@@ -338,3 +338,77 @@ class SanTrenHuggingFace(unittest.TestCase):
         """EVO goi trong vong lap 24/7: mot ngoai le o day lam dung ca luot."""
         r = SCC.tim_huggingface("x" * 3, 2)
         self.assertIsInstance(r, list)
+
+
+class HFPhaiDuocCHAMDIEMCongBang(unittest.TestCase):
+    """HF khong tra `license`/`pushed_at` nhu GitHub.
+
+    Khong anh xa thi `cham_diem` doc ra "khong khai giay phep" va "lan day cuoi
+    9999 ngay truoc" cho MOI mo hinh — tuc phat oan ca mot nguon, va no im
+    lang: diem van ra mot con so, chi la con so sai.
+    """
+
+    @staticmethod
+    def _goi(items):
+        import sys as _s, types
+
+        class _R:
+            status_code = 200
+            @staticmethod
+            def json(): return items
+
+        that = _s.modules.get("requests")
+        _s.modules["requests"] = types.SimpleNamespace(get=lambda *a, **k: _R())
+        try:
+            return SCC.tim_huggingface("x", 5)
+        finally:
+            if that is not None:
+                _s.modules["requests"] = that
+
+    def test_giay_phep_lay_duoc_tu_tag_license(self):
+        r = self._goi([{"id": "a/b", "downloads": 10,
+                        "tags": ["license:apache-2.0", "text-classification"]}])
+        self.assertEqual((r[0]["license"] or {}).get("spdx_id"), "apache-2.0")
+
+    def test_khong_co_tag_license_thi_la_None_chu_khong_bia(self):
+        r = self._goi([{"id": "a/b", "downloads": 10, "tags": ["x"]}])
+        self.assertIsNone(r[0]["license"])
+
+    def test_ngay_sua_lay_tu_lastModified(self):
+        r = self._goi([{"id": "a/b", "downloads": 1,
+                        "lastModified": "2026-08-01T00:00:00.000Z", "tags": []}])
+        self.assertTrue(str(r[0]["pushed_at"]).startswith("2026-08-01"))
+
+    def test_cham_diem_chay_duoc_tren_ban_ghi_HF(self):
+        r = self._goi([{"id": "a/b", "downloads": 50_000, "likes": 120,
+                        "lastModified": "2026-08-01T00:00:00.000Z",
+                        "tags": ["license:mit"]}])
+        d = SCC.cham_diem(r[0])
+        self.assertIsInstance(d, (int, float, dict, tuple, list))
+
+
+class XemKhongDuocVOViMotBanGhiThieuKhoa(unittest.TestCase):
+    """Kho co ban ghi tu nhieu duong; mot ban thieu khoa da lam vo ca man hinh."""
+
+    def test_xem_chay_duoc_khi_co_ban_ghi_thieu_full_name(self):
+        import tempfile, json as _j
+        from pathlib import Path as _P
+        cu = SCC.KHO
+        with tempfile.TemporaryDirectory() as tmp:
+            SCC.KHO = _P(tmp) / "k.json"
+            SCC.KHO.write_text(_j.dumps({
+                "a/b": {"full_name": "a/b", "nhu_cau": "doc_pdf", "diem": 50},
+                "loi": {"nhu_cau": "doc_pdf", "url": "https://x/y", "diem": 10},
+            }), encoding="utf-8")
+            import io as _io
+            from contextlib import redirect_stdout
+            buf = _io.StringIO()
+            try:
+                with redirect_stdout(buf):
+                    SCC.xem(10)
+            finally:
+                SCC.KHO = cu
+        ra = buf.getvalue()
+        self.assertIn("a/b", ra, "ban ghi lanh lan cung khong hien ra")
+        self.assertIn("https://x/y", ra,
+                      "ban ghi thieu full_name bi bo qua im lang thay vi hien url")

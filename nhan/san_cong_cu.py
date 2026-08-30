@@ -444,11 +444,21 @@ def tim_huggingface(truy_van: str, so_luong: int = 8,
         ten = it.get("id") or it.get("modelId") or ""
         if not ten:
             continue
+        tags = it.get("tags") or []
+        # HF khong tra `license` / `pushed_at` nhu GitHub: giay phep nam trong
+        # tag dang "license:apache-2.0", con ngay sua o `lastModified`. Khong
+        # anh xa thi `cham_diem` doc ra "khong khai giay phep" va "lan day cuoi
+        # 9999 ngay truoc" cho MOI mo hinh - tuc no phat oan ca mot nguon.
+        gp = next((t.split(":", 1)[1] for t in tags
+                   if isinstance(t, str) and t.startswith("license:")), None)
         ra.append({
             "full_name": ten,
             "html_url": f"https://huggingface.co/{'datasets/' if loai == 'datasets' else ''}{ten}",
-            "description": ", ".join(it.get("tags", [])[:8])[:300],
+            "description": ", ".join(str(t) for t in tags[:8])[:300],
             "stargazers_count": int(it.get("downloads") or 0),
+            "forks_count": int(it.get("likes") or 0),
+            "license": {"spdx_id": gp} if gp else None,
+            "pushed_at": it.get("lastModified") or it.get("createdAt"),
             "_nguon": "huggingface"})
     return ra
 
@@ -604,7 +614,11 @@ def xem(toi_da: int = 25) -> None:
         d = v.get("diem")
         nhan = (f"{d:5.1f}" if d is not None
                 else ("BAI BAO" if v.get("loai") == "bai_bao" else "  -  "))
-        print(f"  {nhan:>7s}  {str(v.get('nhu_cau')):26s} {v['full_name'][:70]}")
+        # `.get` chu khong `[...]`: kho co ban ghi den tu nhieu duong (GitHub,
+        # arXiv, HuggingFace, nhat tu ban doc) va mot ban thieu khoa khong duoc
+        # phep lam vo ca man hinh - da vo that 30/08/2026.
+        print(f"  {nhan:>7s}  {str(v.get('nhu_cau')):26s} "
+              f"{str(v.get('full_name') or v.get('url') or '?')[:70]}")
         if v.get("mo_ta"):
             print(f"           {v['mo_ta'][:100]}")
         for c in v.get("canh_bao", []):
