@@ -1,81 +1,71 @@
 # -*- coding: utf-8 -*-
 """MOT LENH de vao phien: in ban ban giao + trang thai SONG cua he.
 
-Chay:  python "Downloads/Research SP500/lab/BAN_GIAO.py"
-Hoac:  bam doi vao BAN_GIAO.cmd cung thu muc.
+Chay:  b vao        (hoac: python BAN_GIAO.py, hoac bam doi BAN_GIAO.cmd)
 
 Vi sao co file nay: moi phien truoc deu mat 10-20 phut dau chi de tim thu muc,
 mo dung file ban giao, roi hoi lai CSDL xem hang doi con gi. Ba viec do la tat
 dinh - mot lenh lam duoc het.
+
+Tu 30/08 no doc so qua `nhip_song.py` — cung mot phep dem voi `KET_PHIEN.py`,
+nen cot "doi" so voi moc chot hom qua la so THAT chu khong phai uoc luong.
 
 Nguyen tac: **chi DOC, khong sua gi**, va phai chay xong duoi 5 giay. Khong
 import pandas, khong goi `kho()`, khong chay test.
 """
 from __future__ import annotations
 
-import sqlite3
 import time
 from pathlib import Path
 
-LAB = Path(__file__).resolve().parent
-GOC = LAB.parent
+import nhip_song as NS
 
+LAB = NS.LAB
+GOC = NS.GOC
 
-def _dem(db: Path, cau: str, mac_dinh="?"):
-    if not db.exists():
-        return mac_dinh
-    try:
-        cn = sqlite3.connect(f"file:{db}?mode=ro", uri=True, timeout=3)
-        try:
-            return cn.execute(cau).fetchone()[0]
-        finally:
-            cn.close()
-    except Exception as e:
-        return f"loi: {type(e).__name__}"
-
-
-def _bang(db: Path, cau: str) -> list:
-    if not db.exists():
-        return []
-    try:
-        cn = sqlite3.connect(f"file:{db}?mode=ro", uri=True, timeout=3)
-        try:
-            return list(cn.execute(cau))
-        finally:
-            cn.close()
-    except Exception:
-        return []
+NHAN = {
+    "ham_test": "ham test (lab)", "test_ds": "file test (ds/)",
+    "bang_gia": "bang gia .parquet", "fdr": "dong so FDR",
+    "ung_vien": "ung vien xep hang", "tai_lieu": "ban doc da thu",
+    "co_che": "co che trong thu vien", "van_de_mo": "van de con mo",
+    "van_de_nang": "  muc NANG", "viec_cho_tong": "viec dang CHO",
+}
 
 
 def main() -> int:
     t0 = time.time()
-    nao, thu_vien = LAB / "nao.db", LAB / "thu_vien.db"
-
     print("=" * 78)
     print("THE BRAIN — VAO PHIEN")
     print("=" * 78)
     print(f"lab        : {LAB}")
+    print(f"ds (kho DS): {GOC / 'ds'}" + ("" if (GOC / "ds").exists() else "  [KHONG THAY]"))
     bao_cao = sorted(GOC.glob("BAO_CAO_*.md"))
     if bao_cao:
         print(f"bao cao gan nhat : {bao_cao[-1].name}")
-    print(f"DUNG_LAI   : {'CO (he dang nam im)' if (LAB / 'DUNG_LAI').exists() else 'KHONG'}")
 
-    print("\n--- TRANG THAI SONG ---")
-    so_test = sum(1 for f in LAB.glob("test_*.py")
-                  for l in f.read_text(encoding="utf-8", errors="ignore").splitlines()
-                  if l.strip().startswith("def test_"))
-    print(f"  file test        : {len(list(LAB.glob('test_*.py')))}  ({so_test} ham test)")
-    print(f"  bang gia (parquet): {len(list((GOC / 'data').glob('*.parquet')))}")
-    print(f"  fdr (so quyet dinh): {_dem(nao, 'SELECT COUNT(*) FROM fdr')}")
-    print(f"  ung vien xep hang : {_dem(nao, 'SELECT COUNT(*) FROM candidate_queue')}")
-    print(f"  ban doc (tai_lieu): {_dem(nao, 'SELECT COUNT(*) FROM tai_lieu')}")
-    print(f"  co che (thu_vien) : {_dem(thu_vien, 'SELECT COUNT(*) FROM co_che')}")
-    viec = _bang(nao, "SELECT loai, trang_thai, COUNT(*) FROM viec "
-                      "WHERE trang_thai='CHO' GROUP BY 1,2 ORDER BY 3 DESC")
-    if viec:
-        print("  viec dang CHO    : " + ", ".join(f"{a}={c}" for a, _b, c in viec))
+    t = NS.doc()
+    cu = NS.anh_cu()
+    d = NS.chenh(t, cu)
+
+    print("\n--- TRANG THAI SONG ---" +
+          (f"  (doi so voi moc {cu.get('ngay')})" if cu else "  (chua co moc de so)"))
+    for k, nhan in NHAN.items():
+        v = t.get(k)
+        if v is None:
+            continue
+        print(f"  {nhan:22s}: {v}" + (f"   ({d[k]:+d})" if k in d else ""))
+    print(f"  {'viec CHO theo loai':22s}: " +
+          (", ".join(f"{a}={b}" for a, b in t["viec_cho"].items()) or "khong con"))
+    print(f"  {'co DUNG_LAI':22s}: " +
+          ("CO (he dang nam im)" if t["dung_lai"] else "KHONG (he duoc phep chay)"))
+
+    if NS.co_git():
+        doi = [l for l in NS.git(["status", "--short"]).splitlines() if l.strip()]
+        print(f"  {'git':22s}: {NS.git(['log', '--oneline', '-1'])}")
+        if doi:
+            print(f"  {'':22s}  {len(doi)} file dang doi CHUA commit")
     else:
-        print("  viec dang CHO    : khong con")
+        print(f"  {'git':22s}: CHUA CO — khong co duong lui khi sua hong")
 
     f = LAB / "TIEP_TUC_MAI.md"
     print("\n" + "=" * 78)
@@ -83,7 +73,7 @@ def main() -> int:
     print("=" * 78)
     print(f.read_text(encoding="utf-8") if f.exists()
           else "(KHONG TIM THAY TIEP_TUC_MAI.md)")
-    print(f"\n[doc xong trong {time.time() - t0:.1f}s]")
+    print(f"\n[doc xong trong {time.time() - t0:.1f}s]   Chot phien: b ket \"tom tat\"")
     return 0
 
 
