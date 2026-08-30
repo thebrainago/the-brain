@@ -1,0 +1,133 @@
+{
+ "hoainama8/convertOCR": {
+  "full_name": "hoainama8/convertOCR",
+  "url": "https://github.com/hoainama8/convertOCR",
+  "nhu_cau": "doc_pdf",
+  "truy_van": "chu du an chi",
+  "mo_ta": "chu du an chi 30/08. Server Go, PDF -> md/json/html/docx/csv. OCR can cgo. Dung duoc nhu dich vu ngoai tien trinh.",
+  "thay_luc": "2026-08-30 12:00:43",
+  "trang_thai": "MOI",
+  "diem": null,
+  "nguon": "nguoi_chi"
+ },
+ "coding-kitties/investing-algorithm-framework": {
+  "full_name": "coding-kitties/investing-algorithm-framework",
+  "url": "https://github.com/coding-kitties/investing-algorithm-framework",
+  "nhu_cau": "engine_backtest",
+  "truy_van": "chu du an chi",
+  "mo_ta": "chu du an chi 30/08. 2.022 sao, Apache-2.0. Hai engine (vector + su kien), 50+ chi so, sweep, kiem dinh nhieu cua so, Monte Carlo permutation, bao cao HTML, CCXT. KHONG co FDR chuong trinh / dang ky truoc / MDE / canary.",
+  "thay_luc": "2026-08-30 12:00:43",
+  "trang_thai": "MOI",
+  "diem": null,
+  "nguon": "nguoi_chi"
+ },
+ "alanshaw/markdown-pdf": {
+  "full_name": "alanshaw/markdown-pdf",
+  "url": "https://github.com/alanshaw/markdown-pdf",
+  "mo_ta": " :page_facing_up: Markdown to PDF converter",
+  "ngon_ngu": "JavaScript",
+  "nhu_cau": "doc_pdf",
+  "truy_van": "pdf to markdown converter",
+  "thay_luc": "2026-08-30 12:00:45",
+  "trang_thai": "MOI",
+  "diem": 64.4,
+  "sao": 2876,
+  "tuoi_ngay": 1045,
+  "giay_phep": "MIT",
+  "canh_bao": [
+   "lan day cuoi 1045 ngay truoc - co the da bo"
+  ]
+ },
+ "jzillmann/pdf-to-markdown": {
+  "full_name": "jzillmann/pdf-to-markdown",
+  "url": "https://github.com/jzillmann/pdf-to-markdown",
+  "mo_ta": "A PDF to Markdown converter",
+  "ngon_ngu": "JavaScript",
+  "nhu_cau": "doc_pdf",
+  "truy_van": "pdf to markdown converter",
+  "thay_luc": "2026-08-30 12:00:45",
+  "trang_thai": "MOI",
+  "diem": 79.8,
+  "sao": 1654,
+  "tuoi_ngay": 175,
+  "giay_phep": "MIT",
+  "canh_bao": []
+ },
+ "wisupai/e2m": {
+  "full_name": "wisupai/e2m",
+  "url": "https://github.com/wisupai/e2m",
+  "mo_ta": "E2M converts various file types (doc, docx, epub, html, htm, url, pdf, ppt, pptx, mp3, m4a) into Markdown. It’s easy to install, with dedicated parsers and converters, supporting custom configs. E2M offers an all-in-one,",
+  "ngon_ngu": "Jupyter Notebook",
+  "nhu_cau": "doc_pdf",
+  "truy_van": "pdf to markdown converter",
+  "thay_luc": "2026-08-30 12:00:45",
+  "trang_thai": "MOI",
+  "diem": 57.4,
+  "sao": 1295,
+  "tuoi_ngay": 720,
+  "giay_phep": "Apache-2.0",
+  "canh_bao": []
+ },
+ "elliotblackburn/mdpdf": {
+  "full_name": "elliotblackburn/mdpdf",
+  "url": "https://github.com/elliotblackburn/mdpdf",
+  "mo_ta": "Markdown to PDF command line app with support for stylesheets",
+  "ngon_ngu": "TypeScript",
+  "nhu_cau": "doc_pdf",
+  "truy_van": "pdf to markdown converter",
+  "thay_luc": "2026-08-30 12:00:45",
+  "trang_thai": "MOI",
+  "diem": 70.3,
+  "sao": 802,
+  "tuoi_ngay": 29,
+  "giay_phep": "Apache-2.0",
+  "canh_bao": []
+ },
+ "mrmps/pdf2md": {
+  "full_name": "mrmps/pdf2md",
+  "url": "https://github.com/mrmps/pdf2md",
+  "mo_ta": "Browser based tool to convert PDFs to Markdown",
+  "ngon_ngu": "TypeScript",
+  "nhu_cau": "doc_pdf",
+  "truy_van": "pdf to markdown converter",
+  "thay_luc": "2026-08-30 12:00:45",
+  "trang_thai": "MOI",
+  "diem": 44.7,
+  "sao": 374,
+  "tuoi_ngay": 56,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an"
+  ]
+ },
+ "M1ck4/pdfmd": {
+  "full_name": "M1ck4/pdfmd",
+  "url": "https://github.com/M1ck4/pdfmd",
+  "mo_ta": "Smart PDF to Markdown converter with intelligent heading detection, automatic header/footer removal, orphan fragment merging, and image export. Features a user-friendly GUI with preview mode, persistent settings, and per",
+  "ngon_ngu": "Python",
+  "nhu_cau": "doc_pdf",
+  "truy_van": "pdf to markdown converter",
+  "thay_luc": "2026-08-30 12:00:45",
+  "trang_thai": "MOI",
+  "diem": 60.3,
+  "sao": 299,
+  "tuoi_ngay": 155,
+  "giay_phep": "MIT",
+  "canh_bao": []
+ },
+ "51bitquant/howtrader": {
+  "full_name": "51bitquant/howtrader",
+  "url": "https://github.com/51bitquant/howtrader",
+  "mo_ta": "Howtrader: A crypto quant framework for developing, backtesting, and executing your own trading strategies. Seamlessly integrates with TradingView and other third-party signals. Simply send a post request to automate tra",
+  "ngon_ngu": "Python",
+  "nhu_cau": "engine_backtest",
+  "truy_van": "quantitative trading backtesting framework language:python",
+  "thay_luc": "2026-08-30 12:01:02",
+  "trang_thai": "MOI",
+  "diem": 84.7,
+  "sao": 950,
+  "tuoi_ngay": 83,
+  "giay_phep": "MIT",
+  "canh_bao": []
+ }
+}

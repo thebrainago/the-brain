@@ -31,7 +31,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from nhan import ket_qua_hoat_dong as KQHD, so as SO, tri_tue as TT
+from nhan import ket_qua_hoat_dong as KQHD, san_cong_cu as SCC, so as SO, tri_tue as TT
 
 TRU = "EVO"
 LAB = Path(__file__).resolve().parent.parent
@@ -489,6 +489,27 @@ EVO_TU_QUAN = {
 }
 
 
+#: EVO san cong cu moi 12 gio. Kho cong cu khong doi nhanh, va GitHub search
+#: khong khoa chi cho 10 lan/phut - san day hon la vua ton suat vua khong them
+#: thong tin.
+CHU_KY_SAN_GIAY = 12 * 3600
+
+
+def _den_han_san() -> bool:
+    try:
+        r = SO.mot("SELECT luc FROM chi_so_vh WHERE ten='evo_san_cong_cu' "
+                   "ORDER BY id DESC LIMIT 1")
+    except Exception:
+        return True
+    if not r or not r["luc"]:
+        return True
+    try:
+        cu = time.mktime(time.strptime(r["luc"], "%Y-%m-%d %H:%M:%S"))
+    except Exception:
+        return True
+    return (time.time() - cu) > CHU_KY_SAN_GIAY
+
+
 def mot_luot() -> dict:
     SO.nhip_tim(TRU, "chay")
     vh = do_van_hanh()
@@ -509,6 +530,18 @@ def mot_luot() -> dict:
         elif ma in EVO_TU_QUAN:
             SO.dong_van_de(ma, "dieu kien phat hien khong con dung")
             da_dong.append(ma)
+    # SAN CONG CU NGOAI. Nua viec con lai cua EVO (chu du an chot 30/08): khong
+    # chi canh he hong, ma con di tim du an/cong cu da co san de tich hop.
+    # Tan suat thap - GitHub search khong khoa cho 10 lan/phut, va kho cong cu
+    # khong doi nhanh. Loi o day KHONG duoc lam hong luot EVO.
+    san = {}
+    try:
+        if _den_han_san():
+            san = SCC.mot_luot(gioi_han_truy_van=3, im_lang=True)
+            SO.ghi_chi_so("evo_san_cong_cu", san.get("tim_them", 0), san)
+    except Exception as e:
+        san = {"loi": f"{type(e).__name__}: {str(e)[:80]}"}
+
     da_sua = tu_sua(vh)
     if da_dong:
         da_sua.append("dong_van_de_da_het: " + ", ".join(da_dong))
@@ -518,8 +551,10 @@ def mot_luot() -> dict:
         sau = {"loi": f"{type(e).__name__}: {str(e)[:80]}"}
     viet_bao_cao(vh, sk, vd, da_sua, sau)
     SO.ghi_chi_so("evo_van_de_mo", len(SO.van_de_mo()))
-    SO.nhip_tim(TRU, "nghi", {"van_de": len(vd), "da_sua": len(da_sua)})
+    SO.nhip_tim(TRU, "nghi", {"van_de": len(vd), "da_sua": len(da_sua),
+                              "san_cong_cu": san.get("tim_them", 0)})
     return {"van_de_moi": [v["ma"] for v in vd], "da_sua": da_sua,
+            "san_cong_cu": san,
             "van_de_dang_mo": len(SO.van_de_mo()),
             "tru_dung_im": [t for t, x in vh["tru"].items() if x.get("dung_im")],
             "dia_gb": vh["dia_trong_gb"], "tai_lieu": vh["tai_lieu"],

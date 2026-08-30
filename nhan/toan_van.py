@@ -201,6 +201,56 @@ def tu_html(url: str, kieu: str = "khac") -> dict | None:
     return {"van_ban": vb, "kieu": kieu, "cach": "html"}
 
 
+# --------------------------------------------------- DUONG QUA TRINH DUYET
+#: Mien BAT BUOC di qua trinh duyet, khong phi thoi gian thu `requests` truoc.
+#:
+#: Do that tren so cai 30/08/2026: trong 675 tai lieu chua co ban toan van,
+#: **~230 ban thuoc dung cac mien nay** (reddit 83, mql5 57, myfxbook 37,
+#: darwinex 29, t.me 22, x.com 3) va CHUA MOT BAN NAO doc duoc. Ly do khong
+#: phai nguon chan: `doc()` chi co ba duong (arxiv / github / html tho) va
+#: **khong duong nao di qua con Chrome da dang nhap** cua du an, du ha tang do
+#: da co san tu 21/08 (`nhan/doc_trinh_duyet.py`, CDP 9224, ho so
+#: `lab/.browser_darwinex` 1,5 GB co phien dang nhap that).
+#:
+#: Day la day noi con thieu, khong phai mot tinh nang moi.
+CAN_TRINH_DUYET = (
+    "reddit.com", "mql5.com", "myfxbook.com", "darwinex.com", "t.me",
+    "x.com", "twitter.com", "facebook.com", "discord.com", "tiktok.com",
+    "collective2.com", "fxblue.com", "tradingview.com", "quantconnect.com",
+)
+
+
+def can_trinh_duyet(url: str) -> bool:
+    u = (url or "").lower()
+    return any(m in u for m in CAN_TRINH_DUYET)
+
+
+def tu_trinh_duyet(url: str, kieu: str = "khac") -> dict | None:
+    """Doc qua con Chrome CDP dang mo (ho so co phien dang nhap that).
+
+    Tra None khi CDP khong chay - va do la mot trang thai TAM THOI, khong phai
+    thuoc tinh cua dia chi. Nguoi goi phai phan biet hai thu do: danh dau mot
+    URL la "khong doc duoc" trong luc trinh duyet dang tat se khoa no vinh vien.
+    Xem `seeker.doc_toan_van`.
+    """
+    try:
+        if __package__ in (None, ""):
+            import doc_trinh_duyet as DTD          # type: ignore
+        else:
+            from . import doc_trinh_duyet as DTD
+    except Exception:
+        return None
+    if not DTD.cdp_dang_chay():
+        return None
+    try:
+        r = DTD.doc_gan(url, toi_da_text=NGAN_SACH_KY_TU.get(kieu, 25_000))
+    except Exception:
+        return None
+    if not r or r.get("loi") or len((r.get("text") or "").strip()) < 400:
+        return None
+    return {"van_ban": r["text"], "kieu": kieu, "cach": "trinh_duyet"}
+
+
 # ------------------------------------------------------------------- CUA RA
 def doc(url: str, goi_y: str = "") -> dict | None:
     """Doc mot dia chi bat ky. Tu chon bo boc theo dang nguon.
@@ -211,9 +261,14 @@ def doc(url: str, goi_y: str = "") -> dict | None:
         return None
     u = url.lower()
     r = None
-    if "arxiv.org" in u:
+    # Mien can dang nhap / render bang JS: di THANG qua trinh duyet. Thu
+    # `requests` truoc chi ton thoi gian va tra ve trang dang nhap.
+    if can_trinh_duyet(u):
+        r = tu_trinh_duyet(url, goi_y or ("dien_dan" if "reddit" in u or "t.me" in u
+                                          else "khac"))
+    if r is None and "arxiv.org" in u:
         r = tu_arxiv(url)
-    elif "github.com" in u:
+    elif r is None and "github.com" in u:
         r = tu_github(url)
     if r is None:
         kieu = goi_y or ("dien_dan" if any(k in u for k in
@@ -224,6 +279,11 @@ def doc(url: str, goi_y: str = "") -> dict | None:
                                              "robotwealth"))
                          else "khac")
         r = tu_html(url, kieu)
+        # Chot cuoi: HTML tho hong (403, render bang JS, tuong dang nhap) thi
+        # van con con Chrome that. Truoc 30/08 khong co buoc nay nen moi dia chi
+        # kieu do deu bi ghi la "khong doc duoc" VINH VIEN.
+        if r is None:
+            r = tu_trinh_duyet(url, kieu)
     if r is None:
         return None
     tran = NGAN_SACH_KY_TU.get(r["kieu"], NGAN_SACH_KY_TU["khac"])

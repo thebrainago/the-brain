@@ -14,6 +14,10 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b canary          tu kiem engine (5 canary)
     b quet            quet_be_mat.py
     b mde             chay_bang_mde.py
+    b mde-nap [khung] nap TRUOC bang MDE cho ca be mat (D1: ~4 phut, mot lan)
+    b san             EVO di san cong cu/du an ngoai de tich hop
+    b san-xem         xem kho cong cu da tim duoc
+    b trinh-duyet     mo Chrome bot + CDP 9224 (de doc nguon can dang nhap)
     b ds [args]       chay pytest ben ds/ (kho DeepSeek)
     b tim <tu>        tim trong MA NGUON (bo qua data/reports/backups)
     b luu "msg"       chot nhanh vao git (thay cho copy vao backups/)
@@ -95,6 +99,22 @@ def c_mde(a):
     return chay([PY, LAB / "chay_bang_mde.py", *a])
 
 
+def c_mde_nap(a):
+    return chay([PY, LAB / "nap_truoc_mde.py", *a])
+
+
+def c_san(a):
+    return chay([PY, LAB / "nhan" / "san_cong_cu.py", *a])
+
+
+def c_san_xem(_):
+    return chay([PY, LAB / "nhan" / "san_cong_cu.py", "--xem"])
+
+
+def c_trinh_duyet(_):
+    return chay([PY, LAB / "mo_chrome_cdp.py"])
+
+
 def c_ds(a):
     if not DS.exists():
         print(f"khong thay {DS}")
@@ -161,7 +181,9 @@ LENH = {
     "test": lambda a: c_test(a, True), "test1": lambda a: c_test(a, False),
     "trang-thai": c_trang_thai, "tt": c_trang_thai,
     "chay": c_chay, "dung": c_dung, "canary": c_canary,
-    "quet": c_quet, "mde": c_mde, "ds": c_ds, "tim": c_tim,
+    "quet": c_quet, "mde": c_mde, "mde-nap": c_mde_nap,
+    "san": c_san, "san-xem": c_san_xem, "trinh-duyet": c_trinh_duyet,
+    "ds": c_ds, "tim": c_tim,
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
 }
