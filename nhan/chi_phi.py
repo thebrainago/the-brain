@@ -210,10 +210,16 @@ class MoHinhChiPhi:
         Bat doi xung mua/ban la co chu y: day la loi that #1 ngay 09/08
         (phi chi tinh cho chieu mua -> tang 2 %/nam alpha gia cho chien luoc
         co chieu ban). Canary `luon ban 100%` gac dung cho nay.
+
+        Phi tinh theo DO LON cua phoi nhiem, khong chi theo chieu. Truoc
+        30/08/2026 o day la `np.clip(huong, 0, 1)`: mot vi the 2,0 chi tra phi
+        cho 1,0. Khong ai thay vi `chay()` cung cat tin hieu ve [-1, 1], nhung
+        khi engine biet don bay thi cai chan do bien don bay thanh TIEN MIEN
+        PHI. Voi |huong| <= 1 hai cach cho ket qua Y HET nen khong hoi quy.
         """
         ngay = hinh_hoc(index)[0]
-        mua = np.clip(huong, 0, 1)
-        ban = np.clip(-huong, 0, 1)
+        mua = np.clip(huong, 0, None)
+        ban = np.clip(-huong, 0, None)
         if lai_suat_nam is not None:
             # mo hinh theo co che: lai suat thuc tung ngay + markup co dinh
             markup_mua = self.phi_nam_mua - float(np.nanmean(lai_suat_nam))

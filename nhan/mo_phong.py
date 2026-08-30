@@ -66,17 +66,34 @@ def _loi_suat_tien(df: pd.DataFrame) -> np.ndarray:
 
 def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
          lai_suat_nam: np.ndarray | None = None, ma: str = "", khung: str = "",
-         da_dich: bool = False) -> KetQua:
+         da_dich: bool = False, don_bay: float = 1.0) -> KetQua:
     """Chay mot chien luoc. `tin_hieu[i]` la phoi nhiem biet tai close[i].
 
     da_dich=True chi dung cho CANARY (khi can dat vi the dung bien mot bar).
+
+    `don_bay`: he so nhan phoi nhiem, ap **SAU** khi da cat ve [-1, 1]. Tach
+    lam mot tham so rieng la co y: tran +-1 la tam chan chong template tra ve
+    so bay (mot template tra 50 se che ra loi suat 50 lan), nen don bay phai
+    la thu NGUOI GOI khai ro, khong phai thu template tu gianh duoc.
+
+    Vi sao can: cong 1 so TONG LAI cua he voi mua-giu, nhung he chon loc chi o
+    trong thi truong 16-18% thoi gian con moc o 100%. Do khong phai so cung
+    don vi. Muon hoi "cung mot muc rui ro thi ben nao lai hon" thi phai dua
+    duoc he len dung do bien dong cua moc - va truoc 30/08/2026 dieu do KHONG
+    lam duoc: nhan tin hieu len 1,55 lan roi cat ngay ve 1,0, hai lan chay ra
+    ket qua GIONG HET NHAU ma khong bao gi.
+
+    Phi cua phan don bay them duoc thu day du: spread theo khoi luong doi va
+    phi qua dem theo phoi nhiem, deu tinh tren `v` sau khi nhan.
     """
     n = len(df)
     th = np.asarray(tin_hieu, dtype=float).reshape(-1)
     if len(th) != n:
         raise ValueError(f"tin hieu dai {len(th)} nhung du lieu {n} bar")
+    if not np.isfinite(don_bay) or don_bay <= 0:
+        raise ValueError(f"don_bay phai la so duong huu han, nhan {don_bay!r}")
     th = np.nan_to_num(th, nan=0.0)
-    th = np.clip(th, -1.0, 1.0)
+    th = np.clip(th, -1.0, 1.0) * float(don_bay)
 
     if da_dich:
         v = th
