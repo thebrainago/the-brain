@@ -162,5 +162,58 @@ class DocTrinhDuyetBaoDungTrangThai(unittest.TestCase):
                          "khong bao ro la trinh duyet dang tat")
 
 
+
+
+class TranSoTabTrinhDuyet(unittest.TestCase):
+    """Doc qua Chrome mo TAB MOI moi lan. Khong co tran thi no phinh vo han.
+
+    Do that 30/08/2026 giua mot luot keo ton: **Chrome mo 356 tab**, va luot keo
+    dung han. Nhin tu ngoai la "may treo" chu khong phai mot loi - khong ban ghi
+    nao, khong ngoai le nao. Sau khi don ve 6 tab, moi trang doc het 10-13 giay
+    thay vi ~20.
+
+    Giu vai tab la co y (nguoi dung thay quet dang chay). Khong gioi han moi la loi.
+    """
+
+    class _Tab:
+        def __init__(self, ten): self.ten, self.dong = ten, False
+        def close(self): self.dong = True
+
+    class _Ctx:
+        def __init__(self, n): self.pages = [TranSoTabTrinhDuyet._Tab(i) for i in range(n)]
+
+    def test_it_hon_tran_thi_khong_dong_gi(self):
+        from nhan import doc_trinh_duyet as DTD
+        ctx = self._Ctx(3)
+        self.assertEqual(DTD._don_tab(ctx, giu=6), 0)
+        self.assertFalse(any(t.dong for t in ctx.pages))
+
+    def test_vuot_tran_thi_dong_bot_tab_CU_NHAT(self):
+        from nhan import doc_trinh_duyet as DTD
+        ctx = self._Ctx(50)
+        n = DTD._don_tab(ctx, giu=6)
+        self.assertEqual(n, 44)
+        self.assertTrue(all(t.dong for t in ctx.pages[:44]), "khong dong tab cu")
+        self.assertFalse(any(t.dong for t in ctx.pages[44:]),
+                         "dong nham tab moi nhat")
+
+    def test_mot_tab_khong_dong_duoc_khong_lam_hong_ca_luot(self):
+        from nhan import doc_trinh_duyet as DTD
+
+        class TabBuong(TranSoTabTrinhDuyet._Tab):
+            def close(self): raise RuntimeError("tab da chet")
+
+        ctx = self._Ctx(20)
+        ctx.pages[0] = TabBuong("hong")
+        n = DTD._don_tab(ctx, giu=6)
+        self.assertEqual(n, 13, "mot tab hong lam mat ca vong don")
+
+    def test_tran_mac_dinh_la_mot_con_so_nho(self):
+        from nhan import doc_trinh_duyet as DTD
+        self.assertGreaterEqual(DTD.GIU_TOI_DA_TAB, 1)
+        self.assertLessEqual(DTD.GIU_TOI_DA_TAB, 20,
+                             "tran qua cao thi khong con la tran")
+
+
 if __name__ == "__main__":
     unittest.main()

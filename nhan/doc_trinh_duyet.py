@@ -29,6 +29,49 @@ def cdp_dang_chay(ports=CDP_MAC_DINH):
     return None
 
 
+#: So tab toi da giu lai tren con Chrome bot.
+#:
+#: Du de nguoi dung thay quet dang chay, va du it de trinh duyet khong nghet.
+GIU_TOI_DA_TAB = 6
+
+
+def _don_tab(ctx, giu: int = GIU_TOI_DA_TAB) -> int:
+    """Dong bot tab cu, giu lai `giu` tab moi nhat. Tra so tab da dong."""
+    try:
+        cac = list(ctx.pages)
+    except Exception:
+        return 0
+    if len(cac) <= giu:
+        return 0
+    da_dong = 0
+    for pg in cac[:len(cac) - giu]:
+        try:
+            pg.close()
+            da_dong += 1
+        except Exception:
+            pass
+    return da_dong
+
+
+def don_tab_ngay(port=None) -> dict:
+    """Dong bot tab thua ngay lap tuc. Dung khi Chrome da phinh."""
+    from playwright.sync_api import sync_playwright
+    port = port or cdp_dang_chay()
+    if not port:
+        return {"loi": "khong_mo_cdp"}
+    try:
+        with sync_playwright() as p:
+            b = p.chromium.connect_over_cdp("http://127.0.0.1:%d" % port)
+            ctx = b.contexts[0] if b.contexts else None
+            if ctx is None:
+                return {"truoc": 0, "da_dong": 0, "con": 0}
+            truoc = len(ctx.pages)
+            n = _don_tab(ctx)
+            return {"truoc": truoc, "da_dong": n, "con": len(ctx.pages)}
+    except Exception as e:
+        return {"loi": f"{type(e).__name__}: {str(e)[:80]}"}
+
+
 def doc_gan(url, port=None, cho_ms=14000, toi_da_text=20000):
     """Doc mot trang qua con Chrome CDP dang mo. Tra {url,title,text,links,loi}."""
     from playwright.sync_api import sync_playwright
@@ -40,8 +83,14 @@ def doc_gan(url, port=None, cho_ms=14000, toi_da_text=20000):
         with sync_playwright() as p:
             b = p.chromium.connect_over_cdp("http://127.0.0.1:%d" % port)
             ctx = b.contexts[0] if b.contexts else b.new_context()
-            # MO TAB MOI moi lan va GIU LAI: cac nguon hien song song nhieu tab
-            # tren man hinh trinh duyet, nguoi dung thay duoc ca qua trinh quet.
+            # MO TAB MOI moi lan va GIU LAI VAI TAB: nguoi dung thay duoc qua
+            # trinh quet dang chay tren man hinh.
+            #
+            # NHUNG PHAI CO TRAN. Ban dau khong dong tab nao ca, va do la mot
+            # ro ri tai nguyen: do that 30/08/2026 luc mot luot keo ton dang
+            # chay - **Chrome mo 356 tab**, cham den muc luot keo dung han.
+            # Trieu chung nhin tu ngoai la "may treo", khong phai mot loi.
+            _don_tab(ctx)
             pg = ctx.new_page()
             try:
                 pg.bring_to_front()
