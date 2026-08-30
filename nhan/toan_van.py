@@ -201,6 +201,39 @@ def tu_html(url: str, kieu: str = "khac") -> dict | None:
     return {"van_ban": vb, "kieu": kieu, "cach": "html"}
 
 
+#: Loi cua lan `doc()` gan nhat. Nguoi goi phai doc no TRUOC khi ket luan mot
+#: dia chi la "khong doc duoc".
+#:
+#: BAY DA SAP THAT 30/08/2026. `seeker.doc_toan_van` ghi mot ban ghi
+#: `khong_doc_duoc` VINH VIEN moi lan `doc()` tra None, de khoi keo lai mai mot
+#: dia chi hong. Nhung dem do no danh dau **83 dia chi Reddit** — va Reddit
+#: hong vi `ERR_NAME_NOT_RESOLVED`, tuc **DNS bi chan tren may nay**, mot dieu
+#: kien MOI TRUONG chu khong phai thuoc tinh cua dia chi. Doi mang hay bat VPN
+#: thi 83 bai do van khong bao gio duoc thu lai.
+#:
+#: Hai thu phai tach bach: "trang nay khong co gi de doc" va "hom nay ta khong
+#: voi toi duoc no".
+LOI_CUOI: dict = {}
+
+#: Dau hieu cua loi MOI TRUONG - khong duoc dung de khoa vinh vien mot dia chi.
+_TAM_THOI_RE = re.compile(
+    r"(ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED|ERR_CONNECTION|"
+    r"ERR_PROXY|ERR_TIMED_OUT|ERR_NETWORK|khong_mo_cdp|"
+    r"ConnectionError|ConnectTimeout|ReadTimeout|Timeout|"
+    r"TooManyRedirects|SSLError|ProxyError|\b(?:429|502|503|504)\b)", re.I)
+
+
+def _ghi_loi(url: str, loi: str) -> None:
+    LOI_CUOI.clear()
+    LOI_CUOI.update({"url": url, "loi": (loi or "")[:200],
+                     "tam_thoi": bool(_TAM_THOI_RE.search(loi or ""))})
+
+
+def loi_tam_thoi() -> bool:
+    """Lan `doc()` gan nhat that bai vi MOI TRUONG chu khong vi dia chi?"""
+    return bool(LOI_CUOI.get("tam_thoi"))
+
+
 # --------------------------------------------------- DUONG QUA TRINH DUYET
 #: Mien BAT BUOC di qua trinh duyet, khong phi thoi gian thu `requests` truoc.
 #:
@@ -241,12 +274,18 @@ def tu_trinh_duyet(url: str, kieu: str = "khac") -> dict | None:
     except Exception:
         return None
     if not DTD.cdp_dang_chay():
+        _ghi_loi(url, "khong_mo_cdp")
         return None
     try:
         r = DTD.doc_gan(url, toi_da_text=NGAN_SACH_KY_TU.get(kieu, 25_000))
-    except Exception:
+    except Exception as e:
+        _ghi_loi(url, f"{type(e).__name__}: {e}")
         return None
-    if not r or r.get("loi") or len((r.get("text") or "").strip()) < 400:
+    if not r or r.get("loi"):
+        _ghi_loi(url, (r or {}).get("loi") or "khong ro")
+        return None
+    if len((r.get("text") or "").strip()) < 400:
+        _ghi_loi(url, "trang rong hoac qua ngan")
         return None
     return {"van_ban": r["text"], "kieu": kieu, "cach": "trinh_duyet"}
 
@@ -259,6 +298,7 @@ def doc(url: str, goi_y: str = "") -> dict | None:
     """
     if not url or not url.startswith("http"):
         return None
+    LOI_CUOI.clear()
     u = url.lower()
     r = None
     # Mien can dang nhap / render bang JS: di THANG qua trinh duyet. Thu
@@ -285,7 +325,10 @@ def doc(url: str, goi_y: str = "") -> dict | None:
         if r is None:
             r = tu_trinh_duyet(url, kieu)
     if r is None:
+        if not LOI_CUOI:
+            _ghi_loi(url, "khong bo boc nao doc duoc")
         return None
+    LOI_CUOI.clear()
     tran = NGAN_SACH_KY_TU.get(r["kieu"], NGAN_SACH_KY_TU["khac"])
     day_du = len(r["van_ban"])
     if day_du > tran:

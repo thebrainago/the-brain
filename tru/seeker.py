@@ -844,6 +844,7 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
         "LIMIT ?", gioi_han * 3)
     doc_duoc, that_bai, tong_ky_tu = 0, 0, 0
     cong_cu_moi = 0
+    tam_thoi = 0
     artifact_moi, artifact_da_co, artifact_loi = 0, 0, 0
     for t in ds:
         if doc_duoc >= gioi_han or time.time() - t0 > ngan_sach_giay:
@@ -856,7 +857,13 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
                                                 "loi": f"{type(e).__name__}: {str(e)[:80]}"})
         if not r:
             that_bai += 1
-            # Danh dau da thu de khong keo lai mai mot dia chi khong doc duoc.
+            # Loi MOI TRUONG (DNS chan, CDP tat, mang rot) KHONG duoc khoa vinh
+            # vien mot dia chi: doi mang la doc duoc. Da sap that 30/08 - mot
+            # dem danh dau 83 dia chi Reddit vi `ERR_NAME_NOT_RESOLVED`.
+            if TV.loi_tam_thoi():
+                tam_thoi += 1
+                continue
+            # Con lai: danh dau da thu de khong keo lai mai mot dia chi hong.
             with SO.ket_noi() as cn:
                 cn.execute(
                     "INSERT OR IGNORE INTO noi_dung(tai_lieu_id,van_tay,url,kieu,cach,"
@@ -900,6 +907,7 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
     return {"doc_duoc": doc_duoc, "that_bai": that_bai, "ky_tu_luot_nay": tong_ky_tu,
             "artifact_moi": artifact_moi, "artifact_da_co": artifact_da_co,
             "artifact_loi": artifact_loi, "cong_cu_moi": cong_cu_moi,
+            "hoan_lai_loi_tam_thoi": tam_thoi,
             "thu_vien_ban_doc": tong["n"], "thu_vien_ky_tu": tong["k"],
             "thu_vien_trang_a4": round(tong["k"] / 4000)}
 

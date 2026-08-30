@@ -39,8 +39,6 @@ if str(LAB) not in sys.path:
 #: **Danh sach nay chi duoc NGAN LAI.** Viet test cho module nao thi xoa ten do
 #: khoi day - `test_danh_sach_khong_con_ten_thua` se bao neu quen.
 CHUA_CO_TEST = {
-    "nhan/doc_trinh_duyet.py",
-    "nhan/toan_van.py",
     "nhan/tri_tue.py",
     "nhan/tu_dang_nhap.py",
 }
