@@ -1,6 +1,6 @@
-# TIEP TUC NGAY MAI — chot phien 2026-08-30 17:53
+# TIEP TUC NGAY MAI — chot phien 2026-08-30 23:03
 
-gop du an + mo git; nhanh 8 lan roi song song them 3,8 lan; cong hien phap + 144 bai kiem moi; mo khoa VPN/TradingView/xa hoi (492->1075 ban doc); duong GOP chay ra am tinh do duoc, so cai nguyen ven
+Sua cong 1 sang khop rui ro (THE HE 5); bat hien vat khe dao ngay tren FX H4 va bit bang cong 11; doc_hieu suy ho theo chieu + go dai tu; EVO them duong HuggingFace va dien dan voi 5 nhu cau ky thuat
 
 ## Trang thai do duoc luc chot
 > May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
@@ -8,24 +8,43 @@ gop du an + mo git; nhanh 8 lan roi song song them 3,8 lan; cong hien phap + 144
 
 | chi so | hom nay | doi |
 |---|---:|---:|
-| file test (lab) | 41 | +7 |
-| ham test (lab) | 468 | +98 |
+| file test (lab) | 46 | +5 |
+| ham test (lab) | 563 | +95 |
 | file test (ds/) | 82 |  |
 | bang gia .parquet | 252 |  |
-| dong so FDR | 1769 |  |
-|   trong do bac bo | 398 |  |
-| ung vien xep hang | 107 |  |
-| ban doc da thu | 1750 | +412 |
+| dong so FDR | 1777 | +8 |
+|   trong do bac bo | 403 | +5 |
+| ung vien xep hang | 191 | +84 |
+| ban doc da thu | 2429 | +679 |
 | co che trong thu vien | 32 |  |
-| van de con mo | 27 | +3 |
-|   muc NANG | 16 | +2 |
+| van de con mo | 27 |  |
+|   muc NANG | 16 |  |
 | viec dang CHO | 104 |  |
-| file .py o goc lab | 111 | +7 |
+| file .py o goc lab | 116 | +5 |
 
 - co DUNG_LAI: **CO (he dang nam im)**
 - viec CHO theo loai: kham_pha_gop=1, kham_pha_theo_mau=103
 - commit hom nay:
 ```
+1eb3d18 reports: kho cong cu EVO 97 muc + con tro seeker sau phien 30/08
+c957119 san_cong_cu: tach "khong voi toi duoc" khoi "hoi roi ma khong co gi"
+610ac2a san_cong_cu: duong DIEN DAN + 5 nhu cau KY THUAT (EVO rong hon linh vuc trading)
+3069b7e cong 11: chan chien luoc song bang KHE GIA o moc dao ngay
+411866c san_cong_cu: cham diem HF cong bang + xem() khong vo vi thieu khoa
+c2eb3d2 san_cong_cu: them duong HuggingFace + nhu cau "xep thu tu doc"
+9fe539d cong THE HE 5: cong 1 so o muc RUI RO BANG NHAU + siet khi moc rong
+4b28103 engine: them don_bay tuong minh + phi giu theo DO LON (hai chan chong len nhau)
+c2e7e8e seeker: arxiv/openalex xuong uu tien 3 (suat 0,8% va 6%)
+56580c2 seeker: youtube len uu tien 1 (theo suat DO DUOC, khong theo cam giac)
+96cc093 doc_hieu: phep CAT cung mang chieu (Connors RSI(2) khong con roi vao ho "khac")
+fcf753a doc_hieu: suy ho theo CHIEU, va go dai tu tro ve chi bao o ve truoc
+d523607 MQL5 da dang nhap: them nguon bai viet (58k ky tu/bai, cao nhat kho)
+c9b9d09 9 nguon moi + 7 thu tieng: 1.338 -> 2.117 tai lieu
+a17b16c muc 4: ghi lai SO PHEP THU; va hai module nua bao thanh cong sai
+3b19369 b tai-khoan: mot lenh cho biet nen tang nao da dang nhap, thieu gi
+c2b4dbb video thanh chu; xoa 358 MB thu muc cu; va bat mot module BAO THANH CONG SAI
+dfa97b6 dien ban giao 30/08 — muoi loi hong im lang, hai niem tin bi lat
+b6f2e05 2026-08-30: gop du an + mo git; nhanh 8 lan roi song song them 3,8 lan; cong hien phap + 144 bai kiem moi; mo khoa VPN/TradingView/xa hoi (492->1075 ban doc); duong GOP chay ra am tinh do duoc, so cai nguyen ven
 7509346 b toan-canh: mot man hinh cho biet he dang o dau
 a183052 chuan hoa URL: bien the thu ba (duong dan con cua X) va gop hai ten mien
 406b213 nguon xa hoi: vao TUNG BAI, khu trung dung, va thao bo loc tieu de chan nham
@@ -54,36 +73,7 @@ b61ac59 AGENTS.md: ghi moc gop ds/ + git + lenh b
 
 ## Mot doan doc la hieu ca phien
 
-Bao cao day du: `BAO_CAO_2026_08_30.md` — ba phan A (ra soat) / B (sang, ha tang
-+ toc do) / C (chieu-toi, dau vao + duong gop). **Doc phan C truoc.**
-
-Phien nay tim ra **muoi loi cung mot kieu: HONG IM LANG.** Khong cai nao bao mot
-ngoai le, he van chay, bo test van xanh. Voi mot day chuyen dinh chay 24/7 khong
-nguoi truc thi day la loai hong nguy hiem nhat — no khong dung lai, no chi lang
-le ngung lam viec:
-
-1. `toan_van` khong co duong qua trinh duyet (ha tang co tu 21/08, thieu MOT loi goi)
-2. Loi MOI TRUONG ghi thanh "dia chi hong vinh vien" — 84 dia chi Reddit khoa oan
-3. `doc_gan` mo tab khong dong — **Chrome 356 tab**, luot keo dung han 10 phut
-4. Nhan `NEN_GOP` chi gan duoc o V3 — chan 2/3 co che co tin hieu that
-5. Nguon trinh duyet khong `ORDER BY uu_tien` — xa hoi chua bao gio toi luot
-6. Cache MDE ghi khong nguyen tu — song song thi mat muc
-7. TradingView doc bang ten class da loi thoi — tra ve 0 suot
-8. `da_quet=0` bao thanh "khong bo nao thang mua-giu" — **ket luan am GIA**
-9. Khu trung theo URL tho — ba bien the thoi phong so lieu (YouTube moc thoi
-   gian, tham so theo doi, duong dan con cua X)
-10. Bo loc tieu de >=12 ky tu giet sach bai cua X (link X boc dau thoi gian "2h")
-
-**Hai niem tin cu bi lat bang phep do.** Cong FDR KHONG bi niem kin (da sua
-21/08; `thu_luc_cong` DAT, j=1, nguong 0,0129). Va song song hoa AN THAT: quet
-be mat 1 -> 8 tien trinh cho **3,8 lan** — ket luan cu "20 luong = 1 luong" do
-bang mot bai quet MANG LON, khong ap cho pheu D1 (tap lam viec 128 KB nam trong
-cache CPU).
-
-**Duong GOP da chay** (chu du an duyet): canary 5/5, ket qua **am tinh DO
-DUOC** — ca ba co che thua mua-giu tren ro 12 chi so, cua so train 1980-2014.
-Dung o tang kham pha, **khong cham holdout, FDR van 1.769 dong dung bang dau
-phien**. Khop voi `ibs-la-hien-tuong-cua-mot-thoi-ky` bang mot duong do doc lap.
+(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
 
 ## Viec tiep theo, theo thu tu
 
