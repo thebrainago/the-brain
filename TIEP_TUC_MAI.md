@@ -73,9 +73,51 @@ b61ac59 AGENTS.md: ghi moc gop ds/ + git + lenh b
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phien nay tra loi mot cau cua chu du an: **"cong co dang loai bo phung phi
+khong?"** — va cau tra loi lat nguoc hai gia dinh.
+
+**Mot: bo doc KHONG phai nut that, kho moi la.** Do tren 1.143 ban doc: trong
+2.504 cau bi nhan la "luat vao" nhung khong doc duoc dieu kien, **42,0% la
+manh ma nguon** (`action = "buy"`) va **44,7% la van tan gau**; chi **1,2%
+(30 cau)** la luat that bi trot. Bo doc tu choi 98,8% kia la DUNG. Sua het hai
+lo hong that (suy ho theo CHIEU chu khong theo ten chi bao; go dai tu "it
+crosses below 15") chi duoc **19 -> 20 co che**. Mot gia thuyet cua toi ("bai
+viet ghi luat kieu tieu de + gach dau dong") do ra SAI: 19/1.056 bai, 8 dong.
+
+**Hai: cong 1 hong that, nhung no khong chon vui mo vang nao.** No so TONG LAI
+cua he (phoi nhiem 16,6%) voi mua-giu (phoi nhiem 100%) — khong cung don vi, va
+tren tai san co xu huong tang thi BAT KHA voi moi co che chon loc. V6/IBS tren
+US500M.D1 dat Sharpe 0,992 / Calmar 0,961 / DD -11,76% (moc 0,885 / 0,756 /
+-21,05%): qua cong 2 va 3, chet o cong 1. Bang chung le hon: qua cong 1 la
+**37,4% tren FX so voi 0,4% tren chi so** — de hon 90 lan, nen ngan sach FDR
+tu chay ve FX (79% gia thuyet).
+Da sua thanh **THE HE CONG 5** (khop rui ro `k = min(k_bien_dong, k_sut_giam)`
++ siet p khi moc khong co phan bu rui ro). **Nhung cham lai ca 361 gia thuyet:
+278 chay duoc, 77 qua cong 1-2-3, chi 2 qua them cong 4.** Dung ky vong sua
+cong sinh ra phat hien.
+
+**Va 1 trong 2 cai song sot la HIEN VAT DU LIEU.** `EURGBP.H4.mua_qua_dem`,
+t_alpha = **14,52**. Soi ra: bar 00:00 tren FX H4 mo thap gia tao roi hoi trong
+than bar (khe -3,16 / -2,47 / -4,61 bps o EURGBP/EURCAD/AUDCAD; moi gio khac
+~0). Om dung bar do = mua o gia mo BIA, ban o gia dong THAT: **~14%/nam hien
+vat thuan**. Day khong phai nhin truoc, khong phai qua khop — du lieu that,
+engine dung, khong mot dong ma nao sai — va **khong mot cong nao trong muoi
+cong nhin thay no**. Da bit bang **cong 11**.
+
+Tren duong sua lo ra **hai tam chan chong len nhau**: `chay()` cat tin hieu ve
+[-1,1] (nhan len 1,55 lan ra ket qua GIONG HET, khong canh bao), va go no ra
+thi lo `phi_giu_mang` cat phoi nhiem ve <=1 — tuc **don bay la tien mien phi**.
 
 ## Viec tiep theo, theo thu tu
+
+-1. **83/361 gia thuyet KHONG cham lai duoc** duoi the he 5: template cua chung
+   do NGHI sinh dong, khong nam trong `nhan/mau.py`. Chung dang mang phan quyet
+   cua the he cong 4 (cong 1 hong) va chua ai xet lai. Tim chung o
+   `config/co_che_dsl.json` roi cham lai — day la viec dau tien.
+-0. **Cong 11 moi chi gac khung NOI NGAY.** `khe_gio_bat_thuong` tra
+   `do_duoc=False` tren D1 (chi mot gio) — tuc moi ung vien D1 hien khong duoc
+   kiem hien vat nao. US500M.H4 co khe 1,32 bps o gio 21 (dong cua My), SAT
+   nguong, khong bi gan co: kiem lai neu co ung vien theo phien tren chi so.
 
 0. **Bat he 24/7** (`b chay`). Chu du an muon xay chac truoc, va buoc nay tieu
    suat FDR vinh vien nen chi bat khi co nguoi ngoi may.
