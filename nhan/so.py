@@ -50,7 +50,11 @@ CREATE TABLE IF NOT EXISTS gia_thuyet(
   id INTEGER PRIMARY KEY AUTOINCREMENT, ma TEXT UNIQUE, co_che TEXT,
   template TEXT, tham_so TEXT, tai_san TEXT, khung TEXT, cua_so TEXT,
   plan_hash TEXT, dang_ky_luc TEXT, nguon TEXT, tru_sinh TEXT, ho TEXT,
-  trang_thai TEXT DEFAULT 'DANG_KY', ghi_chu TEXT);
+  trang_thai TEXT DEFAULT 'DANG_KY', ghi_chu TEXT,
+  -- Hai cot nay KHONG nam trong plan_hash (xem `dang_ky_gia_thuyet`).
+  -- Day la cho duy nhat chung duoc luu, de mot PASS sau nay tra loi duoc
+  -- cau: bo tham so nay duoc chon ra tu bao nhieu bo?
+  so_phep_thu INTEGER, the_he_cong INTEGER);
 
 CREATE TABLE IF NOT EXISTS ket_qua(
   id INTEGER PRIMARY KEY AUTOINCREMENT, gt_id INTEGER, gt_ma TEXT, luc TEXT,
@@ -480,13 +484,70 @@ def van_de_mo() -> list[dict]:
 
 
 # --------------------------------------------------------------- GIA THUYET
+def _ghi_pham_vi_quet(cn, ma: str, so_phep_thu, the_he_cong) -> None:
+    """Ghi SO PHEP THU va LUAT QUYET DINH kem theo mot gia thuyet.
+
+    Hai con so nay KHONG nam trong `plan_hash` (xem `dang_ky_gia_thuyet`), nen
+    day la cho duy nhat chung duoc luu. Muc dich khong phai de tinh toan gi, ma
+    de mot ket qua PASS sau nay tra loi duoc cau: *"bo tham so nay duoc chon ra
+    tu bao nhieu bo?"*
+
+    Ghi bang UPDATE, khong bao gio giam: neu goi lai voi so lon hon thi lay so
+    LON (luoi da noi rong). Giam thi bo qua - de tranh mot lan goi thieu doi so
+    xoa mat con so that.
+    """
+    if so_phep_thu is None and the_he_cong is None:
+        return
+    try:
+        cn.execute("ALTER TABLE gia_thuyet ADD COLUMN so_phep_thu INTEGER")
+    except Exception:
+        pass
+    try:
+        cn.execute("ALTER TABLE gia_thuyet ADD COLUMN the_he_cong INTEGER")
+    except Exception:
+        pass
+    try:
+        if so_phep_thu is not None:
+            cn.execute("UPDATE gia_thuyet SET so_phep_thu=? WHERE ma=? "
+                       "AND (so_phep_thu IS NULL OR so_phep_thu < ?)",
+                       (int(so_phep_thu), ma, int(so_phep_thu)))
+        if the_he_cong is not None:
+            cn.execute("UPDATE gia_thuyet SET the_he_cong=? WHERE ma=?",
+                       (int(the_he_cong), ma))
+    except Exception:
+        pass
+
+
 def dang_ky_gia_thuyet(ma: str, co_che: str, template: str, tham_so: dict,
                        tai_san: str, khung: str, cua_so: str, ho: str,
                        nguon: str = "", tru_sinh: str = "QUANTLAB",
-                       ghi_chu: str = "") -> tuple[int | None, str]:
+                       ghi_chu: str = "", so_phep_thu: int | None = None,
+                       the_he_cong: int | None = None) -> tuple[int | None, str]:
     """PRE-REGISTRATION. Dong bang ke hoach TRUOC khi cham du lieu.
+
     plan_hash phu len: co che + template + tham so + tai san + khung + cua so.
-    Doi bat ky thu nao -> hash doi -> la mot gia thuyet KHAC."""
+    Doi bat ky thu nao -> hash doi -> la mot gia thuyet KHAC.
+
+    HAI THU plan_hash KHONG PHU, do 30/08/2026 - ghi ro de khong ai tuong no
+    phu het:
+
+      1. **SO PHEP THU da quet truoc khi chon ra bo tham so nay.** Quet mot luoi
+         3 bo roi dang ky bo thang, va quet mot luoi 20 bo roi dang ky bo thang,
+         cho ra plan_hash Y HET NHAU. Muoi bay phep thu kia bien mat khoi so -
+         va do dung la lo hong qua khop ma ca cai cong sinh ra de chan.
+      2. **LUAT QUYET DINH** (`cong.THE_HE_CONG`). Cai nay da duoc tach o CAP
+         FDR (`tao_epoch_fdr(..., decision_generation=...)`) nen ngan sach kiem
+         dinh khong bi tron; nhung o cap DANH TINH gia thuyet thi chua.
+
+    `nhan/quant_plan.py` (368 dong) dac ta day du ca hai, nhung `tru/quantlab.py`
+    **import no ma khong goi mot ham nao** - do la khoang trong THIET KE.
+
+    Buoc nay (30/08) chi GHI LAI hai con so vao cot rieng, KHONG dua vao hash:
+    dua vao hash se doi danh tinh cua 361 gia thuyet da dang ky va lam moi ket
+    luan truoc do khong doi chieu duoc. Ghi lai truoc thi lo hong nhin thay
+    duoc va do dem duoc; dong han no la mot lan chay lai toan bo, can chu du an
+    ngoi may.
+    """
     ke_hoach = json.dumps(
         {"co_che": co_che, "template": template, "tham_so": tham_so,
          "tai_san": tai_san, "khung": khung, "cua_so": cua_so},
@@ -499,6 +560,7 @@ def dang_ky_gia_thuyet(ma: str, co_che: str, template: str, tham_so: dict,
                 raise ValueError(
                     f"gia thuyet {ma} da ton tai voi plan_hash={r['plan_hash']}, "
                     f"khong duoc im lang doi thanh {ph}")
+            _ghi_pham_vi_quet(cn, ma, so_phep_thu, the_he_cong)
             return int(r["id"]), r["plan_hash"]
         cur = cn.execute(
             "INSERT INTO gia_thuyet(ma,co_che,template,tham_so,tai_san,khung,cua_so,"
@@ -506,8 +568,10 @@ def dang_ky_gia_thuyet(ma: str, co_che: str, template: str, tham_so: dict,
             "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,'DANG_KY',?)",
             (ma, co_che, template, json.dumps(tham_so, ensure_ascii=False, sort_keys=True),
              tai_san, khung, cua_so, ph, bay_gio(), nguon, tru_sinh, ho, ghi_chu))
+        _ghi_pham_vi_quet(cn, ma, so_phep_thu, the_he_cong)
         ghi_su_kien(tru_sinh, "dang_ky_gia_thuyet",
-                    {"ma": ma, "plan_hash": ph, "co_che": co_che, "ho": ho})
+                    {"ma": ma, "plan_hash": ph, "co_che": co_che, "ho": ho,
+                     "so_phep_thu": so_phep_thu, "the_he_cong": the_he_cong})
         return int(cur.lastrowid), ph
 
 

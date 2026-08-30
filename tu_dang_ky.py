@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 r"""tu_dang_ky.py - QUY TRINH TAO TAI KHOAN TU DONG de lay du lieu.
 Dang ky web/san cung cap du lieu: dien form -> submit -> doc ma/link tu Gmail
 (IMAP, doc_email) -> xac minh -> ghi nhan.
@@ -11,7 +11,10 @@ from playwright.sync_api import sync_playwright
 
 LAB = pathlib.Path(__file__).parent
 sys.path.insert(0, str(LAB))
-CDP = "http://127.0.0.1:9222"
+# Cong CDP cua con Chrome bot la 9224 (`mo_chrome_cdp.py`), khong phai
+# 9222. Truoc 30/08 file nay tro nham 9222 nen no chua bao gio ket noi
+# duoc - mot day thieu nua, cung ho voi `toan_van` khong goi trinh duyet.
+CDP = "http://127.0.0.1:9224"
 REG = LAB / "config" / "mo_them_tai_khoan.json"
 KQ = LAB / "reports" / "dang_ky_log.json"
 import doc_email, dang_nhap
@@ -115,6 +118,45 @@ def _app_pw():
     c = json.loads((LAB/"config"/"email_cong_tac.json").read_text(encoding="utf-8-sig"))
     return c["app_password"]
 
+def xac_minh_co_thu(ten_site: str, phut: int = 10) -> dict:
+    """Co thu tu nha cung cap trong `phut` phut gan day khong?
+
+    VI SAO CAN. `form_da_submit` KHONG phai `da_co_tai_khoan`. Do that
+    30/08/2026: marketstack tra ve `form_da_submit` va URL doi sang
+    `/signup/free/monthly` - do la trang CHON GOI, khong phai xac nhan tao tai
+    khoan. Kiem hop thu thi khong co mot thu nao tu ho.
+
+    Ket qua that cua ca luot: **0/4 tai khoan duoc tao**, trong khi bao cao tho
+    nhin nhu 1/4 thanh cong. Cung mot bai hoc voi `auto_follow` bao 8/8 followed
+    trong khi 0/8 an: mot buoc BAM XONG khong phai mot buoc DA XONG.
+    """
+    import imaplib, email as _em, time as _t
+    from datetime import datetime, timedelta
+    c = _cau_hinh_email() if "_cau_hinh_email" in globals() else None
+    try:
+        import json as _j
+        cf = _j.loads((LAB / "config" / "email_cong_tac.json")
+                      .read_text(encoding="utf-8-sig"))
+    except Exception:
+        return {"co_thu": None, "ly_do": "khong doc duoc cau hinh email"}
+    try:
+        m = imaplib.IMAP4_SSL("imap.gmail.com")
+        m.login(cf["email"], cf["app_password"])
+        m.select("INBOX")
+        moc = (datetime.now() - timedelta(minutes=phut)).strftime("%d-%b-%Y")
+        typ, ids = m.search(None, f'(SINCE "{moc}")')
+        thay = []
+        for i in (ids[0].split() or [])[-40:]:
+            _, d = m.fetch(i, "(BODY[HEADER.FIELDS (FROM SUBJECT)])")
+            h = _em.message_from_bytes(d[0][1])
+            gop = f"{h.get('From','')} {h.get('Subject','')}".lower()
+            if ten_site.lower() in gop:
+                thay.append(str(h.get("Subject"))[:90])
+        m.logout()
+        return {"co_thu": bool(thay), "tieu_de": thay[:3]}
+    except Exception as e:
+        return {"co_thu": None, "ly_do": f"{type(e).__name__}: {str(e)[:60]}"}
+
 def main():
     reg = _doc_reg()
     if "--dang-ky" in sys.argv:
@@ -125,7 +167,27 @@ def main():
         print(dang_ky_site({**site, "email": site.get("email") or reg["email"],
                             "mat_khau": site.get("mat_khau") or reg["mat_khau"]}))
         return
-    print("dung: --dang-ky <ten> | sites trong registry:")
+    if "--chay-het" in sys.argv:
+        # Docstring dau file da noi co co nay tu lau, nhung main() khong he xu
+        # ly no: go `--chay-het` chi in ra huong dan su dung. Mot co duoc ghi
+        # trong tai lieu ma khong ton tai trong ma la mot dang day thieu khac.
+        import time as _t
+        for s in reg.get("sites", []):
+            r = dang_ky_site({**s, "email": s.get("email") or reg["email"],
+                              "mat_khau": s.get("mat_khau") or reg["mat_khau"]})
+            # KHONG tin `form_da_submit`. Doi chieu bang hop thu.
+            if str(r.get("trang_thai", "")).startswith("form_da_submit"):
+                _t.sleep(20)
+                xm = xac_minh_co_thu(s.get("sender_gui") or s["ten"])
+                r["xac_minh_email"] = xm
+                if xm.get("co_thu") is False:
+                    r["trang_thai"] = "submit_nhung_KHONG_CO_THU"
+                elif xm.get("co_thu") is True:
+                    r["trang_thai"] = "da_gui_thu_xac_minh"
+            print(f"  {s['ten']:14s} {r}", flush=True)
+            _t.sleep(4)
+        return
+    print("dung: --dang-ky <ten> | --chay-het | sites trong registry:")
     for s in reg.get("sites", []):
         print("  -", s.get("ten"), s.get("url"))
 

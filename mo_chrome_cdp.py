@@ -37,8 +37,13 @@ def cdp_song(port):
         return False
 
 def main():
-    port = sys.argv[1] if len(sys.argv) > 1 else PORT
-    prof = sys.argv[2] if len(sys.argv) > 2 else PROF
+    # Bo CO (`--hien`...) ra khoi doi so vi tri. Truoc 30/08 khong loc, nen
+    # `mo_chrome_cdp.py --hien` chay thanh `--remote-debugging-port=--hien`:
+    # Chrome mo len nhung khong co CDP nao, va thong bao la "KHONG thay CDP sau
+    # 40s (profile bi Chrome khac giu khoa)" - mot chan doan HOAN TOAN SAI.
+    vi_tri = [a for a in sys.argv[1:] if not a.startswith("-")]
+    port = vi_tri[0] if len(vi_tri) > 0 else PORT
+    prof = vi_tri[1] if len(vi_tri) > 1 else PROF
     if cdp_song(port):
         print("CDP %s DA MO san roi - khong lam gi" % port)
         return

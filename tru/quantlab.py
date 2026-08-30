@@ -646,6 +646,11 @@ def kham_pha_theo_mau(ten_mau: str, nguon: str = "") -> dict:
                 ma=ma_gt, co_che=m["co_che"], template=ten_mau, tham_so=ts,
                 tai_san=ma, khung=khung, cua_so=_cua_so(df), ho=m["ho"],
                 nguon=nguon or "kham_pha_theo_mau", tru_sinh=TRU,
+                # SO PHEP THU: ca luoi cua mau nay da duoc quet truoc khi bo
+                # tham so `ts` duoc chon. plan_hash KHONG phu con so do (xem
+                # `so.dang_ky_gia_thuyet`), nen day la cho duy nhat no duoc luu.
+                so_phep_thu=len(m.get("luoi") or [{}]),
+                the_he_cong=CONG.THE_HE_CONG,
                 ghi_chu=f"train sharpe {cs.get('sharpe')} vs mua-giu {m_bh.get('sharpe')}")
             if SO.mot("SELECT id FROM ket_qua WHERE gt_ma=? AND superseded_by IS NULL", ma_gt):
                 continue
@@ -699,6 +704,7 @@ def kham_pha_gop(ten_mau: str, nguon: str = "") -> dict:
             ma=ma_gt, co_che=MAU.MAU[ten_mau].get("co_che", ""), template=ten_mau,
             tham_so=q["tham_so"], tai_san=f"RO:{lop}", khung=q["khung"],
             cua_so=q.get("cua_so_train") or "", ho=ho,
+            so_phep_thu=q.get("da_quet"), the_he_cong=CONG.THE_HE_CONG,
             nguon=nguon or "kham_pha_gop", tru_sinh=TRU,
             ghi_chu=f"RO {q['so_chan']} chan: {','.join(q['chan'])} | "
                     f"train sharpe {q.get('sharpe_train')}")
