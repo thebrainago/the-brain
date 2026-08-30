@@ -37,9 +37,9 @@ from scipy import stats
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-    from nhan import do_luong as DO, mo_phong as MP, so as SO
+    from nhan import do_luong as DO, mo_phong as MP, so as SO, du_lieu as DL
 else:
-    from . import do_luong as DO, mo_phong as MP, so as SO
+    from . import do_luong as DO, mo_phong as MP, so as SO, du_lieu as DL
 
 LAB = Path(__file__).resolve().parent.parent
 NGUONG_FILE = LAB / "config" / "nguong.json"
@@ -627,6 +627,42 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         if not dk["7_chi_phi_do_duoc"]:
             ly_do.append(f"mo hinh chi phi do_tin={cp.do_tin} (chua do tu du lieu/san)")
     dk["8_du_lenh"] = (kq_he.so_lenh or 0) >= n["so_lenh_toi_thieu"]
+
+    # ---- 11: khong duoc song bang KHE GIA o moc dao ngay ------------------
+    # Do 30/08/2026: tren FX H4 cua kho nay, bar 00:00 MO THAP gia tao roi hoi
+    # trong than bar (khe -3,16 bps o EURGBP, -2,47 EURCAD, -4,61 AUDCAD; moi
+    # gio khac ~0). Om dung bar do = mua o gia mo BIA, ban o gia dong THAT:
+    # +5,78 bps/ngay ~ 14%/nam hien vat thuan. Mot ung vien
+    # (EURGBP.H4.mua_qua_dem) dat t_alpha = 14,52 va di het cong re nho dung
+    # cai do - khong mot cong nao trong 10 cong cu nhin thay.
+    #
+    # Chan CHINH XAC chu khong chan ca nguon: chi loai khi chien luoc DON
+    # phoi nhiem vao gio bi nhiem. Mot co che vo tinh nam gio do bang muc
+    # trung binh thi khong an them gi.
+    dk["11_khong_an_khe_dao_ngay"] = True
+    try:
+        _kh = DL.khe_gio_bat_thuong(df)
+        if _kh["do_duoc"] and _kh["gio"]:
+            _v = np.abs(np.nan_to_num(np.asarray(kq_he.vi_the, dtype=float)))
+            _g = np.asarray(df.index.hour)
+            _m = np.isin(_g, _kh["gio"])
+            if _m.any() and (~_m).any():
+                _trong, _ngoai = float(_v[_m].mean()), float(_v[~_m].mean())
+                if _trong > 0 and _trong > 1.25 * max(_ngoai, 1e-9):
+                    dk["11_khong_an_khe_dao_ngay"] = False
+                    ly_do.append(
+                        f"phoi nhiem don vao gio co khe dao ngay {_kh['gio']} "
+                        f"({_trong:.2f} so voi {_ngoai:.2f} o gio khac; khe "
+                        f"{ {g: round(_kh['khe_bps'][g], 2) for g in _kh['gio']} } bps) "
+                        "- dang song bang bao gia luc dao ngay, khong bang co che")
+                else:
+                    ly_do.append(f"co gio khe dao ngay {_kh['gio']} nhung phoi "
+                                 f"nhiem khong don vao do ({_trong:.2f} vs {_ngoai:.2f})")
+        elif not _kh["do_duoc"]:
+            ly_do.append("chua do duoc khe theo gio (khung ngay hoac qua it bar) "
+                         "- KHONG ket luan la sach")
+    except Exception as _e:
+        ly_do.append(f"khong do duoc khe dao ngay: {type(_e).__name__}")
 
     giai_doan = DO.hieu_qua_giai_doan(kq_he.loi, kq_he.index, k=4)
     if siet:

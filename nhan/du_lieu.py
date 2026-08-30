@@ -465,6 +465,73 @@ def nap(ma: str, khung: str = "H1", tu: str | None = None, den: str | None = Non
 #:   SP500 D1 nam 1967-99 93-97%  <- BIA theo mang
 #:
 #: Nguong 0,30 tung loai nham 18 chuoi FX/CFD hop le. 0,60 tach dung hai nhom.
+#: Khe gia tai MOC DAO NGAY. Do 30/08/2026 tren FX H4 cua kho nay:
+#:
+#:      gio    khe(bps)   than(bps)
+#:        0      -3,158      +5,784   <- EURGBP
+#:        4      +0,009      +0,070
+#:       20      +0,001      -2,080
+#:
+#: Bar 00:00 MO THAP gia tao roi "hoi" trong than bar. Moi gio khac khe ~0.
+#: Cung hinh dang tren EURCAD (-2,47) va AUDCAD (-4,61). Do la bao gia luc dao
+#: ngay - thanh khoan mong, chenh mua/ban gian rong.
+#:
+#: Ai om dung bar do thi MUA O GIA MO BIA va BAN O GIA DONG THAT: +5,78 bps
+#: moi ngay ~ **14%/nam hien vat thuan**, lon hon moi edge that. Da lam mot
+#: ung vien dat t_alpha = 14,52 va di het cong re.
+#:
+#: Hai nguong phai dat CUNG LUC:
+#:  - san tuyet doi 1 bps: duoi muc do khe khong du de che ra edge, va moi
+#:    chuoi that deu co khe nho khac 0.
+#:  - gap 10 lan trung vi cac gio khac: tren mot chuoi sach thi moi gio deu
+#:    nho nhu nhau, khong gio nao noi len.
+#: Doi mot nguong thoi thi mot chuoi sach se bi bao dong gia (chi co san) hoac
+#: mot chuoi ban se lot (chi co ty le).
+KHE_GIO_SAN_BPS = 1.0
+KHE_GIO_BOI = 10.0
+
+
+def khe_gio_bat_thuong(df, san_bps: float = KHE_GIO_SAN_BPS,
+                       boi: float = KHE_GIO_BOI) -> dict:
+    """Gio nao co khe gia bat thuong giua bar truoc va bar nay?
+
+    Tra `{"gio": [...], "khe_bps": {gio: bps}, "do_duoc": bool}`.
+
+    `do_duoc=False` khi khong du bar de ket luan - va luc do `gio` la danh
+    sach RONG vi "chua do duoc", khong phai vi "sach". Nguoi goi phai phan
+    biet hai cau do.
+    """
+    import numpy as _np
+    ra = {"gio": [], "khe_bps": {}, "do_duoc": False}
+    try:
+        o = _np.asarray(df["open"], dtype=float)
+        c = _np.asarray(df["close"], dtype=float)
+        gio = _np.asarray(df.index.hour)
+    except Exception:
+        return ra
+    if len(o) < 200:
+        return ra
+    khe = _np.full(len(o), _np.nan)
+    khe[1:] = o[1:] / c[:-1] - 1.0
+    tb = {}
+    for h in sorted(set(gio.tolist())):
+        x = khe[gio == h]
+        x = x[_np.isfinite(x)]
+        if len(x) >= 30:
+            tb[int(h)] = float(_np.mean(x) * 1e4)
+    if len(tb) < 2:
+        return ra
+    ra["do_duoc"] = True
+    ra["khe_bps"] = tb
+    do_lon = sorted(abs(v) for v in tb.values())
+    trung_vi = do_lon[len(do_lon) // 2]
+    for h, v in tb.items():
+        if abs(v) >= san_bps and abs(v) >= boi * max(trung_vi, 1e-9):
+            ra["gio"].append(h)
+    ra["gio"].sort()
+    return ra
+
+
 NGUONG_OPEN_BIA = 0.60
 
 #: Nguong cho thi truong CO PHIEN DONG CUA (chi so, ETF - nguon `ngoai`).
