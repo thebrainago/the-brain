@@ -54,41 +54,62 @@ b61ac59 AGENTS.md: ghi moc gop ds/ + git + lenh b
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Bao cao day du: `BAO_CAO_2026_08_30.md` — ba phan A (ra soat) / B (sang, ha tang
++ toc do) / C (chieu-toi, dau vao + duong gop). **Doc phan C truoc.**
+
+Phien nay tim ra **muoi loi cung mot kieu: HONG IM LANG.** Khong cai nao bao mot
+ngoai le, he van chay, bo test van xanh. Voi mot day chuyen dinh chay 24/7 khong
+nguoi truc thi day la loai hong nguy hiem nhat — no khong dung lai, no chi lang
+le ngung lam viec:
+
+1. `toan_van` khong co duong qua trinh duyet (ha tang co tu 21/08, thieu MOT loi goi)
+2. Loi MOI TRUONG ghi thanh "dia chi hong vinh vien" — 84 dia chi Reddit khoa oan
+3. `doc_gan` mo tab khong dong — **Chrome 356 tab**, luot keo dung han 10 phut
+4. Nhan `NEN_GOP` chi gan duoc o V3 — chan 2/3 co che co tin hieu that
+5. Nguon trinh duyet khong `ORDER BY uu_tien` — xa hoi chua bao gio toi luot
+6. Cache MDE ghi khong nguyen tu — song song thi mat muc
+7. TradingView doc bang ten class da loi thoi — tra ve 0 suot
+8. `da_quet=0` bao thanh "khong bo nao thang mua-giu" — **ket luan am GIA**
+9. Khu trung theo URL tho — ba bien the thoi phong so lieu (YouTube moc thoi
+   gian, tham so theo doi, duong dan con cua X)
+10. Bo loc tieu de >=12 ky tu giet sach bai cua X (link X boc dau thoi gian "2h")
+
+**Hai niem tin cu bi lat bang phep do.** Cong FDR KHONG bi niem kin (da sua
+21/08; `thu_luc_cong` DAT, j=1, nguong 0,0129). Va song song hoa AN THAT: quet
+be mat 1 -> 8 tien trinh cho **3,8 lan** — ket luan cu "20 luong = 1 luong" do
+bang mot bai quet MANG LON, khong ap cho pheu D1 (tap lam viec 128 KB nam trong
+cache CPU).
+
+**Duong GOP da chay** (chu du an duyet): canary 5/5, ket qua **am tinh DO
+DUOC** — ca ba co che thua mua-giu tren ro 12 chi so, cua so train 1980-2014.
+Dung o tang kham pha, **khong cham holdout, FDR van 1.769 dong dung bang dau
+phien**. Khop voi `ibs-la-hien-tuong-cua-mot-thoi-ky` bang mot duong do doc lap.
 
 ## Viec tiep theo, theo thu tu
 
-0. **Duong leo thang sang GOP khong voi toi co che THUA LENH.** `rsi_dao_chieu`
-   co `pham_vi=CO_CO_CHE` nhung 0 o NEN_GOP: 121/122 o chet o V1/V2 vi thieu
-   lenh, ma nhan NEN_GOP chi gan duoc ben trong V3 (`sang_loc.py:414`). "Thua
-   lenh tren tung tai san, day lenh khi gop ca lop" dung la ho so duong GOP sinh
-   ra de xu ly. **Sua cai nay doi tap gia thuyet duoc dua len kiem dinh, tuc doi
-   ngan sach FDR** — can chu du an quyet. De xuat: cho V2 leo thang som sang GOP
-   khi `pham_vi==CO_CO_CHE` va ly do truot la thieu lenh (khong phai thieu edge).
-0b. **QUYET 1.019 dong `family=do_luc` trong so FDR** (khong phai 795). Giu
-   378/398 lan bac bo cua ca so, deu la DO DAC chu khong phai quyet dinh. Xoa
-   dong khoi so kiem toan khong hoan tac duoc: giu va danh dau, hay chuyen sang
-   bang `do_dac` rieng?
-1. **Chay duong GOP cho 26 o `ibs_bat_day`.** Day la dau ra thuc chat cua vong
-   quet: `quantlab.kham_pha_gop` roi `xac_nhan_gop`. **Buoc nay CHAM HOLDOUT va
-   tieu suat FDR vinh vien** — chay khi chu du an ngoi truoc may.
-2. **Bat lai he 24/7** (`b chay`). Da tat 14 ngay. `nghi.py` chay sach rc=0.
-   Cung la buoc tieu suat FDR nen chua tu y bat.
-3. **`quant_plan.py` chua tung duoc goi.** `quantlab` import ma khong dung ham
-   nao; dang ky that di qua `so.dang_ky_gia_thuyet` voi plan_hash **khong phu
-   LUAT QUYET DINH lan KHONG GIAN TIM KIEM**. Doi the he cong hoac noi rong luoi
-   deu khong lam doi hash. Khoang trong thiet ke; da cam moc test.
-4. **Ba template**: SuperTrend, Stochastic, do doc duong trung binh. 12/18 chien
-   luoc `.mq5` da doc khong co duong vao QUANTLAB.
-5. **Do spread H1 that cho nhom chi so** (`bao_dam_spread`). Spread tu bar D1 la
-   CHAN TREN — EURCAD D1 1,70 bps vs H1 1,22 bps.
-6. **Noi `ds` <-> `lab`**: chon MOT chieu. De xuat `lab` la control plane, `ds`
-   la thu vien duoc goi. Hien SEEKER -> QuantLab ben `ds` van go tay.
-7. **Chia luong agent** — dieu kien da du ca ba (git + cong chan test rong + moi
-   agent mot nhanh). Chia cho: template moi, test cho module chua phu, adapter.
-   **Khong chia** `cong/so/chi_phi/ngu_phap/sang_loc`.
-8. Muc con lai tu 23/08: `vuon_nguon.mot_luot_tim` (~100 ten chua thu), 193 ban
-   `khong_doc_duoc`, 103 viec `kham_pha_theo_mau`, 12 nguon can trinh duyet.
+0. **Bat he 24/7** (`b chay`). Chu du an muon xay chac truoc, va buoc nay tieu
+   suat FDR vinh vien nen chi bat khi co nguoi ngoi may.
+1. **`auto_follow` tu join nhom.** Ma da co san (346 dong: X, subreddit, kenh
+   Telegram, YouTube, TradingView) va chua ai goi. No thao tac tren TAI KHOAN
+   THAT — de chu du an bam nut. Da kiem: x/facebook/youtube/mql5 DA dang nhap,
+   tiktok va reddit chua.
+2. **O dia con 14 GB** — EVO da bao (`dia_thap`). Duoi 15 GB thi buoc kiem tick
+   MT5 bi khoa, tuc he tu chan buoc quyet dinh cua chinh no. Phan du an chi
+   chiem 4,5 GB (backups 344 MB / ho so Chrome 1,7 GB / data 769 MB /
+   reports 1,4 GB) — cho can don nam ngoai du an.
+3. **`quant_plan.py` van chua ai goi.** `quantlab` import ma khong dung ham nao;
+   dang ky that di qua `so.dang_ky_gia_thuyet` voi plan_hash **khong phu LUAT
+   QUYET DINH lan KHONG GIAN TIM KIEM**. Doi the he cong hoac noi rong luoi deu
+   khong lam doi hash. Sua doi ca danh tinh gia thuyet lan chuoi FDR.
+4. **Doc ky 4 kho vua nhat** de DOI CHIEU voi cong (khong thay): `zipline`
+   (20.041 sao, slippage model), `oos-lab` (haircut Sharpe), `deflated-alpha`,
+   `skill-backtest-overfit` (Minimum Track Record).
+5. **455 bai con cho doc toan van**, va **220 ban `khong_doc_duoc`** (gan het la
+   `doi.org` — tuong phi that).
+6. **Facebook con mong** (10 bai): trang tim kiem cua no gan nhu khong tra link
+   bai, khac X. Can cach khac.
+7. Muc cu con nguyen: `vuon_nguon.mot_luot_tim` (~100 ten chua thu),
+   103 viec `kham_pha_theo_mau` dang cho, `bao_dam_spread` cho nhom chi so.
 
 ## Khong duoc quen (bo sung cho ban 23/08)
 
