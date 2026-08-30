@@ -1,6 +1,6 @@
-# TIEP TUC NGAY MAI — chot phien 2026-08-30 11:25
+# TIEP TUC NGAY MAI — chot phien 2026-08-30 17:53
 
-tang toc 8 lan (con bao stat trong kho()), cong hien phap + 48 test moi (369 xanh), nap truoc MDE 122 cap, quet lai toan be mat 99,7s; bac bo ket luan 'cong FDR bi niem kin' cua chinh ban ra soat
+gop du an + mo git; nhanh 8 lan roi song song them 3,8 lan; cong hien phap + 144 bai kiem moi; mo khoa VPN/TradingView/xa hoi (492->1075 ban doc); duong GOP chay ra am tinh do duoc, so cai nguyen ven
 
 ## Trang thai do duoc luc chot
 > May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
@@ -8,24 +8,39 @@ tang toc 8 lan (con bao stat trong kho()), cong hien phap + 48 test moi (369 xan
 
 | chi so | hom nay | doi |
 |---|---:|---:|
-| file test (lab) | 34 | +5 |
-| ham test (lab) | 370 | +48 |
+| file test (lab) | 41 | +7 |
+| ham test (lab) | 468 | +98 |
 | file test (ds/) | 82 |  |
 | bang gia .parquet | 252 |  |
 | dong so FDR | 1769 |  |
 |   trong do bac bo | 398 |  |
 | ung vien xep hang | 107 |  |
-| ban doc da thu | 1338 |  |
+| ban doc da thu | 1750 | +412 |
 | co che trong thu vien | 32 |  |
-| van de con mo | 24 |  |
-|   muc NANG | 14 |  |
+| van de con mo | 27 | +3 |
+|   muc NANG | 16 | +2 |
 | viec dang CHO | 104 |  |
-| file .py o goc lab | 104 | +7 |
+| file .py o goc lab | 111 | +7 |
 
 - co DUNG_LAI: **CO (he dang nam im)**
 - viec CHO theo loai: kham_pha_gop=1, kham_pha_theo_mau=103
 - commit hom nay:
 ```
+7509346 b toan-canh: mot man hinh cho biet he dang o dau
+a183052 chuan hoa URL: bien the thu ba (duong dan con cua X) va gop hai ten mien
+406b213 nguon xa hoi: vao TUNG BAI, khu trung dung, va thao bo loc tieu de chan nham
+a7b1f23 duong GOP da chay: am tinh DO DUOC, va tach 'chua do' khoi 'do roi ma thua'
+7f7b47e EVO san PHUONG PHAP, khong chi cong cu
+920a05f quet be mat chay SONG SONG - nhanh 3,8 lan, va no lam lo mot loi ghi cache
+609b7aa Chrome chay AN mac dinh - RAM 2,93 -> 1,51 GB
+44a7b1c EVO canh tai nguyen, ngan sach theo so do, va mo khoa TradingView + xa hoi
+4f831e5 tran so tab trinh duyet - ro ri tai nguyen lam dung han luot keo
+588bf91 bat VPN, them 3 mau chien luoc, va mo duong GOP cho co che thua lenh
+6021de0 tach loi MOI TRUONG khoi loi DIA CHI khi doc toan van, va go 84 khoa oan
+16860cc SEEKER vua san chien luoc vua NHAT CONG CU doc duong
+dc99fb5 noi day toan_van -> trinh duyet, va cho EVO di san cong cu ngoai
+7bb629f dien ban giao 30/08 phan chieu
+cc106f8 2026-08-30: tang toc 8 lan (con bao stat trong kho()), cong hien phap + 48 test moi (369 xanh), nap truoc MDE 122 cap, quet lai toan be mat 99,7s; bac bo ket luan 'cong FDR bi niem kin' cua chinh ban ra soat
 c1ea7c4 nap truoc MDE 122 cap D1 + quet lai toan be mat + bao cao phan B
 d8795f2 cong hien phap + test cho 3 module chua ai kiem + sua lo hong xuat xu chi phi
 83cd2bc toc do: dem van tay kho() theo TTL + dem chi_phi._doc_luu theo (mtime,size)
@@ -39,31 +54,7 @@ b61ac59 AGENTS.md: ghi moc gop ds/ + git + lenh b
 
 ## Mot doan doc la hieu ca phien
 
-Bao cao day du: `BAO_CAO_2026_08_30.md` — **PHAN B** la phan chieu, doc phan do.
-
-Ba dieu chinh lai chinh ban ra soat buoi sang:
-
-1. **Cong FDR KHONG bi niem kin.** Da sua tu 21/08. Do lai: `thu_luc_cong` DAT
-   (p=0,50 FAIL dung, p=0,60 qua het dieu kien), `j` cua mot ho nghien cuu hom
-   nay la **1** voi nguong **0,0129**. Cac dong thoi ky hong nam o khoa epoch
-   dinh dang cu nen da bi `THE_HE_CONG` 3->4 cach ly san. **0 PASS khong phai
-   vi cong chan** — nut nam o tang kham pha.
-2. **Nut that toc do khong o dau ai doan.** 42% toan bo thoi gian la `nt.stat`:
-   `_van_tay_kho()` goi 936 lan/60 giay, moi lan stat 253 file parquet de kiem
-   cache. Phep KIEM cache dat hon thu no bao ve. Sua bang TTL 5 giay + dem
-   `chi_phi._doc_luu` theo (mtime,size): **32,8s -> 4,1s**. Bo test an theo:
-   **6:07 -> 1:15**.
-3. **Hai uoc luong cu lech hang chuc lan.** MDE that la 3-4 giay/cap chu khong
-   phai ~2 phut (nap ca 122 cap D1 het 234 giay). Cache mua-giu tiet kiem duoc
-   **so 0** (9 lan goi, 0,008 giay) — viec do da bi loai.
-
-Quet lai toan be mat D1 (1.830 o) het **99,7 giay**: LOAI 1.075 / CHUA_DU_LUC
-729 / NEN_GOP 26 / SAN_SANG_V4 0. Chi **2/15 co che** qua phep thu phan chung:
-`ibs_bat_day` (cach biet 0,558) va `rsi_dao_chieu` (0,264).
-
-Them cong hien phap cho bo test (`test_hien_phap.py`) va 48 bai kiem moi cho ba
-module truoc day khong ai kiem: `canary` (ca hai chieu mutation audit),
-`quant_plan`, `evolution`. **321 -> 369 xanh.**
+(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
 
 ## Viec tiep theo, theo thu tu
 
