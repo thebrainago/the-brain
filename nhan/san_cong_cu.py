@@ -74,6 +74,24 @@ GIAY_PHEP_LAY_NHIEM = {"GPL-3.0", "GPL-2.0", "AGPL-3.0", "LGPL-3.0"}
 #: no thi lan nao cung "tim thay thu huu ich", va do la mot dang tu lua minh
 #: khac. Moi muc phai noi ro NO CAM VAO DAU va CAI GI NO KHONG DUOC THAY.
 NHU_CAU = {
+    # Them 30/08/2026 sau khi do pheu doc: trong 2.504 cau bo doc nhan la "luat
+    # vao", 42,0% la manh MA NGUON va 44,7% la VAN TAN GAU. Bo doc tu choi
+    # chung la dung, nhung cong doc van bi tieu vao 87% rac.
+    "xep_thu_tu_doc": {
+        "vi_sao": "87% cau ung vien la rac (manh ma nguon + van tan gau). Mot "
+                  "bo phan loai van ban tra loi 'bai nay co ta mot luat khong' "
+                  "du de doi thu tu doc va don gap cong doc ve phia bai co luat.",
+        "cam_vao": "tru/seeker.py - xep hang tai lieu truoc khi doc toan van",
+        "khong_duoc_thay": "TUYET DOI khong duoc sinh co che, khong duoc cham "
+                           "nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau "
+                           "qua toi da la doc nham THU TU - khong bao gio la "
+                           "mot gia thuyet sai duoc dang ky.",
+        "truy_van": ["text classification trading strategy",
+                     "financial text classification",
+                     "zero shot text classification"],
+        "sao_toi_thieu": 0,
+        "tren_hugging": True,
+    },
     "doc_pdf": {
         "vi_sao": "275 tai lieu la lien ket doi.org va 133 la arXiv PDF. "
                   "`toan_van.tu_arxiv` chi boc duoc arXiv; PDF nha xuat ban thi khong.",
@@ -391,6 +409,50 @@ def tim_github(truy_van: str, sao_toi_thieu: int = 100, so_luong: int = 8) -> li
     return r.json().get("items", []) or []
 
 
+def tim_huggingface(truy_van: str, so_luong: int = 8,
+                    loai: str = "models") -> list[dict]:
+    """Tim MO HINH / BO DU LIEU tren HuggingFace.
+
+    Khac GitHub (tim mot goi de goi) va arXiv (tim mot phuong phap de doc): HF
+    la cho co san TRONG SO da huan luyen. Voi The Brain chi co mot cho dung
+    duoc, va no phai nam NGOAI duong ra quyet dinh:
+
+      **xep thu tu doc**, khong phai sinh co che.
+
+    Do 30/08/2026: trong 2.504 cau bo doc nhan la "luat vao", 42,0% la manh ma
+    nguon va 44,7% la van tan gau — 87% cong doc bo vao rac. Mot bo phan loai
+    van ban chi can tra loi "bai nay co ta mot luat khong" la du de doi thu tu
+    doc. No khong sinh co che, khong cham cong, khong tieu suat FDR; doan sai
+    thi hau qua toi da la doc nham thu tu.
+
+    Hien phap cam `exec` ma LLM sinh va cam co che khong qua `ngu_phap`. Cai
+    nay khong pham vi no khong tao ra dieu kien nao - no chi sap hang doi.
+    """
+    import requests
+    duong = "https://huggingface.co/api/" + ("datasets" if loai == "datasets"
+                                             else "models")
+    try:
+        r = requests.get(duong, params={"search": truy_van, "limit": so_luong,
+                                        "sort": "downloads", "direction": -1},
+                         timeout=25)
+    except Exception as e:
+        return [{"loi": f"{type(e).__name__}: {str(e)[:80]}"}]
+    if r.status_code != 200:
+        return [{"loi": f"HTTP {r.status_code}"}]
+    ra = []
+    for it in (r.json() or [])[:so_luong]:
+        ten = it.get("id") or it.get("modelId") or ""
+        if not ten:
+            continue
+        ra.append({
+            "full_name": ten,
+            "html_url": f"https://huggingface.co/{'datasets/' if loai == 'datasets' else ''}{ten}",
+            "description": ", ".join(it.get("tags", [])[:8])[:300],
+            "stargazers_count": int(it.get("downloads") or 0),
+            "_nguon": "huggingface"})
+    return ra
+
+
 # ------------------------------------------------------- TIM CONG TRINH
 def tim_arxiv(truy_van: str, so_luong: int = 8) -> list[dict]:
     """Tim BAI BAO, khong tim kho ma.
@@ -489,7 +551,9 @@ def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False) -> dict:
             time.sleep(NGHI_GIAY)
         # Nhu cau khai `doi_chieu_voi` = nhu cau PHUONG PHAP -> tim BAI BAO.
         # Nhu cau con lai = can mot goi chay duoc -> tim KHO MA.
-        if NHU_CAU[nhu_cau].get("doi_chieu_voi"):
+        if NHU_CAU[nhu_cau].get("tren_hugging"):
+            ds = tim_huggingface(tv)
+        elif NHU_CAU[nhu_cau].get("doi_chieu_voi"):
             ds = tim_arxiv(tv)
         else:
             ds = tim_github(tv, NHU_CAU[nhu_cau]["sao_toi_thieu"])
