@@ -72,12 +72,24 @@ class DoDuocMayThat(unittest.TestCase):
         self.assertIn("so_tab", r["tab"])
         self.assertIn("gb", r["chrome"])
 
-    def test_chay_xong_duoi_hai_giay(self):
-        """EVO goi moi luot. Cham thi no tu tro thanh mot cai nghen."""
+    def test_chay_xong_nhanh_tu_lan_thu_hai(self):
+        """EVO goi moi luot. Cham thi no tu tro thanh mot cai nghen.
+
+        LAN DAU cham hon vi phai DO CONG CDP: mot cong khong ai nghe phai cho
+        het timeout. Do that 30/08: lan dau 3,56 giay, tu lan hai 1,55 giay nho
+        nho lai cong da dung duoc.
+
+        Nguong dat o 2,5 giay cho lan thu hai. EVO co ngan sach 150 giay/luot
+        nen 1,5 giay la 1% - chap nhan duoc; 4 giay tro len thi khong.
+        """
         import time
+        DTN.tat_ca()                      # lan dau: do cong
         t0 = time.time()
         DTN.tat_ca()
-        self.assertLess(time.time() - t0, 4.0)
+        giay = time.time() - t0
+        self.assertLess(giay, 2.5,
+                        f"do tai nguyen mat {giay:.1f}s moi luot - qua dat cho "
+                        "mot phep do phu tro")
 
 
 class EVODocDuocKetQua(unittest.TestCase):

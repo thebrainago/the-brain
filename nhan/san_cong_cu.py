@@ -105,6 +105,42 @@ NHU_CAU = {
                      "deflated sharpe ratio probability backtest overfitting"],
         "sao_toi_thieu": 100,
     },
+    # ---------------- PHUONG PHAP, khong phai cong cu ----------------
+    # Chu du an chot 30/08: "the gioi co rat nhieu nguoi lam quant, nhieu bo loc
+    # va cong trinh nghien cuu se giup tang toc quy trinh ta dang lam".
+    #
+    # Khac voi nam nhu cau tren: cai ta di tim o day khong phai mot kho ma de
+    # `pip install`, ma la mot PHUONG PHAP - mot bo loc, mot phep hieu chuan,
+    # mot cach tranh mot cai bay. No vao he qua NGUOI DOC roi khai bao lai,
+    # khong bao gio qua `import`.
+    #
+    # Vi sao tach rieng: mot bai bao khong co sao GitHub, khong co giay phep,
+    # khong co "lan day cuoi". Cham diem theo suc khoe kho ma la vo nghia voi
+    # chung. Chung chi co mot thu de danh gia: **no giai bai toan nao cua ta**.
+    "phuong_phap_chong_qua_khop": {
+        "vi_sao": "Cong cua ta tu viet: FDR LORD, MDE, placebo hoan vi. Ba thu "
+                  "nay co ban chuan trong tai lieu hoc thuat, va doi chieu voi "
+                  "ban chuan la cach duy nhat biet ta co tu che ra luat rieng.",
+        "cam_vao": "KHONG cam vao dau ca - nguoi doc roi quyet",
+        "doi_chieu_voi": "nhan/cong.py, nhan/do_luc.py",
+        "khong_duoc_thay": "khong mot dong ma nao tu day duoc goi tu duong "
+                           "quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay.",
+        # Truy van NGAN. Ghep bang AND nen moi tu them vao la mot rang buoc
+        # nua; sau tu thi gan nhu chac chan ra rong.
+        "truy_van": ["backtest overfitting", "deflated sharpe ratio",
+                     "multiple testing finance"],
+        "sao_toi_thieu": 50,
+    },
+    "phuong_phap_chi_phi_giao_dich": {
+        "vi_sao": "Chi phi qua dem la thu quyet dinh cua ca du an (do that: "
+                  "4-7%/nam), va mo hinh cua ta tu dung. Ai do da lam ky hon.",
+        "cam_vao": "KHONG cam vao dau ca",
+        "doi_chieu_voi": "nhan/chi_phi.py",
+        "khong_duoc_thay": "the he chi phi (THE_HE) doi thi phai quet lai TOAN "
+                           "BO va tach chuoi FDR - khong duoc sua len tai cho",
+        "truy_van": ["transaction cost slippage", "market impact execution"],
+        "sao_toi_thieu": 50,
+    },
     "thu_thap_web": {
         "vi_sao": "reddit bi chan DNS tren may nay; nhieu nguon can dang nhap.",
         "cam_vao": "nhan/doc_trinh_duyet.py",
@@ -166,6 +202,27 @@ DAU_HIEU = {
                            r"\bbenjamini[- ]hochberg\b"],
     "thu_thap_web": [r"\bundetected[- ]chromedriver\b", r"\bplaywright[- ]stealth\b",
                      r"\banti[- ]?bot\s+detection\b", r"\bcloudflare\s+bypass\b"],
+    # Dau hieu muc PHUONG PHAP: mot bo loc / phep hieu chuan / cai bay da co
+    # nguoi mo ta, khong phai mot goi de `pip install`. Kho hien co CO san
+    # chung: do 30/08 tren 923 ban doc - 23 ban co "deflated sharpe",
+    # 39 ban "market impact", 8 ban "data snooping", 7 ban "superior predictive".
+    "phuong_phap_chong_qua_khop": [
+        r"\bdata\s+snooping\b",
+        r"\bp[- ]hacking\b",
+        r"\bfamily[- ]wise\s+error\b",
+        r"\bsuperior\s+predictive\s+ability\b",
+        r"\bhaircut\s+sharpe\b",
+        r"\bminimum\s+track\s+record\b",
+        r"\bwhite'?s\s+bootstrap\b",
+    ],
+    "phuong_phap_chi_phi_giao_dich": [
+        r"\bmarket\s+impact\s+model\b",
+        r"\bimplementation\s+shortfall\b",
+        r"\bslippage\s+model\b",
+        r"\balmgren[- ]chriss\b",
+        r"\beffective\s+spread\b",
+        r"\bovernight\s+financing\b",
+    ],
     "doc_ma_chien_luoc": [r"\bmql[45]\s+parser\b", r"\bpine\s*script\s+parser\b",
                           r"\bstrategy\s+(?:rule\s+)?extraction\b",
                           r"\bast\s+(?:based\s+)?(?:parser|analysis)\b"],
@@ -334,12 +391,76 @@ def tim_github(truy_van: str, sao_toi_thieu: int = 100, so_luong: int = 8) -> li
     return r.json().get("items", []) or []
 
 
+# ------------------------------------------------------- TIM CONG TRINH
+def tim_arxiv(truy_van: str, so_luong: int = 8) -> list[dict]:
+    """Tim BAI BAO, khong tim kho ma.
+
+    Nhu cau nao khai `doi_chieu_voi` la nhu cau PHUONG PHAP - cai ta can la mot
+    bo loc / mot phep hieu chuan / mot cai bay da co nguoi mo ta, khong phai mot
+    goi de `pip install`. GitHub khong phai cho tim nhung thu do.
+
+    Bai bao khong co sao, khong co giay phep, khong co "lan day cuoi", nen
+    `cham_diem` (do suc khoe kho ma) khong ap duoc: chung mang `diem=None` va
+    duoc xep theo NGAY, roi nguoi doc quyet.
+
+    Dung `requests` chu khong `urllib` tran: WARP dang bat va urllib khong co
+    chung chi -> `CERTIFICATE_VERIFY_FAILED`. `tru/seeker.n_arxiv` da di duong
+    nay tu lau va chay tot.
+    """
+    import re as _re
+    import urllib.parse
+    try:
+        import requests
+    except Exception as e:
+        return [{"loi": f"{type(e).__name__}"}]
+    # HAI CAI BAY, ca hai deu tra HTTP 200 kem KHONG MOT <entry> nao - im lang,
+    # khong bao mot loi nao:
+    #   1. Ma hoa dau hai cham cua `all:` thanh %3A -> arXiv khong hieu truy van.
+    #   2. Boc CA CUM vao ngoac kep -> arXiv tim DUNG NGUYEN CUM. Cum bon tu nhu
+    #      "backtest overfitting multiple testing" khong bai nao co nguyen van.
+    # Nen: ghep TUNG TU bang AND, va giu nguyen dau hai cham.
+    tu = [x for x in truy_van.split() if len(x) > 2][:6]
+    if not tu:
+        return []
+    q = "+AND+".join("all:" + urllib.parse.quote(x) for x in tu)
+    url = ("http://export.arxiv.org/api/query?search_query=" + q +
+           f"&start=0&max_results={so_luong}"
+           "&sortBy=submittedDate&sortOrder=descending")
+    try:
+        r = requests.get(url, timeout=30, headers={"User-Agent": "TheBrain/1.0"})
+        if r.status_code != 200:
+            return [{"loi": f"HTTP {r.status_code}"}]
+        xml = r.text
+    except Exception as e:
+        return [{"loi": f"{type(e).__name__}: {str(e)[:80]}"}]
+
+    khoang = _re.compile(r"\s+")
+    ra = []
+    for muc in _re.findall(r"<entry>(.*?)</entry>", xml, _re.S):
+        def _lay(the, _m=muc):
+            m = _re.search(rf"<{the}>(.*?)</{the}>", _m, _re.S)
+            return khoang.sub(" ", m.group(1)).strip() if m else ""
+        ten = _lay("title")
+        if not ten:
+            continue
+        ra.append({"full_name": ten[:130], "html_url": _lay("id"),
+                   "description": _lay("summary")[:300],
+                   "ngay": _lay("published")[:10], "la_bai_bao": True})
+    return ra
+
+
 def _gon(r: dict, nhu_cau: str, truy_van: str) -> dict:
-    d = cham_diem(r)
+    # Bai bao khong co sao/giay phep/lan day cuoi -> cham diem suc khoe kho ma
+    # la vo nghia. Tra `diem=None` chu khong tra 0: 0 nghia la "do duoc va rat
+    # te", None nghia la "khong do duoc bang thuoc nay". Cung nguyen tac voi
+    # `do_tai_nguyen`.
+    d = ({"diem": None, "canh_bao": [], "ngay": r.get("ngay")}
+         if r.get("la_bai_bao") else cham_diem(r))
     return {
         "full_name": r.get("full_name"), "url": r.get("html_url"),
         "mo_ta": (r.get("description") or "")[:220],
         "ngon_ngu": r.get("language"), "nhu_cau": nhu_cau, "truy_van": truy_van,
+        "loai": "bai_bao" if r.get("la_bai_bao") else "kho_ma",
         "thay_luc": SO.bay_gio(), "trang_thai": "MOI", **d,
     }
 
@@ -366,7 +487,12 @@ def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False) -> dict:
     for i, (nhu_cau, tv) in enumerate(viec):
         if i:
             time.sleep(NGHI_GIAY)
-        ds = tim_github(tv, NHU_CAU[nhu_cau]["sao_toi_thieu"])
+        # Nhu cau khai `doi_chieu_voi` = nhu cau PHUONG PHAP -> tim BAI BAO.
+        # Nhu cau con lai = can mot goi chay duoc -> tim KHO MA.
+        if NHU_CAU[nhu_cau].get("doi_chieu_voi"):
+            ds = tim_arxiv(tv)
+        else:
+            ds = tim_github(tv, NHU_CAU[nhu_cau]["sao_toi_thieu"])
         if ds and "loi" in ds[0]:
             loi += 1
             if not im_lang:
@@ -412,8 +538,9 @@ def xem(toi_da: int = 25) -> None:
     print(f"KHO CONG CU: {len(kho)} muc\n")
     for v in ds[:toi_da]:
         d = v.get("diem")
-        print(f"  {(f'{d:5.1f}' if d is not None else '  -  ')}  "
-              f"{str(v.get('nhu_cau')):20s} {v['full_name']}")
+        nhan = (f"{d:5.1f}" if d is not None
+                else ("BAI BAO" if v.get("loai") == "bai_bao" else "  -  "))
+        print(f"  {nhan:>7s}  {str(v.get('nhu_cau')):26s} {v['full_name'][:70]}")
         if v.get("mo_ta"):
             print(f"           {v['mo_ta'][:100]}")
         for c in v.get("canh_bao", []):

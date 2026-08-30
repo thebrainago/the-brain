@@ -28,15 +28,29 @@ import urllib.request
 CDP_CONG = (9222, 9224)
 
 
+#: Cong CDP da dung duoc lan truoc. EVO goi ham nay MOI LUOT, va do mot cong
+#: chet phai cho het timeout: thu 9222 (thuong khong ai nghe) roi moi toi 9224
+#: la 2 lan cho. Do that: 2,08 giay chi de dem tab. Nho lai cong dung duoc thi
+#: lan sau xuong con ~0,05 giay.
+_CONG_DA_DUNG: list = []
+
+
 def so_tab_trinh_duyet(cong=CDP_CONG) -> dict:
-    """So tab dang mo tren con Chrome bot. Tang khong gioi han = ro ri."""
-    for c in cong:
+    """So tab dang mo tren con Chrome bot. Tang khong gioi han = ro ri.
+
+    Tra `so_tab=None` khi khong do duoc - KHONG tra 0. Xem docstring dau module:
+    "0 tab" khi Chrome tat se thanh "trinh duyet sach" duoi mat EVO.
+    """
+    thu = list(dict.fromkeys(list(_CONG_DA_DUNG) + list(cong)))
+    for c in thu:
         try:
             d = json.load(urllib.request.urlopen(
-                f"http://127.0.0.1:{c}/json/list", timeout=4))
+                f"http://127.0.0.1:{c}/json/list", timeout=1.5))
+            _CONG_DA_DUNG[:] = [c]
             return {"cong": c, "so_tab": len([t for t in d if t.get("type") == "page"])}
         except Exception:
             continue
+    _CONG_DA_DUNG.clear()
     return {"cong": None, "so_tab": None}
 
 
