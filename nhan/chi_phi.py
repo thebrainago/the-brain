@@ -402,6 +402,7 @@ def _ghi_cau_hinh(d: dict) -> None:
     tam = CAU_HINH.with_suffix(".json.tam")
     tam.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     os.replace(tam, CAU_HINH)
+    _DEM_LUU.clear()
 
 
 def _luu_spread(ma: str, r: dict) -> None:
@@ -508,13 +509,45 @@ def tu_du_lieu(ma: str, df: pd.DataFrame, phi_nam_mua: float | None = None,
 
 
 # ---------------------------------------------------------------- DOC/LUU SAN
+#: Bo nho dem cua `_doc_luu()` trong MOT tien trinh, khoa theo (mtime, size).
+#:
+#: `config/chi_phi_do.json` nang **1,09 MB** (1.644 symbol) va `_doc_luu()` duoc
+#: goi tu `phi_cua`, `_spread_da_luu`, `bang_chenh_lech`... tuc vai lan cho MOI
+#: tai san. Do bang cProfile 30/08/2026 tren mot vong pheu 20 tai san:
+#: **90 lan doc = 1,46 giay**, tren tong 6-7 giay ca vong.
+#:
+#: Khoa la (mtime, size) chu khong phai TTL: moi duong ghi deu di qua
+#: `_ghi_cau_hinh` (os.replace nguyen tu) nen mtime doi ngay, va `_ghi_cau_hinh`
+#: con chu dong xoa dem. Khong co cua so doc du lieu cu.
+#:
+#: HOP DONG: ham tra ve chinh doi tuong trong dem, khong phai ban sao (sao chep
+#: 1 MB moi lan goi thi mat luon cai vua tiet kiem). Ba duong SUA no
+#: (`_luu_spread`, `do_moi_san`, muc CLI) deu ghi ngay sau khi sua, va ghi thi
+#: xoa dem. Duong nao chi DOC thi khong duoc sua dict tra ve.
+_DEM_LUU: dict = {}
+
+
+def _khoa_cau_hinh() -> tuple | None:
+    try:
+        st = CAU_HINH.stat()
+        return (st.st_mtime_ns, st.st_size)
+    except OSError:
+        return None
+
+
 def _doc_luu() -> dict:
-    if CAU_HINH.exists():
-        try:
-            return json.loads(CAU_HINH.read_text(encoding="utf-8-sig"))
-        except Exception:
-            return {}
-    return {}
+    khoa = _khoa_cau_hinh()
+    if khoa is None:
+        return {}
+    if _DEM_LUU.get("khoa") == khoa:
+        return _DEM_LUU["d"]
+    try:
+        d = json.loads(CAU_HINH.read_text(encoding="utf-8-sig"))
+    except Exception:
+        # Doc trung cua so ghi -> KHONG dem lai `{}`, de lan sau doc lai.
+        return {}
+    _DEM_LUU.update({"khoa": khoa, "d": d})
+    return d
 
 
 TERMINAL = {

@@ -16,6 +16,7 @@ Bay da biet, da chan o day:
 """
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 import numpy as np
@@ -123,6 +124,17 @@ def so_dong_goc(f) -> int:
 #: Van tay de xa cache: (so file, tong mtime). Them/bot/ghi de mot file la doi.
 _DEM_KHO: dict = {}
 
+#: Bao lau moi cho phep tinh lai VAN TAY (giay).
+#:
+#: Do that bang cProfile 30/08/2026 tren mot vong pheu 20 tai san D1:
+#: `_van_tay_kho` bi goi **936 lan trong 60 giay** va moi lan `stat()` ca 253
+#: file parquet -> **243.286 lenh `nt.stat`, chiem 42% TOAN BO thoi gian chay**.
+#: Tuc phep KIEM cache dat hon han thu no bao ve.
+#:
+#: TTL 5 giay: trong mot vong quet, `data/` khong doi; neu co doi that thi cham
+#: nhat 5 giay sau la thay. Muon chinh xac tuyet doi thi goi `kho(lam_moi=True)`.
+_TTL_VAN_TAY = 5.0
+
 
 def _van_tay_kho() -> tuple:
     if not DATA.exists():
@@ -134,14 +146,23 @@ def _van_tay_kho() -> tuple:
     return (n, round(t, 3))
 
 
-def kho() -> dict[str, dict]:
-    """Liet ke tai san co san + khung goc + nguon + co du OHLC khong."""
+def kho(lam_moi: bool = False) -> dict[str, dict]:
+    """Liet ke tai san co san + khung goc + nguon + co du OHLC khong.
+
+    `lam_moi=True` bo qua TTL va tinh lai van tay ngay. Dung khi vua ghi them
+    file vao `data/` trong cung tien trinh va can thay ngay lap tuc.
+    """
+    bay_gio = time.monotonic()
+    if (not lam_moi and "ds" in _DEM_KHO
+            and bay_gio - _DEM_KHO.get("luc", -1e18) < _TTL_VAN_TAY):
+        return _DEM_KHO["ds"]
     vt = _van_tay_kho()
-    if _DEM_KHO.get("van_tay") == vt:
+    if _DEM_KHO.get("van_tay") == vt and "ds" in _DEM_KHO:
+        _DEM_KHO["luc"] = bay_gio
         return _DEM_KHO["ds"]
     ra: dict[str, dict] = {}
     if not DATA.exists():
-        _DEM_KHO.update({"van_tay": vt, "ds": ra})
+        _DEM_KHO.update({"van_tay": vt, "ds": ra, "luc": bay_gio})
         return ra
     ban_theo_ma: dict[str, list[dict]] = {}
     for p in sorted(DATA.glob("*.parquet")):
@@ -185,7 +206,7 @@ def kho() -> dict[str, dict]:
         # thi US500CASH bao 8,06 nam (file M30) trong khi ban D1 co 15,5 nam.
         goc["uoc_so_nam"] = max([b["uoc_so_nam"] for b in cung_lop] or
                                 [goc["uoc_so_nam"]])
-    _DEM_KHO.update({"van_tay": vt, "ds": ra})
+    _DEM_KHO.update({"van_tay": vt, "ds": ra, "luc": bay_gio})
     return ra
 
 
