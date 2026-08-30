@@ -1,0 +1,89 @@
+{
+ "luc": "2026-08-16 22:08:01",
+ "che_do": {
+  "duong_cong": {
+   "nhan": "DOC",
+   "gia_tri": 0.999,
+   "quy_tac": "10y-3m < 0 = dao nguoc; < 0,5 = phang",
+   "y_nghia": "dao nguoc di truoc suy thoai 6-18 thang; day la BOI CANH, khong phai tin hieu vao lenh"
+  },
+  "xu_huong_lai_suat": {
+   "nhan": "DI NGANG",
+   "gia_tri": 0.073,
+   "doi_90_ngay_diem": 0.073,
+   "quy_tac": "|doi loi suat 10y trong 90 ngay| > 0,25 diem",
+   "y_nghia": "lop vi mo DUY NHAT tung vuot mua-giu qua 64 nam trong du an nay la nghieng size theo THAY DOI loi suat 10y (memory macro-tilt-lead)"
+  },
+  "bien_dong": {
+   "nhan": "THAP",
+   "gia_tri": 14.25,
+   "quy_tac": "VIX > 25 cao, < 15 thap",
+   "y_nghia": "tren SP500 khung ngay: VIX cao = MUA (nguoc truc quan thong thuong)"
+  },
+  "cau_truc_ky_han_vix": {
+   "nhan": "BINH THUONG",
+   "gia_tri": 1.441,
+   "quy_tac": "VIX3M/VIX < 1",
+   "y_nghia": "co che 01 cua du an tung AM TINH (IC +0,106 nhung placebo 10,2%) - dung dung lam tin hieu, chi doc lam boi canh"
+  },
+  "tin_dung": {
+   "nhan": "BINH THUONG",
+   "gia_tri": 0.7511,
+   "doi_90_ngay_pct": 1.67,
+   "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang"
+  },
+  "dola": {
+   "nhan": "ON DINH",
+   "gia_tri": 99.66999816894531,
+   "quy_tac": "|doi chi so dola 90 ngay| > 1 diem",
+   "doi_90_ngay": 0.7
+  }
+ },
+ "so_lieu": {
+  "LS10Y": {
+   "ngay": "2026-08-14",
+   "gia_tri": 4.696000099182129
+  },
+  "LS3M": {
+   "ngay": "2026-08-14",
+   "gia_tri": 3.697000026702881
+  },
+  "VIX": {
+   "ngay": "2026-08-14",
+   "gia_tri": 14.25
+  },
+  "VIX3M": {
+   "ngay": "2026-07-17",
+   "gia_tri": 20.540000915527344
+  },
+  "USD": {
+   "ngay": "2026-08-14",
+   "gia_tri": 99.66999816894531
+  },
+  "HYG": {
+   "ngay": "2026-08-14",
+   "gia_tri": 79.70999908447266
+  },
+  "LQD": {
+   "ngay": "2026-08-14",
+   "gia_tri": 106.12000274658203
+  },
+  "duong_cong_10y_3m": 0.999,
+  "VN_CPI": {
+   "nam": "2025",
+   "gia_tri": 3.3099931421974
+  },
+  "VN_GDP": {
+   "nam": "2025",
+   "gia_tri": 8.01882998978245
+  },
+  "VN_TYGIA": {
+   "nam": "2024",
+   "gia_tri": 24164.8858333333
+  }
+ },
+ "thieu": [],
+ "ham_y": [
+  "Khong che do nao vuot nguong quy tac. Khong co ham y nao dang bao."
+ ]
+}

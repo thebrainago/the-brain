@@ -1,0 +1,2259 @@
+[
+ {
+  "mau": "bien_do_thu_hep",
+  "ho": "pha_vo",
+  "khung": "H4",
+  "tham_so": {
+   "n": 20,
+   "ty_le": 0.7
+  },
+  "ly_do_pham_vi": "Can bien dong gian no va nguoi mua duoi. Thi truong co san khop tap trung moi co hieu ung do.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 3,
+   "chi_tiet": [
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 32,
+     "sharpe": 0.155,
+     "tong_lai_pct": 1.49
+    },
+    {
+     "tai_san": "US500M",
+     "loai": "chi_so_my",
+     "so_lenh": 29,
+     "sharpe": 0.053,
+     "tong_lai_pct": 0.43
+    },
+    {
+     "tai_san": "XAUUSD",
+     "loai": "vang",
+     "so_lenh": 27,
+     "sharpe": -0.449,
+     "tong_lai_pct": -6.94
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 2,
+   "chi_tiet": [
+    {
+     "tai_san": "GBPUSD",
+     "loai": "fx",
+     "so_lenh": 23,
+     "sharpe": 0.572,
+     "tong_lai_pct": 5.68
+    },
+    {
+     "tai_san": "USDJPY",
+     "loai": "fx",
+     "so_lenh": 63,
+     "sharpe": -0.091,
+     "tong_lai_pct": -1.18
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": 0.053,
+  "ket_luan": "CHUA_DU_MAU",
+  "ly_do": "nhom doi chung chi co 2 tai san"
+ },
+ {
+  "mau": "bollinger_ve",
+  "ho": "quay_ve_trung_binh",
+  "khung": "D1",
+  "tham_so": {
+   "n": 20,
+   "k": 2.0
+  },
+  "ly_do_pham_vi": "Can mot ben bi ep ban theo lich trinh (quy vol-target, margin call) roi mua lai. Chi so co phieu co nhom do; ty gia cheo thi khong ai bi ep dong vi the vi ly do phi gia.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 48,
+     "sharpe": 0.902,
+     "tong_lai_pct": 110.13
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 29,
+     "sharpe": 0.071,
+     "tong_lai_pct": 3.3
+    },
+    {
+     "tai_san": "XM_JP225CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 30,
+     "sharpe": -0.467,
+     "tong_lai_pct": -28.24
+    },
+    {
+     "tai_san": "XM_US2000CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 30,
+     "sharpe": 0.062,
+     "tong_lai_pct": 4.0
+    },
+    {
+     "tai_san": "XM_US500_SEP26",
+     "loai": "chi_so_my",
+     "so_lenh": 37,
+     "sharpe": 0.092,
+     "tong_lai_pct": 5.53
+    },
+    {
+     "tai_san": "YH_ASX200",
+     "loai": "chi_so_my",
+     "so_lenh": 27,
+     "sharpe": 0.209,
+     "tong_lai_pct": 7.27
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 129,
+     "sharpe": 0.159,
+     "tong_lai_pct": 50.95
+    },
+    {
+     "tai_san": "YH_EUSTOXX50",
+     "loai": "chi_so_my",
+     "so_lenh": 61,
+     "sharpe": -0.029,
+     "tong_lai_pct": -3.25
+    },
+    {
+     "tai_san": "YH_IBEX35",
+     "loai": "chi_so_my",
+     "so_lenh": 85,
+     "sharpe": 0.124,
+     "tong_lai_pct": 21.3
+    },
+    {
+     "tai_san": "YH_NASDAQ",
+     "loai": "chi_so_my",
+     "so_lenh": 162,
+     "sharpe": 0.03,
+     "tong_lai_pct": 12.67
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 60,
+     "sharpe": -0.225,
+     "tong_lai_pct": -29.59
+    },
+    {
+     "tai_san": "YH_SMI",
+     "loai": "chi_so_my",
+     "so_lenh": 111,
+     "sharpe": 0.36,
+     "tong_lai_pct": 89.67
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 9,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 46,
+     "sharpe": 0.121,
+     "tong_lai_pct": 4.02
+    },
+    {
+     "tai_san": "CHFHUF",
+     "loai": "fx",
+     "so_lenh": 34,
+     "sharpe": 0.764,
+     "tong_lai_pct": 26.07
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 43,
+     "sharpe": 0.085,
+     "tong_lai_pct": 2.53
+    },
+    {
+     "tai_san": "EURILS",
+     "loai": "fx",
+     "so_lenh": 47,
+     "sharpe": 0.063,
+     "tong_lai_pct": 3.06
+    },
+    {
+     "tai_san": "EURRUR",
+     "loai": "fx",
+     "so_lenh": 51,
+     "sharpe": -0.386,
+     "tong_lai_pct": -52.56
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 50,
+     "sharpe": 0.751,
+     "tong_lai_pct": 25.11
+    },
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 88,
+     "sharpe": -0.228,
+     "tong_lai_pct": -14.5
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 60,
+     "sharpe": 0.034,
+     "tong_lai_pct": 1.64
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 77,
+     "sharpe": -0.213,
+     "tong_lai_pct": -12.56
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": 0.0815,
+  "sharpe_trung_vi_khong_hop": 0.063,
+  "cach_biet": 0.0185,
+  "ket_luan": "KHONG_PHAN_BIET",
+  "ly_do": "chay tot ca o nhom da khai la NEN HONG (hop 0.081 vs khong_hop 0.063, cach biet 0.018 < 0.2). Mot co che dung o moi loai thi truong thuong la mot dac tinh chung cua gia, khong phai co che."
+ },
+ {
+  "mau": "cuoi_thang",
+  "ho": "lich",
+  "khung": "D1",
+  "tham_so": {
+   "truoc": 2,
+   "sau": 2
+  },
+  "ly_do_pham_vi": "Dong tien theo lich la dong tien dinh che: luong huu cuoi thang, tai can bang quy. Vang khong co lich dong tien nhu vay.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 65,
+     "sharpe": 0.014,
+     "tong_lai_pct": 0.57
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 41,
+     "sharpe": 0.087,
+     "tong_lai_pct": 1.72
+    },
+    {
+     "tai_san": "XM_JP225CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 48,
+     "sharpe": -0.525,
+     "tong_lai_pct": -15.85
+    },
+    {
+     "tai_san": "XM_US2000CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 42,
+     "sharpe": 0.065,
+     "tong_lai_pct": 2.03
+    },
+    {
+     "tai_san": "XM_US500_SEP26",
+     "loai": "chi_so_my",
+     "so_lenh": 48,
+     "sharpe": 0.099,
+     "tong_lai_pct": 2.61
+    },
+    {
+     "tai_san": "YH_ASX200",
+     "loai": "chi_so_my",
+     "so_lenh": 38,
+     "sharpe": 1.936,
+     "tong_lai_pct": 38.31
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 184,
+     "sharpe": -0.331,
+     "tong_lai_pct": -32.09
+    },
+    {
+     "tai_san": "YH_EUSTOXX50",
+     "loai": "chi_so_my",
+     "so_lenh": 91,
+     "sharpe": -0.263,
+     "tong_lai_pct": -12.1
+    },
+    {
+     "tai_san": "YH_IBEX35",
+     "loai": "chi_so_my",
+     "so_lenh": 117,
+     "sharpe": -0.194,
+     "tong_lai_pct": -12.5
+    },
+    {
+     "tai_san": "YH_NASDAQ",
+     "loai": "chi_so_my",
+     "so_lenh": 266,
+     "sharpe": 0.013,
+     "tong_lai_pct": 2.18
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 94,
+     "sharpe": -0.072,
+     "tong_lai_pct": -4.8
+    },
+    {
+     "tai_san": "YH_SMI",
+     "loai": "chi_so_my",
+     "so_lenh": 168,
+     "sharpe": -0.34,
+     "tong_lai_pct": -21.92
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "vang"
+   ],
+   "n": 7,
+   "chi_tiet": [
+    {
+     "tai_san": "XAUUSD",
+     "loai": "vang",
+     "so_lenh": 105,
+     "sharpe": 0.641,
+     "tong_lai_pct": 40.34
+    },
+    {
+     "tai_san": "XAUUSDM",
+     "loai": "vang",
+     "so_lenh": 60,
+     "sharpe": 0.123,
+     "tong_lai_pct": 3.89
+    },
+    {
+     "tai_san": "XM_GOLD",
+     "loai": "vang",
+     "so_lenh": 99,
+     "sharpe": 0.634,
+     "tong_lai_pct": 41.04
+    },
+    {
+     "tai_san": "XM_SILVER",
+     "loai": "vang",
+     "so_lenh": 55,
+     "sharpe": -0.348,
+     "tong_lai_pct": -20.01
+    },
+    {
+     "tai_san": "XM_XAUEUR",
+     "loai": "vang",
+     "so_lenh": 42,
+     "sharpe": 0.625,
+     "tong_lai_pct": 15.92
+    },
+    {
+     "tai_san": "YH_BAC",
+     "loai": "vang",
+     "so_lenh": 125,
+     "sharpe": 0.207,
+     "tong_lai_pct": 29.13
+    },
+    {
+     "tai_san": "YH_VANG",
+     "loai": "vang",
+     "so_lenh": 125,
+     "sharpe": 0.617,
+     "tong_lai_pct": 48.97
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.0295,
+  "sharpe_trung_vi_khong_hop": 0.617,
+  "cach_biet": -0.6465,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.029)"
+ },
+ {
+  "mau": "donchian",
+  "ho": "pha_vo",
+  "khung": "H4",
+  "tham_so": {
+   "n": 10
+  },
+  "ly_do_pham_vi": "Can bien dong gian no va nguoi mua duoi. Thi truong co san khop tap trung moi co hieu ung do.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 9,
+   "chi_tiet": [
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 210,
+     "sharpe": -0.244,
+     "tong_lai_pct": -11.86
+    },
+    {
+     "tai_san": "US500M",
+     "loai": "chi_so_my",
+     "so_lenh": 166,
+     "sharpe": -0.771,
+     "tong_lai_pct": -27.99
+    },
+    {
+     "tai_san": "XAUAUDM",
+     "loai": "vang",
+     "so_lenh": 110,
+     "sharpe": -5.829,
+     "tong_lai_pct": -91.95
+    },
+    {
+     "tai_san": "XAUEURM",
+     "loai": "vang",
+     "so_lenh": 87,
+     "sharpe": -4.988,
+     "tong_lai_pct": -90.02
+    },
+    {
+     "tai_san": "XAUGBPM",
+     "loai": "vang",
+     "so_lenh": 91,
+     "sharpe": -5.42,
+     "tong_lai_pct": -93.33
+    },
+    {
+     "tai_san": "XAUUSD",
+     "loai": "vang",
+     "so_lenh": 515,
+     "sharpe": 0.094,
+     "tong_lai_pct": 14.23
+    },
+    {
+     "tai_san": "XAUUSDM",
+     "loai": "vang",
+     "so_lenh": 260,
+     "sharpe": -1.279,
+     "tong_lai_pct": -61.0
+    },
+    {
+     "tai_san": "XM_US100CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 40,
+     "sharpe": -1.024,
+     "tong_lai_pct": -12.37
+    },
+    {
+     "tai_san": "XM_US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 40,
+     "sharpe": -1.685,
+     "tong_lai_pct": -13.77
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 11,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 344,
+     "sharpe": -1.656,
+     "tong_lai_pct": -49.02
+    },
+    {
+     "tai_san": "AUDCHF",
+     "loai": "fx",
+     "so_lenh": 333,
+     "sharpe": -1.325,
+     "tong_lai_pct": -50.72
+    },
+    {
+     "tai_san": "AUDNZD",
+     "loai": "fx",
+     "so_lenh": 299,
+     "sharpe": -1.224,
+     "tong_lai_pct": -30.22
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 329,
+     "sharpe": -0.66,
+     "tong_lai_pct": -21.25
+    },
+    {
+     "tai_san": "EURGBP",
+     "loai": "fx",
+     "so_lenh": 325,
+     "sharpe": -0.887,
+     "tong_lai_pct": -24.81
+    },
+    {
+     "tai_san": "EURNZD",
+     "loai": "fx",
+     "so_lenh": 314,
+     "sharpe": -0.813,
+     "tong_lai_pct": -30.1
+    },
+    {
+     "tai_san": "EURUSD",
+     "loai": "fx",
+     "so_lenh": 831,
+     "sharpe": -0.71,
+     "tong_lai_pct": -51.39
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 300,
+     "sharpe": -0.428,
+     "tong_lai_pct": -15.54
+    },
+    {
+     "tai_san": "GBPUSD",
+     "loai": "fx",
+     "so_lenh": 708,
+     "sharpe": -0.031,
+     "tong_lai_pct": -3.17
+    },
+    {
+     "tai_san": "NZDCAD",
+     "loai": "fx",
+     "so_lenh": 333,
+     "sharpe": -1.623,
+     "tong_lai_pct": -51.36
+    },
+    {
+     "tai_san": "USDJPY",
+     "loai": "fx",
+     "so_lenh": 775,
+     "sharpe": -0.047,
+     "tong_lai_pct": -5.25
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -1.279,
+  "sharpe_trung_vi_khong_hop": -0.813,
+  "cach_biet": -0.466,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -1.279)"
+ },
+ {
+  "mau": "gio_trong_ngay",
+  "ho": "phien",
+  "khung": "H4",
+  "tham_so": {
+   "gio_vao": 4,
+   "so_gio": 8
+  },
+  "ly_do_pham_vi": "Can phien giao dich phan biet duoc (mo/dong cua san). FX chay lien tuc 24/5 nen ranh gioi phien mo ho.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 9,
+   "chi_tiet": [
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 880,
+     "sharpe": -0.218,
+     "tong_lai_pct": -6.99
+    },
+    {
+     "tai_san": "US500M",
+     "loai": "chi_so_my",
+     "so_lenh": 667,
+     "sharpe": -0.004,
+     "tong_lai_pct": -0.13
+    },
+    {
+     "tai_san": "XAUAUDM",
+     "loai": "vang",
+     "so_lenh": 404,
+     "sharpe": -22.683,
+     "tong_lai_pct": -99.98
+    },
+    {
+     "tai_san": "XAUEURM",
+     "loai": "vang",
+     "so_lenh": 404,
+     "sharpe": -24.285,
+     "tong_lai_pct": -100.0
+    },
+    {
+     "tai_san": "XAUGBPM",
+     "loai": "vang",
+     "so_lenh": 404,
+     "sharpe": -24.975,
+     "tong_lai_pct": -100.0
+    },
+    {
+     "tai_san": "XAUUSD",
+     "loai": "vang",
+     "so_lenh": 2248,
+     "sharpe": -0.64,
+     "tong_lai_pct": -48.63
+    },
+    {
+     "tai_san": "XAUUSDM",
+     "loai": "vang",
+     "so_lenh": 1023,
+     "sharpe": -4.35,
+     "tong_lai_pct": -89.42
+    },
+    {
+     "tai_san": "XM_US100CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 146,
+     "sharpe": 0.235,
+     "tong_lai_pct": 1.35
+    },
+    {
+     "tai_san": "XM_US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 146,
+     "sharpe": 0.288,
+     "tong_lai_pct": 1.24
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 11,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 1393,
+     "sharpe": -1.448,
+     "tong_lai_pct": -28.73
+    },
+    {
+     "tai_san": "AUDCHF",
+     "loai": "fx",
+     "so_lenh": 1395,
+     "sharpe": -3.331,
+     "tong_lai_pct": -64.62
+    },
+    {
+     "tai_san": "AUDNZD",
+     "loai": "fx",
+     "so_lenh": 1396,
+     "sharpe": -4.906,
+     "tong_lai_pct": -51.95
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 1395,
+     "sharpe": -0.84,
+     "tong_lai_pct": -17.93
+    },
+    {
+     "tai_san": "EURGBP",
+     "loai": "fx",
+     "so_lenh": 1396,
+     "sharpe": -0.735,
+     "tong_lai_pct": -15.52
+    },
+    {
+     "tai_san": "EURNZD",
+     "loai": "fx",
+     "so_lenh": 1396,
+     "sharpe": -2.349,
+     "tong_lai_pct": -45.79
+    },
+    {
+     "tai_san": "EURUSD",
+     "loai": "fx",
+     "so_lenh": 3318,
+     "sharpe": -1.877,
+     "tong_lai_pct": -76.09
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 1394,
+     "sharpe": -0.634,
+     "tong_lai_pct": -15.41
+    },
+    {
+     "tai_san": "GBPUSD",
+     "loai": "fx",
+     "so_lenh": 2939,
+     "sharpe": -0.851,
+     "tong_lai_pct": -48.61
+    },
+    {
+     "tai_san": "NZDCAD",
+     "loai": "fx",
+     "so_lenh": 1397,
+     "sharpe": -3.39,
+     "tong_lai_pct": -57.51
+    },
+    {
+     "tai_san": "USDJPY",
+     "loai": "fx",
+     "so_lenh": 3315,
+     "sharpe": -0.642,
+     "tong_lai_pct": -38.98
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.64,
+  "sharpe_trung_vi_khong_hop": -1.448,
+  "cach_biet": 0.808,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.640)"
+ },
+ {
+  "mau": "ibs_bat_day",
+  "ho": "quay_ve_trung_binh",
+  "khung": "D1",
+  "tham_so": {
+   "nguong": 0.15,
+   "giu": 1
+  },
+  "ly_do_pham_vi": "Can mot ben bi ep ban theo lich trinh (quy vol-target, margin call) roi mua lai. Chi so co phieu co nhom do; ty gia cheo thi khong ai bi ep dong vi the vi ly do phi gia.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my"
+   ],
+   "n": 11,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 152,
+     "sharpe": 0.402,
+     "tong_lai_pct": 15.15
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 114,
+     "sharpe": 0.313,
+     "tong_lai_pct": 10.06
+    },
+    {
+     "tai_san": "XM_JP225CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 107,
+     "sharpe": 0.37,
+     "tong_lai_pct": 14.4
+    },
+    {
+     "tai_san": "XM_US2000CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 115,
+     "sharpe": 0.219,
+     "tong_lai_pct": 7.89
+    },
+    {
+     "tai_san": "XM_US500_SEP26",
+     "loai": "chi_so_my",
+     "so_lenh": 113,
+     "sharpe": 0.524,
+     "tong_lai_pct": 17.99
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 459,
+     "sharpe": -0.417,
+     "tong_lai_pct": -42.49
+    },
+    {
+     "tai_san": "YH_EUSTOXX50",
+     "loai": "chi_so_my",
+     "so_lenh": 255,
+     "sharpe": -0.721,
+     "tong_lai_pct": -38.84
+    },
+    {
+     "tai_san": "YH_IBEX35",
+     "loai": "chi_so_my",
+     "so_lenh": 324,
+     "sharpe": -0.348,
+     "tong_lai_pct": -24.68
+    },
+    {
+     "tai_san": "YH_NASDAQ",
+     "loai": "chi_so_my",
+     "so_lenh": 764,
+     "sharpe": 0.484,
+     "tong_lai_pct": 199.71
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 314,
+     "sharpe": 0.476,
+     "tong_lai_pct": 46.9
+    },
+    {
+     "tai_san": "YH_SMI",
+     "loai": "chi_so_my",
+     "so_lenh": 476,
+     "sharpe": -0.225,
+     "tong_lai_pct": -20.49
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 189,
+     "sharpe": 0.005,
+     "tong_lai_pct": 0.08
+    },
+    {
+     "tai_san": "AUDSGD",
+     "loai": "fx",
+     "so_lenh": 101,
+     "sharpe": 0.537,
+     "tong_lai_pct": 4.9
+    },
+    {
+     "tai_san": "CHFHUF",
+     "loai": "fx",
+     "so_lenh": 152,
+     "sharpe": -0.651,
+     "tong_lai_pct": -10.2
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 216,
+     "sharpe": 0.335,
+     "tong_lai_pct": 5.04
+    },
+    {
+     "tai_san": "EURILS",
+     "loai": "fx",
+     "so_lenh": 184,
+     "sharpe": -0.376,
+     "tong_lai_pct": -17.17
+    },
+    {
+     "tai_san": "EURRUR",
+     "loai": "fx",
+     "so_lenh": 228,
+     "sharpe": -0.571,
+     "tong_lai_pct": -41.53
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 201,
+     "sharpe": 0.141,
+     "tong_lai_pct": 2.24
+    },
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 424,
+     "sharpe": -0.631,
+     "tong_lai_pct": -20.61
+    },
+    {
+     "tai_san": "NOKJPY",
+     "loai": "fx",
+     "so_lenh": 73,
+     "sharpe": -0.271,
+     "tong_lai_pct": -4.32
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 240,
+     "sharpe": -0.154,
+     "tong_lai_pct": -3.33
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 454,
+     "sharpe": -0.745,
+     "tong_lai_pct": -25.44
+    },
+    {
+     "tai_san": "XM_USDCHF",
+     "loai": "fx",
+     "so_lenh": 92,
+     "sharpe": -1.133,
+     "tong_lai_pct": -11.94
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": 0.313,
+  "sharpe_trung_vi_khong_hop": -0.3235,
+  "cach_biet": 0.6365,
+  "ket_luan": "CO_CO_CHE",
+  "ly_do": "nhom hop 0.313 vuot nhom doi chung -0.324 dung 0.637"
+ },
+ {
+  "mau": "ichimoku_cheo",
+  "ho": "xu_huong",
+  "khung": "D1",
+  "tham_so": {
+   "tenkan": 9,
+   "kijun": 26
+  },
+  "ly_do_pham_vi": "Can drift ben vung song qua chi phi. Chi so co phieu co drift loi nhuan doanh nghiep; ty gia cheo la tro choi tong bang khong.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 74,
+     "sharpe": -0.291,
+     "tong_lai_pct": -24.32
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 48,
+     "sharpe": 0.38,
+     "tong_lai_pct": 22.5
+    },
+    {
+     "tai_san": "XAUUSDM",
+     "loai": "vang",
+     "so_lenh": 76,
+     "sharpe": -0.028,
+     "tong_lai_pct": -2.55
+    },
+    {
+     "tai_san": "XM_SILVER",
+     "loai": "vang",
+     "so_lenh": 60,
+     "sharpe": -0.408,
+     "tong_lai_pct": -52.63
+    },
+    {
+     "tai_san": "XM_US30CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 67,
+     "sharpe": -0.415,
+     "tong_lai_pct": -28.95
+    },
+    {
+     "tai_san": "XM_XAUEUR",
+     "loai": "vang",
+     "so_lenh": 48,
+     "sharpe": -0.013,
+     "tong_lai_pct": -0.82
+    },
+    {
+     "tai_san": "YH_BAC",
+     "loai": "vang",
+     "so_lenh": 133,
+     "sharpe": -0.362,
+     "tong_lai_pct": -72.65
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 191,
+     "sharpe": -0.168,
+     "tong_lai_pct": -40.52
+    },
+    {
+     "tai_san": "YH_FTSE100",
+     "loai": "chi_so_my",
+     "so_lenh": 33,
+     "sharpe": -0.063,
+     "tong_lai_pct": -3.17
+    },
+    {
+     "tai_san": "YH_KOSPI",
+     "loai": "chi_so_my",
+     "so_lenh": 137,
+     "sharpe": 0.319,
+     "tong_lai_pct": 116.14
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 101,
+     "sharpe": -0.29,
+     "tong_lai_pct": -40.98
+    },
+    {
+     "tai_san": "YH_TAIWAN",
+     "loai": "chi_so_my",
+     "so_lenh": 127,
+     "sharpe": 0.061,
+     "tong_lai_pct": 11.58
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 76,
+     "sharpe": -0.572,
+     "tong_lai_pct": -19.75
+    },
+    {
+     "tai_san": "AUDSGD",
+     "loai": "fx",
+     "so_lenh": 38,
+     "sharpe": -1.177,
+     "tong_lai_pct": -20.66
+    },
+    {
+     "tai_san": "CHFHUF",
+     "loai": "fx",
+     "so_lenh": 58,
+     "sharpe": -0.773,
+     "tong_lai_pct": -24.73
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 76,
+     "sharpe": -0.986,
+     "tong_lai_pct": -28.47
+    },
+    {
+     "tai_san": "EURILS",
+     "loai": "fx",
+     "so_lenh": 68,
+     "sharpe": 0.039,
+     "tong_lai_pct": 2.98
+    },
+    {
+     "tai_san": "EURRUR",
+     "loai": "fx",
+     "so_lenh": 101,
+     "sharpe": 0.369,
+     "tong_lai_pct": 120.23
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 77,
+     "sharpe": -0.857,
+     "tong_lai_pct": -26.94
+    },
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 111,
+     "sharpe": -0.166,
+     "tong_lai_pct": -12.88
+    },
+    {
+     "tai_san": "NOKJPY",
+     "loai": "fx",
+     "so_lenh": 35,
+     "sharpe": -1.314,
+     "tong_lai_pct": -35.01
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 85,
+     "sharpe": -0.753,
+     "tong_lai_pct": -35.16
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 115,
+     "sharpe": -0.559,
+     "tong_lai_pct": -34.36
+    },
+    {
+     "tai_san": "XM_USDCHF",
+     "loai": "fx",
+     "so_lenh": 30,
+     "sharpe": 0.218,
+     "tong_lai_pct": 8.14
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.1155,
+  "sharpe_trung_vi_khong_hop": -0.6625,
+  "cach_biet": 0.547,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.116)"
+ },
+ {
+  "mau": "lap_gap",
+  "ho": "quay_ve_trung_binh",
+  "khung": "D1",
+  "tham_so": {
+   "nguong": 0.001
+  },
+  "ly_do_pham_vi": "Can mot ben bi ep ban theo lich trinh (quy vol-target, margin call) roi mua lai. Chi so co phieu co nhom do; ty gia cheo thi khong ai bi ep dong vi the vi ly do phi gia.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 386,
+     "sharpe": -0.911,
+     "tong_lai_pct": -44.27
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 85,
+     "sharpe": 0.728,
+     "tong_lai_pct": 13.4
+    },
+    {
+     "tai_san": "XM_JP225CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 207,
+     "sharpe": 0.307,
+     "tong_lai_pct": 20.77
+    },
+    {
+     "tai_san": "XM_US2000CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 164,
+     "sharpe": -0.505,
+     "tong_lai_pct": -19.01
+    },
+    {
+     "tai_san": "XM_US500_SEP26",
+     "loai": "chi_so_my",
+     "so_lenh": 158,
+     "sharpe": -0.395,
+     "tong_lai_pct": -14.61
+    },
+    {
+     "tai_san": "YH_ASX200",
+     "loai": "chi_so_my",
+     "so_lenh": 335,
+     "sharpe": -0.115,
+     "tong_lai_pct": -5.01
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 1874,
+     "sharpe": -0.373,
+     "tong_lai_pct": -66.01
+    },
+    {
+     "tai_san": "YH_EUSTOXX50",
+     "loai": "chi_so_my",
+     "so_lenh": 798,
+     "sharpe": 0.106,
+     "tong_lai_pct": 12.99
+    },
+    {
+     "tai_san": "YH_IBEX35",
+     "loai": "chi_so_my",
+     "so_lenh": 1168,
+     "sharpe": -0.489,
+     "tong_lai_pct": -56.64
+    },
+    {
+     "tai_san": "YH_NASDAQ",
+     "loai": "chi_so_my",
+     "so_lenh": 2837,
+     "sharpe": -0.386,
+     "tong_lai_pct": -81.82
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 756,
+     "sharpe": 0.23,
+     "tong_lai_pct": 40.72
+    },
+    {
+     "tai_san": "YH_SMI",
+     "loai": "chi_so_my",
+     "so_lenh": 1654,
+     "sharpe": -0.544,
+     "tong_lai_pct": -63.42
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 234,
+     "sharpe": -0.337,
+     "tong_lai_pct": -5.88
+    },
+    {
+     "tai_san": "AUDSGD",
+     "loai": "fx",
+     "so_lenh": 153,
+     "sharpe": -0.475,
+     "tong_lai_pct": -4.25
+    },
+    {
+     "tai_san": "CHFHUF",
+     "loai": "fx",
+     "so_lenh": 177,
+     "sharpe": -0.44,
+     "tong_lai_pct": -12.76
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 146,
+     "sharpe": -0.064,
+     "tong_lai_pct": -0.7
+    },
+    {
+     "tai_san": "EURILS",
+     "loai": "fx",
+     "so_lenh": 300,
+     "sharpe": 0.205,
+     "tong_lai_pct": 9.13
+    },
+    {
+     "tai_san": "EURRUR",
+     "loai": "fx",
+     "so_lenh": 742,
+     "sharpe": -0.539,
+     "tong_lai_pct": -66.95
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 177,
+     "sharpe": -0.155,
+     "tong_lai_pct": -1.92
+    },
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 402,
+     "sharpe": -0.753,
+     "tong_lai_pct": -21.86
+    },
+    {
+     "tai_san": "NOKJPY",
+     "loai": "fx",
+     "so_lenh": 144,
+     "sharpe": 0.94,
+     "tong_lai_pct": 24.23
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 331,
+     "sharpe": -0.477,
+     "tong_lai_pct": -11.88
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 273,
+     "sharpe": -0.808,
+     "tong_lai_pct": -19.4
+    },
+    {
+     "tai_san": "XM_USDCHF",
+     "loai": "fx",
+     "so_lenh": 72,
+     "sharpe": -0.805,
+     "tong_lai_pct": -14.7
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.3795,
+  "sharpe_trung_vi_khong_hop": -0.4575,
+  "cach_biet": 0.078,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.380)"
+ },
+ {
+  "mau": "moc_phien",
+  "ho": "pha_vo",
+  "khung": "H4",
+  "tham_so": {
+   "gio_bd": 0,
+   "gio_kt": 7
+  },
+  "ly_do_pham_vi": "Can bien dong gian no va nguoi mua duoi. Thi truong co san khop tap trung moi co hieu ung do.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 3,
+   "chi_tiet": [
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 549,
+     "sharpe": -0.383,
+     "tong_lai_pct": -17.95
+    },
+    {
+     "tai_san": "US500M",
+     "loai": "chi_so_my",
+     "so_lenh": 393,
+     "sharpe": -0.232,
+     "tong_lai_pct": -9.42
+    },
+    {
+     "tai_san": "XAUUSD",
+     "loai": "vang",
+     "so_lenh": 1049,
+     "sharpe": -0.049,
+     "tong_lai_pct": -6.65
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 3,
+   "chi_tiet": [
+    {
+     "tai_san": "EURUSD",
+     "loai": "fx",
+     "so_lenh": 1632,
+     "sharpe": -0.369,
+     "tong_lai_pct": -31.24
+    },
+    {
+     "tai_san": "GBPUSD",
+     "loai": "fx",
+     "so_lenh": 1420,
+     "sharpe": -0.043,
+     "tong_lai_pct": -4.43
+    },
+    {
+     "tai_san": "USDJPY",
+     "loai": "fx",
+     "so_lenh": 1446,
+     "sharpe": -0.226,
+     "tong_lai_pct": -22.92
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.232,
+  "sharpe_trung_vi_khong_hop": -0.226,
+  "cach_biet": -0.006,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.232)"
+ },
+ {
+  "mau": "momentum_ema",
+  "ho": "xu_huong",
+  "khung": "D1",
+  "tham_so": {
+   "n": 10
+  },
+  "ly_do_pham_vi": "Can drift ben vung song qua chi phi. Chi so co phieu co drift loi nhuan doanh nghiep; ty gia cheo la tro choi tong bang khong.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 284,
+     "sharpe": -0.375,
+     "tong_lai_pct": -30.21
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 198,
+     "sharpe": -0.565,
+     "tong_lai_pct": -26.32
+    },
+    {
+     "tai_san": "XAUUSDM",
+     "loai": "vang",
+     "so_lenh": 242,
+     "sharpe": -0.164,
+     "tong_lai_pct": -14.08
+    },
+    {
+     "tai_san": "XM_SILVER",
+     "loai": "vang",
+     "so_lenh": 213,
+     "sharpe": -0.015,
+     "tong_lai_pct": -2.64
+    },
+    {
+     "tai_san": "XM_US30CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 260,
+     "sharpe": -0.114,
+     "tong_lai_pct": -9.0
+    },
+    {
+     "tai_san": "XM_XAUEUR",
+     "loai": "vang",
+     "so_lenh": 177,
+     "sharpe": 0.032,
+     "tong_lai_pct": 2.06
+    },
+    {
+     "tai_san": "YH_BAC",
+     "loai": "vang",
+     "so_lenh": 512,
+     "sharpe": 0.055,
+     "tong_lai_pct": 21.86
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 795,
+     "sharpe": -0.506,
+     "tong_lai_pct": -79.06
+    },
+    {
+     "tai_san": "YH_FTSE100",
+     "loai": "chi_so_my",
+     "so_lenh": 152,
+     "sharpe": -0.158,
+     "tong_lai_pct": -7.84
+    },
+    {
+     "tai_san": "YH_KOSPI",
+     "loai": "chi_so_my",
+     "so_lenh": 514,
+     "sharpe": 0.404,
+     "tong_lai_pct": 165.72
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 406,
+     "sharpe": -0.456,
+     "tong_lai_pct": -56.5
+    },
+    {
+     "tai_san": "YH_TAIWAN",
+     "loai": "chi_so_my",
+     "so_lenh": 501,
+     "sharpe": 0.348,
+     "tong_lai_pct": 88.0
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 277,
+     "sharpe": -0.931,
+     "tong_lai_pct": -30.32
+    },
+    {
+     "tai_san": "AUDSGD",
+     "loai": "fx",
+     "so_lenh": 162,
+     "sharpe": -1.841,
+     "tong_lai_pct": -31.12
+    },
+    {
+     "tai_san": "CHFHUF",
+     "loai": "fx",
+     "so_lenh": 220,
+     "sharpe": -0.518,
+     "tong_lai_pct": -18.02
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 309,
+     "sharpe": -1.171,
+     "tong_lai_pct": -33.1
+    },
+    {
+     "tai_san": "EURILS",
+     "loai": "fx",
+     "so_lenh": 224,
+     "sharpe": 0.051,
+     "tong_lai_pct": 3.29
+    },
+    {
+     "tai_san": "EURRUR",
+     "loai": "fx",
+     "so_lenh": 374,
+     "sharpe": 0.656,
+     "tong_lai_pct": 307.12
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 303,
+     "sharpe": -0.999,
+     "tong_lai_pct": -30.94
+    },
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 542,
+     "sharpe": -0.776,
+     "tong_lai_pct": -49.26
+    },
+    {
+     "tai_san": "NOKJPY",
+     "loai": "fx",
+     "so_lenh": 147,
+     "sharpe": -1.402,
+     "tong_lai_pct": -37.27
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 374,
+     "sharpe": -0.707,
+     "tong_lai_pct": -33.59
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 519,
+     "sharpe": -0.742,
+     "tong_lai_pct": -43.0
+    },
+    {
+     "tai_san": "XM_USDCHF",
+     "loai": "fx",
+     "so_lenh": 106,
+     "sharpe": 0.74,
+     "tong_lai_pct": 30.68
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.136,
+  "sharpe_trung_vi_khong_hop": -0.759,
+  "cach_biet": 0.623,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.136)"
+ },
+ {
+  "mau": "mua_qua_dem",
+  "ho": "phien",
+  "khung": "H4",
+  "tham_so": {
+   "gio_vao": 20,
+   "gio_ra": 14
+  },
+  "ly_do_pham_vi": "Can phien giao dich phan biet duoc (mo/dong cua san). FX chay lien tuc 24/5 nen ranh gioi phien mo ho.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 9,
+   "chi_tiet": [
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 877,
+     "sharpe": 0.386,
+     "tong_lai_pct": 20.81
+    },
+    {
+     "tai_san": "US500M",
+     "loai": "chi_so_my",
+     "so_lenh": 666,
+     "sharpe": 0.633,
+     "tong_lai_pct": 28.77
+    },
+    {
+     "tai_san": "XAUAUDM",
+     "loai": "vang",
+     "so_lenh": 404,
+     "sharpe": -19.2,
+     "tong_lai_pct": -99.98
+    },
+    {
+     "tai_san": "XAUEURM",
+     "loai": "vang",
+     "so_lenh": 404,
+     "sharpe": -21.181,
+     "tong_lai_pct": -100.0
+    },
+    {
+     "tai_san": "XAUGBPM",
+     "loai": "vang",
+     "so_lenh": 404,
+     "sharpe": -22.313,
+     "tong_lai_pct": -100.0
+    },
+    {
+     "tai_san": "XAUUSD",
+     "loai": "vang",
+     "so_lenh": 2248,
+     "sharpe": -0.453,
+     "tong_lai_pct": -46.18
+    },
+    {
+     "tai_san": "XAUUSDM",
+     "loai": "vang",
+     "so_lenh": 1023,
+     "sharpe": -2.852,
+     "tong_lai_pct": -86.39
+    },
+    {
+     "tai_san": "XM_US100CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 147,
+     "sharpe": 0.339,
+     "tong_lai_pct": 4.0
+    },
+    {
+     "tai_san": "XM_US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 147,
+     "sharpe": 0.626,
+     "tong_lai_pct": 4.94
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 11,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 1394,
+     "sharpe": 1.011,
+     "tong_lai_pct": 46.52
+    },
+    {
+     "tai_san": "AUDCHF",
+     "loai": "fx",
+     "so_lenh": 1396,
+     "sharpe": 0.874,
+     "tong_lai_pct": 52.85
+    },
+    {
+     "tai_san": "AUDNZD",
+     "loai": "fx",
+     "so_lenh": 1395,
+     "sharpe": 0.625,
+     "tong_lai_pct": 18.2
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 1395,
+     "sharpe": 0.789,
+     "tong_lai_pct": 30.65
+    },
+    {
+     "tai_san": "EURGBP",
+     "loai": "fx",
+     "so_lenh": 1395,
+     "sharpe": 1.52,
+     "tong_lai_pct": 58.43
+    },
+    {
+     "tai_san": "EURNZD",
+     "loai": "fx",
+     "so_lenh": 1395,
+     "sharpe": 0.362,
+     "tong_lai_pct": 16.15
+    },
+    {
+     "tai_san": "EURUSD",
+     "loai": "fx",
+     "so_lenh": 3314,
+     "sharpe": -1.123,
+     "tong_lai_pct": -66.99
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 1394,
+     "sharpe": 1.185,
+     "tong_lai_pct": 55.4
+    },
+    {
+     "tai_san": "GBPUSD",
+     "loai": "fx",
+     "so_lenh": 2937,
+     "sharpe": -0.55,
+     "tong_lai_pct": -43.0
+    },
+    {
+     "tai_san": "NZDCAD",
+     "loai": "fx",
+     "so_lenh": 1396,
+     "sharpe": 0.104,
+     "tong_lai_pct": 4.32
+    },
+    {
+     "tai_san": "USDJPY",
+     "loai": "fx",
+     "so_lenh": 3312,
+     "sharpe": 0.065,
+     "tong_lai_pct": 7.46
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.453,
+  "sharpe_trung_vi_khong_hop": 0.625,
+  "cach_biet": -1.078,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.453)"
+ },
+ {
+  "mau": "orb_pha_vo",
+  "ho": "pha_vo",
+  "khung": "H4",
+  "tham_so": {
+   "phut_mo": 15,
+   "gio_mo": 13
+  },
+  "ly_do_pham_vi": "Can bien dong gian no va nguoi mua duoi. Thi truong co san khop tap trung moi co hieu ung do.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 0,
+   "chi_tiet": []
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 0,
+   "chi_tiet": []
+  },
+  "ket_luan": "CHUA_DU_MAU",
+  "ly_do": "chi do duoc 0 tai san o nhom hop, can >= 3"
+ },
+ {
+  "mau": "ou_quay_ve",
+  "ho": "quay_ve_trung_binh",
+  "khung": "D1",
+  "tham_so": {
+   "n": 100,
+   "z": 2.0
+  },
+  "ly_do_pham_vi": "Can mot ben bi ep ban theo lich trinh (quy vol-target, margin call) roi mua lai. Chi so co phieu co nhom do; ty gia cheo thi khong ai bi ep dong vi the vi ly do phi gia.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my"
+   ],
+   "n": 5,
+   "chi_tiet": [
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 43,
+     "sharpe": 0.146,
+     "tong_lai_pct": 40.51
+    },
+    {
+     "tai_san": "YH_IBEX35",
+     "loai": "chi_so_my",
+     "so_lenh": 29,
+     "sharpe": -0.027,
+     "tong_lai_pct": -3.63
+    },
+    {
+     "tai_san": "YH_NASDAQ",
+     "loai": "chi_so_my",
+     "so_lenh": 55,
+     "sharpe": -0.036,
+     "tong_lai_pct": -12.36
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 20,
+     "sharpe": 0.102,
+     "tong_lai_pct": 14.77
+    },
+    {
+     "tai_san": "YH_SMI",
+     "loai": "chi_so_my",
+     "so_lenh": 37,
+     "sharpe": 0.342,
+     "tong_lai_pct": 59.47
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 3,
+   "chi_tiet": [
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 27,
+     "sharpe": 0.338,
+     "tong_lai_pct": 19.43
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 25,
+     "sharpe": 0.392,
+     "tong_lai_pct": 16.5
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 31,
+     "sharpe": 0.299,
+     "tong_lai_pct": 17.99
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": 0.102,
+  "sharpe_trung_vi_khong_hop": 0.338,
+  "cach_biet": -0.236,
+  "ket_luan": "KHONG_PHAN_BIET",
+  "ly_do": "chay tot ca o nhom da khai la NEN HONG (hop 0.102 vs khong_hop 0.338, cach biet -0.236 < 0.2). Mot co che dung o moi loai thi truong thuong la mot dac tinh chung cua gia, khong phai co che."
+ },
+ {
+  "mau": "rsi_dao_chieu",
+  "ho": "quay_ve_trung_binh",
+  "khung": "D1",
+  "tham_so": {
+   "n": 7,
+   "vao": 30,
+   "ra_": 55
+  },
+  "ly_do_pham_vi": "Can mot ben bi ep ban theo lich trinh (quy vol-target, margin call) roi mua lai. Chi so co phieu co nhom do; ty gia cheo thi khong ai bi ep dong vi the vi ly do phi gia.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my"
+   ],
+   "n": 9,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 31,
+     "sharpe": 0.733,
+     "tong_lai_pct": 58.0
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 22,
+     "sharpe": 0.438,
+     "tong_lai_pct": 18.05
+    },
+    {
+     "tai_san": "XM_US500_SEP26",
+     "loai": "chi_so_my",
+     "so_lenh": 24,
+     "sharpe": 0.828,
+     "tong_lai_pct": 42.97
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 84,
+     "sharpe": 0.192,
+     "tong_lai_pct": 49.37
+    },
+    {
+     "tai_san": "YH_EUSTOXX50",
+     "loai": "chi_so_my",
+     "so_lenh": 40,
+     "sharpe": 0.263,
+     "tong_lai_pct": 26.31
+    },
+    {
+     "tai_san": "YH_IBEX35",
+     "loai": "chi_so_my",
+     "so_lenh": 50,
+     "sharpe": 0.128,
+     "tong_lai_pct": 16.08
+    },
+    {
+     "tai_san": "YH_NASDAQ",
+     "loai": "chi_so_my",
+     "so_lenh": 111,
+     "sharpe": 0.226,
+     "tong_lai_pct": 104.34
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 40,
+     "sharpe": 0.164,
+     "tong_lai_pct": 21.19
+    },
+    {
+     "tai_san": "YH_SMI",
+     "loai": "chi_so_my",
+     "so_lenh": 76,
+     "sharpe": 0.192,
+     "tong_lai_pct": 29.35
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 9,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 31,
+     "sharpe": 0.643,
+     "tong_lai_pct": 14.94
+    },
+    {
+     "tai_san": "CHFHUF",
+     "loai": "fx",
+     "so_lenh": 21,
+     "sharpe": 0.086,
+     "tong_lai_pct": 1.73
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 33,
+     "sharpe": 0.437,
+     "tong_lai_pct": 8.17
+    },
+    {
+     "tai_san": "EURILS",
+     "loai": "fx",
+     "so_lenh": 23,
+     "sharpe": -0.664,
+     "tong_lai_pct": -17.79
+    },
+    {
+     "tai_san": "EURRUR",
+     "loai": "fx",
+     "so_lenh": 35,
+     "sharpe": -0.192,
+     "tong_lai_pct": -19.86
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 28,
+     "sharpe": 0.668,
+     "tong_lai_pct": 14.16
+    },
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 41,
+     "sharpe": -0.49,
+     "tong_lai_pct": -21.67
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 43,
+     "sharpe": -0.32,
+     "tong_lai_pct": -10.76
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 60,
+     "sharpe": 0.26,
+     "tong_lai_pct": 12.51
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": 0.226,
+  "sharpe_trung_vi_khong_hop": 0.086,
+  "cach_biet": 0.14,
+  "ket_luan": "KHONG_PHAN_BIET",
+  "ly_do": "chay tot ca o nhom da khai la NEN HONG (hop 0.226 vs khong_hop 0.086, cach biet 0.140 < 0.2). Mot co che dung o moi loai thi truong thuong la mot dac tinh chung cua gia, khong phai co che."
+ },
+ {
+  "mau": "sma_cheo",
+  "ho": "xu_huong",
+  "khung": "D1",
+  "tham_so": {
+   "nhanh": 5,
+   "cham": 20
+  },
+  "ly_do_pham_vi": "Can drift ben vung song qua chi phi. Chi so co phieu co drift loi nhuan doanh nghiep; ty gia cheo la tro choi tong bang khong.",
+  "nhom_hop": {
+   "loai": [
+    "chi_so_my",
+    "vang"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "DE40",
+     "loai": "chi_so_my",
+     "so_lenh": 94,
+     "sharpe": 0.139,
+     "tong_lai_pct": 14.19
+    },
+    {
+     "tai_san": "US500CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 54,
+     "sharpe": 0.263,
+     "tong_lai_pct": 15.09
+    },
+    {
+     "tai_san": "XAUUSDM",
+     "loai": "vang",
+     "so_lenh": 99,
+     "sharpe": -0.355,
+     "tong_lai_pct": -27.9
+    },
+    {
+     "tai_san": "XM_SILVER",
+     "loai": "vang",
+     "so_lenh": 80,
+     "sharpe": -0.398,
+     "tong_lai_pct": -51.65
+    },
+    {
+     "tai_san": "XM_US30CASH",
+     "loai": "chi_so_my",
+     "so_lenh": 91,
+     "sharpe": -0.044,
+     "tong_lai_pct": -3.59
+    },
+    {
+     "tai_san": "XM_XAUEUR",
+     "loai": "vang",
+     "so_lenh": 61,
+     "sharpe": -0.542,
+     "tong_lai_pct": -29.47
+    },
+    {
+     "tai_san": "YH_BAC",
+     "loai": "vang",
+     "so_lenh": 173,
+     "sharpe": -0.327,
+     "tong_lai_pct": -69.01
+    },
+    {
+     "tai_san": "YH_DAX",
+     "loai": "chi_so_my",
+     "so_lenh": 245,
+     "sharpe": -0.124,
+     "tong_lai_pct": -31.8
+    },
+    {
+     "tai_san": "YH_FTSE100",
+     "loai": "chi_so_my",
+     "so_lenh": 51,
+     "sharpe": -0.119,
+     "tong_lai_pct": -5.94
+    },
+    {
+     "tai_san": "YH_KOSPI",
+     "loai": "chi_so_my",
+     "so_lenh": 177,
+     "sharpe": 0.266,
+     "tong_lai_pct": 90.28
+    },
+    {
+     "tai_san": "YH_RUSSELL2000",
+     "loai": "chi_so_my",
+     "so_lenh": 124,
+     "sharpe": -0.045,
+     "tong_lai_pct": -7.83
+    },
+    {
+     "tai_san": "YH_TAIWAN",
+     "loai": "chi_so_my",
+     "so_lenh": 167,
+     "sharpe": 0.199,
+     "tong_lai_pct": 43.28
+    }
+   ]
+  },
+  "nhom_khong_hop": {
+   "loai": [
+    "fx"
+   ],
+   "n": 12,
+   "chi_tiet": [
+    {
+     "tai_san": "AUDCAD",
+     "loai": "fx",
+     "so_lenh": 93,
+     "sharpe": -0.38,
+     "tong_lai_pct": -13.61
+    },
+    {
+     "tai_san": "AUDSGD",
+     "loai": "fx",
+     "so_lenh": 52,
+     "sharpe": -1.155,
+     "tong_lai_pct": -20.34
+    },
+    {
+     "tai_san": "CHFHUF",
+     "loai": "fx",
+     "so_lenh": 68,
+     "sharpe": -0.337,
+     "tong_lai_pct": -11.74
+    },
+    {
+     "tai_san": "EURCAD",
+     "loai": "fx",
+     "so_lenh": 100,
+     "sharpe": -1.024,
+     "tong_lai_pct": -29.52
+    },
+    {
+     "tai_san": "EURILS",
+     "loai": "fx",
+     "so_lenh": 82,
+     "sharpe": -0.261,
+     "tong_lai_pct": -17.65
+    },
+    {
+     "tai_san": "EURRUR",
+     "loai": "fx",
+     "so_lenh": 110,
+     "sharpe": 0.257,
+     "tong_lai_pct": 73.59
+    },
+    {
+     "tai_san": "GBPCAD",
+     "loai": "fx",
+     "so_lenh": 101,
+     "sharpe": -0.616,
+     "tong_lai_pct": -20.31
+    },
+    {
+     "tai_san": "GBPNZD",
+     "loai": "fx",
+     "so_lenh": 169,
+     "sharpe": -0.15,
+     "tong_lai_pct": -12.15
+    },
+    {
+     "tai_san": "NOKJPY",
+     "loai": "fx",
+     "so_lenh": 47,
+     "sharpe": -1.414,
+     "tong_lai_pct": -37.1
+    },
+    {
+     "tai_san": "NZDSGD",
+     "loai": "fx",
+     "so_lenh": 125,
+     "sharpe": -0.707,
+     "tong_lai_pct": -33.45
+    },
+    {
+     "tai_san": "USDCHF",
+     "loai": "fx",
+     "so_lenh": 155,
+     "sharpe": -0.588,
+     "tong_lai_pct": -35.8
+    },
+    {
+     "tai_san": "XM_USDCHF",
+     "loai": "fx",
+     "so_lenh": 44,
+     "sharpe": 0.726,
+     "tong_lai_pct": 29.73
+    }
+   ]
+  },
+  "sharpe_trung_vi_hop": -0.082,
+  "sharpe_trung_vi_khong_hop": -0.484,
+  "cach_biet": 0.402,
+  "ket_luan": "KHONG_CO_CO_CHE",
+  "ly_do": "nhom hop khong duong (trung vi Sharpe -0.082)"
+ }
+]

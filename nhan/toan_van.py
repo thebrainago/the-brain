@@ -1,0 +1,258 @@
+# -*- coding: utf-8 -*-
+"""toan_van.py - TANG DOC. Lay NOI DUNG THAT chu khong phai dong tieu de.
+
+VAN DE NO GIAI (do tren so cai 16/08):
+
+    Toan bo "thu vien" cua The Brain = 456 ban ghi, 202.760 ky tu = ~51 trang A4.
+    Va do chi la tieu de + tom tat. Vi du mot tai lieu HANG A diem cao nhat:
+
+        [github 5.0] [22851*] mementum/backtrader
+        noi dung (49 ky tu): "Python Backtesting library for trading strategies"
+
+    49 ky tu. Khong mot dong ma nao. SEEKER khong DOC - no LIET KE. No la mot bo
+    suu tam ket qua tim kiem, khong phai mot phong doc. Va vi vay moi co che ma
+    tang NGHI de xuat that ra den tu kien thuc san co cua LLM chu khong tu kho
+    tai lieu (`de_xuat.nguon` rong o ca 18 ban ghi dau tien).
+
+DO THAT NGAY 16/08 - dung cai duong nay co mo:
+    arXiv PDF          886.446 byte -> 841.439 ky tu van ban  (so voi 886 ky tu tom tat)
+    GitHub raw 1 file   24.586 byte ->  24.585 ky tu MA THAT  (so voi 49 ky tu mo ta)
+    Lean Algorithm.Python                511.157 ky tu ma chien luoc that
+    QuantConnect forum                   107.506 ky tu thao luan
+    MQL5 code base                        20.942 ky tu
+
+Nguyen tac:
+  1. Moi kieu nguon co bo boc RIENG. Boc HTML tho cho mot file PDF ra rac.
+  2. Cat theo NGAN SACH KY TU, khong nap vo han - mot bai 841k ky tu nhet ca
+     vao nhac LLM la vua dot tien vua lam loang cai can doc.
+  3. Ma nguon uu tien file CO KHA NANG chua chien luoc, khong lay ca repo.
+  4. Luon giu `url` va `kieu` de sau nay truy nguoc duoc mot khang dinh ve dung
+     doan van sinh ra no.
+"""
+from __future__ import annotations
+
+import io
+import json
+import re
+import sys
+import time
+from pathlib import Path
+
+UA = {"User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                     "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"),
+      "Accept": "text/html,application/xhtml+xml,application/json,*/*"}
+
+NGAN_SACH_KY_TU = {"bai_bao": 60_000, "ma_nguon": 90_000, "dien_dan": 40_000,
+                   "blog": 25_000, "khac": 25_000}
+
+# Ten file co kha nang chua LOGIC CHIEN LUOC. Lay ca repo la nap ca test,
+# setup.py, docs - ton ngan sach ma khong mang thong tin co che nao.
+UU_TIEN_MA = re.compile(
+    r"(strateg|signal|indicator|alpha|factor|momentum|revers|breakout|pairs|"
+    r"arbitrag|backtest|algo|model|entry|exit|rule)", re.I)
+DUOI_MA = (".py", ".mq5", ".mq4", ".pine", ".ipynb", ".r", ".jl")
+BO_QUA_MA = re.compile(r"(test|__init__|setup|conftest|/docs?/|example.*plot|_plotting)", re.I)
+
+
+def _lay(url: str, timeout: int = 30, nhi_phan: bool = False):
+    import requests
+    try:
+        r = requests.get(url, timeout=timeout, headers=UA)
+        if r.status_code != 200:
+            return None
+        return r.content if nhi_phan else r.text
+    except Exception:
+        return None
+
+
+def _sach(vb: str) -> str:
+    vb = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", vb or "", flags=re.S | re.I)
+    vb = re.sub(r"<[^>]+>", " ", vb)
+    from html import unescape
+    return re.sub(r"[ \t\r\f\v]+", " ", unescape(vb)).strip()
+
+
+# ------------------------------------------------------------------ ARXIV
+_ID_ARXIV = re.compile(r"arxiv\.org/(?:abs|pdf)/([0-9]{4}\.[0-9]{4,5})", re.I)
+
+
+def tu_arxiv(url: str) -> dict | None:
+    """Toan van bai arXiv. PDF truoc (luon co), ar5iv sau (chi co khi co LaTeX).
+
+    Ban tom tat hien nay la 886 ky tu; ban nay ra ~40-60k ky tu, trong do co
+    phan PHUONG PHAP va BANG KET QUA - dung hai thu quyet dinh viec co tai lap
+    duoc hay khong.
+    """
+    m = _ID_ARXIV.search(url or "")
+    if not m:
+        return None
+    ma = m.group(1)
+    b = _lay(f"https://arxiv.org/pdf/{ma}", timeout=45, nhi_phan=True)
+    if b and b[:5] == b"%PDF-":
+        try:
+            import logging
+            import pypdf
+            # pypdf keu "Ignoring wrong pointing object ..." hang chuc dong cho
+            # moi PDF. Chay 24/7 thi do la rac lam ngap log dieu phoi.
+            logging.getLogger("pypdf").setLevel(logging.ERROR)
+            doc = pypdf.PdfReader(io.BytesIO(b), strict=False)
+            phan = []
+            for tr in doc.pages[:40]:
+                try:
+                    phan.append(tr.extract_text() or "")
+                except Exception:
+                    continue
+            vb = re.sub(r"[ \t]+", " ", "\n".join(phan)).strip()
+            if len(vb) > 800:
+                return {"van_ban": vb, "kieu": "bai_bao", "cach": f"arxiv_pdf:{ma}",
+                        "so_trang": len(doc.pages)}
+        except Exception:
+            pass
+    h = _lay(f"https://ar5iv.labs.arxiv.org/html/{ma}", timeout=45)
+    if h:
+        vb = _sach(h)
+        if len(vb) > 800:
+            return {"van_ban": vb, "kieu": "bai_bao", "cach": f"ar5iv:{ma}"}
+    return None
+
+
+# ----------------------------------------------------------------- GITHUB
+_REPO = re.compile(r"github\.com/([^/\s]+)/([^/\s#?]+)", re.I)
+
+
+def tu_github(url: str, so_file: int = 6) -> dict | None:
+    """MA CHIEN LUOC THAT tu mot repo.
+
+    Lay cay thu muc roi chon file CO KHA NANG chua logic chien luoc. Day la thu
+    du an van thieu: memory `quet-rong-tham-khao-nguoi-khac` ghi ro "khong co
+    code ngoai lam nguon logic thi khong tao duoc he thong" - ma cho toi 16/08
+    kho tai lieu chi co MO TA repo (trung binh 164 ky tu), khong co dong ma nao.
+    """
+    m = _REPO.search(url or "")
+    if not m:
+        return None
+    chu, repo = m.group(1), m.group(2).replace(".git", "")
+
+    # Dia chi tro thang vao MOT FILE (`/blob/<nhanh>/<duong dan>`) - lay dung file
+    # do. Khong co nhanh nay thi mot link file cua Lean se keo ve ca cay thu muc
+    # 2.700 muc cua repo Lean, moi lan mot lan.
+    mb = re.search(r"github\.com/[^/]+/[^/]+/blob/([^/]+)/(.+)$", url, re.I)
+    if mb:
+        nhanh, duong = mb.group(1), mb.group(2).split("#")[0].split("?")[0]
+        ma = _lay(f"https://raw.githubusercontent.com/{chu}/{repo}/{nhanh}/{duong}")
+        if ma and len(ma) > 300:
+            return {"van_ban": f"########## {duong}\n{ma}", "kieu": "ma_nguon",
+                    "cach": f"github_file:{chu}/{repo}/{duong}", "file": [duong]}
+        return None
+    cay = None
+    for nhanh in ("HEAD", "main", "master"):
+        t = _lay(f"https://api.github.com/repos/{chu}/{repo}/git/trees/{nhanh}?recursive=1")
+        if t:
+            try:
+                d = json.loads(t)
+                if d.get("tree"):
+                    cay = d["tree"]
+                    break
+            except Exception:
+                continue
+        time.sleep(0.6)
+    if not cay:
+        return None
+
+    ung = [x for x in cay
+           if x.get("type") == "blob"
+           and str(x.get("path", "")).lower().endswith(DUOI_MA)
+           and 400 < int(x.get("size") or 0) < 250_000
+           and not BO_QUA_MA.search(x["path"])]
+    # file co ten goi y chien luoc len truoc, roi den file to nhat (thuong la loi)
+    ung.sort(key=lambda x: (0 if UU_TIEN_MA.search(x["path"]) else 1, -int(x.get("size") or 0)))
+    if not ung:
+        return None
+
+    phan, lay_duoc = [], []
+    for x in ung[:so_file]:
+        for nhanh in ("HEAD", "main", "master"):
+            ma = _lay(f"https://raw.githubusercontent.com/{chu}/{repo}/{nhanh}/{x['path']}")
+            if ma:
+                phan.append(f"\n########## {x['path']} ({x.get('size')} byte)\n{ma}")
+                lay_duoc.append(x["path"])
+                break
+        time.sleep(0.4)
+        if sum(len(p) for p in phan) > NGAN_SACH_KY_TU["ma_nguon"]:
+            break
+    if not phan:
+        return None
+    return {"van_ban": "".join(phan), "kieu": "ma_nguon",
+            "cach": f"github:{chu}/{repo}", "file": lay_duoc,
+            "tong_file_ma": len(ung)}
+
+
+# -------------------------------------------------------- DIEN DAN / BLOG
+def tu_html(url: str, kieu: str = "khac") -> dict | None:
+    h = _lay(url, timeout=35)
+    if not h:
+        return None
+    # trang dien dan/blog thuong co phan noi dung trong <article>/<div class=post>
+    khoi = re.findall(r"<(?:article|main)\b[^>]*>(.*?)</(?:article|main)>", h, re.S | re.I)
+    vb = _sach(" ".join(khoi) if khoi else h)
+    vb = re.sub(r"\n{3,}", "\n\n", vb)
+    if len(vb) < 400:
+        return None
+    return {"van_ban": vb, "kieu": kieu, "cach": "html"}
+
+
+# ------------------------------------------------------------------- CUA RA
+def doc(url: str, goi_y: str = "") -> dict | None:
+    """Doc mot dia chi bat ky. Tu chon bo boc theo dang nguon.
+
+    Tra {van_ban, kieu, cach, so_ky_tu} hoac None neu khong doc duoc.
+    """
+    if not url or not url.startswith("http"):
+        return None
+    u = url.lower()
+    r = None
+    if "arxiv.org" in u:
+        r = tu_arxiv(url)
+    elif "github.com" in u:
+        r = tu_github(url)
+    if r is None:
+        kieu = goi_y or ("dien_dan" if any(k in u for k in
+                                           ("forum", "stackexchange", "quantconnect",
+                                            "forexfactory", "news.ycombinator"))
+                         else "blog" if any(k in u for k in
+                                            ("blog", "quantpedia", "alphaarchitect",
+                                             "robotwealth"))
+                         else "khac")
+        r = tu_html(url, kieu)
+    if r is None:
+        return None
+    tran = NGAN_SACH_KY_TU.get(r["kieu"], NGAN_SACH_KY_TU["khac"])
+    day_du = len(r["van_ban"])
+    if day_du > tran:
+        # Giu DAU va CUOI: dau la tom tat + phuong phap, cuoi la ket qua + ket luan.
+        # Cat cut duoi la cach chac chan nhat de mat dung bang so.
+        r["van_ban"] = (r["van_ban"][: int(tran * 0.65)] +
+                        "\n\n[... cat bot phan giua ...]\n\n" +
+                        r["van_ban"][-int(tran * 0.35):])
+    r["so_ky_tu"] = len(r["van_ban"])
+    r["so_ky_tu_goc"] = day_du
+    r["url"] = url
+    return r
+
+
+if __name__ == "__main__":
+    thu = sys.argv[1:] or [
+        "http://arxiv.org/abs/2411.05790",
+        "https://github.com/kernc/backtesting.py",
+        "https://www.quantconnect.com/forum/discussions/1/latest",
+        "https://alphaarchitect.com/feed/",
+    ]
+    for u in thu:
+        t = time.time()
+        r = doc(u)
+        if not r:
+            print(f"  [KHONG DOC DUOC] {u}")
+            continue
+        print(f"  [{r['kieu']:<9}] {u[:58]:<60} {r['so_ky_tu']:>7,} ky tu "
+              f"(goc {r['so_ky_tu_goc']:,}) qua {r['cach']} - {time.time()-t:.1f}s")
+        print(f"      {r['van_ban'][:180].strip()!r}")

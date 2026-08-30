@@ -1,0 +1,206 @@
+{
+  "du_an": "The Brain",
+  "ban_giao_luc": "2026-08-13 22:23:30",
+  "doc_tiep": [
+    "lab/ket_hop_state.json",
+    "lab/reports/TONG_HOP_3_TRU.md",
+    "lab/BO_NHO.md",
+    "lab/MULTI_AGENT.md"
+  ],
+  "code_moi": [
+    "lab/seeker_quy_tac.py",
+    "lab/ket_hop_3_tru.py",
+    "lab/mt5_chay_ichimoku.py",
+    "MT5:.\\MQL5\\Experts\\EA_IchimokuCross.mq5"
+  ],
+  "viec_tiep": [
+    "Chay bot Evolution moi vong de bank tu lon tu noi dung moi",
+    "Discord: xay nguon qua Playwright (can profile dang nhap)",
+    "TradingView scraper (chiến lược/indicator + Pine)",
+    "Tao demo account san qua Playwright (can chon san + email)",
+    "MT5 Daily Zone gold TP=50"
+  ],
+  "state": {
+    "luc": "2026-08-12 20:28:45",
+    "ba_tru": [
+      {
+        "tru": "SEEKER",
+        "so_nguon": 13,
+        "nguon_uu_tien_cao": [
+          "SSRN - Financial Economics/Trading",
+          "Darwinex (1000 DARWIN)",
+          "Myfxbook Autotrade/Verified"
+        ],
+        "so_ung_vien_qua_loc": 30,
+        "ung_vien_top": [
+          {
+            "a": "VAJJ",
+            "url": "https://www.darwinex.com/darwin/VAJJ",
+            "loi_pct": 144.1,
+            "dd_pct": -15.8,
+            "diem": 1.636
+          },
+          {
+            "a": "AACU",
+            "url": "https://www.darwinex.com/darwin/AACU",
+            "loi_pct": 119.3,
+            "dd_pct": -8.9,
+            "diem": 1.619
+          },
+          {
+            "a": "XKA",
+            "url": "https://www.darwinex.com/darwin/XKA",
+            "loi_pct": 64.0,
+            "dd_pct": -6.1,
+            "diem": 1.414
+          },
+          {
+            "a": "PHRT",
+            "url": "https://www.darwinex.com/darwin/PHRT",
+            "loi_pct": 60.2,
+            "dd_pct": -5.2,
+            "diem": 1.39
+          },
+          {
+            "a": "LSP",
+            "url": "https://www.darwinex.com/darwin/LSP",
+            "loi_pct": 67.3,
+            "dd_pct": -12.6,
+            "diem": 1.384
+          },
+          {
+            "a": "QEEU",
+            "url": "https://www.darwinex.com/darwin/QEEU",
+            "loi_pct": 72.3,
+            "dd_pct": -7.3,
+            "diem": 1.315
+          },
+          {
+            "a": "MQOH",
+            "url": "https://www.darwinex.com/darwin/MQOH",
+            "loi_pct": 52.2,
+            "dd_pct": -11.9,
+            "diem": 1.245
+          },
+          {
+            "a": "CFZ",
+            "url": "https://www.darwinex.com/darwin/CFZ",
+            "loi_pct": 46.4,
+            "dd_pct": -9.5,
+            "diem": 1.239
+          },
+          {
+            "a": "MLTY",
+            "url": "https://www.darwinex.com/darwin/MLTY",
+            "loi_pct": 64.0,
+            "dd_pct": -7.1,
+            "diem": 1.224
+          },
+          {
+            "a": "EJL",
+            "url": "https://www.darwinex.com/darwin/EJL",
+            "loi_pct": 48.7,
+            "dd_pct": -12.9,
+            "diem": 1.195
+          }
+        ],
+        "goi_y_keyword": []
+      },
+      {
+        "tru": "QUANTLAB",
+        "edge_tot_da_loc": {
+          "symbol": "EURUSD=X",
+          "che_do": "hold",
+          "hold": 3,
+          "tp_atr": 0.0,
+          "lai_pct": 21.92167662574942,
+          "lai_bh_pct": 3.593353695471202,
+          "pf": 1.7141927200855085,
+          "sharpe": 0.9526011254421998
+        },
+        "ghi_chu": "EURUSD Ichimoku Chikou+DI vuot buy&hold (27.8% vs 3.6%)"
+      },
+      {
+        "tru": "BANKER",
+        "regime": "neutural",
+        "regime_brief": "neutural",
+        "cot": "E-MINI S&P 500 (ngay 2026-08-04): spec net=-27,258 (-1.29% OI), tuan nay gia tang vi the SHORT. Nhan: spec trung tinh lech SHORT."
+      }
+    ],
+    "de_xuat_giao_dich": [
+      {
+        "co_che": "Ichimoku TenkanxKijun cross",
+        "symbol": "EURUSD=X",
+        "khung": "D1",
+        "hold": 3,
+        "lai_pct": 21.92167662574942,
+        "lai_bh_pct": 3.593353695471202,
+        "pf": 1.7141927200855085,
+        "trang_thai": "len_MT5_tester",
+        "dieu_kien_vi_mo": "thuan"
+      }
+    ],
+    "van_de": [],
+    "ket_luan": "Chay 3 tru song song, gop 1 nguon. Xem TONG_HOP_3_TRU.md."
+  },
+  "mt5_gate": {
+    "loi": -82.47,
+    "dd": 123.81,
+    "pf": 0.73,
+    "sharpe": -1.13,
+    "lenh": 99,
+    "symbol": "EURUSD",
+    "khung": "D1",
+    "thoi_gian": "2016-2026",
+    "ket_luan": "TRUOT o MT5 tick gate: vao lenh o tick mo nen sau (khong phai close nen) mat edge"
+  },
+  "cap_nhat_luc": "2026-08-12 20:50:25",
+  "reddit": {
+    "trang_thai": "DA THONG qua Playwright/nhan-su mo phong (JSON API bi 403)",
+    "luong": "quan_li_quet._chay_reddit -> nguon_reddit_sim.py (bin python)",
+    "ket_qua": "280 bai, them moi 176"
+  },
+  "evolution": {
+    "bot": "evolution.py chay that",
+    "them_vi_mo": 41,
+    "them_dang_doi": 67,
+    "bank": {
+      "vi_mo": 147,
+      "dang_doi": 543
+    }
+  },
+  "mo_dun_moi": [
+    "doc_web_moi.py (requests->Playwright fallback)",
+    "simulator_nguoi.py (mo phong thao tac nguoi dung, vao duoc reddit)",
+    "nguon_reddit_sim.py (reddit qua trinh duyet)",
+    "seeker_deep.py",
+    "seeker_quy_tac.py",
+    "ket_hop_3_tru.py (3 tru song song)"
+  ],
+  "live": {
+    "luc": "2026-08-13 22:23:30",
+    "snapshot": "lab\\reports\\chuyen_giao\\2026-08-13",
+    "brain_24h": {
+      "nhip_tim": "2026-08-09T23:30:01",
+      "trang_thai": "nghi",
+      "hang_doi": {
+        "cho": 12
+      },
+      "viec_loi": [
+        "quet_arxiv",
+        "quet_github",
+        "quet_huggingface",
+        "quet_reddit",
+        "quet_rss",
+        "quet_darwinex",
+        "quet_myfxbook",
+        "do_chi_phi_mt5"
+      ]
+    },
+    "bo_nao_cong_viec": {
+      "BO": 76,
+      "CHO": 725,
+      "XONG": 139
+    }
+  }
+}

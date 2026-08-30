@@ -1,0 +1,356 @@
+{
+ "de_xuat": [
+  {
+   "ten": "phi_bao_hiem_bien_dong_gian_no",
+   "co_che": "Quy huu tri, quy tuong ho va ban quan ly rui ro MUA bao hiem (put/ban giam phoi nhiem) dung luc bien dong vua gian no — ho tra phi cho ben chiu rui ro duoi vi nhu cau bao hiem cua ho la bat buoc theo quy che, khong theo gia; nguoi ban bao hiem thu chenh lech giua bien dong ham y bi thoi phong va bien dong thuc te sau do.",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 3,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "bien_do"
+      },
+      "n": 250
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.85
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "doi_pct",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "n": 100
+     },
+     "phep": "<",
+     "phai": {
+      "hang": -1.0
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "ibs"
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.8
+     }
+    }
+   ],
+   "dieu_kien_sai": "Neu tach mau theo phan vi bien do ma loi suat 3 bar sau cu soc giam KHONG cao hon o nhom bien do cao so voi nhom bien do thap (tuc phi bao hiem khong ton tai, chi la mua-day thong thuong), hoac neu edge bien mat khi bo 2 nam khung hoang, thi co che sai."
+  },
+  {
+   "ten": "bu_rui_ro_truoc_cong_bo_vi_mo",
+   "co_che": "Cac ban tin vi mo lon cua My (CPI, FOMC) roi vao khoang ngay 9-13 hang thang; nha tao lap va quy phong ho HA ton kho rui ro truoc gio cong bo vi ho khong dinh gia duoc rui ro sy kien — ai chiu giu phoi nhiem qua cua so do duoc tra phi rui ro, va phi nay chi ton tai khi thi truong dang vang (ton kho da bi rut).",
+   "ho": "vi_mo",
+   "chieu": 1,
+   "giu": 3,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "ngay_trong_thang"
+     },
+     "phep": ">=",
+     "phai": {
+      "hang": 9
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "ngay_trong_thang"
+     },
+     "phep": "<=",
+     "phai": {
+      "hang": 13
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 60
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.4
+     }
+    }
+   ],
+   "ra": [],
+   "dieu_kien_sai": "Neu loi suat cua so ngay 9-13 khong khac loi suat cua so ngay 19-23 (mot cua so lich khong co ban tin lon), hoac neu dieu kien khoi luong thap khong lam tang loi suat so voi khong dieu kien, thi day chi la hieu ung lich ngau nhien."
+  },
+  {
+   "ten": "gamma_duong_keo_ve",
+   "co_che": "Trong che do bien dong THAP, nha tao lap quyen chon o trang thai gamma duong (ho da ban quyen chon cho quy overwriting) nen phong ho delta bat ho MUA khi gia giam va BAN khi gia tang; ben tra tien la dong lenh nong voi (quy dieu chinh trong so, lenh thi truong cuoi phien) da day gia lech va bi keo ve ngay hom sau.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": 1,
+   "giu": 2,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "do_lech",
+       "cua": {
+        "chi_bao": "doi_pct",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "close"
+        },
+        "n": 1
+       },
+       "n": 20
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.35
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "doi_pct",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "n": 100
+     },
+     "phep": "<",
+     "phai": {
+      "hang": -0.8
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "ibs"
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.75
+     }
+    }
+   ],
+   "dieu_kien_sai": "Neu chia mau lam ba theo phan vi bien dong ma loi suat sau nhip giam KHONG giam don dieu theo bien dong (tuc nhip giam trong che do bien dong cao bat manh bang hoac hon che do thap), thi lop gamma duong khong giai thich gi — chi con mua-day thuan tuy, va co che 1 da phu."
+  },
+  {
+   "ten": "rut_von_quy_tuong_ho",
+   "co_che": "Nha dau tu ca nhan rut von khoi quy tuong ho SAU khi nhin thay NAV giam, va quy phai ban co phieu theo lich thanh toan T+1/T+2 bat ke gia — song ban cuong buc nay lo dien duoi dang khoi luong cao bat thuong trong giai doan sut giam keo dai; nguoi mua lai duoc tra tien vi ho cung thanh khoan cho ben bi ep. Giu 8 bar la do song rut von keo dai nhieu phien; phi qua dem 8 dem chi ~0,15% trong khi bien do bat lai sau song ban cuong buc thuong 1,5-3%, nen phi khong an het bien.",
+   "ho": "dong_tien",
+   "chieu": 1,
+   "giu": 8,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "doi_pct",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 20
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": -1.2
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 20
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.75
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tre",
+      "cua": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 10
+      },
+      "n": 1
+     }
+    }
+   ],
+   "dieu_kien_sai": "Neu bo dieu kien khoi luong cao ma ket qua khong xau di (tuc khoi luong khong mang thong tin ve ban cuong buc), hoac neu lai gop 8 bar khong lon hon 3 lan phi qua dem 8 dem, thi co che nay khong kiem dinh duoc va phai bo."
+  },
+  {
+   "ten": "hoan_lai_sau_gio_dinh_gia_nav",
+   "co_che": "Quy va nha quan ly tai san chau Au dinh gia NAV tai moc 16:00 gio London, nen ho BAT BUOC khop khoi luong con lai trong cua so quanh moc do bat ke gia — ho tra phi truot gia cho ben nhan phia doi ung, va phan lech do dong lenh vo cam voi gia thuong duoc hoan lai trong vai gio ke tiep khi ap luc lich het.",
+   "ho": "phien",
+   "chieu": 1,
+   "giu": 3,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gio"
+     },
+     "phep": ">=",
+     "phai": {
+      "hang": 16
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gio"
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 17
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 120
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.6
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "ra": [],
+   "dieu_kien_sai": "Neu chay cung cau hinh cho tung gio 12h-20h ma gio 16h khong noi bat (hoan lai o moi gio deu tuong duong), thi day chi la quay ve trung binh trong ngay chung chung, khong lien quan moc dinh gia NAV. Luu y: phai chieu gio may chu ve gio London truoc khi tin ket qua."
+  },
+  {
+   "ten": "ep_mua_lai_ban_khong_thanh_khoan_can",
+   "co_che": "Quy phong ho giu vi the ban chi so de phong ho danh muc bi lo mark-to-market khi gia vuot dinh 20 bar va bi goi ky quy; ho phai mua lai bang lenh thi truong, va khi so lenh dang MONG (khoi luong o vung thap) cung lenh do an gia manh hon nhieu — ben tra tien la nguoi ban khong bi ep, khong phai nguoi mua tu nguyen.",
+   "ho": "pha_vo",
+   "chieu": 1,
+   "giu": 3,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tre",
+      "cua": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 20
+      },
+      "n": 1
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 60
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.4
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "tre",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     }
+    }
+   ],
+   "dieu_kien_sai": "Neu chia cac lan pha dinh 20 bar theo phan vi khoi luong ma nhom khoi luong THAP khong tot hon nhom khoi luong CAO, thi lop thanh khoan khong giai thich gi va day chi la donchian doi ten — da co, phai bo. Ket luan cua lab rang SP500 khung ngay la mean-revert khien uu tien tien nghiem cua co che nay thap nhat trong sau de xuat."
+  }
+ ],
+ "ly_do_chon": "Sau tam co che truoc, cac huong con trong deu la nhung noi dong lenh bi RANG BUOC bat ky mot cach quan sat duoc: rang buoc quy che (mua bao hiem, dinh gia NAV 16:00 London), rang buoc thanh toan (rut von quy tuong ho T+1), rang buoc phong ho (nha tao lap gamma duong, ban khong bi goi ky quy) va rang buoc lich cong bo vi mo. Moi de xuat deu la 'A KHI B' voi mot dieu kien che do bang phan_vi cua bien dong hoac khoi luong, va bon trong sau dat che do o hai dau nguoc nhau (bien dong cao o co che 1, thap o co che 3; khoi luong cao o co che 4, thap o co che 2 va 6) — muc dich la do XEM CHE DO CO QUAN TRONG KHONG, chu khong phai tim mot bo tham so thang. Neu ca cap deu ra nhu nhau thi lop che do vo nghia va ca huong bi loai mot lan, do la thong tin re nhat co the mua. Da tranh: dip-buy vo dieu kien (ibs_bat_day, pha_day_hut_quet_stop), dong tien dau/cuoi thang (dong_luong_dau_thang, cuoi_thang, ban_lo_cuoi_nam_thue), don bay he thong (cung_don_bay, giai_chap_vol_target), va lenh dong cua. Chi mot co che giu qua 20 bar? Khong — dai nhat la 8 bar (co_che 4) va da neu ro can phi qua dem so voi bien do bat lai; nam co che con lai giu 2-3 bar hoac trong ngay nen phi giu khong phai bien quyet dinh. Ty le kich hoat uoc tinh 1,5-8% so bar cho ca sau."
+}

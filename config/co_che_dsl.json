@@ -1,0 +1,1327 @@
+[
+ {
+  "ten": "giai_chap_vol_target",
+  "co_che": "Quy risk-parity va vol-target phai HA don bay theo cong thuc khi bien dong thuc te tang, ho ban theo lich trinh chu khong theo gia, keo dai vai ngay sau mot chuoi truot giam trong che do bien dong cao; ta la ben cam gia cho luong ban vo dieu kien do va duoc tra bang phan hoi khi luong ban can — chi giu 3 dem nen phi qua dem ~0,06%/lenh, nho hon nhieu bien do hoi phuc muc tieu.",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 5
+     },
+     "n": 120
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -1.5
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 120
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.75
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.85
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.05
+ },
+ {
+  "ten": "tai_can_bang_etf_don_bay",
+  "co_che": "ETF don bay 2x/3x phai ban co phieu ngay tai/gan phien dong cua sau mot ngay giam de khoi phuc ty le don bay, khoi luong ban ti le voi |loi suat| x AUM va hoan toan vo cam voi gia; ho tra tien cho ben nhan hang qua dem va mua lai o phien sau — giu dung 1 dem nen phi qua dem gan nhu khong dang ke.",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 60
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -1.5
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 252
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 60
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.7
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.036
+ },
+ {
+  "ten": "cung_don_bay_khi_vol_giam",
+  "co_che": "Quy vol-control (bao hiem lien ket bien dong, CTA, target-vol) co don bay = vol_muc_tieu / vol_thuc_te, nen khi bien dong thuc te roi xuong vung thap ho BUOC PHAI mua them trong nhieu ngay theo cua so uoc luong 20 ngay, mua vo cam gia; ta vao truoc luong mua co hoc do va giu 8 dem — phi qua dem ~0,15%/lenh, doi lay dot cung tien keo dai vai tuan.",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 8,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "do_lech",
+      "cua": {
+       "chi_bao": "doi_pct",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "n": 20
+     },
+     "n": 252
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.25
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "do_lech",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 20
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "do_lech",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 252
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0265
+ },
+ {
+  "ten": "dong_luong_dau_thang_khi_gia_giam",
+  "co_che": "Dong tien huu tri/401k va SIP vao quy chi so la lenh mua CO DINH BANG TIEN, chay trong vai phien dau moi thang bat ke gia; khi thang truoc do giam thi cung so tien do mua duoc nhieu don vi hon va tac dong gia manh hon, dac biet luc do sau so lenh mong — nguoi tra la nha dau tu dinh ky vo cam gia, ta la ben ban truoc cho ho.",
+  "ho": "lich",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_thang"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 3
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 21
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 252
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.0449
+ },
+ {
+  "ten": "phi_bao_hiem_cuoi_tuan",
+  "co_che": "Khi bien dong dang o vung cao, nha giao dich don bay va quy khong muon om rui ro tin tuc hai ngay khong the thoat nen ha vi the vao thu Sau va mua lai dau tuan — ho tra phi bao hiem cho ben chiu giu qua cuoi tuan; ta vao mo cua thu Sau (tin hieu tren bar thu Nam, dayofweek=3 voi 0=thu Hai) va giu 2 bar de om dung khoang trong cuoi tuan, phi qua dem chi 2 dem.",
+  "ho": "phien",
+  "chieu": 1,
+  "giu": 2,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_tuan"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 3
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_tuan"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 3
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 252
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.75
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.0474
+ },
+ {
+  "ten": "hap_thu_khoi_luong",
+  "co_che": "Khoi luong cuc cao ma gia gan nhu khong nhuc nghia la mot ben mua lon dang hap thu tron luong ban cuong buc (margin call, quy bi rut von, cat lo he thong) tai mot muc gia — ben ban gap tra phi tac dong gia cho ben hap thu, va viec hap thu xong bao hieu ap luc ban da can; giu 5 dem la thoi gian de luong ban can kiet phan anh vao gia.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 100
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "tuyet_doi",
+      "cua": {
+       "chi_bao": "than_nen"
+      }
+     },
+     "n": 100
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.35
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0737
+ },
+ {
+  "ten": "ban_lo_cuoi_nam_thue",
+  "co_che": "Nha dau tu ca nhan va quy tuong ho o My phai hien thuc hoa khoan LO truoc 31/12 de khau tru thue (va quy tuong ho chot so 31/10-31/12 de lam dep bang danh muc), do la lenh ban BAT BUOC vi ly do phi kinh te; ho tra tien cho ben chiu om vi the qua buoc chuyen nam, va vi the duoc mua lai tu dau thang 1 khi lenh ban thue bien mat - giu 12 dem tuong duong ~0,20% phi, nho hon nhieu so voi bien do hoi thuong thay cua nhip nay, va chi kich hoat khi nam do that su co lo de ban.",
+  "ho": "lich",
+  "chieu": 1,
+  "giu": 12,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "thang"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 12
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_thang"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 14
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.45
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 60
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0231
+ },
+ {
+  "ten": "ghim_gia_tuan_dao_han",
+  "co_che": "Quy overwriting ban call va nha dau tu to chuc mua put chot lai khien nha tao lap quyen chon o trang thai gamma DUONG lon quanh cum gia thuc hien trong tuan dao han (thu Sau thu ba hang thang); de giu trung tinh delta ho buoc phai MUA khi gia nhung va ban khi gia nho - ho tra phi do cho ben cung cap thanh khoan nguoc chieu, va phi nay chi ton tai trong vai bar nen giu 3 bar khong phai chiu phi qua dem dang ke.",
+  "ho": "lich",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_thang"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 13
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_thang"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 19
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 120
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.1286
+ },
+ {
+  "ten": "pha_day_hut_quet_stop",
+  "co_che": "Lenh dung lo cua nha giao dich don bay xep chong ngay duoi day 20 bar; khi gia xuyen qua, chuoi stop bien thanh lenh THI TRUONG ban khong quan tam gia va hut can so lenh cho mua, buoc nha tao lap phai bao gia thap hon nhieu de hap thu - ho doi lai bang viec gia phuc hoi ngay khi chuoi stop can, nen ben mua vao dung luc thanh khoan bi hut duoc chinh nhung nguoi bi quet stop tra tien.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 20
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 20
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 100
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.7
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 10
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0598
+ },
+ {
+  "ten": "mat_can_bang_lenh_dong_cua",
+  "co_che": "Quy chi so, ETF va lenh MOC cua nha dau tu to chuc bat buoc phai khop tai GIA DONG CUA CHINH THUC bat ke gia do la bao nhieu; khi mat can bang lech mot chieu, nha tao lap phai om vi the nguoc trong gio cuoi phien va doi lai bang cach bao gia lech - ho hoan lai phan lech nay vao phien sau, nen nguoi chiu om vi the qua diem dong cua duoc chinh cac quy bi rang buoc benchmark tra tien; giu 2 bar nen chi phi qua dem gan nhu bang khong.",
+  "ho": "phien",
+  "chieu": 1,
+  "giu": 2,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 22
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "tuyet_doi",
+      "cua": {
+       "chi_bao": "than_nen"
+      },
+      "n": 1
+     },
+     "n": 100
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 200
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.6
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.0208
+ },
+ {
+  "ten": "thanh_khoan_mong_dong_thu_dong",
+  "co_che": "Dong mua theo chuong trinh (dong gop 401k, mua lai co phieu quy da uy quyen cho ngan hang, tai dau tu co tuc) chay theo LICH va khong dung lai trong ky nghi le/mua he, trong khi ben ban chu dong - quy chu dong va hedge fund - giam quy mo hoac nghi; khi do nguoi ban duy nhat con lai la nha tao lap va ho doi gia cao hon de nhan vi the, tuc chinh cac chuong trinh mua vo cam gia tra phi thanh khoan; giu 5 dem (~0,08% phi) nen bien do can bu la nho.",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.25
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.4
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.6
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.1803
+ },
+ {
+  "ten": "mua_lai_co_phieu_quy_theo_ngan_sach",
+  "co_che": "Chuong trinh mua lai co phieu quy duoc HDQT duyet bang mot ngan sach TIEN co dinh va uy quyen cho ngan hang thuc thi theo VWAP, nen so co phieu mua vao TANG khi gia giam - day la ben mua vo cam voi dinh gia, chay manh nhat trong vai phien sau mot nhip nhung con thi truong chung van trong xu huong tang (khi thi truong gay, bang can doi bi siet va chuong trinh bi cat, nen bo loc SMA200 la mot phan cua co che chu khong phai bo loc trang tri); giu 5 dem nen phi giu ~0,08%.",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 60
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.3
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 100
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.6
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0927
+ },
+ {
+  "ten": "phi_bao_hiem_bien_dong_gian_no",
+  "co_che": "Quy huu tri, quy tuong ho va ban quan ly rui ro MUA bao hiem (put/ban giam phoi nhiem) dung luc bien dong vua gian no — ho tra phi cho ben chiu rui ro duoi vi nhu cau bao hiem cua ho la bat buoc theo quy che, khong theo gia; nguoi ban bao hiem thu chenh lech giua bien dong ham y bi thoi phong va bien dong thuc te sau do.",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "bien_do"
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.85
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 100
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -1.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.2121
+ },
+ {
+  "ten": "bu_rui_ro_truoc_cong_bo_vi_mo",
+  "co_che": "Cac ban tin vi mo lon cua My (CPI, FOMC) roi vao khoang ngay 9-13 hang thang; nha tao lap va quy phong ho HA ton kho rui ro truoc gio cong bo vi ho khong dinh gia duoc rui ro sy kien — ai chiu giu phoi nhiem qua cua so do duoc tra phi rui ro, va phi nay chi ton tai khi thi truong dang vang (ton kho da bi rut).",
+  "ho": "vi_mo",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_thang"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_thang"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 13
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 60
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.4
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.1228
+ },
+ {
+  "ten": "gamma_duong_keo_ve",
+  "co_che": "Trong che do bien dong THAP, nha tao lap quyen chon o trang thai gamma duong (ho da ban quyen chon cho quy overwriting) nen phong ho delta bat ho MUA khi gia giam va BAN khi gia tang; ben tra tien la dong lenh nong voi (quy dieu chinh trong so, lenh thi truong cuoi phien) da day gia lech va bi keo ve ngay hom sau.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 2,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "do_lech",
+      "cua": {
+       "chi_bao": "doi_pct",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "n": 20
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.35
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 100
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -0.8
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.75
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.1086
+ },
+ {
+  "ten": "rut_von_quy_tuong_ho",
+  "co_che": "Nha dau tu ca nhan rut von khoi quy tuong ho SAU khi nhin thay NAV giam, va quy phai ban co phieu theo lich thanh toan T+1/T+2 bat ke gia — song ban cuong buc nay lo dien duoi dang khoi luong cao bat thuong trong giai doan sut giam keo dai; nguoi mua lai duoc tra tien vi ho cung thanh khoan cho ben bi ep. Giu 8 bar la do song rut von keo dai nhieu phien; phi qua dem 8 dem chi ~0,15% trong khi bien do bat lai sau song ban cuong buc thuong 1,5-3%, nen phi khong an het bien.",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 8,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -1.2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.75
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 10
+     },
+     "n": 1
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.2068
+ },
+ {
+  "ten": "hoan_lai_sau_gio_dinh_gia_nav",
+  "co_che": "Quy va nha quan ly tai san chau Au dinh gia NAV tai moc 16:00 gio London, nen ho BAT BUOC khop khoi luong con lai trong cua so quanh moc do bat ke gia — ho tra phi truot gia cho ben nhan phia doi ung, va phan lech do dong lenh vo cam voi gia thuong duoc hoan lai trong vai gio ke tiep khi ap luc lich het.",
+  "ho": "phien",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 16
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 17
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 120
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.6
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.2315
+ },
+ {
+  "ten": "ep_mua_lai_ban_khong_thanh_khoan_can",
+  "co_che": "Quy phong ho giu vi the ban chi so de phong ho danh muc bi lo mark-to-market khi gia vuot dinh 20 bar va bi goi ky quy; ho phai mua lai bang lenh thi truong, va khi so lenh dang MONG (khoi luong o vung thap) cung lenh do an gia manh hon nhieu — ben tra tien la nguoi ban khong bi ep, khong phai nguoi mua tu nguyen.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 20
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 60
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.4
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0108
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"We open a long position when the price comes within a zone around the lower band\" [nguon: https://financial-hacker.com/trading-the-channel/]",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "nguon": "https://financial-hacker.com/trading-the-channel/",
+  "ra": [
+   {
+    "phai": {
+     "hang": 2.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ten": "mua_zscore20_close_duoi_am2",
+  "van_tay": "97b62f191b228794",
+  "vao": [
+   {
+    "phai": {
+     "hang": -2.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.5511
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"The base case of the strategy is to go long the SPY ETF at the next open when the closing price crosses above the 200-day moving average\" [nguon: https://www.priceactionlab.com/Blog/2026/07/post-hoc-trading-claims/]",
+  "giu": 1,
+  "ho": "xu_huong",
+  "nguon": "https://www.priceactionlab.com/Blog/2026/07/post-hoc-trading-claims/",
+  "ra": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 200
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "ten": "mua_close_cheo_len_sma200",
+  "van_tay": "0cbdf100a7728c1e",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 200
+    },
+    "phep": "cheo_len",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.7021
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Here, we enter and exit a long position with the same set of rules as in the long-only variant, but with an additional check that the price has closed above the 200 MA during entry\" [nguon: https://blog.quantinsti.com/donchian-channel-strategy/]",
+  "giu": 1,
+  "ho": "xu_huong",
+  "nguon": "https://blog.quantinsti.com/donchian-channel-strategy/",
+  "ra": [],
+  "ten": "mua_close_tren_sma200",
+  "van_tay": "89e269cdb0192f40",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 200
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.7161
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Buy= RSI(30)>50 AND RSI(2)<15\" [nguon: https://www.quantifiedstrategies.com/rsi-trading-strategy/]",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/",
+  "ra": [
+   {
+    "phai": {
+     "hang": 85.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    }
+   }
+  ],
+  "ten": "mua_rsi30_tren_50_rsi2_duoi_15",
+  "van_tay": "d879e7b37597f04f",
+  "vao": [
+   {
+    "phai": {
+     "hang": 50.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 30
+    }
+   },
+   {
+    "phai": {
+     "hang": 15.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.271
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"The authors build a target label with a moving-average crossover rule: buy when the 10-bar moving average of Bitcoin's close sits above the 60-bar moving average, sell when it does not\" [nguon: https://aligrithm.com/how-to-spot-a-fake-ml-trading-paper/]",
+  "giu": 1,
+  "ho": "xu_huong",
+  "nguon": "https://aligrithm.com/how-to-spot-a-fake-ml-trading-paper/",
+  "ra": [],
+  "ten": "mua_sma10_tren_sma60",
+  "van_tay": "bfed639b5511df38",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 60
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 10
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.6949
+ }
+]

@@ -1,0 +1,112 @@
+{
+ "luc": 1786708445.3381116,
+ "entries": [
+  {
+   "title": "Calibration Bets on the Past: Post-Training Quantization for Financial Time-Series Forecasting",
+   "summary": "Financial forecasting models are typically developed in full precision, yet production deployment often requires low-precision inference to reduce memory and computational cost. Post-training quantization (PTQ) enables such deployment without retraining. However, reliable activation quantization requires calibration: activation ranges are estimated from historical data before d",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "volatility",
+    "rsi",
+    "neural"
+   ]
+  },
+  {
+   "title": "Regime-Gated Residual Mixture-of-Experts for Cross-Sectional Volatility Forecasting",
+   "summary": "Financial volatility is regime dependent, yet incorporating regime information into neural networks can also destabilize training. This paper asks where such information should enter a neural cross-sectional volatility forecasting model. We study five-day realized-volatility forecasts for 1,027 U.S. equities using a rolling walk-forward evaluation framework in which information",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "volatility",
+    "neural"
+   ]
+  },
+  {
+   "title": "AI-Driven Multiscenario Interest Rate Forecasting: A Proof of Concept for Banking Asset Management",
+   "summary": "This study focuses on developing an AI-supported prototype for multiperspective interest rate forecasting that combines classical econometric models with modern artificial intel-ligence methods. Tested in a major European bank, the system enables more precise and flexible prediction of interest rate developments, supporting strategic decision-making in Asset-Liability Managemen",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "trend",
+    "signal"
+   ]
+  },
+  {
+   "title": "Does a Structural Model Add Anything to the Closing Price? Calibrated forecasting, incremental information, and match leverage in the Italian Serie A",
+   "summary": "Studies of association-football forecasting routinely report three-way accuracy in the low fifties and present it as competitive with the betting market. Accuracy against a uniform benchmark answers the wrong question; the question worth asking is whether a model carries information a margin-free closing price has not already absorbed. We formalise that test as the fitted weigh",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "pair",
+    "signal"
+   ]
+  },
+  {
+   "title": "Universality and Heterogeneity of Stylized Facts in Cryptocurrency and Equity Markets",
+   "summary": "This study investigates whether the macroscopic statistical maturity of cryptocurrencies implies dynamical equivalence with traditional equity markets. We analyze high-frequency data (2020--2025) using the Complexity--Entropy Causality Plane (CECP) and directed horizontal visibility graphs (directed HVG) to uncover complex temporal patterns and time-directed structures in the r",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "rsi"
+   ]
+  },
+  {
+   "title": "The Triadic Stress Index in Financial Markets",
+   "summary": "The Triadic Stress Index (TSI) takes a network index whose four factors were first observed in soil microbiome co-occurrence networks and applies it, without alteration, to the correlation network of financial assets. We test it on five markets spanning 2006-2026 (equities including banking crises and the AI sector, cryptocurrencies, commodities, foreign exchange and sovereign ",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "factor"
+   ]
+  },
+  {
+   "title": "When the Fed Speaks: Dynamics and Forecasts of the Volatility Surface",
+   "summary": "Our primary goal is to forecast and empirically examine the evolution of the implied volatility (IV) surface, with particular focus on the dates of scheduled meetings of the Federal Open Market Committee (FOMC). Firstly, we check if IV increases before the announcement and if thes effect is stronger for short-dated, out-the-money (OTM) options in high volatility regimes. In the",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "volatility",
+    "signal"
+   ]
+  },
+  {
+   "title": "Lower spectrum of financial correlation matrices: a new perspective on market synchronization",
+   "summary": "In this paper we investigate the information content of the lower part of the spectrum of financial correlation matrices, as a source of information on market synchronization. In a financial context, a classical application of Principal Component Analysis and Random Matrix Theory identifies the largest eigenvalues as indicators of dominant market factors and synchronization pat",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "factor"
+   ]
+  },
+  {
+   "title": "Hybrid Neural-Classical Correction for Frozen Time Series Foundation Models: A Comprehensive Ablation Study on High-Frequency Stock Prediction",
+   "summary": "Foundation models for time series forecasting demonstrate impressive zero-shot generalization but often underperform on specialized domains such as high-frequency finance. We present a comprehensive study of hybrid neural-classical correction for adapting frozen TimesFM (200M parameters) to stock return prediction during the volatile opening trading hour. We compare two neural ",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "neural"
+   ]
+  },
+  {
+   "title": "Beyond Co-Movement: Locality by Exposures Enables a Joint Factor-Graph Framework for Portfolio Diversification",
+   "summary": "Current portfolio construction methods are either agnostic to the effects of idiosyncratic shocks (standard factor models) or to the latent data structure driving systematic returns (recent graph-based approaches). This presents an opportunity to combine the complementary market aspects captured by the factor and graph domains, allowing asset allocations to operate directly on ",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "factor",
+    "volatility",
+    "rsi",
+    "pair"
+   ]
+  },
+  {
+   "title": "Cross-Sectional Heterogeneity in LSTM Networks for Financial Time Series",
+   "summary": "Predicting financial asset returns remains one of the most difficult challenges in empirical finance, driven by the low signal-to-noise ratio and the semi-strong form of market efficiency. While deep learning models, especially LSTM networks, have shown promise in capturing temporal dependencies, standard architectures often struggle to account for the cross-sectional heterogen",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "momentum",
+    "factor",
+    "signal"
+   ]
+  },
+  {
+   "title": "Velocity- and Regime-Aware Detection of Intraday Options Market Manipulation, with Explainable Attribution",
+   "summary": "Intraday market manipulation is hard to detect because its footprint is brief, buried in millions of quotes, and statistically similar to ordinary volatility. Detectors reach high recall only by flagging so many other days that measured precision collapses, producing alerts no regulator can act on. We show that this manipulation leaves a distinctive dynamic signature: a pump-an",
+   "nguon": "arxiv",
+   "tu_khoa": [
+    "volatility"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,140 @@
+{
+  "darwinex": {
+    "ten": "Darwinex",
+    "login": "https://www.darwinex.com/login",
+    "targets": [
+      "https://www.darwinex.com/data/darwin-api?hsLang=en",
+      "https://www.darwinex.com/data/darwin-api"
+    ],
+    "fields": {
+      "access_token": [
+        "Access Token"
+      ],
+      "consumer_key": [
+        "Consumer Key"
+      ],
+      "consumer_secret": [
+        "Consumer Secret"
+      ],
+      "refresh_token": [
+        "Refresh Token"
+      ]
+    }
+  },
+  "myfxbook": {
+    "ten": "Myfxbook",
+    "login": "https://www.myfxbook.com/login",
+    "targets": [
+      "https://www.myfxbook.com/api"
+    ],
+    "fields": {
+      "api_token": [
+        "API token"
+      ]
+    }
+  },
+  "collective2": {
+    "ten": "Collective2",
+    "login": "https://trade.collective2.com/login",
+    "targets": [
+      "https://trade.collective2.com/c2-api.html"
+    ],
+    "fields": {
+      "api_key": [
+        "API Key",
+        "API key"
+      ]
+    }
+  },
+  "oanda": {
+    "ten": "OANDA",
+    "login": "https://www.oanda.com/login/",
+    "targets": [
+      "https://www.oanda.com/account/tpa/personal_token"
+    ],
+    "fields": {
+      "api_token": [
+        "Token",
+        "token"
+      ]
+    }
+  },
+  "binance": {
+    "ten": "Binance",
+    "login": "https://accounts.binance.com/en/login",
+    "targets": [
+      "https://www.binance.com/en/my/settings/api-management"
+    ],
+    "fields": {
+      "api_key": [
+        "API Key",
+        "api key"
+      ]
+    }
+  },
+  "bybit": {
+    "ten": "Bybit",
+    "login": "https://www.bybit.com/en/login/",
+    "targets": [
+      "https://www.bybit.com/app/user/api-management"
+    ],
+    "fields": {
+      "api_key": [
+        "API Key",
+        "api key"
+      ]
+    }
+  },
+  "okx": {
+    "ten": "OKX",
+    "login": "https://www.okx.com/cn/account/login",
+    "targets": [
+      "https://www.okx.com/account/my-api"
+    ],
+    "fields": {
+      "api_key": [
+        "API Key",
+        "api key"
+      ]
+    }
+  },
+  "alphavantage": {
+    "ten": "AlphaVantage",
+    "login": "https://www.alphavantage.co/support/",
+    "targets": [
+      "https://www.alphavantage.co/support/#api-key"
+    ],
+    "fields": {
+      "api_key": [
+        "API Key",
+        "api key"
+      ]
+    }
+  },
+  "polygon": {
+    "ten": "Polygon.io",
+    "login": "https://polygon.io/dashboard/signup",
+    "targets": [
+      "https://polygon.io/dashboard/apikey"
+    ],
+    "fields": {
+      "api_key": [
+        "API key",
+        "API Key"
+      ]
+    }
+  },
+  "quantconnect": {
+    "ten": "QuantConnect",
+    "login": "https://www.quantconnect.com/account",
+    "targets": [
+      "https://www.quantconnect.com/account"
+    ],
+    "fields": {
+      "api_token": [
+        "API token",
+        "API Token"
+      ]
+    }
+  }
+}

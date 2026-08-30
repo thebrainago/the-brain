@@ -1,0 +1,400 @@
+# -*- coding: utf-8 -*-
+"""banker.py - TRU BANKER. Vi mo cap nhat lien tuc + phan tich sat sao.
+
+Khac ban cu (`lab/banker.py` viet brief roi thoi): o day moi seri vi mo duoc
+LUU VAO SO theo thoi gian, nen sau nay tra loi duoc cau hoi "luc do ta biet gi"
+(point-in-time) chu khong phai lay ban moi nhat ap nguoc cho qua khu.
+
+Nguon (deu mien phi, khong can khoa):
+  - FRED (fred.stlouisfed.org/graph/fredgraph.csv) : lai suat, duong cong,
+    lam phat, that nghiep, dieu kien tai chinh.
+  - CFTC COT (publicreporting.cftc.gov)            : vi the dau co.
+  - exchangerate/open.er-api                       : ty gia VND.
+
+Ba muc phan tich, tach bach:
+  1. SO LIEU  - so that, co ngay, co nguon.
+  2. CHE DO   - phan loai co quy tac (khong phai cam nhan): duong cong, xu huong
+                lai suat, do bien dong, dieu kien tin dung.
+  3. HAM Y    - chi noi cai gi SUY RA DUOC tu 1 va 2. Khong du doan.
+
+Nguyen tac: BANKER khong duoc tao tin hieu giao dich. No cung cap LOP BOI CANH
+cho QUANTLAB dang ky gia thuyet co dieu kien che do. Chi ap lop tin hieu CO
+NGHIA voi tai san do (CLAUDE.md muc 10).
+"""
+from __future__ import annotations
+
+import io
+import json
+import sys
+import time
+from datetime import date, datetime, timedelta
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from nhan import so as SO
+
+TRU = "BANKER"
+REPORTS = Path(__file__).resolve().parent.parent / "reports"
+
+# FRED bi chan tu mang nay (ConnectionReset, da kiem 15/08). Nguon thay the deu
+# da thu THAT va tra 200: Yahoo chart API, ECB Data API, World Bank API.
+# Seri: ma noi bo -> (nguon, ma nguon, ten, chu ky giay, y nghia)
+SERI = {
+    "LS10Y":  ("yahoo", "^TNX", "Loi suat My 10 nam", 43200, "gia von dai han"),
+    "LS3M":   ("yahoo", "^IRX", "Tin phieu My 13 tuan", 43200, "lai suat ngan han"),
+    "LS5Y":   ("yahoo", "^FVX", "Loi suat My 5 nam", 43200, "ky vong trung han"),
+    "LS30Y":  ("yahoo", "^TYX", "Loi suat My 30 nam", 43200, "ky vong rat dai han"),
+    "VIX":    ("yahoo", "^VIX", "VIX 30 ngay", 21600, "do so hai co phieu"),
+    "VIX3M":  ("yahoo", "^VIX3M", "VIX 3 thang", 21600, "cau truc ky han bien dong"),
+    "USD":    ("yahoo", "DX-Y.NYB", "Chi so dola", 43200, "suc manh dola"),
+    "HYG":    ("yahoo", "HYG", "ETF trai phieu rac", 43200, "khau vi rui ro tin dung"),
+    "LQD":    ("yahoo", "LQD", "ETF trai phieu hang dau tu", 43200, "moc so voi HYG"),
+    "TLT":    ("yahoo", "TLT", "ETF trai phieu dai han", 43200, "do dai ky han"),
+    "DAU":    ("yahoo", "CL=F", "Dau WTI", 43200, "lam phat dau vao"),
+    "VANG":   ("yahoo", "GC=F", "Vang", 43200, "cau tru an"),
+    "SP500":  ("yahoo", "^GSPC", "S&P 500", 21600, "tai san rui ro moc"),
+    "EURUSD_ECB": ("ecb", "D.USD.EUR.SP00.A", "EURUSD tham chieu ECB", 86400,
+                   "ty gia chinh thuc, doc lap voi san"),
+}
+# Chi so quoc gia (World Bank) - nam mot lan, cho phan vi mo Viet Nam
+WB = {
+    "VN_CPI":  ("VN", "FP.CPI.TOTL.ZG", "Lam phat Viet Nam (%/nam)"),
+    "VN_GDP":  ("VN", "NY.GDP.MKTP.KD.ZG", "Tang truong GDP Viet Nam (%/nam)"),
+    "VN_TYGIA": ("VN", "PA.NUS.FCRF", "Ty gia VND/USD trung binh nam"),
+}
+
+# Daily market series may legitimately stop over a weekend/holiday, but a value
+# older than one week must not silently drive a current regime label. World Bank
+# series are annual, so they use a separate freshness window.
+TUOI_TOI_DA_NGAY = 7
+TUOI_TOI_DA_WB_NGAY = 550
+
+
+def _tai(url: str, timeout: int = 30) -> str | None:
+    try:
+        import requests
+        r = requests.get(url, timeout=timeout, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"})
+        if r.status_code == 200 and r.text:
+            return r.text
+    except Exception:
+        return None
+    return None
+
+
+def _tu_yahoo(ma_nguon: str, khoang: str = "2y") -> list[tuple[str, float]]:
+    """Yahoo chart API -> [(ngay, gia tri)]. Da kiem that: tra 200."""
+    u = (f"https://query1.finance.yahoo.com/v8/finance/chart/{ma_nguon}"
+         f"?range={khoang}&interval=1d")
+    txt = _tai(u)
+    if not txt:
+        return []
+    try:
+        j = json.loads(txt)
+        kq = j["chart"]["result"][0]
+        moc = kq["timestamp"]
+        gia = kq["indicators"]["quote"][0]["close"]
+        ra = []
+        for t, g in zip(moc, gia):
+            if g is None:
+                continue
+            ra.append((time.strftime("%Y-%m-%d", time.gmtime(t)), float(g)))
+        return ra
+    except Exception:
+        return []
+
+
+def _tu_ecb(khoa: str) -> list[tuple[str, float]]:
+    u = (f"https://data-api.ecb.europa.eu/service/data/EXR/{khoa}"
+         f"?lastNObservations=500&format=csvdata")
+    txt = _tai(u)
+    if not txt:
+        return []
+    ra = []
+    try:
+        import csv
+        for d in csv.DictReader(io.StringIO(txt)):
+            ng, gt = d.get("TIME_PERIOD"), d.get("OBS_VALUE")
+            if ng and gt:
+                ra.append((ng[:10], float(gt)))
+    except Exception:
+        return []
+    return ra
+
+
+def _tu_worldbank(nuoc: str, chi_so: str) -> list[tuple[str, float]]:
+    u = (f"https://api.worldbank.org/v2/country/{nuoc}/indicator/{chi_so}"
+         f"?format=json&per_page=100")
+    txt = _tai(u)
+    if not txt:
+        return []
+    try:
+        j = json.loads(txt)
+        ra = []
+        for d in (j[1] or []):
+            if d.get("value") is not None:
+                ra.append((f"{d['date']}-12-31", float(d["value"])))
+        return ra
+    except Exception:
+        return []
+
+
+def _luu_seri(ma: str, ten: str, nguon: str, chu_ky: int, y_nghia: str,
+              diem: list[tuple[str, float]]) -> dict:
+    if not diem:
+        SO.chay("INSERT INTO vi_mo_seri(ma,ten,nguon,chu_ky_giay,lan_cuoi,ghi_chu) "
+                "VALUES(?,?,?,?,0,'LOI TAI') ON CONFLICT(ma) DO UPDATE SET ghi_chu='LOI TAI'",
+                ma, ten, nguon, chu_ky)
+        return {"ma": ma, "loi": "khong tai duoc"}
+    with SO.ket_noi() as cn:
+        cn.execute("BEGIN")
+        for ngay, gt in diem:
+            cn.execute("INSERT OR IGNORE INTO vi_mo(seri,ngay,gia_tri) VALUES(?,?,?)",
+                       (ma, ngay, gt))
+        cn.execute("COMMIT")
+    n = SO.mot("SELECT COUNT(*) n FROM vi_mo WHERE seri=?", ma)["n"]
+    SO.chay("INSERT INTO vi_mo_seri(ma,ten,nguon,chu_ky_giay,lan_cuoi,so_diem,ghi_chu) "
+            "VALUES(?,?,?,?,?,?,?) ON CONFLICT(ma) DO UPDATE SET lan_cuoi=excluded.lan_cuoi, "
+            "so_diem=excluded.so_diem, ghi_chu=excluded.ghi_chu",
+            ma, ten, nguon, chu_ky, time.time(), n, y_nghia)
+    return {"ma": ma, "so_diem": n}
+
+
+def nap_seri(ma: str, ep: bool = False) -> dict:
+    """Nap mot seri vao bang vi_mo. CHI-THEM, khong ghi de qua khu -> sau nay
+    tra loi duoc 'luc do ta biet gi' (point-in-time)."""
+    if ma not in SERI:
+        return {"ma": ma, "loi": "khong khai bao"}
+    nguon, ma_nguon, ten, chu_ky, y_nghia = SERI[ma]
+    cu = SO.mot("SELECT * FROM vi_mo_seri WHERE ma=?", ma)
+    if cu and not ep and (time.time() - (cu["lan_cuoi"] or 0)) < chu_ky:
+        return {"ma": ma, "bo_qua": "chua den ky"}
+    diem = _tu_yahoo(ma_nguon) if nguon == "yahoo" else _tu_ecb(ma_nguon)
+    return _luu_seri(ma, ten, nguon, chu_ky, y_nghia, diem)
+
+
+def nap_quoc_gia(ep: bool = False) -> list[dict]:
+    ra = []
+    for ma, (nuoc, chi_so, ten) in WB.items():
+        cu = SO.mot("SELECT * FROM vi_mo_seri WHERE ma=?", ma)
+        if cu and not ep and (time.time() - (cu["lan_cuoi"] or 0)) < 604800:
+            continue
+        ra.append(_luu_seri(ma, ten, "worldbank", 604800, "vi mo quoc gia",
+                            _tu_worldbank(nuoc, chi_so)))
+    return ra
+
+
+def gan_nhat(ma: str, n: int = 1) -> list[dict]:
+    return SO.nhieu("SELECT ngay,gia_tri FROM vi_mo WHERE seri=? ORDER BY ngay DESC LIMIT ?",
+                    ma, n)
+
+
+def _doc_ngay(s: str) -> date | None:
+    try:
+        return datetime.strptime(s[:10], "%Y-%m-%d").date()
+    except Exception:
+        return None
+
+
+def _tuoi_ngay(s: str, hom_nay: date | None = None) -> int | None:
+    d = _doc_ngay(s)
+    return ((hom_nay or date.today()) - d).days if d else None
+
+
+def _nguong_tuoi(ma: str) -> int:
+    return TUOI_TOI_DA_WB_NGAY if ma.startswith("VN_") else TUOI_TOI_DA_NGAY
+
+
+def _cap_cung_ngay(ma_a: str, ma_b: str, ngay_toi_da: str | None = None) -> dict | None:
+    """Lay hai seri tai cung MOT ngay, khong ghep hai moc gan nhat khac nhau."""
+    dieu_kien = "AND a.ngay<=?" if ngay_toi_da else ""
+    tham_so = (ma_a, ma_b, ngay_toi_da) if ngay_toi_da else (ma_a, ma_b)
+    return SO.mot(
+        "SELECT a.ngay, a.gia_tri gia_a, b.gia_tri gia_b "
+        "FROM vi_mo a JOIN vi_mo b ON b.ngay=a.ngay "
+        "WHERE a.seri=? AND b.seri=? " + dieu_kien + " ORDER BY a.ngay DESC LIMIT 1",
+        *tham_so)
+
+
+def _doi(ma: str, so_ngay: int) -> float | None:
+    """Thay doi so voi `so_ngay` truoc MOC MOI NHAT cua chinh seri."""
+    m = SO.mot("SELECT ngay,gia_tri FROM vi_mo WHERE seri=? ORDER BY ngay DESC LIMIT 1", ma)
+    if not m or not _doc_ngay(m["ngay"]):
+        return None
+    moc = (_doc_ngay(m["ngay"]) - timedelta(days=so_ngay)).strftime("%Y-%m-%d")
+    c = SO.mot("SELECT gia_tri FROM vi_mo WHERE seri=? AND ngay<=? ORDER BY ngay DESC LIMIT 1",
+               ma, moc)
+    if not c:
+        return None
+    return float(m["gia_tri"]) - float(c["gia_tri"])
+
+
+def phan_loai_che_do() -> dict:
+    """CHE DO theo QUY TAC, khong theo cam nhan. Moi nhan co dieu kien viet ra."""
+    ra: dict = {"luc": SO.bay_gio(), "che_do": {}, "so_lieu": {}, "thieu": [],
+                "stale": []}
+
+    def lay(ma):
+        r = gan_nhat(ma)
+        if r:
+            tuoi = _tuoi_ngay(r[0]["ngay"])
+            stale = tuoi is None or tuoi > _nguong_tuoi(ma)
+            ra["so_lieu"][ma] = {"ngay": r[0]["ngay"], "gia_tri": r[0]["gia_tri"],
+                                  "tuoi_ngay": tuoi, "stale": stale}
+            if stale:
+                ra["stale"].append(ma)
+                return None
+            return float(r[0]["gia_tri"])
+        ra["thieu"].append(ma)
+        return None
+
+    def cap(ma_a, ma_b, ten):
+        r = _cap_cung_ngay(ma_a, ma_b)
+        if not r:
+            ra["thieu"].append(ten)
+            return None
+        tuoi = _tuoi_ngay(r["ngay"])
+        stale = tuoi is None or tuoi > max(_nguong_tuoi(ma_a), _nguong_tuoi(ma_b))
+        ra["so_lieu"][ten] = {"ngay": r["ngay"], "gia_a": r["gia_a"],
+                               "gia_b": r["gia_b"], "tuoi_ngay": tuoi,
+                               "stale": stale}
+        if stale:
+            ra["stale"].append(ten)
+            return None
+        return float(r["gia_a"]), float(r["gia_b"]), r["ngay"]
+
+    ls10, ls3m = lay("LS10Y"), lay("LS3M")
+    vix, vix3m = lay("VIX"), lay("VIX3M")
+    usd, hyg, lqd = lay("USD"), lay("HYG"), lay("LQD")
+
+    # Moi phep ket hop bat buoc dung cung ngay quan sat.
+    duong_cong = cap("LS10Y", "LS3M", "LS10Y/LS3M")
+    if duong_cong:
+        cong = duong_cong[0] - duong_cong[1]
+        ra["so_lieu"]["duong_cong_10y_3m"] = round(cong, 3)
+        ra["che_do"]["duong_cong"] = {
+            "nhan": "DAO NGUOC" if cong < 0 else ("PHANG" if cong < 0.5 else "DOC"),
+            "gia_tri": round(cong, 3), "quy_tac": "10y-3m < 0 = dao nguoc; < 0,5 = phang",
+            "ngay": duong_cong[2],
+            "y_nghia": "dao nguoc di truoc suy thoai 6-18 thang; day la BOI CANH, "
+                       "khong phai tin hieu vao lenh"}
+
+    d90 = _doi("LS10Y", 90)
+    if d90 is not None:
+        ra["che_do"]["xu_huong_lai_suat"] = {
+            "nhan": "TANG" if d90 > 0.25 else ("GIAM" if d90 < -0.25 else "DI NGANG"),
+            "gia_tri": round(d90, 3), "doi_90_ngay_diem": round(d90, 3),
+            "quy_tac": "|doi loi suat 10y trong 90 ngay| > 0,25 diem",
+            "y_nghia": "lop vi mo DUY NHAT tung vuot mua-giu qua 64 nam trong du an nay la "
+                       "nghieng size theo THAY DOI loi suat 10y (memory macro-tilt-lead)"}
+    if vix is not None:
+        ra["che_do"]["bien_dong"] = {
+            "nhan": "CAO" if vix > 25 else ("THAP" if vix < 15 else "BINH THUONG"),
+            "gia_tri": vix, "quy_tac": "VIX > 25 cao, < 15 thap",
+            "y_nghia": "tren SP500 khung ngay: VIX cao = MUA (nguoc truc quan thong thuong)"}
+    vix_term = cap("VIX3M", "VIX", "VIX3M/VIX")
+    if vix_term and vix_term[1] > 0:
+        ty = vix_term[0] / vix_term[1]
+        ra["che_do"]["cau_truc_ky_han_vix"] = {
+            "nhan": "NGHICH DAO (cang)" if ty < 1.0 else "BINH THUONG",
+            "gia_tri": round(ty, 3), "quy_tac": "VIX3M/VIX < 1",
+            "ngay": vix_term[2],
+            "y_nghia": "co che 01 cua du an tung AM TINH (IC +0,106 nhung placebo 10,2%) "
+                       "- dung dung lam tin hieu, chi doc lam boi canh"}
+    tin_dung = cap("HYG", "LQD", "HYG/LQD")
+    if tin_dung and tin_dung[1] > 0:
+        r = tin_dung[0] / tin_dung[1]
+        moc_ngay = (_doc_ngay(tin_dung[2]) - timedelta(days=90)).strftime("%Y-%m-%d")
+        moc = _cap_cung_ngay("HYG", "LQD", moc_ngay)
+        doi = (r / (float(moc["gia_a"]) / float(moc["gia_b"])) - 1) \
+            if (moc and moc["gia_b"]) else None
+        ra["che_do"]["tin_dung"] = {
+            "nhan": ("CANG" if doi < -0.02 else ("DE" if doi > 0.02 else "BINH THUONG"))
+                    if doi is not None else "?",
+            "gia_tri": round(r, 4), "doi_90_ngay_pct": round(doi * 100, 2) if doi is not None else None,
+            "ngay": tin_dung[2],
+            "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang"}
+    if usd is not None:
+        du = _doi("USD", 90)
+        ra["che_do"]["dola"] = {
+            "nhan": "MANH LEN" if (du or 0) > 1 else ("YEU DI" if (du or 0) < -1 else "ON DINH"),
+            "gia_tri": usd, "quy_tac": "|doi chi so dola 90 ngay| > 1 diem",
+            "doi_90_ngay": round(du, 3) if du is not None else None}
+
+    for ma in ("VN_CPI", "VN_GDP", "VN_TYGIA"):
+        lay(ma)
+    return ra
+
+
+def ham_y(che_do: dict) -> list[str]:
+    """CHI noi cai suy ra duoc. Khong du doan gia."""
+    ra = []
+    cd = che_do.get("che_do", {})
+    if cd.get("duong_cong", {}).get("nhan") == "DAO NGUOC":
+        ra.append("Duong cong dao nguoc: chi phi giu vi the mua dai han cao hon binh thuong "
+                  "(phi qua dem theo lai suat ngan han) - anh huong TRUC TIEP toi chi phi, "
+                  "khong phai toi huong gia.")
+    xh = cd.get("xu_huong_lai_suat", {})
+    if xh.get("nhan") in ("TANG", "GIAM"):
+        ra.append(f"Loi suat 10y {xh['nhan'].lower()} {abs(xh['doi_90_ngay_diem'])} diem trong 90 ngay "
+                  "-> lop nghieng size theo thay doi loi suat dang co tin hieu; "
+                  "day la lop DUY NHAT tung vuot mua-giu qua 64 nam trong du an.")
+    bd = cd.get("bien_dong", {})
+    if bd.get("nhan") == "CAO":
+        ra.append(f"VIX {bd['gia_tri']} > 25: tren khung ngay SP500 day la vung MUA theo "
+                  "ket luan da chot, khong phai vung tranh.")
+    if cd.get("tin_dung", {}).get("nhan") == "CANG":
+        ra.append("Chenh lech tin dung cang: rui ro doi tac cua san CFD tang - "
+                  "lien quan toi so chenh lech chi phi trien khai, khong chi toi gia.")
+    if not ra:
+        ra.append("Khong che do nao vuot nguong quy tac. Khong co ham y nao dang bao.")
+    return ra
+
+
+def mot_luot(ep: bool = False) -> dict:
+    SO.nhip_tim(TRU, "chay")
+    ket = {"nap": [], "loi": 0}
+    for ma in SERI:
+        r = nap_seri(ma, ep=ep)
+        ket["nap"].append(r)
+        ket["loi"] += int("loi" in r)
+    ket["nap"] += nap_quoc_gia(ep=ep)
+
+    cd = phan_loai_che_do()
+    cd["ham_y"] = ham_y(cd)
+    REPORTS.mkdir(parents=True, exist_ok=True)
+    (REPORTS / "banker_che_do.json").write_text(
+        json.dumps(cd, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    dong = ["# BANKER - BOI CANH VI MO", f"*Cap nhat {cd['luc']}*", ""]
+    dong.append("## Che do (theo quy tac, khong theo cam nhan)")
+    dong.append("| Truc | Nhan | Gia tri | Quy tac |")
+    dong.append("|---|---|---|---|")
+    for k, v in cd["che_do"].items():
+        dong.append(f"| {k} | **{v['nhan']}** | {v.get('gia_tri')} | {v.get('quy_tac','')} |")
+    dong += ["", "## Ham y (chi cai suy ra duoc)"]
+    dong += [f"- {x}" for x in cd["ham_y"]]
+    if cd["thieu"]:
+        dong += ["", f"> Thieu seri: {', '.join(cd['thieu'])} - chua tai duoc."]
+    if cd["stale"]:
+        dong += ["", f"> Du lieu stale, KHONG dung gan nhan: {', '.join(cd['stale'])}."]
+    (REPORTS / "BANKER.md").write_text("\n".join(dong), encoding="utf-8")
+
+    SO.ghi_su_kien(TRU, "che_do", {"che_do": {k: v["nhan"] for k, v in cd["che_do"].items()}})
+    SO.ghi_chi_so("banker_so_seri", len([r for r in ket["nap"] if "so_diem" in r]))
+    SO.nhip_tim(TRU, "nghi", {"seri_loi": ket["loi"], "che_do": len(cd["che_do"])})
+    if ket["loi"] >= len(SERI) // 2:
+        SO.bao_van_de("banker_mat_nguon", "VUA",
+                      f"{ket['loi']}/{len(SERI)} seri FRED khong tai duoc - kiem mang/proxy",
+                      {"chi_tiet": ket["nap"][:5]})
+    else:
+        SO.dong_van_de("banker_mat_nguon", "tai lai duoc")
+    return {"seri_ok": len(SERI) - ket["loi"], "seri_loi": ket["loi"],
+            "che_do": {k: v["nhan"] for k, v in cd["che_do"].items()},
+            "ham_y": cd["ham_y"]}
+
+
+if __name__ == "__main__":
+    SO.khoi_tao()
+    print(json.dumps(mot_luot(ep="--ep" in sys.argv), ensure_ascii=False, indent=1))

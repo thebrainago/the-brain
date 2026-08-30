@@ -1,0 +1,1828 @@
+{
+  "sha": "450004aa57401ed21f7831eb4c70bfd2ad1b00d8",
+  "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/450004aa57401ed21f7831eb4c70bfd2ad1b00d8",
+  "tree": [
+    {
+      "path": ".env.example",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "18b1390b87fa089c347950c22aace8849dcb04b1",
+      "size": 4517,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/18b1390b87fa089c347950c22aace8849dcb04b1"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6e85bc9af8c4045103b2c9683670396c35489be7",
+      "size": 750,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/6e85bc9af8c4045103b2c9683670396c35489be7"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59293315a1f28a5e91c18738090e8f7aa170bca9",
+      "size": 1062,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/59293315a1f28a5e91c18738090e8f7aa170bca9"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05f7dfcfa44989ae890dab5dc68542b928e12f8b",
+      "size": 15263,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/05f7dfcfa44989ae890dab5dc68542b928e12f8b"
+    },
+    {
+      "path": "README_VI.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "06aba2b8c859153cd766b6a6ee74eafa2a105cfe",
+      "size": 23780,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/06aba2b8c859153cd766b6a6ee74eafa2a105cfe"
+    },
+    {
+      "path": "agent",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "57c8b745ea420935529fbffed06d9d6f7ade92a8",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/57c8b745ea420935529fbffed06d9d6f7ade92a8"
+    },
+    {
+      "path": "agent/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "709ced987e2e812fff2ae265ba553f9d47c05948",
+      "size": 397,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/709ced987e2e812fff2ae265ba553f9d47c05948"
+    },
+    {
+      "path": "agent/context.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d04fe53699f7bd3ea78b352eacbb7a96cc749cc5",
+      "size": 12640,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d04fe53699f7bd3ea78b352eacbb7a96cc749cc5"
+    },
+    {
+      "path": "agent/frontmatter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6a6c084981bd9dde524977abfada1549f7ddfe14",
+      "size": 1694,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/6a6c084981bd9dde524977abfada1549f7ddfe14"
+    },
+    {
+      "path": "agent/grounding.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d69021d8b43ac91bb86794c39548169c9d146264",
+      "size": 55098,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d69021d8b43ac91bb86794c39548169c9d146264"
+    },
+    {
+      "path": "agent/loop.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eb2663ef6df550ae85e312d1cd04e00f9f30581d",
+      "size": 84059,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/eb2663ef6df550ae85e312d1cd04e00f9f30581d"
+    },
+    {
+      "path": "agent/memory.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cbba50afd8e9507cb170b92fa47561847bc8841b",
+      "size": 1913,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/cbba50afd8e9507cb170b92fa47561847bc8841b"
+    },
+    {
+      "path": "agent/progress.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54b726764e2a177d5542be07d9b22ab3013e7dfb",
+      "size": 7167,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/54b726764e2a177d5542be07d9b22ab3013e7dfb"
+    },
+    {
+      "path": "agent/skills.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1a34f28999dd4698837cc45ca747eb6c36c61fd5",
+      "size": 7250,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/1a34f28999dd4698837cc45ca747eb6c36c61fd5"
+    },
+    {
+      "path": "agent/tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "807b7b39fc88776f909bb379929887f94a198224",
+      "size": 3356,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/807b7b39fc88776f909bb379929887f94a198224"
+    },
+    {
+      "path": "agent/trace.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2253ad587a5a3798e5ca1d63e5104393cd44f744",
+      "size": 15026,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/2253ad587a5a3798e5ca1d63e5104393cd44f744"
+    },
+    {
+      "path": "config",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5f7c18976fa476b8934b22b8b92c7c3b7d1f6fa9",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/5f7c18976fa476b8934b22b8b92c7c3b7d1f6fa9"
+    },
+    {
+      "path": "config/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da3ef02634774c1c9e3eeb39d6690b215ad64dde",
+      "size": 689,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/da3ef02634774c1c9e3eeb39d6690b215ad64dde"
+    },
+    {
+      "path": "config/accessor.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42c357f3d746fe7fa04af93bcd1575c4df36fbb7",
+      "size": 4606,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/42c357f3d746fe7fa04af93bcd1575c4df36fbb7"
+    },
+    {
+      "path": "config/env_schema.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0cd2976a5f5c88b70801be33f3c7d26d3ca3999d",
+      "size": 9000,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/0cd2976a5f5c88b70801be33f3c7d26d3ca3999d"
+    },
+    {
+      "path": "config/loader.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b9f707c62c20cd2f041f3ac6eaf3d7ac8117704",
+      "size": 12513,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8b9f707c62c20cd2f041f3ac6eaf3d7ac8117704"
+    },
+    {
+      "path": "config/paths.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26a6be9fb86e227450eb74277c61b8c8b465a3ff",
+      "size": 5710,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/26a6be9fb86e227450eb74277c61b8c8b465a3ff"
+    },
+    {
+      "path": "config/schema.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cc2c44189ff2b57a1e02a6442eb48cde6eddcf67",
+      "size": 1681,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/cc2c44189ff2b57a1e02a6442eb48cde6eddcf67"
+    },
+    {
+      "path": "core",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c3290714b03bae3d38e37254e26066084a951656",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/c3290714b03bae3d38e37254e26066084a951656"
+    },
+    {
+      "path": "core/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "86964dbc5b31a32bf22941a649dea6fb9f672043",
+      "size": 118,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/86964dbc5b31a32bf22941a649dea6fb9f672043"
+    },
+    {
+      "path": "core/state.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a9366b75c939344b4404ff59609ccf2304aa40b8",
+      "size": 3068,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/a9366b75c939344b4404ff59609ccf2304aa40b8"
+    },
+    {
+      "path": "data",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e592ad8627780d293d6118bdfeb7bff5f45c71cd",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/e592ad8627780d293d6118bdfeb7bff5f45c71cd"
+    },
+    {
+      "path": "data/BNBUSDT",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "58aa0f67a5aae3470e568ad6240ea514ceb709d5",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/58aa0f67a5aae3470e568ad6240ea514ceb709d5"
+    },
+    {
+      "path": "data/BNBUSDT/_metadata.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "890d40395c958b27b6704b34db06954f0f43ffad",
+      "size": 163,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/890d40395c958b27b6704b34db06954f0f43ffad"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "906b07363a29d5674cc3bd4648eea9977c8e7d82",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/906b07363a29d5674cc3bd4648eea9977c8e7d82"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8d899e00ca45a94b3ea54df8bad8ba189588ab17",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/8d899e00ca45a94b3ea54df8bad8ba189588ab17"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=01/ohlcv_binance_bnbusdt_v19.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7222e183f83672d8df34926c53a15143608b41c9",
+      "size": 1828052,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7222e183f83672d8df34926c53a15143608b41c9"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=01/ohlcv_binance_bnbusdt_v36.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2496cb24b4bcece7ad06fe925cb0b5ba3a04ee06",
+      "size": 1827868,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/2496cb24b4bcece7ad06fe925cb0b5ba3a04ee06"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=01/ohlcv_binance_bnbusdt_v53.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2496cb24b4bcece7ad06fe925cb0b5ba3a04ee06",
+      "size": 1827868,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/2496cb24b4bcece7ad06fe925cb0b5ba3a04ee06"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=01/ohlcv_binance_bnbusdt_v87.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2496cb24b4bcece7ad06fe925cb0b5ba3a04ee06",
+      "size": 1827868,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/2496cb24b4bcece7ad06fe925cb0b5ba3a04ee06"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=02",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5a11beae4b404b45c57cdd8bd6aec507acaf6043",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/5a11beae4b404b45c57cdd8bd6aec507acaf6043"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=02/ohlcv_binance_bnbusdt_v20.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c37b0577e4e09e24ca43d433c1b48a342e9e1c2",
+      "size": 1714264,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8c37b0577e4e09e24ca43d433c1b48a342e9e1c2"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=02/ohlcv_binance_bnbusdt_v37.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "04553c727cf1d4564dd7b6a3fd8553718a4e5d5e",
+      "size": 1714038,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/04553c727cf1d4564dd7b6a3fd8553718a4e5d5e"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=02/ohlcv_binance_bnbusdt_v54.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "04553c727cf1d4564dd7b6a3fd8553718a4e5d5e",
+      "size": 1714038,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/04553c727cf1d4564dd7b6a3fd8553718a4e5d5e"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=02/ohlcv_binance_bnbusdt_v88.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "04553c727cf1d4564dd7b6a3fd8553718a4e5d5e",
+      "size": 1714038,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/04553c727cf1d4564dd7b6a3fd8553718a4e5d5e"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=03",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "010857dd496e6376be750aab85a12864984d5ace",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/010857dd496e6376be750aab85a12864984d5ace"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=03/ohlcv_binance_bnbusdt_v21.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe748211555e5161b8f54dd84909e17db6257fc6",
+      "size": 1775747,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/fe748211555e5161b8f54dd84909e17db6257fc6"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=03/ohlcv_binance_bnbusdt_v38.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e91c07b90e5010e048355dc7548a34d685a32833",
+      "size": 1775580,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e91c07b90e5010e048355dc7548a34d685a32833"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=03/ohlcv_binance_bnbusdt_v55.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e91c07b90e5010e048355dc7548a34d685a32833",
+      "size": 1775580,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e91c07b90e5010e048355dc7548a34d685a32833"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=03/ohlcv_binance_bnbusdt_v89.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e91c07b90e5010e048355dc7548a34d685a32833",
+      "size": 1775580,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e91c07b90e5010e048355dc7548a34d685a32833"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=04",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c60ba4845d6363ac872bdc31850ddcf931e5facc",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/c60ba4845d6363ac872bdc31850ddcf931e5facc"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=04/ohlcv_binance_bnbusdt_v22.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4b51dcef20bbe30ecbaaf7ee7d9f135f35573ee",
+      "size": 1693963,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d4b51dcef20bbe30ecbaaf7ee7d9f135f35573ee"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=04/ohlcv_binance_bnbusdt_v39.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e0dc5132adf2571419f6b9efa54b83267d97d88",
+      "size": 1693811,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7e0dc5132adf2571419f6b9efa54b83267d97d88"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=04/ohlcv_binance_bnbusdt_v56.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e0dc5132adf2571419f6b9efa54b83267d97d88",
+      "size": 1693811,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7e0dc5132adf2571419f6b9efa54b83267d97d88"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=04/ohlcv_binance_bnbusdt_v90.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e0dc5132adf2571419f6b9efa54b83267d97d88",
+      "size": 1693811,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7e0dc5132adf2571419f6b9efa54b83267d97d88"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=05",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1aa96ccfca0a944573e3c9078be9b1ee0f4d360d",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/1aa96ccfca0a944573e3c9078be9b1ee0f4d360d"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=05/ohlcv_binance_bnbusdt_v23.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6707141a373fd4f1c48cc56d33b1eda1a81fa250",
+      "size": 1766883,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/6707141a373fd4f1c48cc56d33b1eda1a81fa250"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=05/ohlcv_binance_bnbusdt_v40.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbfddbd063e4b8e4ca8d01b94c977602a0bd0c29",
+      "size": 1766720,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/bbfddbd063e4b8e4ca8d01b94c977602a0bd0c29"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=05/ohlcv_binance_bnbusdt_v57.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbfddbd063e4b8e4ca8d01b94c977602a0bd0c29",
+      "size": 1766720,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/bbfddbd063e4b8e4ca8d01b94c977602a0bd0c29"
+    },
+    {
+      "path": "data/BNBUSDT/year=2026/month=05/ohlcv_binance_bnbusdt_v91.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbfddbd063e4b8e4ca8d01b94c977602a0bd0c29",
+      "size": 1766720,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/bbfddbd063e4b8e4ca8d01b94c977602a0bd0c29"
+    },
+    {
+      "path": "data/BTCUSDT",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d7360d0c515b9d1cba686ca7763bb605f3a1aaa3",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/d7360d0c515b9d1cba686ca7763bb605f3a1aaa3"
+    },
+    {
+      "path": "data/BTCUSDT/_metadata.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2763ab8a124fb3bf40b29f51a53a97aa326d259",
+      "size": 163,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/a2763ab8a124fb3bf40b29f51a53a97aa326d259"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a368126a1f000db37ada36b57f26c5bea9b8fc6e",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/a368126a1f000db37ada36b57f26c5bea9b8fc6e"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1012bda292be0951fabebafebfc9f1ccf5a97a04",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/1012bda292be0951fabebafebfc9f1ccf5a97a04"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=01/ohlcv_binance_btcusdt_v122.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4",
+      "size": 2277934,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=01/ohlcv_binance_btcusdt_v19.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "76a0f34be8325065079955a3c373335a8b087bce",
+      "size": 2278650,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/76a0f34be8325065079955a3c373335a8b087bce"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=01/ohlcv_binance_btcusdt_v36.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4",
+      "size": 2277934,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=01/ohlcv_binance_btcusdt_v53.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4",
+      "size": 2277934,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=01/ohlcv_binance_btcusdt_v71.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4",
+      "size": 2277934,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=01/ohlcv_binance_btcusdt_v88.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4",
+      "size": 2277934,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/fa9aa3afb391e32a2a73cf2cd8ebb1d0aa777cd4"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=02",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9f7f89cec7b25d3031358da2a5eab63068240de3",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/9f7f89cec7b25d3031358da2a5eab63068240de3"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=02/ohlcv_binance_btcusdt_v123.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1526ad1950641ed88e26838a75115f763e4120c5",
+      "size": 2146160,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/1526ad1950641ed88e26838a75115f763e4120c5"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=02/ohlcv_binance_btcusdt_v20.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "68fa4c1b1f5cfdc0f5adba21dfa169e0e22d3323",
+      "size": 2147751,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/68fa4c1b1f5cfdc0f5adba21dfa169e0e22d3323"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=02/ohlcv_binance_btcusdt_v37.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1526ad1950641ed88e26838a75115f763e4120c5",
+      "size": 2146160,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/1526ad1950641ed88e26838a75115f763e4120c5"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=02/ohlcv_binance_btcusdt_v54.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1526ad1950641ed88e26838a75115f763e4120c5",
+      "size": 2146160,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/1526ad1950641ed88e26838a75115f763e4120c5"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=02/ohlcv_binance_btcusdt_v72.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1526ad1950641ed88e26838a75115f763e4120c5",
+      "size": 2146160,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/1526ad1950641ed88e26838a75115f763e4120c5"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=02/ohlcv_binance_btcusdt_v89.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1526ad1950641ed88e26838a75115f763e4120c5",
+      "size": 2146160,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/1526ad1950641ed88e26838a75115f763e4120c5"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=03",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "30a6d8be17869c2c7ba0959092a0919a6db6ab58",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/30a6d8be17869c2c7ba0959092a0919a6db6ab58"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=03/ohlcv_binance_btcusdt_v124.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "197089afc26fd205091e763b725c08fd827e28d6",
+      "size": 2295646,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/197089afc26fd205091e763b725c08fd827e28d6"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=03/ohlcv_binance_btcusdt_v21.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d455f9718380e1910dc996fa8b9307ef8d8d08c6",
+      "size": 2296683,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d455f9718380e1910dc996fa8b9307ef8d8d08c6"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=03/ohlcv_binance_btcusdt_v38.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "197089afc26fd205091e763b725c08fd827e28d6",
+      "size": 2295646,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/197089afc26fd205091e763b725c08fd827e28d6"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=03/ohlcv_binance_btcusdt_v55.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "197089afc26fd205091e763b725c08fd827e28d6",
+      "size": 2295646,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/197089afc26fd205091e763b725c08fd827e28d6"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=03/ohlcv_binance_btcusdt_v73.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "197089afc26fd205091e763b725c08fd827e28d6",
+      "size": 2295646,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/197089afc26fd205091e763b725c08fd827e28d6"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=03/ohlcv_binance_btcusdt_v90.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "197089afc26fd205091e763b725c08fd827e28d6",
+      "size": 2295646,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/197089afc26fd205091e763b725c08fd827e28d6"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=04",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "38127842e14e7a484cce3b2ba067bff608457b44",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/38127842e14e7a484cce3b2ba067bff608457b44"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=04/ohlcv_binance_btcusdt_v125.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df4d53dd7cf64a03b556f487e2004338a09d022b",
+      "size": 2225081,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/df4d53dd7cf64a03b556f487e2004338a09d022b"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=04/ohlcv_binance_btcusdt_v22.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ee7c11c51b251f49d04f0a5b659cf8dc7e4e4ed",
+      "size": 2225778,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8ee7c11c51b251f49d04f0a5b659cf8dc7e4e4ed"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=04/ohlcv_binance_btcusdt_v39.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df4d53dd7cf64a03b556f487e2004338a09d022b",
+      "size": 2225081,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/df4d53dd7cf64a03b556f487e2004338a09d022b"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=04/ohlcv_binance_btcusdt_v56.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df4d53dd7cf64a03b556f487e2004338a09d022b",
+      "size": 2225081,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/df4d53dd7cf64a03b556f487e2004338a09d022b"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=04/ohlcv_binance_btcusdt_v74.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df4d53dd7cf64a03b556f487e2004338a09d022b",
+      "size": 2225081,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/df4d53dd7cf64a03b556f487e2004338a09d022b"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=04/ohlcv_binance_btcusdt_v91.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df4d53dd7cf64a03b556f487e2004338a09d022b",
+      "size": 2225081,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/df4d53dd7cf64a03b556f487e2004338a09d022b"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=05",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "215d0618f048eac8dbb1f932f1a4daddc4b77b14",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/215d0618f048eac8dbb1f932f1a4daddc4b77b14"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=05/ohlcv_binance_btcusdt_v126.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be2d6ad3603f18a638bbc50bc92fe705cdf5861a",
+      "size": 2233946,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/be2d6ad3603f18a638bbc50bc92fe705cdf5861a"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=05/ohlcv_binance_btcusdt_v23.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e5b2c1826005033710949820ab928629dfa4ea0c",
+      "size": 2234554,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e5b2c1826005033710949820ab928629dfa4ea0c"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=05/ohlcv_binance_btcusdt_v40.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be2d6ad3603f18a638bbc50bc92fe705cdf5861a",
+      "size": 2233946,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/be2d6ad3603f18a638bbc50bc92fe705cdf5861a"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=05/ohlcv_binance_btcusdt_v57.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be2d6ad3603f18a638bbc50bc92fe705cdf5861a",
+      "size": 2233946,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/be2d6ad3603f18a638bbc50bc92fe705cdf5861a"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=05/ohlcv_binance_btcusdt_v75.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be2d6ad3603f18a638bbc50bc92fe705cdf5861a",
+      "size": 2233946,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/be2d6ad3603f18a638bbc50bc92fe705cdf5861a"
+    },
+    {
+      "path": "data/BTCUSDT/year=2026/month=05/ohlcv_binance_btcusdt_v92.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be2d6ad3603f18a638bbc50bc92fe705cdf5861a",
+      "size": 2233946,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/be2d6ad3603f18a638bbc50bc92fe705cdf5861a"
+    },
+    {
+      "path": "data/ETHUSDT",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0a25e2d17ca7c971edc9d9b716e9e8d1ee60d4a0",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/0a25e2d17ca7c971edc9d9b716e9e8d1ee60d4a0"
+    },
+    {
+      "path": "data/ETHUSDT/_metadata.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "137dd122e02c082093e426529ea9ad92fb86bbf2",
+      "size": 163,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/137dd122e02c082093e426529ea9ad92fb86bbf2"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0db6a03129f9aae59a6e4703998e951c954cae07",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/0db6a03129f9aae59a6e4703998e951c954cae07"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a4326fb891212438aacdcbe912adb7fed7c4d64c",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/a4326fb891212438aacdcbe912adb7fed7c4d64c"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=01/ohlcv_binance_ethusdt_v19.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5be6c706cf472838002edb6cc9f5311704d8e86d",
+      "size": 2210005,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/5be6c706cf472838002edb6cc9f5311704d8e86d"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=01/ohlcv_binance_ethusdt_v36.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "061bfbd58270a1ec52312c1290f4f6b48dce3df5",
+      "size": 2208362,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/061bfbd58270a1ec52312c1290f4f6b48dce3df5"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=01/ohlcv_binance_ethusdt_v53.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "061bfbd58270a1ec52312c1290f4f6b48dce3df5",
+      "size": 2208362,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/061bfbd58270a1ec52312c1290f4f6b48dce3df5"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=01/ohlcv_binance_ethusdt_v87.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "061bfbd58270a1ec52312c1290f4f6b48dce3df5",
+      "size": 2208362,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/061bfbd58270a1ec52312c1290f4f6b48dce3df5"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=02",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7f247b8d9df6f8be97187bc1336804ef96fde39a",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/7f247b8d9df6f8be97187bc1336804ef96fde39a"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=02/ohlcv_binance_ethusdt_v20.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb8caf188faef56355b10a15b5d199a3cbcd96f6",
+      "size": 1985595,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/cb8caf188faef56355b10a15b5d199a3cbcd96f6"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=02/ohlcv_binance_ethusdt_v37.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0324cfcec0d76cd30bf833785a6267866f673ee",
+      "size": 1982675,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d0324cfcec0d76cd30bf833785a6267866f673ee"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=02/ohlcv_binance_ethusdt_v54.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0324cfcec0d76cd30bf833785a6267866f673ee",
+      "size": 1982675,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d0324cfcec0d76cd30bf833785a6267866f673ee"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=02/ohlcv_binance_ethusdt_v88.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0324cfcec0d76cd30bf833785a6267866f673ee",
+      "size": 1982675,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d0324cfcec0d76cd30bf833785a6267866f673ee"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=03",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9d1c8f93daf40d7c27eeb2871ad7a14b79c3a1c0",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/9d1c8f93daf40d7c27eeb2871ad7a14b79c3a1c0"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=03/ohlcv_binance_ethusdt_v21.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a170a99121d3c384406b71c3c837b645adbf4f80",
+      "size": 2128625,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/a170a99121d3c384406b71c3c837b645adbf4f80"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=03/ohlcv_binance_ethusdt_v38.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bc475c2848fd13f261e440c1aae69de49c47cab",
+      "size": 2126591,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/3bc475c2848fd13f261e440c1aae69de49c47cab"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=03/ohlcv_binance_ethusdt_v55.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bc475c2848fd13f261e440c1aae69de49c47cab",
+      "size": 2126591,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/3bc475c2848fd13f261e440c1aae69de49c47cab"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=03/ohlcv_binance_ethusdt_v89.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bc475c2848fd13f261e440c1aae69de49c47cab",
+      "size": 2126591,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/3bc475c2848fd13f261e440c1aae69de49c47cab"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=04",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "78f5eee75f3751a3b0372ae0b812f0dfe9fbbba2",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/78f5eee75f3751a3b0372ae0b812f0dfe9fbbba2"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=04/ohlcv_binance_ethusdt_v22.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "067adc0353f3f4eedeced542bece992a978ec83b",
+      "size": 2055598,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/067adc0353f3f4eedeced542bece992a978ec83b"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=04/ohlcv_binance_ethusdt_v39.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66e6a3e23a511f6a4c38d41c3a958cd3b5c4315c",
+      "size": 2054315,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/66e6a3e23a511f6a4c38d41c3a958cd3b5c4315c"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=04/ohlcv_binance_ethusdt_v56.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66e6a3e23a511f6a4c38d41c3a958cd3b5c4315c",
+      "size": 2054315,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/66e6a3e23a511f6a4c38d41c3a958cd3b5c4315c"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=04/ohlcv_binance_ethusdt_v90.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66e6a3e23a511f6a4c38d41c3a958cd3b5c4315c",
+      "size": 2054315,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/66e6a3e23a511f6a4c38d41c3a958cd3b5c4315c"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=05",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b091f0051c513e9d14e67e051f69f83d85e84f39",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/b091f0051c513e9d14e67e051f69f83d85e84f39"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=05/ohlcv_binance_ethusdt_v23.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "16146ba0ff6698a000eda8f717cb674366407a4d",
+      "size": 2092950,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/16146ba0ff6698a000eda8f717cb674366407a4d"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=05/ohlcv_binance_ethusdt_v40.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7bcac3f30fb486c430e7d0580e681a7638a6c9a5",
+      "size": 2092068,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7bcac3f30fb486c430e7d0580e681a7638a6c9a5"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=05/ohlcv_binance_ethusdt_v57.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7bcac3f30fb486c430e7d0580e681a7638a6c9a5",
+      "size": 2092068,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7bcac3f30fb486c430e7d0580e681a7638a6c9a5"
+    },
+    {
+      "path": "data/ETHUSDT/year=2026/month=05/ohlcv_binance_ethusdt_v91.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7bcac3f30fb486c430e7d0580e681a7638a6c9a5",
+      "size": 2092068,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7bcac3f30fb486c430e7d0580e681a7638a6c9a5"
+    },
+    {
+      "path": "data/SOLUSDT",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "911dbe8628329c979eba2f5acadec64e4a556f20",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/911dbe8628329c979eba2f5acadec64e4a556f20"
+    },
+    {
+      "path": "data/SOLUSDT/_metadata.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d2ae29a5335597cc066d0a05a656b58e49305a3b",
+      "size": 163,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d2ae29a5335597cc066d0a05a656b58e49305a3b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a7e4852ea7b5d123e68866849719721c4ac5b9cf",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/a7e4852ea7b5d123e68866849719721c4ac5b9cf"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1d997b9ebe68871d76b8e1c93ab3655a2e381dd8",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/1d997b9ebe68871d76b8e1c93ab3655a2e381dd8"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=01/ohlcv_binance_solusdt_v19.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e60570d93da3f372ddfd121749363b451b48d012",
+      "size": 1710195,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e60570d93da3f372ddfd121749363b451b48d012"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=01/ohlcv_binance_solusdt_v36.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47463019cec7f3df7c0b040f68f6baca1588821c",
+      "size": 1709822,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/47463019cec7f3df7c0b040f68f6baca1588821c"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=01/ohlcv_binance_solusdt_v53.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47463019cec7f3df7c0b040f68f6baca1588821c",
+      "size": 1709822,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/47463019cec7f3df7c0b040f68f6baca1588821c"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=01/ohlcv_binance_solusdt_v87.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47463019cec7f3df7c0b040f68f6baca1588821c",
+      "size": 1709822,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/47463019cec7f3df7c0b040f68f6baca1588821c"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=02",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d044ac1fa04c3861f87af68e5d3516bd9343edb1",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/d044ac1fa04c3861f87af68e5d3516bd9343edb1"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=02/ohlcv_binance_solusdt_v20.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0ff7001e6aa54b36777054e5245c003bad369dbc",
+      "size": 1546144,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/0ff7001e6aa54b36777054e5245c003bad369dbc"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=02/ohlcv_binance_solusdt_v37.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26c8f85a39aec4fbccf5c675610f572eb522c85b",
+      "size": 1545705,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/26c8f85a39aec4fbccf5c675610f572eb522c85b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=02/ohlcv_binance_solusdt_v54.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26c8f85a39aec4fbccf5c675610f572eb522c85b",
+      "size": 1545705,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/26c8f85a39aec4fbccf5c675610f572eb522c85b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=02/ohlcv_binance_solusdt_v88.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26c8f85a39aec4fbccf5c675610f572eb522c85b",
+      "size": 1545705,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/26c8f85a39aec4fbccf5c675610f572eb522c85b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=03",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2820656ef1d86c1799740460bc5309696ea2121b",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/2820656ef1d86c1799740460bc5309696ea2121b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=03/ohlcv_binance_solusdt_v21.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "290a46ae69bc7ecc50227eba962526fdf5de59af",
+      "size": 1652795,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/290a46ae69bc7ecc50227eba962526fdf5de59af"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=03/ohlcv_binance_solusdt_v38.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d26a1c40c7379a3c0be2c9413c871757aea4f6ce",
+      "size": 1652436,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d26a1c40c7379a3c0be2c9413c871757aea4f6ce"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=03/ohlcv_binance_solusdt_v55.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d26a1c40c7379a3c0be2c9413c871757aea4f6ce",
+      "size": 1652436,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d26a1c40c7379a3c0be2c9413c871757aea4f6ce"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=03/ohlcv_binance_solusdt_v89.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d26a1c40c7379a3c0be2c9413c871757aea4f6ce",
+      "size": 1652436,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d26a1c40c7379a3c0be2c9413c871757aea4f6ce"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=04",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d6bc7b05ec88de98d19c38f05f57a299de356d30",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/d6bc7b05ec88de98d19c38f05f57a299de356d30"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=04/ohlcv_binance_solusdt_v22.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b30d79322d7842b271506b26247d76d8d0d837b7",
+      "size": 1584687,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/b30d79322d7842b271506b26247d76d8d0d837b7"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=04/ohlcv_binance_solusdt_v39.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8cdaf2b42b908e3094f6f0c3c7448d5c5b03d84b",
+      "size": 1584427,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8cdaf2b42b908e3094f6f0c3c7448d5c5b03d84b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=04/ohlcv_binance_solusdt_v56.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8cdaf2b42b908e3094f6f0c3c7448d5c5b03d84b",
+      "size": 1584427,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8cdaf2b42b908e3094f6f0c3c7448d5c5b03d84b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=04/ohlcv_binance_solusdt_v90.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8cdaf2b42b908e3094f6f0c3c7448d5c5b03d84b",
+      "size": 1584427,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8cdaf2b42b908e3094f6f0c3c7448d5c5b03d84b"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=05",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2d34d6692d8f7d58d714dc9e4701b6f4cc1133f3",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/2d34d6692d8f7d58d714dc9e4701b6f4cc1133f3"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=05/ohlcv_binance_solusdt_v23.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f78e93adcf2a75ed42ac4576c961af5c8212d259",
+      "size": 1649547,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/f78e93adcf2a75ed42ac4576c961af5c8212d259"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=05/ohlcv_binance_solusdt_v40.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a0b521c3a99fb104f7de91ac70f44d30dc58882",
+      "size": 1649317,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8a0b521c3a99fb104f7de91ac70f44d30dc58882"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=05/ohlcv_binance_solusdt_v57.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a0b521c3a99fb104f7de91ac70f44d30dc58882",
+      "size": 1649317,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8a0b521c3a99fb104f7de91ac70f44d30dc58882"
+    },
+    {
+      "path": "data/SOLUSDT/year=2026/month=05/ohlcv_binance_solusdt_v91.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a0b521c3a99fb104f7de91ac70f44d30dc58882",
+      "size": 1649317,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8a0b521c3a99fb104f7de91ac70f44d30dc58882"
+    },
+    {
+      "path": "data/XRPUSDT",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "192016af74445b8559ebf6f42665dda12f181f83",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/192016af74445b8559ebf6f42665dda12f181f83"
+    },
+    {
+      "path": "data/XRPUSDT/_metadata.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d64e6cbf84d7b2dad8b4d4aaac03892445ecbe88",
+      "size": 163,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d64e6cbf84d7b2dad8b4d4aaac03892445ecbe88"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b2aa10ebf57711fb36e81bb566082e6931911ceb",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/b2aa10ebf57711fb36e81bb566082e6931911ceb"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "561c0d54e8b508ac4be053e59ad14697c2ff83de",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/561c0d54e8b508ac4be053e59ad14697c2ff83de"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=01/ohlcv_binance_xrpusdt_v19.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ec48b39aaa3b90873b67100236d96fd1768b767b",
+      "size": 1827162,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/ec48b39aaa3b90873b67100236d96fd1768b767b"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=01/ohlcv_binance_xrpusdt_v36.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f51b03cf3540bec695d737a07ee1df01bafdc461",
+      "size": 1826879,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/f51b03cf3540bec695d737a07ee1df01bafdc461"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=01/ohlcv_binance_xrpusdt_v53.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f51b03cf3540bec695d737a07ee1df01bafdc461",
+      "size": 1826879,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/f51b03cf3540bec695d737a07ee1df01bafdc461"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=01/ohlcv_binance_xrpusdt_v87.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f51b03cf3540bec695d737a07ee1df01bafdc461",
+      "size": 1826879,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/f51b03cf3540bec695d737a07ee1df01bafdc461"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=02",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e7519dbe6b9988a67d6363ca2cecae0b7e3ef809",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/e7519dbe6b9988a67d6363ca2cecae0b7e3ef809"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=02/ohlcv_binance_xrpusdt_v20.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "30292347fbd60f33d91078d5963cb74510344431",
+      "size": 1605675,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/30292347fbd60f33d91078d5963cb74510344431"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=02/ohlcv_binance_xrpusdt_v37.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d045998ad14f70350c758e440134dedb0648d3c1",
+      "size": 1605324,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d045998ad14f70350c758e440134dedb0648d3c1"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=02/ohlcv_binance_xrpusdt_v54.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d045998ad14f70350c758e440134dedb0648d3c1",
+      "size": 1605324,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d045998ad14f70350c758e440134dedb0648d3c1"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=02/ohlcv_binance_xrpusdt_v88.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d045998ad14f70350c758e440134dedb0648d3c1",
+      "size": 1605324,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d045998ad14f70350c758e440134dedb0648d3c1"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=03",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "74c8ad67aa4c4c1cb9a2935627d4fe1de52c3c65",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/74c8ad67aa4c4c1cb9a2935627d4fe1de52c3c65"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=03/ohlcv_binance_xrpusdt_v21.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ee50c06da4f3d96b3a03ee526d9f6c465e7df10d",
+      "size": 1695581,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/ee50c06da4f3d96b3a03ee526d9f6c465e7df10d"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=03/ohlcv_binance_xrpusdt_v38.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e5933a942a37ce5a0d5100cf128455b5ddc12af",
+      "size": 1695360,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/0e5933a942a37ce5a0d5100cf128455b5ddc12af"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=03/ohlcv_binance_xrpusdt_v55.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e5933a942a37ce5a0d5100cf128455b5ddc12af",
+      "size": 1695360,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/0e5933a942a37ce5a0d5100cf128455b5ddc12af"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=03/ohlcv_binance_xrpusdt_v89.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e5933a942a37ce5a0d5100cf128455b5ddc12af",
+      "size": 1695360,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/0e5933a942a37ce5a0d5100cf128455b5ddc12af"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=04",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "deab8b64b46cf0fc194007bf70ce5c22b7f92f25",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/deab8b64b46cf0fc194007bf70ce5c22b7f92f25"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=04/ohlcv_binance_xrpusdt_v22.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "136e42790e50b3699df5b83ec6e527708f077c99",
+      "size": 1634913,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/136e42790e50b3699df5b83ec6e527708f077c99"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=04/ohlcv_binance_xrpusdt_v39.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54f54022de04f2fb7e10018f1c2a565013d8aff3",
+      "size": 1634771,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/54f54022de04f2fb7e10018f1c2a565013d8aff3"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=04/ohlcv_binance_xrpusdt_v56.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54f54022de04f2fb7e10018f1c2a565013d8aff3",
+      "size": 1634771,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/54f54022de04f2fb7e10018f1c2a565013d8aff3"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=04/ohlcv_binance_xrpusdt_v90.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54f54022de04f2fb7e10018f1c2a565013d8aff3",
+      "size": 1634771,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/54f54022de04f2fb7e10018f1c2a565013d8aff3"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=05",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4b6dae3ba16fce89bfcbaefa2db45bd537b224cb",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/4b6dae3ba16fce89bfcbaefa2db45bd537b224cb"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=05/ohlcv_binance_xrpusdt_v23.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a1ac613e9cd42a0d3b09ff0b4339614af5f96db4",
+      "size": 1695126,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/a1ac613e9cd42a0d3b09ff0b4339614af5f96db4"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=05/ohlcv_binance_xrpusdt_v40.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3fd7e9d5d099c1ff210cb8d3e6ee788af2b53389",
+      "size": 1694943,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/3fd7e9d5d099c1ff210cb8d3e6ee788af2b53389"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=05/ohlcv_binance_xrpusdt_v57.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3fd7e9d5d099c1ff210cb8d3e6ee788af2b53389",
+      "size": 1694943,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/3fd7e9d5d099c1ff210cb8d3e6ee788af2b53389"
+    },
+    {
+      "path": "data/XRPUSDT/year=2026/month=05/ohlcv_binance_xrpusdt_v91.parquet",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3fd7e9d5d099c1ff210cb8d3e6ee788af2b53389",
+      "size": 1694943,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/3fd7e9d5d099c1ff210cb8d3e6ee788af2b53389"
+    },
+    {
+      "path": "goal",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8257f1212e391a9acce65e0d28295a11bac15434",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/8257f1212e391a9acce65e0d28295a11bac15434"
+    },
+    {
+      "path": "goal/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d9f0271271c32e145ddc41f958456539e97519b4",
+      "size": 602,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d9f0271271c32e145ddc41f958456539e97519b4"
+    },
+    {
+      "path": "goal/context.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f19a5d2cec8d022c1fed51f57821cebb40de6f1",
+      "size": 3705,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/9f19a5d2cec8d022c1fed51f57821cebb40de6f1"
+    },
+    {
+      "path": "goal/models.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1adb58b2d132913ff165a5f241cb46d71751153a",
+      "size": 4132,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/1adb58b2d132913ff165a5f241cb46d71751153a"
+    },
+    {
+      "path": "goal/policy.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "40e23b074e91b7af103b271bb91641fbc7a598bf",
+      "size": 2634,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/40e23b074e91b7af103b271bb91641fbc7a598bf"
+    },
+    {
+      "path": "goal/store.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "241f2da91bf3880c9db3b5f449d802bc5e003847",
+      "size": 40546,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/241f2da91bf3880c9db3b5f449d802bc5e003847"
+    },
+    {
+      "path": "hypotheses_report.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9803b656d68da1ed32e91f253cc06228b7aa66b4",
+      "size": 2980,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/9803b656d68da1ed32e91f253cc06228b7aa66b4"
+    },
+    {
+      "path": "memory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b57997370f7a3efc271f47ef2028e7c57fba13b8",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/b57997370f7a3efc271f47ef2028e7c57fba13b8"
+    },
+    {
+      "path": "memory/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a13743ff1efcee37e60bae676ec75e4f752bdfc",
+      "size": 97,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/3a13743ff1efcee37e60bae676ec75e4f752bdfc"
+    },
+    {
+      "path": "memory/compression.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a976906bc978a6362c7cddeb0b237d339b058a36",
+      "size": 13748,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/a976906bc978a6362c7cddeb0b237d339b058a36"
+    },
+    {
+      "path": "memory/hierarchy.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f87baa0fb53a55bc0c9a613ed19d23d6bf934a53",
+      "size": 14490,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/f87baa0fb53a55bc0c9a613ed19d23d6bf934a53"
+    },
+    {
+      "path": "memory/lifecycle.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b38224fc3efb6d5d78efa0abb4088b1ff23cf859",
+      "size": 16508,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/b38224fc3efb6d5d78efa0abb4088b1ff23cf859"
+    },
+    {
+      "path": "memory/persistent.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "921ebdd2699cfccadf2e2df7bda88c9f098c2f9f",
+      "size": 25270,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/921ebdd2699cfccadf2e2df7bda88c9f098c2f9f"
+    },
+    {
+      "path": "memory/search_index.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "70a92846d18c53581888319a2dd80bc099f7411b",
+      "size": 17780,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/70a92846d18c53581888319a2dd80bc099f7411b"
+    },
+    {
+      "path": "memory/semantic_links.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "82f27d5f73d71de6c4e947d722e31bf1d1427322",
+      "size": 12002,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/82f27d5f73d71de6c4e947d722e31bf1d1427322"
+    },
+    {
+      "path": "models",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "338d004471756e50bff79b3490b4c48381e10525",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/338d004471756e50bff79b3490b4c48381e10525"
+    },
+    {
+      "path": "models/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "88a72a441ac15edc1cc6dc39d605add8f4cca351",
+      "size": 444,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/88a72a441ac15edc1cc6dc39d605add8f4cca351"
+    },
+    {
+      "path": "models/models.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c1ab411f6e51a1b145ab5eacfafa1065ca78bd3e",
+      "size": 6351,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/c1ab411f6e51a1b145ab5eacfafa1065ca78bd3e"
+    },
+    {
+      "path": "preflight.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e7ea3589cc58ab755b2430d21c864e954ecc502f",
+      "size": 4414,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e7ea3589cc58ab755b2430d21c864e954ecc502f"
+    },
+    {
+      "path": "providers",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "697ab500eb11e80d4d154f6b1331ec0b05b61dcf",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/697ab500eb11e80d4d154f6b1331ec0b05b61dcf"
+    },
+    {
+      "path": "providers/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9c92559133a9eaf04c3bf1f6f08052c97518dbf",
+      "size": 876,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e9c92559133a9eaf04c3bf1f6f08052c97518dbf"
+    },
+    {
+      "path": "providers/chat.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0485c82fcdcf558c8db210341fc8cb678bd76313",
+      "size": 24273,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/0485c82fcdcf558c8db210341fc8cb678bd76313"
+    },
+    {
+      "path": "providers/content_filter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c9c6c7675a1d4c519b446fb5202d5a5ab5e0236b",
+      "size": 3514,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/c9c6c7675a1d4c519b446fb5202d5a5ab5e0236b"
+    },
+    {
+      "path": "providers/llm.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "822f4b702f4221e3bc235c43b5dfbf2bda01013d",
+      "size": 7693,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/822f4b702f4221e3bc235c43b5dfbf2bda01013d"
+    },
+    {
+      "path": "requirements.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d627aad78ba14fc7b89980a6fd0b8558e30f90d6",
+      "size": 334,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d627aad78ba14fc7b89980a6fd0b8558e30f90d6"
+    },
+    {
+      "path": "run_ohlc_anomaly_hypothesis.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "974824045a6be5d3121cff4186fd4cc65ccb829d",
+      "size": 4797,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/974824045a6be5d3121cff4186fd4cc65ccb829d"
+    },
+    {
+      "path": "skills",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a54a0b72a492e8b2f094124d0816480401dddb59",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/a54a0b72a492e8b2f094124d0816480401dddb59"
+    },
+    {
+      "path": "skills/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a96e02eef2485a7f7732015b23c130837f34fa2f",
+      "size": 28,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/a96e02eef2485a7f7732015b23c130837f34fa2f"
+    },
+    {
+      "path": "skills/alpha-hypothesis-writer",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "eb0a77df7396bd10851266d312e9be5daa84ead5",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/eb0a77df7396bd10851266d312e9be5daa84ead5"
+    },
+    {
+      "path": "skills/alpha-hypothesis-writer/SKILL.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94aa49fc6eb4ec448c49d23b217775c26a0f195b",
+      "size": 16716,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/94aa49fc6eb4ec448c49d23b217775c26a0f195b"
+    },
+    {
+      "path": "skills/anomaly-scan-protocol",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "dc965356ef27722cb4251d1f20a287c0619a64b9",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/dc965356ef27722cb4251d1f20a287c0619a64b9"
+    },
+    {
+      "path": "skills/anomaly-scan-protocol/SKILL.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "960a55903107025d63b619f8b65bf08e6370a376",
+      "size": 9819,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/960a55903107025d63b619f8b65bf08e6370a376"
+    },
+    {
+      "path": "skills/evidence-citation-protocol",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8c031974382961f95ea38f4be652f4288096a5a8",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/8c031974382961f95ea38f4be652f4288096a5a8"
+    },
+    {
+      "path": "skills/evidence-citation-protocol/SKILL.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "07de6b0db37152a3d109976b76d4162f2e96f635",
+      "size": 9586,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/07de6b0db37152a3d109976b76d4162f2e96f635"
+    },
+    {
+      "path": "skills/tool-surface-and-limits",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "337829b68a17afbb49d59f9491e6c41bd14efc1e",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/337829b68a17afbb49d59f9491e6c41bd14efc1e"
+    },
+    {
+      "path": "skills/tool-surface-and-limits/SKILL.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ddca1a1f9efa2a84d40530d6d192ee0e6169c9e0",
+      "size": 2065,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/ddca1a1f9efa2a84d40530d6d192ee0e6169c9e0"
+    },
+    {
+      "path": "swarm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "deaef757c6889b133fdfc62a2aa3c04a4a50eb0c",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/deaef757c6889b133fdfc62a2aa3c04a4a50eb0c"
+    },
+    {
+      "path": "swarm/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62e312be969554cbe8005671d2a2ebc8f699e071",
+      "size": 786,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/62e312be969554cbe8005671d2a2ebc8f699e071"
+    },
+    {
+      "path": "swarm/models.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c8499b6076ea5fe77ae2c4e14a64202e6301a2f7",
+      "size": 8369,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/c8499b6076ea5fe77ae2c4e14a64202e6301a2f7"
+    },
+    {
+      "path": "swarm/presets.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8564854adf7e42b820ce56fb30001ddd9daf5457",
+      "size": 13193,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/8564854adf7e42b820ce56fb30001ddd9daf5457"
+    },
+    {
+      "path": "swarm/presets",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "540b2f7085e0d02305a5c5fdd9003409d43ae376",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/540b2f7085e0d02305a5c5fdd9003409d43ae376"
+    },
+    {
+      "path": "swarm/presets/code_analysis_team.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9013a48301fa6072cfcdc20a2ff15fb5a4440aa3",
+      "size": 6729,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/9013a48301fa6072cfcdc20a2ff15fb5a4440aa3"
+    },
+    {
+      "path": "swarm/presets/decision_making_team.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4f8a85c67893d80737047949ccb884c2654b1a8",
+      "size": 6921,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/d4f8a85c67893d80737047949ccb884c2654b1a8"
+    },
+    {
+      "path": "swarm/presets/general_research_team.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7164889d91d7ea347be1ff792600a23345467e38",
+      "size": 6776,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/7164889d91d7ea347be1ff792600a23345467e38"
+    },
+    {
+      "path": "swarm/runtime.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cd6136d6724be714c51b739ff428a5bd868e8cb1",
+      "size": 27482,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/cd6136d6724be714c51b739ff428a5bd868e8cb1"
+    },
+    {
+      "path": "swarm/serialization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0ed7d87db7934b2b6e8ab25a8e170f6cf5925036",
+      "size": 2117,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/0ed7d87db7934b2b6e8ab25a8e170f6cf5925036"
+    },
+    {
+      "path": "swarm/store.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7ebfefdece47646ba796df0a905bd0fe1167d03",
+      "size": 20477,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/c7ebfefdece47646ba796df0a905bd0fe1167d03"
+    },
+    {
+      "path": "swarm/task_store.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b52590a63fbcd8655766939c22358449bd2a0098",
+      "size": 9398,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/b52590a63fbcd8655766939c22358449bd2a0098"
+    },
+    {
+      "path": "swarm/worker.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c36e0c6443370b84f652f67b8c33ed02e0ba2152",
+      "size": 39620,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/c36e0c6443370b84f652f67b8c33ed02e0ba2152"
+    },
+    {
+      "path": "tools",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "06876048f84fd8a0559535d2705ab850fbb5a0ac",
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/trees/06876048f84fd8a0559535d2705ab850fbb5a0ac"
+    },
+    {
+      "path": "tools/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "45583f852ad76ec894c57d5556b2e93131264370",
+      "size": 6458,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/45583f852ad76ec894c57d5556b2e93131264370"
+    },
+    {
+      "path": "tools/file_tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "07bd0df953ac419f7dda1ed296e53b58e1649835",
+      "size": 7599,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/07bd0df953ac419f7dda1ed296e53b58e1649835"
+    },
+    {
+      "path": "tools/ohlc_anomaly_hypothesis_tool.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "184e5b105a9417b721f9a0689b2ec90ea20d04a2",
+      "size": 37320,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/184e5b105a9417b721f9a0689b2ec90ea20d04a2"
+    },
+    {
+      "path": "tools/path_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4410458fefb16efdbd87aee8bd781f06fdc1546",
+      "size": 11718,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/f4410458fefb16efdbd87aee8bd781f06fdc1546"
+    },
+    {
+      "path": "tools/redaction.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e6805a10c9ee134795573caae89733a906b5a36c",
+      "size": 21870,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/e6805a10c9ee134795573caae89733a906b5a36c"
+    },
+    {
+      "path": "tools/remember_tool.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5cdd1c7747417b98502c17562e4afd295d2cbf99",
+      "size": 6748,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/5cdd1c7747417b98502c17562e4afd295d2cbf99"
+    },
+    {
+      "path": "tools/skill_tool.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "79af58b23f0ea90e89b04e77475c350464fff0ba",
+      "size": 2653,
+      "url": "https://api.github.com/repos/PVinh-Quant/pseud/git/blobs/79af58b23f0ea90e89b04e77475c350464fff0ba"
+    }
+  ],
+  "truncated": false
+}

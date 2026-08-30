@@ -1,0 +1,93 @@
+{
+  "du_an": "The Brain",
+  "ban_giao_luc": "2026-08-13 22:23:48",
+  "doc_tiep": [
+    "lab/BAN_GIAO.json",
+    "lab/BO_NHO.md",
+    "lab/HANDOFF.md",
+    "CLAUDE.md"
+  ],
+  "code_moi": [
+    "lab/seeker_quy_tac.py",
+    "lab/ket_hop_3_tru.py",
+    "lab/mt5_chay_ichimoku.py",
+    "MT5:.\\MQL5\\Experts\\EA_IchimokuCross.mq5"
+  ],
+  "viec_tiep": [
+    "[CHUA BẬT 24/7 - CAN USER GAT] Tao Task Scheduler BrainWatchdog (tu khoi dong lai) + chay nền quan_li_quet.py & bo_nao.py BANG DUNG venv sp500_env",
+    "Banker: ap nang cap DGS2 (duong cong 10y-2y) + lich cap nhat seri + nguon VND du phong (open.er-api). LUU Y: banker.py da DUOC KHOI PHUC ve ban goc (bi clobber trong phien) - chua ap cac nang cap do",
+    "Quantlab: viet cau noi Quantlab->BRAIN (tu dong dang ky co_che + task coder khi co che vuot buy&hold, doc quant/ket_qua_all.json)",
+    "Seeker theo doi: sau khi bang cong_dong co du lieu hay chay 'python seeker_theo_doi.py --duyet' de tu dong nang ca nhan/nhom tot vao theo doi",
+    "Cosmetic: BAN_GIAO_HOM_NAY.md phan snapshot path dang dung dấu \\ (nen dung /) - voi thoi"
+  ],
+  "state": {
+    "huong": {
+      "seeker": "DA LAM: seeker_theo_doi.py (theo doi ca nhan/nhom + quet lai hang ngay) + noi vao lich quan_li_quet (24h). Da test thuc: them 2 follow, quet ve 8 bai YouTube da co URL video.",
+      "quantlab": "CHUA lam cau noi. San co: quant/ket_qua_all.json (co_che A/B/C/D tren SP500/Vang/EURUSD), ket_hop_hoc.json. Chi co B_Ichimoku_Chikou_DI EURUSD vuot buy&hold (KET_QUA.md).",
+      "banker": "banker.py bi GHI DE NHAM thanh 'MISS' trong phien -> DA KHOI PHUC ban goc (13.9KB, da xac minh chay dung: import 7 ham + --xem-lich OK). CHUA ap nang cap moi."
+    },
+    "24h": "HIEN KHONG co tien trinh python nao chay. Task BrainWatchdog KHONG ton tai. Lich quan_li_quet dung tu 2026-08-12 21:35; bo_nao tu 2026-08-11. Can user bat de chay 24/7 that (dung sp500_env, khong phai C:\\Python314).",
+    "sinh_truoc": "Trong phien da xay duong: AGENTS.md (tru nho dau phien), lab/chuyen_giao.py + CHUYEN_GIAO.bat (ban giao + snapshot theo ngay)."
+  },
+  "mt5_gate": {
+    "loi": -82.47,
+    "dd": 123.81,
+    "pf": 0.73,
+    "sharpe": -1.13,
+    "lenh": 99,
+    "symbol": "EURUSD",
+    "khung": "D1",
+    "thoi_gian": "2016-2026",
+    "ket_luan": "TRUOT o MT5 tick gate: vao lenh o tick mo nen sau (khong phai close nen) mat edge"
+  },
+  "cap_nhat_luc": "2026-08-12 20:50:25",
+  "reddit": {
+    "trang_thai": "DA THONG qua Playwright/nhan-su mo phong (JSON API bi 403)",
+    "luong": "quan_li_quet._chay_reddit -> nguon_reddit_sim.py (bin python)",
+    "ket_qua": "280 bai, them moi 176"
+  },
+  "evolution": {
+    "bot": "evolution.py chay that",
+    "them_vi_mo": 41,
+    "them_dang_doi": 67,
+    "bank": {
+      "vi_mo": 147,
+      "dang_doi": 543
+    }
+  },
+  "mo_dun_moi": [
+    "doc_web_moi.py (requests->Playwright fallback)",
+    "simulator_nguoi.py (mo phong thao tac nguoi dung, vao duoc reddit)",
+    "nguon_reddit_sim.py (reddit qua trinh duyet)",
+    "seeker_deep.py",
+    "seeker_quy_tac.py",
+    "ket_hop_3_tru.py (3 tru song song)"
+  ],
+  "live": {
+    "luc": "2026-08-13 22:23:48",
+    "snapshot": "lab\\reports\\chuyen_giao\\2026-08-13",
+    "brain_24h": {
+      "nhip_tim": "2026-08-09T23:30:01",
+      "trang_thai": "nghi",
+      "hang_doi": {
+        "cho": 12
+      },
+      "viec_loi": [
+        "quet_arxiv",
+        "quet_github",
+        "quet_huggingface",
+        "quet_reddit",
+        "quet_rss",
+        "quet_darwinex",
+        "quet_myfxbook",
+        "do_chi_phi_mt5"
+      ]
+    },
+    "bo_nao_cong_viec": {
+      "BO": 76,
+      "CHO": 725,
+      "XONG": 139
+    }
+  },
+  "luu_luc": "2026-08-14 00:16:42"
+}

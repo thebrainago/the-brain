@@ -1,0 +1,9 @@
+﻿python.exe : C:\Users\SV STORE\Downloads\Research SP500\lab\chuyen_giao.py:14: SyntaxWarning: "\P" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\P"? A raw string 
+is also an option.
+At line:2 char:1
++ python.exe chuyen_giao.py --snap *> snap_log.txt 2>&1; Write-Output " ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\SV STO...also an option.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Chi dung thu vien chuan (stdio) -> chay duoc bang bat cu python nao (ca C:\Python314).

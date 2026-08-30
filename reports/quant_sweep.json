@@ -1,0 +1,1170 @@
+{
+ "luc": "2026-08-14 23:33:19",
+ "cap": [
+  "AUDCAD",
+  "AUDCHF",
+  "AUDNZD",
+  "EURCAD",
+  "EURGBP",
+  "EURNZD",
+  "GBPCAD",
+  "NZDCAD"
+ ],
+ "workers": 6,
+ "jobs": 128,
+ "giay": 1621.8,
+ "ket_qua": [
+  {
+   "cap": "AUDCAD",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": 272.2,
+   "ls": 10.285,
+   "cat_nam": 0.447,
+   "lenh_tuan": 101.3
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": 194.4,
+   "ls": 6.813,
+   "cat_nam": 0.447,
+   "lenh_tuan": 111.6
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": 160.7,
+   "ls": 5.442,
+   "cat_nam": 0.298,
+   "lenh_tuan": 71.9
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": 131.8,
+   "ls": 5.802,
+   "cat_nam": 0.223,
+   "lenh_tuan": 33.3
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": 116.1,
+   "ls": 3.971,
+   "cat_nam": 0.372,
+   "lenh_tuan": 63.8
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": 93.4,
+   "ls": 2.988,
+   "cat_nam": 0.447,
+   "lenh_tuan": 124.8
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": 92.0,
+   "ls": 4.01,
+   "cat_nam": 0.223,
+   "lenh_tuan": 37.8
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": 2.5,
+   "ls": 0.053,
+   "cat_nam": 0.372,
+   "lenh_tuan": 50.0
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": -6.0,
+   "ls": -0.164,
+   "cat_nam": 0.447,
+   "lenh_tuan": 136.9
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": -6.0,
+   "ls": -0.134,
+   "cat_nam": 0.372,
+   "lenh_tuan": 80.1
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": -9.0,
+   "ls": -0.239,
+   "cat_nam": 0.298,
+   "lenh_tuan": 88.8
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": -11.0,
+   "ls": -0.33,
+   "cat_nam": 0.298,
+   "lenh_tuan": 43.9
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": -27.3,
+   "ls": -0.625,
+   "cat_nam": 0.372,
+   "lenh_tuan": 43.5
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -48.4,
+   "ls": -1.18,
+   "cat_nam": 0.298,
+   "lenh_tuan": 63.0
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": -87.5,
+   "ls": -1.785,
+   "cat_nam": 0.372,
+   "lenh_tuan": 55.8
+  },
+  {
+   "cap": "AUDCAD",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": -89.1,
+   "ls": -2.483,
+   "cat_nam": 0.298,
+   "lenh_tuan": 48.8
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": 155.3,
+   "ls": 7.255,
+   "cat_nam": 0.149,
+   "lenh_tuan": 28.5
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": 135.8,
+   "ls": 5.03,
+   "cat_nam": 0.223,
+   "lenh_tuan": 54.0
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": 66.2,
+   "ls": 1.955,
+   "cat_nam": 0.223,
+   "lenh_tuan": 42.7
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": 54.0,
+   "ls": 2.522,
+   "cat_nam": 0.149,
+   "lenh_tuan": 36.6
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": 24.0,
+   "ls": 0.924,
+   "cat_nam": 0.223,
+   "lenh_tuan": 32.9
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": 22.1,
+   "ls": 0.776,
+   "cat_nam": 0.223,
+   "lenh_tuan": 60.3
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": 1.4,
+   "ls": 0.044,
+   "cat_nam": 0.223,
+   "lenh_tuan": 67.4
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": -3.9,
+   "ls": -0.113,
+   "cat_nam": 0.223,
+   "lenh_tuan": 47.8
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": -66.7,
+   "ls": -2.917,
+   "cat_nam": 0.223,
+   "lenh_tuan": 41.7
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -66.9,
+   "ls": -1.925,
+   "cat_nam": 0.223,
+   "lenh_tuan": 54.1
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": -70.8,
+   "ls": -1.718,
+   "cat_nam": 0.52,
+   "lenh_tuan": 84.8
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": -75.7,
+   "ls": -2.236,
+   "cat_nam": 0.371,
+   "lenh_tuan": 36.8
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": -162.0,
+   "ls": -3.304,
+   "cat_nam": 0.297,
+   "lenh_tuan": 73.8
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": -250.3,
+   "ls": -4.271,
+   "cat_nam": 0.594,
+   "lenh_tuan": 96.3
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": -316.8,
+   "ls": -5.088,
+   "cat_nam": 0.52,
+   "lenh_tuan": 105.0
+  },
+  {
+   "cap": "AUDCHF",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": -508.4,
+   "ls": -6.187,
+   "cat_nam": 0.594,
+   "lenh_tuan": 115.9
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": -100.0,
+   "ls": -3.19,
+   "cat_nam": 0.371,
+   "lenh_tuan": 58.7
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": -101.7,
+   "ls": -3.419,
+   "cat_nam": 0.297,
+   "lenh_tuan": 28.3
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": -147.4,
+   "ls": -4.59,
+   "cat_nam": 0.297,
+   "lenh_tuan": 34.2
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": -183.3,
+   "ls": -5.164,
+   "cat_nam": 0.371,
+   "lenh_tuan": 64.5
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": -205.0,
+   "ls": -5.963,
+   "cat_nam": 0.297,
+   "lenh_tuan": 38.8
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": -209.2,
+   "ls": -5.322,
+   "cat_nam": 0.446,
+   "lenh_tuan": 39.2
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": -248.5,
+   "ls": -5.671,
+   "cat_nam": 0.52,
+   "lenh_tuan": 91.7
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": -258.4,
+   "ls": -6.176,
+   "cat_nam": 0.297,
+   "lenh_tuan": 51.6
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": -270.4,
+   "ls": -5.617,
+   "cat_nam": 0.446,
+   "lenh_tuan": 103.4
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": -283.7,
+   "ls": -6.473,
+   "cat_nam": 0.371,
+   "lenh_tuan": 73.4
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": -293.5,
+   "ls": -5.77,
+   "cat_nam": 0.446,
+   "lenh_tuan": 44.9
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": -303.4,
+   "ls": -6.433,
+   "cat_nam": 0.297,
+   "lenh_tuan": 43.3
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -410.9,
+   "ls": -6.929,
+   "cat_nam": 0.371,
+   "lenh_tuan": 56.8
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": -484.5,
+   "ls": -7.176,
+   "cat_nam": 0.52,
+   "lenh_tuan": 113.6
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": -580.8,
+   "ls": -7.1,
+   "cat_nam": 0.52,
+   "lenh_tuan": 80.9
+  },
+  {
+   "cap": "AUDNZD",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": -688.0,
+   "ls": -7.258,
+   "cat_nam": 0.52,
+   "lenh_tuan": 126.4
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": 1078.2,
+   "ls": 36.148,
+   "cat_nam": 1.262,
+   "lenh_tuan": 208.6
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": 921.1,
+   "ls": 31.241,
+   "cat_nam": 1.41,
+   "lenh_tuan": 232.7
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": 759.2,
+   "ls": 23.36,
+   "cat_nam": 1.41,
+   "lenh_tuan": 259.5
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": 728.7,
+   "ls": 25.086,
+   "cat_nam": 0.89,
+   "lenh_tuan": 163.1
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": 724.9,
+   "ls": 24.894,
+   "cat_nam": 1.039,
+   "lenh_tuan": 129.1
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": 620.8,
+   "ls": 17.002,
+   "cat_nam": 1.336,
+   "lenh_tuan": 283.4
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": 590.5,
+   "ls": 21.29,
+   "cat_nam": 0.668,
+   "lenh_tuan": 68.7
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": 569.8,
+   "ls": 19.369,
+   "cat_nam": 1.113,
+   "lenh_tuan": 143.6
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": 527.9,
+   "ls": 18.921,
+   "cat_nam": 0.668,
+   "lenh_tuan": 78.0
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": 510.1,
+   "ls": 19.329,
+   "cat_nam": 0.965,
+   "lenh_tuan": 91.5
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": 431.3,
+   "ls": 15.763,
+   "cat_nam": 0.668,
+   "lenh_tuan": 88.2
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": 358.9,
+   "ls": 12.863,
+   "cat_nam": 1.039,
+   "lenh_tuan": 102.6
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": 357.7,
+   "ls": 12.218,
+   "cat_nam": 1.113,
+   "lenh_tuan": 178.9
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": 270.8,
+   "ls": 8.047,
+   "cat_nam": 0.742,
+   "lenh_tuan": 99.1
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": 260.4,
+   "ls": 8.959,
+   "cat_nam": 1.039,
+   "lenh_tuan": 114.9
+  },
+  {
+   "cap": "EURCAD",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -11.4,
+   "ls": -0.245,
+   "cat_nam": 1.187,
+   "lenh_tuan": 127.9
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": 127.7,
+   "ls": 6.111,
+   "cat_nam": 0.149,
+   "lenh_tuan": 20.0
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": 125.3,
+   "ls": 2.85,
+   "cat_nam": 0.52,
+   "lenh_tuan": 58.9
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": 18.4,
+   "ls": 0.873,
+   "cat_nam": 0.223,
+   "lenh_tuan": 22.0
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": 16.1,
+   "ls": 0.767,
+   "cat_nam": 0.223,
+   "lenh_tuan": 25.7
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": -4.0,
+   "ls": -0.19,
+   "cat_nam": 0.223,
+   "lenh_tuan": 28.3
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": -25.3,
+   "ls": -0.737,
+   "cat_nam": 0.372,
+   "lenh_tuan": 26.5
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": -35.5,
+   "ls": -0.805,
+   "cat_nam": 0.595,
+   "lenh_tuan": 66.1
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": -54.8,
+   "ls": -1.185,
+   "cat_nam": 0.595,
+   "lenh_tuan": 72.1
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": -57.3,
+   "ls": -1.459,
+   "cat_nam": 0.372,
+   "lenh_tuan": 29.6
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": -67.5,
+   "ls": -1.412,
+   "cat_nam": 0.595,
+   "lenh_tuan": 79.2
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": -102.3,
+   "ls": -2.336,
+   "cat_nam": 0.52,
+   "lenh_tuan": 37.5
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": -131.9,
+   "ls": -3.036,
+   "cat_nam": 0.52,
+   "lenh_tuan": 41.9
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": -139.5,
+   "ls": -3.242,
+   "cat_nam": 0.52,
+   "lenh_tuan": 46.9
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": -195.2,
+   "ls": -4.084,
+   "cat_nam": 0.52,
+   "lenh_tuan": 50.3
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": -204.6,
+   "ls": -4.227,
+   "cat_nam": 0.52,
+   "lenh_tuan": 33.8
+  },
+  {
+   "cap": "EURGBP",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -246.3,
+   "ls": -4.896,
+   "cat_nam": 0.52,
+   "lenh_tuan": 37.3
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": -250.4,
+   "ls": -2.818,
+   "cat_nam": 1.412,
+   "lenh_tuan": 138.7
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": -344.0,
+   "ls": -3.661,
+   "cat_nam": 1.561,
+   "lenh_tuan": 188.2
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": -767.3,
+   "ls": -5.155,
+   "cat_nam": 1.932,
+   "lenh_tuan": 267.7
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": -770.3,
+   "ls": -5.237,
+   "cat_nam": 1.561,
+   "lenh_tuan": 206.9
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": -848.3,
+   "ls": -5.34,
+   "cat_nam": 1.635,
+   "lenh_tuan": 156.7
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": -1128.4,
+   "ls": -5.876,
+   "cat_nam": 1.486,
+   "lenh_tuan": 178.0
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": -1376.8,
+   "ls": -5.766,
+   "cat_nam": 2.378,
+   "lenh_tuan": 423.8
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": -1403.2,
+   "ls": -6.171,
+   "cat_nam": 1.709,
+   "lenh_tuan": 232.8
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": -1574.5,
+   "ls": -6.178,
+   "cat_nam": 2.229,
+   "lenh_tuan": 293.4
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": -1674.7,
+   "ls": -6.472,
+   "cat_nam": 1.561,
+   "lenh_tuan": 196.7
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -1908.5,
+   "ls": -6.651,
+   "cat_nam": 1.635,
+   "lenh_tuan": 258.7
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": -2159.1,
+   "ls": -6.594,
+   "cat_nam": 2.229,
+   "lenh_tuan": 323.5
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": -2401.5,
+   "ls": -6.422,
+   "cat_nam": 2.601,
+   "lenh_tuan": 471.2
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": -2855.2,
+   "ls": -6.896,
+   "cat_nam": 2.229,
+   "lenh_tuan": 357.7
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": -3454.6,
+   "ls": -6.779,
+   "cat_nam": 2.824,
+   "lenh_tuan": 521.5
+  },
+  {
+   "cap": "EURNZD",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": -4406.1,
+   "ls": -7.029,
+   "cat_nam": 2.75,
+   "lenh_tuan": 567.2
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": 300.1,
+   "ls": 6.152,
+   "cat_nam": 1.559,
+   "lenh_tuan": 220.7
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": 277.7,
+   "ls": 4.575,
+   "cat_nam": 1.781,
+   "lenh_tuan": 348.6
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": 273.4,
+   "ls": 5.576,
+   "cat_nam": 1.336,
+   "lenh_tuan": 154.3
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": -120.1,
+   "ls": -1.798,
+   "cat_nam": 1.633,
+   "lenh_tuan": 243.3
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": -136.3,
+   "ls": -1.84,
+   "cat_nam": 1.41,
+   "lenh_tuan": 173.4
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": -281.3,
+   "ls": -2.757,
+   "cat_nam": 1.856,
+   "lenh_tuan": 389.7
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": -360.7,
+   "ls": -3.778,
+   "cat_nam": 1.336,
+   "lenh_tuan": 190.5
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": -378.7,
+   "ls": -4.661,
+   "cat_nam": 1.707,
+   "lenh_tuan": 113.7
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": -483.8,
+   "ls": -5.438,
+   "cat_nam": 1.633,
+   "lenh_tuan": 269.8
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": -518.6,
+   "ls": -5.346,
+   "cat_nam": 1.633,
+   "lenh_tuan": 127.2
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": -709.4,
+   "ls": -5.806,
+   "cat_nam": 2.004,
+   "lenh_tuan": 428.3
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": -900.1,
+   "ls": -6.964,
+   "cat_nam": 1.559,
+   "lenh_tuan": 298.7
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -933.2,
+   "ls": -6.659,
+   "cat_nam": 1.484,
+   "lenh_tuan": 210.7
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": -950.0,
+   "ls": -6.913,
+   "cat_nam": 1.781,
+   "lenh_tuan": 143.1
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": -1193.9,
+   "ls": -6.811,
+   "cat_nam": 1.781,
+   "lenh_tuan": 160.1
+  },
+  {
+   "cap": "GBPCAD",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": -1783.5,
+   "ls": -7.074,
+   "cat_nam": 2.152,
+   "lenh_tuan": 462.4
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 30,
+   "tp": 13,
+   "lai_nam": 111.7,
+   "ls": 5.308,
+   "cat_nam": 0.148,
+   "lenh_tuan": 40.5
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 30,
+   "tp": 17,
+   "lai_nam": 99.6,
+   "ls": 4.714,
+   "cat_nam": 0.222,
+   "lenh_tuan": 36.4
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 15,
+   "tp": 17,
+   "lai_nam": 99.2,
+   "ls": 2.423,
+   "cat_nam": 0.371,
+   "lenh_tuan": 107.2
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 30,
+   "tp": 10,
+   "lai_nam": 15.8,
+   "ls": 0.634,
+   "cat_nam": 0.148,
+   "lenh_tuan": 46.0
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 25,
+   "tp": 17,
+   "lai_nam": 6.7,
+   "ls": 0.22,
+   "cat_nam": 0.371,
+   "lenh_tuan": 48.5
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 20,
+   "tp": 17,
+   "lai_nam": -25.2,
+   "ls": -0.605,
+   "cat_nam": 0.445,
+   "lenh_tuan": 68.5
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 25,
+   "tp": 13,
+   "lai_nam": -67.4,
+   "ls": -1.788,
+   "cat_nam": 0.371,
+   "lenh_tuan": 54.6
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 30,
+   "tp": 8,
+   "lai_nam": -86.6,
+   "ls": -2.951,
+   "cat_nam": 0.148,
+   "lenh_tuan": 50.7
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 20,
+   "tp": 13,
+   "lai_nam": -120.8,
+   "ls": -2.548,
+   "cat_nam": 0.445,
+   "lenh_tuan": 75.3
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 15,
+   "tp": 13,
+   "lai_nam": -182.3,
+   "ls": -3.259,
+   "cat_nam": 0.519,
+   "lenh_tuan": 117.7
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 20,
+   "tp": 10,
+   "lai_nam": -258.3,
+   "ls": -4.48,
+   "cat_nam": 0.445,
+   "lenh_tuan": 84.6
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 25,
+   "tp": 8,
+   "lai_nam": -265.4,
+   "ls": -5.073,
+   "cat_nam": 0.371,
+   "lenh_tuan": 68.6
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 25,
+   "tp": 10,
+   "lai_nam": -327.8,
+   "ls": -5.979,
+   "cat_nam": 0.519,
+   "lenh_tuan": 61.0
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 20,
+   "tp": 8,
+   "lai_nam": -379.6,
+   "ls": -5.739,
+   "cat_nam": 0.445,
+   "lenh_tuan": 93.1
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 15,
+   "tp": 10,
+   "lai_nam": -503.5,
+   "ls": -5.775,
+   "cat_nam": 0.667,
+   "lenh_tuan": 128.3
+  },
+  {
+   "cap": "NZDCAD",
+   "buoc": 15,
+   "tp": 8,
+   "lai_nam": -640.1,
+   "ls": -6.324,
+   "cat_nam": 0.667,
+   "lenh_tuan": 142.3
+  }
+ ]
+}

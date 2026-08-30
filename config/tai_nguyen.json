@@ -1,0 +1,53 @@
+{
+ "ghi_chu": "ON DINH: COMPUTE(6 nhan)+QUANTx1+SEEKERx1. Tranh thread/process budget crash.",
+ "worker": {
+  "SEEKER": {
+   "cpu_pct": 55,
+   "song_song": 1,
+   "min_duty_sleep": 2,
+   "task": [
+    "seeker_quy_tac.py"
+   ]
+  },
+  "QUANT": {
+   "cpu_pct": 88,
+   "song_song": 1,
+   "min_duty_sleep": 2,
+   "task": [
+    "quant_offline.py"
+   ]
+  },
+  "BANKER": {
+   "cpu_pct": 20,
+   "song_song": 1,
+   "min_duty_sleep": 2,
+   "task": [
+    "banker.py"
+   ]
+  },
+  "EVO": {
+   "cpu_pct": 20,
+   "song_song": 1,
+   "min_duty_sleep": 2,
+   "task": [
+    "evo_giam_sat.py"
+   ]
+  },
+  "COMPUTE": {
+   "cpu_pct": 88,
+   "song_song": 1,
+   "min_duty_sleep": 2,
+   "task": [
+    "quant_sweep.py",
+    "6"
+   ]
+  }
+ },
+ "mt5": {
+  "cpu_pct": 20
+ },
+ "du_phong": {
+  "cpu_pct": 5
+ },
+ "gioi_han": "tru ban: COMPUTE(10 nhan) + QUANTx2 scan + SEEKERx1. Giam tai tranh OOM."
+}

@@ -1,0 +1,27 @@
+# The Brain V2 - phu thuoc ngoai chuan
+# Cai:  python -m pip install -r requirements.txt
+#
+# Truoc day lab khong co file nay, nen mot may moi se chay THIEU thu vien ma
+# khong bao loi: cac module deu import lazy hoac co try/except, nen he thong
+# van khoi dong nhung mat tinh nang trong im lang.
+
+# --- BAT BUOC ---
+numpy
+pandas
+scipy
+requests
+psutil            # dieu_phoi.py: kiem tien trinh song theo create_time (chong
+                  # trung PID) + du phong cpu_affinity cho tran CPU 85%.
+                  # Thieu psutil thi ca hai co che tren tat, KHONG bao loi.
+
+# --- BAT BUOC cho nhanh MT5 ---
+MetaTrader5
+
+# --- BAT BUOC cho nhanh trinh duyet (SEEKER) ---
+playwright        # sau khi cai: python -m playwright install chromium
+
+# --- TUY CHON: thieu thi chi mat nguon/tinh nang tuong ung ---
+statsmodels       # nhan/do_luong.py - thong ke nang cao
+pypdf             # nhan/toan_van.py - rut toan van tu PDF
+telethon          # telethon_ban.py, rem_via_tele.py - nguon Telegram tai khoan that
+yt-dlp            # lab.py - nguon YouTube

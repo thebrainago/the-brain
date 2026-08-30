@@ -1,0 +1,255 @@
+{
+ "luc": "2026-08-23 18:47:25",
+ "so_lan": 200,
+ "delta": [
+  0.0,
+  0.5,
+  1.0,
+  1.5,
+  2.0,
+  3.0,
+  5.0,
+  10.0,
+  20.0
+ ],
+ "lop": [
+  {
+   "lop": "chi_so_my",
+   "khung": "D1",
+   "so_tai_san": 9,
+   "tai_san": [
+    "SP500",
+    "US500CASH",
+    "US500M",
+    "XM_JP225CASH",
+    "XM_US2000CASH",
+    "XM_US30CASH",
+    "YH_AEX",
+    "YH_ASX200",
+    "YH_CAC40"
+   ],
+   "so_lan": 200,
+   "cua_so_bar": 1500,
+   "rho_trung_binh": 0.081,
+   "k_hieu_dung": 5.46,
+   "nguong_don_sharpe": 0.083,
+   "nguong_gop_sharpe": 0.186,
+   "bang": {
+    "0.0": {
+     "don_phat_hien_pct": 5.0,
+     "gop_phat_hien_pct": 5.0,
+     "don_sharpe_tv": 0.045,
+     "gop_sharpe_tv": 0.147
+    },
+    "0.5": {
+     "don_phat_hien_pct": 14.0,
+     "gop_phat_hien_pct": 25.0,
+     "don_sharpe_tv": 0.056,
+     "gop_sharpe_tv": 0.17
+    },
+    "1.0": {
+     "don_phat_hien_pct": 33.5,
+     "gop_phat_hien_pct": 57.5,
+     "don_sharpe_tv": 0.065,
+     "gop_sharpe_tv": 0.191
+    },
+    "1.5": {
+     "don_phat_hien_pct": 45.0,
+     "gop_phat_hien_pct": 85.5,
+     "don_sharpe_tv": 0.079,
+     "gop_sharpe_tv": 0.213
+    },
+    "2.0": {
+     "don_phat_hien_pct": 59.0,
+     "gop_phat_hien_pct": 99.5,
+     "don_sharpe_tv": 0.091,
+     "gop_sharpe_tv": 0.237
+    },
+    "3.0": {
+     "don_phat_hien_pct": 85.5,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 0.115,
+     "gop_sharpe_tv": 0.282
+    },
+    "5.0": {
+     "don_phat_hien_pct": 100.0,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 0.156,
+     "gop_sharpe_tv": 0.372
+    },
+    "10.0": {
+     "don_phat_hien_pct": 100.0,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 0.257,
+     "gop_sharpe_tv": 0.593
+    },
+    "20.0": {
+     "don_phat_hien_pct": 100.0,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 0.459,
+     "gop_sharpe_tv": 1.03
+    }
+   },
+   "MDE_don_bps": 3.0,
+   "MDE_gop_bps": 1.5,
+   "giay": 151.1
+  },
+  {
+   "lop": "vang",
+   "khung": "D1",
+   "so_tai_san": 7,
+   "tai_san": [
+    "XAUUSD",
+    "XAUUSDM",
+    "XM_GOLD",
+    "XM_SILVER",
+    "XM_XAUEUR",
+    "YH_BAC",
+    "YH_VANG"
+   ],
+   "so_lan": 200,
+   "cua_so_bar": 1500,
+   "rho_trung_binh": 0.07,
+   "k_hieu_dung": 4.94,
+   "nguong_don_sharpe": -0.002,
+   "nguong_gop_sharpe": -0.174,
+   "bang": {
+    "0.0": {
+     "don_phat_hien_pct": 5.0,
+     "gop_phat_hien_pct": 5.0,
+     "don_sharpe_tv": -0.067,
+     "gop_sharpe_tv": -0.291
+    },
+    "0.5": {
+     "don_phat_hien_pct": 6.5,
+     "gop_phat_hien_pct": 12.0,
+     "don_sharpe_tv": -0.058,
+     "gop_sharpe_tv": -0.271
+    },
+    "1.0": {
+     "don_phat_hien_pct": 11.0,
+     "gop_phat_hien_pct": 17.0,
+     "don_sharpe_tv": -0.049,
+     "gop_sharpe_tv": -0.251
+    },
+    "1.5": {
+     "don_phat_hien_pct": 18.0,
+     "gop_phat_hien_pct": 20.0,
+     "don_sharpe_tv": -0.034,
+     "gop_sharpe_tv": -0.226
+    },
+    "2.0": {
+     "don_phat_hien_pct": 28.0,
+     "gop_phat_hien_pct": 32.0,
+     "don_sharpe_tv": -0.023,
+     "gop_sharpe_tv": -0.205
+    },
+    "3.0": {
+     "don_phat_hien_pct": 51.0,
+     "gop_phat_hien_pct": 61.0,
+     "don_sharpe_tv": -0.001,
+     "gop_sharpe_tv": -0.159
+    },
+    "5.0": {
+     "don_phat_hien_pct": 90.0,
+     "gop_phat_hien_pct": 93.0,
+     "don_sharpe_tv": 0.041,
+     "gop_sharpe_tv": -0.068
+    },
+    "10.0": {
+     "don_phat_hien_pct": 100.0,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 0.152,
+     "gop_sharpe_tv": 0.16
+    },
+    "20.0": {
+     "don_phat_hien_pct": 100.0,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 0.348,
+     "gop_sharpe_tv": 0.6
+    }
+   },
+   "MDE_don_bps": 5.0,
+   "MDE_gop_bps": 5.0,
+   "giay": 107.5
+  },
+  {
+   "lop": "fx",
+   "khung": "D1",
+   "so_tai_san": 6,
+   "tai_san": [
+    "AUDCAD",
+    "AUDCHF",
+    "AUDJPY",
+    "AUDNZD",
+    "AUDUSD",
+    "CADCHF"
+   ],
+   "so_lan": 200,
+   "cua_so_bar": 1500,
+   "rho_trung_binh": 0.121,
+   "k_hieu_dung": 3.74,
+   "nguong_don_sharpe": 0.004,
+   "nguong_gop_sharpe": 0.19,
+   "bang": {
+    "0.0": {
+     "don_phat_hien_pct": 5.0,
+     "gop_phat_hien_pct": 5.0,
+     "don_sharpe_tv": -0.125,
+     "gop_sharpe_tv": 0.084
+    },
+    "0.5": {
+     "don_phat_hien_pct": 17.5,
+     "gop_phat_hien_pct": 27.0,
+     "don_sharpe_tv": -0.076,
+     "gop_sharpe_tv": 0.13
+    },
+    "1.0": {
+     "don_phat_hien_pct": 35.0,
+     "gop_phat_hien_pct": 45.5,
+     "don_sharpe_tv": -0.027,
+     "gop_sharpe_tv": 0.175
+    },
+    "1.5": {
+     "don_phat_hien_pct": 63.0,
+     "gop_phat_hien_pct": 52.5,
+     "don_sharpe_tv": 0.027,
+     "gop_sharpe_tv": 0.221
+    },
+    "2.0": {
+     "don_phat_hien_pct": 74.0,
+     "gop_phat_hien_pct": 62.5,
+     "don_sharpe_tv": 0.078,
+     "gop_sharpe_tv": 0.266
+    },
+    "3.0": {
+     "don_phat_hien_pct": 78.0,
+     "gop_phat_hien_pct": 73.0,
+     "don_sharpe_tv": 0.178,
+     "gop_sharpe_tv": 0.357
+    },
+    "5.0": {
+     "don_phat_hien_pct": 87.0,
+     "gop_phat_hien_pct": 89.0,
+     "don_sharpe_tv": 0.315,
+     "gop_sharpe_tv": 0.543
+    },
+    "10.0": {
+     "don_phat_hien_pct": 100.0,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 0.589,
+     "gop_sharpe_tv": 1.031
+    },
+    "20.0": {
+     "don_phat_hien_pct": 100.0,
+     "gop_phat_hien_pct": 100.0,
+     "don_sharpe_tv": 1.383,
+     "gop_sharpe_tv": 2.047
+    }
+   },
+   "MDE_don_bps": 5.0,
+   "MDE_gop_bps": 5.0,
+   "giay": 63.0
+  }
+ ]
+}

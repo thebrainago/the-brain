@@ -1,0 +1,55 @@
+{
+ "tai_san": "US500CASH",
+ "khung": "D1",
+ "so_lan": 20,
+ "nguong_ibs": 0.2,
+ "mau": "ibs_bat_day",
+ "bang": {
+  "0.0": {
+   "ty_le_phat_hien_pct": 0.0,
+   "dung_o_vong": {
+    "V2": 8,
+    "V3": 12
+   }
+  },
+  "5.0": {
+   "ty_le_phat_hien_pct": 0.0,
+   "dung_o_vong": {
+    "V3": 20
+   }
+  },
+  "10.0": {
+   "ty_le_phat_hien_pct": 0.0,
+   "dung_o_vong": {
+    "V3": 20
+   }
+  },
+  "20.0": {
+   "ty_le_phat_hien_pct": 15.0,
+   "dung_o_vong": {
+    "V3": 20
+   }
+  },
+  "30.0": {
+   "ty_le_phat_hien_pct": 100.0,
+   "dung_o_vong": {
+    "V3": 20
+   }
+  },
+  "50.0": {
+   "ty_le_phat_hien_pct": 100.0,
+   "dung_o_vong": {
+    "V3": 20
+   }
+  },
+  "80.0": {
+   "ty_le_phat_hien_pct": 100.0,
+   "dung_o_vong": {
+    "V3": 20
+   }
+  }
+ },
+ "MDE_bps_moi_lenh": 30.0,
+ "ghi_chu": "",
+ "duong_tinh_gia_pct": 0.0
+}

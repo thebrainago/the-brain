@@ -1,0 +1,2619 @@
+{
+  "chay_luc": "2026-08-14 16:22:36",
+  "n_worker": 6,
+  "thoigian_giay": 2.88,
+  "to_hop": 105,
+  "dat": [],
+  "da_quet": [
+    {
+      "lai": -38.24,
+      "buy_hold": 253.85,
+      "edge": -292.09,
+      "pf": 0.966,
+      "sharpe": -0.176,
+      "so_lenh": 454,
+      "placebo_p": 0.89,
+      "era_edges": [
+        -104.17,
+        -111.8
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 10
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": -0.07,
+      "buy_hold": 253.85,
+      "edge": -253.91,
+      "pf": 1.018,
+      "sharpe": 0.09,
+      "so_lenh": 300,
+      "placebo_p": 0.74,
+      "era_edges": [
+        -80.31,
+        -92.88
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 20
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 3.13,
+      "buy_hold": 253.85,
+      "edge": -250.72,
+      "pf": 1.021,
+      "sharpe": 0.108,
+      "so_lenh": 178,
+      "placebo_p": 0.8,
+      "era_edges": [
+        -94.43,
+        -79.37
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 50
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 2.23,
+      "buy_hold": 253.85,
+      "edge": -251.61,
+      "pf": 1.021,
+      "sharpe": 0.102,
+      "so_lenh": 24,
+      "placebo_p": 0.57,
+      "era_edges": [
+        -98.86,
+        -76.19
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.03
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 8.93,
+      "buy_hold": 253.85,
+      "edge": -244.92,
+      "pf": 1.029,
+      "sharpe": 0.137,
+      "so_lenh": 3,
+      "placebo_p": 0.12,
+      "era_edges": [
+        -75.53,
+        -88.89
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.05
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": -3.57,
+      "buy_hold": 253.85,
+      "edge": -257.42,
+      "pf": 1.014,
+      "sharpe": 0.069,
+      "so_lenh": 10,
+      "placebo_p": 0.58,
+      "era_edges": [
+        -105.88,
+        -75.07
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 50,
+        "rong": 0.05
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 61.82,
+      "buy_hold": 253.85,
+      "edge": -192.03,
+      "pf": 1.073,
+      "sharpe": 0.358,
+      "so_lenh": 127,
+      "placebo_p": 0.3,
+      "era_edges": [
+        -78.7,
+        -44.24
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 5,
+        "slow": 20
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 16.42,
+      "buy_hold": 253.85,
+      "edge": -237.42,
+      "pf": 1.035,
+      "sharpe": 0.175,
+      "so_lenh": 55,
+      "placebo_p": 0.66,
+      "era_edges": [
+        -92.82,
+        -68.71
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 10,
+        "slow": 50
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 1.71,
+      "buy_hold": 253.85,
+      "edge": -252.13,
+      "pf": 1.02,
+      "sharpe": 0.1,
+      "so_lenh": 22,
+      "placebo_p": 0.83,
+      "era_edges": [
+        -88.19,
+        -85.75
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 100
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 27.27,
+      "buy_hold": 253.85,
+      "edge": -226.58,
+      "pf": 1.178,
+      "sharpe": 0.281,
+      "so_lenh": 68,
+      "placebo_p": 0.13,
+      "era_edges": [
+        -96.44,
+        -54.68
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 7,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 27.3,
+      "buy_hold": 253.85,
+      "edge": -226.55,
+      "pf": 1.518,
+      "sharpe": 0.356,
+      "so_lenh": 22,
+      "placebo_p": 0.03,
+      "era_edges": [
+        -96.57,
+        -54.52
+      ],
+      "ok_mau": false,
+      "ok_placebo": true,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 11.1,
+      "buy_hold": 253.85,
+      "edge": -242.74,
+      "pf": 1.713,
+      "sharpe": 0.263,
+      "so_lenh": 6,
+      "placebo_p": 0.04,
+      "era_edges": [
+        -100.39,
+        -65.85
+      ],
+      "ok_mau": false,
+      "ok_placebo": true,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 25,
+        "thoat": 60
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 250.95,
+      "buy_hold": 253.85,
+      "edge": -2.9,
+      "pf": 1.167,
+      "sharpe": 0.788,
+      "so_lenh": 0,
+      "placebo_p": 0.18,
+      "era_edges": [
+        0.87,
+        -2.39
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.0
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 250.95,
+      "buy_hold": 253.85,
+      "edge": -2.9,
+      "pf": 1.167,
+      "sharpe": 0.788,
+      "so_lenh": 0,
+      "placebo_p": 0.18,
+      "era_edges": [
+        0.87,
+        -2.39
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.5
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 253.93,
+      "buy_hold": 253.85,
+      "edge": 0.08,
+      "pf": 1.17,
+      "sharpe": 0.794,
+      "so_lenh": 0,
+      "placebo_p": 0.17,
+      "era_edges": [
+        2.6,
+        -2.39
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 50,
+        "k": 2.0
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": -12.87,
+      "buy_hold": 253.85,
+      "edge": -266.72,
+      "pf": 1.003,
+      "sharpe": 0.014,
+      "so_lenh": 109,
+      "placebo_p": 0.7,
+      "era_edges": [
+        -112.85,
+        -77.7
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 10
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 20.87,
+      "buy_hold": 253.85,
+      "edge": -232.98,
+      "pf": 1.039,
+      "sharpe": 0.196,
+      "so_lenh": 55,
+      "placebo_p": 0.64,
+      "era_edges": [
+        -88.49,
+        -68.82
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 20
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 23.44,
+      "buy_hold": 253.85,
+      "edge": -230.41,
+      "pf": 1.042,
+      "sharpe": 0.208,
+      "so_lenh": 19,
+      "placebo_p": 0.76,
+      "era_edges": [
+        -60.74,
+        -87.58
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 55
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": 23.96,
+      "buy_hold": 253.85,
+      "edge": -229.88,
+      "pf": 1.042,
+      "sharpe": 0.21,
+      "so_lenh": 198,
+      "placebo_p": 0.55,
+      "era_edges": [
+        -71.77,
+        -79.9
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 7,
+        "nhap": 55
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": -10.63,
+      "buy_hold": 253.85,
+      "edge": -264.48,
+      "pf": 1.006,
+      "sharpe": 0.028,
+      "so_lenh": 104,
+      "placebo_p": 0.85,
+      "era_edges": [
+        -126.52,
+        -57.52
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 55
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": -15.42,
+      "buy_hold": 253.85,
+      "edge": -269.27,
+      "pf": 1.0,
+      "sharpe": -0.002,
+      "so_lenh": 56,
+      "placebo_p": 0.77,
+      "era_edges": [
+        -99.65,
+        -92.49
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 60
+      },
+      "symbol": "^GSPC",
+      "loai": "SP500"
+    },
+    {
+      "lai": -45.53,
+      "buy_hold": 234.53,
+      "edge": -280.07,
+      "pf": 0.95,
+      "sharpe": -0.28,
+      "so_lenh": 478,
+      "placebo_p": 0.71,
+      "era_edges": [
+        -71.17,
+        -159.78
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 10
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -46.2,
+      "buy_hold": 234.53,
+      "edge": -280.73,
+      "pf": 0.949,
+      "sharpe": -0.287,
+      "so_lenh": 348,
+      "placebo_p": 0.73,
+      "era_edges": [
+        -71.87,
+        -158.64
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 20
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -15.26,
+      "buy_hold": 234.53,
+      "edge": -249.79,
+      "pf": 0.997,
+      "sharpe": -0.015,
+      "so_lenh": 214,
+      "placebo_p": 0.49,
+      "era_edges": [
+        -77.08,
+        -90.93
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 50
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 83.46,
+      "buy_hold": 234.53,
+      "edge": -151.07,
+      "pf": 1.086,
+      "sharpe": 0.449,
+      "so_lenh": 19,
+      "placebo_p": 0.23,
+      "era_edges": [
+        -35.75,
+        -54.76
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.03
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 150.88,
+      "buy_hold": 234.53,
+      "edge": -83.65,
+      "pf": 1.153,
+      "sharpe": 0.669,
+      "so_lenh": 4,
+      "placebo_p": 0.22,
+      "era_edges": [
+        -33.66,
+        0.7
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.05
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 64.72,
+      "buy_hold": 234.53,
+      "edge": -169.81,
+      "pf": 1.073,
+      "sharpe": 0.384,
+      "so_lenh": 8,
+      "placebo_p": 0.39,
+      "era_edges": [
+        -57.22,
+        -33.03
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 50,
+        "rong": 0.05
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -12.44,
+      "buy_hold": 234.53,
+      "edge": -246.97,
+      "pf": 1.001,
+      "sharpe": 0.004,
+      "so_lenh": 156,
+      "placebo_p": 0.44,
+      "era_edges": [
+        -49.7,
+        -141.58
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 5,
+        "slow": 20
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 6.69,
+      "buy_hold": 234.53,
+      "edge": -227.85,
+      "pf": 1.023,
+      "sharpe": 0.123,
+      "so_lenh": 59,
+      "placebo_p": 0.3,
+      "era_edges": [
+        -43.55,
+        -126.96
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 10,
+        "slow": 50
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 100.06,
+      "buy_hold": 234.53,
+      "edge": -134.47,
+      "pf": 1.098,
+      "sharpe": 0.505,
+      "so_lenh": 26,
+      "placebo_p": 0.09,
+      "era_edges": [
+        -40.46,
+        -25.77
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 100
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 13.9,
+      "buy_hold": 234.53,
+      "edge": -220.63,
+      "pf": 1.14,
+      "sharpe": 0.238,
+      "so_lenh": 63,
+      "placebo_p": 0.43,
+      "era_edges": [
+        -14.83,
+        -153.63
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 7,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 3.01,
+      "buy_hold": 234.53,
+      "edge": -231.52,
+      "pf": 1.105,
+      "sharpe": 0.109,
+      "so_lenh": 21,
+      "placebo_p": 0.53,
+      "era_edges": [
+        -35.65,
+        -143.62
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 6.61,
+      "buy_hold": 234.53,
+      "edge": -227.92,
+      "pf": 1.8,
+      "sharpe": 0.376,
+      "so_lenh": 9,
+      "placebo_p": 0.12,
+      "era_edges": [
+        -29.7,
+        -146.41
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 25,
+        "thoat": 60
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 186.19,
+      "buy_hold": 234.53,
+      "edge": -48.35,
+      "pf": 1.141,
+      "sharpe": 0.718,
+      "so_lenh": 0,
+      "placebo_p": 0.1,
+      "era_edges": [
+        -9.53,
+        -21.0
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.0
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 186.19,
+      "buy_hold": 234.53,
+      "edge": -48.35,
+      "pf": 1.141,
+      "sharpe": 0.718,
+      "so_lenh": 0,
+      "placebo_p": 0.1,
+      "era_edges": [
+        -9.53,
+        -21.0
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.5
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": 197.71,
+      "buy_hold": 234.53,
+      "edge": -36.83,
+      "pf": 1.147,
+      "sharpe": 0.744,
+      "so_lenh": 0,
+      "placebo_p": 0.08,
+      "era_edges": [
+        -4.64,
+        -21.0
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 50,
+        "k": 2.0
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -31.47,
+      "buy_hold": 234.53,
+      "edge": -266.01,
+      "pf": 0.974,
+      "sharpe": -0.142,
+      "so_lenh": 115,
+      "placebo_p": 0.62,
+      "era_edges": [
+        -55.0,
+        -159.51
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 10
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -18.68,
+      "buy_hold": 234.53,
+      "edge": -253.21,
+      "pf": 0.993,
+      "sharpe": -0.04,
+      "so_lenh": 59,
+      "placebo_p": 0.49,
+      "era_edges": [
+        -64.31,
+        -126.99
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 20
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -0.22,
+      "buy_hold": 234.53,
+      "edge": -234.76,
+      "pf": 1.015,
+      "sharpe": 0.082,
+      "so_lenh": 22,
+      "placebo_p": 0.58,
+      "era_edges": [
+        -74.1,
+        -72.32
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 55
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -43.52,
+      "buy_hold": 234.53,
+      "edge": -278.05,
+      "pf": 0.954,
+      "sharpe": -0.258,
+      "so_lenh": 226,
+      "placebo_p": 0.67,
+      "era_edges": [
+        -74.05,
+        -150.26
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 7,
+        "nhap": 55
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -21.86,
+      "buy_hold": 234.53,
+      "edge": -256.4,
+      "pf": 0.988,
+      "sharpe": -0.064,
+      "so_lenh": 108,
+      "placebo_p": 0.52,
+      "era_edges": [
+        -66.54,
+        -127.74
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 55
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -19.95,
+      "buy_hold": 234.53,
+      "edge": -254.48,
+      "pf": 0.991,
+      "sharpe": -0.049,
+      "so_lenh": 58,
+      "placebo_p": 0.68,
+      "era_edges": [
+        -81.35,
+        -86.75
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 60
+      },
+      "symbol": "GC=F",
+      "loai": "XAU"
+    },
+    {
+      "lai": -27.89,
+      "buy_hold": 3.59,
+      "edge": -31.48,
+      "pf": 0.934,
+      "sharpe": -0.406,
+      "so_lenh": 486,
+      "placebo_p": 0.68,
+      "era_edges": [
+        -19.78,
+        -14.17
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 10
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -36.34,
+      "buy_hold": 3.59,
+      "edge": -39.93,
+      "pf": 0.908,
+      "sharpe": -0.575,
+      "so_lenh": 368,
+      "placebo_p": 0.85,
+      "era_edges": [
+        -22.2,
+        -21.88
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 20
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": 1.2,
+      "buy_hold": 3.59,
+      "edge": -2.39,
+      "pf": 1.009,
+      "sharpe": 0.052,
+      "so_lenh": 204,
+      "placebo_p": 0.21,
+      "era_edges": [
+        -11.87,
+        9.82
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 50
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -0.09,
+      "buy_hold": 3.59,
+      "edge": -3.68,
+      "pf": 1.006,
+      "sharpe": 0.028,
+      "so_lenh": 2,
+      "placebo_p": 0.32,
+      "era_edges": [
+        -22.01,
+        21.44
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.03
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": 0.0,
+      "buy_hold": 3.59,
+      "edge": -3.59,
+      "pf": NaN,
+      "sharpe": NaN,
+      "so_lenh": 0,
+      "placebo_p": 1.0,
+      "era_edges": [
+        -5.38,
+        1.57
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.05
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": 0.51,
+      "buy_hold": 3.59,
+      "edge": -3.08,
+      "pf": 1.015,
+      "sharpe": 0.033,
+      "so_lenh": 0,
+      "placebo_p": 0.42,
+      "era_edges": [
+        -5.38,
+        2.08
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 50,
+        "rong": 0.05
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -25.64,
+      "buy_hold": 3.59,
+      "edge": -29.24,
+      "pf": 0.94,
+      "sharpe": -0.366,
+      "so_lenh": 175,
+      "placebo_p": 0.74,
+      "era_edges": [
+        -31.59,
+        2.39
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 5,
+        "slow": 20
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -9.65,
+      "buy_hold": 3.59,
+      "edge": -13.24,
+      "pf": 0.983,
+      "sharpe": -0.103,
+      "so_lenh": 75,
+      "placebo_p": 0.43,
+      "era_edges": [
+        -15.34,
+        1.94
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 10,
+        "slow": 50
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -12.63,
+      "buy_hold": 3.59,
+      "edge": -16.22,
+      "pf": 0.974,
+      "sharpe": -0.152,
+      "so_lenh": 34,
+      "placebo_p": 0.52,
+      "era_edges": [
+        -14.91,
+        -1.82
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 100
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": 1.46,
+      "buy_hold": 3.59,
+      "edge": -2.13,
+      "pf": 1.027,
+      "sharpe": 0.063,
+      "so_lenh": 99,
+      "placebo_p": 0.28,
+      "era_edges": [
+        -4.94,
+        2.56
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 7,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": 5.86,
+      "buy_hold": 3.59,
+      "edge": 2.27,
+      "pf": 1.256,
+      "sharpe": 0.32,
+      "so_lenh": 31,
+      "placebo_p": 0.1,
+      "era_edges": [
+        -5.0,
+        7.03
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": 5.77,
+      "buy_hold": 3.59,
+      "edge": 2.18,
+      "pf": 3.023,
+      "sharpe": 0.637,
+      "so_lenh": 10,
+      "placebo_p": 0.03,
+      "era_edges": [
+        -3.5,
+        5.38
+      ],
+      "ok_mau": false,
+      "ok_placebo": true,
+      "ok_era": false,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 25,
+        "thoat": 60
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -5.51,
+      "buy_hold": 3.59,
+      "edge": -9.11,
+      "pf": 0.993,
+      "sharpe": -0.041,
+      "so_lenh": 0,
+      "placebo_p": 0.52,
+      "era_edges": [
+        -4.6,
+        -4.7
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.0
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -4.8,
+      "buy_hold": 3.59,
+      "edge": -8.39,
+      "pf": 0.995,
+      "sharpe": -0.031,
+      "so_lenh": 0,
+      "placebo_p": 0.41,
+      "era_edges": [
+        -3.84,
+        -4.7
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.5
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -4.03,
+      "buy_hold": 3.59,
+      "edge": -7.62,
+      "pf": 0.997,
+      "sharpe": -0.02,
+      "so_lenh": 0,
+      "placebo_p": 0.31,
+      "era_edges": [
+        -3.02,
+        -4.7
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 50,
+        "k": 2.0
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -45.0,
+      "buy_hold": 3.59,
+      "edge": -48.59,
+      "pf": 0.877,
+      "sharpe": -0.779,
+      "so_lenh": 77,
+      "placebo_p": 0.99,
+      "era_edges": [
+        -34.3,
+        -21.03
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 10
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -15.66,
+      "buy_hold": 3.59,
+      "edge": -19.26,
+      "pf": 0.967,
+      "sharpe": -0.196,
+      "so_lenh": 43,
+      "placebo_p": 0.6,
+      "era_edges": [
+        -26.32,
+        8.27
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 20
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -17.33,
+      "buy_hold": 3.59,
+      "edge": -20.93,
+      "pf": 0.963,
+      "sharpe": -0.225,
+      "so_lenh": 20,
+      "placebo_p": 0.58,
+      "era_edges": [
+        -29.6,
+        10.69
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 55
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -41.67,
+      "buy_hold": 3.59,
+      "edge": -45.26,
+      "pf": 0.89,
+      "sharpe": -0.694,
+      "so_lenh": 258,
+      "placebo_p": 0.92,
+      "era_edges": [
+        -34.01,
+        -16.67
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 7,
+        "nhap": 55
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -18.72,
+      "buy_hold": 3.59,
+      "edge": -22.31,
+      "pf": 0.96,
+      "sharpe": -0.245,
+      "so_lenh": 114,
+      "placebo_p": 0.61,
+      "era_edges": [
+        -18.65,
+        -4.69
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 55
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -16.97,
+      "buy_hold": 3.59,
+      "edge": -20.57,
+      "pf": 0.964,
+      "sharpe": -0.216,
+      "so_lenh": 58,
+      "placebo_p": 0.62,
+      "era_edges": [
+        -14.49,
+        -7.06
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 60
+      },
+      "symbol": "EURUSD=X",
+      "loai": "EURUSD"
+    },
+    {
+      "lai": -53.94,
+      "buy_hold": 518.81,
+      "edge": -572.76,
+      "pf": 0.959,
+      "sharpe": -0.227,
+      "so_lenh": 456,
+      "placebo_p": 0.94,
+      "era_edges": [
+        -232.51,
+        -141.44
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 10
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 6.01,
+      "buy_hold": 518.81,
+      "edge": -512.8,
+      "pf": 1.026,
+      "sharpe": 0.14,
+      "so_lenh": 304,
+      "placebo_p": 0.7,
+      "era_edges": [
+        -191.49,
+        -111.04
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 20
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 32.82,
+      "buy_hold": 518.81,
+      "edge": -485.99,
+      "pf": 1.045,
+      "sharpe": 0.239,
+      "so_lenh": 174,
+      "placebo_p": 0.71,
+      "era_edges": [
+        -216.92,
+        -60.98
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 50
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": -40.97,
+      "buy_hold": 518.81,
+      "edge": -559.78,
+      "pf": 0.976,
+      "sharpe": -0.123,
+      "so_lenh": 48,
+      "placebo_p": 0.75,
+      "era_edges": [
+        -247.96,
+        -108.68
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.03
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": -42.64,
+      "buy_hold": 518.81,
+      "edge": -561.45,
+      "pf": 0.974,
+      "sharpe": -0.138,
+      "so_lenh": 14,
+      "placebo_p": 0.62,
+      "era_edges": [
+        -236.75,
+        -124.63
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.05
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": -48.84,
+      "buy_hold": 518.81,
+      "edge": -567.66,
+      "pf": 0.966,
+      "sharpe": -0.183,
+      "so_lenh": 25,
+      "placebo_p": 0.96,
+      "era_edges": [
+        -229.5,
+        -137.22
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 50,
+        "rong": 0.05
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 37.64,
+      "buy_hold": 518.81,
+      "edge": -481.17,
+      "pf": 1.048,
+      "sharpe": 0.255,
+      "so_lenh": 137,
+      "placebo_p": 0.51,
+      "era_edges": [
+        -156.71,
+        -109.94
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 5,
+        "slow": 20
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": -11.63,
+      "buy_hold": 518.81,
+      "edge": -530.44,
+      "pf": 1.011,
+      "sharpe": 0.06,
+      "so_lenh": 61,
+      "placebo_p": 0.85,
+      "era_edges": [
+        -223.69,
+        -99.93
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 10,
+        "slow": 50
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 67.19,
+      "buy_hold": 518.81,
+      "edge": -451.63,
+      "pf": 1.066,
+      "sharpe": 0.342,
+      "so_lenh": 18,
+      "placebo_p": 0.77,
+      "era_edges": [
+        -164.07,
+        -85.92
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 100
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 37.42,
+      "buy_hold": 518.81,
+      "edge": -481.39,
+      "pf": 1.206,
+      "sharpe": 0.332,
+      "so_lenh": 63,
+      "placebo_p": 0.23,
+      "era_edges": [
+        -206.63,
+        -70.58
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 7,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 41.49,
+      "buy_hold": 518.81,
+      "edge": -477.33,
+      "pf": 2.091,
+      "sharpe": 0.484,
+      "so_lenh": 14,
+      "placebo_p": 0.01,
+      "era_edges": [
+        -204.23,
+        -69.66
+      ],
+      "ok_mau": false,
+      "ok_placebo": true,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 12.79,
+      "buy_hold": 518.81,
+      "edge": -506.03,
+      "pf": 2.521,
+      "sharpe": 0.292,
+      "so_lenh": 3,
+      "placebo_p": 0.01,
+      "era_edges": [
+        -214.47,
+        -85.2
+      ],
+      "ok_mau": false,
+      "ok_placebo": true,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 25,
+        "thoat": 60
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 527.82,
+      "buy_hold": 518.81,
+      "edge": 9.0,
+      "pf": 1.185,
+      "sharpe": 0.925,
+      "so_lenh": 0,
+      "placebo_p": 0.27,
+      "era_edges": [
+        5.77,
+        -0.39
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.0
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 527.82,
+      "buy_hold": 518.81,
+      "edge": 9.0,
+      "pf": 1.185,
+      "sharpe": 0.925,
+      "so_lenh": 0,
+      "placebo_p": 0.27,
+      "era_edges": [
+        5.77,
+        -0.39
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.5
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 528.4,
+      "buy_hold": 518.81,
+      "edge": 9.58,
+      "pf": 1.186,
+      "sharpe": 0.927,
+      "so_lenh": 0,
+      "placebo_p": 0.32,
+      "era_edges": [
+        6.06,
+        -0.39
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 50,
+        "k": 2.0
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": -0.89,
+      "buy_hold": 518.81,
+      "edge": -519.7,
+      "pf": 1.02,
+      "sharpe": 0.11,
+      "so_lenh": 111,
+      "placebo_p": 0.57,
+      "era_edges": [
+        -216.11,
+        -96.49
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 10
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 44.08,
+      "buy_hold": 518.81,
+      "edge": -474.73,
+      "pf": 1.052,
+      "sharpe": 0.275,
+      "so_lenh": 49,
+      "placebo_p": 0.58,
+      "era_edges": [
+        -210.66,
+        -58.29
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 20
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 0.17,
+      "buy_hold": 518.81,
+      "edge": -518.65,
+      "pf": 1.021,
+      "sharpe": 0.115,
+      "so_lenh": 21,
+      "placebo_p": 0.89,
+      "era_edges": [
+        -160.63,
+        -132.18
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 55
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": -2.22,
+      "buy_hold": 518.81,
+      "edge": -521.03,
+      "pf": 1.019,
+      "sharpe": 0.104,
+      "so_lenh": 214,
+      "placebo_p": 0.71,
+      "era_edges": [
+        -188.21,
+        -119.83
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 7,
+        "nhap": 55
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 30.53,
+      "buy_hold": 518.81,
+      "edge": -488.29,
+      "pf": 1.043,
+      "sharpe": 0.232,
+      "so_lenh": 98,
+      "placebo_p": 0.59,
+      "era_edges": [
+        -196.09,
+        -86.9
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 55
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": 6.38,
+      "buy_hold": 518.81,
+      "edge": -512.43,
+      "pf": 1.026,
+      "sharpe": 0.142,
+      "so_lenh": 49,
+      "placebo_p": 0.64,
+      "era_edges": [
+        -203.08,
+        -101.72
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 60
+      },
+      "symbol": "^NDX",
+      "loai": "NDX"
+    },
+    {
+      "lai": -19.84,
+      "buy_hold": 4.35,
+      "edge": -24.2,
+      "pf": 0.966,
+      "sharpe": -0.204,
+      "so_lenh": 527,
+      "placebo_p": 0.46,
+      "era_edges": [
+        -21.62,
+        -3.6
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 10
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -29.82,
+      "buy_hold": 4.35,
+      "edge": -34.18,
+      "pf": 0.941,
+      "sharpe": -0.353,
+      "so_lenh": 349,
+      "placebo_p": 0.66,
+      "era_edges": [
+        -30.85,
+        -5.29
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 20
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -19.83,
+      "buy_hold": 4.35,
+      "edge": -24.19,
+      "pf": 0.966,
+      "sharpe": -0.204,
+      "so_lenh": 211,
+      "placebo_p": 0.59,
+      "era_edges": [
+        -23.72,
+        -1.21
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum",
+      "params": {
+        "n": 50
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -18.57,
+      "buy_hold": 4.35,
+      "edge": -22.92,
+      "pf": 0.968,
+      "sharpe": -0.19,
+      "so_lenh": 5,
+      "placebo_p": 0.65,
+      "era_edges": [
+        -28.77,
+        6.38
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.03
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -23.16,
+      "buy_hold": 4.35,
+      "edge": -27.51,
+      "pf": 0.929,
+      "sharpe": -0.341,
+      "so_lenh": 0,
+      "placebo_p": 0.84,
+      "era_edges": [
+        -25.04,
+        -3.72
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 20,
+        "rong": 0.05
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -5.93,
+      "buy_hold": 4.35,
+      "edge": -10.28,
+      "pf": 0.995,
+      "sharpe": -0.027,
+      "so_lenh": 1,
+      "placebo_p": 0.32,
+      "era_edges": [
+        -25.62,
+        18.18
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "momentum_band",
+      "params": {
+        "n": 50,
+        "rong": 0.05
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -26.05,
+      "buy_hold": 4.35,
+      "edge": -30.41,
+      "pf": 0.95,
+      "sharpe": -0.296,
+      "so_lenh": 154,
+      "placebo_p": 0.63,
+      "era_edges": [
+        -24.69,
+        -7.88
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 5,
+        "slow": 20
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -2.54,
+      "buy_hold": 4.35,
+      "edge": -6.9,
+      "pf": 1.002,
+      "sharpe": 0.013,
+      "so_lenh": 67,
+      "placebo_p": 0.3,
+      "era_edges": [
+        -14.27,
+        7.63
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 10,
+        "slow": 50
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": 5.89,
+      "buy_hold": 4.35,
+      "edge": 1.53,
+      "pf": 1.019,
+      "sharpe": 0.108,
+      "so_lenh": 29,
+      "placebo_p": 0.28,
+      "era_edges": [
+        0.96,
+        0.58
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": true,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "sma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 100
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": 4.03,
+      "buy_hold": 4.35,
+      "edge": -0.32,
+      "pf": 1.055,
+      "sharpe": 0.115,
+      "so_lenh": 93,
+      "placebo_p": 0.26,
+      "era_edges": [
+        -5.96,
+        5.35
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 7,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -3.03,
+      "buy_hold": 4.35,
+      "edge": -7.38,
+      "pf": 0.943,
+      "sharpe": -0.075,
+      "so_lenh": 27,
+      "placebo_p": 0.55,
+      "era_edges": [
+        -11.42,
+        3.85
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 30,
+        "thoat": 55
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": 2.01,
+      "buy_hold": 4.35,
+      "edge": -2.34,
+      "pf": 1.15,
+      "sharpe": 0.104,
+      "so_lenh": 14,
+      "placebo_p": 0.28,
+      "era_edges": [
+        -8.71,
+        6.19
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_revert",
+      "params": {
+        "n": 14,
+        "nhap": 25,
+        "thoat": 60
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -6.0,
+      "buy_hold": 4.35,
+      "edge": -10.36,
+      "pf": 0.995,
+      "sharpe": -0.027,
+      "so_lenh": 0,
+      "placebo_p": 0.55,
+      "era_edges": [
+        -5.6,
+        -5.04
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.0
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -1.3,
+      "buy_hold": 4.35,
+      "edge": -5.65,
+      "pf": 1.005,
+      "sharpe": 0.028,
+      "so_lenh": 0,
+      "placebo_p": 0.1,
+      "era_edges": [
+        -0.53,
+        -5.04
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 20,
+        "k": 2.5
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": 1.97,
+      "buy_hold": 4.35,
+      "edge": -2.38,
+      "pf": 1.011,
+      "sharpe": 0.065,
+      "so_lenh": 0,
+      "placebo_p": 0.07,
+      "era_edges": [
+        2.99,
+        -5.04
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "bollinger",
+      "params": {
+        "n": 50,
+        "k": 2.0
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -37.2,
+      "buy_hold": 4.35,
+      "edge": -41.55,
+      "pf": 0.92,
+      "sharpe": -0.481,
+      "so_lenh": 79,
+      "placebo_p": 0.91,
+      "era_edges": [
+        -38.02,
+        -6.66
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 10
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": 4.46,
+      "buy_hold": 4.35,
+      "edge": 0.1,
+      "pf": 1.016,
+      "sharpe": 0.092,
+      "so_lenh": 43,
+      "placebo_p": 0.31,
+      "era_edges": [
+        -10.14,
+        10.38
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": true,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 20
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -32.32,
+      "buy_hold": 4.35,
+      "edge": -36.67,
+      "pf": 0.931,
+      "sharpe": -0.407,
+      "so_lenh": 16,
+      "placebo_p": 0.85,
+      "era_edges": [
+        -18.43,
+        -21.31
+      ],
+      "ok_mau": false,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "donchian",
+      "params": {
+        "n": 55
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -23.97,
+      "buy_hold": 4.35,
+      "edge": -28.33,
+      "pf": 0.956,
+      "sharpe": -0.263,
+      "so_lenh": 245,
+      "placebo_p": 0.68,
+      "era_edges": [
+        -24.3,
+        -5.36
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 7,
+        "nhap": 55
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -23.32,
+      "buy_hold": 4.35,
+      "edge": -27.67,
+      "pf": 0.957,
+      "sharpe": -0.254,
+      "so_lenh": 107,
+      "placebo_p": 0.73,
+      "era_edges": [
+        -37.07,
+        11.97
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 55
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    },
+    {
+      "lai": -7.89,
+      "buy_hold": 4.35,
+      "edge": -12.24,
+      "pf": 0.992,
+      "sharpe": -0.049,
+      "so_lenh": 55,
+      "placebo_p": 0.4,
+      "era_edges": [
+        -14.07,
+        1.64
+      ],
+      "ok_mau": true,
+      "ok_placebo": false,
+      "ok_era": false,
+      "ok_edge": false,
+      "dat": false,
+      "ten": "rsi_momentum",
+      "params": {
+        "n": 14,
+        "nhap": 60
+      },
+      "symbol": "GBPUSD=X",
+      "loai": "GBPUSD"
+    }
+  ]
+}

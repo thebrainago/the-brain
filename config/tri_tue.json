@@ -1,0 +1,16 @@
+{
+  "model_openai": "",
+  "max_tokens": 8000,
+  "tran_moi_ngay": 40,
+  "cach_nhau_giay": 600,
+  "cache_gio": 6,
+  "timeout_giay": 420,
+  "duong": "tat",
+
+  "_ghi_chu_16_08": [
+    "Claude va Anthropic da duoc loai khoi cau noi runtime.",
+    "SEEKER khong con dung LLM de boc tai lieu trong mot_luot.",
+    "Chi bat OpenAI khi da khai bao model ro rang, schema dau ra, gioi han chi phi",
+    "va co lap noi dung web khong tin cay khoi quyen cong cu/he thong tep."
+  ]
+}

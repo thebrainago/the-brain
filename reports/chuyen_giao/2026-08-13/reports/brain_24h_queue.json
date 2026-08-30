@@ -1,0 +1,228 @@
+[
+  {
+    "id": "quet_arxiv",
+    "loai": "quet",
+    "nguon": "arXiv",
+    "chu_ky_phut": 1440,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "arxiv",
+      "--so",
+      "8"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:09:04",
+    "trang_thai": "cho",
+    "ket_qua": "OK   [LOI arxiv] technical analysis: <urlopen error [WinError 10013] An attempt was made to acces |   arXiv: 0 bai | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:09:04"
+  },
+  {
+    "id": "quet_github",
+    "loai": "quet",
+    "nguon": "GitHub",
+    "chu_ky_phut": 1440,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "github",
+      "--so",
+      "8"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:26:48",
+    "trang_thai": "cho",
+    "ket_qua": "CO_LOI |   [LOI github] forex ea mql5: <urlopen error [WinError 10013] An attempt was made to acces |   GitHub: 0 repo | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:26:48"
+  },
+  {
+    "id": "quet_huggingface",
+    "loai": "quet",
+    "nguon": "HuggingFace",
+    "chu_ky_phut": 1440,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "huggingface",
+      "--so",
+      "8"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:26:50",
+    "trang_thai": "cho",
+    "ket_qua": "CO_LOI |   [LOI huggingface papers]: <urlopen error [WinError 10013] An attempt was made to acces |   HuggingFace: 0 muc | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:26:48"
+  },
+  {
+    "id": "quet_reddit",
+    "loai": "quet",
+    "nguon": "Reddit",
+    "chu_ky_phut": 1440,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "reddit",
+      "--so",
+      "8"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:27:50",
+    "trang_thai": "cho",
+    "ket_qua": "CO_LOI |   [LOI reddit r/Trading]: <urlopen error [WinError 10013] An attempt was made to acces |   Reddit: 0 bai | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:27:50"
+  },
+  {
+    "id": "quet_rss",
+    "loai": "quet",
+    "nguon": "RSS",
+    "chu_ky_phut": 1440,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "rss",
+      "--so",
+      "6"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:27:51",
+    "trang_thai": "cho",
+    "ket_qua": "CO_LOI |   [LOI rss] https://ssrn.com/feeds/top-downloads.cfm?fps=14787: <urlopen error [WinError 10013] An attempt was mad |   RSS: 0 bai | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:27:50"
+  },
+  {
+    "id": "quet_darwinex",
+    "loai": "quet",
+    "nguon": "Darwinex",
+    "chu_ky_phut": 10080,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "darwinex",
+      "--so",
+      "10"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:09:00",
+    "trang_thai": "cho",
+    "ket_qua": "OK [darwinex] |   [LOI darwinex] (thu cong khi mang cho phep): <urlopen error [WinError 10013] An attempt was made to acces | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:09:00"
+  },
+  {
+    "id": "quet_myfxbook",
+    "loai": "quet",
+    "nguon": "Myfxbook",
+    "chu_ky_phut": 10080,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "myfxbook",
+      "--so",
+      "2"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:09:02",
+    "trang_thai": "cho",
+    "ket_qua": "OK   [LOI myfxbook] <urlopen error [WinError 10013] An attempt was made to acces |   Myfxbook: 0 track record (tho) | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:09:02"
+  },
+  {
+    "id": "quet_youtube",
+    "loai": "quet",
+    "nguon": "YouTube",
+    "chu_ky_phut": 1440,
+    "lenh": [
+      "python",
+      "quet_rong.py",
+      "--nguon",
+      "youtube",
+      "--so",
+      "5"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:28:52",
+    "trang_thai": "cho",
+    "ket_qua": "OK | [youtube] |   YouTube: bo qua - chua co api_key trong nguon_config.json | == KHONG thu duoc gi (kiem tra mang / nguon da chay tren may cua ban)",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:28:52"
+  },
+  {
+    "id": "kiem_tra_ma_khoa",
+    "loai": "kiem_tra",
+    "nguon": "IMAP",
+    "chu_ky_phut": 720,
+    "lenh": [
+      "python",
+      "kiem_tra_ma_khoa.py"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:25:48",
+    "trang_thai": "cho",
+    "ket_qua": "OK |   [THIEU] (bo qua - chua dien email/mat khau) | === KET LUAN === |   Lam buoc 1 trong TAI_KHOAN_VA_MA_KHOA.txt roi chay lai.",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:25:48"
+  },
+  {
+    "id": "doc_hop_thu_imap",
+    "loai": "quet",
+    "nguon": "IMAP",
+    "chu_ky_phut": 360,
+    "lenh": [
+      "python",
+      "brain_nguon_moi.py",
+      "hop-thu"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:25:48",
+    "trang_thai": "cho",
+    "ket_qua": "OK | Dung: python brain_nguon_moi.py [hop-thu|hf-models|hf-papers|youtube|darwinex|myfxbook|sec|vn] | Config: C:\\Users\\SV STORE\\Downloads\\Research SP500\\nguon_config.json",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:25:48"
+  },
+  {
+    "id": "loc_nguon",
+    "loai": "loc",
+    "nguon": "kho_code",
+    "chu_ky_phut": 360,
+    "lenh": [
+      "python",
+      "loc_nguon.py",
+      "--tu-dong"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T21:08:48",
+    "trang_thai": "cho",
+    "ket_qua": "OK | == TONG: 13 nguon (can_loc=0, giu=0, moi=13) -> LOC_NGUON.md",
+    "nang": false,
+    "bat_dau": "2026-08-09T21:08:48"
+  },
+  {
+    "id": "do_chi_phi_mt5",
+    "loai": "chi_phi",
+    "nguon": "chi_phi",
+    "chu_ky_phut": 10080,
+    "lenh": [
+      "python",
+      "brain_chi_phi.py"
+    ],
+    "lan_chay": 1,
+    "lan_chay_cuoi": "2026-08-09T19:08:34",
+    "trang_thai": "cho",
+    "ket_qua": "LOI code=1   File \"C:\\Users\\SV STORE\\Downloads\\Research SP500\\brain_chi_phi.py\", line 50, in <module> |     import numpy as np | ModuleNotFoundError: No module named 'numpy'",
+    "nang": false,
+    "bat_dau": "2026-08-09T19:08:34"
+  }
+]

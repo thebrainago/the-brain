@@ -1,0 +1,65 @@
+{
+  "date": "2026-08-21",
+  "time": "23:47:54",
+  "summary": {
+    "downloaded_codes": {
+      "total_files": 317,
+      "total_bytes": 4784219,
+      "by_source": {
+        "root": 0,
+        "github": 3377617,
+        "mql5": 947384,
+        "myfxbook": 0,
+        "tradingview": 459218,
+        "transcripts": 0
+      }
+    },
+    "database": {
+      "so_theo_doi": 9,
+      "so_cong_dong": 2,
+      "so_bai_muc": 1112
+    },
+    "auto_follow": {
+      "ngay": "2026-08-21",
+      "counts": {
+        "youtube": 2,
+        "reddit": 1
+      },
+      "log": [
+        {
+          "platform": "youtube",
+          "target": "https://www.youtube.com/@RationalReminder",
+          "time": "22:00:48",
+          "date": "2026-08-21"
+        },
+        {
+          "platform": "reddit",
+          "target": "algotrading",
+          "time": "22:02:38",
+          "date": "2026-08-21"
+        },
+        {
+          "platform": "youtube",
+          "target": "https://www.youtube.com/@RationalReminder",
+          "time": "22:02:56",
+          "date": "2026-08-21"
+        }
+      ]
+    }
+  },
+  "modules_created": [
+    "code_downloader.py - Tai code tu TradingView + MQL5 + Myfxbook",
+    "github_code.py - Tai code tu GitHub",
+    "youtube_transcript.py - Tai transcript YouTube"
+  ],
+  "modules_updated": [
+    "__init__.py - Them 3 module moi",
+    "scanner.py - Fix auto_follow_new (_exec -> connect().execute())"
+  ],
+  "what_ran_today": [
+    "Scan 9 nguon theo doi: +13 bai moi",
+    "Kham pha: +1 nguon moi (@forex_signalsfx)",
+    "Auto follow: Reddit r/algotrading + YouTube Rational Reminder",
+    "Mass download: 317 files code (~4.78 MB) tu MQL5 + GitHub"
+  ]
+}

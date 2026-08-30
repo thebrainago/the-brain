@@ -1,0 +1,113 @@
+{
+ "luc": "2026-08-14 23:43:18",
+ "thuyet": "ichi cross Kijun + filter Tenkan>Kijun (long)",
+ "cap": "EURNZD",
+ "ket_qua": [
+  {
+   "cap": "EURNZD",
+   "khung": "H4",
+   "bars": 20931,
+   "giay": 1.6,
+   "rows": [
+    {
+     "khung": "H4",
+     "hold": 1,
+     "trades": 718,
+     "points": -69998.64822727782,
+     "win": 35.93314763231198,
+     "pval": 0.564,
+     "real_points": -69998.6
+    },
+    {
+     "khung": "H4",
+     "hold": 3,
+     "trades": 718,
+     "points": -93179.64822727788,
+     "win": 37.74373259052925,
+     "pval": 0.941,
+     "real_points": -93179.6
+    },
+    {
+     "khung": "H4",
+     "hold": 6,
+     "trades": 718,
+     "points": -113150.6482272776,
+     "win": 40.389972144846794,
+     "pval": 1.0,
+     "real_points": -113150.6
+    },
+    {
+     "khung": "H4",
+     "hold": 12,
+     "trades": 718,
+     "points": -163833.64822727803,
+     "win": 41.78272980501393,
+     "pval": 1.0,
+     "real_points": -163833.6
+    },
+    {
+     "khung": "H4",
+     "hold": 24,
+     "trades": 718,
+     "points": -171712.64822727803,
+     "win": 40.947075208913645,
+     "pval": 1.0,
+     "real_points": -171712.6
+    }
+   ]
+  },
+  {
+   "cap": "EURNZD",
+   "khung": "H1",
+   "bars": 83517,
+   "giay": 3.7,
+   "rows": [
+    {
+     "khung": "H1",
+     "hold": 1,
+     "trades": 2917,
+     "points": -307869.000821442,
+     "win": 24.06582104902297,
+     "pval": 0.99,
+     "real_points": -307869.0
+    },
+    {
+     "khung": "H1",
+     "hold": 3,
+     "trades": 2917,
+     "points": -303584.0008214416,
+     "win": 31.779225231402126,
+     "pval": 0.822,
+     "real_points": -303584.0
+    },
+    {
+     "khung": "H1",
+     "hold": 6,
+     "trades": 2917,
+     "points": -300593.00082144164,
+     "win": 38.258484744600615,
+     "pval": 0.842,
+     "real_points": -300593.0
+    },
+    {
+     "khung": "H1",
+     "hold": 12,
+     "trades": 2917,
+     "points": -281875.0008214419,
+     "win": 41.343846417552285,
+     "pval": 0.703,
+     "real_points": -281875.0
+    },
+    {
+     "khung": "H1",
+     "hold": 24,
+     "trades": 2917,
+     "points": -290589.00082144263,
+     "win": 43.40075419952005,
+     "pval": 0.792,
+     "real_points": -290589.0
+    }
+   ]
+  }
+ ]
+}

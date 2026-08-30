@@ -1,0 +1,121 @@
+{
+  "symbol": "EURUSD=X",
+  "don": {
+    "A": {
+      "edge": -4.8,
+      "pf": 0,
+      "sharpe": -0.59,
+      "lenh": 1
+    },
+    "B": {
+      "edge": 24.2,
+      "pf": 1.14,
+      "sharpe": 0.51,
+      "lenh": 123
+    },
+    "C": {
+      "edge": -18.26,
+      "pf": 0.91,
+      "sharpe": -0.33,
+      "lenh": 291
+    },
+    "D": {
+      "edge": -2.4,
+      "pf": 1.87,
+      "sharpe": 0.22,
+      "lenh": 1
+    }
+  },
+  "to_hop": [
+    {
+      "to_hop": "B+D",
+      "cach": "vote",
+      "edge": 25.77,
+      "lai": 29.36,
+      "pf": 1.14,
+      "sharpe": 0.53,
+      "lenh": 124
+    },
+    {
+      "to_hop": "A+B+D",
+      "cach": "vote",
+      "edge": 24.25,
+      "lai": 27.85,
+      "pf": 1.14,
+      "sharpe": 0.5,
+      "lenh": 125
+    },
+    {
+      "to_hop": "A+B",
+      "cach": "vote",
+      "edge": 22.7,
+      "lai": 26.29,
+      "pf": 1.13,
+      "sharpe": 0.48,
+      "lenh": 124
+    },
+    {
+      "to_hop": "B+D",
+      "cach": "avg",
+      "edge": 10.51,
+      "lai": 14.1,
+      "pf": 1.14,
+      "sharpe": 0.53,
+      "lenh": 62
+    },
+    {
+      "to_hop": "B+C+D",
+      "cach": "vote",
+      "edge": 9.8,
+      "lai": 13.39,
+      "pf": 1.05,
+      "sharpe": 0.24,
+      "lenh": 313
+    },
+    {
+      "to_hop": "A+B",
+      "cach": "avg",
+      "edge": 9.14,
+      "lai": 12.73,
+      "pf": 1.13,
+      "sharpe": 0.48,
+      "lenh": 62
+    },
+    {
+      "to_hop": "B+C",
+      "cach": "vote",
+      "edge": 8.37,
+      "lai": 11.97,
+      "pf": 1.05,
+      "sharpe": 0.22,
+      "lenh": 312
+    },
+    {
+      "to_hop": "A+B+C",
+      "cach": "vote",
+      "edge": 7.06,
+      "lai": 10.65,
+      "pf": 1.04,
+      "sharpe": 0.2,
+      "lenh": 313
+    },
+    {
+      "to_hop": "A+B+D",
+      "cach": "avg",
+      "edge": 5.25,
+      "lai": 8.84,
+      "pf": 1.14,
+      "sharpe": 0.5,
+      "lenh": 41
+    },
+    {
+      "to_hop": "B+C",
+      "cach": "avg",
+      "edge": 1.77,
+      "lai": 5.37,
+      "pf": 1.04,
+      "sharpe": 0.16,
+      "lenh": 192
+    }
+  ]
+}

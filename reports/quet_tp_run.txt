@@ -1,0 +1,35 @@
+  AUDCAD TP=50: n=487 pf=0.75 dd=11214.0 win=0.879 (4.8s)
+  AUDCAD TP=100: n=487 pf=0.58 dd=34502.0 win=0.688 (7.8s)
+  AUDCAD TP=150: n=487 pf=0.52 dd=49588.0 win=0.548 (9.5s)
+  AUDCAD TP=200: n=487 pf=0.46 dd=63020.0 win=0.407 (10.4s)
+  EURCAD TP=50: n=1006 pf=0.91 dd=16994.0 win=0.956 (5.4s)
+  EURCAD TP=100: n=1006 pf=0.99 dd=17818.0 win=0.866 (9.3s)
+  EURCAD TP=150: n=1006 pf=0.75 dd=78074.0 win=0.747 (12.8s)
+  EURCAD TP=200: n=1006 pf=0.67 dd=129366.0 win=0.639 (15.8s)
+  EURNZD TP=50: n=1628 pf=0.93 dd=37065.0 win=0.976 (6.1s)
+  EURNZD TP=100: n=1628 pf=0.81 dd=85989.0 win=0.929 (10.9s)
+  EURNZD TP=150: n=1628 pf=0.83 dd=125998.0 win=0.866 (14.9s)
+  EURNZD TP=200: n=1628 pf=0.67 dd=299185.0 win=0.765 (21.1s)
+  GBPCAD TP=50: n=1331 pf=1.01 dd=17806.0 win=0.974 (5.7s)
+  GBPCAD TP=100: n=1331 pf=0.83 dd=50775.0 win=0.915 (9.7s)
+  GBPCAD TP=150: n=1331 pf=0.78 dd=100476.0 win=0.846 (13.2s)
+  GBPCAD TP=200: n=1331 pf=0.69 dd=195578.0 win=0.751 (16.6s)
+  NZDCAD TP=50: n=569 pf=1.02 dd=6385.0 win=0.923 (5.0s)
+  NZDCAD TP=100: n=569 pf=0.63 dd=38374.0 win=0.75 (8.4s)
+  NZDCAD TP=150: n=569 pf=0.55 dd=57772.0 win=0.578 (10.0s)
+  NZDCAD TP=200: n=569 pf=0.47 dd=79564.0 win=0.441 (11.9s)
+  XAUUSDm TP=50: n=2072 pf=3.93 dd=15789.0 win=0.995 (3.5s)
+  XAUUSDm TP=100: n=2072 pf=0.63 dd=400147.0 win=0.972 (6.3s)
+  XAUUSDm TP=150: n=2072 pf=0.51 dd=1010181.0 win=0.947 (8.8s)
+  XAUUSDm TP=200: n=2072 pf=0.53 dd=1518346.0 win=0.918 (11.7s)
+
+=== QUET TP - CO CHE DAILY ZONE (best TP moi cap) ===
+CAP          TP   NAM     N   /NAM     PF      DD    WIN
+XAUUSDm      50  12.5  2072  166.3   3.93   15789   0.99
+NZDCAD       50  13.5   569   42.2   1.02    6385   0.92
+GBPCAD       50  13.5  1331   98.8   1.01   17806   0.97
+EURCAD      100  13.5  1006   74.6   0.99   17818   0.87
+EURNZD       50  13.5  1628  121.0   0.93   37065   0.98
+AUDCAD       50  13.4   487   36.2   0.75   11214   0.88
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\khao_sat_daily_zone.json
