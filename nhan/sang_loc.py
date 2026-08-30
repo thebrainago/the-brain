@@ -65,6 +65,17 @@ SAN_SANG_V4 = "SAN_SANG_V4"
 #: lai cho may man.
 NEN_GOP = "NEN_GOP"
 
+#: Ly do truot co nghia "chua DO DUOC", khong phai "khong co edge".
+#:
+#: Phan biet nay quyet dinh mot ung vien co duoc leo thang sang duong GOP hay
+#: khong. `sharpe_am` va `thua_mua_giu_tren_phoi_nhiem` la cau tra loi THAT ve
+#: co che - gop them chan chi lam loang. Con "it lenh qua de ket luan" thi
+#: khong noi gi ve co che ca, va do dung la thu ma gop ca lop chua duoc.
+LY_DO_THIEU_LUC = frozenset({
+    "thieu_lenh_de_ket_luan", "khong_du_bar", "qua_it_lenh",
+})
+
+
 #: Bo dem trong bo nho. Moi lan LOAI deu ghi lai - day la cach duy nhat de sau
 #: nay tra loi duoc "neu noi tieu chi X thi bao nhieu thu song lai" bang mot
 #: truy van, thay vi chay lai tat ca.
@@ -499,6 +510,33 @@ def chay_pheu(ten_mau: str, tham_so: dict | None, ma: str, khung: str,
         kl, ly_do, do = ham(*doi_so)
         do_tong.update(do or {})
         if kl != NHAN:
+            # LEO THANG SOM SANG DUONG GOP.
+            #
+            # Nhan NEN_GOP truoc day chi duoc gan BEN TRONG V3, nhung san so
+            # lenh toi thieu giet co che THUA LENH ngay o V2 - va "thua lenh
+            # tren tung tai san, day lenh khi gop ca lop" chinh la ho so ma
+            # duong GOP sinh ra de xu ly. Ket qua: pheu tu chan mot lop co che
+            # khoi con duong danh cho no.
+            #
+            # Do that 30/08/2026 tren be mat D1, va no chan dung 2 trong 3 co
+            # che co tin hieu that:
+            #   rsi_dao_chieu  pham_vi=CO_CO_CHE, 121/122 o chet o V1/V2 -> 0 NEN_GOP
+            #   stoch_qua_ban  pham_vi=CO_CO_CHE, 122/122 o chet o V1/V2 -> 0 NEN_GOP
+            #   ibs_bat_day    o toi duoc V3     ->            26 NEN_GOP
+            #
+            # Chi leo thang khi THIEU LUC, khong khi THIEU EDGE: `sharpe_am`,
+            # `thua_mua_giu_tren_phoi_nhiem`, `le_thuoc_mot_bar` la nhung cau
+            # tra loi THAT ve co che va khong duoc gop de cuu.
+            #
+            # Day la thay doi NHAN, khong phai thay doi QUYET DINH: NEN_GOP la
+            # nhan cua tang kham pha, khong tieu mot suat FDR nao. Suat chi bi
+            # tieu khi `quantlab.xac_nhan_gop` chay.
+            if (kl == CHUA_DU_LUC and ly_do in LY_DO_THIEU_LUC
+                    and str((pham_vi or {}).get("ket_luan")) == "CO_CO_CHE"):
+                _ghi_cho_them(vt, ten_vong, "thieu_luc_don_le_nen_gop",
+                              f"{ly_do}; pham_vi=CO_CO_CHE")
+                return _ket(NEN_GOP, ten_vong, "thieu_luc_don_le_nhung_co_co_che",
+                            van_tay=vt, do=do_tong)
             return _ket(kl, ten_vong, ly_do, van_tay=vt, do=do_tong)
 
     return _ket(SAN_SANG_V4, "V3", "", van_tay=vt, do=do_tong)

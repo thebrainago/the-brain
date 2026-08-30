@@ -269,6 +269,92 @@ def m_lap_gap(df, nguong=0.001, **_):
     return _ra(v.fillna(0.0), len(df))
 
 
+# --- ba mau bo sung 30/08/2026 ------------------------------------------
+# Do 24/08 tren 52 file .mq5 tai ve tu MQL5 Code Base: 18 chien luoc that,
+# trong do **12 khong co template tuong ung** nen khong co duong vao QUANTLAB.
+# Ba co che duoi day la thu xuat hien nhieu nhat trong 12 file do.
+#
+# Ca ba deu chi doc thong tin biet TAI close[i]; engine tu dich mot bar.
+
+def supertrend(df, n=10, he_so=3.0):
+    """Duong SuperTrend: dai ATR quanh gia trung binh, CHOT LAI khong lui.
+
+    Phan "khong lui" moi la cai lam nen co che: mot khi dai da siet lai theo
+    huong xu huong thi no khong noi ra, nen tin hieu doi chieu chi xay ra khi
+    gia that su xuyen qua - khong phai khi bien do tinh co no ra.
+    """
+    tb = (df["high"] + df["low"]) / 2.0
+    a = atr(df, n)
+    tren_tho, duoi_tho = tb + he_so * a, tb - he_so * a
+    c = df["close"].to_numpy()
+    tt, td = tren_tho.to_numpy(), duoi_tho.to_numpy()
+    n_bar = len(df)
+    tren = np.full(n_bar, np.nan)
+    duoi = np.full(n_bar, np.nan)
+    huong = np.zeros(n_bar)
+    for i in range(1, n_bar):
+        if np.isnan(tt[i]) or np.isnan(td[i]):
+            continue
+        # Dai tren chi duoc SIET XUONG, tru khi bar truoc da dong tren no.
+        tren[i] = (min(tt[i], tren[i - 1])
+                   if not np.isnan(tren[i - 1]) and c[i - 1] <= tren[i - 1] else tt[i])
+        duoi[i] = (max(td[i], duoi[i - 1])
+                   if not np.isnan(duoi[i - 1]) and c[i - 1] >= duoi[i - 1] else td[i])
+        if c[i] > tren[i]:
+            huong[i] = 1.0
+        elif c[i] < duoi[i]:
+            huong[i] = -1.0
+        else:
+            huong[i] = huong[i - 1]
+    return pd.Series(huong, index=df.index)
+
+
+def stoch(df, n=14, lam_muot=3):
+    """%K cua Stochastic: gia dong cua nam o dau bien do N bar."""
+    thap = df["low"].rolling(n).min()
+    cao = df["high"].rolling(n).max()
+    bien = (cao - thap).replace(0.0, np.nan)
+    k = 100.0 * (df["close"] - thap) / bien
+    return k.rolling(lam_muot).mean()
+
+
+def m_supertrend(df, n=10, he_so=3.0, chi_mua=False, **_):
+    h = supertrend(df, n, he_so)
+    v = h.copy()
+    if chi_mua:
+        v = v.clip(lower=0.0)
+    return _ra(v.fillna(0.0), len(df))
+
+
+def m_stoch_qua_ban(df, n=14, lam_muot=3, vao=20, ra_=60, **_):
+    """Stochastic ban qua da -> mua, thoat khi ve giua bien do.
+
+    Khac `rsi_dao_chieu` o cho no do vi tri trong BIEN DO cao-thap chu khong do
+    ty le tang/giam - nen no bat duoc trang thai "sat day bien do N bar" ma RSI
+    khong thay khi bien do hep.
+    """
+    k = stoch(df, n, lam_muot)
+    v = pd.Series(np.nan, index=df.index)
+    v[k < vao] = 1.0
+    v[k > ra_] = 0.0
+    return _ra(v.ffill().fillna(0.0), len(df))
+
+
+def m_do_doc_ma(df, n=50, cua_so=10, nguong=0.0, **_):
+    """DO DOC cua duong trung binh, khong phai vi tri gia so voi no.
+
+    Khac `momentum_ema`: o day tin hieu la MA dang DI LEN hay DI XUONG, do bang
+    thay doi tuong doi qua `cua_so` bar. Gia co the dang duoi MA ma MA van doc
+    len - hai trang thai do khac nhau, va cac EA tai ve phan biet chung.
+    """
+    m = sma(df["close"], n)
+    doc = (m - m.shift(cua_so)) / m.shift(cua_so).abs().replace(0.0, np.nan)
+    v = pd.Series(0.0, index=df.index)
+    v[doc > nguong] = 1.0
+    v[doc < -nguong] = -1.0
+    return _ra(v.fillna(0.0), len(df))
+
+
 MAU = {
     "ibs_bat_day": {
         "ham": m_ibs_bat_day, "ho": "quay_ve_trung_binh",
@@ -325,6 +411,32 @@ MAU = {
         "ham": m_bien_do_thu_hep, "ho": "pha_vo",
         "co_che": "Bien do co lai bao truoc mot cu gian bien do; di theo huong gian.",
         "luoi": [{"n": 20, "ty_le": 0.7}, {"n": 20, "ty_le": 0.5}, {"n": 50, "ty_le": 0.7}],
+    },
+    "supertrend": {
+        "ham": m_supertrend, "ho": "xu_huong",
+        "nguon": "12/18 chien luoc .mq5 tai ve (quet 24/08) chua co template",
+        "co_che": "Dai ATR chi siet theo huong xu huong, khong noi ra - nen doi "
+                  "chieu chi xay ra khi gia THAT SU xuyen qua, khong phai khi "
+                  "bien do tinh co gian.",
+        "luoi": [{"n": 10, "he_so": 3.0}, {"n": 10, "he_so": 2.0},
+                 {"n": 20, "he_so": 3.0}, {"n": 10, "he_so": 3.0, "chi_mua": True}],
+    },
+    "stoch_qua_ban": {
+        "ham": m_stoch_qua_ban, "ho": "quay_ve_trung_binh",
+        "nguon": "12/18 chien luoc .mq5 tai ve (quet 24/08) chua co template",
+        "co_che": "Dong cua sat DAY BIEN DO N bar = ap luc ban da vet het lenh "
+                  "cho; nguoi mua tiep theo duoc gia tot hon gia tri.",
+        "luoi": [{"n": 14, "vao": 20, "ra_": 60}, {"n": 14, "vao": 10, "ra_": 50},
+                 {"n": 5, "vao": 20, "ra_": 80}],
+    },
+    "do_doc_ma": {
+        "ham": m_do_doc_ma, "ho": "xu_huong",
+        "nguon": "12/18 chien luoc .mq5 tai ve (quet 24/08) chua co template",
+        "co_che": "HUONG DI cua trung binh, khong phai vi tri gia so voi no: "
+                  "gia co the nam duoi MA ma MA van doc len, va do la hai trang "
+                  "thai khac nhau.",
+        "luoi": [{"n": 50, "cua_so": 10}, {"n": 20, "cua_so": 5},
+                 {"n": 100, "cua_so": 20}, {"n": 50, "cua_so": 10, "nguong": 0.002}],
     },
     # --- rut tu code da co san tren may (quet 15/08) ---
     "orb_pha_vo": {
