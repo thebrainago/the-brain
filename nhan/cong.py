@@ -257,7 +257,7 @@ def ky_hien_tai() -> str:
 #              thu thu 4, nen `max(p_alpha, p_placebo)` khoa cung cong lai
 #              vinh vien. 346 phan quyet FAIL cua the he 3 sinh ra tu loi nay
 #              va KHONG duoc dung lam bang chung "khong co edge".
-THE_HE_CONG = 4
+THE_HE_CONG = 5
 
 
 def san_p_placebo(n_bootstrap: int | None = None) -> float:
@@ -454,6 +454,80 @@ def lord(p: float, ho: str, gt_ma: str, muc_tieu: float | None = None,
 
 
 # ---------------------------------------------------------------------- CONG
+def he_so_khop_rui_ro(loi_he, loi_bh) -> tuple[float | None, str]:
+    """He so dua HE ve dung muc rui ro cua MOC. Tra (k, ghi_chu).
+
+    VI SAO CAN. Cong 1 so TONG LAI cua he voi mua-giu. Nhung mot he chon loc
+    chi o trong thi truong 16-18% thoi gian con moc o 100%: do khong phai so
+    cung don vi, va tren tai san co xu huong tang thi cong 1 tro thanh BAT KHA
+    voi moi co che chon loc. Do that 30/08/2026 tren US500M.D1 — chan IBS cua
+    V6 dat Sharpe 0,992 va Calmar 0,961 (moc 0,885 / 0,756), qua cong 2 va 3,
+    chet o cong 1 vi 33,2% < 48,5%.
+
+    Cau hoi dung: *cung mot muc rui ro thi ben nao lai hon?*
+
+    `k = min(k_bien_dong, k_sut_giam)` — he KHONG duoc phep chiu rui ro hon moc
+    o BAT KY thuoc do nao trong hai. Lay min chu khong lay rieng bien dong la
+    co y: mot he co bien dong thap nhung duoi trai day (lai deu, thua tham)
+    se duoc bien dong cho phep nhan len rat cao, va chinh dang do la dang du an
+    nay da gap bon lan (gong lo V6, TP 0,5%, DCA DongDongTV, nhoi lenh).
+
+    Moi thanh phan chi phi deu TUYEN TINH theo phoi nhiem (spread ~ |dv|, phi
+    qua dem ~ |v|, lai gop ~ v) nen nhan chuoi loi suat rong voi k cho dung
+    ket qua chay lai engine voi `don_bay=k` — da doi chieu that: 77,64% ca hai
+    cach. Nho vay khong phai chay lai backtest.
+
+    Tra k=None khi khong khop duoc: chuoi qua ngan, bien dong 0, hoac **don
+    bay lam chay tai khoan** (co bar nao do 1+k*r <= 0). Truong hop cuoi quan
+    trong: mot he khong the nhan len ma khong pha san thi khong duoc huong loi
+    the cua phep nhan do.
+    """
+    a = np.asarray(loi_he, dtype=float); a = a[np.isfinite(a)]
+    b = np.asarray(loi_bh, dtype=float); b = b[np.isfinite(b)]
+    if len(a) < 30 or len(b) < 30:
+        return None, "chuoi qua ngan de khop rui ro"
+    sa, sb = a.std(ddof=1), b.std(ddof=1)
+    if not (sa > 0 and sb > 0):
+        return None, "bien dong bang 0 - khong khop duoc"
+    k = float(sb / sa)
+
+    def _dd(r):
+        e = np.cumprod(1.0 + r)
+        return float((e / np.maximum.accumulate(e) - 1.0).min())
+
+    dd_a, dd_b = _dd(a), _dd(b)
+    if dd_a < 0:
+        k = min(k, float(abs(dd_b) / abs(dd_a)))
+    if k <= 0:
+        return None, "he so khong duong"
+    if float((1.0 + k * a).min()) <= 0.0:
+        return None, f"don bay {k:.2f}x lam chay tai khoan - khong khop duoc"
+    return k, f"khop rui ro k={k:.3f}x (bien dong va sut giam, lay muc chat hon)"
+
+
+def khong_co_phan_bu_rui_ro(kq_bh) -> bool:
+    """Moc mua-giu cua tai san nay co mang phan bu rui ro khong?
+
+    Tren FX, giu mot cap tien te khong duoc tra gi: giu EURCAD 8 nam ra Sharpe
+    -0,02. Vi vay `max(bh, 0)` lam cong 1-2-3 gan nhu CHO KHONG o do.
+
+    Do tren so cai 30/08/2026: qua cong 1 la **37,4% tren FX** so voi **0,4%
+    tren chi so** — cung mot cong, de hon 90 lan. Va 79% gia thuyet dang la FX,
+    tuc ngan sach FDR tu chay ve noi cong de nhat.
+
+    Khi moc khong mang thong tin thi ba cong so-voi-moc cung khong mang thong
+    tin, nen ganh nang phai chuyen sang cong THONG KE: siet nguong p.
+    """
+    sh = getattr(kq_bh, "sharpe", None)
+    if sh is None:
+        try:
+            r = np.asarray(kq_bh.loi, dtype=float); r = r[np.isfinite(r)]
+            sh = float(r.mean() / r.std(ddof=1) * np.sqrt(252)) if len(r) > 30 else None
+        except Exception:
+            return False
+    return sh is not None and sh <= 0.20
+
+
 def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         da_dang_ky: bool = False, tren_holdout: bool = False,
         lai_suat=None, chay_placebo: bool = True,
@@ -486,7 +560,11 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     al = ss["alpha_vs_mua_giu"]
 
     phoi_nhiem = he.get("phoi_nhiem", 0.0) or 0.0
-    siet = phoi_nhiem > n["phoi_nhiem_siet"]
+    # Siet nguong p khi (a) phoi nhiem gan 100% - alpha de lan voi drift; hoac
+    # (b) moc khong mang phan bu rui ro, luc do ba cong so-voi-moc khong loc
+    # duoc gi va ganh nang phai roi sang cong thong ke.
+    moc_rong = khong_co_phan_bu_rui_ro(kq_bh)
+    siet = (phoi_nhiem > n["phoi_nhiem_siet"]) or moc_rong
     p_can = n["p_siet"] if siet else n["p_alpha"]
     p_can_pl = n["p_siet"] if siet else n["p_placebo"]
 
@@ -499,7 +577,28 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     # Moc la mua-giu, NHUNG co san tuyet doi 0. Ly do: tren FX, mua-giu khong co
     # phan bu rui ro - giu EURCAD 8 nam ra Sharpe -0,02. "Thang mua-giu" o day
     # gan nhu cho khong. San 0 khong giet V6 (Sharpe 0,95 do tren MT5 that).
-    dk["1_loi_hon_mua_giu"] = _sanh(he.get("tong_lai_pct"), max(bh.get("tong_lai_pct") or 0, 0.0))
+    #
+    # THE HE 5 (30/08/2026): cong 1 so o muc RUI RO BANG NHAU. Xem
+    # `he_so_khop_rui_ro`. Khong khop duoc thi quay ve so tho - khong khop duoc
+    # KHONG duoc thanh mot cach de qua cong de hon.
+    # `getattr` co chu y: mot vai duong goi (va bo test) dua vao moc khong mang
+    # chuoi loi suat. Thieu so lieu thi LUI VE so tho, khong duoc vo - va cung
+    # khong duoc am tham thanh mot duong de qua cong de hon.
+    _loi_he = getattr(kq_he, "loi", None)
+    _loi_bh = getattr(kq_bh, "loi", None)
+    if _loi_he is None or _loi_bh is None:
+        k_khop, ghi_chu_khop = None, "moc khong mang chuoi loi suat"
+    else:
+        k_khop, ghi_chu_khop = he_so_khop_rui_ro(_loi_he, _loi_bh)
+    lai_khop = he.get("tong_lai_pct")
+    if k_khop is not None:
+        _a = np.asarray(_loi_he, dtype=float); _a = _a[np.isfinite(_a)]
+        lai_khop = float((np.prod(1.0 + k_khop * _a) - 1.0) * 100.0)
+        ly_do.append(ghi_chu_khop + f" -> lai khop {lai_khop:.2f}% "
+                     f"(tho {he.get('tong_lai_pct')}%)")
+    else:
+        ly_do.append("KHONG khop rui ro duoc (" + ghi_chu_khop + ") - so lai tho")
+    dk["1_loi_hon_mua_giu"] = _sanh(lai_khop, max(bh.get("tong_lai_pct") or 0, 0.0))
     dk["2_sharpe_hon_mua_giu"] = _sanh(he.get("sharpe"), max(bh.get("sharpe") or 0, 0.0))
     dk["3_calmar_hon_mua_giu"] = _sanh(he.get("calmar"), max(bh.get("calmar") or 0, 0.0))
 
@@ -533,8 +632,12 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     if siet:
         co_duong = any((g.get("cagr_pct") or -1) > 0 for g in giai_doan)
         dk["9_siet_phoi_nhiem_cao"] = co_duong
-        ly_do.append(f"phoi nhiem {phoi_nhiem:.1%} > {n['phoi_nhiem_siet']:.0%} "
-                     f"-> siet nguong p ve {p_can}")
+        if moc_rong:
+            ly_do.append("moc mua-giu khong co phan bu rui ro (Sharpe <= 0,20) "
+                         f"-> ba cong so-voi-moc khong loc duoc gi, siet p ve {p_can}")
+        if phoi_nhiem > n["phoi_nhiem_siet"]:
+            ly_do.append(f"phoi nhiem {phoi_nhiem:.1%} > {n['phoi_nhiem_siet']:.0%} "
+                         f"-> siet nguong p ve {p_can}")
 
     # ------------------------------------------------------------------
     # Placebo van chi chay sau cac cong re de tranh lang phi CPU. Khac V2 cu,
