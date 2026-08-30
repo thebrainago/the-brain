@@ -363,9 +363,16 @@ def n_semantic_scholar(tu_khoa: list[str]) -> list[dict]:
 
 
 NGUON = {
-    "arxiv":         {"ham": n_arxiv, "chu_ky": 21600, "uu_tien": 2, "loai": "hoc_thuat"},
+    # Hai nguon HOC THUAT xuong uu_tien 3 ngay 30/08/2026 — do that, khong
+    # phai cam giac. Suat ra artifact tren moi tai lieu: github 140/179
+    # (78%), mql5 71/~102 (70%), youtube 18/62 (29%), **openalex 17/281
+    # (6%), arxiv 1/133 (0,8%)**. Ve co che thi ca hai cho DUNG 0 tren
+    # 414 ban. Bai hoc thuat ta PHUONG PHAP, khong ta LUAT.
+    # KHONG tat — chi di sau, vi ngan sach quet chi 90 giay/luot nen thu
+    # tu quyet dinh ai duoc quet that.
+    "arxiv":         {"ham": n_arxiv, "chu_ky": 21600, "uu_tien": 3, "loai": "hoc_thuat"},
     "github":        {"ham": n_github, "chu_ky": 43200, "uu_tien": 1, "loai": "ma_nguon"},
-    "openalex":      {"ham": n_openalex, "chu_ky": 43200, "uu_tien": 2, "loai": "hoc_thuat"},
+    "openalex":      {"ham": n_openalex, "chu_ky": 43200, "uu_tien": 3, "loai": "hoc_thuat"},
     "stackexchange": {"ham": n_stackexchange, "chu_ky": 43200, "uu_tien": 3, "loai": "cong_dong"},
     "hackernews":    {"ham": n_hackernews, "chu_ky": 43200, "uu_tien": 3, "loai": "cong_dong"},
     # Semantic Scholar tra 429 khi khong co khoa -> chu ky dai, backoff tu dong lo not.
