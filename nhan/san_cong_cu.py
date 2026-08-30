@@ -74,6 +74,80 @@ GIAY_PHEP_LAY_NHIEM = {"GPL-3.0", "GPL-2.0", "AGPL-3.0", "LGPL-3.0"}
 #: no thi lan nao cung "tim thay thu huu ich", va do la mot dang tu lua minh
 #: khac. Moi muc phai noi ro NO CAM VAO DAU va CAI GI NO KHONG DUOC THAY.
 NHU_CAU = {
+    # ------------------------------------------------------------------
+    # NHOM KY THUAT (them 30/08/2026 theo chi dan chu du an: EVO nam RONG
+    # HON linh vuc giao dich - phan lon van de cua ta la van de TIN HOC
+    # thuong, va cong dong da giai chung tu lau).
+    #
+    # Moi nhu cau duoi day gan voi mot nut that DA DO DUOC tren may nay,
+    # khong phai mot mong muon chung chung. Do la ly do chung dang mot suat
+    # tim kiem con "lam cho he nhanh hon" thi khong.
+    # ------------------------------------------------------------------
+    "do_nut_that": {
+        "vi_sao": "Do 29/08: 42% thoi gian chay la `nt.stat` - khong ai doan "
+                  "ra, phai profile moi thay. Sua bang cache TTL -> pheu nhanh "
+                  "8 lan, bo test 6:07 -> 1:15. Ta khong co bo do thuong truc, "
+                  "nen lan sau lai phai doan.",
+        "cam_vao": "cong cu ngoai, chay canh day chuyen - khong nhap vao ma",
+        "khong_duoc_thay": "khong duoc cham nhan/cong.py, nhan/so.py; do dac "
+                           "khong duoc chiem suat FDR",
+        "truy_van": ["python sampling profiler production",
+                     "python profiling slow file system calls"],
+        "sao_toi_thieu": 500,
+        "duong": ["github", "dien_dan"],
+    },
+    "song_song_va_bo_nho": {
+        "vi_sao": "May 20 luong nhung nghen BANG THONG BO NHO: co viec 20 luong "
+                  "= 1 luong, co viec (pheu D1, tap lam viec 128 KB nam trong "
+                  "cache CPU) nhanh that 3,8 lan. Ta chua co cach BIET TRUOC "
+                  "viec nao thuoc loai nao, nen dang thu-va-sai.",
+        "cam_vao": "quet_be_mat.py, dieu_phoi.py - cach chia viec",
+        "khong_duoc_thay": "khong duoc doi ket qua tinh toan; song song chi "
+                           "duoc doi TOC DO, khong duoc doi mot con so nao",
+        "truy_van": ["memory bandwidth bound numpy multiprocessing",
+                     "when multiprocessing does not speed up python"],
+        "sao_toi_thieu": 0,
+        "duong": ["dien_dan"],
+    },
+    "nhanh_hon_so_hoc": {
+        "vi_sao": "Quet be mat va placebo la vong lap numpy tren hang trieu "
+                  "bar; mot lan placebo day du la 995 luot backtest. Nhanh hon "
+                  "o day doi thang ra SO GIA THUYET kiem duoc moi ngay.",
+        "cam_vao": "nhan/mo_phong.py, nhan/mau.py - lop tinh toan",
+        "khong_duoc_thay": "TUYET DOI khong duoc doi ket qua so hoc. Bat ky "
+                           "thay the nao phai doi chieu tung bar voi ban cu "
+                           "truoc khi dung.",
+        "truy_van": ["numba vectorized backtest speedup",
+                     "polars vs pandas time series performance"],
+        "sao_toi_thieu": 800,
+        "duong": ["github", "dien_dan"],
+    },
+    "luu_tru_va_doc_gia": {
+        "vi_sao": "Do 29/08: 42% thoi gian chay la `nt.stat` cua `kho()` - "
+                  "cache TTL keo pheu nhanh 8 lan va bo test tu 6:07 xuong "
+                  "1:15. Kho co 111 bang >= 12 nam va con phinh; doc gia van "
+                  "la duong nong nhat cua ca day chuyen.",
+        "cam_vao": "nhan/du_lieu.py - lop doc du lieu gia",
+        "khong_duoc_thay": "khong duoc doi cach CHON ban du lieu (do phu), "
+                           "chi duoc doi cach DOC",
+        "truy_van": ["duckdb parquet time series query speed",
+                     "fastest way to load large parquet python"],
+        "sao_toi_thieu": 300,
+        "duong": ["github", "dien_dan"],
+    },
+    "chay_lau_dai_khong_nguoi_truc": {
+        "vi_sao": "The Brain phai chay 24/7 khong nguoi truc. Task Scheduler bi "
+                  "Access denied nen dang phai dung Startup; Chrome tung phinh "
+                  "356 tab va treo ca luot keo ma khong mot ban ghi nao. Ta "
+                  "chua co cach TU HOI PHUC.",
+        "cam_vao": "dieu_phoi.py - lop giam sat tien trinh",
+        "khong_duoc_thay": "khong duoc tu khoi dong lai mot tru dang giua mot "
+                           "phep ghi so cai",
+        "truy_van": ["supervise long running python process windows restart",
+                     "detect hung headless chrome automation"],
+        "sao_toi_thieu": 0,
+        "duong": ["dien_dan"],
+    },
     # Them 30/08/2026 sau khi do pheu doc: trong 2.504 cau bo doc nhan la "luat
     # vao", 42,0% la manh MA NGUON va 44,7% la VAN TAN GAU. Bo doc tu choi
     # chung la dung, nhung cong doc van bi tieu vao 87% rac.
@@ -463,6 +537,90 @@ def tim_huggingface(truy_van: str, so_luong: int = 8,
     return ra
 
 
+def tim_dien_dan(truy_van: str, so_luong: int = 8) -> list[dict]:
+    """Tim tren DIEN DAN KY THUAT (Hacker News, Stack Overflow, Lobsters).
+
+    Duong thu tu, va no khac ba duong kia ve BAN CHAT cai tim duoc:
+
+      GitHub      -> mot goi de goi
+      arXiv       -> mot phuong phap de doc
+      HuggingFace -> mot bo trong so da huan luyen
+      **Dien dan  -> mot KINH NGHIEM: cai gi cham, vi sao, ai da vap**
+
+    Hai nguon: Hacker News (Algolia) va Stack Overflow. Ca hai da do that
+    la vao duoc tu may nay ngay 30/08/2026.
+
+    Phan lon nut that cua The Brain khong giai bang mot thu vien moi ma bang
+    mot cau "hoa ra `os.stat` goi 80.000 lan/phut". Do la thu chi nam trong
+    bai viet va cau tra loi cua nguoi khac.
+
+    EVO nam RONG HON linh vuc giao dich (chu du an chi 30/08/2026): phan lon
+    van de cua ta la van de TIN HOC thuong - I/O, bo nho, song song, cache -
+    va cong dong giai quyet chung tu lau roi.
+
+    Diem: HN lay `points`, SO lay `score`. Deu quy ve `stargazers_count` de
+    `cham_diem` doc duoc mot cach duy nhat.
+    """
+    import json as _json
+    import urllib.parse as _up
+    import urllib.request as _ur
+
+    def _lay(u):
+        try:
+            rq = _ur.Request(u, headers={"User-Agent": "Mozilla/5.0"})
+            with _ur.urlopen(rq, timeout=25) as f:
+                return f.read().decode("utf-8", "replace")
+        except Exception:
+            return None
+
+    q = _up.quote(truy_van)
+    ra: list[dict] = []
+
+    txt = _lay(f"https://hn.algolia.com/api/v1/search?query={q}"
+               f"&tags=story&hitsPerPage={so_luong}")
+    if txt:
+        try:
+            for it in _json.loads(txt).get("hits", [])[:so_luong]:
+                ten = (it.get("title") or "").strip()
+                if not ten:
+                    continue
+                ra.append({
+                    "full_name": f"HN: {ten}"[:120],
+                    "html_url": it.get("url") or
+                    f"https://news.ycombinator.com/item?id={it.get('objectID')}",
+                    "description": (it.get("story_text") or "")[:300],
+                    "stargazers_count": int(it.get("points") or 0),
+                    "forks_count": int(it.get("num_comments") or 0),
+                    "license": None, "pushed_at": it.get("created_at"),
+                    "_nguon": "hackernews"})
+        except Exception:
+            pass
+
+    txt = _lay("https://api.stackexchange.com/2.3/search/advanced?order=desc"
+               f"&sort=votes&q={q}&site=stackoverflow&pagesize={so_luong}")
+    if txt:
+        try:
+            for it in _json.loads(txt).get("items", [])[:so_luong]:
+                ten = (it.get("title") or "").strip()
+                if not ten:
+                    continue
+                ra.append({
+                    "full_name": f"SO: {ten}"[:120],
+                    "html_url": it.get("link") or "",
+                    "description": ", ".join(it.get("tags", [])[:8])[:300],
+                    "stargazers_count": int(it.get("score") or 0),
+                    "forks_count": int(it.get("answer_count") or 0),
+                    "license": None, "pushed_at": None,
+                    "_nguon": "stackoverflow"})
+        except Exception:
+            pass
+
+    # Lobsters: DA BO. `search.json` tra HTTP 400 - trang khong co endpoint
+    # tim kiem dang JSON. Giu mot loi goi luon hong chi lam nhieu nhat ky va
+    # ton mot vong mang moi luot.
+    return ra or [{"loi": "khong dien dan nao tra ve ket qua"}]
+
+
 # ------------------------------------------------------- TIM CONG TRINH
 def tim_arxiv(truy_van: str, so_luong: int = 8) -> list[dict]:
     """Tim BAI BAO, khong tim kho ma.
@@ -561,12 +719,30 @@ def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False) -> dict:
             time.sleep(NGHI_GIAY)
         # Nhu cau khai `doi_chieu_voi` = nhu cau PHUONG PHAP -> tim BAI BAO.
         # Nhu cau con lai = can mot goi chay duoc -> tim KHO MA.
-        if NHU_CAU[nhu_cau].get("tren_hugging"):
-            ds = tim_huggingface(tv)
-        elif NHU_CAU[nhu_cau].get("doi_chieu_voi"):
-            ds = tim_arxiv(tv)
-        else:
-            ds = tim_github(tv, NHU_CAU[nhu_cau]["sao_toi_thieu"])
+        # Mot nhu cau co the di NHIEU duong. "Goi de goi" (GitHub) va "kinh
+        # nghiem ai da vap" (dien dan) la hai thu KHAC NHAU, va voi nhu cau ky
+        # thuat thi thuong can ca hai: mot thu vien khong noi cho ta biet vi
+        # sao `os.stat` duoc goi 80.000 lan mot phut.
+        nc = NHU_CAU[nhu_cau]
+        duong = nc.get("duong")
+        if not duong:
+            duong = (["dien_dan"] if nc.get("tren_dien_dan") else
+                     ["hugging"] if nc.get("tren_hugging") else
+                     ["arxiv"] if nc.get("doi_chieu_voi") else ["github"])
+        ds = []
+        for d in duong:
+            if d == "dien_dan":
+                ds += tim_dien_dan(tv)
+            elif d == "hugging":
+                ds += tim_huggingface(tv)
+            elif d == "arxiv":
+                ds += tim_arxiv(tv)
+            else:
+                ds += tim_github(tv, nc.get("sao_toi_thieu", 100))
+        # Chi coi la LOI khi MOI duong deu hong; mot duong hong ma duong kia ra
+        # ket qua thi luot do van co gia tri.
+        that = [x for x in ds if "loi" not in x]
+        ds = that if that else (ds[:1] or [{"loi": "khong duong nao tra ve"}])
         if ds and "loi" in ds[0]:
             loi += 1
             if not im_lang:

@@ -131,6 +131,7 @@ class MotLuotKhongGoiMang(unittest.TestCase):
         self._tim_cu = SCC.tim_github
         self._arxiv_cu = SCC.tim_arxiv
         self._hf_cu = SCC.tim_huggingface
+        self._dd_cu = SCC.tim_dien_dan
         self._nghi_cu = SCC.NGHI_GIAY
         SCC.NGHI_GIAY = 0.0
 
@@ -139,11 +140,14 @@ class MotLuotKhongGoiMang(unittest.TestCase):
         SCC.tim_github = self._tim_cu
         SCC.tim_arxiv = self._arxiv_cu
         SCC.tim_huggingface = self._hf_cu
+        SCC.tim_dien_dan = self._dd_cu
         SCC.NGHI_GIAY = self._nghi_cu
         self._tmp.cleanup()
 
     def test_gieo_tay_luon_vao_kho_ke_ca_khi_mang_hong(self):
-        SCC.tim_github = lambda *a, **k: [{"loi": "HTTP 403"}]
+        hong = lambda *a, **k: [{"loi": "HTTP 403"}]              # noqa: E731
+        SCC.tim_github = SCC.tim_arxiv = hong
+        SCC.tim_huggingface = SCC.tim_dien_dan = hong
         SCC.mot_luot(gioi_han_truy_van=1, im_lang=True)
         kho = SCC.doc_kho()
         for g in SCC.GIEO_TAY:
@@ -151,7 +155,12 @@ class MotLuotKhongGoiMang(unittest.TestCase):
                           "cong cu chu du an chi thang bi mat khi mang hong")
 
     def test_khong_them_trung_khi_chay_hai_lan(self):
-        SCC.tim_github = lambda *a, **k: [_repo(full_name="ai/mot-cai")]
+        # Gia lap CA BON duong: mot nhu cau co the di nhieu duong, va mot
+        # duong khong gia lap se goi mang THAT -> ket qua khac nhau moi lan
+        # chay va bai kiem do vi mot ly do khong lien quan den chuyen trung.
+        mot = lambda *a, **k: [_repo(full_name="ai/mot-cai")]     # noqa: E731
+        SCC.tim_github = SCC.tim_arxiv = mot
+        SCC.tim_huggingface = SCC.tim_dien_dan = mot
         SCC.mot_luot(gioi_han_truy_van=1, im_lang=True)
         n1 = len(SCC.doc_kho())
         SCC.mot_luot(gioi_han_truy_van=1, im_lang=True)
@@ -164,6 +173,7 @@ class MotLuotKhongGoiMang(unittest.TestCase):
         SCC.tim_github = lambda *a, **k: [{"loi": "ConnectionError"}]
         SCC.tim_arxiv = lambda *a, **k: [{"loi": "ConnectionError"}]
         SCC.tim_huggingface = lambda *a, **k: [{"loi": "ConnectionError"}]
+        SCC.tim_dien_dan = lambda *a, **k: [{"loi": "ConnectionError"}]
         r = SCC.mot_luot(gioi_han_truy_van=2, im_lang=True)
         self.assertGreaterEqual(r["loi"], 1)
         self.assertIn("tong_kho", r)
@@ -172,6 +182,7 @@ class MotLuotKhongGoiMang(unittest.TestCase):
         SCC.tim_github = lambda *a, **k: [_repo(full_name="ai/luu-thu")]
         SCC.tim_arxiv = lambda *a, **k: [_repo(full_name="ai/luu-thu")]
         SCC.tim_huggingface = lambda *a, **k: [_repo(full_name="ai/luu-thu")]
+        SCC.tim_dien_dan = lambda *a, **k: [_repo(full_name="ai/luu-thu")]
         SCC.mot_luot(gioi_han_truy_van=1, im_lang=True)
         lai = json.loads(SCC.KHO.read_text(encoding="utf-8"))
         self.assertIn("ai/luu-thu", lai)
@@ -302,12 +313,19 @@ class SanTrenHuggingFace(unittest.TestCase):
         nhu cau khai ca hai se lang le di nham duong."""
         van = (Path(LAB) / "nhan" / "san_cong_cu.py").read_text(encoding="utf-8")
         than = van[van.index("def mot_luot("):]
-        i_h = than.find('if NHU_CAU[nhu_cau].get("tren_hugging")')
-        i_a = than.find('elif NHU_CAU[nhu_cau].get("doi_chieu_voi")')
-        i_g = than.find("tim_github(")
-        self.assertNotEqual(i_h, -1, "mot_luot khong dinh tuyen HuggingFace")
-        self.assertLess(i_h, i_a, "kiem doi_chieu_voi truoc tren_hugging")
-        self.assertLess(i_h, i_g)
+        # Chuoi lui mac dinh phai giu dung thu tu: dien_dan -> hugging ->
+        # arxiv -> github. Mot nhu cau khai nhieu co ma doc sai thu tu se lang
+        # le di nham duong.
+        i_d = than.find('nc.get("tren_dien_dan")')
+        i_h = than.find('nc.get("tren_hugging")')
+        i_a = than.find('nc.get("doi_chieu_voi")')
+        for ten, i in (("tren_dien_dan", i_d), ("tren_hugging", i_h),
+                       ("doi_chieu_voi", i_a)):
+            self.assertNotEqual(i, -1, f"mot_luot khong dinh tuyen {ten}")
+        self.assertLess(i_d, i_h)
+        self.assertLess(i_h, i_a)
+        self.assertIn('"dien_dan"', than)
+        self.assertIn("tim_huggingface(tv)", than)
 
     def test_chuan_hoa_ket_qua_HF_dung_khoa_ma_cham_diem_doc(self):
         """`cham_diem` doc `stargazers_count`/`description`; doi khoa la lam cam."""
@@ -412,3 +430,110 @@ class XemKhongDuocVOViMotBanGhiThieuKhoa(unittest.TestCase):
         self.assertIn("a/b", ra, "ban ghi lanh lan cung khong hien ra")
         self.assertIn("https://x/y", ra,
                       "ban ghi thieu full_name bi bo qua im lang thay vi hien url")
+
+
+class DuongDIENDAN(unittest.TestCase):
+    """Duong thu tu cua EVO, va no khac ba duong kia ve BAN CHAT cai tim duoc.
+
+        GitHub      -> mot goi de goi
+        arXiv       -> mot phuong phap de doc
+        HuggingFace -> mot bo trong so da huan luyen
+        Dien dan    -> mot KINH NGHIEM: cai gi cham, vi sao, ai da vap
+
+    Phan lon nut that cua The Brain khong giai bang mot thu vien moi ma bang
+    mot cau "hoa ra `os.stat` goi 80.000 lan/phut" — thu chi nam trong bai viet
+    va cau tra loi cua nguoi khac. Chu du an chi 30/08/2026: EVO nam RONG HON
+    linh vuc giao dich.
+    """
+
+    @staticmethod
+    def _goi(hn=None, so=None):
+        import types, urllib.request as _ur, json as _j
+
+        class _F:
+            def __init__(self, b): self.b = b
+            def read(self): return self.b
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+
+        def gia(rq, timeout=0):
+            u = rq.full_url if hasattr(rq, "full_url") else str(rq)
+            if "algolia" in u:
+                if hn is None:
+                    raise OSError("chan")
+                return _F(_j.dumps({"hits": hn}).encode())
+            if "stackexchange" in u:
+                if so is None:
+                    raise OSError("chan")
+                return _F(_j.dumps({"items": so}).encode())
+            raise OSError("chan")
+
+        goc = _ur.urlopen
+        _ur.urlopen = gia
+        try:
+            return SCC.tim_dien_dan("x", 5)
+        finally:
+            _ur.urlopen = goc
+
+    def test_gop_ket_qua_tu_CA_HAI_dien_dan(self):
+        r = self._goi(hn=[{"title": "a", "url": "http://a", "points": 9}],
+                      so=[{"title": "b", "link": "http://b", "score": 4}])
+        nguon = {x.get("_nguon") for x in r}
+        self.assertEqual(nguon, {"hackernews", "stackoverflow"})
+
+    def test_diem_cua_moi_dien_dan_quy_ve_MOT_khoa(self):
+        """`cham_diem` chi doc `stargazers_count`; moi dien dan mot khoa la lam cam."""
+        r = self._goi(hn=[{"title": "a", "url": "http://a", "points": 9}],
+                      so=[{"title": "b", "link": "http://b", "score": 4}])
+        self.assertEqual({x["stargazers_count"] for x in r}, {9, 4})
+
+    def test_MOT_dien_dan_hong_van_lay_duoc_cua_dien_dan_kia(self):
+        """Chot quan trong: mot nguon chan khong duoc lam mat ca luot."""
+        r = self._goi(hn=None, so=[{"title": "b", "link": "http://b", "score": 4}])
+        that = [x for x in r if "loi" not in x]
+        self.assertEqual(len(that), 1)
+        self.assertEqual(that[0]["_nguon"], "stackoverflow")
+
+    def test_CA_HAI_hong_thi_bao_LOI_chu_khong_bao_rong(self):
+        """'Khong tim thay gi' va 'khong voi toi duoc' phai la hai cau khac nhau."""
+        r = self._goi(hn=None, so=None)
+        self.assertTrue(r and "loi" in r[0],
+                        "ca hai dien dan chan ma bao nhu la khong co ket qua")
+
+
+class NhuCauKYTHUATPhaiGanVoiNutThatDADO(unittest.TestCase):
+    """EVO rong hon linh vuc giao dich, nhung khong duoc rong thanh vo dinh.
+
+    Moi nhu cau ky thuat phai gan voi mot nut that DA DO DUOC tren may nay -
+    do la ly do no dang mot suat tim kiem, con "lam cho he nhanh hon" thi khong.
+    """
+
+    KY_THUAT = ("do_nut_that", "song_song_va_bo_nho", "nhanh_hon_so_hoc",
+                "luu_tru_va_doc_gia", "chay_lau_dai_khong_nguoi_truc")
+
+    def test_du_nam_nhu_cau_ky_thuat(self):
+        for k in self.KY_THUAT:
+            self.assertIn(k, SCC.NHU_CAU)
+
+    def test_moi_nhu_cau_ky_thuat_deu_dan_MOT_CON_SO_da_do(self):
+        import re
+        for k in self.KY_THUAT:
+            with self.subTest(nhu_cau=k):
+                self.assertRegex(
+                    SCC.NHU_CAU[k]["vi_sao"], r"\d",
+                    "vi_sao khong dan mot con so nao - do la mong muon chung "
+                    "chung, khong phai nut that da do")
+
+    def test_khong_nhu_cau_ky_thuat_nao_duoc_cham_duong_quyet_dinh(self):
+        for k in self.KY_THUAT:
+            with self.subTest(nhu_cau=k):
+                kd = SCC.NHU_CAU[k]["khong_duoc_thay"].lower()
+                self.assertTrue(len(kd) > 20, "khai rang buoc qua so sai")
+                self.assertNotIn("cong.py", SCC.NHU_CAU[k]["cam_vao"].lower())
+
+    def test_duong_khai_ra_deu_la_duong_co_that(self):
+        hop_le = {"github", "arxiv", "hugging", "dien_dan"}
+        for k, v in SCC.NHU_CAU.items():
+            for d in (v.get("duong") or []):
+                with self.subTest(nhu_cau=k, duong=d):
+                    self.assertIn(d, hop_le, f"duong '{d}' khong ton tai")
