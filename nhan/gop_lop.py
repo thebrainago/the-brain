@@ -492,8 +492,26 @@ def quet_tham_so_gop(ten_mau: str, ho: str | None = None, khung: str | None = No
             tot = (ts, cs, ro)
     if tot is None:
         ra["ket_luan"] = "KHONG_CO_UNG_VIEN"
-        ra["ly_do"] = ("khong bo tham so nao thang mua-giu cua RO tren train "
-                       "(ca loi suat lan sharpe)")
+        # PHAN BIET HAI CAU TRA LOI KHAC HAN NHAU.
+        #
+        # `da_quet == 0` nghia la KHONG CHAY DUOC BO NAO - thuong vi ro rong sau
+        # khi loc theo `khai["hop"]` (truyen mot ro FX cho mot ho chi khai hop
+        # voi `chi_so_my` thi loc xong khong con chan nao). Bao no la "khong bo
+        # nao thang mua-giu" la noi mot ket qua DO DUOC trong khi chua do gi.
+        #
+        # Da nham that 30/08/2026: ba lop vang/hang_hoa/fx tra ve trong 0 giay
+        # kem dung cau "khong bo tham so nao thang mua-giu", va no doc y het mot
+        # ket luan am co can cu.
+        if not ra["da_quet"]:
+            ra["ly_do"] = (
+                f"KHONG QUET DUOC BO NAO: ro rong sau khi loc theo lop hop le "
+                f"cua ho '{ho}' ({', '.join(khai['hop'])}). Day KHONG phai ket "
+                f"luan ve co che - chua do gi ca.")
+            ra["chua_do"] = True
+        else:
+            ra["ly_do"] = (f"da quet {ra['da_quet']} bo tham so, khong bo nao "
+                           "thang mua-giu cua RO tren train (ca loi suat lan sharpe)")
+            ra["chua_do"] = False
         return ra
     ts, cs, ro = tot
     ra["ket_luan"] = "CO_UNG_VIEN"

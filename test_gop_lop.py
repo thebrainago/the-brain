@@ -284,3 +284,49 @@ class DuongGopTrongQuantlab(_SoCaiTam):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class PhanBietChuaDoVoiDaDoMaThua(unittest.TestCase):
+    """Hai cau tra loi khac han nhau, va truoc 30/08 chung dung CHUNG mot cau.
+
+    `quet_tham_so_gop` loc ro theo lop HOP LE cua ho co che. Truyen mot ro FX
+    cho ho `quay_ve_trung_binh` (chi khai hop voi `chi_so_my`) thi loc xong
+    khong con chan nao -> khong bo tham so nao chay duoc.
+
+    Ban cu tra ve dung cau "khong bo tham so nao thang mua-giu cua RO tren
+    train", va cau do doc y het mot KET LUAN AM CO CAN CU. Da nham that ngay
+    30/08: ba lop vang/hang_hoa/fx tra ve trong 0 giay kem cau do, va suyt duoc
+    ghi lai nhu ba phep do doc lap.
+
+    Mot he tu chay 24/7 phai phan biet duoc "da do va thua" voi "chua do gi" -
+    day la cung mot bai hoc voi 84 dia chi Reddit bi khoa oan sang cung ngay.
+    """
+
+    def test_ro_bi_loc_sach_thi_bao_CHUA_DO(self):
+        from nhan import pham_vi as PV
+        ma = list(PV.kho_du_bar("D1"))
+        fx = [m for m in ma if PV.loai_cua(m) == "fx"]
+        if not fx:
+            self.skipTest("kho khong co tai san FX")
+        r = G.quet_tham_so_gop("ibs_bat_day", ho="quay_ve_trung_binh",
+                                khung="D1", kho=fx)
+        self.assertEqual(r["da_quet"], 0)
+        self.assertTrue(r["chua_do"],
+                        "ro rong ma bao la da do - mot ket luan am gia")
+        self.assertIn("KHONG QUET DUOC", r["ly_do"])
+
+    def test_ro_hop_le_thi_bao_DA_DO(self):
+        r = G.quet_tham_so_gop("ibs_bat_day", ho="quay_ve_trung_binh", khung="D1")
+        self.assertGreater(r["da_quet"], 0, "ro hop le ma khong quet duoc bo nao")
+        if r["ket_luan"] == "KHONG_CO_UNG_VIEN":
+            self.assertFalse(r["chua_do"])
+            self.assertIn("da quet", r["ly_do"])
+
+    def test_moi_bo_tham_so_da_quet_deu_co_so_lieu_kem_theo(self):
+        """Ket luan am phai kem SO, khong duoc chi kem mot cau."""
+        r = G.quet_tham_so_gop("ibs_bat_day", ho="quay_ve_trung_binh", khung="D1")
+        self.assertEqual(len(r["diem"]), r["da_quet"])
+        for d in r["diem"]:
+            self.assertIn("sharpe", d)
+            self.assertIn("sharpe_mua_giu", d)
+            self.assertIn("so_chan", d)

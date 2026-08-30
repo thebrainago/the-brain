@@ -435,13 +435,24 @@ NGUON_TRINH_DUYET = {
                                "https://www.reddit.com/r/quant/hot/",
                                "https://www.reddit.com/r/options/hot/"],
                      "hang": "B", "loai": "cong_dong", "chu_ky": 21600, "uu_tien": 3},
-    "x":            {"kieu": "tu_khoa", "mau": "https://x.com/search?q={k}&f=live",
+    # Bon nguon nay dung `tu_khoa_lien_ket`: trang tim kiem cua chung khong co
+    # noi dung, chi co link. `loc_lien_ket` giu lai duong dan cua BAI THAT va bo
+    # link dieu huong (dang nhap, cai dat, ho tro...).
+    "x":            {"kieu": "tu_khoa_lien_ket",
+                     "mau": "https://x.com/search?q={k}&f=live",
+                     "loc_lien_ket": r"x\.com/[^/]+/status/\d+",
                      "hang": "B", "loai": "social", "chu_ky": 21600, "uu_tien": 3},
-    "tiktok":       {"kieu": "tu_khoa", "mau": "https://www.tiktok.com/search/video?q={k}",
+    "tiktok":       {"kieu": "tu_khoa_lien_ket",
+                     "mau": "https://www.tiktok.com/search/video?q={k}",
+                     "loc_lien_ket": r"tiktok\.com/@[^/]+/video/\d+",
                      "hang": "B", "loai": "social", "chu_ky": 21600, "uu_tien": 3},
-    "facebook":     {"kieu": "tu_khoa", "mau": "https://www.facebook.com/search/posts?q={k}",
+    "facebook":     {"kieu": "tu_khoa_lien_ket",
+                     "mau": "https://www.facebook.com/search/posts?q={k}",
+                     "loc_lien_ket": r"facebook\.com/.*(/posts/|/videos/|story_fbid|permalink)",
                      "hang": "B", "loai": "social", "chu_ky": 21600, "uu_tien": 3},
-    "youtube":      {"kieu": "tu_khoa", "mau": "https://www.youtube.com/results?search_query={k}",
+    "youtube":      {"kieu": "tu_khoa_lien_ket",
+                     "mau": "https://www.youtube.com/results?search_query={k}",
+                     "loc_lien_ket": r"youtube\.com/watch\?v=",
                      "hang": "B", "loai": "video", "chu_ky": 43200, "uu_tien": 3},
     # --- them 30/08/2026 ---
     # TradingView la kho chien luoc CONG KHAI lon nhat con thieu: truoc hom nay
@@ -468,12 +479,40 @@ def _duyet_tai_lieu(d: dict, nguon: str, c: dict, tu_khoa: str = "") -> list[dic
     `kieu=tu_khoa`: giu nguyen text trang tim kiem lam mot bai (giogn doc_cdp ).
     `kieu=trang`: boc anchor; neu khong co anchor rao ra thi giu ca trang text."""
     if c.get("kieu") == "tu_khoa":
+        # `tu_khoa` thuan: giu nguyen van ban TRANG TIM KIEM lam mot bai.
+        #
+        # DU NHUNG NGUON XA HOI KHONG DUNG DUOC KIEU NAY. Do that 30/08: mo
+        # trang tim kiem cua facebook/tiktok/youtube roi luu lai chi duoc **900
+        # ky tu van ban dieu huong**, khong phai bai viet. Ba nguon do sinh dung
+        # 3 "bai" moi cai, va ca ba deu la trang tim kiem chu khong phai noi
+        # dung. Nen chung chuyen sang `tu_khoa_lien_ket` ben duoi.
         ct = (d.get("text") or "").strip()
         if len(ct) < 40:
             return []
         return [{"tieu_de": f"[{nguon}] {tu_khoa or (d.get('title') or 'tim kiem')}",
                  "url": d.get("url") or "", "tom_tat": ct[:900],
                  "hang": c.get("hang", "B"), "loai": c.get("loai", "")}]
+    if c.get("kieu") == "tu_khoa_lien_ket":
+        # Mo trang TIM KIEM (nhu `tu_khoa`) roi BOC LIEN KET (nhu `trang`):
+        # noi dung that nam sau khi bam vao tung bai, khong nam o trang ket qua.
+        ra, da = [], set()
+        loc = c.get("loc_lien_ket")
+        for anch in (d.get("anchor") or []):
+            try:
+                tt, href = str(anch[0]).strip(), str(anch[1])
+            except Exception:
+                continue
+            if len(tt) < 12 or not href.startswith("http") or href in da:
+                continue
+            if loc and not re.search(loc, href):
+                continue
+            da.add(href)
+            ra.append({"tieu_de": f"[{nguon}] {tt[:220]}", "url": href,
+                       "tom_tat": "", "hang": c.get("hang", "B"),
+                       "loai": c.get("loai", "")})
+            if len(ra) >= 25:
+                break
+        return ra
     ra, da = [], set()
     for anch in (d.get("anchor") or []):
         try:
@@ -544,7 +583,9 @@ def quet_trinh_duyet(ngan_sach_giay: int = 90, t0: float | None = None) -> dict:
             break
         c = NGUON_TRINH_DUYET[ma]
         import urllib.parse as _ur
-        if c.get("kieu") == "tu_khoa":
+        # `tu_khoa` va `tu_khoa_lien_ket` deu dung MAU + tu khoa; chung chi khac
+        # nhau o cach BOC trang ket qua (xem `_duyet_tai_lieu`).
+        if str(c.get("kieu", "")).startswith("tu_khoa"):
             phieu = [_ur.quote(k) for k in tu_khoa_dung(3)]
             phieu = [c["mau"].replace("{k}", q) for q in phieu]
         else:
