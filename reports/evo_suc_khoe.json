@@ -1,65 +1,79 @@
 {
  "van_hanh": {
-  "luc": "2026-08-16 22:56:54",
+  "luc": "2026-08-30 15:24:26",
   "tru": {
    "SEEKER": {
-    "lan_cuoi": "2026-08-16 22:41:43",
-    "tre_giay": 911,
+    "lan_cuoi": "2026-08-23 11:04:04",
+    "tre_giay": 620422,
     "trang_thai": "nghi",
-    "dung_im": false
+    "dung_im": true
    },
    "QUANTLAB": {
-    "lan_cuoi": "2026-08-16 22:56:54",
-    "tre_giay": 0,
+    "lan_cuoi": "2026-08-22 19:57:07",
+    "tre_giay": 674839,
     "trang_thai": "nghi",
-    "dung_im": false
+    "dung_im": true
    },
    "NGHI": {
-    "lan_cuoi": "2026-08-16 21:39:42",
-    "tre_giay": 4632,
+    "lan_cuoi": "2026-08-30 11:20:06",
+    "tre_giay": 14660,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "BANKER": {
     "lan_cuoi": "2026-08-16 22:08:02",
-    "tre_giay": 2932,
+    "tre_giay": 1185384,
     "trang_thai": "nghi",
-    "dung_im": false
+    "dung_im": true
    },
    "EVO": {
-    "lan_cuoi": "2026-08-16 22:56:54",
+    "lan_cuoi": "2026-08-30 15:24:26",
     "tre_giay": 0,
     "trang_thai": "chay",
     "dung_im": false
    }
   },
+  "tai_nguyen": {
+   "tab": {
+    "cong": 9224,
+    "so_tab": 7
+   },
+   "chrome": {
+    "gb": 2.93,
+    "so_tien_trinh": 19
+   },
+   "ram_dung_pct": 28.1,
+   "ram_trong_gb": 24.6,
+   "cpu_pct": 10.2
+  },
   "viec": {
    "QUANTLAB": {
-    "XONG": 1327
+    "CHO": 104,
+    "XONG": 1351
    }
   },
   "viec_treo": 0,
   "viec_loi": 0,
-  "viec_cho": 0,
-  "seeker_ty_le_vong_rong": 0.737,
-  "gian_doan_7ngay_gio": 4.7,
-  "gian_doan_lan": 1,
-  "ty_le_song_7ngay": 0.972,
-  "dia_trong_gb": 16.0,
-  "mt5_tick_test": "GO",
+  "viec_cho": 104,
+  "seeker_ty_le_vong_rong": 0.739,
+  "gian_doan_7ngay_gio": 0,
+  "gian_doan_lan": 0,
+  "ty_le_song_7ngay": 1.0,
+  "dia_trong_gb": 14.0,
+  "mt5_tick_test": "KHOA (dia < 15GB)",
   "so_toan_ven": {
    "lanh": true,
-   "mo_ta": "1687 dong lien mach"
+   "mo_ta": "1722 dong lien mach"
   },
   "nguon": {
    "arxiv": {
-    "lan": 4,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 113,
+    "thu_hoach": 133,
     "trang_thai": "BAT"
    },
    "github": {
-    "lan": 3,
+    "lan": 4,
     "loi": 0,
     "thu_hoach": 179,
     "trang_thai": "BAT"
@@ -71,57 +85,57 @@
     "trang_thai": "BAT"
    },
    "stackexchange": {
-    "lan": 3,
+    "lan": 4,
     "loi": 0,
     "thu_hoach": 69,
     "trang_thai": "BAT"
    },
    "hackernews": {
-    "lan": 3,
+    "lan": 4,
     "loi": 0,
     "thu_hoach": 44,
     "trang_thai": "BAT"
    },
    "semantic": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "openalex": {
-    "lan": 3,
+    "lan": 4,
     "loi": 0,
-    "thu_hoach": 216,
+    "thu_hoach": 281,
     "trang_thai": "BAT"
    },
    "lean_algo": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
     "thu_hoach": 40,
     "trang_thai": "BAT"
    },
    "mql5_code": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 30,
     "trang_thai": "BAT"
    },
    "blog": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 27,
+    "thu_hoach": 29,
     "trang_thai": "BAT"
    },
    "quantconnect": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "crossref": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 40,
+    "thu_hoach": 41,
     "trang_thai": "BAT"
    },
    "myfxbook": {
@@ -195,41 +209,230 @@
     "loi": 0,
     "thu_hoach": 13,
     "trang_thai": "BAT"
+   },
+   "mql5_ma_nguon": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 0,
+    "trang_thai": "TAT"
+   },
+   "rss_allocatesmartly": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_alphaarchitect": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 5,
+    "trang_thai": "BAT"
+   },
+   "rss_fh_financial_hacker": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_followingthetrend": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 4,
+    "trang_thai": "BAT"
+   },
+   "rss_mql5_articles": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 4,
+    "trang_thai": "BAT"
+   },
+   "rss_mrzepczynski": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 15,
+    "trang_thai": "BAT"
+   },
+   "rss_priceactionlab": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 15,
+    "trang_thai": "BAT"
+   },
+   "rss_qoppac": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 15,
+    "trang_thai": "BAT"
+   },
+   "rss_quantinsti": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 15,
+    "trang_thai": "BAT"
+   },
+   "rss_quantpedia_blog": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 8,
+    "trang_thai": "BAT"
+   },
+   "rss_reddit_algotrading": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 13,
+    "trang_thai": "BAT"
+   },
+   "rss_reddit_quant": {
+    "lan": 1,
+    "loi": 1,
+    "thu_hoach": 0,
+    "trang_thai": "BAT"
+   },
+   "rss_robotwealth": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_thinknewfound": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_tr8dr": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_tradingmarkets": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 9,
+    "trang_thai": "BAT"
+   },
+   "rss_alvarezquant": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 4,
+    "trang_thai": "BAT"
+   },
+   "rss_buildalpha": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 4,
+    "trang_thai": "BAT"
+   },
+   "rss_gestaltu": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 4,
+    "trang_thai": "BAT"
+   },
+   "rss_hangukquant": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 15,
+    "trang_thai": "BAT"
+   },
+   "rss_headlandstech": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 5,
+    "trang_thai": "BAT"
+   },
+   "rss_newtraderu": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_quantdare": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_quantitativo": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 15,
+    "trang_thai": "BAT"
+   },
+   "rss_quantumtrading": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_reddit_algotrading_nam": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 11,
+    "trang_thai": "BAT"
+   },
+   "rss_tradingview_blog": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 14,
+    "trang_thai": "BAT"
+   },
+   "rss_aligrithm": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_betterbuyandhold": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 3,
+    "trang_thai": "BAT"
+   },
+   "rss_beyondpassive": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_capitalspectator": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 7,
+    "trang_thai": "BAT"
    }
   },
-  "tai_lieu": 952,
+  "tai_lieu": 1338,
   "gia_thuyet": {
-   "FAIL": 346,
-   "NGHI_NHIN_TRUOC": 1,
-   "PASS": 7
+   "FAIL": 353,
+   "QUARANTINED_V2": 8
   }
  },
  "day_chuyen": {
-  "so_ket_qua_tho": 1242,
-  "so_ket_qua_du_phong": 888,
-  "so_ket_qua": 354,
-  "so_gt_da_ket": 354,
+  "so_ket_qua_tho": 1257,
+  "so_ket_qua_du_phong": 896,
+  "so_ket_qua": 353,
+  "so_gt_da_ket": 353,
   "theo_verdict": {
-   "FAIL": 346,
-   "NGHI_NHIN_TRUOC": 1,
-   "PASS": 7
+   "FAIL": 353
   },
-  "ty_le_qua_cong": 0.0198,
+  "ty_le_qua_cong": 0.0,
   "null_ty_le_lot": 0.0,
-  "null_do_luc": "2026-08-16 09:18:16",
+  "null_do_luc": "2026-08-21 22:02:58",
   "null_chi_tiet": {
-   "so_ca": 15,
-   "tai_san": "US500CASH",
-   "khung": "D1"
+   "so_ca": 10,
+   "tai_san": "EURCAD",
+   "khung": "H4"
   },
   "cong_co_luc": true,
-  "cong_co_luc_luc": "2026-08-16 09:18:19",
+  "cong_co_luc_luc": "2026-08-30 11:01:40",
   "cong_co_luc_chi_tiet": [
    {
     "p": 0.5,
     "verdict": "FAIL",
-    "sharpe": -0.513,
-    "alpha_nam_pct": -6.42,
+    "sharpe": -2.692,
+    "alpha_nam_pct": -18.225,
     "truot": [
      "1_loi_hon_mua_giu",
      "2_sharpe_hon_mua_giu",
@@ -240,8 +443,8 @@
    {
     "p": 0.55,
     "verdict": "FAIL",
-    "sharpe": 0.242,
-    "alpha_nam_pct": 5.217,
+    "sharpe": -0.096,
+    "alpha_nam_pct": -0.646,
     "truot": [
      "1_loi_hon_mua_giu",
      "2_sharpe_hon_mua_giu",
@@ -251,29 +454,64 @@
    },
    {
     "p": 0.6,
-    "verdict": "PASS",
-    "sharpe": 1.307,
-    "alpha_nam_pct": 22.533,
+    "verdict": "NGHI_NHIN_TRUOC",
+    "sharpe": 2.972,
+    "alpha_nam_pct": 19.909,
     "truot": []
    }
   ],
-  "ung_vien_n": 113,
-  "ung_vien_p_trung_vi": 0.325,
-  "ung_vien_duoi_005": 0.2301,
-  "fdr_da_bac_bo": 8,
-  "fdr_tong": 279,
-  "fdr_tong_tho": 675,
+  "ung_vien_n": 105,
+  "ung_vien_p_trung_vi": 0.38,
+  "ung_vien_duoi_005": 0.1714,
+  "fdr_da_bac_bo": 0,
+  "fdr_tong": 271,
+  "fdr_tong_tho": 1769,
   "khop_ba_tang": false
  },
  "van_de": [
   {
-   "ma": "qua_nhieu_pass",
+   "ma": "tru_dung_im_SEEKER",
    "muc": "NANG",
-   "mo_ta": "12 PASS trong mot ngay. Theo THIET_KE muc 9 day la tin hieu HONG chu khong phai tin vui - phai kiem day chuyen truoc khi duyet",
+   "mo_ta": "Tru SEEKER dung im 10340 phut (han 180 phut)",
    "bc": {
-    "so_pass": 12
+    "lan_cuoi": "2026-08-23 11:04:04",
+    "tre_giay": 620422,
+    "trang_thai": "nghi",
+    "dung_im": true
+   }
+  },
+  {
+   "ma": "tru_dung_im_QUANTLAB",
+   "muc": "NANG",
+   "mo_ta": "Tru QUANTLAB dung im 11247 phut (han 120 phut)",
+   "bc": {
+    "lan_cuoi": "2026-08-22 19:57:07",
+    "tre_giay": 674839,
+    "trang_thai": "nghi",
+    "dung_im": true
+   }
+  },
+  {
+   "ma": "tru_dung_im_BANKER",
+   "muc": "NANG",
+   "mo_ta": "Tru BANKER dung im 19756 phut (han 720 phut)",
+   "bc": {
+    "lan_cuoi": "2026-08-16 22:08:02",
+    "tre_giay": 1185384,
+    "trang_thai": "nghi",
+    "dung_im": true
+   }
+  },
+  {
+   "ma": "dia_thap",
+   "muc": "NANG",
+   "mo_ta": "Dia con 14.0 GB (< 15) -> MT5 tick-test bi KHOA, tuc dang tu cam minh lam buoc quyet dinh cua chinh du an",
+   "bc": {
+    "goi_y": "lab/.browser_thebrain2 (848MB, INVENTORY ghi la mo nham), lab/.browser_darwinex_tmp (480MB tmp)"
    }
   }
  ],
- "da_sua": []
+ "da_sua": [
+  "dong_van_de_da_het: qua_nhieu_pass"
+ ]
 }

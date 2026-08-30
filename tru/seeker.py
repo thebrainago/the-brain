@@ -443,6 +443,22 @@ NGUON_TRINH_DUYET = {
                      "hang": "B", "loai": "social", "chu_ky": 21600, "uu_tien": 3},
     "youtube":      {"kieu": "tu_khoa", "mau": "https://www.youtube.com/results?search_query={k}",
                      "hang": "B", "loai": "video", "chu_ky": 43200, "uu_tien": 3},
+    # --- them 30/08/2026 ---
+    # TradingView la kho chien luoc CONG KHAI lon nhat con thieu: truoc hom nay
+    # so cai co 14 ban tu `tradingview_blog` va **khong mot Pine Script nao**.
+    # Trang `/scripts/<chu-de>/` liet ke script that; `a[href*="/script/"]` la
+    # bo chon on dinh (ten class cua TradingView doi dinh ky - bo chon cu
+    # `[class*="script-"]` tra ve 0 ket qua khi do lai 30/08).
+    "tradingview_scripts": {
+        "kieu": "trang",
+        "trang": ["https://www.tradingview.com/scripts/meanreversion/",
+                  "https://www.tradingview.com/scripts/breakout/",
+                  "https://www.tradingview.com/scripts/momentum/",
+                  "https://www.tradingview.com/scripts/volatility/"],
+        "hang": "A", "loai": "ma_nguon", "chu_ky": 43200, "uu_tien": 1},
+    "tradingview_ideas": {
+        "kieu": "tu_khoa", "mau": "https://www.tradingview.com/ideas/?q={k}",
+        "hang": "B", "loai": "cong_dong", "chu_ky": 43200, "uu_tien": 3},
 }
 
 
@@ -501,7 +517,23 @@ def quet_trinh_duyet(ngan_sach_giay: int = 90, t0: float | None = None) -> dict:
         return ra
     now = time.time()
     den_han = []
-    for r in SO.nhieu("SELECT * FROM nguon WHERE trang_thai='BAT'"):
+    # XEP THEO UU TIEN, roi theo lau chua quet nhat.
+    #
+    # Truoc 30/08 cau nay khong co ORDER BY nao ca - thu tu la thu tu rowid, tuc
+    # NGAU NHIEN theo thu tu dang ky. Truong `uu_tien` duoc khai trong
+    # NGUON_TRINH_DUYET va ghi vao bang `nguon`, nhung **khong ai doc no** o
+    # duong nay (duong nguon API o `mot_luot` thi co `ORDER BY uu_tien`).
+    #
+    # Hau qua do duoc: ngan sach quet chi 90 giay/luot, bi nhung nguon dung dau
+    # bang an het, va **x / tiktok / facebook / youtube (uu_tien 3) chua bao gio
+    # toi luot** - so cai co 0 bai tu ca bon nguon do. Trieu chung nhin tu ngoai
+    # la "mang xa hoi fetch khong duoc", trong khi ma da san sang tu lau.
+    #
+    # Them `lan_cuoi` lam khoa phu de trong cung mot muc uu tien thi nguon lau
+    # chua quet nhat duoc di truoc - khong thi mot nguon o cuoi bang co the doi
+    # mai.
+    for r in SO.nhieu("SELECT * FROM nguon WHERE trang_thai='BAT' "
+                      "ORDER BY COALESCE(uu_tien, 9), COALESCE(lan_cuoi, 0)"):
         if r["ma"] not in NGUON_TRINH_DUYET:
             continue
         he_so = 2 ** min(r["loi_lien_tuc"] or 0, 5)

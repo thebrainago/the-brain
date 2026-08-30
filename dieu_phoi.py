@@ -72,18 +72,47 @@ TY_LE_KHAM_PHA = 0.70
 LAN_GIOI_HAN = {"compute": 1, "external": 1, "maintenance": 1}
 
 # tru -> script, ngan sach, chu ky toi thieu, nhom, lane, uu tien khoi dong.
+#
+# NGAN SACH DAT THEO SO DO THAT (30/08/2026), khong dat theo cam tinh.
+#
+# Nguyen tac: `ngan_sach` la LUOI AN TOAN (het thi giet), khong phai muc tieu.
+# Mot luot bi giet giua chung la mot luot MAT TRANG - cong da lam khong ghi so.
+# Nen dat theo cong thuc:
+#
+#     ngan_sach ~= 3x thoi gian luot DIEN HINH
+#
+# de mot ngay cham bat thuong van chay xong, con mot luot treo that su thi van
+# bi cat. Con viec giu luot ngan thi phai lam bang TRAN CONG VIEC ben trong tung
+# tru (`gioi_han` so tai lieu, so o quet...), khong bang dong ho.
+#
+# | tru      | do duoc 30/08        | ngan sach |
+# |----------|----------------------|-----------|
+# | SEEKER   | 60-100 s (15 tai lieu/luot, doc qua trinh duyet)  | 420 |
+# | QUANTLAB | quet 1.830 o het 99,7 s sau khi sua hai cho dem   | 600 |
+# | NGHI     | 4 s                  | 120 |
+# | BANKER   | 27 s                 | 180 |
+# | EVO      | 24 s                 | 150 |
+#
+# CHU KY dat theo TOC DO DOI MOI CUA DAU VAO, khong theo "cang day cang tot":
+# nguon RSS ra bai theo ngay nen SEEKER 15 phut la thua; vi mo ra so theo ngay
+# nen BANKER 1 gio la thua. Do 16/08: SEEKER ban cu chay 8.719 lan trong 5,3
+# gio, moi lan 0,2 giay doc lai mot file tinh - tuc 8.718 lan la vong lap rong.
 TRU = {
-    "QUANTLAB": {"script": "tru/quantlab.py", "ngan_sach": 420, "chu_ky": 60,
+    "QUANTLAB": {"script": "tru/quantlab.py", "ngan_sach": 600, "chu_ky": 120,
                  "nhom": "kham_pha", "lan": "compute", "uu_tien": 20},
-    "NGHI": {"script": "tru/nghi.py", "ngan_sach": 420, "chu_ky": 5400,
+    "NGHI": {"script": "tru/nghi.py", "ngan_sach": 120, "chu_ky": 5400,
              "nhom": "kham_pha", "lan": "external", "uu_tien": 40},
-    "SEEKER": {"script": "tru/seeker.py", "ngan_sach": 600, "chu_ky": 900,
+    "SEEKER": {"script": "tru/seeker.py", "ngan_sach": 420, "chu_ky": 900,
                "nhom": "kham_pha", "lan": "external", "uu_tien": 10},
-    "BANKER": {"script": "tru/banker.py", "ngan_sach": 300, "chu_ky": 3600,
+    "BANKER": {"script": "tru/banker.py", "ngan_sach": 180, "chu_ky": 3600,
                "nhom": "bao_tri", "lan": "maintenance", "uu_tien": 30},
-    "EVO": {"script": "tru/evolution.py", "ngan_sach": 180, "chu_ky": 900,
+    "EVO": {"script": "tru/evolution.py", "ngan_sach": 150, "chu_ky": 900,
             "nhom": "bao_tri", "lan": "maintenance", "uu_tien": 0},
 }
+
+#: Ty le canh bao: luot nao thuong xuyen cham hon `ngan_sach * TY_LE_SAT_TRAN`
+#: la dau hieu tran dat sai HOAC tru dang phinh viec. EVO doc con so nay.
+TY_LE_SAT_TRAN = 0.75
 
 ES_CONTINUOUS = 0x80000000
 ES_SYSTEM_REQUIRED = 0x00000001

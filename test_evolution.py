@@ -166,3 +166,67 @@ class DoDiaTrong(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CanhTaiNguyenVanHanh(unittest.TestCase):
+    """Ba loi lam dung day chuyen ngay 30/08 deu KHONG BAO MOT LOI NAO.
+
+    Chung khong lam he dung lai; chung lam he lang le ngung lam viec. Voi mot
+    day chuyen dinh chay 24/7 khong nguoi truc thi day la loai hong nguy hiem
+    nhat, va cach duy nhat bat duoc la DO chu khong doi bao loi.
+
+    Nang nhat trong ba: `doc_gan` mo tab moi moi lan doc va khong dong tab nao.
+    Do duoc **356 tab**, luot keo toan van dung han 10 phut. Sau khi don ve 6
+    tab, moi trang doc het 10-13 giay thay vi ~20.
+    """
+
+    def _vh(self, **tn):
+        goc = {"tab": {"cong": 9224, "so_tab": 7},
+               "chrome": {"gb": 2.9, "so_tien_trinh": 19},
+               "ram_dung_pct": 28.0, "ram_trong_gb": 24.0, "cpu_pct": 5.0}
+        goc.update(tn)
+        return _van_hanh(tai_nguyen=goc)
+
+    def test_binh_thuong_thi_khong_bao_gi(self):
+        ds = _ma(EVO.phat_hien(self._vh(), _suc_khoe()))
+        for m in ("trinh_duyet_phinh_tab", "trinh_duyet_ngon_ram", "ram_may_sap_het"):
+            self.assertNotIn(m, ds, f"bao '{m}' khi tai nguyen binh thuong")
+
+    def test_tab_phinh_bi_bat_va_xep_muc_NANG(self):
+        ds = EVO.phat_hien(self._vh(tab={"cong": 9224, "so_tab": 356}), _suc_khoe())
+        self.assertIn("trinh_duyet_phinh_tab", _ma(ds))
+        self.assertEqual({d["ma"]: d["muc"] for d in ds}["trinh_duyet_phinh_tab"],
+                         "NANG")
+
+    def test_chrome_ngon_ram_bi_bat(self):
+        ds = EVO.phat_hien(self._vh(chrome={"gb": 9.5, "so_tien_trinh": 40}),
+                           _suc_khoe())
+        self.assertIn("trinh_duyet_ngon_ram", _ma(ds))
+
+    def test_ram_may_sap_het_la_muc_NANG(self):
+        ds = EVO.phat_hien(self._vh(ram_trong_gb=1.2), _suc_khoe())
+        self.assertIn("ram_may_sap_het", _ma(ds))
+        self.assertEqual({d["ma"]: d["muc"] for d in ds}["ram_may_sap_het"], "NANG")
+
+    def test_khong_do_duoc_tai_nguyen_thi_khong_bao_bua(self):
+        """psutil thieu hay CDP tat -> gia tri None. Khong duoc coi la hong."""
+        ds = _ma(EVO.phat_hien(
+            _van_hanh(tai_nguyen={"tab": {"cong": None, "so_tab": None},
+                                  "chrome": {"gb": None, "so_tien_trinh": None}}),
+            _suc_khoe()))
+        for m in ("trinh_duyet_phinh_tab", "trinh_duyet_ngon_ram", "ram_may_sap_het"):
+            self.assertNotIn(m, ds, f"'{m}' bao khi khong do duoc gi ca")
+
+    def test_thieu_han_khoa_tai_nguyen_cung_khong_vo(self):
+        """Ban ghi van hanh cu (truoc 30/08) khong co khoa `tai_nguyen`.
+
+        Truoc day bai nay chi goi `phat_hien` roi khong khang dinh gi - tuc no
+        tu bao PASSED ma khong kiem dieu gi. Cong hien phap bat duoc dung no.
+        """
+        vh = _van_hanh()
+        vh.pop("tai_nguyen", None)
+        ds = EVO.phat_hien(vh, _suc_khoe())     # khong duoc nem ngoai le
+        self.assertIsInstance(ds, list)
+        for m in ("trinh_duyet_phinh_tab", "trinh_duyet_ngon_ram", "ram_may_sap_het"):
+            self.assertNotIn(m, _ma(ds),
+                             f"ban ghi cu khong co so lieu ma van bao '{m}'")

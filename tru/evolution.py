@@ -31,7 +31,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from nhan import ket_qua_hoat_dong as KQHD, san_cong_cu as SCC, so as SO, tri_tue as TT
+from nhan import (do_tai_nguyen as DTN, ket_qua_hoat_dong as KQHD,
+                  san_cong_cu as SCC, so as SO, tri_tue as TT)
 
 TRU = "EVO"
 LAB = Path(__file__).resolve().parent.parent
@@ -149,6 +150,19 @@ def do_van_hanh() -> dict:
                         "trang_thai": n["trang_thai"],
                         "dung_im": tre > HAN_DUNG_IM.get(t, 3600)}
 
+    # TAI NGUYEN VAN HANH. Ba loi lam dung day chuyen ngay 30/08 deu khong bao
+    # mot loi nao; cach duy nhat bat duoc chung la DO. Xem nhan/do_tai_nguyen.py.
+    try:
+        ra["tai_nguyen"] = DTN.tat_ca()
+    except Exception as e:
+        ra["tai_nguyen"] = {"loi": f"{type(e).__name__}: {str(e)[:60]}"}
+
+    # THONG LUONG DOC: bao nhieu ban doc / bao nhieu hong trong 20 luot gan nhat.
+    doc = SO.nhieu("SELECT gia_tri FROM chi_so_vh WHERE ten='seeker_doc_toan_van' "
+                   "ORDER BY id DESC LIMIT 20")
+    if doc:
+        ra["doc_toan_van_20_luot"] = sum(float(d["gia_tri"] or 0) for d in doc)
+
     v = SO.dem_viec()
     ra["viec"] = v
     ra["viec_treo"] = sum(x.get("CHAY", 0) for x in v.values())
@@ -216,6 +230,28 @@ def phat_hien(vh: dict, sk: dict) -> list[dict]:
                    "mo_ta": f"{vh['seeker_ty_le_vong_rong']:.0%} lan chay SEEKER khong thu duoc "
                             "gi moi - chu ky nguon dang qua day so voi toc do nguon cap nhat",
                    "bc": {"ty_le": vh["seeker_ty_le_vong_rong"]}})
+
+    # --- tai nguyen van hanh -------------------------------------------
+    tn = vh.get("tai_nguyen") or {}
+    so_tab = (tn.get("tab") or {}).get("so_tab")
+    if isinstance(so_tab, int) and so_tab > TRAN_TAB_BAO_DONG:
+        ra.append({"ma": "trinh_duyet_phinh_tab", "muc": "NANG",
+                   "mo_ta": f"Chrome bot dang mo {so_tab} tab (tran bao dong "
+                            f"{TRAN_TAB_BAO_DONG}). Da sap that 30/08: 356 tab lam "
+                            "luot keo toan van dung han 10 phut MA KHONG BAO LOI. "
+                            "Chay `doc_trinh_duyet.don_tab_ngay()`.",
+                   "bc": tn.get("tab")})
+
+    gb = (tn.get("chrome") or {}).get("gb")
+    if isinstance(gb, (int, float)) and gb > TRAN_RAM_CHROME_GB:
+        ra.append({"ma": "trinh_duyet_ngon_ram", "muc": "VUA",
+                   "mo_ta": f"Chrome bot chiem {gb} GB (tran {TRAN_RAM_CHROME_GB} GB)",
+                   "bc": tn.get("chrome")})
+
+    if isinstance(tn.get("ram_trong_gb"), (int, float)) and tn["ram_trong_gb"] < 3.0:
+        ra.append({"ma": "ram_may_sap_het", "muc": "NANG",
+                   "mo_ta": f"RAM trong chi con {tn['ram_trong_gb']} GB",
+                   "bc": {"ram_dung_pct": tn.get("ram_dung_pct")}})
 
     if vh["viec_loi"] > 20:
         ra.append({"ma": "nhieu_viec_loi", "muc": "VUA",
@@ -493,6 +529,12 @@ EVO_TU_QUAN = {
 #: khong khoa chi cho 10 lan/phut - san day hon la vua ton suat vua khong them
 #: thong tin.
 CHU_KY_SAN_GIAY = 12 * 3600
+
+#: Tran canh bao tai nguyen van hanh. Do that 30/08 truoc khi dat cac so nay:
+#: 356 tab lam luot keo dung han; sau khi don ve 6 tab thi moi trang doc het
+#: 10-13 giay thay vi ~20. Chrome bot binh thuong chiem ~2,9 GB voi 19 tien trinh.
+TRAN_TAB_BAO_DONG = 25
+TRAN_RAM_CHROME_GB = 6.0
 
 
 def _den_han_san() -> bool:
