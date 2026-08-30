@@ -43,7 +43,7 @@ UA = {"User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.
       "Accept": "text/html,application/xhtml+xml,application/json,*/*"}
 
 NGAN_SACH_KY_TU = {"bai_bao": 60_000, "ma_nguon": 90_000, "dien_dan": 40_000,
-                   "blog": 25_000, "khac": 25_000}
+                   "blog": 25_000, "video": 45_000, "khac": 25_000}
 
 # Ten file co kha nang chua LOGIC CHIEN LUOC. Lay ca repo la nap ca test,
 # setup.py, docs - ton ngan sach ma khong mang thong tin co che nao.
@@ -234,6 +234,40 @@ def loi_tam_thoi() -> bool:
     return bool(LOI_CUOI.get("tam_thoi"))
 
 
+def tu_youtube(url: str) -> dict | None:
+    """Video -> CHU, bang phu de tu dong cua YouTube.
+
+    Claude khong xem duoc video va khong nghe duoc tieng. Nhung gan nhu moi
+    video YouTube deu co phu de tu dong, va do la van ban that su - do 30/08 tren
+    5 video dau tien lay duoc: 6.485 / 8.015 / 8.180 / 8.229 / 43.092 ky tu, noi
+    dung that ve mean reversion va dao chieu gia.
+
+    Duong nay KHONG can dang nhap va khong ton mot lan mo trinh duyet nao.
+
+    Neu video khong co phu de thi con mot duong nua chua lam: `yt-dlp` tai TIENG
+    roi cho qua mot bo nhan dang giong noi (Whisper). Do la cach chuan tren cac
+    dien dan. `yt_dlp` DA CO tren may; Whisper thi chua cai.
+
+    TikTok khong di duong nay duoc: clip ngan, phan lon khong co phu de, va
+    khong co API phu de cong khai. Muon doc TikTok phai qua tieng.
+    """
+    m = re.search(r"(?:v=|youtu\.be/)([A-Za-z0-9_-]{6,})", url or "")
+    if not m:
+        return None
+    try:
+        from youtube_transcript_api import YouTubeTranscriptApi
+    except Exception:
+        return None
+    try:
+        muc = YouTubeTranscriptApi().fetch(m.group(1))
+    except Exception:
+        return None
+    van = " ".join(getattr(x, "text", "") for x in muc).strip()
+    if len(van) < 400:
+        return None
+    return {"van_ban": van, "kieu": "video", "cach": f"youtube_phu_de:{m.group(1)}"}
+
+
 # --------------------------------------------------- DUONG QUA TRINH DUYET
 #: Mien BAT BUOC di qua trinh duyet, khong phi thoi gian thu `requests` truoc.
 #:
@@ -306,6 +340,9 @@ def doc(url: str, goi_y: str = "") -> dict | None:
     if can_trinh_duyet(u):
         r = tu_trinh_duyet(url, goi_y or ("dien_dan" if "reddit" in u or "t.me" in u
                                           else "khac"))
+    # Video: lay PHU DE truoc, re hon va sach hon nhieu so voi boc trang.
+    if r is None and ("youtube.com/watch" in u or "youtu.be/" in u):
+        r = tu_youtube(url)
     if r is None and "arxiv.org" in u:
         r = tu_arxiv(url)
     elif r is None and "github.com" in u:
