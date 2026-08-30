@@ -210,6 +210,47 @@ class ChuanHoaLienKetTruocKhiKhuTrung(unittest.TestCase):
                          f"boc ra {len(ra)} bai - hai moc cua cung mot video "
                          "van bi dem thanh hai")
 
+class ChuanHoaX(unittest.TestCase):
+    """Bien the THU BA cua cung mot loi thoi phong trong ngay 30/08.
+
+    Sau khi sua bo loc tieu de, X thu ve 73 "bai" - nhung mot nua la trang
+    `/analytics` cua chinh nhung bai kia. Mot BAI cua X co nhieu duong dan con:
+    `/analytics`, `/photo/1`, `/video/1`, `/likes`, `/retweets`.
+
+    Ba bien the trong mot ngay: YouTube moc thoi gian, YouTube tham so theo doi,
+    X duong dan con. Khu trung theo URL THO luon thoi phong so lieu.
+    """
+
+    def test_duong_dan_con_gop_ve_bai_goc(self):
+        u = ["https://x.com/a/status/123",
+             "https://x.com/a/status/123/analytics",
+             "https://x.com/a/status/123/photo/1",
+             "https://x.com/a/status/123/likes"]
+        self.assertEqual(len({S._chuan_hoa_lien_ket(x) for x in u}), 1,
+                         "duong dan con van bi dem thanh bai rieng")
+
+    def test_twitter_com_va_x_com_la_MOT(self):
+        a = S._chuan_hoa_lien_ket("https://twitter.com/a/status/123")
+        b = S._chuan_hoa_lien_ket("https://x.com/a/status/123")
+        self.assertEqual(a, b, "hai ten mien cua cung mot bai bi dem hai lan")
+
+    def test_hai_bai_khac_nhau_khong_bi_gop(self):
+        a = S._chuan_hoa_lien_ket("https://x.com/a/status/123/analytics")
+        b = S._chuan_hoa_lien_ket("https://x.com/a/status/999")
+        self.assertNotEqual(a, b)
+
+    def test_boc_trang_X_khong_dem_analytics_thanh_bai(self):
+        c = S.NGUON_TRINH_DUYET["x"]
+        d = {"url": "https://x.com/search?q=a", "title": "t", "text": "x" * 800,
+             "links": [],
+             "anchor": [("47m", "https://x.com/q/status/111"),
+                        ("3", "https://x.com/q/status/111/analytics"),
+                        ("32m", "https://x.com/r/status/222"),
+                        ("8", "https://x.com/r/status/222/analytics")]}
+        ra = S._duyet_tai_lieu(d, "x", c)
+        self.assertEqual(len(ra), 2,
+                         f"boc ra {len(ra)} bai - trang analytics van duoc dem")
+
 
 if __name__ == "__main__":
     unittest.main()

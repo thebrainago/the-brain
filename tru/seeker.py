@@ -491,6 +491,17 @@ def _chuan_hoa_lien_ket(url: str) -> str:
     if "youtu.be/" in url:
         m = re.search(r"youtu\.be/([A-Za-z0-9_-]{6,})", url)
         return f"https://www.youtube.com/watch?v={m.group(1)}" if m else url
+    # X/Twitter: mot BAI co nhieu duong dan con - `/analytics`, `/photo/1`,
+    # `/video/1`, `/likes`, `/retweets`. Cat het sau ma bai.
+    #
+    # Do that 30/08: sau khi sua bo loc tieu de, X thu ve 73 'bai' nhung mot
+    # nua la trang `/analytics` cua chinh nhung bai kia. Day la bien the THU BA
+    # cua cung mot loi trong ngay (YouTube moc thoi gian, YouTube tham so theo
+    # doi, va gio la X duong dan con) - khu trung theo URL tho luon thoi phong.
+    m = re.search(r"https?://(?:www\.)?(?:x|twitter)\.com/([^/]+)/status/(\d+)", url)
+    if m:
+        # twitter.com va x.com la CUNG mot bai - khong gop thi dem hai lan.
+        return f"https://x.com/{m.group(1)}/status/{m.group(2)}"
     # Bo phan neo va cac tham so theo doi thuong gap.
     url = url.split("#")[0]
     url = re.sub(r"[?&](utm_[a-z]+|fbclid|igshid|pp|si|feature|t)=[^&]*", "", url)
