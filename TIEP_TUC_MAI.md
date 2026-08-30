@@ -39,39 +39,65 @@ b61ac59 AGENTS.md: ghi moc gop ds/ + git + lenh b
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Bao cao day du: `BAO_CAO_2026_08_30.md` — **PHAN B** la phan chieu, doc phan do.
+
+Ba dieu chinh lai chinh ban ra soat buoi sang:
+
+1. **Cong FDR KHONG bi niem kin.** Da sua tu 21/08. Do lai: `thu_luc_cong` DAT
+   (p=0,50 FAIL dung, p=0,60 qua het dieu kien), `j` cua mot ho nghien cuu hom
+   nay la **1** voi nguong **0,0129**. Cac dong thoi ky hong nam o khoa epoch
+   dinh dang cu nen da bi `THE_HE_CONG` 3->4 cach ly san. **0 PASS khong phai
+   vi cong chan** — nut nam o tang kham pha.
+2. **Nut that toc do khong o dau ai doan.** 42% toan bo thoi gian la `nt.stat`:
+   `_van_tay_kho()` goi 936 lan/60 giay, moi lan stat 253 file parquet de kiem
+   cache. Phep KIEM cache dat hon thu no bao ve. Sua bang TTL 5 giay + dem
+   `chi_phi._doc_luu` theo (mtime,size): **32,8s -> 4,1s**. Bo test an theo:
+   **6:07 -> 1:15**.
+3. **Hai uoc luong cu lech hang chuc lan.** MDE that la 3-4 giay/cap chu khong
+   phai ~2 phut (nap ca 122 cap D1 het 234 giay). Cache mua-giu tiet kiem duoc
+   **so 0** (9 lan goi, 0,008 giay) — viec do da bi loai.
+
+Quet lai toan be mat D1 (1.830 o) het **99,7 giay**: LOAI 1.075 / CHUA_DU_LUC
+729 / NEN_GOP 26 / SAN_SANG_V4 0. Chi **2/15 co che** qua phep thu phan chung:
+`ibs_bat_day` (cach biet 0,558) va `rsi_dao_chieu` (0,264).
+
+Them cong hien phap cho bo test (`test_hien_phap.py`) va 48 bai kiem moi cho ba
+module truoc day khong ai kiem: `canary` (ca hai chieu mutation audit),
+`quant_plan`, `evolution`. **321 -> 369 xanh.**
 
 ## Viec tiep theo, theo thu tu
 
-0. **Cong FDR bi niem kin.** San p placebo 0,005 gap nguong LORD tu phep thu thu 4
-   -> **346 FAIL hien co vo nghia**. Quyet dinh san p / nguong, bo ket qua cu,
-   chay lai. Khong xong viec nay thi moi thu xay them deu do vao mot cai cong
-   khong phan xu duoc.
-0b. **QUYET 795 dong `family=do_luc` trong so FDR.** Viec cua chu du an: xoa dong
-   khoi so kiem toan khong hoan tac duoc. Giu nguyen va danh dau, hoac chuyen sang
-   bang `do_dac` rieng.
-1. **Go `DUNG_LAI`, `b chay`**, xem `nghi.py` hong o dau (rc=1 tu 16/08).
-2. **`b profile quet_be_mat.py`** — 10 phut, biet ty le thoi gian giua `MAU.sinh` /
-   `MP.chay` / `DO.chi_so` / `du_luc_de_kiem`. **Dung doan, do.** Chua ai profile
-   duong nay lan nao.
-3. **Nap truoc bang MDE cho 122 cap D1** (~4 gio, MOT lan) roi bo `du_luc_de_kiem`
-   lazy. Day la nut that that su: mot vong quet 15 x 122 keo theo hang tram phep do.
-4. **Cache mua-giu theo (tai san, khung)** — bat bien nhung dang tinh lai o moi ung
-   vien; 6 lan backtest moi o xuong con 2.
-5. **Port `test_no_acceptance_test_is_vacuous` tu `ds` sang `lab`**, roi viet test
-   cho `canary`, `quant_plan`, `evolution`. Day la dieu kien truoc khi chia luong.
-6. **Ba template**: SuperTrend, Stochastic, do doc duong trung binh. Do 24/08 tren
-   52 file `.mq5`: 12/18 chien luoc chua co template nen khong co duong vao QUANTLAB.
-7. **Do spread H1 that cho nhom chi so tu terminal MT5** (`bao_dam_spread`).
-   Spread do tu bar D1 la CHAN TREN — EURCAD D1 1,70 bps vs H1 1,22 bps (chenh 39%).
-8. **Noi `ds` <-> `lab`**: chon MOT chieu. De xuat: `lab` la control plane, `ds` la
-   thu vien duoc goi — khong phai hai bo nao chay song song. Hien SEEKER -> QuantLab
-   ben `ds` van go tay, va `ds` khong co dich vu nen.
-9. **MQL5: muon 50 chien luoc that thi quet 3-4 trang.** Trang 1 muc `experts`
-   (40 bai) chi cho ~15 chien luoc that.
-10. Muc con lai tu 23/08: `vuon_nguon.mot_luot_tim` (~100 ten chua thu), 193 ban
-   `khong_doc_duoc`, 103 viec `kham_pha_theo_mau` dang cho, 12 nguon can trinh duyet
-   (CDP chua mo).
+0. **Duong leo thang sang GOP khong voi toi co che THUA LENH.** `rsi_dao_chieu`
+   co `pham_vi=CO_CO_CHE` nhung 0 o NEN_GOP: 121/122 o chet o V1/V2 vi thieu
+   lenh, ma nhan NEN_GOP chi gan duoc ben trong V3 (`sang_loc.py:414`). "Thua
+   lenh tren tung tai san, day lenh khi gop ca lop" dung la ho so duong GOP sinh
+   ra de xu ly. **Sua cai nay doi tap gia thuyet duoc dua len kiem dinh, tuc doi
+   ngan sach FDR** — can chu du an quyet. De xuat: cho V2 leo thang som sang GOP
+   khi `pham_vi==CO_CO_CHE` va ly do truot la thieu lenh (khong phai thieu edge).
+0b. **QUYET 1.019 dong `family=do_luc` trong so FDR** (khong phai 795). Giu
+   378/398 lan bac bo cua ca so, deu la DO DAC chu khong phai quyet dinh. Xoa
+   dong khoi so kiem toan khong hoan tac duoc: giu va danh dau, hay chuyen sang
+   bang `do_dac` rieng?
+1. **Chay duong GOP cho 26 o `ibs_bat_day`.** Day la dau ra thuc chat cua vong
+   quet: `quantlab.kham_pha_gop` roi `xac_nhan_gop`. **Buoc nay CHAM HOLDOUT va
+   tieu suat FDR vinh vien** — chay khi chu du an ngoi truoc may.
+2. **Bat lai he 24/7** (`b chay`). Da tat 14 ngay. `nghi.py` chay sach rc=0.
+   Cung la buoc tieu suat FDR nen chua tu y bat.
+3. **`quant_plan.py` chua tung duoc goi.** `quantlab` import ma khong dung ham
+   nao; dang ky that di qua `so.dang_ky_gia_thuyet` voi plan_hash **khong phu
+   LUAT QUYET DINH lan KHONG GIAN TIM KIEM**. Doi the he cong hoac noi rong luoi
+   deu khong lam doi hash. Khoang trong thiet ke; da cam moc test.
+4. **Ba template**: SuperTrend, Stochastic, do doc duong trung binh. 12/18 chien
+   luoc `.mq5` da doc khong co duong vao QUANTLAB.
+5. **Do spread H1 that cho nhom chi so** (`bao_dam_spread`). Spread tu bar D1 la
+   CHAN TREN — EURCAD D1 1,70 bps vs H1 1,22 bps.
+6. **Noi `ds` <-> `lab`**: chon MOT chieu. De xuat `lab` la control plane, `ds`
+   la thu vien duoc goi. Hien SEEKER -> QuantLab ben `ds` van go tay.
+7. **Chia luong agent** — dieu kien da du ca ba (git + cong chan test rong + moi
+   agent mot nhanh). Chia cho: template moi, test cho module chua phu, adapter.
+   **Khong chia** `cong/so/chi_phi/ngu_phap/sang_loc`.
+8. Muc con lai tu 23/08: `vuon_nguon.mot_luot_tim` (~100 ten chua thu), 193 ban
+   `khong_doc_duoc`, 103 viec `kham_pha_theo_mau`, 12 nguon can trinh duyet.
 
 ## Khong duoc quen (bo sung cho ban 23/08)
 
