@@ -136,6 +136,135 @@ GIEO_TAY = [
 ]
 
 
+# =============================================================== NHAT DOC DUONG
+#: DAU HIEU cua mot cong cu nang cap duoc, tim NGAY TRONG van ban SEEKER da doc.
+#:
+#: Day moi la duong chinh, khong phai `tim_github`. Ly do: SEEKER **da** di qua
+#: hang nghin kho ma va bai viet de san chien luoc. Thu khong phai chien luoc
+#: thi hien bi bo di - trong khi `bien_dich_ung_vien.loai_ma_nguon` do duoc
+#: 24/08 rang **34/52 file .mq5 la `tien_ich` hoac `chi_bao`**, tuc phan lon
+#: nhung gi cham vao deu khong phai chien luoc. Trong so do co nhung thu nang
+#: cap duoc chinh cai may nay.
+#:
+#: Nhat doc duong thi khong ton mot lan tai trang nao: van ban da nam trong so.
+#:
+#: KHOP THEO CUM CO RANH GIOI TU, khong khop chuoi tho. Da sap that tren chinh
+#: kho nay: `rsi` khop trong **Ve-rsi-on** -> 117/156 tai lieu "co RSI".
+DAU_HIEU = {
+    "doc_pdf": [r"pdf\s+to\s+markdown", r"extract\s+text\s+from\s+pdf",
+                r"\bpdfplumber\b", r"\bpymupdf\b", r"\bpdfminer\b",
+                r"\blayout\s+aware\s+pdf\b", r"\bdocling\b"],
+    "engine_backtest": [r"\bbacktest(?:ing)?\s+engine\b",
+                        r"\bvectori[sz]ed\s+backtest", r"\bevent[- ]driven\s+backtest",
+                        r"\bwalk[- ]forward\s+(?:analysis|optimi[sz]ation)\b"],
+    "kiem_dinh_thong_ke": [r"\bfalse\s+discovery\s+rate\b", r"\bdeflated\s+sharpe\b",
+                           r"\bmultiple\s+(?:hypothesis\s+)?testing\b",
+                           r"\bpurged\s+(?:k[- ]fold|cross[- ]validation)\b",
+                           r"\bcombinatorial\s+purged\b",
+                           r"\bprobability\s+of\s+backtest\s+overfitting\b",
+                           r"\breality\s+check\b", r"\bwhite'?s\s+reality\b",
+                           r"\bbenjamini[- ]hochberg\b"],
+    "thu_thap_web": [r"\bundetected[- ]chromedriver\b", r"\bplaywright[- ]stealth\b",
+                     r"\banti[- ]?bot\s+detection\b", r"\bcloudflare\s+bypass\b"],
+    "doc_ma_chien_luoc": [r"\bmql[45]\s+parser\b", r"\bpine\s*script\s+parser\b",
+                          r"\bstrategy\s+(?:rule\s+)?extraction\b",
+                          r"\bast\s+(?:based\s+)?(?:parser|analysis)\b"],
+}
+
+#: Van canh BAT BUOC quanh cum khop. Mot bai sinh hoc noi "reality check" khong
+#: phai la cong cu kiem dinh. Cung nguyen tac voi `bien_dich_ung_vien`: chu
+#: `strateg` da bi loai khoi danh sach van canh vi qua chung.
+VAN_CANH = re.compile(
+    r"(python|library|package|framework|repo|toolkit|module|pip install|"
+    r"import |github|open[- ]source|cli|api|implementation)", re.I)
+
+#: Khong nhat lai chinh minh, va khong nhat nhung thu da la chien luoc.
+BO_QUA_URL = re.compile(r"(investing-algorithm-framework|/lab/|Research%20SP500)", re.I)
+
+CUA_SO_VAN_CANH = 400
+
+
+def xet_van_ban(tieu_de: str, van_ban: str, url: str = "",
+                nguon: str = "") -> list[dict]:
+    """Van ban nay co chua mot CONG CU nang cap duoc khong?
+
+    Tra ve danh sach ung vien, moi ung vien kem **trich dan nguyen van + vi tri
+    ky tu** - cung hop dong bang chung ma `CandidateArtifact` doi. Khong co
+    trich dan thi khong co ung vien.
+
+    Day KHONG phai ung vien chien luoc: no khong vao `candidate_queue`, khong
+    tieu mot suat FDR nao, va khong bao gio tu dong duoc tich hop.
+    """
+    if not van_ban or len(van_ban) < 200:
+        return []
+    if url and BO_QUA_URL.search(url):
+        return []
+    ra: list[dict] = []
+    da_co: set[str] = set()
+    for nhu_cau, cac_mau in DAU_HIEU.items():
+        for mau in cac_mau:
+            m = re.search(mau, van_ban, re.I)
+            if not m:
+                continue
+            i = m.start()
+            quanh = van_ban[max(0, i - CUA_SO_VAN_CANH): i + CUA_SO_VAN_CANH]
+            if not VAN_CANH.search(quanh):
+                continue
+            if nhu_cau in da_co:
+                continue
+            da_co.add(nhu_cau)
+            ra.append({
+                "nhu_cau": nhu_cau, "cum_khop": m.group(0),
+                "vi_tri": i, "trich_dan": quanh.strip()[:360],
+                "tieu_de": (tieu_de or "")[:160], "url": url, "nguon": nguon,
+                "thay_luc": SO.bay_gio(), "trang_thai": "MOI",
+                "nguon_phat_hien": "nhat_doc_duong",
+            })
+    return ra
+
+
+def nhat_tu_ban_doc(tieu_de: str, van_ban: str, url: str = "",
+                    nguon: str = "") -> int:
+    """Xet mot ban doc va cat ung vien vao kho. Tra so ung vien MOI."""
+    uv = xet_van_ban(tieu_de, van_ban, url, nguon)
+    if not uv:
+        return 0
+    kho = doc_kho()
+    them = 0
+    for u in uv:
+        khoa = f"doc:{u['nhu_cau']}:{url or tieu_de}"
+        if khoa in kho:
+            continue
+        kho[khoa] = u
+        them += 1
+    if them:
+        luu_kho(kho)
+    return them
+
+
+def quet_lai_thu_vien(gioi_han: int = 0, im_lang: bool = False) -> dict:
+    """Nhat lai tren TOAN BO ban doc da co trong so.
+
+    Chay mot lan sau khi them dau hieu moi: kho da co san hang tram ban doc,
+    khong can tai lai gi.
+    """
+    cau = ("SELECT n.tieu_de_url, n.van_ban, n.url, n.nguon FROM ("
+           "SELECT t.tieu_de AS tieu_de_url, n.van_ban, n.url, t.nguon "
+           "FROM noi_dung n JOIN tai_lieu t ON t.id = n.tai_lieu_id "
+           "WHERE n.so_ky_tu > 200) n")
+    if gioi_han:
+        cau += f" LIMIT {int(gioi_han)}"
+    ds = SO.nhieu(cau)
+    them, co = 0, 0
+    for r in ds:
+        n = nhat_tu_ban_doc(r["tieu_de_url"], r["van_ban"], r["url"], r["nguon"])
+        them += n
+        co += bool(n)
+    if not im_lang:
+        print(f"quet {len(ds)} ban doc -> {them} ung vien cong cu tu {co} ban")
+    return {"ban_doc": len(ds), "ung_vien_moi": them, "ban_co_ung_vien": co}
+
+
 # --------------------------------------------------------------------- KHO
 def doc_kho() -> dict:
     try:

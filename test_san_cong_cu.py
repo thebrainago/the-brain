@@ -164,5 +164,95 @@ class MotLuotKhongGoiMang(unittest.TestCase):
         self.assertEqual(lai["ai/luu-thu"]["trang_thai"], "MOI")
 
 
+
+
+class NhatDocDuong(unittest.TestCase):
+    """Nhat cong cu NGAY TRONG van ban SEEKER da doc — khong tai lai gi.
+
+    Day moi la duong chinh (chu du an chot 30/08): SEEKER da di qua hang nghin
+    kho ma de san chien luoc, va `bien_dich_ung_vien.loai_ma_nguon` do duoc
+    **34/52 file .mq5 la tien_ich/chi_bao** chu khong phai chien luoc. Phan lon
+    nhung gi cham vao khong phai chien luoc — trong do co thu nang cap duoc
+    chinh cai may nay, va truoc 30/08 chung bi bo di.
+    """
+
+    KY_THUAT = ("This python library implements the deflated Sharpe ratio and "
+                "purged k-fold cross-validation. pip install thing. ")
+
+    def test_bat_duoc_cum_ky_thuat_co_van_canh(self):
+        uv = SCC.xet_van_ban("t", self.KY_THUAT * 4, "https://github.com/a/b")
+        self.assertTrue(uv, "khong bat duoc 'deflated Sharpe' trong van canh python")
+        self.assertEqual(uv[0]["nhu_cau"], "kiem_dinh_thong_ke")
+
+    def test_moi_ung_vien_deu_kem_TRICH_DAN_va_VI_TRI(self):
+        uv = SCC.xet_van_ban("t", self.KY_THUAT * 4, "https://github.com/a/b")
+        for u in uv:
+            self.assertTrue(u["trich_dan"].strip(), "ung vien khong co trich dan")
+            self.assertIsInstance(u["vi_tri"], int)
+            self.assertIn(u["cum_khop"].lower(), u["trich_dan"].lower())
+
+    def test_cum_dung_nhung_KHONG_co_van_canh_ky_thuat_thi_bo(self):
+        """`reality check` trong mot bai ve hon nhan khong phai cong cu."""
+        self.assertEqual(
+            SCC.xet_van_ban("t", "a reality check on this marriage. " * 25), [])
+
+    def test_khong_khop_chuoi_tho(self):
+        """Bai hoc da sap that: `rsi` khop trong Ve-rsi-on -> 117/156 tai lieu."""
+        van = "python library Version 2 of the backtesting repo. " * 25
+        self.assertEqual([u["cum_khop"] for u in SCC.xet_van_ban("t", van)], [])
+
+    def test_van_ban_qua_ngan_thi_bo(self):
+        self.assertEqual(SCC.xet_van_ban("t", "deflated sharpe python"), [])
+
+    def test_khong_tu_nhat_chinh_minh(self):
+        van = self.KY_THUAT * 4
+        self.assertEqual(
+            SCC.xet_van_ban("t", van,
+                            "https://github.com/coding-kitties/"
+                            "investing-algorithm-framework"), [])
+
+
+class NhatVaoKhoKhongTrung(unittest.TestCase):
+
+    KY_THUAT = NhatDocDuong.KY_THUAT
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._kho_cu = SCC.KHO
+        SCC.KHO = Path(self._tmp.name) / "cong_cu.json"
+
+    def tearDown(self):
+        SCC.KHO = self._kho_cu
+        self._tmp.cleanup()
+
+    def test_nhat_mot_ban_doc_thi_vao_kho(self):
+        n = SCC.nhat_tu_ban_doc("tieu de", self.KY_THUAT * 4,
+                                "https://github.com/a/b", "github")
+        self.assertGreaterEqual(n, 1)
+        self.assertTrue(SCC.doc_kho())
+
+    def test_nhat_hai_lan_cung_mot_ban_thi_khong_them(self):
+        d = ("tieu de", self.KY_THUAT * 4, "https://github.com/a/b", "github")
+        n1 = SCC.nhat_tu_ban_doc(*d)
+        n2 = SCC.nhat_tu_ban_doc(*d)
+        self.assertGreaterEqual(n1, 1)
+        self.assertEqual(n2, 0, "nhat lai cung mot ban doc lam kho phinh len")
+
+    def test_ung_vien_cong_cu_KHONG_phai_ung_vien_chien_luoc(self):
+        """No khong duoc mang hinh dang cua mot gia thuyet giao dich.
+
+        Ung vien cong cu khong vao `candidate_queue` va khong tieu suat FDR.
+        Chot bang cach doi no PHAI co `nhu_cau` (thu chien luoc khong co) va
+        KHONG duoc co cac truong cua mot gia thuyet.
+        """
+        SCC.nhat_tu_ban_doc("t", self.KY_THUAT * 4, "https://github.com/a/b", "github")
+        for v in SCC.doc_kho().values():
+            self.assertIn("nhu_cau", v)
+            for cam in ("template", "tham_so", "gt_ma", "plan_hash", "tai_san"):
+                self.assertNotIn(cam, v,
+                                 f"ung vien cong cu mang truong '{cam}' cua mot "
+                                 "gia thuyet giao dich")
+
+
 if __name__ == "__main__":
     unittest.main()

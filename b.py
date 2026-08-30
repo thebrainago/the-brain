@@ -17,6 +17,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b mde-nap [khung] nap TRUOC bang MDE cho ca be mat (D1: ~4 phut, mot lan)
     b san             EVO di san cong cu/du an ngoai de tich hop
     b san-xem         xem kho cong cu da tim duoc
+    b san-quet        nhat lai cong cu tu TOAN BO ban doc da co (khong tai gi moi)
     b trinh-duyet     mo Chrome bot + CDP 9224 (de doc nguon can dang nhap)
     b ds [args]       chay pytest ben ds/ (kho DeepSeek)
     b tim <tu>        tim trong MA NGUON (bo qua data/reports/backups)
@@ -107,6 +108,12 @@ def c_san(a):
     return chay([PY, LAB / "nhan" / "san_cong_cu.py", *a])
 
 
+def c_san_quet(_):
+    return chay([PY, "-c",
+                 "import sys;sys.path.insert(0,'.');"
+                 "from nhan import san_cong_cu as S;S.quet_lai_thu_vien()"])
+
+
 def c_san_xem(_):
     return chay([PY, LAB / "nhan" / "san_cong_cu.py", "--xem"])
 
@@ -182,7 +189,7 @@ LENH = {
     "trang-thai": c_trang_thai, "tt": c_trang_thai,
     "chay": c_chay, "dung": c_dung, "canary": c_canary,
     "quet": c_quet, "mde": c_mde, "mde-nap": c_mde_nap,
-    "san": c_san, "san-xem": c_san_xem, "trinh-duyet": c_trinh_duyet,
+    "san": c_san, "san-xem": c_san_xem, "san-quet": c_san_quet, "trinh-duyet": c_trinh_duyet,
     "ds": c_ds, "tim": c_tim,
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
