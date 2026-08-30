@@ -374,12 +374,59 @@ DINH_NGHIA = re.compile(r"\boversold\b[^.]{0,160}\boverbought\b"
                         r"|\boverbought\b[^.]{0,160}\boversold\b", re.I)
 
 
+#: Dai tu tro lai mot chi bao da neu O VE TRUOC trong cung cau.
+_DAI_TU = re.compile(r"\b(?:it|they|no)\b", re.I)
+
+
+def _go_dai_tu(cau: str) -> str:
+    """Thay dai tu trong menh de dieu kien bang chi bao neu o ve TRUOC.
+
+    "The first example is a 2-day RSI strategy where we buy when **it** crosses
+    below 15" — ten va chu ky deu co, nhung `_vung_dieu_kien` cat het phan
+    truoc chu "when" nen "2-day RSI" bi vut di va ca cau thanh khong doc duoc.
+    Do tren kho ngay 30/08/2026: day la mot trong hai hinh dang luat THAT ma
+    bo doc con mu.
+
+    Chi thay khi vung dieu kien KHONG tu co ten chi bao nao — con neu no da co
+    thi dai tu dang tro thu khac, va doan bua se sinh ra mot luat khong ai
+    phat bieu.
+    """
+    m = re.search(r"\b" + NEU + r"\b", cau, re.I)
+    if not m:
+        return cau
+    truoc, vung = cau[:m.end()], cau[m.end():]
+    dt = _DAI_TU.search(vung)
+    if not dt:
+        return cau
+    for rx, _f, la_gia in _TOAN_HANG_RE:
+        if not la_gia and rx.search(vung):
+            return cau                     # vung da co chi bao rieng
+    tot = None
+    for rx, _f, la_gia in _TOAN_HANG_RE:
+        if la_gia:
+            continue                       # "gia" khong phai tien to dang tro
+        for mm in rx.finditer(truoc):
+            # Xep theo (ket thuc, do dai): cum GAN dai tu nhat, va khi hai cum
+            # ket thuc cung cho thi lay cum DAI hon. Neu xep theo vi tri BAT
+            # DAU thi "RSI" tran thang "2-day RSI" (no bat dau muon hon) va
+            # chu ky bi mat -> ghi n=14 cho mot bai noi RSI(2). Hai cai do la
+            # hai co che khac han: RSI(2)<15 la edge Connors, RSI(14)<15 gan
+            # nhu khong bao gio kich hoat.
+            if tot is None or (mm.end(), mm.end() - mm.start()) > (
+                    tot.end(), tot.end() - tot.start()):
+                tot = mm
+    if tot is None:
+        return cau
+    return truoc + vung[:dt.start()] + tot.group(0) + vung[dt.end():]
+
+
 def dieu_kien_trong_cau(cau: str, thay_the: dict | None = None):
     """Cau -> danh sach dieu kien DSL (VA voi nhau). Tra (dieu_kien, ly_do_bo).
 
     `thay_the`: toan hang de thay cho cum TRO LAI ("the average") - xem
     `TRO_LAI`. Chi truyen khi doc ve RA cua chinh cau da doc ve VAO.
     """
+    cau = _go_dai_tu(cau)
     if MO_HO.search(cau):
         return [], "cau mo ta hai kha nang cung luc - khong xac dinh duoc chieu"
     if DINH_NGHIA.search(cau):
@@ -515,7 +562,8 @@ def so_bar_giu(vb: str):
 # --------------------------------------------------------------------- HO
 _HO_THEO_CHI_BAO = {
     "rsi": "quay_ve_trung_binh", "ibs": "quay_ve_trung_binh",
-    "zscore": "quay_ve_trung_binh", "atr": "bien_dong",
+    "zscore": "quay_ve_trung_binh", "stoch": "quay_ve_trung_binh",
+    "atr": "bien_dong",
     "sma": "xu_huong", "ema": "xu_huong",
     "cao_nhat": "pha_vo", "thap_nhat": "pha_vo",
     "gio": "phien", "ngay_trong_thang": "lich", "thang": "lich",
@@ -533,14 +581,56 @@ def _chi_bao_trong(t: dict) -> list[str]:
     return ra
 
 
-def suy_ho(dk: list[dict]) -> str:
+# Chi bao DAO DONG: cung mot chi bao, hai CHIEU la hai co che nguoc nhau.
+#   RSI < 30 -> mua  = bat day          -> quay_ve_trung_binh
+#   RSI > 70 -> mua  = mua theo da manh -> xu_huong
+# Suy ho chi tu TEN chi bao la xep nham mot nua so luat, va ho quyet dinh nhom
+# doi chung o phep thu phan chung -> phan quyet thanh vo nghia.
+_DAO_DONG = {"rsi", "ibs", "zscore", "stoch"}
+_NHO_HON = {"<", "<=", "duoi", "nho_hon"}
+_LON_HON = {">", ">=", "tren", "lon_hon"}
+
+
+def _phia_nguong(dk: list[dict], ten: str) -> int | None:
+    """Luat bat chi bao o phia THAP (-1) hay phia CAO (+1) cua thang do?
+
+    Tra `None` khi khong doc duoc phia (vd. so sanh hai chi bao voi nhau) —
+    khong duoc doan, vi doan sai o day la xep nham ho.
+    """
+    for d in dk:
+        trai, phai = d.get("trai") or {}, d.get("phai") or {}
+        phep = str(d.get("phep") or "")
+        co_trai = ten in _chi_bao_trong(trai)
+        co_phai = ten in _chi_bao_trong(phai)
+        if co_trai == co_phai:                 # ca hai ve, hoac khong ve nao
+            continue
+        # nguong phai la mot HANG SO; chi_bao so voi chi_bao thi khong co "phia"
+        kia = phai if co_trai else trai
+        if not isinstance(kia, dict) or "hang" not in kia:
+            continue
+        if phep in _NHO_HON:
+            return -1 if co_trai else +1
+        if phep in _LON_HON:
+            return +1 if co_trai else -1
+    return None
+
+
+def suy_ho(dk: list[dict], chieu: int = 1) -> str:
     cb = []
     for d in dk:
         cb += _chi_bao_trong(d.get("trai") or {}) + _chi_bao_trong(d.get("phai") or {})
-    for ten in ("rsi", "ibs", "zscore", "cao_nhat", "thap_nhat", "gio",
+    for ten in ("rsi", "ibs", "zscore", "stoch", "cao_nhat", "thap_nhat", "gio",
                 "ngay_trong_thang", "sma", "ema", "atr"):
-        if ten in cb:
-            return _HO_THEO_CHI_BAO[ten]
+        if ten not in cb:
+            continue
+        if ten in _DAO_DONG:
+            phia = _phia_nguong(dk, ten)
+            if phia is None:
+                return "khac"              # khong doc duoc phia -> khong xep bua
+            # bat NGUOC phia cua vi the = quay ve trung binh
+            return ("quay_ve_trung_binh" if phia * int(chieu or 1) < 0
+                    else "xu_huong")
+        return _HO_THEO_CHI_BAO[ten]
     return "khac"
 
 
@@ -655,7 +745,7 @@ def doc_bai(van_ban: str, tieu_de: str = "", nguon: str = "") -> list[dict]:
         giu = so_bar_giu(vb[v["vi_tri"]: v["vi_tri"] + GAN_NHAU]) or 1
         spec = {
             "ten": dat_ten(v["dk"], v["chieu"]),
-            "ho": suy_ho(v["dk"]),
+            "ho": suy_ho(v["dk"], v["chieu"]),
             "chieu": v["chieu"],
             "giu": giu,
             "vao": v["dk"],

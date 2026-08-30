@@ -245,3 +245,147 @@ class BonCoCheDocSaiNgay23_08(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class HoPhaiTheoCHIEUChuKhongChiTheoTENChiBao(unittest.TestCase):
+    """Do that 30/08/2026 tren mot phu de YouTube.
+
+    Bai "GPT: Mean Reversion strategy in Python makes 813%" chua nguyen van
+    "For long positions the RSI must be above 70". Bo doc trich dan DUNG, nhung
+    `suy_ho` xep luat do vao ho `quay_ve_trung_binh` — chi vi thay chu "rsi".
+
+    Mua khi RSI **tren** 70 la mua theo da manh, khong phai bat day. Cung mot
+    chi bao, hai chieu la HAI CO CHE NGUOC NHAU.
+
+    Vi sao khong phai chuyen dat ten: `ho` chon NHOM DOI CHUNG cho phep thu
+    phan chung va chon ho FDR. Dem mot luat thuan xu huong di so voi nhom doi
+    chung cua quay-ve-trung-binh thi phan quyet khong con nghia gi.
+    """
+
+    @staticmethod
+    def _dk(chi_bao, phep, nguong, n=14):
+        return [{"trai": {"chi_bao": chi_bao, "n": n},
+                 "phep": phep, "phai": {"hang": float(nguong)}}]
+
+    def test_mua_khi_RSI_THAP_la_quay_ve_trung_binh(self):
+        self.assertEqual(
+            DH.suy_ho(self._dk("rsi", "<", 30), chieu=1), "quay_ve_trung_binh")
+
+    def test_mua_khi_RSI_CAO_la_XU_HUONG_chu_khong_phai_quay_ve_trung_binh(self):
+        """Chinh ca sap that."""
+        self.assertEqual(
+            DH.suy_ho(self._dk("rsi", ">", 70), chieu=1), "xu_huong",
+            "mua luc qua mua ma van xep 'bat day' -> sai nhom doi chung")
+
+    def test_BAN_khi_RSI_CAO_la_quay_ve_trung_binh(self):
+        """Ban lut dinh = bat nguoc. Neu chi nhin chieu ma bo qua phia thi sai."""
+        self.assertEqual(
+            DH.suy_ho(self._dk("rsi", ">", 70), chieu=-1), "quay_ve_trung_binh")
+
+    def test_BAN_khi_RSI_THAP_la_xu_huong(self):
+        self.assertEqual(
+            DH.suy_ho(self._dk("rsi", "<", 30), chieu=-1), "xu_huong")
+
+    def test_dung_cho_ca_IBS_va_zscore_va_stoch(self):
+        for cb in ("ibs", "zscore", "stoch"):
+            with self.subTest(chi_bao=cb):
+                self.assertEqual(DH.suy_ho(self._dk(cb, "<", 20), 1),
+                                 "quay_ve_trung_binh")
+                self.assertEqual(DH.suy_ho(self._dk(cb, ">", 80), 1),
+                                 "xu_huong")
+
+    def test_nguong_dat_ben_TRAI_thi_phia_phai_lat_lai(self):
+        """`70 < rsi` cung nghia voi `rsi > 70`. Doc sai ve la xep nguoc ho."""
+        dk = [{"trai": {"hang": 70.0}, "phep": "<",
+               "phai": {"chi_bao": "rsi", "n": 14}}]
+        self.assertEqual(DH.suy_ho(dk, chieu=1), "xu_huong")
+
+    def test_so_hai_CHI_BAO_voi_nhau_thi_KHONG_DOAN_ho(self):
+        """Khong co hang so thi khong co 'phia'. Doan bua o day la xep nham."""
+        dk = [{"trai": {"chi_bao": "rsi", "n": 14}, "phep": ">",
+               "phai": {"chi_bao": "rsi", "n": 50}}]
+        self.assertEqual(DH.suy_ho(dk, chieu=1), "khac")
+
+    def test_chi_bao_KHONG_dao_dong_giu_nguyen_cach_xep_cu(self):
+        """Chi sua nhom dao dong; pha_vo / xu_huong / lich khong duoc lay theo."""
+        self.assertEqual(
+            DH.suy_ho([{"trai": {"chi_bao": "cao_nhat", "n": 20}, "phep": ">",
+                        "phai": {"hang": 0.0}}], 1), "pha_vo")
+        self.assertEqual(
+            DH.suy_ho([{"trai": {"chi_bao": "ngay_trong_thang"}, "phep": "<",
+                        "phai": {"hang": 5.0}}], 1), "lich")
+
+    def test_moi_ho_tra_ve_deu_nam_trong_HO_HOP_LE(self):
+        """Mot ho la la se bi `ngu_phap` tu choi o cuoi duong — im lang mat bai."""
+        from nhan.ngu_phap import HO_HOP_LE
+        for cb in ("rsi", "ibs", "zscore", "stoch", "cao_nhat", "sma", "atr"):
+            for phep in ("<", ">"):
+                for ch in (1, -1):
+                    self.assertIn(DH.suy_ho(self._dk(cb, phep, 50), ch),
+                                  HO_HOP_LE)
+
+
+class DaiTuTroVeChiBaoNeuOVeTRUOC(unittest.TestCase):
+    """Mot trong hai hinh dang luat THAT ma bo doc con mu (do kho 30/08/2026).
+
+    "The first example is a 2-day RSI strategy where we buy when **it** crosses
+    below 15" — ten chi bao va chu ky deu co trong cau, nhung `_vung_dieu_kien`
+    cat het phan truoc chu "when" nen chung bi vut di.
+    """
+
+    @staticmethod
+    def _dk(cau):
+        pv, _ = DH.tach_vao_ra(cau)
+        dk, _ = DH.dieu_kien_trong_cau(pv)
+        dk, _ = DH.loc_dieu_kien(dk)
+        return dk
+
+    def test_doc_duoc_luat_viet_bang_dai_tu(self):
+        dk = self._dk("The first example is a 2-day RSI strategy where we buy "
+                      "when it crosses below 15")
+        self.assertTrue(dk, "cau luat that van khong doc duoc")
+        self.assertEqual(dk[0]["trai"]["chi_bao"], "rsi")
+        self.assertEqual(dk[0]["phai"]["hang"], 15.0)
+
+    def test_GIU_DUNG_CHU_KY_chu_khong_roi_ve_mac_dinh_14(self):
+        """Bai nay quan trong hon bai tren.
+
+        Xep cum theo vi tri BAT DAU thi "RSI" tran thang "2-day RSI" va he ghi
+        `n=14` cho mot bai noi RSI(2). Khong loi nao bao, va hai cai do la HAI
+        CO CHE KHAC HAN: RSI(2)<15 la edge Connors co that, RSI(14)<15 gan nhu
+        khong bao gio kich hoat. Tuc he se dang ky mot gia thuyet KHONG AI
+        PHAT BIEU roi tieu mot suat FDR cho no.
+        """
+        for cau, n in (
+                ("The first example is a 2-day RSI strategy where we buy "
+                 "when it crosses below 15", 2),
+                ("This is a 2-period RSI strategy and we go long when it "
+                 "falls below 10", 2),
+                ("We use a 14-day RSI and buy when it drops under 30", 14)):
+            with self.subTest(chu_ky=n):
+                dk = self._dk(cau)
+                self.assertTrue(dk)
+                self.assertEqual(dk[0]["trai"]["n"], n,
+                                 "lay nham chu ky -> kiem dinh mot luat khac")
+
+    def test_vung_dieu_kien_DA_co_chi_bao_thi_KHONG_dung_cham(self):
+        """Dai tu luc do tro thu khac; thay bua la bia ra mot luat moi."""
+        c = "Buy the index when it is above the 200-day moving average"
+        self.assertEqual(DH._go_dai_tu(c), c)
+
+    def test_khong_co_chi_bao_nao_o_ve_truoc_thi_KHONG_doan(self):
+        c = "Buy the stock when it is a good day"
+        self.assertEqual(DH._go_dai_tu(c), c)
+        self.assertFalse(self._dk(c), "doan bua ra mot luat tu mot cau vo nghia")
+
+    def test_khong_co_dai_tu_thi_cau_giu_nguyen_TUNG_KY_TU(self):
+        for c in ("We buy when the RSI crosses below 15",
+                  "Go long when the 50 SMA crosses above the 200 SMA"):
+            with self.subTest(cau=c):
+                self.assertEqual(DH._go_dai_tu(c), c)
+
+    def test_luat_viet_thang_van_doc_duoc_y_nhu_truoc(self):
+        """Chong hoi quy: ban va khong duoc lam hong duong da chay duoc."""
+        dk = self._dk("We buy when the RSI crosses below 15")
+        self.assertEqual(dk[0]["trai"], {"chi_bao": "rsi", "n": 14})
+        self.assertEqual(dk[0]["phep"], "cheo_xuong")
