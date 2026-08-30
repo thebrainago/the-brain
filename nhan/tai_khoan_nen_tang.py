@@ -60,14 +60,27 @@ EMAIL_CAU_HINH = LAB / "config" / "email_cong_tac.json"
 #:           dung cai do da lam 8 lenh follow im lang that bai.
 #:           `tradingview.com/u/` (ho so CUA MINH) thi chuyen thang sang
 #:           `/accounts/signin/` khi chua dang nhap - do moi la tin hieu that.
-#: `dau_hieu_chua`: cum chu chi xuat hien khi CHUA dang nhap
+#: `dau_hieu_da`: cum chu CHI XUAT HIEN KHI DA dang nhap. Day moi la tin hieu
+#:           chinh. Do bang SU VANG MAT cua chu "log in" sai ca hai chieu, va
+#:           da sai that hai lan trong mot phien:
+#:             - tradingview: trang ho so cong khai khong co chu "sign in" ->
+#:               bao DA dang nhap trong khi chua (duong tinh gia)
+#:             - reddit: trang settings CO chu "Log In" o chan trang -> bao
+#:               CHUA trong khi da dang nhap (am tinh gia)
+#:           Giao dien cua nguoi da dang nhap thi khong the gia mao duoc.
+#: `dau_hieu_chua`: cum chu chi xuat hien khi CHUA dang nhap (tin hieu phu)
 #: `dang_ky`: trang tao tai khoan (de mo san cho nguoi dung)
 #: `vi_sao`: no mo khoa cai gi — de biet co dang bo cong ra lam khong
 NEN_TANG = {
     "tradingview": {
         "loai": "mot_lan_tay",
         "kiem": "https://www.tradingview.com/u/",
+        # Tin hieu chac chan nhat: `/u/` (ho so CUA MINH) chuyen thanh
+        # `/u/<ten-tai-khoan>/` khi da dang nhap, va sang `/accounts/signin/`
+        # khi chua. URL doi thi khong the gia mao.
+        "url_da": r"/u/[A-Za-z0-9_]{2,}/",
         "dang_ky": "https://www.tradingview.com/pricing/?source=header_account",
+        "dau_hieu_da": r"watchlist|ideas|scripts",
         "dau_hieu_chua": r"\bsign in\b|\blog in\b",
         "vi_sao": "101 Pine Script da thu duoc; dang nhap them thi FOLLOW duoc "
                   "tac gia va doc duoc script rieng tu",
@@ -75,12 +88,14 @@ NEN_TANG = {
     "x": {
         "loai": "mot_lan_tay", "kiem": "https://x.com/home",
         "dang_ky": "https://x.com/i/flow/signup",
+        "dau_hieu_da": r"\bhome\b.{0,80}\bexplore\b|post|profile",
         "dau_hieu_chua": r"\bsign in\b|\blog in\b|create your account",
         "vi_sao": "41 bai; theo tac gia thi lay duoc dong bai cua ho",
     },
     "reddit": {
         "loai": "mot_lan_tay", "kiem": "https://www.reddit.com/settings",
         "dang_ky": "https://www.reddit.com/register/",
+        "dau_hieu_da": r"expand user menu|open inbox|create post",
         "dau_hieu_chua": r"\blog in\b|\bsign up\b",
         "vi_sao": "169 bai doc an danh duoc; dang nhap thi join duoc r/quant, "
                   "r/algotrading, r/options va doc duoc bai chi cho thanh vien",
@@ -88,27 +103,33 @@ NEN_TANG = {
     "youtube": {
         "loai": "mot_lan_tay", "kiem": "https://www.youtube.com/feed/subscriptions",
         "dang_ky": "https://accounts.google.com/signup",
+        "dau_hieu_da": r"kenh dang ky|kênh đăng ký|your subscriptions|xem sau|danh sách phát",
         "dau_hieu_chua": r"\bsign in\b|\bdang nhap\b",
         "vi_sao": "62 video, 25 da co phu de; dang nhap thi subscribe duoc kenh",
     },
     "facebook": {
         "loai": "mot_lan_tay", "kiem": "https://www.facebook.com/me",
         "dang_ky": "https://www.facebook.com/r.php",
+        "dau_hieu_da": r"\bprofile\b|timeline|dong thoi gian",
         "dau_hieu_chua": r"\blog in\b|\bdang nhap\b",
         "vi_sao": "10 bai — trang tim kiem gan nhu khong tra link; nhom rieng "
                   "moi la cho co noi dung",
     },
-    "tiktok": {
-        "loai": "mot_lan_tay", "kiem": "https://www.tiktok.com/following",
-        "dang_ky": "https://www.tiktok.com/signup",
-        "dau_hieu_chua": r"\blog in\b|\bsign up\b",
-        "vi_sao": "78 clip; nhung TikTok khong co phu de cong khai nen phai qua "
-                  "tieng (yt-dlp + Whisper) moi doc duoc",
-    },
+    # TIKTOK DA BO (chu du an chot 30/08). Khong phai vi kho dang nhap, ma vi
+    # DO DUOC la no gan nhu khong co CHU: 78 clip thu ve khong dong gop noi mot
+    # trang A4, trong khi arXiv 53.756 va GitHub 46.155 ky tu moi ban. Clip ngan
+    # va KHONG co phu de cong khai nhu YouTube; muon doc phai tai tieng roi chay
+    # nhan dang giong noi - ton may, ma noi dung 30 giay hiem khi chua mot co
+    # che kiem dinh duoc.
     "mql5": {
         "loai": "mot_lan_tay", "kiem": "https://www.mql5.com/en/users",
         "dang_ky": "https://www.mql5.com/en/auth_register",
-        "dau_hieu_chua": r"\blog in\b|\bsign in\b",
+        "dau_hieu_da": r"my profile|logout|sign out|\bmy\b.{0,20}\bprofile\b",
+        # KHONG dat ranh gioi tu sau "in": trang MQL5 ghi LIEN
+        # "Log inCreate an account" (khong co dau cach), nen  sau `in`
+        # khong khop va ca phep kiem truot -> bao KHONG RO trong khi trang
+        # noi ro la chua dang nhap. Mot ky tu thieu lam phep do im lang sai.
+        "dau_hieu_chua": r"log ?in|sign ?in|create an account",
         "vi_sao": "185 file .mq5 va 30 tin hieu; dang nhap thi tai duoc ma nguon "
                   "day du va xem duoc lich su tin hieu",
     },
@@ -137,15 +158,38 @@ def kiem_mot(pg, ten: str) -> dict:
         return {"ten": ten, "da_dang_nhap": None,
                 "loi": f"{type(e).__name__}: {str(e)[:60]}"}
     url = pg.url.lower()
-    chuyen_dang_nhap = any(k in url for k in ("login", "signin", "auth", "/i/flow"))
-    thay_dau_hieu = bool(re.search(c["dau_hieu_chua"], van[:2500], re.I))
-    if chuyen_dang_nhap:
-        return {"ten": ten, "da_dang_nhap": False, "ly_do": "bi chuyen sang trang dang nhap"}
-    if thay_dau_hieu and len(van) < 4000:
-        return {"ten": ten, "da_dang_nhap": False, "ly_do": "trang co nut dang nhap"}
+
+    # 1. Bi day sang trang dang nhap: tin hieu chac chan nhat, xet truoc.
+    if any(k in url for k in ("login", "signin", "auth", "/i/flow")):
+        return {"ten": ten, "da_dang_nhap": False,
+                "ly_do": "bi chuyen sang trang dang nhap"}
+
+    # 2. DAU HIEU CO MAT cua giao dien nguoi da dang nhap. Day la tin hieu
+    #    CHINH: giao dien do khong the gia mao duoc, con "khong thay chu log in"
+    #    thi sai ca hai chieu (da sai that hai lan trong mot phien).
+    u_da = c.get("url_da")
+    if u_da and re.search(u_da, pg.url):
+        return {"ten": ten, "da_dang_nhap": True, "so_ky_tu": len(van),
+                "theo": f"URL chuyen sang {pg.url[-40:]}"}
+
+    da = c.get("dau_hieu_da")
+    if da and re.search(da, van[:6000], re.I):
+        return {"ten": ten, "da_dang_nhap": True, "so_ky_tu": len(van),
+                "theo": "dau hieu giao dien da dang nhap"}
+
+    # 3. Khong doc duoc gi -> KHONG BIET, khong doan.
     if len(van) < 300:
-        return {"ten": ten, "da_dang_nhap": None, "ly_do": "trang gan nhu rong - khong doc duoc"}
-    return {"ten": ten, "da_dang_nhap": True, "so_ky_tu": len(van)}
+        return {"ten": ten, "da_dang_nhap": None,
+                "ly_do": "trang gan nhu rong - khong doc duoc"}
+
+    # 4. Tin hieu phu: co nut dang nhap va trang ngan.
+    if re.search(c["dau_hieu_chua"], van[:2500], re.I) and len(van) < 4000:
+        return {"ten": ten, "da_dang_nhap": False, "ly_do": "trang co nut dang nhap"}
+
+    # 5. Doc duoc trang day du nhung khong thay dau hieu nao -> KHONG BIET.
+    #    Truoc day buoc nay tra True, va do chinh la cho tradingview lot.
+    return {"ten": ten, "da_dang_nhap": None, "so_ky_tu": len(van),
+            "ly_do": "khong thay dau hieu nao - can kiem tay"}
 
 
 def kiem_tat_ca(port: int = 9224) -> list[dict]:

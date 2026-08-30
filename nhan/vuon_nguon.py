@@ -259,6 +259,48 @@ DAU_HIEU_NGANH = re.compile(
     r"|sharpe|drawdown|indicator|algorithmic)\b", re.I)
 
 
+#: Ngon ngu cua cac cong dong quant lon ngoai tieng Anh.
+#:
+#: Chu du an chot 30/08: "tim da ngon ngu de tan dung toi da cac cong dong".
+#: Kho hien tai gan nhu chi tieng Anh - do 30/08 tren 1.194 ban doc. Nhung ba
+#: cong dong quant lon nhat ngoai tieng Anh (Trung, Nga, Nhat) co truyen thong
+#: chia se ma nguon rat manh, va ho KHONG viet bang tieng Anh.
+#:
+#: Dung de: (1) sinh truy van cho cac nguon `kieu=tu_khoa`, (2) cham diem mot
+#: mien ung vien - mot trang tieng Trung ve luong hoa van la nguon tot.
+TU_KHOA_NGON_NGU = {
+    "trung": ["量化交易", "量化投资 策略", "回测 框架", "因子挖掘", "高频交易 策略"],
+    "nga":   ["алгоритмический трейдинг", "квантовые стратегии", "бэктест стратегии"],
+    "nhat":  ["システムトレード 戦略", "アルゴリズム取引", "バックテスト 手法"],
+    "tay_ban_nha": ["trading algoritmico estrategia", "backtesting cuantitativo"],
+    "bo_dao_nha": ["trading quantitativo estrategia", "backtest algoritmico"],
+    "han":   ["퀀트 투자 전략", "알고리즘 트레이딩 백테스트"],
+    "duc":   ["algorithmischer handel strategie", "quantitative handelsstrategie"],
+}
+
+#: Mien cua cac cong dong do — de `mien_ung_vien` khong loai chung vi "la".
+MIEN_CONG_DONG_NGOAI = (
+    "zhihu.com", "csdn.net", "jianshu.com", "juejin.cn", "cnblogs.com",
+    "uqer.io", "joinquant.com", "ricequant.com", "myquant.cn",
+    "habr.com", "smart-lab.ru",
+    "qiita.com", "note.com",
+    "velog.io", "tistory.com",
+)
+
+
+def tu_khoa_da_ngon_ngu(so_moi_thu: int = 1) -> list[str]:
+    """Lay tu khoa o NHIEU ngon ngu, moi thu tieng vai cum.
+
+    Tra ve danh sach phang de nguoi goi ghep vao truy van tim kiem. Khong dich
+    may: cac cum nay do nguoi viet, vi mot ban dich may cua "mean reversion"
+    thuong khong phai cum ma cong dong do THUC SU dung.
+    """
+    ra = []
+    for cac in TU_KHOA_NGON_NGU.values():
+        ra.extend(cac[:max(1, so_moi_thu)])
+    return ra
+
+
 def mien_ung_vien(gioi_han: int = 60, it_nhat: int = 2) -> list[tuple[str, int]]:
     """Ten mien duoc CAC BAI DA THU dan sang, xep theo so lan dan.
 
@@ -267,9 +309,18 @@ def mien_ung_vien(gioi_han: int = 60, it_nhat: int = 2) -> list[tuple[str, int]]
     """
     da_co = _mien_da_biet()
     dem: dict[str, int] = {}
+    # DOC TAT CA CAC KIEU, khong chi `bai_bao`.
+    #
+    # Do that 30/08/2026: loc `kieu='bai_bao'` bo qua **207 ban ma_nguon (8,3
+    # trieu ky tu)** va **434 ban `khac` (3 trieu)** - tuc hon mot nua kho.
+    # Mot vong san 6 luot chi tim ra 33 mien va **0 mien dat**.
+    # Mo ra tat ca cac kieu: **241 ung vien**, dan dau la openreview.net,
+    # proceedings.mlr.press, jmlr.org, papers.nips.cc, nber.org - toan nguon
+    # hoc thuat hang dau. Kho ma va trang forum trich dan rat nhieu nguon;
+    # bo chung di la bo dung cho giau nhat.
     for r in SO.nhieu(
-            "SELECT van_ban FROM noi_dung WHERE kieu='bai_bao' AND so_ky_tu>800 "
-            "ORDER BY id DESC LIMIT 400"):
+            "SELECT van_ban FROM noi_dung WHERE so_ky_tu>800 "
+            "ORDER BY id DESC LIMIT 900"):
         thay = set()
         for u in re.findall(r'https?://([a-z0-9.\-]+)', r["van_ban"] or "", re.I):
             mien = u.lower().lstrip("www.")

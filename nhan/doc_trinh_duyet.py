@@ -32,7 +32,14 @@ def cdp_dang_chay(ports=CDP_MAC_DINH):
 #: So tab toi da giu lai tren con Chrome bot.
 #:
 #: Du de nguoi dung thay quet dang chay, va du it de trinh duyet khong nghet.
-GIU_TOI_DA_TAB = 6
+#: 25, khong phai 6. Day la LUOI AN TOAN cho ro ri, khong phai co che don dep
+#: thuong xuyen: `doc_gan` tu dong tab cua chinh no sau khi doc xong.
+#:
+#: Do that 30/08/2026: dat 6 thi bo don dong nham tab cua TIEN TRINH KHAC dang
+#: mo do. Mot luot dang ky MQL5 chay song song voi mot luot quet bi giet giua
+#: chung: `TargetClosedError: Target page has been closed`. Khi he chay 24/7,
+#: SEEKER va viec khac chay cung luc - loi nay se tai dien.
+GIU_TOI_DA_TAB = 25
 
 
 def _don_tab(ctx, giu: int = GIU_TOI_DA_TAB) -> int:
@@ -112,7 +119,16 @@ def doc_gan(url, port=None, cho_ms=14000, toi_da_text=20000):
                     "a", "els => els.map(e => [e.innerText.trim(), e.href])")
             except Exception as e:
                 kq["loi"] = "%s: %s" % (type(e).__name__, str(e)[:120])
-            # KHONG `pg.close()`: giu tab lai de nguoi dung quan sat + tai su dung
+            # DONG TAB CUA CHINH MINH. Truoc 30/08 khong dong (de nguoi dung
+            # quan sat), va do la mot ro ri: Chrome phinh len **356 tab** va
+            # luot keo dung han. Nhung cach chua dau tien - ha tran xuong 6 -
+            # lai sinh ra loi thu hai: bo don dong nham tab cua tien trinh khac.
+            #
+            # Dong tab cua MINH la cach dung: khong ro ri, va khong cham vao ai.
+            try:
+                pg.close()
+            except Exception:
+                pass
     except Exception as e:
         kq["loi"] = "%s: %s" % (type(e).__name__, str(e)[:120])
     return kq

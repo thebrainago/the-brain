@@ -91,8 +91,23 @@ class DocTrangThaiKhongDoanBua(unittest.TestCase):
         r = TK.kiem_mot(pg, "tradingview")
         self.assertIs(r["da_dang_nhap"], False)
 
-    def test_trang_day_du_khong_co_dau_hieu_thi_bao_DA(self):
+    def test_trang_day_du_KHONG_co_dau_hieu_thi_bao_KHONG_RO(self):
+        """Doi hanh vi co y 30/08 — va chinh bai kiem cu nay tung khoa cai sai.
+
+        Ban dau ham tra `True` khi doc duoc trang day du ma khong thay dau hieu
+        nao. Do dung la cho tradingview lot: trang ho so cong khai doc duoc ca
+        khi CHUA dang nhap, khong co chu "sign in", nen bi bao la DA dang nhap —
+        va 8 lenh follow im lang that bai vi tin vao do.
+
+        "Doc duoc trang" khong phai bang chung dang nhap. Khong thay dau hieu
+        nao thi cau tra loi dung la KHONG BIET.
+        """
         pg = self._Pg("https://www.tradingview.com/u/", "noi dung ho so " * 500)
+        self.assertIsNone(TK.kiem_mot(pg, "tradingview")["da_dang_nhap"])
+
+    def test_URL_chuyen_sang_ho_so_CUA_MINH_thi_bao_DA(self):
+        """Tin hieu chac chan nhat: `/u/` -> `/u/<ten-tai-khoan>/`."""
+        pg = self._Pg("https://www.tradingview.com/u/thebrainago/", "x" * 900)
         self.assertIs(TK.kiem_mot(pg, "tradingview")["da_dang_nhap"], True)
 
     def test_trang_RONG_thi_bao_KHONG_RO_chu_khong_doan(self):

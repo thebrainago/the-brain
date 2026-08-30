@@ -208,11 +208,33 @@ class TranSoTabTrinhDuyet(unittest.TestCase):
         n = DTD._don_tab(ctx, giu=6)
         self.assertEqual(n, 13, "mot tab hong lam mat ca vong don")
 
-    def test_tran_mac_dinh_la_mot_con_so_nho(self):
+    def test_tran_la_LUOI_AN_TOAN_chu_khong_phai_co_che_don_thuong_xuyen(self):
+        """Tran phai DU CAO de khong dong nham tab cua tien trinh khac.
+
+        Hai loi noi tiep nhau trong ngay 30/08:
+          1. Khong dong tab nao  -> Chrome phinh 356 tab, luot keo dung han.
+          2. Ha tran xuong 6     -> bo don dong nham tab cua TIEN TRINH KHAC;
+             mot luot dang ky MQL5 chay song song bi giet giua chung
+             (`TargetClosedError`).
+        Cach dung la ca hai: `doc_gan` tu dong tab CUA CHINH NO, con tran chi la
+        luoi an toan cho ro ri that su.
+        """
         from nhan import doc_trinh_duyet as DTD
-        self.assertGreaterEqual(DTD.GIU_TOI_DA_TAB, 1)
-        self.assertLessEqual(DTD.GIU_TOI_DA_TAB, 20,
-                             "tran qua cao thi khong con la tran")
+        self.assertGreaterEqual(
+            DTD.GIU_TOI_DA_TAB, 15,
+            "tran qua thap -> dong nham tab cua tien trinh khac dang chay")
+        self.assertLessEqual(
+            DTD.GIU_TOI_DA_TAB, 60,
+            "tran qua cao thi khong con chan duoc ro ri")
+
+    def test_doc_gan_TU_DONG_tab_cua_chinh_no(self):
+        """Neu khong, ro ri quay lai va tran phai ha xuong - vong luan quan."""
+        van = (Path(LAB) / "nhan" / "doc_trinh_duyet.py").read_text(encoding="utf-8")
+        than = van[van.index("def doc_gan("):]
+        moc = "\n" + "def "
+        than = than[:than.index(moc)] if moc in than else than
+        self.assertIn("pg.close()", than,
+                      "doc_gan khong dong tab cua chinh no -> ro ri tro lai")
 
 
 if __name__ == "__main__":

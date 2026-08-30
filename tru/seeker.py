@@ -467,6 +467,79 @@ NGUON_TRINH_DUYET = {
                   "https://www.tradingview.com/scripts/momentum/",
                   "https://www.tradingview.com/scripts/volatility/"],
         "hang": "A", "loai": "ma_nguon", "chu_ky": 43200, "uu_tien": 1},
+    # --- bon nguon them 30/08/2026 ---
+    # Do that: deu vao duoc KHONG CAN dang nhap, va deu tra ve trang day chu
+    # (paperswithcode 1,5 trieu ky tu / quantpedia 641k / quantconnect 265k /
+    # elitetrader 70k). Day la HANG cua arXiv va GitHub - dung thu dang thieu,
+    # vi hai nguon do da doc CAN.
+    "paperswithcode": {
+        "kieu": "trang",
+        "trang": ["https://paperswithcode.com/search?q=trading",
+                  "https://paperswithcode.com/search?q=time+series+forecasting",
+                  "https://paperswithcode.com/search?q=portfolio+optimization"],
+        "loc_lien_ket": r"paperswithcode\.com/paper/",
+        "hang": "A", "loai": "hoc_thuat", "chu_ky": 43200, "uu_tien": 1},
+    "quantpedia": {
+        "kieu": "trang",
+        "trang": ["https://quantpedia.com/strategies/"],
+        "loc_lien_ket": r"quantpedia\.com/strategies/[a-z0-9-]{6,}",
+        "hang": "A", "loai": "co_che", "chu_ky": 86400, "uu_tien": 1},
+    "quantconnect_forum": {
+        "kieu": "trang",
+        "trang": ["https://www.quantconnect.com/forum/discussions"],
+        "loc_lien_ket": r"quantconnect\.com/forum/discussion/\d+",
+        "hang": "B", "loai": "dien_dan", "chu_ky": 43200, "uu_tien": 2},
+    "elitetrader": {
+        "kieu": "trang",
+        "trang": ["https://www.elitetrader.com/et/forums/automated-trading.15/",
+                  "https://www.elitetrader.com/et/forums/strategy-building.10/"],
+        "loc_lien_ket": r"elitetrader\.com/et/threads/",
+        "hang": "B", "loai": "dien_dan", "chu_ky": 43200, "uu_tien": 2},
+    # --- CONG DONG NGOAI TIENG ANH (them 30/08/2026) ---
+    #
+    # Chu du an: "tim da ngon ngu de tan dung toi da cac cong dong". Kho hien
+    # tai gan nhu chi tieng Anh. Ba cong dong quant lon nhat ngoai tieng Anh
+    # (Trung, Nga, Nhat) co truyen thong chia se ma nguon rat manh va ho KHONG
+    # viet bang tieng Anh.
+    #
+    # Do that 30/08 - vao duoc va giau chu: qiita 308k, habr 277k, note 133k,
+    # smart-lab 100k, cnblogs 74k, velog 61k ky tu.
+    # Bi chan: zhihu (403), csdn (SSL), uqer (chet).
+    #
+    # Tu khoa la cum NGUOI BAN DIA THUC SU DUNG, khong phai ban dich may.
+    "qiita_nhat": {
+        "kieu": "tu_khoa_lien_ket", "mau": "https://qiita.com/search?q={k}",
+        "tu_khoa_rieng": ["システムトレード", "アルゴリズム取引", "バックテスト 株"],
+        "loc_lien_ket": r"qiita\.com/[^/]+/items/[0-9a-f]{8,}",
+        "hang": "B", "loai": "cong_dong", "chu_ky": 43200, "uu_tien": 2},
+    # Trang TIM KIEM cua habr dung bang JS va tra ve body 535 ky tu, 0 link bai.
+    # Trang CHUYEN MUC thi tra ve 23.631 ky tu va 108 link bai. Do that 30/08.
+    "habr_nga": {
+        "kieu": "trang",
+        "trang": ["https://habr.com/ru/hubs/finance/articles/",
+                  "https://habr.com/ru/hubs/algorithms/articles/",
+                  "https://habr.com/ru/hubs/machine_learning/articles/"],
+        "loc_lien_ket": r"habr\.com/ru/(articles|companies/[^/]+/articles)/\d+",
+        "hang": "B", "loai": "cong_dong", "chu_ky": 43200, "uu_tien": 2},
+    "smartlab_nga": {
+        "kieu": "tu_khoa_lien_ket",
+        "mau": "https://smart-lab.ru/search/?q={k}",
+        "tu_khoa_rieng": ["алгоритмический трейдинг", "торговая стратегия тест"],
+        "loc_lien_ket": r"smart-lab\.ru/(blog|company)/.+/\d+",
+        "hang": "B", "loai": "cong_dong", "chu_ky": 43200, "uu_tien": 3},
+    # Cung ly do voi habr: trang tim kiem zzk.cnblogs.com tra ve 227 ky tu,
+    # trang chuyen muc tra ve 5.725 ky tu va 86 link bai.
+    "cnblogs_trung": {
+        "kieu": "trang",
+        "trang": ["https://www.cnblogs.com/cate/python/",
+                  "https://www.cnblogs.com/cate/ai/"],
+        "loc_lien_ket": r"cnblogs\.com/[^/]+/p/\d+",
+        "hang": "C", "loai": "cong_dong", "chu_ky": 43200, "uu_tien": 3},
+    "velog_han": {
+        "kieu": "tu_khoa_lien_ket", "mau": "https://velog.io/search?q={k}",
+        "tu_khoa_rieng": ["퀀트 투자 전략", "알고리즘 트레이딩"],
+        "loc_lien_ket": r"velog\.io/@[^/]+/",
+        "hang": "C", "loai": "cong_dong", "chu_ky": 86400, "uu_tien": 3},
     "tradingview_ideas": {
         "kieu": "tu_khoa", "mau": "https://www.tradingview.com/ideas/?q={k}",
         "hang": "B", "loai": "cong_dong", "chu_ky": 43200, "uu_tien": 3},
@@ -636,7 +709,12 @@ def quet_trinh_duyet(ngan_sach_giay: int = 90, t0: float | None = None) -> dict:
         # `tu_khoa` va `tu_khoa_lien_ket` deu dung MAU + tu khoa; chung chi khac
         # nhau o cach BOC trang ket qua (xem `_duyet_tai_lieu`).
         if str(c.get("kieu", "")).startswith("tu_khoa"):
-            phieu = [_ur.quote(k) for k in tu_khoa_dung(3)]
+            # `tu_khoa_rieng`: nguon ngoai tieng Anh phai dung tu khoa BAN DIA.
+            # Cong dong quant Nhat khong tim bang "mean reversion" ma bang
+            # "システムトレード"; ep tu khoa tieng Anh vao qiita.com thi ra rong,
+            # va cai rong do se bi doc nham thanh "nguon nay khong co gi".
+            tu = c.get("tu_khoa_rieng") or tu_khoa_dung(3)
+            phieu = [_ur.quote(k) for k in tu[:3]]
             phieu = [c["mau"].replace("{k}", q) for q in phieu]
         else:
             phieu = c["trang"]
