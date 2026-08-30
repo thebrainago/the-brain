@@ -467,6 +467,32 @@ NGUON_TRINH_DUYET = {
                   "https://www.tradingview.com/scripts/momentum/",
                   "https://www.tradingview.com/scripts/volatility/"],
         "hang": "A", "loai": "ma_nguon", "chu_ky": 43200, "uu_tien": 1},
+    # --- MQL5 sau khi DANG NHAP (30/08/2026) ---
+    #
+    # Do that: `mql5_articles` co **58.272 ky tu trung binh moi bai** - CAO NHAT
+    # trong moi nguon cua du an, ngang arXiv (53.756) va hon GitHub (46.155).
+    # Vay ma so cai chi co **4 bai**. Do la bai ky thuat dai kem MA DAY DU do
+    # chinh nguoi viet EA viet ra - dung thu du an can nhat.
+    #
+    # Trang liet ke cho 42-45 link bai va 40 link ma moi trang.
+    #
+    # Dang nhap bang GOOGLE (tai khoan Vanh1799). Ten dang nhap KHAC email -
+    # do la ly do mot vong thu dang nhap bang 'thebrainago' that bai.
+    "mql5_bai_viet": {
+        "kieu": "trang",
+        "trang": ["https://www.mql5.com/en/articles/trading_systems",
+                  "https://www.mql5.com/en/articles/tester",
+                  "https://www.mql5.com/en/articles/machine_learning",
+                  "https://www.mql5.com/en/articles/statistics"],
+        "loc_lien_ket": r"mql5\.com/en/articles/\d+",
+        "hang": "A", "loai": "ma_nguon", "chu_ky": 43200, "uu_tien": 1},
+    "mql5_ma_expert": {
+        "kieu": "trang",
+        "trang": ["https://www.mql5.com/en/code/mt5/experts",
+                  "https://www.mql5.com/en/code/mt5/indicators"],
+        "loc_lien_ket": r"mql5\.com/en/code/\d+",
+        "hang": "A", "loai": "ma_nguon", "chu_ky": 43200, "uu_tien": 1},
+
     # --- bon nguon them 30/08/2026 ---
     # Do that: deu vao duoc KHONG CAN dang nhap, va deu tra ve trang day chu
     # (paperswithcode 1,5 trieu ky tu / quantpedia 641k / quantconnect 265k /

@@ -124,7 +124,12 @@ NEN_TANG = {
     "mql5": {
         "loai": "mot_lan_tay", "kiem": "https://www.mql5.com/en/users",
         "dang_ky": "https://www.mql5.com/en/auth_register",
-        "dau_hieu_da": r"my profile|logout|sign out|\bmy\b.{0,20}\bprofile\b",
+        # MQL5 khong hien "my profile"/"sign out" o thanh dau trang; thu
+        # DUY NHAT phan biet la TEN TAI KHOAN thay cho "Log inCreate an
+        # account". Do that 30/08: khi da dang nhap, thanh dau trang hien
+        # "Vanh1799" (ten that cua tai khoan) - va do la ly do dang nhap
+        # bang "thebrainago" that bai: ten dang nhap KHAC email.
+        "dau_hieu_da": r"Vanh1799|my profile|logout|sign out",
         # KHONG dat ranh gioi tu sau "in": trang MQL5 ghi LIEN
         # "Log inCreate an account" (khong co dau cach), nen  sau `in`
         # khong khop va ca phep kiem truot -> bao KHONG RO trong khi trang
