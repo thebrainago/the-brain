@@ -463,6 +463,17 @@ def tu_du_lieu(ma: str, df: pd.DataFrame, phi_nam_mua: float | None = None,
         do_tin = "KHAI"
         cb.append(f"phi qua dem KHAI BAO tu lop '{lt}' - chua do duoc tren san nao "
                   f"trong {san_uu_tien or SAN_UU_TIEN}")
+    elif "san_lay" not in luu:
+        # Phi do CHINH NGUOI GOI truyen vao, khong phai doc tu san. Truoc
+        # 30/08/2026 nhanh nay roi vao `else` ben duoi va lam hai viec sai cung
+        # luc: `KeyError: 'san_lay'` (vi `luu` rong), va - neu khong vo - gan
+        # `do_tin="SAN"` cho mot con so GO TAY. Nhan SAN nghia la "doc tu san",
+        # tuc du dieu kien 7 de PASS. Khong caller san xuat nao dang di duong
+        # nay nen loi con tiem an, nhung no la lo hong xuat xu chi phi chu khong
+        # phai mot cai crash.
+        do_tin = "KHAI"
+        cb.append("phi qua dem do NGUOI GOI truyen vao (khong doc tu san) "
+                  "-> KHAI BAO, khong du de PASS")
     else:
         do_tin = "SAN"
         cb.append(f"phi qua dem do tu {luu['san_lay']}:{luu['symbol_lay']} "
