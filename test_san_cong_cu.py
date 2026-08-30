@@ -499,6 +499,19 @@ class DuongDIENDAN(unittest.TestCase):
         r = self._goi(hn=None, so=None)
         self.assertTrue(r and "loi" in r[0],
                         "ca hai dien dan chan ma bao nhu la khong co ket qua")
+        self.assertIn("voi toi", r[0]["loi"])
+
+    def test_HOI_DUOC_ma_khong_co_gi_thi_tra_RONG_chu_khong_phai_LOI(self):
+        """Chieu con lai, va no la chieu de sai hon.
+
+        Ban dau (30/08/2026) toi viet ca hai truong hop deu tra
+        `[{"loi": "khong dien dan nao tra ve ket qua"}]`. EVO se ghi mot truy
+        van hop le nhung khong trung gi thanh LOI MANG, roi thu lai mai mot
+        truy van that su khong co cau tra loi — dung hinh dang cua bay
+        "chua do" bi ghi thanh "do roi ma khong co", chi la nguoc chieu.
+        """
+        r = self._goi(hn=[], so=[])
+        self.assertEqual(r, [], "hoi duoc ca hai ma bao la loi mang")
 
 
 class NhuCauKYTHUATPhaiGanVoiNutThatDADO(unittest.TestCase):

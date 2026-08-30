@@ -565,19 +565,29 @@ def tim_dien_dan(truy_van: str, so_luong: int = 8) -> list[dict]:
     import urllib.parse as _up
     import urllib.request as _ur
 
-    def _lay(u):
+    # `voi_toi` dem so dien dan TRA LOI DUOC (khac so dien dan CO KET QUA).
+    # Hai cau phai tach bach: "khong dien dan nao voi toi duoc" la loi moi
+    # truong va phai thu lai; "ca hai dien dan deu tra ve rong" la cau tra loi
+    # THAT cho truy van do. Tron hai cau lai la cach du an nay da nhieu lan tu
+    # tin vao mot dieu no chua kiem.
+    trang_thai = {"voi_toi": 0, "hong": []}
+
+    def _lay(u, ten):
         try:
             rq = _ur.Request(u, headers={"User-Agent": "Mozilla/5.0"})
             with _ur.urlopen(rq, timeout=25) as f:
-                return f.read().decode("utf-8", "replace")
-        except Exception:
+                txt = f.read().decode("utf-8", "replace")
+            trang_thai["voi_toi"] += 1
+            return txt
+        except Exception as e:
+            trang_thai["hong"].append(f"{ten}: {type(e).__name__}")
             return None
 
     q = _up.quote(truy_van)
     ra: list[dict] = []
 
     txt = _lay(f"https://hn.algolia.com/api/v1/search?query={q}"
-               f"&tags=story&hitsPerPage={so_luong}")
+               f"&tags=story&hitsPerPage={so_luong}", "hackernews")
     if txt:
         try:
             for it in _json.loads(txt).get("hits", [])[:so_luong]:
@@ -597,7 +607,8 @@ def tim_dien_dan(truy_van: str, so_luong: int = 8) -> list[dict]:
             pass
 
     txt = _lay("https://api.stackexchange.com/2.3/search/advanced?order=desc"
-               f"&sort=votes&q={q}&site=stackoverflow&pagesize={so_luong}")
+               f"&sort=votes&q={q}&site=stackoverflow&pagesize={so_luong}",
+               "stackoverflow")
     if txt:
         try:
             for it in _json.loads(txt).get("items", [])[:so_luong]:
@@ -618,7 +629,12 @@ def tim_dien_dan(truy_van: str, so_luong: int = 8) -> list[dict]:
     # Lobsters: DA BO. `search.json` tra HTTP 400 - trang khong co endpoint
     # tim kiem dang JSON. Giu mot loi goi luon hong chi lam nhieu nhat ky va
     # ton mot vong mang moi luot.
-    return ra or [{"loi": "khong dien dan nao tra ve ket qua"}]
+    if ra:
+        return ra
+    if trang_thai["voi_toi"] == 0:
+        return [{"loi": "khong dien dan nao voi toi duoc ("
+                 + ", ".join(trang_thai["hong"]) + ")"}]
+    return []          # da hoi duoc, that su khong co gi - KHONG phai loi
 
 
 # ------------------------------------------------------- TIM CONG TRINH
