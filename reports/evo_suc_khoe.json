@@ -1,33 +1,33 @@
 {
  "van_hanh": {
-  "luc": "2026-08-30 15:24:26",
+  "luc": "2026-08-30 17:25:23",
   "tru": {
    "SEEKER": {
     "lan_cuoi": "2026-08-23 11:04:04",
-    "tre_giay": 620422,
+    "tre_giay": 627679,
     "trang_thai": "nghi",
     "dung_im": true
    },
    "QUANTLAB": {
     "lan_cuoi": "2026-08-22 19:57:07",
-    "tre_giay": 674839,
+    "tre_giay": 682096,
     "trang_thai": "nghi",
     "dung_im": true
    },
    "NGHI": {
-    "lan_cuoi": "2026-08-30 11:20:06",
-    "tre_giay": 14660,
+    "lan_cuoi": "2026-08-30 15:25:21",
+    "tre_giay": 7202,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "BANKER": {
-    "lan_cuoi": "2026-08-16 22:08:02",
-    "tre_giay": 1185384,
+    "lan_cuoi": "2026-08-30 15:25:17",
+    "tre_giay": 7206,
     "trang_thai": "nghi",
-    "dung_im": true
+    "dung_im": false
    },
    "EVO": {
-    "lan_cuoi": "2026-08-30 15:24:26",
+    "lan_cuoi": "2026-08-30 17:25:23",
     "tre_giay": 0,
     "trang_thai": "chay",
     "dung_im": false
@@ -39,12 +39,12 @@
     "so_tab": 7
    },
    "chrome": {
-    "gb": 2.93,
-    "so_tien_trinh": 19
+    "gb": 3.49,
+    "so_tien_trinh": 17
    },
-   "ram_dung_pct": 28.1,
-   "ram_trong_gb": 24.6,
-   "cpu_pct": 10.2
+   "ram_dung_pct": 29.8,
+   "ram_trong_gb": 24.0,
+   "cpu_pct": 40.5
   },
   "viec": {
    "QUANTLAB": {
@@ -63,7 +63,7 @@
   "mt5_tick_test": "KHOA (dia < 15GB)",
   "so_toan_ven": {
    "lanh": true,
-   "mo_ta": "1722 dong lien mach"
+   "mo_ta": "1723 dong lien mach"
   },
   "nguon": {
    "arxiv": {
@@ -79,9 +79,9 @@
     "trang_thai": "BAT"
    },
    "mql5_signals": {
-    "lan": 3,
+    "lan": 4,
     "loi": 0,
-    "thu_hoach": 30,
+    "thu_hoach": 32,
     "trang_thai": "BAT"
    },
    "stackexchange": {
@@ -139,69 +139,69 @@
     "trang_thai": "BAT"
    },
    "myfxbook": {
-    "lan": 3,
+    "lan": 4,
     "loi": 0,
     "thu_hoach": 37,
     "trang_thai": "BAT"
    },
    "collective2": {
-    "lan": 2,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 10,
+    "thu_hoach": 12,
     "trang_thai": "BAT"
    },
    "fxblue": {
-    "lan": 2,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "etoro": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "zulutrade": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 30,
     "trang_thai": "BAT"
    },
    "darwinex": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 32,
+    "thu_hoach": 39,
     "trang_thai": "BAT"
    },
    "reddit_td": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 90,
+    "thu_hoach": 169,
     "trang_thai": "BAT"
    },
    "x": {
-    "lan": 1,
+    "lan": 5,
     "loi": 0,
-    "thu_hoach": 3,
+    "thu_hoach": 76,
     "trang_thai": "BAT"
    },
    "tiktok": {
-    "lan": 0,
+    "lan": 4,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 78,
     "trang_thai": "BAT"
    },
    "facebook": {
-    "lan": 0,
+    "lan": 4,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "youtube": {
-    "lan": 0,
+    "lan": 4,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 129,
     "trang_thai": "BAT"
    },
    "telegram": {
@@ -401,9 +401,21 @@
     "loi": 0,
     "thu_hoach": 7,
     "trang_thai": "BAT"
+   },
+   "tradingview_scripts": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 101,
+    "trang_thai": "BAT"
+   },
+   "tradingview_ideas": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 3,
+    "trang_thai": "BAT"
    }
   },
-  "tai_lieu": 1338,
+  "tai_lieu": 1750,
   "gia_thuyet": {
    "FAIL": 353,
    "QUARANTINED_V2": 8
@@ -472,10 +484,10 @@
   {
    "ma": "tru_dung_im_SEEKER",
    "muc": "NANG",
-   "mo_ta": "Tru SEEKER dung im 10340 phut (han 180 phut)",
+   "mo_ta": "Tru SEEKER dung im 10461 phut (han 180 phut)",
    "bc": {
     "lan_cuoi": "2026-08-23 11:04:04",
-    "tre_giay": 620422,
+    "tre_giay": 627679,
     "trang_thai": "nghi",
     "dung_im": true
    }
@@ -483,21 +495,10 @@
   {
    "ma": "tru_dung_im_QUANTLAB",
    "muc": "NANG",
-   "mo_ta": "Tru QUANTLAB dung im 11247 phut (han 120 phut)",
+   "mo_ta": "Tru QUANTLAB dung im 11368 phut (han 120 phut)",
    "bc": {
     "lan_cuoi": "2026-08-22 19:57:07",
-    "tre_giay": 674839,
-    "trang_thai": "nghi",
-    "dung_im": true
-   }
-  },
-  {
-   "ma": "tru_dung_im_BANKER",
-   "muc": "NANG",
-   "mo_ta": "Tru BANKER dung im 19756 phut (han 720 phut)",
-   "bc": {
-    "lan_cuoi": "2026-08-16 22:08:02",
-    "tre_giay": 1185384,
+    "tre_giay": 682096,
     "trang_thai": "nghi",
     "dung_im": true
    }
@@ -509,9 +510,19 @@
    "bc": {
     "goi_y": "lab/.browser_thebrain2 (848MB, INVENTORY ghi la mo nham), lab/.browser_darwinex_tmp (480MB tmp)"
    }
+  },
+  {
+   "ma": "nguon_khong_thu_hoach",
+   "muc": "VUA",
+   "mo_ta": "Nguon fxblue da goi >=3 lan ma chua thu duoc tai lieu nao",
+   "bc": {
+    "nguon": [
+     "fxblue"
+    ]
+   }
   }
  ],
  "da_sua": [
-  "dong_van_de_da_het: qua_nhieu_pass"
+  "dong_van_de_da_het: tru_dung_im_BANKER"
  ]
 }

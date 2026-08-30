@@ -1,19 +1,19 @@
 # EVOLUTION - SUC KHOE DAY CHUYEN
-*2026-08-30 15:24:26*
+*2026-08-30 17:25:23*
 
 > Do bang SUC KHOE, khong do bang so PASS. Mot he lanh manh hieu chuan tot ke ca khi tim duoc it edge.
 
 ## 1. Bon tru
 | Tru | Lan cuoi | Tre | Trang thai |
 |---|---|---|---|
-| SEEKER | 2026-08-23 11:04:04 | 10340 phut | nghi **DUNG IM** |
-| QUANTLAB | 2026-08-22 19:57:07 | 11247 phut | nghi **DUNG IM** |
-| NGHI | 2026-08-30 11:20:06 | 244 phut | nghi |
-| BANKER | 2026-08-16 22:08:02 | 19756 phut | nghi **DUNG IM** |
-| EVO | 2026-08-30 15:24:26 | 0 phut | chay |
+| SEEKER | 2026-08-23 11:04:04 | 10461 phut | nghi **DUNG IM** |
+| QUANTLAB | 2026-08-22 19:57:07 | 11368 phut | nghi **DUNG IM** |
+| NGHI | 2026-08-30 15:25:21 | 120 phut | nghi |
+| BANKER | 2026-08-30 15:25:17 | 120 phut | nghi |
+| EVO | 2026-08-30 17:25:23 | 0 phut | chay |
 
 ## 2. San luong
-- Tai lieu da thu: **1338**
+- Tai lieu da thu: **1750**
 - Gia thuyet: {"FAIL": 353, "QUARANTINED_V2": 8}
 - Gia thuyet co ket qua cuoi: **353** (chua 904 dong lich su da supersede, invalidated hoac quarantine)
 - Viec: cho 104 / treo 0 / loi 0
@@ -35,29 +35,29 @@
 ## 4. Tai nguyen + toan ven
 - **Thoi gian song 7 ngay: 100.0%** (mat 0 gio qua 0 lan gian doan - may ngu hoac tat, khong phai tru chet)
 - Dia trong: **14.0 GB** - MT5 tick-test: **KHOA (dia < 15GB)**
-- So cai: LANH (1722 dong lien mach)
+- So cai: LANH (1723 dong lien mach)
 
 ## 5. Nguon
 | Nguon | Lan goi | Loi | Thu hoach | Trang thai |
 |---|---|---|---|---|
 | arxiv | 6 | 0 | 133 | BAT |
 | blog | 2 | 0 | 29 | BAT |
-| collective2 | 2 | 0 | 10 | BAT |
+| collective2 | 3 | 0 | 12 | BAT |
 | crossref | 2 | 0 | 41 | BAT |
-| darwinex | 1 | 0 | 32 | BAT |
-| etoro | 1 | 0 | 0 | BAT |
-| facebook | 0 | 0 | 0 | BAT |
-| fxblue | 2 | 0 | 0 | BAT |
+| darwinex | 2 | 0 | 39 | BAT |
+| etoro | 2 | 0 | 0 | BAT |
+| facebook | 4 | 0 | 10 | BAT |
+| fxblue | 3 | 0 | 0 | BAT |
 | github | 4 | 0 | 179 | BAT |
 | hackernews | 4 | 0 | 44 | BAT |
 | lean_algo | 2 | 0 | 40 | BAT |
 | mql5_code | 2 | 0 | 30 | BAT |
 | mql5_ma_nguon | 1 | 0 | 0 | TAT |
-| mql5_signals | 3 | 0 | 30 | BAT |
-| myfxbook | 3 | 0 | 37 | BAT |
+| mql5_signals | 4 | 0 | 32 | BAT |
+| myfxbook | 4 | 0 | 37 | BAT |
 | openalex | 4 | 0 | 281 | BAT |
 | quantconnect | 2 | 0 | 0 | BAT |
-| reddit_td | 1 | 0 | 90 | BAT |
+| reddit_td | 2 | 0 | 169 | BAT |
 | rss_aligrithm | 1 | 0 | 12 | BAT |
 | rss_allocatesmartly | 1 | 0 | 10 | BAT |
 | rss_alphaarchitect | 1 | 0 | 5 | BAT |
@@ -92,14 +92,15 @@
 | semantic | 2 | 0 | 0 | BAT |
 | stackexchange | 4 | 0 | 69 | BAT |
 | telegram | 2 | 0 | 13 | BAT |
-| tiktok | 0 | 0 | 0 | BAT |
-| x | 1 | 0 | 3 | BAT |
-| youtube | 0 | 0 | 0 | BAT |
-| zulutrade | 1 | 0 | 0 | BAT |
+| tiktok | 4 | 0 | 78 | BAT |
+| tradingview_ideas | 1 | 0 | 3 | BAT |
+| tradingview_scripts | 1 | 0 | 101 | BAT |
+| x | 5 | 0 | 76 | BAT |
+| youtube | 4 | 0 | 129 | BAT |
+| zulutrade | 2 | 0 | 30 | BAT |
 
-## 6. Van de dang mo (28)
+## 6. Van de dang mo (27)
 - **[NANG]** `dia_thap` - Dia con 14.0 GB (< 15) -> MT5 tick-test bi KHOA, tuc dang tu cam minh lam buoc quyet dinh cua chinh du an
-- **[NANG]** `tru_dung_im_BANKER` - Tru BANKER dung im 19756 phut (han 720 phut)
 - **[NANG]** `tru_dung_im_QUANTLAB` - Tru QUANTLAB dung im 11247 phut (han 120 phut)
 - **[NANG]** `tru_dung_im_SEEKER` - Tru SEEKER dung im 10340 phut (han 180 phut)
 - **[NANG]** `quant_pass_quarantine_v2` - 8 ket qua duong da quarantine; khong duoc dung cho paper/live cho toi khi retest V2
@@ -113,11 +114,12 @@
 - **[NANG]** `llm_c17d82c8bb` - [LLM chan doan] Cong PASS loai sach ca 8 gia thuyet da vuot FDR — day chuyen co dau ra o tang thong ke nhung khong co gi di ra khoi cong
 - **[NANG]** `llm_f7f11f13ea` - [LLM chan doan] Nha may null qua nho va khong dai dien de ket luan bat cu dieu gi ve hieu chuan
 - **[NANG]** `llm_ba1deaef7d` - [LLM chan doan] Phan phoi p cua ung vien KHONG phai phan phoi null — nhung khong co gi di ra khoi day chuyen
+- **[NANG]** `llm_3c0a37d910` - [LLM chan doan] Cong loai bo ca 8 gia thuyet da vuot FDR — day la bang chung dinh luong dau tien cho gia thuyet 'cong qua chat', khong con la phong doan
 
 ## 7. EVO da tu sua trong luot nay
-- dong_van_de_da_het: qua_nhieu_pass
+- dong_van_de_da_het: tru_dung_im_BANKER
 
 > EVO chi tu sua nhung viec da khai bao truoc: `don_viec_treo`, `don_cache_khung`, `xep_lai_viec_loi`, `gian_nguon_chet`, `dong_van_de_da_het`. Ngoai danh sach do thi chi ghi van de va cho nguoi - khong tu sua code.
 
 ## 8. Suy nghi sau (LLM doc so lieu van hanh)
-- Bo qua luot nay: da khoa (duong=tat trong config/tri_tue.json)
+- Bo qua luot nay: chua den ky (6 gio)

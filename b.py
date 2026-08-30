@@ -9,7 +9,8 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b ket "tom tat"   KET PHIEN: chot git + sinh TIEP_TUC_MAI.md cho mai
     b test [tu-khoa]  chay test SONG SONG (8 tien trinh, ~1 phut thay vi 6)
     b test1 [tu-khoa] chay test MOT tien trinh (khi nghi song song lam sai)
-    b trang-thai      bang dieu khien
+    b toan-canh       MOT man hinh: dau vao + kho co che + tang kham pha
+    b trang-thai      bang dieu khien (van hanh cua dieu phoi)
     b chay / b dung   bat / dung dieu phoi 24/7
     b canary          tu kiem engine (5 canary)
     b quet            quet_be_mat.py
@@ -71,6 +72,10 @@ def c_test(a, song_song=True):
     if a:
         cmd += ["-k", " or ".join(a)]
     return chay(cmd)
+
+
+def c_toan_canh(_):
+    return chay([PY, LAB / "toan_canh.py"])
 
 
 def c_trang_thai(_):
@@ -186,6 +191,7 @@ def c_ban_do(_):
 LENH = {
     "vao": c_vao, "ket": c_ket,
     "test": lambda a: c_test(a, True), "test1": lambda a: c_test(a, False),
+    "toan-canh": c_toan_canh, "tc": c_toan_canh,
     "trang-thai": c_trang_thai, "tt": c_trang_thai,
     "chay": c_chay, "dung": c_dung, "canary": c_canary,
     "quet": c_quet, "mde": c_mde, "mde-nap": c_mde_nap,

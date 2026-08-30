@@ -72,24 +72,48 @@ class DoDuocMayThat(unittest.TestCase):
         self.assertIn("so_tab", r["tab"])
         self.assertIn("gb", r["chrome"])
 
-    def test_chay_xong_nhanh_tu_lan_thu_hai(self):
+    def test_lan_thu_hai_KHONG_do_lai_cong_chet(self):
         """EVO goi moi luot. Cham thi no tu tro thanh mot cai nghen.
 
-        LAN DAU cham hon vi phai DO CONG CDP: mot cong khong ai nghe phai cho
-        het timeout. Do that 30/08: lan dau 3,56 giay, tu lan hai 1,55 giay nho
-        nho lai cong da dung duoc.
+        Do that 30/08: mot cong khong ai nghe phai cho het timeout, nen moi luot
+        mat 3,56 giay CHI DE DEM TAB. Nho lai cong da dung duoc thi con 1,55.
 
-        Nguong dat o 2,5 giay cho lan thu hai. EVO co ngan sach 150 giay/luot
-        nen 1,5 giay la 1% - chap nhan duoc; 4 giay tro len thi khong.
+        BAI NAY DO CO CHE, KHONG DO DONG HO. Ban dau toi dat nguong 2,5 giay va
+        no do ngay khi mot luot keo chay song song - do la do TAI MAY chu khong
+        do cai minh vua sua. Mot bai kiem chap chon con te hon khong co bai kiem:
+        no day nguoi ta vao thoi quen bo qua mau do.
         """
+        goi = []
+        goc = DTN.urllib.request.urlopen
+
+        def dem(url, *a, **k):
+            goi.append(url)
+            return goc(url, *a, **k)
+
+        DTN.urllib.request.urlopen = dem
+        try:
+            DTN._CONG_DA_DUNG.clear()
+            DTN.so_tab_trinh_duyet()          # lan dau: co the phai do nhieu cong
+            lan_dau = len(goi)
+            goi.clear()
+            DTN.so_tab_trinh_duyet()          # lan hai
+            lan_hai = len(goi)
+        finally:
+            DTN.urllib.request.urlopen = goc
+
+        if not DTN._CONG_DA_DUNG:
+            self.skipTest("khong co CDP nao dang mo de kiem cache cong")
+        self.assertEqual(lan_hai, 1,
+                         f"lan hai goi {lan_hai} lan thay vi 1 - khong nho cong")
+        self.assertGreaterEqual(lan_dau, lan_hai)
+
+    def test_van_chay_xong_trong_thoi_gian_hop_ly(self):
+        """Chan tho: EVO co ngan sach 150 giay/luot nen 10 giay la qua nhieu."""
         import time
-        DTN.tat_ca()                      # lan dau: do cong
+        DTN.tat_ca()
         t0 = time.time()
         DTN.tat_ca()
-        giay = time.time() - t0
-        self.assertLess(giay, 2.5,
-                        f"do tai nguyen mat {giay:.1f}s moi luot - qua dat cho "
-                        "mot phep do phu tro")
+        self.assertLess(time.time() - t0, 10.0)
 
 
 class EVODocDuocKetQua(unittest.TestCase):
