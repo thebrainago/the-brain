@@ -633,5 +633,807 @@
   "thay_luc": "2026-08-30 16:40:24",
   "trang_thai": "MOI",
   "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:kiem_dinh_thong_ke:https://www.mql5.com/en/articles/examples": {
+  "nhu_cau": "kiem_dinh_thong_ke",
+  "cum_khop": "multiple testing",
+  "vi_tri": 15836,
+  "trich_dan": "r return conditioning buy strategy performance? We hold bar count fixed across time, tick, tick-imbalance, and tick-runs on 60.5 million EURUSD ticks, then meta-label RSI, Bollinger, and ADX/DI entries and score with purged cross-validation. No family delivers a consistent edge; efficacy varies narrowly and the best case fails a permutation test. Readers lea",
+  "tieu_de": "[mql5_bai_viet] Examples",
+  "url": "https://www.mql5.com/en/articles/examples",
+  "nguon": "mql5_bai_viet",
+  "thay_luc": "2026-08-30 21:10:10",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:phuong_phap_chi_phi_giao_dich:https://www.reddit.com/r/quant/?f=flair_name%3A%22Technical%20Infrastructure%22": {
+  "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+  "cum_khop": "market impact model",
+  "vi_tri": 28739,
+  "trich_dan": "o one another using gRPC. \n\nSo if you place an order, it gets validated and stored at the order session service, pushed to the exchange simulator services, and that then routes the portfolio/fills/account information to the frontend through the session service. The market data service is using minute bars and pushing it to the exchange service. So your fills",
+  "tieu_de": "[reddit_td] Technical Infrastructure",
+  "url": "https://www.reddit.com/r/quant/?f=flair_name%3A%22Technical%20Infrastructure%22",
+  "nguon": "reddit_td",
+  "thay_luc": "2026-08-30 22:05:49",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:kiem_dinh_thong_ke:https://www.reddit.com/r/quant/?f=flair_name%3A%22Statistical%20Methods%22": {
+  "nhu_cau": "kiem_dinh_thong_ke",
+  "cum_khop": "deflated Sharpe",
+  "vi_tri": 5125,
+  "trich_dan": "or a reasonable primary side signal without just curve-fitting?\nShould the primary signal usually be simple and hypothesis-driven, e.g. trend, mean reversion, carry/funding, spread, regime, order-flow, etc., and then the meta-model filters it?\nWhat validation workflow would you recommend for this kind of project? For example: walk-forward testing, purged CV,",
+  "tieu_de": "[reddit_td] Statistical Methods",
+  "url": "https://www.reddit.com/r/quant/?f=flair_name%3A%22Statistical%20Methods%22",
+  "nguon": "reddit_td",
+  "thay_luc": "2026-08-30 22:11:15",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:phuong_phap_chi_phi_giao_dich:https://www.reddit.com/user/dm13450/": {
+  "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+  "cum_khop": "Almgren-Chriss",
+  "vi_tri": 3608,
+  "trich_dan": "Julia\nr/Julia\n•\n2 yr. ago\nCalibrating an Ornstein–Uhlenbeck Process in Julia\nhttps://dm13450.github.io/2024/03/09/Calibrating-an-Ornstein-Uhlenbeck-Process.html\nr/quant\n• Execution strategy\ndm13450\n  commented 3 yr. ago \n\nYou'll also want to look at the Obizhaeva and Wang model, as that's slightly more contemporary. http://web.mit.edu/wangj/www/pap/Obizhaeva",
+  "tieu_de": "[reddit_td] u/dm13450",
+  "url": "https://www.reddit.com/user/dm13450/",
+  "nguon": "reddit_td",
+  "thay_luc": "2026-08-30 22:11:37",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:engine_backtest:https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Infrastructure%22": {
+  "nhu_cau": "engine_backtest",
+  "cum_khop": "backtesting engine",
+  "vi_tri": 11795,
+  "trich_dan": "high frequency trading, but free TradingView is limited on historical data.\n\nRepost\nWhere do you backtest your strategies\nu/Life-Succotash-7053\n•\n10 days ago\nWhere do you backtest your strategies\nInfrastructure\n\nHello everbody, i was wondering where do you backtest your strategies ? do you use just MT5 backtester, or python backtesting libraries, or pinescri",
+  "tieu_de": "[reddit_td] Infrastructure",
+  "url": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Infrastructure%22",
+  "nguon": "reddit_td",
+  "thay_luc": "2026-08-30 22:21:44",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:kiem_dinh_thong_ke:https://www.reddit.com/r/algotrading/comments/1vxvgmf/weekly_discussion_thread_august_25_2026/": {
+  "nhu_cau": "kiem_dinh_thong_ke",
+  "cum_khop": "Deflated Sharpe",
+  "vi_tri": 3059,
+  "trich_dan": "ago\n\nhttps://huggingface.co/datasets/paperswithbacktest/Stocks-1Min-Price?utm_source=chatgpt.com\n\nAphexPin\n•\n5d ago\n\nGood luck\n\nignacio_arias\n•\n2d ago\n\nAll of that protects the quality of the information inside one backtest. What matters most is keeping count of how many variants you tried, and that count is the first step to figuring out whether you're over",
+  "tieu_de": "[reddit_td] Weekly Discussion Thread - August 25, 2026\n6 votes • 15 comments",
+  "url": "https://www.reddit.com/r/algotrading/comments/1vxvgmf/weekly_discussion_thread_august_25_2026/",
+  "nguon": "reddit_td",
+  "thay_luc": "2026-08-30 22:22:54",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:engine_backtest:https://github.com/sharathStack/Statistical-Arbitrage-Pairs-Trading-Engine": {
+  "nhu_cau": "engine_backtest",
+  "cum_khop": "Event-driven backtest",
+  "vi_tri": 18844,
+  "trich_dan": "m(res.lr1 > res.cvt[:, 1]))\n        except Exception:\n            return 0\n\n    @staticmethod\n    def _optimal_entry(kappa: float) -> float:\n        # σ_∞ = σ_ou / sqrt(2κ) is the stationary std\n        # Entry ≈ 1.5 × σ_∞ clipped to [1.0, 3.0]\n        entry = max(1.0, min(3.0, 1.5 * math.sqrt(1 / (2 * kappa / 252 + 1e-6))))\n        return entry\n\n########## ",
+  "tieu_de": "[2*] sharathStack/Statistical-Arbitrage-Pairs-Trading-Engine",
+  "url": "https://github.com/sharathStack/Statistical-Arbitrage-Pairs-Trading-Engine",
+  "nguon": "github",
+  "thay_luc": "2026-08-30 22:35:28",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "nickmuchi/distilroberta-finetuned-financial-text-classification": {
+  "full_name": "nickmuchi/distilroberta-finetuned-financial-text-classification",
+  "url": "https://huggingface.co/nickmuchi/distilroberta-finetuned-financial-text-classification",
+  "mo_ta": "transformers, pytorch, tensorboard, roberta, text-classification, financial-sentiment-analysis, sentiment-analysis, sentence_50agree",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "financial text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:07",
+  "trang_thai": "MOI",
+  "diem": 11.2,
+  "sao": 423,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "nickmuchi/setfit-finetuned-financial-text-classification": {
+  "full_name": "nickmuchi/setfit-finetuned-financial-text-classification",
+  "url": "https://huggingface.co/nickmuchi/setfit-finetuned-financial-text-classification",
+  "mo_ta": "sentence-transformers, pytorch, mpnet, feature-extraction, sentence-similarity, text-embeddings-inference, endpoints_compatible, region:us",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "financial text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:07",
+  "trang_thai": "MOI",
+  "diem": 7.3,
+  "sao": 98,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "CesZen/financial_text_sentiment_classification_model": {
+  "full_name": "CesZen/financial_text_sentiment_classification_model",
+  "url": "https://huggingface.co/CesZen/financial_text_sentiment_classification_model",
+  "mo_ta": "transformers, tf, roberta, text-classification, generated_from_keras_callback, base_model:FacebookAI/roberta-base, base_model:finetune:FacebookAI/roberta-base, license:mit",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "financial text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:07",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 6,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "loony-huggingface/financial_text_sentiment_classification_model": {
+  "full_name": "loony-huggingface/financial_text_sentiment_classification_model",
+  "url": "https://huggingface.co/loony-huggingface/financial_text_sentiment_classification_model",
+  "mo_ta": "transformers, tf, distilbert, text-classification, generated_from_keras_callback, base_model:distilbert/distilbert-base-uncased, base_model:finetune:distilbert/distilbert-base-uncased, license:apache-2.0",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "financial text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:07",
+  "trang_thai": "MOI",
+  "diem": 4.1,
+  "sao": 5,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "shanpols/financial_text_sentiment_classification_model": {
+  "full_name": "shanpols/financial_text_sentiment_classification_model",
+  "url": "https://huggingface.co/shanpols/financial_text_sentiment_classification_model",
+  "mo_ta": "transformers, tf, roberta, text-classification, generated_from_keras_callback, base_model:FacebookAI/roberta-base, base_model:finetune:FacebookAI/roberta-base, license:mit",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "financial text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:07",
+  "trang_thai": "MOI",
+  "diem": 4.1,
+  "sao": 5,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "Abhra-loony/financial_text_sentiment_classification_model": {
+  "full_name": "Abhra-loony/financial_text_sentiment_classification_model",
+  "url": "https://huggingface.co/Abhra-loony/financial_text_sentiment_classification_model",
+  "mo_ta": "tf, roberta, generated_from_keras_callback, base_model:FacebookAI/roberta-base, base_model:finetune:FacebookAI/roberta-base, license:mit, region:us",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "financial text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:07",
+  "trang_thai": "MOI",
+  "diem": 3.9,
+  "sao": 3,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "MaVier19/zero-shot_text_classification_2": {
+  "full_name": "MaVier19/zero-shot_text_classification_2",
+  "url": "https://huggingface.co/MaVier19/zero-shot_text_classification_2",
+  "mo_ta": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "zero shot text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:15",
+  "trang_thai": "MOI",
+  "diem": 4.6,
+  "sao": 11,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "MaVier19/zero-shot_text_classification_fine_tuned": {
+  "full_name": "MaVier19/zero-shot_text_classification_fine_tuned",
+  "url": "https://huggingface.co/MaVier19/zero-shot_text_classification_fine_tuned",
+  "mo_ta": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "zero shot text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:15",
+  "trang_thai": "MOI",
+  "diem": 4.5,
+  "sao": 9,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "LogischeIP/zero-shot_text_classification": {
+  "full_name": "LogischeIP/zero-shot_text_classification",
+  "url": "https://huggingface.co/LogischeIP/zero-shot_text_classification",
+  "mo_ta": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "zero shot text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:15",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 6,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "MaVier19/zero-shot_text_classification_pre_trained": {
+  "full_name": "MaVier19/zero-shot_text_classification_pre_trained",
+  "url": "https://huggingface.co/MaVier19/zero-shot_text_classification_pre_trained",
+  "mo_ta": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "zero shot text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:15",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 6,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "AventIQ-AI/Zero-shot-Text-Classification-Model": {
+  "full_name": "AventIQ-AI/Zero-shot-Text-Classification-Model",
+  "url": "https://huggingface.co/AventIQ-AI/Zero-shot-Text-Classification-Model",
+  "mo_ta": "safetensors, bart, region:us",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "zero shot text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:15",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 6,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "MaVier19/zero-shot_text_classification": {
+  "full_name": "MaVier19/zero-shot_text_classification",
+  "url": "https://huggingface.co/MaVier19/zero-shot_text_classification",
+  "mo_ta": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "ngon_ngu": null,
+  "nhu_cau": "xep_thu_tu_doc",
+  "truy_van": "zero shot text classification",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:36:15",
+  "trang_thai": "MOI",
+  "diem": 4.0,
+  "sao": 4,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "doc:engine_backtest:https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Business%22": {
+  "nhu_cau": "engine_backtest",
+  "cum_khop": "Walk-forward analysis",
+  "vi_tri": 15052,
+  "trich_dan": "stems and wanted to share some technical insights that might be useful for anyone looking to automate their strategies. \n\n🚀 WHAT'S POSSIBLE WITH NSE TRADING AUTOMATION: \n\nIf you have a trading strategy, here are the technical approaches to automate it: \n\nStrategy Backtesting \n\n• Using NSE Bhavcopy data (historical daily prices) \n\n• Backtesting frameworks (Ba",
+  "tieu_de": "[reddit_td] Business",
+  "url": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Business%22",
+  "nguon": "reddit_td",
+  "thay_luc": "2026-08-30 22:36:56",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:engine_backtest:https://www.reddit.com/r/algorithmictrading": {
+  "nhu_cau": "engine_backtest",
+  "cum_khop": "backtest engine",
+  "vi_tri": 8417,
+  "trich_dan": "d, first target arms breakeven, second target, hard session close. One order-flow filter on top. \n\nBacktest, 11 months, 1 micro contract, fills at bar close, commissions + 2 ticks slippage included: \n\nSession n WR PF Net Max DD Asia 50 56% 3.41 +$7,106 −$429 Europe 201 42% 1.59 +$7,638 −$1,571 US 107 43% 1.72 +$6,009 −$1,495 Total 358 44% 1.85 +$20,754 −$1,5",
+  "tieu_de": "[reddit_td] /r/algorithmictrading",
+  "url": "https://www.reddit.com/r/algorithmictrading",
+  "nguon": "reddit_td",
+  "thay_luc": "2026-08-30 22:45:15",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:phuong_phap_chi_phi_giao_dich:http://arxiv.org/abs/2608.27076v1": {
+  "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+  "cum_khop": "effective spread",
+  "vi_tri": 30617,
+  "trich_dan": "on the assumption that the difference between the pre-close and closing price is negligible. A\n7\nTabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal\nGeneration\nfixed cost of 2.2 basis points per trade accounts for transaction costs and slippage, charged per leg on entry and exit,\nincluding both legs of a same-d",
+  "tieu_de": "Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation",
+  "url": "http://arxiv.org/abs/2608.27076v1",
+  "nguon": "arxiv",
+  "thay_luc": "2026-08-30 22:59:25",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "HN: Launch HN: Pyroscope (YC W21) – Continuous profiling software": {
+  "full_name": "HN: Launch HN: Pyroscope (YC W21) – Continuous profiling software",
+  "url": "https://news.ycombinator.com/item?id=26143923",
+  "mo_ta": "Hi HN! Dmitry and Ryan here. We&#x27;re building Pyroscope (<a href=\"https:&#x2F;&#x2F;pyroscope.io&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;pyroscope.io&#x2F;</a>) — an open source continuous profiling platform (<a href=",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 14.1,
+  "sao": 102,
+  "tuoi_ngay": 2021,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 2021 ngay truoc - co the da bo"
+  ]
+ },
+ "HN: Show HN: p99.chat – the assistant for software performance optimization": {
+  "full_name": "HN: Show HN: p99.chat – the assistant for software performance optimization",
+  "url": "https://p99.chat/chat",
+  "mo_ta": "Hi HN! We’re the team behind CodSpeed (<a href=\"https:&#x2F;&#x2F;codspeed.io\" rel=\"nofollow\">https:&#x2F;&#x2F;codspeed.io</a>), a continuous performance testing tool.<p>Today, we&#x27;re really excited to launch our ne",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 12.2,
+  "sao": 6,
+  "tuoi_ngay": 451,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an"
+  ]
+ },
+ "HN: Show HN: P99.chat – Chat for Performance Measurement": {
+  "full_name": "HN: Show HN: P99.chat – Chat for Performance Measurement",
+  "url": "https://p99.chat/chat",
+  "mo_ta": "Hi HN! We’re the team behind CodSpeed (<a href=\"https:&#x2F;&#x2F;codspeed.io\" rel=\"nofollow\">https:&#x2F;&#x2F;codspeed.io</a>), a continuous performance testing tool.<p>Today, we&#x27;re really excited to launch our ne",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 12.0,
+  "sao": 4,
+  "tuoi_ngay": 446,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an"
+  ]
+ },
+ "SO: Google App Engine Go memory management": {
+  "full_name": "SO: Google App Engine Go memory management",
+  "url": "https://stackoverflow.com/questions/18826678/google-app-engine-go-memory-management",
+  "mo_ta": "google-app-engine, memory, memory-management, go",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 5.3,
+  "sao": 4,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: google checkout with appengine": {
+  "full_name": "SO: google checkout with appengine",
+  "url": "https://stackoverflow.com/questions/3947492/google-checkout-with-appengine",
+  "mo_ta": "python, google-app-engine, google-checkout",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 5.0,
+  "sao": 2,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: environment variables applied during elastic beanstalk deploy": {
+  "full_name": "SO: environment variables applied during elastic beanstalk deploy",
+  "url": "https://stackoverflow.com/questions/42247935/environment-variables-applied-during-elastic-beanstalk-deploy",
+  "mo_ta": "python, linux, amazon-web-services, pip, amazon-elastic-beanstalk",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 5.0,
+  "sao": 2,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Retrieve data with Uber Rides Python SDK fails with 500 error": {
+  "full_name": "SO: Retrieve data with Uber Rides Python SDK fails with 500 error",
+  "url": "https://stackoverflow.com/questions/41597888/retrieve-data-with-uber-rides-python-sdk-fails-with-500-error",
+  "mo_ta": "python, uber-api",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 4.8,
+  "sao": 0,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Compile Scipy function with Cython": {
+  "full_name": "SO: Compile Scipy function with Cython",
+  "url": "https://stackoverflow.com/questions/47405898/compile-scipy-function-with-cython",
+  "mo_ta": "python, numpy, scipy, cython",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 0,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: findAndModify not using index search": {
+  "full_name": "SO: findAndModify not using index search",
+  "url": "https://stackoverflow.com/questions/63175840/findandmodify-not-using-index-search",
+  "mo_ta": "python, mongodb, indexing, mongodb-query, pymongo",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 0,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Code coverage in Production combined with coverage in tests": {
+  "full_name": "SO: Code coverage in Production combined with coverage in tests",
+  "url": "https://stackoverflow.com/questions/68541106/code-coverage-in-production-combined-with-coverage-in-tests",
+  "mo_ta": "python, profiling, code-coverage",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 3.0,
+  "sao": 0,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Converting a CMYK JPEG to RGB": {
+  "full_name": "SO: Converting a CMYK JPEG to RGB",
+  "url": "https://stackoverflow.com/questions/79322180/converting-a-cmyk-jpeg-to-rgb",
+  "mo_ta": "image, colors, cmyk",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python sampling profiler production",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:34",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 0,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: is it possible to speed-up matlab plotting by calling c / c++ code in matlab?": {
+  "full_name": "SO: is it possible to speed-up matlab plotting by calling c / c++ code in matlab?",
+  "url": "https://stackoverflow.com/questions/8946474/is-it-possible-to-speed-up-matlab-plotting-by-calling-c-c-code-in-matlab",
+  "mo_ta": "c++, matlab, plot, matlab-figure",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python profiling slow file system calls",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:44",
+  "trang_thai": "MOI",
+  "diem": 8.5,
+  "sao": 14,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: C# Performance MS verse Mono Problems": {
+  "full_name": "SO: C# Performance MS verse Mono Problems",
+  "url": "https://stackoverflow.com/questions/21796058/c-performance-ms-verse-mono-problems",
+  "mo_ta": "c#, .net, performance, mono",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python profiling slow file system calls",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:44",
+  "trang_thai": "MOI",
+  "diem": 6.1,
+  "sao": 7,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Optimizing a slow loop": {
+  "full_name": "SO: Optimizing a slow loop",
+  "url": "https://stackoverflow.com/questions/36893556/optimizing-a-slow-loop",
+  "mo_ta": "c, performance, gcc, optimization, oprofile",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python profiling slow file system calls",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:44",
+  "trang_thai": "MOI",
+  "diem": 5.3,
+  "sao": 4,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Calling python script from java and collecting output line by line as written": {
+  "full_name": "SO: Calling python script from java and collecting output line by line as written",
+  "url": "https://stackoverflow.com/questions/55359905/calling-python-script-from-java-and-collecting-output-line-by-line-as-written",
+  "mo_ta": "java, python",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python profiling slow file system calls",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:44",
+  "trang_thai": "MOI",
+  "diem": 3.5,
+  "sao": 1,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: How to improve `shutil.rmtree` performance on PolarDB-Filesystem over FUSE?": {
+  "full_name": "SO: How to improve `shutil.rmtree` performance on PolarDB-Filesystem over FUSE?",
+  "url": "https://stackoverflow.com/questions/79879799/how-to-improve-shutil-rmtree-performance-on-polardb-filesystem-over-fuse",
+  "mo_ta": "python, filesystems, polardb, advice",
+  "ngon_ngu": null,
+  "nhu_cau": "do_nut_that",
+  "truy_van": "python profiling slow file system calls",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 22:59:44",
+  "trang_thai": "MOI",
+  "diem": 4.2,
+  "sao": 0,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Python Multiprocessing Process or Pool for what I am doing?": {
+  "full_name": "SO: Python Multiprocessing Process or Pool for what I am doing?",
+  "url": "https://stackoverflow.com/questions/18176178/python-multiprocessing-process-or-pool-for-what-i-am-doing",
+  "mo_ta": "python, multithreading, asynchronous, multiprocessing",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 8.2,
+  "sao": 59,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Parallel application in python becomes much slower when using mpi rather than multiprocessing module": {
+  "full_name": "SO: Parallel application in python becomes much slower when using mpi rather than multiprocessing module",
+  "url": "https://stackoverflow.com/questions/17054469/parallel-application-in-python-becomes-much-slower-when-using-mpi-rather-than-mu",
+  "mo_ta": "python, multiprocessing, mpi, evolutionary-algorithm",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 6.3,
+  "sao": 20,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Minimize overhead in Python multiprocessing.Pool with numpy/scipy": {
+  "full_name": "SO: Minimize overhead in Python multiprocessing.Pool with numpy/scipy",
+  "url": "https://stackoverflow.com/questions/37068981/minimize-overhead-in-python-multiprocessing-pool-with-numpy-scipy",
+  "mo_ta": "python, numpy, parallel-processing, multiprocessing, pool",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 6.2,
+  "sao": 17,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Keras + Tensorflow: Prediction on multiple gpus": {
+  "full_name": "SO: Keras + Tensorflow: Prediction on multiple gpus",
+  "url": "https://stackoverflow.com/questions/42409884/keras-tensorflow-prediction-on-multiple-gpus",
+  "mo_ta": "python, tensorflow, keras, python-multiprocessing",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 6.7,
+  "sao": 17,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Recursion depth error when using BeautifulSoup with multiprocessing pool map": {
+  "full_name": "SO: Recursion depth error when using BeautifulSoup with multiprocessing pool map",
+  "url": "https://stackoverflow.com/questions/10374504/recursion-depth-error-when-using-beautifulsoup-with-multiprocessing-pool-map",
+  "mo_ta": "python, multiprocessing, beautifulsoup",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 5.8,
+  "sao": 10,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Is the class generator (inheriting Sequence) thread safe in Keras/Tensorflow?": {
+  "full_name": "SO: Is the class generator (inheriting Sequence) thread safe in Keras/Tensorflow?",
+  "url": "https://stackoverflow.com/questions/52932406/is-the-class-generator-inheriting-sequence-thread-safe-in-keras-tensorflow",
+  "mo_ta": "python, tensorflow, keras, generator",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 6.3,
+  "sao": 10,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Training multiple neural networks asynchronously in parallel": {
+  "full_name": "SO: Training multiple neural networks asynchronously in parallel",
+  "url": "https://stackoverflow.com/questions/60542501/training-multiple-neural-networks-asynchronously-in-parallel",
+  "mo_ta": "python, multiprocessing, gpu, pytorch, hyperparameters",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 4.5,
+  "sao": 10,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
+ },
+ "SO: Multi-processing in Python: Numpy + Vector Summation -&gt; Huge Slowdown": {
+  "full_name": "SO: Multi-processing in Python: Numpy + Vector Summation -&gt; Huge Slowdown",
+  "url": "https://stackoverflow.com/questions/36383962/multi-processing-in-python-numpy-vector-summation-huge-slowdown",
+  "mo_ta": "python, performance, parallel-processing, multiprocessing, slowdown",
+  "ngon_ngu": null,
+  "nhu_cau": "song_song_va_bo_nho",
+  "truy_van": "when multiprocessing does not speed up python",
+  "loai": "kho_ma",
+  "thay_luc": "2026-08-30 23:00:00",
+  "trang_thai": "MOI",
+  "diem": 5.5,
+  "sao": 7,
+  "tuoi_ngay": 9999,
+  "giay_phep": "?",
+  "canh_bao": [
+   "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+   "lan day cuoi 9999 ngay truoc - co the da bo"
+  ]
  }
 }
