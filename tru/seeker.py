@@ -473,6 +473,30 @@ NGUON_TRINH_DUYET = {
 }
 
 
+def _chuan_hoa_lien_ket(url: str) -> str:
+    """Bo tham so khong doi NOI DUNG, de khu trung cho dung.
+
+    Do that 30/08/2026: mot vong quet YouTube ghi **75 "bai"**, nhung phan lon
+    la link MOC THOI GIAN trong CUNG MOT video - `...watch?v=0rzXU-BlKCg&t=561s`,
+    `&t=434s`, `&t=379s`, `&t=240s`, `&t=100s`, `&t=26s`. Do la muc luc chuong,
+    khong phai 75 video. Khu trung theo URL THO nen chung deu lot.
+
+    Mot so tai lieu bi thoi phong khong chi lam ban so lieu: no lam
+    `doc_toan_van` tai cung mot trang chuc lan, va lam moi ty le "bai moi tren
+    moi luot quet" tro nen vo nghia.
+    """
+    if "youtube.com/watch" in url:
+        m = re.search(r"[?&]v=([A-Za-z0-9_-]{6,})", url)
+        return f"https://www.youtube.com/watch?v={m.group(1)}" if m else url
+    if "youtu.be/" in url:
+        m = re.search(r"youtu\.be/([A-Za-z0-9_-]{6,})", url)
+        return f"https://www.youtube.com/watch?v={m.group(1)}" if m else url
+    # Bo phan neo va cac tham so theo doi thuong gap.
+    url = url.split("#")[0]
+    url = re.sub(r"[?&](utm_[a-z]+|fbclid|igshid|pp|si|feature|t)=[^&]*", "", url)
+    return url.rstrip("?&")
+
+
 def _duyet_tai_lieu(d: dict, nguon: str, c: dict, tu_khoa: str = "") -> list[dict]:
     """Nhat ung vien (link+tieu de that) tu trang doc duoc qua trinh duyet.
 
@@ -502,9 +526,24 @@ def _duyet_tai_lieu(d: dict, nguon: str, c: dict, tu_khoa: str = "") -> list[dic
                 tt, href = str(anch[0]).strip(), str(anch[1])
             except Exception:
                 continue
-            if len(tt) < 12 or not href.startswith("http") or href in da:
+            if not href.startswith("http"):
                 continue
             if loc and not re.search(loc, href):
+                continue
+            # KHI DA CO `loc_lien_ket`, chinh duong dan la bo loc chat luong -
+            # khong duoc siet them bang do dai CHU cua the <a>.
+            #
+            # Do that 30/08: trang tim kiem cua X co **65 link bai** hop le,
+            # nhung link bai cua X thuong boc mot dau thoi gian ("2h", "1d")
+            # nen `len(tt) < 12` giet sach. Ket qua: 3 bai thay vi 65.
+            # Nguong phai la 1 chu khong phai 3: "2h" chi co hai ky tu.
+            if len(tt) < (1 if loc else 12):
+                continue
+            if len(tt) < 12:
+                # Chu qua ngan de lam tieu de -> lay dinh danh tu duong dan.
+                tt = f"{tt} — {href.rstrip('/').rsplit('/', 2)[-2:][0]}/{href.rstrip('/').rsplit('/', 1)[-1]}"
+            href = _chuan_hoa_lien_ket(href)
+            if href in da:
                 continue
             da.add(href)
             ra.append({"tieu_de": f"[{nguon}] {tt[:220]}", "url": href,
