@@ -48,6 +48,7 @@ CACH LAM TANG LUC (theo thu tu de lam truoc):
 from __future__ import annotations
 
 import json
+import os
 import math
 from pathlib import Path
 
@@ -203,6 +204,41 @@ def _doc_mde_cache() -> dict:
         return {}
 
 
+def _ghi_mde_cache(khoa: str, muc: dict) -> None:
+    """Them MOT muc vao cache, GOP va ghi NGUYEN TU.
+
+    BAY DA SAP THAT 30/08/2026 khi bat quet song song 8 tien trinh. Ban cu goi
+    thang `MDE_CACHE.write_text(json.dumps(cache))`, va cai do hong hai duong:
+
+      1. **Mat muc.** Tien trinh A doc cache, them muc cua no, ghi de ca file.
+         Tien trinh B doc TRUOC luc A ghi, them muc cua no, ghi de ca file ->
+         muc cua A bien mat.
+      2. **Doc trung cua so ghi.** `write_text` thang len file dang duoc doc tao
+         mot cua so vai chuc mili giay trong do file KHONG phai JSON hop le;
+         `_doc_mde_cache` nuot ngoai le va tra `{}` -> ca bang MDE coi nhu rong
+         va moi cap bi do lai.
+
+    Trieu chung do duoc: cung mot vong quet chay tuan tu va song song cho Sharpe
+    lech o chu so thu ba (0,006 vs 0,007) tren mot o. Phan quyet khong doi lan
+    do, nhung mot duong ong tat dinh thi khong duoc lech gi ca.
+
+    Cach sua giong het `chi_phi._ghi_cau_hinh` - noi du an DA sua dung loi nay
+    tu 15/08 nhung khong ai mang sang day.
+    """
+    try:
+        MDE_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        # DOC LAI ngay truoc khi ghi: gop muc cua minh vao ban MOI NHAT tren dia,
+        # khong ghi de bang ban da doc tu dau ham.
+        cache = _doc_mde_cache()
+        cache[khoa] = muc
+        tam = MDE_CACHE.with_suffix(f".json.tam{os.getpid()}")
+        tam.write_text(json.dumps(cache, ensure_ascii=False, indent=1),
+                       encoding="utf-8")
+        os.replace(tam, MDE_CACHE)      # doi ten tren cung o dia la nguyen tu
+    except Exception:
+        pass
+
+
 def mde_cua(ma: str, khung: str, lam_moi: bool = False) -> dict:
     """MDE cua mot cap (tai san, khung): Sharpe nho nhat cong con nhin thay.
 
@@ -239,13 +275,7 @@ def mde_cua(ma: str, khung: str, lam_moi: bool = False) -> dict:
           "che_do": r.get("che_do"), "chi_phi_do_tin": cp.do_tin,
           "spread_bps": round(cp.spread_frac_chung * 1e4, 3),
           "loi": r.get("loi"), "do_luc": SO.bay_gio()}
-    cache[khoa] = ra
-    try:
-        MDE_CACHE.parent.mkdir(parents=True, exist_ok=True)
-        MDE_CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=1),
-                             encoding="utf-8")
-    except Exception:
-        pass
+    _ghi_mde_cache(khoa, ra)
     return ra
 
 
