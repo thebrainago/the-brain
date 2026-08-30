@@ -254,3 +254,33 @@ class ChuanHoaX(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class UuTienTheoSUATDODUOC(unittest.TestCase):
+    """Uu tien quet phai bam theo suat DO DUOC, khong theo cam giac.
+
+    Do 30/08/2026 tren 1.143 ban doc, dem theo (cau luat doc duoc -> co che):
+        youtube   20 -> 5      <- ty le cao nhat
+        github    51 -> 6
+        arxiv    133 ban -> 0
+        openalex 281 ban -> 0
+    Phu de tu dong cua YouTube ta LUAT that su; bai hoc thuat ta PHUONG PHAP.
+
+    `uu_tien: 3` cu cua youtube khong phai mot danh gia chat luong — no la cho
+    cac nguon mang xa hoi roi vao hoi truong `uu_tien` con chua ai doc (loi da
+    sua 30/08). Bai nay giu con so lai, de lan sau ai ha xuong thi vo mau do
+    chu khong lang le mat mot nguon dang gia.
+    """
+
+    def test_youtube_khong_duoc_xep_thap_hon_nguon_hoc_thuat(self):
+        from tru import seeker as SK
+        yt = SK.NGUON_TRINH_DUYET["youtube"]["uu_tien"]
+        self.assertLessEqual(
+            yt, SK.NGUON["arxiv"]["uu_tien"],
+            "youtube cho 5 co che, arxiv cho 0 - khong duoc quet arxiv truoc")
+        self.assertLessEqual(yt, SK.NGUON["openalex"]["uu_tien"])
+
+    def test_youtube_van_o_hang_doc_toan_van(self):
+        """Hang C thi `doc_toan_van` khong bao gio doc -> uu tien thanh vo nghia."""
+        from tru import seeker as SK
+        self.assertIn(SK.NGUON_TRINH_DUYET["youtube"]["hang"], ("A", "B"))

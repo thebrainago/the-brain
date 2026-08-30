@@ -450,10 +450,17 @@ NGUON_TRINH_DUYET = {
                      "mau": "https://www.facebook.com/search/posts?q={k}",
                      "loc_lien_ket": r"facebook\.com/.*(/posts/|/videos/|story_fbid|permalink)",
                      "hang": "B", "loai": "social", "chu_ky": 21600, "uu_tien": 3},
+    # UU TIEN 1 tu 30/08/2026 — theo SUAT DO DUOC, khong theo cam giac.
+    # Do tren 1.143 ban doc: youtube 20 cau luat -> **5 co che**, ty le cao
+    # nhat moi nguon (github 51 -> 6; arxiv 133 ban va openalex 281 ban cho
+    # **0**). Phu de tu dong cua YouTube la van xuoi ta luat that su, trong khi
+    # bai hoc thuat ta phuong phap. `uu_tien: 3` cu khong phai danh gia chat
+    # luong — no chi la cho cac nguon mang xa hoi roi vao hoi con chua ai doc
+    # truong `uu_tien` (loi da sua 30/08).
     "youtube":      {"kieu": "tu_khoa_lien_ket",
                      "mau": "https://www.youtube.com/results?search_query={k}",
                      "loc_lien_ket": r"youtube\.com/watch\?v=",
-                     "hang": "B", "loai": "video", "chu_ky": 43200, "uu_tien": 3},
+                     "hang": "B", "loai": "video", "chu_ky": 21600, "uu_tien": 1},
     # --- them 30/08/2026 ---
     # TradingView la kho chien luoc CONG KHAI lon nhat con thieu: truoc hom nay
     # so cai co 14 ban tu `tradingview_blog` va **khong mot Pine Script nao**.
