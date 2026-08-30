@@ -587,8 +587,10 @@ def _chi_bao_trong(t: dict) -> list[str]:
 # Suy ho chi tu TEN chi bao la xep nham mot nua so luat, va ho quyet dinh nhom
 # doi chung o phep thu phan chung -> phan quyet thanh vo nghia.
 _DAO_DONG = {"rsi", "ibs", "zscore", "stoch"}
-_NHO_HON = {"<", "<=", "duoi", "nho_hon"}
-_LON_HON = {">", ">=", "tren", "lon_hon"}
+# Phep CAT cung mang chieu: "RSI cheo xuong 15" la di vao vung thap.
+# Bo sot chung thi luat Connors RSI(2) cheo xuong 15 bi xep ho "khac".
+_NHO_HON = {"<", "<=", "duoi", "nho_hon", "cheo_xuong"}
+_LON_HON = {">", ">=", "tren", "lon_hon", "cheo_len"}
 
 
 def _phia_nguong(dk: list[dict], ten: str) -> int | None:

@@ -389,3 +389,47 @@ class DaiTuTroVeChiBaoNeuOVeTRUOC(unittest.TestCase):
         dk = self._dk("We buy when the RSI crosses below 15")
         self.assertEqual(dk[0]["trai"], {"chi_bao": "rsi", "n": 14})
         self.assertEqual(dk[0]["phep"], "cheo_xuong")
+
+
+class PhepCATCungMangCHIEU(unittest.TestCase):
+    """Bo sot phep cat thi luat Connors RSI(2) cheo xuong 15 bi xep ho "khac".
+
+    Do that 30/08/2026: trong 16 spec rut duoc tu kho, spec duy nhat mang co
+    che noi tieng nhat (`mua_rsi2_cheo_xuong_15`, tu quantifiedstrategies) la
+    spec DUY NHAT khong xep duoc ho — vi `_phia_nguong` chi biet `<` va `>`.
+    "khac" khong bi tu choi o cong, no chi lang le mat nhom doi chung.
+    """
+
+    @staticmethod
+    def _dk(phep, nguong=15.0):
+        return [{"trai": {"chi_bao": "rsi", "n": 2}, "phep": phep,
+                 "phai": {"hang": nguong}}]
+
+    def test_cheo_xuong_va_mua_la_quay_ve_trung_binh(self):
+        self.assertEqual(DH.suy_ho(self._dk("cheo_xuong"), 1),
+                         "quay_ve_trung_binh")
+
+    def test_cheo_len_va_mua_la_xu_huong(self):
+        self.assertEqual(DH.suy_ho(self._dk("cheo_len", 70.0), 1), "xu_huong")
+
+    def test_cheo_len_va_BAN_la_quay_ve_trung_binh(self):
+        self.assertEqual(DH.suy_ho(self._dk("cheo_len", 70.0), -1),
+                         "quay_ve_trung_binh")
+
+    def test_luat_Connors_doc_tu_cau_that_ra_dung_ho_VA_dung_chu_ky(self):
+        """Bai kiem dau-den-cuoi tren dung cau da lam lo loi."""
+        c = ("The first example is a 2-day RSI strategy where we buy when it "
+             "crosses below 15")
+        pv, _ = DH.tach_vao_ra(c)
+        dk, _ = DH.dieu_kien_trong_cau(pv)
+        dk, _ = DH.loc_dieu_kien(dk)
+        self.assertEqual(dk[0]["trai"]["n"], 2)
+        self.assertEqual(DH.suy_ho(dk, 1), "quay_ve_trung_binh")
+
+    def test_moi_phep_trong_ngu_phap_deu_xep_duoc_ho(self):
+        """Chan tho: mot phep moi them vao ngu_phap ma quen o day thi im lang."""
+        for phep in ("<", "<=", ">", ">=", "cheo_len", "cheo_xuong"):
+            with self.subTest(phep=phep):
+                self.assertNotEqual(
+                    DH.suy_ho(self._dk(phep, 50.0), 1), "khac",
+                    f"phep '{phep}' khong xep duoc ho -> mat nhom doi chung")
