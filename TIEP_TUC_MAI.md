@@ -40,7 +40,28 @@ f37eadf cham lai 361 gia thuyet duoi the he cong 5: 83 diem mu da dong, va no lo
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phien nay ngan (ngan sach token gan het) nen chi lam MOT viec, va lam cho no
+chay tiep duoc khi khong con ai ngoi may.
+
+**Cong cu do hinh dang cua hom qua chua bao gio duoc hieu chuan.** `do_on_dinh`
+tra ve ba con so — ty le o duong, boi dinh, do doc — va bao cao 31/08 doc chung
+nhu bang chung ("SUON DOC", "CAO NGUYEN"). Nhung mot be mat hoan toan ngau nhien
+cung co o tot nhat (`boi_dinh` luon > 1) va cung co lan can duong neu chinh tai
+san do di len. Ba con so do khong co PHAN BO NULL thi khong doc duoc.
+
+`hinh_dang_vs_null.py` chay Y HET luoi lan can do tren K chuoi null sinh tu
+chinh holdout (block bootstrap + permute_time, giu nguyen chi phi that), roi tra
+PHAN VI cua gia tri that trong phan bo null. Giu nguyen hai bat bien cua
+`do_on_dinh`: `ghi_so=False` o moi loi goi cong (bo do nay goi cong khoang 3
+trieu lan trong mot dem — de no vao so thi ngan sach FDR bay sach) va khong cap
+phan quyet. 12 test moi, trong do co mot test giu bat bien "khong duong nao tra
+ve p = 0": voi K chuoi null, p nho nhat la 1/(K+1).
+
+**Luot thu (108 ung vien qua cong 1-2-3 x 8 null): 0/76 dat p <= 0,05** — nhung
+8 null chi do duoc toi 0,111, nen do la GIOI HAN DO PHAN GIAI chu chua phai ket
+luan. Luot that dang chay: 368 gia thuyet x 100 null x luoi 81 o. Ba ung vien
+dau da co p that (0,218 / 0,059 / 0,119). **Ket luan de sang mai doc, dung doan
+truoc.**
 
 ## Viec tiep theo, theo thu tu
 
