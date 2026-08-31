@@ -31,9 +31,31 @@ Nen quy tac tich hop la mot chieu:
 Va: mot cong cu tim duoc la UNG VIEN, khong phai mot quyet dinh tich hop. No di
 vao so nhu moi thu khac, va nguoi doc no.
 
+NANG CAP 31/08/2026 - NOI VAO SO VAN DE.
+
+Cho toi 30/08 module nay di san theo mot danh sach NHU_CAU **tinh**: viet mot
+lan roi khong bao gio doi. Do luot san gan nhat: `tim_them=0, loi=3`. Mo ra thi
+ca ba "loi" deu la TIM DUOC MA KHONG CO KET QUA (`tim_github` tra `[]`,
+`tim_dien_dan` tra `[]`) - dung cai bay `da_quet=0` bi bao thanh "khong co gi",
+chi la nguoc chieu. Va vi truy van khong ra ket qua thi khong ghi vet o dau,
+lan sau `mot_luot` lai chon dung ba truy van do -> 17 truy van con lai khong
+bao gio den luot.
+
+Hai thu duoc them:
+
+  1. **SO TRUY VAN** (`cong_cu_truy_van.json`): moi truy van ghi lai `luc`,
+     `ket` (CO_KET_QUA / RONG / LOI) va so ket qua. Chu ky thu lai khac nhau
+     theo `ket` - LOI thu lai ngay, RONG doi 14 ngay (do la CAU TRA LOI, khong
+     phai su co), CO_KET_QUA doi 30 ngay. Nho do hang doi truy van XOAY VONG.
+  2. **NHU CAU SINH TU VAN DE DANG MO** (`NHU_CAU_TU_VAN_DE`): mot van de muc
+     NANG trong so -> mot nhu cau ky thuat -> mot truy van san. Anh xa la KHAI
+     BAO TRUOC (`VAN_DE_SANG_NHU_CAU`), khong phai do LLM sinh ra: nguyen tac
+     "kien thuc moi chi vao he bang khai bao" ap ca o day.
+
 Chay:
     python nhan/san_cong_cu.py            mot luot san theo NHU_CAU
     python nhan/san_cong_cu.py --xem      xem kho cong cu da tim duoc
+    python nhan/san_cong_cu.py --so       xem so truy van (cai gi da thu, ra gi)
 """
 from __future__ import annotations
 
@@ -249,6 +271,282 @@ NHU_CAU = {
         "sao_toi_thieu": 30,
     },
 }
+
+#: NHU CAU SINH RA TU MOT VAN DE DANG MO TRONG SO.
+#:
+#: Khac `NHU_CAU` (tinh, viet mot lan): nhung muc duoi day chi duoc kich hoat
+#: khi CO mot van de tuong ung dang MO. Het van de thi het nhu cau, va suat tim
+#: kiem tra ve cho truy van khac.
+#:
+#: Vi sao phai KHAI BAO TRUOC thay vi de LLM sinh truy van tu van de: mot truy
+#: van do LLM viet ra tu chinh chan doan cua no la vong tron tu xac nhan, va no
+#: cung khong the kiem lai duoc. O day nguoi viet anh xa, may chi chay no.
+NHU_CAU_TU_VAN_DE = {
+    "nha_may_null_qua_nho": {
+        "vi_sao": "Van de dang mo: nha may null chi 10 ca, 1 tai san (EURCAD), "
+                  "1 khung (H4). Voi 0/10 lot, chan tren khoang tin cay 95% van "
+                  "la ~26% - so lieu do KHONG phan biet duoc 'cong hieu chuan "
+                  "5%' voi 'cong tu choi 100%'. Can cach sinh chuoi null giu "
+                  "duoc tinh chat chuoi that (tu tuong quan, cum bien dong).",
+        "cam_vao": "KHONG cam vao dau ca - doi chieu tu ben ngoai",
+        "doi_chieu_voi": "nhan/nha_may_null.py",
+        "khong_duoc_thay": "khong mot dong nao duoc goi tu duong quyet dinh; "
+                           "chuoi null cua he van do nhan/nha_may_null.py sinh, "
+                           "cong cu ngoai chi de doi chieu phan phoi",
+        "truy_van": ["surrogate time series bootstrap",
+                     "stationary block bootstrap financial"],
+        "sao_toi_thieu": 30,
+        "duong": ["arxiv", "github"],
+    },
+    "do_luc_cong": {
+        "vi_sao": "Van de dang mo: cong loai sach ca gia thuyet DA vuot FDR. "
+                  "'Null lot 0%' mot minh khong phan biet duoc cong hieu chuan "
+                  "tot voi cong tu choi tat ca - can thuoc do LUC doc lap "
+                  "(deflated Sharpe, haircut Sharpe, Minimum Track Record) de "
+                  "biet nguong cua ta co qua tay khong.",
+        "cam_vao": "KHONG cam vao dau ca - chay ngoai, doc lap",
+        "doi_chieu_voi": "nhan/cong.py, nhan/do_luc.py",
+        "khong_duoc_thay": "hai ban tinh doc lap cung mot con so roi so ket "
+                           "qua. Khong mot dong nao cua no duoc goi tu duong "
+                           "quyet dinh, va no khong duoc doi mot nguong nao.",
+        "truy_van": ["haircut sharpe ratio multiple testing",
+                     "minimum track record length sharpe"],
+        "sao_toi_thieu": 30,
+        "duong": ["arxiv", "github"],
+    },
+    "p_value_chuoi_chong_lan": {
+        "vi_sao": "Van de dang mo: p cua ung vien lech han khoi null (trung vi "
+                  "0,325 thay vi 0,5; 18% duoi 0,05 thay vi 5%). Hai kha nang "
+                  "chua tach duoc: co tin hieu that bi chan, hoac p bi thoi do "
+                  "bar chong lan / kiem dinh phu thuoc. Day la bai toan thong "
+                  "ke chuan, da co nguoi giai.",
+        "cam_vao": "KHONG cam vao dau ca - doi chieu tu ben ngoai",
+        "doi_chieu_voi": "nhan/cong.py",
+        "khong_duoc_thay": "khong duoc doi cach tinh p cua he bang mot thu vien "
+                           "ngoai; chi duoc DOC de biet ta sai o dau roi khai "
+                           "bao lai bang tay",
+        "truy_van": ["overlapping observations inference bias",
+                     "hansen hodrick newey west overlapping returns"],
+        "sao_toi_thieu": 20,
+        "duong": ["arxiv"],
+    },
+    "nguon_im_lang": {
+        "vi_sao": "Van de dang mo: co nguon BAT, da goi, khong nem loi va "
+                  "khong thu duoc gi. Loi=0 nen no khong hien o dem loi - dung "
+                  "hinh dang 'hong im lang' ma nhan/do_tai_nguyen.py sinh ra de "
+                  "chong.",
+        "cam_vao": "tru/seeker.py - lop goi nguon",
+        "khong_duoc_thay": "khong duoc tu tat mot nguon; chi duoc do va bao",
+        "truy_van": ["detect silent api failure empty response",
+                     "python requests retry rate limit detection"],
+        "sao_toi_thieu": 0,
+        "duong": ["dien_dan"],
+    },
+    "supervisor_chet_im_lang": {
+        "vi_sao": "Van de dang mo: supervisor chet va khoi dong lai lien tuc. "
+                  "Do that 31/08/2026: ~12 lan/gio, nguyen nhan la `os.replace` "
+                  "len file lease dang bi watchdog MO (WinError 5 - Windows "
+                  "khoa file dang mo, POSIX thi khong). Trieu chung duy nhat "
+                  "hien ra la `rc=1`, khong mot traceback nao ton tai o dau. "
+                  "Ta chua co cach BIET ngay khi vong lap chet-restart bat dau.",
+        "cam_vao": "dieu_phoi.py - lop giam sat tien trinh",
+        "khong_duoc_thay": "khong duoc tu khoi dong lai mot tru dang giua mot "
+                           "phep ghi so cai; khong duoc doi cach cham lease",
+        "truy_van": ["atomic file replace windows permission error",
+                     "python crash loop detection restart backoff"],
+        "sao_toi_thieu": 0,
+        "duong": ["dien_dan"],
+    },
+    "dia_va_tick_test": {
+        "vi_sao": "Van de dang mo: dia tut duoi 15 GB nen buoc kiem dinh quyet "
+                  "dinh (MT5 tick-test) bi KHOA. Khong co tick-test that thi "
+                  "khong xac nhan duoc con so nao (CLAUDE.md muc 40).",
+        "cam_vao": "cong cu ngoai, chay canh day chuyen - khong nhap vao ma",
+        "khong_duoc_thay": "khong duoc tu xoa du lieu gia hay so cai; chi don "
+                           "cache va thu muc tam da khai bao",
+        "truy_van": ["find large files disk usage windows cli",
+                     "chrome profile cache bloat cleanup"],
+        "sao_toi_thieu": 0,
+        "duong": ["dien_dan"],
+    },
+}
+
+#: MA VAN DE -> NHU CAU. Mot nhu cau co the duoc nhieu ma van de kich hoat
+#: (cung mot phat hien, hai duong phat hien khac nhau: mot cua `phat_hien`
+#: viet tay, mot cua chan doan LLM da duoc khu trung ve chu de chuan).
+#:
+#: Ma `vd_*` la ma CHU DE CHUAN cua `tru/evolution.py: CHU_DE_VAN_DE`. Hai file
+#: dung chung chuoi nay; `test_san_cong_cu` khoa lai de khong ai doi mot ben.
+VAN_DE_SANG_NHU_CAU = {
+    "vd_null_qua_nho": "nha_may_null_qua_nho",
+    "chua_hieu_chuan_null": "nha_may_null_qua_nho",
+    "vd_cong_loai_sach_fdr": "do_luc_cong",
+    "cong_khong_co_luc": "do_luc_cong",
+    "cong_co_the_qua_chat": "do_luc_cong",
+    "vd_p_ung_vien_lech_null": "p_value_chuoi_chong_lan",
+    "vd_nguon_im_lang": "nguon_im_lang",
+    "nguon_khong_thu_hoach": "nguon_im_lang",
+    "vd_tick_test_bi_khoa": "dia_va_tick_test",
+    "dia_thap": "dia_va_tick_test",
+    # Them 31/08 sau khi bat duoc nguyen nhan goc cua "thoi gian song 0,0%".
+    "supervisor_restart_lien_tuc": "supervisor_chet_im_lang",
+    "dieu_phoi_khong_cham_duoc_lease": "supervisor_chet_im_lang",
+    "dieu_phoi_chet_khong_bat": "supervisor_chet_im_lang",
+}
+
+#: Muc van de duoc phep sinh nhu cau san. VUA/NHE khong duoc: mot suat tim
+#: kiem la co han, va "cai gi cung dang di tim" thi khong khac gi khong tim.
+MUC_SINH_NHU_CAU = ("NANG",)
+
+
+def nhu_cau_tu_van_de(van_de_mo: list[dict] | None) -> dict:
+    """Van de dang MO muc NANG -> nhu cau ky thuat -> truy van san.
+
+    Tra ve dict cung hinh dang `NHU_CAU` de `mot_luot` dung chung mot duong.
+    Moi muc duoc gan them `tu_van_de` (danh sach ma van de da kich hoat no) de
+    bao cao noi duoc VI SAO truy van nay co mat.
+
+    Tra `{}` khi khong co van de nao khop - do la cau tra loi THAT. Tra `{}`
+    khi `van_de_mo` la None cung the, nhung `mot_luot` phan biet hai truong
+    hop bang `da_doc_van_de`.
+    """
+    ra: dict = {}
+    for v in (van_de_mo or []):
+        if (v.get("muc") or "").upper() not in MUC_SINH_NHU_CAU:
+            continue
+        khoa = VAN_DE_SANG_NHU_CAU.get(v.get("ma") or "")
+        if not khoa or khoa not in NHU_CAU_TU_VAN_DE:
+            continue
+        if khoa not in ra:
+            ra[khoa] = dict(NHU_CAU_TU_VAN_DE[khoa])
+            ra[khoa]["tu_van_de"] = []
+        ra[khoa]["tu_van_de"].append(v["ma"])
+    return ra
+
+
+#: HANG DOI DOC - kho ma da nam trong kho cong cu, can NGUOI doc de DOI CHIEU
+#: voi cong (khong bao gio de thay cong). Chu du an chot 30/08/2026.
+#:
+#: Day khong phai "cong cu de tich hop": ba trong bon muc duoi la ban cai dat
+#: cua chinh nhung phep tinh ma `nhan/cong.py` tu viet. Doc chung la cach duy
+#: nhat biet ta co tu che ra luat rieng hay khong.
+HANG_DOI_DOC = [
+    {"khop": "quantopian/zipline", "doi_chieu_voi": "nhan/chi_phi.py, nhan/mo_phong.py",
+     "vi_sao": "mo hinh truot gia + phi giao dich cua mot engine 20.041 sao; "
+               "mo hinh chi phi cua ta tu viet va la thu quyet dinh ca du an"},
+    {"khop": "OutOfSampleLab/oos-lab", "doi_chieu_voi": "nhan/cong.py, nhan/do_luc.py",
+     "vi_sao": "haircut Sharpe - doi chieu voi nguong FDR LORD ta tu viet"},
+    {"khop": "0scarito/deflated-alpha", "doi_chieu_voi": "nhan/cong.py",
+     "vi_sao": "deflated Sharpe - chieu LUC cua hieu chuan hai chieu"},
+    {"khop": "quantskills/skill-backtest-overfit", "doi_chieu_voi": "nhan/do_luc.py",
+     "vi_sao": "Minimum Track Record Length - do 'bao nhieu quan sat moi du ket "
+               "luan', dung bai toan MDE cua ta"},
+]
+
+
+def xep_hang_doc(kho: dict | None = None) -> list[str]:
+    """Danh dau cac kho ma trong HANG_DOI_DOC la CHO_DOC trong kho cong cu.
+
+    KHONG tai gi, KHONG tich hop gi, KHONG doi mot nguong nao: chi doi mot
+    truong `trang_thai` tu MOI sang CHO_DOC va ghi kem `doi_chieu_voi`. Dao
+    nguoc bang mot phep gan nguoc lai.
+
+    Tra ve danh sach ten vua duoc xep hang (rong neu tat ca da xep roi).
+    """
+    tu_luu = kho is None
+    kho = doc_kho() if tu_luu else kho
+    moi = []
+    for m in HANG_DOI_DOC:
+        khop = m["khop"].lower()
+
+        def _trung(khoa, v, _k=khop):
+            ten = str(v.get("full_name") or v.get("url") or khoa)
+            return _k in ten.lower() or _k in khoa.lower()
+
+        # Da co mot ban ghi cua kho ma nay dang CHO_DOC thi thoi. Thieu chot
+        # nay thi moi luot lai danh dau THEM mot ban ghi trung ten khac khoa
+        # (kho co nhieu ban ghi cho cung mot kho ma, nhat tu nhieu bai doc),
+        # va hang doi doc phinh len o moi luot.
+        if any(v.get("trang_thai") == "CHO_DOC" and _trung(k, v)
+               for k, v in kho.items()):
+            continue
+        for khoa, v in kho.items():
+            if not _trung(khoa, v):
+                continue
+            v["trang_thai"] = "CHO_DOC"
+            v["doi_chieu_voi"] = m["doi_chieu_voi"]
+            v["vi_sao_doc"] = m["vi_sao"]
+            v["xep_hang_luc"] = SO.bay_gio()
+            moi.append(m["khop"])
+            break
+    if moi and tu_luu:
+        luu_kho(kho)
+    return moi
+
+
+def dang_cho_doc(kho: dict | None = None) -> list[dict]:
+    """Danh sach dang cho nguoi doc. Doc thuan tuy, khong ghi gi."""
+    kho = doc_kho() if kho is None else kho
+    return [{"ten": v.get("full_name") or v.get("url"),
+             "doi_chieu_voi": v.get("doi_chieu_voi"),
+             "vi_sao": v.get("vi_sao_doc")}
+            for v in kho.values() if v.get("trang_thai") == "CHO_DOC"]
+
+
+# ============================================================= SO TRUY VAN
+#: Nhat ky tung truy van da san. Tach khoi `cong_cu.json` co chu y: kho la
+#: danh sach KET QUA, so nay la danh sach VIEC DA LAM. Truoc 31/08 chi co cai
+#: dau, nen mot truy van khong ra ket qua khong de lai vet nao va bi thu lai
+#: mai mai.
+def _duong_so_truy_van() -> Path:
+    return KHO.with_name("cong_cu_truy_van.json")
+
+
+#: Bao lau moi thu lai mot truy van, theo KET QUA lan truoc.
+#:
+#: `RONG` khong phai su co - do la cau tra loi "khong ai viet ve chuyen nay".
+#: Thu lai sau 14 ngay la du. `LOI` la su co moi truong (mang, rate limit) nen
+#: thu lai o luot sau. Tron hai muc nay lam mot la dung cai bay ma
+#: `test_HOI_DUOC_ma_khong_co_gi_thi_tra_RONG_chu_khong_phai_LOI` da chan o
+#: muc `tim_dien_dan`, nhung con ho o muc `mot_luot`.
+CHU_KY_THU_LAI = {"CO_KET_QUA": 30 * 86400, "RONG": 14 * 86400, "LOI": 3600}
+
+
+def doc_so_truy_van() -> dict:
+    try:
+        return json.loads(_duong_so_truy_van().read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def luu_so_truy_van(d: dict) -> None:
+    p = _duong_so_truy_van()
+    p.parent.mkdir(exist_ok=True)
+    tam = p.with_suffix(".json.tam")
+    tam.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    tam.replace(p)
+
+
+def _den_han_truy_van(tv: str, so: dict, da_co_trong_kho: set) -> bool:
+    """Truy van nay den luot chua?"""
+    g = so.get(tv)
+    if not g:
+        # Tuong thich nguoc: truy van chay TRUOC khi co so nay. Neu no da tung
+        # de lai ket qua trong kho thi coi nhu CO_KET_QUA va chua den han;
+        # nguoc lai coi nhu chua thu bao gio.
+        return tv not in da_co_trong_kho
+    try:
+        cu = time.mktime(time.strptime(g.get("luc", ""), "%Y-%m-%d %H:%M:%S"))
+    except Exception:
+        return True
+    ket = g.get("ket") or "LOI"
+    # Mot duong hong ma duong kia tra ve rong: van ghi RONG (co duong tra loi
+    # duoc), nhung THU LAI SOM nhu LOI - vi cai duong hong co the chinh la
+    # duong duy nhat co cau tra loi cho truy van do.
+    if g.get("duong_hong"):
+        ket = "LOI"
+    return (time.time() - cu) >= CHU_KY_THU_LAI.get(ket, 3600)
+
 
 #: Cong cu do chu du an chi thang. Vao kho khong qua API.
 GIEO_TAY = [
@@ -712,8 +1010,84 @@ def _gon(r: dict, nhu_cau: str, truy_van: str) -> dict:
 
 
 # ------------------------------------------------------------------ MOT LUOT
-def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False) -> dict:
-    """San mot luot. Ton it nhat co the: GitHub search khong khoa cho 10 lan/phut."""
+def _duong_cua(nc: dict) -> list[str]:
+    """Nhu cau nay di duong nao. Tach ra de `mot_luot` doc duoc mot dong."""
+    duong = nc.get("duong")
+    if duong:
+        return list(duong)
+    # Nhu cau khai `doi_chieu_voi` = nhu cau PHUONG PHAP -> tim BAI BAO.
+    # Nhu cau con lai = can mot goi chay duoc -> tim KHO MA.
+    return (["dien_dan"] if nc.get("tren_dien_dan") else
+            ["hugging"] if nc.get("tren_hugging") else
+            ["arxiv"] if nc.get("doi_chieu_voi") else ["github"])
+
+
+def _san_mot_truy_van(nc: dict, tv: str) -> tuple[list, dict]:
+    """San MOT truy van tren moi duong cua nhu cau.
+
+    Tra `(ket_qua_that, thong_ke)`. `thong_ke["ket"]` la mot trong ba:
+
+      CO_KET_QUA - hoi duoc va co thu
+      RONG       - hoi duoc, that su khong co gi. **Day la CAU TRA LOI.**
+      LOI        - khong duong nao voi toi duoc. Day moi la su co.
+
+    Ba trang thai nay phai tach bach. Ban truoc 31/08 gop RONG vao LOI (dong
+    `ds[:1] or [{"loi": "khong duong nao tra ve"}]`), va do la ly do luot san
+    gan nhat bao `loi=3` trong khi ca ba truy van deu chay tot - GitHub va hai
+    dien dan deu tra loi, chi la khong co ket qua nao khop.
+    """
+    that: list = []
+    duong_hong: list[str] = []
+    duong_tra_loi = 0
+    for d in _duong_cua(nc):
+        if d == "dien_dan":
+            ds = tim_dien_dan(tv)
+        elif d == "hugging":
+            ds = tim_huggingface(tv)
+        elif d == "arxiv":
+            ds = tim_arxiv(tv)
+        else:
+            ds = tim_github(tv, nc.get("sao_toi_thieu", 100))
+        hong = [x for x in ds if "loi" in x]
+        if hong:
+            duong_hong.append(f"{d}: {hong[0]['loi']}")
+            continue
+        duong_tra_loi += 1
+        that += ds
+    if duong_tra_loi == 0:
+        ket = "LOI"
+    elif not that:
+        ket = "RONG"
+    else:
+        ket = "CO_KET_QUA"
+    # `so_tu` + `sao_toi_thieu` di kem KET QUA co chu y. GitHub ghep tu bang
+    # AND: moi tu them vao la mot rang buoc nua, va do that 31/08 cho thay
+    # "numba vectorized backtest speedup" + `stars:>800` ra DUNG 0 kho trong
+    # khi "numba backtest" + `stars:>100` cung ra 0 nhung "polars time series"
+    # + `stars:>300` ra 2. Khong co hai con so nay thi moi lan doc so lai
+    # phai doan xem RONG la vi khong ai viet, hay vi truy van qua chat.
+    return that, {"ket": ket, "so_ket_qua": len(that),
+                  "duong_hong": duong_hong, "luc": SO.bay_gio(),
+                  "so_tu": len(tv.split()),
+                  "sao_toi_thieu": nc.get("sao_toi_thieu")}
+
+
+def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False,
+             van_de_mo: list[dict] | None = None) -> dict:
+    """San mot luot. Ton it nhat co the: GitHub search khong khoa cho 10 lan/phut.
+
+    `van_de_mo`: danh sach van de dang mo trong so (EVO truyen vao). Van de muc
+    NANG co anh xa trong `VAN_DE_SANG_NHU_CAU` se sinh ra nhu cau san **duoc uu
+    tien di truoc** danh sach tinh. Khong truyen thi chi san theo `NHU_CAU`.
+
+    Tra ve:
+      tim_them  so muc moi vao kho, hoac **None** khi khong thu duoc truy van
+                nao (khong do duoc != do duoc bang 0)
+      loi       so truy van that su hong (khong duong nao voi toi duoc)
+      rong      so truy van hoi duoc ma khong co ket qua - KHONG phai loi
+      da_thu    so truy van da chay luot nay
+      con_cho   so truy van da khai bao nhung chua den han thu lai
+    """
     kho = doc_kho()
 
     for g in GIEO_TAY:
@@ -725,44 +1099,40 @@ def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False) -> dict:
                 "mo_ta": g["ghi_chu"], "thay_luc": SO.bay_gio(),
                 "trang_thai": "MOI", "diem": None, "nguon": "nguoi_chi"}
 
-    viec = [(k, tv) for k, v in NHU_CAU.items() for tv in v["truy_van"]]
-    da_lam = {v.get("truy_van") for v in kho.values()}
-    viec = [x for x in viec if x[1] not in da_lam][:gioi_han_truy_van]
+    # NHU CAU DONG di truoc NHU CAU TINH: mot van de dang mo la bang chung
+    # manh hon mot danh sach viet tu thang truoc.
+    dong = nhu_cau_tu_van_de(van_de_mo)
+    bang_nhu_cau = {**NHU_CAU, **dong}
+    thu_tu = [(k, tv) for k, v in dong.items() for tv in v["truy_van"]]
+    thu_tu += [(k, tv) for k, v in NHU_CAU.items() for tv in v["truy_van"]]
 
-    moi, loi = 0, 0
+    so_tv = doc_so_truy_van()
+    da_co_trong_kho = {v.get("truy_van") for v in kho.values()}
+    da_xet: set[str] = set()
+    ung_vien = []
+    for k, tv in thu_tu:
+        if tv in da_xet:
+            continue
+        da_xet.add(tv)
+        if _den_han_truy_van(tv, so_tv, da_co_trong_kho):
+            ung_vien.append((k, tv))
+    con_cho = len(da_xet) - len(ung_vien)
+    # Chua thu bao gio di truoc; con lai xep theo lan thu CU NHAT -> hang doi
+    # xoay vong thay vi dam vao dung ba truy van dau danh sach.
+    ung_vien.sort(key=lambda x: so_tv.get(x[1], {}).get("luc") or "")
+    viec = ung_vien[:gioi_han_truy_van]
+
+    moi, loi, rong = 0, 0, 0
     for i, (nhu_cau, tv) in enumerate(viec):
         if i:
             time.sleep(NGHI_GIAY)
-        # Nhu cau khai `doi_chieu_voi` = nhu cau PHUONG PHAP -> tim BAI BAO.
-        # Nhu cau con lai = can mot goi chay duoc -> tim KHO MA.
-        # Mot nhu cau co the di NHIEU duong. "Goi de goi" (GitHub) va "kinh
-        # nghiem ai da vap" (dien dan) la hai thu KHAC NHAU, va voi nhu cau ky
-        # thuat thi thuong can ca hai: mot thu vien khong noi cho ta biet vi
-        # sao `os.stat` duoc goi 80.000 lan mot phut.
-        nc = NHU_CAU[nhu_cau]
-        duong = nc.get("duong")
-        if not duong:
-            duong = (["dien_dan"] if nc.get("tren_dien_dan") else
-                     ["hugging"] if nc.get("tren_hugging") else
-                     ["arxiv"] if nc.get("doi_chieu_voi") else ["github"])
-        ds = []
-        for d in duong:
-            if d == "dien_dan":
-                ds += tim_dien_dan(tv)
-            elif d == "hugging":
-                ds += tim_huggingface(tv)
-            elif d == "arxiv":
-                ds += tim_arxiv(tv)
-            else:
-                ds += tim_github(tv, nc.get("sao_toi_thieu", 100))
-        # Chi coi la LOI khi MOI duong deu hong; mot duong hong ma duong kia ra
-        # ket qua thi luot do van co gia tri.
-        that = [x for x in ds if "loi" not in x]
-        ds = that if that else (ds[:1] or [{"loi": "khong duong nao tra ve"}])
-        if ds and "loi" in ds[0]:
+        ds, tk = _san_mot_truy_van(bang_nhu_cau[nhu_cau], tv)
+        tk["nhu_cau"] = nhu_cau
+        so_tv[tv] = tk
+        if tk["ket"] == "LOI":
             loi += 1
             if not im_lang:
-                print(f"  [LOI ] {tv[:52]:52s} {ds[0]['loi']}")
+                print(f"  [LOI ] {tv[:52]:52s} {'; '.join(tk['duong_hong'])[:60]}")
             continue
         them = 0
         for r in ds:
@@ -772,10 +1142,16 @@ def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False) -> dict:
             kho[ten] = _gon(r, nhu_cau, tv)
             them += 1
         moi += them
-        if not im_lang:
+        if tk["ket"] == "RONG":
+            rong += 1
+            if not im_lang:
+                print(f"  [RONG] {tv[:52]:52s} hoi duoc, khong co ket qua nao")
+        elif not im_lang:
             print(f"  [{them:2d} moi] {tv[:52]:52s} ({len(ds)} ket qua)")
 
+    xep_hang_doc(kho)
     luu_kho(kho)
+    luu_so_truy_van(so_tv)
 
     cao = sorted((v for v in kho.values()
                   if v.get("trang_thai") == "MOI" and (v.get("diem") or 0) >= 70),
@@ -791,8 +1167,10 @@ def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False) -> dict:
                                      "nhu_cau": c["nhu_cau"]} for c in cao[:8]]})
         except Exception:
             pass
-    return {"tim_them": moi, "loi": loi, "tong_kho": len(kho),
-            "diem_cao": len(cao)}
+    return {"tim_them": moi if viec else None, "loi": loi, "rong": rong,
+            "da_thu": len(viec), "con_cho": con_cho, "tong_kho": len(kho),
+            "diem_cao": len(cao), "nhu_cau_tu_van_de": sorted(dong),
+            "cho_doc": len(dang_cho_doc(kho))}
 
 
 def xem(toi_da: int = 25) -> None:
@@ -817,8 +1195,24 @@ def xem(toi_da: int = 25) -> None:
             print(f"           /!\\ {c}")
 
 
+def xem_so() -> None:
+    """Cai gi da thu, ra gi, va con bao lau nua moi thu lai."""
+    so = doc_so_truy_van()
+    if not so:
+        print("so truy van rong - chua luot san nao chay voi ban 31/08")
+        return
+    print(f"SO TRUY VAN: {len(so)} muc\n")
+    for tv, g in sorted(so.items(), key=lambda x: x[1].get("luc") or ""):
+        print(f"  {g.get('ket','?'):11s} {g.get('so_ket_qua',0):3d} ket qua  "
+              f"{g.get('luc','?')}  {tv[:60]}")
+        for h in g.get("duong_hong") or []:
+            print(f"              /!\\ {h}")
+
+
 if __name__ == "__main__":
     if "--xem" in sys.argv:
         xem()
+    elif "--so" in sys.argv:
+        xem_so()
     else:
         print(json.dumps(mot_luot(), ensure_ascii=False, indent=1))

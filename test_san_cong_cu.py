@@ -311,8 +311,10 @@ class SanTrenHuggingFace(unittest.TestCase):
     def test_dinh_tuyen_hugging_di_truoc_arxiv_va_github(self):
         """`tren_hugging` phai duoc kiem TRUOC `doi_chieu_voi`, khong thi mot
         nhu cau khai ca hai se lang le di nham duong."""
-        van = (Path(LAB) / "nhan" / "san_cong_cu.py").read_text(encoding="utf-8")
-        than = van[van.index("def mot_luot("):]
+        # 31/08: phep dinh tuyen tach khoi `mot_luot` ra `_duong_cua` de
+        # `_san_mot_truy_van` doc duoc mot dong. Bai kiem soi dung ham do.
+        import inspect
+        than = inspect.getsource(SCC._duong_cua)
         # Chuoi lui mac dinh phai giu dung thu tu: dien_dan -> hugging ->
         # arxiv -> github. Mot nhu cau khai nhieu co ma doc sai thu tu se lang
         # le di nham duong.
@@ -321,11 +323,17 @@ class SanTrenHuggingFace(unittest.TestCase):
         i_a = than.find('nc.get("doi_chieu_voi")')
         for ten, i in (("tren_dien_dan", i_d), ("tren_hugging", i_h),
                        ("doi_chieu_voi", i_a)):
-            self.assertNotEqual(i, -1, f"mot_luot khong dinh tuyen {ten}")
+            self.assertNotEqual(i, -1, f"_duong_cua khong dinh tuyen {ten}")
         self.assertLess(i_d, i_h)
         self.assertLess(i_h, i_a)
         self.assertIn('"dien_dan"', than)
-        self.assertIn("tim_huggingface(tv)", than)
+        self.assertIn("tim_huggingface(tv)", inspect.getsource(SCC._san_mot_truy_van))
+        # KHAI BAO `duong` van phai thang chuoi lui mac dinh.
+        self.assertEqual(SCC._duong_cua({"duong": ["github"],
+                                         "tren_hugging": True}), ["github"])
+        self.assertEqual(SCC._duong_cua({"tren_hugging": True,
+                                         "doi_chieu_voi": "nhan/cong.py"}),
+                         ["hugging"])
 
     def test_chuan_hoa_ket_qua_HF_dung_khoa_ma_cham_diem_doc(self):
         """`cham_diem` doc `stargazers_count`/`description`; doi khoa la lam cam."""
@@ -550,3 +558,273 @@ class NhuCauKYTHUATPhaiGanVoiNutThatDADO(unittest.TestCase):
             for d in (v.get("duong") or []):
                 with self.subTest(nhu_cau=k, duong=d):
                     self.assertIn(d, hop_le, f"duong '{d}' khong ton tai")
+
+
+# =====================================================================
+# NOI SO VAN DE VAO TRUY VAN SAN (31/08/2026)
+#
+# Cho toi 30/08 `san_cong_cu` di theo mot danh sach NHU_CAU **tinh**: viet
+# mot lan roi khong bao gio doi, va khong biet gi ve tinh trang cua chinh
+# day chuyen no phuc vu. Ket qua do duoc cua luot gan nhat:
+# `tim_them=0, loi=3` - lap lai y het moi 12 gio.
+#
+# Hai bo test duoi day khoa hai nguyen nhan that, va ca hai deu la BIEN THE
+# CUA CUNG MOT CAI BAY ("chua do duoc" bi ghi thanh "do roi, bang 0"):
+#   - `RONGKhongPhaiLOI`: hoi duoc ma khong co ket qua bi dem la LOI MANG.
+#   - `HangDoiTruyVanPhaiXOAY`: truy van khong ra ket qua khong de lai vet
+#     nao, nen lan sau lai chon dung no - 17 truy van con lai khong bao gio
+#     den luot.
+# =====================================================================
+class NoiVanDeVaoNhuCau(unittest.TestCase):
+
+    @staticmethod
+    def _vd(ma, muc="NANG"):
+        return {"ma": ma, "muc": muc, "mo_ta": "..."}
+
+    def test_khong_co_van_de_nao_thi_khong_sinh_nhu_cau_nao(self):
+        self.assertEqual(SCC.nhu_cau_tu_van_de([]), {})
+        self.assertEqual(SCC.nhu_cau_tu_van_de(None), {})
+
+    def test_van_de_muc_VUA_KHONG_duoc_tieu_mot_suat_tim_kiem(self):
+        """Suat tim kiem la co han. 'Cai gi cung dang di tim' = khong tim."""
+        self.assertEqual(SCC.nhu_cau_tu_van_de([self._vd("vd_null_qua_nho", "VUA")]), {})
+
+    def test_van_de_NANG_co_anh_xa_thi_sinh_ra_truy_van(self):
+        r = SCC.nhu_cau_tu_van_de([self._vd("vd_null_qua_nho")])
+        self.assertIn("nha_may_null_qua_nho", r)
+        self.assertTrue(r["nha_may_null_qua_nho"]["truy_van"])
+        self.assertEqual(r["nha_may_null_qua_nho"]["tu_van_de"], ["vd_null_qua_nho"])
+
+    def test_hai_ma_van_de_cung_tro_toi_MOT_nhu_cau_thi_gop_lai(self):
+        r = SCC.nhu_cau_tu_van_de([self._vd("vd_null_qua_nho"),
+                                   self._vd("chua_hieu_chuan_null")])
+        self.assertEqual(len(r), 1)
+        self.assertEqual(sorted(r["nha_may_null_qua_nho"]["tu_van_de"]),
+                         ["chua_hieu_chuan_null", "vd_null_qua_nho"])
+
+    def test_ma_van_de_la_khong_biet_thi_bo_qua_chu_khong_vo(self):
+        self.assertEqual(SCC.nhu_cau_tu_van_de([self._vd("mot_ma_chua_tung_co")]), {})
+
+    def test_moi_anh_xa_deu_tro_toi_mot_nhu_cau_CO_THAT(self):
+        for ma, nc in SCC.VAN_DE_SANG_NHU_CAU.items():
+            with self.subTest(van_de=ma):
+                self.assertIn(nc, SCC.NHU_CAU_TU_VAN_DE,
+                              f"van de '{ma}' tro toi nhu cau '{nc}' khong ton tai")
+
+    def test_moi_nhu_cau_dong_deu_khai_du_ranh_gioi_nhu_nhu_cau_tinh(self):
+        for ten, v in SCC.NHU_CAU_TU_VAN_DE.items():
+            with self.subTest(nhu_cau=ten):
+                for truong in ("vi_sao", "cam_vao", "khong_duoc_thay"):
+                    self.assertTrue((v.get(truong) or "").strip(),
+                                    f"nhu cau '{ten}' thieu '{truong}'")
+                self.assertTrue(v.get("truy_van"), f"nhu cau '{ten}' khong co truy van")
+
+    def test_khong_nhu_cau_dong_nao_nham_thay_ONG_TOA(self):
+        cam = ("cong.py", "do_luc.py", "so.py", "quant_plan.py", "canary.py")
+        for ten, v in SCC.NHU_CAU_TU_VAN_DE.items():
+            for tep in cam:
+                with self.subTest(nhu_cau=ten, tep=tep):
+                    self.assertNotIn(
+                        tep, v["cam_vao"].lower(),
+                        f"nhu cau '{ten}' khai cam vao '{tep}' - do la ong toa")
+
+    def test_duong_cua_nhu_cau_dong_deu_la_duong_co_that(self):
+        hop_le = {"github", "arxiv", "hugging", "dien_dan"}
+        for k, v in SCC.NHU_CAU_TU_VAN_DE.items():
+            for d in (v.get("duong") or []):
+                with self.subTest(nhu_cau=k, duong=d):
+                    self.assertIn(d, hop_le)
+
+    def test_ma_vd_dung_chung_voi_tru_evolution_khong_duoc_lech(self):
+        """Hai file dung chung mot bo chuoi. Doi mot ben la dut lien ket.
+
+        `tru/evolution.py` dat ma chu de chuan; `nhan/san_cong_cu.py` anh xa
+        chung sang nhu cau. Neu ai do doi ten mot chu de ma quen ben kia thi
+        van de van mo, nhu cau lang le khong bao gio duoc sinh, va khong mot
+        loi nao xuat hien.
+        """
+        from tru import evolution as EVO
+        co_that = {ma for ma, _ in EVO.CHU_DE_VAN_DE}
+        for ma in SCC.VAN_DE_SANG_NHU_CAU:
+            if not ma.startswith("vd_"):
+                continue
+            with self.subTest(chu_de=ma):
+                self.assertIn(ma, co_that,
+                              f"'{ma}' khong con trong EVO.CHU_DE_VAN_DE")
+
+
+class RONGKhongPhaiLOI(unittest.TestCase):
+    """Nguyen nhan THAT cua `loi=3` o luot san 30/08.
+
+    Do lai tung truy van ngay 31/08:
+      `memory bandwidth bound numpy multiprocessing` -> HN + SO deu tra loi, 0 hit
+      `numba vectorized backtest speedup`            -> GitHub tra loi, 0 hit
+      `polars vs pandas time series performance`     -> GitHub tra loi, 0 hit
+
+    Ca ba deu CHAY TOT. `mot_luot` cu bien chung thanh loi bang dong
+    `ds[:1] or [{"loi": "khong duong nao tra ve"}]`: mot danh sach RONG bi
+    thay bang mot ban ghi LOI bia ra.
+    """
+
+    def setUp(self):
+        self._cu = (SCC.tim_github, SCC.tim_arxiv, SCC.tim_huggingface,
+                    SCC.tim_dien_dan)
+
+    def tearDown(self):
+        (SCC.tim_github, SCC.tim_arxiv, SCC.tim_huggingface,
+         SCC.tim_dien_dan) = self._cu
+
+    def test_hoi_duoc_ma_khong_co_ket_qua_la_RONG_chu_khong_phai_LOI(self):
+        SCC.tim_github = lambda *a, **k: []
+        _, tk = SCC._san_mot_truy_van({"duong": ["github"]}, "x")
+        self.assertEqual(tk["ket"], "RONG")
+        self.assertEqual(tk["duong_hong"], [])
+
+    def test_khong_duong_nao_voi_toi_duoc_moi_la_LOI(self):
+        SCC.tim_github = lambda *a, **k: [{"loi": "HTTP 403"}]
+        _, tk = SCC._san_mot_truy_van({"duong": ["github"]}, "x")
+        self.assertEqual(tk["ket"], "LOI")
+        self.assertTrue(tk["duong_hong"])
+
+    def test_mot_duong_hong_mot_duong_tra_ve_rong_van_la_RONG(self):
+        SCC.tim_github = lambda *a, **k: [{"loi": "HTTP 403"}]
+        SCC.tim_dien_dan = lambda *a, **k: []
+        _, tk = SCC._san_mot_truy_van({"duong": ["github", "dien_dan"]}, "x")
+        self.assertEqual(tk["ket"], "RONG")
+        self.assertTrue(tk["duong_hong"], "duong hong bi nuot, khong ai biet")
+
+    def test_co_ket_qua_thi_la_CO_KET_QUA(self):
+        SCC.tim_github = lambda *a, **k: [_repo()]
+        ds, tk = SCC._san_mot_truy_van({"duong": ["github"]}, "x")
+        self.assertEqual(tk["ket"], "CO_KET_QUA")
+        self.assertEqual(len(ds), 1)
+
+    def test_ghi_kem_so_tu_va_sao_toi_thieu_de_doc_lai_duoc_vi_sao_RONG(self):
+        SCC.tim_github = lambda *a, **k: []
+        _, tk = SCC._san_mot_truy_van({"duong": ["github"], "sao_toi_thieu": 800},
+                                      "numba vectorized backtest speedup")
+        self.assertEqual(tk["so_tu"], 4)
+        self.assertEqual(tk["sao_toi_thieu"], 800)
+
+
+class HangDoiTruyVanPhaiXOAY(unittest.TestCase):
+    """Truy van khong ra ket qua phai de lai VET, neu khong no bi thu lai mai.
+
+    Do that 31/08: 27 truy van khai bao, 20 chua tung ra ket qua, va vi
+    `da_lam` duoc suy tu KHO KET QUA nen `mot_luot(gioi_han=3)` lan nao cung
+    chon dung ba truy van dau. 17 truy van con lai khong bao gio den luot.
+    """
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._kho_cu, self._nghi_cu = SCC.KHO, SCC.NGHI_GIAY
+        SCC.KHO = Path(self._tmp.name) / "cong_cu.json"
+        SCC.NGHI_GIAY = 0.0
+        self._cu = (SCC.tim_github, SCC.tim_arxiv, SCC.tim_huggingface,
+                    SCC.tim_dien_dan)
+        rong = lambda *a, **k: []                                 # noqa: E731
+        SCC.tim_github = SCC.tim_arxiv = rong
+        SCC.tim_huggingface = SCC.tim_dien_dan = rong
+
+    def tearDown(self):
+        SCC.KHO, SCC.NGHI_GIAY = self._kho_cu, self._nghi_cu
+        (SCC.tim_github, SCC.tim_arxiv, SCC.tim_huggingface,
+         SCC.tim_dien_dan) = self._cu
+        self._tmp.cleanup()
+
+    def test_truy_van_ra_RONG_van_duoc_ghi_vao_so(self):
+        SCC.mot_luot(gioi_han_truy_van=2, im_lang=True)
+        so = SCC.doc_so_truy_van()
+        self.assertEqual(len(so), 2)
+        self.assertEqual({g["ket"] for g in so.values()}, {"RONG"})
+
+    def test_luot_sau_chon_truy_van_KHAC_chu_khong_lap_lai_ba_cai_cu(self):
+        SCC.mot_luot(gioi_han_truy_van=3, im_lang=True)
+        dot1 = set(SCC.doc_so_truy_van())
+        SCC.mot_luot(gioi_han_truy_van=3, im_lang=True)
+        dot2 = set(SCC.doc_so_truy_van()) - dot1
+        self.assertEqual(len(dot2), 3,
+                         "luot hai lam lai dung nhung truy van cua luot mot")
+
+    def test_truy_van_LOI_duoc_thu_lai_som_hon_truy_van_RONG(self):
+        self.assertLess(SCC.CHU_KY_THU_LAI["LOI"], SCC.CHU_KY_THU_LAI["RONG"],
+                        "loi mang va 'khong ai viet ve chuyen nay' bi doi xu nhu nhau")
+
+    def test_moi_truy_van_deu_trong_ky_cho_thi_tim_them_la_None_CHU_KHONG_0(self):
+        """Bay `da_quet=0` bi bao thanh 'khong bo nao thang', chieu san cong cu."""
+        while True:
+            r = SCC.mot_luot(gioi_han_truy_van=8, im_lang=True)
+            if r["tim_them"] is None:
+                break
+            self.assertGreater(r["da_thu"], 0)
+        self.assertIsNone(r["tim_them"])
+        self.assertEqual(r["da_thu"], 0)
+        self.assertEqual(r["con_cho"], len(SCC.doc_so_truy_van()))
+
+    def test_van_de_dang_mo_day_truy_van_cua_no_LEN_TRUOC(self):
+        vd = [{"ma": "vd_null_qua_nho", "muc": "NANG", "mo_ta": "..."}]
+        SCC.mot_luot(gioi_han_truy_van=2, im_lang=True, van_de_mo=vd)
+        da_thu = set(SCC.doc_so_truy_van())
+        self.assertTrue(
+            da_thu <= set(SCC.NHU_CAU_TU_VAN_DE["nha_may_null_qua_nho"]["truy_van"]),
+            f"truy van sinh tu van de khong duoc uu tien: {da_thu}")
+
+    def test_khong_truyen_van_de_thi_chi_san_theo_danh_sach_TINH(self):
+        SCC.mot_luot(gioi_han_truy_van=2, im_lang=True)
+        tinh = {tv for v in SCC.NHU_CAU.values() for tv in v["truy_van"]}
+        self.assertTrue(set(SCC.doc_so_truy_van()) <= tinh)
+
+
+class HangDoiDOC(unittest.TestCase):
+    """Bon kho ma phai DOI CHIEU voi cong, khong bao gio THAY cong."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._kho_cu = SCC.KHO
+        SCC.KHO = Path(self._tmp.name) / "cong_cu.json"
+
+    def tearDown(self):
+        SCC.KHO = self._kho_cu
+        self._tmp.cleanup()
+
+    def test_KHONG_CHAY_khi_kho_khong_co_kho_ma_nao_khop(self):
+        """Dieu kien khong thoa thi khong doi mot truong nao."""
+        SCC.luu_kho({"ai/khong-lien-quan": {"full_name": "ai/khong-lien-quan",
+                                            "trang_thai": "MOI"}})
+        self.assertEqual(SCC.xep_hang_doc(), [])
+        self.assertEqual(SCC.doc_kho()["ai/khong-lien-quan"]["trang_thai"], "MOI")
+        self.assertEqual(SCC.dang_cho_doc(), [])
+
+    def test_danh_dau_dung_kho_ma_da_khai_bao(self):
+        kho = {m["khop"]: {"full_name": m["khop"], "trang_thai": "MOI"}
+               for m in SCC.HANG_DOI_DOC}
+        kho["ai/khac"] = {"full_name": "ai/khac", "trang_thai": "MOI"}
+        SCC.luu_kho(kho)
+        self.assertEqual(len(SCC.xep_hang_doc()), len(SCC.HANG_DOI_DOC))
+        self.assertEqual(len(SCC.dang_cho_doc()), len(SCC.HANG_DOI_DOC))
+        self.assertEqual(SCC.doc_kho()["ai/khac"]["trang_thai"], "MOI")
+
+    def test_chay_lai_khong_lam_hang_doi_phinh(self):
+        kho = {}
+        for i, m in enumerate(SCC.HANG_DOI_DOC):
+            # Kho THAT co nhieu ban ghi cho cung mot kho ma (nhat tu nhieu bai
+            # doc khac nhau). Da sap that 31/08: moi luot lai danh dau them mot
+            # ban, hang doi doc tu 4 len 7 chi sau hai luot.
+            for j in range(3):
+                kho[f"doc:x{i}{j}:{m['khop']}"] = {
+                    "url": f"https://github.com/{m['khop']}", "trang_thai": "MOI"}
+        SCC.luu_kho(kho)
+        SCC.xep_hang_doc()
+        n1 = len(SCC.dang_cho_doc())
+        SCC.xep_hang_doc()
+        SCC.xep_hang_doc()
+        self.assertEqual(len(SCC.dang_cho_doc()), n1)
+        self.assertEqual(n1, len(SCC.HANG_DOI_DOC))
+
+    def test_moi_muc_deu_noi_ro_doi_chieu_voi_FILE_NAO(self):
+        for m in SCC.HANG_DOI_DOC:
+            with self.subTest(kho=m["khop"]):
+                self.assertTrue(m["doi_chieu_voi"].strip())
+                self.assertTrue(m["vi_sao"].strip())
+                self.assertIn(".py", m["doi_chieu_voi"],
+                              "khong chi ra file nao trong lab de doi chieu")
