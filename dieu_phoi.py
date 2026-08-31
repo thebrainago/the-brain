@@ -898,6 +898,7 @@ def main() -> int:
     last_nhip = 0.0
     ma_thoat = 0
     cham_hong = 0
+    da_bao_cham_hong = False
 
     try:
         while True:
@@ -974,12 +975,18 @@ def main() -> int:
                 running, pending, last, cpu, list(dict.fromkeys(backpressure)), _JOB)
             if _cham_control(payload):
                 cham_hong = 0
+                da_bao_cham_hong = False
             else:
                 # Cham hong lien tuc thi lease cu di, va watchdog se ket thuc
                 # supervisor vi tuong no treo. Do la mot cai chet KHAC han
                 # (bi giet, khong phai tu chet) nen phai bao truoc khi no toi.
                 cham_hong += 1
-                if cham_hong == 5:
+                # `>=` chu khong phai `==`: mot bo dem so BANG chi bao dung mot
+                # lan o dung mot gia tri, nen chi can no nhay qua 5 (hoac bi
+                # reset giua chung) la canh bao khong bao gio den. Co rieng de
+                # khong bao lai moi vong. EVO bat duoc cho nay 31/08/2026.
+                if cham_hong >= 5 and not da_bao_cham_hong:
+                    da_bao_cham_hong = True
                     try:
                         SO.bao_van_de("dieu_phoi_khong_cham_duoc_lease", "NANG",
                                       f"Cham lease hong {cham_hong} vong lien tiep - "
