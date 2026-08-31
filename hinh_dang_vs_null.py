@@ -226,13 +226,16 @@ def do_mot_ung_vien(gt: dict, so_null: int = SO_NULL, tran_o: int = TRAN_O) -> d
 
 # ------------------------------------------------------------------ chon viec
 
-def _ung_vien(che: str, ma: str | None) -> list[dict]:
+def _ung_vien(che: str, ma: list | None) -> list[dict]:
     from nhan import so as SO
     if ma:
-        g = SO.mot("SELECT * FROM gia_thuyet WHERE ma=?", ma)
-        if not g:
-            raise SystemExit(f"khong co gia thuyet {ma}")
-        return [dict(g)]
+        ra = []
+        for m in ma:
+            g = SO.mot("SELECT * FROM gia_thuyet WHERE ma=?", m)
+            if not g:
+                raise SystemExit(f"khong co gia thuyet {m}")
+            ra.append(dict(g))
+        return ra
     gts = [dict(g) for g in SO.nhieu("SELECT * FROM gia_thuyet ORDER BY id")]
     if che == "het":
         return gts
@@ -247,45 +250,68 @@ def _ung_vien(che: str, ma: str | None) -> list[dict]:
 
 
 def _bao_cao_md(ds: list[dict]) -> str:
+    """Bao cao. Tach ALPHA DUONG khoi ALPHA AM — day la mot cai bay do duoc.
+
+    `p` mot phia dem so chuoi null dat toi hoac hon gia tri that. Voi mot ung
+    vien LO tien, null con lo nang hon, nen p ra rat nho: `XAUUSDM.H4.lap_gap`
+    mat 7,7%/nam nhung null mat 18,5%/nam -> p = 0,0198. Do la "do it hon ngau
+    nhien", khong phai mot phat hien, va no chiem het dau bang neu xep chung.
+    """
     xong = [r for r in ds if r.get("do_duoc")]
+
+    def _p(r, k):
+        x = (r.get("so_voi_null") or {}).get(k)
+        return x["p"] if x else None
+
+    def _al(r):
+        return r.get("that", {}).get("alpha_tam") or 0.0
+
+    duong = [r for r in xong if _al(r) > 0]
+    am = [r for r in xong if _al(r) <= 0]
     d = ["# Hinh dang co phan biet duoc voi ngau nhien khong?", "",
          "> Cung mot luoi lan can, chay tren holdout THAT va tren chuoi NULL sinh",
          "> tu chinh no. Cot `p` = ty le chuoi null dat toi hoac hon gia tri that",
          "> (co +1 hieu chinh, nen p nho nhat la 1/(so_null+1)). Khong tieu suat",
          "> FDR, khong cap phan quyet.", "",
-         f"- do duoc: **{len(xong)}/{len(ds)}** ung vien", ""]
-    if xong:
+         f"- do duoc: **{len(xong)}/{len(ds)}** ung vien "
+         f"(alpha duong {len(duong)} · alpha am {len(am)})", ""]
+    if duong:
+        d.append("**Chi dem tren ung vien co ALPHA DUONG** — mot he lo tien deu hon"
+                 " null cua no thi khong phai phat hien:")
         for ten, khoa in (("alpha o tam", "alpha_tam"),
                           ("ty le o duong", "ty_le_duong"),
                           ("o tot nhat", "o_tot_nhat")):
-            ps = [r["so_voi_null"][khoa]["p"] for r in xong
-                  if r["so_voi_null"].get(khoa)]
+            ps = [_p(r, khoa) for r in duong if _p(r, khoa) is not None]
             if ps:
+                dat = sum(1 for x in ps if x <= 0.05)
                 d.append(f"- **{ten}**: trung vi p = {np.median(ps):.3f} · "
-                         f"so ung vien p<=0,05: **{sum(1 for p in ps if p <= 0.05)}"
-                         f"/{len(ps)}**")
+                         f"p<=0,05: **{dat}/{len(ps)}** "
+                         f"(ky vong ngau nhien {0.05 * len(ps):.1f})")
         d.append("")
-    d += ["## Tung ung vien (xep theo p cua alpha o tam)", "",
-          "| ung vien | hinh dang that | alpha tam | p(alpha) | p(ty le duong) "
-          "| p(boi dinh) | null p95 alpha |", "|---|---|---:|---:|---:|---:|---:|"]
-
-    def _p(r, k):
-        x = r["so_voi_null"].get(k)
-        return x["p"] if x else None
-
-    for r in sorted(xong, key=lambda x: (_p(x, "alpha_tam") is None,
-                                         _p(x, "alpha_tam") or 1.0)):
-        n95 = r["so_voi_null"].get("alpha_tam") or {}
+    d += ["## Alpha DUONG (xep theo p cua alpha o tam)", "",
+          "| ung vien | hinh dang that | alpha tam | null p95 | p(alpha) "
+          "| p(ty le duong) | p(boi dinh) |", "|---|---|---:|---:|---:|---:|---:|"]
+    for r in sorted(duong, key=lambda x: (_p(x, "alpha_tam") is None,
+                                          _p(x, "alpha_tam") or 1.0)):
+        n = (r.get("so_voi_null") or {}).get("alpha_tam") or {}
         d.append(f"| `{r['ma']}` | {r['that'].get('hinh_dang', '')} | "
-                 f"{r['that'].get('alpha_tam')} | {_p(r, 'alpha_tam')} | "
-                 f"{_p(r, 'ty_le_duong')} | {_p(r, 'boi_dinh')} | "
-                 f"{n95.get('null_p95')} |")
+                 f"{r['that'].get('alpha_tam')} | {n.get('null_p95')} | "
+                 f"{_p(r, 'alpha_tam')} | {_p(r, 'ty_le_duong')} | "
+                 f"{_p(r, 'boi_dinh')} |")
+    d += ["", "## Alpha AM — p nho o day nghia la LO IT HON NULL, khong phai edge", "",
+          "| ung vien | alpha tam | null p95 | p(alpha) |", "|---|---:|---:|---:|"]
+    for r in sorted(am, key=lambda x: (_p(x, "alpha_tam") is None,
+                                       _p(x, "alpha_tam") or 1.0))[:25]:
+        n = (r.get("so_voi_null") or {}).get("alpha_tam") or {}
+        d.append(f"| `{r['ma']}` | {r['that'].get('alpha_tam')} | "
+                 f"{n.get('null_p95')} | {_p(r, 'alpha_tam')} |")
     hong = [r for r in ds if not r.get("do_duoc")]
     if hong:
-        d += ["", "## Khong do duoc", ""]
-        for r in hong[:40]:
-            d.append(f"- `{r['ma']}`: {r.get('ly_do')}")
-    return "\n".join(d) + "\n"
+        from collections import Counter
+        d += ["", f"## Khong do duoc ({len(hong)})", ""]
+        for ly, n in Counter(str(r.get("ly_do"))[:70] for r in hong).most_common(8):
+            d.append(f"- {n} ung vien: {ly}")
+    return chr(10).join(d) + chr(10)
 
 
 def _ghi(ds: list[dict], tham: dict) -> None:
@@ -297,7 +323,7 @@ def _ghi(ds: list[dict], tham: dict) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--ma", help="mot gia thuyet cu the")
+    ap.add_argument("--ma", nargs="+", help="mot hoac nhieu gia thuyet cu the")
     ap.add_argument("--qua-123", action="store_true",
                     help="ung vien qua cong 1-2-3 trong ban cham lai gan nhat")
     ap.add_argument("--het", action="store_true", help="moi gia thuyet trong so cai")
@@ -305,8 +331,20 @@ def main() -> int:
     ap.add_argument("--tran-o", type=int, default=TRAN_O)
     ap.add_argument("--luong", type=int, default=6)
     ap.add_argument("--tiep", action="store_true", help="bo qua ung vien da do xong")
+    ap.add_argument("--ra", help="hau to file ra rieng (vd: sau -> HINH_DANG_VS_NULL_sau)")
+    ap.add_argument("--chi-bao-cao", action="store_true",
+                    help="ve lai .md tu JSON da co, khong chay lai gi")
     a = ap.parse_args()
 
+    global RA_JSON, RA_MD
+    if a.ra:
+        RA_JSON = LAB / "reports" / f"HINH_DANG_VS_NULL_{a.ra}.json"
+        RA_MD = LAB / "reports" / f"HINH_DANG_VS_NULL_{a.ra}.md"
+    if a.chi_bao_cao:
+        d = json.loads(RA_JSON.read_text(encoding="utf-8"))
+        RA_MD.write_text(_bao_cao_md(d.get("ket_qua", [])), encoding="utf-8")
+        print(f"[ve lai] {RA_MD.name}")
+        return 0
     che = "het" if a.het else "qua_123"
     viec = _ung_vien(che, a.ma)
     cu: list[dict] = []

@@ -138,5 +138,32 @@ class KhongDuocTieuSuatFDR(unittest.TestCase):
         self.assertIs(da_goi[0].get("chay_placebo"), False)
 
 
+class AlphaAmKhongDuocTinhLaPHATHIEN(unittest.TestCase):
+    """p nho tren mot he LO tien nghia la 'lo it hon null', khong phai edge.
+
+    Do la cai bay do duoc trong luot 368 ung vien: XAUUSDM.H4.lap_gap mat
+    7,7%/nam trong khi null mat 18,5%/nam -> p = 0,0198 va no leo len dau bang.
+    """
+
+    def _r(self, ma, alpha, p):
+        return {"ma": ma, "do_duoc": True,
+                "that": {"alpha_tam": alpha, "hinh_dang": "x"},
+                "so_voi_null": {"alpha_tam": {"p": p, "null_p95": alpha - 1},
+                                "ty_le_duong": {"p": p, "null_p95": 0},
+                                "o_tot_nhat": {"p": p, "null_p95": 0},
+                                "boi_dinh": {"p": p, "null_p95": 0}}}
+
+    def test_dong_tong_ket_chi_dem_tren_alpha_duong(self):
+        md = HD._bao_cao_md([self._r("AM", -7.7, 0.01), self._r("DUONG", 2.0, 0.5)])
+        self.assertIn("alpha duong 1", md)
+        self.assertIn("alpha am 1", md)
+        self.assertIn("p<=0,05: **0/1**", md)
+
+    def test_hai_bang_tach_roi_va_bang_am_duoc_ghi_chu(self):
+        md = HD._bao_cao_md([self._r("AM", -7.7, 0.01), self._r("DUONG", 2.0, 0.5)])
+        self.assertLess(md.index("## Alpha DUONG"), md.index("## Alpha AM"))
+        self.assertIn("LO IT HON NULL", md)
+
+
 if __name__ == "__main__":
     unittest.main()
