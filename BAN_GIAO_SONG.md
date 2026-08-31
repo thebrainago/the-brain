@@ -1,0 +1,28 @@
+# BAN GIAO SONG
+
+> Ghi LIEN TUC trong phien, khong doi cuoi phien. Phien chet giua
+> chung (het token, may ngu) thi day van la ban giao day du toi luc
+> do. `b ket` doc file nay khi chot phien.
+
+
+### 2026-08-31 23:02:13 — phien 31/08 toi: xay ban giao song + dieu khien xa; tiep theo la sua do sau quet cua seeker (mql5/tradingview moi lay trang 1)
+
+### 2026-08-31 23:02:13 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5160, 0 phut), dieu_phoi.py (pid 10764, 75 phut), quantlab.py (pid 10124, 0 phut)
+- `dieu_phoi.log`: 2026-08-31 23:01:54 EVO       ok           5.7s guard=job
+- `dieu_phoi_nen.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
+- `HINH_DANG_VS_NULL_sau2500.log`: [hinh_dang_vs_null] 23 ung vien · 2500 null moi ung vien · tran 81 o · 6 luong
+- `supervisor_stdio.log`: 2026-08-31 23:01:54 EVO       ok           5.7s guard=job
+- `watchdog.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
+- git: 5e905fd hinh dang vs null: 368 ung vien da chay, va bang xep hang co mot cai bay
+
+### 2026-08-31 23:02:38 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14176, 0 phut), dieu_phoi.py (pid 10764, 76 phut), quantlab.py (pid 10124, 1 phut)
+- `dieu_phoi.log`: 2026-08-31 23:01:54 EVO       ok           5.7s guard=job
+- `dieu_phoi_nen.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
+- `HINH_DANG_VS_NULL_sau2500.log`: [hinh_dang_vs_null] 23 ung vien · 2500 null moi ung vien · tran 81 o · 6 luong
+- `supervisor_stdio.log`: 2026-08-31 23:01:54 EVO       ok           5.7s guard=job
+- `watchdog.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
+- git: 5e905fd hinh dang vs null: 368 ung vien da chay, va bang xep hang co mot cai bay

@@ -7,6 +7,10 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b                 menu
     b vao             VAO PHIEN: trang thai song + ban giao hom qua
     b ket "tom tat"   KET PHIEN: chot git + sinh TIEP_TUC_MAI.md cho mai
+    b bg ["dong"]     ghi BAN GIAO SONG (khong doi cuoi phien moi ban giao)
+    b bg-xem          xem ban giao song hien tai
+    b xa              bat DIEU KHIEN XA qua Telegram (tat may / dung he tu xa)
+    b xa-thu          kiem cau hinh Telegram + gui mot tin thu
     b test [tu-khoa]  chay test SONG SONG (8 tien trinh, ~1 phut thay vi 6)
     b test1 [tu-khoa] chay test MOT tien trinh (khi nghi song song lam sai)
     b toan-canh       MOT man hinh: dau vao + kho co che + tang kham pha
@@ -118,6 +122,22 @@ def c_on_dinh(a):
     return chay([PY, LAB / "do_on_dinh.py", *a])
 
 
+def c_bg(a):
+    return chay([PY, LAB / "ban_giao_song.py", *a])
+
+
+def c_bg_xem(a):
+    return chay([PY, LAB / "ban_giao_song.py", "--xem"])
+
+
+def c_xa(a):
+    return chay([PY, LAB / "dieu_khien_xa.py", *a])
+
+
+def c_xa_thu(a):
+    return chay([PY, LAB / "dieu_khien_xa.py", "--thu"])
+
+
 def c_hinh_dang(a):
     return chay([PY, LAB / "hinh_dang_vs_null.py", *a])
 
@@ -218,6 +238,7 @@ LENH = {
     "quet": c_quet, "mde": c_mde, "mde-nap": c_mde_nap,
     "cham-lai": c_cham_lai, "on-dinh": c_on_dinh,
     "hinh-dang": c_hinh_dang,
+    "bg": c_bg, "bg-xem": c_bg_xem, "xa": c_xa, "xa-thu": c_xa_thu,
     "san": c_san, "san-xem": c_san_xem, "san-quet": c_san_quet,
     "tai-khoan": c_tai_khoan, "trinh-duyet": c_trinh_duyet,
     "ds": c_ds, "tim": c_tim,
