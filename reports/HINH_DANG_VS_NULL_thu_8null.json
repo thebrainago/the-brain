@@ -1,0 +1,4263 @@
+{
+ "luc": "2026-08-31 19:21:05",
+ "tham_so_chay": {
+  "che": "qua_123",
+  "so_null": 8,
+  "tran_o": 25,
+  "luong": 4
+ },
+ "ket_qua": [
+  {
+   "ma": "EURCAD.H4.rsi_dao_chieu.n14_vao25_ra_60",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 60,
+    "vao": 25
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 1.187,
+    "ty_le_duong": 66.667,
+    "trung_vi": 1.187,
+    "o_tot_nhat": 2.66,
+    "boi_dinh": 2.241,
+    "do_doc_mot_buoc_pct": 24.263,
+    "hinh_dang": "SUON DOC - 67% duong, dinh gap 2.2 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.064,
+     "null_p95": 0.985
+    },
+    "ty_le_duong": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 61.111,
+     "null_p95": 77.778
+    },
+    "boi_dinh": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 6.886,
+     "null_p95": 10.445
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.206,
+     "null_p95": 1.668
+    }
+   },
+   "giay": 3.9
+  },
+  {
+   "ma": "EURCAD.H4.rsi_dao_chieu.n7_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 7,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.356,
+    "ty_le_duong": 77.778,
+    "trung_vi": 0.151,
+    "o_tot_nhat": 1.257,
+    "boi_dinh": 8.325,
+    "do_doc_mot_buoc_pct": -9.691,
+    "hinh_dang": "CAI GAI - dinh cao gap 8.3 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -1.095,
+     "null_p95": 0.378
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 16.667,
+     "null_p95": 58.889
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": 0.071,
+     "null_p95": 3.128
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.36,
+     "null_p95": 1.391
+    }
+   },
+   "giay": 4.0
+  },
+  {
+   "ma": "EURCAD.H4.rsi_dao_chieu.n14_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.655,
+    "ty_le_duong": 77.778,
+    "trung_vi": 0.233,
+    "o_tot_nhat": 1.583,
+    "boi_dinh": 6.794,
+    "do_doc_mot_buoc_pct": 72.366,
+    "hinh_dang": "CAI GAI - dinh cao gap 6.8 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.122,
+     "null_p95": 1.33
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 55.556,
+     "null_p95": 96.111
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 1.933,
+     "null_p95": 9.754
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.04,
+     "null_p95": 1.929
+    }
+   },
+   "giay": 4.2
+  },
+  {
+   "ma": "EURCAD.D1.rsi_dao_chieu.n7_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURCAD",
+   "khung": "D1",
+   "tam": {
+    "n": 7,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 1.084,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.084,
+    "o_tot_nhat": 1.342,
+    "boi_dinh": 1.238,
+    "do_doc_mot_buoc_pct": 18.865,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.2 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.306,
+     "null_p95": 1.982
+    },
+    "ty_le_duong": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 88.889,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 1.54,
+     "null_p95": 3.864
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.643,
+     "null_p95": 2.502
+    }
+   },
+   "giay": 3.3
+  },
+  {
+   "ma": "EURCAD.H4.bollinger_ve.n20_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.534,
+    "ty_le_duong": 76.0,
+    "trung_vi": 0.801,
+    "o_tot_nhat": 2.534,
+    "boi_dinh": 3.164,
+    "do_doc_mot_buoc_pct": 52.841,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.2 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -2.042,
+     "null_p95": 0.01
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 16.0,
+     "null_p95": 41.0
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -0.654,
+     "null_p95": 0.283
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.939,
+     "null_p95": 2.106
+    }
+   },
+   "giay": 10.3
+  },
+  {
+   "ma": "EURCAD.H4.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.308,
+    "ty_le_duong": 96.0,
+    "trung_vi": 1.817,
+    "o_tot_nhat": 4.268,
+    "boi_dinh": 2.349,
+    "do_doc_mot_buoc_pct": 13.215,
+    "hinh_dang": "SUON DOC - 96% duong, dinh gap 2.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -1.29,
+     "null_p95": 0.719
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 24.0,
+     "null_p95": 78.2
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 0.287,
+     "null_p95": 6.463
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.958,
+     "null_p95": 3.434
+    }
+   },
+   "giay": 9.3
+  },
+  {
+   "ma": "EURCAD.D1.bollinger_ve.n20_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURCAD",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.765,
+    "ty_le_duong": 88.0,
+    "trung_vi": 0.843,
+    "o_tot_nhat": 2.967,
+    "boi_dinh": 3.52,
+    "do_doc_mot_buoc_pct": -68.039,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.5 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.278,
+     "null_p95": 3.091
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 72.0,
+     "null_p95": 98.6
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 2.116,
+     "null_p95": 3.47
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 2.71,
+     "null_p95": 5.237
+    }
+   },
+   "giay": 9.3
+  },
+  {
+   "ma": "AUDNZD.H4.rsi_dao_chieu.n14_vao25_ra_60",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "AUDNZD",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 60,
+    "vao": 25
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.551,
+    "ty_le_duong": 66.667,
+    "trung_vi": 0.169,
+    "o_tot_nhat": 0.628,
+    "boi_dinh": 3.716,
+    "do_doc_mot_buoc_pct": 53.63,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.7 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.27,
+     "null_p95": 0.398
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 44.444,
+     "null_p95": 70.0
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 0.11,
+     "null_p95": 225.981
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.585,
+     "null_p95": 1.275
+    }
+   },
+   "giay": 4.2
+  },
+  {
+   "ma": "EURGBP.D1.rsi_dao_chieu.n7_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURGBP",
+   "khung": "D1",
+   "tam": {
+    "n": 7,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 1.264,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.264,
+    "o_tot_nhat": 2.546,
+    "boi_dinh": 2.014,
+    "do_doc_mot_buoc_pct": 4.47,
+    "hinh_dang": "SUON DOC - 100% duong, dinh gap 2.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 0.923,
+     "null_p95": 1.594
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 72.222,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 1.675,
+     "null_p95": 6.442
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 1.758,
+     "null_p95": 3.57
+    }
+   },
+   "giay": 3.1
+  },
+  {
+   "ma": "EURGBP.H4.rsi_dao_chieu.n14_vao25_ra_60",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 60,
+    "vao": 25
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.573,
+    "ty_le_duong": 100.0,
+    "trung_vi": 0.85,
+    "o_tot_nhat": 2.385,
+    "boi_dinh": 2.806,
+    "do_doc_mot_buoc_pct": -69.023,
+    "hinh_dang": "SUON DOC - 100% duong, dinh gap 2.8 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.185,
+     "null_p95": 1.347
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 83.333,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 2.158,
+     "null_p95": 5.639
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 2.007,
+     "null_p95": 2.844
+    }
+   },
+   "giay": 3.5
+  },
+  {
+   "ma": "GBPCAD.D1.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "GBPCAD",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.665,
+    "ty_le_duong": 96.0,
+    "trung_vi": 1.247,
+    "o_tot_nhat": 3.234,
+    "boi_dinh": 2.593,
+    "do_doc_mot_buoc_pct": 32.553,
+    "hinh_dang": "SUON DOC - 96% duong, dinh gap 2.6 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.418,
+     "null_p95": 6.963
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 68.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 1.631,
+     "null_p95": 6.469
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 3.187,
+     "null_p95": 7.575
+    }
+   },
+   "giay": 9.4
+  },
+  {
+   "ma": "EURGBP.D1.cuoi_thang.truoc1_sau4",
+   "mau": "cuoi_thang",
+   "tai_san": "EURGBP",
+   "khung": "D1",
+   "tam": {
+    "sau": 4,
+    "truoc": 1
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 15,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 15,
+    "alpha_tam": 1.064,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.064,
+    "o_tot_nhat": 1.853,
+    "boi_dinh": 1.742,
+    "do_doc_mot_buoc_pct": 2.209,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.7 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -0.587,
+     "null_p95": 1.144
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 26.667,
+     "null_p95": 91.0
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 0.337,
+     "null_p95": 2.211
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.716,
+     "null_p95": 2.313
+    }
+   },
+   "giay": 5.6
+  },
+  {
+   "ma": "EURGBP.D1.cuoi_thang.truoc2_sau2",
+   "mau": "cuoi_thang",
+   "tai_san": "EURGBP",
+   "khung": "D1",
+   "tam": {
+    "sau": 2,
+    "truoc": 2
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 16,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 16,
+    "alpha_tam": 1.151,
+    "ty_le_duong": 93.75,
+    "trung_vi": 0.526,
+    "o_tot_nhat": 1.73,
+    "boi_dinh": 3.286,
+    "do_doc_mot_buoc_pct": 36.012,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.3 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.502,
+     "null_p95": 1.098
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 21.875,
+     "null_p95": 75.0
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 0.276,
+     "null_p95": 4.855
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.202,
+     "null_p95": 1.62
+    }
+   },
+   "giay": 5.8
+  },
+  {
+   "ma": "EURGBP.D1.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURGBP",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.626,
+    "ty_le_duong": 100.0,
+    "trung_vi": 2.029,
+    "o_tot_nhat": 4.126,
+    "boi_dinh": 2.034,
+    "do_doc_mot_buoc_pct": 14.928,
+    "hinh_dang": "SUON DOC - 100% duong, dinh gap 2.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.403,
+     "null_p95": 1.343
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 38.0,
+     "null_p95": 95.8
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": -0.413,
+     "null_p95": 4.686
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.453,
+     "null_p95": 3.41
+    }
+   },
+   "giay": 8.4
+  },
+  {
+   "ma": "AUDCAD.H1.rsi_dao_chieu.n14_vao25_ra_60",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "AUDCAD",
+   "khung": "H1",
+   "tam": {
+    "n": 14,
+    "ra_": 60,
+    "vao": 25
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 2.652,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.388,
+    "o_tot_nhat": 2.787,
+    "boi_dinh": 2.008,
+    "do_doc_mot_buoc_pct": 27.47,
+    "hinh_dang": "SUON DOC - 100% duong, dinh gap 2.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.588,
+     "null_p95": 1.508
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 33.333,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 0.43,
+     "null_p95": 3.009
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.959,
+     "null_p95": 1.973
+    }
+   },
+   "giay": 6.8
+  },
+  {
+   "ma": "AUDCAD.H4.rsi_dao_chieu.n14_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 3.944,
+    "ty_le_duong": 100.0,
+    "trung_vi": 3.077,
+    "o_tot_nhat": 3.944,
+    "boi_dinh": 1.282,
+    "do_doc_mot_buoc_pct": 15.91,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.543,
+     "null_p95": 2.723
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 77.778,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 3.23,
+     "null_p95": 8.077
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 2.535,
+     "null_p95": 3.753
+    }
+   },
+   "giay": 3.9
+  },
+  {
+   "ma": "AUDCAD.H4.rsi_dao_chieu.n14_vao25_ra_60",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 60,
+    "vao": 25
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.967,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.878,
+    "o_tot_nhat": 2.876,
+    "boi_dinh": 1.531,
+    "do_doc_mot_buoc_pct": -98.087,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.452,
+     "null_p95": 1.608
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 83.333,
+     "null_p95": 96.111
+    },
+    "boi_dinh": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 2.082,
+     "null_p95": 3.99
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 1.344,
+     "null_p95": 2.997
+    }
+   },
+   "giay": 4.2
+  },
+  {
+   "ma": "AUDCAD.D1.rsi_dao_chieu.n7_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {
+    "n": 7,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.813,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.033,
+    "o_tot_nhat": 1.569,
+    "boi_dinh": 1.519,
+    "do_doc_mot_buoc_pct": -23.985,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.413,
+     "null_p95": 1.085
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 33.333,
+     "null_p95": 80.556
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -0.691,
+     "null_p95": 1.109
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 0.743,
+     "null_p95": 2.525
+    }
+   },
+   "giay": 3.6
+  },
+  {
+   "ma": "AUDCAD.H4.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 3.444,
+    "ty_le_duong": 96.0,
+    "trung_vi": 1.909,
+    "o_tot_nhat": 4.721,
+    "boi_dinh": 2.473,
+    "do_doc_mot_buoc_pct": 4.138,
+    "hinh_dang": "SUON DOC - 96% duong, dinh gap 2.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.672,
+     "null_p95": 3.978
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 36.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -0.12,
+     "null_p95": 2.731
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 2.215,
+     "null_p95": 6.985
+    }
+   },
+   "giay": 10.7
+  },
+  {
+   "ma": "AUDCAD.D1.bollinger_ve.n20_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.768,
+    "ty_le_duong": 84.0,
+    "trung_vi": 0.878,
+    "o_tot_nhat": 3.023,
+    "boi_dinh": 3.443,
+    "do_doc_mot_buoc_pct": -60.026,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.4 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -2.155,
+     "null_p95": 0.108
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 14.0,
+     "null_p95": 71.6
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": -0.194,
+     "null_p95": 16.704
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.804,
+     "null_p95": 2.82
+    }
+   },
+   "giay": 9.9
+  },
+  {
+   "ma": "AUDCAD.D1.bollinger_ve.n20_k2.5",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {
+    "k": 2.5,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.482,
+    "ty_le_duong": 72.0,
+    "trung_vi": 0.426,
+    "o_tot_nhat": 2.825,
+    "boi_dinh": 6.631,
+    "do_doc_mot_buoc_pct": -10.477,
+    "hinh_dang": "CAI GAI - dinh cao gap 6.6 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -1.196,
+     "null_p95": 0.784
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 34.0,
+     "null_p95": 67.8
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -0.656,
+     "null_p95": 12.463
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.331,
+     "null_p95": 2.561
+    }
+   },
+   "giay": 10.0
+  },
+  {
+   "ma": "AUDCAD.D1.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 3.561,
+    "ty_le_duong": 96.0,
+    "trung_vi": 1.972,
+    "o_tot_nhat": 4.542,
+    "boi_dinh": 2.303,
+    "do_doc_mot_buoc_pct": 43.092,
+    "hinh_dang": "SUON DOC - 96% duong, dinh gap 2.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.849,
+     "null_p95": 0.147
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 24.0,
+     "null_p95": 42.6
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -1.469,
+     "null_p95": 0.25
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.835,
+     "null_p95": 1.997
+    }
+   },
+   "giay": 9.7
+  },
+  {
+   "ma": "AUDCHF.D1.ibs_bat_day.nguong0.15_giu1",
+   "mau": "ibs_bat_day",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {
+    "giu": 1,
+    "nguong": 0.15
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 15,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 15,
+    "alpha_tam": 1.601,
+    "ty_le_duong": 80.0,
+    "trung_vi": 0.839,
+    "o_tot_nhat": 1.606,
+    "boi_dinh": 1.914,
+    "do_doc_mot_buoc_pct": 22.861,
+    "hinh_dang": "CAO NGUYEN - 80% lan can duong, dinh chi gap 1.9 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.003,
+     "null_p95": 2.002
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 20.0,
+     "null_p95": 62.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -0.537,
+     "null_p95": 7.375
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.491,
+     "null_p95": 2.516
+    }
+   },
+   "giay": 5.8
+  },
+  {
+   "ma": "AUDCAD.D1.ichimoku_cheo.tenkan9_kijun26_chi_muaTrue",
+   "mau": "ichimoku_cheo",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {
+    "chi_mua": true,
+    "kijun": 26,
+    "tenkan": 9
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.457,
+    "ty_le_duong": 52.0,
+    "trung_vi": 0.074,
+    "o_tot_nhat": 1.161,
+    "boi_dinh": 15.689,
+    "do_doc_mot_buoc_pct": 35.777,
+    "hinh_dang": "CAI GAI - dinh cao gap 15.7 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.18,
+     "null_p95": 0.9
+    },
+    "ty_le_duong": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 60.0,
+     "null_p95": 78.4
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 6.728,
+     "null_p95": 35.867
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.122,
+     "null_p95": 2.266
+    }
+   },
+   "giay": 9.8
+  },
+  {
+   "ma": "AUDCHF.H4.bollinger_ve.n20_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCHF",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.299,
+    "ty_le_duong": 64.0,
+    "trung_vi": 0.607,
+    "o_tot_nhat": 3.648,
+    "boi_dinh": 6.01,
+    "do_doc_mot_buoc_pct": 65.637,
+    "hinh_dang": "CAI GAI - dinh cao gap 6.0 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -2.351,
+     "null_p95": 3.291
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 24.0,
+     "null_p95": 62.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -0.729,
+     "null_p95": 4.58
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 3.495,
+     "null_p95": 5.864
+    }
+   },
+   "giay": 10.0
+  },
+  {
+   "ma": "AUDCHF.H4.bollinger_ve.n20_k2.5",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCHF",
+   "khung": "H4",
+   "tam": {
+    "k": 2.5,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.606,
+    "ty_le_duong": 60.0,
+    "trung_vi": 0.42,
+    "o_tot_nhat": 2.603,
+    "boi_dinh": 6.198,
+    "do_doc_mot_buoc_pct": 20.462,
+    "hinh_dang": "CAI GAI - dinh cao gap 6.2 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 0.262,
+     "null_p95": 4.856
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 40.0,
+     "null_p95": 72.8
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -1.205,
+     "null_p95": 33.765
+    },
+    "o_tot_nhat": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 3.508,
+     "null_p95": 5.501
+    }
+   },
+   "giay": 10.3
+  },
+  {
+   "ma": "AUDCHF.D1.ibs_bat_day.nguong0.2_giu1",
+   "mau": "ibs_bat_day",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {
+    "giu": 1,
+    "nguong": 0.2
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 15,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 15,
+    "alpha_tam": 1.891,
+    "ty_le_duong": 73.333,
+    "trung_vi": 0.989,
+    "o_tot_nhat": 1.891,
+    "boi_dinh": 1.912,
+    "do_doc_mot_buoc_pct": 17.768,
+    "hinh_dang": "SUON DOC - 73% duong, dinh gap 1.9 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.127,
+     "null_p95": 2.044
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 33.333,
+     "null_p95": 68.333
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -1.251,
+     "null_p95": 1.65
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.722,
+     "null_p95": 3.322
+    }
+   },
+   "giay": 4.6
+  },
+  {
+   "ma": "AUDCHF.D1.rsi_dao_chieu.n7_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {
+    "n": 7,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.899,
+    "ty_le_duong": 88.889,
+    "trung_vi": 0.711,
+    "o_tot_nhat": 1.767,
+    "boi_dinh": 2.485,
+    "do_doc_mot_buoc_pct": -18.966,
+    "hinh_dang": "SUON DOC - 89% duong, dinh gap 2.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 0.869,
+     "null_p95": 2.188
+    },
+    "ty_le_duong": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 100.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 1.62,
+     "null_p95": 3.567
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.922,
+     "null_p95": 3.173
+    }
+   },
+   "giay": 3.0
+  },
+  {
+   "ma": "AUDCHF.D1.ibs_bat_day.nguong0.2_giu2",
+   "mau": "ibs_bat_day",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {
+    "giu": 2,
+    "nguong": 0.2
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 20,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 20,
+    "alpha_tam": 0.875,
+    "ty_le_duong": 80.0,
+    "trung_vi": 0.869,
+    "o_tot_nhat": 1.9,
+    "boi_dinh": 2.186,
+    "do_doc_mot_buoc_pct": 1.371,
+    "hinh_dang": "SUON DOC - 80% duong, dinh gap 2.2 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -1.786,
+     "null_p95": 1.286
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 30.0,
+     "null_p95": 74.5
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -0.767,
+     "null_p95": 3.119
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.722,
+     "null_p95": 3.322
+    }
+   },
+   "giay": 8.3
+  },
+  {
+   "ma": "EURNZD.H4.rsi_dao_chieu.n7_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURNZD",
+   "khung": "H4",
+   "tam": {
+    "n": 7,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.884,
+    "ty_le_duong": 55.556,
+    "trung_vi": 0.34,
+    "o_tot_nhat": 1.499,
+    "boi_dinh": 4.409,
+    "do_doc_mot_buoc_pct": 82.296,
+    "hinh_dang": "CAI GAI - dinh cao gap 4.4 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.3,
+     "null_p95": 1.226
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 33.333,
+     "null_p95": 66.111
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -0.832,
+     "null_p95": 2.142
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.725,
+     "null_p95": 3.438
+    }
+   },
+   "giay": 4.1
+  },
+  {
+   "ma": "AUDCHF.D1.cuoi_thang.truoc3_sau3",
+   "mau": "cuoi_thang",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {
+    "sau": 3,
+    "truoc": 3
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.523,
+    "ty_le_duong": 88.0,
+    "trung_vi": 0.494,
+    "o_tot_nhat": 1.192,
+    "boi_dinh": 2.413,
+    "do_doc_mot_buoc_pct": 20.268,
+    "hinh_dang": "SUON DOC - 88% duong, dinh gap 2.4 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -1.062,
+     "null_p95": -0.043
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 38.0,
+     "null_p95": 54.6
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": -0.881,
+     "null_p95": 7.288
+    },
+    "o_tot_nhat": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 1.355,
+     "null_p95": 2.092
+    }
+   },
+   "giay": 7.4
+  },
+  {
+   "ma": "AUDCHF.D1.bollinger_ve.n20_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 3.447,
+    "ty_le_duong": 96.0,
+    "trung_vi": 2.62,
+    "o_tot_nhat": 5.659,
+    "boi_dinh": 2.16,
+    "do_doc_mot_buoc_pct": 23.818,
+    "hinh_dang": "SUON DOC - 96% duong, dinh gap 2.2 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.09,
+     "null_p95": 2.576
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 62.0,
+     "null_p95": 93.0
+    },
+    "boi_dinh": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 2.951,
+     "null_p95": 9.679
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 2.155,
+     "null_p95": 5.85
+    }
+   },
+   "giay": 8.2
+  },
+  {
+   "ma": "NZDCAD.H4.rsi_dao_chieu.n14_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "NZDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 1.661,
+    "ty_le_duong": 77.778,
+    "trung_vi": 0.712,
+    "o_tot_nhat": 1.661,
+    "boi_dinh": 2.333,
+    "do_doc_mot_buoc_pct": 42.023,
+    "hinh_dang": "SUON DOC - 78% duong, dinh gap 2.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.725,
+     "null_p95": 1.293
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 55.556,
+     "null_p95": 92.222
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 1.182,
+     "null_p95": 3.721
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.248,
+     "null_p95": 2.082
+    }
+   },
+   "giay": 4.1
+  },
+  {
+   "ma": "NZDCAD.H1.rsi_dao_chieu.n14_vao25_ra_60",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "NZDCAD",
+   "khung": "H1",
+   "tam": {
+    "n": 14,
+    "ra_": 60,
+    "vao": 25
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 0.606,
+    "ty_le_duong": 55.556,
+    "trung_vi": 0.199,
+    "o_tot_nhat": 1.201,
+    "boi_dinh": 6.035,
+    "do_doc_mot_buoc_pct": 26.568,
+    "hinh_dang": "CAI GAI - dinh cao gap 6.0 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -1.022,
+     "null_p95": 0.757
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 11.111,
+     "null_p95": 55.0
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -0.201,
+     "null_p95": 2.208
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.333,
+     "null_p95": 1.902
+    }
+   },
+   "giay": 6.0
+  },
+  {
+   "ma": "US500CASH.D1.ibs_bat_day.nguong0.3_giu1",
+   "mau": "ibs_bat_day",
+   "tai_san": "US500CASH",
+   "khung": "D1",
+   "tam": {
+    "giu": 1,
+    "nguong": 0.3
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 15,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 15,
+    "alpha_tam": 4.49,
+    "ty_le_duong": 100.0,
+    "trung_vi": 3.326,
+    "o_tot_nhat": 5.952,
+    "boi_dinh": 1.79,
+    "do_doc_mot_buoc_pct": 18.53,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.8 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -0.693,
+     "null_p95": 7.91
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 30.0,
+     "null_p95": 75.333
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 1.053,
+     "null_p95": 8.376
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 3.196,
+     "null_p95": 9.64
+    }
+   },
+   "giay": 5.2
+  },
+  {
+   "ma": "US500CASH.D1.ibs_bat_day.nguong0.2_giu2",
+   "mau": "ibs_bat_day",
+   "tai_san": "US500CASH",
+   "khung": "D1",
+   "tam": {
+    "giu": 2,
+    "nguong": 0.2
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 20,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 20,
+    "alpha_tam": 4.782,
+    "ty_le_duong": 100.0,
+    "trung_vi": 3.644,
+    "o_tot_nhat": 6.519,
+    "boi_dinh": 1.789,
+    "do_doc_mot_buoc_pct": 25.951,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.8 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -1.224,
+     "null_p95": 5.602
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 37.5,
+     "null_p95": 94.75
+    },
+    "boi_dinh": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.215,
+     "null_p95": 92.402
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 4.197,
+     "null_p95": 9.042
+    }
+   },
+   "giay": 6.8
+  },
+  {
+   "ma": "NZDCAD.H4.bollinger_ve.n20_k2.5",
+   "mau": "bollinger_ve",
+   "tai_san": "NZDCAD",
+   "khung": "H4",
+   "tam": {
+    "k": 2.5,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.568,
+    "ty_le_duong": 72.0,
+    "trung_vi": 0.757,
+    "o_tot_nhat": 2.812,
+    "boi_dinh": 3.715,
+    "do_doc_mot_buoc_pct": 94.84,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.7 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -1.269,
+     "null_p95": 1.33
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 14.0,
+     "null_p95": 56.0
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": -0.1,
+     "null_p95": 32.558
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 1.192,
+     "null_p95": 2.993
+    }
+   },
+   "giay": 10.7
+  },
+  {
+   "ma": "NZDCAD.H4.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "NZDCAD",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.409,
+    "ty_le_duong": 48.0,
+    "trung_vi": -0.038,
+    "o_tot_nhat": 4.125,
+    "boi_dinh": -108.553,
+    "do_doc_mot_buoc_pct": 82.363,
+    "hinh_dang": "CAI GAI - da so lan can AM"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -1.576,
+     "null_p95": 2.218
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 26.0,
+     "null_p95": 75.8
+    },
+    "boi_dinh": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.027,
+     "null_p95": 4.435
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.307,
+     "null_p95": 3.58
+    }
+   },
+   "giay": 10.8
+  },
+  {
+   "ma": "EURGBP.H4.rsi_dao_chieu.n14_vao30_ra_55",
+   "mau": "rsi_dao_chieu",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {
+    "n": 14,
+    "ra_": 55,
+    "vao": 30
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 9,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 9,
+    "alpha_tam": 1.39,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.165,
+    "o_tot_nhat": 1.973,
+    "boi_dinh": 1.694,
+    "do_doc_mot_buoc_pct": 15.827,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.7 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.01,
+     "null_p95": 2.186
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 88.889,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 1.995,
+     "null_p95": 6.47
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.905,
+     "null_p95": 2.705
+    }
+   },
+   "giay": 4.2
+  },
+  {
+   "ma": "AUDCHF.D1.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.777,
+    "ty_le_duong": 84.0,
+    "trung_vi": 1.032,
+    "o_tot_nhat": 5.736,
+    "boi_dinh": 5.558,
+    "do_doc_mot_buoc_pct": -20.978,
+    "hinh_dang": "CAI GAI - dinh cao gap 5.6 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.292,
+     "null_p95": 1.949
+    },
+    "ty_le_duong": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 88.0,
+     "null_p95": 97.2
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 2.786,
+     "null_p95": 18.945
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 3.418,
+     "null_p95": 4.297
+    }
+   },
+   "giay": 9.4
+  },
+  {
+   "ma": "EURNZD.D1.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURNZD",
+   "khung": "D1",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.424,
+    "ty_le_duong": 44.0,
+    "trung_vi": -0.132,
+    "o_tot_nhat": 1.578,
+    "boi_dinh": -11.955,
+    "do_doc_mot_buoc_pct": 96.698,
+    "hinh_dang": "CAI GAI - da so lan can AM"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -0.976,
+     "null_p95": 1.659
+    },
+    "ty_le_duong": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 32.0,
+     "null_p95": 63.8
+    },
+    "boi_dinh": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.492,
+     "null_p95": 32.97
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.741,
+     "null_p95": 3.178
+    }
+   },
+   "giay": 9.8
+  },
+  {
+   "ma": "NZDCAD.D1.bollinger_ve.n20_k2.5",
+   "mau": "bollinger_ve",
+   "tai_san": "NZDCAD",
+   "khung": "D1",
+   "tam": {
+    "k": 2.5,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.309,
+    "ty_le_duong": 64.0,
+    "trung_vi": 0.163,
+    "o_tot_nhat": 2.326,
+    "boi_dinh": 14.27,
+    "do_doc_mot_buoc_pct": 88.006,
+    "hinh_dang": "CAI GAI - dinh cao gap 14.3 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -1.018,
+     "null_p95": 0.931
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 34.0,
+     "null_p95": 59.6
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 5,
+     "null_trung_vi": -1.223,
+     "null_p95": 4.492
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 1.226,
+     "null_p95": 2.171
+    }
+   },
+   "giay": 10.1
+  },
+  {
+   "ma": "EURGBP.H4.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 3.303,
+    "ty_le_duong": 96.0,
+    "trung_vi": 2.514,
+    "o_tot_nhat": 3.909,
+    "boi_dinh": 1.555,
+    "do_doc_mot_buoc_pct": 25.28,
+    "hinh_dang": "CAO NGUYEN - 96% lan can duong, dinh chi gap 1.6 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 1.754,
+     "null_p95": 3.917
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 78.0,
+     "null_p95": 98.6
+    },
+    "boi_dinh": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.737,
+     "null_p95": 2.934
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 2.982,
+     "null_p95": 4.89
+    }
+   },
+   "giay": 11.1
+  },
+  {
+   "ma": "EURCAD.H4.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.399,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.799,
+    "o_tot_nhat": 3.044,
+    "boi_dinh": 1.692,
+    "do_doc_mot_buoc_pct": -41.923,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.7 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -2.106,
+     "null_p95": 2.465
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 32.0,
+     "null_p95": 91.6
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 0.979,
+     "null_p95": 30.989
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 1.15,
+     "null_p95": 4.06
+    }
+   },
+   "giay": 10.9
+  },
+  {
+   "ma": "EURCAD.H1.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURCAD",
+   "khung": "H1",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.645,
+    "ty_le_duong": 80.0,
+    "trung_vi": 0.645,
+    "o_tot_nhat": 2.758,
+    "boi_dinh": 4.276,
+    "do_doc_mot_buoc_pct": -33.023,
+    "hinh_dang": "CAI GAI - dinh cao gap 4.3 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -1.777,
+     "null_p95": -0.018
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 10.0,
+     "null_p95": 62.0
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -0.101,
+     "null_p95": 2.667
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.378,
+     "null_p95": 1.619
+    }
+   },
+   "giay": 18.1
+  },
+  {
+   "ma": "EURCAD.H1.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURCAD",
+   "khung": "H1",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.471,
+    "ty_le_duong": 84.0,
+    "trung_vi": 0.674,
+    "o_tot_nhat": 1.831,
+    "boi_dinh": 2.717,
+    "do_doc_mot_buoc_pct": 71.754,
+    "hinh_dang": "SUON DOC - 84% duong, dinh gap 2.7 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.017,
+     "null_p95": 0.924
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 54.0,
+     "null_p95": 79.8
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 1.328,
+     "null_p95": 4.756
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.658,
+     "null_p95": 3.195
+    }
+   },
+   "giay": 18.2
+  },
+  {
+   "ma": "EURCAD.H4.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.916,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.434,
+    "o_tot_nhat": 2.244,
+    "boi_dinh": 1.565,
+    "do_doc_mot_buoc_pct": 24.765,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.6 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -0.192,
+     "null_p95": 3.242
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 42.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 0.92,
+     "null_p95": 46.35
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.858,
+     "null_p95": 4.031
+    }
+   },
+   "giay": 11.2
+  },
+  {
+   "ma": "GBPCAD.H4.lap_gap.nguong0.001",
+   "mau": "lap_gap",
+   "tai_san": "GBPCAD",
+   "khung": "H4",
+   "tam": {
+    "nguong": 0.001
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.865,
+    "ty_le_duong": 100.0,
+    "trung_vi": 0.865,
+    "o_tot_nhat": 1.295,
+    "boi_dinh": 1.497,
+    "do_doc_mot_buoc_pct": 5.607,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -3.729,
+     "null_p95": 1.163
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.0,
+     "null_p95": 80.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 0.738,
+     "null_p95": 2.375
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -2.397,
+     "null_p95": 1.851
+    }
+   },
+   "giay": 2.4
+  },
+  {
+   "ma": "GBPCAD.H4.lap_gap.nguong0.003",
+   "mau": "lap_gap",
+   "tai_san": "GBPCAD",
+   "khung": "H4",
+   "tam": {
+    "nguong": 0.003
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.604,
+    "ty_le_duong": 100.0,
+    "trung_vi": 0.792,
+    "o_tot_nhat": 0.808,
+    "boi_dinh": 1.02,
+    "do_doc_mot_buoc_pct": -31.457,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -1.098,
+     "null_p95": 1.973
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 0.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 0.398,
+     "null_p95": 1.879
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -0.331,
+     "null_p95": 4.157
+    }
+   },
+   "giay": 2.3
+  },
+  {
+   "ma": "EURCAD.H4.ou_quay_ve.n50_z2.5",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 50,
+    "z": 2.5
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.46,
+    "ty_le_duong": 88.0,
+    "trung_vi": 1.138,
+    "o_tot_nhat": 3.515,
+    "boi_dinh": 3.089,
+    "do_doc_mot_buoc_pct": 20.925,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.1 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -1.015,
+     "null_p95": 1.163
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 28.0,
+     "null_p95": 73.2
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": -0.031,
+     "null_p95": 13.951
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.087,
+     "null_p95": 3.05
+    }
+   },
+   "giay": 11.0
+  },
+  {
+   "ma": "EURGBP.H1.lap_gap.nguong0.005",
+   "mau": "lap_gap",
+   "tai_san": "EURGBP",
+   "khung": "H1",
+   "tam": {
+    "nguong": 0.005
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.077,
+    "ty_le_duong": 80.0,
+    "trung_vi": 0.077,
+    "o_tot_nhat": 0.152,
+    "boi_dinh": 1.974,
+    "do_doc_mot_buoc_pct": -46.104,
+    "hinh_dang": "CAO NGUYEN - 80% lan can duong, dinh chi gap 2.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 0.013,
+     "null_p95": 0.216
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 30.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.75,
+     "so_null": 7,
+     "null_trung_vi": 0.686,
+     "null_p95": 3.246
+    },
+    "o_tot_nhat": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 0.09,
+     "null_p95": 0.459
+    }
+   },
+   "giay": 3.4
+  },
+  {
+   "ma": "EURGBP.H1.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURGBP",
+   "khung": "H1",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.248,
+    "ty_le_duong": 76.0,
+    "trung_vi": 0.481,
+    "o_tot_nhat": 1.477,
+    "boi_dinh": 3.071,
+    "do_doc_mot_buoc_pct": -10.484,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.1 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": -0.281,
+     "null_p95": 2.228
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 30.0,
+     "null_p95": 98.6
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 0.281,
+     "null_p95": 2.643
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.633,
+     "null_p95": 3.666
+    }
+   },
+   "giay": 17.6
+  },
+  {
+   "ma": "EURGBP.H1.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURGBP",
+   "khung": "H1",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.22,
+    "ty_le_duong": 84.0,
+    "trung_vi": 0.985,
+    "o_tot_nhat": 2.22,
+    "boi_dinh": 2.254,
+    "do_doc_mot_buoc_pct": 5.082,
+    "hinh_dang": "SUON DOC - 84% duong, dinh gap 2.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": -0.354,
+     "null_p95": 2.673
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 22.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 0.3,
+     "null_p95": 2.934
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 1.529,
+     "null_p95": 3.18
+    }
+   },
+   "giay": 17.3
+  },
+  {
+   "ma": "EURGBP.H4.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.313,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.194,
+    "o_tot_nhat": 4.473,
+    "boi_dinh": 3.746,
+    "do_doc_mot_buoc_pct": 39.559,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.7 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.954,
+     "null_p95": 2.095
+    },
+    "ty_le_duong": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 96.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": 1.761,
+     "null_p95": 3.454
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 2.96,
+     "null_p95": 4.739
+    }
+   },
+   "giay": 11.2
+  },
+  {
+   "ma": "EURGBP.H1.ou_quay_ve.n50_z2.5",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURGBP",
+   "khung": "H1",
+   "tam": {
+    "n": 50,
+    "z": 2.5
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.727,
+    "ty_le_duong": 84.0,
+    "trung_vi": 0.941,
+    "o_tot_nhat": 2.779,
+    "boi_dinh": 2.953,
+    "do_doc_mot_buoc_pct": -95.048,
+    "hinh_dang": "SUON DOC - 84% duong, dinh gap 3.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.034,
+     "null_p95": 2.56
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 32.0,
+     "null_p95": 86.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": -1.154,
+     "null_p95": 5.521
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.846,
+     "null_p95": 4.742
+    }
+   },
+   "giay": 17.7
+  },
+  {
+   "ma": "EURGBP.H4.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 3.028,
+    "ty_le_duong": 100.0,
+    "trung_vi": 3.028,
+    "o_tot_nhat": 4.558,
+    "boi_dinh": 1.505,
+    "do_doc_mot_buoc_pct": 2.493,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 1.122,
+     "null_p95": 3.571
+    },
+    "ty_le_duong": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 96.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 1.612,
+     "null_p95": 3.257
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 2.187,
+     "null_p95": 4.79
+    }
+   },
+   "giay": 11.3
+  },
+  {
+   "ma": "EURGBP.H4.ou_quay_ve.n50_z2.5",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {
+    "n": 50,
+    "z": 2.5
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.476,
+    "ty_le_duong": 80.0,
+    "trung_vi": 0.669,
+    "o_tot_nhat": 2.093,
+    "boi_dinh": 3.129,
+    "do_doc_mot_buoc_pct": 37.873,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.1 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.474,
+     "null_p95": 4.447
+    },
+    "ty_le_duong": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 86.0,
+     "null_p95": 98.6
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 2.112,
+     "null_p95": 3.877
+    },
+    "o_tot_nhat": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 2.384,
+     "null_p95": 4.447
+    }
+   },
+   "giay": 11.8
+  },
+  {
+   "ma": "EURGBP.H4.mua_qua_dem.gio_vao20_gio_ra14",
+   "mau": "mua_qua_dem",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {
+    "gio_ra": 14,
+    "gio_vao": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 11.129,
+    "ty_le_duong": 52.0,
+    "trung_vi": 0.04,
+    "o_tot_nhat": 13.219,
+    "boi_dinh": 330.475,
+    "do_doc_mot_buoc_pct": 49.82,
+    "hinh_dang": "CAI GAI - dinh cao gap 330.5 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -3.404,
+     "null_p95": -0.94
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.0,
+     "null_p95": 40.8
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": 0.005,
+     "null_p95": 4.472
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.006,
+     "null_p95": 0.189
+    }
+   },
+   "giay": 10.8
+  },
+  {
+   "ma": "AUDCAD.H1.lap_gap.nguong0.001",
+   "mau": "lap_gap",
+   "tai_san": "AUDCAD",
+   "khung": "H1",
+   "tam": {
+    "nguong": 0.001
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.409,
+    "ty_le_duong": 40.0,
+    "trung_vi": -0.302,
+    "o_tot_nhat": 0.409,
+    "boi_dinh": -1.354,
+    "do_doc_mot_buoc_pct": 183.619,
+    "hinh_dang": "CAI GAI - da so lan can AM"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -5.434,
+     "null_p95": -1.548
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.0,
+     "null_p95": 0.0
+    },
+    "boi_dinh": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.654,
+     "null_p95": 0.805
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -3.179,
+     "null_p95": -0.775
+    }
+   },
+   "giay": 3.5
+  },
+  {
+   "ma": "AUDCAD.H1.lap_gap.nguong0.003",
+   "mau": "lap_gap",
+   "tai_san": "AUDCAD",
+   "khung": "H1",
+   "tam": {
+    "nguong": 0.003
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.699,
+    "ty_le_duong": 100.0,
+    "trung_vi": 0.633,
+    "o_tot_nhat": 0.957,
+    "boi_dinh": 1.512,
+    "do_doc_mot_buoc_pct": 15.165,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.542,
+     "null_p95": 0.283
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.0,
+     "null_p95": 60.0
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": 0.545,
+     "null_p95": 68.872
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.289,
+     "null_p95": 0.804
+    }
+   },
+   "giay": 3.5
+  },
+  {
+   "ma": "AUDCAD.H1.lap_gap.nguong0.005",
+   "mau": "lap_gap",
+   "tai_san": "AUDCAD",
+   "khung": "H1",
+   "tam": {
+    "nguong": 0.005
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.328,
+    "ty_le_duong": 100.0,
+    "trung_vi": 0.328,
+    "o_tot_nhat": 0.692,
+    "boi_dinh": 2.11,
+    "do_doc_mot_buoc_pct": -39.329,
+    "hinh_dang": "SUON DOC - 100% duong, dinh gap 2.1 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 0.083,
+     "null_p95": 0.424
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 40.0,
+     "null_p95": 93.0
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": 0.154,
+     "null_p95": 1.416
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.12,
+     "null_p95": 0.53
+    }
+   },
+   "giay": 3.7
+  },
+  {
+   "ma": "AUDCAD.H1.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "AUDCAD",
+   "khung": "H1",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 4.091,
+    "ty_le_duong": 100.0,
+    "trung_vi": 4.029,
+    "o_tot_nhat": 5.249,
+    "boi_dinh": 1.303,
+    "do_doc_mot_buoc_pct": 3.972,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.33,
+     "null_p95": 2.554
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 36.0,
+     "null_p95": 86.0
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 0.494,
+     "null_p95": 36.078
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.516,
+     "null_p95": 4.371
+    }
+   },
+   "giay": 18.4
+  },
+  {
+   "ma": "AUDCHF.H1.lap_gap.nguong0.005",
+   "mau": "lap_gap",
+   "tai_san": "AUDCHF",
+   "khung": "H1",
+   "tam": {
+    "nguong": 0.005
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.337,
+    "ty_le_duong": 80.0,
+    "trung_vi": 0.23,
+    "o_tot_nhat": 0.337,
+    "boi_dinh": 1.465,
+    "do_doc_mot_buoc_pct": 36.795,
+    "hinh_dang": "CAO NGUYEN - 80% lan can duong, dinh chi gap 1.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.186,
+     "null_p95": -0.07
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 20.0,
+     "null_p95": 40.0
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -0.496,
+     "null_p95": 0.476
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.112,
+     "null_p95": 0.227
+    }
+   },
+   "giay": 4.0
+  },
+  {
+   "ma": "AUDCAD.H4.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.904,
+    "ty_le_duong": 92.0,
+    "trung_vi": 1.991,
+    "o_tot_nhat": 4.73,
+    "boi_dinh": 2.376,
+    "do_doc_mot_buoc_pct": 29.253,
+    "hinh_dang": "SUON DOC - 92% duong, dinh gap 2.4 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.305,
+     "null_p95": 3.187
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 54.0,
+     "null_p95": 94.4
+    },
+    "boi_dinh": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 3.255,
+     "null_p95": 42.34
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.904,
+     "null_p95": 4.217
+    }
+   },
+   "giay": 11.2
+  },
+  {
+   "ma": "AUDCAD.H1.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "AUDCAD",
+   "khung": "H1",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.754,
+    "ty_le_duong": 100.0,
+    "trung_vi": 4.013,
+    "o_tot_nhat": 4.973,
+    "boi_dinh": 1.239,
+    "do_doc_mot_buoc_pct": -48.348,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.2 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.787,
+     "null_p95": 2.85
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 66.0,
+     "null_p95": 98.6
+    },
+    "boi_dinh": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 1.649,
+     "null_p95": 3.659
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.927,
+     "null_p95": 3.969
+    }
+   },
+   "giay": 18.3
+  },
+  {
+   "ma": "AUDCAD.H4.ou_quay_ve.n50_z2.5",
+   "mau": "ou_quay_ve",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 50,
+    "z": 2.5
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 4.333,
+    "ty_le_duong": 100.0,
+    "trung_vi": 2.857,
+    "o_tot_nhat": 4.333,
+    "boi_dinh": 1.517,
+    "do_doc_mot_buoc_pct": 29.287,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.5 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -0.155,
+     "null_p95": 5.429
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 58.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 2.45,
+     "null_p95": 34.402
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 2.26,
+     "null_p95": 5.817
+    }
+   },
+   "giay": 11.8
+  },
+  {
+   "ma": "AUDCHF.H4.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "AUDCHF",
+   "khung": "H4",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 3.194,
+    "ty_le_duong": 100.0,
+    "trung_vi": 3.403,
+    "o_tot_nhat": 5.282,
+    "boi_dinh": 1.552,
+    "do_doc_mot_buoc_pct": -12.664,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.6 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -1.66,
+     "null_p95": 2.952
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 8.0,
+     "null_p95": 80.8
+    },
+    "boi_dinh": {
+     "p": 0.6667,
+     "so_null": 8,
+     "null_trung_vi": 0.407,
+     "null_p95": 12.325
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 1.429,
+     "null_p95": 3.38
+    }
+   },
+   "giay": 11.2
+  },
+  {
+   "ma": "NZDCAD.H1.lap_gap.nguong0.003",
+   "mau": "lap_gap",
+   "tai_san": "NZDCAD",
+   "khung": "H1",
+   "tam": {
+    "nguong": 0.003
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.417,
+    "ty_le_duong": 80.0,
+    "trung_vi": 0.358,
+    "o_tot_nhat": 0.594,
+    "boi_dinh": 1.659,
+    "do_doc_mot_buoc_pct": 34.412,
+    "hinh_dang": "CAO NGUYEN - 80% lan can duong, dinh chi gap 1.7 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.652,
+     "null_p95": 0.104
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.0,
+     "null_p95": 66.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 0.185,
+     "null_p95": 2.061
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.038,
+     "null_p95": 0.458
+    }
+   },
+   "giay": 3.7
+  },
+  {
+   "ma": "AUDCHF.H4.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "AUDCHF",
+   "khung": "H4",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 3.302,
+    "ty_le_duong": 96.0,
+    "trung_vi": 2.021,
+    "o_tot_nhat": 4.09,
+    "boi_dinh": 2.024,
+    "do_doc_mot_buoc_pct": 40.915,
+    "hinh_dang": "SUON DOC - 96% duong, dinh gap 2.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -1.802,
+     "null_p95": 1.895
+    },
+    "ty_le_duong": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 12.0,
+     "null_p95": 85.2
+    },
+    "boi_dinh": {
+     "p": 0.7778,
+     "so_null": 8,
+     "null_trung_vi": -0.049,
+     "null_p95": 4.005
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 1.097,
+     "null_p95": 4.019
+    }
+   },
+   "giay": 12.1
+  },
+  {
+   "ma": "EURNZD.H4.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "EURNZD",
+   "khung": "H4",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.397,
+    "ty_le_duong": 48.0,
+    "trung_vi": -0.202,
+    "o_tot_nhat": 1.397,
+    "boi_dinh": -6.916,
+    "do_doc_mot_buoc_pct": 62.563,
+    "hinh_dang": "CAI GAI - da so lan can AM"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": -1.368,
+     "null_p95": 1.815
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 12.0,
+     "null_p95": 89.0
+    },
+    "boi_dinh": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.096,
+     "null_p95": 4.187
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.885,
+     "null_p95": 3.986
+    }
+   },
+   "giay": 11.5
+  },
+  {
+   "ma": "NZDCAD.H1.lap_gap.nguong0.005",
+   "mau": "lap_gap",
+   "tai_san": "NZDCAD",
+   "khung": "H1",
+   "tam": {
+    "nguong": 0.005
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.457,
+    "ty_le_duong": 100.0,
+    "trung_vi": 0.218,
+    "o_tot_nhat": 0.457,
+    "boi_dinh": 2.096,
+    "do_doc_mot_buoc_pct": 62.91,
+    "hinh_dang": "SUON DOC - 100% duong, dinh gap 2.1 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -0.053,
+     "null_p95": 0.166
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 30.0,
+     "null_p95": 93.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 0.442,
+     "null_p95": 2.775
+    },
+    "o_tot_nhat": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.085,
+     "null_p95": 0.334
+    }
+   },
+   "giay": 3.9
+  },
+  {
+   "ma": "NZDCAD.H1.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "NZDCAD",
+   "khung": "H1",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.401,
+    "ty_le_duong": 44.0,
+    "trung_vi": -0.098,
+    "o_tot_nhat": 1.678,
+    "boi_dinh": -17.122,
+    "do_doc_mot_buoc_pct": 98.965,
+    "hinh_dang": "CAI GAI - da so lan can AM"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": -1.234,
+     "null_p95": 0.615
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 6.0,
+     "null_p95": 55.4
+    },
+    "boi_dinh": {
+     "p": 0.1111,
+     "so_null": 8,
+     "null_trung_vi": 0.071,
+     "null_p95": 4.009
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.211,
+     "null_p95": 2.21
+    }
+   },
+   "giay": 18.5
+  },
+  {
+   "ma": "NZDCAD.H4.ou_quay_ve.n100_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "NZDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 100,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.131,
+    "ty_le_duong": 52.0,
+    "trung_vi": 0.024,
+    "o_tot_nhat": 1.953,
+    "boi_dinh": 81.375,
+    "do_doc_mot_buoc_pct": 45.358,
+    "hinh_dang": "CAI GAI - dinh cao gap 81.4 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.129,
+     "null_p95": 3.926
+    },
+    "ty_le_duong": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 28.0,
+     "null_p95": 94.4
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": -0.145,
+     "null_p95": 2.671
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.935,
+     "null_p95": 4.47
+    }
+   },
+   "giay": 10.9
+  },
+  {
+   "ma": "EURGBP.H4.dong_luong_dau_thang_khi_gia_giam.mac_dinh",
+   "mau": "dong_luong_dau_thang_khi_gia_giam",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.D1.dong_luong_dau_thang_khi_gia_giam.mac_dinh",
+   "mau": "dong_luong_dau_thang_khi_gia_giam",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.D1.dong_luong_dau_thang_khi_gia_giam.",
+   "mau": "dong_luong_dau_thang_khi_gia_giam",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURCAD.H1.ban_lo_cuoi_nam_thue.mac_dinh",
+   "mau": "ban_lo_cuoi_nam_thue",
+   "tai_san": "EURCAD",
+   "khung": "H1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURCAD.D1.ghim_gia_tuan_dao_han.mac_dinh",
+   "mau": "ghim_gia_tuan_dao_han",
+   "tai_san": "EURCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "GBPCAD.D1.ghim_gia_tuan_dao_han.mac_dinh",
+   "mau": "ghim_gia_tuan_dao_han",
+   "tai_san": "GBPCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURGBP.H4.ghim_gia_tuan_dao_han.mac_dinh",
+   "mau": "ghim_gia_tuan_dao_han",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCHF.H4.pha_day_hut_quet_stop.mac_dinh",
+   "mau": "pha_day_hut_quet_stop",
+   "tai_san": "AUDCHF",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURCAD.H4.mat_can_bang_lenh_dong_cua.mac_dinh",
+   "mau": "mat_can_bang_lenh_dong_cua",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURGBP.H4.mat_can_bang_lenh_dong_cua.mac_dinh",
+   "mau": "mat_can_bang_lenh_dong_cua",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.H4.mat_can_bang_lenh_dong_cua.mac_dinh",
+   "mau": "mat_can_bang_lenh_dong_cua",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.H4.mua_lai_co_phieu_quy_theo_ngan_sach.mac_dinh",
+   "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURCAD.H1.ban_lo_cuoi_nam_thue.",
+   "mau": "ban_lo_cuoi_nam_thue",
+   "tai_san": "EURCAD",
+   "khung": "H1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURCAD.H4.mat_can_bang_lenh_dong_cua.",
+   "mau": "mat_can_bang_lenh_dong_cua",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURCAD.D1.ghim_gia_tuan_dao_han.",
+   "mau": "ghim_gia_tuan_dao_han",
+   "tai_san": "EURCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "GBPCAD.D1.ghim_gia_tuan_dao_han.",
+   "mau": "ghim_gia_tuan_dao_han",
+   "tai_san": "GBPCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURGBP.H4.mat_can_bang_lenh_dong_cua.",
+   "mau": "mat_can_bang_lenh_dong_cua",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.H4.mat_can_bang_lenh_dong_cua.",
+   "mau": "mat_can_bang_lenh_dong_cua",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURNZD.H1.ban_lo_cuoi_nam_thue.",
+   "mau": "ban_lo_cuoi_nam_thue",
+   "tai_san": "EURNZD",
+   "khung": "H1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "GBPCAD.D1.phi_bao_hiem_bien_dong_gian_no.mac_dinh",
+   "mau": "phi_bao_hiem_bien_dong_gian_no",
+   "tai_san": "GBPCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURGBP.H4.phi_bao_hiem_bien_dong_gian_no.mac_dinh",
+   "mau": "phi_bao_hiem_bien_dong_gian_no",
+   "tai_san": "EURGBP",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.D1.phi_bao_hiem_bien_dong_gian_no.mac_dinh",
+   "mau": "phi_bao_hiem_bien_dong_gian_no",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCHF.D1.phi_bao_hiem_bien_dong_gian_no.mac_dinh",
+   "mau": "phi_bao_hiem_bien_dong_gian_no",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "GBPCAD.D1.bu_rui_ro_truoc_cong_bo_vi_mo.mac_dinh",
+   "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+   "tai_san": "GBPCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.D1.gamma_duong_keo_ve.mac_dinh",
+   "mau": "gamma_duong_keo_ve",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "EURCAD.H4.rut_von_quy_tuong_ho.mac_dinh",
+   "mau": "rut_von_quy_tuong_ho",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.H4.rut_von_quy_tuong_ho.mac_dinh",
+   "mau": "rut_von_quy_tuong_ho",
+   "tai_san": "AUDCAD",
+   "khung": "H4",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "GBPCAD.D1.phi_bao_hiem_bien_dong_gian_no.",
+   "mau": "phi_bao_hiem_bien_dong_gian_no",
+   "tai_san": "GBPCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "GBPCAD.D1.bu_rui_ro_truoc_cong_bo_vi_mo.",
+   "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+   "tai_san": "GBPCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCAD.D1.phi_bao_hiem_bien_dong_gian_no.",
+   "mau": "phi_bao_hiem_bien_dong_gian_no",
+   "tai_san": "AUDCAD",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "AUDCHF.D1.phi_bao_hiem_bien_dong_gian_no.",
+   "mau": "phi_bao_hiem_bien_dong_gian_no",
+   "tai_san": "AUDCHF",
+   "khung": "D1",
+   "tam": {},
+   "do_duoc": false,
+   "ly_do": "khong co tham so -> khong co lan can de do"
+  },
+  {
+   "ma": "GOP.ichimoku_cheo.D1.chi_so_my+vang.tenkan9_kijun26_chi_muaTrue",
+   "mau": "ichimoku_cheo",
+   "tai_san": "RO:chi_so_my+vang",
+   "khung": "D1",
+   "tam": {
+    "chi_mua": true,
+    "kijun": 26,
+    "tenkan": 9
+   },
+   "do_duoc": false,
+   "ly_do": "FileNotFoundError: khong co du lieu cho RO:CHI_SO_MY+VANG. Co: AUDCAD, AUDCHF, AUDDKK, AUDHKD, AUDHUF, AUDJPY, AUDNOK, AUDNZD, AUDPLN, AUDSEK, AUDSGD, AUDTHB, ",
+   "giay": 0.0
+  },
+  {
+   "ma": "NZDCAD.H4.lap_gap.nguong0.005",
+   "mau": "lap_gap",
+   "tai_san": "NZDCAD",
+   "khung": "H4",
+   "tam": {
+    "nguong": 0.005
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 5,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 5,
+    "alpha_tam": 0.098,
+    "ty_le_duong": 60.0,
+    "trung_vi": 0.05,
+    "o_tot_nhat": 0.098,
+    "boi_dinh": 1.96,
+    "do_doc_mot_buoc_pct": 154.082,
+    "hinh_dang": "SUON DOC - 60% duong, dinh gap 2.0 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.806,
+     "null_p95": 1.088
+    },
+    "ty_le_duong": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.0,
+     "null_p95": 59.0
+    },
+    "boi_dinh": {
+     "p": 0.8889,
+     "so_null": 8,
+     "null_trung_vi": 0.116,
+     "null_p95": 2.282
+    },
+    "o_tot_nhat": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": -0.054,
+     "null_p95": 1.116
+    }
+   },
+   "giay": 2.4
+  },
+  {
+   "ma": "NZDCAD.H4.ou_quay_ve.n200_z2.0",
+   "mau": "ou_quay_ve",
+   "tai_san": "NZDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 200,
+    "z": 2.0
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 1.614,
+    "ty_le_duong": 88.0,
+    "trung_vi": 1.703,
+    "o_tot_nhat": 3.876,
+    "boi_dinh": 2.276,
+    "do_doc_mot_buoc_pct": -35.905,
+    "hinh_dang": "SUON DOC - 88% duong, dinh gap 2.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2222,
+     "so_null": 8,
+     "null_trung_vi": 0.616,
+     "null_p95": 2.301
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 70.0,
+     "null_p95": 98.6
+    },
+    "boi_dinh": {
+     "p": 0.5556,
+     "so_null": 8,
+     "null_trung_vi": 1.973,
+     "null_p95": 12.878
+    },
+    "o_tot_nhat": {
+     "p": 0.3333,
+     "so_null": 8,
+     "null_trung_vi": 2.62,
+     "null_p95": 4.332
+    }
+   },
+   "giay": 11.7
+  },
+  {
+   "ma": "NZDCAD.H4.ou_quay_ve.n50_z2.5",
+   "mau": "ou_quay_ve",
+   "tai_san": "NZDCAD",
+   "khung": "H4",
+   "tam": {
+    "n": 50,
+    "z": 2.5
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 8,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 0.935,
+    "ty_le_duong": 52.0,
+    "trung_vi": 0.123,
+    "o_tot_nhat": 1.44,
+    "boi_dinh": 11.707,
+    "do_doc_mot_buoc_pct": 86.257,
+    "hinh_dang": "CAI GAI - dinh cao gap 11.7 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": -0.435,
+     "null_p95": 2.016
+    },
+    "ty_le_duong": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 20.0,
+     "null_p95": 93.2
+    },
+    "boi_dinh": {
+     "p": 1.0,
+     "so_null": 8,
+     "null_trung_vi": 0.022,
+     "null_p95": 2.419
+    },
+    "o_tot_nhat": {
+     "p": 0.4444,
+     "so_null": 8,
+     "null_trung_vi": 0.883,
+     "null_p95": 3.929
+    }
+   },
+   "giay": 10.3
+  }
+ ]
+}

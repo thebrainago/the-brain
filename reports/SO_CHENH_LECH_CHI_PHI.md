@@ -1,5 +1,5 @@
 # SO CHENH LECH CHI PHI TRIEN KHAI
-*Do luc 2026-08-22 17:29:12 tren cac terminal MT5 dang cai.*
+*Do luc 2026-08-31 09:27:56 tren cac terminal MT5 dang cai.*
 
 > **Day khong phai gia thuyet, day la phep tru.** Khong ton slot ngan sach
 > thong ke nao. Khong can backtest, khong can placebo.
@@ -18,9 +18,9 @@
 | `USDTRY` | Exness | +5.05 | XM | +42.03 | **+36.98** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `EURTRY` | Exness | +6.54 | XM | +42.87 | **+36.33** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `USDZAR` | FXCE | +0.00 | XM | +9.36 | **+9.36** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `XAGUSD` | FXCE | +3.00 | XM | +11.58 | **+8.58** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 | `BCHUSD` | Exness | +8.10 | FXCE | +16.14 | **+8.04** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `USDMXN` | FXCE | +0.00 | XM | +7.20 | **+7.20** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `XAGUSD` | Exness | +4.44 | XM | +11.58 | **+7.13** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `LTCUSD` | Exness | +6.57 | FXCE | +12.90 | **+6.34** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `USDHUF` | Exness | +0.00 | XM | +5.59 | **+5.59** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `XAUEUR` | Exness | +3.03 | XM | +8.15 | **+5.11** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |

@@ -1,6 +1,6 @@
-# TIEP TUC NGAY MAI — chot phien 2026-08-30 23:03
+# TIEP TUC NGAY MAI — chot phien 2026-08-31 19:25
 
-Sua cong 1 sang khop rui ro (THE HE 5); bat hien vat khe dao ngay tren FX H4 va bit bang cong 11; doc_hieu suy ho theo chieu + go dai tu; EVO them duong HuggingFace va dien dan voi 5 nhu cau ky thuat
+hieu chuan HINH DANG bang chuoi null: cong cu + 12 test, va luot chay dem 368 gia thuyet x 100 null dang chay
 
 ## Trang thai do duoc luc chot
 > May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
@@ -8,116 +8,56 @@ Sua cong 1 sang khop rui ro (THE HE 5); bat hien vat khe dao ngay tren FX H4 va 
 
 | chi so | hom nay | doi |
 |---|---:|---:|
-| file test (lab) | 46 | +5 |
-| ham test (lab) | 563 | +95 |
+| file test (lab) | 49 | +3 |
+| ham test (lab) | 656 | +93 |
 | file test (ds/) | 82 |  |
 | bang gia .parquet | 252 |  |
-| dong so FDR | 1777 | +8 |
-|   trong do bac bo | 403 | +5 |
-| ung vien xep hang | 191 | +84 |
-| ban doc da thu | 2429 | +679 |
+| dong so FDR | 1794 | +17 |
+|   trong do bac bo | 404 | +1 |
+| ung vien xep hang | 327 | +136 |
+| ban doc da thu | 2481 | +52 |
 | co che trong thu vien | 32 |  |
-| van de con mo | 27 |  |
-|   muc NANG | 16 |  |
-| viec dang CHO | 104 |  |
-| file .py o goc lab | 116 | +5 |
+| van de con mo | 22 | -5 |
+|   muc NANG | 10 | -6 |
+| viec dang CHO | 0 | -104 |
+| file .py o goc lab | 122 | +6 |
 
-- co DUNG_LAI: **CO (he dang nam im)**
-- viec CHO theo loai: kham_pha_gop=1, kham_pha_theo_mau=103
+- co DUNG_LAI: **KHONG (he dang chay)**
+- viec CHO theo loai: khong con
 - commit hom nay:
 ```
-1eb3d18 reports: kho cong cu EVO 97 muc + con tro seeker sau phien 30/08
-c957119 san_cong_cu: tach "khong voi toi duoc" khoi "hoi roi ma khong co gi"
-610ac2a san_cong_cu: duong DIEN DAN + 5 nhu cau KY THUAT (EVO rong hon linh vuc trading)
-3069b7e cong 11: chan chien luoc song bang KHE GIA o moc dao ngay
-411866c san_cong_cu: cham diem HF cong bang + xem() khong vo vi thieu khoa
-c2eb3d2 san_cong_cu: them duong HuggingFace + nhu cau "xep thu tu doc"
-9fe539d cong THE HE 5: cong 1 so o muc RUI RO BANG NHAU + siet khi moc rong
-4b28103 engine: them don_bay tuong minh + phi giu theo DO LON (hai chan chong len nhau)
-c2e7e8e seeker: arxiv/openalex xuong uu tien 3 (suat 0,8% va 6%)
-56580c2 seeker: youtube len uu tien 1 (theo suat DO DUOC, khong theo cam giac)
-96cc093 doc_hieu: phep CAT cung mang chieu (Connors RSI(2) khong con roi vao ho "khac")
-fcf753a doc_hieu: suy ho theo CHIEU, va go dai tu tro ve chi bao o ve truoc
-d523607 MQL5 da dang nhap: them nguon bai viet (58k ky tu/bai, cao nhat kho)
-c9b9d09 9 nguon moi + 7 thu tieng: 1.338 -> 2.117 tai lieu
-a17b16c muc 4: ghi lai SO PHEP THU; va hai module nua bao thanh cong sai
-3b19369 b tai-khoan: mot lenh cho biet nen tang nao da dang nhap, thieu gi
-c2b4dbb video thanh chu; xoa 358 MB thu muc cu; va bat mot module BAO THANH CONG SAI
-dfa97b6 dien ban giao 30/08 — muoi loi hong im lang, hai niem tin bi lat
-b6f2e05 2026-08-30: gop du an + mo git; nhanh 8 lan roi song song them 3,8 lan; cong hien phap + 144 bai kiem moi; mo khoa VPN/TradingView/xa hoi (492->1075 ban doc); duong GOP chay ra am tinh do duoc, so cai nguyen ven
-7509346 b toan-canh: mot man hinh cho biet he dang o dau
-a183052 chuan hoa URL: bien the thu ba (duong dan con cua X) va gop hai ten mien
-406b213 nguon xa hoi: vao TUNG BAI, khu trung dung, va thao bo loc tieu de chan nham
-a7b1f23 duong GOP da chay: am tinh DO DUOC, va tach 'chua do' khoi 'do roi ma thua'
-7f7b47e EVO san PHUONG PHAP, khong chi cong cu
-920a05f quet be mat chay SONG SONG - nhanh 3,8 lan, va no lam lo mot loi ghi cache
-609b7aa Chrome chay AN mac dinh - RAM 2,93 -> 1,51 GB
-44a7b1c EVO canh tai nguyen, ngan sach theo so do, va mo khoa TradingView + xa hoi
-4f831e5 tran so tab trinh duyet - ro ri tai nguyen lam dung han luot keo
-588bf91 bat VPN, them 3 mau chien luoc, va mo duong GOP cho co che thua lenh
-6021de0 tach loi MOI TRUONG khoi loi DIA CHI khi doc toan van, va go 84 khoa oan
-16860cc SEEKER vua san chien luoc vua NHAT CONG CU doc duong
-dc99fb5 noi day toan_van -> trinh duyet, va cho EVO di san cong cu ngoai
-7bb629f dien ban giao 30/08 phan chieu
-cc106f8 2026-08-30: tang toc 8 lan (con bao stat trong kho()), cong hien phap + 48 test moi (369 xanh), nap truoc MDE 122 cap, quet lai toan be mat 99,7s; bac bo ket luan 'cong FDR bi niem kin' cua chinh ban ra soat
-c1ea7c4 nap truoc MDE 122 cap D1 + quet lai toan be mat + bao cao phan B
-d8795f2 cong hien phap + test cho 3 module chua ai kiem + sua lo hong xuat xu chi phi
-83cd2bc toc do: dem van tay kho() theo TTL + dem chi_phi._doc_luu theo (mtime,size)
-ff80edd pytest.ini: bo -q khoi addopts (cong voi -q cua b test thanh -qq, nuot dong tong ket)
-b61ac59 AGENTS.md: ghi moc gop ds/ + git + lenh b
-29bf62f dien ban giao 30/08 + sua not tham chieu duong dan cu
-1d28210 2026-08-30: gop 'Promt cho DS' vao ds/, mo git cho ca du an, dung bo lenh b + quy trinh chot phien, ra soat toan bo module
-2222ad5 moc goc 30/08/2026: mo git cho THE BRAIN
+f1d5d2a hieu chuan HINH DANG: cung luoi lan can chay tren chuoi NULL sinh tu chinh no
+f3ba6e6 dieu_phoi: canh bao cham lease dung >= chu khong phai ==
+0b499d3 nhap tru EVO: mot phat hien = mot van de, va so van de day duoc truy van san
+754734c EVO: mot phat hien = mot van de, va so van de day duoc truy van san
+e705e99 do_on_dinh: edge la CAO NGUYEN hay CAI GAI — va ung vien PASS duy nhat la SUON DOC
+fd6d401 24/7: nguyen nhan goc — dua lease vao os.replace lam supervisor chet moi 4-5 phut
+785fc31 24/7: supervisor phai khai bao cai chet cua minh (bit cho 'khong ro nguyen nhan')
+8cb430b cong 11 gac duoc khung NGAY: do khe theo THU khi chuoi chi co mot gio
+f37eadf cham lai 361 gia thuyet duoi the he cong 5: 83 diem mu da dong, va no lo ra mot PASS
 ```
-- file dang doi luc chot: **1**
+- file dang doi luc chot: **23**
 
 ## Mot doan doc la hieu ca phien
 
-Phien nay tra loi mot cau cua chu du an: **"cong co dang loai bo phung phi
-khong?"** — va cau tra loi lat nguoc hai gia dinh.
-
-**Mot: bo doc KHONG phai nut that, kho moi la.** Do tren 1.143 ban doc: trong
-2.504 cau bi nhan la "luat vao" nhung khong doc duoc dieu kien, **42,0% la
-manh ma nguon** (`action = "buy"`) va **44,7% la van tan gau**; chi **1,2%
-(30 cau)** la luat that bi trot. Bo doc tu choi 98,8% kia la DUNG. Sua het hai
-lo hong that (suy ho theo CHIEU chu khong theo ten chi bao; go dai tu "it
-crosses below 15") chi duoc **19 -> 20 co che**. Mot gia thuyet cua toi ("bai
-viet ghi luat kieu tieu de + gach dau dong") do ra SAI: 19/1.056 bai, 8 dong.
-
-**Hai: cong 1 hong that, nhung no khong chon vui mo vang nao.** No so TONG LAI
-cua he (phoi nhiem 16,6%) voi mua-giu (phoi nhiem 100%) — khong cung don vi, va
-tren tai san co xu huong tang thi BAT KHA voi moi co che chon loc. V6/IBS tren
-US500M.D1 dat Sharpe 0,992 / Calmar 0,961 / DD -11,76% (moc 0,885 / 0,756 /
--21,05%): qua cong 2 va 3, chet o cong 1. Bang chung le hon: qua cong 1 la
-**37,4% tren FX so voi 0,4% tren chi so** — de hon 90 lan, nen ngan sach FDR
-tu chay ve FX (79% gia thuyet).
-Da sua thanh **THE HE CONG 5** (khop rui ro `k = min(k_bien_dong, k_sut_giam)`
-+ siet p khi moc khong co phan bu rui ro). **Nhung cham lai ca 361 gia thuyet:
-278 chay duoc, 77 qua cong 1-2-3, chi 2 qua them cong 4.** Dung ky vong sua
-cong sinh ra phat hien.
-
-**Va 1 trong 2 cai song sot la HIEN VAT DU LIEU.** `EURGBP.H4.mua_qua_dem`,
-t_alpha = **14,52**. Soi ra: bar 00:00 tren FX H4 mo thap gia tao roi hoi trong
-than bar (khe -3,16 / -2,47 / -4,61 bps o EURGBP/EURCAD/AUDCAD; moi gio khac
-~0). Om dung bar do = mua o gia mo BIA, ban o gia dong THAT: **~14%/nam hien
-vat thuan**. Day khong phai nhin truoc, khong phai qua khop — du lieu that,
-engine dung, khong mot dong ma nao sai — va **khong mot cong nao trong muoi
-cong nhin thay no**. Da bit bang **cong 11**.
-
-Tren duong sua lo ra **hai tam chan chong len nhau**: `chay()` cat tin hieu ve
-[-1,1] (nhan len 1,55 lan ra ket qua GIONG HET, khong canh bao), va go no ra
-thi lo `phi_giu_mang` cat phoi nhiem ve <=1 — tuc **don bay la tien mien phi**.
+(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
 
 ## Viec tiep theo, theo thu tu
 
--1. **83/361 gia thuyet KHONG cham lai duoc** duoi the he 5: template cua chung
-   do NGHI sinh dong, khong nam trong `nhan/mau.py`. Chung dang mang phan quyet
-   cua the he cong 4 (cong 1 hong) va chua ai xet lai. Tim chung o
-   `config/co_che_dsl.json` roi cham lai — day la viec dau tien.
--0. **Cong 11 moi chi gac khung NOI NGAY.** `khe_gio_bat_thuong` tra
-   `do_duoc=False` tren D1 (chi mot gio) — tuc moi ung vien D1 hien khong duoc
-   kiem hien vat nao. US500M.H4 co khe 1,32 bps o gio 21 (dong cua My), SAT
-   nguong, khong bi gan co: kiem lai neu co ung vien theo phien tren chi so.
+-1. **DOC TRUOC: `reports/HINH_DANG_VS_NULL.md`** — luot chay dem 31/08
+   (368 gia thuyet x 100 chuoi null x luoi lan can 81 o) da xong hoac dang do.
+   Cau hoi no tra loi: **hinh dang cua ung vien that co khac hinh dang cua cung
+   luoi do tren chuoi NGAU NHIEN khong?** Doc theo thu tu:
+   - dong tong ket dau bao cao: co bao nhieu ung vien dat `p <= 0,05`. Neu 0/N
+     thi "cao nguyen" khong phai bang chung ve co che - no la hinh dang cua mot
+     be mat tron, va `do_on_dinh` khong duoc dung lam ly do tin mot ung vien.
+   - cot `null p95 alpha`: chuoi null cho alpha bao nhieu la binh thuong. Ung
+     vien nao co alpha tam THAP HON con so do la da bi null vuot mat.
+   - `AUDCAD.H4.rsi_dao_chieu` (ung vien PASS duy nhat, hinh dang CAO NGUYEN)
+     phai duoc nhin rieng: luot thu 8 null cho p = 0,111 = dung san do phan giai.
+   - Neu tien trinh chet giua chung: `b hinh-dang --het --null 100 --tran-o 81
+     --tiep` chay tiep tu cho dang do (JSON ghi lai sau MOI ung vien).
+   - Luot thu voi 8 null luu o `reports/HINH_DANG_VS_NULL_thu_8null.md`.
 
 0. **Bat he 24/7** (`b chay`). Chu du an muon xay chac truoc, va buoc nay tieu
    suat FDR vinh vien nen chi bat khi co nguoi ngoi may.

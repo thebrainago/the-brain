@@ -112,6 +112,30 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
+  "phoi_nhiem": "XAGUSD",
+  "so_kenh": 3,
+  "kenh_re": "FXCE",
+  "symbol_re": "BAC",
+  "phi_re_pct_nam": 3.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "SILVERMICRO",
+  "phi_dat_pct_nam": 11.576,
+  "chenh_diem_pct_nam": 8.576,
+  "tat_ca": {
+   "FXCE": 3.0,
+   "Exness": 5.936,
+   "XM": 11.576
+  },
+  "symbol_tung_san": {
+   "FXCE": "BAC",
+   "Exness": "BACM",
+   "XM": "SILVERMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
   "phoi_nhiem": "BCHUSD",
   "so_kenh": 2,
   "kenh_re": "Exness",
@@ -158,28 +182,26 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "XAGUSD",
-  "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "XAGUSDM",
-  "phi_re_pct_nam": 4.444,
-  "kenh_dat": "XM",
-  "symbol_dat": "SILVERMICRO",
-  "phi_dat_pct_nam": 11.576,
-  "chenh_diem_pct_nam": 7.132,
+  "phoi_nhiem": "EU50",
+  "so_kenh": 2,
+  "kenh_re": "XM",
+  "symbol_re": "EU50CASH",
+  "phi_re_pct_nam": 5.312,
+  "kenh_dat": "FXCE",
+  "symbol_dat": "EUSTX50",
+  "phi_dat_pct_nam": 11.666,
+  "chenh_diem_pct_nam": 6.354,
   "tat_ca": {
-   "Exness": 4.444,
-   "FXCE": 4.705,
-   "XM": 11.576
+   "XM": 5.312,
+   "FXCE": 11.666
   },
   "symbol_tung_san": {
-   "Exness": "XAGUSDM",
-   "FXCE": "XAGUSD",
-   "XM": "SILVERMICRO"
+   "XM": "EU50CASH",
+   "FXCE": "EUSTX50"
   },
-  "tin_cay": "CAO",
+  "tin_cay": "VUA",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "LTCUSD",
@@ -200,6 +222,30 @@
    "FXCE": "LTCUSD"
   },
   "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "HK50",
+  "so_kenh": 3,
+  "kenh_re": "Exness",
+  "symbol_re": "HK50M",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "HK50CASH",
+  "phi_dat_pct_nam": 5.667,
+  "chenh_diem_pct_nam": 5.667,
+  "tat_ca": {
+   "Exness": -0.0,
+   "FXCE": 2.909,
+   "XM": 5.667
+  },
+  "symbol_tung_san": {
+   "Exness": "HK50M",
+   "FXCE": "HK50",
+   "XM": "HK50CASH"
+  },
+  "tin_cay": "VUA",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
@@ -702,28 +748,6 @@
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "HK50",
-  "so_kenh": 2,
-  "kenh_re": "FXCE",
-  "symbol_re": "HK50",
-  "phi_re_pct_nam": 2.909,
-  "kenh_dat": "XM",
-  "symbol_dat": "HK50CASH",
-  "phi_dat_pct_nam": 5.667,
-  "chenh_diem_pct_nam": 2.758,
-  "tat_ca": {
-   "FXCE": 2.909,
-   "XM": 5.667
-  },
-  "symbol_tung_san": {
-   "FXCE": "HK50",
-   "XM": "HK50CASH"
-  },
-  "tin_cay": "VUA",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "SGDJPY",

@@ -1,33 +1,33 @@
 {
  "van_hanh": {
-  "luc": "2026-08-30 17:25:23",
+  "luc": "2026-08-31 19:16:13",
   "tru": {
    "SEEKER": {
-    "lan_cuoi": "2026-08-23 11:04:04",
-    "tre_giay": 627679,
+    "lan_cuoi": "2026-08-31 19:09:31",
+    "tre_giay": 402,
     "trang_thai": "nghi",
-    "dung_im": true
+    "dung_im": false
    },
    "QUANTLAB": {
-    "lan_cuoi": "2026-08-22 19:57:07",
-    "tre_giay": 682096,
-    "trang_thai": "nghi",
-    "dung_im": true
+    "lan_cuoi": "2026-08-31 19:06:38",
+    "tre_giay": 575,
+    "trang_thai": "chay",
+    "dung_im": false
    },
    "NGHI": {
-    "lan_cuoi": "2026-08-30 15:25:21",
-    "tre_giay": 7202,
+    "lan_cuoi": "2026-08-31 19:09:35",
+    "tre_giay": 398,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "BANKER": {
-    "lan_cuoi": "2026-08-30 15:25:17",
-    "tre_giay": 7206,
+    "lan_cuoi": "2026-08-31 19:06:52",
+    "tre_giay": 561,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "EVO": {
-    "lan_cuoi": "2026-08-30 17:25:23",
+    "lan_cuoi": "2026-08-31 19:16:13",
     "tre_giay": 0,
     "trang_thai": "chay",
     "dung_im": false
@@ -35,47 +35,57 @@
   },
   "tai_nguyen": {
    "tab": {
-    "cong": 9224,
-    "so_tab": 7
+    "cong": null,
+    "so_tab": null
    },
    "chrome": {
-    "gb": 3.49,
-    "so_tien_trinh": 17
+    "gb": 0.0,
+    "so_tien_trinh": 0
    },
-   "ram_dung_pct": 29.8,
-   "ram_trong_gb": 24.0,
-   "cpu_pct": 40.5
+   "ram_dung_pct": 17.8,
+   "ram_trong_gb": 28.2,
+   "cpu_pct": 5.9
   },
   "viec": {
    "QUANTLAB": {
-    "CHO": 104,
-    "XONG": 1351
+    "XONG": 1641
    }
   },
   "viec_treo": 0,
   "viec_loi": 0,
-  "viec_cho": 104,
-  "seeker_ty_le_vong_rong": 0.739,
-  "gian_doan_7ngay_gio": 0,
-  "gian_doan_lan": 0,
-  "ty_le_song_7ngay": 1.0,
-  "dia_trong_gb": 14.0,
+  "viec_cho": 0,
+  "seeker_ty_le_vong_rong": 0.775,
+  "gian_doan_7ngay_gio": 354.8,
+  "gian_doan_lan": 3,
+  "ty_le_song_7ngay": 0.0,
+  "watchdog": {
+   "so_lan": 4,
+   "gio": 24,
+   "theo_rc": {
+    "1": 2,
+    "4": 1,
+    "15": 1
+   },
+   "lan_cuoi": "2026-08-31 19:16:07",
+   "moi_gio": 0.17
+  },
+  "dia_trong_gb": 14.7,
   "mt5_tick_test": "KHOA (dia < 15GB)",
   "so_toan_ven": {
    "lanh": true,
-   "mo_ta": "1723 dong lien mach"
+   "mo_ta": "1762 dong lien mach"
   },
   "nguon": {
    "arxiv": {
-    "lan": 6,
+    "lan": 9,
     "loi": 0,
-    "thu_hoach": 133,
+    "thu_hoach": 159,
     "trang_thai": "BAT"
    },
    "github": {
-    "lan": 4,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 179,
+    "thu_hoach": 209,
     "trang_thai": "BAT"
    },
    "mql5_signals": {
@@ -85,57 +95,57 @@
     "trang_thai": "BAT"
    },
    "stackexchange": {
-    "lan": 4,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 69,
+    "thu_hoach": 89,
     "trang_thai": "BAT"
    },
    "hackernews": {
-    "lan": 4,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 44,
+    "thu_hoach": 46,
     "trang_thai": "BAT"
    },
    "semantic": {
-    "lan": 2,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "openalex": {
-    "lan": 4,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 281,
+    "thu_hoach": 304,
     "trang_thai": "BAT"
    },
    "lean_algo": {
-    "lan": 2,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 40,
     "trang_thai": "BAT"
    },
    "mql5_code": {
-    "lan": 2,
+    "lan": 4,
     "loi": 0,
-    "thu_hoach": 30,
+    "thu_hoach": 35,
     "trang_thai": "BAT"
    },
    "blog": {
-    "lan": 2,
+    "lan": 4,
     "loi": 0,
-    "thu_hoach": 29,
+    "thu_hoach": 32,
     "trang_thai": "BAT"
    },
    "quantconnect": {
-    "lan": 2,
+    "lan": 4,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "crossref": {
-    "lan": 2,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 41,
+    "thu_hoach": 81,
     "trang_thai": "BAT"
    },
    "myfxbook": {
@@ -175,9 +185,9 @@
     "trang_thai": "BAT"
    },
    "reddit_td": {
-    "lan": 2,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 169,
+    "thu_hoach": 224,
     "trang_thai": "BAT"
    },
    "x": {
@@ -205,9 +215,9 @@
     "trang_thai": "BAT"
    },
    "telegram": {
-    "lan": 2,
+    "lan": 5,
     "loi": 0,
-    "thu_hoach": 13,
+    "thu_hoach": 23,
     "trang_thai": "BAT"
    },
    "mql5_ma_nguon": {
@@ -217,189 +227,189 @@
     "trang_thai": "TAT"
    },
    "rss_allocatesmartly": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_alphaarchitect": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 5,
+    "thu_hoach": 6,
     "trang_thai": "BAT"
    },
    "rss_fh_financial_hacker": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_followingthetrend": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 4,
     "trang_thai": "BAT"
    },
    "rss_mql5_articles": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 4,
+    "thu_hoach": 8,
     "trang_thai": "BAT"
    },
    "rss_mrzepczynski": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 15,
+    "thu_hoach": 23,
     "trang_thai": "BAT"
    },
    "rss_priceactionlab": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 15,
+    "thu_hoach": 18,
     "trang_thai": "BAT"
    },
    "rss_qoppac": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 15,
     "trang_thai": "BAT"
    },
    "rss_quantinsti": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 15,
+    "thu_hoach": 16,
     "trang_thai": "BAT"
    },
    "rss_quantpedia_blog": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 8,
+    "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_reddit_algotrading": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 13,
+    "thu_hoach": 23,
     "trang_thai": "BAT"
    },
    "rss_reddit_quant": {
     "lan": 1,
-    "loi": 1,
+    "loi": 3,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "rss_robotwealth": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 12,
     "trang_thai": "BAT"
    },
    "rss_thinknewfound": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_tr8dr": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_tradingmarkets": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 9,
     "trang_thai": "BAT"
    },
    "rss_alvarezquant": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 4,
     "trang_thai": "BAT"
    },
    "rss_buildalpha": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 4,
+    "thu_hoach": 5,
     "trang_thai": "BAT"
    },
    "rss_gestaltu": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 4,
     "trang_thai": "BAT"
    },
    "rss_hangukquant": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 15,
+    "thu_hoach": 16,
     "trang_thai": "BAT"
    },
    "rss_headlandstech": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 5,
     "trang_thai": "BAT"
    },
    "rss_newtraderu": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 10,
+    "thu_hoach": 20,
     "trang_thai": "BAT"
    },
    "rss_quantdare": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 12,
     "trang_thai": "BAT"
    },
    "rss_quantitativo": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 15,
     "trang_thai": "BAT"
    },
    "rss_quantumtrading": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_reddit_algotrading_nam": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 11,
     "trang_thai": "BAT"
    },
    "rss_tradingview_blog": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 14,
+    "thu_hoach": 37,
     "trang_thai": "BAT"
    },
    "rss_aligrithm": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 12,
+    "thu_hoach": 17,
     "trang_thai": "BAT"
    },
    "rss_betterbuyandhold": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
     "thu_hoach": 3,
     "trang_thai": "BAT"
    },
    "rss_beyondpassive": {
-    "lan": 1,
+    "lan": 3,
     "loi": 0,
-    "thu_hoach": 12,
+    "thu_hoach": 13,
     "trang_thai": "BAT"
    },
    "rss_capitalspectator": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 7,
+    "thu_hoach": 12,
     "trang_thai": "BAT"
    },
    "tradingview_scripts": {
@@ -413,32 +423,112 @@
     "loi": 0,
     "thu_hoach": 3,
     "trang_thai": "BAT"
+   },
+   "paperswithcode": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 30,
+    "trang_thai": "BAT"
+   },
+   "quantpedia": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 21,
+    "trang_thai": "BAT"
+   },
+   "quantconnect_forum": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 30,
+    "trang_thai": "BAT"
+   },
+   "elitetrader": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 30,
+    "trang_thai": "BAT"
+   },
+   "qiita_nhat": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 59,
+    "trang_thai": "BAT"
+   },
+   "habr_nga": {
+    "lan": 2,
+    "loi": 0,
+    "thu_hoach": 84,
+    "trang_thai": "BAT"
+   },
+   "smartlab_nga": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 11,
+    "trang_thai": "BAT"
+   },
+   "cnblogs_trung": {
+    "lan": 2,
+    "loi": 0,
+    "thu_hoach": 55,
+    "trang_thai": "BAT"
+   },
+   "velog_han": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 47,
+    "trang_thai": "BAT"
+   },
+   "mql5_bai_viet": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 40,
+    "trang_thai": "BAT"
+   },
+   "mql5_ma_expert": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 16,
+    "trang_thai": "BAT"
+   },
+   "rss_concretumgroup": {
+    "lan": 2,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_crackingmarkets": {
+    "lan": 2,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
    }
   },
-  "tai_lieu": 1750,
+  "tai_lieu": 2479,
   "gia_thuyet": {
-   "FAIL": 353,
-   "QUARANTINED_V2": 8
+   "FAIL": 360,
+   "PASS": 1,
+   "QUARANTINED_V2": 7
   }
  },
  "day_chuyen": {
-  "so_ket_qua_tho": 1257,
-  "so_ket_qua_du_phong": 896,
-  "so_ket_qua": 353,
-  "so_gt_da_ket": 353,
+  "so_ket_qua_tho": 1265,
+  "so_ket_qua_du_phong": 897,
+  "so_ket_qua": 361,
+  "so_gt_da_ket": 361,
   "theo_verdict": {
-   "FAIL": 353
+   "FAIL": 360,
+   "PASS": 1
   },
-  "ty_le_qua_cong": 0.0,
+  "ty_le_qua_cong": 0.0028,
   "null_ty_le_lot": 0.0,
-  "null_do_luc": "2026-08-21 22:02:58",
+  "null_do_luc": "2026-08-31 09:18:33",
   "null_chi_tiet": {
    "so_ca": 10,
    "tai_san": "EURCAD",
    "khung": "H4"
   },
   "cong_co_luc": true,
-  "cong_co_luc_luc": "2026-08-30 11:01:40",
+  "cong_co_luc_luc": "2026-08-31 09:18:34",
   "cong_co_luc_chi_tiet": [
    {
     "p": 0.5,
@@ -472,57 +562,54 @@
     "truot": []
    }
   ],
-  "ung_vien_n": 105,
-  "ung_vien_p_trung_vi": 0.38,
-  "ung_vien_duoi_005": 0.1714,
-  "fdr_da_bac_bo": 0,
-  "fdr_tong": 271,
-  "fdr_tong_tho": 1769,
+  "ung_vien_n": 106,
+  "ung_vien_p_trung_vi": 0.375,
+  "ung_vien_duoi_005": 0.1792,
+  "fdr_da_bac_bo": 1,
+  "fdr_tong": 272,
+  "fdr_tong_tho": 1794,
   "khop_ba_tang": false
  },
  "van_de": [
   {
-   "ma": "tru_dung_im_SEEKER",
-   "muc": "NANG",
-   "mo_ta": "Tru SEEKER dung im 10461 phut (han 180 phut)",
-   "bc": {
-    "lan_cuoi": "2026-08-23 11:04:04",
-    "tre_giay": 627679,
-    "trang_thai": "nghi",
-    "dung_im": true
-   }
-  },
-  {
-   "ma": "tru_dung_im_QUANTLAB",
-   "muc": "NANG",
-   "mo_ta": "Tru QUANTLAB dung im 11368 phut (han 120 phut)",
-   "bc": {
-    "lan_cuoi": "2026-08-22 19:57:07",
-    "tre_giay": 682096,
-    "trang_thai": "nghi",
-    "dung_im": true
-   }
-  },
-  {
    "ma": "dia_thap",
    "muc": "NANG",
-   "mo_ta": "Dia con 14.0 GB (< 15) -> MT5 tick-test bi KHOA, tuc dang tu cam minh lam buoc quyet dinh cua chinh du an",
+   "mo_ta": "Dia con 14.7 GB (< 15) -> MT5 tick-test bi KHOA, tuc dang tu cam minh lam buoc quyet dinh cua chinh du an",
    "bc": {
     "goi_y": "lab/.browser_thebrain2 (848MB, INVENTORY ghi la mo nham), lab/.browser_darwinex_tmp (480MB tmp)"
    }
   },
   {
+   "ma": "supervisor_restart_lien_tuc",
+   "muc": "NANG",
+   "mo_ta": "Supervisor chet va khoi dong lai 4 lan trong 24 gio (0.17 lan/gio, tran 3). Ma thoat: {\"1\": 2, \"4\": 1, \"15\": 1}. Mot vong lap chet-restart giu ty le song thap ma khong tru nao bao 'dung im' - do la cach 24/7 dut quang ma khong ai thay.",
+   "bc": {
+    "so_lan": 4,
+    "gio": 24,
+    "theo_rc": {
+     "1": 2,
+     "4": 1,
+     "15": 1
+    },
+    "lan_cuoi": "2026-08-31 19:16:07",
+    "moi_gio": 0.17
+   }
+  },
+  {
    "ma": "nguon_khong_thu_hoach",
    "muc": "VUA",
-   "mo_ta": "Nguon fxblue da goi >=3 lan ma chua thu duoc tai lieu nao",
+   "mo_ta": "Nguon semantic, quantconnect, fxblue da goi >=3 lan ma chua thu duoc tai lieu nao",
    "bc": {
     "nguon": [
+     "semantic",
+     "quantconnect",
      "fxblue"
     ]
    }
   }
  ],
  "da_sua": [
-  "dong_van_de_da_het: tru_dung_im_BANKER"
- ]
+  "dong_van_de_da_het: tru_dung_im_QUANTLAB, tru_dung_im_SEEKER"
+ ],
+ "san_cong_cu": {}
 }

@@ -1,0 +1,167 @@
+{
+ "luc": "2026-08-31 19:24:54",
+ "tham_so_chay": {
+  "che": "het",
+  "so_null": 100,
+  "tran_o": 81,
+  "luong": 6
+ },
+ "ket_qua": [
+  {
+   "ma": "EURCAD.D1.ibs_bat_day.nguong0.2_giu2",
+   "mau": "ibs_bat_day",
+   "tai_san": "EURCAD",
+   "khung": "D1",
+   "tam": {
+    "giu": 2,
+    "nguong": 0.2
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 20,
+   "so_null_chay_duoc": 100,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 20,
+    "alpha_tam": -0.59,
+    "ty_le_duong": 5.0,
+    "trung_vi": -0.571,
+    "o_tot_nhat": 0.06,
+    "boi_dinh": -0.105,
+    "do_doc_mot_buoc_pct": 22.542,
+    "hinh_dang": "CAI GAI - da so lan can AM"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.2178,
+     "so_null": 100,
+     "null_trung_vi": -1.72,
+     "null_p95": 0.934
+    },
+    "ty_le_duong": {
+     "p": 0.6535,
+     "so_null": 100,
+     "null_trung_vi": 5.0,
+     "null_p95": 50.25
+    },
+    "boi_dinh": {
+     "p": 0.4851,
+     "so_null": 100,
+     "null_trung_vi": -0.085,
+     "null_p95": 0.87
+    },
+    "o_tot_nhat": {
+     "p": 0.6337,
+     "so_null": 100,
+     "null_trung_vi": 0.183,
+     "null_p95": 1.898
+    }
+   },
+   "giay": 96.8
+  },
+  {
+   "ma": "EURCAD.H4.bollinger_ve.n20_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 20
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 100,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.534,
+    "ty_le_duong": 76.0,
+    "trung_vi": 0.801,
+    "o_tot_nhat": 2.534,
+    "boi_dinh": 3.164,
+    "do_doc_mot_buoc_pct": 52.841,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.2 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.0594,
+     "so_null": 100,
+     "null_trung_vi": -1.486,
+     "null_p95": 2.411
+    },
+    "ty_le_duong": {
+     "p": 0.0792,
+     "so_null": 100,
+     "null_trung_vi": 16.0,
+     "null_p95": 80.0
+    },
+    "boi_dinh": {
+     "p": 0.8713,
+     "so_null": 100,
+     "null_trung_vi": -0.237,
+     "null_p95": 10.714
+    },
+    "o_tot_nhat": {
+     "p": 0.2574,
+     "so_null": 100,
+     "null_trung_vi": 1.543,
+     "null_p95": 4.944
+    }
+   },
+   "giay": 106.9
+  },
+  {
+   "ma": "EURCAD.H4.bollinger_ve.n50_k2.0",
+   "mau": "bollinger_ve",
+   "tai_san": "EURCAD",
+   "khung": "H4",
+   "tam": {
+    "k": 2.0,
+    "n": 50
+   },
+   "do_duoc": true,
+   "che_do": "giao_dich",
+   "so_o": 25,
+   "so_null_chay_duoc": 100,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 25,
+    "alpha_tam": 2.308,
+    "ty_le_duong": 96.0,
+    "trung_vi": 1.817,
+    "o_tot_nhat": 4.268,
+    "boi_dinh": 2.349,
+    "do_doc_mot_buoc_pct": 13.215,
+    "hinh_dang": "SUON DOC - 96% duong, dinh gap 2.3 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.1188,
+     "so_null": 100,
+     "null_trung_vi": -0.642,
+     "null_p95": 3.259
+    },
+    "ty_le_duong": {
+     "p": 0.1287,
+     "so_null": 100,
+     "null_trung_vi": 30.0,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.7525,
+     "so_null": 100,
+     "null_trung_vi": 0.203,
+     "null_p95": 6.921
+    },
+    "o_tot_nhat": {
+     "p": 0.1188,
+     "so_null": 100,
+     "null_trung_vi": 2.212,
+     "null_p95": 5.168
+    }
+   },
+   "giay": 116.6
+  }
+ ]
+}

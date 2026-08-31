@@ -151,8 +151,11 @@
   "url": "https://github.com/quantskills/skill-backtest-overfit",
   "nguon": "github",
   "thay_luc": "2026-08-30 12:25:13",
-  "trang_thai": "MOI",
-  "nguon_phat_hien": "nhat_doc_duong"
+  "trang_thai": "CHO_DOC",
+  "nguon_phat_hien": "nhat_doc_duong",
+  "doi_chieu_voi": "nhan/do_luc.py",
+  "vi_sao_doc": "Minimum Track Record Length - do 'bao nhieu quan sat moi du ket luan', dung bai toan MDE cua ta",
+  "xep_hang_luc": "2026-08-31 14:43:06"
  },
  "doc:engine_backtest:https://financial-hacker.com/the-autotune-filter/": {
   "nhu_cau": "engine_backtest",
@@ -367,8 +370,11 @@
   "url": "https://github.com/OutOfSampleLab/oos-lab",
   "nguon": "github",
   "thay_luc": "2026-08-30 15:14:45",
-  "trang_thai": "MOI",
-  "nguon_phat_hien": "nhat_doc_duong"
+  "trang_thai": "CHO_DOC",
+  "nguon_phat_hien": "nhat_doc_duong",
+  "doi_chieu_voi": "nhan/cong.py, nhan/do_luc.py",
+  "vi_sao_doc": "haircut Sharpe - doi chieu voi nguong FDR LORD ta tu viet",
+  "xep_hang_luc": "2026-08-31 14:43:06"
  },
  "doc:kiem_dinh_thong_ke:https://github.com/jonass17/phantomguard": {
   "nhu_cau": "kiem_dinh_thong_ke",
@@ -439,8 +445,11 @@
   "url": "https://github.com/0scarito/deflated-alpha",
   "nguon": "github",
   "thay_luc": "2026-08-30 15:16:12",
-  "trang_thai": "MOI",
-  "nguon_phat_hien": "nhat_doc_duong"
+  "trang_thai": "CHO_DOC",
+  "nguon_phat_hien": "nhat_doc_duong",
+  "doi_chieu_voi": "nhan/cong.py",
+  "vi_sao_doc": "deflated Sharpe - chieu LUC cua hieu chuan hai chieu",
+  "xep_hang_luc": "2026-08-31 14:43:06"
  },
  "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2607.19453v1": {
   "nhu_cau": "kiem_dinh_thong_ke",
@@ -487,8 +496,11 @@
   "url": "https://github.com/quantopian/zipline",
   "nguon": "github",
   "thay_luc": "2026-08-30 16:39:52",
-  "trang_thai": "MOI",
-  "nguon_phat_hien": "nhat_doc_duong"
+  "trang_thai": "CHO_DOC",
+  "nguon_phat_hien": "nhat_doc_duong",
+  "doi_chieu_voi": "nhan/chi_phi.py, nhan/mo_phong.py",
+  "vi_sao_doc": "mo hinh truot gia + phi giao dich cua mot engine 20.041 sao; mo hinh chi phi cua ta tu viet va la thu quyet dinh ca du an",
+  "xep_hang_luc": "2026-08-31 14:43:06"
  },
  "doc:phuong_phap_chong_qua_khop:https://github.com/quantskills/skill-backtest-overfit": {
   "nhu_cau": "phuong_phap_chong_qua_khop",
@@ -1435,5 +1447,29 @@
    "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
    "lan day cuoi 9999 ngay truoc - co the da bo"
   ]
+ },
+ "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2608.28399v1": {
+  "nhu_cau": "kiem_dinh_thong_ke",
+  "cum_khop": "probability of\nbacktest overfitting",
+  "vi_tri": 35796,
+  "trich_dan": "nd David\nWingate. Out of one, many: Using language models to simulate human samples.Political Analysis,\n31(3):337–351, 2023.\nShuai Bai, Yuxuan Cai, Ruizhe Chen, Keqin Chen, Xionghui Chen, Zesen Cheng, Lianghao\nDeng, Wei Ding, Chang Gao, Chunjiang Ge, et al. Qwen3-vl technical report.arXiv preprint\narXiv:2511.21631, 2025.\nDavid Bailey, Jonathan Borwein, Marco",
+  "tieu_de": "RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents",
+  "url": "http://arxiv.org/abs/2608.28399v1",
+  "nguon": "arxiv",
+  "thay_luc": "2026-08-31 19:07:19",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
+ },
+ "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2608.27734v1": {
+  "nhu_cau": "kiem_dinh_thong_ke",
+  "cum_khop": "deflated Sharpe",
+  "vi_tri": 255,
+  "trich_dan": "What survives honest evaluation? Leakage-safe, search-aware\nassessment of LLM-driven trading strategy discovery\nEray Gençaya\naIndependent Researcher, Stuttgart, Germany\nARTICLE INFO\nKeywords:\nlarge language models\nalgorithmic trading\nbacktest overfitting\ndeflated Sharpe ratio\ndata leakage\nagent evaluation\nABSTRACT\nLarge language models (LLMs) are increasingl",
+  "tieu_de": "What survives honest evaluation? Leakage-safe, search-aware assessment of LLM-driven trading strategy discovery",
+  "url": "http://arxiv.org/abs/2608.27734v1",
+  "nguon": "arxiv",
+  "thay_luc": "2026-08-31 19:07:22",
+  "trang_thai": "MOI",
+  "nguon_phat_hien": "nhat_doc_duong"
  }
 }

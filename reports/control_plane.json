@@ -1,0 +1,94 @@
+{
+ "schema": 1,
+ "instance_id": "8f35f893a0a341c3940a2932c88decc3",
+ "pid": 17360,
+ "process_created_epoch": 1788178572.2134209,
+ "started_epoch": 1788178572.57797,
+ "updated_epoch": 1788179125.9452374,
+ "updated_at": "2026-08-31 19:25:25",
+ "status": "running",
+ "live": true,
+ "ready": true,
+ "health": "starting",
+ "cpu": {
+  "current_percent": 22.9,
+  "hard_limit_percent": 85.0,
+  "launch_limit_percent": 80.0,
+  "guard": "windows_job",
+  "guard_error": ""
+ },
+ "workers": {
+  "max": 3,
+  "running": {
+   "QUANTLAB": {
+    "lane": "compute",
+    "started_epoch": 1788178572.686246,
+    "elapsed_seconds": 553.3
+   }
+  },
+  "pending": []
+ },
+ "backpressure": [],
+ "last_results": {
+  "EVO": {
+   "status": "ok",
+   "rc": 0,
+   "giay": 5.7,
+   "fatal": [],
+   "degraded": [],
+   "skip_reason": "",
+   "nhip": {
+    "luc": "2026-08-31 19:16:18",
+    "trang_thai": "nghi"
+   },
+   "resource_guard": "job",
+   "stdout_tail": "{\n \"van_de_moi\": [\n  \"dia_thap\",\n  \"supervisor_restart_lien_tuc\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [\n  \"dong_van_de_da_het: tru_dung_im_QUANTLAB, tru_dung_im_SEEKER\"\n ],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 22,\n \"tru_dung_im\": [],\n \"dia_gb\": 14.7,\n \"tai_lieu\": 2479,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
+   "stderr_tail": ""
+  },
+  "BANKER": {
+   "status": "ok",
+   "rc": 0,
+   "giay": 0.9,
+   "fatal": [],
+   "degraded": [],
+   "skip_reason": "",
+   "nhip": {
+    "luc": "2026-08-31 19:16:19",
+    "trang_thai": "nghi"
+   },
+   "resource_guard": "job",
+   "stdout_tail": "{\n \"seri_ok\": 14,\n \"seri_loi\": 0,\n \"che_do\": {\n  \"duong_cong\": \"DOC\",\n  \"xu_huong_lai_suat\": \"TANG\",\n  \"bien_dong\": \"BINH THUONG\",\n  \"tin_dung\": \"DE\",\n  \"dola\": \"ON DINH\"\n },\n \"ham_y\": [\n  \"Loi suat 10y tang 0.267 diem trong 90 ngay -> lop nghieng size theo thay doi loi suat dang co tin hieu; day la lop DUY NHAT tung vuot mua-giu qua 64 nam trong du an.\"\n ]\n}",
+   "stderr_tail": ""
+  },
+  "SEEKER": {
+   "status": "ok",
+   "rc": 0,
+   "giay": 142.4,
+   "fatal": [],
+   "degraded": [],
+   "skip_reason": "",
+   "nhip": {
+    "luc": "2026-08-31 19:18:34",
+    "trang_thai": "nghi"
+   },
+   "resource_guard": "job",
+   "stdout_tail": "ng_dat\": [],\n   \"khong_co_feed\": 4\n  },\n  \"suat\": {\n   \"hoc_thuat\": {\n    \"bai\": 1312,\n    \"ky_tu\": 29082041,\n    \"ung_vien\": 263,\n    \"co_che\": 21,\n    \"nguon\": 48,\n    \"suat\": 19.82,\n    \"suat_tho\": 20.05\n   },\n   \"xa_hoi\": {\n    \"bai\": 560,\n    \"ky_tu\": 4368296,\n    \"ung_vien\": 50,\n    \"co_che\": 4,\n    \"nguon\": 10,\n    \"suat\": 8.79,\n    \"suat_tho\": 8.93\n   }\n  },\n  \"chia_giay\": {\n   \"hoc_thuat\": 187.1,\n   \"xa_hoi\": 82.9\n  }\n },\n \"con_doc\": 2,\n \"con_boc\": 0,\n \"cho_giay\": 120,\n \"chi_tiet\": []\n}",
+   "stderr_tail": ""
+  },
+  "NGHI": {
+   "status": "skipped",
+   "rc": 0,
+   "giay": 3.3,
+   "fatal": [],
+   "degraded": [],
+   "skip_reason": "da khoa (duong=tat trong config/tri_tue.json)",
+   "nhip": {
+    "luc": "2026-08-31 19:18:38",
+    "trang_thai": "nghi"
+   },
+   "resource_guard": "job",
+   "stdout_tail": "{\n \"doi_chieu\": {\n  \"tong\": 18,\n  \"bi_tu_choi\": 0,\n  \"da_kiem\": 15,\n  \"dang_cho\": 3\n },\n \"tai_lieu_doc\": 8,\n \"duong\": null,\n \"bo_qua\": \"da khoa (duong=tat trong config/tri_tue.json)\"\n}",
+   "stderr_tail": ""
+  }
+ }
+}

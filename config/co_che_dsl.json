@@ -1323,5 +1323,112 @@
    }
   ],
   "_ty_le_kich_hoat": 0.6949
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"3- RSI – Prevents buying above 70 and selling below 30 4- Bollinger Bands – Blocks entries during low volatility (sideways markets) 5- Squeeze Momentum – This strategy uses an inverted Squeeze Momentum logic: \"val < 0 → \" [nguon: https://www.tradingview.com/script/mikVFwAu-Alpha-S-R-Channel-Strategy/]",
+  "giu": 1,
+  "ho": "xu_huong",
+  "nguon": "https://www.tradingview.com/script/mikVFwAu-Alpha-S-R-Channel-Strategy/",
+  "ra": [],
+  "ten": "mua_rsi14_tren_70",
+  "van_tay": "07980e4f615e9eb9",
+  "vao": [
+   {
+    "phai": {
+     "hang": 70.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0901
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"For take profit in long positions, close at the upper band of the current Ballinger bands\" [nguon: https://www.youtube.com/watch?v=5I2vtNovJcQ]",
+  "giu": 1,
+  "ho": "xu_huong",
+  "nguon": "https://www.youtube.com/watch?v=5I2vtNovJcQ",
+  "ra": [],
+  "ten": "mua_zscore20_close_tren_2",
+  "van_tay": "b2f3ec6673c0d254",
+  "vao": [
+   {
+    "phai": {
+     "hang": 2.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0405
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"# RSIミーンリバージョン（暗号通貨） vibe-trading run -p \"Test RSI(14) mean-reversion on BTC-USDT: buy below 30, sell above 70, last 6 months\"\" [nguon: https://qiita.com/Simon_Zhang/items/67db39de5049e01ddb6c]",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "nguon": "https://qiita.com/Simon_Zhang/items/67db39de5049e01ddb6c",
+  "ra": [],
+  "ten": "mua_rsi14_duoi_30",
+  "van_tay": "d8be0bb4541b616d",
+  "vao": [
+   {
+    "phai": {
+     "hang": 30.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0171
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"買い(buy)= RSI<25 \\\\ \\\\ 売り(sell) =RSI>75\" [nguon: https://qiita.com/investor-gon/items/0219e4e7a84bdb919131]",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "nguon": "https://qiita.com/investor-gon/items/0219e4e7a84bdb919131",
+  "ra": [
+   {
+    "phai": {
+     "hang": 75.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    }
+   }
+  ],
+  "ten": "mua_rsi14_duoi_25",
+  "van_tay": "51900c0a4423b6f3",
+  "vao": [
+   {
+    "phai": {
+     "hang": 25.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.4308
  }
 ]
