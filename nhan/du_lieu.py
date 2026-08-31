@@ -493,20 +493,32 @@ KHE_GIO_BOI = 10.0
 
 def khe_gio_bat_thuong(df, san_bps: float = KHE_GIO_SAN_BPS,
                        boi: float = KHE_GIO_BOI) -> dict:
-    """Gio nao co khe gia bat thuong giua bar truoc va bar nay?
+    """O thoi gian nao co khe gia bat thuong giua bar truoc va bar nay?
 
-    Tra `{"gio": [...], "khe_bps": {gio: bps}, "do_duoc": bool}`.
+    Tra `{"gio": [...], "khe_bps": {o: bps}, "theo": "gio"|"thu", "do_duoc": bool}`.
 
     `do_duoc=False` khi khong du bar de ket luan - va luc do `gio` la danh
     sach RONG vi "chua do duoc", khong phai vi "sach". Nguoi goi phai phan
     biet hai cau do.
+
+    KHUNG NGAY (sua 31/08/2026). Ban dau ham chi biet nhom theo GIO, nen tren
+    D1 no thay dung mot gio va tra `do_duoc=False`: **moi ung vien D1 di qua
+    cong 11 ma khong bi kiem hien vat nao**, va cong chi ghi mot dong "chua do
+    duoc" ma khong ai doc. Tren khung ngay o thoi gian tuong duong la THU
+    TRONG TUAN: khe cuoi tuan (thu 2) va khe nghi le nam dung o do, va no la
+    cung mot co che - bao gia luc thi truong dong roi mo lai. Vi vay khi chuoi
+    chi co mot gio thi tu chuyen sang nhom theo thu, va `theo` noi ro dang do
+    theo cai nao. Khoa `gio` giu nguyen ten de duong goi cu khong vo.
     """
     import numpy as _np
-    ra = {"gio": [], "khe_bps": {}, "do_duoc": False}
+    ra = {"gio": [], "khe_bps": {}, "theo": "gio", "do_duoc": False}
     try:
         o = _np.asarray(df["open"], dtype=float)
         c = _np.asarray(df["close"], dtype=float)
         gio = _np.asarray(df.index.hour)
+        if len(set(gio.tolist())) < 2:
+            gio = _np.asarray(df.index.dayofweek)
+            ra["theo"] = "thu"
     except Exception:
         return ra
     if len(o) < 200:

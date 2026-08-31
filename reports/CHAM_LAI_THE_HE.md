@@ -2,8 +2,8 @@
 
 - tong: **361** · chay duoc **361** · khong chay duoc **0**
 - qua cong 1-2-3: **108** · qua them cong 4: **4**
-- doi phan quyet so voi so cai: **8**
-- thoi gian: 15.4s
+- doi phan quyet so voi so cai: **7**
+- thoi gian: 13.6s
 
 ## Verdict
 
@@ -33,7 +33,7 @@
 | `EURGBP.H4.mua_qua_dem.gio_vao20_gio_ra14` | QUARANTINED_V2 | FAIL | 14.52 | 11.13 | 1.52 |
 | `EURGBP.H4.mat_can_bang_lenh_dong_cua.mac_dinh` | QUARANTINED_V2 | FAIL | 3.54 | 0.67 | 1.53 |
 | `EURGBP.H4.mat_can_bang_lenh_dong_cua.` | QUARANTINED_V2 | FAIL | 3.54 | 0.67 | 1.53 |
-| `AUDCAD.H4.rsi_dao_chieu.n14_vao30_ra_55` | QUARANTINED_V2 | PASS | 3.31 | 3.94 | 1.16 |
+| `AUDCAD.H4.rsi_dao_chieu.n14_vao30_ra_55` | PASS | PASS | 3.31 | 3.94 | 1.16 |
 | `AUDCAD.D1.bollinger_ve.n50_k2.0` | FAIL | FAIL | 2.49 | 3.56 | 0.60 |
 | `AUDCAD.H4.ou_quay_ve.n50_z2.5` | QUARANTINED_V2 | FAIL | 2.42 | 4.33 | 0.95 |
 | `AUDCAD.H1.rsi_dao_chieu.n14_vao25_ra_60` | FAIL | FAIL | 2.28 | 2.65 | 0.90 |

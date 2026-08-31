@@ -642,24 +642,27 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     dk["11_khong_an_khe_dao_ngay"] = True
     try:
         _kh = DL.khe_gio_bat_thuong(df)
+        # Truc thoi gian phai lay dung cai ma phep do da dung: tren khung ngay
+        # `khe_gio_bat_thuong` nhom theo THU, khong theo gio (chi co mot gio).
+        _ten_o = "gio" if _kh.get("theo", "gio") == "gio" else "thu"
         if _kh["do_duoc"] and _kh["gio"]:
             _v = np.abs(np.nan_to_num(np.asarray(kq_he.vi_the, dtype=float)))
-            _g = np.asarray(df.index.hour)
+            _g = np.asarray(df.index.hour if _ten_o == "gio" else df.index.dayofweek)
             _m = np.isin(_g, _kh["gio"])
             if _m.any() and (~_m).any():
                 _trong, _ngoai = float(_v[_m].mean()), float(_v[~_m].mean())
                 if _trong > 0 and _trong > 1.25 * max(_ngoai, 1e-9):
                     dk["11_khong_an_khe_dao_ngay"] = False
                     ly_do.append(
-                        f"phoi nhiem don vao gio co khe dao ngay {_kh['gio']} "
-                        f"({_trong:.2f} so voi {_ngoai:.2f} o gio khac; khe "
+                        f"phoi nhiem don vao {_ten_o} co khe dao ngay {_kh['gio']} "
+                        f"({_trong:.2f} so voi {_ngoai:.2f} o {_ten_o} khac; khe "
                         f"{ {g: round(_kh['khe_bps'][g], 2) for g in _kh['gio']} } bps) "
                         "- dang song bang bao gia luc dao ngay, khong bang co che")
                 else:
-                    ly_do.append(f"co gio khe dao ngay {_kh['gio']} nhung phoi "
+                    ly_do.append(f"co {_ten_o} khe dao ngay {_kh['gio']} nhung phoi "
                                  f"nhiem khong don vao do ({_trong:.2f} vs {_ngoai:.2f})")
         elif not _kh["do_duoc"]:
-            ly_do.append("chua do duoc khe theo gio (khung ngay hoac qua it bar) "
+            ly_do.append("chua do duoc khe theo thoi gian (qua it bar hoac chi mot o) "
                          "- KHONG ket luan la sach")
     except Exception as _e:
         ly_do.append(f"khong do duoc khe dao ngay: {type(_e).__name__}")
