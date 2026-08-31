@@ -45,7 +45,35 @@ f37eadf cham lai 361 gia thuyet duoi the he cong 5: 83 diem mu da dong, va no lo
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phien toi 31/08. Ba viec, va mot cai do lai lat nguoc chan doan cua chinh he.
+
+**Mot: hinh dang edge khong phan biet duoc voi ngau nhien.** Xay
+`hinh_dang_vs_null.py` — chay Y HET luoi lan can tren K chuoi null sinh tu
+chinh holdout (giu bien dong, giu hinh dang nen, giu chi phi that) roi tra phan
+vi. Luot 368 gia thuyet x 100 null: 279 do duoc, 115 co alpha duong, **7 dat
+p<=0,05 trong khi ngau nhien thuan da cho 5,8**. Ung vien PASS duy nhat cua du
+an (`AUDCAD.H4.rsi_dao_chieu`) co alpha 3,944%/nam so voi **null p95 = 3,862** —
+nam trong dam may ngau nhien. Va `boi_dinh` khong mang thong tin gi (p rai
+0,3-0,9): nhan CAO NGUYEN / CAI GAI cua `do_on_dinh` mot minh khong dung lam ly
+do tin ai duoc nua. Cong cu CO luc: hien vat khe gia EURGBP sang ruc (alpha
+11,1% so voi null p95 0,4%, boi dinh 330 lan).
+
+Kem mot cai bay do duoc trong chinh bang xep hang cua toi: `p` mot phia lam mot
+he LO tien leo len dau bang (XAUUSDM.H4.lap_gap mat 7,7%/nam trong khi null cua
+no mat 18,5% -> p=0,0198). Da tach hai bang alpha duong / alpha am, dong tong
+ket chi dem tren alpha duong va in kem ky vong ngau nhien, hai test khoa lai.
+
+**Hai: SEEKER khong he can nguon — no chi doc trang 1.** Chu du an nghi ngo,
+do lai thi dung: `n_mql5_code` goi dung hai URL, khong phan trang, cat con 30
+link; ca kho MQL5 Code Base thu ve **35 tai lieu**. Chan doan "chu ky nguon qua
+day" cua EVO la sai. Day la lo hong lon nhat dang mo — xem muc -1.
+
+**Ba: hai thu khong duoc phu thuoc vao agent.** `ban_giao_song.py` ghi lien tuc
+trong phien (noi vao Stop hook nen chay sau MOI luot, khong can toi nho ghi), va
+`dieu_khien_xa.py` nghe lenh Telegram bang mot tien trinh RIENG — token het,
+phien dong, no van nghe. Da them vao Startup nen bat may la no chay. Bot
+`@thebrain_point_bot`; lenh dau tien chu du an nhan se duoc nhan lam chu.
+
 
 ## Viec tiep theo, theo thu tu
 

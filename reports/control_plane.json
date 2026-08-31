@@ -4,14 +4,14 @@
  "pid": 10764,
  "process_created_epoch": 1788187576.0860465,
  "started_epoch": 1788187576.4493983,
- "updated_epoch": 1788192710.9527864,
- "updated_at": "2026-08-31 23:11:50",
+ "updated_epoch": 1788192741.0961585,
+ "updated_at": "2026-08-31 23:12:21",
  "status": "running",
  "live": true,
  "ready": true,
  "health": "healthy",
  "cpu": {
-  "current_percent": 25.0,
+  "current_percent": 18.0,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -20,15 +20,10 @@
  "workers": {
   "max": 3,
   "running": {
-   "QUANTLAB": {
-    "lane": "compute",
-    "started_epoch": 1788192078.5352235,
-    "elapsed_seconds": 632.4
-   },
    "SEEKER": {
     "lane": "external",
     "started_epoch": 1788192692.8747652,
-    "elapsed_seconds": 18.1
+    "elapsed_seconds": 48.2
    }
   },
   "pending": []
@@ -98,16 +93,16 @@
   "QUANTLAB": {
    "status": "ok",
    "rc": 0,
-   "giay": 627.7,
+   "giay": 636.5,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-08-31 22:59:16",
+    "luc": "2026-08-31 23:11:54",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "ation se FAIL du dung hay sai\"\n    }\n   ],\n   \"mde\": 1.226,\n   \"cua_so\": \"2004-06-11..2026-07-27\",\n   \"so_bar\": 34673,\n   \"mua_giu_train\": {\n    \"tong_lai_pct\": 28.87,\n    \"cagr_pct\": 1.91,\n    \"sharpe\": 0.102,\n    \"calmar\": 0.032,\n    \"max_dd_pct\": -59.55,\n    \"pf\": 1.008,\n    \"so_nam\": 13.41,\n    \"so_bar\": 20803\n   },\n   \"chi_phi_do_tin\": \"SAN\"\n  },\n  {\n   \"ma\": \"XAUUSD\",\n   \"khung\": \"D1\",\n   \"da_quet\": 87,\n   \"ung_vien\": 8,\n   \"da_chon\": 0,\n   \"dang_ky_moi\": 0,\n   \"che_do\": \"giao_dich\",\n   \"t",
+   "stdout_tail": "n\": 0,\n   \"dang_ky_moi\": 0,\n   \"che_do\": \"giao_dich\",\n   \"thieu_luc\": 4,\n   \"chi_tiet_thieu_luc\": [\n    {\n     \"mau\": \"rsi_dao_chieu\",\n     \"mde\": 4.287,\n     \"sharpe\": 0.232,\n     \"ly_do\": \"Sharpe kham pha 0.232 < MDE 4.287 cua EURNZD H1 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"mau\": \"cuoi_thang\",\n     \"mde\": 4.287,\n     \"sharpe\": -0.056,\n     \"ly_do\": \"Sharpe kham pha -0.056 < MDE 4.287 cua EURNZD H1 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"mau\": \"ban_lo_cuo",
    "stderr_tail": ""
   }
  }
