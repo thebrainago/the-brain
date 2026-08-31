@@ -855,6 +855,7 @@ def main() -> int:
     stopping = False
     db_ok = True
     last_nhip = 0.0
+    ma_thoat = 0
 
     try:
         while True:
@@ -947,6 +948,30 @@ def main() -> int:
     except KeyboardInterrupt:
         ghi("CTRL-C - dung va ket thuc cay tien trinh con.")
         _ket_thuc_tat_ca()
+    except BaseException as e:
+        # SUPERVISOR CHET MA KHONG DE LAI GI - da xay ra that luc 09:19:03
+        # ngay 31/08/2026: watchdog chi ghi duoc "thoat rc=1", va khong mot
+        # dong traceback nao o dau ca. Voi mot he 24/7 thi do la lo hong te
+        # nhat co the co: no bien moi lan chet thanh "khong ro nguyen nhan",
+        # va chinh cau do da duoc ghi vao so 346 gio gian doan truoc day.
+        #
+        # `ghi()` di thang vao reports/dieu_phoi.log nen no khong phu thuoc
+        # vao viec stderr co duoc thua ke hay khong (Popen cua watchdog dung
+        # CREATE_NO_WINDOW; day la ly do traceback bay mat).
+        import traceback
+        ma_thoat = 4
+        ghi(f"!!! SUPERVISOR CHET vi loi khong bat: {type(e).__name__}: {e}")
+        for dong in traceback.format_exc().rstrip().splitlines():
+            ghi("    " + dong)
+        try:
+            SO.bao_van_de("dieu_phoi_chet_khong_bat", "NANG",
+                          f"Supervisor chet vi {type(e).__name__} khong duoc bat - "
+                          "24/7 dut quang", {"loi": f"{type(e).__name__}: {e}",
+                                             "traceback": traceback.format_exc()[-4000:],
+                                             "instance_id": _INSTANCE_ID})
+        except Exception as e2:
+            ghi(f"khong ghi duoc van de chet: {type(e2).__name__}: {e2}")
+        _ket_thuc_tat_ca()
     finally:
         _ket_thuc_tat_ca()
         pool.shutdown(wait=True, cancel_futures=True)
@@ -967,8 +992,9 @@ def main() -> int:
             if _JOB:
                 _JOB.close()
             _tha_khoa()
-            ghi("=== dung dieu phoi ===")
-    return 0
+            ghi("=== dung dieu phoi ===" if ma_thoat == 0 else
+                f"=== dung dieu phoi (ma {ma_thoat}: chet vi loi khong bat) ===")
+    return ma_thoat
 
 
 if __name__ == "__main__":

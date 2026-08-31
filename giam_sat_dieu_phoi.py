@@ -25,6 +25,9 @@ SUPERVISOR = LAB / "dieu_phoi.py"
 KHOA = LAB / "dieu_phoi.lock"
 DUNG = LAB / "DUNG_LAI"
 LOG = LAB / "reports" / "watchdog.log"
+#: stdout/stderr THO cua supervisor. Tach khoi `watchdog.log` de mot
+#: traceback dai khong lam troi nhat ky cua chinh watchdog.
+LOG_CON = LAB / "reports" / "supervisor_stdio.log"
 HANG_GIAY = max(60, int(os.environ.get("BRAIN_HANG_SECONDS", "180")))
 STARTUP_GRACE_GIAY = max(30, int(os.environ.get("BRAIN_STARTUP_GRACE_SECONDS", "90")))
 STOP_GRACE_GIAY = max(60, int(os.environ.get("BRAIN_STOP_GRACE_SECONDS", "1500")))
@@ -183,8 +186,20 @@ def main() -> int:
                 continue
 
             ghi("khoi dong supervisor")
-            p = subprocess.Popen([PY, str(SUPERVISOR)], cwd=str(LAB),
-                                 creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+            # Bat stdout/stderr cua supervisor VAO FILE, khong dua vao thua ke.
+            # `CREATE_NO_WINDOW` tach tien trinh con khoi console, va 31/08/2026
+            # mot lan supervisor thoat rc=1 ma khong mot dong traceback nao ton
+            # tai o bat ky dau - watchdog chi biet "rc=1". Mo file o che do noi
+            # them va truyen tuong minh thi khong con cua nao cho no bay mat.
+            LOG_CON.parent.mkdir(parents=True, exist_ok=True)
+            with open(LOG_CON, "a", encoding="utf-8", errors="replace") as _fcon:
+                _fcon.write("\n----- supervisor khoi dong "
+                            + time.strftime("%Y-%m-%d %H:%M:%S") + " -----\n")
+                _fcon.flush()
+                p = subprocess.Popen(
+                    [PY, str(SUPERVISOR)], cwd=str(LAB),
+                    stdout=_fcon, stderr=subprocess.STDOUT,
+                    creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
             bat_dau = time.time()
             bi_treo = False
             while p.poll() is None and not DUNG.exists():
