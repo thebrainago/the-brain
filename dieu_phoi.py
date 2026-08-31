@@ -140,12 +140,38 @@ def ghi(s: str) -> None:
     print(dong, flush=True)
 
 
+#: Bao nhieu lan thu lai `os.replace` truoc khi chiu thua, va nghi bao lau.
+#: 12 x 25ms = 0,3 giay - dai hon nhieu lan mot luot doc lease cua watchdog.
+GHI_THU_LAI = 12
+GHI_NGHI_GIAY = 0.025
+
+
 def _ghi_json_nguyen_tu(duong: Path, du_lieu: dict) -> None:
+    """Ghi JSON nguyen tu, CO THU LAI. Tren Windows day la bat buoc.
+
+    `os.replace` de len mot file dang duoc tien trinh khac MO se nem
+    `PermissionError [WinError 5]`, khong phai vi thieu quyen ma vi Windows
+    khong cho thay the mot handle dang mo (tru khi ben doc mo voi
+    FILE_SHARE_DELETE - Python khong mo nhu vay).
+    Do that 31/08/2026: supervisor chet **mo^~i 4-5 phut** dung o day.
+    `_cham_control` ghi lease `dieu_phoi.lock` moi 2 giay, con watchdog doc
+    chinh file do moi 5 giay; hai nhip nay giao nhau la supervisor chet.
+    Chuoi restart lien tuc do truoc gio chi hien ra duoi dang 'rc=1'.
+    Bo quet chong virus va Windows Search cung gay dung loi nay.
+    """
     duong.parent.mkdir(parents=True, exist_ok=True)
     tam = duong.with_name(f".{duong.name}.{os.getpid()}.{threading.get_ident()}.tmp")
     tam.write_text(json.dumps(du_lieu, ensure_ascii=False, indent=1, default=str),
                    encoding="utf-8")
-    os.replace(tam, duong)
+    for lan in range(GHI_THU_LAI):
+        try:
+            os.replace(tam, duong)
+            return
+        except PermissionError:
+            if lan == GHI_THU_LAI - 1:
+                tam.unlink(missing_ok=True)   # dung de lai rac .tmp
+                raise
+            time.sleep(GHI_NGHI_GIAY)
 
 
 def _doc_lease() -> dict:
@@ -737,9 +763,24 @@ def _state_payload(status: str, ready: bool, running: dict[str, dict], pending: 
     }
 
 
-def _cham_control(payload: dict) -> None:
-    _ghi_json_nguyen_tu(CONTROL, payload)
-    _ghi_json_nguyen_tu(KHOA, payload)
+def _cham_control(payload: dict) -> bool:
+    """Cham nhip len control plane + lease. KHONG BAO GIO duoc giet supervisor.
+
+    Day la duong BAO CAO, khong phai duong quyet dinh. Truoc 31/08/2026 mot
+    lan ghi hong o day lam ca supervisor chet (xem `_ghi_json_nguyen_tu`):
+    thu de bao trang thai lai tro thanh thu ket lieu he. Bay gio ghi hong chi
+    lam nhip tim tre mot vong, va watchdog van co lease cu de doc.
+
+    Tra `False` khi khong cham duoc, de nguoi goi dem va bao van de.
+    """
+    ok = True
+    for duong in (CONTROL, KHOA):
+        try:
+            _ghi_json_nguyen_tu(duong, payload)
+        except OSError as e:
+            ok = False
+            ghi(f"khong cham duoc {duong.name}: {type(e).__name__}: {e}")
+    return ok
 
 
 def trang_thai() -> dict:
@@ -856,6 +897,7 @@ def main() -> int:
     db_ok = True
     last_nhip = 0.0
     ma_thoat = 0
+    cham_hong = 0
 
     try:
         while True:
@@ -930,7 +972,21 @@ def main() -> int:
                 "stopping" if stopping else "running",
                 not stopping and guard_san_sang and db_ok,
                 running, pending, last, cpu, list(dict.fromkeys(backpressure)), _JOB)
-            _cham_control(payload)
+            if _cham_control(payload):
+                cham_hong = 0
+            else:
+                # Cham hong lien tuc thi lease cu di, va watchdog se ket thuc
+                # supervisor vi tuong no treo. Do la mot cai chet KHAC han
+                # (bi giet, khong phai tu chet) nen phai bao truoc khi no toi.
+                cham_hong += 1
+                if cham_hong == 5:
+                    try:
+                        SO.bao_van_de("dieu_phoi_khong_cham_duoc_lease", "NANG",
+                                      f"Cham lease hong {cham_hong} vong lien tiep - "
+                                      "watchdog se coi la treo va restart",
+                                      {"khoa": str(KHOA), "control": str(CONTROL)})
+                    except Exception:
+                        pass
             if now - last_nhip >= NHIP_DIEU_PHOI_GIAY:
                 try:
                     SO.nhip_tim("DIEU_PHOI", "dung" if stopping else "song", {

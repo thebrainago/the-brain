@@ -139,5 +139,97 @@ class WatchdogPhaiBatDUOCStdioCuaCon(unittest.TestCase):
                             "traceback dai lam troi nhat ky")
 
 
+class GhiLeaseKhongDuocGIETSupervisor(unittest.TestCase):
+    r"""NGUYEN NHAN GOC tim ra luc 09:33:55 ngay 31/08/2026.
+
+    Traceback that:
+
+        PermissionError: [WinError 5] Access is denied:
+          '...\.dieu_phoi.lock.2616.14968.tmp' -> '...\dieu_phoi.lock'
+        File "dieu_phoi.py", line 933, in main -> _cham_control(payload)
+        File "dieu_phoi.py", line 742, in _cham_control -> _ghi_json_nguyen_tu(KHOA,...)
+
+    Supervisor ghi lease moi 2 giay; watchdog DOC chinh file do moi 5 giay.
+    Tren Windows, `os.replace` de len mot file dang co handle mo se bao
+    WinError 5. Hai nhip giao nhau -> supervisor chet. Truoc ban va nay no chet
+    **moi 4-5 phut** va chi hien ra duoi dang 'rc=1'.
+
+    Hai lop bao ve, kiem ca hai:
+      1. `_ghi_json_nguyen_tu` thu lai thay vi chiu thua ngay.
+      2. `_cham_control` la duong BAO CAO - ghi hong khong duoc giet he.
+    """
+
+    def setUp(self):
+        import tempfile
+        import dieu_phoi as DP
+        self.DP = DP
+        self.tam = Path(tempfile.mkdtemp(prefix="dp_lease_"))
+        self.cu = {"CONTROL": DP.CONTROL, "KHOA": DP.KHOA, "LOG": DP.LOG}
+        DP.CONTROL = self.tam / "control_plane.json"
+        DP.KHOA = self.tam / "dieu_phoi.lock"
+        DP.LOG = self.tam / "dieu_phoi.log"
+
+    def tearDown(self):
+        import shutil
+        DP = self.DP
+        DP.CONTROL, DP.KHOA, DP.LOG = (self.cu["CONTROL"], self.cu["KHOA"],
+                                       self.cu["LOG"])
+        shutil.rmtree(self.tam, ignore_errors=True)
+
+    def test_thu_lai_khi_file_dang_bi_giu(self):
+        """Hai lan dau bi tu choi, lan ba qua - phai ghi duoc, khong duoc nem."""
+        import os as _os
+        DP = self.DP
+        that = _os.replace
+        con = {"n": 0}
+
+        def _gia(a, b):
+            con["n"] += 1
+            if con["n"] <= 2:
+                raise PermissionError(5, "Access is denied")
+            return that(a, b)
+
+        DP.os.replace = _gia
+        try:
+            DP._ghi_json_nguyen_tu(DP.KHOA, {"pid": 1})
+        finally:
+            DP.os.replace = that
+        self.assertEqual(con["n"], 3, "khong thu lai du so lan")
+        self.assertIn('"pid"', DP.KHOA.read_text(encoding="utf-8"))
+
+    def test_thu_lai_het_van_khong_de_lai_rac_tmp(self):
+        import os as _os
+        DP = self.DP
+        that = _os.replace
+        DP.os.replace = lambda a, b: (_ for _ in ()).throw(
+            PermissionError(5, "Access is denied"))
+        try:
+            with self.assertRaises(PermissionError):
+                DP._ghi_json_nguyen_tu(DP.KHOA, {"pid": 1})
+        finally:
+            DP.os.replace = that
+        rac = [x for x in self.tam.iterdir() if x.name.endswith(".tmp")]
+        self.assertEqual(rac, [], f"de lai file tam: {rac}")
+
+    def test_cham_control_nuot_loi_va_bao_False(self):
+        """Duong bao cao hong thi he VAN SONG - chi tre mot nhip."""
+        import os as _os
+        DP = self.DP
+        that = _os.replace
+        DP.os.replace = lambda a, b: (_ for _ in ()).throw(
+            PermissionError(5, "Access is denied"))
+        try:
+            ket = DP._cham_control({"pid": 1, "status": "running"})
+        finally:
+            DP.os.replace = that
+        self.assertIs(ket, False, "cham hong ma bao thanh cong")
+        self.assertIn("khong cham duoc",
+                      DP.LOG.read_text(encoding="utf-8", errors="replace"))
+
+    def test_cham_control_binh_thuong_tra_True(self):
+        self.assertIs(self.DP._cham_control({"pid": 1}), True)
+        self.assertTrue(self.DP.CONTROL.exists())
+        self.assertTrue(self.DP.KHOA.exists())
+
 if __name__ == "__main__":
     unittest.main()
