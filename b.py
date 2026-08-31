@@ -16,6 +16,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b quet            quet_be_mat.py
     b mde             chay_bang_mde.py
     b cham-lai        cham lai MOI gia thuyet duoi the he cong hien tai
+    b on-dinh         edge la CAO NGUYEN hay CAI GAI (do vung lan can)
     b mde-nap [khung] nap TRUOC bang MDE cho ca be mat (D1: ~4 phut, mot lan)
     b san             EVO di san cong cu/du an ngoai de tich hop
     b san-xem         xem kho cong cu da tim duoc
@@ -112,6 +113,10 @@ def c_cham_lai(a):
     return chay([PY, LAB / "cham_lai_the_he.py", *a])
 
 
+def c_on_dinh(a):
+    return chay([PY, LAB / "do_on_dinh.py", *a])
+
+
 def c_mde_nap(a):
     return chay([PY, LAB / "nap_truoc_mde.py", *a])
 
@@ -206,7 +211,7 @@ LENH = {
     "trang-thai": c_trang_thai, "tt": c_trang_thai,
     "chay": c_chay, "dung": c_dung, "canary": c_canary,
     "quet": c_quet, "mde": c_mde, "mde-nap": c_mde_nap,
-    "cham-lai": c_cham_lai,
+    "cham-lai": c_cham_lai, "on-dinh": c_on_dinh,
     "san": c_san, "san-xem": c_san_xem, "san-quet": c_san_quet,
     "tai-khoan": c_tai_khoan, "trinh-duyet": c_trinh_duyet,
     "ds": c_ds, "tim": c_tim,
