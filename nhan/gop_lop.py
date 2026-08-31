@@ -332,11 +332,15 @@ class _KetQuaGop(MP.KetQua):
 def xet_gop(ten_mau: str, ho: str | None = None, khung: str | None = None,
             tham_so: dict | None = None, kho: list[str] | None = None,
             gt_ma: str | None = None, da_dang_ky: bool = False,
-            tran: int = TOI_DA_CHAN) -> dict:
+            tran: int = TOI_DA_CHAN, ghi_so: bool = True) -> dict:
     """Kiem dinh mot co che tren ro `hop` va ro doi chung, ton MOT suat FDR.
 
     Tra dict co `verdict` (tu `cong.xet` tren ro `hop`), `cach_biet` giua hai ro
     va toan bo so lieu de doc lai.
+
+    `ghi_so=False` danh cho DO DAC tren so cai da co (vi du `cham_lai_the_he.py`
+    cham lai gia thuyet GOP duoi the he cong moi). Cung ly do voi `cong.xet`:
+    mot luot do khong duoc tieu suat FDR cua ho.
     """
     if ten_mau not in MAU.MAU:
         return {"mau": ten_mau, "loi": "khong co trong thu vien mau"}
@@ -421,7 +425,8 @@ def xet_gop(ten_mau: str, ho: str | None = None, khung: str | None = None,
     kt = CONG.xet(df_ro, kq_he, kq_bh, cp_ro, gt_ma=ma_gt,
                   ho=f"gop_{ho}@cp{CP.THE_HE}" +
                      ("@nghien_cuu" if che_do == "nghien_cuu" else ""),
-                  da_dang_ky=da_dang_ky, tren_holdout=True, che_do=che_do)
+                  da_dang_ky=da_dang_ky, tren_holdout=True, che_do=che_do,
+                  ghi_so=ghi_so)
 
     ra["che_do"] = che_do
     ra["verdict"] = kt["verdict"]
