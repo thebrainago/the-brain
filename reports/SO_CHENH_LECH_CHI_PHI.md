@@ -1,5 +1,5 @@
 # SO CHENH LECH CHI PHI TRIEN KHAI
-*Do luc 2026-08-31 09:27:56 tren cac terminal MT5 dang cai.*
+*Do luc 2026-08-31 21:42:16 tren cac terminal MT5 dang cai.*
 
 > **Day khong phai gia thuyet, day la phep tru.** Khong ton slot ngan sach
 > thong ke nao. Khong can backtest, khong can placebo.

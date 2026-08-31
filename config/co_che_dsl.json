@@ -1430,5 +1430,51 @@
    }
   ],
   "_ty_le_kich_hoat": 0.4308
+ },
+ {
+  "chieu": 1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"If the 4hour RSI is above 55, we only look for long positions\" [nguon: https://www.youtube.com/watch?v=c9-SIpy3dEw&pp=ygUObWVhbiByZXZlcnNpb24%3D]",
+  "giu": 1,
+  "ho": "xu_huong",
+  "nguon": "https://www.youtube.com/watch?v=c9-SIpy3dEw&pp=ygUObWVhbiByZXZlcnNpb24%3D",
+  "ra": [],
+  "ten": "mua_rsi14_tren_55",
+  "van_tay": "deafef87b7ebf84b",
+  "vao": [
+   {
+    "phai": {
+     "hang": 55.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.5846
+ },
+ {
+  "chieu": -1,
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"If the 4hour RSI is below 45, we only look for short positions\" [nguon: https://www.youtube.com/watch?v=c9-SIpy3dEw&pp=ygUObWVhbiByZXZlcnNpb24%3D]",
+  "giu": 1,
+  "ho": "xu_huong",
+  "nguon": "https://www.youtube.com/watch?v=c9-SIpy3dEw&pp=ygUObWVhbiByZXZlcnNpb24%3D",
+  "ra": [],
+  "ten": "ban_rsi14_duoi_45",
+  "van_tay": "7f7b625513f7ed4e",
+  "vao": [
+   {
+    "phai": {
+     "hang": 45.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.182
  }
 ]

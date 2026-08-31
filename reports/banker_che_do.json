@@ -1,17 +1,17 @@
 {
- "luc": "2026-08-31 19:16:19",
+ "luc": "2026-08-31 22:46:40",
  "che_do": {
   "duong_cong": {
    "nhan": "DOC",
-   "gia_tri": 0.99,
+   "gia_tri": 1.028,
    "quy_tac": "10y-3m < 0 = dao nguoc; < 0,5 = phang",
-   "ngay": "2026-08-28",
+   "ngay": "2026-08-31",
    "y_nghia": "dao nguoc di truoc suy thoai 6-18 thang; day la BOI CANH, khong phai tin hieu vao lenh"
   },
   "xu_huong_lai_suat": {
    "nhan": "TANG",
-   "gia_tri": 0.267,
-   "doi_90_ngay_diem": 0.267,
+   "gia_tri": 0.305,
+   "doi_90_ngay_diem": 0.305,
    "quy_tac": "|doi loi suat 10y trong 90 ngay| > 0,25 diem",
    "y_nghia": "lop vi mo DUY NHAT tung vuot mua-giu qua 64 nam trong du an nay la nghieng size theo THAY DOI loi suat 10y (memory macro-tilt-lead)"
   },
@@ -23,9 +23,9 @@
   },
   "tin_dung": {
    "nhan": "DE",
-   "gia_tri": 0.7498,
-   "doi_90_ngay_pct": 2.1,
-   "ngay": "2026-08-28",
+   "gia_tri": 0.7509,
+   "doi_90_ngay_pct": 2.36,
+   "ngay": "2026-08-31",
    "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang"
   },
   "dola": {
@@ -37,15 +37,15 @@
  },
  "so_lieu": {
   "LS10Y": {
-   "ngay": "2026-08-28",
-   "gia_tri": 4.71999979019165,
-   "tuoi_ngay": 3,
+   "ngay": "2026-08-31",
+   "gia_tri": 4.759999752044678,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "LS3M": {
-   "ngay": "2026-08-28",
-   "gia_tri": 3.7300000190734863,
-   "tuoi_ngay": 3,
+   "ngay": "2026-08-31",
+   "gia_tri": 3.7319998741149902,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "VIX": {
@@ -67,25 +67,25 @@
    "stale": false
   },
   "HYG": {
-   "ngay": "2026-08-28",
-   "gia_tri": 79.73999786376953,
-   "tuoi_ngay": 3,
+   "ngay": "2026-08-31",
+   "gia_tri": 79.68399810791016,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "LQD": {
-   "ngay": "2026-08-28",
-   "gia_tri": 106.3499984741211,
-   "tuoi_ngay": 3,
+   "ngay": "2026-08-31",
+   "gia_tri": 106.125,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "LS10Y/LS3M": {
-   "ngay": "2026-08-28",
-   "gia_a": 4.71999979019165,
-   "gia_b": 3.7300000190734863,
-   "tuoi_ngay": 3,
+   "ngay": "2026-08-31",
+   "gia_a": 4.759999752044678,
+   "gia_b": 3.7319998741149902,
+   "tuoi_ngay": 0,
    "stale": false
   },
-  "duong_cong_10y_3m": 0.99,
+  "duong_cong_10y_3m": 1.028,
   "VIX3M/VIX": {
    "ngay": "2026-07-17",
    "gia_a": 20.540000915527344,
@@ -94,10 +94,10 @@
    "stale": true
   },
   "HYG/LQD": {
-   "ngay": "2026-08-28",
-   "gia_a": 79.73999786376953,
-   "gia_b": 106.3499984741211,
-   "tuoi_ngay": 3,
+   "ngay": "2026-08-31",
+   "gia_a": 79.68399810791016,
+   "gia_b": 106.125,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "VN_CPI": {
@@ -126,6 +126,6 @@
   "VN_TYGIA"
  ],
  "ham_y": [
-  "Loi suat 10y tang 0.267 diem trong 90 ngay -> lop nghieng size theo thay doi loi suat dang co tin hieu; day la lop DUY NHAT tung vuot mua-giu qua 64 nam trong du an."
+  "Loi suat 10y tang 0.305 diem trong 90 ngay -> lop nghieng size theo thay doi loi suat dang co tin hieu; day la lop DUY NHAT tung vuot mua-giu qua 64 nam trong du an."
  ]
 }

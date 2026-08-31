@@ -1,0 +1,115 @@
+{
+ "luc": "2026-08-31 23:07:58",
+ "tham_so_chay": {
+  "che": "qua_123",
+  "so_null": 2500,
+  "tran_o": 81,
+  "luong": 6
+ },
+ "ket_qua": [
+  {
+   "ma": "EURGBP.D1.cuoi_thang.truoc1_sau4",
+   "mau": "cuoi_thang",
+   "tai_san": "EURGBP",
+   "khung": "D1",
+   "tam": {
+    "sau": 4,
+    "truoc": 1
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 15,
+   "so_null_chay_duoc": 2500,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 15,
+    "alpha_tam": 1.064,
+    "ty_le_duong": 100.0,
+    "trung_vi": 1.064,
+    "o_tot_nhat": 1.853,
+    "boi_dinh": 1.742,
+    "do_doc_mot_buoc_pct": 2.209,
+    "hinh_dang": "CAO NGUYEN - 100% lan can duong, dinh chi gap 1.7 lan"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.0728,
+     "so_null": 2500,
+     "null_trung_vi": -0.293,
+     "null_p95": 1.223
+    },
+    "ty_le_duong": {
+     "p": 0.058,
+     "so_null": 2500,
+     "null_trung_vi": 33.333,
+     "null_p95": 100.0
+    },
+    "boi_dinh": {
+     "p": 0.6886,
+     "so_null": 2497,
+     "null_trung_vi": 0.184,
+     "null_p95": 9.732
+    },
+    "o_tot_nhat": {
+     "p": 0.09,
+     "so_null": 2500,
+     "null_trung_vi": 0.698,
+     "null_p95": 2.155
+    }
+   },
+   "giay": 1982.3
+  },
+  {
+   "ma": "EURGBP.D1.cuoi_thang.truoc2_sau2",
+   "mau": "cuoi_thang",
+   "tai_san": "EURGBP",
+   "khung": "D1",
+   "tam": {
+    "sau": 2,
+    "truoc": 2
+   },
+   "do_duoc": true,
+   "che_do": "nghien_cuu",
+   "so_o": 16,
+   "so_null_chay_duoc": 2500,
+   "that": {
+    "do_duoc": true,
+    "chay_duoc": 16,
+    "alpha_tam": 1.151,
+    "ty_le_duong": 93.75,
+    "trung_vi": 0.526,
+    "o_tot_nhat": 1.73,
+    "boi_dinh": 3.286,
+    "do_doc_mot_buoc_pct": 36.012,
+    "hinh_dang": "CAI GAI - dinh cao gap 3.3 lan trung vi lan can"
+   },
+   "so_voi_null": {
+    "alpha_tam": {
+     "p": 0.0504,
+     "so_null": 2500,
+     "null_trung_vi": -0.299,
+     "null_p95": 1.15
+    },
+    "ty_le_duong": {
+     "p": 0.0676,
+     "so_null": 2500,
+     "null_trung_vi": 31.25,
+     "null_p95": 93.75
+    },
+    "boi_dinh": {
+     "p": 0.8289,
+     "so_null": 2500,
+     "null_trung_vi": 0.051,
+     "null_p95": 10.199
+    },
+    "o_tot_nhat": {
+     "p": 0.1068,
+     "so_null": 2500,
+     "null_trung_vi": 0.7,
+     "null_p95": 2.1
+    }
+   },
+   "giay": 2055.1
+  }
+ ]
+}
