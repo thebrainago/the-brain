@@ -82,9 +82,17 @@ CREATE TABLE IF NOT EXISTS vi_mo_seri(
   ma TEXT PRIMARY KEY, ten TEXT, nguon TEXT, chu_ky_giay INTEGER DEFAULT 86400,
   lan_cuoi REAL DEFAULT 0, so_diem INTEGER DEFAULT 0, ghi_chu TEXT);
 
+-- `gt_ma` o day la DANH TINH CUA PHEP THU trong epoch (economic plan hash),
+-- KHONG phai ma gia thuyet trong bang `gia_thuyet`. Truoc 17/08 hai thu do
+-- trung nhau nen khong ai thay khac biet; tu khi lord_v2 dung plan_hash thi
+-- **0/1124 hang moi co gt_ma khop bang gia_thuyet**, va moi phep doi soat
+-- `JOIN ket_qua k ON k.gt_ma = f.gt_ma` lang le chi con nhin thay 675 hang cu
+-- cua 15-16/08. Do la goc that cua van de `vd_so_sach_khong_khop`.
+-- `gt_ma_nguon` giu ma gia thuyet de doi soat duoc; NULL cho hang cu va cho
+-- cac ho do dac (khong co gia thuyet nao dang sau).
 CREATE TABLE IF NOT EXISTS fdr(
   id INTEGER PRIMARY KEY AUTOINCREMENT, luc TEXT, ho TEXT, gt_ma TEXT,
-  p REAL, nguong REAL, bac_bo INTEGER, tai_nguyen REAL);
+  p REAL, nguong REAL, bac_bo INTEGER, tai_nguyen REAL, gt_ma_nguon TEXT);
 
 -- NOI DUNG THAT cua tai lieu (toan van bai bao / ma nguon / bai dien dan).
 -- Tach khoi `tai_lieu` vi hai thu khac han ve kich thuoc va vong doi: `tai_lieu`
@@ -213,9 +221,19 @@ def ket_noi(timeout: float = 30.0):
         cn.close()
 
 
+#: Cot them vao sau khi bang da ton tai. `CREATE TABLE IF NOT EXISTS` khong
+#: dong bo cot cho bang cu, nen mot cot moi khai trong SCHEMA se khong bao gio
+#: xuat hien tren so cai dang chay - va se hong lang le o dung lan ghi dau.
+COT_THEM_SAU = [("fdr", "gt_ma_nguon", "TEXT")]
+
+
 def khoi_tao() -> None:
     with ket_noi() as cn:
         cn.executescript(SCHEMA)
+        for bang, cot, kieu in COT_THEM_SAU:
+            co = {r["name"] for r in cn.execute(f"PRAGMA table_info({bang})")}
+            if cot not in co:
+                cn.execute(f"ALTER TABLE {bang} ADD COLUMN {cot} {kieu}")
 
 
 # --------------------------------------------------------------- SO SU KIEN

@@ -308,6 +308,47 @@ def tao_epoch_fdr(lane: str, family: str, data_release: str,
     )
 
 
+#: Ho FDR la DUNG CU DO, khong phai kham pha. Chung dung chung mot so cai voi
+#: gia thuyet that nhung khong bao gio sinh ra mot khang dinh nao.
+#:
+#: VI SAO PHAI PHAN LOAI (do 01/09/2026). So cai co 1.799 hang FDR, trong do
+#: **1.019 hang (57%) la `do_luc`** - du lieu con lai tu truoc khi
+#: `do_luc` chuyen sang `ghi_so=False` ngay 24/08. Bleeding da dung, nhung moi
+#: bang tong ke tu do van cong chung vao: bao cao noi "fdr_tong_tho = 687" ben
+#: canh "fdr_tong = 275" va tang chan doan khong the giai thich duoc 687 la gi,
+#: nen no mo van de `vd_so_sach_khong_khop`. Do khong phai loi so sach - do la
+#: hai DON VI khac nhau bi in canh nhau ma khong noi ro.
+#:
+#: LORD khong bi anh huong: `j` dem theo `WHERE ho=?` nen moi epoch tu tinh
+#: suat cua no; ho do dac khong lam chat nguong cua ho kham pha. Cai bi hong
+#: chi la BAO CAO - va mot bao cao khong doc duoc thi khong ai kiem duoc gi.
+HO_DO_DAC = ("do_luc", "do_mde", "do_mde2", "null_hieu_chuan", "thu_luc_cong",
+             "test_che_do", "hieu_chuan_v6")
+
+
+def phan_epoch_ra(epoch: str) -> dict:
+    """Tach mot khoa epoch nguoc lai thanh cac thanh phan. Khoa cu -> {}."""
+    if not str(epoch or "").startswith("fdr-v2|"):
+        return {}
+    ra = {}
+    for phan in str(epoch).split("|")[1:]:
+        if "=" in phan:
+            k, v = phan.split("=", 1)
+            ra[k] = v
+    return ra
+
+
+def la_ho_do_dac(epoch: str) -> bool:
+    """Epoch nay la dung cu do hay la duong kham pha that?
+
+    Nhan dien theo `family`, khong theo chuoi con cua ca khoa: mot ho that ten
+    `xu_huong@do_luc_thap` khong duoc lang le bi xep thanh dung cu do.
+    """
+    family = phan_epoch_ra(epoch).get("family") or str(epoch or "")
+    goc = family.split("@")[0].split("#")[0]
+    return goc in HO_DO_DAC
+
+
 def ho_fdr(ho: str) -> str:
     """Adapter khoa ho cu, khong con reset theo quy.
 
@@ -332,7 +373,8 @@ def _p_bao_thu(p) -> tuple[float, bool]:
 def lord_v2(p: float | None, economic_plan_hash: str, *, lane: str,
             family: str, data_release: str,
             decision_generation: int | str = THE_HE_CONG,
-            muc_tieu: float | None = None, ghi_so: bool = True) -> dict:
+            muc_tieu: float | None = None, ghi_so: bool = True,
+            gt_ma_nguon: str | None = None) -> dict:
     """LORD cho mot chuoi quyet dinh duoc khai bao ro.
 
     ``economic_plan_hash`` la danh tinh cua phep thu trong epoch. Goi lai cung
@@ -398,11 +440,15 @@ def lord_v2(p: float | None, economic_plan_hash: str, *, lane: str,
                     a += gam(j - t) / chuan * b0
             bac_bo = bool(p_dung <= a)
             if ghi_so:
+                # `gt_ma` la plan_hash (danh tinh phep thu trong epoch);
+                # `gt_ma_nguon` la ma gia thuyet, de doi soat duoc voi bang
+                # `ket_qua`. Truoc 01/09 chi co cot dau, va moi phep doi soat
+                # ba tang lang le tra ve rong cho moi hang sau 17/08.
                 cur = cn.execute(
-                    "INSERT INTO fdr(luc,ho,gt_ma,p,nguong,bac_bo,tai_nguyen) "
-                    "VALUES(?,?,?,?,?,?,?)",
+                    "INSERT INTO fdr(luc,ho,gt_ma,p,nguong,bac_bo,tai_nguyen,gt_ma_nguon) "
+                    "VALUES(?,?,?,?,?,?,?,?)",
                     (SO.bay_gio(), epoch, plan_hash, p_dung, float(a),
-                     int(bac_bo), mt))
+                     int(bac_bo), mt, gt_ma_nguon))
                 fdr_id = int(cur.lastrowid)
             else:
                 # DO THU, KHONG GHI SO. Van tinh dung nguong ma phep thu nay se
@@ -446,7 +492,7 @@ def lord(p: float, ho: str, gt_ma: str, muc_tieu: float | None = None,
     ra = lord_v2(
         p, plan_hash, lane="legacy", family=ho,
         data_release="LEGACY_UNSPECIFIED", decision_generation=THE_HE_CONG,
-        muc_tieu=muc_tieu, ghi_so=ghi_so)
+        muc_tieu=muc_tieu, ghi_so=ghi_so, gt_ma_nguon=gt_ma or None)
     ra["legacy_adapter"] = True
     ra["identity_source"] = nguon_dinh_danh
     ra["gt_ma_legacy"] = gt_ma
@@ -746,7 +792,8 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
             kq_fdr = lord_v2(
                 p_hop_thanh_fdr, economic_plan_hash,
                 lane=lane, family=family, data_release=data_release,
-                decision_generation=decision_generation, ghi_so=ghi_so)
+                decision_generation=decision_generation, ghi_so=ghi_so,
+                gt_ma_nguon=gt_ma or None)
         else:
             kq_fdr = lord(p_hop_thanh_fdr, ho, gt_ma, ghi_so=ghi_so)
         dk["10_qua_fdr_online"] = bool(kq_fdr["bac_bo"])

@@ -57,7 +57,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from nhan import (do_tai_nguyen as DTN, ket_qua_hoat_dong as KQHD,
+from nhan import (cong as CONG, do_tai_nguyen as DTN, ket_qua_hoat_dong as KQHD,
                   san_cong_cu as SCC, so as SO, tri_tue as TT)
 
 TRU = "EVO"
@@ -381,7 +381,12 @@ def do_suc_khoe_day_chuyen() -> dict:
     # Truoc day `so_ket_qua` dem CA dong chay lai -> roi `theo_verdict`/`ty_le_qua_cong`
     # lai bo superseded -> tu so va mau so dem khac don vi, khong the thao hiep.
     ra["so_ket_qua_tho"] = SO.mot("SELECT COUNT(*) n FROM ket_qua")["n"]
-    ra["so_ket_qua_du_phong"] = SO.mot(
+    # Ten cu la `so_ket_qua_du_phong`. "Du phong" doc ra thanh "duong di thay
+    # the" nen tang chan doan ket luan 63,6% ket qua di duong phu va mo van de
+    # `vd_duong_du_phong` - trong khi cot nay chi dem cac dong DA BI THAY THE
+    # boi mot lan chay sau. Doi ten la ca phan sua: mot con so chi dung khi ten
+    # cua no khong the doc ra nghia khac.
+    ra["so_dong_da_supersede"] = SO.mot(
         "SELECT COUNT(*) n FROM ket_qua WHERE superseded_by IS NOT NULL")["n"]
     theo = {r["verdict"]: r["n"] for r in SO.nhieu(KQHD.truy_van(
         "k.verdict, COUNT(*) n", nhom_theo="k.verdict"))}
@@ -436,15 +441,79 @@ def do_suc_khoe_day_chuyen() -> dict:
     # Chi doi soat FDR cua gia thuyet co ket qua DANG HOAT DONG; slot lich su
     # cua hypothesis quarantine van o lai trong so, nhung khong the lam lech
     # suc khoe day chuyen hien tai.
-    fdr_nguon = KQHD.tu_ket_qua_hoat_dong(join_them="JOIN fdr f ON f.gt_ma=k.gt_ma")
+    # `f.gt_ma` chua PLAN HASH tu khi lord_v2 vao viec (17/08), con `k.gt_ma` la
+    # ma gia thuyet - noi hai cai do lang le tra ve rong cho moi hang moi. Doi
+    # soat phai di qua `gt_ma_nguon`; COALESCE de 675 hang cu (truoc khi co cot
+    # do) van doc duoc bang chinh `gt_ma` cua chung.
+    fdr_nguon = KQHD.tu_ket_qua_hoat_dong(
+        join_them="JOIN fdr f ON COALESCE(f.gt_ma_nguon, f.gt_ma) = k.gt_ma")
     ra["fdr_da_bac_bo"] = SO.mot(
-        "SELECT COUNT(DISTINCT f.gt_ma) n " + fdr_nguon + " AND f.bac_bo=1")["n"]
+        "SELECT COUNT(DISTINCT k.gt_ma) n " + fdr_nguon + " AND f.bac_bo=1")["n"]
     ra["fdr_tong"] = SO.mot(
-        "SELECT COUNT(DISTINCT f.gt_ma) n " + fdr_nguon)["n"]
-    ra["fdr_tong_tho"] = SO.mot("SELECT COUNT(*) n FROM fdr")["n"]
-    # Dong bo ba tang: moi giả thuyết co ket qua cuoi phai vao dung 1 FDR.
-    # `khop`=True khi dem theo giả thuyết o tang ket_qua va tang fdr bang nhau.
-    ra["khop_ba_tang"] = bool(ra["so_gt_da_ket"] == ra["fdr_tong"])
+        "SELECT COUNT(DISTINCT k.gt_ma) n " + fdr_nguon)["n"]
+    # Tach DUNG CU DO khoi KHAM PHA truoc khi in bat ky con so tong nao.
+    # Truoc 01/09/2026 dong nay la `COUNT(*) FROM fdr` - tuc no cong ca 1.019
+    # hang `do_luc` (57% so cai, du lieu con lai tu truoc khi do_luc chuyen
+    # sang ghi_so=False ngay 24/08) vao cung mot bang voi 275 gia thuyet that.
+    # Tang chan doan doc hai con so canh nhau, khong noi duoc 687 la gi, va mo
+    # `vd_so_sach_khong_khop`. Khong phai so sach lech - la hai DON VI bi in
+    # canh nhau ma khong ai noi la hai don vi.
+    tho_theo_ho = SO.nhieu("SELECT ho, COUNT(*) n FROM fdr GROUP BY ho")
+    do_dac = [r for r in tho_theo_ho if CONG.la_ho_do_dac(r["ho"])]
+    con_lai = [r for r in tho_theo_ho if not CONG.la_ho_do_dac(r["ho"])]
+    # Khoa `ho` cu (truoc ngu phap epoch fdr-v2) nam trong nhung EPOCH DA CHET:
+    # mot gia thuyet ho `lich` dang ky hom nay di vao
+    # `fdr-v2|...|family=lich|...`, khong phai `lich@cp2`. Chung khong lam chat
+    # nguong cua bat ky ho song nao, nhung neu gop chung vao mot con so "tong"
+    # thi khong ai doc duoc gi tu con so do.
+    cu = [r for r in con_lai if not str(r["ho"]).startswith("fdr-v2|")]
+    ra["fdr_tho_kham_pha"] = sum(r["n"] for r in con_lai if str(r["ho"]).startswith("fdr-v2|"))
+    ra["fdr_tho_epoch_chet"] = sum(r["n"] for r in cu)
+    ra["fdr_tho_do_dac"] = sum(r["n"] for r in do_dac)
+    ra["fdr_ho_do_dac"] = sorted(
+        {CONG.phan_epoch_ra(r["ho"]).get("family", r["ho"]) for r in do_dac})
+    # Hai huong LECH THAT SU nguy hiem, khac han huong ma `khop_ba_tang` do:
+    #   - mot gia thuyet co HAI hang trong CUNG epoch -> no an hai suat, va lam
+    #     chat nguong cua moi gia thuyet dang sau no trong ho do;
+    #   - mot hang FDR khong co ket qua nao -> da tieu suat cho mot phep thu
+    #     khong ai doc ket qua.
+    ra["fdr_trung_trong_epoch"] = SO.mot(
+        "SELECT COUNT(*) n FROM (SELECT ho, gt_ma FROM fdr "
+        "GROUP BY ho, gt_ma HAVING COUNT(*) > 1)")["n"]
+    ra["fdr_trung_trong_epoch_song"] = SO.mot(
+        "SELECT COUNT(*) n FROM (SELECT ho, gt_ma FROM fdr WHERE ho LIKE 'fdr-v2|%' "
+        "GROUP BY ho, gt_ma HAVING COUNT(*) > 1)")["n"]
+    mo_coi = [r for r in SO.nhieu(
+        "SELECT f.ho, f.gt_ma_nguon FROM fdr f LEFT JOIN ket_qua k "
+        "ON k.gt_ma = COALESCE(f.gt_ma_nguon, f.gt_ma) WHERE k.gt_ma IS NULL")
+        if not CONG.la_ho_do_dac(r["ho"])]
+    ra["fdr_mo_coi"] = len(mo_coi)
+    # Hang ghi TRUOC khi co cot `gt_ma_nguon` (01/09) khong the doi soat duoc
+    # theo cau tao - dem chung vao bat bien song thi den bao do vinh vien va
+    # khong ai dong duoc. Bat bien chi ap cho hang ghi TU BAY GIO.
+    ra["fdr_mo_coi_moi"] = len([r for r in mo_coi if r["gt_ma_nguon"]])
+    ra["fdr_mo_coi_cu_khong_doi_soat_duoc"] = ra["fdr_mo_coi"] - ra["fdr_mo_coi_moi"]
+    # Giu ten cu cho code doc ben ngoai, nhung no gio la TONG cua hai muc tren
+    # va bao cao phai in kem ca hai.
+    ra["fdr_tong_tho"] = (ra["fdr_tho_kham_pha"] + ra["fdr_tho_do_dac"]
+                          + ra["fdr_tho_epoch_chet"])
+
+    # DONG BO BA TANG - dinh nghia lai 01/09/2026.
+    #
+    # Ban cu: `so_gt_da_ket == fdr_tong`, tuc doi MOI gia thuyet co ket qua
+    # phai co mot hang FDR. Do la mot bat bien SAI, va no bao "TACH" moi ngay
+    # ma khong ai dong duoc: **96 gia thuyet FAIL truoc buoc FDR** (khong do
+    # duoc chi phi, truot cong re) - va do dung la thiet ke "cong re truoc
+    # placebo". Mot phep thu chet o cong re thi khong duoc tieu suat FDR nao ca.
+    #
+    # Huong lech that su nguy hiem la hai huong CON LAI, va truoc hom nay khong
+    # ai do: mot gia thuyet an HAI suat trong cung epoch (lam chat nguong cua
+    # moi gia thuyet dang sau no), va mot hang FDR khong co ket qua nao (da
+    # tieu suat cho phep thu khong ai doc). Do dung hai huong do.
+    ra["gt_fail_truoc_fdr"] = ra["so_gt_da_ket"] - ra["fdr_tong"]
+    ra["khop_ba_tang"] = bool(ra["fdr_trung_trong_epoch_song"] == 0
+                              and ra["fdr_mo_coi_moi"] == 0
+                              and ra["fdr_tong"] <= ra["so_gt_da_ket"])
     return ra
 
 
@@ -978,7 +1047,6 @@ def viet_bao_cao(vh: dict, sk: dict, vd: list, da_sua: list, sau: dict | None = 
         d.append(f"| {t} | {x.get('lan_cuoi','-')} | {tre} | {x.get('trang_thai','-')}{dau} |")
 
     _so_tho = sk.get("so_ket_qua_tho", sk.get("so_ket_qua", 0))
-    _du_phong = sk.get("so_ket_qua_du_phong", 0)
     d += ["", "## 2. San luong",
           f"- Tai lieu da thu: **{vh['tai_lieu']}**",
           f"- Gia thuyet: {json.dumps(vh['gia_thuyet'], ensure_ascii=False)}",
@@ -1029,11 +1097,36 @@ def viet_bao_cao(vh: dict, sk: dict, vd: list, da_sua: list, sau: dict | None = 
               "  KHONG dung so nay lam hieu chuan: ung vien da bi chon loc tren train nen p "
               "cua chung LE RA phai lech thap."]
     d.append(f"- FDR online: {sk.get('fdr_da_bac_bo',0)}/{sk.get('fdr_tong',0)} "
-              f"gia thuyet bi bac bo (dem theo gia thuyet, bo du phong/NULL; tho {sk.get('fdr_tong_tho',0)} hang)")
+             "gia thuyet bi bac bo (dem theo gia thuyet, bo dong da supersede)")
+    # In RIENG hai don vi. Truoc 01/09 hai con so nay bi in canh nhau tren cung
+    # mot dong nhu the cung mot thang do; tang chan doan doc "687 khong khop moc
+    # nao" va mo mot van de khong ton tai.
+    d.append(f"  - hang so cai cua duong KHAM PHA: {sk.get('fdr_tho_kham_pha', 0)} "
+             f"(mot gia thuyet co the co nhieu hang: chay lai, doi the he cong)")
+    if sk.get("fdr_tho_do_dac"):
+        d.append(f"  - hang cua DUNG CU DO, khong phai kham pha: "
+                 f"{sk['fdr_tho_do_dac']} ({', '.join(sk.get('fdr_ho_do_dac', []))}) - "
+                 "khong sinh khang dinh nao va khong lam chat nguong cua ho kham pha "
+                 "(LORD dem `j` theo tung epoch rieng)")
+    if sk.get("fdr_tho_epoch_chet"):
+        d.append(f"  - hang trong EPOCH DA CHET (khoa `ho` cu truoc ngu phap "
+                 f"fdr-v2): {sk['fdr_tho_epoch_chet']} - khong ho song nao ke thua "
+                 "chung, nen chung khong lam chat nguong cua ai")
     if "khop_ba_tang" in sk:
         _k = sk["khop_ba_tang"]
-        d.append(f"- Dong bo ba tang (so_gt_da_ket == fdr_tong): "
-                 f"{'**KHOP**' if _k else '**TACH** - doi soat tiep khoan tinh nay'}")
+        d.append(f"- Dong bo ba tang: {'**KHOP**' if _k else '**LECH**'} "
+                 f"(trung suat trong epoch song: {sk.get('fdr_trung_trong_epoch_song', 0)}, "
+                 f"hang FDR mo coi ghi tu 01/09: {sk.get('fdr_mo_coi_moi', 0)})")
+    if sk.get("fdr_mo_coi_cu_khong_doi_soat_duoc"):
+        d.append(f"  - {sk['fdr_mo_coi_cu_khong_doi_soat_duoc']} hang cu khong doi soat "
+                 "duoc theo cau tao (ghi truoc khi co cot `gt_ma_nguon`), khong tinh "
+                 "vao bat bien")
+        d.append(f"  - {sk.get('gt_fail_truoc_fdr', 0)} gia thuyet FAIL TRUOC buoc FDR "
+                 "nen khong tieu suat nao - day la thiet ke 'cong re truoc placebo', "
+                 "khong phai lech so sach")
+        if sk.get("fdr_trung_trong_epoch") and not sk.get("fdr_trung_trong_epoch_song"):
+            d.append(f"  - {sk['fdr_trung_trong_epoch']} truong hop trung suat nam TRON "
+                     "trong cac epoch da chet (15-16/08, truoc khi lord_v2 chong trung)")
 
     d += ["", "## 4. Tai nguyen + toan ven",
           f"- **Thoi gian song 7 ngay: {vh.get('ty_le_song_7ngay', 1):.1%}** "
