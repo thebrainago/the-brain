@@ -129,6 +129,50 @@ def _goi_openai(nhac: str, he_thong: str, c: dict) -> dict:
             "model": jp.get("model") or c.get("model_openai")}
 
 
+def _co_anthropic() -> bool:
+    return bool(os.environ.get("ANTHROPIC_API_KEY"))
+
+
+def _goi_anthropic(nhac: str, he_thong: str, c: dict) -> dict:
+    """Goi API Anthropic (Claude).
+
+    Vi sao can duong RIENG: Claude khong tuong thich `/chat/completions`. No
+    dung `/v1/messages`, doi header `x-api-key` + `anthropic-version`, va dat
+    cau he thong o truong `system` RIENG chu khong phai mot phan tu trong
+    `messages`. Nen `_goi_openai` khong dung duoc du chi doi `base_url`.
+
+    (DeepSeek thi NGUOC LAI: no tuong thich OpenAI, nen chay duoc ngay bang
+    `OPENAI_BASE_URL=https://api.deepseek.com` va `model_openai=deepseek-chat`,
+    khong can them dong nao.)
+    """
+    import requests
+    key = os.environ.get("ANTHROPIC_API_KEY") or ""
+    if not key:
+        return {"loi": "thieu ANTHROPIC_API_KEY"}
+    model = c.get("model_anthropic")
+    if not model:
+        return {"loi": "thieu model_anthropic trong config/tri_tue.json"}
+    base = (os.environ.get("ANTHROPIC_BASE_URL")
+            or c.get("anthropic_base_url") or "https://api.anthropic.com").rstrip("/")
+    than = {"model": model, "max_tokens": int(c["max_tokens"]),
+            "messages": [{"role": "user", "content": nhac}]}
+    if he_thong:
+        than["system"] = he_thong
+    r = requests.post(
+        base + "/v1/messages",
+        headers={"x-api-key": key, "anthropic-version": "2023-06-01",
+                 "content-type": "application/json"},
+        json=than, timeout=int(c["timeout_giay"]))
+    if r.status_code != 200:
+        return {"loi": "HTTP %d: %s" % (r.status_code, r.text[:300])}
+    jp = r.json()
+    # `content` la mot DANH SACH khoi; khoi van ban co `type == "text"`.
+    van_ban = "".join(x.get("text", "") for x in (jp.get("content") or [])
+                      if x.get("type") == "text")
+    return {"van_ban": _sua_mojibake(van_ban.strip()), "duong": "anthropic",
+            "model": jp.get("model") or model}
+
+
 def _sua_mojibake(t: str) -> str:
     """Sua chu bi giai ma hai lan (`â€”` thay vi `—`).
 
@@ -168,7 +212,12 @@ def hoi(nhac: str, he_thong: str = "", bo_qua_han_muc: bool = False,
 
     t0 = time.time()
     duong = c.get("duong", "tat")
-    if duong == "openai":
+    if duong == "anthropic":
+        try:
+            kq = _goi_anthropic(nhac, he_thong, c)
+        except Exception as e:
+            kq = {"loi": f"{type(e).__name__}: {str(e)[:160]}"}
+    elif duong == "openai":
         try:
             kq = _goi_openai(nhac, he_thong, c)
         except Exception as e:
@@ -216,8 +265,10 @@ def trang_thai() -> dict:
     duoc, ly_do = con_duoc_goi(c)
     hom_nay = time.strftime("%Y-%m-%d")
     return {
-        "duong_se_dung": "openai" if c.get("duong") == "openai" else "tat",
+        "duong_se_dung": (c.get("duong")
+                          if c.get("duong") in ("openai", "anthropic") else "tat"),
         "co_openai_api": _co_openai(),
+        "co_anthropic_api": _co_anthropic(),
         "model": c.get("model_openai") or None,
         "da_goi_hom_nay": SO.mot("SELECT COUNT(*) n FROM chi_so_vh WHERE ten='tri_tue_goi' "
                                  "AND luc LIKE ?", hom_nay + "%")["n"],

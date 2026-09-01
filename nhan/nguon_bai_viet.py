@@ -323,7 +323,7 @@ def thu_thap(ma: str, so_bai: int = 12, doc_them: int = 4,
             cur = cn.execute(
                 "INSERT OR IGNORE INTO tai_lieu(van_tay,nguon,loai,tieu_de,url,"
                 "tom_tat,tu_khoa,diem,luc) VALUES(?,?,?,?,?,?,?,?,?)",
-                (vt, ma, c.get("loai", "blog"), m["tieu_de"], url,
+                (vt, _ten_nguon(ma), c.get("loai", "blog"), m["tieu_de"], url,
                  vb[:2000], c.get("hang", "C"),
                  {"A": 3.0, "B": 2.0}.get(c.get("hang", "C"), 1.0), SO.bay_gio()))
             bao["tai_lieu_moi"] += cur.rowcount
@@ -415,7 +415,7 @@ def thu_thap_trang(ma: str, so_trang: int = 6, ngan_sach_giay: int = 120) -> dic
             cur = cn.execute(
                 "INSERT OR IGNORE INTO tai_lieu(van_tay,nguon,loai,tieu_de,url,"
                 "tom_tat,tu_khoa,diem,luc) VALUES(?,?,?,?,?,?,?,?,?)",
-                (vt, ma, c.get("loai", "blog"), tieu_de or url[-80:], url,
+                (vt, _ten_nguon(ma, la_trang=True), c.get("loai", "blog"), tieu_de or url[-80:], url,
                  vb[:2000], c.get("hang", "C"),
                  {"A": 3.0, "B": 2.0}.get(c.get("hang", "C"), 1.0), SO.bay_gio()))
             bao["tai_lieu_moi"] += cur.rowcount
@@ -434,6 +434,23 @@ def thu_thap_trang(ma: str, so_trang: int = 6, ngan_sach_giay: int = 120) -> dic
     bao["con_cho"] = len(tt["cho"])
     _luu_bien_gioi(bg)
     return bao
+
+
+def _ten_nguon(ma: str, la_trang: bool = False) -> str:
+    """Ten nguon GHI VAO `tai_lieu`, khop voi khoa trong bang `nguon`.
+
+    LOI DA SAP (do 01/09): so nguon dang ky khoa `rss_allocatesmartly` (xem
+    `seeker.dang_ky_nguon`: `{"rss_" + m for m in NBV.FEEDS}`) nhung cho ghi tai
+    lieu lai dung `ma` tran -> `allocatesmartly`. Hai ben khong khop ten, nen:
+      - bang nang suat theo nguon cua EVO khong join duoc,
+      - thu tu doc theo nang suat (`seeker._diem_nang_suat`) khong thay chung,
+      - va truy `WHERE nguon LIKE 'rss_%'` tra ve **0** trong khi 32 blog da thu
+        ve 445 tai lieu that.
+    Trieu chung nhin tu ngoai la "cac blog chien luoc khong thu duoc gi".
+    """
+    if ma.startswith(("rss_", "trang_")):
+        return ma
+    return ("trang_" if la_trang else "rss_") + ma
 
 
 def thu_thap_tat_ca(gioi_han_nguon: int = 5, so_bai: int = 12,

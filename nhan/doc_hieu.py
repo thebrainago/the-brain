@@ -227,8 +227,8 @@ def cac_cau(vb: str) -> list[tuple[int, str]]:
 #: day la nguon bao dong gia lon nhat cua `loai_cau` - "on both the buy and sell
 #: side", "its buyback program", "buyers and sellers", "the sell-side analyst".
 _KHONG_PHAI_HANH_DONG = re.compile(
-    r"(?:buy|sell)(?:[ -]?(?:side|back|er|ers|out|in)|s(?=[ ]side))"
-    r"|buy and sell|buyers?|sellers?", re.I)
+    r"\b(?:buy|sell)(?:[ -]?(?:side|back|er|ers|out|in)\b|s\b(?=[ ]side))"
+    r"|\bbuy and sell\b|\bbuyers?\b|\bsellers?\b", re.I)
 
 
 def loai_cau(cau: str) -> str | None:

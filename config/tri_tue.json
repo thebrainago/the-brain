@@ -6,11 +6,16 @@
   "cache_gio": 6,
   "timeout_giay": 420,
   "duong": "tat",
-
   "_ghi_chu_16_08": [
     "Claude va Anthropic da duoc loai khoi cau noi runtime.",
     "SEEKER khong con dung LLM de boc tai lieu trong mot_luot.",
     "Chi bat OpenAI khi da khai bao model ro rang, schema dau ra, gioi han chi phi",
     "va co lap noi dung web khong tin cay khoi quyen cong cu/he thong tep."
-  ]
+  ],
+  "model_anthropic": "",
+  "_huong_dan_bat": {
+    "claude": "dat bien moi truong ANTHROPIC_API_KEY, dien model_anthropic (vd claude-sonnet-4-5), doi duong=anthropic",
+    "deepseek": "dat OPENAI_API_KEY=<khoa deepseek>, OPENAI_BASE_URL=https://api.deepseek.com, dien model_openai=deepseek-chat, doi duong=openai",
+    "tran": "tran_moi_ngay=40 va cach_nhau_giay=600 la phanh chi phi - khong sua khi chua tinh lai tien"
+  }
 }
