@@ -5,7 +5,7 @@
   "cach_nhau_giay": 600,
   "cache_gio": 6,
   "timeout_giay": 420,
-  "duong": "tat",
+  "duong": "openai",
   "_ghi_chu_16_08": [
     "Claude va Anthropic da duoc loai khoi cau noi runtime.",
     "SEEKER khong con dung LLM de boc tai lieu trong mot_luot.",
@@ -17,5 +17,11 @@
     "claude": "dat bien moi truong ANTHROPIC_API_KEY, dien model_anthropic (vd claude-sonnet-4-5), doi duong=anthropic",
     "deepseek": "dat OPENAI_API_KEY=<khoa deepseek>, OPENAI_BASE_URL=https://api.deepseek.com, dien model_openai=deepseek-chat, doi duong=openai",
     "tran": "tran_moi_ngay=40 va cach_nhau_giay=600 la phanh chi phi - khong sua khi chua tinh lai tien"
-  }
+  },
+  "cc_switch_provider": "deepseek",
+  "_ghi_chu_01_09": [
+    "Bat qua cc-switch: khoa+base_url+model doc TAI CHO tu ~/.cc-switch/cc-switch.db,",
+    "khong chep sang day. Doi khoa trong cc-switch la doi luon o day.",
+    "Phanh chi phi: 40 luot/ngay, cach nhau 600s. Muon tat: doi duong=tat."
+  ]
 }

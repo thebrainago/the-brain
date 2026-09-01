@@ -4830,5 +4830,115 @@
   },
   "so_dieu_kien": 1,
   "_ty_le_kich_hoat": 0.0679
+ },
+ {
+  "ten": "etf_arbitrage_khi_bien_dong_thap",
+  "co_che": "Nha tao lap thi truong ETF (AP) mua ETF khi gia thap hon NAV (zscore < -2) va ban khi gia cao hon NAV (zscore > 2), voi dieu kien bien dong thap (phan vi ATR20 < 0.3) de giam rui ro va chi phi giao dich.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 20
+     },
+     "n": 40
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.3
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0989
+ },
+ {
+  "ten": "insurance_put_hedge_khi_bien_dong_cao",
+  "co_che": "Cong ty bao hiem mua quyen chon put de phong ho danh muc co phieu khi bien dong thi truong tang cao (phan vi ATR20 > 0.8) va chi so o gan dinh (phan vi close > 0.8), nham tranh ton that lon trong dot dieu chinh.",
+  "ho": "bien_dong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 20
+     },
+     "n": 40
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 40
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 20
+     },
+     "n": 40
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.2185
  }
 ]

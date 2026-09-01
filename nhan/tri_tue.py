@@ -96,20 +96,71 @@ def con_duoc_goi(c: dict | None = None) -> tuple[bool, str]:
     return True, "ok"
 
 
+#: So cua `cc-switch` - noi chu du an da khai san provider va khoa API.
+CC_SWITCH_DB = Path.home() / ".cc-switch" / "cc-switch.db"
+
+
+def tu_cc_switch(ten: str = "deepseek") -> dict:
+    """Doc khoa + base_url + model tu `cc-switch` DA CO SAN tren may.
+
+    Vi sao doc TAI CHO chu khong chep sang `config/tri_tue.json`: mot khoa API
+    chi nen ton tai o MOT noi. Chep di la tao them mot cho de ro ri, va tao them
+    mot ban co the lech khi chu du an doi khoa trong cc-switch.
+
+    Tra {} khi khong co - de goi y KHONG cham vao duong quyet dinh nao.
+    """
+    if not CC_SWITCH_DB.exists():
+        return {}
+    import re as _re
+    import sqlite3
+    try:
+        cn = sqlite3.connect(f"file:{CC_SWITCH_DB}?mode=ro", uri=True)
+        cn.row_factory = sqlite3.Row
+        for r in cn.execute("SELECT name, settings_config FROM providers"):
+            if ten.lower() not in str(r["name"] or "").lower():
+                continue
+            cfg = json.loads(r["settings_config"] or "{}")
+            khoa = (cfg.get("auth") or {}).get("OPENAI_API_KEY") or ""
+            tho = str(cfg.get("config") or "")
+            m_url = _re.search(r'base_url\s*=\s*"([^"]+)"', tho)
+            m_model = _re.search(r'^model\s*=\s*"([^"]+)"', tho, _re.M)
+            m_wire = _re.search(r'wire_api\s*=\s*"([^"]+)"', tho)
+            if not khoa:
+                continue
+            return {"khoa": khoa,
+                    "base_url": (m_url.group(1) if m_url else "").rstrip("/"),
+                    "model": m_model.group(1) if m_model else "",
+                    "wire_api": m_wire.group(1) if m_wire else "chat",
+                    "ten": r["name"]}
+    except Exception:
+        return {}
+    finally:
+        try:
+            cn.close()
+        except Exception:
+            pass
+    return {}
+
+
 def _co_openai() -> bool:
-    return bool(os.environ.get("OPENAI_API_KEY"))
+    return bool(os.environ.get("OPENAI_API_KEY") or tu_cc_switch().get("khoa"))
 
 
 def _goi_openai(nhac: str, he_thong: str, c: dict) -> dict:
     """Goi bat ky API tuong thich OpenAI (`/chat/completions`) - giup may nay
     khong le thuoc mot he LLM duy nhat (Claude)."""
     import requests
-    key = os.environ.get("OPENAI_API_KEY") or ""
+    # Uu tien bien moi truong; khong co thi lay tu `cc-switch` da khai san tren
+    # may. Chu du an noi ro: "co san deepseek trong may, trong cc switch co cau
+    # hinh". Doc tai cho, khong chep khoa sang file nao cua du an.
+    cc = tu_cc_switch(c.get("cc_switch_provider", "deepseek"))
+    key = os.environ.get("OPENAI_API_KEY") or cc.get("khoa") or ""
     base = (os.environ.get("OPENAI_BASE_URL") or c.get("openai_base_url")
-            or "https://api.openai.com/v1").rstrip("/")
+            or cc.get("base_url") or "https://api.openai.com/v1").rstrip("/")
+    model = c.get("model_openai") or cc.get("model") or ""
     if not key:
-        return {"loi": "thieu OPENAI_API_KEY"}
-    if not c.get("model_openai"):
+        return {"loi": "thieu OPENAI_API_KEY (va cc-switch khong co provider nao)"}
+    if not model:
         return {"loi": "thieu model_openai trong config/tri_tue.json"}
     msgs = []
     if he_thong:
@@ -118,7 +169,7 @@ def _goi_openai(nhac: str, he_thong: str, c: dict) -> dict:
     r = requests.post(
         base + "/chat/completions",
         headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
-        json={"model": c.get("model_openai", "gpt-4o"), "messages": msgs,
+        json={"model": model, "messages": msgs,
               "max_tokens": int(c["max_tokens"])},
         timeout=int(c["timeout_giay"]))
     if r.status_code != 200:
@@ -126,7 +177,7 @@ def _goi_openai(nhac: str, he_thong: str, c: dict) -> dict:
     jp = r.json()
     van_ban = ((jp.get("choices") or [{}])[0].get("message") or {}).get("content", "")
     return {"van_ban": _sua_mojibake((van_ban or "").strip()), "duong": "openai",
-            "model": jp.get("model") or c.get("model_openai")}
+            "model": jp.get("model") or model}
 
 
 def _co_anthropic() -> bool:
