@@ -225,3 +225,71 @@ class DocChienLuocThat(unittest.TestCase):
 
     def test_khong_co_strategy_entry_thi_khong_ra_gi(self):
         self.assertEqual(DM.doc_chien_luoc("x = ema(close, 20)")["co_che"], [])
+
+
+CO_NHO = """//@version=4
+strategy("MA cross state", overlay=true)
+fast_ma = ema(close, 10)
+slow_ma = ema(close, 30)
+direction = na(direction[1]) ? 1 : crossunder(fast_ma, slow_ma) and direction[1] > 0 ? -1 : crossover(fast_ma, slow_ma) and direction[1] < 0 ? 1 : direction[1]
+if (direction > 0)
+    strategy.entry("L", strategy.long)
+"""
+
+CONG_TAC = """//@version=4
+strategy("switch", overlay=true)
+dung_dai = input(true)
+ma_nhanh = ema(close, 10)
+ma_cham = ema(close, 50)
+muc = dung_dai ? ma_cham : ma_nhanh
+if (close > muc)
+    strategy.entry("L", strategy.long)
+"""
+
+
+class DocBienCoNho(unittest.TestCase):
+    """Bien TU THAM CHIEU viet bang tam nguyen long -> `trang_thai_lat`."""
+
+    def setUp(self):
+        self.cc = DM.doc_chien_luoc(CO_NHO, tien_to="t")["co_che"]
+
+    def test_dich_duoc_thanh_trang_thai_lat(self):
+        self.assertEqual(len(self.cc), 1)
+        t = self.cc[0]["vao"][0]["trai"]
+        self.assertEqual(t["chi_bao"], "trang_thai_lat")
+
+    def test_nhanh_len_va_xuong_dung_chieu(self):
+        t = self.cc[0]["vao"][0]["trai"]
+        self.assertEqual(t["len"]["phep"], "cheo_len")
+        self.assertEqual(t["xuong"]["phep"], "cheo_xuong")
+
+    def test_BO_ve_tu_tham_chieu_khoi_dieu_kien(self):
+        """`and direction[1] > 0` la guard trang thai - `trang_thai_lat` da giu san."""
+        t = self.cc[0]["vao"][0]["trai"]
+        self.assertNotIn("trang_thai_lat", str(t["len"]["phai"]))
+        self.assertEqual(t["len"]["trai"]["chi_bao"], "ema")
+
+    def test_ho_nhin_xuyen_qua_trang_thai(self):
+        """`khac` khong khai duoc pham vi nen se bi bo o cua cuoi."""
+        self.assertNotEqual(self.cc[0]["ho"], "khac")
+
+    def test_qua_kiem_cu_phap(self):
+        self.assertEqual(NP.kiem_khai_bao(self.cc[0]), [])
+
+    def test_khong_tu_tham_chieu_thi_khong_thanh_trang_thai(self):
+        self.assertIsNone(DM._trang_thai_tu_tam_nguyen(
+            "x", "a > b ? 1 : -1", 10 ** 6, [], []))
+
+
+class CongTacCauHinh(unittest.TestCase):
+    """`x = co_bat ? A : B` voi `co_bat = input(true)` la LUA CHON, khong phai tin hieu."""
+
+    def test_chon_dung_nhanh_theo_mac_dinh_cua_tac_gia(self):
+        cc = DM.doc_chien_luoc(CONG_TAC, tien_to="t")["co_che"]
+        self.assertEqual(len(cc), 1, "khong chon duoc nhanh cua cong tac")
+        self.assertEqual(cc[0]["vao"][0]["phai"]["n"], 50)
+
+    def test_input_false_thi_chon_nhanh_kia(self):
+        cc = DM.doc_chien_luoc(CONG_TAC.replace("input(true)", "input(false)"),
+                               tien_to="t")["co_che"]
+        self.assertEqual(cc[0]["vao"][0]["phai"]["n"], 10)

@@ -171,6 +171,123 @@ def _luoi_quanh(n: float, khai: dict | None) -> list[int]:
     return sorted(ra)
 
 
+def _tach_tam_nguyen(bt: str) -> list[tuple[str, str]]:
+    """`a ? b : c ? d : e` -> [(a,b), (c,d), ("", e)]. Tach o MUC NGOAI CUNG."""
+    ra, con = [], bt.strip()
+    while True:
+        muc, vt = 0, -1
+        for i, c in enumerate(con):
+            if c in "([":
+                muc += 1
+            elif c in ")]":
+                muc -= 1
+            elif c == "?" and muc == 0:
+                vt = i
+                break
+        if vt < 0:
+            ra.append(("", con.strip()))
+            return ra
+        dk = con[:vt]
+        # tim dau `:` NGANG CAP voi dau `?` nay
+        muc, vt2 = 0, -1
+        for i in range(vt + 1, len(con)):
+            c = con[i]
+            if c in "([":
+                muc += 1
+            elif c in ")]":
+                muc -= 1
+            elif c == ":" and muc == 0:
+                vt2 = i
+                break
+        if vt2 < 0:
+            ra.append((dk.strip(), con[vt + 1:].strip()))
+            return ra
+        ra.append((dk.strip(), con[vt + 1:vt2].strip()))
+        con = con[vt2 + 1:]
+
+
+def _bo_tu_tham_chieu(dk: str, ten: str) -> str:
+    """Bo cac ve `ten[1] > 0` khoi dieu kien - chung la GUARD TRANG THAI.
+
+    `crossunder(fast, slow) and direction[1] > 0 ? -1` nghia la "lat xuong khi co
+    crossunder, va luc do dang len". `trang_thai_lat` da GIU trang thai san nen
+    ve `direction[1] > 0` la thua; giu no lai thi khong dich duoc (mot toan hang
+    tu tham chieu) va ca bien mat.
+    """
+    giu = [v for v in _tach_va(dk)
+           if not re.search(rf"\b{re.escape(ten)}\s*\[", v)]
+    return " and ".join(giu)
+
+
+def _trang_thai_tu_tam_nguyen(ten: str, bt: str, vi_tri: int, bang: list,
+                              bang_bt: list) -> dict | None:
+    """Bien TU THAM CHIEU viet bang tam nguyen long -> toan hang `trang_thai_lat`.
+
+    Dang that trong ma (do 01/09 tren kho Pine, 12 bien co dang nay):
+
+        direction = na(direction[1]) ? 1
+                  : crossunder(fast, slow) and direction[1] > 0 ? -1
+                  : crossover(fast, slow) and direction[1] < 0 ? 1
+                  : direction[1]
+
+    Day chinh la `trang_thai_lat`: nhanh cho ra +1 la dieu kien LEN, nhanh cho ra
+    -1 la dieu kien XUONG, nhanh `x[1]` la "giu nguyen". Bo doc chi can nhan ra
+    hinh dang do - toan tu da co tu truoc.
+    """
+    if not re.search(rf"\b{re.escape(ten)}\s*\[", bt):
+        return None                       # khong tu tham chieu -> khong co nho
+    len_dk, xuong_dk = None, None
+    for dk, gt in _tach_tam_nguyen(bt):
+        g = gt.strip()
+        if not dk or f"{ten}[" in g:
+            continue                      # nhanh mac dinh / giu nguyen
+        if re.search(rf"\bna\s*\(\s*{re.escape(ten)}\s*\[", dk):
+            continue                      # nhanh khoi tao
+        sach = _bo_tu_tham_chieu(dk, ten)
+        if not sach:
+            continue
+        if re.fullmatch(r"[+]?1(?:\.0+)?", g) and len_dk is None:
+            len_dk = sach
+        elif re.fullmatch(r"-1(?:\.0+)?", g) and xuong_dk is None:
+            xuong_dk = sach
+    if not len_dk or not xuong_dk:
+        return None
+    a, ha = _no_dieu_kien(len_dk, vi_tri, bang, bang_bt)
+    b, hb = _no_dieu_kien(xuong_dk, vi_tri, bang, bang_bt)
+    if ha or hb or len(a) != 1 or len(b) != 1:
+        return None                       # dich duoc CA HAI thi moi nhan
+    return {"chi_bao": "trang_thai_lat", "len": a[0], "xuong": b[0]}
+
+
+def _chon_nhanh_cau_hinh(bt: str, vi_tri: int, bang_bt: list) -> str | None:
+    """`x = co_bat ? A : B` voi `co_bat = input(true)` -> tra ve `A`.
+
+    Day KHONG phai tin hieu ma la mot cong tac cau hinh cua tac gia: 59/71 bieu
+    thuc tam nguyen trong kho Pine thuoc dang nay (`use_longer_average`,
+    `no_repainting`, `show_highlight`). Giu nguyen ca bieu thuc thi khong dich
+    duoc; chon dung nhanh ung voi gia tri MAC DINH cua ho thi doc tiep duoc, va
+    do dung la cau hinh ho phat hanh.
+    """
+    nhanh = _tach_tam_nguyen(bt)
+    if len(nhanh) != 2 or not nhanh[0][0]:
+        return None
+    dk = nhanh[0][0].strip()
+    if not re.fullmatch(_TEN, dk):
+        return None
+    gt = None
+    for pos, ten, bt2 in bang_bt:
+        if pos >= vi_tri:
+            break
+        if ten == dk:
+            gt = bt2
+    if gt is None:
+        return None
+    m = re.match(r"input(?:\.bool)?\s*\(\s*(true|false)\b", gt.strip(), re.I)
+    if not m:
+        return None
+    return nhanh[0][1] if m.group(1).lower() == "true" else nhanh[1][1]
+
+
 def _bang_ky_hieu(vb: str) -> list[tuple[int, str, dict]]:
     """(vi tri, ten bien, toan hang) cho moi bien duoc gan bang mot chi bao.
 
@@ -375,6 +492,20 @@ def _toan_hang_goc(tu: str, vi_tri: int, bang: list,
                 if ten == tu:
                     dn = (pos, bt2)
             if dn is not None:
+                # THU TU QUAN TRONG: trang thai co nho truoc, vi mot bieu thuc
+                # tam nguyen tu tham chieu cung "trong nhu" mot to hop tuyen
+                # tinh neu chi nhin dau `+`/`-`.
+                t = _trang_thai_tu_tam_nguyen(tu, dn[1], dn[0], bang, bang_bt)
+                if t is not None:
+                    return t
+                # CONG TAC CAU HINH: `x = co_bat ? A : B` voi `co_bat =
+                # input(true)`. Do la mot lua chon cua tac gia, khong phai tin
+                # hieu - chon dung nhanh ho de mac dinh roi doc tiep.
+                nhanh = _chon_nhanh_cau_hinh(dn[1], dn[0], bang_bt)
+                if nhanh is not None and nhanh != dn[1]:
+                    t = _toan_hang(nhanh, dn[0], bang, bang_bt, sau + 1)
+                    if t is not None:
+                        return t
                 t = _tuyen_tinh(dn[1], dn[0], bang, bang_bt, sau + 1)
                 if t is not None:
                     return t
@@ -439,6 +570,16 @@ def _cac_chi_bao(t: dict, sau: int = 0) -> list[str]:
         ra += _cac_chi_bao(x, sau + 1)
     if isinstance(t.get("cua"), dict):
         ra += _cac_chi_bao(t["cua"], sau + 1)
+    # Toan tu CO NHO giu chi bao trong hai DIEU KIEN con (`len`/`xuong`/`khi`),
+    # khong phai trong `toan_hang` hay `cua`. Khong nhin vao day thi mot co che
+    # supertrend ra ho `khac` - ma `khac` khong khai duoc pham vi nen bi bo o cua
+    # cuoi. Cung ho loi da sap voi `tuyen_tinh`: dich ra duoc roi lai vut di.
+    for khoa in ("len", "xuong", "khi"):
+        d = t.get(khoa)
+        if isinstance(d, dict):
+            for ben in ("trai", "phai"):
+                if isinstance(d.get(ben), dict):
+                    ra += _cac_chi_bao(d[ben], sau + 1)
     return ra
 
 
