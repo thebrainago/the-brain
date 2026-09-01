@@ -62,16 +62,34 @@ KHO_EA = REPORTS / "ea"
 #: Thu muc du lieu cua tung terminal + duong toi metaeditor/terminal cua no.
 #: May nay co NAM thu muc du lieu MT5 (bai hoc 29/07: phai quet het truoc khi
 #: ket luan "khong tim thay").
+_DAT = Path(r"C:\Users\SV STORE\AppData\Roaming\MetaQuotes\Terminal")
+_CAI = Path(r"C:\Program Files")
+
+#: ten -> (thu muc DU LIEU, thu muc CAI DAT, symbol mac dinh co lich su that).
+#: Nam terminal = nam thu muc du lieu RIENG, va do chinh la co so de chay song
+#: song: MT5 khong cho hai tien trinh dung chung mot thu muc du lieu, nhung nam
+#: thu muc khac nhau thi chay dong thoi duoc.
 TERMINAL = {
-    "exness": (r"C:\Users\SV STORE\AppData\Roaming\MetaQuotes\Terminal"
-               r"\53785E099C927DB68A545C249CDBCE06",
-               r"C:\Program Files\MetaTrader 5 EXNESS"),
+    "fxce":       (_DAT / "1A842330F5C043A17800E34E35E4EA61",
+                   _CAI / "FXCE MT5 Terminal", "SP500"),
+    "metaquotes": (_DAT / "D0E8209F77C8CF37AD8BF550E51FF075",
+                   _CAI / "MetaTrader 5", "EURUSD"),
+    "xm":         (_DAT / "656C351524AFFE300FAFE576FA4C7845",
+                   _CAI / "XM MT5", "EURUSDmicro"),
+    "exness":     (_DAT / "53785E099C927DB68A545C249CDBCE06",
+                   _CAI / "MetaTrader 5 EXNESS", "XAUUSDm"),
+    "ultima":     (_DAT / "43A9BD896CCB6BF2DF5C71EA198AE39D",
+                   _CAI / "Ultima Markets MT5 Terminal", "EURUSD"),
 }
 
 
 def _duong(ten_terminal: str) -> tuple[Path, Path, Path]:
-    dat, cai = TERMINAL[ten_terminal]
-    return Path(dat) / "MQL5", Path(cai) / "metaeditor64.exe", Path(cai) / "terminal64.exe"
+    dat, cai, _sym = TERMINAL[ten_terminal]
+    return dat / "MQL5", cai / "metaeditor64.exe", cai / "terminal64.exe"
+
+
+def symbol_mac_dinh(ten_terminal: str) -> str:
+    return TERMINAL[ten_terminal][2]
 
 
 def ten_sach(s: str) -> str:
@@ -173,6 +191,128 @@ def viet_ini(ten: str, ea: str, tap_set: str, symbol: str, khung: str,
     p = f / f"{ten}.ini"
     p.write_text(noi, encoding="utf-16")
     return p
+
+
+def _pid_cua_ten(ten_terminal: str) -> list[int]:
+    """PID cua terminal nay, ke ca ban sao LiveUpdate.
+
+    Do that 01/09: `/config:` duoc doc thanh cong roi terminal ghi
+    `LiveUpdate start "<data>\\liveupdate\\terminal64.exe" /update /path:... /config:...`
+    va tien trinh CHA thoat ngay ("exit with code 0"). Test that chay o tien
+    trinh CON, va con do nam duoi thu muc DU LIEU chu khong phai thu muc cai dat
+    - nen loc theo mot minh thu muc cai dat thi thay "khong con tien trinh nao"
+    va bo cuoc trong khi test dang chay.
+    """
+    dat, cai, _ = TERMINAL[ten_terminal]
+    return _pid_cua(cai) + _pid_cua(dat / "liveupdate")
+
+
+def _pid_cua(cai: Path) -> list[int]:
+    """PID cua nhung `terminal64.exe` chay TU thu muc cai dat nay.
+
+    Ban cu (`chay_mt5_tester.chay_va_cho`) dem TONG so `terminal64.exe`, va cach
+    do chi dung khi chay MOT cai mot luc: chay song song thi mot terminal xong se
+    bi doc thanh "tat ca da xong", con mot terminal khac dang chay lai giu vong
+    cho mai. Phai loc theo DUONG DAN thuc thi.
+
+    Va con bay LiveUpdate cua XM: tien trinh dau doc config roi CHUYEN GIAO cho
+    ban sao trong `liveupdate\\` va thoat ngay - nen loc theo tien to thu muc cai
+    dat chu khong theo duong dan tuyet doi cua chinh `terminal64.exe`.
+    """
+    r = subprocess.run(
+        ["powershell", "-NoProfile", "-Command",
+         "Get-CimInstance Win32_Process -Filter \"Name='terminal64.exe'\" | "
+         "Select-Object ProcessId,ExecutablePath | ConvertTo-Json -Compress"],
+        capture_output=True, text=True, timeout=90)
+    try:
+        d = json.loads((r.stdout or "").strip() or "[]")
+    except Exception:
+        return []
+    if isinstance(d, dict):
+        d = [d]
+    # So khop theo BIEN THU MUC, khong phai tien to chuoi. `C:\\Program Files\\
+    # MetaTrader 5` la tien to cua `...\\MetaTrader 5 EXNESS`, nen `startswith`
+    # gan tien trinh Exness cho ca "metaquotes" - va `dong_terminal("metaquotes")`
+    # se giet luon Exness. Da do that: mot PID hien o ca hai muc.
+    goc = str(cai).lower().rstrip(chr(92))
+    ra = []
+    for x in d:
+        duong = str(x.get("ExecutablePath") or "").lower()
+        if duong == goc + chr(92) + "terminal64.exe" or duong.startswith(goc + chr(92)):
+            ra.append(int(x["ProcessId"]))
+    return ra
+
+
+def dong_terminal(ten_terminal: str) -> int:
+    """Dong RIENG terminal nay, khong dong cai khac.
+
+    An toan ve vi the: terminal chi la cua so ket noi, lenh nam tren server. Chu
+    du an da xac nhan moi tai khoan tren may deu la demo hoac chua dang nhap.
+    """
+    pids = _pid_cua_ten(ten_terminal)
+    for pid in pids:
+        subprocess.run(["taskkill", "/PID", str(pid), "/F"],
+                       capture_output=True, timeout=60)
+    if pids:
+        time.sleep(3)
+    return len(pids)
+
+
+def chay_mot(viec: dict) -> dict:
+    """Mot luot tester tren MOT terminal. Tra ve duong bao cao va thoi gian."""
+    ten_t = viec["terminal"]
+    dat, _cai, _sym = TERMINAL[ten_t]
+    _, _, term = _duong(ten_t)
+    nhan = viec["nhan"]
+    bc = dat / "_bao_cao" / f"{nhan}.htm"
+    try:
+        bc.unlink()
+    except OSError:
+        pass
+    tap_set = viet_set(nhan, viec.get("input") or {}, ten_t)
+    ini = viet_ini(nhan, viec["ea"], tap_set, viec["symbol"], viec["khung"],
+                   viec["tu"], viec["den"], model=viec.get("model", 4),
+                   ten_terminal=ten_t)
+    dong_terminal(ten_t)
+    t0 = time.time()
+    subprocess.Popen([str(term), f"/config:{ini}"])
+    # Cho BAO CAO xuat hien, khong cho tien trinh bien mat: LiveUpdate lam tien
+    # trinh dau thoat ngay lap tuc trong khi test that chay o tien trinh con.
+    han = viec.get("han_giay", 900)
+    while time.time() - t0 < han:
+        if bc.exists() and bc.stat().st_size > 2000:
+            time.sleep(2)
+            break
+        if time.time() - t0 > 90 and not _pid_cua_ten(ten_t):
+            break                       # terminal da thoat ma khong ra bao cao
+        time.sleep(3)
+    xong = bc.exists() and bc.stat().st_size > 2000
+    if not xong:
+        dong_terminal(ten_t)
+    return {**viec, "bao_cao": str(bc) if xong else "", "xong": xong,
+            "giay": round(time.time() - t0, 1)}
+
+
+def chay_song_song(ds_viec: list[dict]) -> list[dict]:
+    """Chay nhieu luot cung luc - MOI TERMINAL MOT LUOT tai mot thoi diem.
+
+    Song song duoc vi moi terminal co thu muc du lieu rieng. Khoa theo terminal
+    chu khong theo so luong: hai luot cung mot terminal se dam nhau o khoa thu
+    muc du lieu, va cai thu hai chet lang le.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    theo_t: dict[str, list] = {}
+    for v in ds_viec:
+        theo_t.setdefault(v["terminal"], []).append(v)
+
+    def _mot_terminal(ds):
+        return [chay_mot(v) for v in ds]
+
+    ra = []
+    with ThreadPoolExecutor(max_workers=len(theo_t) or 1) as ex:
+        for kq in ex.map(_mot_terminal, theo_t.values()):
+            ra += kq
+    return ra
 
 
 def main() -> int:
