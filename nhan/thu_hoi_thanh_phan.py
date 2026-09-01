@@ -35,6 +35,7 @@ from __future__ import annotations
 import json
 import re
 
+from nhan import ngu_phap as NP
 from nhan import so as SO
 
 #: Nguon gia cua Pine -> cot trong khung du lieu cua ta. `hl2`/`hlc3`/`ohlc4`
@@ -95,26 +96,18 @@ _MQL = {
 #:    `dong_luong` = `doi`. Ba cai nay cong 186 lan xuat hien ma khong ton mot
 #:    dong trinh thong dich nao - chung tung bi cham "khong dien dat duoc" chi
 #:    vi bang nay chua duoc cap nhat sau khi `tuyen_tinh` ra doi.
-_DIEN_DAT_DUOC = {"gia", "rsi", "ibs", "atr", "ema", "sma", "bien_do",
-                  "than_nen", "khoi_luong", "gio", "ngay_trong_tuan",
-                  "ngay_trong_thang", "thang", "tb", "do_lech", "zscore",
-                  "phan_vi", "doi", "doi_pct", "tre", "cao_nhat", "thap_nhat",
-                  "tuyet_doi",
-                  "wma", "smma", "cci", "stochastic", "obv", "adx",
-                  "tuong_quan", "phuong_sai", "tuyen_tinh",
-                  "macd", "bollinger", "dong_luong"}
+#: Nhap TU NGU PHAP, khong chep lai. Ban chep tay truoc day lech ca hai chieu:
+#: khai thua macd/bollinger/dong_luong (nen bang "con thieu" giau dung ba toan
+#: hang duoc dung nhieu nhat) va khai thieu 6 toan tu co that (nen thanh phan
+#: dung chung bi vut). Xem `ngu_phap.CHI_BAO_CO`.
+_DIEN_DAT_DUOC = NP.CHI_BAO_CO
+_NHAN_COT = NP.CHI_BAO_NHAN_COT
 
-#: `rsi` cua ngu phap KHONG nhan `cot` (luon tinh tren close); `ema`/`sma` thi
-#: co. Do la mot khac biet that trong `toan_hang()`, khong phai suy doan.
-#:
-#: Cac TOAN TU CUA SO (`cao_nhat`, `tb`, `zscore`...) cung nhan duoc nguon gia,
-#: nhung qua truong `cua` chu khong phai `cot`. Thieu chung o day thi
-#: `highest(high, 55)` - Donchian, dieu kien pha vo pho bien nhat - bi cham la
-#: "khong dien dat duoc" va bi vut, trong khi ngu phap viet no duoc thoai mai:
-#: {"chi_bao": "cao_nhat", "n": 55, "cua": {"chi_bao": "gia", "cot": "high"}}.
-_NHAN_COT = {"ema", "sma", "gia",
-             "cao_nhat", "thap_nhat", "tb", "do_lech", "zscore", "phan_vi",
-             "doi", "doi_pct", "tre", "tuyet_doi"}
+#: Tien to cua ly do "ngu phap KHONG CO toan hang nay". Phan biet voi ly do
+#: "co toan hang nhung bien the nay chua nhan duoc" (`atr` tren `hl2` chang
+#: han): cai dau doi mot toan hang MOI, cai sau chi doi noi rong cai da co.
+#: Tach ra vi hai viec do khac han nhau ve cong suc va ve uu tien.
+THIEU_TOAN_HANG = "ngu phap chua co toan hang"
 
 _SO = r"[-+]?\d+(?:\.\d+)?"
 
@@ -328,10 +321,10 @@ def dien_dat_duoc(tp: dict) -> tuple[bool, str]:
     """Thanh phan nay ngu phap hien tai co viet ra duoc khong, va thieu gi."""
     cb = tp.get("chi_bao")
     if cb not in _DIEN_DAT_DUOC:
-        return False, f"ngu phap chua co toan hang '{cb}'"
+        return False, f"{THIEU_TOAN_HANG} '{cb}'"
     cot = tp.get("cot")
-    if cot in ("hl2", "hlc3", "ohlc4"):
-        return False, f"nguon gia '{cot}' la mot phep tinh, chua co toan hang"
+    if cot in NP.COT_TONG_HOP and cb not in _NHAN_COT:
+        return False, f"'{cb}' chua nhan duoc nguon gia tong hop '{cot}'"
     if cot and cot != "close" and cb not in _NHAN_COT:
         return False, f"'{cb}' trong ngu phap luon tinh tren close, khong nhan cot"
     return True, ""
@@ -415,8 +408,22 @@ def kho(chi_dien_dat_duoc: bool | None = None, toi_da: int = 200) -> list[dict]:
 
 
 def toan_hang_con_thieu(toi_da: int = 30) -> list[dict]:
-    """Danh sach toan hang can them, xep theo SO LAN nguoi ta that su dung."""
-    return SO.nhieu(
-        "SELECT chi_bao, COUNT(*) so_bien_the, SUM(so_lan) tong_lan, "
-        "MIN(con_thieu) con_thieu FROM thanh_phan WHERE dien_dat_duoc=0 "
-        "GROUP BY chi_bao ORDER BY tong_lan DESC LIMIT ?", toi_da)
+    """Danh sach toan hang can them, xep theo SO LAN nguoi ta that su dung.
+
+    Cham lai `dien_dat_duoc` theo NGU PHAP HIEN TAI thay vi tin co `dien_dat_duoc`
+    da luu. Co do la anh chup luc THU HOACH: mot toan hang them vao ngu phap hom
+    sau van bi bang nay doi them lan nua. Do that 01/09: bang van doi them `wma`,
+    `smma`, `cci` trong khi ca ba da co tu buoi sang cung ngay.
+    """
+    tho = SO.nhieu("SELECT chi_bao, cot, so_lan FROM thanh_phan")
+    gom: dict[str, dict] = {}
+    for r in tho:
+        ok, thieu = dien_dat_duoc(r)
+        if ok:
+            continue
+        g = gom.setdefault(r["chi_bao"], {
+            "chi_bao": r["chi_bao"], "so_bien_the": 0, "tong_lan": 0,
+            "con_thieu": thieu})
+        g["so_bien_the"] += 1
+        g["tong_lan"] += int(r["so_lan"] or 0)
+    return sorted(gom.values(), key=lambda x: -x["tong_lan"])[:toi_da]

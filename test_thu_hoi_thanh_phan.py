@@ -116,9 +116,18 @@ class DienDatDuoc(unittest.TestCase):
         ok, _ = TH.dien_dat_duoc({"chi_bao": "ema", "cot": "high"})
         self.assertTrue(ok)
 
-    def test_rsi_tren_high_KHONG_dien_dat_duoc(self):
-        """`rsi` trong ngu phap luon tinh tren close. Do la khac biet THAT."""
-        ok, thieu = TH.dien_dat_duoc({"chi_bao": "rsi", "cot": "high"})
+    def test_rsi_tren_high_dien_dat_duoc_tu_01_09(self):
+        """Truoc 01/09 `rsi` luon tinh tren close, va do la khac biet THAT nen
+        bai nay doi `False`. Tu 01/09 `rsi` nhan `cua`/`cot` - `rsi(hl2, 14)`
+        va `rsi(ema(close,5), 14)` la dang co that trong ma nguoi ta viet."""
+        ok, _ = TH.dien_dat_duoc({"chi_bao": "rsi", "cot": "high"})
+        self.assertTrue(ok)
+
+    def test_atr_tren_high_van_KHONG_dien_dat_duoc(self):
+        """Hieu chuan chieu nguoc: `atr` tinh tu CA OHLC nen mot 'nguon gia'
+        cho no la vo nghia. Neu moi thu deu dien dat duoc thi bang con thieu
+        tro thanh mot bang rong."""
+        ok, thieu = TH.dien_dat_duoc({"chi_bao": "atr", "cot": "high"})
         self.assertFalse(ok)
         self.assertIn("close", thieu)
 
@@ -127,9 +136,16 @@ class DienDatDuoc(unittest.TestCase):
         self.assertFalse(ok)
         self.assertIn("linreg", thieu)
 
-    def test_hl2_khong_phai_mot_cot(self):
-        ok, thieu = TH.dien_dat_duoc({"chi_bao": "ema", "cot": "hl2"})
+    def test_hl2_gio_la_mot_nguon_gia_dien_dat_duoc(self):
+        """`ta.sma(hl2, 20)` la dang co that; truoc 01/09 no bi cham la khong
+        dien dat duoc va thanh phan bi vut. `ngu_phap.COT_TONG_HOP` tinh no."""
+        ok, _ = TH.dien_dat_duoc({"chi_bao": "ema", "cot": "hl2"})
+        self.assertTrue(ok)
+
+    def test_nguon_tong_hop_cho_chi_bao_KHONG_nhan_cot_van_bao_thieu(self):
+        ok, thieu = TH.dien_dat_duoc({"chi_bao": "atr", "cot": "hl2"})
         self.assertFalse(ok)
+        self.assertIn("atr", thieu)
 
 
 class GhiSo(unittest.TestCase):

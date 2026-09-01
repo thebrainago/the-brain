@@ -62,7 +62,21 @@ HO_HOP_LE = {"quay_ve_trung_binh", "xu_huong", "pha_vo", "lich", "phien",
 
 
 # --------------------------------------------------------------- TOAN HANG
+#: Nguon gia TONG HOP. Pine goi la `hl2`/`hlc3`/`ohlc4` va chung xuat hien
+#: nhu mot cot binh thuong trong ma that (`ta.sma(hl2, 20)`). Truoc 01/09 ngu
+#: phap chi biet 4 cot goc nen moi thanh phan dung chung bi cham la "khong dien
+#: dat duoc" va bi vut - 9 lan trong kho ban doc hien tai.
+COT_TONG_HOP = {
+    "hl2": ("high", "low"),
+    "hlc3": ("high", "low", "close"),
+    "ohlc4": ("open", "high", "low", "close"),
+}
+
+
 def _cot(df: pd.DataFrame, ten: str) -> pd.Series:
+    if ten in COT_TONG_HOP:
+        phan = [_cot(df, c) for c in COT_TONG_HOP[ten]]
+        return sum(phan) / float(len(phan))
     if ten not in df.columns:
         raise KeyError(f"du lieu khong co cot '{ten}'")
     return df[ten].astype(float)
@@ -137,7 +151,11 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
     if cb == "gia":
         return _cot(df, str(t.get("cot", "close")).lower())
     if cb == "rsi":
-        return MAU_MOD.rsi(_cot(df, "close"), n)
+        # Nhan `cua`/`cot` tu 01/09: `rsi(ema(close,5), 14)` va `rsi(hl2, 14)`
+        # la dang co that trong ma nguoi ta viet, va truoc do chung bi vut.
+        x = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
+        return MAU_MOD.rsi(x, n)
     if cb == "ibs":
         return MAU_MOD.ibs(df)
     if cb == "atr":
@@ -226,7 +244,10 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
              else _cot(df, str(t.get("cot", "close")).lower()))
         return s.ewm(alpha=1.0 / max(n, 1), adjust=False).mean()
     if cb == "cci":                       # 33 lan
-        tp = (_cot(df, "high") + _cot(df, "low") + _cot(df, "close")) / 3.0
+        # Mac dinh la typical price (hlc3) dung nhu sach; nhung `ta.cci(src, n)`
+        # cua Pine nhan nguon bat ky, nen cho khai `cua`/`cot`.
+        tp = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+              else _cot(df, str(t.get("cot", "hlc3")).lower()))
         tb_ = tp.rolling(n).mean()
         mad = tp.rolling(n).apply(
             lambda x: float(np.mean(np.abs(x - x.mean()))), raw=True)
@@ -252,6 +273,61 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         di_a = 100.0 * dm_am.ewm(alpha=a, adjust=False).mean() / atr_
         dx = 100.0 * (di_d - di_a).abs() / (di_d + di_a).replace(0, np.nan)
         return dx.ewm(alpha=a, adjust=False).mean()
+
+    # --- BA TOAN HANG BAO CAO DA GIAU MAT (them 01/09/2026) ---
+    #
+    # `thu_hoi_thanh_phan._DIEN_DAT_DUOC` la mot ban SAO CHEP TAY cua danh sach
+    # nay, va no khai ca ba cai duoi day la "da co" trong khi ngu phap khong he
+    # co. Hau qua: bang `toan_hang_con_thieu` - thu duy nhat noi cho ta biet nen
+    # them gi - **giau dung ba toan hang duoc dung nhieu nhat**: macd 115 lan
+    # (hang 2), dong_luong 36 lan (hang 7), bollinger 35 lan (hang 8).
+    # Nguon su that gio la `CHI_BAO_CO` o cuoi file nay, va co bai test doi
+    # chieu tung ten mot bang cach GOI THAT.
+    if cb == "macd":
+        # `lay`: "macd" (mac dinh) | "tin_hieu" | "hieu" (histogram).
+        x = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
+        nhanh = int(t.get("nhanh", 12) or 12)
+        cham = int(t.get("cham", 26) or 26)
+        n_tin = int(t.get("tin_hieu", 9) or 9)
+        duong = MAU_MOD.ema(x, nhanh) - MAU_MOD.ema(x, cham)
+        lay = str(t.get("lay", "macd")).lower()
+        if lay == "macd":
+            return duong
+        tin = MAU_MOD.ema(duong, n_tin)
+        return tin if lay == "tin_hieu" else duong - tin
+
+    if cb == "bollinger":
+        # `lay`: "tren" | "giua" | "duoi" | "do_rong" | "phan_tram_b".
+        # Ngu phap da viet duoc dai nay bang `tuyen_tinh`, nhung phai go ba tang
+        # long nhau moi lan - va bo doc phai DOAN ra cau truc do tu mot dong
+        # Pine `ta.bb(src, 20, 2)`. Mot toan hang thang giam khoang cach do.
+        x = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
+        k = float(t.get("k", 2.0) or 2.0)
+        giua = x.rolling(n).mean()
+        sd = x.rolling(n).std()
+        lay = str(t.get("lay", "duoi")).lower()
+        if lay == "giua":
+            return giua
+        if lay == "tren":
+            return giua + k * sd
+        if lay == "duoi":
+            return giua - k * sd
+        if lay == "do_rong":
+            return (2.0 * k * sd) / giua.replace(0, np.nan)
+        if lay == "phan_tram_b":
+            duoi = giua - k * sd
+            return (x - duoi) / (2.0 * k * sd).replace(0, np.nan)
+        raise KeyError(f"'bollinger': khong biet lay='{lay}'")
+
+    if cb == "dong_luong":
+        # `mom(src, n)` cua Pine = src - src[n]. Ngu phap co `doi` lam dung viec
+        # do nhung qua truong `cua`; bo doc rut ra ten `dong_luong` va khong noi
+        # duoc chung la mot. Giu ca hai ten cho mot phep tinh.
+        x = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
+        return x.diff(n)
 
     # --- TUONG QUAN TRUOT giua HAI toan hang (120 lan - nhieu nhat) ---
     if cb == "tuong_quan":
@@ -339,7 +415,51 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         return x.rolling(n).min()
     if cb == "tuyet_doi":
         return x.abs()
+    if cb == "tong":                       # 19 lan trong ma that
+        return x.rolling(n).sum()
     raise KeyError(f"chi bao khong biet: '{cb}'")
+
+
+#: NGUON SU THAT ve nhung toan hang ngu phap noi duoc. `thu_hoi_thanh_phan`
+#: PHAI import tu day, khong duoc giu ban sao.
+#:
+#: VI SAO (do 01/09/2026). `thu_hoi_thanh_phan._DIEN_DAT_DUOC` la mot ban chep
+#: tay, va no da lech ca HAI CHIEU:
+#:   - khai thua `macd`, `bollinger`, `dong_luong` -> bang "toan hang con
+#:     thieu", thu duy nhat noi cho ta biet nen them gi, GIAU dung ba cai duoc
+#:     dung nhieu nhat (115 / 35 / 36 lan trong ma that);
+#:   - khai thieu 6 toan tu co that (`tb_cua_cac`, `cao_nhat_cua_cac`,
+#:     `thap_nhat_cua_cac`, `tong_cua_cac`, `dem_lien_tiep`, `trang_thai_lat`)
+#:     -> thanh phan nao dung chung bi cham la "khong dien dat duoc" va bi vut.
+#: Mot danh sach chep tay se lech lai. Bai test doi chieu tung ten bang cach
+#: GOI THAT `toan_hang()`, khong doc lai chinh danh sach nay.
+CHI_BAO_CO = {
+    # nguon truc tiep tu bang gia
+    "gia", "bien_do", "than_nen", "khoi_luong", "ibs",
+    # lich
+    "gio", "ngay_trong_tuan", "ngay_trong_thang", "thang",
+    # chi bao muc khung (can nhieu cot)
+    "rsi", "atr", "cci", "stochastic", "obv", "adx",
+    "ema", "sma", "wma", "smma", "macd", "bollinger", "dong_luong",
+    # gop danh sach toan hang
+    "tb_cua_cac", "cao_nhat_cua_cac", "thap_nhat_cua_cac", "tong_cua_cac",
+    "tuyen_tinh", "tuong_quan",
+    # co nho trang thai
+    "trang_thai_lat", "dem_lien_tiep",
+    # bien doi mot toan hang con (qua truong `cua`)
+    "tb", "do_lech", "phuong_sai", "zscore", "phan_vi", "doi", "doi_pct",
+    "tre", "cao_nhat", "thap_nhat", "tuyet_doi", "tong",
+}
+
+#: Toan hang nhan truc tiep truong `cot` (nguon gia). Cac toan tu cua so nhan
+#: nguon gia qua truong `cua` chu khong phai `cot`, nhung bo doc rut ra dang
+#: `highest(high, 55)` nen chung phai co mat o day - neu khong thi Donchian,
+#: dieu kien pha vo pho bien nhat, bi cham la "khong dien dat duoc".
+CHI_BAO_NHAN_COT = {
+    "gia", "ema", "sma", "wma", "smma", "macd", "bollinger", "dong_luong",
+    "cao_nhat", "thap_nhat", "tb", "do_lech", "phuong_sai", "zscore",
+    "phan_vi", "doi", "doi_pct", "tre", "tuyet_doi", "tong", "rsi", "cci",
+}
 
 
 def _so_sanh(a: pd.Series, phep: str, b: pd.Series) -> pd.Series:
