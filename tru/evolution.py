@@ -566,6 +566,25 @@ def do_van_hanh() -> dict:
         x = ra["nang_suat_nguon"].setdefault(r["ng"], {"da_boc": 0, "gia_thuyet": 0})
         x["gia_thuyet"] = r["n"]
 
+    # ------------------------------------- THANH PHAN THU HOI DUOC (01/09)
+    # `ngu_phap_thieu_toan_hang` truoc day do tang BOC (LLM) bao, nen no phu
+    # thuoc vao viec LLM co goi duoc hay khong va vao cach no dien dat. Nay co
+    # nguon dinh luong: `thanh_phan` dem tu MA THAT nguoi ta viet, xep theo so
+    # lan dung. Mot toan hang 41 lan xuat hien khac han mot toan hang 1 lan.
+    try:
+        from nhan import thu_hoi_thanh_phan as THTP
+        ra["thanh_phan"] = {
+            "tong": SO.mot("SELECT COUNT(*) n FROM thanh_phan")["n"] or 0,
+            "dien_dat_duoc": SO.mot(
+                "SELECT COUNT(*) n FROM thanh_phan WHERE dien_dat_duoc=1")["n"] or 0,
+            "toan_hang_con_thieu": [
+                {"chi_bao": r["chi_bao"], "tong_lan": r["tong_lan"],
+                 "con_thieu": r["con_thieu"]}
+                for r in THTP.toan_hang_con_thieu(12)],
+        }
+    except Exception:
+        ra["thanh_phan"] = None
+
     # ------------------------------------------------- DO SAU QUET (01/09)
     # Con tro bien gioi nam trong `nguon.lay_gi` (JSON). Co no thi phan biet duoc
     # hai thu ma ban cu tron lam mot: "nguon da can" (vong >= 1) va "chua quet
@@ -634,6 +653,17 @@ def phat_hien(vh: dict, sk: dict) -> list[dict]:
                                 "gi moi, va da di het vong tren "
                                 f"{len(da_het_vong)} nguon - chu ky nguon dang qua day",
                        "bc": {"ty_le": vh["seeker_ty_le_vong_rong"], "het_vong": da_het_vong}})
+
+    tp = vh.get("thanh_phan") or {}
+    thieu = tp.get("toan_hang_con_thieu") or []
+    if thieu and (tp.get("tong") or 0) >= 20:
+        top = ", ".join(f"{r['chi_bao']} ({r['tong_lan']} lan)" for r in thieu[:6])
+        ra.append({"ma": "ngu_phap_thieu_toan_hang", "muc": "VUA",
+                   "mo_ta": f"{len(thieu)} toan hang xuat hien trong ma THAT ma ngu phap "
+                            f"chua dien dat duoc. Xep theo so lan dung: {top}. "
+                            f"({tp['dien_dat_duoc']}/{tp['tong']} thanh phan thu hoi "
+                            "duoc la viet ra duoc.)",
+                   "bc": {"con_thieu": thieu}})
 
     # NANG SUAT DOC: doc nhieu ma khong co che nao qua cong = dang tieu gio LLM
     # vao mot duong khong ra gi. Nguong 0,3 co che/100 bai dat duoi muc hien tai
@@ -918,6 +948,11 @@ def viet_bao_cao(vh: dict, sk: dict, vd: list, da_sua: list, sau: dict | None = 
                  f"{vh['seeker_ung_vien']} ung vien tu {vh['seeker_tai_lieu_artifact']} "
                  f"artifact tai lieu). Noi sinh khong tinh vao day: "
                  f"{vh['nghi_co_che_noi_sinh']} gia thuyet.")
+    if vh.get("thanh_phan"):
+        t = vh["thanh_phan"]
+        d.append(f"- Thanh phan thu hoi duoc tu ban doc: **{t['tong']}** "
+                 f"({t['dien_dat_duoc']} viet ra duoc bang ngu phap hien tai). "
+                 "Day la phan giu lai tu nhung he KHONG qua cong.")
     if vh.get("do_sau_nguon"):
         d.append("- Do sau quet (con tro bien gioi): " + ", ".join(
             f"{m} {x['trang_da_quet']} trang/vong {x['vong']}"

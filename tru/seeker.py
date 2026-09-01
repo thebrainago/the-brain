@@ -29,7 +29,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from nhan import (du_lieu as DL, hop_dong as HD, mau as MAU, ngu_phap as NP,
-                  san_cong_cu as SCC, so as SO, toan_van as TV, tri_tue as TT)
+                  san_cong_cu as SCC, so as SO, thu_hoi_thanh_phan as THTP,
+                  toan_van as TV, tri_tue as TT)
 
 TRU = "SEEKER"
 REPORTS = Path(__file__).resolve().parent.parent / "reports"
@@ -392,6 +393,90 @@ def n_mql5_code(tu_khoa: list[str]) -> list[dict]:
     return ra
 
 
+# TradingView: DUNG O SEARCH, KHONG DUYET TRANG DANH MUC (chu du an chot 01/09).
+#
+# Do that 01/09 tren ba duong:
+#  - `/scripts/?script_type=strategies&page=N`: `page` KHONG phan trang, moi
+#    trang tra dung 21 link giong het nhau (danh sach cuon bang JS).
+#  - trang `/script/<slug>/`: 575 KB HTML nhung **khong co mot dong Pine nao**
+#    (`//@version` dem duoc 0 lan) - ma do trinh duyet dung JS.
+#  - `/scripts/?q=<tu khoa>`: 403.
+# Nen ca ba duong "bam vao tung script roi lay code" deu khong di duoc bang
+# `requests`, va di bang CDP thi ton mot lan mo trinh duyet cho MOI script.
+#
+# Duong that: `pubscripts-suggest-json/?search=<tu khoa>` - dung cai o search
+# cua TradingView goi ra - tra JSON 50 ket qua moi truy van, va **ban ghi co san
+# truong `scriptSource` chua NGUYEN MA PINE**. Do that: 12-20/50 ban ghi co ma
+# (so con lai la script dong nguon), ma dai trung binh 1.200-3.700 ky tu, kem
+# `type`, `access`, `author`, `agreeCount`. Sau truy van dau tien cho 271 script
+# rieng biet.
+#
+# Tuc mot request thay cho mot lan bam + mot lan tai. Va vi ma da nam trong tay,
+# ham nay ghi THANG vao `noi_dung` - khong de tang doc phai keo lai lan nua.
+TV_PINE_URL = "https://www.tradingview.com/pubscripts-suggest-json/?search={k}"
+TV_SO_TRUY_VAN_MOI_LUOT = 3
+
+
+def _ghi_ban_doc(url: str, van_ban: str, kieu: str = "ma_nguon") -> None:
+    """Ghi thang mot ban doc da co san vao `noi_dung` (khong tai lai)."""
+    r = SO.mot("SELECT id FROM tai_lieu WHERE url=?", url)
+    if not r:
+        return
+    with SO.ket_noi() as cn:
+        cn.execute(
+            "INSERT OR IGNORE INTO noi_dung(tai_lieu_id,van_tay,url,kieu,cach,"
+            "so_ky_tu,so_ky_tu_goc,van_ban,luc) VALUES(?,?,?,?,'suggest-json',?,?,?,?)",
+            (r["id"], SO.van_tay("nd", url), url, kieu,
+             len(van_ban), len(van_ban), van_ban, SO.bay_gio()))
+
+
+def n_tradingview_pine(tu_khoa: list[str]) -> list[dict]:
+    """Pine Script cong khai tu o search TradingView. Hang A: ma CHAY DUOC."""
+    ct = _con_tro("tradingview_pine")
+    da_hoi = ct.setdefault("da_hoi", [])
+    # xoay vong bo tu khoa: tu khoa nao lau chua hoi nhat di truoc.
+    kho = [t for t in (tu_khoa or []) if t] or ["strategy", "indicator"]
+    chua = [t for t in kho if t not in da_hoi] or kho
+    ra = []
+    for k in chua[:TV_SO_TRUY_VAN_MOI_LUOT]:
+        import urllib.parse as _ur
+        txt = _lay(TV_PINE_URL.format(k=_ur.quote(k)), timeout=30)
+        da_hoi.append(k)
+        if not txt:
+            time.sleep(1.0)
+            continue
+        try:
+            ds = (json.loads(txt) or {}).get("results") or []
+        except Exception:
+            time.sleep(1.0)
+            continue
+        for x in ds:
+            ma = (x.get("scriptSource") or "").strip()
+            slug = x.get("scriptIdPart") or ""
+            ten = _sach(x.get("scriptName") or x.get("title") or "")
+            if not ten or not slug:
+                continue
+            u = f"https://www.tradingview.com/script/{slug}/"
+            # KHONG bo ban ghi khong co ma. Script dong nguon van la mot muc luc
+            # co that (ten + tac gia + so nguoi thich); no chi khong doc duoc.
+            # Bo im lang thi sau nay khong ai biet da gap no.
+            ra.append({
+                "tieu_de": f"[Pine] {ten[:180]}",
+                "url": u,
+                "tom_tat": (f"{x.get('type') or ''} · {x.get('author') or ''} · "
+                            f"{x.get('agreeCount') or 0} thich · "
+                            f"{'CO ma Pine' if ma else 'dong nguon'}")[:400],
+                "hang": "A" if ma else "C",
+                "loai": "ma_nguon",
+                "_pine": ma,
+            })
+        time.sleep(1.0)
+    ct["da_hoi"] = da_hoi[-60:]
+    ct["truy_van_da_hoi"] = int(ct.get("truy_van_da_hoi", 0)) + len(chua[:TV_SO_TRUY_VAN_MOI_LUOT])
+    _ghi_con_tro("tradingview_pine", ct)
+    return ra
+
+
 def n_crossref(tu_khoa: list[str]) -> list[dict]:
     """Crossref - muc luc cong trinh co DOI. Dung de bat bai KHONG co tren arXiv."""
     ra = []
@@ -461,6 +546,9 @@ NGUON = {
     "blog":          {"ham": n_blog_nghien_cuu, "chu_ky": 43200, "uu_tien": 2, "loai": "blog"},
     "quantconnect":  {"ham": n_quantconnect, "chu_ky": 43200, "uu_tien": 3, "loai": "dien_dan"},
     "crossref":      {"ham": n_crossref, "chu_ky": 86400, "uu_tien": 3, "loai": "hoc_thuat"},
+    # --- them 01/09: Pine Script kem MA, khong can CDP ---
+    "tradingview_pine": {"ham": n_tradingview_pine, "chu_ky": 21600, "uu_tien": 1,
+                         "loai": "ma_nguon"},
 }
 
 # Nguon DA KIEM THAT ngay 15/08 va KHONG vao duoc bang `requests`.
@@ -1059,6 +1147,15 @@ def luu_tai_lieu(nguon: str, ds: list[dict]) -> int:
                 (vt, nguon, d.get("loai", ""), d["tieu_de"][:400], d.get("url", ""),
                  d.get("tom_tat", "")[:2000], d.get("hang", "C"), diem, SO.bay_gio()))
             moi += cur.rowcount
+    # Nguon nao DA cam ma trong tay (Pine tu suggest-json) thi ghi thang ban doc,
+    # khong de `doc_toan_van` phai keo lai mot lan nua - trang /script/<slug>/
+    # render bang JS nen keo lai cung khong ra ma.
+    for d in ds:
+        if d.get("_pine") and d.get("url"):
+            try:
+                _ghi_ban_doc(d["url"], d["_pine"], "ma_nguon")
+            except Exception:
+                pass
     return moi
 
 
@@ -1271,6 +1368,7 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
     ds = ds[:gioi_han * 3]
     doc_duoc, that_bai, tong_ky_tu = 0, 0, 0
     cong_cu_moi = 0
+    thanh_phan_moi = 0
     tam_thoi = 0
     artifact_moi, artifact_da_co, artifact_loi = 0, 0, 0
     for t in ds:
@@ -1317,6 +1415,18 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
         except Exception:
             pass
 
+        # THU HOI THANH PHAN (them 01/09, chu du an chot). Chay cho MOI ban doc,
+        # khong doi ban doc do co tro thanh ung vien hay khong - va nhat la khi
+        # no KHONG tro thanh ung vien. Mot he thong khong qua cong van co the co
+        # duong dung duoc: Sonic R khong dung duoc don lap nhung EMA34 high/low,
+        # EMA89, linreg 89, Hull 377, Donchian 55 thi mang ve lam tham so duoc.
+        # Khong ton mot lan tai trang nao: van ban da nam trong tay.
+        try:
+            tp = THTP.thu_hoi(t["tieu_de"], r["van_ban"], t["url"], t["nguon"])
+            thanh_phan_moi += tp["moi"]
+        except Exception:
+            pass
+
         try:
             _, created = _noi_dung_artifact(noi_dung_van_tay)
             artifact_moi += int(created)
@@ -1334,6 +1444,7 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
     return {"doc_duoc": doc_duoc, "that_bai": that_bai, "ky_tu_luot_nay": tong_ky_tu,
             "artifact_moi": artifact_moi, "artifact_da_co": artifact_da_co,
             "artifact_loi": artifact_loi, "cong_cu_moi": cong_cu_moi,
+            "thanh_phan_moi": thanh_phan_moi,
             "hoan_lai_loi_tam_thoi": tam_thoi,
             "thu_vien_ban_doc": tong["n"], "thu_vien_ky_tu": tong["k"],
             "thu_vien_trang_a4": round(tong["k"] / 4000)}

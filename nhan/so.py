@@ -156,6 +156,21 @@ END;
 -- mot gia thuyet - no chua bao gio duoc kiem dinh. Nhung no van phai duoc ghi
 -- lai, vi vong sau chinh no la du lieu day: khong co so nay thi tang suy nghi
 -- lap lai dung mot loi mai mai.
+-- THANH PHAN THU HOI DUOC tu mot ban doc, KE CA khi ca he thong bi loai.
+-- Xem `nhan/thu_hoi_thanh_phan.py`. Mot he toi khong co nghia moi manh cua no
+-- deu toi: Sonic R khong dung duoc don lap nhung EMA34 high/low, EMA89,
+-- linreg 89, Hull 377, Donchian 55 thi dung duoc lam tham so va bo loc.
+-- `dien_dat_duoc=0` khong phai rac - do la danh sach TOAN HANG CAN THEM, do tu
+-- ma nguoi ta that su viet.
+CREATE TABLE IF NOT EXISTS thanh_phan(
+  id INTEGER PRIMARY KEY AUTOINCREMENT, van_tay TEXT UNIQUE,
+  chi_bao TEXT, tham_so TEXT, cot TEXT, ngon_ngu TEXT,
+  dien_dat_duoc INTEGER DEFAULT 0, con_thieu TEXT, trich TEXT,
+  nguon TEXT, url TEXT, tieu_de TEXT, ly_do_loai TEXT,
+  so_lan INTEGER DEFAULT 1, luc TEXT);
+
+CREATE INDEX IF NOT EXISTS ix_tp_dien_dat ON thanh_phan(dien_dat_duoc, so_lan);
+
 CREATE TABLE IF NOT EXISTS de_xuat(
   id INTEGER PRIMARY KEY AUTOINCREMENT, luc TEXT, tru TEXT, ten TEXT UNIQUE,
   ho TEXT, co_che TEXT, dsl TEXT, nguon TEXT, nhan INTEGER DEFAULT 0,

@@ -23,6 +23,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b on-dinh         edge la CAO NGUYEN hay CAI GAI (do vung lan can)
     b hinh-dang       hinh dang do co khac NGAU NHIEN khong (so voi chuoi null)
     b mde-nap [khung] nap TRUOC bang MDE cho ca be mat (D1: ~4 phut, mot lan)
+    b thanh-phan      kho THANH PHAN thu hoi tu he bi loai + toan hang con thieu
     b san             EVO di san cong cu/du an ngoai de tich hop
     b san-xem         xem kho cong cu da tim duoc
     b san-quet        nhat lai cong cu tu TOAN BO ban doc da co (khong tai gi moi)
@@ -146,6 +147,26 @@ def c_mde_nap(a):
     return chay([PY, LAB / "nap_truoc_mde.py", *a])
 
 
+def c_thanh_phan(a):
+    ma = [
+        "import sys; sys.path.insert(0, r'%s')" % LAB,
+        "from nhan import thu_hoi_thanh_phan as TH, so as SO",
+        "print('KHO THANH PHAN: %d dong (%d viet ra duoc bang ngu phap)' % ("
+        "SO.mot('SELECT COUNT(*) n FROM thanh_phan')['n'],"
+        "SO.mot('SELECT COUNT(*) n FROM thanh_phan WHERE dien_dat_duoc=1')['n']))",
+        "print()",
+        "print('-- DUNG DUOC NGAY (top 20 theo so lan) --')",
+        "[print('  %-14s %-14s cot=%-7s x%s' % (r['chi_bao'], r['tham_so'],"
+        " r['cot'] or '-', r['so_lan'])) for r in TH.kho(True, 20)]",
+        "print()",
+        "print('-- TOAN HANG CON THIEU (do tu ma THAT, xep theo so lan dung) --')",
+        "[print('  %-16s %5d lan · %2d bien the · %s' % (r['chi_bao'],"
+        " r['tong_lan'], r['so_bien_the'], r['con_thieu']))"
+        " for r in TH.toan_hang_con_thieu(20)]",
+    ]
+    return chay([PY, "-c", chr(10).join(ma)])
+
+
 def c_san(a):
     return chay([PY, LAB / "nhan" / "san_cong_cu.py", *a])
 
@@ -239,7 +260,7 @@ LENH = {
     "cham-lai": c_cham_lai, "on-dinh": c_on_dinh,
     "hinh-dang": c_hinh_dang,
     "bg": c_bg, "bg-xem": c_bg_xem, "xa": c_xa, "xa-thu": c_xa_thu,
-    "san": c_san, "san-xem": c_san_xem, "san-quet": c_san_quet,
+    "thanh-phan": c_thanh_phan, "san": c_san, "san-xem": c_san_xem, "san-quet": c_san_quet,
     "tai-khoan": c_tai_khoan, "trinh-duyet": c_trinh_duyet,
     "ds": c_ds, "tim": c_tim,
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
