@@ -95,9 +95,49 @@ c763beb sua phieu chuyen doi: doc MA thanh nhieu kieu danh, bo tran 2, mang tham
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phien nay khong tim ra edge nao — no do lai chinh BO DO. Ca ngay hom nay moi
+loi deu cung mot hinh dang: **mot so 0 doc duoc thanh mot cau tra loi**. Nguon
+"khong thu duoc gi" (that ra ghi lech ten khoa), tang "khong ra gi" (that ra
+truy van hong), thuoc do bao "da dung" (that ra escape hong nen dem nham) —
+lan cuoi xay ra o chinh cai thuoc do toi viet de bat loai loi do, trong lan
+nay, lan thu ba trong ngay.
+
+Hai thu lat nguoc duoc:
+
+1. **Luat "mot gia thuyet cham holdout MOT lan" nam sai cho.** No duoc viet o
+   BON CHO GOI trong `quantlab.py`, khong viet o CHO GHI. Duong nao quen kiem
+   thi cham lai tu do. Da chuyen chot chan ve `nhan/so.py::ghi_ket_qua`.
+   **Nhung** — do theo moc thoi gian thi viec cham lai DA DUNG tu 25/08
+   (1,00 lan/gia thuyet tu do); 897 dong superseded deu la no thang 8. Toi da
+   suyt bao cao rang he "dang vi pham", va do la ket luan sai.
+
+2. **So ho lon nhat khong phai bug ma la cach tieu ngan sach.** 989 trong
+   1.798 phep thu co p > 0,5 — hon mot nua ngan sach FDR VINH VIEN da tieu cho
+   nhung phep thu ve gan nhu khong co gi, va moi cai deu nang thanh chan cho
+   moi y tuong sau. Nguong da tut 0,043 -> 0,0017, tuc he tu lam kho minh gap
+   25 lan, phan lon de tra gia cho cac phep thu vo vong. Cung vi the, 7 gia
+   thuyet tung PASS deu chua tung duoc xac nhan (`khang_dinh = 0`) va deu co
+   lich su cham nhieu lan truoc 25/08 — chung la UNG VIEN, khong phai phat hien.
+
+Ket luan hanh dong: xem muc 0 o duoi.
 
 ## Viec tiep theo, theo thu tu
+
+0. **CAN CHU DU AN GAT: do LUC truoc khi dang ky phep thu.**
+   Hien moi gia thuyet vao pheu deu tieu mot suat FDR, ke ca gia thuyet ma du
+   lieu hien co khong the nao phat hien duoc. Ket qua do duoc: hon nua ngan
+   sach da di vao phep thu co p > 0,5.
+   De xuat: tinh MDE truoc: neu edge nho nhat co the phat hien lon hon bat ky
+   edge hop ly cua gia thuyet do thi **do thoai mai nhung truyen `ghi_so=False`**
+   — khong tieu suat. Ha tang da co san (`do_luc.luc_hai_chang`,
+   `gop_lop.mde_gop`, `nhan/mde.py`), chi chua bat buoc tren moi duong.
+   Day la thay doi lon nhat dang cho, va no doi hanh vi cua ca pheu nen khong
+   tu lam.
+
+1. **Ba nguon CHAY_SACH_MA_RONG — chay tay xem nuot o dau:** `etoro`,
+   `semantic`, `blog`. (`b` -> hoac goi thang ham trong `tru/seeker.py`.)
+   Hai nguon con lai da ro: `fxblue` + `quantconnect` chi doc duoc qua Chrome
+   CDP, bat trinh duyet len roi chay lai (`b trinh-duyet`).
 
 -2. **CHAY TIEP luot 2500 null** (bi cat khi tat may toi 31/08, moi xong 2/23):
    ```
