@@ -157,3 +157,71 @@ class MienQuetCuaTacGia(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+CHIEN_LUOC = """//@version=4
+strategy("BB + RSI", overlay=true)
+length = input(20)
+mult = input(2.0)
+RSIlen = input(6)
+oversold = 30
+price = close
+basis = sma(price, length)
+dev = mult * stdev(price, length)
+BBlower = basis - dev
+vrsi = rsi(price, RSIlen)
+if (crossover(vrsi, oversold) and crossover(price, BBlower))
+    strategy.entry("L", strategy.long)
+if (crossunder(price, basis))
+    strategy.entry("S", strategy.short)
+"""
+
+
+class DocChienLuocThat(unittest.TestCase):
+    """Doc CHIEN LUOC, khong nhat manh - vế "phai dung" cua chu du an."""
+
+    def setUp(self):
+        self.k = DM.doc_chien_luoc(CHIEN_LUOC, nguon="thu", tien_to="t")
+        self.cc = self.k["co_che"]
+
+    def test_ra_dung_hai_co_che_theo_hai_lenh_vao(self):
+        self.assertEqual(len(self.cc), 2, self.k["chua_dien_dat_duoc"])
+
+    def test_ghep_DU_hai_dieu_kien_chu_khong_tach_roi(self):
+        """Guard co `and` thi phai thanh MOT co che hai dieu kien."""
+        mua = [c for c in self.cc if c["chieu"] == 1][0]
+        self.assertEqual(len(mua["vao"]), 2)
+
+    def test_chieu_doc_dung_tu_strategy_long_va_short(self):
+        self.assertEqual(sorted(c["chieu"] for c in self.cc), [-1, 1])
+
+    def test_dich_dung_dai_bollinger_thanh_tuyen_tinh(self):
+        mua = [c for c in self.cc if c["chieu"] == 1][0]
+        bb = [d["phai"] for d in mua["vao"]
+              if (d["phai"] or {}).get("chi_bao") == "tuyen_tinh"]
+        self.assertTrue(bb, "khong dich duoc `basis - dev`")
+        self.assertEqual(bb[0]["he_so"], [1.0, -1.0])
+
+    def test_ho_nhin_xuyen_qua_tuyen_tinh(self):
+        """`khac` khong khai duoc pham vi nen se bi bo o cua cuoi."""
+        for c in self.cc:
+            self.assertNotEqual(c["ho"], "khac", c["ten"])
+
+    def test_moi_co_che_qua_kiem_cu_phap(self):
+        for c in self.cc:
+            self.assertEqual(NP.kiem_khai_bao(c), [], c["ten"])
+
+    def test_CRLF_khong_lam_hong_gi(self):
+        """File Pine tai ve dung CRLF; mot ky tu CR tung lam rot ca chien luoc."""
+        k = DM.doc_chien_luoc(CHIEN_LUOC.replace("\n", "\r\n"), tien_to="t")
+        self.assertEqual(len(k["co_che"]), 2)
+
+    def test_bo_CA_co_che_khi_mot_ve_khong_dich_duoc(self):
+        """Bo rieng mot ve lam dieu kien LONG hon ban goc - do la noi doi."""
+        xau = CHIEN_LUOC.replace("crossover(vrsi, oversold)", "direction > 0")
+        k = DM.doc_chien_luoc(xau, tien_to="t")
+        mua = [c for c in k["co_che"] if c["chieu"] == 1]
+        self.assertEqual(mua, [], "phai bo ca co che, khong duoc bo rieng ve")
+
+    def test_khong_co_strategy_entry_thi_khong_ra_gi(self):
+        self.assertEqual(DM.doc_chien_luoc("x = ema(close, 20)")["co_che"], [])

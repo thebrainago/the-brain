@@ -111,6 +111,23 @@ _INPUT_MQL = re.compile(
 _MINMAX = re.compile(rf"(minval|maxval|step)[ \t]*=[ \t]*({_SO})")
 
 
+def _chuan_hoa(vb: str) -> str:
+    """Chuan hoa xuong dong ve LF va bo chu thich duoi dong.
+
+    Vi sao can, va no la mot LOP loi chu khong phai mot cho: file Pine tai ve
+    dung CRLF, nen moi bieu thuc chinh quy ket bang [ tab]*$ deu truot -
+    `price = close<CR>` khong khop `(open|high|low|close)[ tab]*$`. Ca mot
+    chien luoc Bollinger + RSI rot chi vi mot ky tu CR, va trieu chung nhin tu
+    ngoai chi la "khong dich duoc crossover(source, BBlower)".
+
+    Chu thich duoi dong cung phai bo truoc khi phan tich so hoc:
+    `BBmult = 2 // input(2.0, ...)` co dau `//` ma bo tach hang tu se doc nham
+    thanh phep chia.
+    """
+    vb = (vb or '').replace(chr(13) + chr(10), chr(10)).replace(chr(13), chr(10))
+    return re.sub(r'[ \t]*//[^\n]*', '', vb)
+
+
 def rut_input(vb: str) -> dict:
     """Ten bien -> {gia_tri, min, max} theo dung khai bao cua TAC GIA.
 
@@ -118,6 +135,8 @@ def rut_input(vb: str) -> dict:
     Do la mot mien quet CO NGUON GOC, khac han mot luoi ta tu bia ra - va lay no
     khong phai chay mot dong ma nao cua ho.
     """
+    vb = _chuan_hoa(vb)
+
     ra: dict[str, dict] = {}
     for m in _INPUT_PINE.finditer(vb):
         doi = m.group(2)
@@ -190,7 +209,123 @@ def _bang_ky_hieu(vb: str) -> list[tuple[int, str, dict]]:
     return ra
 
 
-def _toan_hang(tu: str, vi_tri: int, bang: list) -> dict | None:
+def _tach_cong_tru(bt: str) -> list[tuple[float, str]]:
+    """Tach mot bieu thuc theo `+`/`-` o MUC NGOAI CUNG. Tra (dau, hang tu).
+
+    Bo qua dau o vi tri MO DAU (do la dau am cua so hang dau) va dau ngay sau
+    mot toan tu khac (`a * -2`), de khong cat nham thanh hai hang tu.
+    """
+    ra, sau, muc, dau = [], 0, 0, 1.0
+    for i, c in enumerate(bt):
+        if c in "([":
+            muc += 1
+        elif c in ")]":
+            muc -= 1
+        elif muc == 0 and c in "+-" and i > 0:
+            truoc = bt[:i].rstrip()
+            if truoc and truoc[-1] not in "+-*/(,<>=":
+                ra.append((dau, bt[sau:i]))
+                dau = 1.0 if c == "+" else -1.0
+                sau = i + 1
+    ra.append((dau, bt[sau:]))
+    return [(d, t.strip()) for d, t in ra if t.strip()]
+
+
+def _hang_tu(bt: str, vi_tri: int, bang: list, bang_bt: list,
+             sau: int) -> tuple[float, dict] | None:
+    """Mot hang tu -> (he so, toan hang). Chi chap nhan dang TUYEN TINH.
+
+    `2 * dev`, `dev * 2`, `dev / 2`, `dev` deu duoc; `a * b` voi ca hai la chuoi
+    gia tri thi KHONG - do la phep nhan hai chuoi, khong con tuyen tinh va khong
+    dien dat duoc bang `tuyen_tinh`.
+
+    He so co the la mot BIEN (`mult = input(2.0)`), khong chi mot so tho. Bang
+    ky hieu da chua san bien so duoi dang `{"hang": v}` nen chi can hoi no.
+    """
+    he_so, toan = 1.0, None
+    phan = re.split(r"([*/])", bt)
+    dau_chia = False
+    for k, p in enumerate(phan):
+        p = p.strip()
+        if p in ("*", "/"):
+            dau_chia = (p == "/")
+            continue
+        p = _boc_ngoac(p)
+        if not p:
+            continue
+        t = _toan_hang(p, vi_tri, bang, bang_bt, sau + 1)
+        if t is None and re.match(rf"^(?:ta[.])?{_TEN}[ 	]*[(]", p):
+            # LOI GOI VIET THANG trong bieu thuc: `mult * stdev(source, length)`.
+            # Khong xu ly thi moi ban Bollinger deu rot, vi `dev` luon duoc viet
+            # dang nay chu khong gan qua mot bien chi bao rieng.
+            con = TP.rut_pine(p) or TP.rut_mql(p)
+            if con:
+                c0 = con[0]
+                if not c0.get("tham_so"):
+                    # Chu ky la mot BIEN (`stdev(source, length)` voi
+                    # `length = input(20)`). Bo rut chi nhin trong dung chuoi loi
+                    # goi nen khong thay; giai bang BANG KY HIEU - noi da co san
+                    # bien so duoi dang {"hang": v}.
+                    ds2 = TP._tach_doi_so(TP._khoi_ngoac(p, p.index("(")))
+                    for a in ds2:
+                        ta = _toan_hang(a.strip(), vi_tri, bang, bang_bt, sau + 1)
+                        if ta and "hang" in ta and float(ta["hang"]) >= 1:
+                            c0 = dict(c0, tham_so=[float(ta["hang"])])
+                            break
+                t = _tu_thanh_phan(c0)
+        if t is None:
+            return None
+        if "hang" in t:                       # la mot HE SO, khong phai chuoi
+            v = float(t["hang"])
+            if dau_chia and v == 0:
+                return None
+            he_so = he_so / v if dau_chia else he_so * v
+            continue
+        if toan is not None:
+            return None                       # nhan hai chuoi -> khong tuyen tinh
+        toan = t
+    if toan is None:
+        return None
+    return he_so, toan
+
+
+def _tuyen_tinh(bt: str, vi_tri: int, bang: list, bang_bt: list,
+                sau: int) -> dict | None:
+    """Bieu thuc so hoc -> toan hang `tuyen_tinh` cua ngu phap.
+
+    Vi sao can: chien luoc Pine that gan nhu luon so gia voi mot MUC DUOC TINH
+    RA - `BBlower = basis - mult * dev`, kenh Keltner, pivot. Khong dich duoc
+    dang nay thi 17/18 chien luoc trong kho deu rot o buoc dich, va do dung la
+    cho bo doc dung lai truoc khi co ham nay.
+    """
+    hang = _tach_cong_tru(bt)
+    # Mot hang tu VAN hop le neu no co he so (`mult * stdev(...)`) - do la dang
+    # `dev` cua moi ban Bollinger. Chi bo khi ca bieu thuc la mot dinh danh tran,
+    # vi luc do duong khac da lo roi va vao day se de quy vo tan.
+    if len(hang) == 1 and re.fullmatch(_TEN, bt.strip()):
+        return None
+    ds, hs, cong = [], [], 0.0
+    for dau, ht in hang:
+        p = _boc_ngoac(ht)
+        if re.fullmatch(_SO, p):
+            cong += dau * float(p)
+            continue
+        r = _hang_tu(p, vi_tri, bang, bang_bt, sau)
+        if r is None:
+            return None                 # mot hang tu khong dich duoc -> bo CA
+        h, t = r
+        ds.append(t)
+        hs.append(dau * h)
+    if not ds:
+        return None
+    d = {"chi_bao": "tuyen_tinh", "toan_hang": ds, "he_so": hs}
+    if cong:
+        d["cong_them"] = cong
+    return d
+
+
+def _toan_hang(tu: str, vi_tri: int, bang: list,
+               bang_bt: list | None = None, sau: int = 0) -> dict | None:
     """Mot ve cua phep so sanh -> toan hang ngu phap, hoac None neu khong dich duoc."""
     tu = (tu or "").strip()
     # `x[k]` la NHIN LUI k bar. Ban dau ham nay CAT BO hau to do, va do la mot
@@ -205,7 +340,7 @@ def _toan_hang(tu: str, vi_tri: int, bang: list) -> dict | None:
         tu = tu[:m_tre.start()]
     if not tu:
         return None
-    goc = _toan_hang_goc(tu, vi_tri, bang)
+    goc = _toan_hang_goc(tu, vi_tri, bang, bang_bt, sau)
     if goc is None or tre <= 0:
         return goc
     if "hang" in goc:
@@ -213,7 +348,8 @@ def _toan_hang(tu: str, vi_tri: int, bang: list) -> dict | None:
     return {"chi_bao": "tre", "cua": goc, "n": tre}
 
 
-def _toan_hang_goc(tu: str, vi_tri: int, bang: list) -> dict | None:
+def _toan_hang_goc(tu: str, vi_tri: int, bang: list,
+                   bang_bt: list | None = None, sau: int = 0) -> dict | None:
     if re.fullmatch(_SO, tu):
         return {"hang": float(tu)}
     k = tu.lower()
@@ -227,7 +363,27 @@ def _toan_hang_goc(tu: str, vi_tri: int, bang: list) -> dict | None:
         if ten == tu:
             gt = t
     if gt is None:
+        # Bien co the duoc gan bang mot BIEU THUC SO HOC (`BBlower = basis -
+        # mult * dev`). Truoc khi bo cuoc, thu no bieu thuc do ra toan hang
+        # `tuyen_tinh`. Gioi han do sau de mot file co vong tham chieu khong
+        # lam treo bo doc.
+        if bang_bt and sau < 5:
+            dn = None
+            for pos, ten, bt2 in bang_bt:
+                if pos >= vi_tri:
+                    break
+                if ten == tu:
+                    dn = (pos, bt2)
+            if dn is not None:
+                t = _tuyen_tinh(dn[1], dn[0], bang, bang_bt, sau + 1)
+                if t is not None:
+                    return t
         return None
+    return _tu_thanh_phan(gt)
+
+
+def _tu_thanh_phan(gt: dict) -> dict | None:
+    """Mot thanh phan cua `thu_hoi_thanh_phan` -> toan hang ngu phap."""
     if "hang" in gt or gt.get("_thang"):
         return {k: v for k, v in gt.items() if not k.startswith("_")}
     ok, _ = TP.dien_dat_duoc(gt)
@@ -259,13 +415,31 @@ def _ho_cua(dk: dict) -> str:
     cong suc giu lai do tre cho.
     """
     for ben in ("trai", "phai"):
-        t = dk.get(ben) or {}
-        while isinstance(t, dict) and t.get("chi_bao") in ("tre", "tuyet_doi"):
-            t = t.get("cua") or {}
-        cb = (t or {}).get("chi_bao")
-        if cb in _HO:
-            return _HO[cb]
+        for cb in _cac_chi_bao(dk.get(ben) or {}):
+            if cb in _HO:
+                return _HO[cb]
     return "khac"
+
+
+def _cac_chi_bao(t: dict, sau: int = 0) -> list[str]:
+    """Moi ten chi bao xuat hien trong mot toan hang, ke ca long ben trong.
+
+    Phai nhin XUYEN QUA `tuyen_tinh` va `cua`: mot dai Bollinger duoc viet
+    `tuyen_tinh([tb, do_lech])`, va neu chi doc `chi_bao` o lop ngoai thi ho ra
+    `khac` - ma `khac` khong khai duoc pham vi nen khong vao duoc thu vien. Tuc
+    dung cai co che ta vua cong suc dich ra lai bi bo o cua cuoi.
+    """
+    if not isinstance(t, dict) or sau > 6:
+        return []
+    ra = []
+    cb = t.get("chi_bao")
+    if cb and cb not in ("tuyen_tinh", "tre", "tuyet_doi"):
+        ra.append(cb)
+    for x in (t.get("toan_hang") or []):
+        ra += _cac_chi_bao(x, sau + 1)
+    if isinstance(t.get("cua"), dict):
+        ra += _cac_chi_bao(t["cua"], sau + 1)
+    return ra
 
 
 def _ten_toan_hang(t: dict) -> str:
@@ -427,8 +601,8 @@ def _no_dieu_kien(bt: str, vi_tri: int, bang_cb: list, bang_bl: list,
             continue
         m = _SS.fullmatch(ve) or _SS.search(ve)
         if m and m.group(0).strip() == ve:
-            trai = _toan_hang(m.group(1), vi_tri, bang_cb)
-            phai = _toan_hang(m.group(3), vi_tri, bang_cb)
+            trai = _toan_hang(m.group(1), vi_tri, bang_cb, bang_bl)
+            phai = _toan_hang(m.group(3), vi_tri, bang_cb, bang_bl)
             if trai and phai and _hop_thang_do(trai, phai):
                 dk.append({"trai": trai, "phep": _PHEP[m.group(2)], "phai": phai})
             else:
@@ -436,8 +610,8 @@ def _no_dieu_kien(bt: str, vi_tri: int, bang_cb: list, bang_bl: list,
             continue
         mc = _CHEO.fullmatch(ve) or _CHEO.search(ve)
         if mc and mc.group(0).strip() == ve:
-            trai = _toan_hang(mc.group(2), vi_tri, bang_cb)
-            phai = _toan_hang(mc.group(3), vi_tri, bang_cb)
+            trai = _toan_hang(mc.group(2), vi_tri, bang_cb, bang_bl)
+            phai = _toan_hang(mc.group(3), vi_tri, bang_cb, bang_bl)
             if trai and phai:
                 dk.append({"trai": trai,
                            "phep": "cheo_len" if mc.group(1) == "crossover"
@@ -480,6 +654,8 @@ def doc_chien_luoc(vb: str, nguon: str = "", tien_to: str = "ma") -> dict:
     mang ten cua tac gia. Do la noi doi. Ve khong dich duoc duoc bao ra o
     `chua_dien_dat_duoc` de biet ngu phap con thieu gi.
     """
+    vb = _chuan_hoa(vb)
+
     if not vb or "strategy.entry" not in vb:
         return {"co_che": [], "chua_dien_dat_duoc": [], "so_vao_lenh": 0}
     bang_cb = _bang_ky_hieu(vb)
@@ -542,6 +718,8 @@ def doc_ma(vb: str, ngon_ngu: str = "tu_doan", nguon: str = "",
     Tra `[]` khi khong dich duoc dieu kien nao - do la ket qua binh thuong va
     pho bien (mot file tien ich quan ly lenh khong co dieu kien vao nao ca).
     """
+    vb = _chuan_hoa(vb)
+
     if not vb:
         return []
     bang = _bang_ky_hieu(vb)
