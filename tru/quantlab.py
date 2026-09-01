@@ -345,6 +345,11 @@ def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0) -> dict:
 #: nhat ve suc khoe day chuyen - bien thanh mot con so vo nghia.
 TRAN_HANG_DOI_KHAM_PHA = 250
 
+#: Han ngach cho nhanh NGOAI (SEEKER/doc ma). Dat THAP hon tran chung de nhanh
+#: NOI SINH (NGHI) luon con cho: no de xuat 3-6 co che moi 90 phut, con nhanh
+#: ngoai co the day vao hang chuc cai mot luc.
+TRAN_NGOAI_DANG_CHO = max(4, int(TRAN_HANG_DOI_KHAM_PHA * 0.6))
+
 #: Chuoi dung de KIEM mot khai bao co che moi (ty le kich hoat + phep cat
 #: nhin truoc). Do mot lan moi tien trinh.
 _DF_KIEM: list = []
@@ -495,6 +500,32 @@ def rut_hang_doi_ung_vien(gioi_han: int = 20) -> dict:
     bao = {"lane": LANE_CANDIDATE, "da_doc": 0, "xep_viec": 0,
            "mau_la": 0, "trung": 0, "toi": tu, "mau": {}}
 
+    # HAN NGACH THEO NGUON (them 01/09, chu du an chi ra khi NGHI duoc noi lai).
+    #
+    # QUANTLAB gio co HAI nguon dau vao: NGOAI (SEEKER doc ma/tai lieu) va NOI
+    # SINH (NGHI de xuat tu ly le kinh te). Do 01/09: thu vien co 102 co che
+    # ngoai so voi 20 noi sinh - lech 5 lan. Neu de tu do thi nguon ngoai chiem
+    # gan het ngan sach FDR, va nhanh noi sinh chet doi khong phai vi no te ma vi
+    # no cham hon.
+    #
+    # Hai nguon nay KHONG thay the nhau: mot ben mang ve cai nguoi khac da lam,
+    # mot ben hoi "ai dang bi ep phai giao dich". Duong noi sinh la duong duy
+    # nhat co the de xuat mot co che CHUA AI VIET, nen bop chet no la tu bit mot
+    # huong tim kiem.
+    #
+    # Cach chan: gioi han so viec DANG CHO cua rieng nhanh NGOAI. Khong dung
+    # phanh cung theo ty le - viec cua NGHI it va den thanh dot, mot ty le cung
+    # se chan no ngay khi hang doi ngoai vua day.
+    dang_cho_ngoai = SO.mot(
+        "SELECT COUNT(*) n FROM viec WHERE tru=? AND loai='kham_pha_theo_mau' "
+        "AND trang_thai='CHO' AND tham_so LIKE ?", TRU, '%"nguon_tai_lieu": "http%')["n"]
+    if dang_cho_ngoai >= TRAN_NGOAI_DANG_CHO:
+        bao["han_ngach"] = (
+            f"{dang_cho_ngoai} viec tu nguon NGOAI dang cho >= han ngach "
+            f"{TRAN_NGOAI_DANG_CHO} - nhuong luot cho nhanh NOI SINH (NGHI)")
+        SO.ghi_chi_so("quantlab_han_ngach_ngoai", dang_cho_ngoai, bao)
+        return bao
+
     # AP NGUOC. Kiem TRUOC khi doc hang doi, va thoat ma KHONG ghi con tro.
     dang_cho = SO.mot(
         "SELECT COUNT(*) n FROM viec WHERE tru=? AND loai='kham_pha_theo_mau' "
@@ -549,7 +580,15 @@ def rut_hang_doi_ung_vien(gioi_han: int = 20) -> dict:
             neo = {k: v for k, v in ((uv.metadata or {}).get("dsl") or {}).items()
                    if k in ("giu", "chieu")}
         if neo:
-            tham["tham_so_goc"] = neo
+            # `uv.metadata` co the la `mappingproxy` (khung nhin chi-doc), va no
+            # KHONG tuan tu hoa duoc bang json -> `them_viec` nem TypeError va ca
+            # luot rut ung vien chet. Ep ve dict thuong, va chi giu gia tri co
+            # ban de mot cau truc long sau khong lot qua duoc.
+            tham["tham_so_goc"] = {
+                str(k): (list(v) if isinstance(v, (list, tuple))
+                         else v if isinstance(v, (int, float, str, bool, type(None)))
+                         else str(v))
+                for k, v in dict(neo).items()}
         if SO.them_viec(TRU, "kham_pha_theo_mau", tham,
                         uu_tien=_uu_tien_ung_vien(uv, muc)):
             bao["xep_viec"] += 1

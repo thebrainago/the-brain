@@ -82,6 +82,13 @@ NGU PHAP (chi duoc dung dung nhung khoa nay):
   }
 
   dieu_kien = {"trai": toan_hang, "phep": "<|<=|>|>=|cheo_len|cheo_xuong",
+               // `phep` CHI duoc la SAU gia tri tren. Do la PHEP SO SANH.
+               // Loi hay gap nhat (3/3 de xuat mot vong 01/09): lay TEN MOT
+               // TOAN HANG (`phan_vi`, `zscore`, `atr`...) dat vao `phep`.
+               // Toan hang di o `trai`/`phai`, KHONG BAO GIO o `phep`.
+               // Vi du DUNG: muon "bien dong nam trong top 20%" thi viet
+               //   {"trai": {"chi_bao":"phan_vi","cua":{"chi_bao":"atr","n":14},"n":250},
+               //    "phep": ">", "phai": {"hang": 0.8}}
                "phai": toan_hang}
 
   toan_hang =
@@ -152,6 +159,81 @@ def doc_tai_lieu(n: int = 8) -> list[dict]:
 
 
 # --------------------------------------------------------------------- 3. NGHI
+#: Bao nhieu dong moi muc trong ban do QUANTLAB. Giu ngan: lời nhac dai lam
+#: loang tin hieu, va phan gia tri nhat la HUONG chu khong phai tung dong.
+_BAN_DO_TOI_DA = 12
+
+
+def _ban_do_quantlab() -> list[str]:
+    """Toan canh nhung gi QUANTLAB DA THU - de NGHI khong dao lai va biet dao dau.
+
+    Chu du an chi ra (01/09): NGHI dang doc lai ket qua cua CHINH NO thoi. Cai
+    no khong thay la 1.700+ phep thu tren ca thu vien - nen no de xuat mu.
+
+    Ba muc, va muc thu ba moi la muc dang gia nhat:
+      1. HO da can  - ho nao da thu nhieu ma khong ra gi -> dung dao lai.
+      2. HO con trong - ho it duoc thu -> co the con dat.
+      3. GAN DAT - nhung cai FAIL nhung alpha DUONG va t cao. Day khong phai
+         "gan thang" theo nghia thong ke, ma la HUONG co dau hieu; dao sau vao
+         mot huong nhu vay re hon nhieu so voi bat dau tu con so khong.
+    """
+    ra: list[str] = []
+    try:
+        ho = SO.nhieu(
+            "SELECT g.ho, COUNT(*) n, "
+            "SUM(CASE WHEN k.verdict='PASS' THEN 1 ELSE 0 END) pass, "
+            "ROUND(AVG(k.alpha), 3) alpha_tb "
+            "FROM ket_qua k JOIN gia_thuyet g ON g.ma = k.gt_ma "
+            "WHERE g.ho IS NOT NULL AND g.ho != '' GROUP BY g.ho ORDER BY n DESC")
+    except Exception:
+        return ra
+    if not ho:
+        return ra
+    ra += ["== QUANTLAB DA THU NHUNG GI (doc de KHONG dao lai) =="]
+    for r in ho[:_BAN_DO_TOI_DA]:
+        ra.append(f"- ho `{r['ho']}`: {r['n']} phep thu · {r['pass']} PASS · "
+                  f"alpha trung binh {r['alpha_tb']}")
+    it = [r["ho"] for r in ho if (r["n"] or 0) < 20]
+    if it:
+        ra.append(f"HO IT DUOC THU (co the con dat): {', '.join(it[:8])}")
+    ra.append("")
+
+    try:
+        # GOP THEO GIA THUYET, khong liet ke tung dong `ket_qua`: mot gia thuyet
+        # co nhieu lan chay, va lap lai no bon lan trong loi nhac chi lam NGHI
+        # tuong do la bon dau hieu doc lap.
+        #
+        # Va LOAI nhung cai dang bi treo: `QUARANTINED_V2`, hoac co van de
+        # `nghi_nhin_truoc_*` dang MO. Cai dung dau bang truoc khi loc chinh la
+        # `EURGBP.H4.mua_qua_dem` voi t = 13,59 - da bi treo nghi NHIN TRUOC tu
+        # 16/08. Dua no vao day la day NGHI dao sau theo mot LOI, va no se sinh
+        # ra ca mot ho gia thuyet quanh mot hien vat.
+        treo = {r["gt_ma"] for r in SO.nhieu(
+            "SELECT DISTINCT ma AS gt_ma FROM gia_thuyet "
+            "WHERE trang_thai LIKE 'QUARANTINE%'")}
+        treo |= {str(r["ma"]).replace("nghi_nhin_truoc_", "") for r in SO.nhieu(
+            "SELECT ma FROM van_de WHERE trang_thai='MO' AND ma LIKE 'nghi_nhin_truoc_%'")}
+        tho = SO.nhieu(
+            "SELECT k.gt_ma, ROUND(MAX(k.alpha),2) alpha, ROUND(MAX(k.t_alpha),2) t, "
+            "g.ho FROM ket_qua k JOIN gia_thuyet g ON g.ma = k.gt_ma "
+            "WHERE k.verdict != 'PASS' AND k.alpha > 0 AND k.t_alpha > 1.5 "
+            "GROUP BY k.gt_ma ORDER BY MAX(k.t_alpha) DESC LIMIT ?",
+            _BAN_DO_TOI_DA * 3)
+        gan = [r for r in tho if r["gt_ma"] not in treo][:_BAN_DO_TOI_DA]
+    except Exception:
+        gan = []
+    if gan:
+        ra += ["== HUONG CO DAU HIEU (FAIL nhung alpha DUONG va t > 1,5) ==",
+               "(KHONG phai 'gan thang' - la huong dang dao sau, dat them dieu "
+               "kien loc hoac doi khung/tai san. Ghi ro trong `co_che` ban dang "
+               "dao tiep huong nao.)"]
+        for r in gan:
+            ra.append(f"- {str(r['gt_ma'])[:52]} (ho {r['ho']}): "
+                      f"alpha {r['alpha']}%/nam · t {r['t']}")
+        ra.append("")
+    return ra
+
+
 def _nhac(dc: dict, tl: list[dict]) -> str:
     da_co = sorted(set(list(MAU.MAU) + [c.get("ten") for c in NP.doc_kho()]))
     p = [NGU_PHAP_TOM_TAT, "",
@@ -171,6 +253,13 @@ def _nhac(dc: dict, tl: list[dict]) -> str:
             p.append(f"- `{d['ten']}` (ho {d['ho']}): {d['verdict']} | co che: "
                      f"{str(d['co_che'])[:120]}")
         p.append("")
+    # BAN DO QUANTLAB (them 01/09, chu du an chi ra). Truoc do NGHI chi doc lai
+    # ket qua cua CHINH NO - 18 de xuat - trong khi day chuyen da chay hon 1.700
+    # phep thu tren toan bo thu vien. Hau qua: no de xuat mu, khong biet huong
+    # nao da can va huong nao con trong, va khong biet cai gi tuy FAIL nhung da
+    # HE HE mot dau hieu dang dao sau.
+    p += _ban_do_quantlab()
+
     if tl:
         p += ["== TAI LIEU MOI THU DUOC (nguon y tuong, KHONG phai bang chung) ==",
               "(Neu de xuat xuat phat tu mot tai lieu, ghi `nguon` = DUNG url cua no)"]
