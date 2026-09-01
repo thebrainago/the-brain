@@ -24,6 +24,7 @@ from typing import Any, Mapping
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from nhan import nen as NEN
 from nhan import (canary as CANARY, chi_phi as CP, cong as CONG, do_luc as DLUC,
                   do_luong as DO, du_lieu as DL, mau as MAU, mo_phong as MP,
                   ngu_phap as NP, quant_plan as QP, so as SO)
@@ -630,21 +631,36 @@ def kham_pha_theo_mau(ten_mau: str, nguon: str = "") -> dict:
             bh = MP.mua_giu(train, cp, ma=ma, khung=khung)
             m_bh = DO.chi_so(bh.loi, bh.index)
             tot = None
-            for ts in (m.get("luoi") or [{}]):
-                try:
-                    kq = MP.chay(train, MAU.sinh(ten_mau, train, ts), cp, ma=ma, khung=khung)
-                except Exception:
-                    continue
-                if kq.so_lenh < CONG.nguong()["so_lenh_toi_thieu"]:
-                    continue
-                cs = DO.chi_so(kq.loi, kq.index, kq.vi_the)
-                if (cs.get("sharpe") or -9) > (m_bh.get("sharpe") or 0) and \
-                   (cs.get("tong_lai_pct") or -1e9) > (m_bh.get("tong_lai_pct") or 0) and \
-                   (tot is None or (cs.get("sharpe") or -9) > (tot[1].get("sharpe") or -9)):
-                    tot = (ts, cs)
+            # TRUC NEN (them 01/09, chu du an chot: "thu ca cac loai nen nua").
+            # Quet Heikin Ashi ben canh nen thuong.
+            #
+            # RANH GIOI KHONG DOI: nen bien doi CHI de tinh tin hieu; `MP.chay`
+            # van nhan `train` la NEN THAT nen khop lenh, chi phi va loi suat
+            # deu tinh tren gia mua ban duoc. Gia HA la so ke toan (trung binh
+            # OHLC) - khong mot lenh nao khop duoc o do. Vao lenh tai gia HA la
+            # che ra lai tu cho khong co, cung ho voi bay `Model=1` (+1.161,5%
+            # so voi -100,7% o tick that). Xem `nhan/nen.py`.
+            for kieu_nen in NEN.LOAI:
+                for ts in (m.get("luoi") or [{}]):
+                    try:
+                        th = NEN.sinh_tren_nen(
+                            lambda d, _t=ts: MAU.sinh(ten_mau, d, _t),
+                            train, kieu_nen)
+                        kq = MP.chay(train, th, cp, ma=ma, khung=khung)
+                    except Exception:
+                        continue
+                    if kq.so_lenh < CONG.nguong()["so_lenh_toi_thieu"]:
+                        continue
+                    cs = DO.chi_so(kq.loi, kq.index, kq.vi_the)
+                    if (cs.get("sharpe") or -9) > (m_bh.get("sharpe") or 0) and                        (cs.get("tong_lai_pct") or -1e9) > (m_bh.get("tong_lai_pct") or 0) and                        (tot is None or (cs.get("sharpe") or -9) > (tot[2].get("sharpe") or -9)):
+                        tot = (ts, kieu_nen, cs)
             if tot is None:
                 continue
-            ts, cs = tot
+            ts, kieu_nen, cs = tot
+            # Nen di vao TEN gia thuyet chu khong chi vao ghi chu: hai cau hinh
+            # khac nen la hai gia thuyet khac nhau va phai ton hai suat FDR rieng.
+            if kieu_nen != NEN.THUONG:
+                ts = dict(ts, nen=kieu_nen)
             # Cung cong kha thi nhu `kham_pha`: khong tieu suat FDR o cap khong
             # do duoc. Truoc day duong nay dang ky thang, nen mot mau lay tu tai
             # lieu tu dong an 6 suat o 6 cap dau danh sach du cap nao co do duoc
