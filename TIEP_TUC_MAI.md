@@ -117,9 +117,49 @@ c763beb sua phieu chuyen doi: doc MA thanh nhieu kieu danh, bo tran 2, mang tham
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phien nay lam QUANTLAB nhanh **2,6 lan** (8.400 -> 21.982 to hop trong cung 150
+giay) va noi lai FRED cho BANKER (vi mo 7.262 -> 100.054 diem, lich su tu 1976).
+Nhung ket qua quan trong nhat lai la mot ket luan bi LAT NGUOC, va la ket luan
+cua chinh toi vai gio truoc do.
+
+Sang nay toi de nghi, va viet len dau ban giao, rang phai "bat buoc do LUC truoc
+khi dang ky phep thu" vi hon nua ngan sach FDR da di vao nhung phep thu co
+p > 0,5. Chieu profile mot luot THAT thi thay **cong do luc DA CO VA DANG CHAY**:
+  8.400 to hop -> 1.622 ung vien -> 1.589 bi loai vi thieu luc (98%) -> DANG KY 0.
+Phe u khong con tieu mot suat FDR nao cho phep thu vo vong. De xuat cua toi la
+thua, va no thua vi toi doc so LICH SU roi noi ve HIEN TAI.
+
+Dieu do doi huong ca du an mot buoc: rang buoc that khong phai CPU, va cung
+khong phai ngan sach thong ke, ma la **MDE**. Gan nhu moi ung vien deu co Sharpe
+kham pha thap hon muc nho nhat ma du lieu hien co du suc phan xu. Chay nhanh gap
+10 lan chi lam ta quet duoc nhieu hon chu khong ha MDE xuong mot chut nao - tuc
+nhan mot so 0 voi mot so lon hon.
+
+Cung vi the, cau tra loi cho "co VPS thi cay nat may duoc khong": do duoc rang
+1->2 tien trinh duoc 1,47x nhung 4->10 chi them 1,18x. May nghet BANG THONG BO
+NHO chu khong nghet CPU. Mot VPS nhieu nhan hon se khong cho nhieu hon bao
+nhieu; muon dung tien mua thong luong that thi phai chay NHIEU MAY DOC LAP, moi
+may mot mang tai san rieng.
+
+Bai hoc chung cua ca ngay, gap lai lan thu tu: mot so 0 doc duoc thanh mot cau
+tra loi. Hom nay no xuat hien o nguon "khong thu duoc gi" (lech ten khoa), o
+FRED "bi chan" (user-agent cua chinh ta), o gio "he chet" (that ra la may tat),
+va o chinh cai thuoc do toi viet de bat loai loi do.
 
 ## Viec tiep theo, theo thu tu
+
+0. **HUONG CHINH DA DOI: ha MDE, khong phai tang CPU.**
+   Toc do da xong (2,6 lan) va no khong giai quyet gi ve san luong: 98% ung vien
+   chet o cong do luc. Ba duong ha MDE, xep theo cai da biet:
+     - du lieu DAI hon (da do: chuoi D1 dai ha nguong 1,4 -> 0,54)
+     - cong cu CHI PHI THAP hon (da do: ban do chi phi lien san chenh 5,5 diem
+       %/nam cho cung SP500 - la phep TRU khong ton slot FDR)
+     - gop lop (da thu: chi ha 0,535 -> 0,511, khong cuu duoc)
+   Truoc khi mua them may hay mo them nguon, tra loi cau nay truoc.
+
+1. **Ba nguon CHAY_SACH_MA_RONG - chay tay xem nuot o dau:** `etoro`,
+   `semantic`, `blog`. Hai nguon con lai da ro: `fxblue` + `quantconnect` chi
+   doc duoc qua Chrome CDP (`b trinh-duyet`).
 
 0. **CAN CHU DU AN GAT: do LUC truoc khi dang ky phep thu.**
    Hien moi gia thuyet vao pheu deu tieu mot suat FDR, ke ca gia thuyet ma du
