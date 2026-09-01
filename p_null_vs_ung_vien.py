@@ -126,9 +126,13 @@ def _mot_chuoi(viec: tuple) -> dict:
             # so sanh dung cho con so 13,44% do phai dung DUNG ngu nghia the he 1:
             # placebo vo dieu kien. Goi thang chinh la lam viec do.
             try:
-                pl = CONG.placebo(d, kq, cp) or {}
-            except Exception:
-                pl = {}
+                pl, loi_pl = CONG.placebo(d, kq, cp) or {}, None
+            except Exception as e:
+                # KHONG duoc nuot im. Mot `except: pass` o day tung lam ca luot
+                # bao "0 o co p" ma khong ai biet vi sao.
+                pl, loi_pl = {}, f"{type(e).__name__}: {str(e)[:80]}"
+            o.append({"mau": mau, "p": pl.get("p_xau_nhat"), "tang": pl.get("tang"),
+                      "alpha": al, "verdict": kt.get("verdict"), "loi_pl": loi_pl})
         return {"ma": ma, "khung": khung, "pp": pp, "hat": hat, "so_o": len(o),
                 "o": o, "giay": round(time.time() - t0, 1)}
     except Exception as e:

@@ -529,39 +529,42 @@ def do_van_hanh() -> dict:
     # tung nguon. Suat nay hien khoang 1%, va da co lan AM (mot ban doc sai che
     # ra edge Sharpe 0,822, 4 co che phai thu hoi) - nen no la con so dang de
     # toi uu, khong phai so tai lieu.
-    # PHAI LOC `tru='SEEKER'`. Ban dau tien cua thuoc do nay dem CA BANG va ra
-    # 7,59 co che/100 bai - nghe rat kha quan va HOAN TOAN sai: ca 18 dong
-    # `de_xuat` deu cua NGHI (co che noi sinh, `nguon=''`), khong mot dong nao
-    # den tu duong DOC. Chia tu so cua tru nay cho mau so cua tru kia thi ra mot
-    # con so khong noi ve cai gi ca.
+    # PHAI DO DUNG DUONG DANG CHAY. Hai ban truoc cua thuoc do nay deu sai
+    # mau so hoac tu so:
+    #   ban 1: dem ca bang `de_xuat` -> 7,59/100. Ca 18 dong deu cua NGHI (co che
+    #          noi sinh, nguon=''), khong dong nao tu duong DOC.
+    #   ban 2: loc `tru='SEEKER'` -> 0/237. Nhung `de_xuat` chi duoc ghi boi
+    #          `boc_co_che`, va ham do la **LEGACY V1** - `mot_luot()` cua V2
+    #          khong goi no. Do mot duong khong ai chay thi luon ra 0.
+    # Duong V2 that: `noi_dung` -> `bien_dich_ung_vien` -> artifact(candidate) ->
+    # `candidate_queue` -> QUANTLAB dang ky `gia_thuyet`. Nen tu so dung la
+    # GIA THUYET TRUY NGUYEN DUOC VE MOT URL TAI LIEU.
     boc = SO.mot("SELECT COUNT(*) n FROM noi_dung WHERE da_boc=1")["n"] or 0
-    dx = SO.mot("SELECT COUNT(*) n, COALESCE(SUM(nhan),0) k FROM de_xuat "
-                "WHERE tru='SEEKER'") or {}
     ra["seeker_da_boc"] = boc
-    ra["seeker_co_che_nhan"] = int(dx["k"] or 0)
-    ra["seeker_co_che_de_xuat"] = int(dx["n"] or 0)
-    # boc=0 -> CHUA DO (None), khong phai "nang suat bang 0".
-    ra["seeker_nang_suat_100"] = round(100.0 * (dx["k"] or 0) / boc, 2) if boc else None
-    # co che NOI SINH cua NGHI dem rieng, de khong ai lan lai lan nua.
-    nghi = SO.mot("SELECT COUNT(*) n, COALESCE(SUM(nhan),0) k FROM de_xuat "
-                  "WHERE tru!='SEEKER'") or {}
-    ra["nghi_co_che_noi_sinh"] = {"de_xuat": int(nghi["n"] or 0), "nhan": int(nghi["k"] or 0)}
+    ra["seeker_tai_lieu_artifact"] = SO.mot(
+        "SELECT COUNT(*) n FROM artifact WHERE artifact_type='document'")["n"] or 0
+    ra["seeker_ung_vien"] = SO.mot(
+        "SELECT COUNT(*) n FROM artifact WHERE artifact_type='candidate'")["n"] or 0
+    # `nguon` cua gia_thuyet la URL <=> no den tu tai lieu; con lai la noi sinh
+    # (`kham_pha`, `tru NGHI`, `thieu_luc_don_le`).
+    tu_tl = SO.nhieu("SELECT ma, nguon FROM gia_thuyet WHERE nguon LIKE 'http%'")
+    ra["seeker_gia_thuyet_tu_tai_lieu"] = len(tu_tl)
+    ra["seeker_nang_suat_100"] = round(100.0 * len(tu_tl) / boc, 2) if boc else None
+    ra["nghi_co_che_noi_sinh"] = SO.mot(
+        "SELECT COUNT(*) n FROM gia_thuyet WHERE nguon NOT LIKE 'http%' "
+        "OR nguon IS NULL")["n"] or 0
 
-    # Bang theo nguon: DA DOC bao nhieu bai / ra bao nhieu de xuat / duoc nhan
-    # bao nhieu. Cot "da_boc" lay tu `noi_dung`, cot de_xuat/nhan lay tu
-    # `de_xuat.nguon` (URL tai lieu) - hai cot nay o hai bang khac nhau nen phai
-    # gop bang tay chu khong join duoc mot cau.
+    # Bang theo nguon: doc bao nhieu bai / ra bao nhieu gia thuyet. Hai cot o hai
+    # bang khac nhau nen gop bang tay.
     ra["nang_suat_nguon"] = {}
     for r in SO.nhieu("SELECT t.nguon ng, COUNT(*) n FROM noi_dung nd "
                       "JOIN tai_lieu t ON t.id = nd.tai_lieu_id "
                       "WHERE nd.da_boc=1 GROUP BY t.nguon"):
-        ra["nang_suat_nguon"][r["ng"]] = {"da_boc": r["n"], "de_xuat": 0, "nhan": 0}
-    for r in SO.nhieu(
-            "SELECT t.nguon ng, COUNT(*) n, COALESCE(SUM(d.nhan),0) k "
-            "FROM de_xuat d JOIN tai_lieu t ON t.url = d.nguon "
-            "WHERE d.tru='SEEKER' GROUP BY t.nguon"):
-        x = ra["nang_suat_nguon"].setdefault(r["ng"], {"da_boc": 0, "de_xuat": 0, "nhan": 0})
-        x["de_xuat"], x["nhan"] = r["n"], r["k"]
+        ra["nang_suat_nguon"][r["ng"]] = {"da_boc": r["n"], "gia_thuyet": 0}
+    for r in SO.nhieu("SELECT t.nguon ng, COUNT(*) n FROM gia_thuyet g "
+                      "JOIN tai_lieu t ON t.url = g.nguon GROUP BY t.nguon"):
+        x = ra["nang_suat_nguon"].setdefault(r["ng"], {"da_boc": 0, "gia_thuyet": 0})
+        x["gia_thuyet"] = r["n"]
 
     # ------------------------------------------------- DO SAU QUET (01/09)
     # Con tro bien gioi nam trong `nguon.lay_gi` (JSON). Co no thi phan biet duoc
@@ -637,16 +640,15 @@ def phat_hien(vh: dict, sk: dict) -> list[dict]:
     # (~1%) de no bao khi TUT, khong phai bao ngay hom nay.
     if (vh.get("seeker_da_boc") or 0) >= 100 and vh.get("seeker_nang_suat_100") is not None:
         if vh["seeker_nang_suat_100"] < 0.3:
-            cach = ("chua sinh MOT de xuat nao" if not vh.get("seeker_co_che_de_xuat")
-                    else f"{vh['seeker_co_che_nhan']}/{vh['seeker_co_che_de_xuat']} de xuat qua cong")
             ra.append({"ma": "nang_suat_doc_thap",
-                       "muc": "NANG" if not vh.get("seeker_co_che_de_xuat") else "VUA",
-                       "mo_ta": f"Nang suat doc = {vh['seeker_nang_suat_100']} co che/100 bai "
-                                f"({vh['seeker_co_che_nhan']} nhan tren {vh['seeker_da_boc']} bai "
-                                f"da boc; {cach}) - duong DOC dang khong tra ra gia thuyet. "
+                       "muc": "NANG" if not vh.get("seeker_gia_thuyet_tu_tai_lieu") else "VUA",
+                       "mo_ta": f"Nang suat doc = {vh['seeker_nang_suat_100']} gia thuyet/100 bai "
+                                f"({vh['seeker_gia_thuyet_tu_tai_lieu']} truy nguyen ve URL tren "
+                                f"{vh['seeker_da_boc']} bai da boc; {vh['seeker_ung_vien']} ung vien "
+                                f"tu {vh['seeker_tai_lieu_artifact']} artifact tai lieu). "
                                 "Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
                        "bc": {"theo_nguon": vh.get("nang_suat_nguon"),
-                              "noi_sinh_cua_nghi": vh.get("nghi_co_che_noi_sinh")}})
+                              "gia_thuyet_noi_sinh": vh.get("nghi_co_che_noi_sinh")}})
 
     # --- tai nguyen van hanh -------------------------------------------
     tn = vh.get("tai_nguyen") or {}
@@ -910,9 +912,12 @@ def viet_bao_cao(vh: dict, sk: dict, vd: list, da_sua: list, sau: dict | None = 
     if "seeker_ty_le_vong_rong" in vh:
         d.append(f"- Ty le vong lap rong cua SEEKER: **{vh['seeker_ty_le_vong_rong']:.0%}**")
     if vh.get("seeker_nang_suat_100") is not None:
-        d.append(f"- Nang suat doc cua SEEKER: **{vh['seeker_nang_suat_100']} co che/100 bai** "
-                 f"({vh['seeker_co_che_nhan']} nhan / {vh['seeker_co_che_de_xuat']} de xuat "
-                 f"tren {vh['seeker_da_boc']} bai da boc)")
+        d.append(f"- Nang suat doc cua SEEKER: **{vh['seeker_nang_suat_100']} gia thuyet"
+                 f"/100 bai** ({vh['seeker_gia_thuyet_tu_tai_lieu']} gia thuyet truy nguyen "
+                 f"ve URL tai lieu, tren {vh['seeker_da_boc']} bai da boc; "
+                 f"{vh['seeker_ung_vien']} ung vien tu {vh['seeker_tai_lieu_artifact']} "
+                 f"artifact tai lieu). Noi sinh khong tinh vao day: "
+                 f"{vh['nghi_co_che_noi_sinh']} gia thuyet.")
     if vh.get("do_sau_nguon"):
         d.append("- Do sau quet (con tro bien gioi): " + ", ".join(
             f"{m} {x['trang_da_quet']} trang/vong {x['vong']}"

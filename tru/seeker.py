@@ -1219,6 +1219,24 @@ def backfill_document_artifacts(gioi_han: int = 250) -> dict:
             "cursor": cursor, "con_lai": con_lai}
 
 
+def _diem_nang_suat() -> dict:
+    """Nguon -> gia thuyet duoc dang ky tren moi bai da boc (Laplace).
+
+    Day la THUOC DO cua SEEKER tu 01/09 (xem `evolution.do_van_hanh`), va day la
+    cho no doi hanh vi chu khong chi doi bao cao: no xep hang doi doc.
+    """
+    doc = {r["ng"]: r["n"] for r in SO.nhieu(
+        "SELECT t.nguon ng, COUNT(*) n FROM noi_dung nd "
+        "JOIN tai_lieu t ON t.id = nd.tai_lieu_id WHERE nd.da_boc=1 GROUP BY t.nguon")}
+    # Tu so lay tu `gia_thuyet` chu KHONG tu `de_xuat`: bang `de_xuat` chi duoc
+    # ghi boi `boc_co_che`, va ham do la LEGACY V1 ma `mot_luot()` khong goi.
+    # Doc no thi moi nguon deu ra 0 va thu tu nay tro thanh vo nghia.
+    nhan = {r["ng"]: r["n"] for r in SO.nhieu(
+        "SELECT t.nguon ng, COUNT(*) n FROM gia_thuyet g "
+        "JOIN tai_lieu t ON t.url = g.nguon GROUP BY t.nguon")}
+    return {ng: (nhan.get(ng, 0) + 1) / (n + 2) for ng, n in doc.items()}
+
+
 def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
     """Keo toan van / ma nguon cua tai lieu hang A-B chua co ban doc.
 
@@ -1227,12 +1245,30 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
     trong so voi dung 49 ky tu mo ta. Khong the nghien cuu tu 49 ky tu.
     """
     t0 = time.time()
+    # XEP HANG DOC THEO NANG SUAT DO DUOC, khong theo hang + id.
+    #
+    # Ban cu xep `hang A truoc, roi diem, roi id DESC`. Hau qua do duoc 01/09:
+    # trong 237 bai da doc toan van co **195 la openalex** (82%) - dung cai nguon
+    # ma chinh EVO da ha uu tien tu 30/08 vi suat ra artifact 6% - con `mql5_code`
+    # (suat 70%) doc toan van duoc **0 bai**. Cai gi kem nhat lai an gan het ngan
+    # sach doc.
+    #
+    # `_diem_nang_suat` la ty le LAPLACE (k+1)/(n+2) chu khong phai k/n. Ly do:
+    # nguon chua doc bai nao phai duoc phan biet voi nguon doc roi ma khong ra gi.
+    # Voi k/n thi ca hai deu bang 0 va nguon moi khong bao gio duoc thu. Voi
+    # (k+1)/(n+2), nguon chua do duoc 0,5 (cao, se duoc thu ngay), openalex
+    # 1/197 = 0,005 (thap, lui lai) - va thu tu tu dieu chinh khi so lieu ve.
+    diem_ns = _diem_nang_suat()
     ds = SO.nhieu(
         "SELECT t.id, t.tieu_de, t.url, t.tu_khoa, t.nguon, t.diem FROM tai_lieu t "
         "LEFT JOIN noi_dung n ON n.tai_lieu_id = t.id "
         "WHERE n.id IS NULL AND t.url LIKE 'http%' AND t.tu_khoa IN('A','B') "
         "ORDER BY CASE t.tu_khoa WHEN 'A' THEN 0 ELSE 1 END, t.diem DESC, t.id DESC "
-        "LIMIT ?", gioi_han * 3)
+        "LIMIT ?", gioi_han * 30)
+    ds.sort(key=lambda t: (-diem_ns.get(t["nguon"], 0.5),
+                           0 if t["tu_khoa"] == "A" else 1,
+                           -(t["diem"] or 0), -t["id"]))
+    ds = ds[:gioi_han * 3]
     doc_duoc, that_bai, tong_ky_tu = 0, 0, 0
     cong_cu_moi = 0
     tam_thoi = 0
