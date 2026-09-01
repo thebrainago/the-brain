@@ -81,5 +81,41 @@ class Duong(unittest.TestCase):
             self.assertTrue(str(term).endswith("terminal64.exe"))
 
 
+
+class VanDia(unittest.TestCase):
+    """Chay tester khi dia thap la tu dap vao cong quyet dinh cua chinh minh."""
+
+    def test_nguong_khop_voi_cong_cua_evolution(self):
+        """`evolution` khoa mt5_tick_test khi dia < 15 GB - phai cung mot so."""
+        from tru import evolution as EV
+        import inspect
+        src = inspect.getsource(EV.do_van_hanh)
+        self.assertIn("15", src)
+        self.assertEqual(EA.DIA_TOI_THIEU_GB, 15.0)
+
+    def test_do_duoc_dia_trong(self):
+        g = EA.dia_trong_gb()
+        self.assertGreater(g, 0)
+        self.assertLess(g, 100_000)
+
+    def test_don_tick_khong_dong_vao_history(self):
+        """Bo dem tick tai lai duoc; `history` (bar OHLC) thi khong duoc xoa."""
+        import inspect
+        src = inspect.getsource(EA.don_tick)
+        self.assertIn('rglob("ticks")', src)
+        self.assertNotIn('rglob("history")', src)
+
+    def test_tu_choi_chay_khi_dia_thap(self):
+        goc = EA.DIA_TOI_THIEU_GB
+        try:
+            EA.DIA_TOI_THIEU_GB = 10 ** 6      # ep dieu kien thieu dia
+            r = EA.chay_mot({"terminal": "xm", "ea": "x.ex5", "nhan": "thu_dia",
+                             "symbol": "EURUSDmicro", "khung": "H1",
+                             "tu": "2025.01.01", "den": "2025.02.01"})
+            self.assertFalse(r["xong"])
+            self.assertIn("dia con", r.get("bo_qua", ""))
+        finally:
+            EA.DIA_TOI_THIEU_GB = goc
+
 if __name__ == "__main__":
     unittest.main()

@@ -258,6 +258,46 @@ def dong_terminal(ten_terminal: str) -> int:
     return len(pids)
 
 
+#: Duoi nguong nay thi khong chay tester nua. `evolution` khoa buoc kiem tick
+#: khi dia < 15 GB, nen chay tiep la tu dap vao cong quyet dinh cua chinh minh.
+DIA_TOI_THIEU_GB = 15.0
+
+
+def dia_trong_gb() -> float:
+    import shutil
+    return shutil.disk_usage("C:/")[2] / 1024 ** 3
+
+
+def don_tick(ten_terminal: str, gi_u_history: bool = True) -> float:
+    """Xoa bo dem TICK da tai ve. Tra ve so MB thu hoi.
+
+    Vi sao can: do that 01/09 - NAM luot tester tick that lam du lieu MT5 phinh
+    **757 MB trong 12 gio**, va dia tu 15,7 GB tut ve 14,8 GB, tuc khoa lai dung
+    cai cong `mt5_tick_test` ma sang nay vua mo duoc. Chay not 21 EA se lam mat
+    them vai GB.
+
+    An toan: bo dem tick la BAN SAO tu server, xoa di thi lan sau tester tu tai
+    lai. Khong dong vao `history` (bar OHLC) vi cai do dung cho ca `du_lieu.nap`
+    va tai lai cham hon nhieu.
+    """
+    dat, _cai, _sym = TERMINAL[ten_terminal]
+    thu = dat / "bases"
+    if not thu.exists():
+        return 0.0
+    thu_hoi = 0.0
+    for d in thu.rglob("ticks"):
+        if not d.is_dir():
+            continue
+        for f in d.rglob("*"):
+            try:
+                if f.is_file():
+                    thu_hoi += f.stat().st_size / 1024 ** 2
+                    f.unlink()
+            except OSError:
+                pass
+    return round(thu_hoi, 1)
+
+
 def chay_mot(viec: dict) -> dict:
     """Mot luot tester tren MOT terminal. Tra ve duong bao cao va thoi gian."""
     ten_t = viec["terminal"]
@@ -269,6 +309,15 @@ def chay_mot(viec: dict) -> dict:
         bc.unlink()
     except OSError:
         pass
+    # VAN DIA. Chay tiep khi dia da thap la tu dap vao cong quyet dinh cua chinh
+    # minh: `evolution` khoa buoc kiem tick khi dia < 15 GB. Don bo dem tick
+    # truoc; van khong du thi TU CHOI chay chu khong chay roi hong giua chung.
+    if dia_trong_gb() < DIA_TOI_THIEU_GB:
+        thu_hoi = don_tick(ten_t)
+        if dia_trong_gb() < DIA_TOI_THIEU_GB:
+            return {**viec, "bao_cao": "", "xong": False, "giay": 0.0,
+                    "bo_qua": f"dia con {dia_trong_gb():.1f} GB < {DIA_TOI_THIEU_GB} "
+                              f"(da don {thu_hoi} MB tick nhung van khong du)"}
     tap_set = viet_set(nhan, viec.get("input") or {}, ten_t)
     ini = viet_ini(nhan, viec["ea"], tap_set, viec["symbol"], viec["khung"],
                    viec["tu"], viec["den"], model=viec.get("model", 4),
