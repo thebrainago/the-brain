@@ -202,3 +202,69 @@ class LamMuotToanHangBatKy(unittest.TestCase):
         a, b = NP.toan_hang(self.df, t).iloc[:-1], NP.toan_hang(d2, t).iloc[:-1]
         m = a.notna() & b.notna()
         np.testing.assert_allclose(a[m], b[m], rtol=1e-9)
+
+
+class ToanTuCoNho(unittest.TestCase):
+    """Toan tu CO NHO TRANG THAI - `direction`, supertrend, chuoi lien tiep.
+
+    11/18 chien luoc Pine con lai deu chan o cung mot loai bieu thuc: gia tri hom
+    nay phu thuoc gia tri hom qua theo mot quy tac re nhanh. Ngu phap truoc do
+    chi co toan tu KHONG NHO nen khong phat bieu duoc.
+    """
+
+    def setUp(self):
+        self.df = _khung(500)
+        tren = {"chi_bao": "tuyen_tinh", "he_so": [1.0, 2.0],
+                "toan_hang": [{"chi_bao": "ema", "n": 20, "cot": "close"},
+                              {"chi_bao": "atr", "n": 14}]}
+        duoi = dict(tren, he_so=[1.0, -2.0])
+        self.st = {"chi_bao": "trang_thai_lat",
+                   "len": {"trai": GIA, "phep": ">", "phai": tren},
+                   "xuong": {"trai": GIA, "phep": "<", "phai": duoi}}
+        self.dem = {"chi_bao": "dem_lien_tiep",
+                    "khi": {"trai": GIA, "phep": ">",
+                            "phai": {"chi_bao": "ema", "n": 50, "cot": "close"}}}
+
+    def test_trang_thai_chi_nhan_ba_gia_tri(self):
+        x = set(NP.toan_hang(self.df, self.st).unique())
+        self.assertTrue(x <= {-1.0, 0.0, 1.0}, x)
+
+    def test_trang_thai_GIU_NGUYEN_khi_khong_co_tin_hieu_lat(self):
+        """Do la ban chat cua 'co nho': khong lat thi giu, khong ve 0."""
+        x = NP.toan_hang(self.df, self.st).to_numpy()
+        doi = (x[1:] != x[:-1]).sum()
+        self.assertLess(doi, len(x) / 2, "trang thai lat qua nhieu - khong con la trang thai")
+
+    def test_dem_lien_tiep_ve_0_khi_dieu_kien_sai(self):
+        y = NP.toan_hang(self.df, self.dem).to_numpy()
+        self.assertIn(0.0, set(y))
+        self.assertGreater(y.max(), 1)
+
+    def test_dem_tang_dung_mot_moi_bar(self):
+        y = NP.toan_hang(self.df, self.dem).to_numpy()
+        for i in range(1, len(y)):
+            if y[i] > 0:
+                self.assertAlmostEqual(y[i], y[i - 1] + 1, places=9)
+
+    def test_KHONG_nhin_truoc(self):
+        """Quan trong nhat: co nho van phai nhan qua."""
+        d2 = self.df.copy()
+        d2.iloc[-1, :] = d2.iloc[-1, :] * 1.5
+        for ten, t in (("trang_thai_lat", self.st), ("dem_lien_tiep", self.dem)):
+            a = NP.toan_hang(self.df, t).iloc[:-1]
+            b = NP.toan_hang(d2, t).iloc[:-1]
+            np.testing.assert_allclose(a, b, rtol=1e-12, err_msg=ten)
+
+    def test_cu_phap_bat_thieu_dieu_kien(self):
+        self.assertTrue(NP._kiem_toan_hang({"chi_bao": "trang_thai_lat"}))
+        self.assertTrue(NP._kiem_toan_hang({"chi_bao": "dem_lien_tiep"}))
+
+    def test_cu_phap_dat_khi_khai_du(self):
+        self.assertEqual(NP._kiem_toan_hang(self.st), [])
+        self.assertEqual(NP._kiem_toan_hang(self.dem), [])
+
+    def test_dung_duoc_trong_mot_co_che_that(self):
+        spec = {"ten": "thu_co_nho", "ho": "xu_huong", "chieu": 1, "giu": 1,
+                "co_che": "Chi mua khi che do dang len - mot cau du dai cho cong.",
+                "vao": [{"trai": self.st, "phep": ">", "phai": {"hang": 0}}]}
+        self.assertEqual(NP.kiem_khai_bao(spec), [])

@@ -348,12 +348,29 @@ def n_mql5_code(tu_khoa: list[str]) -> list[dict]:
     # duoc di sau chu khong chi cai dau bang.
     bd = ct.get("danh_muc_ke", 0) % len(MQL5_DANH_MUC)
     thu_tu = MQL5_DANH_MUC[bd:] + MQL5_DANH_MUC[:bd]
-    da_lay = 0
+
+    # HAI VIEC MOI LUOT, va viec thu hai la chu du an chi ra (01/09):
+    #   - DI SAU: lay tiep trang ke tiep theo con tro bien gioi.
+    #   - QUAY VE TRANG 1: muc MOI luon xuat hien o dau danh sach, nen di sau mai
+    #     ma khong soi lai dau thi khong bao gio thay cai vua dang. Con tro chi
+    #     tien la mot bo thu thap KHONG BAO GIO cap nhat.
+    # Nen mot suat moi luot danh cho trang 1 (xoay vong danh muc), phan con lai
+    # danh cho bien gioi. Soi lai trang 1 gan nhu mien phi: `luu_tai_lieu` khu
+    # trung theo van tay nen chi cai THAT SU moi mo di tiep.
+    lich = []
+    muc_dau = thu_tu[0]
+    lich.append((muc_dau, 1))                       # soi lai dau danh sach
     for muc in thu_tu:
-        if da_lay >= MQL5_SO_TRANG_MOI_LUOT:
+        if len(lich) >= MQL5_SO_TRANG_MOI_LUOT:
             break
-        n = int(trang.get(muc, 1))
+        n0 = int(trang.get(muc, 1))
+        if (muc, n0) not in lich:
+            lich.append((muc, n0))
+    ct["lan_soi_dau"] = int(ct.get("lan_soi_dau", 0)) + 1
+    da_lay = 0
+    for muc, n in lich:
         u = f"https://www.mql5.com/en/code/{muc}" + ("" if n == 1 else f"/page{n}")
+        soi_dau = (n == 1 and int(trang.get(muc, 1)) != 1)
         txt = _lay(u, timeout=30)
         da_lay += 1
         if not txt:
@@ -382,8 +399,11 @@ def n_mql5_code(tu_khoa: list[str]) -> list[dict]:
                        "tom_tat": "", "hang": "B", "loai": "ma_nguon"})
         # trang 200 nhung khong co link nao = da het thuc su (MQL5 tra 200 cho
         # trang rong o vai danh muc) -> xu ly nhu 404.
-        trang[muc] = (n + 1) if n_link else 1
-        if not n_link and n > 1:
+        # Luot SOI DAU khong duoc dong vao con tro bien gioi: no la mot chuyen
+        # di rieng ve dau danh sach, khong phai buoc tien cua mui khoan.
+        if not soi_dau:
+            trang[muc] = (n + 1) if n_link else 1
+        if not n_link and n > 1 and not soi_dau:
             cuoi[muc] = n - 1
             ct["vong"] = vong + 1
         time.sleep(1.5)
@@ -436,9 +456,16 @@ def n_tradingview_pine(tu_khoa: list[str]) -> list[dict]:
     da_hoi = ct.setdefault("da_hoi", [])
     # xoay vong bo tu khoa: tu khoa nao lau chua hoi nhat di truoc.
     kho = [t for t in (tu_khoa or []) if t] or ["strategy", "indicator"]
-    chua = [t for t in kho if t not in da_hoi] or kho
+    chua = [t for t in kho if t not in da_hoi]
+    # MOT SUAT MOI LUOT DANH CHO TU KHOA CU (chu du an chi ra 01/09). Ket qua tim
+    # duoc xep theo do moi, nen script vua dang nam o dau danh sach cua chinh
+    # nhung tu khoa DA hoi. Chi hoi tu khoa chua hoi la mot bo thu thap khong bao
+    # gio cap nhat: voi 92 tu khoa va 3 truy van moi luot, mot tu khoa phai cho
+    # 31 luot moi den luot lai.
+    cu_nhat = [t for t in da_hoi if t in kho]
+    lich = ([cu_nhat[0]] if cu_nhat else []) + (chua or kho)
     ra = []
-    for k in chua[:TV_SO_TRUY_VAN_MOI_LUOT]:
+    for k in lich[:TV_SO_TRUY_VAN_MOI_LUOT]:
         import urllib.parse as _ur
         txt = _lay(TV_PINE_URL.format(k=_ur.quote(k)), timeout=30)
         da_hoi.append(k)
@@ -460,18 +487,35 @@ def n_tradingview_pine(tu_khoa: list[str]) -> list[dict]:
             # KHONG bo ban ghi khong co ma. Script dong nguon van la mot muc luc
             # co that (ten + tac gia + so nguoi thich); no chi khong doc duoc.
             # Bo im lang thi sau nay khong ai biet da gap no.
+            # `type` PHAN BIET STRATEGY VOI INDICATOR, va do la thong tin quan
+            # trong nhat trong ban ghi. Do doi chieu voi ma that tren 5 truy van:
+            # type=2 la strategy voi do chinh xac **100% (17/17)**, type=1 la
+            # indicator (25/25). Truoc khi dung no, kho thu ve 155 indicator so
+            # voi 20 strategy - va chi strategy moi co `strategy.entry` de bo doc
+            # lan ra dieu kien vao lenh. Tuc 88% cong thu thap do vao thu khong
+            # rut duoc chien luoc.
+            #
+            # Khong VUT indicator: mot chi bao van cho toan hang dung duoc (xem
+            # `thu_hoi_thanh_phan`). Chi ha hang de hang doi doc uu tien strategy.
+            la_chien_luoc = str(x.get("type")) == "2"
             ra.append({
-                "tieu_de": f"[Pine] {ten[:180]}",
+                "tieu_de": f"[Pine{'/CL' if la_chien_luoc else ''}] {ten[:176]}",
                 "url": u,
-                "tom_tat": (f"{x.get('type') or ''} · {x.get('author') or ''} · "
+                "tom_tat": (f"{'chien_luoc' if la_chien_luoc else 'chi_bao'} · "
+                            f"{x.get('author') or ''} · "
                             f"{x.get('agreeCount') or 0} thich · "
                             f"{'CO ma Pine' if ma else 'dong nguon'}")[:400],
-                "hang": "A" if ma else "C",
+                "hang": ("A" if la_chien_luoc else "B") if ma else "C",
                 "loai": "ma_nguon",
                 "_pine": ma,
+                "_chien_luoc": la_chien_luoc,
             })
         time.sleep(1.0)
-    ct["da_hoi"] = da_hoi[-60:]
+    # Xoay vong: tu khoa vua hoi lai di ve CUOI hang doi, de lan sau den luot cai khac.
+    ct["da_hoi"] = [t for t in da_hoi if t != (cu_nhat[0] if cu_nhat else None)]
+    if cu_nhat:
+        ct["da_hoi"].append(cu_nhat[0])
+    ct["da_hoi"] = ct["da_hoi"][-120:]
     ct["truy_van_da_hoi"] = int(ct.get("truy_van_da_hoi", 0)) + len(chua[:TV_SO_TRUY_VAN_MOI_LUOT])
     _ghi_con_tro("tradingview_pine", ct)
     return ra

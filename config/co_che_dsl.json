@@ -4678,5 +4678,157 @@
   },
   "so_dieu_kien": 1,
   "_ty_le_kich_hoat": 0.0034
+ },
+ {
+  "ten": "pine_cl_20_years_mua_high_tren_cao_nhat20_tre1",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Chien luoc THAT rut tu `strategy.entry`: vao lenh khi 1 dieu kien cung dung (`enterL1`). Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet kiem chinh dieu do.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "luoi_goc": {
+   "phai_cao_nhat": [
+    10,
+    20,
+    40
+   ]
+  },
+  "so_dieu_kien": 1,
+  "_ty_le_kich_hoat": 0.1014
+ },
+ {
+  "ten": "pine_cl_20_years_ban_low_duoi_thap_nhat20_tre1",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Chien luoc THAT rut tu `strategy.entry`: vao lenh khi 1 dieu kien cung dung (`enterS1`). Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet kiem chinh dieu do.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "luoi_goc": {
+   "phai_thap_nhat": [
+    10,
+    20,
+    40
+   ]
+  },
+  "so_dieu_kien": 1,
+  "_ty_le_kich_hoat": 0.1166
+ },
+ {
+  "ten": "pine_cl_20_years_mua_high_tren_cao_nhat55_tre1",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Chien luoc THAT rut tu `strategy.entry`: vao lenh khi 1 dieu kien cung dung (`enterL2`). Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet kiem chinh dieu do.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "n": 55,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "luoi_goc": {
+   "phai_cao_nhat": [
+    28,
+    55,
+    110
+   ]
+  },
+  "so_dieu_kien": 1,
+  "_ty_le_kich_hoat": 0.0566
+ },
+ {
+  "ten": "pine_cl_20_years_ban_low_duoi_thap_nhat55_tre1",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Chien luoc THAT rut tu `strategy.entry`: vao lenh khi 1 dieu kien cung dung (`enterS2`). Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet kiem chinh dieu do.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "n": 55,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "luoi_goc": {
+   "phai_thap_nhat": [
+    28,
+    55,
+    110
+   ]
+  },
+  "so_dieu_kien": 1,
+  "_ty_le_kich_hoat": 0.0679
  }
 ]

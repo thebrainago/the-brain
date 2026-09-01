@@ -208,6 +208,53 @@ def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
         b = toan_hang(df, ds[1])
         return a.rolling(n).corr(b)
 
+    # --- TOAN TU CO NHO TRANG THAI ---
+    #
+    # Them 01/09 (chu du an chot). Vi sao can: sau khi sua bo doc, 11/18 chien
+    # luoc Pine con lai deu chan o CUNG MOT loai bieu thuc - `direction < 0`,
+    # `fractal_average[0] > [1]`, `close < dtime_l4`. Chung khong phai thieu chi
+    # bao ma la mot LOAI KHAC: gia tri hom nay phu thuoc gia tri hom qua theo mot
+    # quy tac re nhanh. Ngu phap truoc do chi co toan tu KHONG NHO (rolling,
+    # shift, so sanh) nen khong phat bieu duoc.
+    #
+    # AN TOAN KHONG DOI. Ca hai toan tu duoi day chay MOT VONG TIEN theo thoi
+    # gian, moi buoc chi doc bar hien tai va trang thai cua buoc TRUOC. Khong co
+    # duong nao nhin ve tuong lai - va `kiem_khong_nhin_truoc` van chay tren
+    # chung nhu moi co che khac.
+    if cb == "trang_thai_lat":
+        # Trang thai +1/-1, lat khi mot trong hai dieu kien dung. Day la hinh
+        # dang chung cua supertrend, parabolic SAR, va moi bo loc che do:
+        # "dang len cho toi khi co tin hieu xuong".
+        len_ = t.get("len") or t.get("bat_len")
+        xuong = t.get("xuong") or t.get("bat_xuong")
+        if not isinstance(len_, dict) or not isinstance(xuong, dict):
+            raise KeyError("'trang_thai_lat' can hai dieu kien 'len' va 'xuong'")
+        a = _dieu_kien(df, [len_], mac_dinh=False).to_numpy()
+        b = _dieu_kien(df, [xuong], mac_dinh=False).to_numpy()
+        ra = np.zeros(len(df), dtype=float)
+        cur = float(t.get("ban_dau", 0.0))
+        for i in range(len(df)):
+            if a[i]:
+                cur = 1.0
+            elif b[i]:
+                cur = -1.0
+            ra[i] = cur
+        return pd.Series(ra, index=df.index)
+
+    if cb == "dem_lien_tiep":
+        # Bao nhieu bar LIEN TIEP toi nay dieu kien van dung (0 neu bar nay sai).
+        # Dung cho "gia da tren duong trung binh N bar lien", "chuoi thang thu N".
+        dk = t.get("khi")
+        if not isinstance(dk, dict):
+            raise KeyError("'dem_lien_tiep' can dieu kien 'khi'")
+        a = _dieu_kien(df, [dk], mac_dinh=False).to_numpy()
+        ra = np.zeros(len(df), dtype=float)
+        d = 0.0
+        for i in range(len(df)):
+            d = d + 1.0 if a[i] else 0.0
+            ra[i] = d
+        return pd.Series(ra, index=df.index)
+
     # --- toan tu BIEN DOI: nhan mot toan hang con ---
     con = t.get("cua")
     if con is None:
@@ -327,6 +374,30 @@ def _kiem_toan_hang(t, sau: int = 0) -> list[str]:
             elif not all(isinstance(h, (int, float)) for h in hs):
                 loi.append("'tuyen_tinh': moi 'he_so' phai la so")
         return loi
+    # Toan tu CO NHO: kiem de quy cac dieu kien con, khong de loi lo ra luc
+    # cham du lieu (sau khi da tieu cong backtest).
+    cb0 = str(t.get("chi_bao", "")).lower()
+    if cb0 == "trang_thai_lat":
+        loi = []
+        for k in ("len", "xuong"):
+            d = t.get(k) or t.get("bat_" + k)
+            if not isinstance(d, dict) or "trai" not in d or "phai" not in d:
+                loi.append(f"'trang_thai_lat' can dieu kien '{k}' co trai/phai")
+                continue
+            if d.get("phep", ">") not in PHEP:
+                loi.append(f"'trang_thai_lat.{k}': phep khong hop le")
+            loi += _kiem_toan_hang(d["trai"], sau + 1)
+            loi += _kiem_toan_hang(d["phai"], sau + 1)
+        return loi
+    if cb0 == "dem_lien_tiep":
+        d = t.get("khi")
+        if not isinstance(d, dict) or "trai" not in d or "phai" not in d:
+            return ["'dem_lien_tiep' can dieu kien 'khi' co trai/phai"]
+        loi = []
+        if d.get("phep", ">") not in PHEP:
+            loi.append("'dem_lien_tiep.khi': phep khong hop le")
+        return loi + _kiem_toan_hang(d["trai"], sau + 1) +             _kiem_toan_hang(d["phai"], sau + 1)
+
     if "n" in t:
         try:
             n = int(t["n"])
