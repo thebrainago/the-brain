@@ -4,22 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 5428, 0 phut), dieu_phoi.py (pid 10764, 85 phut), quantlab.py (pid 10124, 10 phut), seeker.py (pid 15348, 0 phut)
-- `dieu_khien_xa.log`: [dieu_khien_xa] dang nghe...
-- `dieu_phoi.log`: 2026-08-31 23:11:32 SEEKER    bat_dau   lane=external
-- `dieu_phoi_nen.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
-- `HINH_DANG_VS_NULL_sau2500.log`: [2/23] EURGBP.D1.cuoi_thang.truoc2_sau2 · CAI GAI - dinh cao gap 3.3 lan trung vi lan can · p=0.0504 · 2055.1s
-- `supervisor_stdio.log`: 2026-08-31 23:11:32 SEEKER    bat_dau   lane=external
-- `watchdog.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
-- git: 886c2a4 ban giao SONG + dieu khien XA: hai thu khong duoc phu thuoc vao agent
-
-### 2026-08-31 23:13:01 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8552, 0 phut), dieu_phoi.py (pid 10764, 86 phut), seeker.py (pid 15348, 1 phut)
-- `dieu_khien_xa.log`: [dieu_khien_xa] dang nghe...
-- `dieu_phoi.log`: 2026-08-31 23:11:56 QUANTLAB  ok         636.5s guard=job
-- `dieu_phoi_nen.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
-- `HINH_DANG_VS_NULL_sau2500.log`: [2/23] EURGBP.D1.cuoi_thang.truoc2_sau2 · CAI GAI - dinh cao gap 3.3 lan trung vi lan can · p=0.0504 · 2055.1s
 - `supervisor_stdio.log`: 2026-08-31 23:11:56 QUANTLAB  ok         636.5s guard=job
 - `watchdog.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
 - git: b55a3f7 ban giao 31/08 toi: dien doan tom tat + muc viec da cap nhat
@@ -404,3 +388,19 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - dang chay: ban_giao_song.py (pid 10264, 0 phut), dieu_khien_xa.py (pid 3308, 714 phut), dieu_phoi.py (pid 11388, 81 phut), quantlab.py (pid 18092, 6 phut)
 - `dieu_phoi.log`: 2026-09-01 18:57:24 SEEKER    ok         136.6s guard=job
 - git: 0ea6839 QUANTLAB nhanh 2,6 lan: 3 diem nong + quet song song
+### 2026-09-01 19:19:39 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12488, 0 phut), dieu_khien_xa.py (pid 3308, 734 phut)
+- `dieu_phoi.log`: 2026-09-01 19:16:07 === dung dieu phoi ===
+- git: a0ea502 ban giao 01/09 toi: doan tom tat + muc 0 (huong doi sang ha MDE)
+### 2026-09-01 20:40:02 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3152, 0 phut)
+- `dieu_phoi.log`: 2026-09-01 19:16:07 === dung dieu phoi ===
+- `dieu_phoi_nen.log`: [Tue 09/01/2026 20:31:12.59] thay DUNG_LAI - khong khoi dong watchdog
+- git: a0ea502 ban giao 01/09 toi: doan tom tat + muc 0 (huong doi sang ha MDE)
+### 2026-09-01 21:26:18 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9352, 0 phut)
+- `dieu_phoi_nen.log`: [Tue 09/01/2026 20:31:12.59] thay DUNG_LAI - khong khoi dong watchdog
+- git: 68e08d8 Tang du lieu: cat doan bar NGAY deo nhan bar gio, va bar theo PHIEN

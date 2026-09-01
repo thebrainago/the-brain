@@ -98,3 +98,4 @@ VIEC TIEP THEO
    cua chu du an.
 
 839 test qua. Da dung sach 24/7, 0 tien trinh mo coi. (test 840, fdr 1799, viec cho 0)
+- **2026-09-01 23:31** — Phien 01/09 khuya: dong 6/16 van de. Sua goc o TANG DU LIEU (bar NGAY deo nhan bar gio tren 5 ma; bar D1 CFD khong phai bar phien), SO SACH FDR (cot gt_ma chua hai khong gian khoa nen moi doi soat tu 17/08 lang le rong; bat bien khop_ba_tang do sai chieu), PHOI NHIEM HOLDOUT (mot PASS o lan nhin thu 10), va NGU PHAP (bang con thieu giau dung ba toan hang can nhat). Bo test tung bom 60 dong rac vao so cai that - da don va da co conftest canh. BANKER de sau theo yeu cau, nen hieu_chuan_v6 chua ket duoc. (test 892, fdr 1799, viec cho 0)
