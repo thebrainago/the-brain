@@ -1334,6 +1334,33 @@ def _diem_nang_suat() -> dict:
     return {ng: (nhan.get(ng, 0) + 1) / (n + 2) for ng, n in doc.items()}
 
 
+def _doc_dinh_tuyen(t: dict) -> dict | None:
+    """Doc mot tai lieu, DINH TUYEN theo dia chi thay vi luon dung bo doc chung.
+
+    Vi sao: do 01/09 tren 37 ban doc cua `mql5_code` cho thay ta dang luu THANH
+    DIEU HUONG cua trang chu khong phai ma - "Forum | Market | Signals |
+    Freelance | VPS | Quotes | ..." - va chi 2/37 ban co mot ky hieu MQL nao.
+    Nguon dac nhat cua ca he (12.200 muc sau khi sua phan trang) dang duoc luu
+    duoi dang khung trang.
+
+    Ha tang de lam dung DA CO SAN va khong ai goi: `nhan/ma_nguon.tai_ma_nguon`
+    doc trang bai, tim link `/en/code/download/<id>/<ten>.mq5` va tai FILE DON
+    (co tran kich thuoc, co xu ly UTF-16 cua MetaEditor, khong dong den .zip).
+    Day chi la mot dong noi day.
+    """
+    u = str(t.get("url") or "")
+    if re.match(r"https?://(www\.)?mql5\.com/[a-z]{2}/code/\d+", u):
+        from nhan import ma_nguon as MN
+        r = MN.tai_ma_nguon({"url": u, "tieu_de": t.get("tieu_de") or ""})
+        if r and r.get("noi_dung"):
+            vb = r["noi_dung"]
+            return {"van_ban": vb, "so_ky_tu": len(vb), "so_ky_tu_goc": len(vb),
+                    "kieu": "ma_nguon", "cach": "mql5_download"}
+        # Khong lay duoc file don -> ROT VE bo doc chung, khong tra None: tra
+        # None o day se danh dau dia chi la "khong doc duoc" vinh vien.
+    return TV.doc(u)
+
+
 def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
     """Keo toan van / ma nguon cua tai lieu hang A-B chua co ban doc.
 
@@ -1375,7 +1402,7 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
         if doc_duoc >= gioi_han or time.time() - t0 > ngan_sach_giay:
             break
         try:
-            r = TV.doc(t["url"])
+            r = _doc_dinh_tuyen(t)
         except Exception as e:
             r = None
             SO.ghi_chi_so("seeker_doc_loi", 1, {"url": t["url"][:120],

@@ -94,7 +94,15 @@ _DIEN_DAT_DUOC = {"gia", "rsi", "ibs", "atr", "ema", "sma", "bien_do",
 
 #: `rsi` cua ngu phap KHONG nhan `cot` (luon tinh tren close); `ema`/`sma` thi
 #: co. Do la mot khac biet that trong `toan_hang()`, khong phai suy doan.
-_NHAN_COT = {"ema", "sma", "gia"}
+#:
+#: Cac TOAN TU CUA SO (`cao_nhat`, `tb`, `zscore`...) cung nhan duoc nguon gia,
+#: nhung qua truong `cua` chu khong phai `cot`. Thieu chung o day thi
+#: `highest(high, 55)` - Donchian, dieu kien pha vo pho bien nhat - bi cham la
+#: "khong dien dat duoc" va bi vut, trong khi ngu phap viet no duoc thoai mai:
+#: {"chi_bao": "cao_nhat", "n": 55, "cua": {"chi_bao": "gia", "cot": "high"}}.
+_NHAN_COT = {"ema", "sma", "gia",
+             "cao_nhat", "thap_nhat", "tb", "do_lech", "zscore", "phan_vi",
+             "doi", "doi_pct", "tre", "tuyet_doi"}
 
 _SO = r"[-+]?\d+(?:\.\d+)?"
 
@@ -235,6 +243,70 @@ def rut_mql(vb: str) -> list[dict]:
     return ra
 
 
+
+#: Phuong ngu PYTHON/pandas. Day la kho LON NHAT trong thu vien (do 01/09: 234
+#: ban doc python so voi 43 pine va 21 mql), va no viet truc tiep hon MQL nhieu:
+#: `df["close"].rolling(20).mean()` khong mo ho gi.
+_PY_ROLL = re.compile(
+    r"\.rolling\(\s*(?:window\s*=\s*)?(\d+)[^)]*\)\s*\.\s*(mean|max|min|std|sum)\s*\(")
+_PY_EWM = re.compile(r"\.ewm\(\s*span\s*=\s*(\d+)[^)]*\)\s*\.\s*mean\s*\(")
+_PY_HAM = {
+    "rsi": ("rsi", 1), "RSI": ("rsi", 1), "atr": ("atr", 1), "ATR": ("atr", 1),
+    "sma": ("sma", 1), "SMA": ("sma", 1), "ema": ("ema", 1), "EMA": ("ema", 1),
+    "wma": ("wma", 1), "WMA": ("wma", 1), "stdev": ("do_lech", 1),
+    "MACD": ("macd", 3), "macd": ("macd", 3), "ADX": ("adx", 1),
+    "CCI": ("cci", 1), "MOM": ("dong_luong", 1), "OBV": ("obv", 0),
+    "BBANDS": ("bollinger", 2), "bbands": ("bollinger", 2),
+}
+_PY_CUA = {"mean": "sma", "max": "cao_nhat", "min": "thap_nhat",
+           "std": "do_lech", "sum": "tong"}
+#: Cot gia trong pandas: `df["close"]`, `df.close`, `data['Close']`.
+_PY_COT = re.compile(r"""(?:\[\s*['"](\w+)['"]\s*\]|\.(\w+))\s*$""")
+
+
+def _cot_python(truoc: str) -> str | None:
+    """Doan cot gia tu doan van ban NGAY TRUOC loi goi."""
+    m = _PY_COT.search(truoc.strip())
+    if not m:
+        return None
+    ten = (m.group(1) or m.group(2) or "").lower()
+    return ten if ten in ("open", "high", "low", "close", "volume") else None
+
+
+def rut_python(vb: str) -> list[dict]:
+    """Bo ba rut tu ma Python/pandas (pandas-ta, talib, rolling/ewm)."""
+    ra = []
+    bang = _bang_bien(vb)
+    for m in _PY_ROLL.finditer(vb):
+        n, phep = int(m.group(1)), m.group(2)
+        cb = _PY_CUA.get(phep)
+        if not cb:
+            continue
+        ra.append({"chi_bao": cb, "tham_so": [float(n)],
+                   "cot": _cot_python(vb[max(0, m.start() - 60):m.start()]),
+                   "ngon_ngu": "python", "trich": m.group(0)[:120]})
+    for m in _PY_EWM.finditer(vb):
+        ra.append({"chi_bao": "ema", "tham_so": [float(m.group(1))],
+                   "cot": _cot_python(vb[max(0, m.start() - 60):m.start()]),
+                   "ngon_ngu": "python", "trich": m.group(0)[:120]})
+    mau = "|".join(map(re.escape, sorted(_PY_HAM, key=len, reverse=True)))
+    for m in re.finditer(rf"(?:ta|talib)?\.?({mau})\s*\(", vb):
+        chuan, so_ts = _PY_HAM[m.group(1)]
+        trong = _khoi_ngoac(vb, m.end() - 1)
+        ds = _tach_doi_so(trong) if trong.strip() else []
+        cot = None
+        for x in ds:
+            c = _cot_python(x)
+            if c:
+                cot = "tick_volume" if c == "volume" else c
+                break
+        ra.append({"chi_bao": chuan,
+                   "tham_so": _so_dau(ds, so_ts, m.start(), bang) if so_ts else [],
+                   "cot": cot, "ngon_ngu": "python",
+                   "trich": (m.group(0) + trong + ")")[:120]})
+    return ra
+
+
 def dien_dat_duoc(tp: dict) -> tuple[bool, str]:
     """Thanh phan nay ngu phap hien tai co viet ra duoc khong, va thieu gi."""
     cb = tp.get("chi_bao")
@@ -255,12 +327,16 @@ def rut(vb: str, ngon_ngu: str = "tu_doan") -> list[dict]:
     la_pine = ("//@version" in vb or "strategy(" in vb or "indicator(" in vb
                or "study(" in vb)
     la_mql = ("OnTick" in vb or "#property" in vb or "iMA(" in vb)
+    la_py = ("import pandas" in vb or "import numpy" in vb or ".rolling(" in vb
+             or "talib" in vb or "pandas_ta" in vb or "def " in vb)
     if ngon_ngu == "pine" or (ngon_ngu == "tu_doan" and la_pine and not la_mql):
         tho = rut_pine(vb)
     elif ngon_ngu == "mql" or (ngon_ngu == "tu_doan" and la_mql and not la_pine):
         tho = rut_mql(vb)
+    elif ngon_ngu == "python" or (ngon_ngu == "tu_doan" and la_py):
+        tho = rut_python(vb)
     else:
-        tho = rut_pine(vb) + rut_mql(vb)
+        tho = rut_pine(vb) + rut_mql(vb) + rut_python(vb)
     gop: dict = {}
     for t in tho:
         khoa = (t["chi_bao"], tuple(t["tham_so"]), t.get("cot"))

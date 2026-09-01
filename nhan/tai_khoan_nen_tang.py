@@ -131,7 +131,7 @@ NEN_TANG = {
         # bang "thebrainago" that bai: ten dang nhap KHAC email.
         "dau_hieu_da": r"Vanh1799|my profile|logout|sign out",
         # KHONG dat ranh gioi tu sau "in": trang MQL5 ghi LIEN
-        # "Log inCreate an account" (khong co dau cach), nen  sau `in`
+        # "Log inCreate an account" (khong co dau cach), nen  sau `in`
         # khong khop va ca phep kiem truot -> bao KHONG RO trong khi trang
         # noi ro la chua dang nhap. Mot ky tu thieu lam phep do im lang sai.
         "dau_hieu_chua": r"log ?in|sign ?in|create an account",

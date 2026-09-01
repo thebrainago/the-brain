@@ -530,9 +530,26 @@ def rut_hang_doi_ung_vien(gioi_han: int = 20) -> dict:
             bao["mau_la"] += 1
             continue
         nguon = str((uv.metadata or {}).get("nguon_url", "")) or uv.fingerprint[:16]
-        if SO.them_viec(TRU, "kham_pha_theo_mau",
-                        {"mau": ten_mau, "nguon_tai_lieu": nguon,
-                         "ung_vien": uv.fingerprint},
+        # MANG THAM SO CUA TAI LIEU THEO (them 01/09).
+        #
+        # Truoc day viec chi chua `{"mau": ..., "nguon_tai_lieu": ...}`. Hau qua
+        # do duoc: 111 tai lieu ve RSI dao chieu deu xep cung MOT viec tren
+        # `rsi_dao_chieu` va chay cung MOT luoi tham so chuan - nguong, bo loc,
+        # luat thoat cua tung bot bi vut sach. 460 viec chi phu 43 mau.
+        #
+        # Nay neo them tham so ma chinh tai lieu do NOI RA. Van la GOI Y cho
+        # tang kham pha, khong phai lenh: luoi van quet, chi la co mot diem neo
+        # tu ban goc. Va vi tham so vao van tay cua viec nen hai tai lieu noi hai
+        # nguong khac nhau khong con gop lam mot.
+        tham = {"mau": ten_mau, "nguon_tai_lieu": nguon,
+                "ung_vien": uv.fingerprint}
+        neo = (uv.metadata or {}).get("tham_so_goc") or {}
+        if not neo and (uv.metadata or {}).get("dsl"):
+            neo = {k: v for k, v in ((uv.metadata or {}).get("dsl") or {}).items()
+                   if k in ("giu", "chieu")}
+        if neo:
+            tham["tham_so_goc"] = neo
+        if SO.them_viec(TRU, "kham_pha_theo_mau", tham,
                         uu_tien=_uu_tien_ung_vien(uv, muc)):
             bao["xep_viec"] += 1
             bao["mau"][ten_mau] = bao["mau"].get(ten_mau, 0) + 1

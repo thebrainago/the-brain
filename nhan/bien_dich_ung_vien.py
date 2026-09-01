@@ -46,7 +46,15 @@ CON_TRO = LAB / "reports" / "bien_dich_ung_vien_cursor.json"
 TRAN_MOI_LUOT = 12
 #: Mot tai lieu chi duoc de xuat toi da bay nhieu mau. Tai lieu nhac 9 chi bao
 #: thuong la tai lieu liet ke thu vien, khong phai mot y tuong.
-TRAN_MOI_TAI_LIEU = 2
+#: Bao nhieu MAU mot tai lieu duoc tro toi. Truoc 01/09 la 2, va do la mot tran
+#: CUNG dat tuy y: chu du an noi mot bot hay mot chi bao tuong duong 1-5 kieu
+#: danh, va do that cho thay phan bo bi cat dung o do (153 tai lieu ra 1 ung
+#: vien, 79 ra 2, chi 4 ra 5 - vi 5 la so mau khop duoc chu khong phai so cho
+#: phep). Nang len 6: du cho "1-5" ma van chan mot tai lieu tap hop nhac ten hai
+#: chuc chi bao. Day KHONG phai noi long cong - moi ung vien van phai qua ty le
+#: kich hoat, phep cat nhin truoc va FDR y nhu cu; no chi thoi ngung viec vut
+#: bo thong tin TRUOC khi cong kip nhin.
+TRAN_MOI_TAI_LIEU = 6
 #: Tu khoa va van canh phai nam trong cung mot cua so bay nhieu ky tu.
 CUA_SO_VAN_CANH = 600
 #: Do dai trich dan luu lam bang chung.
@@ -169,6 +177,17 @@ def _cau_quanh(noi_dung: str, vi_tri: int) -> str:
     dau = max(0, vi_tri - DAI_TRICH_DAN // 2)
     cuoi = min(len(noi_dung), vi_tri + DAI_TRICH_DAN // 2)
     return " ".join(noi_dung[dau:cuoi].split())
+
+
+def _tien_to_ma(tieu_de: str) -> str:
+    """Tien to ten co che, rut tu tieu de tai lieu de con truy nguoc duoc.
+
+    Ten di thang vao `gia_thuyet.ma` roi bi tim lai bang LIKE, nen chi giu chu
+    va so - xem ghi chu o `ngu_phap.chuan_hoa_ten`.
+    """
+    import re as _re
+    t = _re.sub(r"[^a-z0-9]+", "_", (tieu_de or "ma").lower()).strip("_")
+    return (t[:24] or "ma")
 
 
 def do_khop(noi_dung: str, che_do: str = "van_xuoi") -> list[dict]:
@@ -295,6 +314,53 @@ def bien_dich(tai_lieu, luc: str | None = None) -> list:
         except Exception:
             # Duong 2 hong KHONG duoc lam chet duong 1. Duong 1 la duong da
             # chay that tu 21/08.
+            pass
+
+    # DUONG 3 (them 01/09): DOC MA THANH NHIEU KHAI BAO CO CHE.
+    #
+    # Duong 2 o tren bi tat cho `ma_nguon` tu 23/08, va ly do do DUNG: bo doc
+    # VAN XUOI ap len README/notebook trong repo de ra co che sai. Nhung cai bi
+    # tat la bo doc van xuoi; chinh doan MA thi chua ai doc. Do phieu 01/09:
+    # 247 ban doc ma nguon - EA MQL5 va Pine, suat ra ung vien cao nhat trong
+    # moi loai (20,2%) - tu truoc toi nay chi duoc SO KHOP TU KHOA, tuc dong gop
+    # dung mot cai nhan tro toi mot mau da co san.
+    #
+    # `nhan/doc_ma.py` doc KY HIEU chu khong doan nghia tu tieng nguoi, va tra
+    # ve NHIEU khai bao cho MOT file - dung nhu chu du an noi: mot EA hay mot
+    # Pine script tuong duong nhieu kieu danh. Do that tren `pineturtle.txt`
+    # (Sonic R, 6 strategy): 12 khai bao, 10 qua cong ngu phap.
+    if loai_ban_doc == "ma_nguon" or che_do == "ma_nguon":
+        try:
+            from nhan import doc_ma as DMA
+            for spec in DMA.doc_ma(tai_lieu.content, nguon=nguon_url,
+                                   tien_to=_tien_to_ma(tieu_de)):
+                ra.append(HD.CandidateArtifact(
+                    candidate_kind="method",
+                    title=f"[MA] {spec['ten']} - {tieu_de[:70]}",
+                    summary=(
+                        "Doc tu MA NGUON that thanh mot khai bao co che day du. "
+                        "Moi dieu kien so sanh doc lap trong file la mot kieu danh "
+                        "rieng, de cong cham diem tung cai thay vi gop ca file "
+                        "thanh mot nhan. QUANTLAB kiem cu phap, ty le kich hoat va "
+                        "phep cat nhin truoc TRUOC khi cho dang ky."),
+                    source_artifact_fingerprints=[tai_lieu.fingerprint],
+                    evidence=[{"artifact_fingerprint": tai_lieu.fingerprint,
+                               "quote": str(spec.get("co_che", ""))[:400],
+                               "note": "dieu kien rut tu ma nguon"}],
+                    created_at=tao_luc,
+                    tags=["tu_dong", "doc_ma", "dsl"],
+                    extractor="doc_ma",
+                    extractor_version="1",
+                    confidence=0.6,
+                    metadata={
+                        "mau": spec["ten"],
+                        "dsl": spec,
+                        "nguon_url": nguon_url,
+                        "loai_nguon": "ma_nguon_dsl",
+                    },
+                ))
+        except Exception:
+            # Duong 3 hong KHONG duoc lam chet duong 1.
             pass
 
     for khop in do_khop(tai_lieu.content, che_do=che_do):
