@@ -1,0 +1,581 @@
+[
+ {
+  "url": "https://www.mql5.com/en/code/76794",
+  "ten": "[MQL5 mt5/experts] GDS Renko Zones Demo EA",
+  "ten_file": "GDS_Renko_Zones_Demo_EA",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpBrickSize": {
+    "gia_tri": 18.0
+   },
+   "InpZoneHalfBricks": {
+    "gia_tri": 1.65
+   },
+   "InpMinAwayBricks": {
+    "gia_tri": 0.9
+   },
+   "InpMaxZoneAgeBricks": {
+    "gia_tri": 53.0
+   },
+   "InpTakeProfitBricks": {
+    "gia_tri": 5.5
+   },
+   "InpStopLossBricks": {
+    "gia_tri": 2.9
+   },
+   "InpMaxHoldMinutes": {
+    "gia_tri": 680.0
+   },
+   "InpMaxSpreadFraction": {
+    "gia_tri": 0.3
+   },
+   "InpLots": {
+    "gia_tri": 0.01
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76793",
+  "ten": "[MQL5 mt5/experts] GDS Renko Fast Demo EA",
+  "ten_file": "GDS_Renko_Fast_Demo_EA",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpFastBrickSize": {
+    "gia_tri": 21.0
+   },
+   "InpSlowBrickSize": {
+    "gia_tri": 39.0
+   },
+   "InpEntryRunBricks": {
+    "gia_tri": 1.0
+   },
+   "InpTakeProfitBricks": {
+    "gia_tri": 1.4
+   },
+   "InpStopLossBricks": {
+    "gia_tri": 2.1
+   },
+   "InpMaxHoldMinutes": {
+    "gia_tri": 200.0
+   },
+   "InpCooldownBricks": {
+    "gia_tri": 3.0
+   },
+   "InpMaxSpreadFraction": {
+    "gia_tri": 0.57
+   },
+   "InpLots": {
+    "gia_tri": 0.01
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76669",
+  "ten": "[MQL5 mt5/experts] Market Replay Tool",
+  "ten_file": "Market_Replay_Tool",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpBaseTimerMS": {
+    "gia_tri": 200.0
+   },
+   "InpDownloadTimeoutSec": {
+    "gia_tri": 30.0
+   },
+   "InpMinVisibleBars": {
+    "gia_tri": 50.0
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76605",
+  "ten": "[MQL5 mt5/experts] Sniper Gold Hybrid Recovery EA",
+  "ten_file": "Sniper_Gold_Hybrid_Recovery_EA",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "MagicNumber": {
+    "gia_tri": 888999.0
+   },
+   "FixedLotSize": {
+    "gia_tri": 0.01
+   },
+   "BalancePer001Lot": {
+    "gia_tri": 1000.0
+   },
+   "MaxLotCap": {
+    "gia_tri": 0.2
+   },
+   "RecoveryLotMultiplier": {
+    "gia_tri": 1.2
+   },
+   "RSI_Period": {
+    "gia_tri": 14.0
+   },
+   "ATR_Period": {
+    "gia_tri": 14.0
+   },
+   "ATR_AvgBars": {
+    "gia_tri": 50.0
+   },
+   "NormalBuyRSI": {
+    "gia_tri": 40.0
+   },
+   "HighATRBuyRSI": {
+    "gia_tri": 35.0
+   },
+   "ExtremeATRBuyRSI": {
+    "gia_tri": 30.0
+   },
+   "HighATRMultiplier": {
+    "gia_tri": 1.4
+   },
+   "ExtremeATRMultiplier": {
+    "gia_tri": 2.0
+   },
+   "ManualRecoveryTrades": {
+    "gia_tri": 6.0
+   },
+   "RecoveryATRDistanceMult": {
+    "gia_tri": 1.55
+   },
+   "RecoveryDepthStep": {
+    "gia_tri": 0.45
+   },
+   "MinSecondTradeDistancePoints": {
+    "gia_tri": 1800.0
+   },
+   "MinThirdTradeDistancePoints": {
+    "gia_tri": 3000.0
+   },
+   "MinDeepRecoveryDistancePoints": {
+    "gia_tri": 4500.0
+   },
+   "CrashRecoveryMinPoints": {
+    "gia_tri": 1000.0
+   },
+   "StructureLookbackBars": {
+    "gia_tri": 90.0
+   },
+   "SwingDepth": {
+    "gia_tri": 2.0
+   },
+   "NormalRecoveryMinScore": {
+    "gia_tri": 55.0
+   },
+   "RescueRecoveryStartTrade": {
+    "gia_tri": 3.0
+   },
+   "RescueRecoveryMinScore": {
+    "gia_tri": 85.0
+   },
+   "RescueLotExposurePercent": {
+    "gia_tri": 100.0
+   },
+   "RescueLotMaxBaseMultiple": {
+    "gia_tri": 4.0
+   },
+   "EmergencyRecoveryDDPercent": {
+    "gia_tri": 12.0
+   },
+   "EmergencyRecoveryATRMult": {
+    "gia_tri": 2.5
+   },
+   "TargetProfitUSD": {
+    "gia_tri": 15.0
+   },
+   "TrailingStepUSD": {
+    "gia_tri": 5.0
+   },
+   "RecoveryStartTrailUSD": {
+    "gia_tri": 2.0
+   },
+   "RecoveryGivebackUSD": {
+    "gia_tri": 1.0
+   },
+   "TrimProfitTarget": {
+    "gia_tri": 0.0
+   },
+   "MinTrimWinnerUSD": {
+    "gia_tri": 1.0
+   },
+   "MaxSpreadPoints": {
+    "gia_tri": 100.0
+   },
+   "MaxSlippagePoints": {
+    "gia_tri": 30.0
+   },
+   "MaxEquityLossPercent": {
+    "gia_tri": 50.0
+   },
+   "MaxPipsPerSec": {
+    "gia_tri": 200.0
+   },
+   "CrashPauseMinutes": {
+    "gia_tri": 60.0
+   },
+   "PostCrashWideGapMinutes": {
+    "gia_tri": 180.0
+   },
+   "NewsMinutesBefore": {
+    "gia_tri": 30.0
+   },
+   "NewsMinutesAfter": {
+    "gia_tri": 20.0
+   },
+   "ManualBrokerGMTOffsetH": {
+    "gia_tri": 2.0
+   },
+   "DashboardX": {
+    "gia_tri": 20.0
+   },
+   "DashboardY": {
+    "gia_tri": 20.0
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76534",
+  "ten": "[MQL5 mt5/experts] Interactive On-Chart Risk Management and Execution Panel",
+  "ten_file": "Interactive_On_Chart_Risk_Management_an",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpRiskPercent": {
+    "gia_tri": 1.0
+   },
+   "InpDefaultSLPips": {
+    "gia_tri": 20.0
+   },
+   "InpDefaultTPPips": {
+    "gia_tri": 40.0
+   },
+   "InpBETriggerPips": {
+    "gia_tri": 15.0
+   },
+   "InpTrailingStopPips": {
+    "gia_tri": 20.0
+   },
+   "InpTrailingStepPips": {
+    "gia_tri": 5.0
+   },
+   "InpPanelX": {
+    "gia_tri": 20.0
+   },
+   "InpPanelY": {
+    "gia_tri": 40.0
+   },
+   "InpMagicNumber": {
+    "gia_tri": 882026.0
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76446",
+  "ten": "[MQL5 mt5/experts] Chaos Theory Lyapunov Exponent EA",
+  "ten_file": "Chaos_Theory_Lyapunov_Exponent_EA",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpLyaLookback": {
+    "gia_tri": 100.0
+   },
+   "InpLyaEmbedding": {
+    "gia_tri": 3.0
+   },
+   "InpLyaKSteps": {
+    "gia_tri": 5.0
+   },
+   "InpLyaThreshold": {
+    "gia_tri": 0.0
+   },
+   "InpFastEma": {
+    "gia_tri": 9.0
+   },
+   "InpSlowEma": {
+    "gia_tri": 21.0
+   },
+   "InpRiskPercent": {
+    "gia_tri": 0.15
+   },
+   "InpAtrPeriod": {
+    "gia_tri": 14.0
+   },
+   "InpSlAtrMult": {
+    "gia_tri": 1.5
+   },
+   "InpTpAtrMult": {
+    "gia_tri": 2.5
+   },
+   "InpMagicNumber": {
+    "gia_tri": 202610.0
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76518",
+  "ten": "[MQL5 mt5/experts] Basket Protective Close",
+  "ten_file": "Basket_Protective_Close",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpLossValue": {
+    "gia_tri": 2.0
+   },
+   "InpProfitValue": {
+    "gia_tri": 0.0
+   },
+   "InpDeviationPoints": {
+    "gia_tri": 20.0
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76331",
+  "ten": "[MQL5 mt5/experts] HybridMicrostructure EA",
+  "ten_file": "HybridMicrostructure_EA",
+  "bien_dich": false,
+  "loi": "Experts\\_tu_dong\\HybridMicrostructure_EA.mq5(43,10) : error 106: file 'Include\\HybridMicrostructure\\ParamUX.mqh' not found",
+  "input": {
+   "InpMagicNumber": {
+    "gia_tri": 101010.0
+   },
+   "InpFixedLot": {
+    "gia_tri": 0.01
+   },
+   "InpRiskPercent": {
+    "gia_tri": 1.0
+   },
+   "InpTargetPips": {
+    "gia_tri": 200.0
+   },
+   "InpStopLossPips": {
+    "gia_tri": 120.0
+   },
+   "InpMaxSpreadPips": {
+    "gia_tri": 8.0
+   },
+   "InpBreakEvenPips": {
+    "gia_tri": 10.0
+   },
+   "InpTrailingStopPips": {
+    "gia_tri": 15.0
+   },
+   "InpTrailingStepPips": {
+    "gia_tri": 5.0
+   },
+   "InpTickBufferSize": {
+    "gia_tri": 500.0
+   },
+   "InpDevMultiplier": {
+    "gia_tri": 1.2
+   },
+   "InpVelocityWindowMs": {
+    "gia_tri": 800.0
+   },
+   "InpSnapbackPips": {
+    "gia_tri": 2.5
+   },
+   "InpM1ATRPeriod": {
+    "gia_tri": 14.0
+   },
+   "InpMinM1ATRPips": {
+    "gia_tri": 1.5
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76333",
+  "ten": "[MQL5 mt5/experts] AAPL cfd - ORB strategy",
+  "ten_file": "AAPL_cfd_ORB_strategy",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "Initial_Capital_Base": {
+    "gia_tri": 1000.0
+   },
+   "Risk_Per_Trade_Pct": {
+    "gia_tri": 5.0
+   },
+   "EA_Magic_Number": {
+    "gia_tri": 111111.0
+   },
+   "RANGE_MINSIZE_ATR_MULT": {
+    "gia_tri": 0.2
+   },
+   "ENTRY_BUFFER_POINTS": {
+    "gia_tri": 8.0
+   },
+   "TRADE_TP_RR": {
+    "gia_tri": 2.0
+   },
+   "BE_ACTIVATION_RR": {
+    "gia_tri": 1.2
+   },
+   "TRAIL_ACTIVATION_RR": {
+    "gia_tri": 1.3
+   },
+   "TRAIL_DISTANCE_ATR_MULT": {
+    "gia_tri": 0.3
+   },
+   "ORB_START_HOUR": {
+    "gia_tri": 16.0
+   },
+   "ORB_START_MIN": {
+    "gia_tri": 45.0
+   },
+   "ORB_END_HOUR": {
+    "gia_tri": 17.0
+   },
+   "ORB_END_MIN": {
+    "gia_tri": 0.0
+   },
+   "TRADE_CUTOFF_HOUR": {
+    "gia_tri": 19.0
+   },
+   "TRADE_CUTOFF_MIN": {
+    "gia_tri": 30.0
+   },
+   "SESSION_CLOSE_HOUR": {
+    "gia_tri": 22.0
+   },
+   "SESSION_CLOSE_MIN": {
+    "gia_tri": 45.0
+   },
+   "FRIDAY_CLOSE_HOUR": {
+    "gia_tri": 20.0
+   },
+   "FRIDAY_CLOSE_MIN": {
+    "gia_tri": 0.0
+   },
+   "SL_ATR_MULT": {
+    "gia_tri": 1.2
+   },
+   "MAX_SPREAD_POINTS": {
+    "gia_tri": 25.0
+   },
+   "MAX_TRADES_PER_DAY": {
+    "gia_tri": 2.0
+   },
+   "ATR_PERIOD": {
+    "gia_tri": 14.0
+   },
+   "MAX_BARS_HOLD": {
+    "gia_tri": 20.0
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76288",
+  "ten": "[MQL5 mt5/experts] Server Clock and Daily Reset Hour",
+  "ten_file": "Server_Clock_and_Daily_Reset_Hour",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "ResetHour": {
+    "gia_tri": 17.0
+   },
+   "ResetMinute": {
+    "gia_tri": 0.0
+   },
+   "CustomZoneOffsetMinutes": {
+    "gia_tri": 0.0
+   },
+   "ManualServerOffsetMinutes": {
+    "gia_tri": 180.0
+   },
+   "PanelX": {
+    "gia_tri": 12.0
+   },
+   "PanelY": {
+    "gia_tri": 20.0
+   },
+   "FontSize": {
+    "gia_tri": 10.0
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/76153",
+  "ten": "[MQL5 mt5/experts] Session Opening Range Breakout EA",
+  "ten_file": "Session_Opening_Range_Breakout_EA",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpSessionStartHour": {
+    "gia_tri": 8.0
+   },
+   "InpSessionStartMinute": {
+    "gia_tri": 0.0
+   },
+   "InpOpeningRangeMinutes": {
+    "gia_tri": 30.0
+   },
+   "InpTradingWindowMinutes": {
+    "gia_tri": 120.0
+   },
+   "InpMagicNumber": {
+    "gia_tri": 20260815.0
+   },
+   "InpMaxTradesPerSession": {
+    "gia_tri": 1.0
+   },
+   "InpBreakoutBufferPoints": {
+    "gia_tri": 20.0
+   },
+   "InpRiskPercent": {
+    "gia_tri": 1.0
+   },
+   "InpStopLossBufferPoints": {
+    "gia_tri": 30.0
+   },
+   "InpRewardToRiskRatio": {
+    "gia_tri": 2.0
+   },
+   "InpFixedLotSize": {
+    "gia_tri": 0.1
+   }
+  }
+ },
+ {
+  "url": "https://www.mql5.com/en/code/75749",
+  "ten": "[MQL5 mt5/experts] Quantora Spread Monitor MT5 - Professional Live Spread Monitoring Tool",
+  "ten_file": "Quantora_Spread_Monitor_MT5_Professiona",
+  "bien_dich": true,
+  "loi": "",
+  "input": {
+   "InpHistorySize": {
+    "gia_tri": 60.0
+   },
+   "InpTimerSeconds": {
+    "gia_tri": 1.0
+   },
+   "InpExcellentMax": {
+    "gia_tri": 10.0
+   },
+   "InpLowMax": {
+    "gia_tri": 20.0
+   },
+   "InpNormalMax": {
+    "gia_tri": 35.0
+   },
+   "InpHighMax": {
+    "gia_tri": 60.0
+   },
+   "InpAlertSpreadPoints": {
+    "gia_tri": 50.0
+   },
+   "InpAlertCooldownSeconds": {
+    "gia_tri": 60.0
+   },
+   "InpPanelX": {
+    "gia_tri": 15.0
+   },
+   "InpPanelY": {
+    "gia_tri": 145.0
+   }
+  }
+ }
+]

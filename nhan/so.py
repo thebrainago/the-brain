@@ -596,16 +596,45 @@ def doi_trang_thai_gt(ma: str, trang_thai: str, ghi_chu: str = "") -> None:
                    (trang_thai, ghi_chu, ma))
 
 
+class ChamLaiHoldout(RuntimeError):
+    """Dinh ghi ket qua thu HAI cho cung mot gia thuyet ma khong khai ly do.
+
+    Luat goc cua du an: "Xac nhan la NHIN Y NGUYEN. Chay lai cung gia thuyet =
+    nhin lai cung holdout." Chay lai roi lay ban dep nhat la cach chac chan nhat
+    de che ra mot edge khong ton tai.
+
+    LOI DA SAP (do 01/09/2026): luat nay CO duoc viet - nhung viet o BON CHO GOI
+    trong `tru/quantlab.py` (`WHERE gt_ma=? AND superseded_by IS NULL`), khong
+    viet o CHO GHI. Duong nao quen kiem thi cham lai tu do. Do that tren so cai:
+    373 gia thuyet / 1.270 lan cham = **3,40 lan moi gia thuyet**, mot gia thuyet
+    bi cham 10 lan, va 3 gia thuyet di FAIL -> PASS. Ca 7 gia thuyet tung PASS
+    deu co lich su nhieu lan cham.
+
+    Nen chot chan chuyen ve day: mot luat chi duoc thuc thi o CHO HEP NHAT ma
+    moi duong deu phai di qua. Muon cham lai that (co du lieu moi) thi phai KHAI
+    `cham_lai="<ly do>"` - tuc phai co y thuc, khong xay ra do quen.
+    """
+
+
 def ghi_ket_qua(gt_ma: str, chi_so: dict, cong: dict, verdict: str,
                 p_placebo: float | None, alpha: float | None,
-                t_alpha: float | None) -> int:
-    """CHI-THEM: chay lai cung gia thuyet -> dong moi, dong cu tro superseded_by."""
+                t_alpha: float | None, cham_lai: str = "") -> int:
+    """CHI-THEM: chay lai cung gia thuyet -> dong moi, dong cu tro superseded_by.
+
+    `cham_lai` la LY DO CHINH DANG de cham lai holdout (vi du: "du lieu moi den
+    2026-09"). De rong = day la lan dau; neu that ra da co ket qua song thi ham
+    NEM `ChamLaiHoldout` chu khong lang le ghi de.
+    """
     with ket_noi() as cn:
         r = cn.execute("SELECT id FROM gia_thuyet WHERE ma=?", (gt_ma,)).fetchone()
         gt_id = int(r["id"]) if r else None
         cu = cn.execute(
             "SELECT id FROM ket_qua WHERE gt_ma=? AND superseded_by IS NULL "
             "ORDER BY id DESC LIMIT 1", (gt_ma,)).fetchone()
+        if cu and not cham_lai:
+            raise ChamLaiHoldout(
+                f"gia thuyet {gt_ma} da co ket qua song (ket_qua id={cu['id']}). "
+                "Cham lai holdout phai khai ly do: ghi_ket_qua(..., cham_lai='...')")
         cur = cn.execute(
             "INSERT INTO ket_qua(gt_id,gt_ma,luc,chi_so,cong,verdict,p_placebo,alpha,t_alpha) "
             "VALUES(?,?,?,?,?,?,?,?,?)",
@@ -617,7 +646,8 @@ def ghi_ket_qua(gt_ma: str, chi_so: dict, cong: dict, verdict: str,
         if cu:
             cn.execute("UPDATE ket_qua SET superseded_by=? WHERE id=?", (moi, cu["id"]))
     ghi_su_kien("QUANTLAB", "ket_qua",
-                {"gt": gt_ma, "verdict": verdict, "p": p_placebo, "t": t_alpha})
+                {"gt": gt_ma, "verdict": verdict, "p": p_placebo, "t": t_alpha,
+                 "cham_lai": cham_lai or None})
     return moi
 
 

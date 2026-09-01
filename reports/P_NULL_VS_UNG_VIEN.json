@@ -1,0 +1,5012 @@
+{
+ "tom_tat": {
+  "so_chuoi": 32,
+  "so_o": 584,
+  "tat_ca": {
+   "n": 584,
+   "trung_vi": 0.5,
+   "duoi_005_pct": 3.77
+  },
+  "alpha_duong": {
+   "n": 138,
+   "trung_vi": 0.125,
+   "duoi_005_pct": 13.77
+  },
+  "so_loi": 0,
+  "o_khong_toi_placebo": 0
+ },
+ "ket_qua": [
+  {
+   "ma": "AUDNZD",
+   "khung": "D1",
+   "pp": "garch",
+   "hat": 5004,
+   "so_o": 20,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.91,
+     "tang": 1,
+     "alpha": -1.366,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.58,
+     "tang": 1,
+     "alpha": -2.334,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -0.658,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.285,
+     "tang": 2,
+     "alpha": -3.86,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.44,
+     "tang": 1,
+     "alpha": -4.057,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.68,
+     "tang": 1,
+     "alpha": -4.741,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.23,
+     "tang": 2,
+     "alpha": -1.692,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.27,
+     "tang": 2,
+     "alpha": -1.945,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.46,
+     "tang": 1,
+     "alpha": -2.756,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.86,
+     "tang": 1,
+     "alpha": -4.617,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.44,
+     "tang": 1,
+     "alpha": -1.49,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -3.353,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.87,
+     "tang": 1,
+     "alpha": -4.555,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -0.03,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -0.03,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -0.941,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -0.941,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -0.176,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 11.3
+  },
+  {
+   "ma": "US500CASH",
+   "khung": "D1",
+   "pp": "garch",
+   "hat": 5007,
+   "so_o": 7,
+   "o": [
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.02,
+     "tang": 2,
+     "alpha": 5.559,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.51,
+     "tang": 1,
+     "alpha": -3.839,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.64,
+     "tang": 1,
+     "alpha": -1.397,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.58,
+     "tang": 1,
+     "alpha": -3.087,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -4.226,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -5.855,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.305,
+     "tang": 2,
+     "alpha": -5.565,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 28.5
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "D1",
+   "pp": "block_bootstrap",
+   "hat": 5006,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.295,
+     "tang": 2,
+     "alpha": 0.145,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.3,
+     "tang": 2,
+     "alpha": -0.986,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.08,
+     "tang": 2,
+     "alpha": 0.378,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.185,
+     "tang": 2,
+     "alpha": -0.178,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -0.874,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.65,
+     "tang": 1,
+     "alpha": -3.231,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.95,
+     "tang": 1,
+     "alpha": -4.503,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -3.482,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.83,
+     "tang": 1,
+     "alpha": -3.343,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -0.129,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -0.129,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.68,
+     "tang": 1,
+     "alpha": -0.585,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.18,
+     "tang": 2,
+     "alpha": 0.329,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "gamma_duong_keo_ve",
+     "p": 0.74,
+     "tang": 1,
+     "alpha": -0.543,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.18,
+     "tang": 2,
+     "alpha": 0.329,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 54.4
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "H4",
+   "pp": "garch",
+   "hat": 5001,
+   "so_o": 14,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.53,
+     "tang": 1,
+     "alpha": -0.385,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": 0.194,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.23,
+     "tang": 2,
+     "alpha": -0.727,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": 1.071,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.39,
+     "tang": 1,
+     "alpha": -0.925,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.58,
+     "tang": 1,
+     "alpha": -7.287,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.52,
+     "tang": 1,
+     "alpha": -3.144,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.38,
+     "tang": 1,
+     "alpha": -0.609,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -0.24,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.12,
+     "tang": 2,
+     "alpha": 0.026,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.64,
+     "tang": 1,
+     "alpha": -1.245,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.275,
+     "tang": 2,
+     "alpha": 0.003,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.64,
+     "tang": 1,
+     "alpha": -1.245,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.79,
+     "tang": 1,
+     "alpha": -1.21,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 64.0
+  },
+  {
+   "ma": "AUDCHF",
+   "khung": "H4",
+   "pp": "permute_time",
+   "hat": 5011,
+   "so_o": 25,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.56,
+     "tang": 1,
+     "alpha": -0.7,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -0.705,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.87,
+     "tang": 1,
+     "alpha": -7.365,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.64,
+     "tang": 1,
+     "alpha": -2.293,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -3.779,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -1.264,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.275,
+     "tang": 2,
+     "alpha": -0.211,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.53,
+     "tang": 1,
+     "alpha": -5.499,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.64,
+     "tang": 1,
+     "alpha": -5.027,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.67,
+     "tang": 1,
+     "alpha": -4.634,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -4.158,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -6.03,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.39,
+     "tang": 1,
+     "alpha": -0.804,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.26,
+     "tang": 2,
+     "alpha": 0.521,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -11.601,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -5.245,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.72,
+     "tang": 1,
+     "alpha": -3.045,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -0.373,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.5,
+     "tang": 1,
+     "alpha": -0.896,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.5,
+     "tang": 1,
+     "alpha": -0.896,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -0.373,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -5.168,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.9,
+     "tang": 1,
+     "alpha": -2.271,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.9,
+     "tang": 1,
+     "alpha": -2.271,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 0.43,
+     "tang": 1,
+     "alpha": -2.578,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 25.0
+  },
+  {
+   "ma": "AUDNZD",
+   "khung": "D1",
+   "pp": "block_bootstrap",
+   "hat": 5012,
+   "so_o": 20,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.31,
+     "tang": 2,
+     "alpha": 0.011,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.85,
+     "tang": 1,
+     "alpha": -2.975,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.39,
+     "tang": 1,
+     "alpha": -0.51,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.92,
+     "tang": 1,
+     "alpha": -8.274,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -5.542,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": -3.328,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -3.896,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -3.266,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.56,
+     "tang": 1,
+     "alpha": -2.635,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -2.15,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -2.096,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.46,
+     "tang": 1,
+     "alpha": -3.327,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.54,
+     "tang": 1,
+     "alpha": -2.848,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.59,
+     "tang": 1,
+     "alpha": -0.314,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.59,
+     "tang": 1,
+     "alpha": -0.314,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -0.992,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -0.992,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.14,
+     "tang": 2,
+     "alpha": 0.235,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 21.6
+  },
+  {
+   "ma": "EURCAD",
+   "khung": "H4",
+   "pp": "permute_time",
+   "hat": 5002,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.06,
+     "tang": 2,
+     "alpha": 1.144,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.34,
+     "tang": 1,
+     "alpha": 0.059,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.125,
+     "tang": 2,
+     "alpha": 0.927,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.22,
+     "tang": 2,
+     "alpha": -0.746,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.44,
+     "tang": 1,
+     "alpha": -1.632,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.39,
+     "tang": 1,
+     "alpha": -0.893,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.51,
+     "tang": 1,
+     "alpha": -1.364,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.115,
+     "tang": 2,
+     "alpha": 0.539,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.53,
+     "tang": 1,
+     "alpha": -4.623,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.98,
+     "tang": 1,
+     "alpha": -4.169,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.99,
+     "tang": 1,
+     "alpha": -2.095,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.305,
+     "tang": 2,
+     "alpha": -0.051,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.71,
+     "tang": 1,
+     "alpha": -1.077,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.135,
+     "tang": 2,
+     "alpha": 0.432,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.71,
+     "tang": 1,
+     "alpha": -1.077,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": 0.944,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 114.4
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "H4",
+   "pp": "block_bootstrap",
+   "hat": 5009,
+   "so_o": 14,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.04,
+     "tang": 2,
+     "alpha": 1.128,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": 0.087,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.15,
+     "tang": 2,
+     "alpha": -0.418,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -0.671,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.07,
+     "tang": 2,
+     "alpha": 0.626,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -7.395,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.47,
+     "tang": 1,
+     "alpha": -2.624,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.16,
+     "tang": 2,
+     "alpha": -0.364,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.55,
+     "tang": 1,
+     "alpha": -0.207,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.39,
+     "tang": 1,
+     "alpha": -0.748,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -0.758,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.165,
+     "tang": 2,
+     "alpha": 0.035,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -0.758,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -0.307,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 86.3
+  },
+  {
+   "ma": "US500CASH",
+   "khung": "D1",
+   "pp": "block_bootstrap",
+   "hat": 5015,
+   "so_o": 7,
+   "o": [
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -3.455,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.35,
+     "tang": 1,
+     "alpha": -1.97,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -2.155,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.16,
+     "tang": 2,
+     "alpha": 0.111,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.67,
+     "tang": 1,
+     "alpha": -1.614,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -14.525,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -8.563,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 2.9
+  },
+  {
+   "ma": "EURCAD",
+   "khung": "H4",
+   "pp": "garch",
+   "hat": 5010,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.56,
+     "tang": 1,
+     "alpha": -1.138,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.15,
+     "tang": 2,
+     "alpha": 0.807,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.16,
+     "tang": 2,
+     "alpha": 0.699,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.38,
+     "tang": 1,
+     "alpha": -1.996,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.065,
+     "tang": 2,
+     "alpha": 1.124,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.19,
+     "tang": 2,
+     "alpha": 0.19,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.03,
+     "tang": 2,
+     "alpha": 2.2,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -0.752,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.4,
+     "tang": 1,
+     "alpha": -3.925,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.75,
+     "tang": 1,
+     "alpha": -3.011,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -1.13,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.225,
+     "tang": 2,
+     "alpha": 0.088,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -0.607,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.09,
+     "tang": 2,
+     "alpha": 0.587,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -0.607,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.73,
+     "tang": 1,
+     "alpha": -1.057,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 101.0
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H1",
+   "pp": "garch",
+   "hat": 5013,
+   "so_o": 19,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.9,
+     "tang": 1,
+     "alpha": -2.001,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.53,
+     "tang": 1,
+     "alpha": -0.614,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": 0.053,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.395,
+     "tang": 2,
+     "alpha": -0.016,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.12,
+     "tang": 2,
+     "alpha": 0.65,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bien_do_thu_hep",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -0.045,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.94,
+     "tang": 1,
+     "alpha": -4.845,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.98,
+     "tang": 1,
+     "alpha": -5.682,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -2.887,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -3.253,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -2.242,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.97,
+     "tang": 1,
+     "alpha": -1.062,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -0.481,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "giai_chap_vol_target",
+     "p": 0.58,
+     "tang": 1,
+     "alpha": -0.886,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -1.336,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -1.336,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": -0.019,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": -0.019,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -0.954,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 65.4
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "D1",
+   "pp": "permute_time",
+   "hat": 5014,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.84,
+     "tang": 1,
+     "alpha": -0.901,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.99,
+     "tang": 1,
+     "alpha": -4.136,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -1.302,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.265,
+     "tang": 2,
+     "alpha": -0.516,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.225,
+     "tang": 2,
+     "alpha": 0.383,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.77,
+     "tang": 1,
+     "alpha": -3.686,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.37,
+     "tang": 1,
+     "alpha": -1.667,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.24,
+     "tang": 2,
+     "alpha": -1.088,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.51,
+     "tang": 1,
+     "alpha": -2.175,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.56,
+     "tang": 1,
+     "alpha": -0.233,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.56,
+     "tang": 1,
+     "alpha": -0.233,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.68,
+     "tang": 1,
+     "alpha": -0.553,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.135,
+     "tang": 2,
+     "alpha": 0.425,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "gamma_duong_keo_ve",
+     "p": 0.245,
+     "tang": 2,
+     "alpha": 0.203,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.135,
+     "tang": 2,
+     "alpha": 0.425,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 62.4
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H4",
+   "pp": "permute_time",
+   "hat": 5008,
+   "so_o": 29,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.1,
+     "tang": 2,
+     "alpha": 0.907,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": -0.518,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.73,
+     "tang": 1,
+     "alpha": -0.663,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.92,
+     "tang": 1,
+     "alpha": -1.34,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.75,
+     "tang": 1,
+     "alpha": -0.722,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.99,
+     "tang": 1,
+     "alpha": -5.845,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.73,
+     "tang": 1,
+     "alpha": -2.732,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.94,
+     "tang": 1,
+     "alpha": -4.923,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -10.089,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -2.639,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.3,
+     "tang": 2,
+     "alpha": 0.354,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": 0.614,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.01,
+     "tang": 2,
+     "alpha": 2.495,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.09,
+     "tang": 2,
+     "alpha": 1.003,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.03,
+     "tang": 2,
+     "alpha": 1.782,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_qua_dem",
+     "p": 0.04,
+     "tang": 2,
+     "alpha": -2.317,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "moc_phien",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.52,
+     "tang": 1,
+     "alpha": -3.151,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -1.552,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.29,
+     "tang": 2,
+     "alpha": -0.081,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.23,
+     "tang": 2,
+     "alpha": 0.104,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.265,
+     "tang": 2,
+     "alpha": 0.062,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.77,
+     "tang": 1,
+     "alpha": -1.54,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.01,
+     "tang": 2,
+     "alpha": 1.359,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.79,
+     "tang": 1,
+     "alpha": -1.051,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.315,
+     "tang": 2,
+     "alpha": 0.156,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.79,
+     "tang": 1,
+     "alpha": -1.051,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -1.165,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.47,
+     "tang": 1,
+     "alpha": -0.331,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 244.6
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H1",
+   "pp": "permute_time",
+   "hat": 5005,
+   "so_o": 19,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.98,
+     "tang": 1,
+     "alpha": -2.826,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -0.51,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.085,
+     "tang": 2,
+     "alpha": 0.622,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.1,
+     "tang": 2,
+     "alpha": 0.895,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.135,
+     "tang": 2,
+     "alpha": 0.5,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bien_do_thu_hep",
+     "p": 0.88,
+     "tang": 1,
+     "alpha": -0.094,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.88,
+     "tang": 1,
+     "alpha": -4.957,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -4.95,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.79,
+     "tang": 1,
+     "alpha": -3.069,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.91,
+     "tang": 1,
+     "alpha": -4.091,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.86,
+     "tang": 1,
+     "alpha": -3.046,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.83,
+     "tang": 1,
+     "alpha": -0.728,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.5,
+     "tang": 1,
+     "alpha": -0.037,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "giai_chap_vol_target",
+     "p": 0.99,
+     "tang": 1,
+     "alpha": -1.719,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.27,
+     "tang": 2,
+     "alpha": -0.436,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.27,
+     "tang": 2,
+     "alpha": -0.436,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.88,
+     "tang": 1,
+     "alpha": -0.338,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.88,
+     "tang": 1,
+     "alpha": -0.338,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.85,
+     "tang": 1,
+     "alpha": -2.075,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 302.7
+  },
+  {
+   "ma": "AUDCHF",
+   "khung": "H4",
+   "pp": "garch",
+   "hat": 5019,
+   "so_o": 25,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -0.311,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.2,
+     "tang": 2,
+     "alpha": 0.863,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.345,
+     "tang": 2,
+     "alpha": -2.876,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.06,
+     "tang": 2,
+     "alpha": 1.059,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.43,
+     "tang": 1,
+     "alpha": -2.314,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.4,
+     "tang": 1,
+     "alpha": -0.806,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -1.59,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -5.47,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.64,
+     "tang": 1,
+     "alpha": -4.845,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -3.236,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.58,
+     "tang": 1,
+     "alpha": -3.738,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -3.994,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -2.487,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.47,
+     "tang": 1,
+     "alpha": -0.774,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -8.417,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -6.276,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -3.695,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -0.398,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.345,
+     "tang": 2,
+     "alpha": -0.484,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.345,
+     "tang": 2,
+     "alpha": -0.484,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -0.398,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.065,
+     "tang": 2,
+     "alpha": 0.318,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -1.527,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -1.527,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 0.53,
+     "tang": 1,
+     "alpha": -2.598,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 128.6
+  },
+  {
+   "ma": "AUDCHF",
+   "khung": "H4",
+   "pp": "block_bootstrap",
+   "hat": 5003,
+   "so_o": 25,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.035,
+     "tang": 2,
+     "alpha": 1.29,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.09,
+     "tang": 2,
+     "alpha": 1.135,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.12,
+     "tang": 2,
+     "alpha": -1.482,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.1,
+     "tang": 2,
+     "alpha": 0.05,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.01,
+     "tang": 2,
+     "alpha": 3.096,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.36,
+     "tang": 2,
+     "alpha": -0.296,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.24,
+     "tang": 2,
+     "alpha": -0.017,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -11.233,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -4.986,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -12.369,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.95,
+     "tang": 1,
+     "alpha": -6.208,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.51,
+     "tang": 1,
+     "alpha": -4.742,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.03,
+     "tang": 2,
+     "alpha": 2.372,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.04,
+     "tang": 2,
+     "alpha": 2.415,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -10.416,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -6.291,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.65,
+     "tang": 1,
+     "alpha": -2.787,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -0.699,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.51,
+     "tang": 1,
+     "alpha": -0.809,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.51,
+     "tang": 1,
+     "alpha": -0.809,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -0.699,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.08,
+     "tang": 2,
+     "alpha": 0.041,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": -0.635,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": -0.635,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 0.72,
+     "tang": 1,
+     "alpha": -3.762,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 320.2
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H4",
+   "pp": "block_bootstrap",
+   "hat": 5000,
+   "so_o": 29,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.74,
+     "tang": 1,
+     "alpha": -0.447,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.5,
+     "tang": 1,
+     "alpha": -1.74,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -0.456,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.89,
+     "tang": 1,
+     "alpha": -1.368,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -0.648,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.47,
+     "tang": 1,
+     "alpha": -2.184,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.33,
+     "tang": 2,
+     "alpha": -0.305,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -2.348,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.38,
+     "tang": 1,
+     "alpha": -3.159,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.65,
+     "tang": 1,
+     "alpha": -2.279,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.47,
+     "tang": 1,
+     "alpha": -0.1,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": -0.235,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.255,
+     "tang": 2,
+     "alpha": 0.216,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.29,
+     "tang": 2,
+     "alpha": -0.243,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -1.505,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_qua_dem",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -5.149,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "moc_phien",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.9,
+     "tang": 1,
+     "alpha": -4.868,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.84,
+     "tang": 1,
+     "alpha": -1.757,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.245,
+     "tang": 2,
+     "alpha": 0.058,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.24,
+     "tang": 2,
+     "alpha": 0.178,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.8,
+     "tang": 1,
+     "alpha": -0.994,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.19,
+     "tang": 2,
+     "alpha": 0.108,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.8,
+     "tang": 1,
+     "alpha": -0.766,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.16,
+     "tang": 2,
+     "alpha": 0.107,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.23,
+     "tang": 2,
+     "alpha": 0.429,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.16,
+     "tang": 2,
+     "alpha": 0.107,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.41,
+     "tang": 1,
+     "alpha": -0.058,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -0.653,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 335.0
+  },
+  {
+   "ma": "EURCAD",
+   "khung": "H4",
+   "pp": "block_bootstrap",
+   "hat": 5018,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.04,
+     "tang": 2,
+     "alpha": 1.034,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.27,
+     "tang": 2,
+     "alpha": 0.418,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.23,
+     "tang": 2,
+     "alpha": 0.563,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.12,
+     "tang": 2,
+     "alpha": 0.163,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.14,
+     "tang": 2,
+     "alpha": 0.475,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.125,
+     "tang": 2,
+     "alpha": 0.864,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.2,
+     "tang": 2,
+     "alpha": 0.489,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.085,
+     "tang": 2,
+     "alpha": 1.214,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.51,
+     "tang": 1,
+     "alpha": -4.514,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.24,
+     "tang": 2,
+     "alpha": -0.838,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.235,
+     "tang": 2,
+     "alpha": -0.108,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.23,
+     "tang": 2,
+     "alpha": 0.045,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -0.753,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.49,
+     "tang": 1,
+     "alpha": -0.436,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -0.753,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.015,
+     "tang": 2,
+     "alpha": 2.02,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 163.8
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "D1",
+   "pp": "garch",
+   "hat": 5022,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.97,
+     "tang": 1,
+     "alpha": -2.127,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.97,
+     "tang": 1,
+     "alpha": -4.48,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -4.3,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.8,
+     "tang": 1,
+     "alpha": -2.422,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.04,
+     "tang": 2,
+     "alpha": 1.361,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.02,
+     "tang": 2,
+     "alpha": 2.434,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.32,
+     "tang": 1,
+     "alpha": -0.982,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.05,
+     "tang": 2,
+     "alpha": 0.916,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.93,
+     "tang": 1,
+     "alpha": -4.658,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.67,
+     "tang": 1,
+     "alpha": -0.505,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.67,
+     "tang": 1,
+     "alpha": -0.505,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.75,
+     "tang": 1,
+     "alpha": -0.639,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.17,
+     "tang": 2,
+     "alpha": 0.339,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "gamma_duong_keo_ve",
+     "p": 0.4,
+     "tang": 1,
+     "alpha": -0.088,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.17,
+     "tang": 2,
+     "alpha": 0.339,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 38.6
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "H4",
+   "pp": "garch",
+   "hat": 5025,
+   "so_o": 14,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -2.071,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.57,
+     "tang": 1,
+     "alpha": -0.487,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.97,
+     "tang": 1,
+     "alpha": -6.374,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.79,
+     "tang": 1,
+     "alpha": -2.805,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -5.818,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.34,
+     "tang": 1,
+     "alpha": -5.651,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.93,
+     "tang": 1,
+     "alpha": -5.04,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -1.494,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -0.125,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.79,
+     "tang": 1,
+     "alpha": -1.764,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -1.996,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.67,
+     "tang": 1,
+     "alpha": -0.912,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -1.996,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.92,
+     "tang": 1,
+     "alpha": -2.027,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 4.9
+  },
+  {
+   "ma": "AUDNZD",
+   "khung": "D1",
+   "pp": "permute_time",
+   "hat": 5020,
+   "so_o": 20,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -0.723,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -4.871,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.18,
+     "tang": 2,
+     "alpha": 0.19,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.44,
+     "tang": 1,
+     "alpha": -4.39,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.03,
+     "tang": 2,
+     "alpha": -0.008,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.1,
+     "tang": 2,
+     "alpha": -0.454,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.085,
+     "tang": 2,
+     "alpha": 0.501,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.3,
+     "tang": 2,
+     "alpha": -1.906,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.185,
+     "tang": 2,
+     "alpha": -0.691,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.15,
+     "tang": 2,
+     "alpha": -0.014,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.83,
+     "tang": 1,
+     "alpha": -3.486,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.13,
+     "tang": 2,
+     "alpha": -1.014,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.095,
+     "tang": 2,
+     "alpha": 0.176,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.17,
+     "tang": 2,
+     "alpha": 0.206,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.17,
+     "tang": 2,
+     "alpha": 0.206,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.37,
+     "tang": 1,
+     "alpha": -0.441,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.37,
+     "tang": 1,
+     "alpha": -0.441,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.255,
+     "tang": 2,
+     "alpha": 0.184,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 98.1
+  },
+  {
+   "ma": "AUDNZD",
+   "khung": "D1",
+   "pp": "garch",
+   "hat": 5028,
+   "so_o": 20,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -0.708,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.46,
+     "tang": 1,
+     "alpha": -1.807,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.48,
+     "tang": 1,
+     "alpha": -0.74,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -4.802,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.08,
+     "tang": 2,
+     "alpha": -1.389,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.305,
+     "tang": 2,
+     "alpha": -2.362,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.58,
+     "tang": 1,
+     "alpha": -3.428,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.34,
+     "tang": 2,
+     "alpha": -2.21,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.22,
+     "tang": 2,
+     "alpha": -1.122,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.215,
+     "tang": 2,
+     "alpha": -0.824,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.43,
+     "tang": 1,
+     "alpha": -1.274,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.15,
+     "tang": 2,
+     "alpha": -1.05,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -4.479,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.4,
+     "tang": 1,
+     "alpha": -0.187,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.4,
+     "tang": 1,
+     "alpha": -0.187,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -0.795,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -0.795,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.87,
+     "tang": 1,
+     "alpha": -0.751,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 12.9
+  },
+  {
+   "ma": "US500CASH",
+   "khung": "D1",
+   "pp": "permute_time",
+   "hat": 5023,
+   "so_o": 7,
+   "o": [
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.8,
+     "tang": 1,
+     "alpha": -4.891,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.91,
+     "tang": 1,
+     "alpha": -7.624,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.115,
+     "tang": 2,
+     "alpha": 1.906,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.92,
+     "tang": 1,
+     "alpha": -8.838,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.06,
+     "tang": 2,
+     "alpha": 2.858,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.055,
+     "tang": 2,
+     "alpha": 2.164,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.02,
+     "tang": 2,
+     "alpha": 4.322,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 49.3
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H1",
+   "pp": "block_bootstrap",
+   "hat": 5021,
+   "so_o": 19,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.355,
+     "tang": 2,
+     "alpha": -0.54,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.13,
+     "tang": 2,
+     "alpha": 0.614,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.91,
+     "tang": 1,
+     "alpha": -1.305,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.84,
+     "tang": 1,
+     "alpha": -0.991,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.33,
+     "tang": 1,
+     "alpha": 0.227,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bien_do_thu_hep",
+     "p": 0.34,
+     "tang": 1,
+     "alpha": -0.097,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -5.73,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.46,
+     "tang": 1,
+     "alpha": -2.227,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.55,
+     "tang": 1,
+     "alpha": -1.65,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -3.48,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.5,
+     "tang": 1,
+     "alpha": -1.706,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.59,
+     "tang": 1,
+     "alpha": -0.347,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -0.165,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "giai_chap_vol_target",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -0.662,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.43,
+     "tang": 1,
+     "alpha": -0.646,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.43,
+     "tang": 1,
+     "alpha": -0.646,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.91,
+     "tang": 1,
+     "alpha": -0.563,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.91,
+     "tang": 1,
+     "alpha": -0.563,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.54,
+     "tang": 1,
+     "alpha": -1.243,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 74.9
+  },
+  {
+   "ma": "US500CASH",
+   "khung": "D1",
+   "pp": "garch",
+   "hat": 5031,
+   "so_o": 7,
+   "o": [
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.43,
+     "tang": 1,
+     "alpha": -0.945,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ibs_bat_day",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -3.968,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.87,
+     "tang": 1,
+     "alpha": -3.075,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.46,
+     "tang": 1,
+     "alpha": -0.403,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.93,
+     "tang": 1,
+     "alpha": -4.493,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.86,
+     "tang": 1,
+     "alpha": -15.562,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.72,
+     "tang": 1,
+     "alpha": -12.225,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 1.0
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "D1",
+   "pp": "block_bootstrap",
+   "hat": 5030,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.65,
+     "tang": 1,
+     "alpha": -0.641,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -2.338,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.75,
+     "tang": 1,
+     "alpha": -1.517,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.81,
+     "tang": 1,
+     "alpha": -2.235,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.05,
+     "tang": 2,
+     "alpha": 1.147,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.45,
+     "tang": 1,
+     "alpha": -2.528,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.055,
+     "tang": 2,
+     "alpha": 0.6,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.06,
+     "tang": 2,
+     "alpha": 0.389,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -2.952,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.37,
+     "tang": 1,
+     "alpha": -0.034,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.37,
+     "tang": 1,
+     "alpha": -0.034,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.43,
+     "tang": 1,
+     "alpha": -0.22,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -0.359,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "gamma_duong_keo_ve",
+     "p": 0.16,
+     "tang": 2,
+     "alpha": 0.31,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -0.359,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 25.6
+  },
+  {
+   "ma": "AUDCAD",
+   "khung": "H4",
+   "pp": "permute_time",
+   "hat": 5017,
+   "so_o": 14,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.12,
+     "tang": 2,
+     "alpha": 0.759,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.28,
+     "tang": 2,
+     "alpha": 0.489,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.1,
+     "tang": 2,
+     "alpha": 0.227,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.02,
+     "tang": 2,
+     "alpha": 2.748,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.14,
+     "tang": 2,
+     "alpha": 0.482,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.88,
+     "tang": 1,
+     "alpha": -8.62,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.84,
+     "tang": 1,
+     "alpha": -3.962,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.15,
+     "tang": 2,
+     "alpha": -0.06,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.25,
+     "tang": 2,
+     "alpha": 0.061,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.84,
+     "tang": 1,
+     "alpha": -1.623,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.09,
+     "tang": 2,
+     "alpha": -0.223,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.28,
+     "tang": 2,
+     "alpha": -0.103,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.09,
+     "tang": 2,
+     "alpha": -0.223,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.03,
+     "tang": 2,
+     "alpha": 1.703,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 289.5
+  },
+  {
+   "ma": "AUDCHF",
+   "khung": "H4",
+   "pp": "block_bootstrap",
+   "hat": 5027,
+   "so_o": 25,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.08,
+     "tang": 2,
+     "alpha": 1.048,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.58,
+     "tang": 1,
+     "alpha": -0.449,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.44,
+     "tang": 1,
+     "alpha": -4.179,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.42,
+     "tang": 1,
+     "alpha": -1.983,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.09,
+     "tang": 2,
+     "alpha": 0.395,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.54,
+     "tang": 1,
+     "alpha": -0.916,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": -3.735,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.87,
+     "tang": 1,
+     "alpha": -8.167,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -4.785,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.8,
+     "tang": 1,
+     "alpha": -5.818,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.95,
+     "tang": 1,
+     "alpha": -7.067,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.88,
+     "tang": 1,
+     "alpha": -7.983,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.1,
+     "tang": 2,
+     "alpha": 0.742,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -1.962,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.33,
+     "tang": 1,
+     "alpha": -8.234,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.305,
+     "tang": 2,
+     "alpha": -4.289,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.145,
+     "tang": 2,
+     "alpha": -1.001,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.52,
+     "tang": 1,
+     "alpha": -0.24,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.56,
+     "tang": 1,
+     "alpha": -0.883,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.56,
+     "tang": 1,
+     "alpha": -0.883,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cung_don_bay_khi_vol_giam",
+     "p": 0.52,
+     "tang": 1,
+     "alpha": -0.24,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.16,
+     "tang": 2,
+     "alpha": -0.155,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -2.4,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.82,
+     "tang": 1,
+     "alpha": -2.4,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bu_rui_ro_truoc_cong_bo_vi_mo",
+     "p": 0.98,
+     "tang": 1,
+     "alpha": -5.386,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 101.1
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H4",
+   "pp": "block_bootstrap",
+   "hat": 5024,
+   "so_o": 29,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": 1.17,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.09,
+     "tang": 2,
+     "alpha": 0.943,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.38,
+     "tang": 1,
+     "alpha": -0.143,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.295,
+     "tang": 2,
+     "alpha": 0.29,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.145,
+     "tang": 2,
+     "alpha": 0.842,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.73,
+     "tang": 1,
+     "alpha": -3.601,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.34,
+     "tang": 1,
+     "alpha": -0.723,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.8,
+     "tang": 1,
+     "alpha": -4.593,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.97,
+     "tang": 1,
+     "alpha": -8.217,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.54,
+     "tang": 1,
+     "alpha": -3.094,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.18,
+     "tang": 2,
+     "alpha": 0.868,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.83,
+     "tang": 1,
+     "alpha": -3.144,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.76,
+     "tang": 1,
+     "alpha": -1.813,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.44,
+     "tang": 1,
+     "alpha": -0.157,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.72,
+     "tang": 1,
+     "alpha": -1.41,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_qua_dem",
+     "p": 0.03,
+     "tang": 2,
+     "alpha": -0.825,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "moc_phien",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.55,
+     "tang": 1,
+     "alpha": -3.631,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -1.889,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.31,
+     "tang": 1,
+     "alpha": -0.117,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.125,
+     "tang": 2,
+     "alpha": 0.369,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.095,
+     "tang": 2,
+     "alpha": 0.773,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.74,
+     "tang": 1,
+     "alpha": -1.415,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.75,
+     "tang": 1,
+     "alpha": -0.841,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.68,
+     "tang": 1,
+     "alpha": -0.712,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.14,
+     "tang": 2,
+     "alpha": 0.656,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.68,
+     "tang": 1,
+     "alpha": -0.712,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.115,
+     "tang": 2,
+     "alpha": 0.394,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.13,
+     "tang": 2,
+     "alpha": 0.939,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 186.8
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H4",
+   "pp": "garch",
+   "hat": 5016,
+   "so_o": 29,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.08,
+     "tang": 2,
+     "alpha": 1.515,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.61,
+     "tang": 1,
+     "alpha": -0.895,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.175,
+     "tang": 2,
+     "alpha": 0.681,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.4,
+     "tang": 1,
+     "alpha": 0.027,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.37,
+     "tang": 1,
+     "alpha": 0.029,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -3.351,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "donchian",
+     "p": 0.96,
+     "tang": 1,
+     "alpha": -6.285,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ichimoku_cheo",
+     "p": 0.97,
+     "tang": 1,
+     "alpha": -6.305,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "momentum_ema",
+     "p": 0.83,
+     "tang": 1,
+     "alpha": -7.358,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "sma_cheo",
+     "p": 0.7,
+     "tang": 1,
+     "alpha": -3.823,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.27,
+     "tang": 2,
+     "alpha": 0.809,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": 1.221,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.02,
+     "tang": 2,
+     "alpha": 2.688,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.08,
+     "tang": 2,
+     "alpha": 1.678,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.07,
+     "tang": 2,
+     "alpha": 1.398,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_qua_dem",
+     "p": 0.94,
+     "tang": 1,
+     "alpha": -7.005,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "moc_phien",
+     "p": 1.0,
+     "tang": 1,
+     "alpha": 0.0,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.18,
+     "tang": 2,
+     "alpha": -1.863,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.14,
+     "tang": 2,
+     "alpha": -0.352,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.01,
+     "tang": 2,
+     "alpha": 1.331,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.74,
+     "tang": 1,
+     "alpha": -0.567,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "hap_thu_khoi_luong",
+     "p": 0.275,
+     "tang": 2,
+     "alpha": 0.285,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ghim_gia_tuan_dao_han",
+     "p": 0.065,
+     "tang": 2,
+     "alpha": 0.382,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.77,
+     "tang": 1,
+     "alpha": -0.643,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": 0.105,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.17,
+     "tang": 2,
+     "alpha": 0.332,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.11,
+     "tang": 2,
+     "alpha": 0.105,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "phi_bao_hiem_bien_dong_gian_no",
+     "p": 0.345,
+     "tang": 2,
+     "alpha": -0.071,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.71,
+     "tang": 1,
+     "alpha": -0.465,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 410.8
+  },
+  {
+   "ma": "EURCAD",
+   "khung": "H4",
+   "pp": "permute_time",
+   "hat": 5026,
+   "so_o": 16,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.91,
+     "tang": 1,
+     "alpha": -2.179,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.8,
+     "tang": 1,
+     "alpha": -0.84,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.68,
+     "tang": 1,
+     "alpha": -0.547,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.66,
+     "tang": 1,
+     "alpha": -2.576,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -2.492,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -1.358,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.31,
+     "tang": 2,
+     "alpha": 0.002,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.37,
+     "tang": 1,
+     "alpha": -0.315,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.39,
+     "tang": 1,
+     "alpha": -3.853,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.305,
+     "tang": 2,
+     "alpha": -0.944,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.84,
+     "tang": 1,
+     "alpha": -1.35,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "pha_day_hut_quet_stop",
+     "p": 0.95,
+     "tang": 1,
+     "alpha": -1.651,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.12,
+     "tang": 2,
+     "alpha": 0.049,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mua_lai_co_phieu_quy_theo_ngan_sach",
+     "p": 0.355,
+     "tang": 2,
+     "alpha": -0.083,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "mat_can_bang_lenh_dong_cua",
+     "p": 0.12,
+     "tang": 2,
+     "alpha": 0.049,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.63,
+     "tang": 1,
+     "alpha": -0.586,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 205.6
+  },
+  {
+   "ma": "EURGBP",
+   "khung": "H1",
+   "pp": "permute_time",
+   "hat": 5029,
+   "so_o": 19,
+   "o": [
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.6,
+     "tang": 1,
+     "alpha": -1.301,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rsi_dao_chieu",
+     "p": 0.36,
+     "tang": 1,
+     "alpha": -0.187,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.94,
+     "tang": 1,
+     "alpha": -1.194,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.81,
+     "tang": 1,
+     "alpha": -0.906,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "cuoi_thang",
+     "p": 0.52,
+     "tang": 1,
+     "alpha": -0.271,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bien_do_thu_hep",
+     "p": 0.65,
+     "tang": 1,
+     "alpha": -0.041,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "bollinger_ve",
+     "p": 0.78,
+     "tang": 1,
+     "alpha": -4.661,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.72,
+     "tang": 1,
+     "alpha": -2.885,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.35,
+     "tang": 1,
+     "alpha": -0.805,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ou_quay_ve",
+     "p": 0.18,
+     "tang": 2,
+     "alpha": -0.824,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.69,
+     "tang": 1,
+     "alpha": -2.525,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.22,
+     "tang": 2,
+     "alpha": 0.032,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "lap_gap",
+     "p": 0.55,
+     "tang": 1,
+     "alpha": -0.072,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "giai_chap_vol_target",
+     "p": 0.54,
+     "tang": 1,
+     "alpha": -0.727,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.27,
+     "tang": 2,
+     "alpha": -0.305,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "dong_luong_dau_thang_khi_gia_giam",
+     "p": 0.27,
+     "tang": 2,
+     "alpha": -0.305,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.19,
+     "tang": 2,
+     "alpha": 0.145,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "ban_lo_cuoi_nam_thue",
+     "p": 0.19,
+     "tang": 2,
+     "alpha": 0.145,
+     "verdict": "FAIL",
+     "loi_pl": null
+    },
+    {
+     "mau": "rut_von_quy_tuong_ho",
+     "p": 0.62,
+     "tang": 1,
+     "alpha": -1.387,
+     "verdict": "FAIL",
+     "loi_pl": null
+    }
+   ],
+   "giay": 300.5
+  }
+ ]
+}

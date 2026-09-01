@@ -25,5 +25,104 @@
   "so_tu": 7,
   "sao_toi_thieu": 0,
   "nhu_cau": "dia_va_tick_test"
+ },
+ "memory bandwidth bound numpy multiprocessing": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 09:36:23",
+  "so_tu": 5,
+  "sao_toi_thieu": 0,
+  "nhu_cau": "song_song_va_bo_nho"
+ },
+ "numba vectorized backtest speedup": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 09:36:33",
+  "so_tu": 4,
+  "sao_toi_thieu": 800,
+  "nhu_cau": "nhanh_hon_so_hoc"
+ },
+ "polars vs pandas time series performance": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 09:36:43",
+  "so_tu": 6,
+  "sao_toi_thieu": 800,
+  "nhu_cau": "nhanh_hon_so_hoc"
+ },
+ "supertrend indicator python implementation": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:04:38",
+  "so_tu": 4,
+  "sao_toi_thieu": null,
+  "nhu_cau": "toan_tu_co_nho"
+ },
+ "stateful indicator dsl backtesting": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:04:47",
+  "so_tu": 4,
+  "sao_toi_thieu": null,
+  "nhu_cau": "toan_tu_co_nho"
+ },
+ "declarative trading strategy dsl json": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:04:56",
+  "so_tu": 5,
+  "sao_toi_thieu": null,
+  "nhu_cau": "toan_tu_co_nho"
+ },
+ "pine script to python transpiler": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:05:04",
+  "so_tu": 5,
+  "sao_toi_thieu": null,
+  "nhu_cau": "toan_tu_co_nho"
+ },
+ "zigzag fractal indicator vectorized pandas": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:05:13",
+  "so_tu": 5,
+  "sao_toi_thieu": null,
+  "nhu_cau": "toan_tu_co_nho"
+ },
+ "pine script parser python": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:05:21",
+  "so_tu": 4,
+  "sao_toi_thieu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc"
+ },
+ "mql5 parser ast python": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:05:30",
+  "so_tu": 4,
+  "sao_toi_thieu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc"
+ },
+ "trading strategy extraction source code": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 8,
+  "duong_hong": [],
+  "luc": "2026-09-01 13:05:39",
+  "so_tu": 5,
+  "sao_toi_thieu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc"
  }
 }

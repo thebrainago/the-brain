@@ -4940,5 +4940,209 @@
   ],
   "nguon": "",
   "_ty_le_kich_hoat": 0.2185
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `crossunder(vrsi, RSIOverBought)`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "luoi_goc": {
+   "trai_rsi": [
+    7,
+    14,
+    28
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;1897/",
+  "ten": "pine_stochastic_rsi_doub_rsi14_cheo_xuong_70",
+  "vao": [
+   {
+    "phai": {
+     "hang": 70.0
+    },
+    "phep": "cheo_xuong",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0246
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `xRSI > Overbought`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "luoi_goc": {
+   "trai_rsi": [
+    6,
+    12,
+    24
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;72/",
+  "ten": "pine_rsi_strategy_rsi12_tren_70",
+  "vao": [
+   {
+    "phai": {
+     "hang": 70.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 12
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.1244
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `xRSI < Oversold`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "luoi_goc": {
+   "trai_rsi": [
+    6,
+    12,
+    24
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;72/",
+  "ten": "pine_rsi_strategy_rsi12_duoi_30",
+  "vao": [
+   {
+    "phai": {
+     "hang": 30.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 12
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0248
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `crossover(price,EMA)`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "xu_huong",
+  "luoi_goc": {
+   "phai_sma": [
+    100,
+    200,
+    400
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;3066/",
+  "ten": "pine_keltner_bounce_from_close_cheo_len_sma200_close",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 200
+    },
+    "phep": "cheo_len",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0117
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `crossunder(price, EMA)`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "xu_huong",
+  "luoi_goc": {
+   "phai_sma": [
+    100,
+    200,
+    400
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;3066/",
+  "ten": "pine_keltner_bounce_from_close_cheo_xuong_sma200_close",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 200
+    },
+    "phep": "cheo_xuong",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0117
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `crossover(price,EMA)`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "xu_huong",
+  "luoi_goc": {
+   "phai_sma": [
+    10,
+    20,
+    40
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;3032/",
+  "ten": "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 20
+    },
+    "phep": "cheo_len",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0608
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `crossunder(price, EMA)`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "xu_huong",
+  "luoi_goc": {
+   "phai_sma": [
+    10,
+    20,
+    40
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;3032/",
+  "ten": "pine_keltner_bounce_from_open_cheo_xuong_sma20_close",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 20
+    },
+    "phep": "cheo_xuong",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0611
  }
 ]

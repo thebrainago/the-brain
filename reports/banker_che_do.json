@@ -1,5 +1,5 @@
 {
- "luc": "2026-08-31 22:46:40",
+ "luc": "2026-09-01 16:05:51",
  "che_do": {
   "duong_cong": {
    "nhan": "DOC",
@@ -21,6 +21,13 @@
    "quy_tac": "VIX > 25 cao, < 15 thap",
    "y_nghia": "tren SP500 khung ngay: VIX cao = MUA (nguoc truc quan thong thuong)"
   },
+  "cau_truc_ky_han_vix": {
+   "nhan": "BINH THUONG",
+   "gia_tri": 1.147,
+   "quy_tac": "VIX3M/VIX < 1",
+   "ngay": "2026-08-31",
+   "y_nghia": "co che 01 cua du an tung AM TINH (IC +0,106 nhung placebo 10,2%) - dung dung lam tin hieu, chi doc lam boi canh"
+  },
   "tin_dung": {
    "nhan": "DE",
    "gia_tri": 0.7509,
@@ -30,99 +37,97 @@
   },
   "dola": {
    "nhan": "ON DINH",
-   "gia_tri": 99.58499908447266,
+   "gia_tri": 99.4800033569336,
    "quy_tac": "|doi chi so dola 90 ngay| > 1 diem",
-   "doi_90_ngay": 0.365
+   "doi_90_ngay": -0.05
   }
  },
  "so_lieu": {
   "LS10Y": {
    "ngay": "2026-08-31",
    "gia_tri": 4.759999752044678,
-   "tuoi_ngay": 0,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "LS3M": {
    "ngay": "2026-08-31",
    "gia_tri": 3.7319998741149902,
-   "tuoi_ngay": 0,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "VIX": {
    "ngay": "2026-08-31",
    "gia_tri": 15.289999961853027,
-   "tuoi_ngay": 0,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "VIX3M": {
-   "ngay": "2026-07-17",
-   "gia_tri": 20.540000915527344,
-   "tuoi_ngay": 45,
-   "stale": true
+   "ngay": "2026-08-31",
+   "gia_tri": 17.530000686645508,
+   "tuoi_ngay": 1,
+   "stale": false
   },
   "USD": {
-   "ngay": "2026-08-31",
-   "gia_tri": 99.58499908447266,
+   "ngay": "2026-09-01",
+   "gia_tri": 99.4800033569336,
    "tuoi_ngay": 0,
    "stale": false
   },
   "HYG": {
    "ngay": "2026-08-31",
    "gia_tri": 79.68399810791016,
-   "tuoi_ngay": 0,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "LQD": {
    "ngay": "2026-08-31",
    "gia_tri": 106.125,
-   "tuoi_ngay": 0,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "LS10Y/LS3M": {
    "ngay": "2026-08-31",
    "gia_a": 4.759999752044678,
    "gia_b": 3.7319998741149902,
-   "tuoi_ngay": 0,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "duong_cong_10y_3m": 1.028,
   "VIX3M/VIX": {
-   "ngay": "2026-07-17",
-   "gia_a": 20.540000915527344,
-   "gia_b": 18.770000457763672,
-   "tuoi_ngay": 45,
-   "stale": true
+   "ngay": "2026-08-31",
+   "gia_a": 17.530000686645508,
+   "gia_b": 15.289999961853027,
+   "tuoi_ngay": 1,
+   "stale": false
   },
   "HYG/LQD": {
    "ngay": "2026-08-31",
    "gia_a": 79.68399810791016,
    "gia_b": 106.125,
-   "tuoi_ngay": 0,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "VN_CPI": {
    "ngay": "2025-12-31",
    "gia_tri": 3.3099931421974,
-   "tuoi_ngay": 243,
+   "tuoi_ngay": 244,
    "stale": false
   },
   "VN_GDP": {
    "ngay": "2025-12-31",
    "gia_tri": 8.01882998978245,
-   "tuoi_ngay": 243,
+   "tuoi_ngay": 244,
    "stale": false
   },
   "VN_TYGIA": {
    "ngay": "2024-12-31",
    "gia_tri": 24164.8858333333,
-   "tuoi_ngay": 608,
+   "tuoi_ngay": 609,
    "stale": true
   }
  },
  "thieu": [],
  "stale": [
-  "VIX3M",
-  "VIX3M/VIX",
   "VN_TYGIA"
  ],
  "ham_y": [
