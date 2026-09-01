@@ -634,6 +634,31 @@ class ChamLaiHoldout(RuntimeError):
     """
 
 
+def phoi_nhiem_holdout(gt_ma: str) -> int:
+    """Gia thuyet nay da NHIN holdout bao nhieu lan roi (ke ca lan bi superseded).
+
+    VI SAO CAN MOT SO RIENG (do 01/09/2026). FDR dem suat theo HO, va ho duoc
+    phep tach khi doi cau truc mo hinh chi phi - dung theo THIET_KE muc 7, vi
+    hai the he chi phi la hai thuoc do khac nhau. Nhung khi ho tach thi `j` ve 1
+    va nguong LORD nhay tu 5,0e-6 len 0,0129 (**noi gap 2.600 lan**), trong khi
+    HOLDOUT thi van la holdout cu - no khong duoc lam moi theo mo hinh chi phi.
+
+    Hau qua do duoc tren so cai: 375 gia thuyet / 1.272 lan cham =
+    **3,39 lan moi gia thuyet**, mot gia thuyet cham 10 lan, va 3 gia thuyet di
+    tu FAIL sang PASS qua cac lan cham lai - ca ba deu nam trong ro cach ly.
+    `AUDCAD.H4.rsi_dao_chieu.n14_vao30_ra_55` co lich su
+    FAIL FAIL FAIL FAIL FAIL PASS PASS PASS INVALIDATED PASS.
+
+    Tung buoc mot deu hop le. Cai thieu la khong ai dem TONG so lan nhin, nen
+    mot PASS o lan nhin thu 10 trong y het mot PASS o lan nhin dau tren moi
+    bao cao. Con so nay khong chan ai ca - no bat mot PASS phai khai ra no la
+    lan nhin thu may.
+    """
+    with ket_noi() as cn:
+        r = cn.execute("SELECT COUNT(*) n FROM ket_qua WHERE gt_ma=?", (gt_ma,)).fetchone()
+        return int(r["n"]) if r else 0
+
+
 def ghi_ket_qua(gt_ma: str, chi_so: dict, cong: dict, verdict: str,
                 p_placebo: float | None, alpha: float | None,
                 t_alpha: float | None, cham_lai: str = "") -> int:
@@ -663,9 +688,13 @@ def ghi_ket_qua(gt_ma: str, chi_so: dict, cong: dict, verdict: str,
         moi = int(cur.lastrowid)
         if cu:
             cn.execute("UPDATE ket_qua SET superseded_by=? WHERE id=?", (moi, cu["id"]))
+    # `lan_nhin` di kem MOI dong ket qua, khong chi dong PASS: mot con so chi
+    # doc duoc khi no luon co mat. Dem SAU khi da chen nen dong nay la lan thu
+    # may, khong phai con bao nhieu lan truoc do.
     ghi_su_kien("QUANTLAB", "ket_qua",
                 {"gt": gt_ma, "verdict": verdict, "p": p_placebo, "t": t_alpha,
-                 "cham_lai": cham_lai or None})
+                 "cham_lai": cham_lai or None,
+                 "lan_nhin_holdout": phoi_nhiem_holdout(gt_ma)})
     return moi
 
 

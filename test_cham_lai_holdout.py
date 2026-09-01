@@ -9,13 +9,34 @@ nam o cho HEP NHAT ma moi duong phai di qua, chu khong nam o tung nguoi goi.
 """
 from __future__ import annotations
 
+import tempfile
 import unittest
 import uuid
+from pathlib import Path
 
 from nhan import so as SO
 
 
 class ChamLaiPhaiKhaiLyDo(unittest.TestCase):
+    """Cac bai o day GHI vao bang `ket_qua`, nen phai ghi vao so TAM.
+
+    Ban dau (01/09) lop nay khong tro `SO.DB` di dau ca, va no da bom **60
+    dong `test_cham_lai_*` vao so cai THAT** trong mot buoi chieu - moi lan
+    chay `b test` them ~10 dong. Chung khong vao bang `fdr` nen ngan sach
+    quyet dinh khong viec gi, nhung `so_ket_qua_tho` thi dem ca chung.
+    Bo test khong duoc lam ban chinh cai so ma no dang di kiem.
+    """
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._db_cu = SO.DB
+        SO.DB = Path(self._tmp.name) / "nao_test.db"
+        SO.khoi_tao()
+
+    def tearDown(self):
+        SO.DB = self._db_cu
+        self._tmp.cleanup()
+
     def _gt_moi(self) -> str:
         return "test_cham_lai_" + uuid.uuid4().hex[:12]
 

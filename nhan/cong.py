@@ -53,6 +53,10 @@ MAC_DINH = {
     "n_bootstrap": 199,
     "so_lenh_toi_thieu": 30,
     "fdr_muc_tieu": 0.10,
+    # So lan mot gia thuyet duoc phep DA NHIN holdout truoc lan nay ma van con
+    # co the PASS. 0 = chi lan nhin DAU TIEN moi chung nhan duoc. Xem
+    # `so.phoi_nhiem_holdout`.
+    "lan_nhin_holdout_truoc_do_toi_da": 0,
     "_ghi_chu": "Ba con so cua THIET_KE muc 11 chua duoc chu du an khai bao. "
                 "Dang dung mac dinh hoc thuat 0,05 - la MAC DINH, khong phai chan ly. "
                 "Khai bao 'gia_tri_mot_chien_luoc_tot_nam', "
@@ -580,7 +584,8 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         economic_plan_hash: str | None = None, lane: str | None = None,
         family: str | None = None, data_release: str | None = None,
         decision_generation: int | str = THE_HE_CONG,
-        che_do: str = "giao_dich", ghi_so: bool = True) -> dict:
+        che_do: str = "giao_dich", ghi_so: bool = True,
+        du_lieu_moi: bool = False) -> dict:
     """Chay day du cong. Tra ve dict co ``verdict`` va ``ly_do``.
 
     ``che_do``:
@@ -832,6 +837,37 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         "nguong_dung": {"p_alpha": p_can, "p_placebo": p_can_pl, "siet": siet},
         "chi_phi_do_tin": cp.do_tin, "chi_phi_canh_bao": cp.canh_bao,
     }
+
+    # PHOI NHIEM HOLDOUT TICH LUY (them 01/09/2026).
+    #
+    # FDR dem suat theo HO, va ho duoc phep tach khi doi cau truc mo hinh chi
+    # phi - dung theo THIET_KE muc 7. Nhung khi ho tach thi `j` ve 1 va nguong
+    # LORD nhay tu 5,0e-6 len 0,0129 (**noi gap 2.600 lan**), trong khi HOLDOUT
+    # van la holdout cu: no khong duoc lam moi theo mo hinh chi phi.
+    #
+    # Do tren so cai: 375 gia thuyet / 1.272 lan cham = 3,39 lan moi gia thuyet;
+    # mot gia thuyet cham 10 lan; 3 gia thuyet di tu FAIL sang PASS qua cac lan
+    # cham lai - ca ba deu trong ro cach ly. Tung buoc deu hop le, cai thieu la
+    # khong ai dem TONG so lan nhin.
+    #
+    # Ha xuong UNG_VIEN chu khong FAIL: gia thuyet do co the that, chi la CHUA
+    # duoc xac nhan - va xac nhan doi du lieu chua ai nhin, khong phai mot lan
+    # nhin lai nua. `du_lieu_moi=True` la cua de lai cho truong hop holdout that
+    # su dai ra; no phai duoc KHAI, khong duoc tu suy.
+    if tren_holdout and gt_ma and not du_lieu_moi:
+        try:
+            lan_truoc = SO.phoi_nhiem_holdout(gt_ma)
+        except Exception:
+            lan_truoc = 0
+        ra["lan_nhin_holdout_truoc_do"] = lan_truoc
+        if lan_truoc > n["lan_nhin_holdout_truoc_do_toi_da"] and ra["verdict"] == "PASS":
+            ra["verdict"] = "UNG_VIEN"
+            ly_do.append(
+                f"gia thuyet nay da nhin holdout {lan_truoc} lan truoc lan nay. "
+                "Mot PASS o lan nhin lai khong phai mot xac nhan (ho FDR da tach "
+                "theo the he chi phi nen `j` ve 1, nhung holdout thi khong moi "
+                "lai). Can du lieu chua ai nhin; neu holdout that su dai ra thi "
+                "khai `du_lieu_moi=True`.")
 
     # DAU HIEU NHIN TRUOC: hieu chuan tu canary (THIET_KE muc 12b)
     if t_al is not None and t_al > 5:
