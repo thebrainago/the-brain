@@ -223,6 +223,14 @@ def cac_cau(vb: str) -> list[tuple[int, str]]:
 
 
 # ------------------------------------------------------------- PHAN TICH CAU
+#: Cum DANH TU chua buy/sell nhung khong phai hanh dong giao dich. Do 01/09:
+#: day la nguon bao dong gia lon nhat cua `loai_cau` - "on both the buy and sell
+#: side", "its buyback program", "buyers and sellers", "the sell-side analyst".
+_KHONG_PHAI_HANH_DONG = re.compile(
+    r"(?:buy|sell)(?:[ -]?(?:side|back|er|ers|out|in)|s(?=[ ]side))"
+    r"|buy and sell|buyers?|sellers?", re.I)
+
+
 def loai_cau(cau: str) -> str | None:
     """'vao_mua' | 'vao_ban' | 'ra' | None.
 
@@ -233,11 +241,24 @@ def loai_cau(cau: str) -> str | None:
         return "vao_mua"
     if NHAN_RA.search(cau):
         return "ra"
-    if re.search(HD_BAN, cau, re.I):
+    # DANH TU chua chu buy/sell nhung KHONG phai hanh dong. Bo truoc khi do:
+    # "on both the buy and sell SIDE", "its BUYBACK program", "the BUYER".
+    # Do 01/09: trong 1.289 cau bi cham la luat ma khong dich duoc, phan lon la
+    # dang nay - bo doc tu choi chung la DUNG, nhung chung lam con so "cau dang
+    # luat" phong len 5.386 va che mat cho hong that su o dau.
+    sach = _KHONG_PHAI_HANH_DONG.sub(" ", cau)
+    # Mot luat LUON co menh de dieu kien ("buy WHEN rsi < 10") hoac mot phep so
+    # sanh. Dong tu tran khong kem dieu kien la van ke chuyen, khong phai luat.
+    co_dieu_kien = bool(re.search(NEU, sach, re.I)
+                        or re.search(r"(?:<|>|=|crosses|above|below|exceeds)",
+                                     sach, re.I))
+    if not co_dieu_kien:
+        return None
+    if re.search(HD_BAN, sach, re.I):
         return "vao_ban"
-    if re.search(HD_MUA, cau, re.I):
+    if re.search(HD_MUA, sach, re.I):
         return "vao_mua"
-    if re.search(HD_RA, cau, re.I):
+    if re.search(HD_RA, sach, re.I):
         return "ra"
     return None
 
