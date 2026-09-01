@@ -1,5 +1,5 @@
 # BANKER - BOI CANH VI MO
-*Cap nhat 2026-09-01 16:05:51*
+*Cap nhat 2026-09-01 16:47:31*
 
 ## Che do (theo quy tac, khong theo cam nhan)
 | Truc | Nhan | Gia tri | Quy tac |

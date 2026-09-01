@@ -1,99 +1,22 @@
 {
  "de_xuat": [
   {
-   "ten": "mua_bien_dong_thap_ibs_thap",
-   "co_che": "Nha dau tu ca nhan va quy tuong ho ban vi the khi thua lo (stop loss) khi gia pha dinh hoac day, tao luc mua lai khi bien dong thap va gia o vung qua ban; nha tao lap quyen chon gamma duong phai mua hedge.",
+   "ten": "mua_quay_ve_sau_vol_gian_no",
+   "co_che": "Nha tao lap quyen chon gamma am va nha giao dich xu huong bi ket khi bien dong gian no, ho phai mua lai de phong ho, tao luc day gia quay ve.",
    "ho": "quay_ve_trung_binh",
    "chieu": 1,
    "giu": 5,
    "vao": [
     {
      "trai": {
-      "chi_bao": "atr",
-      "n": 14
-     },
-     "phep": "phu_vi",
-     "phai": {
-      "hang": 0.2
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "ibs"
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.2
-     }
-    }
-   ],
-   "ra": [
-    {
-     "trai": {
-      "chi_bao": "ibs"
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
      },
      "phep": ">",
-     "phai": {
-      "hang": 0.5
-     }
-    }
-   ],
-   "dieu_kien_sai": "Bien dong thap va IBS thap nhung dong cua khong bao gio hoi phuc trong 5 bar, cho thay luc mua hedge khong du manh.",
-   "nguon": ""
-  },
-  {
-   "ten": "ban_bien_dong_cao_ibs_cao",
-   "co_che": "Nha dau tu ca nhan va quy tuong ho mua duoi khi gia tang manh (FOMO), tao luc ban chot loi khi bien dong cao va gia o vung qua mua; nha tao lap quyen chon gamma am phai ban hedge.",
-   "ho": "quay_ve_trung_binh",
-   "chieu": -1,
-   "giu": 5,
-   "vao": [
-    {
-     "trai": {
-      "chi_bao": "atr",
-      "n": 14
-     },
-     "phep": "phu_vi",
-     "phai": {
-      "hang": 0.8
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "ibs"
-     },
-     "phep": ">",
-     "phai": {
-      "hang": 0.8
-     }
-    }
-   ],
-   "ra": [
-    {
-     "trai": {
-      "chi_bao": "ibs"
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.5
-     }
-    }
-   ],
-   "dieu_kien_sai": "Bien dong cao va IBS cao nhung gia tiep tuc tang, cho thay dong FOMO manh hon luc chot loi.",
-   "nguon": ""
-  },
-  {
-   "ten": "mua_tich_luy_khoi_luong_gia_thap",
-   "co_che": "Nha dau tu to chuc (quy, ETF) tich luy co phieu khi khoi luong tang dot bien va gia o vung thap, gay luc mua dieu khien giam gia; nha dau tu ca nhan ban giam lo.",
-   "ho": "dong_tien",
-   "chieu": 1,
-   "giu": 10,
-   "vao": [
-    {
-     "trai": {
-      "chi_bao": "khoi_luong"
-     },
-     "phep": "phu_vi",
      "phai": {
       "hang": 0.9
      }
@@ -104,26 +27,31 @@
      },
      "phep": "<",
      "phai": {
-      "hang": 0.3
+      "hang": 0.2
      }
     }
    ],
    "ra": [],
-   "dieu_kien_sai": "Khoi luong cao nhung gia tiep tuc giam, cho thay do la luong ban cuong buc (margin call), khong phai tich luy.",
+   "dieu_kien_sai": "Neu gia tiep tuc di xa sau khi vao, chung to dong da manh chu khong quay ve.",
    "nguon": ""
   },
   {
-   "ten": "ban_phan_phoi_khoi_luong_gia_cao",
-   "co_che": "Nha dau tu to chuc phan phoi co phieu khi khoi luong tang dot bien va gia o vung cao, gay luc ban; nha dau tu ca nhan mua vi cho rang gia se tiep tuc tang.",
-   "ho": "dong_tien",
+   "ten": "ban_quay_ve_sau_vol_gian_no",
+   "co_che": "Nha tao lap quyen chon gamma am va nha giao dich xu huong bi ket, ho phai ban de phong ho, tao luc keo gia quay ve.",
+   "ho": "quay_ve_trung_binh",
    "chieu": -1,
-   "giu": 10,
+   "giu": 5,
    "vao": [
     {
      "trai": {
-      "chi_bao": "khoi_luong"
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
      },
-     "phep": "phu_vi",
+     "phep": ">",
      "phai": {
       "hang": 0.9
      }
@@ -134,88 +62,198 @@
      },
      "phep": ">",
      "phai": {
-      "hang": 0.7
+      "hang": 0.8
      }
     }
    ],
    "ra": [],
-   "dieu_kien_sai": "Khoi luong cao nhung gia tiep tuc tang, cho thay do la luong mua tu nha dau tu to chuc, khong phai phan phoi.",
+   "dieu_kien_sai": "Neu gia tiep tuc tang, chung to dong da manh.",
    "nguon": ""
   },
   {
-   "ten": "mua_vol_gian_no_sau_lang",
-   "co_che": "Sau mot giai doan bien dong thap keo dai (ATR phan_vi < 0.1 trong 10 bar), nha tao lap quyen chon o trang thai gamma duong bi ep phai mua hedge khi bien dong bat ngo gian no, tao luc mua trong vai ngay.",
-   "ho": "bien_dong",
+   "ten": "mua_sau_vol_thap_va_giam_sau",
+   "co_che": "Sau mot dot giam manh trong moi truong bien dong thap, nha dau tu co loi nhuan chot lai (profit taking) va nha phan tich co ban mua vao, tao luc day gia quay ve.",
+   "ho": "quay_ve_trung_binh",
    "chieu": 1,
-   "giu": 5,
+   "giu": 10,
    "vao": [
     {
      "trai": {
-      "chi_bao": "atr",
-      "n": 14
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
      },
-     "phep": "phu_vi",
+     "phep": "<",
+     "phai": {
+      "hang": 0.2
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "doi_pct",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "n": 250
+     },
+     "phep": "<",
      "phai": {
       "hang": 0.1
      }
-    },
+    }
+   ],
+   "ra": [],
+   "dieu_kien_sai": "Neu gia tiep tuc giam sau khi vao, chung to xu huong giam manh.",
+   "nguon": ""
+  },
+  {
+   "ten": "ban_sau_vol_thap_va_tang_manh",
+   "co_che": "Sau mot dot tang manh trong moi truong bien dong thap, nha dau tu chot lai va nha phan tich co ban ban ra, tao luc keo gia quay ve.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": -1,
+   "giu": 10,
+   "vao": [
     {
      "trai": {
-      "chi_bao": "tre",
+      "chi_bao": "phan_vi",
       "cua": {
        "chi_bao": "atr",
        "n": 14
       },
-      "n": 1
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.2
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "doi_pct",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "n": 250
      },
      "phep": ">",
      "phai": {
-      "chi_bao": "atr",
-      "n": 14
+      "hang": 0.9
      }
     }
    ],
    "ra": [],
-   "dieu_kien_sai": "Bien dong thap keo dai nhung khi gia no khong co luc mua hedge, the hien nha tao lap da phong ho roi.",
-   "nguon": "https://doi.org/10.1016/j.compag.2018.02.016"
+   "dieu_kien_sai": "Neu gia tiep tuc tang, chung to xu huong tang manh.",
+   "nguon": ""
   },
   {
-   "ten": "ban_sau_vol_gian_no_nghich",
-   "co_che": "Khi bien dong tu thap len cao dot ngoi (ATR phan_vi tu duoi 0.2 len tren 0.8), nha dau tu chot loi va dao chieu huong, tao luc ban; nha tao lap quyen chon gamma am phai ban hedge.",
-   "ho": "bien_dong",
+   "ten": "mua_sau_vol_gian_no_va_kl_cuc_dai",
+   "co_che": "Khi bien dong va khoi luong cung dat dinh, do la dinh cua su hoang loan (capitulation); nha dau tu thong thai mua vao, gia quay ve.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": 1,
+   "giu": 5,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.9
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 250
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.9
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "ibs"
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.2
+     }
+    }
+   ],
+   "ra": [],
+   "dieu_kien_sai": "Neu bien dong tiep tuc mo rong va gia di xa, chung to dong xu huong tiep dien.",
+   "nguon": ""
+  },
+  {
+   "ten": "ban_sau_vol_gian_no_va_kl_cuc_dai",
+   "co_che": "Khi bien dong va khoi luong cung dat dinh, do la dinh cua su hung phan (euphoria); nha dau tu thong thai ban ra, gia quay ve.",
+   "ho": "quay_ve_trung_binh",
    "chieu": -1,
    "giu": 5,
    "vao": [
     {
      "trai": {
-      "chi_bao": "atr",
-      "n": 14
-     },
-     "phep": "phu_vi",
-     "phai": {
-      "hang": 0.8
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "tre",
+      "chi_bao": "phan_vi",
       "cua": {
        "chi_bao": "atr",
        "n": 14
       },
-      "n": 1
+      "n": 250
      },
-     "phep": "<",
+     "phep": ">",
      "phai": {
-      "chi_bao": "atr",
-      "n": 14
+      "hang": 0.9
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 250
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.9
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "ibs"
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.8
      }
     }
    ],
    "ra": [],
-   "dieu_kien_sai": "Bien dong cao nhung tiep tuc tang, cho thay nha dau tu tiep tuc mua theo xu huong, khong chot loi.",
+   "dieu_kien_sai": "Neu bien dong tiep tuc mo rong va gia di xa, chung to dong xu huong tiep dien.",
    "nguon": ""
   }
  ],
- "ly_do_chon": "Cac de xuat nay theo dinh dang 'A KHI B', su dung phan_vi de xac dinh che do (bien dong, khoi luong) ma khong can nguong tuyet doi, co the kiem dinh duoc. Moi co che deu co nguoi tra tien cu the (nha tao lap quyen chon, nha dau tu to chuc, nha dau tu ca nhan). Ty le kich hoat du kien nam trong khoang 1-30% bar. Chon nhung huong it duoc thu (bien_dong, dong_tien) de mo rong khong gian tim kiem."
+ "ly_do_chon": "Tat ca de xuat deu la 'A KHI B' co dieu kien che do (bien dong va khoi luong), co che giai thich ro ai tra tien (nha tao lap, nha dau tu chot lai) va tai sao (phong ho, profit taking). Ty le kich hoat uoc tinh 1-10% (phan_vi 0.1 hoac 0.9), phi qua dem duoc bu tru boi bien do quay ve ky vong lon hon. Cac huong nay dao tiep manh tu cac phep thu thanh cong truoc day (mean reversion, volatility spike)."
 }

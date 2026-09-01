@@ -495,11 +495,58 @@ def do_van_hanh() -> dict:
     # THOI GIAN SONG THAT. "Chay 24/7" phai do bang gio, khong phai bang y dinh:
     # so cai co lo hong 00:15 -> 08:35 ngay 16/08 vi may ngu, va khong mot phep
     # do nao cua ban cu thay dieu do.
-    gd = SO.nhieu("SELECT gia_tri, luc FROM chi_so_vh WHERE ten='gian_doan_gio' "
-                  "AND luc >= datetime('now','-7 days') ORDER BY id DESC")
-    ra["gian_doan_7ngay_gio"] = round(sum(float(g["gia_tri"] or 0) for g in gd), 1)
+    gd = SO.nhieu("SELECT gia_tri, luc, chi_tiet FROM chi_so_vh "
+                  "WHERE ten='gian_doan_gio' AND luc >= datetime('now','-7 days') "
+                  "ORDER BY id DESC")
+
+    # TACH HAI LOAI GIAN DOAN. Gio chu du an TAT MAY khong phai gio he chet, va
+    # gop chung lai lam hong ca hai huong: `ty_le_song` tut xuong vi mot chuyen
+    # binh thuong (may ngu qua dem), nen mot su co THAT se chim trong dong canh
+    # bao quen thuoc hang dem. Do that 01/09: gian doan 7,84 gio la may tat tu
+    # 23:14 den 07:04, khong phai su co nao ca.
+    def _nn(g) -> str:
+        try:
+            return (json.loads(g["chi_tiet"] or "{}") or {}).get(
+                "nguyen_nhan") or "khong_xac_dinh"
+        except Exception:
+            return "khong_xac_dinh"
+
+    # CAT GON VE CUA SO. Mot gian doan GHI trong 7 ngay co the KEO DAI tu truoc
+    # do: dong 31/08 mang 346 gio (dut tu 16/08). Cong nguyen thi tong gio "chet"
+    # ra 362,6 tren mot cua so chi co 168 gio - con so vo nghia, va truoc day no
+    # bi `max(0.0, ...)` nuot mat thanh ty_le_song = 0 tron.
+    moc = datetime.now() - timedelta(days=7)
+
+    def _gio_trong_cua_so(g) -> float:
+        try:
+            het = datetime.strptime(g["luc"], "%Y-%m-%d %H:%M:%S")
+        except Exception:
+            return 0.0
+        bat_dau = het - timedelta(hours=float(g["gia_tri"] or 0))
+        return max(0.0, (het - max(bat_dau, moc)).total_seconds() / 3600.0)
+
+    def _tong(loc) -> float:
+        return round(sum(_gio_trong_cua_so(g) for g in gd if loc(_nn(g))), 1)
+
+    ra["gian_doan_7ngay_gio"] = _tong(lambda n: True)
     ra["gian_doan_lan"] = len(gd)
-    ra["ty_le_song_7ngay"] = round(max(0.0, 1 - ra["gian_doan_7ngay_gio"] / (7 * 24)), 4)
+    ra["may_tat_7ngay_gio"] = _tong(lambda n: n == "may_tat")
+    ra["he_chet_7ngay_gio"] = _tong(lambda n: n == "he_chet_khi_may_chay")
+    ra["chua_ro_7ngay_gio"] = _tong(lambda n: n == "khong_xac_dinh")
+    ra["he_chet_lan"] = sum(1 for g in gd if _nn(g) == "he_chet_khi_may_chay")
+
+    # Thoi gian song chi tinh tren nhung gio MAY CON CHAY. Tat may khong phai
+    # loi cua he, va cung khong phai thanh tich cua he - no nam ngoai mau.
+    # Gio CHUA RO cung nam ngoai: dem no thanh chet la doan, dem thanh song cung
+    # la doan. No duoc bao rieng de con biet thuoc do dang mu bao nhieu.
+    ngoai_mau = ra["may_tat_7ngay_gio"] + ra["chua_ro_7ngay_gio"]
+    gio_do_duoc = 7 * 24 - ngoai_mau
+    # Kem DO PHU: "song 100%" tren 15 gio do duoc khong dong nghia voi "song
+    # 100%" tren 168 gio. Mot ty le khong kem mau so la mot cau noi thieu ve.
+    ra["gio_do_duoc_7ngay"] = round(gio_do_duoc, 1)
+    ra["ty_le_song_7ngay"] = round(
+        max(0.0, 1 - ra["he_chet_7ngay_gio"] / gio_do_duoc), 4
+    ) if gio_do_duoc > 0 else None
 
     # SUPERVISOR CO DANG CHET LIEN TUC KHONG. `ty_le_song_7ngay` noi duoc
     # "mat bao nhieu gio" nhung KHONG noi duoc VI SAO - va do dung la cho EVO

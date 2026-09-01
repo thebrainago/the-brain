@@ -1,24 +1,24 @@
 # EVOLUTION - SUC KHOE DAY CHUYEN
-*2026-09-01 16:25:00*
+*2026-09-01 17:17:35*
 
 > Do bang SUC KHOE, khong do bang so PASS. Mot he lanh manh hieu chuan tot ke ca khi tim duoc it edge.
 
 ## 1. Bon tru
 | Tru | Lan cuoi | Tre | Trang thai |
 |---|---|---|---|
-| SEEKER | 2026-09-01 16:22:12 | 2 phut | nghi |
-| QUANTLAB | 2026-09-01 16:15:23 | 9 phut | chay |
-| NGHI | 2026-09-01 16:10:45 | 14 phut | nghi |
-| BANKER | 2026-09-01 16:05:51 | 19 phut | nghi |
-| EVO | 2026-09-01 16:25:00 | 0 phut | chay |
+| SEEKER | 2026-09-01 17:13:23 | 4 phut | nghi |
+| QUANTLAB | 2026-09-01 17:12:29 | 5 phut | chay |
+| NGHI | 2026-09-01 16:54:37 | 22 phut | nghi |
+| BANKER | 2026-09-01 16:47:31 | 30 phut | nghi |
+| EVO | 2026-09-01 17:17:35 | 0 phut | chay |
 
 ## 2. San luong
-- Tai lieu da thu: **3200**
-- Gia thuyet: {"FAIL": 365, "PASS": 1, "QUARANTINED_V2": 7}
-- Gia thuyet co ket qua cuoi: **366** (chua 904 dong lich su da supersede, invalidated hoac quarantine)
+- Tai lieu da thu: **3273**
+- Gia thuyet: {"FAIL": 367, "PASS": 1, "QUARANTINED_V2": 7}
+- Gia thuyet co ket qua cuoi: **368** (chua 904 dong lich su da supersede, invalidated hoac quarantine)
 - Viec: cho 0 / treo 0 / loi 0
-- Ty le vong lap rong cua SEEKER: **88%**
-- Nang suat doc cua SEEKER: **1.27 gia thuyet/100 bai** (3 gia thuyet truy nguyen ve URL tai lieu, tren 236 bai da boc; 549 ung vien tu 2180 artifact tai lieu). Noi sinh khong tinh vao day: 370 gia thuyet.
+- Ty le vong lap rong cua SEEKER: **90%**
+- Nang suat doc cua SEEKER: **1.69 gia thuyet/100 bai** (4 gia thuyet truy nguyen ve URL tai lieu, tren 236 bai da boc; 549 ung vien tu 2210 artifact tai lieu). Noi sinh khong tinh vao day: 371 gia thuyet.
 - Thanh phan thu hoi duoc tu ban doc: **282** (183 viet ra duoc bang ngu phap hien tai). Day la phan giu lai tu nhung he KHONG qua cong.
 - Do sau quet (con tro bien gioi): mql5_code 12 trang/vong 0, tradingview_scripts 0 trang/vong 0
 
@@ -32,27 +32,27 @@
   - biet truoc 0.6 cua so lan -> `NGHI_NHIN_TRUOC` (sharpe 2.972)
 - (tham khao) p placebo cua 106 ung vien: trung vi 0.375, ty le p<=0,05 la 17.9%
   KHONG dung so nay lam hieu chuan: ung vien da bi chon loc tren train nen p cua chung LE RA phai lech thap.
-- FDR online: 1/272 gia thuyet bi bac bo (dem theo gia thuyet, bo du phong/NULL; tho 1798 hang)
+- FDR online: 1/272 gia thuyet bi bac bo (dem theo gia thuyet, bo du phong/NULL; tho 1799 hang)
 - Dong bo ba tang (so_gt_da_ket == fdr_tong): **TACH** - doi soat tiep khoan tinh nay
 
 ## 4. Tai nguyen + toan ven
 - **Thoi gian song 7 ngay: 0.0%** (mat 362.6 gio qua 4 lan gian doan - may ngu hoac tat, khong phai tru chet)
 - **Supervisor restart 24h: 2 lan** (0.08 lan/gio, tran 3) - ma thoat {"15": 2}, lan cuoi 2026-08-31 21:46:06
 - Dia trong: **15.6 GB** - MT5 tick-test: **GO**
-- So cai: LANH (1798 dong lien mach)
+- So cai: LANH (1817 dong lien mach)
 
 ## 5. Nguon
 | Nguon | Lan goi | Loi | Thu hoach | Trang thai |
 |---|---|---|---|---|
 | arxiv | 11 | 0 | 171 | BAT |
 | blog | 5 | 0 | 33 | BAT |
-| cnblogs_trung | 2 | 0 | 55 | BAT |
+| cnblogs_trung | 3 | 0 | 72 | BAT |
 | collective2 | 4 | 0 | 12 | BAT |
 | crossref | 4 | 0 | 83 | BAT |
 | darwinex | 3 | 0 | 39 | BAT |
 | elitetrader | 2 | 0 | 30 | BAT |
 | etoro | 3 | 0 | 0 | BAT |
-| facebook | 4 | 0 | 10 | BAT |
+| facebook | 5 | 0 | 15 | BAT |
 | fxblue | 4 | 0 | 0 | BAT |
 | github | 7 | 0 | 209 | BAT |
 | habr_nga | 3 | 0 | 128 | BAT |
@@ -70,7 +70,7 @@
 | quantconnect | 5 | 0 | 0 | BAT |
 | quantconnect_forum | 2 | 0 | 30 | BAT |
 | quantpedia | 2 | 0 | 21 | BAT |
-| reddit_td | 3 | 0 | 224 | BAT |
+| reddit_td | 4 | 0 | 270 | BAT |
 | rss_aligrithm | 5 | 0 | 17 | BAT |
 | rss_allocatesmartly | 6 | 0 | 11 | BAT |
 | rss_alphaarchitect | 6 | 0 | 7 | BAT |
@@ -105,25 +105,26 @@
 | rss_tradingmarkets | 6 | 0 | 9 | BAT |
 | rss_tradingview_blog | 5 | 0 | 60 | BAT |
 | semantic | 3 | 0 | 0 | BAT |
-| smartlab_nga | 1 | 0 | 11 | BAT |
+| smartlab_nga | 2 | 0 | 16 | BAT |
 | stackexchange | 7 | 0 | 89 | BAT |
 | telegram | 7 | 0 | 26 | BAT |
 | tiktok | 5 | 0 | 101 | BAT |
 | tradingview_ideas | 2 | 0 | 3 | BAT |
 | tradingview_pine | 2 | 0 | 9 | BAT |
 | tradingview_scripts | 2 | 0 | 101 | BAT |
-| velog_han | 1 | 0 | 47 | BAT |
+| velog_han | 2 | 0 | 47 | BAT |
 | x | 6 | 0 | 134 | BAT |
 | youtube | 5 | 0 | 176 | BAT |
 | zulutrade | 3 | 0 | 31 | BAT |
 
-## 6. Van de dang mo (15)
+## 6. Van de dang mo (16)
 > Mot PHAT HIEN = mot dong. Dien dat khac di khong de ra dong moi; no cong vao `x<n> lan`. Xem `CHU_DE_VAN_DE` trong tru/evolution.py.
 - **[NANG]** `quet_nong` - 86% lan chay SEEKER khong thu duoc gi moi, NHUNG chua nguon nao di het mot vong bien gioi - day la DO SAU QUET, khong phai chu ky qua day
 - **[NANG]** `dieu_phoi_chet_khong_bat` - Supervisor chet vi PermissionError khong duoc bat - 24/7 dut quang
 - **[NANG]** `quant_pass_quarantine_v2` - 8 ket qua duong da quarantine; khong duoc dung cho paper/live cho toi khi retest V2
 - **[NANG]** `nghi_nhin_truoc_EURGBP.H4.mua_qua_dem.gio_vao20_gio_ra14` - EURGBP.H4.mua_qua_dem.gio_vao20_gio_ra14 cho t_alpha > 5 - nguong hieu chuan tu canary noi day phai gia dinh la nhin truoc
 - **[NANG]** `hieu_chuan_v6` - Cong PASS chua duoc hieu chuan bang V6 THAT. Ban thu 15/08 dung IBS<0,2 don gian tren US500M/US500CASH D1 va bi FAIL, nhung do CHUA phai V6: thieu lop bias>0, chay mot chi so thay vi danh muc 3 chi so My, va bar D1 cat theo UTC chu khong theo phien My. THIET_KE noi ro: cong nao loai mat V6 la cong SAI. Phai dung lai dung V6 (Sharpe 0,95 do tren MT5 that) roi cho qua cong truoc khi tin bat ky ket luan am tinh nao.
+- **[VUA]** `nguon_can_trinh_duyet` - co CDP nhung khong co nguon den han - kiem tra lai trang seed
 - **[VUA]** `nguon_chet` - 1 nguon loi lien tuc >= 3 lan, dang bi gian chu ky
 - **[VUA]** `nguon_khong_thu_hoach` - Nguon fxblue da goi >=3 lan ma chua thu duoc tai lieu nao
 - **[VUA]** `cong_cu_dang_xem` - 3 cong cu ngoai diem >=70 dang cho nguoi xem tich hop. Cao nhat: 51bitquant/howtrader (84.7). Quy tac: cong cu ngoai lam BAN THI NGHIEM, khong bao gio lam ONG TOA.
@@ -133,7 +134,6 @@
 - **[VUA]** `vd_duong_du_phong` - [LLM chan doan] 63,6% ket qua di duong DU PHONG
 - **[VUA]** `vd_so_sach_khong_khop` - [LLM chan doan] Mau thuan so lieu FDR giua cac tang dem
 - **[VUA]** `vd_nguon_im_lang` - [LLM chan doan] Nguon 'semantic' loi im: bat, chay, khong bao loi, khong thu duoc gi
-- **[VUA]** `ba_con_so_chua_khai_bao` - THIET_KE muc 11: moi nguong cua he phai suy ra tu ba con so ma chi chu du an tra loi duoc. Chua khai bao nen he dang dung mac dinh hoc thuat 0,05 - la MAC DINH, khong phai chan ly. Khai bao vao lab/config/nguong.json.
 
 ## 6b. Kho ma dang cho NGUOI doc de doi chieu (5)
 > Doc de DOI CHIEU voi cong, khong bao gio de THAY cong.

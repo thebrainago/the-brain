@@ -36,8 +36,16 @@ from nhan import so as SO
 TRU = "BANKER"
 REPORTS = Path(__file__).resolve().parent.parent / "reports"
 
-# FRED bi chan tu mang nay (ConnectionReset, da kiem 15/08). Nguon thay the deu
-# da thu THAT va tra 200: Yahoo chart API, ECB Data API, World Bank API.
+# FRED: ghi chu cu o day noi "bi chan tu mang nay (ConnectionReset, kiem 15/08)"
+# va vi the 12 seri FRED nam trong so KHONG CO DUONG LAY NAO - dang ky roi de
+# do, 0 diem du lieu, khong ai bao loi. Do lai 01/09/2026: FRED tra **HTTP 200,
+# 209 KB, du lieu den 2026-08-31**. Ghi chu cu da sai, va cai gia phai tra
+# khong phai mot nguon thieu ma la CA XUONG SONG VI MO: BANKER chay bang proxy
+# Yahoo (^TNX, HYG) thay cho so that (T10Y2Y, BAMLH0A0HYM2), va chi co 2 nam
+# lich su thay vi hang chuc nam.
+# Bai hoc: mot ket luan "nguon nay bi chan" phai co NGAY DO va phai do lai,
+# khong duoc thanh vinh vien.
+# Nguon deu da thu THAT va tra 200: FRED, Yahoo chart API, ECB Data API, World Bank.
 # Seri: ma noi bo -> (nguon, ma nguon, ten, chu ky giay, y nghia)
 SERI = {
     "LS10Y":  ("yahoo", "^TNX", "Loi suat My 10 nam", 43200, "gia von dai han"),
@@ -55,6 +63,26 @@ SERI = {
     "SP500":  ("yahoo", "^GSPC", "S&P 500", 21600, "tai san rui ro moc"),
     "EURUSD_ECB": ("ecb", "D.USD.EUR.SP00.A", "EURUSD tham chieu ECB", 86400,
                    "ty gia chinh thuc, doc lap voi san"),
+
+    # FRED - so THAT thay cho proxy, va lich su dai hon Yahoo hang chuc nam.
+    "T10Y2Y": ("fred", "T10Y2Y", "Chenh 10Y-2Y", 43200,
+               "duong cong lai suat, do THANG chu khong tinh tu hai proxy"),
+    "T10Y3M": ("fred", "T10Y3M", "Chenh 10Y-3M", 43200,
+               "ban duong cong duoc nghien cuu nhieu nhat ve bao suy thoai"),
+    "DGS10":  ("fred", "DGS10", "Loi suat 10 nam (FRED)", 43200, "moc doi chieu ^TNX"),
+    "DGS2":   ("fred", "DGS2", "Loi suat 2 nam", 43200, "dau ngan cua duong cong"),
+    "DFF":    ("fred", "DFF", "Lai suat quy lien bang thuc te", 43200,
+               "lap truong chinh sach - Yahoo khong co"),
+    "CPIAUCSL": ("fred", "CPIAUCSL", "CPI My", 86400, "lam phat thuc do"),
+    "UNRATE": ("fred", "UNRATE", "That nghiep My", 86400, "sat suc khoe lao dong"),
+    "NFCI":   ("fred", "NFCI", "Dieu kien tai chinh Chicago Fed", 86400,
+               "do that chat tai chinh tong hop"),
+    "WALCL":  ("fred", "WALCL", "Bang can doi Fed", 86400, "thanh khoan he thong"),
+    "BAMLH0A0HYM2": ("fred", "BAMLH0A0HYM2", "Chenh loi suat trai phieu rac", 43200,
+                     "gia rui ro tin dung THAT, thay cho gia ETF HYG"),
+    "DTWEXBGS": ("fred", "DTWEXBGS", "Chi so dola dien rong", 43200,
+                 "ro rong hon DXY (DXY nang ve EUR)"),
+    "VIXCLS": ("fred", "VIXCLS", "VIX (FRED)", 43200, "moc doi chieu ^VIX"),
 }
 # Chi so quoc gia (World Bank) - nam mot lan, cho phan vi mo Viet Nam
 WB = {
@@ -69,18 +97,77 @@ WB = {
 TUOI_TOI_DA_NGAY = 7
 TUOI_TOI_DA_WB_NGAY = 550
 
+#: Seri cong bo theo THANG/TUAN khong the do bang nguong 7 ngay cua seri ngay:
+#: CPI thang 8 ra giua thang 9, nen no se LUON bi danh "oi" va lang le bi loai
+#: khoi moi phan loai che do. Nguong phai khop tan suat cong bo, neu khong thi
+#: "khong co du lieu" va "du lieu cu" bi gop lam mot lan nua.
+TUOI_TOI_DA_RIENG = {
+    "CPIAUCSL": 60,   # thang, cong bo tre ~2 tuan
+    "UNRATE": 60,     # thang
+    "WALCL": 21,      # tuan
+    "NFCI": 21,       # tuan
+    "BAMLH0A0HYM2": 10,
+    "DTWEXBGS": 10,
+}
+
+
+UA_TRINH_DUYET = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+
 
 def _tai(url: str, timeout: int = 30) -> str | None:
+    """Tai mot URL. Thu KHONG User-Agent truoc, co UA sau.
+
+    LOI DA SAP (do 01/09/2026) - va no la loi TU GAY RA, khong phai loi mang:
+    ham nay tung gan cung UA trinh duyet cho MOI dia chi. Voi FRED thi UA do
+    lam yeu cau treo den het timeout:
+        khong UA  -> HTTP 200, 209 KB, du lieu den 2026-08-31
+        co UA     -> ReadTimeout sau 20-30 giay
+    Vi `_tai` nuot moi ngoai le va tra `None`, trieu chung nhin tu ngoai chi la
+    "khong tai duoc". Ket luan duoc ghi vao ma nguon la **"FRED bi chan tu mang
+    nay"** va ton tai tu 15/08 den 01/09, khien 12 seri vi mo nam chet trong so
+    va BANKER phai chay bang proxy Yahoo.
+
+    Bai hoc chung: truoc khi ket luan "nguon X chan ta", phai thu bo chinh nhung
+    thu TA them vao yeu cau. Mot cai chan do minh tu dung len trong khong the
+    phan biet duoc voi mot cai chan that.
+    """
     try:
         import requests
-        r = requests.get(url, timeout=timeout, headers={
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                          "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"})
-        if r.status_code == 200 and r.text:
-            return r.text
     except Exception:
         return None
+    for headers in ({}, {"User-Agent": UA_TRINH_DUYET}):
+        try:
+            r = requests.get(url, timeout=timeout, headers=headers)
+            if r.status_code == 200 and r.text:
+                return r.text
+        except Exception:
+            continue
     return None
+
+
+def _tu_fred(ma_nguon: str) -> list[tuple[str, float]]:
+    """FRED CSV -> [(ngay, gia tri)]. Do lai 01/09/2026: HTTP 200, den 2026-08-31.
+
+    FRED danh dau ky khong co so bang dau cham. Bo qua chung chu KHONG doi thanh
+    0: mot ngay le khong phai mot ngay lai suat bang khong.
+    """
+    txt = _tai(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={ma_nguon}")
+    if not txt:
+        return []
+    ra: list[tuple[str, float]] = []
+    for dong in txt.splitlines()[1:]:
+        phan = dong.split(",")
+        if len(phan) < 2:
+            continue
+        ngay, gt = phan[0].strip(), phan[1].strip()
+        if not ngay or gt in ("", "."):
+            continue
+        try:
+            ra.append((ngay, float(gt)))
+        except ValueError:
+            continue
+    return ra
 
 
 def _tu_yahoo(ma_nguon: str, khoang: str = "2y") -> list[tuple[str, float]]:
@@ -170,7 +257,13 @@ def nap_seri(ma: str, ep: bool = False) -> dict:
     cu = SO.mot("SELECT * FROM vi_mo_seri WHERE ma=?", ma)
     if cu and not ep and (time.time() - (cu["lan_cuoi"] or 0)) < chu_ky:
         return {"ma": ma, "bo_qua": "chua den ky"}
-    diem = _tu_yahoo(ma_nguon) if nguon == "yahoo" else _tu_ecb(ma_nguon)
+    # Bang tra, KHONG dung if/else hai nhanh: mot nguon thu ba (fred) se lang le
+    # roi vao nhanh `else` va tra ve rong ma khong ai bao gi - dung hinh dang loi
+    # da lam 12 seri FRED nam chet trong so.
+    LAY = {"yahoo": _tu_yahoo, "ecb": _tu_ecb, "fred": _tu_fred}
+    if nguon not in LAY:
+        return {"ma": ma, "loi": f"nguon '{nguon}' chua co duong lay"}
+    diem = LAY[nguon](ma_nguon)
     return _luu_seri(ma, ten, nguon, chu_ky, y_nghia, diem)
 
 
@@ -203,6 +296,8 @@ def _tuoi_ngay(s: str, hom_nay: date | None = None) -> int | None:
 
 
 def _nguong_tuoi(ma: str) -> int:
+    if ma in TUOI_TOI_DA_RIENG:
+        return TUOI_TOI_DA_RIENG[ma]
     return TUOI_TOI_DA_WB_NGAY if ma.startswith("VN_") else TUOI_TOI_DA_NGAY
 
 
@@ -314,13 +409,68 @@ def phan_loai_che_do() -> dict:
                     if doi is not None else "?",
             "gia_tri": round(r, 4), "doi_90_ngay_pct": round(doi * 100, 2) if doi is not None else None,
             "ngay": tin_dung[2],
-            "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang"}
+            "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang",
+            "y_nghia": "PROXY tu gia hai ETF, khong phai chenh loi suat. No lan ca "
+                       "rui ro ky han va dong tien vao ETF, nen co the lech voi "
+                       "`tin_dung_that` (BAMLH0A0HYM2) - luc lech thi tin ban THAT"}
+    # ---- BON CHE DO CHI CO KHI CO FRED (nap lai 01/09, truoc do 12 seri nam chet)
+    # Ca bon deu do LAP TRUONG CHINH SACH / DIEU KIEN TIEN TE, tuc thu ma gia
+    # tai san tren Yahoo khong noi ra duoc.
+    dff = lay("DFF")
+    if dff is not None:
+        d180 = _doi("DFF", 180)
+        if d180 is not None:
+            ra["che_do"]["chinh_sach_tien_te"] = {
+                "nhan": "THAT CHAT" if d180 > 0.25 else ("NOI LONG" if d180 < -0.25
+                                                         else "GIU NGUYEN"),
+                "gia_tri": dff, "doi_180_ngay_diem": round(d180, 3),
+                "quy_tac": "|doi lai suat quy lien bang trong 180 ngay| > 0,25 diem",
+                "y_nghia": "lap truong Fed. BOI CANH cho gia thuyet co dieu kien, "
+                           "khong phai tin hieu vao lenh"}
+
+    nfci = lay("NFCI")
+    if nfci is not None:
+        ra["che_do"]["dieu_kien_tai_chinh"] = {
+            "nhan": "CHAT HON TRUNG BINH" if nfci > 0 else "LONG HON TRUNG BINH",
+            "gia_tri": nfci,
+            "quy_tac": "NFCI > 0 = chat hon trung binh lich su (chi so da chuan hoa)",
+            "y_nghia": "chi so tong hop 105 bien cua Chicago Fed - do dieu kien tai "
+                       "chinh TONG THE, khong suy ra tu gia mot tai san nao"}
+
+    walcl = _doi("WALCL", 90)
+    if walcl is not None:
+        moc = gan_nhat("WALCL")
+        muc = float(moc[0]["gia_tri"]) if moc else None
+        pct = (walcl / (muc - walcl) * 100) if muc and (muc - walcl) else None
+        ra["che_do"]["thanh_khoan"] = {
+            "nhan": ("BOM VAO" if pct > 1 else ("RUT RA" if pct < -1 else "DI NGANG"))
+                    if pct is not None else "?",
+            "gia_tri": muc, "doi_90_ngay_pct": round(pct, 2) if pct is not None else None,
+            "quy_tac": "|doi bang can doi Fed trong 90 ngay| > 1%",
+            "y_nghia": "thanh khoan he thong. Doc lam boi canh cho tai san rui ro"}
+
+    # Chenh loi suat trai phieu rac THAT, thay cho ty le gia hai ETF. Giu ca hai:
+    # neu hai ben noi nguoc nhau thi do la thong tin, khong phai loi.
+    hy = lay("BAMLH0A0HYM2")
+    if hy is not None:
+        dhy = _doi("BAMLH0A0HYM2", 90)
+        ra["che_do"]["tin_dung_that"] = {
+            "nhan": ("CANG" if dhy > 0.5 else ("DE" if dhy < -0.5 else "BINH THUONG"))
+                    if dhy is not None else "?",
+            "gia_tri": hy, "doi_90_ngay_diem": round(dhy, 3) if dhy is not None else None,
+            "quy_tac": "chenh loi suat HY - kho bac; doi > 0,5 diem trong 90 ngay",
+            "y_nghia": "gia rui ro tin dung do THANG. Ban `tin_dung` (HYG/LQD) la "
+                       "proxy tu gia ETF, giu lai de doi chieu"}
+
     if usd is not None:
         du = _doi("USD", 90)
         ra["che_do"]["dola"] = {
             "nhan": "MANH LEN" if (du or 0) > 1 else ("YEU DI" if (du or 0) < -1 else "ON DINH"),
             "gia_tri": usd, "quy_tac": "|doi chi so dola 90 ngay| > 1 diem",
-            "doi_90_ngay": round(du, 3) if du is not None else None}
+            "doi_90_ngay": round(du, 3) if du is not None else None,
+            "y_nghia": "DXY nang ve EUR (~58%). Dola manh len thuong siet tai san "
+                       "rui ro va hang hoa. Doi chieu voi DTWEXBGS (ro rong hon) "
+                       "truoc khi ket luan ve suc manh dola noi chung"}
 
     for ma in ("VN_CPI", "VN_GDP", "VN_TYGIA"):
         lay(ma)

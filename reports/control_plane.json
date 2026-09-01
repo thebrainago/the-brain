@@ -1,17 +1,17 @@
 {
  "schema": 1,
- "instance_id": "46d6ca52649e48d89c2d75d983775e65",
- "pid": 1780,
- "process_created_epoch": 1788221091.6308706,
- "started_epoch": 1788221091.9736164,
- "updated_epoch": 1788255749.0425568,
- "updated_at": "2026-09-01 16:42:29",
+ "instance_id": "031ce5fb55e449419ba9b318f3af4ca1",
+ "pid": 11232,
+ "process_created_epoch": 1788256044.511312,
+ "started_epoch": 1788256044.811664,
+ "updated_epoch": 1788258920.1566775,
+ "updated_at": "2026-09-01 17:35:20",
  "status": "stopped",
  "live": false,
  "ready": false,
  "health": "healthy",
  "cpu": {
-  "current_percent": 4.1,
+  "current_percent": 4.7,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -27,16 +27,16 @@
   "EVO": {
    "status": "ok",
    "rc": 0,
-   "giay": 4.1,
+   "giay": 4.2,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 16:25:04",
+    "luc": "2026-09-01 17:17:39",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 15,\n \"tru_dung_im\": [],\n \"dia_gb\": 15.6,\n \"tai_lieu\": 3200,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
+   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 16,\n \"tru_dung_im\": [],\n \"dia_gb\": 15.6,\n \"tai_lieu\": 3273,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
    "stderr_tail": ""
   },
   "BANKER": {
@@ -47,7 +47,7 @@
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 16:05:51",
+    "luc": "2026-09-01 16:47:31",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
@@ -57,46 +57,46 @@
   "SEEKER": {
    "status": "ok",
    "rc": 0,
-   "giay": 313.5,
+   "giay": 290.4,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 16:42:28",
+    "luc": "2026-09-01 17:33:15",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "t\": [],\n   \"khong_co_feed\": 4\n  },\n  \"suat\": {\n   \"hoc_thuat\": {\n    \"bai\": 1597,\n    \"ky_tu\": 31347517,\n    \"ung_vien\": 467,\n    \"co_che\": 139,\n    \"nguon\": 52,\n    \"suat\": 28.94,\n    \"suat_tho\": 29.24\n   },\n   \"xa_hoi\": {\n    \"bai\": 593,\n    \"ky_tu\": 4680309,\n    \"ung_vien\": 80,\n    \"co_che\": 8,\n    \"nguon\": 10,\n    \"suat\": 13.21,\n    \"suat_tho\": 13.49\n   }\n  },\n  \"chia_giay\": {\n   \"hoc_thuat\": 149.1,\n   \"xa_hoi\": 68.1\n  }\n },\n \"con_doc\": 138,\n \"con_boc\": 0,\n \"cho_giay\": 120,\n \"chi_tiet\": []\n}",
+   "stdout_tail": "at\": [],\n   \"khong_co_feed\": 2\n  },\n  \"suat\": {\n   \"hoc_thuat\": {\n    \"bai\": 1597,\n    \"ky_tu\": 31347517,\n    \"ung_vien\": 467,\n    \"co_che\": 139,\n    \"nguon\": 52,\n    \"suat\": 28.94,\n    \"suat_tho\": 29.24\n   },\n   \"xa_hoi\": {\n    \"bai\": 623,\n    \"ky_tu\": 4744089,\n    \"ung_vien\": 80,\n    \"co_che\": 8,\n    \"nguon\": 10,\n    \"suat\": 12.6,\n    \"suat_tho\": 12.84\n   }\n  },\n  \"chia_giay\": {\n   \"hoc_thuat\": 153.8,\n   \"xa_hoi\": 67.0\n  }\n },\n \"con_doc\": 154,\n \"con_boc\": 0,\n \"cho_giay\": 120,\n \"chi_tiet\": []\n}",
    "stderr_tail": ""
   },
   "NGHI": {
-   "status": "skipped",
+   "status": "ok",
    "rc": 0,
-   "giay": 3.2,
+   "giay": 80.2,
    "fatal": [],
    "degraded": [],
-   "skip_reason": "moi goi 374s truoc, can cach 600s",
+   "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 16:10:45",
+    "luc": "2026-09-01 16:54:37",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "{\n \"doi_chieu\": {\n  \"tong\": 27,\n  \"bi_tu_choi\": 7,\n  \"da_kiem\": 15,\n  \"dang_cho\": 5\n },\n \"tai_lieu_doc\": 8,\n \"duong\": null,\n \"bo_qua\": \"moi goi 374s truoc, can cach 600s\"\n}",
+   "stdout_tail": "kl_cuc_dai\"\n ],\n \"tu_choi\": [],\n \"co_nguon_tu_tai_lieu\": 0,\n \"ly_do_chon\": \"Tat ca de xuat deu la 'A KHI B' co dieu kien che do (bien dong va khoi luong), co che giai thich ro ai tra tien (nha tao lap, nha dau tu chot lai) va tai sao (phong ho, profit taking). Ty le kich hoat uoc tinh 1-10% (phan_vi 0.1 hoac 0.9), phi qua dem duoc bu tru boi bien do quay ve ky vong lon hon. Cac huong nay dao tiep manh tu cac phep thu thanh cong truoc day (mean reversion, volatility spike)\",\n \"mau_dang_co\": 157\n}",
    "stderr_tail": ""
   },
   "QUANTLAB": {
-   "status": "skipped",
+   "status": "ok",
    "rc": 0,
-   "giay": 625.7,
+   "giay": 626.1,
    "fatal": [],
    "degraded": [],
-   "skip_reason": "nhom hop khong duong (trung vi Sharpe -0.278)",
+   "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 16:38:12",
+    "luc": "2026-09-01 17:35:17",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "26\n      },\n      {\n       \"tai_san\": \"XM_SILVER\",\n       \"loai\": \"vang\",\n       \"so_lenh\": 410,\n       \"sharpe\": -0.458,\n       \"tong_lai_pct\": -74.19\n      },\n      {\n       \"tai_san\": \"XM_US30CASH\",\n       \"loai\": \"chi_so_my\",\n       \"so_lenh\": 295,\n       \"sharpe\": -0.185,\n       \"tong_lai_pct\": -16.54\n      },\n      {\n       \"tai_san\": \"XM_XAUEUR\",\n       \"loai\": \"vang\",\n       \"so_lenh\": 177,\n       \"sharpe\": -0.013,\n       \"tong_lai_pct\": -0.84\n      },\n      {\n       \"tai_san\": \"YH_BAC\",",
+   "stdout_tail": "  \"mde\": 1.649,\n   \"cua_so\": \"2011-08-07..2026-07-10\",\n   \"so_bar\": 61030,\n   \"mua_giu_train\": {\n    \"tong_lai_pct\": 79.69,\n    \"cagr_pct\": 5.586,\n    \"sharpe\": 0.309,\n    \"calmar\": 0.156,\n    \"max_dd_pct\": -35.8,\n    \"pf\": 1.022,\n    \"so_nam\": 10.78,\n    \"so_bar\": 36618\n   },\n   \"chi_phi_do_tin\": \"SAN\"\n  },\n  {\n   \"ma\": \"US500CASH\",\n   \"khung\": \"H4\",\n   \"da_quet\": 205,\n   \"ung_vien\": 6,\n   \"da_chon\": 0,\n   \"dang_ky_moi\": 0,\n   \"che_do\": \"giao_dich\",\n   \"thieu_luc\": 6,\n   \"chi_tiet_thieu_luc\": [",
    "stderr_tail": ""
   }
  }

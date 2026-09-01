@@ -1,11 +1,11 @@
 # TRU NGHI - bien kien thuc thanh co che kiem dinh duoc
-*2026-09-01 16:04:32*
+*2026-09-01 16:54:37*
 
 > Tru nay KHONG ket luan gi ve tien. No chi de xuat. Moi con so van di
 > qua `nhan/cong.py` va van ton ngan sach FDR nhu mau viet tay.
 
 ## 1. Doi chieu vong truoc
-- De xuat da ghi so: **21** (bi tu choi truoc kiem dinh 1, da co ket qua 15, dang cho 5)
+- De xuat da ghi so: **27** (bi tu choi truoc kiem dinh 7, da co ket qua 15, dang cho 5)
 
 | Co che | Ho | Ket qua |
 |---|---|---|
@@ -24,18 +24,18 @@
 
 ## 2. Vong nay
 - Doc 8 tai lieu hang A/B
-- Nhan duoc 6 de xuat, **qua ba cua kiem: 0**
-- Trong do 1 co nguon truy nguyen
+- Nhan duoc 6 de xuat, **qua ba cua kiem: 6**
+- Trong do 0 co nguon truy nguyen
   ve tai lieu (5-6 truoc day luon la 0 - moi co che la cua LLM).
 - Tai san dung de kiem: EURCAD
 
-### Bi tu choi (va vi sao - vong sau se doc lai muc nay)
-- `mua_bien_dong_thap_ibs_thap`: vao[0] phep 'phu_vi' khong hop le
-- `ban_bien_dong_cao_ibs_cao`: vao[0] phep 'phu_vi' khong hop le
-- `mua_tich_luy_khoi_luong_gia_thap`: vao[0] phep 'phu_vi' khong hop le
-- `ban_phan_phoi_khoi_luong_gia_cao`: vao[0] phep 'phu_vi' khong hop le
-- `mua_vol_gian_no_sau_lang`: vao[0] phep 'phu_vi' khong hop le
-- `ban_sau_vol_gian_no_nghich`: vao[0] phep 'phu_vi' khong hop le
+### Da nhan vao kho co che
+- `mua_quay_ve_sau_vol_gian_no`
+- `ban_quay_ve_sau_vol_gian_no`
+- `mua_sau_vol_thap_va_giam_sau`
+- `ban_sau_vol_thap_va_tang_manh`
+- `mua_sau_vol_gian_no_va_kl_cuc_dai`
+- `ban_sau_vol_gian_no_va_kl_cuc_dai`
 
 ## 3. Ba cua kiem moi de xuat phai qua
 

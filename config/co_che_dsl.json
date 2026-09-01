@@ -5144,5 +5144,664 @@
    }
   ],
   "_ty_le_kich_hoat": 0.0611
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `xRSI > Overbought`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "luoi_goc": {
+   "trai_rsi": [
+    5,
+    10,
+    20
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;815/",
+  "ten": "pine_strategy_macd_and_r_rsi10_tren_51",
+  "vao": [
+   {
+    "phai": {
+     "hang": 51.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 10
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.6737
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `xRSI < Oversold`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "luoi_goc": {
+   "trai_rsi": [
+    5,
+    10,
+    20
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;815/",
+  "ten": "pine_strategy_macd_and_r_rsi10_duoi_49",
+  "vao": [
+   {
+    "phai": {
+     "hang": 49.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 10
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.2863
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `rsiVal>rsiUpper`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "luoi_goc": {
+   "trai_rsi": [
+    4,
+    7,
+    14
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;3086/",
+  "ten": "pine_price_action_tradin_rsi7_tren_70",
+  "vao": [
+   {
+    "phai": {
+     "hang": 70.0
+    },
+    "phep": ">",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 7
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.2317
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `rsiVal<rsiLower`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "quay_ve_trung_binh",
+  "luoi_goc": {
+   "trai_rsi": [
+    4,
+    7,
+    14
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;3086/",
+  "ten": "pine_price_action_tradin_rsi7_duoi_30",
+  "vao": [
+   {
+    "phai": {
+     "hang": 30.0
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 7
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0688
+ },
+ {
+  "ten": "mua_quay_ve_sau_vol_gian_no",
+  "co_che": "Nha tao lap quyen chon gamma am va nha giao dich xu huong bi ket khi bien dong gian no, ho phai mua lai de phong ho, tao luc day gia quay ve.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0943
+ },
+ {
+  "ten": "ban_quay_ve_sau_vol_gian_no",
+  "co_che": "Nha tao lap quyen chon gamma am va nha giao dich xu huong bi ket, ho phai ban de phong ho, tao luc keo gia quay ve.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0859
+ },
+ {
+  "ten": "mua_sau_vol_thap_va_giam_sau",
+  "co_che": "Sau mot dot giam manh trong moi truong bien dong thap, nha dau tu co loi nhuan chot lai (profit taking) va nha phan tich co ban mua vao, tao luc day gia quay ve.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 10,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0893
+ },
+ {
+  "ten": "ban_sau_vol_thap_va_tang_manh",
+  "co_che": "Sau mot dot tang manh trong moi truong bien dong thap, nha dau tu chot lai va nha phan tich co ban ban ra, tao luc keo gia quay ve.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 10,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.1009
+ },
+ {
+  "ten": "mua_sau_vol_gian_no_va_kl_cuc_dai",
+  "co_che": "Khi bien dong va khoi luong cung dat dinh, do la dinh cua su hoang loan (capitulation); nha dau tu thong thai mua vao, gia quay ve.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0323
+ },
+ {
+  "ten": "ban_sau_vol_gian_no_va_kl_cuc_dai",
+  "co_che": "Khi bien dong va khoi luong cung dat dinh, do la dinh cua su hung phan (euphoria); nha dau tu thong thai ban ra, gia quay ve.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ibs"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0327
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `crossunder(fast_ma, slow_ma)`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "xu_huong",
+  "luoi_goc": {
+   "phai_ema": [
+    28,
+    55,
+    110
+   ],
+   "trai_ema": [
+    2,
+    5,
+    10
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;2784/",
+  "ten": "pine_rs_function_marting_ema5_close_cheo_xuong_ema55_close",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "ema",
+     "cot": "close",
+     "n": 55
+    },
+    "phep": "cheo_xuong",
+    "trai": {
+     "chi_bao": "ema",
+     "cot": "close",
+     "n": 5
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0169
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `crossover(fast_ma, slow_ma)`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "xu_huong",
+  "luoi_goc": {
+   "phai_ema": [
+    28,
+    55,
+    110
+   ],
+   "trai_ema": [
+    2,
+    5,
+    10
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;2784/",
+  "ten": "pine_rs_function_marting_ema5_close_cheo_len_ema55_close",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "ema",
+     "cot": "close",
+     "n": 55
+    },
+    "phep": "cheo_len",
+    "trai": {
+     "chi_bao": "ema",
+     "cot": "close",
+     "n": 5
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0171
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `long >= short`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "xu_huong",
+  "luoi_goc": {
+   "phai_sma": [
+    2,
+    3,
+    6
+   ],
+   "trai_sma": [
+    6,
+    13,
+    26
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;1335/",
+  "ten": "pine_vdub_binary_pro_3_v_sma13_close_tren_sma3_close",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 3
+    },
+    "phep": ">=",
+    "trai": {
+     "chi_bao": "sma",
+     "cot": "close",
+     "n": 13
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.3566
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `low <= fastLC[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "pha_vo",
+  "luoi_goc": {
+   "phai_thap_nhat": [
+    5,
+    10,
+    20
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "ten": "pine_cl_20_years_old_tur_low_duoi_thap_nhat10_tre1",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 10
+     },
+     "n": 1
+    },
+    "phep": "<=",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.1296
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `low < fastS[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "pha_vo",
+  "luoi_goc": {
+   "phai_thap_nhat": [
+    10,
+    20,
+    40
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "ten": "pine_cl_20_years_old_tur_low_duoi_thap_nhat20_tre1",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 20
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.0807
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `high >= fastSC[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "pha_vo",
+  "luoi_goc": {
+   "phai_cao_nhat": [
+    5,
+    10,
+    20
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "ten": "pine_cl_20_years_old_tur_high_tren_cao_nhat10_tre1",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 10
+     },
+     "n": 1
+    },
+    "phep": ">=",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.2913
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `low < slowS[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "pha_vo",
+  "luoi_goc": {
+   "phai_thap_nhat": [
+    28,
+    55,
+    110
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "ten": "pine_cl_20_years_old_tur_low_duoi_thap_nhat55_tre1",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 55
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.032
+ },
+ {
+  "chieu": 1,
+  "co_che": "Rut tu ma nguon that: dieu kien `high >= slowSC[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dung trang thai nay - gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc.",
+  "giu": 1,
+  "ho": "pha_vo",
+  "luoi_goc": {
+   "phai_cao_nhat": [
+    10,
+    20,
+    40
+   ]
+  },
+  "nguon": "https://www.tradingview.com/script/PUB;2008/",
+  "ten": "pine_cl_20_years_old_tur_high_tren_cao_nhat20_tre1",
+  "vao": [
+   {
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 20
+     },
+     "n": 1
+    },
+    "phep": ">=",
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    }
+   }
+  ],
+  "_ty_le_kich_hoat": 0.2429
  }
 ]

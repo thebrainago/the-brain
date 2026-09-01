@@ -23,7 +23,7 @@ import threading
 import time
 import uuid
 from concurrent.futures import Future, ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -319,6 +319,34 @@ def tha_may_ngu() -> None:
         pass
 
 
+def _nguyen_nhan_gian_doan(nhip_cuoi: str) -> str:
+    """MAY TAT hay HE CHET? Hai chuyen khac han nhau, dung gop lam mot.
+
+    Truoc 01/09/2026 truong nay bi gan cung `"khong_xac_dinh"` - no khong bao
+    gio thu xac dinh gi. Hau qua khong nam o cho ghi ma nam o cho DOC:
+    `evolution` lay chinh con so nay tinh `ty_le_song_7ngay`, tuc **dem gio chu
+    du an tat may thanh gio he chet**. Do that: may khoi dong 01/09 07:04:05,
+    gian doan ghi luc 07:04:52 voi nhip cuoi 23:14 hom truoc - may ngu qua dem,
+    khong phai su co. Gop hai trang thai lam mot thi mot su co that se chim
+    trong dong "gian doan" quen thuoc hang dem.
+
+    Tra: `may_tat` (may khoi dong SAU nhip cuoi - ha tang tat, khong phai loi he)
+         `he_chet_khi_may_chay` (may song suot ma he van im - LOI THAT, phai xem)
+         `khong_xac_dinh` (khong doc duoc gio khoi dong)
+    """
+    try:
+        import psutil
+        khoi_dong = datetime.fromtimestamp(psutil.boot_time())
+    except Exception:
+        return "khong_xac_dinh"
+    try:
+        cuoi = datetime.strptime(nhip_cuoi, "%Y-%m-%d %H:%M:%S")
+    except Exception:
+        return "khong_xac_dinh"
+    # Tru mot phut de tha cho truong hop he kip dap mot nhip ngay truoc khi tat.
+    return "may_tat" if khoi_dong > cuoi - timedelta(minutes=1)         else "he_chet_khi_may_chay"
+
+
 def ghi_gian_doan() -> float:
     n = SO.mot("SELECT luc FROM nhip WHERE tru='DIEU_PHOI'")
     if not n:
@@ -331,7 +359,7 @@ def ghi_gian_doan() -> float:
     gio = cach / 3600.0
     if gio >= 0.5:
         chi_tiet = {"gio": round(gio, 2), "nhip_cuoi": n["luc"],
-                    "nguyen_nhan": "khong_xac_dinh"}
+                    "nguyen_nhan": _nguyen_nhan_gian_doan(n["luc"])}
         SO.ghi_chi_so("gian_doan_gio", round(gio, 2), chi_tiet)
         SO.ghi_su_kien("DIEU_PHOI", "gian_doan", chi_tiet)
     return gio

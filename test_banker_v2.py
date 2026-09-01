@@ -23,6 +23,11 @@ class TestBankerAsOf(unittest.TestCase):
         }
 
         def gan_nhat(ma, n=1):
+            # Seri khong co trong bang gia gia lap -> tra RONG, dung nem KeyError.
+            # Rong la trang thai THAT (seri chua nap); nem loi se lam moi seri
+            # them vao sau nay pha vo bai test nay ma khong lien quan gi den no.
+            if ma not in gia:
+                return []
             ngay = cu if ma == "VIX3M" else moi
             if ma.startswith("VN_"):
                 ngay = (hom_nay - timedelta(days=200)).isoformat()
