@@ -69,9 +69,45 @@ c763beb sua phieu chuyen doi: doc MA thanh nhieu kieu danh, bo tran 2, mang tham
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phien nay khong tim ra edge nao. No di go 16 van de con mo va phat hien ra rang
+**phan lon chung khong phai van de nghien cuu ma la DUNG CU DO BI HONG** — va
+moi cai hong deu hong theo cung mot kieu: mot con so duoc bao cao ma khong ai
+kiem lai xem no con dung khong.
+
+  - `khung_that()` lay TRUNG VI ca chuoi, nen 5 ma co doan dau la bar NGAY deo
+    nhan bar gio van qua cua (EURUSD/USDJPY 28 nam, US500CASH 5 nam).
+  - `fdr.gt_ma` chua HAI khong gian khoa; 0/1124 hang moi khop bang gia_thuyet,
+    nen moi phep doi soat tu 17/08 lang le tra ve rong ma khong bao loi.
+  - `khop_ba_tang` do sai chieu: no bao do vi 96 gia thuyet FAIL o cong re,
+    dung nhu THIET KE, trong khi hai huong nguy hiem that thi khong ai do.
+  - `_DIEN_DAT_DUOC` la ban chep tay lech ca hai chieu, nen bang "toan hang con
+    thieu" giau dung ba toan hang duoc dung nhieu nhat.
+  - bo test bom 60 dong rac vao so cai THAT, moi lan `b test` them ~10 dong.
+
+Cai LAT NGUOC: `quant_pass_quarantine_v2` khong phai "8 ket qua cho retest". Con
+mot cai song, va no PASS o **lan nhin thu 10** vao cung mot holdout. Tung buoc
+hop le — nguong LORD tut 1,3e-4 -> 5,0e-6 qua bon lan chay trong ho `@cp2`, roi
+mo hinh chi phi doi the he 2->3 nen ho tach thanh `@cp3`, `j` ve 1 va nguong noi
+**gap 2.600 lan**. Tach ho theo the he chi phi la DUNG THIET KE muc 7. Cai thieu
+la khong ai dem TONG so lan nhin holdout xuyen the he: do duoc **3,39 lan moi
+gia thuyet**, va 3 gia thuyet di tu FAIL sang PASS qua cac lan cham lai.
 
 ## Viec tiep theo, theo thu tu
+
+-1. **KIEM LAI MOI KET LUAN H1/H4 TRUOC 01/09.** Cache khung da bump sang `v2`
+   va 5 ma bi cat doan dau (EURUSD/USDJPY 1971-1998, GBPUSD 1993-1998,
+   US500CASH 2011-2015, XAUUSDM 2014-2016). Ba trong so do la cap FX duoc quet
+   nhieu nhat cua du an. Chua do xem so nao doi.
+
+0. **`hieu_chuan_v6` DANG BI CHAN, va no chan boi mot quyet dinh chu khong boi
+   ky thuat.** Dieu kien dau cua V6 la `bias > 0`, ma bias = 0,25 vi mo + 0,10
+   VIX + 0,25 mua vu — deu la du lieu BANKER. Chu du an da noi de BANKER sau,
+   nen phan nay dung o day. Lop bias da viet xong va cat o
+   `archive/vi_mo_CHO_BANKER.py` (doc thang tu bang `vi_mo` trong nao.db, khong
+   them nguon moi). Hai dieu kien con lai cua van de do da lam duoc:
+   danh muc 3 chi so My, va bar theo PHIEN (`du_lieu.nap_phien` — do duoc: bar
+   D1 CFD rong hon bar phien tien mat 1,39 lan, IBS hai ben chi tuong quan
+   0,866, 98 ngay kich hoat theo phien ma khong theo D1).
 
 0. **HUONG CHINH DA DOI: ha MDE, khong phai tang CPU.**
    Toc do da xong (2,6 lan) va no khong giai quyet gi ve san luong: 98% ung vien
