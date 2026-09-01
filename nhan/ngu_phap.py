@@ -336,6 +336,18 @@ def luu_kho(ds: list[dict]) -> None:
     KHO_CO_CHE.write_text(json.dumps(ds, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
+def van_tay_dieu_kien(spec: dict) -> str:
+    """Van tay theo NOI DUNG QUYET DINH, bo qua ten va cau giai thich.
+
+    Hai co che cung `vao`/`ra`/`chieu`/`giu` la MOT co che du dat ten khac nhau -
+    va do la truong hop pho bien khi rut tu dong tu nhieu nguon noi ve cung mot
+    y tuong.
+    """
+    return json.dumps({"vao": spec.get("vao"), "ra": spec.get("ra"),
+                       "chieu": spec.get("chieu", 1), "giu": spec.get("giu", 1)},
+                      sort_keys=True, ensure_ascii=False, default=str)
+
+
 def them_co_che(spec: dict, df_kiem: pd.DataFrame | None = None) -> dict:
     """Them mot co che vao kho SAU KHI qua ca hai bai kiem.
 
@@ -374,6 +386,19 @@ def them_co_che(spec: dict, df_kiem: pd.DataFrame | None = None) -> dict:
     kho = doc_kho()
     if any(c.get("ten") == spec["ten"] for c in kho):
         return {"nhan": False, "ly_do": [f"da co co che ten '{spec['ten']}'"]}
+    # KHU TRUNG THEO DIEU KIEN, khong chi theo TEN.
+    #
+    # Do that 01/09: mot lo tu dong dua thu vien tu 29 len 146 co che, nhung chi
+    # **81 dieu kien rieng biet** - 65 cai trung y het nhau va chi khac ten, vi
+    # cung mot script duoc xu ly hai lan (mot lan luc thu thap, mot lan luc quet
+    # lai kho) nen sinh ra `x_...` va `pine_x_...`. Khu trung theo ten khong bat
+    # duoc, va moi ban trung se an MOT SUAT FDR rieng o tang kham pha.
+    vt = van_tay_dieu_kien(spec)
+    trung = next((c for c in kho if van_tay_dieu_kien(c) == vt), None)
+    if trung is not None:
+        return {"nhan": False,
+                "ly_do": [f"trung DIEU KIEN voi co che '{trung.get('ten')}' "
+                          "(chi khac ten) - mot dieu kien chi duoc mot suat FDR"]}
     kho.append(spec)
     luu_kho(kho)
     return {"nhan": True, "ten": spec["ten"], "so_co_che": len(kho)}
