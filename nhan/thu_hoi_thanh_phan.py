@@ -143,6 +143,11 @@ def _giai_bien(x: str, vi_tri: int, bang: list) -> float | None:
     x = x.strip()
     if re.fullmatch(_SO, x):
         return float(x)
+    # `input(6)` VIET THANG trong doi so, khong qua mot bien trung gian:
+    # `ema(DX, input(6))`. Khong bat thi chu ky mat va ca chi bao rot.
+    m_in = re.fullmatch(rf"input(?:\.[a-z]+)?\s*\(\s*(?:defval\s*=\s*)?({_SO})[^)]*\)", x)
+    if m_in:
+        return float(m_in.group(1))
     if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", x):
         return None
     gt = None

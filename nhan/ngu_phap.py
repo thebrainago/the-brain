@@ -88,10 +88,17 @@ def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
         return MAU_MOD.ibs(df)
     if cb == "atr":
         return MAU_MOD.atr(df, n)
-    if cb == "ema":
-        return MAU_MOD.ema(_cot(df, str(t.get("cot", "close")).lower()), n)
-    if cb == "sma":
-        return MAU_MOD.sma(_cot(df, str(t.get("cot", "close")).lower()), n)
+    # `ema`/`sma`/`wma`/`smma` nhan CA `cot` (cot gia) LAN `cua` (toan hang bat ky).
+    #
+    # Truoc 01/09 chung chi lam muot mot COT GIA, va do la mot gioi han that:
+    # `ema(DX, 6)`, `ema(rsi, 9)`, `sma(atr, 20)` la nhung dang cuc ky pho bien
+    # trong ma that. Do duoc: `SmoothedADX1 = ema(DX, input(6))` lam ca mot chien
+    # luoc ADX rot o buoc dich chi vi khong lam muot duoc mot chuoi khong-phai-gia.
+    # `tb`/`do_lech` da nhan `cua` tu truoc, nen day chi la lam cho nhat quan.
+    if cb in ("ema", "sma"):
+        x = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
+        return MAU_MOD.ema(x, n) if cb == "ema" else MAU_MOD.sma(x, n)
     if cb == "bien_do":
         return _cot(df, "high") - _cot(df, "low")
     if cb == "than_nen":
@@ -156,11 +163,13 @@ def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
     # (`thu_hoi_thanh_phan.toan_hang_con_thieu`), xep theo so lan nguoi viet bot
     # thuc su dung. Moi cai them vao day mo khoa mot so chien luoc dem duoc.
     if cb == "wma":                       # 56 lan
-        s = _cot(df, str(t.get("cot", "close")).lower())
+        s = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
         w = np.arange(1, n + 1, dtype=float)
         return s.rolling(n).apply(lambda x: float(np.dot(x, w) / w.sum()), raw=True)
     if cb == "smma":                      # 46 lan - RMA cua Wilder, dung trong ADX/RSI
-        s = _cot(df, str(t.get("cot", "close")).lower())
+        s = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
         return s.ewm(alpha=1.0 / max(n, 1), adjust=False).mean()
     if cb == "cci":                       # 33 lan
         tp = (_cot(df, "high") + _cot(df, "low") + _cot(df, "close")) / 3.0

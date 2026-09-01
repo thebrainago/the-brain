@@ -164,3 +164,41 @@ class ToanHangMoi(unittest.TestCase):
             m = a.notna() & b.notna()
             np.testing.assert_allclose(a[m], b[m], rtol=1e-9,
                                        err_msg=f"{ten} nhin truoc")
+
+
+class LamMuotToanHangBatKy(unittest.TestCase):
+    """`ema`/`sma`/`wma`/`smma` phai lam muot duoc MOT TOAN HANG, khong chi mot cot gia.
+
+    Do that: `SmoothedADX1 = ema(DX, input(6))` lam ca mot chien luoc ADX rot o
+    buoc dich, chi vi khong lam muot duoc mot chuoi khong-phai-gia. `tb`/`do_lech`
+    da nhan `cua` tu truoc nen day chi la lam cho nhat quan.
+    """
+
+    def setUp(self):
+        self.df = _khung(500)
+
+    def test_ema_cua_mot_chi_bao(self):
+        t = {"chi_bao": "ema", "n": 6, "cua": {"chi_bao": "adx", "n": 14}}
+        self.assertEqual(NP._kiem_toan_hang(t), [])
+        x = NP.toan_hang(self.df, t)
+        self.assertTrue(x.notna().any())
+
+    def test_bon_duong_trung_binh_deu_nhan_cua(self):
+        for cb in ("ema", "sma", "wma", "smma"):
+            t = {"chi_bao": cb, "n": 5, "cua": {"chi_bao": "rsi", "n": 14}}
+            x = NP.toan_hang(self.df, t)
+            self.assertTrue(x.notna().any(), cb)
+
+    def test_khong_co_cua_thi_van_dung_cot_nhu_cu(self):
+        a = NP.toan_hang(self.df, {"chi_bao": "ema", "n": 10, "cot": "close"})
+        b = NP.toan_hang(self.df, {"chi_bao": "ema", "n": 10,
+                                   "cua": {"chi_bao": "gia", "cot": "close"}})
+        np.testing.assert_allclose(a.dropna(), b.dropna(), rtol=1e-12)
+
+    def test_lam_muot_khong_nhin_truoc(self):
+        t = {"chi_bao": "ema", "n": 6, "cua": {"chi_bao": "adx", "n": 14}}
+        d2 = self.df.copy()
+        d2.iloc[-1, :] = d2.iloc[-1, :] * 1.5
+        a, b = NP.toan_hang(self.df, t).iloc[:-1], NP.toan_hang(d2, t).iloc[:-1]
+        m = a.notna() & b.notna()
+        np.testing.assert_allclose(a[m], b[m], rtol=1e-9)
