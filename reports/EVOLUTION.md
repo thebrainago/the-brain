@@ -1,21 +1,21 @@
 # EVOLUTION - SUC KHOE DAY CHUYEN
-*2026-09-01 18:38:24*
+*2026-09-01 18:53:34*
 
 > Do bang SUC KHOE, khong do bang so PASS. Mot he lanh manh hieu chuan tot ke ca khi tim duoc it edge.
 
 ## 1. Bon tru
 | Tru | Lan cuoi | Tre | Trang thai |
 |---|---|---|---|
-| SEEKER | 2026-09-01 18:37:34 | 0 phut | chay |
-| QUANTLAB | 2026-09-01 18:27:47 | 10 phut | chay |
-| NGHI | 2026-09-01 17:43:49 | 54 phut | nghi |
-| BANKER | 2026-09-01 18:37:44 | 0 phut | nghi |
-| EVO | 2026-09-01 18:38:24 | 0 phut | chay |
+| SEEKER | 2026-09-01 18:39:58 | 13 phut | nghi |
+| QUANTLAB | 2026-09-01 18:53:10 | 0 phut | chay |
+| NGHI | 2026-09-01 17:43:49 | 69 phut | nghi |
+| BANKER | 2026-09-01 18:37:44 | 15 phut | nghi |
+| EVO | 2026-09-01 18:53:34 | 0 phut | chay |
 
 ## 2. San luong
 - Tai lieu da thu: **3273**
 - Gia thuyet: {"FAIL": 367, "PASS": 1, "QUARANTINED_V2": 7}
-- Gia thuyet co ket qua cuoi: **368** (chua 929 dong lich su da supersede, invalidated hoac quarantine)
+- Gia thuyet co ket qua cuoi: **368** (chua 939 dong lich su da supersede, invalidated hoac quarantine)
 - Viec: cho 0 / treo 0 / loi 0
 - Ty le vong lap rong cua SEEKER: **92%**
 - Nang suat doc cua SEEKER: **1.69 gia thuyet/100 bai** (4 gia thuyet truy nguyen ve URL tai lieu, tren 236 bai da boc; 555 ung vien tu 2260 artifact tai lieu). Noi sinh khong tinh vao day: 371 gia thuyet.
@@ -36,10 +36,10 @@
 - Dong bo ba tang (so_gt_da_ket == fdr_tong): **TACH** - doi soat tiep khoan tinh nay
 
 ## 4. Tai nguyen + toan ven
-- **Thoi gian song 7 ngay: 100.0%** (mat 151.2 gio qua 4 lan gian doan - may ngu hoac tat, khong phai tru chet)
+- **Thoi gian song 7 ngay: 100.0%** (mat 150.9 gio qua 4 lan gian doan - may ngu hoac tat, khong phai tru chet)
 - **Supervisor restart 24h: 2 lan** (0.08 lan/gio, tran 3) - ma thoat {"15": 2}, lan cuoi 2026-08-31 21:46:06
-- Dia trong: **15.5 GB** - MT5 tick-test: **GO**
-- So cai: LANH (1848 dong lien mach)
+- Dia trong: **15.4 GB** - MT5 tick-test: **GO**
+- So cai: LANH (1858 dong lien mach)
 
 ## 5. Nguon
 | Nguon | Lan goi | Loi | Thu hoach | Trang thai |

@@ -43,3 +43,58 @@ VIEC TOI / MAI
    ngoai pytest. Chi la warning, khong doi hanh vi.
 
 BANKER: da ghi mo ta cua chu du an vao ban giao, CHUA XAY (dung thu tu da dan). (test 823, fdr 1798, viec cho 0)
+- **2026-09-01 19:17** — Phien 01/09 toi: QUANTLAB nhanh 2,6 lan + BANKER noi lai FRED.
+
+DA LAM
+1. TOC DO QUANTLAB - profile truoc, khong doan. Ba diem nong deu khong o cho de nghi:
+   - supertrend 14% ca luot (vong lap Python truy tung phan tu mang numpy)
+     -> list thuan + 'x != x': nhanh 7 lan, ket qua GIONG HET tung phan tu.
+   - mde_cua 17% (cache dia co, nhung phai nap lai du lieu de tinh van tay moi
+     tra cache duoc) -> nho trong tien trinh, TTL 300s.
+   - toan_hang 30% (tinh lai cung mot rsi14/ema20 hang tram lan tren cung khung)
+     -> nho gan theo doi tuong khung, don bang weakref.
+   - Quet SONG SONG: tach quet (thuan tinh toan) khoi dang ky (cham so FDR).
+     Dang ky O LAI tien trinh cha vi so FDR NHAY THU TU (LORD giam 1/j^1.6).
+   DO DUOC, cung 150 giay: 8.400 -> 12.810 -> 21.982 to hop = 2,6 lan.
+   So tien trinh: 1->2 duoc 1,47x nhung 4->10 chi them 1,18x. MAY NGHET BANG
+   THONG BO NHO, khong nghet CPU. => VPS nhieu nhan hon KHONG cho nhieu hon bao
+   nhieu; muon cay that thi chay NHIEU MAY DOC LAP, moi may mot mang tai san.
+
+2. BANKER - FRED bi bo roi 17 ngay vi USER-AGENT CUA CHINH TA. FRED tra 200 khi
+   khong gui UA va treo het timeout khi gui UA Chrome; _tai gan cung UA cho moi
+   dia chi va nuot ngoai le -> 'khong tai duoc' -> ma nguon ghi 'FRED bi chan tu
+   mang nay'. Vi mo 7.262 -> 100.054 diem, lich su tu 1976. Che do 6 -> 10.
+
+3. dieu_phoi/evolution: phan biet MAY TAT voi HE CHET (truoc gan cung
+   'khong_xac_dinh' va dem gio chu du an tat may thanh gio he chet). Cat gian
+   doan ve trong cua so 7 ngay. ty_le_song nay kem mau so gio_do_duoc.
+
+4. do_im_lang: nguon cam nay noi kem VI SAO. Tra 39 tai lieu ve dung khoa nguon.
+
+5. nhan/so.py: chot chan 'mot gia thuyet cham holdout MOT lan' chuyen tu 4 CHO
+   GOI ve CHO GHI (ghi_ket_qua nem ChamLaiHoldout).
+
+LAT NGUOC MOT KET LUAN CUA CHINH PHIEN NAY
+Sang toi de nghi 'bat buoc do LUC truoc khi dang ky phep thu' nhu viec so 0.
+Profile mot luot that cho thay CONG DO DA CO VA DANG CHAY: mot luot quet 8.400
+to hop -> 1.622 ung vien -> 1.589 bi loai vi thieu luc (98%) -> dang ky 0.
+Phe u KHONG con tieu ngan sach FDR cho phep thu vo vong. De xuat do la THUA.
+
+=> RANG BUOC THAT khong phai CPU va khong phai ngan sach FDR, ma la MDE: gan
+   nhu moi ung vien deu co Sharpe kham pha thap hon muc nho nhat ma du lieu
+   hien co phan xu duoc. Tang toc do chi lam quet duoc NHIEU HON, khong lam ha
+   MDE. Muon co san luong that thi phai HA MDE: du lieu dai hon, cong cu chi
+   phi thap hon, hoac gop lop (da thu: chi ha 0,535 -> 0,511).
+
+VIEC TIEP THEO
+1. Huong chinh: HA MDE, khong phai tang CPU. Xem lai kho du lieu dai va lop
+   chi phi thap truoc khi mua them may.
+2. Ba nguon CHAY_SACH_MA_RONG chay tay: etoro, semantic, blog.
+3. Bat Chrome CDP roi chay lai fxblue + quantconnect.
+4. Dao kho luu tru blog (WordPress /wp-json): ~2.900 bai so voi 331 bai RSS.
+5. BANKER con 3/4 phan: hoc giao trinh+CFA, thu thap nhan dinh (Bloomberg/COT/
+   BofA), va muc Viet Nam (hien chi co 3 chuoi World Bank theo NAM, qua tho).
+   Phan 'du doan tai san' dang bi trụ tu cam - noi luat hay khong la quyet dinh
+   cua chu du an.
+
+839 test qua. Da dung sach 24/7, 0 tien trinh mo coi. (test 840, fdr 1799, viec cho 0)

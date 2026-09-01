@@ -1334,6 +1334,20 @@ def _dong_pool() -> None:
 
 # ------------------------------------------------------------- MOT LUOT CHAY
 def mot_luot(ngan_sach_giay: int = 900) -> dict:
+    """Mot luot QUANTLAB. Luon dep pool quet truoc khi ve, du ve bang duong nao.
+
+    `atexit` mot minh KHONG DU: supervisor gioi han moi luot bang ngan sach thoi
+    gian va GIET tien trinh khi qua han - luc do atexit khong chay, va 10 tien
+    trinh quet thanh mo coi. Moi luot mo coi 10 con thi sau vai gio may day tien
+    trinh chet ma khong ai truy ra tu dau (dung hinh dang loi cua ngay hom nay).
+    """
+    try:
+        return _mot_luot(ngan_sach_giay)
+    finally:
+        _dong_pool()
+
+
+def _mot_luot(ngan_sach_giay: int = 900) -> dict:
     """Mot luot lam viec cua tru. Duoc dieu phoi goi lai lien tuc."""
     t0 = time.time()
     SO.nhip_tim(TRU, "chay")

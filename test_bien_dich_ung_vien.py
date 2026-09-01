@@ -175,7 +175,9 @@ class RutHangDoi(unittest.TestCase):
         """Loai viec xep ra phai co nguoi nhan, neu khong lai dut duong ong."""
         import inspect
         import tru.quantlab as Q
-        nguon = inspect.getsource(Q.mot_luot)
+        # `mot_luot` la lop boc mong (dep pool trong finally); than that
+        # nam o `_mot_luot`. Soi than THAT chu khong soi lop boc.
+        nguon = inspect.getsource(getattr(Q, "_mot_luot", Q.mot_luot))
         self.assertIn("kham_pha_theo_mau", nguon)
         self.assertIn("rut_hang_doi_ung_vien", nguon)
 

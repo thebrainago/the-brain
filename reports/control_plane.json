@@ -4,14 +4,14 @@
  "pid": 11388,
  "process_created_epoch": 1788259054.8700657,
  "started_epoch": 1788259055.137481,
- "updated_epoch": 1788263569.6798646,
- "updated_at": "2026-09-01 18:52:49",
- "status": "running",
- "live": true,
- "ready": true,
+ "updated_epoch": 1788264967.9410775,
+ "updated_at": "2026-09-01 19:16:07",
+ "status": "stopped",
+ "live": false,
+ "ready": false,
  "health": "healthy",
  "cpu": {
-  "current_percent": 88.4,
+  "current_percent": 9.8,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -27,16 +27,16 @@
   "EVO": {
    "status": "ok",
    "rc": 0,
-   "giay": 6.6,
+   "giay": 7.0,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 18:38:30",
+    "luc": "2026-09-01 18:53:40",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 16,\n \"tru_dung_im\": [],\n \"dia_gb\": 15.5,\n \"tai_lieu\": 3273,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
+   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 16,\n \"tru_dung_im\": [],\n \"dia_gb\": 15.4,\n \"tai_lieu\": 3273,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
    "stderr_tail": ""
   },
   "BANKER": {
@@ -57,16 +57,16 @@
   "SEEKER": {
    "status": "ok",
    "rc": 0,
-   "giay": 147.0,
+   "giay": 136.6,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 18:39:58",
+    "luc": "2026-09-01 18:57:22",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "t\": [],\n   \"khong_co_feed\": 3\n  },\n  \"suat\": {\n   \"hoc_thuat\": {\n    \"bai\": 1609,\n    \"ky_tu\": 31566738,\n    \"ung_vien\": 467,\n    \"co_che\": 139,\n    \"nguon\": 52,\n    \"suat\": 28.73,\n    \"suat_tho\": 29.02\n   },\n   \"xa_hoi\": {\n    \"bai\": 651,\n    \"ky_tu\": 4789957,\n    \"ung_vien\": 86,\n    \"co_che\": 8,\n    \"nguon\": 10,\n    \"suat\": 12.97,\n    \"suat_tho\": 13.21\n   }\n  },\n  \"chia_giay\": {\n   \"hoc_thuat\": 186.0,\n   \"xa_hoi\": 84.0\n  }\n },\n \"con_doc\": 114,\n \"con_boc\": 0,\n \"cho_giay\": 120,\n \"chi_tiet\": []\n}",
+   "stdout_tail": "t\": [],\n   \"khong_co_feed\": 2\n  },\n  \"suat\": {\n   \"hoc_thuat\": {\n    \"bai\": 1619,\n    \"ky_tu\": 31732173,\n    \"ung_vien\": 467,\n    \"co_che\": 139,\n    \"nguon\": 52,\n    \"suat\": 28.55,\n    \"suat_tho\": 28.84\n   },\n   \"xa_hoi\": {\n    \"bai\": 651,\n    \"ky_tu\": 4789957,\n    \"ung_vien\": 86,\n    \"co_che\": 8,\n    \"nguon\": 10,\n    \"suat\": 12.97,\n    \"suat_tho\": 13.21\n   }\n  },\n  \"chia_giay\": {\n   \"hoc_thuat\": 185.7,\n   \"xa_hoi\": 84.3\n  }\n },\n \"con_doc\": 104,\n \"con_boc\": 0,\n \"cho_giay\": 120,\n \"chi_tiet\": []\n}",
    "stderr_tail": ""
   },
   "NGHI": {
@@ -87,16 +87,16 @@
   "QUANTLAB": {
    "status": "ok",
    "rc": 0,
-   "giay": 633.6,
+   "giay": 624.2,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-01 18:51:06",
+    "luc": "2026-09-01 19:16:05",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "\"calmar\": 0.026,\n    \"max_dd_pct\": -43.26,\n    \"pf\": 1.016,\n    \"so_nam\": 19.93,\n    \"so_bar\": 5187\n   },\n   \"chi_phi_do_tin\": \"KHAI\",\n   \"dang_ky_moi\": 0,\n   \"chua_dang_ky\": true,\n   \"mde\": 0.744\n  },\n  {\n   \"ma\": \"USDCAD\",\n   \"khung\": \"D1\",\n   \"da_quet\": 58,\n   \"ung_vien\": 8,\n   \"da_chon\": 0,\n   \"che_do\": \"nghien_cuu\",\n   \"thieu_luc\": 8,\n   \"chi_tiet_thieu_luc\": [\n    {\n     \"mau\": \"stoch_qua_ban\",\n     \"mde\": 0.793,\n     \"sharpe\": 0.304,\n     \"ly_do\": \"Sharpe kham pha 0.304 < MDE 0.793 cua US",
+   "stdout_tail": "e FAIL du dung hay sai\"\n    }\n   ],\n   \"cua_so\": \"1990-03-01..2026-08-12\",\n   \"so_bar\": 9257,\n   \"mua_giu_train\": {\n    \"tong_lai_pct\": -44.31,\n    \"cagr_pct\": -2.631,\n    \"sharpe\": -0.109,\n    \"calmar\": -0.034,\n    \"max_dd_pct\": -78.19,\n    \"pf\": 0.981,\n    \"so_nam\": 21.96,\n    \"so_bar\": 5554\n   },\n   \"chi_phi_do_tin\": \"KHAI\",\n   \"dang_ky_moi\": 0,\n   \"chua_dang_ky\": true,\n   \"mde\": 0.795\n  },\n  {\n   \"ma\": \"YH_NASDAQ\",\n   \"khung\": \"D1\",\n   \"da_quet\": 58,\n   \"ung_vien\": 22,\n   \"da_chon\": 3,\n   \"c",
    "stderr_tail": ""
   }
  }

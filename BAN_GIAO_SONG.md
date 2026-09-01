@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-### 2026-08-31 23:11:41 — TAT MAY theo lenh chu du an. Luot 2500 null moi xong 2/23 - chay tiep bang: b hinh-dang --ma <doc reports/_shortlist_hinh_dang.txt> --null 2500 --tran-o 81 --ra sau2500 --tiep
-
-### 2026-08-31 23:11:41 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 5428, 0 phut), dieu_phoi.py (pid 10764, 85 phut), quantlab.py (pid 10124, 10 phut), seeker.py (pid 15348, 0 phut)
 - `dieu_khien_xa.log`: [dieu_khien_xa] dang nghe...
 - `dieu_phoi.log`: 2026-08-31 23:11:32 SEEKER    bat_dau   lane=external
@@ -404,3 +399,8 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `supervisor_stdio.log`: 2026-09-01 16:42:29 === dung dieu phoi ===
 - `watchdog.log`: 2026-09-01 16:42:29 WATCHDOG watchdog dung
 - git: abe0ca5 BANKER: noi lai FRED (12 seri chet 17 ngay vi User-Agent cua chinh ta)
+### 2026-09-01 18:59:26 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10264, 0 phut), dieu_khien_xa.py (pid 3308, 714 phut), dieu_phoi.py (pid 11388, 81 phut), quantlab.py (pid 18092, 6 phut)
+- `dieu_phoi.log`: 2026-09-01 18:57:24 SEEKER    ok         136.6s guard=job
+- git: 0ea6839 QUANTLAB nhanh 2,6 lan: 3 diem nong + quet song song
