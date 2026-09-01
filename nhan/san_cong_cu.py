@@ -97,6 +97,44 @@ GIAY_PHEP_LAY_NHIEM = {"GPL-3.0", "GPL-2.0", "AGPL-3.0", "LGPL-3.0"}
 #: khac. Moi muc phai noi ro NO CAM VAO DAU va CAI GI NO KHONG DUOC THAY.
 NHU_CAU = {
     # ------------------------------------------------------------------
+    # Them 01/09 theo chi dan chu du an: gap van de thi hoi cong dong truoc,
+    # dung tu viet lai. Nut that DA DO DUOC hom nay, khong phai mong muon chung.
+    # ------------------------------------------------------------------
+    "toan_tu_co_nho": {
+        "vi_sao": "Do 01/09: bo doc ma rut duoc 12 co che ghep tu 7/18 chien "
+                  "luoc Pine. Phan con chan KHONG phai thieu chi bao ma la "
+                  "thieu TOAN TU CO NHO TRANG THAI: `direction < 0` (huong "
+                  "supertrend - gia tri hom nay phu thuoc gia tri hom qua theo "
+                  "mot quy tac re nhanh), `fractal_average[0] > [1]`, "
+                  "`close < dtime_l4` (muc theo gio trong ngay). Ngu phap hien "
+                  "tai chi co toan tu KHONG NHO: rolling, shift, so sanh.",
+        "cam_vao": "KHONG cam vao dau ca - doi chieu cach nguoi khac dinh nghia "
+                   "toan tu co nho ma van giu duoc tinh nhan qua",
+        "doi_chieu_voi": "nhan/ngu_phap.py",
+        "khong_duoc_thay": "khong mot dong ma ngoai nao duoc chay; ngu phap van "
+                           "la thu duy nhat cham vao chuoi gia, va no phai giu "
+                           "duoc tinh chat 'khong phat bieu duoc dieu nhin truoc'",
+        "truy_van": ["supertrend indicator python implementation",
+                     "stateful indicator dsl backtesting",
+                     "declarative trading strategy dsl json",
+                     "pine script to python transpiler",
+                     "zigzag fractal indicator vectorized pandas"],
+    },
+    "doc_ma_thanh_chien_luoc": {
+        "vi_sao": "Do 01/09: bo doc ma tu viet chi rut duoc 7/18 chien luoc "
+                  "Pine, va 0/7 EA MQL5 (EA la chuong trinh co cau truc, quyet "
+                  "dinh vao lenh nam rai qua nhieu ham). Neu cong dong da co bo "
+                  "phan tich cu phap Pine hay MQL thi khong nen tu viet regex.",
+        "cam_vao": "KHONG cam vao dau ca - doi chieu, va neu co bo phan tich cu "
+                   "phap tot thi NGUOI doc roi quyet dinh",
+        "doi_chieu_voi": "nhan/doc_ma.py",
+        "khong_duoc_thay": "dau ra van phai la khai bao DU LIEU theo ngu phap da "
+                           "kiem duyet, khong bao gio la ma chay duoc",
+        "truy_van": ["pine script parser python", "mql5 parser ast python",
+                     "trading strategy extraction source code",
+                     "tree sitter pine script grammar"],
+    },
+    # ------------------------------------------------------------------
     # NHOM KY THUAT (them 30/08/2026 theo chi dan chu du an: EVO nam RONG
     # HON linh vuc giao dich - phan lon van de cua ta la van de TIN HOC
     # thuong, va cong dong da giai chung tu lau).
@@ -767,18 +805,55 @@ def cham_diem(r: dict) -> dict:
 
 # ---------------------------------------------------------------------- TIM
 def tim_github(truy_van: str, sao_toi_thieu: int = 100, so_luong: int = 8) -> list[dict]:
+    """Tim repo tren GitHub. Tra danh sach DA CHUAN HOA.
+
+    HAI LOI DA SAP THAT (do 01/09, khi chu du an bao "gap van de thi len github
+    xem ai lam chua"):
+
+    1. **Khong chuan hoa.** Ham nay tra thang `items` cua GitHub, trong do khoa
+       la `full_name` va `stargazers_count`. Ca duong phia sau lai doc `ten` va
+       `sao`, nen moi ket qua deu hien ra `None None` - tim duoc ma nhu khong.
+
+    2. **Nguong sao qua gat, va cai rong bi doc thanh "the gioi khong co gi".**
+       `stars:>100` lam "pine script parser" tra 0 trong khi API tra 18 ket qua
+       cho cung tu khoa. Nay: het nguong thi HA XUONG roi hoi lai, va chi bao
+       rong khi ca hai lan deu rong. Dung cai bay `da_quet=0` bao thanh "khong
+       co gi" - lan nay o chieu nguoc lai.
+    """
     import requests
-    q = f"{truy_van} stars:>{sao_toi_thieu}"
-    try:
-        r = requests.get("https://api.github.com/search/repositories",
-                         params={"q": q, "sort": "stars", "per_page": so_luong},
-                         headers={"Accept": "application/vnd.github+json"}, timeout=25)
-    except Exception as e:
-        return [{"loi": f"{type(e).__name__}: {str(e)[:80]}"}]
-    if r.status_code != 200:
-        return [{"loi": f"HTTP {r.status_code}", "con_lai":
-                 r.headers.get("x-ratelimit-remaining")}]
-    return r.json().get("items", []) or []
+
+    def _hoi(nguong: int) -> tuple[list, str]:
+        q = f"{truy_van} stars:>{nguong}" if nguong > 0 else truy_van
+        try:
+            r = requests.get("https://api.github.com/search/repositories",
+                             params={"q": q, "sort": "stars", "per_page": so_luong},
+                             headers={"Accept": "application/vnd.github+json",
+                                      "User-Agent": "TheBrainResearch/0.1"},
+                             timeout=25)
+        except Exception as e:
+            return [], f"{type(e).__name__}: {str(e)[:80]}"
+        if r.status_code != 200:
+            return [], (f"HTTP {r.status_code} (con lai "
+                        f"{r.headers.get('x-ratelimit-remaining')})")
+        return (r.json().get("items") or []), ""
+
+    ds, loi = _hoi(sao_toi_thieu)
+    if not ds and not loi and sao_toi_thieu > 0:
+        ds, loi = _hoi(0)          # ha nguong roi hoi lai truoc khi ket luan rong
+    if loi:
+        return [{"loi": loi}]
+    ra = []
+    for x in ds:
+        ra.append({
+            "ten": x.get("full_name") or x.get("name"),
+            "url": x.get("html_url"),
+            "sao": x.get("stargazers_count"),
+            "mo_ta": (x.get("description") or "")[:300],
+            "giay_phep": ((x.get("license") or {}) or {}).get("spdx_id"),
+            "cap_nhat": x.get("pushed_at"),
+            "nguon": "github",
+        })
+    return ra
 
 
 def tim_huggingface(truy_van: str, so_luong: int = 8,
