@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import hashlib
 import inspect
+import atexit
 import json
 import os
 import sys
@@ -222,9 +223,17 @@ def _nap(ma: str, khung: str):
 
 
 # ------------------------------------------------------------- TANG KHAM PHA
-def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0) -> dict:
+def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0,
+             dang_ky: bool = True) -> dict:
     """Quet mau x tham so tren TRAIN. Khong sinh p-value chinh thuc.
-    Cai nao thang mua-giu -> dang ky gia thuyet + xep hang xac nhan."""
+    Cai nao thang mua-giu -> dang ky gia thuyet + xep hang xac nhan.
+
+    `dang_ky=False` chi QUET va tra ve ung vien, khong cham vao so. Dung cho
+    duong chay song song: quet la thuan tinh toan nen chia cho nhieu tien trinh
+    duoc, nhung DANG KY thi khong - so FDR nhay THU TU (nguong LORD giam theo
+    1/j^1.6), nen hai tien trinh cung dang ky se cho mot chuoi quyet dinh khac
+    voi chuoi ma bat ky ai co the tai dung lai. Quet song song, dang ky tuan tu.
+    """
     df, train, _h, cp, _cph = _nap(ma, khung)
     bc = DL.kiem(df, ma)
     if not bc["dung_duoc"] or len(df) < SO_BAR_TOI_THIEU:
@@ -300,13 +309,37 @@ def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0) -> dict:
                                                   if k in kt_luc}})
     ung_vien = du_luc[:TOI_DA_DANG_KY_MOI_CAP]
 
-    # dang ky + xep hang xac nhan
+    ra = {"ma": ma, "khung": khung, "da_quet": da_quet,
+          "ung_vien": tong_ung_vien, "da_chon": len(ung_vien),
+          "che_do": che_do, "thieu_luc": len(thieu_luc),
+          "chi_tiet_thieu_luc": thieu_luc[:5], "cua_so": _cua_so(df),
+          "so_bar": len(df), "mua_giu_train": m_bh,
+          "chi_phi_do_tin": cp.do_tin,
+          "_ung_vien": ung_vien, "_thieu_luc": thieu_luc}
+    if not dang_ky:
+        ra["dang_ky_moi"] = 0
+        ra["chua_dang_ky"] = True
+        return ra
+    return dang_ky_sau_quet(ra)
+
+
+def dang_ky_sau_quet(ra: dict) -> dict:
+    """Phan GHI SO cua `kham_pha`. Phai chay o MOT tien trinh duy nhat.
+
+    Tach ra de quet co the chay song song ma so FDR van giu dung mot chuoi
+    quyet dinh tuan tu. Nhan lai chinh dict ma `kham_pha(dang_ky=False)` tra ve.
+    """
+    ma, khung = ra["ma"], ra["khung"]
+    ung_vien = ra.pop("_ung_vien", [])
+    thieu_luc = ra.pop("_thieu_luc", [])
+    che_do = ra.get("che_do")
+    m_bh = ra.get("mua_giu_train") or {}
     dang_ky = 0
     for u in ung_vien:
         ma_gt = f"{ma}.{khung}.{u['mau']}." + "_".join(f"{k}{v}" for k, v in u["tham_so"].items())
         gid, ph = SO.dang_ky_gia_thuyet(
             ma=ma_gt, co_che=u["co_che"], template=u["mau"], tham_so=u["tham_so"],
-            tai_san=ma, khung=khung, cua_so=_cua_so(df), ho=u["ho"],
+            tai_san=ma, khung=khung, cua_so=ra.get("cua_so"), ho=u["ho"],
             nguon="kham_pha", tru_sinh=TRU,
             ghi_chu=f"[{che_do}] train sharpe {u['chi_so'].get('sharpe')} "
                     f"vs mua-giu {m_bh.get('sharpe')}")
@@ -325,14 +358,10 @@ def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0) -> dict:
         # khong ton tai. Ghi ra so de dem duoc, va de biet dang bo lo bao nhieu.
         SO.ghi_chi_so("kham_pha_thieu_luc", float(len(thieu_luc)),
                       {"tai_san": ma, "khung": khung, "chi_tiet": thieu_luc[:5]})
-    return {"ma": ma, "khung": khung, "da_quet": da_quet,
-            "ung_vien": tong_ung_vien, "da_chon": len(ung_vien),
-            "dang_ky_moi": dang_ky, "che_do": che_do,
-            "thieu_luc": len(thieu_luc), "chi_tiet_thieu_luc": thieu_luc[:5],
-            "mde": (thieu_luc[0]["mde"] if thieu_luc else
-                    (DLUC.mde_cua(ma, khung).get("mde") if du_luc else None)),
-            "cua_so": _cua_so(df), "so_bar": len(df),
-            "mua_giu_train": m_bh, "chi_phi_do_tin": cp.do_tin}
+    ra["dang_ky_moi"] = dang_ky
+    ra["mde"] = (thieu_luc[0]["mde"] if thieu_luc else
+                 (DLUC.mde_cua(ma, khung).get("mde") if ung_vien else None))
+    return ra
 
 
 #: TRAN HANG DOI KHAM PHA. Vuot tran thi NGUNG rut ung vien - va con tro
@@ -1210,6 +1239,97 @@ def thu_luc_cong(cac_p=(0.50, 0.55, 0.60), ma: str | None = None,
     else:
         SO.dong_van_de("cong_khong_co_luc", "cong phan biet duoc hai chieu")
     return {"tai_san": ma, "khung": khung, "dat": dat, "ket": ket}
+# --------------------------------------------------------------- QUET SONG SONG
+#: So tien trinh quet. Do that tren may nay (20 luong logic / 10 nhan / 34 GB):
+#: quet la thuan tinh toan tren mang nho, khong cham mang, khong cham so cho den
+#: khi xong - dung dang viec chia duoc. Mac dinh de duoi so nhan THAT vi bai hoc
+#: "may nghet bang thong": vuot so nhan vat ly thi cac tien trinh tranh nhau
+#: bang thong bo nho chu khong them viec.
+def _so_tien_trinh_quet(xin: int = 0) -> int:
+    import os
+    tran = max(1, (os.cpu_count() or 2) // 2)      # ~so nhan vat ly
+    if xin > 0:
+        return max(1, min(xin, tran))
+    try:
+        return max(1, min(int(os.environ.get("BRAIN_QUET_TIEN_TRINH", 0)) or tran, tran))
+    except Exception:
+        return tran
+
+
+def _quet_mot(cap):
+    """Chay trong TIEN TRINH CON. Chi quet, khong cham so cai."""
+    ma, khung = cap
+    try:
+        return kham_pha(ma, khung, dang_ky=False)
+    except Exception as e:
+        return {"ma": ma, "khung": khung, "loi": f"{type(e).__name__}: {str(e)[:120]}"}
+
+
+def kham_pha_nhieu(cap_ds: list, so_tien_trinh: int = 0,
+                   ngan_sach_giay: float = 0) -> list:
+    """Quet nhieu cap SONG SONG roi dang ky TUAN TU o tien trinh cha.
+
+    Vi sao tach lam hai nhip:
+      - QUET thuan tinh toan -> chia cho nhieu tien trinh la thang tuyet doi.
+      - DANG KY cham so FDR, va so do NHAY THU TU (nguong LORD giam theo
+        1/j^1.6). Neu nhieu tien trinh cung dang ky thi chuoi quyet dinh phu
+        thuoc thu tu hoan thanh cua he dieu hanh - tuc khong tai dung lai duoc,
+        va do la dieu toi ky voi mot so cai thong ke.
+    Ket qua giong ban tuan tu ve NOI DUNG; chi thu tu dang ky GIUA cac cap la
+    khac (trong mot cap thi thu tu giu nguyen).
+    """
+    import time as _t
+    n = _so_tien_trinh_quet(so_tien_trinh)
+    t0 = _t.time()
+    ra = []
+    if n <= 1 or len(cap_ds) <= 1:
+        for cap in cap_ds:
+            if ngan_sach_giay and _t.time() - t0 > ngan_sach_giay:
+                break
+            ra.append(dang_ky_sau_quet(_quet_mot(cap)))
+        return ra
+    pool = _pool_quet(n)
+    for kq in pool.imap_unordered(_quet_mot, cap_ds):
+        ra.append(kq if (kq.get("loi") or kq.get("bo_qua"))
+                  else dang_ky_sau_quet(kq))
+        if ngan_sach_giay and _t.time() - t0 > ngan_sach_giay:
+            break
+    return ra
+
+
+#: Pool DUNG LAI ca luot. Tren Windows moi tien trinh con phai nap lai pandas +
+#: numpy + toan bo module cua du an - vai giay MOI LAN. Ban dau ham nay tao mot
+#: `mp.Pool` cho tung me, va do that cho thay tra gia du: mot luot 150 giay quet
+#: duoc 195 tai san nhung so TO HOP khong tang so voi ban tuan tu - toan bo phan
+#: nhanh duoc dem di tra cho viec dung roi dep pool hang chuc lan.
+#: Dem so to hop, dung dem so tai san: tai san bi bo qua som cung tinh la mot.
+_POOL = {"n": 0, "p": None}
+atexit.register(lambda: _dong_pool())
+
+
+def _pool_quet(n: int):
+    if _POOL["p"] is not None and _POOL["n"] == n:
+        return _POOL["p"]
+    _dong_pool()
+    import multiprocessing as mp
+    _POOL["p"], _POOL["n"] = mp.Pool(n), n
+    return _POOL["p"]
+
+
+def _dong_pool() -> None:
+    """Dep pool. Co dang ky atexit: mot luot QUANTLAB la mot tien trinh ngan do
+    supervisor sinh ra, va de lai 10 tien trinh con mo coi moi luot thi sau vai
+    gio may se day tien trinh chet ma khong ai truy ra tu dau."""
+    p = _POOL.get("p")
+    if p is not None:
+        try:
+            p.terminate()
+            p.join()
+        except Exception:
+            pass
+    _POOL["p"], _POOL["n"] = None, 0
+
+
 
 
 # ------------------------------------------------------------- MOT LUOT CHAY
@@ -1377,25 +1497,35 @@ def mot_luot(ngan_sach_giay: int = 900) -> dict:
     ds = _tai_san_kha_dung()
     trang_thai = _doc_tien_do()
     mau_thieu_luc: list[str] = []
+    # Quet theo ME: lay mot nhom cap roi quet SONG SONG, dang ky TUAN TU o day.
+    # Do that tren may nay (20 luong logic / 10 nhan, 40 cap that): 1 tien trinh
+    # 25,4 giay -> 10 tien trinh 10,9 giay = 2,32x, ket qua GIONG HET. Duong
+    # cong bao hoa rat som (1->2 duoc 1,47x nhung 4->10 chi them 1,18x) vi quet
+    # nghet BANG THONG BO NHO chu khong nghet CPU - do la ly do khong dat me lon
+    # hon va khong tang so tien trinh len sat 20.
+    me = max(1, _so_tien_trinh_quet() * 2)
     while time.time() - t0 < ngan_sach_giay:
-        cap = _cap_ke_tiep(ds, trang_thai)
-        if cap is None:
-            trang_thai = {"vong": trang_thai.get("vong", 0) + 1, "da_quet": []}
-            _luu_tien_do(trang_thai)
+        nhom = []
+        while len(nhom) < me:
+            cap = _cap_ke_tiep(ds, trang_thai)
+            if cap is None:
+                if nhom:
+                    break
+                trang_thai = {"vong": trang_thai.get("vong", 0) + 1, "da_quet": []}
+                _luu_tien_do(trang_thai)
+                continue
+            nhom.append(cap)
+            trang_thai.setdefault("da_quet", []).append(f"{cap[0]}|{cap[1]}")
+        if not nhom:
             continue
-        ma, khung = cap
-        try:
-            r = kham_pha(ma, khung)
+        con_lai = ngan_sach_giay - (time.time() - t0)
+        for r in kham_pha_nhieu(nhom, ngan_sach_giay=max(5.0, con_lai)):
             lam["kham_pha"] += 1
             lam["chi_tiet"].append(r)
             for x in (r.get("chi_tiet_thieu_luc") or []):
                 if x.get("sharpe") is not None and x.get("mde"):
                     mau_thieu_luc.append((float(x["sharpe"]) / float(x["mde"]),
                                           x["mau"]))
-        except Exception as e:
-            r = {"ma": ma, "khung": khung, "loi": f"{type(e).__name__}: {str(e)[:80]}"}
-            lam["chi_tiet"].append(r)
-        trang_thai.setdefault("da_quet", []).append(f"{ma}|{khung}")
         _luu_tien_do(trang_thai)
 
     # 3b) DUONG GOP. Chay SAU vong kham pha don le va dung ket qua cua no lam

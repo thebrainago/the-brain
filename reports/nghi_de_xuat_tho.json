@@ -1,184 +1,12 @@
 {
  "de_xuat": [
   {
-   "ten": "mua_quay_ve_sau_vol_gian_no",
-   "co_che": "Nha tao lap quyen chon gamma am va nha giao dich xu huong bi ket khi bien dong gian no, ho phai mua lai de phong ho, tao luc day gia quay ve.",
-   "ho": "quay_ve_trung_binh",
-   "chieu": 1,
-   "giu": 5,
-   "vao": [
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "atr",
-       "n": 14
-      },
-      "n": 250
-     },
-     "phep": ">",
-     "phai": {
-      "hang": 0.9
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "ibs"
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.2
-     }
-    }
-   ],
-   "ra": [],
-   "dieu_kien_sai": "Neu gia tiep tuc di xa sau khi vao, chung to dong da manh chu khong quay ve.",
-   "nguon": ""
-  },
-  {
-   "ten": "ban_quay_ve_sau_vol_gian_no",
-   "co_che": "Nha tao lap quyen chon gamma am va nha giao dich xu huong bi ket, ho phai ban de phong ho, tao luc keo gia quay ve.",
+   "ten": "ban_dinh_climax_vol_cao",
+   "co_che": "Khi khối lượng đột biến và biến động cao, nhà đầu tư cá nhân mua đuổi đỉnh tạo lực cầu cuối; tổ chức và nhà tạo lập bán ra chốt lời, gây đảo chiều ngắn hạn.",
    "ho": "quay_ve_trung_binh",
    "chieu": -1,
    "giu": 5,
    "vao": [
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "atr",
-       "n": 14
-      },
-      "n": 250
-     },
-     "phep": ">",
-     "phai": {
-      "hang": 0.9
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "ibs"
-     },
-     "phep": ">",
-     "phai": {
-      "hang": 0.8
-     }
-    }
-   ],
-   "ra": [],
-   "dieu_kien_sai": "Neu gia tiep tuc tang, chung to dong da manh.",
-   "nguon": ""
-  },
-  {
-   "ten": "mua_sau_vol_thap_va_giam_sau",
-   "co_che": "Sau mot dot giam manh trong moi truong bien dong thap, nha dau tu co loi nhuan chot lai (profit taking) va nha phan tich co ban mua vao, tao luc day gia quay ve.",
-   "ho": "quay_ve_trung_binh",
-   "chieu": 1,
-   "giu": 10,
-   "vao": [
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "atr",
-       "n": 14
-      },
-      "n": 250
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.2
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "doi_pct",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "n": 250
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.1
-     }
-    }
-   ],
-   "ra": [],
-   "dieu_kien_sai": "Neu gia tiep tuc giam sau khi vao, chung to xu huong giam manh.",
-   "nguon": ""
-  },
-  {
-   "ten": "ban_sau_vol_thap_va_tang_manh",
-   "co_che": "Sau mot dot tang manh trong moi truong bien dong thap, nha dau tu chot lai va nha phan tich co ban ban ra, tao luc keo gia quay ve.",
-   "ho": "quay_ve_trung_binh",
-   "chieu": -1,
-   "giu": 10,
-   "vao": [
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "atr",
-       "n": 14
-      },
-      "n": 250
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.2
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "doi_pct",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "n": 250
-     },
-     "phep": ">",
-     "phai": {
-      "hang": 0.9
-     }
-    }
-   ],
-   "ra": [],
-   "dieu_kien_sai": "Neu gia tiep tuc tang, chung to xu huong tang manh.",
-   "nguon": ""
-  },
-  {
-   "ten": "mua_sau_vol_gian_no_va_kl_cuc_dai",
-   "co_che": "Khi bien dong va khoi luong cung dat dinh, do la dinh cua su hoang loan (capitulation); nha dau tu thong thai mua vao, gia quay ve.",
-   "ho": "quay_ve_trung_binh",
-   "chieu": 1,
-   "giu": 5,
-   "vao": [
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "atr",
-       "n": 14
-      },
-      "n": 250
-     },
-     "phep": ">",
-     "phai": {
-      "hang": 0.9
-     }
-    },
     {
      "trai": {
       "chi_bao": "phan_vi",
@@ -194,27 +22,6 @@
     },
     {
      "trai": {
-      "chi_bao": "ibs"
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.2
-     }
-    }
-   ],
-   "ra": [],
-   "dieu_kien_sai": "Neu bien dong tiep tuc mo rong va gia di xa, chung to dong xu huong tiep dien.",
-   "nguon": ""
-  },
-  {
-   "ten": "ban_sau_vol_gian_no_va_kl_cuc_dai",
-   "co_che": "Khi bien dong va khoi luong cung dat dinh, do la dinh cua su hung phan (euphoria); nha dau tu thong thai ban ra, gia quay ve.",
-   "ho": "quay_ve_trung_binh",
-   "chieu": -1,
-   "giu": 5,
-   "vao": [
-    {
-     "trai": {
       "chi_bao": "phan_vi",
       "cua": {
        "chi_bao": "atr",
@@ -224,9 +31,35 @@
      },
      "phep": ">",
      "phai": {
-      "hang": 0.9
+      "hang": 0.8
      }
-    },
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.5
+     }
+    }
+   ],
+   "dieu_kien_sai": "Nếu khối lượng đột biến không kèm biến động cao, hoặc thị trường đang trong xu hướng mạnh, không có đảo chiều.",
+   "nguon": ""
+  },
+  {
+   "ten": "mua_day_climax_vol_cao",
+   "co_che": "Khi khối lượng đột biến và biến động cao, nhà đầu tư hoảng loạn bán tháo tạo đáy; tổ chức và nhà tạo lập mua vào hút hàng, gây đảo chiều tăng.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": 1,
+   "giu": 5,
+   "vao": [
     {
      "trai": {
       "chi_bao": "phan_vi",
@@ -242,7 +75,12 @@
     },
     {
      "trai": {
-      "chi_bao": "ibs"
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
      },
      "phep": ">",
      "phai": {
@@ -250,10 +88,238 @@
      }
     }
    ],
-   "ra": [],
-   "dieu_kien_sai": "Neu bien dong tiep tuc mo rong va gia di xa, chung to dong xu huong tiep dien.",
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong"
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.5
+     }
+    }
+   ],
+   "dieu_kien_sai": "Nếu khối lượng đột biến không kèm biến động cao, hoặc thị trường đang trong xu hướng mạnh, không có đảo chiều.",
+   "nguon": ""
+  },
+  {
+   "ten": "quay_ve_vwap_tb_low_vol",
+   "co_che": "Các quỹ và ngân hàng dùng chiến lược VWAP buộc phải mua/bán để đưa giá về trung bình. Khi biến động thấp, lệnh này chiếm ưu thế, tạo lực quay về sau khi giá lệch xa trung bình.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": 1,
+   "giu": 5,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     },
+     "phep": "<",
+     "phai": {
+      "hang": -2
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.2
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0
+     }
+    }
+   ],
+   "dieu_kien_sai": "Nếu biến động cao hoặc độ lệch không có ý nghĩa thống kê, cơ chế này sai.",
+   "nguon": ""
+  },
+  {
+   "ten": "quay_ve_keltner_low_vol",
+   "co_che": "Nhà tạo lập quyền chọn phòng ngừa gamma khi giá chạm dải Keltner. Khi biến động thấp, lực phòng ngừa đẩy giá quay về đường trung bình.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": 1,
+   "giu": 5,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "phep": "<=",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.2
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     }
+    }
+   ],
+   "dieu_kien_sai": "Nếu biến động cao hoặc giá không chạm dải dưới, cơ chế này sai.",
+   "nguon": ""
+  },
+  {
+   "ten": "ban_quay_ve_keltner_low_vol",
+   "co_che": "Nhà tạo lập quyền chọn phòng ngừa gamma khi giá chạm dải Keltner trên. Khi biến động thấp, lực phòng ngừa đẩy giá quay về đường trung bình.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": -1,
+   "giu": 5,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.2
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     }
+    }
+   ],
+   "dieu_kien_sai": "Nếu biến động cao hoặc giá không chạm dải trên, cơ chế này sai.",
+   "nguon": ""
+  },
+  {
+   "ten": "quay_ve_ta_can_bang_etf_vol_thap",
+   "co_che": "Quỹ ETF tái cân bằng định kỳ khi biến động thấp, các lệnh mua/bán bắt buộc tạo ra biến động giá ngắn hạn và sau đó quay về do nhà tạo lập thị trường hấp thụ.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": 1,
+   "giu": 3,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "ngay_trong_tuan"
+     },
+     "phep": "=",
+     "phai": {
+      "hang": 5
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 250
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.3
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "ngay_trong_tuan"
+     },
+     "phep": "=",
+     "phai": {
+      "hang": 1
+     }
+    }
+   ],
+   "dieu_kien_sai": "Nếu biến động cao hoặc không phải cuối tuần, cơ chế này sai.",
    "nguon": ""
   }
  ],
- "ly_do_chon": "Tat ca de xuat deu la 'A KHI B' co dieu kien che do (bien dong va khoi luong), co che giai thich ro ai tra tien (nha tao lap, nha dau tu chot lai) va tai sao (phong ho, profit taking). Ty le kich hoat uoc tinh 1-10% (phan_vi 0.1 hoac 0.9), phi qua dem duoc bu tru boi bien do quay ve ky vong lon hon. Cac huong nay dao tiep manh tu cac phep thu thanh cong truoc day (mean reversion, volatility spike)."
+ "ly_do_chon": "Các cơ chế đều có dạng 'A KHI B' với ít nhất 2 điều kiện, một điều kiện là chế độ biến động (dùng phan_vi). Tập trung vào quay về trung bình – hướng có dấu hiệu alpha dương nhẹ. Mỗi cơ chế giải thích rõ ai trả tiền và tại sao. Tỷ lệ kích hoạt nằm trong khoảng 0.5–40% nhờ ngưỡng phan_vi khắt khe. Giữ ngắn (≤5 bar) nên không cần giải thích carry cost."
 }

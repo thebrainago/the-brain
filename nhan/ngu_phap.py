@@ -40,6 +40,7 @@ QUY UOC THOI GIAN (khong the vi pham):
 from __future__ import annotations
 
 import json
+import weakref
 import sys
 from pathlib import Path
 
@@ -68,12 +69,65 @@ def _cot(df: pd.DataFrame, ten: str) -> pd.Series:
 
 
 def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
-    """Dich mot toan hang thanh chuoi gia tri tai tung bar.
+    """Dich mot toan hang thanh chuoi gia tri tai tung bar. CO NHO KET QUA.
 
     MOI nhanh o day chi doc qua khu va hien tai. Khong co nhanh nao dich am.
+
+    VI SAO CO NHO (do that tren mot luot QUANTLAB 01/09/2026): mot luot quet
+    8.400 to hop tham so tren CUNG mot tai san, va ham nay duoc goi 34.803 lan
+    ngon 55,4 giay = 30% ca luot. Rat nhieu lan trong so do tinh lai DUNG MOT
+    thu: `rsi(close,14)`, `ema(close,20)`, `atr(14)` xuat hien trong hang tram
+    mau khac nhau. Rolling window tren 20.000 bar khong re, va tinh no lai hang
+    tram lan la lang phi thuan tuy.
+
+    Nho khoa theo `id(df)` NHUNG co `weakref.finalize` xoa muc khi khung bi thu
+    gom. Khong co no thi id cua mot khung da chet co the duoc cap lai cho khung
+    khac va bo nho tra ve chuoi cua MOT KHUNG KHAC - dung hinh dang loi "so lieu
+    doc duoc nhung sai" ma du an nay da mat ca ngay 01/09 de truy.
+
+    Ban dau thu cat nho vao `df.attrs`: SAI, va test bat duoc ngay. pandas so
+    sanh `obj.attrs == attrs` trong `__finalize__` khi concat; attrs chua Series
+    thi phep so tro thanh so sanh theo phan tu va nem "truth value of a Series
+    is ambiguous". `attrs` chi duoc chua thu so sanh duoc bang `==`.
+
+    Tra ve BAN SAO: neu nguoi goi sua tai cho chuoi nhan duoc thi ban trong nho
+    se hong va moi phep tinh sau do deu sai. Sao mot chuoi 20.000 so la vai chuc
+    micro giay, re hon nhieu lan so voi tinh lai.
     """
     if not isinstance(t, dict):
         raise TypeError(f"toan hang phai la dict, nhan duoc {type(t).__name__}")
+    if "hang" in t:
+        return pd.Series(float(t["hang"]), index=df.index)
+
+    try:
+        khoa = json.dumps(t, sort_keys=True, default=str)
+        nho = _nho_cua(df)
+    except Exception:
+        return _toan_hang_tinh(df, t)
+    cu = nho.get(khoa)
+    if cu is not None:
+        return cu.copy()
+    ra = _toan_hang_tinh(df, t)
+    if len(nho) < 4096:
+        nho[khoa] = ra
+    return ra.copy()
+
+
+#: id(df) -> {khoa toan hang: chuoi}. Muc bi xoa khi khung bi thu gom.
+_NHO_TOAN_HANG: dict[int, dict] = {}
+
+
+def _nho_cua(df: pd.DataFrame) -> dict:
+    k = id(df)
+    d = _NHO_TOAN_HANG.get(k)
+    if d is None:
+        d = _NHO_TOAN_HANG[k] = {}
+        weakref.finalize(df, _NHO_TOAN_HANG.pop, k, None)
+    return d
+
+
+def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
+    """Phan TINH THAT cua `toan_hang`. Xem giai thich o do."""
     if "hang" in t:
         return pd.Series(float(t["hang"]), index=df.index)
 

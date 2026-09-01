@@ -1,5 +1,5 @@
 {
- "luc": "2026-09-01 16:47:31",
+ "luc": "2026-09-01 18:37:44",
  "che_do": {
   "duong_cong": {
    "nhan": "DOC",
@@ -33,13 +33,42 @@
    "gia_tri": 0.7509,
    "doi_90_ngay_pct": 2.36,
    "ngay": "2026-08-31",
-   "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang"
+   "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang",
+   "y_nghia": "PROXY tu gia hai ETF, khong phai chenh loi suat. No lan ca rui ro ky han va dong tien vao ETF, nen co the lech voi `tin_dung_that` (BAMLH0A0HYM2) - luc lech thi tin ban THAT"
+  },
+  "chinh_sach_tien_te": {
+   "nhan": "GIU NGUYEN",
+   "gia_tri": 3.63,
+   "doi_180_ngay_diem": -0.01,
+   "quy_tac": "|doi lai suat quy lien bang trong 180 ngay| > 0,25 diem",
+   "y_nghia": "lap truong Fed. BOI CANH cho gia thuyet co dieu kien, khong phai tin hieu vao lenh"
+  },
+  "dieu_kien_tai_chinh": {
+   "nhan": "LONG HON TRUNG BINH",
+   "gia_tri": -0.566,
+   "quy_tac": "NFCI > 0 = chat hon trung binh lich su (chi so da chuan hoa)",
+   "y_nghia": "chi so tong hop 105 bien cua Chicago Fed - do dieu kien tai chinh TONG THE, khong suy ra tu gia mot tai san nao"
+  },
+  "thanh_khoan": {
+   "nhan": "DI NGANG",
+   "gia_tri": 6730912.0,
+   "doi_90_ngay_pct": 0.4,
+   "quy_tac": "|doi bang can doi Fed trong 90 ngay| > 1%",
+   "y_nghia": "thanh khoan he thong. Doc lam boi canh cho tai san rui ro"
+  },
+  "tin_dung_that": {
+   "nhan": "BINH THUONG",
+   "gia_tri": 2.6,
+   "doi_90_ngay_diem": -0.12,
+   "quy_tac": "chenh loi suat HY - kho bac; doi > 0,5 diem trong 90 ngay",
+   "y_nghia": "gia rui ro tin dung do THANG. Ban `tin_dung` (HYG/LQD) la proxy tu gia ETF, giu lai de doi chieu"
   },
   "dola": {
    "nhan": "ON DINH",
    "gia_tri": 99.4800033569336,
    "quy_tac": "|doi chi so dola 90 ngay| > 1 diem",
-   "doi_90_ngay": -0.05
+   "doi_90_ngay": -0.05,
+   "y_nghia": "DXY nang ve EUR (~58%). Dola manh len thuong siet tai san rui ro va hang hoa. Doi chieu voi DTWEXBGS (ro rong hon) truoc khi ket luan ve suc manh dola noi chung"
   }
  },
  "so_lieu": {
@@ -105,6 +134,24 @@
    "gia_a": 79.68399810791016,
    "gia_b": 106.125,
    "tuoi_ngay": 1,
+   "stale": false
+  },
+  "DFF": {
+   "ngay": "2026-08-28",
+   "gia_tri": 3.63,
+   "tuoi_ngay": 4,
+   "stale": false
+  },
+  "NFCI": {
+   "ngay": "2026-08-21",
+   "gia_tri": -0.566,
+   "tuoi_ngay": 11,
+   "stale": false
+  },
+  "BAMLH0A0HYM2": {
+   "ngay": "2026-08-28",
+   "gia_tri": 2.6,
+   "tuoi_ngay": 4,
    "stale": false
   },
   "VN_CPI": {

@@ -48,6 +48,7 @@ CACH LAM TANG LUC (theo thu tu de lam truoc):
 from __future__ import annotations
 
 import json
+import time
 import os
 import math
 from pathlib import Path
@@ -197,6 +198,11 @@ def duong_cong_luc(ma: str = "EURCAD", khung: str = "H4",
 MDE_CACHE = LAB_REPORTS / "mde_cap.json"
 
 
+#: Nho MDE trong tien trinh: khoa -> (luc, ket qua). Xem giai thich o `mde_cua`.
+_NHO_MDE: dict[str, tuple[float, dict]] = {}
+_TTL_NHO_MDE = 300.0
+
+
 def _doc_mde_cache() -> dict:
     try:
         return json.loads(MDE_CACHE.read_text(encoding="utf-8-sig"))
@@ -251,6 +257,22 @@ def mde_cua(ma: str, khung: str, lam_moi: bool = False) -> dict:
     """
     ma, khung = ma.upper(), khung.upper()
     khoa = f"{ma}|{khung}"
+
+    # NHO TRONG TIEN TRINH. Cache tren dia da co, nhung de tinh VAN TAY thi phai
+    # nap lai du lieu + dung lai mo hinh chi phi TRUOC khi tra cache duoc - tuc
+    # phan dat tien chay du cache trung. Do that (profile mot luot QUANTLAB
+    # 01/09): `mde_cua` duoc goi 1.667 lan trong mot luot 190 giay va ngon 31,4
+    # giay = 17% ca luot, trong khi chi co vai chuc cap (tai san, khung) khac
+    # nhau that su. Trong MOT luot du lieu khong doi, nen nho lai la dung.
+    # TTL ngan de mot luot dai (600 giay) van thay du lieu vua nap ve.
+    #
+    # Cung hinh dang voi loi `kho()` da sua 29/08 (42% thoi gian nam o nt.stat):
+    # cache dung cho nhung dat tien khong nam o cho ta nghi.
+    if not lam_moi:
+        _c = _NHO_MDE.get(khoa)
+        if _c and (time.time() - _c[0]) < _TTL_NHO_MDE:
+            return _c[1]
+
     cache = _doc_mde_cache()
     try:
         hold = DL.hai_nua(_nap_da_cat(ma, khung), 0.6)[1]
@@ -268,6 +290,7 @@ def mde_cua(ma: str, khung: str, lam_moi: bool = False) -> dict:
                f"|{round(cp.phi_nam_mua, 5)}|{round(cp.phi_nam_ban, 5)}|cp{CP.THE_HE}")
     cu = cache.get(khoa)
     if cu and not lam_moi and cu.get("van_tay") == van_tay:
+        _NHO_MDE[khoa] = (time.time(), cu)
         return cu
     r = duong_cong_luc(ma, khung)
     ra = {"ma": ma, "khung": khung, "so_bar": so_bar, "van_tay": van_tay,
@@ -276,6 +299,7 @@ def mde_cua(ma: str, khung: str, lam_moi: bool = False) -> dict:
           "spread_bps": round(cp.spread_frac_chung * 1e4, 3),
           "loi": r.get("loi"), "do_luc": SO.bay_gio()}
     _ghi_mde_cache(khoa, ra)
+    _NHO_MDE[khoa] = (time.time(), ra)
     return ra
 
 

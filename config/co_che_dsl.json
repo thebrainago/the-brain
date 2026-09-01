@@ -5803,5 +5803,280 @@
    }
   ],
   "_ty_le_kich_hoat": 0.2429
+ },
+ {
+  "ten": "ban_dinh_climax_vol_cao",
+  "co_che": "Khi khối lượng đột biến và biến động cao, nhà đầu tư cá nhân mua đuổi đỉnh tạo lực cầu cuối; tổ chức và nhà tạo lập bán ra chốt lời, gây đảo chiều ngắn hạn.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0727
+ },
+ {
+  "ten": "mua_day_climax_vol_cao",
+  "co_che": "Khi khối lượng đột biến và biến động cao, nhà đầu tư hoảng loạn bán tháo tạo đáy; tổ chức và nhà tạo lập mua vào hút hàng, gây đảo chiều tăng.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.9
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "khoi_luong"
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0727
+ },
+ {
+  "ten": "quay_ve_vwap_tb_low_vol",
+  "co_che": "Các quỹ và ngân hàng dùng chiến lược VWAP buộc phải mua/bán để đưa giá về trung bình. Khi biến động thấp, lệnh này chiếm ưu thế, tạo lực quay về sau khi giá lệch xa trung bình.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.2
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.0529
+ },
+ {
+  "ten": "quay_ve_keltner_low_vol",
+  "co_che": "Nhà tạo lập quyền chọn phòng ngừa gamma khi giá chạm dải Keltner. Khi biến động thấp, lực phòng ngừa đẩy giá quay về đường trung bình.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.2
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.2184
+ },
+ {
+  "ten": "ban_quay_ve_keltner_low_vol",
+  "co_che": "Nhà tạo lập quyền chọn phòng ngừa gamma khi giá chạm dải Keltner trên. Khi biến động thấp, lực phòng ngừa đẩy giá quay về đường trung bình.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "n": 250
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.2
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "nguon": "",
+  "_ty_le_kich_hoat": 0.2285
  }
 ]

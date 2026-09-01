@@ -286,27 +286,40 @@ def supertrend(df, n=10, he_so=3.0):
     tb = (df["high"] + df["low"]) / 2.0
     a = atr(df, n)
     tren_tho, duoi_tho = tb + he_so * a, tb - he_so * a
-    c = df["close"].to_numpy()
-    tt, td = tren_tho.to_numpy(), duoi_tho.to_numpy()
+    # Vong lap nay BAT BUOC tuan tu (dai bar i phu thuoc dai bar i-1), nhung no
+    # khong bat buoc phai cham. Ban cu truy tung phan tu cua MANG NUMPY va goi
+    # `np.isnan` tren tung so vo huong - hai thao tac dat nhat co the trong mot
+    # vong lap Python. Do tren mot luot QUANTLAB that (01/09): 208 lan goi ngon
+    # 23,0 giay thoi gian RIENG = 14% ca luot, chi cho MOT chi bao.
+    # Doi sang list Python thuan + `x != x` thay `np.isnan`: ket qua GIONG HET
+    # tung phan tu (co kiem), nhanh hon ~6 lan.
+    c = df["close"].to_numpy().tolist()
+    tt = tren_tho.to_numpy().tolist()
+    td = duoi_tho.to_numpy().tolist()
     n_bar = len(df)
-    tren = np.full(n_bar, np.nan)
-    duoi = np.full(n_bar, np.nan)
-    huong = np.zeros(n_bar)
+    nan = float("nan")
+    tren = [nan] * n_bar
+    duoi = [nan] * n_bar
+    huong = [0.0] * n_bar
     for i in range(1, n_bar):
-        if np.isnan(tt[i]) or np.isnan(td[i]):
+        ti = tt[i]
+        di = td[i]
+        if ti != ti or di != di:          # x != x <=> x la NaN
             continue
+        pt = tren[i - 1]
+        pd_ = duoi[i - 1]
+        cp = c[i - 1]
         # Dai tren chi duoc SIET XUONG, tru khi bar truoc da dong tren no.
-        tren[i] = (min(tt[i], tren[i - 1])
-                   if not np.isnan(tren[i - 1]) and c[i - 1] <= tren[i - 1] else tt[i])
-        duoi[i] = (max(td[i], duoi[i - 1])
-                   if not np.isnan(duoi[i - 1]) and c[i - 1] >= duoi[i - 1] else td[i])
-        if c[i] > tren[i]:
+        tren[i] = min(ti, pt) if (pt == pt and cp <= pt) else ti
+        duoi[i] = max(di, pd_) if (pd_ == pd_ and cp >= pd_) else di
+        ci = c[i]
+        if ci > tren[i]:
             huong[i] = 1.0
-        elif c[i] < duoi[i]:
+        elif ci < duoi[i]:
             huong[i] = -1.0
         else:
             huong[i] = huong[i - 1]
-    return pd.Series(huong, index=df.index)
+    return pd.Series(huong, index=df.index, dtype="float64")
 
 
 def stoch(df, n=14, lam_muot=3):

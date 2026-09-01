@@ -4,22 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi_nen.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
-- `HINH_DANG_VS_NULL_sau2500.log`: [hinh_dang_vs_null] 23 ung vien · 2500 null moi ung vien · tran 81 o · 6 luong
-- `supervisor_stdio.log`: 2026-08-31 23:01:54 EVO       ok           5.7s guard=job
-- `watchdog.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
-- git: 5e905fd hinh dang vs null: 368 ung vien da chay, va bang xep hang co mot cai bay
-
-### 2026-08-31 23:04:17 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5224, 0 phut), dieu_phoi.py (pid 10764, 78 phut), quantlab.py (pid 10124, 2 phut)
-- `dieu_khien_xa.log`: [dieu_khien_xa] dang nghe...
-- `dieu_phoi.log`: 2026-08-31 23:01:54 EVO       ok           5.7s guard=job
-- `dieu_phoi_nen.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
-- `HINH_DANG_VS_NULL_sau2500.log`: [hinh_dang_vs_null] 23 ung vien · 2500 null moi ung vien · tran 81 o · 6 luong
-- `supervisor_stdio.log`: 2026-08-31 23:01:54 EVO       ok           5.7s guard=job
-- `watchdog.log`: 2026-08-31 21:46:16 WATCHDOG khoi dong supervisor
-- git: 886c2a4 ban giao SONG + dieu khien XA: hai thu khong duoc phu thuoc vao agent
 
 ### 2026-08-31 23:11:41 — TAT MAY theo lenh chu du an. Luot 2500 null moi xong 2/23 - chay tiep bang: b hinh-dang --ma <doc reports/_shortlist_hinh_dang.txt> --null 2500 --tran-o 81 --ra sau2500 --tiep
 
@@ -404,3 +388,19 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `supervisor_stdio.log`: 2026-09-01 16:42:29 === dung dieu phoi ===
 - `watchdog.log`: 2026-09-01 16:42:29 WATCHDOG watchdog dung
 - git: abd0f57 ban giao 01/09: dien doan tom tat phien + muc 0 (do luc truoc khi tieu suat FDR)
+### 2026-09-01 17:38:33 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16632, 0 phut), dieu_khien_xa.py (pid 3308, 633 phut), dieu_phoi.py (pid 11388, 0 phut), quantlab.py (pid 11184, 0 phut), seeker.py (pid 7108, 0 phut)
+- `dieu_phoi.log`: 2026-09-01 17:37:43 BANKER    ok           0.7s guard=job
+- `dieu_phoi_nen.log`: [Tue 09/01/2026 16:42:30.07] watchdog thoat (ma 0)
+- `supervisor_stdio.log`: 2026-09-01 16:42:29 === dung dieu phoi ===
+- `watchdog.log`: 2026-09-01 16:42:29 WATCHDOG watchdog dung
+- git: abe0ca5 BANKER: noi lai FRED (12 seri chet 17 ngay vi User-Agent cua chinh ta)
+### 2026-09-01 17:55:32 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1780, 0 phut), dieu_khien_xa.py (pid 3308, 650 phut), dieu_phoi.py (pid 11388, 17 phut), quantlab.py (pid 9416, 5 phut)
+- `dieu_phoi.log`: 2026-09-01 17:52:47 EVO       ok           4.2s guard=job
+- `dieu_phoi_nen.log`: [Tue 09/01/2026 16:42:30.07] watchdog thoat (ma 0)
+- `supervisor_stdio.log`: 2026-09-01 16:42:29 === dung dieu phoi ===
+- `watchdog.log`: 2026-09-01 16:42:29 WATCHDOG watchdog dung
+- git: abe0ca5 BANKER: noi lai FRED (12 seri chet 17 ngay vi User-Agent cua chinh ta)
