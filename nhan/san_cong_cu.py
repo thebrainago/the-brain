@@ -482,6 +482,153 @@ HANG_DOI_DOC = [
 ]
 
 
+#: File trong repo dang doc duoc va dang gia. Bo qua anh, binary, khoa.
+_DUOI_DOC = (".py", ".md", ".pine", ".mq5", ".mq4", ".txt", ".rst", ".ipynb",
+             ".pinescript", ".js", ".ts")
+#: Tran kich thuoc MOT file. Mot file 400 KB khong phai chien luoc.
+_TRAN_FILE = 300_000
+#: Bao nhieu file lay ve moi kho. Muc dich la DOI CHIEU, khong phai nhan ban.
+_SO_FILE = 6
+
+
+def tai_ve_doc(gioi_han: int = 3, ngan_sach_giay: int = 180,
+               chi_cho_doc: bool = True) -> dict:
+    """TAI ma cua cong cu ngoai ve, va dua thang vao DUONG DOC cua he.
+
+    Truoc 01/09 bo san chi TIM: no ghi ten kho vao `reports/cong_cu.json` roi
+    dung. Chu du an chi ra day la nua viec - "tim duoc thi tai ve tich hop".
+
+    CACH TICH HOP, va vi sao khong phai `pip install`:
+      Ma tai ve duoc luu nhu MOT BAN DOC (`tai_lieu` + `noi_dung`, nguon
+      `cong_cu_ngoai`), roi di qua dung nhung bo doc da co - `doc_ma` rut co
+      che, `thu_hoi_thanh_phan` rut toan hang. Tuc cong cu ngoai duoc doi xu y
+      het mot file .mq5 hay mot Pine script tai ve tu MQL5.
+
+      Do la ranh gioi cua ca du an (`ma_nguon.py` rang buoc 1, nhac lai o
+      `doc_ma.py` va `thu_hoi_thanh_phan.py`): **khong bao gio chay ma tai ve**.
+      Cai ta lay la KIEN THUC trong ma - mot cong thuc, mot nguong, mot cach
+      dung chi bao - chu khong phai ban than chuong trinh. Cong cu ngoai lam
+      ban thi nghiem, khong bao gio lam ong toa.
+    """
+    import time as _t
+    t0 = _t.time()
+    kho = doc_kho()
+    ung = [(k, v) for k, v in kho.items()
+           if str(v.get("url") or "").startswith("https://github.com/")
+           and v.get("trang_thai") != "DA_TAI"
+           and (not chi_cho_doc or v.get("trang_thai") == "CHO_DOC")]
+    if not ung:                       # khong co CHO_DOC thi lay diem cao nhat
+        ung = sorted(
+            [(k, v) for k, v in kho.items()
+             if str(v.get("url") or "").startswith("https://github.com/")
+             and v.get("trang_thai") != "DA_TAI"],
+            key=lambda x: -(x[1].get("diem") or 0))
+    bao = {"da_tai": 0, "file": 0, "ky_tu": 0, "kho": [], "loi": {}}
+    for khoa, v in ung:
+        if bao["da_tai"] >= gioi_han or _t.time() - t0 > ngan_sach_giay:
+            break
+        ten = str(v.get("full_name") or "")
+        if not ten:
+            m = re.search(r"github\.com/([^/]+/[^/#?]+)", str(v.get("url") or ""))
+            ten = m.group(1) if m else ""
+        if not ten:
+            continue
+        try:
+            ds = _file_trong_repo(ten)
+        except Exception as e:
+            bao["loi"][f"{type(e).__name__}"] = bao["loi"].get(f"{type(e).__name__}", 0) + 1
+            continue
+        n_file, n_ky = 0, 0
+        for f in ds[:_SO_FILE]:
+            vb = _lay_van_ban(f["download_url"])
+            if not vb or len(vb) > _TRAN_FILE:
+                continue
+            _ghi_ban_doc_cong_cu(ten, f["path"], f["html_url"], vb)
+            n_file += 1
+            n_ky += len(vb)
+        v["trang_thai"] = "DA_TAI"
+        v["tai_luc"] = SO.bay_gio()
+        v["so_file_tai"] = n_file
+        bao["da_tai"] += 1
+        bao["file"] += n_file
+        bao["ky_tu"] += n_ky
+        bao["kho"].append({"ten": ten, "file": n_file, "ky_tu": n_ky})
+    luu_kho(kho)
+    return bao
+
+
+def _file_trong_repo(full_name: str) -> list[dict]:
+    """File o MUC GOC cua repo, loc theo duoi doc duoc. Khong de quy.
+
+    Khong di sau: muc dich la doi chieu cach ho lam, khong phai sao chep ca
+    kho. Muc goc thuong da co README va file chinh.
+    """
+    import requests
+    r = requests.get(f"https://api.github.com/repos/{full_name}/contents",
+                     headers={"Accept": "application/vnd.github+json",
+                              "User-Agent": "TheBrainResearch/0.1"}, timeout=25)
+    if r.status_code != 200:
+        return []
+    def _loc(ds):
+        return [x for x in (ds or [])
+                if x.get("type") == "file"
+                and str(x.get("name", "")).lower().endswith(_DUOI_DOC)
+                and (x.get("size") or 0) <= _TRAN_FILE]
+
+    goc = r.json() or []
+    ra = _loc(goc)
+    # XUONG MOT TANG khi muc goc chi co tai lieu. Do that 01/09:
+    # `mr-easy/streaming_indicators` o goc chi co README/LICENSE/TODO, con ca
+    # thu vien chi bao nam trong mot thu muc con - lay dung muc goc thi tuong la
+    # "kho nay khong co ma nao". Mot tang la du: thu vien Python dat ma trong
+    # thu muc cung ten goi, `src/`, hay `lib/`.
+    if len([x for x in ra if not x["name"].lower().endswith((".md", ".txt", ".rst"))]) < 2:
+        thu_muc = [x for x in goc if x.get("type") == "dir"
+                   and not x["name"].startswith((".", "test", "doc", "example"))]
+        for d in thu_muc[:3]:
+            try:
+                r2 = requests.get(d["url"], timeout=25,
+                                  headers={"Accept": "application/vnd.github+json",
+                                           "User-Agent": "TheBrainResearch/0.1"})
+                if r2.status_code == 200:
+                    ra += _loc(r2.json())
+            except Exception:
+                continue
+    # README truoc: no giai thich CACH DUNG, thu ta khong doc duoc tu ma.
+    ra.sort(key=lambda x: (0 if "readme" in x["name"].lower() else 1,
+                           -(x.get("size") or 0)))
+    return ra
+
+
+def _lay_van_ban(url: str) -> str | None:
+    import requests
+    try:
+        r = requests.get(url, timeout=25,
+                         headers={"User-Agent": "TheBrainResearch/0.1"})
+        return r.text if r.status_code == 200 else None
+    except Exception:
+        return None
+
+
+def _ghi_ban_doc_cong_cu(repo: str, duong: str, url: str, vb: str) -> None:
+    """Ghi mot file cua repo thanh mot BAN DOC binh thuong cua he."""
+    vt = SO.van_tay(url or f"{repo}/{duong}")
+    with SO.ket_noi() as cn:
+        cn.execute(
+            "INSERT OR IGNORE INTO tai_lieu(van_tay,nguon,loai,tieu_de,url,"
+            "tom_tat,tu_khoa,diem,luc) VALUES(?,?,?,?,?,?,?,?,?)",
+            (vt, "cong_cu_ngoai", "ma_nguon", f"[{repo}] {duong}"[:300], url,
+             f"file trong kho ma ngoai {repo}", "A", 3.0, SO.bay_gio()))
+        r = cn.execute("SELECT id FROM tai_lieu WHERE van_tay=?", (vt,)).fetchone()
+        if not r:
+            return
+        cn.execute(
+            "INSERT OR IGNORE INTO noi_dung(tai_lieu_id,van_tay,url,kieu,cach,"
+            "so_ky_tu,so_ky_tu_goc,van_ban,luc) VALUES(?,?,?,?,'github_raw',?,?,?,?)",
+            (r["id"], SO.van_tay("nd", url), url, "ma_nguon",
+             len(vb), len(vb), vb, SO.bay_gio()))
+
+
 def xep_hang_doc(kho: dict | None = None) -> list[str]:
     """Danh dau cac kho ma trong HANG_DOI_DOC la CHO_DOC trong kho cong cu.
 

@@ -1378,6 +1378,112 @@ def _diem_nang_suat() -> dict:
     return {ng: (nhan.get(ng, 0) + 1) / (n + 2) for ng, n in doc.items()}
 
 
+def _nguyen_nhan(url: str, loi: str) -> str:
+    u = (url or "").lower()
+    l = (loi or "").lower()
+    if "khong co ban mo" in l or "paywall" in l:
+        return "paywall_khong_co_ban_mo"
+    if "openalex http" in l:
+        return "doi_khong_tra_cuu_duoc"
+    if "khong_mo_cdp" in l:
+        return "can_trinh_duyet_nhung_cdp_tat"
+    if any(k in l for k in ("sslerror", "ssl")):
+        return "sni_bi_loc"
+    if "429" in l:
+        return "bi_han_muc_429"
+    if "403" in l:
+        return "bi_tu_choi_403"
+    if any(k in l for k in ("timeout", "connectionerror", "connection")):
+        return "het_gio_hoac_mat_ket_noi"
+    if "name_not_resolved" in l or "dns" in l:
+        return "dns_bi_chan"
+    if "t.me" in u or "telegram" in u:
+        return "can_trinh_duyet_nhung_cdp_tat"
+    return "khong_boc_duoc"
+
+
+def thu_hoi_khong_doc_duoc(gioi_han: int = 12, ngan_sach_giay: int = 120) -> dict:
+    """Thu lai cac ban `khong_doc_duoc`, ghi NGUYEN NHAN THAT cho ban con lai.
+
+    Mot ban thu hoi duoc se duoc GHI DE tai cho (cung `van_tay`), nen no chay
+    tiep vao tang artifact nhu moi ban doc khac - khong sinh ban trung.
+
+    Ban khong thu hoi duoc KHONG bi xoa va KHONG bi khoa: `ket_boc` giu nguyen
+    nhan do duoc, de lan sau con biet nen sua cai gi. Loi MOI TRUONG (CDP tat,
+    mat mang) de nguyen cho lan sau, y het `doc_toan_van`.
+    """
+    t0 = time.time()
+    ds = SO.nhieu(
+        "SELECT n.id, n.van_tay, n.url, n.tai_lieu_id, t.tieu_de, t.nguon "
+        "FROM noi_dung n LEFT JOIN tai_lieu t ON t.id=n.tai_lieu_id "
+        "WHERE n.kieu='khong_doc_duoc' AND (n.ket_boc IS NULL OR n.ket_boc "
+        "NOT LIKE 'nguyen_nhan:%') AND n.url LIKE 'http%' "
+        "ORDER BY n.id LIMIT ?", max(int(gioi_han) * 3, 1))
+    bao = {"da_thu": 0, "thu_hoi_duoc": 0, "ky_tu": 0, "nguyen_nhan": {},
+           "artifact_moi": 0}
+    for r in ds:
+        if bao["da_thu"] >= gioi_han or time.time() - t0 > ngan_sach_giay:
+            break
+        bao["da_thu"] += 1
+        try:
+            kq = TV.doc(r["url"])
+        except Exception as e:
+            kq = None
+            TV.LOI_CUOI.update({"url": r["url"], "loi": f"{type(e).__name__}: {e}"})
+        if not kq:
+            loi = str((TV.LOI_CUOI or {}).get("loi") or "")
+            nn = _nguyen_nhan(r["url"], loi)
+            bao["nguyen_nhan"][nn] = bao["nguyen_nhan"].get(nn, 0) + 1
+            if TV.loi_tam_thoi():
+                # MOI TRUONG, khong phai thuoc tinh cua dia chi: de nguyen cho
+                # lan sau, khong dong dau nguyen nhan.
+                continue
+            SO.chay("UPDATE noi_dung SET ket_boc=? WHERE id=?",
+                    f"nguyen_nhan:{nn} | {loi[:160]}", r["id"])
+            continue
+        # THU HOI DUOC: nang chinh ban ghi cu len thanh ban doc that.
+        SO.chay(
+            "UPDATE noi_dung SET kieu=?, cach=?, so_ky_tu=?, so_ky_tu_goc=?, "
+            "van_ban=?, luc=?, da_boc=0, ket_boc=? WHERE id=?",
+            kq["kieu"], kq["cach"], kq["so_ky_tu"],
+            kq.get("so_ky_tu_goc", kq["so_ky_tu"]), kq["van_ban"], SO.bay_gio(),
+            "thu_hoi_duoc", r["id"])
+        bao["thu_hoi_duoc"] += 1
+        bao["ky_tu"] += kq["so_ky_tu"]
+        try:
+            _, moi = _noi_dung_artifact(r["van_tay"])
+            bao["artifact_moi"] += int(moi)
+        except Exception as e:
+            SO.ghi_chi_so("seeker_artifact_loi", 1,
+                          {"url": str(r["url"])[:120], "loi": str(e)[:120]})
+    con_lai = SO.mot("SELECT COUNT(*) n FROM noi_dung WHERE kieu='khong_doc_duoc'")
+    bao["con_lai"] = con_lai["n"] if con_lai else None
+    if bao["da_thu"]:
+        SO.ghi_chi_so("seeker_thu_hoi", bao["thu_hoi_duoc"], bao)
+    return bao
+
+
+# ======================================================================
+# TANG 3: BOC. Van ban -> KHANG DINH co so + CO CHE kiem dinh duoc.
+# ======================================================================
+HE_THONG_BOC = """Ban la tang BOC cua mot phong lab dinh luong. Ban duoc dua NOI DUNG
+THAT cua mot tai lieu (toan van bai bao, ma nguon chien luoc, hoac bai dien dan).
+
+Viec cua ban KHONG phai tom tat. Viec cua ban la rut ra thu KIEM DINH DUOC:
+mot khang dinh co the SAI, va neu duoc thi mot co che dien dat bang ngu phap.
+
+Ky luat bat buoc:
+- CHI dung nhung gi CO TRONG VAN BAN. Moi khang dinh phai kem `trich_dan` la
+  cau/doan NGUYEN VAN lay tu van ban. Khong co trich dan = bia dat.
+- Con so cong bo trong tai lieu la CUA HO, khong phai cua ta. Ghi lai de sau
+  doi chieu khi tai lap, khong duoc coi la bang chung.
+- Neu tai lieu khong chua co che giao dich nao (vi du: mot thu vien backtest,
+  mot bai ve ha tang) thi noi thang: `khang_dinh: []`. Do la cau tra loi tot.
+- Neu co co che nhung NGU PHAP khong dien dat duoc, viet ro thieu toan hang gi
+  vao `khong_dien_dat_duoc`. Do la cach ngu phap duoc mo rong."""
+
+
+
 def _doc_dinh_tuyen(t: dict) -> dict | None:
     """Doc mot tai lieu, DINH TUYEN theo dia chi thay vi luon dung bo doc chung.
 

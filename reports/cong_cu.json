@@ -151,11 +151,13 @@
   "url": "https://github.com/quantskills/skill-backtest-overfit",
   "nguon": "github",
   "thay_luc": "2026-08-30 12:25:13",
-  "trang_thai": "CHO_DOC",
+  "trang_thai": "DA_TAI",
   "nguon_phat_hien": "nhat_doc_duong",
   "doi_chieu_voi": "nhan/do_luc.py",
   "vi_sao_doc": "Minimum Track Record Length - do 'bao nhieu quan sat moi du ket luan', dung bai toan MDE cua ta",
-  "xep_hang_luc": "2026-08-31 14:43:06"
+  "xep_hang_luc": "2026-08-31 14:43:06",
+  "tai_luc": "2026-09-01 14:44:43",
+  "so_file_tai": 3
  },
  "doc:engine_backtest:https://financial-hacker.com/the-autotune-filter/": {
   "nhu_cau": "engine_backtest",
@@ -370,11 +372,13 @@
   "url": "https://github.com/OutOfSampleLab/oos-lab",
   "nguon": "github",
   "thay_luc": "2026-08-30 15:14:45",
-  "trang_thai": "CHO_DOC",
+  "trang_thai": "DA_TAI",
   "nguon_phat_hien": "nhat_doc_duong",
   "doi_chieu_voi": "nhan/cong.py, nhan/do_luc.py",
   "vi_sao_doc": "haircut Sharpe - doi chieu voi nguong FDR LORD ta tu viet",
-  "xep_hang_luc": "2026-08-31 14:43:06"
+  "xep_hang_luc": "2026-08-31 14:43:06",
+  "tai_luc": "2026-09-01 14:44:57",
+  "so_file_tai": 2
  },
  "doc:kiem_dinh_thong_ke:https://github.com/jonass17/phantomguard": {
   "nhu_cau": "kiem_dinh_thong_ke",
@@ -445,11 +449,13 @@
   "url": "https://github.com/0scarito/deflated-alpha",
   "nguon": "github",
   "thay_luc": "2026-08-30 15:16:12",
-  "trang_thai": "CHO_DOC",
+  "trang_thai": "DA_TAI",
   "nguon_phat_hien": "nhat_doc_duong",
   "doi_chieu_voi": "nhan/cong.py",
   "vi_sao_doc": "deflated Sharpe - chieu LUC cua hieu chuan hai chieu",
-  "xep_hang_luc": "2026-08-31 14:43:06"
+  "xep_hang_luc": "2026-08-31 14:43:06",
+  "tai_luc": "2026-09-01 14:45:11",
+  "so_file_tai": 3
  },
  "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2607.19453v1": {
   "nhu_cau": "kiem_dinh_thong_ke",
@@ -496,11 +502,13 @@
   "url": "https://github.com/quantopian/zipline",
   "nguon": "github",
   "thay_luc": "2026-08-30 16:39:52",
-  "trang_thai": "CHO_DOC",
+  "trang_thai": "DA_TAI",
   "nguon_phat_hien": "nhat_doc_duong",
   "doi_chieu_voi": "nhan/chi_phi.py, nhan/mo_phong.py",
   "vi_sao_doc": "mo hinh truot gia + phi giao dich cua mot engine 20.041 sao; mo hinh chi phi cua ta tu viet va la thu quyet dinh ca du an",
-  "xep_hang_luc": "2026-08-31 14:43:06"
+  "xep_hang_luc": "2026-08-31 14:43:06",
+  "tai_luc": "2026-09-01 14:46:49",
+  "so_file_tai": 4
  },
  "doc:phuong_phap_chong_qua_khop:https://github.com/quantskills/skill-backtest-overfit": {
   "nhu_cau": "phuong_phap_chong_qua_khop",
@@ -1490,5 +1498,127 @@
    "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
    "lan day cuoi 9999 ngay truoc - co the da bo"
   ]
+ },
+ "SafeHarbor: Defining Precise Decision Boundaries via Hierarchical Memory-Augmented Guardrail for LLM Agent Safety": {
+  "full_name": "SafeHarbor: Defining Precise Decision Boundaries via Hierarchical Memory-Augmented Guardrail for LLM Agent Safety",
+  "url": "http://arxiv.org/abs/2605.05704v3",
+  "mo_ta": "Recent advances in foundation models have transformed LLMs from passive conversational systems into autonomous agents capable of reasoning and tool execution. While these capabilities unlock substantial practical value, ",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2026-05-07"
+ },
+ "Real-Time Structural Detection for Indoor Navigation from 3D LiDAR Using Bird's-Eye-View Images": {
+  "full_name": "Real-Time Structural Detection for Indoor Navigation from 3D LiDAR Using Bird's-Eye-View Images",
+  "url": "http://arxiv.org/abs/2603.19830v2",
+  "mo_ta": "Efficient structural perception is essential for mapping and autonomous navigation on resource-constrained robots. Existing 3D methods are computationally prohibitive, while traditional 2D geometric approaches lack robus",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2026-03-20"
+ },
+ "SfMamba: Efficient Source-Free Domain Adaptation via Selective Scan Modeling": {
+  "full_name": "SfMamba: Efficient Source-Free Domain Adaptation via Selective Scan Modeling",
+  "url": "http://arxiv.org/abs/2601.08608v1",
+  "mo_ta": "Source-free domain adaptation (SFDA) tackles the critical challenge of adapting source-pretrained models to unlabeled target domains without access to source data, overcoming data privacy and storage limitations in real-",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2026-01-13"
+ },
+ "Kinetic modelling of the CO2 capture and utilisation on NiRu-Ca/Al dual function material via parameter estimation": {
+  "full_name": "Kinetic modelling of the CO2 capture and utilisation on NiRu-Ca/Al dual function material via parameter estimation",
+  "url": "http://arxiv.org/abs/2510.12439v1",
+  "mo_ta": "This study presents a detailed, open-source kinetic modelling computational framework for CO2 capture and utilisation using a newly formulated dual-function material (DFM) comprising 15 wt% Ni, 1 wt% Ru, and 10 wt% CaO s",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2025-10-14"
+ },
+ "DELM: a Python toolkit for Data Extraction with Language Models": {
+  "full_name": "DELM: a Python toolkit for Data Extraction with Language Models",
+  "url": "http://arxiv.org/abs/2509.20617v1",
+  "mo_ta": "Large Language Models (LLMs) have become powerful tools for annotating unstructured data. However, most existing workflows rely on ad hoc scripts, making reproducibility, robustness, and systematic evaluation difficult. ",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2025-09-24"
+ },
+ "Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study": {
+  "full_name": "Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study",
+  "url": "http://arxiv.org/abs/2505.16136v1",
+  "mo_ta": "This study introduces an interpretable machine learning (ML) framework to extract macroeconomic alpha from global news sentiment. We process the Global Database of Events, Language, and Tone (GDELT) Project's worldwide n",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2025-05-22"
+ },
+ "Aggregating empirical evidence from data strategy studies: a case on model quantization": {
+  "full_name": "Aggregating empirical evidence from data strategy studies: a case on model quantization",
+  "url": "http://arxiv.org/abs/2505.00816v1",
+  "mo_ta": "Background: As empirical software engineering evolves, more studies adopt data strategies$-$approaches that investigate digital artifacts such as models, source code, or system logs rather than relying on human subjects.",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2025-05-01"
+ },
+ "A Novel Incremental Learning Driven Instance Segmentation Framework to Recognize Highly Cluttered Instances of the Contraband Item": {
+  "full_name": "A Novel Incremental Learning Driven Instance Segmentation Framework to Recognize Highly Cluttered Instances of the Contraband Item",
+  "url": "http://arxiv.org/abs/2201.02560v2",
+  "mo_ta": "Screening cluttered and occluded contraband items from baggage X-ray scans is a cumbersome task even for the expert security staff. This paper presents a novel strategy that extends a conventional encoder-decoder archite",
+  "ngon_ngu": null,
+  "nhu_cau": "doc_ma_thanh_chien_luoc",
+  "truy_van": "trading strategy extraction source code",
+  "loai": "bai_bao",
+  "thay_luc": "2026-09-01 13:05:39",
+  "trang_thai": "MOI",
+  "diem": null,
+  "canh_bao": [],
+  "ngay": "2022-01-07"
+ },
+ "mr-easy/streaming_indicators": {
+  "full_name": "mr-easy/streaming_indicators",
+  "url": "https://github.com/mr-easy/streaming_indicators",
+  "nhu_cau": "toan_tu_co_nho",
+  "truy_van": "supertrend indicator python",
+  "mo_ta": "chi bao tinh theo dong, co trang thai",
+  "trang_thai": "CHO_DOC",
+  "diem": 90,
+  "nguon": "github"
  }
 }
