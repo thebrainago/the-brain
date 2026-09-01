@@ -86,11 +86,23 @@ _MQL = {
 #: Toan hang ngu phap hien co (`nhan/ngu_phap.py::toan_hang`). Cai gi khong nam
 #: trong day thi rut ve duoc nhung CHUA dien dat duoc - va do la thong tin can
 #: bao chu khong phai ly do de vut.
+#: Cap nhat 01/09 sau khi them toan hang. Ba nhom:
+#:  - san co tu truoc
+#:  - THEM MOI: wma, smma, cci, stochastic, obv, adx, tuong_quan, phuong_sai,
+#:    tuyen_tinh - chon theo SO LAN do duoc trong ma that, khong theo cam giac
+#:  - GHEP DUOC ma khong can toan hang rieng: `macd` = tuyen_tinh([ema_nhanh,
+#:    ema_cham], [1,-1]) · `bollinger` = tuyen_tinh([tb, do_lech], [1, ±k]) ·
+#:    `dong_luong` = `doi`. Ba cai nay cong 186 lan xuat hien ma khong ton mot
+#:    dong trinh thong dich nao - chung tung bi cham "khong dien dat duoc" chi
+#:    vi bang nay chua duoc cap nhat sau khi `tuyen_tinh` ra doi.
 _DIEN_DAT_DUOC = {"gia", "rsi", "ibs", "atr", "ema", "sma", "bien_do",
                   "than_nen", "khoi_luong", "gio", "ngay_trong_tuan",
                   "ngay_trong_thang", "thang", "tb", "do_lech", "zscore",
                   "phan_vi", "doi", "doi_pct", "tre", "cao_nhat", "thap_nhat",
-                  "tuyet_doi"}
+                  "tuyet_doi",
+                  "wma", "smma", "cci", "stochastic", "obv", "adx",
+                  "tuong_quan", "phuong_sai", "tuyen_tinh",
+                  "macd", "bollinger", "dong_luong"}
 
 #: `rsi` cua ngu phap KHONG nhan `cot` (luon tinh tren close); `ema`/`sma` thi
 #: co. Do la mot khac biet that trong `toan_hang()`, khong phai suy doan.

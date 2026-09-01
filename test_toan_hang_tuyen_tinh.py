@@ -96,3 +96,71 @@ class KiemKhaiBao(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+GIA_H = {"chi_bao": "gia", "cot": "high"}
+
+MOI = {
+    "wma": {"chi_bao": "wma", "n": 10, "cot": "close"},
+    "smma": {"chi_bao": "smma", "n": 14, "cot": "close"},
+    "phuong_sai": {"chi_bao": "phuong_sai", "cua": GIA, "n": 20},
+    "cci": {"chi_bao": "cci", "n": 20},
+    "stochastic": {"chi_bao": "stochastic", "n": 14},
+    "obv": {"chi_bao": "obv"},
+    "adx": {"chi_bao": "adx", "n": 14},
+    "tuong_quan": {"chi_bao": "tuong_quan", "n": 50,
+                   "toan_hang": [GIA, {"chi_bao": "ema", "n": 20, "cot": "close"}]},
+}
+
+
+class ToanHangMoi(unittest.TestCase):
+    """Chin toan hang them 01/09, chon theo SO LAN do duoc trong ma that."""
+
+    def setUp(self):
+        self.df = _khung(600)
+
+    def test_tat_ca_tinh_duoc_va_dung_do_dai(self):
+        for ten, t in MOI.items():
+            x = NP.toan_hang(self.df, t)
+            self.assertEqual(len(x), len(self.df), ten)
+            self.assertTrue(x.notna().any(), ten)
+
+    def test_adx_trong_khoang_0_100(self):
+        x = NP.toan_hang(self.df, MOI["adx"]).dropna()
+        self.assertTrue((x >= -1e-9).all() and (x <= 100 + 1e-9).all())
+
+    def test_stochastic_trong_khoang_0_100(self):
+        x = NP.toan_hang(self.df, MOI["stochastic"]).dropna()
+        self.assertTrue((x >= -1e-9).all() and (x <= 100 + 1e-9).all())
+
+    def test_tuong_quan_trong_khoang_am1_1(self):
+        x = NP.toan_hang(self.df, MOI["tuong_quan"]).dropna()
+        self.assertTrue((x >= -1.000001).all() and (x <= 1.000001).all())
+
+    def test_phuong_sai_bang_binh_phuong_do_lech(self):
+        a = NP.toan_hang(self.df, MOI["phuong_sai"])
+        b = NP.toan_hang(self.df, {"chi_bao": "do_lech", "cua": GIA, "n": 20})
+        np.testing.assert_allclose(a.dropna(), (b ** 2).dropna(), rtol=1e-10)
+
+    def test_wma_khop_cong_thuc_trong_so(self):
+        x = NP.toan_hang(self.df, MOI["wma"])
+        c = self.df["close"].astype(float)
+        w = np.arange(1, 11, dtype=float)
+        mong = c.rolling(10).apply(lambda v: float(np.dot(v, w) / w.sum()), raw=True)
+        np.testing.assert_allclose(x.dropna(), mong.dropna(), rtol=1e-12)
+
+    def test_tuong_quan_doi_HAI_toan_hang(self):
+        with self.assertRaises(KeyError):
+            NP.toan_hang(self.df, {"chi_bao": "tuong_quan", "n": 20,
+                                   "toan_hang": [GIA]})
+
+    def test_KHONG_toan_hang_moi_nao_nhin_truoc(self):
+        """Rang buoc thoi gian cua ca ngu phap - kiem tung cai mot."""
+        d2 = self.df.copy()
+        d2.iloc[-1, :] = d2.iloc[-1, :] * 1.5
+        for ten, t in MOI.items():
+            a = NP.toan_hang(self.df, t).iloc[:-1]
+            b = NP.toan_hang(d2, t).iloc[:-1]
+            m = a.notna() & b.notna()
+            np.testing.assert_allclose(a[m], b[m], rtol=1e-9,
+                                       err_msg=f"{ten} nhin truoc")

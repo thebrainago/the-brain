@@ -150,6 +150,55 @@ def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
             tong = phan if tong is None else tong + phan
         return tong + float(t.get("cong_them", 0.0))
 
+    # --- CHI BAO MUC KHUNG: can ca OHLC, khong tinh tu mot toan hang con ---
+    #
+    # Them 01/09. Danh sach nay KHONG phai doan: no la thu tu do duoc tu ma that
+    # (`thu_hoi_thanh_phan.toan_hang_con_thieu`), xep theo so lan nguoi viet bot
+    # thuc su dung. Moi cai them vao day mo khoa mot so chien luoc dem duoc.
+    if cb == "wma":                       # 56 lan
+        s = _cot(df, str(t.get("cot", "close")).lower())
+        w = np.arange(1, n + 1, dtype=float)
+        return s.rolling(n).apply(lambda x: float(np.dot(x, w) / w.sum()), raw=True)
+    if cb == "smma":                      # 46 lan - RMA cua Wilder, dung trong ADX/RSI
+        s = _cot(df, str(t.get("cot", "close")).lower())
+        return s.ewm(alpha=1.0 / max(n, 1), adjust=False).mean()
+    if cb == "cci":                       # 33 lan
+        tp = (_cot(df, "high") + _cot(df, "low") + _cot(df, "close")) / 3.0
+        tb_ = tp.rolling(n).mean()
+        mad = tp.rolling(n).apply(
+            lambda x: float(np.mean(np.abs(x - x.mean()))), raw=True)
+        return (tp - tb_) / (0.015 * mad.replace(0, np.nan))
+    if cb == "stochastic":                # 20 lan
+        thap = _cot(df, "low").rolling(n).min()
+        cao = _cot(df, "high").rolling(n).max()
+        return 100.0 * (_cot(df, "close") - thap) / (cao - thap).replace(0, np.nan)
+    if cb == "obv":                       # 29 lan
+        kl = (_cot(df, "tick_volume") if "tick_volume" in df.columns
+              else pd.Series(1.0, index=df.index))
+        return (np.sign(_cot(df, "close").diff().fillna(0.0)) * kl).cumsum()
+    if cb == "adx":                       # 50 lan - Wilder
+        h, l, c = _cot(df, "high"), _cot(df, "low"), _cot(df, "close")
+        len_h, len_l = h.diff(), -l.diff()
+        dm_duong = ((len_h > len_l) & (len_h > 0)) * len_h.clip(lower=0)
+        dm_am = ((len_l > len_h) & (len_l > 0)) * len_l.clip(lower=0)
+        tr = pd.concat([h - l, (h - c.shift(1)).abs(),
+                        (l - c.shift(1)).abs()], axis=1).max(axis=1)
+        a = 1.0 / max(n, 1)
+        atr_ = tr.ewm(alpha=a, adjust=False).mean().replace(0, np.nan)
+        di_d = 100.0 * dm_duong.ewm(alpha=a, adjust=False).mean() / atr_
+        di_a = 100.0 * dm_am.ewm(alpha=a, adjust=False).mean() / atr_
+        dx = 100.0 * (di_d - di_a).abs() / (di_d + di_a).replace(0, np.nan)
+        return dx.ewm(alpha=a, adjust=False).mean()
+
+    # --- TUONG QUAN TRUOT giua HAI toan hang (120 lan - nhieu nhat) ---
+    if cb == "tuong_quan":
+        ds = t.get("toan_hang") or []
+        if not isinstance(ds, list) or len(ds) != 2:
+            raise KeyError("'tuong_quan' can dung HAI toan hang trong 'toan_hang'")
+        a = toan_hang(df, ds[0])
+        b = toan_hang(df, ds[1])
+        return a.rolling(n).corr(b)
+
     # --- toan tu BIEN DOI: nhan mot toan hang con ---
     con = t.get("cua")
     if con is None:
@@ -159,6 +208,8 @@ def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
         return x.rolling(n).mean()
     if cb == "do_lech":
         return x.rolling(n).std()
+    if cb == "phuong_sai":                 # 72 lan trong ma that
+        return x.rolling(n).var()
     if cb == "zscore":
         sd = x.rolling(n).std()
         return (x - x.rolling(n).mean()) / sd.replace(0, np.nan)
