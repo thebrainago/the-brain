@@ -124,6 +124,32 @@ def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
             return khung.sum(axis=1)
         return khung.max(axis=1) if cb == "cao_nhat_cua_cac" else khung.min(axis=1)
 
+    # --- TO HOP TUYEN TINH: sum(he_so[i] * toan_hang[i]) ---
+    #
+    # Them 01/09. Vi sao can: bo doc ma rut duoc guard cua `strategy.entry` roi
+    # nhung phan lon dieu kien Pine that so gia voi mot MUC DUOC TINH RA -
+    # `crossover(source, BBlower)` voi `BBlower = basis - mult * dev`,
+    # `crossover(price, bottom)`, kenh Keltner, pivot. Ngu phap co `tb` va
+    # `do_lech` nhung khong co phep cong/nhan nen khong viet noi `tb + 2*do_lech`,
+    # va moi chien luoc ho do deu rot o buoc dich.
+    #
+    # Mot toan tu tuyen tinh mo ca ho do ma khong mo them cua nao: no chi cong
+    # va nhan cac toan hang DA CO, khong co nhanh nao nhin ve tuong lai.
+    #   Bollinger duoi = tb(close,20) - 2*do_lech(close,20)
+    #   Keltner tren   = ema(close,20) + 2*atr(14)
+    if cb == "tuyen_tinh":
+        ds = t.get("toan_hang") or []
+        hs = t.get("he_so") or []
+        if not isinstance(ds, list) or not ds:
+            raise KeyError("'tuyen_tinh' can 'toan_hang' la danh sach khong rong")
+        if len(hs) != len(ds):
+            raise KeyError("'tuyen_tinh': 'he_so' phai cung do dai 'toan_hang'")
+        tong = None
+        for h, x in zip(hs[:12], ds[:12]):
+            phan = float(h) * toan_hang(df, x)
+            tong = phan if tong is None else tong + phan
+        return tong + float(t.get("cong_them", 0.0))
+
     # --- toan tu BIEN DOI: nhan mot toan hang con ---
     con = t.get("cua")
     if con is None:
@@ -231,6 +257,15 @@ def _kiem_toan_hang(t, sau: int = 0) -> list[str]:
         loi = []
         for x in ds:
             loi += _kiem_toan_hang(x, sau + 1)
+        # `tuyen_tinh` doi `he_so` cung do dai. Thieu kiem o day thi loi chi lo
+        # ra luc CHAM DU LIEU, tuc sau khi da tieu cong do backtest.
+        if str(t.get("chi_bao", "")).lower() == "tuyen_tinh":
+            hs = t.get("he_so")
+            if not isinstance(hs, list) or len(hs) != len(ds):
+                loi.append("'tuyen_tinh': 'he_so' phai la danh sach cung do dai "
+                           "'toan_hang'")
+            elif not all(isinstance(h, (int, float)) for h in hs):
+                loi.append("'tuyen_tinh': moi 'he_so' phai la so")
         return loi
     if "n" in t:
         try:

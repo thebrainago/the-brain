@@ -173,6 +173,20 @@ def _bang_ky_hieu(vb: str) -> list[tuple[int, str, dict]]:
             ds = TP._tach_doi_so(TP._khoi_ngoac(biu, biu.index("(")))
             t = dict(t, tham_so=TP._so_dau(ds, 1, m.start(), bang_so))
         ra.append((m.start(), ten, t))
+    # HAI DANG BIEN RAT PHO BIEN ma ban dau bo doc bo qua - va bo qua chung thi
+    # moi dieu kien dang `crossover(vrsi, RSIoverSold)` deu rot:
+    #   1. BIEN SO   : `RSIoverSold = input(30)`  -> mot hang so
+    #   2. BI DANH GIA: `source = close`          -> chinh cot gia do
+    da = {t[1] for t in ra}
+    for pos, ten, v in bang_so:
+        if ten not in da:
+            ra.append((pos, ten, {"hang": float(v), "_thang": 1}))
+    for m in re.finditer(rf"^[ 	]*({_TEN})[ 	]*=[ 	]*(open|high|low|close)[ 	]*$",
+                         vb, re.M):
+        if m.group(1) not in da:
+            ra.append((m.start(), m.group(1),
+                       {"chi_bao": "gia", "cot": m.group(2), "_thang": 1}))
+    ra.sort(key=lambda x: x[0])
     return ra
 
 
@@ -214,6 +228,8 @@ def _toan_hang_goc(tu: str, vi_tri: int, bang: list) -> dict | None:
             gt = t
     if gt is None:
         return None
+    if "hang" in gt or gt.get("_thang"):
+        return {k: v for k, v in gt.items() if not k.startswith("_")}
     ok, _ = TP.dien_dat_duoc(gt)
     if not ok:
         return None
@@ -336,6 +352,187 @@ def _luoi_tu_dieu_kien(dk: dict, khai: dict) -> dict:
         # chu ky 34 bi 89 ghi de - mat dung mot nua dieu kien.
         ra[f"{ben}_{t.get('chi_bao')}"] = _luoi_quanh(float(n), k)
     return ra
+
+
+#: `strategy.entry(..., strategy.long)` / `... , true)` / `..., when = <dk>`.
+_VAO_LENH = re.compile(
+    r"strategy\.(entry|order)[ \t]*\(([^\n]*)", re.M)
+#: Gan mot bien BOOL: `ten = <bieu thuc co so sanh hoac ket noi>`.
+_GAN_BOOL = re.compile(rf"^[ \t]*({_TEN})[ \t]*=[ \t]*([^\n]+)$", re.M)
+
+
+def _bang_bool(vb: str) -> list[tuple[int, str, str]]:
+    """(vi tri, ten, bieu thuc) cho moi bien duoc gan mot bieu thuc."""
+    return [(m.start(), m.group(1), m.group(2).strip())
+            for m in _GAN_BOOL.finditer(vb)]
+
+
+def _tach_va(bt: str) -> list[str]:
+    """Tach mot bieu thuc theo `and` o MUC NGOAI CUNG."""
+    ra, sau, muc = [], 0, 0
+    i = 0
+    while i < len(bt):
+        c = bt[i]
+        if c in "([":
+            muc += 1
+        elif c in ")]":
+            muc -= 1
+        elif muc == 0 and bt.startswith("and", i) and \
+                (i == 0 or not bt[i - 1].isalnum()) and \
+                (i + 3 >= len(bt) or not bt[i + 3].isalnum()):
+            ra.append(bt[sau:i])
+            sau = i + 3
+            i += 2
+        i += 1
+    ra.append(bt[sau:])
+    return [_boc_ngoac(x.strip()) for x in ra if x.strip()]
+
+
+def _boc_ngoac(s: str) -> str:
+    """Bo cap ngoac BAO NGOAI, va chi khi no that su bao ngoai.
+
+    `.strip("()")` mu lam hong lay: no cat dau `)` cuoi cua
+    `crossover(source, BBlower)` thanh `crossover(source, BBlower`, va sau do
+    khong regex nao khop duoc nua. Do that: moi dieu kien crossover trong kho
+    Pine deu rot o day.
+    """
+    s = s.strip()
+    while len(s) > 1 and s[0] == "(" and s[-1] == ")":
+        muc = 0
+        for i, c in enumerate(s):
+            if c == "(":
+                muc += 1
+            elif c == ")":
+                muc -= 1
+                if muc == 0 and i < len(s) - 1:
+                    return s          # ngoac dau dong lai giua chung -> khong bao ngoai
+        s = s[1:-1].strip()
+    return s
+
+
+def _no_dieu_kien(bt: str, vi_tri: int, bang_cb: list, bang_bl: list,
+                  sau: int = 0) -> tuple[list[dict], list[str]]:
+    """Bieu thuc guard -> danh sach dieu kien DSL. Tra (dieu kien, phan khong dich duoc).
+
+    De quy: mot ve co the la mot BIEN tro toi mot bieu thuc khac
+    (`trade_entry = fractal_trend and fractal_breakout`), nen phai no ra toi khi
+    cham day la mot phep so sanh.
+    """
+    if sau > 5:
+        return [], [bt[:60]]
+    dk, ho = [], []
+    for ve in _tach_va(bt):
+        if " or " in f" {ve} ":
+            ho.append(ve[:60])          # `or` khong dien dat duoc bang danh sach VA
+            continue
+        m = _SS.fullmatch(ve) or _SS.search(ve)
+        if m and m.group(0).strip() == ve:
+            trai = _toan_hang(m.group(1), vi_tri, bang_cb)
+            phai = _toan_hang(m.group(3), vi_tri, bang_cb)
+            if trai and phai and _hop_thang_do(trai, phai):
+                dk.append({"trai": trai, "phep": _PHEP[m.group(2)], "phai": phai})
+            else:
+                ho.append(ve[:60])
+            continue
+        mc = _CHEO.fullmatch(ve) or _CHEO.search(ve)
+        if mc and mc.group(0).strip() == ve:
+            trai = _toan_hang(mc.group(2), vi_tri, bang_cb)
+            phai = _toan_hang(mc.group(3), vi_tri, bang_cb)
+            if trai and phai:
+                dk.append({"trai": trai,
+                           "phep": "cheo_len" if mc.group(1) == "crossover"
+                                   else "cheo_xuong", "phai": phai})
+            else:
+                ho.append(ve[:60])
+            continue
+        # mot BIEN -> tim dinh nghia gan nhat TRUOC vi tri dung
+        if re.fullmatch(_TEN, ve):
+            dn = None
+            for pos, ten, bt2 in bang_bl:
+                if pos >= vi_tri:
+                    break
+                if ten == ve:
+                    dn = (pos, bt2)
+            if dn is not None:
+                d2, h2 = _no_dieu_kien(dn[1], dn[0], bang_cb, bang_bl, sau + 1)
+                dk += d2
+                ho += h2
+                continue
+        ho.append(ve[:60])
+    return dk, ho
+
+
+def doc_chien_luoc(vb: str, nguon: str = "", tien_to: str = "ma") -> dict:
+    """CHIEN LUOC THAT: lan tu `strategy.entry` nguoc ve dieu kien vao.
+
+    Vi sao ham nay ton tai rieng voi `doc_ma`: ban dau bo doc nhat MOI phep so
+    sanh trong file, ke ca nhung phep chi dung de VE hay to mau. Ty le rut thi
+    cao nhung SAI - Sonic R ra 8 "kieu danh" trong khi ban goc vao lenh khi
+    xu huong dung VA gia hoi ve dai VA nen xac nhan. Tam mau roi khong phai ba
+    dieu kien ghep: chung kich hoat o nhung luc khac han nhau.
+
+    O day di dung duong cua chuong trinh: tim `strategy.entry`, lay guard cua no
+    (`when = ...` hoac khoi `if (...)` bao ngoai), no bien ra toi khi cham day la
+    phep so sanh, roi ghep TAT CA lam mot co che.
+
+    Va neu MOT ve khong dich duoc thi BO CA CO CHE, khong bo rieng ve do: bo mot
+    ve lam dieu kien LONG hon ban goc - nhieu lenh hon, hanh vi khac - ma van
+    mang ten cua tac gia. Do la noi doi. Ve khong dich duoc duoc bao ra o
+    `chua_dien_dat_duoc` de biet ngu phap con thieu gi.
+    """
+    if not vb or "strategy.entry" not in vb:
+        return {"co_che": [], "chua_dien_dat_duoc": [], "so_vao_lenh": 0}
+    bang_cb = _bang_ky_hieu(vb)
+    bang_bl = _bang_bool(vb)
+    khai = rut_input(vb)
+    L = vb.splitlines(keepends=True)
+    dau_dong = []
+    p = 0
+    for l in L:
+        dau_dong.append(p)
+        p += len(l)
+
+    ra, ho, n = [], [], 0
+    for m in _VAO_LENH.finditer(vb):
+        n += 1
+        doi = m.group(2)
+        chieu = -1 if ("strategy.short" in doi or re.search(r",\s*false", doi)) else 1
+        guard, vi = None, m.start()
+        mw = re.search(r"when\s*=\s*([^,)\n]+)", doi)
+        if mw:
+            guard = mw.group(1).strip()
+        else:
+            # lui tim khoi `if (...)` gan nhat phia tren
+            i = max(k for k, x in enumerate(dau_dong) if x <= m.start())
+            for j in range(i, max(-1, i - 12), -1):
+                mi = re.match(r"^[ \t]*if[ \t]*\(?([^\n{]+?)\)?[ \t]*$", L[j].rstrip())
+                if mi:
+                    guard, vi = mi.group(1).strip(), dau_dong[j]
+                    break
+        if not guard:
+            ho.append("khong tim duoc guard cua strategy.entry")
+            continue
+        dk, h = _no_dieu_kien(guard, vi, bang_cb, bang_bl)
+        if h or not dk:
+            ho += h or ["guard rong sau khi dich"]
+            continue                    # BO CA CO CHE, khong bo rieng ve
+        ten = f"{tien_to}_{'mua' if chieu == 1 else 'ban'}_" + "_va_".join(
+            f"{_ten_toan_hang(d['trai'])}_{_TEN_PHEP[d['phep']]}_{_ten_toan_hang(d['phai'])}"
+            for d in dk[:3])
+        ra.append({
+            "ten": ten[:60], "ho": _ho_cua(dk[0]), "chieu": chieu, "giu": 1,
+            "co_che": (
+                f"Chien luoc THAT rut tu `strategy.entry`: vao lenh khi "
+                f"{len(dk)} dieu kien cung dung (`{guard[:70]}`). Phoi nhiem duoc "
+                f"tra tien khi ben doi ung buoc phai giao dich o dung trang thai "
+                f"nay - gia thuyet kiem chinh dieu do."),
+            "vao": dk, "nguon": nguon,
+            "luoi_goc": {k: v for d in dk
+                         for k, v in _luoi_tu_dieu_kien(d, khai).items()},
+            "so_dieu_kien": len(dk),
+        })
+    return {"co_che": ra, "chua_dien_dat_duoc": sorted(set(ho))[:12],
+            "so_vao_lenh": n}
 
 
 def doc_ma(vb: str, ngon_ngu: str = "tu_doan", nguon: str = "",
