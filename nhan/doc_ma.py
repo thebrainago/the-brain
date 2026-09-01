@@ -100,6 +100,58 @@ _SS = re.compile(
 _CHEO = re.compile(rf"(?:ta\.)?(crossover|crossunder)[ \t]*\(([^,]+),([^)]+)\)")
 
 
+#: Khai bao input CUA TAC GIA. Pine: `n = input(34, minval=2, maxval=200)`.
+#: MQL5: `input int InpPeriod = 14; // mo ta`.
+_INPUT_PINE = re.compile(
+    rf"^[ \t]*({_TEN})[ \t]*=[ \t]*"
+    rf"input(?:\.[a-z]+)?[ \t]*\(([^)\n]*)\)", re.M)
+_INPUT_MQL = re.compile(
+    rf"^[ \t]*(?:extern|input)[ \t]+[A-Za-z_]\w*[ \t]+({_TEN})"
+    rf"[ \t]*=[ \t]*({_SO})[ \t]*;", re.M)
+_MINMAX = re.compile(rf"(minval|maxval|step)[ \t]*=[ \t]*({_SO})")
+
+
+def rut_input(vb: str) -> dict:
+    """Ten bien -> {gia_tri, min, max} theo dung khai bao cua TAC GIA.
+
+    Vi sao dang gia: chinh nguoi viet bot da noi bien nay chay trong khoang nao.
+    Do la mot mien quet CO NGUON GOC, khac han mot luoi ta tu bia ra - va lay no
+    khong phai chay mot dong ma nao cua ho.
+    """
+    ra: dict[str, dict] = {}
+    for m in _INPUT_PINE.finditer(vb):
+        doi = m.group(2)
+        so = re.search(rf"(?:defval[ \t]*=[ \t]*)?({_SO})", doi)
+        if not so:
+            continue
+        d = {"gia_tri": float(so.group(1))}
+        for mm in _MINMAX.finditer(doi):
+            d[{"minval": "min", "maxval": "max",
+               "step": "buoc"}[mm.group(1)]] = float(mm.group(2))
+        ra[m.group(1)] = d
+    for m in _INPUT_MQL.finditer(vb):
+        ra.setdefault(m.group(1), {"gia_tri": float(m.group(2))})
+    return ra
+
+
+def _luoi_quanh(n: float, khai: dict | None) -> list[int]:
+    """Ba diem quanh gia tri tac gia dung, chan trong mien tac gia khai.
+
+    Ba chu khong nhieu hon: moi diem them la mot suat FDR. Muc dich khong phai
+    do tim gia tri tot nhat - do la viec cua tang kham pha - ma la biet hinh
+    dang quanh diem tac gia chon (cao nguyen hay cai gai).
+    """
+    khai = khai or {}
+    lo = khai.get("min", 2.0)
+    hi = khai.get("max", 1e9)
+    ra = []
+    for x in (n / 2.0, n, n * 2.0):
+        v = int(round(max(lo, min(hi, x))))
+        if v >= 2 and v not in ra:
+            ra.append(v)
+    return sorted(ra)
+
+
 def _bang_ky_hieu(vb: str) -> list[tuple[int, str, dict]]:
     """(vi tri, ten bien, toan hang) cho moi bien duoc gan bang mot chi bao.
 
@@ -267,6 +319,25 @@ def _dieu_kien(vb: str, bang: list) -> list[dict]:
     return ra
 
 
+def _luoi_tu_dieu_kien(dk: dict, khai: dict) -> dict:
+    """Chu ky trong dieu kien -> luoi quet, chan theo minval/maxval cua tac gia."""
+    ra = {}
+    for ben in ("trai", "phai"):
+        t = dk.get(ben) or {}
+        while isinstance(t, dict) and t.get("chi_bao") in ("tre", "tuyet_doi"):
+            t = t.get("cua") or {}
+        n = (t or {}).get("n")
+        if not n:
+            continue
+        # Khai bao nao co gia tri dung bang `n` thi mien cua no ap cho `n`.
+        k = next((v for v in khai.values() if v.get("gia_tri") == float(n)), None)
+        # Khoa theo VE, khong theo ten chi bao: mot dieu kien nhu
+        # `ema34_low < ema89_close` co hai ve CUNG la `ema`, va khoa theo ten thi
+        # chu ky 34 bi 89 ghi de - mat dung mot nua dieu kien.
+        ra[f"{ben}_{t.get('chi_bao')}"] = _luoi_quanh(float(n), k)
+    return ra
+
+
 def doc_ma(vb: str, ngon_ngu: str = "tu_doan", nguon: str = "",
            tien_to: str = "ma", toi_da: int = 12) -> list[dict]:
     """Mot file ma -> NHIEU khai bao co che theo `nhan/ngu_phap.py`.
@@ -277,6 +348,7 @@ def doc_ma(vb: str, ngon_ngu: str = "tu_doan", nguon: str = "",
     if not vb:
         return []
     bang = _bang_ky_hieu(vb)
+    khai = rut_input(vb)
     ra = []
     for dk in _dieu_kien(vb, bang)[:toi_da]:
         trich = dk.pop("_trich", "")
@@ -301,5 +373,10 @@ def doc_ma(vb: str, ngon_ngu: str = "tu_doan", nguon: str = "",
                 f"gia thuyet nay kiem chinh dieu do, khong kiem cai bot goc."),
             "vao": [dk],
             "nguon": nguon,
+            # MIEN QUET CUA CHINH TAC GIA (them 01/09). Khong chay mot dong ma
+            # nao cua ho: `input(34, minval=2, maxval=200)` da noi ro bien nay
+            # chay trong khoang nao. Tang kham pha lay day lam DIEM NEO thay vi
+            # mot luoi ta tu bia.
+            "luoi_goc": _luoi_tu_dieu_kien(dk, khai),
         })
     return ra

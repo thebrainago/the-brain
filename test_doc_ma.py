@@ -124,5 +124,36 @@ class KhongNo(unittest.TestCase):
             self.assertNotIn(".", s["ten"])
 
 
+
+class MienQuetCuaTacGia(unittest.TestCase):
+    """Lay mien quet tu `input(...)` cua chinh tac giả - khong chay ma cua ho."""
+
+    def test_doc_duoc_input_pine_kem_minval(self):
+        khai = DM.rut_input(PINE)
+        self.assertEqual(khai["HiLoLen"]["gia_tri"], 34.0)
+        self.assertEqual(khai["HiLoLen"]["min"], 2.0)
+
+    def test_doc_duoc_input_mql(self):
+        mql = "input int    InpPeriod   = 14;  // chu ky\ninput double InpRisk = 2.0;\n"
+        khai = DM.rut_input(mql)
+        self.assertEqual(khai["InpPeriod"]["gia_tri"], 14.0)
+        self.assertEqual(khai["InpRisk"]["gia_tri"], 2.0)
+
+    def test_luoi_neo_quanh_gia_tri_tac_gia_dung(self):
+        self.assertEqual(DM._luoi_quanh(34, None), [17, 34, 68])
+
+    def test_luoi_bi_chan_trong_mien_tac_gia_khai(self):
+        self.assertEqual(DM._luoi_quanh(10, {"min": 8.0, "max": 12.0}), [8, 10, 12])
+
+    def test_hai_ve_cung_chi_bao_khong_ghi_de_nhau(self):
+        """`ema34 < ema89`: khoa theo ten chi bao thi mat mot nua dieu kien."""
+        ds = DM.doc_ma(PINE, "pine", tien_to="t")
+        hai = [s for s in ds if len(s["luoi_goc"]) == 2]
+        self.assertTrue(hai, "dieu kien hai ve deu co chu ky phai giu ca hai")
+
+    def test_moi_khai_bao_deu_co_luoi_goc(self):
+        for s in DM.doc_ma(PINE, "pine", tien_to="t"):
+            self.assertIn("luoi_goc", s)
+
 if __name__ == "__main__":
     unittest.main()

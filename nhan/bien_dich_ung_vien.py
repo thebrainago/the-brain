@@ -357,6 +357,11 @@ def bien_dich(tai_lieu, luc: str | None = None) -> list:
                         "dsl": spec,
                         "nguon_url": nguon_url,
                         "loai_nguon": "ma_nguon_dsl",
+                        # MIEN QUET CUA CHINH TAC GIA, rut tu khai bao
+                        # `input(34, minval=2, maxval=200)` cua ho. Khong chay
+                        # mot dong ma nao. QUANTLAB doc khoa nay lam DIEM NEO
+                        # cho luoi quet (xem `rut_hang_doi_ung_vien`).
+                        "tham_so_goc": spec.get("luoi_goc") or {},
                     },
                 ))
         except Exception:
