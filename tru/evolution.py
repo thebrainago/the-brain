@@ -517,6 +517,70 @@ def do_van_hanh() -> dict:
                              "thu_hoach": n["thu_hoach"], "trang_thai": n["trang_thai"]}
                    for n in ng}
     ra["tai_lieu"] = SO.mot("SELECT COUNT(*) n FROM tai_lieu")["n"]
+
+    # ------------------------------------------------- NANG SUAT DOC (01/09)
+    # Thuoc do CU cua SEEKER la SO TAI LIEU. No sai theo hai huong cung luc:
+    #  - tang so tai lieu ma khong co che nao qua cong thi van "xanh";
+    #  - va no de he ket luan "nguon can" khi that ra chi la DOC NONG (do that
+    #    01/09: `n_mql5_code` goi dung 2 URL, ca kho MQL5 thu ve 35 tai lieu
+    #    trong khi kho that co ~12.200 muc).
+    # Thuoc do MOI: **so co che duoc CONG NGU PHAP chap nhan tren 100 bai da
+    # BOC**. Do tren `de_xuat` (nguon = URL tai lieu) join `tai_lieu` de quy ve
+    # tung nguon. Suat nay hien khoang 1%, va da co lan AM (mot ban doc sai che
+    # ra edge Sharpe 0,822, 4 co che phai thu hoi) - nen no la con so dang de
+    # toi uu, khong phai so tai lieu.
+    # PHAI LOC `tru='SEEKER'`. Ban dau tien cua thuoc do nay dem CA BANG va ra
+    # 7,59 co che/100 bai - nghe rat kha quan va HOAN TOAN sai: ca 18 dong
+    # `de_xuat` deu cua NGHI (co che noi sinh, `nguon=''`), khong mot dong nao
+    # den tu duong DOC. Chia tu so cua tru nay cho mau so cua tru kia thi ra mot
+    # con so khong noi ve cai gi ca.
+    boc = SO.mot("SELECT COUNT(*) n FROM noi_dung WHERE da_boc=1")["n"] or 0
+    dx = SO.mot("SELECT COUNT(*) n, COALESCE(SUM(nhan),0) k FROM de_xuat "
+                "WHERE tru='SEEKER'") or {}
+    ra["seeker_da_boc"] = boc
+    ra["seeker_co_che_nhan"] = int(dx["k"] or 0)
+    ra["seeker_co_che_de_xuat"] = int(dx["n"] or 0)
+    # boc=0 -> CHUA DO (None), khong phai "nang suat bang 0".
+    ra["seeker_nang_suat_100"] = round(100.0 * (dx["k"] or 0) / boc, 2) if boc else None
+    # co che NOI SINH cua NGHI dem rieng, de khong ai lan lai lan nua.
+    nghi = SO.mot("SELECT COUNT(*) n, COALESCE(SUM(nhan),0) k FROM de_xuat "
+                  "WHERE tru!='SEEKER'") or {}
+    ra["nghi_co_che_noi_sinh"] = {"de_xuat": int(nghi["n"] or 0), "nhan": int(nghi["k"] or 0)}
+
+    # Bang theo nguon: DA DOC bao nhieu bai / ra bao nhieu de xuat / duoc nhan
+    # bao nhieu. Cot "da_boc" lay tu `noi_dung`, cot de_xuat/nhan lay tu
+    # `de_xuat.nguon` (URL tai lieu) - hai cot nay o hai bang khac nhau nen phai
+    # gop bang tay chu khong join duoc mot cau.
+    ra["nang_suat_nguon"] = {}
+    for r in SO.nhieu("SELECT t.nguon ng, COUNT(*) n FROM noi_dung nd "
+                      "JOIN tai_lieu t ON t.id = nd.tai_lieu_id "
+                      "WHERE nd.da_boc=1 GROUP BY t.nguon"):
+        ra["nang_suat_nguon"][r["ng"]] = {"da_boc": r["n"], "de_xuat": 0, "nhan": 0}
+    for r in SO.nhieu(
+            "SELECT t.nguon ng, COUNT(*) n, COALESCE(SUM(d.nhan),0) k "
+            "FROM de_xuat d JOIN tai_lieu t ON t.url = d.nguon "
+            "WHERE d.tru='SEEKER' GROUP BY t.nguon"):
+        x = ra["nang_suat_nguon"].setdefault(r["ng"], {"da_boc": 0, "de_xuat": 0, "nhan": 0})
+        x["de_xuat"], x["nhan"] = r["n"], r["k"]
+
+    # ------------------------------------------------- DO SAU QUET (01/09)
+    # Con tro bien gioi nam trong `nguon.lay_gi` (JSON). Co no thi phan biet duoc
+    # hai thu ma ban cu tron lam mot: "nguon da can" (vong >= 1) va "chua quet
+    # toi day bao gio" (vong = 0). Chan doan `vong_lap_rong` cu doc nham cai thu
+    # hai thanh cai thu nhat.
+    ra["do_sau_nguon"] = {}
+    for r in SO.nhieu("SELECT ma, lay_gi FROM nguon WHERE lay_gi IS NOT NULL "
+                      "AND lay_gi NOT IN ('','{}')"):
+        try:
+            d = json.loads(r["lay_gi"])
+        except Exception:
+            continue
+        if not isinstance(d, dict) or "trang" not in d:
+            continue
+        ra["do_sau_nguon"][r["ma"]] = {
+            "trang_da_quet": int(d.get("da_quet_trang", 0)),
+            "vong": int(d.get("vong", 0)),
+            "bien_da_biet": d.get("trang_cuoi") or {}}
     ra["gia_thuyet"] = {r["trang_thai"]: r["n"] for r in SO.nhieu(
         "SELECT trang_thai, COUNT(*) n FROM gia_thuyet GROUP BY trang_thai")}
     return ra
@@ -548,10 +612,41 @@ def phat_hien(vh: dict, sk: dict) -> list[dict]:
                                    "lab/.browser_darwinex_tmp (480MB tmp)"}})
 
     if vh.get("seeker_ty_le_vong_rong", 0) > 0.8:
-        ra.append({"ma": "vong_lap_rong", "muc": "VUA",
-                   "mo_ta": f"{vh['seeker_ty_le_vong_rong']:.0%} lan chay SEEKER khong thu duoc "
-                            "gi moi - chu ky nguon dang qua day so voi toc do nguon cap nhat",
-                   "bc": {"ty_le": vh["seeker_ty_le_vong_rong"]}})
+        # KHONG duoc ket luan "chu ky qua day" khi chua biet da quet SAU toi dau.
+        # Ngay 31/08 ban cu ket luan dung the va SAI: nguon khong can, ma he chi
+        # doc trang 1 cua moi danh muc. Nen mo ta bay gio doi theo con tro bien
+        # gioi: chua nguon nao di het mot vong -> van de la DO SAU, khong phai
+        # tan suat.
+        ds = vh.get("do_sau_nguon") or {}
+        da_het_vong = [m for m, d in ds.items() if d.get("vong", 0) >= 1]
+        if ds and not da_het_vong:
+            ra.append({"ma": "quet_nong", "muc": "NANG",
+                       "mo_ta": f"{vh['seeker_ty_le_vong_rong']:.0%} lan chay SEEKER khong thu "
+                                "duoc gi moi, NHUNG chua nguon nao di het mot vong bien gioi "
+                                "- day la DO SAU QUET, khong phai chu ky qua day",
+                       "bc": {"ty_le": vh["seeker_ty_le_vong_rong"], "do_sau": ds}})
+        else:
+            ra.append({"ma": "vong_lap_rong", "muc": "VUA",
+                       "mo_ta": f"{vh['seeker_ty_le_vong_rong']:.0%} lan chay SEEKER khong thu duoc "
+                                "gi moi, va da di het vong tren "
+                                f"{len(da_het_vong)} nguon - chu ky nguon dang qua day",
+                       "bc": {"ty_le": vh["seeker_ty_le_vong_rong"], "het_vong": da_het_vong}})
+
+    # NANG SUAT DOC: doc nhieu ma khong co che nao qua cong = dang tieu gio LLM
+    # vao mot duong khong ra gi. Nguong 0,3 co che/100 bai dat duoi muc hien tai
+    # (~1%) de no bao khi TUT, khong phai bao ngay hom nay.
+    if (vh.get("seeker_da_boc") or 0) >= 100 and vh.get("seeker_nang_suat_100") is not None:
+        if vh["seeker_nang_suat_100"] < 0.3:
+            cach = ("chua sinh MOT de xuat nao" if not vh.get("seeker_co_che_de_xuat")
+                    else f"{vh['seeker_co_che_nhan']}/{vh['seeker_co_che_de_xuat']} de xuat qua cong")
+            ra.append({"ma": "nang_suat_doc_thap",
+                       "muc": "NANG" if not vh.get("seeker_co_che_de_xuat") else "VUA",
+                       "mo_ta": f"Nang suat doc = {vh['seeker_nang_suat_100']} co che/100 bai "
+                                f"({vh['seeker_co_che_nhan']} nhan tren {vh['seeker_da_boc']} bai "
+                                f"da boc; {cach}) - duong DOC dang khong tra ra gia thuyet. "
+                                "Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
+                       "bc": {"theo_nguon": vh.get("nang_suat_nguon"),
+                              "noi_sinh_cua_nghi": vh.get("nghi_co_che_noi_sinh")}})
 
     # --- tai nguyen van hanh -------------------------------------------
     tn = vh.get("tai_nguyen") or {}
@@ -814,6 +909,14 @@ def viet_bao_cao(vh: dict, sk: dict, vd: list, da_sua: list, sau: dict | None = 
     d.append(f"- Viec: cho {vh['viec_cho']} / treo {vh['viec_treo']} / loi {vh['viec_loi']}")
     if "seeker_ty_le_vong_rong" in vh:
         d.append(f"- Ty le vong lap rong cua SEEKER: **{vh['seeker_ty_le_vong_rong']:.0%}**")
+    if vh.get("seeker_nang_suat_100") is not None:
+        d.append(f"- Nang suat doc cua SEEKER: **{vh['seeker_nang_suat_100']} co che/100 bai** "
+                 f"({vh['seeker_co_che_nhan']} nhan / {vh['seeker_co_che_de_xuat']} de xuat "
+                 f"tren {vh['seeker_da_boc']} bai da boc)")
+    if vh.get("do_sau_nguon"):
+        d.append("- Do sau quet (con tro bien gioi): " + ", ".join(
+            f"{m} {x['trang_da_quet']} trang/vong {x['vong']}"
+            for m, x in sorted(vh["do_sau_nguon"].items())))
 
     d += ["", "## 3. Hieu chuan (thu quan trong hon so PASS)"]
     if sk.get("null_ty_le_lot") is not None:
@@ -947,7 +1050,8 @@ def viet_bao_cao(vh: dict, sk: dict, vd: list, da_sua: list, sau: dict | None = 
 # se hien thi mai nhung thu da sua xong - dung cai lam nguoi dung mat long tin
 # vao danh sach. (Da xay ra that ngay 15/08 voi `dia_thap`.)
 EVO_TU_QUAN = {
-    "dia_thap", "vong_lap_rong", "nhieu_viec_loi", "qua_nhieu_pass",
+    "dia_thap", "vong_lap_rong", "quet_nong", "nang_suat_doc_thap",
+    "nhieu_viec_loi", "qua_nhieu_pass",
     "so_dut_chuoi", "nguon_khong_thu_hoach", "chua_hieu_chuan_null",
     "null_lot_qua_nhieu", "cong_co_the_qua_chat",
     # Them 31/08: ca hai deu suy ra tu mot phep do chay moi luot, nen khi dieu

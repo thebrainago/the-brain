@@ -61,6 +61,37 @@ def _sach(s: str) -> str:
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", s or ""))).strip()
 
 
+# --------------------------------------------------- CON TRO BIEN GIOI
+# Vi sao co: do that 01/09 cho thay `n_mql5_code` goi DUNG HAI URL (trang 1 cua
+# experts va indicators) roi cat con 30 link, nen ca kho MQL5 Code Base chi thu
+# ve **35 tai lieu**. Tu luot thu hai tro di no doc lai dung trang do -> khong
+# co gi moi -> he tu ket luan "chu ky nguon qua day". Chan doan do la SAI: van
+# de la DO SAU QUET, khong phai tan suat.
+#
+# Do that cung ngay (requests, khong doan): `/en/code/<mt5|mt4>/<danh muc>/pageN`
+# tra 200 va 40 link/trang, trang qua cuoi tra 404, va cac trang KHONG trung
+# nhau (giao p1&p2 = 0, p2&p3 = 0). Trang cuoi do bang tim nhi phan:
+#   mt5/indicators 146 · mt5/experts 42 · mt4/indicators 65 · mt4/experts 31
+#   · mt5/libraries 11 · mt5/scripts 10   ->  ~12.200 muc, so voi 35 da lay.
+#
+# Con tro nay ghi DA QUET TOI TRANG NAO cho tung danh muc, luu trong cot
+# `nguon.lay_gi` (JSON). `dang_ky_nguon` khong ghi de cot do khi ON CONFLICT nen
+# con tro song qua moi lan khoi dong. Moi luot di TIEP tu cho da dung, het bien
+# thi quay ve trang 1 (bat muc moi dang len dau) va tang `vong`.
+def _con_tro(ma: str) -> dict:
+    r = SO.mot("SELECT lay_gi FROM nguon WHERE ma=?", ma)
+    try:
+        d = json.loads((r["lay_gi"] if r else "") or "{}")
+        return d if isinstance(d, dict) else {}
+    except Exception:
+        return {}
+
+
+def _ghi_con_tro(ma: str, d: dict) -> None:
+    SO.chay("UPDATE nguon SET lay_gi=? WHERE ma=?",
+            json.dumps(d, ensure_ascii=False)[:4000], ma)
+
+
 # ------------------------------------------------------------------- NGUON
 def n_arxiv(tu_khoa: list[str]) -> list[dict]:
     """arXiv q-fin. HANG B: cong trinh co phuong phap viet ra."""
@@ -287,32 +318,78 @@ def n_lean_algo(tu_khoa: list[str]) -> list[dict]:
     return ra[:40]
 
 
+# Sau danh muc THAT cua MQL5 Code Base (do 01/09 bang tim nhi phan tren so
+# trang): mt5/indicators 146 trang · mt5/experts 42 · mt4/indicators 65 ·
+# mt4/experts 31 · mt5/libraries 11 · mt5/scripts 10. Xep EA truoc chi bao vi
+# `bien_dich_ung_vien.loai_ma_nguon` chi nhan cai MO VI THE MOI.
+MQL5_DANH_MUC = ["mt5/experts", "mt4/experts", "mt5/indicators",
+                 "mt4/indicators", "mt5/scripts", "mt5/libraries"]
+MQL5_SO_TRANG_MOI_LUOT = 3
+
+
 def n_mql5_code(tu_khoa: list[str]) -> list[dict]:
-    """Kho ma MQL5 - EA/chi bao that dang chay tren MT5.
+    """Kho ma MQL5 - EA/chi bao that dang chay tren MT5. CO PHAN TRANG.
 
     Ghi chu cu bao "mql5 render bang JS" la noi ve trang SIGNALS. Trang
     /en/code tra HTML tho co link (do that 16/08: 200, 20.942 ky tu van ban).
+
+    Ban 01/09: khong con doc trang 1 roi thoi. Moi luot lay `SO_TRANG_MOI_LUOT`
+    trang KE TIEP theo con tro bien gioi (xem `_con_tro`), xoay vong qua 6 danh
+    muc de khong danh het ngan sach cho mot cai. Ngan sach ~90 giay/luot nen de
+    3 trang: 3 x (1 GET + 1,5s nghi) ~ 8 giay.
     """
     ra, da = [], set()
-    for muc in ("experts", "indicators"):
-        txt = _lay(f"https://www.mql5.com/en/code/mt5/{muc}", timeout=30)
+    ct = _con_tro("mql5_code")
+    trang = ct.setdefault("trang", {})          # danh muc -> trang KE TIEP se lay
+    cuoi = ct.setdefault("trang_cuoi", {})      # danh muc -> trang cuoi da biet
+    vong = ct.setdefault("vong", 0)
+    # xoay vong danh muc: bat dau tu cai sau cai lan truoc, de moi danh muc deu
+    # duoc di sau chu khong chi cai dau bang.
+    bd = ct.get("danh_muc_ke", 0) % len(MQL5_DANH_MUC)
+    thu_tu = MQL5_DANH_MUC[bd:] + MQL5_DANH_MUC[:bd]
+    da_lay = 0
+    for muc in thu_tu:
+        if da_lay >= MQL5_SO_TRANG_MOI_LUOT:
+            break
+        n = int(trang.get(muc, 1))
+        u = f"https://www.mql5.com/en/code/{muc}" + ("" if n == 1 else f"/page{n}")
+        txt = _lay(u, timeout=30)
+        da_lay += 1
         if not txt:
+            # 404 = qua trang cuoi -> ghi lai bien va quay ve dau (muc moi len
+            # dau bang nen trang 1 luon con gia tri), khong tinh la loi nguon.
+            if n > 1:
+                cuoi[muc] = n - 1
+                trang[muc] = 1
+                ct["vong"] = vong + 1
+            time.sleep(1.5)
             continue
         # HREF TUONG DOI. Ban truoc doi `href="https://www.mql5.com/en/code/123"`
         # nhung trang that dung `href="/en/code/76331"`, nen regex khop 0/40 va
         # ham tra ve rong SUOT - khong loi, khong canh bao. Doi chieu 22/08:
         # trang 82.894 ky tu, 40 link tuong doi, 0 link tuyet doi.
+        n_link = 0
         for m in re.finditer(
                 r'href="(?:https://www\.mql5\.com)?(/en/code/\d+)"[^>]*>(.*?)</a>',
                 txt, re.S | re.I):
-            u, tt = "https://www.mql5.com" + m.group(1), _sach(m.group(2))
-            if len(tt) < 10 or u in da:
+            u2, tt = "https://www.mql5.com" + m.group(1), _sach(m.group(2))
+            if len(tt) < 10 or u2 in da:
                 continue
-            da.add(u)
-            ra.append({"tieu_de": f"[MQL5 {muc}] {tt[:200]}", "url": u,
+            da.add(u2)
+            n_link += 1
+            ra.append({"tieu_de": f"[MQL5 {muc}] {tt[:200]}", "url": u2,
                        "tom_tat": "", "hang": "B", "loai": "ma_nguon"})
+        # trang 200 nhung khong co link nao = da het thuc su (MQL5 tra 200 cho
+        # trang rong o vai danh muc) -> xu ly nhu 404.
+        trang[muc] = (n + 1) if n_link else 1
+        if not n_link and n > 1:
+            cuoi[muc] = n - 1
+            ct["vong"] = vong + 1
         time.sleep(1.5)
-    return ra[:30]
+    ct["danh_muc_ke"] = (bd + da_lay) % len(MQL5_DANH_MUC)
+    ct["da_quet_trang"] = int(ct.get("da_quet_trang", 0)) + da_lay
+    _ghi_con_tro("mql5_code", ct)
+    return ra
 
 
 def n_crossref(tu_khoa: list[str]) -> list[dict]:
@@ -480,6 +557,13 @@ NGUON_TRINH_DUYET = {
                   "https://www.tradingview.com/scripts/breakout/",
                   "https://www.tradingview.com/scripts/momentum/",
                   "https://www.tradingview.com/scripts/volatility/"],
+                     # PHAN TRANG (them 01/09). Do that: `/page-N/` tra 200 va noi
+                     # dung KHAC (page-2 co 22 link script, khac hoan toan page 1)
+                     # nhung QUA BIEN thi im lang tra lai DUNG page 1 (page-99 va
+                     # page-500 giong page 1 tung byte) - khong 404 nhu MQL5. Nen
+                     # bien duoc phat hien bang VAN TAY trang 1, xem `_trang_phan_trang`.
+                     "mau_trang": "{u}page-{n}/",
+                     "trang_moi_luot": 2,
         "hang": "A", "loai": "ma_nguon", "chu_ky": 43200, "uu_tien": 1},
     # --- MQL5 sau khi DANG NHAP (30/08/2026) ---
     #
@@ -697,6 +781,57 @@ def _duyet_tai_lieu(d: dict, nguon: str, c: dict, tu_khoa: str = "") -> list[dic
     return ra
 
 
+def _trang_phan_trang(ma: str, c: dict) -> tuple[list[str], dict]:
+    """Sinh danh sach URL cho mot nguon `kieu: trang` CO khai `mau_trang`.
+
+    Nguon khong khai `mau_trang` -> tra dung `c["trang"]` nhu cu (khong doi hanh
+    vi cua 20+ nguon con lai). Nguon co khai thi moi luot lay `trang_moi_luot`
+    trang KE TIEP theo con tro bien gioi, xoay vong qua cac trang seed.
+    """
+    if not c.get("mau_trang"):
+        return list(c["trang"]), {}
+    ct = _con_tro(ma)
+    trang = ct.setdefault("trang", {})
+    bd = int(ct.get("seed_ke", 0)) % len(c["trang"])
+    thu_tu = c["trang"][bd:] + c["trang"][:bd]
+    ra, n_seed = [], int(c.get("trang_moi_luot", 2))
+    for goc in thu_tu[:n_seed]:
+        n = int(trang.get(goc, 1))
+        ra.append(goc if n == 1 else c["mau_trang"].format(u=goc, n=n))
+    ct["seed_ke"] = (bd + n_seed) % len(c["trang"])
+    ct["_dang_lay"] = [[g, int(trang.get(g, 1))] for g in thu_tu[:n_seed]]
+    return ra, ct
+
+
+def _tien_con_tro_trang(ma: str, ct: dict, van_tay: dict) -> None:
+    """Tien con tro sau mot luot doc, va phat hien BIEN bang van tay trang 1.
+
+    TradingView khong 404 khi qua trang cuoi - no im lang tra lai trang 1. Neu
+    chi tien con tro mu thi tu do tro di he doc lai trang 1 mai ma van tuong
+    minh dang di sau. Nen: nho van tay trang 1 cua tung seed; trang N>1 nao
+    trung van tay do la da CHAM BIEN -> ghi lai `trang_cuoi` va quay ve 1.
+    """
+    if not ct:
+        return
+    trang, vt1 = ct.setdefault("trang", {}), ct.setdefault("van_tay_1", {})
+    cuoi = ct.setdefault("trang_cuoi", {})
+    for goc, n in ct.pop("_dang_lay", []):
+        v = van_tay.get(goc if n == 1 else f"{goc}#{n}")
+        if v is None:
+            continue                       # doc loi: giu nguyen con tro, thu lai sau
+        if n == 1:
+            vt1[goc] = v
+            trang[goc] = 2
+        elif vt1.get(goc) and v == vt1[goc]:
+            cuoi[goc] = n - 1
+            trang[goc] = 1
+            ct["vong"] = int(ct.get("vong", 0)) + 1
+        else:
+            trang[goc] = n + 1
+    ct["da_quet_trang"] = int(ct.get("da_quet_trang", 0)) + len(van_tay)
+    _ghi_con_tro(ma, ct)
+
+
 def quet_trinh_duyet(ngan_sach_giay: int = 90, t0: float | None = None) -> dict:
     """Doc cac nguon can-trinh-duyet qua CON CHROME CDP DANG MO (dang nhap san).
 
@@ -756,9 +891,11 @@ def quet_trinh_duyet(ngan_sach_giay: int = 90, t0: float | None = None) -> dict:
             tu = c.get("tu_khoa_rieng") or tu_khoa_dung(3)
             phieu = [_ur.quote(k) for k in tu[:3]]
             phieu = [c["mau"].replace("{k}", q) for q in phieu]
+            ct_trang = {}
         else:
-            phieu = c["trang"]
+            phieu, ct_trang = _trang_phan_trang(ma, c)
         tong_moi, loi_td = 0, []
+        vt_trang = {}
         try:
             for u in phieu:
                 d = DT.doc_gan(u, port=port)
@@ -766,8 +903,21 @@ def quet_trinh_duyet(ngan_sach_giay: int = 90, t0: float | None = None) -> dict:
                     loi_td.append(str(d["loi"])[:60])
                     continue
                 ds = _duyet_tai_lieu(d, ma, c, tu_khoa=u)
+                # van tay = tap URL boc duoc, dung de biet trang nay co that su
+                # moi khong (xem `_tien_con_tro_trang`).
+                if ct_trang:
+                    # khop bang TIEN TO: URL co phan trang la goc + "page-N/",
+                    # nen `u.startswith(goc)` la dinh danh dung. Khop bang chuoi
+                    # "page-N" thi hai seed cung o trang N se khop lan nhau.
+                    goc = next((g for g, _ in ct_trang.get("_dang_lay", [])
+                                if u.startswith(g)), u)
+                    n_hien = next((n for g, n in ct_trang.get("_dang_lay", [])
+                                   if g == goc), 1)
+                    vt_trang[goc if n_hien == 1 else f"{goc}#{n_hien}"] = SO.van_tay(
+                        "|".join(sorted(x.get("url", "") for x in ds)))
                 if ds:
                     tong_moi += luu_tai_lieu(ma, ds)
+            _tien_con_tro_trang(ma, ct_trang, vt_trang)
             SO.chay("UPDATE nguon SET lan_cuoi=?, so_lan=so_lan+1, loi_lien_tuc=0, "
                     "thu_hoach=thu_hoach+?, ghi_chu=? WHERE ma=?",
                     time.time(), tong_moi,
