@@ -1,6 +1,42 @@
-# TIEP TUC NGAY MAI — chot phien 2026-08-31 23:11
+# TIEP TUC NGAY MAI — chot phien 2026-09-01 16:43
 
-seeker lo do sau quet bang 1 (mql5 chi lay trang dau, ca kho ve 35 tai lieu); xay ban giao SONG + dieu khien XA qua Telegram; luot null 368 ung vien ra am tinh do duoc
+Phien 01/09 chieu: vá lớp 'số 0 câm' + chuyển chốt chặn chạm holdout về chỗ ghi.
+
+DA LAM
+- do_im_lang: nguon cam nay kem VI SAO (KHONG_AI_LAY / CHO_TRINH_DUYET /
+  LOI_MANG / CHAY_SACH_MA_RONG). Truoc chi bao 'cam', van phai truy tay.
+- _co_nguoi_lay tra CA HAI kho seeker (NGUON 12 + NGUON_TRINH_DUYET 25).
+- Tra 39 tai lieu ve dung khoa nguon. Con 5 nguon cam, da biet ly do:
+  fxblue/quantconnect cho Chrome CDP (dang tat); etoro/semantic/blog chay
+  sach ma rong -> phai chay tay.
+- nhan/so.py: chuyen chot chan 'mot gia thuyet cham holdout MOT lan' tu 4 CHO
+  GOI trong quantlab ve CHO GHI (ghi_ket_qua). Nay nem ChamLaiHoldout neu da
+  co ket qua song ma khong khai cham_lai='<ly do>'.
+- test_do_im_lang.py + test_cham_lai_holdout.py. 822 test qua.
+
+DO DUOC (danh gia khach quan)
+- FDR: 1.798 phep thu, nguong tut 0,043 -> 0,0017 (kho gap 25 lan).
+  989/1.798 phep thu co p > 0,5 -> hon NUA ngan sach vinh vien tieu cho phep
+  thu ve gan nhu khong co gi. Day la so ho lon nhat, va la loi TU DUY.
+- 7 gia thuyet tung PASS: deu co lich su cham nhieu lan truoc 25/08,
+  khang_dinh = 0. La UNG VIEN, khong phai phat hien.
+- Cham lai holdout DA DUNG tu 25/08 (1,00 lan/gia thuyet tu do). 897 dong
+  superseded deu la no thang 8, khong phai vi pham dang dien ra.
+- Dau vao 3.200 tai lieu -> 21 co che. Nut that o khau doc-thanh-co-che.
+
+VIEC TOI / MAI
+1. DE XUAT CHO CHU DU AN GAT: bat buoc do LUC (MDE) truoc khi dang ky phep
+   thu. Gia thuyet nao du lieu hien co khong du de phat hien thi do thoai mai
+   nhung KHONG duoc tieu suat FDR. De danh ngan sach cho y tuong co cua thang.
+2. Chay tay 3 nguon CHAY_SACH_MA_RONG: etoro, semantic, blog.
+3. Bat Chrome CDP roi chay lai fxblue + quantconnect.
+4. Dao kho luu tru blog (WordPress /wp-json): ~2.900 bai chien luoc so voi 331
+   bai RSS dang co. Can con tro bien gioi giong MQL5.
+5. Chay ~18 EA da bien dich voi tham so da quy doi theo ATR.
+6. Ton nho: SyntaxWarning '\L' tu mot doan ma nap dong, khong tai hien duoc
+   ngoai pytest. Chi la warning, khong doi hanh vi.
+
+BANKER: da ghi mo ta cua chu du an vao ban giao, CHUA XAY (dung thu tu da dan).
 
 ## Trang thai do duoc luc chot
 > May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
@@ -8,72 +44,58 @@ seeker lo do sau quet bang 1 (mql5 chi lay trang dau, ca kho ve 35 tai lieu); xa
 
 | chi so | hom nay | doi |
 |---|---:|---:|
-| file test (lab) | 50 | +1 |
-| ham test (lab) | 667 | +11 |
+| file test (lab) | 61 | +11 |
+| ham test (lab) | 823 | +156 |
 | file test (ds/) | 82 |  |
 | bang gia .parquet | 252 |  |
-| dong so FDR | 1795 | +1 |
+| dong so FDR | 1798 | +3 |
 |   trong do bac bo | 404 |  |
-| ung vien xep hang | 372 | +45 |
-| ban doc da thu | 2486 | +5 |
+| ung vien xep hang | 549 | +177 |
+| ban doc da thu | 3210 | +724 |
 | co che trong thu vien | 32 |  |
-| van de con mo | 22 |  |
-|   muc NANG | 9 | -1 |
+| van de con mo | 15 | -7 |
+|   muc NANG | 5 | -4 |
 | viec dang CHO | 0 |  |
-| file .py o goc lab | 125 | +3 |
+| file .py o goc lab | 139 | +14 |
 
-- co DUNG_LAI: **KHONG (he dang chay)**
+- co DUNG_LAI: **CO (he dang nam im)**
 - viec CHO theo loai: khong con
 - commit hom nay:
 ```
-886c2a4 ban giao SONG + dieu khien XA: hai thu khong duoc phu thuoc vao agent
-5e905fd hinh dang vs null: 368 ung vien da chay, va bang xep hang co mot cai bay
-5c8b5c7 ban giao 31/08: dien doan tom tat phien
-6b483ac git: bo .claude/worktrees khoi kho (thu muc tam cua harness, vao nham thanh gitlink)
-79529e3 2026-08-31: hieu chuan HINH DANG bang chuoi null: cong cu + 12 test, va luot chay dem 368 gia thuyet x 100 null dang chay
-f1d5d2a hieu chuan HINH DANG: cung luoi lan can chay tren chuoi NULL sinh tu chinh no
-f3ba6e6 dieu_phoi: canh bao cham lease dung >= chu khong phai ==
-0b499d3 nhap tru EVO: mot phat hien = mot van de, va so van de day duoc truy van san
-754734c EVO: mot phat hien = mot van de, va so van de day duoc truy van san
-e705e99 do_on_dinh: edge la CAO NGUYEN hay CAI GAI — va ung vien PASS duy nhat la SUON DOC
-fd6d401 24/7: nguyen nhan goc — dua lease vao os.replace lam supervisor chet moi 4-5 phut
-785fc31 24/7: supervisor phai khai bao cai chet cua minh (bit cho 'khong ro nguyen nhan')
-8cb430b cong 11 gac duoc khung NGAY: do khe theo THU khi chuoi chi co mot gio
-f37eadf cham lai 361 gia thuyet duoi the he cong 5: 83 diem mu da dong, va no lo ra mot PASS
+6801d27 do_im_lang: noi ly do cam + chot chan cham lai holdout ve cho ghi
+7d96b4a NGHI doc duoc BAN DO cua QUANTLAB, va chia han ngach cho hai nguon dau vao
+a55d2dc noi DeepSeek qua cc-switch (khoa da co san tren may), va sua test do
+b2afaaf duong Claude cho tri_tue, sua ten nguon blog, va mot bai kiem chan lop loi cua toi
+787943d van dia cho tester: tick that an 757 MB/12 gio va tu khoa lai cong cua chinh no
+219c2d6 giai quyet hai muc ton: thu hoi ban khong doc duoc, va EVO TAI VE chu khong chi tim
+22b2082 doc van xuoi: bo bao dong gia cua bo phan loai cau luat
+995129f bo doc lan duoc BIEN CO NHO va CONG TAC CAU HINH
+8cfab0f toan tu CO NHO, phan biet strategy/indicator, va soi lai trang dau moi luot
+3ecde6e sua bo tim GitHub cua EVO: no van tim duoc, chi la khong ai doc duoc ket qua
+73643be duong trung binh lam muot duoc MOT TOAN HANG, khong chi mot cot gia
+3bb8f11 them 9 toan hang, chon theo SO LAN do duoc trong ma that
+643fb95 doc_ma: dich duoc "so gia voi MUC DUOC TINH RA" - Bollinger, kenh, pivot
+fd6ab0e SEEKER dung chuan: doc CHIEN LUOC THAT thay vi nhat manh, va them toan hang tuyen tinh
+09396fb doi tai san thi tham so phai doi theo - quy doi bang ATR, khong bang gia
+1be22ed mo rong lo thu thap: 30 -> 92 tu khoa co che
+33b0128 khu trung co che theo DIEU KIEN, khong chi theo TEN
+cebc1b5 lo viec tu chay mot tieng: don vao Pine (suat rut cao nhat) + thu hoi toan kho
+9ea7e17 chay song song nhieu MT5: theo doi TUNG cai dat, va bat ban sao LiveUpdate
+bb07521 day chuyen EA: tai .mq5 that -> bien dich -> tester (chu du an bo rao an ninh)
+dc50b64 lay MIEN QUET cua chinh tac gia tu khai bao input (khong chay ma cua ho)
+ffbe998 truc NEN: Heikin Ashi lam TIN HIEU, khop lenh van o gia that
+c763beb sua phieu chuyen doi: doc MA thanh nhieu kieu danh, bo tran 2, mang tham so theo
+48dfbe6 TradingView lay thang ma Pine, va LOP THU HOI PHAN DUNG DUOC cua he bi loai
+3a06591 vd_p_ung_vien_lech_null: DA TACH bang moc null do that
+9447451 thuoc do nang suat: do dung duong V2 dang chay, va xep hang doi doc theo no
+0888a13 hieu chuan p_placebo bang chuoi null, va dong hai van de NANG da cu
+68f0cb4 seeker: phan trang that + con tro bien gioi, va doi thuoc do sang nang suat doc
 ```
-- file dang doi luc chot: **19**
+- file dang doi luc chot: **7**
 
 ## Mot doan doc la hieu ca phien
 
-Phien toi 31/08. Ba viec, va mot cai do lai lat nguoc chan doan cua chinh he.
-
-**Mot: hinh dang edge khong phan biet duoc voi ngau nhien.** Xay
-`hinh_dang_vs_null.py` — chay Y HET luoi lan can tren K chuoi null sinh tu
-chinh holdout (giu bien dong, giu hinh dang nen, giu chi phi that) roi tra phan
-vi. Luot 368 gia thuyet x 100 null: 279 do duoc, 115 co alpha duong, **7 dat
-p<=0,05 trong khi ngau nhien thuan da cho 5,8**. Ung vien PASS duy nhat cua du
-an (`AUDCAD.H4.rsi_dao_chieu`) co alpha 3,944%/nam so voi **null p95 = 3,862** —
-nam trong dam may ngau nhien. Va `boi_dinh` khong mang thong tin gi (p rai
-0,3-0,9): nhan CAO NGUYEN / CAI GAI cua `do_on_dinh` mot minh khong dung lam ly
-do tin ai duoc nua. Cong cu CO luc: hien vat khe gia EURGBP sang ruc (alpha
-11,1% so voi null p95 0,4%, boi dinh 330 lan).
-
-Kem mot cai bay do duoc trong chinh bang xep hang cua toi: `p` mot phia lam mot
-he LO tien leo len dau bang (XAUUSDM.H4.lap_gap mat 7,7%/nam trong khi null cua
-no mat 18,5% -> p=0,0198). Da tach hai bang alpha duong / alpha am, dong tong
-ket chi dem tren alpha duong va in kem ky vong ngau nhien, hai test khoa lai.
-
-**Hai: SEEKER khong he can nguon — no chi doc trang 1.** Chu du an nghi ngo,
-do lai thi dung: `n_mql5_code` goi dung hai URL, khong phan trang, cat con 30
-link; ca kho MQL5 Code Base thu ve **35 tai lieu**. Chan doan "chu ky nguon qua
-day" cua EVO la sai. Day la lo hong lon nhat dang mo — xem muc -1.
-
-**Ba: hai thu khong duoc phu thuoc vao agent.** `ban_giao_song.py` ghi lien tuc
-trong phien (noi vao Stop hook nen chay sau MOI luot, khong can toi nho ghi), va
-`dieu_khien_xa.py` nghe lenh Telegram bang mot tien trinh RIENG — token het,
-phien dong, no van nghe. Da them vao Startup nen bat may la no chay. Bot
-`@thebrain_point_bot`; lenh dau tien chu du an nhan se duoc nhan lam chu.
-
+(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
 
 ## Viec tiep theo, theo thu tu
 

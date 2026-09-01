@@ -4,7 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
 ### 2026-08-31 23:02:13 — phien 31/08 toi: xay ban giao song + dieu khien xa; tiep theo la sua do sau quet cua seeker (mql5/tradingview moi lay trang 1)
 
 ### 2026-08-31 23:02:13 — chup trang thai
@@ -398,3 +397,10 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `dieu_phoi.log`: 2026-09-01 16:13:19 QUANTLAB  ok         625.7s guard=job
 - `supervisor_stdio.log`: 2026-09-01 16:13:19 QUANTLAB  ok         625.7s guard=job
 - git: 7d96b4a NGHI doc duoc BAN DO cua QUANTLAB, va chia han ngach cho hai nguon dau vao
+
+### 2026-09-01 16:32:36 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10104, 0 phut), dieu_khien_xa.py (pid 3308, 567 phut), dieu_phoi.py (pid 1780, 567 phut), quantlab.py (pid 11196, 4 phut)
+- `dieu_phoi.log`: 2026-09-01 16:27:47 QUANTLAB  bat_dau   lane=compute
+- `supervisor_stdio.log`: 2026-09-01 16:27:47 QUANTLAB  bat_dau   lane=compute
+- git: 6801d27 do_im_lang: noi ly do cam + chot chan cham lai holdout ve cho ghi
