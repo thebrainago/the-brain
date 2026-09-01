@@ -47,6 +47,15 @@ trong `ds/browser/*` va `lab/BROWSER_SCAN*.bat` da sua theo.
 - **Model=1 cua MT5 noi doi** khi TP < 2x bien do nen M1. Phai chay Model=0/4.
 - `swap_mode` co ba nhom cong thuc; mode 9 khong co trong API MT5 nhung FXCE tra ve.
 - Tra cuu phi theo ten symbol tho -> lang le lay phi `MetaQuotes-Demo`.
+- **Chuoi LAI TAP do phan giai** (sua 01/09): `khung_that()` lay TRUNG VI ca chuoi
+  nen doan dau la bar NGAY deo nhan bar gio van qua cua. Dinh 5 ma: EURUSD/USDJPY
+  1971-1998, GBPUSD 1993-1998, US500CASH 2011-2015, XAUUSDM 2014-2016. Da chan
+  bang `du_lieu.cat_doan_tho`; quet lai bang `du_lieu.chan_doan_do_phan_giai()`.
+- **Bar D1 cua CFD KHONG phai bar phien.** D1 cua CFD chi so om ~23 gio, bien do
+  rong hon bien do phien tien mat My **1,39 lan** (do tren US500CASH 2018-2026),
+  va IBS tinh tren hai bar do chi tuong quan 0,866 — 98 ngay kich hoat IBS<0,2
+  theo phien nhung khong theo D1, va 91 ngay nguoc lai. Dung `du_lieu.nap_phien`
+  khi co che noi ve PHIEN chu khong ve ngay lich.
 
 ## Sua code
 - **Co git roi**: sua thang, `b luu "..."` de chot, `b lui <file>` de tra lai.

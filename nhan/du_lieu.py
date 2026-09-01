@@ -16,6 +16,7 @@ Bay da biet, da chan o day:
 """
 from __future__ import annotations
 
+import os
 import time
 from pathlib import Path
 
@@ -403,6 +404,104 @@ def khung_that(df: pd.DataFrame) -> float:
     return float(np.median(d)) if len(d) else float("nan")
 
 
+# ------------------------------------------------- DOAN DAU DO PHAN GIAI THAP
+#: Ty le bar/ngay toi thieu (so voi ky vong cua khung) de mot NAM duoc coi la
+#: co du lieu THAT o khung do.
+#:
+#: VI SAO CAN (do that 01/09/2026, khi hieu chuan cong bang V6). `khung_that()`
+#: lay TRUNG VI khoang cach bar tren CA chuoi, nen mot chuoi lai tap - vai nam
+#: dau la bar NGAY duoc terminal don vao, phan con lai la bar gio that - van
+#: qua duoc cua: trung vi cua 61.030 bar US500CASH la 60 phut trong khi
+#: 1.299 bar dau (2011-2015) moi bar la MOT NGAY.
+#:
+#: Do tren ca kho: 5 ma dinh, va khong phai ma le nao ca -
+#:   EURUSD  H1/H4  1971-1998  (28 nam bar ngay deo nhan bar gio)
+#:   USDJPY  H1/H4  1971-1998  (28 nam)
+#:   GBPUSD  H1/H4  1993-1998  (6 nam)
+#:   US500CASH H1/H4 2011-2015 (5 nam)
+#:   XAUUSDM H1/H4  2014-2016  (3 nam)
+#: Ba trong so do la cap FX duoc quet nhieu nhat cua du an.
+#:
+#: Vi sao no lam hong ket qua chu khong chi lam ban: mot bar NGAY deo nhan H1
+#: co bien do ca ngay. Moi chi bao dua tren bien do bar (IBS, ATR, Donchian,
+#: Bollinger) doc doan do nhu mot gio bien dong gap ~5 lan binh thuong, va moi
+#: quy tac "giu N bar" giu sai don vi thoi gian 24 lan.
+TY_LE_BAR_TOI_THIEU = 0.35
+
+#: Ghi nhan cac lan cat, de `chan_doan_do_phan_giai()` bao cao duoc
+#: ngay ca khi `nap()` tra ket qua tu cache.
+_CAT_DOAN: dict[tuple, dict] = {}
+
+
+def _bar_moi_ngay(index: pd.DatetimeIndex) -> "pd.Series":
+    """So bar trung binh moi NGAY CO GIAO DICH, theo tung nam."""
+    ngay = pd.Series(index.normalize())
+    nam = pd.Series(index.year)
+    so_bar = nam.groupby(nam).size()
+    so_ngay = ngay.groupby(nam.to_numpy()).nunique()
+    return (so_bar / so_ngay).dropna()
+
+
+def doan_do_phan_giai_that(df: pd.DataFrame, khung: str) -> pd.Timestamp | None:
+    """Moc dau tien ma `df` thuc su co do phan giai `khung`.
+
+    Tra None khi ca chuoi da dung do phan giai (khong phai cat gi).
+
+    Chi cat o DAU chuoi: mot nam thua o giua (san dong cua, du lieu ro) la van
+    de KHAC va khong duoc lang le vut bo bang cung mot luat.
+    """
+    if khung not in PHUT_KHUNG or khung in ("D1", "W1") or len(df) < 50:
+        return None
+    ky_vong = 1440.0 / PHUT_KHUNG[khung]
+    bpd = _bar_moi_ngay(df.index)
+    if bpd.empty:
+        return None
+    dat = bpd >= ky_vong * TY_LE_BAR_TOI_THIEU
+    if dat.all() or not dat.any():
+        return None
+    nam_dau = int(dat.idxmax())               # nam DAT dau tien
+    if bpd.index.min() >= nam_dau:
+        return None
+    # Kho co ca bang tz-naive lan tz=UTC; moc phai mang dung mui cua chinh
+    # chuoi, neu khong pandas nem TypeError thay vi so sanh.
+    return pd.Timestamp(year=nam_dau, month=1, day=1, tz=getattr(df.index, "tz", None))
+
+
+def cat_doan_tho(df: pd.DataFrame, khung: str) -> tuple[pd.DataFrame, dict | None]:
+    """Cat doan dau co do phan giai tho hon `khung`. Tra (df, ghi_chu|None)."""
+    moc = doan_do_phan_giai_that(df, khung)
+    if moc is None:
+        return df, None
+    truoc = len(df)
+    ra = df[df.index >= moc]
+    return ra, {"cat_tu": str(df.index.min().date()), "den": str(moc.date()),
+                "bo_bar": truoc - len(ra), "con_bar": len(ra), "khung": khung}
+
+
+def _ghi_cache(df: pd.DataFrame, dich: Path) -> None:
+    """Ghi cache mot cach KHONG BAO GIO de lai file dang do.
+
+    `to_parquet` thang vao `dich` khong phai mot buoc: mot tien trinh khac doc
+    dung luc do se thay file 0 byte va nem ArrowInvalid. Do that 01/09/2026 -
+    lan dau chay `b test` (8 tien trinh) sau khi doi ten cache, ca 8 cung tao
+    mot file va bo test do mot loi khong lien quan gi den thu dang duoc test.
+
+    Ghi ra ten tam mang PID roi doi ten. Tren Windows `os.replace` NEM khi dich
+    dang duoc tien trinh khac mo (bai hoc `24-7-chet-vi-lease-windows`), nen
+    that bai o buoc doi ten chi co nghia "ai do vua ghi xong ban cua ho" - don
+    file tam va di tiep, khong nem len tren.
+    """
+    tam = dich.with_suffix(f".{os.getpid()}.tmp")
+    try:
+        df.to_parquet(tam)
+        os.replace(tam, dich)
+    except Exception:
+        try:
+            tam.unlink(missing_ok=True)
+        except Exception:
+            pass
+
+
 def nap(ma: str, khung: str = "H1", tu: str | None = None, den: str | None = None,
         cache: bool = True) -> pd.DataFrame:
     """Nap bar cua `ma` o `khung`. Tu dong gop tu khung goc + cache ra parquet.
@@ -422,11 +521,22 @@ def nap(ma: str, khung: str = "H1", tu: str | None = None, den: str | None = Non
     # Ten cache mang theo TEN FILE NGUON. Neu chi dat theo `{ma}_{khung}` thi
     # khi ban duoc chon doi (vi them file, vi sua luat chon) cache cu van "moi
     # hon file goc" va duoc dung tiep - tuc doi nguon xong van doc du lieu cu.
-    f_cache = CACHE / f"{ma}_{khung}__{goc['file'].stem}.parquet"
+    # `v2` trong ten: doi 01/09/2026 khi them `cat_doan_tho`. Khong bump thi
+    # cache cu (van moi hon file goc) tiep tuc duoc dung va ban va KHONG BAO GI -
+    # tuc ban sua xong ma so khong doi, va ban se tin la "khong anh huong".
+    f_cache = CACHE / f"{ma}_{khung}__{goc['file'].stem}__v2.parquet"
 
+    df = None
     if cache and f_cache.exists() and f_cache.stat().st_mtime > goc["file"].stat().st_mtime:
-        df = _chuan_hoa(pd.read_parquet(f_cache))
-    else:
+        # Doc co the hong khi mot tien trinh KHAC dang ghi do cache: `b test`
+        # chay 8 tien trinh va lan dau sau khi bump ten cache, ca 8 cung dung
+        # mot ten file. Cache la thu TANG TOC, hong thi dung lai tu file goc -
+        # KHONG duoc de mot phep toi uu lam do vo ca bo test.
+        try:
+            df = _chuan_hoa(pd.read_parquet(f_cache))
+        except Exception:
+            df = None
+    if df is None:
         tho = _chuan_hoa(pd.read_parquet(goc["file"]))
         phut_goc = khung_that(tho)
         if np.isfinite(phut_goc) and phut_goc > PHUT_KHUNG[khung] * 1.5:
@@ -437,17 +547,143 @@ def nap(ma: str, khung: str = "H1", tu: str | None = None, den: str | None = Non
             df = tho          # da dung khung, khong gop
         else:
             df = _gop(tho, khung)
+        # Doan dau do phan giai tho (bar NGAY deo nhan bar gio) phai bi cat SAU
+        # khi gop: gop khong tao them bar, no chi giu nguyen bar ngay do.
+        df, _ghi_chu = cat_doan_tho(df, khung)
+        if _ghi_chu:
+            _CAT_DOAN[(ma, khung)] = _ghi_chu
         if cache:
-            try:
-                df.to_parquet(f_cache)
-            except Exception:
-                pass
+            _ghi_cache(df, f_cache)
     if tu:
         df = df[df.index >= pd.Timestamp(tu)]
     if den:
         df = df[df.index <= pd.Timestamp(den)]
     return df
 
+
+
+def chan_doan_do_phan_giai(cac_khung=("H1", "H4"), cac_ma=None) -> list[dict]:
+    """Quet kho: bang nao co doan dau do phan giai tho hon ten khung cua no.
+
+    Doc TRUC TIEP file goc, khong qua `nap()` - vi `nap()` da cat roi thi bao
+    cao se rong va ta se ket luan "khong co van de" tu chinh cai da sua.
+    """
+    ds = kho()
+    ra = []
+    for ma in (cac_ma or sorted(ds)):
+        for khung in cac_khung:
+            ban = ban_cho_khung(ma, khung)
+            if not ban:
+                continue
+            try:
+                tho = _chuan_hoa(pd.read_parquet(ban["file"]))
+            except Exception:
+                continue
+            if len(tho) < 200:
+                continue
+            df = tho if khung_that(tho) >= PHUT_KHUNG[khung] * 0.9 else _gop(tho, khung)
+            _, ghi_chu = cat_doan_tho(df, khung)
+            if ghi_chu:
+                ra.append({"ma": ma, "file": ban["file"].name, **ghi_chu})
+    return ra
+
+
+# ------------------------------------------------------------- BAR THEO PHIEN
+#: Cua so phien giao dich noi dia, theo gio DIA PHUONG cua san giao dich do.
+#: Dung ten mui gio (khong dung do lech cung) de DST tu dong dung: phien My
+#: la 13:30-20:00 UTC vao mua he va 14:30-21:00 UTC vao mua dong - mot con so
+#: UTC cung se sai mot tieng trong nua nam.
+PHIEN = {
+    "my": {"mui": "America/New_York", "mo": (9, 30), "dong": (16, 0)},
+    "au": {"mui": "Europe/London", "mo": (8, 0), "dong": (16, 30)},
+    "nhat": {"mui": "Asia/Tokyo", "mo": (9, 0), "dong": (15, 0)},
+}
+#: Ty le bar toi thieu so voi mot phien day du de giu lai ngay do. Nua phien
+#: (truoc Le Ta on) la that va nen giu; mot ngay chi co 2 bar thi bien do cua
+#: no khong phai bien do phien.
+TY_LE_BAR_PHIEN_TOI_THIEU = 0.5
+
+
+def nap_phien(ma: str, phien: str = "my", khung: str = "M30",
+              toi_thieu_ty_le: float = TY_LE_BAR_PHIEN_TOI_THIEU
+              ) -> tuple[pd.DataFrame, dict]:
+    """Bar NGAY dung nghia mot PHIEN GIAO DICH, gop tu bar trong ngay.
+
+    VI SAO CAN (van de `hieu_chuan_v6`, mo tu 15/08/2026). V6 duoc dung tren
+    `sp500_daily` - bar cua PHIEN TIEN MAT 09:30-16:00 gio New York. Trong lab,
+    cung ma do la mot CFD chi so chay gan 23 gio, nen bar D1 cua no om ca phien
+    A va phien Au. `ibs` = vi tri gia dong cua TRONG BIEN DO BAR, nen hai bar
+    do khong cung mot dai luong: bien do 23 gio rong hon han bien do 6,5 gio va
+    gia dong cua phien My nam o cho khac trong do.
+    
+    Do that tren US500CASH 2018-2026: bien do bar D1 CFD rong hon bien do phien
+    tien mat, va IBS tinh tren hai bar do chi tuong quan mot phan. Vi vay
+    "V6 tren D1 cua CFD" KHONG phai V6 - va do la dieu bai thu 15/08 chua biet.
+
+    Tra `(df, ghi_chu)`. `ghi_chu` noi ro cua so phien, khung nguon, so ngay bi
+    bo va - quan trong nhat - `xap_xi` khi khung nguon khong chia dung moc mo
+    cua (H1 khong the bat dau luc 09:30).
+
+    Index tra ve la NGAY phien (naive, da chuan hoa) de gong duoc voi lop vi mo
+    va voi cac bang D1 khac.
+    """
+    df = nap(ma, khung)
+    if df.empty:
+        return df, {"loi": "khong co du lieu"}
+    return gop_theo_phien(df, phien, khung, toi_thieu_ty_le)
+
+
+def gop_theo_phien(df: pd.DataFrame, phien: str = "my", khung: str = "M30",
+                   toi_thieu_ty_le: float = TY_LE_BAR_PHIEN_TOI_THIEU
+                   ) -> tuple[pd.DataFrame, dict]:
+    """Phan THUAN TINH TOAN cua `nap_phien`: gop bar trong ngay thanh bar phien.
+
+    Tach ra de bo test khoa duoc LUAT ma khong phu thuoc kho du lieu that -
+    kho co the doi, luat thi khong duoc doi lang le.
+    """
+    if phien not in PHIEN:
+        raise ValueError(f"phien khong biet: {phien}. Co: {', '.join(PHIEN)}")
+    ph = PHIEN[phien]
+    if df.empty:
+        return df, {"loi": "khong co du lieu"}
+
+    idx = pd.DatetimeIndex(df.index)
+    idx = idx.tz_localize("UTC") if idx.tz is None else idx.tz_convert("UTC")
+    dia_phuong = idx.tz_convert(ph["mui"])
+
+    phut = dia_phuong.hour * 60 + dia_phuong.minute
+    mo = ph["mo"][0] * 60 + ph["mo"][1]
+    dong = ph["dong"][0] * 60 + ph["dong"][1]
+    # Bar duoc dan nhan o DAU bar: bar bat dau tu `mo` va ket thuc truoc `dong`.
+    xap_xi = (mo % PHUT_KHUNG[khung]) != 0
+    neo = mo - (mo % PHUT_KHUNG[khung]) if xap_xi else mo
+    giu = (phut >= neo) & (phut < dong)
+
+    trong = df[giu].copy()
+    if trong.empty:
+        return trong, {"loi": "khong bar nao roi vao cua so phien"}
+    ngay = pd.DatetimeIndex(dia_phuong[giu]).normalize().tz_localize(None)
+
+    ham = {"open": "first", "high": "max", "low": "min", "close": "last"}
+    if "tick_volume" in trong.columns:
+        ham["tick_volume"] = "sum"
+    gom = trong.groupby(ngay)
+    ra = gom.agg(ham)
+    if "spread" in trong.columns:
+        ra["spread"] = trong["spread"].where(trong["spread"] > 0).groupby(ngay).median()
+    dem = gom.size()
+
+    day_du = int((dong - neo) / PHUT_KHUNG[khung])
+    du_bar = dem >= max(1, int(day_du * toi_thieu_ty_le))
+    ra = ra[du_bar.to_numpy()]
+    ra.index.name = None
+
+    return ra, {"phien": phien, "mui": ph["mui"], "khung_nguon": khung,
+                "cua_so": f"{ph['mo'][0]:02d}:{ph['mo'][1]:02d}-{ph['dong'][0]:02d}:{ph['dong'][1]:02d}",
+                "bar_mot_phien": day_du, "xap_xi_moc_mo": bool(xap_xi),
+                "ngay_giu": int(len(ra)), "ngay_bo_thieu_bar": int((~du_bar).sum()),
+                "tu": str(ra.index.min().date()) if len(ra) else None,
+                "den": str(ra.index.max().date()) if len(ra) else None}
 
 # --------------------------------------------------------------- KIEM SUC KHOE
 #: Ty le `open[i] == close[i-1]` toi da con chap nhan duoc.
