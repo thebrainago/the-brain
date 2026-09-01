@@ -36,12 +36,29 @@ RA_JSON = LAB / "reports" / "LO_MOT_GIO.json"
 #: Tu khoa hoi o search TradingView. Rong ve CO CHE chu khong ve ten chi bao, de
 #: khong keo ve mot ro bien the cua cung mot thu.
 TU_KHOA = [
+    # co che
     "mean reversion", "breakout", "momentum", "trend following", "scalping",
     "swing trading", "pullback", "range trading", "volatility", "session",
     "opening range", "gap", "reversal", "divergence", "support resistance",
     "moving average cross", "bollinger", "rsi", "atr stop", "donchian",
     "ichimoku", "vwap", "order block", "supply demand", "market structure",
     "seasonality", "day of week", "overnight", "carry", "pairs trading",
+    # them 01/09 luot hai: mo rong sau khi cong khu trung theo dieu kien da co,
+    # nen chay lai khong con de ra ban trung.
+    "keltner", "supertrend", "parabolic sar", "adx trend", "stochastic",
+    "macd strategy", "cci", "williams", "money flow", "obv", "accumulation",
+    "volume profile", "fair value gap", "liquidity sweep", "break of structure",
+    "engulfing", "pin bar", "inside bar", "harmonic", "fibonacci retracement",
+    "pivot point", "camarilla", "murrey math", "regression channel",
+    "standard deviation channel", "zscore", "hurst", "kalman filter",
+    "hidden markov", "machine learning", "neural", "grid trading", "martingale",
+    "hedging", "arbitrage", "statistical arbitrage", "cointegration",
+    "risk parity", "portfolio rotation", "relative strength", "sector rotation",
+    "gap and go", "opening drive", "closing auction", "turn of month",
+    "pre market", "news trading", "economic calendar", "interest rate",
+    "yield curve", "vix", "term structure", "put call ratio", "open interest",
+    "commitment of traders", "smart money", "wyckoff", "elliott wave",
+    "renko strategy", "heikin ashi", "point and figure", "tick chart",
 ]
 
 
