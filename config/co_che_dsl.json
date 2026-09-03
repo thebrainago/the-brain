@@ -7075,5 +7075,494 @@
   "ra": [],
   "nguon": "https://www.youtube.com/watch?v=AY7fWmE1CBk",
   "_ty_le_kich_hoat": 0.0965
+ },
+ {
+  "ten": "rsi_3_5",
+  "co_che": "RSI 3 period xuống dưới 5 là tín hiệu quá bán ngắn hạn, thường dẫn đến phục hồi trong xu hướng tăng.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 3
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 5.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=GzReQDx3U8s",
+  "_ty_le_kich_hoat": 0.0189
+ },
+ {
+  "ten": "rsi_3_10",
+  "co_che": "RSI 3 period xuống dưới 10 cho tín hiệu oversold nhẹ, tần suất giao dịch cao hơn.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 3
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 10.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=GzReQDx3U8s",
+  "_ty_le_kich_hoat": 0.0483
+ },
+ {
+  "ten": "rsi_2_2",
+  "co_che": "RSI 2 period xuống dưới 2 là cực kỳ quá bán, xác suất bật cao.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 2.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=GzReQDx3U8s",
+  "_ty_le_kich_hoat": 0.0263
+ },
+ {
+  "ten": "rsi_2_3",
+  "co_che": "RSI 2 period xuống dưới 3 cho tín hiệu oversold mạnh, thường đi kèm hồi phục.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 3.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=GzReQDx3U8s",
+  "_ty_le_kich_hoat": 0.0374
+ },
+ {
+  "ten": "rsi_overbought_sell",
+  "co_che": "Bán khi RSI lên trên 70 vùng quá mua, kỳ vọng giá giảm từ vùng overbought",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=ZX-Tp4zgJYc",
+  "_ty_le_kich_hoat": 0.0954
+ },
+ {
+  "ten": "mean_reversion_buy_rsi2_10_above_200ema_below_10sma",
+  "co_che": "Buy when price above 200EMA indicating uptrend, price below 10SMA indicating deviation from mean, and RSI(2) below 10 indicating oversold. Target is 10SMA, hold max 3 days.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 10
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 10.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 10
+    }
+   }
+  ],
+  "nguon": "https://www.youtube.com/watch?v=1pjK2wdSqE4",
+  "_ty_le_kich_hoat": 0.1785
+ },
+ {
+  "ten": "mean_reversion_sell_rsi2_90_below_200ema_above_10sma",
+  "co_che": "Sell when price below 200EMA indicating downtrend, price above 10SMA indicating deviation from mean, and RSI(2) above 90 indicating overbought. Target is 10SMA, hold max 3 days.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 3,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 10
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 90.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 10
+    }
+   }
+  ],
+  "nguon": "https://www.youtube.com/watch?v=1pjK2wdSqE4",
+  "_ty_le_kich_hoat": 0.095
+ },
+ {
+  "ten": "short_khi_rsi_2_96_trong_downtrend",
+  "co_che": "Bán khống khi RSI 2 kỳ quá mua trên 96 trong xu hướng giảm (20 EMA < 200 EMA)",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 2,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 20
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 96.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=NMs87wGmunM",
+  "_ty_le_kich_hoat": 0.0267
+ },
+ {
+  "ten": "long_khi_rsi_2_1_8_trong_uptrend",
+  "co_che": "Mua khi RSI 2 kỳ quá bán dưới 1.8 trong xu hướng tăng (20 EMA > 200 EMA)",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 2,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 1.8
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=NMs87wGmunM",
+  "_ty_le_kich_hoat": 0.0237
+ },
+ {
+  "ten": "long_khi_rsi_2_1_7_trong_uptrend",
+  "co_che": "Mua khi RSI 2 kỳ xuống dưới 1.7 trong xu hướng tăng",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 2,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 1.7
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=NMs87wGmunM",
+  "_ty_le_kich_hoat": 0.0226
+ },
+ {
+  "ten": "donchian_long_short_long",
+  "co_che": "Vao long khi close vuot upper channel (shifted 1 bar), thoat long khi close duoi lower channel. Breakout pha vo kenh gia.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "n": 1,
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     }
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "n": 1,
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     }
+    }
+   }
+  ],
+  "nguon": "https://blog.quantinsti.com/donchian-channel-strategy/",
+  "_ty_le_kich_hoat": 0.626
+ },
+ {
+  "ten": "donchian_long_short_short",
+  "co_che": "Vao short khi close duoi lower channel (shifted), thoat short khi close vuot upper channel. Breakout pha vo kenh gia.",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "n": 1,
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     }
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "n": 1,
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     }
+    }
+   }
+  ],
+  "nguon": "https://blog.quantinsti.com/donchian-channel-strategy/",
+  "_ty_le_kich_hoat": 0.3716
+ },
+ {
+  "ten": "donchian_long_only_with_ma_filter",
+  "co_che": "Vao long khi close vuot upper channel (shifted) va close tren 200 SMA, thoat long khi close duoi lower channel. Bo loc xu huong dai han.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "n": 1,
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     }
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200,
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     }
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "n": 1,
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "n": 20,
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     }
+    }
+   }
+  ],
+  "nguon": "https://blog.quantinsti.com/donchian-channel-strategy/",
+  "_ty_le_kich_hoat": 0.5464
  }
 ]
