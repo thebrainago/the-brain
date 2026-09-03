@@ -67,15 +67,40 @@ TU_KHOA_GOC = [
 ]
 
 
+#: Ma tra ve cua lan lay cuoi, cho nguoi goi PHAN BIET duoc ba truong hop.
+#: Truoc 03/09/2026 `_lay` tra `None` cho ca ba, va `n_mql5_code` dich `None`
+#: thanh "qua trang cuoi" -> mot lan chan tam thoi cat VINH VIEN con tro bien
+#: gioi. Do that: con tro ghi `trang_cuoi = 3` cho gan het danh muc trong khi
+#: MQL5 Code Base co hang chuc trang, va tu do nguon lang le bao "het trang".
+LAN_LAY_CUOI: dict = {}
+
+
 def _lay(url: str, timeout: int = 25) -> str | None:
+    """Tra van ban khi 200, `None` khi khong. Ghi CHI TIET vao `LAN_LAY_CUOI`.
+
+    Nguoi goi nao can phan biet "404 = het trang" voi "khong noi duoc mang"
+    thi doc `LAN_LAY_CUOI` ngay sau khi goi. Khong doi chu ky ham vi co ~20
+    cho goi no va phan lon khong quan tam.
+    """
+    LAN_LAY_CUOI.clear()
     try:
         import requests
         r = requests.get(url, timeout=timeout, headers={"User-Agent": UA})
+        LAN_LAY_CUOI.update({"url": url, "ma": r.status_code, "loi": None})
         if r.status_code == 200:
             return r.text
-    except Exception:
+    except Exception as e:
+        LAN_LAY_CUOI.update({"url": url, "ma": None,
+                             "loi": f"{type(e).__name__}: {str(e)[:100]}"})
         return None
     return None
+
+
+def lay_that_bai_vi_mang() -> bool:
+    """Lan `_lay` vua roi hong vi MANG/CHAN, khong phai vi trang khong ton tai."""
+    d = LAN_LAY_CUOI
+    return bool(d.get("loi")) or (d.get("ma") not in (None, 200) and
+                                  int(d.get("ma") or 0) >= 500)
 
 
 def _sach(s: str) -> str:
@@ -394,8 +419,16 @@ def n_mql5_code(tu_khoa: list[str]) -> list[dict]:
         txt = _lay(u, timeout=30)
         da_lay += 1
         if not txt:
-            # 404 = qua trang cuoi -> ghi lai bien va quay ve dau (muc moi len
-            # dau bang nen trang 1 luon con gia tri), khong tinh la loi nguon.
+            # PHAN BIET hai truong hop, va do la ban va 03/09/2026:
+            #   - hong vi MANG/CHAN -> KHONG dung dat gi vao con tro. Mot lan
+            #     mql5.com bi loc SNI tung ghi `trang_cuoi = 3` cho gan het
+            #     danh muc, va tu do nguon lang le bao "het trang" MAI MAI.
+            #   - 404 that -> moi la qua trang cuoi.
+            if lay_that_bai_vi_mang():
+                ct["lan_hong_mang"] = int(ct.get("lan_hong_mang", 0)) + 1
+                ct["hong_mang_cuoi"] = LAN_LAY_CUOI.get("loi") or LAN_LAY_CUOI.get("ma")
+                time.sleep(1.5)
+                continue
             if n > 1:
                 cuoi[muc] = n - 1
                 trang[muc] = 1
