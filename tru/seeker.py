@@ -37,6 +37,26 @@ REPORTS = Path(__file__).resolve().parent.parent / "reports"
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 
+#: SO TU KHOA MOI NGUON MOI LUOT. Truoc 03/09/2026 con so nay viet CUNG trong
+#: than tung ham (`tu_khoa[:3]`, `tu_khoa[:2]`), nen khong ai chinh duoc va
+#: khong ai thay no dang chan.
+#:
+#: Do duoc 03/09: bang `tu_khoa` co 126 tu, moi nguon chi hoi 2-3 tu moi luot
+#: -> can ~50 luot moi di het MOT VONG. Rieng TradingView: tu truoc den nay moi
+#: hoi **15 tu khoa**, va mot lan noi tran cho ngay 120 bai moi.
+#:
+#: Muc mac dinh giu nguyen hanh vi cu (phanh chi phi + ton trong quota API).
+#: `muc_tieu.san*` noi tran cho RIENG luot chien dich cua no.
+SO_TU_KHOA_MOI_NGUON = {
+    "arxiv": 3, "github": 3, "openalex": 3, "stackexchange": 2,
+    "hackernews": 2, "crossref": 2, "semantic": 2, "mql5_code": 3,
+}
+
+
+def _so_tu_khoa(nguon: str, mac_dinh: int = 3) -> int:
+    return int(SO_TU_KHOA_MOI_NGUON.get(nguon, mac_dinh))
+
+
 TU_KHOA_GOC = [
     "trading strategy backtest", "momentum factor", "mean reversion equity",
     "statistical arbitrage", "market microstructure", "volatility risk premium",
@@ -98,7 +118,7 @@ def n_arxiv(tu_khoa: list[str]) -> list[dict]:
     """arXiv q-fin. HANG B: cong trinh co phuong phap viet ra."""
     ra = []
     truy_van = ["cat:q-fin.ST", "cat:q-fin.PM", "cat:q-fin.TR", "cat:q-fin.CP"]
-    truy_van += [f'all:"{t}"' for t in tu_khoa[:3]]
+    truy_van += [f'all:"{t}"' for t in tu_khoa[:_so_tu_khoa("arxiv")]]
     for q in truy_van[:5]:
         u = ("http://export.arxiv.org/api/query?search_query=" + q.replace(" ", "+") +
              "&start=0&max_results=25&sortBy=submittedDate&sortOrder=descending")
@@ -122,7 +142,7 @@ def n_arxiv(tu_khoa: list[str]) -> list[dict]:
 def n_github(tu_khoa: list[str]) -> list[dict]:
     """GitHub. HANG A khi repo co CODE CHAY DUOC - ta backtest lai duoc ngay."""
     ra = []
-    for t in tu_khoa[:3]:
+    for t in tu_khoa[:_so_tu_khoa("github")]:
         u = ("https://api.github.com/search/repositories?q=" +
              t.replace(" ", "+") + "+language:python&sort=stars&order=desc&per_page=20")
         txt = _lay(u)
@@ -146,7 +166,7 @@ def n_github(tu_khoa: list[str]) -> list[dict]:
 def n_openalex(tu_khoa: list[str]) -> list[dict]:
     """OpenAlex - kho cong trinh mo, khong can khoa. Thay cho SSRN (bi SSL chan)."""
     ra = []
-    for t in tu_khoa[:3]:
+    for t in tu_khoa[:_so_tu_khoa("openalex")]:
         u = ("https://api.openalex.org/works?search=" + t.replace(" ", "%20") +
              "&per-page=25&sort=cited_by_count:desc")
         txt = _lay(u)
@@ -173,7 +193,7 @@ def n_openalex(tu_khoa: list[str]) -> list[dict]:
 def n_stackexchange(tu_khoa: list[str]) -> list[dict]:
     """Quant StackExchange. HANG C nhung chat luong cau hoi cao, tot de mo tu khoa."""
     ra = []
-    for t in tu_khoa[:2]:
+    for t in tu_khoa[:_so_tu_khoa("stackexchange")]:
         u = ("https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=votes"
              "&q=" + t.replace(" ", "%20") + "&site=quant&pagesize=20&filter=withbody")
         txt = _lay(u)
@@ -194,7 +214,7 @@ def n_stackexchange(tu_khoa: list[str]) -> list[dict]:
 
 def n_hackernews(tu_khoa: list[str]) -> list[dict]:
     ra = []
-    for t in tu_khoa[:2]:
+    for t in tu_khoa[:_so_tu_khoa("hackernews")]:
         u = ("https://hn.algolia.com/api/v1/search?query=" + t.replace(" ", "%20") +
              "&tags=story&hitsPerPage=20")
         txt = _lay(u)
@@ -524,7 +544,7 @@ def n_tradingview_pine(tu_khoa: list[str]) -> list[dict]:
 def n_crossref(tu_khoa: list[str]) -> list[dict]:
     """Crossref - muc luc cong trinh co DOI. Dung de bat bai KHONG co tren arXiv."""
     ra = []
-    for t in tu_khoa[:2]:
+    for t in tu_khoa[:_so_tu_khoa("crossref")]:
         txt = _lay("https://api.crossref.org/works?rows=20&sort=score&query=" +
                    t.replace(" ", "+"), timeout=30)
         if not txt:
@@ -548,7 +568,7 @@ def n_crossref(tu_khoa: list[str]) -> list[dict]:
 
 def n_semantic_scholar(tu_khoa: list[str]) -> list[dict]:
     ra = []
-    for t in tu_khoa[:2]:
+    for t in tu_khoa[:_so_tu_khoa("semantic")]:
         u = ("https://api.semanticscholar.org/graph/v1/paper/search?query=" +
              t.replace(" ", "+") + "&limit=20&fields=title,abstract,year,citationCount,url")
         txt = _lay(u)
@@ -1021,7 +1041,7 @@ def quet_trinh_duyet(ngan_sach_giay: int = 90, t0: float | None = None) -> dict:
             # "システムトレード"; ep tu khoa tieng Anh vao qiita.com thi ra rong,
             # va cai rong do se bi doc nham thanh "nguon nay khong co gi".
             tu = c.get("tu_khoa_rieng") or tu_khoa_dung(3)
-            phieu = [_ur.quote(k) for k in tu[:3]]
+            phieu = [_ur.quote(k) for k in tu[:_so_tu_khoa("mql5_code")]]
             phieu = [c["mau"].replace("{k}", q) for q in phieu]
             ct_trang = {}
         else:

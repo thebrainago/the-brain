@@ -134,8 +134,43 @@ def bom_tu_khoa(tu_khoa: list[str], diem: float = 10.0) -> int:
     return them
 
 
+class NoiTran:
+    """Noi tran truy van cua TAT CA nguon, chi trong pham vi `with`.
+
+    Truoc 03/09/2026 moi nguon hoi cung lam 2-3 tu khoa moi luot va con so do
+    viet CUNG trong than tung ham. Voi 126 tu khoa trong bang, mot vong day du
+    can ~50 luot. Do that tren TradingView: tu truoc den nay moi hoi 15 tu, va
+    mot lan noi tran cho ngay 120 bai moi.
+
+    Dung `with` chu khong sua file cau hinh: mot chien dich duoc quyen hoi
+    nhieu, nhung SEEKER chay nen hang ngay thi van phai giu phanh chi phi va
+    ton trong quota API cua tung nguon.
+    """
+
+    def __init__(self, so: int = 40):
+        self.so = int(so)
+        self._cu_nguon = None
+        self._cu_tv = None
+
+    def __enter__(self):
+        from tru import seeker as SK
+        self._cu_nguon = dict(SK.SO_TU_KHOA_MOI_NGUON)
+        self._cu_tv = SK.TV_SO_TRUY_VAN_MOI_LUOT
+        for k in SK.SO_TU_KHOA_MOI_NGUON:
+            SK.SO_TU_KHOA_MOI_NGUON[k] = self.so
+        SK.TV_SO_TRUY_VAN_MOI_LUOT = self.so
+        return self
+
+    def __exit__(self, *a):
+        from tru import seeker as SK
+        SK.SO_TU_KHOA_MOI_NGUON.clear()
+        SK.SO_TU_KHOA_MOI_NGUON.update(self._cu_nguon)
+        SK.TV_SO_TRUY_VAN_MOI_LUOT = self._cu_tv
+        return False
+
+
 def san(ma: str, ngan_sach_giay: int = 900, them_tu_khoa: list[str] | None = None,
-        moi_nguon_toi_da: int = 0, in_ra=print) -> dict:
+        moi_nguon_toi_da: int = 0, toan_luc: int = 0, in_ra=print) -> dict:
     """LUONG 1 - SEEKER het cong suat theo mot muc tieu.
 
     Khac `seeker.mot_luot`: bo qua LICH cua nguon (chien dich uu tien hon chu
@@ -148,6 +183,10 @@ def san(ma: str, ngan_sach_giay: int = 900, them_tu_khoa: list[str] | None = Non
     tk = _cac_tu_khoa(ma, them_tu_khoa)
     bom_tu_khoa(tk)
     SK.dang_ky_nguon()
+    tran = NoiTran(toan_luc) if toan_luc else None
+    if tran:
+        tran.__enter__()
+        in_ra(f"  [toan luc] tran truy van moi nguon nang len {toan_luc}")
 
     # Nguon dang loi lien tuc thi van phai nhin (bat bien 2).
     hong = {r["ma"] for r in (SO.nhieu(
@@ -193,8 +232,11 @@ def san(ma: str, ngan_sach_giay: int = 900, them_tu_khoa: list[str] | None = Non
                        "so_ket_qua=so_ket_qua+? WHERE tu=?",
                        (tong_moi // max(len(tk), 1), t))
 
+    if tran:
+        tran.__exit__()
     return {"ma": ma, "tu_khoa": len(tk), "nguon_chay": len(chi_tiet),
             "tai_lieu_moi": tong_moi, "giay": round(time.time() - t0, 1),
+            "toan_luc": toan_luc,
             "chi_tiet": chi_tiet, "nguon_bo_qua_vi_loi": sorted(hong)}
 
 
