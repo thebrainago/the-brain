@@ -4,13 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `supervisor_stdio.log`: 2026-09-01 12:08:01 EVO       ok           6.3s guard=job
-- git: 09396fb doi tai san thi tham so phai doi theo - quy doi bang ATR, khong bang gia
-
-### 2026-09-01 12:14:43 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 2384, 0 phut), dieu_khien_xa.py (pid 3308, 309 phut), dieu_phoi.py (pid 1780, 309 phut), quantlab.py (pid 9228, 9 phut)
-- `dieu_phoi.log`: 2026-09-01 12:14:03 SEEKER    ok         145.9s guard=job
 - `HINH_DANG_VS_NULL_sau2500.log`: [xong] 23 ung vien · 12826.0s -> HINH_DANG_VS_NULL_sau2500.md
 - `LO_MOT_GIO.log`: 11:08:46  === XONG. Thu vien co che: 81 -> 106 ===
 - `supervisor_stdio.log`: 2026-09-01 12:14:03 SEEKER    ok         145.9s guard=job
@@ -404,3 +397,10 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `github_toan_luc.log`: KHO CO CHE: 191 -> 191   tong 873s
 - `thu_mql5.log`: TONG 0 ma nguon rieng biet
 - git: a57728b MQL5 khong bi "chan bot" - DNS bi DAU DOC. Ba trieu chung, mot nguyen nhan
+### 2026-09-03 21:53:56 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 7036, 0 phut), dieu_khien_xa.py (pid 16352, 678 phut)
+- `cao_mql5.log`: CHIEN LUOC: GDS Renko Fast Demo EA
+- `thu_hai_cach.log`: thong ke: {'so_lan': 4, 'so_403': 4, 'ty_le_403': 0.5}
+- `thu_mql5.log`: TONG 0 ma nguon rieng biet
+- git: 46e2ffc thu_thap khong he phan trang - chay 4 vong lien tiep de tai lai dung 60 file cu

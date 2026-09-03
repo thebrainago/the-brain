@@ -45,15 +45,41 @@ from nhan import ngu_phap as NP
 from nhan import so as SO
 from nhan import tri_tue as TT
 
-#: Tai lieu phai co it nhat 2 dau hieu nay moi dang mot luot goi.
+#: Tai lieu phai co it nhat `DIEM_TOI_THIEU` dau hieu nay moi dang mot luot goi.
+#:
+#: BAN DAU CHI CO NHOM VAN XUOI, va do la mot loi do 03/09/2026: bo loc duoc
+#: viet cho VAN XUOI roi dem ap len MA NGUON. Do that tren 300 ban doc github
+#: (co that `class ThreeBarStrategy`, `strategy/indicators.py`): cham **0-1
+#: diem, 0/300 qua nguong**. Code khong viet "buy when RSI crosses above 30";
+#: no viet `if rsi < 30:`, `self.buy()`, `strategy.entry(...)`, `OrderSend(...)`.
 DAU_HIEU_LUAT = [
+    # --- van xuoi ---
     r"\b(buy|long|enter)\s+(when|if|signal|entry)", r"\b(sell|short|exit)\s+(when|if)",
     r"\bcross(es|ing)?\s+(above|below|over|under)\b", r"\bstop[\s-]?loss\b",
     r"\btake[\s-]?profit\b", r"\bif\s+.{0,40}\b(rsi|ema|sma|macd|atr|adx|stoch)",
     r"\b(rsi|stochastic|cci)\s*[<>]\s*\d", r"\bclose\s+(above|below)\b",
     r"\bentry\s+(rule|condition|signal)", r"\bexit\s+(rule|condition|signal)",
     r"\bkhi\s+(gia|rsi|ema|sma)\b", r"\b(vao|thoat)\s+lenh\b",
+    # --- MA NGUON: Pine ---
+    r"strategy\.(entry|close|exit|order)\s*\(", r"\bta\.(crossover|crossunder)\s*\(",
+    r"\bplotshape\s*\(", r"//@version\s*=",
+    # --- MA NGUON: MQL4/5 ---
+    r"\b(OrderSend|PositionOpen|CTrade|trade\.(Buy|Sell))\s*\(",
+    r"\bOnTick\s*\(", r"\biCustom\s*\(",
+    r"\b(input|extern)\s+(double|int|bool)\s+\w*(SL|TP|Stop|Take|Period|Lot)",
+    # --- MA NGUON: Python (backtrader / QuantConnect / vectorbt) ---
+    r"self\.(buy|sell|order_target|close)\s*\(",
+    r"\b(SetHoldings|MarketOrder|Liquidate)\s*\(",
+    r"class\s+\w*Strateg\w*\s*[\(:]", r"def\s+(next|on_data|OnData|handle_data)\s*\(",
+    # --- chung cho moi ngon ngu ---
+    r"\b(rsi|ema|sma|macd|atr|adx|stoch|bollinger)\w*\s*[<>=]{1,2}\s*[\d\w]",
+    r"\b(sl|tp|stop_?loss|take_?profit)\s*=\s*[\d\w]",
 ]
+
+#: Ha tu 2 xuong 1: mot file ma nguon co the chi lo dung MOT dau hieu (vd mot
+#: dong `strategy.entry`) ma van chua tron mot chien luoc. Doi HAI dau hieu la
+#: mot rao khong co co so, va no da giet 300 ban doc tot.
+DIEM_TOI_THIEU = 1
 _RX = [re.compile(p, re.I) for p in DAU_HIEU_LUAT]
 
 HE_THONG = (
@@ -85,6 +111,49 @@ def ung_vien(gioi_han: int = 200, diem_toi_thieu: int = 2,
         d = dict(r)
         if _diem_luat(d["van_ban"]) >= diem_toi_thieu:
             ra.append(d)
+        if len(ra) >= gioi_han:
+            break
+    return ra
+
+
+def ung_vien_artifact(gioi_han: int = 300, diem_toi_thieu: int | None = None) -> list[dict]:
+    """Ma nguon nam trong bang `artifact` (type `code`) chu khong o `noi_dung`.
+
+    MAT XICH DUT tim ra 03/09/2026: `ma_nguon.thu_thap` tai file `.mq5` THAT
+    ve va ghi vao **`artifact`**; con `boc_llm.ung_vien` doc **`noi_dung`**.
+    Ket qua: 290 file .mq5 vua cao ve nam ngoai tam voi cua bo boc, va bao cao
+    hien ra la "0 co che" trong khi kho vua day len 377 artifact code.
+
+    Danh dau da boc bang mot dong trong `chi_so_vh` (bang `artifact` la
+    CHI-GHI-THEM, khong duoc UPDATE).
+    """
+    da = {str(r["chi_tiet"]) for r in (SO.nhieu(
+        "SELECT chi_tiet FROM chi_so_vh WHERE ten='boc_artifact'") or [])}
+    rows = SO.nhieu(
+        "SELECT id, fingerprint, payload FROM artifact "
+        "WHERE artifact_type='code' ORDER BY id DESC LIMIT ?", gioi_han * 3) or []
+    nguong = DIEM_TOI_THIEU if diem_toi_thieu is None else diem_toi_thieu
+    ra = []
+    for r in rows:
+        d = dict(r)
+        if str(d["id"]) in da:
+            continue
+        try:
+            pl = json.loads(d["payload"])
+        except Exception:
+            continue
+        # Payload LONG mot tang: cot `payload` chua {artifact_type, fingerprint,
+        # payload, schema_version}, va ma nguon nam o `payload["payload"]`.
+        if isinstance(pl.get("payload"), dict):
+            pl = pl["payload"]
+        vb = pl.get("content") or pl.get("noi_dung") or ""
+        if len(vb) < 800 or _diem_luat(vb) < nguong:
+            continue
+        ra.append({"id": f"art:{d['id']}", "artifact_id": d["id"],
+                   "van_ban": vb, "so_ky_tu": len(vb),
+                   "tieu_de": pl.get("title") or pl.get("ten_file") or "",
+                   "nguon": "mql5_code",
+                   "url": pl.get("source_url") or pl.get("url") or ""})
         if len(ra) >= gioi_han:
             break
     return ra
@@ -208,6 +277,11 @@ def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
         df_kiem=None, in_ra=print) -> dict:
     """Boc `gioi_han` ban doc, goi SONG SONG `luong` luot."""
     ds = ung_vien(gioi_han)
+    con = gioi_han - len(ds)
+    if con > 0:
+        them = ung_vien_artifact(con)
+        ds += them
+        in_ra(f"  + {len(them)} ma nguon tu bang `artifact` (file .mq5 that)")
     in_ra(f"  {len(ds)} ban doc co dau hieu chua luat (tren tong chua boc)")
     if not ds:
         return {"ban": 0, "co_che_moi": 0}
@@ -264,8 +338,16 @@ def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
 
     with SO.ket_noi() as cn:
         for r in ket:
-            if not r.get("loi"):
-                cn.execute("UPDATE noi_dung SET da_boc=1 WHERE id=?", (r["id"],))
+            if r.get("loi"):
+                continue
+            i = r["id"]
+            if isinstance(i, str) and i.startswith("art:"):
+                # `artifact` la CHI-GHI-THEM: danh dau o `chi_so_vh`.
+                cn.execute("INSERT INTO chi_so_vh(ten,gia_tri,chi_tiet,luc) "
+                           "VALUES('boc_artifact',1,?,?)",
+                           (i.split(":", 1)[1], SO.bay_gio()))
+            else:
+                cn.execute("UPDATE noi_dung SET da_boc=1 WHERE id=?", (i,))
 
     giay = time.time() - t0
     return {"ban": len(ds), "co_che_moi": moi, "tu_choi": tu_choi, "loi": loi,

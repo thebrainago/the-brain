@@ -57,6 +57,53 @@ trong `ds/browser/*` va `lab/BROWSER_SCAN*.bat` da sua theo.
   theo phien nhung khong theo D1, va 91 ngay nguoc lai. Dung `du_lieu.nap_phien`
   khi co che noi ve PHIEN chu khong ve ngay lich.
 
+## Day chuyen theo MUC TIEU (03/09/2026 - moi)
+```
+b mang             kiem duong ra + bat Cloudflare WARP neu can
+b day-chuyen [MA]  ca day chuyen: san -> doc song song -> boc co che
+b san-nguon [MA]   LUONG 1: theo tai san + theo TEN HE THONG + MQL5 .mq5
+b boc [N] [M]      LUONG 2: doc song song roi boc bang LLM
+b noi-sinh [MA] [KHUNG]   LUONG 3: sinh co che tu chinh lich su cua ma
+b pheu             do TUNG CHANG cua pheu nguon (tai lieu -> co che)
+```
+`nhan/day_chuyen.py` noi ca ba luong. Ngoai sinh: `nhan/ngoai_sinh.chuyen`
+(he DA PASS -> tai san moi, **giu TY LE KICH HOAT chu khong giu con so**).
+
+## Bay them - phien 03/09/2026 (tat ca deu tung bao so lieu BINH THUONG)
+- **`don_bay` gop bang LOG** cho `(S_T/S_0)^L`: mat luc can bien dong va mat ca
+  kha nang chay tai khoan. L=3 tren 98 nam ra x76.289.488 thay vi x2.406.
+  Dung `gop="so_hoc"` (mac dinh `tu_dong` da lo khi don_bay != 1).
+- **Sharpe cho Kelly phai tinh tren loi suat SO HOC**, khong phai log — dung
+  log ha tran `0,5*S^2` di 27%.
+- **CO TUC**: CFD chi so tra dieu chinh co tuc rieng; chuoi backtest la chi so
+  GIA. Chu du an xac nhan XM **khong tra** -> dung `co_tuc=False`. `nhan/tai_tro.py`
+  do duoc suat that (1990s 2,58% ... 2026 1,24%).
+- **"Em a" la bay**: 3 chi so bien dong thap nhat thi 2 cai AM sau phi. UK100
+  mua-giu **-2,77 %/nam** suot 15 nam. Xep chi so theo CAGR RONG, khong theo vol.
+- **Closure DSL tung nuot tham so** (`**_`) -> 152/170 mau "diec", va bo do on
+  dinh cham chung la CAO NGUYEN hoan hao. Nay `do_hinh_dang` tu choi khi
+  `so_o_khac_nhau < 2`.
+- **Co che theo GIO tren khung khong co gio** -> tin hieu hang so. `mau._phai_co_gio`
+  va `ngu_phap` chi_bao 'gio' nay NEM LOI thay vi tra 0.
+- **Tran phoi nhiem cua bo sinh** tung la 0,60 -> loai sach he XU HUONG. Nay 0,95.
+  Cai chan "mua-giu doi ten" la phep so O CUNG RUI RO, khong phai tran phoi nhiem.
+- **Bo loc "co dau hieu chua luat"** viet cho VAN XUOI thi cham ma nguon 0 diem.
+- **Loi nhac cua bo boc** tung kem "KHONG de xuat lai, ke ca doi ten" + danh sach
+  170 co che -> LLM tra ve 0. Bo loc phai o CONG, khong o loi nhac.
+- **`Accept-Encoding: br` khi khong co brotli**: HTTP 200 nhung `r.text` RAC.
+  Cung mot trang: 21.245 ky tu/0 link vs 82.347 ky tu/40 link.
+- **DNS bi dau doc** tren mang nay (mql5.com): ba trieu chung khac nhau
+  (RemoteDisconnected / ERR_HTTP2_PROTOCOL_ERROR / HTTP 000) cua MOT nguyen nhan.
+  **Bat WARP la thong.** Du phong: `nhan/dns_vuot.py`.
+- **Lam "giong nguoi" qua tay thi phan tac dung**: `requests.get` tran 4/4 = 200;
+  phien giu cookie + Referer 4/4 = 403.
+- **Tai HONG bi dich thanh "het trang"** -> con tro bien gioi MQL5 bi cat vinh
+  vien xuong trang 3. Dung `seeker.lay_that_bai_vi_mang()`.
+- **`ma_nguon.thu_thap` khong he phan trang** truoc 03/09 -> 4 vong lien tiep
+  tai lai dung 60 file cu. Nay co con tro `config/ma_nguon_con_tro.json`.
+- **`thu_thap` ghi vao bang `artifact`**, KHONG vao `tai_lieu`. Dem nham bang
+  thi tuong nhu that bai.
+
 ## Sua code
 - **Co git roi**: sua thang, `b luu "..."` de chot, `b lui <file>` de tra lai.
   **Dung copy tay vao `backups/`** (da phinh 247 MB) — do la thoi quen truoc git.

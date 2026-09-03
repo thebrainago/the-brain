@@ -250,6 +250,56 @@ def c_ban_do(_):
     return 0
 
 
+
+# ---- DAY CHUYEN 03/09/2026: san -> doc -> boc -----------------------------
+def _nhan(a, i, mac_dinh):
+    return a[i] if len(a) > i else mac_dinh
+
+
+def c_day_chuyen(a):
+    """b day-chuyen [MA] - ca day chuyen mot lenh."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import day_chuyen as D;"
+                 f"D.mot_luot({_nhan(a, 0, 'US500CASH')!r})"], cwd=LAB)
+
+
+def c_san(a):
+    """b san-nguon [MA] - LUONG 1: san theo tai san + ten he thong + MQL5."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import day_chuyen as D;"
+                 f"D.san({_nhan(a, 0, 'US500CASH')!r})"], cwd=LAB)
+
+
+def c_boc(a):
+    """b boc [SO_DOC] [SO_BOC] - LUONG 2: doc song song + boc co che."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import day_chuyen as D;"
+                 f"D.boc({int(_nhan(a, 0, 500))}, {int(_nhan(a, 1, 200))})"], cwd=LAB)
+
+
+def c_noi_sinh(a):
+    """b noi-sinh [MA] [KHUNG] - LUONG 3: sinh co che tu chinh lich su."""
+    return chay([PY, LAB / "_noi_sinh_chay.py", "--ma", _nhan(a, 0, "US500CASH"),
+                 "--khung", _nhan(a, 1, "H4")], cwd=LAB)
+
+
+def c_pheu(a):
+    """b pheu - do tung chang cua pheu nguon."""
+    return chay([PY, LAB / "_pheu_nguon.py"], cwd=LAB)
+
+
+def c_mang(a):
+    """b mang - kiem duong ra cho cac nguon, bat WARP neu can."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import day_chuyen as D;"
+                 "m=D.kiem_mang();"
+                 "_=D.bat_warp() if m.get('mql5')!='OK' else None"], cwd=LAB)
+
+
 LENH = {
     "vao": c_vao, "ket": c_ket,
     "test": lambda a: c_test(a, True), "test1": lambda a: c_test(a, False),
@@ -265,6 +315,10 @@ LENH = {
     "ds": c_ds, "tim": c_tim,
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
+    # --- day chuyen 03/09/2026 ---
+    "day-chuyen": c_day_chuyen, "dc": c_day_chuyen,
+    "san-nguon": c_san, "boc": c_boc,
+    "noi-sinh": c_noi_sinh, "pheu": c_pheu, "mang": c_mang,
 }
 
 
