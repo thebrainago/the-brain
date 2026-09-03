@@ -46,9 +46,17 @@ class KetQua:
     so_lenh: int = 0
     phoi_nhiem: float = 0.0
     canh_bao: list = field(default_factory=list)
+    che_do_gop: str = "log"                # log | so_hoc
+    don_bay: float = 1.0
+    chay_tai_khoan: bool = False           # co bar nao lam von <= nguong khong
+    bar_chay: int | None = None
+    ngay_chay: object = None
+    von_mang: np.ndarray | None = None     # von SO HOC (co the ve 0)
 
     @property
     def von(self) -> np.ndarray:
+        if self.von_mang is not None:
+            return self.von_mang
         return np.exp(np.cumsum(np.nan_to_num(self.loi)))
 
     def chuoi(self) -> pd.Series:
@@ -66,7 +74,8 @@ def _loi_suat_tien(df: pd.DataFrame) -> np.ndarray:
 
 def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
          lai_suat_nam: np.ndarray | None = None, ma: str = "", khung: str = "",
-         da_dich: bool = False, don_bay: float = 1.0) -> KetQua:
+         da_dich: bool = False, don_bay: float = 1.0,
+         gop: str = "tu_dong", nguong_chay: float = 0.0) -> KetQua:
     """Chay mot chien luoc. `tin_hieu[i]` la phoi nhiem biet tai close[i].
 
     da_dich=True chi dung cho CANARY (khi can dat vi the dung bien mot bar).
@@ -85,6 +94,29 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
 
     Phi cua phan don bay them duoc thu day du: spread theo khoi luong doi va
     phi qua dem theo phoi nhiem, deu tinh tren `v` sau khi nhan.
+
+    `gop`: CACH GOP LOI SUAT QUA THOI GIAN. Day la loi nang duoc phat hien
+    03/09/2026, ngay khi du an quay sang cau hoi don bay.
+      - "log"    : loi_von = v*r voi r la loi suat LOG. Cong don tuyen tinh.
+      - "so_hoc" : loi_von = log(1 + v*(e^r - 1) - phi). Dung.
+      - "tu_dong": "so_hoc" khi don_bay != 1, nguoc lai "log" (giu nguyen moi
+                   con so cu).
+
+    VI SAO PHAI SUA. Cach "log" cho exp(sum(L*r)) = (S_T/S_0)^L. Do khong phai
+    mot vi the don bay L tai can bang hang ngay — do la mua LUY THUA cua chi
+    so. Hai thu bi lam bien mat sach:
+      1. LUC CAN BIEN DONG ~ 0,5*L*(L-1)*sigma^2/nam. Voi SP500 (sigma 16%)
+         va L=3 do la 7,7 diem %/nam bi bo qua.
+      2. CHAY TAI KHOAN. Trong log, von khong bao gio am duoc. Ngoai doi L=3
+         chet sach o bat ky ngay nao -33,4%.
+    Do that tren 98 nam SP500: don_bay=3 kieu log cho von cuoi x76.289.488,
+    dung bang (giá cuoi/giá dau)^3, trong khi thuc te chay tai khoan thang
+    10/1929. Moi ket luan CAGR o L>1 truoc 03/09/2026 deu phai xem lai.
+    (Sharpe thi khong sao: no bat bien theo ti le.)
+
+    `nguong_chay`: von con lai (ti le so voi von truoc bar do) ma duoi no thi
+    coi la chay tai khoan. 0,0 = chay sach. San that cat lenh som hon (XM cat
+    o muc ky quy 20%), nen 0,0 la CHAN DUOI lac quan.
     """
     n = len(df)
     th = np.asarray(tin_hieu, dtype=float).reshape(-1)
@@ -110,8 +142,41 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
     phi_tr = doi * cp.truot_gia_frac
     phi_gi = cp.phi_giu_mang(idx, v, lai_suat_nam)
 
-    loi_tho = v * r
-    loi = loi_tho - phi_sp - phi_tr - phi_gi
+    if gop == "tu_dong":
+        che_do = "so_hoc" if abs(float(don_bay) - 1.0) > 1e-12 else "log"
+    elif gop in ("log", "so_hoc"):
+        che_do = gop
+    else:
+        raise ValueError(f"gop phai la log|so_hoc|tu_dong, nhan {gop!r}")
+
+    phi_tong = phi_sp + phi_tr + phi_gi
+    canh = list(cp.canh_bao)
+    von_mang = None
+    chay_tk, bar_chay, ngay_chay = False, None, None
+
+    if che_do == "log":
+        loi_tho = v * r
+        loi = loi_tho - phi_tong
+    else:
+        # loi suat SO HOC cua tai san; moi thanh phan duoi day deu la ti le
+        # cua VON (notional = v * von), nen cong tru truc tiep duoc.
+        ra = np.expm1(r)
+        loi_tho_sh = v * ra
+        song = 1.0 + loi_tho_sh - phi_tong
+        xau = np.nonzero(song <= nguong_chay)[0]
+        if len(xau):
+            bar_chay = int(xau[0])
+            chay_tk = True
+            ngay_chay = idx[bar_chay]
+            song = song.copy()
+            song[bar_chay:] = 1.0        # dong bang: khong con von de lai/lo
+            canh.append(f"CHAY TAI KHOAN tai bar {bar_chay} ({ngay_chay}) "
+                        f"voi don bay {don_bay:g}x")
+        von_mang = np.cumprod(song)
+        if bar_chay is not None:
+            von_mang[bar_chay:] = 0.0
+        loi = np.log(song)
+        loi_tho = np.log1p(np.maximum(loi_tho_sh, -1.0 + 1e-12))
 
     return KetQua(
         ma=ma, khung=khung, index=idx, vi_the=v, loi=loi, loi_tho=loi_tho, r=r,
@@ -121,7 +186,10 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
         so_lan_doi=int(np.sum(doi > 1e-12)),
         so_lenh=dem_lenh(v),
         phoi_nhiem=float(np.mean(np.abs(v))),
-        canh_bao=list(cp.canh_bao))
+        canh_bao=canh,
+        che_do_gop=che_do, don_bay=float(don_bay),
+        chay_tai_khoan=chay_tk, bar_chay=bar_chay, ngay_chay=ngay_chay,
+        von_mang=von_mang)
 
 
 def dem_lenh(v: np.ndarray) -> int:
