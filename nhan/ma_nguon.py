@@ -52,9 +52,27 @@ _CHU_DE = {"experts": "EA", "indicators": "chi bao"}
 
 
 def _lay(url: str, timeout: int = 30, nhi_phan: bool = False):
+    """Tai mot trang/file cua MQL5.
+
+    DA THU va DA BO mot lop "duyet nhu nguoi" (phien giu cookie + Referer +
+    nhip ngau nhien) ngay 03/09/2026. Do tach bach tren cung mot may, cung
+    mot luc, cung 4 trang:
+        `requests.get` tran   -> **4/4 HTTP 200**, 40 link ma moi trang
+        `duyet_nguoi.Khach`   -> **4/4 HTTP 403**
+    Tuc lop "giong nguoi" chinh la thu bi danh dau, khong phai thu duoc cho
+    qua. Phien co cookie tu `/` roi mang Referer di khap noi la mot dau van
+    RIENG, va no de nhan hon mot yeu cau tran.
+
+    Cai that su can: (1) DNS khong bi dau doc - `nhan/dns_vuot.py` hoac mot
+    duong VPN nhu Cloudflare WARP; (2) mot `User-Agent` that; (3) nghi giua
+    cac lan goi. Khong can gi them.
+    """
+    from nhan import duyet_nguoi as DN
     try:
         import requests
-        r = requests.get(url, timeout=timeout, headers={"User-Agent": UA})
+        r = requests.get(url, timeout=timeout,
+                         headers={"User-Agent": DN.UA,
+                                  "Accept-Encoding": DN._MA_NEN})
         if r.status_code != 200:
             return None
         return r.content if nhi_phan else r.text

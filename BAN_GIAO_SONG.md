@@ -4,13 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-### 2026-09-01 12:10:00 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13560, 0 phut), dieu_khien_xa.py (pid 3308, 305 phut), dieu_phoi.py (pid 1780, 305 phut), quantlab.py (pid 9228, 4 phut)
-- `dieu_phoi.log`: 2026-09-01 12:08:01 EVO       ok           6.3s guard=job
-- `HINH_DANG_VS_NULL_sau2500.log`: [xong] 23 ung vien · 12826.0s -> HINH_DANG_VS_NULL_sau2500.md
-- `LO_MOT_GIO.log`: 11:08:46  === XONG. Thu vien co che: 81 -> 106 ===
 - `supervisor_stdio.log`: 2026-09-01 12:08:01 EVO       ok           6.3s guard=job
 - git: 09396fb doi tai san thi tham so phai doi theo - quy doi bang ATR, khong bang gia
 
@@ -404,3 +397,10 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
 - `tv_toan_luc.log`: KHO CO CHE: 178 -> 191   tong 341s
 - git: a08860d TradingView: tran truy van 3/luot la nut that that; kho co che 152 -> 191
+### 2026-09-03 20:46:38 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12880, 0 phut), dieu_khien_xa.py (pid 16352, 610 phut)
+- `cao_mql5.log`: truoc: 236 tai lieu mql5_code
+- `github_toan_luc.log`: KHO CO CHE: 191 -> 191   tong 873s
+- `thu_mql5.log`: TONG 0 ma nguon rieng biet
+- git: a57728b MQL5 khong bi "chan bot" - DNS bi DAU DOC. Ba trieu chung, mot nguyen nhan
