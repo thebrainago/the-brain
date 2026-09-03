@@ -99,3 +99,4 @@ VIEC TIEP THEO
 
 839 test qua. Da dung sach 24/7, 0 tien trinh mo coi. (test 840, fdr 1799, viec cho 0)
 - **2026-09-01 23:31** — Phien 01/09 khuya: dong 6/16 van de. Sua goc o TANG DU LIEU (bar NGAY deo nhan bar gio tren 5 ma; bar D1 CFD khong phai bar phien), SO SACH FDR (cot gt_ma chua hai khong gian khoa nen moi doi soat tu 17/08 lang le rong; bat bien khop_ba_tang do sai chieu), PHOI NHIEM HOLDOUT (mot PASS o lan nhin thu 10), va NGU PHAP (bang con thieu giau dung ba toan hang can nhat). Bo test tung bom 60 dong rac vao so cai that - da don va da co conftest canh. BANKER de sau theo yeu cau, nen hieu_chuan_v6 chua ket duoc. (test 892, fdr 1799, viec cho 0)
+- **2026-09-03 23:04** — Phien 10 tieng tren MOT muc tieu (US500CASH 20-30%/nam): lo ra 15 loi cung mot ho benh - that bai duoc bao cao nhu ket qua binh thuong. Sua het, noi ca ba luong vao b, MQL5 thong lai sau khi phat hien DNS bi dau doc. (test 1022, fdr 1799, viec cho 0)

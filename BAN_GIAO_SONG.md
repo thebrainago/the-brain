@@ -4,17 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `HINH_DANG_VS_NULL_sau2500.log`: [xong] 23 ung vien · 12826.0s -> HINH_DANG_VS_NULL_sau2500.md
-- `LO_MOT_GIO.log`: 11:08:46  === XONG. Thu vien co che: 81 -> 106 ===
-- `supervisor_stdio.log`: 2026-09-01 12:14:03 SEEKER    ok         145.9s guard=job
-- git: 09396fb doi tai san thi tham so phai doi theo - quy doi bang ATR, khong bang gia
-
-### 2026-09-01 12:22:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16868, 0 phut), dieu_khien_xa.py (pid 3308, 317 phut), dieu_phoi.py (pid 1780, 317 phut), quantlab.py (pid 5276, 4 phut)
-- `dieu_phoi.log`: 2026-09-01 12:18:13 QUANTLAB  bat_dau   lane=compute
-- `HINH_DANG_VS_NULL_sau2500.log`: [xong] 23 ung vien · 12826.0s -> HINH_DANG_VS_NULL_sau2500.md
-- `LO_MOT_GIO.log`: 11:08:46  === XONG. Thu vien co che: 81 -> 106 ===
 - `supervisor_stdio.log`: 2026-09-01 12:18:13 QUANTLAB  bat_dau   lane=compute
 - git: fd6ab0e SEEKER dung chuan: doc CHIEN LUOC THAT thay vi nhat manh, va them toan hang tuyen tinh
 
@@ -404,3 +393,77 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `thu_hai_cach.log`: thong ke: {'so_lan': 4, 'so_403': 4, 'ty_le_403': 0.5}
 - `thu_mql5.log`: TONG 0 ma nguon rieng biet
 - git: 46e2ffc thu_thap khong he phan trang - chay 4 vong lien tiep de tai lai dung 60 file cu
+### 2026-09-03 22:54:06 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6444, 0 phut), dieu_khien_xa.py (pid 16352, 738 phut)
+- `cao_mql5.log`: tai lieu mql5: 236 -> 236   ban doc MA NGUON: 28   (2907s)
+- `thu_hai_cach.log`: thong ke: {'so_lan': 4, 'so_403': 4, 'ty_le_403': 0.5}
+- git: 909a491 Chot day chuyen 03/09: noi ca ba luong vao `b`, va noi not mat xich artifact->boc
+### 2026-09-03 22:58:56 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12136, 0 phut), dieu_khien_xa.py (pid 16352, 743 phut)
+- `cao_mql5.log`: tai lieu mql5: 236 -> 236   ban doc MA NGUON: 28   (2907s)
+- git: 909a491 Chot day chuyen 03/09: noi ca ba luong vao `b`, va noi not mat xich artifact->boc
+### 2026-09-03 — CHOT PHIEN 10 TIENG: mot muc tieu cu the lam lo ra 15 loi
+
+**Chu du an dat muc tieu**: US500CASH, toi uu nhip tang + don bay, 20-30 %/nam.
+Rang buoc: khong dung BANKER (thuan gia), co che phai chay duoc ca FX.
+
+**Cai lam moi thu lo ra**: mot muc tieu CO CON SO GAN VAO. 890 test dang xanh
+trong luc `don_bay` sai 31.700 lan — khong loi nao hom nay la loi test bat
+duoc, vi ca 15 loi deu thuoc loai *ham chay dung, bao so binh thuong, va khong
+sinh ra gi*.
+
+**Bai hoc lon nhat, ghi lai vi toi mac 4 lan trong mot phien**: DUNG CHAN DOAN
+NUT THAT, HAY DO TUNG CHANG. Toi doan la toc do (sai — `doc_ma` chay 452 ban
+duoi 1 giay), doan la nguon it (sai — kho co san 1.007 bai ve ICT), doan la
+TradingView chan JS (sai — hang A da doc 182/182), doan la 285 file Pine bi
+rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
+=> `b pheu` bay gio la mot LENH, khong phai doan script go lai moi lan.
+
+## VIEC NGAY MAI (chu du an giao)
+
+**1. Lam not CAC NGUON DAU VAO con lai.**
+   Da xong: MQL5 (358 file .mq5, qua WARP), GitHub (302 -> 1.170 repo, da sua
+   truy van de vao duoc DUOI DAI thay vi 20 framework noi tieng), TradingView
+   (182/182 hang A da doc — da can voi tu khoa hien co).
+   Con lai, theo thu tu dang lam truoc:
+     - `quantconnect` + `lean_algo`: dang tra 0, chua ro vi sao. Do truoc.
+     - `fxblue`, `myfxbook`: memory ghi can Chrome CDP / bi loc SNI. Nay da co
+       `dns_vuot` + WARP — thu lai.
+     - `etoro`, `semantic`, `blog`: ba nguon `CHAY_SACH_MA_RONG` van chua ro
+       nuot o dau (muc ton tu 01/09).
+     - Kiem `SO_TU_KHOA_MOI_NGUON` cho tung nguon: da go khoi than ham nhung
+       moi chinh cho chien dich, chua chinh cho vong chay nen.
+
+**2. Toi uu co che BOC TACH / DOC.**
+   Hien: doc 0,31 s/ban, boc 3-5 s/ban voi suat 19-37 co che/100 ban.
+   - **281 file .mq5 dang cho boc** — mat xich `artifact -> boc_llm` vua noi
+     xong luc chot phien, CHUA CHAY LAN NAO. Chay dau tien vao mai.
+   - Han muc API la nut that moi (chu du an se nang goi DeepSeek).
+   - Suat chenh 16 lan giua cac nguon (TradingView Pine 18,9% vs MQL5+GitHub
+     1,2%) — do lai sau khi boc lo .mq5, vi lan do la ma CHIEN LUOC that.
+
+**3. QUANTLAB test chung NHANH va CHINH XAC nhu the nao.**
+   Day la cau hoi chu du an dat ra va CHUA co lo trinh. Nhung gi da co:
+     - backtest 0,72 ms / 4.027 bar -> toc do khong phai van de
+     - `hang_doi.py` da xay (18 test) nhung CHUA AI GOI — noi vao vong chay
+     - `bien_don_bay.do_bien` + `cong.xet` + `do_on_dinh.do_hinh_dang`
+     - Quy trinh dung da chay that hom nay: train/holdout -> khop rui ro ->
+       lan can tham so. Sonic R qua ca ba.
+   Can quyet: co che moi vao bang cua nao, tieu suat FDR luc nao, va cai gi
+   duoc chay "do thoai mai" voi `ghi_so=False`.
+
+**4. Sonic R: len MT5 Strategy Tester.** Luat cua chu du an la tester TRUOC,
+   Python SAU. Con so 26,01 %/nam o don bay 3 (maxDD -47,8%) chua duoc tin cho
+   toi khi khop lenh that. Va chua chay placebo, chua qua cong, chua dang ky
+   gia thuyet.
+
+## KHONG DUOC QUEN
+- `b mang` truoc khi san bat cu thu gi. Nhieu nguon bi chan o tang DNS chu
+  khong phai "chan bot"; bat Cloudflare WARP la thong.
+- **Lam "giong nguoi" qua tay thi phan tac dung**: `requests.get` tran 4/4 =
+  200; phien giu cookie + Referer 4/4 = 403.
+- `thu_thap` ghi vao bang `artifact`, KHONG vao `tai_lieu`. Dem nham bang thi
+  tuong nhu that bai.
+- Payload artifact LONG mot tang: ma o `payload["payload"]["content"]`.

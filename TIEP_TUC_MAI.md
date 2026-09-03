@@ -1,6 +1,6 @@
-# TIEP TUC NGAY MAI — chot phien 2026-09-01 23:31
+# TIEP TUC NGAY MAI — chot phien 2026-09-03 23:04
 
-Phien 01/09 khuya: dong 6/16 van de. Sua goc o TANG DU LIEU (bar NGAY deo nhan bar gio tren 5 ma; bar D1 CFD khong phai bar phien), SO SACH FDR (cot gt_ma chua hai khong gian khoa nen moi doi soat tu 17/08 lang le rong; bat bien khop_ba_tang do sai chieu), PHOI NHIEM HOLDOUT (mot PASS o lan nhin thu 10), va NGU PHAP (bang con thieu giau dung ba toan hang can nhat). Bo test tung bom 60 dong rac vao so cai that - da don va da co conftest canh. BANKER de sau theo yeu cau, nen hieu_chuan_v6 chua ket duoc.
+Phien 10 tieng tren MOT muc tieu (US500CASH 20-30%/nam): lo ra 15 loi cung mot ho benh - that bai duoc bao cao nhu ket qua binh thuong. Sua het, noi ca ba luong vao b, MQL5 thong lai sau khi phat hien DNS bi dau doc.
 
 ## Trang thai do duoc luc chot
 > May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
@@ -8,89 +8,50 @@ Phien 01/09 khuya: dong 6/16 van de. Sua goc o TANG DU LIEU (bar NGAY deo nhan b
 
 | chi so | hom nay | doi |
 |---|---:|---:|
-| file test (lab) | 67 | +4 |
-| ham test (lab) | 892 | +52 |
+| file test (lab) | 76 | +9 |
+| ham test (lab) | 1022 | +130 |
 | file test (ds/) | 82 |  |
-| bang gia .parquet | 252 |  |
+| bang gia .parquet | 269 | +17 |
 | dong so FDR | 1799 |  |
 |   trong do bac bo | 404 |  |
 | ung vien xep hang | 555 |  |
-| ban doc da thu | 3273 |  |
+| ban doc da thu | 6226 | +2953 |
 | co che trong thu vien | 32 |  |
-| van de con mo | 10 | -6 |
-|   muc NANG | 2 | -3 |
+| van de con mo | 11 | +1 |
+|   muc NANG | 2 |  |
 | viec dang CHO | 0 |  |
-| file .py o goc lab | 146 | +5 |
+| file .py o goc lab | 181 | +35 |
 
 - co DUNG_LAI: **CO (he dang nam im)**
 - viec CHO theo loai: khong con
 - commit hom nay:
 ```
-b7ecaeb Ngu phap: bang "toan hang con thieu" da giau dung nhung cai can nhat
-3a6b853 Phoi nhiem holdout tich luy: mot PASS o lan nhin thu 10 khong phai mot PASS
-f416fa4 So sach FDR: cot gt_ma chua hai khong gian khoa, va bat bien do sai chieu
-68e08d8 Tang du lieu: cat doan bar NGAY deo nhan bar gio, va bar theo PHIEN
-a0ea502 ban giao 01/09 toi: doan tom tat + muc 0 (huong doi sang ha MDE)
-5f3d2e3 2026-09-01: Phien 01/09 toi: QUANTLAB nhanh 2,6 lan + BANKER noi lai FRED.
-0ea6839 QUANTLAB nhanh 2,6 lan: 3 diem nong + quet song song
-abe0ca5 BANKER: noi lai FRED (12 seri chet 17 ngay vi User-Agent cua chinh ta)
-abd0f57 ban giao 01/09: dien doan tom tat phien + muc 0 (do luc truoc khi tieu suat FDR)
-ce18633 2026-09-01: Phien 01/09 chieu: vá lớp 'số 0 câm' + chuyển chốt chặn chạm holdout về chỗ ghi.
-6801d27 do_im_lang: noi ly do cam + chot chan cham lai holdout ve cho ghi
-7d96b4a NGHI doc duoc BAN DO cua QUANTLAB, va chia han ngach cho hai nguon dau vao
-a55d2dc noi DeepSeek qua cc-switch (khoa da co san tren may), va sua test do
-b2afaaf duong Claude cho tri_tue, sua ten nguon blog, va mot bai kiem chan lop loi cua toi
-787943d van dia cho tester: tick that an 757 MB/12 gio va tu khoa lai cong cua chinh no
-219c2d6 giai quyet hai muc ton: thu hoi ban khong doc duoc, va EVO TAI VE chu khong chi tim
-22b2082 doc van xuoi: bo bao dong gia cua bo phan loai cau luat
-995129f bo doc lan duoc BIEN CO NHO va CONG TAC CAU HINH
-8cfab0f toan tu CO NHO, phan biet strategy/indicator, va soi lai trang dau moi luot
-3ecde6e sua bo tim GitHub cua EVO: no van tim duoc, chi la khong ai doc duoc ket qua
-73643be duong trung binh lam muot duoc MOT TOAN HANG, khong chi mot cot gia
-3bb8f11 them 9 toan hang, chon theo SO LAN do duoc trong ma that
-643fb95 doc_ma: dich duoc "so gia voi MUC DUOC TINH RA" - Bollinger, kenh, pivot
-fd6ab0e SEEKER dung chuan: doc CHIEN LUOC THAT thay vi nhat manh, va them toan hang tuyen tinh
-09396fb doi tai san thi tham so phai doi theo - quy doi bang ATR, khong bang gia
-1be22ed mo rong lo thu thap: 30 -> 92 tu khoa co che
-33b0128 khu trung co che theo DIEU KIEN, khong chi theo TEN
-cebc1b5 lo viec tu chay mot tieng: don vao Pine (suat rut cao nhat) + thu hoi toan kho
-9ea7e17 chay song song nhieu MT5: theo doi TUNG cai dat, va bat ban sao LiveUpdate
-bb07521 day chuyen EA: tai .mq5 that -> bien dich -> tester (chu du an bo rao an ninh)
-dc50b64 lay MIEN QUET cua chinh tac gia tu khai bao input (khong chay ma cua ho)
-ffbe998 truc NEN: Heikin Ashi lam TIN HIEU, khop lenh van o gia that
-c763beb sua phieu chuyen doi: doc MA thanh nhieu kieu danh, bo tran 2, mang tham so theo
-48dfbe6 TradingView lay thang ma Pine, va LOP THU HOI PHAN DUNG DUOC cua he bi loai
-3a06591 vd_p_ung_vien_lech_null: DA TACH bang moc null do that
-9447451 thuoc do nang suat: do dung duong V2 dang chay, va xep hang doi doc theo no
-0888a13 hieu chuan p_placebo bang chuoi null, va dong hai van de NANG da cu
-68f0cb4 seeker: phan trang that + con tro bien gioi, va doi thuoc do sang nang suat doc
+909a491 Chot day chuyen 03/09: noi ca ba luong vao `b`, va noi not mat xich artifact->boc
+46e2ffc thu_thap khong he phan trang - chay 4 vong lien tiep de tai lai dung 60 file cu
+376439b MQL5 DA THONG: 60 file .mq5 that tai ve vong dau. Lop "duyet nhu nguoi" CHINH LA thu bi chan
+a57728b MQL5 khong bi "chan bot" - DNS bi DAU DOC. Ba trieu chung, mot nguyen nhan
+3cd074f Hong mang bi dich thanh "het trang" - mot lan chan cat VINH VIEN con tro MQL5
+11d6bdd Go tran truy van khoi than ham: 2-3 tu khoa/nguon/luot la con so KHONG AI CHINH DUOC
+a08860d TradingView: tran truy van 3/luot la nut that that; kho co che 152 -> 191
+3cd60b4 Test cho bo doc song song + bo boc LLM, va sua test tran phoi nhiem
+bd04a34 Doc song song 28 lan nhanh hon, va suat boc chenh 16 lan giua cac nguon
+258ba61 Duong boc da thong: 0 -> 20 co che/106 ban, va nut that khong phai cai toi tuong
+70c032f SONIC R H4 tren US500CASH: he dau tien ra tien, du lenh, dung vung ngoai mau
+50cb6aa Noi sinh KHONG DIEN DAT DUOC he xu huong - lo hong CAU TRUC, khong phai tham so
+cb4eee7 Bo loc xu huong la BAO HIEM, khong phai alpha - va no NANG TRAN don bay tren chuoi dai
+a3ae24f khop rui ro: 0/11 hon moc, khong cai nao t>2 - nghi ngo 'holdout bi lech' khong cuu duoc gi
+1a83293 Quet lan can PASS DUY NHAT cua du an, va no khong chuyen sang tai san khac duoc
+d03b27f Ba luong theo muc tieu: SEEKER san rieng SP500, NOI SINH, NGOAI SINH
+6b9e1ed bao cao 03/09 phan II: va he + quet da khung + hinh dang
+a0a4a43 Vá sạch lớp lỗi "đổi tham số mà kết quả không đổi" + mở quét đa khung
+65c283c US500CASH: 0/190 co che thang mua-giu; theo tieu chi HE THONG chi V6 du so lenh
+70612d0 Don bay: engine gop bang LOG nen khong co luc can bien dong, va chua ai cap co tuc
 ```
-- file dang doi luc chot: **5**
+- file dang doi luc chot: **4**
 
 ## Mot doan doc la hieu ca phien
 
-Phien nay khong tim ra edge nao. No di go 16 van de con mo va phat hien ra rang
-**phan lon chung khong phai van de nghien cuu ma la DUNG CU DO BI HONG** — va
-moi cai hong deu hong theo cung mot kieu: mot con so duoc bao cao ma khong ai
-kiem lai xem no con dung khong.
-
-  - `khung_that()` lay TRUNG VI ca chuoi, nen 5 ma co doan dau la bar NGAY deo
-    nhan bar gio van qua cua (EURUSD/USDJPY 28 nam, US500CASH 5 nam).
-  - `fdr.gt_ma` chua HAI khong gian khoa; 0/1124 hang moi khop bang gia_thuyet,
-    nen moi phep doi soat tu 17/08 lang le tra ve rong ma khong bao loi.
-  - `khop_ba_tang` do sai chieu: no bao do vi 96 gia thuyet FAIL o cong re,
-    dung nhu THIET KE, trong khi hai huong nguy hiem that thi khong ai do.
-  - `_DIEN_DAT_DUOC` la ban chep tay lech ca hai chieu, nen bang "toan hang con
-    thieu" giau dung ba toan hang duoc dung nhieu nhat.
-  - bo test bom 60 dong rac vao so cai THAT, moi lan `b test` them ~10 dong.
-
-Cai LAT NGUOC: `quant_pass_quarantine_v2` khong phai "8 ket qua cho retest". Con
-mot cai song, va no PASS o **lan nhin thu 10** vao cung mot holdout. Tung buoc
-hop le — nguong LORD tut 1,3e-4 -> 5,0e-6 qua bon lan chay trong ho `@cp2`, roi
-mo hinh chi phi doi the he 2->3 nen ho tach thanh `@cp3`, `j` ve 1 va nguong noi
-**gap 2.600 lan**. Tach ho theo the he chi phi la DUNG THIET KE muc 7. Cai thieu
-la khong ai dem TONG so lan nhin holdout xuyen the he: do duoc **3,39 lan moi
-gia thuyet**, va 3 gia thuyet di tu FAIL sang PASS qua cac lan cham lai.
+(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
 
 ## Viec tiep theo, theo thu tu
 
