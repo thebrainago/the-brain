@@ -183,11 +183,24 @@ def nguong_tu_lich_su(df: pd.DataFrame, toan_hang: dict,
 
 def sinh(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=CAC_GIU,
          chieu: int = 1, kich_hoat_toi_thieu: float = 0.005,
-         kich_hoat_toi_da: float = 0.60) -> list[dict]:
+         kich_hoat_toi_da: float = 0.95) -> list[dict]:
     """Sinh cac khai bao DSL mot dieu kien, nguong lay tu `df_train`.
 
-    Loc ngay tai cho hai dau: co che kich hoat qua hiem (khong du lenh de noi
-    gi) va qua thuong (khong con la mot dieu kien, chi la mua-giu doi ten).
+    `kich_hoat_toi_da` mac dinh 0,95 — KHONG phai 0,60.
+
+    Do la mot loi thiet ke da sua 03/09/2026, do chu du an chi ra: *"neu thi
+    truong bull thi ve li ta cang de kiem loi voi trendfollowing va breakout"*.
+    Voi tran 0,60, moi co che THEO XU HUONG bi loai ngay tu bo sinh: mot bo loc
+    xu huong tren thi truong bo o trong thi truong 70-90% so bar. Hau qua do
+    duoc: top-12 noi sinh tren US500CASH.H4 toan `ibs<q10` / `zscore<q5` /
+    `stochastic<q2` voi phoi nhiem 1-12% — khong MOT he xu huong nao, nen ket
+    luan am cua luot do chua he cham toi trend/breakout.
+
+    Vay cai gi chan "mua-giu doi ten"? KHONG phai tran phoi nhiem — ma la phep
+    so voi chinh mua-giu O CUNG MUC RUI RO (`cong.he_so_khop_rui_ro`). Mot co
+    che kich hoat 92% so bar ma khong hon duoc mua-giu se rot o do, va do la
+    cho dung de no rot. Chan bang tran phoi nhiem la chan NHAM TANG: no loai ca
+    thu ta dang di tim.
     """
     ra: list[dict] = []
     for th in (cac_toan_hang or TOAN_HANG_GOC):
@@ -234,7 +247,7 @@ def sinh(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=CAC_GIU,
 
 def sinh_cap(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=(1, 3, 5),
              chieu: int = 1, kich_hoat_toi_thieu: float = 0.005,
-             kich_hoat_toi_da: float = 0.35, toi_da: int = 4000) -> list[dict]:
+             kich_hoat_toi_da: float = 0.85, toi_da: int = 4000) -> list[dict]:
     """Ghep HAI dieu kien. Day la thu ca du an chua bao gio thu.
 
     Ghi chu 03/09/2026: quet 623 cau hinh truoc do deu la co che MOT dieu kien
@@ -290,4 +303,93 @@ def sinh_cap(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=(1, 3, 5),
                         continue
                     spec["_ty_le_kich_hoat"] = round(kh, 4)
                     ra.append(spec)
+    return ra
+
+# ------------------------------------------------------ SO TOAN HANG VOI NHAU
+#: Cap (nhanh, cham) de so TRUC TIEP voi nhau. Day la dang co che ma `sinh()`
+#: KHONG the de ra duoc, va do la mot lo hong cau truc chu khong phai mot tham
+#: so dat sai.
+#:
+#: Phat hien 03/09/2026, sau khi chu du an hoi "ngoai sinh khong kiem duoc
+#: chien luoc nao trendfollowing chac?": `sinh()` luon so mot toan hang voi mot
+#: HANG SO (nguong phan vi). Nhung mot bo loc xu huong la `close > sma(close,
+#: 200)` - TOAN HANG so voi TOAN HANG. Khong co duong nao trong `sinh()` de ra
+#: duoc dang do, nen ket luan am cua noi sinh truoc 03/09 khong he cham toi
+#: trend/breakout. Nang tran phoi nhiem (0,60 -> 0,95) chi them 16 co che va ca
+#: 16 deu la `giu10` - day phoi nhiem len bang cach giu lau, khong phai loc
+#: xu huong.
+CAP_XU_HUONG = [
+    ("close", {"chi_bao": "gia", "cot": "close"},
+     "sma200", {"chi_bao": "sma", "cot": "close", "n": 200}),
+    ("close", {"chi_bao": "gia", "cot": "close"},
+     "sma50", {"chi_bao": "sma", "cot": "close", "n": 50}),
+    ("close", {"chi_bao": "gia", "cot": "close"},
+     "ema20", {"chi_bao": "ema", "cot": "close", "n": 20}),
+    ("sma20", {"chi_bao": "sma", "cot": "close", "n": 20},
+     "sma100", {"chi_bao": "sma", "cot": "close", "n": 100}),
+    ("sma50", {"chi_bao": "sma", "cot": "close", "n": 50},
+     "sma200", {"chi_bao": "sma", "cot": "close", "n": 200}),
+    ("ema12", {"chi_bao": "ema", "cot": "close", "n": 12},
+     "ema26", {"chi_bao": "ema", "cot": "close", "n": 26}),
+    ("close", {"chi_bao": "gia", "cot": "close"},
+     "dinh50", {"chi_bao": "cao_nhat", "cua": {"chi_bao": "gia", "cot": "high"},
+                "n": 50}),
+    ("close", {"chi_bao": "gia", "cot": "close"},
+     "day50", {"chi_bao": "thap_nhat", "cua": {"chi_bao": "gia", "cot": "low"},
+               "n": 50}),
+]
+
+CO_CHE_CAP = {
+    ">": ("xu_huong",
+          "Gia nam tren duong tham chieu dai han danh dau che do co huong: dong "
+          "von vao co to chuc duoc giai ngan dan qua nhieu phien, nen ai di theo "
+          "duoc tra phan bu xu huong."),
+    "<": ("xu_huong",
+          "Gia nam duoi duong tham chieu dai han danh dau che do giam: rui ro "
+          "giai chap va ban buoc tang, nen dung ngoai la mot vi the co gia."),
+    "cheo_len": ("xu_huong",
+                 "Diem cat len la luc che do doi chieu; dong lenh dat theo dieu "
+                 "kien do duoc kich hoat cung mot luc va cung day mot huong."),
+    "cheo_xuong": ("xu_huong",
+                   "Diem cat xuong lam hang loat lenh dung lo va lenh dao chieu "
+                   "kich hoat cung luc, day gia tiep theo huong do."),
+}
+
+
+def sinh_xu_huong(df_train: pd.DataFrame, cac_cap=None, cac_giu=(1, 5, 10, 20),
+                  chieu: int = 1, kich_hoat_toi_thieu: float = 0.02,
+                  kich_hoat_toi_da: float = 0.97) -> list[dict]:
+    """Sinh co che THEO XU HUONG: so hai toan hang voi nhau.
+
+    Tran phoi nhiem o day cao (0,97) la CO Y: mot bo loc xu huong tren thi
+    truong bo o trong thi truong 70-90% so bar. Cai chan "mua-giu doi ten"
+    khong phai tran phoi nhiem ma la phep so voi mua-giu O CUNG MUC RUI RO.
+    """
+    ra: list[dict] = []
+    for ten_a, ta, ten_b, tb in (cac_cap or CAP_XU_HUONG):
+        for phep in (">", "<", "cheo_len", "cheo_xuong"):
+            ho, cau = CO_CHE_CAP[phep]
+            for giu in cac_giu:
+                spec = {
+                    "ten": f"nsx_{ten_a}_{phep}_{ten_b}_giu{giu}",
+                    "ho": ho, "chieu": chieu, "giu": int(giu),
+                    "co_che": f"{cau} (do bang {ten_a} {phep} {ten_b})",
+                    "nguon": "noi_sinh_xu_huong",
+                    "vao": [{"trai": ta, "phep": phep, "phai": tb}],
+                    "ra": [],
+                }
+                if NP.kiem_khai_bao(spec):
+                    continue
+                try:
+                    tin = NP.sinh_tu_spec(spec, df_train)
+                except Exception:
+                    continue
+                kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
+                if not (kich_hoat_toi_thieu <= kh <= kich_hoat_toi_da):
+                    continue
+                ok, _ = NP.kiem_khong_nhin_truoc(spec, df_train)
+                if not ok:
+                    continue
+                spec["_ty_le_kich_hoat"] = round(kh, 4)
+                ra.append(spec)
     return ra
