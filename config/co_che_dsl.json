@@ -6078,5 +6078,870 @@
   ],
   "nguon": "",
   "_ty_le_kich_hoat": 0.2285
+ },
+ {
+  "ten": "mua_theo_momentum_20_ngay",
+  "co_che": "Mua tài sản có xu hướng tăng giá dựa trên 20-day return dương, kỳ vọng giá tiếp tục tăng.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/Alter-404/multi-asset-portfolio-manager",
+  "_ty_le_kich_hoat": 0.595
+ },
+ {
+  "ten": "ban_theo_momentum_20_ngay",
+  "co_che": "Bán tài sản có xu hướng giảm giá dựa trên 20-day return âm, nhằm cắt lỗ hoặc chốt lời.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/Alter-404/multi-asset-portfolio-manager",
+  "_ty_le_kich_hoat": 0.4037
+ },
+ {
+  "ten": "donchian_breakout_long",
+  "co_che": "Buy when close breaks above the highest high of the previous 100 days, a classic breakout strategy that captures strong trends.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 100
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 100
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://github.com/engineerinvestor/systematic-trend-following-with-managed-futures",
+  "_ty_le_kich_hoat": 0.6587
+ },
+ {
+  "ten": "donchian_breakout_short",
+  "co_che": "Sell when close breaks below the lowest low of the previous 100 days, capturing downside trends.",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 100
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 100
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://github.com/engineerinvestor/systematic-trend-following-with-managed-futures",
+  "_ty_le_kich_hoat": 0.333
+ },
+ {
+  "ten": "sma_200_long",
+  "co_che": "Go long when close is above its 200-day simple moving average, a simple trend-following rule.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "https://github.com/engineerinvestor/systematic-trend-following-with-managed-futures",
+  "_ty_le_kich_hoat": 0.6957
+ },
+ {
+  "ten": "sma_200_short",
+  "co_che": "Go short when close is below its 200-day simple moving average, capturing downtrends.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "https://github.com/engineerinvestor/systematic-trend-following-with-managed-futures",
+  "_ty_le_kich_hoat": 0.2916
+ },
+ {
+  "ten": "12_month_momentum_long",
+  "co_che": "Go long when the 12-month return (close vs 252 days ago) is positive, following time-series momentum.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 252
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 252
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "nguon": "https://github.com/engineerinvestor/systematic-trend-following-with-managed-futures",
+  "_ty_le_kich_hoat": 0.727
+ },
+ {
+  "ten": "12_month_momentum_short",
+  "co_che": "Go short when the 12-month return is negative, betting on momentum reversals.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 252
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 252
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "nguon": "https://github.com/engineerinvestor/systematic-trend-following-with-managed-futures",
+  "_ty_le_kich_hoat": 0.2569
+ },
+ {
+  "ten": "ethusdt_short_ema_cross_under_200_ema",
+  "co_che": "Bullish EMA cross under 200 EMA in macro downtrend, fading bear rally trap",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 50,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 50
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 1950.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 1665.0
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/u/StrixEDGE/",
+  "_ty_le_kich_hoat": 0.9648
+ },
+ {
+  "ten": "bearish_an_bullish_buy_ma50",
+  "co_che": "Mua khi giá đóng cửa trên đường SMA50, xu hướng tăng, thoát khi giá xuống dưới SMA50 hoặc đến 8 PM terminal time.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50,
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     }
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50,
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     }
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 20.0
+    }
+   }
+  ],
+  "nguon": "https://www.mql5.com/en/users/vanh1799/messages",
+  "_ty_le_kich_hoat": 0.6849
+ },
+ {
+  "ten": "mua_khi_ema15_ema200",
+  "co_che": "Mua khi EMA ngắn hạn vượt lên trên EMA dài hạn, bắt đầu xu hướng tăng, nhà đầu tư kỳ vọng giá tiếp tục tăng.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 15
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/maihde/quant",
+  "_ty_le_kich_hoat": 0.7283
+ },
+ {
+  "ten": "ban_khi_ema15_ema200",
+  "co_che": "Ban khi EMA ngắn hạn xuống dưới EMA dài hạn, tín hiệu xu hướng giảm, nhà đầu tư muốn thoát vị thế dài hạn.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 15
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/maihde/quant",
+  "_ty_le_kich_hoat": 0.2717
+ },
+ {
+  "ten": "xauusd_bullish_breakout",
+  "co_che": "Breakout from rising wedge, entry zone 4428-4440, stop 4399.50, targets 4475,4500,4539.44",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 4428.1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 4440.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 4399.5
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 4475.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 4500.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 4539.44
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/chart/XAUUSD/zT0SlFcR-XAU-USD-Bullish-Breakout-Setup-4539-Target-in-Focus/",
+  "_ty_le_kich_hoat": 0.4842
+ },
+ {
+  "ten": "mua_khi_gia_duoi_dai_duoi_bollinger",
+  "co_che": "Gia đóng cửa chạm dải dưới Bollinger (20,2) báo hiệu quá bán, kỳ vọng đảo chiều tăng",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -2.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/chrisconlan/algorithmic-trading-with-python",
+  "_ty_le_kich_hoat": 0.0494
+ },
+ {
+  "ten": "ban_khi_gia_tren_dai_tren_bollinger",
+  "co_che": "Gia đóng cửa chạm dải trên Bollinger (20,2) báo hiệu quá mua, kỳ vọng đảo chiều giảm",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 2.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/chrisconlan/algorithmic-trading-with-python",
+  "_ty_le_kich_hoat": 0.0553
+ },
+ {
+  "ten": "trend_ma200",
+  "co_che": "Xu huong gia tren MA200 giam drawdown, ket hop bien dong muc tieu.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "https://github.com/ijmh2/too-good-to-be-true-backtester",
+  "_ty_le_kich_hoat": 0.6957
+ },
+ {
+  "ten": "my_ma100",
+  "co_che": "Xu huong don gian: mua khi gia tren MA100, ban khi duoi.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   }
+  ],
+  "nguon": "https://github.com/ijmh2/too-good-to-be-true-backtester",
+  "_ty_le_kich_hoat": 0.6763
+ },
+ {
+  "ten": "mean_reversion_z5",
+  "co_che": "Mua khi gia giam sau duoi trung binh 5 ngay, ky vong hoi phuc.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 5
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -1.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 5
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": -1.0
+    }
+   }
+  ],
+  "nguon": "https://github.com/ijmh2/too-good-to-be-true-backtester",
+  "_ty_le_kich_hoat": 0.1963
+ },
+ {
+  "ten": "mua_xu_huong",
+  "co_che": "Kết hợp EMA và RSI để xác nhận xu hướng tăng",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 48.0
+    }
+   }
+  ],
+  "ra": [],
+  "giu": 1,
+  "nguon": "https://www.mql5.com/en/code/75002",
+  "_ty_le_kich_hoat": 0.5935
+ },
+ {
+  "ten": "ban_xu_huong",
+  "co_che": "Kết hợp EMA và RSI để xác nhận xu hướng giảm",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 52.0
+    }
+   }
+  ],
+  "ra": [],
+  "giu": 1,
+  "nguon": "https://www.mql5.com/en/code/75002",
+  "_ty_le_kich_hoat": 0.3415
+ },
+ {
+  "ten": "ethusdt_wedge_rejection_short",
+  "co_che": "Short khi giá chạm vùng kháng cự wedge 2520-2540, stop loss trên 2565, take profit 2440.",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "hang": 2520.0
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 2540.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 2565.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 2440.0
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/chart/ETHUSDT/uFYS90C8-ETH-USDT-THE-2-440-WEDGE-REJECTION-FLUSH/",
+  "_ty_le_kich_hoat": 0.861
+ },
+ {
+  "ten": "golden_cross_long",
+  "co_che": "Mua khi SMA 50 cắt lên SMA 200, bán khi SMA 50 cắt xuống SMA 200, dựa trên xu hướng dài hạn.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 50
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 50
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2811/",
+  "_ty_le_kich_hoat": 0.6851
  }
 ]

@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi.log`: 2026-09-01 10:50:59 QUANTLAB  bat_dau   lane=compute
-- `HINH_DANG_VS_NULL_sau2500.log`: [xong] 23 ung vien · 12826.0s -> HINH_DANG_VS_NULL_sau2500.md
-- `supervisor_stdio.log`: 2026-09-01 10:50:59 QUANTLAB  bat_dau   lane=compute
-- git: bb07521 day chuyen EA: tai .mq5 that -> bien dich -> tester (chu du an bo rao an ninh)
-
-### 2026-09-01 10:57:33 — HET TOKEN toi 12:10 - da giao may hai lo chay nen:
-(1) lo_mot_gio.py --phut 70: gom Pine tu o search TradingView (30 tu khoa) -> doc_ma -> them_co_che; roi thu hoi thanh phan tren TOAN kho; roi doc_ma tren ban doc ma nguon da co. Nhat ky reports/LO_MOT_GIO.log, ket qua reports/LO_MOT_GIO.json. KHONG dang ky gia thuyet, KHONG tieu suat FDR.
-(2) 4 EA chay tester song song tren 4 terminal (fxce/metaquotes/exness/xm), ket qua reports/ea/tester_luot1.json.
 KHI QUAY LAI, doc theo thu tu: LO_MOT_GIO.json (thu vien co che truoc/sau + ly do tu choi) roi tester_luot1.json.
 Viec tiep theo da xac dinh: (a) nang so agent tester tu 3 len 20 de quet tham so song song trong MOT terminal - khong ton dia, va phan biet ro dung Optimization lam MAY CHAY chu khong de no CHON tham so; (b) chay not 21 EA da bien dich; (c) toan hang ngu phap con thieu do tu ma that: tuong_quan 41 lan, phuong_sai 26, macd 13, adx 9.
 
@@ -404,3 +396,11 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `khop_rui_ro_us500.log`: QUA CA HAI          : 0
 - `noi_sinh_2_chi_so.log`: -> reports/noi_sinh_xm_uk100cash_h4.csv  (603s)
 - git: a3ae24f khop rui ro: 0/11 hon moc, khong cai nao t>2 - nghi ngo 'holdout bi lech' khong cuu duoc gi
+### 2026-09-03 15:23:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10704, 0 phut), dieu_khien_xa.py (pid 16352, 287 phut)
+- `hinh_dang_audcad_rsi.log`: {'n': 17, 'ra_': 46, 'vao': 32}          alpha  -1.832%  t -0.654  lenh None
+- `khop_rui_ro_us500.log`: QUA CA HAI          : 0
+- `noi_sinh_2_chi_so.log`: -> reports/noi_sinh_xm_uk100cash_h4.csv  (603s)
+- `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
+- git: 70c032f SONIC R H4 tren US500CASH: he dau tien ra tien, du lenh, dung vung ngoai mau

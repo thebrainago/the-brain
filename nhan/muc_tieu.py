@@ -74,6 +74,36 @@ TU_KHOA_THEO_MA = {
 }
 
 
+#: HE THONG GIAO DICH PHO THONG — san theo TEN RIENG, khong theo tai san.
+#:
+#: Vi sao can (chu du an chi ra 03/09/2026): *"sonic r van la cai toi goi y chu
+#: chua phai he thong nay tim ra, trong khi sonic r ve muc do pho thong la qua
+#: noi tieng trong bao nhieu nam nay roi"*. Do that trong kho 3.489 tai lieu:
+#: "sonic" xuat hien **0 lan trong tieu de, 0 lan trong URL**, chi 5 lan trong
+#: than bai. Mot he noi tieng ca chuc nam ma SEEKER trang tay - vi khong ai
+#: bao no di tim theo TEN.
+#:
+#: Danh sach nay la mot GIA THUYET ve "nhung cai ai cung biet", va no phai sua
+#: duoc bang tay. Cham diem nang suat cua `tu_khoa` se tu ha nhung ten vo bo.
+HE_THONG_PHO_THONG = [
+    "Sonic R trading system", "SonicR PAC dragon EMA34",
+    "Turtle trading rules", "Ichimoku Kinko Hyo strategy",
+    "Wyckoff accumulation distribution", "Elliott wave trading rules",
+    "ICT inner circle trader model", "smart money concepts order block",
+    "fair value gap trading", "supply and demand zone trading",
+    "London breakout strategy", "opening range breakout ORB",
+    "Bollinger band squeeze breakout", "Keltner channel strategy",
+    "SuperTrend ATR strategy", "Heikin Ashi trend strategy",
+    "Renko chart trading strategy", "pivot point trading rules",
+    "VWAP mean reversion intraday", "three white soldiers candlestick strategy",
+    "harmonic pattern Gartley Butterfly", "grid trading martingale system",
+    "Donchian channel breakout", "Parabolic SAR trailing system",
+    "MACD divergence strategy", "RSI-2 mean reversion Connors",
+    "internal bar strength IBS strategy", "gap and go strategy",
+    "seasonality turn of month strategy", "pairs trading statistical arbitrage",
+]
+
+
 def _cac_tu_khoa(ma: str, them: list[str] | None = None) -> list[str]:
     tk = list(TU_KHOA_THEO_MA.get(ma.upper(), []))
     for t in (them or []):
@@ -166,6 +196,49 @@ def san(ma: str, ngan_sach_giay: int = 900, them_tu_khoa: list[str] | None = Non
     return {"ma": ma, "tu_khoa": len(tk), "nguon_chay": len(chi_tiet),
             "tai_lieu_moi": tong_moi, "giay": round(time.time() - t0, 1),
             "chi_tiet": chi_tiet, "nguon_bo_qua_vi_loi": sorted(hong)}
+
+
+def san_he_pho_thong(ngan_sach_giay: int = 1200, in_ra=print) -> dict:
+    """San theo TEN HE THONG, khong theo tai san.
+
+    Bo sung cho `san(ma)`: mot he noi tieng nhu Sonic R khong xuat hien duoi tu
+    khoa "S&P 500 trading strategy" — phai goi dung ten no. Do that: 3.489 tai
+    lieu trong kho co 0 tieu de nhac "sonic".
+    """
+    from tru import seeker as SK
+
+    t0 = time.time()
+    bom_tu_khoa(HE_THONG_PHO_THONG, diem=9.0)
+    SK.dang_ky_nguon()
+    hong = {r["ma"] for r in (SO.nhieu(
+        "SELECT ma FROM nguon WHERE loi_lien_tuc >= 5") or [])}
+    ten_nguon = [n for n in SK.NGUON if n not in hong]
+    ten_nguon.sort(key=lambda n: SK.NGUON[n]["uu_tien"])
+
+    tk = list(HE_THONG_PHO_THONG)
+    chi_tiet, tong_moi = [], 0
+    for i, ma_nguon in enumerate(ten_nguon):
+        if ngan_sach_giay - (time.time() - t0) <= 10:
+            in_ra(f"  [het ngan sach] dung truoc {ma_nguon}")
+            break
+        d = (i * 3) % len(tk)
+        try:
+            ds = SK.NGUON[ma_nguon]["ham"](tk[d:] + tk[:d])
+            moi = SK.luu_tai_lieu(ma_nguon, ds)
+            tong_moi += moi
+            SO.chay("UPDATE nguon SET lan_cuoi=?, so_lan=so_lan+1, loi_lien_tuc=0, "
+                    "thu_hoach=thu_hoach+? WHERE ma=?", time.time(), moi, ma_nguon)
+            chi_tiet.append({"nguon": ma_nguon, "lay_ve": len(ds), "moi": moi})
+            in_ra(f"  {ma_nguon:<18} lay ve {len(ds):>4}  moi {moi:>4}  "
+                  f"({time.time() - t0:.0f}s)")
+        except Exception as e:
+            SO.chay("UPDATE nguon SET lan_cuoi=?, so_loi=so_loi+1, "
+                    "loi_lien_tuc=loi_lien_tuc+1, ghi_chu=? WHERE ma=?",
+                    time.time(), f"{type(e).__name__}: {str(e)[:100]}", ma_nguon)
+            in_ra(f"  {ma_nguon:<18} LOI {type(e).__name__}: {str(e)[:56]}")
+    return {"tu_khoa": len(tk), "nguon_chay": len(chi_tiet),
+            "tai_lieu_moi": tong_moi, "giay": round(time.time() - t0, 1),
+            "chi_tiet": chi_tiet}
 
 
 def boc(gioi_han_doc: int = 40, gioi_han_co_che: int = 25,
