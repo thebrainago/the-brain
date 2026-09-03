@@ -74,6 +74,23 @@ TU_KHOA_GOC = [
 #: MQL5 Code Base co hang chuc trang, va tu do nguon lang le bao "het trang".
 LAN_LAY_CUOI: dict = {}
 
+#: Header cua mot trinh duyet THAT. Chu du an 03/09/2026: *"mo phong thao tac
+#: tay nguoi dung chu dung lam nhu bot"*. Do that tren mql5.com: chi gui
+#: `User-Agent` thi 403; gui du bo nay thi **200**.
+_DAU_TRANG_DUYET = {
+    "User-Agent": UA,
+    "Accept": ("text/html,application/xhtml+xml,application/xml;q=0.9,"
+               "image/avif,image/webp,*/*;q=0.8"),
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Connection": "keep-alive",
+}
+
 
 def _lay(url: str, timeout: int = 25) -> str | None:
     """Tra van ban khi 200, `None` khi khong. Ghi CHI TIET vao `LAN_LAY_CUOI`.
@@ -83,9 +100,19 @@ def _lay(url: str, timeout: int = 25) -> str | None:
     cho goi no va phan lon khong quan tam.
     """
     LAN_LAY_CUOI.clear()
+    # Ten mien bi DNS DAU DOC tren mang nay -> phan giai sang IP that. Giu
+    # nguyen ten trong URL nen SNI va chung chi TLS van dung. Xem
+    # `nhan/dns_vuot.py` (chan doan day du o docstring cua no).
+    try:
+        from nhan import dns_vuot as _DV
+        _can_vuot = any(t in url for t in _DV.BAN_DO)
+    except Exception:
+        _DV, _can_vuot = None, False
+    if _can_vuot:
+        _DV.bat()
     try:
         import requests
-        r = requests.get(url, timeout=timeout, headers={"User-Agent": UA})
+        r = requests.get(url, timeout=timeout, headers=_DAU_TRANG_DUYET)
         LAN_LAY_CUOI.update({"url": url, "ma": r.status_code, "loi": None})
         if r.status_code == 200:
             return r.text
@@ -164,14 +191,39 @@ def n_arxiv(tu_khoa: list[str]) -> list[dict]:
     return ra
 
 
+#: Ngon ngu cua ma CHIEN LUOC, khong chi Python. Truoc 03/09/2026 truy van
+#: ghim cung `language:python` va bo het repo Pine/MQL/C++.
+GH_NGON_NGU = ["python", "pine", "mql5", "mql4", "cpp"]
+
+#: Cach xep. `sort=stars` mot minh la ly do suat github chi 1,2%: MOI tu khoa
+#: deu tra ve cung mot nhom framework noi tieng (finmarketpy, OctoBot,
+#: backtesting.py) chu khong ra chien luoc. Do la THU VIEN, khong phai LUAT.
+#: Xen ke `updated` va best-match de cham duoc DUOI DAI - noi nguoi ta dang
+#: chien luoc le.
+GH_CACH_XEP = [("", ""), ("updated", "desc"), ("stars", "desc")]
+
+
 def n_github(tu_khoa: list[str]) -> list[dict]:
-    """GitHub. HANG A khi repo co CODE CHAY DUOC - ta backtest lai duoc ngay."""
+    """GitHub. HANG A khi repo co CODE CHAY DUOC - ta backtest lai duoc ngay.
+
+    Ban 03/09/2026 doi ba dieu, deu do suat 1,2% chi ra:
+      - khong ghim `language:python` nua, xoay vong qua 5 ngon ngu
+      - khong chi `sort=stars` nua, xen ke `updated`/best-match de vao duoi dai
+      - `per_page` 20 -> 100
+    """
     ra = []
-    for t in tu_khoa[:_so_tu_khoa("github")]:
+    ct = _con_tro("github")
+    xoay = int(ct.get("xoay", 0))
+    for i, t in enumerate(tu_khoa[:_so_tu_khoa("github")]):
+        nn = GH_NGON_NGU[(xoay + i) % len(GH_NGON_NGU)]
+        xep, thu_tu = GH_CACH_XEP[(xoay + i) % len(GH_CACH_XEP)]
         u = ("https://api.github.com/search/repositories?q=" +
-             t.replace(" ", "+") + "+language:python&sort=stars&order=desc&per_page=20")
+             t.replace(" ", "+") + f"+language:{nn}&per_page=100")
+        if xep:
+            u += f"&sort={xep}&order={thu_tu}"
         txt = _lay(u)
         if not txt:
+            time.sleep(2)
             continue
         try:
             for it in json.loads(txt).get("items", []):
@@ -185,6 +237,8 @@ def n_github(tu_khoa: list[str]) -> list[dict]:
         except Exception:
             pass
         time.sleep(2)
+    ct["xoay"] = xoay + max(1, len(tu_khoa[:_so_tu_khoa("github")]))
+    _ghi_con_tro("github", ct)
     return ra
 
 

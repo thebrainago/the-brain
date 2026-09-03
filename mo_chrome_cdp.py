@@ -21,6 +21,14 @@ import urllib.request
 
 LAB = pathlib.Path(__file__).parent
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+
+#: Ten mien -> IP THAT, cho nhung ten bi DNS dau doc tren mang nay.
+#: Lay bang: curl -H "accept: application/dns-json" \n#:   "https://cloudflare-dns.com/dns-query?name=<ten>&type=A"
+#: Kiem lai dinh ky - MQL5 dung nhieu IP va chung co doi.
+MAP_TEN = {
+    "www.mql5.com": "203.29.60.247",
+    "mql5.com": "203.29.60.247",
+}
 PROF = str(LAB / ".browser_darwinex")      # profile DA DANG NHAP
 PORT = "9224"
 
@@ -51,6 +59,18 @@ def main():
     args = [CHROME, "--remote-debugging-port=" + port,
             "--user-data-dir=" + prof,
             "--no-first-run", "--no-default-browser-check"]
+    # --- VUOT DNS BI DAU DOC ---------------------------------------------
+    # Do that 03/09/2026: `nslookup www.mql5.com` tren may nay tra ve DUY NHAT
+    # mot dia chi IPv6 `2401:fce0:31:1::247` (dai cua ISP Viet Nam), va moi
+    # ket noi deu rot: `requests` -> RemoteDisconnected, Chrome -> ERR_HTTP2_
+    # PROTOCOL_ERROR, curl -> HTTP 000 o ca http1.0/1.1/2. DNS bi dau doc.
+    # IP THAT lay qua DNS-over-HTTPS (Cloudflare 1.1.1.1): noi thang vao do
+    # thi may chu tra 403 - tuc DEN DUOC, chi con bi chan vi trong nhu bot.
+    # Nen phai la CHROME THAT di vao (dau van TLS that, JS that, cookie that),
+    # chi ep rieng phan phan giai ten.
+    if MAP_TEN:
+        args.append("--host-resolver-rules=" +
+                    ",".join(f"MAP {t} {ip}" for t, ip in MAP_TEN.items()))
     if an:
         # `--headless=new` la ban headless DUNG CHUNG engine voi Chrome thuong
         # (khac ban cu, von la mot trinh duyet khac han va bi nhieu trang chan).
