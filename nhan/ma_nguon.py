@@ -31,7 +31,9 @@ BON RANG BUOC AN TOAN - **khong duoc noi long**:
 """
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 import time
 from html import unescape
 
@@ -82,6 +84,21 @@ def _lay(url: str, timeout: int = 30, nhi_phan: bool = False):
 
 def _sach(s: str) -> str:
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", s or ""))).strip()
+
+
+CON_TRO = Path(__file__).resolve().parent.parent / "config" / "ma_nguon_con_tro.json"
+
+
+def _con_tro() -> dict:
+    try:
+        return json.loads(CON_TRO.read_text(encoding="utf-8-sig"))
+    except Exception:
+        return {}
+
+
+def _ghi_con_tro(d: dict) -> None:
+    CON_TRO.parent.mkdir(parents=True, exist_ok=True)
+    CON_TRO.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 def liet_ke_mql5(muc: str = "experts", trang: int = 1) -> list[dict]:
@@ -169,8 +186,21 @@ def thu_thap(muc_can: tuple = ("experts", "indicators"), so_bai: int = 10,
     """
     bao = {"nhin_thay": 0, "tai_duoc": 0, "ghi_moi": 0, "trung": 0,
            "bo_qua": [], "bai": []}
+    ct = _con_tro()
+    trang_cua = ct.setdefault("trang", {})
     for muc in muc_can:
-        ds = liet_ke_mql5(muc)
+        # PHAN TRANG. Truoc 03/09/2026 cho nay goi `liet_ke_mql5(muc)` tran,
+        # tuc LUON trang 1. Chay 4 vong lien tiep cho: vong 1 "moi 35", vong 2
+        # va 3 deu "moi 0 | trung 60" - tai lai dung 60 file cu. `liet_ke_mql5`
+        # co tham so `trang` tu dau, chi la khong ai truyen.
+        n = int(trang_cua.get(muc, 1))
+        ds = liet_ke_mql5(muc, n)
+        if not ds and n > 1:
+            # het trang (hoac hong) -> quay ve dau: muc MOI luon len dau bang
+            n = 1
+            ds = liet_ke_mql5(muc, n)
+        trang_cua[muc] = n + 1 if ds else 1
+        bao.setdefault("trang_da_lay", {})[muc] = n
         bao["nhin_thay"] += len(ds)
         for bai in ds[:so_bai]:
             time.sleep(nghi_giay)
@@ -192,6 +222,7 @@ def thu_thap(muc_can: tuple = ("experts", "indicators"), so_bai: int = 10,
                                # giu tam de `_bao_mau_con_thieu` doc; bi loai
                                # khoi bao cao ghi so ngay sau do.
                                "_noi_dung": day_du["noi_dung"]})
+    _ghi_con_tro(ct)
     _bao_mau_con_thieu(bao)
     for b in bao["bai"]:
         b.pop("_noi_dung", None)          # khong doc ca file ma nguon vao so cai

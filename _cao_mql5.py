@@ -11,7 +11,7 @@ if __name__ == "__main__":
     ghi(f"truoc: {n0} tai lieu mql5_code")
     tong = {"nhin_thay": 0, "tai_duoc": 0, "ghi_moi": 0, "trung": 0}
     loai = {}
-    for vong in range(4):
+    for vong in range(6):
         r = MN.thu_thap(muc_can=("experts", "indicators"), so_bai=30)
         for k in tong:
             tong[k] += int(r.get(k, 0) or 0)
