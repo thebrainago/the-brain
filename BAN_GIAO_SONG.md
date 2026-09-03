@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-### 2026-09-01 10:22:11 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 4196, 0 phut), dieu_khien_xa.py (pid 3308, 197 phut), dieu_phoi.py (pid 1780, 197 phut), quantlab.py (pid 15424, 8 phut)
 - `dieu_phoi.log`: 2026-09-01 10:22:08 EVO       ok           5.9s guard=job
 - `HINH_DANG_VS_NULL_sau2500.log`: [20/21] AUDCAD.H1.ou_quay_ve.n100_z2.0 · CAO NGUYEN - 100% lan can duong, dinh chi gap 1.3 lan · p=0.0568 · 4289.3s
 - `supervisor_stdio.log`: 2026-09-01 10:22:08 EVO       ok           5.9s guard=job
@@ -404,3 +400,7 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - dang chay: ban_giao_song.py (pid 8520, 0 phut), dieu_khien_xa.py (pid 16352, 80 phut)
 - `dieu_phoi_nen.log`: [Thu 09/03/2026 10:35:56.84] thay DUNG_LAI - khong khoi dong watchdog
 - git: 65c283c US500CASH: 0/190 co che thang mua-giu; theo tieu chi HE THONG chi V6 du so lenh
+### 2026-09-03 12:52:19 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14904, 0 phut), dieu_khien_xa.py (pid 16352, 136 phut)
+- git: 6b9e1ed bao cao 03/09 phan II: va he + quet da khung + hinh dang
