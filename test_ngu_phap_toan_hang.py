@@ -30,7 +30,12 @@ from nhan import thu_hoi_thanh_phan as TP
 
 
 def _df(n: int = 300) -> pd.DataFrame:
-    idx = pd.date_range("2020-01-01", periods=n, freq="D")
+    # Khung GIO, khong phai ngay. Tu 03/09/2026 `chi_bao='gio'` nem
+    # `KhungThieuGio` tren khung khong co gio (xem `mau._phai_co_gio`), va mot
+    # khung ngay lam bai kiem nay bao oan rang `gio` "khai ra ma goi khong
+    # duoc". Moi toan hang con lai deu khong quan tam khung nen doi sang gio
+    # la vo hai. Chieu nguoc duoc chot o `GacKhungThieuGio` ben duoi.
+    idx = pd.date_range("2020-01-01", periods=n, freq="h")
     g = pd.Series(100 + np.cumsum(np.random.default_rng(1).normal(0, 1, n)), index=idx)
     return pd.DataFrame({"open": g, "high": g + 1.0, "low": g - 1.0,
                          "close": g, "tick_volume": 1000.0})
@@ -86,6 +91,39 @@ class MoiToanHangKhaiRaDeuGOI_DUOC(unittest.TestCase):
         """Hieu chuan chieu nguoc: neu moi ten deu chay thi bai tren vo nghia."""
         with self.assertRaises(KeyError):
             NP.toan_hang(_df(), {"chi_bao": "khong_he_ton_tai"})
+
+
+class GacKhungThieuGio(unittest.TestCase):
+    """Chieu nguoc cua bai tren: toan hang theo GIO phai TU CHOI khung khong co gio.
+
+    Do that 03/09/2026 tren US500CASH.D1 (moi bar hour=0): hai co che DSL
+    `mat_can_bang_lenh_dong_cua` (gio>=20 va gio<=22) va
+    `hoan_lai_sau_gio_dinh_gia_nav` (gio>=16 va gio<17) cho tin hieu TOAN 0 va
+    khong doi khi doi bat ky tham so nao - nen bo do on dinh cham chung la
+    "cao nguyen hoan hao".
+    """
+
+    def _df_ngay(self, n: int = 200) -> pd.DataFrame:
+        idx = pd.date_range("2020-01-01", periods=n, freq="D")
+        g = pd.Series(100.0 + np.arange(n) * 0.1, index=idx)
+        return pd.DataFrame({"open": g, "high": g + 1, "low": g - 1, "close": g,
+                             "tick_volume": 1000.0})
+
+    def test_gio_tren_khung_ngay_thi_nem_loi(self):
+        from nhan import mau as MAU
+        with self.assertRaises(MAU.KhungThieuGio):
+            NP.toan_hang(self._df_ngay(), {"chi_bao": "gio"})
+
+    def test_gio_tren_khung_gio_thi_chay(self):
+        s = NP.toan_hang(_df(), {"chi_bao": "gio"})
+        self.assertGreater(len(set(s.tolist())), 1)
+
+    def test_toan_hang_thoi_gian_KHAC_van_chay_tren_khung_ngay(self):
+        """Chi `gio` bi chan. `ngay_trong_tuan`/`thang` van co nghia tren D1."""
+        d = self._df_ngay()
+        for cb in ("ngay_trong_tuan", "ngay_trong_thang", "thang"):
+            self.assertEqual(len(NP.toan_hang(d, {"chi_bao": cb})), len(d), cb)
+
 
 
 class BaToanHangDaBiGIAU(unittest.TestCase):

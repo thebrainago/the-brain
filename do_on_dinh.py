@@ -163,6 +163,30 @@ def do_hinh_dang(mau: str, tam: dict, tai_san: str, khung: str,
                 "so_o": len(o), "giay": round(time.time() - t0, 1)}
 
     a = np.array([r["alpha"] for r in chay], dtype=float)
+
+    # ---- LAN CAN SUY BIEN: tu choi dat ten hinh dang -------------------
+    # Mot lan can chi co Y NGHIA khi cac o THAT SU khac nhau. Hai duong lam
+    # no suy bien, ca hai da sap that 03/09/2026:
+    #   1. Mau DIEC - ham bo qua tham so (closure DSL tung co `**_` nuot
+    #      sach). Moi o tra ve cung mot ket qua.
+    #   2. `lan_can` DONG BANG truc de giu duoi tran `toi_da`: voi 7-8 tham
+    #      so no co the rot ve DUNG MOT o (`etf_arbitrage_khi_bien_dong_thap`,
+    #      `quay_ve_vwap_tb_low_vol`).
+    # Ca hai deu cho "100% lan can duong, do doc 0%" = CAO NGUYEN hoan hao.
+    # Day la cung mot loi voi mot cong tu choi tat ca ma van co so lieu dep:
+    # phai HIEU CHUAN HAI CHIEU, khong duoc tin mot phan quyet ma bo do chua
+    # bao gio co co hoi noi "khong".
+    so_khac = len({round(float(x), 9) for x in a})
+    if len(chay) < 3 or so_khac < 2:
+        ly = ("mau DIEC - doi tham so nhung ket qua khong doi"
+              if so_khac < 2 and len(chay) >= 3
+              else f"lan can chi con {len(chay)} o chay duoc")
+        return {"mau": mau, "tai_san": tai_san, "khung": khung, "tam": tam,
+                "do_duoc": False, "ly_do": f"lan can SUY BIEN: {ly}",
+                "so_o": len(o), "chay_duoc": len(chay), "so_o_khac_nhau": so_khac,
+                "hinh_dang": "KHONG DO DUOC",
+                "giay": round(time.time() - t0, 1)}
+
     r_tam = next((r for r in chay if r["tham_so"] == tam), None)
     trung_vi = float(np.median(a))
     tot_nhat = float(np.max(a))
@@ -178,6 +202,7 @@ def do_hinh_dang(mau: str, tam: dict, tai_san: str, khung: str,
         "mau": mau, "tai_san": tai_san, "khung": khung, "tam": tam,
         "do_duoc": True,
         "so_o": len(o), "chay_duoc": len(chay),
+        "so_o_khac_nhau": so_khac,
         "alpha_tam": a_tam,
         "ty_le_duong": round(float(np.mean(a > 0)) * 100.0, 1),
         "trung_vi_lan_can": round(trung_vi, 3),

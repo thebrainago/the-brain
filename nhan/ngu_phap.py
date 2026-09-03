@@ -39,6 +39,7 @@ QUY UOC THOI GIAN (khong the vi pham):
 """
 from __future__ import annotations
 
+import copy
 import json
 import weakref
 import sys
@@ -179,6 +180,16 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         return _cot(df, "tick_volume") if "tick_volume" in df.columns \
             else pd.Series(np.nan, index=df.index)
     if cb == "gio":
+        # Cung gac nhu `mau._phai_co_gio`, nhung cho duong DSL. Do that
+        # 03/09/2026: `mat_can_bang_lenh_dong_cua` (gio >= 20 va gio <= 22) va
+        # `hoan_lai_sau_gio_dinh_gia_nav` (gio >= 16 va gio < 17) chay tren
+        # US500CASH.D1 - moi bar co hour=0 nen dieu kien LUON SAI, tin hieu
+        # toan 0, va doi bat ky tham so nao cung khong lam no doi. Chung lot
+        # qua bo do on dinh nhu mot "cao nguyen" hoan hao.
+        #
+        # Nem loi thay vi tra chuoi 0: mot co che theo GIO chay tren khung
+        # khong co gio la LOI CAU HINH, khong phai mot co che khong vao lenh.
+        MAU_MOD._phai_co_gio(df, f"DSL chi_bao='gio'")
         return pd.Series(df.index.hour, index=df.index, dtype=float)
     if cb == "ngay_trong_tuan":
         return pd.Series(df.index.dayofweek, index=df.index, dtype=float)
@@ -744,6 +755,96 @@ def them_co_che(spec: dict, df_kiem: pd.DataFrame | None = None) -> dict:
     return {"nhan": True, "ten": spec["ten"], "so_co_che": len(kho)}
 
 
+# ------------------------------------------------- THAM SO CHON TRONG SPEC
+#: Cac khoa mang GIA TRI SO co the chinh duoc trong mot khai bao DSL.
+#: `n`  = do dai cua so nhin lai. `hang` = nguong so sanh.
+KHOA_CHINH_DUOC = ("n", "hang")
+
+
+def _di_spec(nut, duong: str, ra: dict) -> None:
+    """Di sau vao cay spec, gom moi hang so chinh duoc kem DUONG DAN cua no."""
+    if isinstance(nut, dict):
+        for k, v in nut.items():
+            if k in KHOA_CHINH_DUOC and isinstance(v, (int, float))                     and not isinstance(v, bool):
+                ra[f"{duong}_{k}" if duong else k] = v
+            else:
+                _di_spec(v, f"{duong}_{k}" if duong else str(k), ra)
+    elif isinstance(nut, list):
+        for i, v in enumerate(nut):
+            _di_spec(v, f"{duong}{i}", ra)
+
+
+def tham_so_cua(spec: dict) -> dict:
+    """Phoi bay cac hang so CHON DUOC cua mot khai bao DSL thanh dict PHANG.
+
+    VI SAO CAN (loi tim ra 03/09/2026). `do_on_dinh.lan_can()` — bo may tra
+    loi "cao nguyen hay cai gai" — nhan mot dict tham so phang. 152 co che DSL
+    trong kho co `luoi = [{}]` va closure cua chung la:
+
+        def _ham(df, _s=spec, **_):   # <- `**_` NUOT SACH moi tham so
+            return sinh_tu_spec(_s, df)
+
+    Nen neu ai chay `b on-dinh` len mot co che DSL: `lan_can` sinh du 81 o,
+    ca 81 o goi cung mot ham voi cung mot spec, tra ve **ket qua y het nhau**,
+    va bo do hinh dang ket luan "CAO NGUYEN - 100% lan can duong, do doc 0%"
+    cho mot co che **chua he duoc doi tham so lan nao**. Mot phan quyet on
+    dinh gia mao, im lang, theo dung huong lam ta tin tuong.
+
+    Ten khoa la DUONG DAN trong cay, vd `vao0_trai_n`, `vao0_phai_hang`,
+    cong `giu` o muc goc. Dung `ap_tham_so` de dat nguoc vao.
+    """
+    ra: dict = {}
+    for phan in ("vao", "ra"):
+        _di_spec(spec.get(phan) or [], phan, ra)
+    giu = spec.get("giu")
+    if isinstance(giu, int) and not isinstance(giu, bool) and giu >= 1:
+        ra["giu"] = giu
+    return ra
+
+
+def ap_tham_so(spec: dict, ts: dict) -> dict:
+    """Ban SAO cua `spec` voi cac hang so thay bang gia tri trong `ts`."""
+    if not ts:
+        return spec
+    moi = copy.deepcopy(spec)
+    for khoa, gt in ts.items():
+        if khoa == "giu":
+            moi["giu"] = int(gt)
+            continue
+        nut, duong = None, khoa
+        for phan in ("vao", "ra"):
+            if khoa.startswith(phan):
+                nut, duong = moi.get(phan) or [], khoa[len(phan):]
+                break
+        if nut is None:
+            continue
+        _dat(nut, duong, gt)
+    return moi
+
+
+def _dat(nut, duong: str, gt) -> None:
+    """Dat `gt` vao vi tri `duong` (dang `0_trai_n`) trong cay `nut`."""
+    phan = duong.split("_")
+    cuoi = phan[-1]
+    cur = nut
+    for buoc in phan[:-1]:
+        if buoc == "":
+            continue
+        if isinstance(cur, list):
+            i = int(buoc)
+            if i >= len(cur):
+                return
+            cur = cur[i]
+        elif isinstance(cur, dict):
+            if buoc not in cur:
+                return
+            cur = cur[buoc]
+        else:
+            return
+    if isinstance(cur, dict) and cuoi in cur:
+        cur[cuoi] = type(cur[cuoi])(gt) if isinstance(cur[cuoi], int)             and not isinstance(cur[cuoi], bool) else gt
+
+
 def nap_vao_mau() -> int:
     """Dua toan bo co che trong kho vao `MAU.MAU` de QUANTLAB quet nhu mau goc.
 
@@ -756,14 +857,17 @@ def nap_vao_mau() -> int:
         if not ten or ten in MAU_MOD.MAU:
             continue
 
-        def _ham(df, _s=spec, **_):
-            return sinh_tu_spec(_s, df)
+        def _ham(df, _s=spec, **ts):
+            # Truoc 03/09/2026 cho nay la `**_` (nuot sach). Xem `tham_so_cua`.
+            return sinh_tu_spec(ap_tham_so(_s, ts) if ts else _s, df)
 
+        tam = tham_so_cua(spec)
         MAU_MOD.MAU[ten] = {
             "ham": _ham, "ho": spec.get("ho", "khac"),
             "co_che": spec.get("co_che", ""),
             "nguon": spec.get("nguon", "ngu_phap"),
-            "luoi": spec.get("luoi") or [{}],
+            "luoi": spec.get("luoi") or ([tam] if tam else [{}]),
+            "tham_so_tam": tam,
             "dsl": True,
         }
         them += 1
