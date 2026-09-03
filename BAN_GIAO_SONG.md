@@ -4,15 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-KHI QUAY LAI, doc theo thu tu: LO_MOT_GIO.json (thu vien co che truoc/sau + ly do tu choi) roi tester_luot1.json.
-Viec tiep theo da xac dinh: (a) nang so agent tester tu 3 len 20 de quet tham so song song trong MOT terminal - khong ton dia, va phan biet ro dung Optimization lam MAY CHAY chu khong de no CHON tham so; (b) chay not 21 EA da bien dich; (c) toan hang ngu phap con thieu do tu ma that: tuong_quan 41 lan, phuong_sai 26, macd 13, adx 9.
-
-### 2026-09-01 10:57:33 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11812, 0 phut), dieu_khien_xa.py (pid 3308, 232 phut), dieu_phoi.py (pid 1780, 232 phut), quantlab.py (pid 636, 6 phut)
-- `dieu_phoi.log`: 2026-09-01 10:52:23 EVO       ok           5.6s guard=job
-- `HINH_DANG_VS_NULL_sau2500.log`: [xong] 23 ung vien · 12826.0s -> HINH_DANG_VS_NULL_sau2500.md
-- `LO_MOT_GIO.log`: 10:57:33    [pine] da hoi 6/30 tu khoa · 11 script co ma
 - `supervisor_stdio.log`: 2026-09-01 10:52:23 EVO       ok           5.6s guard=job
 - git: cebc1b5 lo viec tu chay mot tieng: don vao Pine (suat rut cao nhat) + thu hoi toan kho
 
@@ -404,3 +395,12 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `noi_sinh_2_chi_so.log`: -> reports/noi_sinh_xm_uk100cash_h4.csv  (603s)
 - `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
 - git: 70c032f SONIC R H4 tren US500CASH: he dau tien ra tien, du lenh, dung vung ngoai mau
+### 2026-09-03 16:24:34 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13328, 0 phut), dieu_khien_xa.py (pid 16352, 348 phut)
+- `boc_llm_130.log`: KHO CO CHE: 154 -> 174   (+20)
+- `boc_llm_thu.log`: KHO CO CHE: 152 -> 154   (+2)
+- `doc_roi_boc.log`: vong 1: doc duoc 28, that bai 2 (245s)
+- `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
+- `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
+- git: 258ba61 Duong boc da thong: 0 -> 20 co che/106 ban, va nut that khong phai cai toi tuong

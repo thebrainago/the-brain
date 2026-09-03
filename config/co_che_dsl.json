@@ -6943,5 +6943,137 @@
   ],
   "nguon": "https://www.tradingview.com/script/PUB;2811/",
   "_ty_le_kich_hoat": 0.6851
+ },
+ {
+  "ten": "mua_khi_rsi_30_tren_50_va_rsi_2_qua_ban",
+  "co_che": "RSI_30_trend_RSI_2_oversold",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 30
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 50.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 15.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 85.0
+    }
+   }
+  ],
+  "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/",
+  "_ty_le_kich_hoat": 0.2503
+ },
+ {
+  "ten": "loi_nhuan_1_ngay_thuoc_10_te_nhat_100_ngay",
+  "co_che": "Mua khi phien giam manh so voi lich su 100 ngay, ky vong hoi phuc",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "doi_pct",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "n": 100
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 0.1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=7fbgEnOYRB4",
+  "_ty_le_kich_hoat": 0.3985
+ },
+ {
+  "ten": "gia_tren_sma_200_ngay",
+  "co_che": "Chi mua khi gia tren duong trung binh 200 ngay de dam bao xu huong tang",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=7fbgEnOYRB4",
+  "_ty_le_kich_hoat": 0.7304
+ },
+ {
+  "ten": "mua_theo_xu_huong_tang",
+  "co_che": "Giá cắt lên EMA8 và nến có thân lớn hơn trung bình, xác nhận lực mua mạnh từ dòng tiền thông minh.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 8
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "than_nen"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.youtube.com/watch?v=AY7fWmE1CBk",
+  "_ty_le_kich_hoat": 0.0965
  }
 ]
