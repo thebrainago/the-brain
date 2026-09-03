@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi.log`: 2026-09-01 10:22:08 EVO       ok           5.9s guard=job
-- `HINH_DANG_VS_NULL_sau2500.log`: [20/21] AUDCAD.H1.ou_quay_ve.n100_z2.0 · CAO NGUYEN - 100% lan can duong, dinh chi gap 1.3 lan · p=0.0568 · 4289.3s
-- `supervisor_stdio.log`: 2026-09-01 10:22:08 EVO       ok           5.9s guard=job
-- git: bb07521 day chuyen EA: tai .mq5 that -> bien dich -> tester (chu du an bo rao an ninh)
-
-### 2026-09-01 10:35:04 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17268, 0 phut), dieu_khien_xa.py (pid 3308, 210 phut), dieu_phoi.py (pid 1780, 210 phut), quantlab.py (pid 5736, 9 phut)
 - `dieu_phoi.log`: 2026-09-01 10:26:53 SEEKER    ok         150.5s guard=job
 - `HINH_DANG_VS_NULL_sau2500.log`: [20/21] AUDCAD.H1.ou_quay_ve.n100_z2.0 · CAO NGUYEN - 100% lan can duong, dinh chi gap 1.3 lan · p=0.0568 · 4289.3s
 - `supervisor_stdio.log`: 2026-09-01 10:26:53 SEEKER    ok         150.5s guard=job
@@ -404,3 +396,11 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 
 - dang chay: ban_giao_song.py (pid 14904, 0 phut), dieu_khien_xa.py (pid 16352, 136 phut)
 - git: 6b9e1ed bao cao 03/09 phan II: va he + quet da khung + hinh dang
+### 2026-09-03 14:03:19 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10380, 0 phut), dieu_khien_xa.py (pid 16352, 207 phut)
+- `chien_dich_sp500.log`: nguon bo qua vi loi: ['rss_reddit_quant']
+- `hinh_dang_audcad_rsi.log`: {'n': 17, 'ra_': 46, 'vao': 32}          alpha  -1.832%  t -0.654  lenh None
+- `khop_rui_ro_us500.log`: QUA CA HAI          : 0
+- `noi_sinh_2_chi_so.log`: -> reports/noi_sinh_xm_uk100cash_h4.csv  (603s)
+- git: 1a83293 Quet lan can PASS DUY NHAT cua du an, va no khong chuyen sang tai san khac duoc
