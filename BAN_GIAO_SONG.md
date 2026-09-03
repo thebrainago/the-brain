@@ -4,16 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `supervisor_stdio.log`: 2026-09-01 10:52:23 EVO       ok           5.6s guard=job
-- git: cebc1b5 lo viec tu chay mot tieng: don vao Pine (suat rut cao nhat) + thu hoi toan kho
-
-### 2026-09-01 10:57:59 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13456, 0 phut), dieu_khien_xa.py (pid 3308, 233 phut), dieu_phoi.py (pid 1780, 233 phut), quantlab.py (pid 636, 7 phut)
-- `dieu_phoi.log`: 2026-09-01 10:52:23 EVO       ok           5.6s guard=job
-- `HINH_DANG_VS_NULL_sau2500.log`: [xong] 23 ung vien · 12826.0s -> HINH_DANG_VS_NULL_sau2500.md
-- `LO_MOT_GIO.log`: 10:57:54    [pine] da hoi 15/30 tu khoa · 26 script co ma
-- `supervisor_stdio.log`: 2026-09-01 10:52:23 EVO       ok           5.6s guard=job
 - git: cebc1b5 lo viec tu chay mot tieng: don vao Pine (suat rut cao nhat) + thu hoi toan kho
 
 ### 2026-09-01 11:05:50 — chup trang thai
@@ -404,3 +394,13 @@ Ghi chu cua toi: banker hien tai chi chay che_do (19 su kien/24h), chua lam gi t
 - `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
 - `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
 - git: 258ba61 Duong boc da thong: 0 -> 20 co che/106 ban, va nut that khong phai cai toi tuong
+### 2026-09-03 16:58:22 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13880, 0 phut), dieu_khien_xa.py (pid 16352, 382 phut)
+- `boc_llm_130.log`: KHO CO CHE: 154 -> 174   (+20)
+- `boc_llm_thu.log`: KHO CO CHE: 152 -> 154   (+2)
+- `doc_boc_toan_luc.log`: KHO CO CHE: 177 -> 178   tong 447s
+- `doc_roi_boc.log`: KHO CO CHE: 174 -> 177
+- `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
+- `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
+- git: bd04a34 Doc song song 28 lan nhanh hon, va suat boc chenh 16 lan giua cac nguon

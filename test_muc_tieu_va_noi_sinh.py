@@ -94,9 +94,22 @@ class NoiSinhLayNguongTuLichSu(unittest.TestCase):
             self.assertNotIn("NOI SINH:", s["co_che"])
 
     def test_loc_hai_dau_kich_hoat(self):
+        """Tran tren la 0,95 — KHONG phai 0,60.
+
+        Doi 03/09/2026 sau khi chu du an hoi *"neu thi truong bull thi ve li ta
+        cang de kiem loi voi trendfollowing"*: voi tran 0,60, moi co che theo
+        XU HUONG bi loai ngay tu bo sinh (mot bo loc xu huong tren thi truong
+        bo o trong thi truong 70-90% so bar). Cai chan "mua-giu doi ten" phai
+        la phep so O CUNG MUC RUI RO, khong phai mot tran phoi nhiem.
+        """
         for s in NS.sinh(self.df):
             self.assertGreaterEqual(s["_ty_le_kich_hoat"], 0.005, s["ten"])
-            self.assertLessEqual(s["_ty_le_kich_hoat"], 0.60, s["ten"])
+            self.assertLessEqual(s["_ty_le_kich_hoat"], 0.95, s["ten"])
+
+    def test_tran_phoi_nhiem_cho_phep_vung_XU_HUONG(self):
+        """Hieu chuan chieu nguoc: tran phai du cao de he xu huong lot qua."""
+        self.assertGreaterEqual(
+            NS.sinh.__defaults__[-1] if NS.sinh.__defaults__ else 0, 0.90)
 
     def test_toan_hang_chua_khai_co_che_thi_KHONG_sinh(self):
         """Bo sinh khong duoc de ra co che vo danh roi bat nguoi khac tim y nghia."""
