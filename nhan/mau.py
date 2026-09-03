@@ -120,8 +120,37 @@ def m_cuoi_thang(df, truoc=3, sau=3, **_):
     return _ra(v, len(df))
 
 
+class KhungThieuGio(ValueError):
+    """Co che theo GIO bi chay tren khung khong co gio (D1, W1)."""
+
+
+def _phai_co_gio(df, ten: str) -> None:
+    """Chan co che theo PHIEN chay tren khung khong co gio.
+
+    Do that 03/09/2026: `m_mua_qua_dem` tren US500CASH.D1 - moi bar deu co
+    hour=0 nen `(g >= 20) | (g < 14)` dung VOI MOI BAR, tin hieu thanh hang so
+    1,0, tuc MUA-GIU. No vao bang xep hang o hang 2 voi Sharpe 0,840, tren ca
+    moc mua-giu that (0,815), mang ten mot co che phien.
+
+    Ba mau phien khac (`gio_trong_ngay`, `moc_phien`, `orb_pha_vo`) tra ve
+    toan 0 nen bi bo loc phoi nhiem nhat ra. Chi cai nay lot, va no lot vi no
+    thoai hoa ve phia CO PHOI NHIEM chu khong phai ve 0. Im lang theo huong
+    "trong nhu ket qua tot" la dang nguy hiem nhat.
+
+    Nem loi thay vi tra 0: mot co che khong AP DUNG DUOC cho khung nay khac
+    han mot co che ap dung duoc nhung khong bao gio vao lenh.
+    """
+    if len(getattr(df.index, "hour", [])) == 0:
+        raise KhungThieuGio(f"{ten}: index khong co thuoc tinh gio")
+    if len(set(df.index.hour)) <= 1:
+        raise KhungThieuGio(
+            f"{ten}: co che theo PHIEN nhung khung chi co mot gio duy nhat "
+            f"({sorted(set(df.index.hour))}) - can khung noi ngay")
+
+
 def m_gio_trong_ngay(df, gio_vao=4, so_gio=8, chieu=1, **_):
     """Session: chi giu trong mot cua so gio co dinh moi ngay."""
+    _phai_co_gio(df, "gio_trong_ngay")
     g = df.index.hour
     trong = (g >= gio_vao) & (g < gio_vao + so_gio)
     return _ra(np.where(trong, float(chieu), 0.0), len(df))
@@ -146,6 +175,7 @@ def m_orb_pha_vo(df, phut_mo=30, gio_mo=13, chi_mua=False, **_):
 
     Lay bien do `phut_mo` phut dau tu gio mo cua, roi theo huong pha vo.
     """
+    _phai_co_gio(df, "orb_pha_vo")
     g, p = df.index.hour, df.index.minute
     trong_mo = (g == gio_mo) & (p < phut_mo)
     ngay = pd.Series(df.index.normalize(), index=df.index)
@@ -183,6 +213,7 @@ def m_mua_qua_dem(df, gio_vao=20, gio_ra=14, **_):
     LUU Y: day chinh la co che bi phi qua dem an nang nhat - dung de kiem
     xem engine co tinh dung phi khong.
     """
+    _phai_co_gio(df, "mua_qua_dem")
     g = df.index.hour
     trong = (g >= gio_vao) | (g < gio_ra)
     return _ra(np.where(trong, 1.0, 0.0), len(df))
@@ -233,6 +264,7 @@ def m_moc_phien(df, gio_bd=0, gio_kt=7, chieu=1, **_):
     """Pha vo dinh/day cua mot PHIEN truoc do (Á / London / My).
     Nguon: Desktop/sp500checkerv5.py (magnetic levels) + magnetic_master.py.
     """
+    _phai_co_gio(df, "moc_phien")
     g = df.index.hour
     trong_phien = (g >= gio_bd) & (g < gio_kt)
     if gio_bd > gio_kt:
