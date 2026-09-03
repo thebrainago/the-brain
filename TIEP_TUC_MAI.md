@@ -51,133 +51,72 @@ a0a4a43 Vá sạch lớp lỗi "đổi tham số mà kết quả không đổi" 
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Mot phien 10 tieng tren MOT muc tieu co CON SO gan vao (US500CASH, 20-30
+%/nam) da lam lo ra **15 loi**, va tat ca cung mot ho benh: **mot that bai
+duoc bao cao nhu mot ket qua binh thuong**. 890 test dang xanh trong luc
+`don_bay` sai 31.700 lan. `thu_thap` bao "tai 60 file" bon vong lien tiep de
+tai lai dung 60 file cu. Bo boc bao "0 co che" rat binh tinh — vi chinh loi
+nhac cua no cam de xuat bien the. Cong on dinh cham "CAO NGUYEN 100% duong"
+cho 152/170 mau chua he duoc doi tham so lan nao.
+
+Cai lam chung lo ra khong phai test, ma la mot muc tieu buoc TUNG KHAU phai
+that su de ra cai gi do. Hai thang truoc do lam viec truu tuong hon ("co edge
+khong") nen chua bao gio cham toi don bay, chua can co tuc, chua can pheu that
+su chay.
+
+Bai hoc dat nhat, ghi vi toi mac BON LAN trong mot phien: **dung chan doan nut
+that, hay do tung chang**. Doan la toc do (sai — `doc_ma` chay 452 ban duoi 1
+giay), doan la nguon it (sai — kho co san 1.007 bai ve ICT), doan la
+TradingView chan JS (sai — hang A da doc 182/182), doan la 285 file Pine bi
+rao ky thuat (sai — chung DONG NGUON). `b pheu` bay gio la mot LENH.
+
+Ket qua: MQL5 thong lai (DNS bi dau doc, bat WARP la xong) va cao ve **358
+file .mq5 that**; ca ba luong da noi vao `b`; kho co che 152 -> 191; 1.021
+test xanh.
+
 
 ## Viec tiep theo, theo thu tu
 
--1. **KIEM LAI MOI KET LUAN H1/H4 TRUOC 01/09.** Cache khung da bump sang `v2`
-   va 5 ma bi cat doan dau (EURUSD/USDJPY 1971-1998, GBPUSD 1993-1998,
-   US500CASH 2011-2015, XAUUSDM 2014-2016). Ba trong so do la cap FX duoc quet
-   nhieu nhat cua du an. Chua do xem so nao doi.
+1. **CHAY BOC 281 FILE .mq5 DANG CHO.** Mat xich `artifact -> boc_llm` vua noi
+   xong luc chot phien va CHUA CHAY LAN NAO. `b boc 0 300`. Day la thu re nhat
+   va co suat cao nhat dang co (ma CHIEN LUOC that, khong phai van xuoi).
 
-0. **`hieu_chuan_v6` DANG BI CHAN, va no chan boi mot quyet dinh chu khong boi
-   ky thuat.** Dieu kien dau cua V6 la `bias > 0`, ma bias = 0,25 vi mo + 0,10
-   VIX + 0,25 mua vu — deu la du lieu BANKER. Chu du an da noi de BANKER sau,
-   nen phan nay dung o day. Lop bias da viet xong va cat o
-   `archive/vi_mo_CHO_BANKER.py` (doc thang tu bang `vi_mo` trong nao.db, khong
-   them nguon moi). Hai dieu kien con lai cua van de do da lam duoc:
-   danh muc 3 chi so My, va bar theo PHIEN (`du_lieu.nap_phien` — do duoc: bar
-   D1 CFD rong hon bar phien tien mat 1,39 lan, IBS hai ben chi tuong quan
-   0,866, 98 ngay kich hoat theo phien ma khong theo D1).
+2. **Lam not cac NGUON DAU VAO con lai.**
+   - `quantconnect` + `lean_algo` dang tra 0 — do truoc khi doan.
+   - `fxblue`, `myfxbook`: memory ghi bi loc SNI. Nay da co `dns_vuot` + WARP,
+     thu lai bang `b mang` roi san.
+   - `etoro`, `semantic`, `blog`: ba nguon `CHAY_SACH_MA_RONG` chua ro nuot o
+     dau (ton tu 01/09).
+   - `SO_TU_KHOA_MOI_NGUON`: da go khoi than ham nhung moi noi tran cho CHIEN
+     DICH; vong chay nen van dung muc cu. Quyet dinh muc cho vong nen.
 
-0. **HUONG CHINH DA DOI: ha MDE, khong phai tang CPU.**
-   Toc do da xong (2,6 lan) va no khong giai quyet gi ve san luong: 98% ung vien
-   chet o cong do luc. Ba duong ha MDE, xep theo cai da biet:
-     - du lieu DAI hon (da do: chuoi D1 dai ha nguong 1,4 -> 0,54)
-     - cong cu CHI PHI THAP hon (da do: ban do chi phi lien san chenh 5,5 diem
-       %/nam cho cung SP500 - la phep TRU khong ton slot FDR)
-     - gop lop (da thu: chi ha 0,535 -> 0,511, khong cuu duoc)
-   Truoc khi mua them may hay mo them nguon, tra loi cau nay truoc.
+3. **Toi uu co che BOC TACH / DOC** (chu du an giao).
+   Hien: doc 0,31 s/ban, boc 3-5 s/ban, suat 19-37 co che/100 ban.
+   Nut that moi la HAN MUC API (chu du an se nang goi DeepSeek).
+   Do lai suat theo nguon SAU khi boc lo .mq5 — con so 1,2% cua MQL5+GitHub do
+   truoc day la tren trang muc luc, khong phai tren ma chien luoc.
 
-1. **Ba nguon CHAY_SACH_MA_RONG - chay tay xem nuot o dau:** `etoro`,
-   `semantic`, `blog`. Hai nguon con lai da ro: `fxblue` + `quantconnect` chi
-   doc duoc qua Chrome CDP (`b trinh-duyet`).
+4. **QUANTLAB test chung NHANH va CHINH XAC nhu the nao** — cau hoi chu du an
+   dat ra, CHUA co lo trinh. Da co: backtest 0,72 ms/4.027 bar (toc do khong
+   phai van de), `hang_doi.py` (18 test) **chua ai goi**, `bien_don_bay` +
+   `cong` + `do_on_dinh`. Quy trinh da chay that hom nay va Sonic R qua ca ba:
+   train/holdout -> khop rui ro -> lan can tham so.
+   CAN QUYET: co che moi vao bang cua nao, tieu suat FDR luc nao, cai gi duoc
+   chay "do thoai mai" voi `ghi_so=False`.
 
-0. **CAN CHU DU AN GAT: do LUC truoc khi dang ky phep thu.**
-   Hien moi gia thuyet vao pheu deu tieu mot suat FDR, ke ca gia thuyet ma du
-   lieu hien co khong the nao phat hien duoc. Ket qua do duoc: hon nua ngan
-   sach da di vao phep thu co p > 0,5.
-   De xuat: tinh MDE truoc: neu edge nho nhat co the phat hien lon hon bat ky
-   edge hop ly cua gia thuyet do thi **do thoai mai nhung truyen `ghi_so=False`**
-   — khong tieu suat. Ha tang da co san (`do_luc.luc_hai_chang`,
-   `gop_lop.mde_gop`, `nhan/mde.py`), chi chua bat buoc tren moi duong.
-   Day la thay doi lon nhat dang cho, va no doi hanh vi cua ca pheu nen khong
-   tu lam.
+5. **Sonic R len MT5 Strategy Tester.** Luat cua chu du an: tester TRUOC,
+   Python SAU. 26,01 %/nam o don bay 3 (maxDD -47,8%) chua duoc tin cho toi
+   khi khop lenh that. Chua chay placebo, chua qua cong, chua dang ky gia
+   thuyet.
 
-1. **Ba nguon CHAY_SACH_MA_RONG — chay tay xem nuot o dau:** `etoro`,
-   `semantic`, `blog`. (`b` -> hoac goi thang ham trong `tru/seeker.py`.)
-   Hai nguon con lai da ro: `fxblue` + `quantconnect` chi doc duoc qua Chrome
-   CDP, bat trinh duyet len roi chay lai (`b trinh-duyet`).
+6. Muc cu con nguyen: `quant_plan.py` chua ai goi; `auto_follow` chua bam nut;
+   o dia con thap; 3 van de muc NANG (`vd_p_ung_vien_lech_null`,
+   `vd_cong_loai_sach_fdr`, `vd_null_qua_nho`).
 
--2. **CHAY TIEP luot 2500 null** (bi cat khi tat may toi 31/08, moi xong 2/23):
-   ```
-   b hinh-dang --ma $(doc reports/_shortlist_hinh_dang.txt) --null 2500 --tran-o 81 --ra sau2500 --tiep
-   ```
-   (hoac chay lai dung lenh PowerShell trong BAN_GIAO_SONG.md). Moi ung vien
-   ~2.000 giay; 21 cai con lai ~2 gio tren 6 luong. Hai ket qua dau da co:
-   `EURGBP.D1.cuoi_thang.truoc1_sau4` p=0,0728 va `truoc2_sau2` p=0,0504 —
-   **ca hai deu KHONG qua nguong Bonferroni** (0,05/115 = 0,00043), tuc luot sau
-   dang xac nhan ket luan am cua luot truoc chu khong lat nguoc no.
-
--1. **SUA DO SAU QUET CUA SEEKER — day la lo hong lon nhat dang mo.**
-   Chu du an nghi ngo va do lai thi DUNG: `tru/seeker.py::n_mql5_code` chi goi
-   DUNG HAI URL (`/en/code/mt5/experts` va `/en/code/mt5/indicators`), **trang 1,
-   khong phan trang**, roi cat con 30 link. Ca kho MQL5 Code Base thu ve duoc
-   **35 tai lieu**; TradingView 101. Khong nguon nao can ca — he doc di doc lai
-   trang dau nen tu lan hai tro di khong thay gi moi, va bao "vong lap rong 84%".
-   Chan doan cu cua EVO ("chu ky nguon qua day") la SAI.
-   Phai lam: phan trang that cho MQL5 (4 danh muc x nhieu trang) va TradingView,
-   cong mot CON TRO BIEN GIOI ghi da quet toi trang nao de moi luot di TIEP.
-   Va doi thuoc do cua SEEKER tu "so tai lieu" sang **"so co che duoc cong chap
-   nhan tren 100 bai"** — nang suat doc hien la ~1% va da co lan AM (mot ban doc
-   sai che ra edge Sharpe 0,822, 4 co che phai thu hoi).
-
--0. **EVO: phien kham hang ngay** (chu du an da nhat tri). Dau ra khong phai
-   danh sach ma la BENH AN CO THU TU: moi van de kem bang chung du de bat tay
-   sua (file nao, dong nao, so do nao sai), phan loai "lam sai KET LUAN" hay
-   "chi lam cham may", xep theo cau hoi duy nhat: *khong sua thi ket luan nao
-   cua du an dang sai?*. Chia viec dut khoat: EVO tu sua phan may moc (nguon
-   chet, tien trinh chet, don o dia, noi day mot ham chua ai goi); phan dong
-   vao CONG / SO FDR / CHI PHI / NGU PHAP thi CHI nguoi (Claude trong phien)
-   duoc sua — mot AI vua ra de vua cham bai vua sua thuoc do la cach nhanh nhat
-   de co mot he tu khen minh. Gan luon phan DON DEP vao phien kham nay (xoay
-   vong log 7 ngay, nen van ban, xoa cache trinh duyet, canh bao o dia thap).
-
--0b. **Ba van de muc NANG lam hong KET LUAN — sua truoc khi do them cai gi:**
-   `vd_p_ung_vien_lech_null` (phan phoi p cua ung vien khong phai phan phoi
-   null), `vd_cong_loai_sach_fdr` (cong loai ca 8 gia thuyet da vuot FDR),
-   `vd_null_qua_nho` (nha may null qua nho de ket luan). Thuoc con cong thi do
-   gi cung phi.
-
-0. **Bat he 24/7** (`b chay`). Chu du an muon xay chac truoc, va buoc nay tieu
-   suat FDR vinh vien nen chi bat khi co nguoi ngoi may.
-1. **`auto_follow` tu join nhom.** Ma da co san (346 dong: X, subreddit, kenh
-   Telegram, YouTube, TradingView) va chua ai goi. No thao tac tren TAI KHOAN
-   THAT — de chu du an bam nut. Da kiem: x/facebook/youtube/mql5 DA dang nhap,
-   tiktok va reddit chua.
-2. **O dia con 14 GB** — EVO da bao (`dia_thap`). Duoi 15 GB thi buoc kiem tick
-   MT5 bi khoa, tuc he tu chan buoc quyet dinh cua chinh no. Phan du an chi
-   chiem 4,5 GB (backups 344 MB / ho so Chrome 1,7 GB / data 769 MB /
-   reports 1,4 GB) — cho can don nam ngoai du an.
-3. **`quant_plan.py` van chua ai goi.** `quantlab` import ma khong dung ham nao;
-   dang ky that di qua `so.dang_ky_gia_thuyet` voi plan_hash **khong phu LUAT
-   QUYET DINH lan KHONG GIAN TIM KIEM**. Doi the he cong hoac noi rong luoi deu
-   khong lam doi hash. Sua doi ca danh tinh gia thuyet lan chuoi FDR.
-4. **Doc ky 4 kho vua nhat** de DOI CHIEU voi cong (khong thay): `zipline`
-   (20.041 sao, slippage model), `oos-lab` (haircut Sharpe), `deflated-alpha`,
-   `skill-backtest-overfit` (Minimum Track Record).
-5. **455 bai con cho doc toan van**, va **220 ban `khong_doc_duoc`** (gan het la
-   `doi.org` — tuong phi that).
-6. **Facebook con mong** (10 bai): trang tim kiem cua no gan nhu khong tra link
-   bai, khac X. Can cach khac.
-7. Muc cu con nguyen: `vuon_nguon.mot_luot_tim` (~100 ten chua thu),
-   103 viec `kham_pha_theo_mau` dang cho, `bao_dam_spread` cho nhom chi so.
-
-## Khong duoc quen (bo sung cho ban 23/08)
-
-- **`kho()` chon ban theo DO PHU, khong theo byte.** Them mot file vao `data/`
-  co the doi ban duoc chon cua ca mot ma. Cache mang ten file nguon nen no tu
-  het han — nhung ket qua backtest cu thi khong.
-- **Mot ma co ban `san` thi ban `ngoai` cung ten bi loai.** Do la cai chan
-  `us500cash_daily` (thuc ra la Yahoo ^GSPC) khoi ma US500CASH (CFD).
-- **Cung muc gia KHONG co nghia la cung chuoi.** Ba file `*_daily_dai` lech gia
-  0,24-0,36% nhung tuong quan loi suat ngay chi 0,08-0,14.
-- **Chi phi do o khung RIENG** (`du_lieu.khung_do_spread`), khong phai khung
-  chay backtest: ban D1 dai nhat thuong khong co cot spread.
-- **Do dac phai goi `ghi_so=False`.** Bat ky duong nao goi
-  `cong.xet(tren_holdout=True)` tren du lieu tong hop deu phai truyen co nay.
-- **`chay_pheu` khong truyen `df` = chi co TRAIN.** Muon ca chuoi thi noi ro
-  `cham_holdout=True`.
-- **Bo test cham duong FDR phai dat `SO.DB` sang CSDL tam.**
-- **`CTrade trade;` co trong MOI tien ich quan ly lenh.** Ranh gioi chien luoc /
-  tien ich la **MO VI THE MOI** (`bien_dich_ung_vien.loai_ma_nguon`).
+## KHONG DUOC QUEN (bo sung 03/09)
+- `b mang` TRUOC khi san bat cu thu gi.
+- **Lam "giong nguoi" qua tay thi phan tac dung**: `requests.get` tran 4/4 =
+  200; phien giu cookie + Referer 4/4 = 403.
+- `thu_thap` ghi vao bang `artifact`, KHONG vao `tai_lieu`.
+- Payload artifact LONG mot tang: ma o `payload["payload"]["content"]`.
+- `Accept-Encoding: br` khi khong co brotli -> HTTP 200 nhung `r.text` RAC.
