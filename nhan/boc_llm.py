@@ -60,6 +60,26 @@ DAU_HIEU_LUAT = [
     r"\b(rsi|stochastic|cci)\s*[<>]\s*\d", r"\bclose\s+(above|below)\b",
     r"\bentry\s+(rule|condition|signal)", r"\bexit\s+(rule|condition|signal)",
     r"\bkhi\s+(gia|rsi|ema|sma)\b", r"\b(vao|thoat)\s+lenh\b",
+    # --- TIENG VIET CO DAU ---
+    # DO 04/09/2026, va la LAN THU HAI cung mot ho loi. Ngay 03/09 bo loc nay
+    # duoc viet cho VAN XUOI roi dem ap len MA NGUON: 0/300 ban github qua
+    # nguong. Hom nay lay ve 180 bai Telegram tieng Viet (hai kenh chu du an
+    # dua) va **161/180 cham DUNG 0 diem** - trong do co bai phan tich DCA vang
+    # tren tai khoan cent, du 10 muc lenh, tuc dac luat.
+    #
+    # Nguyen nhan y het: moi mau tren deu la tieng Anh hoac cu phap lap trinh.
+    # Hai mau tieng Viet duy nhat lai viet KHONG DAU (`khi gia`, `vao lenh`),
+    # nen khong khop mot chu nao cua van ban that.
+    r"\b(mua|b[áa]n)\s+khi\b",
+    r"v[àa]o\s+l[ệe]nh", r"tho[áa]t\s+l[ệe]nh",
+    r"c[ắa]t\s+l[ỗo]", r"d[ừu]ng\s+l[ỗo]", r"ch[ốo]t\s+l[ờo]i",
+    r"\b(tp|sl)\s*[:=]?\s*\d",
+    r"khung\s+(m1|m5|m15|m30|h1|h4|d1|w1)\b",
+    r"n[ếe]u\s+.{0,40}\bth[ìi]\b",
+    r"(v[ưu][ợo]t|ph[áa]\s+v[ỡo]|c[ắa]t)\s+(l[êe]n|xu[ốo]ng|qua)",
+    r"[đd][óo]ng\s+n[ếe]n", r"r[âa]u\s+n[ếe]n",
+    r"\b(dca|trailing|martingale)\b", r"l[ướơ]i\s+l[ệe]nh",
+    r"kh[ốo]i\s+l[ưư][ợo]ng\s+l[ệe]nh", r"t[ỉi]\s*l[ệe]\s*r\s*:?\s*r",
     # --- MA NGUON: Pine ---
     r"strategy\.(entry|close|exit|order)\s*\(", r"\bta\.(crossover|crossunder)\s*\(",
     r"\bplotshape\s*\(", r"//@version\s*=",
@@ -94,26 +114,46 @@ def _diem_luat(vb: str) -> int:
     return sum(1 for rx in _RX if rx.search(vb or ""))
 
 
-def ung_vien(gioi_han: int = 200, diem_toi_thieu: int = 2,
+def ung_vien(gioi_han: int = 200, diem_toi_thieu: int | None = None,
              nguon_uu_tien=("tradingview_pine", "tradingview_scripts", "mql5_code",
                             "mql5_bai_viet", "github", "lean_algo", "blog",
                             "rss_tradingview_blog", "quantconnect")) -> list[dict]:
     """Ban doc CHUA duoc boc, co dau hieu chua luat, uu tien nguon suat cao."""
+    # Truoc 04/09 tham so nay hardcode `2` trong khi hang so khai bao
+    # `DIEM_TOI_THIEU = 1` (da ha xuong 1 ngay 03/09 vi "doi HAI dau hieu la mot
+    # rao khong co co so"). Tuc duong VAN XUOI van chay o nguong CU, chi duong
+    # MA NGUON duoc ha - mot lan sua chi ap duoc mot nua.
+    nguong = DIEM_TOI_THIEU if diem_toi_thieu is None else diem_toi_thieu
     ds = SO.nhieu(
         "SELECT n.id, n.van_ban, n.so_ky_tu, n.kieu, t.tieu_de, t.nguon, t.url "
         "FROM noi_dung n LEFT JOIN tai_lieu t ON t.id = n.tai_lieu_id "
         "WHERE n.da_boc = 0 AND n.so_ky_tu > 800 AND n.kieu != 'khong_doc_duoc' "
-        "ORDER BY CASE WHEN t.nguon IN ({}) THEN 0 ELSE 1 END, n.so_ky_tu DESC "
+        "ORDER BY CASE WHEN t.nguon IN ({}) "
+        "            OR t.nguon LIKE 'telegram%' THEN 0 ELSE 1 END, n.id DESC "
         "LIMIT ?".format(",".join("?" for _ in nguon_uu_tien)),
-        *nguon_uu_tien, gioi_han * 4) or []
+        *nguon_uu_tien, gioi_han * 8) or []
+
+    # XEP THEO MAT DO LUAT, KHONG THEO DO DAI.
+    #
+    # DO 04/09/2026. Truoc do cau lenh xep `n.so_ky_tu DESC`, va hau qua chi lo
+    # ra khi co mot nguon MOI voi hinh dang khac: 180 bai Telegram vua lay ve,
+    # 100 bai qua duoc bo loc dau hieu luat, va **khong bai nao tung den luot**
+    # - vi bai Telegram dai 2-4 nghin ky tu con mot trang blog hay mot file
+    # `.mq5` dai 30-40 nghin, nen o thu tu giam dan theo do dai thi ca lop nguon
+    # do nam duoi day mai mai.
+    #
+    # Do dai KHONG phai mat do luat. Mot bai 2.000 ky tu noi thang "vao khi RSI
+    # < 30, cat lo 1%, chot 2%" dac luat hon mot trang 40.000 ky tu ke chuyen.
+    # Nen: lay theo THU TU MOI NHAT (bai vua thu hoach la bai chua ai boc), roi
+    # xep lai theo SO DAU HIEU LUAT dem duoc, roi moi cat `gioi_han`.
     ra = []
     for r in ds:
         d = dict(r)
-        if _diem_luat(d["van_ban"]) >= diem_toi_thieu:
+        d["_diem"] = _diem_luat(d["van_ban"])
+        if d["_diem"] >= nguong:
             ra.append(d)
-        if len(ra) >= gioi_han:
-            break
-    return ra
+    ra.sort(key=lambda d: -d["_diem"])
+    return ra[:gioi_han]
 
 
 def ung_vien_artifact(gioi_han: int = 300, diem_toi_thieu: int | None = None) -> list[dict]:
@@ -350,6 +390,11 @@ def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
                 cn.execute("UPDATE noi_dung SET da_boc=1 WHERE id=?", (i,))
 
     giay = time.time() - t0
+    # Ghi so de dem duoc "bao nhieu co che moi HOM NAY". Kho co che
+    # (`ngu_phap.doc_kho`) khong co truong thoi gian nao, nen khong co dong nay
+    # thi chi tieu ngay khong do duoc muc quan trong nhat cua no.
+    SO.ghi_chi_so("boc_co_che_moi", float(moi),
+                  {"ban": len(ds), "tu_choi": tu_choi, "loi": loi})
     return {"ban": len(ds), "co_che_moi": moi, "tu_choi": tu_choi, "loi": loi,
             "giay": round(giay, 1), "giay_moi_ban": round(giay / max(len(ds), 1), 1),
             "suat_tren_100_ban": round(moi / max(len(ds), 1) * 100, 1),

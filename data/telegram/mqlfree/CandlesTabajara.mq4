@@ -1,0 +1,1855 @@
+//+------------------------------------------------------------------+
+//|                                             Candles Tabajara.mq4 |
+//|                             Copyright 2007-2016, FinanceWave.com |
+//|                              http://www.facebook.com/FinanceWave |
+//|                                                     @FinanceWave |
+//|                                       http://www.financewave.com |
+//+------------------------------------------------------------------+
+#property copyright   "2007-2016, FinanceWave.com"
+#property link        "http://www.financewave.com"
+#property description "Candles Tabajara"
+#property indicator_separate_window
+#property indicator_buffers 25
+
+color bg;
+//--- indicator buffers
+double         GREEN_HIGH[];
+double         GREEN_OPEN[];
+double         GREEN_CLOSE[];
+double         GREEN_LOW[];
+double         RED_HIGH[];
+double         RED_OPEN[];
+double         RED_CLOSE[];
+double         RED_LOW[];
+double         YELLOW_HIGH[];
+double         YELLOW_OPEN[];
+double         YELLOW_CLOSE[];
+double         YELLOW_LOW[];
+
+double         GREENc_HIGH[];
+double         GREENc_OPEN[];
+double         GREENc_CLOSE[];
+double         GREENc_LOW[];
+double         REDc_HIGH[];
+double         REDc_OPEN[];
+double         REDc_CLOSE[];
+double         REDc_LOW[];
+
+double ma20flat[];
+double ma20long[];
+double ma20short[];
+
+double ma200[];
+
+double ma[];
+
+static string PatternText[200];
+
+extern int periods = 40;
+
+//+------------------------------------------------------------------+
+//| Custom indicator initialization function                         |
+//+------------------------------------------------------------------+
+int OnInit()
+  {
+   bg=(color)ChartGetInteger(ChartID(),CHART_COLOR_BACKGROUND);
+//--- indicator buffers mapping
+   SetIndexBuffer(0,GREEN_CLOSE);SetIndexStyle(0,DRAW_HISTOGRAM,STYLE_SOLID,3,DarkGray);
+   SetIndexBuffer(1,GREEN_OPEN);SetIndexStyle(1,DRAW_HISTOGRAM,STYLE_SOLID,3,bg);
+   SetIndexBuffer(2,GREEN_HIGH);SetIndexStyle(2,DRAW_HISTOGRAM,STYLE_SOLID,1,DarkGray);
+   SetIndexBuffer(3,GREEN_LOW);SetIndexStyle(3,DRAW_HISTOGRAM,STYLE_SOLID,1,bg);
+   SetIndexBuffer(4,RED_OPEN);SetIndexStyle(4,DRAW_HISTOGRAM,STYLE_SOLID,3,Gray);
+   SetIndexBuffer(5,RED_CLOSE);SetIndexStyle(5,DRAW_HISTOGRAM,STYLE_SOLID,3,bg);
+   SetIndexBuffer(6,RED_HIGH);SetIndexStyle(6,DRAW_HISTOGRAM,STYLE_SOLID,1,Gray);
+   SetIndexBuffer(7,RED_LOW);SetIndexStyle(7,DRAW_HISTOGRAM,STYLE_SOLID,1,bg);
+   SetIndexBuffer(8,YELLOW_OPEN);SetIndexStyle(8,DRAW_HISTOGRAM,STYLE_SOLID,3,DarkGray);
+   SetIndexBuffer(9,YELLOW_CLOSE);SetIndexStyle(9,DRAW_HISTOGRAM,STYLE_SOLID,3,bg);
+   SetIndexBuffer(10,YELLOW_HIGH);SetIndexStyle(10,DRAW_HISTOGRAM,STYLE_SOLID,1,DarkGray);
+   SetIndexBuffer(11,YELLOW_LOW);SetIndexStyle(11,DRAW_HISTOGRAM,STYLE_SOLID,1,bg);
+
+   SetIndexBuffer(12,GREENc_CLOSE);SetIndexStyle(12,DRAW_HISTOGRAM,STYLE_SOLID,3,Green);
+   SetIndexBuffer(13,GREENc_OPEN);SetIndexStyle(13,DRAW_HISTOGRAM,STYLE_SOLID,3,bg);
+   SetIndexBuffer(14,GREENc_HIGH);SetIndexStyle(14,DRAW_HISTOGRAM,STYLE_SOLID,1,Green);
+   SetIndexBuffer(15,GREENc_LOW);SetIndexStyle(15,DRAW_HISTOGRAM,STYLE_SOLID,1,bg);
+   SetIndexBuffer(16,REDc_OPEN);SetIndexStyle(16,DRAW_HISTOGRAM,STYLE_SOLID,3,Red);
+   SetIndexBuffer(17,REDc_CLOSE);SetIndexStyle(17,DRAW_HISTOGRAM,STYLE_SOLID,3,bg);
+   SetIndexBuffer(18,REDc_HIGH);SetIndexStyle(18,DRAW_HISTOGRAM,STYLE_SOLID,1,Red);
+   SetIndexBuffer(19,REDc_LOW);SetIndexStyle(19,DRAW_HISTOGRAM,STYLE_SOLID,1,bg);
+
+   SetIndexBuffer(20,ma20flat);SetIndexStyle(20,DRAW_LINE,STYLE_SOLID,1,Yellow);
+   SetIndexBuffer(21,ma20long);SetIndexStyle(21,DRAW_LINE,STYLE_SOLID,1,Green);
+   SetIndexBuffer(22,ma20short);SetIndexStyle(22,DRAW_LINE,STYLE_SOLID,1,Red);
+   SetIndexBuffer(23,ma200);SetIndexStyle(23,DRAW_LINE,STYLE_SOLID,1,Blue);
+
+   SetIndexBuffer(24,ma);SetIndexStyle(24,DRAW_NONE);
+
+//---
+   return(0);
+  }
+//+------------------------------------------------------------------+
+//| Custom indicator deinitialization function                       |
+//+------------------------------------------------------------------+
+int deinit() {
+   ObjectsDeleteAll(0, OBJ_TEXT);
+   return(0);
+}
+//+------------------------------------------------------------------+
+//| Custom indicator iteration function                              |
+//+------------------------------------------------------------------+
+int OnCalculate(const int rates_total,
+                const int prev_calculated,
+                const datetime &time[],
+                const double &open[],
+                const double &high[],
+                const double &low[],
+                const double &close[],
+                const long &tick_volume[],
+                const long &volume[],
+                const int &spread[])
+  {
+   double OPEN,HIGH,LOW,CLOSE,CLOSEANT;
+
+   for(int i=Bars-1;i>=0;i--) 
+   {
+      GREEN_OPEN[i]=GREEN_HIGH[i]=GREEN_LOW[i]=GREEN_CLOSE[i]=EMPTY_VALUE;
+      RED_OPEN[i]=RED_HIGH[i]=RED_LOW[i]=RED_CLOSE[i]=EMPTY_VALUE;
+      YELLOW_OPEN[i]=YELLOW_HIGH[i]=YELLOW_LOW[i]=YELLOW_CLOSE[i]=EMPTY_VALUE;
+      GREENc_OPEN[i]=GREENc_HIGH[i]=GREENc_LOW[i]=GREENc_CLOSE[i]=EMPTY_VALUE;
+      REDc_OPEN[i]=REDc_HIGH[i]=REDc_LOW[i]=REDc_CLOSE[i]=EMPTY_VALUE;
+      ma20flat[i]=EMPTY_VALUE;
+      ma20short[i]=EMPTY_VALUE;
+      ma20long[i]=EMPTY_VALUE;
+      ma200[i]=EMPTY_VALUE;
+      ma[i]=EMPTY_VALUE;
+   }
+
+/////////////////////MAs///////////////////////
+
+//1M
+for(i = 0; i<periods; i++)
+{
+ma[i]=(iClose(NULL,0,i)+iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19))/20;
+ma[i+1]=(iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19)+iClose(NULL,0,i+20))/20;
+if(ma[i]>ma[i+1] && iClose(NULL,0,i)>ma[i])
+{ma20long[i]=(iClose(NULL,0,i)+iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19))/20;
+ma20long[i+1]=(iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19)+iClose(NULL,0,i+20))/20;}
+else if(ma[i]<ma[i+1] && iClose(NULL,0,i)<ma[i])
+{ma20short[i]=(iClose(NULL,0,i)+iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19))/20;
+ma20short[i+1]=(iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19)+iClose(NULL,0,i+20))/20;}
+else
+{ma20flat[i]=(iClose(NULL,0,i)+iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19))/20;
+ma20flat[i+1]=(iClose(NULL,0,i+1)+iClose(NULL,0,i+2)+iClose(NULL,0,i+3)+iClose(NULL,0,i+4)+iClose(NULL,0,i+5)+iClose(NULL,0,i+6)+iClose(NULL,0,i+7)+iClose(NULL,0,i+8)+iClose(NULL,0,i+9)+iClose(NULL,0,i+10)+iClose(NULL,0,i+11)+iClose(NULL,0,i+12)+iClose(NULL,0,i+13)+iClose(NULL,0,i+14)+iClose(NULL,0,i+15)+iClose(NULL,0,i+16)+iClose(NULL,0,i+17)+iClose(NULL,0,i+18)+iClose(NULL,0,i+19)+iClose(NULL,0,i+20))/20;}
+}
+//2M
+for(i = 0; i<periods; i++)
+{
+ma[i+1*(periods+12)]=(iClose(NULL,0,2*i)+iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19)))/20;
+ma[i+1*(periods+12)+1]=(iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19))+iClose(NULL,0,2*(i+20)))/20;
+if(ma[i+1*(periods+12)]>ma[i+1*(periods+12)+1] && iClose(NULL,0,2*i)>ma[i+1*(periods+12)])
+{ma20long[i+1*(periods+12)]=(iClose(NULL,0,2*i)+iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19)))/20;
+ma20long[i+1*(periods+12)+1]=(iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19))+iClose(NULL,0,2*(i+20)))/20;}
+else if(ma[i+1*(periods+12)]<ma[i+1*(periods+12)+1] && iClose(NULL,0,2*i)<ma[i+1*(periods+12)])
+{ma20short[i+1*(periods+12)]=(iClose(NULL,0,2*i)+iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19)))/20;
+ma20short[i+1*(periods+12)+1]=(iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19))+iClose(NULL,0,2*(i+20)))/20;}
+else
+{ma20flat[i+1*(periods+12)]=(iClose(NULL,0,2*i)+iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19)))/20;
+ma20flat[i+1*(periods+12)+1]=(iClose(NULL,0,2*(i+1))+iClose(NULL,0,2*(i+2))+iClose(NULL,0,2*(i+3))+iClose(NULL,0,2*(i+4))+iClose(NULL,0,2*(i+5))+iClose(NULL,0,2*(i+6))+iClose(NULL,0,2*(i+7))+iClose(NULL,0,2*(i+8))+iClose(NULL,0,2*(i+9))+iClose(NULL,0,2*(i+10))+iClose(NULL,0,2*(i+11))+iClose(NULL,0,2*(i+12))+iClose(NULL,0,2*(i+13))+iClose(NULL,0,2*(i+14))+iClose(NULL,0,2*(i+15))+iClose(NULL,0,2*(i+16))+iClose(NULL,0,2*(i+17))+iClose(NULL,0,2*(i+18))+iClose(NULL,0,2*(i+19))+iClose(NULL,0,2*(i+20)))/20;}
+}
+//3M
+for(i = 0; i<periods; i++)
+{
+ma[i+2*(periods+12)]=(iClose(NULL,0,3*i)+iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19)))/20;
+ma[i+2*(periods+12)+1]=(iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19))+iClose(NULL,0,3*(i+20)))/20;
+if(ma[i+2*(periods+12)]>ma[i+2*(periods+12)+1] && iClose(NULL,0,3*i)>ma[i+2*(periods+12)])
+{ma20long[i+2*(periods+12)]=(iClose(NULL,0,3*i)+iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19)))/20;
+ma20long[i+2*(periods+12)+1]=(iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19))+iClose(NULL,0,3*(i+20)))/20;}
+else if(ma[i+2*(periods+12)]<ma[i+2*(periods+12)+1] && iClose(NULL,0,3*i)<ma[i+2*(periods+12)])
+{ma20short[i+2*(periods+12)]=(iClose(NULL,0,3*i)+iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19)))/20;
+ma20short[i+2*(periods+12)+1]=(iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19))+iClose(NULL,0,3*(i+20)))/20;}
+else
+{ma20flat[i+2*(periods+12)]=(iClose(NULL,0,3*i)+iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19)))/20;
+ma20flat[i+2*(periods+12)+1]=(iClose(NULL,0,3*(i+1))+iClose(NULL,0,3*(i+2))+iClose(NULL,0,3*(i+3))+iClose(NULL,0,3*(i+4))+iClose(NULL,0,3*(i+5))+iClose(NULL,0,3*(i+6))+iClose(NULL,0,3*(i+7))+iClose(NULL,0,3*(i+8))+iClose(NULL,0,3*(i+9))+iClose(NULL,0,3*(i+10))+iClose(NULL,0,3*(i+11))+iClose(NULL,0,3*(i+12))+iClose(NULL,0,3*(i+13))+iClose(NULL,0,3*(i+14))+iClose(NULL,0,3*(i+15))+iClose(NULL,0,3*(i+16))+iClose(NULL,0,3*(i+17))+iClose(NULL,0,3*(i+18))+iClose(NULL,0,3*(i+19))+iClose(NULL,0,3*(i+20)))/20;}
+}
+//4M
+for(i = 0; i<periods; i++)
+{
+ma[i+3*(periods+12)]=(iClose(NULL,0,4*i)+iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19)))/20;
+ma[i+3*(periods+12)+1]=(iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19))+iClose(NULL,0,4*(i+20)))/20;
+if(ma[i+3*(periods+12)]>ma[i+3*(periods+12)+1] && iClose(NULL,0,4*i)>ma[i+3*(periods+12)])
+{ma20long[i+3*(periods+12)]=(iClose(NULL,0,4*i)+iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19)))/20;
+ma20long[i+3*(periods+12)+1]=(iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19))+iClose(NULL,0,4*(i+20)))/20;}
+else if(ma[i+3*(periods+12)]<ma[i+3*(periods+12)+1] && iClose(NULL,0,4*i)<ma[i+3*(periods+12)])
+{ma20short[i+3*(periods+12)]=(iClose(NULL,0,4*i)+iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19)))/20;
+ma20short[i+3*(periods+12)+1]=(iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19))+iClose(NULL,0,4*(i+20)))/20;}
+else
+{ma20flat[i+3*(periods+12)]=(iClose(NULL,0,4*i)+iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19)))/20;
+ma20flat[i+3*(periods+12)+1]=(iClose(NULL,0,4*(i+1))+iClose(NULL,0,4*(i+2))+iClose(NULL,0,4*(i+3))+iClose(NULL,0,4*(i+4))+iClose(NULL,0,4*(i+5))+iClose(NULL,0,4*(i+6))+iClose(NULL,0,4*(i+7))+iClose(NULL,0,4*(i+8))+iClose(NULL,0,4*(i+9))+iClose(NULL,0,4*(i+10))+iClose(NULL,0,4*(i+11))+iClose(NULL,0,4*(i+12))+iClose(NULL,0,4*(i+13))+iClose(NULL,0,4*(i+14))+iClose(NULL,0,4*(i+15))+iClose(NULL,0,4*(i+16))+iClose(NULL,0,4*(i+17))+iClose(NULL,0,4*(i+18))+iClose(NULL,0,4*(i+19))+iClose(NULL,0,4*(i+20)))/20;}
+}
+//5M
+for(i = 0; i<periods; i++)
+{
+ma[i+4*(periods+12)]=(iClose(NULL,0,5*i)+iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19)))/20;
+ma[i+4*(periods+12)+1]=(iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19))+iClose(NULL,0,5*(i+20)))/20;
+if(ma[i+4*(periods+12)]>ma[i+4*(periods+12)+1] && iClose(NULL,0,5*i)>ma[i+4*(periods+12)])
+{ma20long[i+4*(periods+12)]=(iClose(NULL,0,5*i)+iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19)))/20;
+ma20long[i+4*(periods+12)+1]=(iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19))+iClose(NULL,0,5*(i+20)))/20;}
+else if(ma[i+4*(periods+12)]<ma[i+4*(periods+12)+1] && iClose(NULL,0,5*i)<ma[i+4*(periods+12)])
+{ma20short[i+4*(periods+12)]=(iClose(NULL,0,5*i)+iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19)))/20;
+ma20short[i+4*(periods+12)+1]=(iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19))+iClose(NULL,0,5*(i+20)))/20;}
+else
+{ma20flat[i+4*(periods+12)]=(iClose(NULL,0,5*i)+iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19)))/20;
+ma20flat[i+4*(periods+12)+1]=(iClose(NULL,0,5*(i+1))+iClose(NULL,0,5*(i+2))+iClose(NULL,0,5*(i+3))+iClose(NULL,0,5*(i+4))+iClose(NULL,0,5*(i+5))+iClose(NULL,0,5*(i+6))+iClose(NULL,0,5*(i+7))+iClose(NULL,0,5*(i+8))+iClose(NULL,0,5*(i+9))+iClose(NULL,0,5*(i+10))+iClose(NULL,0,5*(i+11))+iClose(NULL,0,5*(i+12))+iClose(NULL,0,5*(i+13))+iClose(NULL,0,5*(i+14))+iClose(NULL,0,5*(i+15))+iClose(NULL,0,5*(i+16))+iClose(NULL,0,5*(i+17))+iClose(NULL,0,5*(i+18))+iClose(NULL,0,5*(i+19))+iClose(NULL,0,5*(i+20)))/20;}
+}
+//6M
+for(i = 0; i<periods; i++)
+{
+ma[i+5*(periods+12)]=(iClose(NULL,0,6*i)+iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19)))/20;
+ma[i+5*(periods+12)+1]=(iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19))+iClose(NULL,0,6*(i+20)))/20;
+if(ma[i+5*(periods+12)]>ma[i+5*(periods+12)+1] && iClose(NULL,0,6*i)>ma[i+5*(periods+12)])
+{ma20long[i+5*(periods+12)]=(iClose(NULL,0,6*i)+iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19)))/20;
+ma20long[i+5*(periods+12)+1]=(iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19))+iClose(NULL,0,6*(i+20)))/20;}
+else if(ma[i+5*(periods+12)]<ma[i+5*(periods+12)+1] && iClose(NULL,0,6*i)<ma[i+5*(periods+12)])
+{ma20short[i+5*(periods+12)]=(iClose(NULL,0,6*i)+iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19)))/20;
+ma20short[i+5*(periods+12)+1]=(iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19))+iClose(NULL,0,6*(i+20)))/20;}
+else
+{ma20flat[i+5*(periods+12)]=(iClose(NULL,0,6*i)+iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19)))/20;
+ma20flat[i+5*(periods+12)+1]=(iClose(NULL,0,6*(i+1))+iClose(NULL,0,6*(i+2))+iClose(NULL,0,6*(i+3))+iClose(NULL,0,6*(i+4))+iClose(NULL,0,6*(i+5))+iClose(NULL,0,6*(i+6))+iClose(NULL,0,6*(i+7))+iClose(NULL,0,6*(i+8))+iClose(NULL,0,6*(i+9))+iClose(NULL,0,6*(i+10))+iClose(NULL,0,6*(i+11))+iClose(NULL,0,6*(i+12))+iClose(NULL,0,6*(i+13))+iClose(NULL,0,6*(i+14))+iClose(NULL,0,6*(i+15))+iClose(NULL,0,6*(i+16))+iClose(NULL,0,6*(i+17))+iClose(NULL,0,6*(i+18))+iClose(NULL,0,6*(i+19))+iClose(NULL,0,6*(i+20)))/20;}
+}
+
+//1M
+for(i = 0; i<periods; i++)
+{
+ma200[i]=(
+iClose(NULL,0,i)+
+iClose(NULL,0,i+1)+
+iClose(NULL,0,i+2)+
+iClose(NULL,0,i+3)+
+iClose(NULL,0,i+4)+
+iClose(NULL,0,i+5)+
+iClose(NULL,0,i+6)+
+iClose(NULL,0,i+7)+
+iClose(NULL,0,i+8)+
+iClose(NULL,0,i+9)+
+iClose(NULL,0,i+10)+
+iClose(NULL,0,i+11)+
+iClose(NULL,0,i+12)+
+iClose(NULL,0,i+13)+
+iClose(NULL,0,i+14)+
+iClose(NULL,0,i+15)+
+iClose(NULL,0,i+16)+
+iClose(NULL,0,i+17)+
+iClose(NULL,0,i+18)+
+iClose(NULL,0,i+19)+
+iClose(NULL,0,i+20)+
+iClose(NULL,0,i+21)+
+iClose(NULL,0,i+22)+
+iClose(NULL,0,i+23)+
+iClose(NULL,0,i+24)+
+iClose(NULL,0,i+25)+
+iClose(NULL,0,i+26)+
+iClose(NULL,0,i+27)+
+iClose(NULL,0,i+28)+
+iClose(NULL,0,i+29)+
+iClose(NULL,0,i+30)+
+iClose(NULL,0,i+31)+
+iClose(NULL,0,i+32)+
+iClose(NULL,0,i+33)+
+iClose(NULL,0,i+34)+
+iClose(NULL,0,i+35)+
+iClose(NULL,0,i+36)+
+iClose(NULL,0,i+37)+
+iClose(NULL,0,i+38)+
+iClose(NULL,0,i+39)+
+iClose(NULL,0,i+40)+
+iClose(NULL,0,i+41)+
+iClose(NULL,0,i+42)+
+iClose(NULL,0,i+43)+
+iClose(NULL,0,i+44)+
+iClose(NULL,0,i+45)+
+iClose(NULL,0,i+46)+
+iClose(NULL,0,i+47)+
+iClose(NULL,0,i+48)+
+iClose(NULL,0,i+49)+
+iClose(NULL,0,i+50)+
+iClose(NULL,0,i+51)+
+iClose(NULL,0,i+52)+
+iClose(NULL,0,i+53)+
+iClose(NULL,0,i+54)+
+iClose(NULL,0,i+55)+
+iClose(NULL,0,i+56)+
+iClose(NULL,0,i+57)+
+iClose(NULL,0,i+58)+
+iClose(NULL,0,i+59)+
+iClose(NULL,0,i+60)+
+iClose(NULL,0,i+61)+
+iClose(NULL,0,i+62)+
+iClose(NULL,0,i+63)+
+iClose(NULL,0,i+64)+
+iClose(NULL,0,i+65)+
+iClose(NULL,0,i+66)+
+iClose(NULL,0,i+67)+
+iClose(NULL,0,i+68)+
+iClose(NULL,0,i+69)+
+iClose(NULL,0,i+70)+
+iClose(NULL,0,i+71)+
+iClose(NULL,0,i+72)+
+iClose(NULL,0,i+73)+
+iClose(NULL,0,i+74)+
+iClose(NULL,0,i+75)+
+iClose(NULL,0,i+76)+
+iClose(NULL,0,i+77)+
+iClose(NULL,0,i+78)+
+iClose(NULL,0,i+79)+
+iClose(NULL,0,i+80)+
+iClose(NULL,0,i+81)+
+iClose(NULL,0,i+82)+
+iClose(NULL,0,i+83)+
+iClose(NULL,0,i+84)+
+iClose(NULL,0,i+85)+
+iClose(NULL,0,i+86)+
+iClose(NULL,0,i+87)+
+iClose(NULL,0,i+88)+
+iClose(NULL,0,i+89)+
+iClose(NULL,0,i+90)+
+iClose(NULL,0,i+91)+
+iClose(NULL,0,i+92)+
+iClose(NULL,0,i+93)+
+iClose(NULL,0,i+94)+
+iClose(NULL,0,i+95)+
+iClose(NULL,0,i+96)+
+iClose(NULL,0,i+97)+
+iClose(NULL,0,i+98)+
+iClose(NULL,0,i+99)+
+iClose(NULL,0,i+100)+
+iClose(NULL,0,i+101)+
+iClose(NULL,0,i+102)+
+iClose(NULL,0,i+103)+
+iClose(NULL,0,i+104)+
+iClose(NULL,0,i+105)+
+iClose(NULL,0,i+106)+
+iClose(NULL,0,i+107)+
+iClose(NULL,0,i+108)+
+iClose(NULL,0,i+109)+
+iClose(NULL,0,i+110)+
+iClose(NULL,0,i+111)+
+iClose(NULL,0,i+112)+
+iClose(NULL,0,i+113)+
+iClose(NULL,0,i+114)+
+iClose(NULL,0,i+115)+
+iClose(NULL,0,i+116)+
+iClose(NULL,0,i+117)+
+iClose(NULL,0,i+118)+
+iClose(NULL,0,i+119)+
+iClose(NULL,0,i+120)+
+iClose(NULL,0,i+121)+
+iClose(NULL,0,i+122)+
+iClose(NULL,0,i+123)+
+iClose(NULL,0,i+124)+
+iClose(NULL,0,i+125)+
+iClose(NULL,0,i+126)+
+iClose(NULL,0,i+127)+
+iClose(NULL,0,i+128)+
+iClose(NULL,0,i+129)+
+iClose(NULL,0,i+130)+
+iClose(NULL,0,i+131)+
+iClose(NULL,0,i+132)+
+iClose(NULL,0,i+133)+
+iClose(NULL,0,i+134)+
+iClose(NULL,0,i+135)+
+iClose(NULL,0,i+136)+
+iClose(NULL,0,i+137)+
+iClose(NULL,0,i+138)+
+iClose(NULL,0,i+139)+
+iClose(NULL,0,i+140)+
+iClose(NULL,0,i+141)+
+iClose(NULL,0,i+142)+
+iClose(NULL,0,i+143)+
+iClose(NULL,0,i+144)+
+iClose(NULL,0,i+145)+
+iClose(NULL,0,i+146)+
+iClose(NULL,0,i+147)+
+iClose(NULL,0,i+148)+
+iClose(NULL,0,i+149)+
+iClose(NULL,0,i+150)+
+iClose(NULL,0,i+151)+
+iClose(NULL,0,i+152)+
+iClose(NULL,0,i+153)+
+iClose(NULL,0,i+154)+
+iClose(NULL,0,i+155)+
+iClose(NULL,0,i+156)+
+iClose(NULL,0,i+157)+
+iClose(NULL,0,i+158)+
+iClose(NULL,0,i+159)+
+iClose(NULL,0,i+160)+
+iClose(NULL,0,i+161)+
+iClose(NULL,0,i+162)+
+iClose(NULL,0,i+163)+
+iClose(NULL,0,i+164)+
+iClose(NULL,0,i+165)+
+iClose(NULL,0,i+166)+
+iClose(NULL,0,i+167)+
+iClose(NULL,0,i+168)+
+iClose(NULL,0,i+169)+
+iClose(NULL,0,i+170)+
+iClose(NULL,0,i+171)+
+iClose(NULL,0,i+172)+
+iClose(NULL,0,i+173)+
+iClose(NULL,0,i+174)+
+iClose(NULL,0,i+175)+
+iClose(NULL,0,i+176)+
+iClose(NULL,0,i+177)+
+iClose(NULL,0,i+178)+
+iClose(NULL,0,i+179)+
+iClose(NULL,0,i+180)+
+iClose(NULL,0,i+181)+
+iClose(NULL,0,i+182)+
+iClose(NULL,0,i+183)+
+iClose(NULL,0,i+184)+
+iClose(NULL,0,i+185)+
+iClose(NULL,0,i+186)+
+iClose(NULL,0,i+187)+
+iClose(NULL,0,i+188)+
+iClose(NULL,0,i+189)+
+iClose(NULL,0,i+190)+
+iClose(NULL,0,i+191)+
+iClose(NULL,0,i+192)+
+iClose(NULL,0,i+193)+
+iClose(NULL,0,i+194)+
+iClose(NULL,0,i+195)+
+iClose(NULL,0,i+196)+
+iClose(NULL,0,i+197)+
+iClose(NULL,0,i+198)+
+iClose(NULL,0,i+199))/200;
+}
+
+//2M
+for(i = 0; i<periods; i++)
+{
+ma200[i+periods+12]=(
+iClose(NULL,0,2*(i))+
+iClose(NULL,0,2*(i+1))+
+iClose(NULL,0,2*(i+2))+
+iClose(NULL,0,2*(i+3))+
+iClose(NULL,0,2*(i+4))+
+iClose(NULL,0,2*(i+5))+
+iClose(NULL,0,2*(i+6))+
+iClose(NULL,0,2*(i+7))+
+iClose(NULL,0,2*(i+8))+
+iClose(NULL,0,2*(i+9))+
+iClose(NULL,0,2*(i+10))+
+iClose(NULL,0,2*(i+11))+
+iClose(NULL,0,2*(i+12))+
+iClose(NULL,0,2*(i+13))+
+iClose(NULL,0,2*(i+14))+
+iClose(NULL,0,2*(i+15))+
+iClose(NULL,0,2*(i+16))+
+iClose(NULL,0,2*(i+17))+
+iClose(NULL,0,2*(i+18))+
+iClose(NULL,0,2*(i+19))+
+iClose(NULL,0,2*(i+20))+
+iClose(NULL,0,2*(i+21))+
+iClose(NULL,0,2*(i+22))+
+iClose(NULL,0,2*(i+23))+
+iClose(NULL,0,2*(i+24))+
+iClose(NULL,0,2*(i+25))+
+iClose(NULL,0,2*(i+26))+
+iClose(NULL,0,2*(i+27))+
+iClose(NULL,0,2*(i+28))+
+iClose(NULL,0,2*(i+29))+
+iClose(NULL,0,2*(i+30))+
+iClose(NULL,0,2*(i+31))+
+iClose(NULL,0,2*(i+32))+
+iClose(NULL,0,2*(i+33))+
+iClose(NULL,0,2*(i+34))+
+iClose(NULL,0,2*(i+35))+
+iClose(NULL,0,2*(i+36))+
+iClose(NULL,0,2*(i+37))+
+iClose(NULL,0,2*(i+38))+
+iClose(NULL,0,2*(i+39))+
+iClose(NULL,0,2*(i+40))+
+iClose(NULL,0,2*(i+41))+
+iClose(NULL,0,2*(i+42))+
+iClose(NULL,0,2*(i+43))+
+iClose(NULL,0,2*(i+44))+
+iClose(NULL,0,2*(i+45))+
+iClose(NULL,0,2*(i+46))+
+iClose(NULL,0,2*(i+47))+
+iClose(NULL,0,2*(i+48))+
+iClose(NULL,0,2*(i+49))+
+iClose(NULL,0,2*(i+50))+
+iClose(NULL,0,2*(i+51))+
+iClose(NULL,0,2*(i+52))+
+iClose(NULL,0,2*(i+53))+
+iClose(NULL,0,2*(i+54))+
+iClose(NULL,0,2*(i+55))+
+iClose(NULL,0,2*(i+56))+
+iClose(NULL,0,2*(i+57))+
+iClose(NULL,0,2*(i+58))+
+iClose(NULL,0,2*(i+59))+
+iClose(NULL,0,2*(i+60))+
+iClose(NULL,0,2*(i+61))+
+iClose(NULL,0,2*(i+62))+
+iClose(NULL,0,2*(i+63))+
+iClose(NULL,0,2*(i+64))+
+iClose(NULL,0,2*(i+65))+
+iClose(NULL,0,2*(i+66))+
+iClose(NULL,0,2*(i+67))+
+iClose(NULL,0,2*(i+68))+
+iClose(NULL,0,2*(i+69))+
+iClose(NULL,0,2*(i+70))+
+iClose(NULL,0,2*(i+71))+
+iClose(NULL,0,2*(i+72))+
+iClose(NULL,0,2*(i+73))+
+iClose(NULL,0,2*(i+74))+
+iClose(NULL,0,2*(i+75))+
+iClose(NULL,0,2*(i+76))+
+iClose(NULL,0,2*(i+77))+
+iClose(NULL,0,2*(i+78))+
+iClose(NULL,0,2*(i+79))+
+iClose(NULL,0,2*(i+80))+
+iClose(NULL,0,2*(i+81))+
+iClose(NULL,0,2*(i+82))+
+iClose(NULL,0,2*(i+83))+
+iClose(NULL,0,2*(i+84))+
+iClose(NULL,0,2*(i+85))+
+iClose(NULL,0,2*(i+86))+
+iClose(NULL,0,2*(i+87))+
+iClose(NULL,0,2*(i+88))+
+iClose(NULL,0,2*(i+89))+
+iClose(NULL,0,2*(i+90))+
+iClose(NULL,0,2*(i+91))+
+iClose(NULL,0,2*(i+92))+
+iClose(NULL,0,2*(i+93))+
+iClose(NULL,0,2*(i+94))+
+iClose(NULL,0,2*(i+95))+
+iClose(NULL,0,2*(i+96))+
+iClose(NULL,0,2*(i+97))+
+iClose(NULL,0,2*(i+98))+
+iClose(NULL,0,2*(i+99))+
+iClose(NULL,0,2*(i+100))+
+iClose(NULL,0,2*(i+101))+
+iClose(NULL,0,2*(i+102))+
+iClose(NULL,0,2*(i+103))+
+iClose(NULL,0,2*(i+104))+
+iClose(NULL,0,2*(i+105))+
+iClose(NULL,0,2*(i+106))+
+iClose(NULL,0,2*(i+107))+
+iClose(NULL,0,2*(i+108))+
+iClose(NULL,0,2*(i+109))+
+iClose(NULL,0,2*(i+110))+
+iClose(NULL,0,2*(i+111))+
+iClose(NULL,0,2*(i+112))+
+iClose(NULL,0,2*(i+113))+
+iClose(NULL,0,2*(i+114))+
+iClose(NULL,0,2*(i+115))+
+iClose(NULL,0,2*(i+116))+
+iClose(NULL,0,2*(i+117))+
+iClose(NULL,0,2*(i+118))+
+iClose(NULL,0,2*(i+119))+
+iClose(NULL,0,2*(i+120))+
+iClose(NULL,0,2*(i+121))+
+iClose(NULL,0,2*(i+122))+
+iClose(NULL,0,2*(i+123))+
+iClose(NULL,0,2*(i+124))+
+iClose(NULL,0,2*(i+125))+
+iClose(NULL,0,2*(i+126))+
+iClose(NULL,0,2*(i+127))+
+iClose(NULL,0,2*(i+128))+
+iClose(NULL,0,2*(i+129))+
+iClose(NULL,0,2*(i+130))+
+iClose(NULL,0,2*(i+131))+
+iClose(NULL,0,2*(i+132))+
+iClose(NULL,0,2*(i+133))+
+iClose(NULL,0,2*(i+134))+
+iClose(NULL,0,2*(i+135))+
+iClose(NULL,0,2*(i+136))+
+iClose(NULL,0,2*(i+137))+
+iClose(NULL,0,2*(i+138))+
+iClose(NULL,0,2*(i+139))+
+iClose(NULL,0,2*(i+140))+
+iClose(NULL,0,2*(i+141))+
+iClose(NULL,0,2*(i+142))+
+iClose(NULL,0,2*(i+143))+
+iClose(NULL,0,2*(i+144))+
+iClose(NULL,0,2*(i+145))+
+iClose(NULL,0,2*(i+146))+
+iClose(NULL,0,2*(i+147))+
+iClose(NULL,0,2*(i+148))+
+iClose(NULL,0,2*(i+149))+
+iClose(NULL,0,2*(i+150))+
+iClose(NULL,0,2*(i+151))+
+iClose(NULL,0,2*(i+152))+
+iClose(NULL,0,2*(i+153))+
+iClose(NULL,0,2*(i+154))+
+iClose(NULL,0,2*(i+155))+
+iClose(NULL,0,2*(i+156))+
+iClose(NULL,0,2*(i+157))+
+iClose(NULL,0,2*(i+158))+
+iClose(NULL,0,2*(i+159))+
+iClose(NULL,0,2*(i+160))+
+iClose(NULL,0,2*(i+161))+
+iClose(NULL,0,2*(i+162))+
+iClose(NULL,0,2*(i+163))+
+iClose(NULL,0,2*(i+164))+
+iClose(NULL,0,2*(i+165))+
+iClose(NULL,0,2*(i+166))+
+iClose(NULL,0,2*(i+167))+
+iClose(NULL,0,2*(i+168))+
+iClose(NULL,0,2*(i+169))+
+iClose(NULL,0,2*(i+170))+
+iClose(NULL,0,2*(i+171))+
+iClose(NULL,0,2*(i+172))+
+iClose(NULL,0,2*(i+173))+
+iClose(NULL,0,2*(i+174))+
+iClose(NULL,0,2*(i+175))+
+iClose(NULL,0,2*(i+176))+
+iClose(NULL,0,2*(i+177))+
+iClose(NULL,0,2*(i+178))+
+iClose(NULL,0,2*(i+179))+
+iClose(NULL,0,2*(i+180))+
+iClose(NULL,0,2*(i+181))+
+iClose(NULL,0,2*(i+182))+
+iClose(NULL,0,2*(i+183))+
+iClose(NULL,0,2*(i+184))+
+iClose(NULL,0,2*(i+185))+
+iClose(NULL,0,2*(i+186))+
+iClose(NULL,0,2*(i+187))+
+iClose(NULL,0,2*(i+188))+
+iClose(NULL,0,2*(i+189))+
+iClose(NULL,0,2*(i+190))+
+iClose(NULL,0,2*(i+191))+
+iClose(NULL,0,2*(i+192))+
+iClose(NULL,0,2*(i+193))+
+iClose(NULL,0,2*(i+194))+
+iClose(NULL,0,2*(i+195))+
+iClose(NULL,0,2*(i+196))+
+iClose(NULL,0,2*(i+197))+
+iClose(NULL,0,2*(i+198))+
+iClose(NULL,0,2*(i+199)))/200;
+}
+
+//3M
+for(i = 0; i<periods; i++)
+{
+ma200[i+2*(periods+12)]=(
+iClose(NULL,0,3*(i))+
+iClose(NULL,0,3*(i+1))+
+iClose(NULL,0,3*(i+2))+
+iClose(NULL,0,3*(i+3))+
+iClose(NULL,0,3*(i+4))+
+iClose(NULL,0,3*(i+5))+
+iClose(NULL,0,3*(i+6))+
+iClose(NULL,0,3*(i+7))+
+iClose(NULL,0,3*(i+8))+
+iClose(NULL,0,3*(i+9))+
+iClose(NULL,0,3*(i+10))+
+iClose(NULL,0,3*(i+11))+
+iClose(NULL,0,3*(i+12))+
+iClose(NULL,0,3*(i+13))+
+iClose(NULL,0,3*(i+14))+
+iClose(NULL,0,3*(i+15))+
+iClose(NULL,0,3*(i+16))+
+iClose(NULL,0,3*(i+17))+
+iClose(NULL,0,3*(i+18))+
+iClose(NULL,0,3*(i+19))+
+iClose(NULL,0,3*(i+20))+
+iClose(NULL,0,3*(i+21))+
+iClose(NULL,0,3*(i+22))+
+iClose(NULL,0,3*(i+23))+
+iClose(NULL,0,3*(i+24))+
+iClose(NULL,0,3*(i+25))+
+iClose(NULL,0,3*(i+26))+
+iClose(NULL,0,3*(i+27))+
+iClose(NULL,0,3*(i+28))+
+iClose(NULL,0,3*(i+29))+
+iClose(NULL,0,3*(i+30))+
+iClose(NULL,0,3*(i+31))+
+iClose(NULL,0,3*(i+32))+
+iClose(NULL,0,3*(i+33))+
+iClose(NULL,0,3*(i+34))+
+iClose(NULL,0,3*(i+35))+
+iClose(NULL,0,3*(i+36))+
+iClose(NULL,0,3*(i+37))+
+iClose(NULL,0,3*(i+38))+
+iClose(NULL,0,3*(i+39))+
+iClose(NULL,0,3*(i+40))+
+iClose(NULL,0,3*(i+41))+
+iClose(NULL,0,3*(i+42))+
+iClose(NULL,0,3*(i+43))+
+iClose(NULL,0,3*(i+44))+
+iClose(NULL,0,3*(i+45))+
+iClose(NULL,0,3*(i+46))+
+iClose(NULL,0,3*(i+47))+
+iClose(NULL,0,3*(i+48))+
+iClose(NULL,0,3*(i+49))+
+iClose(NULL,0,3*(i+50))+
+iClose(NULL,0,3*(i+51))+
+iClose(NULL,0,3*(i+52))+
+iClose(NULL,0,3*(i+53))+
+iClose(NULL,0,3*(i+54))+
+iClose(NULL,0,3*(i+55))+
+iClose(NULL,0,3*(i+56))+
+iClose(NULL,0,3*(i+57))+
+iClose(NULL,0,3*(i+58))+
+iClose(NULL,0,3*(i+59))+
+iClose(NULL,0,3*(i+60))+
+iClose(NULL,0,3*(i+61))+
+iClose(NULL,0,3*(i+62))+
+iClose(NULL,0,3*(i+63))+
+iClose(NULL,0,3*(i+64))+
+iClose(NULL,0,3*(i+65))+
+iClose(NULL,0,3*(i+66))+
+iClose(NULL,0,3*(i+67))+
+iClose(NULL,0,3*(i+68))+
+iClose(NULL,0,3*(i+69))+
+iClose(NULL,0,3*(i+70))+
+iClose(NULL,0,3*(i+71))+
+iClose(NULL,0,3*(i+72))+
+iClose(NULL,0,3*(i+73))+
+iClose(NULL,0,3*(i+74))+
+iClose(NULL,0,3*(i+75))+
+iClose(NULL,0,3*(i+76))+
+iClose(NULL,0,3*(i+77))+
+iClose(NULL,0,3*(i+78))+
+iClose(NULL,0,3*(i+79))+
+iClose(NULL,0,3*(i+80))+
+iClose(NULL,0,3*(i+81))+
+iClose(NULL,0,3*(i+82))+
+iClose(NULL,0,3*(i+83))+
+iClose(NULL,0,3*(i+84))+
+iClose(NULL,0,3*(i+85))+
+iClose(NULL,0,3*(i+86))+
+iClose(NULL,0,3*(i+87))+
+iClose(NULL,0,3*(i+88))+
+iClose(NULL,0,3*(i+89))+
+iClose(NULL,0,3*(i+90))+
+iClose(NULL,0,3*(i+91))+
+iClose(NULL,0,3*(i+92))+
+iClose(NULL,0,3*(i+93))+
+iClose(NULL,0,3*(i+94))+
+iClose(NULL,0,3*(i+95))+
+iClose(NULL,0,3*(i+96))+
+iClose(NULL,0,3*(i+97))+
+iClose(NULL,0,3*(i+98))+
+iClose(NULL,0,3*(i+99))+
+iClose(NULL,0,3*(i+100))+
+iClose(NULL,0,3*(i+101))+
+iClose(NULL,0,3*(i+102))+
+iClose(NULL,0,3*(i+103))+
+iClose(NULL,0,3*(i+104))+
+iClose(NULL,0,3*(i+105))+
+iClose(NULL,0,3*(i+106))+
+iClose(NULL,0,3*(i+107))+
+iClose(NULL,0,3*(i+108))+
+iClose(NULL,0,3*(i+109))+
+iClose(NULL,0,3*(i+110))+
+iClose(NULL,0,3*(i+111))+
+iClose(NULL,0,3*(i+112))+
+iClose(NULL,0,3*(i+113))+
+iClose(NULL,0,3*(i+114))+
+iClose(NULL,0,3*(i+115))+
+iClose(NULL,0,3*(i+116))+
+iClose(NULL,0,3*(i+117))+
+iClose(NULL,0,3*(i+118))+
+iClose(NULL,0,3*(i+119))+
+iClose(NULL,0,3*(i+120))+
+iClose(NULL,0,3*(i+121))+
+iClose(NULL,0,3*(i+122))+
+iClose(NULL,0,3*(i+123))+
+iClose(NULL,0,3*(i+124))+
+iClose(NULL,0,3*(i+125))+
+iClose(NULL,0,3*(i+126))+
+iClose(NULL,0,3*(i+127))+
+iClose(NULL,0,3*(i+128))+
+iClose(NULL,0,3*(i+129))+
+iClose(NULL,0,3*(i+130))+
+iClose(NULL,0,3*(i+131))+
+iClose(NULL,0,3*(i+132))+
+iClose(NULL,0,3*(i+133))+
+iClose(NULL,0,3*(i+134))+
+iClose(NULL,0,3*(i+135))+
+iClose(NULL,0,3*(i+136))+
+iClose(NULL,0,3*(i+137))+
+iClose(NULL,0,3*(i+138))+
+iClose(NULL,0,3*(i+139))+
+iClose(NULL,0,3*(i+140))+
+iClose(NULL,0,3*(i+141))+
+iClose(NULL,0,3*(i+142))+
+iClose(NULL,0,3*(i+143))+
+iClose(NULL,0,3*(i+144))+
+iClose(NULL,0,3*(i+145))+
+iClose(NULL,0,3*(i+146))+
+iClose(NULL,0,3*(i+147))+
+iClose(NULL,0,3*(i+148))+
+iClose(NULL,0,3*(i+149))+
+iClose(NULL,0,3*(i+150))+
+iClose(NULL,0,3*(i+151))+
+iClose(NULL,0,3*(i+152))+
+iClose(NULL,0,3*(i+153))+
+iClose(NULL,0,3*(i+154))+
+iClose(NULL,0,3*(i+155))+
+iClose(NULL,0,3*(i+156))+
+iClose(NULL,0,3*(i+157))+
+iClose(NULL,0,3*(i+158))+
+iClose(NULL,0,3*(i+159))+
+iClose(NULL,0,3*(i+160))+
+iClose(NULL,0,3*(i+161))+
+iClose(NULL,0,3*(i+162))+
+iClose(NULL,0,3*(i+163))+
+iClose(NULL,0,3*(i+164))+
+iClose(NULL,0,3*(i+165))+
+iClose(NULL,0,3*(i+166))+
+iClose(NULL,0,3*(i+167))+
+iClose(NULL,0,3*(i+168))+
+iClose(NULL,0,3*(i+169))+
+iClose(NULL,0,3*(i+170))+
+iClose(NULL,0,3*(i+171))+
+iClose(NULL,0,3*(i+172))+
+iClose(NULL,0,3*(i+173))+
+iClose(NULL,0,3*(i+174))+
+iClose(NULL,0,3*(i+175))+
+iClose(NULL,0,3*(i+176))+
+iClose(NULL,0,3*(i+177))+
+iClose(NULL,0,3*(i+178))+
+iClose(NULL,0,3*(i+179))+
+iClose(NULL,0,3*(i+180))+
+iClose(NULL,0,3*(i+181))+
+iClose(NULL,0,3*(i+182))+
+iClose(NULL,0,3*(i+183))+
+iClose(NULL,0,3*(i+184))+
+iClose(NULL,0,3*(i+185))+
+iClose(NULL,0,3*(i+186))+
+iClose(NULL,0,3*(i+187))+
+iClose(NULL,0,3*(i+188))+
+iClose(NULL,0,3*(i+189))+
+iClose(NULL,0,3*(i+190))+
+iClose(NULL,0,3*(i+191))+
+iClose(NULL,0,3*(i+192))+
+iClose(NULL,0,3*(i+193))+
+iClose(NULL,0,3*(i+194))+
+iClose(NULL,0,3*(i+195))+
+iClose(NULL,0,3*(i+196))+
+iClose(NULL,0,3*(i+197))+
+iClose(NULL,0,3*(i+198))+
+iClose(NULL,0,3*(i+199)))/200;
+}
+
+//4M
+for(i = 0; i<periods; i++)
+{
+ma200[i+3*(periods+12)]=(
+iClose(NULL,0,4*(i))+
+iClose(NULL,0,4*(i+1))+
+iClose(NULL,0,4*(i+2))+
+iClose(NULL,0,4*(i+3))+
+iClose(NULL,0,4*(i+4))+
+iClose(NULL,0,4*(i+5))+
+iClose(NULL,0,4*(i+6))+
+iClose(NULL,0,4*(i+7))+
+iClose(NULL,0,4*(i+8))+
+iClose(NULL,0,4*(i+9))+
+iClose(NULL,0,4*(i+10))+
+iClose(NULL,0,4*(i+11))+
+iClose(NULL,0,4*(i+12))+
+iClose(NULL,0,4*(i+13))+
+iClose(NULL,0,4*(i+14))+
+iClose(NULL,0,4*(i+15))+
+iClose(NULL,0,4*(i+16))+
+iClose(NULL,0,4*(i+17))+
+iClose(NULL,0,4*(i+18))+
+iClose(NULL,0,4*(i+19))+
+iClose(NULL,0,4*(i+20))+
+iClose(NULL,0,4*(i+21))+
+iClose(NULL,0,4*(i+22))+
+iClose(NULL,0,4*(i+23))+
+iClose(NULL,0,4*(i+24))+
+iClose(NULL,0,4*(i+25))+
+iClose(NULL,0,4*(i+26))+
+iClose(NULL,0,4*(i+27))+
+iClose(NULL,0,4*(i+28))+
+iClose(NULL,0,4*(i+29))+
+iClose(NULL,0,4*(i+30))+
+iClose(NULL,0,4*(i+31))+
+iClose(NULL,0,4*(i+32))+
+iClose(NULL,0,4*(i+33))+
+iClose(NULL,0,4*(i+34))+
+iClose(NULL,0,4*(i+35))+
+iClose(NULL,0,4*(i+36))+
+iClose(NULL,0,4*(i+37))+
+iClose(NULL,0,4*(i+38))+
+iClose(NULL,0,4*(i+39))+
+iClose(NULL,0,4*(i+40))+
+iClose(NULL,0,4*(i+41))+
+iClose(NULL,0,4*(i+42))+
+iClose(NULL,0,4*(i+43))+
+iClose(NULL,0,4*(i+44))+
+iClose(NULL,0,4*(i+45))+
+iClose(NULL,0,4*(i+46))+
+iClose(NULL,0,4*(i+47))+
+iClose(NULL,0,4*(i+48))+
+iClose(NULL,0,4*(i+49))+
+iClose(NULL,0,4*(i+50))+
+iClose(NULL,0,4*(i+51))+
+iClose(NULL,0,4*(i+52))+
+iClose(NULL,0,4*(i+53))+
+iClose(NULL,0,4*(i+54))+
+iClose(NULL,0,4*(i+55))+
+iClose(NULL,0,4*(i+56))+
+iClose(NULL,0,4*(i+57))+
+iClose(NULL,0,4*(i+58))+
+iClose(NULL,0,4*(i+59))+
+iClose(NULL,0,4*(i+60))+
+iClose(NULL,0,4*(i+61))+
+iClose(NULL,0,4*(i+62))+
+iClose(NULL,0,4*(i+63))+
+iClose(NULL,0,4*(i+64))+
+iClose(NULL,0,4*(i+65))+
+iClose(NULL,0,4*(i+66))+
+iClose(NULL,0,4*(i+67))+
+iClose(NULL,0,4*(i+68))+
+iClose(NULL,0,4*(i+69))+
+iClose(NULL,0,4*(i+70))+
+iClose(NULL,0,4*(i+71))+
+iClose(NULL,0,4*(i+72))+
+iClose(NULL,0,4*(i+73))+
+iClose(NULL,0,4*(i+74))+
+iClose(NULL,0,4*(i+75))+
+iClose(NULL,0,4*(i+76))+
+iClose(NULL,0,4*(i+77))+
+iClose(NULL,0,4*(i+78))+
+iClose(NULL,0,4*(i+79))+
+iClose(NULL,0,4*(i+80))+
+iClose(NULL,0,4*(i+81))+
+iClose(NULL,0,4*(i+82))+
+iClose(NULL,0,4*(i+83))+
+iClose(NULL,0,4*(i+84))+
+iClose(NULL,0,4*(i+85))+
+iClose(NULL,0,4*(i+86))+
+iClose(NULL,0,4*(i+87))+
+iClose(NULL,0,4*(i+88))+
+iClose(NULL,0,4*(i+89))+
+iClose(NULL,0,4*(i+90))+
+iClose(NULL,0,4*(i+91))+
+iClose(NULL,0,4*(i+92))+
+iClose(NULL,0,4*(i+93))+
+iClose(NULL,0,4*(i+94))+
+iClose(NULL,0,4*(i+95))+
+iClose(NULL,0,4*(i+96))+
+iClose(NULL,0,4*(i+97))+
+iClose(NULL,0,4*(i+98))+
+iClose(NULL,0,4*(i+99))+
+iClose(NULL,0,4*(i+100))+
+iClose(NULL,0,4*(i+101))+
+iClose(NULL,0,4*(i+102))+
+iClose(NULL,0,4*(i+103))+
+iClose(NULL,0,4*(i+104))+
+iClose(NULL,0,4*(i+105))+
+iClose(NULL,0,4*(i+106))+
+iClose(NULL,0,4*(i+107))+
+iClose(NULL,0,4*(i+108))+
+iClose(NULL,0,4*(i+109))+
+iClose(NULL,0,4*(i+110))+
+iClose(NULL,0,4*(i+111))+
+iClose(NULL,0,4*(i+112))+
+iClose(NULL,0,4*(i+113))+
+iClose(NULL,0,4*(i+114))+
+iClose(NULL,0,4*(i+115))+
+iClose(NULL,0,4*(i+116))+
+iClose(NULL,0,4*(i+117))+
+iClose(NULL,0,4*(i+118))+
+iClose(NULL,0,4*(i+119))+
+iClose(NULL,0,4*(i+120))+
+iClose(NULL,0,4*(i+121))+
+iClose(NULL,0,4*(i+122))+
+iClose(NULL,0,4*(i+123))+
+iClose(NULL,0,4*(i+124))+
+iClose(NULL,0,4*(i+125))+
+iClose(NULL,0,4*(i+126))+
+iClose(NULL,0,4*(i+127))+
+iClose(NULL,0,4*(i+128))+
+iClose(NULL,0,4*(i+129))+
+iClose(NULL,0,4*(i+130))+
+iClose(NULL,0,4*(i+131))+
+iClose(NULL,0,4*(i+132))+
+iClose(NULL,0,4*(i+133))+
+iClose(NULL,0,4*(i+134))+
+iClose(NULL,0,4*(i+135))+
+iClose(NULL,0,4*(i+136))+
+iClose(NULL,0,4*(i+137))+
+iClose(NULL,0,4*(i+138))+
+iClose(NULL,0,4*(i+139))+
+iClose(NULL,0,4*(i+140))+
+iClose(NULL,0,4*(i+141))+
+iClose(NULL,0,4*(i+142))+
+iClose(NULL,0,4*(i+143))+
+iClose(NULL,0,4*(i+144))+
+iClose(NULL,0,4*(i+145))+
+iClose(NULL,0,4*(i+146))+
+iClose(NULL,0,4*(i+147))+
+iClose(NULL,0,4*(i+148))+
+iClose(NULL,0,4*(i+149))+
+iClose(NULL,0,4*(i+150))+
+iClose(NULL,0,4*(i+151))+
+iClose(NULL,0,4*(i+152))+
+iClose(NULL,0,4*(i+153))+
+iClose(NULL,0,4*(i+154))+
+iClose(NULL,0,4*(i+155))+
+iClose(NULL,0,4*(i+156))+
+iClose(NULL,0,4*(i+157))+
+iClose(NULL,0,4*(i+158))+
+iClose(NULL,0,4*(i+159))+
+iClose(NULL,0,4*(i+160))+
+iClose(NULL,0,4*(i+161))+
+iClose(NULL,0,4*(i+162))+
+iClose(NULL,0,4*(i+163))+
+iClose(NULL,0,4*(i+164))+
+iClose(NULL,0,4*(i+165))+
+iClose(NULL,0,4*(i+166))+
+iClose(NULL,0,4*(i+167))+
+iClose(NULL,0,4*(i+168))+
+iClose(NULL,0,4*(i+169))+
+iClose(NULL,0,4*(i+170))+
+iClose(NULL,0,4*(i+171))+
+iClose(NULL,0,4*(i+172))+
+iClose(NULL,0,4*(i+173))+
+iClose(NULL,0,4*(i+174))+
+iClose(NULL,0,4*(i+175))+
+iClose(NULL,0,4*(i+176))+
+iClose(NULL,0,4*(i+177))+
+iClose(NULL,0,4*(i+178))+
+iClose(NULL,0,4*(i+179))+
+iClose(NULL,0,4*(i+180))+
+iClose(NULL,0,4*(i+181))+
+iClose(NULL,0,4*(i+182))+
+iClose(NULL,0,4*(i+183))+
+iClose(NULL,0,4*(i+184))+
+iClose(NULL,0,4*(i+185))+
+iClose(NULL,0,4*(i+186))+
+iClose(NULL,0,4*(i+187))+
+iClose(NULL,0,4*(i+188))+
+iClose(NULL,0,4*(i+189))+
+iClose(NULL,0,4*(i+190))+
+iClose(NULL,0,4*(i+191))+
+iClose(NULL,0,4*(i+192))+
+iClose(NULL,0,4*(i+193))+
+iClose(NULL,0,4*(i+194))+
+iClose(NULL,0,4*(i+195))+
+iClose(NULL,0,4*(i+196))+
+iClose(NULL,0,4*(i+197))+
+iClose(NULL,0,4*(i+198))+
+iClose(NULL,0,4*(i+199)))/200;
+}
+
+//5M
+for(i = 0; i<periods; i++)
+{
+ma200[i+4*(periods+12)]=(
+iClose(NULL,0,5*(i))+
+iClose(NULL,0,5*(i+1))+
+iClose(NULL,0,5*(i+2))+
+iClose(NULL,0,5*(i+3))+
+iClose(NULL,0,5*(i+4))+
+iClose(NULL,0,5*(i+5))+
+iClose(NULL,0,5*(i+6))+
+iClose(NULL,0,5*(i+7))+
+iClose(NULL,0,5*(i+8))+
+iClose(NULL,0,5*(i+9))+
+iClose(NULL,0,5*(i+10))+
+iClose(NULL,0,5*(i+11))+
+iClose(NULL,0,5*(i+12))+
+iClose(NULL,0,5*(i+13))+
+iClose(NULL,0,5*(i+14))+
+iClose(NULL,0,5*(i+15))+
+iClose(NULL,0,5*(i+16))+
+iClose(NULL,0,5*(i+17))+
+iClose(NULL,0,5*(i+18))+
+iClose(NULL,0,5*(i+19))+
+iClose(NULL,0,5*(i+20))+
+iClose(NULL,0,5*(i+21))+
+iClose(NULL,0,5*(i+22))+
+iClose(NULL,0,5*(i+23))+
+iClose(NULL,0,5*(i+24))+
+iClose(NULL,0,5*(i+25))+
+iClose(NULL,0,5*(i+26))+
+iClose(NULL,0,5*(i+27))+
+iClose(NULL,0,5*(i+28))+
+iClose(NULL,0,5*(i+29))+
+iClose(NULL,0,5*(i+30))+
+iClose(NULL,0,5*(i+31))+
+iClose(NULL,0,5*(i+32))+
+iClose(NULL,0,5*(i+33))+
+iClose(NULL,0,5*(i+34))+
+iClose(NULL,0,5*(i+35))+
+iClose(NULL,0,5*(i+36))+
+iClose(NULL,0,5*(i+37))+
+iClose(NULL,0,5*(i+38))+
+iClose(NULL,0,5*(i+39))+
+iClose(NULL,0,5*(i+40))+
+iClose(NULL,0,5*(i+41))+
+iClose(NULL,0,5*(i+42))+
+iClose(NULL,0,5*(i+43))+
+iClose(NULL,0,5*(i+44))+
+iClose(NULL,0,5*(i+45))+
+iClose(NULL,0,5*(i+46))+
+iClose(NULL,0,5*(i+47))+
+iClose(NULL,0,5*(i+48))+
+iClose(NULL,0,5*(i+49))+
+iClose(NULL,0,5*(i+50))+
+iClose(NULL,0,5*(i+51))+
+iClose(NULL,0,5*(i+52))+
+iClose(NULL,0,5*(i+53))+
+iClose(NULL,0,5*(i+54))+
+iClose(NULL,0,5*(i+55))+
+iClose(NULL,0,5*(i+56))+
+iClose(NULL,0,5*(i+57))+
+iClose(NULL,0,5*(i+58))+
+iClose(NULL,0,5*(i+59))+
+iClose(NULL,0,5*(i+60))+
+iClose(NULL,0,5*(i+61))+
+iClose(NULL,0,5*(i+62))+
+iClose(NULL,0,5*(i+63))+
+iClose(NULL,0,5*(i+64))+
+iClose(NULL,0,5*(i+65))+
+iClose(NULL,0,5*(i+66))+
+iClose(NULL,0,5*(i+67))+
+iClose(NULL,0,5*(i+68))+
+iClose(NULL,0,5*(i+69))+
+iClose(NULL,0,5*(i+70))+
+iClose(NULL,0,5*(i+71))+
+iClose(NULL,0,5*(i+72))+
+iClose(NULL,0,5*(i+73))+
+iClose(NULL,0,5*(i+74))+
+iClose(NULL,0,5*(i+75))+
+iClose(NULL,0,5*(i+76))+
+iClose(NULL,0,5*(i+77))+
+iClose(NULL,0,5*(i+78))+
+iClose(NULL,0,5*(i+79))+
+iClose(NULL,0,5*(i+80))+
+iClose(NULL,0,5*(i+81))+
+iClose(NULL,0,5*(i+82))+
+iClose(NULL,0,5*(i+83))+
+iClose(NULL,0,5*(i+84))+
+iClose(NULL,0,5*(i+85))+
+iClose(NULL,0,5*(i+86))+
+iClose(NULL,0,5*(i+87))+
+iClose(NULL,0,5*(i+88))+
+iClose(NULL,0,5*(i+89))+
+iClose(NULL,0,5*(i+90))+
+iClose(NULL,0,5*(i+91))+
+iClose(NULL,0,5*(i+92))+
+iClose(NULL,0,5*(i+93))+
+iClose(NULL,0,5*(i+94))+
+iClose(NULL,0,5*(i+95))+
+iClose(NULL,0,5*(i+96))+
+iClose(NULL,0,5*(i+97))+
+iClose(NULL,0,5*(i+98))+
+iClose(NULL,0,5*(i+99))+
+iClose(NULL,0,5*(i+100))+
+iClose(NULL,0,5*(i+101))+
+iClose(NULL,0,5*(i+102))+
+iClose(NULL,0,5*(i+103))+
+iClose(NULL,0,5*(i+104))+
+iClose(NULL,0,5*(i+105))+
+iClose(NULL,0,5*(i+106))+
+iClose(NULL,0,5*(i+107))+
+iClose(NULL,0,5*(i+108))+
+iClose(NULL,0,5*(i+109))+
+iClose(NULL,0,5*(i+110))+
+iClose(NULL,0,5*(i+111))+
+iClose(NULL,0,5*(i+112))+
+iClose(NULL,0,5*(i+113))+
+iClose(NULL,0,5*(i+114))+
+iClose(NULL,0,5*(i+115))+
+iClose(NULL,0,5*(i+116))+
+iClose(NULL,0,5*(i+117))+
+iClose(NULL,0,5*(i+118))+
+iClose(NULL,0,5*(i+119))+
+iClose(NULL,0,5*(i+120))+
+iClose(NULL,0,5*(i+121))+
+iClose(NULL,0,5*(i+122))+
+iClose(NULL,0,5*(i+123))+
+iClose(NULL,0,5*(i+124))+
+iClose(NULL,0,5*(i+125))+
+iClose(NULL,0,5*(i+126))+
+iClose(NULL,0,5*(i+127))+
+iClose(NULL,0,5*(i+128))+
+iClose(NULL,0,5*(i+129))+
+iClose(NULL,0,5*(i+130))+
+iClose(NULL,0,5*(i+131))+
+iClose(NULL,0,5*(i+132))+
+iClose(NULL,0,5*(i+133))+
+iClose(NULL,0,5*(i+134))+
+iClose(NULL,0,5*(i+135))+
+iClose(NULL,0,5*(i+136))+
+iClose(NULL,0,5*(i+137))+
+iClose(NULL,0,5*(i+138))+
+iClose(NULL,0,5*(i+139))+
+iClose(NULL,0,5*(i+140))+
+iClose(NULL,0,5*(i+141))+
+iClose(NULL,0,5*(i+142))+
+iClose(NULL,0,5*(i+143))+
+iClose(NULL,0,5*(i+144))+
+iClose(NULL,0,5*(i+145))+
+iClose(NULL,0,5*(i+146))+
+iClose(NULL,0,5*(i+147))+
+iClose(NULL,0,5*(i+148))+
+iClose(NULL,0,5*(i+149))+
+iClose(NULL,0,5*(i+150))+
+iClose(NULL,0,5*(i+151))+
+iClose(NULL,0,5*(i+152))+
+iClose(NULL,0,5*(i+153))+
+iClose(NULL,0,5*(i+154))+
+iClose(NULL,0,5*(i+155))+
+iClose(NULL,0,5*(i+156))+
+iClose(NULL,0,5*(i+157))+
+iClose(NULL,0,5*(i+158))+
+iClose(NULL,0,5*(i+159))+
+iClose(NULL,0,5*(i+160))+
+iClose(NULL,0,5*(i+161))+
+iClose(NULL,0,5*(i+162))+
+iClose(NULL,0,5*(i+163))+
+iClose(NULL,0,5*(i+164))+
+iClose(NULL,0,5*(i+165))+
+iClose(NULL,0,5*(i+166))+
+iClose(NULL,0,5*(i+167))+
+iClose(NULL,0,5*(i+168))+
+iClose(NULL,0,5*(i+169))+
+iClose(NULL,0,5*(i+170))+
+iClose(NULL,0,5*(i+171))+
+iClose(NULL,0,5*(i+172))+
+iClose(NULL,0,5*(i+173))+
+iClose(NULL,0,5*(i+174))+
+iClose(NULL,0,5*(i+175))+
+iClose(NULL,0,5*(i+176))+
+iClose(NULL,0,5*(i+177))+
+iClose(NULL,0,5*(i+178))+
+iClose(NULL,0,5*(i+179))+
+iClose(NULL,0,5*(i+180))+
+iClose(NULL,0,5*(i+181))+
+iClose(NULL,0,5*(i+182))+
+iClose(NULL,0,5*(i+183))+
+iClose(NULL,0,5*(i+184))+
+iClose(NULL,0,5*(i+185))+
+iClose(NULL,0,5*(i+186))+
+iClose(NULL,0,5*(i+187))+
+iClose(NULL,0,5*(i+188))+
+iClose(NULL,0,5*(i+189))+
+iClose(NULL,0,5*(i+190))+
+iClose(NULL,0,5*(i+191))+
+iClose(NULL,0,5*(i+192))+
+iClose(NULL,0,5*(i+193))+
+iClose(NULL,0,5*(i+194))+
+iClose(NULL,0,5*(i+195))+
+iClose(NULL,0,5*(i+196))+
+iClose(NULL,0,5*(i+197))+
+iClose(NULL,0,5*(i+198))+
+iClose(NULL,0,5*(i+199)))/200;
+}
+
+//6M
+for(i = 0; i<periods; i++)
+{
+ma200[i+5*(periods+12)]=(
+iClose(NULL,0,6*(i))+
+iClose(NULL,0,6*(i+1))+
+iClose(NULL,0,6*(i+2))+
+iClose(NULL,0,6*(i+3))+
+iClose(NULL,0,6*(i+4))+
+iClose(NULL,0,6*(i+5))+
+iClose(NULL,0,6*(i+6))+
+iClose(NULL,0,6*(i+7))+
+iClose(NULL,0,6*(i+8))+
+iClose(NULL,0,6*(i+9))+
+iClose(NULL,0,6*(i+10))+
+iClose(NULL,0,6*(i+11))+
+iClose(NULL,0,6*(i+12))+
+iClose(NULL,0,6*(i+13))+
+iClose(NULL,0,6*(i+14))+
+iClose(NULL,0,6*(i+15))+
+iClose(NULL,0,6*(i+16))+
+iClose(NULL,0,6*(i+17))+
+iClose(NULL,0,6*(i+18))+
+iClose(NULL,0,6*(i+19))+
+iClose(NULL,0,6*(i+20))+
+iClose(NULL,0,6*(i+21))+
+iClose(NULL,0,6*(i+22))+
+iClose(NULL,0,6*(i+23))+
+iClose(NULL,0,6*(i+24))+
+iClose(NULL,0,6*(i+25))+
+iClose(NULL,0,6*(i+26))+
+iClose(NULL,0,6*(i+27))+
+iClose(NULL,0,6*(i+28))+
+iClose(NULL,0,6*(i+29))+
+iClose(NULL,0,6*(i+30))+
+iClose(NULL,0,6*(i+31))+
+iClose(NULL,0,6*(i+32))+
+iClose(NULL,0,6*(i+33))+
+iClose(NULL,0,6*(i+34))+
+iClose(NULL,0,6*(i+35))+
+iClose(NULL,0,6*(i+36))+
+iClose(NULL,0,6*(i+37))+
+iClose(NULL,0,6*(i+38))+
+iClose(NULL,0,6*(i+39))+
+iClose(NULL,0,6*(i+40))+
+iClose(NULL,0,6*(i+41))+
+iClose(NULL,0,6*(i+42))+
+iClose(NULL,0,6*(i+43))+
+iClose(NULL,0,6*(i+44))+
+iClose(NULL,0,6*(i+45))+
+iClose(NULL,0,6*(i+46))+
+iClose(NULL,0,6*(i+47))+
+iClose(NULL,0,6*(i+48))+
+iClose(NULL,0,6*(i+49))+
+iClose(NULL,0,6*(i+50))+
+iClose(NULL,0,6*(i+51))+
+iClose(NULL,0,6*(i+52))+
+iClose(NULL,0,6*(i+53))+
+iClose(NULL,0,6*(i+54))+
+iClose(NULL,0,6*(i+55))+
+iClose(NULL,0,6*(i+56))+
+iClose(NULL,0,6*(i+57))+
+iClose(NULL,0,6*(i+58))+
+iClose(NULL,0,6*(i+59))+
+iClose(NULL,0,6*(i+60))+
+iClose(NULL,0,6*(i+61))+
+iClose(NULL,0,6*(i+62))+
+iClose(NULL,0,6*(i+63))+
+iClose(NULL,0,6*(i+64))+
+iClose(NULL,0,6*(i+65))+
+iClose(NULL,0,6*(i+66))+
+iClose(NULL,0,6*(i+67))+
+iClose(NULL,0,6*(i+68))+
+iClose(NULL,0,6*(i+69))+
+iClose(NULL,0,6*(i+70))+
+iClose(NULL,0,6*(i+71))+
+iClose(NULL,0,6*(i+72))+
+iClose(NULL,0,6*(i+73))+
+iClose(NULL,0,6*(i+74))+
+iClose(NULL,0,6*(i+75))+
+iClose(NULL,0,6*(i+76))+
+iClose(NULL,0,6*(i+77))+
+iClose(NULL,0,6*(i+78))+
+iClose(NULL,0,6*(i+79))+
+iClose(NULL,0,6*(i+80))+
+iClose(NULL,0,6*(i+81))+
+iClose(NULL,0,6*(i+82))+
+iClose(NULL,0,6*(i+83))+
+iClose(NULL,0,6*(i+84))+
+iClose(NULL,0,6*(i+85))+
+iClose(NULL,0,6*(i+86))+
+iClose(NULL,0,6*(i+87))+
+iClose(NULL,0,6*(i+88))+
+iClose(NULL,0,6*(i+89))+
+iClose(NULL,0,6*(i+90))+
+iClose(NULL,0,6*(i+91))+
+iClose(NULL,0,6*(i+92))+
+iClose(NULL,0,6*(i+93))+
+iClose(NULL,0,6*(i+94))+
+iClose(NULL,0,6*(i+95))+
+iClose(NULL,0,6*(i+96))+
+iClose(NULL,0,6*(i+97))+
+iClose(NULL,0,6*(i+98))+
+iClose(NULL,0,6*(i+99))+
+iClose(NULL,0,6*(i+100))+
+iClose(NULL,0,6*(i+101))+
+iClose(NULL,0,6*(i+102))+
+iClose(NULL,0,6*(i+103))+
+iClose(NULL,0,6*(i+104))+
+iClose(NULL,0,6*(i+105))+
+iClose(NULL,0,6*(i+106))+
+iClose(NULL,0,6*(i+107))+
+iClose(NULL,0,6*(i+108))+
+iClose(NULL,0,6*(i+109))+
+iClose(NULL,0,6*(i+110))+
+iClose(NULL,0,6*(i+111))+
+iClose(NULL,0,6*(i+112))+
+iClose(NULL,0,6*(i+113))+
+iClose(NULL,0,6*(i+114))+
+iClose(NULL,0,6*(i+115))+
+iClose(NULL,0,6*(i+116))+
+iClose(NULL,0,6*(i+117))+
+iClose(NULL,0,6*(i+118))+
+iClose(NULL,0,6*(i+119))+
+iClose(NULL,0,6*(i+120))+
+iClose(NULL,0,6*(i+121))+
+iClose(NULL,0,6*(i+122))+
+iClose(NULL,0,6*(i+123))+
+iClose(NULL,0,6*(i+124))+
+iClose(NULL,0,6*(i+125))+
+iClose(NULL,0,6*(i+126))+
+iClose(NULL,0,6*(i+127))+
+iClose(NULL,0,6*(i+128))+
+iClose(NULL,0,6*(i+129))+
+iClose(NULL,0,6*(i+130))+
+iClose(NULL,0,6*(i+131))+
+iClose(NULL,0,6*(i+132))+
+iClose(NULL,0,6*(i+133))+
+iClose(NULL,0,6*(i+134))+
+iClose(NULL,0,6*(i+135))+
+iClose(NULL,0,6*(i+136))+
+iClose(NULL,0,6*(i+137))+
+iClose(NULL,0,6*(i+138))+
+iClose(NULL,0,6*(i+139))+
+iClose(NULL,0,6*(i+140))+
+iClose(NULL,0,6*(i+141))+
+iClose(NULL,0,6*(i+142))+
+iClose(NULL,0,6*(i+143))+
+iClose(NULL,0,6*(i+144))+
+iClose(NULL,0,6*(i+145))+
+iClose(NULL,0,6*(i+146))+
+iClose(NULL,0,6*(i+147))+
+iClose(NULL,0,6*(i+148))+
+iClose(NULL,0,6*(i+149))+
+iClose(NULL,0,6*(i+150))+
+iClose(NULL,0,6*(i+151))+
+iClose(NULL,0,6*(i+152))+
+iClose(NULL,0,6*(i+153))+
+iClose(NULL,0,6*(i+154))+
+iClose(NULL,0,6*(i+155))+
+iClose(NULL,0,6*(i+156))+
+iClose(NULL,0,6*(i+157))+
+iClose(NULL,0,6*(i+158))+
+iClose(NULL,0,6*(i+159))+
+iClose(NULL,0,6*(i+160))+
+iClose(NULL,0,6*(i+161))+
+iClose(NULL,0,6*(i+162))+
+iClose(NULL,0,6*(i+163))+
+iClose(NULL,0,6*(i+164))+
+iClose(NULL,0,6*(i+165))+
+iClose(NULL,0,6*(i+166))+
+iClose(NULL,0,6*(i+167))+
+iClose(NULL,0,6*(i+168))+
+iClose(NULL,0,6*(i+169))+
+iClose(NULL,0,6*(i+170))+
+iClose(NULL,0,6*(i+171))+
+iClose(NULL,0,6*(i+172))+
+iClose(NULL,0,6*(i+173))+
+iClose(NULL,0,6*(i+174))+
+iClose(NULL,0,6*(i+175))+
+iClose(NULL,0,6*(i+176))+
+iClose(NULL,0,6*(i+177))+
+iClose(NULL,0,6*(i+178))+
+iClose(NULL,0,6*(i+179))+
+iClose(NULL,0,6*(i+180))+
+iClose(NULL,0,6*(i+181))+
+iClose(NULL,0,6*(i+182))+
+iClose(NULL,0,6*(i+183))+
+iClose(NULL,0,6*(i+184))+
+iClose(NULL,0,6*(i+185))+
+iClose(NULL,0,6*(i+186))+
+iClose(NULL,0,6*(i+187))+
+iClose(NULL,0,6*(i+188))+
+iClose(NULL,0,6*(i+189))+
+iClose(NULL,0,6*(i+190))+
+iClose(NULL,0,6*(i+191))+
+iClose(NULL,0,6*(i+192))+
+iClose(NULL,0,6*(i+193))+
+iClose(NULL,0,6*(i+194))+
+iClose(NULL,0,6*(i+195))+
+iClose(NULL,0,6*(i+196))+
+iClose(NULL,0,6*(i+197))+
+iClose(NULL,0,6*(i+198))+
+iClose(NULL,0,6*(i+199)))/200;
+}
+
+/////////////////////MAs///////////////////////
+
+//1M
+   for(i=periods;i>=0;i--) 
+     {
+
+      OPEN=iOpen(NULL,0,i);
+      CLOSE=iClose(NULL,0,i);
+      CLOSEANT=iClose(NULL,0,i+1);
+      HIGH=iHigh(NULL,0,i);
+      LOW=iLow(NULL,0,i);
+
+      if(CLOSE<CLOSEANT && CLOSE<ma[i] && ma[i]<ma[i+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         REDc_OPEN[i]=OPEN+Point/4;
+         REDc_HIGH[i]=HIGH;
+         REDc_LOW[i]=LOW;
+         REDc_CLOSE[i]=CLOSE;
+         }
+         else
+         {
+         REDc_OPEN[i]=OPEN;
+         REDc_HIGH[i]=HIGH;
+         REDc_LOW[i]=LOW;
+         REDc_CLOSE[i]=CLOSE;
+         }         
+        }
+      else if(CLOSE>CLOSEANT && CLOSE>ma[i] && ma[i]>ma[i+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         GREENc_OPEN[i]=OPEN+Point/4;
+         GREENc_HIGH[i]=HIGH;
+         GREENc_LOW[i]=LOW;
+         GREENc_CLOSE[i]=CLOSE;
+         }
+         else
+         {
+         GREENc_OPEN[i]=OPEN;
+         GREENc_HIGH[i]=HIGH;
+         GREENc_LOW[i]=LOW;
+         GREENc_CLOSE[i]=CLOSE;
+         }
+        }
+      else if(OPEN>CLOSE) 
+        {
+         RED_OPEN[i]=OPEN;
+         RED_HIGH[i]=HIGH;
+         RED_LOW[i]=LOW;
+         RED_CLOSE[i]=CLOSE;
+        }
+      else if(OPEN<CLOSE)
+        {
+         GREEN_OPEN[i]=OPEN;
+         GREEN_HIGH[i]=HIGH;
+         GREEN_LOW[i]=LOW;
+         GREEN_CLOSE[i]=CLOSE;
+        }
+      else 
+        {YELLOW_OPEN[i]=OPEN+Point/4;
+         YELLOW_HIGH[i]=HIGH;
+         YELLOW_LOW[i]=LOW;
+         YELLOW_CLOSE[i]=CLOSE;
+        }
+      }
+
+//2M
+   for(i=periods;i>=0;i--) 
+     {
+
+      OPEN=iOpen(NULL,0,2*i+1);
+      CLOSE=iClose(NULL,0,2*i);
+      CLOSEANT=iClose(NULL,0,2*(i+1));
+      HIGH=iHigh(NULL,0,iHighest(NULL,0,MODE_HIGH,2,2*i));
+      LOW=iLow(NULL,0,iLowest(NULL,0,MODE_LOW,2,2*i));
+      
+      if(CLOSE<CLOSEANT && CLOSE<ma[i+1*(periods+12)] && ma[i+1*(periods+12)]<ma[i+1*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         REDc_OPEN[i+1*(periods+12)]=OPEN+Point/4;
+         REDc_HIGH[i+1*(periods+12)]=HIGH;
+         REDc_LOW[i+1*(periods+12)]=LOW;
+         REDc_CLOSE[i+1*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         REDc_OPEN[i+1*(periods+12)]=OPEN;
+         REDc_HIGH[i+1*(periods+12)]=HIGH;
+         REDc_LOW[i+1*(periods+12)]=LOW;
+         REDc_CLOSE[i+1*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(CLOSE>CLOSEANT && CLOSE>ma[i+1*(periods+12)] && ma[i+1*(periods+12)]>ma[i+1*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         GREENc_OPEN[i+1*(periods+12)]=OPEN+Point/4;
+         GREENc_HIGH[i+1*(periods+12)]=HIGH;
+         GREENc_LOW[i+1*(periods+12)]=LOW;
+         GREENc_CLOSE[i+1*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         GREENc_OPEN[i+1*(periods+12)]=OPEN;
+         GREENc_HIGH[i+1*(periods+12)]=HIGH;
+         GREENc_LOW[i+1*(periods+12)]=LOW;
+         GREENc_CLOSE[i+1*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(OPEN>CLOSE) 
+        {
+         RED_OPEN[i+1*(periods+12)]=OPEN;
+         RED_HIGH[i+1*(periods+12)]=HIGH;
+         RED_LOW[i+1*(periods+12)]=LOW;
+         RED_CLOSE[i+1*(periods+12)]=CLOSE;
+        }
+      else if(OPEN<CLOSE)
+        {
+         GREEN_OPEN[i+1*(periods+12)]=OPEN;
+         GREEN_HIGH[i+1*(periods+12)]=HIGH;
+         GREEN_LOW[i+1*(periods+12)]=LOW;
+         GREEN_CLOSE[i+1*(periods+12)]=CLOSE;
+        }
+      else 
+        {YELLOW_OPEN[i+1*(periods+12)]=OPEN+Point/4;
+         YELLOW_HIGH[i+1*(periods+12)]=HIGH;
+         YELLOW_LOW[i+1*(periods+12)]=LOW;
+         YELLOW_CLOSE[i+1*(periods+12)]=CLOSE;
+        }
+      }
+
+//3M
+   for(i=periods;i>=0;i--) 
+     {
+
+      OPEN=iOpen(NULL,0,3*i+2);
+      CLOSE=iClose(NULL,0,3*i);
+      CLOSEANT=iClose(NULL,0,3*(i+1));
+      HIGH=iHigh(NULL,0,iHighest(NULL,0,MODE_HIGH,3,3*i));
+      LOW=iLow(NULL,0,iLowest(NULL,0,MODE_LOW,3,3*i));
+      
+      if(CLOSE<CLOSEANT && CLOSE<ma[i+2*(periods+12)] && ma[i+2*(periods+12)]<ma[i+2*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         REDc_OPEN[i+2*(periods+12)]=OPEN+Point/4;
+         REDc_HIGH[i+2*(periods+12)]=HIGH;
+         REDc_LOW[i+2*(periods+12)]=LOW;
+         REDc_CLOSE[i+2*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         REDc_OPEN[i+2*(periods+12)]=OPEN;
+         REDc_HIGH[i+2*(periods+12)]=HIGH;
+         REDc_LOW[i+2*(periods+12)]=LOW;
+         REDc_CLOSE[i+2*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(CLOSE>CLOSEANT && CLOSE>ma[i+2*(periods+12)] && ma[i+2*(periods+12)]>ma[i+2*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         GREENc_OPEN[i+2*(periods+12)]=OPEN+Point/4;
+         GREENc_HIGH[i+2*(periods+12)]=HIGH;
+         GREENc_LOW[i+2*(periods+12)]=LOW;
+         GREENc_CLOSE[i+2*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         GREENc_OPEN[i+2*(periods+12)]=OPEN;
+         GREENc_HIGH[i+2*(periods+12)]=HIGH;
+         GREENc_LOW[i+2*(periods+12)]=LOW;
+         GREENc_CLOSE[i+2*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(OPEN>CLOSE) 
+        {
+         RED_OPEN[i+2*(periods+12)]=OPEN;
+         RED_HIGH[i+2*(periods+12)]=HIGH;
+         RED_LOW[i+2*(periods+12)]=LOW;
+         RED_CLOSE[i+2*(periods+12)]=CLOSE;
+        }
+      else if(OPEN<CLOSE)
+        {
+         GREEN_OPEN[i+2*(periods+12)]=OPEN;
+         GREEN_HIGH[i+2*(periods+12)]=HIGH;
+         GREEN_LOW[i+2*(periods+12)]=LOW;
+         GREEN_CLOSE[i+2*(periods+12)]=CLOSE;
+        }
+      else 
+        {YELLOW_OPEN[i+2*(periods+12)]=OPEN+Point/4;
+         YELLOW_HIGH[i+2*(periods+12)]=HIGH;
+         YELLOW_LOW[i+2*(periods+12)]=LOW;
+         YELLOW_CLOSE[i+2*(periods+12)]=CLOSE;
+        }
+      }
+
+//4M
+   for(i=periods;i>=0;i--) 
+     {
+
+      OPEN=iOpen(NULL,0,4*i+3);
+      CLOSE=iClose(NULL,0,4*i);
+      CLOSEANT=iClose(NULL,0,4*(i+1));
+      HIGH=iHigh(NULL,0,iHighest(NULL,0,MODE_HIGH,4,4*i));
+      LOW=iLow(NULL,0,iLowest(NULL,0,MODE_LOW,4,4*i));
+            
+      if(CLOSE<CLOSEANT && CLOSE<ma[i+3*(periods+12)] && ma[i+3*(periods+12)]<ma[i+3*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         REDc_OPEN[i+3*(periods+12)]=OPEN+Point/4;
+         REDc_HIGH[i+3*(periods+12)]=HIGH;
+         REDc_LOW[i+3*(periods+12)]=LOW;
+         REDc_CLOSE[i+3*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         REDc_OPEN[i+3*(periods+12)]=OPEN;
+         REDc_HIGH[i+3*(periods+12)]=HIGH;
+         REDc_LOW[i+3*(periods+12)]=LOW;
+         REDc_CLOSE[i+3*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(CLOSE>CLOSEANT && CLOSE>ma[i+3*(periods+12)] && ma[i+3*(periods+12)]>ma[i+3*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         GREENc_OPEN[i+3*(periods+12)]=OPEN+Point/4;
+         GREENc_HIGH[i+3*(periods+12)]=HIGH;
+         GREENc_LOW[i+3*(periods+12)]=LOW;
+         GREENc_CLOSE[i+3*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         GREENc_OPEN[i+3*(periods+12)]=OPEN;
+         GREENc_HIGH[i+3*(periods+12)]=HIGH;
+         GREENc_LOW[i+3*(periods+12)]=LOW;
+         GREENc_CLOSE[i+3*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(OPEN>CLOSE) 
+        {
+         RED_OPEN[i+3*(periods+12)]=OPEN;
+         RED_HIGH[i+3*(periods+12)]=HIGH;
+         RED_LOW[i+3*(periods+12)]=LOW;
+         RED_CLOSE[i+3*(periods+12)]=CLOSE;
+        }
+      else if(OPEN<CLOSE)
+        {
+         GREEN_OPEN[i+3*(periods+12)]=OPEN;
+         GREEN_HIGH[i+3*(periods+12)]=HIGH;
+         GREEN_LOW[i+3*(periods+12)]=LOW;
+         GREEN_CLOSE[i+3*(periods+12)]=CLOSE;
+        }
+      else 
+        {YELLOW_OPEN[i+3*(periods+12)]=OPEN+Point/4;
+         YELLOW_HIGH[i+3*(periods+12)]=HIGH;
+         YELLOW_LOW[i+3*(periods+12)]=LOW;
+         YELLOW_CLOSE[i+3*(periods+12)]=CLOSE;
+        }
+      }
+
+//5M
+   for(i=periods;i>=0;i--) 
+     {
+
+      OPEN=iOpen(NULL,0,5*i+4);
+      CLOSE=iClose(NULL,0,5*i);
+      CLOSEANT=iClose(NULL,0,5*(i+1));
+      HIGH=iHigh(NULL,0,iHighest(NULL,0,MODE_HIGH,5,5*i));
+      LOW=iLow(NULL,0,iLowest(NULL,0,MODE_LOW,5,5*i));
+      
+      if(CLOSE<CLOSEANT && CLOSE<ma[i+4*(periods+12)] && ma[i+4*(periods+12)]<ma[i+4*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         REDc_OPEN[i+4*(periods+12)]=OPEN+Point/4;
+         REDc_HIGH[i+4*(periods+12)]=HIGH;
+         REDc_LOW[i+4*(periods+12)]=LOW;
+         REDc_CLOSE[i+4*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         REDc_OPEN[i+4*(periods+12)]=OPEN;
+         REDc_HIGH[i+4*(periods+12)]=HIGH;
+         REDc_LOW[i+4*(periods+12)]=LOW;
+         REDc_CLOSE[i+4*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(CLOSE>CLOSEANT && CLOSE>ma[i+4*(periods+12)] && ma[i+4*(periods+12)]>ma[i+4*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         GREENc_OPEN[i+4*(periods+12)]=OPEN+Point/4;
+         GREENc_HIGH[i+4*(periods+12)]=HIGH;
+         GREENc_LOW[i+4*(periods+12)]=LOW;
+         GREENc_CLOSE[i+4*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         GREENc_OPEN[i+4*(periods+12)]=OPEN;
+         GREENc_HIGH[i+4*(periods+12)]=HIGH;
+         GREENc_LOW[i+4*(periods+12)]=LOW;
+         GREENc_CLOSE[i+4*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(OPEN>CLOSE) 
+        {
+         RED_OPEN[i+4*(periods+12)]=OPEN;
+         RED_HIGH[i+4*(periods+12)]=HIGH;
+         RED_LOW[i+4*(periods+12)]=LOW;
+         RED_CLOSE[i+4*(periods+12)]=CLOSE;
+        }
+      else if(OPEN<CLOSE)
+        {
+         GREEN_OPEN[i+4*(periods+12)]=OPEN;
+         GREEN_HIGH[i+4*(periods+12)]=HIGH;
+         GREEN_LOW[i+4*(periods+12)]=LOW;
+         GREEN_CLOSE[i+4*(periods+12)]=CLOSE;
+        }
+      else 
+        {YELLOW_OPEN[i+4*(periods+12)]=OPEN+Point/4;
+         YELLOW_HIGH[i+4*(periods+12)]=HIGH;
+         YELLOW_LOW[i+4*(periods+12)]=LOW;
+         YELLOW_CLOSE[i+4*(periods+12)]=CLOSE;
+        }
+      }
+
+//6M
+   for(i=periods;i>=0;i--) 
+     {
+
+      OPEN=iOpen(NULL,0,6*i+5);
+      CLOSE=iClose(NULL,0,6*i);
+      CLOSEANT=iClose(NULL,0,6*(i+1));
+      HIGH=iHigh(NULL,0,iHighest(NULL,0,MODE_HIGH,6,6*i));
+      LOW=iLow(NULL,0,iLowest(NULL,0,MODE_LOW,6,6*i));
+      
+      if(CLOSE<CLOSEANT && CLOSE<ma[i+5*(periods+12)] && ma[i+5*(periods+12)]<ma[i+5*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         REDc_OPEN[i+5*(periods+12)]=OPEN+Point/4;
+         REDc_HIGH[i+5*(periods+12)]=HIGH;
+         REDc_LOW[i+5*(periods+12)]=LOW;
+         REDc_CLOSE[i+5*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         REDc_OPEN[i+5*(periods+12)]=OPEN;
+         REDc_HIGH[i+5*(periods+12)]=HIGH;
+         REDc_LOW[i+5*(periods+12)]=LOW;
+         REDc_CLOSE[i+5*(periods+12)]=CLOSE;
+         }
+        }
+      else if(CLOSE>CLOSEANT && CLOSE>ma[i+5*(periods+12)] && ma[i+5*(periods+12)]>ma[i+5*(periods+12)+1])
+        {
+         if(CLOSE==OPEN)
+         {
+         GREENc_OPEN[i+5*(periods+12)]=OPEN+Point/4;
+         GREENc_HIGH[i+5*(periods+12)]=HIGH;
+         GREENc_LOW[i+5*(periods+12)]=LOW;
+         GREENc_CLOSE[i+5*(periods+12)]=CLOSE;
+         }
+         else
+         {
+         GREENc_OPEN[i+5*(periods+12)]=OPEN;
+         GREENc_HIGH[i+5*(periods+12)]=HIGH;
+         GREENc_LOW[i+5*(periods+12)]=LOW;
+         GREENc_CLOSE[i+5*(periods+12)]=CLOSE;
+         }         
+        }
+      else if(OPEN>CLOSE) 
+        {
+         RED_OPEN[i+5*(periods+12)]=OPEN;
+         RED_HIGH[i+5*(periods+12)]=HIGH;
+         RED_LOW[i+5*(periods+12)]=LOW;
+         RED_CLOSE[i+5*(periods+12)]=CLOSE;
+        }
+      else if(OPEN<CLOSE)
+        {
+         GREEN_OPEN[i+5*(periods+12)]=OPEN;
+         GREEN_HIGH[i+5*(periods+12)]=HIGH;
+         GREEN_LOW[i+5*(periods+12)]=LOW;
+         GREEN_CLOSE[i+5*(periods+12)]=CLOSE;
+        }
+      else 
+        {YELLOW_OPEN[i+5*(periods+12)]=OPEN+Point/4;
+         YELLOW_HIGH[i+5*(periods+12)]=HIGH;
+         YELLOW_LOW[i+5*(periods+12)]=LOW;
+         YELLOW_CLOSE[i+5*(periods+12)]=CLOSE;
+        }
+      }
+
+   return(0);
+  }
+//+------------------------------------------------------------------+

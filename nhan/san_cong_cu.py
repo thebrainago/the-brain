@@ -100,40 +100,6 @@ NHU_CAU = {
     # Them 01/09 theo chi dan chu du an: gap van de thi hoi cong dong truoc,
     # dung tu viet lai. Nut that DA DO DUOC hom nay, khong phai mong muon chung.
     # ------------------------------------------------------------------
-    "toan_tu_co_nho": {
-        "vi_sao": "Do 01/09: bo doc ma rut duoc 12 co che ghep tu 7/18 chien "
-                  "luoc Pine. Phan con chan KHONG phai thieu chi bao ma la "
-                  "thieu TOAN TU CO NHO TRANG THAI: `direction < 0` (huong "
-                  "supertrend - gia tri hom nay phu thuoc gia tri hom qua theo "
-                  "mot quy tac re nhanh), `fractal_average[0] > [1]`, "
-                  "`close < dtime_l4` (muc theo gio trong ngay). Ngu phap hien "
-                  "tai chi co toan tu KHONG NHO: rolling, shift, so sanh.",
-        "cam_vao": "KHONG cam vao dau ca - doi chieu cach nguoi khac dinh nghia "
-                   "toan tu co nho ma van giu duoc tinh nhan qua",
-        "doi_chieu_voi": "nhan/ngu_phap.py",
-        "khong_duoc_thay": "khong mot dong ma ngoai nao duoc chay; ngu phap van "
-                           "la thu duy nhat cham vao chuoi gia, va no phai giu "
-                           "duoc tinh chat 'khong phat bieu duoc dieu nhin truoc'",
-        "truy_van": ["supertrend indicator python implementation",
-                     "stateful indicator dsl backtesting",
-                     "declarative trading strategy dsl json",
-                     "pine script to python transpiler",
-                     "zigzag fractal indicator vectorized pandas"],
-    },
-    "doc_ma_thanh_chien_luoc": {
-        "vi_sao": "Do 01/09: bo doc ma tu viet chi rut duoc 7/18 chien luoc "
-                  "Pine, va 0/7 EA MQL5 (EA la chuong trinh co cau truc, quyet "
-                  "dinh vao lenh nam rai qua nhieu ham). Neu cong dong da co bo "
-                  "phan tich cu phap Pine hay MQL thi khong nen tu viet regex.",
-        "cam_vao": "KHONG cam vao dau ca - doi chieu, va neu co bo phan tich cu "
-                   "phap tot thi NGUOI doc roi quyet dinh",
-        "doi_chieu_voi": "nhan/doc_ma.py",
-        "khong_duoc_thay": "dau ra van phai la khai bao DU LIEU theo ngu phap da "
-                           "kiem duyet, khong bao gio la ma chay duoc",
-        "truy_van": ["pine script parser python", "mql5 parser ast python",
-                     "trading strategy extraction source code",
-                     "tree sitter pine script grammar"],
-    },
     # ------------------------------------------------------------------
     # NHOM KY THUAT (them 30/08/2026 theo chi dan chu du an: EVO nam RONG
     # HON linh vuc giao dich - phan lon van de cua ta la van de TIN HOC
@@ -320,6 +286,100 @@ NHU_CAU = {
 #: van do LLM viet ra tu chinh chan doan cua no la vong tron tu xac nhan, va no
 #: cung khong the kiem lai duoc. O day nguoi viet anh xa, may chi chay no.
 NHU_CAU_TU_VAN_DE = {
+    # CHUYEN VE DAY 04/09/2026. Truoc do hai nhu cau nay nam trong `NHU_CAU`
+    # TINH, va `VAN_DE_SANG_NHU_CAU` khong tro toi chung duoc: test
+    # `test_moi_anh_xa_deu_tro_toi_mot_nhu_cau_CO_THAT` doi mo tro toi mot
+    # muc CO THAT trong `NHU_CAU_TU_VAN_DE`, va no doi dung.
+    #
+    # Ly do rang buoc do dung: chi muc o day moi buoc khai `cam_vao` +
+    # `khong_duoc_thay`. Mot van de tro thang vao nhu cau TINH la mot duong
+    # vong qua hai loi khai bao ranh gioi do. Hai muc nay von da co du ca
+    # hai, nen chuyen ve la dung cho chu khong phai noi long luat.
+    "doc_ma_thanh_chien_luoc": {
+        "vi_sao": "Do 01/09: bo doc ma tu viet chi rut duoc 7/18 chien luoc "
+                  "Pine, va 0/7 EA MQL5 (EA la chuong trinh co cau truc, quyet "
+                  "dinh vao lenh nam rai qua nhieu ham). Neu cong dong da co bo "
+                  "phan tich cu phap Pine hay MQL thi khong nen tu viet regex.",
+        "cam_vao": "KHONG cam vao dau ca - doi chieu, va neu co bo phan tich cu "
+                   "phap tot thi NGUOI doc roi quyet dinh",
+        "doi_chieu_voi": "nhan/doc_ma.py",
+        "khong_duoc_thay": "dau ra van phai la khai bao DU LIEU theo ngu phap da "
+                           "kiem duyet, khong bao gio la ma chay duoc",
+        "truy_van": ["pine script parser python", "mql5 parser ast python",
+                     "trading strategy extraction source code",
+                     "tree sitter pine script grammar"],
+        "sao_toi_thieu": 100,
+        "duong": ["github"],
+    },
+    "toan_tu_co_nho": {
+        "vi_sao": "Do 01/09: bo doc ma rut duoc 12 co che ghep tu 7/18 chien "
+                  "luoc Pine. Phan con chan KHONG phai thieu chi bao ma la "
+                  "thieu TOAN TU CO NHO TRANG THAI: `direction < 0` (huong "
+                  "supertrend - gia tri hom nay phu thuoc gia tri hom qua theo "
+                  "mot quy tac re nhanh), `fractal_average[0] > [1]`, "
+                  "`close < dtime_l4` (muc theo gio trong ngay). Ngu phap hien "
+                  "tai chi co toan tu KHONG NHO: rolling, shift, so sanh.",
+        "cam_vao": "KHONG cam vao dau ca - doi chieu cach nguoi khac dinh nghia "
+                   "toan tu co nho ma van giu duoc tinh nhan qua",
+        "doi_chieu_voi": "nhan/ngu_phap.py",
+        "khong_duoc_thay": "khong mot dong ma ngoai nao duoc chay; ngu phap van "
+                           "la thu duy nhat cham vao chuoi gia, va no phai giu "
+                           "duoc tinh chat 'khong phat bieu duoc dieu nhin truoc'",
+        "truy_van": ["supertrend indicator python implementation",
+                     "stateful indicator dsl backtesting",
+                     "declarative trading strategy dsl json",
+                     "pine script to python transpiler",
+                     "zigzag fractal indicator vectorized pandas"],
+        "sao_toi_thieu": 50,
+        "duong": ["github"],
+    },
+    "ocr_nhanh_tieng_viet": {
+        "vi_sao": "Van de dang mo `ocr_anh_chan_nguon`. Do 04/09/2026: 17 PDF "
+                  "chien luoc lay ve tu Telegram la SLIDE XUAT THANH ANH - "
+                  "~67 ky tu moi trang o lop van ban, tuc gan nhu rong. Khong "
+                  "OCR thi ca lop nguon nay vo hinh voi pheu. Engine duy nhat "
+                  "dung duoc tren may la EasyOCR (Windows OCR chi co en-US; "
+                  "tesseract khong co ban nhi phan), va no chay **14,2 "
+                  "giay/trang** tren CPU. Uoc ~425 trang = ~100 phut cho mot "
+                  "lo 17 file. Voi mot nguon con dang mo rong thi do la chan.",
+        "cam_vao": "nhan/doc_pdf.py - lop doc, KHONG cham vao gia hay cong",
+        "doi_chieu_voi": "nhan/doc_pdf.py",
+        "khong_duoc_thay": "OCR chi duoc tra VAN BAN. Moi co che van phai qua "
+                           "nhan/ngu_phap.py; khong mot dong ma ngoai nao chay "
+                           "tren duong quyet dinh.",
+        "truy_van": ["fast vietnamese ocr python",
+                     "onnx ocr cpu inference fast",
+                     "pdf slide image text extraction pipeline",
+                     "rapidocr paddleocr lightweight cpu"],
+        "sao_toi_thieu": 100,
+        "duong": ["github"],
+    },
+    "doc_tieng_noi_video": {
+        "vi_sao": "Van de dang mo `video_khong_co_phu_de`. Do 04/09/2026: duong "
+                  "PHU DE da chay tot - 71 ban doc kieu video, **1.367.415 ky "
+                  "tu** tu phu de tu dong YouTube, va suat cao (do cu: 20 cau "
+                  "luat -> 5 co che). Nhung do la nua co phu de. Nua kia chua "
+                  "cham duoc: 102 tai lieu TikTok co 89 'ban doc' nhung tat ca "
+                  "deu la `cach=trinh_duyet` - ban do TRANG WEB, chua toan "
+                  "giao dien ('TikTok Search For You Explore Following LIVE "
+                  "Upload... (c) 2026 TikTok') cong caption va hashtag. Trung "
+                  "vi 2.255 ky tu ma diem dau hieu luat cao nhat chi 2. TIENG "
+                  "NOI trong clip hoan toan chua doc. Cong them 3 video YouTube "
+                  "khong co ban doc nao (khong co phu de).",
+        "cam_vao": "nhan/toan_van.py - them mot duong ASR sau khi phu de that bai",
+        "doi_chieu_voi": "nhan/toan_van.py (ham tu_youtube)",
+        "khong_duoc_thay": "ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai "
+                           "nao chay tren duong quyet dinh; moi co che van phai "
+                           "qua nhan/ngu_phap.py. Va khong duoc thay duong phu "
+                           "de - phu de la van ban THAT, ASR la van ban DOAN, "
+                           "nen phu de luon di truoc.",
+        "truy_van": ["faster whisper cpu transcription",
+                     "vietnamese speech recognition open source",
+                     "yt-dlp audio extract transcribe pipeline",
+                     "tiktok video download transcript python"],
+        "sao_toi_thieu": 200,
+        "duong": ["github"],
+    },
     "nha_may_null_qua_nho": {
         "vi_sao": "Van de dang mo: nha may null chi 10 ca, 1 tai san (EURCAD), "
                   "1 khung (H4). Voi 0/10 lot, chan tren khoang tin cay 95% van "
@@ -367,6 +427,26 @@ NHU_CAU_TU_VAN_DE = {
                      "hansen hodrick newey west overlapping returns"],
         "sao_toi_thieu": 20,
         "duong": ["arxiv"],
+    },
+    "thu_thap_nguon_rong": {
+        "vi_sao": "Van de dang mo `quet_nong` (muc NANG): 86% lan chay SEEKER "
+                  "khong thu duoc gi moi, va chua nguon nao di het mot vong "
+                  "bien gioi. Do them 04/09/2026: hai kenh Telegram chu du an "
+                  "dua deu TAT xem truoc web, tuc lop nguon can DANG NHAP la "
+                  "mot mang trang hoan toan. Van de khong phai 'thieu truy van' "
+                  "ma la THIEU CACH VAO: chan bot, phan trang, nguon can phien "
+                  "dang nhap, va nguon khong co API.",
+        "cam_vao": "tru/seeker.py + nhan/doc_trinh_duyet.py - lop lay trang",
+        "doi_chieu_voi": "nhan/doc_trinh_duyet.py, nhan/cau_browser.py",
+        "khong_duoc_thay": "khong mot dong ma ngoai nao duoc chay tren duong "
+                           "quyet dinh; bo thu thap chi duoc tra VAN BAN, moi "
+                           "co che van phai qua nhan/ngu_phap.py",
+        "truy_van": ["self hosted web crawler api firecrawl alternative",
+                     "bypass bot detection scraper python",
+                     "telegram channel scraper telethon export",
+                     "headless browser scraping login session reuse"],
+        "sao_toi_thieu": 50,
+        "duong": ["github", "dien_dan"],
     },
     "nguon_im_lang": {
         "vi_sao": "Van de dang mo: co nguon BAT, da goi, khong nem loi va "
@@ -430,6 +510,28 @@ VAN_DE_SANG_NHU_CAU = {
     "supervisor_restart_lien_tuc": "supervisor_chet_im_lang",
     "dieu_phoi_khong_cham_duoc_lease": "supervisor_chet_im_lang",
     "dieu_phoi_chet_khong_bat": "supervisor_chet_im_lang",
+    # Them 04/09/2026. LY DO: `tru/finder.py` cham 110 the trong kho va ra
+    # **110/110 TAM_HOAN**, vi chi DUY NHAT mot van de dang mo (`nguon_im_lang`)
+    # co anh xa o day. Doc ky thi do khong phai "khong co cong cu nao dang" -
+    # do la BANG ANH XA DA CU so voi so van de: 11 van de mo, 1 co anh xa.
+    #
+    # Phan biet hai viec, vi chung ton hai loai ngan sach khac nhau:
+    #   - ANH XA (bang nay) chi cho phep mot the NEO vao van de. Mien phi.
+    #   - SINH TRUY VAN (`MUC_SINH_NHU_CAU`) moi ton luot mang, va van chi mo
+    #     cho muc NANG.
+    # Nen them anh xa cho van de muc VUA la an toan: the neo duoc, nhung khong
+    # cai nao tu dong di san them.
+    "quet_nong": "thu_thap_nguon_rong",
+    "nguon_can_trinh_duyet": "thu_thap_nguon_rong",
+    "nguon_chet": "nguon_im_lang",
+    "can_mau_moi_tu_ma_nguon": "doc_ma_thanh_chien_luoc",
+    "ngu_phap_thieu_toan_hang": "toan_tu_co_nho",
+    # Them 04/09/2026 tu mot khau CHINH TA vua vuong: xem
+    # `nhan/doc_pdf.py`. Day la vong lap chu du an mo ta -
+    # gap chan thi bien no thanh van de de FINDER di san,
+    # thay vi tu chiu.
+    "ocr_anh_chan_nguon": "ocr_nhanh_tieng_viet",
+    "video_khong_co_phu_de": "doc_tieng_noi_video",
 }
 
 #: Muc van de duoc phep sinh nhu cau san. VUA/NHE khong duoc: mot suat tim
@@ -998,6 +1100,13 @@ def tim_github(truy_van: str, sao_toi_thieu: int = 100, so_luong: int = 8) -> li
             "mo_ta": (x.get("description") or "")[:300],
             "giay_phep": ((x.get("license") or {}) or {}).get("spdx_id"),
             "cap_nhat": x.get("pushed_at"),
+            # `language` + `forks_count` co san trong ket qua tim kiem GitHub va
+            # KHONG ton them mot luot goi nao. Bo chung di thi `finder.muc_khop`
+            # tru diem truc "nhap duoc" cua MOI the GitHub, va `cham_diem` cho
+            # truc "co ai kiem khong" diem 0 - hai thien lech he thong chi vi
+            # hai dong khong chep.
+            "ngon_ngu": x.get("language"),
+            "fork": x.get("forks_count"),
             "nguon": "github",
         })
     return ra
@@ -1215,6 +1324,54 @@ def tim_arxiv(truy_van: str, so_luong: int = 8) -> list[dict]:
     return ra
 
 
+def chuan_hoa_ket_qua(r: dict) -> dict:
+    """Dua MOI duong san ve CUNG mot hinh dang truoc khi vao kho.
+
+    LOI DA SAP, va no am tu lau: `mot_luot` doc `r.get("full_name")` de dat ten
+    the, nhung `tim_github` tra ve khoa **`ten`**, khong phai `full_name`:
+
+        tim_github -> {ten, url, sao, mo_ta, giay_phep, cap_nhat, nguon}
+        tim_arxiv  -> {full_name, html_url, description, la_bai_bao, ngay}
+        _gon/cham_diem doc -> full_name, html_url, stargazers_count,
+                              pushed_at, license.spdx_id, forks_count
+
+    Nen voi moi ket qua GitHub, `ten` la `None` -> `continue` -> **khong mot kho
+    ma GitHub nao tung vao duoc kho cong cu**. Duong arXiv thi dung khoa nen no
+    chay, va do la ly do kho 110 the gan nhu toan bai bao + hat gieo tay.
+
+    Trieu chung nhin thay suot ma khong ai doc ra: moi luot san deu in
+    `[ 0 moi] <truy van>  (N ket qua)` - co ket qua, khong bao gio co the moi.
+    Dung ho "ket luan am phai phan biet CHUA DO": "0 moi" doc nhu "khong tim
+    thay gi dang", that ra la "tim thay nhung do vao thung rac".
+
+    Ham nay chi DOI TEN KHOA, khong doi noi dung va khong doan gia tri thieu.
+    """
+    if r.get("full_name") or r.get("la_bai_bao"):
+        return r                                    # da dung hinh dang
+    ten = r.get("ten")
+    if not ten:
+        return r
+    d = dict(r)
+    d["full_name"] = ten
+    d.setdefault("html_url", r.get("url"))
+    try:
+        d["stargazers_count"] = int(r.get("sao") or 0)
+    except (TypeError, ValueError):
+        d["stargazers_count"] = 0
+    d["pushed_at"] = r.get("cap_nhat")
+    if r.get("fork") is not None:
+        d["forks_count"] = r["fork"]
+    gp = r.get("giay_phep")
+    d["license"] = {"spdx_id": gp} if gp else None
+    # `tim_github` khong tra so fork. KHONG bia ra 0 - do se bi `cham_diem` doc
+    # thanh "khong ai kiem", tuc mot ket luan tu mot phep chua do. De thieu, va
+    # `cham_diem` tu cho truc do diem 0 vi khong co du lieu.
+    d["description"] = r.get("mo_ta")
+    if r.get("ngon_ngu"):
+        d["language"] = r["ngon_ngu"]      # `_gon` doc `language`, khong `ngon_ngu`
+    return d
+
+
 def _gon(r: dict, nhu_cau: str, truy_van: str) -> dict:
     # Bai bao khong co sao/giay phep/lan day cuoi -> cham diem suc khoe kho ma
     # la vo nghia. Tra `diem=None` chu khong tra 0: 0 nghia la "do duoc va rat
@@ -1358,6 +1515,7 @@ def mot_luot(gioi_han_truy_van: int = 5, im_lang: bool = False,
             continue
         them = 0
         for r in ds:
+            r = chuan_hoa_ket_qua(r)
             ten = r.get("full_name")
             if not ten or ten in kho:
                 continue

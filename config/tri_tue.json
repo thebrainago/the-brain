@@ -23,5 +23,13 @@
     "Bat qua cc-switch: khoa+base_url+model doc TAI CHO tu ~/.cc-switch/cc-switch.db,",
     "khong chep sang day. Doi khoa trong cc-switch la doi luon o day.",
     "Phanh chi phi: 40 luot/ngay, cach nhau 600s. Muon tat: doi duong=tat."
+  ],
+  "temperature": 0,
+  "json_mode": true,
+  "_ghi_chu_04_09": [
+    "temperature=0: viec cua duong nay la TRICH XUAT co cau truc, khong phai hoi thoai.",
+    "Truoc 04/09 khong dat -> deepseek-chat chay o 1.0, sinh loi dinh dang phai di va.",
+    "json_mode=true: bat response_format json_object khi nguoi goi dung hoi_json.",
+    "Tat json_mode neu doi sang mot API tuong thich-OpenAI khong nhan response_format."
   ]
 }

@@ -1,13 +1,4 @@
 {
- "atomic file replace windows permission error": {
-  "ket": "CO_KET_QUA",
-  "so_ket_qua": 1,
-  "duong_hong": [],
-  "luc": "2026-08-31 21:32:22",
-  "so_tu": 6,
-  "sao_toi_thieu": 0,
-  "nhu_cau": "supervisor_chet_im_lang"
- },
  "python crash loop detection restart backoff": {
   "ket": "RONG",
   "so_ket_qua": 0,
@@ -116,13 +107,183 @@
   "sao_toi_thieu": null,
   "nhu_cau": "doc_ma_thanh_chien_luoc"
  },
- "trading strategy extraction source code": {
+ "fast vietnamese ocr python": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-04 14:02:18",
+  "so_tu": 4,
+  "sao_toi_thieu": 100,
+  "nhu_cau": "ocr_nhanh_tieng_viet"
+ },
+ "onnx ocr cpu inference fast": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-04 14:02:27",
+  "so_tu": 5,
+  "sao_toi_thieu": 100,
+  "nhu_cau": "ocr_nhanh_tieng_viet"
+ },
+ "pdf slide image text extraction pipeline": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-04 14:02:35",
+  "so_tu": 6,
+  "sao_toi_thieu": 100,
+  "nhu_cau": "ocr_nhanh_tieng_viet"
+ },
+ "duckdb parquet time series query speed": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:30:59",
+  "so_tu": 6,
+  "sao_toi_thieu": 300,
+  "nhu_cau": "luu_tru_va_doc_gia"
+ },
+ "supervise long running python process windows restart": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:31:18",
+  "so_tu": 7,
+  "sao_toi_thieu": 0,
+  "nhu_cau": "chay_lau_dai_khong_nguoi_truc"
+ },
+ "detect hung headless chrome automation": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:31:26",
+  "so_tu": 5,
+  "sao_toi_thieu": 0,
+  "nhu_cau": "chay_lau_dai_khong_nguoi_truc"
+ },
+ "text classification trading strategy": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:31:33",
+  "so_tu": 4,
+  "sao_toi_thieu": 0,
+  "nhu_cau": "xep_thu_tu_doc"
+ },
+ "telegram channel scraper telethon export": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "github: HTTP 403 (con lai 0)"
+  ],
+  "luc": "2026-09-04 16:32:59",
+  "so_tu": 5,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "thu_thap_nguon_rong"
+ },
+ "headless browser scraping login session reuse": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "github: HTTP 403 (con lai 0)"
+  ],
+  "luc": "2026-09-04 16:33:07",
+  "so_tu": 6,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "thu_thap_nguon_rong"
+ },
+ "faster whisper cpu transcription": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 1,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:36:01",
+  "so_tu": 4,
+  "sao_toi_thieu": 200,
+  "nhu_cau": "doc_tieng_noi_video"
+ },
+ "vietnamese speech recognition open source": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 1,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:36:09",
+  "so_tu": 5,
+  "sao_toi_thieu": 200,
+  "nhu_cau": "doc_tieng_noi_video"
+ },
+ "yt-dlp audio extract transcribe pipeline": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 2,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:36:18",
+  "so_tu": 5,
+  "sao_toi_thieu": 200,
+  "nhu_cau": "doc_tieng_noi_video"
+ },
+ "tiktok video download transcript python": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 2,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:36:26",
+  "so_tu": 5,
+  "sao_toi_thieu": 200,
+  "nhu_cau": "doc_tieng_noi_video"
+ },
+ "rapidocr paddleocr lightweight cpu": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 1,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:36:34",
+  "so_tu": 4,
+  "sao_toi_thieu": 100,
+  "nhu_cau": "ocr_nhanh_tieng_viet"
+ },
+ "self hosted web crawler api firecrawl alternative": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 1,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:36:43",
+  "so_tu": 7,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "thu_thap_nguon_rong"
+ },
+ "pdf text extraction layout language:python": {
+  "ket": "LOI",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "github: HTTP 403 (con lai 0)"
+  ],
+  "luc": "2026-09-04 16:36:50",
+  "so_tu": 5,
+  "sao_toi_thieu": 200,
+  "nhu_cau": "doc_pdf"
+ },
+ "vectorized backtesting engine language:python": {
+  "ket": "LOI",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "github: HTTP 403 (con lai 0)"
+  ],
+  "luc": "2026-09-04 16:36:58",
+  "so_tu": 4,
+  "sao_toi_thieu": 300,
+  "nhu_cau": "engine_backtest"
+ },
+ "multiple hypothesis testing false discovery rate language:python": {
   "ket": "CO_KET_QUA",
   "so_ket_qua": 8,
   "duong_hong": [],
-  "luc": "2026-09-01 13:05:39",
-  "so_tu": 5,
-  "sao_toi_thieu": null,
-  "nhu_cau": "doc_ma_thanh_chien_luoc"
+  "luc": "2026-09-04 16:37:07",
+  "so_tu": 7,
+  "sao_toi_thieu": 100,
+  "nhu_cau": "kiem_dinh_thong_ke"
+ },
+ "deflated sharpe ratio probability backtest overfitting": {
+  "ket": "CO_KET_QUA",
+  "so_ket_qua": 2,
+  "duong_hong": [],
+  "luc": "2026-09-04 16:37:15",
+  "so_tu": 6,
+  "sao_toi_thieu": 100,
+  "nhu_cau": "kiem_dinh_thong_ke"
  }
 }

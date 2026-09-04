@@ -1,0 +1,5137 @@
+{
+  "luc": "2026-09-04 16:37:15",
+  "bao": {
+    "the": 148,
+    "trang_thai": {
+      "CHO_XAC_NHAN": 5,
+      "TAM_HOAN": 104,
+      "DOC_THAM_KHAO": 30,
+      "LOAI": 6,
+      "DE_XUAT": 3
+    },
+    "nhu_cau_vua_gan": 0,
+    "van_de_mo": 14,
+    "nhu_cau_co_neo": [
+      "doc_ma_thanh_chien_luoc",
+      "doc_tieng_noi_video",
+      "nguon_im_lang",
+      "ocr_nhanh_tieng_viet",
+      "thu_thap_nguon_rong",
+      "toan_tu_co_nho"
+    ],
+    "de_xuat": [
+      {
+        "id": "ishanmalu/Transcriber",
+        "nguon": "?",
+        "loai": "kho_ma",
+        "van_de_giai_quyet": [
+          "video_khong_co_phu_de"
+        ],
+        "nhu_cau": "doc_tieng_noi_video",
+        "tom_tat": "Transcribe or download TikTok, Reels, and YouTube videos. Whisper transcripts with timestamps, plus MP4/MOV/MP3 export. Runs entirely on your own machine.",
+        "muc_khop": 55.0,
+        "truc_khop": {
+          "neo": 25.0,
+          "bang_chung": 25.0,
+          "nhap": 5.0,
+          "dich": 0.0
+        },
+        "suc_khoe_kho_ma": 50.0,
+        "rui_ro": [
+          "RANG BUOC: ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai nao chay tren duong quyet dinh; moi co che van phai qua nhan/ngu_phap.py. Va khong duoc thay duong phu de - phu de la van ban THAT, ASR la van ban DOA"
+        ],
+        "cong_tich_hop": {
+          "bac": 4,
+          "muc": "RAT_CAO",
+          "ly_do": [
+            "loai=kho_ma",
+            "chua biet no cham vao file nao cua he"
+          ]
+        },
+        "trang_thai": "DE_XUAT",
+        "neo_tam": false,
+        "neo_bang_chung": null,
+        "url": "https://github.com/ishanmalu/Transcriber",
+        "doi_chieu_voi": null
+      },
+      {
+        "id": "yakoylp/dsh-md-convert",
+        "nguon": "?",
+        "loai": "kho_ma",
+        "van_de_giai_quyet": [
+          "ocr_anh_chan_nguon"
+        ],
+        "nhu_cau": "ocr_nhanh_tieng_viet",
+        "tom_tat": "Convert Office documents and PDFs (incl. scanned, via CPU-first routing OCR with lightweight models: PP-DocLayout-L layout, RapidOCR text, SLANet tables, FormulaNet formulas) to structurally-formatted Markdown. CLI + dsh",
+        "muc_khop": 55.0,
+        "truc_khop": {
+          "neo": 25.0,
+          "bang_chung": 25.0,
+          "nhap": 5.0,
+          "dich": 0.0
+        },
+        "suc_khoe_kho_ma": 50.5,
+        "rui_ro": [
+          "RANG BUOC: OCR chi duoc tra VAN BAN. Moi co che van phai qua nhan/ngu_phap.py; khong mot dong ma ngoai nao chay tren duong quyet dinh."
+        ],
+        "cong_tich_hop": {
+          "bac": 4,
+          "muc": "RAT_CAO",
+          "ly_do": [
+            "loai=kho_ma",
+            "chua biet no cham vao file nao cua he"
+          ]
+        },
+        "trang_thai": "DE_XUAT",
+        "neo_tam": false,
+        "neo_bang_chung": null,
+        "url": "https://github.com/yakoylp/dsh-md-convert",
+        "doi_chieu_voi": null
+      },
+      {
+        "id": "us/crw",
+        "nguon": "?",
+        "loai": "kho_ma",
+        "van_de_giai_quyet": [
+          "quet_nong",
+          "nguon_can_trinh_duyet"
+        ],
+        "nhu_cau": "thu_thap_nguon_rong",
+        "tom_tat": "Fast, lightweight Firecrawl/Tavily alternative in Rust. Web scraper, crawler & search API with MCP server for AI agents. Drop-in Firecrawl-compatible API (/scrape, /crawl, /search). 2.3x faster than Tavily, 1.5x faster t",
+        "muc_khop": 55.0,
+        "truc_khop": {
+          "neo": 25.0,
+          "bang_chung": 25.0,
+          "nhap": 5.0,
+          "dich": 0.0
+        },
+        "suc_khoe_kho_ma": 46.7,
+        "rui_ro": [
+          "giay phep AGPL-3.0 LAY NHIEM - dung trong du an kin phai mo nguon theo",
+          "chi duoc DOC de doi chieu, khong duoc nhap ma vao du an",
+          "RANG BUOC: khong mot dong ma ngoai nao duoc chay tren duong quyet dinh; bo thu thap chi duoc tra VAN BAN, moi co che van phai qua nhan/ngu_phap.py"
+        ],
+        "cong_tich_hop": {
+          "bac": 4,
+          "muc": "RAT_CAO",
+          "ly_do": [
+            "loai=kho_ma",
+            "giay phep AGPL-3.0 lay nhiem: chi doc de doi chieu, khong nhap ma",
+            "chua biet no cham vao file nao cua he"
+          ]
+        },
+        "trang_thai": "DE_XUAT",
+        "neo_tam": false,
+        "neo_bang_chung": null,
+        "url": "https://github.com/us/crw",
+        "doi_chieu_voi": null
+      }
+    ]
+  },
+  "the": [
+    {
+      "id": "M1ck4/pdfmd",
+      "nguon": "?",
+      "loai": "khac",
+      "van_de_giai_quyet": [
+        "ocr_anh_chan_nguon"
+      ],
+      "nhu_cau": "ocr_nhanh_tieng_viet",
+      "tom_tat": "Smart PDF to Markdown converter with intelligent heading detection, automatic header/footer removal, orphan fragment merging, and image export. Features a user-friendly GUI with preview mode, persistent settings, and per",
+      "muc_khop": 75.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 25.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 60.3,
+      "rui_ro": [
+        "RANG BUOC: OCR chi duoc tra VAN BAN. Moi co che van phai qua nhan/ngu_phap.py; khong mot dong ma ngoai nao chay tren duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "CHO_XAC_NHAN",
+      "neo_tam": true,
+      "neo_bang_chung": "M1ck4/pdfmd Smart PDF to Markdown converter with intelligent heading detection, automatic hea",
+      "url": "https://github.com/M1ck4/pdfmd",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/quantskills/skill-backtest-overfit",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[14*] quantskills/skill-backtest-overfit",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 25.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=khac",
+          "da biet cham vao dau: nhan/do_luc.py"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/quantskills/skill-backtest-overfit",
+      "doi_chieu_voi": "nhan/do_luc.py"
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/OutOfSampleLab/oos-lab",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] OutOfSampleLab/oos-lab",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 25.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=khac",
+          "da biet cham vao dau: nhan/cong.py, nhan/do_luc.py"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/OutOfSampleLab/oos-lab",
+      "doi_chieu_voi": "nhan/cong.py, nhan/do_luc.py"
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/0scarito/deflated-alpha",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] 0scarito/deflated-alpha",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 25.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=khac",
+          "da biet cham vao dau: nhan/cong.py"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/0scarito/deflated-alpha",
+      "doi_chieu_voi": "nhan/cong.py"
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:https://github.com/quantopian/zipline",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "[20041*] quantopian/zipline",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 25.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=khac",
+          "da biet cham vao dau: nhan/chi_phi.py, nhan/mo_phong.py"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/quantopian/zipline",
+      "doi_chieu_voi": "nhan/chi_phi.py, nhan/mo_phong.py"
+    },
+    {
+      "id": "SafeHarbor: Defining Precise Decision Boundaries via Hierarchical Memory-Augmented Guardrail for LLM Agent Safety",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "Recent advances in foundation models have transformed LLMs from passive conversational systems into autonomous agents capable of reasoning and tool execution. While these capabilities unlock substantial practical value, ",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2605.05704v3",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Real-Time Structural Detection for Indoor Navigation from 3D LiDAR Using Bird's-Eye-View Images",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "Efficient structural perception is essential for mapping and autonomous navigation on resource-constrained robots. Existing 3D methods are computationally prohibitive, while traditional 2D geometric approaches lack robus",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2603.19830v2",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SfMamba: Efficient Source-Free Domain Adaptation via Selective Scan Modeling",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "Source-free domain adaptation (SFDA) tackles the critical challenge of adapting source-pretrained models to unlabeled target domains without access to source data, overcoming data privacy and storage limitations in real-",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2601.08608v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Kinetic modelling of the CO2 capture and utilisation on NiRu-Ca/Al dual function material via parameter estimation",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "This study presents a detailed, open-source kinetic modelling computational framework for CO2 capture and utilisation using a newly formulated dual-function material (DFM) comprising 15 wt% Ni, 1 wt% Ru, and 10 wt% CaO s",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2510.12439v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "DELM: a Python toolkit for Data Extraction with Language Models",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "Large Language Models (LLMs) have become powerful tools for annotating unstructured data. However, most existing workflows rely on ad hoc scripts, making reproducibility, robustness, and systematic evaluation difficult. ",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2509.20617v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Interpretable Machine Learning for Macro Alpha: A News Sentiment Case Study",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "This study introduces an interpretable machine learning (ML) framework to extract macroeconomic alpha from global news sentiment. We process the Global Database of Events, Language, and Tone (GDELT) Project's worldwide n",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2505.16136v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Aggregating empirical evidence from data strategy studies: a case on model quantization",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "Background: As empirical software engineering evolves, more studies adopt data strategies$-$approaches that investigate digital artifacts such as models, source code, or system logs rather than relying on human subjects.",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2505.00816v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "A Novel Incremental Learning Driven Instance Segmentation Framework to Recognize Highly Cluttered Instances of the Contraband Item",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [
+        "can_mau_moi_tu_ma_nguon"
+      ],
+      "nhu_cau": "doc_ma_thanh_chien_luoc",
+      "tom_tat": "Screening cluttered and occluded contraband items from baggage X-ray scans is a cumbersome task even for the expert security staff. This paper presents a novel strategy that extends a conventional encoder-decoder archite",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: dau ra van phai la khai bao DU LIEU theo ngu phap da kiem duyet, khong bao gio la ma chay duoc"
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2201.02560v2",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "LiquidGiraffe8/Metatrader-5-Plus-Edge",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [
+        "quet_nong",
+        "nguon_can_trinh_duyet"
+      ],
+      "nhu_cau": "thu_thap_nguon_rong",
+      "tom_tat": "Automated MetaTrader 5 (MT5) algorithmic execution framework. Features open-source Python API integration, real-time technical analysis, and risk management tools.",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: khong mot dong ma ngoai nao duoc chay tren duong quyet dinh; bo thu thap chi duoc tra VAN BAN, moi co che van phai qua nhan/ngu_phap.py"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "CHO_XAC_NHAN",
+      "neo_tam": true,
+      "neo_bang_chung": "s. background-process metatrader5-no-gui mt5-api mt5-ea mt5-headless mt5-no-gui mt5-python mt5-run-background mt5-stealth mt5-st",
+      "url": "https://github.com/LiquidGiraffe8/Metatrader-5-Plus-Edge",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "mohdali239/Offline-speech-recognition-with-python-",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "video_khong_co_phu_de"
+      ],
+      "nhu_cau": "doc_tieng_noi_video",
+      "tom_tat": "This is a Python module for Vosk.  Vosk is an offline open source speech recognition toolkit. It enables speech recognition models for 17 languages and dialects - English, Indian English, German, French, Spanish, Portugu",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 2108 ngay truoc - co the da bo",
+        "RANG BUOC: ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai nao chay tren duong quyet dinh; moi co che van phai qua nhan/ngu_phap.py. Va khong duoc thay duong phu de - phu de la van ban THAT, ASR la van ban DOA"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "LOAI",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/mohdali239/Offline-speech-recognition-with-python-",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "dinuka-kasun-medis/Background_Music_Transcription",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "video_khong_co_phu_de"
+      ],
+      "nhu_cau": "doc_tieng_noi_video",
+      "tom_tat": "This repository provides an automated pipeline to extract background music from YouTube videos and convert it into a textual transcription. The solution leverages widely used tools—yt-dlp for downloading and converting v",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 11.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "RANG BUOC: ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai nao chay tren duong quyet dinh; moi co che van phai qua nhan/ngu_phap.py. Va khong duoc thay duong phu de - phu de la van ban THAT, ASR la van ban DOA"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "LOAI",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/dinuka-kasun-medis/Background_Music_Transcription",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "krishnasalampuriya/ROAS_BOOSTERS",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "video_khong_co_phu_de"
+      ],
+      "nhu_cau": "doc_tieng_noi_video",
+      "tom_tat": "Developed an end-to-end pipeline for downloading Instagram Reels and extracting audio. Used yt-dlp and Python scripts to automate downloads and convert video to MP3. Transcribed audio with OpenAI Whisper to generate accu",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 11.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "RANG BUOC: ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai nao chay tren duong quyet dinh; moi co che van phai qua nhan/ngu_phap.py. Va khong duoc thay duong phu de - phu de la van ban THAT, ASR la van ban DOA"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "LOAI",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/krishnasalampuriya/ROAS_BOOSTERS",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "ttgrex1/Video-Clip-Downloader",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "video_khong_co_phu_de"
+      ],
+      "nhu_cau": "doc_tieng_noi_video",
+      "tom_tat": "A Python-based GUI application for downloading video clips from YouTube, TikTok, and Facebook. This tool allows users to specify start and end times for video downloads, select resolution, and optionally download availab",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 33.0,
+      "rui_ro": [
+        "RANG BUOC: ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai nao chay tren duong quyet dinh; moi co che van phai qua nhan/ngu_phap.py. Va khong duoc thay duong phu de - phu de la van ban THAT, ASR la van ban DOA"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "LOAI",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/ttgrex1/Video-Clip-Downloader",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "ishanmalu/Transcriber",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "video_khong_co_phu_de"
+      ],
+      "nhu_cau": "doc_tieng_noi_video",
+      "tom_tat": "Transcribe or download TikTok, Reels, and YouTube videos. Whisper transcripts with timestamps, plus MP4/MOV/MP3 export. Runs entirely on your own machine.",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 50.0,
+      "rui_ro": [
+        "RANG BUOC: ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai nao chay tren duong quyet dinh; moi co che van phai qua nhan/ngu_phap.py. Va khong duoc thay duong phu de - phu de la van ban THAT, ASR la van ban DOA"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DE_XUAT",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/ishanmalu/Transcriber",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "yakoylp/dsh-md-convert",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "ocr_anh_chan_nguon"
+      ],
+      "nhu_cau": "ocr_nhanh_tieng_viet",
+      "tom_tat": "Convert Office documents and PDFs (incl. scanned, via CPU-first routing OCR with lightweight models: PP-DocLayout-L layout, RapidOCR text, SLANet tables, FormulaNet formulas) to structurally-formatted Markdown. CLI + dsh",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 50.5,
+      "rui_ro": [
+        "RANG BUOC: OCR chi duoc tra VAN BAN. Moi co che van phai qua nhan/ngu_phap.py; khong mot dong ma ngoai nao chay tren duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DE_XUAT",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/yakoylp/dsh-md-convert",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "us/crw",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "quet_nong",
+        "nguon_can_trinh_duyet"
+      ],
+      "nhu_cau": "thu_thap_nguon_rong",
+      "tom_tat": "Fast, lightweight Firecrawl/Tavily alternative in Rust. Web scraper, crawler & search API with MCP server for AI agents. Drop-in Firecrawl-compatible API (/scrape, /crawl, /search). 2.3x faster than Tavily, 1.5x faster t",
+      "muc_khop": 55.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 46.7,
+      "rui_ro": [
+        "giay phep AGPL-3.0 LAY NHIEM - dung trong du an kin phai mo nguon theo",
+        "chi duoc DOC de doi chieu, khong duoc nhap ma vao du an",
+        "RANG BUOC: khong mot dong ma ngoai nao duoc chay tren duong quyet dinh; bo thu thap chi duoc tra VAN BAN, moi co che van phai qua nhan/ngu_phap.py"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "giay phep AGPL-3.0 lay nhiem: chi doc de doi chieu, khong nhap ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DE_XUAT",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/us/crw",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "jzillmann/pdf-to-markdown",
+      "nguon": "?",
+      "loai": "khac",
+      "van_de_giai_quyet": [
+        "ocr_anh_chan_nguon"
+      ],
+      "nhu_cau": "ocr_nhanh_tieng_viet",
+      "tom_tat": "A PDF to Markdown converter",
+      "muc_khop": 50.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 79.8,
+      "rui_ro": [
+        "RANG BUOC: OCR chi duoc tra VAN BAN. Moi co che van phai qua nhan/ngu_phap.py; khong mot dong ma ngoai nao chay tren duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu JavaScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "CHO_XAC_NHAN",
+      "neo_tam": true,
+      "neo_bang_chung": "jzillmann/pdf-to-markdown A PDF to Markdown converter ",
+      "url": "https://github.com/jzillmann/pdf-to-markdown",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "wisupai/e2m",
+      "nguon": "?",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "doc_pdf",
+      "tom_tat": "E2M converts various file types (doc, docx, epub, html, htm, url, pdf, ppt, pptx, mp3, m4a) into Markdown. It’s easy to install, with dedicated parsers and converters, supporting custom configs. E2M offers an all-in-one,",
+      "muc_khop": 50.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 25.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 57.4,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong lien quan den cong PASS"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/wisupai/e2m",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "51bitquant/howtrader",
+      "nguon": "?",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "Howtrader: A crypto quant framework for developing, backtesting, and executing your own trading strategies. Seamlessly integrates with TradingView and other third-party signals. Simply send a post request to automate tra",
+      "muc_khop": 50.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 25.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 84.7,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/51bitquant/howtrader",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "N4darae/anti-mage",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [
+        "quet_nong",
+        "nguon_can_trinh_duyet"
+      ],
+      "nhu_cau": "thu_thap_nguon_rong",
+      "tom_tat": "For detecting anti-detect browsers and spoofed profiles through runtime coherence analysis.",
+      "muc_khop": 50.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: khong mot dong ma ngoai nao duoc chay tren duong quyet dinh; bo thu thap chi duoc tra VAN BAN, moi co che van phai qua nhan/ngu_phap.py"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu Go: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "CHO_XAC_NHAN",
+      "neo_tam": true,
+      "neo_bang_chung": "N4darae/anti-mage For detecting anti-detect browsers and spoofed profiles through runtime coherence ana",
+      "url": "https://github.com/N4darae/anti-mage",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "hoainama8/convertOCR",
+      "nguon": "nguoi_chi",
+      "loai": "khac",
+      "van_de_giai_quyet": [
+        "ocr_anh_chan_nguon"
+      ],
+      "nhu_cau": "ocr_nhanh_tieng_viet",
+      "tom_tat": "chu du an chi 30/08. Server Go, PDF -> md/json/html/docx/csv. OCR can cgo. Dung duoc nhu dich vu ngoai tien trinh.",
+      "muc_khop": 45.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "RANG BUOC: OCR chi duoc tra VAN BAN. Moi co che van phai qua nhan/ngu_phap.py; khong mot dong ma ngoai nao chay tren duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "CHO_XAC_NHAN",
+      "neo_tam": true,
+      "neo_bang_chung": "u du an chi 30/08. Server Go, PDF -> md/json/html/docx/csv. OCR can cgo. Dung duoc nhu dich vu ngoai tien trinh. ",
+      "url": "https://github.com/hoainama8/convertOCR",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "mr-easy/streaming_indicators",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [
+        "ngu_phap_thieu_toan_hang"
+      ],
+      "nhu_cau": "toan_tu_co_nho",
+      "tom_tat": "chi bao tinh theo dong, co trang thai",
+      "muc_khop": 45.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 90,
+      "rui_ro": [
+        "RANG BUOC: khong mot dong ma ngoai nao duoc chay; ngu phap van la thu duy nhat cham vao chuoi gia, va no phai giu duoc tinh chat 'khong phat bieu duoc dieu nhin truoc'"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/mr-easy/streaming_indicators",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Python&#39;s requests triggers Cloudflare&#39;s security while urllib does not",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "quet_nong",
+        "nguon_can_trinh_duyet"
+      ],
+      "nhu_cau": "thu_thap_nguon_rong",
+      "tom_tat": "python, python-3.x, web-scraping, python-requests",
+      "muc_khop": 45.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 6.8,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "RANG BUOC: khong mot dong ma ngoai nao duoc chay tren duong quyet dinh; bo thu thap chi duoc tra VAN BAN, moi co che van phai qua nhan/ngu_phap.py"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "LOAI",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/62684468/pythons-requests-triggers-cloudflares-security-while-urllib-does-not",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Bypassing Youtube Login + reCaptcha with Selenium",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "quet_nong",
+        "nguon_can_trinh_duyet"
+      ],
+      "nhu_cau": "thu_thap_nguon_rong",
+      "tom_tat": "selenium, web-scraping, scrapy, youtube, request",
+      "muc_khop": 45.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 5.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "RANG BUOC: khong mot dong ma ngoai nao duoc chay tren duong quyet dinh; bo thu thap chi duoc tra VAN BAN, moi co che van phai qua nhan/ngu_phap.py"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "LOAI",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/65432901/bypassing-youtube-login-recaptcha-with-selenium",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "achetronic/parakeet",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [
+        "video_khong_co_phu_de"
+      ],
+      "nhu_cau": "doc_tieng_noi_video",
+      "tom_tat": "OpenAI Whisper-compatible ASR server using NVIDIA Parakeet TDT 0.6B (ONNX). Super fast CPU/GPU transcriptions",
+      "muc_khop": 45.0,
+      "truc_khop": {
+        "neo": 25.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 56.7,
+      "rui_ro": [
+        "RANG BUOC: ASR chi duoc tra VAN BAN. Khong mot dong ma ngoai nao chay tren duong quyet dinh; moi co che van phai qua nhan/ngu_phap.py. Va khong duoc thay duong phu de - phu de la van ban THAT, ASR la van ban DOA"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/achetronic/parakeet",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "blader/humanizer",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "Agent skill that removes signs of AI-generated writing from text",
+      "muc_khop": 40.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 25.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/blader/humanizer",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "sgl-project/sglang",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "SGLang is a high-performance serving framework for large language models and multimodal models.",
+      "muc_khop": 40.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 25.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/sgl-project/sglang",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "NousResearch/hermes-agent",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "The agent that grows with you",
+      "muc_khop": 40.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 25.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "larashero3-dotcom/lieflat-charts",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "Data visualization Skill for AI Agents, turning data into polished, interactive HTML charts. 面向 AI Agents 的数据可视化 Skill，将数据快速生成精致、可交互的 HTML 图表。",
+      "muc_khop": 35.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu HTML: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/larashero3-dotcom/lieflat-charts",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "tt-a1i/archify",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
+      "muc_khop": 35.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu JavaScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/tt-a1i/archify",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "bilawalsidhu/gods-eye-view",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "A spy satellite simulator in your browser, except the data is real. Live open source spatial intelligence on a photorealistic 3D globe.",
+      "muc_khop": 35.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu JavaScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/bilawalsidhu/gods-eye-view",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "stablyai/orca",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and VPS.",
+      "muc_khop": 35.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu TypeScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/stablyai/orca",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "affaan-m/ECC",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "muc_khop": 35.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu JavaScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/affaan-m/ECC",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Two-stage Adaptive Testing of Large-scale Mediation Hypotheses",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "In testing large-scale mediation hypotheses, the exposure-mediator and mediator-outcome path-specific p-values obtained for each hypothesis from the same sample can be combined into a pair of asymptotically independent p",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2607.17579v2",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Calibration without labels in multiple testing",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Large-scale hypothesis testing supports probability claims about individual hypotheses, as in empirical Bayes methods for estimating local false discovery rates. We study how such claims can be interpreted as approximate",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2606.19737v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Estimating the local false discovery rate under an unknown symmetric null",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "This paper is concerned with estimating the local false discovery rate (lfdr) in a two-groups model where the only assumption regarding the null distribution is symmetry about zero. Our motivation comes from the contempo",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2606.11548v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Covariance-Adaptive Residualization and Stagewise Calibration for Dependent Multiple Testing",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "In this paper, we study simultaneous hypothesis testing for multivariate Gaussian means under arbitrary covariance dependence. Building upon the Maximum Residual Down (MRD) procedure of Cohen et al. (2009), we investigat",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2606.07466v2",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "A Distribution-Free Framework for Rewrite-Based Human-text Detection via Knockoff Filtering",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "We propose a distribution-free statistical framework that converts arbitrary rewrite-based detectors into detectors with finite-sample FDR guarantees without retraining. Our key observation is that rewrite-based detectio",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2606.00402v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Consistent Variable Selection for GARCH-X Models",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "In this paper we develop a consistent variable selection procedure for GARCH-X models that identifies the truly relevant exogenous covariates influencing volatility dynamics. The proposed method is based on a multiple hy",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2604.25894v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "A Quasi-Regression Method for the Mediation Analysis of Zero-Inflated Single-Cell Data",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Recent advances in single-cell technologies have advanced our understanding of gene regulation and cellular heterogeneity at single-cell resolution. Single-cell data contain both gene expression levels and the proportion",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2604.08507v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Predictive Power Analysis of Multiple Test Procedures Under Arbitrary Dependence",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Many statistical problems can be addressed by applying a multiple testing procedure (MTP) that controls either the Family-wise Error Rate (FWER) or False Discovery Rate (FDR) under unknown arbitrarily-interdependent $p$-",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2603.07312v3",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "What survives honest evaluation? Leakage-safe, search-aware assessment of LLM-driven trading strategy discovery",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Large language models (LLMs) are increasingly used to discover trading strategies, and much of the resulting literature shares a methodological weakness: many candidate strategies are generated, the best is reported, and",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.27734v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Equity Strategy Backtesting: Luck or Edge? The MinervaScore as a Statistical Robustness Grade",
+      "nguon": "?",
+      "loai": "bai_bao",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Backtests of trading strategies are often selected after many parameter trials. A strong historical result can therefore reflect search luck rather than a persistent signal. Standard summaries such as return, Sharpe rati",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 3,
+        "muc": "CAO",
+        "ly_do": [
+          "loai=bai_bao",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.23808v2",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "coding-kitties/investing-algorithm-framework",
+      "nguon": "nguoi_chi",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "chu du an chi 30/08. 2.022 sao, Apache-2.0. Hai engine (vector + su kien), 50+ chi so, sweep, kiem dinh nhieu cua so, Monte Carlo permutation, bao cao HTML, CCXT. KHONG co FDR chuong trinh / dang ky truoc / MDE / canary.",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/coding-kitties/investing-algorithm-framework",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://github.com/kernc/backtesting.py",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[8846*] kernc/backtesting.py",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/kernc/backtesting.py",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://financial-hacker.com/the-autotune-filter/",
+      "nguon": "fh_financial_hacker",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "The AutoTune filter",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://financial-hacker.com/the-autotune-filter/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://financial-hacker.com/a-better-stock-rotation-system/",
+      "nguon": "fh_financial_hacker",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "A Better Stock Rotation System",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://financial-hacker.com/a-better-stock-rotation-system/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://financial-hacker.com/the-cybernetic-oscillator/",
+      "nguon": "fh_financial_hacker",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "The Cybernetic Oscillator",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://financial-hacker.com/the-cybernetic-oscillator/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://www.followingthetrend.com/2021/12/backtesting-is-zipline-dead-or-does-it-just-need-a-reload/",
+      "nguon": "followingthetrend",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "Backtesting – Is Zipline Dead? Or does it just need a reload?",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.followingthetrend.com/2021/12/backtesting-is-zipline-dead-or-does-it-just-need-a-reload/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://blog.quantinsti.com/ai-aapl-trading-risk-manager-deepseek-python/",
+      "nguon": "quantinsti",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "Building a Guardrailed LLM Trading Risk-Manager Agent for AAPL",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://blog.quantinsti.com/ai-aapl-trading-risk-manager-deepseek-python/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://blog.quantinsti.com/cointegrated-pairs-trading-indian-equity-market-epat-project/",
+      "nguon": "quantinsti",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Statistical Arbitrage Using Cointegrated Stock Pairs in Indian Equity Market (2015-2025) | EPAT Project",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://blog.quantinsti.com/cointegrated-pairs-trading-indian-equity-market-epat-project/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://blog.quantinsti.com/regime-adaptive-trading-python/",
+      "nguon": "quantinsti",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "Market Regime using Hidden Markov Model",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://blog.quantinsti.com/regime-adaptive-trading-python/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://www.reddit.com/r/algotrading/comments/1vtwj32/where_do_you_backtest_your_strategies/",
+      "nguon": "reddit_algotrading",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "Where do you backtest your strategies",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/algotrading/comments/1vtwj32/where_do_you_backtest_your_strategies/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://www.quantitativo.com/p/quantitativo-weekly-3",
+      "nguon": "quantitativo",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Quantitativo weekly #3",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.quantitativo.com/p/quantitativo-weekly-3",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/falsify-quant/falsify",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[2*] falsify-quant/falsify",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/falsify-quant/falsify",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/Torim98/regime-switching-daa-paper",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[1*] Torim98/regime-switching-daa-paper",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/Torim98/regime-switching-daa-paper",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/4xqz8hnrhb-gif/overfit-diagnostic",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[1*] 4xqz8hnrhb-gif/overfit-diagnostic",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/4xqz8hnrhb-gif/overfit-diagnostic",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://github.com/eldermorph/Quantitative-Backtesting-Engine-for-Rule-Based-Trading-Systems-Python-",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[1*] eldermorph/Quantitative-Backtesting-Engine-for-Rule-Based-Trading-Systems-Python-",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/eldermorph/Quantitative-Backtesting-Engine-for-Rule-Based-Trading-Systems-Python-",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2608.14014v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Buy the Rumor, Sell the News: When Is News Priced In?",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.14014v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Education%22",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[reddit_td] Education",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Education%22",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/suenot/plateau-robustness",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] suenot/plateau-robustness",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/suenot/plateau-robustness",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/JavaMorant/trading-strategy",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] JavaMorant/trading-strategy",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/JavaMorant/trading-strategy",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/jonass17/phantomguard",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] jonass17/phantomguard",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/jonass17/phantomguard",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/ranafaraz/FinSight",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] ranafaraz/FinSight",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/ranafaraz/FinSight",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://github.com/gabriel-egea/cac40-backtest-and-overfitting",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[0*] gabriel-egea/cac40-backtest-and-overfitting",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/gabriel-egea/cac40-backtest-and-overfitting",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/gabriel-egea/cac40-backtest-and-overfitting",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] gabriel-egea/cac40-backtest-and-overfitting",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/gabriel-egea/cac40-backtest-and-overfitting",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/jarvisss007/backtest-overfitting",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] jarvisss007/backtest-overfitting",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/jarvisss007/backtest-overfitting",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2607.19453v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "Predictive Extrema, Unprofitable Policies: An AI-Assisted Audit of Candle-Based Binance Spot Timing Models",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2607.19453v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://github.com/shahwfabian/equity-regime-research",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[0*] shahwfabian/equity-regime-research",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/shahwfabian/equity-regime-research",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:https://github.com/scrtlabs/catalyst",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "[2559*] scrtlabs/catalyst",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/scrtlabs/catalyst",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:https://github.com/quantskills/skill-backtest-overfit",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "[14*] quantskills/skill-backtest-overfit",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/quantskills/skill-backtest-overfit",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:https://aligrithm.com/model-based-or-data-mined-lotters-framing-of-the-whole-problem/",
+      "nguon": "aligrithm",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "1.28 Model-Based or Data-Mined: Lotter's Framing of the Whole Problem",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://aligrithm.com/model-based-or-data-mined-lotters-framing-of-the-whole-problem/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:http://arxiv.org/abs/2408.03594v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "Forecasting High Frequency Order Flow Imbalance",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2408.03594v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:http://arxiv.org/abs/2608.09576v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "Anomaly detection in European cryptocurrency exchange-traded products",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.09576v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:https://github.com/OutOfSampleLab/oos-lab",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "[0*] OutOfSampleLab/oos-lab",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/OutOfSampleLab/oos-lab",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:https://github.com/jonass17/phantomguard",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "[0*] jonass17/phantomguard",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/jonass17/phantomguard",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:https://github.com/0scarito/deflated-alpha",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "[0*] 0scarito/deflated-alpha",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/0scarito/deflated-alpha",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:http://arxiv.org/abs/2607.19453v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "Predictive Extrema, Unprofitable Policies: An AI-Assisted Audit of Candle-Based Binance Spot Timing Models",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2607.19453v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:http://arxiv.org/abs/2607.28323v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "Optimal Execution with Passive Market Impact",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2607.28323v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:http://arxiv.org/abs/2607.28410v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "Can Large Language Models Execute Parent Orders?",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2607.28410v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:http://arxiv.org/abs/2608.05755v2",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "Cross-Sectional Heterogeneity in LSTM Networks for Financial Time Series",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.05755v2",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chong_qua_khop:https://github.com/shahwfabian/equity-regime-research",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chong_qua_khop",
+      "tom_tat": "[0*] shahwfabian/equity-regime-research",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong mot dong ma nao tu day duoc goi tu duong quyet dinh. Doc, hieu, roi KHAI BAO LAI bang tay."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/shahwfabian/equity-regime-research",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://www.mql5.com/en/articles/examples",
+      "nguon": "mql5_bai_viet",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[mql5_bai_viet] Examples",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.mql5.com/en/articles/examples",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:https://www.reddit.com/r/quant/?f=flair_name%3A%22Technical%20Infrastructure%22",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "[reddit_td] Technical Infrastructure",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/quant/?f=flair_name%3A%22Technical%20Infrastructure%22",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://www.reddit.com/r/quant/?f=flair_name%3A%22Statistical%20Methods%22",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[reddit_td] Statistical Methods",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/quant/?f=flair_name%3A%22Statistical%20Methods%22",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:https://www.reddit.com/user/dm13450/",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "[reddit_td] u/dm13450",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/user/dm13450/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Infrastructure%22",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[reddit_td] Infrastructure",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Infrastructure%22",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:https://www.reddit.com/r/algotrading/comments/1vxvgmf/weekly_discussion_thread_august_25_2026/",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "[reddit_td] Weekly Discussion Thread - August 25, 2026\n6 votes • 15 comments",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/algotrading/comments/1vxvgmf/weekly_discussion_thread_august_25_2026/",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://github.com/sharathStack/Statistical-Arbitrage-Pairs-Trading-Engine",
+      "nguon": "github",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[2*] sharathStack/Statistical-Arbitrage-Pairs-Trading-Engine",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/sharathStack/Statistical-Arbitrage-Pairs-Trading-Engine",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "nickmuchi/distilroberta-finetuned-financial-text-classification",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, pytorch, tensorboard, roberta, text-classification, financial-sentiment-analysis, sentiment-analysis, sentence_50agree",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 11.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/nickmuchi/distilroberta-finetuned-financial-text-classification",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "nickmuchi/setfit-finetuned-financial-text-classification",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "sentence-transformers, pytorch, mpnet, feature-extraction, sentence-similarity, text-embeddings-inference, endpoints_compatible, region:us",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 7.3,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/nickmuchi/setfit-finetuned-financial-text-classification",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "CesZen/financial_text_sentiment_classification_model",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tf, roberta, text-classification, generated_from_keras_callback, base_model:FacebookAI/roberta-base, base_model:finetune:FacebookAI/roberta-base, license:mit",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/CesZen/financial_text_sentiment_classification_model",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "loony-huggingface/financial_text_sentiment_classification_model",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tf, distilbert, text-classification, generated_from_keras_callback, base_model:distilbert/distilbert-base-uncased, base_model:finetune:distilbert/distilbert-base-uncased, license:apache-2.0",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.1,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/loony-huggingface/financial_text_sentiment_classification_model",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "shanpols/financial_text_sentiment_classification_model",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tf, roberta, text-classification, generated_from_keras_callback, base_model:FacebookAI/roberta-base, base_model:finetune:FacebookAI/roberta-base, license:mit",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.1,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/shanpols/financial_text_sentiment_classification_model",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Abhra-loony/financial_text_sentiment_classification_model",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "tf, roberta, generated_from_keras_callback, base_model:FacebookAI/roberta-base, base_model:finetune:FacebookAI/roberta-base, license:mit, region:us",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 3.9,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/Abhra-loony/financial_text_sentiment_classification_model",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "MaVier19/zero-shot_text_classification_2",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.6,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/MaVier19/zero-shot_text_classification_2",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "MaVier19/zero-shot_text_classification_fine_tuned",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.5,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/MaVier19/zero-shot_text_classification_fine_tuned",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "LogischeIP/zero-shot_text_classification",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/LogischeIP/zero-shot_text_classification",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "MaVier19/zero-shot_text_classification_pre_trained",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/MaVier19/zero-shot_text_classification_pre_trained",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "MaVier19/zero-shot_text_classification",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "transformers, tensorboard, safetensors, deberta-v2, text-classification, generated_from_trainer, base_model:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli, base_model:finetune:MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/MaVier19/zero-shot_text_classification",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Business%22",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[reddit_td] Business",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Business%22",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:engine_backtest:https://www.reddit.com/r/algorithmictrading",
+      "nguon": "reddit_td",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "engine_backtest",
+      "tom_tat": "[reddit_td] /r/algorithmictrading",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong thay nhan/cong.py, nhan/do_luc.py, nhan/so.py - do la ong toa, khong phai ban thi nghiem"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://www.reddit.com/r/algorithmictrading",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:http://arxiv.org/abs/2608.27076v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.27076v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "HN: Launch HN: Pyroscope (YC W21) – Continuous profiling software",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "Hi HN! Dmitry and Ryan here. We&#x27;re building Pyroscope (<a href=\"https:&#x2F;&#x2F;pyroscope.io&#x2F;\" rel=\"nofollow\">https:&#x2F;&#x2F;pyroscope.io&#x2F;</a>) — an open source continuous profiling platform (<a href=",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 14.1,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 2021 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://news.ycombinator.com/item?id=26143923",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "HN: Show HN: p99.chat – the assistant for software performance optimization",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "Hi HN! We’re the team behind CodSpeed (<a href=\"https:&#x2F;&#x2F;codspeed.io\" rel=\"nofollow\">https:&#x2F;&#x2F;codspeed.io</a>), a continuous performance testing tool.<p>Today, we&#x27;re really excited to launch our ne",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 12.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://p99.chat/chat",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "HN: Show HN: P99.chat – Chat for Performance Measurement",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "Hi HN! We’re the team behind CodSpeed (<a href=\"https:&#x2F;&#x2F;codspeed.io\" rel=\"nofollow\">https:&#x2F;&#x2F;codspeed.io</a>), a continuous performance testing tool.<p>Today, we&#x27;re really excited to launch our ne",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 12.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://p99.chat/chat",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2608.28399v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.28399v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:kiem_dinh_thong_ke:http://arxiv.org/abs/2608.27734v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "kiem_dinh_thong_ke",
+      "tom_tat": "What survives honest evaluation? Leakage-safe, search-aware assessment of LLM-driven trading strategy discovery",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: chi DOI CHIEU tu ben ngoai: hai ban tinh doc lap cung mot con so roi so ket qua. Khong mot dong nao cua no duoc goi tu duong quyet dinh."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2608.27734v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "doc:phuong_phap_chi_phi_giao_dich:http://arxiv.org/abs/2609.02447v1",
+      "nguon": "arxiv",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "phuong_phap_chi_phi_giao_dich",
+      "tom_tat": "Price manipulation in nonlinear transient impact models: rigidity before memory and complete positivity after memory",
+      "muc_khop": 30.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 25.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: the he chi phi (THE_HE) doi thi phai quet lai TOAN BO va tach chuoi FDR - khong duoc sua len tai cho"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "DOC_THAM_KHAO",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "http://arxiv.org/abs/2609.02447v1",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "alanshaw/markdown-pdf",
+      "nguon": "?",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "doc_pdf",
+      "tom_tat": " :page_facing_up: Markdown to PDF converter",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 64.4,
+      "rui_ro": [
+        "lan day cuoi 1045 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong lien quan den cong PASS"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu JavaScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/alanshaw/markdown-pdf",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "elliotblackburn/mdpdf",
+      "nguon": "?",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "doc_pdf",
+      "tom_tat": "Markdown to PDF command line app with support for stylesheets",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 70.3,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong lien quan den cong PASS"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu TypeScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/elliotblackburn/mdpdf",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "mrmps/pdf2md",
+      "nguon": "?",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "doc_pdf",
+      "tom_tat": "Browser based tool to convert PDFs to Markdown",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 44.7,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong lien quan den cong PASS"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu TypeScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/mrmps/pdf2md",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "DietrichGebert/ponytail",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu JavaScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "mattpocock/skills",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "Skills for Real Engineers. Straight from my .agents directory.",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu Shell: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/mattpocock/skills",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "deepseek-ai/deepseek-harness",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "DeepSeek Harness: Everything is a Plugin.",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu TypeScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/deepseek-ai/deepseek-harness",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "Gitlawb/openclaude",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "runs anywhere. uses anything",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu TypeScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/Gitlawb/openclaude",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "cathrynlavery/diagram-design",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu HTML: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "vercel-labs/portless",
+      "nguon": "tinix",
+      "loai": "khac",
+      "van_de_giai_quyet": [],
+      "nhu_cau": null,
+      "tom_tat": "Replace port numbers with stable, named local URLs. For humans and agents.",
+      "muc_khop": 25.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 10.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": null,
+      "rui_ro": [
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=khac",
+          "ngon ngu TypeScript: phai doc roi viet lai, khong import duoc",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://github.com/vercel-labs/portless",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "AventIQ-AI/Zero-shot-Text-Classification-Model",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "xep_thu_tu_doc",
+      "tom_tat": "safetensors, bart, region:us",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: TUYET DOI khong duoc sinh co che, khong duoc cham nhan/cong.py hay nhan/ngu_phap.py. Doan sai thi hau qua toi da la doc nham THU TU - khong bao gio la mot gia thuyet sai duoc dang ky."
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://huggingface.co/AventIQ-AI/Zero-shot-Text-Classification-Model",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Google App Engine Go memory management",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "google-app-engine, memory, memory-management, go",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 5.3,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/18826678/google-app-engine-go-memory-management",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: google checkout with appengine",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "python, google-app-engine, google-checkout",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 5.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/3947492/google-checkout-with-appengine",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: environment variables applied during elastic beanstalk deploy",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "python, linux, amazon-web-services, pip, amazon-elastic-beanstalk",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 5.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/42247935/environment-variables-applied-during-elastic-beanstalk-deploy",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Retrieve data with Uber Rides Python SDK fails with 500 error",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "python, uber-api",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.8,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/41597888/retrieve-data-with-uber-rides-python-sdk-fails-with-500-error",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Compile Scipy function with Cython",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "python, numpy, scipy, cython",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/47405898/compile-scipy-function-with-cython",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: findAndModify not using index search",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "python, mongodb, indexing, mongodb-query, pymongo",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/63175840/findandmodify-not-using-index-search",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Code coverage in Production combined with coverage in tests",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "python, profiling, code-coverage",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 3.0,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/68541106/code-coverage-in-production-combined-with-coverage-in-tests",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Converting a CMYK JPEG to RGB",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "image, colors, cmyk",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/79322180/converting-a-cmyk-jpeg-to-rgb",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: is it possible to speed-up matlab plotting by calling c / c++ code in matlab?",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "c++, matlab, plot, matlab-figure",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 8.5,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/8946474/is-it-possible-to-speed-up-matlab-plotting-by-calling-c-c-code-in-matlab",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: C# Performance MS verse Mono Problems",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "c#, .net, performance, mono",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 6.1,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/21796058/c-performance-ms-verse-mono-problems",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Optimizing a slow loop",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "c, performance, gcc, optimization, oprofile",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 5.3,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/36893556/optimizing-a-slow-loop",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Calling python script from java and collecting output line by line as written",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "java, python",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 3.5,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/55359905/calling-python-script-from-java-and-collecting-output-line-by-line-as-written",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: How to improve `shutil.rmtree` performance on PolarDB-Filesystem over FUSE?",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "do_nut_that",
+      "tom_tat": "python, filesystems, polardb, advice",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc cham nhan/cong.py, nhan/so.py; do dac khong duoc chiem suat FDR"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/79879799/how-to-improve-shutil-rmtree-performance-on-polardb-filesystem-over-fuse",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Python Multiprocessing Process or Pool for what I am doing?",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, multithreading, asynchronous, multiprocessing",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 8.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/18176178/python-multiprocessing-process-or-pool-for-what-i-am-doing",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Parallel application in python becomes much slower when using mpi rather than multiprocessing module",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, multiprocessing, mpi, evolutionary-algorithm",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 6.3,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/17054469/parallel-application-in-python-becomes-much-slower-when-using-mpi-rather-than-mu",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Minimize overhead in Python multiprocessing.Pool with numpy/scipy",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, numpy, parallel-processing, multiprocessing, pool",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 6.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/37068981/minimize-overhead-in-python-multiprocessing-pool-with-numpy-scipy",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Keras + Tensorflow: Prediction on multiple gpus",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, tensorflow, keras, python-multiprocessing",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 6.7,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/42409884/keras-tensorflow-prediction-on-multiple-gpus",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Recursion depth error when using BeautifulSoup with multiprocessing pool map",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, multiprocessing, beautifulsoup",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 5.8,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/10374504/recursion-depth-error-when-using-beautifulsoup-with-multiprocessing-pool-map",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Is the class generator (inheriting Sequence) thread safe in Keras/Tensorflow?",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, tensorflow, keras, generator",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 6.3,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/52932406/is-the-class-generator-inheriting-sequence-thread-safe-in-keras-tensorflow",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Training multiple neural networks asynchronously in parallel",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, multiprocessing, gpu, pytorch, hyperparameters",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.5,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/60542501/training-multiple-neural-networks-asynchronously-in-parallel",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Multi-processing in Python: Numpy + Vector Summation -&gt; Huge Slowdown",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "song_song_va_bo_nho",
+      "tom_tat": "python, performance, parallel-processing, multiprocessing, slowdown",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 5.5,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi ket qua tinh toan; song song chi duoc doi TOC DO, khong duoc doi mot con so nao"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/36383962/multi-processing-in-python-numpy-vector-summation-huge-slowdown",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Dynamic on the fly compile",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "supervisor_chet_im_lang",
+      "tom_tat": "python, cython, on-the-fly",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.8,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc tu khoi dong lai mot tru dang giua mot phep ghi so cai; khong duoc doi cach cham lease"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/49239036/dynamic-on-the-fly-compile",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Serializing a large number of small data sets in python",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "luu_tru_va_doc_gia",
+      "tom_tat": "python, serialization",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.8,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi cach CHON ban du lieu (do phu), chi duoc doi cach DOC"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/78557672/serializing-a-large-number-of-small-data-sets-in-python",
+      "doi_chieu_voi": null
+    },
+    {
+      "id": "SO: Loading columnar-structured time-series data faster into a NumPy Arrays",
+      "nguon": "?",
+      "loai": "kho_ma",
+      "van_de_giai_quyet": [],
+      "nhu_cau": "luu_tru_va_doc_gia",
+      "tom_tat": "python, pandas, numpy, fastparquet",
+      "muc_khop": 20.0,
+      "truc_khop": {
+        "neo": 0.0,
+        "bang_chung": 15.0,
+        "nhap": 5.0,
+        "dich": 0.0
+      },
+      "suc_khoe_kho_ma": 4.2,
+      "rui_ro": [
+        "KHONG khai giay phep - khong duoc dua vao ma nguon du an",
+        "lan day cuoi 9999 ngay truoc - co the da bo",
+        "CHUA NEO: khong van de dang mo nao doi thu nay - tich hop bay gio la mo rong pham vi khong ai yeu cau",
+        "RANG BUOC: khong duoc doi cach CHON ban du lieu (do phu), chi duoc doi cach DOC"
+      ],
+      "cong_tich_hop": {
+        "bac": 4,
+        "muc": "RAT_CAO",
+        "ly_do": [
+          "loai=kho_ma",
+          "chua biet no cham vao file nao cua he"
+        ]
+      },
+      "trang_thai": "TAM_HOAN",
+      "neo_tam": false,
+      "neo_bang_chung": null,
+      "url": "https://stackoverflow.com/questions/77509128/loading-columnar-structured-time-series-data-faster-into-a-numpy-arrays",
+      "doi_chieu_voi": null
+    }
+  ]
+}

@@ -801,8 +801,42 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
                 gt_ma_nguon=gt_ma or None)
         else:
             kq_fdr = lord(p_hop_thanh_fdr, ho, gt_ma, ghi_so=ghi_so)
-        dk["10_qua_fdr_online"] = bool(kq_fdr["bac_bo"])
-        if not kq_fdr["bac_bo"]:
+        # ---------------------------------------------------------------
+        # CONG FDR: TAT theo quyet dinh cua chu du an 04/09/2026.
+        #
+        # Lap luan cua ho: *"o thi truong nay khong ai di share mieng banh minh
+        # co ca, ta dang tim kiem nhung manh vun. Toi xay mot cai pheu lon het
+        # co de dao ca mot bai bien lay mot hat vang, thi cau di add cai tieu
+        # chuan khong phu hop vao"*.
+        #
+        # SO DO DUOC TRUOC KHI TAT - ghi lai de sau nay khong ai doc nham day
+        # la mot loi:
+        #
+        #   703 ket qua co cham cong FDR
+        #     0  truot CHI vi FDR
+        #     0  qua het moi chan khac roi chet o FDR
+        #
+        # Tuc **FDR chua tung loai mot ung vien nao du tieu chuan**. Cai giet la
+        # placebo (98,0%), alpha khong co y nghia (97,8%), va MDE. Nen tat no
+        # KHONG mo them mot he nao - do la mot phep bo thu vo hai, khong phai
+        # mot phep noi long nguy hiem.
+        #
+        # VA MOT LOI THAT DA TIM RA, la ly do chu du an dung: he tinh tien FDR
+        # **58,8 lan cho MOT y tuong** (294 phep thu trong ho
+        # `quay_ve_trung_binh@cp2` chi la 5 y tuong nhan luoi tham so x tai san
+        # x khung). Nguong vi vay sup tu 0,012929 (j=1) xuong 0,000004 (j=294) -
+        # **3.200 lan**. Chuan cho "mot y tuong, nhieu bien the" la hieu chinh
+        # best-of-N (White Reality Check / Hansen SPA): mot suat, null rong hon.
+        # Tinh N suat doc lap la sai ve phuong phap, khong chi ve khau vi.
+        #
+        # BAT LAI: dat `"bat_fdr": true` trong config/nguong.json. So FDR van
+        # duoc ghi binh thuong (`lord_v2` van chay), chi la ket qua cua no
+        # khong con la mot dieu kien PASS - nen khi nao muon danh gia lai thi
+        # du lieu van con nguyen.
+        _bat_fdr = bool(nguong().get("bat_fdr", False))
+        if _bat_fdr:
+            dk["10_qua_fdr_online"] = bool(kq_fdr["bac_bo"])
+        if _bat_fdr and not kq_fdr["bac_bo"]:
             ly_do.append(
                 f"p_hop_thanh={p_hop_thanh_fdr} khong qua nguong FDR online "
                 f"{kq_fdr['nguong_fdr']:.5f} (phep thu thu {kq_fdr['thu_tu_trong_ho']} "

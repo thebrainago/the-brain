@@ -1,0 +1,842 @@
+[
+ {
+  "ma": "SP500",
+  "nam": 98.6,
+  "bar": 24754
+ },
+ {
+  "ma": "YH_NIKKEI",
+  "nam": 56.6,
+  "bar": 13919
+ },
+ {
+  "ma": "USDJPY",
+  "nam": 55.6,
+  "bar": 15763
+ },
+ {
+  "ma": "EURUSD",
+  "nam": 55.6,
+  "bar": 14322
+ },
+ {
+  "ma": "YH_NASDAQ",
+  "nam": 55.5,
+  "bar": 13995
+ },
+ {
+  "ma": "YH_TSX",
+  "nam": 47.1,
+  "bar": 11830
+ },
+ {
+  "ma": "YH_FTSE100",
+  "nam": 42.6,
+  "bar": 10764
+ },
+ {
+  "ma": "YH_HANGSENG",
+  "nam": 39.6,
+  "bar": 9775
+ },
+ {
+  "ma": "YH_RUSSELL2000",
+  "nam": 38.9,
+  "bar": 9803
+ },
+ {
+  "ma": "YH_DAX",
+  "nam": 38.6,
+  "bar": 9765
+ },
+ {
+  "ma": "SP500_CO_TUC_DO",
+  "nam": 37.7,
+  "bar": 9487
+ },
+ {
+  "ma": "VIX",
+  "nam": 36.5,
+  "bar": 9226
+ },
+ {
+  "ma": "YH_CAC40",
+  "nam": 36.4,
+  "bar": 9257
+ },
+ {
+  "ma": "YH_SMI",
+  "nam": 35.8,
+  "bar": 8977
+ },
+ {
+  "ma": "YH_DOWJONES",
+  "nam": 34.6,
+  "bar": 8713
+ },
+ {
+  "ma": "CHFJPY",
+  "nam": 34.4,
+  "bar": 8708
+ },
+ {
+  "ma": "YH_AEX",
+  "nam": 33.8,
+  "bar": 8633
+ },
+ {
+  "ma": "YH_ASX200",
+  "nam": 33.7,
+  "bar": 8524
+ },
+ {
+  "ma": "ETF_SPY",
+  "nam": 33.5,
+  "bar": 8428
+ },
+ {
+  "ma": "AUDNZD",
+  "nam": 33.3,
+  "bar": 8540
+ },
+ {
+  "ma": "GBPCHF",
+  "nam": 33.3,
+  "bar": 8597
+ },
+ {
+  "ma": "YH_BOVESPA",
+  "nam": 33.3,
+  "bar": 8246
+ },
+ {
+  "ma": "GBPJPY",
+  "nam": 33.3,
+  "bar": 8643
+ },
+ {
+  "ma": "AUDUSD",
+  "nam": 33.2,
+  "bar": 8645
+ },
+ {
+  "ma": "AUDCAD",
+  "nam": 33.2,
+  "bar": 8612
+ },
+ {
+  "ma": "EURJPY",
+  "nam": 33.2,
+  "bar": 8516
+ },
+ {
+  "ma": "USDCAD",
+  "nam": 33.2,
+  "bar": 8646
+ },
+ {
+  "ma": "EURCHF",
+  "nam": 33.2,
+  "bar": 8633
+ },
+ {
+  "ma": "EURGBP",
+  "nam": 33.2,
+  "bar": 8638
+ },
+ {
+  "ma": "GBPUSD",
+  "nam": 33.2,
+  "bar": 8634
+ },
+ {
+  "ma": "AUDCHF",
+  "nam": 33.2,
+  "bar": 8542
+ },
+ {
+  "ma": "AUDJPY",
+  "nam": 33.2,
+  "bar": 8571
+ },
+ {
+  "ma": "CADCHF",
+  "nam": 33.2,
+  "bar": 8463
+ },
+ {
+  "ma": "YH_IBEX35",
+  "nam": 33.1,
+  "bar": 8384
+ },
+ {
+  "ma": "NZDUSD",
+  "nam": 32.5,
+  "bar": 8449
+ },
+ {
+  "ma": "YH_USDJPY",
+  "nam": 29.8,
+  "bar": 7723
+ },
+ {
+  "ma": "YH_KOSPI",
+  "nam": 29.7,
+  "bar": 7303
+ },
+ {
+  "ma": "YH_SENSEX",
+  "nam": 29.1,
+  "bar": 7172
+ },
+ {
+  "ma": "YH_TAIWAN",
+  "nam": 29.1,
+  "bar": 7134
+ },
+ {
+  "ma": "ETF_QQQ",
+  "nam": 27.4,
+  "bar": 6886
+ },
+ {
+  "ma": "GBPNZD",
+  "nam": 26.6,
+  "bar": 6676
+ },
+ {
+  "ma": "EURNZD",
+  "nam": 26.3,
+  "bar": 6672
+ },
+ {
+  "ma": "ETF_IWM",
+  "nam": 26.2,
+  "bar": 6578
+ },
+ {
+  "ma": "YH_NGO",
+  "nam": 26.1,
+  "bar": 6523
+ },
+ {
+  "ma": "YH_DAUWTI",
+  "nam": 26.0,
+  "bar": 6520
+ },
+ {
+  "ma": "YH_KHIDOT",
+  "nam": 25.9,
+  "bar": 6517
+ },
+ {
+  "ma": "YH_DONG",
+  "nam": 25.9,
+  "bar": 6516
+ },
+ {
+  "ma": "YH_BAC",
+  "nam": 25.9,
+  "bar": 6513
+ },
+ {
+  "ma": "YH_VANG",
+  "nam": 25.9,
+  "bar": 6511
+ },
+ {
+  "ma": "YH_DAUTUONG",
+  "nam": 25.9,
+  "bar": 6515
+ },
+ {
+  "ma": "NZDJPY",
+  "nam": 25.8,
+  "bar": 6672
+ },
+ {
+  "ma": "NZDCHF",
+  "nam": 25.7,
+  "bar": 6672
+ },
+ {
+  "ma": "EURCAD",
+  "nam": 25.3,
+  "bar": 6672
+ },
+ {
+  "ma": "GBPAUD",
+  "nam": 25.2,
+  "bar": 6672
+ },
+ {
+  "ma": "NZDCAD",
+  "nam": 25.2,
+  "bar": 6672
+ },
+ {
+  "ma": "GBPCAD",
+  "nam": 25.1,
+  "bar": 6673
+ },
+ {
+  "ma": "CADJPY",
+  "nam": 25.0,
+  "bar": 6671
+ },
+ {
+  "ma": "USDCHF",
+  "nam": 24.9,
+  "bar": 6645
+ },
+ {
+  "ma": "EURAUD",
+  "nam": 24.8,
+  "bar": 6672
+ },
+ {
+  "ma": "ETF_TLT",
+  "nam": 24.0,
+  "bar": 6035
+ },
+ {
+  "ma": "YH_USDCAD",
+  "nam": 22.9,
+  "bar": 5957
+ },
+ {
+  "ma": "YH_USDCHF",
+  "nam": 22.9,
+  "bar": 5955
+ },
+ {
+  "ma": "YH_GBPUSD",
+  "nam": 22.7,
+  "bar": 5901
+ },
+ {
+  "ma": "YH_EURUSD",
+  "nam": 22.7,
+  "bar": 5889
+ },
+ {
+  "ma": "XAUUSD",
+  "nam": 22.1,
+  "bar": 5670
+ },
+ {
+  "ma": "ETF_GLD",
+  "nam": 21.7,
+  "bar": 5453
+ },
+ {
+  "ma": "XM_USDCAD",
+  "nam": 20.6,
+  "bar": 5375
+ },
+ {
+  "ma": "XM_USDCHF",
+  "nam": 20.6,
+  "bar": 5374
+ },
+ {
+  "ma": "XM_AUDUSD",
+  "nam": 20.6,
+  "bar": 5374
+ },
+ {
+  "ma": "XM_GBPUSD",
+  "nam": 20.6,
+  "bar": 5373
+ },
+ {
+  "ma": "XM_EURUSD",
+  "nam": 20.6,
+  "bar": 5373
+ },
+ {
+  "ma": "XM_GOLD",
+  "nam": 20.6,
+  "bar": 5347
+ },
+ {
+  "ma": "XM_SILVER",
+  "nam": 20.6,
+  "bar": 5337
+ },
+ {
+  "ma": "YH_AUDUSD",
+  "nam": 20.2,
+  "bar": 5265
+ },
+ {
+  "ma": "TS_SPY",
+  "nam": 20.0,
+  "bar": 5030
+ },
+ {
+  "ma": "TS_QQQ",
+  "nam": 20.0,
+  "bar": 5030
+ },
+ {
+  "ma": "TS_GLD",
+  "nam": 20.0,
+  "bar": 5030
+ },
+ {
+  "ma": "ETF_UUP",
+  "nam": 19.4,
+  "bar": 4881
+ },
+ {
+  "ma": "YH_EUSTOXX50",
+  "nam": 19.4,
+  "bar": 4854
+ },
+ {
+  "ma": "ETF_HYG",
+  "nam": 19.3,
+  "bar": 4853
+ },
+ {
+  "ma": "ETF_BIL",
+  "nam": 19.2,
+  "bar": 4819
+ },
+ {
+  "ma": "EURRUR",
+  "nam": 18.9,
+  "bar": 4690
+ },
+ {
+  "ma": "SGDJPY",
+  "nam": 18.9,
+  "bar": 4908
+ },
+ {
+  "ma": "NZDSGD",
+  "nam": 18.9,
+  "bar": 4875
+ },
+ {
+  "ma": "EURHKD",
+  "nam": 18.9,
+  "bar": 4494
+ },
+ {
+  "ma": "TS_VNM",
+  "nam": 17.0,
+  "bar": 4264
+ },
+ {
+  "ma": "EURTRY",
+  "nam": 16.2,
+  "bar": 4102
+ },
+ {
+  "ma": "XM_JP225CASH",
+  "nam": 16.0,
+  "bar": 4023
+ },
+ {
+  "ma": "XM_EU50CASH",
+  "nam": 15.8,
+  "bar": 4007
+ },
+ {
+  "ma": "XM_FRA40CASH",
+  "nam": 15.2,
+  "bar": 4028
+ },
+ {
+  "ma": "XM_GER40CASH",
+  "nam": 15.1,
+  "bar": 4003
+ },
+ {
+  "ma": "XM_UK100CASH",
+  "nam": 15.1,
+  "bar": 3997
+ },
+ {
+  "ma": "XM_US500CASH",
+  "nam": 15.1,
+  "bar": 4054
+ },
+ {
+  "ma": "XM_US30CASH",
+  "nam": 15.1,
+  "bar": 4054
+ },
+ {
+  "ma": "US500CASH",
+  "nam": 15.0,
+  "bar": 4027
+ },
+ {
+  "ma": "XM_US100CASH",
+  "nam": 14.9,
+  "bar": 3995
+ },
+ {
+  "ma": "XM_HK50CASH",
+  "nam": 14.8,
+  "bar": 707
+ },
+ {
+  "ma": "DE40",
+  "nam": 14.0,
+  "bar": 3522
+ },
+ {
+  "ma": "EURILS",
+  "nam": 13.9,
+  "bar": 3329
+ },
+ {
+  "ma": "EURSEK",
+  "nam": 13.4,
+  "bar": 3514
+ },
+ {
+  "ma": "GBPSGD",
+  "nam": 13.4,
+  "bar": 3462
+ },
+ {
+  "ma": "EURNOK",
+  "nam": 13.3,
+  "bar": 3501
+ },
+ {
+  "ma": "USDCLP",
+  "nam": 13.1,
+  "bar": 2031
+ },
+ {
+  "ma": "XAUUSDM",
+  "nam": 12.5,
+  "bar": 3835
+ },
+ {
+  "ma": "CADMXN",
+  "nam": 12.3,
+  "bar": 1747
+ },
+ {
+  "ma": "XM_AUS200CASH",
+  "nam": 12.3,
+  "bar": 3152
+ },
+ {
+  "ma": "TS_BTC",
+  "nam": 11.9,
+  "bar": 4334
+ },
+ {
+  "ma": "EURRUB",
+  "nam": 11.6,
+  "bar": 2962
+ },
+ {
+  "ma": "EURHUF",
+  "nam": 11.6,
+  "bar": 3003
+ },
+ {
+  "ma": "EURPLN",
+  "nam": 11.6,
+  "bar": 3002
+ },
+ {
+  "ma": "GBPPLN",
+  "nam": 11.6,
+  "bar": 2996
+ },
+ {
+  "ma": "GBPNOK",
+  "nam": 11.6,
+  "bar": 2989
+ },
+ {
+  "ma": "GBPSEK",
+  "nam": 11.6,
+  "bar": 2988
+ },
+ {
+  "ma": "EURCZK",
+  "nam": 11.6,
+  "bar": 2958
+ },
+ {
+  "ma": "GBPZAR",
+  "nam": 11.0,
+  "bar": 2852
+ },
+ {
+  "ma": "EURZAR",
+  "nam": 10.7,
+  "bar": 2762
+ },
+ {
+  "ma": "EURDKK",
+  "nam": 10.7,
+  "bar": 2701
+ },
+ {
+  "ma": "XM_US500_SEP26",
+  "nam": 10.2,
+  "bar": 2628
+ },
+ {
+  "ma": "XM_US30_SEP26",
+  "nam": 10.2,
+  "bar": 2628
+ },
+ {
+  "ma": "XM_US100_SEP26",
+  "nam": 10.2,
+  "bar": 2627
+ },
+ {
+  "ma": "EURMXN",
+  "nam": 9.4,
+  "bar": 2439
+ },
+ {
+  "ma": "GBPHUF",
+  "nam": 9.1,
+  "bar": 2463
+ },
+ {
+  "ma": "CHFHUF",
+  "nam": 9.1,
+  "bar": 2462
+ },
+ {
+  "ma": "USDARS",
+  "nam": 9.0,
+  "bar": 1998
+ },
+ {
+  "ma": "XM_XAUEUR",
+  "nam": 8.9,
+  "bar": 2302
+ },
+ {
+  "ma": "XM_US2000CASH",
+  "nam": 8.9,
+  "bar": 2302
+ },
+ {
+  "ma": "AUDHUF",
+  "nam": 8.9,
+  "bar": 1757
+ },
+ {
+  "ma": "NZDHUF",
+  "nam": 8.9,
+  "bar": 1548
+ },
+ {
+  "ma": "AUDZAR",
+  "nam": 8.8,
+  "bar": 1826
+ },
+ {
+  "ma": "GBPMXN",
+  "nam": 8.7,
+  "bar": 2260
+ },
+ {
+  "ma": "TS_ETH",
+  "nam": 8.7,
+  "bar": 3185
+ },
+ {
+  "ma": "NZDMXN",
+  "nam": 7.7,
+  "bar": 1852
+ },
+ {
+  "ma": "CHFMXN",
+  "nam": 7.7,
+  "bar": 1849
+ },
+ {
+  "ma": "AUDHKD",
+  "nam": 7.1,
+  "bar": 854
+ },
+ {
+  "ma": "TRYJPY",
+  "nam": 6.9,
+  "bar": 1786
+ },
+ {
+  "ma": "SEKJPY",
+  "nam": 6.9,
+  "bar": 1786
+ },
+ {
+  "ma": "NOKSEK",
+  "nam": 6.9,
+  "bar": 1786
+ },
+ {
+  "ma": "NOKJPY",
+  "nam": 6.9,
+  "bar": 1786
+ },
+ {
+  "ma": "EURSGD",
+  "nam": 6.9,
+  "bar": 1786
+ },
+ {
+  "ma": "CHFSGD",
+  "nam": 6.9,
+  "bar": 1786
+ },
+ {
+  "ma": "CHFPLN",
+  "nam": 6.9,
+  "bar": 1786
+ },
+ {
+  "ma": "CHFNOK",
+  "nam": 6.9,
+  "bar": 1785
+ },
+ {
+  "ma": "CHFDKK",
+  "nam": 6.9,
+  "bar": 1785
+ },
+ {
+  "ma": "GBPDKK",
+  "nam": 6.9,
+  "bar": 1783
+ },
+ {
+  "ma": "AUDSEK",
+  "nam": 6.9,
+  "bar": 1781
+ },
+ {
+  "ma": "AUDSGD",
+  "nam": 6.9,
+  "bar": 1742
+ },
+ {
+  "ma": "AUDNOK",
+  "nam": 6.9,
+  "bar": 1248
+ },
+ {
+  "ma": "PLNJPY",
+  "nam": 6.9,
+  "bar": 1232
+ },
+ {
+  "ma": "AUDPLN",
+  "nam": 6.9,
+  "bar": 1200
+ },
+ {
+  "ma": "HKDJPY",
+  "nam": 6.8,
+  "bar": 1780
+ },
+ {
+  "ma": "US500M",
+  "nam": 6.6,
+  "bar": 1701
+ },
+ {
+  "ma": "MXNJPY",
+  "nam": 5.7,
+  "bar": 1272
+ },
+ {
+  "ma": "SEKNOK",
+  "nam": 5.5,
+  "bar": 1295
+ },
+ {
+  "ma": "XAUGBPM",
+  "nam": 3.9,
+  "bar": 1218
+ },
+ {
+  "ma": "XAUEURM",
+  "nam": 3.9,
+  "bar": 1218
+ },
+ {
+  "ma": "XAUAUDM",
+  "nam": 3.9,
+  "bar": 1218
+ },
+ {
+  "ma": "DKKSEK",
+  "nam": 3.4,
+  "bar": 888
+ },
+ {
+  "ma": "NZDDKK",
+  "nam": 3.4,
+  "bar": 887
+ },
+ {
+  "ma": "SGDHKD",
+  "nam": 3.4,
+  "bar": 886
+ },
+ {
+  "ma": "NZDSEK",
+  "nam": 3.4,
+  "bar": 886
+ },
+ {
+  "ma": "GBPCZK",
+  "nam": 3.4,
+  "bar": 883
+ },
+ {
+  "ma": "EURCNH",
+  "nam": 3.4,
+  "bar": 883
+ },
+ {
+  "ma": "GBPHKD",
+  "nam": 3.4,
+  "bar": 728
+ },
+ {
+  "ma": "GBPTRY",
+  "nam": 3.4,
+  "bar": 877
+ },
+ {
+  "ma": "CADSGD",
+  "nam": 3.4,
+  "bar": 878
+ },
+ {
+  "ma": "CHFSEK",
+  "nam": 3.4,
+  "bar": 877
+ },
+ {
+  "ma": "USDCOP",
+  "nam": 3.0,
+  "bar": 720
+ },
+ {
+  "ma": "AUDTHB",
+  "nam": 2.9,
+  "bar": 590
+ }
+]

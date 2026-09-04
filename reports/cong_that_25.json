@@ -1,0 +1,627 @@
+[
+ {
+  "ten": "macd_stochastic_doub_close_tren_ema26_close",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.743,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.743
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.636x (bien dong va sut giam, lay muc chat hon) -> lai khop 58807.62% (tho 9931.87%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "mua_rsi14_tren_55",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.7341,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.7341
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.910x (bien dong va sut giam, lay muc chat hon) -> lai khop 62147.80% (tho 5233.74%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "pine_strategy_macd_and_r_rsi10_tren_51",
+  "ho": "quay_ve_trung_binh",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.7159,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.7159
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.662x (bien dong va sut giam, lay muc chat hon) -> lai khop 44461.59% (tho 7800.29%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "trend_strength_entry_with_ema_exit",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.715,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.715
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.767x (bien dong va sut giam, lay muc chat hon) -> lai khop 44138.85% (tho 5956.1%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "pine_ichimoku_cloud_close_tren_ema21_close",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.7068,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.7068
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.629x (bien dong va sut giam, lay muc chat hon) -> lai khop 39182.60% (tho 7883.09%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "vao_lenh_long_khi_ema20_duoi_gia",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.7065,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.7065
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.630x (bien dong va sut giam, lay muc chat hon) -> lai khop 39089.21% (tho 7834.53%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "macd_stochastic_doub_close_tren_ema12_close",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.663,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.663
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.609x (bien dong va sut giam, lay muc chat hon) -> lai khop 24405.58% (tho 6185.85%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "macd_sma_200_strateg_close_tren_sma26",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.6612,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.6612
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.645x (bien dong va sut giam, lay muc chat hon) -> lai khop 23705.26% (tho 5539.95%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "mua_theo_momentum_20_ngay",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.6493,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.6493
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.526x (bien dong va sut giam, lay muc chat hon) -> lai khop 15985.41% (tho 5370.98%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "mua_xu_huong",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.6276,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.6276
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.677x (bien dong va sut giam, lay muc chat hon) -> lai khop 16189.41% (tho 4056.96%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "triple_ema_long_entry",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.6191,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.6191
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.802x (bien dong va sut giam, lay muc chat hon) -> lai khop 14575.57% (tho 2933.12%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "donchian_long_short_long",
+  "ho": "pha_vo",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.6133,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.6133
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.613x (bien dong va sut giam, lay muc chat hon) -> lai khop 13724.60% (tho 4258.14%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "donchian_long_only_with_ma_filter",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.6098,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.6098
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.803x (bien dong va sut giam, lay muc chat hon) -> lai khop 12633.32% (tho 2698.89%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "trend_strength_entry_with_rsi_exit",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.6006,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.6006
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.535x (bien dong va sut giam, lay muc chat hon) -> lai khop 10381.84% (tho 4306.86%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "pine_yuthavithi_vol_ema3_tren_ema20",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5978,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5978
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.611x (bien dong va sut giam, lay muc chat hon) -> lai khop 11273.09% (tho 3780.97%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "pine_pullback_candl_high_tren_sma50_close",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5962,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5962
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.541x (bien dong va sut giam, lay muc chat hon) -> lai khop 10060.37% (tho 4158.76%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "slow_long",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5947,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5947
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.980x (bien dong va sut giam, lay muc chat hon) -> lai khop 12256.25% (tho 1950.57%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "ema_cross_long",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5787,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5787
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.401x (bien dong va sut giam, lay muc chat hon) -> lai khop 6102.91% (tho 3480.72%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "fast_long",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5717,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5717
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.696x (bien dong va sut giam, lay muc chat hon) -> lai khop 6805.71% (tho 2009.65%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "macd_sma_200_strateg_close_tren_sma12",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5671,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5671
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.306x (bien dong va sut giam, lay muc chat hon) -> lai khop 4306.78% (tho 3158.37%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "macd_stochastic_doub_close_tren_sma100_close",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5606,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5606
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.544x (bien dong va sut giam, lay muc chat hon) -> lai khop 6203.61% (tho 2905.36%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "my_ma100",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5606,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5606
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.544x (bien dong va sut giam, lay muc chat hon) -> lai khop 6203.61% (tho 2905.36%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "pine_yuthavithi_vol_ema3_tre1_tren_ema20_tre1",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5561,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5561
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.594x (bien dong va sut giam, lay muc chat hon) -> lai khop 6969.09% (tho 2895.91%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "pine_everyday_0003_ema14_close_tren_ema28_close",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5561,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5561
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.584x (bien dong va sut giam, lay muc chat hon) -> lai khop 6715.22% (tho 2890.11%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ },
+ {
+  "ten": "pine_ichimoku_cloud_close_tren_ema144_close",
+  "ho": "xu_huong",
+  "ma": "YH_NASDAQ",
+  "khung": "D1",
+  "sharpe_gop": 0.5393,
+  "so_bar": 13995,
+  "so_thoi_dai": 1,
+  "dong_thuan": 1.0,
+  "tung_thoi_dai": [
+   0.5393
+  ],
+  "mde": 0.532,
+  "vuot_mde": true,
+  "verdict": "FAIL",
+  "truot": [
+   "6_dang_ky_truoc",
+   "5_placebo"
+  ],
+  "so_truot": 2,
+  "ly_do": [
+   "khop rui ro k=1.539x (bien dong va sut giam, lay muc chat hon) -> lai khop 5184.92% (tho 2703.1%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich"
+  ]
+ }
+]

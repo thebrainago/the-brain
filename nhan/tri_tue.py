@@ -146,9 +146,26 @@ def _co_openai() -> bool:
     return bool(os.environ.get("OPENAI_API_KEY") or tu_cc_switch().get("khoa"))
 
 
-def _goi_openai(nhac: str, he_thong: str, c: dict) -> dict:
+def _goi_openai(nhac: str, he_thong: str, c: dict, ep_json: bool = False) -> dict:
     """Goi bat ky API tuong thich OpenAI (`/chat/completions`) - giup may nay
-    khong le thuoc mot he LLM duy nhat (Claude)."""
+    khong le thuoc mot he LLM duy nhat (Claude).
+
+    HAI THAM SO THEM 04/09/2026, sau khi do lai duong boc:
+
+    - `temperature`. Truoc do KHONG dat, nen deepseek-chat chay o mac dinh
+      **1.0** - muc lay mau cho hoi thoai - trong khi viec o day la TRICH XUAT
+      co cau truc. Do la nguon rat co kha nang cua lop loi dinh dang ma
+      `boc_llm.chuan_hoa_spec` dang phai di va (`giu` tra ve so thuc, chuoi,
+      hoac null; 2/4 khai bao bi loai chi vi kieu). Trich xuat thi lay 0.
+
+    - `response_format={"type":"json_object"}` (JSON mode). Truoc do JSON chi
+      duoc XIN BANG LOI trong prompt roi `hoi_json` tu cat chuoi tim dau `{`.
+      Xin bang loi thi mo hinh duoc phep khong nghe.
+
+    Ca hai chi bat khi nguoi goi noi ro `ep_json`, va co duong tat qua config
+    (`temperature`, `json_mode`) vi khong phai API tuong thich-OpenAI nao cung
+    nhan `response_format`.
+    """
     import requests
     # Uu tien bien moi truong; khong co thi lay tu `cc-switch` da khai san tren
     # may. Chu du an noi ro: "co san deepseek trong may, trong cc switch co cau
@@ -166,12 +183,17 @@ def _goi_openai(nhac: str, he_thong: str, c: dict) -> dict:
     if he_thong:
         msgs.append({"role": "system", "content": he_thong})
     msgs.append({"role": "user", "content": nhac})
+    than = {"model": model, "messages": msgs,
+            "max_tokens": int(c["max_tokens"])}
+    nd = c.get("temperature")
+    if nd is not None:
+        than["temperature"] = float(nd)
+    if ep_json and c.get("json_mode", True):
+        than["response_format"] = {"type": "json_object"}
     r = requests.post(
         base + "/chat/completions",
         headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
-        json={"model": model, "messages": msgs,
-              "max_tokens": int(c["max_tokens"])},
-        timeout=int(c["timeout_giay"]))
+        json=than, timeout=int(c["timeout_giay"]))
     if r.status_code != 200:
         return {"loi": "HTTP %d: %s" % (r.status_code, r.text[:300])}
     jp = r.json()
@@ -243,11 +265,11 @@ def _sua_mojibake(t: str) -> str:
 
 # ------------------------------------------------------------------- CUA RA
 def hoi(nhac: str, he_thong: str = "", bo_qua_han_muc: bool = False,
-        dung_cache: bool = True) -> dict:
+        dung_cache: bool = True, ep_json: bool = False) -> dict:
     """Hoi LLM mot cau. Tra dict co `van_ban` hoac `loi`/`bo_qua`."""
     c = cau_hinh()
     khoa = hashlib.sha1(
-        (c.get("model_openai", "") + he_thong + nhac).encode("utf-8", "replace")
+        (c.get("model_openai", "") + str(ep_json) + he_thong + nhac).encode("utf-8", "replace")
     ).hexdigest()
 
     if dung_cache:
@@ -270,7 +292,7 @@ def hoi(nhac: str, he_thong: str = "", bo_qua_han_muc: bool = False,
             kq = {"loi": f"{type(e).__name__}: {str(e)[:160]}"}
     elif duong == "openai":
         try:
-            kq = _goi_openai(nhac, he_thong, c)
+            kq = _goi_openai(nhac, he_thong, c, ep_json=ep_json)
         except Exception as e:
             kq = {"loi": "OPENAI: %s: %s" % (type(e).__name__, str(e)[:150])}
     else:

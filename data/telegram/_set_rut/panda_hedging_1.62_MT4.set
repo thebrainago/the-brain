@@ -1,0 +1,34 @@
+Tradingsetting==============================
+currency1=true
+currency2=true
+AutoLot=============================== 
+Autolots=false
+Riskmode=2
+Fixlot=============================== 
+fixLots=0.02
+fixLots2=0.02
+SmartStopLoss=============================== 
+Stoplevel1=true
+Stoplevel2=true
+TradingGroup====Maximum Orders and Exit TakeProfit===
+OpMax=10
+Exit_TP=0.0
+OpMax2=10
+Exit_TP2=0.0
+Use_Missing_Recovey=true
+CurrencySetting======Fill in correctly if there is suffix=====
+symbol1=USDCAD
+symbol2=USDNOK
+symbol3=AUDUSD
+symbol4=USDNOK
+MaxSpread=============================== 
+MaxSpread1=50.0
+MaxSpread2=500.0
+MaxSpread3=50.0
+MaxSpread4=500.0
+magicnumber=============================== 
+magic=2022
+magic2=2023
+EAComment=============================== 
+Comment1=panda hedging1
+Comment2=panda hedging2

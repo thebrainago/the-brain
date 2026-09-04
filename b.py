@@ -300,6 +300,59 @@ def c_mang(a):
                  "_=D.bat_warp() if m.get('mql5')!='OK' else None"], cwd=LAB)
 
 
+def c_chi_tieu(a):
+    """b chi-tieu [NGAY] - hom nay dat chi tieu nao, thieu cai nao."""
+    n = repr(a[0]) if a else "None"
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import chi_tieu as CT;"
+                 f"CT.in_bao_cao({n})"], cwd=LAB)
+
+
+def c_kham_pha(a):
+    """b kham-pha - chay het cac kenh TU TIM nguon moi (blog + telegram)."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import kham_pha_nguon as KP; KP.mot_luot()"], cwd=LAB)
+
+
+def c_nguon_cho(a):
+    """b nguon-cho - liet ke nguon ung vien dang cho nguoi gat."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import kham_pha_nguon as KP;"
+                 "[print(f\"{str(d.get('nguoi')):>8}  {d['khoa'][:36]:36s} "
+                 "{str(d.get('ten'))[:44]}\") for d in KP.dang_cho_duyet()]"],
+                cwd=LAB)
+
+
+def c_finder(a):
+    """b finder [--khong-san] - san cong cu ngoai + phan loai the de xuat."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from tru import finder as F;"
+                 f"F.mot_luot(san={'--khong-san' not in a})"], cwd=LAB)
+
+
+def c_tinix(a):
+    """b tinix - nap chi muc du an tu repo.tinix.ai vao kho cong cu."""
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import nguon_tinix as T; T.nap_vao_kho()"], cwd=LAB)
+
+
+def c_tele(a):
+    """b tele [KENH] - quet kenh Telegram (web, hoac MTProto neu co khoa)."""
+    if a:
+        return chay([PY, "-c",
+                     "import sys; sys.path.insert(0,'.');"
+                     "from nhan import telegram as TG;"
+                     f"print(TG.quet_tat_ca(kenh=({a[0]!r},)))"], cwd=LAB)
+    return chay([PY, "-c",
+                 "import sys; sys.path.insert(0,'.');"
+                 "from nhan import telegram as TG; print(TG.quet_tat_ca())"], cwd=LAB)
+
+
 LENH = {
     "vao": c_vao, "ket": c_ket,
     "test": lambda a: c_test(a, True), "test1": lambda a: c_test(a, False),
@@ -319,6 +372,10 @@ LENH = {
     "day-chuyen": c_day_chuyen, "dc": c_day_chuyen,
     "san-nguon": c_san, "boc": c_boc,
     "noi-sinh": c_noi_sinh, "pheu": c_pheu, "mang": c_mang,
+    # --- 04/09/2026 ---
+    "finder": c_finder, "tinix": c_tinix, "tele": c_tele,
+    "kham-pha": c_kham_pha, "nguon-cho": c_nguon_cho,
+    "chi-tieu": c_chi_tieu, "ct": c_chi_tieu,
 }
 
 

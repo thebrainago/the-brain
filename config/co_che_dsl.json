@@ -7564,5 +7564,2853 @@
   ],
   "nguon": "https://blog.quantinsti.com/donchian-channel-strategy/",
   "_ty_le_kich_hoat": 0.5464
+ },
+ {
+  "ten": "ema9_cat_len_ema21",
+  "co_che": "Mua khi EMA9 nhanh cắt lên trên EMA21 chậm, báo hiệu xu hướng tăng mới",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "ema9_cat_xuong_ema21",
+  "co_che": "Bán khi EMA9 nhanh cắt xuống dưới EMA21 chậm, báo hiệu xu hướng giảm mới",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "breakout_long_entry",
+  "co_che": "Gia vuot qua dinh 20 bar truoc do kich hoat lenh mua voi stop loss tai day 20 bar.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "ask"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "bid"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "cao_nhat_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 20
+      },
+      {
+       "chi_bao": "tb_cua_cac",
+       "toan_hang": [
+        {
+         "chi_bao": "cao_nhat",
+         "cua": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "n": 20
+        },
+        {
+         "chi_bao": "thap_nhat",
+         "cua": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "n": 20
+        }
+       ]
+      }
+     ]
+    }
+   }
+  ],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "breakout_short_entry",
+  "co_che": "Gia pha vo day 20 bar truoc do kich hoat lenh ban voi stop loss tai dinh 20 bar.",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "bid"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "ask"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "thap_nhat_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 20
+      },
+      {
+       "chi_bao": "tb_cua_cac",
+       "toan_hang": [
+        {
+         "chi_bao": "cao_nhat",
+         "cua": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "n": 20
+        },
+        {
+         "chi_bao": "thap_nhat",
+         "cua": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "n": 20
+        }
+       ]
+      }
+     ]
+    }
+   }
+  ],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "mua_engulfing_rsi_30",
+  "co_che": "Mô hình nến engulfing tăng kết hợp RSI quá bán báo hiệu đảo chiều tăng",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 6
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "ban_engulfing_rsi_70",
+  "co_che": "Mô hình nến engulfing giảm kết hợp RSI quá mua báo hiệu đảo chiều giảm",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 2
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 6
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "mua_rsi_qua_ban_xu_huong_tang",
+  "co_che": "Mua khi RSI dưới 30 (quá bán) và giá trên SMA20 và SMA50 (xu hướng tăng) để bắt đáy theo xu hướng",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "ban_rsi_qua_mua_xu_huong_giam",
+  "co_che": "Bán khi RSI trên 70 (quá mua) và giá dưới SMA20 và SMA50 (xu hướng giảm) để bắt đỉnh theo xu hướng",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "buy_on_ma_trend_up",
+  "co_che": "Buy when TEMA(6) at bar 2 < bar 3 and bar 0 > bar 1, indicating upward trend reversal",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 3
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 0
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "sell_on_ma_trend_down",
+  "co_che": "Sell when TEMA(6) at bar 2 > bar 3 and bar 0 < bar 1, indicating downward trend reversal",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 2
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 3
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 0
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "crossma_buy",
+  "co_che": "Mua khi MA nhanh 14 cắt xuống dưới MA chậm 28 (tín hiệu đảo chiều giảm nhưng EA đặt BUY theo code)",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 28
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 14
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 28
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "crossma_sell",
+  "co_che": "Bán khi MA nhanh 14 cắt lên trên MA chậm 28 (tín hiệu đảo chiều tăng nhưng EA đặt SELL theo code)",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 28
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 14
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 28
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "trend_buy_fast_ma_crosses_above_slow_ma",
+  "co_che": "Fast MA(20) cắt lên trên Slow MA(50) báo hiệu xu hướng tăng, kỳ vọng giá tiếp tục tăng.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 20,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 20
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "trend_sell_fast_ma_crosses_below_slow_ma",
+  "co_che": "Fast MA(20) cắt xuống dưới Slow MA(50) báo hiệu xu hướng giảm, kỳ vọng giá tiếp tục giảm.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 20,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 20
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "mua_khi_gia_thap_nhat_trong_200_bar",
+  "co_che": "Mua khi giá phá vỡ đáy 200 bar, kỳ vọng quay về trung bình",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "ban_khi_gia_cao_nhat_trong_200_bar",
+  "co_che": "Bán khi giá phá vỡ đỉnh 200 bar, kỳ vọng quay về trung bình",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "ma_crossover_long",
+  "co_che": "Gia cat len duong trung binh SMA 14, bao hieu xu huong tang.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "ma_crossover_short",
+  "co_che": "Gia cat xuong duong trung binh SMA 14, bao hieu xu huong giam.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code"
+ },
+ {
+  "ten": "mua_khi_rsi_qua_ban",
+  "co_che": "Thị trường quá bán, kỳ vọng giá hồi phục, mua vào khi RSI dưới 25",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 25.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129020"
+ },
+ {
+  "ten": "rsi_qua_mua_manh",
+  "co_che": "RSI quá mua mạnh trên 75 cho thấy thị trường cực đoan, kỳ vọng điều chỉnh giảm, phù hợp chiến lược mean reversion.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 75.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129063"
+ },
+ {
+  "ten": "rsi_ao_chieu_mua",
+  "co_che": "RSI cắt lên trên 25 từ vùng quá bán cho thấy lực mua mới xuất hiện, timing chính xác hơn, phù hợp DCA.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 14
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 25.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 14
+     },
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 25.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129063"
+ },
+ {
+  "ten": "rsi_ao_chieu_ban",
+  "co_che": "RSI cắt xuống dưới 75 từ vùng quá mua cho thấy lực bán mới xuất hiện, timing chính xác hơn, phù hợp DCA.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 14
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 75.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 14
+     },
+     "n": 2
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 75.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129063"
+ },
+ {
+  "ten": "2nentang_buy",
+  "co_che": "Bot mua khi 2 nến tăng liên tiếp, kỳ vọng xu hướng tăng tiếp.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "than_nen"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129021"
+ },
+ {
+  "ten": "2nengiam_sell",
+  "co_che": "Bot bán khi 2 nến giảm liên tiếp, kỳ vọng xu hướng giảm tiếp.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "than_nen"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129021"
+ },
+ {
+  "ten": "engulfing_buy",
+  "co_che": "Mô hình nến bao trùm tăng giá, báo hiệu đảo chiều mạnh từ giảm sang tăng.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 50.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129064"
+ },
+ {
+  "ten": "engulfing_sell",
+  "co_che": "Mô hình nến bao trùm giảm giá, báo hiệu đảo chiều mạnh từ tăng sang giảm.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 50.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/vutruea/1129064"
+ },
+ {
+  "ten": "mua_xu_huong_tang",
+  "co_che": "Kết hợp 3 EMA (21,55,200) xác nhận xu hướng tăng, giá cắt lên EMA21, lọc phiên London-NY và ngày tránh thứ 6",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 21
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 55
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 55
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 7.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 21.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_tuan"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 1.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_tuan"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 4.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/mqlfree/2626"
+ },
+ {
+  "ten": "ban_xu_huong_giam",
+  "co_che": "Kết hợp 3 EMA xác nhận xu hướng giảm, giá cắt xuống EMA21, lọc phiên và ngày tránh thứ 6",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 21
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 55
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 55
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 7.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 21.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_tuan"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 1.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ngay_trong_tuan"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 4.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://t.me/mqlfree/2626"
+ },
+ {
+  "ten": "triple_ema_long_entry",
+  "co_che": "Khi EMA8 vượt lên trên EMA21 và EMA21 trên EMA50, xu hướng tăng được xác nhận, trader vốn lớn mua vào với kỳ vọng xu hướng tiếp diễn.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 8
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 21
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "file:///data/telegram/bobvolmanchannel/chiến lược trader vốn lớn.pdf"
+ },
+ {
+  "ten": "triple_ema_short_entry",
+  "co_che": "Khi EMA8 nằm dưới EMA21 và EMA21 dưới EMA50, xu hướng giảm được xác nhận, trader vốn lớn bán khống với kỳ vọng xu hướng tiếp diễn.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 8
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 21
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "file:///data/telegram/bobvolmanchannel/chiến lược trader vốn lớn.pdf"
+ },
+ {
+  "ten": "mua_khi_bien_dong_giam_va_pha_vo_high_nen_truoc",
+  "co_che": "Mua khi ATR(50) < ATR(100) va gia dong cua tren high nen truoc",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "atr",
+     "n": 50
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "atr",
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "file:///data/telegram/bobvolmanchannel/hệ thống scalping vàng--Nhật Hoài Trader.pdf"
+ },
+ {
+  "ten": "ban_khi_bien_dong_giam_va_pha_vo_low_nen_truoc",
+  "co_che": "Ban khi ATR(50) < ATR(100) va gia dong cua duoi low nen truoc",
+  "ho": "bien_dong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "atr",
+     "n": 50
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "atr",
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "file:///data/telegram/bobvolmanchannel/hệ thống scalping vàng--Nhật Hoài Trader.pdf"
+ },
+ {
+  "ten": "mua_khi_bien_dong_tang_va_gia_tren_ma100",
+  "co_che": "Mua khi ATR(50) > ATR(100) va gia dong cua tren duong trung binh MA100",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "atr",
+     "n": 50
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "atr",
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "file:///data/telegram/bobvolmanchannel/hệ thống scalping vàng--Nhật Hoài Trader.pdf"
+ },
+ {
+  "ten": "ban_khi_bien_dong_tang_va_gia_duoi_ma100",
+  "co_che": "Ban khi ATR(50) > ATR(100) va gia dong cua duoi duong trung binh MA100",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "atr",
+     "n": 50
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "atr",
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "file:///data/telegram/bobvolmanchannel/hệ thống scalping vàng--Nhật Hoài Trader.pdf"
+ },
+ {
+  "ten": "trend_strength_entry_with_ema_exit",
+  "co_che": "Mua khi gia tren EMA20 va SMA50 va RSI14 tren 50; ban khi gia xuong duoi EMA20",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 20,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 50.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 20
+    }
+   }
+  ],
+  "nguon": "https://github.com/liebs72/T212-Turtle-Trading-Hybrid-App"
+ },
+ {
+  "ten": "trend_strength_entry_with_rsi_exit",
+  "co_che": "Mua khi gia tren EMA20 va SMA50 va RSI14 tren 50; ban khi RSI14 xuong duoi 40",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 20,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 50.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 40.0
+    }
+   }
+  ],
+  "nguon": "https://github.com/liebs72/T212-Turtle-Trading-Hybrid-App"
+ },
+ {
+  "ten": "fast_sma_cuts_above_slow_sma",
+  "co_che": "MA crossover strategy: buy when fast SMA crosses above slow SMA, capturing trend reversal.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 21
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.mql5.com/en/code/37600"
+ },
+ {
+  "ten": "fast_sma_cuts_below_slow_sma",
+  "co_che": "MA crossover strategy: sell when fast SMA crosses below slow SMA, capturing trend reversal.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 21
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.mql5.com/en/code/37600"
+ },
+ {
+  "ten": "rsi_oversold_buy",
+  "co_che": "RSI xuống dưới 30 sau khi trên 30 báo hiệu quá bán, dự kiến giá tăng trở lại.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14,
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 14,
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.mql5.com/en/code/37565"
+ },
+ {
+  "ten": "mua_khi_close_5_close_1",
+  "co_che": "Mua khi giá đóng cửa 5 bar trước cao hơn giá đóng cửa 1 bar trước, cho thấy xu hướng tăng ngắn hạn có thể tiếp diễn.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 100,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 5
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.mql5.com/en/code/37576"
+ },
+ {
+  "ten": "xauusd_m15_bullish_breakout_retest",
+  "co_che": "Gold broke descending trendline and consolidated, then retest entry zone 4477-4482 offers high probability continuation with 1:1.8 risk/reward.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 4477.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 4482.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 4452.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 4524.0
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/chart/GOLD/CVOYDKSZ-XAUUSD-GOLD-BULLISH-BREAKOUT-SETUP-M15/"
+ },
+ {
+  "ten": "mua_khi_ema5_cat_len_ema55",
+  "co_che": "Crossover của EMA nhanh và chậm báo hiệu thay đổi xu hướng, chiến lược mua khi xu hướng tăng mới bắt đầu.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 5
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 55
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2784/"
+ },
+ {
+  "ten": "ban_khi_ema5_cat_xuong_ema55",
+  "co_che": "Crossover của EMA nhanh và chậm báo hiệu thay đổi xu hướng, chiến lược bán khi xu hướng giảm mới bắt đầu.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 5
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 55
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2784/"
+ },
+ {
+  "ten": "rsi_long_khi_rsi_60_va_ong_khi_rsi_75",
+  "co_che": "Mua khi RSI dưới 60 kỳ vọng giá hồi phục, bán khi RSI trên 75 chốt lời quá mua",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 60.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 75.0
+    }
+   }
+  ],
+  "nguon": "https://github.com/WISEPLAT/backtrader_binance"
+ },
+ {
+  "ten": "vao_lenh_long_khi_ema20_duoi_gia",
+  "co_che": "Mua khi giá đóng cửa vượt lên trên đường EMA20, cho thấy xu hướng tăng ngắn hạn.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 20
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateFutureRolloverAlgorithm.py"
+ },
+ {
+  "ten": "vao_lenh_short_khi_ema20_tren_gia",
+  "co_che": "Bán khi giá đóng cửa nằm dưới EMA20, cho thấy xu hướng giảm ngắn hạn.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateFutureRolloverAlgorithm.py"
+ },
+ {
+  "ten": "rsi_cross_up_from_30",
+  "co_che": "RSI vượt lên từ vùng quá bán (30) cho thấy lực mua mạnh, tín hiệu mua",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;454/"
+ },
+ {
+  "ten": "rsi_cross_down_from_70",
+  "co_che": "RSI rơi xuống từ vùng quá mua (70) cho thấy áp lực bán, tín hiệu bán",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;454/"
+ },
+ {
+  "ten": "long_ema14_cat_len_sma56",
+  "co_che": "Chiến lược giao cắt đường trung bình động, mua khi EMA14 vượt lên SMA56 và đang trên EMA28.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 56
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 28
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2627/"
+ },
+ {
+  "ten": "short_ema14_cat_xuong_sma56",
+  "co_che": "Bán khi EMA14 cắt xuống dưới SMA56 và dưới EMA28, theo xu hướng giảm.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 56
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 28
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2627/"
+ },
+ {
+  "ten": "sma4_10_cross_up",
+  "co_che": "Buy when fast SMA(4) crosses above slow SMA(10), trend following.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 4
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 10
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateContinuousFutureAlgorithm.py"
+ },
+ {
+  "ten": "sma4_10_cross_down",
+  "co_che": "Sell when fast SMA crosses below slow SMA, exiting trend position.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 4
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 10
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateContinuousFutureAlgorithm.py"
+ },
+ {
+  "ten": "sma_cross_with_threshold",
+  "co_che": "Mua khi SMA(4) vượt SMA(10) + 0.001, bán khi ngược lại",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 4
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tong_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "sma",
+       "n": 10
+      },
+      {
+       "hang": 0.001
+      }
+     ]
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 10
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tong_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "sma",
+       "n": 4
+      },
+      {
+       "hang": 0.001
+      }
+     ]
+    }
+   }
+  ],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateContinuousFutureWithExtendedMarketAlgorithm.py"
+ },
+ {
+  "ten": "ema_cross_long",
+  "co_che": "EMA 3 vuot len EMA 6 bao hieu xu huong tang, mua vao",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 3
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 6
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateCryptoFutureHourlyAlgorithm.py"
+ },
+ {
+  "ten": "ema_cross_short_gio",
+  "co_che": "EMA 3 xuong duoi EMA 6 va sau 10h sang bao hieu ban ra",
+  "ho": "lich",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 3
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 6
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 10.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateCryptoFutureHourlyAlgorithm.py"
+ },
+ {
+  "ten": "thanh_ly_cuoi_ngay",
+  "co_che": "Dong tat ca vi the vao cuoi ngay de tranh rui ro qua dem",
+  "ho": "lich",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 22.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/QuantConnect/Lean/blob/master/Algorithm.Python/BasicTemplateCryptoFutureHourlyAlgorithm.py"
+ },
+ {
+  "ten": "fast_long",
+  "co_che": "Breakout of 20-day high for entry, 10-day low for exit.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 20
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 10
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/"
+ },
+ {
+  "ten": "fast_short",
+  "co_che": "Breakout below 20-day low for entry, 10-day high for exit.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 20
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 10
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/"
+ },
+ {
+  "ten": "slow_long",
+  "co_che": "Breakout of 55-day high for entry, 20-day low for exit.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 55
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 20
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/"
+ },
+ {
+  "ten": "slow_short",
+  "co_che": "Breakout below 55-day low for entry, 20-day high for exit.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 55
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 20
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/PUB;2008/"
+ },
+ {
+  "ten": "bearish_inside_bar_breakout_failure",
+  "co_che": "Bearish IBBF: Nến trong trước, sau đó phá vỡ lên nhưng đóng dưới đỉnh cũ, báo hiệu đảo chiều giảm.",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2466/"
+ },
+ {
+  "ten": "bullish_inside_bar_breakout_failure",
+  "co_che": "Bullish IBBF: Nến trong trước, sau đó phá vỡ xuống nhưng đóng trên đáy cũ, báo hiệu đảo chiều tăng.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2466/"
+ },
+ {
+  "ten": "mua_khi_rsi_10_close_ma200_va_close_ma5",
+  "co_che": "Mua khi giá điều chỉnh trong xu hướng tăng, RSI quá bán, kỳ vọng hồi phục ngắn hạn.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 5
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 10.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;568/"
+ },
+ {
+  "ten": "ban_khi_rsi_90_close_ma200_va_close_ma5",
+  "co_che": "Bán khi giá hồi phục trong xu hướng giảm, RSI quá mua, kỳ vọng giảm tiếp.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 5
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 90.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;568/"
+ },
+ {
+  "ten": "ma_cross_buy",
+  "co_che": "Đường MA ngắn vượt lên MA dài xác nhận xu hướng tăng, kết hợp giá tăng tạo tín hiệu mua.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 50
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 50
+     },
+     "n": 1
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 100
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;1767/"
+ },
+ {
+  "ten": "ma_cross_sell",
+  "co_che": "Đường MA ngắn cắt xuống dưới MA dài báo hiệu xu hướng giảm, kết hợp giá giảm tạo tín hiệu bán.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 50
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 50
+     },
+     "n": 1
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 100
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;1767/"
+ },
+ {
+  "ten": "mua_breakout_trendline_a",
+  "co_che": "Chờ xác nhận breakout hàng ngày trên trendline kháng cự chính ($1,980-$2,000) để vào lệnh mua, tận dụng đà tăng tiếp theo.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 1980.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/chart/MELI/E2iT9JQl-MercadoLibre-Apex-Decision-Zone-at-Major-Trendline-Resistance/"
+ },
+ {
+  "ten": "mua_khi_z_score_thap",
+  "co_che": "Z-score thấp cho thấy gia lech xa trung binh, ky vong hoi phuc",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 100,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 40
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -2.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 40
+    },
+    "phep": ">",
+    "phai": {
+     "hang": -0.5
+    }
+   }
+  ],
+  "nguon": "https://github.com/alexmueller07/backtest-mean-reversion"
+ },
+ {
+  "ten": "ban_khi_z_score_cao",
+  "co_che": "Z-score cao cho thay gia vuot xa trung binh, ky vong hoi phuc",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 100,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 40
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 2.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 40
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "nguon": "https://github.com/alexmueller07/backtest-mean-reversion"
+ },
+ {
+  "ten": "rsi_mua_qua_ban",
+  "co_che": "Mua khi RSI 6 giam xuong duoi 30, tin hieu qua ban nguong co dien",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 6
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 6
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/billpwchan/futu_algo"
+ },
+ {
+  "ten": "rsi_ban_qua_mua",
+  "co_che": "Ban khi RSI 6 vuot len tren 70, tin hieu qua mua nguong co dien",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 6
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 6
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/billpwchan/futu_algo"
  }
 ]

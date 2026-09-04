@@ -506,26 +506,26 @@
  "US500CASH|H1": {
   "ma": "US500CASH",
   "khung": "H1",
-  "so_bar": 24412,
-  "van_tay": "24412|SAN|95|0.05758|-0.00666|cp3",
-  "mde": 1.649,
+  "so_bar": 23893,
+  "van_tay": "23893|SAN|95|0.05758|-0.00666|cp3",
+  "mde": 1.419,
   "che_do": "giao_dich",
   "chi_phi_do_tin": "SAN",
   "spread_bps": 0.946,
   "loi": null,
-  "do_luc": "2026-08-31 09:31:29"
+  "do_luc": "2026-09-04 20:52:36"
  },
  "US500CASH|H4": {
   "ma": "US500CASH",
   "khung": "H4",
-  "so_bar": 6796,
-  "van_tay": "6796|SAN|95|0.05758|-0.00666|cp3",
-  "mde": 1.318,
+  "so_bar": 6276,
+  "van_tay": "6276|SAN|95|0.05758|-0.00666|cp3",
+  "mde": 1.484,
   "che_do": "giao_dich",
   "chi_phi_do_tin": "SAN",
   "spread_bps": 0.946,
   "loi": null,
-  "do_luc": "2026-08-31 09:31:45"
+  "do_luc": "2026-09-04 20:52:48"
  },
  "US500CASH|D1": {
   "ma": "US500CASH",
@@ -1822,5 +1822,77 @@
   "spread_bps": 1.334,
   "loi": null,
   "do_luc": "2026-08-30 11:13:12"
+ },
+ "US500CASH|M5": {
+  "ma": "US500CASH",
+  "khung": "M5",
+  "so_bar": 40000,
+  "van_tay": "40000|SAN|95|0.05758|-0.00666|cp3",
+  "mde": 10.075,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 0.946,
+  "loi": null,
+  "do_luc": "2026-09-04 20:51:28"
+ },
+ "US500CASH|M15": {
+  "ma": "US500CASH",
+  "khung": "M15",
+  "so_bar": 40000,
+  "van_tay": "40000|SAN|95|0.05758|-0.00666|cp3",
+  "mde": 3.919,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 0.946,
+  "loi": null,
+  "do_luc": "2026-09-04 20:51:46"
+ },
+ "US500CASH|M30": {
+  "ma": "US500CASH",
+  "khung": "M30",
+  "so_bar": 40000,
+  "van_tay": "40000|SAN|95|0.05758|-0.00666|cp3",
+  "mde": 2.454,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 0.946,
+  "loi": null,
+  "do_luc": "2026-09-04 20:52:09"
+ },
+ "AUDCAD|M5": {
+  "ma": "AUDCAD",
+  "khung": "M5",
+  "so_bar": 400411,
+  "van_tay": "400411|SAN|132|-0.00263|0.03853|cp3",
+  "mde": null,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 1.32,
+  "loi": null,
+  "do_luc": "2026-09-04 20:52:58"
+ },
+ "AUDCAD|M15": {
+  "ma": "AUDCAD",
+  "khung": "M15",
+  "so_bar": 133540,
+  "van_tay": "133540|SAN|132|-0.00263|0.03853|cp3",
+  "mde": null,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 1.32,
+  "loi": null,
+  "do_luc": "2026-09-04 20:53:01"
+ },
+ "AUDCAD|M30": {
+  "ma": "AUDCAD",
+  "khung": "M30",
+  "so_bar": 66783,
+  "van_tay": "66783|SAN|132|-0.00263|0.03853|cp3",
+  "mde": 3.937,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 1.32,
+  "loi": null,
+  "do_luc": "2026-09-04 20:53:13"
  }
 }
