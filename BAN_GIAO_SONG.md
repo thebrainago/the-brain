@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-02 18:05:30 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19636, 0 phut), dieu_khien_xa.py (pid 15536, 463 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 18:10:44 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6216, 0 phut), dieu_khien_xa.py (pid 15536, 468 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
 ### 2026-09-02 18:19:08 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 14224, 0 phut), dieu_khien_xa.py (pid 15536, 477 phut)
@@ -404,3 +396,11 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 
 - dang chay: ? (pid 10408, 2 phut), ? (pid 3740, 13 phut), ban_giao_song.py (pid 10216, 0 phut), dieu_khien_xa.py (pid 14676, 430 phut)
 - git: af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc
+### 2026-09-05 14:23:53 — chup trang thai
+
+- dang chay: ? (pid 3740, 17 phut), ban_giao_song.py (pid 14968, 0 phut), dieu_khien_xa.py (pid 14676, 433 phut)
+- git: 72f6ddb cham 42 co che quan tri: trailing thang, quy doi tham so bang ATR
+### 2026-09-05 14:32:33 — chup trang thai
+
+- dang chay: ? (pid 5416, 0 phut), ban_giao_song.py (pid 3780, 0 phut), dieu_khien_xa.py (pid 14676, 442 phut)
+- git: 72f6ddb cham 42 co che quan tri: trailing thang, quy doi tham so bang ATR

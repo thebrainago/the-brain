@@ -34,7 +34,10 @@ import concurrent.futures as _cf
 import json
 import re
 
-MAX_VUNG = 3200          # ky tu gui len cho moi file
+# 3.200 ky tu du cho file vua, nhung file >40k (EquityGuardPanel, Frontend,
+# breakrevertpro...) bi cat mat dieu kien. Do 05/09: 4/33 file khong chuyen doi
+# duoc roi vao dung nhom nay. Nang len 8.000 - van re so voi ca file 50k.
+MAX_VUNG = 8000
 LUONG = 6
 
 

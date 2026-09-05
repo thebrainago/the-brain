@@ -10412,5 +10412,1594 @@
   ],
   "ra": [],
   "nguon": "https://github.com/billpwchan/futu_algo"
+ },
+ {
+  "ten": "khong_dien_dat_duoc",
+  "ho": "khac",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   "khong_dien_dat_duoc"
+  ],
+  "nguon": "HybridMicrostructure_EA.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [\"khong_dien_dat_duoc\"]}"
+ },
+ {
+  "ten": "ORB_Long",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high",
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 2
+    }
+   }
+  ],
+  "nguon": "AAPL_Pro.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\", \"n\": 1}}]}"
+ },
+ {
+  "ten": "ORB_Short",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low",
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 2
+    }
+   }
+  ],
+  "nguon": "AAPL_Pro.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\", \"n\": 1}}]}"
+ },
+ {
+  "ten": "SteepMA_Long",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "SteepMA.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "SteepMA_Short",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "SteepMA.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "long",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": "khong_dien_dat_duoc",
+  "ra": [],
+  "nguon": "Nikkei225_Gap_Continuation_EA.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": \"khong_dien_dat_duoc\"}"
+ },
+ {
+  "ten": "short",
+  "ho": "bien_dong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": "khong_dien_dat_duoc",
+  "ra": [],
+  "nguon": "Nikkei225_Gap_Continuation_EA.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": \"khong_dien_dat_duoc\"}"
+ },
+ {
+  "ten": "BuySignal",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 12
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 26
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "nguon": "Aegis_Quantum_Lite.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "SellSignal",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 12
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 26
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "nguon": "Aegis_Quantum_Lite.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "SuperTrend Long",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [],
+  "nguon": "SuperTrend_AK.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": []}"
+ },
+ {
+  "ten": "SuperTrend Short",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [],
+  "nguon": "SuperTrend_AK.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": []}"
+ },
+ {
+  "ten": "khong_dien_dat_duoc",
+  "ho": "khac",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "nguon": "GDS_Renko_Zones_Demo.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "khong_dien_dat_duoc",
+  "ho": "khac",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "nguon": "GDS_Renko_Zones_Demo.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "First Buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}"
+ },
+ {
+  "ten": "MA Crossover Buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 5
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "lyapunov.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}"
+ },
+ {
+  "ten": "MA Crossover Sell",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 5
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "lyapunov.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}"
+ },
+ {
+  "ten": "khong_dien_dat_duoc",
+  "ho": "khac",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [],
+  "ra": [],
+  "nguon": "Prime_Quantum_AI.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": []}"
+ },
+ {
+  "ten": "Buy Breakout",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "khong_dien_dat_duoc"
+    }
+   }
+  ],
+  "nguon": "Range_BreakOut_EA_1_02.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"khong_dien_dat_duoc\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "Sell Breakout",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "khong_dien_dat_duoc"
+    }
+   }
+  ],
+  "nguon": "Range_BreakOut_EA_1_02.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"khong_dien_dat_duoc\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "Buy Grid",
+  "ho": "khac",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "nguon": "XANDER_Grid_XAUUSD.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "Sell Grid",
+  "ho": "khac",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "nguon": "XANDER_Grid_XAUUSD.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "RSI Sell",
+  "ho": "bien_dong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 1
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "nguon": "Grid_EA_Pro.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 70}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 1}}]}"
+ },
+ {
+  "ten": "RSI Buy",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 1
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "nguon": "Grid_EA_Pro.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 1}}]}"
+ },
+ {
+  "ten": "Breakout Buy",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Hon-Matrix.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "Breakout Sell",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Hon-Matrix.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 20}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "H1H4_Buy_Signal",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 4
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "OHLCMTF_Scalper_MAIN.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}}, {\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 4}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}}]}"
+ },
+ {
+  "ten": "H1H4_Sell_Signal",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 4
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "OHLCMTF_Scalper_MAIN.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}}, {\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 4}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}}]}"
+ },
+ {
+  "ten": "Breakout_Buy",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 48
+    }
+   }
+  ],
+  "nguon": "SilviosEAbest26.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 48}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}"
+ },
+ {
+  "ten": "Breakout_Sell",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 48
+    }
+   }
+  ],
+  "nguon": "SilviosEAbest26.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 48}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}"
+ },
+ {
+  "ten": "Breakout previous high",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "VR_Breakdown_level.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "Breakdown previous low",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "VR_Breakdown_level.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "EMA_RSI_Long",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "EA.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "EMA_RSI_Short",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "EA.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 70}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "khong_dien_dat_duoc",
+  "ho": "",
+  "chieu": 0,
+  "giu": 0,
+  "vao": [],
+  "ra": [],
+  "nguon": "SidewaysMartingale.mq5",
+  "van_tay": "{\"chieu\": 0, \"giu\": 0, \"ra\": [], \"vao\": []}"
+ },
+ {
+  "ten": "TrendMomentum Buy",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "khong_dien_dat_duoc": "rsiOk"
+   },
+   {
+    "khong_dien_dat_duoc": "stochCross (stochK[2]<=stochD[2] && stochK[1]>stochD[1])"
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Trend_Momentum_EA.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"khong_dien_dat_duoc\": \"rsiOk\"}, {\"khong_dien_dat_duoc\": \"stochCross (stochK[2]<=stochD[2] && stochK[1]>stochD[1])\"}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}"
+ },
+ {
+  "ten": "TrendMomentum Sell",
+  "ho": "dong_tien",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "khong_dien_dat_duoc": "rsiOk"
+   },
+   {
+    "khong_dien_dat_duoc": "stochCross (stochK[2]>=stochD[2] && stochK[1]<stochD[1])"
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Trend_Momentum_EA.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"khong_dien_dat_duoc\": \"rsiOk\"}, {\"khong_dien_dat_duoc\": \"stochCross (stochK[2]>=stochD[2] && stochK[1]<stochD[1])\"}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}"
+ },
+ {
+  "ten": "Larry Williams Outside Bar + AI Buy",
+  "ho": "khac",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "high",
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "low",
+     "n": 1
+    }
+   },
+   "khong_dien_dat_duoc"
+  ],
+  "nguon": "larry_williams_onnx.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"high\", \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"low\", \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}, \"khong_dien_dat_duoc\"]}"
+ },
+ {
+  "ten": "Larry Williams Outside Bar + AI Sell",
+  "ho": "khac",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "high",
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "low",
+     "n": 1
+    }
+   },
+   "khong_dien_dat_duoc"
+  ],
+  "nguon": "larry_williams_onnx.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"high\", \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"low\", \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}, \"khong_dien_dat_duoc\"]}"
+ },
+ {
+  "ten": "Mua breakout len",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close",
+     "n": 1
+    },
+    "phep": ">",
+    "phai": "khong_dien_dat_duoc"
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close",
+     "n": 2
+    },
+    "phep": "<",
+    "phai": "khong_dien_dat_duoc"
+   }
+  ],
+  "ra": [],
+  "nguon": "DataTraderH4Breakout.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": \"khong_dien_dat_duoc\", \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"n\": 1}}, {\"phai\": \"khong_dien_dat_duoc\", \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"n\": 2}}]}"
+ },
+ {
+  "ten": "Ban breakout xuong",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close",
+     "n": 1
+    },
+    "phep": "<",
+    "phai": "khong_dien_dat_duoc"
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close",
+     "n": 2
+    },
+    "phep": ">",
+    "phai": "khong_dien_dat_duoc"
+   }
+  ],
+  "ra": [],
+  "nguon": "DataTraderH4Breakout.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": \"khong_dien_dat_duoc\", \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"n\": 1}}, {\"phai\": \"khong_dien_dat_duoc\", \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"n\": 2}}]}"
+ },
+ {
+  "ten": "arbitrage_buy",
+  "ho": "khac",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "khac"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "khac"
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "tardiobot_v1.05.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"khac\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"khac\"}}]}"
+ },
+ {
+  "ten": "arbitrage_sell",
+  "ho": "khac",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "khac"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "khac"
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "tardiobot_v1.05.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"khac\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"khac\"}}]}"
+ },
+ {
+  "ten": "EMA_RSI_Bear",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 12
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 26
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "ema_rsi_risk_ea.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 70}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "MA_RSI_Buy",
+  "ho": "khac",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "nguon": "marsi_ea.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "MA_RSI_Sell",
+  "ho": "khac",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "nguon": "marsi_ea.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 70}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "Mua khi thap nhat",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "meanreversion.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 200}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}"
+ },
+ {
+  "ten": "Ban khi cao nhat",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "meanreversion.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 200}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}"
+ },
+ {
+  "ten": "khong_dien_dat_duoc",
+  "ho": "khong_dien_dat_duoc",
+  "chieu": 0,
+  "giu": 0,
+  "vao": [],
+  "nguon": "mean_reverse.mq5",
+  "van_tay": "{\"chieu\": 0, \"giu\": 0, \"ra\": null, \"vao\": []}"
+ },
+ {
+  "ten": "Mua_MA_RSI",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 10
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 30
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "nguon": "smart_trend_follower.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 10}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}}, {\"phai\": {\"hang\": 30}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "Ban_MA_RSI",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 10
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 30
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "nguon": "smart_trend_follower.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 10}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}}, {\"phai\": {\"hang\": 70}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "Buy entry",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   "khong_dien_dat_duoc"
+  ],
+  "ra": [],
+  "nguon": "profit_labels.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [\"khong_dien_dat_duoc\"]}"
+ },
+ {
+  "ten": "Sell entry",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   "khong_dien_dat_duoc"
+  ],
+  "ra": [],
+  "nguon": "profit_labels.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [\"khong_dien_dat_duoc\"]}"
+ },
+ {
+  "ten": "Buy signal: RSI < 30, price > trendValue, price > higherTimeframeTrendValue",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30
+    }
+   },
+   {
+    "khong_dien_dat_duoc": "price > trendValue"
+   },
+   {
+    "khong_dien_dat_duoc": "price > higherTimeframeTrendValue"
+   }
+  ],
+  "ra": [],
+  "nguon": "adaptivetrader_pro_final_ea.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}, {\"khong_dien_dat_duoc\": \"price > trendValue\"}, {\"khong_dien_dat_duoc\": \"price > higherTimeframeTrendValue\"}]}"
+ },
+ {
+  "ten": "Sell signal: RSI > 70, price < trendValue, price < higherTimeframeTrendValue",
+  "ho": "bien_dong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70
+    }
+   },
+   {
+    "khong_dien_dat_duoc": "price < trendValue"
+   },
+   {
+    "khong_dien_dat_duoc": "price < higherTimeframeTrendValue"
+   }
+  ],
+  "ra": [],
+  "nguon": "adaptivetrader_pro_final_ea.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"hang\": 70}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}, {\"khong_dien_dat_duoc\": \"price < trendValue\"}, {\"khong_dien_dat_duoc\": \"price < higherTimeframeTrendValue\"}]}"
+ },
+ {
+  "ten": "Ban khi prediction < 0.4",
+  "ho": "khac",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [],
+  "ra": [],
+  "khong_dien_dat_duoc": "Khong the bieu dien prediction bang chi bao co san trong schema",
+  "nguon": "neurotest.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": []}"
+ },
+ {
+  "ten": "BullBreakout",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "martingalebreakout.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "BearBreakout",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "martingalebreakout.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+ },
+ {
+  "ten": "Mua RSI < 50",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "nguon": "rsijmartingale1.5.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "Ban RSI > 50",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "nguon": "rsijmartingale1.5.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "ORB Long",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tong_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 5
+      },
+      {
+       "hang": 0.0005
+      }
+     ]
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "SessionORB_EA_g4y.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tong_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 5}, {\"hang\": 0.0005}]}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}"
+ },
+ {
+  "ten": "ORB Short",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tong_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 5
+      },
+      {
+       "hang": -0.0005
+      }
+     ]
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "SessionORB_EA_g4y.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tong_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 5}, {\"hang\": -0.0005}]}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}"
+ },
+ {
+  "ten": "GridBuy",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "bid"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "khong_dien_dat_duoc"
+    }
+   }
+  ],
+  "nguon": "DailyZoneRecovery.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"khong_dien_dat_duoc\"}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"bid\"}}]}"
+ },
+ {
+  "ten": "Mua khi Stochastic cắt lên 50",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "nguon": "Stochastic_Protector.mq5",
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+ },
+ {
+  "ten": "Ban khi Stochastic cắt xuống 50",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "nguon": "Stochastic_Protector.mq5",
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
  }
 ]
