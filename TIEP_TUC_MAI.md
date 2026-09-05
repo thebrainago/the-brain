@@ -1,6 +1,6 @@
-# TIEP TUC NGAY MAI — chot phien 2026-09-05 14:39
+# TIEP TUC NGAY MAI — chot phien 2026-09-05 23:27
 
-boc .mq5 tu 0 len 70%: sua doc_ma viet cho Pine; kho co che 262->326; trailing x4,8 lai; XM_US100CASH PASS
+boc tach theo lan: chi bao 0->87%, chien luoc 37->79%, tai lieu 1->11/100 bai; kho 326->540; nut that chuyen tu boc tach sang MDE + chi phi do duoc
 
 ## Trang thai do duoc luc chot
 > May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
@@ -8,24 +8,31 @@ boc .mq5 tu 0 len 70%: sua doc_ma viet cho Pine; kho co che 262->326; trailing x
 
 | chi so | hom nay | doi |
 |---|---:|---:|
-| file test (lab) | 77 |  |
-| ham test (lab) | 1072 |  |
+| file test (lab) | 78 | +1 |
+| ham test (lab) | 1101 | +29 |
 | file test (ds/) | 82 |  |
 | bang gia .parquet | 269 |  |
-| dong so FDR | 1807 | +2 |
-|   trong do bac bo | 406 | +2 |
+| dong so FDR | 1807 |  |
+|   trong do bac bo | 406 |  |
 | ung vien xep hang | 567 |  |
 | ban doc da thu | 6658 |  |
 | co che trong thu vien | 32 |  |
 | van de con mo | 12 |  |
 |   muc NANG | 3 |  |
-| viec dang CHO | 2 | +2 |
-| file .py o goc lab | 199 | +7 |
+| viec dang CHO | 2 |  |
+| file .py o goc lab | 201 | +2 |
 
 - co DUNG_LAI: **CO (he dang nam im)**
 - viec CHO theo loai: bac_cau_san=1, mt5_tick=1
 - commit hom nay:
 ```
+c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
+6e0a460 lan TAI LIEU va TIEN ICH: kho 507 -> 540, va 13/58 tien ich hop nhu cau
+2466734 lan quan tri: LLM anh xa nut van + CONG DON VI; kho 453 -> 507 co che
+7b22c94 boc tach: chien luoc 37->78%, chi bao 93%, va cuu lan TAI LIEU tu 0
+26088aa boc tach theo LAN: chi bao 0->92%, va 321 co che lan dau cham pheu
+2f78bb3 chot phien 05/09: bao cao day du + ban giao
+2d8a84f 2026-09-05: boc .mq5 tu 0 len 70%: sua doc_ma viet cho Pine; kho co che 262->326; trailing x4,8 lai; XM_US100CASH PASS
 1baba4b cham tran 70%: kho co che 262 -> 326, 64 cai tu file .mq5
 72f6ddb cham 42 co che quan tri: trailing thang, quy doi tham so bang ATR
 af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc
@@ -39,38 +46,11 @@ d324e84 vong quantlab AUDCAD: tiem nang -> 900 cau hinh -> ket qua am co gia tri
 1c44318 dien tay hai muc ban giao 05/09
 c15e863 2026-09-05: 6 muc ban giao: 5 ket qua am + 4 con so 04/09 bi lat nguoc; sua tin_hieu_mql5 + them ap_luat_von
 ```
-- file dang doi luc chot: **3**
+- file dang doi luc chot: **5**
 
 ## Mot doan doc la hieu ca phien
 
-Phien 05/09 lam sau muc ban giao cu roi di tiep ba huong chu du an mo ra. **Bon
-con so cua 04/09 khong dung duoc khi do lai**, va **hai lo hong CAU TRUC lo ra**.
-
-**Lat nguoc 04/09:** Lucky Cat chua tung chay -> chay ra x1,4e28 vi ba loi doc
-risk-json. 6 he "dat 20%/nam" FAIL 6/6 holdout (Sharpe train ~1,0 -> 0,20-0,34).
-Quet 262 co che x 194 ma: 35 "vuot MDE" nhung ca 35 tren ma chi phi KHAI 1 bps
--> buoc chi phi do duoc thi con 0. "Chan DD 40% gan nhu mien phi" la AO do dat
-lai dinh (that: -68,18% chu khong -42%). Ban do chi phi lien san: 0/59 dong qua
-xac minh, FXCE va Exness deu la may chu demo/trial.
-
-**PASS dau tien tren symbol giao dich duoc:** `mean_reversion_z5` tren
-XM_US100CASH. `mt5.initialize` thanh cong khi may ranh (lan hong truoc do 16
-tien trinh quet lam nghen pipe) -> do spread 0,9384 bps tu 5.747 bar H1 XM ->
-`do_tin` KHAI->SAN -> che do `nghien_cuu`->`giao_dich` -> **PASS**: Sharpe 1,158
-· Calmar 1,04 · alpha 10,36%/nam t=2,847 · placebo p=0,01.
-
-**Lo hong 1 - The Brain khong co ngu phap cho QUAN TRI VI THE.** 262 co che TOAN
-la tin hieu vao; kho co 389 file ma nhung 0 cai lot vao. Da mo ho thu hai
-(`nhan/quan_tri.py`) + cai hedge/trailing/breakeven/thoat-theo-gio/cong-bien-dong
-vao `mo_phong_v2`.
-
-**Lo hong 2 - `doc_chien_luoc` viet cho TradingView Pine.** Dong cung
-`if "strategy.entry" not in vb: return 0` lam 389 file `.mq5` ra 0 co che, chay
-sach khong bao loi. Sua xong: **0% -> 70%**, kho co che **262 -> 326**.
-
-**Do duoc, dang gia nhat:** trailing (boc tu nhom file TIEN ICH) nhan **4,8 lan
-lai holdout** va giam sut giam **15 lan**. Va entry co tinh SAI van cho
-92-97%/nam -> voi lop luoi, quan tri vi the QUAN TRONG HON tin hieu vao.
+(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
 
 ## Viec tiep theo, theo thu tu
 

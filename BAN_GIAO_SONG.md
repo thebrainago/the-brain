@@ -4,39 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 21:23:59 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14556, 0 phut), dieu_khien_xa.py (pid 15536, 662 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 21:55:19 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18468, 0 phut), dieu_khien_xa.py (pid 15536, 693 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 23:36:02 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5608, 0 phut), dieu_khien_xa.py (pid 15536, 794 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 23:44:20 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 2024, 0 phut), dieu_khien_xa.py (pid 15536, 802 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 23:47:39 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9960, 0 phut), dieu_khien_xa.py (pid 15536, 805 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-03 11:37:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13920, 0 phut), dieu_khien_xa.py (pid 16352, 61 phut)
-- `dieu_phoi_nen.log`: [Thu 09/03/2026 10:35:56.84] thay DUNG_LAI - khong khoi dong watchdog
-- git: 65c283c US500CASH: 0/190 co che thang mua-giu; theo tieu chi HE THONG chi V6 du so lenh
-### 2026-09-03 11:56:37 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8520, 0 phut), dieu_khien_xa.py (pid 16352, 80 phut)
-- `dieu_phoi_nen.log`: [Thu 09/03/2026 10:35:56.84] thay DUNG_LAI - khong khoi dong watchdog
-- git: 65c283c US500CASH: 0/190 co che thang mua-giu; theo tieu chi HE THONG chi V6 du so lenh
-### 2026-09-03 12:52:19 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 14904, 0 phut), dieu_khien_xa.py (pid 16352, 136 phut)
 - git: 6b9e1ed bao cao 03/09 phan II: va he + quet da khung + hinh dang
 ### 2026-09-03 14:03:19 — chup trang thai
@@ -404,3 +371,36 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - `quet_be_mat_D1_20260905.log`: TONG: {'LOAI': 11283, 'CHUA_DU_LUC': 11237, 'NEN_GOP': 8463, 'SAN_SANG_V4': 13} (305.4s, 6 tien trinh)
 - `quet_full_D1_20260905.log`: TONG: {'LOAI': 15716, 'CHUA_DU_LUC': 12948, 'NEN_GOP': 9369, 'SAN_SANG_V4': 19} (358.4s, 6 tien trinh)
 - git: 26088aa boc tach theo LAN: chi bao 0->92%, va 321 co che lan dau cham pheu
+### 2026-09-05 23:02:35 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12220, 0 phut), dieu_khien_xa.py (pid 16212, 232 phut)
+- `chi_bao_qwen_20260905.log`: them vao kho     : 0
+- `chi_bao_v2.log`: them vao kho     : 44
+- `chien_luoc_qwen_20260905.log`: them vao kho     : 0
+- `chien_luoc_v2.log`: them vao kho     : 10
+- `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
+- `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
+- `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
+- git: c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
+### 2026-09-05 23:11:45 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17932, 0 phut), dieu_khien_xa.py (pid 16212, 241 phut)
+- `chi_bao_qwen_20260905.log`: them vao kho     : 0
+- `chi_bao_v2.log`: them vao kho     : 44
+- `chien_luoc_qwen_20260905.log`: them vao kho     : 0
+- `chien_luoc_v2.log`: them vao kho     : 10
+- `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
+- `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
+- `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
+- git: c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
+### 2026-09-05 23:22:09 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17556, 0 phut), dieu_khien_xa.py (pid 16212, 251 phut)
+- `chi_bao_qwen_20260905.log`: them vao kho     : 0
+- `chi_bao_v2.log`: them vao kho     : 44
+- `chien_luoc_qwen_20260905.log`: them vao kho     : 0
+- `chien_luoc_v2.log`: them vao kho     : 10
+- `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
+- `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
+- `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
+- git: c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
