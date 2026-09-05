@@ -1,0 +1,178 @@
+[
+ {
+  "ten": "GridEA.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "luoi",
+   "chot_ro",
+   "thang_lot"
+  ],
+  "so_input": 47,
+  "nut_van": {
+   "buoc": 500.0,
+   "tang_toi_da": 8.0,
+   "_lot_goc": 0.01,
+   "he_so_1": 1.0,
+   "chot_tien": 50.0,
+   "thoat_theo_gio": 72.0,
+   "vol_min": 0.5,
+   "vol_max": 5.0
+  },
+  "input_goc": {
+   "buoc": "InpGridSpacing",
+   "tang_toi_da": "InpGridLevels",
+   "_lot_goc": "InpBaseLot",
+   "he_so_1": "InpLotMultiplier",
+   "chot_tien": "InpProfitTargetDollars",
+   "thoat_theo_gio": "InpMaxCycleHours",
+   "vol_min": "InpMinVolatilityRatio",
+   "vol_max": "InpMaxVolatilityRatio"
+  },
+  "artifact_id": 4933,
+  "ghep_duoc_voi_moi_he": true,
+  "nut_quan_tri": [
+   "chot_tien",
+   "thoat_theo_gio",
+   "vol_max",
+   "vol_min"
+  ],
+  "nut_luoi": [
+   "buoc",
+   "he_so_1",
+   "tang_toi_da"
+  ]
+ },
+ {
+  "ten": "SidewaysMartingale.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "martingale",
+   "chot_ro",
+   "thang_lot"
+  ],
+  "so_input": 13,
+  "nut_van": {
+   "_lot_goc": 0.08,
+   "chot_tien": 12.0,
+   "he_so_1": 2.0,
+   "buoc": 15.0,
+   "tang_toi_da": 8.0
+  },
+  "input_goc": {
+   "_lot_goc": "InpLotSize",
+   "chot_tien": "TakeProfitTargetUSD",
+   "he_so_1": "LotMultiplier",
+   "buoc": "DistanceMartingalePips",
+   "tang_toi_da": "MaxTradesInSeries"
+  },
+  "artifact_id": 4945,
+  "ghep_duoc_voi_moi_he": true,
+  "nut_quan_tri": [
+   "chot_tien"
+  ],
+  "nut_luoi": [
+   "buoc",
+   "he_so_1",
+   "tang_toi_da"
+  ]
+ },
+ {
+  "ten": "botcilentov1.35.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "martingale",
+   "luoi",
+   "chot_ro"
+  ],
+  "so_input": 46,
+  "nut_van": {
+   "he_so_1": 1.3,
+   "buoc": 20.0,
+   "tp": 100.0,
+   "thoat_theo_gio": 48.0,
+   "dung_lo": 5.0
+  },
+  "input_goc": {
+   "he_so_1": "Martingale_Multiplier",
+   "buoc": "Min_Grid_Step_Pips",
+   "tp": "Take_Profit_In_Pips",
+   "thoat_theo_gio": "Max_Cycle_Hours",
+   "dung_lo": "Daily_Loss_Limit_Percent"
+  },
+  "artifact_id": 5010,
+  "ghep_duoc_voi_moi_he": true,
+  "nut_quan_tri": [
+   "dung_lo",
+   "thoat_theo_gio"
+  ],
+  "nut_luoi": [
+   "buoc",
+   "he_so_1",
+   "tp"
+  ]
+ },
+ {
+  "ten": "cincinv2.24.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "hedge",
+   "chot_ro",
+   "lenh_cho",
+   "thang_lot"
+  ],
+  "so_input": 33,
+  "nut_van": {
+   "dung_lo": 1.0,
+   "cat_hoa_tu": 1.0,
+   "hedge_tu": 5.0,
+   "he_so_1": 2.0
+  },
+  "input_goc": {
+   "dung_lo": "InpLossLimit",
+   "cat_hoa_tu": "InpPositionThreshold",
+   "hedge_tu": "InpHedgePips",
+   "he_so_1": "InpHedgeLotMultiplier"
+  },
+  "artifact_id": 5005,
+  "ghep_duoc_voi_moi_he": true,
+  "nut_quan_tri": [
+   "cat_hoa_tu",
+   "dung_lo",
+   "hedge_tu"
+  ],
+  "nut_luoi": [
+   "he_so_1"
+  ]
+ },
+ {
+  "ten": "Prime_Quantum_AI.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "martingale",
+   "tia_lenh",
+   "chot_ro"
+  ],
+  "so_input": 104,
+  "nut_van": {
+   "dung_lo": 2500.0,
+   "he_so_1": 2.0,
+   "tp": 60.0
+  },
+  "input_goc": {
+   "dung_lo": "InpEquityLossLimit",
+   "he_so_1": "InpMartingaleMultiplier",
+   "tp": "InpFixedTP_Pips"
+  },
+  "artifact_id": 4891,
+  "ghep_duoc_voi_moi_he": true,
+  "nut_quan_tri": [
+   "dung_lo"
+  ],
+  "nut_luoi": [
+   "he_so_1",
+   "tp"
+  ]
+ }
+]

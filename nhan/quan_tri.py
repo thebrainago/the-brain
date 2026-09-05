@@ -172,3 +172,74 @@ def boc_kho(gioi_han: int = 0, in_ra=print) -> list[dict]:
             break
     in_ra("boc duoc %d co che quan tri vi the tu %d artifact ma" % (len(ra), len(r)))
     return ra
+
+
+# ------------------------------------------------------- BUOC LOC CO CHE
+#: Chu du an 05/09: *"Co che can phai co buoc loc de chon ra hoac giu lai. Vdu
+#: co che quan tri vi the hedge kia toi nghi se dung di dung lai va ket hop
+#: duoc voi rat nhieu he thong"*.
+#:
+#: Nen bo loc o day KHONG hoi "co che nay co lai khong" - do la viec cua
+#: `cham_diem`. No hoi: **co che nay co DUNG LAI DUOC khong**. Bon dieu kien:
+#:
+#:   1. CHAY DUOC   - anh xa duoc >= 2 nut van cua `mo_phong_v2`. Mot cai chi
+#:                    boc ra `lot_goc` thi khong mo phong duoc gi.
+#:   2. KHONG TRUNG  - da co cai khac cung bo nut van va cung gia tri thi giu
+#:                    mot. 389 file EA co rat nhieu ban sao doi ten.
+#:   3. CO THAM SO   - it nhat mot nut van la SO (khong phai bool). Co che
+#:                    khong co so thi khong "thay so, dieu chinh he so" duoc.
+#:   4. GHEP DUOC    - co it nhat mot nut thuoc nhom QUAN TRI (hedge/tia/chot/
+#:                    dung), tuc dung duoc CHUNG voi bat ky tin hieu vao nao.
+#:                    Day la tieu chi quan trong nhat: no chon ra dung lop
+#:                    "dung di dung lai" ma chu du an noi.
+NUT_QUAN_TRI = {"hedge_tu", "hedge_ty", "cat_hoa_tu", "chot_tien", "dung_lo",
+                "thoat_theo_gio", "vol_min", "vol_max", "kc_bs"}
+NUT_LUOI = {"buoc", "tp", "he_so_1", "tang_toi_da"}
+
+
+def loc(specs: list[dict], in_ra=print) -> tuple[list[dict], dict]:
+    """Loc cac spec quan tri vi the. Tra (giu_lai, thong_ke_vi_sao_loai)."""
+    bo = {"it_nut_van": 0, "khong_tham_so": 0, "trung": 0, "khong_ghep_duoc": 0}
+    thay = {}
+    giu = []
+    for s in sorted(specs, key=lambda z: -len(z.get("nut_van") or {})):
+        nut = s.get("nut_van") or {}
+        if len(nut) < 2:
+            bo["it_nut_van"] += 1
+            continue
+        if not any(isinstance(v, (int, float)) and not isinstance(v, bool)
+                   for v in nut.values()):
+            bo["khong_tham_so"] += 1
+            continue
+        khoa = tuple(sorted((k, round(float(v), 6))
+                            for k, v in nut.items()
+                            if isinstance(v, (int, float))
+                            and not isinstance(v, bool)))
+        if khoa in thay:
+            bo["trung"] += 1
+            continue
+        if not (set(nut) & NUT_QUAN_TRI):
+            bo["khong_ghep_duoc"] += 1
+            continue
+        thay[khoa] = s["ten"]
+        s["ghep_duoc_voi_moi_he"] = True
+        s["nut_quan_tri"] = sorted(set(nut) & NUT_QUAN_TRI)
+        s["nut_luoi"] = sorted(set(nut) & NUT_LUOI)
+        giu.append(s)
+    in_ra("giu %d/%d co che | loai: %s"
+          % (len(giu), len(specs), ", ".join("%s %d" % kv for kv in bo.items())))
+    return giu, bo
+
+
+def kho_ghep(specs: list[dict]) -> dict:
+    """Gom cac GIA TRI THAT cua tung nut van tu moi EA da boc.
+
+    Day la thu de "thay so": thay vi tu bia dai quet, dung dai ma cac EA THAT
+    dang chay. Tra {nut: [gia tri da thay, da sap xep, bo trung]}.
+    """
+    ra: dict[str, list] = {}
+    for s in specs:
+        for k, v in (s.get("nut_van") or {}).items():
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                ra.setdefault(k, []).append(float(v))
+    return {k: sorted(set(v)) for k, v in sorted(ra.items())}

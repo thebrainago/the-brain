@@ -109,3 +109,47 @@ b pheu             do TUNG CHANG cua pheu nguon (tai lieu -> co che)
   **Dung copy tay vao `backups/`** (da phinh 247 MB) — do la thoi quen truoc git.
 - `b test` = 8 tien trinh, ~2,5 phut / 321 test. `b test1` khi nghi song song sai.
 - `b tim <tu>` tim trong ma nguon, khong loi nhoi ket qua tu data/reports.
+
+## QUY TRINH QUANTLAB CHUAN (chot 05/09/2026 - dung lai, dung tu che)
+
+Chu du an: *"Quy trinh cang ro rang va chuan hoa bao nhieu thi cang nhanh va
+hieu qua bay nhieu"*. Nam buoc, chay NOI TIEP:
+
+```
+1 BOC    nhan/quan_tri.boc_kho()        389 file ma  -> spec co che (1,0 giay)
+2 LOC    nhan/quan_tri.loc()            giu cai DUNG LAI DUOC (ghep moi he)
+3 HO SO  nhan/ho_so_symbol.quet()       194 symbol -> tinh cach+bien do+chi phi (5s)
+4 GHEP   ho_so_symbol.chon_ung_vien()   co gia thuyet -> nen thu tren ma nao
+5 CHAM   nhan/cham_diem.cham()          TIEN + RUI RO, khong Sharpe/p-value
+```
+Goi ca bon buoc dau: `nhan/day_chuyen_quantlab.chay(kieu='hoi_quy')` — **6 giay**.
+
+**KHONG song song hoa buoc 1-3.** Do 05/09: boc tach 389 file = **1,01 giay**,
+ho so 194 symbol = 92 giay 1 luong, con MOT backtest luoi M5 = **8,17 giay**.
+Boc tach ton bang 0,12 lan mot backtest — khong co gi de toi uu. Chay noi tiep
+roi de backtest chiem may.
+
+**CHUA 4 NHAN.** Khi chay 16 tien trinh quet, `mt5.initialize()` het 60 giay va
+bao IPC timeout — dung thu dang chan `PASS`. Mac dinh `luong = so_nhan - 4`.
+
+### Hai HO co che, khong duoc tron
+- `ho 1` **tin hieu VAO** (262) — `nhan/ngu_phap.py`, DSL `vao`/`ra`.
+- `ho 2` **QUAN TRI VI THE** (18) — `nhan/quan_tri.py`, chay bang `mo_phong_v2.py`.
+  Ho 2 **ghep duoc voi moi he**, va do 05/09 no QUAN TRONG HON ho 1 voi lop luoi:
+  entry co tinh SAI van cho 92-97%/nam.
+
+### Bo loc co che (buoc 2) hoi gi
+KHONG hoi "co lai khong" (do la viec `cham_diem`). Hoi **"co dung lai duoc khong"**:
+>=2 nut van · khong trung · co tham so SO · co it nhat mot nut QUAN TRI.
+
+### Bang diem (buoc 5) chi co sau con so
+`lai_pct_nam` tren VON PHAI BO RA · `sut_giam_pct` · `von_can` (+ ban CENT chia 100)
+· `hoi_von_thang` · `so_lenh_nam` · `nguy_co_chay`. Ba muc: **CHAY_DUOC / MONG / BO**.
+Sharpe, Calmar, p-value, FDR **khong o day** — chung thuoc `nhan/cong.py`.
+Mot cau hinh CHAY_DUOC ma chua qua cong that thi goi dung ten: *canh bac co ky
+vong duong do duoc*, chua phai phat hien (`da_qua_cong_that`).
+
+### Chon ung vien phai LOC CHI PHI TRUOC
+Xep thuan theo Hurst thi GBPPLN (**98,5 bps**) va GBPZAR (20,8 bps) len dau —
+nhung cap phi giet moi luoi. `TRAN_SPREAD_BPS = 8`, va `vong_quay_can=` neu he
+quay nhieu.

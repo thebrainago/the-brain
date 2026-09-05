@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-02 12:23:14 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8032, 0 phut), dieu_khien_xa.py (pid 15536, 121 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 12:55:07 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8056, 0 phut), dieu_khien_xa.py (pid 15536, 153 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
 ### 2026-09-02 12:55:51 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 10836, 0 phut), dieu_khien_xa.py (pid 15536, 154 phut)
@@ -404,3 +396,11 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 
 - dang chay: ban_giao_song.py (pid 5276, 0 phut), dieu_khien_xa.py (pid 14676, 310 phut)
 - git: 995e9b1 ho co che THU HAI: quan tri vi the + thuoc do tinh cach tai san
+### 2026-09-05 12:40:37 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11464, 0 phut), dieu_khien_xa.py (pid 14676, 330 phut)
+- git: f90e448 PASS dau tien: do duoc spread XM US100Cash -> chi phi KHAI thanh SAN
+### 2026-09-05 12:44:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10440, 0 phut), dieu_khien_xa.py (pid 14676, 334 phut)
+- git: f90e448 PASS dau tien: do duoc spread XM US100Cash -> chi phi KHAI thanh SAN
