@@ -43,31 +43,49 @@ c15e863 2026-09-05: 6 muc ban giao: 5 ket qua am + 4 con so 04/09 bi lat nguoc; 
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phien 05/09 lam sau muc ban giao cu roi di tiep ba huong chu du an mo ra. **Bon
+con so cua 04/09 khong dung duoc khi do lai**, va **hai lo hong CAU TRUC lo ra**.
+
+**Lat nguoc 04/09:** Lucky Cat chua tung chay -> chay ra x1,4e28 vi ba loi doc
+risk-json. 6 he "dat 20%/nam" FAIL 6/6 holdout (Sharpe train ~1,0 -> 0,20-0,34).
+Quet 262 co che x 194 ma: 35 "vuot MDE" nhung ca 35 tren ma chi phi KHAI 1 bps
+-> buoc chi phi do duoc thi con 0. "Chan DD 40% gan nhu mien phi" la AO do dat
+lai dinh (that: -68,18% chu khong -42%). Ban do chi phi lien san: 0/59 dong qua
+xac minh, FXCE va Exness deu la may chu demo/trial.
+
+**PASS dau tien tren symbol giao dich duoc:** `mean_reversion_z5` tren
+XM_US100CASH. `mt5.initialize` thanh cong khi may ranh (lan hong truoc do 16
+tien trinh quet lam nghen pipe) -> do spread 0,9384 bps tu 5.747 bar H1 XM ->
+`do_tin` KHAI->SAN -> che do `nghien_cuu`->`giao_dich` -> **PASS**: Sharpe 1,158
+· Calmar 1,04 · alpha 10,36%/nam t=2,847 · placebo p=0,01.
+
+**Lo hong 1 - The Brain khong co ngu phap cho QUAN TRI VI THE.** 262 co che TOAN
+la tin hieu vao; kho co 389 file ma nhung 0 cai lot vao. Da mo ho thu hai
+(`nhan/quan_tri.py`) + cai hedge/trailing/breakeven/thoat-theo-gio/cong-bien-dong
+vao `mo_phong_v2`.
+
+**Lo hong 2 - `doc_chien_luoc` viet cho TradingView Pine.** Dong cung
+`if "strategy.entry" not in vb: return 0` lam 389 file `.mq5` ra 0 co che, chay
+sach khong bao loi. Sua xong: **0% -> 70%**, kho co che **262 -> 326**.
+
+**Do duoc, dang gia nhat:** trailing (boc tu nhom file TIEN ICH) nhan **4,8 lan
+lai holdout** va giam sut giam **15 lan**. Va entry co tinh SAI van cho
+92-97%/nam -> voi lop luoi, quan tri vi the QUAN TRONG HON tin hieu vao.
 
 ## Viec tiep theo, theo thu tu
 
-1. **Bac cau san cho 3 ma chi phi KHAI.** Quet rong cho ket qua am ve CHUOI
-   GIAO DICH DUOC, khong phai am ve co che. YH_NASDAQ / TS_BTC / NZDHUF deu la
-   che do `nghien_cuu`. Goi `quantlab.bac_cau_san` de dua co che sang tai san
-   cung LOP co chi phi DO DUOC. Luu y 6 he NASDAQ da FAIL holdout roi -> lay
-   nhung co che con lai trong 35 dong.
-2. **Do chi phi that cho cac ma dang KHAI.** Nut that lo ra o muc 3: 8.959/37.060
-   phep do khong co MDE, va 3 ma duy nhat "vuot" deu la chi phi bia. Dieu quyet
-   dinh do rong cua pheu bay gio la SO MA CO CHI PHI DO DUOC, khong phai so co
-   che. Bat dau bang `chi_phi.do_moi_san()` tren XM (may chu that duy nhat).
-3. **Ho so vang -> `noi_sinh`.** Dua ho so do duoc o muc 5 vao lam rang buoc
-   sinh co che: vang, giu 7-600 phut, MAE/MFE <= 0,98, tai deu <= 0,87,
-   ~1.000 lenh, PF ~1,5. Day la cach dung DUNG cua lop nguon signal — thu hep
-   khong gian tim kiem, khong tu sinh luat.
-4. **Rut tien dinh ky la luat DUY NHAT con dung** sau muc 4. Neu co he nao qua
-   cong ve sau thi ap `bien_don_bay.ap_luat_von(rut_ky=...)`, va bao CA HAI so
-   (DD tai khoan va DD von ca nhan). Dung bao chan DD nhu mot cai loi.
-5. **Ban do chi phi lien san: mo tai khoan THAT nho o FXCE va Exness**, giu mot
-   vi the qua dem, doi chieu SAO KE. Day la viec cua chu du an, khong lam thay
-   duoc. Truoc khi do, KHONG dung bang do de quyet dinh chuyen tien.
-6. Quet rong tren khung khac D1 (H4 giau nhat theo `quet-phai-mo-DA-KHUNG`) —
-   nhung chi sau khi muc 2 xong, neu khong lai ra them 35 duong tinh gia.
+1. **Chay MT5 Strategy Tester cho XM_US100CASH** - cong da tu dat viec `mt5_tick`
+   vao hang doi. Co PASS ma chua kiem tren tick that thi Sharpe 1,158 van la so
+   Python. Luat chu du an: [[mt5-tester-truoc-python-sau]].
+2. **`bac_cau_san`** cho cung gia thuyet (viec thu hai cong tu dat).
+3. **Danh gia 59 co che moi tu `.mq5`** - chung vao kho nhung CHUA qua cong nao.
+   Chay `quantlab.kham_pha` tren chung nhu moi co che khac.
+4. **Bang chi phi phai do lai** - chi co XM la may chu that. Muon dung ban do
+   chi phi lien san thi phai mo tai khoan that o FXCE/Exness roi doi SAO KE.
+5. Vuot 70% thi phai DOI CACH (thu lai da bao hoa 16%->4%, noi vung 0/37):
+   cho DSL biet Renko/Heiken · duong rieng cho 190 file chi bao (chung dinh nghia
+   TIN HIEU nen dung ra thuoc ho 1) · phan loai lai nhom quan ly lenh sang ho 2.
+6. FINDER hut mot LOP NGUON - xem muc rieng cuoi file nay.
 
 ## KHONG DUOC QUEN (bo sung 03/09)
 - `b mang` TRUOC khi san bat cu thu gi.
