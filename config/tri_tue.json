@@ -1,5 +1,5 @@
 {
-  "model_openai": "",
+  "model_openai": "qwen3.7-flash",
   "max_tokens": 8000,
   "tran_moi_ngay": 40,
   "cach_nhau_giay": 600,
@@ -18,7 +18,7 @@
     "deepseek": "dat OPENAI_API_KEY=<khoa deepseek>, OPENAI_BASE_URL=https://api.deepseek.com, dien model_openai=deepseek-chat, doi duong=openai",
     "tran": "tran_moi_ngay=40 va cach_nhau_giay=600 la phanh chi phi - khong sua khi chua tinh lai tien"
   },
-  "cc_switch_provider": "deepseek",
+  "cc_switch_provider": "aibox goi moi",
   "_ghi_chu_01_09": [
     "Bat qua cc-switch: khoa+base_url+model doc TAI CHO tu ~/.cc-switch/cc-switch.db,",
     "khong chep sang day. Doi khoa trong cc-switch la doi luon o day.",
@@ -31,5 +31,28 @@
     "Truoc 04/09 khong dat -> deepseek-chat chay o 1.0, sinh loi dinh dang phai di va.",
     "json_mode=true: bat response_format json_object khi nguoi goi dung hoi_json.",
     "Tat json_mode neu doi sang mot API tuong thich-OpenAI khong nhan response_format."
+  ],
+  "_ghi_chu_05_09_duong_du_phong": [
+    "Duong 'deepseek' (api.ai-box.vn) HET QUOTA 05/09: HTTP 403 insufficient_user_quota, remaining 0.0 d.",
+    "Hau qua im lang: hoi_json tra {'loi':...} chu khong nem ngoai le, nen ca me boc chay 2 GIAY",
+    "va bao '0/20 file ra co che' - doc y het mot ket qua am that. Da sua o boc_ma_llm._mot",
+    "va doc_chi_bao._mot: gap {'loi'} thi danh dau chua_do va KHONG bao suat.",
+    "cc-switch da co san provider thu hai chua ai thu: 'https://apithat.dev auto codex'.",
+    "Do 05/09: /models 1s, /chat/completions 2s, model gpt-5.6-sol. Doi sang do, khong ton them tien.",
+    "Doi lai: sua cc_switch_provider ve 'deepseek' khi goi cu duoc nap lai."
+  ],
+  "_ghi_chu_05_09_model": [
+    "gpt-5.4-mini: 2,9s/44 token ra vs gpt-5.6-sol 6,8s/95 token, cung endpoint apithat. Dung mini cho viec BOC HANG LOAT."
+  ],
+  "_ghi_chu_05_09_chon_model": [
+    "Do that tren 6 file chi bao (khai bao QUA CONG ngu phap / token ra / gia theo ratio ai-box):",
+    "  qwen3.7-flash  5/6 file, 8 khai bao, 4.904 token/file, ratio 0,010 vao / 0,040 ra  -> RE NHAT",
+    "  qwen3.6-flash  6/6 file, 12 khai bao, 6.155 token/file, ratio 0,0235 / 0,047",
+    "  qwen3.8-flash  3/6 file, 5 khai bao,  5.769 token/file, ratio 0,016 / 0,047",
+    "  deepseek-v4-flash 0/6, glm-5.2-fast 0/6, kimi-k3 0/6 (mot so bi cat o tran token)",
+    "Quy ra gia moi KHAI BAO GIU DUOC: qwen3.7-flash ~160 dv, qwen3.6-flash ~165, qwen3.8-flash ~358.",
+    "=> mac dinh qwen3.7-flash. File nao tra rong thi thu lai bang qwen3.6-flash (yield cao hon).",
+    "Khoa cua goi nap moi nam trong cc-switch profile 'AiBox goi moi (qwen3.7-flash)'.",
+    "Profile 'DeepSeek' tro toi api.deepseek.com KHONG dung duoc: khoa nay la khoa ai-box, khong phai khoa DeepSeek chinh chu (401)."
   ]
 }

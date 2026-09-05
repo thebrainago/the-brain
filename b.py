@@ -17,7 +17,10 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b trang-thai      bang dieu khien (van hanh cua dieu phoi)
     b chay / b dung   bat / dung dieu phoi 24/7
     b canary          tu kiem engine (5 canary)
-    b quet            quet_be_mat.py
+    b phan-loai       389 file ma -> 4 lan + BANG SUAT BOC tung lan
+    b chi-bao [N]     boc co che tu file CHI BAO (N = test me; --that = chay het)
+    b loc [--khung K] loc TINH truoc pheu: suy bien / trung hanh vi / spec hong
+    b quet            quet_be_mat.py  (da tu goi `b loc` truoc khi quet)
     b mde             chay_bang_mde.py
     b cham-lai        cham lai MOI gia thuyet duoi the he cong hien tai
     b on-dinh         edge la CAO NGUYEN hay CAI GAI (do vung lan can)
@@ -109,6 +112,22 @@ def c_canary(_):
 
 def c_quet(a):
     return chay([PY, LAB / "quet_be_mat.py", *a])
+
+
+def c_phan_loai(a):
+    """b phan-loai - chia kho ma thanh 4 lan + bang suat boc tung lan."""
+    return chay([PY, LAB / "nhan" / "phan_loai_ma.py",
+                 *(a or ["--suat"])], cwd=LAB)
+
+
+def c_chi_bao(a):
+    """b chi-bao [N|--that] - boc co che tu 190 file CHI BAO."""
+    return chay([PY, LAB / "nhan" / "doc_chi_bao.py", *a], cwd=LAB)
+
+
+def c_loc(a):
+    """b loc [--khung K] - bo loc TINH chay truoc pheu V0-V3."""
+    return chay([PY, LAB / "nhan" / "loc_co_che.py", *a], cwd=LAB)
 
 
 def c_mde(a):
@@ -360,6 +379,8 @@ LENH = {
     "trang-thai": c_trang_thai, "tt": c_trang_thai,
     "chay": c_chay, "dung": c_dung, "canary": c_canary,
     "quet": c_quet, "mde": c_mde, "mde-nap": c_mde_nap,
+    # --- 05/09/2026: khau boc tach + bo loc truoc pheu ---
+    "phan-loai": c_phan_loai, "chi-bao": c_chi_bao, "loc": c_loc,
     "cham-lai": c_cham_lai, "on-dinh": c_on_dinh,
     "hinh-dang": c_hinh_dang,
     "bg": c_bg, "bg-xem": c_bg_xem, "xa": c_xa, "xa-thu": c_xa_thu,

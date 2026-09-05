@@ -912,7 +912,7 @@ def doc_chien_luoc(vb: str, nguon: str = "", tien_to: str = "ma") -> dict:
             # MQL5: chieu nam trong TEN HAM, khong nam trong doi so
             chieu = -1 if m.group("mql") == "Sell" else 1
         elif m.group("ham"):
-            chieu = -1 if re.search(r"ORDER_TYPE_SELL|SELL", doi) else 1
+            chieu = -1 if re.search(r"ORDER_TYPE_SELL|\bSELL\b", doi) else 1
         else:
             chieu = -1 if ("strategy.short" in doi
                            or re.search(r",\s*false", doi)) else 1

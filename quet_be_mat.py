@@ -57,7 +57,13 @@ def _quet_mot_mau(doi_so):
     import sys as _s
     from pathlib import Path as _P
     _s.path.insert(0, str(_P(__file__).resolve().parent))
+    from nhan import ngu_phap as _NP
     from nhan import sang_loc as SL
+
+    # Tien trinh con nhap `mau` LAI TU DAU, nen kho DSL chua duoc nap vao no.
+    # Thieu dong nay thi moi o tra `mau_khong_co_trong_thu_vien` - im lang, va
+    # doc y het "quet xong, khong co gi" ([[nap-vao-mau-truoc-khi-doc-mau]]).
+    _NP.nap_vao_mau()
 
     SL.xoa_bo_dem()
     try:
@@ -90,7 +96,20 @@ def quet(khung: str = "D1", cac_mau=None, cac_ma=None,
     `so_tien_trinh=1` chay tuan tu (de go loi, va de doi chieu voi ban cu).
     """
     t0 = time.time()
-    cac_mau = list(cac_mau or sorted(MAU.MAU))
+
+    # HAI DONG NAY LA CA CUOC QUET. Truoc 05/09/2026 khong co chung, va
+    # `sorted(MAU.MAU)` chi thay **18 template viet tay** - toan bo 321 co che
+    # boc tu kho ma nguon chua tung cham vao pheu mot lan nao. Do la ly do that
+    # cua con so "297/339 template chua bao gio chay", chu khong phai thieu may.
+    from nhan import loc_co_che as LCC
+    from nhan import ngu_phap as NP
+    NP.nap_vao_mau()
+
+    if cac_mau is None:
+        # Bo loc TINH truoc: cat ~27% template suy bien / trung hanh vi / spec
+        # hong ma khong ton mot backtest nao (~1,3 giay cho ca kho).
+        cac_mau = LCC.loc(khung=khung, in_ra=print)["dung_duoc"]
+    cac_mau = list(cac_mau)
     cac_ma = list(cac_ma or PV.kho_du_bar(khung))
     n = so_tien_trinh if so_tien_trinh is not None else SO_TIEN_TRINH
     n = max(1, min(int(n), len(cac_mau)))

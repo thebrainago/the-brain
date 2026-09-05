@@ -516,6 +516,25 @@ def tu_du_lieu(ma: str, df: pd.DataFrame, phi_nam_mua: float | None = None,
             chung = 1.0e-4
             do_tin = "KHAI"
             cb.append("spread KHAI BAO (khong do duoc tu du lieu lan tu san)")
+    # CHUOI NGHIEN CUU KHONG DUOC THUA KE NHAN "DO DUOC" CUA SAN.
+    #
+    # Tu 24/08, `YH_NASDAQ` muon chi phi cua `US100` voi ly do dung: chi so khong
+    # mua truc tiep duoc, kenh giao dich cua no la CFD. Nhung 05/09 khi
+    # `XM_US100CASH` duoc DO spread that va len `do_tin=SAN`, nhan do chay luon
+    # sang `YH_NASDAQ` - va bat bien "chuoi nghien cuu khong bao gio PASS"
+    # (`test_tin_hieu_hoan_hao_van_chi_toi_CO_CO_CHE`) vo.
+    #
+    # Chi phi thi muon duoc; NHAN DO TIN thi khong. Ly do khong phai hinh thuc:
+    # bar `YH_*` la bar PHIEN cua so giao dich, con bar CFD chay ~23 gio. Do
+    # trong chinh du an: bien do D1 cua CFD rong hon bien do phien **1,39 lan**
+    # va IBS tinh tren hai ban chi tuong quan 0,866. Mot ket qua do tren bar
+    # Yahoo KHONG khop duoc bang lenh tren CFD, nen no khong duoc mang nhan cua
+    # mot chuoi giao dich duoc - du con so chi phi co dung den dau.
+    if ma.upper().startswith(("YH_", "ETF_")) and do_tin != "KHAI":
+        cb.append("chuoi NGHIEN CUU (%s): muon duoc con so chi phi cua san "
+                  "nhung do_tin ha ve KHAI - bar phien khong khop duoc bang "
+                  "lenh tren CFD" % ma.upper().split("_")[0])
+        do_tin = "KHAI"
     return MoHinhChiPhi(
         ma=ma.upper(), spread_frac_theo_gio=theo_gio, spread_frac_chung=chung,
         truot_gia_frac=chung * 0.25,     # truot ~1/4 spread, se do lai khi co lenh that

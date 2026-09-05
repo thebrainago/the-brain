@@ -94,6 +94,19 @@ class ClosureKhongDuocNuotThamSo(unittest.TestCase):
                 continue
             except Exception:
                 continue
+            # TIN HIEU GOC RONG -> BAI NAY KHONG DO DUOC GI.
+            #
+            # Doi tham so cua mot mau khong he vao lenh tren chuoi kiem thi ket
+            # qua van la mot chuoi 0 - va bai doc do thanh "diec", tuc thanh
+            # bang chung cua loi closure. Hai viec khac han nhau:
+            #   closure nuot tham so  -> mau CO vao lenh nhung khong doi  (LOI)
+            #   mau khong vao lenh    -> khong do duoc phan ung           (CHUA DO)
+            # Do 05/09 sau khi kho len 447 mau: 67 "diec", nhung ca ba mau lay
+            # ra soi tay deu la chuoi 0 tren `_df()`, khong cai nao la loi
+            # closure. Gop chung lai la dung mot ket qua CHUA DO lam ket qua am
+            # ([[ket-luan-am-phai-phan-biet-chua-do]]).
+            if not np.any(goc):
+                continue
             doi = False
             for ts in OD.lan_can(tam):
                 if ts == tam:

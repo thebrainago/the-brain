@@ -145,9 +145,15 @@ def _mot(d: dict, tom_tat: str) -> dict:
     except Exception as e:
         return {"ten": d["ten"], "co_che": [],
                 "vi_sao": "%s: %s" % (type(e).__name__, str(e)[:60])}
+    # `hoi_json` tra `{"loi": ...}` chu KHONG nem ngoai le khi goi hong. Khong
+    # tach ra thi mot me het quota chay 2 giay va bao "0/20 file ra co che" -
+    # doc y het mot ket qua am that (do 05/09, [[ket-luan-am-phai-phan-biet-chua-do]]).
+    if isinstance(r, dict) and r.get("loi"):
+        return {"ten": d["ten"], "co_che": [], "chua_do": True,
+                "vi_sao": "CHUA DO - %s" % str(r["loi"])[:90]}
     j = (r or {}).get("json") or r or {}
     cc = j.get("co_che") or []
-    return {"ten": d["ten"], "co_che": cc,
+    return {"ten": d["ten"], "co_che": cc, "chua_do": False,
             "vi_sao": "" if cc else "LLM tra ve rong"}
 
 
@@ -156,11 +162,14 @@ def mot_file(d: dict, tom_tat: str, so_lan: int = 2) -> dict:
 
     LLM khong tat dinh: do 05/09, ba file ra co che o me 15 lai tra rong o me 45
     du khong doi mot ky tu nao. Mot lan rong khong phai ket luan.
+
+    Nhung mot lan `chua_do` (quota/mang) THI la ket luan - thu lai chi ton thoi
+    gian de ra cung con so 0.
     """
     cuoi = {"ten": d["ten"], "co_che": [], "vi_sao": "chua chay"}
     for _ in range(max(1, so_lan)):
         cuoi = _mot(d, tom_tat)
-        if cuoi["co_che"]:
+        if cuoi["co_che"] or cuoi.get("chua_do"):
             return cuoi
     return cuoi
 
@@ -174,6 +183,24 @@ def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]
         # Bo qua yen lang thay vi nem loi lam mat ca me (da sap 05/09).
         if not isinstance(c, dict):
             ho.append("khong phai dict: %s" % str(c)[:40])
+            continue
+        # HO `khac` KHONG DUOC VAO KHO.
+        #
+        # `doc_ma.doc_ma` da bo ho nay tu 01/09 voi ly do da viet ra: moi ho
+        # phai khai duoc PHAM VI ("chay o lop tai san nao, hong o lop nao, vi
+        # sao" - `nhan/pham_vi.py`), va mot dieu kien khong goi ten duoc co che
+        # kinh te thi khong co co so de doi hoi phep thu phan chung cho no.
+        # Duong LLM khong ap luat do, nen me 05/09 dua **61 co che ho `khac`**
+        # vao kho va lam do bai `test_moi_ho_trong_thu_vien_mau_deu_da_khai_pham_vi`.
+        # Chan o day - cho ca hai duong boc dung chung ham nay.
+        # Danh sach ho hop le lay THANG tu `pham_vi.PHAM_VI` chu khong viet
+        # cung o day: bai kiem `test_moi_ho_trong_thu_vien_mau_deu_da_khai_pham_vi`
+        # so voi dung bang do, nen hai noi phai la MOT nguon. Me 05/09 con de
+        # LLM tu che ra ho `khong_dien_dat_duoc` - mot ho khong ai khai bao.
+        from nhan import pham_vi as _PV
+        if str(c.get("ho") or "").strip() not in _PV.PHAM_VI:
+            ho.append("%s: ho '%s' chua khai pham vi"
+                      % (str(c.get("ten", "?"))[:26], str(c.get("ho"))[:18]))
             continue
         c.setdefault("nguon", nguon)
         c.setdefault("giu", 1)
@@ -300,29 +327,35 @@ def chay_that(gioi_han: int = 0, so_lan: int = 2, ghi_kho: bool = True,
     in_ra("  file ra co che   : %d/%d (%.0f%%)"
           % (len(co), len(ds), 100 * len(co) / max(len(ds), 1)))
     in_ra("  khai bao qua kiem: %d" % len(giu))
-    them = trung = 0
+    them = 0
     if ghi_kho and giu:
-        try:
-            kho = NP.doc_kho()
-            # CHONG TRUNG BANG VAN TAY DIEU KIEN, khong bang ten. Hai co che
-            # cung `vao`/`ra`/`chieu`/`giu` la MOT co che du dat ten khac -
-            # va do la truong hop pho bien khi rut tu dong tu nhieu nguon noi
-            # ve cung mot y tuong.
-            co = {NP.van_tay_dieu_kien(c) for c in kho}
+        # VAO KHO BANG `them_co_che`, KHONG TU GHI.
+        #
+        # Ban truoc tu goi `doc_kho()` + `luu_kho()` va chi chong trung bang van
+        # tay dieu kien. No bo qua `ngu_phap.them_co_che` - "cua duy nhat cho
+        # kien thuc moi vao he" - nen bo qua luon ba bai kiem chi chay duoc khi
+        # co DU LIEU: chay thu, ty le kich hoat, va nhin truoc.
+        #
+        # Gia phai tra, do 05/09: **20 spec trong kho khong chay duoc**
+        # (`vao: ["khong_dien_dat_duoc"]`, thieu khoa `trai`, toan hang la chuoi,
+        # doi cot `bid`/`ask`). Tat ca deu qua `kiem_khai_bao` - bai kiem TINH -
+        # roi no o buoc sinh tin hieu, tuc chung nam trong kho nhu co che that
+        # va duoc dem vao con so "326 co che".
+        from collections import Counter as _C
+        from nhan import loc_co_che as LCC
+        tu_choi = _C()
+        df_kiem = LCC.df_kiem_chuan()
+        if df_kiem is None:
+            in_ra("  !! khong nap duoc chuoi kiem - KHONG ghi kho (khong ha cong)")
+        else:
             for c in giu:
-                vt = NP.van_tay_dieu_kien(c)
-                if vt in co:
-                    trung += 1
-                    continue
-                co.add(vt)
-                c["van_tay"] = vt
-                kho.append(c)
-                them += 1
-            if them:
-                NP.luu_kho(kho)
-            in_ra("  trung (van tay): %d" % trung)
-        except Exception as e:
-            in_ra("  loi ghi kho: %s: %s" % (type(e).__name__, str(e)[:70]))
+                r = NP.them_co_che(c, df_kiem)
+                if r.get("nhan"):
+                    them += 1
+                else:
+                    tu_choi[str((r.get("ly_do") or ["?"])[0])[:46]] += 1
+            for k, v in tu_choi.most_common(5):
+                in_ra("  cong tu choi %3d: %s" % (v, k))
     in_ra("  them vao kho     : %d" % them)
     return {"so_file": len(ds), "ra_co_che": len(co), "qua_kiem": len(giu),
             "them_kho": them, "ket": ket}

@@ -128,7 +128,7 @@ NUT_CHAY_DUOC = {"buoc", "kc_bs", "tp", "chot_tien", "dung_lo", "he_so_1",
 #: Dau hieu de nhan mot file la CO quan tri vi the. BAN 2 - mo rong theo tu
 #: vung do duoc, va them tieng Viet (kho co ma nguon cua nguoi Viet).
 DAU_HIEU = {
-    "hedge": r"hedge|Hedge|khoa.?lo|lock.?(position|profit)|cover.?position",
+    "hedge": r"\bhedge|Hedge|khoa.?lo|lock.?(position|profit)|cover.?position",
     "recovery": r"[Rr]ecovery|go.?lenh|zone.?recovery|smart.?recover",
     "martingale": r"[Mm]artingale|nhan.?lot|lot.*\*=|LotMultiplier|lot.?factor",
     "luoi": r"[Gg]rid|GridStep|gridDistance|luoi|zone.?(grid|trade)",
@@ -138,7 +138,7 @@ DAU_HIEU = {
     "thang_lot": r"[Ll]ot\s*\*=|LotMultiplier|HesoNhan|lot.?\*\s*[A-Za-z_]",
     "trailing": r"[Tt]railing|TrailStop|trail.?(stop|step)",
     "breakeven": r"[Bb]reak.?[Ee]ven|BreakEven|hoa.?von",
-    "dca": r"DCA|averaging|average.?down|scale.?in|pyramid|add.?position|nhoi",
+    "dca": r"\bDCA\b|averaging|average.?down|scale.?in|pyramid|add.?position|nhoi",
     "chan_von": r"[Dd]rawdown|equity.?(stop|guard|protect)|max.?loss|MaxDD",
 }
 
