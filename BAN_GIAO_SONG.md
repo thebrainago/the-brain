@@ -4,18 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-02 17:51:00 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17664, 0 phut), dieu_khien_xa.py (pid 15536, 449 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 17:52:11 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3724, 0 phut), dieu_khien_xa.py (pid 15536, 450 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 17:59:31 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1976, 0 phut), dieu_khien_xa.py (pid 15536, 457 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
 ### 2026-09-02 18:05:30 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 19636, 0 phut), dieu_khien_xa.py (pid 15536, 463 phut)
@@ -404,3 +392,15 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 
 - dang chay: ? (pid 3692, 23 phut), ban_giao_song.py (pid 12316, 0 phut), dieu_khien_xa.py (pid 14676, 415 phut)
 - git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
+### 2026-09-05 14:07:59 — chup trang thai
+
+- dang chay: ? (pid 3740, 1 phut), ban_giao_song.py (pid 10384, 0 phut), dieu_khien_xa.py (pid 14676, 417 phut)
+- git: af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc
+### 2026-09-05 14:10:56 — chup trang thai
+
+- dang chay: ? (pid 3740, 4 phut), ban_giao_song.py (pid 1724, 0 phut), dieu_khien_xa.py (pid 14676, 420 phut)
+- git: af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc
+### 2026-09-05 14:20:01 — chup trang thai
+
+- dang chay: ? (pid 10408, 2 phut), ? (pid 3740, 13 phut), ban_giao_song.py (pid 10216, 0 phut), dieu_khien_xa.py (pid 14676, 430 phut)
+- git: af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc

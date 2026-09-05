@@ -125,8 +125,10 @@ def chay(nguon: str = "reports/quan_tri_da_loc.json", in_ra=print) -> list[dict]
                                                  or k["hon_ho"] <= 0)]
     in_ra("")
     in_ra("  KHONG lay ve: %d (lam xau it nhat MOT nua)" % len(xau))
+    # numpy float32 khong JSON hoa duoc -> `default=float`. Da sap 05/09 va
+    # lam mat ca bang vi buoc ghi nam SAU buoc in.
     json.dump(ket, open("reports/xet_quan_tri.json", "w", encoding="utf-8"),
-              ensure_ascii=False, indent=1)
+              ensure_ascii=False, indent=1, default=float)
     in_ra("  chi tiet -> reports/xet_quan_tri.json")
     return ket
 

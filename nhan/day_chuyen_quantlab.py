@@ -6,6 +6,25 @@ che. Co che can phai co buoc loc... Boc tach co che xong roi test tren cac symbo
 khac nhau + thay doi tham so / input / cac co che quan li vi the... Quy trinh
 cang ro rang va chuan hoa bao nhieu thi cang nhanh va hieu qua bay nhieu"*.
 
+## HAI DUONG RA, KHONG DUOC TRON
+
+Chu du an 05/09: *"Boc tach ra se gom chien luoc va cac he thong ho tro. Luc nay
+chien luoc thi phai kiem dinh con tien ich thi can xem xem cai nao phu hop de
+lay ve"*.
+
+    CHIEN LUOC  (ho 1, sinh tin hieu vao)
+      -> `SO.dang_ky_gia_thuyet` -> `quantlab.xac_nhan` -> cong that
+      -> kiem dinh DOC LAP duoc vi no tu sinh vi the
+
+    QUAN TRI VI THE (ho 2, khong sinh tin hieu)
+      -> `_thu_quan_tri.py`: DAP len mot he NEN, do truoc/sau
+      -> KHONG kiem dinh doc lap duoc. Gia tri cua no chi hien ra khi ghep.
+      -> giu cai lam TANG LAI TUYET DOI tren CA HAI nua train+holdout
+
+Nham duong la sai nghiem trong: cham mot co che quan tri bang `cong.py` se luon
+truot (no khong co chuoi loi suat rieng), con cham mot chien luoc bang phep
+"dap len he nen" se giau mat viec no co edge hay khong.
+
 ## NAM BUOC, CHAY NOI TIEP
 
     1 BOC     `quan_tri.boc_kho`      389 file ma  -> spec co che
