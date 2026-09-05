@@ -99,3 +99,23 @@ Da thay; ban cua du an con giu duoc nhieu hon (9,5 nam thay vi 9,2).
 - `thu_thap` ghi vao bang `artifact`, KHONG vao `tai_lieu`.
 - Payload artifact LONG mot tang: ma o `payload["payload"]["content"]`.
 - `Accept-Encoding: br` khi khong co brotli -> HTTP 200 nhung `r.text` RAC.
+
+## FINDER hut mot LOP NGUON (chu du an chi ra 05/09)
+
+Chu du an tu dua 4 repo: `raphaelmansuy/caveman`, `addyosmani/agent-skills`,
+`ComposioHQ/awesome-claude-skills`, `tech-leads-club/agent-skills` — kem mot cau:
+*"Toi lai lam thay viec cua finder roi"*.
+
+**Chan doan:** FINDER dang san dung mot lop duy nhat — nguon CO CHE GIAO DICH.
+No khong co muc nao cho lop **cong cu nang NANG LUC cua chinh The Brain**
+(ky nang agent, tien ich, khung lam viec). Nut that da ghi trong bo nho
+[[finder-da-ton-tai-la-san-cong-cu]] van dung: **bang anh xa van de -> nhu cau
+da cu**, va no chi anh xa sang nhu cau nghien cuu thi truong.
+
+Da nap 4 repo vao `kham_pha_nguon` (hang doi len 26). Viec con lai:
+1. Them mot NHOM NHU CAU thu hai vao `tru/finder.py`: `nang_luc_he` — nguon la
+   GitHub topic `claude-skills`, `agent-skills`, `mcp-server`, `llm-tooling`.
+2. Neo nhom do vao "van de con mo" cua chinh he (12 van de dang mo, 3 muc NANG)
+   thay vi vao danh sach tai san.
+3. Do suat: bao nhieu repo/100 cho ra mot cong cu dung duoc — cung cach da do
+   suat co che theo lop nguon ([[suat-co-che-theo-lop-nguon]]).

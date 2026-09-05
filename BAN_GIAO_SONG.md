@@ -4,20 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 10:47:37 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 15620, 0 phut), dieu_khien_xa.py (pid 15536, 25 phut)
-- `dieu_phoi_nen.log`: [Wed 09/02/2026 10:21:48.88] thay DUNG_LAI - khong khoi dong watchdog
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 11:18:33 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13784, 0 phut), dieu_khien_xa.py (pid 15536, 56 phut)
-- `dieu_phoi_nen.log`: [Wed 09/02/2026 10:21:48.88] thay DUNG_LAI - khong khoi dong watchdog
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 12:03:20 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19500, 0 phut), dieu_khien_xa.py (pid 15536, 101 phut)
 - `dieu_phoi_nen.log`: [Wed 09/02/2026 10:21:48.88] thay DUNG_LAI - khong khoi dong watchdog
 - git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
 ### 2026-09-02 12:05:12 — chup trang thai
@@ -404,3 +390,17 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - dang chay: ban_giao_song.py (pid 8360, 0 phut), dieu_khien_xa.py (pid 14676, 90 phut)
 - `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
 - git: 1c44318 dien tay hai muc ban giao 05/09
+### 2026-09-05 08:47:04 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6780, 0 phut), dieu_khien_xa.py (pid 14676, 97 phut)
+- `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
+- git: 2a4bce1 cong ra tien + bo luan nguoc: he dau tien qua ca hai cong
+### 2026-09-05 09:05:04 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15144, 0 phut), dieu_khien_xa.py (pid 14676, 115 phut)
+- `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
+- git: 2a4bce1 cong ra tien + bo luan nguoc: he dau tien qua ca hai cong
+### 2026-09-05 09:17:39 — chup trang thai
+
+- dang chay: ? (pid 11056, 3 phut), ban_giao_song.py (pid 4260, 0 phut), dieu_khien_xa.py (pid 14676, 127 phut)
+- git: 2a4bce1 cong ra tien + bo luan nguoc: he dau tien qua ca hai cong
