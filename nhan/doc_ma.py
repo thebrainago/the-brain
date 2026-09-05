@@ -66,7 +66,54 @@ _HO = {
 }
 
 #: Ten cot gia viet trong ma -> toan hang gia cua ngu phap.
-_GIA = {"close": "close", "open": "open", "high": "high", "low": "low"}
+_GIA = {"close": "close", "open": "open", "high": "high", "low": "low",
+        # --- MQL5 (them 05/09) ---
+        "bid": "close", "ask": "close",
+        "iclose": "close", "iopen": "open", "ihigh": "high", "ilow": "low",
+        "close[0]": "close", "price": "close", "last": "close",
+        "currentprice": "close", "gia": "close"}
+
+#: HAM CHI BAO cua MQL5 -> chi bao DSL. `iMA(sym,tf,n,shift,method,price)`:
+#: doi so 5 la phuong phap (MODE_SMA=0, MODE_EMA=1) - lay `n` o doi so 3.
+_HAM_MQL5 = {
+    "irsi": ("rsi", 2), "iatr": ("atr", 2), "icci": ("cci", 2),
+    "iadx": ("adx", 2), "imomentum": ("dong_luong", 2),
+    "istdev": ("do_lech", 2), "ihighest": ("cao_nhat", 3),
+    "ilowest": ("thap_nhat", 3), "ibands": ("bollinger", 2),
+    "imacd": ("macd", 2), "istochastic": ("stochastic", 2),
+    "iobv": ("obv", None), "ima": ("sma", 2), "iema": ("ema", 2),
+}
+#: `iMA(...)` voi MODE_EMA o doi so phuong phap -> ema thay vi sma.
+_RX_HAM_MQL5 = re.compile(r"^(i[A-Za-z]+)[ \t]*\((.*)\)$", re.S)
+
+
+def _tu_ham_mql5(tu: str) -> dict | None:
+    """`iRSI(_Symbol,PERIOD_H1,14,PRICE_CLOSE)` -> {chi_bao: rsi, n: 14}."""
+    m = _RX_HAM_MQL5.match(tu.strip())
+    if not m:
+        return None
+    ten = m.group(1).lower()
+    if ten not in _HAM_MQL5:
+        return None
+    cb, vt_n = _HAM_MQL5[ten]
+    doi = [d.strip() for d in m.group(2).split(",")]
+    if cb == "sma" and any("MODE_EMA" in d or "MODE_SMMA" in d for d in doi):
+        cb = "ema"
+    if vt_n is None:
+        return {"chi_bao": cb}
+    n = None
+    if vt_n < len(doi):
+        try:
+            n = int(float(doi[vt_n]))
+        except ValueError:
+            n = None
+    if n is None or n <= 0:
+        return None                 # chu ky la BIEN -> khong chot duoc, bo
+    ra = {"chi_bao": cb, "n": n}
+    if cb in ("cao_nhat", "thap_nhat"):
+        ra["cua"] = {"chi_bao": "gia",
+                     "cot": "high" if cb == "cao_nhat" else "low"}
+    return ra
 
 #: Toan tu CUA SO: tinh tren mot toan hang khac, bat buoc co truong `cua`.
 _CAN_CUA = {"cao_nhat", "thap_nhat", "tb", "do_lech", "zscore", "phan_vi",
@@ -472,6 +519,10 @@ def _toan_hang_goc(tu: str, vi_tri: int, bang: list,
     k = tu.lower()
     if k in _GIA:
         return {"chi_bao": "gia", "cot": _GIA[k]}
+    # ham chi bao MQL5 viet thang trong dieu kien
+    hm = _tu_ham_mql5(tu)
+    if hm is not None:
+        return hm
     # bien tro toi mot chi bao: lay lan gan GAN NHAT TRUOC vi tri dung
     gt = None
     for pos, ten, t in bang:
@@ -671,7 +722,51 @@ def _luoi_tu_dieu_kien(dk: dict, khai: dict) -> dict:
 
 #: `strategy.entry(..., strategy.long)` / `... , true)` / `..., when = <dk>`.
 _VAO_LENH = re.compile(
-    r"strategy\.(entry|order)[ \t]*\(([^\n]*)", re.M)
+    r"strategy\.(?P<pine>entry|order)[ \t]*\((?P<doi_p>[^\n]*)"
+    r"|(?P<obj>\w+)\.(?P<mql>Buy|Sell)[ \t]*\((?P<doi_m>[^\n]*)"
+    r"|(?P<ham>OrderSend|PositionOpen)[ \t]*\((?P<doi_o>[^\n]*)", re.M)
+#: Guard chi noi DANG DI NHANH NAO, khong noi vi sao vao lenh. Do 05/09:
+#: `type == ORDER_TYPE_BUY` (7 file) · `type==POSITION_TYPE_BUY` (6) ·
+#: `orderType == ORDER_TYPE_BUY` (4) · `direction>0` (3) · `isBuy` (3).
+_LA_PHAN_NHANH = re.compile(
+    r"ORDER_TYPE_(BUY|SELL)|POSITION_TYPE_(BUY|SELL)|\bis[_]?Buy\b|\bis[_]?Sell\b"
+    r"|\bdirection\s*[<>=]|\bdir\s*[<>=]|\btype\s*==|\bcmd\s*==",
+    re.I)
+
+#: Khai bao ham kieu C: `void Ten(...)` / `bool Ten(...)` / `void Ten(...) {`.
+_KHAI_HAM = re.compile(
+    r"^[ \t]*(?:static[ \t]+)?(?:void|bool|int|double|long|string|datetime)"
+    r"[ \t]+(\w+)[ \t]*\(", re.M)
+
+
+def _ham_bao(vb: str, vi_tri: int) -> str | None:
+    """Ten ham chua vi tri `vi_tri`. Lay khai bao ham GAN NHAT phia tren."""
+    ten = None
+    for m in _KHAI_HAM.finditer(vb):
+        if m.start() > vi_tri:
+            break
+        ten = m.group(1)
+    return ten
+
+
+def _cho_goi(vb: str, ten_ham: str, tru_vi_tri: int) -> list[int]:
+    """Vi tri cac cho GOI `ten_ham(` - tru chinh cho khai bao."""
+    ra = []
+    for m in re.finditer(r"\b" + re.escape(ten_ham) + r"[ \t]*\(", vb):
+        if abs(m.start() - tru_vi_tri) < 4:
+            continue
+        dong = vb[max(0, m.start() - 200):m.start()]
+        if re.search(r"(?:void|bool|int|double|long|string|datetime)[ \t]+$", dong):
+            continue                      # do la khai bao, khong phai loi goi
+        ra.append(m.start())
+    return ra
+
+
+#: `if` la KIEM LOI cua chinh lenh vao, khong phai dieu kien vao.
+_LA_KIEM_LOI = re.compile(
+    r"OrderSend|PositionOpen|\.(Buy|Sell)[ \t]*\(|GetLastError|ResultRetcode"
+    r"|IsStopped|!\s*\w+\.(Buy|Sell)")
+
 #: Gan mot bien BOOL: `ten = <bieu thuc co so sanh hoac ket noi>`.
 _GAN_BOOL = re.compile(rf"^[ \t]*({_TEN})[ \t]*=[ \t]*([^\n]+)$", re.M)
 
@@ -797,7 +892,7 @@ def doc_chien_luoc(vb: str, nguon: str = "", tien_to: str = "ma") -> dict:
     """
     vb = _chuan_hoa(vb)
 
-    if not vb or "strategy.entry" not in vb:
+    if not vb or not _VAO_LENH.search(vb):
         return {"co_che": [], "chua_dien_dat_duoc": [], "so_vao_lenh": 0}
     bang_cb = _bang_ky_hieu(vb)
     bang_bl = _bang_bool(vb)
@@ -812,8 +907,15 @@ def doc_chien_luoc(vb: str, nguon: str = "", tien_to: str = "ma") -> dict:
     ra, ho, n = [], [], 0
     for m in _VAO_LENH.finditer(vb):
         n += 1
-        doi = m.group(2)
-        chieu = -1 if ("strategy.short" in doi or re.search(r",\s*false", doi)) else 1
+        doi = m.group("doi_p") or m.group("doi_m") or m.group("doi_o") or ""
+        if m.group("mql"):
+            # MQL5: chieu nam trong TEN HAM, khong nam trong doi so
+            chieu = -1 if m.group("mql") == "Sell" else 1
+        elif m.group("ham"):
+            chieu = -1 if re.search(r"ORDER_TYPE_SELL|SELL", doi) else 1
+        else:
+            chieu = -1 if ("strategy.short" in doi
+                           or re.search(r",\s*false", doi)) else 1
         guard, vi = None, m.start()
         mw = re.search(r"when\s*=\s*([^,)\n]+)", doi)
         if mw:
@@ -821,13 +923,51 @@ def doc_chien_luoc(vb: str, nguon: str = "", tien_to: str = "ma") -> dict:
         else:
             # lui tim khoi `if (...)` gan nhat phia tren
             i = max(k for k, x in enumerate(dau_dong) if x <= m.start())
-            for j in range(i, max(-1, i - 12), -1):
-                mi = re.match(r"^[ \t]*if[ \t]*\(?([^\n{]+?)\)?[ \t]*$", L[j].rstrip())
+            # Cua so 12 dong la du cho Pine (guard sat lenh) nhung KHONG du cho
+            # MQL5: giua `if(dieu_kien)` va `trade.Buy()` thuong con tinh lot,
+            # SL, TP - do 05/09 thay khoang cach den 30+ dong.
+            for j in range(i, max(-1, i - 40), -1):
+                # MQL5 hay viet `if(dk) {` tren MOT dong; ban cu doi dong
+                # `if` phai ket thuc KHONG co `{` nen truot het file .mq5.
+                mi = re.match(r"^[ \t]*if[ \t]*\(?(.+?)\)?[ \t]*\{?[ \t]*$",
+                              L[j].rstrip())
                 if mi:
-                    guard, vi = mi.group(1).strip(), dau_dong[j]
+                    ung = mi.group(1).strip()
+                    # BO QUA `if` la KIEM LOI cua chinh lenh vao. MQL5 viet
+                    # `if(!trade.Buy(...))` hoac `if(!OrderSend(req,res))` -
+                    # do la xu ly that bai, khong phai dieu kien vao. Lay no
+                    # lam guard thi co che sinh ra la `!OrderSend(request,
+                    # result)`, vo nghia. Do 05/09: day la ly do hang dau
+                    # khien 113 file nhan ra lenh vao ma 0 file ra co che.
+                    if _LA_KIEM_LOI.search(ung):
+                        continue
+                    guard, vi = ung, dau_dong[j]
                     break
+        # LAN QUA RANH GIOI HAM. Guard sat lenh chi noi dang di nhanh nao;
+        # dieu kien chien luoc nam o cho GOI ham bao lenh vao.
+        if guard is None or _LA_PHAN_NHANH.search(guard):
+            ten_ham = _ham_bao(vb, m.start())
+            tim_duoc = None
+            if ten_ham:
+                for vt in _cho_goi(vb, ten_ham, m.start())[:6]:
+                    k = max(kk for kk, xx in enumerate(dau_dong) if xx <= vt)
+                    for j in range(k, max(-1, k - 25), -1):
+                        mi2 = re.match(
+                            r"^[ \t]*if[ \t]*\(?(.+?)\)?[ \t]*\{?[ \t]*$",
+                            L[j].rstrip())
+                        if not mi2:
+                            continue
+                        g2 = mi2.group(1).strip()
+                        if _LA_KIEM_LOI.search(g2) or _LA_PHAN_NHANH.search(g2):
+                            continue
+                        tim_duoc, vi = g2, dau_dong[j]
+                        break
+                    if tim_duoc:
+                        break
+            if tim_duoc:
+                guard = tim_duoc
         if not guard:
-            ho.append("khong tim duoc guard cua strategy.entry")
+            ho.append("khong tim duoc guard cua lenh vao")
             continue
         dk, h = _no_dieu_kien(guard, vi, bang_cb, bang_bl)
         if h or not dk:

@@ -48,47 +48,95 @@ import re
 
 #: Ten input -> nut van cua `mo_phong_v2.mo_phong`. Khoa la regex tren TEN input
 #: (khong phan biet hoa thuong), gia tri la (ten_nut, he_so_quy_doi, ghi_chu).
+#: Ten input -> nut van cua `mo_phong_v2.mo_phong`.
+#:
+#: BAN 2 (05/09, sau khi DO pheu): ban 1 chi co 14 mau va 93% file chet o buoc
+#: "duoi 2 dau hieu". Ban nay viet tu TU VUNG THAT do duoc tren 5.964 input cua
+#: 353 file: trailing(87) · step(70) · multiplier(58) · level(53) · target(45) ·
+#: trail(41) · distance(38) · grid(32) · zone(32) · drawdown(28) · martingale(24) ·
+#: recovery(22) · partial(20) · breakeven(19) · hedge(17) · equity(15).
+#:
+#: `mo_phong_v2` CHUA co nut cho `trailing` va `breakeven` - van boc ra va danh
+#: dau `_chua_mo_phong` de biet dang bo lo gi, khong im lang bo di.
 ANH_XA = {
-    r"grid.?spacing|gridstep|distance.?martingale|step.?pip|khoangcach":
-        ("buoc", 1.0, "khoang cach giua cac tang (pip hoac point - phai kiem)"),
-    r"take.?profit.*(pip)|tp.?pip":
+    # --- khoang cach / buoc luoi ---
+    r"grid.?(spacing|step|dist)|gridsize|step.?(pip|point)|distance.?(pip|point|martingale|grid)"
+    r"|khoangcach|spacing|pip.?step|point.?step|zone.?(size|width|dist)":
+        ("buoc", 1.0, "khoang cach giua cac tang"),
+    r"buy.?sell.?dist|khoangcachbuysell|hedge.?dist|entry.?gap":
+        ("kc_bs", 1.0, "Buy va Sell mo cach nhau"),
+    # --- chot lai ---
+    r"^(inp)?take.?profit|(^|_)tp(_|$)|tp.?(pip|point)|takeprofit.?(pip|point)|profit.?pip":
         ("tp", 1.0, "TP tu gia trung binh, pip"),
-    r"lot.?multiplier|hesonhan|multiplier.*lot|martingale.?mult":
-        ("he_so_1", 1.0, "he so nhan lot moi tang"),
-    r"grid.?levels|max.?trades.*series|maxlenh|max.?orders|tang.?toi.?da":
-        ("tang_toi_da", 1, "tran so tang moi ro"),
-    r"base.?lot|lot.?size|lot.?batdau|inplotsize":
-        ("_lot_goc", 1.0, "lot tang dau"),
-    r"profit.?target.*(dollar|usd)|target.?exit.?all|tpall.?money|takeprofittargetusd":
+    r"profit.?target.*(dollar|usd|money|cash)|target.?exit.?all|tpall|close.?all.?profit"
+    r"|takeprofittargetusd|basket.?(tp|profit)|total.?profit.?target":
         ("chot_tien", 1.0, "chot ca ro khi lai noi >= X tien"),
-    r"loss.?limit|max.?cutloss.?all|stoploss.*money|dunglo":
+    # --- dung lo toan cuc ---
+    r"loss.?limit|max.?cutloss|cutloss.?all|stop.?loss.*(money|usd|dollar|all)"
+    r"|dunglo|basket.?(sl|loss)|max.?(daily.?)?loss|equity.?stop|drawdown.?(stop|limit|max)":
         ("dung_lo", 1.0, "dong sach khi lo noi >= X tien"),
-    r"solenh.?kichhoat|position.?threshold|cat.?hoa":
+    # --- thang lot ---
+    r"lot.?(multiplier|mult|factor|coef)|(martingale|grid|dca).?(mult|factor)"
+    r"|hesonhan|multiplier(?!.*hedge)|lot.?exponent|volume.?mult":
+        ("he_so_1", 1.0, "he so nhan lot moi tang"),
+    r"(base|start|first|initial).?lot|lot.?(size|batdau|start)|inplotsize|fixed.?lot":
+        ("_lot_goc", 1.0, "lot tang dau"),
+    # --- tran ---
+    r"grid.?levels|max.?(trades|orders|positions|lenh|level|grid)|maxlenh"
+    r"|tang.?toi.?da|series.?(max|size)|max.?trades.*series|depth":
+        ("tang_toi_da", 1, "tran so tang moi ro"),
+    r"max.?lot|lot.?(max|toi.?da|limit)|volume.?limit":
+        ("_lot_toi_da", 1.0, "tran tong lot mot ro"),
+    # --- tia lenh ---
+    r"solenh.?kichhoat|position.?threshold|cat.?hoa|partial.?(close|tp|level)"
+    r"|close.?partial|pair.?close|hedge.?pair":
         ("cat_hoa_tu", 1, "chi tia lenh khi ro co >= N lenh"),
-    r"hedge.?pip|hedge.?distance":
-        ("hedge_tu", 1.0, "mo lenh nguoc khi lo >= N pip"),
-    r"hedge.?lot.?multiplier|hedge.?ratio":
+    # --- hedge / khoa lo ---
+    r"hedge.?(pip|point|dist|level|after|trigger|start)|lock.?(pip|after|level)|khoa.?lo":
+        ("hedge_tu", 1.0, "mo lenh nguoc khi ro ket toi N"),
+    r"hedge.?(lot.?)?(mult|ratio|factor|size|coef)|lock.?(ratio|lot)|cover.?ratio":
         ("hedge_ty", 1.0, "ty le lot cua lenh hedge"),
-    r"max.?cycle.?hours|max.?hold.?hours|time.?exit":
-        ("thoat_theo_gio", 1.0, "dong ro sau X gio BAT KE lai lo - CO CHE MOI"),
-    r"min.?volatility.?ratio":
-        ("vol_min", 1.0, "chi mo ro khi bien dong >= nguong - CO CHE MOI"),
-    r"max.?volatility.?ratio":
-        ("vol_max", 1.0, "chi mo ro khi bien dong <= nguong - CO CHE MOI"),
-    r"khoangcachbuysell|buy.?sell.?distance":
-        ("kc_bs", 1.0, "Buy va Sell mo cach nhau bao nhieu"),
+    # --- thoat theo thoi gian ---
+    r"max.?(cycle|hold|trade).?(hour|time|bar|day)|time.?(exit|limit|stop)"
+    r"|close.?after.?(hour|bar|day)|expiry.?(hour|bar)":
+        ("thoat_theo_gio", 1.0, "dong ro sau X gio bat ke lai lo"),
+    # --- cong bien dong ---
+    r"min.?(volatility|vol|atr).?(ratio|filter|thresh)":
+        ("vol_min", 1.0, "chi mo ro khi bien dong >= nguong"),
+    r"max.?(volatility|vol|atr).?(ratio|filter|thresh)":
+        ("vol_max", 1.0, "chi mo ro khi bien dong <= nguong"),
+    # --- CHUA MO PHONG DUOC, van boc de biet dang bo lo gi ---
+    r"trail(ing)?.?(start|after|trigger|activate)|start.?trail":
+        ("_trailing_tu", 1.0, "CHUA MO PHONG: bat trailing sau bao nhieu pip"),
+    r"trail(ing)?.?(step|dist|gap|stop|pip|point)":
+        ("_trailing_buoc", 1.0, "CHUA MO PHONG: buoc trailing"),
+    r"break.?even.?(pip|point|after|trigger|dist)|be.?(trigger|pip)":
+        ("_breakeven_tu", 1.0, "CHUA MO PHONG: dua SL ve hoa von sau N pip"),
+    r"risk.?(percent|pct)|percent.?risk|risk.?per.?trade":
+        ("_risk_pct", 1.0, "CHUA MO PHONG: lot theo % rui ro"),
 }
 
-#: Dau hieu de nhan mot file la CO quan tri vi the (khong phai chi tin hieu).
+#: Nut MA `mo_phong_v2` chay duoc. Nut bat dau bang `_` la boc duoc nhung chua
+#: mo phong - dem rieng de biet do lon cua phan dang bo lo.
+NUT_CHAY_DUOC = {"buoc", "kc_bs", "tp", "chot_tien", "dung_lo", "he_so_1",
+                 "tang_toi_da", "cat_hoa_tu", "hedge_tu", "hedge_ty",
+                 "thoat_theo_gio", "vol_min", "vol_max"}
+
+#: Dau hieu de nhan mot file la CO quan tri vi the. BAN 2 - mo rong theo tu
+#: vung do duoc, va them tieng Viet (kho co ma nguon cua nguoi Viet).
 DAU_HIEU = {
-    "hedge": r"\bhedge|Hedge",
-    "recovery": r"[Rr]ecovery",
-    "martingale": r"[Mm]artingale",
-    "luoi": r"[Gg]rid[SsPpLl]|GridStep|gridDistance",
-    "tia_lenh": r"PositionClosePartial|[Pp]artialClose|CatHoa",
-    "chot_ro": r"CloseAll|closeAll|Target_Exit|tpAll",
+    "hedge": r"hedge|Hedge|khoa.?lo|lock.?(position|profit)|cover.?position",
+    "recovery": r"[Rr]ecovery|go.?lenh|zone.?recovery|smart.?recover",
+    "martingale": r"[Mm]artingale|nhan.?lot|lot.*\*=|LotMultiplier|lot.?factor",
+    "luoi": r"[Gg]rid|GridStep|gridDistance|luoi|zone.?(grid|trade)",
+    "tia_lenh": r"PositionClosePartial|[Pp]artial[Cc]lose|CatHoa|cat.?hoa|partial.?(tp|exit)",
+    "chot_ro": r"CloseAll|closeAll|Target_Exit|tpAll|basket.?(close|profit)|total.?profit",
     "lenh_cho": r"ORDER_TYPE_(BUY|SELL)_(STOP|LIMIT)",
-    "thang_lot": r"[Ll]ot\s*\*=|LotMultiplier|HesoNhan",
+    "thang_lot": r"[Ll]ot\s*\*=|LotMultiplier|HesoNhan|lot.?\*\s*[A-Za-z_]",
+    "trailing": r"[Tt]railing|TrailStop|trail.?(stop|step)",
+    "breakeven": r"[Bb]reak.?[Ee]ven|BreakEven|hoa.?von",
+    "dca": r"DCA|averaging|average.?down|scale.?in|pyramid|add.?position|nhoi",
+    "chan_von": r"[Dd]rawdown|equity.?(stop|guard|protect)|max.?loss|MaxDD",
 }
 
 _RX_INPUT = re.compile(

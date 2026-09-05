@@ -4,18 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-02 12:55:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10836, 0 phut), dieu_khien_xa.py (pid 15536, 154 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 15:25:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16796, 0 phut), dieu_khien_xa.py (pid 15536, 303 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 15:39:53 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14136, 0 phut), dieu_khien_xa.py (pid 15536, 318 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
 ### 2026-09-02 16:18:51 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 1628, 0 phut), dieu_khien_xa.py (pid 15536, 357 phut)
@@ -404,3 +392,15 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 
 - dang chay: ban_giao_song.py (pid 10440, 0 phut), dieu_khien_xa.py (pid 14676, 334 phut)
 - git: f90e448 PASS dau tien: do duoc spread XM US100Cash -> chi phi KHAI thanh SAN
+### 2026-09-05 12:59:59 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14888, 0 phut), dieu_khien_xa.py (pid 14676, 349 phut)
+- git: 11c9883 chuan hoa quy trinh QuantLab: 5 buoc, 4 module dung lai duoc
+### 2026-09-05 13:14:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5032, 0 phut), dieu_khien_xa.py (pid 14676, 364 phut)
+- git: 11c9883 chuan hoa quy trinh QuantLab: 5 buoc, 4 module dung lai duoc
+### 2026-09-05 13:29:42 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6632, 0 phut), dieu_khien_xa.py (pid 14676, 379 phut)
+- git: 11c9883 chuan hoa quy trinh QuantLab: 5 buoc, 4 module dung lai duoc
