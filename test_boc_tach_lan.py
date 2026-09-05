@@ -375,5 +375,44 @@ input int    InpMagic                = 12345;
         self.assertIn("_chua_do", r)
 
 
+class XetTienIchTheoNhuCauDAKHAI(unittest.TestCase):
+    """`tien_ich_xet` — LLM chi duoc GAN vao nhu cau da khai, khong nghi ra moi.
+
+    Cung ly do voi `san_cong_cu`: *"tim truoc roi moi nghi ra ly do can no thi
+    lan nao cung 'tim thay thu huu ich', va do la mot dang tu lua minh"*.
+    """
+
+    def _chay(self, tra):
+        from nhan import tien_ich_xet as TI
+        from nhan import tri_tue as TT
+        cu = TT.hoi_json
+        TT.hoi_json = lambda *a, **k: {"json": tra}
+        try:
+            return TI.xet_mot("void OnTick(){}", "thu.mq5")
+        finally:
+            TT.hoi_json = cu
+
+    def test_nhu_cau_tu_bia_bi_bo(self):
+        r = self._chay({"nhu_cau": "toi_uu_hoa_vu_tru", "muc_do": "cao"})
+        self.assertIsNone(r["nhu_cau"])
+
+    def test_nhu_cau_da_khai_thi_giu(self):
+        r = self._chay({"nhu_cau": "do_chi_phi_that", "muc_do": "cao",
+                        "lam_gi": "ghi spread that ra file"})
+        self.assertEqual(r["nhu_cau"], "do_chi_phi_that")
+
+    def test_chua_do_khong_thanh_khong_hop(self):
+        from nhan import tien_ich_xet as TI
+        from nhan import tri_tue as TT
+        cu = TT.hoi_json
+        TT.hoi_json = lambda *a, **k: {"loi": "HTTP 403: quota"}
+        try:
+            r = TI.xet_mot("void OnTick(){}", "thu.mq5")
+        finally:
+            TT.hoi_json = cu
+        self.assertTrue(r["chua_do"])
+        self.assertNotIn("nhu_cau", r)
+
+
 if __name__ == "__main__":
     unittest.main()

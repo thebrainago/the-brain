@@ -1,0 +1,408 @@
+[
+ {
+  "ten": "ResetHourClock.mq5",
+  "nhu_cau": "quan_ly_phien_gio",
+  "muc_do": "cao",
+  "lam_gi": "Tinh gio chuyen phien giao dich theo gio may chu broker, tu dong chuyen doi mui gio va canh bao khi thay doi gio mua he.",
+  "lay_ve_the_nao": "Chay tren MT5 de ve bang hien thi gio may chu, dem ngung den moc chuyen phien va cap nhat tu dong theo quy tac DST cua tung khu vuc."
+ },
+ {
+  "ten": "gonisshi-mt5-sync.mq5",
+  "nhu_cau": null,
+  "muc_do": "null",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Quantora_Spread_Monitor_MT5.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "RoundTripCostReconcilerMT5.mq5",
+  "nhu_cau": "xuat_du_lieu",
+  "muc_do": "cao",
+  "lam_gi": "xuat du lieu giao dich va vi tri sang file csv de doi chieu chi phi",
+  "lay_ve_the_nao": "chay tren MT5 de sinh file csv deal va position"
+ },
+ {
+  "ten": "TradeTransactionTraceLoggerMT5.mq5",
+  "nhu_cau": "xuat_du_lieu",
+  "muc_do": "vua",
+  "lam_gi": "ghi du lieu su kien giao dich va ket qua lenh ra file csv de kiem tra",
+  "lay_ve_the_nao": "chay tren MT5 de sinh file CSV theo cau hinh"
+ },
+ {
+  "ten": "TrendExecutionPlanner.mq5",
+  "nhu_cau": "tinh_khoi_luong",
+  "muc_do": "cao",
+  "lam_gi": "Tinh kich thuoc lot theo ty le rui ro tren tai khoan, chia thua thua co the xay ra tren mot lot cho don vi tai khoan va dieu chinh theo buoc giao dich toi thieu toi da cua broker.",
+  "lay_ve_the_nao": "Doc ham BuildPlan trong ma nguon de tinh toan gia tri volume dua tren loss_per_lot va dieu chinh theo quyet dinh cua broker."
+ },
+ {
+  "ten": "RiskPositionSizeCalculator.mq5",
+  "nhu_cau": "tinh_khoi_luong",
+  "muc_do": "cao",
+  "lam_gi": "Tinh kich thuoc lot theo ty le rui ro tren tai khoan va khoang cach den muc stop loss.",
+  "lay_ve_the_nao": "Doc doan tinh toan trong ham Refresh() de tim cong thuc chuyen doi don vi tai khoan va quy mo hop dong."
+ },
+ {
+  "ten": "Quantora_Margin_Calculator_MT5_v1_00.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "tinh margin yeu cau, free margin sau lenh va muc do an toan margin theo phan tram",
+  "lay_ve_the_nao": "chay tren MT5 de hien thi ban tin margin len man hinh"
+ },
+ {
+  "ten": "Quantora_Risk_Calculator_MT5_v1_00.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Quantora_Position_Size_Calculator_MT5.mq5",
+  "nhu_cau": "tinh_khoi_luong",
+  "muc_do": "cao",
+  "lam_gi": "tinh kich thuoc lenh theo phan tram rui ro khoang cach stop loss va dieu kien hop dong",
+  "lay_ve_the_nao": "doc cong thuc tinh lot trong ham CalculatePositionSize va NormalizeVolume"
+ },
+ {
+  "ten": "T5Copier_Master.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "RealCostSpreadP95LoggerMT5.mq5",
+  "nhu_cau": "do_chi_phi_that",
+  "muc_do": "vua",
+  "lam_gi": "ghi gia tri spread thuc te theo khoang thoi gian co dinh va xuat ra file csv de phan tich chi phi",
+  "lay_ve_the_nao": "chay tren mt5 de sinh file csv spread, sau do doc file nay de xu ly tiep"
+ },
+ {
+  "ten": "PropFirmGuardEA.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Replay_Tool.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "DoomEA.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "ExMachina_TelegramBridge.mq5",
+  "nhu_cau": "giam_sat_van_hanh",
+  "muc_do": "vua",
+  "lam_gi": "Theo doi tai khoan theo thoi gian thuc, theo doi suot giam qua muc cao thap nhat cua equity, dem so luong lenh va gui thong bao canh bao ra ngoai bang tin nhan telegram.",
+  "lay_ve_the_nao": "Doc phan xu ly OnTick de cap nhat gia tri equity cao thap, doc cac ham CheckDeals va CheckPositionChanges de theo doi so lenh, va doc ham SendTelegram de xuat thong bao ra ngoai."
+ },
+ {
+  "ten": "RiskCalc.mq5",
+  "nhu_cau": "tinh_khoi_luong",
+  "muc_do": "cao",
+  "lam_gi": "tinh kich thuoc lot theo ty le rui ro tren so du tai khoan va khoang cach stop loss",
+  "lay_ve_the_nao": "doc cong thuc tinh lot trong ham UpdateCalculations roi viet lai bang python"
+ },
+ {
+  "ten": "TelegramTradeNotify.mq5",
+  "nhu_cau": null,
+  "muc_do": "null",
+  "lam_gi": "gui thong bao khi co deal mua ban duoc cap nhat toi telegram",
+  "lay_ve_the_nao": "khong co, can viet them code de xu ly cac yeu cau nay"
+ },
+ {
+  "ten": "Indicator_Loader.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Risk_Calculator.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "spread_lister_current-min-max.mq5",
+  "nhu_cau": "do_chi_phi_that",
+  "muc_do": "vua",
+  "lam_gi": "ghi gia tri spread hien tai, nho nhat va lon nhat theo ngay cho tung co",
+  "lay_ve_the_nao": "doc lai code roi viet lai thanh script xuat file csv de doi chieu voi python"
+ },
+ {
+  "ten": "bias_ea.mq5",
+  "nhu_cau": null,
+  "muc_do": "thap",
+  "lam_gi": "ma nguon chi la khung co ban khong co logic thuc thi chuc nang nao",
+  "lay_ve_the_nao": "doc ma nguon thay cac ham OnTick OnInit Deinit deu trong"
+ },
+ {
+  "ten": "riskmanager_with_infopanel_and_support.mq5",
+  "nhu_cau": "tinh_khoi_luong",
+  "muc_do": "cao",
+  "lam_gi": "Tinh kich thuoc lenh (lot) dua tren phan tram nguyen vong, so du tai khoan va khoang cach den diem cat loi, tu dong chuyen doi gia tri tick va don vi hop dong.",
+  "lay_ve_the_nao": "Doc ham CalculateLotSize tinh toan riskMoney chia cho riskPerLot duoc suy ra tu tick_size, tick_value va khoang cach SL."
+ },
+ {
+  "ten": "riskmanager_with_infopanel_and_support.mq5",
+  "nhu_cau": "tinh_khoi_luong",
+  "muc_do": "cao",
+  "lam_gi": "tinh toan kich thuoc lot theo ty le rui ro tren so von va khoang cach den stop loss tu dong chuan doi don vi theo ky hieu",
+  "lay_ve_the_nao": "doc ham CalculateLotSize trong ma nguon de xem cach lay SYMBOL_TRADE_TICK_VALUE va SYMBOL_TRADE_TICK_SIZE tinh toan gia tri pip tren mot lot"
+ },
+ {
+  "ten": "new_bar_formation.mq5",
+  "nhu_cau": null,
+  "muc_do": "thấp",
+  "lam_gi": "khong ghi hay tinh toan du lieu nao chi phat hien thanh moi hien len tren khung gio hien tai",
+  "lay_ve_the_nao": "doc lai code roi viet lai chuong trinh con de thuc thi muc tieu"
+ },
+ {
+  "ten": "novabarra.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "withdrawaltracker.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "magic-number-wise-ea-profit-loss-live-dashboard_v1.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "Hien thi ban dieu khien truc tuyen tren bieu do MT5, tong hop va hien thi so luong lenh dong, loi nhuan tinh (bao gom phi hoa hong va swap) va ky hieu tai san cho tung ma magic number cua EA.",
+  "lay_ve_the_nao": "Doc lich su giao dich va vi tri mo bang API MQL5, tinh tong DEAL_PROFIT + DEAL_SWAP + DEAL_COMMISSION cho moi magic number, sau do ve cac nhan OBJ_LABEL len bieu do cap nhat moi 5 giay."
+ },
+ {
+  "ten": "pull_all_ticks.mq5",
+  "nhu_cau": "xuat_du_lieu",
+  "muc_do": "vua",
+  "lam_gi": "tai lieu toan bo tick ve file theo tung symbol de chuan bi cho python",
+  "lay_ve_the_nao": "chay tren MT5 de tu dong download tick ve file va cap nhat file status.txt"
+ },
+ {
+  "ten": "symbol_swap.mq5",
+  "nhu_cau": null,
+  "muc_do": "cao",
+  "lam_gi": "Khong ghi phi giao dich tinh lot xuat file quan ly phien hay giam sat tai khoan chi doi symbol tren chart",
+  "lay_ve_the_nao": "Doc ma nguon de thay no chi la script UI chuyen doi symbol khong lien quan den yeu cau du an"
+ },
+ {
+  "ten": "supermacbot_by_the_guardian_forex_tvt.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "informative_dashboard_ea.mq5",
+  "nhu_cau": null,
+  "muc_do": "thap",
+  "lam_gi": "hien thi thong tin co ban tren giao dien benh canh MT5 khong co chuc nang giao dich hay tinh toan",
+  "lay_ve_the_nao": "chay tren MT5 de hien thi man hoi thong tin co ban hoac doc file .mqh de mo rong"
+ },
+ {
+  "ten": "market_watch_panel.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "count_and_pass.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "new_bar_check.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "phat hien thanh bar moi bang cach theo doi tang tong so bar tren khung hien hanh",
+  "lay_ve_the_nao": "doc dieu kien so sanh iBars trong ham OnTick de cap nhat bien BarsTotal_OnInt"
+ },
+ {
+  "ten": "new_candel_-_bar_detector.mq5",
+  "nhu_cau": null,
+  "muc_do": "thap",
+  "lam_gi": "phat hien thanh moi tren khung M1 bang cach so sanh thoi gian dong ca",
+  "lay_ve_the_nao": "doc ma nguon MQL5 de xac nhan co che dem thoi gian va dat canh bao"
+ },
+ {
+  "ten": "symbolsyncea.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "connect_disconnect_sound_alert.mq5",
+  "nhu_cau": null,
+  "muc_do": "thấp",
+  "lam_gi": "Theo doi trang thai ket noi terminal va ghi nhan thoi gian ket noi ngat ket noi",
+  "lay_ve_the_nao": "Doc vong lap while kiem tra terminalInfo.IsConnected() moi giay de phat hien thay doi trang thai mang"
+ },
+ {
+  "ten": "BandOsMACustom.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "LifeCycle.mq5",
+  "nhu_cau": null,
+  "muc_do": "thấp",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "LibHoughTransform.mq5",
+  "nhu_cau": null,
+  "muc_do": "thap",
+  "lam_gi": "Tinh toan tham so a va b cua toi da 8 duong thang y=ax+b tu mau nhap vao",
+  "lay_ve_the_nao": "Doc code va goi ham createHoughTransform de xu ly Hough transform cho du lieu ma tran"
+ },
+ {
+  "ten": "LibHoughTransform.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "thuc hien bien doi hough tuyen tinh de phat hien cac duong thang tren anh so",
+  "lay_ve_the_nao": "doc code mql5 roi chuyen thanh thu vien python hoac cpp de xu ly anh"
+ },
+ {
+  "ten": "LibHoughTransform.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "LibHoughTransform.mq5",
+  "nhu_cau": null,
+  "muc_do": "thấp",
+  "lam_gi": "Tinh toan va loc cac duong thang thang trong ma tran toa do anh, tra ve he so a va b cua phuong trinh y=ax+b",
+  "lay_ve_the_nao": "Doc cong thuc bien doi Hough roi viet lai bang MQL5 de xu ly ma tran 2 chieu va tim cuc tri"
+ },
+ {
+  "ten": "testmnistonnx.mq5",
+  "nhu_cau": null,
+  "muc_do": "thap",
+  "lam_gi": "phan mem minh hoa trien khai mo huan onnx de nhan dang chu so tay ve tren canvas ma khong thuc hien chuc nang giao dich hay tinh toan theo yeu cau",
+  "lay_ve_the_nao": "doc ma nguon thay chi co xu ly su kien chuot ve canvas, chuyen doi pixel thanh ma tran 28x28, goi ham onnxrun de tra ve ket qua, khong co chenh loi phi hay xuat file"
+ },
+ {
+  "ten": "fillingtype.mq5",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Accelerator Oscillator/Accelerator Oscillator/Accelerator Oscillator.cs",
+  "nhu_cau": null,
+  "muc_do": "cao",
+  "lam_gi": "Tinh gia tri dao dong gia toc bang cach lay ket qua Awesome Oscillator tru di trung binh dong don gian 5 ky, sau do ve cot truyen hinh co mau xanh khi tang va mau do khi giam.",
+  "lay_ve_the_nao": "Doc lai cong thuc Result index = _awesomeOscillator Result index - _simpleMovingAverage Result index trong ham Calculate de xac nhan logic tinh toan."
+ },
+ {
+  "ten": "Indicators/Access Right Sample/Access Right Sample/Access Right Sample.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Access Right Sample/Access Right Sample/Properties/AssemblyInfo.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Account Sample/Account Sample/Account Sample.cs",
+  "nhu_cau": null,
+  "muc_do": "thap",
+  "lam_gi": "hien thi cac thong tin co ban cua tai khoan giao dich len man hinh",
+  "lay_ve_the_nao": "doc lai cong thuc roi viet lai bang Python"
+ },
+ {
+  "ten": "Indicators/Account Sample/Account Sample/Properties/AssemblyInfo.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/AccountType Sample/AccountType Sample/AccountType Sample.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Accelerator Oscillator/Accelerator Oscillator/Accelerator Oscillator.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Accelerator Oscillator/Accelerator Oscillator/BaseBridge.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Accelerator Oscillator/Accelerator Oscillator/EmbeddedResourceProvider.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Accelerator Oscillator/Accelerator Oscillator/Engine.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ },
+ {
+  "ten": "Indicators/Accelerator Oscillator/Accelerator Oscillator/EngineHelper.cs",
+  "nhu_cau": null,
+  "muc_do": "thap",
+  "lam_gi": "khoi dong thung lua python va nhap module vao bo nho de lien ket voi cAlgo",
+  "lay_ve_the_nao": "doc file py tu resource noi bo, su dung Python.Runtime de chay va map doi tuong api"
+ },
+ {
+  "ten": "Indicators/Accelerator Oscillator/Accelerator Oscillator/IndicatorBridge.cs",
+  "nhu_cau": null,
+  "muc_do": "",
+  "lam_gi": "",
+  "lay_ve_the_nao": ""
+ }
+]
