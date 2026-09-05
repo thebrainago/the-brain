@@ -374,7 +374,19 @@ def _mot_ban(d: dict) -> dict:
 
 def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
         df_kiem=None, in_ra=print) -> dict:
-    """Boc `gioi_han` ban doc, goi SONG SONG `luong` luot."""
+    """Boc `gioi_han` ban doc, goi SONG SONG `luong` luot.
+
+    `df_kiem=None` de nguyen thi `them_co_che` **bo qua bai chay thu** — spec
+    khong chay duoc van vao kho (do 05/09: 54 spec kieu do da nam san trong kho
+    va duoc dem vao con so co che). Nen o day tu nap chuoi kiem chuan.
+    """
+    from nhan import boc_ma_llm as BM       # noqa: F401  (dung o vong duoi)
+    if df_kiem is None:
+        from nhan import loc_co_che as LCC
+        df_kiem = LCC.df_kiem_chuan()
+        if df_kiem is None:
+            in_ra("  !! khong nap duoc chuoi kiem - se KHONG ghi kho")
+            ghi_kho = False
     ds = ung_vien(gioi_han)
     con = gioi_han - len(ds)
     if con > 0:
@@ -405,6 +417,11 @@ def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
                 continue
             spec = chuan_hoa_spec(spec)
             spec.setdefault("nguon", r.get("url") or r.get("nguon") or "boc_llm")
+            # Cung cho dien `co_che` voi hai duong boc ma nguon: cong doi mot
+            # cau >= 25 ky tu, va loi nhac chua bao gio xin no. Khong dien thi
+            # ca me bi tu choi vi mot ly do DINH DANG (do 05/09: 80/80 o lan
+            # chien luoc). Cau tu dien noi ro la CHUA co lap luan kinh te.
+            BM._dien_co_che(spec, str(spec.get("nguon") or ""))
             v = NP.kiem_khai_bao(spec)
             if v:
                 tu_choi += 1

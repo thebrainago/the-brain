@@ -313,5 +313,67 @@ class CongNgoaiVaoKho(unittest.TestCase):
         self.assertTrue(r["chua_do"])
 
 
+class AnhXaNutVanBangLLM(unittest.TestCase):
+    """`quan_tri_llm` — LLM chi duoc CHON nut, khong duoc tao nut hay tao so."""
+
+    MA = """
+input double InpStrategy1GridStepPct = 0.34;
+input double InpLockProfitPoints     = 50;
+input double InpTrailingStopDist     = 200;
+input int    InpMagic                = 12345;
+"""
+
+    def _chay(self, tra):
+        from nhan import quan_tri_llm as QL
+        from nhan import tri_tue as TT
+        cu = TT.hoi_json
+        TT.hoi_json = lambda *a, **k: {"json": {"anh_xa": tra}}
+        try:
+            return QL.anh_xa_mot(self.MA, "thu.mq5")
+        finally:
+            TT.hoi_json = cu
+
+    def test_don_vi_lech_thi_TU_CHOI(self):
+        """Loi da sap 05/09: `...Pct` (phan tram) bi gan vao `buoc` (pip).
+
+        Anh xa dung ten nhung sai don vi van chay ra so - va so do vo nghia.
+        """
+        r = self._chay({"InpStrategy1GridStepPct": {"nut": "buoc",
+                                                    "don_vi": "phan_tram"}})
+        self.assertNotIn("buoc", r)
+        self.assertTrue(r.get("_bo_vi_don_vi"))
+
+    def test_don_vi_khop_thi_nhan(self):
+        r = self._chay({"InpTrailingStopDist": {"nut": "trailing_buoc",
+                                                "don_vi": "diem"}})
+        self.assertEqual(r["trailing_buoc"][0], 200.0)
+        self.assertEqual(r["trailing_buoc"][1], "InpTrailingStopDist")
+
+    def test_khong_duoc_tao_nut_moi(self):
+        r = self._chay({"InpMagic": {"nut": "nut_tu_bia", "don_vi": "so_lan"}})
+        self.assertEqual({k: v for k, v in r.items() if not k.startswith("_")}, {})
+
+    def test_khong_duoc_bia_ten_input(self):
+        r = self._chay({"KhongHeCoInputNay": {"nut": "tp", "don_vi": "pip"}})
+        self.assertNotIn("tp", r)
+
+    def test_gia_tri_lay_tu_MA_NGUON_khong_lay_tu_loi_mo_hinh(self):
+        """Mo hinh noi 999 nhung ma nguon ghi 50 -> phai lay 50."""
+        r = self._chay({"InpLockProfitPoints": {"nut": "tp", "don_vi": "diem",
+                                                "gia_tri": 999}})
+        self.assertEqual(r["tp"][0], 50.0)
+
+    def test_chua_do_khong_thanh_rong(self):
+        from nhan import quan_tri_llm as QL
+        from nhan import tri_tue as TT
+        cu = TT.hoi_json
+        TT.hoi_json = lambda *a, **k: {"loi": "HTTP 403: quota"}
+        try:
+            r = QL.anh_xa_mot(self.MA, "thu.mq5")
+        finally:
+            TT.hoi_json = cu
+        self.assertIn("_chua_do", r)
+
+
 if __name__ == "__main__":
     unittest.main()

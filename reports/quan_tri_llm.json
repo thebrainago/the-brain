@@ -1,0 +1,128 @@
+[
+ {
+  "ten": "SmartTradeAdjustmentPanel.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "tia_lenh",
+   "trailing",
+   "breakeven"
+  ],
+  "so_input": 9,
+  "nut_van": {
+   "trailing_buoc": 200.0,
+   "breakeven_tu": 10.0,
+   "tp": 50.0
+  },
+  "input_goc": {
+   "trailing_buoc": "InpTrailingStopDist",
+   "breakeven_tu": "InpBEPointOffset",
+   "tp": "InpLockProfitPoints"
+  },
+  "_llu_bo_sung": [
+   "breakeven_tu",
+   "tp",
+   "trailing_buoc"
+  ]
+ },
+ {
+  "ten": "Quantum_XAUUSD_Silver_Trader.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "trailing",
+   "chan_von"
+  ],
+  "so_input": 79,
+  "nut_van": {
+   "dung_lo": 50.0,
+   "trailing_tu": 1.0
+  },
+  "input_goc": {
+   "dung_lo": "InpDailyLossAbs",
+   "trailing_tu": "InpTrailActivation"
+  },
+  "_llu_bo_sung": [
+   "dung_lo",
+   "trailing_tu"
+  ]
+ },
+ {
+  "ten": "BEC_Combined_BE_Trail.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "tia_lenh",
+   "chot_ro",
+   "trailing",
+   "breakeven"
+  ],
+  "so_input": 26,
+  "nut_van": {
+   "trailing_buoc": 30.0,
+   "trailing_tu": 30.0
+  },
+  "input_goc": {
+   "trailing_buoc": "TrailingStop",
+   "trailing_tu": "TrailingProfit"
+  },
+  "_llu_bo_sung": [
+   "trailing_buoc",
+   "trailing_tu"
+  ]
+ },
+ {
+  "ten": "ausbruch_trader_1.0.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "tia_lenh",
+   "chot_ro",
+   "trailing"
+  ],
+  "so_input": 69,
+  "nut_van": {
+   "tp": 5000.0,
+   "dung_lo": 3.0,
+   "buoc": 8.0,
+   "he_so_1": 0.5,
+   "tang_toi_da": 3.0,
+   "thoat_theo_gio": 23.0
+  },
+  "input_goc": {
+   "tp": "Takeprofit",
+   "dung_lo": "StopGross",
+   "buoc": "Spanne",
+   "he_so_1": "Aenderung",
+   "tang_toi_da": "Aenderung2",
+   "thoat_theo_gio": "TimeClose"
+  },
+  "_llu_bo_sung": [
+   "buoc",
+   "dung_lo",
+   "he_so_1",
+   "tang_toi_da",
+   "thoat_theo_gio",
+   "tp"
+  ]
+ },
+ {
+  "ten": "bollingerbandsea.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "chot_ro",
+   "trailing",
+   "breakeven"
+  ],
+  "so_input": 13,
+  "nut_van": {
+   "tp": 2.0,
+   "thoat_theo_gio": 30.0
+  },
+  "input_goc": {
+   "tp": "ProfitFactor",
+   "thoat_theo_gio": "ClosePosMinutes"
+  },
+  "_llu_bo_sung": [
+   "thoat_theo_gio",
+   "tp"
+  ]
+ }
+]

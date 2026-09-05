@@ -68,10 +68,31 @@ def _luong(chua: int = 4) -> int:
     return max(1, (os.cpu_count() or 8) - chua)
 
 
-def buoc1_boc(in_ra=print) -> list[dict]:
+def buoc1_boc(in_ra=print, them_llm: bool = False) -> list[dict]:
+    """Buoc 1: 389 file ma -> spec quan tri vi the.
+
+    `them_llm=True` chay them mot luot LLM cho nhung file ma BANG TEN doc duoc
+    duoi 2 nut van. Do 05/09: bang regex tren ten input bo sot han 12 file, co
+    file 79 input ma chi anh xa duoc 1 nut - chung khong rong, chung dat ten
+    khac (`ZoneWidth` / `KhoangCachNhoi` cho cung mot buoc luoi). Luot LLM cuu
+    5/12. Mac dinh TAT vi buoc nay phai chay duoc khi khong co mang.
+    """
     from nhan import quan_tri as QT
     t = time.time()
     specs = QT.boc_kho(in_ra=lambda *a: None)
+    if them_llm:
+        from nhan import quan_tri_llm as QL
+        r = QL.bo_sung(in_ra=lambda *a: None)
+        theo_ten = {s["ten"]: s for s in specs}
+        them = 0
+        for s in r.get("spec") or []:
+            if s["ten"] in theo_ten:
+                theo_ten[s["ten"]].update(s)
+            else:
+                specs.append(s)
+            them += 1
+        in_ra("  1b LLM  : bo sung nut van cho %d file (bang ten doc < 2 nut)"
+              % them)
     in_ra("  1 BOC   : %d co che tu artifact ma (%.2fs)" % (len(specs), time.time() - t))
     return specs
 
