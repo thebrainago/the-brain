@@ -1,0 +1,266 @@
+[
+ {
+  "gt": "YH_NASDAQ.D1.macd_stochastic_doub_close_tren_ema26_close.MUCTIEU",
+  "verdict": "FAIL",
+  "ly_do": [
+   "khop rui ro k=1.655x (bien dong va sut giam, lay muc chat hon) -> lai khop 113.73% (tho 113.35%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich",
+   "khong chay placebo: da truot cong re hon (1_loi_hon_mua_giu, 2_sharpe_hon_mua_giu, 4_alpha_duong_co_y_nghia) - confirmation van tieu thu suat FDR p=1",
+   "truot: 1_loi_hon_mua_giu"
+  ],
+  "che_do": "nghien_cuu",
+  "ho_fdr": "xu_huong@cp3@nghien_cuu",
+  "chi_so": {
+   "tong_lai_pct": 113.35,
+   "cagr_pct": 3.464,
+   "sharpe": 0.268,
+   "calmar": 0.108,
+   "max_dd_pct": -32.09,
+   "pf": 1.058,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 0.6584,
+   "ty_le_mua": 0.6584,
+   "ty_le_ban": 0.0
+  },
+  "mua_giu": {
+   "tong_lai_pct": 283.31,
+   "cagr_pct": 6.225,
+   "sharpe": 0.287,
+   "calmar": 0.107,
+   "max_dd_pct": -58.1,
+   "pf": 1.054,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 1.0,
+   "ty_le_mua": 1.0,
+   "ty_le_ban": 0.0
+  },
+  "alpha": {
+   "alpha_nam_pct": 1.202,
+   "t_alpha": 0.585,
+   "beta": 0.365
+  },
+  "placebo": null
+ },
+ {
+  "gt": "YH_NASDAQ.D1.mua_rsi14_tren_55.MUCTIEU",
+  "verdict": "FAIL",
+  "ly_do": [
+   "khop rui ro k=1.988x (bien dong va sut giam, lay muc chat hon) -> lai khop 112.41% (tho 87.39%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich",
+   "khong chay placebo: da truot cong re hon (1_loi_hon_mua_giu, 2_sharpe_hon_mua_giu, 3_calmar_hon_mua_giu, 4_alpha_duong_co_y_nghia) - confirmation van tieu thu suat FDR p=1",
+   "truot: 1_loi_hon_mua_giu"
+  ],
+  "che_do": "nghien_cuu",
+  "ho_fdr": "xu_huong@cp3@nghien_cuu",
+  "chi_so": {
+   "tong_lai_pct": 87.39,
+   "cagr_pct": 2.863,
+   "sharpe": 0.267,
+   "calmar": 0.105,
+   "max_dd_pct": -27.18,
+   "pf": 1.065,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 0.5218,
+   "ty_le_mua": 0.5218,
+   "ty_le_ban": 0.0
+  },
+  "mua_giu": {
+   "tong_lai_pct": 283.31,
+   "cagr_pct": 6.225,
+   "sharpe": 0.287,
+   "calmar": 0.107,
+   "max_dd_pct": -58.1,
+   "pf": 1.054,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 1.0,
+   "ty_le_mua": 1.0,
+   "ty_le_ban": 0.0
+  },
+  "alpha": {
+   "alpha_nam_pct": 1.294,
+   "t_alpha": 0.713,
+   "beta": 0.253
+  },
+  "placebo": null
+ },
+ {
+  "gt": "YH_NASDAQ.D1.trend_strength_entry_with_ema_exit.MUCTIEU",
+  "verdict": "FAIL",
+  "ly_do": [
+   "khop rui ro k=1.790x (bien dong va sut giam, lay muc chat hon) -> lai khop 191.70% (tho 139.76%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich",
+   "khong chay placebo: da truot cong re hon (1_loi_hon_mua_giu, 4_alpha_duong_co_y_nghia) - confirmation van tieu thu suat FDR p=1",
+   "truot: 1_loi_hon_mua_giu"
+  ],
+  "che_do": "nghien_cuu",
+  "ho_fdr": "xu_huong@cp3@nghien_cuu",
+  "chi_so": {
+   "tong_lai_pct": 139.76,
+   "cagr_pct": 4.008,
+   "sharpe": 0.335,
+   "calmar": 0.152,
+   "max_dd_pct": -26.42,
+   "pf": 1.077,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 0.5982,
+   "ty_le_mua": 0.5982,
+   "ty_le_ban": 0.0
+  },
+  "mua_giu": {
+   "tong_lai_pct": 283.31,
+   "cagr_pct": 6.225,
+   "sharpe": 0.287,
+   "calmar": 0.107,
+   "max_dd_pct": -58.1,
+   "pf": 1.054,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 1.0,
+   "ty_le_mua": 1.0,
+   "ty_le_ban": 0.0
+  },
+  "alpha": {
+   "alpha_nam_pct": 2.046,
+   "t_alpha": 1.039,
+   "beta": 0.312
+  },
+  "placebo": null
+ },
+ {
+  "gt": "YH_NASDAQ.D1.pine_ichimoku_cloud_close_tren_ema21_close.MUCTIEU",
+  "verdict": "FAIL",
+  "ly_do": [
+   "khop rui ro k=1.567x (bien dong va sut giam, lay muc chat hon) -> lai khop 56.37% (tho 77.06%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich",
+   "khong chay placebo: da truot cong re hon (1_loi_hon_mua_giu, 2_sharpe_hon_mua_giu, 3_calmar_hon_mua_giu, 4_alpha_duong_co_y_nghia) - confirmation van tieu thu suat FDR p=1",
+   "truot: 1_loi_hon_mua_giu"
+  ],
+  "che_do": "nghien_cuu",
+  "ho_fdr": "xu_huong@cp3@nghien_cuu",
+  "chi_so": {
+   "tong_lai_pct": 77.06,
+   "cagr_pct": 2.601,
+   "sharpe": 0.201,
+   "calmar": 0.068,
+   "max_dd_pct": -38.09,
+   "pf": 1.044,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 0.6536,
+   "ty_le_mua": 0.6536,
+   "ty_le_ban": 0.0
+  },
+  "mua_giu": {
+   "tong_lai_pct": 283.31,
+   "cagr_pct": 6.225,
+   "sharpe": 0.287,
+   "calmar": 0.107,
+   "max_dd_pct": -58.1,
+   "pf": 1.054,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 1.0,
+   "ty_le_mua": 1.0,
+   "ty_le_ban": 0.0
+  },
+  "alpha": {
+   "alpha_nam_pct": 0.339,
+   "t_alpha": 0.163,
+   "beta": 0.369
+  },
+  "placebo": null
+ },
+ {
+  "gt": "YH_NASDAQ.D1.vao_lenh_long_khi_ema20_duoi_gia.MUCTIEU",
+  "verdict": "FAIL",
+  "ly_do": [
+   "khop rui ro k=1.646x (bien dong va sut giam, lay muc chat hon) -> lai khop 79.06% (tho 92.4%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich",
+   "khong chay placebo: da truot cong re hon (1_loi_hon_mua_giu, 2_sharpe_hon_mua_giu, 3_calmar_hon_mua_giu, 4_alpha_duong_co_y_nghia) - confirmation van tieu thu suat FDR p=1",
+   "truot: 1_loi_hon_mua_giu"
+  ],
+  "che_do": "nghien_cuu",
+  "ho_fdr": "xu_huong@cp3@nghien_cuu",
+  "chi_so": {
+   "tong_lai_pct": 92.4,
+   "cagr_pct": 2.985,
+   "sharpe": 0.23,
+   "calmar": 0.087,
+   "max_dd_pct": -34.32,
+   "pf": 1.05,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 0.6506,
+   "ty_le_mua": 0.6506,
+   "ty_le_ban": 0.0
+  },
+  "mua_giu": {
+   "tong_lai_pct": 283.31,
+   "cagr_pct": 6.225,
+   "sharpe": 0.287,
+   "calmar": 0.107,
+   "max_dd_pct": -58.1,
+   "pf": 1.054,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 1.0,
+   "ty_le_mua": 1.0,
+   "ty_le_ban": 0.0
+  },
+  "alpha": {
+   "alpha_nam_pct": 0.713,
+   "t_alpha": 0.343,
+   "beta": 0.369
+  },
+  "placebo": null
+ },
+ {
+  "gt": "YH_NASDAQ.D1.macd_sma_200_strateg_close_tren_sma26.MUCTIEU",
+  "verdict": "FAIL",
+  "ly_do": [
+   "khop rui ro k=1.668x (bien dong va sut giam, lay muc chat hon) -> lai khop 105.51% (tho 107.18%)",
+   "che do nghien cuu: chi phi do_tin=KHAI chi la khai bao - ket luan chi noi ve CO CHE, khong noi ve kha nang giao dich",
+   "khong chay placebo: da truot cong re hon (1_loi_hon_mua_giu, 2_sharpe_hon_mua_giu, 4_alpha_duong_co_y_nghia) - confirmation van tieu thu suat FDR p=1",
+   "truot: 1_loi_hon_mua_giu"
+  ],
+  "che_do": "nghien_cuu",
+  "ho_fdr": "xu_huong@cp3@nghien_cuu",
+  "chi_so": {
+   "tong_lai_pct": 107.18,
+   "cagr_pct": 3.328,
+   "sharpe": 0.26,
+   "calmar": 0.111,
+   "max_dd_pct": -29.99,
+   "pf": 1.058,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 0.6422,
+   "ty_le_mua": 0.6422,
+   "ty_le_ban": 0.0
+  },
+  "mua_giu": {
+   "tong_lai_pct": 283.31,
+   "cagr_pct": 6.225,
+   "sharpe": 0.287,
+   "calmar": 0.107,
+   "max_dd_pct": -58.1,
+   "pf": 1.054,
+   "so_nam": 22.25,
+   "so_bar": 5598,
+   "phoi_nhiem": 1.0,
+   "ty_le_mua": 1.0,
+   "ty_le_ban": 0.0
+  },
+  "alpha": {
+   "alpha_nam_pct": 1.104,
+   "t_alpha": 0.541,
+   "beta": 0.359
+  },
+  "placebo": null
+ }
+]

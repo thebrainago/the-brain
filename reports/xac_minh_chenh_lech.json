@@ -1,0 +1,715 @@
+[
+ {
+  "phoi_nhiem": "ETHBTC",
+  "chenh": 481.381,
+  "kenh_re": "Exness",
+  "kenh_dat": "FXCE",
+  "lech_gia_pct": 93.9,
+  "canh_bao": [
+   "GIA LECH 93.9% (Exness 0.031253, FXCE 0.0606)",
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 10x: Exness=100, FXCE=10"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BATUSD",
+  "chenh": 149.208,
+  "kenh_re": "Exness",
+  "kenh_dat": "FXCE",
+  "lech_gia_pct": 25.53,
+  "canh_bao": [
+   "GIA LECH 25.5% (Exness 0.1559, FXCE 0.1957)",
+   "SWAP_MODE khac nhau: Exness=0, FXCE=1",
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 20x: Exness=500, FXCE=10000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDTRY",
+  "chenh": 36.976,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURTRY",
+  "chenh": 36.329,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.27,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDZAR",
+  "chenh": 9.355,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.08,
+  "canh_bao": [
+   "SWAP_MODE khac nhau: FXCE=0, Exness=1, XM=1",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "XAGUSD",
+  "chenh": 8.576,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 12.15,
+  "canh_bao": [
+   "GIA LECH 12.1% (FXCE 61.71, Exness 61.49, XM 68.959)",
+   "SWAP_MODE khac nhau: FXCE=5, Exness=1, XM=1",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 2x: FXCE=100, Exness=100, XM=50"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BCHUSD",
+  "chenh": 8.036,
+  "kenh_re": "Exness",
+  "kenh_dat": "FXCE",
+  "lech_gia_pct": 30.6,
+  "canh_bao": [
+   "GIA LECH 30.6% (Exness 265.89, FXCE 203.59)",
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 10x: Exness=1, FXCE=10"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDMXN",
+  "chenh": 7.2,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.1,
+  "canh_bao": [
+   "SWAP_MODE khac nhau: FXCE=0, Exness=1, XM=1",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "LTCUSD",
+  "chenh": 6.34,
+  "kenh_re": "Exness",
+  "kenh_dat": "FXCE",
+  "lech_gia_pct": 1.74,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 100x: Exness=1, FXCE=100"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDHUF",
+  "chenh": 5.586,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.09,
+  "canh_bao": [
+   "SWAP_MODE khac nhau: Exness=0, FXCE=0, XM=1",
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "XAUEUR",
+  "chenh": 5.113,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.0,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100, XM=1"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BTCUSD",
+  "chenh": 4.825,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.1,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "XRPUSD",
+  "chenh": 4.591,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.65,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 10000x: FXCE=10000, Exness=1"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURHUF",
+  "chenh": 4.494,
+  "kenh_re": "XM",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.53,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: XM=1000, Exness=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BTCJPY",
+  "chenh": 4.293,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 174.49,
+  "canh_bao": [
+   "GIA LECH 174.5% (FXCE 4.454e+06, Exness 1.2226e+07)",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "ADP",
+  "chenh": 4.18,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 158.02,
+  "canh_bao": [
+   "GIA LECH 158.0% (FXCE 280.66, XM 108.78)",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 10x: FXCE=100, XM=10"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "ING",
+  "chenh": 4.18,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 252.49,
+  "canh_bao": [
+   "GIA LECH 252.5% (FXCE 8.43, XM 29.715)",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 10x: FXCE=100, XM=10"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "ETHUSD",
+  "chenh": 4.056,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.05,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 10x: FXCE=10, Exness=1"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURZAR",
+  "chenh": 3.939,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.04,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "XPDUSD",
+  "chenh": 3.562,
+  "kenh_re": "XM",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.12,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: XM=1, Exness=100"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BTCAUD",
+  "chenh": 3.466,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 131.14,
+  "canh_bao": [
+   "GIA LECH 131.1% (FXCE 46399, Exness 1.0725e+05)",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "AUDJPY",
+  "chenh": 3.285,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, XM=1000, Exness=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDNOK",
+  "chenh": 3.281,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.09,
+  "canh_bao": [
+   "SWAP_MODE khac nhau: FXCE=0, Exness=1, XM=1",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "AUDCHF",
+  "chenh": 3.234,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.04,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, XM=1000, Exness=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDPLN",
+  "chenh": 3.045,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.4,
+  "canh_bao": [
+   "SWAP_MODE khac nhau: FXCE=0, Exness=1, XM=1",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "CHFSGD",
+  "chenh": 3.006,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.07,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "SGDJPY",
+  "chenh": 2.718,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "XAUUSD",
+  "chenh": 2.657,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 100x: Exness=100, FXCE=100, XM=1"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "GBPNOK",
+  "chenh": 2.424,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.03,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDCHF",
+  "chenh": 2.332,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURDKK",
+  "chenh": 2.326,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "GBPJPY",
+  "chenh": 2.263,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, XM=1000, Exness=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURSEK",
+  "chenh": 2.221,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.06,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDJPY",
+  "chenh": 2.197,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURNOK",
+  "chenh": 2.076,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.07,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "XPTUSD",
+  "chenh": 2.07,
+  "kenh_re": "XM",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.35,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: XM=1, Exness=100"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURPLN",
+  "chenh": 2.033,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.05,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BTCXAU",
+  "chenh": 2.003,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 3.5,
+  "canh_bao": [
+   "GIA LECH 3.5% (FXCE 16.137, Exness 16.702)",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURJPY",
+  "chenh": 1.976,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BTCXAG",
+  "chenh": 1.961,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 23.02,
+  "canh_bao": [
+   "GIA LECH 23.0% (FXCE 1370.9, Exness 1114.4)",
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "NZDSGD",
+  "chenh": 1.847,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.09,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "GBPCHF",
+  "chenh": 1.787,
+  "kenh_re": "XM",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: XM=1000, FXCE=100000, Exness=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "CHFJPY",
+  "chenh": 1.723,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.0,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURSGD",
+  "chenh": 1.689,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.04,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "NZDJPY",
+  "chenh": 1.617,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "AUDNZD",
+  "chenh": 1.604,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURHKD",
+  "chenh": 1.573,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "AUDCAD",
+  "chenh": 1.468,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, XM=1000, Exness=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "CADJPY",
+  "chenh": 1.346,
+  "kenh_re": "FXCE",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, Exness=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURCAD",
+  "chenh": 1.276,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 100x: Exness=100000, FXCE=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "USDHKD",
+  "chenh": 1.244,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.03,
+  "canh_bao": [
+   "SWAP_MODE khac nhau: Exness=1, FXCE=0, XM=1",
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "AUDUSD",
+  "chenh": 1.212,
+  "kenh_re": "Exness",
+  "kenh_dat": "FXCE",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURNZD",
+  "chenh": 1.208,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.03,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 100x: Exness=100000, FXCE=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "BAM",
+  "chenh": 1.196,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 1756.43,
+  "canh_bao": [
+   "GIA LECH 1756.4% (Exness 213.49, XM 11.5)",
+   "SWAP_MODE khac nhau: Exness=1, XM=5",
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 10x: Exness=100, XM=10"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURGBP",
+  "chenh": 1.173,
+  "kenh_re": "Exness",
+  "kenh_dat": "FXCE",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 100x: Exness=100000, XM=1000, FXCE=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "NZDCHF",
+  "chenh": 1.128,
+  "kenh_re": "XM",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.06,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: XM=1000, FXCE=100000, Exness=100000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "GBPAUD",
+  "chenh": 1.097,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.02,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 100x: Exness=100000, FXCE=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "EURAUD",
+  "chenh": 1.084,
+  "kenh_re": "Exness",
+  "kenh_dat": "XM",
+  "lech_gia_pct": 0.01,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: Exness=MT5:Exness-MT5Trial14, FXCE=MT5:NeotechFinancialServices-Demo",
+   "CONTRACT SIZE lech 100x: Exness=100000, FXCE=100000, XM=1000"
+  ],
+  "dat": false
+ },
+ {
+  "phoi_nhiem": "CADCHF",
+  "chenh": 1.047,
+  "kenh_re": "FXCE",
+  "kenh_dat": "Exness",
+  "lech_gia_pct": 0.03,
+  "canh_bao": [
+   "BAN GHI TU MAY CHU THU/DEMO: FXCE=MT5:NeotechFinancialServices-Demo, Exness=MT5:Exness-MT5Trial14",
+   "CONTRACT SIZE lech 100x: FXCE=100000, XM=1000, Exness=100000"
+  ],
+  "dat": false
+ }
+]

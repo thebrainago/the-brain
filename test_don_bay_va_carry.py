@@ -151,3 +151,43 @@ class Carry(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ----------------------------------------------------- LUAT VON (them 05/09)
+def test_ap_luat_von_khong_lam_gi_bang_gop_thuong():
+    """Khong chan, khong rut -> phai bang y het gop (1+r) tren chuoi so hoc."""
+    import numpy as np
+    from nhan import bien_don_bay as B
+    rng = np.random.default_rng(7)
+    r = rng.normal(0.0004, 0.012, 2000)
+    k = B.ap_luat_von(np.log1p(r), so_nam=8.0)
+    assert abs(k["tai_khoan_cuoi"] - float(np.prod(1.0 + r))) < 1e-3
+    assert k["so_lan_chan"] == 0
+
+
+def test_chan_dd_khong_duoc_bao_sut_giam_tren_dinh_dat_lai():
+    """CHAN LOI 04/09. Luat chan phai DAT LAI dinh lam viec (neu khong thi cham
+    mot lan la thoat lien tuc mai), nhung so sut giam BAO RA phai do tren dinh
+    THAT. Ban dau tien dung chung mot dinh -> chan DD 40% "cat" sut giam tu
+    -72% xuong -42% trong khi duong von khong he doi."""
+    import numpy as np
+    from nhan import bien_don_bay as B
+    # Chuoi di xuong deu roi hoi: chan DD se kich hoat nhieu lan.
+    r = np.concatenate([np.full(300, -0.004), np.full(300, 0.004)])
+    k = B.ap_luat_von(np.log1p(r), so_nam=2.4, chan_dd=0.30)
+    assert k["so_lan_chan"] >= 1, "chuoi nay phai cham chan it nhat mot lan"
+    # Khong rut tien -> tai khoan CHINH LA von ca nhan, hai so phai trung khop.
+    assert abs(k["dd_tai_khoan"] - k["dd_von_ca_nhan"]) < 1e-9
+    # Va sut giam that phai SAU HON nguong chan, khong duoc bang no.
+    assert k["dd_tai_khoan"] < -0.30
+
+
+def test_rut_tien_tach_dd_tai_khoan_khoi_dd_von_ca_nhan():
+    """Rut tien ra tui thi hai con so PHAI khac nhau - do la ca diem cua luat."""
+    import numpy as np
+    from nhan import bien_don_bay as B
+    rng = np.random.default_rng(11)
+    r = np.concatenate([rng.normal(0.003, 0.01, 800), np.full(200, -0.006)])
+    k = B.ap_luat_von(np.log1p(r), so_nam=4.0, rut_ky=1.0, bar_moi_ky=63)
+    assert k["da_rut"] > 0
+    assert k["dd_von_ca_nhan"] > k["dd_tai_khoan"], "rut tien phai lam nhe DD von"

@@ -120,3 +120,73 @@ def do_bien(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
         h["don_bay"] = float(L)
         ra.append(h)
     return ra, do_tin
+
+
+# ------------------------------------------------ LUAT VON ("giao dich linh hoat")
+#: Bao nhieu bar nghi sau khi cham chan sut giam. Mot thang giao dich.
+NGHI_SAU_CHAN = 21
+#: Bao nhieu bar mot ky rut lai. Mot quy giao dich.
+BAR_MOI_KY = 63
+
+
+def ap_luat_von(loi_log, so_nam: float, chan_dd: float | None = None,
+                rut_ky: float = 0.0, nghi_bar: int = NGHI_SAU_CHAN,
+                bar_moi_ky: int = BAR_MOI_KY) -> dict:
+    """Ap luat quan tri VON len chuoi loi suat cua he. Khong doi tin hieu.
+
+    Chu du an 04/09: *"neu he ra tien ta se nhay ra truoc khi sap hoac dung lai
+    da cashout"*. Y do chi do duoc khi no la LUAT, nen o day co dung hai luat:
+
+      `chan_dd`  thoat het khi tai khoan sut qua X% tu dinh, nghi `nghi_bar`
+                 bar roi vao lai. Dat lai dinh khi thoat - neu khong thi
+                 tai khoan cham chan mot lan roi thoat lien tuc mai.
+      `rut_ky`   moi `bar_moi_ky` bar, rut ra tui `rut_ky` phan cua lai vuot
+                 von goc. Tien ra khoi tai khoan nen **sut giam tren VON CA
+                 NHAN khac han sut giam tren TAI KHOAN** - do la ca diem cua no.
+
+    `loi_log` la chuoi loi suat LOG cua `mo_phong.KetQua.loi`. Phai `expm1` ve
+    so hoc truoc khi gop bang `(1+r)`: gop log truc tiep la loi da ghi trong
+    bo nho du an ("don bay gop log la SAI") va no thoi ket qua len nhieu lan.
+
+    KHONG lam: bom von ngoai vao cuu tai khoan. Do khong phai luat giao dich,
+    do la chuyen lo giao dich thanh lo doi song.
+    """
+    r = np.expm1(np.nan_to_num(np.asarray(loi_log, float)))
+    tk, tui, goc = 1.0, 0.0, 1.0
+    # BA cai dinh khac nhau, va lan dau viet chi co hai nen ket qua doc sai
+    # (do 05/09). `dinh_lam_viec` BI DAT LAI moi lan cham chan - phai vay,
+    # neu khong thi cham mot lan la thoat lien tuc mai. Nhung dung chinh no de
+    # bao sut giam thi con so ra la "sut giam KE TU LAN DAT LAI GAN NHAT", va
+    # no lam luat chan trong nhu cat sut giam tu -54% xuong -32% trong khi
+    # duong von khong he doi. Sut giam THAT phai do tren dinh khong dat lai.
+    dinh_lam_viec = dinh_tk = dinh_tong = 1.0
+    dd_tk = dd_tong = 0.0
+    nghi = 0
+    so_lan_chan = 0
+    for i in range(len(r)):
+        if nghi > 0:
+            nghi -= 1
+        else:
+            tk *= (1.0 + r[i])
+        if tk <= 0:
+            return {"vo": True, "so_lan_chan": so_lan_chan}
+        dinh_lam_viec = max(dinh_lam_viec, tk)
+        dinh_tk = max(dinh_tk, tk)
+        dd_tk = min(dd_tk, tk / dinh_tk - 1.0)
+        tong = tk + tui
+        dinh_tong = max(dinh_tong, tong)
+        dd_tong = min(dd_tong, tong / dinh_tong - 1.0)
+        if chan_dd is not None and nghi == 0                 and (tk / dinh_lam_viec - 1.0) <= -chan_dd:
+            nghi = nghi_bar
+            dinh_lam_viec = tk
+            so_lan_chan += 1
+        if rut_ky > 0 and i and i % bar_moi_ky == 0 and tk > goc:
+            lay = (tk - goc) * rut_ky
+            tk -= lay
+            tui += lay
+    tong = tk + tui
+    return {"vo": False, "tai_khoan_cuoi": round(tk, 4),
+            "da_rut": round(tui, 4), "tong_cuoi": round(tong, 4),
+            "cagr": round(tong ** (1.0 / so_nam) - 1.0, 4) if so_nam > 0 else None,
+            "dd_tai_khoan": round(dd_tk, 4), "dd_von_ca_nhan": round(dd_tong, 4),
+            "so_lan_chan": so_lan_chan}

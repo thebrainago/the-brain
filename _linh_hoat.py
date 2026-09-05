@@ -55,38 +55,21 @@ nam = (tr.index[-1] - tr.index[0]).days / 365.25
 print(f"{spec['ten'][:40]} | {MA} {KHUNG} L={L:.0f} | {n} bar, {nam:.1f} nam\n")
 
 
+# 05/09: ban cai dat tay o day co loi DINH DAT LAI - no do sut giam ke tu lan
+# dat lai gan nhat roi bao do la sut giam cua he, nen luat chan trong nhu cat
+# DD tu -72% xuong -42% trong khi duong von khong doi. Da chuyen ca hai luat
+# vao `bien_don_bay.ap_luat_von` (mot ban cai dat, dinh that va dinh lam viec
+# tach nhau) va goi tu day. Ket qua dung: xem `_chan_dd_holdout.py`.
+from nhan import bien_don_bay as B
+
+
 def chay(rut_quy=0.0, chan_dd=None):
-    """rut_quy: ti le phan lai rut ra moi ~63 bar. chan_dd: thoat khi sut qua."""
-    tk = 1.0          # tai khoan
-    tui = 0.0         # tien da rut ra tui
-    goc = 1.0
-    dinh_tk, dinh_tong = 1.0, 1.0
-    dd_tk, dd_tong = 0.0, 0.0
-    nghi = 0
-    for i in range(n):
-        if nghi > 0:
-            nghi -= 1
-        else:
-            tk *= (1.0 + r[i])
-        if tk <= 0:
-            return {"vo": True}
-        dinh_tk = max(dinh_tk, tk)
-        dd_tk = min(dd_tk, tk / dinh_tk - 1.0)
-        tong = tk + tui
-        dinh_tong = max(dinh_tong, tong)
-        dd_tong = min(dd_tong, tong / dinh_tong - 1.0)
-        if chan_dd is not None and (tk / dinh_tk - 1.0) <= -chan_dd and nghi == 0:
-            nghi = 21          # nghi mot thang giao dich roi vao lai
-            dinh_tk = tk       # dat lai dinh de khong thoat lien tuc
-        if rut_quy > 0 and i and i % 63 == 0 and tk > goc:
-            lay = (tk - goc) * rut_quy
-            tk -= lay
-            tui += lay
-    tong = tk + tui
-    return {"tai_khoan_cuoi": round(tk, 3), "da_rut": round(tui, 3),
-            "tong_cuoi": round(tong, 3),
-            "cagr_tong": round(tong ** (1 / nam) - 1, 4),
-            "dd_tai_khoan": round(dd_tk, 4), "dd_tong": round(dd_tong, 4),
+    k = B.ap_luat_von(kq.loi, nam, chan_dd=chan_dd, rut_ky=rut_quy)
+    if k.get("vo"):
+        return {"vo": True}
+    return {"tai_khoan_cuoi": k["tai_khoan_cuoi"], "da_rut": k["da_rut"],
+            "tong_cuoi": k["tong_cuoi"], "cagr_tong": k["cagr"],
+            "dd_tai_khoan": k["dd_tai_khoan"], "dd_tong": k["dd_von_ca_nhan"],
             "vo": False}
 
 

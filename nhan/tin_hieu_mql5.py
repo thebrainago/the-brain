@@ -122,8 +122,85 @@ def ho_so_phong_cach(cap: list[tuple[int, float]]) -> dict:
     }
 
 
+#: Mang so dai nhung trong trang signal, theo THU TU xuat hien:
+#: 0 = growth %% theo so lenh, 1 = balance theo so lenh,
+#: 2 = (luc, balance, equity), 3 = (luc, muc_tai).
+_RX_MANG = re.compile(r"\[((?:[-\d.]+,){40,}[-\d.]+)\]")
+
+
+def mang_trong_trang(html: str) -> list:
+    """Cac mang so dai nhung trong trang signal, giu nguyen thu tu."""
+    import numpy as np
+    return [np.array([float(x) for x in m.group(1).split(",")])
+            for m in _RX_MANG.finditer(html or "")]
+
+
+def phan_loai_mang(html: str) -> dict:
+    """Nhan dang tung mang theo HINH DANG, khong theo vi tri.
+
+    Lan dau (04/09) code lay `mang[0]` la growth va `mang[3]` la muc tai. Do
+    la dung tren #2359404 va SAI tren nhieu signal khac: co trang khong co du
+    bon mang, co trang chen them mang khac vao giua. Quet 288 signal thi no no
+    o cai thu 3 (`cannot reshape array of size 7575 into shape (2)`).
+
+    Bon dang phan biet duoc chac chan:
+      `von`     bo BA so, so dau > 1e9  -> (timestamp, balance, equity)
+      `tai`     bo HAI so, so dau > 1e9, so sau trong [0, 1] -> (timestamp, tai)
+      `growth`  bo HAI so, so dau la 0,2,4,... va gia tri dau = 0 -> (lenh, %)
+      `balance` bo HAI so, so dau la 0,2,4,... va gia tri dau != 0 -> (lenh, tien)
+    """
+    import numpy as np
+    ra: dict = {}
+    for a in mang_trong_trang(html):
+        n = len(a)
+        if n % 3 == 0 and n >= 6 and (a[0::3] > 1e9).all():
+            ra.setdefault("von", a.reshape(-1, 3))
+            continue
+        if n % 2:
+            continue
+        x, y = a[0::2], a[1::2]
+        if (x > 1e9).all():
+            if ((y >= 0) & (y <= 1)).all():
+                ra.setdefault("tai", a.reshape(-1, 2))
+            continue
+        if len(x) > 2 and x[0] == 0 and (np.diff(x) > 0).all():
+            ra.setdefault("growth" if abs(y[0]) < 1e-9 else "balance",
+                          a.reshape(-1, 2))
+    return ra
+
+
+def duong_von(html: str):
+    """(loi_suat_theo_lenh, tang_truong_cuoi_pct) tu chuoi `growth`.
+
+    DAY la chuoi dung de tinh hieu suat, khong phai chuoi balance/equity:
+    growth DA HIEU CHINH nap/rut, con balance thi khong (do that tren #2359404:
+    mot buoc -398,59 USD la lenh rut, neu tinh la lo thi ra -35,8% mot ngay).
+    Truc x la SO LENH chu khong phai ngay - dung no lam "loi suat ngay" se
+    thoi moi thu len theo so lenh moi ngay.
+    """
+    import numpy as np
+    g = phan_loai_mang(html).get("growth")
+    if g is None or len(g) < 3:
+        return np.array([]), None
+    v = 1.0 + g[:, 1] / 100.0
+    return np.diff(v) / v[:-1], float(g[-1, 1])
+
+
 def rui_ro_json(sid: int) -> list[dict]:
-    """MFE/MAE theo ngay. URL KHONG co tien to `/en` - do that 04/09."""
+    """Nhom 5 so mot ngay tu bieu do rui ro. URL KHONG co tien to `/en`.
+
+    Thu tu la (luc, LAI, MFE, LO, MAE) - do 05/09 tren #2359404:
+    LAI >= 0 va MFE >= LAI luon dung; LO <= 0 va MAE <= LO luon dung.
+
+    HAI CAI BAY, ca hai da sap that ngay 04/09:
+
+      1. `so[i+1]` KHONG phai loi suat cua ngay - no chi la NHANH LAI, luon
+         khong am. Lay no lam loi suat cho 0/118 ngay am va +5,4%/ngay.
+         Net cua ngay la `lai + lo` (o day tra san trong khoa `net`).
+      2. Don vi KHONG phai % von. Ngay MAE -71,22% (14/07/2026) doi chieu
+         chuoi equity thi lo treo that chi 7,6% von. Dung cac so nay de XEP
+         HANG / so sanh giua cac ngay thi duoc; dung de tinh tien thi sai.
+    """
     try:
         r = _lay(f"{GOC}/signals/charts/risks/json", {"id": sid})
         if r.status_code != 200:
@@ -133,8 +210,9 @@ def rui_ro_json(sid: int) -> list[dict]:
         return []
     ra = []
     for i in range(0, len(so) - 4, 5):
-        ra.append({"luc": int(so[i]), "loi": so[i + 1], "mfe": so[i + 2],
-                   "mae": so[i + 4]})
+        lai, lo = so[i + 1], so[i + 3]
+        ra.append({"luc": int(so[i]), "lai": lai, "mfe": so[i + 2],
+                   "lo": lo, "mae": so[i + 4], "net": lai + lo})
     return ra
 
 
