@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-02 18:19:08 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14224, 0 phut), dieu_khien_xa.py (pid 15536, 477 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
 ### 2026-09-02 20:27:08 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 5616, 0 phut), dieu_khien_xa.py (pid 15536, 605 phut)
@@ -404,3 +400,7 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 
 - dang chay: ? (pid 5416, 0 phut), ban_giao_song.py (pid 3780, 0 phut), dieu_khien_xa.py (pid 14676, 442 phut)
 - git: 72f6ddb cham 42 co che quan tri: trailing thang, quy doi tham so bang ATR
+### 2026-09-05 14:39:15 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3384, 0 phut), dieu_khien_xa.py (pid 14676, 449 phut)
+- git: 1baba4b cham tran 70%: kho co che 262 -> 326, 64 cai tu file .mq5

@@ -102,3 +102,4 @@ VIEC TIEP THEO
 - **2026-09-03 23:04** — Phien 10 tieng tren MOT muc tieu (US500CASH 20-30%/nam): lo ra 15 loi cung mot ho benh - that bai duoc bao cao nhu ket qua binh thuong. Sua het, noi ca ba luong vao b, MQL5 thong lai sau khi phat hien DNS bi dau doc. (test 1022, fdr 1799, viec cho 0)
 - **2026-09-04 21:28** — Phien 04/09: pheu (Telegram/PDF-OCR/tinix/Finder/chi tieu) + tat FDR + tim edge (MDE, 6 he dat 20%/nam tren NASDAQ D1) + nen tang cTrader + nhanh mql5 signal. 3 loi tu dung lai logic he da co, da ghi nho. (test 1069, fdr 1799, viec cho 0)
 - **2026-09-05 07:45** — 6 muc ban giao: 5 ket qua am + 4 con so 04/09 bi lat nguoc; sua tin_hieu_mql5 + them ap_luat_von (test 1072, fdr 1805, viec cho 0)
+- **2026-09-05 14:39** — boc .mq5 tu 0 len 70%: sua doc_ma viet cho Pine; kho co che 262->326; trailing x4,8 lai; XM_US100CASH PASS (test 1072, fdr 1807, viec cho 2)

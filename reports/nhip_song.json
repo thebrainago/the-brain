@@ -4,15 +4,18 @@
  "ham_test": 1072,
  "test_ds": 82,
  "bang_gia": 269,
- "fdr": 1805,
- "fdr_bac_bo": 404,
+ "fdr": 1807,
+ "fdr_bac_bo": 406,
  "ung_vien": 567,
  "tai_lieu": 6658,
  "co_che": 32,
  "van_de_mo": 12,
  "van_de_nang": 3,
- "viec_cho": {},
- "viec_cho_tong": 0,
+ "viec_cho": {
+  "bac_cau_san": 1,
+  "mt5_tick": 1
+ },
+ "viec_cho_tong": 2,
  "dung_lai": true,
- "py_top": 192
+ "py_top": 199
 }
