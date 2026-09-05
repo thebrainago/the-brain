@@ -36,11 +36,12 @@ warnings.filterwarnings("ignore")
 import numpy as np
 import requests
 
+from nhan import dau_chan as DC
 from nhan import tin_hieu_mql5 as TH
 
 RA = "reports/signal_ho_so.json"
-SO_TRANG = 6
-TRAN = 120       # du cho "50-100 signal" ma ban giao hoi, khong cao hon
+SO_TRANG = 14
+TRAN = 400       # 05/09: chu du an bao "tiep tuc do" -> mo rong mau
 NGHI = 0.6
 
 _RX_O = re.compile(
@@ -91,6 +92,7 @@ def mot(sid: int) -> dict | None:
     m = TH.phan_loai_mang(h)
     tai = m["tai"][:, 1] if "tai" in m else np.array([])
     tai_co = tai[tai > 0]
+    dc = DC.dac_trung(m.get("von"), m.get("tai"), loi_suat)
 
     rr = TH.rui_ro_json(sid)
     time.sleep(NGHI)
@@ -134,6 +136,11 @@ def mot(sid: int) -> dict | None:
                     if len(tai_co) > 5 and tai_co.mean() > 0 else None),
         "tai_trung_vi_pct": (round(float(np.median(tai_co)) * 100, 3)
                              if len(tai_co) else None),
+        # Dau chan de LUAN NGUOC kieu chien luoc - xem `nhan/dau_chan.py`.
+        # Phan LOAI khong lam o day: de `_luan_nguoc.py` lam tu file da luu,
+        # nen doi nguong phan loai khong phai cao lai 400 trang.
+        **{k: (round(v, 4) if isinstance(v, float) else v)
+           for k, v in dc.items()},
     }
 
 
