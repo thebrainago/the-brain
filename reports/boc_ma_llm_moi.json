@@ -1,0 +1,823 @@
+[
+ {
+  "ten": "HybridMicrostructure_EA.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "AAPL_Pro.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "ORB Breakout Long",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high",
+       "n": 1
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 2
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "AAPL_Pro.mq5"
+   },
+   {
+    "ten": "ORB Breakout Short",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low",
+       "n": 1
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 2
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "AAPL_Pro.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "SessionORB_EA_g4y.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "DailyZoneRecovery.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Trade_Manager.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "ES_Manager.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "SteepMA.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "SteepMA Long",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 0
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "SteepMA.mq5"
+   },
+   {
+    "ten": "SteepMA Short",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 0
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "SteepMA.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "Nikkei225_Gap_Continuation_EA.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "BlueMoon_EA_v3_4_Netting_Volume_Fix.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "EA_Money_Management.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Aegis_Quantum_Lite.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "EMA_RSI_Buy",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "ema",
+       "n": 20
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 50
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": ">",
+      "phai": {
+       "hang": 30
+      }
+     }
+    ],
+    "nguon": "Aegis_Quantum_Lite.mq5"
+   },
+   {
+    "ten": "EMA_RSI_Sell",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "ema",
+       "n": 20
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 50
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "<",
+      "phai": {
+       "hang": 70
+      }
+     }
+    ],
+    "nguon": "Aegis_Quantum_Lite.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "SuperTrend_AK.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "SuperTrend Buy",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "khong_dien_dat_duoc": "khong the mo ta current_trend == 1 bang cac chi bao co san"
+     }
+    ],
+    "nguon": "SuperTrend_AK.mq5"
+   },
+   {
+    "ten": "SuperTrend Sell",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "khong_dien_dat_duoc": "khong the mo ta current_trend == -1 bang cac chi bao co san"
+     }
+    ],
+    "nguon": "SuperTrend_AK.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "EA_KCI_N-Matrix_engine.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Market_Miner.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "FC_Env_Breakout.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Stochastic_Protector.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "Stochastic Buy",
+    "ho": "quay_ve_trung_binh",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "stochastic",
+       "n": 14
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "hang": 20
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "Stochastic_Protector.mq5"
+   },
+   {
+    "ten": "Stochastic Sell",
+    "ho": "quay_ve_trung_binh",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "stochastic",
+       "n": 14
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "hang": 80
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "Stochastic_Protector.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "KCI_Embeded_EA_Sniper_Ver_1.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "KCI Sniper Buy",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "khong_dien_dat_duoc": "Dieu kien vao lenh: kci_signal == 1 va WPR(period) <= InpWPRBuyLevel. Khong the dien dat do thieu gia tri cu the cua InpWPRPeriod, InpWPRBuyLevel va ham GetEmbeddedKCISignal.",
+    "nguon": "KCI_Embeded_EA_Sniper_Ver_1.mq5"
+   },
+   {
+    "ten": "KCI Sniper Sell",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [],
+    "khong_dien_dat_duoc": "Dieu kien vao lenh: kci_signal == -1 va WPR(period) >= InpWPRSellLevel. Khong the dien dat do thieu gia tri cu the.",
+    "nguon": "KCI_Embeded_EA_Sniper_Ver_1.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "EquityGuardPanel.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "GDS_Renko_SuperTrend_Demo_EA_v1_11.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "ToolAssistantV2.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "GDS_Renko_Zones_Demo.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "GDS_Renko_Fast_Demo.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+  "so": 1,
+  "co_che": [
+   {
+    "ten": "LL Recovery Buy",
+    "ho": "khong_dien_dat_duoc",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "<",
+      "phai": {
+       "hang": 30
+      }
+     }
+    ],
+    "nguon": "Sniper_Gold_Hybrid_Recovery_EA.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "RiskDashboardPanel.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "lyapunov.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "003-Weekly-Day-Reversal.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "EMA_Cross_EA5.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "EMA Cross Buy",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "ema",
+       "n": 12
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 26
+      }
+     }
+    ],
+    "nguon": "EMA_Cross_EA5.mq5"
+   },
+   {
+    "ten": "EMA Cross Sell",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "ema",
+       "n": 12
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 26
+      }
+     }
+    ],
+    "nguon": "EMA_Cross_EA5.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "ADX_Trend_Pullback_EA.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "MSNR_v531Plus_AEU1.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "001-Turnaround-Tuesday.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "BreakoutEA.mq5",
+  "so": 1,
+  "co_che": [
+   {
+    "ten": "Breakout Entry",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "khong_dien_dat_duoc": true
+     }
+    ],
+    "ra": [],
+    "nguon": "BreakoutEA.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "Quantum_XAUUSD_Silver_Trader.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Prime_Quantum_AI.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Frontend.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "XANDER_Gold_Recovery.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Range_BreakOut_EA_1_02.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Range_BreakOut_EA_1_02.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "Range Breakout Buy",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 30
+      }
+     }
+    ],
+    "nguon": "Range_BreakOut_EA_1_02.mq5"
+   },
+   {
+    "ten": "Range Breakout Sell",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 30
+      }
+     }
+    ],
+    "nguon": "Range_BreakOut_EA_1_02.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "XANDER_Grid_XAUUSD.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "Grid Buy",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "open"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "XANDER_Grid_XAUUSD.mq5"
+   },
+   {
+    "ten": "Grid Sell",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "open"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "XANDER_Grid_XAUUSD.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "BEC_Lockin_Dashboard_Manager_V2_71.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "XProTradePanel.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Grid_EA_Pro.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "RSI_SELL",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 70
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "Grid_EA_Pro.mq5"
+   },
+   {
+    "ten": "RSI_BUY",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": 30
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "Grid_EA_Pro.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "BEC_Combined_BE_Trail.mq5",
+  "so": 0,
+  "co_che": []
+ },
+ {
+  "ten": "Hon-Matrix.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "Breakout Buy",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 20
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "Hon-Matrix.mq5"
+   },
+   {
+    "ten": "Breakout Sell",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 20
+      }
+     }
+    ],
+    "ra": [],
+    "nguon": "Hon-Matrix.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "OHLCMTF_Scalper_MAIN.mq5",
+  "so": 2,
+  "co_che": [
+   {
+    "ten": "Buy_Signal_MTF",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 1
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "nguon": "OHLCMTF_Scalper_MAIN.mq5"
+   },
+   {
+    "ten": "Sell_Signal_MTF",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 1
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "nguon": "OHLCMTF_Scalper_MAIN.mq5"
+   }
+  ]
+ },
+ {
+  "ten": "VR_Rsi_Robot.mq5",
+  "so": 0,
+  "co_che": []
+ }
+]

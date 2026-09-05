@@ -107,11 +107,11 @@ ANH_XA = {
         ("vol_max", 1.0, "chi mo ro khi bien dong <= nguong"),
     # --- CHUA MO PHONG DUOC, van boc de biet dang bo lo gi ---
     r"trail(ing)?.?(start|after|trigger|activate)|start.?trail":
-        ("_trailing_tu", 1.0, "CHUA MO PHONG: bat trailing sau bao nhieu pip"),
+        ("trailing_tu", 1.0, "bat trailing sau bao nhieu pip"),
     r"trail(ing)?.?(step|dist|gap|stop|pip|point)":
-        ("_trailing_buoc", 1.0, "CHUA MO PHONG: buoc trailing"),
+        ("trailing_buoc", 1.0, "buoc trailing"),
     r"break.?even.?(pip|point|after|trigger|dist)|be.?(trigger|pip)":
-        ("_breakeven_tu", 1.0, "CHUA MO PHONG: dua SL ve hoa von sau N pip"),
+        ("breakeven_tu", 1.0, "dua SL ve hoa von sau N pip"),
     r"risk.?(percent|pct)|percent.?risk|risk.?per.?trade":
         ("_risk_pct", 1.0, "CHUA MO PHONG: lot theo % rui ro"),
 }
@@ -120,7 +120,10 @@ ANH_XA = {
 #: mo phong - dem rieng de biet do lon cua phan dang bo lo.
 NUT_CHAY_DUOC = {"buoc", "kc_bs", "tp", "chot_tien", "dung_lo", "he_so_1",
                  "tang_toi_da", "cat_hoa_tu", "hedge_tu", "hedge_ty",
-                 "thoat_theo_gio", "vol_min", "vol_max"}
+                 "thoat_theo_gio", "vol_min", "vol_max",
+                 # them 05/09 sau khi cai vao `mo_phong_v2`. Truoc do 35/86 file
+                 # tien ich bi gat chi vi thieu ba nut nay - khong phai vi rong.
+                 "trailing_tu", "trailing_buoc", "breakeven_tu"}
 
 #: Dau hieu de nhan mot file la CO quan tri vi the. BAN 2 - mo rong theo tu
 #: vung do duoc, va them tieng Viet (kho co ma nguon cua nguoi Viet).
@@ -183,11 +186,17 @@ def boc_mot(src: str, ten: str = "") -> dict | None:
     `CloseAll`) co o gan nhu moi EA va khong noi len gi.
     """
     dh = dau_hieu_cua(src)
-    if len(dh) < 2:
-        return None
     ins = doc_input(src)
     nut = anh_xa(ins)
     if not nut:
+        return None
+    chay = {k for k in nut if k in NUT_CHAY_DUOC}
+    # Bang chung la NUT ANH XA DUOC, khong phai so tu khoa. Mot file chi co
+    # `trailing` co DUNG mot dau hieu nhung neu no khai ca `TrailingStart` lan
+    # `TrailingStep` thi no CO trailing that. Nguong cu (>=2 dau hieu) gat het
+    # lop nay - ma do lai la lop manh nhat: 23/35 co che giu duoc co
+    # `trailing_buoc` (do 05/09).
+    if len(dh) < 2 and len(chay) < 2:
         return None
     return {
         "ten": ten, "ho": "quan_tri_vi_the",
@@ -241,7 +250,8 @@ def boc_kho(gioi_han: int = 0, in_ra=print) -> list[dict]:
 #:                    Day la tieu chi quan trong nhat: no chon ra dung lop
 #:                    "dung di dung lai" ma chu du an noi.
 NUT_QUAN_TRI = {"hedge_tu", "hedge_ty", "cat_hoa_tu", "chot_tien", "dung_lo",
-                "thoat_theo_gio", "vol_min", "vol_max", "kc_bs"}
+                "thoat_theo_gio", "vol_min", "vol_max", "kc_bs",
+                "trailing_tu", "trailing_buoc", "breakeven_tu"}
 NUT_LUOI = {"buoc", "tp", "he_so_1", "tang_toi_da"}
 
 

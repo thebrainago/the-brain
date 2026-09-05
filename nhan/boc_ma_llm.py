@@ -148,11 +148,30 @@ def _mot(d: dict, tom_tat: str) -> dict:
             "vi_sao": "" if cc else "LLM tra ve rong"}
 
 
+def mot_file(d: dict, tom_tat: str, so_lan: int = 2) -> dict:
+    """Boc MOT file, thu lai toi da `so_lan` neu tra rong.
+
+    LLM khong tat dinh: do 05/09, ba file ra co che o me 15 lai tra rong o me 45
+    du khong doi mot ky tu nao. Mot lan rong khong phai ket luan.
+    """
+    cuoi = {"ten": d["ten"], "co_che": [], "vi_sao": "chua chay"}
+    for _ in range(max(1, so_lan)):
+        cuoi = _mot(d, tom_tat)
+        if cuoi["co_che"]:
+            return cuoi
+    return cuoi
+
+
 def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]:
     """Moi khai bao phai qua `ngu_phap.kiem_khai_bao`. Khong qua thi BO."""
     from nhan import ngu_phap as NP
     giu, ho = [], []
     for c in cc:
+        # LLM doi khi tra `co_che: ["mua khi rsi < 30"]` - danh sach CHUOI.
+        # Bo qua yen lang thay vi nem loi lam mat ca me (da sap 05/09).
+        if not isinstance(c, dict):
+            ho.append("khong phai dict: %s" % str(c)[:40])
+            continue
         c.setdefault("nguon", nguon)
         c.setdefault("giu", 1)
         try:
@@ -196,7 +215,7 @@ def moi(so_file: int = 20, in_ra=print) -> dict:
     in_ra("TEST MOI tren %d file co lenh vao" % len(ds))
     ket = []
     with _cf.ThreadPoolExecutor(max_workers=LUONG) as ex:
-        for z in ex.map(lambda d: _mot(d, tom_tat), ds):
+        for z in ex.map(lambda d: mot_file(d, tom_tat, so_lan=2), ds):
             ket.append(z)
     co = [k for k in ket if k["co_che"]]
     tong_cc = sum(len(k["co_che"]) for k in ket)
@@ -216,3 +235,91 @@ def moi(so_file: int = 20, in_ra=print) -> dict:
         in_ra("  khong ra: %-40s %d" % (k[:40], v))
     return {"so_file": len(ds), "ra_co_che": len(co), "khai_bao": tong_cc,
             "qua_kiem": len(giu_tong), "ket": ket}
+
+
+
+def chay_that(gioi_han: int = 0, so_lan: int = 2, ghi_kho: bool = True,
+              in_ra=print) -> dict:
+    """Chay tren TOAN BO file co lenh vao, ghi khai bao dat vao kho co che.
+
+    Khac `moi()` o hai cho: khong cat mau, va CO ghi kho. Moi khai bao van phai
+    qua `kiem_va_giu` (tuc `ngu_phap.kiem_khai_bao`) truoc khi vao.
+    """
+    import time
+    from nhan import boc_llm as BL
+    from nhan import ngu_phap as NP
+    from nhan import so as SO
+
+    tom_tat = BL._ngu_phap_tom_tat()
+    r = SO.nhieu("SELECT id,payload FROM artifact WHERE artifact_type='code'")
+    ds = []
+    for x in r:
+        try:
+            p = json.loads(x["payload"])
+        except Exception:
+            continue
+        con = p.get("payload") or p
+        src = con.get("content") or ""
+        if not isinstance(src, str) or len(src) < 200:
+            continue
+        if not vung_vao_lenh(src):
+            continue
+        ds.append({"ten": str(con.get("ten") or con.get("path") or x["id"]),
+                   "src": src, "id": x["id"]})
+        if gioi_han and len(ds) >= gioi_han:
+            break
+    in_ra("CHAY THAT tren %d file co lenh vao (thu lai %d lan)" % (len(ds), so_lan))
+    t0 = time.time()
+    ket = []
+    with _cf.ThreadPoolExecutor(max_workers=LUONG) as ex:
+        for i, z in enumerate(
+                ex.map(lambda d: mot_file(d, tom_tat, so_lan), ds), 1):
+            ket.append(z)
+            if i % 20 == 0:
+                in_ra("  ... %d/%d (%.0fs)" % (i, len(ds), time.time() - t0))
+    # GHI THO NGAY, truoc khi kiem. Mot me la ~25 phut goi API; mot loi hau ky
+    # khong duoc phep lam mat no.
+    try:
+        import pathlib
+        pathlib.Path("reports/boc_ma_llm_tho.json").write_text(
+            json.dumps(ket, ensure_ascii=False, indent=1), encoding="utf-8")
+        in_ra("  da ghi tho -> reports/boc_ma_llm_tho.json")
+    except Exception as e:
+        in_ra("  khong ghi duoc ban tho: %s" % str(e)[:60])
+
+    co = [k for k in ket if k["co_che"]]
+    giu, ho = [], []
+    for k in ket:
+        g, h = kiem_va_giu(k["co_che"], nguon=k["ten"])
+        giu += g
+        ho += h
+    in_ra("")
+    in_ra("  file ra co che   : %d/%d (%.0f%%)"
+          % (len(co), len(ds), 100 * len(co) / max(len(ds), 1)))
+    in_ra("  khai bao qua kiem: %d" % len(giu))
+    them = trung = 0
+    if ghi_kho and giu:
+        try:
+            kho = NP.doc_kho()
+            # CHONG TRUNG BANG VAN TAY DIEU KIEN, khong bang ten. Hai co che
+            # cung `vao`/`ra`/`chieu`/`giu` la MOT co che du dat ten khac -
+            # va do la truong hop pho bien khi rut tu dong tu nhieu nguon noi
+            # ve cung mot y tuong.
+            co = {NP.van_tay_dieu_kien(c) for c in kho}
+            for c in giu:
+                vt = NP.van_tay_dieu_kien(c)
+                if vt in co:
+                    trung += 1
+                    continue
+                co.add(vt)
+                c["van_tay"] = vt
+                kho.append(c)
+                them += 1
+            if them:
+                NP.luu_kho(kho)
+            in_ra("  trung (van tay): %d" % trung)
+        except Exception as e:
+            in_ra("  loi ghi kho: %s: %s" % (type(e).__name__, str(e)[:70]))
+    in_ra("  them vao kho     : %d" % them)
+    return {"so_file": len(ds), "ra_co_che": len(co), "qua_kiem": len(giu),
+            "them_kho": them, "ket": ket}

@@ -4,26 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-02 16:18:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1628, 0 phut), dieu_khien_xa.py (pid 15536, 357 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 17:15:27 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19992, 0 phut), dieu_khien_xa.py (pid 15536, 413 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 17:26:46 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16768, 0 phut), dieu_khien_xa.py (pid 15536, 424 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 17:40:43 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12048, 0 phut), dieu_khien_xa.py (pid 15536, 438 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 17:48:32 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14368, 0 phut), dieu_khien_xa.py (pid 15536, 446 phut)
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
 ### 2026-09-02 17:51:00 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 17664, 0 phut), dieu_khien_xa.py (pid 15536, 449 phut)
@@ -404,3 +384,23 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 
 - dang chay: ban_giao_song.py (pid 6632, 0 phut), dieu_khien_xa.py (pid 14676, 379 phut)
 - git: 11c9883 chuan hoa quy trinh QuantLab: 5 buoc, 4 module dung lai duoc
+### 2026-09-05 13:32:41 — chup trang thai
+
+- dang chay: ? (pid 8576, 1 phut), ban_giao_song.py (pid 8668, 0 phut), dieu_khien_xa.py (pid 14676, 382 phut)
+- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
+### 2026-09-05 13:41:09 — chup trang thai
+
+- dang chay: ? (pid 8828, 3 phut), ban_giao_song.py (pid 14972, 0 phut), dieu_khien_xa.py (pid 14676, 391 phut)
+- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
+### 2026-09-05 13:42:46 — chup trang thai
+
+- dang chay: ? (pid 3692, 0 phut), ban_giao_song.py (pid 13568, 0 phut), dieu_khien_xa.py (pid 14676, 392 phut)
+- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
+### 2026-09-05 13:53:06 — chup trang thai
+
+- dang chay: ? (pid 3692, 11 phut), ban_giao_song.py (pid 7312, 0 phut), dieu_khien_xa.py (pid 14676, 403 phut)
+- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
+### 2026-09-05 14:05:39 — chup trang thai
+
+- dang chay: ? (pid 3692, 23 phut), ban_giao_song.py (pid 12316, 0 phut), dieu_khien_xa.py (pid 14676, 415 phut)
+- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
