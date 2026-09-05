@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 2440, 0 phut), dieu_khien_xa.py (pid 15536, 103 phut)
-- `dieu_phoi_nen.log`: [Wed 09/02/2026 10:21:48.88] thay DUNG_LAI - khong khoi dong watchdog
-- git: 4b4ef6b ban giao 01/09 khuya: dien doan tom tat + hai muc dau (kiem lai H1/H4, va vi sao hieu_chuan_v6 dung lai)
-### 2026-09-02 12:09:42 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 16768, 0 phut), dieu_khien_xa.py (pid 15536, 107 phut)
 - `dieu_phoi_nen.log`: [Wed 09/02/2026 10:21:48.88] thay DUNG_LAI - khong khoi dong watchdog
@@ -404,3 +400,7 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 
 - dang chay: ban_giao_song.py (pid 13948, 0 phut), dieu_khien_xa.py (pid 14676, 129 phut)
 - git: d324e84 vong quantlab AUDCAD: tiem nang -> 900 cau hinh -> ket qua am co gia tri
+### 2026-09-05 09:41:35 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16264, 0 phut), dieu_khien_xa.py (pid 14676, 151 phut)
+- git: c62bfc7 boc .set THAT cua Bigmouse, chay tren AUDCAD: 62%/nam voi von 33$ cent

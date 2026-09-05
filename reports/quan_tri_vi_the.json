@@ -1,0 +1,367 @@
+[
+ {
+  "ten": "DailyZoneRecovery.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "luoi"
+  ],
+  "so_input": 33,
+  "nut_van": {
+   "buoc": 0.34
+  },
+  "input_goc": {
+   "buoc": "InpStrategy1GridStepPct"
+  },
+  "artifact_id": 177
+ },
+ {
+  "ten": "BlueMoon_EA_v3_4_Netting_Volume_Fix.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "luoi",
+   "chot_ro",
+   "lenh_cho"
+  ],
+  "so_input": 32,
+  "nut_van": {
+   "tp": 10.0
+  },
+  "input_goc": {
+   "tp": "InpSingleTradeTPPips"
+  },
+  "artifact_id": 752
+ },
+ {
+  "ten": "EA_KCI_N-Matrix_engine.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "hedge",
+   "thang_lot"
+  ],
+  "so_input": 162,
+  "nut_van": {
+   "_lot_goc": 0.01,
+   "he_so_1": 1.3
+  },
+  "input_goc": {
+   "_lot_goc": "InpLotSize",
+   "he_so_1": "InpLotMultiplier"
+  },
+  "artifact_id": 758
+ },
+ {
+  "ten": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "chot_ro",
+   "thang_lot"
+  ],
+  "so_input": 65,
+  "nut_van": {
+   "_lot_goc": 0.01,
+   "he_so_1": 1.2
+  },
+  "input_goc": {
+   "_lot_goc": "FixedLotSize",
+   "he_so_1": "RecoveryLotMultiplier"
+  },
+  "artifact_id": 4579
+ },
+ {
+  "ten": "Prime_Quantum_AI.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "martingale",
+   "tia_lenh",
+   "chot_ro"
+  ],
+  "so_input": 104,
+  "nut_van": {
+   "dung_lo": 2500.0,
+   "he_so_1": 2.0,
+   "tp": 60.0
+  },
+  "input_goc": {
+   "dung_lo": "InpEquityLossLimit",
+   "he_so_1": "InpMartingaleMultiplier",
+   "tp": "InpFixedTP_Pips"
+  },
+  "artifact_id": 4891
+ },
+ {
+  "ten": "XANDER_Grid_XAUUSD.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "luoi",
+   "tia_lenh",
+   "chot_ro"
+  ],
+  "so_input": 21,
+  "nut_van": {
+   "buoc": 390.0
+  },
+  "input_goc": {
+   "buoc": "xs_GridStep"
+  },
+  "artifact_id": 4896
+ },
+ {
+  "ten": "BEC_Lockin_Dashboard_Manager_V2_71.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "tia_lenh",
+   "chot_ro"
+  ],
+  "so_input": 40,
+  "nut_van": {
+   "buoc": 30.0
+  },
+  "input_goc": {
+   "buoc": "PositionTrailStepPips"
+  },
+  "artifact_id": 4897
+ },
+ {
+  "ten": "Hon-Matrix.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "luoi",
+   "chot_ro",
+   "lenh_cho",
+   "thang_lot"
+  ],
+  "so_input": 68,
+  "nut_van": {
+   "_lot_goc": 0.06,
+   "he_so_1": 1.1,
+   "tp": 50.0
+  },
+  "input_goc": {
+   "_lot_goc": "InitialLotSize",
+   "he_so_1": "LotMultiplier",
+   "tp": "TakeProfitPips"
+  },
+  "artifact_id": 4901
+ },
+ {
+  "ten": "GridEA.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "luoi",
+   "chot_ro",
+   "thang_lot"
+  ],
+  "so_input": 47,
+  "nut_van": {
+   "buoc": 500.0,
+   "tang_toi_da": 8.0,
+   "_lot_goc": 0.01,
+   "he_so_1": 1.0,
+   "chot_tien": 50.0,
+   "thoat_theo_gio": 72.0,
+   "vol_min": 0.5,
+   "vol_max": 5.0
+  },
+  "input_goc": {
+   "buoc": "InpGridSpacing",
+   "tang_toi_da": "InpGridLevels",
+   "_lot_goc": "InpBaseLot",
+   "he_so_1": "InpLotMultiplier",
+   "chot_tien": "InpProfitTargetDollars",
+   "thoat_theo_gio": "InpMaxCycleHours",
+   "vol_min": "InpMinVolatilityRatio",
+   "vol_max": "InpMaxVolatilityRatio"
+  },
+  "artifact_id": 4933
+ },
+ {
+  "ten": "EA.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "luoi",
+   "chot_ro"
+  ],
+  "so_input": 14,
+  "nut_van": {
+   "buoc": 1500.0
+  },
+  "input_goc": {
+   "buoc": "GridStep"
+  },
+  "artifact_id": 4941
+ },
+ {
+  "ten": "SidewaysMartingale.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "recovery",
+   "martingale",
+   "chot_ro",
+   "thang_lot"
+  ],
+  "so_input": 13,
+  "nut_van": {
+   "_lot_goc": 0.08,
+   "chot_tien": 12.0,
+   "he_so_1": 2.0,
+   "buoc": 15.0,
+   "tang_toi_da": 8.0
+  },
+  "input_goc": {
+   "_lot_goc": "InpLotSize",
+   "chot_tien": "TakeProfitTargetUSD",
+   "he_so_1": "LotMultiplier",
+   "buoc": "DistanceMartingalePips",
+   "tang_toi_da": "MaxTradesInSeries"
+  },
+  "artifact_id": 4945
+ },
+ {
+  "ten": "BabiNgepet_07.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "martingale",
+   "chot_ro",
+   "lenh_cho",
+   "thang_lot"
+  ],
+  "so_input": 22,
+  "nut_van": {
+   "he_so_1": 2.0,
+   "buoc": 28.0,
+   "tang_toi_da": 8.0
+  },
+  "input_goc": {
+   "he_so_1": "LotMultiplier",
+   "buoc": "DistanceMartingalePips",
+   "tang_toi_da": "MaxTradesInSeries"
+  },
+  "artifact_id": 4995
+ },
+ {
+  "ten": "MartingalePulse.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "martingale",
+   "chot_ro",
+   "lenh_cho"
+  ],
+  "so_input": 45,
+  "nut_van": {
+   "he_so_1": 2.0,
+   "tang_toi_da": 5.0,
+   "_lot_goc": 5.0
+  },
+  "input_goc": {
+   "he_so_1": "InpMartingaleMultiplier",
+   "tang_toi_da": "InpMaxOrdersPerRound",
+   "_lot_goc": "InpMaxLotSize"
+  },
+  "artifact_id": 4999
+ },
+ {
+  "ten": "cincinv2.24.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "hedge",
+   "chot_ro",
+   "lenh_cho",
+   "thang_lot"
+  ],
+  "so_input": 33,
+  "nut_van": {
+   "dung_lo": 1.0,
+   "cat_hoa_tu": 1.0,
+   "hedge_tu": 5.0,
+   "he_so_1": 2.0
+  },
+  "input_goc": {
+   "dung_lo": "InpLossLimit",
+   "cat_hoa_tu": "InpPositionThreshold",
+   "hedge_tu": "InpHedgePips",
+   "he_so_1": "InpHedgeLotMultiplier"
+  },
+  "artifact_id": 5005
+ },
+ {
+  "ten": "tarantellav1.37.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "hedge",
+   "tia_lenh",
+   "chot_ro"
+  ],
+  "so_input": 71,
+  "nut_van": {
+   "hedge_ty": 1.0
+  },
+  "input_goc": {
+   "hedge_ty": "HedgeRatio"
+  },
+  "artifact_id": 5009
+ },
+ {
+  "ten": "botcilentov1.35.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "martingale",
+   "luoi",
+   "chot_ro"
+  ],
+  "so_input": 46,
+  "nut_van": {
+   "he_so_1": 1.3,
+   "buoc": 20.0,
+   "tp": 100.0,
+   "thoat_theo_gio": 48.0,
+   "dung_lo": 5.0
+  },
+  "input_goc": {
+   "he_so_1": "Martingale_Multiplier",
+   "buoc": "Min_Grid_Step_Pips",
+   "tp": "Take_Profit_In_Pips",
+   "thoat_theo_gio": "Max_Cycle_Hours",
+   "dung_lo": "Daily_Loss_Limit_Percent"
+  },
+  "artifact_id": 5010
+ },
+ {
+  "ten": "pending_tread.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "luoi",
+   "chot_ro",
+   "lenh_cho"
+  ],
+  "so_input": 15,
+  "nut_van": {
+   "tp": 75.0,
+   "_lot_goc": 0.1
+  },
+  "input_goc": {
+   "tp": "TakeProfitPips",
+   "_lot_goc": "LotSize"
+  },
+  "artifact_id": 5014
+ },
+ {
+  "ten": "rsijmartingale1.5.mq5",
+  "ho": "quan_tri_vi_the",
+  "dau_hieu": [
+   "martingale",
+   "chot_ro"
+  ],
+  "so_input": 52,
+  "nut_van": {
+   "he_so_1": 2.0
+  },
+  "input_goc": {
+   "he_so_1": "MartingaleMultiplier"
+  },
+  "artifact_id": 5134
+ }
+]
