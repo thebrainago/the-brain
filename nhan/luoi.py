@@ -82,6 +82,33 @@ class ThamSo:
     kieu_lot: str = "phang"
     he_so_lot: float = 1.0
 
+    # ---- CO CHE THAT cua EA luoi, boc tu `LuoiDoiXung.mq5` cua du an ----
+    # Chu du an 05/09: *"Co rat nhieu con EA co kha nang hedging va tia lenh.
+    # No dung cac lenh buy sell stop, chot tia lenh va nhieu co che. Chu khong
+    # phai moi dca thuan"*. Dung - va ban dau cua file nay chi co DCA thuan,
+    # ngheo hon chinh cai du an da boc duoc tu EA that.
+    #
+    #: TIA LENH (`BatChotCap`/`BienCapPip`): ghep lenh SAU NHAT voi lenh DAU
+    #: TIEN, dong ca cap khi tong lai cua cap >= `bien_cap` pip. Cat ngan thang
+    #: ladder ma khong phai cho ca ro ve hoa von. `cap_moi_bar` = 1 la tia THAT
+    #: tung phan; 999 la dong day chuyen (khac han nhau).
+    tia_lenh: bool = False
+    bien_cap: float = 4.0
+    cap_moi_bar: int = 999
+    #: CHOT CA RO THEO TIEN (`ChotTien_0v01`) thay vi theo pip tu gia trung
+    #: binh. Khac nhau khi ro co nhieu tang: TP pip co dinh cho ro 10 tang an
+    #: gap 10 lan ro 1 tang, con chot theo tien thi khong.
+    chot_tien: float = 0.0
+    #: DUNG LO TOAN CUC (`DungLo_0v01`): dong SACH ca hai ro khi lo noi cong lai
+    #: vuot nguong. Day la thu bien "khong cat lo" thanh "cat lo co tran" - va
+    #: no la co che doi han hinh dang duoi rui ro.
+    dung_lo_tong: float = 0.0
+    #: BUOC GIAN DAN (`HeSoBuoc`/`BuocTranPip`): khoang cach tang thu k =
+    #: buoc * he_so_buoc^(k-1), chan tren `buoc_tran`. >1 = gian dan (song lau
+    #: hon trong xu huong), <1 = day dan.
+    he_so_buoc: float = 1.0
+    buoc_tran: float = 400.0
+
 
 @dataclass
 class KetQuaLuoi:
@@ -122,12 +149,23 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo):
             return ts.lot * (1.0 + ts.he_so_lot * k)
         return ts.lot
 
-    vao = [cl[0]]
+    def _buoc(k: int) -> float:
+        """Khoang cach tu tang k den tang k+1 (pip), co gian dan va tran."""
+        if ts.he_so_buoc == 1.0:
+            return ts.buoc
+        return min(ts.buoc * (ts.he_so_buoc ** k), ts.buoc_tran)
+
+    # (gia, lot) - lot GAN VAO LENH luc mo. Truoc 05/09 day la list gia va lot
+    # duoc tra bang `_lot(vi_tri_trong_list)`; khi TIA LENH cat hai dau thi cac
+    # tang con lai bi DANH SO LAI va lot cua chung doi ngam. Loi do thoi ket
+    # qua len vi no am tham bo di dung nhung tang lot to nhat.
+    vao = [(cl[0], _lot(0))]
     cho = 0.0          # != 0: dang CHO gia lui toi muc nay moi mo L1
     lai = 0.0
     phi_sp = 0.0
     phi_sw = 0.0
-    so_ro = so_lenh = 0
+    so_ro = so_lenh = so_cap = 0
+    so_tang = 1          # bao nhieu tang DA MO cua ro hien tai (khong tut khi tia)
     tang_max = 1
     lai_arr = np.empty(n)
     treo_arr = np.empty(n)
@@ -139,7 +177,7 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo):
         # ---- 0. dang CHO gia lui de mo L1 ----
         if cho:
             if (lo[i] <= cho) if chieu > 0 else (hi[i] >= cho):
-                vao = [cho]
+                vao = [(cho, _lot(0))]
                 so_lenh += 1
                 phi_sp += spread_gia[i] * _lot(0) * HOP_DONG
                 cho = 0.0
@@ -149,14 +187,15 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo):
                 continue
         # ---- 1. BAT LOI TRUOC: them tang ----
         if len(vao) < ts.tran_tang:
-            moc = vao[-1] - chieu * b
+            moc = vao[-1][0] - chieu * _buoc(so_tang) * PIP
             while (lo[i] <= moc if chieu > 0 else hi[i] >= moc):
-                phi_sp += spread_gia[i] * _lot(len(vao)) * HOP_DONG
-                vao.append(moc)
+                phi_sp += spread_gia[i] * _lot(so_tang) * HOP_DONG
+                vao.append((moc, _lot(so_tang)))
+                so_tang += 1
                 so_lenh += 1
                 if len(vao) >= ts.tran_tang:
                     break
-                moc = moc - chieu * b
+                moc = moc - chieu * _buoc(so_tang) * PIP
         if not vao:
             lai_arr[i] = lai - phi_sp - phi_sw
             treo_arr[i] = 0.0
@@ -164,32 +203,66 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo):
         if len(vao) > tang_max:
             tang_max = len(vao)
         # ---- 2. phi qua dem cho cac tang dang mo ----
-        tong_lot = sum(_lot(k) for k in range(len(vao)))
+        tong_lot = sum(l for _g, l in vao)
         if dem[i]:
             phi_sw += tong_lot * HOP_DONG * ty_le * dem[i] / 365.0 * cl[i]
         # ---- 3. lo treo sau nhat trong bar ----
         xau = lo[i] if chieu > 0 else hi[i]
         treo = 0.0
-        for k, v in enumerate(vao):
-            d = chieu * (v - xau)
+        for g, l in vao:
+            d = chieu * (g - xau)
             if d > 0:
-                treo += d * _lot(k)
+                treo += d * l
         treo_arr[i] = treo * HOP_DONG
         # ---- 4. TP tu gia trung binh ----
+        # ---- 3b. TIA LENH: ghep tang SAU NHAT voi tang DAU TIEN ----
+        if ts.tia_lenh and len(vao) >= 2:
+            tot = hi[i] if chieu > 0 else lo[i]
+            da = 0
+            while len(vao) >= 2 and da < ts.cap_moi_bar:
+                (g_dau, l_dau), (g_cuoi, l_cuoi) = vao[0], vao[-1]
+                lai_cap = (chieu * (tot - g_cuoi) * l_cuoi
+                           + chieu * (tot - g_dau) * l_dau) * HOP_DONG
+                if lai_cap < ts.bien_cap * PIP * (l_dau + l_cuoi) * HOP_DONG:
+                    break
+                lai += lai_cap
+                phi_sp += spread_gia[i] * (l_dau + l_cuoi) * HOP_DONG
+                so_cap += 1
+                da += 1
+                vao = vao[1:-1]
+            if not vao:
+                # tia het ca ro -> mo lai mot lenh moi, ladder ve 0
+                so_tang = 1
+                vao = [(cl[i], _lot(0))]
+                so_lenh += 1
+                phi_sp += spread_gia[i] * _lot(0) * HOP_DONG
+            tong_lot = sum(l for _g, l in vao)
         # gia trung binh CO TRONG SO LOT - do la ca co che cua DCA: tang sau
         # lot to hon keo gia trung binh ve gan gia hien tai nhanh hon.
-        tb = sum(_lot(k) * v for k, v in enumerate(vao)) / tong_lot
-        mtp = tb + chieu * t
-        if (hi[i] >= mtp) if chieu > 0 else (lo[i] <= mtp):
-            lai += tong_lot * HOP_DONG * t
+        tb = sum(l * g for g, l in vao) / tong_lot
+        if ts.chot_tien > 0:
+            # chot khi LAI NOI cua ro >= nguong tien (quy ve 0,01 lot goc)
+            tot = hi[i] if chieu > 0 else lo[i]
+            lai_noi = sum(chieu * (tot - g) * l for g, l in vao) * HOP_DONG
+            nguong = ts.chot_tien * (ts.lot / 0.01)
+            mtp = tot if lai_noi >= nguong else None
+            cham = mtp is not None
+            loi_chot = lai_noi
+        else:
+            mtp = tb + chieu * t
+            cham = (hi[i] >= mtp) if chieu > 0 else (lo[i] <= mtp)
+            loi_chot = tong_lot * HOP_DONG * t
+        if cham:
+            lai += loi_chot
             so_ro += 1
             treo_arr[i] = 0.0
+            so_tang = 1
             if ts.cho_lui > 0:
                 # khong mo lai ngay: dat moc cho gia lui `cho_lui` pip
                 cho = mtp - chieu * ts.cho_lui * PIP
                 vao = []
             else:
-                vao = [mtp]
+                vao = [(mtp, _lot(0))]
                 so_lenh += 1
                 phi_sp += spread_gia[i] * _lot(0) * HOP_DONG
         lai_arr[i] = lai - phi_sp - phi_sw
@@ -198,7 +271,7 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo):
     return lai_arr, treo_arr, {
         "lai_gop": lai, "phi_spread": phi_sp, "phi_swap": phi_sw,
         "so_ro": so_ro, "so_lenh": so_lenh, "tang_max": tang_max,
-        "con_mo": len(vao)}
+        "so_cap": so_cap, "con_mo": len(vao)}
 
 
 def chay(df, ts: ThamSo, von: float) -> KetQuaLuoi:
