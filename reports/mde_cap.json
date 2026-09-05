@@ -255,13 +255,13 @@
   "ma": "YH_VANG",
   "khung": "D1",
   "so_bar": 2605,
-  "van_tay": "2605|SAN|69|0.07062|-0.00909|cp3",
+  "van_tay": "2605|KHAI|69|0.07062|-0.00909|cp3",
   "mde": 0.895,
-  "che_do": "giao_dich",
-  "chi_phi_do_tin": "SAN",
+  "che_do": "nghien_cuu",
+  "chi_phi_do_tin": "KHAI",
   "spread_bps": 0.693,
   "loi": null,
-  "do_luc": "2026-08-30 11:21:53"
+  "do_luc": "2026-09-05 22:48:16"
  },
  "EURGBP|D1": {
   "ma": "EURGBP",
@@ -483,13 +483,13 @@
   "ma": "US500M",
   "khung": "H4",
   "so_bar": 3990,
-  "van_tay": "3990|SAN|95|0.05758|-0.00666|cp3",
-  "mde": 1.662,
+  "van_tay": "3990|SAN|94|0.05758|-0.00666|cp3",
+  "mde": 1.668,
   "che_do": "giao_dich",
   "chi_phi_do_tin": "SAN",
-  "spread_bps": 0.946,
+  "spread_bps": 0.942,
   "loi": null,
-  "do_luc": "2026-08-31 09:31:00"
+  "do_luc": "2026-09-05 22:55:12"
  },
  "US500M|D1": {
   "ma": "US500M",
@@ -519,13 +519,13 @@
   "ma": "US500CASH",
   "khung": "H4",
   "so_bar": 6276,
-  "van_tay": "6276|SAN|95|0.05758|-0.00666|cp3",
-  "mde": 1.484,
+  "van_tay": "6276|SAN|94|0.05758|-0.00666|cp3",
+  "mde": 1.489,
   "che_do": "giao_dich",
   "chi_phi_do_tin": "SAN",
-  "spread_bps": 0.946,
+  "spread_bps": 0.942,
   "loi": null,
-  "do_luc": "2026-09-04 20:52:48"
+  "do_luc": "2026-09-05 22:57:08"
  },
  "US500CASH|D1": {
   "ma": "US500CASH",
@@ -554,14 +554,14 @@
  "EURUSD|H4": {
   "ma": "EURUSD",
   "khung": "H4",
-  "so_bar": 20463,
-  "van_tay": "20463|SAN|163|0.0246|-0.00447|cp3",
-  "mde": 1.033,
+  "so_bar": 17599,
+  "van_tay": "17599|SAN|163|0.0246|-0.00447|cp3",
+  "mde": 1.097,
   "che_do": "giao_dich",
   "chi_phi_do_tin": "SAN",
   "spread_bps": 1.633,
   "loi": null,
-  "do_luc": "2026-08-22 17:22:05"
+  "do_luc": "2026-09-05 22:56:45"
  },
  "EURUSD|D1": {
   "ma": "EURUSD",
@@ -590,14 +590,14 @@
  "USDJPY|H4": {
   "ma": "USDJPY",
   "khung": "H4",
-  "so_bar": 20442,
-  "van_tay": "20442|SAN|133|-0.00484|0.06794|cp3",
-  "mde": 0.708,
+  "so_bar": 17576,
+  "van_tay": "17576|SAN|133|-0.00484|0.06794|cp3",
+  "mde": 0.923,
   "che_do": "giao_dich",
   "chi_phi_do_tin": "SAN",
   "spread_bps": 1.334,
   "loi": null,
-  "do_luc": "2026-08-22 17:22:46"
+  "do_luc": "2026-09-05 22:55:08"
  },
  "USDJPY|D1": {
   "ma": "USDJPY",
@@ -626,14 +626,14 @@
  "GBPUSD|H4": {
   "ma": "GBPUSD",
   "khung": "H4",
-  "so_bar": 18172,
-  "van_tay": "18172|SAN|156|0.0099|0.01097|cp3",
-  "mde": 1.218,
+  "so_bar": 17585,
+  "van_tay": "17585|SAN|156|0.0099|0.01097|cp3",
+  "mde": 0.917,
   "che_do": "giao_dich",
   "chi_phi_do_tin": "SAN",
   "spread_bps": 1.564,
   "loi": null,
-  "do_luc": "2026-08-22 17:23:28"
+  "do_luc": "2026-09-05 22:56:39"
  },
  "GBPUSD|D1": {
   "ma": "GBPUSD",
@@ -1731,13 +1731,13 @@
   "ma": "YH_GBPUSD",
   "khung": "D1",
   "so_bar": 1937,
-  "van_tay": "1937|SAN|156|0.0099|0.01097|cp3",
+  "van_tay": "1937|KHAI|156|0.0099|0.01097|cp3",
   "mde": 1.247,
-  "che_do": "giao_dich",
-  "chi_phi_do_tin": "SAN",
+  "che_do": "nghien_cuu",
+  "chi_phi_do_tin": "KHAI",
   "spread_bps": 1.564,
   "loi": null,
-  "do_luc": "2026-08-30 11:12:35"
+  "do_luc": "2026-09-05 22:51:17"
  },
  "YH_IBEX35|D1": {
   "ma": "YH_IBEX35",
@@ -2710,5 +2710,89 @@
   "spread_bps": 1.0,
   "loi": "holdout chi 397 bar",
   "do_luc": "2026-09-05 07:34:51"
+ },
+ "XM_JP225CASH|H4": {
+  "ma": "XM_JP225CASH",
+  "khung": "H4",
+  "so_bar": 6371,
+  "van_tay": "6371|SAN|2|0.02522|0.00835|cp3",
+  "mde": 1.896,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 0.018,
+  "loi": null,
+  "do_luc": "2026-09-05 22:55:15"
+ },
+ "XM_GER40CASH|H4": {
+  "ma": "XM_GER40CASH",
+  "khung": "H4",
+  "so_bar": 6293,
+  "van_tay": "6293|SAN|105|0.04794|0.00321|cp3",
+  "mde": 1.312,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 1.049,
+  "loi": null,
+  "do_luc": "2026-09-05 22:55:21"
+ },
+ "XM_US30CASH|H4": {
+  "ma": "XM_US30CASH",
+  "khung": "H4",
+  "so_bar": 6368,
+  "van_tay": "6368|SAN|100|0.05798|-0.00658|cp3",
+  "mde": 1.326,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 1.0,
+  "loi": null,
+  "do_luc": "2026-09-05 22:55:34"
+ },
+ "XM_FRA40CASH|H4": {
+  "ma": "XM_FRA40CASH",
+  "khung": "H4",
+  "so_bar": 4355,
+  "van_tay": "4355|SAN|218|0.05427|0.00345|cp3",
+  "mde": 1.393,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 2.181,
+  "loi": null,
+  "do_luc": "2026-09-05 22:55:50"
+ },
+ "XM_US500CASH|H4": {
+  "ma": "XM_US500CASH",
+  "khung": "H4",
+  "so_bar": 6368,
+  "van_tay": "6368|SAN|104|0.05758|-0.00666|cp3",
+  "mde": 1.341,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 1.04,
+  "loi": null,
+  "do_luc": "2026-09-05 22:57:21"
+ },
+ "XM_EU50CASH|H4": {
+  "ma": "XM_EU50CASH",
+  "khung": "H4",
+  "so_bar": 5082,
+  "van_tay": "5082|SAN|317|0.05312|0.00339|cp3",
+  "mde": 1.647,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 3.173,
+  "loi": null,
+  "do_luc": "2026-09-05 22:57:56"
+ },
+ "XM_UK100CASH|H4": {
+  "ma": "XM_UK100CASH",
+  "khung": "H4",
+  "so_bar": 6258,
+  "van_tay": "6258|SAN|219|0.06854|-0.00743|cp3",
+  "mde": 1.624,
+  "che_do": "giao_dich",
+  "chi_phi_do_tin": "SAN",
+  "spread_bps": 2.192,
+  "loi": null,
+  "do_luc": "2026-09-05 22:57:58"
  }
 }
