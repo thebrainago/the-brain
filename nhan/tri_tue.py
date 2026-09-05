@@ -265,9 +265,18 @@ def _sua_mojibake(t: str) -> str:
 
 # ------------------------------------------------------------------- CUA RA
 def hoi(nhac: str, he_thong: str = "", bo_qua_han_muc: bool = False,
-        dung_cache: bool = True, ep_json: bool = False) -> dict:
-    """Hoi LLM mot cau. Tra dict co `van_ban` hoac `loi`/`bo_qua`."""
+        dung_cache: bool = True, ep_json: bool = False, model: str = "") -> dict:
+    """Hoi LLM mot cau. Tra dict co `van_ban` hoac `loi`/`bo_qua`.
+
+    `model` de RONG thi lay `model_openai` cua cau hinh. Truyen ten model vao de
+    doi rieng MOT luot goi - dung cho chien luoc HAI TANG cua khau boc: goi
+    bang model re nhat truoc, file nao tra rong thi goi lai bang model manh hon.
+    Do 05/09: `qwen3.7-flash` re nhat moi khai bao giu duoc (5/6 file), nhung
+    `qwen3.6-flash` ra 6/6 - chenh lech nam dung o nhung file kho.
+    """
     c = cau_hinh()
+    if model:
+        c = dict(c, model_openai=model)
     khoa = hashlib.sha1(
         (c.get("model_openai", "") + str(ep_json) + he_thong + nhac).encode("utf-8", "replace")
     ).hexdigest()

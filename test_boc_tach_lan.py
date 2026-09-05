@@ -179,12 +179,12 @@ class ChuaDoKhongDuocThanhKhong(unittest.TestCase):
 
     def test_LLM_tra_rong_that_thi_VAN_thu_lai(self):
         """Rong that KHAC chua do: LLM khong tat dinh nen mot lan rong chua
-        phai ket luan."""
+        phai ket luan - va sau khi het luot thu thi DOI MODEL (tang 2)."""
         from nhan import tri_tue as TT
-        dem = {"n": 0}
+        goi = []
 
         def gia(*a, **k):
-            dem["n"] += 1
+            goi.append(k.get("model") or "")
             return {"json": {"co_che": []}}
 
         cu = TT.hoi_json
@@ -193,7 +193,27 @@ class ChuaDoKhongDuocThanhKhong(unittest.TestCase):
             DC.mot_file({"ten": "x.mq5", "src": CHI_BAO}, "", so_lan=3)
         finally:
             TT.hoi_json = cu
-        self.assertEqual(dem["n"], 3)
+        # 3 luot tang 1 + 1 luot tang 2
+        self.assertEqual(len(goi), 4)
+        self.assertEqual(goi[-1], DC.MODEL_TANG_2)
+        self.assertTrue(all(g == DC.MODEL_TANG_1 for g in goi[:3]))
+
+    def test_tat_hai_tang_thi_khong_goi_model_thu_hai(self):
+        from nhan import tri_tue as TT
+        goi = []
+
+        def gia(*a, **k):
+            goi.append(k.get("model") or "")
+            return {"json": {"co_che": []}}
+
+        cu = TT.hoi_json
+        TT.hoi_json = gia
+        try:
+            DC.mot_file({"ten": "x.mq5", "src": CHI_BAO}, "", so_lan=2,
+                        hai_tang=False)
+        finally:
+            TT.hoi_json = cu
+        self.assertEqual(len(goi), 2)
 
 
 class LocTinhTruocPheu(unittest.TestCase):

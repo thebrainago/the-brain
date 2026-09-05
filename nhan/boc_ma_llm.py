@@ -37,11 +37,18 @@ import re
 # 3.200 ky tu du cho file vua, nhung file >40k (EquityGuardPanel, Frontend,
 # breakrevertpro...) bi cat mat dieu kien. Do 05/09: 4/33 file khong chuyen doi
 # duoc roi vao dung nhom nay. Nang len 8.000 - van re so voi ca file 50k.
-MAX_VUNG = 8000
+#
+# NANG TIEP LEN 16.000 (05/09, toi). Ly do do duoc: trong 17 loi giai thich
+# `khong_dien_dat_duoc` ma mo hinh tra ve, **10 cai noi "doan ma duoc cung cap
+# khong chua dieu kien vao lenh"** - tuc mat mat nam o khau KHOANH VUNG chu
+# khong o ngu phap. Va mo rong vung gan nhu mien phi: gia cua `qwen3.7-flash`
+# la 0,010 cho token VAO so voi 0,040 cho token RA, con do dai dau ra khong doi
+# theo do dai dau vao.
+MAX_VUNG = 16000
 LUONG = 6
 
 
-def vung_vao_lenh(src: str, so_vung: int = 2) -> list[str]:
+def vung_vao_lenh(src: str, so_vung: int = 5) -> list[str]:
     """Khoanh cac VUNG quanh lenh vao. Dung chinh bo tim cua `doc_ma`."""
     from nhan import doc_ma as DM
     vb = DM._chuan_hoa(src)
@@ -126,8 +133,15 @@ VUNG MA (vung dau: quanh lenh vao · vung sau: cho GOI ham · cuoi: CHO GAN BIEN
 {chr(10).join(vung)[:MAX_VUNG]}
 ```
 
+- Moi muc PHAI co truong `co_che`: MOT CAU (>= 25 ky tu) noi VI SAO co nguoi
+  tra tien cho phoi nhiem nay - ai la ben doi ung va vi sao ho buoc phai giao
+  dich o trang thai do. **Khong dien lai chinh luat** ("mua khi RSI thap vi RSI
+  thap"): neu ban khong biet ly do kinh te thi ghi dung chuoi
+  "CHUA_BIET_LY_DO" va he se tu ghi chu, dung bia mot cau nghe hop ly.
+
 Tra ve DUNG mot JSON: {{"co_che": [{{"ten": "...", "ho": "...", "chieu": 1,
-"giu": 1, "vao": [{{"trai": {{...}}, "phep": "<", "phai": {{...}}}}]}}]}}"""
+"giu": 1, "co_che": "...", "vao": [{{"trai": {{...}}, "phep": "<",
+"phai": {{...}}}}]}}]}}"""
 
 
 def _mot(d: dict, tom_tat: str) -> dict:
@@ -141,7 +155,8 @@ def _mot(d: dict, tom_tat: str) -> dict:
         # Quen cho nay thi 20 luot song song deu nhan
         # `{"bo_qua": "moi goi 103s truoc, can cach 600s"}` va ra 0/20 (do 05/09).
         r = TT.hoi_json(_nhac(d["ten"], vung, tom_tat),
-                        bo_qua_han_muc=True, dung_cache=False)
+                        bo_qua_han_muc=True, dung_cache=False,
+                        model=d.get("_model") or "")
     except Exception as e:
         return {"ten": d["ten"], "co_che": [],
                 "vi_sao": "%s: %s" % (type(e).__name__, str(e)[:60])}
@@ -166,12 +181,47 @@ def mot_file(d: dict, tom_tat: str, so_lan: int = 2) -> dict:
     Nhung mot lan `chua_do` (quota/mang) THI la ket luan - thu lai chi ton thoi
     gian de ra cung con so 0.
     """
+    from nhan import doc_chi_bao as DC          # dung chung cau hinh hai tang
     cuoi = {"ten": d["ten"], "co_che": [], "vi_sao": "chua chay"}
     for _ in range(max(1, so_lan)):
-        cuoi = _mot(d, tom_tat)
+        cuoi = _mot(dict(d, _model=DC.MODEL_TANG_1), tom_tat)
         if cuoi["co_che"] or cuoi.get("chua_do"):
             return cuoi
+    if DC.MODEL_TANG_2:
+        z = _mot(dict(d, _model=DC.MODEL_TANG_2), tom_tat)
+        if z["co_che"]:
+            z["model_tang_2"] = DC.MODEL_TANG_2
+            return z
     return cuoi
+
+
+def _dien_co_che(c: dict, nguon: str) -> None:
+    """Dam bao co truong `co_che` — mot cau cho NGUOI DUYET doc.
+
+    `ngu_phap.kiem_khai_bao` doi truong nay dai >= 25 ky tu: *"mot cau giai
+    thich vi sao co nguoi tra tien cho phoi nhiem nay - man hinh duyet doc cau
+    nay, khong doc tham so"*. Do 05/09: loi nhac cua ca hai duong boc **khong he
+    xin truong do**, nen 80/80 khai bao cua me lan chien luoc bi cong tu choi va
+    ket qua la `them vao kho: 0` du 64/82 file ra co che.
+
+    KHONG BIA MOT LY LE NGHE HOP LY. Neu mo hinh khong noi duoc thi dien dung
+    cau noi rang no CHUA co lap luan kinh te - do la cach kho hien tai dang ghi
+    cho co che rut tu tai lieu, va nguoi duyet doc phat hien ra ngay. Mot cau
+    bia tron tru con te hon truong bo trong: no lam co che trong nhu da co ly do.
+    """
+    cu = str(c.get("co_che") or "").strip()
+    if len(cu) >= 25:
+        return
+    if cu.upper().replace(" ", "_") == "CHUA_BIET_LY_DO":
+        cu = ""                     # mo hinh da noi thang la khong biet
+    ten = str(c.get("ten") or "?")
+    # Danh dau de nguoi duyet loc duoc: cau nay do MAY dien, khong phai mot lap
+    # luan kinh te ai do da nghi ra.
+    c["_ly_do_may_dien"] = True
+    c["co_che"] = ("Luat rut TU MA NGUON `%s` (%s), CHUA co lap luan kinh te: "
+                   "gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay "
+                   "khong, khong kiem cai bot goc.%s"
+                   % (nguon or "?", ten, (" Mo hinh ghi: " + cu) if cu else ""))
 
 
 def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]:
@@ -204,6 +254,7 @@ def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]
             continue
         c.setdefault("nguon", nguon)
         c.setdefault("giu", 1)
+        _dien_co_che(c, nguon)
         try:
             bao = NP.kiem_khai_bao(c) if hasattr(NP, "kiem_khai_bao") else {"dat": True}
         except Exception as e:
@@ -278,6 +329,7 @@ def chay_that(gioi_han: int = 0, so_lan: int = 2, ghi_kho: bool = True,
     import time
     from nhan import boc_llm as BL
     from nhan import ngu_phap as NP
+    from nhan import phan_loai_ma as PL
     from nhan import so as SO
 
     tom_tat = BL._ngu_phap_tom_tat()
@@ -292,13 +344,19 @@ def chay_that(gioi_han: int = 0, so_lan: int = 2, ghi_kho: bool = True,
         src = con.get("content") or ""
         if not isinstance(src, str) or len(src) < 200:
             continue
-        if not vung_vao_lenh(src):
+        # DINH TUYEN THEO LAN. Truoc 05/09 duong nay nhan MOI file co vung vao
+        # lenh, tuc ca 48 file thuoc lan `quan_tri`. Chung khong co dieu kien
+        # vao de doc, nen chung tra rong va bi dem nhu boc that bai - keo suat
+        # cua lan `chien_luoc` tu 37% xuong 33%, va che mat viec chung ra spec
+        # dung 90% o duong `quan_tri.boc_kho`.
+        ten = str(con.get("ten") or con.get("path") or x["id"])
+        if PL.phan_loai_mot(src, ten)["lan"] != PL.CHIEN_LUOC:
             continue
-        ds.append({"ten": str(con.get("ten") or con.get("path") or x["id"]),
-                   "src": src, "id": x["id"]})
+        ds.append({"ten": ten, "src": src, "id": x["id"]})
         if gioi_han and len(ds) >= gioi_han:
             break
-    in_ra("CHAY THAT tren %d file co lenh vao (thu lai %d lan)" % (len(ds), so_lan))
+    in_ra("CHAY THAT tren %d file lan CHIEN_LUOC (thu lai %d lan)"
+          % (len(ds), so_lan))
     t0 = time.time()
     ket = []
     with _cf.ThreadPoolExecutor(max_workers=LUONG) as ex:

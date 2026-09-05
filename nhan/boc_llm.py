@@ -114,6 +114,27 @@ def _diem_luat(vb: str) -> int:
     return sum(1 for rx in _RX if rx.search(vb or ""))
 
 
+def _la_html_tho(vb: str) -> bool:
+    """Ban doc la TRANG HTML CHUA BOC, khong phai van ban.
+
+    Do 05/09/2026 tren 150 ung vien hang dau: **143 cai la trang HTML tho cua
+    GitHub** — `<!DOCTYPE html>` + 340.000-630.000 ky tu boilerplate, cua nhung
+    repo nhu `RadialMenuKit-swiftUI`, `syntest` (khong lien quan giao dich).
+    Chung lot vao vi bo cham dem SO dau hieu luat: mot trang 340k ky tu cham du
+    diem hoan toan ngau nhien.
+
+    Do la ly do that cua "3/259 bai ra co che" — khong phai mo hinh doc kem, ma
+    la khau THU THAP luu nguyen trang tim kiem thay vi van ban. Doi model khong
+    cuu duoc gi o day; goi API tren chung la dot tien.
+    """
+    dau = (vb or "")[:600].lstrip()
+    if "<!doctype html" in dau.lower() or dau.startswith("<html"):
+        return True
+    # Trang da bi cat dau nhung than van la HTML: dem the tren 2.000 ky tu dau.
+    mau = (vb or "")[:2000]
+    return mau.count("<") > 40 and mau.count("</") > 20
+
+
 def ung_vien(gioi_han: int = 200, diem_toi_thieu: int | None = None,
              nguon_uu_tien=("tradingview_pine", "tradingview_scripts", "mql5_code",
                             "mql5_bai_viet", "github", "lean_algo", "blog",
@@ -124,14 +145,45 @@ def ung_vien(gioi_han: int = 200, diem_toi_thieu: int | None = None,
     # rao khong co co so"). Tuc duong VAN XUOI van chay o nguong CU, chi duong
     # MA NGUON duoc ha - mot lan sua chi ap duoc mot nua.
     nguong = DIEM_TOI_THIEU if diem_toi_thieu is None else diem_toi_thieu
-    ds = SO.nhieu(
-        "SELECT n.id, n.van_ban, n.so_ky_tu, n.kieu, t.tieu_de, t.nguon, t.url "
-        "FROM noi_dung n LEFT JOIN tai_lieu t ON t.id = n.tai_lieu_id "
-        "WHERE n.da_boc = 0 AND n.so_ky_tu > 800 AND n.kieu != 'khong_doc_duoc' "
-        "ORDER BY CASE WHEN t.nguon IN ({}) "
-        "            OR t.nguon LIKE 'telegram%' THEN 0 ELSE 1 END, n.id DESC "
-        "LIMIT ?".format(",".join("?" for _ in nguon_uu_tien)),
-        *nguon_uu_tien, gioi_han * 8) or []
+
+    def _lay(n: int):
+        return SO.nhieu(
+            "SELECT n.id, n.van_ban, n.so_ky_tu, n.kieu, t.tieu_de, t.nguon, t.url "
+            "FROM noi_dung n LEFT JOIN tai_lieu t ON t.id = n.tai_lieu_id "
+            "WHERE n.da_boc = 0 AND n.so_ky_tu > 800 AND n.kieu != 'khong_doc_duoc' "
+            "ORDER BY CASE WHEN t.nguon IN ({}) "
+            "            OR t.nguon LIKE 'telegram%' THEN 0 ELSE 1 END, n.id DESC "
+            "LIMIT ?".format(",".join("?" for _ in nguon_uu_tien)),
+            *nguon_uu_tien, n) or []
+
+    # LAY THEM CHO DEN KHI DU, dung nhan cung mot he so.
+    #
+    # He so ×8 dat khi bo loc chi bo vai ban doc. Tu khi `_la_html_tho` chan
+    # trang HTML chua boc, no bo **143/150 ban doc dau bang**, nen `ung_vien(20)`
+    # quet 160 dong roi tra ve RONG - va mot me boc doc do thanh "khong con gi
+    # de boc". Cai bay quen thuoc: mot bo loc dung lam mot phep dem thanh 0.
+    def _qua_loc(ds_):
+        ra_ = []
+        for r in ds_:
+            d = dict(r)
+            if _la_html_tho(d["van_ban"]):
+                continue
+            d["_diem"] = _diem_luat(d["van_ban"])
+            if d["_diem"] >= nguong:
+                d["_mat_do"] = d["_diem"] / max(d["so_ky_tu"], 1) * 1e4
+                ra_.append(d)
+        return ra_
+
+    ds = _lay(gioi_han * 8)
+    ra = _qua_loc(ds)
+    # Dieu kien leo thang phai dem so ung vien QUA CA HAI bo loc. Ban dau no
+    # dem "khong phai HTML" (71/160) roi dung — trong khi chi **1** cai qua duoc
+    # nguong dau hieu luat, nen `ung_vien(20)` van tra ve gan rong.
+    for he_so in (32, 128, 512):
+        if len(ra) >= gioi_han or len(ds) < gioi_han * (he_so // 4):
+            break
+        ds = _lay(gioi_han * he_so)
+        ra = _qua_loc(ds)
 
     # XEP THEO MAT DO LUAT, KHONG THEO DO DAI.
     #
@@ -146,13 +198,10 @@ def ung_vien(gioi_han: int = 200, diem_toi_thieu: int | None = None,
     # < 30, cat lo 1%, chot 2%" dac luat hon mot trang 40.000 ky tu ke chuyen.
     # Nen: lay theo THU TU MOI NHAT (bai vua thu hoach la bai chua ai boc), roi
     # xep lai theo SO DAU HIEU LUAT dem duoc, roi moi cat `gioi_han`.
-    ra = []
-    for r in ds:
-        d = dict(r)
-        d["_diem"] = _diem_luat(d["van_ban"])
-        if d["_diem"] >= nguong:
-            ra.append(d)
-    ra.sort(key=lambda d: -d["_diem"])
+    # MAT DO, khong phai SO DEM, o khoa phu. Mot trang 340.000 ky tu se cham du
+    # 5 dau hieu luat hoan toan ngau nhien, va no day het bai ngan ra khoi danh
+    # sach du khong mang mot luat nao.
+    ra.sort(key=lambda d: (-d["_diem"], -d["_mat_do"]))
     return ra[:gioi_han]
 
 
@@ -305,6 +354,16 @@ def _mot_ban(d: dict) -> dict:
         kq = TT.hoi_json(_nhac(d), HE_THONG, bo_qua_han_muc=True, dung_cache=False)
     except Exception as e:
         return {"id": d["id"], "loi": f"{type(e).__name__}: {str(e)[:80]}",
+                "giay": time.time() - t0}
+    # `hoi_json` tra `{"loi": ...}` chu KHONG nem ngoai le khi goi hong, va
+    # `.get("json")` tren dict do ra `{}`. Khong tach ra thi mot me het quota /
+    # sai model chay rat nhanh va bao "0 co che, 0 tu choi, 0 loi" - doc y het
+    # mot ket qua am that. Do 05/09 tren ca ba module boc
+    # ([[ket-luan-am-phai-phan-biet-chua-do]]).
+    if kq.get("loi") or kq.get("bo_qua"):
+        return {"id": d["id"], "url": d.get("url"), "nguon": d.get("nguon"),
+                "co_che": [], "chua_do": True,
+                "loi": "CHUA DO - %s" % str(kq.get("loi") or kq.get("bo_qua"))[:90],
                 "giay": time.time() - t0}
     j = kq.get("json") or {}
     return {"id": d["id"], "url": d.get("url"), "nguon": d.get("nguon"),

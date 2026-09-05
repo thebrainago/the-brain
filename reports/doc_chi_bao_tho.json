@@ -3,63 +3,27 @@
   "ten": "SMC_Pullback_v1_0.mq5",
   "co_che": [
    {
-    "ten": "swing_high_confirmed_buffer",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tuyet_doi",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "swing_low_confirmed_buffer",
-    "ho": "pha_vo",
+    "ten": "SMC_Pullback_v1_0",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tuyet_doi",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "HurstExponentRegimeSwitch.mq5",
   "co_che": [
    {
-    "ten": "HurstBuffer >= InpTrendThreshold",
+    "ten": "Hurst Trend Regime",
     "ho": "xu_huong",
     "chieu": 1,
-    "giu": 1,
+    "giu": 100,
     "vao": [
      {
       "trai": {
@@ -68,20 +32,21 @@
         "chi_bao": "gia",
         "cot": "close"
        },
-       "n": 2
+       "n": 1
       },
       "phep": ">=",
       "phai": {
-       "hang": 0.5
+       "hang": 0.6
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "HurstBuffer <= InpReversionThreshold",
+    "ten": "Hurst Reversion Regime",
     "ho": "quay_ve_trung_binh",
     "chieu": -1,
-    "giu": 1,
+    "giu": 100,
     "vao": [
      {
       "trai": {
@@ -90,14 +55,15 @@
         "chi_bao": "gia",
         "cot": "close"
        },
-       "n": 2
+       "n": 1
       },
       "phep": "<=",
       "phai": {
-       "hang": 0.5
+       "hang": 0.4
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -107,12 +73,30 @@
   "ten": "MultiTimeframeTrendDashboard.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
+    "ten": "MultiTimeframeTrendDashboard_BUY",
+    "co_che": "xu_huong",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "ra": []
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   },
+   {
+    "ten": "MultiTimeframeTrendDashboard_SELL",
+    "co_che": "xu_huong",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -122,47 +106,27 @@
   "ten": "The_Fisher_Transform_Indicator.mq5",
   "co_che": [
    {
-    "ten": "Fisher Transform crossing above/below zero from smoothed price transform",
-    "ho": "khac",
+    "ten": "Fisher Transform",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    },
    {
-    "ten": "Fisher Transform crossing above/below zero from smoothed price transform",
-    "ho": "khac",
+    "ten": "Fisher Transform",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -173,1125 +137,8 @@
   "ten": "Super_Trend_Indicator.mq5",
   "co_che": [
    {
-    "ten": "SuperTrend xuong sang len",
-    "co_che": "sieu_xu_huong",
+    "ten": "SuperTrend",
     "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 1,
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "hang": 1,
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 1,
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "hang": 1,
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 1,
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "SuperTrend len sang xuong",
-    "co_che": "sieu_xu_huong",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1,
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "hang": 1,
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1,
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "hang": 1,
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1,
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Wolfe_Wave_Dashboard_V_1_25.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Dynamic_Session_Sweep_Detector.mq5",
-  "co_che": [
-   {
-    "ten": "SessionHighSweepBuy",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "SessionLowSweepSell",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Liquidity_Void_Decay_Oscillator.mq5",
-  "co_che": [
-   {
-    "ten": "DecayZones score smoothing signal",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 5
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 5
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 5
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "CurrencyStrengthMeter.mq5",
-  "co_che": [
-   {
-    "ten": "CurrencyStrengthMeter_strength_positive",
-    "co_che": "dong_tien",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "hang": 0
-        },
-        {
-         "hang": 0
-        },
-        {
-         "hang": 0
-        }
-       ]
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "CurrencyStrengthMeter_strength_negative",
-    "co_che": "dong_tien",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "hang": 0
-        },
-        {
-         "hang": 0
-        },
-        {
-         "hang": 0
-        }
-       ]
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "CandleBodyWickPressureOscillator.mq5",
-  "co_che": [
-   {
-    "ten": "BullDivBuffer",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low",
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "osc",
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "osc",
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "BearDivBuffer",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high",
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "osc",
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "osc",
-       "n": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "MultiSymbolCorrelationDivergenceMeter.mq5",
-  "co_che": [
-   {
-    "ten": "corr_thap_va_zscore_duong",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "bien_do"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "corr",
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "zscore",
-       "cua": {
-        "chi_bao": "tb",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 1
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "corr_thap_va_zscore_am",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "bien_do"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "corr",
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "zscore",
-       "cua": {
-        "chi_bao": "tb",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 1
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Adaptive_Volume_Profile_Node_Tracker.mq5",
-  "co_che": [
-   {
-    "ten": "POC/VAH/VAL duoc cap nhat theo tung bar sau khi du lieu dong goi xong",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "close"
-        }
-       ]
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "POC/VAH/VAL la cac muc node/volume profile cho moi bar trong vung tinh",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "POC/VAH/VAL la cac muc node/volume profile cho moi bar trong vung tinh",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "RMA_Engine.mq5",
-  "co_che": [
-   {
-    "ten": "RMA Panel: adverse movement",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "RMA Panel: rma family",
-    "ho": "quay_ve_trung_binh",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "TradingJournal.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   },
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "OrderBlockDetector.mq5",
-  "co_che": [
-   {
-    "ten": "OB bullish rectangle created",
-    "co_che": "OrderBlockDetector.mq5",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "bien_do"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "OB bearish rectangle created",
-    "co_che": "OrderBlockDetector.mq5",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "bien_do"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "IHSMC_V2.mq5",
-  "co_che": [
-   {
-    "ten": "IHSMC zone detected/armed/active breakout score update",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "IHSMC zone detected/armed/active breakdown score update",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "SwiftDraw_Lite.mq5",
-  "co_che": [
-   {
-    "ten": "MouseDraw_HLine",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "hang": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "hang": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Fair_Value_Gap_Scanner_MT5.mq5",
-  "co_che": [
-   {
-    "ten": "Bullish_FVG_alert_or_arrow",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "cao_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        }
-       ]
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Bearish_FVG_alert_or_arrow",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "thap_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        }
-       ]
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Session_Liquidity_Map_MT5.mq5",
-  "co_che": [
-   {
-    "ten": "session_high_breakout",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": "session_high"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "session_low_breakdown",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": "session_low"
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Market_Structure_Swing_Map_MT5.mq5",
-  "co_che": [
-   {
-    "ten": "Swing structure bullish label/arrow",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Swing structure bearish label/arrow",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Multi_Timeframe_Trend_Matrix_MT5.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "GDS_Renko_Bricks_v1_05.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "GDS_Renko_Reversal_Context.mq5",
-  "co_che": [
-   {
-    "ten": "reversal",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [],
-    "ra": [],
-    "khong_dien_dat_duoc": [
-     "Doan ma duoc cung cap chi co phan xoa/tao doi tuong panel (DeleteObjects, SetPanelRow), khong co logic gan buffer mui ten hoac Alert BUY/SELL nen khong the suy ra dieu kien tin hieu vao lenh."
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "IronHawk_Fibonacci_Structure_Map.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "hang": 0
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "MarketSessionSeparator_g1u.mq5",
-  "co_che": [
-   {
-    "ten": "mo_box_hoac_nhan_label_theo_khung_gio",
-    "ho": "phien",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "ElliotWave.mq5",
-  "co_che": [
-   {
-    "ten": "WaveLabel_pivot_high",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "cao_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "cao_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 2
-      }
-     }
-    ]
-   },
-   {
-    "ten": "WaveLabel_pivot_low",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "thap_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "thap_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 2
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Nadaraya_Watson_Envelope_NR.mq5",
-  "co_che": [
-   {
-    "ten": "tinh_gia_tri_duoi_duong_tren_duoi_envelope",
-    "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -1307,7 +154,84 @@
         "chi_bao": "gia",
         "cot": "close"
        },
-       "n": 500
+       "n": 10
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "SuperTrend",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 10
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Wolfe_Wave_Dashboard_V_1_25.mq5",
+  "co_che": [
+   {
+    "ten": "Wolfe Wave Dashboard",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 100,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "ibs"
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 0.5
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "Dynamic_Session_Sweep_Detector.mq5",
+  "co_che": [
+   {
+    "ten": "Session High Sweep",
+    "ho": "phien",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "high"
       }
      },
      {
@@ -1317,51 +241,82 @@
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 500
+       "chi_bao": "gia",
+       "cot": "high"
       }
      }
     ],
-    "ra": [
+    "ra": []
+   },
+   {
+    "ten": "Session Low Sweep",
+    "ho": "phien",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     },
      {
       "trai": {
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": "<",
+      "phep": ">",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 500
+       "chi_bao": "gia",
+       "cot": "low"
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
   "vi_sao": ""
  },
  {
-  "ten": "RiskBasedPositionSizeCalculator_FIXED.mq5",
+  "ten": "Liquidity_Void_Decay_Oscillator.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
+    "ten": "Liquidity Void Decay Oscillator",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "hang": 1
+       "chi_bao": "khac",
+       "ten": "BufSignal"
       },
-      "phep": ">",
+      "phep": "cheo_len",
+      "phai": {
+       "hang": 0
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Liquidity Void Decay Oscillator",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "khac",
+       "ten": "BufSignal"
+      },
+      "phep": "cheo_xuong",
       "phai": {
        "hang": 0
       }
@@ -1374,11 +329,448 @@
   "vi_sao": ""
  },
  {
-  "ten": "smc_entry.mq5",
+  "ten": "CurrencyStrengthMeter.mq5",
   "co_che": [
    {
-    "ten": "gia_cat_len_ema",
-    "co_che": "BufferBuy",
+    "ten": "CurrencyStrengthMeter",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "CandleBodyWickPressureOscillator.mq5",
+  "co_che": [
+   {
+    "ten": "Candle Body Wick Pressure Divergence",
+    "ho": "quay_ve_trung_binh",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khac",
+       "ten": "Oscillator"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "khac",
+       "ten": "Oscillator"
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Candle Body Wick Pressure Divergence",
+    "ho": "quay_ve_trung_binh",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khac",
+       "ten": "Oscillator"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "khac",
+       "ten": "Oscillator"
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "MultiSymbolCorrelationDivergenceMeter.mq5",
+  "co_che": [
+   {
+    "ten": "MultiSymbolCorrelationDivergenceMeter",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "khong_dien_dat_duoc": "Doan code duoc cap khong chua logic gan gia tri cho ArrowUpBuffer/ArrowDownBuffer hay ham Alert('BUY'/'SELL'). Chi co phan tinh toan he so tuong quan (CorrBuffer), Z-Score (ZScoreBuffer) va bien mau (CorrColorBuffer)."
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Adaptive_Volume_Profile_Node_Tracker.mq5",
+  "co_che": [
+   {
+    "ten": "Adaptive_Volume_Profile_Node_Tracker",
+    "ho": "dong_tien",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "khong_dien_dat_duoc": "Khong co dieu kien vao lenh/cao buoc trong doan ma duoc cung cap"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "RMA_Engine.mq5",
+  "co_che": [
+   {
+    "ten": "RMA_Engine",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "TradingJournal.mq5",
+  "co_che": [
+   {
+    "ten": "TradingJournal_GraphicEngine",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "OrderBlockDetector.mq5",
+  "co_che": [
+   {
+    "ten": "OrderBlock_Bullish",
+    "ho": "phá_vào",
+    "chieu": 1,
+    "giu": 100,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "open"
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "OrderBlock_Bearish",
+    "ho": "phá_vào",
+    "chieu": -1,
+    "giu": 100,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "open"
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "IHSMC_V2.mq5",
+  "co_che": [
+   {
+    "ten": "IHSMC_V2",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": "khong_dien_dat_duoc",
+      "phep": "=",
+      "phai": "khong_dien_dat_duoc"
+     }
+    ],
+    "ra": [
+     {
+      "trai": "khong_dien_dat_duoc",
+      "phep": "=",
+      "phai": "khong_dien_dat_duoc"
+     }
+    ]
+   },
+   {
+    "ten": "IHSMC_V2_BAN",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": "khong_dien_dat_duoc",
+      "phep": "=",
+      "phai": "khong_dien_dat_duoc"
+     }
+    ],
+    "ra": [
+     {
+      "trai": "khong_dien_dat_duoc",
+      "phep": "=",
+      "phai": "khong_dien_dat_duoc"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SwiftDraw_Lite.mq5",
+  "co_che": [],
+  "chua_do": false,
+  "vi_sao": "LLM tra ve rong"
+ },
+ {
+  "ten": "Fair_Value_Gap_Scanner_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "Fair_Value_Gap_Bullish",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 20,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Fair_Value_Gap_Bearish",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 20,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Session_Liquidity_Map_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "Session_Liquidity_Map",
+    "ho": "phien",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Market_Structure_Swing_Map_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "Market_Structure_Swing_MAP_BUY",
+    "co_che": "xu_huong",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 5
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Market_Structure_Swing_MAP_SELL",
+    "co_che": "xu_huong",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 5
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Multi_Timeframe_Trend_Matrix_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "MTFMATRIX_BUY",
+    "co_che": "đa_khung_thời_gian",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "không_diễn_đạt_được"
+    ],
+    "ra": [
+     "không_diễn_đạt_được"
+    ]
+   },
+   {
+    "ten": "MTFMATRIX_SELL",
+    "co_che": "đa_khung_thời_gian",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     "không_diễn_đạt_được"
+    ],
+    "ra": [
+     "không_diễn_đạt_được"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "GDS_Renko_Bricks_v1_05.mq5",
+  "co_che": [
+   {
+    "ten": "GDS_Renko_Bricks_Signal",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
@@ -1391,14 +783,24 @@
       "phep": ">",
       "phai": {
        "chi_bao": "ema",
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
        "n": 14
+      },
+      "phep": ">",
+      "phai": {
+       "hang": 50
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "gia_cat_xuong_ema",
-    "co_che": "BufferSell",
+    "ten": "GDS_Renko_Bricks_Signal",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
@@ -1411,10 +813,148 @@
       "phep": "<",
       "phai": {
        "chi_bao": "ema",
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
        "n": 14
+      },
+      "phep": "<",
+      "phai": {
+       "hang": 50
       }
      }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "GDS_Renko_Reversal_Context.mq5",
+  "co_che": [
+   {
+    "ten": "GDS_Renko_Reversal_Context",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": "Doan ma duoc cung cap chi chua cac ham quan ly giao dien (DeleteObjects, SetPanelRow). Khong co chuong trinh gan buffer, kiem dieu kien, hay goi Alert() nao duoc tim thay de rut ra dieu kien vao/ra."
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "IronHawk_Fibonacci_Structure_Map.mq5",
+  "co_che": [
+   {
+    "ten": "IronHawk_Fibonacci_Structure_Map",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   },
+   {
+    "ten": "IronHawk_Fibonacci_Structure_Map",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "MarketSessionSeparator_g1u.mq5",
+  "co_che": [
+   {
+    "ten": "MarketSessionSeparator",
+    "co_che": "phan_tich_ky_hoac",
+    "ho": "phien",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "ElliotWave.mq5",
+  "co_che": [
+   {
+    "ten": "ElliotWave_PivotSignal",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Nadaraya_Watson_Envelope_NR.mq5",
+  "co_che": [
+   {
+    "ten": "Nadaraya_Watson_Envelope",
+    "ho": "quay_ve_trung_binh",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "RiskBasedPositionSizeCalculator_FIXED.mq5",
+  "co_che": [
+   {
+    "ten": "RiskBasedPositionSizeCalculator_FIXED",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "smc_entry.mq5",
+  "co_che": [
+   {
+    "ten": "smc_entry",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -1424,95 +964,21 @@
   "ten": "Adaptive_MACD.mq5",
   "co_che": [
    {
-    "ten": "macd_histogram_duong",
+    "ten": "Adaptive_MACD",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 9
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    },
    {
-    "ten": "macd_histogram_am",
+    "ten": "Adaptive_MACD",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 9
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -1523,8 +989,8 @@
   "ten": "SNR.mq5",
   "co_che": [
    {
-    "ten": "LowMapBuffer gan gia tri tai day tro thanh muc thap nhat noi bo trong InpDepth bar gan nhat",
-    "ho": "quay_ve_trung_binh",
+    "ten": "SNR",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -1535,19 +1001,21 @@
       },
       "phep": "<=",
       "phai": {
-       "chi_bao": "thap_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": null
+       "chi_bao": "thap_nhat_cua_cac",
+       "toan_hang": [
+        {
+         "chi_bao": "gia",
+         "cot": "low"
+        }
+       ]
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "HighMapBuffer gan gia tri tai day tro thanh muc cao nhat noi bo trong InpDepth bar gan nhat",
-    "ho": "pha_vo",
+    "ten": "SNR",
+    "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
@@ -1558,15 +1026,17 @@
       },
       "phep": ">=",
       "phai": {
-       "chi_bao": "cao_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": null
+       "chi_bao": "cao_nhat_cua_cac",
+       "toan_hang": [
+        {
+         "chi_bao": "gia",
+         "cot": "high"
+        }
+       ]
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -1576,8 +1046,8 @@
   "ten": "Human_Level_Structure_Engine.mq5",
   "co_che": [
    {
-    "ten": "Fibo 50% bull retrace touch",
-    "ho": "pha_vo",
+    "ten": "Fib50_Bounce",
+    "ho": "vi_mo",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -1588,14 +1058,15 @@
       },
       "phep": "<=",
       "phai": {
-       "hang": "p_50"
+       "chi_bao": "gia",
+       "cot": "close"
       }
      }
     ]
    },
    {
-    "ten": "Fibo 50% bear retrace touch",
-    "ho": "pha_vo",
+    "ten": "Fib50_Reject",
+    "ho": "vi_mo",
     "chieu": -1,
     "giu": 1,
     "vao": [
@@ -1606,7 +1077,8 @@
       },
       "phep": ">=",
       "phai": {
-       "hang": "p_50"
+       "chi_bao": "gia",
+       "cot": "close"
       }
      }
     ]
@@ -1619,67 +1091,12 @@
   "ten": "Auto_ZigZag_Fibonacci_Golden_Zone.mq5",
   "co_che": [
    {
-    "ten": "KPG_GOLDEN_ZONE_BUY",
+    "ten": "Auto_ZigZag_Fibonacci_Golden_Zone",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        {
-         "chi_bao": "tb",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "close"
-         },
-         "n": 1
-        }
-       ]
-      }
-     }
-    ]
-   },
-   {
-    "ten": "KPG_GOLDEN_ZONE_SELL",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        {
-         "chi_bao": "tb",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "close"
-         },
-         "n": 1
-        }
-       ]
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -1690,40 +1107,12 @@
   "ten": "VolumeProfileLevels.mq5",
   "co_che": [
    {
-    "ten": "Gia vuot VAH",
-    "ho": "pha_vo",
+    "ten": "VolumeProfileLevels",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Gia giam duoi VAL",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+    "vao": [],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -1733,7 +1122,7 @@
   "ten": "SessionRangeBreakout.mq5",
   "co_che": [
    {
-    "ten": "breakout_vung_gia_trong_phien_mua",
+    "ten": "SessionRangeBreakout",
     "ho": "phien",
     "chieu": 1,
     "giu": 1,
@@ -1745,28 +1134,21 @@
       },
       "phep": ">",
       "phai": {
-       "hang": 0
+       "chi_bao": "gia",
+       "cot": "high"
       }
-     }
-    ]
-   },
-   {
-    "ten": "breakout_vung_gia_trong_phien_ban",
-    "ho": "phien",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
+     },
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "gio"
       },
-      "phep": "<",
+      "phep": ">=",
       "phai": {
        "hang": 0
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -1776,40 +1158,40 @@
   "ten": "LiquiditySweepDetector.mq5",
   "co_che": [
    {
-    "ten": "Liquidity Sweep mua",
-    "ho": "pha_vo",
+    "ten": "LiquiditySweepDetector",
+    "ho": "lich",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
+       "chi_bao": "khong_dien_dat_duoc"
       },
-      "phep": "<",
+      "phep": "=",
       "phai": {
-       "hang": 0
+       "hang": 1
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "Liquidity Sweep ban",
-    "ho": "pha_vo",
+    "ten": "LiquiditySweepDetector",
+    "ho": "lich",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
+       "chi_bao": "khong_dien_dat_duoc"
       },
-      "phep": ">",
+      "phep": "=",
       "phai": {
-       "hang": 0
+       "hang": 1
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -1819,31 +1201,15 @@
   "ten": "scalefix.mq5",
   "co_che": [
    {
-    "ten": "ResetChartScale_button_click",
-    "co_che": "co_che",
+    "ten": "scalefix",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "gio"
-      },
+      "trai": "khong_dien_dat_duoc",
       "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
+      "phai": "khong_dien_dat_duoc"
      }
     ]
    }
@@ -1855,66 +1221,52 @@
   "ten": "FairValueGapDetector.mq5",
   "co_che": [
    {
-    "ten": "FVG bullish gap detected",
-    "ho": "pha_vo",
+    "ten": "Fair Value Gap Detector",
+    "ho": "khac",
     "chieu": 1,
-    "giu": 1,
+    "giu": 100,
     "vao": [
      {
       "trai": {
        "chi_bao": "gia",
        "cot": "low"
       },
-      "phep": ">",
+      "phep": "<",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 2,
-       "chi_bao": "gia",
-       "cot": "high"
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 2
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "FVG bearish gap detected",
-    "ho": "pha_vo",
+    "ten": "Fair Value Gap Detector",
+    "ho": "khac",
     "chieu": -1,
-    "giu": 1,
+    "giu": 100,
     "vao": [
      {
       "trai": {
        "chi_bao": "gia",
        "cot": "high"
       },
-      "phep": "<",
+      "phep": ">",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 2,
-       "chi_bao": "gia",
-       "cot": "low"
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 2
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -1924,14 +1276,12 @@
   "ten": "time_CD.mq5",
   "co_che": [
    {
-    "ten": "candle_countdown_text",
+    "ten": "time_CD",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "ra": [],
-    "khong_dien_dat_duoc": [
-     "Doan ma duoc cung cap chi tao OBJ_TEXT de hien thi dem nguoc thoi gian tren chart, khong co buffer mui ten, khong co Alert(\"BUY\"/\"SELL\"), va doan trich khong bao gom phan logic tinh tin hieu vao lenh."
+    "vao": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -1940,6 +1290,147 @@
  },
  {
   "ten": "FilesBmpBackground.mq5",
+  "co_che": [
+   {
+    "ten": "FilesBmpBackground",
+    "ho": "khac",
+    "chieu": 0,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Custom_Simple_Moving_Average.mq5",
+  "co_che": [
+   {
+    "ten": "Custom_Simple_Moving_Average",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": true
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Reverse_RSI_Bands.mq5",
+  "co_che": [
+   {
+    "ten": "Reverse RSI Bands",
+    "ho": "quay_ve_trung_binh",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "hang": 30
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Reverse RSI Bands",
+    "ho": "quay_ve_trung_binh",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "hang": 70
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Adaptive_Kalman_Trend_Filter_Regime_Bands.mq5",
+  "co_che": [
+   {
+    "ten": "Adaptive_Kalman_Trend_Filter_Regime_Bands",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "chi_bao": "khac"
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Adaptive_Kalman_Trend_Filter_Regime_Bands",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "khac"
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Quantora_Trading_Cost_Calculator_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "Quantora_Trading_Cost_Calculator",
+    "ho": "khac",
+    "chieu": 0,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "StopGeometryVisualizerMT5.mq5",
   "co_che": [
    {
     "ten": "khong_dien_dat_duoc",
@@ -1953,292 +1444,12 @@
   "vi_sao": ""
  },
  {
-  "ten": "Custom_Simple_Moving_Average.mq5",
-  "co_che": [
-   {
-    "ten": "gia_cat_len_sma_lwma",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "sma",
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_cat_xuong_sma_lwma",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "sma",
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Reverse_RSI_Bands.mq5",
-  "co_che": [
-   {
-    "ten": "RSI oversold rebound from Wilder-smoothed RSI",
-    "co_che": "Reverse_RSI_Bands.mq5",
-    "ho": "quay_ve_trung_binh",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "rsi",
-       "n": 14
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 30
-      }
-     }
-    ]
-   },
-   {
-    "ten": "RSI overbought reversal from Wilder-smoothed RSI",
-    "co_che": "Reverse_RSI_Bands.mq5",
-    "ho": "quay_ve_trung_binh",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "rsi",
-       "n": 14
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 70
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Adaptive_Kalman_Trend_Filter_Regime_Bands.mq5",
-  "co_che": [
-   {
-    "ten": "Kalman trend up",
-    "co_che": "Adaptive_Kalman_Trend_Filter_Regime_Bands",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Kalman trend down",
-    "co_che": "Adaptive_Kalman_Trend_Filter_Regime_Bands",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Quantora_Trading_Cost_Calculator_MT5.mq5",
-  "co_che": [
-   {
-    "ten": "cost_pct_balance_high",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "do_lech",
-        "cua": {
-         "hang": 0
-        },
-        "n": 1
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "cost_pct_balance_high",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "do_lech",
-        "cua": {
-         "hang": 0
-        },
-        "n": 1
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "StopGeometryVisualizerMT5.mq5",
-  "co_che": [
-   {
-    "ten": "object_line_created_or_updated",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
   "ten": "MTF_FVG_Depth_Meter.mq5",
   "co_che": [
    {
-    "ten": "FVG_gap_up",
-    "ho": "pha_vo",
+    "ten": "FVG Up",
+    "ho": "khac",
     "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low",
-       "n": 2
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "FVG_gap_down",
-    "ho": "pha_vo",
-    "chieu": -1,
     "giu": 1,
     "vao": [
      {
@@ -2252,15 +1463,25 @@
        "cot": "high",
        "n": 2
       }
-     },
+     }
+    ]
+   },
+   {
+    "ten": "FVG Down",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
      {
       "trai": {
        "chi_bao": "gia",
-       "cot": "high"
+       "cot": "low",
+       "n": 2
       },
-      "phep": "<=",
+      "phep": ">",
       "phai": {
-       "hang": 0
+       "chi_bao": "gia",
+       "cot": "high"
       }
      }
     ]
@@ -2273,80 +1494,24 @@
   "ten": "Session_Sweep_Reversal.mq5",
   "co_che": [
    {
-    "ten": "Bull sweep reversal",
-    "ho": "pha_vo",
+    "ten": "Session_Sweep_Reversal",
+    "ho": "phien",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     }
-    ]
+     "không_dien_dat_duoc"
+    ],
+    "ra": []
    },
    {
-    "ten": "Bear sweep reversal",
-    "ho": "pha_vo",
+    "ten": "Session_Sweep_Reversal",
+    "ho": "phien",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     }
-    ]
+     "không_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -2356,7 +1521,8 @@
   "ten": "Order_Block_Mitigation_Tracker_91a.mq5",
   "co_che": [
    {
-    "ten": "Mitigation bullish buffer",
+    "ten": "Order_Block_Mitigation_Tracker_91a",
+    "co_che": "Order Block Mitigation",
     "ho": "pha_vo",
     "chieu": 1,
     "giu": 1,
@@ -2364,30 +1530,21 @@
      {
       "trai": {
        "chi_bao": "gia",
-       "cot": "low"
+       "cot": "high"
       },
-      "phep": "<=",
+      "phep": ">=",
       "phai": {
        "chi_bao": "gia",
-       "cot": "high"
+       "cot": "low"
       }
      }
     ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
+    "ra": [],
+    "khong_dien_dat_duoc": "Trigger thuc te phu thuoc vao bien InpMitigationMode (co the la MathMax(open, close) neu khong dung wick). Co che chi hieu luc khi Order Block co the tinh isBullish = true. ZoneLow la bien tinh tu cuoc lap block."
    },
    {
-    "ten": "Mitigation bearish buffer",
+    "ten": "Order_Block_Mitigation_Tracker_91a",
+    "co_che": "Order Block Mitigation",
     "ho": "pha_vo",
     "chieu": -1,
     "giu": 1,
@@ -2404,18 +1561,8 @@
       }
      }
     ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
+    "ra": [],
+    "khong_dien_dat_duoc": "Giong chieu mua, dieu kien chi hieu luc khi Order Block co the tinh isBullish = false."
    }
   ],
   "chua_do": false,
@@ -2425,48 +1572,14 @@
   "ten": "RollingAutocorrRegimeOscillator.mq5",
   "co_che": [
    {
-    "ten": "raw_acf_tang_qua_nguong_am",
-    "ho": "khac",
+    "ten": "RollingAutocorrRegimeOscillator",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "raw_acf_khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -2476,60 +1589,13 @@
   "ten": "FX_Dashboard.mq5",
   "co_che": [
    {
-    "ten": "Donchian breakout tren",
-    "ho": "pha_vo",
+    "ten": "Donchian_Channel_Bounds",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "cao_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        }
-       ]
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Donchian breakout duoi",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "thap_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        }
-       ]
-      }
-     }
-    ]
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": "Doan ma duoc cap chi dinh nghia buffer BufDonHigh/BufDonLow (tinh max high/min low trong N bar), khong co logic sinh tin hieu (Alert/Arrow) de xac dinh dieu kien vao/ra."
    }
   ],
   "chua_do": false,
@@ -2540,10 +1606,15 @@
   "co_che": [
    {
     "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
+    "ho": "khong_dien_dat_duoc",
+    "chieu": "khong_dien_dat_duoc",
+    "giu": "khong_dien_dat_duoc",
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -2558,13 +1629,6 @@
     "chieu": 1,
     "giu": 1,
     "vao": []
-   },
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": []
    }
   ],
   "chua_do": false,
@@ -2574,44 +1638,14 @@
   "ten": "Channel_Breakout_Dashboard.mq5",
   "co_che": [
    {
-    "ten": "buffer/mui ten mua",
-    "ho": "pha_vo",
+    "ten": "Channel_Breakout_Dashboard",
+    "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "high",
-       "cot": "high"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "buffer/mui ten ban",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "low",
-       "cot": "low"
-      }
-     }
-    ]
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -2621,7 +1655,8 @@
   "ten": "XAUUSD_MTF_Liquidity_OB_Reversal_r2i.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "XAUUSD_MTF_Liquidity_OB_Reversal_r2i",
+    "co_che": "khac",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
@@ -2634,28 +1669,21 @@
  },
  {
   "ten": "Swing_Trading_Dashboard.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
+  "co_che": [],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "LLM tra ve rong"
  },
  {
   "ten": "Scalping_Dashboard.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "Scalping_Dashboard",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [],
-    "ra": []
+    "ra": [],
+    "khong_dien_dat_duoc": "Doan ma duoc cung cap chi chua cac ham ve giao dien (CreateRectangle, CreateLabel), khong co dinh nghia buffer, mui ten hoac canh bao Alert() de xac dinh dieu kien vao/ra lenh."
    }
   ],
   "chua_do": false,
@@ -2665,60 +1693,14 @@
   "ten": "PreviousWeekHighLow.mq5",
   "co_che": [
    {
-    "ten": "PWH",
+    "ten": "PreviousWeekHighLow",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "PWL",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<=",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -2726,49 +1708,15 @@
  },
  {
   "ten": "Swing_Mitigation.mq5",
-  "co_che": [
-   {
-    "ten": "buy arrow / BUY alert",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   },
-   {
-    "ten": "sell arrow / SELL alert",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
+  "co_che": [],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "LLM tra ve rong"
  },
  {
   "ten": "SwingHighLow.mq5",
   "co_che": [
    {
-    "ten": "PivotHigh",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "PivotLow",
+    "ten": "SwingHighLow",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
@@ -2776,12 +1724,69 @@
      {
       "trai": {
        "chi_bao": "gia",
-       "cot": "low"
+       "cot": "high"
       },
-      "phep": "cheo_xuong",
+      "phep": ">",
       "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 5
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 5
+      }
+     }
+    ]
+   },
+   {
+    "ten": "SwingHighLow",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
        "chi_bao": "gia",
        "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 5
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 5
       }
      }
     ]
@@ -2794,12 +1799,16 @@
   "ten": "RiskBasedPositionSizeCalculator_22k.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "RiskBasedPositionSizeCalculator_22k",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "ra": []
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -2809,7 +1818,7 @@
   "ten": "TrendRegimeInspector.mq5",
   "co_che": [
    {
-    "ten": "trend_following_strength_buy",
+    "ten": "TrendRegimeInspector",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
@@ -2827,60 +1836,22 @@
      },
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 20
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 20
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "adx",
-       "n": 14
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 50
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "zscore",
+       "chi_bao": "do_lech",
        "cua": {
-        "chi_bao": "tb",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
+        "chi_bao": "ema",
         "n": 20
        },
-       "n": 20
+       "n": 1
       },
       "phep": ">",
       "phai": {
        "hang": 0
       }
      }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 20
-      }
-     }
     ]
    },
    {
-    "ten": "trend_following_strength_sell",
+    "ten": "TrendRegimeInspector",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
@@ -2898,54 +1869,16 @@
      },
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 20
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 20
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "adx",
-       "n": 14
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 50
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "zscore",
+       "chi_bao": "do_lech",
        "cua": {
-        "chi_bao": "tb",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
+        "chi_bao": "ema",
         "n": 20
        },
-       "n": 20
+       "n": 1
       },
       "phep": "<",
       "phai": {
        "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 20
       }
      }
     ]
@@ -2958,79 +1891,79 @@
   "ten": "STC_CROSS.mq5",
   "co_che": [
    {
-    "ten": "Stochastic cross buy khi thoat vung qua ban va cat len",
-    "ho": "xu_huong",
+    "ten": "STC_CROSS",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "stochastic_k",
-       "n": 14
+       "chi_bao": "khac",
+       "ten": "Stoch_K"
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khac",
+       "ten": "Stoch_D"
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khac",
+       "ten": "Stoch_K"
       },
       "phep": "cheo_len",
       "phai": {
-       "chi_bao": "stochastic_d",
-       "n": 14
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "stochastic_k",
-       "n": 14
-      },
-      "phep": "<=",
-      "phai": {
-       "hang": 20
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "stochastic_d",
-       "n": 14
-      },
-      "phep": "<=",
-      "phai": {
-       "hang": 20
+       "chi_bao": "khac",
+       "ten": "Stoch_D"
       }
      }
     ]
    },
    {
-    "ten": "Stochastic cross sell khi thoat vung qua mua va cat xuong",
-    "ho": "xu_huong",
+    "ten": "STC_CROSS",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "stochastic_k",
-       "n": 14
+       "chi_bao": "khac",
+       "ten": "Stoch_K"
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 80
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khac",
+       "ten": "Stoch_D"
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 80
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khac",
+       "ten": "Stoch_K"
       },
       "phep": "cheo_xuong",
       "phai": {
-       "chi_bao": "stochastic_d",
-       "n": 14
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "stochastic_k",
-       "n": 14
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 80
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "stochastic_d",
-       "n": 14
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 80
+       "chi_bao": "khac",
+       "ten": "Stoch_D"
       }
      }
     ]
@@ -3043,78 +1976,14 @@
   "ten": "PreviousDayHighLowClose.mq5",
   "co_che": [
    {
-    "ten": "PreviousDayHighLowClose_muc_vao_PDL",
+    "ten": "PreviousDayHighLowClose",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "hang": 0
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "PreviousDayHighLowClose_muc_vao_PDL",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "hang": 0
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -3124,56 +1993,24 @@
   "ten": "Quantora_Candle_Strength_Analyzer.mq5",
   "co_che": [
    {
-    "ten": "BUY signal from bullish candle strength / pressure state",
-    "co_che": "giau",
-    "ho": "xu_huong",
+    "ten": "Quantora_Candle_Strength_Analyzer",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    },
    {
-    "ten": "SELL signal from bearish candle strength / pressure state",
-    "co_che": "giau",
-    "ho": "xu_huong",
+    "ten": "Quantora_Candle_Strength_Analyzer",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -3183,7 +2020,8 @@
   "ten": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "co_che": [
    {
-    "ten": "gia_vuot_ema20",
+    "ten": "Quantora_MA_Dashboard_Buy",
+    "co_che": "xu_huong",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
@@ -3193,149 +2031,101 @@
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": ">",
+      "phep": ">=",
       "phai": {
        "chi_bao": "ema",
        "n": 20
       }
-     }
-    ]
-   },
-   {
-    "ten": "gia_duoi_ema20",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
+     },
      {
       "trai": {
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 20
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_vuot_ema50",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
+      "phep": ">=",
       "phai": {
        "chi_bao": "ema",
        "n": 50
       }
-     }
-    ]
-   },
-   {
-    "ten": "gia_duoi_ema50",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
+     },
      {
       "trai": {
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 50
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_vuot_ema100",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
+      "phep": ">=",
       "phai": {
        "chi_bao": "ema",
        "n": 100
       }
-     }
-    ]
-   },
-   {
-    "ten": "gia_duoi_ema100",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
+     },
      {
       "trai": {
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 100
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_vuot_ema200",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 200
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_duoi_ema200",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
+      "phep": ">=",
       "phai": {
        "chi_bao": "ema",
        "n": 200
       }
      }
     ],
-    "khong_dien_dat_duoc": [
-     "ham AboveBelow(g_price,g_emaX) chi cho biet gia dang tren/duoi EMA X, khong thay duoc logic cat len/cat xuong hay canh bao mua/ban cu the"
-    ]
+    "ra": []
+   },
+   {
+    "ten": "Quantora_MA_Dashboard_Sell",
+    "co_che": "xu_huong",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<=",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<=",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 50
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<=",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 100
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<=",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 200
+      }
+     }
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -3345,78 +2135,24 @@
   "ten": "Quantora_Multi-Timeframe_MACD.mq5",
   "co_che": [
    {
-    "ten": "MACD multi-timeframe BUY khi MACD main cat len signal tren nhieu khung",
+    "ten": "MACD_Đa_Kỳ_Hạn",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "macd_main",
-         "n": 12
-        },
-        {
-         "chi_bao": "macd_main",
-         "n": 26
-        }
-       ]
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "macd_signal",
-         "n": 12
-        },
-        {
-         "chi_bao": "macd_signal",
-         "n": 26
-        }
-       ]
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    },
    {
-    "ten": "MACD multi-timeframe SELL khi MACD main cat xuong signal tren nhieu khung",
+    "ten": "MACD_Đa_Kỳ_Hạn",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "macd_main",
-         "n": 12
-        },
-        {
-         "chi_bao": "macd_main",
-         "n": 26
-        }
-       ]
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "macd_signal",
-         "n": 12
-        },
-        {
-         "chi_bao": "macd_signal",
-         "n": 26
-        }
-       ]
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -3426,11 +2162,13 @@
   "ten": "Quantora_Multi-Timeframe_RSI_Dashboard.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
+    "ten": "Quantora_MultiTimeframe_RSI_Dashboard",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
-    "vao": []
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -3440,20 +2178,15 @@
   "ten": "Quantora_Multi-Timeframe_Trend.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "Quantora_Multi-Timeframe_Trend",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "hang": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -3464,47 +2197,36 @@
   "ten": "Quantora_Market_Volatility_Monitor.mq5",
   "co_che": [
    {
-    "ten": "ATR ratio high state",
-    "ho": "bien_dong",
+    "ten": "Quantora_Market_Volatility_Monitor",
+    "co_che": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "atr",
-        "n": 14
-       },
-       "n": 20
+       "chi_bao": "khac"
       },
-      "phep": "<",
+      "phep": ">=",
       "phai": {
-       "chi_bao": "atr",
-       "n": 14
+       "hang": 0
       }
-     }
-    ]
-   },
-   {
-    "ten": "ATR ratio extreme state",
-    "ho": "bien_dong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
+     },
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "atr",
-        "n": 14
-       },
-       "n": 50
+       "chi_bao": "khac"
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 0
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khac"
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "atr",
-       "n": 14
+       "hang": 0
       }
      }
     ]
@@ -3515,146 +2237,432 @@
  },
  {
   "ten": "Quantora_Market_Status_Dashboard_MT5.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
+  "co_che": [
+   {
+    "ten": "khong_dien_dat_duoc",
+    "ho": "khong_dien_dat_duoc",
+    "chieu": 0,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
  },
  {
   "ten": "Quantora_Symbol_Information_Panel_MT5.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
+  "co_che": [
+   {
+    "ten": "khong_dien_dat_duoc",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "Quantora_Pip_Value_Calculator_MT5.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
+  "co_che": [
+   {
+    "ten": "Quantora_Pip_Value_Calculator_MT5",
+    "ho": "khac",
+    "chieu": 0,
+    "giu": 1,
+    "vao": [
+     {
+      "khong_dien_dat_duoc": "Doan ma duoc cung cap chi chua tinh toan gia tri pip (g_pip_value_*) va tao doi tuong giao dien (CreateRectangle). Khong co logic bufer mui ten, Alert('BUY'/'SELL'), hay dieu kien ky thuat nao de phat hien tin hieu vao/ra."
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
  },
  {
   "ten": "Quantora_ADR_Calculator_MT5.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
+  "co_che": [
+   {
+    "ten": "Quantora_ADR_Calculator",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "Quantora_Session_Clock_MT5.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
+  "co_che": [
+   {
+    "ten": "SessionClockPanel",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "ReportTable.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "SessionHighLow.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "Quantora_Candle_Countdown_MT5.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "Spread_Monitor.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "Volatility_Regime.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "Global_Macro_Soros.mq5",
   "co_che": [],
   "chua_do": false,
   "vi_sao": "LLM tra ve rong"
  },
  {
-  "ten": "BBStochRSIXReversal.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "SMC_Order_Block_Detector.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "SHK_Professional_Heikin_Ashi_Signals.mq5",
+  "ten": "SessionHighLow.mq5",
   "co_che": [
    {
-    "ten": "Heikin Ashi bull strong",
+    "ten": "SessionHighLow",
+    "ho": "phien",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Quantora_Candle_Countdown_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "Quantora_Candle_Countdown",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "Spread_Monitor.mq5",
+  "co_che": [
+   {
+    "ten": "Spread_Monitor",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   },
+   {
+    "ten": "Spread_Monitor",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Volatility_Regime.mq5",
+  "co_che": [
+   {
+    "ten": "Volatility_Regime",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "bien_do"
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "hang": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "bien_do"
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 20
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Volatility_Regime",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "bien_do"
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "hang": 50
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "bien_do"
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": 50
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Global_Macro_Soros.mq5",
+  "co_che": [
+   {
+    "ten": "Global Macro Soros",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "than_nen"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
+       "chi_bao": "ema",
        "n": 14
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 30
       }
      },
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "ema",
+       "n": 14
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
+       "chi_bao": "ema",
+       "n": 30
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "ema",
+       "n": 14
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 30
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "Heikin Ashi bear strong",
+    "ten": "Global Macro Soros",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "than_nen"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
+       "chi_bao": "ema",
        "n": 14
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 30
       }
      },
+     {
+      "trai": {
+       "chi_bao": "ema",
+       "n": 14
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 30
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "ema",
+       "n": 14
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 30
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "BBStochRSIXReversal.mq5",
+  "co_che": [
+   {
+    "ten": "BB_StochRSI_Reversal_BUY",
+    "co_che": "bb_stochrsi",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
      {
       "trai": {
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": "<",
+      "phep": "<=",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 20
       }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "rsi",
+        "n": 14
+       },
+       "n": 3
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "BB_StochRSI_Reversal_SELL",
+    "co_che": "bb_stochrsi",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">=",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "rsi",
+        "n": 14
+       },
+       "n": 3
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SMC_Order_Block_Detector.mq5",
+  "co_che": [
+   {
+    "ten": "SMC_Order_Block_Detector",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SHK_Professional_Heikin_Ashi_Signals.mq5",
+  "co_che": [
+   {
+    "ten": "SHK_Professional_Heikin_Ashi_Signals",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "khong_dien_dat_duoc": "Doan code duoc cung cap chi chua cac ham tinh toan gia tri Heikin Ashi va ATR, khong chua dieu kien sinh tin hieu (gan buffer, ve mui ten, hoac Alert BUY/SELL). Khong the xuat dieu kien vao/ra."
      }
     ]
    }
@@ -3666,65 +2674,23 @@
   "ten": "RSI_Histogram_EN.mq5",
   "co_che": [
    {
-    "ten": "RSI_Histogram_BUY_seed",
-    "ho": "quay_ve_trung_binh",
+    "ten": "RSI_Histogram_EN",
+    "co_che": "rsi_histogram",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "rsi",
-       "n": 14
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 50
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    },
    {
-    "ten": "RSI_Histogram_SELL_seed",
-    "ho": "quay_ve_trung_binh",
+    "ten": "RSI_Histogram_EN",
+    "co_che": "rsi_histogram",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "rsi",
-       "n": 14
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 50
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -3733,43 +2699,41 @@
  },
  {
   "ten": "EVTCrashGauge.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "Sessionvolatilityheatmap.mq5",
-  "co_che": [],
-  "chua_do": true,
-  "vi_sao": "CHUA DO - HTTP 500: {\"error\":{\"message\":\"分组 auto 下模型 gpt-5.4-mini 的可用渠道不存在（retry） (request id: 20260"
- },
- {
-  "ten": "Tradeanalyticsdashboard.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
+    "ten": "EVTCrashGauge",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [],
     "ra": [],
-    "khong_dien_dat_duoc": "Doan ma duoc cung cap chi chua phan khoi tao giao dien/ canvas (OnInit, ObjectSetInteger, CreateBitmapLabel), khong thay dieu kien gan buffer mui ten hoac Alert BUY/SELL nao."
+    "khong_dien_dat_duoc": "Doan ma duoc cap nhat chi chua logic tinh VaR/ES theo GPD va cap nhat giao dien panel. Khong co dieu kien Alert('BUY')/'SELL' hay gan gia tri cho buffer mui ten tin hieu de trich xuat."
    }
   ],
   "chua_do": false,
   "vi_sao": ""
  },
  {
+  "ten": "Sessionvolatilityheatmap.mq5",
+  "co_che": [],
+  "chua_do": false,
+  "vi_sao": "LLM tra ve rong"
+ },
+ {
+  "ten": "Tradeanalyticsdashboard.mq5",
+  "co_che": [],
+  "chua_do": false,
+  "vi_sao": "LLM tra ve rong"
+ },
+ {
   "ten": "SAXAnalog.mq5",
   "co_che": [
    {
-    "ten": "SAXAnalog signal buffer/alert",
-    "ho": "khac",
+    "ten": "SAXAnalog",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "ra": [],
-    "khong_dien_dat_duoc": "Doan ma duoc cung cap khong chua phan xu ly tin hieu vao lenh (cac dieu kien gan buffer mui ten hoac Alert BUY/SELL). Doan nay chi co ham ve do hoa SetTrend/SetLabel va mot doan copy ATR, khong co logic xac dinh vao/ra tin hieu."
+    "vao": []
    }
   ],
   "chua_do": false,
@@ -3779,39 +2743,14 @@
   "ten": "session_scalper.mq5",
   "co_che": [
    {
-    "ten": "gia_mo_phien",
+    "ten": "Session_Open_Buffer",
+    "co_che": "session_time_check",
     "ho": "phien",
-    "chieu": 1,
+    "chieu": 0,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "open"
-       },
-       "n": 2
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": "Đoạn mã chỉ chứa logic tính toán khung giờ phiên và gán giá mở phiên vào buffer (SessionOpenBuffer[i] = open[idx]). Điều kiện duy nhất là so sánh thời gian (time[i] >= sOpen && time[i] < sEnd), không có phép so sánh chỉ báo kỹ thuật, không có Alert BUY/SELL và không xác định được chiều giao dịch nên không thể điền đầy đủ các trường chieu, vao, ra theo schema yêu cầu."
    }
   ],
   "chua_do": false,
@@ -3821,25 +2760,13 @@
   "ten": "RMA_Engine.mq5",
   "co_che": [
    {
-    "ten": "RMA Panel: adverse movement",
+    "ten": "RMA_Engine",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": []
-   },
-   {
-    "ten": "RMA Panel: rma family",
-    "ho": "quay_ve_trung_binh",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   },
-   {
-    "ten": "RMA Panel: rma family",
-    "ho": "quay_ve_trung_binh",
-    "chieu": -1,
-    "giu": 1,
-    "vao": []
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -3849,39 +2776,17 @@
   "ten": "SniperGold_SMC_ProPlus_v4_3.mq5",
   "co_che": [
    {
-    "ten": "PivotHighBreakArrow",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "PivotLowBreakArrow",
-    "ho": "pha_vo",
+    "ten": "SniperGold_SMC_ProPlus_v4_3",
+    "co_che": "SMC_Pivot_Trend",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
+      "trai": "khong_dien_dat_duoc",
       "phep": ">",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
+       "hang": 0
       }
      }
     ]
@@ -3894,7 +2799,7 @@
   "ten": "Clock_zSpread0.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "Clock_zSpread0",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
@@ -3909,42 +2814,24 @@
   "ten": "Mediana_Trendline_EN.mq5",
   "co_che": [
    {
-    "ten": "mediana_trendline_mua",
+    "ten": "Mediana_Trendline_EN",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    },
    {
-    "ten": "mediana_trendline_ban",
+    "ten": "Mediana_Trendline_EN",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -3954,42 +2841,24 @@
   "ten": "Channel_Sun_Signals_ENG.mq5",
   "co_che": [
    {
-    "ten": "dnArrowBuf",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "upArrowBuf",
-    "ho": "khac",
+    "ten": "Channel_Sun_Signals",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Channel_Sun_Signals",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -3999,40 +2868,17 @@
   "ten": "SimpleTradeStats.mq5",
   "co_che": [
    {
-    "ten": "STS_Link2_click_buy",
-    "co_che": "STS_Link2 object click triggers BUY-side alert/signal",
+    "ten": "SimpleTradeStats",
+    "co_che": "khac",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "hang": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 2
-      }
+      "khong_dien_dat_duoc": "Doan ma duoc cap nhat chi chua phan xu ly su kien click tren chart va tao nhãn, khong co dinh nghia buffer mui ten hay canh bao Alert de xac dinh dieu kien vao lenh."
      }
-    ]
-   },
-   {
-    "ten": "STS_Link2_click_sell",
-    "co_che": "STS_Link2 object click triggers SELL-side alert/signal",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "hang": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 2
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4042,77 +2888,15 @@
   "ten": "SmartTrendScore_v2.mq5",
   "co_che": [
    {
-    "ten": "Signal BUY/SELL khi Score cắt ngưỡng trung tính",
+    "ten": "SmartTrendScore_v2",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "doi_pct",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 1
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Signal SELL khi Score cắt ngưỡng trung tính",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "doi_pct",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 1
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -4123,10 +2907,10 @@
   "ten": "AsianFibBreakout.mq5",
   "co_che": [
    {
-    "ten": "AsianFibBreakout_buy",
+    "ten": "AsianFibBreakout",
     "ho": "pha_vo",
     "chieu": 1,
-    "giu": 12,
+    "giu": 1,
     "vao": [
      {
       "trai": {
@@ -4135,23 +2919,16 @@
       },
       "phep": ">",
       "phai": {
-       "hang": "asianHigh"
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 100
       }
      }
     ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4161,60 +2938,13 @@
   "ten": "Microstructure_Matrix.mq5",
   "co_che": [
    {
-    "ten": "OB bullish visual",
-    "ho": "pha_vo",
+    "ten": "Microstructure_Matrix_OB_Visual",
+    "ho": "khac",
     "chieu": 1,
-    "giu": 5,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      },
-      "phep": "==",
-      "phai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      },
-      "phep": "==",
-      "phai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "OB bearish visual",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 5,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      },
-      "phep": "==",
-      "phai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      },
-      "phep": "==",
-      "phai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      }
-     }
-    ]
+    "giu": 1,
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": "Doan ma duoc cung cap chi chua logic ve ve hinh chu nhat (OBJ_RECTANGLE) va quan ly trang thai cached_ob_type. Khong co dieu kien tinh toan, gan buffer, ve mui ten, hay goi Alert('BUY'/'SELL') nen khong the xac dinh dieu kien vao/ra."
    }
   ],
   "chua_do": false,
@@ -4224,12 +2954,17 @@
   "ten": "Account_Dashboard_Pro.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "Account_Dashboard_Pro",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "ra": []
+    "vao": [
+     {
+      "trai": "khong_dien_dat_duoc",
+      "phep": "=",
+      "phai": "khong_dien_dat_duoc"
+     }
+    ]
    }
   ],
   "chua_do": false,
@@ -4239,10 +2974,10 @@
   "ten": "MACD_TradingView_Style.mq5",
   "co_che": [
    {
-    "ten": "MACD cắt lên tín hiệu sau khi EMA nhanh chậm và đường tín hiệu SMA được tính",
+    "ten": "MACD_TradingView_Style",
     "ho": "xu_huong",
     "chieu": 1,
-    "giu": 1,
+    "giu": 50,
     "vao": [
      {
       "trai": {
@@ -4255,13 +2990,14 @@
        "n": 26
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "MACD cắt xuống tín hiệu sau khi EMA nhanh chậm và đường tín hiệu SMA được tính",
+    "ten": "MACD_TradingView_Style",
     "ho": "xu_huong",
     "chieu": -1,
-    "giu": 1,
+    "giu": 50,
     "vao": [
      {
       "trai": {
@@ -4274,7 +3010,8 @@
        "n": 26
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4284,21 +3021,13 @@
   "ten": "AIS_Smoothed_Linear_Trend.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
+    "ten": "AIS_Smoothed_Linear_Trend",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khong_xac_dinh"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "khong_xac_dinh"
-      }
-     }
-    ]
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": true
    }
   ],
   "chua_do": false,
@@ -4308,7 +3037,7 @@
   "ten": "MA_Length_AuTo-_AKM.mq5",
   "co_che": [
    {
-    "ten": "cat_len_ma_xuat_hien",
+    "ten": "MA_Crossover_AKM",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
@@ -4320,14 +3049,15 @@
       },
       "phep": "cheo_len",
       "phai": {
-       "chi_bao": "ema",
-       "n": 0
+       "chi_bao": "sma",
+       "n": 14
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "cat_xuong_ma_xuat_hien",
+    "ten": "MA_Crossover_AKM_Sell",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
@@ -4339,11 +3069,12 @@
       },
       "phep": "cheo_xuong",
       "phai": {
-       "chi_bao": "ema",
-       "n": 0
+       "chi_bao": "sma",
+       "n": 14
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4353,83 +3084,27 @@
   "ten": "Alpha_Beta_Channel_-_AKM.mq5",
   "co_che": [
    {
-    "ten": "Gia cat duong du bao Alpha-Beta khi sai lech duong",
+    "ten": "Alpha_Beta_Channel_AKM",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
+     "khong_dien_dat_duoc"
     ],
     "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    },
    {
-    "ten": "Gia cat duong du bao Alpha-Beta khi sai lech am",
+    "ten": "Alpha_Beta_Channel_AKM",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
+     "khong_dien_dat_duoc"
     ],
     "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -4440,49 +3115,27 @@
   "ten": "Alpha_Beta_Trend.mq5",
   "co_che": [
    {
-    "ten": "gia_cat_duong_du_bao_tang",
+    "ten": "Alpha_Beta_Trend",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    },
    {
-    "ten": "gia_cat_duong_du_bao_giam",
+    "ten": "Alpha_Beta_Trend",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -4493,84 +3146,42 @@
   "ten": "UPLOAD_1_CKS_Dashboard.mq5",
   "co_che": [
    {
-    "ten": "protected_open_risk_duong",
+    "ten": "UPLOAD_1_CKS_Dashboard",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tong_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "tuyet_doi",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "open"
-         },
-         "n": 1
-        },
-        {
-         "chi_bao": "tuyet_doi",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "low"
-         },
-         "n": 1
-        }
-       ]
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+    "vao": [],
+    "ra": []
    }
   ],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "Double_Env.mq5",
   "co_che": [
    {
-    "ten": "BuyBuf gan low - 10*_Point",
-    "co_che": "Double_Env.mq5",
-    "ho": "khac",
+    "ten": "Double_Env_Mua",
+    "co_che": "double_envelope",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    },
    {
-    "ten": "SellBuf gan high + 10*_Point",
-    "co_che": "Double_Env.mq5",
-    "ho": "khac",
+    "ten": "Double_Env_Ban",
+    "co_che": "double_envelope",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4580,56 +3191,24 @@
   "ten": "KCI-Directional_X.mq5",
   "co_che": [
    {
-    "ten": "KCI_Plus_buffer_arrow",
+    "ten": "KCI_Directional_X",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "zscore",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 3
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    },
    {
-    "ten": "KCI_Minus_buffer_arrow",
+    "ten": "KCI_Directional_X",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "zscore",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 3
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4639,21 +3218,12 @@
   "ten": "KCI_Volatility_Distance.mq5",
   "co_che": [
    {
-    "ten": "KVR_Buffer",
-    "ho": "khac",
+    "ten": "KCI_Volatility_Distance",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "khac",
-       "ten": "kci_engine.Calculate"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -4664,47 +3234,43 @@
   "ten": "EnvSAR.mq5",
   "co_che": [
    {
-    "ten": "UpLevelBuffer",
-    "ho": "khac",
+    "ten": "EnvSAR",
+    "co_che": "EnvSAR",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "gia",
+       "cot": "close"
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "sar",
-       "n": 1
+       "chi_bao": "khac",
+       "ten_chi_bao": "sar",
+       "n": 14
       }
      }
     ]
    },
    {
-    "ten": "DownLevelBuffer",
-    "ho": "khac",
+    "ten": "EnvSAR",
+    "co_che": "EnvSAR",
+    "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "gia",
+       "cot": "close"
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "sar",
-       "n": 1
+       "chi_bao": "khac",
+       "ten_chi_bao": "sar",
+       "n": 14
       }
      }
     ]
@@ -4717,50 +3283,18 @@
   "ten": "zProfitLossCalendar.mq5",
   "co_che": [
    {
-    "ten": "calendar_positive_profit_day",
-    "co_che": "lich",
-    "ho": "vi_mo",
-    "chieu": 1,
+    "ten": "zProfitLossCalendar",
+    "ho": "khác",
+    "chieu": 0,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
+      "trai": "không_điền_đặt_được",
+      "phep": "",
+      "phai": ""
      }
-    ]
-   },
-   {
-    "ten": "calendar_negative_loss_day",
-    "co_che": "lich",
-    "ho": "vi_mo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4768,23 +3302,15 @@
  },
  {
   "ten": "Chart_Navigator_MT5_Light.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
+  "co_che": [],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "LLM tra ve rong"
  },
  {
   "ten": "BBandsPsar.mq5",
   "co_che": [
    {
-    "ten": "UpLevelBuffer",
+    "ten": "BBandsPsar_Up",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
@@ -4796,8 +3322,7 @@
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "sar",
-       "n": 1
+       "chi_bao": "psar"
       }
      },
      {
@@ -4807,25 +3332,14 @@
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "sar",
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "psar"
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "DownLevelBuffer",
+    "ten": "BBandsPsar_Down",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
@@ -4837,8 +3351,7 @@
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "sar",
-       "n": 1
+       "chi_bao": "psar"
       }
      },
      {
@@ -4848,22 +3361,11 @@
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "sar",
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "psar"
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4873,84 +3375,24 @@
   "ten": "KCI_Custom.mq5",
   "co_che": [
    {
-    "ten": "Bullish_Buffer",
-    "co_che": "KCI_Custom.mq5",
-    "ho": "khac",
+    "ten": "KCI_Custom",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "khoang_cach_zscore",
-        "toan_hang": [
-         {
-          "chi_bao": "tb",
-          "cua": {
-           "chi_bao": "gia",
-           "cot": "close"
-          },
-          "n": 1
-         },
-         {
-          "chi_bao": "tb",
-          "cua": {
-           "chi_bao": "gia",
-           "cot": "close"
-          },
-          "n": 1
-         }
-        ]
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    },
    {
-    "ten": "Bearish_Buffer",
-    "co_che": "KCI_Custom.mq5",
-    "ho": "khac",
+    "ten": "KCI_Custom",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "khoang_cach_zscore",
-        "toan_hang": [
-         {
-          "chi_bao": "tb",
-          "cua": {
-           "chi_bao": "gia",
-           "cot": "close"
-          },
-          "n": 1
-         },
-         {
-          "chi_bao": "tb",
-          "cua": {
-           "chi_bao": "gia",
-           "cot": "close"
-          },
-          "n": 1
-         }
-        ]
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -4960,68 +3402,24 @@
   "ten": "LW_MarketStructure_SMC.mq5",
   "co_che": [
    {
-    "ten": "SwingHighBuf duoc gan khi co dinh cao cuc bo (swing high)",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "chi_bao": "cao_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        }
-       ]
-      }
-     }
-    ]
-   },
-   {
-    "ten": "SwingLowBuf duoc gan khi co dinh thap cuc bo (swing low)",
+    "ten": "SMC_BOS_CHoCH_BUY",
     "ho": "pha_vo",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "chi_bao": "thap_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        }
-       ]
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
+   },
+   {
+    "ten": "SMC_BOS_CHoCH_SELL",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -5031,93 +3429,31 @@
   "ten": "SpreadMonitorPanel.mq5",
   "co_che": [
    {
-    "ten": "spread_warn_threshold",
-    "co_che": "bien_dong",
+    "ten": "SpreadMonitorPanel",
     "ho": "khac",
-    "chieu": 1,
+    "chieu": 0,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "spread_warning_buffer",
-    "co_che": "bien_dong",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "khong_dien_dat_duoc": [
-     "Dung code dinh tinh trong doan trich nay chi thay cap nhat giao dien va bien thong ke spread, khong thay ro dieu kien gan buffer mui ten hay Alert BUY/SELL"
-    ]
+    "vao": "khong_dien_dat_duoc",
+    "ra": "khong_dien_dat_duoc"
    }
   ],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "PropFirmRiskDashboard.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "PropFirmRiskDashboard",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
     "ra": [
-     {
-      "trai": {
-       "hang": 0
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -5128,46 +3464,44 @@
   "ten": "Consecutive_Bars_v1_50.mq5",
   "co_che": [
    {
-    "ten": "consecutive_up_bars",
+    "ten": "Consecutive_Bars_v1_50",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "consecutiveUpBars"
-       },
-       "n": 1
+       "chi_bao": "gia",
+       "cot": "close"
       },
-      "phep": ">=",
+      "phep": ">",
       "phai": {
-       "hang": 1
+       "chi_bao": "gia",
+       "cot": "open"
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "consecutive_down_bars",
+    "ten": "Consecutive_Bars_v1_50",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "consecutiveDnBars"
-       },
-       "n": 1
+       "chi_bao": "gia",
+       "cot": "close"
       },
-      "phep": ">=",
+      "phep": "<",
       "phai": {
-       "hang": 1
+       "chi_bao": "gia",
+       "cot": "open"
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -5177,78 +3511,22 @@
   "ten": "Multi_Timeframe_Candle_Map.mq5",
   "co_che": [
    {
-    "ten": "gia_tren_50_phan_tram_than_nen",
-    "ho": "quay_ve_trung_binh",
-    "chieu": 1,
+    "ten": "Multi_Timeframe_Candle_Map",
+    "ho": "khac",
+    "chieu": "khong_dien_dat_duoc",
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
+      "trai": "khong_dien_dat_duoc",
+      "phep": "khong_dien_dat_duoc",
+      "phai": "khong_dien_dat_duoc"
      }
-    ]
-   },
-   {
-    "ten": "gia_duoi_50_phan_tram_than_nen",
-    "ho": "quay_ve_trung_binh",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
+    ],
+    "ra": [
      {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
+      "trai": "khong_dien_dat_duoc",
+      "phep": "khong_dien_dat_duoc",
+      "phai": "khong_dien_dat_duoc"
      }
     ]
    }
@@ -5260,93 +3538,15 @@
   "ten": "zSRZones.mq5",
   "co_che": [
    {
-    "ten": "Demand zone touch/rejection",
-    "ho": "pha_vo",
-    "chieu": 1,
+    "ten": "zSRZones",
+    "ho": "khac",
+    "chieu": 0,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "thap_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 20
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 20
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Supply zone touch/rejection",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "cao_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 20
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 20
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -5357,38 +3557,13 @@
   "ten": "zPipCaluculator.mq5",
   "co_che": [
    {
-    "ten": "pip_value_duong",
+    "ten": "zPipCalculator",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "pip_value_am",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
+      "khong_dien_dat_duoc": true
      }
     ]
    }
@@ -5400,75 +3575,12 @@
   "ten": "Adaptive_Support_Resistance_Zones.mq5",
   "co_che": [
    {
-    "ten": "Price enters support zone and signals BUY",
-    "ho": "pha_vo",
+    "ten": "Adaptive_Support_Resistance_Zones",
+    "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "tb",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "low"
-         },
-         "n": 20
-        },
-        {
-         "chi_bao": "tb",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "high"
-         },
-         "n": 20
-        }
-       ]
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Price enters resistance zone and signals SELL",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "tb",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "low"
-         },
-         "n": 20
-        },
-        {
-         "chi_bao": "tb",
-         "cua": {
-          "chi_bao": "gia",
-          "cot": "high"
-         },
-         "n": 20
-        }
-       ]
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -5479,57 +3591,30 @@
   "ten": "Spread_Calculator.mq5",
   "co_che": [
    {
-    "ten": "Spread quá cao",
+    "ten": "Spread_Calculator",
     "ho": "khac",
-    "chieu": -1,
+    "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": true
    }
   ],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "Candle_countdown_clock.mq5",
   "co_che": [
    {
-    "ten": "countdown_text_label",
+    "ten": "Candle_countdown_clock",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": []
-   },
-   {
-    "ten": "countdown_text_label",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": []
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -5539,68 +3624,11 @@
   "ten": "Premium_Discount_Range_Mapper.mq5",
   "co_che": [
    {
-    "ten": "premium_discount_zone_mapper_buy",
-    "ho": "khac",
+    "ten": "Premium_Discount_Range_Mapper",
+    "ho": "khong_dien_dat_duoc",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "tb_cua_cac",
-        "toan_hang": [
-         {
-          "chi_bao": "gia",
-          "cot": "high"
-         },
-         {
-          "chi_bao": "gia",
-          "cot": "low"
-         }
-        ]
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "premium_discount_zone_mapper_sell",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "tb_cua_cac",
-        "toan_hang": [
-         {
-          "chi_bao": "gia",
-          "cot": "high"
-         },
-         {
-          "chi_bao": "gia",
-          "cot": "low"
-         }
-        ]
-       },
-       "n": 1
-      }
-     }
-    ]
+    "vao": []
    }
   ],
   "chua_do": false,
@@ -5610,42 +3638,13 @@
   "ten": "FVG_Imbalance_Marker_Helper.mq5",
   "co_che": [
    {
-    "ten": "FVG Bullish",
-    "ho": "pha_vo",
+    "ten": "FVG_Imbalance_Marker",
+    "co_che": "FVG_Gap_Detection",
+    "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "FVG Bearish",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
+    "vao": [],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -5655,65 +3654,27 @@
   "ten": "Confirmed_Swing_Points_Helper.mq5",
   "co_che": [
    {
-    "ten": "pivot_cao",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "pivot_thap",
-    "ho": "pha_vo",
+    "ten": "Confirmed_Swing_Points_Helper",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
+     "khong_dien_dat_duoc"
     ],
     "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "khong_dien_dat_duoc"
+    ]
+   },
+   {
+    "ten": "Confirmed_Swing_Points_Helper",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -5724,48 +3685,18 @@
   "ten": "zDaily_Range_Tracker.mq5",
   "co_che": [
    {
-    "ten": "ADR_usage_high_buy",
+    "ten": "zDaily_Range_Tracker",
     "ho": "bien_dong",
-    "chieu": 1,
+    "chieu": 0,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
+      "trai": "khong_dien_dat_duoc",
+      "phep": "=",
+      "phai": "khong_dien_dat_duoc"
      }
-    ]
-   },
-   {
-    "ten": "ADR_usage_high_sell",
-    "ho": "bien_dong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -5775,42 +3706,14 @@
   "ten": "zSwapMeter.mq5",
   "co_che": [
    {
-    "ten": "swap_positive_alert",
-    "co_che": "zSwapMeter",
+    "ten": "zSwapMeter",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "swap_negative_alert",
-    "co_che": "zSwapMeter",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -5818,209 +3721,92 @@
  },
  {
   "ten": "SpreadMonitorLive.mq5",
+  "co_che": [],
+  "chua_do": false,
+  "vi_sao": "LLM tra ve rong"
+ },
+ {
+  "ten": "XAUUSD_Spread_Alert_Utility_MT5.mq5",
+  "co_che": [],
+  "chua_do": false,
+  "vi_sao": "LLM tra ve rong"
+ },
+ {
+  "ten": "Gold_Spread_ATR_Trend_Panel_MT5.mq5",
+  "co_che": [],
+  "chua_do": false,
+  "vi_sao": "LLM tra ve rong"
+ },
+ {
+  "ten": "Heiken_Ashi_Series.mq5",
   "co_che": [
    {
-    "ten": "spread_vuot_nguong",
+    "ten": "Heikin_Ashi_Series",
+    "co_che": "indicator",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "SpreadMonitor.mq5",
+  "co_che": [
+   {
+    "ten": "SpreadMonitor",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "Harmonic_Gravity_Center.mq5",
+  "co_che": [
+   {
+    "ten": "Harmonic_Gravity_Center",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "khong_dien_dat_duoc"
+      },
+      "phep": "khong_dien_dat_duoc",
+      "phai": {
+       "chi_bao": "khong_dien_dat_duoc"
+      }
+     }
+    ]
+   },
+   {
+    "ten": "Harmonic_Gravity_Center",
     "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "khong_dien_dat_duoc"
       },
-      "phep": "cheo_len",
+      "phep": "khong_dien_dat_duoc",
       "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "khong_dien_dat_duoc": [
-     "Dieu kien thuc su la currentSpread >= InpWideThreshold de doi mau/ve canh bao, nhung khong co thanh phan thoi gian trong schema de bieu dien truc tiep theo dung ngu phap chi cho phep.",
-     "Khong co thong tin du dieu kien cho chan BUY/SELL rieng, chi co canh bao/mui ten lien quan spread."
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "XAUUSD_Spread_Alert_Utility_MT5.mq5",
-  "co_che": [
-   {
-    "ten": "spread_alert_utility_status_buffer",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "bien_do"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Gold_Spread_ATR_Trend_Panel_MT5.mq5",
-  "co_che": [
-   {
-    "ten": "DashboardBuffer_ghi_0",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "hang": 0
-      },
-      "phep": "=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Heiken_Ashi_Series.mq5",
-  "co_che": [
-   {
-    "ten": "Heiken_Ashi_Series bullish candle",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Heiken_Ashi_Series bearish candle",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "SpreadMonitor.mq5",
-  "co_che": [
-   {
-    "ten": "SpreadMonitor_label_text",
-    "co_che": "khac",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   }
-  ],
-  "chua_do": false,
-  "vi_sao": ""
- },
- {
-  "ten": "Harmonic_Gravity_Center.mq5",
-  "co_che": [
-   {
-    "ten": "gia_cat_len_duong_tam_harmonic_gravity_center",
-    "ho": "quay_ve_trung_binh",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_cat_xuong_duong_tam_harmonic_gravity_center",
-    "ho": "quay_ve_trung_binh",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "khong_dien_dat_duoc"
       }
      }
     ]
@@ -6033,95 +3819,41 @@
   "ten": "MacdColor.mq5",
   "co_che": [
    {
-    "ten": "macd_histogram_duong",
-    "co_che": "ExtHistogramBuffer >= 0",
+    "ten": "MACD Color",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
+       "chi_bao": "macd",
+       "fast": 12,
+       "slow": 26
       },
       "phep": "cheo_len",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 26
+       "chi_bao": "sma",
+       "n": 9
       }
      }
     ]
    },
    {
-    "ten": "macd_histogram_am",
-    "co_che": "ExtHistogramBuffer < 0",
+    "ten": "MACD Color",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
+       "chi_bao": "macd",
+       "fast": 12,
+       "slow": 26
       },
       "phep": "cheo_xuong",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 12
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 26
+       "chi_bao": "sma",
+       "n": 9
       }
      }
     ]
@@ -6134,19 +3866,15 @@
   "ten": "Kinematic_Physics.mq5",
   "co_che": [
    {
-    "ten": "velocity_duong",
+    "ten": "Kinematic Physics",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "gia",
+       "cot": "close"
       },
       "phep": ">",
       "phai": {
@@ -6155,34 +3883,30 @@
         "chi_bao": "gia",
         "cot": "close"
        },
-       "n": 1
+       "n": 14
       }
      }
     ]
    },
    {
-    "ten": "velocity_am",
+    "ten": "Kinematic Physics",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "gia",
+       "cot": "close"
       },
-      "phep": "<",
+      "phep": "<=",
       "phai": {
        "chi_bao": "tb",
        "cua": {
         "chi_bao": "gia",
         "cot": "close"
        },
-       "n": 1
+       "n": 14
       }
      }
     ]
@@ -6195,38 +3919,37 @@
   "ten": "Momentum_Candles.mq5",
   "co_che": [
    {
-    "ten": "news_candle_filter",
-    "co_che": "gia_phien",
-    "ho": "phien",
+    "ten": "Momentum Candles",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tre",
-       "cua": {
-        "chi_bao": "bien_do"
-       },
-       "n": 1
+       "chi_bao": "momentum",
+       "n": "InpMomPeriod"
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "bien_do"
-       },
-       "n": 3
+       "hang": 100
       }
-     },
+     }
+    ]
+   },
+   {
+    "ten": "Momentum Candles",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "momentum",
+       "n": "InpMomPeriod"
       },
-      "phep": ">",
+      "phep": "<",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
+       "hang": 100
       }
      }
     ]
@@ -6239,46 +3962,18 @@
   "ten": "inside_bar.mq5",
   "co_che": [
    {
-    "ten": "inside_bar_buy",
-    "co_che": "pha_vo",
-    "ho": "khac",
+    "ten": "inside_bar",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high",
-       "tham_chieu": "bar_truoc"
-      }
+      "trai": "khong_dien_dat_duoc",
+      "phep": "=",
+      "phai": "khong_dien_dat_duoc"
      }
-    ]
-   },
-   {
-    "ten": "inside_bar_sell",
-    "co_che": "pha_vo",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low",
-       "tham_chieu": "bar_truoc"
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -6288,8 +3983,8 @@
   "ten": "MACDint_150.mq5",
   "co_che": [
    {
-    "ten": "MACDint_150_filtered_volume_buy",
-    "ho": "xu_huong",
+    "ten": "MACD_Volume_Filtered_Buy",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -6303,25 +3998,15 @@
        "cua": {
         "chi_bao": "khoi_luong"
        },
-       "n": 150
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 150
+       "n": 20
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "MACDint_150_filtered_volume_sell",
-    "ho": "xu_huong",
+    "ten": "MACD_Volume_Filtered_Sell",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
@@ -6335,21 +4020,11 @@
        "cua": {
         "chi_bao": "khoi_luong"
        },
-       "n": 150
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 150
+       "n": 20
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -6359,52 +4034,11 @@
   "ten": "Kalman_Filter.mq5",
   "co_che": [
    {
-    "ten": "gia_cat_len_kalman",
-    "co_che": "gia cat len duong Kalman",
-    "ho": "xu_huong",
+    "ten": "Kalman Filter",
+    "ho": "quay_ve_trung_binh",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_cat_xuong_kalman",
-    "co_che": "gia cat xuong duong Kalman",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
-      }
-     }
-    ]
+    "vao": []
    }
   ],
   "chua_do": false,
@@ -6418,38 +4052,9 @@
     "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "phan_vi",
-       "cua": {
-        "chi_bao": "entropy",
-        "n": 14
-       },
-       "n": 100
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0.8
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "phan_vi",
-       "cua": {
-        "chi_bao": "entropy",
-        "n": 14
-       },
-       "n": 100
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0.2
-      }
-     }
-    ]
+    "vao": [],
+    "ra": [],
+    "khong_dien_dat_duoc": true
    }
   ],
   "chua_do": false,
@@ -6459,11 +4064,13 @@
   "ten": "WeekendGapStats.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "WeekendGapStats",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
     "ra": []
    }
   ],
@@ -6474,104 +4081,44 @@
   "ten": "Chart_Water_Mark.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "Chart_Water_Mark",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
     "ra": []
    }
   ],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "SwapMonitorPanel.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
-   }
-  ],
+  "co_che": [],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "LLM tra ve rong"
  },
  {
   "ten": "CorrelationMatrixDashboard.mq5",
-  "co_che": [
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [],
-    "ra": [
-     {
-      "trai": {
-       "hang": 1
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 1
-      }
-     }
-    ]
-   }
-  ],
+  "co_che": [],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "LLM tra ve rong"
  },
  {
   "ten": "Fourier_DFT_Cycle.mq5",
   "co_che": [
    {
-    "ten": "gia_cat_len_duong_du_bao_dft",
-    "ho": "xu_huong",
+    "ten": "Fourier_DFT_Cycle",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "gia_cat_xuong_duong_du_bao_dft",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -6581,8 +4128,7 @@
   "ten": "Supertrend.mq5",
   "co_che": [
    {
-    "ten": "Supertrend BUY",
-    "co_che": "supertrend_cross_up",
+    "ten": "Supertrend",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
@@ -6594,34 +4140,15 @@
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "thap_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
+       "chi_bao": "atr",
+       "n": 10
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "Supertrend SELL",
-    "co_che": "supertrend_cross_down",
+    "ten": "Supertrend",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
@@ -6633,30 +4160,12 @@
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "cao_nhat",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
+       "chi_bao": "atr",
+       "n": 10
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -6666,71 +4175,14 @@
   "ten": "SelfAwareTrendSystem.mq5",
   "co_che": [
    {
-    "ten": "SuperTrend xu huong tang",
-    "co_che": "Dung tin hieu khi SuperTrend flip len va da qua warmup, ve buffer gia tri duong tai duong chan duoi",
+    "ten": "SelfAwareTrendSystem",
     "ho": "xu_huong",
     "chieu": 1,
-    "giu": 1,
+    "giu": 100,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "không_diền_đặt_được"
     ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "SuperTrend xu huong giam",
-    "co_che": "Dung tin hieu khi SuperTrend flip xuong va da qua warmup, ve buffer gia tri am/duong tai duong chan tren",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 1
-      }
-     }
-    ],
-    "khong_dien_dat_duoc": [
-     "Dieu kien flip len/flip xuong that su khong duoc viet chinh xac bang doan ma duoc cap, vi phu thuoc vao finalFlipUp/finalFlipDown va prevTrend khong co cong thuc tinh ro rang trong phan trich dan.",
-     "Dieu kien isWarmedUp = barIndexFromOld >= g_warmupBars voi g_warmupBars=50 chi la dieu kien phu de buffer duoc gan gia tri; khong phai tin hieu vao lenh.",
-     "Gia tri STBuffer[shift] = stLine chi la gia tri ve buffer, khong phai co che vao lenh co the suy ra day du chi bang cac chi bao co san."
-    ]
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -6740,101 +4192,57 @@
   "ten": "ML_SuperTrend.mq5",
   "co_che": [
    {
-    "ten": "SuperTrend_buy_arrow",
+    "ten": "ML_SuperTrend_BUY",
     "ho": "xu_huong",
     "chieu": 1,
-    "giu": 5,
+    "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
+       "chi_bao": "rsi",
+       "n": 14
       },
       "phep": "<",
       "phai": {
-       "hang": 0
+       "hang": 50
       }
      },
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "khac",
+       "phan_vi": 0.5
       },
-      "phep": ">",
+      "phep": "<",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "hang": 1
       }
      }
     ]
    },
    {
-    "ten": "SuperTrend_sell_arrow",
+    "ten": "ML_SuperTrend_SELL",
     "ho": "xu_huong",
     "chieu": -1,
-    "giu": 5,
+    "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
+       "chi_bao": "rsi",
+       "n": 14
       },
       "phep": ">",
       "phai": {
-       "hang": 0
+       "hang": 50
       }
      },
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "khac",
+       "phan_vi": 0.5
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "hang": 1
       }
      }
     ]
@@ -6847,39 +4255,35 @@
   "ten": "XANDER_Adaptive_Cross.mq5",
   "co_che": [
    {
-    "ten": "Fast_Slow_color_bullish_cross",
+    "ten": "XANDER_Adaptive_Cross",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 1
+       "chi_bao": "khac"
       },
       "phep": "cheo_len",
       "phai": {
-       "chi_bao": "ema",
-       "n": 1
+       "chi_bao": "khac"
       }
      }
     ]
    },
    {
-    "ten": "Fast_Slow_color_bearish_cross",
+    "ten": "XANDER_Adaptive_Cross",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 1
+       "chi_bao": "khac"
       },
       "phep": "cheo_xuong",
       "phai": {
-       "chi_bao": "ema",
-       "n": 1
+       "chi_bao": "khac"
       }
      }
     ]
@@ -6892,12 +4296,16 @@
   "ten": "MarketClockPro.mq5",
   "co_che": [
    {
-    "ten": "khong_dien_dat_duoc",
+    "ten": "MarketClockPro",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "ra": []
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -6907,33 +4315,14 @@
   "ten": "GARCH_Forecaster.mq5",
   "co_che": [
    {
-    "ten": "GARCH volatility low initialization",
+    "ten": "GARCH_Forecaster",
     "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "bien_do"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
+     "khong_dien_dat_duoc"
     ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -6943,85 +4332,16 @@
   "ten": "PrecisionSniper.mq5",
   "co_che": [
    {
-    "ten": "buy_ema_cross_trend_filter",
+    "ten": "PrecisionSniper",
+    "co_che": "PrecisionSniper",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "ema",
-       "n": 12
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "ema",
-       "n": 12
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "ema",
-       "n": 26
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 50
-      }
-     }
-    ]
-   },
-   {
-    "ten": "sell_ema_cross_trend_filter",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "ema",
-       "n": 12
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "ema",
-       "n": 12
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 26
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "ema",
-       "n": 26
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 50
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -7032,71 +4352,43 @@
   "ten": "StatArb_Spread_ZScore.mq5",
   "co_che": [
    {
-    "ten": "z_score <= -InpExtreme",
+    "ten": "StatArb_ZScore_MeanRev",
     "ho": "quay_ve_trung_binh",
     "chieu": 1,
-    "giu": 1,
+    "giu": 20,
     "vao": [
      {
       "trai": {
        "chi_bao": "zscore",
        "cua": {
-        "chi_bao": "tb",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 1
+        "hang": 0
        },
-       "n": 1
+       "n": 20
       },
-      "phep": "<=",
+      "phep": "cheo_xuong",
       "phai": {
-       "hang": -1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "zscore",
-       "cua": {
-        "chi_bao": "tb",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 1
-       },
-       "n": 1
-      },
-      "phep": "<=",
-      "phai": {
-       "hang": -1
+       "hang": -2
       }
      }
     ]
    },
    {
-    "ten": "z_score >= InpExtreme",
+    "ten": "StatArb_ZScore_MeanRev",
     "ho": "quay_ve_trung_binh",
     "chieu": -1,
-    "giu": 1,
+    "giu": 20,
     "vao": [
      {
       "trai": {
        "chi_bao": "zscore",
        "cua": {
-        "chi_bao": "tb",
-        "cua": {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        "n": 1
+        "hang": 0
        },
-       "n": 1
+       "n": 20
       },
-      "phep": ">=",
+      "phep": "cheo_len",
       "phai": {
-       "hang": 1
+       "hang": 2
       }
      }
     ]
@@ -7109,57 +4401,12 @@
   "ten": "XANDER_Pulse_Candles.mq5",
   "co_che": [
    {
-    "ten": "momentum_bull_arrow",
-    "ho": "xu_huong",
+    "ten": "XANDER_Pulse_Candles",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 5
-      }
-     }
-    ]
-   },
-   {
-    "ten": "momentum_bear_arrow",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 5
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -7170,8 +4417,7 @@
   "ten": "SmartMoneyConcepts.mq5",
   "co_che": [
    {
-    "ten": "Bullish order block retest + FVG filter",
-    "co_che": "Gia chui vao vung bullish order block sau khi da xac lap, theo sau la ve buffer BuyBuffer tai phia duoi nen",
+    "ten": "SMC_BullishOB_Retest",
     "ho": "pha_vo",
     "chieu": 1,
     "giu": 1,
@@ -7183,7 +4429,8 @@
       },
       "phep": "<=",
       "phai": {
-       "hang": "g_bullOBs[j].top"
+       "chi_bao": "gia",
+       "cot": "high"
       }
      },
      {
@@ -7193,19 +4440,20 @@
       },
       "phep": ">=",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "atr",
+       "n": 14
       }
      }
+    ],
+    "ra": [],
+    "khong_dien_dat_duoc": [
+     "g_bullOBs[j].top",
+     "g_bullOBs[j].bottom - g_atr * 0.8",
+     "FVGNearby()"
     ]
    },
    {
-    "ten": "Bearish order block retest + FVG filter",
-    "co_che": "Gia chui vao vung bearish order block sau khi da xac lap, theo sau la ve buffer SellBuffer tai phia tren nen",
+    "ten": "SMC_BearishOB_Retest",
     "ho": "pha_vo",
     "chieu": -1,
     "giu": 1,
@@ -7217,7 +4465,8 @@
       },
       "phep": ">=",
       "phai": {
-       "hang": "g_bearOBs[j].bottom"
+       "chi_bao": "gia",
+       "cot": "low"
       }
      },
      {
@@ -7227,9 +4476,16 @@
       },
       "phep": "<=",
       "phai": {
-       "hang": "g_bearOBs[j].top"
+       "chi_bao": "atr",
+       "n": 14
       }
      }
+    ],
+    "ra": [],
+    "khong_dien_dat_duoc": [
+     "g_bearOBs[j].bottom",
+     "g_bearOBs[j].top + g_atr * 0.8",
+     "FVGNearby()"
     ]
    }
   ],
@@ -7240,37 +4496,12 @@
   "ten": "Pivot_Point.mq5",
   "co_che": [
    {
-    "ten": "Pivot Point",
-    "co_che": "khong_xac_dinh",
+    "ten": "Pivot_Point",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      }
-     }
-    ]
+    "vao": [],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7278,70 +4509,52 @@
  },
  {
   "ten": "BarStatsIndicator.mq5",
-  "co_che": [
-   {
-    "ten": "diff_duong_va_am",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "diff_duong_va_am",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   }
-  ],
+  "co_che": [],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "LLM tra ve rong"
  },
  {
   "ten": "Fair_Value_Gap_FVG.mq5",
   "co_che": [
    {
-    "ten": "FVG rectangle filled/label marked as signal state",
+    "ten": "Fair Value Gap (Mua)",
     "ho": "khac",
     "chieu": 1,
-    "giu": 1,
+    "giu": 10,
     "vao": [
      {
       "trai": {
        "chi_bao": "gia",
-       "cot": "close"
+       "cot": "low"
       },
       "phep": ">",
       "phai": {
        "chi_bao": "gia",
-       "cot": "open"
+       "cot": "high"
       }
      }
-    ]
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Fair Value Gap (Ban)",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 10,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     }
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7351,49 +4564,33 @@
   "ten": "ExMachina_CandleTimer_Lite.mq5",
   "co_che": [
    {
-    "ten": "BUY alert/arrow buffer",
+    "ten": "khong_dien_dat_duoc",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
+       "hang": 0
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "SELL alert/arrow buffer",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khong_dien_dat_duoc"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "khong_dien_dat_duoc"
+       "hang": 0
       }
      }
     ]
    }
   ],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "Nadaraya_Watson.mq5",
   "co_che": [
    {
-    "ten": "gia_cat_tren_duong_tren_kernel_vung_ATR",
-    "ho": "xu_huong",
+    "ten": "Nadaraya_Watson_Bands",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -7402,36 +4599,17 @@
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": ">",
+      "phep": "cheo_len",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "khac"
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "gia_cat_duoi_duong_duoi_kernel_vung_ATR",
-    "ho": "xu_huong",
+    "ten": "Nadaraya_Watson_Bands",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
@@ -7440,32 +4618,13 @@
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": "<",
+      "phep": "cheo_xuong",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 1
+       "chi_bao": "khac"
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7475,68 +4634,14 @@
   "ten": "MultiSymbolAlertPanel.mq5",
   "co_che": [
    {
-    "ten": "PopupAlert",
+    "ten": "MultiSymbolAlertPanel",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
+     "khong_dien_dat_duoc"
     ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "PopupAlert",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7546,55 +4651,47 @@
   "ten": "Gaussian_Filter.mq5",
   "co_che": [
    {
-    "ten": "ExtAlmaBuffer tang len",
+    "ten": "Gaussian Filter",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
+       "chi_bao": "sma",
+       "n": 9
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "tre",
        "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
+        "chi_bao": "sma",
+        "n": 9
        },
        "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
       }
      }
     ]
    },
    {
-    "ten": "ExtAlmaBuffer giam xuong",
+    "ten": "Gaussian Filter",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "tb",
+       "chi_bao": "sma",
+       "n": 9
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "tre",
        "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
+        "chi_bao": "sma",
+        "n": 9
        },
        "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 2
       }
      }
     ]
@@ -7607,58 +4704,40 @@
   "ten": "ASQ_SpreadLogger.mq5",
   "co_che": [
    {
-    "ten": "spread_thap",
-    "ho": "khac",
+    "ten": "Spread_Low_Threshold",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "khoi_luong"
+       "chi_bao": "bien_do"
       },
       "phep": "<=",
       "phai": {
-       "hang": 0
+       "hang": 10
       }
      }
     ],
-    "khong_dien_dat_duoc": "Chi co doan gan mau phan loai spread theo nguong, khong thay buffer/canh bao xuat tin hieu mua/ban ro rang. Dieu kien co the suy ra nhat la spread <= InpLowThreshold cho mau thap, nhung khong dam bao la tin hieu vao lenh. Nen buoc vao dien duoc khong xac dinh chinh xac tu ma nay."
+    "ra": []
    },
    {
-    "ten": "spread_trung_binh",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khoi_luong"
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "khong_dien_dat_duoc": "Khong co dieu kien xuat mui ten/Alert BUY/SELL trong doan ma duoc cung cap."
-   },
-   {
-    "ten": "spread_cao",
-    "ho": "khac",
+    "ten": "Spread_High_Threshold",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "khoi_luong"
+       "chi_bao": "bien_do"
       },
       "phep": ">",
       "phai": {
-       "hang": 0
+       "hang": 30
       }
      }
     ],
-    "khong_dien_dat_duoc": "Chi thay gan gia tri vao cac buffer g_spreadBuf, g_avgBuf, g_colorBuf; khong thay logich tao tin hieu ban."
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7668,12 +4747,13 @@
   "ten": "CandleBodyRatio.mq5",
   "co_che": [
    {
-    "ten": "chua_xac_dinh",
+    "ten": "CandleBodyRatio",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
-    "vao": [],
-    "khong_dien_dat_duoc": "Doan ma duoc cung cap khong chua phan logic tinh tin hieu vao buffer/mui ten hoac Alert BUY/SELL; chi co ham mau SetRect va doan tinh mau/ve giao dien, nen khong rut ra duoc dieu kien phat tin hieu."
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
    }
   ],
   "chua_do": false,
@@ -7683,8 +4763,9 @@
   "ten": "ASQ_DivergenceDetector.mq5",
   "co_che": [
    {
-    "ten": "DivergenceDetector regular bullish",
-    "ho": "khac",
+    "ten": "ASQ_DivergenceDetector",
+    "co_che": "Phan ky gia-oscillator",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -7701,28 +4782,22 @@
      },
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
+       "chi_bao": "rsi",
        "n": 14
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
+       "chi_bao": "rsi",
        "n": 14
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "DivergenceDetector regular bearish",
-    "ho": "khac",
+    "ten": "ASQ_DivergenceDetector",
+    "co_che": "Phan ky gia-oscillator",
+    "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
@@ -7739,100 +4814,17 @@
      },
      {
       "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
+       "chi_bao": "rsi",
        "n": 14
       },
       "phep": "<",
       "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
+       "chi_bao": "rsi",
        "n": 14
       }
      }
-    ]
-   },
-   {
-    "ten": "DivergenceDetector hidden bullish",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 14
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 14
-      }
-     }
-    ]
-   },
-   {
-    "ten": "DivergenceDetector hidden bearish",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 14
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 14
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7842,64 +4834,12 @@
   "ten": "Institutional_CVD.mq5",
   "co_che": [
    {
-    "ten": "CVD_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
+    "ten": "Institutional_CVD",
     "ho": "dong_tien",
     "chieu": 1,
     "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_len",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "CVD_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
-    "ho": "dong_tien",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ],
-    "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "cheo_xuong",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      }
-     }
-    ]
+    "vao": [],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7909,8 +4849,50 @@
   "ten": "ZScore_Reversion.mq5",
   "co_che": [
    {
-    "ten": "ZScore_Reversion_overbought",
-    "co_che": "{"
+    "ten": "Z-Score Reversion",
+    "ho": "quay_ve_trung_binh",
+    "chieu": 1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "zscore",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 20
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": -2.0
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Z-Score Reversion",
+    "ho": "quay_ve_trung_binh",
+    "chieu": -1,
+    "giu": 1,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "zscore",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 20
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 2.0
+      }
+     }
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -7920,8 +4902,8 @@
   "ten": "Unmitigated_OB_Matrix.mq5",
   "co_che": [
    {
-    "ten": "Bullish order block",
-    "ho": "khac",
+    "ten": "Unmitigated_OB_Matrix",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -7944,7 +4926,7 @@
       },
       "phep": ">=",
       "phai": {
-       "hang": 0
+       "hang": 10
       }
      },
      {
@@ -7960,8 +4942,12 @@
      },
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
       },
       "phep": "<",
       "phai": {
@@ -7973,8 +4959,8 @@
     "ra": []
    },
    {
-    "ten": "Bearish order block",
-    "ho": "khac",
+    "ten": "Unmitigated_OB_Matrix",
+    "ho": "bien_dong",
     "chieu": -1,
     "giu": 1,
     "vao": [
@@ -7997,7 +4983,7 @@
       },
       "phep": ">=",
       "phai": {
-       "hang": 0
+       "hang": 10
       }
      },
      {
@@ -8013,8 +4999,12 @@
      },
      {
       "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 1
       },
       "phep": ">",
       "phai": {
@@ -8033,8 +5023,8 @@
   "ten": "Institutional_Toxic_Flow.mq5",
   "co_che": [
    {
-    "ten": "toxic_volume_spike_tren_trung_binh_nen",
-    "ho": "bien_dong",
+    "ten": "Institutional_Toxic_Flow",
+    "ho": "dong_tien",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -8048,44 +5038,11 @@
        "cua": {
         "chi_bao": "khoi_luong"
        },
-       "n": 30
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "khoi_luong"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "khoi_luong"
-       },
-       "n": 30
+       "n": 20
       }
      }
-    ]
-   },
-   {
-    "ten": "toxic_volume_spike_duoi_trung_binh_nen",
-    "ho": "bien_dong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "khoi_luong"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "khoi_luong"
-       },
-       "n": 30
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -8095,39 +5052,35 @@
   "ten": "Sniper_Pro.mq5",
   "co_che": [
    {
-    "ten": "EMA9 cắt lên EMA21",
+    "ten": "Sniper_Pro_BUY",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 9
+       "chi_bao": "khong_dien_dat_duoc"
       },
       "phep": "cheo_len",
       "phai": {
-       "chi_bao": "ema",
-       "n": 21
+       "hang": 1
       }
      }
     ]
    },
    {
-    "ten": "EMA9 cắt xuống EMA21",
+    "ten": "Sniper_Pro_SELL",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 9
+       "chi_bao": "khong_dien_dat_duoc"
       },
       "phep": "cheo_xuong",
       "phai": {
-       "chi_bao": "ema",
-       "n": 21
+       "hang": 1
       }
      }
     ]
@@ -8140,29 +5093,11 @@
   "ten": "ICT_Silver_Bullet_Filter.mq5",
   "co_che": [
    {
-    "ten": "Silver Bullet time window + bullish FVG",
+    "ten": "ICT_Silver_Bullet_Filter",
     "ho": "phien",
     "chieu": 1,
-    "giu": 5,
+    "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": "<=",
-      "phai": {
-       "hang": 1
-      }
-     },
      {
       "trai": {
        "chi_bao": "gia",
@@ -8170,50 +5105,16 @@
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "gia",
-       "cot": "high",
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
        "n": 2
       }
      }
-    ]
-   },
-   {
-    "ten": "Silver Bullet time window + bullish FVG",
-    "ho": "phien",
-    "chieu": -1,
-    "giu": 5,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gio"
-      },
-      "phep": "<=",
-      "phai": {
-       "hang": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low",
-       "n": 2
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -8223,49 +5124,21 @@
   "ten": "ASQ_SuperTrend.mq5",
   "co_che": [
    {
-    "ten": "SuperTrend bull arrow / BUY",
+    "ten": "ASQ_SuperTrend",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 14
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    },
    {
-    "ten": "SuperTrend bear arrow / SELL",
+    "ten": "ASQ_SuperTrend",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 14
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -8276,47 +5149,15 @@
   "ten": "Institutional_DXY_Overlay.mq5",
   "co_che": [
    {
-    "ten": "overlay_bang_vung_cao_thap_20_bar",
+    "ten": "Institutional_DXY_Overlay",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "close"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        }
-       ]
-      },
-      "phep": ">",
-      "phai": {
-       "hang": 0.5
-      }
-     }
+     "khong_dien_dat_duoc"
     ],
     "ra": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -8327,60 +5168,15 @@
   "ten": "ICT_True_Open.mq5",
   "co_che": [
    {
-    "ten": "Daily Open line appear/use as buy signal when price is above daily open?",
+    "ten": "ICT_True_Open",
     "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Weekly Open line appear/use as sell signal when price is below weekly open?",
-    "ho": "khac",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Monthly Open line appear/use as buy signal when price is above monthly open?",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -8391,8 +5187,8 @@
   "ten": "SMC_Liquidity_Detector.mq5",
   "co_che": [
    {
-    "ten": "quet_dinh_voi_rau_nen_du_tren",
-    "ho": "pha_vo",
+    "ten": "SMC Liquidity Sweep",
+    "ho": "khac",
     "chieu": -1,
     "giu": 1,
     "vao": [
@@ -8403,92 +5199,12 @@
       },
       "phep": ">",
       "phai": {
-       "chi_bao": "cao_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        }
-       ]
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "cao_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "high"
-        }
-       ]
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "than_nen"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "bien_do"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tuyet_doi",
+       "chi_bao": "tre",
        "cua": {
         "chi_bao": "gia",
         "cot": "high"
        },
        "n": 1
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
-      }
-     }
-    ]
-   },
-   {
-    "ten": "quet_day_voi_rau_nen_duoi",
-    "ho": "pha_vo",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "thap_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        }
-       ]
       }
      },
      {
@@ -8496,48 +5212,19 @@
        "chi_bao": "gia",
        "cot": "close"
       },
-      "phep": ">",
+      "phep": "<",
       "phai": {
-       "chi_bao": "thap_nhat_cua_cac",
-       "toan_hang": [
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        },
-        {
-         "chi_bao": "gia",
-         "cot": "low"
-        }
-       ]
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "than_nen"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "bien_do"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "tuyet_doi",
+       "chi_bao": "tre",
        "cua": {
         "chi_bao": "gia",
-        "cot": "low"
+        "cot": "high"
        },
        "n": 1
-      },
-      "phep": ">=",
-      "phai": {
-       "hang": 0
       }
      }
+    ],
+    "khong_dien_dat_duoc": [
+     "(upper_wick / total_size) * 100 >= InpMinWickPct"
     ]
    }
   ],
@@ -8548,41 +5235,27 @@
   "ten": "ZigZagSNRDetection.mq5",
   "co_che": [
    {
-    "ten": "ZigZag LowMapBuffer peak-to-buy reversal",
-    "ho": "pha_vo",
+    "ten": "ZigZag SNR Detection",
+    "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    },
    {
-    "ten": "ZigZag HighMapBuffer bottom-to-sell reversal",
-    "ho": "pha_vo",
+    "ten": "ZigZag SNR Detection",
+    "ho": "khac",
     "chieu": -1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -8593,46 +5266,44 @@
   "ten": "SMC_FVG_Auto_Detector.mq5",
   "co_che": [
    {
-    "ten": "Bullish FVG",
-    "ho": "pha_vo",
+    "ten": "SMC_FVG_Auto_Detector",
+    "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
        "chi_bao": "gia",
-       "cot": "high",
-       "lui": 2
+       "cot": "low"
       },
-      "phep": "<",
+      "phep": ">",
       "phai": {
        "chi_bao": "gia",
-       "cot": "low",
-       "lui": 0
+       "cot": "high"
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "Bearish FVG",
-    "ho": "pha_vo",
+    "ten": "SMC_FVG_Auto_Detector",
+    "ho": "khac",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
        "chi_bao": "gia",
-       "cot": "low",
-       "lui": 2
+       "cot": "high"
       },
-      "phep": ">",
+      "phep": "<",
       "phai": {
        "chi_bao": "gia",
-       "cot": "high",
-       "lui": 0
+       "cot": "low"
       }
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -8642,84 +5313,58 @@
   "ten": "MACD_vTradingview.mq5",
   "co_che": [
    {
-    "ten": "MACD_buffer_duong",
+    "ten": "MACD_TradingView_Buy",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 12
+       "chi_bao": "doi",
+       "cua": {
+        "chi_bao": "ema",
+        "n": 12
+       },
+       "phai": {
+        "chi_bao": "ema",
+        "n": 26
+       }
       },
-      "phep": ">",
+      "phep": "cheo_len",
       "phai": {
-       "chi_bao": "ema",
-       "n": 26
+       "chi_bao": "sma",
+       "n": 9
       }
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "MACD_buffer_am",
+    "ten": "MACD_TradingView_Sell",
     "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
       "trai": {
-       "chi_bao": "ema",
-       "n": 12
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "ema",
-       "n": 26
-      }
-     }
-    ]
-   },
-   {
-    "ten": "SignalBuffer_tinh_tu_SMA_cua_MACD",
-    "ho": "xu_huong",
-    "chieu": 1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "tb",
+       "chi_bao": "doi",
        "cua": {
-        "chi_bao": "tb_cua_cac",
-        "toan_hang": [
-         {
-          "chi_bao": "ema",
-          "n": 12
-         },
-         {
-          "chi_bao": "doi",
-          "cua": {
-           "chi_bao": "ema",
-           "n": 26
-          },
-          "n": 1
-         }
-        ]
+        "chi_bao": "ema",
+        "n": 12
        },
-       "n": 9
+       "phai": {
+        "chi_bao": "ema",
+        "n": 26
+       }
       },
-      "phep": ">",
+      "phep": "cheo_xuong",
       "phai": {
-       "hang": 0
+       "chi_bao": "sma",
+       "n": 9
       }
      }
-    ]
-   },
-   {
-    "ten": "khong_dien_dat_duoc",
-    "ho": "khac",
-    "chieu": 1,
-    "giu": 1,
-    "vao": []
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -8729,41 +5374,15 @@
   "ten": "ExMachina_HeikinAshi.mq5",
   "co_che": [
    {
-    "ten": "Heikin Ashi mua khi nen xanh va mui ten len duoc ve",
+    "ten": "ExMachina_HeikinAshi",
     "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
-    ]
-   },
-   {
-    "ten": "Heikin Ashi ban khi nen do va mui ten xuong duoc ve",
-    "ho": "xu_huong",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "close"
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "open"
-      }
-     }
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
     ]
    }
   ],
@@ -8774,137 +5393,51 @@
   "ten": "ExMachina_SMC.mq5",
   "co_che": [
    {
-    "ten": "manh_phien_vao_bullish",
-    "ho": "khac",
+    "ten": "ExMachina_SMC_Buy",
+    "ho": "xu_huong",
     "chieu": 1,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      },
-      "phep": ">",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      }
+      "trai": "khong_dien_dat_duoc",
+      "phep": "cheo_len",
+      "phai": "khong_dien_dat_duoc"
      }
-    ]
+    ],
+    "ra": []
    },
    {
-    "ten": "manh_phien_vao_bearish",
-    "ho": "khac",
+    "ten": "ExMachina_SMC_Sell",
+    "ho": "xu_huong",
     "chieu": -1,
     "giu": 1,
     "vao": [
      {
-      "trai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      },
-      "phep": "<",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "than_nen"
-       },
-       "n": 1
-      }
+      "trai": "khong_dien_dat_duoc",
+      "phep": "cheo_xuong",
+      "phai": "khong_dien_dat_duoc"
      }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
-  "vi_sao": ""
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
  },
  {
   "ten": "ExMachina_SupplyDemand.mq5",
   "co_che": [
    {
-    "ten": "cham_vao_vung_cau",
-    "ho": "pha_vo",
+    "ten": "ExMachina_SupplyDemand",
+    "co_che": "SupplyDemand_Zones",
+    "ho": "khac",
     "chieu": 1,
     "giu": 1,
     "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     }
-    ]
-   },
-   {
-    "ten": "cham_vao_vung_cung",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "high"
-       },
-       "n": 1
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "low"
-       },
-       "n": 1
-      }
-     }
-    ]
+     "khong_dien_dat_duoc"
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,
@@ -8914,9 +5447,8 @@
   "ten": "InsideBarAlerts.mq5",
   "co_che": [
    {
-    "ten": "Inside bar bullish signal",
-    "co_che": "ColorBuffer[i] = 1 when current candle is inside previous candle",
-    "ho": "pha_vo",
+    "ten": "Inside Bar",
+    "ho": "bien_dong",
     "chieu": 1,
     "giu": 1,
     "vao": [
@@ -8925,10 +5457,11 @@
        "chi_bao": "gia",
        "cot": "high"
       },
-      "phep": "<=",
+      "phep": "<",
       "phai": {
        "chi_bao": "gia",
-       "cot": "high"
+       "cot": "high",
+       "n": 1
       }
      },
      {
@@ -8936,44 +5469,15 @@
        "chi_bao": "gia",
        "cot": "low"
       },
-      "phep": ">=",
+      "phep": ">",
       "phai": {
        "chi_bao": "gia",
-       "cot": "low"
+       "cot": "low",
+       "n": 1
       }
      }
-    ]
-   },
-   {
-    "ten": "Inside bar bearish signal",
-    "co_che": "ColorBuffer[i] = 1 when current candle is inside previous candle",
-    "ho": "pha_vo",
-    "chieu": -1,
-    "giu": 1,
-    "vao": [
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "phep": "<=",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "high"
-      }
-     },
-     {
-      "trai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      },
-      "phep": ">=",
-      "phai": {
-       "chi_bao": "gia",
-       "cot": "low"
-      }
-     }
-    ]
+    ],
+    "ra": []
    }
   ],
   "chua_do": false,

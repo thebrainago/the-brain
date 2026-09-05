@@ -63,7 +63,7 @@ if __package__ in (None, ""):
 from nhan import boc_ma_llm as BM
 
 #: Tran ky tu mot vung gui cho LLM. Cung muc voi `boc_ma_llm.MAX_VUNG`.
-MAX_VUNG = 8000
+MAX_VUNG = 16000
 LUONG = 6
 
 #: Cho phep mot `if(...)` dung TRUOC cho gan, tren CUNG MOT DONG.
@@ -92,7 +92,7 @@ _RX_VE = re.compile(r"^[ \t]*(?:ObjectCreate|ObjectSetInteger|ObjectSetString)"
                     r"\s*\(", re.M)
 
 
-def vung_tin_hieu(src: str, so_vung: int = 3) -> list[str]:
+def vung_tin_hieu(src: str, so_vung: int = 6) -> list[str]:
     """Khoanh cac VUNG dinh nghia tin hieu trong mot file chi bao.
 
     Uu tien: buffer trong `if` > cat nhau > canh bao. Ly do: buffer la noi tac
@@ -183,11 +183,17 @@ VUNG MA (dau: cho gan buffer/canh bao · cuoi: CHO GAN BIEN):
 {chr(10).join(vung)[:MAX_VUNG]}
 ```
 
+- Moi muc PHAI co truong `co_che`: MOT CAU (>= 25 ky tu) noi VI SAO co nguoi
+  tra tien cho phoi nhiem nay - ai la ben doi ung va vi sao ho buoc phai giao
+  dich o trang thai do. **Khong dien lai chinh luat**. Neu ban khong biet ly do
+  kinh te thi ghi dung chuoi "CHUA_BIET_LY_DO", dung bia mot cau nghe hop ly.
+
 Tra ve DUNG mot JSON: {{"co_che": [{{"ten": "...", "ho": "...", "chieu": 1,
-"giu": 1, "vao": [{{"trai": {{...}}, "phep": "<", "phai": {{...}}}}]}}]}}"""
+"giu": 1, "co_che": "...", "vao": [{{"trai": {{...}}, "phep": "<",
+"phai": {{...}}}}]}}]}}"""
 
 
-def _mot(d: dict, tom_tat: str) -> dict:
+def _mot(d: dict, tom_tat: str, model: str = "") -> dict:
     from nhan import tri_tue as TT
     vung = vung_tin_hieu(d["src"])
     if not vung:
@@ -196,7 +202,7 @@ def _mot(d: dict, tom_tat: str) -> dict:
         # Duong BOC co han muc rieng - quen `bo_qua_han_muc` thi ca me tra
         # `{"bo_qua": ...}` va ra 0 (do that 05/09 tren duong `boc_ma_llm`).
         r = TT.hoi_json(_nhac(d["ten"], vung, tom_tat),
-                        bo_qua_han_muc=True, dung_cache=False)
+                        bo_qua_han_muc=True, dung_cache=False, model=model)
     except Exception as e:
         return {"ten": d["ten"], "co_che": [],
                 "vi_sao": "%s: %s" % (type(e).__name__, str(e)[:60])}
@@ -216,17 +222,34 @@ def _mot(d: dict, tom_tat: str) -> dict:
             "vi_sao": "" if cc else "LLM tra ve rong"}
 
 
-def mot_file(d: dict, tom_tat: str, so_lan: int = 2) -> dict:
-    """Boc MOT file, thu lai toi da `so_lan` neu tra rong (LLM khong tat dinh).
+#: HAI TANG MODEL. Tang 1 chay ca me; tang 2 chi chay tren file tang 1 tra rong.
+#:
+#: Do 05/09 tren 6 file chi bao, dem khai bao QUA duoc cong ngu phap va quy ra
+#: gia theo bang ratio cua san:
+#:      qwen3.7-flash   5/6 file · 4.904 token ra · ratio 0,010/0,040 -> RE NHAT
+#:      qwen3.6-flash   6/6 file · 6.155 token ra · ratio 0,0235/0,047
+#: Chenh lech nam dung o nhung file kho, nen goi tang 2 CHI cho phan tra rong
+#: se re hon nhieu so voi chay ca me bang model dat hon.
+MODEL_TANG_1 = ""                 # rong = lay `model_openai` cua cau hinh
+MODEL_TANG_2 = "qwen3.6-flash"
+
+
+def mot_file(d: dict, tom_tat: str, so_lan: int = 2, hai_tang: bool = True) -> dict:
+    """Boc MOT file. Thu lai khi tra rong (LLM khong tat dinh), roi doi MODEL.
 
     Khong thu lai khi `chua_do`: mot loi quota/mang khong tu khoi phuc trong
     3 giay, va thu lai chi lam me chay lau gap doi de ra cung mot con so 0.
     """
     cuoi = {"ten": d["ten"], "co_che": [], "vi_sao": "chua chay"}
     for _ in range(max(1, so_lan)):
-        cuoi = _mot(d, tom_tat)
+        cuoi = _mot(d, tom_tat, MODEL_TANG_1)
         if cuoi["co_che"] or cuoi.get("chua_do"):
             return cuoi
+    if hai_tang and MODEL_TANG_2:
+        z = _mot(d, tom_tat, MODEL_TANG_2)
+        if z["co_che"]:
+            z["model_tang_2"] = MODEL_TANG_2
+            return z
     return cuoi
 
 
