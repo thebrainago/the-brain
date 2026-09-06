@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `cao_mql5.log`: truoc: 236 tai lieu mql5_code
-- `github_toan_luc.log`: KHO CO CHE: 191 -> 191   tong 873s
-- `thu_mql5.log`: TONG 0 ma nguon rieng biet
-- git: a57728b MQL5 khong bi "chan bot" - DNS bi DAU DOC. Ba trieu chung, mot nguyen nhan
-### 2026-09-03 21:53:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 7036, 0 phut), dieu_khien_xa.py (pid 16352, 678 phut)
-- `cao_mql5.log`: CHIEN LUOC: GDS Renko Fast Demo EA
 - `thu_hai_cach.log`: thong ke: {'so_lan': 4, 'so_403': 4, 'ty_le_403': 0.5}
 - `thu_mql5.log`: TONG 0 ma nguon rieng biet
 - git: 46e2ffc thu_thap khong he phan trang - chay 4 vong lien tiep de tai lai dung 60 file cu
@@ -404,3 +396,11 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
 - `tham_dinh_v2.log`: da go 12 cau khoi kho
 - git: 5a484c8 2026-09-06 (chieu): tham dinh co_che + bao cao + ban giao
+### 2026-09-06 18:46:09 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 4700, 0 phut)
+- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
+- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
+- `tester_z5.log`: -> reports/TESTER_Z5.json
+- `tham_dinh_v2.log`: da go 12 cau khoi kho
+- git: 660c08b ban giao: he da PASS ra tester lan dau + viec 0 la truy chenh lech 463 vs 305 lenh
