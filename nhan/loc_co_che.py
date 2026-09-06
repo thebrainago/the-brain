@@ -209,6 +209,51 @@ def loc(cac_mau=None, khung: str = "D1", cac_ma=None, in_ra=print) -> dict:
     NP.nap_vao_mau()
     ten_ds = list(cac_mau or sorted(MAU.MAU))
 
+    # --- CHAN O MUC KHAI BAO, TRUOC KHI CHAM DU LIEU ---
+    #
+    # Lo hong tim ra 06/09/2026. `_hang_so_gia` co tu 05/09 va `don_kho` co goi
+    # no, nhung `don_kho` **chi bao cao, khong ghi** - con `loc()`, cai duy nhat
+    # dung tren duong len be mat, thi khong goi bao gio. Ket qua:
+    # `aapl_call_breakout_above_322_50` (`close >= 325.25`) van len be mat sau
+    # ca mot ngay ke ten no trong ban giao. Mot chan doan dung ma khong noi vao
+    # duong chay thi khong khac gi chua chan doan [[noi-day-truoc-khi-xay-them]].
+    #
+    # Chan o day re hon chan bang du lieu: khong o backtest nao, va ly do tu
+    # choi mang DUNG TEN ("nguong gia tuyet doi") thay vi "suy bien tren moi
+    # tai san" - cau sau doc nhu mot phat hien ve thi truong.
+    kho_theo_ten = {c.get("ten"): c for c in NP.doc_kho()}
+    tong_ban_dau = len(ten_ds)
+    bo_khai_bao, chi_tiet_gia, chi_tiet_kb = {}, [], []
+    for ten in list(ten_ds):
+        spec = kho_theo_ten.get(ten)
+        if spec is None:
+            continue                                   # mau viet tay: khong co spec
+        h = _hang_so_gia(spec)
+        if h is not None:
+            # Ly do phai la MOT khoa on dinh: nhet con so vao day thi moi co
+            # che thanh mot nhom rieng trong bang dem, va bang doc nhu the moi
+            # cai la mot benh khac nhau.
+            bo_khai_bao[ten] = "nguong_gia_tuyet_doi"
+            chi_tiet_gia.append((ten, h))
+            ten_ds.remove(ten)
+            continue
+        # CONG CUA CHINH HE, AP CHO CA HANG DA VAO KHO.
+        #
+        # Do 06/09: **169/540 muc trong kho khong qua noi `kiem_khai_bao`** -
+        # phan lon thieu han truong `co_che`, cau noi ai la ben doi ung. Chung
+        # vao qua cua sau (duong LLM ghi thang file JSON), va vi `loc()` chua
+        # bao gio goi cong nen ca 169 van chay tren be mat nhu moi co che khac.
+        #
+        # Mot cong chi ap cho hang MOI thi khong phai cong, ma la mot thu tuc
+        # nhap kho. `_dien_co_che.py` da hoi LLM lay ly do cho cai nao co ly
+        # do that; cai nao LLM tra "CHUA_BIET_LY_DO" thi dung ra o day - do la
+        # danh sach cho BO, khong phai danh sach cho dien not.
+        loi_kb = NP.kiem_khai_bao(spec)
+        if loi_kb:
+            bo_khai_bao[ten] = "khong_qua_kiem_khai_bao"
+            chi_tiet_kb.append((ten, loi_kb[0]))
+            ten_ds.remove(ten)
+
     cac_ma = list(cac_ma or SO_MA_DO)
     do, da_do = {}, []
     for ma in cac_ma:
@@ -225,7 +270,7 @@ def loc(cac_mau=None, khung: str = "D1", cac_ma=None, in_ra=print) -> dict:
                 "bi_danh": {}, "chua_do": True,
                 "vi_sao": "khong nap duoc tai san nao trong %s" % (cac_ma,)}
 
-    bo, hong, chuyen, dung = {}, [], [], []
+    bo, hong, chuyen, dung = dict(bo_khai_bao), [], [], []
     for ten in ten_ds:
         cac = [do[m].get(ten, {}) for m in da_do]
         loi = [c.get("loi") for c in cac if c.get("loi")]
@@ -263,16 +308,22 @@ def loc(cac_mau=None, khung: str = "D1", cac_ma=None, in_ra=print) -> dict:
             bi_danh[ds[0]] = ds[1:]
 
     in_ra("LOC TINH %d template tren %d tai san (%s)"
-          % (len(ten_ds), len(da_do), ", ".join(da_do)))
+          % (tong_ban_dau, len(da_do), ", ".join(da_do)))
     in_ra("  spec hong        : %d" % len(hong))
     in_ra("  sai khung        : %d  (co che phien, phai chay khung noi ngay)"
           % len(chuyen))
     for k, v in Counter(bo.values()).most_common():
         in_ra("  %-17s: %d" % (k[:17], v))
+    for ten, h in chi_tiet_gia:
+        in_ra("      %-40s nguong %.2f" % (str(ten)[:40], h))
+    if chi_tiet_kb:
+        for ly, n in Counter(v for _, v in chi_tiet_kb).most_common(4):
+            in_ra("      %-40s x%d" % (ly[:40], n))
     in_ra("  trung hanh vi    : %d template gop vao %d"
           % (sum(len(v) for v in bi_danh.values()), len(bi_danh)))
     in_ra("  --> len be mat   : %d/%d  (cat %.0f%%)"
-          % (len(giu), len(ten_ds), 100 * (1 - len(giu) / max(len(ten_ds), 1))))
+          % (len(giu), tong_ban_dau,
+             100 * (1 - len(giu) / max(tong_ban_dau, 1))))
     return {"dung_duoc": sorted(giu), "bo": bo, "chuyen_khung": chuyen,
             "hong": hong, "bi_danh": bi_danh, "chua_do": False,
             "da_do_tren": da_do}

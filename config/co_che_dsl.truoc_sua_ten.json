@@ -10024,7 +10024,7 @@
   "nguon": "https://github.com/billpwchan/futu_algo"
  },
  {
-  "ten": "orb_long",
+  "ten": "ORB_Long",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -10052,7 +10052,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "orb_short",
+  "ten": "ORB_Short",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -10080,7 +10080,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "steepma_long",
+  "ten": "SteepMA_Long",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10102,7 +10102,7 @@
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
  },
  {
-  "ten": "steepma_short",
+  "ten": "SteepMA_Short",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10124,7 +10124,7 @@
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
  },
  {
-  "ten": "buysignal",
+  "ten": "BuySignal",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10155,7 +10155,7 @@
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
  },
  {
-  "ten": "sellsignal",
+  "ten": "SellSignal",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10186,7 +10186,7 @@
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
  },
  {
-  "ten": "supertrend_long",
+  "ten": "SuperTrend Long",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10195,7 +10195,7 @@
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": []}"
  },
  {
-  "ten": "supertrend_short",
+  "ten": "SuperTrend Short",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10204,7 +10204,7 @@
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": []}"
  },
  {
-  "ten": "first_buy",
+  "ten": "First Buy",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10256,7 +10256,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "ma_crossover_buy",
+  "ten": "MA Crossover Buy",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10278,7 +10278,7 @@
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}"
  },
  {
-  "ten": "ma_crossover_sell",
+  "ten": "MA Crossover Sell",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10300,7 +10300,7 @@
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}"
  },
  {
-  "ten": "rsi_sell",
+  "ten": "RSI Sell",
   "ho": "bien_dong",
   "chieu": -1,
   "giu": 1,
@@ -10322,7 +10322,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "rsi_buy",
+  "ten": "RSI Buy",
   "ho": "bien_dong",
   "chieu": 1,
   "giu": 1,
@@ -10344,7 +10344,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "breakout_buy",
+  "ten": "Breakout Buy",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -10372,7 +10372,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "breakout_sell",
+  "ten": "Breakout Sell",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -10400,7 +10400,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "h1h4_buy_signal",
+  "ten": "H1H4_Buy_Signal",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10451,7 +10451,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "h1h4_sell_signal",
+  "ten": "H1H4_Sell_Signal",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10502,7 +10502,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "breakout_buy_2",
+  "ten": "Breakout_Buy",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -10529,7 +10529,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "breakout_sell_2",
+  "ten": "Breakout_Sell",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -10556,7 +10556,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "breakout_previous_high",
+  "ten": "Breakout previous high",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -10583,7 +10583,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "breakdown_previous_low",
+  "ten": "Breakdown previous low",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -10610,7 +10610,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "ema_rsi_long",
+  "ten": "EMA_RSI_Long",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10644,7 +10644,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "ema_rsi_short",
+  "ten": "EMA_RSI_Short",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10678,7 +10678,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "ema_rsi_bear",
+  "ten": "EMA_RSI_Bear",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10712,7 +10712,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "mua_khi_thap_nhat",
+  "ten": "Mua khi thap nhat",
   "ho": "quay_ve_trung_binh",
   "chieu": 1,
   "giu": 1,
@@ -10739,7 +10739,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "ban_khi_cao_nhat",
+  "ten": "Ban khi cao nhat",
   "ho": "quay_ve_trung_binh",
   "chieu": -1,
   "giu": 1,
@@ -10766,7 +10766,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "mua_ma_rsi",
+  "ten": "Mua_MA_RSI",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -10810,7 +10810,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "ban_ma_rsi",
+  "ten": "Ban_MA_RSI",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -10854,7 +10854,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "bullbreakout",
+  "ten": "BullBreakout",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -10881,7 +10881,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "bearbreakout",
+  "ten": "BearBreakout",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -10908,7 +10908,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "mua_rsi_50",
+  "ten": "Mua RSI < 50",
   "ho": "quay_ve_trung_binh",
   "chieu": 1,
   "giu": 1,
@@ -10928,7 +10928,7 @@
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
  },
  {
-  "ten": "ban_rsi_50",
+  "ten": "Ban RSI > 50",
   "ho": "quay_ve_trung_binh",
   "chieu": -1,
   "giu": 1,
@@ -10948,7 +10948,7 @@
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
  },
  {
-  "ten": "orb_long_2",
+  "ten": "ORB Long",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -10988,7 +10988,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "orb_short_2",
+  "ten": "ORB Short",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11028,7 +11028,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "mua_khi_stochastic_cat_len_50",
+  "ten": "Mua khi Stochastic cắt lên 50",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11048,7 +11048,7 @@
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
  },
  {
-  "ten": "ban_khi_stochastic_cat_xuong_50",
+  "ten": "Ban khi Stochastic cắt xuống 50",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11124,7 +11124,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "hurstbuffer_inptrendthreshold",
+  "ten": "HurstBuffer >= InpTrendThreshold",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -11149,7 +11149,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "hurstbuffer_inpreversionthreshold",
+  "ten": "HurstBuffer <= InpReversionThreshold",
   "ho": "quay_ve_trung_binh",
   "chieu": -1,
   "giu": 1,
@@ -11174,7 +11174,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_xuong_sang_len",
+  "ten": "SuperTrend xuong sang len",
   "co_che": "sieu_xu_huong",
   "ho": "xu_huong",
   "chieu": 1,
@@ -11238,7 +11238,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_len_sang_xuong",
+  "ten": "SuperTrend len sang xuong",
   "co_che": "sieu_xu_huong",
   "ho": "xu_huong",
   "chieu": -1,
@@ -11302,7 +11302,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "sessionhighsweepbuy",
+  "ten": "SessionHighSweepBuy",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11343,7 +11343,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "sessionlowsweepsell",
+  "ten": "SessionLowSweepSell",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11384,7 +11384,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "decayzones_score_smoothing_signal",
+  "ten": "DecayZones score smoothing signal",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11428,7 +11428,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "ob_bullish_rectangle_created",
+  "ten": "OB bullish rectangle created",
   "co_che": "OrderBlockDetector.mq5",
   "ho": "pha_vo",
   "chieu": 1,
@@ -11462,7 +11462,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "ob_bearish_rectangle_created",
+  "ten": "OB bearish rectangle created",
   "co_che": "OrderBlockDetector.mq5",
   "ho": "pha_vo",
   "chieu": -1,
@@ -11496,7 +11496,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "ihsmc_zone_detected_armed_active_breakout_score_update",
+  "ten": "IHSMC zone detected/armed/active breakout score update",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11522,7 +11522,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "ihsmc_zone_detected_armed_active_breakdown_score_update",
+  "ten": "IHSMC zone detected/armed/active breakdown score update",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11548,7 +11548,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "bullish_fvg_alert_or_arrow",
+  "ten": "Bullish_FVG_alert_or_arrow",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11579,7 +11579,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "bearish_fvg_alert_or_arrow",
+  "ten": "Bearish_FVG_alert_or_arrow",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11791,7 +11791,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "lowmapbuffer_gan_gia_tri_tai_day_tro_thanh_muc_thap_nhat_noi",
+  "ten": "LowMapBuffer gan gia tri tai day tro thanh muc thap nhat noi bo trong InpDepth bar gan nhat",
   "ho": "quay_ve_trung_binh",
   "chieu": 1,
   "giu": 1,
@@ -11817,7 +11817,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "highmapbuffer_gan_gia_tri_tai_day_tro_thanh_muc_cao_nhat_noi",
+  "ten": "HighMapBuffer gan gia tri tai day tro thanh muc cao nhat noi bo trong InpDepth bar gan nhat",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11843,7 +11843,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "kpg_golden_zone_buy",
+  "ten": "KPG_GOLDEN_ZONE_BUY",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -11880,7 +11880,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "kpg_golden_zone_sell",
+  "ten": "KPG_GOLDEN_ZONE_SELL",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -11917,7 +11917,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "liquidity_sweep_mua",
+  "ten": "Liquidity Sweep mua",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11938,7 +11938,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "liquidity_sweep_ban",
+  "ten": "Liquidity Sweep ban",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11959,7 +11959,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "fvg_bullish_gap_detected",
+  "ten": "FVG bullish gap detected",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11993,7 +11993,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "fvg_bearish_gap_detected",
+  "ten": "FVG bearish gap detected",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -12097,7 +12097,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "rsi_oversold_rebound_from_wilder_smoothed_rsi",
+  "ten": "RSI oversold rebound from Wilder-smoothed RSI",
   "co_che": "Các quỹ mean-reversion và statistical arb bị quy định phải mua khi chỉ báo quá bán cực đoan để khai thác sai lệch định giá tạm thời, buộc các nhà đầu tư cá nhân dùng đòn bẩy và quỹ trend-following phải bán hoảng loạn vào thanh khoản này để cắt lỗ.",
   "ho": "quay_ve_trung_binh",
   "chieu": 1,
@@ -12120,7 +12120,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "rsi_overbought_reversal_from_wilder_smoothed_rsi",
+  "ten": "RSI overbought reversal from Wilder-smoothed RSI",
   "co_che": "Các đội ngũ contrarian và quỹ arbitrage biến động phải vào lệnh bán hoặc mua put khi RSI vượt ngưỡng 70 để cân bằng độ lệch phân phối, buộc các quỹ momentum và nhà giao dịch dài hạn phải giảm vị thế theo giới hạn VaR hàng ngày, tạo luồng chuyển thanh khoản cưỡng bức",
   "ho": "quay_ve_trung_binh",
   "chieu": -1,
@@ -12143,7 +12143,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "fvg_gap_up",
+  "ten": "FVG_gap_up",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -12176,7 +12176,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "fvg_gap_down",
+  "ten": "FVG_gap_down",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -12209,7 +12209,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "bull_sweep_reversal",
+  "ten": "Bull sweep reversal",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -12252,7 +12252,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "bear_sweep_reversal",
+  "ten": "Bear sweep reversal",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -12295,7 +12295,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "mitigation_bullish_buffer",
+  "ten": "Mitigation bullish buffer",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -12329,7 +12329,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "mitigation_bearish_buffer",
+  "ten": "Mitigation bearish buffer",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -12363,7 +12363,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "donchian_breakout_tren",
+  "ten": "Donchian breakout tren",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -12396,7 +12396,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "donchian_breakout_duoi",
+  "ten": "Donchian breakout duoi",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -12577,7 +12577,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "buy_signal_from_bullish_candle_strength_pressure_state",
+  "ten": "BUY signal from bullish candle strength / pressure state",
   "co_che": "giau",
   "ho": "xu_huong",
   "chieu": 1,
@@ -12606,7 +12606,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "sell_signal_from_bearish_candle_strength_pressure_state",
+  "ten": "SELL signal from bearish candle strength / pressure state",
   "co_che": "giau",
   "ho": "xu_huong",
   "chieu": -1,
@@ -12830,7 +12830,7 @@
   "co_che_nguon": "llm_2026_09_06"
  },
  {
-  "ten": "atr_ratio_high_state",
+  "ten": "ATR ratio high state",
   "ho": "bien_dong",
   "chieu": 1,
   "giu": 1,
@@ -12856,7 +12856,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "atr_ratio_extreme_state",
+  "ten": "ATR ratio extreme state",
   "ho": "bien_dong",
   "chieu": 1,
   "giu": 1,
@@ -12882,7 +12882,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "heikin_ashi_bull_strong",
+  "ten": "Heikin Ashi bull strong",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -12917,7 +12917,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "heikin_ashi_bear_strong",
+  "ten": "Heikin Ashi bear strong",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -12952,7 +12952,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "rsi_histogram_buy_seed",
+  "ten": "RSI_Histogram_BUY_seed",
   "ho": "quay_ve_trung_binh",
   "chieu": 1,
   "giu": 1,
@@ -12986,7 +12986,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "rsi_histogram_sell_seed",
+  "ten": "RSI_Histogram_SELL_seed",
   "ho": "quay_ve_trung_binh",
   "chieu": -1,
   "giu": 1,
@@ -13058,7 +13058,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "pivothighbreakarrow",
+  "ten": "PivotHighBreakArrow",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -13080,7 +13080,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "pivotlowbreakarrow",
+  "ten": "PivotLowBreakArrow",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -13102,7 +13102,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macd_cat_len_tin_hieu_sau_khi_ema_nhanh_cham_va_uong_tin_hie",
+  "ten": "MACD cắt lên tín hiệu sau khi EMA nhanh chậm và đường tín hiệu SMA được tính",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -13124,7 +13124,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macd_cat_xuong_tin_hieu_sau_khi_ema_nhanh_cham_va_uong_tin_h",
+  "ten": "MACD cắt xuống tín hiệu sau khi EMA nhanh chậm và đường tín hiệu SMA được tính",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -13190,7 +13190,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "gia_cat_duong_du_bao_alpha_beta_khi_sai_lech_duong",
+  "ten": "Gia cat duong du bao Alpha-Beta khi sai lech duong",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -13233,7 +13233,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "gia_cat_duong_du_bao_alpha_beta_khi_sai_lech_am",
+  "ten": "Gia cat duong du bao Alpha-Beta khi sai lech am",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -13328,7 +13328,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "kci_plus_buffer_arrow",
+  "ten": "KCI_Plus_buffer_arrow",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -13357,7 +13357,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "kci_minus_buffer_arrow",
+  "ten": "KCI_Minus_buffer_arrow",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -13386,7 +13386,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "swinghighbuf_duoc_gan_khi_co_dinh_cao_cuc_bo_swing_high",
+  "ten": "SwingHighBuf duoc gan khi co dinh cao cuc bo (swing high)",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -13421,7 +13421,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "swinglowbuf_duoc_gan_khi_co_dinh_thap_cuc_bo_swing_low",
+  "ten": "SwingLowBuf duoc gan khi co dinh thap cuc bo (swing low)",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -13538,7 +13538,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "demand_zone_touch_rejection",
+  "ten": "Demand zone touch/rejection",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -13586,7 +13586,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supply_zone_touch_rejection",
+  "ten": "Supply zone touch/rejection",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -13634,7 +13634,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "price_enters_support_zone_and_signals_buy",
+  "ten": "Price enters support zone and signals BUY",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -13673,7 +13673,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "price_enters_resistance_zone_and_signals_sell",
+  "ten": "Price enters resistance zone and signals SELL",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -13712,7 +13712,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "fvg_bullish",
+  "ten": "FVG Bullish",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -13734,7 +13734,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "fvg_bearish",
+  "ten": "FVG Bearish",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -13849,7 +13849,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macd_histogram_duong_2",
+  "ten": "macd_histogram_duong",
   "co_che": "ExtHistogramBuffer >= 0",
   "ho": "xu_huong",
   "chieu": 1,
@@ -13899,7 +13899,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macd_histogram_am_2",
+  "ten": "macd_histogram_am",
   "co_che": "ExtHistogramBuffer < 0",
   "ho": "xu_huong",
   "chieu": -1,
@@ -14049,7 +14049,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macdint_150_filtered_volume_buy",
+  "ten": "MACDint_150_filtered_volume_buy",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -14084,7 +14084,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macdint_150_filtered_volume_sell",
+  "ten": "MACDint_150_filtered_volume_sell",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -14225,7 +14225,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_buy",
+  "ten": "Supertrend BUY",
   "co_che": "supertrend_cross_up",
   "ho": "xu_huong",
   "chieu": 1,
@@ -14267,7 +14267,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_sell",
+  "ten": "Supertrend SELL",
   "co_che": "supertrend_cross_down",
   "ho": "xu_huong",
   "chieu": -1,
@@ -14309,7 +14309,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_xu_huong_tang",
+  "ten": "SuperTrend xu huong tang",
   "co_che": "Dung tin hieu khi SuperTrend flip len va da qua warmup, ve buffer gia tri duong tai duong chan duoi",
   "ho": "xu_huong",
   "chieu": 1,
@@ -14343,7 +14343,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_xu_huong_giam",
+  "ten": "SuperTrend xu huong giam",
   "co_che": "Dung tin hieu khi SuperTrend flip xuong va da qua warmup, ve buffer gia tri am/duong tai duong chan tren",
   "ho": "xu_huong",
   "chieu": -1,
@@ -14382,7 +14382,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_buy_arrow",
+  "ten": "SuperTrend_buy_arrow",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 5,
@@ -14435,7 +14435,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_sell_arrow",
+  "ten": "SuperTrend_sell_arrow",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 5,
@@ -14488,7 +14488,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "fast_slow_color_bullish_cross",
+  "ten": "Fast_Slow_color_bullish_cross",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -14510,7 +14510,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "fast_slow_color_bearish_cross",
+  "ten": "Fast_Slow_color_bearish_cross",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -14532,7 +14532,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "garch_volatility_low_initialization",
+  "ten": "GARCH volatility low initialization",
   "ho": "bien_dong",
   "chieu": 1,
   "giu": 1,
@@ -14652,7 +14652,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "z_score_inpextreme",
+  "ten": "z_score <= -InpExtreme",
   "ho": "quay_ve_trung_binh",
   "chieu": 1,
   "giu": 1,
@@ -14699,7 +14699,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "z_score_inpextreme_2",
+  "ten": "z_score >= InpExtreme",
   "ho": "quay_ve_trung_binh",
   "chieu": -1,
   "giu": 1,
@@ -14788,7 +14788,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "gia_cat_tren_duong_tren_kernel_vung_atr",
+  "ten": "gia_cat_tren_duong_tren_kernel_vung_ATR",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -14829,7 +14829,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "gia_cat_duoi_duong_duoi_kernel_vung_atr",
+  "ten": "gia_cat_duoi_duong_duoi_kernel_vung_ATR",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -14870,7 +14870,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "extalmabuffer_tang_len",
+  "ten": "ExtAlmaBuffer tang len",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -14900,7 +14900,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "extalmabuffer_giam_xuong",
+  "ten": "ExtAlmaBuffer giam xuong",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -14930,7 +14930,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "cvd_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
+  "ten": "CVD_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
   "ho": "dong_tien",
   "chieu": 1,
   "giu": 1,
@@ -14963,7 +14963,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "cvd_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay_2",
+  "ten": "CVD_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
   "ho": "dong_tien",
   "chieu": -1,
   "giu": 1,
@@ -15057,7 +15057,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "ema9_cat_len_ema21_2",
+  "ten": "EMA9 cắt lên EMA21",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -15079,7 +15079,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "ema9_cat_xuong_ema21_2",
+  "ten": "EMA9 cắt xuống EMA21",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -15101,7 +15101,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "silver_bullet_time_window_bullish_fvg",
+  "ten": "Silver Bullet time window + bullish FVG",
   "ho": "phien",
   "chieu": 1,
   "giu": 5,
@@ -15142,7 +15142,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "silver_bullet_time_window_bullish_fvg_2",
+  "ten": "Silver Bullet time window + bullish FVG",
   "ho": "phien",
   "chieu": -1,
   "giu": 5,
@@ -15183,7 +15183,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_bull_arrow_buy",
+  "ten": "SuperTrend bull arrow / BUY",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -15209,7 +15209,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "supertrend_bear_arrow_sell",
+  "ten": "SuperTrend bear arrow / SELL",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -15391,7 +15391,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "zigzag_lowmapbuffer_peak_to_buy_reversal",
+  "ten": "ZigZag LowMapBuffer peak-to-buy reversal",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -15413,7 +15413,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "zigzag_highmapbuffer_bottom_to_sell_reversal",
+  "ten": "ZigZag HighMapBuffer bottom-to-sell reversal",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -15435,7 +15435,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "bullish_fvg",
+  "ten": "Bullish FVG",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -15459,7 +15459,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "bearish_fvg",
+  "ten": "Bearish FVG",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -15483,7 +15483,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macd_buffer_duong",
+  "ten": "MACD_buffer_duong",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -15505,7 +15505,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "macd_buffer_am",
+  "ten": "MACD_buffer_am",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -15527,7 +15527,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "signalbuffer_tinh_tu_sma_cua_macd",
+  "ten": "SignalBuffer_tinh_tu_SMA_cua_MACD",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -15647,7 +15647,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "inside_bar_bullish_signal",
+  "ten": "Inside bar bullish signal",
   "co_che": "ColorBuffer[i] = 1 when current candle is inside previous candle",
   "ho": "pha_vo",
   "chieu": 1,
@@ -15681,7 +15681,7 @@
   "nguon_lan": "chi_bao"
  },
  {
-  "ten": "inside_bar_bearish_signal",
+  "ten": "Inside bar bearish signal",
   "co_che": "ColorBuffer[i] = 1 when current candle is inside previous candle",
   "ho": "pha_vo",
   "chieu": -1,

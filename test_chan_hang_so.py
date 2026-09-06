@@ -1,0 +1,141 @@
+# -*- coding: utf-8 -*-
+"""HAI KIEU HANG SO TRA HINH, VA CHUNG HONG THEO HAI CHIEU NGUOC NHAU.
+
+Do tren kho 06/09/2026, ca hai deu la dau vet cua mot lan boc HONG chu khong
+phai co che that:
+
+  1. `close > 0`, `low < 0`, `high >= 0` - **27 ve tren 12 co che**, gan het
+     thuoc ho FVG / order block / liquidity sweep. Bo boc nhin thay
+     `if(cond) Buffer[i] = low[i] - 10*_Point;` roi dien `hang: 0` vao cho
+     nguong ma no khong doc duoc. Gia luon duong, nen ve nay la HANG SO.
+  2. `close >= 325.25` - mot muc gia cua MOT tai san tai MOT thoi diem. Dung o
+     do, va la hang so `False` o moi noi khac.
+
+Chieu hong khac nhau, va do la ly do phai chan ca hai:
+
+  - Ve LUON SAI thi pheu BAT DUOC (`gan_khong_bao_gio_vao`) - on ao nhung an
+    toan.
+  - Ve LUON DUNG thi **im lang bien mat**: co che van chay, van co ve co du
+    dieu kien, va khong ai biet minh dang kiem dinh mot thu KHAC voi cai ban
+    goc noi. Dung ho benh [[ket-luan-am-phai-phan-biet-chua-do]].
+
+Bay rieng cua bai nay: `_hang_so_gia` **da ton tai tu 05/09** va `don_kho` co
+goi no - nhung `don_kho` chi bao cao, con `loc()`, cai duy nhat nam tren duong
+len be mat, thi khong goi bao gio. Nen bai kiem phai bam vao `loc()`, khong
+duoc bam vao ham chan; ham chan xanh khong chung minh duoc gi
+[[noi-day-truoc-khi-xay-them]].
+"""
+import unittest
+
+from nhan import loc_co_che as LCC
+from nhan import ngu_phap as NP
+
+
+def _ve(trai, phep, phai):
+    return {"trai": trai, "phep": phep, "phai": phai}
+
+
+GIA = {"chi_bao": "gia", "cot": "close"}
+
+
+class GiaSoVoiHangSoAmHoacKhongLaHangSo(unittest.TestCase):
+
+    def test_luon_dung_bi_chan(self):
+        self.assertTrue(NP._kiem_hien_nhien(_ve(GIA, ">", {"hang": 0})))
+
+    def test_luon_sai_bi_chan(self):
+        self.assertTrue(NP._kiem_hien_nhien(
+            _ve({"chi_bao": "gia", "cot": "low"}, "<", {"hang": 0})))
+
+    def test_hang_so_am_cung_bi_chan(self):
+        self.assertTrue(NP._kiem_hien_nhien(_ve(GIA, ">", {"hang": -10})))
+
+    def test_nguong_DUONG_khong_bi_ham_nay_dung_toi(self):
+        """`close > 322.5` la mot benh KHAC (nguong tuyet doi), va no do
+        `loc_co_che._hang_so_gia` chan. Chan hai lan o hai cho voi hai ly do
+        khac nhau thi ly do bao ra se sai mot trong hai lan."""
+        self.assertEqual(NP._kiem_hien_nhien(_ve(GIA, ">", {"hang": 322.5})), [])
+
+    def test_chi_bao_CO_THE_am_thi_khong_bi_cham(self):
+        """`zscore < 0` va `doi_pct > 0` la dieu kien THAT - chung nhan gia tri
+        hai dau. Chan bua o day se giet ca ho quay ve trung binh."""
+        for cb in ("zscore", "doi_pct", "doi"):
+            t = {"chi_bao": cb, "cua": GIA, "n": 20}
+            self.assertEqual(NP._kiem_hien_nhien(_ve(t, "<", {"hang": 0})), [],
+                             "chan nham '%s < 0'" % cb)
+
+    def test_cong_them_co_che_tu_choi_spec_kieu_nay(self):
+        spec = {"ten": "thu", "ho": "pha_vo", "chieu": 1, "giu": 1,
+                "co_che": "mot cau du dai de qua duoc cong kiem khai bao.",
+                "vao": [_ve({"chi_bao": "gia", "cot": "low"}, "<", {"hang": 0})]}
+        self.assertTrue(NP.kiem_khai_bao(spec))
+
+
+class LocPhaiChanNguongGiaTuyetDoi(unittest.TestCase):
+    """Bam vao `loc()` chu khong vao `_hang_so_gia` - xem docstring dau file."""
+
+    def test_ham_chan_nhan_dien_dung(self):
+        self.assertEqual(
+            LCC._hang_so_gia({"vao": [_ve(GIA, ">=", {"hang": 325.25})]}),
+            325.25)
+        self.assertIsNone(
+            LCC._hang_so_gia({"vao": [_ve({"chi_bao": "rsi", "n": 14}, "<",
+                                          {"hang": 30})]}))
+
+    def test_loc_that_su_go_co_che_do_khoi_be_mat(self):
+        kho = NP.doc_kho()
+        dinh = [c["ten"] for c in kho if LCC._hang_so_gia(c) is not None]
+        if not dinh:
+            self.skipTest("kho khong con co che nao so gia voi hang so tuyet doi")
+        r = LCC.loc(khung="D1", in_ra=lambda *_: None)
+        if r.get("chua_do"):
+            self.skipTest("khong nap duoc tai san nao de loc")
+        for ten in dinh:
+            self.assertNotIn(ten, r["dung_duoc"],
+                             "'%s' van len be mat du co nguong gia tuyet doi" % ten)
+            self.assertEqual(r["bo"].get(ten), "nguong_gia_tuyet_doi")
+
+    def test_ly_do_bo_la_khoa_ON_DINH_khong_kem_con_so(self):
+        """Nhet gia tri vao ly do thi moi co che thanh mot nhom rieng trong
+        bang dem, va bang doc nhu the moi cai la mot benh khac nhau."""
+        r = LCC.loc(khung="D1", in_ra=lambda *_: None)
+        if r.get("chua_do"):
+            self.skipTest("khong nap duoc tai san nao de loc")
+        for v in r["bo"].values():
+            self.assertNotIn("(", v, "ly_do '%s' co nhung con so thay doi" % v)
+
+
+class CongPhaiApChoCA_HANG_DA_VAO_KHO(unittest.TestCase):
+    """Mot cong chi ap cho hang MOI thi khong phai cong, ma la thu tuc nhap kho.
+
+    Do 06/09: 169/540 muc trong kho khong qua noi `kiem_khai_bao` - phan lon
+    thieu han truong `co_che`. Chung vao qua cua sau (duong LLM ghi thang file
+    JSON) va van chay tren be mat, vi `loc()` chua bao gio goi cong.
+    """
+
+    def test_spec_thieu_co_che_khong_len_be_mat(self):
+        kho = NP.doc_kho()
+        thieu = [c["ten"] for c in kho
+                 if NP.kiem_khai_bao(c) and LCC._hang_so_gia(c) is None]
+        if not thieu:
+            self.skipTest("kho da sach - moi muc deu qua duoc kiem_khai_bao")
+        r = LCC.loc(khung="D1", in_ra=lambda *_: None)
+        if r.get("chua_do"):
+            self.skipTest("khong nap duoc tai san nao de loc")
+        for ten in thieu:
+            self.assertNotIn(ten, r["dung_duoc"])
+            self.assertEqual(r["bo"].get(ten), "khong_qua_kiem_khai_bao")
+
+    def test_mau_viet_tay_khong_bi_cong_nay_cham(self):
+        """18 mau goc la ham Python, khong co spec trong kho. Doi chung qua
+        `kiem_khai_bao` la doi mot thu khong ton tai."""
+        r = LCC.loc(khung="D1", in_ra=lambda *_: None)
+        if r.get("chua_do"):
+            self.skipTest("khong nap duoc tai san nao de loc")
+        for ten in ("ibs_bat_day", "momentum_ema", "donchian"):
+            self.assertNotEqual(r["bo"].get(ten), "khong_qua_kiem_khai_bao",
+                                "'%s' la mau viet tay, khong co spec" % ten)
+
+
+if __name__ == "__main__":
+    unittest.main()

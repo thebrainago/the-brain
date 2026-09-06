@@ -645,6 +645,28 @@ def _kiem_hien_nhien(d: dict) -> list[str]:
     trai, phai, phep = d.get("trai"), d.get("phai"), d.get("phep", ">")
     if not isinstance(trai, dict) or not isinstance(phai, dict):
         return []
+
+    # GIA SO VOI MOT HANG SO <= 0. Gia la so DUONG NGAT tren moi tai san, nen
+    # `close > 0` luon dung va `low < 0` khong bao gio dung - o ca hai chieu,
+    # ve do khong quyet dinh gi.
+    #
+    # Do 06/09/2026: 27 ve nhu vay trong kho (`low < 0`, `high > 0`,
+    # `close >= 0`) tren 12 co che, phan lon la ho FVG / order block /
+    # liquidity sweep. Chung KHONG phai co che that bi mat, ma la dau vet cua
+    # mot lan boc HONG: bo boc thay `if(cond) Buffer[i] = low[i] - 10*_Point;`
+    # roi dien `hang: 0` vao cho nguong ma no khong doc duoc.
+    #
+    # Vi sao phai chan chu khong de pheu tu loc: ve LUON SAI thi pheu bat duoc
+    # (`gan_khong_bao_gio_vao`), nhung ve LUON DUNG thi **im lang bien mat** -
+    # co che van chay, van co ve co hai dieu kien, va ta khong bao gio biet
+    # minh dang kiem dinh mot thu KHAC voi cai ban goc noi.
+    if (str(trai.get("chi_bao", "")).lower() == "gia" and "hang" in phai
+            and isinstance(phai.get("hang"), (int, float))
+            and not isinstance(phai.get("hang"), bool)
+            and float(phai["hang"]) <= 0.0):
+        return ["gia luon DUONG nen 'gia %s %g' la hang so - nguong that da "
+                "mat luc boc" % (phep, float(phai["hang"]))]
+
     try:
         gt, gp = (json.dumps(x, sort_keys=True, default=str) for x in (trai, phai))
     except Exception:

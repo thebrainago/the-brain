@@ -18,7 +18,7 @@
     "deepseek": "dat OPENAI_API_KEY=<khoa deepseek>, OPENAI_BASE_URL=https://api.deepseek.com, dien model_openai=deepseek-chat, doi duong=openai",
     "tran": "tran_moi_ngay=40 va cach_nhau_giay=600 la phanh chi phi - khong sua khi chua tinh lai tien"
   },
-  "cc_switch_provider": "aibox goi moi",
+  "cc_switch_provider": "aibox",
   "_ghi_chu_01_09": [
     "Bat qua cc-switch: khoa+base_url+model doc TAI CHO tu ~/.cc-switch/cc-switch.db,",
     "khong chep sang day. Doi khoa trong cc-switch la doi luon o day.",
@@ -54,5 +54,12 @@
     "=> mac dinh qwen3.7-flash. File nao tra rong thi thu lai bang qwen3.6-flash (yield cao hon).",
     "Khoa cua goi nap moi nam trong cc-switch profile 'AiBox goi moi (qwen3.7-flash)'.",
     "Profile 'DeepSeek' tro toi api.deepseek.com KHONG dung duoc: khoa nay la khoa ai-box, khong phai khoa DeepSeek chinh chu (401)."
+  ],
+  "_ghi_chu_06_09_ten_provider": [
+    "cc_switch_provider tung la 'aibox goi moi' - KHONG con provider nao ten vay.",
+    "Profile that ten 'AiBox qua cau noi (qwen3.7-flash)'. `tu_cc_switch` khop bang",
+    "chuoi con nen khong tim thay -> `_co_openai()` False -> moi loi goi tra ve",
+    "'thieu OPENAI_API_KEY' va ca duong LLM cua The Brain im lang tat.",
+    "Nay khop bang 'aibox' - ngan hon phan ten hay bi doi."
   ]
 }
