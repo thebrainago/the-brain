@@ -120,7 +120,50 @@ Ba vướng mắc của phiên sáng đã đóng, và một nguyên thuỷ mới
 
 Đó là lần thứ **ba** trong ngày cùng một bức tường.
 
+## Phiên tối — hệ đã PASS ra tick THẬT lần đầu
+
+Sổ cái có **2 giả thuyết PASS** và **cả hai chưa bao giờ chạy MT5 tester**. Lần
+chạy tester gần nhất của cả dự án là **01/09** — năm ngày thuần Python, trong đó
+hệ ba lần kết luận "nút thắt là MDE".
+
+`lab/ea_MeanRevZ5.mq5` + `lab/chay_tester_z5.py`. Luật nguyên văn từ kho:
+vào khi `zscore(close,5) < −1`, ra khi `>= −1`, chỉ MUA.
+
+**Kết quả** (US100Cash H1 / tín hiệu D1, 2011.09.19–2026.07.29, Model=2,
+lot 0,10 cố định, vốn 10.000 USD):
+
+```
+305 lệnh · lãi ròng 1.374,58 USD · PF 1,77 · Sharpe 1,13
+sụt giảm vốn sở hữu tối đa 3,28% · hệ số hồi phục 3,89
+```
+
+Đối chiếu Python: **463 lần mở vị thế, 67,1 bps/lệnh → tester 305 lệnh,
+46,4 bps/lệnh**. Cùng dấu, cùng bậc độ lớn, nhưng **ít hơn 34% số lệnh**.
+
+**Ba lần chạy đầu đều hỏng, và cả ba đều ghi báo cáo "0 lệnh" — đọc y hệt kết
+quả âm:**
+1. Model=1 trên 15 năm D1 phải SINH tick M1 → ngốn 20.480 MB rồi chết
+   `cannot generate history data` (đĩa còn 12 GB).
+2. Model=2 trên khung D1: MT5 đặt tick ở OPEN nến D1 = 00:00, **ngoài phiên**
+   của CFD chỉ số → 463 lệnh đều `Market closed`.
+3. Chuyển EA sang H1 (tín hiệu vẫn từ D1): còn 3 lệnh — nến D1 đổi lúc 00:00 vẫn
+   ngoài phiên.
+
+Sửa thật: EA **ghi nhớ ý định** rồi khớp ở nến H1 đầu tiên có thể giao dịch. Đó
+cũng là cách một bot thật phải chạy, không phải mẹo của tester.
+
 ## Việc tiếp theo, theo thứ tự
+
+0. **TRUY CHO RA CHÊNH LỆCH 463 vs 305 LỆNH.** Trước khi tin bất cứ con số
+   %/năm nào của bản tester, và trước khi so nó với bảng xếp hạng. Giả thuyết:
+   trường hợp **thoát rồi vào lại trong cùng một ngày** — Python cho phép (điều
+   kiện `ra` rồi `vao` ở bar kế tiếp), còn EA chỉ đánh giá một lần mỗi khi nến
+   D1 đổi nên mất các lần đó. Cách kiểm: xuất danh sách deal từ tester, so từng
+   ngày với chuỗi tín hiệu Python. Nếu đúng là vậy thì **Python đang đếm thừa**,
+   và mọi con số "số lệnh" của bề mặt đều phải xem lại.
+
+   Sau đó: đưa nốt `AUDCAD.H4.rsi_dao_chieu.n14` ra tester (giả thuyết PASS thứ
+   hai, đăng ký 15/08, cũng chưa từng chạy).
 
 1. **MDE — và lần này là câu hỏi ĐÓNG, không phải việc quét.** Ba đường độc lập
    trong một ngày (mở vũ trụ 44→86 · sửa lối ra 182.550 ô · mở khoá họ vùng)
