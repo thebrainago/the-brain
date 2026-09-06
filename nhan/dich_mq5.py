@@ -436,6 +436,16 @@ MAU_EA = r"""//+----------------------------------------------------------------
 #include <Trade\Trade.mqh>
 
 input int    InpMaCoChe = 0;      // ma co che (0..%(max)d)
+
+//--- DICH TIN HIEU o RUNTIME, khong phai luc sinh ma.
+//---
+//--- Do 06/09: mot luot tester ton ~130 giay BOOT + gan nhu 0 giay tinh (20 nhan
+//--- chay song song; 393 pass ton dung bang 1 pass). Nen them pass la MIEN PHI,
+//--- con them LAN CHAY thi dat. Sinh 101 ban dich thanh 101 co che rieng lam ma
+//--- nguon phinh 10 lan va bien dich cham; de `InpDich` thanh THAM SO TOI UU HOA
+//--- thi EA giu nguyen kich thuoc va ta quet duoc co_che x do_dich trong MOT
+//--- luot. 40 co che x 26 do dich = 1.040 pass, van la mot lan boot.
+input int    InpDich    = 0;      // dich dieu kien di N nen (placebo)
 input double InpLot     = 0.10;
 input long   InpMagic   = 26090601;
 
@@ -549,11 +559,11 @@ void OnTick()
    if(DangMo())
      {
       g_bar_vao++;
-      bool ra = CoDieuKienRa(k) ? CoRa(k, 1) : (g_bar_vao >= Giu(k));
+      bool ra = CoDieuKienRa(k) ? CoRa(k, 1 + InpDich) : (g_bar_vao >= Giu(k));
       g_y_dinh = (ra || g_bar_vao >= 500) ? -1 : 0;
      }
    else
-      g_y_dinh = CoVao(k, 1) ? 1 : 0;
+      g_y_dinh = CoVao(k, 1 + InpDich) ? 1 : 0;
   }
 //+------------------------------------------------------------------+
 """
