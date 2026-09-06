@@ -105,3 +105,4 @@ VIEC TIEP THEO
 - **2026-09-05 14:39** — boc .mq5 tu 0 len 70%: sua doc_ma viet cho Pine; kho co che 262->326; trailing x4,8 lai; XM_US100CASH PASS (test 1072, fdr 1807, viec cho 2)
 - **2026-09-05 23:27** — boc tach theo lan: chi bao 0->87%, chien luoc 37->79%, tai lieu 1->11/100 bai; kho 326->540; nut that chuyen tu boc tach sang MDE + chi phi do duoc (test 1101, fdr 1807, viec cho 2)
 - **2026-09-06 16:31** — do ho loi ra 182.550 o -> SAN_SANG_V4 = 0 (chan troi khong phai nut that); sua duong LLM chet; ap cong kiem_khai_bao cho 169 co che da o trong kho (test 1207, fdr 1807, viec cho 2)
+- **2026-09-06 23:26** — toi uu khau test (8.241 phep thu / 82 giay), tim ra co che THU HAI: quantora_ma_dashboard_sell (test 1229, fdr 1807, viec cho 2)
