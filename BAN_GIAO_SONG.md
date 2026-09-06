@@ -4,31 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 18:13:09 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6532, 0 phut)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 19:01:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8640, 0 phut)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 19:10:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9156, 0 phut)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 19:29:47 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 7676, 0 phut)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 19:48:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 15252, 0 phut)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 19:59:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13808, 0 phut)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
 ### 2026-09-04 20:26:36 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 9264, 0 phut)
@@ -404,3 +379,28 @@
 - `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
 - `tester_holdout2.log`: duong o CA HAI doan: 15/242
 - git: bb7289c ban giao: 3 muc chu du an chot - seeker uu tien nguon co file, sua bo loc, tiep tuc z5
+### 2026-09-06 23:27:05 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5184, 0 phut)
+- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
+- `don_bay.log`: when serializing dict item 'bang'
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
+- `placebo_bichan_dama.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_rong.log`: -> reports/PLACEBO_RONG.json
+- `placebo_sau.log`: -> reports/PLACEBO_RONG.json
+- `tester_holdout2.log`: duong o CA HAI doan: 15/242
+- git: 6c5423b dien muc ban giao 06/09: mot doan doc la hieu ca phien
+### 2026-09-06 23:34:53 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13316, 0 phut)
+- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
+- `don_bay.log`: when serializing dict item 'bang'
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
+- `placebo_bichan_dama.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_rong.log`: -> reports/PLACEBO_RONG.json
+- `placebo_sau.log`: -> reports/PLACEBO_RONG.json
+- git: 6c5423b dien muc ban giao 06/09: mot doan doc la hieu ca phien
