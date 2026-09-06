@@ -4,33 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `doc_roi_boc.log`: vong 1: doc duoc 28, that bai 2 (245s)
-- `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
-- `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
-- git: 258ba61 Duong boc da thong: 0 -> 20 co che/106 ban, va nut that khong phai cai toi tuong
-### 2026-09-03 16:58:22 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13880, 0 phut), dieu_khien_xa.py (pid 16352, 382 phut)
-- `boc_llm_130.log`: KHO CO CHE: 154 -> 174   (+20)
-- `boc_llm_thu.log`: KHO CO CHE: 152 -> 154   (+2)
-- `doc_boc_toan_luc.log`: KHO CO CHE: 177 -> 178   tong 447s
-- `doc_roi_boc.log`: KHO CO CHE: 174 -> 177
-- `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
-- `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
-- git: bd04a34 Doc song song 28 lan nhanh hon, va suat boc chenh 16 lan giua cac nguon
-### 2026-09-03 17:48:28 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12884, 0 phut), dieu_khien_xa.py (pid 16352, 432 phut)
-- `boc_llm_130.log`: KHO CO CHE: 154 -> 174   (+20)
-- `boc_llm_thu.log`: KHO CO CHE: 152 -> 154   (+2)
-- `doc_boc_toan_luc.log`: KHO CO CHE: 177 -> 178   tong 447s
-- `doc_roi_boc.log`: KHO CO CHE: 174 -> 177
-- `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
-- `tv_toan_luc.log`: KHO CO CHE: 178 -> 191   tong 341s
-- git: a08860d TradingView: tran truy van 3/luot la nut that that; kho co che 152 -> 191
-### 2026-09-03 20:46:38 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12880, 0 phut), dieu_khien_xa.py (pid 16352, 610 phut)
 - `cao_mql5.log`: truoc: 236 tai lieu mql5_code
 - `github_toan_luc.log`: KHO CO CHE: 191 -> 191   tong 873s
 - `thu_mql5.log`: TONG 0 ma nguon rieng biet
@@ -404,3 +377,30 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - `quet_D1_0906.log`: TONG: {'LOAI': 18812, 'CHUA_DU_LUC': 18599, 'NEN_GOP': 10706, 'SAN_SANG_V4': 15} (506.8s, 8 tien trinh)
 - `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
 - git: 20da25d dien 2 muc ban giao 06/09: mot doan doc la hieu ca phien + 3 viec mai theo thu tu moi
+### 2026-09-06 17:45:26 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8560, 0 phut)
+- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
+- `loi_ra_D1.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LOI_RA_D1.json
+- `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
+- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
+- `tham_dinh_v2.log`: da go 12 cau khoi kho
+- git: 5a484c8 2026-09-06 (chieu): tham dinh co_che + bao cao + ban giao
+### 2026-09-06 17:59:00 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16228, 0 phut)
+- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
+- `loi_ra_D1.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LOI_RA_D1.json
+- `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
+- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
+- `tham_dinh_v2.log`: da go 12 cau khoi kho
+- git: 5a484c8 2026-09-06 (chieu): tham dinh co_che + bao cao + ban giao
+### 2026-09-06 18:02:35 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3148, 0 phut)
+- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
+- `loi_ra_D1.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LOI_RA_D1.json
+- `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
+- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
+- `tham_dinh_v2.log`: da go 12 cau khoi kho
+- git: 5a484c8 2026-09-06 (chieu): tham dinh co_che + bao cao + ban giao
