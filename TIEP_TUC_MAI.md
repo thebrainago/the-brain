@@ -56,13 +56,42 @@ b1888ff 2026-09-06: bao cao phien + anh chup be mat truoc khi don kho
 ```
 - file dang doi luc chot: **1**
 
-## Mot doan doc la hieu ca phien
+## Một đoạn đọc là hiểu cả phiên
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phiên này đổi **trọng tài** của dự án: từ Python sang MT5 tester.
 
-## Viec tiep theo, theo thu tu
+Trước hôm nay mới có **một** cơ chế từng ra tester, bằng file `.mq5` viết tay,
+và lần chạy gần nhất là 01/09 — năm ngày thuần Python. Tôi viết **bộ dịch
+DSL → MQL5** (`nhan/dich_mq5.py`, 393/408 = 96%) và gộp cả kho vào một EA có
+công tắc chọn cơ chế. Một lượt tester tốn 138 giây mà bài test thật chỉ 0,5
+giây — nên 393 cơ chế chạy từng cái là 14 giờ, gộp lại là **4 phút**.
 
-1. (chua dien)
+Rồi đo tiếp: máy có 20 nhân và MT5 đã dùng đủ. **Nghẽn là boot terminal, không
+phải tính toán.** Nên tôi chuyển mọi biến thể thành *tham số tối ưu hoá*:
+**8.241 phép thử = 82 giây**.
+
+**Tester phán xử khác hẳn Python.** Dẫn đầu bảng US100 là `ema_rsi_risk_ea`
+(Sharpe 1,66) — chạy sang chỉ số khác thì **không tồn tại**. Riêng hôm nay
+placebo đa tài sản giết 5 cơ chế "mạnh trên US100". **Sharpe một mã không đủ,
+placebo một mã cũng không đủ.**
+
+Còn lại **hai** hệ qua hết các cổng, cả hai đều trượt đúng GER40 — khớp tiên
+nghiệm cũ rằng bắt đáy chỉ sống ở chỉ số châu Mỹ:
+- `mean_reversion_z5` — ở sụt giảm 20% cho **9,00%/năm** so với 1,59% của
+  mua-giữ CFD cùng mức. Nhưng phần lớn ưu thế đến từ **không giữ qua đêm**
+  (phí 5,807%/năm), không phải từ bắt đáy.
+- `quantora_ma_dashboard_sell` — tìm ra ở phút cuối, trong nhóm 32/40 ứng viên
+  tôi **chưa kịp thử placebo**.
+
+Phần bóc tách: dọn được ba lỗ hổng (cổng chưa từng áp cho hàng trong kho ·
+đường LLM chết lặng lẽ · tên chưa chuẩn hoá), thêm nguyên thuỷ `vùng` làm sống
+33 cơ chế từ file đã có sẵn, và đo được rằng **LLM không điền được trường
+`co_che`** (nó bác 41/48 câu chính nó viết).
+
+**Bốn lần tôi báo sai trong ngày, đều cùng một kiểu — tin một con số trước khi
+kiểm nó được sinh ra thế nào:** "1/27" (do thuật di truyền bỏ sót) · "train
++0,15" (do H1 chỉ có từ 2016) · "cổng cắt vào thịt" (đa tài sản lật lại) ·
+"chỉ 1 cơ chế sống" (mới thử 8/40).
 
 ## KHONG DUOC QUEN (bo sung 03/09)
 - `b mang` TRUOC khi san bat cu thu gi.
