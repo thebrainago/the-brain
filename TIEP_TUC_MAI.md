@@ -154,36 +154,32 @@ cũng là cách một bot thật phải chạy, không phải mẹo của tester
 
 ## Việc tiếp theo, theo thứ tự
 
-Câu hỏi mở đã truy xong và nó **sửa lại kết luận của chính phiên này**: `US100Cash`
-có D1 đủ từ 2011 nhưng tester chỉ dựng được **H1 từ ~2016**, mà EA chạy trên H1.
-Khai lại cửa sổ cho đúng (train 2016-06 → 2021-06, holdout 2021-06 → 2026-07)
-thì **z5 train +0,84 chứ không phải +0,15** — nhận định "hình dạng của một giai
-đoạn" là sai, và sai vì cửa sổ chứ không vì thị trường.
+Đã có **%/năm thật**: ở sụt giảm 20%, hệ z5 cho **9,00%/năm** so với 1,59% của
+mua-giữ CFD cùng mức sụt giảm (×5,7). Mua-giữ cháy tài khoản từ lot 2,1 trong
+khi hệ ở lot 2,0 vẫn chỉ sụt 27,7%.
 
-Sau khi placebo dọn nhóm dẫn đầu mới (4 hệ có Sharpe cao hơn z5 đều nằm trong
-đám bản dịch), còn lại **đúng một hệ**: `mean_reversion_z5`, đạt placebo trên cả
-ba chỉ số Mỹ và trượt đúng GER40 — khớp với tiên nghiệm cũ của dự án.
+**Nhưng phần lớn ưu thế đó đến từ KHÔNG GIỮ QUA ĐÊM, không phải từ bắt đáy.**
+`US100Cash` thu 5,807%/năm phí qua đêm; giữ 1 lot 10 năm mất ~17.145 USD trong
+khi chỉ số chỉ tăng ~19.600 điểm. Hệ chỉ nằm trong thị trường ~19% số ngày.
+Đó là lợi thế thật và bán được, nhưng phải gọi đúng tên.
 
-1. **ĐO %/NĂM THẬT.** Đây là việc còn thiếu duy nhất trước khi gọi nó là một hệ
-   dùng được. Mọi số hiện có chạy ở **lot 0,10 cố định trên vốn 10.000** — đòn
-   bẩy ~0,03x, nên `+1.341 USD` không phải lợi suất mà chỉ là bằng chứng hướng.
-   Cần quét lot (0,1 là `min_lot` của US100Cash) để tìm mức sụt giảm chấp nhận
-   được, rồi ra đủ sáu con số của `cham_diem`: `lãi %/năm trên vốn phải bỏ ra ·
-   sụt giảm · vốn cần · hồi vốn tháng · số lệnh/năm · nguy cơ cháy`. Nhớ
-   `don-bay-gop-log-sai` và trần `0,5·S²`.
+1. **DANH MỤC BA CHỈ SỐ MỸ.** z5 đạt placebo trên US100 + US500 + US30 với ~170
+   lệnh mỗi mã. Chạy cả ba trong một EA, đo **tương quan chuỗi vốn**. Nếu tương
+   quan thấp thì đây là cách nâng Sharpe mà không cần đòn bẩy — đúng đường V6 đã
+   đi (danh mục 3 chỉ số Mỹ). Nếu tương quan cao (>0,8) thì gộp không thêm gì và
+   phải nói thẳng.
 
-2. **Danh mục ba chỉ số Mỹ.** z5 đạt placebo trên US100 + US500 + US30 với
-   ~170 lệnh mỗi mã. Chạy cả ba cùng lúc trong một EA và đo tương quan chuỗi vốn
-   — nếu tương quan thấp thì đây là cách nâng Sharpe mà không cần đòn bẩy, đúng
-   đường mà V6 đã đi (danh mục 3 chỉ số Mỹ).
+2. **ĐỐI CHIẾU VỚI MUA-GIỮ CHỈ SỐ (không phí).** Mốc hiện tại là mua-giữ CFD.
+   Cần biết hệ có thắng cả mốc *không mua được* kia không — nếu không thì câu
+   đúng là *"cách rẻ nhất để cầm US100"*, chứ không phải *"một cơ chế"*. Dùng
+   `nhan/tai_tro.py` + chuỗi chỉ số, đừng dựng lại.
 
-3. **Demo.** Hệ vào/ra một lần mỗi ngày ở nến H1 đầu tiên mở phiên nên phải có
-   bot chạy liên tục. EA đã có (`ea_MeanRevZ5.mq5`); gắn vào demo XM rồi đối
-   chiếu lệnh thật với bảng tester sau 2 tuần.
+3. **DEMO.** EA đã có (`ea_MeanRevZ5.mq5`, và bản sinh tự động). Gắn vào demo XM,
+   đối chiếu lệnh thật với bảng tester sau 2 tuần. Hệ vào/ra một lần mỗi ngày ở
+   nến H1 đầu tiên mở phiên nên phải chạy liên tục — VPS, giống V6.
 
-**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python · tin bảng nào chạy
-bằng `Optimization=2` · và **khai cửa sổ backtest mà chưa đếm bar của khung EA
-thật sự chạy**.
+**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python · tin bảng chạy bằng
+`Optimization=2` · khai cửa sổ backtest mà chưa đếm bar của khung EA thật sự chạy.
 
 ### Vướng mắc còn lại (chưa sửa)
 
