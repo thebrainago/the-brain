@@ -82,44 +82,83 @@ không ai nối dây:**
 Phụ phẩm: sau khi chặn ở mức khai báo, `gần_không_bao_giờ_vào` tụt 103 → 46. Không
 phải bớt bệnh, mà vì **lý do từ chối trở nên đúng tên**.
 
+## Phiên chiều — "sửa lại hết"
+
+Ba vướng mắc của phiên sáng đã đóng, và một nguyên thuỷ mới ra đời.
+
+1. **Cổng về đúng CỬA.** `loc()` không phải cửa duy nhất vào `MAU.MAU` —
+   `do_on_dinh`, `hinh_dang_vs_null`, `cham_lai_the_he`, `ngoai_sinh`,
+   `p_null_vs_ung_vien` gọi thẳng `nap_vao_mau`. Cổng nay ở `nap_vao_mau`, và
+   giữ bản ghi từ chối (`BI_TU_CHOI_KHI_NAP`) để `loc()` đọc.
+
+2. **`co_che` KHÔNG điền được bằng máy.** Lượt thẩm định độc lập (rubric +
+   "nghi ngờ thì BÁC") bác **41/48** câu LLM viết buổi sáng, kể cả một câu
+   *ngược chiều với luật*. Còn 7. Ròng: 169 → **166** cơ chế trượt cổng, tức
+   cứu được **3**. Và bộ thẩm định cũng **không ổn định** (`bullbreakout` được
+   giữ lượt 1, bị bác lượt 2) — ghi ra chứ không giấu.
+
+3. **Nguyên thuỷ `vùng`** (`ngu_phap._vung`): họ FVG/order block/ORB từ 0 lên
+   **33 cơ chế chạy được**. Bóc lại 49 file: 92 khai báo, **68 dùng `vung`**,
+   vào kho 34. Lượt đầu ra **0/9** dù bản tóm tắt ngữ pháp đã liệt kê — lời nhắc
+   kết bằng ví dụ chỉ có dạng `{trai,phep,phai}`, mô hình bám ví dụ chứ không
+   bám tham chiếu.
+
+**Ba lỗi do bài canary lôi ra, không cái nào lộ nếu chỉ đọc kết quả:**
+   - vùng **tự kích hoạt ở chính nến sinh** → `song` và `huy` là **nút giả**
+     (song 20/21/23/28 đều ra đúng 20). Nay vùng sống từ nến SAU nến sinh.
+   - `_dat` **không đặt được** tham số trong danh sách lồng (`tao0` là token
+     dính liền) → `tham_so_cua` liệt kê mà `ap_tham_so` trả spec y hệt.
+   - `kiem_khong_nhin_truoc` **gần như mù với cơ chế thưa**: 40 mốc ngẫu nhiên
+     không trúng mốc nào trong 16/400 bar bị rò rỉ. Lực của bộ đo tỉ lệ với tần
+     suất kích hoạt. Nay ưu tiên mốc có tín hiệu; hiệu chuẩn hai chiều: bắt được
+     canary, 0/374 dương tính giả.
+
+**Và họ vùng dừng ở đúng bức tường ấy:** 33 cơ chế, 4.158 ô, 1.061 NÊN_GỘP,
+**0 SẴN_SÀNG_V4**. Nhưng ô tốt nhất của nó nằm trên tài sản **giao dịch được**
+(XM_US100CASH 0,58 · DE40 0,55 · XM_US30CASH 0,50), 37-153 lệnh — khác hẳn 12
+ứng viên của bề mặt vốn nằm hết trên `YH_`.
+
+Đó là lần thứ **ba** trong ngày cùng một bức tường.
+
 ## Việc tiếp theo, theo thứ tự
 
-Thứ tự này thay bản 05/09: mục 2 đã cho kết quả âm, và nó **loại luôn giả thuyết
-đứng sau mục 3 cũ** (chỉ báo thường cũng chỉ là tín hiệu vào ở sai chân trời —
-vừa đo, không phải vậy).
+1. **MDE — và lần này là câu hỏi ĐÓNG, không phải việc quét.** Ba đường độc lập
+   trong một ngày (mở vũ trụ 44→86 · sửa lối ra 182.550 ô · mở khoá họ vùng)
+   đều dừng ở `SẴN_SÀNG_V4 = 0` trên tài sản đo được, và đều chết vì **thiếu
+   lực** chứ không vì thiếu edge. Trước khi quét thêm bất cứ thứ gì, phải trả
+   lời: **còn đường nào hạ MDE mà chưa thử không?** Hai đường đã đo đều gần cạn
+   (gộp lớp 0,535 → 0,511; H1 tệ hơn D1 dù nhiều bar gấp 24). Nếu không còn,
+   kết luận đúng là *kho cơ chế hiện có không đủ để chứng nhận gì ở mức Sharpe
+   0,3-0,5*, và **hướng phải đổi** — không phải quét thêm.
+   Ứng cử viên cụ thể chưa thử: **gộp theo HỌ VÙNG** (33 cơ chế cùng một cấu
+   trúc kinh tế, Sharpe 0,43-0,58 trên 6 chỉ số giao dịch được — đây là hình
+   dạng mà `gop_lop.mde_gop` sinh ra để xử lý, và nó chưa từng được chạy trên
+   một họ đồng nhất như vậy).
 
-1. **MDE, không phải cơ chế.** Con số quyết định là 39.050 ô chết vì thiếu lệnh
-   và 30.462 vì kích hoạt quá thấp. Không thêm cơ chế nào sửa được. Hai đường có
-   thật đều đã bị đo và đều gần cạn: **gộp lớp** (05/09: gộp 12 chỉ số chỉ hạ
-   ngưỡng 0,535 → 0,511) và **khung nhỏ hơn** (`mde-va-cong-kha-thi`: H1 TỆ hơn
-   D1 dù nhiều bar gấp 24). Câu hỏi phải trả lời TRƯỚC khi quét tiếp: **còn đường
-   nào hạ MDE mà chưa thử không?** Nếu không, kết luận đúng là *kho cơ chế hiện
-   có không đủ để chứng nhận bất cứ thứ gì ở mức Sharpe 0,3-0,5*, và hướng phải
-   đổi chứ không phải quét thêm.
+2. **166 cơ chế trượt cổng: BỎ, đừng điền.** Phiên chiều đã chứng minh không
+   điền được bằng máy. Trong 81 cái `CHUA_BIET_LY_DO` có `SessionHighSweepBuy`,
+   `OB bullish rectangle created`, `IHSMC zone detected` — họ **vùng**, và nay
+   ngữ pháp đã nói được. Việc đúng: **chạy `_boc_lai_vung.py` mở rộng bộ lọc
+   `RX_VUNG`** để bóc lại chính chúng, rồi bỏ phần còn lại.
+   Danh sách ở `reports/DIEN_CO_CHE.json` + `reports/THAM_DINH_CO_CHE.json`.
 
-2. **81 cơ chế `CHUA_BIET_LY_DO`** — đang nằm trong kho, bị cổng chặn khỏi bề
-   mặt, không mất. Việc đúng là **bỏ**, nhưng đọc 5-10 cái trước: trong đó có
-   `SessionHighSweepBuy`, `OB bullish rectangle created`, `IHSMC zone detected` —
-   họ **vùng**, thứ ngữ pháp chưa nói được. Chúng không có lý do vì bị **dịch
-   sai**, không phải vì vô nghĩa. Danh sách đầy đủ ở `reports/DIEN_CO_CHE.json`.
-
-3. **Nguyên thuỷ `vùng` cho FVG / order block / ORB** — mục 4 của bàn giao 05/09,
-   chưa động tới, nay có thêm bằng chứng ủng hộ: 2.925 ô chết vì
-   `DSL chi_bao='gio'` (cơ chế phiên chạy trên D1), và 5/5 spec bị bộ chặn hiển
-   nhiên mới bắt đều thuộc họ FVG. Kho giữ 14 định nghĩa FVG, 19 order block, 23
-   cấu trúc/BOS — tất cả đang bị dịch thành so sánh từng nến, tức dịch sai.
+3. **Nguyên thuỷ vùng mới chỉ dùng cho FVG/order block.** Ba họ còn lại chưa
+   bóc lại: **cấu trúc/BOS** (23 file), **thanh khoản** (13), **ORB** (6).
+   `RX_VUNG` hiện đã bắt chúng nhưng `vung_tin_hieu` khoanh trượt 4/55 file. Và
+   `quan_he` chưa có "vùng bị PHÁ" (BOS = giá đóng cửa vượt hẳn qua vùng rồi
+   KHÔNG quay lại) — `xuyen_len`/`xuyen_xuong` gần nhưng chưa đủ.
 
 ### Vướng mắc còn lại (chưa sửa)
 
-- **48 câu `co_che` do LLM viết chưa được thẩm định.** Qua được cổng cú pháp, vài
-  câu gần như diễn lại luật bằng từ ngữ về người. Đánh dấu
-  `co_che_nguon = "llm_2026_09_06"` để truy ngược. Cổng `co_che` chỉ chặn được sự
-  **vắng mặt**, không chặn được sự **rỗng**.
-- `reports/LOI_RA_D1.json` dùng tên **TRƯỚC** khi chuẩn hoá — đối chiếu phải đi
-  qua `chuan_hoa_ten`. Bản kho cũ ở `config/co_che_dsl.truoc_sua_ten.json`.
-- Cổng `kiem_khai_bao` mới chỉ áp ở `loc()`; `nap_vao_mau` vẫn nạp mọi thứ, nên
-  đường nào gọi thẳng `MAU.MAU` vẫn thấy đủ 557.
-- `test_hien_phap` ĐỎ cũ đã hết: 7 module của 05/09 nay đã có test.
+- **Bộ thẩm định `co_che` không ổn định giữa hai lượt.** Cùng dữ liệu, đổi phán
+  xử. Nếu còn dùng nó thì phải chạy **nhiều lượt và lấy đa số**, hoặc chấp nhận
+  nó chỉ dùng để LỌC THÔ.
+- 4 câu `co_che` chưa được phán xử lượt nào (`_tham_dinh_co_che.py` chạy lại là
+  xong, nhưng xem gạch đầu dòng trên).
+- `TRAN_VUNG_SONG = 64` là chặn an toàn chưa ai đo: chưa biết có cơ chế thật nào
+  cần hơn 64 vùng sống cùng lúc không.
+- 8 khai báo vùng bị từ chối vì `vung.tao` thiếu vế `trai`/`phai` — đó là LLM
+  trả sai định dạng, `chuan_hoa_spec` có thể vá được như nó đã vá `giu`.
 
 ## KHONG DUOC QUEN (bo sung 03/09)
 - `b mang` TRUOC khi san bat cu thu gi.
