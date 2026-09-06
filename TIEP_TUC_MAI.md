@@ -34,81 +34,92 @@ b1888ff 2026-09-06: bao cao phien + anh chup be mat truoc khi don kho
 ```
 - file dang doi luc chot: **1**
 
-## Mot doan doc la hieu ca phien
+## Một đoạn đọc là hiểu cả phiên
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Phiên sáng làm xong mục 1 (đo spread thật: **44 → 86 mã giao dịch được**, riêng
+D1 là **75 mã**). Câu hỏi tự nhiên: vũ trụ giao dịch được rộng gấp đôi thì bề mặt
+đẻ ra bao nhiêu ứng viên? **Không cái nào.** 13 ứng viên `SẴN_SÀNG_V4`, **11 nằm
+trên `YH_NASDAQ`**, 1 `YH_TSX`, 1 `EURILS` — cả ba đều `do_tin = KHAI`.
 
-## Viec tiep theo, theo thu tu
+Nên phiên chiều làm mục 2 với giả thuyết: tín hiệu không vô giá trị, ta đang đo
+chúng ở **sai chân trời**. 447/540 cơ chế không có `ra`, và 218 trong số đó có
+`giu = 1` — số mặc định của `sinh_tu_spec`, không ai chọn nó cả; bản gốc *không
+thể* nói gì về lối ra vì 190/389 file là chỉ báo, chúng vẽ mũi tên chứ không đặt
+lệnh.
 
-Chu du an chot thu tu nay cuoi phien 05/09, sau khi doc ket luan "boc tach het
-la nut that":
+`quet_loi_ra.py` — **2.434 biến thể × 75 tài sản = 182.550 ô, 33 phút**:
+chân trời **có** quan trọng (tỷ lệ `NÊN_GỘP` đi từ **15,1% ở giữ 1 nến lên 29,0%
+ở giữ 10 nến**, 208/447 cơ chế sống thêm ở chân trời khác) — **nhưng
+`SẴN_SÀNG_V4` = 0 trên cả 182.550 ô.** Đổi lối ra chuyển cơ chế từ LOẠI sang "có
+cơ chế nhưng thiếu lực", không chuyển được cái nào thành ứng viên.
 
-1. **CHAY EA DO CHI PHI TRUOC** (uu tien cao nhat). Ly do chu du an dua ra: EA
-   la thu **da duoc chuan hoa**, thay tham so duoc, chay da cap duoc, va la thu
-   duy nhat chay tren TICK THAT. `nhan/tien_ich_xet.py` da loc ra tu 58 file
-   tien ich: `RealCostSpreadP95LoggerMT5.mq5` (ghi spread that ra file),
-   `RoundTripCostReconcilerMT5.mq5` (xuat CSV doi chieu chi phi),
-   `spread_lister_current-min-max.mq5`. Muc tieu: nang `do_tin` KHAI -> DO cho
-   them symbol. **Day la thu mo khoa cong**; khong co no thi moi thu sau deu
-   dung o "canh bac co ky vong duong", chua phai phat hien.
+Hiệu chuẩn bộ đo trước khi tin số 0: chạy chính nó lên ba ô mà bề mặt ĐÃ tìm ra
+ứng viên → tái tạo đúng cả ba. **Số 0 là phép đo thật, không phải cổng hỏng.**
 
-2. **Boc loi ra chuan cho 34 chi bao MUI TEN** roi quet. Mui ten la tin hieu
-   vao nhung khong co loi ra. Boc bang: giu N nen (1/3/5/10/20) · SL/TP theo ATR
-   (1x/2x/3x) · thoat khi co mui ten nguoc. Mot tin hieu -> mot ho nho chien
-   luoc, va biet duoc tin hieu do CAN loi ra nao. Dung lai co che `giu` da co.
-   **Bay rieng cua lop nay: REPAINT** - chi bao ve lai mui ten trong qua khu se
-   thanh nhin truoc va de ra edge gia rat dep. `kiem_khong_nhin_truoc` la cong
-   quan trong nhat cua lan nay, khong phai thu tuc.
+=> **Nút thắt vẫn là MDE**, đúng như bộ nhớ đã ghi. Ba lý do trượt áp đảo đều về
+LỰC: `thiếu_lệnh_để_kết_luận` 39.050 ô · `kích_hoạt_quá_thấp` 30.462 ·
+`tần_suất_quá_thấp` 17.486.
 
-3. **Sinh ho gia thuyet chuan cho chi bao THUONG** (34 file kenh/band + con lai).
-   Mot chi bao la mot CON SO, chua phai chien luoc. Moi chi bao sinh: vuot nguong
-   tuyet doi · cat mot muc · cat trung binh cua chinh no · **phan vi / z-score
-   cua chinh no** (quan trong nhat: chay duoc tren moi tai san, con nguong tuyet
-   doi thi khong - bai hoc `close >= 4428.1`) · dung lam BO LOC CHE DO cho tin
-   hieu khac. Ngu phap da co `zscore`/`phan_vi`, va `luoi_goc` giu dai tham so
-   cua chinh tac gia nen khong phai bia luoi.
+**Ba lỗ hổng cấu trúc lộ ra trên đường đi, cùng một họ bệnh — hạ tầng đã có mà
+không ai nối dây:**
 
-4. **Xay nguyen thuy `vung` cho FVG / order block / ORB** (dat nhat, mo khoa
-   nhieu nhat). Kho dang giu **14 dinh nghia FVG doc lap, 19 order block, 23 cau
-   truc/BOS, 13 thanh khoan, 6 ORB** - chua ai so chung voi nhau bao gio. Y cua
-   chu du an: tach **DINH NGHIA VUNG** khoi **CACH GIAO DICH VUNG**, giu wrapper
-   co dinh roi thay 14 dinh nghia FVG vao -> biet dinh nghia nao chat luong hon.
-   Do la ghep he thong that, khong phai nhoi tin hieu.
-   Ngu phap hien chi noi duoc so sanh THEO TUNG NEN; mot vung thi CO TRANG THAI:
-   `{tao: [dieu kien i-2..i], dinh/day: bieu thuc, huy: dieu kien, song: N nen}`
-   + tin hieu `gia cham vung` / `gia bat khoi vung`. **Mot nguyen thuy nay mo
-   khoa ca 5 ho (~75 file) dang nam chet.**
+1. **Đường LLM của The Brain đã tắt lặng lẽ.** `cc_switch_provider = "aibox goi
+   moi"` không còn khớp provider nào (tên thật `AiBox qua cau noi`). Mọi lời gọi
+   trả `"thiếu OPENAI_API_KEY"`, và `hoi_json` trả `{"loi":...}` chứ không ném —
+   nên một mẻ bóc chạy 2 giây và báo "0 cơ chế", **đọc y hệt kết quả âm thật**.
+   Sửa: khớp bằng `"aibox"`.
+2. **Cổng `kiem_khai_bao` chưa từng áp cho hàng đã ở trong kho: 169/540 không
+   qua nổi** (148 thiếu hẳn trường `co_che`). Chúng vào qua cửa sau và vẫn chạy
+   trên bề mặt. LLM điền được **48**, trả lời `CHUA_BIET_LY_DO` **81** — 81 đó là
+   danh sách chờ **BỎ**, không phải chờ điền nốt. `loc()` nay gọi cổng: bề mặt
+   382 → 334.
+3. **Ba bộ chặn ở mức khai báo**: `gia <phép> hằng ≤ 0` (27 vế, dấu vết bóc
+   hỏng); `_hang_so_gia` đã có từ 05/09 nhưng `loc()` **chưa bao giờ gọi** nên
+   `aapl_call_breakout_above_322_50` vẫn lên bề mặt; và 125 tên chưa chuẩn hoá —
+   trong đó lộ ra **4 cơ chế trùng tên y hệt, bản thứ hai chưa từng chạy lần nào**
+   vì `nap_vao_mau` có `if ten in MAU.MAU: continue`.
 
-**Nguyen tac ghep, chu du an chot:** KHONG ghep tin hieu voi tin hieu (nhan so
-phep thu ma tien khong den tu do). Ghep dung la **tin hieu x lop QUAN TRI**
-(46 spec ho 2) - cho da co so chung minh: entry tinh SAI van cho 92-97%/nam khi
-co lop luoi.
+Phụ phẩm: sau khi chặn ở mức khai báo, `gần_không_bao_giờ_vào` tụt 103 → 46. Không
+phải bớt bệnh, mà vì **lý do từ chối trở nên đúng tên**.
 
-### Vuong mac con lai cua khau boc (chua sua)
+## Việc tiếp theo, theo thứ tự
 
-- **Cong dang loai ~115 co che chi vi MOT chuoi thu.** `them_co_che` tu choi khi
-  kich hoat < 0,2%, nhung no chi thu tren `XM_US100CASH H1`. Tin hieu mui ten
-  von la su kien hiem. Luat "chi loai khi suy bien tren TAT CA tai san" da duoc
-  ap cho `loc_co_che` nhung QUEN ap cho cong vao kho. Sua cho nay co the tra lai
-  mot phan trong 115 cai. **Viec re nhat, lam truoc muc 2.**
-- 97/190 file chi bao la loai VE VAT THE - ngu phap chua noi duoc (xem muc 4).
-- Bo chan "gia so voi hang so tuyet doi" chi bat mot hinh dang;
-  `aapl_call_breakout_above_322_50` van lot vao be mat.
-- `test_hien_phap` DO: 7 module cua phien sang chua co test (`cong_ra_tien`,
-  `da_thoi_dai`, `dau_chan`, `day_chuyen_quantlab`, `ho_so_symbol`,
-  `tin_hieu_mql5`, `tinh_cach`). `test_banker_fred` DO: thieu che do
-  `chinh_sach_tien_te`, chua truy.
-- 14 file chi bao con `CHUA_DO` (may chu tra HTTP 500), chay lai la duoc.
+Thứ tự này thay bản 05/09: mục 2 đã cho kết quả âm, và nó **loại luôn giả thuyết
+đứng sau mục 3 cũ** (chỉ báo thường cũng chỉ là tín hiệu vào ở sai chân trời —
+vừa đo, không phải vậy).
 
-### Duong LLM (moi tu 05/09)
+1. **MDE, không phải cơ chế.** Con số quyết định là 39.050 ô chết vì thiếu lệnh
+   và 30.462 vì kích hoạt quá thấp. Không thêm cơ chế nào sửa được. Hai đường có
+   thật đều đã bị đo và đều gần cạn: **gộp lớp** (05/09: gộp 12 chỉ số chỉ hạ
+   ngưỡng 0,535 → 0,511) và **khung nhỏ hơn** (`mde-va-cong-kha-thi`: H1 TỆ hơn
+   D1 dù nhiều bar gấp 24). Câu hỏi phải trả lời TRƯỚC khi quét tiếp: **còn đường
+   nào hạ MDE mà chưa thử không?** Nếu không, kết luận đúng là *kho cơ chế hiện
+   có không đủ để chứng nhận bất cứ thứ gì ở mức Sharpe 0,3-0,5*, và hướng phải
+   đổi chứ không phải quét thêm.
 
-Khoa goi nap moi nam trong cc-switch profile **"AiBox goi moi (qwen3.7-flash)"**
-(tab Codex). `config/tri_tue.json` tro toi no bang `cc_switch_provider="aibox
-goi moi"`. Model mac dinh `qwen3.7-flash`, tu dong doi sang `qwen3.6-flash` cho
-file tra rong (`doc_chi_bao.MODEL_TANG_1/2`). Gia do duoc: ~160 don vi moi khai
-bao giu duoc - RE NHAT trong 8 model da thu. Profile `DeepSeek` tro
-`api.deepseek.com` KHONG dung duoc (khoa la khoa ai-box, khong phai DeepSeek
-chinh chu).
+2. **81 cơ chế `CHUA_BIET_LY_DO`** — đang nằm trong kho, bị cổng chặn khỏi bề
+   mặt, không mất. Việc đúng là **bỏ**, nhưng đọc 5-10 cái trước: trong đó có
+   `SessionHighSweepBuy`, `OB bullish rectangle created`, `IHSMC zone detected` —
+   họ **vùng**, thứ ngữ pháp chưa nói được. Chúng không có lý do vì bị **dịch
+   sai**, không phải vì vô nghĩa. Danh sách đầy đủ ở `reports/DIEN_CO_CHE.json`.
+
+3. **Nguyên thuỷ `vùng` cho FVG / order block / ORB** — mục 4 của bàn giao 05/09,
+   chưa động tới, nay có thêm bằng chứng ủng hộ: 2.925 ô chết vì
+   `DSL chi_bao='gio'` (cơ chế phiên chạy trên D1), và 5/5 spec bị bộ chặn hiển
+   nhiên mới bắt đều thuộc họ FVG. Kho giữ 14 định nghĩa FVG, 19 order block, 23
+   cấu trúc/BOS — tất cả đang bị dịch thành so sánh từng nến, tức dịch sai.
+
+### Vướng mắc còn lại (chưa sửa)
+
+- **48 câu `co_che` do LLM viết chưa được thẩm định.** Qua được cổng cú pháp, vài
+  câu gần như diễn lại luật bằng từ ngữ về người. Đánh dấu
+  `co_che_nguon = "llm_2026_09_06"` để truy ngược. Cổng `co_che` chỉ chặn được sự
+  **vắng mặt**, không chặn được sự **rỗng**.
+- `reports/LOI_RA_D1.json` dùng tên **TRƯỚC** khi chuẩn hoá — đối chiếu phải đi
+  qua `chuan_hoa_ten`. Bản kho cũ ở `config/co_che_dsl.truoc_sua_ten.json`.
+- Cổng `kiem_khai_bao` mới chỉ áp ở `loc()`; `nap_vao_mau` vẫn nạp mọi thứ, nên
+  đường nào gọi thẳng `MAU.MAU` vẫn thấy đủ 557.
+- `test_hien_phap` ĐỎ cũ đã hết: 7 module của 05/09 nay đã có test.
 
 ## KHONG DUOC QUEN (bo sung 03/09)
 - `b mang` TRUOC khi san bat cu thu gi.
