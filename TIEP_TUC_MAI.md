@@ -154,26 +154,30 @@ cũng là cách một bot thật phải chạy, không phải mẹo của tester
 
 ## Việc tiếp theo, theo thứ tự
 
-Phiên tối đã làm xong cả ba việc đặt ra trước đó: mốc mua-giữ vào chính EA · bộ
-dịch nói được `vùng` (393/408) · quét đầy đủ thay thuật di truyền. Còn lại **hai
-cơ chế** qua được cả hai cổng, và cả hai đều đáng ngờ theo cùng một cách.
+Ba bài hạ bệ đã chạy xong. `pine_ichimoku_...ema144` bị loại (placebo rớt 3/4
+chỉ số). Còn **đúng một hệ**: `mean_reversion_z5`, đã qua bốn cổng trên tick
+thật. Việc bây giờ là *dùng nó* và *vá lỗ hổng của chính nó*.
 
-1. **PLACEBO cho `mean_reversion_z5` và `pine_ichimoku_cloud_...ema144`.** Cả hai
-   có train ≈ 0 và holdout mạnh — hình dạng của một giai đoạn, không phải của
-   một cơ chế. Phép thử đúng: hoán vị **khối vị thế** (không hoán vị lãi/lỗ —
-   lỗi 29/07), giữ nguyên phơi nhiễm. Chạy được ngay trên tester bằng cách thêm
-   một "cơ chế" sinh tín hiệu hoán vị vào EA, cùng một lượt optimization.
+1. **TRUY VÌ SAO 2012–2015 KHÔNG CÓ LỆNH NÀO.** Đây là việc số một vì nó có thể
+   làm hỏng con số train. Luật `zscore(close,5) < −1` lẽ ra kích hoạt ~19% số
+   nến ở mọi giai đoạn, nhưng 2011–2015 chỉ ~7 lệnh còn 2016–2019 có 91. Cách
+   kiểm: đếm bar D1 của `US100Cash` theo năm trong terminal XM, và xem
+   `SYMBOL_TRADE_MODE` giai đoạn đó. Nếu lịch sử thưa thật thì **cửa sổ train
+   phải khai lại là 2016–2020**, và mọi kết luận "train +0,15" viết lại theo đó.
 
-2. **Đa tài sản cho đúng hai cái đó**, quét đầy đủ (lượt đa tài sản hôm nay chạy
-   bằng thuật di truyền nên bảng của nó **không dùng được**). US500/US30/GER40 +
-   vàng. Một cơ chế sống trên một mã là một con số ngẫu nhiên.
+2. **Đo %/năm thật ở đòn bẩy thật.** Mọi số hiện có chạy ở lot 0,10 cố định trên
+   vốn 10.000 — đòn bẩy ~0,03x, nên `lãi 1.341 USD` không nói gì về lợi suất.
+   Cần: quét lot để tìm mức sụt giảm chấp nhận được, rồi ra bảng
+   `%/năm · sụt giảm · vốn cần · số lệnh/năm` theo đúng sáu con số của
+   `cham_diem`. Nhớ `don-bay-gop-log-sai` và trần `0,5*S²`.
 
-3. **Chia nhỏ holdout theo năm.** 2020-2026 gồm cả 2022; nếu lãi dồn hết vào một
-   hai năm thì đó lại là "mẫu của một thời kỳ" ở quy mô nhỏ hơn. Đây là bài mà
-   dự án đã dùng để hạ bệ bot Session V3 (93% lãi nằm ở 2024+).
+3. **Chạy demo.** Hệ vào/ra một lần mỗi ngày ở nến H1 đầu tiên mở phiên, tức
+   phải có bot chạy liên tục — giống V6. EA đã có sẵn (`ea_MeanRevZ5.mq5`), chỉ
+   cần gắn vào tài khoản demo XM và đối chiếu lệnh thật với bảng tester sau
+   2 tuần.
 
-**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python để tìm ứng viên, và
-đừng tin bảng nào chạy bằng `Optimization=2`.
+**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python; và đừng tin bảng nào
+chạy bằng `Optimization=2` (thuật di truyền bỏ sót cơ chế).
 
 ### Vướng mắc còn lại (chưa sửa)
 
