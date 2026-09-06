@@ -4,16 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-**Cai lam moi thu lo ra**: mot muc tieu CO CON SO GAN VAO. 890 test dang xanh
-trong luc `don_bay` sai 31.700 lan — khong loi nao hom nay la loi test bat
-duoc, vi ca 15 loi deu thuoc loai *ham chay dung, bao so binh thuong, va khong
-sinh ra gi*.
-
-**Bai hoc lon nhat, ghi lai vi toi mac 4 lan trong mot phien**: DUNG CHAN DOAN
-NUT THAT, HAY DO TUNG CHANG. Toi doan la toc do (sai — `doc_ma` chay 452 ban
-duoi 1 giay), doan la nguon it (sai — kho co san 1.007 bai ve ICT), doan la
-TradingView chan JS (sai — hang A da doc 182/182), doan la 285 file Pine bi
-rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 => `b pheu` bay gio la mot LENH, khong phai doan script go lai moi lan.
 
 ## VIEC NGAY MAI (chu du an giao)
@@ -404,3 +394,13 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - `tester_kho.log`: UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM
 - `tester_z5.log`: -> reports/TESTER_Z5.json
 - git: 4d5d3d0 ban giao: con hai he qua ca hai cong; viec mai la placebo + da tai san + chia nam
+### 2026-09-06 21:08:39 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8016, 0 phut)
+- `placebo.log`: DAT (ban that noi len khoi dam dich)
+- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
+- `so_mua_giu.log`: THANG mua-giu o cung sut giam: 43/268
+- `tester_da_ma.log`: -> reports/TESTER_DA_MA.json
+- `tester_holdout.log`: duong o CA HAI doan: 13/225
+- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
+- git: 1870af1 ban giao: con MOT he qua het 4 cong; viec 1 la truy vi sao 2012-2015 khong co lenh

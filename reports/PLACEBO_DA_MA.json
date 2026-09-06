@@ -2,85 +2,85 @@
  "US500Cash": {
   "mean_reversion_z5": {
    "that": {
-    "lenh": 198,
-    "lai": 291.75,
-    "sharpe": 1.431918,
-    "dd_pct": 0.7144
+    "lenh": 169,
+    "lai": 227.29,
+    "sharpe": 1.248021,
+    "dd_pct": 0.719
    },
    "so_dich": 101,
-   "dich_trung_vi": 22.71,
-   "dich_tot_nhat": 278.35,
+   "dich_trung_vi": 7.3,
+   "dich_tot_nhat": 216.78,
    "so_dich_hon_that": 0,
    "p": 0.0098
   },
-  "pine_ichimoku_cloud_close_duoi_ema144_close": {
+  "pine_ichimoku_cloud_close_duoi_ema377_close": {
    "that": {
-    "lenh": 166,
-    "lai": -128.43,
-    "sharpe": -1.252973,
-    "dd_pct": 1.655
+    "lenh": 116,
+    "lai": 1.69,
+    "sharpe": 0.02578,
+    "dd_pct": 0.888
    },
    "so_dich": 101,
-   "dich_trung_vi": 31.98,
-   "dich_tot_nhat": 228.38,
-   "so_dich_hon_that": 101,
-   "p": 1.0
+   "dich_trung_vi": 8.61,
+   "dich_tot_nhat": 61.81,
+   "so_dich_hon_that": 61,
+   "p": 0.6078
   }
  },
  "US30Cash": {
   "mean_reversion_z5": {
    "that": {
-    "lenh": 202,
-    "lai": 1496.29,
-    "sharpe": 0.983339,
-    "dd_pct": 6.3955
+    "lenh": 166,
+    "lai": 958.12,
+    "sharpe": 0.699302,
+    "dd_pct": 6.7356
    },
    "so_dich": 101,
-   "dich_trung_vi": 129.53,
-   "dich_tot_nhat": 1866.65,
-   "so_dich_hon_that": 1,
-   "p": 0.0196
+   "dich_trung_vi": 0.31,
+   "dich_tot_nhat": 1251.15,
+   "so_dich_hon_that": 3,
+   "p": 0.0392
   },
-  "pine_ichimoku_cloud_close_duoi_ema144_close": {
+  "pine_ichimoku_cloud_close_duoi_ema377_close": {
    "that": {
-    "lenh": 179,
-    "lai": -191.9,
-    "sharpe": -0.2609,
-    "dd_pct": 8.7794
+    "lenh": 97,
+    "lai": 673.27,
+    "sharpe": 1.430737,
+    "dd_pct": 3.459
    },
    "so_dich": 101,
-   "dich_trung_vi": 215.86,
-   "dich_tot_nhat": 1325.92,
-   "so_dich_hon_that": 85,
-   "p": 0.8431
+   "dich_trung_vi": -40.34,
+   "dich_tot_nhat": 408.01,
+   "so_dich_hon_that": 0,
+   "p": 0.0098
   }
  },
  "GER40Cash": {
   "mean_reversion_z5": {
    "that": {
-    "lenh": 198,
-    "lai": 799.91,
-    "sharpe": 0.926879,
-    "dd_pct": 4.2259
+    "lenh": 165,
+    "lai": 464.76,
+    "sharpe": 0.592098,
+    "dd_pct": 4.366
    },
    "so_dich": 101,
-   "dich_trung_vi": 90.13,
-   "dich_tot_nhat": 954.47,
-   "so_dich_hon_that": 3,
-   "p": 0.0392
+   "dich_trung_vi": 53.62,
+   "dich_tot_nhat": 910.35,
+   "so_dich_hon_that": 11,
+   "p": 0.1176
   },
-  "pine_ichimoku_cloud_close_duoi_ema144_close": {
+  "pine_ichimoku_cloud_close_duoi_ema377_close": {
    "that": {
-    "lenh": 178,
-    "lai": 188.64,
-    "sharpe": 0.400179,
-    "dd_pct": 5.6691
+    "lenh": 107,
+    "lai": -175.96,
+    "sharpe": -0.68908,
+    "dd_pct": 4.5449
    },
    "so_dich": 101,
-   "dich_trung_vi": 73.58,
-   "dich_tot_nhat": 469.75,
-   "so_dich_hon_that": 19,
-   "p": 0.1961
+   "dich_trung_vi": -1.48,
+   "dich_tot_nhat": 287.93,
+   "so_dich_hon_that": 89,
+   "p": 0.8824
   }
  }
 }

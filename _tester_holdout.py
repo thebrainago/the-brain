@@ -16,11 +16,22 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import chay_tester_kho as C     # noqa: E402
 
 MA = sys.argv[1] if len(sys.argv) > 1 else "US100Cash"
-CAT = "2020.05.01"        # ~60% cua 2011-09..2026-07
+
+#: CUA SO THAT, khong phai cua so khai bao.
+#:
+#: Do 06/09/2026: `US100Cash` co D1 tu 2011 (3.997 bar, day du tung nam) NHUNG
+#: tester chi sinh duoc **61.170 bar H1** ~ tu 2016. EA chay tren H1 (nen khung
+#: tin hieu mo luc 00:00 nam ngoai phien), nen truoc 2016 khong co tick nao va
+#: he **khong vao mot lenh nao** - 2011-2015 chi ~7 lenh trong khi 2016-2019 co
+#: 91. Cua so "train 2011-2020" that ra la 2016-2020.
+#:
+#: Khai dung thi phai cat GIUA phan co du lieu that.
+DAU = "2016.06.01"
+CAT = "2021.06.01"        # ~50% cua 2016-06..2026-07
+CUOI = "2026.07.29"
 
 ra = {}
-for ten, tu, den in (("train", "2011.01.01", CAT),
-                     ("holdout", CAT, "2026.07.29")):
+for ten, tu, den in (("train", DAU, CAT), ("holdout", CAT, CUOI)):
     print("\n===", ten, tu, "->", den, flush=True)
     r = C.chay(MA, "D1", tu=tu, den=den)
     if r.get("loi"):
@@ -37,11 +48,12 @@ ho = {r["ten"]: r for r in ra.get("holdout", []) if r["lenh"] >= 25}
 chung = sorted(set(tr) & set(ho), key=lambda t: -tr[t]["sharpe"])
 print("\n%d co che co >=25 lenh o CA HAI doan" % len(chung))
 print("%-40s %8s %8s %7s %7s" % ("co che", "sh_train", "sh_hold", "lenh_tr", "lenh_ho"))
-giu = 0
+# DEM tren TOAN BO, in 30 dong dau. Truoc do bien dem nam TRONG vong lap in nen
+# no dem 15/242 trong khi that ra la 40 - mot con so bao cao sai vi cho dat cua
+# no, khong phai vi phep tinh.
+giu = sum(1 for t in chung if tr[t]["sharpe"] > 0 and ho[t]["sharpe"] > 0)
 for t in chung[:30]:
     a, b = tr[t], ho[t]
-    if a["sharpe"] > 0 and b["sharpe"] > 0:
-        giu += 1
     print("%-40s %8.2f %8.2f %7d %7d"
           % (t[:40], a["sharpe"], b["sharpe"], a["lenh"], b["lenh"]))
 print("\nduong o CA HAI doan: %d/%d" % (giu, len(chung)))

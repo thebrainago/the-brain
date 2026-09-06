@@ -43,14 +43,14 @@ from nhan import ngu_phap as NP  # noqa: E402
 
 LAB = Path(__file__).resolve().parent
 
-HE = ["mean_reversion_z5", "pine_ichimoku_cloud_close_duoi_ema144_close"]
+HE = ["mean_reversion_z5", "pine_ichimoku_cloud_close_duoi_ema377_close"]
 
 #: Do dich (so nen). Chon so NGUYEN TO va rai deu de khong cong huong voi chu ky
 #: nao cua chinh co che (5, 14, 20, 144, 200 la cac chu ky dang co mat).
 #: 100 do dich -> p san = 1/101 = 0,0099. Voi 20 ban thi p nho nhat co the dat
 #: la 1/21 = 0,0476 - dung bang nguong, tuc bo do het luc ngay tai cho quan
 #: trong nhat [[hinh-dang-phai-hieu-chuan-bang-null]].
-DICH = tuple(range(3, 405, 4))
+DICH = tuple(range(3, 405, 4))   # 101 ban -> p san 1/102 = 0,0098
 
 
 def chay(symbol: str, tu: str, den: str) -> dict:
