@@ -154,30 +154,26 @@ cũng là cách một bot thật phải chạy, không phải mẹo của tester
 
 ## Việc tiếp theo, theo thứ tự
 
-Thứ tự này viết lại hoàn toàn sau phiên tối: **tester đã thành cổng chính**, và
-nó phán xử khác hẳn Python. Ba việc dưới đây đều là việc trên tester.
+Phiên tối đã làm xong cả ba việc đặt ra trước đó: mốc mua-giữ vào chính EA · bộ
+dịch nói được `vùng` (393/408) · quét đầy đủ thay thuật di truyền. Còn lại **hai
+cơ chế** qua được cả hai cổng, và cả hai đều đáng ngờ theo cùng một cách.
 
-1. **So `mean_reversion_z5` với MUA-GIỮ ở CÙNG SỤT GIẢM, trên chính đoạn
-   holdout.** Đây là việc bắt buộc trước khi gọi nó là phát hiện. US100
-   2020–2026 là đoạn mua-giữ rất mạnh; Sharpe holdout 1,43 với DD 3,28% ở lot
-   0,10 nghĩa là phơi nhiễm rất thấp — phải nâng đòn bẩy đến **cùng mức sụt
-   giảm** rồi mới so. Cách làm: thêm một "cơ chế" mua-giữ vào EA sinh tự động
-   (luôn vào lệnh) để nó chạy chung một lượt optimization, cùng chi phí, cùng
-   thực thi. Chưa so thì chưa có gì.
+1. **PLACEBO cho `mean_reversion_z5` và `pine_ichimoku_cloud_...ema144`.** Cả hai
+   có train ≈ 0 và holdout mạnh — hình dạng của một giai đoạn, không phải của
+   một cơ chế. Phép thử đúng: hoán vị **khối vị thế** (không hoán vị lãi/lỗ —
+   lỗi 29/07), giữ nguyên phơi nhiễm. Chạy được ngay trên tester bằng cách thêm
+   một "cơ chế" sinh tín hiệu hoán vị vào EA, cùng một lượt optimization.
 
-2. **Đưa nốt `AUDCAD.H4.rsi_dao_chieu.n14` ra tester** — giả thuyết PASS thứ hai
-   trong sổ cái (đăng ký 15/08), vẫn chưa từng chạy. Khung H4 nên `KHUNG_CHAY`
-   phải đổi (H1 vẫn được, tín hiệu lấy từ H4).
+2. **Đa tài sản cho đúng hai cái đó**, quét đầy đủ (lượt đa tài sản hôm nay chạy
+   bằng thuật di truyền nên bảng của nó **không dùng được**). US500/US30/GER40 +
+   vàng. Một cơ chế sống trên một mã là một con số ngẫu nhiên.
 
-3. **Bộ dịch còn thiếu 48/408 cơ chế**, và 33 trong đó là họ `vung` — tức cả họ
-   FVG/order block vừa mở khoá buổi chiều **chưa hề được tester phán xử**. Dịch
-   `vung` sang MQL5 là việc rõ ràng: giữ mảng vùng đang sống, sinh ở nến `tao`,
-   chết theo `huy`. Sau đó là `tuyen_tinh` (7) và các nhóm `*_cua_cac` (4).
+3. **Chia nhỏ holdout theo năm.** 2020-2026 gồm cả 2022; nếu lãi dồn hết vào một
+   hai năm thì đó lại là "mẫu của một thời kỳ" ở quy mô nhỏ hơn. Đây là bài mà
+   dự án đã dùng để hạ bệ bot Session V3 (93% lãi nằm ở 2024+).
 
-**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python để tìm ứng viên. Phiên
-này đo ba đường độc lập và cả ba đều ra 0 ứng viên giao dịch được; rồi tester
-cho thấy ngay cả khi Python xếp hạng cao (`ema_rsi_risk_ea` Sharpe 1,66) thì đó
-có thể là hiện tượng một mã. Python giờ chỉ dùng để **sàng thô cho nhanh**.
+**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python để tìm ứng viên, và
+đừng tin bảng nào chạy bằng `Optimization=2`.
 
 ### Vướng mắc còn lại (chưa sửa)
 
