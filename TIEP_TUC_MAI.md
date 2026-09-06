@@ -154,44 +154,39 @@ cũng là cách một bot thật phải chạy, không phải mẹo của tester
 
 ## Việc tiếp theo, theo thứ tự
 
-0. **TRUY CHO RA CHÊNH LỆCH 463 vs 305 LỆNH.** Trước khi tin bất cứ con số
-   %/năm nào của bản tester, và trước khi so nó với bảng xếp hạng. Giả thuyết:
-   trường hợp **thoát rồi vào lại trong cùng một ngày** — Python cho phép (điều
-   kiện `ra` rồi `vao` ở bar kế tiếp), còn EA chỉ đánh giá một lần mỗi khi nến
-   D1 đổi nên mất các lần đó. Cách kiểm: xuất danh sách deal từ tester, so từng
-   ngày với chuỗi tín hiệu Python. Nếu đúng là vậy thì **Python đang đếm thừa**,
-   và mọi con số "số lệnh" của bề mặt đều phải xem lại.
+Thứ tự này viết lại hoàn toàn sau phiên tối: **tester đã thành cổng chính**, và
+nó phán xử khác hẳn Python. Ba việc dưới đây đều là việc trên tester.
 
-   Sau đó: đưa nốt `AUDCAD.H4.rsi_dao_chieu.n14` ra tester (giả thuyết PASS thứ
-   hai, đăng ký 15/08, cũng chưa từng chạy).
+1. **So `mean_reversion_z5` với MUA-GIỮ ở CÙNG SỤT GIẢM, trên chính đoạn
+   holdout.** Đây là việc bắt buộc trước khi gọi nó là phát hiện. US100
+   2020–2026 là đoạn mua-giữ rất mạnh; Sharpe holdout 1,43 với DD 3,28% ở lot
+   0,10 nghĩa là phơi nhiễm rất thấp — phải nâng đòn bẩy đến **cùng mức sụt
+   giảm** rồi mới so. Cách làm: thêm một "cơ chế" mua-giữ vào EA sinh tự động
+   (luôn vào lệnh) để nó chạy chung một lượt optimization, cùng chi phí, cùng
+   thực thi. Chưa so thì chưa có gì.
 
-1. **MDE — và lần này là câu hỏi ĐÓNG, không phải việc quét.** Ba đường độc lập
-   trong một ngày (mở vũ trụ 44→86 · sửa lối ra 182.550 ô · mở khoá họ vùng)
-   đều dừng ở `SẴN_SÀNG_V4 = 0` trên tài sản đo được, và đều chết vì **thiếu
-   lực** chứ không vì thiếu edge. Trước khi quét thêm bất cứ thứ gì, phải trả
-   lời: **còn đường nào hạ MDE mà chưa thử không?** Hai đường đã đo đều gần cạn
-   (gộp lớp 0,535 → 0,511; H1 tệ hơn D1 dù nhiều bar gấp 24). Nếu không còn,
-   kết luận đúng là *kho cơ chế hiện có không đủ để chứng nhận gì ở mức Sharpe
-   0,3-0,5*, và **hướng phải đổi** — không phải quét thêm.
-   Ứng cử viên cụ thể chưa thử: **gộp theo HỌ VÙNG** (33 cơ chế cùng một cấu
-   trúc kinh tế, Sharpe 0,43-0,58 trên 6 chỉ số giao dịch được — đây là hình
-   dạng mà `gop_lop.mde_gop` sinh ra để xử lý, và nó chưa từng được chạy trên
-   một họ đồng nhất như vậy).
+2. **Đưa nốt `AUDCAD.H4.rsi_dao_chieu.n14` ra tester** — giả thuyết PASS thứ hai
+   trong sổ cái (đăng ký 15/08), vẫn chưa từng chạy. Khung H4 nên `KHUNG_CHAY`
+   phải đổi (H1 vẫn được, tín hiệu lấy từ H4).
 
-2. **166 cơ chế trượt cổng: BỎ, đừng điền.** Phiên chiều đã chứng minh không
-   điền được bằng máy. Trong 81 cái `CHUA_BIET_LY_DO` có `SessionHighSweepBuy`,
-   `OB bullish rectangle created`, `IHSMC zone detected` — họ **vùng**, và nay
-   ngữ pháp đã nói được. Việc đúng: **chạy `_boc_lai_vung.py` mở rộng bộ lọc
-   `RX_VUNG`** để bóc lại chính chúng, rồi bỏ phần còn lại.
-   Danh sách ở `reports/DIEN_CO_CHE.json` + `reports/THAM_DINH_CO_CHE.json`.
+3. **Bộ dịch còn thiếu 48/408 cơ chế**, và 33 trong đó là họ `vung` — tức cả họ
+   FVG/order block vừa mở khoá buổi chiều **chưa hề được tester phán xử**. Dịch
+   `vung` sang MQL5 là việc rõ ràng: giữ mảng vùng đang sống, sinh ở nến `tao`,
+   chết theo `huy`. Sau đó là `tuyen_tinh` (7) và các nhóm `*_cua_cac` (4).
 
-3. **Nguyên thuỷ vùng mới chỉ dùng cho FVG/order block.** Ba họ còn lại chưa
-   bóc lại: **cấu trúc/BOS** (23 file), **thanh khoản** (13), **ORB** (6).
-   `RX_VUNG` hiện đã bắt chúng nhưng `vung_tin_hieu` khoanh trượt 4/55 file. Và
-   `quan_he` chưa có "vùng bị PHÁ" (BOS = giá đóng cửa vượt hẳn qua vùng rồi
-   KHÔNG quay lại) — `xuyen_len`/`xuyen_xuong` gần nhưng chưa đủ.
+**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python để tìm ứng viên. Phiên
+này đo ba đường độc lập và cả ba đều ra 0 ứng viên giao dịch được; rồi tester
+cho thấy ngay cả khi Python xếp hạng cao (`ema_rsi_risk_ea` Sharpe 1,66) thì đó
+có thể là hiện tượng một mã. Python giờ chỉ dùng để **sàng thô cho nhanh**.
 
 ### Vướng mắc còn lại (chưa sửa)
+
+- **Chênh lệch Python 463 lệnh vs tester 305 lệnh** vẫn chưa truy. Nhưng sau
+  phiên tối nó tụt ưu tiên: nếu tester là trọng tài thì con số của Python sai
+  bao nhiêu cũng chỉ ảnh hưởng khâu sàng thô.
+- Bộ đo `Sharpe` của MT5 tester **không cùng định nghĩa** với Sharpe năm hoá của
+  Python — dùng để XẾP HẠNG thì được, đừng so trực tiếp hai con số.
+- `GOLD` trượt khỏi lượt quét đa tài sản (tên symbol) — chưa kiểm.
 
 - **Bộ thẩm định `co_che` không ổn định giữa hai lượt.** Cùng dữ liệu, đổi phán
   xử. Nếu còn dùng nó thì phải chạy **nhiều lượt và lấy đa số**, hoặc chấp nhận
