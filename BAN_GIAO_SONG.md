@@ -4,17 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-=> `b pheu` bay gio la mot LENH, khong phai doan script go lai moi lan.
-
-## VIEC NGAY MAI (chu du an giao)
-
-**1. Lam not CAC NGUON DAU VAO con lai.**
-   Da xong: MQL5 (358 file .mq5, qua WARP), GitHub (302 -> 1.170 repo, da sua
-   truy van de vao duoc DUOI DAI thay vi 20 framework noi tieng), TradingView
-   (182/182 hang A da doc — da can voi tu khoa hien co).
-   Con lai, theo thu tu dang lam truoc:
-     - `quantconnect` + `lean_algo`: dang tra 0, chua ro vi sao. Do truoc.
-     - `fxblue`, `myfxbook`: memory ghi can Chrome CDP / bi loc SNI. Nay da co
        `dns_vuot` + WARP — thu lai.
      - `etoro`, `semantic`, `blog`: ba nguon `CHAY_SACH_MA_RONG` van chua ro
        nuot o dau (muc ton tu 01/09).
@@ -404,3 +393,14 @@
 - `tester_holdout.log`: duong o CA HAI doan: 13/225
 - `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
 - git: 1870af1 ban giao: con MOT he qua het 4 cong; viec 1 la truy vi sao 2012-2015 khong co lenh
+### 2026-09-06 21:43:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19960, 0 phut)
+- `placebo.log`: DAT (ban that noi len khoi dam dich)
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `tester_holdout.log`: duong o CA HAI doan: 13/225
+- `tester_holdout2.log`: duong o CA HAI doan: 15/242
+- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
+- git: 4e33134 ban giao: con MOT he sau placebo; viec 1 la do %/nam that o don bay that
