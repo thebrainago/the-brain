@@ -154,32 +154,33 @@ cũng là cách một bot thật phải chạy, không phải mẹo của tester
 
 ## Việc tiếp theo, theo thứ tự
 
-Đã có **%/năm thật**: ở sụt giảm 20%, hệ z5 cho **9,00%/năm** so với 1,59% của
-mua-giữ CFD cùng mức sụt giảm (×5,7). Mua-giữ cháy tài khoản từ lot 2,1 trong
-khi hệ ở lot 2,0 vẫn chỉ sụt 27,7%.
+Ba mục dưới đây là **chủ dự án chốt cuối phiên 06/09**, sau khi đọc số đo suất
+bóc và kết quả tester trong ngày.
 
-**Nhưng phần lớn ưu thế đó đến từ KHÔNG GIỮ QUA ĐÊM, không phải từ bắt đáy.**
-`US100Cash` thu 5,807%/năm phí qua đêm; giữ 1 lot 10 năm mất ~17.145 USD trong
-khi chỉ số chỉ tăng ~19.600 điểm. Hệ chỉ nằm trong thị trường ~19% số ngày.
-Đó là lợi thế thật và bán được, nhưng phải gọi đúng tên.
+1. **SEEKER: ưu tiên nguồn CÓ SẴN FILE.** Xếp hạng nguồn theo *có file hay
+   không*, không theo độ dài hay uy tín. Ưu tiên `.mq5` / `.ex5` / `.set` /
+   Pine — có `.ex5` + `.set` là **chạy tester được ngay**, bỏ qua hẳn khâu dễ
+   sai nhất. **Đào sâu vào group, nhất là nhóm Telegram share EA** — khoá và
+   phiên đã có sẵn (`nhan/telegram.py`, `telethon_ban`); nhóm là chỗ file được
+   đính kèm, khác với kênh. Bỏ công: bài phân tích/quan điểm (300 bản → 33 cơ
+   chế, phần lớn chết vòng sau), video không transcript.
 
-1. **DANH MỤC BA CHỈ SỐ MỸ.** z5 đạt placebo trên US100 + US500 + US30 với ~170
-   lệnh mỗi mã. Chạy cả ba trong một EA, đo **tương quan chuỗi vốn**. Nếu tương
-   quan thấp thì đây là cách nâng Sharpe mà không cần đòn bẩy — đúng đường V6 đã
-   đi (danh mục 3 chỉ số Mỹ). Nếu tương quan cao (>0,8) thì gộp không thêm gì và
-   phải nói thẳng.
+2. **BỘ LỌC: sửa ba chỗ.**
+   - **Đưa placebo ĐA TÀI SẢN lên làm cổng tự động.** Hôm nay nó giết 5 cơ chế
+     "mạnh trên US100" (Sharpe 1,66 · 1,47 · 1,25 · 0,99 · 0,84). Sharpe một mã
+     và placebo một mã **đều không đủ**. Giá: ~2,5 phút/symbol cho một lượt gộp
+     bản thật + 101 bản dịch.
+   - **Cổng `co_che` chuyển từ cửa vào sang cửa ra tiền.** Cửa vào chỉ chặn thứ
+     *không kiểm định được*: spec hỏng · kích hoạt 0% · mua-giữ trá hình · trùng
+     điều kiện. Lý do: đo được rằng cổng không phân biệt tốt/xấu — nó chặn 4 cơ
+     chế mà 4 cái đó hoá ra là rác, nhưng chặn vì thiếu một câu văn chứ không
+     vì chất lượng.
+   - **Bỏ hẳn vai phán xử của LLM.** Giữ nó ở khâu dịch. Đo được: nó bác 41/48
+     câu do chính nó viết, và tự mâu thuẫn giữa hai lượt.
 
-2. **ĐỐI CHIẾU VỚI MUA-GIỮ CHỈ SỐ (không phí).** Mốc hiện tại là mua-giữ CFD.
-   Cần biết hệ có thắng cả mốc *không mua được* kia không — nếu không thì câu
-   đúng là *"cách rẻ nhất để cầm US100"*, chứ không phải *"một cơ chế"*. Dùng
-   `nhan/tai_tro.py` + chuỗi chỉ số, đừng dựng lại.
-
-3. **DEMO.** EA đã có (`ea_MeanRevZ5.mq5`, và bản sinh tự động). Gắn vào demo XM,
-   đối chiếu lệnh thật với bảng tester sau 2 tuần. Hệ vào/ra một lần mỗi ngày ở
-   nến H1 đầu tiên mở phiên nên phải chạy liên tục — VPS, giống V6.
-
-**Việc KHÔNG nên làm nữa:** quét thêm bề mặt bằng Python · tin bảng chạy bằng
-`Optimization=2` · khai cửa sổ backtest mà chưa đếm bar của khung EA thật sự chạy.
+3. **Tiếp tục với `mean_reversion_z5`** — hệ duy nhất còn lại: danh mục ba chỉ
+   số Mỹ (đo tương quan chuỗi vốn) · đối chiếu với mua-giữ **chỉ số** (không
+   phí) · chạy demo.
 
 ### Vướng mắc còn lại (chưa sửa)
 
