@@ -19108,7 +19108,7 @@
  {
   "ten": "tai_can_bang_danh_muc_theo_chu_ky_3_thang",
   "co_che": "Chu kỳ điều chỉnh định kỳ giúp nhà đầu tư duy trì tiếp xúc với các cổ phiếu có động lượng mạnh nhất mà không bị mắc kẹt trong các vị thế lỗi thời khi xu hướng thị trường thay đổi.",
-  "ho": "khac",
+  "ho": "lich",
   "giu": 63,
   "vao": [
    {
@@ -19124,7 +19124,8 @@
   "ra": [],
   "chieu": 1,
   "nguon": "https://github.com/KZHANG022-star/HSI300-Momentum-Strategy",
-  "_ty_le_kich_hoat": 0.0126
+  "_ty_le_kich_hoat": 0.0126,
+  "_xep_lai_06_09": "06/09/2026 xep lai tu ho 'khac' sang 'lich': dieu kien vao la `thang cheo_len 3` - tai can bang theo quy, dung la dong tien dinh che theo lich. Ho 'khac' khong co trong pham_vi.PHAM_VI nen co che nay chua tung duoc thu."
  },
  {
   "ten": "ribbon_flip_long",
