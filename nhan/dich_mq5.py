@@ -303,6 +303,100 @@ class BoDich:
             kt.append('   h_atr%d = iATR(_Symbol, KHUNG, %d);' % (i, n))
         return "\n".join(kb), "\n".join(kt)
 
+    # -------------------------------------------------------------------- VUNG
+    #: Tran so vung song cung luc. Cung y nghia `ngu_phap.TRAN_VUNG_SONG`: chan
+    #: an toan cho truong hop `tao` suy bien thanh luon dung.
+    TRAN_VUNG = 64
+
+    #: Quan he -> bieu thuc, voi `a` = bien duoi, `b` = bien tren, `dg` = dong
+    #: cua nen dang xet, `dgt` = dong cua nen truoc.
+    QH_BT = {
+        "cham": "true",
+        "trong": "(dg >= a && dg <= b)",
+        "bat_len": "(dg > b)",
+        "bat_xuong": "(dg < a)",
+        "xuyen_len": "(dg > b && dgt <= b)",
+        "xuyen_xuong": "(dg < a && dgt >= a)",
+    }
+
+    def vung(self, d: dict) -> str:
+        """Mot ve `vung` -> ten ham `bool V<k>(int s)`.
+
+        Dich NGUYEN VAN ngu nghia cua `ngu_phap._vung`, ke ca chi tiet quan
+        trong nhat: **vung song tu nen SAU nen sinh**. Bo qua chi tiet do thi
+        voi hinh hoc FVG nen sinh luon tu cham chinh no, moi vung song dung mot
+        nen, va `song` lan `huy` thanh nut chet - dung cai loi da phai sua trong
+        ban Python [[doi-tham-so-ma-khong-doi-ket-qua]].
+
+        Khac ban Python o MOT diem, va la khac biet BAT BUOC: Python duyet ca
+        chuoi mot lan va mang trang thai theo; MQL5 duoc hoi tai MOT shift. Nen
+        ham nay DUNG LAI cac vung bang cach lui ve qua khu toi da `song` nen roi
+        kiem tung cai. Cung ket qua, chi ton hon.
+        """
+        kb = d.get("vung") or {}
+        qh = str(d.get("quan_he", "cham"))
+        if qh not in self.QH_BT:
+            raise KhongDichDuoc("quan he vung '%s' chua dich duoc" % qh)
+        song = int(kb.get("song", 20) or 20)
+        huy = str(kb.get("huy", "cham"))
+        if huy not in ("cham", "dong_ngoai", "het_han"):
+            raise KhongDichDuoc("cach huy vung '%s' chua dich duoc" % huy)
+
+        tao = self._theo_i(self.dieu_kien(kb.get("tao") or []))
+        tren = self.toan_hang(kb["tren"])
+        duoi = self.toan_hang(kb["duoi"])
+
+        # `huy=cham`: vung chet o LAN CHAM DAU, nen no chi con hieu luc tai `s`
+        # neu khong nen nao GIUA nen sinh va `s` da cham no.
+        if huy == "cham":
+            chan = ("      bool da = false;\n"
+                    "      for(int j = i - 1; j > s && !da; j--)\n"
+                    "         if(iLow(_Symbol,KHUNG,j) <= b && "
+                    "iHigh(_Symbol,KHUNG,j) >= a) da = true;\n"
+                    "      if(da) continue;\n")
+        elif huy == "dong_ngoai":
+            chan = ("      bool da = false;\n"
+                    "      for(int j = i - 1; j > s && !da; j--)\n"
+                    "        {\n"
+                    "         double c = iClose(_Symbol,KHUNG,j);\n"
+                    "         if(c > b || c < a) da = true;\n"
+                    "        }\n"
+                    "      if(da) continue;\n")
+        else:
+            chan = ""
+
+        self._dem += 1
+        ten = "V%d" % self._dem
+        than = [
+            "bool %s(int s)" % ten,
+            "  {",
+            "   double dg  = iClose(_Symbol,KHUNG,s);",
+            "   double dgt = iClose(_Symbol,KHUNG,s+1);",
+            "   int dem = 0;",
+            "   for(int i = s + 1; i <= s + %d; i++)" % song,
+            "     {",
+            "      if(!(%s)) continue;" % tao,
+            "      if(++dem > %d) break;" % self.TRAN_VUNG,
+            "      double x = %s(i), y = %s(i);" % (tren, duoi),
+            "      double a = MathMin(x, y), b = MathMax(x, y);",
+            "      if(!MathIsValidNumber(a) || !MathIsValidNumber(b)) continue;",
+            "      if(!(iLow(_Symbol,KHUNG,s) <= b && "
+            "iHigh(_Symbol,KHUNG,s) >= a)) continue;",
+            chan.rstrip("\n"),
+            "      if(%s) return(true);" % self.QH_BT[qh],
+            "     }",
+            "   return(false);",
+            "  }",
+            "",
+        ]
+        self.ham.append("\n".join(x for x in than if x != ""))
+        return ten
+
+    @staticmethod
+    def _theo_i(bt: str) -> str:
+        """`dieu_kien` sinh bieu thuc theo shift `s`; `tao` can no theo `i`."""
+        return bt.replace("(s+1)", "(i+1)").replace("(s)", "(i)")
+
     # ---------------------------------------------------------------- dieu kien
     def dieu_kien(self, ds: list) -> str:
         """Danh sach dieu kien (VA voi nhau) -> bieu thuc bool tai shift `s`."""
@@ -310,8 +404,11 @@ class BoDich:
             return "false"
         ve = []
         for d in ds:
-            if not isinstance(d, dict) or "vung" in d:
-                raise KhongDichDuoc("ve 'vung' chua dich duoc")
+            if isinstance(d, dict) and "vung" in d:
+                ve.append("%s(s)" % self.vung(d))
+                continue
+            if not isinstance(d, dict):
+                raise KhongDichDuoc("ve khong phai dict")
             a = self.toan_hang(d["trai"])
             b = self.toan_hang(d["phai"])
             p = d.get("phep", ">")
@@ -462,8 +559,26 @@ void OnTick()
 """
 
 
-def sinh_ea(cac_spec: list[dict], ten: str = "KhoCoChe",
-            khung: str = "D1") -> tuple[str, list[dict]]:
+#: Co che MUA-GIU, chen vao chinh EA sinh ra.
+#:
+#: VI SAO PHAI NAM TRONG CUNG MOT EA chu khong tinh rieng: moc so sanh chi co
+#: nghia neu no di qua **dung mot bo thuc thi** - cung spread, cung phi qua dem,
+#: cung gio khop, cung lot, cung lich phien. Mot con so mua-giu lay tu chuoi gia
+#: (hoac tu Python) la mot moc KHAC [[v6-doi-chieu-dung-cach]].
+#:
+#: `vao` luon dung (`high >= low`), khong co `ra`, `giu` = 500 -> vao mot lan roi
+#: nam im. Ve nay CO Y hien nhien; no khong di qua `kiem_khai_bao` va khong bao
+#: gio duoc ghi vao kho.
+SPEC_MUA_GIU = {
+    "ten": "__mua_giu__", "ho": "moc", "chieu": 1, "giu": 500,
+    "co_che": "MOC SO SANH - khong phai co che.",
+    "vao": [{"trai": {"chi_bao": "gia", "cot": "high"}, "phep": ">=",
+             "phai": {"chi_bao": "gia", "cot": "low"}}],
+}
+
+
+def sinh_ea(cac_spec: list[dict], ten: str = "KhoCoChe", khung: str = "D1",
+            them_mua_giu: bool = True) -> tuple[str, list[dict]]:
     """Sinh MOT EA cho nhieu co che. Tra (ma nguon, danh sach da dich duoc).
 
     Co che nao khong dich duoc thi BI BO KHOI EA va duoc ghi ly do - do la mot
@@ -471,6 +586,8 @@ def sinh_ea(cac_spec: list[dict], ten: str = "KhoCoChe",
     """
     bd = BoDich()
     dat, dk_ma, sw_vao, sw_ra, sw_chieu, sw_giu, sw_cora = [], [], [], [], [], [], []
+    if them_mua_giu:
+        cac_spec = [dict(SPEC_MUA_GIU)] + list(cac_spec)
     for c in cac_spec:
         try:
             bt_vao = bd.dieu_kien(c.get("vao") or [])

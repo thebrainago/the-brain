@@ -51,6 +51,16 @@ from nhan import ngu_phap as NP                               # noqa: E402
 LAB = Path(__file__).resolve().parent
 TEN_EA = "KhoCoChe"
 
+#: `Optimization=1` = QUET DAY DU, khong phai `2` = thuat DI TRUYEN.
+#:
+#: Loi tim ra 06/09/2026 sau ba luot chay: bang ket qua chi co **116/361 pass**,
+#: va `mean_reversion_z5` (chi so 160) KHONG CO trong bang - trong khi luot chay
+#: rieng cua no cho 207 lenh. Khong phai co che im lang: thuat di truyen chi lay
+#: MOT PHAN khong gian tham so, va voi mot tham so la "ma co che" thi lay mau
+#: nhu vay la bo sot co che chu khong phai bo sot cau hinh.
+#: Trieu chung de doc nham: "245 co che khong ra pass nao" doc y het "245 co che
+#: khong vao lenh" [[ket-luan-am-phai-phan-biet-chua-do]].
+#:
 #: Chay EA tren H1 con tin hieu lay tu khung khai bao. Nen khung tin hieu mo
 #: luc 00:00 nam NGOAI phien cua CFD chi so; EA giu Y DINH roi khop o nen H1 dau
 #: tien co the giao dich (xem MAU_EA.KhopYDinh).
@@ -118,7 +128,7 @@ Symbol={symbol}
 Period={KHUNG_CHAY}
 Model=2
 ExecutionMode=0
-Optimization=2
+Optimization=1
 OptimizationCriterion=0
 FromDate={tu}
 ToDate={den}

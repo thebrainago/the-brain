@@ -4,16 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `thu_hai_cach.log`: thong ke: {'so_lan': 4, 'so_403': 4, 'ty_le_403': 0.5}
-- `thu_mql5.log`: TONG 0 ma nguon rieng biet
-- git: 46e2ffc thu_thap khong he phan trang - chay 4 vong lien tiep de tai lai dung 60 file cu
-### 2026-09-03 22:54:06 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6444, 0 phut), dieu_khien_xa.py (pid 16352, 738 phut)
-- `cao_mql5.log`: tai lieu mql5: 236 -> 236   ban doc MA NGUON: 28   (2907s)
-- `thu_hai_cach.log`: thong ke: {'so_lan': 4, 'so_403': 4, 'ty_le_403': 0.5}
-- git: 909a491 Chot day chuyen 03/09: noi ca ba luong vao `b`, va noi not mat xich artifact->boc
-### 2026-09-03 22:58:56 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 12136, 0 phut), dieu_khien_xa.py (pid 16352, 743 phut)
 - `cao_mql5.log`: tai lieu mql5: 236 -> 236   ban doc MA NGUON: 28   (2907s)
@@ -404,3 +394,13 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - `tester_z5.log`: -> reports/TESTER_Z5.json
 - `tham_dinh_v2.log`: da go 12 cau khoi kho
 - git: 660c08b ban giao: he da PASS ra tester lan dau + viec 0 la truy chenh lech 463 vs 305 lenh
+### 2026-09-06 19:27:11 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17540, 0 phut)
+- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
+- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
+- `tester_da_ma.log`: -> reports/TESTER_DA_MA.json
+- `tester_holdout.log`: duong o CA HAI doan: 1/27
+- `tester_kho.log`: UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM
+- `tester_z5.log`: -> reports/TESTER_Z5.json
+- git: f2768f9 ban giao: tester la cong chinh; 3 viec deu tren tester, khong quet Python nua
