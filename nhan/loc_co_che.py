@@ -222,8 +222,13 @@ def loc(cac_mau=None, khung: str = "D1", cac_ma=None, in_ra=print) -> dict:
     # choi mang DUNG TEN ("nguong gia tuyet doi") thay vi "suy bien tren moi
     # tai san" - cau sau doc nhu mot phat hien ve thi truong.
     kho_theo_ten = {c.get("ten"): c for c in NP.doc_kho()}
-    tong_ban_dau = len(ten_ds)
-    bo_khai_bao, chi_tiet_gia, chi_tiet_kb = {}, [], []
+    tong_ban_dau = len(ten_ds) + len(NP.BI_TU_CHOI_KHI_NAP)
+    bo_khai_bao, chi_tiet_gia = {}, []
+    # `nap_vao_mau` la CUA, va no da tu choi truoc khi ta nhin thay. Doc lai ban
+    # ghi cua no thay vi chan lan hai: hai danh sach o hai cho som muon se lech.
+    chi_tiet_kb = sorted(NP.BI_TU_CHOI_KHI_NAP.items())
+    for ten, _ly in chi_tiet_kb:
+        bo_khai_bao[ten] = "khong_qua_kiem_khai_bao"
     for ten in list(ten_ds):
         spec = kho_theo_ten.get(ten)
         if spec is None:
@@ -237,22 +242,6 @@ def loc(cac_mau=None, khung: str = "D1", cac_ma=None, in_ra=print) -> dict:
             chi_tiet_gia.append((ten, h))
             ten_ds.remove(ten)
             continue
-        # CONG CUA CHINH HE, AP CHO CA HANG DA VAO KHO.
-        #
-        # Do 06/09: **169/540 muc trong kho khong qua noi `kiem_khai_bao`** -
-        # phan lon thieu han truong `co_che`, cau noi ai la ben doi ung. Chung
-        # vao qua cua sau (duong LLM ghi thang file JSON), va vi `loc()` chua
-        # bao gio goi cong nen ca 169 van chay tren be mat nhu moi co che khac.
-        #
-        # Mot cong chi ap cho hang MOI thi khong phai cong, ma la mot thu tuc
-        # nhap kho. `_dien_co_che.py` da hoi LLM lay ly do cho cai nao co ly
-        # do that; cai nao LLM tra "CHUA_BIET_LY_DO" thi dung ra o day - do la
-        # danh sach cho BO, khong phai danh sach cho dien not.
-        loi_kb = NP.kiem_khai_bao(spec)
-        if loi_kb:
-            bo_khai_bao[ten] = "khong_qua_kiem_khai_bao"
-            chi_tiet_kb.append((ten, loi_kb[0]))
-            ten_ds.remove(ten)
 
     cac_ma = list(cac_ma or SO_MA_DO)
     do, da_do = {}, []

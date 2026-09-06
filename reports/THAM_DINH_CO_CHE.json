@@ -1,0 +1,74 @@
+{
+ "can": 19,
+ "giu": 3,
+ "bac": 12,
+ "chua": 4,
+ "so_goi": 4,
+ "ten_giu": [
+  "mo_box_hoac_nhan_label_theo_khung_gio",
+  "gia_cat_len_sma_lwma",
+  "gia_cat_xuong_sma_lwma"
+ ],
+ "ten_bac": [
+  {
+   "ten": "h1h4_sell_signal",
+   "vi_sao": "Chỉ mô tả hành vi cắt lỗ chung, thiếu ràng buộc cơ chế độc lập với luật.",
+   "cau": "Những người đang nắm giữ vị thế mua dài hạn sẽ bị ép bán khi giá thủng đáy gần nhất trên nhiều khung thời gian, nhằm cắt đứt tổn thất hoặc đáp ứng yêu cầu thanh lý của sàn giao dịch."
+  },
+  {
+   "ten": "breakout_buy_2",
+   "vi_sao": "Lý do áp dụng chung cho mọi tín hiệu, không nêu ràng buộc cơ chế cụ thể.",
+   "cau": "Các nhà làm thị trường và trader bán khống đang mắc kẹt trong vùng tích lũy dài ngày sẽ buộc phải mua lại vị thế khi giá phá vỡ đỉnh 48 phiên, gây ra sóng gom hàng bắt buộc từ phe bán."
+  },
+  {
+   "ten": "breakout_sell_2",
+   "vi_sao": "Chỉ nhắc đến quản trị rủi ro chung, thiếu ràng buộc cơ chế hoặc phe đối kháng.",
+   "cau": "Người nắm giữ vị thế mua lâu dài sẽ bị ép bán tháo khi giá thủng đáy 48 phiên, nhằm cắt lỗ theo quy định quản trị rủi ro hoặc tránh mất vốn do biến động mạnh kéo dài."
+  },
+  {
+   "ten": "breakout_previous_high",
+   "vi_sao": "Mô tả phản ứng cắt lỗ thông thường, không thêm thông tin ràng buộc khách quan nào.",
+   "cau": "Các trader giao dịch nhanh đang đặt lệnh cắt lỗ ngay trên đỉnh trước đó sẽ bị kích hoạt bán, tạo thanh khoản cho phe mua đang đuổi theo đà tăng ngắn hạn."
+  },
+  {
+   "ten": "breakdown_previous_low",
+   "vi_sao": "Chỉ lặp lại mục đích cắt lỗ, thiếu ràng buộc cơ chế hoặc phe đối kháng cụ thể.",
+   "cau": "Nhà đầu tư lướt sóng đang nắm giữ vị thế mua sẽ bị ép bán khi giá thủng đáy liền kề, nhằm thực hiện cắt lỗ kỹ thuật hoặc tuân thủ quy tắc quản lý vốn nghiêm ngặt."
+  },
+  {
+   "ten": "ema_rsi_long",
+   "vi_sao": "Thiếu ràng buộc thực tế, chỉ là cách diễn giải khác của luật.",
+   "cau": "Các nhà đầu cơ bán khống sẽ buộc phải mua lại khi chỉ số sức mạnh tương đối phục hồi vượt ngưỡng 30 kết hợp giá đứng trên đường trung bình động, nhằm cắt giảm rủi ro xu hướng đảo chiều."
+  },
+  {
+   "ten": "ema_rsi_short",
+   "vi_sao": "Không nêu cơ chế ràng buộc cụ thể, chỉ mô tả động lực chung.",
+   "cau": "Nhà quản lý danh mục đang nắm giữ tài sản tăng trưởng sẽ bị ép bán khi giá rớt dưới đường trung bình động và chỉ số RSI xác nhận đà suy yếu, nhằm bảo toàn vốn trước nguy cơ điều chỉnh sâu hơn."
+  },
+  {
+   "ten": "ema_rsi_bear",
+   "vi_sao": "Chỉ lặp lại logic nội tại, thiếu bên đối ứng và ràng buộc.",
+   "cau": "Các hệ thống quản lý rủi ro tự động sẽ kích hoạt lệnh đóng vị thế mua khi đường trung bình động ngắn cắt xuống dài và RSI không đạt trạng thái quá mua, buộc phe mua phải rời thị trường để tránh thua lỗ hệ thống."
+  },
+  {
+   "ten": "bullbreakout",
+   "vi_sao": "Chỉ mô tả dòng lệnh theo tín hiệu, không có ràng buộc ép.",
+   "cau": "Những người đặt lệnh cắt lỗ bán ở mức đỉnh cũ sẽ bị kích hoạt tự động khi giá phá vỡ, buộc họ phải mua lại để đóng vị thế và chịu thua lỗ."
+  },
+  {
+   "ten": "bearbreakout",
+   "vi_sao": "Chỉ phản ánh cơ chế khớp lệnh dừng lỗ, thiếu ràng buộc độc lập.",
+   "cau": "Nhà đầu tư giữ vị thế mua đang bị treo lệnh dừng lỗ dưới đáy gần nhất sẽ bị khớp lệnh tự động, buộc họ phải bán tài sản để cắt giảm rủi ro."
+  },
+  {
+   "ten": "rsi_oversold_rebound_from_wilder_smoothed_rsi",
+   "vi_sao": "Không có quy định bắt buộc mua khi RSI thấp; chỉ là định nghĩa chiến lược.",
+   "cau": "Các quỹ mean-reversion và statistical arb bị quy định phải mua khi chỉ báo quá bán cực đoan để khai thác sai lệch định giá tạm thời, buộc các nhà đầu tư cá nhân dùng đòn bẩy và quỹ trend-following phải bán hoảng loạn vào thanh khoản này để cắt lỗ."
+  },
+  {
+   "ten": "rsi_overbought_reversal_from_wilder_smoothed_rsi",
+   "vi_sao": "Không ràng buộc bên ngoài nào ép contrarian bán khi RSI cao; chỉ là mô tả luật.",
+   "cau": "Các đội ngũ contrarian và quỹ arbitrage biến động phải vào lệnh bán hoặc mua put khi RSI vượt ngưỡng 70 để cân bằng độ lệch phân phối, buộc các quỹ momentum và nhà giao dịch dài hạn phải giảm vị thế theo giới hạn VaR hàng ngày, tạo luồng chuyển thanh khoản cưỡng bức"
+  }
+ ]
+}

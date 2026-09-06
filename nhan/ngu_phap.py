@@ -574,14 +574,151 @@ def _so_sanh(a: pd.Series, phep: str, b: pd.Series) -> pd.Series:
     raise KeyError(f"phep so sanh khong biet: '{phep}'")
 
 
+# ------------------------------------------------------------------- VUNG
+#: Quan he giua gia cua bar hien tai va mot vung con song.
+QUAN_HE_VUNG = {"cham", "bat_len", "bat_xuong", "trong", "xuyen_len",
+                "xuyen_xuong"}
+#: Vung chet khi nao. "cham" = chuan cua FVG/order block (lap day mot lan la
+#: het); "dong_ngoai" = chi chet khi gia DONG CUA ra ngoai; "het_han" = chi
+#: chet khi het `song` bar.
+HUY_VUNG = {"cham", "dong_ngoai", "het_han"}
+#: Tran so vung song cung luc. Khong phai toi uu - la CHAN AN TOAN: mot dieu
+#: kien `tao` suy bien (luon dung) se sinh mot vung moi moi bar, va khong co
+#: tran thi vong lap thanh O(n^2) tren 20.000 bar.
+TRAN_VUNG_SONG = 64
+
+
+def _vung(df: pd.DataFrame, v: dict) -> pd.Series:
+    """Mot VUNG CO TRANG THAI -> chuoi bool "bar nay thoa quan he voi vung".
+
+    ## VI SAO NGU PHAP CAN THU NAY (do tren kho 06/09/2026)
+
+    Kho dang giu **14 dinh nghia FVG doc lap, 19 order block, 23 cau truc/BOS,
+    13 thanh khoan, 6 ORB** - khoang 75 file - va tat ca deu dang bi dich thanh
+    so sanh THEO TUNG NEN, tuc dich SAI. Mot khoang trong gia tao ra o bar i
+    khong phai la mot dieu kien tai bar i: no la mot VAT THE song qua nhieu bar,
+    co bien tren, bien duoi, va chet khi bi lap day. Bo boc khong dien duoc dieu
+    do nen no dien `hang: 0` vao cho nguong, va ca ho tro thanh dieu kien hien
+    nhien [[cong-chua-ap-cho-hang-trong-kho]].
+
+    ## KHAI BAO
+
+        {"vung": {
+            "tao":  [dieu kien ...],      # bar nao SINH ra mot vung
+            "tren": <toan hang>,          # bien tren, tinh TAI BAR SINH
+            "duoi": <toan hang>,          # bien duoi, tinh TAI BAR SINH
+            "song": 20,                   # song toi da bao nhieu bar
+            "huy":  "cham"                # cham | dong_ngoai | het_han
+         },
+         "quan_he": "cham"}               # xem `QUAN_HE_VUNG`
+
+    ## QUY UOC THOI GIAN VAN KHONG THE VI PHAM
+
+    Bien vung tinh tai bar SINH bang chinh `toan_hang`, ma `toan_hang` khong co
+    nhanh nao nhin ve tuong lai. Vung chi duoc dung tu bar sinh tro DI. Nen
+    khong co duong nao de mot gia tri tuong lai chay nguoc vao tin hieu, giong
+    het phan con lai cua ngu phap.
+
+    Diem tinh te: mot FVG chuan dinh nghia bang bar i-2 va i (`low[i] >
+    high[i-2]`), va CA HAI deu biet tai close cua bar i. Viet bang `tre` trong
+    `tao` la du - khong can toan tu moi nao.
+
+    ## QUAN HE
+
+    Goi vung la doan [duoi, tren] (tu dao neu khai nguoc):
+      `cham`        bien do bar phu len vung
+      `trong`       gia dong cua nam trong vung
+      `bat_len`     cham vung roi dong cua TREN vung  (tu choi tu duoi len)
+      `bat_xuong`   cham vung roi dong cua DUOI vung
+      `xuyen_len`   dong cua vuot han len tren sau khi bar truoc con o duoi
+      `xuyen_xuong` nguoc lai
+    """
+    if not isinstance(v, dict):
+        raise TypeError("'vung' phai la dict")
+    kb = v.get("vung") if "vung" in v else v
+    qh = str(v.get("quan_he", "cham"))
+    if qh not in QUAN_HE_VUNG:
+        raise KeyError("quan he vung khong biet: '%s'" % qh)
+
+    tao = _dieu_kien(df, kb.get("tao") or [], mac_dinh=False).to_numpy()
+    tren = toan_hang(df, kb["tren"]).to_numpy(dtype=float)
+    duoi = toan_hang(df, kb["duoi"]).to_numpy(dtype=float)
+    song = int(kb.get("song", 20) or 20)
+    huy = str(kb.get("huy", "cham"))
+    if huy not in HUY_VUNG:
+        raise KeyError("cach huy vung khong biet: '%s'" % huy)
+
+    hi = _cot(df, "high").to_numpy(dtype=float)
+    lo = _cot(df, "low").to_numpy(dtype=float)
+    dong = _cot(df, "close").to_numpy(dtype=float)
+    n = len(df)
+    ra = np.zeros(n, dtype=bool)
+
+    # (bien duoi, bien tren, bar het han). Danh sach NGAN - xem TRAN_VUNG_SONG.
+    song_ds: list = []
+    for i in range(n):
+        # MOT VUNG CHI SONG TU NEN SAU NEN SINH RA NO.
+        #
+        # Do 06/09/2026: ban dau vung duoc xet ngay tai nen sinh, va voi hinh
+        # hoc cua FVG thi no LUON tu cham chinh no o do (bien tren = `low[i]`,
+        # nen `low[i] <= tren` la hien nhien). Hau qua: moi vung song dung mot
+        # nen roi chet, so lan kich hoat bang y so vung duoc tao, va **`song`
+        # lan `huy` khong doi ket qua mot ly nao** - do lai voi song = 20/21/23/28
+        # deu ra dung 20. Tuc hai nut van cua nguyen thuy la nut GIA
+        # [[doi-tham-so-ma-khong-doi-ket-qua]].
+        #
+        # Va quan trong hon: co che that cua ho nay la "gia QUAY LAI lap gap",
+        # khong phai "gap vua xuat hien". Xet tai nen sinh la dien sai chinh cai
+        # minh dinh dien.
+        if tao[i - 1] and i and np.isfinite(tren[i - 1]) and np.isfinite(duoi[i - 1]):
+            a, b = ((duoi[i - 1], tren[i - 1]) if duoi[i - 1] <= tren[i - 1]
+                    else (tren[i - 1], duoi[i - 1]))
+            song_ds.append([a, b, i - 1 + song])
+            if len(song_ds) > TRAN_VUNG_SONG:
+                del song_ds[0]
+        if not song_ds:
+            continue
+        con = []
+        for z in song_ds:
+            a, b, han = z
+            if i > han:
+                continue                                  # het han
+            cham = (lo[i] <= b) and (hi[i] >= a)
+            if not cham:
+                con.append(z)
+                continue
+            if qh == "cham":
+                ra[i] = True
+            elif qh == "trong":
+                ra[i] = ra[i] or (a <= dong[i] <= b)
+            elif qh == "bat_len":
+                ra[i] = ra[i] or (dong[i] > b)
+            elif qh == "bat_xuong":
+                ra[i] = ra[i] or (dong[i] < a)
+            elif qh == "xuyen_len":
+                ra[i] = ra[i] or (dong[i] > b and dong[i - 1] <= b if i else False)
+            elif qh == "xuyen_xuong":
+                ra[i] = ra[i] or (dong[i] < a and dong[i - 1] >= a if i else False)
+            if huy == "cham":
+                continue                                  # lap day mot lan la het
+            if huy == "dong_ngoai" and (dong[i] > b or dong[i] < a):
+                continue
+            con.append(z)
+        song_ds = con
+    return pd.Series(ra, index=df.index)
+
+
 def _dieu_kien(df: pd.DataFrame, ds: list, mac_dinh: bool) -> pd.Series:
     """Danh sach dieu kien -> chuoi bool. Rong thi tra `mac_dinh`."""
     if not ds:
         return pd.Series(mac_dinh, index=df.index)
     ra = None
     for d in ds:
-        m = _so_sanh(toan_hang(df, d["trai"]), d.get("phep", ">"),
-                     toan_hang(df, d["phai"]))
+        if "vung" in d:
+            m = _vung(df, d)
+        else:
+            m = _so_sanh(toan_hang(df, d["trai"]), d.get("phep", ">"),
+                         toan_hang(df, d["phai"]))
         m = m.fillna(False)
         ra = m if ra is None else (ra & m)
     return ra
@@ -608,6 +745,9 @@ def kiem_khai_bao(spec: dict) -> list[str]:
         loi.append("'giu' phai la so nguyen 1..500")
     for nhom in ("vao", "ra"):
         for i, d in enumerate(spec.get(nhom) or []):
+            if isinstance(d, dict) and "vung" in d:
+                loi += [f"{nhom}[{i}]: {e}" for e in _kiem_vung(d)]
+                continue
             if not isinstance(d, dict) or "trai" not in d or "phai" not in d:
                 loi.append(f"{nhom}[{i}] phai co 'trai' va 'phai'")
                 continue
@@ -616,6 +756,41 @@ def kiem_khai_bao(spec: dict) -> list[str]:
             for ben in ("trai", "phai"):
                 loi += [f"{nhom}[{i}].{ben}: {e}" for e in _kiem_toan_hang(d[ben])]
             loi += [f"{nhom}[{i}]: {e}" for e in _kiem_hien_nhien(d)]
+    return loi
+
+
+def _kiem_vung(d: dict) -> list[str]:
+    """Kiem CU PHAP mot ve `vung`. Xem `_vung` de biet hinh dang."""
+    loi = []
+    if d.get("quan_he", "cham") not in QUAN_HE_VUNG:
+        loi.append("'quan_he' phai thuoc %s" % sorted(QUAN_HE_VUNG))
+    kb = d.get("vung")
+    if not isinstance(kb, dict):
+        return loi + ["'vung' phai la dict"]
+    if not kb.get("tao"):
+        # Thieu `tao` thi vung sinh o MOI bar, va moi quan he thanh gan nhu
+        # luon dung - dung hinh dang "ve luon dung im lang bien mat".
+        loi.append("'vung.tao' rong - vung se sinh o moi bar")
+    for k in ("tren", "duoi"):
+        if k not in kb:
+            loi.append("'vung' thieu bien '%s'" % k)
+        else:
+            loi += ["vung.%s: %s" % (k, e) for e in _kiem_toan_hang(kb[k])]
+    for i, x in enumerate(kb.get("tao") or []):
+        if not isinstance(x, dict) or "trai" not in x or "phai" not in x:
+            loi.append("vung.tao[%d] phai co 'trai' va 'phai'" % i)
+            continue
+        if x.get("phep", ">") not in PHEP:
+            loi.append("vung.tao[%d] phep '%s' khong hop le" % (i, x.get("phep")))
+        for ben in ("trai", "phai"):
+            loi += ["vung.tao[%d].%s: %s" % (i, ben, e)
+                    for e in _kiem_toan_hang(x[ben])]
+        loi += ["vung.tao[%d]: %s" % (i, e) for e in _kiem_hien_nhien(x)]
+    s = kb.get("song", 20)
+    if not isinstance(s, int) or isinstance(s, bool) or not (1 <= s <= 500):
+        loi.append("'vung.song' phai la so nguyen 1..500")
+    if kb.get("huy", "cham") not in HUY_VUNG:
+        loi.append("'vung.huy' phai thuoc %s" % sorted(HUY_VUNG))
     return loi
 
 
@@ -783,7 +958,34 @@ def kiem_khong_nhin_truoc(spec: dict, df: pd.DataFrame, k: int = 5) -> tuple[boo
         return True, "khong du bar de kiem"
     day_du = sinh_tu_spec(spec, df)
     rng = np.random.default_rng(20260816)
-    diem = sorted(set(int(x) for x in rng.integers(len(df) // 3, len(df) - 2, size=40)))
+    lo_, hi_ = len(df) // 3, len(df) - 2
+    diem = set(int(x) for x in rng.integers(lo_, hi_, size=40))
+
+    # LAY MAU O CHO CO CHUYEN DONG, khong chi lay ngau nhien.
+    #
+    # Do 06/09/2026 khi dung nguyen thuy `vung` lam canary: mot ban RO RI CO Y
+    # (bien vung lay `low` cua bar KE TIEP) lam lech tin hieu o **16/400 bar**,
+    # nhung 40 moc ngau nhien voi hat giong co dinh khong trung moc nao trong
+    # 16 do -> bo do bao "dat". Bay khong rung truoc mot ro ri that.
+    #
+    # Nguyen nhan khong phai xui: co che thua (kich hoat 2,75% so bar) thi moc
+    # ngau nhien gan nhu luon roi vao bar tin hieu BANG 0, va o bar do hai ban
+    # bang nhau du co ro ri hay khong. Tuc **luc cua bo do ti le voi tan suat
+    # kich hoat** - dung o lop co che thua nhat, no yeu nhat.
+    #
+    # Sua: uu tien moc noi tin hieu KHAC 0 va moc no vua DOI GIA TRI. Do la cho
+    # duy nhat mot ro ri co the lo ra. Van giu moc ngau nhien de khong bo sot
+    # ro ri chi hien o bar im lang.
+    kh = np.abs(np.asarray(day_du, dtype=float)) > 1e-12
+    doi = np.zeros(len(df), dtype=bool)
+    doi[1:] = kh[1:] != kh[:-1]
+    dang_quan_tam = np.flatnonzero((kh | doi))
+    dang_quan_tam = dang_quan_tam[(dang_quan_tam >= lo_) & (dang_quan_tam < hi_)]
+    if dang_quan_tam.size:
+        lay = min(40, dang_quan_tam.size)
+        diem |= set(int(x) for x in
+                    rng.choice(dang_quan_tam, size=lay, replace=False))
+    diem = sorted(diem)
     lech, vi_du = 0, []
     for t in diem:
         cat = sinh_tu_spec(spec, df.iloc[: t + 1])       # chi biet den bar t
@@ -993,7 +1195,11 @@ def them_co_che(spec: dict, df_kiem: pd.DataFrame | None = None) -> dict:
 # ------------------------------------------------- THAM SO CHON TRONG SPEC
 #: Cac khoa mang GIA TRI SO co the chinh duoc trong mot khai bao DSL.
 #: `n`  = do dai cua so nhin lai. `hang` = nguong so sanh.
-KHOA_CHINH_DUOC = ("n", "hang")
+#: `song` = tuoi tho cua mot VUNG (them 06/09/2026). Do la nut van tu nhien cua
+#: ho FVG/order block - "gap nay con hieu luc bao lau" - va neu khong liet ke o
+#: day thi `do_on_dinh.lan_can` se do lan can cua mot vung MA KHONG BAO GIO DOI
+#: tuoi tho no, roi ket luan "cao nguyen" [[doi-tham-so-ma-khong-doi-ket-qua]].
+KHOA_CHINH_DUOC = ("n", "hang", "song")
 
 
 def _di_spec(nut, duong: str, ra: dict) -> None:
@@ -1057,6 +1263,31 @@ def ap_tham_so(spec: dict, ts: dict) -> dict:
     return moi
 
 
+def _tach_chi_so(buoc: str) -> tuple[str, int | None]:
+    """`'tao0'` -> `('tao', 0)`. `'trai'` -> `('trai', None)`.
+
+    VI SAO (loi tim ra 06/09/2026 khi them nguyen thuy `vung`). `_di_spec` noi
+    chi so cua danh sach vao duong dan MA KHONG CO DAU PHAN CACH
+    (`f"{duong}{i}"`), va `_dat` thi tach duong bang `split("_")`. Voi mot danh
+    sach o TANG GOC (`vao`, `ra`) khong sao: chi so thanh token dau tien
+    (`"0_trai_n"`). Nhung mot danh sach LONG BEN TRONG - `vung.tao` - cho ra
+    token dinh lien `"tao0"`, ma `"tao0"` khong phai khoa cua dict nao, nen
+    `_dat` lang le `return` va tham so KHONG DUOC DAT.
+
+    Trieu chung neu khong sua: `tham_so_cua` van LIET KE `vao0_vung_tao0_phai_n`
+    nen bo do on dinh tuong minh dang doi tham so, con `ap_tham_so` thi tra ve
+    spec Y HET. Do dung la hinh dang "doi tham so ma khong doi ket qua" da lam
+    ca mot phan quyet CAO NGUYEN gia hoi 03/09
+    [[doi-tham-so-ma-khong-doi-ket-qua]].
+    """
+    i = len(buoc)
+    while i > 0 and buoc[i - 1].isdigit():
+        i -= 1
+    if i == 0 or i == len(buoc):
+        return buoc, None
+    return buoc[:i], int(buoc[i:])
+
+
 def _dat(nut, duong: str, gt) -> None:
     """Dat `gt` vao vi tri `duong` (dang `0_trai_n`) trong cay `nut`."""
     phan = duong.split("_")
@@ -1064,6 +1295,15 @@ def _dat(nut, duong: str, gt) -> None:
     cur = nut
     for buoc in phan[:-1]:
         if buoc == "":
+            continue
+        if isinstance(cur, dict) and buoc not in cur:
+            # Token dinh lien kieu `tao0` - xem `_tach_chi_so`.
+            k, idx = _tach_chi_so(buoc)
+            if idx is None or k not in cur or not isinstance(cur[k], list):
+                return
+            if idx >= len(cur[k]):
+                return
+            cur = cur[k][idx]
             continue
         if isinstance(cur, list):
             i = int(buoc)
@@ -1080,17 +1320,48 @@ def _dat(nut, duong: str, gt) -> None:
         cur[cuoi] = type(cur[cuoi])(gt) if isinstance(cur[cuoi], int)             and not isinstance(cur[cuoi], bool) else gt
 
 
-def nap_vao_mau() -> int:
-    """Dua toan bo co che trong kho vao `MAU.MAU` de QUANTLAB quet nhu mau goc.
+#: Muc bi `nap_vao_mau` tu choi o lan nap gan nhat: {ten: ly_do}.
+#:
+#: Phai GIU LAI chu khong duoc vut: mot muc bi tu choi im lang thi khong ai
+#: biet kho vua nho di, va con so "540 co che" van duoc doc nhu 540 phep thu.
+#: `loc_co_che.loc` doc bien nay de bao ra dung ten benh.
+BI_TU_CHOI_KHI_NAP: dict = {}
+
+
+def nap_vao_mau(kiem_cong: bool = True) -> int:
+    """Dua co che trong kho vao `MAU.MAU` de QUANTLAB quet nhu mau goc.
 
     Diem cot yeu: co che tu hoc KHONG co duong tat nao. No di qua dung engine,
     dung cong, dung ngan sach FDR nhu mau viet tay.
+
+    `kiem_cong=True` (mac dinh, tu 06/09/2026): CHAN o cua nay luon.
+
+    VI SAO CHUYEN CONG VE DAY. Ngay 06/09 cong `kiem_khai_bao` duoc ap o
+    `loc_co_che.loc` va cat 125 muc khoi be mat. Nhung `loc()` khong phai cua
+    duy nhat: `do_on_dinh`, `hinh_dang_vs_null`, `cham_lai_the_he`,
+    `ngoai_sinh`, `p_null_vs_ung_vien` deu goi thang `nap_vao_mau` roi doc
+    `MAU.MAU`. Tuc mot co che khong co truong `co_che` van duoc CHAM LAI diem,
+    van duoc do lan can "cao nguyen hay cai gai", van duoc dem trong nha may
+    null - chi khong len be mat.
+
+    Chan o hai cho voi hai danh sach thi som muon se lech nhau. Cong phai nam
+    o CUA, va cua la day: `MAU.MAU` khong duoc chua thu ma cong tu choi.
+    [[cong-chua-ap-cho-hang-trong-kho]]
+
+    `kiem_cong=False` chi danh cho phep DO DAC ve chinh cai kho (dem xem co bao
+    nhieu muc hong), khong danh cho duong chay nghien cuu nao.
     """
     them = 0
+    BI_TU_CHOI_KHI_NAP.clear()
     for spec in doc_kho():
         ten = spec.get("ten")
         if not ten or ten in MAU_MOD.MAU:
             continue
+        if kiem_cong:
+            loi = kiem_khai_bao(spec)
+            if loi:
+                BI_TU_CHOI_KHI_NAP[ten] = loi[0]
+                continue
 
         def _ham(df, _s=spec, **ts):
             # Truoc 03/09/2026 cho nay la `**_` (nuot sach). Xem `tham_so_cua`.

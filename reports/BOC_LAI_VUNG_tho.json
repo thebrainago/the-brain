@@ -1,0 +1,3786 @@
+[
+ {
+  "ten": "HybridMicrostructure_EA.mq5",
+  "co_che": [
+   {
+    "ten": "khong_dien_dat_duoc",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "co_che": "CHUA_BIET_LY_DO",
+    "vao": [],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "ResetHourClock.mq5",
+  "co_che": [],
+  "chua_do": true,
+  "vi_sao": "CHUA DO - OPENAI: ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=8317): Read timed out. (rea"
+ },
+ {
+  "ten": "SessionORB_EA_g4y.mq5",
+  "co_che": [
+   {
+    "ten": "ORB Buy Signal",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Price breaks above the opening range high, signaling bullish momentum and potential upward continuation.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 100,
+       "huy": "het_han"
+      },
+      "quan_he": "xuyen_len"
+     }
+    ]
+   },
+   {
+    "ten": "ORB Sell Signal",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Price breaks below the opening range low, signaling bearish momentum and potential downward continuation.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 100,
+       "huy": "het_han"
+      },
+      "quan_he": "xuyen_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "DailyZoneRecovery.mq5",
+  "co_che": [
+   {
+    "ten": "DailyZoneRecovery_BUY",
+    "co_che": "Chap nhan mua khi gia quay ve vung cung cau hoac order block tang da duoc xac nhan, cho phep tai lieu giao dich co do an to hon voi he thong quan ly von.",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 5,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 2
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "DailyZoneRecovery_SELL",
+    "co_che": "Giao dich ban khi gia phat hien vung cung cuot hoac order block giam, cho phep buu lai muc tieu gia tri khi xu huong chuan bi dao chieu sau khi kiem tra vung.",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 5,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 2
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SMC_Pullback_v1_0.mq5",
+  "co_che": [
+   {
+    "ten": "SMC Pullback Swing Low",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Price retraces to validated swing structure to join institutional flow, offering favorable risk-reward before continuation.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": "<=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "SMC Pullback Swing High",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Price retraces to validated swing structure to join institutional flow, offering favorable risk-reward before continuation.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Dynamic_Session_Sweep_Detector.mq5",
+  "co_che": [
+   {
+    "ten": "Session Liquidity Sweep Reclaim",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "co_che": "Trader institution cần thanh khoản để lấp đơn lớn, họ đẩy giá qua đỉnh/đáy phiên để kích hoạt stop loss retail (bẫy thanh khoản). Khi giá đóng cửa quay lại trong vùng phiên, báo hiệu sự hấp thụ hoàn tất và chuẩn bị xu hướng mới, giúp trader vào lệnh đúng hướng dòng tiền chính.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 24
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 24
+      }
+     }
+    ]
+   },
+   {
+    "ten": "Session Liquidity Sweep Reclaim",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "co_che": "Trader institution cần thanh khoản để lấp đơn lớn, họ đẩy giá qua đỉnh/đáy phiên để kích hoạt stop loss retail (bẫy thanh khoản). Khi giá đóng cửa quay lại trong vùng phiên, báo hiệu sự hấp thụ hoàn tất và chuẩn bị xu hướng mới, giúp trader vào lệnh đúng hướng dòng tiền chính.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 24
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 24
+      }
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Liquidity_Void_Decay_Oscillator.mq5",
+  "co_che": [
+   {
+    "ten": "Liquidity Void Decay Oscillator",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 1,
+    "co_che": "The oscillator tracks liquidity void decay. Traders pay for this signal because entering when liquidity drains and price reclaims the void offers high-probability reversals with tight risk. The volume/range filter ensures we only trade during genuine liquidity shifts, avoiding chop.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "bien_do"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "bien_do"
+       },
+       "n": 14
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khoi_luong"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "khoi_luong"
+       },
+       "n": 14
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "open"
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Liquidity Void Decay Oscillator",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 1,
+    "co_che": "The oscillator tracks liquidity void decay. Traders pay for this signal because entering when liquidity drains and price breaks the void downward offers high-probability continuations with tight risk. The volume/range filter ensures we only trade during genuine liquidity shifts, avoiding chop.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "bien_do"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "bien_do"
+       },
+       "n": 14
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "khoi_luong"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "khoi_luong"
+       },
+       "n": 14
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "open"
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "DynamicSR4.mq5",
+  "co_che": [
+   {
+    "ten": "Dynamic Support Bounce",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Price reacts to historical supply/demand imbalances stored in the zone. Institutional orders cluster here, causing reversals when liquidity is absorbed.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "dong_ngoai"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Dynamic Resistance Rejection",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Price encounters concentrated sell-side liquidity at dynamic resistance levels. Failed attempts to break higher trigger short entries as sellers defend the zone.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "dong_ngoai"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "EquityGuardPanel.mq5",
+  "co_che": [
+   {
+    "ten": "EquityGuardPanel",
+    "ho": "khac",
+    "chieu": 0,
+    "giu": 1,
+    "co_che": "KHONG_CO_DK_TRAO_DOI",
+    "vao": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "OrderBlockDetector.mq5",
+  "co_che": [
+   {
+    "ten": "Bullish Order Block Reversal",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 10,
+    "co_che": "Institutional buyers accumulate at unmitigated demand zones left by prior sell moves; retail traders pay for high-probability long entries on retests.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Bearish Order Block Reversal",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 10,
+    "co_che": "Sellers target supply zones where prior buying was exhausted; entering shorts on retests offers favorable risk-to-reward ratios near institutional levels.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "IHSMC_V2.mq5",
+  "co_che": [
+   {
+    "ten": "Bullish FVG Pullback",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 20,
+    "co_che": "Vùng giá trống (FVG) hình thành do xung đột mua/bán mạnh, thường được các tổ chức sử dụng làm điểm hồi quy để bù đắp thanh khoản trước khi giá tiếp tục xu hướng tăng.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 2
+       },
+       "song": 30,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Bearish FVG Pullback",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 20,
+    "co_che": "Vùng giá trống hình thành sau đợt bán tháo mạnh, đại diện cho khu vực cung chưa được lấp đầy, nơi giá thường phản ứng giảm khi quay lại kiểm tra.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 2
+       },
+       "song": 30,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Fair_Value_Gap_Scanner_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "Fair Value Gap Bullish",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 500,
+    "co_che": "Khối lượng mua ẩn tích tụ tại vùng thiếu thanh khoản tạo áp lực giá bật lên khi hồi về.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 2
+       },
+       "song": 500,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Fair Value Gap Bearish",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 500,
+    "co_che": "Áp lực bán tiềm ẩn tại vùng chênh lệch giá khiến giá giảm mạnh khi chạm vào ngưỡng này.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 2
+       },
+       "song": 500,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Market_Structure_Swing_Map_MT5.mq5",
+  "co_che": [
+   {
+    "ten": "Xac nhan cau truc tang (HH/HL)",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Nha dau tu theo xu huong tang khi gia xac nhan muc thap moi cao hon muc cu, chi ra ap luc mua dang chiem uu the va xu huong co kha nang tiep tuc.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Xac nhan cau truc giam (LH/LL)",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Phat hien su yeu di cua xu huong tang hoac bat dau xu huong giam khi gia tao muc cao moi thap hon muc cu, bao ve tai san khoi dong ap luc ban tang.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "IronHawk_Fibonacci_Structure_Map.mq5",
+  "co_che": [
+   {
+    "ten": "Fibonacci_Structure_MAP_BUY",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 30,
+    "co_che": "Nha dau tu thanh toan cho vi the bat xuong khoi vung yeu cuoi cung de chong lai xu huong chinh va buoc vao phien tang gia co xac suat cao.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 50
+      }
+     }
+    ]
+   },
+   {
+    "ten": "Fibonacci_Structure_MAP_SELL",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 30,
+    "co_che": "Dau tu vien tra phi de khai tac muc gap cong sua trong vung cuc toc khi gia bi loai khoi vung yeu cau, tranh mat tien khi xu huong dao nguoc.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "ema",
+       "n": 50
+      }
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "smc_entry.mq5",
+  "co_che": [
+   {
+    "ten": "SMC Demand Zone Entry",
+    "co_che": "Các tổ chức tài chính tích lũy vị thế mua tại vùng cầu sau khi xác nhận phá vỡ cấu trúc giảm, chờ giá hồi quy chạm vùng để vào lệnh với tỷ lệ rủi ro được kiểm soát chặt chẽ.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "SMC Supply Zone Entry",
+    "co_che": "Dòng tiền thông minh phân phối hàng hóa tại vùng cung sau khi đảo chiều xu hướng tăng, tận dụng phản ứng giá khi hồi lên chạm kháng cự để mở vị thế bán với biên độ an toàn cao.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SNR.mq5",
+  "co_che": [
+   {
+    "ten": "Buy Zone Touch",
+    "ho": "quay_ve_trung_binh",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Gia quay ve vung ho tro sau khi test thanh cong, tai day luc mua vuot suc ban lam gia tang tiep.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "chi_bao": "thap_nhat",
+         "cua": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "n": 10
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   },
+   {
+    "ten": "Sell Zone Touch",
+    "ho": "quay_ve_trung_binh",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Gia quay ve vung cung cap sau khi test thanh cong, tai day luc ban vuot suc mua lam gia giam tiep.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "chi_bao": "cao_nhat",
+         "cua": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "n": 10
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Human_Level_Structure_Engine.mq5",
+  "co_che": [
+   {
+    "ten": "Fibonacci 50% Support Bounce",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Thiet lap nay khai thác quy luật hồi quy mức 50% của sóng giá trước đó làm vùng hỗ trợ động. Khi giá giảm chạm hoặc xuyên qua mức này trong bối cảnh sự kiện tăng giá, nó thường báo hiệu lực mua tái thiết lập, thu hút các trader tìm điểm vào lệnh an toàn với tỷ lệ rủi ro lợi nhuận cao.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": 0
+      }
+     }
+    ]
+   },
+   {
+    "ten": "Fibonacci 50% Resistance Rejection",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Cơ chế tương tự nhưng áp dụng cho xu hướng giảm. Mức 50% đóng vai trò kháng cự động. Khi giá bật lên chạm hoặc vượt quá mức này sau sự kiện giảm, nó xác nhận áp lực bán tiếp tục thống trị, tạo cơ hội vào lệnh short khi giá từ chối phá vỡ vùng kháng cự.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 0
+      }
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Auto_ZigZag_Fibonacci_Golden_Zone.mq5",
+  "co_che": [
+   {
+    "ten": "Vào lệnh mua khi giá hồi về vùng vàng trong xu hướng tăng",
+    "co_che": "Các trader xu hướng trả phí cho công cụ này vì họ cần điểm vào lệnh tối ưu ở mức điều chỉnh sâu 61.8-78.6% để giảm thiểu rủi ro và tận dụng đà tăng chính.",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 10,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "chi_bao": "gia",
+         "cot": "low"
+        }
+       ],
+       "tren": {
+        "chi_bao": "doi_pct",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 61.8
+       },
+       "duoi": {
+        "chi_bao": "doi_pct",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 78.6
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "trong"
+     }
+    ]
+   },
+   {
+    "ten": "Vào lệnh bán khi giá hồi về vùng vàng trong xu hướng giảm",
+    "co_che": "Nhà giao dịch bán khống sử dụng vùng này để chốt vị thế hoặc mở mới tại mức hồi nhẹ dưới đỉnh swing, nơi áp lực bán thường tái diễn mạnh khi trend tiếp tục.",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 10,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "chi_bao": "gia",
+         "cot": "high"
+        }
+       ],
+       "tren": {
+        "chi_bao": "doi_pct",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 61.8
+       },
+       "duoi": {
+        "chi_bao": "doi_pct",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 78.6
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "trong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "LiquiditySweepDetector.mq5",
+  "co_che": [
+   {
+    "ten": "Buy Liquidity Sweep",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Gia phan vet muc gia cu sau khi thu hut thanh khoan, tao co hoi vao lenh theo xu huong tang voi risk thap.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 100,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Sell Liquidity Sweep",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Gia quet muc cao cu de trigger stop loss cua nguoi mua, tao khoang trang de vao lenh ban theo xu huong giam.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "song": 100,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "FairValueGapDetector.mq5",
+  "co_che": [
+   {
+    "ten": "Fair Value Gap Tang",
+    "co_che": "Gia thuong quay lai dien khoang trong thanh khoan truoc khi tiep tuc xu huong tang, tao diem vao lenh an toan.",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 50,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 2
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Fair Value Gap Giam",
+    "co_che": "Ap luc ban gia tang khi gia hoi ve vung thieu thanh khoan, cho phep nha giao dich tham gia xu huong giam.",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 50,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 2
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "MSNR_v531Plus_AEU1.mq5",
+  "co_che": [
+   {
+    "ten": "MSNR Trend Buy Retest & FVG Tap",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Dau tu theo xu huong chinh, vao khi gia quay lai kiem tra muc gia cu (FVG/Order Block) thay doi chuc nang, xac nhan phan ung bang nguyen tat tang de toi uu diem vao va cut loss sach se.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 1
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "open"
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "MSNR Trend Sell Retest & FVG Tap",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Dau tu theo xu huong chinh, vao khi gia quay lai kiem tra muc gia cu (FVG/Order Block) thay doi chuc nang, xac nhan phan ung bang nguyen tat giam de toi uu diem vao va cut loss sach se.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 1
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "open"
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "MTF_FVG_Depth_Meter.mq5",
+  "co_che": [
+   {
+    "ten": "FVG_BULLISH_RETEST",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Khoang trong thanh khoan tai cac vung cung cau thuong hien thi khi co su bat dong giua nguon va cau, gia co xu huong quay lai lap day de thu huy thanh khoan truoc khi tiep tuc xu huong.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "FVG_BEARISH_RETEST",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Khoang trong thanh khoan tai cac vung cung cau thuong hien thi khi co su bat dong giua nguon va cau, gia co xu huong quay lai lap day de thu huy thanh khoan truoc khi tiep tuc xu huong.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Session_Sweep_Reversal.mq5",
+  "co_che": [
+   {
+    "ten": "Session Sweep Reversal Long",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Kich hoat khi gia phá vỡ vùng thấp phiên trước để quét thanh khoản, sau đó đóng cửa quay trở lại bên trong vùng, xác nhận đảo chiều tăng do thiếu lực bán tiếp tục.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "chi_bao": "tb",
+         "cua": {
+          "chi_bao": "ngay_trong_tuan"
+         },
+         "n": 1
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 1,
+       "huy": "cham"
+      },
+      "quan_he": "xuyen_xuong"
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "low"
+      }
+     }
+    ]
+   },
+   {
+    "ten": "Session Sweep Reversal Short",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Kich hoat khi gia phá vỡ vùng cao phiên trước để quét stop loss, sau đó đóng cửa giảm xuống dưới mức phá vỡ, xác nhận đảo chiều giảm do thiếu lực mua duy trì.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "chi_bao": "tb",
+         "cua": {
+          "chi_bao": "ngay_trong_tuan"
+         },
+         "n": 1
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 1,
+       "huy": "cham"
+      },
+      "quan_he": "xuyen_len"
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      }
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Order_Block_Mitigation_Tracker_91a.mq5",
+  "co_che": [
+   {
+    "ten": "Order Block Mitigation Bullish",
+    "co_che": "Khi giá hồi về chạm vùng Order Block tăng đã hình thành, cho thấy áp lực mua có thể tái diễn và tạo cơ hội vào lệnh dài hạn.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 50,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   },
+   {
+    "ten": "Order Block Mitigation Bearish",
+    "co_che": "Khi giá hồi lên chạm vùng Order Block giảm đã hình thành, báo hiệu áp lực bán có thể kích hoạt và tạo điểm vào lệnh ngắn hạn.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 50,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "XAUUSD_MTF_Liquidity_OB_Reversal_r2i.mq5",
+  "co_che": [
+   {
+    "ten": "Buy Liquidity OB Reversal",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Traders pay for high-probability reversal entries at institutional order blocks where liquidity sweeps trigger sharp price rejections.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Sell Liquidity OB Reversal",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Institutional sellers target retail buy stops above liquidity pools, using bearish order blocks to capture rapid downward reversals.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Swing_Trading_Dashboard.mq5",
+  "co_che": [
+   {
+    "ten": "Vung Ho Tro Dao Ngoc Buy",
+    "ho": "bien_dong",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Danh vao vung ho tro khi gia quay lai cham vung sau khi dao nguoc tu phia tren, chiu luong mua tai day.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": "<=",
+         "phai": {
+          "hang": 0
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "doi_pct",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 4
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Vung Khang Cu Dao Ngoc Sell",
+    "ho": "bien_dong",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Danh vao vung khang cu khi gia quay lai cham vung sau khi dao nguoc tu phia duoi, chiu luong ban tai day.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">=",
+         "phai": {
+          "hang": 0
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "doi_pct",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 4
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "STC_CROSS.mq5",
+  "co_che": [
+   {
+    "ten": "STC Cross Buy",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "co_che": "Bắt điểm đảo chiều khi chỉ báo dao động chạm vùng quá bán và đường K cắt lên D, xác nhận áp lực bán đã suy yếu.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "k",
+       "n": 0
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "chi_bao": "d",
+       "n": 0
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "k",
+       "n": 1
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "d",
+       "n": 1
+      },
+      "phep": "<=",
+      "phai": {
+       "hang": 20
+      }
+     }
+    ]
+   },
+   {
+    "ten": "STC Cross Sell",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "co_che": "Bán ra khi chỉ báo dao động chạm vùng quá mua và đường K cắt xuống D, xác nhận áp lực mua đã suy yếu.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "k",
+       "n": 0
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "d",
+       "n": 0
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "k",
+       "n": 1
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 80
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "d",
+       "n": 1
+      },
+      "phep": ">=",
+      "phai": {
+       "hang": 80
+      }
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "MarketStructure.mq5",
+  "co_che": [
+   {
+    "ten": "khong_dien_dat_duoc",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 1,
+    "co_che": "CHUA_BIET_LY_DO",
+    "vao": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Playground_v1_00.mq5",
+  "co_che": [
+   {
+    "ten": "ENC_BUY_SCALP",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Khi gia dong cua vuot len tren muc ENC point (gioi han FVG/liquidity), cho thay suc mua da phan hoa, xu ly phep thuong tai vung h tro.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      }
+     }
+    ]
+   },
+   {
+    "ten": "ENC_SELL_SCALP",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Khi gia dong cua xuong duoi muc ENC point, cho thay suc ban chiem uu the, xu ly phep thuong tai vung cu.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      }
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "BBStochRSIXReversal.mq5",
+  "co_che": [
+   {
+    "ten": "BB StochRSI Reversal Sell",
+    "ho": "quay_ve_trung_binh",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Khi giá đóng cửa nằm trên dải trên Bollinger Bands và chỉ số StochRSI ở vùng quá mua (>80), việc giá đóng cửa quay trở lại dưới dải trên báo hiệu động lực tăng đã suy yếu, tạo cơ hội bán để bắt đỉnh hoặc chốt lời.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": ">",
+      "phai": {
+       "hang": 80
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "BB StochRSI Reversal Buy",
+    "ho": "quay_ve_trung_binh",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Khi giá đóng cửa nằm dưới dải dưới Bollinger Bands và chỉ số StochRSI ở vùng quá bán (<20), việc giá đóng cửa bật lên trên dải dưới cho thấy áp lực bán đã cạn kiệt, tạo tín hiệu mua để bắt đáy hoặc gom hàng.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "sma",
+       "n": 20
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "rsi",
+       "n": 14
+      },
+      "phep": "<",
+      "phai": {
+       "hang": 20
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SMC_Order_Block_Detector.mq5",
+  "co_che": [
+   {
+    "ten": "Order Block Bull",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 50,
+    "co_che": "Cac qu fund chi tra phi cho he thong tim vung cung cau co xac suat cao, vi ho bat buoc phai vao lenh tai day gia tot thay vi chase gia tren market.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 100,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   },
+   {
+    "ten": "Order Block Bear",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 50,
+    "co_che": "Cac qu fund chi tra phi cho he thong tim vung cung cau co xac suat cao, vi ho bat buoc phai vao lenh tai day gia tot thay vi chase gia tren market.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 100,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SniperGold_SMC_ProPlus_v4_3.mq5",
+  "co_che": [
+   {
+    "ten": "SMC Buy Zone Reversal",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 15,
+    "co_che": "Khi thanh toc li chieu cao thap bi quet (liquidity sweep), gia thuong quay lai test vung buy order block hoac FVG de bat dau xu huong tang moi. Cac NQD va fund manager co xu huong mua tai day sau khi lam tan nha giao dich thuat.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "SMC Sell Zone Reversal",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 15,
+    "co_che": "Khi thanh toc li chieu cao cao bi quet (liquidity sweep), gia thuong quay lai test vung sell order block hoac FVG de bat dau xu huong giam moi. Cac NQD va fund manager co xu huong ban tai day sau khi lam tan nha giao dich thuat.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Microstructure_Matrix.mq5",
+  "co_che": [
+   {
+    "ten": "Bullish Order Block",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 100,
+    "co_che": "Bullish order blocks mark institutional buying zones. Entering here captures reversals or continuations with high probability setups.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        },
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 1
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 500,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   },
+   {
+    "ten": "Bearish Order Block",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 100,
+    "co_che": "Bearish order blocks indicate selling pressure zones. Traders sell here expecting price rejection and downward movement.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        },
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 1
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 500,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "ausbruch_trader_1.0.mq5",
+  "co_che": [
+   {
+    "ten": "Tin hieu Mua - Phá đỉnh",
+    "ho": "xu_huong",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Khi giá đóng cửa vượt lên trên đỉnh nến trước, xác nhận sự phá vỡ kháng cự và giải phóng động lượng tăng giá, thu hút nhà giao dịch theo xu hướng tìm kiếm lợi nhuận từ đà tăng tiếp diễn.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "high",
+       "n": 1
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Tin hieu Ban - Thủng đáy",
+    "ho": "xu_huong",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Khi giá đóng cửa phá vỡ xuống dưới đáy nến trước, xác nhận mất hỗ trợ và giải phóng áp lực bán, kích hoạt dòng tiền ngắn hạn hoặc cắt lỗ theo đà giảm.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "gia",
+       "cot": "low",
+       "n": 1
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "LW_MarketStructure_SMC.mq5",
+  "co_che": [
+   {
+    "ten": "Phá vỡ Swing Cao (BOS/CHoCH Mua)",
+    "co_che": "Khi giá đóng cửa vượt lên trên đỉnh swing cao nhất gần nhất, nó xác nhận sự kiểm soát của bên mua và xu hướng tăng, bù đắp rủi ro trượt giá cho trader breakout.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 50,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_len",
+      "phai": {
+       "chi_bao": "cao_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 5
+      }
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Phá vỡ Swing Thấp (BOS/CHoCH Ban)",
+    "co_che": "Khi giá đóng cửa cắt xuống dưới đáy swing thấp nhất gần nhất, nó báo hiệu áp lực bán chiếm ưu thế, khuyến khích dòng tiền ngắn hạn vào lệnh để bắt đà giảm.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 50,
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "cheo_xuong",
+      "phai": {
+       "chi_bao": "thap_nhat",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "n": 5
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Multi_Timeframe_Candle_Map.mq5",
+  "co_che": [
+   {
+    "ten": "Buy_MultiTF_Zone_Reversal",
+    "co_che": "Các nhà giao dịch institution chờ giá hồi về vùng hỗ trợ đa khung thời gian để tích lũy vị thế long, trong khi market makers cung cấp thanh khoản bằng cách bán vào vùng này trước khi đẩy giá lên.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 20,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 40,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Sell_MultiTF_Zone_Reversal",
+    "co_che": "Các quỹ đầu tư chờ giá phá vỡ vùng kháng cự đa khung thời gian để chốt lời hoặc mở short, trong khi retail traders mua đuổi vào đỉnh tạo thanh khoản cho dòng tiền bán chiếm lĩnh.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 20,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 40,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": "",
+  "model_tang_2": "qwen3.6-flash"
+ },
+ {
+  "ten": "zSRZones.mq5",
+  "co_che": [
+   {
+    "ten": "zSRZones_Demand",
+    "co_che": "Các nhà giao dịch chờ giá hồi về vùng cầu cũ để tìm điểm vào lệnh thuận theo xu hướng chính với tỷ lệ rủi ro trên lợi nhuận tối ưu.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 15,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "zSRZones_Supply",
+    "co_che": "Các trader chuyên nghiệp sử dụng vùng cung đã xác định làm lá chắn phòng thủ, chờ giá chạm vào để bán khống hoặc chốt lời vị thế mua trước đó.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 15,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Adaptive_Support_Resistance_Zones.mq5",
+  "co_che": [
+   {
+    "ten": "Mua hồi về hỗ trợ thích ứng",
+    "co_che": "Các tổ chức lớn thường đặt lệnh mua tích lũy tại vùng hỗ trợ thích ứng để bù đắp vị thế bán ngắn hạn, tạo động lực giá bật lên khi retail tham gia theo phe mua.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 20,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": "<=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 40,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Bán từ chối kháng cự thích ứng",
+    "co_che": "Các quỹ đầu cơ và maker thường kích hoạt lệnh bán tại vùng kháng cự thích ứng để khóa lời hoặc mở vị thế short mới, gây áp lực giảm giá khi breakout thất bại.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 20,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">=",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 40,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Premium_Discount_Range_Mapper.mq5",
+  "co_che": [
+   {
+    "ten": "Vung Discount Rebound",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 30,
+    "co_che": "Cac fund lon mua o muc giam gia (discount) sau xu huong tang, khi gia quay lai vung nay se gap luc mua manh, tao co hoi vao long an toan.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 40,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Vung Premium Reject",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 30,
+    "co_che": "Nha dau tu ban o muc cao gia (premium) sau xu huong giam, khi gia retracement vao vung nay se gap luc ban ap luot, tao co hoi vao short hieu qua.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 40,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "FVG_Imbalance_Marker_Helper.mq5",
+  "co_che": [
+   {
+    "ten": "FVG Bullish Imbalance",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 50,
+    "co_che": "Fair Value Gaps represent pricing inefficiencies where liquidity was swept. Market makers often return to these zones to rebalance orders before continuing the primary trend, providing high-probability long entries.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 2
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "FVG Bearish Imbalance",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 50,
+    "co_che": "Bearish FVGs indicate strong selling pressure leaving unfilled sell orders. Price frequently retraces to these gaps to trigger pending shorts or stop hunts before resuming the downtrend.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 2
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "stellarlite_ict_ea.mq5",
+  "co_che": [
+   {
+    "ten": "ICT_Buy_Zone_Entry",
+    "co_che": "Khach hang tra tien de khai thác quy luat bat phan tai cac vung cung cau, khi gia quay lai cham vung se co xu huong chuyen huong theo chieu ngich lai.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   },
+   {
+    "ten": "ICT_Sell_Zone_Entry",
+    "co_che": "Khach hang tra tien de khai thác quy luat bat phan tai cac vung cung cau, khi gia quay lai cham vung se co xu huong chuyen huong theo chieu ngich lai.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "vao": [
+     "khong_dien_dat_duoc"
+    ],
+    "ra": [
+     "khong_dien_dat_duoc"
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "XANDER_Pulse_Candles.mq5",
+  "co_che": [
+   {
+    "ten": "Xander Pulse Candles Buy",
+    "co_che": "Giao dich theo chieu xu huong khi gia quay lai cham vao vung tang duoc xac dinh boi gap giua cac mui nen, tranh giao dich o vi tri phan hoi sau khi da di xa.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 30,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ],
+    "ra": []
+   },
+   {
+    "ten": "Xander Pulse Candles Sell",
+    "co_che": "Giao dich theo chieu xu huong khi gia quay lai cham vao vung giam duoc xac dinh boi gap giua cac mui nen, tranh giao dich o vi tri phan hoi sau khi da di xa.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 30,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SmartMoneyConcepts.mq5",
+  "co_che": [
+   {
+    "ten": "Bullish Order Block Pullback",
+    "co_che": "Nha dau tu co quyen mua tin hieu nay de bat cuoc theo xu huong tang khi gia retracement ve vung buy limit cua cac chong tien lon (Order Block). Vung nay dai dien cho muc gia co su khop lenh thua, khi gia cham vao se phat sinh dong goc tiep tuc huong tren.",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 10,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "thap_nhat",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 14
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "open"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   },
+   {
+    "ten": "Bearish Order Block Pullback",
+    "co_che": "Nha dau tu co quyen ban tin hieu nay de bat cuoc theo xu huong giam khi gia retracement ve vung sell limit cua cac chong tien lon. Vung nay dai dien cho muc gia co su khop lenh mua thua, khi gia cham vao se phat sinh dong goc tiep tuc huong xuong.",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 10,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "cao_nhat",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 14
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "open"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "Fair_Value_Gap_FVG.mq5",
+  "co_che": [
+   {
+    "ten": "Fair Value Gap Bullish",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 20,
+    "co_che": "Khoảng trống thanh khoản hình thành sau biến động mạnh, giá thường hồi về điền补缺 rồi tiếp tục xu hướng, tạo điểm vào tối ưu cho phe mua.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "duoi": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 2
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Fair Value Gap Bearish",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 20,
+    "co_che": "Vùng thiếu thanh khoản xuất hiện khi giá giảm mạnh tạo khoảng hở giữa nến hiện tại và nến trước đó, cung cấp vùng phản kháng cho phe bán khi giá hồi về chạm và từ chối.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 2
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "ICT_Silver_Bullet_Filter.mq5",
+  "co_che": [
+   {
+    "ten": "ICT Silver Bullet FVG Buy",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 1,
+    "co_che": "Liquidity sweep & imbalance fill during high-volume session window. Institutions target FVGs created by rapid directional moves. Pullback entry reduces risk while capturing continuation.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "high",
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high",
+        "n": 2
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low",
+        "n": 0
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   },
+   {
+    "ten": "ICT Silver Bullet FVG Sell",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 1,
+    "co_che": "Liquidity sweep & imbalance fill during high-volume session window. Institutions target FVGs created by rapid directional moves. Pullback entry reduces risk while capturing continuation.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "low",
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high",
+        "n": 0
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low",
+        "n": 2
+       },
+       "song": 20,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SMC_Liquidity_Detector.mq5",
+  "co_che": [
+   {
+    "ten": "Liquidity Sweep Detector",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Các tổ chức lớn quét thanh khoản trên đỉnh cũ để kích hoạt lệnh dừng lỗ của retail trước khi đảo chiều giá. Tín hiệu này báo hiệu sự từ chối giá tại vùng thanh khoản, tạo cơ hội vào lệnh thuận xu hướng ngược lại.",
+    "vao": [
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "phep": ">",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 1
+      }
+     },
+     {
+      "trai": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "phep": "<",
+      "phai": {
+       "chi_bao": "tre",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "n": 1
+      }
+     }
+    ],
+    "ra": []
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "SMC_FVG_Auto_Detector.mq5",
+  "co_che": [
+   {
+    "ten": "FVG Bullish Retest",
+    "co_che": "Fair Value Gap represents institutional order imbalance. Price frequently retraces to fill the void before continuing trend, offering high-probability reversal entries.",
+    "ho": "khac",
+    "chieu": 1,
+    "giu": 15,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "low"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "high"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "high"
+        },
+        "n": 2
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   },
+   {
+    "ten": "FVG Bearish Retest",
+    "co_che": "Bearish FVG indicates selling pressure leaving a liquidity void. Market mechanics drive price back down to test this area before resuming downtrend, providing short opportunities.",
+    "ho": "khac",
+    "chieu": -1,
+    "giu": 15,
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "high"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "tre",
+          "cua": {
+           "chi_bao": "gia",
+           "cot": "low"
+          },
+          "n": 2
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "tre",
+        "cua": {
+         "chi_bao": "gia",
+         "cot": "low"
+        },
+        "n": 2
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "cham"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "ExMachina_SMC.mq5",
+  "co_che": [
+   {
+    "ten": "SMC Zone Reaction",
+    "ho": "lich",
+    "chieu": 1,
+    "giu": 50,
+    "co_che": "Gia quan tâm đến các vùng cung cầu lịch sử (Order Block/FVG) được xác định bởi cấu trúc đỉnh/đáy. Tín hiệu vào khi giá chạm hoặc bật lại khỏi vùng hỗ trợ/kháng cự này.",
+    "vao": [
+     {
+      "vung": {
+       "tao": "khong_dien_dat_duoc",
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "SMC Zone Reaction Sell",
+    "ho": "lich",
+    "chieu": -1,
+    "giu": 50,
+    "co_che": "Gia phản ứng với vùng kháng cự lịch sử. Tín hiệu bán khi giá chạm vùng và bật xuống.",
+    "vao": [
+     {
+      "vung": {
+       "tao": "khong_dien_dat_duoc",
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 50,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ },
+ {
+  "ten": "ExMachina_SupplyDemand.mq5",
+  "co_che": [
+   {
+    "ten": "Vung Cau (Demand Zone)",
+    "ho": "pha_vo",
+    "chieu": 1,
+    "giu": 5,
+    "co_che": "Nha dau tu mua tai vung cau cu sau khi gia quay ve cham vung, tao dong luc tang khi phe ban het luc.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": ">",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 30,
+       "huy": "cham"
+      },
+      "quan_he": "bat_len"
+     }
+    ]
+   },
+   {
+    "ten": "Vung Cung (Supply Zone)",
+    "ho": "pha_vo",
+    "chieu": -1,
+    "giu": 5,
+    "co_che": "Nha dau tu ban tai vung cung cu sau khi gia quay ve cham vung, tao dong luc giam khi phe mua het luc.",
+    "vao": [
+     {
+      "vung": {
+       "tao": [
+        {
+         "trai": {
+          "chi_bao": "gia",
+          "cot": "close"
+         },
+         "phep": "<",
+         "phai": {
+          "chi_bao": "gia",
+          "cot": "open"
+         }
+        }
+       ],
+       "tren": {
+        "chi_bao": "gia",
+        "cot": "high"
+       },
+       "duoi": {
+        "chi_bao": "gia",
+        "cot": "low"
+       },
+       "song": 30,
+       "huy": "cham"
+      },
+      "quan_he": "bat_xuong"
+     }
+    ]
+   }
+  ],
+  "chua_do": false,
+  "vi_sao": ""
+ }
+]

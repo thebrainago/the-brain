@@ -1,4 +1,94 @@
 {
+ "b82950a7ac7e206ac7d203d473139f5438d81d75": {
+  "luc": 1788689178.1113658,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"15\": {\"ket\": \"thật\", \"vi_sao\": \"Lệnh cắt lỗ tự động của nhà đầu tư cá nhân tạo thanh khoản ép bán.\"}, \"16\": {\"ket\": \"thật\", \"vi_sao\": \"Lệnh bắt đỉnh của trader mua đuổi tạo thanh khoản ép mua tại vùng đỉnh.\"}, \"17\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ tái diễn giải tín hiệu, thiếu ràng buộc giao dịch độc lập với luật.\"}, \"18\": {\"ket\": \"rỗng\", \"vi_sao\": \"Giả định chung về tâm lý trader, không chỉ rõ ràng buộc nào ngoài luật.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 64.4
+  }
+ },
+ "2a7bc94dd461400bf03cf6edd53e0342627177d1": {
+  "luc": 1788689113.646946,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"10\": {\"ket\": \"that\", \"vi_sao\": \"Rủi ro tỷ giá qua đêm và quy định khớp lệnh quốc tế buộc điều chỉnh vị thế.\"}, \"11\": {\"ket\": \"that\", \"vi_sao\": \"Nhà tạo lập thị trường bắt buộc delta-hedge spot khi giá phá vỡ ngưỡng trung bình.\"}, \"12\": {\"ket\": \"that\", \"vi_sao\": \"Giới hạn đòn bẩy và cơ chế delta-hedge buộc dealer bán tương lai bù rủi ro.\"}, \"13\": {\"ket\": \"rong\", \"vi_sao\": \"Không có quy định bắt buộc mua khi RSI thấp; chỉ là định nghĩa chiến lược.\"}, \"14\": {\"ket\": \"rong\", \"vi_sao\": \"Không ràng buộc bên ngoài nào ép contrarian bán khi RSI cao; chỉ là mô tả luật.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 22.1
+  }
+ },
+ "13cb368574daf8b4c4dcd2ea1f037e2106f64023": {
+  "luc": 1788689091.4874232,
+  "ket_qua": {
+   "van_ban": "{ \"phan_xu\": { \"5\": { \"ket\": \"rong\", \"vi_sao\": \"Thiếu ràng buộc thực tế, chỉ là cách diễn giải khác của luật.\" }, \"6\": { \"ket\": \"rong\", \"vi_sao\": \"Không nêu cơ chế ràng buộc cụ thể, chỉ mô tả động lực chung.\" }, \"7\": { \"ket\": \"rong\", \"vi_sao\": \"Chỉ lặp lại logic nội tại, thiếu bên đối ứng và ràng buộc.\" }, \"8\": { \"ket\": \"rong\", \"vi_sao\": \"Chỉ mô tả dòng lệnh theo tín hiệu, không có ràng buộc ép.\" }, \"9\": { \"ket\": \"rong\", \"vi_sao\": \"Chỉ phản ánh cơ chế khớp lệnh dừng lỗ, thiếu ràng buộc độc lập.\" } } }",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 38.1
+  }
+ },
+ "2f946fe685eda4dbab83f13728c1ac1e2634035b": {
+  "luc": 1788689053.3162475,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"0\": {\"ket\": \"rong\", \"vi_sao\": \"Chỉ mô tả hành vi cắt lỗ chung, thiếu ràng buộc cơ chế độc lập với luật.\"}, \"1\": {\"ket\": \"rong\", \"vi_sao\": \"Lý do áp dụng chung cho mọi tín hiệu, không nêu ràng buộc cơ chế cụ thể.\"}, \"2\": {\"ket\": \"rong\", \"vi_sao\": \"Chỉ nhắc đến quản trị rủi ro chung, thiếu ràng buộc cơ chế hoặc phe đối kháng.\"}, \"3\": {\"ket\": \"rong\", \"vi_sao\": \"Mô tả phản ứng cắt lỗ thông thường, không thêm thông tin ràng buộc khách quan nào.\"}, \"4\": {\"ket\": \"rong\", \"vi_sao\": \"Chỉ lặp lại mục đích cắt lỗ, thiếu ràng buộc cơ chế hoặc phe đối kháng cụ thể.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 38.8
+  }
+ },
+ "ae8d78a7edf1c673bd1d0fd170573deac4203b6f": {
+  "luc": 1788688961.440502,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"40\": {\"ket\": \"rong\", \"vi_sao\": \"Chỉ gán động cơ giả định cho tín hiệu kỹ thuật, không có ràng buộc bên ngoài.\"}, \"41\": {\"ket\": \"rong\", \"vi_sao\": \"Quy tắc cắt lỗ đã nằm trong luật, không phải áp lực thị trường độc lập.\"}, \"42\": {\"ket\": \"rong\", \"vi_sao\": \"Benchmark thực tế không dùng EMA làm ngưỡng kích hoạt tái cân bằng bắt buộc.\"}, \"43\": {\"ket\": \"rong\", \"vi_sao\": \"Kiểm soát rủi ro dựa trên biên độ biến động, không gắn cứng với EMA.\"}, \"44\": {\"ket\": \"rong\", \"vi_sao\": \"Quy trình phê duyệt danh mục không vận hành theo tín hiệu kỹ thuật tức thời.\"}, \"45\": {\"ket\": \"rong\", \"vi_sao\": \"Giới hạn tổn thất tính bằng phần trăm vốn, hoàn toàn không liên quan đến EMA.\"}, \"46\": {\"ket\": \"rong\", \"vi_sao\": \"Tín hiệu chính thức do luật định nghĩa, không phải chuẩn mực thị trường bên ngoài.\"}, \"47\": {\"ket\": \"rong\", \"vi_sao\": \"Rủi ro hệ thống đo bằng thanh khoản, không liên quan đến đường trung bình động.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 48.0
+  }
+ },
+ "6d0d45240b23e7ab272b362a2048d8be3f04fb66": {
+  "luc": 1788688913.4096024,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"32\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ mô tả hành vi trend-following chung, không nêu ràng buộc định lượng cụ thể.\"}, \"33\": {\"ket\": \"rỗng\", \"vi_sao\": \"Diễn giải lại cơ chế cắt lỗ, thiếu ràng buộc quy chế độc lập.\"}, \"34\": {\"ket\": \"rỗng\", \"vi_sao\": \"Quy định giả định không tồn tại, chỉ là định nghĩa chiến lược mean-reversion.\"}, \"35\": {\"ket\": \"rỗng\", \"vi_sao\": \"Sai liên kết giữa chỉ báo kỹ thuật và giới hạn VaR vốn có.\"}, \"36\": {\"ket\": \"thật\", \"vi_sao\": \"Nêu rõ ràng buộc lệnh cắt lỗ tự động kích hoạt tạo thanh khoản.\"}, \"37\": {\"ket\": \"thật\", \"vi_sao\": \"Cơ chế kích hoạt lệnh chờ mua tạo thanh khoản cung, độc lập luật.\"}, \"38\": {\"ket\": \"rỗng\", \"vi_sao\": \"Từ \\\"buộc phải\\\" chung chung, thiếu ràng buộc định lượng hoặc quy chế cụ thể.\"}, \"39\": {\"ket\": \"rỗng\", \"vi_sao\": \"Thiếu cơ chế ràng buộc cụ thể, chỉ mô tả dòng tiền chung quanh vùng.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 61.6
+  }
+ },
+ "2a03ad609c5798d340fa8c06b45fad6cde241425": {
+  "luc": 1788688851.722357,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"24\": {\"ket\": \"rong\", \"vi_sao\": \"Chỉ mô tả phản ứng kỹ thuật, thiếu ràng buộc định chế thực tế.\"}, \"25\": {\"ket\": \"rong\", \"vi_sao\": \"Diễn giải stop-loss, không nêu ràng buộc thanh khoản hay quy định định chế.\"}, \"26\": {\"ket\": \"rong\", \"vi_sao\": \"Dùng thuật ngữ mơ hồ, không nêu ràng buộc định chế nào ép giao dịch.\"}, \"27\": {\"ket\": \"that\", \"vi_sao\": \"Chỉ ra ràng buộc thanh toán quốc tế và rủi ro tỷ giá qua đêm.\"}, \"28\": {\"ket\": \"rong\", \"vi_sao\": \"Gán mác CTA, không nêu ràng buộc nội bộ nào ép mua ở ngưỡng EMA14.\"}, \"29\": {\"ket\": \"rong\", \"vi_sao\": \"Liên kết giả tạo giữa EMA14 và margin, thiếu ràng buộc định chế thực tế.\"}, \"30\": {\"ket\": \"rong\", \"vi_sao\": \"Đề cập Fibonacci lạc đề, không có ràng buộc thanh khoản nào khớp với luật.\"}, \"31\": {\"ket\": \"rong\", \"vi_sao\": \"Nhắc fib vô lý, thiếu ràng buộc chi phí vốn hay cơ chế ép bán.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 42.6
+  }
+ },
+ "1dff9b3966748039d1d20217d787946103fb2e81": {
+  "luc": 1788688809.1059637,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"16\": {\"ket\": \"rong\", \"vi_sao\": \"Không có ràng buộc độc lập ép giao dịch tại mốc 200 phiên.\"}, \"17\": {\"ket\": \"rong\", \"vi_sao\": \"FOMO không phải ràng buộc cứng nhắc kích hoạt đúng ngưỡng 200 phiên.\"}, \"18\": {\"ket\": \"rong\", \"vi_sao\": \"Cắt lỗ không gắn cơ chế cứng nhắc với điểm cắt đường trung bình.\"}, \"19\": {\"ket\": \"rong\", \"vi_sao\": \"Cắt lỗ không đồng nhất với điểm đảo chiều đường trung bình động.\"}, \"20\": {\"ket\": \"that\", \"vi_sao\": \"Chạy lệnh dừng lỗ phe bán tạo dòng tiền mua độc lập.\"}, \"21\": {\"ket\": \"that\", \"vi_sao\": \"Dừng lỗ phe mua dưới đáy cũ tạo áp lực bán độc lập.\"}, \"22\": {\"ket\": \"rong\", \"vi_sao\": \"Thay đổi tham số 5 phiên thành khung mở cửa, thiếu ràng buộc.\"}, \"23\": {\"ket\": \"rong\", \"vi_sao\": \"Khung thời gian mô tả sai luật, chỉ là diễn giải hành vi chung.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 55.2
+  }
+ },
+ "f6a5f08010278a3f5db977d122ea1f8b279791ba": {
+  "luc": 1788688753.8788269,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"8\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ mô tả cắt lỗ chung, thiếu ràng buộc thị trường độc lập nào.\"}, \"9\": {\"ket\": \"thật\", \"vi_sao\": \"Xác định rõ phe bán khống bị kích hoạt cắt lỗ, tạo dòng tiền mua.\"}, \"10\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ là cắt lỗ chung, thiếu ràng buộc thị trường hay phe đối kháng.\"}, \"11\": {\"ket\": \"thật\", \"vi_sao\": \"Xác định cơ chế kích hoạt lệnh cắt lỗ trader nhanh, cung cấp thanh khoản thực.\"}, \"12\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ lặp lại cắt lỗ kỹ thuật, không nêu ràng buộc thị trường độc lập nào.\"}, \"13\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ gán phe bán khống vào điều kiện luật, thiếu ràng buộc kinh tế độc lập.\"}, \"14\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ mô tả phản ứng phòng vệ chung, thiếu cơ chế ràng buộc thị trường cụ thể.\"}, \"15\": {\"ket\": \"rỗng\", \"vi_sao\": \"Chỉ diễn giải điều kiện kỹ thuật thành kích hoạt hệ thống, thiếu ràng buộc độc lập.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 86.7
+  }
+ },
+ "064b5fed13effa7754f9a6acb5da4a2e069954c5": {
+  "luc": 1788688667.12637,
+  "ket_qua": {
+   "van_ban": "{\"phan_xu\": {\"0\": {\"ket\": \"rong\", \"vi_sao\": \"Chỉ mô tả cơ chế kích hoạt lệnh dừng, thiếu ràng buộc kinh tế độc lập.\"}, \"1\": {\"ket\": \"rong\", \"vi_sao\": \"Diễn giải lại lệnh cắt lỗ, thiếu ràng buộc khách quan bên ngoài luật.\"}, \"2\": {\"ket\": \"rong\", \"vi_sao\": \"Giải thích mô tả bán tháo, trái ngược hoàn toàn với lệnh MUA trong luật.\"}, \"3\": {\"ket\": \"rong\", \"vi_sao\": \"Diễn giải lại tín hiệu quá mua, không nêu ràng buộc khách quan nào.\"}, \"4\": {\"ket\": \"rong\", \"vi_sao\": \"Mô tả chung chung tâm lý mua đáy, thiếu ràng buộc khách quan độc lập.\"}, \"5\": {\"ket\": \"rong\", \"vi_sao\": \"Diễn giải lại động thái theo xu hướng, thiếu yếu tố ràng buộc khách quan.\"}, \"6\": {\"ket\": \"rong\", \"vi_sao\": \"Chỉ mô tả cơ chế kích hoạt lệnh dừng lỗ, không nêu ràng buộc thực sự.\"}, \"7\": {\"ket\": \"rong\", \"vi_sao\": \"Giải thích dựa trên lệnh cắt lỗ phe bán, thiếu ràng buộc khách quan.\"}}}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 72.8
+  }
+ },
  "6dc8670d35569e42e91e1e8921ae82148d62b56a": {
   "luc": 1788685431.6884813,
   "ket_qua": {

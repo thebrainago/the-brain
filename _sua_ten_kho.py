@@ -65,7 +65,67 @@ def sua(kho: list[dict]) -> tuple[list[dict], dict]:
     return moi, bao
 
 
+def ban_do_ten(kho_cu: list[dict] | None = None) -> dict:
+    """{ten cu: ten moi}. Dung de doc lai cac bao cao sinh TRUOC lan doi ten.
+
+    Vi sao can (vuong mac ghi trong ban giao 06/09): `reports/LOI_RA_D1.json`
+    182.550 o duoc sinh truoc khi doi ten, nen doi chieu no voi kho hien tai
+    truot 127 co che. `chuan_hoa_ten` khong du de doi chieu: 11 ten quy ve cung
+    mot chuoi va duoc them hau to so, nen anh xa la 1-nhieu neu chi tinh bang
+    ham chuan hoa.
+
+    `sua()` la tat dinh va khong bo muc nao trong lan chay 06/09, nen ghep theo
+    VI TRI la dung. Neu ban cu va ban moi lech so luong thi tra {} chu khong
+    doan - mot ban do doan ra se lam moi doi chieu sau do sai mot cach im lang.
+    """
+    if kho_cu is None:
+        p = NP.KHO_CO_CHE.with_suffix(".truoc_sua_ten.json")
+        if not p.exists():
+            return {}
+        kho_cu = json.loads(p.read_text(encoding="utf-8-sig"))
+    moi, _ = sua(kho_cu)
+    if len(moi) != len(kho_cu):
+        return {}
+    return {c.get("ten"): m.get("ten") for c, m in zip(kho_cu, moi)
+            if c.get("ten") != m.get("ten")}
+
+
+def nan_bao_cao(duong: str, that: bool = False) -> dict:
+    """Doi ten co che trong mot bao cao JSON da sinh truoc lan doi ten."""
+    bd = ban_do_ten()
+    if not bd:
+        return {"loi": "khong dung duoc ban do ten"}
+    p = Path(duong)
+    d = json.loads(p.read_text(encoding="utf-8-sig"))
+    dem = 0
+
+    def _doi(x):
+        nonlocal dem
+        if isinstance(x, dict):
+            for k in ("goc", "mau", "bien_the", "co_che", "tot_nhat"):
+                v = x.get(k)
+                if isinstance(v, str):
+                    cot, hau = (v.split("@", 1) + [""])[:2]
+                    if cot in bd:
+                        x[k] = bd[cot] + ("@" + hau if hau else "")
+                        dem += 1
+            for v in x.values():
+                _doi(v)
+        elif isinstance(x, list):
+            for v in x:
+                _doi(v)
+
+    _doi(d)
+    if that:
+        p.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    return {"file": p.name, "doi": dem, "da_ghi": bool(that)}
+
+
 def main() -> int:
+    if "--nan-bao-cao" in sys.argv:
+        f = sys.argv[sys.argv.index("--nan-bao-cao") + 1]
+        print(nan_bao_cao(f, "--that" in sys.argv))
+        return 0
     kho = NP.doc_kho()
     moi, bao = sua(kho)
     print("kho %d -> %d co che" % (len(kho), len(moi)))

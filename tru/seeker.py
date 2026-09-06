@@ -1899,7 +1899,33 @@ NP_TOM_TAT = """NGU PHAP KHAI BAO CO CHE (chi duoc dung dung nhung khoa nay):
             "toan_hang":[th, th, ...]}        // gop mot DAI chi bao, vi du GMMA
   `n` LUON lui ve qua khu - khong co cach nao viet toan hang nhin tuong lai.
   `phan_vi` = thu hang trong N bar gan nhat (0..1); dung no thay cho nguong tuyet doi.
-  Ty le kich hoat phai nam trong 0,5%..40% so bar."""
+  Ty le kich hoat phai nam trong 0,5%..40% so bar.
+
+VUNG (dung cho FVG / order block / vung cung cau / thanh khoan / ORB / khang cu
+ho tro). Mot vung KHONG phai dieu kien tai mot nen: no la vat the SONG QUA
+NHIEU NEN, co bien tren, bien duoi, va chet khi bi lap day. Dung `dk` thuong de
+dien no la dien SAI.
+  dk_vung = {"vung": {"tao":[dk...],        // nen nao SINH ra vung
+                      "tren": th, "duoi": th,   // bien, tinh TAI NEN SINH
+                      "song": <1..500>,     // song toi da bao nhieu nen
+                      "huy": "cham|dong_ngoai|het_han"},
+             "quan_he": "cham|trong|bat_len|bat_xuong|xuyen_len|xuyen_xuong"}
+  quan_he: `cham` bien do nen phu len vung · `trong` gia dong cua nam trong vung
+           `bat_len` cham roi dong cua TREN vung · `bat_xuong` cham roi dong DUOI
+           `xuyen_len`/`xuyen_xuong` dong cua vuot han qua sau khi nen truoc con o
+  huy:     `cham` lap day mot lan la het (chuan cua FVG/order block)
+           `dong_ngoai` chi chet khi gia dong cua ra ngoai · `het_han` het `song` nen
+
+  VI DU - FVG tang (`low[i] > high[i-2]`), vao khi gia quay lai bat len khoi gap:
+  {"vung": {"tao": [{"trai": {"chi_bao":"gia","cot":"low"}, "phep": ">",
+                     "phai": {"chi_bao":"tre","cua":{"chi_bao":"gia","cot":"high"},"n":2}}],
+            "tren": {"chi_bao":"gia","cot":"low"},
+            "duoi": {"chi_bao":"tre","cua":{"chi_bao":"gia","cot":"high"},"n":2},
+            "song": 20, "huy": "cham"},
+   "quan_he": "bat_len"}
+
+  `tao` KHONG duoc de rong: vung se sinh o moi nen va quan he thanh gan nhu luon
+  dung. Bien vung tinh bang chinh `th` nen cung khong nhin duoc tuong lai."""
 
 
 # ----------------------------------------------------------------- MOT LUOT

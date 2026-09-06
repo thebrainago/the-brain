@@ -4,13 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
-- git: 70c032f SONIC R H4 tren US500CASH: he dau tien ra tien, du lenh, dung vung ngoai mau
-### 2026-09-03 16:24:34 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13328, 0 phut), dieu_khien_xa.py (pid 16352, 348 phut)
-- `boc_llm_130.log`: KHO CO CHE: 154 -> 174   (+20)
-- `boc_llm_thu.log`: KHO CO CHE: 152 -> 154   (+2)
 - `doc_roi_boc.log`: vong 1: doc duoc 28, that bai 2 (245s)
 - `placebo_xu_huong.log`: SMA50>SMA200    2011-2026           0.8400      0.8400   390  ROT
 - `san_he_pho_thong.log`: KHO CO CHE: 174 -> 174
@@ -404,3 +397,10 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - `quet_D1_0906.log`: TONG: {'LOAI': 18812, 'CHUA_DU_LUC': 18599, 'NEN_GOP': 10706, 'SAN_SANG_V4': 15} (506.8s, 8 tien trinh)
 - `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
 - git: 91c2b49 do spread that cho ca be mat: 44 -> 86 ma giao dich duoc
+### 2026-09-06 16:35:00 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5304, 0 phut)
+- `loi_ra_D1.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LOI_RA_D1.json
+- `quet_D1_0906.log`: TONG: {'LOAI': 18812, 'CHUA_DU_LUC': 18599, 'NEN_GOP': 10706, 'SAN_SANG_V4': 15} (506.8s, 8 tien trinh)
+- `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
+- git: 20da25d dien 2 muc ban giao 06/09: mot doan doc la hieu ca phien + 3 viec mai theo thu tu moi

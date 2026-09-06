@@ -137,5 +137,56 @@ class CongPhaiApChoCA_HANG_DA_VAO_KHO(unittest.TestCase):
                                 "'%s' la mau viet tay, khong co spec" % ten)
 
 
+class CONG_PHAI_NAM_O_CUA(unittest.TestCase):
+    """`loc()` khong phai cua duy nhat vao `MAU.MAU`.
+
+    Sua 06/09 lan mot dat cong o `loc_co_che.loc`. Nhung `do_on_dinh`,
+    `hinh_dang_vs_null`, `cham_lai_the_he`, `ngoai_sinh`, `p_null_vs_ung_vien`
+    deu goi thang `nap_vao_mau` roi doc `MAU.MAU` - nen mot co che khong co
+    truong `co_che` van duoc cham lai diem, van duoc do lan can "cao nguyen hay
+    cai gai", van duoc dem trong nha may null. Chan o hai cho voi hai danh sach
+    thi som muon se lech nhau; cong phai nam o CUA.
+    """
+
+    def test_nap_vao_mau_tu_choi_spec_khong_qua_cong(self):
+        from nhan import mau as MAU
+        MAU.MAU.pop("thu_khong_co_co_che", None)
+        goc = NP.doc_kho()
+        hong = {"ten": "thu_khong_co_co_che", "ho": "pha_vo", "chieu": 1,
+                "giu": 1, "vao": [_ve(GIA, ">", {"chi_bao": "gia",
+                                                 "cot": "open"})]}
+        NP.luu_kho(goc + [hong])
+        try:
+            NP.nap_vao_mau()
+            self.assertNotIn("thu_khong_co_co_che", MAU.MAU,
+                             "spec thieu 'co_che' van vao duoc MAU.MAU")
+            self.assertIn("thu_khong_co_co_che", NP.BI_TU_CHOI_KHI_NAP)
+        finally:
+            NP.luu_kho(goc)
+            MAU.MAU.pop("thu_khong_co_co_che", None)
+
+    def test_ban_ghi_tu_choi_khong_bi_vut_di(self):
+        """Mot muc bi tu choi im lang thi khong ai biet kho vua nho di, va con
+        so '540 co che' van duoc doc nhu 540 phep thu."""
+        NP.nap_vao_mau()
+        self.assertIsInstance(NP.BI_TU_CHOI_KHI_NAP, dict)
+        kho = NP.doc_kho()
+        dung = sum(1 for c in kho if NP.kiem_khai_bao(c))
+        self.assertEqual(len(NP.BI_TU_CHOI_KHI_NAP), dung,
+                         "so muc bi tu choi khong khop so muc truot cong")
+
+    def test_kiem_cong_False_chi_de_DO_DAC(self):
+        from nhan import mau as MAU
+        MAU.MAU.clear()
+        import importlib
+        importlib.reload(MAU)
+        n_co_cong = NP.nap_vao_mau()
+        MAU.MAU.clear()
+        importlib.reload(MAU)
+        n_khong_cong = NP.nap_vao_mau(kiem_cong=False)
+        self.assertGreater(n_khong_cong, n_co_cong,
+                           "tat cong ma so nap khong tang -> cong khong lam gi")
+
+
 if __name__ == "__main__":
     unittest.main()

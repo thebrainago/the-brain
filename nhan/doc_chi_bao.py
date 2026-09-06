@@ -269,10 +269,14 @@ def _ds_chi_bao(gioi_han: int = 0) -> list[dict]:
     return ds
 
 
-def _chay(ds: list[dict], so_lan: int, in_ra) -> list[dict]:
+def _chay(ds: list[dict], so_lan: int, in_ra, tom_tat: str = "") -> list[dict]:
     from nhan import boc_llm as BL
     import time
-    tom_tat = BL._ngu_phap_tom_tat()
+    # `tom_tat` truyen vao la diem chen CHI DAN RIENG cho tung lop file. Do 06/09:
+    # ban tom tat ngu phap co lieu ke nguyen thuy `vung`, nhung VI DU tra ve
+    # trong loi nhac chi cho dang so-sanh-tung-nen, va LLM bam vi du chu khong
+    # bam ban tham chieu - 0/9 khai bao dung `vung` o luot dau.
+    tom_tat = tom_tat or BL._ngu_phap_tom_tat()
     t0 = time.time()
     ket = []
     with _cf.ThreadPoolExecutor(max_workers=LUONG) as ex:
