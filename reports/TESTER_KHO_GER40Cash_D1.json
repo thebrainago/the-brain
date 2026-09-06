@@ -1,0 +1,1728 @@
+{
+ "symbol": "GER40Cash",
+ "khung": "D1",
+ "so_co_che": 360,
+ "so_pass": 127,
+ "giay": 213.0,
+ "ghi_chu": "",
+ "ket": [
+  {
+   "ten": "rsi_3_10",
+   "ma_co_che": 169,
+   "lenh": 67,
+   "lai": 684.97,
+   "pf": 2.733662,
+   "sharpe": 2.753409,
+   "dd_pct": 1.6509,
+   "ky_vong": 10.223433,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "RSI 3 period xuống dưới 10 cho tín hiệu oversold nhẹ, tần suất giao dịch cao hơn."
+  },
+  {
+   "ten": "ema_cross_ea5",
+   "ma_co_che": 256,
+   "lenh": 63,
+   "lai": 182.78,
+   "pf": 1.524431,
+   "sharpe": 1.83182,
+   "dd_pct": 1.0169,
+   "ky_vong": 2.90127,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `EMA_Cross_EA5.mq5` (EMA_Cross_EA5), CHUA co lap luan kinh te: gia thuyet nay kiem chinh "
+  },
+  {
+   "ten": "mua_rsi14_tren_70",
+   "ma_co_che": 4,
+   "lenh": 124,
+   "lai": 236.19,
+   "pf": 1.650392,
+   "sharpe": 1.803224,
+   "dd_pct": 0.5905,
+   "ky_vong": 1.904758,
+   "ho": "xu_huong",
+   "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"3- RSI – Prevents buying above 70 and selling below 30 4"
+  },
+  {
+   "ten": "aegis_quantum_lite",
+   "ma_co_che": 255,
+   "lenh": 124,
+   "lai": 236.19,
+   "pf": 1.650392,
+   "sharpe": 1.803224,
+   "dd_pct": 0.5905,
+   "ky_vong": 1.904758,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `Aegis_Quantum_Lite.mq5` (Aegis_Quantum_Lite), CHUA co lap luan kinh te: gia thuyet nay k"
+  },
+  {
+   "ten": "rsi_ban_qua_mua",
+   "ma_co_che": 246,
+   "lenh": 149,
+   "lai": 312.23,
+   "pf": 1.463538,
+   "sharpe": 1.598122,
+   "dd_pct": 1.7827,
+   "ky_vong": 2.095503,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Ban khi RSI 6 vuot len tren 70, tin hieu qua mua nguong co dien"
+  },
+  {
+   "ten": "tranh_xa_vao_khi_bien_dong_ngan_han_vuot_qua_dai_han",
+   "ma_co_che": 331,
+   "lenh": 109,
+   "lai": 242.69,
+   "pf": 1.387826,
+   "sharpe": 1.43138,
+   "dd_pct": 1.9321,
+   "ky_vong": 2.226514,
+   "ho": "bien_dong",
+   "co_che": "Luat rut TU MA NGUON `https://www.reddit.com/r/algotrading/comments/1phv4zz/the_signal_i_use_to_detect_hidden_"
+  },
+  {
+   "ten": "ema_trend_cross_sell",
+   "ma_co_che": 289,
+   "lenh": 26,
+   "lai": 103.95,
+   "pf": 1.438404,
+   "sharpe": 1.372964,
+   "dd_pct": 1.8981,
+   "ky_vong": 3.998077,
+   "ho": "xu_huong",
+   "co_che": "Các quỹ định lượng bán khi đường EMA nhanh cắt xuống EMA trung bình để kết thúc xu hướng giảm, buộc các nhà bá"
+  },
+  {
+   "ten": "mua_khi_gia_duoi_dai_duoi_bollinger",
+   "ma_co_che": 156,
+   "lenh": 104,
+   "lai": 430.55,
+   "pf": 1.492271,
+   "sharpe": 1.210749,
+   "dd_pct": 1.7209,
+   "ky_vong": 4.139904,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Gia đóng cửa chạm dải dưới Bollinger (20,2) báo hiệu quá bán, kỳ vọng đảo chiều tăng"
+  },
+  {
+   "ten": "ban_khi_rsi_90_close_ma200_va_close_ma5",
+   "ma_co_che": 240,
+   "lenh": 51,
+   "lai": 108.77,
+   "pf": 1.284798,
+   "sharpe": 1.185482,
+   "dd_pct": 1.3522,
+   "ky_vong": 2.132745,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Bán khi giá hồi phục trong xu hướng giảm, RSI quá mua, kỳ vọng giảm tiếp."
+  },
+  {
+   "ten": "rsi_cross_down_from_70",
+   "ma_co_che": 225,
+   "lenh": 42,
+   "lai": 44.43,
+   "pf": 1.244107,
+   "sharpe": 0.895955,
+   "dd_pct": 1.4733,
+   "ky_vong": 1.057857,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "RSI rơi xuống từ vùng quá mua (70) cho thấy áp lực bán, tín hiệu bán"
+  },
+  {
+   "ten": "s_ban_rsi14_cheo_xuong_70",
+   "ma_co_che": 106,
+   "lenh": 42,
+   "lai": 44.43,
+   "pf": 1.244107,
+   "sharpe": 0.895955,
+   "dd_pct": 1.4733,
+   "ky_vong": 1.057857,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Chien luoc THAT rut tu `strategy.entry`: vao lenh khi 1 dieu kien cung dung (`crossunder(vrsi, RSIOverBought)`"
+  },
+  {
+   "ten": "meanreversion_200",
+   "ma_co_che": 260,
+   "lenh": 24,
+   "lai": 96.75,
+   "pf": 1.435575,
+   "sharpe": 0.787198,
+   "dd_pct": 1.8311,
+   "ky_vong": 4.03125,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Luat rut TU MA NGUON `meanreversion.mq5` (MeanReversion_200), CHUA co lap luan kinh te: gia thuyet nay kiem ch"
+  },
+  {
+   "ten": "mua_khi_rsi_qua_ban",
+   "ma_co_che": 197,
+   "lenh": 13,
+   "lai": 242.99,
+   "pf": 2.103347,
+   "sharpe": 0.777437,
+   "dd_pct": 2.6424,
+   "ky_vong": 18.691538,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Thị trường quá bán, kỳ vọng giá hồi phục, mua vào khi RSI dưới 25"
+  },
+  {
+   "ten": "short_khi_rsi_2_96_trong_downtrend",
+   "ma_co_che": 175,
+   "lenh": 27,
+   "lai": 59.58,
+   "pf": 1.214293,
+   "sharpe": 0.625817,
+   "dd_pct": 1.7476,
+   "ky_vong": 2.206667,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Bán khống khi RSI 2 kỳ quá mua trên 96 trong xu hướng giảm (20 EMA < 200 EMA)"
+  },
+  {
+   "ten": "pine_bollinger_band_ema60_close_duoi_ema180_close",
+   "ma_co_che": 56,
+   "lenh": 295,
+   "lai": 324.55,
+   "pf": 1.166675,
+   "sharpe": 0.623979,
+   "dd_pct": 3.108,
+   "ky_vong": 1.100169,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `FastEMA<SlowEMA`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dic"
+  },
+  {
+   "ten": "bu_rui_ro_truoc_cong_bo_vi_mo",
+   "ma_co_che": 21,
+   "lenh": 86,
+   "lai": 230.16,
+   "pf": 1.350886,
+   "sharpe": 0.589035,
+   "dd_pct": 2.0671,
+   "ky_vong": 2.676279,
+   "ho": "vi_mo",
+   "co_che": "Cac ban tin vi mo lon cua My (CPI, FOMC) roi vao khoang ngay 9-13 hang thang; nha tao lap va quy phong ho HA t"
+  },
+  {
+   "ten": "pine_cl_20_years_old_tur_low_duoi_thap_nhat55_tre1",
+   "ma_co_che": 138,
+   "lenh": 68,
+   "lai": 144.67,
+   "pf": 1.224357,
+   "sharpe": 0.562302,
+   "dd_pct": 3.836,
+   "ky_vong": 2.1275,
+   "ho": "pha_vo",
+   "co_che": "Rut tu ma nguon that: dieu kien `low < slowS[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich"
+  },
+  {
+   "ten": "long_khi_rsi_2_1_8_trong_uptrend",
+   "ma_co_che": 176,
+   "lenh": 18,
+   "lai": 100.21,
+   "pf": 1.511302,
+   "sharpe": 0.541787,
+   "dd_pct": 2.2184,
+   "ky_vong": 5.567222,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Mua khi RSI 2 kỳ quá bán dưới 1.8 trong xu hướng tăng (20 EMA > 200 EMA)"
+  },
+  {
+   "ten": "pine_rsi_strategy_rsi12_tren_70",
+   "ma_co_che": 116,
+   "lenh": 155,
+   "lai": 88.24,
+   "pf": 1.135385,
+   "sharpe": 0.505621,
+   "dd_pct": 1.2884,
+   "ky_vong": 0.56929,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Rut tu ma nguon that: dieu kien `xRSI > Overbought`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao d"
+  },
+  {
+   "ten": "ban_khi_z_score_cao",
+   "ma_co_che": 244,
+   "lenh": 42,
+   "lai": 444.13,
+   "pf": 1.57416,
+   "sharpe": 0.470106,
+   "dd_pct": 3.8889,
+   "ky_vong": 10.574524,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Z-score cao cho thay gia vuot xa trung binh, ky vong hoi phuc"
+  },
+  {
+   "ten": "ep_mua_lai_ban_khong_thanh_khoan_can",
+   "ma_co_che": 30,
+   "lenh": 86,
+   "lai": 92.74,
+   "pf": 1.166712,
+   "sharpe": 0.465129,
+   "dd_pct": 2.2246,
+   "ky_vong": 1.078372,
+   "ho": "pha_vo",
+   "co_che": "Quy phong ho giu vi the ban chi so de phong ho danh muc bi lo mark-to-market khi gia vuot dinh 20 bar va bi go"
+  },
+  {
+   "ten": "pine_cl_20_years_old_tur_low_duoi_thap_nhat20_tre1",
+   "ma_co_che": 136,
+   "lenh": 145,
+   "lai": 170.25,
+   "pf": 1.137168,
+   "sharpe": 0.403794,
+   "dd_pct": 2.7422,
+   "ky_vong": 1.174138,
+   "ho": "pha_vo",
+   "co_che": "Rut tu ma nguon that: dieu kien `low < fastS[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich"
+  },
+  {
+   "ten": "mean_reversion_z5",
+   "ma_co_che": 160,
+   "lenh": 321,
+   "lai": 515.65,
+   "pf": 1.205326,
+   "sharpe": 0.394482,
+   "dd_pct": 5.3476,
+   "ky_vong": 1.606386,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Mua khi gia giam sau duoi trung binh 5 ngay, ky vong hoi phuc."
+  },
+  {
+   "ten": "mua_zscore20_close_duoi_am2",
+   "ma_co_che": 20,
+   "lenh": 30,
+   "lai": 889.56,
+   "pf": 2.099702,
+   "sharpe": 0.325255,
+   "dd_pct": 6.3782,
+   "ky_vong": 29.652,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"We open a long position when the price comes within a zo"
+  },
+  {
+   "ten": "mua_sma10_tren_sma60",
+   "ma_co_che": 9,
+   "lenh": 885,
+   "lai": 445.19,
+   "pf": 1.083034,
+   "sharpe": 0.324058,
+   "dd_pct": 3.414,
+   "ky_vong": 0.50304,
+   "ho": "xu_huong",
+   "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"The authors build a target label with a moving-average c"
+  },
+  {
+   "ten": "pine_pekipek_s_ppo_sma2_duoi_sma2_tre1",
+   "ma_co_che": 32,
+   "lenh": 692,
+   "lai": 425.02,
+   "pf": 1.093581,
+   "sharpe": 0.311517,
+   "dd_pct": 4.6883,
+   "ky_vong": 0.614191,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `d < d[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o dun"
+  },
+  {
+   "ten": "pine_cm_rsi_2_strat_close_tre3_duoi_sma5_close_tre3",
+   "ma_co_che": 72,
+   "lenh": 665,
+   "lai": 374.47,
+   "pf": 1.078701,
+   "sharpe": 0.293711,
+   "dd_pct": 3.7589,
+   "ky_vong": 0.563113,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close[3] < ma5[3]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao d"
+  },
+  {
+   "ten": "gamma_duong_keo_ve",
+   "ma_co_che": 5,
+   "lenh": 110,
+   "lai": 107.42,
+   "pf": 1.129398,
+   "sharpe": 0.272821,
+   "dd_pct": 2.3324,
+   "ky_vong": 0.976545,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Trong che do bien dong THAP, nha tao lap quyen chon o trang thai gamma duong (ho da ban quyen chon cho quy ove"
+  },
+  {
+   "ten": "mua_day_climax_vol_cao",
+   "ma_co_che": 141,
+   "lenh": 30,
+   "lai": 304.24,
+   "pf": 1.417058,
+   "sharpe": 0.23885,
+   "dd_pct": 5.8475,
+   "ky_vong": 10.141333,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Khi khối lượng đột biến và biến động cao, nhà đầu tư hoảng loạn bán tháo tạo đáy; tổ chức và nhà tạo lập mua v"
+  },
+  {
+   "ten": "rut_von_quy_tuong_ho",
+   "ma_co_che": 10,
+   "lenh": 26,
+   "lai": 275.7,
+   "pf": 1.517708,
+   "sharpe": 0.211311,
+   "dd_pct": 5.6019,
+   "ky_vong": 10.603846,
+   "ho": "dong_tien",
+   "co_che": "Nha dau tu ca nhan rut von khoi quy tuong ho SAU khi nhin thay NAV giam, va quy phai ban co phieu theo lich th"
+  },
+  {
+   "ten": "yes_rsi_bb_sniper_long",
+   "ma_co_che": 344,
+   "lenh": 13,
+   "lai": 776.88,
+   "pf": 2.471308,
+   "sharpe": 0.19244,
+   "dd_pct": 4.9425,
+   "ky_vong": 59.76,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Kết hợp giá đóng cửa chạm hoặc nằm dưới dải giữa Bollinger Bands cùng lúc RSI vượt lên trên ngưỡng 30 để xác n"
+  },
+  {
+   "ten": "vao_long_khi_rsi_duoi_nguong_qua_ban",
+   "ma_co_che": 335,
+   "lenh": 13,
+   "lai": 896.67,
+   "pf": 2.965649,
+   "sharpe": 0.160794,
+   "dd_pct": 5.6599,
+   "ky_vong": 68.974615,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Khi chi bao RSI xuong duoi muc 30, cho thay gia da bi ban qua toc, co kha nang cao se hoi phuc va tang gia tro"
+  },
+  {
+   "ten": "pha_day_hut_quet_stop",
+   "ma_co_che": 13,
+   "lenh": 50,
+   "lai": 112.03,
+   "pf": 1.147033,
+   "sharpe": 0.143021,
+   "dd_pct": 4.6704,
+   "ky_vong": 2.2406,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Lenh dung lo cua nha giao dich don bay xep chong ngay duoi day 20 bar; khi gia xuyen qua, chuoi stop bien than"
+  },
+  {
+   "ten": "trend_momentum_buy",
+   "ma_co_che": 320,
+   "lenh": 21,
+   "lai": 149.87,
+   "pf": 1.392813,
+   "sharpe": 0.139812,
+   "dd_pct": 2.6824,
+   "ky_vong": 7.136667,
+   "ho": "xu_huong",
+   "co_che": "Các quỹ xu hướng trả phí để xác nhận lực mua mạnh qua việc đường trung bình nhanh vượt chậm, đồng thời RSI nằm"
+  },
+  {
+   "ten": "macd_stochastic_doub_close_duoi_ema26_close",
+   "ma_co_che": 85,
+   "lenh": 508,
+   "lai": 100.17,
+   "pf": 1.023645,
+   "sharpe": 0.09426,
+   "dd_pct": 8.2576,
+   "ky_vong": 0.197185,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close < slowMA`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich"
+  },
+  {
+   "ten": "pine_volatility_swi_do_lech21_tre9_duoi_do_lech21",
+   "ma_co_che": 66,
+   "lenh": 678,
+   "lai": 84.96,
+   "pf": 1.018339,
+   "sharpe": 0.068316,
+   "dd_pct": 4.8914,
+   "ky_vong": 0.12531,
+   "ho": "bien_dong",
+   "co_che": "Rut tu ma nguon that: dieu kien `vola21[9] <= vola21`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao"
+  },
+  {
+   "ten": "pine_volatility_swi_do_lech21_tre11_duoi_do_lech21",
+   "ma_co_che": 68,
+   "lenh": 669,
+   "lai": 85.56,
+   "pf": 1.019109,
+   "sharpe": 0.067186,
+   "dd_pct": 5.3001,
+   "ky_vong": 0.127892,
+   "ho": "bien_dong",
+   "co_che": "Rut tu ma nguon that: dieu kien `vola21[11] <= vola21`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai gia"
+  },
+  {
+   "ten": "ban_lo_cuoi_nam_thue",
+   "ma_co_che": 7,
+   "lenh": 2,
+   "lai": 97.14,
+   "pf": 0.0,
+   "sharpe": 0.065645,
+   "dd_pct": 0.7584,
+   "ky_vong": 48.57,
+   "ho": "lich",
+   "co_che": "Nha dau tu ca nhan va quy tuong ho o My phai hien thuc hoa khoan LO truoc 31/12 de khau tru thue (va quy tuong"
+  },
+  {
+   "ten": "ema_stack_sma_trend_filter",
+   "ma_co_che": 295,
+   "lenh": 15,
+   "lai": 406.57,
+   "pf": 1.714961,
+   "sharpe": 0.049394,
+   "dd_pct": 7.6434,
+   "ky_vong": 27.104667,
+   "ho": "xu_huong",
+   "co_che": "Dau tu gia nhieu theo phep do lech tren trung binh dong ngan han va trung han de chong laixu huong nguoc, tran"
+  },
+  {
+   "ten": "insurance_put_hedge_khi_bien_dong_cao",
+   "ma_co_che": 114,
+   "lenh": 24,
+   "lai": 58.25,
+   "pf": 1.09135,
+   "sharpe": 0.04376,
+   "dd_pct": 6.3759,
+   "ky_vong": 2.427083,
+   "ho": "bien_dong",
+   "co_che": "Cong ty bao hiem mua quyen chon put de phong ho danh muc co phieu khi bien dong thi truong tang cao (phan vi A"
+  },
+  {
+   "ten": "rsi_long_khi_rsi_60_va_ong_khi_rsi_75",
+   "ma_co_che": 221,
+   "lenh": 15,
+   "lai": 389.59,
+   "pf": 1.527399,
+   "sharpe": 0.04259,
+   "dd_pct": 8.9456,
+   "ky_vong": 25.972667,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Mua khi RSI dưới 60 kỳ vọng giá hồi phục, bán khi RSI trên 75 chốt lời quá mua"
+  },
+  {
+   "ten": "mua_sau_vol_gian_no_va_kl_cuc_dai",
+   "ma_co_che": 130,
+   "lenh": 16,
+   "lai": 26.47,
+   "pf": 1.063717,
+   "sharpe": 0.041456,
+   "dd_pct": 4.2543,
+   "ky_vong": 1.654375,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Khi bien dong va khoi luong cung dat dinh, do la dinh cua su hoang loan (capitulation); nha dau tu thong thai "
+  },
+  {
+   "ten": "ema_rsi_sell",
+   "ma_co_che": 326,
+   "lenh": 2,
+   "lai": 233.41,
+   "pf": 3.944494,
+   "sharpe": 0.03285,
+   "dd_pct": 2.7348,
+   "ky_vong": 116.705,
+   "ho": "xu_huong",
+   "co_che": "Các quỹ định lượng bán khống khi momentum suy yếu và giá phá vỡ cấu trúc tăng, tận dụng dòng lệnh stop-loss củ"
+  },
+  {
+   "ten": "silviobuyentry",
+   "ma_co_che": 323,
+   "lenh": 1,
+   "lai": 97.12,
+   "pf": 0.0,
+   "sharpe": 0.010241,
+   "dd_pct": 3.3934,
+   "ky_vong": 97.12,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Bắt điểm mua khi giá chạm vùng hỗ trợ động trong 48 nến kèm RSI dưới 40, tận dụng đà phục hồi ngắn hạn sau phi"
+  },
+  {
+   "ten": "thanh_ly_cuoi_ngay",
+   "ma_co_che": 232,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "lich",
+   "co_che": "Dong tat ca vi the vao cuoi ngay de tranh rui ro qua dem"
+  },
+  {
+   "ten": "spread_low_threshold",
+   "ma_co_che": 275,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "bien_dong",
+   "co_che": "Luat rut TU MA NGUON `ASQ_SpreadLogger.mq5` (Spread_Low_Threshold), CHUA co lap luan kinh te: gia thuyet nay k"
+  },
+  {
+   "ten": "bull_sweep_reversal",
+   "ma_co_che": 250,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "pha_vo",
+   "co_che": "Bên mua tổ chức tận dụng thanh khoản từ nhà đầu tư cá nhân bị kích hoạt lệnh cắt lỗ tự động khi giá thủng đáy "
+  },
+  {
+   "ten": "ghim_gia_tuan_dao_han",
+   "ma_co_che": 11,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "lich",
+   "co_che": "Quy overwriting ban call va nha dau tu to chuc mua put chot lai khien nha tao lap quyen chon o trang thai gamm"
+  },
+  {
+   "ten": "ban_xu_huong_giam",
+   "ma_co_che": 206,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "xu_huong",
+   "co_che": "Kết hợp 3 EMA xác nhận xu hướng giảm, giá cắt xuống EMA21, lọc phiên và ngày tránh thứ 6"
+  },
+  {
+   "ten": "gia_cat_xuong_sma_lwma",
+   "ma_co_che": 249,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "xu_huong",
+   "co_che": "Các quỹ đòn bẩy và bộ phận kiểm soát rủi ro bị ép phải giảm Exposure hoặc mua bảo hiểm khi giá thụt giảm dưới "
+  },
+  {
+   "ten": "buy_on_ma_trend_up",
+   "ma_co_che": 187,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "xu_huong",
+   "co_che": "Buy when TEMA(6) at bar 2 < bar 3 and bar 0 > bar 1, indicating upward trend reversal"
+  },
+  {
+   "ten": "ema_cross_short_gio",
+   "ma_co_che": 231,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "lich",
+   "co_che": "EMA 3 xuong duoi EMA 6 va sau 10h sang bao hieu ban ra"
+  },
+  {
+   "ten": "bear_sweep_reversal",
+   "ma_co_che": 251,
+   "lenh": 0,
+   "lai": 0.0,
+   "pf": 0.0,
+   "sharpe": 0.0,
+   "dd_pct": 0.0,
+   "ky_vong": 0.0,
+   "ho": "pha_vo",
+   "co_che": "Bên bán tổ chức phân phối hàng hóa vào thanh khoản do các trader mua đuổi bị kích hoạt lệnh bắt đỉnh khi giá p"
+  },
+  {
+   "ten": "macd_tradingview_style",
+   "ma_co_che": 271,
+   "lenh": 29,
+   "lai": -73.58,
+   "pf": 0.944567,
+   "sharpe": -0.028977,
+   "dd_pct": 8.9728,
+   "ky_vong": -2.537241,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `MACD_TradingView_Style.mq5` (MACD_TradingView_Style), CHUA co lap luan kinh te: gia thuy"
+  },
+  {
+   "ten": "macd_stochastic_doub_close_tren_sma100_close",
+   "ma_co_che": 83,
+   "lenh": 919,
+   "lai": -63.95,
+   "pf": 0.98808,
+   "sharpe": -0.048312,
+   "dd_pct": 4.8641,
+   "ky_vong": -0.069587,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close > veryslowMA`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao "
+  },
+  {
+   "ten": "vao_ngan_khi_rsi_tren_nguong_qua_mua",
+   "ma_co_che": 336,
+   "lenh": 12,
+   "lai": -493.07,
+   "pf": 0.2371,
+   "sharpe": -0.054832,
+   "dd_pct": 7.1688,
+   "ky_vong": -41.089167,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Khi chi bao RSI len tren muc 70, cho thay gia da bi mua qua toc, co kha nang cao se dieu chinh giam gia de ve "
+  },
+  {
+   "ten": "ban_quay_ve_keltner_low_vol",
+   "ma_co_che": 144,
+   "lenh": 66,
+   "lai": -46.49,
+   "pf": 0.948946,
+   "sharpe": -0.069711,
+   "dd_pct": 3.6511,
+   "ky_vong": -0.704394,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Nhà tạo lập quyền chọn phòng ngừa gamma khi giá chạm dải Keltner trên. Khi biến động thấp, lực phòng ngừa đẩy "
+  },
+  {
+   "ten": "pine_vdub_binary_pro_3_v_sma13_close_tren_sma3_close",
+   "ma_co_che": 134,
+   "lenh": 559,
+   "lai": -85.96,
+   "pf": 0.981208,
+   "sharpe": -0.07121,
+   "dd_pct": 6.5663,
+   "ky_vong": -0.153775,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `long >= short`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich "
+  },
+  {
+   "ten": "trend_ma200",
+   "ma_co_che": 158,
+   "lenh": 38,
+   "lai": -218.94,
+   "pf": 0.785178,
+   "sharpe": -0.075049,
+   "dd_pct": 6.5437,
+   "ky_vong": -5.761579,
+   "ho": "xu_huong",
+   "co_che": "Xu huong gia tren MA200 giam drawdown, ket hop bien dong muc tieu."
+  },
+  {
+   "ten": "pine_volatility_swi_do_lech21_tre7_duoi_do_lech21",
+   "ma_co_che": 64,
+   "lenh": 681,
+   "lai": -100.14,
+   "pf": 0.978365,
+   "sharpe": -0.07798,
+   "dd_pct": 5.53,
+   "ky_vong": -0.147048,
+   "ho": "bien_dong",
+   "co_che": "Rut tu ma nguon that: dieu kien `vola21[7] <= vola21`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao"
+  },
+  {
+   "ten": "pine_bollinger_band_ema60_close_tren_ema180_close",
+   "ma_co_che": 57,
+   "lenh": 1000,
+   "lai": -145.29,
+   "pf": 0.978072,
+   "sharpe": -0.081424,
+   "dd_pct": 6.5039,
+   "ky_vong": -0.14529,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `FastEMA>SlowEMA`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dic"
+  },
+  {
+   "ten": "my_ma100",
+   "ma_co_che": 159,
+   "lenh": 58,
+   "lai": -241.41,
+   "pf": 0.816494,
+   "sharpe": -0.093111,
+   "dd_pct": 8.2819,
+   "ky_vong": -4.162241,
+   "ho": "xu_huong",
+   "co_che": "Xu huong don gian: mua khi gia tren MA100, ban khi duoi."
+  },
+  {
+   "ten": "trend_strength_entry_with_rsi_exit",
+   "ma_co_che": 214,
+   "lenh": 40,
+   "lai": -262.99,
+   "pf": 0.839798,
+   "sharpe": -0.094184,
+   "dd_pct": 7.9726,
+   "ky_vong": -6.57475,
+   "ho": "xu_huong",
+   "co_che": "Mua khi gia tren EMA20 va SMA50 va RSI14 tren 50; ban khi RSI14 xuong duoi 40"
+  },
+  {
+   "ten": "pine_bollinger_rsi_sma200_close_tren_sma200_close_tre1",
+   "ma_co_che": 79,
+   "lenh": 918,
+   "lai": -163.65,
+   "pf": 0.971945,
+   "sharpe": -0.10419,
+   "dd_pct": 7.0246,
+   "ky_vong": -0.178268,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `BBbasis > BBbasis[1]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai gia"
+  },
+  {
+   "ten": "pine_cm_rsi_2_strat_close_tre2_duoi_sma5_close_tre2",
+   "ma_co_che": 71,
+   "lenh": 666,
+   "lai": -220.23,
+   "pf": 0.955833,
+   "sharpe": -0.17039,
+   "dd_pct": 7.5659,
+   "ky_vong": -0.330676,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close[2] < ma5[2]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao d"
+  },
+  {
+   "ten": "cung_don_bay_khi_vol_giam",
+   "ma_co_che": 16,
+   "lenh": 9,
+   "lai": -265.82,
+   "pf": 0.039668,
+   "sharpe": -0.172389,
+   "dd_pct": 3.1716,
+   "ky_vong": -29.535556,
+   "ho": "dong_tien",
+   "co_che": "Quy vol-control (bao hiem lien ket bien dong, CTA, target-vol) co don bay = vol_muc_tieu / vol_thuc_te, nen kh"
+  },
+  {
+   "ten": "pine_ichimoku_cloud_close_tren_ema377_close",
+   "ma_co_che": 46,
+   "lenh": 1048,
+   "lai": -337.82,
+   "pf": 0.948861,
+   "sharpe": -0.192817,
+   "dd_pct": 6.6589,
+   "ky_vong": -0.322347,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close >= ema3`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich "
+  },
+  {
+   "ten": "pine_volatility_swi_do_lech21_tre5_duoi_do_lech21",
+   "ma_co_che": 62,
+   "lenh": 682,
+   "lai": -285.08,
+   "pf": 0.935443,
+   "sharpe": -0.227129,
+   "dd_pct": 5.922,
+   "ky_vong": -0.418006,
+   "ho": "bien_dong",
+   "co_che": "Rut tu ma nguon that: dieu kien `vola21[5] <= vola21`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao"
+  },
+  {
+   "ten": "gia_tren_sma_200_ngay",
+   "ma_co_che": 166,
+   "lenh": 331,
+   "lai": -603.81,
+   "pf": 0.868202,
+   "sharpe": -0.231455,
+   "dd_pct": 8.1072,
+   "ky_vong": -1.824199,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Chi mua khi gia tren duong trung binh 200 ngay de dam bao xu huong tang"
+  },
+  {
+   "ten": "statarb_zscore_meanreversion_sell",
+   "ma_co_che": 312,
+   "lenh": 57,
+   "lai": -192.58,
+   "pf": 0.806195,
+   "sharpe": -0.251664,
+   "dd_pct": 5.1291,
+   "ky_vong": -3.378596,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Chiến lược này khai thác sự lệch giá tạm thời giữa hai tài sản có mối quan hệ lịch sử bền vững. Khi khoảng các"
+  },
+  {
+   "ten": "gds_renko_bricks_signal",
+   "ma_co_che": 263,
+   "lenh": 848,
+   "lai": -297.06,
+   "pf": 0.940757,
+   "sharpe": -0.252792,
+   "dd_pct": 7.8537,
+   "ky_vong": -0.350307,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `GDS_Renko_Bricks_v1_05.mq5` (GDS_Renko_Bricks_Signal), CHUA co lap luan kinh te: gia thu"
+  },
+  {
+   "ten": "mua_sau_vol_thap_va_giam_sau",
+   "ma_co_che": 128,
+   "lenh": 15,
+   "lai": -113.98,
+   "pf": 0.611321,
+   "sharpe": -0.257586,
+   "dd_pct": 2.677,
+   "ky_vong": -7.598667,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Sau mot dot giam manh trong moi truong bien dong thap, nha dau tu co loi nhuan chot lai (profit taking) va nha"
+  },
+  {
+   "ten": "camarillastrategy_v1_ema8_close_duoi_close",
+   "ma_co_che": 102,
+   "lenh": 852,
+   "lai": -359.57,
+   "pf": 0.93059,
+   "sharpe": -0.286622,
+   "dd_pct": 9.1399,
+   "ky_vong": -0.422031,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `EMA < close`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o "
+  },
+  {
+   "ten": "donchian_long_short_long",
+   "ma_co_che": 178,
+   "lenh": 35,
+   "lai": -734.5,
+   "pf": 0.563696,
+   "sharpe": -0.312666,
+   "dd_pct": 9.6198,
+   "ky_vong": -20.985714,
+   "ho": "pha_vo",
+   "co_che": "Vao long khi close vuot upper channel (shifted 1 bar), thoat long khi close duoi lower channel. Breakout pha v"
+  },
+  {
+   "ten": "aapl_call_breakout_above_322_50",
+   "ma_co_che": 339,
+   "lenh": 1291,
+   "lai": -685.15,
+   "pf": 0.923846,
+   "sharpe": -0.318586,
+   "dd_pct": 10.7554,
+   "ky_vong": -0.530713,
+   "ho": "xu_huong",
+   "co_che": "Chiến lược bắt bứt phá giá lên trên ngưỡng kháng cự 322.50 để đón đà tăng tiếp theo về vùng gap fill."
+  },
+  {
+   "ten": "macd_sma_200_strateg_sma12_tren_sma26",
+   "ma_co_che": 89,
+   "lenh": 791,
+   "lai": -406.98,
+   "pf": 0.917801,
+   "sharpe": -0.351593,
+   "dd_pct": 6.0194,
+   "ky_vong": -0.514513,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `fastMA > slowMA`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dic"
+  },
+  {
+   "ten": "vung_khang_cu",
+   "ma_co_che": 284,
+   "lenh": 186,
+   "lai": -1010.11,
+   "pf": 0.753776,
+   "sharpe": -0.356047,
+   "dd_pct": 12.9861,
+   "ky_vong": -5.430699,
+   "ho": "bien_dong",
+   "co_che": "Ap luc cung tang cao tai muc cao cuc bo lam gia kho tang tiep, nguoi ban co xu huong cham gia va dao chieu, do"
+  },
+  {
+   "ten": "mua_close_tren_sma200",
+   "ma_co_che": 12,
+   "lenh": 967,
+   "lai": -538.11,
+   "pf": 0.912424,
+   "sharpe": -0.362147,
+   "dd_pct": 7.4478,
+   "ky_vong": -0.556474,
+   "ho": "xu_huong",
+   "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Here, we enter and exit a long position with the same se"
+  },
+  {
+   "ten": "pine_cm_rsi_2_strat_close_duoi_sma200_close",
+   "ma_co_che": 41,
+   "lenh": 350,
+   "lai": -270.63,
+   "pf": 0.917646,
+   "sharpe": -0.369083,
+   "dd_pct": 8.053,
+   "ky_vong": -0.773229,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close < ma200`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich "
+  },
+  {
+   "ten": "vao_lenh_mua_theo_rsi_histoalert_he_thong_dung_rsi_bien_oi_e",
+   "ma_co_che": 337,
+   "lenh": 582,
+   "lai": -905.51,
+   "pf": 0.824642,
+   "sharpe": -0.395172,
+   "dd_pct": 9.9208,
+   "ky_vong": -1.555859,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `https://www.tradingview.com/script/PUB;370/` (vao_lenh_mua_theo_rsi_histoalert_he_thong_"
+  },
+  {
+   "ten": "scalping_dashboard_buy",
+   "ma_co_che": 292,
+   "lenh": 855,
+   "lai": -484.9,
+   "pf": 0.909413,
+   "sharpe": -0.403922,
+   "dd_pct": 7.7977,
+   "ky_vong": -0.567135,
+   "ho": "xu_huong",
+   "co_che": "Các trader tần suất cao trả phí cho công cụ này để tận dụng momentum ngắn hạn khi đường EMA nhanh cắt lên EMA "
+  },
+  {
+   "ten": "meanreversion_200_sell",
+   "ma_co_che": 261,
+   "lenh": 162,
+   "lai": -80.72,
+   "pf": 0.89839,
+   "sharpe": -0.409099,
+   "dd_pct": 1.7265,
+   "ky_vong": -0.498272,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Luat rut TU MA NGUON `meanreversion.mq5` (MeanReversion_200_Sell), CHUA co lap luan kinh te: gia thuyet nay ki"
+  },
+  {
+   "ten": "vao_lenh_long_khi_ema20_duoi_gia",
+   "ma_co_che": 222,
+   "lenh": 872,
+   "lai": -506.34,
+   "pf": 0.901649,
+   "sharpe": -0.415002,
+   "dd_pct": 8.674,
+   "ky_vong": -0.580665,
+   "ho": "xu_huong",
+   "co_che": "Mua khi giá đóng cửa vượt lên trên đường EMA20, cho thấy xu hướng tăng ngắn hạn."
+  },
+  {
+   "ten": "pine_ichimoku_cloud_close_tren_ema21_close",
+   "ma_co_che": 40,
+   "lenh": 870,
+   "lai": -516.67,
+   "pf": 0.901013,
+   "sharpe": -0.422744,
+   "dd_pct": 9.4217,
+   "ky_vong": -0.593874,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close >= ema1`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich "
+  },
+  {
+   "ten": "ema_cross_long",
+   "ma_co_che": 230,
+   "lenh": 827,
+   "lai": -515.21,
+   "pf": 0.898117,
+   "sharpe": -0.440077,
+   "dd_pct": 7.5734,
+   "ky_vong": -0.622987,
+   "ho": "xu_huong",
+   "co_che": "EMA 3 vuot len EMA 6 bao hieu xu huong tang, mua vao"
+  },
+  {
+   "ten": "pine_strategy_macd_and_r_rsi10_tren_51",
+   "ma_co_che": 122,
+   "lenh": 838,
+   "lai": -534.6,
+   "pf": 0.894275,
+   "sharpe": -0.458501,
+   "dd_pct": 9.263,
+   "ky_vong": -0.637947,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Rut tu ma nguon that: dieu kien `xRSI > Overbought`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao d"
+  },
+  {
+   "ten": "pine_cm_rsi_2_strat_close_tre3_tren_sma200_close_tre3",
+   "ma_co_che": 76,
+   "lenh": 965,
+   "lai": -733.94,
+   "pf": 0.884904,
+   "sharpe": -0.483306,
+   "dd_pct": 8.7839,
+   "ky_vong": -0.76056,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close[3] > ma200[3]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao"
+  },
+  {
+   "ten": "consecutive_bars_v1_50",
+   "ma_co_che": 272,
+   "lenh": 924,
+   "lai": -722.07,
+   "pf": 0.886026,
+   "sharpe": -0.489434,
+   "dd_pct": 7.9682,
+   "ky_vong": -0.781461,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `Consecutive_Bars_v1_50.mq5` (Consecutive_Bars_v1_50), CHUA co lap luan kinh te: gia thuy"
+  },
+  {
+   "ten": "ea_original",
+   "ma_co_che": 258,
+   "lenh": 859,
+   "lai": -593.73,
+   "pf": 0.885686,
+   "sharpe": -0.491015,
+   "dd_pct": 9.5424,
+   "ky_vong": -0.691187,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `EA.mq5` (EA_Original), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do "
+  },
+  {
+   "ten": "macd_crossover_long",
+   "ma_co_che": 306,
+   "lenh": 37,
+   "lai": -757.15,
+   "pf": 0.613784,
+   "sharpe": -0.49529,
+   "dd_pct": 10.5088,
+   "ky_vong": -20.463514,
+   "ho": "xu_huong",
+   "co_che": "Các quỹ đầu cơ và trader xu hướng trả phí cho chiến lược này vì nó giúp bắt đầu các đợt tăng giá mạnh sớm hơn "
+  },
+  {
+   "ten": "zigzag_high_extremum",
+   "ma_co_che": 317,
+   "lenh": 374,
+   "lai": -248.76,
+   "pf": 0.883235,
+   "sharpe": -0.503024,
+   "dd_pct": 5.238,
+   "ky_vong": -0.665134,
+   "ho": "bien_dong",
+   "co_che": "Ban tai vi tri co gia cao nhat gan day de phong nguu risi ton tai khi xu huong giam bat dau, phan anh su het l"
+  },
+  {
+   "ten": "trend_sell_fast_ma_crosses_below_slow_ma",
+   "ma_co_che": 192,
+   "lenh": 29,
+   "lai": -628.58,
+   "pf": 0.544768,
+   "sharpe": -0.519487,
+   "dd_pct": 10.6114,
+   "ky_vong": -21.675172,
+   "ho": "xu_huong",
+   "co_che": "Fast MA(20) cắt xuống dưới Slow MA(50) báo hiệu xu hướng giảm, kỳ vọng giá tiếp tục giảm."
+  },
+  {
+   "ten": "pairs_trading_z_score_short",
+   "ma_co_che": 351,
+   "lenh": 504,
+   "lai": -341.62,
+   "pf": 0.88594,
+   "sharpe": -0.522195,
+   "dd_pct": 6.9789,
+   "ky_vong": -0.677817,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Dau tu chi tra cho vi nghich ly do cach khai thác sai lệch tạm thời giữa hai tài sản tương quan, kỳ vọng giá t"
+  },
+  {
+   "ten": "mtf_trend_matrix_sell",
+   "ma_co_che": 281,
+   "lenh": 25,
+   "lai": -921.42,
+   "pf": 0.296937,
+   "sharpe": -0.538512,
+   "dd_pct": 12.4832,
+   "ky_vong": -36.8568,
+   "ho": "xu_huong",
+   "co_che": "Bán khống hoặc đóng lệnh mua khi xu hướng đảo chiều được xác nhận bởi đường EMA nhanh cắt xuống EMA chậm và gi"
+  },
+  {
+   "ten": "mua_xu_huong",
+   "ma_co_che": 161,
+   "lenh": 822,
+   "lai": -784.8,
+   "pf": 0.843136,
+   "sharpe": -0.67477,
+   "dd_pct": 8.9707,
+   "ky_vong": -0.954745,
+   "ho": "xu_huong",
+   "co_che": "Kết hợp EMA và RSI để xác nhận xu hướng tăng"
+  },
+  {
+   "ten": "12_month_momentum_short",
+   "ma_co_che": 152,
+   "lenh": 33,
+   "lai": -873.27,
+   "pf": 0.09575,
+   "sharpe": -0.67802,
+   "dd_pct": 10.6301,
+   "ky_vong": -26.462727,
+   "ho": "xu_huong",
+   "co_che": "Go short when the 12-month return is negative, betting on momentum reversals."
+  },
+  {
+   "ten": "triple_ema_short_entry",
+   "ma_co_che": 208,
+   "lenh": 296,
+   "lai": -481.71,
+   "pf": 0.818588,
+   "sharpe": -0.684442,
+   "dd_pct": 6.6835,
+   "ky_vong": -1.627399,
+   "ho": "xu_huong",
+   "co_che": "Khi EMA8 nằm dưới EMA21 và EMA21 dưới EMA50, xu hướng giảm được xác nhận, trader vốn lớn bán khống với kỳ vọng"
+  },
+  {
+   "ten": "slow_short",
+   "ma_co_che": 236,
+   "lenh": 23,
+   "lai": -990.23,
+   "pf": 0.30942,
+   "sharpe": -0.690441,
+   "dd_pct": 12.0993,
+   "ky_vong": -43.053478,
+   "ho": "xu_huong",
+   "co_che": "Breakout below 55-day low for entry, 20-day high for exit."
+  },
+  {
+   "ten": "mean_reversion_sell_rsi2_90_below_200ema_above_10sma",
+   "ma_co_che": 174,
+   "lenh": 27,
+   "lai": -291.5,
+   "pf": 0.554438,
+   "sharpe": -0.699242,
+   "dd_pct": 4.2608,
+   "ky_vong": -10.796296,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Sell when price below 200EMA indicating downtrend, price above 10SMA indicating deviation from mean, and RSI(2"
+  },
+  {
+   "ten": "pine_cm_rsi_2_strat_close_tre4_duoi_sma5_close_tre4",
+   "ma_co_che": 73,
+   "lenh": 666,
+   "lai": -892.53,
+   "pf": 0.827676,
+   "sharpe": -0.714506,
+   "dd_pct": 14.932,
+   "ky_vong": -1.340135,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `close[4] < ma5[4]`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao d"
+  },
+  {
+   "ten": "tin_hieu_phan_ky_tang",
+   "ma_co_che": 313,
+   "lenh": 202,
+   "lai": -291.35,
+   "pf": 0.840879,
+   "sharpe": -0.737957,
+   "dd_pct": 5.3763,
+   "ky_vong": -1.442327,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Phan ky tang giua gia va chi bao dong luong cho thay ap luc ban yeu di, thuong xuat hien o cuoi xu huong giam,"
+  },
+  {
+   "ten": "ma_crossover_long",
+   "ma_co_che": 195,
+   "lenh": 213,
+   "lai": -244.6,
+   "pf": 0.844276,
+   "sharpe": -0.746225,
+   "dd_pct": 4.9234,
+   "ky_vong": -1.148357,
+   "ho": "xu_huong",
+   "co_che": "Gia cat len duong trung binh SMA 14, bao hieu xu huong tang."
+  },
+  {
+   "ten": "quantora_ma_dashboard_sell",
+   "ma_co_che": 266,
+   "lenh": 218,
+   "lai": -443.64,
+   "pf": 0.799658,
+   "sharpe": -0.756903,
+   "dd_pct": 5.1381,
+   "ky_vong": -2.035046,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (Quantora_MA_Dashboard_Sell), CHUA co l"
+  },
+  {
+   "ten": "macd_sma_200_strateg_sma26_tren_sma200",
+   "ma_co_che": 97,
+   "lenh": 960,
+   "lai": -1321.64,
+   "pf": 0.805802,
+   "sharpe": -0.827396,
+   "dd_pct": 15.0601,
+   "ky_vong": -1.376708,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `slowMA > veryslowMA`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao"
+  },
+  {
+   "ten": "pine_rsi_strategy_rsi12_duoi_30",
+   "ma_co_che": 117,
+   "lenh": 45,
+   "lai": -173.9,
+   "pf": 0.788664,
+   "sharpe": -0.865307,
+   "dd_pct": 5.4885,
+   "ky_vong": -3.864444,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Rut tu ma nguon that: dieu kien `xRSI < Oversold`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dic"
+  },
+  {
+   "ten": "bb_stochrsi_reversal_buy",
+   "ma_co_che": 269,
+   "lenh": 195,
+   "lai": -351.94,
+   "pf": 0.808953,
+   "sharpe": -0.87659,
+   "dd_pct": 6.1747,
+   "ky_vong": -1.804821,
+   "ho": "pha_vo",
+   "co_che": "Luat rut TU MA NGUON `BBStochRSIXReversal.mq5` (BB_StochRSI_Reversal_BUY), CHUA co lap luan kinh te: gia thuye"
+  },
+  {
+   "ten": "vao_lenh_ban_theo_rsi_histoalert_co_che_cat_ngang_nguong_duo",
+   "ma_co_che": 338,
+   "lenh": 581,
+   "lai": -1774.72,
+   "pf": 0.674201,
+   "sharpe": -0.878359,
+   "dd_pct": 19.8584,
+   "ky_vong": -3.054596,
+   "ho": "xu_huong",
+   "co_che": "Luat rut TU MA NGUON `https://www.tradingview.com/script/PUB;370/` (vao_lenh_ban_theo_rsi_histoalert_co_che_ca"
+  },
+  {
+   "ten": "rsi_cross_up_from_30",
+   "ma_co_che": 224,
+   "lenh": 18,
+   "lai": -76.09,
+   "pf": 0.714184,
+   "sharpe": -0.942213,
+   "dd_pct": 2.4044,
+   "ky_vong": -4.227222,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "RSI vượt lên từ vùng quá bán (30) cho thấy lực mua mạnh, tín hiệu mua"
+  },
+  {
+   "ten": "reverse_rsi_bands",
+   "ma_co_che": 264,
+   "lenh": 18,
+   "lai": -76.09,
+   "pf": 0.714184,
+   "sharpe": -0.942213,
+   "dd_pct": 2.4044,
+   "ky_vong": -4.227222,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Luat rut TU MA NGUON `Reverse_RSI_Bands.mq5` (Reverse RSI Bands), CHUA co lap luan kinh te: gia thuyet nay kie"
+  },
+  {
+   "ten": "pine_stochastic_rsi_doub_rsi14_cheo_len_30",
+   "ma_co_che": 107,
+   "lenh": 18,
+   "lai": -76.09,
+   "pf": 0.714184,
+   "sharpe": -0.942213,
+   "dd_pct": 2.4044,
+   "ky_vong": -4.227222,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Rut tu ma nguon that: dieu kien `crossover(vrsi, RSIOverSold)`. Phoi nhiem duoc tra tien khi ben doi ung buoc "
+  },
+  {
+   "ten": "gold_reversal_long_setup",
+   "ma_co_che": 340,
+   "lenh": 18,
+   "lai": -76.09,
+   "pf": 0.714184,
+   "sharpe": -0.942213,
+   "dd_pct": 2.4044,
+   "ky_vong": -4.227222,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Chi trả cho hệ thống này để tận dụng tín hiệu đảo chiều từ RSI kết hợp quản lý rủi ro cố định, giúp giao dịch "
+  },
+  {
+   "ten": "pine_cl_20_years_ban_low_duoi_thap_nhat55_tre1",
+   "ma_co_che": 112,
+   "lenh": 68,
+   "lai": -235.52,
+   "pf": 0.723798,
+   "sharpe": -0.950207,
+   "dd_pct": 5.8073,
+   "ky_vong": -3.463529,
+   "ho": "pha_vo",
+   "co_che": "Chien luoc THAT rut tu `strategy.entry`: vao lenh khi 1 dieu kien cung dung (`enterS2`). Phoi nhiem duoc tra t"
+  },
+  {
+   "ten": "pine_pullback_candl_high_tren_sma50_close",
+   "ma_co_che": 38,
+   "lenh": 970,
+   "lai": -1355.71,
+   "pf": 0.791132,
+   "sharpe": -0.961769,
+   "dd_pct": 14.364,
+   "ky_vong": -1.397639,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `high > out`. Phoi nhiem duoc tra tien khi ben doi ung buoc phai giao dich o d"
+  },
+  {
+   "ten": "ban_khi_bien_dong_tang_va_gia_duoi_ma100",
+   "ma_co_che": 212,
+   "lenh": 277,
+   "lai": -716.85,
+   "pf": 0.764278,
+   "sharpe": -1.021742,
+   "dd_pct": 8.8376,
+   "ky_vong": -2.587906,
+   "ho": "xu_huong",
+   "co_che": "Ban khi ATR(50) > ATR(100) va gia dong cua duoi duong trung binh MA100"
+  },
+  {
+   "ten": "ban_khi_ema15_ema200",
+   "ma_co_che": 155,
+   "lenh": 312,
+   "lai": -652.19,
+   "pf": 0.761047,
+   "sharpe": -1.077227,
+   "dd_pct": 8.2636,
+   "ky_vong": -2.090353,
+   "ho": "xu_huong",
+   "co_che": "Ban khi EMA ngắn hạn xuống dưới EMA dài hạn, tín hiệu xu hướng giảm, nhà đầu tư muốn thoát vị thế dài hạn."
+  },
+  {
+   "ten": "rsi_oversold_buy",
+   "ma_co_che": 217,
+   "lenh": 18,
+   "lai": -131.28,
+   "pf": 0.608843,
+   "sharpe": -1.088782,
+   "dd_pct": 2.2106,
+   "ky_vong": -7.293333,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "RSI xuống dưới 30 sau khi trên 30 báo hiệu quá bán, dự kiến giá tăng trở lại."
+  },
+  {
+   "ten": "scalping_dashboard_sell",
+   "ma_co_che": 293,
+   "lenh": 472,
+   "lai": -1148.06,
+   "pf": 0.743145,
+   "sharpe": -1.142073,
+   "dd_pct": 12.529,
+   "ky_vong": -2.432331,
+   "ho": "xu_huong",
+   "co_che": "Nhà giao dịch scalping chấp nhận chi trả để lọc ra các điểm bán khi xu hướng giảm hình thành rõ ràng qua việc "
+  },
+  {
+   "ten": "rsi_ao_chieu_mua",
+   "ma_co_che": 199,
+   "lenh": 11,
+   "lai": -285.07,
+   "pf": 0.128306,
+   "sharpe": -1.24191,
+   "dd_pct": 3.6919,
+   "ky_vong": -25.915455,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "RSI cắt lên trên 25 từ vùng quá bán cho thấy lực mua mới xuất hiện, timing chính xác hơn, phù hợp DCA."
+  },
+  {
+   "ten": "stc_crossover_mean_reversion",
+   "ma_co_che": 294,
+   "lenh": 289,
+   "lai": -586.99,
+   "pf": 0.721672,
+   "sharpe": -1.273679,
+   "dd_pct": 6.6846,
+   "ky_vong": -2.031107,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Nhà giao dịch thanh khoản và người theo xu hướng thường đặt lệnh chờ hoặc stop loss ở vùng cực trị, tạo điều k"
+  },
+  {
+   "ten": "ema_trend_cross_buy",
+   "ma_co_che": 288,
+   "lenh": 26,
+   "lai": -59.47,
+   "pf": 0.682318,
+   "sharpe": -1.427617,
+   "dd_pct": 0.8713,
+   "ky_vong": -2.287308,
+   "ho": "xu_huong",
+   "co_che": "Các quỹ định lượng mua khi đường EMA nhanh cắt lên EMA trung bình để bắt đầu xu hướng tăng mới, buộc các nhà b"
+  },
+  {
+   "ten": "ban_rsi14_duoi_45",
+   "ma_co_che": 0,
+   "lenh": 322,
+   "lai": -1249.58,
+   "pf": 0.65361,
+   "sharpe": -1.598686,
+   "dd_pct": 15.0373,
+   "ky_vong": -3.880683,
+   "ho": "xu_huong",
+   "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"If the 4hour RSI is below 45, we only look for short pos"
+  },
+  {
+   "ten": "engulfing_buy",
+   "ma_co_che": 203,
+   "lenh": 143,
+   "lai": -410.49,
+   "pf": 0.668783,
+   "sharpe": -1.636785,
+   "dd_pct": 5.6858,
+   "ky_vong": -2.870559,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Mô hình nến bao trùm tăng giá, báo hiệu đảo chiều mạnh từ giảm sang tăng."
+  },
+  {
+   "ten": "mua_khi_ema5_cat_len_ema55",
+   "ma_co_che": 219,
+   "lenh": 39,
+   "lai": -104.57,
+   "pf": 0.654987,
+   "sharpe": -1.726297,
+   "dd_pct": 1.3603,
+   "ky_vong": -2.681282,
+   "ho": "xu_huong",
+   "co_che": "Crossover của EMA nhanh và chậm báo hiệu thay đổi xu hướng, chiến lược mua khi xu hướng tăng mới bắt đầu."
+  },
+  {
+   "ten": "fast_sma_cuts_below_slow_sma",
+   "ma_co_che": 216,
+   "lenh": 71,
+   "lai": -221.35,
+   "pf": 0.698966,
+   "sharpe": -1.771369,
+   "dd_pct": 2.7115,
+   "ky_vong": -3.117606,
+   "ho": "xu_huong",
+   "co_che": "MA crossover strategy: sell when fast SMA crosses below slow SMA, capturing trend reversal."
+  },
+  {
+   "ten": "ema9_cat_xuong_ema21",
+   "ma_co_che": 182,
+   "lenh": 62,
+   "lai": -238.07,
+   "pf": 0.642532,
+   "sharpe": -2.166516,
+   "dd_pct": 4.1268,
+   "ky_vong": -3.839839,
+   "ho": "xu_huong",
+   "co_che": "Bán khi EMA9 nhanh cắt xuống dưới EMA21 chậm, báo hiệu xu hướng giảm mới"
+  },
+  {
+   "ten": "vao_lenh_ngan_khi_gia_thung_xuong_duoi_uong_ema_20_tai_vung",
+   "ma_co_che": 342,
+   "lenh": 188,
+   "lai": -968.87,
+   "pf": 0.502444,
+   "sharpe": -3.029569,
+   "dd_pct": 10.1704,
+   "ky_vong": -5.153564,
+   "ho": "quay_ve_trung_binh",
+   "co_che": "Luat rut TU MA NGUON `https://www.youtube.com/watch?v=i8Wf-fknjIw&pp=ygUObWVhbiByZXZlcnNpb24%3D` (vao_lenh_nga"
+  },
+  {
+   "ten": "pine_rs_function_marting_ema5_close_cheo_xuong_ema55_close",
+   "ma_co_che": 132,
+   "lenh": 39,
+   "lai": -318.92,
+   "pf": 0.437015,
+   "sharpe": -3.203651,
+   "dd_pct": 4.257,
+   "ky_vong": -8.177436,
+   "ho": "xu_huong",
+   "co_che": "Rut tu ma nguon that: dieu kien `crossunder(fast_ma, slow_ma)`. Phoi nhiem duoc tra tien khi ben doi ung buoc "
+  }
+ ],
+ "bo_dich": [
+  {
+   "ten": "s_mua_rsi6_cheo_len_50_va_close_cheo_len_tuyen_tinh",
+   "vi_sao": "chua dich duoc nhom 'tuyen_tinh'"
+  },
+  {
+   "ten": "s_ban_rsi6_cheo_xuong_50_va_close_cheo_xuong_tuyen_tinh",
+   "vi_sao": "chua dich duoc nhom 'tuyen_tinh'"
+  },
+  {
+   "ten": "s_mua_close_cheo_len_tuyen_tinh",
+   "vi_sao": "chua dich duoc nhom 'tuyen_tinh'"
+  },
+  {
+   "ten": "s_ban_close_cheo_xuong_tuyen_tinh",
+   "vi_sao": "chua dich duoc nhom 'tuyen_tinh'"
+  },
+  {
+   "ten": "s_mua_open_cheo_len_tuyen_tinh",
+   "vi_sao": "chua dich duoc nhom 'tuyen_tinh'"
+  },
+  {
+   "ten": "s_ban_open_cheo_xuong_tuyen_tinh",
+   "vi_sao": "chua dich duoc nhom 'tuyen_tinh'"
+  },
+  {
+   "ten": "pine_forex_master_mua_close_cheo_len_tuyen_tinh_va_ema6_duo",
+   "vi_sao": "chua dich duoc nhom 'tuyen_tinh'"
+  },
+  {
+   "ten": "sma_cross_with_threshold",
+   "vi_sao": "chua dich duoc nhom 'tong_cua_cac'"
+  },
+  {
+   "ten": "donchian_breakout_tren",
+   "vi_sao": "chua dich duoc nhom 'cao_nhat_cua_cac'"
+  },
+  {
+   "ten": "donchian_breakout_duoi",
+   "vi_sao": "chua dich duoc nhom 'thap_nhat_cua_cac'"
+  },
+  {
+   "ten": "stochastic_protector",
+   "vi_sao": "chua dich duoc chi bao 'stochastic'"
+  },
+  {
+   "ten": "macd_support_bounce_long",
+   "vi_sao": "chua dich duoc chi bao 'macd'"
+  },
+  {
+   "ten": "macd_resistance_reject_short",
+   "vi_sao": "chua dich duoc chi bao 'macd'"
+  },
+  {
+   "ten": "dung_e_bat_iem_hoi_quy_trung_binh_a_ky_khai_thac_su_qua_phan",
+   "vi_sao": "chua dich duoc nhom 'tb_cua_cac'"
+  },
+  {
+   "ten": "khai_thac_xu_huong_hoi_quy_nguoc_khi_gia_vuot_len_tren_trung",
+   "vi_sao": "chua dich duoc nhom 'tb_cua_cac'"
+  },
+  {
+   "ten": "dailyzonerecovery_buy",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "dailyzonerecovery_sell",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "bullish_order_block_reversal",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "bearish_order_block_reversal",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "bullish_fvg_pullback",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "bearish_fvg_pullback",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fibonacci_structure_map_buy",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fibonacci_structure_map_sell",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "smc_demand_zone_entry",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "smc_supply_zone_entry",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "buy_liquidity_sweep",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "sell_liquidity_sweep",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fair_value_gap_tang",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fair_value_gap_giam",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "msnr_trend_buy_retest_fvg_tap",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "msnr_trend_sell_retest_fvg_tap",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fvg_bullish_retest",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fvg_bearish_retest",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "buy_liquidity_ob_reversal",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "sell_liquidity_ob_reversal",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "smc_buy_zone_reversal",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "smc_sell_zone_reversal",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "buy_multitf_zone_reversal",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "vung_discount_rebound",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "vung_premium_reject",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fvg_bullish_imbalance",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fvg_bearish_imbalance",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "xander_pulse_candles_buy",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "xander_pulse_candles_sell",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fair_value_gap_bullish",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "fair_value_gap_bearish",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "vung_cau_demand_zone",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  },
+  {
+   "ten": "vung_cung_supply_zone",
+   "vi_sao": "ve 'vung' chua dich duoc"
+  }
+ ]
+}
