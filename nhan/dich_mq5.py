@@ -597,8 +597,22 @@ def sinh_ea(cac_spec: list[dict], ten: str = "KhoCoChe", khung: str = "D1",
             c["_khong_dich"] = str(e)
             continue
         k = len(dat)
-        dk_ma.append("bool VAO%d(int s) { return(%s); }" % (k, bt_vao))
-        dk_ma.append("bool RA%d(int s)  { return(%s); }" % (k, bt_ra))
+        # `_dich`: danh gia dieu kien tai bar s+K thay vi s.
+        #
+        # Day la PLACEBO dung cach cho duong tester. Giu NGUYEN chuoi tin hieu -
+        # cung ty le kich hoat, cung do dai cum, cung tu tuong quan - chi pha
+        # cai duy nhat dang tra loi: su khop thoi diem voi loi suat phia sau.
+        # Hoan vi lai/lo thi giu nguyen phan phoi va luon ra ~50%, do la loi da
+        # mac 29/07 [[v6-doi-chieu-dung-cach]]; con dich chuoi tin hieu thi
+        # khong dung vao phan phoi loi suat mot ly nao.
+        kk = int(c.get("_dich", 0) or 0)
+        d_s = "s+%d" % kk if kk else "s"
+        dk_ma.append("bool VAO%d(int s) { return(%s); }"
+                     % (k, bt_vao.replace("(s)", "(%s)" % d_s)
+                        .replace("(s+1)", "(%s+1)" % d_s) if kk else bt_vao))
+        dk_ma.append("bool RA%d(int s)  { return(%s); }"
+                     % (k, bt_ra.replace("(s)", "(%s)" % d_s)
+                        .replace("(s+1)", "(%s+1)" % d_s) if kk else bt_ra))
         sw_vao.append("      case %d: return(VAO%d(s));" % (k, k))
         sw_ra.append("      case %d: return(RA%d(s));" % (k, k))
         sw_chieu.append("case %d: return(%d);"

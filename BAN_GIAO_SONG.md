@@ -4,15 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-- dang chay: ban_giao_song.py (pid 12136, 0 phut), dieu_khien_xa.py (pid 16352, 743 phut)
-- `cao_mql5.log`: tai lieu mql5: 236 -> 236   ban doc MA NGUON: 28   (2907s)
-- git: 909a491 Chot day chuyen 03/09: noi ca ba luong vao `b`, va noi not mat xich artifact->boc
-### 2026-09-03 — CHOT PHIEN 10 TIENG: mot muc tieu cu the lam lo ra 15 loi
-
-**Chu du an dat muc tieu**: US500CASH, toi uu nhip tang + don bay, 20-30 %/nam.
-Rang buoc: khong dung BANKER (thuan gia), co che phai chay duoc ca FX.
-
 **Cai lam moi thu lo ra**: mot muc tieu CO CON SO GAN VAO. 890 test dang xanh
 trong luc `don_bay` sai 31.700 lan — khong loi nao hom nay la loi test bat
 duoc, vi ca 15 loi deu thuoc loai *ham chay dung, bao so binh thuong, va khong
@@ -404,3 +395,12 @@ rao ky thuat (sai — chung DONG NGUON). Cai dung chi hien ra khi do.
 - `tester_kho.log`: UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM
 - `tester_z5.log`: -> reports/TESTER_Z5.json
 - git: f2768f9 ban giao: tester la cong chinh; 3 viec deu tren tester, khong quet Python nua
+### 2026-09-06 19:48:05 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19360, 0 phut)
+- `so_mua_giu.log`: THANG mua-giu o cung sut giam: 43/268
+- `tester_da_ma.log`: -> reports/TESTER_DA_MA.json
+- `tester_holdout.log`: duong o CA HAI doan: 13/225
+- `tester_kho.log`: UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM
+- `tester_z5.log`: -> reports/TESTER_Z5.json
+- git: 4d5d3d0 ban giao: con hai he qua ca hai cong; viec mai la placebo + da tai san + chia nam
