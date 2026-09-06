@@ -43,7 +43,8 @@ from nhan import ngu_phap as NP  # noqa: E402
 
 LAB = Path(__file__).resolve().parent
 
-HE = ["mean_reversion_z5", "pine_ichimoku_cloud_close_duoi_ema377_close"]
+HE = ["macdint_150_filtered_volume_sell", "gia_duoi_ema200",
+      "mean_reversion_z5"]
 
 #: Do dich (so nen). Chon so NGUYEN TO va rai deu de khong cong huong voi chu ky
 #: nao cua chinh co che (5, 14, 20, 144, 200 la cac chu ky dang co mat).
@@ -54,7 +55,16 @@ DICH = tuple(range(3, 405, 4))   # 101 ban -> p san 1/102 = 0,0098
 
 
 def chay(symbol: str, tu: str, den: str) -> dict:
-    kho = {c["ten"]: c for c in NP.doc_kho() if not NP.kiem_khai_bao(c)}
+    # Lay CA muc dang bi cong chan, mien truong `co_che` de do duoc. Bai nay
+    # tra loi cau "cong co cat vao thit khong", nen no phai nhin duoc thu ma
+    # cong dang chan.
+    kho = {}
+    for c in NP.doc_kho():
+        if NP.kiem_khai_bao(c):
+            c = dict(c, co_che="MIEN CONG DE DO - chua co ly do kinh te.")
+            if NP.kiem_khai_bao(c):
+                continue
+        kho[c["ten"]] = c
     goc = []
     for t in HE:
         c = kho.get(t) or next((v for k, v in kho.items() if k.startswith(t[:40])),

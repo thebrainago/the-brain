@@ -4,60 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-       `dns_vuot` + WARP — thu lai.
-     - `etoro`, `semantic`, `blog`: ba nguon `CHAY_SACH_MA_RONG` van chua ro
-       nuot o dau (muc ton tu 01/09).
-     - Kiem `SO_TU_KHOA_MOI_NGUON` cho tung nguon: da go khoi than ham nhung
-       moi chinh cho chien dich, chua chinh cho vong chay nen.
-
-**2. Toi uu co che BOC TACH / DOC.**
-   Hien: doc 0,31 s/ban, boc 3-5 s/ban voi suat 19-37 co che/100 ban.
-   - **281 file .mq5 dang cho boc** — mat xich `artifact -> boc_llm` vua noi
-     xong luc chot phien, CHUA CHAY LAN NAO. Chay dau tien vao mai.
-   - Han muc API la nut that moi (chu du an se nang goi DeepSeek).
-   - Suat chenh 16 lan giua cac nguon (TradingView Pine 18,9% vs MQL5+GitHub
-     1,2%) — do lai sau khi boc lo .mq5, vi lan do la ma CHIEN LUOC that.
-
-**3. QUANTLAB test chung NHANH va CHINH XAC nhu the nao.**
-   Day la cau hoi chu du an dat ra va CHUA co lo trinh. Nhung gi da co:
-     - backtest 0,72 ms / 4.027 bar -> toc do khong phai van de
-     - `hang_doi.py` da xay (18 test) nhung CHUA AI GOI — noi vao vong chay
-     - `bien_don_bay.do_bien` + `cong.xet` + `do_on_dinh.do_hinh_dang`
-     - Quy trinh dung da chay that hom nay: train/holdout -> khop rui ro ->
-       lan can tham so. Sonic R qua ca ba.
-   Can quyet: co che moi vao bang cua nao, tieu suat FDR luc nao, va cai gi
-   duoc chay "do thoai mai" voi `ghi_so=False`.
-
-**4. Sonic R: len MT5 Strategy Tester.** Luat cua chu du an la tester TRUOC,
-   Python SAU. Con so 26,01 %/nam o don bay 3 (maxDD -47,8%) chua duoc tin cho
-   toi khi khop lenh that. Va chua chay placebo, chua qua cong, chua dang ky
-   gia thuyet.
-
-## KHONG DUOC QUEN
-- `b mang` truoc khi san bat cu thu gi. Nhieu nguon bi chan o tang DNS chu
-  khong phai "chan bot"; bat Cloudflare WARP la thong.
-- **Lam "giong nguoi" qua tay thi phan tac dung**: `requests.get` tran 4/4 =
-  200; phien giu cookie + Referer 4/4 = 403.
-- `thu_thap` ghi vao bang `artifact`, KHONG vao `tai_lieu`. Dem nham bang thi
-  tuong nhu that bai.
-- Payload artifact LONG mot tang: ma o `payload["payload"]["content"]`.
-
-### 2026-09-03 23:15:19 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11676, 0 phut)
-- `cao_mql5.log`: tai lieu mql5: 236 -> 236   ban doc MA NGUON: 28   (2907s)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-03 23:15:35 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1496, 0 phut)
-- `cao_mql5.log`: tai lieu mql5: 236 -> 236   ban doc MA NGUON: 28   (2907s)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 11:53:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 2612, 0 phut), dieu_khien_xa.py (pid 16256, 8 phut)
-- `dieu_phoi_nen.log`: [Fri 09/04/2026 11:44:50.40] thay DUNG_LAI - khong khoi dong watchdog
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 13:45:30 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 7676, 0 phut)
 - git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
@@ -404,3 +350,57 @@
 - `tester_holdout2.log`: duong o CA HAI doan: 15/242
 - `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
 - git: 4e33134 ban giao: con MOT he sau placebo; viec 1 la do %/nam that o don bay that
+### 2026-09-06 22:06:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12708, 0 phut)
+- `don_bay.log`: when serializing dict item 'bang'
+- `placebo.log`: DAT (ban that noi len khoi dam dich)
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `tester_holdout2.log`: duong o CA HAI doan: 15/242
+- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
+- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
+### 2026-09-06 22:25:49 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19260, 0 phut)
+- `don_bay.log`: when serializing dict item 'bang'
+- `placebo.log`: DAT (ban that noi len khoi dam dich)
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `tester_holdout2.log`: duong o CA HAI doan: 15/242
+- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
+- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
+### 2026-09-06 22:55:00 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 21080, 0 phut)
+- `don_bay.log`: when serializing dict item 'bang'
+- `placebo.log`: DAT (ban that noi len khoi dam dich)
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `tester_holdout2.log`: duong o CA HAI doan: 15/242
+- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
+- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
+### 2026-09-06 22:57:55 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15404, 0 phut)
+- `don_bay.log`: when serializing dict item 'bang'
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `tester_holdout2.log`: duong o CA HAI doan: 15/242
+- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
+- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
+### 2026-09-06 23:05:54 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9516, 0 phut)
+- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
+- `don_bay.log`: when serializing dict item 'bang'
+- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
+- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
+- `placebo_bichan_dama.log`: ######## US30Cash
+- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
+- `tester_holdout2.log`: duong o CA HAI doan: 15/242
+- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
