@@ -178,9 +178,13 @@ bóc và kết quả tester trong ngày.
    - **Bỏ hẳn vai phán xử của LLM.** Giữ nó ở khâu dịch. Đo được: nó bác 41/48
      câu do chính nó viết, và tự mâu thuẫn giữa hai lượt.
 
-3. **Tiếp tục với `mean_reversion_z5`** — hệ duy nhất còn lại: danh mục ba chỉ
-   số Mỹ (đo tương quan chuỗi vốn) · đối chiếu với mua-giữ **chỉ số** (không
-   phí) · chạy demo.
+3. **Hai hệ, không phải một.** Cuối phiên tìm ra `quantora_ma_dashboard_sell`
+   (bán khi close dưới cả bốn EMA 20/50/100/200) — placebo đạt 3/4 chỉ số
+   y như z5, và cũng trượt đúng GER40. Nó nằm trong nhóm **32/40 cơ chế qua
+   train+holdout mà chưa kịp thử placebo** — bài học: chạy placebo cho **mọi**
+   ứng viên, đừng chọn tay. Rẻ: ~5 phút cho 40 cơ chế × 4 mã.
+   Việc còn thiếu cho `quantora`: so mua-giữ ở cùng sụt giảm · chia theo năm ·
+   %/năm ở đòn bẩy thật. z5 đã có đủ ba.
 
 ### Vướng mắc còn lại (chưa sửa)
 
