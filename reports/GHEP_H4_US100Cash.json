@@ -1,0 +1,492 @@
+{
+ "symbol": "US100Cash",
+ "khung": "H4",
+ "so_chan": 61,
+ "sau_khu_trung": 56,
+ "don_train_dau_bang": "bu_rui_ro_truoc_cong_bo_vi_mo",
+ "don_holdout": 156.3,
+ "cap_giu_hang": 5,
+ "trung_vi_holdout": 99.7,
+ "cap": [
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "mua_khi_rsi_qua_ban"
+   ],
+   "tr": 447.5,
+   "ho": 99.7
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "mua_sau_vol_thap_va_giam_sau"
+   ],
+   "tr": 329.7,
+   "ho": 158.8
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "short_khi_rsi_2_96_trong_downtrend__dao"
+   ],
+   "tr": 294.1,
+   "ho": 52.4
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "short_khi_rsi_2_96_trong_downtrend__dao"
+   ],
+   "tr": 288.7,
+   "ho": 178.8
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "mean_reversion_sell_rsi2_90_below_200ema_above_10sma"
+   ],
+   "tr": 283.3,
+   "ho": 83.6
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "mua_sau_vol_thap_va_giam_sau"
+   ],
+   "tr": 265.4,
+   "ho": 53.6
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han"
+   ],
+   "tr": 264.8,
+   "ho": 232.0
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "macd_crossover_short__dao"
+   ],
+   "tr": 251.4,
+   "ho": 33.8
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "mean_reversion_sell_rsi2_90_below_200ema_above_10sma"
+   ],
+   "tr": 250.2,
+   "ho": 44.3
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "dailyzonerecovery_sell__dao"
+   ],
+   "tr": 248.2,
+   "ho": 172.8
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "mua_rsi14_duoi_30"
+   ],
+   "tr": 244.7,
+   "ho": 364.1
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "macd_crossover_short__dao"
+   ],
+   "tr": 244.3,
+   "ho": 68.1
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "mua_rsi14_duoi_30"
+   ],
+   "tr": 230.6,
+   "ho": 119.6
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "mua_sau_vol_thap_va_giam_sau"
+   ],
+   "tr": 226.4,
+   "ho": 41.4
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han"
+   ],
+   "tr": 224.0,
+   "ho": 140.9
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "short_khi_rsi_2_96_trong_downtrend__dao"
+   ],
+   "tr": 213.9,
+   "ho": 48.9
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_sell__dao",
+    "mean_reversion_sell_rsi2_90_below_200ema_above_10sma"
+   ],
+   "tr": 212.3,
+   "ho": 103.6
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han"
+   ],
+   "tr": 206.6,
+   "ho": 76.1
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "slow_short__dao"
+   ],
+   "tr": 206.2,
+   "ho": 115.9
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "12_month_momentum_short__dao"
+   ],
+   "tr": 204.9,
+   "ho": 48.0
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "mean_reversion_sell_rsi2_90_below_200ema_above_10sma"
+   ],
+   "tr": 199.5,
+   "ho": 19.2
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "fvg_bullish_retest"
+   ],
+   "tr": 197.7,
+   "ho": 243.6
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "fast_short__dao"
+   ],
+   "tr": 191.5,
+   "ho": 194.9
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "12_month_momentum_short__dao"
+   ],
+   "tr": 189.3,
+   "ho": 21.2
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "quay_ve_keltner_low_vol"
+   ],
+   "tr": 187.8,
+   "ho": 165.6
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "dailyzonerecovery_sell__dao"
+   ],
+   "tr": 186.8,
+   "ho": 68.2
+  },
+  {
+   "bo": [
+    "mua_sau_vol_thap_va_giam_sau",
+    "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han"
+   ],
+   "tr": 183.9,
+   "ho": 171.6
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_sell__dao",
+    "quay_ve_keltner_low_vol"
+   ],
+   "tr": 182.9,
+   "ho": 138.0
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "fast_short__dao"
+   ],
+   "tr": 181.6,
+   "ho": 144.7
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "mua_zscore20_close_duoi_am2"
+   ],
+   "tr": 179.6,
+   "ho": 202.4
+  },
+  {
+   "bo": [
+    "mua_sau_vol_thap_va_giam_sau",
+    "dailyzonerecovery_sell__dao"
+   ],
+   "tr": 177.1,
+   "ho": 131.0
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "mt_macd_trend_short__dao"
+   ],
+   "tr": 176.0,
+   "ho": 190.4
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "slow_short__dao"
+   ],
+   "tr": 174.9,
+   "ho": 71.6
+  },
+  {
+   "bo": [
+    "12_month_momentum_short__dao",
+    "mean_reversion_sell_rsi2_90_below_200ema_above_10sma"
+   ],
+   "tr": 174.7,
+   "ho": 16.1
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "quay_ve_keltner_low_vol"
+   ],
+   "tr": 174.0,
+   "ho": 62.9
+  },
+  {
+   "bo": [
+    "slow_short__dao",
+    "quay_ve_keltner_low_vol"
+   ],
+   "tr": 173.2,
+   "ho": 134.0
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "ban_quay_ve_sau_vol_gian_no__dao"
+   ],
+   "tr": 173.1,
+   "ho": 599.7
+  },
+  {
+   "bo": [
+    "mua_sau_vol_thap_va_giam_sau",
+    "short_khi_rsi_2_96_trong_downtrend__dao"
+   ],
+   "tr": 170.2,
+   "ho": 135.5
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "dailyzonerecovery_sell__dao"
+   ],
+   "tr": 169.7,
+   "ho": 131.5
+  },
+  {
+   "bo": [
+    "bu_rui_ro_truoc_cong_bo_vi_mo",
+    "trend_sell_fast_ma_crosses_below_slow_ma__dao"
+   ],
+   "tr": 169.3,
+   "ho": 141.4
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "slow_short__dao"
+   ],
+   "tr": 168.8,
+   "ho": 97.5
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "fast_short__dao"
+   ],
+   "tr": 166.9,
+   "ho": 151.1
+  },
+  {
+   "bo": [
+    "fast_short__dao",
+    "mean_reversion_sell_rsi2_90_below_200ema_above_10sma"
+   ],
+   "tr": 166.6,
+   "ho": 184.9
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_sell__dao",
+    "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han"
+   ],
+   "tr": 166.1,
+   "ho": 191.5
+  },
+  {
+   "bo": [
+    "fast_short__dao",
+    "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han"
+   ],
+   "tr": 164.4,
+   "ho": 219.8
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_sell__dao",
+    "fvg_bullish_retest"
+   ],
+   "tr": 163.6,
+   "ho": 314.4
+  },
+  {
+   "bo": [
+    "short_khi_rsi_2_96_trong_downtrend__dao",
+    "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han"
+   ],
+   "tr": 163.5,
+   "ho": 237.8
+  },
+  {
+   "bo": [
+    "mua_sau_vol_thap_va_giam_sau",
+    "12_month_momentum_short__dao"
+   ],
+   "tr": 162.9,
+   "ho": 24.4
+  },
+  {
+   "bo": [
+    "fast_short__dao",
+    "mua_rsi14_duoi_30"
+   ],
+   "tr": 162.6,
+   "ho": 247.0
+  },
+  {
+   "bo": [
+    "short_khi_rsi_2_96_trong_downtrend__dao",
+    "dailyzonerecovery_sell__dao"
+   ],
+   "tr": 162.2,
+   "ho": 166.2
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "mua_zscore20_close_duoi_am2"
+   ],
+   "tr": 160.9,
+   "ho": 106.1
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "ban_quay_ve_sau_vol_gian_no__dao"
+   ],
+   "tr": 160.4,
+   "ho": 219.8
+  },
+  {
+   "bo": [
+    "mua_sau_vol_thap_va_giam_sau",
+    "fast_short__dao"
+   ],
+   "tr": 160.2,
+   "ho": 182.8
+  },
+  {
+   "bo": [
+    "slow_short__dao",
+    "mean_reversion_sell_rsi2_90_below_200ema_above_10sma"
+   ],
+   "tr": 159.7,
+   "ho": 71.6
+  },
+  {
+   "bo": [
+    "macd_crossover_short__dao",
+    "mt_macd_trend_short__dao"
+   ],
+   "tr": 159.0,
+   "ho": 115.8
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "mua_zscore20_close_duoi_am2"
+   ],
+   "tr": 158.5,
+   "ho": 140.7
+  },
+  {
+   "bo": [
+    "mua_zscore20_close_duoi_am2",
+    "quay_ve_keltner_low_vol"
+   ],
+   "tr": 158.2,
+   "ho": 193.9
+  },
+  {
+   "bo": [
+    "12_month_momentum_short__dao",
+    "slow_short__dao"
+   ],
+   "tr": 158.0,
+   "ho": 47.2
+  },
+  {
+   "bo": [
+    "mua_khi_rsi_qua_ban",
+    "12_month_momentum_short__dao"
+   ],
+   "tr": 157.5,
+   "ho": 11.0
+  },
+  {
+   "bo": [
+    "mua_sau_vol_thap_va_giam_sau",
+    "mua_rsi14_duoi_30"
+   ],
+   "tr": 157.2,
+   "ho": 296.0
+  }
+ ]
+}

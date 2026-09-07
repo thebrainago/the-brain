@@ -77,6 +77,9 @@ KHUNG = [
     ("H1",  "H1",  "2016.06.01", "2021.06.01", "2026.07.29"),
     ("M30", "M30", "2018.06.01", "2022.06.01", "2026.07.29"),
 ]
+#: `python _khung_nho.py US100Cash H4` -> chi chay khung do.
+if len(sys.argv) > 2:
+    KHUNG = [k for k in KHUNG if k[0] == sys.argv[2]]
 
 
 def kho_mo() -> list[dict]:
@@ -198,9 +201,12 @@ def main() -> int:
         xh = sorted(duong,
                     key=lambda t: -(b[t]["lai"] / b[t]["dd"] if b[t]["dd"] > 0
                                     else 0))
+        # Luu DU TEN chu khong chi dem: buoc ghep sau nay can danh sach, va
+        # chay lai ca chang A+B chi de lay ten la phi mot lan boot.
         gop[khung] = {"cua_so": [tu, cat, den], "co_ca_hai_doan": len(chung),
                       "duong": len(duong), "am": len(am), "dao_duong": len(dd),
                       "tong_chan_duong": len(duong) + len(dd),
+                      "ten_duong": sorted(duong), "ten_dao_duong": sorted(dd),
                       "top": [{"ten": t, "lai_ho": round(b[t]["lai"], 2),
                                "dd_ho": round(b[t]["dd"], 3),
                                "lenh_ho": b[t]["lenh"],

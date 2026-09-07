@@ -10,6 +10,71 @@
   "am": 284,
   "dao_duong": 27,
   "tong_chan_duong": 61,
+  "ten_duong": [
+   "bu_rui_ro_truoc_cong_bo_vi_mo",
+   "chap_nhan_vao_khi_bien_dong_ngan_han_nho_hon_dai_han",
+   "first_buy",
+   "fvg_bullish_retest",
+   "hap_thu_khoi_luong",
+   "ma_crossover_sell",
+   "mean_reversion_sell_rsi2_90_below_200ema_above_10sma",
+   "mua_khi_close_5_close_1",
+   "mua_khi_rsi_30_tren_50_va_rsi_2_qua_ban",
+   "mua_khi_rsi_qua_ban",
+   "mua_khi_z_score_thap",
+   "mua_rsi14_duoi_30",
+   "mua_rsi30_tren_50_rsi2_duoi_15",
+   "mua_sau_vol_thap_va_giam_sau",
+   "mua_zscore20_close_duoi_am2",
+   "pairs_trading_long",
+   "pha_day_hut_quet_stop",
+   "pine_bollinger_rsi_sma200_close_duoi_sma200_close_tre1",
+   "pine_cl_20_years_old_tur_low_duoi_thap_nhat20_tre1",
+   "pine_stochastic_rsi_doub_rsi14_cheo_xuong_70",
+   "quay_ve_keltner_low_vol",
+   "ribbon_flip_long",
+   "rsi_ao_chieu_mua",
+   "rsi_long_khi_rsi_60_va_ong_khi_rsi_75",
+   "rsi_nghich_chi_ban_doc_lap",
+   "rsi_oversold_rebound_from_wilder_smoothed_rsi",
+   "rut_von_quy_tuong_ho",
+   "sma_cross_trend",
+   "smc_buy_zone_reversal",
+   "statarb_zscore_meanreversion_buy",
+   "trend_following_daily_breakout",
+   "vao_long_khi_rsi_duoi_nguong_qua_ban",
+   "vung_ho_tro",
+   "xander_pulse_candles_buy"
+  ],
+  "ten_dao_duong": [
+   "12_month_momentum_short__dao",
+   "ban_khi_z_score_cao__dao",
+   "ban_quay_ve_sau_vol_gian_no__dao",
+   "bearish_fvg_pullback__dao",
+   "dailyzonerecovery_sell__dao",
+   "donchian_long_short_short__dao",
+   "fair_value_gap_bearish__dao",
+   "fair_value_gap_giam__dao",
+   "fast_short__dao",
+   "fvg_bearish_imbalance__dao",
+   "ichimoku_scalper_bearish__dao",
+   "macd_crossover_short__dao",
+   "macd_histogram_am__dao",
+   "macd_xu_huong_giam__dao",
+   "mt_macd_trend_short__dao",
+   "mtf_trend_matrix_sell__dao",
+   "pine_cl_20_years_ban_low_duoi_thap_nhat20_tre1__dao",
+   "pine_keltner_bounce_from_close_cheo_len_sma200_close__dao",
+   "rsi_cross_down_from_70__dao",
+   "rsi_histogram_sell_seed__dao",
+   "s_ban_rsi14_cheo_xuong_70__dao",
+   "short_khi_rsi_2_96_trong_downtrend__dao",
+   "slow_short__dao",
+   "sma_200_short__dao",
+   "smc_sell_zone_reversal__dao",
+   "thoat_ay_bien_ong__dao",
+   "trend_sell_fast_ma_crosses_below_slow_ma__dao"
+  ],
   "top": [
    {
     "ten": "statarb_zscore_meanreversion_buy",
@@ -19,14 +84,14 @@
     "loi_tren_dd": 372.0
    },
    {
-    "ten": "rsi_oversold_rebound_from_wilder_smoothed_rsi",
+    "ten": "mua_rsi14_duoi_30",
     "lai_ho": 439.68,
     "dd_ho": 1.268,
     "lenh_ho": 205,
     "loi_tren_dd": 346.6
    },
    {
-    "ten": "mua_rsi14_duoi_30",
+    "ten": "rsi_oversold_rebound_from_wilder_smoothed_rsi",
     "lai_ho": 439.68,
     "dd_ho": 1.268,
     "lenh_ho": 205,
@@ -80,174 +145,6 @@
     "dd_ho": 3.461,
     "lenh_ho": 81,
     "loi_tren_dd": 160.5
-   }
-  ]
- },
- "H1": {
-  "cua_so": [
-   "2016.06.01",
-   "2021.06.01",
-   "2026.07.29"
-  ],
-  "co_ca_hai_doan": 451,
-  "duong": 15,
-  "am": 335,
-  "dao_duong": 14,
-  "tong_chan_duong": 29,
-  "top": [
-   {
-    "ten": "trend_following_daily_breakout",
-    "lai_ho": 372.13,
-    "dd_ho": 3.047,
-    "lenh_ho": 81,
-    "loi_tren_dd": 122.1
-   },
-   {
-    "ten": "mua_khi_close_5_close_1",
-    "lai_ho": 795.3,
-    "dd_ho": 6.671,
-    "lenh_ho": 294,
-    "loi_tren_dd": 119.2
-   },
-   {
-    "ten": "pine_golden_cross_mua_sma50_close_cheo_len_sma200_close",
-    "lai_ho": 37.05,
-    "dd_ho": 0.402,
-    "lenh_ho": 93,
-    "loi_tren_dd": 92.2
-   },
-   {
-    "ten": "supertrend_xu_huong_tang",
-    "lai_ho": 567.7,
-    "dd_ho": 7.517,
-    "lenh_ho": 61,
-    "loi_tren_dd": 75.5
-   },
-   {
-    "ten": "__mua_giu__",
-    "lai_ho": 567.7,
-    "dd_ho": 7.517,
-    "lenh_ho": 61,
-    "loi_tren_dd": 75.5
-   },
-   {
-    "ten": "mua_zscore20_close_duoi_am2",
-    "lai_ho": 461.92,
-    "dd_ho": 7.371,
-    "lenh_ho": 384,
-    "loi_tren_dd": 62.7
-   },
-   {
-    "ten": "fvg_bullish_imbalance",
-    "lai_ho": 461.94,
-    "dd_ho": 7.668,
-    "lenh_ho": 440,
-    "loi_tren_dd": 60.2
-   },
-   {
-    "ten": "rsi_long_khi_rsi_60_va_ong_khi_rsi_75",
-    "lai_ho": 426.15,
-    "dd_ho": 7.89,
-    "lenh_ho": 190,
-    "loi_tren_dd": 54.0
-   },
-   {
-    "ten": "vao_long_khi_rsi_duoi_nguong_qua_ban",
-    "lai_ho": 318.08,
-    "dd_ho": 7.16,
-    "lenh_ho": 174,
-    "loi_tren_dd": 44.4
-   },
-   {
-    "ten": "dual_moving_average_crossover",
-    "lai_ho": 275.84,
-    "dd_ho": 7.282,
-    "lenh_ho": 70,
-    "loi_tren_dd": 37.9
-   }
-  ]
- },
- "M30": {
-  "cua_so": [
-   "2018.06.01",
-   "2022.06.01",
-   "2026.07.29"
-  ],
-  "co_ca_hai_doan": 457,
-  "duong": 10,
-  "am": 370,
-  "dao_duong": 6,
-  "tong_chan_duong": 16,
-  "top": [
-   {
-    "ten": "bearish_an_bullish_buy_ma50",
-    "lai_ho": 730.33,
-    "dd_ho": 3.999,
-    "lenh_ho": 616,
-    "loi_tren_dd": 182.6
-   },
-   {
-    "ten": "vao_ngan_khi_rsi_tren_nguong_qua_mua",
-    "lai_ho": 638.25,
-    "dd_ho": 3.621,
-    "lenh_ho": 276,
-    "loi_tren_dd": 176.3
-   },
-   {
-    "ten": "trend_strength_entry_with_rsi_exit",
-    "lai_ho": 394.37,
-    "dd_ho": 3.372,
-    "lenh_ho": 759,
-    "loi_tren_dd": 117.0
-   },
-   {
-    "ten": "phan_ky_nghich_mua",
-    "lai_ho": 393.32,
-    "dd_ho": 4.04,
-    "lenh_ho": 2029,
-    "loi_tren_dd": 97.4
-   },
-   {
-    "ten": "xander_pulse_candles_sell",
-    "lai_ho": 359.48,
-    "dd_ho": 5.441,
-    "lenh_ho": 625,
-    "loi_tren_dd": 66.1
-   },
-   {
-    "ten": "mua_close_cheo_len_sma200",
-    "lai_ho": 282.41,
-    "dd_ho": 4.741,
-    "lenh_ho": 708,
-    "loi_tren_dd": 59.6
-   },
-   {
-    "ten": "sma_200_long",
-    "lai_ho": 240.47,
-    "dd_ho": 4.83,
-    "lenh_ho": 722,
-    "loi_tren_dd": 49.8
-   },
-   {
-    "ten": "trend_ma200",
-    "lai_ho": 240.47,
-    "dd_ho": 4.83,
-    "lenh_ho": 722,
-    "loi_tren_dd": 49.8
-   },
-   {
-    "ten": "thanh_khoan_mong_dong_thu_dong",
-    "lai_ho": 73.19,
-    "dd_ho": 2.497,
-    "lenh_ho": 821,
-    "loi_tren_dd": 29.3
-   },
-   {
-    "ten": "donchian_long_only_with_ma_filter",
-    "lai_ho": 57.76,
-    "dd_ho": 5.723,
-    "lenh_ho": 514,
-    "loi_tren_dd": 10.1
    }
   ]
  }
