@@ -1,0 +1,174 @@
+[
+ {
+  "bo": [
+   "mean_reversion_z5",
+   "ma_crossover_buy__dao",
+   "engulfing_sell"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    8.0,
+    16.0,
+    1.6
+   ],
+   "dd": 22.11,
+   "lenh": 440,
+   "pct_nam": 30.57,
+   "sharpe": 0.263451
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    6.4,
+    0.0,
+    0.0
+   ],
+   "dd": 38.0,
+   "lenh": 305,
+   "pct_nam": 25.39,
+   "sharpe": 0.491399
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 99.7,
+   "lenh": 6,
+   "pct_nam": 8.44,
+   "sharpe": 0.002623
+  }
+ },
+ {
+  "bo": [
+   "mean_reversion_z5",
+   "rsi_mua_qua_ban",
+   "ma_crossover_buy__dao"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    6.4,
+    4.8,
+    16.0
+   ],
+   "dd": 22.77,
+   "lenh": 473,
+   "pct_nam": 30.11,
+   "sharpe": 0.347892
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    6.4,
+    0.0,
+    0.0
+   ],
+   "dd": 38.0,
+   "lenh": 305,
+   "pct_nam": 25.39,
+   "sharpe": 0.491399
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 99.7,
+   "lenh": 6,
+   "pct_nam": 8.44,
+   "sharpe": 0.002623
+  }
+ },
+ {
+  "bo": [
+   "ma_crossover_short__dao",
+   "engulfing_sell",
+   "sma4_10_cross_up"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    11.2,
+    14.4,
+    14.4
+   ],
+   "dd": 46.57,
+   "lenh": 386,
+   "pct_nam": 28.8,
+   "sharpe": 0.387466
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    9.6,
+    0.0,
+    0.0
+   ],
+   "dd": 96.35,
+   "lenh": 184,
+   "pct_nam": 19.11,
+   "sharpe": 0.629031
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 99.7,
+   "lenh": 6,
+   "pct_nam": 8.44,
+   "sharpe": 0.002623
+  }
+ },
+ {
+  "bo": [
+   "mean_reversion_z5",
+   "ma_crossover_buy__dao",
+   "ma_crossover_short__dao"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    6.4,
+    16.0,
+    8.0
+   ],
+   "dd": 32.89,
+   "lenh": 561,
+   "pct_nam": 31.83,
+   "sharpe": 0.354002
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    6.4,
+    0.0,
+    0.0
+   ],
+   "dd": 38.0,
+   "lenh": 305,
+   "pct_nam": 25.39,
+   "sharpe": 0.491399
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 99.7,
+   "lenh": 6,
+   "pct_nam": 8.44,
+   "sharpe": 0.002623
+  }
+ }
+]

@@ -1,0 +1,666 @@
+[
+ {
+  "a": "ban_engulfing_rsi_70",
+  "b": "buy_liquidity_ob_reversal",
+  "r": -0.0703,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     2.4,
+     5.6
+    ],
+    "dd": 25.17,
+    "lenh": 284,
+    "pct_nam": 26.66,
+    "sharpe": 0.243007
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     4.0,
+     4.8
+    ],
+    "dd": 21.43,
+    "lenh": 284,
+    "pct_nam": 25.62,
+    "sharpe": 0.315603
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 99.99
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     9.6,
+     0.0
+    ],
+    "dd": 34.5,
+    "lenh": 117,
+    "pct_nam": 13.76,
+    "sharpe": 0.529401
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     2.4,
+     0.0
+    ],
+    "dd": 21.2,
+    "lenh": 117,
+    "pct_nam": 5.2,
+    "sharpe": 1.190192
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 34.5
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     6.4
+    ],
+    "dd": 30.16,
+    "lenh": 167,
+    "pct_nam": 27.38,
+    "sharpe": 0.257668
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     0.8
+    ],
+    "dd": 17.61,
+    "lenh": 167,
+    "pct_nam": 8.66,
+    "sharpe": 0.713188
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.16
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 93.69,
+    "lenh": 6,
+    "pct_nam": 2.9,
+    "sharpe": 0.001877
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.4,
+     0.0,
+     0.0
+    ],
+    "dd": 53.08,
+    "lenh": 6,
+    "pct_nam": 1.54,
+    "sharpe": 0.003046
+   },
+   "dd_max_do_duoc": 93.69
+  }
+ },
+ {
+  "a": "ban_quay_ve_keltner_low_vol",
+  "b": "dailyzonerecovery_buy",
+  "r": -0.244,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 31.33,
+    "lenh": 198,
+    "pct_nam": 40.88,
+    "sharpe": 0.805907
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     12.0
+    ],
+    "dd": 19.09,
+    "lenh": 198,
+    "pct_nam": 38.27,
+    "sharpe": 0.792786
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.8,
+     16.0
+    ],
+    "dd": 51.34,
+    "lenh": 198,
+    "pct_nam": 36.64,
+    "sharpe": 0.340693
+   },
+   "dd_max_do_duoc": 51.34
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 45.07,
+    "lenh": 66,
+    "pct_nam": 25.47,
+    "sharpe": 0.294439
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.8,
+     0.0
+    ],
+    "dd": 19.51,
+    "lenh": 66,
+    "pct_nam": 3.7,
+    "sharpe": 0.555655
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 45.07
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 54.3,
+    "lenh": 132,
+    "pct_nam": 36.38,
+    "sharpe": 0.37374
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     0.8
+    ],
+    "dd": 21.59,
+    "lenh": 132,
+    "pct_nam": 7.6,
+    "sharpe": 0.865502
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 54.3,
+    "lenh": 132,
+    "pct_nam": 36.38,
+    "sharpe": 0.37374
+   },
+   "dd_max_do_duoc": 54.3
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 93.69,
+    "lenh": 6,
+    "pct_nam": 2.9,
+    "sharpe": 0.001877
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.4,
+     0.0,
+     0.0
+    ],
+    "dd": 53.08,
+    "lenh": 6,
+    "pct_nam": 1.54,
+    "sharpe": 0.003046
+   },
+   "dd_max_do_duoc": 93.69
+  }
+ },
+ {
+  "a": "buy_liquidity_ob_reversal",
+  "b": "pine_everyday_0003_ema14_close_tre12_duoi_sma56_close_tre1",
+  "r": 0.2997,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     6.4,
+     2.4
+    ],
+    "dd": 37.98,
+    "lenh": 535,
+    "pct_nam": 31.2,
+    "sharpe": 0.196932
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.8,
+     0.8
+    ],
+    "dd": 22.1,
+    "lenh": 535,
+    "pct_nam": 13.66,
+    "sharpe": 0.690039
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 99.99
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     6.4,
+     0.0
+    ],
+    "dd": 30.16,
+    "lenh": 167,
+    "pct_nam": 27.38,
+    "sharpe": 0.257668
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.8,
+     0.0
+    ],
+    "dd": 17.61,
+    "lenh": 167,
+    "pct_nam": 8.66,
+    "sharpe": 0.713188
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.16
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     3.2
+    ],
+    "dd": 98.54,
+    "lenh": 368,
+    "pct_nam": 20.04,
+    "sharpe": 0.312186
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.0,
+     1.6
+    ],
+    "dd": 56.69,
+    "lenh": 368,
+    "pct_nam": 13.71,
+    "sharpe": 0.838663
+   },
+   "dd_max_do_duoc": 99.91
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 93.69,
+    "lenh": 6,
+    "pct_nam": 2.9,
+    "sharpe": 0.001877
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.4,
+     0.0,
+     0.0
+    ],
+    "dd": 53.08,
+    "lenh": 6,
+    "pct_nam": 1.54,
+    "sharpe": 0.003046
+   },
+   "dd_max_do_duoc": 93.69
+  }
+ },
+ {
+  "a": "pine_everyday_0003_ema14_close_tre12_duoi_sma56_close_tre1",
+  "b": "pine_price_action_tradin_rsi7_duoi_30__dao",
+  "r": -0.022,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     4.8,
+     4.0
+    ],
+    "dd": 95.25,
+    "lenh": 504,
+    "pct_nam": 26.44,
+    "sharpe": 0.304338
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 99.99
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     3.2,
+     0.0
+    ],
+    "dd": 98.54,
+    "lenh": 368,
+    "pct_nam": 20.04,
+    "sharpe": 0.312186
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     1.6,
+     0.0
+    ],
+    "dd": 56.69,
+    "lenh": 368,
+    "pct_nam": 13.71,
+    "sharpe": 0.838663
+   },
+   "dd_max_do_duoc": 99.91
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     6.4
+    ],
+    "dd": 82.17,
+    "lenh": 136,
+    "pct_nam": 13.87,
+    "sharpe": 0.264648
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.0,
+     2.4
+    ],
+    "dd": 53.53,
+    "lenh": 136,
+    "pct_nam": 7.2,
+    "sharpe": 0.558001
+   },
+   "dd_max_do_duoc": 99.69
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 93.69,
+    "lenh": 6,
+    "pct_nam": 2.9,
+    "sharpe": 0.001877
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.4,
+     0.0,
+     0.0
+    ],
+    "dd": 53.08,
+    "lenh": 6,
+    "pct_nam": 1.54,
+    "sharpe": 0.003046
+   },
+   "dd_max_do_duoc": 93.69
+  }
+ },
+ {
+  "a": "buy_liquidity_ob_reversal",
+  "b": "macd_sma_200_strateg_sma26_duoi_sma200",
+  "r": 0.253,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     6.4,
+     8.8
+    ],
+    "dd": 48.7,
+    "lenh": 391,
+    "pct_nam": 38.05,
+    "sharpe": 0.266957
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     4.0,
+     8.0
+    ],
+    "dd": 50.79,
+    "lenh": 391,
+    "pct_nam": 34.98,
+    "sharpe": 0.380002
+   },
+   "dd_max_do_duoc": 99.76
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     6.4,
+     0.0
+    ],
+    "dd": 30.16,
+    "lenh": 167,
+    "pct_nam": 27.38,
+    "sharpe": 0.257668
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.8,
+     0.0
+    ],
+    "dd": 17.61,
+    "lenh": 167,
+    "pct_nam": 8.66,
+    "sharpe": 0.713188
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.16
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     6.4
+    ],
+    "dd": 66.7,
+    "lenh": 224,
+    "pct_nam": 27.33,
+    "sharpe": 0.854001
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.0,
+     3.2
+    ],
+    "dd": 56.31,
+    "lenh": 224,
+    "pct_nam": 19.87,
+    "sharpe": 1.218842
+   },
+   "dd_max_do_duoc": 66.7
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 93.69,
+    "lenh": 6,
+    "pct_nam": 2.9,
+    "sharpe": 0.001877
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.4,
+     0.0,
+     0.0
+    ],
+    "dd": 53.08,
+    "lenh": 6,
+    "pct_nam": 1.54,
+    "sharpe": 0.003046
+   },
+   "dd_max_do_duoc": 93.69
+  }
+ },
+ {
+  "a": "ban_quay_ve_keltner_low_vol",
+  "b": "buy_liquidity_ob_reversal",
+  "r": -0.1921,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     14.4
+    ],
+    "dd": 21.48,
+    "lenh": 233,
+    "pct_nam": 41.63,
+    "sharpe": 0.344595
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     14.4
+    ],
+    "dd": 21.48,
+    "lenh": 233,
+    "pct_nam": 41.63,
+    "sharpe": 0.344595
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 99.97
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 45.07,
+    "lenh": 66,
+    "pct_nam": 25.47,
+    "sharpe": 0.294439
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.8,
+     0.0
+    ],
+    "dd": 19.51,
+    "lenh": 66,
+    "pct_nam": 3.7,
+    "sharpe": 0.555655
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 45.07
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     6.4
+    ],
+    "dd": 30.16,
+    "lenh": 167,
+    "pct_nam": 27.38,
+    "sharpe": 0.257668
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     0.8
+    ],
+    "dd": 17.61,
+    "lenh": 167,
+    "pct_nam": 8.66,
+    "sharpe": 0.713188
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.16
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 93.69,
+    "lenh": 6,
+    "pct_nam": 2.9,
+    "sharpe": 0.001877
+   },
+   "dd20": null,
+   "dd_chu_du_an": {
+    "lot": [
+     0.4,
+     0.0,
+     0.0
+    ],
+    "dd": 53.08,
+    "lenh": 6,
+    "pct_nam": 1.54,
+    "sharpe": 0.003046
+   },
+   "dd_max_do_duoc": 93.69
+  }
+ }
+]

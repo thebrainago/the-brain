@@ -1,0 +1,206 @@
+[
+ {
+  "a": "mean_reversion_z5",
+  "b": "quantora_ma_dashboard_sell",
+  "r": -0.2939,
+  "ghep": {
+   "lot": [
+    0.0,
+    0.8,
+    8.0
+   ],
+   "dd": 51.17,
+   "lenh": 451,
+   "pct_nam": 16.59,
+   "sharpe": 0.57779
+  },
+  "chi_a": null,
+  "chi_b": {
+   "lot": [
+    0.0,
+    0.0,
+    7.2
+   ],
+   "dd": 59.77,
+   "lenh": 146,
+   "pct_nam": 12.7,
+   "sharpe": 0.905615
+  },
+  "mua_giu": {
+   "lot": [
+    0.8,
+    0.0,
+    0.0
+   ],
+   "dd": 51.4,
+   "lenh": 6,
+   "pct_nam": 4.14,
+   "sharpe": 0.007946
+  }
+ },
+ {
+  "a": "ma_crossover_buy__dao",
+  "b": "mean_reversion_z5",
+  "r": -0.0031,
+  "ghep": null,
+  "chi_a": null,
+  "chi_b": null,
+  "mua_giu": {
+   "lot": [
+    0.8,
+    0.0,
+    0.0
+   ],
+   "dd": 51.4,
+   "lenh": 6,
+   "pct_nam": 4.14,
+   "sharpe": 0.007946
+  }
+ },
+ {
+  "a": "ma_crossover_short__dao",
+  "b": "mean_reversion_z5",
+  "r": 0.3118,
+  "ghep": {
+   "lot": [
+    0.0,
+    8.0,
+    5.2
+   ],
+   "dd": 50.85,
+   "lenh": 489,
+   "pct_nam": 28.12,
+   "sharpe": 0.480871
+  },
+  "chi_a": {
+   "lot": [
+    0.0,
+    3.2,
+    0.0
+   ],
+   "dd": 56.94,
+   "lenh": 184,
+   "pct_nam": 9.98,
+   "sharpe": 1.155919
+  },
+  "chi_b": null,
+  "mua_giu": {
+   "lot": [
+    0.8,
+    0.0,
+    0.0
+   ],
+   "dd": 51.4,
+   "lenh": 6,
+   "pct_nam": 4.14,
+   "sharpe": 0.007946
+  }
+ },
+ {
+  "a": "engulfing_sell",
+  "b": "mean_reversion_z5",
+  "r": -0.0559,
+  "ghep": null,
+  "chi_a": null,
+  "chi_b": null,
+  "mua_giu": {
+   "lot": [
+    0.8,
+    0.0,
+    0.0
+   ],
+   "dd": 51.4,
+   "lenh": 6,
+   "pct_nam": 4.14,
+   "sharpe": 0.007946
+  }
+ },
+ {
+  "a": "mean_reversion_z5",
+  "b": "rsi_mua_qua_ban",
+  "r": 0.4655,
+  "ghep": {
+   "lot": [
+    0.0,
+    0.8,
+    8.0
+   ],
+   "dd": 54.94,
+   "lenh": 401,
+   "pct_nam": 18.33,
+   "sharpe": 0.588277
+  },
+  "chi_a": null,
+  "chi_b": {
+   "lot": [
+    0.0,
+    0.0,
+    6.0
+   ],
+   "dd": 58.99,
+   "lenh": 96,
+   "pct_nam": 13.29,
+   "sharpe": 1.289476
+  },
+  "mua_giu": {
+   "lot": [
+    0.8,
+    0.0,
+    0.0
+   ],
+   "dd": 51.4,
+   "lenh": 6,
+   "pct_nam": 4.14,
+   "sharpe": 0.007946
+  }
+ },
+ {
+  "a": "quantora_ma_dashboard_sell",
+  "b": "smc_sell_zone_reversal__dao",
+  "r": -0.3498,
+  "ghep": {
+   "lot": [
+    0.0,
+    4.0,
+    4.0
+   ],
+   "dd": 59.9,
+   "lenh": 243,
+   "pct_nam": 22.29,
+   "sharpe": 0.34223
+  },
+  "chi_a": {
+   "lot": [
+    0.0,
+    7.2,
+    0.0
+   ],
+   "dd": 59.77,
+   "lenh": 146,
+   "pct_nam": 12.7,
+   "sharpe": 0.905615
+  },
+  "chi_b": {
+   "lot": [
+    0.0,
+    0.0,
+    1.6
+   ],
+   "dd": 57.7,
+   "lenh": 97,
+   "pct_nam": 11.95,
+   "sharpe": 0.359531
+  },
+  "mua_giu": {
+   "lot": [
+    0.8,
+    0.0,
+    0.0
+   ],
+   "dd": 51.4,
+   "lenh": 6,
+   "pct_nam": 4.14,
+   "sharpe": 0.007946
+  }
+ }
+]

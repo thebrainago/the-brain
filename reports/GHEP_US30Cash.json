@@ -1,0 +1,456 @@
+{
+ "symbol": "US30Cash",
+ "tu": "2016.06.01",
+ "den": "2026.07.29",
+ "von": 10000,
+ "slot": [
+  "__mua_giu__",
+  "mean_reversion_z5",
+  "quantora_ma_dashboard_sell"
+ ],
+ "hinh_dang": {
+  "so_nen": 2624,
+  "tu": "2016.06.01 00:00",
+  "den": "2026.07.28 00:00",
+  "slot": [
+   "__mua_giu__",
+   "mean_reversion_z5",
+   "quantora_ma_dashboard_sell"
+  ],
+  "cuoi": [
+   365.57,
+   1392.22,
+   418.1
+  ],
+  "sut_giam": [
+   14.22,
+   6.3,
+   6.28
+  ],
+  "phoi_nhiem": [
+   99.77,
+   22.98,
+   6.25
+  ],
+  "tuong_quan": -0.3865,
+  "cung_mo_pct": 3.09,
+  "cung_mo_neu_a_mo": 13.43,
+  "tong": {
+   "lai": 1810.32,
+   "sut_giam": 6.29
+  },
+  "tong_hai_sut_giam": 12.58
+ },
+ "cong_ra_tien": {
+  "nam": 10.08,
+  "so_pass": 9260,
+  "cung_sut_giam": [
+   {
+    "dd_moc": 14.74,
+    "lot_mg": 0.1,
+    "mua_giu": 0.4,
+    "mean_reversion_z5": null,
+    "mean_reversion_z5__lot": null,
+    "quantora_ma_dashboard_sell": null,
+    "quantora_ma_dashboard_sell__lot": null,
+    "ghep": null,
+    "ghep__lot": null
+   },
+   {
+    "dd_moc": 28.42,
+    "lot_mg": 0.2,
+    "mua_giu": 0.8,
+    "mean_reversion_z5": null,
+    "mean_reversion_z5__lot": null,
+    "quantora_ma_dashboard_sell": null,
+    "quantora_ma_dashboard_sell__lot": null,
+    "ghep": 7.13,
+    "ghep__lot": [
+     0.0,
+     0.6,
+     0.4
+    ]
+   },
+   {
+    "dd_moc": 41.17,
+    "lot_mg": 0.3,
+    "mua_giu": 1.17,
+    "mean_reversion_z5": null,
+    "mean_reversion_z5__lot": null,
+    "quantora_ma_dashboard_sell": null,
+    "quantora_ma_dashboard_sell__lot": null,
+    "ghep": 9.77,
+    "ghep__lot": [
+     0.0,
+     1.0,
+     0.4
+    ]
+   },
+   {
+    "dd_moc": 53.08,
+    "lot_mg": 0.4,
+    "mua_giu": 1.54,
+    "mean_reversion_z5": null,
+    "mean_reversion_z5__lot": null,
+    "quantora_ma_dashboard_sell": 3.52,
+    "quantora_ma_dashboard_sell__lot": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "ghep": 13.69,
+    "ghep__lot": [
+     0.0,
+     1.6,
+     1.0
+    ]
+   },
+   {
+    "dd_moc": 64.23,
+    "lot_mg": 0.5,
+    "mua_giu": 1.89,
+    "mean_reversion_z5": 10.24,
+    "mean_reversion_z5__lot": [
+     0.0,
+     1.2,
+     0.0
+    ],
+    "quantora_ma_dashboard_sell": null,
+    "quantora_ma_dashboard_sell__lot": null,
+    "ghep": 17.96,
+    "ghep__lot": [
+     0.0,
+     2.6,
+     1.6
+    ]
+   },
+   {
+    "dd_moc": 74.61,
+    "lot_mg": 0.6,
+    "mua_giu": 2.25,
+    "mean_reversion_z5": null,
+    "mean_reversion_z5__lot": null,
+    "quantora_ma_dashboard_sell": null,
+    "quantora_ma_dashboard_sell__lot": null,
+    "ghep": 18.27,
+    "ghep__lot": [
+     0.0,
+     2.4,
+     2.6
+    ]
+   },
+   {
+    "dd_moc": 84.44,
+    "lot_mg": 0.7,
+    "mua_giu": 2.58,
+    "mean_reversion_z5": null,
+    "mean_reversion_z5__lot": null,
+    "quantora_ma_dashboard_sell": 6.2,
+    "quantora_ma_dashboard_sell__lot": [
+     0.0,
+     0.0,
+     2.0
+    ],
+    "ghep": 16.04,
+    "ghep__lot": [
+     0.0,
+     1.6,
+     3.0
+    ]
+   },
+   {
+    "dd_moc": 93.69,
+    "lot_mg": 0.8,
+    "mua_giu": 2.9,
+    "mean_reversion_z5": 14.11,
+    "mean_reversion_z5__lot": [
+     0.0,
+     2.0,
+     0.0
+    ],
+    "quantora_ma_dashboard_sell": 7.12,
+    "quantora_ma_dashboard_sell__lot": [
+     0.0,
+     0.0,
+     2.4
+    ],
+    "ghep": 16.67,
+    "ghep__lot": [
+     0.0,
+     1.6,
+     3.6
+    ]
+   }
+  ],
+  "dinh": {
+   "mua-giu (moc)": [
+    {
+     "lot": [
+      0.8,
+      0.0,
+      0.0
+     ],
+     "lenh": 6,
+     "lai": 3347.29,
+     "dd": 93.6865,
+     "sharpe": 0.001877,
+     "pct_nam": 2.9048109177606696,
+     "chay": false
+    },
+    {
+     "lot": [
+      1.1,
+      0.0,
+      0.0
+     ],
+     "lenh": 2,
+     "lai": -10001.94,
+     "dd": 100.0137,
+     "sharpe": -0.011887,
+     "pct_nam": NaN,
+     "chay": true
+    },
+    {
+     "lot": [
+      1.4,
+      0.0,
+      0.0
+     ],
+     "lenh": 2,
+     "lai": -10079.32,
+     "dd": 100.5169,
+     "sharpe": -0.010287,
+     "pct_nam": NaN,
+     "chay": true
+    },
+    {
+     "lot": [
+      1.7,
+      0.0,
+      0.0
+     ],
+     "lenh": 2,
+     "lai": -10111.65,
+     "dd": 100.6769,
+     "sharpe": -0.009137,
+     "pct_nam": NaN,
+     "chay": true
+    },
+    {
+     "lot": [
+      1.2,
+      0.0,
+      0.0
+     ],
+     "lenh": 2,
+     "lai": -10102.22,
+     "dd": 100.7009,
+     "sharpe": -0.00844,
+     "pct_nam": NaN,
+     "chay": true
+    }
+   ],
+   "mean_reversion_z5": [
+    {
+     "lot": [
+      0.0,
+      2.2,
+      0.0
+     ],
+     "lenh": 322,
+     "lai": 30644.91,
+     "dd": 99.376,
+     "sharpe": 0.139427,
+     "pct_nam": 14.920446779443907,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      2.0,
+      0.0
+     ],
+     "lenh": 322,
+     "lai": 27859.4,
+     "dd": 93.3658,
+     "sharpe": 0.217465,
+     "pct_nam": 14.114161425339367,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      1.8,
+      0.0
+     ],
+     "lenh": 322,
+     "lai": 25073.89,
+     "dd": 86.9391,
+     "sharpe": 0.264562,
+     "pct_nam": 13.252551100929711,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      1.6,
+      0.0
+     ],
+     "lenh": 322,
+     "lai": 22289.74,
+     "dd": 80.0484,
+     "sharpe": 0.30436,
+     "pct_nam": 12.327408730031909,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      1.4,
+      0.0
+     ],
+     "lenh": 322,
+     "lai": 19499.36,
+     "dd": 72.6593,
+     "sharpe": 0.340358,
+     "pct_nam": 11.325071957221544,
+     "chay": false
+    }
+   ],
+   "quantora_ma_dashboard_sell": [
+    {
+     "lot": [
+      0.0,
+      0.0,
+      2.6
+     ],
+     "lenh": 164,
+     "lai": 10850.75,
+     "dd": 96.9746,
+     "sharpe": 0.24973,
+     "pct_nam": 7.559414924082919,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      0.0,
+      2.4
+     ],
+     "lenh": 164,
+     "lai": 10016.05,
+     "dd": 93.0295,
+     "sharpe": 0.294704,
+     "pct_nam": 7.124489344518836,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      0.0,
+      2.2
+     ],
+     "lenh": 164,
+     "lai": 9181.45,
+     "dd": 88.7612,
+     "sharpe": 0.323942,
+     "pct_nam": 6.67296267227746,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      0.0,
+      2.0
+     ],
+     "lenh": 164,
+     "lai": 8346.72,
+     "dd": 84.1301,
+     "sharpe": 0.346916,
+     "pct_nam": 6.203303631490731,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      0.0,
+      1.8
+     ],
+     "lenh": 164,
+     "lai": 7511.99,
+     "dd": 79.0868,
+     "sharpe": 0.366554,
+     "pct_nam": 5.7139854901071985,
+     "chay": false
+    }
+   ],
+   "ghep": [
+    {
+     "lot": [
+      0.0,
+      2.8,
+      2.0
+     ],
+     "lenh": 486,
+     "lai": 47350.31,
+     "dd": 69.2942,
+     "sharpe": 0.179746,
+     "pct_nam": 18.912274974308897,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      2.8,
+      1.8
+     ],
+     "lenh": 486,
+     "lai": 46515.58,
+     "dd": 67.5191,
+     "sharpe": 0.20618,
+     "pct_nam": 18.739493567041276,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      2.8,
+      1.6
+     ],
+     "lenh": 486,
+     "lai": 45680.98,
+     "dd": 66.5713,
+     "sharpe": 0.208737,
+     "pct_nam": 18.564425250025906,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      2.6,
+      2.2
+     ],
+     "lenh": 486,
+     "lai": 45400.89,
+     "dd": 70.4831,
+     "sharpe": 0.252514,
+     "pct_nam": 18.505142680872268,
+     "chay": false
+    },
+    {
+     "lot": [
+      0.0,
+      2.8,
+      1.4
+     ],
+     "lenh": 486,
+     "lai": 44846.28,
+     "dd": 67.3654,
+     "sharpe": 0.194594,
+     "pct_nam": 18.38695551355649,
+     "chay": false
+    }
+   ]
+  }
+ }
+}

@@ -71,68 +71,73 @@ InpMagic=26090601||26090601||0||0||N
     return p
 
 
-ten_uv = ds_ung_vien()
-kho = {c["ten"]: c for c in NP.doc_kho() if not NP.kiem_khai_bao(c)}
-spec = [kho[t] for t in ten_uv if t in kho]
-print("%d co che qua train+holdout -> dich duoc %d" % (len(ten_uv), len(spec)))
+#: `import` file nay TUNG chay ca luot tester: 07/09 mot dong `from
+#: _quet_placebo_rong import ds_ung_vien` da khoi dong lai ban quet va GHI DE
+#: `reports/PLACEBO_RONG.json` bon ma bang ban mot ma. Than script phai nam
+#: trong guard, khong duoc de o muc module.
+if __name__ == "__main__":
+    ten_uv = ds_ung_vien()
+    kho = {c["ten"]: c for c in NP.doc_kho() if not NP.kiem_khai_bao(c)}
+    spec = [kho[t] for t in ten_uv if t in kho]
+    print("%d co che qua train+holdout -> dich duoc %d" % (len(ten_uv), len(spec)))
 
-ma, dat = D.sinh_ea(spec, C.TEN_EA, khung="D1", them_mua_giu=True)
-src = C.XM_DATA / "MQL5" / "Experts" / (C.TEN_EA + ".mq5")
-src.write_text(ma, encoding="utf-8")
-loi = C.bien_dich(src)
-if loi:
-    print("LOI:", loi)
-    raise SystemExit(1)
-so_dich = len(range(0, DICH_MAX + 1, DICH_BUOC))
-print("  bien dich xong: %d co che x %d do dich = %d pass/symbol"
-      % (len(dat), so_dich, len(dat) * so_dich))
+    ma, dat = D.sinh_ea(spec, C.TEN_EA, khung="D1", them_mua_giu=True)
+    src = C.XM_DATA / "MQL5" / "Experts" / (C.TEN_EA + ".mq5")
+    src.write_text(ma, encoding="utf-8")
+    loi = C.bien_dich(src)
+    if loi:
+        print("LOI:", loi)
+        raise SystemExit(1)
+    so_dich = len(range(0, DICH_MAX + 1, DICH_BUOC))
+    print("  bien dich xong: %d co che x %d do dich = %d pass/symbol"
+          % (len(dat), so_dich, len(dat) * so_dich))
 
-gop = {}
-for symbol in MA:
-    ten = "prong_%s" % symbol
-    ini = viet_ini(ten, symbol, len(dat))
-    for h in (".xml", ".htm"):
-        f = C.XM_DATA / (ten + h)
-        if f.exists():
-            f.unlink()
-    C.dong_terminal()
-    print("\n=== %s ..." % symbol, flush=True)
-    t0 = time.time()
-    subprocess.Popen([str(C.XM_EXE), "/config:%s" % ini])
-    while time.time() - t0 < 3600:
-        time.sleep(10)
-        r = subprocess.run(["tasklist", "/FI", "IMAGENAME eq terminal64.exe"],
-                           capture_output=True, text=True)
-        if "terminal64.exe" not in r.stdout:
-            break
-    print("  %.0fs" % (time.time() - t0), flush=True)
+    gop = {}
+    for symbol in MA:
+        ten = "prong_%s" % symbol
+        ini = viet_ini(ten, symbol, len(dat))
+        for h in (".xml", ".htm"):
+            f = C.XM_DATA / (ten + h)
+            if f.exists():
+                f.unlink()
+        C.dong_terminal()
+        print("\n=== %s ..." % symbol, flush=True)
+        t0 = time.time()
+        subprocess.Popen([str(C.XM_EXE), "/config:%s" % ini])
+        while time.time() - t0 < 3600:
+            time.sleep(10)
+            r = subprocess.run(["tasklist", "/FI", "IMAGENAME eq terminal64.exe"],
+                               capture_output=True, text=True)
+            if "terminal64.exe" not in r.stdout:
+                break
+        print("  %.0fs" % (time.time() - t0), flush=True)
 
-    o = {}
-    for d in C.doc_xml(C.XM_DATA / (ten + ".xml")):
-        i = int(C._so(d.get("InpMaCoChe", -1), -1))
-        k = int(C._so(d.get("InpDich", -1), -1))
-        if 0 <= i < len(dat) and k >= 0:
-            o.setdefault(dat[i]["ten"], {})[k] = C._so(d.get("Profit"))
-    ket = {}
-    for t, v in o.items():
-        if 0 not in v or len(v) < 5:
-            continue
-        that = v[0]
-        dich = sorted(x for k, x in v.items() if k > 0)
-        hon = sum(1 for x in dich if x >= that)
-        ket[t] = {"that": that, "so_dich": len(dich),
-                  "trung_vi": dich[len(dich) // 2],
-                  "p": round((hon + 1) / (len(dich) + 1), 4)}
-    gop[symbol] = ket
-    dat_p = sorted((t for t, x in ket.items() if x["p"] <= 0.05),
-                   key=lambda t: ket[t]["p"])
-    print("  %d co che co ket qua | DAT placebo (p<=0,05): %d"
-          % (len(ket), len(dat_p)))
-    for t in dat_p[:15]:
-        x = ket[t]
-        print("    %-42s that %8.2f  dich_tv %8.2f  p=%.4f"
-              % (t[:42], x["that"], x["trung_vi"], x["p"]))
+        o = {}
+        for d in C.doc_xml(C.XM_DATA / (ten + ".xml")):
+            i = int(C._so(d.get("InpMaCoChe", -1), -1))
+            k = int(C._so(d.get("InpDich", -1), -1))
+            if 0 <= i < len(dat) and k >= 0:
+                o.setdefault(dat[i]["ten"], {})[k] = C._so(d.get("Profit"))
+        ket = {}
+        for t, v in o.items():
+            if 0 not in v or len(v) < 5:
+                continue
+            that = v[0]
+            dich = sorted(x for k, x in v.items() if k > 0)
+            hon = sum(1 for x in dich if x >= that)
+            ket[t] = {"that": that, "so_dich": len(dich),
+                      "trung_vi": dich[len(dich) // 2],
+                      "p": round((hon + 1) / (len(dich) + 1), 4)}
+        gop[symbol] = ket
+        dat_p = sorted((t for t, x in ket.items() if x["p"] <= 0.05),
+                       key=lambda t: ket[t]["p"])
+        print("  %d co che co ket qua | DAT placebo (p<=0,05): %d"
+              % (len(ket), len(dat_p)))
+        for t in dat_p[:15]:
+            x = ket[t]
+            print("    %-42s that %8.2f  dich_tv %8.2f  p=%.4f"
+                  % (t[:42], x["that"], x["trung_vi"], x["p"]))
 
-Path("reports/PLACEBO_RONG.json").write_text(
-    json.dumps(gop, ensure_ascii=False, indent=1), encoding="utf-8")
-print("\n-> reports/PLACEBO_RONG.json")
+    Path("reports/PLACEBO_RONG.json").write_text(
+        json.dumps(gop, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("\n-> reports/PLACEBO_RONG.json")
