@@ -153,3 +153,38 @@ vong duong do duoc*, chua phai phat hien (`da_qua_cong_that`).
 Xep thuan theo Hurst thi GBPPLN (**98,5 bps**) va GBPZAR (20,8 bps) len dau —
 nhung cap phi giet moi luoi. `TRAN_SPREAD_BPS = 8`, va `vong_quay_can=` neu he
 quay nhieu.
+
+## DOI KHUNG = DOI TAI SAN ve mat phuong phap (chot 07/09/2026)
+
+Chu du an: *"Sau nay chuyen khung can sua co che, cai nay can note vao quy trinh,
+theo toi thay la do nhieu lon hon se can phai nang thong so len cao hon."*
+
+Dung, va **co HAI duong khac nhau - dung lan**:
+
+**A. Chuyen mot he DA CO sang khung khac** -> `nhan/ngoai_sinh.chuyen(gt, ma,
+khung_dich)`. Phai giu **TY LE KICH HOAT**, khong giu con so. Ly do da ghi trong
+chinh file do: cai khong doi khi sang tai san (hay khung) khac la **do HIEM cua
+su kien**. `zscore(5) < -1,0` tren D1 kich hoat 19,6% so bar; cung nguong do tren
+H1 kich hoat khac han - nhieu lon hon nen nguong phai **nang len** de giu cung
+do chon loc.
+
+  Quy doi chu ky (`n`, `giu`) theo ti le bar la **CAN NHUNG KHONG DU**. Do 07/09:
+  be 36 chan chon tren D1 sang khung khac, chi quy doi chu ky:
+      W1  12/36 chan duong, tong lai  -1.471
+      H4  21/36,             tong lai  +6.420
+      H1   6/36,             tong lai  -4.739
+  `_da_khung.py` lam THIEU dung khau nay - giu lai lam moc, dung coi la ket luan
+  ve khung.
+
+**B. Tim he MOI tren khung khac** -> quet lai ca kho **truc tiep tren khung do**
+(`_khung_nho.py`), khong chuyen gi ca. Duong nay khong dinh van de nguong vi no
+chon lai tu dau.
+
+**Do sau du lieu phai kiem TRUOC** [[khung-nho-do-du-lieu-quyet-dinh]]: dem bar
+MOI NAM. US100Cash: D1 tu 2011 · H4/H1 tu **2016** · M30 tu 2018-04 · M15 tu
+2022-06 · M5 tu **2025-04 (1,4 nam)**. 2012-2015 H4 va D1 co so bar y het nhau -
+MT5 don bar NGAY vao khung nho khi thieu du lieu, khong bao loi.
+
+**Chi phi quyet dinh khung nao dang quet**: spread 0,98 bps an **12,0%** bien do
+mot nen M5 nhung chi 0,7% bien do nen D1. Nguoc lai, **phi qua dem 1,56 bps/dem
+con dat hon spread**, va chan BAN duoc NHAN +0,18 bps/dem.

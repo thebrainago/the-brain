@@ -63,8 +63,22 @@ B = sys.argv[3] if len(sys.argv) > 3 else "quantora_ma_dashboard_sell"
 VON = GH.VON
 NAM = DG.NAM
 TEN_EA = "GhepQuanTri"
-#: `0` = every tick. Xem docstring: Model=2 khong do duoc quan tri vi the.
-MODEL = 0
+#: SUA 07/09 sau khi DO: quan tri viet o day la quan tri **theo NEN DONG** -
+#: `TrailingCham`, `DatHueCham`, `Tia` chi duoc goi khi co nen KHUNG moi. Nen
+#: `Model=2` (open prices only) do DUNG no. Canh bao "Model=2 khong do duoc quan
+#: tri" chi dung cho quan tri TRONG NEN: SL/TP dat o san, lenh stop hai dau.
+#:
+#: Va Model=0 khong chay duoc o day vi ly do du lieu chu khong phai nguyen tac:
+#: M1 trong may chi co tu 2026-05-28, nen every-tick phai TAI VE nhieu nam M1
+#: truoc khi chay - mot luot 10 nam ton 19,5 phut roi tra bang RONG.
+#: Muon do trailing TRONG NEN thi phai tai M1 truoc, va do la mot viec rieng.
+MODEL = 2
+#: CUA SO NGAN HON CUA SO CHUNG - co chu dich. Model=0 phai dung tick tu bar M1
+#: nen mot luot 10 nam ton hang chuc phut; ma cau hoi o day la **so sanh trong
+#: CUNG mot luot** (moi luot deu co dong `moc` tat het quan tri), khong phai do
+#: %/nam dai han. 5 nam du de phan xu, va no giu duoc phan holdout 2021-2026.
+DAU, CUOI = "2021.06.01", "2026.07.29"
+NAM_QT = (2026 + 7 / 12) - (2021 + 6 / 12)
 
 NL = "\n"
 LOT_CO_DINH = ("InpLot0=0||0||0||0||N" + NL + "InpLot1=0.1||0.1||0||0||N" + NL
@@ -73,21 +87,21 @@ LOT_CO_DINH = ("InpLot0=0||0||0||0||N" + NL + "InpLot1=0.1||0.1||0||0||N" + NL
 SWEEP = [
     ("trailing",
      "InpKieuRa=2||2||0||0||N" + NL
-     + "InpTrailATR=0.5||0.5||0.5||6.0||Y" + NL
-     + "InpTrailTu=0||0||0.5||3.0||Y" + NL),
+     + "InpTrailATR=0.5||0.5||0.5||4.0||Y" + NL
+     + "InpTrailTu=0||0||1.0||2.0||Y" + NL),
     ("dat_hue_va_vao_lai",
      "InpKieuRa=0||0||0||0||N" + NL
-     + "InpBE=0||0||0.25||3.0||Y" + NL
+     + "InpBE=0||0||0.5||3.0||Y" + NL
      + "InpVaoLai=0||0||1||1||Y" + NL),
     ("tia_lenh",
      "InpKieuRa=0||0||0||0||N" + NL
-     + "InpTiaATR=0||0||0.25||3.0||Y" + NL),
+     + "InpTiaATR=0||0||0.5||3.0||Y" + NL),
     ("nhoi_am_duong",
      "InpKieuRa=0||0||0||0||N" + NL
      + "InpNhoi=0||0||1||2||Y" + NL
-     + "InpNhoiATR=0.5||0.5||0.5||3.0||Y" + NL
+     + "InpNhoiATR=1.0||1.0||1.0||3.0||Y" + NL
      + "InpNhoiHeSo=1.0||1.0||0.5||2.0||Y" + NL
-     + "InpNhoiMax=1||1||1||3||Y" + NL),
+     + "InpNhoiMax=2||2||0||0||N" + NL),
     ("kieu_ra",
      "InpKieuRa=0||0||1||3||Y" + NL
      + "InpTrailATR=2.0||2.0||0||0||N" + NL),
@@ -129,7 +143,7 @@ ShutdownTerminal=1
 [TesterInputs]
 %s%sInpMagic=26091300||26091300||0||0||N
 InpGhi=0||0||0||0||N
-""" % (TEN_EA, MA, C.KHUNG_CHAY, MODEL, DG.DAU, DG.CUOI, VON, nc, dong_lot,
+""" % (TEN_EA, MA, C.KHUNG_CHAY, MODEL, DAU, CUOI, VON, nc, dong_lot,
        dong_qt), encoding="utf-16")
     for h in (".xml", ".htm"):
         f = C.XM_DATA / (nc + h)
@@ -160,7 +174,7 @@ InpGhi=0||0||0||0||N
             "lenh": int(C._so(d.get("Trades"))), "lai": lai,
             "dd": C._so(d.get("Equity DD %")),
             "sharpe": C._so(d.get("Sharpe Ratio")),
-            "pct_nam": (((VON + lai) / VON) ** (1 / NAM) - 1) * 100})
+            "pct_nam": (((VON + lai) / VON) ** (1 / NAM_QT) - 1) * 100})
     print("  %d pass, %ss" % (len(ra), giay), flush=True)
     return ra
 

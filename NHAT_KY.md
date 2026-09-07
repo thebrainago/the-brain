@@ -106,3 +106,4 @@ VIEC TIEP THEO
 - **2026-09-05 23:27** — boc tach theo lan: chi bao 0->87%, chien luoc 37->79%, tai lieu 1->11/100 bai; kho 326->540; nut that chuyen tu boc tach sang MDE + chi phi do duoc (test 1101, fdr 1807, viec cho 2)
 - **2026-09-06 16:31** — do ho loi ra 182.550 o -> SAN_SANG_V4 = 0 (chan troi khong phai nut that); sua duong LLM chet; ap cong kiem_khai_bao cho 169 co che da o trong kho (test 1207, fdr 1807, viec cho 2)
 - **2026-09-06 23:26** — toi uu khau test (8.241 phep thu / 82 giay), tim ra co che THU HAI: quantora_ma_dashboard_sell (test 1229, fdr 1807, viec cho 2)
+- **2026-09-07 16:41** — ghep he: chan am re hon chan manh; dao chieu tang doi chan duong; loi the ghep SONG o holdout (39/45 cap) trong khi bang he don la nhieu (test 1229, fdr 1807, viec cho 2)

@@ -1,0 +1,174 @@
+[
+ {
+  "bo": [
+   "dailyzonerecovery_sell__dao",
+   "ban_khi_bien_dong_giam_va_pha_vo_low_nen_truoc__dao",
+   "accumulation_distrib_sma9_duoi_sma15__dao"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 8.86,
+   "lenh": 736,
+   "pct_nam": 23.19,
+   "sharpe": 0.818936
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    16.0,
+    0.0,
+    0.0
+   ],
+   "dd": 23.6,
+   "lenh": 77,
+   "pct_nam": 16.5,
+   "sharpe": 1.196398
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 32.06,
+   "lenh": 6,
+   "pct_nam": 1.6,
+   "sharpe": 0.004931
+  }
+ },
+ {
+  "bo": [
+   "dailyzonerecovery_sell__dao",
+   "ban_khi_ema15_ema200__dao",
+   "accumulation_distrib_sma9_duoi_sma15__dao"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 26.74,
+   "lenh": 760,
+   "pct_nam": 25.8,
+   "sharpe": 0.683526
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    0.0,
+    16.0,
+    0.0
+   ],
+   "dd": 49.86,
+   "lenh": 213,
+   "pct_nam": 16.76,
+   "sharpe": 0.992112
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 32.06,
+   "lenh": 6,
+   "pct_nam": 1.6,
+   "sharpe": 0.004931
+  }
+ },
+ {
+  "bo": [
+   "dailyzonerecovery_sell__dao",
+   "fast_sma_cuts_below_slow_sma__dao",
+   "accumulation_distrib_sma9_duoi_sma15__dao"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 35.55,
+   "lenh": 604,
+   "pct_nam": 22.45,
+   "sharpe": 0.871997
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    16.0,
+    0.0,
+    0.0
+   ],
+   "dd": 23.6,
+   "lenh": 77,
+   "pct_nam": 16.5,
+   "sharpe": 1.196398
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 32.06,
+   "lenh": 6,
+   "pct_nam": 1.6,
+   "sharpe": 0.004931
+  }
+ },
+ {
+  "bo": [
+   "dailyzonerecovery_sell__dao",
+   "ban_khi_ema15_ema200__dao",
+   "pine_ichimoku_cloud_close_duoi_ema144_close__dao"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 26.17,
+   "lenh": 538,
+   "pct_nam": 25.63,
+   "sharpe": 1.005919
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    0.0,
+    16.0,
+    0.0
+   ],
+   "dd": 49.86,
+   "lenh": 213,
+   "pct_nam": 16.76,
+   "sharpe": 0.992112
+  },
+  "mua_giu": {
+   "lot": [
+    2.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 32.06,
+   "lenh": 6,
+   "pct_nam": 1.6,
+   "sharpe": 0.004931
+  }
+ }
+]

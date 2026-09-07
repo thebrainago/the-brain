@@ -1,0 +1,613 @@
+{
+ "symbol": "US30Cash",
+ "cat": "2021.06.01",
+ "so_chan": 77,
+ "sau_khu_trung": 67,
+ "he_don_train_dau_bang": "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+ "don_train": 406.1,
+ "don_holdout": 50.0,
+ "cap_giu_hang": 15,
+ "trung_vi_holdout_15_cap": 226.0,
+ "cap": [
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "dailyzonerecovery_buy"
+   ],
+   "tr": 584.1,
+   "ho": 178.1,
+   "ho_lai": 819.28,
+   "ho_dd": 4.599
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "buy_liquidity_ob_reversal"
+   ],
+   "tr": 488.2,
+   "ho": 343.8,
+   "ho_lai": 1868.84,
+   "ho_dd": 5.436
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "buy_liquidity_ob_reversal"
+   ],
+   "tr": 488.0,
+   "ho": 271.8,
+   "ho_lai": 1212.74,
+   "ho_dd": 4.461
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "ban_quay_ve_keltner_low_vol"
+   ],
+   "tr": 455.6,
+   "ho": 390.3,
+   "ho_lai": 1158.91,
+   "ho_dd": 2.97
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "tr": 429.1,
+   "ho": 407.3,
+   "ho_lai": 2285.15,
+   "ho_dd": 5.61
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "tr": 415.0,
+   "ho": 293.6,
+   "ho_lai": 1891.69,
+   "ho_dd": 6.444
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "tr": 404.8,
+   "ho": 143.2,
+   "ho_lai": 1090.12,
+   "ho_dd": 7.613
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "ban_engulfing_rsi_70"
+   ],
+   "tr": 400.0,
+   "ho": 303.1,
+   "ho_lai": 940.01,
+   "ho_dd": 3.101
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "mua_khi_stochastic_cat_len_50"
+   ],
+   "tr": 389.7,
+   "ho": 131.0,
+   "ho_lai": 381.89,
+   "ho_dd": 2.915
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "aegis_quantum_lite"
+   ],
+   "tr": 385.1,
+   "ho": 182.3,
+   "ho_lai": 754.89,
+   "ho_dd": 4.14
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "vung_discount_rebound"
+   ],
+   "tr": 373.6,
+   "ho": 165.6,
+   "ho_lai": 1913.89,
+   "ho_dd": 11.559
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "tr": 369.7,
+   "ho": 77.3,
+   "ho_lai": 434.02,
+   "ho_dd": 5.611
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "mua_khi_stochastic_cat_len_50"
+   ],
+   "tr": 363.3,
+   "ho": 235.4,
+   "ho_lai": 1037.99,
+   "ho_dd": 4.409
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "tr": 363.3,
+   "ho": 226.0,
+   "ho_lai": 1151.18,
+   "ho_dd": 5.094
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "bearish_order_block_reversal__dao"
+   ],
+   "tr": 361.3,
+   "ho": 174.4,
+   "ho_lai": 1582.75,
+   "ho_dd": 9.076
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "tr": 359.1,
+   "ho": 162.0,
+   "ho_lai": 757.72,
+   "ho_dd": 4.677
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "ban_quay_ve_keltner_low_vol"
+   ],
+   "tr": 351.8,
+   "ho": 427.1,
+   "ho_lai": 1552.37,
+   "ho_dd": 3.635
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "tr": 350.1,
+   "ho": 290.9,
+   "ho_lai": 1235.59,
+   "ho_dd": 4.248
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "gamma_duong_keo_ve"
+   ],
+   "tr": 340.5,
+   "ho": 146.4,
+   "ho_lai": 735.88,
+   "ho_dd": 5.028
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "tr": 336.5,
+   "ho": 107.4,
+   "ho_lai": 1135.17,
+   "ho_dd": 10.573
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "pine_strategy_macd_and_r_rsi10_tren_51"
+   ],
+   "tr": 334.1,
+   "ho": 140.4,
+   "ho_lai": 1172.74,
+   "ho_dd": 8.351
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "bearish_order_block_reversal__dao"
+   ],
+   "tr": 325.9,
+   "ho": 41.2,
+   "ho_lai": 533.19,
+   "ho_dd": 12.952
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "rsi_3_10"
+   ],
+   "tr": 324.0,
+   "ho": 409.1,
+   "ho_lai": 1622.56,
+   "ho_dd": 3.966
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "tr": 321.7,
+   "ho": 77.0,
+   "ho_lai": 802.77,
+   "ho_dd": 10.427
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "aegis_quantum_lite"
+   ],
+   "tr": 321.1,
+   "ho": 60.8,
+   "ho_lai": 98.79,
+   "ho_dd": 1.626
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "vung_discount_rebound"
+   ],
+   "tr": 320.0,
+   "ho": 79.4,
+   "ho_lai": 864.33,
+   "ho_dd": 10.886
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "vung_discount_rebound"
+   ],
+   "tr": 319.9,
+   "ho": 153.6,
+   "ho_lai": 1520.43,
+   "ho_dd": 9.899
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "ban_engulfing_rsi_70"
+   ],
+   "tr": 316.7,
+   "ho": 459.6,
+   "ho_lai": 1333.47,
+   "ho_dd": 2.901
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "rsi_3_10"
+   ],
+   "tr": 312.7,
+   "ho": 113.5,
+   "ho_lai": 1274.15,
+   "ho_dd": 11.227
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "rsi_3_10"
+   ],
+   "tr": 311.6,
+   "ho": 284.2,
+   "ho_lai": 1229.1,
+   "ho_dd": 4.325
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "tr": 306.8,
+   "ho": 183.1,
+   "ho_lai": 1936.74,
+   "ho_dd": 10.576
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "bearish_order_block_reversal__dao"
+   ],
+   "tr": 305.0,
+   "ho": 70.8,
+   "ho_lai": 1234.34,
+   "ho_dd": 17.425
+  },
+  {
+   "bo": [
+    "bearish_order_block_reversal__dao",
+    "macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "tr": 303.4,
+   "ho": 60.0,
+   "ho_lai": 804.03,
+   "ho_dd": 13.41
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "tr": 299.0,
+   "ho": 28.7,
+   "ho_lai": 101.62,
+   "ho_dd": 3.544
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "ban_quay_ve_keltner_low_vol"
+   ],
+   "tr": 292.7,
+   "ho": 126.6,
+   "ho_lai": 1203.96,
+   "ho_dd": 9.511
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "smc_buy_zone_reversal"
+   ],
+   "tr": 291.6,
+   "ho": 168.3,
+   "ho_lai": 1571.17,
+   "ho_dd": 9.336
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "ban_engulfing_rsi_70"
+   ],
+   "tr": 288.5,
+   "ho": 167.9,
+   "ho_lai": 283.91,
+   "ho_dd": 1.691
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "aegis_quantum_lite"
+   ],
+   "tr": 288.5,
+   "ho": 276.0,
+   "ho_lai": 1148.35,
+   "ho_dd": 4.161
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "bearish_order_block_reversal__dao"
+   ],
+   "tr": 284.1,
+   "ho": 114.7,
+   "ho_lai": 1189.29,
+   "ho_dd": 10.369
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "phi_bao_hiem_cuoi_tuan"
+   ],
+   "tr": 280.7,
+   "ho": 292.8,
+   "ho_lai": 1389.6,
+   "ho_dd": 4.745
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "pine_strategy_macd_and_r_rsi10_tren_51"
+   ],
+   "tr": 278.7,
+   "ho": 76.9,
+   "ho_lai": 516.64,
+   "ho_dd": 6.717
+  },
+  {
+   "bo": [
+    "macd_sma_200_strateg_close_tren_sma12",
+    "rsi_3_10"
+   ],
+   "tr": 272.6,
+   "ho": 135.9,
+   "ho_lai": 843.84,
+   "ho_dd": 6.211
+  },
+  {
+   "bo": [
+    "macd_sma_200_strateg_sma26_duoi_sma200",
+    "macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "tr": 272.4,
+   "ho": 214.5,
+   "ho_lai": 1506.43,
+   "ho_dd": 7.023
+  },
+  {
+   "bo": [
+    "macd_sma_200_strateg_sma26_duoi_sma200",
+    "rsi_3_10"
+   ],
+   "tr": 271.8,
+   "ho": 350.9,
+   "ho_lai": 1645.41,
+   "ho_dd": 4.689
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "smc_sell_zone_reversal__dao"
+   ],
+   "tr": 271.7,
+   "ho": 180.0,
+   "ho_lai": 1736.09,
+   "ho_dd": 9.643
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "pine_everyday_0003_ema14_close_tre12_duoi_sma56_close_tre1"
+   ],
+   "tr": 268.1,
+   "ho": 460.6,
+   "ho_lai": 2486.61,
+   "ho_dd": 5.398
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "mua_khi_stochastic_cat_len_50"
+   ],
+   "tr": 266.3,
+   "ho": 108.6,
+   "ho_lai": 1083.04,
+   "ho_dd": 9.974
+  },
+  {
+   "bo": [
+    "macd_sma_200_strateg_sma26_duoi_sma200",
+    "bearish_order_block_reversal__dao"
+   ],
+   "tr": 265.2,
+   "ho": 145.1,
+   "ho_lai": 1605.6,
+   "ho_dd": 11.064
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "aegis_quantum_lite"
+   ],
+   "tr": 264.5,
+   "ho": 80.6,
+   "ho_lai": 799.94,
+   "ho_dd": 9.928
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "pine_strategy_macd_and_r_rsi10_tren_51"
+   ],
+   "tr": 263.6,
+   "ho": 135.6,
+   "ho_lai": 1217.79,
+   "ho_dd": 8.982
+  },
+  {
+   "bo": [
+    "vung_discount_rebound",
+    "ban_engulfing_rsi_70"
+   ],
+   "tr": 263.3,
+   "ho": 108.6,
+   "ho_lai": 985.06,
+   "ho_dd": 9.067
+  },
+  {
+   "bo": [
+    "macd_sma_200_strateg_close_tren_sma12",
+    "fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "tr": 262.7,
+   "ho": 52.0,
+   "ho_lai": 372.46,
+   "ho_dd": 7.165
+  },
+  {
+   "bo": [
+    "dailyzonerecovery_buy",
+    "phi_bao_hiem_cuoi_tuan"
+   ],
+   "tr": 262.5,
+   "ho": 210.5,
+   "ho_lai": 996.14,
+   "ho_dd": 4.732
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "pine_strategy_macd_and_r_rsi10_tren_51"
+   ],
+   "tr": 259.9,
+   "ho": 257.7,
+   "ho_lai": 1566.2,
+   "ho_dd": 6.079
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "tr": 259.3,
+   "ho": 227.0,
+   "ho_lai": 1483.58,
+   "ho_dd": 6.537
+  },
+  {
+   "bo": [
+    "bearish_order_block_reversal__dao",
+    "ban_quay_ve_keltner_low_vol"
+   ],
+   "tr": 258.9,
+   "ho": 92.3,
+   "ho_lai": 872.82,
+   "ho_dd": 9.456
+  },
+  {
+   "bo": [
+    "buy_liquidity_ob_reversal",
+    "gamma_duong_keo_ve"
+   ],
+   "tr": 254.4,
+   "ho": 222.0,
+   "ho_lai": 1129.34,
+   "ho_dd": 5.087
+  },
+  {
+   "bo": [
+    "bearish_order_block_reversal__dao",
+    "gamma_duong_keo_ve"
+   ],
+   "tr": 249.2,
+   "ho": 32.3,
+   "ho_lai": 449.79,
+   "ho_dd": 13.938
+  },
+  {
+   "bo": [
+    "bearish_order_block_reversal__dao",
+    "fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "tr": 248.6,
+   "ho": 34.0,
+   "ho_lai": 471.63,
+   "ho_dd": 13.88
+  },
+  {
+   "bo": [
+    "pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "smc_buy_zone_reversal"
+   ],
+   "tr": 248.0,
+   "ho": 60.1,
+   "ho_lai": 521.61,
+   "ho_dd": 8.675
+  }
+ ]
+}

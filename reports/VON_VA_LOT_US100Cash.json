@@ -1,0 +1,641 @@
+{
+ "symbol": "US100Cash",
+ "ho_so": {
+  "volume_min": 0.1,
+  "volume_step": 0.1,
+  "contract": 1.0,
+  "gia": 29623.9,
+  "don_bay": 1000
+ },
+ "von_goc": 10000.0,
+ "bang": [
+  {
+   "ten": "mean_reversion_z5 + ma_crossover_buy__dao + ma_crossover_short__da",
+   "lot_goc": [
+    6.4,
+    16.0,
+    8.0
+   ],
+   "pct_nam_goc": 31.83,
+   "dd_pct": 32.89,
+   "lenh": 561,
+   "hang": [
+    {
+     "von": 100,
+     "lot_ly_thuyet": [
+      0.064,
+      0.16,
+      0.08
+     ],
+     "lot_chay_duoc": [
+      0.0,
+      0.1,
+      0.0
+     ],
+     "chay_duoc": false,
+     "pct_nam": null,
+     "sut_giam_usd": 32.89,
+     "ky_quy_usd": 2.96,
+     "hut_do_lam_tron_pct": 67.1
+    },
+    {
+     "von": 200,
+     "lot_ly_thuyet": [
+      0.128,
+      0.32,
+      0.16
+     ],
+     "lot_chay_duoc": [
+      0.1,
+      0.3,
+      0.1
+     ],
+     "chay_duoc": true,
+     "pct_nam": 29.48,
+     "sut_giam_usd": 65.78,
+     "ky_quy_usd": 14.81,
+     "hut_do_lam_tron_pct": 17.8
+    },
+    {
+     "von": 500,
+     "lot_ly_thuyet": [
+      0.32,
+      0.8,
+      0.4
+     ],
+     "lot_chay_duoc": [
+      0.3,
+      0.8,
+      0.4
+     ],
+     "chay_duoc": true,
+     "pct_nam": 31.67,
+     "sut_giam_usd": 164.45,
+     "ky_quy_usd": 44.44,
+     "hut_do_lam_tron_pct": 1.3
+    },
+    {
+     "von": 1000,
+     "lot_ly_thuyet": [
+      0.64,
+      1.6,
+      0.8
+     ],
+     "lot_chay_duoc": [
+      0.6,
+      1.6,
+      0.8
+     ],
+     "chay_duoc": true,
+     "pct_nam": 31.67,
+     "sut_giam_usd": 328.9,
+     "ky_quy_usd": 88.87,
+     "hut_do_lam_tron_pct": 1.3
+    },
+    {
+     "von": 2000,
+     "lot_ly_thuyet": [
+      1.28,
+      3.2,
+      1.6
+     ],
+     "lot_chay_duoc": [
+      1.2,
+      3.2,
+      1.6
+     ],
+     "chay_duoc": true,
+     "pct_nam": 31.67,
+     "sut_giam_usd": 657.8,
+     "ky_quy_usd": 177.74,
+     "hut_do_lam_tron_pct": 1.3
+    },
+    {
+     "von": 5000,
+     "lot_ly_thuyet": [
+      3.2,
+      8.0,
+      4.0
+     ],
+     "lot_chay_duoc": [
+      3.2,
+      8.0,
+      4.0
+     ],
+     "chay_duoc": true,
+     "pct_nam": 31.83,
+     "sut_giam_usd": 1644.5,
+     "ky_quy_usd": 450.28,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 10000,
+     "lot_ly_thuyet": [
+      6.4,
+      16.0,
+      8.0
+     ],
+     "lot_chay_duoc": [
+      6.4,
+      16.0,
+      8.0
+     ],
+     "chay_duoc": true,
+     "pct_nam": 31.83,
+     "sut_giam_usd": 3289.0,
+     "ky_quy_usd": 900.57,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 20000,
+     "lot_ly_thuyet": [
+      12.8,
+      32.0,
+      16.0
+     ],
+     "lot_chay_duoc": [
+      12.8,
+      32.0,
+      16.0
+     ],
+     "chay_duoc": true,
+     "pct_nam": 31.83,
+     "sut_giam_usd": 6578.0,
+     "ky_quy_usd": 1801.13,
+     "hut_do_lam_tron_pct": 0.0
+    }
+   ]
+  },
+  {
+   "ten": "mean_reversion_z5 + ma_crossover_buy__dao + engulfing_sell",
+   "lot_goc": [
+    8.0,
+    16.0,
+    1.6
+   ],
+   "pct_nam_goc": 30.57,
+   "dd_pct": 22.11,
+   "lenh": 440,
+   "hang": [
+    {
+     "von": 100,
+     "lot_ly_thuyet": [
+      0.08,
+      0.16,
+      0.016
+     ],
+     "lot_chay_duoc": [
+      0.0,
+      0.1,
+      0.0
+     ],
+     "chay_duoc": false,
+     "pct_nam": null,
+     "sut_giam_usd": 22.11,
+     "ky_quy_usd": 2.96,
+     "hut_do_lam_tron_pct": 60.9
+    },
+    {
+     "von": 200,
+     "lot_ly_thuyet": [
+      0.16,
+      0.32,
+      0.032
+     ],
+     "lot_chay_duoc": [
+      0.1,
+      0.3,
+      0.0
+     ],
+     "chay_duoc": false,
+     "pct_nam": null,
+     "sut_giam_usd": 44.22,
+     "ky_quy_usd": 11.85,
+     "hut_do_lam_tron_pct": 21.9
+    },
+    {
+     "von": 500,
+     "lot_ly_thuyet": [
+      0.4,
+      0.8,
+      0.08
+     ],
+     "lot_chay_duoc": [
+      0.4,
+      0.8,
+      0.0
+     ],
+     "chay_duoc": false,
+     "pct_nam": null,
+     "sut_giam_usd": 110.55,
+     "ky_quy_usd": 35.55,
+     "hut_do_lam_tron_pct": 6.2
+    },
+    {
+     "von": 1000,
+     "lot_ly_thuyet": [
+      0.8,
+      1.6,
+      0.16
+     ],
+     "lot_chay_duoc": [
+      0.8,
+      1.6,
+      0.1
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.29,
+     "sut_giam_usd": 221.1,
+     "ky_quy_usd": 74.06,
+     "hut_do_lam_tron_pct": 2.3
+    },
+    {
+     "von": 2000,
+     "lot_ly_thuyet": [
+      1.6,
+      3.2,
+      0.32
+     ],
+     "lot_chay_duoc": [
+      1.6,
+      3.2,
+      0.3
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.52,
+     "sut_giam_usd": 442.2,
+     "ky_quy_usd": 151.08,
+     "hut_do_lam_tron_pct": 0.4
+    },
+    {
+     "von": 5000,
+     "lot_ly_thuyet": [
+      4.0,
+      8.0,
+      0.8
+     ],
+     "lot_chay_duoc": [
+      4.0,
+      8.0,
+      0.8
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.57,
+     "sut_giam_usd": 1105.5,
+     "ky_quy_usd": 379.19,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 10000,
+     "lot_ly_thuyet": [
+      8.0,
+      16.0,
+      1.6
+     ],
+     "lot_chay_duoc": [
+      8.0,
+      16.0,
+      1.6
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.57,
+     "sut_giam_usd": 2211.0,
+     "ky_quy_usd": 758.37,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 20000,
+     "lot_ly_thuyet": [
+      16.0,
+      32.0,
+      3.2
+     ],
+     "lot_chay_duoc": [
+      16.0,
+      32.0,
+      3.2
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.57,
+     "sut_giam_usd": 4422.0,
+     "ky_quy_usd": 1516.74,
+     "hut_do_lam_tron_pct": 0.0
+    }
+   ]
+  },
+  {
+   "ten": "mean_reversion_z5 + rsi_mua_qua_ban + ma_crossover_buy__dao",
+   "lot_goc": [
+    6.4,
+    4.8,
+    16.0
+   ],
+   "pct_nam_goc": 30.11,
+   "dd_pct": 22.77,
+   "lenh": 473,
+   "hang": [
+    {
+     "von": 100,
+     "lot_ly_thuyet": [
+      0.064,
+      0.048,
+      0.16
+     ],
+     "lot_chay_duoc": [
+      0.0,
+      0.0,
+      0.1
+     ],
+     "chay_duoc": false,
+     "pct_nam": null,
+     "sut_giam_usd": 22.77,
+     "ky_quy_usd": 2.96,
+     "hut_do_lam_tron_pct": 63.2
+    },
+    {
+     "von": 200,
+     "lot_ly_thuyet": [
+      0.128,
+      0.096,
+      0.32
+     ],
+     "lot_chay_duoc": [
+      0.1,
+      0.0,
+      0.3
+     ],
+     "chay_duoc": false,
+     "pct_nam": null,
+     "sut_giam_usd": 45.54,
+     "ky_quy_usd": 11.85,
+     "hut_do_lam_tron_pct": 26.5
+    },
+    {
+     "von": 500,
+     "lot_ly_thuyet": [
+      0.32,
+      0.24,
+      0.8
+     ],
+     "lot_chay_duoc": [
+      0.3,
+      0.2,
+      0.8
+     ],
+     "chay_duoc": true,
+     "pct_nam": 29.57,
+     "sut_giam_usd": 113.85,
+     "ky_quy_usd": 38.51,
+     "hut_do_lam_tron_pct": 4.4
+    },
+    {
+     "von": 1000,
+     "lot_ly_thuyet": [
+      0.64,
+      0.48,
+      1.6
+     ],
+     "lot_chay_duoc": [
+      0.6,
+      0.4,
+      1.6
+     ],
+     "chay_duoc": true,
+     "pct_nam": 29.57,
+     "sut_giam_usd": 227.7,
+     "ky_quy_usd": 77.02,
+     "hut_do_lam_tron_pct": 4.4
+    },
+    {
+     "von": 2000,
+     "lot_ly_thuyet": [
+      1.28,
+      0.96,
+      3.2
+     ],
+     "lot_chay_duoc": [
+      1.2,
+      0.9,
+      3.2
+     ],
+     "chay_duoc": true,
+     "pct_nam": 29.8,
+     "sut_giam_usd": 455.4,
+     "ky_quy_usd": 157.01,
+     "hut_do_lam_tron_pct": 2.6
+    },
+    {
+     "von": 5000,
+     "lot_ly_thuyet": [
+      3.2,
+      2.4,
+      8.0
+     ],
+     "lot_chay_duoc": [
+      3.2,
+      2.4,
+      8.0
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.11,
+     "sut_giam_usd": 1138.5,
+     "ky_quy_usd": 402.89,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 10000,
+     "lot_ly_thuyet": [
+      6.4,
+      4.8,
+      16.0
+     ],
+     "lot_chay_duoc": [
+      6.4,
+      4.8,
+      16.0
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.11,
+     "sut_giam_usd": 2277.0,
+     "ky_quy_usd": 805.77,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 20000,
+     "lot_ly_thuyet": [
+      12.8,
+      9.6,
+      32.0
+     ],
+     "lot_chay_duoc": [
+      12.8,
+      9.6,
+      32.0
+     ],
+     "chay_duoc": true,
+     "pct_nam": 30.11,
+     "sut_giam_usd": 4554.0,
+     "ky_quy_usd": 1611.54,
+     "hut_do_lam_tron_pct": 0.0
+    }
+   ]
+  },
+  {
+   "ten": "ma_crossover_short__da + engulfing_sell + sma4_10_cross_up",
+   "lot_goc": [
+    11.2,
+    14.4,
+    14.4
+   ],
+   "pct_nam_goc": 28.8,
+   "dd_pct": 46.57,
+   "lenh": 386,
+   "hang": [
+    {
+     "von": 100,
+     "lot_ly_thuyet": [
+      0.112,
+      0.144,
+      0.144
+     ],
+     "lot_chay_duoc": [
+      0.1,
+      0.1,
+      0.1
+     ],
+     "chay_duoc": true,
+     "pct_nam": 25.51,
+     "sut_giam_usd": 46.57,
+     "ky_quy_usd": 8.89,
+     "hut_do_lam_tron_pct": 25.0
+    },
+    {
+     "von": 200,
+     "lot_ly_thuyet": [
+      0.224,
+      0.288,
+      0.288
+     ],
+     "lot_chay_duoc": [
+      0.2,
+      0.2,
+      0.2
+     ],
+     "chay_duoc": true,
+     "pct_nam": 25.51,
+     "sut_giam_usd": 93.14,
+     "ky_quy_usd": 17.77,
+     "hut_do_lam_tron_pct": 25.0
+    },
+    {
+     "von": 500,
+     "lot_ly_thuyet": [
+      0.56,
+      0.72,
+      0.72
+     ],
+     "lot_chay_duoc": [
+      0.5,
+      0.7,
+      0.7
+     ],
+     "chay_duoc": true,
+     "pct_nam": 28.2,
+     "sut_giam_usd": 232.85,
+     "ky_quy_usd": 56.29,
+     "hut_do_lam_tron_pct": 5.0
+    },
+    {
+     "von": 1000,
+     "lot_ly_thuyet": [
+      1.12,
+      1.44,
+      1.44
+     ],
+     "lot_chay_duoc": [
+      1.1,
+      1.4,
+      1.4
+     ],
+     "chay_duoc": true,
+     "pct_nam": 28.5,
+     "sut_giam_usd": 465.7,
+     "ky_quy_usd": 115.53,
+     "hut_do_lam_tron_pct": 2.5
+    },
+    {
+     "von": 2000,
+     "lot_ly_thuyet": [
+      2.24,
+      2.88,
+      2.88
+     ],
+     "lot_chay_duoc": [
+      2.2,
+      2.8,
+      2.8
+     ],
+     "chay_duoc": true,
+     "pct_nam": 28.5,
+     "sut_giam_usd": 931.4,
+     "ky_quy_usd": 231.07,
+     "hut_do_lam_tron_pct": 2.5
+    },
+    {
+     "von": 5000,
+     "lot_ly_thuyet": [
+      5.6,
+      7.2,
+      7.2
+     ],
+     "lot_chay_duoc": [
+      5.6,
+      7.2,
+      7.2
+     ],
+     "chay_duoc": true,
+     "pct_nam": 28.8,
+     "sut_giam_usd": 2328.5,
+     "ky_quy_usd": 592.48,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 10000,
+     "lot_ly_thuyet": [
+      11.2,
+      14.4,
+      14.4
+     ],
+     "lot_chay_duoc": [
+      11.2,
+      14.4,
+      14.4
+     ],
+     "chay_duoc": true,
+     "pct_nam": 28.8,
+     "sut_giam_usd": 4657.0,
+     "ky_quy_usd": 1184.96,
+     "hut_do_lam_tron_pct": 0.0
+    },
+    {
+     "von": 20000,
+     "lot_ly_thuyet": [
+      22.4,
+      28.8,
+      28.8
+     ],
+     "lot_chay_duoc": [
+      22.4,
+      28.8,
+      28.8
+     ],
+     "chay_duoc": true,
+     "pct_nam": 28.8,
+     "sut_giam_usd": 9314.0,
+     "ky_quy_usd": 2369.91,
+     "hut_do_lam_tron_pct": 0.0
+    }
+   ]
+  }
+ ]
+}

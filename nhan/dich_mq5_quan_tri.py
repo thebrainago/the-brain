@@ -375,11 +375,19 @@ void OnTick()
          bool ra;
          // Slot 0 (moc mua-giu) KHONG chiu quan tri - moc phai giu nguyen y
          // nghia "mua roi nam im", neu khong thi khong con la moc nua.
-         if(i == 0 || InpKieuRa == 0)
+         //
+         // SUA 07/09: dat hue / tia / nhoi la LOP PHU DOC LAP, phai chay voi
+         // MOI `InpKieuRa` ke ca 0. Ban truoc de chung trong nhanh
+         // `InpKieuRa != 0` nen ba luot quet dat o `InpKieuRa=0` chay ma khong
+         // co gi duoc goi - 336 pass ra ket qua Y HET nhau va bang so trong
+         // hoan toan binh thuong. Do la kieu loi nguy hiem nhat.
+         if(i == 0)
             ra = CoDieuKienRa(i) ? CoRa(i, 1) : (g_bar_vao[i] >= Giu(i));
          else
            {
-            ra = false;
+            ra = (InpKieuRa == 0)
+                 ? (CoDieuKienRa(i) ? CoRa(i, 1) : (g_bar_vao[i] >= Giu(i)))
+                 : false;
             if(InpKieuRa == 1 || InpKieuRa == 3) ra = ra || ChanKiaVao(i);
             if(InpKieuRa == 2 || InpKieuRa == 3) ra = ra || TrailingCham(i, atr);
             ra = ra || DatHueCham(i, atr);
