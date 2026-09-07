@@ -58,8 +58,12 @@ KHUNG = [("W1", 1 / 5), ("D1", 1.0), ("H4", 6.0), ("H1", 24.0)]
 TOP_CHAN = 36
 
 
+#: GIU LAI LAM MOC, khong dung nua. Do 07/09: ban nay chi nhan chu ky, va tren
+#: 26 chan co hang so nguong thi **7 chan bi cam** (tut duoi 25 lenh) khi doi
+#: D1 -> H4. Ban day du la `nhan/doi_khung.doi()` - no them buoc khop phan vi va
+#: hieu chinh gop, ha so chan bi cam tu 7 xuong 1.
 def doi_khung(nut, he_so: float):
-    """Nhan MOI truong `n` va `giu` theo he_so; giu nguyen moi `hang`."""
+    """Nhan MOI truong `n` va `giu` theo he_so; giu nguyen moi `hang`. CU."""
     if isinstance(nut, dict):
         ra = {}
         for k, v in nut.items():
@@ -75,18 +79,42 @@ def doi_khung(nut, he_so: float):
     return nut
 
 
-def spec_khung(chan: list[dict], he_so: float) -> list[dict]:
-    ra = []
+def spec_khung(chan: list[dict], he_so: float, khung: str = "",
+               ma_kho: str = "") -> list[dict]:
+    """Doi ca danh sach sang khung khac.
+
+    Dung `nhan/doi_khung.doi()` (chu ky + khop phan vi + hieu chinh gop) khi co
+    du du lieu; thieu du lieu thi roi ve ban chi-nhan-chu-ky va **noi ra** chu
+    khong im lang [[ket-luan-am-phai-phan-biet-chua-do]].
+    """
+    from nhan import doi_khung as DK
+    dg = dd = None
+    if khung and ma_kho:
+        dg = DK.nap_khung(ma_kho, "D1", DG.DAU, DG.CAT if hasattr(DG, "CAT")
+                          else "2021.06.01")
+        dd = DK.nap_khung(ma_kho, khung, DG.DAU, "2021.06.01")
+    ra, roi_ve = [], 0
     for c in chan:
+        if dg is not None and dd is not None:
+            r = DK.doi(c, ma_kho, "D1", khung, df_goc=dg, df_dich=dd)
+            if not r.get("loi"):
+                d = dict(r["spec"])
+                d["ten"] = c["ten"]
+                ra.append(d)
+                continue
+        roi_ve += 1
         d = doi_khung(c, he_so)
         d["ten"] = c["ten"]
         d["giu"] = max(1, int(round(int(c.get("giu", 1) or 1) * he_so)))
         ra.append(d)
+    if roi_ve:
+        print("   (%d/%d chan roi ve ban chi-nhan-chu-ky vi thieu du lieu)"
+              % (roi_ve, len(chan)), flush=True)
     return ra
 
 
 def chay_khung(chan: list[dict], khung: str, he_so: float) -> dict:
-    spec = spec_khung(chan, he_so)
+    spec = spec_khung(chan, he_so, khung, "XM_" + MA.upper())
     goc, tat = [], {}
     for lo in range((len(spec) + DG.SLOT_MOI_LAN - 1) // DG.SLOT_MOI_LAN):
         phan = spec[lo * DG.SLOT_MOI_LAN:(lo + 1) * DG.SLOT_MOI_LAN]
