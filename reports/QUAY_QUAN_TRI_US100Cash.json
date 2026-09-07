@@ -1,0 +1,1402 @@
+{
+ "vung_discount_rebound": {
+  "moc_train": 70.5,
+  "moc_holdout": 161.1,
+  "so_luat_kich_hoat": 38,
+  "hang": [
+   {
+    "luat": 36,
+    "ten": "ausbruch_trader_1.0.mq5",
+    "tr": 184.2,
+    "ho": 227.3,
+    "lenh_tr": 52
+   },
+   {
+    "luat": 26,
+    "ten": "RiskSizer_Panel_Lite.mq5",
+    "tr": 148.1,
+    "ho": 132.2,
+    "lenh_tr": 50
+   },
+   {
+    "luat": 5,
+    "ten": "Nikkei225_Gap_Continuation_EA.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 9,
+    "ten": "IronHawk_Fibonacci_Structure_Map.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 11,
+    "ten": "MSNR_v531Plus_AEU1.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 15,
+    "ten": "XANDER_Grid_XAUUSD.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 16,
+    "ten": "XProTradePanel.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 38,
+    "ten": "Double_Env.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 39,
+    "ten": "Adaptive_Support_Resistance_Zones.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 40,
+    "ten": "Confirmed_Swing_Points_Helper.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 41,
+    "ten": "stellarlite_ict_ea.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 45,
+    "ten": "ML_SuperTrend.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 48,
+    "ten": "martingalebreakout.mq5",
+    "tr": 70.5,
+    "ho": 161.1,
+    "lenh_tr": 31
+   },
+   {
+    "luat": 46,
+    "ten": "trailing_only_with_close_all_button_v2.1.mq5",
+    "tr": 51.4,
+    "ho": 25.0,
+    "lenh_tr": 73
+   },
+   {
+    "luat": 8,
+    "ten": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+    "tr": 47.5,
+    "ho": 25.0,
+    "lenh_tr": 66
+   },
+   {
+    "luat": 18,
+    "ten": "BEC_Combined_BE_Trail.mq5",
+    "tr": 47.5,
+    "ho": 24.7,
+    "lenh_tr": 66
+   },
+   {
+    "luat": 25,
+    "ten": "MarketStructure.mq5",
+    "tr": 47.5,
+    "ho": 25.0,
+    "lenh_tr": 66
+   },
+   {
+    "luat": 3,
+    "ten": "SmartTradeAdjustmentPanel.mq5",
+    "tr": 45.3,
+    "ho": 33.8,
+    "lenh_tr": 65
+   },
+   {
+    "luat": 27,
+    "ten": "Playground_v1_00.mq5",
+    "tr": 44.1,
+    "ho": 24.7,
+    "lenh_tr": 65
+   },
+   {
+    "luat": 17,
+    "ten": "Grid_EA_Pro.mq5",
+    "tr": 38.8,
+    "ho": 6.1,
+    "lenh_tr": 74
+   },
+   {
+    "luat": 47,
+    "ten": "ka-gold_bot.mq5",
+    "tr": 38.5,
+    "ho": 4.6,
+    "lenh_tr": 73
+   },
+   {
+    "luat": 6,
+    "ten": "BlueMoon_EA_v3_4_Netting_Volume_Fix.mq5",
+    "tr": 37.4,
+    "ho": 23.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 49,
+    "ten": "ak-47_scalper_ea_-_mt5.mq5",
+    "tr": 37.4,
+    "ho": 23.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 10,
+    "ten": "Universal_Breakout_Study.mq5",
+    "tr": 37.3,
+    "ho": -4.1,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 19,
+    "ten": "Hon-Matrix.mq5",
+    "tr": 37.3,
+    "ho": -4.1,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 32,
+    "ten": "scalping_dashboard_V2.mq5",
+    "tr": 37.3,
+    "ho": -4.1,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 33,
+    "ten": "ema_rsi_risk_ea.mq5",
+    "tr": 37.3,
+    "ho": 7.4,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 42,
+    "ten": "icho_trend_ccidualonma_filter.mq5",
+    "tr": 36.7,
+    "ho": 2.1,
+    "lenh_tr": 74
+   },
+   {
+    "luat": 43,
+    "ten": "manual_position_tracking_panel.mq5",
+    "tr": 36.3,
+    "ho": 2.1,
+    "lenh_tr": 74
+   },
+   {
+    "luat": 1,
+    "ten": "AAPL_Pro.mq5",
+    "tr": 35.9,
+    "ho": 23.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 21,
+    "ten": "OHLCMTF_Scalper_MAIN.mq5",
+    "tr": 35.9,
+    "ho": 23.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 44,
+    "ten": "ma_trend_2.mq5",
+    "tr": 35.5,
+    "ho": -9.8,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 23,
+    "ten": "ExMachina_SafeScalping_CB_i18.mq5",
+    "tr": 35.2,
+    "ho": -9.8,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 34,
+    "ten": "multi_divergence.mq5",
+    "tr": 33.5,
+    "ho": -9.8,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 14,
+    "ten": "XANDER_Gold_Recovery.mq5",
+    "tr": 32.7,
+    "ho": 0.5,
+    "lenh_tr": 62
+   },
+   {
+    "luat": 22,
+    "ten": "SilviosEAbest26.mq5",
+    "tr": 32.4,
+    "ho": 7.4,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 4,
+    "ten": "ES_Manager.mq5",
+    "tr": -18.4,
+    "ho": 4.9,
+    "lenh_tr": 129
+   },
+   {
+    "luat": 2,
+    "ten": "SmartTradeManager.mq5",
+    "tr": -21.1,
+    "ho": 76.3,
+    "lenh_tr": 51
+   },
+   {
+    "luat": 13,
+    "ten": "Prime_Quantum_AI.mq5",
+    "tr": -76.0,
+    "ho": -46.2,
+    "lenh_tr": 103
+   },
+   {
+    "luat": 30,
+    "ten": "The_RSI_Engine_v2.1.mq5",
+    "tr": -76.0,
+    "ho": -48.6,
+    "lenh_tr": 103
+   },
+   {
+    "luat": 35,
+    "ten": "botcilentov1.35.mq5",
+    "tr": -76.0,
+    "ho": -45.7,
+    "lenh_tr": 103
+   },
+   {
+    "luat": 20,
+    "ten": "GridEA.mq5",
+    "tr": -80.5,
+    "ho": -52.6,
+    "lenh_tr": 155
+   },
+   {
+    "luat": 12,
+    "ten": "Quantum_XAUUSD_Silver_Trader.mq5",
+    "tr": -93.8,
+    "ho": -47.0,
+    "lenh_tr": 72
+   },
+   {
+    "luat": 29,
+    "ten": "Quantum_Gold_Silver_Trader.mq5",
+    "tr": -93.8,
+    "ho": -47.0,
+    "lenh_tr": 72
+   },
+   {
+    "luat": 24,
+    "ten": "SidewaysMartingale.mq5",
+    "tr": -100.2,
+    "ho": 3046.9,
+    "lenh_tr": 28
+   },
+   {
+    "luat": 28,
+    "ten": "BabiNgepet_07.mq5",
+    "tr": -100.2,
+    "ho": 3025.7,
+    "lenh_tr": 28
+   },
+   {
+    "luat": 31,
+    "ten": "MartingalePulse.mq5",
+    "tr": -103.9,
+    "ho": -99.7,
+    "lenh_tr": 65
+   },
+   {
+    "luat": 7,
+    "ten": "EA_KCI_N-Matrix_engine.mq5",
+    "tr": -105.2,
+    "ho": -106.1,
+    "lenh_tr": 63
+   },
+   {
+    "luat": 37,
+    "ten": "tuyuluncensored.mq5",
+    "tr": -105.4,
+    "ho": -99.8,
+    "lenh_tr": 121
+   }
+  ]
+ },
+ "smc_sell_zone_reversal__dao": {
+  "moc_train": 7.4,
+  "moc_holdout": 301.1,
+  "so_luat_kich_hoat": 38,
+  "hang": [
+   {
+    "luat": 20,
+    "ten": "GridEA.mq5",
+    "tr": 369.2,
+    "ho": 302.8,
+    "lenh_tr": 114
+   },
+   {
+    "luat": 13,
+    "ten": "Prime_Quantum_AI.mq5",
+    "tr": 47.3,
+    "ho": 294.7,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 35,
+    "ten": "botcilentov1.35.mq5",
+    "tr": 47.3,
+    "ho": 291.0,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 3,
+    "ten": "SmartTradeAdjustmentPanel.mq5",
+    "tr": 44.6,
+    "ho": 201.0,
+    "lenh_tr": 67
+   },
+   {
+    "luat": 12,
+    "ten": "Quantum_XAUUSD_Silver_Trader.mq5",
+    "tr": 41.2,
+    "ho": 89.7,
+    "lenh_tr": 70
+   },
+   {
+    "luat": 29,
+    "ten": "Quantum_Gold_Silver_Trader.mq5",
+    "tr": 41.2,
+    "ho": 89.7,
+    "lenh_tr": 70
+   },
+   {
+    "luat": 14,
+    "ten": "XANDER_Gold_Recovery.mq5",
+    "tr": 40.8,
+    "ho": 272.0,
+    "lenh_tr": 65
+   },
+   {
+    "luat": 30,
+    "ten": "The_RSI_Engine_v2.1.mq5",
+    "tr": 30.3,
+    "ho": 295.3,
+    "lenh_tr": 85
+   },
+   {
+    "luat": 26,
+    "ten": "RiskSizer_Panel_Lite.mq5",
+    "tr": 25.8,
+    "ho": 79.6,
+    "lenh_tr": 60
+   },
+   {
+    "luat": 5,
+    "ten": "Nikkei225_Gap_Continuation_EA.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 9,
+    "ten": "IronHawk_Fibonacci_Structure_Map.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 11,
+    "ten": "MSNR_v531Plus_AEU1.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 15,
+    "ten": "XANDER_Grid_XAUUSD.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 16,
+    "ten": "XProTradePanel.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 38,
+    "ten": "Double_Env.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 39,
+    "ten": "Adaptive_Support_Resistance_Zones.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 40,
+    "ten": "Confirmed_Swing_Points_Helper.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 41,
+    "ten": "stellarlite_ict_ea.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 45,
+    "ten": "ML_SuperTrend.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 48,
+    "ten": "martingalebreakout.mq5",
+    "tr": 7.4,
+    "ho": 301.1,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 36,
+    "ten": "ausbruch_trader_1.0.mq5",
+    "tr": 5.4,
+    "ho": 89.1,
+    "lenh_tr": 61
+   },
+   {
+    "luat": 8,
+    "ten": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+    "tr": 4.5,
+    "ho": 196.9,
+    "lenh_tr": 69
+   },
+   {
+    "luat": 25,
+    "ten": "MarketStructure.mq5",
+    "tr": 4.5,
+    "ho": 196.9,
+    "lenh_tr": 69
+   },
+   {
+    "luat": 18,
+    "ten": "BEC_Combined_BE_Trail.mq5",
+    "tr": -0.7,
+    "ho": 178.0,
+    "lenh_tr": 69
+   },
+   {
+    "luat": 27,
+    "ten": "Playground_v1_00.mq5",
+    "tr": -16.6,
+    "ho": 196.9,
+    "lenh_tr": 67
+   },
+   {
+    "luat": 23,
+    "ten": "ExMachina_SafeScalping_CB_i18.mq5",
+    "tr": -37.8,
+    "ho": 288.7,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 34,
+    "ten": "multi_divergence.mq5",
+    "tr": -37.8,
+    "ho": 288.7,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 44,
+    "ten": "ma_trend_2.mq5",
+    "tr": -41.1,
+    "ho": 280.7,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 46,
+    "ten": "trailing_only_with_close_all_button_v2.1.mq5",
+    "tr": -42.6,
+    "ho": 237.2,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 19,
+    "ten": "Hon-Matrix.mq5",
+    "tr": -44.2,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 22,
+    "ten": "SilviosEAbest26.mq5",
+    "tr": -44.2,
+    "ho": 258.1,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 32,
+    "ten": "scalping_dashboard_V2.mq5",
+    "tr": -44.2,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 33,
+    "ten": "ema_rsi_risk_ea.mq5",
+    "tr": -44.2,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 1,
+    "ten": "AAPL_Pro.mq5",
+    "tr": -45.3,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 6,
+    "ten": "BlueMoon_EA_v3_4_Netting_Volume_Fix.mq5",
+    "tr": -45.3,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 10,
+    "ten": "Universal_Breakout_Study.mq5",
+    "tr": -45.3,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 21,
+    "ten": "OHLCMTF_Scalper_MAIN.mq5",
+    "tr": -45.3,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 49,
+    "ten": "ak-47_scalper_ea_-_mt5.mq5",
+    "tr": -45.3,
+    "ho": 259.5,
+    "lenh_tr": 80
+   },
+   {
+    "luat": 47,
+    "ten": "ka-gold_bot.mq5",
+    "tr": -51.6,
+    "ho": 230.0,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 17,
+    "ten": "Grid_EA_Pro.mq5",
+    "tr": -53.4,
+    "ho": 230.0,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 2,
+    "ten": "SmartTradeManager.mq5",
+    "tr": -53.7,
+    "ho": 222.0,
+    "lenh_tr": 54
+   },
+   {
+    "luat": 42,
+    "ten": "icho_trend_ccidualonma_filter.mq5",
+    "tr": -53.8,
+    "ho": 230.0,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 43,
+    "ten": "manual_position_tracking_panel.mq5",
+    "tr": -53.8,
+    "ho": 230.0,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 4,
+    "ten": "ES_Manager.mq5",
+    "tr": -100.2,
+    "ho": 702.4,
+    "lenh_tr": 101
+   },
+   {
+    "luat": 24,
+    "ten": "SidewaysMartingale.mq5",
+    "tr": -101.2,
+    "ho": -99.3,
+    "lenh_tr": 105
+   },
+   {
+    "luat": 28,
+    "ten": "BabiNgepet_07.mq5",
+    "tr": -101.2,
+    "ho": -130.9,
+    "lenh_tr": 105
+   },
+   {
+    "luat": 37,
+    "ten": "tuyuluncensored.mq5",
+    "tr": -101.5,
+    "ho": -102.8,
+    "lenh_tr": 139
+   },
+   {
+    "luat": 31,
+    "ten": "MartingalePulse.mq5",
+    "tr": -104.6,
+    "ho": -99.9,
+    "lenh_tr": 92
+   },
+   {
+    "luat": 7,
+    "ten": "EA_KCI_N-Matrix_engine.mq5",
+    "tr": -126.6,
+    "ho": -112.7,
+    "lenh_tr": 84
+   }
+  ]
+ },
+ "fair_value_gap_bullish": {
+  "moc_train": 23.8,
+  "moc_holdout": 174.2,
+  "so_luat_kich_hoat": 38,
+  "hang": [
+   {
+    "luat": 37,
+    "ten": "tuyuluncensored.mq5",
+    "tr": 495.4,
+    "ho": -102.4,
+    "lenh_tr": 197
+   },
+   {
+    "luat": 26,
+    "ten": "RiskSizer_Panel_Lite.mq5",
+    "tr": 335.8,
+    "ho": 73.4,
+    "lenh_tr": 61
+   },
+   {
+    "luat": 36,
+    "ten": "ausbruch_trader_1.0.mq5",
+    "tr": 314.7,
+    "ho": 72.8,
+    "lenh_tr": 64
+   },
+   {
+    "luat": 31,
+    "ten": "MartingalePulse.mq5",
+    "tr": 311.5,
+    "ho": -100.8,
+    "lenh_tr": 120
+   },
+   {
+    "luat": 24,
+    "ten": "SidewaysMartingale.mq5",
+    "tr": 257.8,
+    "ho": -96.4,
+    "lenh_tr": 147
+   },
+   {
+    "luat": 28,
+    "ten": "BabiNgepet_07.mq5",
+    "tr": 257.8,
+    "ho": -98.2,
+    "lenh_tr": 147
+   },
+   {
+    "luat": 46,
+    "ten": "trailing_only_with_close_all_button_v2.1.mq5",
+    "tr": 226.4,
+    "ho": -32.3,
+    "lenh_tr": 85
+   },
+   {
+    "luat": 47,
+    "ten": "ka-gold_bot.mq5",
+    "tr": 177.8,
+    "ho": -20.9,
+    "lenh_tr": 85
+   },
+   {
+    "luat": 42,
+    "ten": "icho_trend_ccidualonma_filter.mq5",
+    "tr": 176.7,
+    "ho": -20.9,
+    "lenh_tr": 85
+   },
+   {
+    "luat": 43,
+    "ten": "manual_position_tracking_panel.mq5",
+    "tr": 176.7,
+    "ho": -20.9,
+    "lenh_tr": 85
+   },
+   {
+    "luat": 17,
+    "ten": "Grid_EA_Pro.mq5",
+    "tr": 175.3,
+    "ho": -20.9,
+    "lenh_tr": 85
+   },
+   {
+    "luat": 23,
+    "ten": "ExMachina_SafeScalping_CB_i18.mq5",
+    "tr": 155.9,
+    "ho": -27.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 44,
+    "ten": "ma_trend_2.mq5",
+    "tr": 155.0,
+    "ho": -31.7,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 34,
+    "ten": "multi_divergence.mq5",
+    "tr": 151.4,
+    "ho": -31.7,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 22,
+    "ten": "SilviosEAbest26.mq5",
+    "tr": 136.3,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 33,
+    "ten": "ema_rsi_risk_ea.mq5",
+    "tr": 136.3,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 10,
+    "ten": "Universal_Breakout_Study.mq5",
+    "tr": 131.8,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 32,
+    "ten": "scalping_dashboard_V2.mq5",
+    "tr": 131.8,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 1,
+    "ten": "AAPL_Pro.mq5",
+    "tr": 128.2,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 6,
+    "ten": "BlueMoon_EA_v3_4_Netting_Volume_Fix.mq5",
+    "tr": 128.2,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 21,
+    "ten": "OHLCMTF_Scalper_MAIN.mq5",
+    "tr": 128.2,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 49,
+    "ten": "ak-47_scalper_ea_-_mt5.mq5",
+    "tr": 128.2,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 19,
+    "ten": "Hon-Matrix.mq5",
+    "tr": 123.2,
+    "ho": -36.5,
+    "lenh_tr": 86
+   },
+   {
+    "luat": 3,
+    "ten": "SmartTradeAdjustmentPanel.mq5",
+    "tr": 122.0,
+    "ho": 85.5,
+    "lenh_tr": 74
+   },
+   {
+    "luat": 14,
+    "ten": "XANDER_Gold_Recovery.mq5",
+    "tr": 108.3,
+    "ho": 57.0,
+    "lenh_tr": 72
+   },
+   {
+    "luat": 27,
+    "ten": "Playground_v1_00.mq5",
+    "tr": 95.5,
+    "ho": 49.5,
+    "lenh_tr": 73
+   },
+   {
+    "luat": 8,
+    "ten": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+    "tr": 85.5,
+    "ho": 49.5,
+    "lenh_tr": 74
+   },
+   {
+    "luat": 25,
+    "ten": "MarketStructure.mq5",
+    "tr": 85.5,
+    "ho": 49.5,
+    "lenh_tr": 74
+   },
+   {
+    "luat": 18,
+    "ten": "BEC_Combined_BE_Trail.mq5",
+    "tr": 84.9,
+    "ho": 49.5,
+    "lenh_tr": 74
+   },
+   {
+    "luat": 4,
+    "ten": "ES_Manager.mq5",
+    "tr": 58.9,
+    "ho": -14.4,
+    "lenh_tr": 106
+   },
+   {
+    "luat": 5,
+    "ten": "Nikkei225_Gap_Continuation_EA.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 9,
+    "ten": "IronHawk_Fibonacci_Structure_Map.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 11,
+    "ten": "MSNR_v531Plus_AEU1.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 15,
+    "ten": "XANDER_Grid_XAUUSD.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 16,
+    "ten": "XProTradePanel.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 38,
+    "ten": "Double_Env.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 39,
+    "ten": "Adaptive_Support_Resistance_Zones.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 40,
+    "ten": "Confirmed_Swing_Points_Helper.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 41,
+    "ten": "stellarlite_ict_ea.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 45,
+    "ten": "ML_SuperTrend.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 48,
+    "ten": "martingalebreakout.mq5",
+    "tr": 23.8,
+    "ho": 174.2,
+    "lenh_tr": 43
+   },
+   {
+    "luat": 20,
+    "ten": "GridEA.mq5",
+    "tr": 20.7,
+    "ho": 76.7,
+    "lenh_tr": 122
+   },
+   {
+    "luat": 2,
+    "ten": "SmartTradeManager.mq5",
+    "tr": -23.1,
+    "ho": 108.6,
+    "lenh_tr": 54
+   },
+   {
+    "luat": 13,
+    "ten": "Prime_Quantum_AI.mq5",
+    "tr": -53.2,
+    "ho": -39.5,
+    "lenh_tr": 90
+   },
+   {
+    "luat": 30,
+    "ten": "The_RSI_Engine_v2.1.mq5",
+    "tr": -53.2,
+    "ho": -43.5,
+    "lenh_tr": 90
+   },
+   {
+    "luat": 35,
+    "ten": "botcilentov1.35.mq5",
+    "tr": -53.2,
+    "ho": -42.2,
+    "lenh_tr": 90
+   },
+   {
+    "luat": 12,
+    "ten": "Quantum_XAUUSD_Silver_Trader.mq5",
+    "tr": -88.6,
+    "ho": 167.0,
+    "lenh_tr": 69
+   },
+   {
+    "luat": 29,
+    "ten": "Quantum_Gold_Silver_Trader.mq5",
+    "tr": -88.6,
+    "ho": 167.0,
+    "lenh_tr": 69
+   },
+   {
+    "luat": 7,
+    "ten": "EA_KCI_N-Matrix_engine.mq5",
+    "tr": -101.3,
+    "ho": -112.5,
+    "lenh_tr": 7
+   }
+  ]
+ },
+ "ichimoku_scalper_bullish": {
+  "moc_train": 19.2,
+  "moc_holdout": 63.2,
+  "so_luat_kich_hoat": 38,
+  "hang": [
+   {
+    "luat": 26,
+    "ten": "RiskSizer_Panel_Lite.mq5",
+    "tr": 105.5,
+    "ho": 63.9,
+    "lenh_tr": 106
+   },
+   {
+    "luat": 4,
+    "ten": "ES_Manager.mq5",
+    "tr": 38.4,
+    "ho": -65.2,
+    "lenh_tr": 84
+   },
+   {
+    "luat": 36,
+    "ten": "ausbruch_trader_1.0.mq5",
+    "tr": 37.2,
+    "ho": 27.4,
+    "lenh_tr": 120
+   },
+   {
+    "luat": 46,
+    "ten": "trailing_only_with_close_all_button_v2.1.mq5",
+    "tr": 35.6,
+    "ho": -10.7,
+    "lenh_tr": 229
+   },
+   {
+    "luat": 37,
+    "ten": "tuyuluncensored.mq5",
+    "tr": 29.2,
+    "ho": -27.7,
+    "lenh_tr": 98
+   },
+   {
+    "luat": 7,
+    "ten": "EA_KCI_N-Matrix_engine.mq5",
+    "tr": 27.0,
+    "ho": -36.5,
+    "lenh_tr": 69
+   },
+   {
+    "luat": 23,
+    "ten": "ExMachina_SafeScalping_CB_i18.mq5",
+    "tr": 22.0,
+    "ho": -10.5,
+    "lenh_tr": 255
+   },
+   {
+    "luat": 5,
+    "ten": "Nikkei225_Gap_Continuation_EA.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 9,
+    "ten": "IronHawk_Fibonacci_Structure_Map.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 11,
+    "ten": "MSNR_v531Plus_AEU1.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 15,
+    "ten": "XANDER_Grid_XAUUSD.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 16,
+    "ten": "XProTradePanel.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 38,
+    "ten": "Double_Env.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 39,
+    "ten": "Adaptive_Support_Resistance_Zones.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 40,
+    "ten": "Confirmed_Swing_Points_Helper.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 41,
+    "ten": "stellarlite_ict_ea.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 45,
+    "ten": "ML_SuperTrend.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 48,
+    "ten": "martingalebreakout.mq5",
+    "tr": 19.2,
+    "ho": 63.2,
+    "lenh_tr": 36
+   },
+   {
+    "luat": 10,
+    "ten": "Universal_Breakout_Study.mq5",
+    "tr": 16.2,
+    "ho": 13.8,
+    "lenh_tr": 269
+   },
+   {
+    "luat": 34,
+    "ten": "multi_divergence.mq5",
+    "tr": 15.3,
+    "ho": -2.7,
+    "lenh_tr": 260
+   },
+   {
+    "luat": 32,
+    "ten": "scalping_dashboard_V2.mq5",
+    "tr": 12.0,
+    "ho": 19.8,
+    "lenh_tr": 268
+   },
+   {
+    "luat": 2,
+    "ten": "SmartTradeManager.mq5",
+    "tr": 11.7,
+    "ho": 39.7,
+    "lenh_tr": 48
+   },
+   {
+    "luat": 42,
+    "ten": "icho_trend_ccidualonma_filter.mq5",
+    "tr": 11.4,
+    "ho": -5.4,
+    "lenh_tr": 245
+   },
+   {
+    "luat": 43,
+    "ten": "manual_position_tracking_panel.mq5",
+    "tr": 11.4,
+    "ho": -5.4,
+    "lenh_tr": 245
+   },
+   {
+    "luat": 44,
+    "ten": "ma_trend_2.mq5",
+    "tr": 9.5,
+    "ho": -16.8,
+    "lenh_tr": 264
+   },
+   {
+    "luat": 22,
+    "ten": "SilviosEAbest26.mq5",
+    "tr": 9.2,
+    "ho": 26.2,
+    "lenh_tr": 269
+   },
+   {
+    "luat": 19,
+    "ten": "Hon-Matrix.mq5",
+    "tr": 6.9,
+    "ho": 23.3,
+    "lenh_tr": 269
+   },
+   {
+    "luat": 33,
+    "ten": "ema_rsi_risk_ea.mq5",
+    "tr": 3.9,
+    "ho": 26.2,
+    "lenh_tr": 267
+   },
+   {
+    "luat": 47,
+    "ten": "ka-gold_bot.mq5",
+    "tr": 2.4,
+    "ho": -11.2,
+    "lenh_tr": 242
+   },
+   {
+    "luat": 1,
+    "ten": "AAPL_Pro.mq5",
+    "tr": 2.2,
+    "ho": 7.4,
+    "lenh_tr": 276
+   },
+   {
+    "luat": 21,
+    "ten": "OHLCMTF_Scalper_MAIN.mq5",
+    "tr": 2.2,
+    "ho": 7.4,
+    "lenh_tr": 276
+   },
+   {
+    "luat": 49,
+    "ten": "ak-47_scalper_ea_-_mt5.mq5",
+    "tr": 0.9,
+    "ho": 7.7,
+    "lenh_tr": 275
+   },
+   {
+    "luat": 31,
+    "ten": "MartingalePulse.mq5",
+    "tr": 0.6,
+    "ho": -52.4,
+    "lenh_tr": 79
+   },
+   {
+    "luat": 6,
+    "ten": "BlueMoon_EA_v3_4_Netting_Volume_Fix.mq5",
+    "tr": 0.2,
+    "ho": 7.7,
+    "lenh_tr": 273
+   },
+   {
+    "luat": 17,
+    "ten": "Grid_EA_Pro.mq5",
+    "tr": -1.0,
+    "ho": -12.3,
+    "lenh_tr": 242
+   },
+   {
+    "luat": 12,
+    "ten": "Quantum_XAUUSD_Silver_Trader.mq5",
+    "tr": -26.9,
+    "ho": 21.0,
+    "lenh_tr": 112
+   },
+   {
+    "luat": 29,
+    "ten": "Quantum_Gold_Silver_Trader.mq5",
+    "tr": -26.9,
+    "ho": 21.0,
+    "lenh_tr": 112
+   },
+   {
+    "luat": 8,
+    "ten": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+    "tr": -45.2,
+    "ho": -7.6,
+    "lenh_tr": 149
+   },
+   {
+    "luat": 25,
+    "ten": "MarketStructure.mq5",
+    "tr": -45.2,
+    "ho": -4.2,
+    "lenh_tr": 149
+   },
+   {
+    "luat": 18,
+    "ten": "BEC_Combined_BE_Trail.mq5",
+    "tr": -45.3,
+    "ho": -4.3,
+    "lenh_tr": 148
+   },
+   {
+    "luat": 3,
+    "ten": "SmartTradeAdjustmentPanel.mq5",
+    "tr": -50.3,
+    "ho": 33.1,
+    "lenh_tr": 145
+   },
+   {
+    "luat": 13,
+    "ten": "Prime_Quantum_AI.mq5",
+    "tr": -50.5,
+    "ho": -65.3,
+    "lenh_tr": 400
+   },
+   {
+    "luat": 35,
+    "ten": "botcilentov1.35.mq5",
+    "tr": -50.5,
+    "ho": -65.3,
+    "lenh_tr": 400
+   },
+   {
+    "luat": 14,
+    "ten": "XANDER_Gold_Recovery.mq5",
+    "tr": -50.9,
+    "ho": 17.5,
+    "lenh_tr": 137
+   },
+   {
+    "luat": 27,
+    "ten": "Playground_v1_00.mq5",
+    "tr": -53.5,
+    "ho": -4.3,
+    "lenh_tr": 147
+   },
+   {
+    "luat": 30,
+    "ten": "The_RSI_Engine_v2.1.mq5",
+    "tr": -58.9,
+    "ho": -87.6,
+    "lenh_tr": 393
+   },
+   {
+    "luat": 20,
+    "ten": "GridEA.mq5",
+    "tr": -61.5,
+    "ho": 139.4,
+    "lenh_tr": 378
+   },
+   {
+    "luat": 24,
+    "ten": "SidewaysMartingale.mq5",
+    "tr": -100.0,
+    "ho": -106.5,
+    "lenh_tr": 278
+   },
+   {
+    "luat": 28,
+    "ten": "BabiNgepet_07.mq5",
+    "tr": -100.1,
+    "ho": -106.5,
+    "lenh_tr": 276
+   }
+  ]
+ }
+}

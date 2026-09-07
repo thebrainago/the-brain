@@ -407,3 +407,129 @@ def sinh_ea_giam_sat(spec: dict, ten: str = "GiamSatViThe",
     """EA doc lap de DE LEN EA khac khi chay that (khong backtest duoc cung nhau)."""
     return EA_GIAM_SAT % {"ten": ten, "khung": khung,
                           "khoi": sinh_khoi(spec, khung=khung, magic=magic)}
+
+
+NHIEU = r"""
+//============ KHO QUAN TRI: %(k)d luat, chon bang QT_MaLuat ================
+//  Sinh tu nhan/dich_mq5_qtvt.py. KHONG SUA TAY.
+//  QT_MaLuat = 0 la MOC: tat het quan tri. Bat buoc co, va phai nam trong
+//  CUNG lan chay - so hai lan boot khac nhau la so hai thu khac nhau.
+input int    QT_MaLuat = 0;   // 0..%(max)d
+input long   QT_Magic  = %(magic)d;
+input double QT_LotGoc = %(lot_goc)s;
+
+double QT_A_DatHue[], QT_A_TrKhoang[], QT_A_TrBatDau[], QT_A_TiaTu[];
+double QT_A_TiaTy[], QT_A_NhoiKh[], QT_A_NhoiLx[], QT_A_ChotTien[];
+double QT_A_ChotAtr[], QT_A_CatHoa[], QT_A_TranLot[], QT_A_TranLo[];
+int    QT_A_NhoiChieu[], QT_A_TranVT[], QT_A_TranTuoi[];
+
+double QT_DatHue, QT_TrailKhoang, QT_TrailBatDau, QT_TiaTu, QT_TiaTyLe;
+double QT_NhoiKhoang, QT_NhoiLotX, QT_ChotRoTien, QT_ChotRoAtr, QT_CatHoaTu;
+double QT_TranLot, QT_TranLoTien;
+int    QT_NhoiChieu, QT_NhoiMax, QT_TranViThe, QT_TranTuoiGio;
+
+void QT_NapBang()
+  {
+%(nap)s
+  }
+
+void QT_ChonLuat(int k)
+  {
+   if(k < 0 || k >= %(k)d) k = 0;
+   QT_DatHue      = QT_A_DatHue[k];
+   QT_TrailKhoang = QT_A_TrKhoang[k];
+   QT_TrailBatDau = QT_A_TrBatDau[k];
+   QT_TiaTu       = QT_A_TiaTu[k];
+   QT_TiaTyLe     = QT_A_TiaTy[k];
+   QT_NhoiKhoang  = QT_A_NhoiKh[k];
+   QT_NhoiLotX    = QT_A_NhoiLx[k];
+   QT_NhoiChieu   = QT_A_NhoiChieu[k];
+   QT_ChotRoTien  = QT_A_ChotTien[k];
+   QT_ChotRoAtr   = QT_A_ChotAtr[k];
+   QT_CatHoaTu    = QT_A_CatHoa[k];
+   QT_TranViThe   = QT_A_TranVT[k];
+   QT_TranLot     = QT_A_TranLot[k];
+   QT_TranLoTien  = QT_A_TranLo[k];
+   QT_TranTuoiGio = QT_A_TranTuoi[k];
+   QT_NhoiMax     = QT_TranViThe;
+  }
+"""
+
+
+def _g(x, *duong, md=0.0):
+    nut = x
+    for k in duong:
+        nut = (nut or {}).get(k) if isinstance(nut, dict) else None
+    return nut if nut is not None else md
+
+
+def sinh_khoi_nhieu(specs: list[dict], khung: str = "D1", magic: int = 0,
+                    lot_goc: float = 0.1) -> tuple[str, list[dict]]:
+    """K luat quan tri trong MOT EA, chon bang `QT_MaLuat`. Tra (ma, luat da nap).
+
+    Vi sao gop: mot luot tester ton ~130 giay boot va gan nhu 0 giay tinh, nen
+    **them pass la mien phi con them LAN CHAY moi dat**
+    [[tester-nhoi-het-vao-mot-lan-boot]]. K luat x 1 lan boot thay vi K lan.
+
+    **Luat 0 LUON la moc tat het quan tri**, va no nam trong CUNG lan chay - so
+    voi moc cua mot lan boot khac la so hai thu khac nhau.
+    """
+    dat = [{"ten": "__tat_quan_tri__", "lop": "moc"}]
+    for s in specs:
+        nh = s.get("nhoi") or {}
+        chan = s.get("chan") or {}
+        if nh and not (chan.get("so_vi_the_toi_da") or chan.get("lot_toi_da")):
+            continue          # nhoi khong tran = cong thuc chay tai khoan
+        dat.append(s)
+    if len(dat) < 2:
+        raise KhongDichDuoc("khong luat nao dich duoc")
+
+    def _hang(ten, lay, dinh="%.4f"):
+        d = ["   ArrayResize(%s, %d);" % (ten, len(dat))]
+        for i, x in enumerate(dat):
+            d.append("   %s[%d] = %s;" % (ten, i, dinh % lay(x)))
+        return "\n".join(d) + "\n"
+
+    def _atr0(x, *duong):
+        v = _g(x, *duong)
+        return _atr(v, 0) if isinstance(v, dict) and "atr" in v else 0.0
+
+    nap = (
+        _hang("QT_A_DatHue",    lambda x: _atr0(x, "dat_hue", "tu"))
+        + _hang("QT_A_TrKhoang",  lambda x: _atr0(x, "trailing", "khoang"))
+        + _hang("QT_A_TrBatDau",  lambda x: _atr0(x, "trailing", "bat_dau"))
+        + _hang("QT_A_TiaTu",     lambda x: _atr0(x, "tia", "tu"))
+        + _hang("QT_A_TiaTy",     lambda x: float(_g(x, "tia", "ty_le", md=0.5)))
+        + _hang("QT_A_NhoiKh",    lambda x: _atr0(x, "nhoi", "khoang"))
+        + _hang("QT_A_NhoiLx",    lambda x: float(_g(x, "nhoi", "lot_x", md=1.0)))
+        + _hang("QT_A_NhoiChieu", lambda x: 1 if x.get("nhoi") else 0, "%d")
+        + _hang("QT_A_ChotTien",  lambda x: _so(_g(x, "chot", "tien"), 0))
+        + _hang("QT_A_ChotAtr",   lambda x: _atr0(x, "chot", "muc"))
+        + _hang("QT_A_CatHoa",    lambda x: _atr0(x, "cat_hoa", "tu"))
+        + _hang("QT_A_TranVT",    lambda x: int(_g(x, "chan", "so_vi_the_toi_da", md=0)), "%d")
+        + _hang("QT_A_TranLot",   lambda x: float(_g(x, "chan", "lot_toi_da", md=0)))
+        + _hang("QT_A_TranLo",    lambda x: _so(_g(x, "chan", "lo_toi_da"), 0))
+        + _hang("QT_A_TranTuoi",  lambda x: int(_so(_g(x, "chan", "tuoi_gio_toi_da"), 0)), "%d")
+    )
+    ma = NHIEU % {"k": len(dat), "max": len(dat) - 1, "magic": magic,
+                  "lot_goc": "%.2f" % lot_goc, "nap": nap}
+    than = KHOI % {"ten": "kho gop", "lop": "gop", "luat": "gop", "khung": khung,
+                   "magic": magic, "dat_hue": "0", "tr_khoang": "0",
+                   "tr_batdau": "0", "tia_tu": "0", "tia_ty": "0",
+                   "nhoi_khoang": "0", "nhoi_lotx": "1", "nhoi_max": 0,
+                   "nhoi_chieu": 0, "chot_tien": "0", "chot_atr": "0",
+                   "cat_hoa": "0", "hedge_tu": "0", "hedge_lotx": "1",
+                   "tran_vt": 0, "tran_lot": "0", "tran_lo": "0",
+                   "tran_tuoi": 0, "lot_goc": "%.2f" % lot_goc}
+    # Bo cac dong `input` cua ban MOT luat: o ban gop chung da thanh BANG.
+    than = "\n".join(d for d in than.splitlines() if not d.startswith("input "))
+    than = than.replace("void QT_Khoi()", "void QT_KhoiThat()")
+    ma += than + """
+void QT_Khoi()
+  {
+   QT_KhoiThat();
+   QT_NapBang();
+   QT_ChonLuat(QT_MaLuat);
+  }
+"""
+    return ma, dat
