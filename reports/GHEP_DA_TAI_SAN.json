@@ -1,0 +1,1389 @@
+{
+ "tai_san": [
+  "US100Cash",
+  "US500Cash",
+  "US30Cash"
+ ],
+ "so_chan": 219,
+ "sau_khu_trung": 192,
+ "don_train_dau_bang": "US100Cash:ma_crossover_buy__dao",
+ "don_holdout": 42.6,
+ "ket": {
+  "cung": {
+   "giu_hang": 15,
+   "so": 15,
+   "trung_vi_ho": 108.3,
+   "top": [
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:pine_ichimoku_cloud_close_duoi_ema377_close"
+     ],
+     "cheo": false,
+     "r": -0.073,
+     "tr": 930.5,
+     "ho": 186.8
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:rsi_mua_qua_ban"
+     ],
+     "cheo": false,
+     "r": -0.001,
+     "tr": 919.7,
+     "ho": 127.4
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:cat_xuong_ma_xuat_hien__dao"
+     ],
+     "cheo": false,
+     "r": -0.088,
+     "tr": 912.2,
+     "ho": 54.0
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:sellsignal__dao"
+     ],
+     "cheo": false,
+     "r": -0.007,
+     "tr": 894.2,
+     "ho": 81.4
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:dailyzonerecovery_sell__dao"
+     ],
+     "cheo": false,
+     "r": -0.006,
+     "tr": 833.2,
+     "ho": 58.7
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:gamma_duong_keo_ve"
+     ],
+     "cheo": false,
+     "r": -0.001,
+     "tr": 780.4,
+     "ho": 78.6
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:pine_everyday_0003_ema14_close_duoi_ema28_close"
+     ],
+     "cheo": false,
+     "r": -0.015,
+     "tr": 775.7,
+     "ho": 84.4
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US100Cash:sell_liquidity_ob_reversal__dao"
+     ],
+     "cheo": false,
+     "r": -0.002,
+     "tr": 773.5,
+     "ho": 134.2
+    }
+   ]
+  },
+  "cheo": {
+   "giu_hang": 14,
+   "so": 15,
+   "trung_vi_ho": 71.5,
+   "top": [
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US500Cash:dailyzonerecovery_sell__dao"
+     ],
+     "cheo": true,
+     "r": -0.023,
+     "tr": 843.8,
+     "ho": 159.4
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US500Cash:macd_crossover"
+     ],
+     "cheo": true,
+     "r": -0.003,
+     "tr": 815.2,
+     "ho": 46.4
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US30Cash:momentum_bear_arrow__dao"
+     ],
+     "cheo": true,
+     "r": -0.019,
+     "tr": 801.8,
+     "ho": 78.4
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US500Cash:pine_bollinger_band_ema60_close_duoi_ema180_close"
+     ],
+     "cheo": true,
+     "r": -0.067,
+     "tr": 799.2,
+     "ho": 61.5
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US30Cash:dailyzonerecovery_buy"
+     ],
+     "cheo": true,
+     "r": -0.004,
+     "tr": 794.9,
+     "ho": 191.0
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close"
+     ],
+     "cheo": true,
+     "r": 0.013,
+     "tr": 793.5,
+     "ho": 71.3
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US500Cash:rsi_mua_qua_ban"
+     ],
+     "cheo": true,
+     "r": -0.001,
+     "tr": 788.8,
+     "ho": 71.5
+    },
+    {
+     "bo": [
+      "US100Cash:ma_crossover_buy__dao",
+      "US30Cash:fast_sma_cuts_below_slow_sma__dao"
+     ],
+     "cheo": true,
+     "r": -0.001,
+     "tr": 768.7,
+     "ho": 38.9
+    }
+   ]
+  }
+ },
+ "cap": [
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:pine_ichimoku_cloud_close_duoi_ema377_close"
+   ],
+   "cheo": false,
+   "r": -0.073,
+   "tr": 930.5,
+   "ho": 186.8
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:rsi_mua_qua_ban"
+   ],
+   "cheo": false,
+   "r": -0.001,
+   "tr": 919.7,
+   "ho": 127.4
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:cat_xuong_ma_xuat_hien__dao"
+   ],
+   "cheo": false,
+   "r": -0.088,
+   "tr": 912.2,
+   "ho": 54.0
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:sellsignal__dao"
+   ],
+   "cheo": false,
+   "r": -0.007,
+   "tr": 894.2,
+   "ho": 81.4
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": -0.023,
+   "tr": 843.8,
+   "ho": 159.4
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": false,
+   "r": -0.006,
+   "tr": 833.2,
+   "ho": 58.7
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US500Cash:macd_crossover"
+   ],
+   "cheo": true,
+   "r": -0.003,
+   "tr": 815.2,
+   "ho": 46.4
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:momentum_bear_arrow__dao"
+   ],
+   "cheo": true,
+   "r": -0.019,
+   "tr": 801.8,
+   "ho": 78.4
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US500Cash:pine_bollinger_band_ema60_close_duoi_ema180_close"
+   ],
+   "cheo": true,
+   "r": -0.067,
+   "tr": 799.2,
+   "ho": 61.5
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:dailyzonerecovery_buy"
+   ],
+   "cheo": true,
+   "r": -0.004,
+   "tr": 794.9,
+   "ho": 191.0
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close"
+   ],
+   "cheo": true,
+   "r": 0.013,
+   "tr": 793.5,
+   "ho": 71.3
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US500Cash:rsi_mua_qua_ban"
+   ],
+   "cheo": true,
+   "r": -0.001,
+   "tr": 788.8,
+   "ho": 71.5
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:gamma_duong_keo_ve"
+   ],
+   "cheo": false,
+   "r": -0.001,
+   "tr": 780.4,
+   "ho": 78.6
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:pine_everyday_0003_ema14_close_duoi_ema28_close"
+   ],
+   "cheo": false,
+   "r": -0.015,
+   "tr": 775.7,
+   "ho": 84.4
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:sell_liquidity_ob_reversal__dao"
+   ],
+   "cheo": false,
+   "r": -0.002,
+   "tr": 773.5,
+   "ho": 134.2
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:giai_chap_vol_target"
+   ],
+   "cheo": false,
+   "r": -0.001,
+   "tr": 772.1,
+   "ho": 108.7
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "cheo": true,
+   "r": -0.001,
+   "tr": 768.7,
+   "ho": 38.9
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:smc_buy_zone_reversal"
+   ],
+   "cheo": true,
+   "r": -0.057,
+   "tr": 761.2,
+   "ho": 75.3
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:sma4_10_cross_up"
+   ],
+   "cheo": false,
+   "r": 0.007,
+   "tr": 741.4,
+   "ho": 108.3
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:smc_sell_zone_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.03,
+   "tr": 739.8,
+   "ho": 76.0
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:mean_reversion_z5"
+   ],
+   "cheo": false,
+   "r": -0.0,
+   "tr": 739.5,
+   "ho": 296.0
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:vung_discount_rebound"
+   ],
+   "cheo": true,
+   "r": -0.024,
+   "tr": 725.2,
+   "ho": 120.7
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:ma_crossover_short__dao"
+   ],
+   "cheo": false,
+   "r": -0.002,
+   "tr": 714.4,
+   "ho": 155.3
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:rsi_3_10"
+   ],
+   "cheo": true,
+   "r": -0.001,
+   "tr": 705.8,
+   "ho": 96.0
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:macd_stochastic_doub_close_duoi_sma100_close"
+   ],
+   "cheo": false,
+   "r": -0.052,
+   "tr": 700.8,
+   "ho": 54.5
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:bearish_order_block_reversal__dao"
+   ],
+   "cheo": false,
+   "r": -0.101,
+   "tr": 698.2,
+   "ho": 80.4
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:ban_khi_bien_dong_tang_va_gia_duoi_ma100__dao"
+   ],
+   "cheo": false,
+   "r": -0.052,
+   "tr": 697.5,
+   "ho": 116.7
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "cheo": false,
+   "r": -0.001,
+   "tr": 697.4,
+   "ho": 66.1
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:pine_ichimoku_cloud_close_tren_ema21_close"
+   ],
+   "cheo": true,
+   "r": 0.036,
+   "tr": 692.5,
+   "ho": 55.6
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US500Cash:vung_cau_demand_zone"
+   ],
+   "cheo": true,
+   "r": -0.008,
+   "tr": 688.9,
+   "ho": 58.1
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:bearish_order_block_reversal__dao"
+   ],
+   "cheo": true,
+   "r": -0.005,
+   "tr": 666.4,
+   "ho": 69.9
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US500Cash:smc_sell_zone_reversal__dao"
+   ],
+   "cheo": true,
+   "r": -0.014,
+   "tr": 656.5,
+   "ho": 43.6
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:buy_liquidity_ob_reversal"
+   ],
+   "cheo": true,
+   "r": -0.047,
+   "tr": 640.0,
+   "ho": 216.2
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US100Cash:aegis_quantum_lite__dao"
+   ],
+   "cheo": false,
+   "r": -0.001,
+   "tr": 621.1,
+   "ho": 50.2
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:bullish_order_block_reversal"
+   ],
+   "cheo": true,
+   "r": -0.081,
+   "tr": 620.6,
+   "ho": 57.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:dailyzonerecovery_buy"
+   ],
+   "cheo": false,
+   "r": 0.114,
+   "tr": 608.1,
+   "ho": 152.3
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "cheo": true,
+   "r": -0.054,
+   "tr": 575.8,
+   "ho": 197.5
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:buy_liquidity_ob_reversal"
+   ],
+   "cheo": false,
+   "r": 0.243,
+   "tr": 548.1,
+   "ho": 235.0
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US500Cash:sma4_10_cross_down__dao"
+   ],
+   "cheo": true,
+   "r": -0.001,
+   "tr": 536.3,
+   "ho": 58.2
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:pine_strategy_macd_and_r_rsi10_tren_51"
+   ],
+   "cheo": true,
+   "r": 0.031,
+   "tr": 525.2,
+   "ho": 74.7
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_buy__dao",
+    "US30Cash:macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "cheo": true,
+   "r": -0.022,
+   "tr": 524.8,
+   "ho": 75.8
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:aegis_quantum_lite__dao"
+   ],
+   "cheo": true,
+   "r": -0.107,
+   "tr": 524.0,
+   "ho": 205.0
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "cheo": false,
+   "r": 0.193,
+   "tr": 493.3,
+   "ho": 81.6
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.159,
+   "tr": 480.9,
+   "ho": 432.6
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US30Cash:buy_liquidity_ob_reversal"
+   ],
+   "cheo": false,
+   "r": 0.173,
+   "tr": 474.9,
+   "ho": 336.3
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:gamma_duong_keo_ve"
+   ],
+   "cheo": true,
+   "r": 0.158,
+   "tr": 472.5,
+   "ho": 207.7
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:rsi_mua_qua_ban"
+   ],
+   "cheo": true,
+   "r": 0.049,
+   "tr": 465.4,
+   "ho": 215.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:ma_crossover_short__dao"
+   ],
+   "cheo": true,
+   "r": 0.042,
+   "tr": 458.8,
+   "ho": 151.6
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:bearish_order_block_reversal__dao"
+   ],
+   "cheo": false,
+   "r": 0.163,
+   "tr": 435.7,
+   "ho": 47.2
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:mean_reversion_z5"
+   ],
+   "cheo": true,
+   "r": 0.035,
+   "tr": 435.6,
+   "ho": 507.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US500Cash:macd_crossover"
+   ],
+   "cheo": true,
+   "r": 0.036,
+   "tr": 434.4,
+   "ho": 34.7
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:pine_ichimoku_cloud_close_tren_ema21_close"
+   ],
+   "cheo": false,
+   "r": 0.082,
+   "tr": 432.7,
+   "ho": 60.1
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US500Cash:sma4_10_cross_down__dao"
+   ],
+   "cheo": true,
+   "r": 0.033,
+   "tr": 432.3,
+   "ho": 44.1
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US500Cash:smc_sell_zone_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.185,
+   "tr": 432.2,
+   "ho": 26.1
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:sell_liquidity_ob_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.277,
+   "tr": 430.7,
+   "ho": 224.4
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:rsi_mua_qua_ban"
+   ],
+   "cheo": true,
+   "r": -0.004,
+   "tr": 430.7,
+   "ho": 404.5
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.137,
+   "tr": 429.4,
+   "ho": 268.1
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:rsi_mua_qua_ban"
+   ],
+   "cheo": true,
+   "r": 0.04,
+   "tr": 426.7,
+   "ho": 350.1
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.099,
+   "tr": 422.6,
+   "ho": 222.3
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US30Cash:macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "cheo": false,
+   "r": 0.202,
+   "tr": 419.9,
+   "ho": 281.2
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US30Cash:macd_sma_200_strateg_close_tren_sma12"
+   ],
+   "cheo": false,
+   "r": 0.281,
+   "tr": 417.2,
+   "ho": 176.5
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US30Cash:macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "cheo": false,
+   "r": 0.259,
+   "tr": 416.7,
+   "ho": 414.3
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:bearish_order_block_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.101,
+   "tr": 416.6,
+   "ho": 51.2
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US500Cash:vung_cau_demand_zone"
+   ],
+   "cheo": true,
+   "r": 0.197,
+   "tr": 415.5,
+   "ho": 47.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:macd_sma_200_strateg_sma26_duoi_sma200"
+   ],
+   "cheo": false,
+   "r": 0.153,
+   "tr": 415.4,
+   "ho": 240.0
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US500Cash:vung_cau_demand_zone"
+   ],
+   "cheo": true,
+   "r": 0.302,
+   "tr": 414.8,
+   "ho": 117.1
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:aegis_quantum_lite__dao"
+   ],
+   "cheo": true,
+   "r": -0.012,
+   "tr": 413.2,
+   "ho": 61.5
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.206,
+   "tr": 413.2,
+   "ho": 491.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:vung_discount_rebound"
+   ],
+   "cheo": false,
+   "r": 0.278,
+   "tr": 412.7,
+   "ho": 77.3
+  },
+  {
+   "bo": [
+    "US30Cash:vung_discount_rebound",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.271,
+   "tr": 412.2,
+   "ho": 206.9
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:pine_ichimoku_cloud_close_duoi_ema377_close"
+   ],
+   "cheo": true,
+   "r": 0.038,
+   "tr": 411.3,
+   "ho": 298.5
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US500Cash:rsi_mua_qua_ban"
+   ],
+   "cheo": true,
+   "r": 0.042,
+   "tr": 408.6,
+   "ho": 59.6
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:bearish_order_block_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.189,
+   "tr": 406.5,
+   "ho": 186.1
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:aegis_quantum_lite__dao"
+   ],
+   "cheo": true,
+   "r": -0.036,
+   "tr": 396.3,
+   "ho": 262.0
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:bullish_order_block_reversal"
+   ],
+   "cheo": false,
+   "r": 0.263,
+   "tr": 395.7,
+   "ho": 47.4
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US500Cash:pine_bollinger_band_ema60_close_duoi_ema180_close"
+   ],
+   "cheo": true,
+   "r": 0.267,
+   "tr": 391.7,
+   "ho": 224.6
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:pine_strategy_macd_and_r_rsi10_tren_51"
+   ],
+   "cheo": false,
+   "r": 0.044,
+   "tr": 391.5,
+   "ho": 86.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:mean_reversion_z5"
+   ],
+   "cheo": true,
+   "r": 0.052,
+   "tr": 391.3,
+   "ho": 265.1
+  },
+  {
+   "bo": [
+    "US30Cash:vung_discount_rebound",
+    "US100Cash:sell_liquidity_ob_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.226,
+   "tr": 390.8,
+   "ho": 143.8
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US500Cash:macd_crossover"
+   ],
+   "cheo": true,
+   "r": 0.096,
+   "tr": 386.6,
+   "ho": 205.6
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:cat_xuong_ma_xuat_hien__dao"
+   ],
+   "cheo": true,
+   "r": 0.176,
+   "tr": 384.8,
+   "ho": 218.6
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:sma4_10_cross_up"
+   ],
+   "cheo": true,
+   "r": 0.029,
+   "tr": 384.4,
+   "ho": 397.2
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US30Cash:bearish_order_block_reversal__dao"
+   ],
+   "cheo": false,
+   "r": 0.304,
+   "tr": 384.3,
+   "ho": 228.4
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:sell_liquidity_ob_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.135,
+   "tr": 381.7,
+   "ho": 332.8
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:cat_xuong_ma_xuat_hien__dao"
+   ],
+   "cheo": true,
+   "r": 0.341,
+   "tr": 379.9,
+   "ho": 40.3
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:ma_crossover_short__dao"
+   ],
+   "cheo": true,
+   "r": 0.067,
+   "tr": 379.5,
+   "ho": 298.4
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:pine_ichimoku_cloud_close_duoi_ema377_close"
+   ],
+   "cheo": true,
+   "r": 0.09,
+   "tr": 379.3,
+   "ho": 328.3
+  },
+  {
+   "bo": [
+    "US30Cash:macd_sma_200_strateg_close_tren_sma12",
+    "US100Cash:sell_liquidity_ob_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.146,
+   "tr": 378.2,
+   "ho": 181.9
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US500Cash:smc_sell_zone_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.292,
+   "tr": 378.0,
+   "ho": 118.4
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US30Cash:momentum_bear_arrow__dao"
+   ],
+   "cheo": false,
+   "r": 0.081,
+   "tr": 377.7,
+   "ho": 294.3
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:giai_chap_vol_target"
+   ],
+   "cheo": true,
+   "r": 0.035,
+   "tr": 376.9,
+   "ho": 128.0
+  },
+  {
+   "bo": [
+    "US30Cash:macd_sma_200_strateg_sma26_duoi_sma200",
+    "US100Cash:sma4_10_cross_up"
+   ],
+   "cheo": true,
+   "r": 0.018,
+   "tr": 376.5,
+   "ho": 409.0
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US30Cash:vung_discount_rebound"
+   ],
+   "cheo": false,
+   "r": 0.629,
+   "tr": 375.5,
+   "ho": 190.7
+  },
+  {
+   "bo": [
+    "US30Cash:macd_sma_200_strateg_close_tren_sma12",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.117,
+   "tr": 374.9,
+   "ho": 384.4
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.225,
+   "tr": 373.5,
+   "ho": 139.3
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:macd_stochastic_doub_close_duoi_sma100_close"
+   ],
+   "cheo": true,
+   "r": 0.202,
+   "tr": 370.4,
+   "ho": 192.6
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:sellsignal__dao"
+   ],
+   "cheo": true,
+   "r": 0.089,
+   "tr": 368.7,
+   "ho": 80.7
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:sma4_10_cross_up"
+   ],
+   "cheo": true,
+   "r": 0.116,
+   "tr": 367.0,
+   "ho": 126.7
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:ban_khi_bien_dong_tang_va_gia_duoi_ma100__dao"
+   ],
+   "cheo": true,
+   "r": 0.197,
+   "tr": 366.2,
+   "ho": 288.8
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:sell_liquidity_ob_reversal__dao"
+   ],
+   "cheo": true,
+   "r": 0.113,
+   "tr": 363.8,
+   "ho": 150.1
+  },
+  {
+   "bo": [
+    "US30Cash:vung_discount_rebound",
+    "US500Cash:vung_cau_demand_zone"
+   ],
+   "cheo": true,
+   "r": 0.492,
+   "tr": 363.5,
+   "ho": 82.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:pine_ichimoku_cloud_close_duoi_ema377_close"
+   ],
+   "cheo": true,
+   "r": 0.186,
+   "tr": 363.1,
+   "ho": 209.5
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US30Cash:smc_sell_zone_reversal__dao"
+   ],
+   "cheo": false,
+   "r": 0.299,
+   "tr": 360.9,
+   "ho": 260.1
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US30Cash:smc_buy_zone_reversal"
+   ],
+   "cheo": false,
+   "r": 0.298,
+   "tr": 360.6,
+   "ho": 61.9
+  },
+  {
+   "bo": [
+    "US500Cash:smc_sell_zone_reversal__dao",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": false,
+   "r": 0.174,
+   "tr": 360.6,
+   "ho": 98.1
+  },
+  {
+   "bo": [
+    "US100Cash:ma_crossover_short__dao",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.037,
+   "tr": 359.0,
+   "ho": 358.6
+  },
+  {
+   "bo": [
+    "US500Cash:macd_crossover",
+    "US500Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": false,
+   "r": 0.206,
+   "tr": 358.6,
+   "ho": 214.1
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US500Cash:rsi_mua_qua_ban"
+   ],
+   "cheo": true,
+   "r": 0.02,
+   "tr": 357.0,
+   "ho": 224.0
+  },
+  {
+   "bo": [
+    "US30Cash:macd_sma_200_strateg_sma26_duoi_sma200",
+    "US100Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.055,
+   "tr": 355.3,
+   "ho": 187.6
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:macd_stochastic_doub_close_duoi_sma100_close"
+   ],
+   "cheo": true,
+   "r": 0.16,
+   "tr": 354.4,
+   "ho": 40.8
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US30Cash:rsi_3_10"
+   ],
+   "cheo": false,
+   "r": -0.002,
+   "tr": 354.0,
+   "ho": 385.2
+  },
+  {
+   "bo": [
+    "US30Cash:buy_liquidity_ob_reversal",
+    "US100Cash:giai_chap_vol_target"
+   ],
+   "cheo": true,
+   "r": 0.031,
+   "tr": 354.0,
+   "ho": 362.2
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:mean_reversion_z5"
+   ],
+   "cheo": true,
+   "r": 0.198,
+   "tr": 353.7,
+   "ho": 491.5
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:ban_khi_bien_dong_tang_va_gia_duoi_ma100__dao"
+   ],
+   "cheo": true,
+   "r": 0.157,
+   "tr": 351.4,
+   "ho": 117.4
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.117,
+   "tr": 350.8,
+   "ho": 48.2
+  },
+  {
+   "bo": [
+    "US30Cash:vung_discount_rebound",
+    "US100Cash:dailyzonerecovery_sell__dao"
+   ],
+   "cheo": true,
+   "r": 0.21,
+   "tr": 349.7,
+   "ho": 68.8
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US100Cash:macd_stochastic_doub_close_duoi_sma100_close"
+   ],
+   "cheo": true,
+   "r": 0.101,
+   "tr": 347.8,
+   "ho": 124.8
+  },
+  {
+   "bo": [
+    "US500Cash:pine_bollinger_band_ema60_close_duoi_ema180_close",
+    "US100Cash:sma4_10_cross_up"
+   ],
+   "cheo": true,
+   "r": 0.021,
+   "tr": 346.7,
+   "ho": 155.7
+  },
+  {
+   "bo": [
+    "US30Cash:dailyzonerecovery_buy",
+    "US30Cash:pine_strategy_macd_and_r_rsi10_tren_51"
+   ],
+   "cheo": false,
+   "r": 0.339,
+   "tr": 345.9,
+   "ho": 153.2
+  },
+  {
+   "bo": [
+    "US30Cash:pine_keltner_bounce_from_open_cheo_len_sma20_close",
+    "US100Cash:fast_sma_cuts_below_slow_sma__dao"
+   ],
+   "cheo": true,
+   "r": 0.002,
+   "tr": 344.8,
+   "ho": 69.7
+  }
+ ]
+}
