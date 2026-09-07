@@ -91,6 +91,12 @@ bool     g_da_tia[N_SLOT];
 bool     g_be_bat[N_SLOT];        // da tung dat nguong dat hue chua
 bool     g_cho_tat[N_SLOT];       // dang cho tin hieu TAT truoc khi vao lai
 int      g_so_nhoi[N_SLOT];
+//--- Khoi luong dang CHO duoc nhoi. Phai di qua `KhopYDinh` chu khong dat lenh
+//--- thang trong khoi nen-moi: nen khung tin hieu doi luc 00:00 nam NGOAI phien
+//--- CFD chi so, dat thang o do thi lenh tra "Market closed" va **khong de lai
+//--- dau vet nao** - bang so trong y het nhu nhoi khong co tac dung.
+//--- Do 07/09: 648 cau hinh nhoi ra ket qua giong het moc dung vi ly do nay.
+double   g_y_nhoi[N_SLOT];
 int      g_quet = 0;
 int      g_tep  = INVALID_HANDLE;
 
@@ -143,7 +149,7 @@ int OnInit()
    for(int i = 0; i < N_SLOT; i++)
      { g_bar_vao[i]=0; g_y_dinh[i]=0; g_thuc[i]=0.0; g_dinh[i]=0.0;
        g_gia_vao[i]=0.0; g_da_tia[i]=false; g_be_bat[i]=false;
-       g_cho_tat[i]=false; g_so_nhoi[i]=0; }
+       g_cho_tat[i]=false; g_so_nhoi[i]=0; g_y_nhoi[i]=0.0; }
 %(khoi_tao)s
    if(InpGhi == 1)
      {
@@ -235,10 +241,22 @@ void CapNhatThuc()
 
 void KhopYDinh(int slot)
   {
-   if(g_y_dinh[slot] == 0 || g_lot[slot] <= 0.0) return;
+   if(g_lot[slot] <= 0.0) return;
    if((ENUM_SYMBOL_TRADE_MODE)SymbolInfoInteger(_Symbol, SYMBOL_TRADE_MODE)
       != SYMBOL_TRADE_MODE_FULL) return;
    trade.SetExpertMagicNumber(InpMagic + slot);
+   //--- Y DINH NHOI: chi khop khi phien mo, va chi khi vi the goc con song.
+   if(g_y_nhoi[slot] > 0.0)
+     {
+      if(DangMo(slot))
+        {
+         bool ok_n = (Chieu(slot) > 0) ? trade.Buy(g_y_nhoi[slot], _Symbol)
+                                       : trade.Sell(g_y_nhoi[slot], _Symbol);
+         if(ok_n) g_so_nhoi[slot]++;
+        }
+      g_y_nhoi[slot] = 0.0;
+     }
+   if(g_y_dinh[slot] == 0) return;
    if(g_y_dinh[slot] < 0)
      {
       if(!DangMo(slot)) { g_y_dinh[slot] = 0; return; }
@@ -253,7 +271,7 @@ void KhopYDinh(int slot)
    if(ok)
      {
       g_bar_vao[slot] = 0; g_y_dinh[slot] = 0; g_da_tia[slot] = false;
-      g_be_bat[slot] = false; g_so_nhoi[slot] = 0;
+      g_be_bat[slot] = false; g_so_nhoi[slot] = 0; g_y_nhoi[slot] = 0.0;
       g_dinh[slot] = (Chieu(slot) > 0) ? SymbolInfoDouble(_Symbol, SYMBOL_BID)
                                        : SymbolInfoDouble(_Symbol, SYMBOL_ASK);
       ulong tk = VeCua(slot);
@@ -301,10 +319,7 @@ void Nhoi(int slot, double atr)
    double mn = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
    if(b > 0) vol = MathRound(vol / b) * b;
    if(vol < mn) vol = mn;
-   trade.SetExpertMagicNumber(InpMagic + slot);
-   bool ok = (Chieu(slot) > 0) ? trade.Buy(vol, _Symbol)
-                               : trade.Sell(vol, _Symbol);
-   if(ok) g_so_nhoi[slot]++;
+   g_y_nhoi[slot] = vol;      // khop o `KhopYDinh` khi phien mo
   }
 
 //--- Chan KIA co tin hieu vao khong. `slot` la chan dang mo.

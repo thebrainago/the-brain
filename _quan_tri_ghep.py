@@ -85,10 +85,15 @@ LOT_CO_DINH = ("InpLot0=0||0||0||0||N" + NL + "InpLot1=0.1||0.1||0||0||N" + NL
                + "InpLot2=0.1||0.1||0||0||N" + NL)
 
 SWEEP = [
+    # `InpVaoLai` nam TRONG luot trailing chu khong de mac dinh: nghi luot
+    # trailing 07/09 chay 773 giay chua xong vi `InpVaoLai=1` lam he dong lenh
+    # roi vao lai ngay o nen ke tiep -> so lenh no ra hang chuc nghin moi pass.
+    # De no thanh mot chieu quet thi vua do duoc nghi ngo do, vua co ban 0.
     ("trailing",
      "InpKieuRa=2||2||0||0||N" + NL
-     + "InpTrailATR=0.5||0.5||0.5||4.0||Y" + NL
-     + "InpTrailTu=0||0||1.0||2.0||Y" + NL),
+     + "InpTrailATR=0.5||0.5||0.5||3.0||Y" + NL
+     + "InpTrailTu=0||0||1.0||2.0||Y" + NL
+     + "InpVaoLai=0||0||1||1||Y" + NL),
     ("dat_hue_va_vao_lai",
      "InpKieuRa=0||0||0||0||N" + NL
      + "InpBE=0||0||0.5||3.0||Y" + NL
