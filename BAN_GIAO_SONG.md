@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-05 07:46:48 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14820, 0 phut), dieu_khien_xa.py (pid 14676, 36 phut)
-- `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
-- git: 1c44318 dien tay hai muc ban giao 05/09
 ### 2026-09-05 08:40:42 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 8360, 0 phut), dieu_khien_xa.py (pid 14676, 90 phut)
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 19772, 0 phut)
 - `DEM_GHEP.log`: @@@@ XONG 23:33
 - git: cdc2857 luan phien 50 luat quan tri x 4 he nen: KHONG luat nao qua cong (>=3 he nen)
+### 2026-09-07 23:56:49 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17580, 0 phut)
+- `DEM_GHEP.log`: @@@@ XONG 23:33
+- git: 9f488f9 ban giao 07/09: nut that la CHAN BAN; kho quan li lenh xong nhung chua luat nao qua cong; Qwen chay tiep tu phien sau
