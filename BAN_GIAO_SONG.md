@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-05 07:42:47 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1320, 0 phut), dieu_khien_xa.py (pid 14676, 32 phut)
-- `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
-- git: cb9f77d cap nhat ban giao 04/09
 ### 2026-09-05 07:46:48 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 14820, 0 phut), dieu_khien_xa.py (pid 14676, 36 phut)
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 9300, 0 phut)
 - `DEM_GHEP.log`: @@@@ XONG 22:37
 - git: 9777f58 kho he thong quan li lenh: DSL + kho 75 co che + bo dich MQL5 hai che do
+### 2026-09-07 23:38:56 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19772, 0 phut)
+- `DEM_GHEP.log`: @@@@ XONG 23:33
+- git: cdc2857 luan phien 50 luat quan tri x 4 he nen: KHONG luat nao qua cong (>=3 he nen)
