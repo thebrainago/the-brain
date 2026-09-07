@@ -4,21 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-04 21:29:00 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14132, 0 phut)
-- git: cb9f77d cap nhat ban giao 04/09
-### 2026-09-04 21:31:19 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1824, 0 phut)
-- git: cb9f77d cap nhat ban giao 04/09
-### 2026-09-04 21:33:31 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9068, 0 phut)
-- git: cb9f77d cap nhat ban giao 04/09
-### 2026-09-04 21:35:57 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5984, 0 phut)
 - git: cb9f77d cap nhat ban giao 04/09
 ### 2026-09-04 21:36:06 — chup trang thai
 
@@ -404,3 +389,18 @@
 - dang chay: ban_giao_song.py (pid 8352, 0 phut)
 - `DEM_GHEP.log`: A_be_nguyen   : >=25 lenh ca hai  84 | DUONG ca hai   4 | lai holdout   1140.59
 - git: edd7ec7 ghi chu phep thu H1 dang chay nen luc chot phien
+### 2026-09-07 21:27:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1184, 0 phut)
+- `DEM_GHEP.log`: B_chi_chu_ky  : >=25 lenh ca hai  75 | DUONG ca hai  40 | lai holdout  13741.14
+- git: 47d9c14 RUT LAI con so H1 cua _da_khung: EA nhieu-slot vs EA switch cho ket qua khac han
+### 2026-09-07 22:21:51 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18292, 0 phut)
+- `DEM_GHEP.log`: B_chi_chu_ky  : >=25 lenh ca hai  75 | DUONG ca hai  40 | lai holdout  13741.14
+- git: 47d9c14 RUT LAI con so H1 cua _da_khung: EA nhieu-slot vs EA switch cho ket qua khac han
+### 2026-09-07 22:39:49 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12248, 0 phut)
+- `DEM_GHEP.log`: @@@@ XONG 22:37
+- git: 47d9c14 RUT LAI con so H1 cua _da_khung: EA nhieu-slot vs EA switch cho ket qua khac han
