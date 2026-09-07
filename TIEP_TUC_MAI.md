@@ -104,6 +104,12 @@ Thứ tự việc, xếp theo giá trị trên mỗi giờ máy:
 4. **Lệnh stop hai đầu** — `_stop_hai_dau.py` đã viết và biên dịch được, phải
    tải M1 về trước.
 
+### Đang chạy nền lúc chốt phiên
+- `_thu_doi_khung.py US100Cash H1` — bản A xong (4/84 chân dương), bản B và C
+  còn chạy. Kết quả sẽ rơi vào `reports/THU_DOI_KHUNG_US100Cash_H1.json` và
+  cuối `reports/DEM_GHEP.log`. Đọc nó trước khi kết luận gì về bộ đổi khung ở
+  H1 — bản D1→H4 đã xong và đó là bản đã dùng để viết mục 16 của báo cáo.
+
 ### Vướng mắc còn lại
 - **Tỉ lệ lot trong mọi bảng ra tiền là chọn TRONG MẪU.** Bài kiểm holdout chỉ
   kiểm việc chọn CHÂN.
