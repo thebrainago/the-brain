@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
-### 2026-09-04 21:23:36 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10136, 0 phut)
-- git: a3747ed ban giao 03/09: dien doan tom tat phien + 6 muc viec cho ngay mai
 ### 2026-09-04 21:29:00 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 14132, 0 phut)
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 3680, 0 phut)
 - `DEM_GHEP.log`: @@@@ XONG 17:19
 - git: 0c05cc1 truy xong vi sao ghep khong chuyen sang H4: chan H4 tuong quan voi nhau cao hon
+### 2026-09-07 20:07:23 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8352, 0 phut)
+- `DEM_GHEP.log`: A_be_nguyen   : >=25 lenh ca hai  84 | DUONG ca hai   4 | lai holdout   1140.59
+- git: edd7ec7 ghi chu phep thu H1 dang chay nen luc chot phien
