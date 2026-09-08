@@ -188,3 +188,29 @@ MT5 don bar NGAY vao khung nho khi thieu du lieu, khong bao loi.
 **Chi phi quyet dinh khung nao dang quet**: spread 0,98 bps an **12,0%** bien do
 mot nen M5 nhung chi 0,7% bien do nen D1. Nguoc lai, **phi qua dem 1,56 bps/dem
 con dat hon spread**, va chan BAN duoc NHAN +0,18 bps/dem.
+
+## HE TU CHAY BANG QWEN (08/09/2026) — lenh `q`
+
+Khi het token Claude, du an chay tiep bang MOT lenh (cd vao `lab/` roi go `q`):
+
+```
+q                chay lien tuc nhieu ngay (Ctrl-C an toan; `q dung` de thoat em)
+q trang-thai     xem bang viec + trang thai may
+q kiem           tu kiem duong LLM + cong + dieu toc
+```
+
+Doc `lab/qwen/DOC_TRUOC.md`. Ba dieu phai nho:
+
+- **qwen DOC va VIET; code CHAM va CHAN.** `qwen/cong.py` cham dat/am bang code,
+  qwen khong duoc tu phan. Ly do la mot phep do: LLM dien `co_che` cho 48 khai
+  bao, tham dinh bac 41, rong cuu 3.
+- **Ba trang thai, khong phai hai.** Ma thoat != 0, thieu file ra, file ra CU hon
+  luc bat dau chay, hay bang co phan lon cot so dung im -> deu la `CHUA_DO_DUOC`,
+  khong bao gio la `AM`.
+- **Lan TESTER = 1 la rang buoc VAT LY**, khong phai lua chon. `chay_tester_kho`
+  ghi de cung mot `.mq5` / `.ini` / `.xml` va may chi co mot `terminal64.exe`.
+  Hai viec tester cung luc thi ghi de ket qua cua nhau **va khong ai bao loi**.
+
+Sua viec cua may = sua `lab/qwen/NHIEM_VU.json`. Muc tieu CPU o
+`config/qwen.json` -> `muc_tieu_cpu` (mac dinh 85, la % cua CA MAY chu khong
+rieng he nay, nen khi MT5 tester an 60% thi lan CPU tu co lai).

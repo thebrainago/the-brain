@@ -98,7 +98,21 @@ cùng phép đổi**.
 
 ## Việc tiếp theo
 
-**Token tuần đã dùng ~90%. Từ phiên sau Qwen chạy tiếp** — bàn giao đầy đủ ở
+> **08/09/2026 — không còn phải dán prompt nữa. Mở terminal và gõ:**
+> ```
+> cd "C:\Users\SV STORE\Downloads\Research SP500\lab"
+> q
+> ```
+> Bốn việc dưới đây đã nằm trong `lab/qwen/NHIEM_VU.json` cùng cổng kiểm của
+> chúng. `q` đo CPU giữ máy ở ~85%, chạy song song theo làn (tester 1 việc, LLM
+> và mạng chạy đồng thời), chấm kết quả **bằng code**, rồi để qwen đọc và viết
+> nhật ký. Tắt máy giữa chừng vẫn resume được. Đọc `lab/qwen/DOC_TRUOC.md`.
+> Xem bảng: `q trang-thai`. Kiểm đường: `q kiem`. Dừng êm: `q dung`.
+>
+> Hai việc **cần chủ dự án** (hệ không tự chạy): tải M1 về MT5, và duyệt bản nháp
+> đối chứng EA switch-vs-nhiều-slot. `q trang-thai` in ra cả hai ở cuối.
+
+**Token tuần đã dùng ~95%. Từ phiên sau Qwen chạy tiếp** — bàn giao đầy đủ ở
 `PROMPT_QWEN.md` (khối nạp bối cảnh, 4 việc, 11 bẫy, chi phí thật, bảng vốn↔lot,
 kho quản lý lệnh ở mục 3b, 5 câu tự kiểm).
 

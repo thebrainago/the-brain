@@ -38,6 +38,8 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b luu "msg"       chot nhanh vao git (thay cho copy vao backups/)
     b lich [n]        n commit gan nhat
     b lui <file>      tra mot file ve ban da chot
+    b qwen [lenh]     HE TU CHAY: qwen lam tiep bang viec (xem qwen/DOC_TRUOC.md)
+                      `b qwen` = `q`. `b qwen trang-thai` xem bang. `b qwen kiem`.
     b ban-do          ban do thu muc + file nao lam gi
     b profile <file>  do cProfile mot script, in 25 dong ton nhat
 
@@ -372,8 +374,18 @@ def c_tele(a):
                  "from nhan import telegram as TG; print(TG.quet_tat_ca())"], cwd=LAB)
 
 
+def c_qwen(a):
+    """b qwen [...] - he tu chay bang qwen. Cua vao ngan hon la `q` o cung thu muc.
+
+    Vi sao co ca hai: `q` la lenh chu du an go hang ngay; `b qwen` de nguoi doc
+    menu `b` biet la he do TON TAI.
+    """
+    return chay([PY, "-X", "utf8", "-m", "qwen.chay", *a], cwd=LAB)
+
+
 LENH = {
     "vao": c_vao, "ket": c_ket,
+    "qwen": c_qwen, "q": c_qwen,
     "test": lambda a: c_test(a, True), "test1": lambda a: c_test(a, False),
     "toan-canh": c_toan_canh, "tc": c_toan_canh,
     "trang-thai": c_trang_thai, "tt": c_trang_thai,

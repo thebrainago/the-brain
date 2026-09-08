@@ -1,0 +1,41 @@
+{
+ "_doc_truoc": [
+  "Cau hinh he tu chay `q`. Moi khoa o day de trong thi lay mac dinh trong",
+  "qwen/cau_hinh.py. Sua file nay KHONG can sua code.",
+  "",
+  "muc_tieu_cpu la % cua CA MAY, khong phai % rieng cua he nay. Khi MT5 tester",
+  "an 60% thi lan CPU tu co lai - do la hanh vi dung. Muon chay mot lan voi muc",
+  "khac ma khong sua file: `QWEN_CPU=70 q` (hoac set QWEN_CPU=70 tren cmd)."
+ ],
+
+ "muc_tieu_cpu": 85.0,
+
+ "tran_lan": {"CPU": 8, "LLM": 4, "MANG": 3, "TESTER": 1, "NHE": 6},
+ "_ghi_chu_tran_lan": [
+  "TESTER = 1 la RANG BUOC VAT LY, dung nang len. `chay_tester_kho` ghi de cung",
+  "mot MQL5/Experts/<TEN_EA>.mq5, cung mot .ini, cung mot .xml, va may chi co",
+  "MOT terminal64.exe. Hai viec tester chay cung luc thi ghi de ket qua cua nhau",
+  "va KHONG AI BAO LOI - bang so doc y het mot ket qua that."
+ ],
+
+ "cc_switch_provider": "aibox",
+ "base_url": "https://api.ai-box.vn/v1",
+ "model": "qwen3.7-flash",
+ "model_du_phong": "qwen3.6-flash",
+ "_ghi_chu_mo_hinh": [
+  "Khoa doc TAI CHO tu ~/.cc-switch/cc-switch.db, khong chep sang day.",
+  "`cc_switch_provider` khop bang CHUOI CON voi cot `name`. Lech ten = ca duong",
+  "LLM tat lang le (06/09: moi loi goi tra 'thieu OPENAI_API_KEY').",
+  "Goi THANG api.ai-box.vn, khong qua cau noi 127.0.0.1:8317 - cau noi do dung",
+  "cho Codex CLI (doi /v1/responses). Do 08/09: thang 2,1s vs qua cau noi 3,2s.",
+  "Dat `qua_cau_noi: true` neu muon ep di qua cau noi de xem log tung loi goi.",
+  "Chon qwen3.7-flash bang PHEP DO (khai bao QUA duoc cong ngu phap / gia), khong",
+  "bang ten: 5/6 file, 8 khai bao, ~160 dv moi khai bao giu duoc."
+ ],
+
+ "temperature": 0,
+ "max_tokens": 4000,
+ "timeout_giay": 180,
+ "nhip_vong_giay": 20.0,
+ "gio_bao_cao": 23
+}

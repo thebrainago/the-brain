@@ -25,3 +25,9 @@ statsmodels       # nhan/do_luong.py - thong ke nang cao
 pypdf             # nhan/toan_van.py - rut toan van tu PDF
 telethon          # telethon_ban.py, rem_via_tele.py - nguon Telegram tai khoan that
 yt-dlp            # lab.py - nguon YouTube
+
+# he tu chay `q` (08/09/2026) - xem lab/qwen/DOC_TRUOC.md
+langchain>=1.4
+langchain-openai>=1.6
+langgraph>=1.2
+psutil>=7.0
