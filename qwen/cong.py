@@ -208,6 +208,19 @@ def cham(viec: dict, ma_thoat: int, bat_dau: float, log_duoi: str,
 
     if kieu == "truong_vuot":
         truong, nguong = spec["truong"], float(spec["nguong"])
+        # Truong o MUC TREN CUNG (bao cao dem duoc: ghi_moi, tai_duoc, doc_duoc)
+        # chu khong phai mot cot cua bang. Nhieu ham cua lab tra ve hinh dang do,
+        # va no la cho phan biet "chay xong" voi "chay xong MA RONG".
+        if isinstance(d, dict) and isinstance(d.get(truong), (int, float)):
+            v0 = d[truong]
+            ra["so"].update(truong=truong, gia_tri=v0, nguong=nguong)
+            if v0 > nguong:
+                ra.update(ket=DAT, vi_sao="%s = %.4g > %.4g" % (truong, v0, nguong))
+            else:
+                ra.update(ket=AM, vi_sao="%s = %.4g, khong vuot %.4g - lan chay nay "
+                                         "KHONG them duoc gi (khac han 'chay hong')"
+                          % (truong, v0, nguong))
+            return ra
         gt = [x.get(truong) for x in dong if isinstance(x.get(truong), (int, float))]
         ra["so"].update(truong=truong, cao_nhat=max(gt) if gt else None, nguong=nguong)
         if not gt:

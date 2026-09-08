@@ -362,7 +362,7 @@
   {
    "ma": "S2_mql5_code_base",
    "ten": "THUONG TRUC: tai ma nguon MQL5 Code Base (nguon DUY NHAT co file chay tester ngay)",
-   "vi_sao": "Do la nguon DUY NHAT co file chay tester duoc ngay. Chien dich 08/09 tai 0 file du kiem_mang bao OK -> gan chac la khau tai hong chu khong phai nguon rong.",
+   "vi_sao": "Nguon DUY NHAT co file chay tester duoc ngay. Do 20:07 08/09: MQL5 KHONG bi chan - nhin thay 80, tai duoc 78. Nhung ghi_moi=0 vi con tro dang o trang 4 va trang do da boc roi. Con tro TIEN mot trang moi luot (config/ma_nguon_con_tro.json) nen viec nay phai LAP moi di sau duoc; 3 gio/luot = ~8 trang/ngay.",
    "lan": "MANG",
    "uu_tien": 2,
    "ngay": 2,
@@ -371,14 +371,16 @@
     "import sys, json, pathlib; sys.path.insert(0,'.')\nfrom nhan import ma_nguon as MN\nr = MN.thu_thap(so_bai=40)\nprint(json.dumps(r, ensure_ascii=False, default=str)[:3000])\npathlib.Path('reports/QWEN_MA_NGUON.json').write_text(json.dumps(r, ensure_ascii=False, default=str), encoding='utf-8')"
    ],
    "cong": {
-    "kieu": "chay_duoc",
-    "file": "reports/QWEN_MA_NGUON.json"
+    "kieu": "truong_vuot",
+    "file": "reports/QWEN_MA_NGUON.json",
+    "truong": "ghi_moi",
+    "nguong": 0
    },
    "toi_da_phut": 60,
-   "ghi_chu": "Ham that la `thu_thap(muc_can, so_bai)` - KHONG co `mot_luot`. Lan chay 19:58 08/09 goi nham ten roi ghi {'loi':...} vao file va duoc cham DAT; da vá cổng để bắt hình dạng đó. MQL5 bi chan vi DNS - bat Cloudflare WARP (`b mang`) truoc. `thu_thap` ghi vao bang `artifact` CHU KHONG vao `tai_lieu` - dem nham bang thi tuong nhu that bai.",
+   "ghi_chu": "Cong do `ghi_moi` chu khong do 'chay xong' - mot luot tai 78 file trung het la AM THAT (khong them duoc gi), khac han chay hong. Ham la `thu_thap(so_bai=)`, KHONG co `mot_luot`. `thu_thap` ghi vao bang `artifact` CHU KHONG vao `tai_lieu` - dem nham bang thi tuong nhu that bai.",
    "phu_thuoc": [],
-   "lap": 6,
-   "cach_nhau_gio": 8
+   "lap": 40,
+   "cach_nhau_gio": 3
   },
   {
    "ma": "S1_do_suat_doc_ma",

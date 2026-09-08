@@ -298,8 +298,37 @@ class DieuPhoi:
             print("  !! bang viec moi HONG (%s) - giu ban cu, khong nap" % e, flush=True)
             return False
 
+    def kiem_ma_doi(self) -> None:
+        """Bao khi ma nguon `qwen/*.py` doi giua chung.
+
+        Bang thi nap lai duoc; MA thi khong - Python da nap module vao bo nho roi,
+        va `importlib.reload` giua mot vong lap co tien trinh con dang chay la
+        cach hay nhat de co hai phien ban cong cung ton tai. Nen o day chi BAO,
+        va bao MOT lan.
+
+        Vi sao can bao: 20:17 08/09 toi sua `cong.py` de no do truong `ghi_moi`,
+        nhung dot dang chay van cham bang ban cu - va khong co dong nao noi ra
+        chuyen do. Mot tuan sau doc nhat ky se khong hieu tai sao cong xu khac
+        voi ma dang nam tren dia.
+        """
+        if getattr(self, "_da_bao_ma_doi", False):
+            return
+        moi = max((p.stat().st_mtime for p in CH.QWEN.glob("*.py")), default=0)
+        if not getattr(self, "_moc_ma", 0):
+            self._moc_ma = moi
+            return
+        if moi > self._moc_ma:
+            self._da_bao_ma_doi = True
+            print("\n  !! MA NGUON qwen/*.py vua doi, nhung dot nay van chay BAN CU.\n"
+                  "     Bang thi nap lai duoc, ma thi khong. Muon ap ma moi:\n"
+                  "       q dung        (doi vong lap thoat em)\n"
+                  "       q giet        (neu con tien trinh con)\n"
+                  "       q             (chay lai - so tay giu nguyen ket qua da co)\n",
+                  flush=True)
+
     def mot_vong(self) -> None:
         self.nap_lai_bang()
+        self.kiem_ma_doi()
         self.thu_hoach()
         self.phong()
         self.moc_ngay()
