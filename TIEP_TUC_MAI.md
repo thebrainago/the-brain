@@ -111,6 +111,16 @@ cùng phép đổi**.
 >
 > Hai việc **cần chủ dự án** (hệ không tự chạy): tải M1 về MT5, và duyệt bản nháp
 > đối chứng EA switch-vs-nhiều-slot. `q trang-thai` in ra cả hai ở cuối.
+>
+> **Bộ test đang có 4 cái hỏng** (đo 08/09: 1.239 pass / 4 fail / 11:14). Không
+> cái nào do hệ `q` sinh ra, nhưng một cái **chặn việc đang nằm trong bảng**:
+> `gann_sq9` khai trong `CHI_BAO_CO` mà gọi không được (`KeyError: chi bao
+> 'gann_sq9' khong biet`) — nên "đưa Gann vào một giả thuyết thật" (mục E.5)
+> chưa chạy được. Ba cái còn lại: banker thiếu khối `tin_dung`/`tin_dung_that`
+> (2 test), và hiến pháp báo 6 module chưa có test nào nhắc đến
+> (`nhan/dich_mq5*.py`, `doi_khung.py`, `quan_tri_dsl.py` — đều từ phiên 07/09).
+> Cả bốn đều cần **sửa mã**, hệ không tự sửa; việc `X0_bo_test` chạy lại mỗi
+> ngày để biết con số 4 đó tăng hay giảm.
 
 **Token tuần đã dùng ~95%. Từ phiên sau Qwen chạy tiếp** — bàn giao đầy đủ ở
 `PROMPT_QWEN.md` (khối nạp bối cảnh, 4 việc, 11 bẫy, chi phí thật, bảng vốn↔lot,

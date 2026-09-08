@@ -235,5 +235,18 @@ def cham(viec: dict, ma_thoat: int, bat_dau: float, log_duoi: str,
             ra.update(ket=AM, vi_sao="log khong co dau hieu nao trong %s" % (tu,))
         return ra
 
+    if kieu == "khong_trong_log":
+        # Cho viec ma IM LANG moi la dat: bo test, bo linter, kiem mang.
+        tu = spec.get("tu") or []
+        thay = [t for t in tu if t.lower() in (log_duoi or "").lower()]
+        if not (log_duoi or "").strip():
+            ra.update(ket=CHUA, vi_sao="log RONG - viec khong in gi thi khong cham "
+                                       "duoc, dung doc thanh dat")
+        elif thay:
+            ra.update(ket=AM, vi_sao="log co dau hieu hong: %s" % ", ".join(thay))
+        else:
+            ra.update(ket=DAT, vi_sao="log khong co dau hieu nao trong %s" % (tu,))
+        return ra
+
     ra["vi_sao"] = "kieu cong %s chua cai dat -> khong dam cham" % kieu
     return ra

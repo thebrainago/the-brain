@@ -28,6 +28,15 @@
    "toi_da_phut": 2,
    "ghi_chu": "Thoat ma 3 = con duoi 6 GB. KHONG duoc tu xoa AppData\\Local\\Google (13,7 GB) hay Apple Computer (5,7 GB) - do la du lieu cua chu du an, phai hoi."},
 
+  {"ma": "X0_bo_test",
+   "ten": "Chay bo test cua lab - 4 cai dang HONG tu truoc dot nay",
+   "vi_sao": "Do 08/09 truoc khi giao cho qwen: 1.239 pass / 4 FAIL / 673 giay. Bon cai do KHONG phai do he `q` sinh ra, va deu chan viec dang nam trong bang: (1) `gann_sq9` khai trong CHI_BAO_CO ma goi khong duoc (KeyError) - nen viec 'dua Gann vao mot gia thuyet that' o muc E.5 chua chay duoc; (2)+(3) banker thieu khoi `tin_dung` / `tin_dung_that`; (4) hien phap: 6 module chua co test (nhan/dich_mq5*.py, doi_khung.py, quan_tri_dsl.py - deu tu phien 07/09). Chay lai moi ngay de biet con so 4 do TANG hay GIAM.",
+   "lan": "CPU", "uu_tien": 0, "ngay": 1,
+   "lenh": ["-m", "pytest", "-q", "-n", "8", "--dist", "loadfile", "--tb=no"],
+   "cong": {"kieu": "khong_trong_log", "tu": [" failed", "error"]},
+   "toi_da_phut": 25,
+   "ghi_chu": "Cong nay AM khi con test hong - do la am THAT, khong phai chua do duoc. Bon cai dang hong deu can SUA MA nen he khong tu sua; qwen chi bao so va viet vao nhat ky."},
+
   {"ma": "L2_boc_a",
    "ten": "qwen doc toan van + boc co che den het ton kho (dot 1)",
    "vi_sao": "Day la viec DUNG de giao cho may: khoi luong thuan, loi bi `them_co_che` chay tren du lieu that bat lai. 6.970/7.297 tai lieu chua khai thac.",
