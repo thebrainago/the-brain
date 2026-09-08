@@ -199,11 +199,30 @@ def test_dieu_toc_khong_cap_qua_muc_tieu():
     assert not duoc, ly
 
 
-def test_lan_cho_mang_van_di_duoc_khi_CPU_day():
-    """Chan lan LLM/MANG luc CPU day la bo khong duong ong dat nhat."""
+def test_KHONG_lan_nao_duoc_mien_ngan_sach():
+    """Ban dau toi mien lan LLM/MANG khoi ngan sach voi ly do 'chung cho mang
+    chu khong an CPU'. Do la GIA DINH CHUA DO: do that luc chu du an choi game,
+    mot viec lan LLM an 7,7 loi. Che do nghi ha muc tieu ve 35% ma may van 97%.
+    """
     from qwen import dieu_toc as DT
     dt = DT.DieuToc()
     for i in range(20):
         dt.giu("gia_%d" % i, "CPU")
-    duoc, _ = dt.cho_phep("LLM")
-    assert duoc
+    for lan in ("LLM", "MANG", "NHE", "CPU", "TESTER"):
+        duoc, ly = dt.cho_phep(lan)
+        assert not duoc, "lan %s van lot qua khi ngan sach da can: %s" % (lan, ly)
+
+
+def test_dieu_toc_HOC_suat_that_va_lay_max_voi_bang_khai():
+    """Bang khai la chan DUOI cho lan chua chay; phep do la su that cho lan da
+    chay. Lay max hai cai - uoc thap thi may nghen va nguoi phai di giet tay."""
+    from qwen import dieu_toc as DT
+    dt = DT.DieuToc({**__import__("qwen.cau_hinh", fromlist=["x"]).nap(),
+                     "nang_lan": {"LLM": 1.2}})
+    assert dt.nang("LLM") == 1.2
+    dt.hoc("LLM", 7.7)
+    assert dt.nang("LLM") > 1.2, "do duoc 7,7 loi ma van dung bang khai 1,2"
+    # nghieng ve CAO: len nhanh, xuong cham
+    truoc = dt.do_duoc["LLM"]
+    dt.hoc("LLM", 0.1)
+    assert dt.do_duoc["LLM"] > truoc * 0.8, "tut xuong qua nhanh sau mot phep do thap"

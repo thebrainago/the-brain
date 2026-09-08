@@ -27,6 +27,9 @@ viec do va phong; nhan xet cua qwen chay o hai luong nen.
     q de-xuat        xem viec qwen de xuat, chua ai duyet
     q ban-giao       BAN GIAO NGUOC: mot man hinh cho nguoi quay lai sau vai ngay
     q xong <ma>      danh dau mot viec `can_nguoi` la da lam xong
+    q nghi [phut]    CHOI GAME: ha CPU + khoa lan TESTER/CPU/LLM (mac dinh 60 phut, tu tro lai)
+    q thuc           bo che do nghi ngay
+    q cpu <N>        doi muc tieu CPU (an ngay, khong can khoi dong lai)
     q kiem           tu kiem ca duong: mo hinh, cong, dieu toc, bang
 """
 from __future__ import annotations
@@ -85,6 +88,7 @@ class DieuPhoi:
         self.st = ST.SoTay()
         self.bg = BV.BangViec()
         self.dt = DT.DieuToc(self.c)
+        self.dt.do_duoc.update(self.st.moc('nang_do_duoc') or {})
         self.dang: dict[str, TT.Viec] = {}
         self.tho = ThreadPoolExecutor(max_workers=2, thread_name_prefix="qwen")
         self.ngay_da_mo = set(self.st.d.get("ngay_da_mo", []))
@@ -159,6 +163,25 @@ class DieuPhoi:
                 v["ma"], v["lan"], tv.p.pid, v["ten"][:40], ly_do), flush=True)
             n += 1
         return n
+
+    def do_suat_lan(self) -> None:
+        """Do suat CPU THAT cua tung lan roi day vao `dieu_toc`.
+
+        Day la khau khep vong: bang `nang_lan` trong config chi la phong doan
+        ban dau, con day la su that do tren chinh may nay. 20:30 08/09 khoang
+        cach giua hai cai la 6,4 lan (khai 1,2 loi cho lan LLM, that 7,7).
+        """
+        theo_lan = {}
+        for ma, v in self.dang.items():
+            try:
+                theo_lan.setdefault(v.lan, []).append(v.loi_dang_an())
+            except Exception:
+                pass
+        for lan, ds in theo_lan.items():
+            if len(ds) == 1 and ds[0] > 0.1:      # chi hoc khi lan do CHI co 1 viec
+                self.dt.hoc(lan, ds[0])           # - nhieu viec thi khong tach duoc
+        if theo_lan:
+            self.st.dat_moc("nang_do_duoc", dict(self.dt.do_duoc))
 
     def ai_dang_an(self) -> str:
         """Viec nao dang an CPU THAT - do tren cay tien trinh, khong doan.
@@ -326,9 +349,46 @@ class DieuPhoi:
                   "       q             (chay lai - so tay giu nguyen ket qua da co)\n",
                   flush=True)
 
+    def nap_lai_cau_hinh(self) -> None:
+        """Doc lai `config/qwen.json` moi vong, va ap CHE DO NGHI neu dang bat.
+
+        Vi sao doc lai moi vong chu khong doc mot lan luc khoi dong: chu du an
+        ngoi truoc chinh cai may nay. Khi ho mo game (hay mot viec gi can may),
+        khong the bat ho dung ca dot chay nhieu ngay chi de doi mot con so.
+
+        CHE DO NGHI ha muc tieu CPU **va khoa han lan TESTER**. Ha muc tieu thoi
+        la chua du: bo dieu toc chan viec MOI PHONG, no khong ghi duoc mot phien
+        MT5 tester DANG chay - ma tester voi 20 agent chinh la thu an CPU nang
+        nhat o day. Het gio thi tu tro lai, khong can ai nho.
+        """
+        try:
+            c = CH.nap()
+        except Exception:
+            return
+        den = float(c.get("nghi_den") or 0)
+        dang_nghi = time.time() < den
+        if dang_nghi:
+            muc = float(c.get("cpu_khi_nghi", 35.0))
+            tran = dict(c["tran_lan"], TESTER=0, CPU=0, LLM=0, MANG=1, NHE=2)
+        else:
+            muc, tran = float(c["muc_tieu_cpu"]), dict(c["tran_lan"])
+            if getattr(self, "_dang_nghi", False):
+                print("\n  == HET GIO NGHI -> tra lai muc tieu CPU %.0f%% va mo lan TESTER\n"
+                      % muc, flush=True)
+        if dang_nghi and not getattr(self, "_dang_nghi", False):
+            print("\n  == CHE DO NGHI: muc tieu CPU %.0f%%, KHOA lan TESTER+CPU+LLM, den %s\n"
+                  "     (bo som: `q thuc`)\n"
+                  % (muc, time.strftime("%H:%M", time.localtime(den))), flush=True)
+        self._dang_nghi = dang_nghi
+        self.dt.muc_tieu = muc
+        self.dt.c["tran_lan"] = tran
+        self.c["tran_lan"] = tran
+
     def mot_vong(self) -> None:
+        self.nap_lai_cau_hinh()
         self.nap_lai_bang()
         self.kiem_ma_doi()
+        self.do_suat_lan()
         self.thu_hoach()
         self.phong()
         self.moc_ngay()
@@ -445,6 +505,33 @@ def main(argv: list) -> int:
         return 0
     if lenh == "kiem":
         return kiem()
+    if lenh in ("nghi", "thuc", "cpu"):
+        import json as _j
+        c = {}
+        if CH.CAU_HINH_NGOAI.exists():
+            c = _j.loads(CH.CAU_HINH_NGOAI.read_text(encoding="utf-8-sig"))
+        if lenh == "nghi":
+            phut = float(argv[1]) if len(argv) > 1 else 60.0
+            c["nghi_den"] = time.time() + phut * 60
+            c.setdefault("cpu_khi_nghi", 35.0)
+            print("nghi %g phut (den %s): muc tieu CPU %.0f%%, KHOA lan TESTER+CPU+LLM (chi con MANG nhe)."
+                  % (phut, time.strftime("%H:%M", time.localtime(c["nghi_den"])),
+                     c["cpu_khi_nghi"]))
+            print("Het gio no TU tro lai - khong phai lam gi. Bo som: `q thuc`.")
+        elif lenh == "thuc":
+            c["nghi_den"] = 0
+            print("da bo che do nghi - muc tieu ve %.0f%%." % c.get("muc_tieu_cpu", 85))
+        else:
+            if len(argv) < 2:
+                print("go: q cpu <phan tram>   (vi du: q cpu 50)")
+                return 2
+            c["muc_tieu_cpu"] = float(argv[1])
+            print("muc tieu CPU -> %.0f%%" % c["muc_tieu_cpu"])
+        CH.CAU_HINH_NGOAI.write_text(_j.dumps(c, ensure_ascii=False, indent=1),
+                                     encoding="utf-8")
+        print("Dot dang chay se thay trong ~%gs (no doc lai config moi vong)."
+              % CH.nap()["nhip_vong_giay"])
+        return 0
 
     dp = DieuPhoi()
 

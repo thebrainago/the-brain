@@ -45,6 +45,8 @@ class DieuToc:
         self.lan_do = 0.0
         #: {ma_viec: (lan, nang, luc_phong)} - von da cap, chua kip vao phep do
         self.von = {}
+        #: {lan: so loi DO DUOC} - hoc dan tu chinh cac lan chay truoc
+        self.do_duoc = dict(self.c.get("nang_do_duoc") or {})
         psutil.cpu_percent(interval=None)   # moi lan goi dau tra 0, bo di
 
     # ------------------------------------------------------------- phep do
@@ -84,22 +86,44 @@ class DieuToc:
         dang = self.dem_lan(lan)
         if dang >= tran:
             return False, "lan %s da day (%d/%d)" % (lan, dang, tran)
-        nang = float(self.c["nang_lan"].get(lan, 1.0))
+        nang = self.nang(lan)
         con = self.con_trong()
-        # Lan TESTER va CPU phai co du cho THAT. Lan LLM/MANG cho no di duoc ke
-        # ca khi CPU day, vi chung cho mang chu khong an CPU - chan chung lai la
-        # bo khong duong ong dat nhat.
-        if lan in ("LLM", "MANG", "NHE"):
-            if self.do() > 97.0:
-                return False, "may dang 97%+, hoan ca lan nhe"
-            return True, "ok (lan cho mang)"
+        # MOI lan deu di qua ngan sach, KHONG co lan nao duoc mien.
+        #
+        # Truoc 20:30 08/09 o day mien cho LLM/MANG/NHE, voi ly do "chung cho
+        # mang chu khong an CPU". Do la mot GIA DINH CHUA DO. Do that luc chu du
+        # an dang choi game: `TT_boc` an **768% = 7,7 loi** (16 luong doc + 20
+        # luong boc, va boc tach JSON/HTML la viec CPU chu khong phai cho mang),
+        # trong khi bang `nang_lan` cua toi khai 1,2. Che do nghi ha muc tieu
+        # xuong 35% ma may van 97%, vi hai thu an nhieu nhat deu duoc mien.
         if con < nang:
             return False, "con %.1f loi, viec can %.1f (CPU %.0f%%/%.0f%%)" % (
                 con, nang, self.do(), self.muc_tieu)
         return True, "ok (con %.1f loi)" % con
 
+    # --------------------------------------------------------------- hoc nang
+    def nang(self, lan: str) -> float:
+        """Suat cua mot viec lan nay: lay MAX cua bang khai va cai DO DUOC.
+
+        Lay max chu khong lay cai do duoc: bang khai la chan duoi cho lan chua
+        chay bao gio, con phep do la su that cho lan da chay.
+        """
+        return max(float(self.c["nang_lan"].get(lan, 1.0)),
+                   float(self.do_duoc.get(lan, 0.0)))
+
+    def hoc(self, lan: str, loi: float) -> None:
+        """Ghi lai suat CPU that cua mot lan (trung binh truot, nghieng ve cao).
+
+        Nghieng ve cao (0,3 khi tang / 0,05 khi giam) vi hau qua hai chieu khong
+        can nhau: uoc thap thi may nghen va chu du an phai di giet tay; uoc cao
+        thi chi cham hon mot chut.
+        """
+        cu = float(self.do_duoc.get(lan, 0.0))
+        a = 0.3 if loi > cu else 0.05
+        self.do_duoc[lan] = round(cu + a * (loi - cu), 2)
+
     def giu(self, ma: str, lan: str) -> None:
-        self.von[ma] = (lan, float(self.c["nang_lan"].get(lan, 1.0)), time.time())
+        self.von[ma] = (lan, self.nang(lan), time.time())
 
     def nha(self, ma: str) -> None:
         self.von.pop(ma, None)
@@ -110,7 +134,10 @@ class DieuToc:
             self.do(), self.muc_tieu, self.con_trong(), len(self.von),
             ", ".join("%s:%d" % (l, self.dem_lan(l))
                       for l in ("CPU", "LLM", "MANG", "TESTER", "NHE")
-                      if self.dem_lan(l)) or "trong")
+                      if self.dem_lan(l)) or "trong") + (
+            "  suat do duoc: " + " ".join("%s=%.1f" % kv for kv in
+                                          sorted(self.do_duoc.items()))
+            if self.do_duoc else "")
 
 
 def do_nhanh(giay: float = 3.0) -> dict:
