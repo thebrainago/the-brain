@@ -51,7 +51,27 @@ class BangViec:
                                      % (v["ma"], p))
         self.ds = ds
         self.chi_muc = thay
+        self._kiem_vong()
         return ds
+
+    def _kiem_vong(self) -> None:
+        """Phu thuoc vong tron = hai viec cho nhau mai mai, va he nam im ma khong
+        bao gi. Bat luc NAP chu khong doi den luc chay."""
+        mau = {}
+
+        def di(ma, duong):
+            if mau.get(ma) == 2:
+                return
+            if mau.get(ma) == 1:
+                raise SystemExit("!! bang viec co phu thuoc VONG TRON: %s"
+                                 % " -> ".join(duong + [ma]))
+            mau[ma] = 1
+            for p in (self.chi_muc.get(ma) or {}).get("phu_thuoc", []):
+                di(p, duong + [ma])
+            mau[ma] = 2
+
+        for v in self.ds:
+            di(v["ma"], [])
 
     def viec(self, ma: str) -> dict | None:
         return self.chi_muc.get(ma)
@@ -72,6 +92,13 @@ class BangViec:
             da_chay = (so_tay.d["viec"].get(ma) or {}).get("so_lan_chay", 0)
             if tt == "XONG" and da_chay >= int(v["lap"]):
                 continue
+            # Viec THUONG TRUC (lap > 1): phai cho het chu ky moi chay lai. Khong
+            # co cho nay thi mot viec 20 giay se quay lien tuc va chiem cho cua
+            # moi thu khac - va nhat ky day 200 dong giong het nhau.
+            if tt == "XONG" and float(v.get("cach_nhau_gio", 0)):
+                xong_luc = (so_tay.d["viec"].get(ma) or {}).get("xong") or 0
+                if time.time() - xong_luc < float(v["cach_nhau_gio"]) * 3600:
+                    continue
             if tt in ("LOI", "QUA_GIO"):
                 if da_chay >= max(2, int(v["lap"])):
                     continue      # thu 2 lan roi thi thoi, de nguoi xem
@@ -88,6 +115,60 @@ class BangViec:
             ra.append((v["uu_tien"], v["ngay"], i, v))
         ra.sort(key=lambda t: t[:3])
         return [t[3] for t in ra]
+
+    def sap_san_sang(self, so_tay) -> list[tuple[dict, str]]:
+        """Viec CHUA chay duoc nhung roi se chay duoc - kem ly do dang cho.
+
+        Day la thu phan biet "bang trong mot luc" voi "het viec that". Khong co
+        no thi vong lap thoat ngay khi lan tester ban va lan LLM dang nghi chu
+        ky - roi may nam khong ca dem.
+        """
+        gio = time.time()
+        xong = so_tay.da_xong()
+        ra = []
+        for v in self.ds:
+            ma = v["ma"]
+            if v.get("can_nguoi") or not v.get("lenh"):
+                continue
+            tt = so_tay.trang_thai(ma)
+            g = so_tay.d["viec"].get(ma) or {}
+            da_chay = g.get("so_lan_chay", 0)
+            if tt == "DANG_CHAY":
+                ra.append((v, "dang chay"))
+                continue
+            chan = [p for p in v["phu_thuoc"] if p not in xong]
+            if chan:
+                # chi la "sap san sang" neu cai chan no CON co the xong
+                if all(self._con_co_the_xong(p, so_tay) for p in chan):
+                    ra.append((v, "cho %s" % ", ".join(chan)))
+                continue
+            if tt == "XONG":
+                ck = float(v.get("cach_nhau_gio", 0))
+                if da_chay < int(v["lap"]) and ck:
+                    con = ck * 3600 - (gio - (g.get("xong") or 0))
+                    if con > 0:
+                        ra.append((v, "thuong truc, con %.0f phut" % (con / 60)))
+                continue
+            if tt in ("LOI", "QUA_GIO") and da_chay < max(2, int(v["lap"])):
+                con = 180 - (gio - (g.get("xong") or 0))
+                if con > 0:
+                    ra.append((v, "cho thu lai, con %.0fs" % con))
+        return ra
+
+    def _con_co_the_xong(self, ma: str, so_tay) -> bool:
+        v = self.viec(ma) or {}
+        tt = so_tay.trang_thai(ma)
+        if tt == "XONG":
+            return True
+        if v.get("can_nguoi"):
+            return False            # cho nguoi thi khong tu xong duoc
+        if not v.get("lenh"):
+            return False
+        da_chay = (so_tay.d["viec"].get(ma) or {}).get("so_lan_chay", 0)
+        if tt in ("LOI", "QUA_GIO") and da_chay >= max(2, int(v["lap"])):
+            return False
+        return all(self._con_co_the_xong(p, so_tay) for p in v.get("phu_thuoc", [])
+                   if p != ma)
 
     def ket_treo(self, so_tay) -> list[dict]:
         """Viec dang cho NGUOI - in ra de chu du an thay, khong tu chay."""

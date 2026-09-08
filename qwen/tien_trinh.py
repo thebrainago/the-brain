@@ -90,7 +90,14 @@ class Viec:
             return 0.0
 
     def giet(self) -> None:
-        """Giet ca cay - terminal64 de lai tien trinh con neu chi giet cha."""
+        """Giet ca cay, VA cac tien trinh MT5 khong phai con.
+
+        Do that 20:0x 08/09: giet `_dem_ghep.py` xong van con mot `metatester64.exe`
+        song. Ly do la `terminal64.exe /config:` duoc phong roi TACH RA - agent
+        tester khong nam trong cay con cua script, nen `children(recursive=True)`
+        khong thay. Mot dot chay ca tuan ma moi lan qua gio de lai mot agent thi
+        may bi an dan, va lan tester ke tiep chay tren mot may da bi chiem.
+        """
         try:
             pr = psutil.Process(self.p.pid)
             for con in pr.children(recursive=True):
@@ -101,6 +108,17 @@ class Viec:
             pr.kill()
         except psutil.Error:
             pass
+        if self.lan != "TESTER":
+            return
+        # MT5 khong cho hai tien trinh dung chung thu muc du lieu, nen o day
+        # KHONG the co mot phien tester hop le nao khac dang chay.
+        for ten in ("metatester64.exe", "terminal64.exe", "metaeditor64.exe"):
+            for p in psutil.process_iter(["name"]):
+                if (p.info.get("name") or "").lower() == ten:
+                    try:
+                        p.kill()
+                    except psutil.Error:
+                        pass
 
     def dong(self) -> tuple[int, str]:
         try:

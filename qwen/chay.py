@@ -25,6 +25,7 @@ viec do va phong; nhan xet cua qwen chay o hai luong nen.
     q mot-vong       chay dung mot vong roi thoat (de thu)
     q bao-cao        sinh bao cao ngay ngay bay gio
     q de-xuat        xem viec qwen de xuat, chua ai duyet
+    q ban-giao       BAN GIAO NGUOC: mot man hinh cho nguoi quay lai sau vai ngay
     q xong <ma>      danh dau mot viec `can_nguoi` la da lam xong
     q kiem           tu kiem ca duong: mo hinh, cong, dieu toc, bang
 """
@@ -190,6 +191,70 @@ class DieuPhoi:
         except Exception as e:
             print("!! mo dau ngay loi: %s" % e, flush=True)
 
+    def ban_giao(self) -> str:
+        """BAN GIAO NGUOC: mot man hinh cho nguoi (hay Claude) quay lai sau vai ngay.
+
+        Khac `bao_cao`: bao cao la van do qwen viet cho chu du an doc. Ban giao la
+        SO do may dem, sap theo dung thu tu ma nguoi quay lai can - viec gi da do
+        duoc, viec gi hong, va viec gi dang cho chinh ho.
+        """
+        st, bg = self.st, self.bg
+        d = ["# BAN GIAO NGUOC — dot chay tu dong",
+             "",
+             "phien bat dau : %s" % st.d.get("phien"),
+             "den           : %s" % time.strftime("%Y-%m-%d %H:%M"),
+             "so ngay da mo : %d" % len(self.ngay_da_mo), ""]
+
+        nhom = {}
+        for ma, v in st.d["viec"].items():
+            nhom.setdefault((v.get("cong") or {}).get("ket") or v.get("trang_thai", "CHUA"),
+                            []).append((ma, v))
+        d.append("## Ket qua cong (code cham, khong phai qwen)")
+        for ket in (CONG.DAT, CONG.AM, CONG.CHUA):
+            ds = nhom.get(ket, [])
+            d.append("\n### %s — %d viec" % (ket, len(ds)))
+            for ma, v in sorted(ds):
+                d.append("- **%s** (%ss) — %s" % (ma, int(v.get("giay") or 0),
+                                                  (v.get("cong") or {}).get("vi_sao", "")))
+
+        treo = bg.ket_treo(st)
+        if treo:
+            d.append("\n## CAN CHU DU AN — he khong tu chay duoc")
+            for v in treo:
+                d.append("- **%s** — %s\n  %s\n  xong roi thi: `q xong %s`"
+                         % (v["ma"], v["ten"], v.get("ghi_chu", ""), v["ma"]))
+
+        if st.d["de_xuat"]:
+            d.append("\n## qwen DE XUAT (chua ai duyet, chua chay)")
+            for v in st.d["de_xuat"]:
+                d.append("- **%s** [%s] %s\n  vi sao: %s\n  lenh: `%s`"
+                         % (v.get("ma"), v.get("lan"), v.get("ten"), v.get("vi_sao"),
+                            " ".join(v.get("lenh", []))))
+
+        d.append("\n## Nhat ky qwen (%d muc, 30 muc cuoi)" % len(st.d["nhat_ky"]))
+        for m in st.d["nhat_ky"][-30:]:
+            d.append("- `%s` **%s** — %s" % (m["luc"][5:16], m["ma"],
+                                             m["van"].replace("\n", " ")[:300]))
+
+        bc = sorted(CH.GOC.glob("BAO_CAO_*.md"), key=lambda p: p.stat().st_mtime,
+                    reverse=True)[:7]
+        d.append("\n## Bao cao ngay da sinh")
+        d += ["- %s" % p.name for p in bc] or ["- (chua co)"]
+
+        d.append("\n## Buoc tiep — cho Claude khi quay lai")
+        d.append("1. Doc muc **CHUA_DO_DUOC** o tren truoc moi thu khac: do la cho he "
+                 "khong do duoc, khong phai cho khong co edge.")
+        d.append("2. Giao viec moi = sua `lab/qwen/NHIEM_VU.json` roi `q kiem` de "
+                 "no soat bang, roi `q`.")
+        d.append("3. Duyet muc **qwen DE XUAT** — chep cai nao dang lam vao bang.")
+
+        van = "\n".join(d)
+        p = CH.LAB / "BAN_GIAO_QWEN.md"
+        p.write_text(van, encoding="utf-8")
+        print(van)
+        print("\n-> %s" % p, flush=True)
+        return str(p)
+
     def bao_cao(self) -> str:
         from . import tac_tu as TA
         md = TA.viet_bao_cao(self.st.d["nhat_ky"], self.bg.bang_chu(self.st))
@@ -202,7 +267,39 @@ class DieuPhoi:
         return str(p)
 
     # ------------------------------------------------------------ vong lap
+    def nap_lai_bang(self) -> bool:
+        """Doc lai NHIEM_VU.json neu no vua bi sua. Cho phep giao viec MOI cho
+        mot dot dang chay ma khong phai dung no.
+
+        Can cai nay vi dot chay keo nhieu ngay: chu du an (hay Claude khi quay
+        lai) sua bang luc 2 gio sang thi khong co ly do gi bat giet ca lan tester
+        dang chay do. Bang hong thi GIU ban cu - dung de mot dau phay thua lam
+        chet ca dot chay.
+        """
+        try:
+            moi = self.bg.duong.stat().st_mtime
+        except OSError:
+            return False
+        if moi <= getattr(self, "_moc_bang", 0):
+            return False
+        cu = getattr(self, "_moc_bang", 0)
+        self._moc_bang = moi
+        if not cu:
+            return False
+        try:
+            truoc = {v["ma"] for v in self.bg.ds}
+            self.bg.nap()
+            them = sorted({v["ma"] for v in self.bg.ds} - truoc)
+            print("  ~~ bang viec vua doi -> da nap lai (%d viec%s)"
+                  % (len(self.bg.ds), ", moi: " + ", ".join(them) if them else ""),
+                  flush=True)
+            return True
+        except SystemExit as e:
+            print("  !! bang viec moi HONG (%s) - giu ban cu, khong nap" % e, flush=True)
+            return False
+
     def mot_vong(self) -> None:
+        self.nap_lai_bang()
         self.thu_hoach()
         self.phong()
         self.moc_ngay()
@@ -223,12 +320,28 @@ class DieuPhoi:
                 self.mot_vong()
                 con = self.bg.san_sang(self.st)
                 if not self.dang and not con:
+                    # Bang trong MOT LUC khac han het viec THAT. Viec thuong truc
+                    # dang nghi chu ky, hay mot phu thuoc chua toi luot, deu lam
+                    # bang trong tam thoi - thoat o day thi may nam khong ca dem.
+                    sap = self.bg.sap_san_sang(self.st)
+                    if sap:
+                        if im % 15 == 0:
+                            print("  ... khong co viec chay duoc ngay. %d viec dang cho: %s"
+                                  % (len(sap), "; ".join("%s (%s)" % (v["ma"], ly)
+                                                         for v, ly in sap[:4])),
+                                  flush=True)
+                        im += 1
+                        time.sleep(float(self.c["nhip_vong_giay"]))
+                        continue
                     print("\n=== HET VIEC TU CHAY DUOC ===")
                     treo = self.bg.ket_treo(self.st)
                     if treo:
                         print("Con %d viec CAN CHU DU AN:" % len(treo))
                         for v in treo:
                             print("  * %s — %s" % (v["ma"], v["ten"]))
+                            if v.get("ghi_chu"):
+                                print("      %s" % v["ghi_chu"])
+                    print("\nThem viec: sua qwen/NHIEM_VU.json roi chay lai `q`.")
                     self.bao_cao()
                     break
                 if im % 6 == 0:
@@ -317,6 +430,9 @@ def main(argv: list) -> int:
         return 0
     if lenh == "bao-cao":
         dp.bao_cao()
+        return 0
+    if lenh in ("ban-giao", "bg"):
+        dp.ban_giao()
         return 0
     if lenh == "de-xuat":
         if not dp.st.d["de_xuat"]:

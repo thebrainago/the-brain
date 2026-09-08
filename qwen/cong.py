@@ -136,6 +136,19 @@ def cham(viec: dict, ma_thoat: int, bat_dau: float, log_duoi: str,
         dat_file.append(p)
 
     d = _doc_json(dat_file[0]) if dat_file else None
+
+    # File ra chi chua mot thong bao LOI thi khong phai ket qua. Bat o day vi ca
+    # lab dung quy uoc `{"loi": ...}` thay cho nem ngoai le (`tri_tue.hoi_json`,
+    # `boc_llm`, `ma_nguon`) - nen mot khau chet van thoat ma 0 va van ghi file.
+    # Da sap that luc 19:58 08/09: `S2_mql5_code_base` ghi
+    # `{"loi": "khong co mot_luot"}` roi duoc cham DAT.
+    if isinstance(d, dict) and "loi" in d and len(d) <= 3:
+        ra["vi_sao"] = ("file ra chi co thong bao loi: %r -> CHUA DO DUOC. Ca lab "
+                        "dung quy uoc {'loi':...} thay cho nem ngoai le, nen mot "
+                        "khau chet van thoat 0 va van ghi file." % (d.get("loi"),))
+        ra["so"]["loi_trong_file"] = str(d.get("loi"))[:200]
+        return ra
+
     dong = _cac_dong(d) if d is not None else []
     ra["so"]["so_dong"] = len(dong)
 
