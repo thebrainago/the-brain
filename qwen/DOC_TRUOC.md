@@ -165,6 +165,38 @@ Kiểu cổng có sẵn: `chay_duoc` · `khong_rong` · `so_lenh_du` · `truong_
 | `chay.py` | vòng lặp điều phối + CLI |
 | `NHIEM_VU.json` | **bảng việc — sửa ở đây** |
 
+## Claude giao việc — qwen làm việc
+
+Đây là nhịp làm việc từ nay, kể cả khi Claude có mặt.
+
+**Khi Claude quay lại sau vài ngày**, đọc theo đúng thứ tự này:
+
+```
+q ban-giao        # ghi ra lab/BAN_GIAO_QWEN.md và in luôn
+```
+
+Nó xếp sẵn theo thứ tự người quay lại cần: `DAT` / `AM` / **`CHUA_DO_DUOC`**, việc
+đang chờ chủ dự án, việc qwen đề xuất, nhật ký 30 mục cuối, các `BAO_CAO_*.md` đã
+sinh. **Đọc mục `CHUA_DO_DUOC` trước mọi thứ khác** — đó là chỗ hệ không đo được,
+không phải chỗ không có edge.
+
+**Giao việc mới = sửa `qwen/NHIEM_VU.json`.** Không cần dừng đợt đang chạy: vòng
+lặp thấy file đổi thì tự nạp lại (bảng hỏng thì nó giữ bản cũ và báo, chứ không
+chết). Sau khi sửa nên `q kiem` để nó soát bảng — trùng mã, phụ thuộc treo, phụ
+thuộc vòng tròn đều bị bắt lúc nạp.
+
+Một việc tối thiểu cần: `ma` · `ten` · **`vi_sao`** · `lan` · `lenh` · `cong`.
+Trường `vi_sao` không phải trang trí — nó đi vào lời nhắc của qwen khi qwen đọc
+kết quả, nên viết nó như viết cho một người chưa đọc phiên trước.
+
+**Việc thường trực** (`lap` > 1 + `cach_nhau_gio`) là thứ giữ cho một tuần không
+cạn: bóc kho, bóc chỉ báo, săn nguồn, chạy bộ test. Chúng chạy lại khi hết chu kỳ,
+và vòng lặp **không thoát** chỉ vì bảng trống một lúc.
+
+**Phân vai:** Claude nghĩ ra *phép thử nào đáng chạy* và viết cổng cho nó. qwen
+gánh khối lượng và viết lại những gì đo được. Ranh giới ở giữa là `qwen/cong.py`,
+và nó phải luôn là code.
+
 ## Chạy nhiều ngày
 
 Muốn nó sống qua đăng xuất: tạo Task Scheduler trỏ vào `lab\q.cmd` (giống 8 tác vụ
