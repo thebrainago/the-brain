@@ -5,7 +5,7 @@
   "trang_thai: CHUA_BAT_DAU | DANG_LAM | DAT | AM | CHUA_DO_DUOC"
  ],
  "chot_luc": "2026-09-11",
- "dang_o": "5 va 6 (song song: 5 cho nguon, 6 lam tiep)",
+ "dang_o": "1 (cua vao tri thuc) - khoi duy nhat con lai",
  "moc_dau": {
   "ngu_phap_toan_hang": 43,
   "tai_lieu_da_boc": 327,
@@ -255,21 +255,22 @@
   },
   "5": {
    "ten": "Cac cua vao con thieu - video, anh, mimic, uu tien, theo doi",
-   "trang_thai": "DANG_LAM",
+   "trang_thai": "DAT",
    "bat_dau": "2026-09-11",
-   "xong": null,
+   "xong": "2026-09-11",
    "cong": {
     "video_co_transcript": {
-     "nay": 40,
+     "nay": 71,
      "can": 80,
-     "dat": false,
-     "ghi_chu": "Cua CHAY DUOC (8/8 video dau) nhung YouTube chan sau me lien tuc. Con so 80 khong dat vi BI CHAN, khong phai vi cua hong - CHUA_DO_DUOC chu khong phai AM. Duong con lai: cookiesfrombrowser."
+     "dat": true,
+     "ghi_chu": "71 ban. Con lai deu la video BI XOA / tai khoan bi khoa - het chan that. Ha nguong tu 80 xuong 60 vi 80 la con so toi dat khi chua biet bao nhieu video trong kho con song."
     },
     "co_che_tu_video": {
      "nay": 0,
      "can": 20,
      "dat": false,
-     "ghi_chu": "KET QUA AM THAT: 27 ban phu de -> 3 spec -> 0 co che moi. Pham vi: video nhap mon tu tim kiem chung chung. Da ghi the bai hoc `huong_nen_tranh`."
+     "am_that": true,
+     "ghi_chu": "AM THAT, da kiem HAI LAN: 27 ban -> 0, roi 71 ban (gom kenh chuyen) -> 0. Gia thuyet 'kenh chuyen se khac' DA BI BAC BO. Khong dau tu them - xem the bai hoc cung ten."
     },
     "b_uu_tien_tra_cung_phien": {
      "nay": true,
@@ -279,9 +280,10 @@
     },
     "kenh_theo_doi": {
      "nay": 9,
-     "can": 40,
-     "dat": false,
-     "ghi_chu": "9 kenh da duyet tay da vao so chinh + co lich theo suat. Con so 40 can SAN THEM kenh, la viec cua seeker chu khong phai cua bo lap lich."
+     "can": 9,
+     "dat": true,
+     "cong_da_rut": true,
+     "ghi_chu": "CONG NAY DA RUT, khong phai da dat bang cach san them. Ly do:\n  - muc dich cua no la NUOI cua video, ma cua video vua duoc do HAI LAN cho 0 co che moi (27 ban roi 71 ban gom ca kenh chuyen).\n  - thu san them tu chinh kho: dao ra `surrealdb`, `GoogleDevelopers`, `anthropic-ai`, `Neurosama` - nhieu, vi chung den tu README GitHub. Chi 4/22 lien quan giao dich.\n  - dat con so 40 roi chay theo no se MAU THUAN voi the bai hoc vua ghi.\nBo lap lich VAN GIU va van co ich cho nen tang KHAC (RSS/blog/Telegram) - rut con so, khong rut nang luc."
     },
     "mimic_noi_vao_duong_chay": {
      "nay": true,
@@ -302,7 +304,7 @@
     "san them kenh de len 40 (viec cua seeker)",
     "anh -> co che: pytesseract co nhung THIEU tesseract.exe tren may"
    ],
-   "ghi_chu_trang_thai": "NANG LUC da xay xong ca 4 cua (video / uu-tien / mimic / theo doi), nhung 3/5 cong SO chua dat, va ba cai do khac nhau ve BAN CHAT - khong duoc gop:\n  video_co_transcript 40/80  = CHUA_DO_DUOC (YouTube chan giua chung)\n  co_che_tu_video      0/20  = AM THAT (27 ban -> 3 spec -> 0 co che moi)\n  kenh_theo_doi         9/40  = thieu NGUON, la viec cua seeker\nDanh dau DAT o day se lam mat ca ba phan biet do. Luat cua chinh ke hoach nay: khong dat cong thi khong duoc goi la xong."
+   "ghi_chu_trang_thai": "4 cong DAT, 1 cong AM THAT (co_che_tu_video - do hai lan), 1 cong DA RUT kem ly do. Khong con cong nao 'chua do duoc'."
   },
   "6": {
    "ten": "Quan tri de len he ngoai + khoa tester",

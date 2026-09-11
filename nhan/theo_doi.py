@@ -164,13 +164,23 @@ def quet_youtube(url: str, so_muc: int = 15) -> dict:
     u = url.rstrip("/")
     if "/@" in u and not u.endswith(("/videos", "/streams")):
         u += "/videos"
-    opt = {"quiet": True, "no_warnings": True, "extract_flat": "in_playlist",
-           "playlistend": so_muc, "socket_timeout": 25, "retries": 2}
-    try:
-        with yt_dlp.YoutubeDL(opt) as y:
-            info = y.extract_info(u, download=False)
-    except Exception as e:
-        return {"nhan": False, "ly_do": f"{type(e).__name__}: {str(e)[:120]}"}
+    # Dung CUNG chuoi client voi `doc_video`: `android` truoc. Do 11/09: cai
+    # chan la CLIENT chu khong phai thieu dang nhap.
+    info, loi = None, ""
+    for ten, ea, _ck in DV._CACH:
+        opt = {"quiet": True, "no_warnings": True, "extract_flat": "in_playlist",
+               "playlistend": so_muc, "socket_timeout": 25, "retries": 2}
+        if ea:
+            opt["extractor_args"] = ea
+        try:
+            with yt_dlp.YoutubeDL(opt) as y:
+                info = y.extract_info(u, download=False)
+            break
+        except Exception as e:
+            loi = f"[{ten}] {type(e).__name__}: {str(e)[:110]}"
+            info = None
+    if info is None:
+        return {"nhan": False, "ly_do": loi}
 
     moi, da_co, hong, chan = 0, 0, 0, 0
     for x in (info.get("entries") or []):
