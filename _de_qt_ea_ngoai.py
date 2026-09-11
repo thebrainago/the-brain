@@ -72,9 +72,21 @@ QT_LotGoc=0.10||0.10||0||0||N
     return p
 
 
-def chay(symbol: str = "XM_US500Cash", nguon_ea: str | None = None,
+def chay(symbol: str = "US500Cash", nguon_ea: str | None = None,
          tu: str = "2018.01.01", den: str = "2026.07.29",
-         khung: str = "D1", so_luat: int = 14) -> dict:
+         khung: str = "H1", so_luat: int = 14) -> dict:
+    """`khung` MAC DINH LA H1, khong phai D1 - va do la mot bai hoc da tra gia.
+
+    So bai hoc, the `chay EA D1 tren CFD chi so trong MT5 tester`:
+    `Model=2` tren khung D1 thi MT5 dat tick o OPEN, tuc 00:00 - NGOAI PHIEN cua
+    CFD chi so - nen 463 lenh deu `Market closed` va bao cao ghi ra "0 lenh",
+    khong loi, khong canh bao.
+
+    Lan chay dau tien cua ham nay (23:1x 11/09) lap lai dung loi do: Period=D1,
+    moc 0 lenh. Hoi `b da-thu "EA D1 chay tester CFD chi so bao 0 lenh"` thi so
+    tra ra ngay the tren. Do la lan dau so bai hoc cua khoi 2 tra cong trong mot
+    tinh huong that.
+    """
     ea = Path(nguon_ea or (GOC / "downloaded_codes" / "github" /
                            "EA Snippets_Breakout_Breakout1.mq5"))
     if not ea.exists():
@@ -139,17 +151,36 @@ def chay(symbol: str = "XM_US500Cash", nguon_ea: str | None = None,
                 "ly_do": "EA ngoai KHONG dat lenh nao o moc - doi symbol/cua so",
                 "ket": ket}
 
-    doi = [x for x in ket if x["luat"] and x["lenh"] != moc["lenh"]]
+    # CONG: bat ky SO NAO doi - khong chi so lenh.
+    #
+    # Lan dat cong dau tien cua toi chi hoi "so lenh co doi khong", va no SAI:
+    # mot luat `dat_hue` hay `trailing` doi GIA THOAT chu khong doi SO LENH. Chay
+    # that 23:2x ngay 11/09: 0/14 luat doi so lenh, nhung luat 6 doi LAI tu
+    # -108,76 sang -99,20 - tuc quan tri CO cham vao vi the, va cong cua toi se
+    # bao "AM" cho mot nang luc dang chay dung.
+    #
+    # Chi nhung luat NHOI hay CAT SOM moi doi so lenh; ca ho `dat_hue`/`trailing`
+    # - tuc phan lon kho quan tri - khong bao gio doi no.
+    def _khac(a, b, eps=1e-9):
+        return abs(float(a or 0) - float(b or 0)) > eps
+
+    doi = [x for x in ket if x["luat"] and (
+        x["lenh"] != moc["lenh"] or _khac(x["lai"], moc["lai"])
+        or _khac(x["sut_giam"], moc["sut_giam"]))]
+    doi_lenh = [x for x in doi if x["lenh"] != moc["lenh"]]
     kq = {
         "trang_thai": "DAT" if doi else "AM",
         "ea": ea.name, "symbol": symbol, "khung": khung, "cua_so": f"{tu}..{den}",
         "giay": round(time.time() - t0),
         "so_luat": len(ket) - 1,
         "moc_tat_quan_tri": moc,
-        "so_luat_doi_so_lenh": len(doi),
+        "so_luat_cham_duoc_vi_the": len(doi),
+        "so_luat_doi_SO_LENH": len(doi_lenh),
+        "luat_cham_duoc": [{"luat": x["luat"], "ten": x["ten"],
+                            "lenh": x["lenh"], "lai": x["lai"]} for x in doi[:8]],
         "ly_do": ("" if doi else
-                  "KHONG luat nao doi so lenh - quan tri khong cham vao vi the "
-                  "nao. Moi con so lai/lo deu vo nghia o day."),
+                  "KHONG luat nao doi duoc so nao - quan tri khong cham vao vi "
+                  "the nao. Moi con so lai/lo deu vo nghia o day."),
         "ket": ket,
     }
     RA.parent.mkdir(exist_ok=True)

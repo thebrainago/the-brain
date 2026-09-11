@@ -306,9 +306,9 @@
   },
   "6": {
    "ten": "Quan tri de len he ngoai + khoa tester",
-   "trang_thai": "DANG_LAM",
+   "trang_thai": "DAT",
    "bat_dau": "2026-09-11",
-   "xong": null,
+   "xong": "2026-09-11",
    "cong": {
     "khoa_tester_chan_duoc": {
      "nay": true,
@@ -323,19 +323,23 @@
      "ghi_chu": "Bo quet ma nguon tim thay 9 file phong ngoai khoa. Da boc 6, mien 5 KEM LY DO (he truoc 15/08). Bai quet la thu duy nhat chan duoc script MOI viet sau nay."
     },
     "de_len_ea_ngoai_doi_so_lenh": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": false,
-     "ghi_chu": "CHUA LAM - can mot EA ngoai that va mot lan chay tester doi chung"
+     "dat": true,
+     "ghi_chu": "Do that tren EA ngoai cua GitHub: moc 1.759 lenh/-108,76; luat 6 -> -99,19. 1/14 luat cham duoc vi the. 13/14 im lang vi EA co SL/TP rieng - khop bai hoc `quan tri can CHO de hoat dong`."
     }
    },
    "da_lam": [
     "nhan/khoa_tester.py + phong()",
     "test_khoa_tester.py: 11 ca kiem",
-    "boc khoa: chay_tester_kho.chay · _ghep_he._chay_terminal · _quet_placebo_rong · _kiem_cong_co_che · _placebo_tester · _z5_don_bay"
+    "boc khoa: chay_tester_kho.chay · _ghep_he._chay_terminal · _quet_placebo_rong · _kiem_cong_co_che · _placebo_tester · _z5_don_bay",
+    "nhan/de_quan_tri.py - chen khoi quan tri vao ma nguon EA ngoai (3 cho)",
+    "_de_qt_ea_ngoai.py - quet QT_MaLuat 0..K trong CUNG mot lan boot",
+    "test_de_quan_tri.py: 12 ca kiem"
    ],
    "con_lai": [
-    "EA giam sat de len EA ngoai (ban nhap da bien dich dat 07/09)"
+    "thu tren EA co CHO cho quan tri (khong co SL/TP rieng chat)",
+    "EA giam sat chay THAT (khong backtest duoc) - can tai khoan song"
    ]
   }
  }

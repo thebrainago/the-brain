@@ -92,27 +92,27 @@
   "S2_mql5_code_base": {
    "ma": "S2_mql5_code_base",
    "so_lan_chay": 3,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys, json, pathlib; sys.path.insert(0,'.')\nfrom nhan import ma_nguon as MN\nr = MN.thu_thap(so_bai=40)\nprint(json.dumps(r, ensure_ascii=False, default=str)[:3000])\npathlib.Path('reports/QWEN_MA_NGUON.json').write_text(json.dumps(r, ensure_ascii=False, default=str), encoding='utf-8')"
    ],
    "bat_dau": 1789142739.4751759,
-   "xong": null,
-   "ma_thoat": null,
+   "xong": 1789143300.2640388,
+   "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
-    "vi_sao": "ghi_moi = 39 > 0",
+    "vi_sao": "ghi_moi = 71 > 0",
     "so": {
      "so_dong": 0,
      "truong": "ghi_moi",
-     "gia_tri": 39,
+     "gia_tri": 71,
      "nguong": 0.0
     }
    },
-   "log": "\"60730\", \"tieu_de\": \"Moving Average x Relative Strength Indicator EA\", \"url\": \"https://www.mql5.com/en/code/60730\", \"file\": \"marsi_ea.mq5\", \"byte\": 8320, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"60347\", \"tieu_de\": \"Tuyul GAP\", \"url\": \"https://www.mql5.com/en/code/60347\", \"file\": \"TuyulGAP.mq5\", \"byte\": 13651, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"57157\", \"tieu_de\": \"Indicator based on 2 MAs\", \"url\": \"https://www.mql5.com/en/code/57157\", \"file\": \"atrTrader.mq5\", \"byte\": 33562, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"57272\", \"tieu_de\": \"Triangular Arbitrage\", \"url\": \"https://www.mql5.com/en/code/57272\", \"file\": \"Triangular_Arbitrage.mq5\", \"byte\": 20748, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"59651\", \"tieu_de\": \"Basket Manager EA\", \"url\": \"https://www.mql5.com/en/code/59651\", \"file\": \"basket_manager_ea.mq5\", \"byte\": 2094, \"moi\": false, \"loai_ma\": \"tien_ich\"}, {\"id\": \"59529\", \"tieu_de\": \"Butterfly Strategy Expert Advisor with Multiple TimeFrames\", \"url\": \"https://www.mql5.com/en/code/59529\", \"file\": \"cypher_ea.mq5\", \"byte\": 124080, \"moi\": false, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"58268\", \"tieu_de\": \"Bands R-squared\", \"url\": \"https://www.mql5.com/en/code/58268\", \"file\": \"bands.mq5\", \"byte\": 29644, \"moi\": false, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"59371\", \"tieu_de\": \"AutoCloseOnProfitLoss Expert - Automatically Close All Positions on Pr\", \"url\": \"https://www.mql5.com/en/code/59371\", \"file\": \"AutoCloseOnProfitLoss.mq5\", \"byte\": 6004, \"moi\": true, \"loai_ma\":\n",
-   "giay": 481.8
+   "log": " 80742, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"20000\", \"tieu_de\": \"N Candles v6\", \"url\": \"https://www.mql5.com/en/code/20000\", \"file\": \"n_candles_v6.mq5\", \"byte\": 43152, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19981\", \"tieu_de\": \"Pipsover 2\", \"url\": \"https://www.mql5.com/en/code/19981\", \"file\": \"pipsover_2.mq5\", \"byte\": 38736, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19977\", \"tieu_de\": \"MACDSimpleReshetov\", \"url\": \"https://www.mql5.com/en/code/19977\", \"file\": \"macdsimplereshetov.mq5\", \"byte\": 17272, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17561\", \"tieu_de\": \"UmnickTrader\", \"url\": \"https://www.mql5.com/en/code/17561\", \"file\": \"umnicktrader.mq5\", \"byte\": 33076, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19971\", \"tieu_de\": \"Channels\", \"url\": \"https://www.mql5.com/en/code/19971\", \"file\": \"channels.mq5\", \"byte\": 21006, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19968\", \"tieu_de\": \"Invest System 4.5\", \"url\": \"https://www.mql5.com/en/code/19968\", \"file\": \"invest_system_4.5.mq5\", \"byte\": 30768, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19963\", \"tieu_de\": \"TrailingStopAndTake\", \"url\": \"https://www.mql5.com/en/code/19963\", \"file\": \"trailingstopandtake.mq5\", \"byte\": 39102, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19951\", \"tieu_de\": \"Trend Me Leave Me\", \"url\": \"https://www.mql5.com/en/code/19951\", \"file\": \"trend_me_leave_me.mq5\", \"byte\": 43064, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19945\", \"tieu_de\": \"EMA Cross Contest Hedged\", \"url\": \"https\n",
+   "giay": 560.8
   },
   "X0_bo_test": {
    "ma": "X0_bo_test",
@@ -144,8 +144,8 @@
   },
   "TT_boc": {
    "ma": "TT_boc",
-   "so_lan_chay": 4,
-   "trang_thai": "GIAN_DOAN",
+   "so_lan_chay": 5,
+   "trang_thai": "DANG_CHAY",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -153,7 +153,7 @@
     "400",
     "250"
    ],
-   "bat_dau": 1789142100.4565241,
+   "bat_dau": 1789143340.3028798,
    "xong": null,
    "ma_thoat": null,
    "cong": {
@@ -224,14 +224,14 @@
   },
   "TT_chi_bao": {
    "ma": "TT_chi_bao",
-   "so_lan_chay": 2,
-   "trang_thai": "GIAN_DOAN",
+   "so_lan_chay": 3,
+   "trang_thai": "DANG_CHAY",
    "lan": "LLM",
    "lenh": [
     "nhan/doc_chi_bao.py",
     "--that"
    ],
-   "bat_dau": 1789138292.0266094,
+   "bat_dau": 1789143340.3243966,
    "xong": null,
    "ma_thoat": null,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
@@ -388,6 +388,12 @@
    "ma": "X0_bo_test",
    "ai": "qwen",
    "van": "Bo test da chay xong voi 1354 tests PASS, 0 loi. Con so 0 la so dong loi/tai nem tim thay - sinh ra tu 1354 phep thu va 478 subtests. Ket qua nay DAT, xac nhan ma nguon lab sach, khong co loi compile hoac runtime trong cac test hien tai. Warning ve escape sequence khong anh huong chuc nang. Day la nen tang tin cay de tiep tuc phat trieu he giao dich. Khau nay khong phai la backtest MT5 nen khong co so lenh thuong mai, chi la kiem tra code quality."
+  },
+  {
+   "luc": "2026-09-11 23:15:21",
+   "ma": "S2_mql5_code_base",
+   "ai": "qwen",
+   "van": "Con số 71 file .mq5 mới được thu thập thành công từ 40 trang MQL5 Code Base sau khi lọc 3 link lỗi. Tập dữ liệu này bao gồm cả chiến lược (EA) và tiện ích, tạo nền tảng mã nguồn để phân tích hoặc chạy thử nghiệm sau này. Kết quả DAT, nhưng đây chỉ là bước thu thập, chưa có thông tin về hiệu suất hay edge thực tế. Cần kiểm tra tiếp trong môi trường mô phỏng để xác định tính khả thi."
   }
  ],
  "de_xuat": [
@@ -738,12 +744,36 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-11 22:28:00"
+  },
+  {
+   "ma": "S3_tester_mql5",
+   "ten": "Chạy thử nghiệm MT5 Strategy Tester trên các file MQL5 vừa thu thập",
+   "vi_sao": "Co 71 file .mq5 moi tu Code Base, can kiem hieu qua thuc te tren du lieu XM SP500 H1 de tim he giao dich thang MUA-GIU",
+   "lan": "CPU",
+   "lenh": [
+    "_qwen_chay_tester.py",
+    "--source",
+    "QWEN_MA_NGUON.json",
+    "--symbol",
+    "SP500",
+    "--tf",
+    "H1",
+    "--period",
+    "2016-2024"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-11 23:15:25"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789143059.8784838
+   "luc": 1789143300.2043898
   }
  },
  "ngay_da_mo": [
