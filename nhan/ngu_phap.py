@@ -41,8 +41,11 @@ from __future__ import annotations
 
 import copy
 import json
+import os
+import time
 import weakref
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
@@ -1090,9 +1093,88 @@ def doc_kho() -> list[dict]:
         return []
 
 
-def luu_kho(ds: list[dict]) -> None:
+#: Bao nhieu phan tram kho duoc phep BIEN MAT trong mot lan ghi. Vuot nguong
+#: nay thi tu choi ghi - gan nhu chac chan la mot lan doc-sua-ghi bi chen ngang.
+NGUONG_HAO_HUT = 0.20
+
+
+class KhoBiTeoLai(RuntimeError):
+    """Mot lan ghi lam kho nho di dot ngot. Ten loai co y: day khong phai loi
+    cua co che nao, day la mat du lieu."""
+
+
+def luu_kho(ds: list[dict], ep: bool = False) -> None:
+    """Ghi kho co che. CO KHOA va CO CHOT CHONG TEO.
+
+    ## Chuyen da xay ra that, 23:48 ngay 11/09/2026
+
+    Kho tut tu **1.149 co che xuong 3** trong vai phut, va khong mot dong log
+    nao bao. Nguyen nhan: `doc_kho()` -> sua -> `luu_kho()` la mot chuoi
+    DOC-SUA-GHI khong khoa. Khi chu du an cho toan bo CPU va `q ultra` chay 3
+    tien trinh boc LLM dong thoi, moi tien trinh doc kho, them co che cua no,
+    roi ghi de len - **nguoi ghi cuoi cung thang, va vut het phan cua nhung
+    nguoi kia**. Mot tien trinh doc phai trang thai som se ghi lai mot danh
+    sach ti hon.
+
+    Va toi da COMMIT dung trang thai hong do (`fa6a4e1`, 3 co che) truoc khi
+    phat hien. Cuu duoc nho git con ban `c56034c` (1.149).
+
+    ## Hai lop chan
+
+    1. **Khoa file** quanh ca chuoi doc-sua-ghi -> `voi_khoa()`.
+    2. **Chot chong teo**: tu choi mot lan ghi lam kho mat hon 20%. Khoa co the
+       hong (tien trinh bi giet giua chung); chot nay thi khong phu thuoc gi.
+       Muon ghi nho that (don kho) thi phai noi ro `ep=True`.
+    """
     KHO_CO_CHE.parent.mkdir(parents=True, exist_ok=True)
-    KHO_CO_CHE.write_text(json.dumps(ds, ensure_ascii=False, indent=1), encoding="utf-8")
+    cu = len(doc_kho())
+    moi = len(ds or [])
+    if not ep and cu and moi < cu * (1 - NGUONG_HAO_HUT):
+        raise KhoBiTeoLai(
+            f"tu choi ghi: kho {cu} -> {moi} co che (mat {cu - moi}, "
+            f"{(cu - moi) / cu:.0%}). Gan nhu chac chan la mot lan doc-sua-ghi "
+            f"bi chen ngang. Muon ghi nho that thi goi luu_kho(ds, ep=True).")
+    tam = KHO_CO_CHE.with_suffix(".json.tam")
+    tam.write_text(json.dumps(ds, ensure_ascii=False, indent=1), encoding="utf-8")
+    tam.replace(KHO_CO_CHE)      # thay the NGUYEN TU, khong de lai file nua voi
+
+
+@contextmanager
+def voi_khoa(cho_giay: float = 120.0, nhip: float = 0.25):
+    """Khoa quanh ca chuoi DOC-SUA-GHI kho co che.
+
+        with NP.voi_khoa():
+            ds = NP.doc_kho(); ds.append(spec); NP.luu_kho(ds)
+
+    Khoa theo FILE (ba tien trinh khong nhin thay bien cua nhau), tu thu hoi
+    khi chu giu da chet hoac qua 5 phut.
+    """
+    khoa = KHO_CO_CHE.with_suffix(".khoa")
+    het = time.time() + cho_giay
+    while True:
+        try:
+            fd = os.open(str(khoa), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(fd, str(os.getpid()).encode())
+            os.close(fd)
+            break
+        except FileExistsError:
+            try:
+                cu = float(khoa.stat().st_mtime)
+                if time.time() - cu > 300:      # khoa mo coi
+                    khoa.unlink(missing_ok=True)
+                    continue
+            except OSError:
+                pass
+            if time.time() >= het:
+                raise KhoBiTeoLai(
+                    "khong lay duoc khoa kho co che sau %.0fs - co tien trinh "
+                    "khac dang ghi. Xoa %s neu chac khong con ai ghi."
+                    % (cho_giay, khoa.name))
+            time.sleep(nhip)
+    try:
+        yield
+    finally:
+        khoa.unlink(missing_ok=True)
 
 
 def van_tay_dieu_kien(spec: dict) -> str:
@@ -1165,7 +1247,18 @@ def them_co_che(spec: dict, df_kiem: pd.DataFrame | None = None) -> dict:
     """Them mot co che vao kho SAU KHI qua ca hai bai kiem.
 
     Khong dat -> KHONG vao kho, va tra ly do de tang suy nghi hoc duoc tu no.
+
+    CHAY TRONG KHOA (tu 12/09/2026). Ham nay doc kho, sua, roi ghi lai - mot
+    chuoi DOC-SUA-GHI. Khi nhieu tien trinh boc chay dong thoi, nguoi ghi cuoi
+    cung vut het phan cua nhung nguoi kia: kho tut 1.149 -> 3 co che trong vai
+    phut, khong mot dong log nao bao. Xem `luu_kho`.
     """
+    with voi_khoa():
+        return _them_co_che_trong_khoa(spec, df_kiem)
+
+
+def _them_co_che_trong_khoa(spec: dict,
+                            df_kiem: pd.DataFrame | None = None) -> dict:
     # Chuan hoa TEN truoc moi thu. Ten di thang vao `gia_thuyet.ma` duoi dang
     # `{tai_san}.{khung}.{ten}.{tham_so}`, va sau do bi tim lai bang LIKE
     # '%.{ten}.%'. Mot cai ten nhu `sma2_cat_keo_(nhanh_tren_cham)` (tang BOC
