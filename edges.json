@@ -1,0 +1,714 @@
+{
+"edges": {
+"banker": [
+"so"
+],
+"evolution": [
+"cong",
+"do_tai_nguyen",
+"ket_qua_hoat_dong",
+"san_cong_cu",
+"so",
+"thu_hoi_thanh_phan",
+"tri_tue"
+],
+"finder": [
+"san_cong_cu",
+"so"
+],
+"nghi": [
+"du_lieu",
+"ket_qua_hoat_dong",
+"mau",
+"ngu_phap",
+"so",
+"tri_tue"
+],
+"quantlab": [
+"canary",
+"chi_phi",
+"cong",
+"danh_muc",
+"do_luc",
+"do_luong",
+"du_lieu",
+"gop_lop",
+"mau",
+"mo_phong",
+"nen",
+"ngu_phap",
+"pham_vi",
+"quant_plan",
+"sang_loc",
+"so",
+"vuon_nguon"
+],
+"seeker": [
+"bien_dich_ung_vien",
+"cau_browser",
+"dns_vuot",
+"doc_trinh_duyet",
+"du_lieu",
+"hop_dong",
+"ma_nguon",
+"mau",
+"ngu_phap",
+"nguon_bai_viet",
+"san_cong_cu",
+"so",
+"thu_hoi_thanh_phan",
+"toan_van",
+"tri_tue",
+"vuon_nguon"
+],
+"bien_dich_ung_vien": [
+"doc_hieu",
+"doc_ma",
+"hop_dong",
+"so"
+],
+"boc_llm": [
+"boc_ma_llm",
+"loc_co_che",
+"ngu_phap",
+"so",
+"tri_tue"
+],
+"boc_ma_llm": [
+"boc_llm",
+"doc_chi_bao",
+"doc_ma",
+"loc_co_che",
+"ngu_phap",
+"pham_vi",
+"phan_loai_ma",
+"so",
+"tri_tue"
+],
+"canary": [
+"chi_phi",
+"do_luong",
+"du_lieu",
+"mo_phong"
+],
+"cau_browser": [
+"doc_hieu",
+"so"
+],
+"chi_tieu": [
+"so"
+],
+"cong": [
+"do_luong",
+"du_lieu",
+"mo_phong",
+"so"
+],
+"cong_ra_tien": [
+"bien_don_bay",
+"chi_phi",
+"mo_phong"
+],
+"danh_muc": [
+"chi_phi",
+"do_luong",
+"du_lieu",
+"mau",
+"mo_phong",
+"so"
+],
+"day_chuyen": [
+"boc_llm",
+"doc_song_song",
+"du_lieu",
+"duyet_nguoi",
+"ma_nguon",
+"muc_tieu",
+"ngu_phap"
+],
+"day_chuyen_quantlab": [
+"ho_so_symbol",
+"quan_tri",
+"quan_tri_llm"
+],
+"da_thoi_dai": [
+"bien_don_bay",
+"chi_phi",
+"du_lieu",
+"ngu_phap"
+],
+"doc_chi_bao": [
+"boc_llm",
+"boc_ma_llm",
+"doc_ma",
+"loc_co_che",
+"ngu_phap",
+"phan_loai_ma",
+"tri_tue"
+],
+"doc_hieu": [
+"ngu_phap"
+],
+"doc_ma": [
+"thu_hoi_thanh_phan"
+],
+"doc_pdf": [
+"so"
+],
+"doc_song_song": [
+"so"
+],
+"do_im_lang": [
+"doc_trinh_duyet",
+"nguon_bai_viet",
+"so",
+"toan_van"
+],
+"do_luc": [
+"chi_phi",
+"cong",
+"du_lieu",
+"mo_phong",
+"pham_vi",
+"so"
+],
+"duyet_nguoi": [
+"dns_vuot"
+],
+"gop_lop": [
+"chi_phi",
+"cong",
+"do_luc",
+"do_luong",
+"du_lieu",
+"mau",
+"mo_phong",
+"pham_vi",
+"so"
+],
+"hang_doi": [
+"so"
+],
+"ho_so_symbol": [
+"chi_phi",
+"du_lieu",
+"tinh_cach"
+],
+"kham_pha_nguon": [
+"so",
+"telegram",
+"vuon_nguon"
+],
+"loc_co_che": [
+"du_lieu",
+"mau",
+"ngu_phap",
+"pham_vi"
+],
+"ma_nguon": [
+"bien_dich_ung_vien",
+"duyet_nguoi",
+"hop_dong",
+"so"
+],
+"muc_tieu": [
+"ngu_phap",
+"so"
+],
+"nen_tang": [
+"hop_dong",
+"so"
+],
+"ngoai_sinh": [
+"du_lieu",
+"mau",
+"ngu_phap",
+"so"
+],
+"nguon_bai_viet": [
+"doc_hieu",
+"so",
+"vuon_nguon"
+],
+"nguon_tinix": [
+"san_cong_cu",
+"so"
+],
+"ngu_phap": [
+"du_lieu",
+"mau"
+],
+"nha_may_null": [
+"du_lieu",
+"mo_phong",
+"sang_loc"
+],
+"noi_sinh": [
+"ngu_phap"
+],
+"pham_vi": [
+"chi_phi",
+"do_luong",
+"du_lieu",
+"mau",
+"mo_phong"
+],
+"phan_loai_ma": [
+"doc_chi_bao",
+"doc_ma",
+"quan_tri",
+"so"
+],
+"quan_tri": [
+"so"
+],
+"quan_tri_llm": [
+"phan_loai_ma",
+"quan_tri",
+"tri_tue"
+],
+"quy_doi_tham_so": [
+"du_lieu",
+"mau"
+],
+"sang_loc": [
+"chi_phi",
+"do_luc",
+"do_luong",
+"du_lieu",
+"mau",
+"mo_phong",
+"pham_vi",
+"so"
+],
+"san_cong_cu": [
+"so"
+],
+"telegram": [
+"so"
+],
+"thu_hoi_thanh_phan": [
+"ngu_phap",
+"so"
+],
+"tien_ich_xet": [
+"phan_loai_ma",
+"tri_tue"
+],
+"tin_hieu_mql5": [
+"so"
+],
+"tri_tue": [
+"so"
+],
+"tu_dang_nhap": [
+"doc_trinh_duyet"
+],
+"vuon_nguon": [
+"nguon_bai_viet",
+"so"
+],
+"_boc_lai_vung": [
+"boc_llm",
+"boc_ma_llm",
+"doc_chi_bao",
+"loc_co_che",
+"ngu_phap",
+"phan_loai_ma"
+],
+"_bo_ba": [
+"dich_mq5_ghep",
+"ngu_phap"
+],
+"_bo_doc_mu_o_dau": [
+"doc_ma",
+"ngu_phap",
+"so"
+],
+"_cao_mql5": [
+"ma_nguon",
+"so"
+],
+"_cao_mql5_sau": [
+"ma_nguon",
+"so"
+],
+"_chan_dd_holdout": [
+"bien_don_bay",
+"chi_phi",
+"du_lieu",
+"mo_phong",
+"ngu_phap"
+],
+"_chien_dich_sp500": [
+"muc_tieu"
+],
+"_cong_ra_tien_quet": [
+"chi_phi",
+"cong_ra_tien",
+"du_lieu",
+"ngu_phap"
+],
+"_dang_ky_6_he": [
+"du_lieu",
+"ngu_phap",
+"so"
+],
+"_da_khung": [
+"dich_mq5_ghep",
+"doi_khung"
+],
+"_dem_ghep": [
+"dich_mq5",
+"dich_mq5_ghep",
+"ngu_phap"
+],
+"_dien_co_che": [
+"ngu_phap",
+"tri_tue"
+],
+"_doc_boc_toan_luc": [
+"boc_llm",
+"doc_song_song",
+"du_lieu",
+"ngu_phap"
+],
+"_doc_roi_boc": [
+"boc_llm",
+"du_lieu",
+"ngu_phap",
+"so"
+],
+"_do_suat_doc_ma": [
+"doc_ma",
+"ngu_phap",
+"so"
+],
+"_ghep_h4": [
+"dich_mq5_ghep",
+"ngu_phap"
+],
+"_ghep_he": [
+"dich_mq5_ghep",
+"ngu_phap"
+],
+"_github_toan_luc": [
+"boc_llm",
+"doc_song_song",
+"du_lieu",
+"muc_tieu",
+"ngu_phap",
+"so"
+],
+"_hinh_dang_audcad_rsi": [
+"ngoai_sinh",
+"ngu_phap"
+],
+"_hinh_dang_song_sot": [
+"mau",
+"ngu_phap"
+],
+"_khung_nho": [
+"dich_mq5",
+"ngu_phap"
+],
+"_kiem_cong_co_che": [
+"dich_mq5",
+"ngu_phap"
+],
+"_linh_hoat": [
+"bien_don_bay",
+"chi_phi",
+"da_thoi_dai",
+"du_lieu",
+"mo_phong",
+"ngu_phap"
+],
+"_luan_nguoc": [
+"dau_chan"
+],
+"_luoi_audcad": [
+"du_lieu",
+"luoi"
+],
+"_luoi_audcad_chang2": [
+"du_lieu",
+"luoi"
+],
+"_luoi_fx_song_bao_lau": [
+"du_lieu"
+],
+"_luong2_qwen": [
+"boc_llm",
+"doc_song_song",
+"du_lieu",
+"ngu_phap",
+"so"
+],
+"_ma_tran_ghep": [
+"dich_mq5_ghep",
+"ngu_phap"
+],
+"_mo_xe_z5": [
+"bien_don_bay",
+"chi_phi",
+"cong",
+"cong_ra_tien",
+"du_lieu",
+"mo_phong",
+"ngu_phap"
+],
+"_muc_tieu_20pc": [
+"bien_don_bay",
+"chi_phi",
+"da_thoi_dai",
+"du_lieu",
+"ngu_phap"
+],
+"_noi_sinh_chay": [
+"bien_don_bay",
+"chi_phi",
+"du_lieu",
+"ngu_phap",
+"noi_sinh"
+],
+"_noi_sinh_khop_rui_ro": [
+"bien_don_bay",
+"chi_phi",
+"cong",
+"do_luong",
+"du_lieu",
+"mo_phong",
+"ngu_phap",
+"noi_sinh"
+],
+"_noi_sinh_xu_huong_chay": [
+"bien_don_bay",
+"chi_phi",
+"cong",
+"do_luong",
+"du_lieu",
+"mo_phong",
+"ngu_phap",
+"noi_sinh"
+],
+"_pheu_nguon": [
+"mau",
+"ngu_phap",
+"so"
+],
+"_placebo_tester": [
+"dich_mq5",
+"ngu_phap"
+],
+"_placebo_xu_huong": [
+"chi_phi",
+"cong",
+"mau",
+"mo_phong"
+],
+"_quan_tri_ghep": [
+"dich_mq5_quan_tri",
+"ngu_phap"
+],
+"_quay_quan_tri": [
+"dich_mq5",
+"dich_mq5_qtvt",
+"quan_tri_dsl"
+],
+"_quet_nen_dat": [
+"da_thoi_dai",
+"do_luc",
+"ngu_phap"
+],
+"_quet_placebo_rong": [
+"dich_mq5",
+"ngu_phap"
+],
+"_quet_rong_d1": [
+"da_thoi_dai",
+"do_luc",
+"du_lieu",
+"ngu_phap"
+],
+"_quet_signal_mql5": [
+"dau_chan",
+"tin_hieu_mql5"
+],
+"_quet_song_song": [
+"doc_trinh_duyet"
+],
+"_qwen_het_cong_suat": [
+"boc_llm",
+"doc_song_song",
+"loc_co_che",
+"ngu_phap",
+"so"
+],
+"_san_4_gia_thuyet": [
+"ma_nguon",
+"muc_tieu",
+"ngu_phap",
+"so"
+],
+"_san_he_pho_thong": [
+"boc_llm",
+"du_lieu",
+"muc_tieu",
+"ngu_phap",
+"so"
+],
+"_sonic_r_don_bay": [
+"bien_don_bay",
+"chi_phi",
+"du_lieu",
+"mo_phong"
+],
+"_sonic_r_kiem_chung": [
+"bien_don_bay",
+"chi_phi",
+"du_lieu",
+"mo_phong"
+],
+"_sonic_r_placebo": [
+"chi_phi",
+"cong",
+"du_lieu",
+"mo_phong"
+],
+"_sonic_r_tpsl": [
+"bien_don_bay",
+"chi_phi",
+"du_lieu",
+"mau",
+"mo_phong"
+],
+"_so_sanh_chi_so": [
+"bien_don_bay",
+"chi_phi"
+],
+"_sua_ten_kho": [
+"ngu_phap"
+],
+"_tai_chi_so_xm": [
+"chi_phi"
+],
+"_tham_dinh_co_che": [
+"ngu_phap",
+"tri_tue"
+],
+"_thu_doi_khung": [
+"dich_mq5",
+"doi_khung"
+],
+"_thu_hai_cach": [
+"duyet_nguoi"
+],
+"_thu_mql5": [
+"duyet_nguoi"
+],
+"_thu_quan_tri": [
+"du_lieu"
+],
+"_tinh_cach_tai_san": [
+"du_lieu",
+"tinh_cach"
+],
+"_toan_luc": [
+"boc_llm",
+"doc_song_song",
+"du_lieu",
+"muc_tieu",
+"ngu_phap",
+"so"
+],
+"_trend_don_bay": [
+"bien_don_bay",
+"chi_phi",
+"mau"
+],
+"_trend_theo_che_do": [
+"bien_don_bay",
+"chi_phi",
+"mau"
+],
+"_tv_toan_luc": [
+"boc_llm",
+"du_lieu",
+"muc_tieu",
+"ngu_phap",
+"so"
+],
+"_xac_minh_chenh_lech": [
+"chi_phi"
+],
+"_z5_don_bay": [
+"dich_mq5",
+"ngu_phap"
+],
+"dieu_phoi": [
+"so"
+]
+},
+"bac": {
+"so": 51,
+"cong": 9,
+"do_tai_nguyen": 1,
+"ket_qua_hoat_dong": 2,
+"san_cong_cu": 4,
+"tri_tue": 10,
+"thu_hoi_thanh_phan": 3,
+"du_lieu": 50,
+"mau": 19,
+"ngu_phap": 57,
+"nen": 1,
+"canary": 1,
+"chi_phi": 30,
+"do_luc": 6,
+"do_luong": 9,
+"mo_phong": 20,
+"quant_plan": 1,
+"gop_lop": 2,
+"pham_vi": 10,
+"sang_loc": 2,
+"vuon_nguon": 5,
+"danh_muc": 1,
+"hop_dong": 4,
+"toan_van": 2,
+"doc_trinh_duyet": 4,
+"dns_vuot": 2,
+"ma_nguon": 6,
+"nguon_bai_viet": 6,
+"bien_dich_ung_vien": 2,
+"cau_browser": 1,
+"doc_hieu": 4,
+"doc_ma": 6,
+"boc_ma_llm": 3,
+"loc_co_che": 5,
+"doc_chi_bao": 4,
+"boc_llm": 13,
+"phan_loai_ma": 5,
+"bien_don_bay": 15,
+"duyet_nguoi": 4,
+"muc_tieu": 7,
+"doc_song_song": 6,
+"quan_tri": 4,
+"ho_so_symbol": 2,
+"quan_tri_llm": 1,
+"tinh_cach": 2,
+"telegram": 1,
+"dich_mq5_ghep": 6,
+"cong_ra_tien": 3,
+"doi_khung": 2,
+"dich_mq5": 8,
+"ngoai_sinh": 1,
+"da_thoi_dai": 4,
+"dau_chan": 2,
+"luoi": 2,
+"noi_sinh": 3,
+"dich_mq5_quan_tri": 1,
+"dich_mq5_qtvt": 1,
+"quan_tri_dsl": 1,
+"tin_hieu_mql5": 1
+}
+}

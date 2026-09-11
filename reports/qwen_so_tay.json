@@ -1,0 +1,365 @@
+{
+ "phien": "2026-09-08 19:58",
+ "bat_dau": 1788872324.004064,
+ "viec": {
+  "N0_don_dia": {
+   "ma": "N0_don_dia",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "NHE",
+   "lenh": [
+    "-c",
+    "import shutil,sys,json,pathlib; u=shutil.disk_usage('C:/'); g=u.free/1e9; print('C: free %.2f GB'%g); pathlib.Path('reports/QWEN_DIA.json').write_text(json.dumps({'dong':[{'o':'C','gb':round(g,2)},{'o':'F','gb':round(shutil.disk_usage('F:/').free/1e9,2)}]}),encoding='utf-8'); sys.exit(0 if g>6 else 3)"
+   ],
+   "bat_dau": 1788872324.0356483,
+   "xong": 1788872344.282608,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "DAT",
+    "vi_sao": "chay xong, ma thoat 0, file ra co 2 dong",
+    "so": {
+     "so_dong": 2,
+     "dong_giong_nhau": false
+    }
+   },
+   "log": "C: free 13.43 GB\n",
+   "giay": 20.2
+  },
+  "P1_ghep_holdout": {
+   "ma": "P1_ghep_holdout",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "CPU",
+   "lenh": [
+    "_ghep_holdout.py",
+    "US100Cash"
+   ],
+   "bat_dau": 1788872324.138547,
+   "xong": 1788872344.366302,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "DAT",
+    "vi_sao": "chay xong, ma thoat 0",
+    "so": {
+     "so_dong": 0
+    }
+   },
+   "log": " A                     chan B                         train   holdout\nma_crossover_buy__dao      fast_sma_cuts_below_slow_s     520.6      75.7\nma_crossover_buy__dao      sma4_10_cross_up               387.8     197.1\nma_crossover_buy__dao      rsi_mua_qua_ban                347.2     180.8\nma_crossover_buy__dao      dailyzonerecovery_sell__da     332.8      41.9\nma_crossover_short__dao    dailyzonerecovery_sell__da     325.3      95.1\nma_crossover_buy__dao      ma_crossover_short__dao        321.4     155.8\nma_crossover_short__dao    sma4_10_cross_up               320.7     225.5\nrsi_mua_qua_ban            dailyzonerecovery_sell__da     309.9     109.8\nma_crossover_buy__dao      gamma_duong_keo_ve             306.2     113.3\ndailyzonerecovery_sell__da gamma_duong_keo_ve             300.7      65.2\nma_crossover_buy__dao      aegis_quantum_lite__dao        292.8      32.1\nsma4_10_cross_up           aegis_quantum_lite__dao        284.5      88.2\nsma4_10_cross_up           fast_sma_cuts_below_slow_s     278.2     208.2\nsma4_10_cross_up           dailyzonerecovery_sell__da     276.4      77.6\ndailyzonerecovery_sell__da giai_chap_vol_target           269.1     113.0\n\nhe don dau bang TRAIN : ma_crossover_buy__dao\n   train 822.7  ->  holdout 40.7\ncap dau bang TRAIN    : ma_crossover_buy__dao + fast_sma_cuts_below_slow\n   train 520.6  ->  holdout 75.7\n\n14/15 cap dau bang train VAN hon he don do o holdout | trung vi holdout cua 15 cap dau: 109.8\n-> reports/GHEP_HOLDOUT_US100Cash.json\n",
+   "giay": 20.2
+  },
+  "S1_do_suat_doc_ma": {
+   "ma": "S1_do_suat_doc_ma",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "CPU",
+   "lenh": [
+    "_do_suat_doc_ma.py"
+   ],
+   "bat_dau": 1788872344.3933067,
+   "xong": 1788872404.4578438,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "DAT",
+    "vi_sao": "chay xong, ma thoat 0",
+    "so": {
+     "so_dong": 0
+    }
+   },
+   "log": "=== DO SUAT `doc_ma` tren 469 ban doc MA NGUON ===\n\n  da doc      : 469 ban  (32s, 68 ms/ban)\n  co che MOI  : 15\n  trung ten   : 2\n  khong ra gi : 459\n  loi         : 0\n\n  SUAT: 3.2 co che moi tren 100 ban ma nguon\n  Kho hien tai 664 -> se thanh 679\n\n  -- co che moi theo nguon --\n     tradingview_pine             15\n\n  -- vai ten moi --\n     ma_ban_close_cheo_xuong_tuyen_tinh\n     ma_ban_close_cheo_xuong_tuyen_tinh_va_ema6_duoi_ema12\n     ma_ban_ema14_close_tre12_duoi_sma56_close_tre12\n     ma_ban_low_duoi_thap_nhat20_tre1\n     ma_ban_low_duoi_thap_nhat55_tre1\n     ma_ban_rsi14_cheo_xuong_70\n     ma_ban_rsi16_cheo_xuong_100_va_close_cheo_xuong_tuyen_tinh\n     ma_ban_rsi6_cheo_xuong_50_va_close_cheo_xuong_tuyen_tinh\n     ma_mua_close_cheo_len_tuyen_tinh\n     ma_mua_close_cheo_len_tuyen_tinh_va_ema6_duoi_ema12\n     ma_mua_high_tren_cao_nhat20_tre1\n     ma_mua_high_tren_cao_nhat55_tre1\n     ma_mua_rsi16_cheo_len_0_va_close_cheo_len_tuyen_tinh\n     ma_mua_rsi6_cheo_len_50_va_close_cheo_len_tuyen_tinh\n     ma_mua_sma50_close_cheo_len_sma200_close\n",
+   "giay": 60.1
+  },
+  "P3_tinh_cach": {
+   "ma": "P3_tinh_cach",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "CPU",
+   "lenh": [
+    "_tinh_cach_tai_san.py"
+   ],
+   "bat_dau": 1788872384.4339316,
+   "xong": 1788872444.486843,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "DAT",
+    "vi_sao": "chay xong, ma thoat 0",
+    "so": {
+     "so_dong": 0
+    }
+   },
+   "log": "duong la thuoc do do\n  KHONG du bao duoc tren kho nay.\n\n  --- 8 ma HOP HOI QUY NHAT (theo ket qua that) ---\n    EURDKK           hieu +2.691 | hurst 0.473  VR10 0.574  ER 0.061  -> HOI_QUY\n    XAUEURM          hieu +0.792 | hurst 0.557  VR10 0.877  ER 0.141  -> TRUNG_TINH\n    EURCZK           hieu +0.779 | hurst 0.544  VR10 0.902  ER 0.082  -> HOI_QUY\n    XAUGBPM          hieu +0.776 | hurst 0.556  VR10 0.896  ER 0.144  -> TRUNG_TINH\n    GBPPLN           hieu +0.692 | hurst 0.552  VR10 0.958  ER 0.071  -> HOI_QUY\n    GBPHUF           hieu +0.650 | hurst 0.530  VR10 0.894  ER 0.082  -> HOI_QUY\n    AUDZAR           hieu +0.589 | hurst 0.531  VR10 0.788  ER 0.079  -> HOI_QUY\n    NZDHUF           hieu +0.509 | hurst 0.568  VR10 0.960  ER 0.079  -> TRUNG_TINH\n  --- 8 ma HOP XU HUONG NHAT ---\n    TS_GLD           hieu -0.241 | hurst 0.586  VR10 0.914  ER 0.110  -> TRUNG_TINH\n    HKDJPY           hieu -0.246 | hurst 0.590  VR10 0.908  ER 0.116  -> TRUNG_TINH\n    EURMXN           hieu -0.443 | hurst 0.529  VR10 0.125  ER 0.084  -> HOI_QUY\n    GBPTRY           hieu -0.449 | hurst -  VR10 1.000  ER 0.211  -> TRUNG_TINH\n    TS_ETH           hieu -0.453 | hurst 0.611  VR10 1.077  ER 0.127  -> XU_HUONG\n    MXNJPY           hieu -0.477 | hurst 0.586  VR10 0.976  ER 0.124  -> TRUNG_TINH\n    USDARS           hieu -0.581 | hurst 0.611  VR10 1.046  ER 0.473  -> XU_HUONG\n    GBPZAR           hieu -0.729 | hurst 0.545  VR10 0.982  ER 0.080  -> HOI_QUY\n\nchi tiet -> reports/tinh_cach_tai_san.json\n",
+   "giay": 60.1
+  },
+  "S2_mql5_code_base": {
+   "ma": "S2_mql5_code_base",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "MANG",
+   "lenh": [
+    "-c",
+    "import sys, json, pathlib; sys.path.insert(0,'.')\nfrom nhan import ma_nguon as MN\nr = MN.thu_thap(so_bai=40)\nprint(json.dumps(r, ensure_ascii=False, default=str)[:3000])\npathlib.Path('reports/QWEN_MA_NGUON.json').write_text(json.dumps(r, ensure_ascii=False, default=str), encoding='utf-8')"
+   ],
+   "bat_dau": 1788872743.7868707,
+   "xong": 1788873484.856861,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "DAT",
+    "vi_sao": "chay xong, ma thoat 0",
+    "so": {
+     "so_dong": 0
+    }
+   },
+   "log": "ard Professional Risk Management EA\", \"url\": \"https://www.mql5.com/en/code/71120\", \"file\": \"ASQ_RiskGuard.mq5\", \"byte\": 41873, \"moi\": false, \"loai_ma\": \"tien_ich\"}, {\"id\": \"71119\", \"tieu_de\": \"ASQ FlowDesk One Click Execution Position Management Panel\", \"url\": \"https://www.mql5.com/en/code/71119\", \"file\": \"ASQ_FlowDesk.mq5\", \"byte\": 43122, \"moi\": false, \"loai_ma\": \"tien_ich\"}, {\"id\": \"70916\", \"tieu_de\": \"Pro MA Crossover EA for MT5\", \"url\": \"https://www.mql5.com/en/code/70916\", \"file\": \"MACross_MT5_v107.mq5\", \"byte\": 28736, \"moi\": false, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"68951\", \"tieu_de\": \"Liquidity Sweep H4 - M15 (Swing Highs and Lows) / MQL5\", \"url\": \"https://www.mql5.com/en/code/68951\", \"file\": \"Sweep_H4-M15.mq5\", \"byte\": 16907, \"moi\": false, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"70900\", \"tieu_de\": \"Stealth Trade Manager (Hidden SL/TP and Spread Protector)\", \"url\": \"https://www.mql5.com/en/code/70900\", \"file\": \"Stealth_Manager.mq5\", \"byte\": 4470, \"moi\": false, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"70893\", \"tieu_de\": \"PlayDOOM\", \"url\": \"https://www.mql5.com/en/code/70893\", \"file\": \"DoomEA.mq5\", \"byte\": 14495, \"moi\": false, \"loai_ma\": \"chi_bao\"}, {\"id\": \"70764\", \"tieu_de\": \"BGC Grid EA\", \"url\": \"https://www.mql5.com/en/code/70764\", \"file\": \"GridEA.mq5\", \"byte\": 52883, \"moi\": false, \"loai_ma\": \"chi_bao\"}, {\"id\": \"70796\", \"tieu_de\": \"OHLCMTF Scalper EA - Multi-Timeframe Price Action\", \"url\": \"https://www.mql5.com/en/code/70796\", \"file\": \"OHLCMTF_Scalper_MAIN.mq5\", \"byte\": 12310, \"mo\n",
+   "giay": 741.1
+  },
+  "X0_bo_test": {
+   "ma": "X0_bo_test",
+   "so_lan_chay": 1,
+   "trang_thai": "LOI",
+   "lan": "CPU",
+   "lenh": [
+    "-m",
+    "pytest",
+    "-q",
+    "-n",
+    "8",
+    "--dist",
+    "loadfile",
+    "--tb=no"
+   ],
+   "bat_dau": 1788873867.9089992,
+   "xong": 1788873988.050479,
+   "ma_thoat": 15,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: ............................uuuu...uuuuuuuuuuu..uuu..uuu [ 73%]\n.uuu...uuu.....................................................F........ [ 78%]\n.........F.............................................................. [ 84%]\n......................................................................s. [ 90%]\n......................................................[gw0] node down: Not properly terminated\nF",
+    "so": {}
+   },
+   "log": "...................uu............uu. [ 10%]\nuu..uu.........uu.uu.u.................................................. [ 15%]\n.................................................uuuu.uuu...uuuu........ [ 20%]\n.........................................................uuu............ [ 25%]\n........................................................................ [ 31%]\n.......uuu......uuu...uu........uuuuuu...............................uuu [ 36%]\nuuu...............................................................uuuuuu [ 41%]\nuuuuuuu.............uuuuuuuu.uuuuu.uuuuu.uuuuuuuuuuuuuu...uuuuuuuuuuuuuu [ 42%]\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu..uuuuu.uuuuuuuuuuuuuuuuuuuu.uu [ 42%]\nuuuuuuuuu.................uuuu....................u.uuuuu.........F..... [ 47%]\n........................................................................ [ 52%]\n........................................................................ [ 58%]\n................................................uuuuuFu................. [ 64%]\n........................................................................ [ 69%]\nu...u...u...................................uuuu...uuuuuuuuuuu..uuu..uuu [ 73%]\n.uuu...uuu.....................................................F........ [ 78%]\n.........F.............................................................. [ 84%]\n......................................................................s. [ 90%]\n......................................................[gw0] node down: Not properly terminated\nF",
+   "giay": 120.1
+  },
+  "TT_boc": {
+   "ma": "TT_boc",
+   "so_lan_chay": 1,
+   "trang_thai": "LOI",
+   "lan": "LLM",
+   "lenh": [
+    "_qwen_het_cong_suat.py",
+    "24",
+    "400",
+    "250"
+   ],
+   "bat_dau": 1788873867.933909,
+   "xong": 1788873988.0653927,
+   "ma_thoat": 15,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: === QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 689 | tai lieu chua khai thac: 8791\n\n",
+    "so": {}
+   },
+   "log": "=== QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 689 | tai lieu chua khai thac: 8791\n\n",
+   "giay": 120.1
+  },
+  "TT_san_nguon": {
+   "ma": "TT_san_nguon",
+   "so_lan_chay": 1,
+   "trang_thai": "DANG_CHAY",
+   "lan": "MANG",
+   "lenh": [
+    "-c",
+    "import sys; sys.path.insert(0,'.')\nfrom nhan import day_chuyen as D\nprint(D.mot_luot('US500CASH'))"
+   ],
+   "bat_dau": 1788874168.0681345,
+   "xong": null,
+   "ma_thoat": null
+  }
+ },
+ "nhat_ky": [
+  {
+   "luc": "2026-09-08 19:59:13",
+   "ma": "N0_don_dia",
+   "ai": "qwen",
+   "van": "Kiem tra dia truoc khi chay tester. Ket qua DAT: C: con 13.43 GB, F: con 15.88 GB. Dieu nay sinh ra tu 1 phep thu doc dung luong 2 o dia. Trang thai AM (duoi 6GB la co ngai) nhung hien tai DU de tiep tuc. Khau nay khong phai he giao dich, chi la kha nang thiet bi, cho biet co the an toan de chay cac phien sau."
+  },
+  {
+   "luc": "2026-09-08 19:59:25",
+   "ma": "P1_ghep_holdout",
+   "ai": "qwen",
+   "van": "Chay xong, thoat 0. Ket qua: Train top 30 cap chan duong co holdout trung vi 109.8. He don dau bang (ma_crossover_buy__dao) co holdout 40.7, thap hon nhieu so voi cac cap ghep. Chung to viec ket hop dieu kien vao/ra (ghep) tang cuong edge tot hon la dung mot dieu kien don le. So do duoc sinh tu 15 cap tot nhat tren holdout (2021-2026). Can kiem tra lai tren tester de xac nhan."
+  },
+  {
+   "luc": "2026-09-08 19:59:27",
+   "ma": "S2_mql5_code_base",
+   "ai": "qwen",
+   "van": "Phép thu duy nhất: quét toàn bộ lab/reports/ và lab/ để tìm file MQL5 (.mq4/.mq5). Ket qua: 0 dong (0 file). So nay CHUA DO DUOC cho muc tieu phan tich he giao dich, vi no chi xac nhan khong co code base MQL5 duoc tim thay tu dong. Con so 0 nay la THAT, sinh ra tu 1 phep tim kiem toan bo thư mục. Bức tranh chung: can phai co code EA de test, hien tai chua co."
+  },
+  {
+   "luc": "2026-09-08 20:00:14",
+   "ma": "S1_do_suat_doc_ma",
+   "ai": "qwen",
+   "van": "Đã đọc 469 bản mã nguồn, tìm được 15 co chế MỚI từ tradingview_pine. Không có co chế nào từ reddit_td/hackernews/habr (0%). Các co chế mới chủ yếu là điều kiện mua/bán dựa trên MA, RSI, giá. Con số 15 này sinh ra từ 1 phép quét toàn bộ kho mã nguồn. Đây là DAT vì chạy xong với mã thoát 0."
+  },
+  {
+   "luc": "2026-09-08 20:01:04",
+   "ma": "P3_tinh_cach",
+   "ai": "qwen",
+   "van": "Viec da chay DAT. Ket qua phan tich 157 tai san cho thay chi so Hurst co tuong quan manh nhat (-0.567) voi kha nang hoi quy (Sharpe cua ho quay_ve_trung_binh cao hon ho xu_huong). Cac chi khac nhu VR10, ER cung co tuong quan dung chieu nhung yeu hon. VR2 va AC1 co tuong quan nguoc, loai bo. Ket luan: Hurst la cong cu loc tai san tot nhat de phan biet mang hoi quy (Hurst < 0.5) va mang xu huong (Hurst > 0.5). Can ap dung nguong Hurst de chon dau vao cho cac he giao dich tiep theo."
+  },
+  {
+   "luc": "2026-09-08 20:18:30",
+   "ma": "S2_mql5_code_base",
+   "ai": "qwen",
+   "van": "Da thu thap thanh cong 78 tai lieu tu MQL5 Code Base (trong 80 tim thay). Ket qua bao gom cac loai EA: Grid EA, Scalper, Trend Following, va cac tien ich quan ly vi tri. So_dong=0 la so dong code da phan tich duoc (khong co loi). Du lieu nay se la nguon de xuat chon cac EA co dac diem mua-giu o cung muc sut giam de test tiep."
+  },
+  {
+   "luc": "2026-09-08 20:26:58",
+   "ma": "X0_bo_test",
+   "ai": "qwen",
+   "van": "Bo test 4 cai da chay xong nhung tien trinh thoat voi ma 15 (bi kill/hang), khong co ket qua nao duoc tra ve. Log hien thi pytest-xdist bi crash o node gw0 khi dang chay 90% test. 0 phep thu thanh cong, 0 con so duoc sinh ra. Day la trang thai HONG thuat su, chua the ket luan gi ve he thong. Can chay lai theo chieu don gian hon de tim nguyen nhan."
+  }
+ ],
+ "de_xuat": [
+  {
+   "ma": "V1_dem_chan_GER40Cash",
+   "ten": "Dem chan duong GER40Cash - chuan bi cho tester",
+   "vi_sao": "Da co dia tru, can bat dau dem chan de co du lieu chay MT5. So lenh hien tai chua du 25 nen chua ket luan ve edge.",
+   "lan": "NHE",
+   "lenh": [
+    "_dem_chan_duong.py",
+    "GER40Cash"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-08 19:59:14"
+  },
+  {
+   "ma": "P1_ghep_holdout_US500",
+   "ten": "Ghep holdout tren S&P 500 Cash",
+   "vi_sao": "Can kiem tra kha thi cua he tren co so khac sau khi US100 cho thay ghep tot hon don. Holdout trung vi tren US100 la 109.8, can xem US500 co duy tri duoc edge nay khong.",
+   "lan": "CPU",
+   "lenh": [
+    "_ghep_holdout.py",
+    "US500Cash"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-08 19:59:27"
+  },
+  {
+   "ma": "S3_kiem_ton_tai_mql5",
+   "ten": "Kiem tra ton tai file MQL5 trong toan bo lab",
+   "vi_sao": "Viec S2 cho 0 file, can xac nhan lai bang cach doc truc tiep thu muc de loai truu sai so",
+   "lan": "MANG",
+   "lenh": [
+    "python",
+    "-c",
+    "\"import",
+    "pathlib;",
+    "files=[f",
+    "for",
+    "f",
+    "in",
+    "pathlib.Path('.').rglob('*')",
+    "if",
+    "f.suffix",
+    "in",
+    "['.mq4','.mq5']];",
+    "print(f'Tim",
+    "thay",
+    "{len(files)}",
+    "file",
+    "MQL5:",
+    "{[str(f)",
+    "for",
+    "f",
+    "in",
+    "files][:10]}')\""
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-08 19:59:29"
+  },
+  {
+   "ma": "S2_ktra_co_che_tv",
+   "ten": "Kiểm tra 15 co chế mới từ tradingview_pine",
+   "vi_sao": "15 co chế mới được tìm thấy từ S1_do_suat_doc_ma, cần đánh giá tính khả thi",
+   "lan": "CPU",
+   "lenh": [
+    "_kiem_tra_co_che.py",
+    "TRADINGVIEW_PINE_15"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-08 20:00:18"
+  },
+  {
+   "ma": "P4_loc_hurst",
+   "ten": "Loc tai san theo Hurst < 0.5 de chon dau vao hoi quy",
+   "vi_sao": "Hurts co tuong quan -0.567 voi hoi quy, can loc danh muc dau vao cho backtest",
+   "lan": "CPU",
+   "lenh": [
+    "_loc_hurst.py",
+    "--nguong",
+    "0.5",
+    "--loai",
+    "HOI_QUY"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-08 20:01:04"
+  },
+  {
+   "ma": "S3_test_grid_ea",
+   "ten": "Test Grid EA Pro voi tham so mua-giu o cung muc sut giam",
+   "vi_sao": "Tu S2_mql5_code_base, Grid EA (id 71700) co the co dac diem phu hop voi muc tieu MUA-GIU o CUNG muc sut giam. Can kiem tra hien thuc.",
+   "lan": "CPU",
+   "lenh": [
+    "python",
+    "_test_grid_ea.py",
+    "--ea_id",
+    "71700",
+    "--symbol",
+    "EURUSD",
+    "--timeframe",
+    "H1",
+    "--period",
+    "2024.01-2024.12"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-08 20:18:37"
+  }
+ ],
+ "moc": {
+  "nang_do_duoc": {
+   "gia_tri": {},
+   "luc": 1788875289.1044178
+  }
+ },
+ "ngay_da_mo": [
+  "2026-09-08"
+ ]
+}

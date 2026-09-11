@@ -1,6 +1,8 @@
 {
  "_doc_truoc": [
   "BANG VIEC cho qwen chay may ngay lien. Sua file nay la sua viec cua may.",
+  "KE HOACH XAY: viec ma `B*` phuc vu lab/KE_HOACH_XAY.md. Viec `C*` la",
+  "CONG CLAUDE - can_nguoi=true, qwen KHONG chay, chi hien ra va cho `q xong <ma>`.",
   "",
   "Truong bat buoc: ma, ten, lan, uu_tien, ngay, lenh (hoac soan_ma), cong.",
   "  lan     TESTER | CPU | LLM | MANG | NHE     -> quyet dinh chay song song bao nhieu",
@@ -577,6 +579,134 @@
     "toi_thieu": 25
    },
    "ghi_chu": "H4 chi co tu 2016. Dem bar MOI NAM truoc khi tin - 2012-2015 H4 va D1 co so bar y het nhau."
+  },
+  {
+   "ma": "C1_khau_doc",
+   "ten": "[CLAUDE] Khoi 1A - sua khau doc: loai_cau co do tin cay, dieu_kien_trong_cau tra phan bo sot",
+   "vi_sao": "Baseline 11/09: 150/150 cau tang A ra 0 dieu kien, ly do doc_hieu tra ve la 'khong tach duoc cap'. loai_cau nhan ca cau ke chuyen ('you go for a sell'). Do phu cao, do chinh xac gan 0. Day la cho nghen TRUC TIEP, khong phai tu vung.",
+   "lan": "NHE",
+   "uu_tien": 1,
+   "ngay": 1,
+   "can_nguoi": true,
+   "lenh": [
+    "-c",
+    "print('viec cua Claude - xem KE_HOACH_XAY.md khoi 1A')"
+   ],
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "toi_da_phut": 2,
+   "phu_thuoc": [],
+   "ghi_chu": "Xong thi go `q xong C1_khau_doc`. Cong: tang A NOI_DUOC >= 35% VA NOI_MOT_PHAN > 0."
+  },
+  {
+   "ma": "C1_toan_hang_chet",
+   "ten": "[CLAUDE] Khoi 1A - truy 12 toan hang CHUA AI DUNG bao gio",
+   "vi_sao": "12/43 toan hang chua duoc dung mot lan nao trong 689 co che: bollinger cci dem_lien_tiep dong_luong gann_sq9 obv phuong_sai smma tong trang_thai_lat tuong_quan wma. Chung khong duoc SINH RA, hay sinh ra roi bi LOAI? Cung ho nghi ngo voi loi closure DSL nuot tham so (152/170 mau diec). Them toan hang thu 44 truoc khi tra loi cau nay la lang phi.",
+   "lan": "NHE",
+   "uu_tien": 1,
+   "ngay": 1,
+   "can_nguoi": true,
+   "lenh": [
+    "-c",
+    "print('viec cua Claude - xem KE_HOACH_XAY.md khoi 1A')"
+   ],
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "toi_da_phut": 2,
+   "phu_thuoc": [],
+   "ghi_chu": "Cong: so toan hang chua ai dung <= 6, moi cai con lai co ly do ghi ra."
+  },
+  {
+   "ma": "B1_do_corpus",
+   "ten": "THUONG TRUC: do lai tran ngu phap (tang A/B/C) - hat co dinh nen so sanh duoc",
+   "vi_sao": "Cong nghiem thu cua khoi 1. Hat ngau nhien co dinh 20260911 nen hai lan chay lay CUNG corpus - khong co cai do thi con so sau khi sua vo nghia. Baseline 11/09: tang A 0,0% NOI_DUOC, 12/43 toan hang chet, tang B 158 cau bi tu choi.",
+   "lan": "CPU",
+   "uu_tien": 2,
+   "ngay": 1,
+   "lenh": [
+    "_corpus_ngu_phap.py",
+    "150"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/CORPUS_NGU_PHAP.json"
+   },
+   "toi_da_phut": 20,
+   "lap": 30,
+   "cach_nhau_gio": 4,
+   "phu_thuoc": [],
+   "ghi_chu": "NOI_DUOC 0 VA NOI_MOT_PHAN 0 cung luc = bo do hong, khong phai ket qua am. Bao ngay."
+  },
+  {
+   "ma": "B1_corpus_vang",
+   "ten": "qwen dung CORPUS VANG: cau THAT SU phat bieu mot luat, co nguong va so sanh",
+   "vi_sao": "Bo do dang phai dua vao loai_cau, ma loai_cau nhan ca cau ke chuyen. Can mot corpus ma tung cau da duoc xac nhan la LUAT (co toan hang + phep so sanh + nguong). Day dung la viec cua qwen: khoi luong doc thuan, va code cham lai duoc bang kiem_khai_bao.",
+   "lan": "LLM",
+   "uu_tien": 2,
+   "ngay": 1,
+   "lenh": [
+    "_qwen_het_cong_suat.py",
+    "6",
+    "300",
+    "200"
+   ],
+   "cong": {
+    "kieu": "trong_log",
+    "tu": [
+     "co che",
+     "khai bao"
+    ]
+   },
+   "toi_da_phut": 180,
+   "lap": 20,
+   "cach_nhau_gio": 3,
+   "phu_thuoc": [],
+   "ghi_chu": "Uu tien tai lieu co tu vung vung/song - tang B cho thay do la hai nhom bi tu choi nhieu nhat (60 va 46)."
+  },
+  {
+   "ma": "C2_so_bai_hoc",
+   "ten": "[CLAUDE] Khoi 2 - bang bai_hoc + nhan/bai_hoc.py + b da-thu",
+   "vi_sao": "hethong.txt neu dich danh 'bo tong ket de rut ra chien luoc, ghi lai huong nen tranh'. Grep toan bo nhan/ tru/ qwen/ ra 0 file. Chuc nang do dang song trong 130 file memory cua Claude, NGOAI repo - mat phien la mat. Va 1.255 dong FAIL trong ket_qua khong tra cuu duoc.",
+   "lan": "NHE",
+   "uu_tien": 3,
+   "ngay": 2,
+   "can_nguoi": true,
+   "lenh": [
+    "-c",
+    "print('viec cua Claude - xem KE_HOACH_XAY.md khoi 2')"
+   ],
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "toi_da_phut": 2,
+   "phu_thuoc": [
+    "C1_khau_doc"
+   ],
+   "ghi_chu": "Cong: >=120 the, 16/20 cau hoi tra dung, quantlab canh bao khi gia thuyet moi trung huong da chet."
+  },
+  {
+   "ma": "B2_the_bai_hoc",
+   "ten": "qwen phan loai 1.255 dong FAIL + 192 JSON thanh the bai hoc",
+   "vi_sao": "Khoi luong thuan, code cham lai duoc bang schema. Dung so truong cua LLM (doc/viet) va tranh so doan cua no (cham dat/am).",
+   "lan": "LLM",
+   "uu_tien": 3,
+   "ngay": 2,
+   "lenh": [
+    "-c",
+    "import sys;sys.path.insert(0,'.')\nprint('CHUA_DO_DUOC: nhan/bai_hoc.py chua ton tai - cho C2_so_bai_hoc')\nsys.exit(3)"
+   ],
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "toi_da_phut": 240,
+   "lap": 10,
+   "cach_nhau_gio": 6,
+   "phu_thuoc": [
+    "C2_so_bai_hoc"
+   ],
+   "ghi_chu": "Thoat ma 3 khi chua co nhan/bai_hoc.py - dung doc la AM."
   }
  ]
 }

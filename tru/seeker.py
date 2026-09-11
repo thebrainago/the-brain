@@ -108,6 +108,29 @@ def _lay(url: str, timeout: int = 25) -> str | None:
         _can_vuot = any(t in url for t in _DV.BAN_DO)
     except Exception:
         _DV, _can_vuot = None, False
+    # THU DNS THAT TRUOC, CHI EP BAN DO KHI THAT BAI (08/09/2026).
+    #
+    # Truoc do `bat()` duoc goi VO DIEU KIEN cho moi ten trong `BAN_DO`. Do
+    # duoc hom nay: `www.mql5.com` phan giai that ra `36.255.76.151` va tra
+    # **200 / 64.844 byte**, con IP trong ban do (`203.29.60.247`) da cu va tra
+    # **403**. Tuc cach vá song lau hon cai no vá, roi tro thanh chinh cai loi -
+    # va no doc y het "nguon rong": mql5_code tai 0 file suot ca chien dich, du
+    # `kiem_mang` bao OK.
+    #
+    # Giu ban do lai chu khong xoa: DNS bi dau doc la co that va co the quay
+    # lai. Nhung no phai la DUONG LUI, khong phai duong chinh.
+    try:
+        import requests
+        r = requests.get(url, timeout=timeout, headers=_DAU_TRANG_DUYET)
+        LAN_LAY_CUOI.update({"url": url, "ma": r.status_code, "loi": None})
+        if r.status_code == 200:
+            return r.text
+    except Exception as e:
+        LAN_LAY_CUOI.update({"url": url, "ma": None,
+                             "loi": f"{type(e).__name__}: {str(e)[:100]}"})
+        if not _can_vuot:
+            return None
+
     if _can_vuot:
         _DV.bat()
     try:

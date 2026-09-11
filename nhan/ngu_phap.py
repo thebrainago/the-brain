@@ -499,6 +499,40 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         return x.abs()
     if cb == "tong":                       # 19 lan trong ma that
         return x.rolling(n).sum()
+
+    # --- GANN SQUARE OF 9: mot MUC GIA HINH HOC ---
+    #
+    # Them 08/09/2026 theo gia thuyet #4 cua chu du an. Vi sao can: "square of
+    # nine" xuat hien **0 lan** trong ca 574 co che cua kho, trong khi no la mot
+    # ho muc tinh co that va rat pho bien. Ngu phap co `vung` (bien tren/duoi
+    # tinh tai bar sinh) nen chi con thieu ham tinh RA muc; them mot toan hang
+    # la du, khong can mot he rieng - va nho the no thua huong nguyen cong
+    # placebo/holdout/MDE thay vi tu do bang mot script roi.
+    #
+    #     muc = (sqrt(nen) + huong * k * goc/360) ** 2
+    #
+    # `nen` la mot toan hang bat ky (thuong la `thap_nhat`/`cao_nhat` n bar =
+    # mot pivot), nen KHONG co nhanh nhin truoc: no chi doc qua khu nhu moi
+    # toan hang khac.
+    #
+    # BA CHOT CHAN cua chinh ho nay:
+    #   - gia am hoac 0 -> sqrt khong xac dinh. Tra NaN, khong tra 0: mot muc
+    #     bang 0 se bien moi so sanh thanh mot dieu kien hien nhien.
+    #   - THANG DO. Muc cach nhau ~2*sqrt(nen)*goc/360. Tren vang (nen ~2000)
+    #     buoc la ~4,0 diem; tren EURUSD (nen ~1,08) buoc la ~0,0029. Cung mot
+    #     `goc` cho ra do hiem HOAN TOAN khac nhau giua hai tai san - dung bug,
+    #     dung ky vong (chu du an do duoc: "0 lenh o tai san bien dong thap").
+    #     Cach chuyen dung tai san la `ngoai_sinh.quy_doi` KHOP TY LE KICH HOAT,
+    #     khong phai bung nguyen con so `goc`.
+    if cb == "gann_sq9":
+        goc = float(t.get("goc", 45.0) or 45.0)
+        k = float(t.get("k", 1.0) or 1.0)
+        huong = 1.0 if float(t.get("huong", 1) or 1) >= 0 else -1.0
+        nen = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+               else _cot(df, str(t.get("cot", "close")).lower()))
+        can = np.sqrt(nen.where(nen > 0))
+        return (can + huong * k * goc / 360.0) ** 2
+
     raise KeyError(f"chi bao khong biet: '{cb}'")
 
 
@@ -526,6 +560,8 @@ CHI_BAO_CO = {
     # gop danh sach toan hang
     "tb_cua_cac", "cao_nhat_cua_cac", "thap_nhat_cua_cac", "tong_cua_cac",
     "tuyen_tinh", "tuong_quan",
+    # muc gia hinh hoc (08/09/2026)
+    "gann_sq9",
     # co nho trang thai
     "trang_thai_lat", "dem_lien_tiep",
     # bien doi mot toan hang con (qua truong `cua`)
@@ -541,6 +577,7 @@ CHI_BAO_NHAN_COT = {
     "gia", "ema", "sma", "wma", "smma", "macd", "bollinger", "dong_luong",
     "cao_nhat", "thap_nhat", "tb", "do_lech", "phuong_sai", "zscore",
     "phan_vi", "doi", "doi_pct", "tre", "tuyet_doi", "tong", "rsi", "cci",
+    "gann_sq9",
 }
 
 

@@ -27,6 +27,18 @@ Nen: chay `Model=0` (every tick), va neu ket qua duong thi **bat buoc chay lai
 `Model=4` (tick THAT cua san)** truoc khi tin. Hai mo hinh khop nhau thi tin;
 lech nhau thi con so la cua mo hinh, khong phai cua thi truong.
 
+## LUOI THO TRUOC, TINH SAU (08/09/2026)
+
+Ban dau luoi la 6x6x4x4x2 = **1.152 pass** o Model=0. Tren may nay (10 loi,
+C: con 8 GB) tester chet ca loat voi hai loi ghi ro trong
+`Tester/logs`: `"no memory for ticks generating"` va `"Tester Agent is wrong
+for task processing due low disk space"` - metatester64 chay 2 gio ma chi ton
+12 giay CPU. Sinh tick every-tick cho 20 agent song song khong du bo nho.
+
+Nen luoi ha ve 2x3x2x2x2 = **48 pass**. Neu co vung duong thi moi quet tinh
+quanh no. Day cung la thu tu dung ve phuong phap: do HINH DANG truoc, chon
+tham so sau [[cao-nguyen-hay-cai-gai]].
+
 ## BON CAU HOI, LA BON CHIEU TOI UU HOA
 
     InpKhoang   dat lenh cach gia bao nhieu ATR
@@ -56,6 +68,15 @@ KHUNG = sys.argv[2] if len(sys.argv) > 2 else "H1"
 TEN_EA = "StopHaiDau"
 VON = GH.VON
 NAM = DG.NAM
+
+# CUA SO NGAN CHO VONG THO (08/09/2026). Model=0 buoc MOI agent dung mot cache
+# tick RIENG cho ca cua so. Voi 20 agent x 2016-2026 tren H1, do la ~470 MB moi
+# agent = **9,4 GB** - dung bang so dia da bien mat, va no lam sqlite cua The
+# Brain nem `database or disk is full`. Quet tho 3 nam truoc; chi mo rong khi
+# da co cau hinh duong.
+DAU = "2023.01.01"
+CUOI = DG.CUOI
+TOI_THIEU_GB = 6.0          # duoi muc nay thi KHONG khoi dong tester
 
 EA = r"""//+------------------------------------------------------------------+
 //| StopHaiDau - dat BuyStop va SellStop hai phia, cai nao khop thi
@@ -179,7 +200,22 @@ void OnTick()
 """
 
 
+def _dia_trong_gb() -> float:
+    import shutil
+    return shutil.disk_usage("C:\\").free / (1024 ** 3)
+
+
 def chay(model: int) -> list[dict]:
+    # CHOT CHAN DIA. 08/09/2026 tester chay het 9,4 GB roi lam ca sqlite cua
+    # The Brain chet voi `database or disk is full`. Mot phep thu KHONG duoc
+    # phep lam hong so cua du an.
+    con = _dia_trong_gb()
+    if con < TOI_THIEU_GB:
+        raise SystemExit(
+            "DUNG: C: chi con %.2f GB (can >= %.1f). Tester Model=0 se lap day "
+            "dia va lam hong nao.db. Don dia truoc." % (con, TOI_THIEU_GB))
+    print("  [dia] C: con %.2f GB truoc khi chay" % con, flush=True)
+
     src = C.XM_DATA / "MQL5" / "Experts" / (TEN_EA + ".mq5")
     src.write_text(EA % {"khung": KHUNG}, encoding="utf-8")
     loi = C.bien_dich(src)
@@ -206,14 +242,14 @@ ReplaceReport=1
 ShutdownTerminal=1
 
 [TesterInputs]
-InpKhoang=0.25||0.25||0.25||1.5||Y
-InpTP=0.25||0.25||0.25||1.5||Y
-InpSL=0.5||0.5||0.5||2.0||Y
-InpHan=1||1||1||4||Y
+InpKhoang=0.5||0.5||0.5||1.0||Y
+InpTP=0.25||0.25||0.25||0.75||Y
+InpSL=1.0||1.0||1.0||2.0||Y
+InpHan=2||2||2||4||Y
 InpHuyDauKia=0||0||1||1||Y
 InpLot=0.10||0.10||0||0||N
 InpMagic=26091400||26091400||0||0||N
-""" % (TEN_EA, MA, KHUNG, model, DG.DAU, DG.CUOI, VON, nc), encoding="utf-16")
+""" % (TEN_EA, MA, KHUNG, model, DAU, CUOI, VON, nc), encoding="utf-16")
     for h in (".xml", ".htm"):
         f = C.XM_DATA / (nc + h)
         if f.exists():
@@ -245,8 +281,7 @@ def main() -> int:
     # boi, va neu khong co gi duong o every-tick thi khong co gi de doi chieu.
     for model in (0, 4):
         if model == 4 and not [x for x in gop.get(0, []) if x["lai"] > 0]:
-            print("
-Model=0 khong co cau hinh duong -> bo qua Model=4",
+            print("\nModel=0 khong co cau hinh duong -> bo qua Model=4",
                   flush=True)
             break
         print("\n### Model=%d (%s)"

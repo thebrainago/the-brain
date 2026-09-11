@@ -1,0 +1,29 @@
+84 chan | 2624 nen | cat tai 2021.06.01 (nen 1290): train 2016.06.01..2021.05.31  holdout 2021.06.01..2026.07.28
+khu trung tren train: 84 -> 73 chan
+chan duong tren TRAIN: 73, lay top 30
+
+--- 15 CAP dau bang cua TRAIN, doc ket qua o HOLDOUT ---
+chan A                     chan B                         train   holdout
+ma_crossover_buy__dao      fast_sma_cuts_below_slow_s     520.6      75.7
+ma_crossover_buy__dao      sma4_10_cross_up               387.8     197.1
+ma_crossover_buy__dao      rsi_mua_qua_ban                347.2     180.8
+ma_crossover_buy__dao      dailyzonerecovery_sell__da     332.8      41.9
+ma_crossover_short__dao    dailyzonerecovery_sell__da     325.3      95.1
+ma_crossover_buy__dao      ma_crossover_short__dao        321.4     155.8
+ma_crossover_short__dao    sma4_10_cross_up               320.7     225.5
+rsi_mua_qua_ban            dailyzonerecovery_sell__da     309.9     109.8
+ma_crossover_buy__dao      gamma_duong_keo_ve             306.2     113.3
+dailyzonerecovery_sell__da gamma_duong_keo_ve             300.7      65.2
+ma_crossover_buy__dao      aegis_quantum_lite__dao        292.8      32.1
+sma4_10_cross_up           aegis_quantum_lite__dao        284.5      88.2
+sma4_10_cross_up           fast_sma_cuts_below_slow_s     278.2     208.2
+sma4_10_cross_up           dailyzonerecovery_sell__da     276.4      77.6
+dailyzonerecovery_sell__da giai_chap_vol_target           269.1     113.0
+
+he don dau bang TRAIN : ma_crossover_buy__dao
+   train 822.7  ->  holdout 40.7
+cap dau bang TRAIN    : ma_crossover_buy__dao + fast_sma_cuts_below_slow
+   train 520.6  ->  holdout 75.7
+
+14/15 cap dau bang train VAN hon he don do o holdout | trung vi holdout cua 15 cap dau: 109.8
+-> reports/GHEP_HOLDOUT_US100Cash.json

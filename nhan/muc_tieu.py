@@ -104,14 +104,65 @@ HE_THONG_PHO_THONG = [
 ]
 
 
+#: TU KHOA THEO CHU DE - san mot CO CHE, khong san mot TAI SAN.
+#:
+#: Vi sao can (08/09/2026): `TU_KHOA_THEO_MA` san theo tai san, `HE_THONG_PHO_THONG`
+#: san theo TEN RIENG cua he. Ca hai deu khong bat duoc mot GIA THUYET dang o
+#: dang mo ta co che ("dat stop hai dau roi chot cuc nhanh") - no khong co ten
+#: rieng va khong thuoc tai san nao. Do duoc tren kho 08/09: "square of nine" va
+#: "lead lag" deu **0 lan** trong DSL 574 co che.
+#:
+#: Bon chu de duoi day la bon gia thuyet chu du an dua ra. Xep theo do gan voi
+#: nut that da do: `quan_tri_lenh` dung dau vi ca 574 co che trong kho deu la
+#: TIN HIEU VAO [[quan-tri-la-ho-co-che-thu-hai]].
+TU_KHOA_THEO_CHU_DE = {
+    # GT#2 - breakout grid / stop hai dau. UU TIEN 1: ho co che con thieu.
+    "QUAN_TRI_LENH": [
+        "buy stop sell stop straddle EA", "two sided pending order breakout EA",
+        "news straddle expert advisor mql5", "breakout grid expert advisor",
+        "pending order grid EA mql5", "OCO order breakout strategy",
+        "opening range breakout pending orders", "London breakout straddle EA",
+        "volatility squeeze breakout pending order", "bidirectional breakout system",
+        "straddle order expiration backtest", "quick take profit scalping EA",
+        "trailing stop management expert advisor", "breakeven partial close EA",
+        "position management EA no entry signal", "order management only strategy",
+        "hedging recovery expert advisor mql5", "basket close equity EA",
+    ],
+    # GT#4 - Gann Square of 9. UU TIEN 2: re, cam vao ngu_phap lam nguon vung.
+    "GANN": [
+        "Gann square of nine trading strategy", "Gann square of 9 calculator",
+        "Gann angles trading rules", "Gann fan indicator mt5",
+        "Gann levels expert advisor mql5", "WD Gann method backtest",
+        "Gann wheel price levels intraday", "square of nine support resistance",
+        "Gann Hi Lo activator strategy", "geometric price levels trading",
+    ],
+    # GT#1 - reversal point. UU TIEN 3: chi PHAN KY la moi (kho co 4-6 lan).
+    "DAO_CHIEU": [
+        "RSI divergence expert advisor mql5", "MACD divergence EA backtest",
+        "hidden divergence trading strategy", "regression channel trading strategy",
+        "standard deviation channel EA", "z-score mean reversion strategy",
+        "ATR extension reversal strategy", "overextended price reversal backtest",
+        "divergence detection algorithm trading", "Bollinger band reversal EA",
+    ],
+    # GT#3 - lead-lag. UU TIEN 4: duoi MDE 30 bps, san de biet chu chua de test.
+    "LEAD_LAG": [
+        "lead lag correlation trading strategy", "pairs trading cointegration backtest",
+        "index correlation arbitrage EA", "cross asset lead lag effect",
+        "statistical arbitrage two instruments mt5", "spread trading EA mql5",
+        "correlation hedge expert advisor", "intermarket analysis trading signal",
+    ],
+}
+
+
 def _cac_tu_khoa(ma: str, them: list[str] | None = None) -> list[str]:
-    tk = list(TU_KHOA_THEO_MA.get(ma.upper(), []))
+    tk = list(TU_KHOA_THEO_MA.get(ma.upper(), [])
+              or TU_KHOA_THEO_CHU_DE.get(ma.upper(), []))
     for t in (them or []):
         if t not in tk:
             tk.append(t)
     if not tk:
         raise ValueError(
-            f"khong co tu khoa cho {ma!r} - khai vao TU_KHOA_THEO_MA hoac "
+            f"khong co tu khoa cho {ma!r} - khai vao TU_KHOA_THEO_MA / TU_KHOA_THEO_CHU_DE hoac "
             f"truyen qua tham so `them_tu_khoa`")
     return tk
 

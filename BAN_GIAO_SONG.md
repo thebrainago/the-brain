@@ -4,86 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-05 08:40:42 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8360, 0 phut), dieu_khien_xa.py (pid 14676, 90 phut)
-- `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
-- git: 1c44318 dien tay hai muc ban giao 05/09
-### 2026-09-05 08:47:04 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6780, 0 phut), dieu_khien_xa.py (pid 14676, 97 phut)
-- `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
-- git: 2a4bce1 cong ra tien + bo luan nguoc: he dau tien qua ca hai cong
-### 2026-09-05 09:05:04 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 15144, 0 phut), dieu_khien_xa.py (pid 14676, 115 phut)
-- `dieu_phoi_nen.log`: [Sat 09/05/2026  7:10:02.03] thay DUNG_LAI - khong khoi dong watchdog
-- git: 2a4bce1 cong ra tien + bo luan nguoc: he dau tien qua ca hai cong
-### 2026-09-05 09:17:39 — chup trang thai
-
-- dang chay: ? (pid 11056, 3 phut), ban_giao_song.py (pid 4260, 0 phut), dieu_khien_xa.py (pid 14676, 127 phut)
-- git: 2a4bce1 cong ra tien + bo luan nguoc: he dau tien qua ca hai cong
-### 2026-09-05 09:19:58 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13948, 0 phut), dieu_khien_xa.py (pid 14676, 129 phut)
-- git: d324e84 vong quantlab AUDCAD: tiem nang -> 900 cau hinh -> ket qua am co gia tri
-### 2026-09-05 09:41:35 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16264, 0 phut), dieu_khien_xa.py (pid 14676, 151 phut)
-- git: c62bfc7 boc .set THAT cua Bigmouse, chay tren AUDCAD: 62%/nam voi von 33$ cent
-### 2026-09-05 12:20:06 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5276, 0 phut), dieu_khien_xa.py (pid 14676, 310 phut)
-- git: 995e9b1 ho co che THU HAI: quan tri vi the + thuoc do tinh cach tai san
-### 2026-09-05 12:40:37 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11464, 0 phut), dieu_khien_xa.py (pid 14676, 330 phut)
-- git: f90e448 PASS dau tien: do duoc spread XM US100Cash -> chi phi KHAI thanh SAN
-### 2026-09-05 12:44:17 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10440, 0 phut), dieu_khien_xa.py (pid 14676, 334 phut)
-- git: f90e448 PASS dau tien: do duoc spread XM US100Cash -> chi phi KHAI thanh SAN
-### 2026-09-05 12:59:59 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14888, 0 phut), dieu_khien_xa.py (pid 14676, 349 phut)
-- git: 11c9883 chuan hoa quy trinh QuantLab: 5 buoc, 4 module dung lai duoc
-### 2026-09-05 13:14:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5032, 0 phut), dieu_khien_xa.py (pid 14676, 364 phut)
-- git: 11c9883 chuan hoa quy trinh QuantLab: 5 buoc, 4 module dung lai duoc
-### 2026-09-05 13:29:42 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6632, 0 phut), dieu_khien_xa.py (pid 14676, 379 phut)
-- git: 11c9883 chuan hoa quy trinh QuantLab: 5 buoc, 4 module dung lai duoc
-### 2026-09-05 13:32:41 — chup trang thai
-
-- dang chay: ? (pid 8576, 1 phut), ban_giao_song.py (pid 8668, 0 phut), dieu_khien_xa.py (pid 14676, 382 phut)
-- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
-### 2026-09-05 13:41:09 — chup trang thai
-
-- dang chay: ? (pid 8828, 3 phut), ban_giao_song.py (pid 14972, 0 phut), dieu_khien_xa.py (pid 14676, 391 phut)
-- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
-### 2026-09-05 13:42:46 — chup trang thai
-
-- dang chay: ? (pid 3692, 0 phut), ban_giao_song.py (pid 13568, 0 phut), dieu_khien_xa.py (pid 14676, 392 phut)
-- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
-### 2026-09-05 13:53:06 — chup trang thai
-
-- dang chay: ? (pid 3692, 11 phut), ban_giao_song.py (pid 7312, 0 phut), dieu_khien_xa.py (pid 14676, 403 phut)
-- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
-### 2026-09-05 14:05:39 — chup trang thai
-
-- dang chay: ? (pid 3692, 23 phut), ban_giao_song.py (pid 12316, 0 phut), dieu_khien_xa.py (pid 14676, 415 phut)
-- git: 716598c sua doc_ma: no viet cho Pine nen 389 file .mq5 ra 0 co che
-### 2026-09-05 14:07:59 — chup trang thai
-
-- dang chay: ? (pid 3740, 1 phut), ban_giao_song.py (pid 10384, 0 phut), dieu_khien_xa.py (pid 14676, 417 phut)
-- git: af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc
-### 2026-09-05 14:10:56 — chup trang thai
-
-- dang chay: ? (pid 3740, 4 phut), ban_giao_song.py (pid 1724, 0 phut), dieu_khien_xa.py (pid 14676, 420 phut)
-- git: af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc
-### 2026-09-05 14:20:01 — chup trang thai
 
 - dang chay: ? (pid 10408, 2 phut), ? (pid 3740, 13 phut), ban_giao_song.py (pid 10216, 0 phut), dieu_khien_xa.py (pid 14676, 430 phut)
 - git: af851a3 ho 2 tu 5 len 43 co che: cai trailing/breakeven + noi nguong boc
@@ -404,3 +324,83 @@
 - dang chay: ban_giao_song.py (pid 17580, 0 phut)
 - `DEM_GHEP.log`: @@@@ XONG 23:33
 - git: 9f488f9 ban giao 07/09: nut that la CHAN BAN; kho quan li lenh xong nhung chua luat nao qua cong; Qwen chay tiep tu phien sau
+### 2026-09-07 23:58:25 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20672, 0 phut)
+- `DEM_GHEP.log`: @@@@ XONG 23:33
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 14:30:56 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15904, 0 phut), dieu_khien_xa.py (pid 1984, 24 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 14:40:20 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3432, 0 phut), dieu_khien_xa.py (pid 1984, 34 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 14:44:56 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12552, 0 phut), dieu_khien_xa.py (pid 1984, 38 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 15:01:21 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8768, 0 phut), dieu_khien_xa.py (pid 1984, 55 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 15:26:25 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14492, 0 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 15:38:08 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3956, 0 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 15:44:35 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8216, 0 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
+- git: 3f2d65c chot not ban giao song 07/09
+### 2026-09-08 19:24:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2280, 0 phut), dieu_khien_xa.py (pid 15140, 39 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
+- git: 6940a29 he tu chay `q`: qwen lam tiep bang viec, code cham cong, CPU giu ~85%
+### 2026-09-08 19:29:35 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15992, 0 phut), dieu_khien_xa.py (pid 15140, 44 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
+- git: 5fc7e24 them cong `khong_trong_log` + viec X0_bo_test: 4 test dang hong tu truoc dot nay
+### 2026-09-08 20:07:30 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13108, 0 phut), dieu_khien_xa.py (pid 15140, 82 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
+- git: 48aedc8 doc: nhip 'Claude giao viec - qwen lam viec' + q ban-giao la cua vao khi quay lai
+### 2026-09-08 20:21:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18424, 0 phut), dieu_khien_xa.py (pid 15140, 96 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
+- git: a723f95 do duoc bo dieu toc tren tai that: 0 -> 83% khong vot, va S2 la AM chu khong DAT
+### 2026-09-08 20:31:53 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5052, 0 phut), dieu_khien_xa.py (pid 15140, 107 phut)
+- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
+- git: c8dd97f dieu toc: bo mien tru cho lan LLM/MANG - do that 7,7 loi thay vi 1,2 nhu khai
+### 2026-09-11 18:48:31 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15604, 0 phut), dieu_khien_xa.py (pid 8360, 16 phut)
+- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
+- git: c8dd97f dieu toc: bo mien tru cho lan LLM/MANG - do that 7,7 loi thay vi 1,2 nhu khai
+### 2026-09-11 18:56:52 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5088, 0 phut), dieu_khien_xa.py (pid 8360, 25 phut)
+- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
+- git: c8dd97f dieu toc: bo mien tru cho lan LLM/MANG - do that 7,7 loi thay vi 1,2 nhu khai
+### 2026-09-11 19:05:19 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 21016, 0 phut), dieu_khien_xa.py (pid 8360, 33 phut)
+- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
+- git: c8dd97f dieu toc: bo mien tru cho lan LLM/MANG - do that 7,7 loi thay vi 1,2 nhu khai

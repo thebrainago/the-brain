@@ -91,6 +91,34 @@ DAU_HIEU_LUAT = [
     r"self\.(buy|sell|order_target|close)\s*\(",
     r"\b(SetHoldings|MarketOrder|Liquidate)\s*\(",
     r"class\s+\w*Strateg\w*\s*[\(:]", r"def\s+(next|on_data|OnData|handle_data)\s*\(",
+    # --- MA NGUON: THU VIEN QUANT dang pandas/numpy VECTOR ---
+    #
+    # DO 08/09/2026, va la LAN THU BA cung mot ho loi (03/09 van xuoi -> ma
+    # nguon; 04/09 tieng Anh -> tieng Viet co dau). Lan nay: **60/60 ban github
+    # chua boc cham DUNG 0 diem**, trong do co `joshyattridge/smart-money-concepts`
+    # - 40 KB ma tinh FVG, order block, swing, BOS/CHoCH, tuc DUNG cai ngu phap
+    # `nguyen_thuy_vung` dang can [[nguyen-thuy-vung]].
+    #
+    # Nguyen nhan: moi mau ma nguon o tren deu gia dinh mot EA/strategy co LENH
+    # (`strategy.entry`, `OrderSend`, `self.buy`). Mot THU VIEN chi bao khong dat
+    # lenh bao gio - no tra ve mot DataFrame. Va no viet dang vector
+    # (`breaker[idx] = True`) nen khong co ca so sanh kieu `rsi > 30`.
+    #
+    # Nguong o day co the noi rong an toan: `DIEM_TOI_THIEU = 1` chi quyet dinh
+    # cai gi duoc DUA CHO qwen doc, con cong that la `them_co_che` - no chay
+    # spec tren du lieu that va tu choi cai khong chay duoc. Loc chat o day thi
+    # mat han mot lop nguon; loc rong thi chi ton them vai loi goi qwen.
+    r"\b(order[_\s-]?block|fair[_\s-]?value[_\s-]?gap|break[_\s-]?of[_\s-]?structure)\b",
+    r"\b(fvg|bos|choch|ob)\b\s*[=\[(]", r"\bliquidity[_\s-]?(sweep|pool|grab)\b",
+    r"\bswing[_\s-]?(high|low|highs_lows)\b", r"\bpremium[_\s-]?discount\b",
+    r"def\s+\w*(fvg|order_block|swing|liquidity|structure|retracement|session)\w*\s*\(",
+    r"\b(highs?|lows?|closes?|opens?)\s*\[\s*(idx|i|index)\s*\]\s*[<>=]",
+    r"\bdf\s*\[\s*[\"'](open|high|low|close|volume)[\"']\s*\]",
+    r"\bohlc\s*\[\s*[\"'](open|high|low|close)[\"']\s*\]",
+    r"\.rolling\s*\([^)]*\)\s*\.\s*(max|min|mean|std)\s*\(",
+    r"\bimport\s+(talib|pandas_ta|vectorbt|backtesting|ccxt|yfinance)\b",
+    r"\bfrom\s+(backtesting|vectorbt|pandas_ta|talib)\b",
+
     # --- chung cho moi ngon ngu ---
     r"\b(rsi|ema|sma|macd|atr|adx|stoch|bollinger)\w*\s*[<>=]{1,2}\s*[\d\w]",
     r"\b(sl|tp|stop_?loss|take_?profit)\s*=\s*[\d\w]",

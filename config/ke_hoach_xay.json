@@ -1,0 +1,203 @@
+{
+ "_doc_truoc": [
+  "Trang thai cua lab/KE_HOACH_XAY.md. Cap nhat luc `b ket`.",
+  "KHONG sua tay phan so - sua tay thi mai het so sanh duoc.",
+  "trang_thai: CHUA_BAT_DAU | DANG_LAM | DAT | AM | CHUA_DO_DUOC"
+ ],
+ "chot_luc": "2026-09-11",
+ "dang_o": "1",
+ "moc_dau": {
+  "ngu_phap_toan_hang": 43,
+  "tai_lieu_da_boc": 327,
+  "tai_lieu_tong": 9419,
+  "ket_qua": 1280,
+  "pass": 14,
+  "the_bai_hoc": 0,
+  "file_cham_tien": 0,
+  "video_co_transcript": 0,
+  "kenh_theo_doi": 9,
+  "test_fail": 4,
+  "toan_hang_chua_ai_dung": 12,
+  "kho_co_che": 689,
+  "corpus_tang_A_noi_duoc": 0.0,
+  "corpus_tang_B_bi_tu_choi": 150
+ },
+ "khoi": {
+  "1": {
+   "ten": "Cua vao tri thuc - 1A khau doc truoc, 1B tu vung sau",
+   "trang_thai": "DANG_LAM",
+   "bat_dau": "2026-09-11",
+   "xong": null,
+   "cong": {
+    "corpus_tang_A_noi_duoc": {
+     "nay": 0.0,
+     "can": 0.35,
+     "dat": false
+    },
+    "corpus_tang_A_noi_mot_phan": {
+     "nay": 0,
+     "can": 1,
+     "dat": false
+    },
+    "toan_hang_chua_ai_dung": {
+     "nay": 12,
+     "can": 6,
+     "dat": false
+    },
+    "tang_B_bi_tu_choi": {
+     "nay": 150,
+     "can": 80,
+     "dat": false
+    },
+    "gann_sq9_goi_duoc": {
+     "nay": false,
+     "can": true,
+     "dat": false
+    },
+    "test_fail_khong_tang": {
+     "nay": 4,
+     "can": 4,
+     "dat": null
+    },
+    "ca_kiem_nhin_truoc": {
+     "nay": false,
+     "can": true,
+     "dat": false
+    }
+   },
+   "da_lam": [
+    "_corpus_ngu_phap.py - bo do ba tang, hat co dinh 20260911, da chay lay baseline"
+   ]
+  },
+  "2": {
+   "ten": "Vong phan hoi - so bai hoc + tra cuu ket qua am",
+   "trang_thai": "CHUA_BAT_DAU",
+   "bat_dau": null,
+   "xong": null,
+   "cong": {
+    "the_bai_hoc": {
+     "nay": 0,
+     "can": 120,
+     "dat": null
+    },
+    "cau_hoi_tra_dung": {
+     "nay": null,
+     "can": 16,
+     "dat": null
+    },
+    "evo_co_muc_nen_tranh": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    },
+    "canh_bao_trung_huong_chet": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    }
+   }
+  },
+  "3": {
+   "ten": "Anh chup du lieu bat bien",
+   "trang_thai": "CHUA_BAT_DAU",
+   "bat_dau": null,
+   "xong": null,
+   "cong": {
+    "ket_qua_cu_tai_lap": {
+     "nay": null,
+     "can": 20,
+     "dat": null
+    },
+    "them_file_rac_khong_doi": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    },
+    "sua_file_da_ghim_nem_loi": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    }
+   }
+  },
+  "4": {
+   "ten": "Tang cham tien - paper, han muc, kill-switch, suy giam",
+   "trang_thai": "CHUA_BAT_DAU",
+   "bat_dau": null,
+   "xong": null,
+   "cong": {
+    "so_lenh_paper": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    },
+    "han_muc_kill_switch": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    },
+    "suy_giam": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    },
+    "paper_khop_backtest": {
+     "nay": null,
+     "can": 1.0,
+     "dat": null
+    },
+    "dien_tap_kill_switch": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    }
+   }
+  },
+  "5": {
+   "ten": "Cac cua vao con thieu - video, anh, mimic, uu tien, theo doi",
+   "trang_thai": "CHUA_BAT_DAU",
+   "bat_dau": null,
+   "xong": null,
+   "cong": {
+    "video_co_transcript": {
+     "nay": 0,
+     "can": 80,
+     "dat": null
+    },
+    "co_che_tu_video": {
+     "nay": 0,
+     "can": 20,
+     "dat": null
+    },
+    "b_uu_tien_tra_cung_phien": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    },
+    "kenh_theo_doi": {
+     "nay": 9,
+     "can": 40,
+     "dat": null
+    }
+   }
+  },
+  "6": {
+   "ten": "Quan tri de len he ngoai + khoa tester",
+   "trang_thai": "CHUA_BAT_DAU",
+   "bat_dau": null,
+   "xong": null,
+   "cong": {
+    "de_len_ea_ngoai_doi_so_lenh": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    },
+    "khoa_tester_chan_duoc": {
+     "nay": false,
+     "can": true,
+     "dat": null
+    }
+   }
+  }
+ }
+}

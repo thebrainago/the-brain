@@ -1,0 +1,59 @@
+============================================================================================
+TINH CACH TAI SAN - 194 ma, khung D1
+============================================================================================
+do duoc 157/194 ma
+
+--- MA QUEN THUOC ---
+  ma                 hurst   VR(2)  VR(10)      ac1    nua doi      ER  nhan
+  AUDCAD             0.562   0.936   0.794   -0.065        209   0.089  HOI_QUY
+  EURCAD             0.574   0.987   0.936   -0.013        195   0.094  TRUNG_TINH
+  NZDCAD             0.588   0.979   0.912   -0.022        236   0.097  TRUNG_TINH
+  USDCAD             0.578   0.972   0.940   -0.028       1067   0.094  TRUNG_TINH
+  TS_BTC             0.608   0.977   1.025   -0.023       2025   0.140  XU_HUONG
+  TS_ETH             0.611   0.962   1.077   -0.038        747   0.127  XU_HUONG
+  YH_VANG            0.579   0.985   0.918   -0.015       6946   0.108  TRUNG_TINH
+  XAUUSD             0.598   1.005   0.955    0.004       2342   0.113  TRUNG_TINH
+  XM_US100CASH       0.558   0.908   0.808   -0.092       8014   0.123  HOI_QUY
+  XM_US500CASH       0.553   0.894   0.806   -0.103       3510   0.118  HOI_QUY
+  SP500              0.583   0.984   0.995   -0.016        inf   0.133  TRUNG_TINH
+  EURUSD             0.603   1.007   1.045    0.007       1029   0.125  XU_HUONG
+  USDJPY             0.603   1.012   1.028    0.012       2224   0.135  XU_HUONG
+  YH_DAX             0.578   0.989   0.927   -0.011       3393   0.115  TRUNG_TINH
+
+--- DOI CHIEU: thuoc do co DU BAO duoc khong? ---
+Voi moi ma: hieu Sharpe trung vi cua ho `quay_ve_trung_binh` tru ho
+`xu_huong`. Duong = ma do HOP hoi quy hon. Roi tuong quan hieu do voi
+tung thuoc do tinh cach. |tuong quan| cao = thuoc do du bao duoc.
+
+  so ma doi chieu duoc: 157
+  thuoc do       tuong quan        |r| doc the nao
+  hurst              -0.567      0.567  dung chieu: thap = hop hoi quy
+  vr2                 0.044      0.044  NGUOC chieu ky vong
+  vr10               -0.256      0.256  dung chieu: thap = hop hoi quy
+  ac1                 0.042      0.042  NGUOC chieu ky vong
+  er                 -0.348      0.348  dung chieu: thap = hop hoi quy
+
+  Ky vong: ca 5 thuoc do deu phai AM (gia tri thap = hoi quy hon =
+  ho quay_ve_trung_binh chay tot hon). Cai nao duong la thuoc do do
+  KHONG du bao duoc tren kho nay.
+
+  --- 8 ma HOP HOI QUY NHAT (theo ket qua that) ---
+    EURDKK           hieu +2.691 | hurst 0.473  VR10 0.574  ER 0.061  -> HOI_QUY
+    XAUEURM          hieu +0.792 | hurst 0.557  VR10 0.877  ER 0.141  -> TRUNG_TINH
+    EURCZK           hieu +0.779 | hurst 0.544  VR10 0.902  ER 0.082  -> HOI_QUY
+    XAUGBPM          hieu +0.776 | hurst 0.556  VR10 0.896  ER 0.144  -> TRUNG_TINH
+    GBPPLN           hieu +0.692 | hurst 0.552  VR10 0.958  ER 0.071  -> HOI_QUY
+    GBPHUF           hieu +0.650 | hurst 0.530  VR10 0.894  ER 0.082  -> HOI_QUY
+    AUDZAR           hieu +0.589 | hurst 0.531  VR10 0.788  ER 0.079  -> HOI_QUY
+    NZDHUF           hieu +0.509 | hurst 0.568  VR10 0.960  ER 0.079  -> TRUNG_TINH
+  --- 8 ma HOP XU HUONG NHAT ---
+    TS_GLD           hieu -0.241 | hurst 0.586  VR10 0.914  ER 0.110  -> TRUNG_TINH
+    HKDJPY           hieu -0.246 | hurst 0.590  VR10 0.908  ER 0.116  -> TRUNG_TINH
+    EURMXN           hieu -0.443 | hurst 0.529  VR10 0.125  ER 0.084  -> HOI_QUY
+    GBPTRY           hieu -0.449 | hurst -  VR10 1.000  ER 0.211  -> TRUNG_TINH
+    TS_ETH           hieu -0.453 | hurst 0.611  VR10 1.077  ER 0.127  -> XU_HUONG
+    MXNJPY           hieu -0.477 | hurst 0.586  VR10 0.976  ER 0.124  -> TRUNG_TINH
+    USDARS           hieu -0.581 | hurst 0.611  VR10 1.046  ER 0.473  -> XU_HUONG
+    GBPZAR           hieu -0.729 | hurst 0.545  VR10 0.982  ER 0.080  -> HOI_QUY
+
+chi tiet -> reports/tinh_cach_tai_san.json
