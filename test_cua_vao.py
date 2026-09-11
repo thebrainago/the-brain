@@ -117,6 +117,59 @@ class CuaUuTienDocDuocFILE(unittest.TestCase):
         self.assertTrue(kq["nhan"])
         self.assertIn("cum_chua_hieu", kq)
 
+class CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN(unittest.TestCase):
+    """`ds/mimic` lam dung viec `hethong.txt` neu - suy nguoc tu so lenh - nhung
+    nam trong mot kho git rieng va KHONG file nao trong lab goi toi. Cau noi nay
+    la duong duy nhat, nen no phai tu choi dung cho."""
+
+    def setUp(self):
+        from nhan import mimic_cau_noi as MC
+        self.MC = MC
+
+    def test_dac_trung_khop_thi_dich_duoc(self):
+        r = self.MC.dich_dieu_kien("rsi_14 <= 30.0000")
+        self.assertTrue(r["nhan"], r.get("ly_do"))
+        self.assertEqual(r["dieu_kien"]["trai"], {"chi_bao": "rsi", "n": 14})
+        self.assertEqual(r["dieu_kien"]["phai"], {"hang": 30.0})
+
+    def test_dac_trung_la_BIEU_THUC_thi_tu_choi_va_ghi_hang_doi(self):
+        r = self.MC.dich_dieu_kien("price_position <= 0.2000")
+        self.assertFalse(r["nhan"])
+        self.assertEqual(r["thieu_tu_vung"], "price_position")
+
+    def test_DICH_MOT_PHAN_bi_tu_choi(self):
+        """Bo mot dieu kien khong dich duoc thi luat con lai LONG HON luat goc:
+        no kich hoat nhieu hon han, an mot suat FDR, va khi truot thi ket luan
+        'suy nguoc khong an' - trong khi cai truot la ban dich."""
+        r = self.MC.dich_luat({"conditions": ["rsi_14 <= 25.0000",
+                                              "price_position <= 0.2000"],
+                               "pos_ratio": 0.7, "samples": 90})
+        self.assertFalse(r["nhan"])
+        self.assertIn("LONG HON", r["ly_do"][0])
+
+    def test_dich_tron_ven_thi_ra_spec_hop_le(self):
+        from nhan import ngu_phap as NP
+        r = self.MC.dich_luat({"conditions": ["rsi_14 <= 30.0000",
+                                              "momentum_20 <= -0.0500"],
+                               "pos_ratio": 0.71, "samples": 140},
+                              chieu=1, nguon="ca_kiem")
+        self.assertTrue(r["nhan"], r.get("ly_do"))
+        self.assertEqual(NP.kiem_khai_bao(r["spec"]), [])
+        self.assertEqual(r["spec"]["ho"], "quay_ve_trung_binh")
+
+    def test_luat_YEU_bi_bo_qua(self):
+        kq = self.MC.dich_the({"rules": [
+            {"conditions": ["rsi_14 <= 30.0000"], "pos_ratio": 0.31,
+             "samples": 300}]}, nguon="ca_kiem")
+        self.assertEqual(kq["spec"], [],
+                         "luat co pos_ratio duoi nguong van duoc dich")
+
+    def test_ban_do_khong_duoc_bia_toan_hang_gan_dung(self):
+        """Hai dac trung la bieu thuc PHAI la None. Ep chung vao mot toan hang
+        gan dung se cho ra mot luat KHAC luat cua trader."""
+        self.assertIsNone(self.MC.BAN_DO["price_position"])
+        self.assertIsNone(self.MC.BAN_DO["dist_ma200_atr"])
+
 
 if __name__ == "__main__":
     unittest.main()
