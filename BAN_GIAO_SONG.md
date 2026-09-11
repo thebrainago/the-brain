@@ -9,17 +9,6 @@
 - `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
 - `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
 - git: c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
-### 2026-09-05 23:11:45 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17932, 0 phut), dieu_khien_xa.py (pid 16212, 241 phut)
-- `chi_bao_qwen_20260905.log`: them vao kho     : 0
-- `chi_bao_v2.log`: them vao kho     : 44
-- `chien_luoc_qwen_20260905.log`: them vao kho     : 0
-- `chien_luoc_v2.log`: them vao kho     : 10
-- `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
-- `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
-- `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
-- git: c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
 ### 2026-09-05 23:22:09 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 17556, 0 phut), dieu_khien_xa.py (pid 16212, 251 phut)
@@ -404,3 +393,14 @@
 - `qwen_ultra.log`: [!] X0_bo_test             CHUA_DO_DUOC  |  tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log: summary info =============
 - `test_day_du.log`: 3 failed, 1299 passed, 1 skipped, 1 warning, 468 subtests passed in 1082.15s (0:18:02)
 - git: 5e6c83d trang thai: khoi 2, 3, 4 DAT; kho co che 689 -> 820 trong phien
+### 2026-09-11 22:16:27 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 23588, 0 phut)
+- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `doc_video.log`: }
+- `ghim_ca_kho.log`: }
+- `qwen_ultra.log`: ~ 22:16:15 | san sang 11 | CPU   36% / muc tieu 65%  |  con  5.8 loi  |  dang chay 2  [CPU:1, LLM:1]
+- `test_day_du.log`: ..........................................................
+- `theo_doi.log`: }
+- git: a6de503 khoi 6: khoa tester - va bo quet cho thay 9 duong phong VAN o ngoai khoa

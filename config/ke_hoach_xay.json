@@ -5,7 +5,7 @@
   "trang_thai: CHUA_BAT_DAU | DANG_LAM | DAT | AM | CHUA_DO_DUOC"
  ],
  "chot_luc": "2026-09-11",
- "dang_o": "5",
+ "dang_o": "5 va 6 (song song: 5 cho nguon, 6 lam tiep)",
  "moc_dau": {
   "ngu_phap_toan_hang": 43,
   "tai_lieu_da_boc": 327,
@@ -21,7 +21,9 @@
   "kho_co_che": 689,
   "corpus_tang_A_noi_duoc": 0.0,
   "corpus_tang_B_bi_tu_choi": 150,
-  "kho_co_che_cuoi_phien_11_09": 820
+  "kho_co_che_cuoi_phien_11_09": 891,
+  "the_bai_hoc_cuoi_phien": 232,
+  "video_phu_de": 40
  },
  "khoi": {
   "1": {
@@ -253,49 +255,88 @@
   },
   "5": {
    "ten": "Cac cua vao con thieu - video, anh, mimic, uu tien, theo doi",
-   "trang_thai": "CHUA_BAT_DAU",
-   "bat_dau": null,
+   "trang_thai": "DANG_LAM",
+   "bat_dau": "2026-09-11",
    "xong": null,
    "cong": {
     "video_co_transcript": {
-     "nay": 0,
+     "nay": 40,
      "can": 80,
-     "dat": null
+     "dat": false,
+     "ghi_chu": "Cua CHAY DUOC (8/8 video dau) nhung YouTube chan sau me lien tuc. Con so 80 khong dat vi BI CHAN, khong phai vi cua hong - CHUA_DO_DUOC chu khong phai AM. Duong con lai: cookiesfrombrowser."
     },
     "co_che_tu_video": {
      "nay": 0,
      "can": 20,
-     "dat": null
+     "dat": false,
+     "ghi_chu": "KET QUA AM THAT: 27 ban phu de -> 3 spec -> 0 co che moi. Pham vi: video nhap mon tu tim kiem chung chung. Da ghi the bai hoc `huong_nen_tranh`."
     },
     "b_uu_tien_tra_cung_phien": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "3 duong: file / web (toan_van + trinh duyet) / video. Da thu that ca ba."
     },
     "kenh_theo_doi": {
      "nay": 9,
      "can": 40,
-     "dat": null
+     "dat": false,
+     "ghi_chu": "9 kenh da duyet tay da vao so chinh + co lich theo suat. Con so 40 can SAN THEM kenh, la viec cua seeker chu khong phai cua bo lap lich."
+    },
+    "mimic_noi_vao_duong_chay": {
+     "nay": true,
+     "can": true,
+     "dat": true,
+     "ghi_chu": "nhan/mimic_cau_noi.py; tu choi dich mot phan; 2/7 dac trung vao hang doi tu vung"
     }
-   }
+   },
+   "da_lam": [
+    "nhan/doc_video.py - phu de YouTube, khong can ffmpeg",
+    "nhan/uu_tien.py + b uu-tien <url|file>",
+    "nhan/mimic_cau_noi.py - noi ds/mimic vao duong chay",
+    "nhan/theo_doi.py - 9 kenh + lich theo suat do duoc",
+    "test_cua_vao.py: 25 ca kiem"
+   ],
+   "con_lai": [
+    "YouTube dang chan - can cookiesfrombrowser tro vao ho so Chrome cua du an",
+    "san them kenh de len 40 (viec cua seeker)",
+    "anh -> co che: pytesseract co nhung THIEU tesseract.exe tren may"
+   ],
+   "ghi_chu_trang_thai": "NANG LUC da xay xong ca 4 cua (video / uu-tien / mimic / theo doi), nhung 3/5 cong SO chua dat, va ba cai do khac nhau ve BAN CHAT - khong duoc gop:\n  video_co_transcript 40/80  = CHUA_DO_DUOC (YouTube chan giua chung)\n  co_che_tu_video      0/20  = AM THAT (27 ban -> 3 spec -> 0 co che moi)\n  kenh_theo_doi         9/40  = thieu NGUON, la viec cua seeker\nDanh dau DAT o day se lam mat ca ba phan biet do. Luat cua chinh ke hoach nay: khong dat cong thi khong duoc goi la xong."
   },
   "6": {
    "ten": "Quan tri de len he ngoai + khoa tester",
-   "trang_thai": "CHUA_BAT_DAU",
-   "bat_dau": null,
+   "trang_thai": "DANG_LAM",
+   "bat_dau": "2026-09-11",
    "xong": null,
    "cong": {
+    "khoa_tester_chan_duoc": {
+     "nay": true,
+     "can": true,
+     "dat": true,
+     "ghi_chu": "chan that giua hai tien trinh; 11 ca kiem"
+    },
+    "moi_duong_phong_deu_qua_khoa": {
+     "nay": true,
+     "can": true,
+     "dat": true,
+     "ghi_chu": "Bo quet ma nguon tim thay 9 file phong ngoai khoa. Da boc 6, mien 5 KEM LY DO (he truoc 15/08). Bai quet la thu duy nhat chan duoc script MOI viet sau nay."
+    },
     "de_len_ea_ngoai_doi_so_lenh": {
      "nay": false,
      "can": true,
-     "dat": null
-    },
-    "khoa_tester_chan_duoc": {
-     "nay": false,
-     "can": true,
-     "dat": null
+     "dat": false,
+     "ghi_chu": "CHUA LAM - can mot EA ngoai that va mot lan chay tester doi chung"
     }
-   }
+   },
+   "da_lam": [
+    "nhan/khoa_tester.py + phong()",
+    "test_khoa_tester.py: 11 ca kiem",
+    "boc khoa: chay_tester_kho.chay · _ghep_he._chay_terminal · _quet_placebo_rong · _kiem_cong_co_che · _placebo_tester · _z5_don_bay"
+   ],
+   "con_lai": [
+    "EA giam sat de len EA ngoai (ban nhap da bien dich dat 07/09)"
+   ]
   }
  }
 }
