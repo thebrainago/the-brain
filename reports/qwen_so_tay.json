@@ -91,16 +91,16 @@
   },
   "S2_mql5_code_base": {
    "ma": "S2_mql5_code_base",
-   "so_lan_chay": 2,
-   "trang_thai": "XONG",
+   "so_lan_chay": 3,
+   "trang_thai": "DANG_CHAY",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys, json, pathlib; sys.path.insert(0,'.')\nfrom nhan import ma_nguon as MN\nr = MN.thu_thap(so_bai=40)\nprint(json.dumps(r, ensure_ascii=False, default=str)[:3000])\npathlib.Path('reports/QWEN_MA_NGUON.json').write_text(json.dumps(r, ensure_ascii=False, default=str), encoding='utf-8')"
    ],
-   "bat_dau": 1789131410.553095,
-   "xong": 1789131892.3813524,
-   "ma_thoat": 0,
+   "bat_dau": 1789142739.4751759,
+   "xong": null,
+   "ma_thoat": null,
    "cong": {
     "ket": "DAT",
     "vi_sao": "ghi_moi = 39 > 0",
@@ -743,7 +743,7 @@
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789142100.4469857
+   "luc": 1789143059.8784838
   }
  },
  "ngay_da_mo": [

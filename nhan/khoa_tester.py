@@ -117,14 +117,14 @@ def giu(viec: str, cho_giay: float = 0.0, nhip: float = 5.0):
 
 
 def phong(exe, ini, tran: int = 3600, nhip: float = 6.0,
-          dong_truoc=None, viec: str = "") -> float:
+          dong_truoc=None, viec: str = "", cho_giay: float = 0.0) -> float:
     """PHONG terminal64 TRONG KHOA roi cho no thoat. -> so giay da chay.
 
     Mot cua duy nhat cho moi script. Truoc 11/09 moi script tu `Popen` lay, va
     quet ma nguon thay 9 file lam vay - tuc cai khoa co viet cung khong an gi.
     """
     import subprocess
-    with giu(viec or f"phong {Path(ini).name}"):
+    with giu(viec or f"phong {Path(ini).name}", cho_giay=cho_giay):
         if dong_truoc:
             dong_truoc()
         t0 = time.time()
