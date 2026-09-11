@@ -481,7 +481,7 @@ def _quet_toan_hang(doan: str, uu_tien_chi_bao: bool):
 
 #: Con so la mot phan cua cum DON VI GOC, khong phai mot nguong gia.
 #: "crosses below the 45 degree Gann angle" tung ra `close cheo_xuong 45.0`.
-_SO_LA_GOC = re.compile(r"(\d+(?:\.\d+)?)\s*(?:degree|deg|do)", re.I)
+_SO_LA_GOC = re.compile(r"(\d+(?:\.\d+)?)\s*(?:degree|deg\b|do\b)", re.I)
 
 
 def _so_dau_tien(doan: str):
