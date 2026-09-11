@@ -26,4 +26,10 @@ uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]
 uuuuuuuuuuuuuuu......................................................... [ 86%]
 ........................................................................ [ 92%]
 .................s...................................................... [ 97%]
-........................
+.................................                                        [100%]
+============================== warnings summary ===============================
+test_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc
+  <unknown>:6: SyntaxWarning: "\L" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\L"? A raw string is also an option.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1354 passed, 1 skipped, 1 warning, 478 subtests passed in 902.71s (0:15:02)

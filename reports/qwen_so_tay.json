@@ -117,7 +117,7 @@
   "X0_bo_test": {
    "ma": "X0_bo_test",
    "so_lan_chay": 9,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "CPU",
    "lenh": [
     "-m",
@@ -130,20 +130,22 @@
     "--tb=no"
    ],
    "bat_dau": 1789140637.3172023,
-   "xong": null,
-   "ma_thoat": null,
+   "xong": 1789141559.637402,
+   "ma_thoat": 0,
    "cong": {
-    "ket": "CHUA_DO_DUOC",
-    "vi_sao": "tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log:  summary info ===========================\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_co_che_do_chi_FRED_moi_lam_duoc\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_giu_CA_proxy_lan_so_that_de_doi_chieu\nFAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test\n3 failed, 1335 passed, 1 skipped, 1 warning, 474 subtests passed in 917.20s (0:15:17)\n",
-    "so": {}
+    "ket": "DAT",
+    "vi_sao": "log khong co dau hieu nao trong [' failed', 'error']",
+    "so": {
+     "so_dong": 0
+    }
    },
-   "log": ".uuuu.....................uu.u [ 76%]\nuuuu.uuuu.uu.u.uuu.uuu.uuu......................................FF...... [ 80%]\n.......................uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\n.uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu........... [ 82%]\n........................................................................ [ 88%]\n.....................................................................s.. [ 93%]\n..............................................F......................... [ 99%]\n.............                                                            [100%]\n============================== warnings summary ===============================\ntest_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc\n  <unknown>:6: SyntaxWarning: \"\\L\" is an invalid escape sequence. Such sequences will not work in the future. Did you mean \"\\\\L\"? A raw string is also an option.\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_co_che_do_chi_FRED_moi_lam_duoc\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_giu_CA_proxy_lan_so_that_de_doi_chieu\nFAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test\n3 failed, 1335 passed, 1 skipped, 1 warning, 474 subtests passed in 917.20s (0:15:17)\n",
+   "log": "........................................................................ [ 55%]\n........................................................................ [ 60%]\n.....................................................uuuuuu............. [ 65%]\n.....................................................u...u.....u........ [ 70%]\n........................................................................ [ 75%]\n..uuuu...............uuuuuuuuuuu.uuu.uuu.uuu.uuu........................ [ 79%]\n..................................................uuuuuuuuuuuuuuuuuuuuuu [ 82%]\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\nuuuuuuuuuuuuuuu......................................................... [ 86%]\n........................................................................ [ 92%]\n.................s...................................................... [ 97%]\n.................................                                        [100%]\n============================== warnings summary ===============================\ntest_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc\n  <unknown>:6: SyntaxWarning: \"\\L\" is an invalid escape sequence. Such sequences will not work in the future. Did you mean \"\\\\L\"? A raw string is also an option.\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1354 passed, 1 skipped, 1 warning, 478 subtests passed in 902.71s (0:15:02)\n",
    "giay": 922.3
   },
   "TT_boc": {
    "ma": "TT_boc",
-   "so_lan_chay": 3,
-   "trang_thai": "XONG",
+   "so_lan_chay": 4,
+   "trang_thai": "GIAN_DOAN",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -151,9 +153,9 @@
     "400",
     "250"
    ],
-   "bat_dau": 1789133640.3402333,
-   "xong": 1789136910.2746727,
-   "ma_thoat": 0,
+   "bat_dau": 1789142100.4565241,
+   "xong": null,
+   "ma_thoat": null,
    "cong": {
     "ket": "DAT",
     "vi_sao": "log co: co che, KHAU DOC HONG",
@@ -162,7 +164,8 @@
     }
    },
    "log": "2, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 6, \"thieu truong bat buoc 'vao'\": 3, \"vao[2]: trong mot bar 'close' <= 'high' LUON dung, nen 'clos\": 2, \"ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph\": 1, \"vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close\": 1, \"vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'clos\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.980%, XAU\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 100.000%, XA\": 1}}\nvong  3 | doc   2/400 | ung vien  62 | co che 865 -> 888 (+23) | 1047s\n         boc: {'ban': 82, 'co_che_moi': 23, 'tu_choi': 67, 'loi': 1, 'giay': 524.7, 'giay_moi_ban': 6.4, 'suat_tren_100_ban': 28.0, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 25, \"thieu truong bat buoc 'vao'\": 9, \"ho '1' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'pha_v\": 3, \"ho '-1' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'pha_\": 3, \"vao[0]: gia luon DUONG nen 'gia cheo_len 0' la hang so - ngu\": 2, \"thieu truong bat buoc 'ho'\": 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'macd_signal\\\\\\' khong biet, v': 2, 'vao[1]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2}}\nvong  4 | doc   0/400 | ung vien   0 | co che 888 -> 891 (+3) | 501s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3411 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 3258s | co che 696 -> 891 (+195) ===\n",
-   "giay": 3269.9
+   "giay": 3269.9,
+   "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "TT_san_nguon": {
    "ma": "TT_san_nguon",
@@ -222,7 +225,7 @@
   "TT_chi_bao": {
    "ma": "TT_chi_bao",
    "so_lan_chay": 2,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "GIAN_DOAN",
    "lan": "LLM",
    "lenh": [
     "nhan/doc_chi_bao.py",
@@ -235,22 +238,22 @@
   },
   "V1_dao_GER40": {
    "ma": "V1_dao_GER40",
-   "so_lan_chay": 1,
+   "so_lan_chay": 2,
    "trang_thai": "GIAN_DOAN",
    "lan": "TESTER",
    "lenh": [
     "_dem_ghep.py",
     "GER40Cash"
    ],
-   "bat_dau": 1789131731.50032,
+   "bat_dau": 1789141960.1844504,
    "xong": null,
    "ma_thoat": null,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "B1_corpus_vang": {
    "ma": "B1_corpus_vang",
-   "so_lan_chay": 1,
-   "trang_thai": "LOI",
+   "so_lan_chay": 2,
+   "trang_thai": "GIAN_DOAN",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -258,16 +261,17 @@
     "300",
     "200"
    ],
-   "bat_dau": 1789131791.7735047,
-   "xong": 1789133178.040016,
-   "ma_thoat": 15,
+   "bat_dau": 1789142100.4719372,
+   "xong": null,
+   "ma_thoat": null,
    "cong": {
     "ket": "CHUA_DO_DUOC",
     "vi_sao": "tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: co che truoc: 693 | tai lieu chua khai thac: 9381\n\nvong  1 | doc 239/300 | ung vien   8 | co che 693 -> 695 (+2) | 444s\n         boc: {'ban': 8, 'co_che_moi': 2, 'tu_choi': 2, 'loi': 0, 'giay': 69.0, 'giay_moi_ban': 8.6, 'suat_tren_100_ban': 25.0, 'ly_do_tu_choi': {'trung dieu kien': 2}}\nvong  2 | doc  26/300 | ung vien   0 | co che 695 -> 695 (+0) | 630s\n         boc: {'ban': 0, 'co_che_moi': 0}\n",
     "so": {}
    },
    "log": "=== QWEN HET CONG SUAT (doc 300 x boc 200) x 6 vong ===\nco che truoc: 693 | tai lieu chua khai thac: 9381\n\nvong  1 | doc 239/300 | ung vien   8 | co che 693 -> 695 (+2) | 444s\n         boc: {'ban': 8, 'co_che_moi': 2, 'tu_choi': 2, 'loi': 0, 'giay': 69.0, 'giay_moi_ban': 8.6, 'suat_tren_100_ban': 25.0, 'ly_do_tu_choi': {'trung dieu kien': 2}}\nvong  2 | doc  26/300 | ung vien   0 | co che 695 -> 695 (+0) | 630s\n         boc: {'ban': 0, 'co_che_moi': 0}\n",
-   "giay": 1386.3
+   "giay": 1386.3,
+   "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   }
  },
  "nhat_ky": [
@@ -378,6 +382,12 @@
    "ma": "X0_bo_test",
    "ai": "qwen",
    "van": "Phien test co 1335 phep thu PASS, 1 skipped, 474 subtests. Tuy nhien co 3 phep thu FAIL: 2 trong test_banker_fred.py (test_co_che_do_chi_FRED_moi_lam_duoc, test_giu_CA_proxy_lan_so_that_de_doi_chieu) va 1 trong test_hien_phap.py (test_module_moi_khong_duoc_ra_doi_ma_khong_co_test). Tien trinh thoat voi ma 1, do do ket qua la CHUA_DO_DUOC (HONG). Con so chi so: 3 loi hien tai. Khau nay chua cho phep tin vao he thong, can sua code hoac test de vuot qua."
+  },
+  {
+   "luc": "2026-09-11 22:47:32",
+   "ma": "X0_bo_test",
+   "ai": "qwen",
+   "van": "Bo test da chay xong voi 1354 tests PASS, 0 loi. Con so 0 la so dong loi/tai nem tim thay - sinh ra tu 1354 phep thu va 478 subtests. Ket qua nay DAT, xac nhan ma nguon lab sach, khong co loi compile hoac runtime trong cac test hien tai. Warning ve escape sequence khong anh huong chuc nang. Day la nen tang tin cay de tiep tuc phat trieu he giao dich. Khau nay khong phai la backtest MT5 nen khong co so lenh thuong mai, chi la kiem tra code quality."
   }
  ],
  "de_xuat": [
@@ -733,7 +743,7 @@
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789141258.9420319
+   "luc": 1789142100.4469857
   }
  },
  "ngay_da_mo": [

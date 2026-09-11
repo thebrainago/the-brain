@@ -4,26 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `chien_luoc_v2.log`: them vao kho     : 10
-- `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
-- `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
-- `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
-- git: c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
-### 2026-09-05 23:22:09 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17556, 0 phut), dieu_khien_xa.py (pid 16212, 251 phut)
-- `chi_bao_qwen_20260905.log`: them vao kho     : 0
-- `chi_bao_v2.log`: them vao kho     : 44
-- `chien_luoc_qwen_20260905.log`: them vao kho     : 0
-- `chien_luoc_v2.log`: them vao kho     : 10
-- `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
-- `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
-- `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
-- git: c5234f5 be mat sau khi kho x6: 21 ung vien D1, H4 ra 0, va boc tach het la nut that
-### 2026-09-05 23:29:45 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 4840, 0 phut), dieu_khien_xa.py (pid 16212, 259 phut)
-- `chi_bao_qwen_20260905.log`: them vao kho     : 0
 - `chi_bao_v2.log`: them vao kho     : 44
 - `chien_luoc_v2.log`: them vao kho     : 10
 - `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
@@ -404,3 +384,23 @@
 - `test_day_du.log`: ..........................................................
 - `theo_doi.log`: }
 - git: a6de503 khoi 6: khoa tester - va bo quet cho thay 9 duong phong VAN o ngoai khoa
+### 2026-09-11 22:41:25 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10504, 0 phut)
+- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `doc_video.log`: }
+- `ghim_ca_kho.log`: }
+- `qwen_ultra.log`: ~ 22:40:18 | san sang 12 | CPU   37% / muc tieu 65%  |  con  5.7 loi  |  dang chay 2  [CPU:1, LLM:1]
+- `test_day_du.log`: 1354 passed, 1 skipped, 1 warning, 478 subtests passed in 935.92s (0:15:35)
+- `theo_doi.log`: }
+- git: 5469043 BO TEST SACH: 1.354 pass / 0 fail (dau phien 1.239 / 4)
+### 2026-09-11 22:52:07 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18100, 0 phut)
+- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `doc_video.log`: }
+- `qwen_ultra.log`: ~ 22:50:19 | san sang 12 | CPU   21% / muc tieu 65%  |  con  8.9 loi  |  dang chay 1  [LLM:1]
+- `test_day_du.log`: 1354 passed, 1 skipped, 1 warning, 478 subtests passed in 935.92s (0:15:35)
+- `theo_doi.log`: }
+- git: 5469043 BO TEST SACH: 1.354 pass / 0 fail (dau phien 1.239 / 4)

@@ -39,8 +39,8 @@ import os as _os
 # CPU ca may van 76-86%. Boc tach JSON/HTML la viec CPU chu khong phai cho mang,
 # nen moi luong an gan tron mot loi. 5/5 la con so khop voi ngan sach 13 loi
 # khi con phai chia cho lan CPU va lan MANG.
-LUONG_DOC = int(_os.environ.get("QWEN_LUONG_DOC", "5"))   # tai HTTP, khong phai qwen
-LUONG_BOC = int(_os.environ.get("QWEN_LUONG_BOC", "5"))   # qwen - do 24 dong thoi van OK
+LUONG_DOC = int(_os.environ.get("QWEN_LUONG_DOC", "10"))   # tai HTTP, khong phai qwen
+LUONG_BOC = int(_os.environ.get("QWEN_LUONG_BOC", "10"))   # qwen - do 24 dong thoi van OK
 
 
 def main() -> int:

@@ -254,5 +254,52 @@ class BI_CHAN_KHAC_KHONG_CO_GI(unittest.TestCase):
                 cn.execute("DELETE FROM theo_doi WHERE ma = ?", (ma,))
 
 
+
+
+class OCR_RAC_KHONG_DUOC_VAO_KHO(unittest.TestCase):
+    """OCR tren anh xau cho ra chuoi TRONG GIONG chu ma khong phai chu. De chung
+    vao `noi_dung` thi bo doc se cham chung, hang doi tu vung day nhung cum vo
+    nghia, va ca hai bo do sau do deu nhieu di."""
+
+    def setUp(self):
+        from nhan import doc_anh as DA
+        self.DA = DA
+
+    def test_co_tesseract_that(self):
+        """`pytesseract` chi la vo boc - no goi mot chuong trinh NGOAI. Truoc
+        11/09 may co vo boc ma khong co chuong trinh, nen moi loi goi deu nem."""
+        self.assertIsNotNone(self.DA.co_tesseract(),
+                             "chua cai tesseract.exe - cua anh khong mo duoc")
+
+    def test_chan_chuoi_rac(self):
+        ok, vi = self.DA._du_sach("|_||,-. ~ ||| _- ,,, |||| ~~~ ._. |||" * 6)
+        self.assertFalse(ok)
+        self.assertIn("rac", vi)
+
+    def test_chan_van_ban_qua_ngan(self):
+        ok, vi = self.DA._du_sach("Buy RSI")
+        self.assertFalse(ok)
+        self.assertIn("qua ngan", vi)
+
+    def test_chan_chuoi_khong_co_tu_nao_dai(self):
+        ok, vi = self.DA._du_sach("a b c d e f g h i j k l m n " * 12)
+        self.assertFalse(ok)
+
+    def test_van_ban_that_thi_qua(self):
+        vb = ("Buy when the 2-period RSI closes below 10 and the close is above "
+              "the 200-day moving average. Sell when the close crosses above "
+              "the 5-day moving average. Hold for at most five days.")
+        ok, vi = self.DA._du_sach(vb)
+        self.assertTrue(ok, vi)
+
+    def test_PDF_CO_LOP_CHU_thi_KHONG_ocr(self):
+        """OCR mot ban da co chu la doi mot ban sach lay mot ban co loi nhan
+        dang. Bo doc phai uu tien lop chu."""
+        import inspect
+        ma = inspect.getsource(self.DA.doc_pdf_quet)
+        self.assertIn("pdf_co_lop_chu", ma)
+        self.assertIn("doi mot ban sach", ma)
+
+
 if __name__ == "__main__":
     unittest.main()
