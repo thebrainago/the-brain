@@ -433,3 +433,111 @@ class PhepCATCungMangCHIEU(unittest.TestCase):
                 self.assertNotEqual(
                     DH.suy_ho(self._dk(phep, 50.0), 1), "khac",
                     f"phep '{phep}' khong xep duoc ho -> mat nhom doi chung")
+
+
+class BoDocPhaiSinhRaTOAN_HANG_NGU_PHAP_DA_CO(unittest.TestCase):
+    """Do 11/09/2026: 12/43 toan hang chua duoc dung MOT LAN NAO trong 689 co
+    che cua kho - va ca 12 deu vang mat khoi `_TOAN_HANG` cua bo doc. Ngu phap
+    noi duoc mot dai rong gap hai lan cai ma bo doc biet hoi, nen phan chenh do
+    la vung mu KHONG THE vao he bang duong van xuoi.
+
+    Lop nay khoa lai phan da noi duoc. Them mot chi bao vao `CHI_BAO_CO` ma
+    quen bo doc thi bai kiem cuoi cung o day keu.
+    """
+
+    def _trai(self, cau):
+        dk, _ = DH.dieu_kien_trong_cau(cau)
+        self.assertTrue(dk, f"khong doc duoc: {cau}")
+        return dk[0]["trai"]
+
+    def test_adx_macd_cci_stochastic_obv_momentum(self):
+        for cau, mong in (
+            ("Buy when the 14-period ADX is above 25", {"chi_bao": "adx", "n": 14}),
+            ("Sell when MACD histogram falls below 0", {"chi_bao": "macd", "lay": "hieu"}),
+            ("Go long if the 20-period CCI drops below -100", {"chi_bao": "cci", "n": 20}),
+            ("Enter when stochastic(14) is below 20", {"chi_bao": "stochastic", "n": 14}),
+            ("Buy when OBV is above 0", {"chi_bao": "obv"}),
+            ("Short when the 10-period momentum is below 0",
+             {"chi_bao": "dong_luong", "n": 10}),
+            ("Long when the 50-day weighted moving average is above 100",
+             {"chi_bao": "wma", "n": 50, "cot": "close"}),
+            ("Buy when the daily range exceeds 2", {"chi_bao": "bien_do"}),
+            ("Enter long when volume is above 1000", {"chi_bao": "khoi_luong"}),
+        ):
+            with self.subTest(cau=cau):
+                self.assertEqual(self._trai(cau), mong)
+
+    def test_doc_xong_phai_QUA_duoc_kiem_khai_bao(self):
+        """Doc ra mot toan hang ma ngu phap tu choi thi khong hon gi khong doc."""
+        cau = "Buy when the 14-period ADX is above 25"
+        dk, _ = DH.dieu_kien_trong_cau(cau)
+        spec = {"ten": "t", "ho": "xu_huong", "chieu": 1, "giu": 1,
+                "vao": dk, "ra": [],
+                "co_che": "ADX cao nghia la xu huong dang manh, nen di theo chieu "
+                          "cua no thay vi cho gia quay ve trung binh."}
+        self.assertEqual(NP.kiem_khai_bao(spec), [])
+
+
+class LOAI_CAU_PHAI_TU_CHOI_VAN_KE_CHUYEN(unittest.TestCase):
+    """Truoc 11/09 `loai_cau` chi can thay chu 'if'/'when' la nhan la luat. Do
+    duoc tren 150 cau: CA 150 cau no nhan deu ra 0 dieu kien. Do phu cao, do
+    chinh xac gan bang 0 - va mot bo phan loai nhu vay nhoi hang doi boc bang
+    rac DONG THOI thoi phong con so 'cau dang luat' nen cho hong that bi che.
+    """
+
+    def test_tu_choi_van_ke_chuyen_co_chu_if(self):
+        for cau in (
+            "And if it's a bearish price movement, you go for a sell",
+            "So if you are still bullish, how about buying a stock at an oversold level",
+            "Has multiple overlapping exit systems: fixed SL/TP, break-even move",
+        ):
+            with self.subTest(cau=cau):
+                self.assertIsNone(DH.loai_cau(cau))
+
+    def test_van_nhan_luat_that(self):
+        self.assertEqual(DH.loai_cau("We sell short when RSI is above 90"), "vao_ban")
+        self.assertIsNotNone(
+            DH.loai_cau("Buy when the close falls below the lower Bollinger band."),
+            "nguong la mot TOAN HANG chu khong phai con so - van la luat day du")
+
+    def test_hang_doi_tu_vung_dung_che_do_LONG(self):
+        """`cum_chua_hieu` ton tai de tim cau co toan hang CHUA doc duoc. Siet
+        no bang `chat=True` la lam mu chinh cai la khoa mo cho buoc sau."""
+        cau = "Buy when the Ichimoku cloud thickness is above 30"
+        self.assertIsNone(DH.loai_cau(cau, chat=True))
+        self.assertIsNotNone(DH.loai_cau(cau, chat=False))
+
+
+class MENH_DE_CHUNG_CHU_NGU(unittest.TestCase):
+    """Tieng Anh tai chinh luoc chu ngu o menh de sau. Cat o chu 'and' roi doi
+    menh de sau tu co chu ngu rieng la doc SAI van pham."""
+
+    def test_thua_ke_chu_ngu_tu_menh_de_truoc(self):
+        dk, _ = DH.dieu_kien_trong_cau(
+            "if the price rises and exceeds the previous High, the robot buys")
+        self.assertTrue(dk)
+        self.assertEqual(dk[0]["trai"], {"chi_bao": "gia", "cot": "close"})
+
+    def test_KHONG_thua_ke_qua_mot_chu_ngu_khac(self):
+        """Doan trai dai = mot thuc the khac han, thua ke vao do la gan dieu
+        kien cho nham nguoi."""
+        dk, _ = DH.dieu_kien_trong_cau(
+            "Given ORCL known sustained downtrend, a long-only breakout "
+            "strategy is exposed above 5")
+        self.assertEqual(dk, [])
+
+
+class BAO_PHAN_BO_SOT_CHU_KHONG_IM_LANG(unittest.TestCase):
+    """Doc duoc mot nua roi im lang la mat mat khong do duoc: co che dang ky
+    vao he la mot co che KHAC voi y tac gia, va khong ai biet."""
+
+    def test_ve_khong_doc_duoc_phai_hien_ra_trong_ly_do(self):
+        dk, ly = DH.dieu_kien_trong_cau(
+            "Buy when RSI(14) is below 30 and the Ichimoku cloud is above 55")
+        self.assertTrue(dk)
+        self.assertTrue(ly.startswith("bo_sot:"),
+                        f"ve thu hai bi bo ma khong bao: {ly!r}")
+
+    def test_doc_tron_ven_thi_khong_bao_bo_sot(self):
+        _, ly = DH.dieu_kien_trong_cau("Buy when the 2-period RSI closes below 10")
+        self.assertEqual(ly, "")

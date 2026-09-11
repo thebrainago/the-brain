@@ -4,16 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 72f6ddb cham 42 co che quan tri: trailing thang, quy doi tham so bang ATR
-### 2026-09-05 14:39:15 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3384, 0 phut), dieu_khien_xa.py (pid 14676, 449 phut)
-- git: 1baba4b cham tran 70%: kho co che 262 -> 326, 64 cai tu file .mq5
-### 2026-09-05 14:41:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10964, 0 phut), dieu_khien_xa.py (pid 14676, 451 phut)
-- git: 2f78bb3 chot phien 05/09: bao cao day du + ban giao
-### 2026-09-05 14:48:04 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 2664, 0 phut), dieu_khien_xa.py (pid 14676, 458 phut)
 - git: 2f78bb3 chot phien 05/09: bao cao day du + ban giao
@@ -404,3 +394,13 @@
 - dang chay: ban_giao_song.py (pid 3240, 0 phut), dieu_khien_xa.py (pid 8360, 67 phut)
 - `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
 - git: 100b071 trang thai khoi 1A + ghi ro cong nao DAT, cong nao CHUA
+### 2026-09-11 19:40:36 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3200, 0 phut), dieu_khien_xa.py (pid 8360, 68 phut)
+- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
+- git: 17faff1 bo test day du sau khoi 1A: 1.242 pass / 3 fail (truoc: 1.239 / 4)
+### 2026-09-11 19:53:28 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16916, 0 phut), dieu_khien_xa.py (pid 8360, 81 phut)
+- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
+- git: 17faff1 bo test day du sau khoi 1A: 1.242 pass / 3 fail (truoc: 1.239 / 4)

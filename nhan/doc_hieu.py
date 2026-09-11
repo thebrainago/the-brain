@@ -317,11 +317,16 @@ _KHONG_PHAI_HANH_DONG = re.compile(
     r"|\bbuy and sell\b|\bbuyers?\b|\bsellers?\b", re.I)
 
 
-def loai_cau(cau: str) -> str | None:
+def loai_cau(cau: str, chat: bool = True) -> str | None:
     """'vao_mua' | 'vao_ban' | 'ra' | None.
 
     Thu tu kiem la co y: BAN truoc RA vi "sell short" chua chu "sell"; VAO
     truoc RA vi "buy" khong duoc doc thanh "dong vi the".
+
+    `chat=True` (mac dinh, cho duong BOC) doi them: cau phai co it nhat MOT
+    toan hang doc duoc. `chat=False` (cho `cum_chua_hieu`) bo dieu do - vi
+    hang doi tu vung TON TAI de tim dung nhung cau co toan hang CHUA doc duoc,
+    siet chung o day thi lam mu chinh cai la khoa mo cho buoc sau.
     """
     if NHAN_VAO.search(cau):
         return "vao_mua"
@@ -370,6 +375,16 @@ def loai_cau(cau: str) -> str | None:
             and _quet_toan_hang(phai, uu_tien_chi_bao=False) is None
             and not (BOLL.search(phai) or BOLL_DUOI.search(phai)
                      or BOLL_TREN.search(phai))):
+        return None
+    # Phai co it nhat MOT toan hang doc duoc trong cau. Khong co chot nay thi
+    # van hoc thuat ("if φn → φ in L2F, then, up to a subsequence"), danh sach
+    # tinh nang ("Has multiple overlapping exit systems: fixed SL/TP, ...") va
+    # tro chuyen Reddit ("So if selling into the panic is key, when do you
+    # sell") deu lot vao, vi chung co du mot tu so sanh va mot con so o dau do.
+    # Do 11/09: chung la phan lon cua 108 cau "khong tach duoc cap".
+    if chat and _quet_toan_hang(sach, uu_tien_chi_bao=True) is None \
+            and not (BOLL.search(sach) or BOLL_DUOI.search(sach)
+                     or BOLL_TREN.search(sach)):
         return None
     if re.search(HD_BAN, sach, re.I):
         return "vao_ban"
@@ -427,6 +442,22 @@ def _so_dau_tien(doan: str):
         return float(m.group(0).replace(",", ".")), m.start(), m.end()
     except ValueError:
         return None
+
+
+#: Doan ve TRAI cua mot menh de da LUOC CHU NGU. Chi nhung tu noi/dai tu rong
+#: moi duoc phep o day.
+#:
+#: Chot dau tien cua toi 11/09 la "doan trai ngan hon 25 ky tu" - va no SAI ngay
+#: tren vi du dau tien co that: "RSI(14) is below 30 and the Ichimoku cloud is
+#: above 55" co doan trai "the Ichimoku cloud " (19 ky tu) nen duoc thua ke, va
+#: bo doc sinh ra `rsi > 55`. Tuc no ghi vao he MOT CO CHE KHAC HAN dieu tac gia
+#: viet, khong mot loi canh bao. Do dai khong phan biet duoc "luoc chu ngu" voi
+#: "chu ngu la mot thu ta chua doc duoc" - chi TU VUNG moi phan biet duoc.
+#:
+#: Ve trai khong doc duoc ma khong rong thi phai vao `bo_sot`, khong duoc thua ke.
+_LUOC_CHU_NGU = re.compile(
+    r"[\s,]*(?:(?:and|then|also|it|they|which|that|subsequently|later|again"
+    r"|conversely|otherwise|va|roi|sau do)\b[\s,]*)*", re.I)
 
 
 #: Cum TRO LAI mot thu vua noi o ve vao. "exit when the closing price falls
@@ -582,11 +613,22 @@ def dieu_kien_trong_cau(cau: str, thay_the: dict | None = None):
     if dk:
         return dk, ""
 
+    # `bo_sot` GIU LAI cac menh de CO phep so sanh ma khong doc ra dieu kien.
+    #
+    # Truoc 11/09 ham nay chi tra ve mot LY DO khi ra tay trang, va khong noi gi
+    # khi no doc duoc mot nua. Do la mat mat im lang: cau
+    #     "buy when RSI(14) < 30 and the close is above the 200-day MA"
+    # ra dung `rsi < 30`, ve MA bi bo, khong mot dong nhac - va co che dang ky
+    # vao he la mot co che KHAC voi y tac gia. Khong do duoc thi khong sua duoc:
+    # `_corpus_ngu_phap.py` khong bao gio dem duoc trang thai NOI_MOT_PHAN.
     ra: list[dict] = []
+    bo_sot: list[str] = []
+    menh_truoc = ""
     for menh in re.split(r"\band\b|,|;|\bva\b", vung, flags=re.I):
         menh = menh.strip()
         if len(menh) < 3:
             continue
+        truoc, menh_truoc = menh_truoc, menh
         vt = None
         for bt, phep in _SO_SANH_RE:
             m = bt.search(menh)
@@ -596,10 +638,29 @@ def dieu_kien_trong_cau(cau: str, thay_the: dict | None = None):
             continue
         trai_doan, phai_doan = menh[:vt[0]], menh[vt[1]:]
         trai = _quet_toan_hang(trai_doan, uu_tien_chi_bao=True)
+        if trai is None and truoc and _LUOC_CHU_NGU.fullmatch(trai_doan):
+            # Menh de truoc co the KHONG phai mot dieu kien ma chi la nua dau
+            # cua cung mot menh de: "if the price rises and exceeds the previous
+            # High" - "the price rises" khong co phep so sanh nen khong sinh
+            # dieu kien nao, nhung chu ngu nam o do. Quet VAN BAN cua no.
+            trai = _quet_toan_hang(truoc, uu_tien_chi_bao=True)
+        if trai is None and ra and _LUOC_CHU_NGU.fullmatch(trai_doan):
+            # CHUNG CHU NGU. Tieng Anh tai chinh hay luoc chu ngu o menh de sau:
+            #   "if the price rises and exceeds the previous High"
+            #   "price breaks above the 50 MA and below the 200 MA"
+            # Cat o chu "and" roi doi menh de sau tu co chu ngu rieng la doc
+            # SAI van pham - ve trai cua no da duoc noi o menh de truoc.
+            # Chi thua ke khi doan trai NGAN (<=25 ky tu): du de om "and then",
+            # "and also", nhung khong du de om mot chu ngu khac han nhu
+            # "Given ORCL's known sustained downtrend" - thua ke nham vao do se
+            # gan dieu kien cho sai thuc the.
+            trai = (dict(ra[-1]["trai"]), "<thua ke>", 0)
         if trai is None:
+            bo_sot.append(menh)
             continue
         phai = _ben_phai(phai_doan, trai[0], thay_the)
         if phai is None:
+            bo_sot.append(menh)
             continue
         ra.append({"trai": {k: v for k, v in trai[0].items() if not k.startswith("_")},
                    "phep": vt[2],
@@ -608,6 +669,10 @@ def dieu_kien_trong_cau(cau: str, thay_the: dict | None = None):
             break
     if not ra:
         return [], "khong tach duoc cap (toan hang, so sanh, nguong)"
+    if bo_sot:
+        # Dang `bo_sot: ...` de goi BIET day la van ban chua doc duoc, khac han
+        # cac ly do o tren (chung la cau bi TU CHOI ca cau).
+        return ra, "bo_sot: " + " | ".join(m[:120] for m in bo_sot[:3])
     return ra, ""
 
 
@@ -931,7 +996,9 @@ def cum_chua_hieu(van_ban: str, toi_da: int = 40) -> list[dict]:
         return []
     ra = []
     for _vt, cau in cac_cau(vb):
-        if len(cau) > 700 or loai_cau(cau) is None:
+        # `chat=False`: hang doi tu vung phai thay duoc cau co toan hang
+        # CHUA doc duoc - do dung la thu no di tim.
+        if len(cau) > 700 or loai_cau(cau, chat=False) is None:
             continue
         vung = _vung_dieu_kien(tach_vao_ra(cau)[0])
         for menh in re.split(r"\band\b|,|;", vung, flags=re.I):

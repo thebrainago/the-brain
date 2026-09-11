@@ -25261,5 +25261,196 @@
   "nguon": "mql5_code",
   "_ty_le_kich_hoat": 0.9515,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "mean_reversion_cao_nhat_200",
+  "co_che": "Chot ban khi gia xuat hien muc cao nhat moi trong 200 bar gan nhat, chot mua khi gia xuat hien muc thap nhat moi, dat diem loi nhuan tai trung binh cua vung.",
+  "ho": "quay_ve_trung_binh",
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "chieu": 1,
+  "nguon": "mql5_code",
+  "_ty_le_kich_hoat": 0.0695,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "xu_huong_h1_voi_ma_200",
+  "co_che": "Sử dụng đường trung bình động 200 trên khung H1 để lọc xu hướng chính, chỉ giao dịch theo chiều trend giúp tăng xác suất thành công.",
+  "chieu": 1,
+  "giu": 200,
+  "ho": "xu_huong",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code",
+  "_ty_le_kich_hoat": 0.9399,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "xu_huong_h1_ban_voi_ma_200",
+  "co_che": "Xác nhận xu hướng giảm khi giá đóng cửa thấp hơn MA 200, đảm bảo giao dịch thuận dòng lớn trên khung thời gian cao hơn.",
+  "chieu": -1,
+  "giu": 200,
+  "ho": "xu_huong",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code",
+  "_ty_le_kich_hoat": 0.8228,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "hoi_quy_vung_khoang_trong_thanh_khoan_fvg",
+  "co_che": "Vào lệnh khi giá quay lại chạm hoặc nằm trong khoảng trống thanh khoản (FVG) tạo ra bởi sự dịch chuyển giá mạnh trước đó.",
+  "chieu": 1,
+  "giu": 100,
+  "ho": "quay_ve_trung_binh",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code",
+  "_ty_le_kich_hoat": 0.04,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "geometric_buy_signal",
+  "co_che": "Lọc nhiễu bằng cách chỉ kích hoạt mua khi đáy dao động 18 nến gần nhất cao hơn đáy trước đó, đảm bảo xu hướng tăng đã hình thành rõ ràng.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 18
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 18
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code",
+  "_ty_le_kich_hoat": 0.5551,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "geometric_sell_signal",
+  "co_che": "Chỉ định bán khi đỉnh dao động 18 nến hiện tại thấp hơn đỉnh trước đó, xác nhận áp lực giảm giá đang gia tăng và phá vỡ cấu trúc cũ.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 18
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 18
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "mql5_code",
+  "_ty_le_kich_hoat": 0.4407,
+  "_do_tren": "chuoi kiem"
  }
 ]

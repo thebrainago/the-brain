@@ -1,6 +1,13 @@
 {
  "train": [
   {
+   "ten": "ema_rsi_short__dao",
+   "lenh": 254,
+   "lai": 481.86,
+   "sharpe": 1.03607,
+   "dd": 2.9884
+  },
+  {
    "ten": "gia_duoi_ema20__dao",
    "lenh": 254,
    "lai": 481.86,
@@ -9,13 +16,6 @@
   },
   {
    "ten": "vao_lenh_short_khi_ema20_tren_gia__dao",
-   "lenh": 254,
-   "lai": 481.86,
-   "sharpe": 1.03607,
-   "dd": 2.9884
-  },
-  {
-   "ten": "ema_rsi_short__dao",
    "lenh": 254,
    "lai": 481.86,
    "sharpe": 1.03607,
@@ -39,14 +39,14 @@
    "ten": "vao_lenh_ngan_khi_gia_thung_xuong_duoi_uong_ema_20_tai_vung__dao",
    "lenh": 88,
    "lai": 430.88,
-   "sharpe": 3.732965,
+   "sharpe": 3.732969,
    "dd": 0.645
   },
   {
    "ten": "cat_xuong_ma_xuat_hien__dao",
    "lenh": 88,
-   "lai": 430.87,
-   "sharpe": 3.732879,
+   "lai": 430.88,
+   "sharpe": 3.732969,
    "dd": 0.645
   },
   {
@@ -73,19 +73,19 @@
   {
    "ten": "heikin_ashi_bull_strong__dao",
    "lenh": 236,
-   "lai": 395.0,
-   "sharpe": 1.223119,
-   "dd": 1.6188
+   "lai": 393.49,
+   "sharpe": 1.221156,
+   "dd": 1.6191
   },
   {
-   "ten": "vao_xu_huong_giam_ban_au__dao",
+   "ten": "gia_cat_xuong_ema__dao",
    "lenh": 264,
    "lai": 386.29,
    "sharpe": 0.810047,
    "dd": 4.7913
   },
   {
-   "ten": "gia_cat_xuong_ema__dao",
+   "ten": "vao_xu_huong_giam_ban_au__dao",
    "lenh": 264,
    "lai": 386.29,
    "sharpe": 0.810047,
@@ -115,8 +115,8 @@
   {
    "ten": "vao_lenh_ban_theo_rsi_histoalert_co_che_cat_ngang_nguong_duo__dao",
    "lenh": 273,
-   "lai": 356.21,
-   "sharpe": 0.419364,
+   "lai": 356.22,
+   "sharpe": 0.419376,
    "dd": 7.5025
   },
   {
@@ -129,9 +129,9 @@
   {
    "ten": "mua_theo_momentum_20_ngay__dao",
    "lenh": 421,
-   "lai": 339.65,
-   "sharpe": 0.689677,
-   "dd": 2.2856
+   "lai": 339.96,
+   "sharpe": 0.690273,
+   "dd": 2.2855
   },
   {
    "ten": "bearish_order_block_reversal__dao",
@@ -157,8 +157,8 @@
   {
    "ten": "steepma_long__dao",
    "lenh": 427,
-   "lai": 269.14,
-   "sharpe": 0.543403,
+   "lai": 269.19,
+   "sharpe": 0.543483,
    "dd": 1.9758
   },
   {
@@ -178,8 +178,8 @@
   {
    "ten": "gia_cat_len_kalman__dao",
    "lenh": 319,
-   "lai": 247.19,
-   "sharpe": 0.552837,
+   "lai": 247.18,
+   "sharpe": 0.552823,
    "dd": 2.1901
   },
   {
@@ -228,14 +228,14 @@
    "ten": "ban_khi_gia_ong_cua_roi_xuong_duoi_uong_trung_binh_ong_ham_m__dao",
    "lenh": 51,
    "lai": 229.24,
-   "sharpe": 0.306519,
+   "sharpe": 0.30652,
    "dd": 6.4303
   },
   {
    "ten": "kci_plus_buffer_arrow__dao",
    "lenh": 425,
-   "lai": 226.74,
-   "sharpe": 0.418157,
+   "lai": 226.73,
+   "sharpe": 0.418079,
    "dd": 2.2611
   },
   {
@@ -248,8 +248,8 @@
   {
    "ten": "ban_pha_vo_inh_phien_ny__dao",
    "lenh": 51,
-   "lai": 198.9,
-   "sharpe": 3.11155,
+   "lai": 199.12,
+   "sharpe": 3.115157,
    "dd": 0.7131
   },
   {
@@ -274,21 +274,21 @@
    "dd": 0.8951
   },
   {
-   "ten": "adx_trend_pullback_ea_buy__dao",
-   "lenh": 88,
-   "lai": 167.56,
-   "sharpe": 1.474189,
-   "dd": 1.0378
-  },
-  {
-   "ten": "cat_len_ma_xuat_hien__dao",
+   "ten": "vao_lenh_dai_khi_gia_pha_vo_len_tren_uong_ema_20_sau_khi_tic__dao",
    "lenh": 88,
    "lai": 167.56,
    "sharpe": 1.474175,
    "dd": 1.0378
   },
   {
-   "ten": "vao_lenh_dai_khi_gia_pha_vo_len_tren_uong_ema_20_sau_khi_tic__dao",
+   "ten": "cat_len_ma_xuat_hien__dao",
+   "lenh": 88,
+   "lai": 167.56,
+   "sharpe": 1.474189,
+   "dd": 1.0378
+  },
+  {
+   "ten": "adx_trend_pullback_ea_buy__dao",
    "lenh": 88,
    "lai": 167.56,
    "sharpe": 1.474189,
@@ -298,22 +298,15 @@
    "ten": "stc_crossover_mean_reversion__dao",
    "lenh": 139,
    "lai": 166.51,
-   "sharpe": 0.951163,
+   "sharpe": 0.951157,
    "dd": 1.1689
   },
   {
    "ten": "vung_cung_supply_zone__dao",
    "lenh": 92,
-   "lai": 161.89,
-   "sharpe": 0.22068,
+   "lai": 161.87,
+   "sharpe": 0.22063,
    "dd": 5.264
-  },
-  {
-   "ten": "ban_theo_xu_huong_giam__dao",
-   "lenh": 214,
-   "lai": 160.73,
-   "sharpe": 0.418597,
-   "dd": 3.6849
   },
   {
    "ten": "gia_duoi_ema50__dao",
@@ -323,11 +316,18 @@
    "dd": 3.6849
   },
   {
+   "ten": "ban_theo_xu_huong_giam__dao",
+   "lenh": 214,
+   "lai": 160.73,
+   "sharpe": 0.418598,
+   "dd": 3.6849
+  },
+  {
    "ten": "pine_ichimoku_cloud_close_tren_ema377_close__dao",
    "lenh": 490,
-   "lai": 159.8,
-   "sharpe": 0.279845,
-   "dd": 3.1999
+   "lai": 159.83,
+   "sharpe": 0.279892,
+   "dd": 3.1998
   },
   {
    "ten": "pine_cm_rsi_2_strat_close_tre4_duoi_sma5_close_tre4__dao",
@@ -346,15 +346,15 @@
   {
    "ten": "gia_duoi_ema200__dao",
    "lenh": 184,
-   "lai": 148.22,
-   "sharpe": 0.403192,
+   "lai": 148.24,
+   "sharpe": 0.40331,
    "dd": 2.7903
   },
   {
    "ten": "macd_sma_200_strateg_close_tren_sma26__dao",
    "lenh": 423,
-   "lai": 141.49,
-   "sharpe": 0.286964,
+   "lai": 141.52,
+   "sharpe": 0.287019,
    "dd": 1.9897
   },
   {
@@ -367,16 +367,16 @@
   {
    "ten": "gia_vuot_ema200__dao",
    "lenh": 460,
-   "lai": 140.31,
-   "sharpe": 0.259958,
-   "dd": 2.3343
+   "lai": 140.64,
+   "sharpe": 0.260569,
+   "dd": 2.3342
   },
   {
    "ten": "macd_sma_200_strateg_close_duoi_sma200__dao",
    "lenh": 192,
-   "lai": 138.16,
-   "sharpe": 0.405926,
-   "dd": 3.1352
+   "lai": 138.37,
+   "sharpe": 0.406545,
+   "dd": 3.1351
   },
   {
    "ten": "pine_cm_rsi_2_strat_close_duoi_sma200_close__dao",
@@ -388,9 +388,9 @@
   {
    "ten": "smc_supply_zone_entry__dao",
    "lenh": 185,
-   "lai": 136.26,
-   "sharpe": 0.106364,
-   "dd": 6.9345
+   "lai": 135.3,
+   "sharpe": 0.105596,
+   "dd": 6.9351
   },
   {
    "ten": "regimeswitchingsystem__dao",
@@ -416,8 +416,8 @@
   {
    "ten": "quantora_ma_dashboard_buy__dao",
    "lenh": 362,
-   "lai": 108.79,
-   "sharpe": 0.264142,
+   "lai": 109.12,
+   "sharpe": 0.264941,
    "dd": 2.2048
   },
   {
@@ -428,17 +428,17 @@
    "dd": 2.3282
   },
   {
-   "ten": "pine_cl_20_years_mua_high_tren_cao_nhat20_tre1__dao",
+   "ten": "pine_cl_20_years_old_tur_high_tren_cao_nhat20_tre1__dao",
    "lenh": 147,
    "lai": 105.23,
    "sharpe": 0.619863,
    "dd": 1.7399
   },
   {
-   "ten": "pine_cl_20_years_old_tur_high_tren_cao_nhat20_tre1__dao",
+   "ten": "pine_cl_20_years_mua_high_tren_cao_nhat20_tre1__dao",
    "lenh": 147,
-   "lai": 105.2,
-   "sharpe": 0.619687,
+   "lai": 105.23,
+   "sharpe": 0.619863,
    "dd": 1.7399
   },
   {
@@ -451,37 +451,37 @@
   {
    "ten": "gia_cat_duong_du_bao_giam__dao",
    "lenh": 393,
-   "lai": 91.56,
-   "sharpe": 0.150791,
-   "dd": 5.1924
+   "lai": 91.07,
+   "sharpe": 0.149972,
+   "dd": 5.1926
   },
   {
    "ten": "pine_cm_rsi_2_strat_close_duoi_sma5_close__dao",
    "lenh": 332,
-   "lai": 89.79,
-   "sharpe": 0.172584,
+   "lai": 89.74,
+   "sharpe": 0.172492,
    "dd": 2.5359
   },
   {
    "ten": "macd_stochastic_doub_close_tren_ema12_close__dao",
    "lenh": 430,
-   "lai": 88.2,
-   "sharpe": 0.170616,
-   "dd": 2.2316
+   "lai": 87.78,
+   "sharpe": 0.169804,
+   "dd": 2.2317
   },
   {
    "ten": "van_toc_gia_ong_hoc__dao",
    "lenh": 404,
-   "lai": 84.06,
-   "sharpe": 0.17992,
+   "lai": 84.09,
+   "sharpe": 0.17998,
    "dd": 3.8968
   },
   {
    "ten": "kci_minus_buffer_arrow__dao",
    "lenh": 349,
-   "lai": 83.45,
-   "sharpe": 0.15621,
-   "dd": 3.5348
+   "lai": 83.27,
+   "sharpe": 0.155871,
+   "dd": 3.5349
   },
   {
    "ten": "ema9_cat_len_ema21__dao",
@@ -508,7 +508,7 @@
    "ten": "ichimoku_scalper_bullish__dao",
    "lenh": 50,
    "lai": 69.96,
-   "sharpe": 0.07509,
+   "sharpe": 0.075097,
    "dd": 2.9946
   },
   {
@@ -522,7 +522,7 @@
    "ten": "thanh_khoan_mong_dong_thu_dong__dao",
    "lenh": 36,
    "lai": 58.9,
-   "sharpe": 0.133284,
+   "sharpe": 0.133263,
    "dd": 1.7872
   },
   {
@@ -535,9 +535,9 @@
   {
    "ten": "momentum_bear_arrow__dao",
    "lenh": 323,
-   "lai": 57.19,
-   "sharpe": 0.109672,
-   "dd": 4.7158
+   "lai": 56.95,
+   "sharpe": 0.109201,
+   "dd": 4.7159
   },
   {
    "ten": "pine_everyday_0003_ema14_close_tren_ema28_close__dao",
@@ -568,14 +568,14 @@
    "dd": 1.9081
   },
   {
-   "ten": "rsi_overbought_reversal_from_wilder_smoothed_rsi__dao",
+   "ten": "rsi_overbought_sell__dao",
    "lenh": 58,
    "lai": 43.34,
    "sharpe": 0.848061,
    "dd": 0.5905
   },
   {
-   "ten": "rsi_overbought_sell__dao",
+   "ten": "rsi_overbought_reversal_from_wilder_smoothed_rsi__dao",
    "lenh": 58,
    "lai": 43.34,
    "sharpe": 0.848061,
@@ -605,8 +605,8 @@
   {
    "ten": "pine_breakout_range_high_tren_cao_nhat4_tre1__dao",
    "lenh": 256,
-   "lai": 36.06,
-   "sharpe": 0.114537,
+   "lai": 36.09,
+   "sharpe": 0.114633,
    "dd": 2.8121
   },
   {
@@ -638,6 +638,13 @@
    "dd": 3.0589
   },
   {
+   "ten": "macd_buffer_duong__dao",
+   "lenh": 439,
+   "lai": 24.28,
+   "sharpe": 0.048166,
+   "dd": 2.6309
+  },
+  {
    "ten": "vao_lenh_mua_theo_xu_huong_tang_but_pha__dao",
    "lenh": 272,
    "lai": 24.26,
@@ -645,25 +652,18 @@
    "dd": 2.6621
   },
   {
-   "ten": "macd_buffer_duong__dao",
-   "lenh": 439,
-   "lai": 23.95,
-   "sharpe": 0.047513,
-   "dd": 2.631
-  },
-  {
    "ten": "ban_engulfing_rsi_70__dao",
    "lenh": 41,
    "lai": 21.64,
-   "sharpe": 0.586883,
+   "sharpe": 0.586884,
    "dd": 0.5768
   },
   {
    "ten": "pine_yuthavithi_vol_atr20_tren_atr50__dao",
    "lenh": 286,
-   "lai": 20.71,
-   "sharpe": 0.044041,
-   "dd": 3.8167
+   "lai": 20.57,
+   "sharpe": 0.043743,
+   "dd": 3.8168
   },
   {
    "ten": "ban_xu_huong__dao",
@@ -675,9 +675,9 @@
   {
    "ten": "buysignal__dao",
    "lenh": 390,
-   "lai": 7.19,
-   "sharpe": 0.016556,
-   "dd": 2.6097
+   "lai": 7.52,
+   "sharpe": 0.017316,
+   "dd": 2.6096
   },
   {
    "ten": "ma_crossover_buy__dao",
@@ -689,9 +689,9 @@
   {
    "ten": "ban_rsi_50__dao",
    "lenh": 432,
-   "lai": 5.06,
-   "sharpe": 0.010316,
-   "dd": 2.6863
+   "lai": 5.42,
+   "sharpe": 0.011051,
+   "dd": 2.6862
   },
   {
    "ten": "macd_buffer_am__dao",
@@ -710,8 +710,8 @@
   {
    "ten": "ob_bearish_rectangle_created__dao",
    "lenh": 392,
-   "lai": 1.96,
-   "sharpe": 0.003296,
+   "lai": 1.93,
+   "sharpe": 0.003245,
    "dd": 5.6303
   },
   {
@@ -731,15 +731,15 @@
   {
    "ten": "sell_liquidity_ob_reversal__dao",
    "lenh": 64,
-   "lai": -0.16,
-   "sharpe": -0.000345,
-   "dd": 3.2798
+   "lai": -0.23,
+   "sharpe": -0.000496,
+   "dd": 3.2799
   },
   {
    "ten": "ban_o_vung_phi_ton_premium_discount_sell__dao",
    "lenh": 488,
-   "lai": -3.23,
-   "sharpe": -0.004988,
+   "lai": -3.26,
+   "sharpe": -0.005035,
    "dd": 4.0496
   },
   {
@@ -752,23 +752,23 @@
   {
    "ten": "consecutive_bars_v1_50__dao",
    "lenh": 459,
-   "lai": -3.68,
-   "sharpe": -0.006114,
+   "lai": -3.67,
+   "sharpe": -0.006097,
    "dd": 3.3972
   },
   {
    "ten": "pine_cm_rsi_2_strat_close_tre1_tren_sma200_close_tre1__dao",
    "lenh": 451,
-   "lai": -5.74,
-   "sharpe": -0.011067,
+   "lai": -5.71,
+   "sharpe": -0.011009,
    "dd": 3.0585
   },
   {
    "ten": "cham_vao_vung_cung__dao",
    "lenh": 631,
-   "lai": -6.44,
-   "sharpe": -0.007303,
-   "dd": 6.5832
+   "lai": -6.81,
+   "sharpe": -0.007722,
+   "dd": 6.5835
   },
   {
    "ten": "spread_high_threshold__dao",
@@ -794,8 +794,8 @@
   {
    "ten": "gia_cat_xuong_kalman__dao",
    "lenh": 319,
-   "lai": -13.84,
-   "sharpe": -0.029193,
+   "lai": -13.83,
+   "sharpe": -0.029172,
    "dd": 4.9023
   },
   {
@@ -809,7 +809,7 @@
    "ten": "pine_ichimoku_cloud_close_duoi_ema377_close__dao",
    "lenh": 156,
    "lai": -15.62,
-   "sharpe": -0.048572,
+   "sharpe": -0.048573,
    "dd": 2.7486
   },
   {
@@ -843,30 +843,30 @@
   {
    "ten": "scalping_dashboard_sell__dao",
    "lenh": 219,
-   "lai": -24.92,
-   "sharpe": -0.060639,
-   "dd": 3.3606
+   "lai": -24.57,
+   "sharpe": -0.059792,
+   "dd": 3.3605
   },
   {
    "ten": "dao_nguoc_gia_ngan_han_tren_khung_15_phut__dao",
    "lenh": 314,
-   "lai": -27.47,
-   "sharpe": -0.030053,
+   "lai": -27.5,
+   "sharpe": -0.030085,
    "dd": 4.0752
   },
   {
    "ten": "gia_vuot_ema100__dao",
    "lenh": 455,
-   "lai": -28.28,
-   "sharpe": -0.05308,
-   "dd": 2.8131
+   "lai": -28.56,
+   "sharpe": -0.053607,
+   "dd": 2.8132
   },
   {
    "ten": "pine_volatility_swi_do_lech21_tre3_duoi_do_lech21__dao",
    "lenh": 358,
-   "lai": -32.52,
-   "sharpe": -0.05993,
-   "dd": 3.3065
+   "lai": -32.19,
+   "sharpe": -0.059322,
+   "dd": 3.3064
   },
   {
    "ten": "__mua_giu__",
@@ -920,9 +920,9 @@
   {
    "ten": "pine_volatility_swi_do_lech21_tre10_duoi_do_lech21__dao",
    "lenh": 339,
-   "lai": -55.27,
-   "sharpe": -0.110452,
-   "dd": 3.2007
+   "lai": -55.47,
+   "sharpe": -0.110855,
+   "dd": 3.2008
   },
   {
    "ten": "pine_strategy_macd_and_r_rsi10_tren_51__dao",
@@ -939,6 +939,13 @@
    "dd": 3.1371
   },
   {
+   "ten": "gia_vuot_ema20__dao",
+   "lenh": 430,
+   "lai": -75.55,
+   "sharpe": -0.152701,
+   "dd": 2.8983
+  },
+  {
    "ten": "vao_lenh_long_khi_ema20_duoi_gia__dao",
    "lenh": 430,
    "lai": -75.55,
@@ -946,17 +953,10 @@
    "dd": 2.8983
   },
   {
-   "ten": "gia_vuot_ema20__dao",
-   "lenh": 430,
-   "lai": -75.85,
-   "sharpe": -0.153348,
-   "dd": 2.8984
-  },
-  {
    "ten": "ema_rsi_long__dao",
    "lenh": 430,
-   "lai": -75.88,
-   "sharpe": -0.153371,
+   "lai": -75.86,
+   "sharpe": -0.153334,
    "dd": 2.8984
   },
   {
@@ -970,7 +970,7 @@
    "ten": "fast_long__dao",
    "lenh": 33,
    "lai": -84.78,
-   "sharpe": -0.117931,
+   "sharpe": -0.117923,
    "dd": 3.1642
   },
   {
@@ -983,8 +983,8 @@
   {
    "ten": "cci_strategy_sma20_duoi_sma10__dao",
    "lenh": 391,
-   "lai": -93.2,
-   "sharpe": -0.204784,
+   "lai": -93.17,
+   "sharpe": -0.204713,
    "dd": 3.7369
   },
   {
@@ -1009,18 +1009,18 @@
    "dd": 4.6853
   },
   {
-   "ten": "gia_cat_len_ema__dao",
+   "ten": "ea_original__dao",
    "lenh": 430,
-   "lai": -110.96,
-   "sharpe": -0.222264,
+   "lai": -110.93,
+   "sharpe": -0.222199,
    "dd": 2.8557
   },
   {
-   "ten": "ea_original__dao",
+   "ten": "gia_cat_len_ema__dao",
    "lenh": 430,
-   "lai": -111.23,
-   "sharpe": -0.222814,
-   "dd": 2.8558
+   "lai": -110.93,
+   "sharpe": -0.222199,
+   "dd": 2.8557
   },
   {
    "ten": "pine_yuthavithi_vol_ema3_tre1_tren_ema20_tre1__dao",
@@ -1032,23 +1032,23 @@
   {
    "ten": "pine_cm_rsi_2_strat_close_tre1_duoi_sma5_close_tre1__dao",
    "lenh": 331,
-   "lai": -147.4,
-   "sharpe": -0.283137,
+   "lai": -147.39,
+   "sharpe": -0.283117,
    "dd": 5.4219
   },
   {
    "ten": "bullish_order_block_reversal__dao",
    "lenh": 53,
    "lai": -156.16,
-   "sharpe": -0.231866,
+   "sharpe": -0.231815,
    "dd": 3.2872
   },
   {
    "ten": "mua_xu_huong__dao",
    "lenh": 412,
-   "lai": -158.58,
-   "sharpe": -0.337229,
-   "dd": 4.6443
+   "lai": -158.98,
+   "sharpe": -0.338192,
+   "dd": 4.6444
   },
   {
    "ten": "momentum_bull_arrow__dao",
@@ -1067,16 +1067,9 @@
   {
    "ten": "gia_vuot_ema50__dao",
    "lenh": 447,
-   "lai": -165.93,
-   "sharpe": -0.321738,
+   "lai": -165.9,
+   "sharpe": -0.321674,
    "dd": 4.0067
-  },
-  {
-   "ten": "sma_trend_following_buy__dao",
-   "lenh": 423,
-   "lai": -180.2,
-   "sharpe": -0.362562,
-   "dd": 3.1105
   },
   {
    "ten": "kinematic_physics__dao",
@@ -1093,6 +1086,13 @@
    "dd": 3.0416
   },
   {
+   "ten": "sma_trend_following_buy__dao",
+   "lenh": 423,
+   "lai": -180.51,
+   "sharpe": -0.363202,
+   "dd": 3.1106
+  },
+  {
    "ten": "bat_xu_huong_tang_khi_gia_ong_cua_vuot_tren_uong_trung_binh__dao",
    "lenh": 52,
    "lai": -188.28,
@@ -1102,8 +1102,8 @@
   {
    "ten": "rs_auto_regression_high_tren_ema10_tre1__dao",
    "lenh": 524,
-   "lai": -191.28,
-   "sharpe": -0.302656,
+   "lai": -191.25,
+   "sharpe": -0.302604,
    "dd": 3.6877
   },
   {
@@ -1123,29 +1123,29 @@
   {
    "ten": "extalmabuffer_giam_xuong__dao",
    "lenh": 461,
-   "lai": -204.6,
-   "sharpe": -0.333612,
-   "dd": 3.8378
+   "lai": -203.75,
+   "sharpe": -0.332319,
+   "dd": 3.8333
   },
   {
    "ten": "pine_yuthavithi_vol_ema3_tren_ema20__dao",
    "lenh": 421,
-   "lai": -217.48,
-   "sharpe": -0.45331,
-   "dd": 4.6283
+   "lai": -217.15,
+   "sharpe": -0.45262,
+   "dd": 4.6282
   },
   {
    "ten": "gia_tren_50_phan_tram_than_nen__dao",
    "lenh": 629,
-   "lai": -218.74,
-   "sharpe": -0.249619,
-   "dd": 4.0603
+   "lai": -218.71,
+   "sharpe": -0.249582,
+   "dd": 4.0602
   },
   {
    "ten": "macd_sma_200_strateg_sma12_tren_sma26__dao",
    "lenh": 400,
-   "lai": -237.62,
-   "sharpe": -0.507115,
+   "lai": -237.59,
+   "sharpe": -0.50704,
    "dd": 3.3879
   },
   {
@@ -1165,8 +1165,8 @@
   {
    "ten": "gia_tren_sma_200_ngay__dao",
    "lenh": 155,
-   "lai": -270.81,
-   "sharpe": -0.291866,
+   "lai": -270.84,
+   "sharpe": -0.291915,
    "dd": 5.1395
   },
   {
@@ -1191,21 +1191,7 @@
    "dd": 7.5847
   },
   {
-   "ten": "decayzones_score_smoothing_signal__dao",
-   "lenh": 631,
-   "lai": -374.13,
-   "sharpe": -0.436861,
-   "dd": 5.5219
-  },
-  {
-   "ten": "mo_box_hoac_nhan_label_theo_khung_gio__dao",
-   "lenh": 631,
-   "lai": -374.44,
-   "sharpe": -0.437182,
-   "dd": 5.5221
-  },
-  {
-   "ten": "cham_vao_vung_cau__dao",
+   "ten": "rsi_buy__dao",
    "lenh": 631,
    "lai": -374.44,
    "sharpe": -0.437182,
@@ -1219,32 +1205,18 @@
    "dd": 5.5221
   },
   {
-   "ten": "hurstbuffer_inptrendthreshold__dao",
-   "lenh": 631,
-   "lai": -374.47,
-   "sharpe": -0.437221,
-   "dd": 5.5221
-  },
-  {
-   "ten": "rsi_buy__dao",
-   "lenh": 631,
-   "lai": -374.47,
-   "sharpe": -0.437221,
-   "dd": 5.5221
-  },
-  {
-   "ten": "vao_lenh_khi_gia_ong_cua_vuot_len_tren_khang_cu_cu_e_bat_nhi__dao",
+   "ten": "cham_vao_vung_cau__dao",
    "lenh": 631,
    "lai": -374.77,
    "sharpe": -0.437565,
    "dd": 5.5223
   },
   {
-   "ten": "chon_ngay_giao_dich__dao",
-   "lenh": 631,
-   "lai": -374.77,
-   "sharpe": -0.437568,
-   "dd": 5.5223
+   "ten": "bullish_cisd_delivery_breakout__dao",
+   "lenh": 314,
+   "lai": -382.81,
+   "sharpe": -0.418685,
+   "dd": 5.1575
   },
   {
    "ten": "phan_ky_nghich_mua__dao",
@@ -1291,17 +1263,17 @@
    "dd": 4.317
   },
   {
-   "ten": "ban_theo_xu_huong_giam__dao",
+   "ten": "gia_duoi_ema50__dao",
    "lenh": 235,
    "lai": 633.04,
    "sharpe": 1.019334,
    "dd": 3.4131
   },
   {
-   "ten": "gia_duoi_ema50__dao",
+   "ten": "ban_theo_xu_huong_giam__dao",
    "lenh": 235,
    "lai": 633.04,
-   "sharpe": 1.019334,
+   "sharpe": 1.019332,
    "dd": 3.4131
   },
   {
@@ -1314,8 +1286,8 @@
   {
    "ten": "scalping_dashboard_sell__dao",
    "lenh": 253,
-   "lai": 490.98,
-   "sharpe": 0.796872,
+   "lai": 490.92,
+   "sharpe": 0.796722,
    "dd": 3.6591
   },
   {
@@ -1357,14 +1329,14 @@
    "ten": "vao_lenh_ban_theo_rsi_histoalert_co_che_cat_ngang_nguong_duo__dao",
    "lenh": 308,
    "lai": 355.02,
-   "sharpe": 0.284486,
+   "sharpe": 0.284492,
    "dd": 5.9438
   },
   {
    "ten": "ban_pha_vo_inh_phien_ny__dao",
    "lenh": 68,
-   "lai": 354.61,
-   "sharpe": 2.583047,
+   "lai": 354.7,
+   "sharpe": 2.58364,
    "dd": 1.2314
   },
   {
@@ -1389,17 +1361,17 @@
    "dd": 3.4254
   },
   {
-   "ten": "cat_xuong_ma_xuat_hien__dao",
+   "ten": "vao_lenh_ngan_khi_gia_thung_xuong_duoi_uong_ema_20_tai_vung__dao",
    "lenh": 100,
    "lai": 268.14,
    "sharpe": 1.324792,
    "dd": 3.6711
   },
   {
-   "ten": "vao_lenh_ngan_khi_gia_thung_xuong_duoi_uong_ema_20_tai_vung__dao",
+   "ten": "cat_xuong_ma_xuat_hien__dao",
    "lenh": 100,
    "lai": 268.14,
-   "sharpe": 1.324785,
+   "sharpe": 1.324792,
    "dd": 3.6711
   },
   {
@@ -1417,14 +1389,14 @@
    "dd": 4.4066
   },
   {
-   "ten": "ob_bearish_rectangle_created__dao",
+   "ten": "consecutive_down_bars_signal__dao",
    "lenh": 430,
-   "lai": 244.39,
-   "sharpe": 0.260265,
+   "lai": 244.38,
+   "sharpe": 0.260246,
    "dd": 3.8837
   },
   {
-   "ten": "consecutive_down_bars_signal__dao",
+   "ten": "ob_bearish_rectangle_created__dao",
    "lenh": 430,
    "lai": 244.13,
    "sharpe": 0.259989,
@@ -1459,14 +1431,14 @@
    "dd": 1.7412
   },
   {
-   "ten": "rsi_overbought_reversal_from_wilder_smoothed_rsi__dao",
+   "ten": "rsi_overbought_sell__dao",
    "lenh": 66,
    "lai": 192.85,
    "sharpe": 2.466642,
    "dd": 0.4896
   },
   {
-   "ten": "rsi_overbought_sell__dao",
+   "ten": "rsi_overbought_reversal_from_wilder_smoothed_rsi__dao",
    "lenh": 66,
    "lai": 192.85,
    "sharpe": 2.466642,
@@ -1494,14 +1466,14 @@
    "dd": 1.8251
   },
   {
-   "ten": "bearish_fvg_pullback__dao",
+   "ten": "fair_value_gap_bearish__dao",
    "lenh": 29,
    "lai": 168.54,
    "sharpe": 0.140795,
    "dd": 4.4743
   },
   {
-   "ten": "fair_value_gap_bearish__dao",
+   "ten": "bearish_fvg_pullback__dao",
    "lenh": 29,
    "lai": 168.54,
    "sharpe": 0.140795,
@@ -1511,14 +1483,14 @@
    "ten": "ban_khi_bien_dong_giam_va_pha_vo_low_nen_truoc__dao",
    "lenh": 102,
    "lai": 154.62,
-   "sharpe": 0.822571,
+   "sharpe": 0.822572,
    "dd": 1.4827
   },
   {
    "ten": "tin_hieu_phan_ky_giam__dao",
    "lenh": 143,
-   "lai": 151.09,
-   "sharpe": 0.629673,
+   "lai": 151.32,
+   "sharpe": 0.630616,
    "dd": 2.2579
   },
   {
@@ -1536,17 +1508,17 @@
    "dd": 2.874
   },
   {
-   "ten": "ema9_cat_len_ema21__dao",
+   "ten": "ema9_cat_len_ema21_2__dao",
    "lenh": 35,
    "lai": 109.58,
    "sharpe": 1.900884,
    "dd": 1.0242
   },
   {
-   "ten": "ema9_cat_len_ema21_2__dao",
+   "ten": "ema9_cat_len_ema21__dao",
    "lenh": 35,
-   "lai": 109.58,
-   "sharpe": 1.900884,
+   "lai": 108.97,
+   "sharpe": 1.888519,
    "dd": 1.0242
   },
   {
@@ -1580,9 +1552,9 @@
   {
    "ten": "vung_cung_supply_zone__dao",
    "lenh": 96,
-   "lai": 48.69,
-   "sharpe": 0.04551,
-   "dd": 5.3406
+   "lai": 48.54,
+   "sharpe": 0.04537,
+   "dd": 5.3407
   },
   {
    "ten": "tin_hieu_phan_ky_tang__dao",
@@ -1602,7 +1574,7 @@
    "ten": "supertrend__dao",
    "lenh": 122,
    "lai": 39.89,
-   "sharpe": 0.187248,
+   "sharpe": 0.187266,
    "dd": 1.7596
   },
   {
@@ -1620,7 +1592,7 @@
    "dd": 3.8084
   },
   {
-   "ten": "adx_trend_pullback_ea_buy__dao",
+   "ten": "vao_lenh_dai_khi_gia_pha_vo_len_tren_uong_ema_20_sau_khi_tic__dao",
    "lenh": 100,
    "lai": 24.18,
    "sharpe": 0.132117,
@@ -1630,11 +1602,11 @@
    "ten": "cat_len_ma_xuat_hien__dao",
    "lenh": 100,
    "lai": 24.18,
-   "sharpe": 0.132116,
+   "sharpe": 0.132117,
    "dd": 2.8792
   },
   {
-   "ten": "vao_lenh_dai_khi_gia_pha_vo_len_tren_uong_ema_20_sau_khi_tic__dao",
+   "ten": "adx_trend_pullback_ea_buy__dao",
    "lenh": 100,
    "lai": 24.18,
    "sharpe": 0.132117,
@@ -1707,7 +1679,7 @@
    "ten": "ban_engulfing_rsi_70__dao",
    "lenh": 51,
    "lai": -13.43,
-   "sharpe": -0.207874,
+   "sharpe": -0.207877,
    "dd": 1.5358
   },
   {
@@ -1728,7 +1700,7 @@
    "ten": "pine_ichimoku_cloud_close_duoi_ema377_close__dao",
    "lenh": 107,
    "lai": -43.07,
-   "sharpe": -0.170481,
+   "sharpe": -0.170486,
    "dd": 3.4148
   },
   {
@@ -1739,6 +1711,13 @@
    "dd": 2.9385
   },
   {
+   "ten": "ema_rsi_short__dao",
+   "lenh": 279,
+   "lai": -51.93,
+   "sharpe": -0.0754,
+   "dd": 7.8089
+  },
+  {
    "ten": "gia_duoi_ema20__dao",
    "lenh": 279,
    "lai": -51.93,
@@ -1747,13 +1726,6 @@
   },
   {
    "ten": "vao_lenh_short_khi_ema20_tren_gia__dao",
-   "lenh": 279,
-   "lai": -51.93,
-   "sharpe": -0.0754,
-   "dd": 7.8089
-  },
-  {
-   "ten": "ema_rsi_short__dao",
    "lenh": 279,
    "lai": -51.93,
    "sharpe": -0.0754,
@@ -1790,22 +1762,22 @@
   {
    "ten": "extalmabuffer_giam_xuong__dao",
    "lenh": 463,
-   "lai": -112.03,
-   "sharpe": -0.132609,
-   "dd": 4.2628
+   "lai": -111.87,
+   "sharpe": -0.132419,
+   "dd": 4.2632
   },
   {
    "ten": "heikin_ashi_bull_strong__dao",
    "lenh": 260,
-   "lai": -122.6,
-   "sharpe": -0.244577,
-   "dd": 3.4311
+   "lai": -124.31,
+   "sharpe": -0.248074,
+   "dd": 3.4316
   },
   {
    "ten": "pine_yuthavithi_vol_ema3_tre1_duoi_ema20_tre1__dao",
    "lenh": 258,
    "lai": -129.42,
-   "sharpe": -0.22145,
+   "sharpe": -0.221446,
    "dd": 5.2119
   },
   {
@@ -1832,9 +1804,9 @@
   {
    "ten": "pine_cl_20_years_mua_high_tren_cao_nhat55_tre1__dao",
    "lenh": 106,
-   "lai": -144.55,
-   "sharpe": -1.033966,
-   "dd": 1.9348
+   "lai": -144.58,
+   "sharpe": -1.03414,
+   "dd": 1.9356
   },
   {
    "ten": "pine_cm_rsi_2_strat_close_tre4_duoi_sma5_close_tre4__dao",
@@ -1860,9 +1832,9 @@
   {
    "ten": "mua_xu_huong__dao",
    "lenh": 408,
-   "lai": -191.56,
-   "sharpe": -0.287638,
-   "dd": 4.1859
+   "lai": -192.77,
+   "sharpe": -0.289482,
+   "dd": 4.1864
   },
   {
    "ten": "bb_stochrsi_reversal_buy__dao",
@@ -1881,8 +1853,8 @@
   {
    "ten": "mua_khi_bien_dong_giam_va_pha_vo_high_nen_truoc__dao",
    "lenh": 124,
-   "lai": -198.76,
-   "sharpe": -1.071214,
+   "lai": -198.77,
+   "sharpe": -1.071227,
    "dd": 2.6922
   },
   {
@@ -1909,16 +1881,9 @@
   {
    "ten": "rs_auto_regression_high_tren_ema10_tre1__dao",
    "lenh": 538,
-   "lai": -288.85,
-   "sharpe": -0.314576,
-   "dd": 5.1865
-  },
-  {
-   "ten": "thanh_khoan_mong_dong_thu_dong__dao",
-   "lenh": 42,
-   "lai": -299.09,
-   "sharpe": -0.496037,
-   "dd": 6.1024
+   "lai": -288.58,
+   "sharpe": -0.31429,
+   "dd": 5.1863
   },
   {
    "ten": "pairs_trading_z_score_long__dao",
@@ -1928,28 +1893,35 @@
    "dd": 4.4239
   },
   {
+   "ten": "thanh_khoan_mong_dong_thu_dong__dao",
+   "lenh": 42,
+   "lai": -299.17,
+   "sharpe": -0.49629,
+   "dd": 6.1024
+  },
+  {
    "ten": "ban_o_vung_phi_ton_premium_discount_sell__dao",
    "lenh": 497,
-   "lai": -319.02,
-   "sharpe": -0.346053,
-   "dd": 5.3582
+   "lai": -320.13,
+   "sharpe": -0.347222,
+   "dd": 5.3588
   },
   {
    "ten": "bullish_order_block_reversal__dao",
    "lenh": 66,
    "lai": -320.44,
-   "sharpe": -0.262228,
+   "sharpe": -0.262229,
    "dd": 7.2759
   },
   {
-   "ten": "macd_sma_200_strateg_close_duoi_sma200__dao",
+   "ten": "pine_cm_rsi_2_strat_close_duoi_sma200_close__dao",
    "lenh": 158,
    "lai": -321.03,
    "sharpe": -0.901803,
    "dd": 5.4041
   },
   {
-   "ten": "pine_cm_rsi_2_strat_close_duoi_sma200_close__dao",
+   "ten": "macd_sma_200_strateg_close_duoi_sma200__dao",
    "lenh": 158,
    "lai": -321.03,
    "sharpe": -0.901803,
@@ -1965,19 +1937,19 @@
   {
    "ten": "cci_strategy_sma20_duoi_sma10__dao",
    "lenh": 380,
-   "lai": -324.24,
-   "sharpe": -0.516387,
-   "dd": 5.6366
+   "lai": -323.75,
+   "sharpe": -0.51564,
+   "dd": 5.6364
   },
   {
-   "ten": "vao_xu_huong_giam_ban_au__dao",
+   "ten": "gia_cat_xuong_ema__dao",
    "lenh": 305,
    "lai": -327.53,
    "sharpe": -0.445923,
    "dd": 8.4324
   },
   {
-   "ten": "gia_cat_xuong_ema__dao",
+   "ten": "vao_xu_huong_giam_ban_au__dao",
    "lenh": 305,
    "lai": -327.53,
    "sharpe": -0.445923,
@@ -2000,16 +1972,16 @@
   {
    "ten": "buysignal__dao",
    "lenh": 385,
-   "lai": -338.77,
-   "sharpe": -0.553801,
-   "dd": 4.3093
+   "lai": -338.28,
+   "sharpe": -0.553038,
+   "dd": 4.3091
   },
   {
    "ten": "price_cross_long__dao",
    "lenh": 93,
-   "lai": -351.95,
-   "sharpe": -0.289741,
-   "dd": 9.0931
+   "lai": -351.77,
+   "sharpe": -0.28959,
+   "dd": 9.0929
   },
   {
    "ten": "but_pha_trong_luc_ieu_hoa__dao",
@@ -2035,23 +2007,30 @@
   {
    "ten": "gia_tren_sma_200_ngay__dao",
    "lenh": 176,
-   "lai": -400.79,
-   "sharpe": -0.24236,
-   "dd": 9.3733
+   "lai": -400.95,
+   "sharpe": -0.242451,
+   "dd": 9.3735
   },
   {
    "ten": "pine_cm_rsi_2_strat_close_tre1_duoi_sma5_close_tre1__dao",
    "lenh": 334,
-   "lai": -401.39,
-   "sharpe": -0.55414,
-   "dd": 7.5562
+   "lai": -402.31,
+   "sharpe": -0.55541,
+   "dd": 7.5568
   },
   {
    "ten": "mua_rsi14_tren_55__dao",
    "lenh": 317,
-   "lai": -409.04,
-   "sharpe": -0.851468,
-   "dd": 6.8746
+   "lai": -408.9,
+   "sharpe": -0.851088,
+   "dd": 6.8745
+  },
+  {
+   "ten": "bullish_cisd_delivery_breakout__dao",
+   "lenh": 345,
+   "lai": -423.69,
+   "sharpe": -0.341881,
+   "dd": 9.7108
   },
   {
    "ten": "pine_yuthavithi_vol_ema3_tre1_tren_ema20_tre1__dao",
@@ -2078,7 +2057,7 @@
    "ten": "gia_cat_xuong_kalman__dao",
    "lenh": 335,
    "lai": -477.9,
-   "sharpe": -0.761264,
+   "sharpe": -0.761265,
    "dd": 7.3433
   },
   {
@@ -2091,16 +2070,16 @@
   {
    "ten": "macd_sma_200_strateg_close_tren_sma26__dao",
    "lenh": 423,
-   "lai": -505.38,
-   "sharpe": -0.763199,
-   "dd": 7.3582
+   "lai": -504.89,
+   "sharpe": -0.762508,
+   "dd": 7.3579
   },
   {
    "ten": "gia_cat_len_kalman__dao",
    "lenh": 336,
-   "lai": -507.1,
-   "sharpe": -0.791475,
-   "dd": 6.6346
+   "lai": -506.04,
+   "sharpe": -0.789857,
+   "dd": 6.6339
   },
   {
    "ten": "gaussian_filter__dao",
@@ -2112,23 +2091,23 @@
   {
    "ten": "ichimoku_scalper_bullish__dao",
    "lenh": 51,
-   "lai": -511.54,
-   "sharpe": -0.39565,
-   "dd": 9.8714
+   "lai": -510.65,
+   "sharpe": -0.394874,
+   "dd": 9.8705
   },
   {
    "ten": "pine_yuthavithi_vol_ema3_tren_ema20__dao",
    "lenh": 430,
-   "lai": -525.33,
-   "sharpe": -0.76497,
-   "dd": 7.0911
+   "lai": -524.84,
+   "sharpe": -0.764349,
+   "dd": 7.0908
   },
   {
    "ten": "dao_nguoc_gia_ngan_han_tren_khung_15_phut__dao",
    "lenh": 345,
-   "lai": -532.57,
+   "lai": -532.55,
    "sharpe": -0.437161,
-   "dd": 6.0528
+   "dd": 6.0504
   },
   {
    "ten": "macd_sma_200_strateg_sma26_tren_sma200__dao",
@@ -2145,18 +2124,18 @@
    "dd": 11.5848
   },
   {
-   "ten": "ea_original__dao",
+   "ten": "gia_cat_len_ema__dao",
    "lenh": 427,
    "lai": -540.34,
    "sharpe": -0.800664,
    "dd": 8.537
   },
   {
-   "ten": "gia_cat_len_ema__dao",
+   "ten": "ea_original__dao",
    "lenh": 427,
-   "lai": -540.83,
-   "sharpe": -0.801341,
-   "dd": 8.5374
+   "lai": -540.56,
+   "sharpe": -0.800965,
+   "dd": 8.5372
   },
   {
    "ten": "pine_everyday_0003_ema14_close_tren_ema28_close__dao",
@@ -2189,9 +2168,9 @@
   {
    "ten": "macd_sma_200_strateg_sma12_tren_sma26__dao",
    "lenh": 392,
-   "lai": -560.95,
-   "sharpe": -0.840739,
-   "dd": 7.7048
+   "lai": -560.46,
+   "sharpe": -0.840055,
+   "dd": 7.7045
   },
   {
    "ten": "momentum_bull_arrow__dao",
@@ -2204,7 +2183,7 @@
    "ten": "ema_cross_long__dao",
    "lenh": 416,
    "lai": -583.75,
-   "sharpe": -0.871115,
+   "sharpe": -0.871114,
    "dd": 8.3905
   },
   {
@@ -2217,22 +2196,22 @@
   {
    "ten": "mua_theo_momentum_20_ngay__dao",
    "lenh": 404,
-   "lai": -598.03,
-   "sharpe": -0.90813,
-   "dd": 8.853
+   "lai": -597.6,
+   "sharpe": -0.907578,
+   "dd": 8.8527
   },
   {
    "ten": "regimeswitchingsystem__dao",
    "lenh": 384,
    "lai": -607.28,
-   "sharpe": -0.934124,
+   "sharpe": -0.934125,
    "dd": 8.0766
   },
   {
    "ten": "macd_stochastic_doub_close_tren_ema26_close__dao",
    "lenh": 442,
    "lai": -609.87,
-   "sharpe": -0.865466,
+   "sharpe": -0.865467,
    "dd": 7.8771
   },
   {
@@ -2245,37 +2224,30 @@
   {
    "ten": "macd_stochastic_doub_close_tren_ema12_close__dao",
    "lenh": 433,
-   "lai": -632.72,
-   "sharpe": -0.893052,
-   "dd": 9.0626
+   "lai": -633.21,
+   "sharpe": -0.89369,
+   "dd": 9.0631
   },
   {
    "ten": "pine_volatility_swi_do_lech21_tre10_duoi_do_lech21__dao",
    "lenh": 327,
    "lai": -636.75,
-   "sharpe": -0.830484,
+   "sharpe": -0.830483,
    "dd": 10.4307
   },
   {
    "ten": "gia_tren_50_phan_tram_than_nen__dao",
    "lenh": 657,
-   "lai": -639.33,
-   "sharpe": -0.511721,
-   "dd": 7.5765
+   "lai": -638.84,
+   "sharpe": -0.51135,
+   "dd": 7.5761
   },
   {
    "ten": "pine_ichimoku_cloud_close_tren_ema21_close__dao",
    "lenh": 438,
-   "lai": -672.58,
-   "sharpe": -0.968309,
-   "dd": 9.8917
-  },
-  {
-   "ten": "spread_high_threshold__dao",
-   "lenh": 658,
-   "lai": -681.02,
-   "sharpe": -0.538409,
-   "dd": 10.5078
+   "lai": -673.07,
+   "sharpe": -0.968955,
+   "dd": 9.8922
   },
   {
    "ten": "cham_vao_vung_cung__dao",
@@ -2285,25 +2257,32 @@
    "dd": 10.5078
   },
   {
-   "ten": "gia_vuot_ema20__dao",
-   "lenh": 440,
-   "lai": -692.32,
-   "sharpe": -0.995621,
-   "dd": 9.6425
+   "ten": "spread_high_threshold__dao",
+   "lenh": 658,
+   "lai": -681.02,
+   "sharpe": -0.538409,
+   "dd": 10.5078
   },
   {
    "ten": "ema_rsi_long__dao",
    "lenh": 440,
+   "lai": -692.51,
+   "sharpe": -0.996157,
+   "dd": 9.6427
+  },
+  {
+   "ten": "gia_vuot_ema20__dao",
+   "lenh": 440,
    "lai": -693.09,
-   "sharpe": -0.99735,
+   "sharpe": -0.997351,
    "dd": 9.6432
   },
   {
    "ten": "vao_lenh_long_khi_ema20_duoi_gia__dao",
    "lenh": 440,
-   "lai": -693.15,
-   "sharpe": -0.997422,
-   "dd": 9.6433
+   "lai": -693.09,
+   "sharpe": -0.99735,
+   "dd": 9.6432
   },
   {
    "ten": "steepma_long__dao",
@@ -2315,15 +2294,15 @@
   {
    "ten": "pine_cm_rsi_2_strat_close_duoi_sma5_close__dao",
    "lenh": 334,
-   "lai": -695.24,
-   "sharpe": -0.931808,
-   "dd": 8.5101
+   "lai": -695.53,
+   "sharpe": -0.932168,
+   "dd": 8.5103
   },
   {
    "ten": "pine_volatility_swi_do_lech21_tre3_duoi_do_lech21__dao",
    "lenh": 332,
    "lai": -699.35,
-   "sharpe": -0.999835,
+   "sharpe": -0.999836,
    "dd": 9.9607
   },
   {
@@ -2334,7 +2313,14 @@
    "dd": 9.3201
   },
   {
-   "ten": "vao_lenh_khi_gia_ong_cua_vuot_len_tren_khang_cu_cu_e_bat_nhi__dao",
+   "ten": "cham_vao_vung_cau__dao",
+   "lenh": 658,
+   "lai": -749.12,
+   "sharpe": -0.596233,
+   "dd": 8.0542
+  },
+  {
+   "ten": "rsi_buy__dao",
    "lenh": 658,
    "lai": -749.12,
    "sharpe": -0.596233,
@@ -2348,27 +2334,6 @@
    "dd": 8.0542
   },
   {
-   "ten": "mo_box_hoac_nhan_label_theo_khung_gio__dao",
-   "lenh": 658,
-   "lai": -749.12,
-   "sharpe": -0.596233,
-   "dd": 8.0542
-  },
-  {
-   "ten": "chon_ngay_giao_dich__dao",
-   "lenh": 658,
-   "lai": -749.12,
-   "sharpe": -0.596233,
-   "dd": 8.0542
-  },
-  {
-   "ten": "cham_vao_vung_cau__dao",
-   "lenh": 658,
-   "lai": -749.12,
-   "sharpe": -0.596233,
-   "dd": 8.0542
-  },
-  {
    "ten": "aapl_call_breakout_above_322_50__dao",
    "lenh": 658,
    "lai": -749.12,
@@ -2376,53 +2341,32 @@
    "dd": 8.0542
   },
   {
-   "ten": "hurstbuffer_inptrendthreshold__dao",
-   "lenh": 658,
-   "lai": -749.61,
-   "sharpe": -0.596599,
-   "dd": 8.0593
-  },
-  {
-   "ten": "rsi_buy__dao",
-   "lenh": 658,
-   "lai": -749.61,
-   "sharpe": -0.596599,
-   "dd": 8.0593
-  },
-  {
-   "ten": "decayzones_score_smoothing_signal__dao",
-   "lenh": 658,
-   "lai": -751.71,
-   "sharpe": -0.597946,
-   "dd": 8.0803
-  },
-  {
    "ten": "gds_renko_bricks_signal__dao",
    "lenh": 426,
-   "lai": -760.35,
-   "sharpe": -1.134325,
-   "dd": 10.5177
-  },
-  {
-   "ten": "sma_trend_following_buy__dao",
-   "lenh": 417,
-   "lai": -762.73,
-   "sharpe": -1.151367,
-   "dd": 10.3508
+   "lai": -760.57,
+   "sharpe": -1.134616,
+   "dd": 10.5179
   },
   {
    "ten": "kinematic_physics__dao",
    "lenh": 417,
-   "lai": -762.73,
-   "sharpe": -1.151367,
-   "dd": 10.3508
+   "lai": -761.77,
+   "sharpe": -1.145429,
+   "dd": 10.3498
+  },
+  {
+   "ten": "sma_trend_following_buy__dao",
+   "lenh": 417,
+   "lai": -762.87,
+   "sharpe": -1.151238,
+   "dd": 10.351
   },
   {
    "ten": "quantora_ma_dashboard_buy__dao",
    "lenh": 378,
-   "lai": -780.23,
-   "sharpe": -1.30173,
-   "dd": 9.7571
+   "lai": -779.74,
+   "sharpe": -1.301,
+   "dd": 9.7566
   },
   {
    "ten": "gia_duoi_50_phan_tram_than_nen__dao",
@@ -2434,19 +2378,19 @@
   {
    "ten": "van_toc_gia_ong_hoc__dao",
    "lenh": 399,
-   "lai": -816.26,
-   "sharpe": -1.264942,
-   "dd": 9.8749
+   "lai": -816.07,
+   "sharpe": -1.26438,
+   "dd": 9.8747
   },
   {
-   "ten": "gia_vuot_ema200__dao",
+   "ten": "kci_wpr_embedded_sniper_trend_buy__dao",
    "lenh": 531,
    "lai": -832.95,
    "sharpe": -0.893127,
    "dd": 10.3045
   },
   {
-   "ten": "kci_wpr_embedded_sniper_trend_buy__dao",
+   "ten": "gia_vuot_ema200__dao",
    "lenh": 531,
    "lai": -832.95,
    "sharpe": -0.893128,
@@ -2455,9 +2399,9 @@
   {
    "ten": "gia_vuot_ema50__dao",
    "lenh": 468,
-   "lai": -839.9,
-   "sharpe": -1.049042,
-   "dd": 9.3132
+   "lai": -839.41,
+   "sharpe": -1.048487,
+   "dd": 9.3127
   },
   {
    "ten": "global_macro_soros__dao",
@@ -2469,9 +2413,9 @@
   {
    "ten": "kci_plus_buffer_arrow__dao",
    "lenh": 425,
-   "lai": -879.49,
-   "sharpe": -1.162755,
-   "dd": 10.3199
+   "lai": -881.09,
+   "sharpe": -1.165262,
+   "dd": 10.3197
   },
   {
    "ten": "gia_cat_duong_du_bao_tang__dao",
@@ -2483,30 +2427,30 @@
   {
    "ten": "camarillastrategy_v1_ema8_close_duoi_close__dao",
    "lenh": 424,
-   "lai": -916.19,
-   "sharpe": -1.311604,
+   "lai": -916.17,
+   "sharpe": -1.311587,
    "dd": 10.7013
   },
   {
    "ten": "pine_cm_rsi_2_strat_close_tre1_tren_sma200_close_tre1__dao",
    "lenh": 513,
-   "lai": -926.35,
-   "sharpe": -0.98224,
-   "dd": 10.7991
+   "lai": -925.86,
+   "sharpe": -0.981769,
+   "dd": 10.7939
   },
   {
    "ten": "gia_vuot_ema100__dao",
    "lenh": 495,
    "lai": -948.18,
-   "sharpe": -1.052875,
+   "sharpe": -1.052835,
    "dd": 9.7595
   },
   {
    "ten": "pine_ichimoku_cloud_close_tren_ema377_close__dao",
    "lenh": 558,
-   "lai": -1169.67,
-   "sharpe": -1.055463,
-   "dd": 13.1139
+   "lai": -1169.4,
+   "sharpe": -1.055242,
+   "dd": 13.1112
   }
  ]
 }

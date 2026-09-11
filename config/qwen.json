@@ -7,13 +7,13 @@
   "an 60% thi lan CPU tu co lai - do la hanh vi dung. Muon chay mot lan voi muc",
   "khac ma khong sua file: `QWEN_CPU=70 q` (hoac set QWEN_CPU=70 tren cmd)."
  ],
- "muc_tieu_cpu": 85.0,
+ "muc_tieu_cpu": 65.0,
  "tran_lan": {
-  "CPU": 8,
-  "LLM": 4,
-  "MANG": 3,
+  "CPU": 3,
+  "LLM": 2,
+  "MANG": 2,
   "TESTER": 1,
-  "NHE": 6
+  "NHE": 4
  },
  "_ghi_chu_tran_lan": [
   "TESTER = 1 la RANG BUOC VAT LY, dung nang len. `chay_tester_kho` ghi de cung",
@@ -40,7 +40,7 @@
  "timeout_giay": 180,
  "nhip_vong_giay": 20.0,
  "gio_bao_cao": 23,
- "nghi_den": 1788877460.2242875,
+ "nghi_den": 0,
  "cpu_khi_nghi": 35.0,
  "nang_lan": {
   "CPU": 2.0,
@@ -59,5 +59,6 @@
   "cua bang khai voi cai do duoc - bang khai chi la chan duoi cho lan chua chay.",
   "Ban cu khai LLM=1,2 va MIEN lan LLM khoi ngan sach: che do nghi ha muc tieu",
   "xuong 35% ma may van 97%."
- ]
+ ],
+ "che_do": "ultra"
 }

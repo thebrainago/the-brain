@@ -136,6 +136,9 @@ def _do_mot_cau(cau: str) -> tuple[str, list[str], int]:
                           else (ket, ""))
     if not dieu_kien:
         return "KHONG_NOI", [], len(cau)
+    # Chi chuoi bat dau bang `bo_sot:` moi la VAN BAN chua doc duoc. Cac chuoi
+    # khac la LY DO tu choi ca cau - do do dai cua chung la do nham mot loi nhan.
+    con_lai = con_lai[len("bo_sot:"):] if str(con_lai).startswith("bo_sot:") else ""
 
     # `co_che` va `ho` la truong BAT BUOC cua kiem_khai_bao. Thieu chung thi
     # MOI cau deu bi bac, va bang doc y het "bo doc hong" - toi da suyt ket luan
@@ -151,6 +154,35 @@ def _do_mot_cau(cau: str) -> tuple[str, list[str], int]:
     if bo_sot > len(cau) * 0.25:
         return "NOI_MOT_PHAN", [], bo_sot
     return "NOI_DUOC", [], bo_sot
+
+
+def _doi(ct_moi: list) -> dict:
+    """So TUNG CAU voi lan chay truoc, khong chi so tong.
+
+    Vi sao can: 11/09 mot ban va lam `NOI_MOT_PHAN` tut 8 -> 6 ma `NOI_DUOC`
+    khong tang. Nhin bang tong thi khong the biet do la hai cau nao, va bang
+    tong cua mot mau 150 thi mot thay doi 2 cau nam trong nhieu. Khong so tung
+    cau thi moi ban va deu phai TIN chu khong KIEM duoc.
+    """
+    if not RA.exists():
+        return {"ghi_chu": "chua co lan chay truoc de so"}
+    try:
+        cu = json.loads(RA.read_text(encoding="utf-8"))
+    except Exception:
+        return {"ghi_chu": "khong doc duoc ban cu"}
+    b_cu = {c["cau"]: c["tt"] for c in cu.get("chi_tiet_A", [])}
+    len_ = {"NOI_DUOC": 2, "NOI_MOT_PHAN": 1, "KHONG_NOI": 0}
+    tot, xau, chi_tiet = [], [], []
+    for c in ct_moi:
+        t = b_cu.get(c["cau"])
+        if t is None or t == c["tt"]:
+            continue
+        d = {"tu": t, "sang": c["tt"], "cau": c["cau"][:160]}
+        chi_tiet.append(d)
+        (tot if len_[c["tt"]] > len_[t] else xau).append(d)
+    return {"chung_cau": len(set(b_cu) & {c["cau"] for c in ct_moi}),
+            "tot_len": len(tot), "xau_di": len(xau),
+            "XAU_DI": xau[:10], "tot": tot[:6], "tat_ca": chi_tiet[:40]}
 
 
 def _do_tang(corpus: list) -> tuple[Counter, Counter, dict, list]:
@@ -241,6 +273,7 @@ def chay(so_can: int = 150) -> dict:
         "chi_tiet_A": ct_a,
         "chi_tiet_B": ct_b[:80],
     }
+    ket["doi_so_lan_truoc"] = _doi(ct_a)
     RA.parent.mkdir(exist_ok=True)
     RA.write_text(json.dumps(ket, ensure_ascii=False, indent=1), encoding="utf-8")
 
@@ -264,6 +297,12 @@ def chay(so_can: int = 150) -> dict:
                                            c["toan_hang_duoc_dung"][:10]))
         print(f"  CHUA AI DUNG ({len(c['toan_hang_CHUA_AI_DUNG'])}): "
               + ", ".join(c["toan_hang_CHUA_AI_DUNG"]))
+    dd = ket["doi_so_lan_truoc"]
+    if "chung_cau" in dd:
+        print(f"\nSO VOI LAN TRUOC ({dd['chung_cau']} cau chung): "
+              f"tot len {dd['tot_len']} · XAU DI {dd['xau_di']}")
+        for x in dd["XAU_DI"][:5]:
+            print(f"  ! {x['tu']} -> {x['sang']}: {x['cau'][:110]}")
     print(f"\n-> {RA}")
     return ket
 

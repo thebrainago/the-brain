@@ -27,6 +27,8 @@ viec do va phong; nhan xet cua qwen chay o hai luong nen.
     q de-xuat        xem viec qwen de xuat, chua ai duyet
     q ban-giao       BAN GIAO NGUOC: mot man hinh cho nguoi quay lai sau vai ngay
     q xong <ma>      danh dau mot viec `can_nguoi` la da lam xong
+    q ultra [N]      CHE DO ULTRA: chay lien tuc ho tro viec XAY, tran CPU N% (mac dinh 65)
+    q thuong         ve mac dinh 85% + tran lan goc
     q nghi [phut]    CHOI GAME: ha CPU + khoa lan TESTER/CPU/LLM (mac dinh 60 phut, tu tro lai)
     q thuc           bo che do nghi ngay
     q cpu <N>        doi muc tieu CPU (an ngay, khong can khoi dong lai)
@@ -505,11 +507,49 @@ def main(argv: list) -> int:
         return 0
     if lenh == "kiem":
         return kiem()
-    if lenh in ("nghi", "thuc", "cpu"):
+    if lenh in ("nghi", "thuc", "cpu", "ultra", "thuong"):
         import json as _j
         c = {}
         if CH.CAU_HINH_NGOAI.exists():
             c = _j.loads(CH.CAU_HINH_NGOAI.read_text(encoding="utf-8-sig"))
+        if lenh in ("ultra", "thuong"):
+            # ULTRA = chay lien tuc HO TRO viec xay, trong mot TRAN CPU chua cho
+            # nguoi dung. Khac `nghi` (choi game, khoa lan) va khac mac dinh 85%
+            # (danh ca may). Chu du an 11/09: "cho cau hon 50% cpu, de lai vua du
+            # de toi choi lol" -> 65% cua 20 luong ~ 13 luong, con ~7 cho game.
+            #
+            # Ultra KHONG nang tran lan TESTER: mot terminal64.exe la rang buoc
+            # VAT LY, nang len la hai viec ghi de nhau va khong ai bao loi.
+            if lenh == "ultra":
+                c["muc_tieu_cpu"] = float(argv[1]) if len(argv) > 1 else \
+                    float(c.get("muc_tieu_cpu_ultra", 65.0))
+                c["nghi_den"] = 0
+                c["che_do"] = "ultra"
+                # TRAN LAN PHAI THEO TRONG SO DA DO, khong theo mong muon.
+                # Ban dau toi dat LLM 6 - nhung `nang_lan` do duoc LLM = 8,0 loi
+                # MOT viec, nen 3 viec LLM da la 24 loi tren mot may 20 luong.
+                # Do that 20:10-20:18 ngay 11/09: CPU 66 -> 75 -> 86% trong khi
+                # muc tieu la 65%. Bo dieu toc chi chan LUC PHONG; no khong giet
+                # duoc viec da chay, nen tran lan dat sai thi muc tieu CPU khong
+                # cuu duoc. Ngan sach 65% cua 20 luong = 13 loi:
+                #   LLM 1x8,0 + CPU 2x2,0 + MANG 1x0,77  ~ 12,8
+                tran = dict(c.get("tran_lan") or {})
+                tran.update({"CPU": 3, "LLM": 2, "MANG": 2, "NHE": 4, "TESTER": 1})
+                c["tran_lan"] = tran
+                print("che do ULTRA: muc tieu CPU %.0f%% ca may (con ~%.0f%% cho game)."
+                      % (c["muc_tieu_cpu"], 100 - c["muc_tieu_cpu"]))
+                print("lan: CPU 3 · LLM 2 · MANG 2 · NHE 4 · TESTER 1 "
+                      "(dat theo TRONG SO da do, khong theo mong muon).")
+                print("Ha xuong khi can may: `q nghi 120`  |  ve mac dinh: `q thuong`.")
+            else:
+                c["che_do"] = "thuong"
+                c["muc_tieu_cpu"] = 85.0
+                c.pop("tran_lan", None)
+                print("ve che do THUONG: muc tieu CPU 85%, tran lan theo mac dinh.")
+            CH.CAU_HINH_NGOAI.write_text(_j.dumps(c, ensure_ascii=False, indent=1),
+                                         encoding="utf-8")
+            print("Dot dang chay se thay trong ~%gs." % CH.nap()["nhip_vong_giay"])
+            return 0
         if lenh == "nghi":
             phut = float(argv[1]) if len(argv) > 1 else 60.0
             c["nghi_den"] = time.time() + phut * 60
