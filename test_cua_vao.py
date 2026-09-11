@@ -171,5 +171,88 @@ class CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN(unittest.TestCase):
         self.assertIsNone(self.MC.BAN_DO["dist_ma200_atr"])
 
 
+
+
+class LichTheoDoiTHEO_SUAT_KHONG_THEO_LICH_CUNG(unittest.TestCase):
+    """Mot kenh ra bai moi moi thang ma quet moi ngay la 29 lan goi mang cho mot
+    cau tra loi da biet truoc."""
+
+    def setUp(self):
+        from nhan import theo_doi as TD
+        self.TD = TD
+
+    def test_co_bai_moi_thi_quet_DAY_hon(self):
+        cu = 7 * 86400.0
+        self.assertLess(self.TD._chu_ky_moi(cu, bai_moi=3), cu)
+
+    def test_khong_co_bai_moi_thi_GIAN_ra(self):
+        cu = 7 * 86400.0
+        self.assertGreater(self.TD._chu_ky_moi(cu, bai_moi=0), cu)
+
+    def test_chu_ky_luon_trong_bien(self):
+        for cu, moi in ((1.0, 0), (1e9, 5), (7 * 86400.0, 0)):
+            v = self.TD._chu_ky_moi(cu, moi)
+            self.assertGreaterEqual(v, self.TD.CHU_KY_MIN)
+            self.assertLessEqual(v, self.TD.CHU_KY_MAX)
+
+    def test_danh_sach_da_vao_SO_CHINH(self):
+        """Giu danh sach trong thu_vien.db nghia la `evolution` khong bao gio
+        thay, va bo lap lich phai mo hai co so du lieu."""
+        b = self.TD.bang()
+        self.assertGreaterEqual(len(b), 5, "chua nhap: `python -m nhan.theo_doi nhap`")
+        self.assertTrue(any((r["nen_tang"] or "") == "youtube" for r in b))
+
+    def test_nen_tang_chua_ho_tro_thi_noi_RO_chu_khong_im(self):
+        kq = self.TD.quet_mot({"ma": "thu", "url": "https://x.test",
+                               "nen_tang": "mot_nen_tang_la",
+                               "chu_ky_giay": 604800.0})
+        self.assertFalse(kq["nhan"])
+        self.assertIn("chua co duong quet", kq["ly_do"])
+
+
+
+
+class BI_CHAN_KHAC_KHONG_CO_GI(unittest.TestCase):
+    """Hai thu nay cho cung `bai_moi = 0`. Khong phan biet thi bo lap lich GIAN
+    chu ky len 45 ngay vi mot lan bi chan - tu trung phat chinh no cho mot loi
+    khong phai cua nguon. Bay `khau do hong doc y het ket qua am`, o tang lich."""
+
+    def setUp(self):
+        from nhan import theo_doi as TD
+        self.TD = TD
+
+    def test_nhan_ra_cac_dang_bi_chan(self):
+        for t in ("Sign in to confirm you're not a bot",
+                  "HTTP Error 429: Too Many Requests",
+                  "use --cookies-from-browser"):
+            with self.subTest(t=t):
+                self.assertTrue(self.TD._LA_CHAN(t))
+
+    def test_KHONG_nham_loi_that_thanh_bi_chan(self):
+        for t in ("khong co phu de", "Private video", "phu de qua ngan (12 ky tu)"):
+            with self.subTest(t=t):
+                self.assertFalse(self.TD._LA_CHAN(t))
+
+    def test_bi_chan_thi_KHONG_doi_lich_cua_nguon(self):
+        from nhan import so as SO
+        ma = "thu::bi_chan"
+        self.TD._khoi_tao()
+        with SO.ket_noi() as cn:
+            cn.execute("INSERT INTO theo_doi(ma,url,nen_tang,chu_ky_giay,lan_quet,"
+                       "trang_thai) VALUES(?,?,?,?,?,'BAT') "
+                       "ON CONFLICT(ma) DO UPDATE SET lan_quet=excluded.lan_quet,"
+                       "chu_ky_giay=excluded.chu_ky_giay",
+                       (ma, "https://x.test", "youtube", 604800.0, 111.0))
+        try:
+            self.TD.quet_mot({"ma": ma, "url": "https://x.test",
+                              "nen_tang": "khong_ho_tro", "chu_ky_giay": 604800.0})
+            r = SO.mot("SELECT lan_quet, chu_ky_giay FROM theo_doi WHERE ma=?", ma)
+            # nen tang chua ho tro KHONG phai bi chan -> van duoc coi la mot lan quet
+            self.assertGreater(float(r["lan_quet"]), 111.0)
+        finally:
+            with SO.ket_noi() as cn:
+                cn.execute("DELETE FROM theo_doi WHERE ma = ?", (ma,))
+
+
 if __name__ == "__main__":
     unittest.main()
