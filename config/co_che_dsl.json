@@ -28614,5 +28614,139 @@
   ],
   "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"The strategy I want to design is to coarse-filter for stocks with their CCI being oversold (<-100) to create a universe of candidates to buy from, until I hold 10 Stocks\" [nguon: https://www.quantconnect.com/forum/discussion/7969/newbie-help-needed-in-creatin]",
   "nguon": "https://www.quantconnect.com/forum/discussion/7969/newbie-help-needed-in-creating-a-cci-universe-selection-algorithm/"
+ },
+ {
+  "ten": "mua_adx14_tren_25",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "adx",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 25.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "adx",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 25.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"* ADX Up level: 25 (Chỉ vào lệnh Buy khi ADX > 25 và +DI > -DI)\" [nguon: https://t.me/vutruea/1129099]",
+  "nguon": "https://t.me/vutruea/1129099"
+ },
+ {
+  "ten": "mua_cci20_duoi_am100",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "cci",
+     "n": 20
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -100.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "cci",
+     "n": 20
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 100.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"* Vào lệnh BUY: CCI[2] < -100 VÀ CCI[1] ≥ -100 (CCI vừa cắt lên trên ngưỡng quá bán)\" [nguon: https://t.me/vutruea/1129060]",
+  "nguon": "https://t.me/vutruea/1129060"
+ },
+ {
+  "ten": "mua_macd_tren_0",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "macd"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "macd"
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"* Để vào Buy: Histogram của MACD phải dương (> 0)\" [nguon: https://t.me/vutruea/1129021]",
+  "nguon": "https://t.me/vutruea/1129021"
+ },
+ {
+  "ten": "mua_khoi_luong_tren_10",
+  "ho": "dong_tien",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "khoi_luong"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 10.0
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Backtest nhiêu căp tiền, 00-10 TWEQ 4 GOLD \" ICT_BUY 2 ICT_SELL \" Combined 52 51 '00 '06 '02 '03 '04 '05 '07 '08 '01 '09 Backtest nhiêu căp tiên, 10-26 TWEQ 1 GOLD \" ICT BUY =ICT SELL 4 Combined 54 52 51 '12 '15 '16 '17 \" [nguon: file:///data/telegram/bobvolmanchannel/test thử ict smc--Nhật Hoài Trader.p]",
+  "nguon": "file:///data/telegram/bobvolmanchannel/test thử ict smc--Nhật Hoài Trader.pdf"
+ },
+ {
+  "ten": "mua_macd_tren_20",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "macd"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 20.0
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"│ │ │ ├─ MACD > center & Stoch <20 & divergence → BUY 3 │ │ │ └─ Stop below point 0 │ │ │ │ │ └─ Wave 5 top → SELL ALL │ │ │ └─ DOWNTREND │ └─ Reverse everything above │ └─ GAPS → Breakaway = trade, Exhaustion = exit\"> S\" [nguon: https://github.com/passiontrader/geometric-trading-engine]",
+  "nguon": "https://github.com/passiontrader/geometric-trading-engine"
  }
 ]

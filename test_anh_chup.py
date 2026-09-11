@@ -121,5 +121,51 @@ class KhoKHONG_DUOC_GAY_VI_ANH_CHUP(unittest.TestCase):
                     self.assertEqual(str(k[ma]["file"]), g["file"])
 
 
+
+
+class DANG_KY_PHAI_GHI_VAN_TAY_TAP_DU_LIEU(unittest.TestCase):
+    """`plan_hash` dong bang KE HOACH nhung khong dong bang DU LIEU.
+
+    Van tay tap ghim duoc ghi vao cot rieng, KHONG vao hash - cung ly do ma
+    `so_phep_thu` va `the_he_cong` chi duoc ghi ra cot: dua vao hash se doi
+    danh tinh cua moi gia thuyet da dang ky va lam ket luan cu khong doi chieu
+    duoc.
+    """
+    MA = "THU.GHI_ANH_CHUP.D1.x"
+
+    def tearDown(self):
+        with SO.ket_noi() as cn:
+            cn.execute("DELETE FROM gia_thuyet WHERE ma = ?", (self.MA,))
+
+    def test_co_cot_anh_chup_hash_va_duoc_dien(self):
+        SO.khoi_tao()
+        SO.dang_ky_gia_thuyet(
+            ma=self.MA, co_che="ca kiem ghi van tay tap du lieu", template="thu",
+            tham_so={"n": 1}, tai_san="US500CASH", khung="D1",
+            cua_so="2016-2021", ho="xu_huong")
+        r = SO.mot("SELECT plan_hash, anh_chup_hash FROM gia_thuyet WHERE ma=?",
+                   self.MA)
+        self.assertTrue(r["anh_chup_hash"],
+                        "dang ky ma khong ghi van tay tap du lieu")
+        self.assertEqual(r["anh_chup_hash"], AC.van_tay_ghim())
+
+    def test_van_tay_tap_du_lieu_KHONG_nam_trong_plan_hash(self):
+        """Neu no nam trong hash thi ghim them mot ma se doi danh tinh cua MOI
+        gia thuyet - va 361 ket luan cu thanh khong doi chieu duoc."""
+        SO.khoi_tao()
+        _, ph1 = SO.dang_ky_gia_thuyet(
+            ma=self.MA, co_che="ca kiem ghi van tay tap du lieu", template="thu",
+            tham_so={"n": 1}, tai_san="US500CASH", khung="D1",
+            cua_so="2016-2021", ho="xu_huong")
+        import hashlib, json as _j
+        ke_hoach = _j.dumps(
+            {"co_che": "ca kiem ghi van tay tap du lieu", "template": "thu",
+             "tham_so": {"n": 1}, "tai_san": "US500CASH", "khung": "D1",
+             "cua_so": "2016-2021"}, sort_keys=True, ensure_ascii=False)
+        self.assertEqual(
+            ph1, hashlib.sha256(ke_hoach.encode("utf-8")).hexdigest()[:16],
+            "plan_hash da doi cong thuc - danh tinh gia thuyet cu bi pha")
+
+
 if __name__ == "__main__":
     unittest.main()

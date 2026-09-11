@@ -224,7 +224,12 @@ def ket_noi(timeout: float = 30.0):
 #: Cot them vao sau khi bang da ton tai. `CREATE TABLE IF NOT EXISTS` khong
 #: dong bo cot cho bang cu, nen mot cot moi khai trong SCHEMA se khong bao gio
 #: xuat hien tren so cai dang chay - va se hong lang le o dung lan ghi dau.
-COT_THEM_SAU = [("fdr", "gt_ma_nguon", "TEXT")]
+COT_THEM_SAU = [("fdr", "gt_ma_nguon", "TEXT"),
+                # 11/09/2026 - van tay TAP DU LIEU da ghim luc dang ky. GHI LAI,
+                # KHONG dua vao plan_hash: dua vao se doi danh tinh cua moi gia
+                # thuyet da co va lam ket luan cu khong doi chieu duoc - dung ly
+                # do ma `so_phep_thu` / `the_he_cong` cung chi duoc ghi ra cot.
+                ("gia_thuyet", "anh_chup_hash", "TEXT")]
 
 
 def khoi_tao() -> None:
@@ -571,6 +576,12 @@ def dang_ky_gia_thuyet(ma: str, co_che: str, template: str, tham_so: dict,
       2. **LUAT QUYET DINH** (`cong.THE_HE_CONG`). Cai nay da duoc tach o CAP
          FDR (`tao_epoch_fdr(..., decision_generation=...)`) nen ngan sach kiem
          dinh khong bi tron; nhung o cap DANH TINH gia thuyet thi chua.
+      3. **TAP DU LIEU** (them 11/09/2026). `du_lieu.kho()` chon ban theo KICH
+         THUOC FILE, nen them mot file vao `data/` la doi ban cua ca mot ma -
+         khong mot canh bao nao. Hai gia thuyet cung plan_hash van co the da
+         chay tren hai bang gia khac nhau. Tu 11/09 co `nhan/anh_chup.py` ghim
+         ban va `van_tay_ghim()` bam ca tap ghim; van tay do duoc ghi vao cot
+         `anh_chup_hash` - **cung ly do nhu hai muc tren, khong dua vao hash**.
 
     `nhan/quant_plan.py` (368 dong) dac ta day du ca hai, nhung `tru/quantlab.py`
     **import no ma khong goi mot ham nao** - do la khoang trong THIET KE.
@@ -594,6 +605,7 @@ def dang_ky_gia_thuyet(ma: str, co_che: str, template: str, tham_so: dict,
                     f"gia thuyet {ma} da ton tai voi plan_hash={r['plan_hash']}, "
                     f"khong duoc im lang doi thanh {ph}")
             _ghi_pham_vi_quet(cn, ma, so_phep_thu, the_he_cong)
+            _ghi_anh_chup(cn, ma)
             return int(r["id"]), r["plan_hash"]
         cur = cn.execute(
             "INSERT INTO gia_thuyet(ma,co_che,template,tham_so,tai_san,khung,cua_so,"
@@ -602,10 +614,30 @@ def dang_ky_gia_thuyet(ma: str, co_che: str, template: str, tham_so: dict,
             (ma, co_che, template, json.dumps(tham_so, ensure_ascii=False, sort_keys=True),
              tai_san, khung, cua_so, ph, bay_gio(), nguon, tru_sinh, ho, ghi_chu))
         _ghi_pham_vi_quet(cn, ma, so_phep_thu, the_he_cong)
+        _ghi_anh_chup(cn, ma)
         ghi_su_kien(tru_sinh, "dang_ky_gia_thuyet",
                     {"ma": ma, "plan_hash": ph, "co_che": co_che, "ho": ho,
                      "so_phep_thu": so_phep_thu, "the_he_cong": the_he_cong})
         return int(cur.lastrowid), ph
+
+
+def _ghi_anh_chup(cn, ma: str) -> None:
+    """Ghi van tay TAP DU LIEU da ghim tai thoi diem dang ky.
+
+    KHONG dua vao `plan_hash` - xem muc 3 trong docstring cua
+    `dang_ky_gia_thuyet`. O day chi ghi lai, de sau nay tra loi duoc cau hoi
+    "ket qua nay chay tren bang gia nao" ma khong pha danh tinh cua 361 gia
+    thuyet da dang ky truoc 11/09.
+
+    Loi o day KHONG duoc chan viec dang ky: mot so ghi chu hong khong duoc lam
+    dung ca day chuyen.
+    """
+    try:
+        from nhan import anh_chup as AC
+        cn.execute("UPDATE gia_thuyet SET anh_chup_hash=? WHERE ma=?",
+                   (AC.van_tay_ghim(), ma))
+    except Exception:
+        pass
 
 
 def doi_trang_thai_gt(ma: str, trang_thai: str, ghi_chu: str = "") -> None:

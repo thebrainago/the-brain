@@ -4,13 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-- dang chay: ban_giao_song.py (pid 2664, 0 phut), dieu_khien_xa.py (pid 14676, 458 phut)
-- git: 2f78bb3 chot phien 05/09: bao cao day du + ban giao
-### 2026-09-05 21:10:26 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 15804, 0 phut), dieu_khien_xa.py (pid 16212, 120 phut)
-- `chay_chi_bao_20260905.log`: them vao kho     : 225
 - `quet_be_mat_D1_20260905.log`: TONG: {'LOAI': 11283, 'CHUA_DU_LUC': 11237, 'NEN_GOP': 8463, 'SAN_SANG_V4': 13} (305.4s, 6 tien trinh)
 - `quet_full_D1_20260905.log`: TONG: {'LOAI': 15716, 'CHUA_DU_LUC': 12948, 'NEN_GOP': 9369, 'SAN_SANG_V4': 19} (358.4s, 6 tien trinh)
 - git: 26088aa boc tach theo LAN: chi bao 0->92%, va 321 co che lan dau cham pheu
@@ -404,3 +397,10 @@
 - dang chay: ban_giao_song.py (pid 16916, 0 phut), dieu_khien_xa.py (pid 8360, 81 phut)
 - `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
 - git: 17faff1 bo test day du sau khoi 1A: 1.242 pass / 3 fail (truoc: 1.239 / 4)
+### 2026-09-11 20:47:14 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20852, 0 phut), dieu_khien_xa.py (pid 8360, 135 phut)
+- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `boc_lai2.log`: ... 2000/5121 ban · kho 781
+- `qwen_ultra.log`: ~ 20:46:02 | san sang 12 | CPU   31% / muc tieu 65%  |  con  6.7 loi  |  dang chay 3  [CPU:1, LLM:1, MANG:1]
+- git: 1aecb9c khoi 3: ca kiem bat duoc lo hong trong chinh bo phat hien thay doi
