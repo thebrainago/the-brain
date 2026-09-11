@@ -4,15 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `chi_bao_v2.log`: them vao kho     : 44
-- `chien_luoc_v2.log`: them vao kho     : 10
-- `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
-- `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
-- `tai_lieu_300.log`: KET: {'ban': 300, 'co_che_moi': 33, 'tu_choi': 43, 'loi': 0, 'giay': 1110.7, 'giay_moi_ban': 3.7, 'suat_tren_100_ban': 11.0, 'ly_do_tu_choi': {"['chi 
-- git: c5134d5 dien 2 muc ban giao 05/09: mot doan doc la hieu ca phien + 4 viec mai theo thu tu chu du an chot
-### 2026-09-06 10:46:10 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 7928, 0 phut), dieu_khien_xa.py (pid 15940, 25 phut)
 - `dieu_phoi_nen.log`: [Sun 09/06/2026 10:20:33.79] thay DUNG_LAI - khong khoi dong watchdog
 - git: c5134d5 dien 2 muc ban giao 05/09: mot doan doc la hieu ca phien + 4 viec mai theo thu tu chu du an chot
 ### 2026-09-06 16:29:29 — phien 06/09: do ho loi ra (182.550 o) -> SAN_SANG_V4 = 0; sua duong LLM chet (cc_switch_provider sai ten); ap cong kiem_khai_bao cho 169 co che da o trong kho
@@ -404,3 +395,12 @@
 - `test_day_du.log`: 1354 passed, 1 skipped, 1 warning, 478 subtests passed in 935.92s (0:15:35)
 - `theo_doi.log`: }
 - git: 5469043 BO TEST SACH: 1.354 pass / 0 fail (dau phien 1.239 / 4)
+### 2026-09-12 00:15:26 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14224, 0 phut)
+- `de_qt_chay.log`: luat 14 · GridEA.mq5                           lenh  1759 · lai     -108.8
+- `doc_video2.log`: }
+- `qwen_ultra.log`: **Đã đề xuất:** `V1_dao_SP500` để kiểm tra xem edge này có tồn tại trên thị trường Mỹ hay
+- `test_day_du.log`: 3 failed, 1373 passed, 2 skipped, 1 warning, 479 subtests passed in 1074.15s (0:17:54)
+- `theo_doi.log`: }
+- git: df3a5e5 2026-09-12: khoi 2-6 DAT: so bai hoc, anh chup bat bien, tang cham tien, 4 cua vao, khoa tester + de quan tri len EA ngoai. Cuu mat du lieu kho co che 1149->3
