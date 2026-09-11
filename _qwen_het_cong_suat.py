@@ -23,8 +23,20 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-LUONG_DOC = 16      # tai HTTP, khong phai qwen
-LUONG_BOC = 20      # qwen - da do 24 dong thoi van OK
+# Do 20:25 ngay 11/09: MOT tien trinh nay an 1.153% CPU = 11,5 loi tren may 20
+# luong, trong khi bang `nang_lan` khai lan LLM nang 8,0 loi va che do ultra cho
+# phep 2 viec LLM. Tuc mot viec da vuot ca ngan sach cua ca lan.
+#
+# Bo dieu toc KHONG THE thay dieu do: no dem so VIEC dang chay, con so luong ben
+# trong mot viec thi nam o day. Mot tac vu tu song song hoa lam moi ngan sach
+# ben ngoai thanh vo nghia - day la dang "bo phan im lang khong nghe lenh".
+#
+# `QWEN_LUONG_DOC` / `QWEN_LUONG_BOC` cho phep ha ma khong sua ma. Chu du an
+# 11/09: "cho hon 50% cpu, de lai vua du de toi choi lol".
+import os as _os
+
+LUONG_DOC = int(_os.environ.get("QWEN_LUONG_DOC", "8"))   # tai HTTP, khong phai qwen
+LUONG_BOC = int(_os.environ.get("QWEN_LUONG_BOC", "8"))   # qwen - do 24 dong thoi van OK
 
 
 def main() -> int:

@@ -25452,5 +25452,87 @@
   "nguon": "mql5_code",
   "_ty_le_kich_hoat": 0.4407,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "tema_reversal_trend",
+  "co_che": "Chiến lược sử dụng đường trung bình động hàm mũ kép với chu kỳ 6 để xác định điểm đảo chiều xu hướng, giúp tối ưu hóa thời điểm vào lệnh theo dòng chảy giá thị trường.",
+  "ho": "xu_huong",
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 6
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 2
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 3
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 6
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 2
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 6
+     },
+     "n": 3
+    }
+   }
+  ],
+  "chieu": 1,
+  "nguon": "mql5_code",
+  "_ty_le_kich_hoat": 0.5583,
+  "_do_tren": "chuoi kiem"
  }
 ]

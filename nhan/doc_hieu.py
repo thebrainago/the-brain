@@ -208,11 +208,36 @@ _TOAN_HANG: tuple[tuple[str, object, bool], ...] = (
     (r"\b(?:cci|commodity channel index)\b",
      lambda m: {"chi_bao": "cci", "n": 20, "_mac_dinh": "n"}, False),
 
+    # "the highest high OF THE LAST 20 bars" - cung y nghia voi "20-bar high" o
+    # tren nhung dao thu tu chu ky va ten. Do 11/09: day la cach viet cua cau
+    # pha vo pho bien nhat ("buys when price exceeds the highest high of the
+    # last n bars"), va mau "20-bar high" khong bat duoc no.
+    (r"\b(?:highest high|high(?:est)?)\s+(?:price\s+)?of\s+the\s+"
+     r"(?:last|past|previous|prior)\s+(\d+)\s*(?:bar|day|period|week)s?\b",
+     lambda m: {"chi_bao": "cao_nhat", "n": int(m.group(1)),
+                "cua": {"chi_bao": "tre", "n": 1,
+                        "cua": {"chi_bao": "gia", "cot": "high"}}}, False),
+    (r"\b(?:lowest low|low(?:est)?)\s+(?:price\s+)?of\s+the\s+"
+     r"(?:last|past|previous|prior)\s+(\d+)\s*(?:bar|day|period|week)s?\b",
+     lambda m: {"chi_bao": "thap_nhat", "n": int(m.group(1)),
+                "cua": {"chi_bao": "tre", "n": 1,
+                        "cua": {"chi_bao": "gia", "cot": "low"}}}, False),
+
     (r"\b(\d+)[-\s](?:period|day|bar)s?\s+stochastics?\b",
      lambda m: {"chi_bao": "stochastic", "n": int(m.group(1))}, False),
     (r"\bstoch(?:astic)?\s*\(\s*(\d+)\s*(?:,[^)]*)?\)",
      lambda m: {"chi_bao": "stochastic", "n": int(m.group(1))}, False),
-    (r"\b(?:stochastics?|%k|stochastic oscillator)\b",
+    # %D la trung binh 3 phien cua %K - ngu phap noi duoc bang `tb` co `cua`.
+    # Khong co muc nay thi cau pho bien nhat cua ho stochastic ("a bullish
+    # crossover occurs when %K rises above %D") rot ngay o ve PHAI.
+    (r"%\s?d\b",
+     lambda m: {"chi_bao": "tb", "n": 3,
+                "cua": {"chi_bao": "stochastic", "n": 14, "_mac_dinh": "n"}}, False),
+    # `%k` phai la mau RIENG: `\b` truoc `%` khong bao gio khop, vi `%` la ky tu
+    # khong-phai-chu nen khong co ranh gioi tu o do. Viet chung voi `stochastic`
+    # trong mot nhom `\b(?:...)` la tat lang le nhanh `%k`.
+    (r"%\s?k\b", lambda m: {"chi_bao": "stochastic", "n": 14, "_mac_dinh": "n"}, False),
+    (r"\b(?:stochastics?|stochastic oscillator)\b",
      lambda m: {"chi_bao": "stochastic", "n": 14, "_mac_dinh": "n"}, False),
 
     (r"\b(?:obv|on[- ]balance volume)\b", lambda m: {"chi_bao": "obv"}, False),

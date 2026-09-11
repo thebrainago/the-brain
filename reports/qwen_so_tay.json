@@ -116,8 +116,8 @@
   },
   "X0_bo_test": {
    "ma": "X0_bo_test",
-   "so_lan_chay": 2,
-   "trang_thai": "LOI",
+   "so_lan_chay": 3,
+   "trang_thai": "DANG_CHAY",
    "lan": "CPU",
    "lenh": [
     "-m",
@@ -129,9 +129,9 @@
     "loadfile",
     "--tb=no"
    ],
-   "bat_dau": 1789131410.4976707,
-   "xong": 1789132736.1812725,
-   "ma_thoat": 1,
+   "bat_dau": 1789133640.3248596,
+   "xong": null,
+   "ma_thoat": null,
    "cong": {
     "ket": "CHUA_DO_DUOC",
     "vi_sao": "tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log: summary info ===========================\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_co_che_do_chi_FRED_moi_lam_duoc\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_giu_CA_proxy_lan_so_that_de_doi_chieu\nFAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test\n3 failed, 1242 passed, 1 skipped, 1 warning, 241 subtests passed in 1316.54s (0:21:56)\n",
@@ -142,7 +142,7 @@
   },
   "TT_boc": {
    "ma": "TT_boc",
-   "so_lan_chay": 2,
+   "so_lan_chay": 3,
    "trang_thai": "DANG_CHAY",
    "lan": "LLM",
    "lenh": [
@@ -151,27 +151,27 @@
     "400",
     "250"
    ],
-   "bat_dau": 1789131410.5148008,
+   "bat_dau": 1789133640.3402333,
    "xong": null,
    "ma_thoat": null,
    "cong": {
     "ket": "CHUA_DO_DUOC",
-    "vi_sao": "tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: === QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 689 | tai lieu chua khai thac: 8791\n\n",
+    "vi_sao": "tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: ai san do duoc (chuoi kiem 99.940%, XAU\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.379%, XAU\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.720%, XAU\": 1}}\nvong  3 | doc  26/400 | ung vien   0 | co che 695 -> 696 (+1) | 739s\n         boc: {'ban': 1, 'co_che_moi': 1, 'tu_choi': 0, 'loi': 0, 'giay': 55.1, 'giay_moi_ban': 55.1, 'suat_tren_100_ban': 100.0, 'ly_do_tu_choi': {}}\n",
     "so": {}
    },
-   "log": "=== QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 689 | tai lieu chua khai thac: 8791\n\n",
-   "giay": 120.1
+   "log": "T (doc 400 x boc 250) x 24 vong ===\nco che truoc: 689 | tai lieu chua khai thac: 9092\n\nvong  1 | doc 338/400 | ung vien  16 | co che 689 -> 693 (+4) | 375s\n         boc: {'ban': 21, 'co_che_moi': 4, 'tu_choi': 20, 'loi': 0, 'giay': 102.3, 'giay_moi_ban': 4.9, 'suat_tren_100_ban': 19.0, 'ly_do_tu_choi': {'[\\'chay loi: KeyError: \"du lieu khong co cot \\\\\\'ask\\\\\\'\"\\']': 3, \"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 3, '[\\'chay loi: KeyError: \"du lieu khong co cot \\\\\\'bid\\\\\\'\"\\']': 2, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.559%, XAU\": 2, \"vao[0]: vung.tao[0]: trong mot bar 'low' <= 'high' LUON dung\": 1, \"vao[0]: vung.tao[0]: trong mot bar 'high' >= 'low' LUON dung\": 1, 'trung dieu kien': 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.840%, XAU\": 1}}\nvong  2 | doc 269/400 | ung vien   8 | co che 693 -> 695 (+2) | 469s\n         boc: {'ban': 8, 'co_che_moi': 0, 'tu_choi': 4, 'loi': 0, 'giay': 71.3, 'giay_moi_ban': 8.9, 'suat_tren_100_ban': 0.0, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 99.600%, XAU\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.940%, XAU\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.379%, XAU\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.720%, XAU\": 1}}\nvong  3 | doc  26/400 | ung vien   0 | co che 695 -> 696 (+1) | 739s\n         boc: {'ban': 1, 'co_che_moi': 1, 'tu_choi': 0, 'loi': 0, 'giay': 55.1, 'giay_moi_ban': 55.1, 'suat_tren_100_ban': 100.0, 'ly_do_tu_choi': {}}\n",
+   "giay": 1767.5
   },
   "TT_san_nguon": {
    "ma": "TT_san_nguon",
-   "so_lan_chay": 2,
+   "so_lan_chay": 3,
    "trang_thai": "DANG_CHAY",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys; sys.path.insert(0,'.')\nfrom nhan import day_chuyen as D\nprint(D.mot_luot('US500CASH'))"
    ],
-   "bat_dau": 1789131591.0991468,
+   "bat_dau": 1789133640.3618293,
    "xong": null,
    "ma_thoat": null,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
@@ -211,7 +211,7 @@
   "TT_chi_bao": {
    "ma": "TT_chi_bao",
    "so_lan_chay": 1,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "GIAN_DOAN",
    "lan": "LLM",
    "lenh": [
     "nhan/doc_chi_bao.py",
@@ -219,12 +219,13 @@
    ],
    "bat_dau": 1789131671.320465,
    "xong": null,
-   "ma_thoat": null
+   "ma_thoat": null,
+   "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "V1_dao_GER40": {
    "ma": "V1_dao_GER40",
    "so_lan_chay": 1,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "GIAN_DOAN",
    "lan": "TESTER",
    "lenh": [
     "_dem_ghep.py",
@@ -232,12 +233,13 @@
    ],
    "bat_dau": 1789131731.50032,
    "xong": null,
-   "ma_thoat": null
+   "ma_thoat": null,
+   "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "B1_corpus_vang": {
    "ma": "B1_corpus_vang",
    "so_lan_chay": 1,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "LOI",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -246,8 +248,15 @@
     "200"
    ],
    "bat_dau": 1789131791.7735047,
-   "xong": null,
-   "ma_thoat": null
+   "xong": 1789133178.040016,
+   "ma_thoat": 15,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: co che truoc: 693 | tai lieu chua khai thac: 9381\n\nvong  1 | doc 239/300 | ung vien   8 | co che 693 -> 695 (+2) | 444s\n         boc: {'ban': 8, 'co_che_moi': 2, 'tu_choi': 2, 'loi': 0, 'giay': 69.0, 'giay_moi_ban': 8.6, 'suat_tren_100_ban': 25.0, 'ly_do_tu_choi': {'trung dieu kien': 2}}\nvong  2 | doc  26/300 | ung vien   0 | co che 695 -> 695 (+0) | 630s\n         boc: {'ban': 0, 'co_che_moi': 0}\n",
+    "so": {}
+   },
+   "log": "=== QWEN HET CONG SUAT (doc 300 x boc 200) x 6 vong ===\nco che truoc: 693 | tai lieu chua khai thac: 9381\n\nvong  1 | doc 239/300 | ung vien   8 | co che 693 -> 695 (+2) | 444s\n         boc: {'ban': 8, 'co_che_moi': 2, 'tu_choi': 2, 'loi': 0, 'giay': 69.0, 'giay_moi_ban': 8.6, 'suat_tren_100_ban': 25.0, 'ly_do_tu_choi': {'trung dieu kien': 2}}\nvong  2 | doc  26/300 | ung vien   0 | co che 695 -> 695 (+0) | 630s\n         boc: {'ban': 0, 'co_che_moi': 0}\n",
+   "giay": 1386.3
   }
  },
  "nhat_ky": [
@@ -310,6 +319,12 @@
    "ma": "X0_bo_test",
    "ai": "qwen",
    "van": "Phien test 1246 cau (1242 dat, 3 hong). Ket qua CHUA_DO_DUOC do tien trinh thoat ma 1. 3 cau hong: 2 trong test_banker_fred.py (FRED proxy va CA proxy) va 1 trong test_hien_phap.py (thieu nguoi kiem module). Day la loi thiet ke, khong phai he giao dich am. Con so 1242/1245 cho thay code co chat luong, nhung 3 chao hong nay can sua de hoat dong hoan toan."
+  },
+  {
+   "luc": "2026-09-11 20:26:54",
+   "ma": "TT_boc",
+   "ai": "qwen",
+   "van": "Viec TT_boc bi trung doan o vong 3 (hiet cong suat/thoi gian) nen ket qua la CHUA_DO_DUOC. Qua 2 vong dau, he da doc duoc 607 tai lieu va thuc hien 30 phep boc. Tuy nhien, chi co 4 co che moi duoc chap thuan (ca deu o vong 1). Cac phep boc con lai bi LLM tu choi voi ly do \"suy bien tren MOI tai san\" (99%+ sut giam) hoac loi KeyError 'ask'/'bid'. Con so 4 co che nay sinh ra tu 30 phep thu, chua du de ket luan ve hieu qua cua phuong phap. Can kiem tra code xu ly du lieu de sua loi KeyError va xem xét lai prompt de giam ty le tu choi."
   }
  ],
  "de_xuat": [
@@ -502,12 +517,32 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-11 20:19:17"
+  },
+  {
+   "ma": "TT_sua_keyerror",
+   "ten": "Sua loi KeyError 'ask'/'bid' trong qua trinh boc co che",
+   "vi_sao": "20/30 phep boc bi loai bo do KeyError hoac \"suy bien\", chi 4 co che duoc chap thuan. Can sua code de xu ly dung cot du lieu tai_lieu.",
+   "lan": "LLM",
+   "lenh": [
+    "_qwen_het_cong_suat.py",
+    "24",
+    "400",
+    "250",
+    "--fix-keyerror"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-11 20:26:57"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789132796.4825287
+   "luc": 1789133198.0904374
   }
  },
  "ngay_da_mo": [
