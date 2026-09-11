@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ? (pid 3740, 17 phut), ban_giao_song.py (pid 14968, 0 phut), dieu_khien_xa.py (pid 14676, 433 phut)
-- git: 72f6ddb cham 42 co che quan tri: trailing thang, quy doi tham so bang ATR
-### 2026-09-05 14:32:33 — chup trang thai
-
-- dang chay: ? (pid 5416, 0 phut), ban_giao_song.py (pid 3780, 0 phut), dieu_khien_xa.py (pid 14676, 442 phut)
 - git: 72f6ddb cham 42 co che quan tri: trailing thang, quy doi tham so bang ATR
 ### 2026-09-05 14:39:15 — chup trang thai
 
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 9428, 0 phut), dieu_khien_xa.py (pid 8360, 41 phut)
 - `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
 - git: 18c60ea ke hoach XAY he thong: 6 khoi + bo do tran ngu phap; baseline lat lai hai gia dinh
+### 2026-09-11 19:39:10 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3240, 0 phut), dieu_khien_xa.py (pid 8360, 67 phut)
+- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
+- git: 100b071 trang thai khoi 1A + ghi ro cong nao DAT, cong nao CHUA

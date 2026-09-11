@@ -58,9 +58,10 @@
      "ghi_chu": "Khoi gann nam SAU chot 'cua is None' nen ban khong co 'cua' khong bao gio toi noi. Da chuyen len truoc chot."
     },
     "test_fail_khong_tang": {
-     "nay": 4,
+     "nay": 3,
      "can": 4,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "Bo test day du sau khi va: 1.242 pass / 3 fail / 728s (truoc dot nay: 1.239 pass / 4 fail). Cai bot di dung la gann_sq9. Ba cai con lai co tu truoc va khong lien quan: banker thieu khoi tin_dung (2), va hien phap bao 6 module cua phien 07/09 chua co test."
     },
     "ca_kiem_nhin_truoc": {
      "nay": false,
