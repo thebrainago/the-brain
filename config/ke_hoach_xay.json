@@ -30,14 +30,16 @@
    "xong": null,
    "cong": {
     "corpus_tang_A_noi_duoc": {
-     "nay": 0.0,
+     "nay": 0.0667,
      "can": 0.35,
-     "dat": false
+     "dat": false,
+     "ghi_chu": "Moc 0,0%% ban dau do tren van ban THO. 6,7%% do tren DUONG CHAY THAT (_chuan truoc khi tach cau). Hai con so khong so sanh truc tiep duoc - moc that de so ve sau la 6,7%%."
     },
     "corpus_tang_A_noi_mot_phan": {
      "nay": 0,
      "can": 1,
-     "dat": false
+     "dat": false,
+     "ghi_chu": "CHUA_DO_DUOC, khong phai AM. dieu_kien_trong_cau tra ve LY DO BO chu khong tra phan van ban con lai, nen trang thai nay khong the do duoc. Phai sua ham do truoc khi tin o nay."
     },
     "toan_hang_chua_ai_dung": {
      "nay": 12,
@@ -50,9 +52,10 @@
      "dat": false
     },
     "gann_sq9_goi_duoc": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": false
+     "dat": true,
+     "ghi_chu": "Khoi gann nam SAU chot 'cua is None' nen ban khong co 'cua' khong bao gio toi noi. Da chuyen len truoc chot."
     },
     "test_fail_khong_tang": {
      "nay": 4,
@@ -63,10 +66,37 @@
      "nay": false,
      "can": true,
      "dat": false
+    },
+    "bo_doc_sinh_toan_hang_moi": {
+     "nay": [
+      "cci",
+      "adx",
+      "macd",
+      "khoi_luong"
+     ],
+     "can": 1,
+     "dat": true,
+     "ghi_chu": "Quet 4.198 ban van xuoi: bon toan hang nay LAN DAU xuat hien. Truoc 11/09 chung khong co mat trong _TOAN_HANG."
+    },
+    "giai_ma_chuoi_thoat": {
+     "nay": true,
+     "can": true,
+     "dat": true,
+     "ghi_chu": "1.679/4.198 ban (40,0%%) chua chuoi thoat \\uXXXX chua giai ma - dang duoc doc qua mot lop rac."
     }
    },
    "da_lam": [
-    "_corpus_ngu_phap.py - bo do ba tang, hat co dinh 20260911, da chay lay baseline"
+    "_corpus_ngu_phap.py - bo do ba tang, hat co dinh, da chay truoc/sau",
+    "doc_hieu._TOAN_HANG +24 mau: macd adx cci stochastic obv wma smma dong_luong bien_do than_nen khoi_luong ngay_trong_tuan thang phan_vi phuong_sai",
+    "ngu_phap: chuyen khoi gann_sq9 len TRUOC chot 'cua is None'",
+    "doc_hieu.loai_cau: doi du HANH DONG + SO SANH + NGUONG (nguong = so HOAC toan hang khac HOAC dai Bollinger)",
+    "doc_hieu._chuan: giai ma \\uXXXX truoc khi bo the HTML"
+   ],
+   "con_lai": [
+    "dieu_kien_trong_cau phai tra PHAN BO SOT that (khong phai ly do) - neu khong thi NOI_MOT_PHAN khong bao gio do duoc",
+    "tang A 6,7%% con xa 35%%: 140/150 cau van 'khong tach duoc cap'",
+    "tang C van 12 toan hang chet - chi giam sau khi chay LAI khau boc tren kho",
+    "tuong_quan / trang_thai_lat / dem_lien_tiep can duong doc rieng (chung nhan mot danh sach toan hang hoac mot dieu kien con)"
    ]
   },
   "2": {
