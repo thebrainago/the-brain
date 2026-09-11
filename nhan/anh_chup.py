@@ -69,11 +69,21 @@ def _khoi_tao() -> None:
         cn.executescript(_SCHEMA)
 
 
-def hash_file(p: Path | str) -> str:
+def hash_file(p: Path | str, dung_dem: bool = True) -> str:
+    """Bam noi dung file. `dung_dem=False` thi BAM LAI that, khong tin bo dem.
+
+    Vi sao can co duong khong-dem: bo dem khoa theo (duong dan, so byte, mtime),
+    va mot file bi ghi de voi CUNG kich thuoc trong CUNG mot giay se giu nguyen
+    khoa - tuc mot thay doi di lot. Bai kiem `test_bam_lai_khi_file_doi` bat
+    dung tinh huong do.
+
+    `kiem()` la noi PHAT HIEN thay doi nen no khong duoc tin bo dem. `ghim_ca_kho()`
+    thi can toc do hon (269 file parquet) va no dang GHI chu khong dang KIEM.
+    """
     p = Path(p)
     st = p.stat()
-    khoa = (str(p), st.st_size, int(st.st_mtime))
-    if khoa in _DEM:
+    khoa = (str(p), st.st_size, st.st_mtime_ns)
+    if dung_dem and khoa in _DEM:
         return _DEM[khoa]
     h = hashlib.blake2b(digest_size=16)
     with p.open("rb") as f:
@@ -132,7 +142,7 @@ def kiem(ma: str) -> tuple[bool, str]:
     p = Path(g["file"])
     if not p.exists():
         return False, f"ban da ghim BIEN MAT: {p.name}"
-    h = hash_file(p)
+    h = hash_file(p, dung_dem=False)      # KHONG tin bo dem o cho PHAT HIEN thay doi
     if h != g["hash"]:
         return False, (f"ban da ghim DOI NOI DUNG: {p.name} "
                        f"({g['hash'][:12]} -> {h[:12]}); ket qua cu KHONG tai lap duoc")
