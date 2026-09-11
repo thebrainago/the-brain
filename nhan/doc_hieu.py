@@ -168,6 +168,26 @@ _TOAN_HANG: tuple[tuple[str, object, bool], ...] = (
     (r"\bintraday low\b", lambda m: {"chi_bao": "gia", "cot": "low"}, True),
     (r"\b(?:the )?price\b", lambda m: {"chi_bao": "gia", "cot": "close"}, True),
 
+    # --- HINH HOC GANN ---
+    #
+    # Ngu phap co `gann_sq9` tu 08/09 nhung bang nay chua bao gio sinh ra no, nen
+    # toan hang do van "chua ai dung" sau khi da sua loi KeyError. Sua mot cho thi
+    # phai di het duong - day la lan thu tu cung mot bai hoc trong phien 11/09.
+    #
+    # VA co mot bay o day, do duoc trong chinh cau thu: "price crosses below the
+    # 45 degree Gann angle" tung duoc doc thanh `close cheo_xuong 45.0` - tuc SO
+    # GIA VOI CON SO 45. Tren US500 (~6.000) dieu kien do khong bao gio kich
+    # hoat; tren EURUSD (~1,08) thi luon dung. Ca hai deu la mot co che khong ai
+    # viet, va no trong hoan toan hop le. `_SO_GOC_GANN` chan cai do.
+    (r"\b(?:gann\s+square\s+of\s+nine|square\s+of\s+nine|gann\s+sq9|sq9)\b",
+     lambda m: {"chi_bao": "gann_sq9"}, False),
+    (r"\b(\d+(?:\.\d+)?)\s*(?:degree|deg\.?|do)\s+gann(?:\s+angle)?\b",
+     lambda m: {"chi_bao": "gann_sq9", "goc": float(m.group(1))}, False),
+    (r"\bgann\s+angle\s+(?:of\s+)?(\d+(?:\.\d+)?)\b",
+     lambda m: {"chi_bao": "gann_sq9", "goc": float(m.group(1))}, False),
+    (r"\bgann\s+(?:angle|level|line)\b",
+     lambda m: {"chi_bao": "gann_sq9", "_mac_dinh": "goc"}, False),
+
     # --- chi bao NGU PHAP DA CO ma bang nay chua bao gio sinh ra (them 11/09) ---
     #
     # Do 11/09 bang `_corpus_ngu_phap.py`: 12/43 toan hang chua duoc dung MOT
@@ -459,7 +479,15 @@ def _quet_toan_hang(doan: str, uu_tien_chi_bao: bool):
     return chon[2], chon[4], chon[0]
 
 
+#: Con so la mot phan cua cum DON VI GOC, khong phai mot nguong gia.
+#: "crosses below the 45 degree Gann angle" tung ra `close cheo_xuong 45.0`.
+_SO_LA_GOC = re.compile(r"(\d+(?:\.\d+)?)\s*(?:degree|deg|do)", re.I)
+
+
 def _so_dau_tien(doan: str):
+    for m in _SO_LA_GOC.finditer(doan):
+        # con so nay thuoc ve mot GOC - bo no ra khoi cuoc thi lam nguong
+        doan = doan[:m.start(1)] + " " * (m.end(1) - m.start(1)) + doan[m.end(1):]
     m = re.search(_SO, doan)
     if not m:
         return None
@@ -812,6 +840,9 @@ _HO_THEO_CHI_BAO = {
     "macd": "xu_huong", "dong_luong": "xu_huong", "adx": "xu_huong",
     "obv": "dong_tien", "khoi_luong": "dong_tien",
     "cao_nhat": "pha_vo", "thap_nhat": "pha_vo",
+    # Muc Gann la mot MUC GIA hinh hoc - xuyen qua no la pha vo, cung ho voi
+    # dinh/day N bar. (Lan thu nam trong phien: sua bo doc ma quen bang ho.)
+    "gann_sq9": "pha_vo",
     "gio": "phien", "ngay_trong_thang": "lich", "thang": "lich",
     "ngay_trong_tuan": "lich",
 }
@@ -849,7 +880,7 @@ _UU_TIEN_HO: tuple[str, ...] = (
     # dao dong / phan vi truoc: chung noi ro luat dang bat phia nao
     "rsi", "ibs", "zscore", "stochastic", "stoch", "cci", "phan_vi",
     # pha vo
-    "cao_nhat", "thap_nhat",
+    "cao_nhat", "thap_nhat", "gann_sq9",
     # lich / phien
     "gio", "ngay_trong_tuan", "ngay_trong_thang", "thang",
     # dong tien

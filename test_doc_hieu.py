@@ -582,3 +582,50 @@ class MOI_CHI_BAO_BO_DOC_SINH_RA_DEU_PHAI_XEP_DUOC_HO(unittest.TestCase):
                 dk, _ = DH.dieu_kien_trong_cau(cau)
                 self.assertTrue(dk, f"khong doc duoc: {cau}")
                 self.assertEqual(DH.suy_ho(dk, chieu), mong)
+
+
+class HINH_HOC_GANN_DOC_DUNG_CHU_KHONG_DOC_BUA(unittest.TestCase):
+    """`gann_sq9` vao ngu phap tu 08/09 nhung bo doc chua bao gio sinh ra no -
+    nen no van nam trong danh sach "chua ai dung" ke ca sau khi da sua loi
+    KeyError. Sua mot cho thi phai di het duong.
+
+    Va o day co mot bay do duoc: "price crosses below the 45 degree Gann angle"
+    tung ra `close cheo_xuong 45.0` - SO GIA VOI CON SO 45. Tren US500 (~6.000)
+    dieu kien do khong bao gio kich hoat; tren EURUSD (~1,08) thi luon dung. Ca
+    hai deu la mot co che khong ai viet, va no TRONG HOAN TOAN HOP LE.
+    """
+
+    def _dk(self, cau):
+        dk, ly = DH.dieu_kien_trong_cau(cau)
+        self.assertTrue(dk, f"khong doc duoc: {cau} ({ly})")
+        return dk[0]
+
+    def test_square_of_nine_ra_dung_toan_hang(self):
+        d = self._dk("Buy when price is above the Gann square of nine level")
+        self.assertEqual(d["phai"], {"chi_bao": "gann_sq9"})
+
+    def test_SO_DO_KHONG_duoc_thanh_NGUONG(self):
+        d = self._dk("Sell when price crosses below the 45 degree Gann angle")
+        self.assertEqual(d["phai"].get("chi_bao"), "gann_sq9",
+                         "con so cua GOC bi doc thanh nguong gia")
+        self.assertEqual(d["phai"].get("goc"), 45.0)
+        self.assertNotIn("hang", d["phai"])
+
+    def test_gann_angle_of_N_cung_doc_duoc(self):
+        d = self._dk("Buy when the close is above the Gann angle of 45")
+        self.assertEqual(d["phai"].get("goc"), 45.0)
+
+    def test_xep_ho_PHA_VO_va_qua_cong_ngu_phap(self):
+        """Muc Gann la mot MUC GIA hinh hoc - xuyen qua no la pha vo."""
+        dk, _ = DH.dieu_kien_trong_cau(
+            "Buy when price is above the Gann square of nine level")
+        ho = DH.suy_ho(dk, 1)
+        self.assertEqual(ho, "pha_vo")
+        self.assertEqual(NP.kiem_khai_bao(
+            {"ten": "t", "ho": ho, "chieu": 1, "giu": 1, "vao": dk, "ra": [],
+             "co_che": "Muc Gann la muc gia hinh hoc; xuyen qua no la pha vo."}), [])
+
+    def test_so_binh_thuong_VAN_lam_nguong_duoc(self):
+        """Chot chan goc khong duoc lam hong cac cau khong lien quan."""
+        d = self._dk("Buy when the 2-period RSI closes below 10")
+        self.assertEqual(d["phai"], {"hang": 10.0})

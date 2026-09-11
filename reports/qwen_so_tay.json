@@ -116,7 +116,7 @@
   },
   "X0_bo_test": {
    "ma": "X0_bo_test",
-   "so_lan_chay": 8,
+   "so_lan_chay": 9,
    "trang_thai": "DANG_CHAY",
    "lan": "CPU",
    "lenh": [
@@ -129,16 +129,16 @@
     "loadfile",
     "--tb=no"
    ],
-   "bat_dau": 1789139534.7484758,
+   "bat_dau": 1789140637.3172023,
    "xong": null,
    "ma_thoat": null,
    "cong": {
     "ket": "CHUA_DO_DUOC",
-    "vi_sao": "tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log:  summary info ===========================\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_co_che_do_chi_FRED_moi_lam_duoc\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_giu_CA_proxy_lan_so_that_de_doi_chieu\nFAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test\n3 failed, 1299 passed, 1 skipped, 1 warning, 468 subtests passed in 925.30s (0:15:25)\n",
+    "vi_sao": "tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log:  summary info ===========================\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_co_che_do_chi_FRED_moi_lam_duoc\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_giu_CA_proxy_lan_so_that_de_doi_chieu\nFAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test\n3 failed, 1335 passed, 1 skipped, 1 warning, 474 subtests passed in 917.20s (0:15:17)\n",
     "so": {}
    },
-   "log": ".............................. [ 73%]\n................uuuu....uu.uuu..uuuuuu.uuu.u.uu.uuu.uu.u................ [ 77%]\n.....................FF......................................uuuuuuuuuuu [ 82%]\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\nuuuuuuuu.uuuuuuuuuuuuuuuuuu............................................. [ 85%]\n........................................................................ [ 91%]\n.........................s..........................................F... [ 96%]\n...........................................                              [100%]\n============================== warnings summary ===============================\ntest_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc\n  <unknown>:6: SyntaxWarning: \"\\L\" is an invalid escape sequence. Such sequences will not work in the future. Did you mean \"\\\\L\"? A raw string is also an option.\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_co_che_do_chi_FRED_moi_lam_duoc\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_giu_CA_proxy_lan_so_that_de_doi_chieu\nFAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test\n3 failed, 1299 passed, 1 skipped, 1 warning, 468 subtests passed in 925.30s (0:15:25)\n",
-   "giay": 942.3
+   "log": ".uuuu.....................uu.u [ 76%]\nuuuu.uuuu.uu.u.uuu.uuu.uuu......................................FF...... [ 80%]\n.......................uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]\n.uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu........... [ 82%]\n........................................................................ [ 88%]\n.....................................................................s.. [ 93%]\n..............................................F......................... [ 99%]\n.............                                                            [100%]\n============================== warnings summary ===============================\ntest_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc\n  <unknown>:6: SyntaxWarning: \"\\L\" is an invalid escape sequence. Such sequences will not work in the future. Did you mean \"\\\\L\"? A raw string is also an option.\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_co_che_do_chi_FRED_moi_lam_duoc\nFAILED test_banker_fred.py::CheDoDungSoTHAT::test_giu_CA_proxy_lan_so_that_de_doi_chieu\nFAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test\n3 failed, 1335 passed, 1 skipped, 1 warning, 474 subtests passed in 917.20s (0:15:17)\n",
+   "giay": 922.3
   },
   "TT_boc": {
    "ma": "TT_boc",
@@ -372,6 +372,12 @@
    "ma": "X0_bo_test",
    "ai": "qwen",
    "van": "Chay toan bo 1299 test, co 3 loi va 1 bi skip. Ket qua la CHUA_DO_DUOC vi tien trinh thoat ma 1 (HONG), khong phai am thuong mai. 3 test loi: 2 trong `test_banker_fred.py` (ve FRED chi phi va CA proxy) va 1 trong `test_hien_phap.py` (kiem tra module co test hay khong). Day la loi code/phan mem, khong phai ket qua giao dich. Can sua code de het loi thi moi co the tin vao he thong."
+  },
+  {
+   "luc": "2026-09-11 22:27:50",
+   "ma": "X0_bo_test",
+   "ai": "qwen",
+   "van": "Phien test co 1335 phep thu PASS, 1 skipped, 474 subtests. Tuy nhien co 3 phep thu FAIL: 2 trong test_banker_fred.py (test_co_che_do_chi_FRED_moi_lam_duoc, test_giu_CA_proxy_lan_so_that_de_doi_chieu) va 1 trong test_hien_phap.py (test_module_moi_khong_duoc_ra_doi_ma_khong_co_test). Tien trinh thoat voi ma 1, do do ket qua la CHUA_DO_DUOC (HONG). Con so chi so: 3 loi hien tai. Khau nay chua cho phep tin vao he thong, can sua code hoac test de vuot qua."
   }
  ],
  "de_xuat": [
@@ -703,12 +709,31 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-11 22:09:29"
+  },
+  {
+   "ma": "V1_sua_3_test_fail",
+   "ten": "Debug va sua 3 phep thu fail trong bo test (test_banker_fred.py x2, test_hien_phap.py x1)",
+   "vi_sao": "X0_bo_test chay xong cho thay 3 loi hien tai tren 1335 phep thu thanh cong. Can tim nguyen nhan cau (assert sai, mock khop, hay logic FRED/proxy) va sua de vuot nguong test.",
+   "lan": "CPU",
+   "lenh": [
+    "python",
+    "_debug_tests.py",
+    "--fix",
+    "3_failures"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-11 22:28:00"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789140296.6503046
+   "luc": 1789141118.5612223
   }
  },
  "ngay_da_mo": [
