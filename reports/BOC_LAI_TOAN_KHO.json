@@ -1,128 +1,114 @@
 {
- "luc": "2026-09-11 20:44:33",
- "so_ban": 4971,
- "giay": 467,
- "kho_truoc": 696,
- "kho_sau": 780,
- "them": 84,
+ "luc": "2026-09-11 20:54:21",
+ "so_ban": 5121,
+ "giay": 503,
+ "kho_truoc": 780,
+ "kho_sau": 820,
+ "them": 40,
  "trang_thai_cong": {
-  "TU_CHOI": 58,
+  "TU_CHOI": 67,
   "vi::da co co che ten 'mua_close_cheo_len_sma200'": 1,
   "vi::da co co che ten 'mua_close_tren_sma200'": 1,
-  "NHAN": 19,
+  "vi::da co co che ten 'mua_rsi2_cheo_xuong_15'": 1,
   "vi::da co co che ten 'mua_rsi30_tren_50_rsi2_duoi_15'": 1,
   "vi::da co co che ten 'mua_sma10_tren_sma60'": 1,
+  "vi::da co co che ten 'mua_close_tren_ema200_ema50_cheo_len_ema20": 2,
   "vi::da co co che ten 'mua_rsi14_tren_70'": 2,
   "vi::da co co che ten 'mua_rsi14_tren_55'": 7,
   "vi::da co co che ten 'ban_rsi14_duoi_45'": 2,
-  "vi::da co co che ten 'mua_close_tren_ema200_ema50_cheo_len_ema20": 1,
   "vi::da co co che ten 'mua_rsi14_duoi_30'": 3,
   "vi::da co co che ten 'mua_rsi14_duoi_25'": 1,
-  "vi::ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph": 29,
+  "NHAN": 10,
   "vi::da co co che ten 'mua_zscore20_close_duoi_am2'": 4,
   "vi::trung DIEU KIEN voi co che 'rsi_cross_up_from_30' (chi khac ": 1,
-  "vi::da co co che ten 'mua_ema1_tren_ema2'": 1,
+  "vi::da co co che ten 'mua_rsi5_cheo_len_30'": 1,
+  "vi::ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph": 15,
+  "vi::da co co che ten 'mua_rsi14_tren_60'": 1,
+  "vi::da co co che ten 'mua_rsi14_duoi_60'": 1,
+  "vi::da co co che ten 'mua_ema21_tren_ema50_ema21_duoi_ema50'": 1,
+  "vi::da co co che ten 'mua_adx14_tren_25'": 1,
+  "vi::da co co che ten 'mua_rsi14_tren_25'": 1,
+  "vi::da co co che ten 'mua_ema1_tren_ema2'": 2,
+  "vi::da co co che ten 'mua_cci20_duoi_am100'": 3,
+  "vi::da co co che ten 'mua_rsi14_tren_30_rsi14_duoi_70'": 1,
+  "vi::da co co che ten 'mua_ema25_tren_ema125'": 1,
   "vi::da co co che ten 'mua_zscore20_close_tren_2'": 2,
-  "vi::da co co che ten 'ban_zscore20_close_duoi_am2'": 1
+  "vi::da co co che ten 'ban_zscore20_close_duoi_am2'": 2,
+  "vi::da co co che ten 'mua_rsi14_cheo_len_50'": 1,
+  "vi::da co co che ten 'mua_sma50_cheo_len_sma200'": 1,
+  "vi::da co co che ten 'mua_sma20_cheo_len_sma50'": 1,
+  "vi::da co co che ten 'mua_close_tren_ema50_ema200_duoi_ema50'": 1,
+  "vi::da co co che ten 'mua_rsi14_duoi_40'": 1,
+  "vi::da co co che ten 'mua_rsi14_tren_50'": 1,
+  "vi::da co co che ten 'mua_rsi14_duoi_30_rsi14_cheo_len_30'": 1,
+  "vi::da co co che ten 'mua_rsi14_tren_30'": 1
  },
  "toan_hang_trong_co_che_moi": [
   [
-   "rsi",
-   21
+   "macd",
+   6
   ],
   [
-   "ema",
-   18
-  ],
-  [
-   "sma",
+   "cci",
    4
   ],
   [
-   "gia",
-   3
+   "adx",
+   2
   ],
   [
-   "zscore",
+   "tb",
+   2
+  ],
+  [
+   "stochastic",
+   2
+  ],
+  [
+   "khoi_luong",
    1
   ]
  ],
  "vi_du_moi": [
   {
-   "ten": "mua_rsi2_cheo_xuong_15",
-   "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/"
+   "ten": "mua_cci20_tren_am100",
+   "nguon": "https://www.quantconnect.com/forum/discussion/7969/newbie-help-needed-in-creating-a-cci-universe-selection-algorithm/"
   },
   {
-   "ten": "mua_close_tren_ema200_ema50_cheo_len_ema200_rsi14_tren_50",
-   "nguon": "https://www.mql5.com/en/job"
+   "ten": "mua_adx14_tren_25",
+   "nguon": "https://t.me/vutruea/1129099"
   },
   {
-   "ten": "mua_rsi5_cheo_len_30",
-   "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
+   "ten": "mua_cci20_duoi_am100",
+   "nguon": "https://t.me/vutruea/1129060"
   },
   {
-   "ten": "mua_rsi14_tren_60",
-   "nguon": "https://t.me/vutruea/1129346"
-  },
-  {
-   "ten": "mua_rsi14_duoi_60",
-   "nguon": "https://t.me/vutruea/1129345"
-  },
-  {
-   "ten": "mua_ema21_tren_ema50_ema21_duoi_ema50",
-   "nguon": "https://t.me/vutruea/1129103"
-  },
-  {
-   "ten": "mua_rsi14_tren_25",
-   "nguon": "https://t.me/vutruea/1129063"
-  },
-  {
-   "ten": "mua_ema1_tren_ema2",
+   "ten": "mua_macd_tren_0",
    "nguon": "https://t.me/vutruea/1129021"
   },
   {
-   "ten": "mua_rsi14_tren_30_rsi14_duoi_70",
-   "nguon": "https://t.me/vutruea/1129003"
+   "ten": "mua_khoi_luong_tren_10",
+   "nguon": "file:///data/telegram/bobvolmanchannel/test thử ict smc--Nhật Hoài Trader.pdf"
   },
   {
-   "ten": "mua_ema25_tren_ema125",
-   "nguon": "https://github.com/NadirAliOfficial/kaizen-intraday-semis-backtest"
+   "ten": "mua_macd_tren_20",
+   "nguon": "https://github.com/passiontrader/geometric-trading-engine"
   },
   {
-   "ten": "ban_zscore20_close_duoi_am2",
-   "nguon": "https://github.com/ksingla-GL/keltner-channels-strategy"
+   "ten": "mua_macd_tren_1",
+   "nguon": "https://github.com/Matteo567/LSTM_for_SPY_MACD_Prediction_with_Backtest"
   },
   {
-   "ten": "mua_rsi14_cheo_len_50",
-   "nguon": "https://github.com/mosh888/VectorBT-Simlpe-RSI-Backtest"
+   "ten": "mua_tb3_stochastic14_cheo_len_50",
+   "nguon": "https://www.mql5.com/en/code/74661"
   },
   {
-   "ten": "mua_sma50_cheo_len_sma200",
-   "nguon": "https://github.com/AliAmeri1996/algo-backtest"
+   "ten": "mua_macd_cheo_len_1",
+   "nguon": "https://github.com/02mba20092princesaini-lgtm/macd-trading-strategy-kotak-bank"
   },
   {
-   "ten": "mua_sma20_cheo_len_sma50",
-   "nguon": "https://github.com/adiv-1/momentum-clustered-algorithmic-trading-strategy"
-  },
-  {
-   "ten": "mua_close_tren_ema50_ema200_duoi_ema50",
-   "nguon": "https://www.mql5.com/en/code/68512"
-  },
-  {
-   "ten": "mua_rsi14_duoi_40",
-   "nguon": "https://www.mql5.com/en/code/68934"
-  },
-  {
-   "ten": "mua_rsi14_tren_50",
-   "nguon": "https://www.mql5.com/en/code/48663"
-  },
-  {
-   "ten": "mua_rsi14_duoi_30_rsi14_cheo_len_30",
-   "nguon": "https://github.com/resign123/Nifty-50-RSI-Overbought-Oversold-and-MACD-Signal-Strategy"
-  },
-  {
-   "ten": "mua_rsi14_tren_30",
-   "nguon": "https://www.mql5.com/en/code/63698"
+   "ten": "ban_macd_cheo_xuong_am1",
+   "nguon": "https://github.com/02mba20092princesaini-lgtm/macd-trading-strategy-kotak-bank"
   }
  ]
 }

@@ -4,15 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `quet_be_mat_D1_20260905.log`: TONG: {'LOAI': 11283, 'CHUA_DU_LUC': 11237, 'NEN_GOP': 8463, 'SAN_SANG_V4': 13} (305.4s, 6 tien trinh)
-- `quet_full_D1_20260905.log`: TONG: {'LOAI': 15716, 'CHUA_DU_LUC': 12948, 'NEN_GOP': 9369, 'SAN_SANG_V4': 19} (358.4s, 6 tien trinh)
-- git: 26088aa boc tach theo LAN: chi bao 0->92%, va 321 co che lan dau cham pheu
-### 2026-09-05 23:02:35 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12220, 0 phut), dieu_khien_xa.py (pid 16212, 232 phut)
-- `chi_bao_qwen_20260905.log`: them vao kho     : 0
-- `chi_bao_v2.log`: them vao kho     : 44
-- `chien_luoc_qwen_20260905.log`: them vao kho     : 0
 - `chien_luoc_v2.log`: them vao kho     : 10
 - `quet_D1_v3.log`: TONG: {'LOAI': 18600, 'CHUA_DU_LUC': 17561, 'NEN_GOP': 11950, 'SAN_SANG_V4': 21} (451.8s, 6 tien trinh)
 - `quet_H4_v3.log`: TONG: {'LOAI': 7805, 'CHUA_DU_LUC': 1879, 'NEN_GOP': 873} (282.5s, 6 tien trinh)
@@ -404,3 +395,12 @@
 - `boc_lai2.log`: ... 2000/5121 ban · kho 781
 - `qwen_ultra.log`: ~ 20:46:02 | san sang 12 | CPU   31% / muc tieu 65%  |  con  6.7 loi  |  dang chay 3  [CPU:1, LLM:1, MANG:1]
 - git: 1aecb9c khoi 3: ca kiem bat duoc lo hong trong chinh bo phat hien thay doi
+### 2026-09-11 21:11:33 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 23664, 0 phut)
+- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
+- `ghim_ca_kho.log`: }
+- `qwen_ultra.log`: [!] X0_bo_test             CHUA_DO_DUOC  |  tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log: summary info =============
+- `test_day_du.log`: 3 failed, 1299 passed, 1 skipped, 1 warning, 468 subtests passed in 1082.15s (0:18:02)
+- git: 5e6c83d trang thai: khoi 2, 3, 4 DAT; kho co che 689 -> 820 trong phien

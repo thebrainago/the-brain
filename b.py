@@ -414,6 +414,30 @@ def c_da_thu(a: list) -> int:
     return 0
 
 
+
+def c_uu_tien(a: list) -> int:
+    """`b uu-tien <url|file>` - LUONG UU TIEN cua chu du an.
+
+    Mot link -> toan van -> co che -> dang ky, ngay trong phien. Khong phai cho
+    hang doi 10.000 tai lieu may tu quet.
+    """
+    if not a:
+        print('go: b uu-tien <url hoac duong dan file>')
+        print('vi du: b uu-tien https://www.youtube.com/watch?v=...')
+        return 2
+    from nhan import uu_tien as UT
+    UT.in_ra(UT.xu_ly(a[0]))
+    return 0
+
+
+def c_video(a: list) -> int:
+    """`b video [N]` - lay phu de cho N video trong kho (mac dinh 20)."""
+    from nhan import doc_video as DV
+    import json as _j
+    print(_j.dumps(DV.mot_luot(int(a[0]) if a else 20), ensure_ascii=False, indent=1))
+    return 0
+
+
 LENH = {
     "vao": c_vao, "ket": c_ket,
     "qwen": c_qwen, "q": c_qwen,
@@ -442,6 +466,8 @@ LENH = {
     "chi-tieu": c_chi_tieu, "ct": c_chi_tieu,
     # --- khoi 2 (11/09/2026): so bai hoc ---
     "da-thu": c_da_thu, "bai-hoc": c_da_thu,
+    # --- khoi 5 (11/09/2026): cac cua vao con thieu ---
+    "uu-tien": c_uu_tien, "ut": c_uu_tien, "video": c_video,
 }
 
 
