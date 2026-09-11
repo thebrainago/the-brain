@@ -1,14 +1,128 @@
 {
- "luc": "2026-09-11 20:36:31",
- "so_ban": 120,
- "giay": 3,
+ "luc": "2026-09-11 20:44:33",
+ "so_ban": 4971,
+ "giay": 467,
  "kho_truoc": 696,
- "kho_sau": 696,
- "them": 0,
+ "kho_sau": 780,
+ "them": 84,
  "trang_thai_cong": {
-  "{'nhan': False, 'ly_do': [\"da co co che ten 'mua_close_cheo_len_sma200'\"]}": 1,
-  "{'nhan': False, 'ly_do': [\"da co co che ten 'mua_close_tren_sma200'\"]}": 1
+  "TU_CHOI": 58,
+  "vi::da co co che ten 'mua_close_cheo_len_sma200'": 1,
+  "vi::da co co che ten 'mua_close_tren_sma200'": 1,
+  "NHAN": 19,
+  "vi::da co co che ten 'mua_rsi30_tren_50_rsi2_duoi_15'": 1,
+  "vi::da co co che ten 'mua_sma10_tren_sma60'": 1,
+  "vi::da co co che ten 'mua_rsi14_tren_70'": 2,
+  "vi::da co co che ten 'mua_rsi14_tren_55'": 7,
+  "vi::da co co che ten 'ban_rsi14_duoi_45'": 2,
+  "vi::da co co che ten 'mua_close_tren_ema200_ema50_cheo_len_ema20": 1,
+  "vi::da co co che ten 'mua_rsi14_duoi_30'": 3,
+  "vi::da co co che ten 'mua_rsi14_duoi_25'": 1,
+  "vi::ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph": 29,
+  "vi::da co co che ten 'mua_zscore20_close_duoi_am2'": 4,
+  "vi::trung DIEU KIEN voi co che 'rsi_cross_up_from_30' (chi khac ": 1,
+  "vi::da co co che ten 'mua_ema1_tren_ema2'": 1,
+  "vi::da co co che ten 'mua_zscore20_close_tren_2'": 2,
+  "vi::da co co che ten 'ban_zscore20_close_duoi_am2'": 1
  },
- "toan_hang_trong_co_che_moi": [],
- "vi_du_moi": []
+ "toan_hang_trong_co_che_moi": [
+  [
+   "rsi",
+   21
+  ],
+  [
+   "ema",
+   18
+  ],
+  [
+   "sma",
+   4
+  ],
+  [
+   "gia",
+   3
+  ],
+  [
+   "zscore",
+   1
+  ]
+ ],
+ "vi_du_moi": [
+  {
+   "ten": "mua_rsi2_cheo_xuong_15",
+   "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/"
+  },
+  {
+   "ten": "mua_close_tren_ema200_ema50_cheo_len_ema200_rsi14_tren_50",
+   "nguon": "https://www.mql5.com/en/job"
+  },
+  {
+   "ten": "mua_rsi5_cheo_len_30",
+   "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
+  },
+  {
+   "ten": "mua_rsi14_tren_60",
+   "nguon": "https://t.me/vutruea/1129346"
+  },
+  {
+   "ten": "mua_rsi14_duoi_60",
+   "nguon": "https://t.me/vutruea/1129345"
+  },
+  {
+   "ten": "mua_ema21_tren_ema50_ema21_duoi_ema50",
+   "nguon": "https://t.me/vutruea/1129103"
+  },
+  {
+   "ten": "mua_rsi14_tren_25",
+   "nguon": "https://t.me/vutruea/1129063"
+  },
+  {
+   "ten": "mua_ema1_tren_ema2",
+   "nguon": "https://t.me/vutruea/1129021"
+  },
+  {
+   "ten": "mua_rsi14_tren_30_rsi14_duoi_70",
+   "nguon": "https://t.me/vutruea/1129003"
+  },
+  {
+   "ten": "mua_ema25_tren_ema125",
+   "nguon": "https://github.com/NadirAliOfficial/kaizen-intraday-semis-backtest"
+  },
+  {
+   "ten": "ban_zscore20_close_duoi_am2",
+   "nguon": "https://github.com/ksingla-GL/keltner-channels-strategy"
+  },
+  {
+   "ten": "mua_rsi14_cheo_len_50",
+   "nguon": "https://github.com/mosh888/VectorBT-Simlpe-RSI-Backtest"
+  },
+  {
+   "ten": "mua_sma50_cheo_len_sma200",
+   "nguon": "https://github.com/AliAmeri1996/algo-backtest"
+  },
+  {
+   "ten": "mua_sma20_cheo_len_sma50",
+   "nguon": "https://github.com/adiv-1/momentum-clustered-algorithmic-trading-strategy"
+  },
+  {
+   "ten": "mua_close_tren_ema50_ema200_duoi_ema50",
+   "nguon": "https://www.mql5.com/en/code/68512"
+  },
+  {
+   "ten": "mua_rsi14_duoi_40",
+   "nguon": "https://www.mql5.com/en/code/68934"
+  },
+  {
+   "ten": "mua_rsi14_tren_50",
+   "nguon": "https://www.mql5.com/en/code/48663"
+  },
+  {
+   "ten": "mua_rsi14_duoi_30_rsi14_cheo_len_30",
+   "nguon": "https://github.com/resign123/Nifty-50-RSI-Overbought-Oversold-and-MACD-Signal-Strategy"
+  },
+  {
+   "ten": "mua_rsi14_tren_30",
+   "nguon": "https://www.mql5.com/en/code/63698"
+  }
+ ]
 }

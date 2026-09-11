@@ -788,11 +788,29 @@ def so_bar_giu(vb: str):
 
 
 # --------------------------------------------------------------------- HO
+#: Chi bao -> HO. Moi chi bao bo doc co the sinh ra PHAI co mat o day.
+#:
+#: Do 11/09/2026 sau khi them 15 toan hang vao bo doc: ly do TU CHOI lon nhat cua
+#: `them_co_che` la `ho 'khac' khong thuoc [...]` - **29 tren 58 lan tu choi**, va
+#: trong 19 co che moi duoc nhan KHONG co lay mot cci/adx/macd nao. Doi chieu thi
+#: bang nay chi biet 11 chi bao, khong co MOT cai nao trong 15 cai vua them.
+#:
+#: Tuc ban va bo doc bi HUY LANG LE o tang duoi: doc ra duoc, roi bi vut vi khong
+#: xep duoc ho. Cung ho loi voi "bo doc khong sinh ra toan hang ngu phap da co" -
+#: mot mat xich im lang lam vo hieu mat xich truoc no. Sua mot cho thi phai di
+#: het duong.
+#:
+#: `stochastic` la ten bo doc THAT SU sinh ra; `stoch` la ten cu. Giu ca hai.
 _HO_THEO_CHI_BAO = {
     "rsi": "quay_ve_trung_binh", "ibs": "quay_ve_trung_binh",
     "zscore": "quay_ve_trung_binh", "stoch": "quay_ve_trung_binh",
-    "atr": "bien_dong",
-    "sma": "xu_huong", "ema": "xu_huong",
+    "stochastic": "quay_ve_trung_binh", "cci": "quay_ve_trung_binh",
+    "phan_vi": "quay_ve_trung_binh",
+    "atr": "bien_dong", "phuong_sai": "bien_dong", "do_lech": "bien_dong",
+    "bien_do": "bien_dong", "than_nen": "bien_dong",
+    "sma": "xu_huong", "ema": "xu_huong", "wma": "xu_huong", "smma": "xu_huong",
+    "macd": "xu_huong", "dong_luong": "xu_huong", "adx": "xu_huong",
+    "obv": "dong_tien", "khoi_luong": "dong_tien",
     "cao_nhat": "pha_vo", "thap_nhat": "pha_vo",
     "gio": "phien", "ngay_trong_thang": "lich", "thang": "lich",
     "ngay_trong_tuan": "lich",
@@ -814,7 +832,33 @@ def _chi_bao_trong(t: dict) -> list[str]:
 #   RSI > 70 -> mua  = mua theo da manh -> xu_huong
 # Suy ho chi tu TEN chi bao la xep nham mot nua so luat, va ho quyet dinh nhom
 # doi chung o phep thu phan chung -> phan quyet thanh vo nghia.
-_DAO_DONG = {"rsi", "ibs", "zscore", "stoch"}
+# DAO DONG = chi bao co THANG DO co dinh, nen "bat o phia thap" doc duoc thanh
+# quay-ve-trung-binh va "bat o phia cao" thanh xu-huong. `adx` va `macd` KHONG
+# o day du chung cung la so: ADX cao = xu huong MANH (khong noi chieu), MACD
+# khong co bien - xep chung theo phia nguong se cho ra ho sai.
+_DAO_DONG = {"rsi", "ibs", "zscore", "stoch", "stochastic", "cci", "phan_vi"}
+
+#: THU TU XET trong `suy_ho`. Mot cau co nhieu chi bao ("RSI(2) closes below 10"
+#: co ca `rsi` lan `gia`), nen chi bao DAC TRUNG phai duoc hoi truoc chi bao nen.
+#:
+#: Truoc 11/09 day la mot tuple VIET CUNG ben trong `suy_ho`, tach roi khoi
+#: `_HO_THEO_CHI_BAO`. Hai nguon su that cho cung mot dieu: toi them 15 chi bao
+#: vao bang ho, chay lai, va van ra "khac" - vi vong lap khong he doc bang do.
+#: Nay mot nguon, va co bai kiem chan hai ben lech nhau.
+_UU_TIEN_HO: tuple[str, ...] = (
+    # dao dong / phan vi truoc: chung noi ro luat dang bat phia nao
+    "rsi", "ibs", "zscore", "stochastic", "stoch", "cci", "phan_vi",
+    # pha vo
+    "cao_nhat", "thap_nhat",
+    # lich / phien
+    "gio", "ngay_trong_tuan", "ngay_trong_thang", "thang",
+    # dong tien
+    "obv", "khoi_luong",
+    # xu huong
+    "macd", "adx", "dong_luong", "sma", "ema", "wma", "smma",
+    # bien dong (sau cung: `bien_do`/`than_nen` hay di kem chi bao khac)
+    "atr", "phuong_sai", "do_lech", "bien_do", "than_nen",
+)
 # Phep CAT cung mang chieu: "RSI cheo xuong 15" la di vao vung thap.
 # Bo sot chung thi luat Connors RSI(2) cheo xuong 15 bi xep ho "khac".
 _NHO_HON = {"<", "<=", "duoi", "nho_hon", "cheo_xuong"}
@@ -849,8 +893,7 @@ def suy_ho(dk: list[dict], chieu: int = 1) -> str:
     cb = []
     for d in dk:
         cb += _chi_bao_trong(d.get("trai") or {}) + _chi_bao_trong(d.get("phai") or {})
-    for ten in ("rsi", "ibs", "zscore", "stoch", "cao_nhat", "thap_nhat", "gio",
-                "ngay_trong_thang", "sma", "ema", "atr"):
+    for ten in _UU_TIEN_HO:
         if ten not in cb:
             continue
         if ten in _DAO_DONG:

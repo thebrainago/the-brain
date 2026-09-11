@@ -28508,5 +28508,79 @@
   "ra": [],
   "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Draws Buy/Sell arrows when RSI is above/below 50 and Price is above/below MA\" [nguon: https://www.mql5.com/en/code/48663]",
   "nguon": "https://www.mql5.com/en/code/48663"
+ },
+ {
+  "ten": "mua_rsi14_duoi_30_rsi14_cheo_len_30",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Buy Signal : RSI drops below 30 (oversold) and crosses back above 30\" [nguon: https://github.com/resign123/Nifty-50-RSI-Overbought-Oversold-and-MACD-Signal-St]",
+  "nguon": "https://github.com/resign123/Nifty-50-RSI-Overbought-Oversold-and-MACD-Signal-Strategy"
+ },
+ {
+  "ten": "mua_rsi14_tren_30",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Buy Signal: Generated when the RSI crosses up from the oversold zone (default: below 30)\" [nguon: https://www.mql5.com/en/code/63698]",
+  "nguon": "https://www.mql5.com/en/code/63698"
  }
 ]

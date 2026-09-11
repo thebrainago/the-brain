@@ -541,3 +541,44 @@ class BAO_PHAN_BO_SOT_CHU_KHONG_IM_LANG(unittest.TestCase):
     def test_doc_tron_ven_thi_khong_bao_bo_sot(self):
         _, ly = DH.dieu_kien_trong_cau("Buy when the 2-period RSI closes below 10")
         self.assertEqual(ly, "")
+
+
+class MOI_CHI_BAO_BO_DOC_SINH_RA_DEU_PHAI_XEP_DUOC_HO(unittest.TestCase):
+    """Doc ra mot co che roi vut no vi khong xep duoc ho la mat mat im lang.
+
+    Do 11/09/2026 sau khi them 15 toan hang vao bo doc: ly do TU CHOI lon nhat
+    cua `them_co_che` la `ho 'khac'` - 29/58 lan - va trong 19 co che moi duoc
+    nhan KHONG co lay mot cci/adx/macd nao. Ban va bo doc bi HUY LANG LE o tang
+    duoi vi bang ho khong biet cac ten do.
+    """
+
+    def test_bang_ho_va_thu_tu_xet_KHONG_duoc_lech(self):
+        """Truoc 11/09 day la HAI nguon su that: mot dict, va mot tuple viet
+        cung ben trong `suy_ho`. Them vao dict ma quen tuple = khong co tac dung
+        gi, va khong mot loi bao."""
+        self.assertEqual(set(DH._HO_THEO_CHI_BAO), set(DH._UU_TIEN_HO))
+
+    def test_moi_chi_bao_trong_bang_ho_deu_hop_le(self):
+        hop_le = {"quay_ve_trung_binh", "xu_huong", "pha_vo", "bien_dong",
+                  "dong_tien", "lich", "phien", "vi_mo"}
+        for ten, ho in DH._HO_THEO_CHI_BAO.items():
+            with self.subTest(chi_bao=ten):
+                self.assertIn(ho, hop_le)
+
+    def test_dao_dong_phai_nam_trong_bang_ho(self):
+        self.assertTrue(set(DH._DAO_DONG) <= set(DH._HO_THEO_CHI_BAO))
+
+    def test_cau_that_voi_chi_bao_moi_deu_ra_ho_KHAC_khac(self):
+        for cau, chieu, mong in (
+            ("Buy when the 14-period ADX is above 25", 1, "xu_huong"),
+            ("Go long if the 20-period CCI drops below -100", 1, "quay_ve_trung_binh"),
+            ("Sell when MACD histogram falls below 0", -1, "xu_huong"),
+            ("Buy when OBV is above 0", 1, "dong_tien"),
+            ("Enter when stochastic(14) is below 20", 1, "quay_ve_trung_binh"),
+            ("Buy when the daily range exceeds 2", 1, "bien_dong"),
+            ("Enter long when volume is above 1000", 1, "dong_tien"),
+        ):
+            with self.subTest(cau=cau):
+                dk, _ = DH.dieu_kien_trong_cau(cau)
+                self.assertTrue(dk, f"khong doc duoc: {cau}")
+                self.assertEqual(DH.suy_ho(dk, chieu), mong)

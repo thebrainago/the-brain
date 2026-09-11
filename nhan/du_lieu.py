@@ -207,6 +207,34 @@ def kho(lam_moi: bool = False) -> dict[str, dict]:
         # thi US500CASH bao 8,06 nam (file M30) trong khi ban D1 co 15,5 nam.
         goc["uoc_so_nam"] = max([b["uoc_so_nam"] for b in cung_lop] or
                                 [goc["uoc_so_nam"]])
+
+    # ANH CHUP (khoi 3, 11/09/2026). Phep chon o tren la "ban .parquet TO NHAT
+    # thang", nen chi can them mot file vao `data/` la ban duoc chon cua ca mot
+    # ma doi - khong mot loi canh bao nao. Voi mot he lay holdout lam trong tai,
+    # dieu do nghia la ket qua cu khong tai lap duoc.
+    #
+    # O day chi TON TRONG ghim, KHONG nem loi: nem loi trong `kho()` se lam sap
+    # moi duong chay chi vi mot file phu bi sua. Viec keu len la cua
+    # `anh_chup.kiem()`, va no chan o cho cham holdout.
+    try:
+        from . import anh_chup as AC
+        for ma, g in AC.ghim_theo_ma().items():
+            goc = ra.get(ma)
+            if not goc:
+                continue
+            for b in goc.get("cac_ban", []):
+                if str(b["file"]) == g["file"]:
+                    b_ghim = dict(b)
+                    b_ghim["cac_ban"] = goc["cac_ban"]
+                    b_ghim["lop_nguon"] = goc["lop_nguon"]
+                    b_ghim["khung_min"] = goc["khung_min"]
+                    b_ghim["uoc_so_nam"] = goc["uoc_so_nam"]
+                    b_ghim["da_ghim"] = True
+                    ra[ma] = b_ghim
+                    break
+    except Exception:
+        pass  # so anh chup hong KHONG duoc chan viec nap du lieu
+
     _DEM_KHO.update({"van_tay": vt, "ds": ra, "luc": bay_gio})
     return ra
 
