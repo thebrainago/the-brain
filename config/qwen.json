@@ -7,14 +7,7 @@
   "an 60% thi lan CPU tu co lai - do la hanh vi dung. Muon chay mot lan voi muc",
   "khac ma khong sua file: `QWEN_CPU=70 q` (hoac set QWEN_CPU=70 tren cmd)."
  ],
- "muc_tieu_cpu": 95.0,
- "tran_lan": {
-  "CPU": 5,
-  "LLM": 3,
-  "MANG": 3,
-  "NHE": 6,
-  "TESTER": 1
- },
+ "muc_tieu_cpu": 85.0,
  "_ghi_chu_tran_lan": [
   "TESTER = 1 la RANG BUOC VAT LY, dung nang len. `chay_tester_kho` ghi de cung",
   "mot MQL5/Experts/<TEN_EA>.mq5, cung mot .ini, cung mot .xml, va may chi co",
@@ -60,6 +53,6 @@
   "Ban cu khai LLM=1,2 va MIEN lan LLM khoi ngan sach: che do nghi ha muc tieu",
   "xuong 35% ma may van 97%."
  ],
- "che_do": "ultra",
+ "che_do": "thuong",
  "muc_tieu_cpu_ultra": 95.0
 }

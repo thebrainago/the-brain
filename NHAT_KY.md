@@ -108,3 +108,4 @@ VIEC TIEP THEO
 - **2026-09-06 23:26** — toi uu khau test (8.241 phep thu / 82 giay), tim ra co che THU HAI: quantora_ma_dashboard_sell (test 1229, fdr 1807, viec cho 2)
 - **2026-09-07 16:41** — ghep he: chan am re hon chan manh; dao chieu tang doi chan duong; loi the ghep SONG o holdout (39/45 cap) trong khi bang he don la nhieu (test 1229, fdr 1807, viec cho 2)
 - **2026-09-07 23:55** — kho quan li lenh: DSL + 75 co che + EA giam sat de len EA ngoai; luan phien 50 luat x 4 he nen -> khong luat nao qua cong (test 1229, fdr 1807, viec cho 2)
+- **2026-09-12 00:14** — khoi 2-6 DAT: so bai hoc, anh chup bat bien, tang cham tien, 4 cua vao, khoa tester + de quan tri len EA ngoai. Cuu mat du lieu kho co che 1149->3 (test 1379, fdr 1807, viec cho 2)
