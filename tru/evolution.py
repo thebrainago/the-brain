@@ -1218,10 +1218,39 @@ def viet_bao_cao(vh: dict, sk: dict, vd: list, da_sua: list, sau: dict | None = 
         else:
             d.append(f"- Khong phan tich duoc JSON: {sau.get('loi_phan_tich', '?')}")
 
+    # SO BAI HOC (khoi 2, 11/09/2026). Truoc do EVO do duoc suc khoe VAN HANH
+    # nhung khong thay duoc he da HOC duoc gi - nen no khong bao gio nhac lai
+    # mot huong da am. Tri thuc do nam trong 130 file memory ngoai repo.
+    #
+    # `huong_nen_tranh` la loai the doi hoi bang chung, nen muc nay luon la so
+    # do chu khong phai y kien.
+    bh = {}
+    try:
+        from nhan import bai_hoc as BH
+        bh = BH.dem()
+        tranh = BH.tra("chien luoc backtest edge chi phi holdout", so_the=6,
+                       loai="huong_nen_tranh")
+        d += ["", "## 9. Huong NEN TRANH (so bai hoc)",
+              f"- so co {bh.get('tong', 0)} the: "
+              + " · ".join(f"{k} {v}" for k, v in
+                           sorted((bh.get("theo_loai") or {}).items(),
+                                  key=lambda x: -x[1]))]
+        for t in tranh:
+            d.append(f"- **{t['tieu_de'][:110]}**")
+            if t["bang_chung"]:
+                d.append(f"  - bang chung: {' '.join(t['bang_chung'].split())[:180]}")
+        if not tranh:
+            d.append("- (chua co the `huong_nen_tranh` nao - chay "
+                     "`python _nhap_bai_hoc.py --that`)")
+        d.append("> Day la TRI NHO, khong phai lenh cam. Mot huong tung am o mot "
+                 "tai san / cua so / muc chi phi van co the duong o cho khac.")
+    except Exception as e:
+        d += ["", f"## 9. Huong NEN TRANH — khong doc duoc so: {type(e).__name__}: {e}"]
+
     (REPORTS / "EVOLUTION.md").write_text("\n".join(d), encoding="utf-8")
     (REPORTS / "evo_suc_khoe.json").write_text(
         json.dumps({"van_hanh": vh, "day_chuyen": sk, "van_de": vd,
-                    "da_sua": da_sua, "san_cong_cu": san},
+                    "da_sua": da_sua, "san_cong_cu": san, "bai_hoc": bh},
                    ensure_ascii=False, indent=1, default=str), encoding="utf-8")
 
 

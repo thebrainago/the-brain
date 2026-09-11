@@ -1,0 +1,288 @@
+{
+ "so_cau": 20,
+ "dat": 20,
+ "so_the_moi_cau": 5,
+ "ty_le": 1.0,
+ "vo_nghia_so_cau": 4,
+ "vo_nghia_GIA_DAT": 0,
+ "chi_tiet": [
+  {
+   "cau": "Model=1 cua MT5 tester co tin duoc khong",
+   "dat": true,
+   "trung": [
+    "model=1",
+    "1 minute ohlc",
+    "tick that"
+   ],
+   "the": [
+    "mean_reversion_z5 chay tick that lan dau - 305 lenh PF 1,77 Sharpe 1,13, nhung i",
+    "\"MT5 Model=1 (1 minute OHLC) che ra lai gia khi TP/SL nho hon bien do nen M1 — D",
+    "chay EA D1 tren CFD chi so trong MT5 tester - ba cach hong deu ghi ra bao cao \"0"
+   ]
+  },
+  {
+   "cau": "phi qua dem tinh the nao cho dung",
+   "dat": true,
+   "trung": [
+    "swap",
+    "lai suat",
+    "qua dem"
+   ],
+   "the": [
+    "IBS bat day chi song tren chi so co phieu.",
+    "COST THẬT đầy đủ, KHÔNG dùng cost giả định 2đ:",
+    "KHONG duoc mo hinh phi qua dem bang `swap_tuyet_doi * 365 / gia_tung_ngay`"
+   ]
+  },
+  {
+   "cau": "placebo hoan vi cai gi moi dung",
+   "dat": true,
+   "trung": [
+    "hoan vi",
+    "vi the",
+    "chuoi lai"
+   ],
+   "the": [
+    "Placebo phai giu nguyen phoi nhiem",
+    "PLACEBO PHAI HOAN VI CHUOI VI THE, KHONG PHAI CHUOI LAI/LO.",
+    "HOAN VI THU TU LENH LA PHEP THU VO NGHIA voi lai kep ty le co dinh."
+   ]
+  },
+  {
+   "cau": "vao lenh o close hay open bar ke tiep",
+   "dat": true,
+   "trung": [
+    "open bar",
+    "look-ahead",
+    "nhin truoc"
+   ],
+   "the": [
+    "ENTRY tại OPEN[i+1], KHÔNG phải close[i].",
+    "Rau nen HONG trong lich su che ra ca so dep lan so xau.",
+    "TIE-BREAK TP/SL cùng bar:"
+   ]
+  },
+  {
+   "cau": "IBS bat day co song tren forex khong",
+   "dat": true,
+   "trung": [
+    "ibs",
+    "chi so co phieu",
+    "chau my"
+   ],
+   "the": [
+    "IBS bat day chi song tren chi so co phieu.",
+    "Vao lenh cang SOM cang tot.",
+    "\"Cot `open` cua sp500_daily = close[t-1] o 95-98% so ngay truoc 2006 - quy tac c"
+   ]
+  },
+  {
+   "cau": "spread that cua CFD chi so la bao nhieu",
+   "dat": true,
+   "trung": [
+    "bps",
+    "spread"
+   ],
+   "the": [
+    "Spread that cua CFD chi so la ~0,6-0,8 bps, KHONG phai 9 bps.",
+    "COST THẬT đầy đủ, KHÔNG dùng cost giả định 2đ:",
+    "chu du an 06/09 - quantora la he BAN, dung de can cho cac he MUA; mai thu ghep h"
+   ]
+  },
+  {
+   "cau": "tai khoan cent co giup giam von can khong",
+   "dat": true,
+   "trung": [
+    "cent",
+    "min lot",
+    "chia 100"
+   ],
+   "the": [
+    "do 07/09 tu tai khoan XM - swap mua -4,61/lot/dem = 1,56 bps/dem DAT HON spread ",
+    "KIEM LOAI TAI KHOAN TRUOC LENH THAT DAU TIEN",
+    "\"1 USD chuẩn = 100 USD cent, nên mọi con số 'vốn cần' tính ở lot 0,01 CHUẨN phải"
+   ]
+  },
+  {
+   "cau": "FDR co tung loai duoc gia thuyet nao khong",
+   "dat": true,
+   "trung": [
+    "fdr",
+    "lord",
+    "nguong"
+   ],
+   "the": [
+    "do 182.550 o tren 5 chan troi giu lenh -> SAN_SANG_V4 = 0; chan troi doi ty le N",
+    "\"Cong 1 tung so tong lai cua he phoi nhiem 16% voi moc phoi nhiem 100% - bat kha",
+    "\"QUY TAC CUA NGUOI DUNG - cac phai huyen hoc doc cung mot cau hinh o cac DO CAO "
+   ]
+  },
+  {
+   "cau": "khung nho M5 co du du lieu de backtest khong",
+   "dat": true,
+   "trung": [
+    "m5",
+    "bar",
+    "2016"
+   ],
+   "the": [
+    "CHU DU AN CHAN DUNG - dung ap khung co phieu len FX; luoi khong SL khong tu dong",
+    "\"Cot `open` cua sp500_daily = close[t-1] o 95-98% so ngay truoc 2006 - quy tac c",
+    "XM US100Cash co D1 du tu 2011 nhung tester chi dung duoc H1 tu ~2016; EA chay tr"
+   ]
+  },
+  {
+   "cau": "don bay cao co lam tang CAGR mai khong",
+   "dat": true,
+   "trung": [
+    "don bay",
+    "sharpe",
+    "tran"
+   ],
+   "the": [
+    "\"Luật chặn DD phải đặt lại đỉnh để không thoát liên tục — nhưng đo sụt giảm trên",
+    "chu du an 06/09 - quantora la he BAN, dung de can cho cac he MUA; mai thu ghep h",
+    "\"DOC TRUOC KHI CHON CHI SO - ba chi so em nhat thi hai cai AM sau phi; UK100 mua"
+   ]
+  },
+  {
+   "cau": "ghep hai he thi chon chan nao",
+   "dat": true,
+   "trung": [
+    "nguoc chieu",
+    "ghep",
+    "tuong quan"
+   ],
+   "the": [
+    "do 07/09 - bang xep hang he DON la nhieu (822 -> 40 o holdout) nhung loi the GHE",
+    "\"do 07/09 - ghep hai he tuong quan am nang %/nam o CUNG sut giam 6,14->20,25; nh",
+    "\"do 07/09 - M5 chi co 1,4 nam nen loai vi DU LIEU; H4 truoc 2016 la bar NGAY deo"
+   ]
+  },
+  {
+   "cau": "trailing stop co cai thien he khong",
+   "dat": true,
+   "trung": [
+    "trailing",
+    "dat hue",
+    "quan tri"
+   ],
+   "the": [
+    "MQL5 Code Base muc experts - chi ~45% file la chien luoc that, con lai la tien i",
+    "\"Trailing (bóc từ nhóm file TIỆN ÍCH) nhân 4,8 lần lãi holdout và giảm sụt giảm ",
+    "do 07/09 - trailing/dat hue gan nhu vo hieu tren he thoat nhanh; chi BE 0,05xATR"
+   ]
+  },
+  {
+   "cau": "luoi khong SL co an toan khong",
+   "dat": true,
+   "trung": [
+    "luoi",
+    "sl",
+    "martingale",
+    "dca"
+   ],
+   "the": [
+    "Setup A (Pivot Breakout) chet tren gan nhu moi thi truong, khong phai chi SP500.",
+    "Luoi khong SL: ham muc tieu la `quang_duong/MAE_max²`, khong phai `min(MAE_max)`",
+    "\"Đo được: entry cố tình SAI vẫn cho 92-97%/năm, và lọc 'đúng chiều' còn TỆ HƠN l"
+   ]
+  },
+  {
+   "cau": "co nen tin bang xep hang he don khong",
+   "dat": true,
+   "trung": [
+    "holdout",
+    "xep hang"
+   ],
+   "the": [
+    "KIEM TRUOC KHI TIN BANG XEP HANG - m_mua_qua_dem tren D1 thanh hang so 1,0 = mua",
+    "DOC TRUOC KHI XEP HANG UNG VIEN - so LENH doi han bang xep hang; mua-giu la 1 le",
+    "mean_reversion_z5 chay tick that lan dau - 305 lenh PF 1,77 Sharpe 1,13, nhung i"
+   ]
+  },
+  {
+   "cau": "MT5 co tra du bar khi goi lan dau khong",
+   "dat": true,
+   "trung": [
+    "thieu bar",
+    "from_pos"
+   ],
+   "the": [
+    "Lan goi `copy_rates_*` DAU sau `symbol_select` tra THIEU bar, khong bao loi.",
+    "\"do 07/09 - M5 chi co 1,4 nam nen loai vi DU LIEU; H4 truoc 2016 la bar NGAY deo",
+    "TIE-BREAK TP/SL cùng bar:"
+   ]
+  },
+  {
+   "cau": "open truoc 2006 co dung duoc khong",
+   "dat": true,
+   "trung": [
+    "open",
+    "bia"
+   ],
+   "the": [
+    "TIE-BREAK TP/SL cùng bar:",
+    "\"Cot `open` cua sp500_daily = close[t-1] o 95-98% so ngay truoc 2006 - quy tac c",
+    "KIEM TRUOC MOI BACKTEST - kho() tung chon file theo BYTE nen D1 lay doan ngan nh"
+   ]
+  },
+  {
+   "cau": "bar D1 cua CFD co phai bar phien khong",
+   "dat": true,
+   "trung": [
+    "d1",
+    "phien",
+    "cfd"
+   ],
+   "the": [
+    "Spread that cua CFD chi so la ~0,6-0,8 bps, KHONG phai 9 bps.",
+    "Hieu chuan cong bang V6 THAT",
+    "chu du an 06/09 - quantora la he BAN, dung de can cho cac he MUA; mai thu ghep h"
+   ]
+  },
+  {
+   "cau": "order flow tren CFD do duoc khong",
+   "dat": true,
+   "trung": [
+    "order flow",
+    "volume",
+    "tape",
+    "cme"
+   ],
+   "the": [
+    "KHONG THE lam order flow (delta / big trade) tren CFD",
+    "\"Khung ngan da do xong: khong co tinh lien tuc sau nen manh (gia QUAY DAU), nhoi",
+    "The packaged 8-step recipe for dissecting any asset (asset_profile + run_asset +"
+   ]
+  },
+  {
+   "cau": "mua-giu co phai moc so sanh dung khong",
+   "dat": true,
+   "trung": [
+    "mua-giu",
+    "moc"
+   ],
+   "the": [
+    "US500 chua so sanh duoc giua hai san THAT",
+    "\"ky thuat 07/09 - EA N slot moi slot mot magic, lot=0 tat slot; mot lan boot ra ",
+    "do 07/09 - bang xep hang he DON la nhieu (822 -> 40 o holdout) nhung loi the GHE"
+   ]
+  },
+  {
+   "cau": "LLM dien co che duoc khong",
+   "dat": true,
+   "trung": [
+    "llm",
+    "co che",
+    "tham dinh",
+    "48"
+   ],
+   "the": [
+    "LLM dien 48 cau \"vi sao co nguoi tra tien\", luot tham dinh doc lap bac 41; rong ",
+    "\"DOC TRUOC KHI TIN MOT TY LE BOC TACH: mau so bi giau vi kho ma chua chia lan; 1",
+    "\"The Brain chay tiep khong can Claude bang MOT lenh `q` trong lab/; qwen doc va "
+   ]
+  }
+ ]
+}

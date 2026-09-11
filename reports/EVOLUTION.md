@@ -32,8 +32,9 @@
   - biet truoc 0.6 cua so lan -> `NGHI_NHIN_TRUOC` (sharpe 2.972)
 - (tham khao) p placebo cua 106 ung vien: trung vi 0.375, ty le p<=0,05 la 17.9%
   KHONG dung so nay lam hieu chuan: ung vien da bi chon loc tren train nen p cua chung LE RA phai lech thap.
-- FDR online: 1/272 gia thuyet bi bac bo (dem theo gia thuyet, bo du phong/NULL; tho 1799 hang)
-- Dong bo ba tang (so_gt_da_ket == fdr_tong): **TACH** - doi soat tiep khoan tinh nay
+- FDR online: 1/272 gia thuyet bi bac bo (dem theo gia thuyet, bo dong da supersede)
+  - hang so cai cua duong KHAM PHA: 0 (mot gia thuyet co the co nhieu hang: chay lai, doi the he cong)
+- Dong bo ba tang: **LECH** (trung suat trong epoch song: 0, hang FDR mo coi ghi tu 01/09: 0)
 
 ## 4. Tai nguyen + toan ven
 - **Thoi gian song 7 ngay: 100.0%** (mat 150.9 gio qua 4 lan gian doan - may ngu hoac tat, khong phai tru chet)
@@ -117,23 +118,20 @@
 | youtube | 5 | 0 | 176 | BAT |
 | zulutrade | 3 | 0 | 31 | BAT |
 
-## 6. Van de dang mo (16)
+## 6. Van de dang mo (12)
 > Mot PHAT HIEN = mot dong. Dien dat khac di khong de ra dong moi; no cong vao `x<n> lan`. Xem `CHU_DE_VAN_DE` trong tru/evolution.py.
+- **[NANG]** `ocr_anh_chan_nguon` - 17 PDF chien luoc tu Telegram la slide xuat thanh ANH (~67 ky tu/trang o lop van ban). Khong OCR thi ca lop nguon nay vo hinh voi pheu boc. Engine duy nhat dung duoc la EasyOCR va no chay 14,2 giay/trang tren CPU (~100 phut cho 425 trang).
 - **[NANG]** `quet_nong` - 86% lan chay SEEKER khong thu duoc gi moi, NHUNG chua nguon nao di het mot vong bien gioi - day la DO SAU QUET, khong phai chu ky qua day
-- **[NANG]** `dieu_phoi_chet_khong_bat` - Supervisor chet vi PermissionError khong duoc bat - 24/7 dut quang
-- **[NANG]** `quant_pass_quarantine_v2` - 8 ket qua duong da quarantine; khong duoc dung cho paper/live cho toi khi retest V2
-- **[NANG]** `nghi_nhin_truoc_EURGBP.H4.mua_qua_dem.gio_vao20_gio_ra14` - EURGBP.H4.mua_qua_dem.gio_vao20_gio_ra14 cho t_alpha > 5 - nguong hieu chuan tu canary noi day phai gia dinh la nhin truoc
 - **[NANG]** `hieu_chuan_v6` - Cong PASS chua duoc hieu chuan bang V6 THAT. Ban thu 15/08 dung IBS<0,2 don gian tren US500M/US500CASH D1 va bi FAIL, nhung do CHUA phai V6: thieu lop bias>0, chay mot chi so thay vi danh muc 3 chi so My, va bar D1 cat theo UTC chu khong theo phien My. THIET_KE noi ro: cong nao loai mat V6 la cong SAI. Phai dung lai dung V6 (Sharpe 0,95 do tren MT5 that) roi cho qua cong truoc khi tin bat ky ket luan am tinh nao.
+- **[VUA]** `can_mau_moi_tu_ma_nguon` - 16 file .mq5 DAT LENH THAT nhung co che cua chung chua co template trong nhan/mau.py - QUANTLAB khong kiem dinh duoc cho toi khi them template
+- **[VUA]** `ngu_phap_thieu_toan_hang` - Tang BOC gap co che ma ngu phap khong dien dat duoc - day la danh sach toan hang can them vao nhan/ngu_phap.py
 - **[VUA]** `nguon_can_trinh_duyet` - co CDP nhung khong co nguon den han - kiem tra lai trang seed
 - **[VUA]** `nguon_chet` - 1 nguon loi lien tuc >= 3 lan, dang bi gian chu ky
 - **[VUA]** `nguon_khong_thu_hoach` - Nguon fxblue da goi >=3 lan ma chua thu duoc tai lieu nao
 - **[VUA]** `cong_cu_dang_xem` - 3 cong cu ngoai diem >=70 dang cho nguoi xem tich hop. Cao nhat: 51bitquant/howtrader (84.7). Quy tac: cong cu ngoai lam BAN THI NGHIEM, khong bao gio lam ONG TOA.
-- **[VUA]** `can_mau_moi_tu_ma_nguon` - 5 file .mq5 DAT LENH THAT nhung co che cua chung chua co template trong nhan/mau.py - QUANTLAB khong kiem dinh duoc cho toi khi them template
-- **[VUA]** `ngu_phap_thieu_toan_hang` - Tang BOC gap co che ma ngu phap khong dien dat duoc - day la danh sach toan hang can them vao nhan/ngu_phap.py
 - **[VUA]** `cho_kiem_tick_mt5` - Co gia thuyet da qua cong Python dang cho kiem dinh tick that tren MT5 - buoc nay chua tu dong hoa duoc
-- **[VUA]** `vd_duong_du_phong` - [LLM chan doan] 63,6% ket qua di duong DU PHONG
-- **[VUA]** `vd_so_sach_khong_khop` - [LLM chan doan] Mau thuan so lieu FDR giua cac tang dem
 - **[VUA]** `vd_nguon_im_lang` - [LLM chan doan] Nguon 'semantic' loi im: bat, chay, khong bao loi, khong thu duoc gi
+- **[VUA]** `ba_con_so_chua_khai_bao` - THIET_KE muc 11: moi nguong cua he phai suy ra tu ba con so ma chi chu du an tra loi duoc. Chua khai bao nen he dang dung mac dinh hoc thuat 0,05 - la MAC DINH, khong phai chan ly. Khai bao vao lab/config/nguong.json.
 
 ## 6b. Kho ma dang cho NGUOI doc de doi chieu (5)
 > Doc de DOI CHIEU voi cong, khong bao gio de THAY cong.
@@ -150,5 +148,18 @@
 
 > EVO chi tu sua nhung viec da khai bao truoc: `don_viec_treo`, `don_cache_khung`, `xep_lai_viec_loi`, `gian_nguon_chet`, `dong_van_de_da_het`, `gop_van_de_trung_lap`, `xep_hang_doc_cong_cu`. Ngoai danh sach do thi chi ghi van de va cho nguoi - khong tu sua code.
 
-## 8. Suy nghi sau (LLM doc so lieu van hanh)
-- Bo qua luot nay: chua den ky (6 gio)
+## 9. Huong NEN TRANH (so bai hoc)
+- so co 228 the: bay_do_luong 133 · huong_dang_mo 58 · quy_tac_nguoi_dung 29 · huong_nen_tranh 8
+- **HUONG CHINH tu 24/08/2026 - rut ngan thoi gian test; may nghet bang thong nen KHONG duoc bat dau bang nhan luo**
+  - bang chung: **Nguoi dung chot 24/08/2026:** vi du "lay 50 chien luoc" chi la vi du. Bai toan
+- **"21/08/2026 - he chi thay duoc edge tu Sharpe 1,57; Sharpe 0,5 can 43 nam; gop tai san phai tinh theo k HIEU D**
+  - bang chung: | 1,4 nam | Sharpe 3,32 (alpha 19,7%/nam) |
+- **"Phuong phap moi sau khi quet tham so that bai: tim trong khong gian CO CHE (~40-60 phan tu). Co che 01 (cau t**
+  - bang chung: - IC(20 ngay) **+0,106**, duong o ca 5 giai doan con — nhung KHONG chuyen thanh tien.
+- **KHONG duoc mo hinh phi qua dem bang `swap_tuyet_doi * 365 / gia_tung_ngay`**
+  - bang chung: chinh cai bay o muc 13, va toi da tu mac lai no ngay 28/07 (ra 38,8%/nam cho nam 2011).
+- **Khong duoc mo hinh phi qua dem bang swap tuyet doi nhan 365**
+  - bang chung: 38,8%/nam nam 2011 so voi 6,0-14,7%/nam do that
+- **21/08/2026 - san p-value cua placebo (1/200) va nguong LORD va nhau tu phep thu thu 4; 346 phan quyet FAIL vo **
+  - bang chung: Tu 15/08 den 21/08/2026 cong QUANTLAB khong the cho bat cu thu gi di qua, va
+> Day la TRI NHO, khong phai lenh cam. Mot huong tung am o mot tai san / cua so / muc chi phi van co the duong o cho khac.

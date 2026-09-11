@@ -352,6 +352,32 @@ def dang_ky_sau_quet(ra: dict) -> dict:
         if SO.them_viec(TRU, "xac_nhan", {"gt_ma": ma_gt}, uu_tien=3):
             dang_ky += 1
 
+    # SO BAI HOC (khoi 2, 11/09/2026). Khong CHAN gi - chi ghi ra rang huong
+    # nay da tung duoc di, de cai gi lap lai thi lap lai CO Y THUC.
+    #
+    # Vi sao khong chan: so bai hoc la TRI NHO, khong phai quyen phu quyet. Mot
+    # huong tung am o mot tai san / mot cua so / mot muc chi phi hoan toan co the
+    # duong o cho khac; chan tu dong la cach nhanh nhat de he ngung hoc cai moi.
+    # Va chinh du an nay da co bai hoc "ket luan am phai phan biet CHUA DO".
+    if ung_vien:
+        try:
+            from nhan import bai_hoc as BH
+            u0 = ung_vien[0]
+            the = BH.lien_quan({"ho": u0.get("ho"), "co_che": u0.get("co_che"),
+                                "ten": u0.get("mau"), "tai_san": ma, "khung": khung})
+            canh = [t for t in the if t["loai"] == "huong_nen_tranh"]
+            if canh:
+                ra["bai_hoc_canh_bao"] = [
+                    {"ma": t["ma"], "tieu_de": t["tieu_de"][:120],
+                     "bang_chung": (t["bang_chung"] or "")[:200]} for t in canh[:3]]
+                SO.ghi_chi_so("kham_pha_trung_huong_da_tranh", float(len(canh)),
+                              {"tai_san": ma, "khung": khung,
+                               "the": [t["ma"] for t in canh[:3]]})
+            elif the:
+                ra["bai_hoc_lien_quan"] = [t["ma"] for t in the[:3]]
+        except Exception as e:      # so bai hoc hong KHONG duoc chan quantlab
+            ra["bai_hoc_loi"] = f"{type(e).__name__}: {e}"
+
     if thieu_luc:
         # KHONG duoc im lang. "Bo qua vi thieu luc" la mot ket luan CO NOI DUNG:
         # no noi rang cap nay khong do duoc thu do, chu khong noi rang thu do

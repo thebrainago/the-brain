@@ -115,5 +115,44 @@ class SoPhaiCoTHAT(unittest.TestCase):
         self.assertLessEqual(sau - truoc, 1)
 
 
+
+
+class QuantlabPhaiHOI_SO_TRUOC_KHI_DANG_KY(unittest.TestCase):
+    """Vong phan hoi chi khep khi ben SINH gia thuyet co doc so bai hoc.
+
+    Bai kiem nay khoa MOT dieu: quantlab phai GHI RA canh bao, va phai KHONG
+    chan. Neu mot ngay nao do ai do doi no thanh cai chan, bai kiem duoi day keu.
+    """
+
+    def test_dang_ky_sau_quet_co_goi_bai_hoc(self):
+        import inspect
+        from tru import quantlab as QL
+        ma = inspect.getsource(QL.dang_ky_sau_quet)
+        self.assertIn("bai_hoc", ma,
+                      "dang_ky_sau_quet khong hoi so bai hoc - vong phan hoi dut")
+        self.assertIn("bai_hoc_canh_bao", ma)
+
+    def test_KHONG_duoc_chan_bang_bai_hoc(self):
+        """`continue` / `return` ngay sau canh bao = da thanh cai chan."""
+        import inspect, re
+        from tru import quantlab as QL
+        ma = inspect.getsource(QL.dang_ky_sau_quet)
+        i = ma.find("bai_hoc_canh_bao")
+        self.assertGreater(i, 0)
+        sau = ma[i:i + 400]
+        self.assertNotRegex(
+            sau, r"\n\s+(?:continue|return|raise)\b",
+            "so bai hoc dang CHAN quantlab - no la tri nho, khong phai quyen phu quyet")
+
+    def test_so_hong_khong_duoc_chan_quantlab(self):
+        import inspect
+        from tru import quantlab as QL
+        ma = inspect.getsource(QL.dang_ky_sau_quet)
+        i = ma.find("from nhan import bai_hoc")
+        self.assertGreater(i, 0)
+        self.assertIn("except Exception", ma[i:i + 1200],
+                      "goi so bai hoc ma khong bat loi - so hong se lam sap quantlab")
+
+
 if __name__ == "__main__":
     unittest.main()

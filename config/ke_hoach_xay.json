@@ -5,7 +5,7 @@
   "trang_thai: CHUA_BAT_DAU | DANG_LAM | DAT | AM | CHUA_DO_DUOC"
  ],
  "chot_luc": "2026-09-11",
- "dang_o": "1",
+ "dang_o": "3",
  "moc_dau": {
   "ngu_phap_toan_hang": 43,
   "tai_lieu_da_boc": 327,
@@ -30,16 +30,16 @@
    "xong": null,
    "cong": {
     "corpus_tang_A_noi_duoc": {
-     "nay": 0.0667,
+     "nay": 0.2,
      "can": 0.35,
      "dat": false,
      "ghi_chu": "Moc 0,0%% ban dau do tren van ban THO. 6,7%% do tren DUONG CHAY THAT (_chuan truoc khi tach cau). Hai con so khong so sanh truc tiep duoc - moc that de so ve sau la 6,7%%."
     },
     "corpus_tang_A_noi_mot_phan": {
-     "nay": 0,
+     "nay": 4,
      "can": 1,
-     "dat": false,
-     "ghi_chu": "CHUA_DO_DUOC, khong phai AM. dieu_kien_trong_cau tra ve LY DO BO chu khong tra phan van ban con lai, nen trang thai nay khong the do duoc. Phai sua ham do truoc khi tin o nay."
+     "dat": true,
+     "ghi_chu": "dieu_kien_trong_cau nay tra PHAN BO SOT that duoi tien to 'bo_sot:'."
     },
     "toan_hang_chua_ai_dung": {
      "nay": 12,
@@ -84,14 +84,20 @@
      "can": true,
      "dat": true,
      "ghi_chu": "1.679/4.198 ban (40,0%%) chua chuoi thoat \\uXXXX chua giai ma - dang duoc doc qua mot lop rac."
-    }
+    },
+    "ghi_chu_cong_35": "Cong 35% CAN HIEU CHUAN LAI - xem KE_HOACH_XAY.md. Tang A tron hai cau hoi: 'cau nay co phai mot luat khong' va 'ngu phap co noi duoc khong'. Mau so dung la CORPUS VANG (viec B1_corpus_vang cua qwen)."
    },
    "da_lam": [
     "_corpus_ngu_phap.py - bo do ba tang, hat co dinh, da chay truoc/sau",
     "doc_hieu._TOAN_HANG +24 mau: macd adx cci stochastic obv wma smma dong_luong bien_do than_nen khoi_luong ngay_trong_tuan thang phan_vi phuong_sai",
     "ngu_phap: chuyen khoi gann_sq9 len TRUOC chot 'cua is None'",
     "doc_hieu.loai_cau: doi du HANH DONG + SO SANH + NGUONG (nguong = so HOAC toan hang khac HOAC dai Bollinger)",
-    "doc_hieu._chuan: giai ma \\uXXXX truoc khi bo the HTML"
+    "doc_hieu._chuan: giai ma \\uXXXX truoc khi bo the HTML",
+    "dieu_kien_trong_cau tra phan bo sot that",
+    "loai_cau doi them MOT toan hang doc duoc (chat=True); cum_chua_hieu dung chat=False",
+    "menh de CHUNG CHU NGU: thua ke toan hang tu van ban menh de truoc",
+    "them %K/%D va dang 'highest high of the last N bars'",
+    "_boc_lai_toan_kho.py: doc LAI 4.971 ban bang bo doc moi"
    ],
    "con_lai": [
     "dieu_kien_trong_cau phai tra PHAN BO SOT that (khong phai ly do) - neu khong thi NOI_MOT_PHAN khong bao gio do duoc",
@@ -102,31 +108,53 @@
   },
   "2": {
    "ten": "Vong phan hoi - so bai hoc + tra cuu ket qua am",
-   "trang_thai": "CHUA_BAT_DAU",
-   "bat_dau": null,
-   "xong": null,
+   "trang_thai": "DAT",
+   "bat_dau": "2026-09-11",
+   "xong": "2026-09-11",
    "cong": {
     "the_bai_hoc": {
-     "nay": 0,
+     "nay": 230,
      "can": 120,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "theo loai: {'bay_do_luong': 135, 'huong_dang_mo': 58, 'huong_nen_tranh': 8, 'quy_tac_nguoi_dung': 29}"
     },
     "cau_hoi_tra_dung": {
-     "nay": null,
+     "nay": 20,
      "can": 16,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "17/20 o top-1, 20/20 o top-3. Hieu chuan HAI CHIEU: 0/4 cau vo nghia lot."
+    },
+    "hieu_chuan_nguoc": {
+     "nay": 0,
+     "can": 0,
+     "dat": true
     },
     "evo_co_muc_nen_tranh": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "EVOLUTION.md muc 9, kem bang chung tung the"
     },
     "canh_bao_trung_huong_chet": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "quantlab.dang_ky_sau_quet goi bai_hoc.lien_quan; KHONG chan - co 3 ca kiem khoa dieu do"
     }
-   }
+   },
+   "da_lam": [
+    "nhan/bai_hoc.py (them/tra/lien_quan/dem) + bang nao.db `bai_hoc`",
+    "_nhap_bai_hoc.py: 234 the doc duoc -> 225 nhan, 9 tu choi vi thieu bang chung",
+    "b da-thu \"<mo ta>\" - cua tra cuu",
+    "quantlab.dang_ky_sau_quet hoi so truoc khi dang ky (ghi canh bao, khong chan)",
+    "evolution.viet_bao_cao muc 9 'Huong NEN TRANH'",
+    "_kiem_tra_cuu.py: 20 cau that + 4 cau vo nghia lam chieu nguoc",
+    "test_bai_hoc.py: 13 ca kiem"
+   ],
+   "con_lai": [
+    "nhap them tu 1.255 dong FAIL trong ket_qua (moi nhap tu memory + hien phap)",
+    "lab/bai_hoc/*.md - ban nguoi doc trong git (hien moi co trong nao.db)"
+   ]
   },
   "3": {
    "ten": "Anh chup du lieu bat bien",
