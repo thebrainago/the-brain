@@ -81,6 +81,19 @@ def sinh(khung: str = "D1") -> list[dict]:
 
 
 def _chay_terminal(ini: Path, tran: int = 2400) -> float:
+    """Cua CHUNG phong terminal64 cho 10 script tester.
+
+    KHOA (11/09/2026): may chi co MOT terminal64.exe va moi lan chay ghi de cung
+    mot .ini / .xml. Hai viec cung luc thi ghi de ket qua cua nhau VA khong ai
+    bao loi - bang so ra doc y het mot ket qua that. Truoc day rang buoc nay
+    duoc giu bang mot dong ghi chu trong NHIEM_VU.json.
+    """
+    from nhan import khoa_tester as KT
+    with KT.giu(f"_chay_terminal {Path(ini).name}"):
+        return _chay_terminal_trong_khoa(ini, tran)
+
+
+def _chay_terminal_trong_khoa(ini: Path, tran: int = 2400) -> float:
     C.dong_terminal()
     t0 = time.time()
     subprocess.Popen([str(C.XM_EXE), "/config:%s" % ini])

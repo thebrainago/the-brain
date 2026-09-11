@@ -187,6 +187,21 @@ def _so(x, mac_dinh=0.0):
 
 def chay(symbol: str, khung: str, so: int = 0, loc: str = "",
          tu: str = "2011.01.01", den: str = "2026.07.29") -> dict:
+    """Chay ca kho qua MT5 Strategy Tester.
+
+    KHOA TESTER (11/09/2026): ham nay ghi de cung mot .mq5 / .ini / .xml va may
+    chi co MOT terminal64.exe. Truoc day rang buoc do duoc giu bang ky luat con
+    nguoi (mot dong trong NHIEM_VU.json). Nay no la mot cai khoa that - vi ky
+    luat con nguoi hong IM LANG, nhat la khi ca Claude, qwen va chu du an cung
+    ngoi tren mot may.
+    """
+    from nhan import khoa_tester as KT
+    with KT.giu(f"chay_tester_kho {symbol} {khung}"):
+        return _chay_trong_khoa(symbol, khung, so, loc, tu, den)
+
+
+def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
+                     tu: str = "2011.01.01", den: str = "2026.07.29") -> dict:
     kho = [c for c in NP.doc_kho() if not NP.kiem_khai_bao(c)]
     if loc:
         kho = [c for c in kho if loc in json.dumps(c, ensure_ascii=False)]

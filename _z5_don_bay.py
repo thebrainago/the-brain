@@ -34,6 +34,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import chay_tester_kho as C     # noqa: E402
+from nhan import khoa_tester as KT
 from nhan import dich_mq5 as D  # noqa: E402
 from nhan import ngu_phap as NP  # noqa: E402
 
@@ -93,13 +94,8 @@ def chay(symbol: str, tu: str, den: str) -> dict:
     C.dong_terminal()
     print("  quet %d lot x %d co che ..." % (len(LOT), len(dat)), flush=True)
     t0 = time.time()
-    subprocess.Popen([str(C.XM_EXE), "/config:%s" % ini])
-    while time.time() - t0 < 2400:
-        time.sleep(8)
-        r = subprocess.run(["tasklist", "/FI", "IMAGENAME eq terminal64.exe"],
-                           capture_output=True, text=True)
-        if "terminal64.exe" not in r.stdout:
-            break
+    KT.phong(C.XM_EXE, ini, tran=2400, nhip=8, dong_truoc=C.dong_terminal,
+             viec="z5_don_bay")
 
     hong = C.kiem_log_agent()
     if hong.startswith("TESTER KHONG CHAY DUOC"):
