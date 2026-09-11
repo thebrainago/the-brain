@@ -53,13 +53,38 @@ NGON_NGU = ("en", "en-orig", "en-US", "en-GB", "vi")
 UU_TIEN_DINH_DANG = ("json3", "srv3", "srv1", "vtt")
 
 
-def _yt():
+#: HO SO TRINH DUYET cua du an - co dang nhap YouTube that (SID, SAPISID,
+#: LOGIN_INFO deu co). Giu lai cho nguon CAN dang nhap.
+HO_SO = Path(__file__).resolve().parent.parent / ".browser_darwinex"
+
+#: THU TU THU. Do 23:3x ngay 11/09 sau khi YouTube bat dau chan me lien tuc:
+#:   android  KHONG cookie   -> OK, 157 ngon ngu phu de
+#:   tv       co/khong cookie -> "The page needs to be reloaded"
+#:   mweb / web_safari + cookie -> "Requested format is not available"
+#:   mac dinh (web) + cookie -> "Sign in to confirm you're not a bot"
+#:
+#: Nghia la: cai chan khong phai THIEU DANG NHAP, ma la CLIENT. Dang nhap vao
+#: con lam no chan CHAT HON - mot phien dang nhap ban nhieu tin hieu nhan dang
+#: hon mot client di dong an danh. Do la ly do `android` khong kem cookie.
+_CACH: tuple[tuple[str, dict, bool], ...] = (
+    ("android", {"youtube": {"player_client": ["android"]}}, False),
+    ("ios", {"youtube": {"player_client": ["ios"]}}, False),
+    ("web+cookie", {}, True),
+)
+
+
+def _yt(ea: dict | None = None, cookie: bool = False):
     import yt_dlp
-    return yt_dlp.YoutubeDL({
+    o = {
         "skip_download": True, "writesubtitles": True, "writeautomaticsub": True,
         "subtitleslangs": list(NGON_NGU), "quiet": True, "no_warnings": True,
         "socket_timeout": 25, "retries": 2,
-    })
+    }
+    if ea:
+        o["extractor_args"] = ea
+    if cookie and HO_SO.exists():
+        o["cookiesfrombrowser"] = ("chrome", str(HO_SO), None, None)
+    return yt_dlp.YoutubeDL(o)
 
 
 def _chon_phu_de(info: dict) -> tuple[str, str] | None:
@@ -105,11 +130,17 @@ def _doc_vtt(vb: str) -> str:
 def phu_de(url: str) -> dict:
     """-> {nhan, van_ban, tieu_de, giay, ly_do}"""
     import requests
-    try:
-        with _yt() as y:
-            info = y.extract_info(url, download=False)
-    except Exception as e:
-        return {"nhan": False, "ly_do": f"{type(e).__name__}: {str(e)[:140]}"}
+    info, loi_cuoi = None, ""
+    for ten, ea, ck in _CACH:
+        try:
+            with _yt(ea, ck) as y:
+                info = y.extract_info(url, download=False)
+            break
+        except Exception as e:
+            loi_cuoi = f"[{ten}] {type(e).__name__}: {str(e)[:110]}"
+            info = None
+    if info is None:
+        return {"nhan": False, "ly_do": loi_cuoi}
     chon = _chon_phu_de(info)
     if not chon:
         return {"nhan": False, "ly_do": "khong co phu de (can duong lui whisper + ffmpeg)",

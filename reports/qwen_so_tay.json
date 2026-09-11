@@ -238,22 +238,22 @@
   },
   "V1_dao_GER40": {
    "ma": "V1_dao_GER40",
-   "so_lan_chay": 2,
-   "trang_thai": "GIAN_DOAN",
+   "so_lan_chay": 3,
+   "trang_thai": "DANG_CHAY",
    "lan": "TESTER",
    "lenh": [
     "_dem_ghep.py",
     "GER40Cash"
    ],
-   "bat_dau": 1789141960.1844504,
+   "bat_dau": 1789143400.4395013,
    "xong": null,
    "ma_thoat": null,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "B1_corpus_vang": {
    "ma": "B1_corpus_vang",
-   "so_lan_chay": 2,
-   "trang_thai": "GIAN_DOAN",
+   "so_lan_chay": 3,
+   "trang_thai": "DANG_CHAY",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -261,7 +261,7 @@
     "300",
     "200"
    ],
-   "bat_dau": 1789142100.4719372,
+   "bat_dau": 1789143400.474496,
    "xong": null,
    "ma_thoat": null,
    "cong": {
@@ -773,7 +773,7 @@
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789143300.2043898
+   "luc": 1789144564.2722366
   }
  },
  "ngay_da_mo": [
