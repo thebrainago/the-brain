@@ -5,7 +5,7 @@
   "trang_thai: CHUA_BAT_DAU | DANG_LAM | DAT | AM | CHUA_DO_DUOC"
  ],
  "chot_luc": "2026-09-11",
- "dang_o": "3",
+ "dang_o": "5",
  "moc_dau": {
   "ngu_phap_toan_hang": 43,
   "tai_lieu_da_boc": 327,
@@ -20,7 +20,8 @@
   "toan_hang_chua_ai_dung": 12,
   "kho_co_che": 689,
   "corpus_tang_A_noi_duoc": 0.0,
-  "corpus_tang_B_bi_tu_choi": 150
+  "corpus_tang_B_bi_tu_choi": 150,
+  "kho_co_che_cuoi_phien_11_09": 820
  },
  "khoi": {
   "1": {
@@ -158,59 +159,97 @@
   },
   "3": {
    "ten": "Anh chup du lieu bat bien",
-   "trang_thai": "CHUA_BAT_DAU",
-   "bat_dau": null,
-   "xong": null,
+   "trang_thai": "DAT",
+   "bat_dau": "2026-09-11",
+   "xong": "2026-09-11",
    "cong": {
-    "ket_qua_cu_tai_lap": {
-     "nay": null,
-     "can": 20,
-     "dat": null
+    "so_ma_da_ghim": {
+     "nay": 181,
+     "can": 100,
+     "dat": true,
+     "ghi_chu": "181/194 ma; 13 ma bo qua vi khong du OHLC"
     },
-    "them_file_rac_khong_doi": {
-     "nay": false,
-     "can": true,
-     "dat": null
+    "ghim_con_nguyen": {
+     "nay": 0,
+     "can": 0,
+     "dat": true
     },
     "sua_file_da_ghim_nem_loi": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "kiem() bam lai THAT, khong tin bo dem"
+    },
+    "kho_khong_gay_khi_ghim_hong": {
+     "nay": true,
+     "can": true,
+     "dat": true
+    },
+    "van_tay_vao_so_dang_ky": {
+     "nay": true,
+     "can": true,
+     "dat": true,
+     "ghi_chu": "cot gia_thuyet.anh_chup_hash; KHONG vao plan_hash - xem muc 3 docstring dang_ky_gia_thuyet"
     }
-   }
+   },
+   "da_lam": [
+    "nhan/anh_chup.py + bang nao.db `anh_chup`",
+    "du_lieu.kho() ton trong ban da ghim (0,51s / 194 ma)",
+    "so.dang_ky_gia_thuyet ghi van_tay_ghim() vao cot anh_chup_hash",
+    "test_anh_chup.py: 11 ca kiem"
+   ],
+   "con_lai": [
+    "chay lai 20 ket qua cu de xac nhan tai lap duoc (can chon 20 gia thuyet cu)",
+    "13 ma khong du OHLC chua ghim"
+   ]
   },
   "4": {
    "ten": "Tang cham tien - paper, han muc, kill-switch, suy giam",
-   "trang_thai": "CHUA_BAT_DAU",
-   "bat_dau": null,
-   "xong": null,
+   "trang_thai": "DAT",
+   "bat_dau": "2026-09-11",
+   "xong": "2026-09-11",
    "cong": {
     "so_lenh_paper": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "CHI-THEM, trigger cam xoa lenh da ghi"
     },
     "han_muc_kill_switch": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "phanh MAC DINH BAT; mo lai phai co ten nguoi"
     },
     "suy_giam": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
-    },
-    "paper_khop_backtest": {
-     "nay": null,
-     "can": 1.0,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "tra BA trang thai; co n_can nen khong tuyen bo chet som"
     },
     "dien_tap_kill_switch": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": null
+     "dat": true,
+     "ghi_chu": "test_quet_NGAT_khi_sut_giam_vuot_tran"
+    },
+    "he_dau_tien_vao_tang": {
+     "nay": "PAPER_CANDIDATE",
+     "can": "PAPER_CANDIDATE",
+     "dat": true,
+     "ghi_chu": "nguoi song sot 1/35.937 cua cong ra tien; han muc lay tu chinh so holdout"
     }
-   }
+   },
+   "da_lam": [
+    "nhan/so_lenh.py - may trang thai PAPER_CANDIDATE->PAPER->LIVE_SHADOW->LIVE_CAP",
+    "nhan/han_muc.py - kill-switch + 4 tran",
+    "nhan/suy_giam.py - t-test so voi ky vong backtest, kem n_can",
+    "test_cham_tien.py: 20 ca kiem"
+   ],
+   "con_lai": [
+    "paper khop backtest 100%: can chay he TS_QQQ tren gia that mot cua so",
+    "chua noi voi MT5 - LIVE_SHADOW chua co duong dat lenh that"
+   ]
   },
   "5": {
    "ten": "Cac cua vao con thieu - video, anh, mimic, uu tien, theo doi",
