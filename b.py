@@ -383,6 +383,37 @@ def c_qwen(a):
     return chay([PY, "-X", "utf8", "-m", "qwen.chay", *a], cwd=LAB)
 
 
+
+def c_da_thu(a: list) -> int:
+    """`b da-thu "<mo ta>"` - so BAI HOC da co gi ve huong nay chua.
+
+    Cua tra cuu cua khoi 2. Truoc khi dang ky mot gia thuyet hay mo mot huong,
+    hoi cai nay. No KHONG phan xet - no dua ra nhung lan truoc he da di huong
+    do, de cai gi lap lai thi lap lai CO Y THUC.
+    """
+    from nhan import bai_hoc as BH
+    if not a:
+        d = BH.dem()
+        print(f"so bai hoc: {d['tong']} the")
+        for k, v in sorted(d["theo_loai"].items(), key=lambda x: -x[1]):
+            print(f"  {k:22s} {v}")
+        print('')
+        print('Go:  b da-thu "phi qua dem CFD chi so"')
+        return 0
+    the = BH.tra(" ".join(a), so_the=6)
+    if not the:
+        print("khong co the nao lien quan - huong nay CHUA tung duoc ghi.")
+        return 0
+    for t in the:
+        print(f"[{t['loai']}] {t['tieu_de']}   (diem {t['diem']})")
+        noi = " ".join(t["noi_dung"].split())
+        print(f"    {noi[:220]}")
+        if t["bang_chung"]:
+            print(f"    bang chung: {' '.join(t['bang_chung'].split())[:170]}")
+        print()
+    return 0
+
+
 LENH = {
     "vao": c_vao, "ket": c_ket,
     "qwen": c_qwen, "q": c_qwen,
@@ -409,6 +440,8 @@ LENH = {
     "finder": c_finder, "tinix": c_tinix, "tele": c_tele,
     "kham-pha": c_kham_pha, "nguon-cho": c_nguon_cho,
     "chi-tieu": c_chi_tieu, "ct": c_chi_tieu,
+    # --- khoi 2 (11/09/2026): so bai hoc ---
+    "da-thu": c_da_thu, "bai-hoc": c_da_thu,
 }
 
 

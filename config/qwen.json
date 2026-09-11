@@ -9,11 +9,11 @@
  ],
  "muc_tieu_cpu": 65.0,
  "tran_lan": {
-  "CPU": 3,
-  "LLM": 2,
+  "CPU": 2,
+  "LLM": 1,
   "MANG": 2,
-  "TESTER": 1,
-  "NHE": 4
+  "NHE": 3,
+  "TESTER": 1
  },
  "_ghi_chu_tran_lan": [
   "TESTER = 1 la RANG BUOC VAT LY, dung nang len. `chay_tester_kho` ghi de cung",
@@ -60,5 +60,6 @@
   "Ban cu khai LLM=1,2 va MIEN lan LLM khoi ngan sach: che do nghi ha muc tieu",
   "xuong 35% ma may van 97%."
  ],
- "che_do": "ultra"
+ "che_do": "ultra",
+ "muc_tieu_cpu_ultra": 65.0
 }

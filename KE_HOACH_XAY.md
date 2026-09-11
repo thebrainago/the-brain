@@ -160,6 +160,33 @@ lien_ma.*   tuong_quan(ma_khac, n) · doi_pct(ma_khac) · dan_dat(ma_khac, tre)
 python _corpus_ngu_phap.py 150
 ```
 
+### Cổng tầng A ≥ 35% CẦN HIỆU CHUẨN LẠI — tôi đặt sai đơn vị đo
+
+Đo 11/09 sau khi vá: tầng A lên **20,0%**, và truy 116 câu còn trượt thì phần lớn
+**không phải lỗi ngữ pháp**. Chúng là những câu *có nhắc hành động giao dịch* nhưng
+không hề phát biểu một luật:
+
+```
+"Learn More Long Put A long put gives you the right to sell the underlying stock at strike price A"
+"Entry-level technical and administrative work is being absorbed by automation at a steady clip"
+"exit - exit the cheat shell (aliases: quit, ^D)"
+```
+
+Tầng A đang trộn hai câu hỏi khác nhau: *"câu này có phải một luật không"* và
+*"ngữ pháp có nói được luật này không"*. Một tỉ lệ trên mẫu câu ngẫu nhiên không
+trả lời câu thứ hai.
+
+**Mẫu số đúng là CORPUS VÀNG** — câu đã được xác nhận là luật thật (việc
+`B1_corpus_vang` của qwen). Khi corpus vàng đủ 150 câu, đo lại trên đó và
+đặt cổng ở **≥ 70%**. Con số tầng A vẫn giữ, nhưng đọc nó như **thước đo độ
+sạch của khâu đọc** chứ không phải trần ngữ pháp.
+
+Ba nhóm còn trượt mà **đúng là giới hạn thật**, ghi lại để 1B nhắm:
+- `"Fast EMA is above Slow EMA"` — trung bình động có tên mà không có chu kỳ.
+  Đoán chu kỳ = bịa ra một con số rồi kiểm định chính nó. **Từ chối là đúng.**
+- `"price closes above the entry channel"` — `entry channel` là từ vựng chưa có.
+- `"the highest high of the last n bars"` — `n` là chữ, không phải số.
+
 **Claude làm:** `loai_cau` có độ tin cậy, `dieu_kien_trong_cau` trả phần bỏ sót, truy 12 toán
 hạng chết, rồi mới đến toán hạng mới + ca kiểm nhìn trước + sửa `gann_sq9`.
 **qwen làm:** dựng corpus có người/máy xác nhận là câu luật thật (`B1_corpus_vang`),

@@ -35,8 +35,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 # 11/09: "cho hon 50% cpu, de lai vua du de toi choi lol".
 import os as _os
 
-LUONG_DOC = int(_os.environ.get("QWEN_LUONG_DOC", "8"))   # tai HTTP, khong phai qwen
-LUONG_BOC = int(_os.environ.get("QWEN_LUONG_BOC", "8"))   # qwen - do 24 dong thoi van OK
+# Ha 20 -> 8 van chua du: do lai 20:36 ngay 11/09 voi DUNG MOT viec LLM chay,
+# CPU ca may van 76-86%. Boc tach JSON/HTML la viec CPU chu khong phai cho mang,
+# nen moi luong an gan tron mot loi. 5/5 la con so khop voi ngan sach 13 loi
+# khi con phai chia cho lan CPU va lan MANG.
+LUONG_DOC = int(_os.environ.get("QWEN_LUONG_DOC", "5"))   # tai HTTP, khong phai qwen
+LUONG_BOC = int(_os.environ.get("QWEN_LUONG_BOC", "5"))   # qwen - do 24 dong thoi van OK
 
 
 def main() -> int:

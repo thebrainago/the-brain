@@ -25534,5 +25534,332 @@
   "nguon": "mql5_code",
   "_ty_le_kich_hoat": 0.5583,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "mua_rsi2_cheo_xuong_15",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 2
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 15.0
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"The first example is a 2-day RSI strategy where we buy when it crosses below 15\" [nguon: https://www.quantifiedstrategies.com/rsi-trading-strategy/]",
+  "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/"
+ },
+ {
+  "ten": "mua_close_tren_ema200_ema50_cheo_len_ema200_rsi14_tren_50",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200,
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 50,
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200,
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 50.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 50,
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 200,
+     "cot": "close"
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Timeframe: M5 Pairs: XAUUSD / EURUSD BUY when: Price > EMA200 and EMA50 crosses above EMA200 and RSI(14) > 50 SELL when: Price < EMA200 and EMA50 crosses below EMA200 and RSI(14) < 50 Risk: Fixed lot 0.01, SL 300 points,\" [nguon: https://www.mql5.com/en/job]",
+  "nguon": "https://www.mql5.com/en/job"
+ },
+ {
+  "ten": "mua_rsi5_cheo_len_30",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 5
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"It's buy when RSI 5 crosses above 30, which is the green the green vertical lines\" [nguon: https://www.youtube.com/watch?v=7ZOAur8Rr2U]",
+  "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
+ },
+ {
+  "ten": "mua_rsi14_tren_60",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 60.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 40.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"RSI Filter (Bộ lọc động lực) * RSI Buy Level = 60: Khi breakout tăng, nếu RSI đã > 60, thị trường đã quá mua, lực mua có thể hết\" [nguon: https://t.me/vutruea/1129346]",
+  "nguon": "https://t.me/vutruea/1129346"
+ },
+ {
+  "ten": "mua_rsi14_duoi_60",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 60.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 40.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"| | | RSI Buy Level | 60 | Khi breakout tăng, RSI phải < 60 (chưa quá mua) để có lực đi lên tiếp theo\" [nguon: https://t.me/vutruea/1129345]",
+  "nguon": "https://t.me/vutruea/1129345"
+ },
+ {
+  "ten": "mua_ema21_tren_ema50_ema21_duoi_ema50",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 21,
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 50,
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 21,
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 50,
+     "cot": "close"
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"* Bộ lọc EMA: ON (EMA 21 > EMA 50 cho Buy, EMA 21 < EMA 50 cho Sell)\" [nguon: https://t.me/vutruea/1129103]",
+  "nguon": "https://t.me/vutruea/1129103"
+ },
+ {
+  "ten": "mua_rsi14_tren_25",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 25.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 75.0
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"* Vào lệnh BUY: RSI[1] > 25 VÀ RSI[2] < 25 (vừa cắt lên trên 25)\" [nguon: https://t.me/vutruea/1129063]",
+  "nguon": "https://t.me/vutruea/1129063"
+ },
+ {
+  "ten": "mua_ema1_tren_ema2",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 1,
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 2,
+     "cot": "close"
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 1,
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 2,
+     "cot": "close"
+    }
+   }
+  ],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"* Để vào Buy: EMA1 phải > EMA2 (xu hướng tăng)\" [nguon: https://t.me/vutruea/1129021]",
+  "nguon": "https://t.me/vutruea/1129021"
+ },
+ {
+  "ten": "mua_rsi14_tren_30_rsi14_duoi_70",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 30.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"* RSI: Phải nằm trong vùng lọc (VD: > 30 cho Buy, < 70 cho Sell, hoặc các ngưỡng custom)\" [nguon: https://t.me/vutruea/1129003]",
+  "nguon": "https://t.me/vutruea/1129003"
+ },
+ {
+  "ten": "mua_ema25_tren_ema125",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 25,
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 125,
+     "cot": "close"
+    }
+   }
+  ],
+  "ra": [],
+  "co_che": "Luat doc duoc tu tai lieu, CHUA co lap luan kinh te: \"Signal: EMA 25 > EMA 125 = BULL (enter long)\" [nguon: https://github.com/NadirAliOfficial/kaizen-intraday-semis-backtest]",
+  "nguon": "https://github.com/NadirAliOfficial/kaizen-intraday-semis-backtest"
  }
 ]
