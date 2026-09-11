@@ -98,7 +98,10 @@ def _lay_cau(so_can: int) -> tuple[list, list]:
 
     a, b, thay = [], [], set()
     for url, vb in dong:
-        for _, cau in DH.cac_cau(vb or ""):
+        # `_chuan` TRUOC khi tach cau - day la thu `doc_bai` lam. Khong goi no
+        # thi bo do chay tren mot van ban KHAC voi van ban duong chay that thay,
+        # va moi con so deu khong noi ve he dang chay.
+        for _, cau in DH.cac_cau(DH._chuan(vb or "")):
             c = cau.strip()
             if not (40 <= len(c) <= 320) or RAC.search(c):
                 continue
@@ -134,8 +137,12 @@ def _do_mot_cau(cau: str) -> tuple[str, list[str], int]:
     if not dieu_kien:
         return "KHONG_NOI", [], len(cau)
 
-    spec = {"ten": "thu", "ho": "thu", "chieu": 1, "giu": 1,
-            "vao": list(dieu_kien), "ra": []}
+    # `co_che` va `ho` la truong BAT BUOC cua kiem_khai_bao. Thieu chung thi
+    # MOI cau deu bi bac, va bang doc y het "bo doc hong" - toi da suyt ket luan
+    # dung nhu vay luc 19:40 ngay 11/09, trong khi bo doc ra dieu kien cho 12/150.
+    spec = {"ten": "thu", "ho": "xu_huong", "chieu": 1, "giu": 1,
+            "vao": list(dieu_kien), "ra": [],
+            "co_che": "cau do corpus - khong dang ky, chi de kiem cu phap"}
     loi = NP.kiem_khai_bao(spec)
     bo_sot = len((con_lai or "").strip())
 

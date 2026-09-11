@@ -167,6 +167,84 @@ _TOAN_HANG: tuple[tuple[str, object, bool], ...] = (
     (r"\bintraday high\b", lambda m: {"chi_bao": "gia", "cot": "high"}, True),
     (r"\bintraday low\b", lambda m: {"chi_bao": "gia", "cot": "low"}, True),
     (r"\b(?:the )?price\b", lambda m: {"chi_bao": "gia", "cot": "close"}, True),
+
+    # --- chi bao NGU PHAP DA CO ma bang nay chua bao gio sinh ra (them 11/09) ---
+    #
+    # Do 11/09 bang `_corpus_ngu_phap.py`: 12/43 toan hang chua duoc dung MOT
+    # LAN NAO trong 689 co che cua kho - bollinger, cci, dem_lien_tiep,
+    # dong_luong, gann_sq9, obv, phuong_sai, smma, tong, trang_thai_lat,
+    # tuong_quan, wma. Doi chieu thi CA 12 deu vang mat khoi bang nay.
+    #
+    # Tuc khong phai he "khong thich" chung, cung khong phai thi truong khong
+    # co: khong co gi NOI RA chung. Ngu phap noi duoc mot dai rong hon hai lan
+    # cai ma bo doc biet hoi. Day la cung ho loi voi `ma_nguon.thu_thap khong
+    # phan trang` va `closure DSL nuot tham so` - bo phan im lang khong lam
+    # viec, doc y het "khong co gi o do".
+    #
+    # `tuong_quan`, `trang_thai_lat`, `dem_lien_tiep` KHONG them o day: chung
+    # nhan mot DANH SACH toan hang hoac mot dieu kien con, khong doc duoc bang
+    # mot mau ve trai. Chung can duong doc rieng - ghi vao hang doi, dung im.
+    (r"\bmacd\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)",
+     lambda m: {"chi_bao": "macd", "nhanh": int(m.group(1)),
+                "cham": int(m.group(2)), "tin_hieu": int(m.group(3))}, False),
+    (r"\bmacd\s+histogram\b",
+     lambda m: {"chi_bao": "macd", "lay": "hieu", "_mac_dinh": "chu_ky"}, False),
+    (r"\bmacd\s+signal(?:\s+line)?\b",
+     lambda m: {"chi_bao": "macd", "lay": "tin_hieu", "_mac_dinh": "chu_ky"}, False),
+    (r"\bmacd(?:\s+line)?\b",
+     lambda m: {"chi_bao": "macd", "_mac_dinh": "chu_ky"}, False),
+
+    (r"\b(\d+)[-\s](?:period|day|bar|week)s?\s+adx\b",
+     lambda m: {"chi_bao": "adx", "n": int(m.group(1))}, False),
+    (r"\badx\s*\(\s*(\d+)\s*\)",
+     lambda m: {"chi_bao": "adx", "n": int(m.group(1))}, False),
+    (r"\b(?:adx|average directional (?:index|movement index))\b",
+     lambda m: {"chi_bao": "adx", "n": 14, "_mac_dinh": "n"}, False),
+
+    (r"\b(\d+)[-\s](?:period|day|bar|week)s?\s+cci\b",
+     lambda m: {"chi_bao": "cci", "n": int(m.group(1))}, False),
+    (r"\bcci\s*\(\s*(\d+)\s*\)",
+     lambda m: {"chi_bao": "cci", "n": int(m.group(1))}, False),
+    (r"\b(?:cci|commodity channel index)\b",
+     lambda m: {"chi_bao": "cci", "n": 20, "_mac_dinh": "n"}, False),
+
+    (r"\b(\d+)[-\s](?:period|day|bar)s?\s+stochastics?\b",
+     lambda m: {"chi_bao": "stochastic", "n": int(m.group(1))}, False),
+    (r"\bstoch(?:astic)?\s*\(\s*(\d+)\s*(?:,[^)]*)?\)",
+     lambda m: {"chi_bao": "stochastic", "n": int(m.group(1))}, False),
+    (r"\b(?:stochastics?|%k|stochastic oscillator)\b",
+     lambda m: {"chi_bao": "stochastic", "n": 14, "_mac_dinh": "n"}, False),
+
+    (r"\b(?:obv|on[- ]balance volume)\b", lambda m: {"chi_bao": "obv"}, False),
+
+    (r"\b(\d+)[-\s](?:period|day|bar|week)s?\s+weighted\s+(?:moving average|ma|wma)\b",
+     lambda m: _tb(m.group(1), "wma"), False),
+    (r"\bwma\s*\(\s*(\d+)\s*\)", lambda m: _tb(m.group(1), "wma"), False),
+    (r"\b(?:smma|rma)\s*\(\s*(\d+)\s*\)", lambda m: _tb(m.group(1), "smma"), False),
+    (r"\b(\d+)[-\s](?:period|day|bar)s?\s+(?:smma|rma"
+     r"|wilder'?s?\s+(?:smooth(?:ed|ing)?|moving average))\b",
+     lambda m: _tb(m.group(1), "smma"), False),
+
+    (r"\b(\d+)[-\s](?:period|day|bar|week)s?\s+momentum\b",
+     lambda m: {"chi_bao": "dong_luong", "n": int(m.group(1))}, False),
+    (r"\bmom(?:entum)?\s*\(\s*(\d+)\s*\)",
+     lambda m: {"chi_bao": "dong_luong", "n": int(m.group(1))}, False),
+
+    (r"\b(\d+)[-\s](?:period|day|bar)s?\s+variance\b",
+     lambda m: {"chi_bao": "phuong_sai", "n": int(m.group(1))}, False),
+    (r"\b(\d+)[-\s](?:period|day|bar)s?\s+percentile\b",
+     lambda m: {"chi_bao": "phan_vi", "n": int(m.group(1))}, False),
+
+    # Khong dat `\brange\b` tran: "a range of strategies" khong phai bien do.
+    (r"\b(?:daily|bar|candle|intraday|true)\s+range\b",
+     lambda m: {"chi_bao": "bien_do"}, False),
+    (r"\b(?:candle|candlestick|bar)\s+body\b",
+     lambda m: {"chi_bao": "than_nen"}, False),
+    (r"\b(?:trading |tick )?volume\b", lambda m: {"chi_bao": "khoi_luong"}, False),
+
+    (r"\bday of (?:the )?week\b", lambda m: {"chi_bao": "ngay_trong_tuan"}, False),
+    (r"\b(?:calendar month|month of (?:the )?year)\b",
+     lambda m: {"chi_bao": "thang"}, False),
 )
 _TOAN_HANG_RE = [(re.compile(p, re.I), f, g) for p, f, g in _TOAN_HANG]
 
@@ -190,6 +268,14 @@ GIU_RE3 = re.compile(r"\bhold(?:ing)?\s+period\s*(?:of|is|:|=)?\s*(\d+)\s*"
 # ------------------------------------------------------------------ TIEN XU LY
 def _chuan(vb: str) -> str:
     """Bo HTML, gop trang, GIU xuong dong de con nhan duoc dau dong."""
+    # GIAI MA CHUOI THOAT `\uXXXX` TRUOC KHI BO THE HTML. Do 11/09: 1.679/4.198
+    # ban van xuoi (40,0%) chua `<` thay vi `<` - chung di qua API tra JSON
+    # roi duoc luu nguyen van. Bo the HTML chay SAU se khong nhan ra chung, nen
+    # ca doan `</p>\n<p dir=\"auto\">` o lai trong cau va
+    # bo tach menh de doc no thanh van. Phai lam truoc, khong lam sau.
+    if vb and "\\u00" in vb:
+        vb = re.sub(r"\\u([0-9a-fA-F]{4})",
+                    lambda m: chr(int(m.group(1), 16)), vb)
     vb = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", vb or "", flags=re.S | re.I)
     vb = re.sub(r"<br\s*/?>|</p>|</li>|</h\d>|</tr>", "\n", vb, flags=re.I)
     # Bo THE HTML, khong bo PHEP SO SANH. `<[^>]+>` an "< 5 ... the close >"
@@ -249,10 +335,41 @@ def loai_cau(cau: str) -> str | None:
     sach = _KHONG_PHAI_HANH_DONG.sub(" ", cau)
     # Mot luat LUON co menh de dieu kien ("buy WHEN rsi < 10") hoac mot phep so
     # sanh. Dong tu tran khong kem dieu kien la van ke chuyen, khong phai luat.
-    co_dieu_kien = bool(re.search(NEU, sach, re.I)
-                        or re.search(r"(?:<|>|=|crosses|above|below|exceeds)",
-                                     sach, re.I))
-    if not co_dieu_kien:
+    #
+    # SIET 11/09: truoc day chi can CO tu dieu kien ("if"/"when") LA DU. Do duoc
+    # tren 150 cau corpus: ca 150 cau `loai_cau` nhan la luat deu ra 0 dieu kien,
+    # va ly do `dieu_kien_trong_cau` tra ve la "khong tach duoc cap". Nhin vao
+    # cau thi ro - chung la van ke chuyen co chu "if":
+    #     "So if you are still bullish, how about buying a stock at an oversold
+    #      (rsi) or at a support level"
+    #     "And if it's a bearish price movement, you go for a sell"
+    # Do phu cao, do chinh xac gan bang 0. Mot bo phan loai nhu vay lam hai viec
+    # cung luc: nhoi hang doi boc bang rac, va thoi phong con so "cau dang luat"
+    # nen cho hong that su bi che.
+    #
+    # Mot LUAT phai co du ba thanh phan: hanh dong · phep so sanh · NGUONG.
+    # Thieu nguong thi khong co gi de kiem dinh - "buy when RSI is oversold"
+    # khong dich duoc thanh mot phep thu, du no la mot cau tieng Anh dung.
+    # Day cung la nguong `cum_chua_hieu` vao dung dung (no doi `_SO` sau phep
+    # so sanh), nen hai ham gio noi cung mot thu.
+    m_ss = None
+    for bt, _phep in _SO_SANH_RE:
+        k = bt.search(sach)
+        if k and (m_ss is None or k.start() < m_ss.start()):
+            m_ss = k
+    if m_ss is None:
+        return None
+    # NGUONG la mot CON SO hoac mot TOAN HANG KHAC. Doi con so khong thoi la
+    # sai: "the close falls below the lower Bollinger band" la mot luat day du
+    # va khong co chu so nao - phep siet dau tien cua toi 11/09 da loai no, va
+    # bai test `test_dai_bollinger_thanh_zscore` bat duoc ngay.
+    # Dai Bollinger KHONG nam trong `_TOAN_HANG` - no co duong doc rieng
+    # (`_bollinger`). Quen no o day thi cau Bollinger bi loai ngay tu cua.
+    phai = sach[m_ss.end():]
+    if (not re.search(_SO, phai)
+            and _quet_toan_hang(phai, uu_tien_chi_bao=False) is None
+            and not (BOLL.search(phai) or BOLL_DUOI.search(phai)
+                     or BOLL_TREN.search(phai))):
         return None
     if re.search(HD_BAN, sach, re.I):
         return "vao_ban"

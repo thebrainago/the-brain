@@ -467,39 +467,10 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
             ra[i] = d
         return pd.Series(ra, index=df.index)
 
-    # --- toan tu BIEN DOI: nhan mot toan hang con ---
-    con = t.get("cua")
-    if con is None:
-        raise KeyError(f"chi bao '{cb}' khong biet, va khong co truong 'cua'")
-    x = toan_hang(df, con)
-    if cb == "tb":
-        return x.rolling(n).mean()
-    if cb == "do_lech":
-        return x.rolling(n).std()
-    if cb == "phuong_sai":                 # 72 lan trong ma that
-        return x.rolling(n).var()
-    if cb == "zscore":
-        sd = x.rolling(n).std()
-        return (x - x.rolling(n).mean()) / sd.replace(0, np.nan)
-    if cb == "phan_vi":
-        # thu hang cua gia tri HIEN TAI trong N bar GAN NHAT, ke ca bar nay.
-        # Hop le: bar nay da dong. `rank(pct=True)` tren cua so truot.
-        return x.rolling(n).rank(pct=True)
-    if cb == "doi":
-        return x.diff(n)
-    if cb == "doi_pct":
-        return x.pct_change(n)
-    if cb == "tre":
-        return x.shift(max(n, 1))          # LUI ve qua khu; n am bi chan o duoi
-    if cb == "cao_nhat":
-        return x.rolling(n).max()
-    if cb == "thap_nhat":
-        return x.rolling(n).min()
-    if cb == "tuyet_doi":
-        return x.abs()
-    if cb == "tong":                       # 19 lan trong ma that
-        return x.rolling(n).sum()
-
+    # DAT TRUOC chot `cua is None` ben duoi: gann_sq9 nhan `cot` HOAC `cua`,
+    # nhung truoc 11/09 no nam SAU chot do nen ban khong co `cua` khong bao gio
+    # toi noi - `{'chi_bao':'gann_sq9'}` nem KeyError 'khong biet'. Mot toan hang
+    # khai trong CHI_BAO_CO ma goi khong duoc doc y het mot toan hang khong ton tai.
     # --- GANN SQUARE OF 9: mot MUC GIA HINH HOC ---
     #
     # Them 08/09/2026 theo gia thuyet #4 cua chu du an. Vi sao can: "square of
@@ -532,6 +503,39 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
                else _cot(df, str(t.get("cot", "close")).lower()))
         can = np.sqrt(nen.where(nen > 0))
         return (can + huong * k * goc / 360.0) ** 2
+
+    # --- toan tu BIEN DOI: nhan mot toan hang con ---
+    con = t.get("cua")
+    if con is None:
+        raise KeyError(f"chi bao '{cb}' khong biet, va khong co truong 'cua'")
+    x = toan_hang(df, con)
+    if cb == "tb":
+        return x.rolling(n).mean()
+    if cb == "do_lech":
+        return x.rolling(n).std()
+    if cb == "phuong_sai":                 # 72 lan trong ma that
+        return x.rolling(n).var()
+    if cb == "zscore":
+        sd = x.rolling(n).std()
+        return (x - x.rolling(n).mean()) / sd.replace(0, np.nan)
+    if cb == "phan_vi":
+        # thu hang cua gia tri HIEN TAI trong N bar GAN NHAT, ke ca bar nay.
+        # Hop le: bar nay da dong. `rank(pct=True)` tren cua so truot.
+        return x.rolling(n).rank(pct=True)
+    if cb == "doi":
+        return x.diff(n)
+    if cb == "doi_pct":
+        return x.pct_change(n)
+    if cb == "tre":
+        return x.shift(max(n, 1))          # LUI ve qua khu; n am bi chan o duoi
+    if cb == "cao_nhat":
+        return x.rolling(n).max()
+    if cb == "thap_nhat":
+        return x.rolling(n).min()
+    if cb == "tuyet_doi":
+        return x.abs()
+    if cb == "tong":                       # 19 lan trong ma that
+        return x.rolling(n).sum()
 
     raise KeyError(f"chi bao khong biet: '{cb}'")
 
