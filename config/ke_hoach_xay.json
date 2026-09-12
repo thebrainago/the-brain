@@ -377,7 +377,7 @@
      "nay": 0,
      "can": 10,
      "dat": false,
-     "ghi_chu": "Dem co che co truong quan tri (trailing/dat hue/thoat theo thoi gian/chia lenh) trong kho, khong phai tin hieu vao."
+     "ghi_chu": "DO 12/09 tren kho 1.216 co che: 0 co che co BAT KY truong quan tri nao. 344 (28,3%) co dieu kien RA tuong minh, 872 chi co VAO + giu N bar. Kho quan tri la mot kho RIENG (reports/xet_quan_tri.json, quan_tri_vi_the.json), khong nam trong doc_kho()."
     },
     "he_qua_hai_cong_co_quan_tri": {
      "nay": 0,
@@ -385,7 +385,54 @@
      "dat": false,
      "ghi_chu": "Mot he da qua ca hai cong, duoc gan quan tri, va VAN qua sau khi gan."
     }
-   }
+   },
+   "da_do_truoc_khi_giao_viec": {
+    "nguon": [
+     "reports/xet_quan_tri.json",
+     "reports/DE_QT_EA_NGOAI.json",
+     "reports/quan_tri_da_loc.json"
+    ],
+    "dem": {
+     "da_thu": 42,
+     "hon_train": 11,
+     "hon_holdout": 8,
+     "hon_ca_hai": 5
+    },
+    "ca_nam_qua_deu_la_trailing": [
+     {
+      "ea": "EA_KCI_N-Matrix",
+      "nut": "trailing_tu 1,0 · buoc 0,05",
+      "hon_ho": 3869.7
+     },
+     {
+      "ea": "MartingalePulse",
+      "nut": "trailing_tu 200",
+      "hon_ho": 2511.7
+     },
+     {
+      "ea": "Playground_v1_00",
+      "nut": "trailing_tu 50 · buoc 20",
+      "hon_ho": 2360.1
+     },
+     {
+      "ea": "Sniper_Gold_Hybrid",
+      "nut": "trailing_tu 2 · buoc 5",
+      "hon_ho": 2292.2
+     },
+     {
+      "ea": "DynamicSR4",
+      "nut": "trailing_tu 15",
+      "hon_ho": 1437.0
+     }
+    ],
+    "canh_bao_dem": "11/42 qua train (26%) va 8/42 qua holdout (19%). Neu hai cong doc lap thi ky vong qua CA HAI la 0,26*0,19*42 = 2,1 luat; quan sat 5. Tuc chi ~2,4 lan ky vong ngau nhien - KHONG DU de tin bang so dem. Thu dang tin hon la BIEN DO (hon_ho +1.437 den +3.870) va viec ca 5 cung MOT ho.",
+    "khong_phai_phan_quyet_am": "DE_QT_EA_NGOAI.json = AM, nhung do la MOT EA tren US500Cash H1 - mot ket qua am le. quan_tri_da_loc.json rong la ket qua cua mot BO LOC khac, khong phai cua phep thu train/holdout o tren."
+   },
+   "viec_ngay": [
+    "V7_placebo_trailing: chay placebo cho RIENG ho trailing tren he nen da co. Day la phep thu quyet dinh - 5/42 chi hon ky vong ngau nhien 2,4 lan, nen phai co placebo moi biet la bien do that hay dam nhieu. Bo placebo da co san.",
+    "Neu placebo DAT: dua trailing thanh mot TRUONG cua khai bao trong doc_kho(), de no thua huong ca pheu (MDE, FDR, holdout, khu trung) thay vi song trong kho rieng.",
+    "Neu placebo KHONG DAT: ghi am kem ly do; don bay con lai la GHEP (39/45 cap giu hang o holdout trong khi he don tut 822 -> 40)."
+   ]
   }
  },
  "tuong_mde": {

@@ -62,3 +62,21 @@ rsi_2_3                        rsi_overbought_sell             -0.001    260.05 
 ########## CHANG D: cong ra tien o sut giam 50-60%
 
 === cap 0: gamma_duong_keo_ve__dao + rsi_3_10
+   ghep     dinh  18.93%/nam @ DD 36.81%  lot 0.0/16.0/16.0 | DD20  10.49%/nam @ DD 22.04%  lot 0.0/6.4/5.6 | 50-60%  16.03%/nam @ DD 50.73%  lot 0.0/2.4/16.0
+   chi_a    dinh   9.47%/nam @ DD 51.07%  lot 0.0/16.0/0.0 | DD20   2.62%/nam @ DD 20.58%  lot 0.0/3.2/0.0 | 50-60%   9.47%/nam @ DD 51.07%  lot 0.0/16.0/0.0
+   chi_b    dinh  15.44%/nam @ DD 42.27%  lot 0.0/0.0/16.0 | DD20   6.08%/nam @ DD 20.13%  lot 0.0/0.0/4.0 | 50-60%   --
+   mua_giu  dinh  -0.32%/nam @ DD  7.20%  lot 0.1/0.0/0.0 | DD20  -0.99%/nam @ DD 21.25%  lot 0.3/0.0/0.0 | 50-60%  -2.88%/nam @ DD 54.47%  lot 0.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_UK100Cash.json
+=== cap 1: gamma_duong_keo_ve__dao + rsi_2_3
+   ghep     dinh  18.69%/nam @ DD 44.02%  lot 0.0/16.0/16.0 | DD20   7.92%/nam @ DD 20.75%  lot 0.0/4.0/4.0 | 50-60%  17.21%/nam @ DD 51.11%  lot 0.0/8.8/16.0
+   chi_a    dinh   9.47%/nam @ DD 51.07%  lot 0.0/16.0/0.0 | DD20   2.62%/nam @ DD 20.58%  lot 0.0/3.2/0.0 | 50-60%   9.47%/nam @ DD 51.07%  lot 0.0/16.0/0.0
+   chi_b    dinh  15.13%/nam @ DD 70.35%  lot 0.0/0.0/16.0 | DD20   4.95%/nam @ DD 20.80%  lot 0.0/0.0/3.2 | 50-60%  12.75%/nam @ DD 58.70%  lot 0.0/0.0/12.0
+   mua_giu  dinh  -0.32%/nam @ DD  7.20%  lot 0.1/0.0/0.0 | DD20  -0.99%/nam @ DD 21.25%  lot 0.3/0.0/0.0 | 50-60%  -2.88%/nam @ DD 54.47%  lot 0.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_UK100Cash.json
+=== cap 2: bearish_engulfing__dao + rsi_3_10
+   ghep     dinh  21.23%/nam @ DD 28.97%  lot 0.0/16.0/16.0 | DD20  14.69%/nam @ DD 22.43%  lot 0.0/12.8/4.0 | 50-60%   --
+   chi_a    dinh  13.89%/nam @ DD 28.70%  lot 0.0/16.0/0.0 | DD20   8.87%/nam @ DD 22.44%  lot 0.0/8.0/0.0 | 50-60%   --
+   chi_b    dinh  15.44%/nam @ DD 42.27%  lot 0.0/0.0/16.0 | DD20   6.08%/nam @ DD 20.13%  lot 0.0/0.0/4.0 | 50-60%   --
+   mua_giu  dinh  -0.32%/nam @ DD  7.20%  lot 0.1/0.0/0.0 | DD20  -0.99%/nam @ DD 21.25%  lot 0.3/0.0/0.0 | 50-60%  -2.88%/nam @ DD 54.47%  lot 0.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_UK100Cash.json
+=== cap 3: aegis_quantum_lite__dao + bearish_engulfing__dao

@@ -1,3 +1,9 @@
 === QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===
 co che truoc: 1181 | tai lieu chua khai thac: 9788
 
+vong  1 | doc   0/400 | ung vien  34 | co che 1181 -> 1208 (+27) | 685s
+         boc: {'ban': 50, 'co_che_moi': 27, 'tu_choi': 26, 'loi': 0, 'giay': 242.5, 'giay_moi_ban': 4.8, 'suat_tren_100_ban': 54.0, 'ly_do_tu_choi': {"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 6, "thieu truong bat buoc 'vao'": 5, 'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 3, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.559%, XAU": 2, "ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph": 2, '[\'chay loi: KeyError: "chi bao \\\'stoch_sig\\\' khong biet, va ': 2, "['suy bien tren MOI tai san do duoc (chuoi kiem 100.000%, XA": 2, '["da co co che ten \'day_pivot_ema_open_signal\'"]': 1}}
+vong  2 | doc 253/400 | ung vien   6 | co che 1208 -> 1208 (+0) | 579s
+         boc: {'ban': 6, 'co_che_moi': 0, 'tu_choi': 0, 'loi': 0, 'giay': 47.1, 'giay_moi_ban': 7.9, 'suat_tren_100_ban': 0.0, 'ly_do_tu_choi': {}}
+vong  3 | doc 107/400 | ung vien  32 | co che 1208 -> 1216 (+8) | 869s
+         boc: {'ban': 50, 'co_che_moi': 8, 'tu_choi': 88, 'loi': 0, 'giay': 264.2, 'giay_moi_ban': 5.3, 'suat_tren_100_ban': 16.0, 'ly_do_tu_choi': {"ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph": 65, "vao[0]: gia luon DUONG nen 'gia > 0' la hang so - nguong tha": 5, "['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 4, 'vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, '[\'chay loi: KeyError: "chi bao \\\'xroc2_vg\\\' khong biet, va k': 2, 'trung dieu kien': 2, "thieu truong bat buoc 'vao'": 2, "vao[0]: trong mot bar 'high' >= 'low' LUON dung, nen 'high <": 1}}
