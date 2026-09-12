@@ -111,15 +111,93 @@
      "p": 0.0025
     }
    }
+  },
+  "M30": {
+   "khung": "M30",
+   "so_doan": 1843,
+   "so_cap": 915,
+   "bar": 16666,
+   "luat": {
+    "L1_hoi_theo_co_day": {
+     "hoi_khi_day_NHO_pct": 75.37,
+     "hoi_khi_day_LON_pct": 52.94,
+     "chenh": -22.43,
+     "p": 0.0025
+    },
+    "L2_nho_ty_le_hoi": {
+     "tu_tuong_quan": -0.0477,
+     "p": 0.0773
+    },
+    "L3_ben_huong": {
+     "ty_le_cung_chieu_pct": 45.4,
+     "null_pct": 50.0,
+     "p": 0.005
+    },
+    "L4_cum_bien_do": {
+     "tu_tuong_quan": 0.5703,
+     "p": 0.0025
+    },
+    "L5_hoi_dung_o_moc_thang": {
+     "kc_trung_vi_pct": 1.4311,
+     "null_pct": 8.8323,
+     "gan_hon_lan": 6.172,
+     "p": 0.0083
+    },
+    "L6_gio_bat_dau_song": {
+     "gio_dong_nhat": 17,
+     "dam_hon_deu_lan": 2.492,
+     "null_lan": 1.311,
+     "p": 0.0025
+    }
+   }
+  },
+  "M15": {
+   "khung": "M15",
+   "so_doan": 3627,
+   "so_cap": 1819,
+   "bar": 33326,
+   "luat": {
+    "L1_hoi_theo_co_day": {
+     "hoi_khi_day_NHO_pct": 76.3,
+     "hoi_khi_day_LON_pct": 52.92,
+     "chenh": -23.38,
+     "p": 0.0025
+    },
+    "L2_nho_ty_le_hoi": {
+     "tu_tuong_quan": -0.0286,
+     "p": 0.0998
+    },
+    "L3_ben_huong": {
+     "ty_le_cung_chieu_pct": 45.1,
+     "null_pct": 50.06,
+     "p": 0.0025
+    },
+    "L4_cum_bien_do": {
+     "tu_tuong_quan": 0.5102,
+     "p": 0.0025
+    },
+    "L5_hoi_dung_o_moc_thang": {
+     "kc_trung_vi_pct": 1.4942,
+     "null_pct": 8.8455,
+     "gan_hon_lan": 5.92,
+     "p": 0.0083
+    },
+    "L6_gio_bat_dau_song": {
+     "gio_dong_nhat": 16,
+     "dam_hon_deu_lan": 2.428,
+     "null_lan": 1.227,
+     "p": 0.0025
+    }
+   }
   }
  },
  "dat_tren_may_khung": {
-  "L1_hoi_theo_co_day": "3/3",
-  "L2_nho_ty_le_hoi": "0/3",
-  "L3_ben_huong": "3/3",
-  "L4_cum_bien_do": "3/3",
-  "L5_hoi_dung_o_moc_thang": "3/3",
-  "L6_gio_bat_dau_song": "2/2"
+  "L1_hoi_theo_co_day": "5/5",
+  "L2_nho_ty_le_hoi": "0/5",
+  "L3_ben_huong": "5/5",
+  "L4_cum_bien_do": "5/5",
+  "L5_hoi_dung_o_moc_thang": "5/5",
+  "L6_gio_bat_dau_song": "4/4"
  },
- "giay": 1.3
+ "giay": 2.0
 }

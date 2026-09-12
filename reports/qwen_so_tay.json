@@ -169,16 +169,16 @@
   },
   "TT_san_nguon": {
    "ma": "TT_san_nguon",
-   "so_lan_chay": 4,
-   "trang_thai": "XONG",
+   "so_lan_chay": 5,
+   "trang_thai": "DANG_CHAY",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys; sys.path.insert(0,'.')\nfrom nhan import day_chuyen as D\nprint(D.mot_luot('US500CASH'))"
    ],
-   "bat_dau": 1789172617.9943235,
-   "xong": 1789176167.9368138,
-   "ma_thoat": 0,
+   "bat_dau": 1789190579.761988,
+   "xong": null,
+   "ma_thoat": null,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet",
    "cong": {
     "ket": "DAT",
@@ -1786,7 +1786,7 @@
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789189664.0470529
+   "luc": 1789190719.907925
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,

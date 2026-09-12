@@ -498,6 +498,44 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
     #     dung ky vong (chu du an do duoc: "0 lenh o tai san bien dong thap").
     #     Cach chuyen dung tai san la `ngoai_sinh.quy_doi` KHOP TY LE KICH HOAT,
     #     khong phai bung nguyen con so `goc`.
+    # --- MOC NEO THEO CHU KY (magnetic) ---
+    #
+    # Them 12/09/2026 sau khi `quy_luat_song` do duoc quy luat L5: diem KET THUC
+    # HOI nam gan `dong_thang_truoc` hon muc ngau nhien **5,4 den 31,2 lan**, va
+    # no dat 15/15 o tren 3 ma x 5 khung (M15..D1). Truoc do ngu phap khong noi
+    # duoc moc nao nhu vay, nen mot quy luat da do duoc van khong thanh co che.
+    #
+    # LUU Y QUAN TRONG: cung mot moc, hai cach hoi cho hai ket qua khac han:
+    #   "gia co CHAM moc khong"      -> 1,35 lan muc ngau nhien   (yeu)
+    #   "HOI co DUNG o moc khong"    -> 5-31 lan                  (rat manh)
+    # Nen moc nay dung de dat NGUONG/MUC TIEU, khong dung lam tin hieu "cham".
+    #
+    # AN TOAN: dich mot KY chu khong mot BAR. Cai bay 15/08 trong `mau.py` la
+    # `transform("last")` phat gia dong cua CUOI NGAY cho MOI bar trong ngay roi
+    # `.shift(1)` chi dich mot BAR - ra EURCAD H1 CAGR 115% Sharpe 10,4.
+    # `mo_<ky>` cua ky HIEN TAI la hop le: biet ngay tu bar dau ky.
+    if cb == "moc_ky":
+        ky = str(t.get("ky", "thang")).lower()
+        lay = str(t.get("lay", "dong_truoc")).lower()
+        if ky not in ("ngay", "tuan", "thang"):
+            raise KeyError("'moc_ky': ky phai la ngay/tuan/thang, khong phai '%s'" % ky)
+        idx = pd.DatetimeIndex(df.index)
+        if idx.tz is not None:
+            idx = idx.tz_convert("UTC").tz_localize(None)
+        nhom = {"ngay": idx.normalize(),
+                "tuan": idx.to_period("W").start_time,
+                "thang": idx.to_period("M").start_time}[ky]
+        gr = df.groupby(nhom)
+        ns = pd.Series(nhom, index=df.index)
+        if lay == "mo":                       # mo ky HIEN TAI - hop le
+            return ns.map(gr["open"].first())
+        bang = {"dong_truoc": gr["close"].last(), "cao_truoc": gr["high"].max(),
+                "thap_truoc": gr["low"].min(), "mo_truoc": gr["open"].first()}
+        if lay not in bang:
+            raise KeyError("'moc_ky': khong biet lay='%s' (co: mo, mo_truoc, "
+                           "dong_truoc, cao_truoc, thap_truoc)" % lay)
+        return ns.map(bang[lay].shift(1))     # DICH MOT KY, khong mot bar
+
     if cb == "gann_sq9":
         goc = float(t.get("goc", 45.0) or 45.0)
         k = float(t.get("k", 1.0) or 1.0)
@@ -569,6 +607,8 @@ CHI_BAO_CO = {
     "tuyen_tinh", "tuong_quan",
     # muc gia hinh hoc (08/09/2026)
     "gann_sq9",
+    # moc neo theo chu ky (magnetic) - them 12/09 sau quy luat L5
+    "moc_ky",
     # co nho trang thai
     "trang_thai_lat", "dem_lien_tiep",
     # bien doi mot toan hang con (qua truong `cua`)

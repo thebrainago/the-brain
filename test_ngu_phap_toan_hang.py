@@ -90,6 +90,11 @@ _DOI_SO = {
         "xuong": {"trai": {"chi_bao": "rsi"}, "phep": "<", "phai": {"hang": 50}}},
     "dem_lien_tiep": {
         "khi": {"trai": {"chi_bao": "rsi"}, "phep": ">", "phai": {"hang": 50}}},
+    # `moc_ky` mac dinh lay moc THANG. Khung kiem chi 1.500 bar gio = 62 ngay,
+    # tuc `dong_thang_truoc` chi co 2-3 gia tri roi rac - khong nguong nao chia
+    # duoc 5-95%. Do la chuyen DOI SO, khong phai loi ngu phap: doi sang moc
+    # NGAY thi co 62 muc va phep cat chay binh thuong.
+    "moc_ky": {"ky": "ngay", "lay": "dong_truoc"},
 }
 #: Toan tu BIEN DOI: chi co nghia khi nhan mot toan hang con qua `cua`.
 _CAN_CUA = {"tb", "do_lech", "phuong_sai", "zscore", "phan_vi", "doi", "doi_pct",
