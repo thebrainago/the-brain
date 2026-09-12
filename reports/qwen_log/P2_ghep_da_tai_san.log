@@ -1,0 +1,37 @@
+219 chan tu 3 tai san | 2624 ngay chung | cat 2021.06.01 (ngay 1290)
+khu trung: 219 -> 192 chan
+chan duong tren TRAIN: 192 | lay top 40
+   phan bo theo tai san: {'US100Cash': 18, 'US30Cash': 15, 'US500Cash': 7}
+
+--- PHAN BO TUONG QUAN (tren TRAIN) ---
+lop cap          so cap  r trung vi    % r>0,5      % r<0
+CUNG tai san        279      +0.147       6.8%      12.9%
+KHAC tai san        501      +0.113       2.2%       9.6%
+
+he don dau bang TRAIN: US100Cash:ma_crossover_buy__dao
+   train 822.7 -> holdout 42.6
+
+--- TOP 15 CAP CUA TUNG LOP: cham TRAIN, doc HOLDOUT ---
+
+[CUNG tai san]  15/15 cap hon he don o holdout | trung vi holdout 108.3 (he don 42.6)
+chan A                             chan B                                  r    train  holdout
+US100Cash:ma_crossover_buy__dao    US100Cash:pine_ichimoku_cloud_clos  -0.07    930.5    186.8
+US100Cash:ma_crossover_buy__dao    US100Cash:rsi_mua_qua_ban           -0.00    919.7    127.4
+US100Cash:ma_crossover_buy__dao    US100Cash:cat_xuong_ma_xuat_hien__  -0.09    912.2     54.0
+US100Cash:ma_crossover_buy__dao    US100Cash:sellsignal__dao           -0.01    894.2     81.4
+US100Cash:ma_crossover_buy__dao    US100Cash:dailyzonerecovery_sell__  -0.01    833.2     58.7
+US100Cash:ma_crossover_buy__dao    US100Cash:gamma_duong_keo_ve        -0.00    780.4     78.6
+US100Cash:ma_crossover_buy__dao    US100Cash:pine_everyday_0003_ema14  -0.01    775.7     84.4
+US100Cash:ma_crossover_buy__dao    US100Cash:sell_liquidity_ob_revers  -0.00    773.5    134.2
+
+[CHEO tai san]  14/15 cap hon he don o holdout | trung vi holdout 71.5 (he don 42.6)
+chan A                             chan B                                  r    train  holdout
+US100Cash:ma_crossover_buy__dao    US500Cash:dailyzonerecovery_sell__  -0.02    843.8    159.4
+US100Cash:ma_crossover_buy__dao    US500Cash:macd_crossover            -0.00    815.2     46.4
+US100Cash:ma_crossover_buy__dao    US30Cash:momentum_bear_arrow__dao   -0.02    801.8     78.4
+US100Cash:ma_crossover_buy__dao    US500Cash:pine_bollinger_band_ema6  -0.07    799.2     61.5
+US100Cash:ma_crossover_buy__dao    US30Cash:dailyzonerecovery_buy      -0.00    794.9    191.0
+US100Cash:ma_crossover_buy__dao    US30Cash:pine_keltner_bounce_from_  +0.01    793.5     71.3
+US100Cash:ma_crossover_buy__dao    US500Cash:rsi_mua_qua_ban           -0.00    788.8     71.5
+US100Cash:ma_crossover_buy__dao    US30Cash:fast_sma_cuts_below_slow_  -0.00    768.7     38.9
+-> reports/GHEP_DA_TAI_SAN.json

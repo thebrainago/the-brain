@@ -1,5 +1,5 @@
 {
- "luc": "2026-09-12 07:19:11",
+ "luc": "2026-09-12 07:25:13",
  "hat": 20260911,
  "toan_hang_hien_co": 43,
  "tang_A_do_NGU_PHAP": {
@@ -2012,34 +2012,11 @@
   }
  ],
  "doi_so_lan_truoc": {
-  "chung_cau": 111,
-  "tot_len": 1,
-  "xau_di": 1,
-  "XAU_DI": [
-   {
-    "tu": "NOI_DUOC",
-    "sang": "NOI_MOT_PHAN",
-    "cau": "The first example is a 2-day RSI strategy where we buy when it crosses below 15 and sell when it exceeds 85"
-   }
-  ],
-  "tot": [
-   {
-    "tu": "NOI_MOT_PHAN",
-    "sang": "NOI_DUOC",
-    "cau": "The base case of the strategy is to go long the SPY ETF at the next open when the closing price crosses above the 200-day moving average and to exit the trade a"
-   }
-  ],
-  "tat_ca": [
-   {
-    "tu": "NOI_DUOC",
-    "sang": "NOI_MOT_PHAN",
-    "cau": "The first example is a 2-day RSI strategy where we buy when it crosses below 15 and sell when it exceeds 85"
-   },
-   {
-    "tu": "NOI_MOT_PHAN",
-    "sang": "NOI_DUOC",
-    "cau": "The base case of the strategy is to go long the SPY ETF at the next open when the closing price crosses above the 200-day moving average and to exit the trade a"
-   }
-  ]
+  "chung_cau": 150,
+  "tot_len": 0,
+  "xau_di": 0,
+  "XAU_DI": [],
+  "tot": [],
+  "tat_ca": []
  }
 }

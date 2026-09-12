@@ -91,16 +91,16 @@
   },
   "S2_mql5_code_base": {
    "ma": "S2_mql5_code_base",
-   "so_lan_chay": 3,
-   "trang_thai": "XONG",
+   "so_lan_chay": 4,
+   "trang_thai": "DANG_CHAY",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys, json, pathlib; sys.path.insert(0,'.')\nfrom nhan import ma_nguon as MN\nr = MN.thu_thap(so_bai=40)\nprint(json.dumps(r, ensure_ascii=False, default=str)[:3000])\npathlib.Path('reports/QWEN_MA_NGUON.json').write_text(json.dumps(r, ensure_ascii=False, default=str), encoding='utf-8')"
    ],
-   "bat_dau": 1789142739.4751759,
-   "xong": 1789143300.2640388,
-   "ma_thoat": 0,
+   "bat_dau": 1789172617.9492497,
+   "xong": null,
+   "ma_thoat": null,
    "cong": {
     "ket": "DAT",
     "vi_sao": "ghi_moi = 71 > 0",
@@ -144,7 +144,7 @@
   },
   "TT_boc": {
    "ma": "TT_boc",
-   "so_lan_chay": 5,
+   "so_lan_chay": 6,
    "trang_thai": "DANG_CHAY",
    "lan": "LLM",
    "lenh": [
@@ -153,7 +153,7 @@
     "400",
     "250"
    ],
-   "bat_dau": 1789143340.3028798,
+   "bat_dau": 1789172557.730524,
    "xong": null,
    "ma_thoat": null,
    "cong": {
@@ -169,16 +169,16 @@
   },
   "TT_san_nguon": {
    "ma": "TT_san_nguon",
-   "so_lan_chay": 3,
-   "trang_thai": "XONG",
+   "so_lan_chay": 4,
+   "trang_thai": "DANG_CHAY",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys; sys.path.insert(0,'.')\nfrom nhan import day_chuyen as D\nprint(D.mot_luot('US500CASH'))"
    ],
-   "bat_dau": 1789133640.3618293,
-   "xong": 1789136569.5417972,
-   "ma_thoat": 0,
+   "bat_dau": 1789172617.9943235,
+   "xong": null,
+   "ma_thoat": null,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet",
    "cong": {
     "ket": "DAT",
@@ -201,37 +201,37 @@
   },
   "B1_do_corpus": {
    "ma": "B1_do_corpus",
-   "so_lan_chay": 1,
+   "so_lan_chay": 2,
    "trang_thai": "XONG",
    "lan": "CPU",
    "lenh": [
     "_corpus_ngu_phap.py",
     "150"
    ],
-   "bat_dau": 1789131410.5371392,
-   "xong": 1789131591.0815566,
+   "bat_dau": 1789172557.7739034,
+   "xong": 1789172718.4086173,
    "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
-    "vi_sao": "chay xong, ma thoat 0, file ra co 3 dong",
+    "vi_sao": "chay xong, ma thoat 0, file ra co 4 dong",
     "so": {
-     "so_dong": 3,
+     "so_dong": 4,
      "dong_giong_nhau": false
     }
    },
-   "log": "toan hang hien co: 43\n\nTANG A - do NGU PHAP (150 cau `loai_cau` nhan la luat)\n  NOI_DUOC         10    6.7%\n  NOI_MOT_PHAN      0    0.0%\n  KHONG_NOI       140   93.3%\n\nTANG B - do KHAU DOC (150 cau co tu vung phuong phap ma `loai_cau` tu choi)\n  vung         58\n  song         41\n  lien_ma      24\n  khoi_luong   17\n  hinh_hoc     15\n  nen          3\n\nhang doi tu vung thieu (tang A):\n  vung         7\n  song         5\n  hinh_hoc     2\n  khoi_luong   1\n\nTANG C - hinh dang THAT cua 689 co che trong kho\n  ho:        xu_huong 338 · quay_ve_trung_binh 142 · pha_vo 125 · bien_dong 54 · phien 13 · dong_tien 10 · lich 6 · vi_mo 1\n  toan hang: gia 1159 · ema 334 · sma 233 · tre 228 · tb 159 · rsi 149 · phan_vi 67 · zscore 51 · cao_nhat 43 · thap_nhat 42\n  CHUA AI DUNG (12): bollinger, cci, dem_lien_tiep, dong_luong, gann_sq9, obv, phuong_sai, smma, tong, trang_thai_lat, tuong_quan, wma\n\n-> C:\\Users\\SV STORE\\Downloads\\Research SP500\\lab\\reports\\CORPUS_NGU_PHAP.json\n",
-   "giay": 180.5
+   "log": "toan hang hien co: 43\n\nTANG A - do NGU PHAP (150 cau `loai_cau` nhan la luat)\n  NOI_DUOC         33   22.0%\n  NOI_MOT_PHAN      7    4.7%\n  KHONG_NOI       110   73.3%\n\nTANG B - do KHAU DOC (150 cau co tu vung phuong phap ma `loai_cau` tu choi)\n  vung         67\n  song         45\n  hinh_hoc     19\n  lien_ma      18\n  khoi_luong   15\n  nen          2\n\nhang doi tu vung thieu (tang A):\n  vung         9\n  song         5\n  hinh_hoc     4\n  khoi_luong   1\n\nTANG C - hinh dang THAT cua 1181 co che trong kho\n  ho:        xu_huong 600 · quay_ve_trung_binh 259 · pha_vo 181 · bien_dong 98 · phien 19 · dong_tien 13 · lich 8 · vi_mo 3\n  toan hang: gia 2225 · ema 603 · tre 442 · sma 430 · rsi 288 · tb 288 · phan_vi 79 · zscore 72 · gio 70 · thap_nhat 59\n  CHUA AI DUNG (11): bollinger, dem_lien_tiep, dong_luong, gann_sq9, obv, phuong_sai, smma, tong, trang_thai_lat, tuong_quan, wma\n\nSO VOI LAN TRUOC (150 cau chung): tot len 0 · XAU DI 0\n\n-> C:\\Users\\SV STORE\\Downloads\\Research SP500\\lab\\reports\\CORPUS_NGU_PHAP.json\n",
+   "giay": 160.6
   },
   "TT_chi_bao": {
    "ma": "TT_chi_bao",
-   "so_lan_chay": 3,
+   "so_lan_chay": 4,
    "trang_thai": "DANG_CHAY",
    "lan": "LLM",
    "lenh": [
     "nhan/doc_chi_bao.py",
     "--that"
    ],
-   "bat_dau": 1789143340.3243966,
+   "bat_dau": 1789172557.7519443,
    "xong": null,
    "ma_thoat": null,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
@@ -264,7 +264,7 @@
   "B1_corpus_vang": {
    "ma": "B1_corpus_vang",
    "so_lan_chay": 3,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "GIAN_DOAN",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -283,6 +283,40 @@
    "log": "=== QWEN HET CONG SUAT (doc 300 x boc 200) x 6 vong ===\nco che truoc: 693 | tai lieu chua khai thac: 9381\n\nvong  1 | doc 239/300 | ung vien   8 | co che 693 -> 695 (+2) | 444s\n         boc: {'ban': 8, 'co_che_moi': 2, 'tu_choi': 2, 'loi': 0, 'giay': 69.0, 'giay_moi_ban': 8.6, 'suat_tren_100_ban': 25.0, 'ly_do_tu_choi': {'trung dieu kien': 2}}\nvong  2 | doc  26/300 | ung vien   0 | co che 695 -> 695 (+0) | 630s\n         boc: {'ban': 0, 'co_che_moi': 0}\n",
    "giay": 1386.3,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
+  },
+  "V1_dao_UK100": {
+   "ma": "V1_dao_UK100",
+   "so_lan_chay": 1,
+   "trang_thai": "DANG_CHAY",
+   "lan": "TESTER",
+   "lenh": [
+    "_dem_ghep.py",
+    "UK100Cash"
+   ],
+   "bat_dau": 1789172617.9302533,
+   "xong": null,
+   "ma_thoat": null
+  },
+  "P2_ghep_da_tai_san": {
+   "ma": "P2_ghep_da_tai_san",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "CPU",
+   "lenh": [
+    "_ghep_da_tai_san.py"
+   ],
+   "bat_dau": 1789172617.975626,
+   "xong": 1789172638.0879388,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "DAT",
+    "vi_sao": "chay xong, ma thoat 0",
+    "so": {
+     "so_dong": 0
+    }
+   },
+   "log": "h:cat_xuong_ma_xuat_hien__  -0.09    912.2     54.0\nUS100Cash:ma_crossover_buy__dao    US100Cash:sellsignal__dao           -0.01    894.2     81.4\nUS100Cash:ma_crossover_buy__dao    US100Cash:dailyzonerecovery_sell__  -0.01    833.2     58.7\nUS100Cash:ma_crossover_buy__dao    US100Cash:gamma_duong_keo_ve        -0.00    780.4     78.6\nUS100Cash:ma_crossover_buy__dao    US100Cash:pine_everyday_0003_ema14  -0.01    775.7     84.4\nUS100Cash:ma_crossover_buy__dao    US100Cash:sell_liquidity_ob_revers  -0.00    773.5    134.2\n\n[CHEO tai san]  14/15 cap hon he don o holdout | trung vi holdout 71.5 (he don 42.6)\nchan A                             chan B                                  r    train  holdout\nUS100Cash:ma_crossover_buy__dao    US500Cash:dailyzonerecovery_sell__  -0.02    843.8    159.4\nUS100Cash:ma_crossover_buy__dao    US500Cash:macd_crossover            -0.00    815.2     46.4\nUS100Cash:ma_crossover_buy__dao    US30Cash:momentum_bear_arrow__dao   -0.02    801.8     78.4\nUS100Cash:ma_crossover_buy__dao    US500Cash:pine_bollinger_band_ema6  -0.07    799.2     61.5\nUS100Cash:ma_crossover_buy__dao    US30Cash:dailyzonerecovery_buy      -0.00    794.9    191.0\nUS100Cash:ma_crossover_buy__dao    US30Cash:pine_keltner_bounce_from_  +0.01    793.5     71.3\nUS100Cash:ma_crossover_buy__dao    US500Cash:rsi_mua_qua_ban           -0.00    788.8     71.5\nUS100Cash:ma_crossover_buy__dao    US30Cash:fast_sma_cuts_below_slow_  -0.00    768.7     38.9\n-> reports/GHEP_DA_TAI_SAN.json\n",
+   "giay": 20.1
   }
  },
  "nhat_ky": [
@@ -411,6 +445,18 @@
    "ma": "V1_dao_GER40",
    "ai": "qwen",
    "van": "Kết quả này sinh ra từ 5 phép thử ghép điều kiện trên GER40Cash, trạng thái CHUA_DO_DUOC do là lần chạy đầu tiên nên chưa xuất hiện chân bán dương để đối chiếu. Các con số nền tảng ghi nhận: tổ hợp ghep tạo ra 180 lệnh với lợi nhuận 26%/năm và DD 21.85%, còn chi_b đạt 56 lệnh với Sharpe 3.74. Dữ liệu này đóng vai trò mốc tham chiếu (baseline) để xác định xem chiến lược có tạo ra edge thực sự hay chỉ là nhiễu thống kê khi chuyển sang tài sản khác."
+  },
+  {
+   "luc": "2026-09-12 07:24:16",
+   "ma": "P2_ghep_da_tai_san",
+   "ai": "qwen",
+   "van": "Chay xong 219 chan tu 3 tai san (US100, US30, US500), loc top 40. Ket qua: tat ca cac cap ghep (ca cung tai san va cheo tai san) deu co holdout THAP hon he don (42.6). He don train 822 -> holdout 42. Cap tot nhat (cung tai san) train 930 -> holdout 186; cheo tai san tot nhat train 843 -> holdout 159. Khong co kha nang gan edge duoc. Correlation trung binh thap (+0.147 cung, +0.113 cheo). Ghep da tai san khong hieu qua trong truong hop nay."
+  },
+  {
+   "luc": "2026-09-12 07:25:56",
+   "ma": "B1_do_corpus",
+   "ai": "qwen",
+   "van": "Việc `B1_do_corpus` hoàn tất với trạng thái DAT. Kết quả cho thấy 43 toán hạng và 1181 cơ chế trong kho dữ liệu. Ở Tạng A, tỷ lệ \"KHÔNG NÓI\" chiếm 73.3%, phản ánh chính sách bảo mật chặt chẽ của LLM đối với các thuật ngữ giao dịch cụ thể. Tạng B xác nhận LLM hiểu rõ từ vựng phương pháp (như \"vùng\", \"sóng\") nhưng từ chối diễn đạt chúng thành luật. Tạng C lập bản đồ chi tiết các cơ chế, với \"xu_hướng\" và \"quay_ve_trung_binh\" là phổ biến nhất. Dữ liệu này là nền tảng metadata để lựa chọn đối tượng kiểm tra edge trong các bước tiếp theo."
   }
  ],
  "de_xuat": [
@@ -802,12 +848,46 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-11 23:51:21"
+  },
+  {
+   "ma": "P3_tim_he_don_tot",
+   "ten": "Tim top 20 he don co holdout cao nhat de lam goc ghep",
+   "vi_sao": "Ghep da tai san thất bại vì hệ đơn gốc quá yếu (holdout 42.6). Cần hệ đơn có holdout cao hơn (>100) để có nền tảng ghép hiệu quả.",
+   "lan": "CPU",
+   "lenh": [
+    "_xem_he_don.py",
+    "--top_holdout",
+    "20"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 07:24:23"
+  },
+  {
+   "ma": "B2_chon_co_che",
+   "ten": "Chọn 3 cơ chế để kiểm tra edge",
+   "vi_sao": "Tạng C cho thấy xu_hướng (600), quay_ve_trung_binh (259), pha_vo (181) là phổ biến nhất. Cần chọn 3 cơ chế cụ thể để xây dựng luật mua-giữ trong cùng mức sụt giảm.",
+   "lan": "CPU",
+   "lenh": [
+    "_chon_co_che.py"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 07:25:58"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789145467.737497
+   "luc": 1789172979.1618085
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,
@@ -816,6 +896,7 @@
  },
  "ngay_da_mo": [
   "2026-09-08",
-  "2026-09-11"
+  "2026-09-11",
+  "2026-09-12"
  ]
 }

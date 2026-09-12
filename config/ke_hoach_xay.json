@@ -33,10 +33,10 @@
    "xong": null,
    "cong": {
     "corpus_tang_A_noi_duoc": {
-     "nay": 0.2,
+     "nay": 0.22,
      "can": 0.35,
      "dat": false,
-     "ghi_chu": "Moc 0,0%% ban dau do tren van ban THO. 6,7%% do tren DUONG CHAY THAT (_chuan truoc khi tach cau). Hai con so khong so sanh truc tiep duoc - moc that de so ve sau la 6,7%%."
+     "ghi_chu": "12/09: 22,0% do tren DUONG CHAY THAT (bo do truoc do goi thang dieu_kien_trong_cau(ca_cau), bo qua tach_vao_ra - mot duong khong ai chay). Sua bo do lam con so trung thuc hon chu khong dep hon: mot cau tut NOI_DUOC -> NOI_MOT_PHAN dung chieu. Cong 35% van CHUA hieu chuan - mau so dung la corpus vang."
     },
     "corpus_tang_A_noi_mot_phan": {
      "nay": 4,
@@ -53,7 +53,8 @@
     "tang_B_bi_tu_choi": {
      "nay": 150,
      "can": 80,
-     "dat": false
+     "dat": false,
+     "ghi_chu": "12/09 phan bo tang B: vung 67 · song 45 · hinh_hoc 19 · lien_ma 18 · khoi_luong 15 · nen 2. Thu tu nay la hang doi cua 1B neu 1B duoc lam."
     },
     "gann_sq9_goi_duoc": {
      "nay": true,
@@ -96,6 +97,12 @@
     },
     "ba_hinh_dang_cau_bi_tu_choi": {
      "ghi_chu": "12/09 - do tren 6 cau luat Bollinger that: nut that cua 1A KHONG phai tu vung ma la HINH DANG CAU. Ba ly do tu choi gap ngay trong mau nho: (1) 'cau ta ca chieu mua lan chieu ban' - ma 'buy when X, sell when Y' la cach nguoi ta phat bieu luat PHO BIEN NHAT, va ngu phap noi duoc: do la HAI khai bao chieu +1 va -1, khong phai mot; (2) \"cau co 'or' giua hai so sanh - ngu phap chi co VA\"; (3) 'cau mo ta hai kha nang cung luc'. Dang do so cau tung ly do chan bang _ly_do_tu_choi.py."
+    },
+    "nut_that_that_cua_1A": {
+     "ghi_chu": "12/09 - DO TREN 1.185 CAU HINH DANG LUAT (reports/LY_DO_TU_CHOI.json). Chi 102 cau (8,6%) ra duoc dieu kien. Phan bo ly do truot: 74,6% 'khong tach duoc cap (toan hang, so sanh, nguong)' · 8,9% 'hai kha nang cung luc' · 6,4% 'ta ca chieu mua lan chieu ban' · 1,3% co 'or'. => Nut that KHONG phai tu vung (1B) va KHONG phai hinh dang cau. La khau TACH CAP. NHUNG lay mau 894 cau truot vi khong tach duoc cap: 65% KHONG CO CON SO NAO - tu choi chung la DUNG THEO THIET KE (doan nguong = bia ra mot so roi kiem dinh chinh no). Doc tay 30 cau CO so: chi ~5 la luat that; con lai la van hoc thuat, bao cao hieu suat, bieu phi, mo ta nut bam, rac dien dan, va mot doan ve nhip tim. => Tran cua 1A khong nam o bo doc ma o CHAT LUONG CAU DI VAO no."
+    },
+    "1A_con_lai_thu_hoach_duoc_bao_nhieu": {
+     "ghi_chu": "12/09 - uoc luong tu ba phep do, de chu du an quyet dinh co lam tiep 1A/1B khong: 11 toan hang chet cong lai 31 cau · hai hinh dang hai chieu 182 cau (phan lon tu choi DUNG) · khoang 304 cau co so trong nhom 'khong tach duoc cap', mau cho thay ~15-20% la luat that => 45-60 cau. Tong thu hoach thuc te cua CA khoi 1A/1B vao khoang 100-200 khai bao. Kho hien co 1.181 co che. Them 150 khai bao khong doi duoc ket cuc, vi rang buoc dang siet van la MDE chu khong phai so gia thuyet - dung ket luan da do 24/08 va 30/08. Cong viec bo doc KHONG vo ich (kho van dang day len nho qwen doc tiep, va bo doc tot hon nhan len theo kho), nhung goi khoi 1 la 'tran cua ca he' thi KHONG DUNG voi so do duoc hom nay."
     }
    },
    "da_lam": [
