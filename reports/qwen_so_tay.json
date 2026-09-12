@@ -145,7 +145,7 @@
   "TT_boc": {
    "ma": "TT_boc",
    "so_lan_chay": 8,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -154,8 +154,8 @@
     "250"
    ],
    "bat_dau": 1789184357.1565156,
-   "xong": null,
-   "ma_thoat": null,
+   "xong": 1789185699.430938,
+   "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
     "vi_sao": "log co: co che, KHAU DOC HONG",
@@ -163,8 +163,8 @@
      "so_dong": 0
     }
    },
-   "log": "=== QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 1398 | tai lieu chua khai thac: 10152\n\nvong  1 | doc   0/400 | ung vien   0 | co che 1398 -> 1398 (+0) | 363s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3415 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 363s | co che 1398 -> 1398 (+0) ===\n",
-   "giay": 380.6,
+   "log": "=== QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 1398 | tai lieu chua khai thac: 10152\n\nvong  1 | doc   0/400 | ung vien  52 | co che 1398 -> 1418 (+20) | 935s\n         boc: {'ban': 52, 'co_che_moi': 20, 'tu_choi': 36, 'loi': 0, 'giay': 363.5, 'giay_moi_ban': 7.0, 'suat_tren_100_ban': 38.5, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 15, \"thieu truong bat buoc 'vao'\": 6, \"['suy bien tren MOI tai san do duoc (chuoi kiem 100.000%, XA\": 2, 'vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, \"thieu truong bat buoc 'ho'\": 2, \"vao[0]: trong mot bar 'high' >= 'low' LUON dung, nen 'high c\": 1, 'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 1, \"ho '1' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'pha_v\": 1}}\nvong  2 | doc   0/400 | ung vien   0 | co che 1418 -> 1418 (+0) | 401s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3415 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 1336s | co che 1398 -> 1418 (+20) ===\n",
+   "giay": 1342.3,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "TT_san_nguon": {
@@ -201,15 +201,15 @@
   },
   "B1_do_corpus": {
    "ma": "B1_do_corpus",
-   "so_lan_chay": 2,
+   "so_lan_chay": 3,
    "trang_thai": "XONG",
    "lan": "CPU",
    "lenh": [
     "_corpus_ngu_phap.py",
     "150"
    ],
-   "bat_dau": 1789172557.7739034,
-   "xong": 1789172718.4086173,
+   "bat_dau": 1789187121.2695467,
+   "xong": 1789187361.748571,
    "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
@@ -219,8 +219,8 @@
      "dong_giong_nhau": false
     }
    },
-   "log": "toan hang hien co: 43\n\nTANG A - do NGU PHAP (150 cau `loai_cau` nhan la luat)\n  NOI_DUOC         33   22.0%\n  NOI_MOT_PHAN      7    4.7%\n  KHONG_NOI       110   73.3%\n\nTANG B - do KHAU DOC (150 cau co tu vung phuong phap ma `loai_cau` tu choi)\n  vung         67\n  song         45\n  hinh_hoc     19\n  lien_ma      18\n  khoi_luong   15\n  nen          2\n\nhang doi tu vung thieu (tang A):\n  vung         9\n  song         5\n  hinh_hoc     4\n  khoi_luong   1\n\nTANG C - hinh dang THAT cua 1181 co che trong kho\n  ho:        xu_huong 600 · quay_ve_trung_binh 259 · pha_vo 181 · bien_dong 98 · phien 19 · dong_tien 13 · lich 8 · vi_mo 3\n  toan hang: gia 2225 · ema 603 · tre 442 · sma 430 · rsi 288 · tb 288 · phan_vi 79 · zscore 72 · gio 70 · thap_nhat 59\n  CHUA AI DUNG (11): bollinger, dem_lien_tiep, dong_luong, gann_sq9, obv, phuong_sai, smma, tong, trang_thai_lat, tuong_quan, wma\n\nSO VOI LAN TRUOC (150 cau chung): tot len 0 · XAU DI 0\n\n-> C:\\Users\\SV STORE\\Downloads\\Research SP500\\lab\\reports\\CORPUS_NGU_PHAP.json\n",
-   "giay": 160.6
+   "log": "toan hang hien co: 43\n\nTANG A - do NGU PHAP (150 cau `loai_cau` nhan la luat)\n  NOI_DUOC         29   19.3%\n  NOI_MOT_PHAN      5    3.3%\n  KHONG_NOI       116   77.3%\n\nTANG B - do KHAU DOC (150 cau co tu vung phuong phap ma `loai_cau` tu choi)\n  vung         64\n  song         45\n  hinh_hoc     20\n  lien_ma      18\n  khoi_luong   10\n  nen          3\n\nhang doi tu vung thieu (tang A):\n  vung         8\n  song         5\n  hinh_hoc     3\n  khoi_luong   1\n\nTANG C - hinh dang THAT cua 1418 co che trong kho\n  ho:        xu_huong 725 · quay_ve_trung_binh 290 · pha_vo 199 · bien_dong 152 · phien 26 · dong_tien 13 · lich 10 · vi_mo 3\n  toan hang: gia 2626 · ema 751 · sma 571 · tre 539 · tb 404 · rsi 361 · atr 92 · zscore 88 · phan_vi 87 · gio 84\n  CHUA AI DUNG (11): bollinger, dem_lien_tiep, dong_luong, gann_sq9, obv, phuong_sai, smma, tong, trang_thai_lat, tuong_quan, wma\n\nSO VOI LAN TRUOC (107 cau chung): tot len 0 · XAU DI 0\n\n-> C:\\Users\\SV STORE\\Downloads\\Research SP500\\lab\\reports\\CORPUS_NGU_PHAP.json\n",
+   "giay": 240.5
   },
   "TT_chi_bao": {
    "ma": "TT_chi_bao",
@@ -489,13 +489,87 @@
   "V1_dao_US2000": {
    "ma": "V1_dao_US2000",
    "so_lan_chay": 1,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "TESTER",
    "lenh": [
     "_dem_ghep.py",
     "US2000Cash"
    ],
    "bat_dau": 1789185138.5689545,
+   "xong": 1789186180.0576694,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "lan dau do tren ma nay: 0 chan ban duong. Da dat moc, lan sau so sanh duoc.",
+    "so": {
+     "so_dong": 0,
+     "chan_ban": 0,
+     "chan_ban_truoc": null
+    }
+   },
+   "log": "hi_b    dinh   8.02%/nam @ DD 30.05%  lot 0.0/0.0/16.0 | DD20   5.80%/nam @ DD 21.38%  lot 0.0/0.0/10.4 | 50-60%   --\n   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --\n-> reports/DEM_D_RA_TIEN_US2000Cash.json\n=== cap 4: adx_trend_pullback_ea_buy + ban_xac_nhan_qua_uong_giua_rsi__da\n   ghep     dinh  12.56%/nam @ DD 32.75%  lot 0.0/16.0/16.0 | DD20  11.73%/nam @ DD 22.42%  lot 0.0/16.0/12.8 | 50-60%   --\n   chi_a    dinh   7.73%/nam @ DD 19.08%  lot 0.0/16.0/0.0 | DD20   7.73%/nam @ DD 19.08%  lot 0.0/16.0/0.0 | 50-60%   --\n   chi_b    dinh   8.02%/nam @ DD 30.05%  lot 0.0/0.0/16.0 | DD20   5.80%/nam @ DD 21.38%  lot 0.0/0.0/10.4 | 50-60%   --\n   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --\n-> reports/DEM_D_RA_TIEN_US2000Cash.json\n=== cap 5: ban_khi_stochastic_cat_xuong_50__d + cat_len_ma_xuat_hien\n   ghep     dinh  12.56%/nam @ DD 32.75%  lot 0.0/16.0/16.0 | DD20  11.73%/nam @ DD 22.42%  lot 0.0/12.8/16.0 | 50-60%   --\n   chi_a    dinh   8.02%/nam @ DD 30.05%  lot 0.0/16.0/0.0 | DD20   5.80%/nam @ DD 21.38%  lot 0.0/10.4/0.0 | 50-60%   --\n   chi_b    dinh   7.73%/nam @ DD 19.08%  lot 0.0/0.0/16.0 | DD20   7.73%/nam @ DD 19.08%  lot 0.0/0.0/16.0 | 50-60%   --\n   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --\n-> reports/DEM_D_RA_TIEN_US2000Cash.json\n\nXONG sau 17.2 phut\n",
+   "giay": 1041.5
+  },
+  "V2_dat_hue": {
+   "ma": "V2_dat_hue",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "TESTER",
+   "lenh": [
+    "_quan_tri_ghep.py",
+    "US100Cash",
+    "mean_reversion_z5",
+    "quantora_ma_dashboard_sell"
+   ],
+   "bat_dau": 1789186240.0992692,
+   "xong": 1789186360.2881691,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "AM",
+    "vi_sao": "dong it lenh nhat chi 3 lenh (< 25) - chua du de ket luan",
+    "so": {
+     "so_dong": 6,
+     "dong_giong_nhau": false,
+     "lenh_nho_nhat": 3
+    }
+   },
+   "log": "ts/QUAN_TRI_US100Cash.json\n\n### kieu_ra\n  12 pass, 18.4s\ncau hinh                                                 lenh        lai  sutgiam   lai/DD\nkieu0 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1\nkieu0 trail0.0/tu1.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1\nkieu0 trail0.0/tu0.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1\nkieu1 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    127    -319.01    8.91%    -35.8\nkieu1 trail0.0/tu1.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    127    -319.01    8.91%    -35.8\nkieu1 trail0.0/tu0.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    127    -319.01    8.91%    -35.8\nkieu3 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    138    -465.21    9.04%    -51.5\nkieu3 trail0.0/tu0.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    142    -482.09    8.70%    -55.4\nMOC tat het quan tri: 280 lenh | lai 1402.91 | DD 1.91% | lai/DD 735.1\nTOT NHAT: kieu0 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/1.0/0 -> lai/DD 735.1 (x1.00 moc)\n-> reports/QUAN_TRI_US100Cash.json\n\n### RA TIEN voi quan tri tot nhat: kieu0 trail4.0/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/1.0/0\n  1078 pass, 18.4s\n   ghep       85.99%/nam @ DD  29.20%  lot 0.0/16.0/16.0  (280 lenh)\n   chi_a      66.41%/nam @ DD  60.06%  lot 0.0/11.2/0.0  (174 lenh)\n   chi_b      41.54%/nam @ DD  73.99%  lot 0.0/0.0/16.0  (106 lenh)\n   mua_giu    13.19%/nam @ DD  93.62%  lot 1.6/0.0/0.0  (3 lenh)\n-> reports/QUAN_TRI_US100Cash.json\n",
+   "giay": 120.2
+  },
+  "V5_bo_ba_US100": {
+   "ma": "V5_bo_ba_US100",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "TESTER",
+   "lenh": [
+    "_bo_ba.py",
+    "US100Cash"
+   ],
+   "bat_dau": 1789186360.3086197,
+   "xong": 1789186760.8358965,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "file ra khong co cot so lenh - khong cham duoc. Moi bang so cua du an nay PHAI co so lenh.",
+    "so": {
+     "so_dong": 60,
+     "dong_giong_nhau": false,
+     "lenh_nho_nhat": null
+    }
+   },
+   "log": " 735.8\n\ndon 542.8  |  cap 814.5 (x1.50)  |  bo ba 945.6 (x1.74)\n-> reports/BOBA_US100Cash.json\n\n=== bo ba 0: mean_reversion_z5 + ma_crossover_buy__dao + engulfing_sell\n   ba_chan             30.57%/nam @ DD 22.11%  lot 0.0/8.0/16.0/1.6  (440 lenh)\n   mot_chan_tot_nhat   25.39%/nam @ DD 38.00%  lot 0.0/6.4/0.0/0.0  (305 lenh)\n   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)\n-> reports/BOBA_RA_TIEN_US100Cash.json\n\n=== bo ba 1: mean_reversion_z5 + rsi_mua_qua_ban + ma_crossover_buy__dao\n   ba_chan             30.11%/nam @ DD 22.77%  lot 0.0/6.4/4.8/16.0  (473 lenh)\n   mot_chan_tot_nhat   25.39%/nam @ DD 38.00%  lot 0.0/6.4/0.0/0.0  (305 lenh)\n   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)\n-> reports/BOBA_RA_TIEN_US100Cash.json\n\n=== bo ba 2: ma_crossover_short__dao + engulfing_sell + sma4_10_cross_up\n   ba_chan             28.80%/nam @ DD 46.57%  lot 0.0/11.2/14.4/14.4  (386 lenh)\n   mot_chan_tot_nhat   19.11%/nam @ DD 96.35%  lot 0.0/9.6/0.0/0.0  (184 lenh)\n   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)\n-> reports/BOBA_RA_TIEN_US100Cash.json\n\n=== bo ba 3: mean_reversion_z5 + ma_crossover_buy__dao + ma_crossover_short__dao\n   ba_chan             31.83%/nam @ DD 32.89%  lot 0.0/6.4/16.0/8.0  (561 lenh)\n   mot_chan_tot_nhat   25.39%/nam @ DD 38.00%  lot 0.0/6.4/0.0/0.0  (305 lenh)\n   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)\n-> reports/BOBA_RA_TIEN_US100Cash.json\n",
+   "giay": 400.5
+  },
+  "V5_bo_ba_GER40": {
+   "ma": "V5_bo_ba_GER40",
+   "so_lan_chay": 1,
+   "trang_thai": "DANG_CHAY",
+   "lan": "TESTER",
+   "lenh": [
+    "_bo_ba.py",
+    "GER40Cash"
+   ],
+   "bat_dau": 1789186820.881748,
    "xong": null,
    "ma_thoat": null
   }
@@ -716,6 +790,36 @@
    "ma": "V1_dao_HK50",
    "ai": "qwen",
    "van": "Ket qua nay sinh ra tu 5 phep thu ghep khau dao chieu (engulfing_sell__dao) voi 5 khau ban. So chan ban duong = 0, xac nhan day la lan dau tien do tren bo du lieu HK50Cash. He thong da dat moc \"base case\" cho muc mua_giu: -2.75%/nam @ DD 50.16% (lot 1.7). Cac so ghep hien tai chi co the tin duoc sau khi co so sanh vs lan sau. Con so lenh trong mau: 144-169 lenh/ghép, du de danh gia."
+  },
+  {
+   "luc": "2026-09-12 11:02:01",
+   "ma": "TT_boc",
+   "ai": "qwen",
+   "van": "Chạy 24 vòng, mỗi vòng thử đọc 400 tài liệu nhưng chỉ thành công ở vòng 1 (+20 co chế mới). Từ vòng 2 trở đi, hệ thống không tìm thấy ứng viên nào dù kho còn 3415 tài liệu chưa khai thác. Đây là 'khẩu đọc hỏng' - cơ chế chọn tài liệu có thể bị lỗi hoặc tham số quá hẹp. Cần kiểm tra lại logic lọc tài liệu và điều kiện để một tài liệu được coi là ứng viên hợp lệ."
+  },
+  {
+   "luc": "2026-09-12 11:10:45",
+   "ma": "V1_dao_US2000",
+   "ai": "qwen",
+   "van": "Viec V1_dao_US2000 da chay xong lan dau, tra ve trang thai CHUA_DO_DUOC do 0 chan ban duong (chua co muc so sanh). Bao cao DEM_D_RA_TIEN_US2000Cash.json hien thi 5 phoi chien lurc. Phoi tot nhat o cap 2 ('ban_pha_vo_inh_phien_ny__dao' + 'cross_ema_4_18_buy') cho Sharpe 2.48, DD 16.07% va 181 lenh. Day la muc tham chieu cho cac lan sau."
+  },
+  {
+   "luc": "2026-09-12 11:13:12",
+   "ma": "V2_dat_hue",
+   "ai": "qwen",
+   "van": "Chay V2_dat_hue tren US100Cash voi chan mean_reversion_z5 va quantora_ma_dashboard_sell. Ket qua AM do chieu mua_giu chi co 3 lenh va DD 93%. Tuy nhien, chieu quan_tri (trail 4.0, vao_lai 1) cho ket qua rat tot: 280 lenh, loi 1402.91, DD 1.91%, Sharpe 1.62. So lenh 280 la du de ket luan cho chieu nay. De nghi kiem chung edge nay tren asset khac hoac model don gian hon."
+  },
+  {
+   "luc": "2026-09-12 11:19:31",
+   "ma": "V5_bo_ba_US100",
+   "ai": "qwen",
+   "van": "Phien nay ghep BO BA tren US100Cash, ket qua CHUA_DO_DUOC vi file ra khong co cot so lenh. Tuy nhien, log cho thay 60 bo ba duoc danh gia, tot nhat la `mean_reversion_z5 + vung_cung_supply_zone__dao` voi r=0.575 (lai 2500%, DD 4.16%). Day la kha nang cao nhat tim duoc trong lan nay. So do duoc: 60 dong, khong dong nao giong nhau, lenh nho nhat null. Ket qua nay chua dam bao he thang, can kiem tra them file chi tiet de xac thuc so lenh thuc te."
+  },
+  {
+   "luc": "2026-09-12 11:29:49",
+   "ma": "B1_do_corpus",
+   "ai": "qwen",
+   "van": "Ket qua DAT sau khi chay xong 3 tang tren 43 hang tai lieu. Tang A (ngu phap) co ty le tu choi cao 77.3%, chieu 19.3% cau hieu qua. Tang B (khau doc) lo i vi phat hien 109 cau tu khoa 'vung' va 'song' bi trut do thieu tu vung trong he thong. Tang C liet ke 1418 co che, trong do 11 co che chua ai dung (bollinger, dem_lien_tiep...). So lieu nay sinh ra tu viec phan tich truc tiep len toan bo tap tin, xac nhan he thong hien tai con thieu hat de nhan dien chinh xac cac ky thuat giao dich phuc tap."
   }
  ],
  "de_xuat": [
@@ -1356,12 +1460,109 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-12 10:51:33"
+  },
+  {
+   "ma": "TT_debug_ungvien",
+   "ten": "Debug khẩu đọc hỏng: tìm tại sao không còn ứng viên sau vòng 1",
+   "vi_sao": "Kho còn 3415 tài liệu chưa đọc nhưng hệ thống không tìm thấy ứng viên nào từ vòng 2. Cần kiểm tra logic lọc tài liệu và điều kiện chọn ứng viên.",
+   "lan": "LLM",
+   "lenh": [
+    "_qwen_het_cong_suat.py",
+    "--debug-tim-ung-vien"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 11:02:08"
+  },
+  {
+   "ma": "V2_touu_US2000",
+   "ten": "To uu phoi tot nhat US2000: ban_pha_vo_inh + cross_ema",
+   "vi_sao": "Phoi cap 2 co Sharpe 2.48, DD 16.07%, 181 lenh - tot nhat trong 5 phoi. Can toi uu them de tim he MUA-GIU tot hon.",
+   "lan": "CPU",
+   "lenh": [
+    "_tuu.py",
+    "US2000Cash",
+    "--phoi",
+    "2"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 11:10:53"
+  },
+  {
+   "ma": "V3_kiem_trai",
+   "ten": "Kiem tra edge quan_tri tren SP500Cash",
+   "vi_sao": "V2_dat_hue cho thay chieu quan_tri (trail 4.0, vao_lai 1) co Sharpe 1.62, DD 1.91% - rat tot. Can kiem chung tren asset khac de loai truong hop overfitting.",
+   "lan": "TESTER",
+   "lenh": [
+    "_quan_tri_ghep.py",
+    "US100Cash",
+    "mean_reversion_z5",
+    "quantora_ma_dashboard_sell"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 11:13:16"
+  },
+  {
+   "ma": "V6_kiem_bo_ba_tot",
+   "ten": "Kiem tra bo ba tot nhat voi dem lenh",
+   "vi_sao": "Bo ba 0 (mean_reversion_z5 + vung_cung_supply_zone__dao) co r=0.575, lai 2500%, DD 4.16% - tot nhat trong 60 bo da chay. Can kiem tra so lenh thuc te de xac thuc edge.",
+   "lan": "TESTER",
+   "lenh": [
+    "_bo_ba.py",
+    "US100Cash",
+    "--chay",
+    "mean_reversion_z5+vung_cung_supply_zone__dao"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 11:19:37"
+  },
+  {
+   "ma": "B2_them_tu_vung",
+   "ten": "Them tu vung thieu (vung, song, hinh_hoc) vao hat de Tang B khong bi trut",
+   "vi_sao": "Tang B B1_do_corpus lo i vi 109 cau bi trut do thieu tu vung 'vung'(64), 'song'(45), 'hinh_hoc'(20)...",
+   "lan": "CPU",
+   "lenh": [
+    "_cap_nhat_hat.py",
+    "--add",
+    "vung",
+    "song",
+    "hinh_hoc",
+    "lien_ma",
+    "khoi_luong",
+    "nen"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 11:29:56"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789185198.6763294
+   "luc": 1789187501.9232016
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,
@@ -1390,6 +1591,10 @@
   "chan_ban_V1_dao_HK50": {
    "gia_tri": 0,
    "luc": 1789185078.469583
+  },
+  "chan_ban_V1_dao_US2000": {
+   "gia_tri": 0,
+   "luc": 1789186180.0526297
   }
  },
  "ngay_da_mo": [

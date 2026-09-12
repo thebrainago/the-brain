@@ -162,5 +162,49 @@ class KHONG_SCRIPT_NAO_DUOC_PHONG_TERMINAL_NGOAI_KHOA(unittest.TestCase):
             "se ghi de ket qua cua nhau va khong ai bao loi: " + str(vi_pham))
 
 
+class CuaGIETCungPhaiCoKhoa(unittest.TestCase):
+    """Do 12/09/2026: khoa chan duong PHONG nhung KHONG chan duong GIET.
+
+    Bon script (`mt5_worker`, `lab`, `mt5_chay_ichimoku`, `chay_tester_z5`) goi
+    thang `taskkill /F /IM terminal64.exe` de don duong. Lenh do giet ca luot
+    tester cua nguoi khac, roi ben do doc file ket qua CU **va khong bao loi**.
+    Mot cai khoa chi chan mot chieu thi khong phai mot cai khoa.
+    """
+
+    def setUp(self):
+        KT.KHOA.unlink(missing_ok=True)
+
+    def tearDown(self):
+        KT.KHOA.unlink(missing_ok=True)
+
+    def test_tu_choi_giet_khi_nguoi_khac_giu(self):
+        # Gia lam mot tien trinh KHAC dang giu khoa (pid cua he dieu hanh, luon song)
+        KT.KHOA.parent.mkdir(exist_ok=True)
+        KT.KHOA.write_text(json.dumps(
+            {"pid": 4, "viec": "tester cua nguoi khac", "luc": time.time(),
+             "luc_doc": "2026-09-12 00:00:00"}), encoding="utf-8")
+        with self.assertRaises(KT.TesterDangBan):
+            KT.dong_terminal("thu giet")
+
+    def test_khong_con_file_nao_taskkill_thang(self):
+        """Hieu chuan chieu nguoc: neu con duong tat thi cai khoa vo nghia."""
+        import re
+        from pathlib import Path
+        goc = Path(__file__).resolve().parent
+        rx = re.compile(r"taskkill.{0,40}terminal64", re.I)
+        hong = []
+        for p in list(goc.glob("*.py")) + list(goc.glob("nhan/*.py")) +                 list(goc.glob("tru/*.py")) + list(goc.glob("qwen/*.py")):
+            if p.name == "khoa_tester.py" or p.name == Path(__file__).name:
+                continue
+            try:
+                s = p.read_text(encoding="utf-8-sig")
+            except Exception:
+                continue
+            if rx.search(s):
+                hong.append(p.name)
+        self.assertEqual(hong, [], "goi taskkill terminal64 KHONG qua khoa_tester: "
+                                   + str(hong))
+
+
 if __name__ == "__main__":
     unittest.main()

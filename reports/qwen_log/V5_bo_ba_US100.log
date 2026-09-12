@@ -1,0 +1,71 @@
+84 chan duong
+dung lai duong von da do: 84 chan
+
+khu trung duong von: bo 11 chan
+   ema9_cat_len_ema21_2__dao                == ema9_cat_len_ema21__dao, ema_cross_ea5
+   extalmabuffer_tang_len                   == gia_cat_duong_du_bao_giam__dao
+   ea_original                              == gia_cat_len_ema
+   consecutive_down_bars_signal__dao        == martingale_level_1, ob_bearish_rectangle_created__dao
+   aegis_quantum_lite__dao                  == mua_rsi14_tren_70__dao, rsi_overbought_reversal_from_wilde, rsi_overbought_sell
+   cat_xuong_ma_xuat_hien__dao              == vao_lenh_ngan_khi_gia_thung_xuong_
+   mua_khi_gia_duoi_dai_duoi_bollinger      == z_score_reversion
+con 73 chan doc lap (tu 84)
+
+--- 8 he DON tot nhat ---
+mean_reversion_z5                                1398.94    2.58%    542.8
+consecutive_down_bars_signal__dao                1273.43    4.06%    313.3
+smc_sell_zone_reversal__dao                      1328.64    4.30%    308.7
+vung_cung_supply_zone__dao                       1101.61    3.59%    307.0
+sell_liquidity_ob_reversal__dao                   792.13    2.95%    268.9
+toxic_volume_spike_tren_trung_binh_nen            848.25    3.22%    263.3
+rsi_mua_qua_ban                                   426.65    1.65%    259.3
+pine_ichimoku_cloud_close_duoi_ema144_close       606.22    2.39%    254.0
+
+--- 8 CAP tot nhat ---
+mean_reversion_z5            + ma_crossover_buy__dao        r -0.00   1549.37   1.90%    814.5
+mean_reversion_z5            + ma_crossover_short__dao      r +0.31   1902.70   2.78%    684.1
+mean_reversion_z5            + engulfing_sell               r -0.06   1605.41   2.46%    653.2
+mean_reversion_z5            + rsi_mua_qua_ban              r +0.47   1825.59   2.88%    634.2
+mean_reversion_z5            + pine_ichimoku_cloud_close_du r +0.41   1967.76   3.15%    624.2
+mean_reversion_z5            + sell_liquidity_ob_reversal__ r +0.32   2191.07   3.57%    613.8
+mean_reversion_z5            + vung_cung_supply_zone__dao   r +0.57   2500.55   4.16%    600.5
+mean_reversion_z5            + macd_stochastic_doub_sma3_ch r +0.32   1780.25   3.01%    590.8
+
+--- 10 BO BA tot nhat ---
+mean_reversion_z5        + ma_crossover_buy__dao    + engulfing_sell             1755.84   1.86%    945.6
+mean_reversion_z5        + rsi_mua_qua_ban          + ma_crossover_buy__dao      1976.02   2.21%    896.0
+ma_crossover_short__dao  + engulfing_sell           + sma4_10_cross_up            934.44   1.09%    860.2
+mean_reversion_z5        + ma_crossover_buy__dao    + ma_crossover_short__dao    2053.13   2.61%    786.1
+mean_reversion_z5        + ma_crossover_short__dao  + engulfing_sell             2109.17   2.71%    776.7
+mean_reversion_z5        + ma_crossover_buy__dao    + sma4_10_cross_up           1773.58   2.33%    760.5
+mean_reversion_z5        + rsi_mua_qua_ban          + ma_crossover_short__dao    2329.35   3.08%    757.2
+mean_reversion_z5        + giai_chap_vol_target     + ma_crossover_buy__dao      2047.37   2.75%    745.5
+mean_reversion_z5        + rsi_mua_qua_ban          + engulfing_sell             2032.06   2.75%    738.1
+mean_reversion_z5        + engulfing_sell           + macd_stochastic_doub_sma   1986.72   2.70%    735.8
+
+don 542.8  |  cap 814.5 (x1.50)  |  bo ba 945.6 (x1.74)
+-> reports/BOBA_US100Cash.json
+
+=== bo ba 0: mean_reversion_z5 + ma_crossover_buy__dao + engulfing_sell
+   ba_chan             30.57%/nam @ DD 22.11%  lot 0.0/8.0/16.0/1.6  (440 lenh)
+   mot_chan_tot_nhat   25.39%/nam @ DD 38.00%  lot 0.0/6.4/0.0/0.0  (305 lenh)
+   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)
+-> reports/BOBA_RA_TIEN_US100Cash.json
+
+=== bo ba 1: mean_reversion_z5 + rsi_mua_qua_ban + ma_crossover_buy__dao
+   ba_chan             30.11%/nam @ DD 22.77%  lot 0.0/6.4/4.8/16.0  (473 lenh)
+   mot_chan_tot_nhat   25.39%/nam @ DD 38.00%  lot 0.0/6.4/0.0/0.0  (305 lenh)
+   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)
+-> reports/BOBA_RA_TIEN_US100Cash.json
+
+=== bo ba 2: ma_crossover_short__dao + engulfing_sell + sma4_10_cross_up
+   ba_chan             28.80%/nam @ DD 46.57%  lot 0.0/11.2/14.4/14.4  (386 lenh)
+   mot_chan_tot_nhat   19.11%/nam @ DD 96.35%  lot 0.0/9.6/0.0/0.0  (184 lenh)
+   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)
+-> reports/BOBA_RA_TIEN_US100Cash.json
+
+=== bo ba 3: mean_reversion_z5 + ma_crossover_buy__dao + ma_crossover_short__dao
+   ba_chan             31.83%/nam @ DD 32.89%  lot 0.0/6.4/16.0/8.0  (561 lenh)
+   mot_chan_tot_nhat   25.39%/nam @ DD 38.00%  lot 0.0/6.4/0.0/0.0  (305 lenh)
+   mua_giu              8.44%/nam @ DD 99.70%  lot 2.0/0.0/0.0/0.0  (6 lenh)
+-> reports/BOBA_RA_TIEN_US100Cash.json

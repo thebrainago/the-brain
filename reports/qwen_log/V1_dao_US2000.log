@@ -2,3 +2,105 @@
 ########## CHANG A: mo kho = 1354 co che
 
 === moKho train  2016.06.01 -> 2021.06.01
+  1297 pass, 42.9s
+=== moKho holdout  2021.06.01 -> 2026.07.29
+  1297 pass, 24.7s
+-> reports/DEM_A_MO_KHO_US2000Cash.json
+
+chan DUONG ca hai doan : 111
+chan AM   ca hai doan : 304
+
+########## CHANG B: dao chieu 304 chan am
+
+=== dao train  2016.06.01 -> 2021.06.01
+  305 pass, 12.3s
+=== dao holdout  2021.06.01 -> 2026.07.29
+  305 pass, 12.3s
+-> reports/DEM_B_DAO_US2000Cash.json
+
+dao chieu -> duong ca hai doan: 111/304
+
+TONG CHAN DUONG: 222 (goc 111 + dao 111)
+-> reports/DEM_CHAN_DUONG_US2000Cash.json
+
+########## CHANG C: ma tran tuong quan 222 chan
+
+=== lo 0: 40 slot
+=== lo 1: 40 slot
+=== lo 2: 40 slot
+=== lo 3: 40 slot
+=== lo 4: 40 slot
+=== lo 5: 22 slot
+
+ghep duoc 222 chuoi von
+-> reports/DEM_C_MATRAN_US2000Cash.json
+
+--- 10 he DON tot nhat ---
+adx_trend_pullback_ea_buy                          70.53    0.11%    624.5
+cat_len_ma_xuat_hien                               70.53    0.11%    624.5
+vao_lenh_dai_khi_gia_pha_vo_len_tren_uong_ema_     70.53    0.11%    624.5
+bullish_engulfing                                  56.62    0.13%    422.9
+cross_ema_4_18_buy                                 56.59    0.14%    399.3
+ban_pha_vo_inh_phien_ny__dao                       83.78    0.21%    394.7
+mua_rsi2_cheo_xuong_15                             81.19    0.22%    369.0
+ban_khi_stochastic_cat_xuong_50__dao               74.03    0.21%    351.1
+ban_xac_nhan_qua_uong_giua_rsi__dao                74.03    0.21%    351.1
+macd_crossover__dao                                59.58    0.17%    344.4
+
+--- 15 CAP tot nhat ---
+ban_pha_vo_inh_phien_ny__dao   mua_khi_stochastic_cat_len_50   +0.011    136.32    0.14%    949.4
+ban_pha_vo_inh_phien_ny__dao   mua_xac_nhan_qua_uong_giua_rsi  +0.011    136.32    0.14%    949.4
+ban_pha_vo_inh_phien_ny__dao   cross_ema_4_18_buy              -0.003    140.37    0.16%    881.5
+adx_trend_pullback_ea_buy      ban_khi_stochastic_cat_xuong_5  +0.007    144.56    0.17%    827.6
+adx_trend_pullback_ea_buy      ban_xac_nhan_qua_uong_giua_rsi  +0.007    144.56    0.17%    827.6
+ban_khi_stochastic_cat_xuong_5 cat_len_ma_xuat_hien            +0.007    144.56    0.17%    827.6
+ban_khi_stochastic_cat_xuong_5 vao_lenh_dai_khi_gia_pha_vo_le  +0.007    144.56    0.17%    827.6
+ban_xac_nhan_qua_uong_giua_rsi cat_len_ma_xuat_hien            +0.007    144.56    0.17%    827.6
+ban_xac_nhan_qua_uong_giua_rsi vao_lenh_dai_khi_gia_pha_vo_le  +0.007    144.56    0.17%    827.6
+adx_trend_pullback_ea_buy      bullish_engulfing               +0.188    127.15    0.15%    827.4
+bullish_engulfing              cat_len_ma_xuat_hien            +0.188    127.15    0.15%    827.4
+bullish_engulfing              vao_lenh_dai_khi_gia_pha_vo_le  +0.188    127.15    0.15%    827.4
+adx_trend_pullback_ea_buy      macd_crossover__dao             -0.102    130.11    0.16%    801.3
+cat_len_ma_xuat_hien           macd_crossover__dao             -0.102    130.11    0.16%    801.3
+macd_crossover__dao            vao_lenh_dai_khi_gia_pha_vo_le  -0.102    130.11    0.16%    801.3
+
+########## CHANG D: cong ra tien o sut giam 50-60%
+
+=== cap 0: ban_pha_vo_inh_phien_ny__dao + mua_khi_stochastic_cat_len_50
+   ghep     dinh  12.12%/nam @ DD 13.64%  lot 0.0/16.0/16.0 | DD20   9.88%/nam @ DD 17.65%  lot 0.0/16.0/4.8 | 50-60%   --
+   chi_a    dinh   8.77%/nam @ DD 19.72%  lot 0.0/16.0/0.0 | DD20   8.77%/nam @ DD 19.72%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh   6.20%/nam @ DD 27.09%  lot 0.0/0.0/16.0 | DD20   5.20%/nam @ DD 22.32%  lot 0.0/0.0/12.8 | 50-60%   --
+   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_US2000Cash.json
+=== cap 1: ban_pha_vo_inh_phien_ny__dao + mua_xac_nhan_qua_uong_giua_rsi
+   ghep     dinh  12.12%/nam @ DD 13.64%  lot 0.0/16.0/16.0 | DD20   9.88%/nam @ DD 17.65%  lot 0.0/16.0/4.8 | 50-60%   --
+   chi_a    dinh   8.77%/nam @ DD 19.72%  lot 0.0/16.0/0.0 | DD20   8.77%/nam @ DD 19.72%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh   6.20%/nam @ DD 27.09%  lot 0.0/0.0/16.0 | DD20   5.20%/nam @ DD 22.32%  lot 0.0/0.0/12.8 | 50-60%   --
+   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_US2000Cash.json
+=== cap 2: ban_pha_vo_inh_phien_ny__dao + cross_ema_4_18_buy
+   ghep     dinh  12.35%/nam @ DD 16.07%  lot 0.0/16.0/16.0 | DD20  11.04%/nam @ DD 17.52%  lot 0.0/16.0/9.6 | 50-60%   --
+   chi_a    dinh   8.77%/nam @ DD 19.72%  lot 0.0/16.0/0.0 | DD20   8.77%/nam @ DD 19.72%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh   6.57%/nam @ DD 21.06%  lot 0.0/0.0/16.0 | DD20   6.57%/nam @ DD 21.06%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_US2000Cash.json
+=== cap 3: adx_trend_pullback_ea_buy + ban_khi_stochastic_cat_xuong_50__d
+   ghep     dinh  12.56%/nam @ DD 32.75%  lot 0.0/16.0/16.0 | DD20  11.73%/nam @ DD 22.42%  lot 0.0/16.0/12.8 | 50-60%   --
+   chi_a    dinh   7.73%/nam @ DD 19.08%  lot 0.0/16.0/0.0 | DD20   7.73%/nam @ DD 19.08%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh   8.02%/nam @ DD 30.05%  lot 0.0/0.0/16.0 | DD20   5.80%/nam @ DD 21.38%  lot 0.0/0.0/10.4 | 50-60%   --
+   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_US2000Cash.json
+=== cap 4: adx_trend_pullback_ea_buy + ban_xac_nhan_qua_uong_giua_rsi__da
+   ghep     dinh  12.56%/nam @ DD 32.75%  lot 0.0/16.0/16.0 | DD20  11.73%/nam @ DD 22.42%  lot 0.0/16.0/12.8 | 50-60%   --
+   chi_a    dinh   7.73%/nam @ DD 19.08%  lot 0.0/16.0/0.0 | DD20   7.73%/nam @ DD 19.08%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh   8.02%/nam @ DD 30.05%  lot 0.0/0.0/16.0 | DD20   5.80%/nam @ DD 21.38%  lot 0.0/0.0/10.4 | 50-60%   --
+   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_US2000Cash.json
+=== cap 5: ban_khi_stochastic_cat_xuong_50__d + cat_len_ma_xuat_hien
+   ghep     dinh  12.56%/nam @ DD 32.75%  lot 0.0/16.0/16.0 | DD20  11.73%/nam @ DD 22.42%  lot 0.0/12.8/16.0 | 50-60%   --
+   chi_a    dinh   8.02%/nam @ DD 30.05%  lot 0.0/16.0/0.0 | DD20   5.80%/nam @ DD 21.38%  lot 0.0/10.4/0.0 | 50-60%   --
+   chi_b    dinh   7.73%/nam @ DD 19.08%  lot 0.0/0.0/16.0 | DD20   7.73%/nam @ DD 19.08%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.01%/nam @ DD  1.43%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.29%  lot 1.3/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_US2000Cash.json
+
+XONG sau 17.2 phut

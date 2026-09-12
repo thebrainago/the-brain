@@ -1,0 +1,88 @@
+[
+ {
+  "bo": [
+   "macd_histogram_duong_2",
+   "aegis_quantum_lite",
+   "breakout_xu_huong_tang__dao"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 10.62,
+   "lenh": 353,
+   "pct_nam": 31.01,
+   "sharpe": 0.3475
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    16.0,
+    0.0,
+    0.0
+   ],
+   "dd": 26.64,
+   "lenh": 56,
+   "pct_nam": 20.44,
+   "sharpe": 3.748807
+  },
+  "mua_giu": {
+   "lot": [
+    1.2,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 91.97,
+   "lenh": 6,
+   "pct_nam": 3.37,
+   "sharpe": 0.002513
+  }
+ },
+ {
+  "bo": [
+   "ban_pha_vo_inh_phien_ny__dao",
+   "fast_sma_cuts_above_slow_sma",
+   "rsi_ban_qua_mua"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 13.36,
+   "lenh": 337,
+   "pct_nam": 34.48,
+   "sharpe": 1.570011
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    16.0,
+    0.0,
+    0.0
+   ],
+   "dd": 32.94,
+   "lenh": 119,
+   "pct_nam": 25.48,
+   "sharpe": 1.74619
+  },
+  "mua_giu": {
+   "lot": [
+    1.2,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 91.97,
+   "lenh": 6,
+   "pct_nam": 3.37,
+   "sharpe": 0.002513
+  }
+ }
+]

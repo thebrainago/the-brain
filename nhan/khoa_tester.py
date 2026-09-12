@@ -47,6 +47,11 @@ KHOA = LAB / "config" / "khoa_tester.json"
 HAN_GIAY = 45 * 60
 
 
+class TesterDangBan(RuntimeError):
+    """Nem ra khi khong lay duoc khoa. TEN loai co y: no khong phai mot loi cua
+    phep thu, no la 'cho luot'."""
+
+
 def _con_song(pid: int) -> bool:
     if not pid or pid == os.getpid():
         return pid == os.getpid()
@@ -141,9 +146,30 @@ def phong(exe, ini, tran: int = 3600, nhip: float = 6.0,
         return round(time.time() - t0, 1)
 
 
-class TesterDangBan(RuntimeError):
-    """Nem ra khi khong lay duoc khoa. TEN loai co y: no khong phai mot loi cua
-    phep thu, no la 'cho luot'."""
+def dong_terminal(viec: str = "") -> bool:
+    """`taskkill /F /IM terminal64.exe` NHUNG chi khi khong ai khac dang giu khoa.
+
+    Do 12/09/2026: bon script (`mt5_worker.py`, `lab.py`, `mt5_chay_ichimoku.py`,
+    `chay_tester_z5.py`) goi thang `taskkill /F /IM terminal64.exe` de don duong
+    truoc khi chay. Lenh do giet MOI terminal, ke ca luot tester ma nguoi/tien
+    trinh khac dang chay - roi ben kia doc file ket qua CU hoac RONG **va khong
+    ai bao loi**. Dung dang hong ma `khoa_tester` sinh ra de chan, nhung khoa chi
+    chan duong PHONG chu khong chan duong GIET.
+
+    Ham nay la cua duy nhat de giet terminal. Tra True neu da giet.
+    Nem `TesterDangBan` neu tien trinh KHAC dang giu khoa - luc do giet la pha
+    viec cua ho.
+    """
+    import subprocess
+    cu = dang_giu()
+    if cu and int(cu.get("pid") or 0) != os.getpid():
+        raise TesterDangBan(
+            f"KHONG giet terminal64: pid {cu.get('pid')} ({cu.get('viec')}) dang "
+            f"chay tester tu {cu.get('luc_doc')}. Giet bay gio la pha ket qua cua "
+            f"ho, va ho se khong bao loi. Viec dang cho: {viec or '?'}")
+    subprocess.run(["taskkill", "/F", "/IM", "terminal64.exe"], capture_output=True)
+    time.sleep(2)
+    return True
 
 
 if __name__ == "__main__":

@@ -1,29 +1,29 @@
 toan hang hien co: 43
 
 TANG A - do NGU PHAP (150 cau `loai_cau` nhan la luat)
-  NOI_DUOC         33   22.0%
-  NOI_MOT_PHAN      7    4.7%
-  KHONG_NOI       110   73.3%
+  NOI_DUOC         29   19.3%
+  NOI_MOT_PHAN      5    3.3%
+  KHONG_NOI       116   77.3%
 
 TANG B - do KHAU DOC (150 cau co tu vung phuong phap ma `loai_cau` tu choi)
-  vung         67
+  vung         64
   song         45
-  hinh_hoc     19
+  hinh_hoc     20
   lien_ma      18
-  khoi_luong   15
-  nen          2
+  khoi_luong   10
+  nen          3
 
 hang doi tu vung thieu (tang A):
-  vung         9
+  vung         8
   song         5
-  hinh_hoc     4
+  hinh_hoc     3
   khoi_luong   1
 
-TANG C - hinh dang THAT cua 1181 co che trong kho
-  ho:        xu_huong 600 · quay_ve_trung_binh 259 · pha_vo 181 · bien_dong 98 · phien 19 · dong_tien 13 · lich 8 · vi_mo 3
-  toan hang: gia 2225 · ema 603 · tre 442 · sma 430 · rsi 288 · tb 288 · phan_vi 79 · zscore 72 · gio 70 · thap_nhat 59
+TANG C - hinh dang THAT cua 1418 co che trong kho
+  ho:        xu_huong 725 · quay_ve_trung_binh 290 · pha_vo 199 · bien_dong 152 · phien 26 · dong_tien 13 · lich 10 · vi_mo 3
+  toan hang: gia 2626 · ema 751 · sma 571 · tre 539 · tb 404 · rsi 361 · atr 92 · zscore 88 · phan_vi 87 · gio 84
   CHUA AI DUNG (11): bollinger, dem_lien_tiep, dong_luong, gann_sq9, obv, phuong_sai, smma, tong, trang_thai_lat, tuong_quan, wma
 
-SO VOI LAN TRUOC (150 cau chung): tot len 0 · XAU DI 0
+SO VOI LAN TRUOC (107 cau chung): tot len 0 · XAU DI 0
 
 -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\CORPUS_NGU_PHAP.json

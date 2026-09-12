@@ -4,18 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `so_mua_giu.log`: THANG mua-giu o cung sut giam: 43/268
-- `tester_da_ma.log`: -> reports/TESTER_DA_MA.json
-- `tester_holdout.log`: duong o CA HAI doan: 13/225
-- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
-- git: 1870af1 ban giao: con MOT he qua het 4 cong; viec 1 la truy vi sao 2012-2015 khong co lenh
-### 2026-09-06 21:43:16 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19960, 0 phut)
-- `placebo.log`: DAT (ban that noi len khoi dam dich)
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
 - `tester_holdout.log`: duong o CA HAI doan: 13/225
 - `tester_holdout2.log`: duong o CA HAI doan: 15/242
 - `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
@@ -404,3 +392,15 @@
 - `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
 - `qwen_ultra.log`: ~ 10:18:55 | san sang 8 | CPU   20% / muc tieu 90%  |  con 14.0 loi  |  dang chay 1  [TESTER:1]
 - git: ae0286c bao cao 12/09 phan 3: khoi 7 - 5 phep thu, 5 ket qua AM
+### 2026-09-12 10:54:01 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6300, 0 phut), dieu_khien_xa.py (pid 15316, 228 phut)
+- `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
+- `qwen_ultra.log`: ~ 10:52:58 | san sang 6 | CPU   22% / muc tieu 90%  |  con  9.0 loi  |  dang chay 2  [LLM:1, TESTER:1]
+- git: 3202e14 SUA LAI ket luan "ho loc xu huong song": khop co mau thi no KHONG vuot MDE
+### 2026-09-12 11:05:14 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3904, 0 phut), dieu_khien_xa.py (pid 15316, 239 phut)
+- `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
+- `qwen_ultra.log`: ~ 11:04:59 | san sang 6 | CPU   56% / muc tieu 90%  |  con  6.7 loi  |  dang chay 1  [TESTER:1]
+- git: 3202e14 SUA LAI ket luan "ho loc xu huong song": khop co mau thi no KHONG vuot MDE

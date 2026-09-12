@@ -1,23 +1,23 @@
 {
- "luc": "2026-09-12 07:25:13",
+ "luc": "2026-09-12 11:29:05",
  "hat": 20260911,
  "toan_hang_hien_co": 43,
  "tang_A_do_NGU_PHAP": {
   "so_cau": 150,
   "moc": {
-   "NOI_DUOC": 0.22,
-   "NOI_MOT_PHAN": 0.0467,
-   "KHONG_NOI": 0.7333
+   "NOI_DUOC": 0.1933,
+   "NOI_MOT_PHAN": 0.0333,
+   "KHONG_NOI": 0.7733
   },
   "dem": {
-   "KHONG_NOI": 110,
-   "NOI_MOT_PHAN": 7,
-   "NOI_DUOC": 33
+   "NOI_MOT_PHAN": 5,
+   "NOI_DUOC": 29,
+   "KHONG_NOI": 116
   },
   "tu_vung_thieu": [
    [
     "vung",
-    9
+    8
    ],
    [
     "song",
@@ -25,7 +25,7 @@
    ],
    [
     "hinh_hoc",
-    4
+    3
    ],
    [
     "khoi_luong",
@@ -35,67 +35,57 @@
   "vi_du": {
    "KHONG_NOI": [
     {
-     "cau": "Trade projection\n- Entry: close of the valid FVG-retest bar",
+     "cau": "For SELL Orders:\nSell Limit: Placed above the market price (expecting price to retrace up, then drop)",
      "loi": [],
-     "nguon": "https://www.mql5.com/en/code/77071"
+     "nguon": "https://www.mql5.com/en/code/75690"
     },
     {
-     "cau": "Predict short‑term stock movement as Buy / Sell / Hold by combining technical analysis (Supertrend, RSI, ATR) with machine learning and engineered features",
+     "cau": "* **Exit:** Close the position at 3:30 PM EST to avoid overnight gap risk",
      "loi": [],
-     "nguon": "https://github.com/Praneeth2025/Stock-Market-Predictor"
+     "nguon": "https://github.com/omar-laps/spx-reality-check"
     },
     {
-     "cau": "A   Buy   signal occurs when the Chikou Span crosses the price from below, confirmed when both current price and Chikou are above the Kumo",
+     "cau": "Entry: wick-ratio pattern above, on a closed 30-minute candle",
      "loi": [],
-     "nguon": "https://www.mql5.com/en/code/64492"
+     "nguon": "https://github.com/tesudesu/half-wick"
     },
     {
-     "cau": "For a buy, it requires that on H1 and D1, the RSI value (based on the completed candle) is above the oversold level (default 20) and that the current RSI value is greater than the previous one, indicating an upward impulse",
+     "cau": "Similarly, (l a,j\nn ,qa,j\nn ,wa,j\nn ) = (l,q,w) means\nthat thej-th limit sell order consists ofwlots, is restingl−1 ticks above the best ask, and there\nareq−1 other lots on the same price level with higher priority",
      "loi": [],
-     "nguon": "https://www.mql5.com/en/code/70465"
+     "nguon": "http://arxiv.org/abs/2608.18195v1"
     },
     {
-     "cau": "Pivot SuperTrend / BhanuCodeLab\nPivot SuperTrend BhanuCodeLab is a trend-following indicator that combines confirmed pivot points with an ATR-based trailing trend line to identify market direction, trend reversals, and potential BUY or SELL signals",
+     "cau": "4\nIn a different direction, related asymptotic questions are also considered by Dolinskyi and\nDolinsky [14], who study exponential-utility indifference prices of European options under a\nliquidation constraint in a regime of small linear price impact and high risk aversion",
      "loi": [],
-     "nguon": "https://www.mql5.com/en/code/75112"
+     "nguon": "http://arxiv.org/abs/2608.29468v1"
     },
     {
-     "cau": "Buying just underneath an unswept pool is expensive, because you are entering directly into the place price is being pulled toward and where it will meet resting supply",
+     "cau": "4 ,   [SL Modify TP] button,   Above is to modify the Stop Loss and Take Profit, press the button, will modify all orders relative to the current price of the Stop Loss and Take Profit distance",
      "loi": [],
-     "nguon": "https://www.tradingview.com/u/AlgoForex_Officiel/"
+     "nguon": "https://www.mql5.com/en/code/48412"
+    },
+    {
+     "cau": "Close opposite - forced closing of opposite positions when a trading signal is received",
+     "loi": [],
+     "nguon": "https://www.mql5.com/en/code/23632"
+    },
+    {
+     "cau": "Entry: 5 minutes before market close (3:55 PM ET)",
+     "loi": [],
+     "nguon": "https://github.com/NadirAliOfficial/kaizen-intraday-semis-backtest"
+    },
+    {
+     "cau": "For everyx∈ R, denote the number of submitted sell orders with a price less than or equal to\nx by DA(x) and the number of submitted buy orders with a price greater than x by DB(x)",
+     "loi": [],
+     "nguon": "http://arxiv.org/abs/1904.07583v2"
     },
     {
      "cau": "The strategy is a simple exponential moving average crossover strategy, where we go long when the short-period exponential moving average (SEMA) of the close price goes above the long-period exponential moving average (LEMA), and we go short when the SEMA crosses the LEMA from above ( read more )",
      "loi": [],
      "nguon": "https://blog.quantinsti.com/retrospective-simulation-trading/"
-    },
-    {
-     "cau": "The\nexit-clock draws have mean 1.001 and variance 0.668, while the equilibrium residual\ndraws have mean 0.833",
-     "loi": [],
-     "nguon": "http://arxiv.org/abs/2609.02525v1"
-    },
-    {
-     "cau": "Core rule: Close above ENC = BUY, Close below ENC = SELL",
-     "loi": [],
-     "nguon": "https://www.mql5.com/en/code/68125"
-    },
-    {
-     "cau": "Learn More Long Put A long put gives you the right to sell the underlying stock at strike price A",
-     "loi": [],
-     "nguon": "http://www.optionsplaybook.com/option-strategies/"
     }
    ],
    "NOI_MOT_PHAN": [
-    {
-     "cau": "Draws Buy/Sell arrows when RSI is above/below 50 and Price is above/below MA",
-     "loi": [],
-     "nguon": "https://www.mql5.com/en/code/48663"
-    },
-    {
-     "cau": "Trade management: Entry: 0.69381 (rejection off demand) SL: 0.69150 (below the range floor) TP1: 0.69600 — take 50% off, move stop to breakeven TP2: 0.69761 — 100% exit at the range highs R:R: ~1.6:1 to full target Invalidation: A 2h close back below 0.69150",
-     "loi": [],
-     "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
-    },
     {
      "cau": "The first example is a 2-day RSI strategy where we buy when it crosses below 15 and sell when it exceeds 85",
      "loi": [],
@@ -103,6 +93,11 @@
     },
     {
      "cau": "Trade management: Entry: 1.92129 (retest of supply / MA) SL: 1.92919 (above the retest high) TP1: 1.90802 — take 50% off, move stop to breakeven TP2: 1.89608 — 100% exit R:R: 2.11:1 Invalidation: A 2h close back above 1.92919",
+     "loi": [],
+     "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
+    },
+    {
+     "cau": "Trade management: Entry: 0.69381 (rejection off demand) SL: 0.69150 (below the range floor) TP1: 0.69600 — take 50% off, move stop to breakeven TP2: 0.69761 — 100% exit at the range highs R:R: ~1.6:1 to full target Invalidation: A 2h close back below 0.69150",
      "loi": [],
      "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
     },
@@ -115,11 +110,6 @@
      "cau": "when close price brakes up the EMA build based on high prices given that RSI is above 55 and RSI is above its Moving average - we buy",
      "loi": [],
      "nguon": "https://www.mql5.com/en/code/54067"
-    },
-    {
-     "cau": "For a sell, similarly: the RSI on both timeframes must be below the overbought level (80) and the current value must be less than the previous one, signaling a downward movement",
-     "loi": [],
-     "nguon": "https://www.mql5.com/en/code/70465"
     }
    ]
   }
@@ -130,7 +120,7 @@
   "tu_vung_thieu": [
    [
     "vung",
-    67
+    64
    ],
    [
     "song",
@@ -138,7 +128,7 @@
    ],
    [
     "hinh_hoc",
-    19
+    20
    ],
    [
     "lien_ma",
@@ -146,91 +136,91 @@
    ],
    [
     "khoi_luong",
-    15
+    10
    ],
    [
     "nen",
-    2
+    3
    ]
   ],
   "vi_du": {
    "KHONG_NOI": [
     {
-     "cau": "When single trade volumes are themselves strongly fluctuating, the statistics of volume imbalance can be very\ndifferent from those of sign imbalance, a feature we actually observe on data and reproduce within our framework\n– see section 4.2 below",
+     "cau": "For example, if an inversion FVG occurs after touching a higher time frame key level or a higher time frame trend line, it has a higher chance of working out",
      "loi": [],
-     "nguon": "http://arxiv.org/abs/2506.07711v6"
+     "nguon": "https://www.youtube.com/watch?v=vGyREXEwLIk"
     },
     {
-     "cau": "So, when I'm looking at a chart here, you'll see we started off with a line chart",
+     "cau": "As long as a majority of CPU power is controlled by nodes that are not cooperating to attack the network, they'll generate the longest chain and outpace attackers",
      "loi": [],
-     "nguon": "https://www.youtube.com/watch?v=xHU5MHuUSKI&t=60s&pp=ygUSdHJhZGluZyBzdHJhdGVnaWVz"
+     "nguon": "https://github.com/uvhw/Bitcoin-Foundation"
     },
     {
-     "cau": "Rakhlin, “The non-linear market impact of large trades: evidence from buy-side order flow”, Quant",
+     "cau": "a fun-\ndamental lead–lag confounder—the most dangerous alterna-\ntive, because cross-autocorrelation among correlated equities\nis a documented regularity [18], [19]—yields a 2% false-alarm\nrate, because continuation and reversal load with opposite\nsigns",
+     "loi": [],
+     "nguon": "http://arxiv.org/abs/2608.22768v1"
+    },
+    {
+     "cau": "structure-break and order-block concepts are pure price action with no symbol-specific assumptions, though — like any fractal-pivot method — InpSwingLookback trades off level significance against detection frequency the same way it does in this series' Liquidity Sweep Detector",
+     "loi": [],
+     "nguon": "https://www.mql5.com/en/code/76878"
+    },
+    {
+     "cau": "Kanazawa, “Inferring Microscopic Financial Information from the Long Memory in Market-Order Flow: A Quantitative\nTest of the Lillo-Mike-Farmer Model”, Phys",
      "loi": [],
      "nguon": "http://arxiv.org/abs/2608.00988v1"
     },
     {
-     "cau": "You'll literally go in here and\nput long position or short position",
+     "cau": "The two assets were positively correlated 61% of the time and strongly correlated above +0.3 for 31% of the period",
      "loi": [],
-     "nguon": "https://www.youtube.com/watch?v=r2j0CmRWhQI"
+     "nguon": "https://beyondpassive.substack.com/p/revisiting-beyond-6040-five-decades"
     },
     {
-     "cau": "If that's the case, see me after class, and I'll pay you $150,000.”",
+     "cau": "When do you think we'll have good, reliable 5 finger hands that are ~reasonably priced",
      "loi": [],
-     "nguon": "https://www.newtraderu.com/2026/08/31/how-to-speak-intelligently-according-to-warren-buffett/"
+     "nguon": "https://news.ycombinator.com/item?id=44456904"
     },
     {
-     "cau": "Long\nby RLinda\nAug 29\n12\n2\n0\nSEPTEMBER GOLD OUTLOOK — CORRECTION BEFORE THE NEXT LEG",
+     "cau": "I'm looking for a fiveminut break of structure or a 5minute inverse fair value gap",
      "loi": [],
-     "nguon": "https://www.tradingview.com/ideas/"
+     "nguon": "https://www.youtube.com/watch?v=8PYgFVB0GHE"
     },
     {
-     "cau": "But when it comes to spending money, privately I almost never opt for the enterprise grad hardware that does come with warranties like long term guaranteed support",
+     "cau": "Liquidity and volatility therefore provide different types of information and should be evaluated separately when assessing market behavior",
      "loi": [],
-     "nguon": "https://news.ycombinator.com/item?id=37392676"
+     "nguon": "https://github.com/SuraAnnuka/stock-market-big-data-analytics"
     },
     {
-     "cau": "You don't have to, but if you punch in you zip on the site and leave your email we'll let you know when we're there",
+     "cau": "If an Outside Bar is detected, the EA extracts 10 Data Features (Body size, Relative Range, ATR, Volume change, Day of the week, Hour, etc.) and sends them to the larry_model.onnx model",
      "loi": [],
-     "nguon": "https://news.ycombinator.com/item?id=22368112"
-    },
-    {
-     "cau": "🔻 Key Structure BTC swept the previous highs around 81,000–81,500, taking buy-side liquidity",
-     "loi": [],
-     "nguon": "https://www.tradingview.com/ideas/"
-    },
-    {
-     "cau": "We're making a low time frame downtrend and we sweep out this hourly low and then from there we see a break of structure and then from there we see boom a fair value gap get filled and then boom we see a leg up",
-     "loi": [],
-     "nguon": "https://www.youtube.com/watch?v=N7SM8a7Dc9s"
+     "nguon": "https://www.mql5.com/en/code/68424"
     }
    ],
    "NOI_MOT_PHAN": []
   }
  },
  "tang_C_hinh_dang_kho": {
-  "so_co_che": 1181,
+  "so_co_che": 1418,
   "theo_ho": [
    [
     "xu_huong",
-    600
+    725
    ],
    [
     "quay_ve_trung_binh",
-    259
+    290
    ],
    [
     "pha_vo",
-    181
+    199
    ],
    [
     "bien_dong",
-    98
+    152
    ],
    [
     "phien",
-    19
+    26
    ],
    [
     "dong_tien",
@@ -238,7 +228,7 @@
    ],
    [
     "lich",
-    8
+    10
    ],
    [
     "vi_mo",
@@ -248,91 +238,91 @@
   "toan_hang_duoc_dung": [
    [
     "gia",
-    2225
+    2626
    ],
    [
     "ema",
-    603
-   ],
-   [
-    "tre",
-    442
+    751
    ],
    [
     "sma",
-    430
+    571
    ],
    [
-    "rsi",
-    288
+    "tre",
+    539
    ],
    [
     "tb",
-    288
+    404
    ],
    [
-    "phan_vi",
-    79
-   ],
-   [
-    "zscore",
-    72
-   ],
-   [
-    "gio",
-    70
-   ],
-   [
-    "thap_nhat",
-    59
-   ],
-   [
-    "cao_nhat",
-    56
+    "rsi",
+    361
    ],
    [
     "atr",
-    47
+    92
    ],
    [
-    "doi_pct",
-    39
+    "zscore",
+    88
    ],
    [
-    "doi",
-    38
+    "phan_vi",
+    87
+   ],
+   [
+    "gio",
+    84
+   ],
+   [
+    "thap_nhat",
+    69
+   ],
+   [
+    "cao_nhat",
+    65
    ],
    [
     "bien_do",
-    35
+    56
    ],
    [
     "do_lech",
-    34
+    44
+   ],
+   [
+    "doi_pct",
+    41
+   ],
+   [
+    "doi",
+    40
+   ],
+   [
+    "than_nen",
+    31
    ],
    [
     "khoi_luong",
     27
    ],
    [
-    "than_nen",
-    27
+    "stoch",
+    19
    ],
    [
     "ibs",
     18
    ],
    [
+    "ngay_trong_tuan",
+    16
+   ],
+   [
     "tb_cua_cac",
     14
-   ],
-   [
-    "ngay_trong_tuan",
-    13
-   ],
-   [
-    "stoch",
-    11
    ],
    [
     "tuyen_tinh",
@@ -343,15 +333,15 @@
     9
    ],
    [
+    "thap_nhat_cua_cac",
+    8
+   ],
+   [
     "macd",
     8
    ],
    [
     "cao_nhat_cua_cac",
-    7
-   ],
-   [
-    "thap_nhat_cua_cac",
     7
    ],
    [
@@ -399,67 +389,74 @@
  },
  "chi_tiet_A": [
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 59,
-   "nhan": "vao_mua",
-   "cau": "Trade projection\n- Entry: close of the valid FVG-retest bar",
-   "nguon": "https://www.mql5.com/en/code/77071"
-  },
-  {
    "tt": "NOI_MOT_PHAN",
-   "bo_sot": 23,
+   "bo_sot": 27,
    "nhan": "vao_mua",
-   "cau": "Draws Buy/Sell arrows when RSI is above/below 50 and Price is above/below MA",
-   "nguon": "https://www.mql5.com/en/code/48663"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 155,
-   "nhan": "vao_mua",
-   "cau": "Predict short‑term stock movement as Buy / Sell / Hold by combining technical analysis (Supertrend, RSI, ATR) with machine learning and engineered features",
-   "nguon": "https://github.com/Praneeth2025/Stock-Market-Predictor"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 138,
-   "nhan": "vao_mua",
-   "cau": "A   Buy   signal occurs when the Chikou Span crosses the price from below, confirmed when both current price and Chikou are above the Kumo",
-   "nguon": "https://www.mql5.com/en/code/64492"
+   "cau": "The first example is a 2-day RSI strategy where we buy when it crosses below 15 and sell when it exceeds 85",
+   "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/"
   },
   {
    "tt": "NOI_DUOC",
    "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "A BUY order (0.01 lots) is opened when %D crosses above (50 - OffSet)",
+   "nhan": "ra",
+   "cau": "Closes SELL positions when %K crosses above %D while %D is below Oversold (20)",
    "nguon": "https://www.mql5.com/en/code/74661"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 222,
-   "nhan": "vao_mua",
-   "cau": "For a buy, it requires that on H1 and D1, the RSI value (based on the completed candle) is above the oversold level (default 20) and that the current RSI value is greater than the previous one, indica",
-   "nguon": "https://www.mql5.com/en/code/70465"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 248,
-   "nhan": "vao_mua",
-   "cau": "Pivot SuperTrend / BhanuCodeLab\nPivot SuperTrend BhanuCodeLab is a trend-following indicator that combines confirmed pivot points with an ATR-based trailing trend line to identify market direction, tr",
-   "nguon": "https://www.mql5.com/en/code/75112"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 168,
-   "nhan": "vao_mua",
-   "cau": "Buying just underneath an unswept pool is expensive, because you are entering directly into the place price is being pulled toward and where it will meet resting supply",
-   "nguon": "https://www.tradingview.com/u/AlgoForex_Officiel/"
-  },
-  {
-   "tt": "NOI_MOT_PHAN",
-   "bo_sot": 119,
+   "bo_sot": 101,
    "nhan": "ra",
-   "cau": "Trade management: Entry: 0.69381 (rejection off demand) SL: 0.69150 (below the range floor) TP1: 0.69600 — take 50% off, move stop to breakeven TP2: 0.69761 — 100% exit at the range highs R:R: ~1.6:1 ",
-   "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
+   "cau": "For SELL Orders:\nSell Limit: Placed above the market price (expecting price to retrace up, then drop)",
+   "nguon": "https://www.mql5.com/en/code/75690"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 73,
+   "nhan": "ra",
+   "cau": "* **Exit:** Close the position at 3:30 PM EST to avoid overnight gap risk",
+   "nguon": "https://github.com/omar-laps/spx-reality-check"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 61,
+   "nhan": "vao_mua",
+   "cau": "Entry: wick-ratio pattern above, on a closed 30-minute candle",
+   "nguon": "https://github.com/tesudesu/half-wick"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 214,
+   "nhan": "ra",
+   "cau": "Similarly, (l a,j\nn ,qa,j\nn ,wa,j\nn ) = (l,q,w) means\nthat thej-th limit sell order consists ofwlots, is restingl−1 ticks above the best ask, and there\nareq−1 other lots on the same price level with h",
+   "nguon": "http://arxiv.org/abs/2608.18195v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 273,
+   "nhan": "ra",
+   "cau": "4\nIn a different direction, related asymptotic questions are also considered by Dolinskyi and\nDolinsky [14], who study exponential-utility indifference prices of European options under a\nliquidation c",
+   "nguon": "http://arxiv.org/abs/2608.29468v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 193,
+   "nhan": "ra",
+   "cau": "4 ,   [SL Modify TP] button,   Above is to modify the Stop Loss and Take Profit, press the button, will modify all orders relative to the current price of the Stop Loss and Take Profit distance",
+   "nguon": "https://www.mql5.com/en/code/48412"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 87,
+   "nhan": "ra",
+   "cau": "Close opposite - forced closing of opposite positions when a trading signal is received",
+   "nguon": "https://www.mql5.com/en/code/23632"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 49,
+   "nhan": "vao_mua",
+   "cau": "Entry: 5 minutes before market close (3:55 PM ET)",
+   "nguon": "https://github.com/NadirAliOfficial/kaizen-intraday-semis-backtest"
   },
   {
    "tt": "NOI_DUOC",
@@ -470,24 +467,17 @@
   },
   {
    "tt": "KHONG_NOI",
+   "bo_sot": 179,
+   "nhan": "vao_mua",
+   "cau": "For everyx∈ R, denote the number of submitted sell orders with a price less than or equal to\nx by DA(x) and the number of submitted buy orders with a price greater than x by DB(x)",
+   "nguon": "http://arxiv.org/abs/1904.07583v2"
+  },
+  {
+   "tt": "KHONG_NOI",
    "bo_sot": 297,
    "nhan": "vao_ban",
    "cau": "The strategy is a simple exponential moving average crossover strategy, where we go long when the short-period exponential moving average (SEMA) of the close price goes above the long-period exponenti",
    "nguon": "https://blog.quantinsti.com/retrospective-simulation-trading/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 109,
-   "nhan": "ra",
-   "cau": "The\nexit-clock draws have mean 1.001 and variance 0.668, while the equilibrium residual\ndraws have mean 0.833",
-   "nguon": "http://arxiv.org/abs/2609.02525v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 56,
-   "nhan": "vao_mua",
-   "cau": "Core rule: Close above ENC = BUY, Close below ENC = SELL",
-   "nguon": "https://www.mql5.com/en/code/68125"
   },
   {
    "tt": "KHONG_NOI",
@@ -500,288 +490,29 @@
    "tt": "NOI_DUOC",
    "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "If the 4hour RSI is above 55, we only look for long positions",
-   "nguon": "https://www.youtube.com/watch?v=c9-SIpy3dEw&pp=ygUObWVhbiByZXZlcnNpb24%3D"
-  },
-  {
-   "tt": "NOI_MOT_PHAN",
-   "bo_sot": 27,
-   "nhan": "vao_mua",
-   "cau": "The first example is a 2-day RSI strategy where we buy when it crosses below 15 and sell when it exceeds 85",
-   "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 195,
-   "nhan": "vao_mua",
-   "cau": "Forex Simple EA Overview: Current Price → XX pips above = Buy Stop | XX pips below = Sell Stop → One order triggers → Delete opposite order → Maximum 1 position → Trade closes → Start a new cycle",
-   "nguon": "https://www.mql5.com/en/job"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 140,
-   "nhan": "ra",
-   "cau": "In order to hedge, I thought I might sell covered calls against my shares to collect a premium and lock in an exit price im comfortable with",
-   "nguon": "https://www.reddit.com/r/options/comments/1voguhw/selling_covered_calls_on_te/"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "// RSI Overbought (SELL)\n//=== SL/TP ===\ninput group \"=== STOP LOSS / TAKE PROFIT ===\"\ninput int InpSLPoints = 300",
-   "nguon": "https://t.me/mqlfree/2627"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 249,
-   "nhan": "vao_mua",
-   "cau": "Then, the final piece of context was I saw the aggressive buying on the CVD ramp up, and as soon as I saw that aggressive buying ramp up, I took the market long here with just a 10-point stop under th",
-   "nguon": "https://www.youtube.com/watch?v=i8Wf-fknjIw&pp=ygUObWVhbiByZXZlcnNpb24%3D"
+   "cau": "The base case of the strategy is to go long the SPY ETF at the next open when the closing price crosses above the 200-day moving average and to exit the trade at the next open when the closing price f",
+   "nguon": "https://www.priceactionlab.com/Blog/2026/07/post-hoc-trading-claims/"
   },
   {
    "tt": "KHONG_NOI",
    "bo_sot": 56,
    "nhan": "vao_mua",
-   "cau": "Buy Condition: WPR drops below WPR_Buy_Level (e.g., -80)",
-   "nguon": "https://www.mql5.com/en/code/74818"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 186,
-   "nhan": "ra",
-   "cau": "So if you want to enter a sell position over here as the price leaves and comes down away from the resistance zone, you can enter into a sell with your target very very close to the mean",
-   "nguon": "https://www.youtube.com/watch?v=llfWx_3EMEU&pp=ygUObWVhbiByZXZlcnNpb24%3D"
-  },
-  {
-   "tt": "NOI_MOT_PHAN",
-   "bo_sot": 120,
-   "nhan": "ra",
-   "cau": "Trade management: Entry: 1.92129 (retest of supply / MA) SL: 1.92919 (above the retest high) TP1: 1.90802 — take 50% off, move stop to breakeven TP2: 1.89608 — 100% exit R:R: 2.11:1 Invalidation: A 2h",
-   "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 47,
-   "nhan": "ra",
-   "cau": "exit - exit the cheat shell (aliases: quit, ^D)",
-   "nguon": "https://github.com/chubin/cheat.sh"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 249,
-   "nhan": "ra",
-   "cau": "Exit Strategy: The series of trades continues to increase lot size until the aggregate floating profit of all trades in the series reaches the SecureProfitMartingaleTarget , at which point all positio",
-   "nguon": "https://www.mql5.com/en/code/64444"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 214,
-   "nhan": "ra",
-   "cau": "Similarly, (l a,j\nn ,qa,j\nn ,wa,j\nn ) = (l,q,w) means\nthat thej-th limit sell order consists ofwlots, is restingl−1 ticks above the best ask, and there\nareq−1 other lots on the same price level with h",
-   "nguon": "http://arxiv.org/abs/2608.18195v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 151,
-   "nhan": "vao_mua",
-   "cau": "inputs 1 rsi is below value 30 when divergent   for buy/bullish divergence\ninput 2 divergence settings buys\ninput 3 lots and stop loss , target in pips",
-   "nguon": "https://www.mql5.com/en/code/35376"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "Sell Signal : RSI rises above 70 (overbought)",
-   "nguon": "https://github.com/resign123/Nifty-50-RSI-Overbought-Oversold-and-MACD-Signal-Strategy"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 60,
-   "nhan": "vao_mua",
-   "cau": "Long Entry: We will enter long positions on the Golden Cross",
-   "nguon": "https://www.mql5.com/en/code/46426"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 147,
-   "nhan": "ra",
-   "cau": "\"Safe, slow stocks have very low IV and therefore low option premium.\"\nSetting Strike Prices and Expiration Dates\nSell out-of-the-money (OTM) calls",
-   "nguon": "https://www.reddit.com/r/options/comments/1voez8q/the_big_premium_is_the_market_warning_you_not/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 94,
-   "nhan": "vao_mua",
-   "cau": "Entry-level technical and administrative work is being absorbed by automation at a steady clip",
-   "nguon": "https://www.newtraderu.com/2026/08/30/the-10-most-important-skills-middle-class-people-must-learn-in-the-next-10-years/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 139,
-   "nhan": "ra",
-   "cau": "Wait for price to come back up to it, set our stop loss above the highs, set our take profit at the previous day's low we marked out before",
-   "nguon": "https://www.youtube.com/watch?v=fi7OxEzvhjw"
+   "cau": "Buy/Cover  as soon as the price breaks above n bars high",
+   "nguon": "https://www.mql5.com/en/code/49272"
   },
   {
    "tt": "NOI_DUOC",
    "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "If the probability of price rise exceeds 51%, EA can open a buy position, and if the probability of price fall exceeds 51%, EA can open a sell position",
-   "nguon": "https://www.mql5.com/en/code/49770"
+   "cau": "For long positions the RSI must be above 70",
+   "nguon": "https://www.youtube.com/watch?v=5I2vtNovJcQ"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 173,
-   "nhan": "ra",
-   "cau": "2\n2.1 Option valuation under stochastic volatility\nThe validation framework is developed and evaluated on a family of stochastic-volatility models of in-\ncreasing complexity",
-   "nguon": "http://arxiv.org/abs/2607.25199v2"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 101,
-   "nhan": "ra",
-   "cau": "For SELL Orders:\nSell Limit: Placed above the market price (expecting price to retrace up, then drop)",
-   "nguon": "https://www.mql5.com/en/code/75690"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "Sell signals are triggered when %K crosses below %D above the 80 level",
-   "nguon": "https://www.mql5.com/en/code/58942"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 134,
-   "nhan": "ra",
-   "cau": "CounterTrend : Trades against the trend, waiting for a trend reversal (e.g., if RSI touches the overbought line, it takes a sell trade",
-   "nguon": "https://www.mql5.com/en/code/58462"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 179,
-   "nhan": "vao_mua",
-   "cau": "For everyx∈ R, denote the number of submitted sell orders with a price less than or equal to\nx by DA(x) and the number of submitted buy orders with a price greater than x by DB(x)",
-   "nguon": "http://arxiv.org/abs/1904.07583v2"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 133,
-   "nhan": "ra",
-   "cau": "5d is annualized\nfrom non-overlapping five-session returns;𝛽RUI is estimated at the same horizon against the Russell 1000 price index",
-   "nguon": "http://arxiv.org/abs/2608.30446v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 130,
-   "nhan": "ra",
-   "cau": "Emergency & Management Tools:\nCLOSE ALL: Instantly liquidates all open positions associated with the Expert Advisor's Magic Number",
-   "nguon": "https://www.mql5.com/en/code/76534"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 36,
-   "nhan": "ra",
-   "cau": "Trade management: Entry: 15,450 (rejection off supply) SL: 15,610 (above the supply block) TP1: 15,150 — take 50% off, move stop to breakeven TP2: 14,960 — 100% exit at the range lows R:R: ~3.1:1 to f",
-   "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "Sell: All three Stochastic K lines are above the MaxStochOverbought level, and the M15 price is above the upper Bollinger Band",
-   "nguon": "https://www.mql5.com/en/code/58746"
-  },
-  {
-   "tt": "NOI_DUOC",
    "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "Skip to main content\nUK (u/Legitimate_Tailor858) - Reddit\nAdvertise on Reddit\nOpen chat\nCreate\nCreate post\nOpen inbox\nExpand user menu\nUK\nu/Legitimate_Tailor858\nOverview\nPosts\nComments\nback\nforward\nFe",
-   "nguon": "https://www.reddit.com/user/Legitimate_Tailor858/"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "It's buy when RSI 5 crosses above 30, which is the green the green vertical lines, and sell when you close below the chandelier 221, which is the red these are the red vertical lines",
-   "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "vao_ban",
-   "cau": "If the security's RSI is below 30 and the Bollinger Bands are moving downward and breaking below the lower band, open a short selling using the account's available margin balance",
-   "nguon": "https://medium.com/@DolphinDB_Inc/why-your-backtests-fail-in-margin-trading-securities-lending-and-how-to-fix-it-8f1c2d592baf"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 149,
-   "nhan": "vao_mua",
-   "cau": "TradeDirection Trend, CounterTrend Trend : Opens trades in the direction of the trend (e.g., if RSI touches the overbought line, it takes a buy trade",
-   "nguon": "https://www.mql5.com/en/code/58462"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 198,
-   "nhan": "vao_mua",
-   "cau": "Long Signal - January 30, 2024 Trade Outcome : Date : January 30, 2024 Signal : Long📈 Market Context : Event :The approval of Bitcoin spot ETFs in January 2024 significantly boosted market sentiment",
-   "nguon": "https://www.tradingview.com/u/AlgoAlpha/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 57,
-   "nhan": "ra",
-   "cau": "Close basket at -0.50% MAX_LOSS_PERCENT (values: 0.5-0.8)",
-   "nguon": "https://www.mql5.com/en/code/26948"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 72,
-   "nhan": "vao_mua",
-   "cau": "Long timeline - Aim for breadth and more depth with system design topics",
-   "nguon": "https://github.com/donnemartin/system-design-primer"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 151,
-   "nhan": "vao_ban",
-   "cau": "The classical strategy with this indicator is to go long when the price closes above the upper band and to go short when it closes below the lower band",
-   "nguon": "https://www.mql5.com/en/code/55391"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 142,
-   "nhan": "ra",
-   "cau": "Rolling betas here go negative on about 4% of days, and one passed\nclose enough to -1 to produce roughly 46x leverage and a -241% daily return",
-   "nguon": "https://github.com/Leo3243/Statistical-Arbitrage-Cointegration-Based-Pairs-Trading"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 207,
-   "nhan": "vao_mua",
-   "cau": "The Supertrend indicator plots an ATR-based dynamic trend line on the MetaTrader 5 chart, switching between a green uptrend and red downtrend line with optional buy/sell arrow signals at every trend r",
-   "nguon": "https://www.mql5.com/en/code/72025"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 273,
-   "nhan": "ra",
-   "cau": "4\nIn a different direction, related asymptotic questions are also considered by Dolinskyi and\nDolinsky [14], who study exponential-utility indifference prices of European options under a\nliquidation c",
-   "nguon": "http://arxiv.org/abs/2608.29468v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 82,
-   "nhan": "vao_mua",
-   "cau": "Entry : after 9:45, when a 1-min close breaks above the OR high, buy at that close",
-   "nguon": "https://github.com/Ushey1/LearnTrading"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 67,
-   "nhan": "ra",
-   "cau": "Intraday trend-following opens and closes the trade in the same day",
-   "nguon": "https://concretumgroup.substack.com/p/where-to-trade-intraday-trends"
+   "cau": "Long Position : When current price is below the predicted lower bound (assumption: price will return to center)",
+   "nguon": "https://github.com/rkomorow89/arima_trading_strategy"
   },
   {
    "tt": "KHONG_NOI",
@@ -792,66 +523,17 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 146,
+   "bo_sot": 58,
    "nhan": "ra",
-   "cau": "Signal to open a SELL position: The current price BID is less than the indicator value on bar #1 and the point of the parabolic is above the price",
-   "nguon": "https://www.mql5.com/en/code/23632"
+   "cau": "Sell Condition: WPR rises above WPR_Sell_Level (e.g., -20)",
+   "nguon": "https://www.mql5.com/en/code/74818"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 120,
+   "bo_sot": 63,
    "nhan": "vao_mua",
-   "cau": "If enabled, the EA will only enter buy trades when the price is above the EMA and sell trades when the price is below it",
-   "nguon": "https://www.mql5.com/en/code/62742"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 97,
-   "nhan": "vao_mua",
-   "cau": "Strategy logic: if Monday closes below its open, a Buy position is opened at the start of Tuesday",
-   "nguon": "https://www.mql5.com/en/code/73674"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 57,
-   "nhan": "vao_mua",
-   "cau": "Long Trades: RSI must be above a user-specified threshold",
-   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 195,
-   "nhan": "vao_mua",
-   "cau": "Pairs trading bets on mean reversion: if two stocks normally move together and\none strays too far from the other, you short the outperformer and go long the\nunderperformer, betting the gap closes",
-   "nguon": "https://github.com/masonharvey904-debug/Pairs_trading"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "The strategy is regarded as successful if its price does not fall under its buying price within 5 days",
-   "nguon": "https://github.com/kelvonlys/Breakout-Screener"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "When a stock's RSI is below 30, and the Bollinger Bands are moving downward and breaking below the lower band, use the account's available margin balance to execute short selling",
-   "nguon": "https://medium.com/@DolphinDB_Inc/why-your-backtests-fail-in-margin-trading-securities-lending-and-how-to-fix-it-8f1c2d592baf"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 168,
-   "nhan": "vao_mua",
-   "cau": "The simplest version of a range breakout buys when price exceeds the highest high of the last n bars and sells when price breaks below the lowest low of the last n bars",
-   "nguon": "https://financial-hacker.com/implementing-robert-pardos-ranger-system/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 55,
-   "nhan": "ra",
-   "cau": "Close a long-spread position when the z-score reaches 0",
-   "nguon": "https://github.com/Arjun-07-P/statistical-arbitrage-pairs-trading"
+   "cau": "If the market breaks above the range high, it opens a buy trade",
+   "nguon": "https://www.mql5.com/en/code/71476"
   },
   {
    "tt": "NOI_DUOC",
@@ -868,46 +550,53 @@
    "nguon": "https://www.reddit.com/r/options/comments/1voguhw/selling_covered_calls_on_te/"
   },
   {
+   "tt": "KHONG_NOI",
+   "bo_sot": 58,
+   "nhan": "vao_mua",
+   "cau": "Long Short-Term Memory.Neural Computation,9(8), 1735–\n1780",
+   "nguon": "http://arxiv.org/abs/2608.05755v2"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 56,
+   "nhan": "ra",
+   "cau": "Exits and trailing-stop updates run every cycle as usual",
+   "nguon": "https://github.com/DecentralizedJM/Mudrex-Supertrend-ATR-Strategy-Bot"
+  },
+  {
    "tt": "NOI_DUOC",
    "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "A long signal is triggered when the price closes below the lower band and volume is above its 20-day average",
-   "nguon": "https://github.com/chromedome04/Volume-Filtered-Bollinger-Bands-Trading-Strategy"
+   "cau": "buy when the 20-day MA crosses above the 50-day MA",
+   "nguon": "https://github.com/adiv-1/momentum-clustered-algorithmic-trading-strategy"
   },
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 191,
-   "nhan": "ra",
-   "cau": "So there are times right where stock price just diary you still have to hold that stock for 10 trading days and then sell it right if the 2-day RSI has not crossed above 50 within the 10 days",
-   "nguon": "https://www.youtube.com/watch?v=NheeZ94_Ajk"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 118,
-   "nhan": "ra",
-   "cau": "If a 5 Minute candle closes above the High and then a 5 Minute candle closes back in the Range, there is a sell signal",
-   "nguon": "https://www.mql5.com/en/code/68082"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 76,
-   "nhan": "ra",
-   "cau": "Main signal: RSI crossed above 30, indicating an exit from the oversold zone",
-   "nguon": "https://www.tradingview.com/chart/MGC1!/4PMRPRQf-Gold-Reversal-Strategy-Long-Setup/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 262,
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "the focus is on the parabolic sar as first signal to indicate a buy or sell secondly it looks where the closed of bar or candle indicated on the chart if the third candle back was below sma and previo",
-   "nguon": "https://www.mql5.com/en/code/65407"
+   "cau": "Long Trades: The %K line must be above the %D line",
+   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 218,
+   "bo_sot": 136,
    "nhan": "vao_mua",
-   "cau": "The most recent candles in the downtrend show either good volume but narrow price action on up days (classic effort but no result) or falling volume on sequential up days during the sell-off (lack of ",
-   "nguon": "https://www.quantumtrading.com/cryptocurrency-strength-indicator/bitcoin-crypto-market-analysis-how-volume-price-analysis-vpa-and-the-quantum-ccsi-work-together-in-real-time/"
+   "cau": "Trend Filter:    A 200-period moving average filters trades:  Only buys are allowed above the MA, and sells if the price is below the MA",
+   "nguon": "https://www.mql5.com/en/code/61998"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 130,
+   "nhan": "ra",
+   "cau": "Emergency & Management Tools:\nCLOSE ALL: Instantly liquidates all open positions associated with the Expert Advisor's Magic Number",
+   "nguon": "https://www.mql5.com/en/code/76534"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 248,
+   "nhan": "vao_mua",
+   "cau": "Pivot SuperTrend / BhanuCodeLab\nPivot SuperTrend BhanuCodeLab is a trend-following indicator that combines confirmed pivot points with an ATR-based trailing trend line to identify market direction, tr",
+   "nguon": "https://www.mql5.com/en/code/75112"
   },
   {
    "tt": "KHONG_NOI",
@@ -918,17 +607,66 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 154,
+   "bo_sot": 189,
+   "nhan": "ra",
+   "cau": "It covers both systems: 20/55-day breakouts, the System 1 skip rule, N (Wilder ATR) for volatility-adjusted sizing, a four‑unit pyramid with N/2 adds, a unified 2N stop, and 10/20-day exits",
+   "nguon": "https://www.mql5.com/en/articles/expert_advisors"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 36,
+   "nhan": "ra",
+   "cau": "Trade management: Entry: 15,450 (rejection off supply) SL: 15,610 (above the supply block) TP1: 15,150 — take 50% off, move stop to breakeven TP2: 14,960 — 100% exit at the range lows R:R: ~3.1:1 to f",
+   "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 168,
    "nhan": "vao_mua",
-   "cau": "b behind you: the exact mirror — sell failed rallies into value (Plan A), or buy the failure traverse when 2+ closes above VAH with volume appear (Plan B)",
-   "nguon": "https://www.tradingview.com/script/qiW43jql-Volume-Profile-P-b-D-Shapes-Day-Playbook/"
+   "cau": "Buying just underneath an unswept pool is expensive, because you are entering directly into the place price is being pulled toward and where it will meet resting supply",
+   "nguon": "https://www.tradingview.com/u/AlgoForex_Officiel/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 252,
+   "nhan": "ra",
+   "cau": "\"Cryptocurrency Divergence\" EA draws 2 mini Trend Lines with \"Fractals\" on chart and trades with Divergence\\Convergence of RSI & MACD indicators ,has Trailing Stop Loss &Take Profit works with all tim",
+   "nguon": "https://www.mql5.com/en/code/25780"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "vao_mua",
+   "cau": "Buy Signal: Generated when the RSI crosses up from the oversold zone (default: below 30)",
+   "nguon": "https://www.mql5.com/en/code/63698"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "ra",
+   "cau": "// RSI Overbought (SELL)\n//=== SL/TP ===\ninput group \"=== STOP LOSS / TAKE PROFIT ===\"\ninput int InpSLPoints = 300",
+   "nguon": "https://t.me/mqlfree/2627"
   },
   {
    "tt": "KHONG_NOI",
    "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "The EA automatically determines whether the order should be a Limit or a Stop based on the position of your SETUP ENTRY line (or manual input) relative to the current market price:\nFor BUY Orders:\nBuy",
-   "nguon": "https://www.mql5.com/en/code/75690"
+   "cau": "The strategy is regarded as successful if its price does not fall under its buying price within 5 days",
+   "nguon": "https://github.com/kelvonlys/Breakout-Screener"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 139,
+   "nhan": "ra",
+   "cau": "Has multiple overlapping exit systems: fixed SL/TP, break-even move, candle-based trailing, money-target closes, and equity stop protection",
+   "nguon": "https://www.mql5.com/en/code/25287"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 153,
+   "nhan": "ra",
+   "cau": "Phase 2 (runner) : exits on the breakeven stop, a 4h close back\npast the Keltner middle, OBV crossing below its SMA, or the Friday\n3:30pm New York cutoff",
+   "nguon": "https://github.com/NadirAliOfficial/alpaca-momentum-bot"
   },
   {
    "tt": "KHONG_NOI",
@@ -939,6 +677,272 @@
   },
   {
    "tt": "KHONG_NOI",
+   "bo_sot": 85,
+   "nhan": "ra",
+   "cau": "Exit : As the spread collapses back toward 0 (Mean Reversion), the position is closed",
+   "nguon": "https://github.com/eddiesung111/statistical-arbitrage-engine"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 147,
+   "nhan": "ra",
+   "cau": "\"Safe, slow stocks have very low IV and therefore low option premium.\"\nSetting Strike Prices and Expiration Dates\nSell out-of-the-money (OTM) calls",
+   "nguon": "https://www.reddit.com/r/options/comments/1voez8q/the_big_premium_is_the_market_warning_you_not/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 47,
+   "nhan": "ra",
+   "cau": "exit - exit the cheat shell (aliases: quit, ^D)",
+   "nguon": "https://github.com/chubin/cheat.sh"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 88,
+   "nhan": "vao_mua",
+   "cau": "Long Trades: Yesterday's closing price must be above a designated long MA (e.g., 50-day)",
+   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 56,
+   "nhan": "vao_mua",
+   "cau": "Long Trades: The MACD line must be above its signal line",
+   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 140,
+   "nhan": "ra",
+   "cau": "In order to hedge, I thought I might sell covered calls against my shares to collect a premium and lock in an exit price im comfortable with",
+   "nguon": "https://www.reddit.com/r/options/comments/1voguhw/selling_covered_calls_on_te/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 113,
+   "nhan": "vao_mua",
+   "cau": "After it traded below for a while, it then closed back inside, which means technically this is a valid long setup",
+   "nguon": "https://www.youtube.com/watch?v=O5eC5lY7ZXY"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 173,
+   "nhan": "ra",
+   "cau": "2\n2.1 Option valuation under stochastic volatility\nThe validation framework is developed and evaluated on a family of stochastic-volatility models of in-\ncreasing complexity",
+   "nguon": "http://arxiv.org/abs/2607.25199v2"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 198,
+   "nhan": "vao_mua",
+   "cau": "Long Signal - January 30, 2024 Trade Outcome : Date : January 30, 2024 Signal : Long📈 Market Context : Event :The approval of Bitcoin spot ETFs in January 2024 significantly boosted market sentiment",
+   "nguon": "https://www.tradingview.com/u/AlgoAlpha/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 119,
+   "nhan": "vao_mua",
+   "cau": "Tín hiệu BUY chỉ được chấp nhận khi các bộ lọc báo hiệu Up trend (tăng) và các điều kiện an toàn (ATR, Zone Cycle) ĐÚNG",
+   "nguon": "https://t.me/vutruea/1129064"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 67,
+   "nhan": "ra",
+   "cau": "Intraday trend-following opens and closes the trade in the same day",
+   "nguon": "https://concretumgroup.substack.com/p/where-to-trade-intraday-trends"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 279,
+   "nhan": "ra",
+   "cau": "The engine scans a curated set of 3 mega-cap stocks on\n5-minute candles during a data-optimized afternoon window, identifies\noversold entries using RSI and VWAP, and executes trades with\nlimit-bracket",
+   "nguon": "https://github.com/jmschmitz12/vwap-reversion-engine"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 103,
+   "nhan": "ra",
+   "cau": "Sell Trigger: The previous bar closes below the Lower Envelope band, and the current bar opens below it",
+   "nguon": "https://www.mql5.com/en/code/74818"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 76,
+   "nhan": "vao_mua",
+   "cau": "Buys when price breaks above the MA and Sells when price breaks below the MA",
+   "nguon": "https://www.mql5.com/en/code/45323"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 227,
+   "nhan": "vao_mua",
+   "cau": "Long Signal - May 17, 2024 Trade Outcome : Date : May 17, 2024 Signal : Long📈 Market Context : Event :As of May 2024, the crypto market showed resilience with new institutional interest and advancemen",
+   "nguon": "https://www.tradingview.com/u/AlgoAlpha/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 180,
+   "nhan": "vao_mua",
+   "cau": "but in iCHO Trend CCIDualOnMA Filter it is different - if, for example, buy is open, then when a sell signal is received, first buy will be closed and then sell will be opened, i.e",
+   "nguon": "https://www.mql5.com/en/code/37799"
+  },
+  {
+   "tt": "NOI_MOT_PHAN",
+   "bo_sot": 120,
+   "nhan": "ra",
+   "cau": "Trade management: Entry: 1.92129 (retest of supply / MA) SL: 1.92919 (above the retest high) TP1: 1.90802 — take 50% off, move stop to breakeven TP2: 1.89608 — 100% exit R:R: 2.11:1 Invalidation: A 2h",
+   "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 130,
+   "nhan": "vao_mua",
+   "cau": "Long story short: I took on a project I thought I would like, for a client I've got to be friends with, and which am competent for",
+   "nguon": "https://news.ycombinator.com/item?id=1699543"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 83,
+   "nhan": "ra",
+   "cau": "Exit Threshold : Number of standard deviations for trade exit (default: 0.0 = mean)",
+   "nguon": "https://github.com/alexmarthan/ETF-Pairs-Trading-Simulator"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "vao_mua",
+   "cau": "Entry : When the Spread (Blue) crosses the Upper Band (Green), the strategy detects a deviation",
+   "nguon": "https://github.com/eddiesung111/statistical-arbitrage-engine"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 85,
+   "nhan": "vao_mua",
+   "cau": "rsiOversold RSI threshold below which the market is considered oversold (buy trigger)",
+   "nguon": "https://www.mql5.com/en/code/60730"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 216,
+   "nhan": "vao_mua",
+   "cau": "Shows red arrows above the candles for bullish fractals (sell) when the CCI is above the configured threshold and green arrows below the candles for bearish fractals (buy) when the CCI is below the ne",
+   "nguon": "https://www.mql5.com/en/code/63299"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 106,
+   "nhan": "ra",
+   "cau": "Usage: Helps traders identify entry/exit points and monitor market trends based on historical price levels",
+   "nguon": "https://www.mql5.com/en/code/52221"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "vao_mua",
+   "cau": "If the probability of price rise exceeds 51%, EA can open a buy position, and if the probability of price fall exceeds 51%, EA can open a sell position",
+   "nguon": "https://www.mql5.com/en/code/49770"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 168,
+   "nhan": "vao_mua",
+   "cau": "The simplest version of a range breakout buys when price exceeds the highest high of the last n bars and sells when price breaks below the lowest low of the last n bars",
+   "nguon": "https://financial-hacker.com/implementing-robert-pardos-ranger-system/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 109,
+   "nhan": "ra",
+   "cau": "The\nexit-clock draws have mean 1.001 and variance 0.668, while the equilibrium residual\ndraws have mean 0.833",
+   "nguon": "http://arxiv.org/abs/2609.02525v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 73,
+   "nhan": "ra",
+   "cau": "Close on Trend Flip   – Exits trades instantly when candle colors reverse",
+   "nguon": "https://www.mql5.com/en/code/64833"
+  },
+  {
+   "tt": "NOI_MOT_PHAN",
+   "bo_sot": 119,
+   "nhan": "ra",
+   "cau": "Trade management: Entry: 0.69381 (rejection off demand) SL: 0.69150 (below the range floor) TP1: 0.69600 — take 50% off, move stop to breakeven TP2: 0.69761 — 100% exit at the range highs R:R: ~1.6:1 ",
+   "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 139,
+   "nhan": "ra",
+   "cau": "Wait for price to come back up to it, set our stop loss above the highs, set our take profit at the previous day's low we marked out before",
+   "nguon": "https://www.youtube.com/watch?v=fi7OxEzvhjw"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 120,
+   "nhan": "vao_mua",
+   "cau": "If we took a long position because price broke a downward trendline, our safety line is the upward trendline below price",
+   "nguon": "https://www.youtube.com/watch?v=PnIkSLm2yRk"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "vao_mua",
+   "cau": "Buy when the 50-day MA crosses above the 200-day MA",
+   "nguon": "https://github.com/AliAmeri1996/algo-backtest"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 76,
+   "nhan": "ra",
+   "cau": "Main signal: RSI crossed above 30, indicating an exit from the oversold zone",
+   "nguon": "https://www.tradingview.com/chart/MGC1!/4PMRPRQf-Gold-Reversal-Strategy-Long-Setup/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 195,
+   "nhan": "vao_mua",
+   "cau": "Forex Simple EA Overview: Current Price → XX pips above = Buy Stop | XX pips below = Sell Stop → One order triggers → Delete opposite order → Maximum 1 position → Trade closes → Start a new cycle",
+   "nguon": "https://www.mql5.com/en/job"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 218,
+   "nhan": "vao_mua",
+   "cau": "The most recent candles in the downtrend show either good volume but narrow price action on up days (classic effort but no result) or falling volume on sequential up days during the sell-off (lack of ",
+   "nguon": "https://www.quantumtrading.com/cryptocurrency-strength-indicator/bitcoin-crypto-market-analysis-how-volume-price-analysis-vpa-and-the-quantum-ccsi-work-together-in-real-time/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 79,
+   "nhan": "ra",
+   "cau": "Exit: Positions are unwound when the Z-score reverts near the mean (e.g., ±0.5)",
+   "nguon": "https://github.com/harshbatham7898-maker/Statistical-Arbitrage-Engine"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 133,
+   "nhan": "ra",
+   "cau": "5d is annualized\nfrom non-overlapping five-session returns;𝛽RUI is estimated at the same horizon against the Russell 1000 price index",
+   "nguon": "http://arxiv.org/abs/2608.30446v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 0,
+   "nhan": "vao_mua",
+   "cau": "The EA automatically determines whether the order should be a Limit or a Stop based on the position of your SETUP ENTRY line (or manual input) relative to the current market price:\nFor BUY Orders:\nBuy",
+   "nguon": "https://www.mql5.com/en/code/75690"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 67,
+   "nhan": "vao_mua",
+   "cau": "Long Signal : When current price is below the predicted lower bound",
+   "nguon": "https://github.com/rkomorow89/arima_trading_strategy"
+  },
+  {
+   "tt": "KHONG_NOI",
    "bo_sot": 123,
    "nhan": "vao_mua",
    "cau": "Overbought Pullback : A trading strategy that involves selling when the RSI is overbought and then buying during a pullback",
@@ -946,24 +950,24 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 103,
-   "nhan": "ra",
-   "cau": "Exit: Positions are closed when residuals revert to the mean or hit a stop-loss threshold ( $2\\sigma$ )",
-   "nguon": "https://github.com/clockkaya/kalman-filter"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "Sell Signal: Generated when the RSI crosses down from the overbought zone (default: above 70)",
-   "nguon": "https://www.mql5.com/en/code/63698"
+   "bo_sot": 107,
+   "nhan": "vao_mua",
+   "cau": "Entry Quality: ₹2,162 is the planned entry and sits exactly at the proximal edge of the ITF/MTF demand zone",
+   "nguon": "https://www.tradingview.com/chart/APLAPOLLO/QYXQEWZh-APL-Apollo-Tubes-Ltd/"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 130,
+   "bo_sot": 102,
+   "nhan": "ra",
+   "cau": "Sell : WPR is coming out of the overbought zone and the bar opening price is above the average BB line",
+   "nguon": "https://www.mql5.com/en/code/63916"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 151,
    "nhan": "vao_mua",
-   "cau": "For example, a simple strategy might involve buying when the price is above its 200-day moving average and selling when it's below",
-   "nguon": "https://www.tradingview.com/u/AlgoAlpha/"
+   "cau": "inputs 1 rsi is below value 30 when divergent   for buy/bullish divergence\ninput 2 divergence settings buys\ninput 3 lots and stop loss , target in pips",
+   "nguon": "https://www.mql5.com/en/code/35376"
   },
   {
    "tt": "KHONG_NOI",
@@ -974,6 +978,13 @@
   },
   {
    "tt": "KHONG_NOI",
+   "bo_sot": 93,
+   "nhan": "vao_mua",
+   "cau": "Generates buy signals when fast MA crosses above slow MA or price falls below volatility band",
+   "nguon": "https://www.mql5.com/en/code/57020"
+  },
+  {
+   "tt": "KHONG_NOI",
    "bo_sot": 96,
    "nhan": "vao_mua",
    "cau": "So if you are still bullish, how about buying a stock at an oversold (rsi) or at a support level",
@@ -981,10 +992,10 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 85,
+   "bo_sot": 68,
    "nhan": "ra",
-   "cau": "Exit : As the spread collapses back toward 0 (Mean Reversion), the position is closed",
-   "nguon": "https://github.com/eddiesung111/statistical-arbitrage-engine"
+   "cau": "Exit : live z-score returns to exit threshold using current VWAP/std",
+   "nguon": "https://github.com/einc58-netizen/vwap-mean-reversion-futures"
   },
   {
    "tt": "KHONG_NOI",
@@ -992,6 +1003,41 @@
    "nhan": "ra",
    "cau": "Trend Breakout Relocation: When the price crosses the moving average in the opposite direction, the stop-loss is simultaneously moved beyond the moving average to exit the position swiftly following a",
    "nguon": "https://www.mql5.com/en/code/74379"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 156,
+   "nhan": "ra",
+   "cau": "This Expert Advisor combines an ADX-based trend strength filter with an EMA pullback entry technique, using ATR for dynamic stop loss and take profit sizing",
+   "nguon": "https://www.mql5.com/en/code/73884"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 186,
+   "nhan": "ra",
+   "cau": "So if you want to enter a sell position over here as the price leaves and comes down away from the resistance zone, you can enter into a sell with your target very very close to the mean",
+   "nguon": "https://www.youtube.com/watch?v=llfWx_3EMEU&pp=ygUObWVhbiByZXZlcnNpb24%3D"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 175,
+   "nhan": "vao_mua",
+   "cau": "Long story short - I think there is room for manufacturer consent / acknowledgement / notice to be part of the solution and if it can be part of the solution then it should be",
+   "nguon": "https://news.ycombinator.com/item?id=37392676"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 94,
+   "nhan": "vao_mua",
+   "cau": "Entry-level technical and administrative work is being absorbed by automation at a steady clip",
+   "nguon": "https://www.newtraderu.com/2026/08/30/the-10-most-important-skills-middle-class-people-must-learn-in-the-next-10-years/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 90,
+   "nhan": "vao_mua",
+   "cau": "If you're buying above ORH, set your exit at ORL — or at the midpoint of the opening range",
+   "nguon": "https://www.buildalpha.com/opening-range-breakout/"
   },
   {
    "tt": "NOI_MOT_PHAN",
@@ -1003,93 +1049,44 @@
   {
    "tt": "NOI_DUOC",
    "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "For long positions the RSI must be above 70",
-   "nguon": "https://www.youtube.com/watch?v=5I2vtNovJcQ"
-  },
-  {
-   "tt": "NOI_MOT_PHAN",
-   "bo_sot": 40,
-   "nhan": "vao_mua",
-   "cau": "when close price brakes up the EMA build based on high prices given that RSI is above 55 and RSI is above its Moving average - we buy",
-   "nguon": "https://www.mql5.com/en/code/54067"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
    "nhan": "vao_ban",
-   "cau": "Short Entry : Price crosses below lower band",
+   "cau": "If the security's RSI is below 30 and the Bollinger Bands are moving downward and breaking below the lower band, open a short selling using the account's available margin balance",
+   "nguon": "https://medium.com/@DolphinDB_Inc/why-your-backtests-fail-in-margin-trading-securities-lending-and-how-to-fix-it-8f1c2d592baf"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 51,
+   "nhan": "ra",
+   "cau": "Exit : Opposite signal or market close (if enabled)",
    "nguon": "https://github.com/ksingla-GL/keltner-channels-strategy"
   },
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 90,
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "If you're buying above ORH, set your exit at ORL — or at the midpoint of the opening range",
-   "nguon": "https://www.buildalpha.com/opening-range-breakout/"
+   "cau": "Buy signals are triggered when %K crosses above %D below the 20 level",
+   "nguon": "https://www.mql5.com/en/code/58942"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 88,
+   "bo_sot": 64,
    "nhan": "vao_mua",
-   "cau": "Long Trades: Yesterday's closing price must be above a designated long MA (e.g., 50-day)",
-   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
+   "cau": "If you're overall bullish, you want to buy below the market open",
+   "nguon": "https://www.youtube.com/watch?v=j8Q3MIwGYOk"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 135,
-   "nhan": "ra",
-   "cau": "Smart Exit: The system monitors overbought/oversold conditions and can close positions early if the RSI reaches extreme opposite values",
-   "nguon": "https://www.mql5.com/en/code/68934"
+   "bo_sot": 213,
+   "nhan": "vao_mua",
+   "cau": "This repository contains a Python script that backtests a Relative Strength Index (RSI) based trading strategy on Tesla (TSLA) and compares its performance against a buy-and-hold strategy on S&P 500 F",
+   "nguon": "https://github.com/mosh888/VectorBT-Simlpe-RSI-Backtest"
   },
   {
    "tt": "NOI_DUOC",
    "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "Enters long when price closes more than 2σ below its 20-day rolling mean, exits when price reverts to the mean",
-   "nguon": "https://github.com/psalarc/quant-backtester"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 119,
-   "nhan": "vao_mua",
-   "cau": "Tín hiệu BUY chỉ được chấp nhận khi các bộ lọc báo hiệu Up trend (tăng) và các điều kiện an toàn (ATR, Zone Cycle) ĐÚNG",
-   "nguon": "https://t.me/vutruea/1129064"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 307,
-   "nhan": "vao_mua",
-   "cau": "So suppose that at this point for example we decide to submit the buy order and of course because we are setting a price lower than the current price it's going to be a limit buy order right so it won",
-   "nguon": "https://www.youtube.com/watch?v=5I2vtNovJcQ"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 171,
-   "nhan": "vao_ban",
-   "cau": "If the forecasted price for the day is above 1x forecasted volatility we create a long position in the stock and a short position in its pair in ratio of their snp weights",
-   "nguon": "https://github.com/AkashRinge/Long-Short-Statistical-Arbitrage"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 152,
-   "nhan": "vao_mua",
-   "cau": "If a stock is above the average price and\nthe p e ratio is lower than the average, we buy, we then check to see\nif the moving average is on the way down",
-   "nguon": "https://www.youtube.com/watch?v=zh008MNMOlo"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 130,
-   "nhan": "vao_mua",
-   "cau": "Long story short: I took on a project I thought I would like, for a client I've got to be friends with, and which am competent for",
-   "nguon": "https://news.ycombinator.com/item?id=1699543"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 225,
-   "nhan": "vao_mua",
-   "cau": "However, an elite Over-Extension Filter (Rubber Band Effect) acts as a safety harness, instantly blocking new entries if the price has stretched too far from the equilibrium baseline, preventing catas",
-   "nguon": "https://www.mql5.com/en/code/74840"
+   "nhan": "ra",
+   "cau": "When a stock's RSI is below 30, and the Bollinger Bands are moving downward and breaking below the lower band, use the account's available margin balance to execute short selling",
+   "nguon": "https://medium.com/@DolphinDB_Inc/why-your-backtests-fail-in-margin-trading-securities-lending-and-how-to-fix-it-8f1c2d592baf"
   },
   {
    "tt": "KHONG_NOI",
@@ -1097,6 +1094,20 @@
    "nhan": "vao_mua",
    "cau": "When the market conditions align with the moving average crossover strategy, it can open buy or sell orders",
    "nguon": "https://www.mql5.com/en/code/46314"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "vao_mua",
+   "cau": "// RSI Oversold (BUY)\ninput double InpRSIOverbought= 65.0",
+   "nguon": "https://t.me/mqlfree/2627"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 138,
+   "nhan": "vao_mua",
+   "cau": "A   Buy   signal occurs when the Chikou Span crosses the price from below, confirmed when both current price and Chikou are above the Kumo",
+   "nguon": "https://www.mql5.com/en/code/64492"
   },
   {
    "tt": "KHONG_NOI",
@@ -1109,43 +1120,8 @@
    "tt": "NOI_DUOC",
    "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "The script applies a 14-period RSI on TSLA, generating buy signals when RSI crosses above 50 and sell signals when RSI crosses below 50",
-   "nguon": "https://github.com/mosh888/VectorBT-Simlpe-RSI-Backtest"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 107,
-   "nhan": "vao_mua",
-   "cau": "Entry Quality: ₹2,162 is the planned entry and sits exactly at the proximal edge of the ITF/MTF demand zone",
-   "nguon": "https://www.tradingview.com/chart/APLAPOLLO/QYXQEWZh-APL-Apollo-Tubes-Ltd/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 235,
-   "nhan": "vao_mua",
-   "cau": "Financial options are contracts that grant their buyer the right, but not the obligation, to buy or sell a certain amount of the underlying asset, at a given price called the strike price, within a st",
-   "nguon": "https://quantdare.com/gamma-squeeze/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 73,
-   "nhan": "ra",
-   "cau": "* **Exit:** Close the position at 3:30 PM EST to avoid overnight gap risk",
-   "nguon": "https://github.com/omar-laps/spx-reality-check"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 58,
-   "nhan": "vao_mua",
-   "cau": "Long short-term\nmemory.Neural computation, 9(8): 1735–1780",
-   "nguon": "http://arxiv.org/abs/2607.28410v1"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "Long Trades: The %K line must be above the %D line",
-   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
+   "cau": "And basically you can buy when RSI goes below 30",
+   "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
   },
   {
    "tt": "NOI_DUOC",
@@ -1156,10 +1132,45 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 49,
+   "bo_sot": 235,
    "nhan": "vao_mua",
-   "cau": "Entry: 5 minutes before market close (3:55 PM ET)",
-   "nguon": "https://github.com/NadirAliOfficial/kaizen-intraday-semis-backtest"
+   "cau": "Financial options are contracts that grant their buyer the right, but not the obligation, to buy or sell a certain amount of the underlying asset, at a given price called the strike price, within a st",
+   "nguon": "https://quantdare.com/gamma-squeeze/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 159,
+   "nhan": "ra",
+   "cau": "Close an open trade:\nBy choosing to close a trade you will then be prompted to a confirmation window, where you can either confirm or cancel your Close request",
+   "nguon": "https://www.zulutrade.com/user-guide"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 58,
+   "nhan": "vao_mua",
+   "cau": "Long short-term\nmemory.Neural computation, 9(8): 1735–1780",
+   "nguon": "http://arxiv.org/abs/2607.28410v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 154,
+   "nhan": "vao_mua",
+   "cau": "b behind you: the exact mirror — sell failed rallies into value (Plan A), or buy the failure traverse when 2+ closes above VAH with volume appear (Plan B)",
+   "nguon": "https://www.tradingview.com/script/qiW43jql-Volume-Profile-P-b-D-Shapes-Day-Playbook/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 72,
+   "nhan": "vao_mua",
+   "cau": "// for buy if Bid above Open Price + Breakeven pips Vice Versa for sells",
+   "nguon": "https://www.mql5.com/en/code/35609"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 130,
+   "nhan": "vao_mua",
+   "cau": "For example, a simple strategy might involve buying when the price is above its 200-day moving average and selling when it's below",
+   "nguon": "https://www.tradingview.com/u/AlgoAlpha/"
   },
   {
    "tt": "KHONG_NOI",
@@ -1176,11 +1187,11 @@
    "nguon": "https://aligrithm.com/how-to-spot-a-fake-ml-trading-paper/"
   },
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 156,
-   "nhan": "ra",
-   "cau": "This Expert Advisor combines an ADX-based trend strength filter with an EMA pullback entry technique, using ATR for dynamic stop loss and take profit sizing",
-   "nguon": "https://www.mql5.com/en/code/73884"
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "vao_mua",
+   "cau": "It's buy when RSI 5 crosses above 30, which is the green the green vertical lines, and sell when you close below the chandelier 221, which is the red these are the red vertical lines",
+   "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
   },
   {
    "tt": "KHONG_NOI",
@@ -1190,25 +1201,25 @@
    "nguon": "https://www.tradingview.com/script/PaWMFCg6-Auto-Fibo-Multi-Channel-Reversal-Retest-by-WiselyWealth/"
   },
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 227,
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "Long Signal - May 17, 2024 Trade Outcome : Date : May 17, 2024 Signal : Long📈 Market Context : Event :As of May 2024, the crypto market showed resilience with new institutional interest and advancemen",
-   "nguon": "https://www.tradingview.com/u/AlgoAlpha/"
+   "cau": "Buy Signal: A bullish crossover occurs when %K rises above %D in the oversold zone",
+   "nguon": "https://www.mql5.com/en/code/71360"
   },
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 54,
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
    "nhan": "ra",
-   "cau": "Sell Arrow SL Box: Extends UPWARDS from the Sell Arrow",
-   "nguon": "https://www.mql5.com/en/code/75920"
+   "cau": "Sell: All three Stochastic K lines are above the MaxStochOverbought level, and the M15 price is above the upper Bollinger Band",
+   "nguon": "https://www.mql5.com/en/code/58746"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 305,
+   "bo_sot": 51,
    "nhan": "vao_mua",
-   "cau": "Given ORCL's known sustained downtrend from the earlier projects, a long-only breakout strategy is exposed to false breakouts here, a bounce triggers a new 20-day high, then price rolls over shortly a",
-   "nguon": "https://github.com/JamesRPowell/Donchain-Breakout"
+   "cau": "Long Entry: A long signal is generated when today's closing price exceeds the highest price of the previous n days (the \"upper channel\"), while yesterday's close is at or below that channel",
+   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
   },
   {
    "tt": "KHONG_NOI",
@@ -1219,17 +1230,17 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 102,
-   "nhan": "ra",
-   "cau": "Wait for the next candle to close back under the band with the QQE sell signal and volume confirmation",
-   "nguon": "https://www.youtube.com/watch?v=9hn68C9Q_G8"
+   "bo_sot": 62,
+   "nhan": "vao_mua",
+   "cau": "Long Trade : Set at the lower Keltner Band at the entry candle",
+   "nguon": "https://github.com/OtienoKeith/EMA-Keltner-Channel-Strategy-"
   },
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 112,
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "Entry signal: a Fair Value Gap gets body-closed through its far edge against the raid direction (iFVG inversion)",
-   "nguon": "https://github.com/Matswm86/tradingview-indicators"
+   "cau": "If the 4hour RSI is above 55, we only look for long positions",
+   "nguon": "https://www.youtube.com/watch?v=c9-SIpy3dEw&pp=ygUObWVhbiByZXZlcnNpb24%3D"
   },
   {
    "tt": "KHONG_NOI",
@@ -1247,45 +1258,45 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 189,
-   "nhan": "ra",
-   "cau": "It covers both systems: 20/55-day breakouts, the System 1 skip rule, N (Wilder ATR) for volatility-adjusted sizing, a four‑unit pyramid with N/2 adds, a unified 2N stop, and 10/20-day exits",
-   "nguon": "https://www.mql5.com/en/articles/expert_advisors"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
+   "bo_sot": 249,
    "nhan": "vao_mua",
-   "cau": "Entry : When the Spread (Blue) crosses the Upper Band (Green), the strategy detects a deviation",
-   "nguon": "https://github.com/eddiesung111/statistical-arbitrage-engine"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "The base case of the strategy is to go long the SPY ETF at the next open when the closing price crosses above the 200-day moving average and to exit the trade at the next open when the closing price f",
-   "nguon": "https://www.priceactionlab.com/Blog/2026/07/post-hoc-trading-claims/"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "Exit is when the two-day RSI crosses above 50 of the 10 trading days",
-   "nguon": "https://www.youtube.com/watch?v=NheeZ94_Ajk"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 67,
-   "nhan": "vao_mua",
-   "cau": "Long Signal : When current price is below the predicted lower bound",
-   "nguon": "https://github.com/rkomorow89/arima_trading_strategy"
+   "cau": "Then, the final piece of context was I saw the aggressive buying on the CVD ramp up, and as soon as I saw that aggressive buying ramp up, I took the market long here with just a 10-point stop under th",
+   "nguon": "https://www.youtube.com/watch?v=i8Wf-fknjIw&pp=ygUObWVhbiByZXZlcnNpb24%3D"
   },
   {
    "tt": "KHONG_NOI",
    "bo_sot": 103,
    "nhan": "ra",
-   "cau": "Close screen: automatically turn off the Android device screen to save power after starting the service",
-   "nguon": "https://github.com/barry-ran/QtScrcpy"
+   "cau": "Exit: Positions are closed when residuals revert to the mean or hit a stop-loss threshold ( $2\\sigma$ )",
+   "nguon": "https://github.com/clockkaya/kalman-filter"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 82,
+   "nhan": "vao_mua",
+   "cau": "Entry : after 9:45, when a 1-min close breaks above the OR high, buy at that close",
+   "nguon": "https://github.com/Ushey1/LearnTrading"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 195,
+   "nhan": "vao_mua",
+   "cau": "Pairs trading bets on mean reversion: if two stocks normally move together and\none strays too far from the other, you short the outperformer and go long the\nunderperformer, betting the gap closes",
+   "nguon": "https://github.com/masonharvey904-debug/Pairs_trading"
+  },
+  {
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
+   "nhan": "ra",
+   "cau": "when close price brakes down the EMA build based on low prices given that RSI is below 45 - expert sells",
+   "nguon": "https://www.mql5.com/en/code/54396"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 120,
+   "nhan": "vao_mua",
+   "cau": "If enabled, the EA will only enter buy trades when the price is above the EMA and sell trades when the price is below it",
+   "nguon": "https://www.mql5.com/en/code/62742"
   },
   {
    "tt": "KHONG_NOI",
@@ -1296,24 +1307,24 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 51,
-   "nhan": "vao_mua",
-   "cau": "Long Entry: A long signal is generated when today's closing price exceeds the highest price of the previous n days (the \"upper channel\"), while yesterday's close is at or below that channel",
-   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
+   "bo_sot": 103,
+   "nhan": "ra",
+   "cau": "Close screen: automatically turn off the Android device screen to save power after starting the service",
+   "nguon": "https://github.com/barry-ran/QtScrcpy"
   },
   {
    "tt": "NOI_DUOC",
    "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "Buy Signal: A bullish crossover occurs when %K rises above %D in the oversold zone",
-   "nguon": "https://www.mql5.com/en/code/71360"
+   "cau": "Crossing Mode closes BUY positions when %K crosses below %D while %D is above Overbought (80)",
+   "nguon": "https://www.mql5.com/en/code/74661"
   },
   {
-   "tt": "KHONG_NOI",
-   "bo_sot": 206,
+   "tt": "NOI_DUOC",
+   "bo_sot": 0,
    "nhan": "vao_mua",
-   "cau": "Pending Orders: When the spread is too high for immediate execution, the EA places pending buy limit or sell limit orders slightly below the current price for buy entries and slightly above for sell e",
-   "nguon": "https://www.mql5.com/en/code/58746"
+   "cau": "Skip to main content\nUK (u/Legitimate_Tailor858) - Reddit\nAdvertise on Reddit\nOpen chat\nCreate\nCreate post\nOpen inbox\nExpand user menu\nUK\nu/Legitimate_Tailor858\nOverview\nPosts\nComments\nback\nforward\nFe",
+   "nguon": "https://www.reddit.com/user/Legitimate_Tailor858/"
   },
   {
    "tt": "KHONG_NOI",
@@ -1338,59 +1349,59 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 175,
+   "bo_sot": 57,
    "nhan": "vao_mua",
-   "cau": "Long story short - I think there is room for manufacturer consent / acknowledgement / notice to be part of the solution and if it can be part of the solution then it should be",
-   "nguon": "https://news.ycombinator.com/item?id=37392676"
+   "cau": "Long Trades: RSI must be above a user-specified threshold",
+   "nguon": "https://github.com/jeevanba273/Donchian-Channel-Breakout-Strategy"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 64,
+   "nhan": "vao_mua",
+   "cau": "Buy : Placed below the origin swing low 0.0%  0.0%  Fibo anchor)",
+   "nguon": "https://www.mql5.com/en/code/76637"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 55,
+   "nhan": "ra",
+   "cau": "Exits with non-zero code when vulnerabilities are found",
+   "nguon": "https://github.com/usestrix/strix"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 65,
+   "nhan": "ra",
+   "cau": "If you're overall bearish, you want to sell above the market open",
+   "nguon": "https://www.youtube.com/watch?v=j8Q3MIwGYOk"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 94,
+   "nhan": "ra",
+   "cau": "CHO is used as a trend indicator and also, when the indicator crosses zero, to close positions",
+   "nguon": "https://www.mql5.com/en/code/37799"
   },
   {
    "tt": "NOI_MOT_PHAN",
-   "bo_sot": 52,
+   "bo_sot": 40,
+   "nhan": "vao_mua",
+   "cau": "when close price brakes up the EMA build based on high prices given that RSI is above 55 and RSI is above its Moving average - we buy",
+   "nguon": "https://www.mql5.com/en/code/54067"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 197,
+   "nhan": "vao_mua",
+   "cau": "Entry signal : price sweeps the liquidity (green/red line, \"liq ✕\" mark on the sweep candle), wicks into the zone without a body close inside it, and the first directional close prints the triangle",
+   "nguon": "https://github.com/Matswm86/tradingview-indicators"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 118,
    "nhan": "ra",
-   "cau": "For a sell, similarly: the RSI on both timeframes must be below the overbought level (80) and the current value must be less than the previous one, signaling a downward movement",
-   "nguon": "https://www.mql5.com/en/code/70465"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 136,
-   "nhan": "vao_mua",
-   "cau": "Trend Filter:    A 200-period moving average filters trades:  Only buys are allowed above the MA, and sells if the price is below the MA",
-   "nguon": "https://www.mql5.com/en/code/61998"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "ra",
-   "cau": "So number four, if your order is filled, you sell when the 2-day RSI crosses above 50 or after 10 trading days",
-   "nguon": "https://www.youtube.com/watch?v=NheeZ94_Ajk"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "Crossing Mode closes BUY positions when %K crosses below %D while %D is above Overbought (80)",
-   "nguon": "https://www.mql5.com/en/code/74661"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 155,
-   "nhan": "ra",
-   "cau": "So you can see here we moved above and so then it was possible to have an exit signal and the exit signal triggers when you close below the chandelier exit",
-   "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 173,
-   "nhan": "vao_mua",
-   "cau": "Intraday Dip Recovery — when SPY drops during the trading day, the price tends to recover toward the close, creating a systematic buying opportunity with zero overnight risk",
-   "nguon": "https://github.com/daniel100peer/stocks_master"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 120,
-   "nhan": "vao_mua",
-   "cau": "If we took a long position because price broke a downward trendline, our safety line is the upward trendline below price",
-   "nguon": "https://www.youtube.com/watch?v=PnIkSLm2yRk"
+   "cau": "If a 5 Minute candle closes above the High and then a 5 Minute candle closes back in the Range, there is a sell signal",
+   "nguon": "https://www.mql5.com/en/code/68082"
   },
   {
    "tt": "KHONG_NOI",
@@ -1408,17 +1419,17 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 94,
+   "bo_sot": 90,
    "nhan": "ra",
-   "cau": "CHO is used as a trend indicator and also, when the indicator crosses zero, to close positions",
-   "nguon": "https://www.mql5.com/en/code/37799"
+   "cau": "rsiOverbought RSI threshold above which the market is considered overbought (sell trigger)",
+   "nguon": "https://www.mql5.com/en/code/60730"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 93,
+   "bo_sot": 140,
    "nhan": "vao_mua",
-   "cau": "Generates buy signals when fast MA crosses above slow MA or price falls below volatility band",
-   "nguon": "https://www.mql5.com/en/code/57020"
+   "cau": "If it is uptrend and you get a blue arrow — go long, if you get a red arrow — do nothing (just close your long position if you had one open)",
+   "nguon": "https://www.mql5.com/en/code/55365"
   },
   {
    "tt": "KHONG_NOI",
@@ -1426,400 +1437,22 @@
    "nhan": "ra",
    "cau": "Overall, a RSI 14 trading strategy can be a useful tool for identifying potential entry and exit points in the market, helping traders capitalize on short-term price movements while managing risk",
    "nguon": "https://www.quantifiedstrategies.com/rsi-trading-strategy/"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "buy when the 20-day MA crosses above the 50-day MA",
-   "nguon": "https://github.com/adiv-1/momentum-clustered-algorithmic-trading-strategy"
-  },
-  {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
-   "nhan": "vao_mua",
-   "cau": "And basically you can buy when RSI goes below 30",
-   "nguon": "https://www.youtube.com/watch?v=7ZOAur8Rr2U"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 103,
-   "nhan": "ra",
-   "cau": "Sell Trigger: The previous bar closes below the Lower Envelope band, and the current bar opens below it",
-   "nguon": "https://www.mql5.com/en/code/74818"
   }
  ],
  "chi_tiet_B": [
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 246,
+   "bo_sot": 157,
    "nhan": null,
-   "cau": "When single trade volumes are themselves strongly fluctuating, the statistics of volume imbalance can be very\ndifferent from those of sign imbalance, a feature we actually observe on data and reproduc",
-   "nguon": "http://arxiv.org/abs/2506.07711v6"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 81,
-   "nhan": null,
-   "cau": "So, when I'm looking at a chart here, you'll see we started off with a line chart",
-   "nguon": "https://www.youtube.com/watch?v=xHU5MHuUSKI&t=60s&pp=ygUSdHJhZGluZyBzdHJhdGVnaWVz"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 97,
-   "nhan": null,
-   "cau": "Rakhlin, “The non-linear market impact of large trades: evidence from buy-side order flow”, Quant",
-   "nguon": "http://arxiv.org/abs/2608.00988v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 67,
-   "nhan": null,
-   "cau": "You'll literally go in here and\nput long position or short position",
-   "nguon": "https://www.youtube.com/watch?v=r2j0CmRWhQI"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 67,
-   "nhan": null,
-   "cau": "If that's the case, see me after class, and I'll pay you $150,000.”",
-   "nguon": "https://www.newtraderu.com/2026/08/31/how-to-speak-intelligently-according-to-warren-buffett/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 84,
-   "nhan": null,
-   "cau": "Long\nby RLinda\nAug 29\n12\n2\n0\nSEPTEMBER GOLD OUTLOOK — CORRECTION BEFORE THE NEXT LEG",
-   "nguon": "https://www.tradingview.com/ideas/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 163,
-   "nhan": null,
-   "cau": "But when it comes to spending money, privately I almost never opt for the enterprise grad hardware that does come with warranties like long term guaranteed support",
-   "nguon": "https://news.ycombinator.com/item?id=37392676"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 115,
-   "nhan": null,
-   "cau": "You don't have to, but if you punch in you zip on the site and leave your email we'll let you know when we're there",
-   "nguon": "https://news.ycombinator.com/item?id=22368112"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 92,
-   "nhan": null,
-   "cau": "🔻 Key Structure BTC swept the previous highs around 81,000–81,500, taking buy-side liquidity",
-   "nguon": "https://www.tradingview.com/ideas/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 210,
-   "nhan": null,
-   "cau": "We're making a low time frame downtrend and we sweep out this hourly low and then from there we see a break of structure and then from there we see boom a fair value gap get filled and then boom we se",
-   "nguon": "https://www.youtube.com/watch?v=N7SM8a7Dc9s"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 170,
-   "nhan": null,
-   "cau": "We know that wherever we enter the trade, our first target would be the previous high because this is where liquidity usually rests and where the price is likely to reach",
+   "cau": "For example, if an inversion FVG occurs after touching a higher time frame key level or a higher time frame trend line, it has a higher chance of working out",
    "nguon": "https://www.youtube.com/watch?v=vGyREXEwLIk"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 65,
-   "nhan": null,
-   "cau": "At 41% Premium at Risk for ~0.70 delta, I prefer to buy the stock",
-   "nguon": "https://www.reddit.com/user/Legitimate_Tailor858/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 92,
-   "nhan": null,
-   "cau": "This liquidity sweep above the key structure of the day signals a possible upcoming reversal",
-   "nguon": "https://www.youtube.com/watch?v=vGyREXEwLIk"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 239,
-   "nhan": null,
-   "cau": "The algorithm projects a classic liquidity sweep, rejection, and markdown sequence: \n• An initial impulse push driving price up to test the upper boundary of the Wedge pattern near $2,540.00 to trap l",
-   "nguon": "https://www.tradingview.com/chart/ETHUSDT/uFYS90C8-ETH-USDT-THE-2-440-WEDGE-REJECTION-FLUSH/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 201,
-   "nhan": null,
-   "cau": "Indicator Description: PTB.mq5 \nOverview: The PTB.mq5 indicator for MetaTrader 5 calculates short-term and long-term high and low prices, along with Fibonacci retracement levels based on these extreme",
-   "nguon": "https://www.mql5.com/en/code/52221"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 160,
-   "nhan": null,
-   "cau": "GitHub - Kryptera-K/MMM-CCI-Channel-Break-Momentum-Strategy: Woodie-CCI and Keltner Channel Trading Strategy: A Technical Analysis Backtest on 3M (MMM) · GitHub",
-   "nguon": "https://github.com/Kryptera-K/MMM-CCI-Channel-Break-Momentum-Strategy"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 85,
-   "nhan": null,
-   "cau": "However, if they are not doing this already voluntarily, they'll need to be persuaded",
-   "nguon": "https://news.ycombinator.com/item?id=37392676"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 58,
-   "nhan": null,
-   "cau": "Look for a ▲ below price when sell-side liquidity is swept",
-   "nguon": "https://www.tradingview.com/script/cAkHfnXI-Smart-Money-Liquidation-Exploits-AlgoAlpha/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 129,
-   "nhan": null,
-   "cau": "First, we transform correlations into distancesd ij =\np\n0.5(1−ρ ij)∈[0,1] so that highly correlated\ncurrencies are close together",
-   "nguon": "http://arxiv.org/abs/2607.26405v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 0,
-   "nhan": null,
-   "cau": "🟢 Bullish SFP — price sweeps below a previous swing low with a wick but closes above it",
-   "nguon": "https://www.tradingview.com/script/eB3dChAT-SkuldX-SFP-Swing-Failure-Pattern/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 119,
-   "nhan": null,
-   "cau": "if 73.214 fails to hold as support, \nthe probability of a move toward the next major support around 59.630 may increase",
-   "nguon": "https://www.tradingview.com/chart/HYPEUSDT.P/U9k4nNHQ-HYPE-CAN-THE-PRICE-HOLD-ABOVE-73-214/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 153,
-   "nhan": null,
-   "cau": "The pair passes the saved cointegration and ADF thresholds, but its 0.4216 return correlation is below the required 0.55 , so eligible is stored as false",
-   "nguon": "https://github.com/wajedulhaque2/Pairs-Trading"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 114,
-   "nhan": null,
-   "cau": "Then you'll be able to just summary entry with IRS 8949 box A/D, entering like literally two lines, and you're set",
-   "nguon": "https://news.ycombinator.com/item?id=42377018"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 189,
-   "nhan": null,
-   "cau": "Sharpe\ncalendar\nmorning\nSPX index\nVIX\nmacro\nvol surface\nRV/IV\nhigher moments\nVIX curvature\ntrend\nposition greeks\nper-strategy stats\nentry liquidity\nintra-strategy\nregime sensitivities FMU\n2",
-   "nguon": "http://arxiv.org/abs/2608.24786v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 201,
-   "nhan": null,
-   "cau": "post2postbreaks\n•\n9h ago\nauriisacrafames\n•\n55m ago\nIf you trade non delta-neutral strategies, you are betting on the market direction, and with delta of 0.3, around 30% of your returns are driven by i",
-   "nguon": "https://www.reddit.com/r/options/comments/1w28sdx/trading_in_low_iv_environment/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 172,
-   "nhan": null,
-   "cau": "Posts that solely aim to bring attention to your blog, YouTube channel, social media, or any other personal site are not allowed, even if the content is free or educational",
-   "nguon": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Education%22"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 141,
-   "nhan": null,
-   "cau": "While correlation shows short-term co-movements, cointegration captures long-term ties, and independence means no influence between variables",
-   "nguon": "https://blog.quantinsti.com/independent-events/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 282,
-   "nhan": null,
-   "cau": "The cross-asset relationship between an estimate of effective tick size (scaled by the\naverage price) and an upper-quantile summary of imbalance SHAP values displays a\npositive association: assets wit",
-   "nguon": "http://arxiv.org/abs/2602.00776v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 302,
-   "nhan": null,
-   "cau": "A useful alert system needs to score uncertainty, not just shout “volume spike.” \nPotential signal groups:\nliquidity movement\nholder concentration\ndeployer history\nsocial velocity\nDEX migration\ntransa",
-   "nguon": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Business%22"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 63,
-   "nhan": null,
-   "cau": "A pullback or consolidation is the superior new-entry condition",
-   "nguon": "https://tradingmarkets.com/forex/forex-trading-lessons/power-law-o-s-trading-report-2026-07-23-wordpress-html-1597835"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 177,
-   "nhan": null,
-   "cau": "CCTP Resilience Bridge: Integrated with Circle's Cross-Chain Transfer Protocol using the AttestationResilienceManager pattern for zero-downtime cross-chain liquidity rebalancing",
-   "nguon": "https://github.com/forumevi/serai"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 124,
-   "nhan": null,
-   "cau": "So, I think that they're great tools, but I think if you rely too much on that stuff and not context, it'll end up being bad",
-   "nguon": "https://www.youtube.com/watch?v=1MwNxmCzpmc&pp=ygUObWVhbiByZXZlcnNpb24%3D"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 211,
-   "nhan": null,
-   "cau": "Cross-impact and coupled microstructure\nThat order flow in one asset moves prices of others is\ndocumented in [8] and modeled in [7], who attribute observed\ncross-impact largely to common components in",
-   "nguon": "http://arxiv.org/abs/2608.22768v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 315,
-   "nhan": null,
-   "cau": "(a) ROSE - Imbal-\nance\n(b) ROSE -\nSpread\n(c) ROSE - Vwap\nBuy to Mid\n(d) ROSE - Net\nOrder Flow\n(e) ROSE -\nVolatility\n(f) ROSE - Con-\ncentration of Vol-\nume\n(g) ROSE - N\nTrades\n(h) ROSE - Trade\nPrice Va",
-   "nguon": "http://arxiv.org/abs/2602.00776v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 134,
-   "nhan": null,
-   "cau": "This is the highest-probability ORB setup because it confirms the breakout level as new support before entering via limit order at ORH",
-   "nguon": "https://www.buildalpha.com/opening-range-breakout/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 257,
-   "nhan": null,
-   "cau": "Volatility-\nsurface features contribute three (the 252-day percentile of 1DTE ATMF IV, the intraday range\nof 10DTE ATMF IV, and the IV-to-spot-change ratio at 1DTE close), which supply same-session\nco",
-   "nguon": "http://arxiv.org/abs/2608.24786v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 111,
-   "nhan": null,
-   "cau": "Wave (2): A shallow retracement holding above 68.00–69.17 USD (Fib 0.236), signaling dwindling selling pressure",
-   "nguon": "https://www.tradingview.com/u/ALT_analyst/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 121,
-   "nhan": null,
-   "cau": "So, the quantity vector vk is:\nvk =\n( 0\n100\n2\n)\n(16)\nIf we only care about ﬁrst-level order ﬂow imbalance, we get OFI = 0",
-   "nguon": "http://arxiv.org/abs/2012.12555v1"
   },
   {
    "tt": "KHONG_NOI",
    "bo_sot": 162,
    "nhan": null,
-   "cau": "The signal\nis qualitatively different from imbalance and volatility: it rises gradually from the onset of\nthe build-up episode rather than spiking at stress onset",
-   "nguon": "http://arxiv.org/abs/2604.20949v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 173,
-   "nhan": null,
-   "cau": "If the cohorts share calendar\ndates the ratios are correlated and the variance carries the additional term−2Rk Cov(ˆDk, ˆDK),\nwhich the contemporaneous design makes non-zero",
-   "nguon": "http://arxiv.org/abs/2608.08405v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 66,
-   "nhan": null,
-   "cau": "Tell us which DAWs you use and we'll notify you when support lands",
-   "nguon": "https://vixsound.com"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 110,
-   "nhan": null,
-   "cau": "If the losses were highly correlated then bundling into a portfolio\nwould not tend to improve the overall risk",
-   "nguon": "http://tr8dr.github.io//NewCryptoStrategy/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 292,
-   "nhan": null,
-   "cau": "Why it matters in trading: If two independent variables are perfectly (or highly) correlated (e.g., using both a 5-day moving average and a 7-day moving average of the same price series), the model ge",
-   "nguon": "https://blog.quantinsti.com/linear-regression/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 224,
-   "nhan": null,
-   "cau": "a break would shift momentum bearish\nThe final call is yours — the market is in a digestion phase after a strong August rally, with institutional inflows providing support but macro headwinds (rates, ",
-   "nguon": "https://x.com/Rina_BingX/status/2094714705147543657"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 137,
-   "nhan": null,
-   "cau": "If a significant portion of market participants were to deploy similar imbalance-\nbased models, it could create a dangerous feedback loop",
-   "nguon": "http://arxiv.org/abs/2602.00776v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 120,
-   "nhan": null,
-   "cau": "And then we formed that bearish SMT at the swing high and then this trade eventually sends you back to break even, right",
-   "nguon": "https://www.youtube.com/watch?v=9O6JU5_xTd8"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 109,
-   "nhan": null,
-   "cau": "I don't chase, but if you're late to the move or you wake up, [laughter] I'll teach you how to do it properly",
-   "nguon": "https://www.youtube.com/watch?v=Q2iXjTmCkZQ&pp=ygUObWVhbiByZXZlcnNpb24%3D"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 150,
-   "nhan": null,
-   "cau": "For\nboth metrics, this long-range correlation is entirely destroyed by shuffling (𝐻shuf ≈ 0.51) but preserved by the\nIAAFT surrogates (𝐻IAAFT ≈𝐻 orig)",
-   "nguon": "http://arxiv.org/abs/2608.10852v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 82,
-   "nhan": null,
-   "cau": "PostgreSQL support is optional and imports Psycopg only when that adapter is used:",
-   "nguon": "https://github.com/fruwehq/determa-state-python"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 233,
-   "nhan": null,
-   "cau": "Following standard market practice, out-of-\nthe-money put implied volatilities are used for strikes below the\nat-the-money level, whereas out-of-the-money call implied volatili-\nties are used for stri",
-   "nguon": "http://arxiv.org/abs/2608.00616v2"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 181,
-   "nhan": null,
-   "cau": "The reviewed sys-\ntems show a clear imbalance: signal discovery is nearly universal,\nwhile complete integration with portfolio construction, execution,\nand risk control remains rare",
-   "nguon": "http://arxiv.org/abs/2608.31041v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 199,
-   "nhan": null,
-   "cau": "Unless you really think you have intraday alpha in the name (and in this case they most certainly do not) then you'll camp out on the near side or down the book and cross much less than half the time",
-   "nguon": "https://news.ycombinator.com/item?id=42377018"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 192,
-   "nhan": null,
-   "cau": "In Low Liquidity, sparse learned execution still improves on the tuned classical\nband under a strict risk budget, though wider classical bands close most of that gap once the budget is\nrelaxed",
-   "nguon": "http://arxiv.org/abs/2607.25258v1"
+   "cau": "As long as a majority of CPU power is controlled by nodes that are not cooperating to attack the network, they'll generate the longest chain and outpace attackers",
+   "nguon": "https://github.com/uvhw/Bitcoin-Foundation"
   },
   {
    "tt": "KHONG_NOI",
@@ -1829,67 +1462,18 @@
    "nguon": "http://arxiv.org/abs/2608.22768v1"
   },
   {
-   "tt": "NOI_DUOC",
-   "bo_sot": 0,
+   "tt": "KHONG_NOI",
+   "bo_sot": 277,
    "nhan": null,
-   "cau": "Bearish Entry (Red): Enter when the candle turns Red, price is below the 200 EMA, and ideally rejecting a Supply (Orange) line",
-   "nguon": "https://www.mql5.com/en/code/72801"
+   "cau": "structure-break and order-block concepts are pure price action with no symbol-specific assumptions, though — like any fractal-pivot method — InpSwingLookback trades off level significance against dete",
+   "nguon": "https://www.mql5.com/en/code/76878"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 229,
+   "bo_sot": 155,
    "nhan": null,
-   "cau": "It uses Smart Money Concepts (FVG + Order Blocks) for signal generation, a Random Forest AI model for high-probability trade filtering, and a dual-mode risk management system for account compounding a",
-   "nguon": "https://github.com/Antz1886/Flipper-Bot"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 70,
-   "nhan": null,
-   "cau": "Percentage Retracement: A swing is formed if the market retraces by X%",
-   "nguon": "https://www.crackingmarkets.com/do-breakouts-of-strong-swings-work-i-tested-40-futures-markets-and-the-data-is-clear/"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 226,
-   "nhan": null,
-   "cau": "Built as a Claude Code skill : drop it in ~/.claude/skills/ and Claude will\nuse it automatically when you say things like \"pull up BANKNIFTY on the hourly\nand mark the supply zones.\" It also works as ",
-   "nguon": "https://github.com/Sandeepdezno/tradingview-control"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 158,
-   "nhan": null,
-   "cau": "The gaps\nenter with the negative signs Davis–Kahan predicts (t =−3.14for the upper gap,t =−2.15\nfor the lower), confirming that the mechanical channel is real",
-   "nguon": "http://arxiv.org/abs/2608.20020v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 265,
-   "nhan": null,
-   "cau": "Cointegration Validation (Engle-Granger):\nRather than relying on simple price correlation, the engine performs an Engle-Granger two-step test to mathematically prove that the price spread between two ",
-   "nguon": "https://github.com/harshbatham7898-maker/Statistical-Arbitrage-Engine"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 210,
-   "nhan": null,
-   "cau": "This pattern holds across the full test set: the mean trade count for all three\nneural configurations, about 20.44, is statistically indistinguishable from BS delta's 20.40, and far above\nWhalley-Wilm",
-   "nguon": "http://arxiv.org/abs/2608.29025v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 246,
-   "nhan": null,
-   "cau": "Multifractal cross-correlation analysis (MFCCA) is\nparticularly useful for this purpose because it generalizes\ndetrended cross-correlation analysis to arbitrary fluctua-\ntion orders while preserving t",
-   "nguon": "http://arxiv.org/abs/2608.04987v1"
-  },
-  {
-   "tt": "KHONG_NOI",
-   "bo_sot": 70,
-   "nhan": null,
-   "cau": "30\n5.7.2 Layer 3: crowding as observed cross-institutional correlation",
-   "nguon": "http://arxiv.org/abs/2608.02311v2"
+   "cau": "Kanazawa, “Inferring Microscopic Financial Information from the Long Memory in Market-Order Flow: A Quantitative\nTest of the Lillo-Mike-Farmer Model”, Phys",
+   "nguon": "http://arxiv.org/abs/2608.00988v1"
   },
   {
    "tt": "KHONG_NOI",
@@ -1900,87 +1484,206 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 145,
+   "bo_sot": 86,
    "nhan": null,
-   "cau": "EnablePushAlerts   (default = false) — if   true , an email message will be sent when price closes above or below the support or resistance level",
-   "nguon": "https://www.mql5.com/en/code/55514"
+   "cau": "When do you think we'll have good, reliable 5 finger hands that are ~reasonably priced",
+   "nguon": "https://news.ycombinator.com/item?id=44456904"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 217,
+   "bo_sot": 82,
    "nhan": null,
-   "cau": "The uncomfortable lesson is that our four-angle diagnostics battery (costs, hyperparameter sweeps, placebo graphs, regime breakdowns) never stood a chance, because every variant shared the same asynch",
-   "nguon": "https://www.quantitativo.com/p/network-momentum"
+   "cau": "I'm looking for a fiveminut break of structure or a 5minute inverse fair value gap",
+   "nguon": "https://www.youtube.com/watch?v=8PYgFVB0GHE"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 156,
+   "bo_sot": 139,
    "nhan": null,
-   "cau": "Extension Clusters When multiple Fibonacci extensions from different swings align at the same price level, that's a high-probability target or reversal zone",
-   "nguon": "https://www.tradingview.com/u/officialjackofalltrades/"
+   "cau": "Liquidity and volatility therefore provide different types of information and should be evaluated separately when assessing market behavior",
+   "nguon": "https://github.com/SuraAnnuka/stock-market-big-data-analytics"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 79,
+   "bo_sot": 185,
    "nhan": null,
-   "cau": "Long-requested features like option groups, portal support, animation, and more",
-   "nguon": "https://github.com/JedWatson/react-select"
+   "cau": "If an Outside Bar is detected, the EA extracts 10 Data Features (Body size, Relative Range, ATR, Volume change, Day of the week, Hour, etc.) and sends them to the larry_model.onnx model",
+   "nguon": "https://www.mql5.com/en/code/68424"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 232,
+   "bo_sot": 120,
    "nhan": null,
-   "cau": "Whether you are a novice looking for a clear trend-following system or an experienced trader refining your entry points, Double Moving Averages offers a powerful combination of simplicity and depth to",
-   "nguon": "https://www.mql5.com/en/code/59976"
+   "cau": "A pairs trade relies on the fact that - if the correlation between two stocks is atleast 95% they follow a similar trend",
+   "nguon": "https://github.com/kanupriyaanand/Pairs_Trading_Quant"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 142,
+   "bo_sot": 84,
    "nhan": null,
-   "cau": "Both the closed-loop leg and\nthe shadow driving series are calibrated to a matched herd-side directional-bias amplitude,\nmean|p buy−0.5|≈0.269",
-   "nguon": "http://arxiv.org/abs/2607.08907v1"
+   "cau": "More items ALB Strategy — Opening Range Breakout + FVG Expert Advisor (MetaTrader 5)",
+   "nguon": "https://github.com/PazSheimy/alb-orb-fvg-mt5"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 59,
+   "bo_sot": 70,
    "nhan": null,
-   "cau": "I'll keep that in mind if I ever try to pick it up again :)",
-   "nguon": "https://news.ycombinator.com/item?id=22918980"
+   "cau": "Submit a support ticket if (learners are) blocked due to other reasons",
+   "nguon": "https://github.com/udacity/machine-learning"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 128,
+   "nhan": null,
+   "cau": "📌 Bias: BULLISH — As long as price remains above the support area, buyers may continue pushing XAU/USD toward the upside targets",
+   "nguon": "https://www.tradingview.com/chart/XAUUSD/zT0SlFcR-XAU-USD-Bullish-Breakout-Setup-4539-Target-in-Focus/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 301,
+   "nhan": null,
+   "cau": "Auto ZigZag Fibonacci Golden Zone Indicator For MT5\nThe Auto ZigZag Fibonacci Golden Zone indicator automatically detects the latest swing high and low, draws key Fibonacci retracement levels (50%, 61",
+   "nguon": "https://www.mql5.com/en/code"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 243,
+   "nhan": null,
+   "cau": "GitHub - shashikumarigamage96525-ops/smc-trading-bot: Real-time Binance crypto analysis dashboard featuring Smart Money Concepts (SMC), liquidity tracking, Order Block/FVG detection, and automated tra",
+   "nguon": "https://github.com/shashikumarigamage96525-ops/smc-trading-bot"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 119,
+   "nhan": null,
+   "cau": "if 73.214 fails to hold as support, \nthe probability of a move toward the next major support around 59.630 may increase",
+   "nguon": "https://www.tradingview.com/chart/HYPEUSDT.P/U9k4nNHQ-HYPE-CAN-THE-PRICE-HOLD-ABOVE-73-214/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 226,
+   "nhan": null,
+   "cau": "Built as a Claude Code skill : drop it in ~/.claude/skills/ and Claude will\nuse it automatically when you say things like \"pull up BANKNIFTY on the hourly\nand mark the supply zones.\" It also works as ",
+   "nguon": "https://github.com/Sandeepdezno/tradingview-control"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 104,
+   "nhan": null,
+   "cau": "If the crossover candle already satisfies IsMomentumCandle(), the EA can advance directly to retracement",
+   "nguon": "https://www.mql5.com/en/articles/23620"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 189,
+   "nhan": null,
+   "cau": "Session-Based Liquidity Breakout\nStrategia basata sulla liquidità di apertura della sessione e sui ritracciamenti di Fibonacci (spesso utilizzata nel trading sul Forex o sulle criptovalute)",
+   "nguon": "https://www.mql5.com/it/code/mt5/indicators"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 276,
+   "nhan": null,
+   "cau": "10.9 Capital cost and pricing\nExpected contribution can be written as\nCM =F protocol + (rborrow−r capital)D∆t+R partner−F venue−E[ℓ]−C ops−C reserve.(88)\nA positive borrow spread does not imply a viab",
+   "nguon": "http://arxiv.org/abs/2608.00631v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 222,
+   "nhan": null,
+   "cau": "We introduce an MQL5 diagnostic EA that records entry and exit slippage, asymmetry, observed spread, requotes, and per-leg latency, using a precise probe mode and an approximate passive mode, and writ",
+   "nguon": "https://www.mql5.com/en/articles/statistics#"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 215,
+   "nhan": null,
+   "cau": "It installs Node, pnpm, and Docker if missing, registers your Anthropic credential with OneCLI, builds the agent container, and pairs your first channel (Slack, Telegram, Discord, WhatsApp, iMessage, ",
+   "nguon": "https://github.com/nanocoai/nanoclaw"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 196,
+   "nhan": null,
+   "cau": "If price can pull\nback to my supply zone, I will take sales because I'll be confident in an\nentry like that and my stop loss will obviously be outside of the zone and my\nTP will be at a one to one",
+   "nguon": "https://www.youtube.com/watch?v=r2j0CmRWhQI"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 219,
+   "nhan": null,
+   "cau": "Since the specific \"IoT device for the USA market\" set of buyers is actually a small percentage of sales for most of the parts they sell, they really don't care to support their product from the IoT s",
+   "nguon": "https://news.ycombinator.com/item?id=37392676"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 176,
+   "nhan": null,
+   "cau": "It excludes cross-margin, portfolio offsets, multi-outcome\nmarkets, endogenous liquidity equilibrium, public permissionless lending, and production claims\nabout any named venue",
+   "nguon": "http://arxiv.org/abs/2608.00631v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 164,
+   "nhan": null,
+   "cau": "Long\nby Quantum-Algo\nAug 25\n7\nNVDA — Bid from Support [Quantum Algo]\nNVDA rallied from the 190 base up to 228, then rolled over and sold back down through the range",
+   "nguon": "https://www.tradingview.com/u/Quantum-Algo/"
   },
   {
    "tt": "KHONG_NOI",
    "bo_sot": 175,
    "nhan": null,
-   "cau": "Some people assume that when the price \"comes close\" to a channel line, that this is the entry signal, but in reality this is just a guess and not an informed trading decision",
-   "nguon": "https://www.mql5.com/en/code/73055"
+   "cau": "Combines Market Structure Analysis (swing highs/lows, Break of Structure), Fair Value Gaps (FVG), and multi-timeframe confluence (H1, M15, M5, M1) for high-probability entries",
+   "nguon": "https://github.com/Ndubueze4/Strategized-Trade-Engine"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 247,
+   "bo_sot": 122,
    "nhan": null,
-   "cau": "Education\nby AlgoAlpha\nFeb 16, 2024\n5\n9\nMastering Trading with Support and Resistance Levels\nTrading with support and resistance levels is a fundamental strategy that offers insights into market psych",
-   "nguon": "https://www.tradingview.com/u/AlgoAlpha/"
+   "cau": "Candlestick Engulfing: A powerful price action pattern that identifies potential trend reversals on the close of a new bar",
+   "nguon": "https://www.mql5.com/en/code/63569"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 177,
+   "bo_sot": 168,
    "nhan": null,
-   "cau": "breakout Bullish Patterns Chart Patterns Technical Indicators reversal support trend USDJPY Wave Analysis yen TheSignalyst Follow Following 📊I help you turn charts into a career",
-   "nguon": "https://www.tradingview.com/chart/USDJPY/24MttEKa-USDJPY-Range-Support-Back-in-Focus/"
+   "cau": "Now if I were to go in depth of what draws on liquidity are, how to identify them, and then go over every single confluence, like this video would just be absurdly long",
+   "nguon": "https://www.youtube.com/watch?v=N7SM8a7Dc9s"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 117,
+   "bo_sot": 170,
    "nhan": null,
-   "cau": "Proposition 3.3 shows that, under the long-only, box-support, andℓ 1 struc-\nture, it admits an exact finite reduction",
-   "nguon": "http://arxiv.org/abs/2608.07032v1"
+   "cau": "If a trader contributes\ncollateralC and receives leverageL, the protocol must supply(L− 1)C in stablecoin and use\nthe combined amount to acquire recognized event exposure",
+   "nguon": "http://arxiv.org/abs/2608.00647v1"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 105,
+   "bo_sot": 154,
    "nhan": null,
-   "cau": "The volume vector (1) reflects supply and demand in the market and can indicate short-term price\npressure",
-   "nguon": "http://arxiv.org/abs/2608.18195v1"
+   "cau": "If you are compiling the library yourself, you'll want to copy your built files from \\plugin\\build\\outputs\\aar to \\addons\\PraxisMapperGPSPlugin afterwards",
+   "nguon": "https://github.com/PraxisMapper/GodotGPSPlugin"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 153,
+   "nhan": null,
+   "cau": "Exit number two is going to be liquidity-based, meaning we're going to just target a previous daily high or low, which is our next pool of resting orders",
+   "nguon": "https://www.youtube.com/watch?v=tFKOaF4HMcg&pp=ygUSdHJhZGluZyBzdHJhdGVnaWVz0gcJCRMMAYcqIYzv"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 126,
+   "nhan": null,
+   "cau": "If you've seen any of my other videos, you'll know that I don't trust a strategy tested against only the history that happened",
+   "nguon": "https://youtu.be/hDZZFfpeZB4?is=wPzD25pIAHN6aZGZ"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 109,
+   "nhan": null,
+   "cau": "If you enjoyed the video, drop a like, subscribe for more content like this, and I'll see you in the next one",
+   "nguon": "https://www.youtube.com/watch?v=7FfWJeDjlEE"
   },
   {
    "tt": "KHONG_NOI",
@@ -1991,28 +1694,315 @@
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 142,
+   "bo_sot": 99,
    "nhan": null,
-   "cau": "Keep semiconductor or QQQ protection if it offsets actual long delta, but avoid adding broad index hedges solely because futures are down 0.4%",
+   "cau": "Typically, if you're a beginner and you want the safest stop loss possible, put it at the swing low",
+   "nguon": "https://www.youtube.com/watch?v=9O6JU5_xTd8"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 211,
+   "nhan": null,
+   "cau": "Since the channel's most informative output is its width rather than its position, the last test gates that same breakout rule on the normalised width, trading only when it is above or below a thresho",
+   "nguon": "https://www.mql5.com/en/articles/23719"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 212,
+   "nhan": null,
+   "cau": "Source media inspection — when users supply their own footage, the system probes every file (resolution, codec, audio channels, duration) and builds planning implications before a single creative deci",
+   "nguon": "https://github.com/calesthio/OpenMontage"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 151,
+   "nhan": null,
+   "cau": "Price has formed a base near support and then pushed above the descending resistance trendline, suggesting a potential bullish breakout in price action",
+   "nguon": "https://www.tradingview.com/ideas/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 173,
+   "nhan": null,
+   "cau": "When price returns to a fresh, untested supply zone with trend and seasonality aligned, you are entering alongside the same institutional sellers at their defined cost basis",
+   "nguon": "https://www.tradingview.com/u/PickMyTrade_Official/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 167,
+   "nhan": null,
+   "cau": "The instance types we'll be using do tend to get interrupted, so if that becomes a problem we can change this to 0% which tells Meadowrun we want an on-demand instance",
+   "nguon": "https://medium.com/@meadowrun/run-your-own-dall-e-mini-craiyon-server-on-ec2-e8aef6f974c1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 150,
+   "nhan": null,
+   "cau": "Which means that being able to short is not something to be taken for granted, not a lot of exchanges support shorting and only for few selected coins",
+   "nguon": "https://medium.com/@deandree/is-pairs-trading-profitable-in-crypto-part8-fba698abcd6f"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 183,
+   "nhan": null,
+   "cau": "More items -- ============================================\n-- DADDY DEVIL SPAMMER – DELTA OPTIMIZED\n-- (No close button, safe messages)\n-- ============================================",
+   "nguon": "https://github.com/tapashazra2345-netizen/DADDY-DEVIL-SPAMMER-"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 113,
+   "nhan": null,
+   "cau": "Session filter (default 07:00–15:00 UTC) and four alerts: long signal, short signal, zone tapped, liquidity swept",
+   "nguon": "https://github.com/Matswm86/tradingview-indicators"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 233,
+   "nhan": null,
+   "cau": "✨ Once all sub-waves of the triangle pattern are completed — which may represent wave four — and the upper boundary is broken 🏹 along with a key level, this would signal positive development reinforci",
+   "nguon": "https://www.tradingview.com/u/StrixEDGE/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 205,
+   "nhan": null,
+   "cau": "\"Crypto S&R\" EA uses 2 different time frames and fractals as support & resistance ,has Trailing Stop Loss &Take Profit works with all time frame major forex pairs,Crypto and stocks NASDAQ.Short descri",
+   "nguon": "https://www.mql5.com/en/code/25741"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 89,
+   "nhan": null,
+   "cau": "Consider the retest entry (Setup 3) which waits for the breakout level to hold as support",
+   "nguon": "https://www.buildalpha.com/opening-range-breakout/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 178,
+   "nhan": null,
+   "cau": "Session-Based Liquidity Breakout\nEstratégia de rompimento de liquidez e retração de Fibonacci baseada em sessões (frequentemente utilizada na negociação de Forex ou criptomoedas)",
+   "nguon": "https://www.mql5.com/pt/code/mt5/indicators"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 100,
+   "nhan": null,
+   "cau": "A bearish market structure shift happens when the price breaks and closes below the recent swing low",
+   "nguon": "https://www.youtube.com/watch?v=vGyREXEwLIk"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 103,
+   "nhan": null,
+   "cau": "Meaning, if it wanted to make a higher high, this candle would have\npushed up past this high right here",
+   "nguon": "https://www.youtube.com/watch?v=r2j0CmRWhQI"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 141,
+   "nhan": null,
+   "cau": "While correlation shows short-term co-movements, cointegration captures long-term ties, and independence means no influence between variables",
+   "nguon": "https://blog.quantinsti.com/independent-events/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 298,
+   "nhan": null,
+   "cau": "Once the channel was fixed, the same raw_signal and .ffill() pattern from the Bollinger Bands project was used to turn the entry and exit triggers into a continuous position column, and the same signa",
+   "nguon": "https://github.com/JamesRPowell/Donchain-Breakout"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 84,
+   "nhan": null,
+   "cau": "If the manufacturer will support open source alternative firmware & security updates",
+   "nguon": "https://news.ycombinator.com/item?id=37392676"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 69,
+   "nhan": null,
+   "cau": "If you appreciate Sniffnet, sponsor the project to support its growth",
+   "nguon": "https://github.com/GyulyVGC/sniffnet"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 61,
+   "nhan": null,
+   "cau": "If you don't yet have it, I'll leave a link in my description",
+   "nguon": "https://www.youtube.com/watch?v=j8Q3MIwGYOk"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 230,
+   "nhan": null,
+   "cau": "Sometimes it'll break its rules, because these things aren't perfect, but having an understanding of how to set this up now is extremely beneficial, because in the future months and future years, thes",
+   "nguon": "https://www.youtube.com/watch?v=PBBSMSyU674"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 80,
+   "nhan": null,
+   "cau": "Now here we have a closure back below the swing high and that's our confirmation",
+   "nguon": "https://www.youtube.com/watch?v=tFKOaF4HMcg&pp=ygUSdHJhZGluZyBzdHJhdGVnaWVz0gcJCRMMAYcqIYzv"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 70,
+   "nhan": null,
+   "cau": "when M≥ 2, MLOFI becomes a more general\nmeasure of order-ﬂow imbalance",
+   "nguon": "http://arxiv.org/abs/1907.06230v2"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 252,
+   "nhan": null,
+   "cau": "Monday, July 20, 2026 — Pre-Market Edition \nHigh dispersion, semiconductor de-risking, an active oil-supply shock, and elevated long-end yields create a market for selective short alpha and defined-ri",
+   "nguon": "https://tradingmarkets.com/forex/forex-trading-lessons/power-law-o-s-trading-report-2026-07-20-wordpress-html-1597832"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 160,
+   "nhan": null,
+   "cau": "GitHub - Kryptera-K/MMM-CCI-Channel-Break-Momentum-Strategy: Woodie-CCI and Keltner Channel Trading Strategy: A Technical Analysis Backtest on 3M (MMM) · GitHub",
+   "nguon": "https://github.com/Kryptera-K/MMM-CCI-Channel-Break-Momentum-Strategy"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 72,
+   "nhan": null,
+   "cau": "I use a limit stop for the short leg at least 2x the credit the received",
+   "nguon": "https://www.reddit.com/r/options/comments/1vlp5j1/options_questions_safe_haven_periodic_megathread/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 163,
+   "nhan": null,
+   "cau": "At its core, the EA places buy/sell orders in expanding Fibonacci-based intervals, dynamically adjusting position sizes and grid spacing based on market conditions",
+   "nguon": "https://www.mql5.com/en/code/62713"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 105,
+   "nhan": null,
+   "cau": "The volume vector (1) reflects supply and demand in the market and can indicate short-term price\npressure",
+   "nguon": "http://arxiv.org/abs/2608.18195v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 172,
+   "nhan": null,
+   "cau": "Posts that solely aim to bring attention to your blog, YouTube channel, social media, or any other personal site are not allowed, even if the content is free or educational",
+   "nguon": "https://www.reddit.com/r/algotrading/?f=flair_name%3A%22Education%22"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 104,
+   "nhan": null,
+   "cau": "The long leg — being long equities, bonds or metals when they are trending up — correlates 0.63 with RP3",
+   "nguon": "https://beyondpassive.substack.com/p/what-trend-following-actually-adds"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 125,
+   "nhan": null,
+   "cau": "I'll actively recommend FLOSS solutions to customers even if they're not quite as good as the competition on paper right away",
+   "nguon": "https://news.ycombinator.com/item?id=37392676"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 90,
+   "nhan": null,
+   "cau": "Create cards, check balances, view credentials, close cards, and get support via MCP tools",
+   "nguon": "https://github.com/sickn33/agentic-awesome-skills"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 107,
+   "nhan": null,
+   "cau": "10\n5.3 Strategic traders\nThe strategic traders trade in the direction of a smoothed volume imbalance signal",
+   "nguon": "http://arxiv.org/abs/2608.18195v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 220,
+   "nhan": null,
+   "cau": "And of course, if you want to keep leveling up your own trading and investing, subscribe to the channel as I'll be bringing you the AI strategies that can help you stay at the forefront and [music] th",
+   "nguon": "https://www.youtube.com/watch?v=PBBSMSyU674"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 110,
+   "nhan": null,
+   "cau": "Each buy and sell setup includes both breakout and pullback entry types, along with their respective rationale",
+   "nguon": "https://www.mql5.com/en/users/vanh1799/messages"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 97,
+   "nhan": null,
+   "cau": "To get started, you'll need a compatible wallet extension installed if you don't already have one",
+   "nguon": "https://www.youtube.com/watch?v=7FfWJeDjlEE"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 53,
+   "nhan": null,
+   "cau": "🖥️ Cross-platform Support for Windows, Mac, and Linux",
+   "nguon": "https://github.com/CherryHQ/cherry-studio"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 129,
+   "nhan": null,
+   "cau": "The classic Turtle setup uses a 20-day entry channel and a 10-day exit channel, and this project uses the same numbers for Part A",
+   "nguon": "https://github.com/JamesRPowell/Donchain-Breakout"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 194,
+   "nhan": null,
+   "cau": "3.3.2 : keep the 3.3.1 universe and execution path intact, then add a live trend-health gate to block short-term down-channel candidates such as CMCSA while allowing sideways or recovering names",
+   "nguon": "https://github.com/randomwalkhan/Short-Term-Reversal-Strategy"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 63,
+   "nhan": null,
+   "cau": "A pullback or consolidation is the superior new-entry condition",
    "nguon": "https://tradingmarkets.com/forex/forex-trading-lessons/power-law-o-s-trading-report-2026-07-23-wordpress-html-1597835"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 191,
+   "bo_sot": 105,
    "nhan": null,
-   "cau": "To hedge his position, the Market Maker must buy stocks of the underlying asset of the option in order to obtain a Delta Neutral ( the overall [latex]\\Delta[/latex] value of a position is 0 )",
-   "nguon": "https://quantdare.com/gamma-squeeze/"
+   "cau": "Max Inside Bar Size (% of Main) - Maximum Signal Bar size expressed as a percentage of the Main Bar range",
+   "nguon": "https://www.mql5.com/en/code/73884"
   },
   {
    "tt": "KHONG_NOI",
-   "bo_sot": 238,
+   "bo_sot": 307,
    "nhan": null,
-   "cau": "pooled correlations differ: For AAPL, per-\nday correlation is only 0.171 (GatedLinear+RF) while\npooled is 0.347, suggesting the model captures cross-\nday variance structure better than within-day temp",
-   "nguon": "http://arxiv.org/abs/2608.08825v1"
+   "cau": "Single_Duck_4055\n•\n12d ago\nI'll let OP opine, but my guess is that if you have a lot of the same shops running the same event driven strategy, that trading activity/initiating the trades generates mom",
+   "nguon": "https://www.reddit.com/r/quant/comments/1voy3q7/may_i_ask_why_major_quant_firms_are_long_momentum/"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 263,
+   "nhan": null,
+   "cau": "The broader prediction-market literature studies forecast ac-\ncuracy, incentive compatibility, and event-study use cases, while market-\nmicrostructure research studies how order flow, liquidity, laten",
+   "nguon": "http://arxiv.org/abs/2607.26245v1"
+  },
+  {
+   "tt": "KHONG_NOI",
+   "bo_sot": 116,
+   "nhan": null,
+   "cau": "It'll probably start to make sense why you're not getting the reactions you expect when you're marking gaps in price",
+   "nguon": "https://www.youtube.com/watch?v=7NZhKIJpV-E&pp=ygUObWVhbiByZXZlcnNpb27SBwkJEwwBhyohjO8%3D"
   }
  ],
  "doi_so_lan_truoc": {
-  "chung_cau": 150,
+  "chung_cau": 107,
   "tot_len": 0,
   "xau_di": 0,
   "XAU_DI": [],

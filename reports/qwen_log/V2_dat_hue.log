@@ -1,0 +1,84 @@
+EA quan tri: __mua_giu__ | mean_reversion_z5 | quantora_ma_dashboard_sell
+
+### trailing
+  36 pass, 12.3s
+cau hinh                                                 lenh        lai  sutgiam   lai/DD
+kieu0 trail1.0/tu0.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/     36    -211.04   14.08%    -15.0
+kieu0 trail2.5/tu0.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/     22    -206.45    8.46%    -24.4
+kieu0 trail2.5/tu1.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/     18    -408.75   10.67%    -38.3
+kieu0 trail1.0/tu1.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/     27    -507.09   10.99%    -46.1
+kieu0 trail3.0/tu0.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/     17    -350.57    7.49%    -46.8
+kieu0 trail2.0/tu0.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/     22    -398.99    8.53%    -46.8
+kieu0 trail3.0/tu0.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/     18    -334.82    7.01%    -47.8
+kieu0 trail2.0/tu1.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/     20    -428.91    8.83%    -48.6
+MOC tat het quan tri: 36 lenh | lai -211.04 | DD 14.08% | lai/DD -15.0
+TOT NHAT: kieu0 trail1.0/tu0.0 BE0.00 tia0.00 vaolai0 nhoi0/0.0/1.0/0 -> lai/DD -15.0 (x1.00 moc)
+-> reports/QUAN_TRI_US100Cash.json
+
+### dat_hue_va_vao_lai
+  336 pass, 12.3s
+cau hinh                                                 lenh        lai  sutgiam   lai/DD
+kieu0 trail4.0/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail3.5/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail3.0/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail2.5/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail2.0/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail1.5/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail1.0/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail0.5/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+MOC tat het quan tri: 280 lenh | lai 1402.91 | DD 1.91% | lai/DD 735.1
+TOT NHAT: kieu0 trail4.0/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/1.0/0 -> lai/DD 735.1 (x1.00 moc)
+-> reports/QUAN_TRI_US100Cash.json
+
+### tia_lenh
+  168 pass, 12.3s
+cau hinh                                                 lenh        lai  sutgiam   lai/DD
+kieu0 trail4.0/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail3.5/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail3.0/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail2.5/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail2.0/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail1.5/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail1.0/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail0.5/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+MOC tat het quan tri: 280 lenh | lai 1402.91 | DD 1.91% | lai/DD 735.1
+TOT NHAT: kieu0 trail4.0/tu2.0 BE0.00 tia3.00 vaolai1 nhoi0/0.0/1.0/0 -> lai/DD 735.1 (x1.00 moc)
+-> reports/QUAN_TRI_US100Cash.json
+
+### nhoi_am_duong
+  648 pass, 12.3s
+cau hinh                                                 lenh        lai  sutgiam   lai/DD
+kieu0 trail4.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+kieu0 trail3.5/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+kieu0 trail3.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+kieu0 trail2.5/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+kieu0 trail2.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+kieu0 trail1.5/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+kieu0 trail1.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+kieu0 trail0.5/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/    280    1402.91    1.91%    735.1
+MOC tat het quan tri: 280 lenh | lai 1402.91 | DD 1.91% | lai/DD 735.1
+TOT NHAT: kieu0 trail4.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi2/3.0/2.0/0 -> lai/DD 735.1 (x1.00 moc)
+-> reports/QUAN_TRI_US100Cash.json
+
+### kieu_ra
+  12 pass, 18.4s
+cau hinh                                                 lenh        lai  sutgiam   lai/DD
+kieu0 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail0.0/tu1.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu0 trail0.0/tu0.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    280    1402.91    1.91%    735.1
+kieu1 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    127    -319.01    8.91%    -35.8
+kieu1 trail0.0/tu1.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    127    -319.01    8.91%    -35.8
+kieu1 trail0.0/tu0.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    127    -319.01    8.91%    -35.8
+kieu3 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    138    -465.21    9.04%    -51.5
+kieu3 trail0.0/tu0.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/    142    -482.09    8.70%    -55.4
+MOC tat het quan tri: 280 lenh | lai 1402.91 | DD 1.91% | lai/DD 735.1
+TOT NHAT: kieu0 trail0.0/tu2.0 BE0.00 tia0.00 vaolai1 nhoi0/0.0/1.0/0 -> lai/DD 735.1 (x1.00 moc)
+-> reports/QUAN_TRI_US100Cash.json
+
+### RA TIEN voi quan tri tot nhat: kieu0 trail4.0/tu2.0 BE3.00 tia0.00 vaolai1 nhoi0/0.0/1.0/0
+  1078 pass, 18.4s
+   ghep       85.99%/nam @ DD  29.20%  lot 0.0/16.0/16.0  (280 lenh)
+   chi_a      66.41%/nam @ DD  60.06%  lot 0.0/11.2/0.0  (174 lenh)
+   chi_b      41.54%/nam @ DD  73.99%  lot 0.0/0.0/16.0  (106 lenh)
+   mua_giu    13.19%/nam @ DD  93.62%  lot 1.6/0.0/0.0  (3 lenh)
+-> reports/QUAN_TRI_US100Cash.json

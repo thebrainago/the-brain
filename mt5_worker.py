@@ -29,8 +29,11 @@ EA_INPUT_MAC_DINH = dict(
 
 
 def dong_mt5():
-    subprocess.run(["taskkill", "/F", "/IM", "terminal64.exe"], capture_output=True)
-    time.sleep(2)
+    # Mot cua duy nhat: `khoa_tester.dong_terminal` tu choi giet khi tien trinh
+    # KHAC dang chay tester (vi 12/09: taskkill o day giet ca luot cua nguoi khac
+    # va ben do doc file ket qua cu ma khong ai bao loi).
+    from nhan import khoa_tester
+    khoa_tester.dong_terminal("mt5_worker.dong_mt5")
 
 
 def viet_set(ten, input_ghi_de):

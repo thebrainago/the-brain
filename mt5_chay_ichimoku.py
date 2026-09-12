@@ -22,8 +22,9 @@ INPUTS = dict(
 )
 
 def dong_mt5():
-    subprocess.run(["taskkill", "/F", "/IM", "terminal64.exe"], capture_output=True)
-    time.sleep(2)
+    # Xem ghi chu o `nhan/khoa_tester.dong_terminal` - khong duoc giet thang.
+    from nhan import khoa_tester
+    khoa_tester.dong_terminal("mt5_chay_ichimoku.dong_mt5")
 
 def viet_set(ten):
     p = dict(INPUTS)
