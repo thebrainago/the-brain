@@ -1,0 +1,636 @@
+[
+ {
+  "a": "ema9_cat_xuong_ema21_2__dao",
+  "b": "mean_reversion_z_score_cross_short",
+  "r": -0.0016,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 7.56,
+    "lenh": 115,
+    "pct_nam": 11.11,
+    "sharpe": 2.756474
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     15.2,
+     16.0
+    ],
+    "dd": 20.65,
+    "lenh": 115,
+    "pct_nam": 10.91,
+    "sharpe": 2.766609
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 20.65
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 13.99,
+    "lenh": 56,
+    "pct_nam": 7.11,
+    "sharpe": 3.009856
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 13.99
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 19.86
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.97,
+    "lenh": 6,
+    "pct_nam": -0.22,
+    "sharpe": -0.015761
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 17.7,
+    "lenh": 6,
+    "pct_nam": -1.4,
+    "sharpe": -0.015347
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.8,
+     0.0,
+     0.0
+    ],
+    "dd": 52.25,
+    "lenh": 6,
+    "pct_nam": -4.9,
+    "sharpe": -0.013955
+   },
+   "dd_max_do_duoc": 57.89
+  }
+ },
+ {
+  "a": "ema9_cat_xuong_ema21__dao",
+  "b": "mean_reversion_z_score_cross_short",
+  "r": -0.0016,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 7.56,
+    "lenh": 115,
+    "pct_nam": 11.11,
+    "sharpe": 2.756474
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     15.2,
+     16.0
+    ],
+    "dd": 20.65,
+    "lenh": 115,
+    "pct_nam": 10.91,
+    "sharpe": 2.766609
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 20.65
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 13.99,
+    "lenh": 56,
+    "pct_nam": 7.11,
+    "sharpe": 3.009856
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 13.99
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 19.86
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.97,
+    "lenh": 6,
+    "pct_nam": -0.22,
+    "sharpe": -0.015761
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 17.7,
+    "lenh": 6,
+    "pct_nam": -1.4,
+    "sharpe": -0.015347
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.8,
+     0.0,
+     0.0
+    ],
+    "dd": 52.25,
+    "lenh": 6,
+    "pct_nam": -4.9,
+    "sharpe": -0.013955
+   },
+   "dd_max_do_duoc": 57.89
+  }
+ },
+ {
+  "a": "ema_rsi_risk_ea__dao",
+  "b": "mean_reversion_z_score_cross_short",
+  "r": -0.0016,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 7.56,
+    "lenh": 115,
+    "pct_nam": 11.11,
+    "sharpe": 2.756474
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     15.2,
+     16.0
+    ],
+    "dd": 20.65,
+    "lenh": 115,
+    "pct_nam": 10.91,
+    "sharpe": 2.766609
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 20.65
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 13.99,
+    "lenh": 56,
+    "pct_nam": 7.11,
+    "sharpe": 3.009856
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 13.99
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 19.86
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.97,
+    "lenh": 6,
+    "pct_nam": -0.22,
+    "sharpe": -0.015761
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 17.7,
+    "lenh": 6,
+    "pct_nam": -1.4,
+    "sharpe": -0.015347
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.8,
+     0.0,
+     0.0
+    ],
+    "dd": 52.25,
+    "lenh": 6,
+    "pct_nam": -4.9,
+    "sharpe": -0.013955
+   },
+   "dd_max_do_duoc": 57.89
+  }
+ },
+ {
+  "a": "kijun_sen_long_crossover__dao",
+  "b": "tranh_xa_vao_khi_bien_dong_ngan_han_vuot_qua_dai_han",
+  "r": 0.1222,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 15.76,
+    "lenh": 196,
+    "pct_nam": 18.75,
+    "sharpe": 1.114797
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     4.8,
+     16.0
+    ],
+    "dd": 18.22,
+    "lenh": 196,
+    "pct_nam": 13.59,
+    "sharpe": 1.229825
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.07
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 15.36,
+    "lenh": 71,
+    "pct_nam": 14.51,
+    "sharpe": 0.88718
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 15.36
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 30.72,
+    "lenh": 125,
+    "pct_nam": 10.5,
+    "sharpe": 2.282141
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     8.8
+    ],
+    "dd": 22.38,
+    "lenh": 125,
+    "pct_nam": 6.88,
+    "sharpe": 2.304238
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.72
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.97,
+    "lenh": 6,
+    "pct_nam": -0.22,
+    "sharpe": -0.015761
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 17.7,
+    "lenh": 6,
+    "pct_nam": -1.4,
+    "sharpe": -0.015347
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.8,
+     0.0,
+     0.0
+    ],
+    "dd": 52.25,
+    "lenh": 6,
+    "pct_nam": -4.9,
+    "sharpe": -0.013955
+   },
+   "dd_max_do_duoc": 57.89
+  }
+ },
+ {
+  "a": "ban_engulfing_rsi_70",
+  "b": "kijun_sen_long_crossover__dao",
+  "r": 0.1297,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 32.25,
+    "lenh": 152,
+    "pct_nam": 17.31,
+    "sharpe": 1.028241
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     13.6,
+     8.0
+    ],
+    "dd": 22.48,
+    "lenh": 152,
+    "pct_nam": 12.84,
+    "sharpe": 1.178176
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 32.25
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 12.77,
+    "lenh": 81,
+    "pct_nam": 7.56,
+    "sharpe": 2.740321
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 12.77
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 15.36,
+    "lenh": 71,
+    "pct_nam": 14.51,
+    "sharpe": 0.88718
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 15.36
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.97,
+    "lenh": 6,
+    "pct_nam": -0.22,
+    "sharpe": -0.015761
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 17.7,
+    "lenh": 6,
+    "pct_nam": -1.4,
+    "sharpe": -0.015347
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.8,
+     0.0,
+     0.0
+    ],
+    "dd": 52.25,
+    "lenh": 6,
+    "pct_nam": -4.9,
+    "sharpe": -0.013955
+   },
+   "dd_max_do_duoc": 57.89
+  }
+ },
+ {
+  "a": "kijun_sen_long_crossover__dao",
+  "b": "mean_reversion_z_score_cross_short",
+  "r": 0.204,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 16.94,
+    "lenh": 130,
+    "pct_nam": 16.86,
+    "sharpe": 0.951882
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 17.21
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 15.36,
+    "lenh": 71,
+    "pct_nam": 14.51,
+    "sharpe": 0.88718
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 15.36
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.86,
+    "lenh": 59,
+    "pct_nam": 6.53,
+    "sharpe": 2.687411
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 19.86
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.97,
+    "lenh": 6,
+    "pct_nam": -0.22,
+    "sharpe": -0.015761
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 17.7,
+    "lenh": 6,
+    "pct_nam": -1.4,
+    "sharpe": -0.015347
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.8,
+     0.0,
+     0.0
+    ],
+    "dd": 52.25,
+    "lenh": 6,
+    "pct_nam": -4.9,
+    "sharpe": -0.013955
+   },
+   "dd_max_do_duoc": 57.89
+  }
+ }
+]

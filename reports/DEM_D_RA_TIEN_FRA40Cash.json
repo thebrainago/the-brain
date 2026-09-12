@@ -1,0 +1,836 @@
+[
+ {
+  "a": "ban_zscore20_close_duoi_am2",
+  "b": "mua_rsi2_cheo_xuong_15__dao",
+  "r": 0.4223,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 48.3,
+    "lenh": 291,
+    "pct_nam": 23.04,
+    "sharpe": 1.481015
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     1.6,
+     4.0
+    ],
+    "dd": 21.61,
+    "lenh": 291,
+    "pct_nam": 8.41,
+    "sharpe": 1.813076
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     16.0,
+     4.8
+    ],
+    "dd": 50.48,
+    "lenh": 291,
+    "pct_nam": 18.48,
+    "sharpe": 1.331057
+   },
+   "dd_max_do_duoc": 54.6
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     3.2,
+     0.0
+    ],
+    "dd": 20.8,
+    "lenh": 105,
+    "pct_nam": 5.32,
+    "sharpe": 2.278139
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd_max_do_duoc": 55.58
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 46.34,
+    "lenh": 186,
+    "pct_nam": 16.49,
+    "sharpe": 1.800951
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     3.2
+    ],
+    "dd": 20.4,
+    "lenh": 186,
+    "pct_nam": 5.6,
+    "sharpe": 1.895583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 46.34
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.47,
+    "lenh": 6,
+    "pct_nam": -0.08,
+    "sharpe": -0.004363
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.2,
+    "lenh": 6,
+    "pct_nam": -0.51,
+    "sharpe": -0.004267
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.6,
+     0.0,
+     0.0
+    ],
+    "dd": 50.83,
+    "lenh": 6,
+    "pct_nam": -1.41,
+    "sharpe": -0.003928
+   },
+   "dd_max_do_duoc": 62.14
+  }
+ },
+ {
+  "a": "mua_khi_gia_duoi_dai_duoi_bollinger__dao",
+  "b": "mua_rsi2_cheo_xuong_15__dao",
+  "r": 0.4223,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 48.3,
+    "lenh": 291,
+    "pct_nam": 23.04,
+    "sharpe": 1.481015
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     1.6,
+     4.0
+    ],
+    "dd": 21.61,
+    "lenh": 291,
+    "pct_nam": 8.41,
+    "sharpe": 1.813076
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     16.0,
+     4.8
+    ],
+    "dd": 50.48,
+    "lenh": 291,
+    "pct_nam": 18.48,
+    "sharpe": 1.331057
+   },
+   "dd_max_do_duoc": 54.6
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     3.2,
+     0.0
+    ],
+    "dd": 20.8,
+    "lenh": 105,
+    "pct_nam": 5.32,
+    "sharpe": 2.278139
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd_max_do_duoc": 55.58
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 46.34,
+    "lenh": 186,
+    "pct_nam": 16.49,
+    "sharpe": 1.800951
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     3.2
+    ],
+    "dd": 20.4,
+    "lenh": 186,
+    "pct_nam": 5.6,
+    "sharpe": 1.895583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 46.34
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.47,
+    "lenh": 6,
+    "pct_nam": -0.08,
+    "sharpe": -0.004363
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.2,
+    "lenh": 6,
+    "pct_nam": -0.51,
+    "sharpe": -0.004267
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.6,
+     0.0,
+     0.0
+    ],
+    "dd": 50.83,
+    "lenh": 6,
+    "pct_nam": -1.41,
+    "sharpe": -0.003928
+   },
+   "dd_max_do_duoc": 62.14
+  }
+ },
+ {
+  "a": "mua_rsi2_cheo_xuong_15__dao",
+  "b": "statarb_z_score_buy_signal__dao",
+  "r": 0.4223,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 48.3,
+    "lenh": 291,
+    "pct_nam": 23.04,
+    "sharpe": 1.481015
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     4.0,
+     1.6
+    ],
+    "dd": 21.61,
+    "lenh": 291,
+    "pct_nam": 8.41,
+    "sharpe": 1.813076
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     4.8,
+     16.0
+    ],
+    "dd": 50.48,
+    "lenh": 291,
+    "pct_nam": 18.48,
+    "sharpe": 1.331057
+   },
+   "dd_max_do_duoc": 54.6
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 46.34,
+    "lenh": 186,
+    "pct_nam": 16.49,
+    "sharpe": 1.800951
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     3.2,
+     0.0
+    ],
+    "dd": 20.4,
+    "lenh": 186,
+    "pct_nam": 5.6,
+    "sharpe": 1.895583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 46.34
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     3.2
+    ],
+    "dd": 20.8,
+    "lenh": 105,
+    "pct_nam": 5.32,
+    "sharpe": 2.278139
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd_max_do_duoc": 55.58
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.47,
+    "lenh": 6,
+    "pct_nam": -0.08,
+    "sharpe": -0.004363
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.2,
+    "lenh": 6,
+    "pct_nam": -0.51,
+    "sharpe": -0.004267
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.6,
+     0.0,
+     0.0
+    ],
+    "dd": 50.83,
+    "lenh": 6,
+    "pct_nam": -1.41,
+    "sharpe": -0.003928
+   },
+   "dd_max_do_duoc": 62.14
+  }
+ },
+ {
+  "a": "mua_rsi2_cheo_xuong_15__dao",
+  "b": "z_score_mean_reversion_buy__dao",
+  "r": 0.4223,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 48.3,
+    "lenh": 291,
+    "pct_nam": 23.04,
+    "sharpe": 1.481015
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     4.0,
+     1.6
+    ],
+    "dd": 21.61,
+    "lenh": 291,
+    "pct_nam": 8.41,
+    "sharpe": 1.813076
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     4.8,
+     16.0
+    ],
+    "dd": 50.48,
+    "lenh": 291,
+    "pct_nam": 18.48,
+    "sharpe": 1.331057
+   },
+   "dd_max_do_duoc": 54.6
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 46.34,
+    "lenh": 186,
+    "pct_nam": 16.49,
+    "sharpe": 1.800951
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     3.2,
+     0.0
+    ],
+    "dd": 20.4,
+    "lenh": 186,
+    "pct_nam": 5.6,
+    "sharpe": 1.895583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 46.34
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     3.2
+    ],
+    "dd": 20.8,
+    "lenh": 105,
+    "pct_nam": 5.32,
+    "sharpe": 2.278139
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd_max_do_duoc": 55.58
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.47,
+    "lenh": 6,
+    "pct_nam": -0.08,
+    "sharpe": -0.004363
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.2,
+    "lenh": 6,
+    "pct_nam": -0.51,
+    "sharpe": -0.004267
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.6,
+     0.0,
+     0.0
+    ],
+    "dd": 50.83,
+    "lenh": 6,
+    "pct_nam": -1.41,
+    "sharpe": -0.003928
+   },
+   "dd_max_do_duoc": 62.14
+  }
+ },
+ {
+  "a": "mua_rsi2_cheo_xuong_15__dao",
+  "b": "z_score_reversion__dao",
+  "r": 0.4223,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 48.3,
+    "lenh": 291,
+    "pct_nam": 23.04,
+    "sharpe": 1.481015
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     4.0,
+     1.6
+    ],
+    "dd": 21.61,
+    "lenh": 291,
+    "pct_nam": 8.41,
+    "sharpe": 1.813076
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     4.8,
+     16.0
+    ],
+    "dd": 50.48,
+    "lenh": 291,
+    "pct_nam": 18.48,
+    "sharpe": 1.331057
+   },
+   "dd_max_do_duoc": 54.6
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 46.34,
+    "lenh": 186,
+    "pct_nam": 16.49,
+    "sharpe": 1.800951
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     3.2,
+     0.0
+    ],
+    "dd": 20.4,
+    "lenh": 186,
+    "pct_nam": 5.6,
+    "sharpe": 1.895583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 46.34
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     3.2
+    ],
+    "dd": 20.8,
+    "lenh": 105,
+    "pct_nam": 5.32,
+    "sharpe": 2.278139
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd_max_do_duoc": 55.58
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.47,
+    "lenh": 6,
+    "pct_nam": -0.08,
+    "sharpe": -0.004363
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.2,
+    "lenh": 6,
+    "pct_nam": -0.51,
+    "sharpe": -0.004267
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.6,
+     0.0,
+     0.0
+    ],
+    "dd": 50.83,
+    "lenh": 6,
+    "pct_nam": -1.41,
+    "sharpe": -0.003928
+   },
+   "dd_max_do_duoc": 62.14
+  }
+ },
+ {
+  "a": "ban_zscore20_close_duoi_am2",
+  "b": "tranh_xa_vao_khi_bien_dong_ngan_han_vuot_qua_dai_han",
+  "r": 0.3829,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 25.1,
+    "lenh": 202,
+    "pct_nam": 22.47,
+    "sharpe": 2.123911
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     9.6,
+     16.0
+    ],
+    "dd": 22.23,
+    "lenh": 202,
+    "pct_nam": 20.12,
+    "sharpe": 2.533907
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     16.0,
+     1.6
+    ],
+    "dd": 50.62,
+    "lenh": 202,
+    "pct_nam": 16.73,
+    "sharpe": 1.402747
+   },
+   "dd_max_do_duoc": 53.03
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     3.2,
+     0.0
+    ],
+    "dd": 20.8,
+    "lenh": 105,
+    "pct_nam": 5.32,
+    "sharpe": 2.278139
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 55.58,
+    "lenh": 105,
+    "pct_nam": 15.91,
+    "sharpe": 1.711571
+   },
+   "dd_max_do_duoc": 55.58
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 21.51,
+    "lenh": 97,
+    "pct_nam": 15.54,
+    "sharpe": 3.764065
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 21.51,
+    "lenh": 97,
+    "pct_nam": 15.54,
+    "sharpe": 3.764065
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 21.51
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.47,
+    "lenh": 6,
+    "pct_nam": -0.08,
+    "sharpe": -0.004363
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.2,
+    "lenh": 6,
+    "pct_nam": -0.51,
+    "sharpe": -0.004267
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.6,
+     0.0,
+     0.0
+    ],
+    "dd": 50.83,
+    "lenh": 6,
+    "pct_nam": -1.41,
+    "sharpe": -0.003928
+   },
+   "dd_max_do_duoc": 62.14
+  }
+ }
+]

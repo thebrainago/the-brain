@@ -1,0 +1,104 @@
+
+########## CHANG A: mo kho = 1354 co che
+
+=== moKho train  2016.06.01 -> 2021.06.01
+  1297 pass, 73.9s
+=== moKho holdout  2021.06.01 -> 2026.07.29
+  1297 pass, 32.0s
+-> reports/DEM_A_MO_KHO_AUS200Cash.json
+
+chan DUONG ca hai doan : 36
+chan AM   ca hai doan : 617
+
+########## CHANG B: dao chieu 617 chan am
+
+=== dao train  2016.06.01 -> 2021.06.01
+  618 pass, 18.5s
+=== dao holdout  2021.06.01 -> 2026.07.29
+  618 pass, 18.4s
+-> reports/DEM_B_DAO_AUS200Cash.json
+
+dao chieu -> duong ca hai doan: 105/617
+
+TONG CHAN DUONG: 141 (goc 36 + dao 105)
+-> reports/DEM_CHAN_DUONG_AUS200Cash.json
+
+########## CHANG C: ma tran tuong quan 141 chan
+
+=== lo 0: 40 slot
+=== lo 1: 40 slot
+=== lo 2: 40 slot
+=== lo 3: 21 slot
+
+ghep duoc 141 chuoi von
+-> reports/DEM_C_MATRAN_AUS200Cash.json
+
+--- 10 he DON tot nhat ---
+ema9_cat_xuong_ema21_2__dao                        62.49    0.11%    558.3
+ema9_cat_xuong_ema21__dao                          62.49    0.11%    558.3
+ema_rsi_risk_ea__dao                               62.49    0.11%    558.3
+kijun_sen_long_crossover__dao                     194.45    0.36%    542.0
+ban_engulfing_rsi_70                               67.74    0.13%    533.4
+mean_reversion_z_score_cross_short                 55.70    0.11%    486.9
+statarb_z_score_vuot_nguong_duong__dao            100.66    0.26%    383.0
+ma_crossover_xu_huong__dao                        108.95    0.29%    370.6
+rainbow_envelopes_long_signal__dao                108.95    0.29%    370.6
+pine_bollinger_band_ema60_close_duoi_ema180_cl    188.15    0.51%    366.3
+
+--- 15 CAP tot nhat ---
+ema9_cat_xuong_ema21_2__dao    mean_reversion_z_score_cross_s  -0.002    118.19    0.11%   1085.3
+ema9_cat_xuong_ema21__dao      mean_reversion_z_score_cross_s  -0.002    118.19    0.11%   1085.3
+ema_rsi_risk_ea__dao           mean_reversion_z_score_cross_s  -0.002    118.19    0.11%   1085.3
+kijun_sen_long_crossover__dao  tranh_xa_vao_khi_bien_dong_nga  +0.122    302.91    0.31%    968.1
+ban_engulfing_rsi_70           kijun_sen_long_crossover__dao   +0.130    262.19    0.28%    948.2
+kijun_sen_long_crossover__dao  mean_reversion_z_score_cross_s  +0.204    250.15    0.27%    939.9
+ban_khi_stochastic_cat_xuong_5 kijun_sen_long_crossover__dao   +0.029    267.85    0.32%    839.8
+ban_xac_nhan_qua_uong_giua_rsi kijun_sen_long_crossover__dao   +0.029    267.85    0.32%    839.8
+kijun_sen_long_crossover__dao  pine_bollinger_band_ema60_clos  -0.078    382.60    0.46%    834.1
+kijun_sen_long_crossover__dao  statarb_z_score_vuot_nguong_du  +0.278    295.11    0.37%    791.4
+kijun_sen_long_crossover__dao  pine_cl_20_years_ban_low_duoi_  -0.001    251.21    0.33%    774.0
+kijun_sen_long_crossover__dao  pine_cl_20_years_old_tur_low_d  -0.001    251.21    0.33%    774.0
+ema9_cat_xuong_ema21_2__dao    kijun_sen_long_crossover__dao   -0.006    256.94    0.34%    745.6
+ema9_cat_xuong_ema21__dao      kijun_sen_long_crossover__dao   -0.006    256.94    0.34%    745.6
+ema_rsi_risk_ea__dao           kijun_sen_long_crossover__dao   -0.006    256.94    0.34%    745.6
+
+########## CHANG D: cong ra tien o sut giam 50-60%
+
+=== cap 0: ema9_cat_xuong_ema21_2__dao + mean_reversion_z_score_cross_short
+   ghep     dinh  11.11%/nam @ DD  7.56%  lot 0.0/16.0/16.0 | DD20  10.91%/nam @ DD 20.65%  lot 0.0/15.2/16.0 | 50-60%   --
+   chi_a    dinh   7.11%/nam @ DD 13.99%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | DD20   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.22%/nam @ DD  2.97%  lot 0.1/0.0/0.0 | DD20  -1.40%/nam @ DD 17.70%  lot 0.6/0.0/0.0 | 50-60%  -4.90%/nam @ DD 52.25%  lot 1.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_AUS200Cash.json
+=== cap 1: ema9_cat_xuong_ema21__dao + mean_reversion_z_score_cross_short
+   ghep     dinh  11.11%/nam @ DD  7.56%  lot 0.0/16.0/16.0 | DD20  10.91%/nam @ DD 20.65%  lot 0.0/15.2/16.0 | 50-60%   --
+   chi_a    dinh   7.11%/nam @ DD 13.99%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | DD20   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.22%/nam @ DD  2.97%  lot 0.1/0.0/0.0 | DD20  -1.40%/nam @ DD 17.70%  lot 0.6/0.0/0.0 | 50-60%  -4.90%/nam @ DD 52.25%  lot 1.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_AUS200Cash.json
+=== cap 2: ema_rsi_risk_ea__dao + mean_reversion_z_score_cross_short
+   ghep     dinh  11.11%/nam @ DD  7.56%  lot 0.0/16.0/16.0 | DD20  10.91%/nam @ DD 20.65%  lot 0.0/15.2/16.0 | 50-60%   --
+   chi_a    dinh   7.11%/nam @ DD 13.99%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | DD20   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.22%/nam @ DD  2.97%  lot 0.1/0.0/0.0 | DD20  -1.40%/nam @ DD 17.70%  lot 0.6/0.0/0.0 | 50-60%  -4.90%/nam @ DD 52.25%  lot 1.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_AUS200Cash.json
+=== cap 3: kijun_sen_long_crossover__dao + tranh_xa_vao_khi_bien_dong_ngan_ha
+   ghep     dinh  18.75%/nam @ DD 15.76%  lot 0.0/16.0/16.0 | DD20  13.59%/nam @ DD 18.22%  lot 0.0/4.8/16.0 | 50-60%   --
+   chi_a    dinh  14.51%/nam @ DD 15.36%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh  10.50%/nam @ DD 30.72%  lot 0.0/0.0/16.0 | DD20   6.88%/nam @ DD 22.38%  lot 0.0/0.0/8.8 | 50-60%   --
+   mua_giu  dinh  -0.22%/nam @ DD  2.97%  lot 0.1/0.0/0.0 | DD20  -1.40%/nam @ DD 17.70%  lot 0.6/0.0/0.0 | 50-60%  -4.90%/nam @ DD 52.25%  lot 1.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_AUS200Cash.json
+=== cap 4: ban_engulfing_rsi_70 + kijun_sen_long_crossover__dao
+   ghep     dinh  17.31%/nam @ DD 32.25%  lot 0.0/16.0/16.0 | DD20  12.84%/nam @ DD 22.48%  lot 0.0/13.6/8.0 | 50-60%   --
+   chi_a    dinh   7.56%/nam @ DD 12.77%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh  14.51%/nam @ DD 15.36%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --
+   mua_giu  dinh  -0.22%/nam @ DD  2.97%  lot 0.1/0.0/0.0 | DD20  -1.40%/nam @ DD 17.70%  lot 0.6/0.0/0.0 | 50-60%  -4.90%/nam @ DD 52.25%  lot 1.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_AUS200Cash.json
+=== cap 5: kijun_sen_long_crossover__dao + mean_reversion_z_score_cross_short
+   ghep     dinh  16.86%/nam @ DD 16.94%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --
+   chi_a    dinh  14.51%/nam @ DD 15.36%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | DD20   6.53%/nam @ DD 19.86%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.22%/nam @ DD  2.97%  lot 0.1/0.0/0.0 | DD20  -1.40%/nam @ DD 17.70%  lot 0.6/0.0/0.0 | 50-60%  -4.90%/nam @ DD 52.25%  lot 1.8/0.0/0.0
+-> reports/DEM_D_RA_TIEN_AUS200Cash.json
+
+XONG sau 21.7 phut

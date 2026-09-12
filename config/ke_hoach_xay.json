@@ -429,9 +429,9 @@
     "khong_phai_phan_quyet_am": "DE_QT_EA_NGOAI.json = AM, nhung do la MOT EA tren US500Cash H1 - mot ket qua am le. quan_tri_da_loc.json rong la ket qua cua mot BO LOC khac, khong phai cua phep thu train/holdout o tren."
    },
    "viec_ngay": [
-    "XONG - V7_placebo_trailing: AM. Trailing KHONG duoc dua vao doc_kho(); no chi la mot cuc dai cua 40 lan thu, va ban gia con cho cuc dai cao hon.",
-    "TIEP THEO - GHEP. Do da co va manh hon trailing nhieu: 39/45 cap giu hang o holdout trong khi he don tut 822 -> 40. Ghep khong phai vuot MDE tung chan - no CONG chan, nen cung di vong qua tuong giong nhu quan tri dinh lam.",
-    "Truoc khi chay: ap dung dung bai hoc vua roi - moi con so 'tot nhat trong N' phai so voi phan bo MAX-cua-N cua ban gia, khong so voi tung ban le."
+    "XONG - trailing: AM (placebo p 0,596). XONG - ghep: AM (xep hang cap khong mang thong tin 0/3 ma; gop deu thua mua-giu 0/3 ma).",
+    "KET LUAN TAM CUA KHOI 7: hai don bay duoc ky vong 'di vong qua tuong MDE' deu khong di vong duoc. Gop deu chi giam PHUONG SAI, va giam phuong sai tren mot ro khong co alpha thi van khong co alpha.",
+    "CAU HOI CHO CHU DU AN: kho 1.216 co che deu la chan co Sharpe duoi MDE. Thu duy nhat tung qua het cong la z5 / quantora / Sonic R H4 - nhung he RIENG LE co bien do lon. Huong con lai la dao sau vao chinh chung, chu khong phai to hop lai kho."
    ],
    "ket_qua_placebo_trailing": {
     "trang_thai": "AM",
@@ -451,6 +451,53 @@
     "ket_luan": "Ban that tot nhat (+3.870$/nam) nam DUOI TRUNG VI cua phan bo max ban gia (+4.385$). Tuc lay 40 bo nut TRAILING NGAU NHIEN roi chon cai tot nhat thi THUONG duoc nhieu hon bo tot nhat ma 40 tac gia EA that da chon. Ca hai tieu chi deu truot: dem p=0,199 · bien do p=0,596.",
     "day_la_AM_chu_khong_phai_CHUA_DO_DUOC": "Bo do chay du 400 ban, va no BIET NOI KHONG theo chieu nguoc: ti le ban gia la 7,8% chu khong phai 0%, nen khong phai truong hop 'null factory 0% lot'.",
     "LOI_DA_SUA_TRONG_CHINH_PHEP_THU": "Ban dau script in p = 0,0249 'DAT'. Sai phep so: no dem bao nhieu ban gia LE dat >= moc, trong khi moc la CAI TOT NHAT TRONG 40 ban that - mot cuc dai. Cung ho loi voi chay 40 phep thu roi bao p cua cai tot nhat ma khong hieu chinh. So dung la max-cua-40 voi max-cua-40: 0,0249 -> 0,5958. Da va trong _placebo_quan_tri.py, kem ghi chu day du."
+   },
+   "ket_qua_ghep": {
+    "trang_thai": "AM",
+    "luc": "2026-09-12",
+    "nguon": [
+     "_placebo_ghep.py",
+     "_gop_khong_chon.py",
+     "reports/PLACEBO_GHEP_*.json",
+     "reports/GOP_KHONG_CHON_*.json"
+    ],
+    "1_xep_hang_cap_tren_train_khong_mang_thong_tin": {
+     "ket_qua": "0/3 ma",
+     "chi_tiet": {
+      "US100Cash": "that 14/15 · gia trung vi 14/15 · p 0,658",
+      "US30Cash": "that 15/15 · gia trung vi 14/15 · p 0,349",
+      "US500Cash": "that 10/15 · gia trung vi 12/15 · p 0,909 (that KEM hon gia)"
+     },
+     "vi_sao": "Diem cap la lai/sut_giam cua TONG hai duong von. Cong hai duong tuong quan khong hoan hao thi sut giam giam theo SO HOC trong khi lai chi cong lai, nen cap hon he don MA KHONG CAN EDGE NAO. Do duoc: 77-93% cap BAT KY hon he don o holdout. Vay '14/15 cap giu hang' chinh la ti le nen.",
+     "lat_nguoc": "Con so '39/45 cap giu hang o holdout' tung duoc dung lam bang chung manh nhat cho huong ghep. No la MOT HIEN VAT CUA PHEP CONG, khong phai bang chung rang chon cap co tac dung."
+    },
+    "2_gop_deu_khong_chon": {
+     "ket_qua": "GOP thang mua-giu o 0/3 ma",
+     "bang_Calmar_holdout_2021_06_den_2026_07": {
+      "US100Cash": {
+       "he_don": 0.4,
+       "gop_73_chan": 1.72,
+       "mua_giu": 2.92
+      },
+      "US30Cash": {
+       "he_don": 0.5,
+       "gop_67_chan": 1.98,
+       "mua_giu": 2.41
+      },
+      "US500Cash": {
+       "he_don": 0.45,
+       "gop_52_chan": 1.77,
+       "mua_giu": 3.04
+      }
+     },
+     "doc_the_nao": "Gop deu CO tac dung that: Calmar tang 4 lan so voi he don (0,40 -> 1,72). Nhung no van THUA mua-giu tren ca ba ma (0,58-0,82 lan). Va loi tuyet doi cua he la 0,3-4,9% trong 5 nam so voi 52-104% cua mua-giu - o cung muc sut giam thi mua-giu van thang o MOI don bay, vi tran lai suat la Sharpe.",
+     "khop_voi_MDE": "Dung nhu tuong MDE du bao: tung chan co Sharpe duoi nguong phat hien, nen gop chung lai chi lam giam PHUONG SAI chu khong tao ra alpha."
+    },
+    "HAI_LOI_DA_MAC_VA_DA_SUA": [
+     "`_ghep_he._sut_giam` nhan LAI USD tren tai khoan VON=10.000, khong nhan chuoi phan tram. Dua chuoi % vao thi sut giam mua-giu US100 2021-2026 ra 0,4% trong khi that la 35,5%. Dau hieu: mot con so rui ro nho den muc vo ly.",
+     "Diem `lai/sut_giam` dung khap cac script ghep la USD CHIA CHO PHAN TRAM - van xep hang dung (ti le thuan Calmar khi VON co dinh) nhung KHONG phai Calmar. Calmar that = diem x 100 / VON. Dem so voi mot moc don vi khac la sai.",
+     "Ban dau `_gop_khong_chon.py` boc mau bang ca kho (p = 1,0000 ca ba ma). Nguyen nhan: MOI chan sau khu trung deu da duong tren train (73/73, 67/67, 52/52), tuc buoc loc khong loai ai - khong the dung chinh no lam null. Do la CHUA_DO_DUOC, khong phai AM. Da bo phep thu do va ghi ro `loc_duong_train_vo_hieu`."
+    ]
    }
   }
  },

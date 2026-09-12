@@ -4,13 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-- dang chay: ban_giao_song.py (pid 19360, 0 phut)
-- `so_mua_giu.log`: THANG mua-giu o cung sut giam: 43/268
-- `tester_da_ma.log`: -> reports/TESTER_DA_MA.json
-- `tester_holdout.log`: duong o CA HAI doan: 13/225
-- `tester_kho.log`: UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM
-- `tester_z5.log`: -> reports/TESTER_Z5.json
 - git: 4d5d3d0 ban giao: con hai he qua ca hai cong; viec mai la placebo + da tai san + chia nam
 ### 2026-09-06 21:08:39 — chup trang thai
 
@@ -404,3 +397,10 @@
 - `test_day_du.log`: .......................................................................................
 - `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
 - git: b1c2ff5 bao cao 12/09 phan 2: dong khoi 1, mo khoi 7, placebo trailing dang chay
+### 2026-09-12 09:30:43 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16688, 0 phut), dieu_khien_xa.py (pid 15316, 144 phut)
+- `lam_moi_mde.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LAM_MOI_MDE.json
+- `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
+- `qwen_ultra.log`: ~ 09:28:51 | san sang 12 | CPU    6% / muc tieu 35%  |  con  5.8 loi  |  dang chay 0  [trong]
+- git: 8f9c130 khoi 7 viec 1: ho TRAILING TRUOT PLACEBO - va mot loi thong ke trong chinh phep thu

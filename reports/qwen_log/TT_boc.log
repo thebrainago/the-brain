@@ -1,16 +1,8 @@
 === QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===
-co che truoc: 1181 | tai lieu chua khai thac: 9788
+co che truoc: 1398 | tai lieu chua khai thac: 10152
 
-vong  1 | doc   0/400 | ung vien  34 | co che 1181 -> 1208 (+27) | 685s
-         boc: {'ban': 50, 'co_che_moi': 27, 'tu_choi': 26, 'loi': 0, 'giay': 242.5, 'giay_moi_ban': 4.8, 'suat_tren_100_ban': 54.0, 'ly_do_tu_choi': {"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 6, "thieu truong bat buoc 'vao'": 5, 'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 3, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.559%, XAU": 2, "ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph": 2, '[\'chay loi: KeyError: "chi bao \\\'stoch_sig\\\' khong biet, va ': 2, "['suy bien tren MOI tai san do duoc (chuoi kiem 100.000%, XA": 2, '["da co co che ten \'day_pivot_ema_open_signal\'"]': 1}}
-vong  2 | doc 253/400 | ung vien   6 | co che 1208 -> 1208 (+0) | 579s
-         boc: {'ban': 6, 'co_che_moi': 0, 'tu_choi': 0, 'loi': 0, 'giay': 47.1, 'giay_moi_ban': 7.9, 'suat_tren_100_ban': 0.0, 'ly_do_tu_choi': {}}
-vong  3 | doc 107/400 | ung vien  32 | co che 1208 -> 1216 (+8) | 869s
-         boc: {'ban': 50, 'co_che_moi': 8, 'tu_choi': 88, 'loi': 0, 'giay': 264.2, 'giay_moi_ban': 5.3, 'suat_tren_100_ban': 16.0, 'ly_do_tu_choi': {"ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph": 65, "vao[0]: gia luon DUONG nen 'gia > 0' la hang so - nguong tha": 5, "['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 4, 'vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, '[\'chay loi: KeyError: "chi bao \\\'xroc2_vg\\\' khong biet, va k': 2, 'trung dieu kien': 2, "thieu truong bat buoc 'vao'": 2, "vao[0]: trong mot bar 'high' >= 'low' LUON dung, nen 'high <": 1}}
-vong  4 | doc   0/400 | ung vien  97 | co che 1216 -> 1240 (+24) | 1190s
-         boc: {'ban': 102, 'co_che_moi': 24, 'tu_choi': 68, 'loi': 0, 'giay': 487.4, 'giay_moi_ban': 4.8, 'suat_tren_100_ban': 23.5, 'ly_do_tu_choi': {'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 14, "['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 13, '[\'chay loi: KeyError: "chi bao \\\'xxdpo\\\' khong biet, va khon': 8, '[\'chay loi: KeyError: "chi bao \\\'custom\\\' khong biet, va kho': 4, "thieu truong bat buoc 'vao'": 3, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.900%, XAU": 2, '[\'chay loi: KeyError: "chi bao \\\'wpr\\\' khong biet, va khong ': 2, '[\'chay loi: KeyError: "chi bao \\\'khac\\\' khong biet, va khong': 2}}
-vong  5 | doc   0/400 | ung vien   0 | co che 1240 -> 1263 (+23) | 350s
+vong  1 | doc   0/400 | ung vien   0 | co che 1398 -> 1398 (+0) | 363s
          boc: {'ban': 0, 'co_che_moi': 0}
   !! ung vien 0 NHUNG kho con 3415 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.
 
-=== XONG 3673s | co che 1181 -> 1263 (+82) ===
+=== XONG 363s | co che 1398 -> 1398 (+0) ===

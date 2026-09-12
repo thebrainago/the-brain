@@ -1,0 +1,27 @@
+{
+ "symbol": "US30Cash",
+ "cat": "2021.06.01",
+ "so_chan": 77,
+ "sau_khu_trung": 67,
+ "so_duong_train": 67,
+ "loc_duong_train_vo_hieu": true,
+ "bang": {
+  "he don dau bang train": {
+   "loi_pct": 0.82,
+   "sut_giam_pct": 1.64,
+   "calmar": 0.498
+  },
+  "GOP DEU 67 chan": {
+   "loi_pct": 4.94,
+   "sut_giam_pct": 2.5,
+   "calmar": 1.978
+  },
+  "MUA-GIU XM_US30CASH": {
+   "loi_pct": 52.45,
+   "sut_giam_pct": 21.8,
+   "calmar": 2.406
+  }
+ },
+ "gop_tren_mua_giu": 0.822,
+ "phan_quyet": "MUA-GIU THANG"
+}
