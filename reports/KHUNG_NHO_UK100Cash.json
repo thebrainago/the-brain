@@ -1,0 +1,92 @@
+{
+ "H4": {
+  "cua_so": [
+   "2016.06.01",
+   "2021.06.01",
+   "2026.07.29"
+  ],
+  "co_ca_hai_doan": 1156,
+  "duong": 7,
+  "am": 990,
+  "dao_duong": 16,
+  "tong_chan_duong": 23,
+  "ten_duong": [
+   "bao_loi_ban_theo_xu_huong_giam",
+   "buy_rsi_oversold_filter",
+   "dong_luc_bull",
+   "mua_quay_ve_sau_vol_gian_no",
+   "rsi_oversold_buy",
+   "vao_lenh_mean_reversion_ibs_cuc_thap",
+   "yy_cross_ma_buy"
+  ],
+  "ten_dao_duong": [
+   "12_month_momentum_long__dao",
+   "absolute_momentum__dao",
+   "ban_khi_sma5_cheo_xuong_sma8__dao",
+   "bearish_fair_value_gap__dao",
+   "bullish_order_block_reversal__dao",
+   "kijun_sen_short_crossover__dao",
+   "mean_reversion_sell_rsi2_90_below_200ema_above_10sma__dao",
+   "mua_engulfing_rsi_30__dao",
+   "mua_khi_rsi_vao_vung_qua_ban__dao",
+   "net_rsi_signal__dao",
+   "rsi_dashboard_buy_signal__dao",
+   "slow_short__dao",
+   "smarttrendscore_v2_trend_following__dao",
+   "trend_momentum_buy__dao",
+   "vao_ban_phan_do_thap__dao",
+   "vao_ngan_khi_rsi_tren_nguong_qua_mua__dao"
+  ],
+  "top": [
+   {
+    "ten": "vao_lenh_mean_reversion_ibs_cuc_thap",
+    "lai_ho": 243.75,
+    "dd_ho": 1.09,
+    "lenh_ho": 272,
+    "loi_tren_dd": 223.6
+   },
+   {
+    "ten": "yy_cross_ma_buy",
+    "lai_ho": 18.69,
+    "dd_ho": 0.157,
+    "lenh_ho": 31,
+    "loi_tren_dd": 119.0
+   },
+   {
+    "ten": "dong_luc_bull",
+    "lai_ho": 85.7,
+    "dd_ho": 1.909,
+    "lenh_ho": 191,
+    "loi_tren_dd": 44.9
+   },
+   {
+    "ten": "mua_quay_ve_sau_vol_gian_no",
+    "lai_ho": 68.97,
+    "dd_ho": 1.664,
+    "lenh_ho": 118,
+    "loi_tren_dd": 41.4
+   },
+   {
+    "ten": "bao_loi_ban_theo_xu_huong_giam",
+    "lai_ho": 17.96,
+    "dd_ho": 0.855,
+    "lenh_ho": 88,
+    "loi_tren_dd": 21.0
+   },
+   {
+    "ten": "buy_rsi_oversold_filter",
+    "lai_ho": 17.93,
+    "dd_ho": 1.493,
+    "lenh_ho": 104,
+    "loi_tren_dd": 12.0
+   },
+   {
+    "ten": "rsi_oversold_buy",
+    "lai_ho": 3.38,
+    "dd_ho": 0.582,
+    "lenh_ho": 96,
+    "loi_tren_dd": 5.8
+   }
+  ]
+ }
+}

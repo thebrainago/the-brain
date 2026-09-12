@@ -127,5 +127,48 @@
    "pct_nam": 3.37,
    "sharpe": 0.002513
   }
+ },
+ {
+  "bo": [
+   "ban_pha_vo_inh_phien_ny__dao",
+   "rsi_3_10",
+   "rsi_ban_qua_mua"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 39.71,
+   "lenh": 334,
+   "pct_nam": 38.08,
+   "sharpe": 1.187709
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    16.0,
+    0.0,
+    0.0
+   ],
+   "dd": 32.94,
+   "lenh": 119,
+   "pct_nam": 25.48,
+   "sharpe": 1.74619
+  },
+  "mua_giu": {
+   "lot": [
+    1.2,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 91.97,
+   "lenh": 6,
+   "pct_nam": 3.37,
+   "sharpe": 0.002513
+  }
  }
 ]

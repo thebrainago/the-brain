@@ -1,0 +1,111 @@
+{
+ "nguong_ibs": 0.2,
+ "bac": [
+  {
+   "bac": "1_cfd_utc",
+   "ma": "XM_US500CASH",
+   "so_bar": 4054,
+   "tu": "2011-08-08",
+   "den": "2026-09-03",
+   "che_do": "giao_dich",
+   "chi_phi_do_tin": "SAN",
+   "verdict": "FAIL",
+   "he_sharpe": 0.52,
+   "bh_sharpe": 0.384,
+   "he_cagr_pct": 5.113,
+   "bh_cagr_pct": 6.931,
+   "phoi_nhiem": 0.1704,
+   "truot": [
+    "4_alpha_duong_co_y_nghia",
+    "6_dang_ky_truoc",
+    "5_placebo"
+   ]
+  },
+  {
+   "bac": "1_cfd_utc",
+   "ma": "US500CASH",
+   "so_bar": 4027,
+   "tu": "2011-08-08",
+   "den": "2026-07-28",
+   "che_do": "giao_dich",
+   "chi_phi_do_tin": "SAN",
+   "verdict": "FAIL",
+   "he_sharpe": 0.525,
+   "bh_sharpe": 0.377,
+   "he_cagr_pct": 5.169,
+   "bh_cagr_pct": 6.788,
+   "phoi_nhiem": 0.1696,
+   "truot": [
+    "4_alpha_duong_co_y_nghia",
+    "6_dang_ky_truoc",
+    "5_placebo"
+   ]
+  },
+  {
+   "bac": "2_cash_phien",
+   "ma": "SP500",
+   "so_bar": 24754,
+   "tu": "1927-12-30",
+   "den": "2026-07-21",
+   "che_do": "giao_dich",
+   "chi_phi_do_tin": "SAN",
+   "verdict": "FAIL",
+   "he_sharpe": -0.011,
+   "bh_sharpe": 0.02,
+   "he_cagr_pct": -0.073,
+   "bh_cagr_pct": 0.377,
+   "phoi_nhiem": 0.1052,
+   "truot": [
+    "1_loi_hon_mua_giu",
+    "2_sharpe_hon_mua_giu",
+    "3_calmar_hon_mua_giu",
+    "4_alpha_duong_co_y_nghia",
+    "6_dang_ky_truoc",
+    "5_placebo"
+   ]
+  },
+  {
+   "bac": "2_cash_phien",
+   "ma": "YH_NASDAQ",
+   "so_bar": 13995,
+   "tu": "1971-02-05",
+   "den": "2026-08-11",
+   "che_do": "nghien_cuu",
+   "chi_phi_do_tin": "KHAI",
+   "verdict": "FAIL",
+   "he_sharpe": 0.032,
+   "bh_sharpe": 0.209,
+   "he_cagr_pct": 0.359,
+   "bh_cagr_pct": 4.343,
+   "phoi_nhiem": 0.1658,
+   "truot": [
+    "1_loi_hon_mua_giu",
+    "2_sharpe_hon_mua_giu",
+    "3_calmar_hon_mua_giu",
+    "4_alpha_duong_co_y_nghia",
+    "6_dang_ky_truoc",
+    "5_placebo"
+   ]
+  },
+  {
+   "bac": "3_danh_muc",
+   "ma": "SP500 + YH_NASDAQ",
+   "so_bar": 13980,
+   "tu": "1971-02-05",
+   "den": "2026-07-21",
+   "verdict": "FAIL",
+   "he_sharpe": 0.038,
+   "bh_sharpe": 0.186,
+   "he_cagr_pct": 0.332,
+   "bh_cagr_pct": 3.189,
+   "truot": [
+    "1_loi_hon_mua_giu",
+    "2_sharpe_hon_mua_giu",
+    "3_calmar_hon_mua_giu",
+    "4_alpha_duong_co_y_nghia",
+    "6_dang_ky_truoc",
+    "5_placebo"
+   ]
+  }
+ ]
+}

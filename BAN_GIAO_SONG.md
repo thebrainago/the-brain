@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-- dang chay: ban_giao_song.py (pid 12708, 0 phut)
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo.log`: DAT (ban that noi len khoi dam dich)
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
 - `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
 - `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
 - `tester_holdout2.log`: duong o CA HAI doan: 15/242
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 6044, 0 phut), dieu_khien_xa.py (pid 15316, 266 phut)
 - `qwen_ultra.log`: ~ 11:31:01 | san sang 3 | CPU   81% / muc tieu 90%  |  con  1.9 loi  |  dang chay 1  [TESTER:1]
 - git: b9ef6d9 tru: bit CUA GIET cua khoa tester - khoi 6 chi chan duong PHONG, khong chan duong GIET
+### 2026-09-12 11:37:37 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3404, 0 phut), dieu_khien_xa.py (pid 15316, 271 phut)
+- `qwen_ultra.log`: ~ 11:37:02 | san sang 4 | CPU  100% / muc tieu 90%  |  con -2.0 loi  |  dang chay 1  [TESTER:1]
+- git: d892a73 DINH CHINH: chang 4->5 KHONG nghen - 0/1.132 co che vuot noi MDE
