@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
-- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
-### 2026-09-06 23:05:54 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9516, 0 phut)
 - `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
 - `don_bay.log`: when serializing dict item 'bang'
 - `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 10068, 0 phut), dieu_khien_xa.py (pid 15316, 326 phut)
 - `qwen_ultra.log`: ~ 12:31:04 | san sang 0 | CPU    6% / muc tieu 95%  |  con 17.9 loi  |  dang chay 1  [MANG:1]
 - git: 8919af8 Quet TRAIN/HOLDOUT 18 ma: chon THAM SO tren train khong mang thong tin - va XM_US100CASH la mot cu cherry-pick cua chinh toi
+### 2026-09-12 12:49:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11428, 0 phut), dieu_khien_xa.py (pid 15316, 343 phut)
+- `qwen_ultra.log`: ~ 12:49:05 | san sang 0 | CPU    4% / muc tieu 95%  |  con 18.1 loi  |  dang chay 1  [MANG:1]
+- git: 3e865b8 MOC DANH GIA SAI da che mat mot tin hieu that - chu du an chi ra

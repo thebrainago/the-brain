@@ -61,6 +61,15 @@ KC_ATR = [0.5, 1.0, 2.0]
 #: o dau bang la mot cau hinh 2 LENH voi CAGR khop sut giam 421% - maxDD gan 0
 #: lam don bay khop phong len tram lan. Chan o TRAIN, truoc khi nhin holdout.
 SO_LENH_TOI_THIEU = 30
+#: NGAN SACH SUT GIAM CHUNG. Quy MOI he ve cung muc rui ro nay roi so CAGR.
+#:
+#: Vi sao khong khop sut giam voi "chan giu tot hon": khi ca hai chan deu am (moi
+#: cap FX deu vay), moc la TIEN MAT - ma tien mat khong co sut giam, nen khong co
+#: gi de khop. Ban truoc van lay maxDD cua chan giu dang LO lam chuan, tuc do rui
+#: ro bang mot thu khong ai chon.
+#: Mot nguong CO DINH lam moi tai san so duoc voi nhau, va no tra loi dung cau hoi
+#: tien: BAO NHIEU LAI O BAY NHIEU RUI RO.
+NGAN_SACH_DD = 20.0
 
 
 def spec(chieu: int, z: float, giu: int, kc: float) -> dict:
@@ -157,8 +166,15 @@ def _mot(args) -> list[dict]:
                     if n_tr < SO_LENH_TOI_THIEU or kh_tr < 0.002:
                         continue
                     hho, n_ho, kh_ho = _chay(ho, cho)
-                    Ltr = abs(bh_tr["maxdd"]) / max(abs(htr["maxdd"]), 1e-9)
-                    Lho = abs(bh["maxdd"]) / max(abs(hho["maxdd"]), 1e-9)
+                    # Quy ve CUNG ngan sach sut giam, ca he lan moc.
+                    Ltr = (NGAN_SACH_DD / 100.0) / max(abs(htr["maxdd"]), 1e-9)
+                    Lho = (NGAN_SACH_DD / 100.0) / max(abs(hho["maxdd"]), 1e-9)
+                    L_moc_tr = (NGAN_SACH_DD / 100.0) / max(abs(bh_tr["maxdd"]), 1e-9)
+                    L_moc_ho = (NGAN_SACH_DD / 100.0) / max(abs(bh["maxdd"]), 1e-9)
+                    # Moc o cung ngan sach: neu ca hai chan giu am thi moc la 0
+                    # (tien mat), khong phai mot so am nhan don bay.
+                    moc_tr = max(bh_tr["cagr"] * L_moc_tr, 0.0)
+                    moc_ho = max(bh["cagr"] * L_moc_ho, 0.0)
                     ra.append({
                         "ma": ma, "khung": khung, "z": z, "giu": giu, "kc_atr": kc,
                         # --- TRAIN: dung de XEP HANG, khong dung de ket luan
@@ -166,7 +182,8 @@ def _mot(args) -> list[dict]:
                         "tr_sharpe": round(htr["sharpe"], 3),
                         "tr_so_lenh": n_tr,
                         "tr_cagr_khop_dd": round(htr["cagr"] * 100 * Ltr, 3),
-                        "tr_hon_mua_giu": bool(htr["cagr"] * Ltr > bh_tr["cagr_moc"]),
+                        "tr_moc_khop_dd": round(moc_tr * 100, 3),
+                        "tr_hon_mua_giu": bool(htr["cagr"] * Ltr > moc_tr),
                         # --- HOLDOUT: con so DUY NHAT duoc tin
                         "cagr_pct": round(hho["cagr"] * 100, 3),
                         "sharpe": round(hho["sharpe"], 3),
@@ -180,8 +197,10 @@ def _mot(args) -> list[dict]:
                         "bh_mua_cagr_pct": round(bh["mua_cagr"] * 100, 3),
                         "bh_ban_cagr_pct": round(bh["ban_cagr"] * 100, 3),
                         "moc_cagr_pct": round(bh["cagr_moc"] * 100, 3),
-                        # HON MOC = hon max(mua-giu, ban-giu, tien mat) o cung sut giam
-                        "hon_mua_giu": bool(hho["cagr"] * Lho > bh["cagr_moc"]),
+                        "moc_khop_dd": round(moc_ho * 100, 3),
+                        # HON MOC = o CUNG ngan sach sut giam, he cho CAGR cao hon
+                        # max(mua-giu, ban-giu, tien mat) cung quy ve muc do.
+                        "hon_mua_giu": bool(hho["cagr"] * Lho > moc_ho),
                     })
                 except Exception:
                     continue
