@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
-- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
-### 2026-09-06 23:07:36 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 19416, 0 phut)
 - `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
 - `don_bay.log`: when serializing dict item 'bang'
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 12740, 0 phut), dieu_khien_xa.py (pid 15316, 350 phut)
 - `qwen_ultra.log`: ~ 12:55:06 | san sang 0 | CPU   13% / muc tieu 95%  |  con 16.3 loi  |  dang chay 1  [MANG:1]
 - git: dc582d4 QUANTLAB: nhan/dap_quan_tri.py - cay cau con thieu giua HO 1 (entry) va HO 2 (quan tri)
+### 2026-09-12 13:06:08 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13756, 0 phut), dieu_khien_xa.py (pid 15316, 360 phut)
+- `qwen_ultra.log`: ~ 13:05:06 | san sang 0 | CPU   48% / muc tieu 95%  |  con  9.4 loi  |  dang chay 1  [MANG:1]
+- git: f233587 Q2: nhan/ho_so_mua_vu.py - mua vu + entry-time cho 159 ma, va mot BAY NHAN DU LIEU

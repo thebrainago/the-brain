@@ -55,6 +55,18 @@ SO_XAO = 2000
 HAT = 20260912
 #: Duoi so quan sat nay cho mot nhom thi khong ket luan gi ve nhom do.
 QS_TOI_THIEU = 12
+#: Mot nhom phai co it nhat tung nay lan TRUNG VI cac nhom moi duoc tinh.
+#:
+#: VI SAO (chu du an chi ra 12/09: "fx dau chay thu 7 va chu nhat"). Sau khi da
+#: hieu chinh lech nhan, van con 54/159 ma co bar CHU NHAT - tat ca la cap FX.
+#: Chung khong phai phien: FX mo lai ~22:00 toi CN gio may chu, nen sinh mot bar
+#: hai gio mang KHE GIA CUOI TUAN. So luong 1,3-11% so voi ~20% cua ngay that.
+#:
+#: Doi nhan khong cuu duoc loai nay - phai LOAI. Va luat theo TI LE thi bat duoc
+#: ca hai loai mot luc, khong can biet tai san la FX hay chi so:
+#:   loai A  khong co T6, CN ~20%  -> lech nhan, dich +1 (xem `thu_da_sua`)
+#:   loai B  co T6, CN 1-4%        -> bar mo lai, bi luat nay loai
+TY_LE_NHOM_TOI_THIEU = 0.5
 
 
 def _loi_suat(df: pd.DataFrame) -> pd.Series:
@@ -101,7 +113,8 @@ def thu_da_sua(idx: pd.DatetimeIndex) -> tuple[np.ndarray, str]:
     return t, ""
 
 
-def _nhom(r: pd.Series, nhan: np.ndarray, ten: str) -> dict:
+def _nhom(r: pd.Series, nhan: np.ndarray, ten: str,
+          nhom_deu: bool = True) -> dict:
     """Chenh lech nhom cao nhat - thap nhat, so voi HOAN VI NHAN.
 
     Hoan vi NHAN (khong hoan vi loi suat) giu nguyen moi tinh chat cua chuoi -
@@ -114,7 +127,15 @@ def _nhom(r: pd.Series, nhan: np.ndarray, ten: str) -> dict:
         return {"loi": "chi %d quan sat" % len(x)}
     ten_nhom = sorted(set(g.tolist()))
     dem = {k: int((g == k).sum()) for k in ten_nhom}
-    du = [k for k in ten_nhom if dem[k] >= QS_TOI_THIEU]
+    # Luat ti le CHI ap cho nhom CHU KY DEU (thu, gio, thang) - noi cac nhom le
+    # ra phai xap xi bang nhau nen mot nhom nho bat thuong la hien vat.
+    # KHONG ap cho phep thu HAI NHOM CO Y LECH: "tuan giao thang" chi co 6 ngay
+    # tren ~24 ngay con lai, va luat ti le se loai chinh nhom dang hoi. Ban dau
+    # toi ap cho tat ca va M2 bien mat khoi 159/159 ma.
+    tv = float(np.median([dem[k] for k in ten_nhom])) if ten_nhom else 0.0
+    san = max(QS_TOI_THIEU, TY_LE_NHOM_TOI_THIEU * tv) if nhom_deu else QS_TOI_THIEU
+    du = [k for k in ten_nhom if dem[k] >= san]
+    bo = [int(k) for k in ten_nhom if dem[k] < san]
     if len(du) < 2:
         return {"loi": "chi %d nhom du quan sat" % len(du)}
 
@@ -127,7 +148,8 @@ def _nhom(r: pd.Series, nhan: np.ndarray, ten: str) -> dict:
     null = np.array([_chenh(rng.permutation(g))[0] for _ in range(SO_XAO)])
     p = float((np.sum(null >= that) + 1) / (SO_XAO + 1))
     tb = {int(k): round(float(x[g == k].mean()) * 1e4, 2) for k in du}  # bps/bar
-    return {"ten": ten, "so_nhom": len(du), "nhom_cao": int(cao), "nhom_thap": int(thap),
+    return {"ten": ten, "so_nhom": len(du), "nhom_bi_loai": bo,
+            "nhom_cao": int(cao), "nhom_thap": int(thap),
             "chenh_bps": round(that * 1e4, 2),
             "null_trung_vi_bps": round(float(np.median(null)) * 1e4, 2),
             "p": round(p, 4), "dat": bool(p <= 0.05),
@@ -190,7 +212,7 @@ def quet_mot(ma: str, khung: str = "D1") -> dict:
           "tu": str(df.index[0].date()), "den": str(df.index[-1].date()),
           "so_nam": round((df.index[-1] - df.index[0]).days / 365.25, 2)}
     ra["M1_thang_trong_nam"] = _nhom(r, idx.month.to_numpy(), "thang")
-    ra["M2_tuan_giao_thang"] = _nhom(r, giao_thang, "giao_thang")
+    ra["M2_tuan_giao_thang"] = _nhom(r, giao_thang, "giao_thang", nhom_deu=False)
     thu, ghi = thu_da_sua(idx)
     ra["M3_ngay_trong_tuan"] = _nhom(r, thu, "thu")
     if ghi:

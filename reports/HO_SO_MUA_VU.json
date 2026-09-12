@@ -9,6 +9,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 5,
    "chenh_bps": 7.56,
@@ -47,6 +48,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.29,
@@ -65,6 +67,10 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 3,
    "nhom_thap": 4,
    "chenh_bps": 2.72,
@@ -94,7 +100,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 4.4
+  "giay": 4.23
  },
  "AUDCHF|D1": {
   "ma": "AUDCHF",
@@ -106,6 +112,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 5,
    "chenh_bps": 7.81,
@@ -144,6 +151,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.41,
@@ -162,6 +170,10 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 1,
    "nhom_thap": 3,
    "chenh_bps": 4.61,
@@ -191,7 +203,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.85
+  "giay": 4.0
  },
  "AUDHKD|D1": {
   "ma": "AUDHKD",
@@ -203,6 +215,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 9,
    "chenh_bps": 25.6,
@@ -241,6 +254,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 7.82,
@@ -259,6 +273,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 4,
    "chenh_bps": 15.11,
@@ -285,7 +300,7 @@
    "loi": "chi 102 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.37
+  "giay": 1.29
  },
  "AUDHUF|D1": {
   "ma": "AUDHUF",
@@ -297,6 +312,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 5,
    "nhom_thap": 1,
    "chenh_bps": 10.48,
@@ -335,6 +351,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 3.11,
@@ -352,11 +369,14 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 0,
    "nhom_thap": 4,
-   "chenh_bps": 53.12,
-   "null_trung_vi_bps": 10.84,
+   "chenh_bps": 29.02,
+   "null_trung_vi_bps": 8.61,
    "p": 0.0005,
    "dat": true,
    "trung_binh_bps": {
@@ -364,16 +384,14 @@
     "1": 0.23,
     "2": 2.3,
     "3": -1.57,
-    "4": -19.39,
-    "6": 33.73
+    "4": -19.39
    },
    "so_quan_sat": {
     "0": 331,
     "1": 331,
     "2": 329,
     "3": 331,
-    "4": 330,
-    "6": 104
+    "4": 330
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 18.8%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -384,7 +402,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.32
+  "giay": 1.23
  },
  "AUDJPY|D1": {
   "ma": "AUDJPY",
@@ -396,6 +414,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 8,
    "chenh_bps": 9.63,
@@ -434,6 +453,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.61,
@@ -452,6 +472,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 1.89,
@@ -481,7 +502,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 4.11
+  "giay": 4.17
  },
  "AUDNOK|D1": {
   "ma": "AUDNOK",
@@ -493,6 +514,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 7,
    "chenh_bps": 12.95,
@@ -531,6 +553,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.6,
@@ -549,6 +572,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 13.38,
@@ -575,7 +601,7 @@
    "loi": "chi 129 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.96
+  "giay": 0.87
  },
  "AUDNZD|D1": {
   "ma": "AUDNZD",
@@ -587,6 +613,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 12,
    "chenh_bps": 4.84,
@@ -625,6 +652,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.71,
@@ -643,6 +671,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 6.07,
@@ -672,7 +703,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 4.34
+  "giay": 4.2
  },
  "AUDPLN|D1": {
   "ma": "AUDPLN",
@@ -684,6 +715,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 11,
    "chenh_bps": 16.39,
@@ -722,6 +754,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.29,
@@ -740,6 +773,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 33.93,
@@ -766,7 +802,7 @@
    "loi": "chi 129 quan sat PIT"
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.02
+  "giay": 0.87
  },
  "AUDSEK|D1": {
   "ma": "AUDSEK",
@@ -778,6 +814,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 7,
    "chenh_bps": 7.54,
@@ -816,6 +853,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 4.07,
@@ -834,6 +872,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 1,
    "chenh_bps": 6.65,
@@ -863,7 +904,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.72
+  "giay": 1.77
  },
  "AUDSGD|D1": {
   "ma": "AUDSGD",
@@ -875,6 +916,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 5,
    "nhom_thap": 9,
    "chenh_bps": 8.48,
@@ -913,6 +955,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.28,
@@ -931,6 +974,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 10.94,
@@ -960,7 +1006,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.22
+  "giay": 1.18
  },
  "AUDTHB|D1": {
   "ma": "AUDTHB",
@@ -972,6 +1018,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 11,
    "chenh_bps": 31.44,
@@ -1010,6 +1057,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 4.18,
@@ -1028,6 +1076,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 18.12,
@@ -1054,7 +1103,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.15
+  "giay": 1.21
  },
  "AUDUSD|D1": {
   "ma": "AUDUSD",
@@ -1066,6 +1115,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 5,
    "chenh_bps": 7.89,
@@ -1104,6 +1154,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.3,
@@ -1122,6 +1173,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 2.78,
@@ -1151,7 +1203,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 4.02
+  "giay": 3.68
  },
  "AUDZAR|D1": {
   "ma": "AUDZAR",
@@ -1163,6 +1215,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 3,
    "chenh_bps": 27.9,
@@ -1201,6 +1254,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.26,
@@ -1219,6 +1273,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 2,
    "chenh_bps": 20.49,
@@ -1248,7 +1303,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.73
+  "giay": 1.86
  },
  "CADCHF|D1": {
   "ma": "CADCHF",
@@ -1260,6 +1315,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 12,
    "chenh_bps": 7.07,
@@ -1298,6 +1354,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.18,
@@ -1316,6 +1373,10 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 1,
    "nhom_thap": 3,
    "chenh_bps": 5.85,
@@ -1345,7 +1406,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.8
+  "giay": 3.89
  },
  "CADJPY|D1": {
   "ma": "CADJPY",
@@ -1357,6 +1418,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 1,
    "chenh_bps": 9.95,
@@ -1395,6 +1457,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.45,
@@ -1412,28 +1475,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 2,
-   "nhom_thap": 6,
-   "chenh_bps": 7.96,
-   "null_trung_vi_bps": 7.16,
-   "p": 0.4153,
+   "nhom_thap": 4,
+   "chenh_bps": 4.28,
+   "null_trung_vi_bps": 4.97,
+   "p": 0.6367,
    "dat": false,
    "trung_binh_bps": {
     "0": 1.28,
     "1": 1.93,
     "2": 2.78,
     "3": -1.25,
-    "4": -1.51,
-    "6": -5.18
+    "4": -1.51
    },
    "so_quan_sat": {
     "0": 1299,
     "1": 1301,
     "2": 1298,
     "3": 1301,
-    "4": 1300,
-    "6": 170
+    "4": 1300
    }
   },
   "diem_thang_PIT": {
@@ -1443,7 +1508,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.84
+  "giay": 4.16
  },
  "CADMXN|D1": {
   "ma": "CADMXN",
@@ -1455,6 +1520,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 6,
    "chenh_bps": 19.28,
@@ -1493,6 +1559,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 5.62,
@@ -1511,6 +1578,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 1,
    "chenh_bps": 9.45,
@@ -1540,7 +1608,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.19
+  "giay": 1.26
  },
  "CADSGD|D1": {
   "ma": "CADSGD",
@@ -1552,6 +1620,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 7,
    "chenh_bps": 5.62,
@@ -1590,6 +1659,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.84,
@@ -1608,6 +1678,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 3.2,
@@ -1634,7 +1705,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.28
+  "giay": 1.68
  },
  "CHFDKK|D1": {
   "ma": "CHFDKK",
@@ -1646,6 +1717,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 3,
    "chenh_bps": 7.46,
@@ -1684,6 +1756,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.02,
@@ -1702,6 +1775,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 3,
    "nhom_thap": 0,
    "chenh_bps": 5.48,
@@ -1731,7 +1807,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.22
+  "giay": 1.28
  },
  "CHFHUF|D1": {
   "ma": "CHFHUF",
@@ -1743,6 +1819,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 1,
    "chenh_bps": 9.7,
@@ -1781,6 +1858,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 4.79,
@@ -1798,28 +1876,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 0,
    "nhom_thap": 4,
-   "chenh_bps": 41.87,
-   "null_trung_vi_bps": 8.31,
-   "p": 0.0005,
+   "chenh_bps": 17.56,
+   "null_trung_vi_bps": 6.24,
+   "p": 0.001,
    "dat": true,
    "trung_binh_bps": {
     "0": 6.07,
     "1": 0.42,
     "2": -0.7,
     "3": 5.75,
-    "4": -11.48,
-    "6": 30.39
+    "4": -11.48
    },
    "so_quan_sat": {
     "0": 472,
     "1": 473,
     "2": 469,
     "3": 471,
-    "4": 472,
-    "6": 104
+    "4": 472
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.2%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -1830,7 +1909,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.08
+  "giay": 2.03
  },
  "CHFJPY|D1": {
   "ma": "CHFJPY",
@@ -1842,6 +1921,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 1,
    "chenh_bps": 9.09,
@@ -1880,6 +1960,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.87,
@@ -1898,6 +1979,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5
+   ],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 3.02,
@@ -1927,7 +2011,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 4.1
+  "giay": 3.83
  },
  "CHFMXN|D1": {
   "ma": "CHFMXN",
@@ -1939,6 +2023,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 10,
    "chenh_bps": 13.96,
@@ -1977,6 +2062,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 4.25,
@@ -1995,6 +2081,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 4,
    "chenh_bps": 13.36,
@@ -2024,7 +2111,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.21
+  "giay": 1.65
  },
  "CHFNOK|D1": {
   "ma": "CHFNOK",
@@ -2036,6 +2123,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 6,
    "nhom_thap": 5,
    "chenh_bps": 12.79,
@@ -2074,6 +2162,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.29,
@@ -2092,6 +2181,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 3,
    "nhom_thap": 2,
    "chenh_bps": 11.61,
@@ -2121,7 +2213,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.24
+  "giay": 1.21
  },
  "CHFPLN|D1": {
   "ma": "CHFPLN",
@@ -2133,6 +2225,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 5,
    "chenh_bps": 16.8,
@@ -2171,6 +2264,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 3.01,
@@ -2189,6 +2283,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 3,
    "nhom_thap": 0,
    "chenh_bps": 7.96,
@@ -2218,7 +2315,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.16
+  "giay": 1.2
  },
  "CHFSEK|D1": {
   "ma": "CHFSEK",
@@ -2230,6 +2327,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 9,
    "chenh_bps": 14.04,
@@ -2268,6 +2366,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 6.16,
@@ -2286,6 +2385,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 0,
    "chenh_bps": 16.71,
@@ -2312,7 +2412,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 0.76
+  "giay": 0.79
  },
  "CHFSGD|D1": {
   "ma": "CHFSGD",
@@ -2324,6 +2424,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 8,
    "chenh_bps": 6.05,
@@ -2362,6 +2463,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.91,
@@ -2380,6 +2482,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 3,
    "nhom_thap": 2,
    "chenh_bps": 4.82,
@@ -2409,7 +2514,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.16
+  "giay": 1.21
  },
  "DE40|D1": {
   "ma": "DE40",
@@ -2421,6 +2526,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 6,
    "chenh_bps": 19.64,
@@ -2459,6 +2565,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 5.27,
@@ -2477,6 +2584,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 12.11,
@@ -2506,7 +2614,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.83
+  "giay": 1.87
  },
  "DKKSEK|D1": {
   "ma": "DKKSEK",
@@ -2518,6 +2626,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 6,
    "nhom_thap": 11,
    "chenh_bps": 15.77,
@@ -2556,6 +2665,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.86,
@@ -2574,6 +2684,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 10.65,
@@ -2600,7 +2711,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.7
+  "giay": 0.74
  },
  "EURAUD|D1": {
   "ma": "EURAUD",
@@ -2612,6 +2723,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 2,
    "chenh_bps": 6.91,
@@ -2650,6 +2762,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.59,
@@ -2667,28 +2780,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
+   "nhom_cao": 4,
    "nhom_thap": 0,
-   "chenh_bps": 5.35,
-   "null_trung_vi_bps": 5.24,
-   "p": 0.4813,
+   "chenh_bps": 4.11,
+   "null_trung_vi_bps": 3.82,
+   "p": 0.4218,
    "dat": false,
    "trung_binh_bps": {
     "0": -2.64,
     "1": -1.66,
     "2": 1.1,
     "3": 0.56,
-    "4": 1.47,
-    "6": 2.71
+    "4": 1.47
    },
    "so_quan_sat": {
     "0": 1285,
     "1": 1287,
     "2": 1286,
     "3": 1286,
-    "4": 1285,
-    "6": 241
+    "4": 1285
    }
   },
   "diem_thang_PIT": {
@@ -2698,7 +2813,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.3
+  "giay": 3.18
  },
  "EURCAD|D1": {
   "ma": "EURCAD",
@@ -2710,6 +2825,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 5,
    "chenh_bps": 8.52,
@@ -2748,6 +2864,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.72,
@@ -2765,28 +2882,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 3,
    "nhom_thap": 0,
-   "chenh_bps": 3.81,
-   "null_trung_vi_bps": 5.17,
-   "p": 0.7411,
+   "chenh_bps": 3.04,
+   "null_trung_vi_bps": 3.38,
+   "p": 0.6127,
    "dat": false,
    "trung_binh_bps": {
     "0": -1.13,
     "1": 0.03,
     "2": -0.36,
     "3": 1.91,
-    "4": 0.46,
-    "6": 2.68
+    "4": 0.46
    },
    "so_quan_sat": {
     "0": 1301,
     "1": 1311,
     "2": 1309,
     "3": 1307,
-    "4": 1307,
-    "6": 136
+    "4": 1307
    }
   },
   "diem_thang_PIT": {
@@ -2796,7 +2914,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.21
+  "giay": 3.01
  },
  "EURCHF|D1": {
   "ma": "EURCHF",
@@ -2808,6 +2926,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 7,
    "chenh_bps": 3.09,
@@ -2846,6 +2965,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.02,
@@ -2864,6 +2984,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5
+   ],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 2.64,
@@ -2905,6 +3028,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 2,
    "chenh_bps": 12.49,
@@ -2943,6 +3067,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 3.22,
@@ -2961,6 +3086,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 3,
    "chenh_bps": 5.88,
@@ -2987,7 +3113,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.76
+  "giay": 0.78
  },
  "EURCZK|D1": {
   "ma": "EURCZK",
@@ -2999,6 +3125,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 11,
    "chenh_bps": 4.78,
@@ -3037,6 +3164,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.71,
@@ -3054,28 +3182,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 17.61,
-   "null_trung_vi_bps": 4.06,
-   "p": 0.001,
+   "null_trung_vi_bps": 2.62,
+   "p": 0.0005,
    "dat": true,
    "trung_binh_bps": {
     "0": 8.38,
     "1": -1.98,
     "2": -1.14,
     "3": 1.15,
-    "4": -9.22,
-    "6": 4.88
+    "4": -9.22
    },
    "so_quan_sat": {
     "0": 578,
     "1": 580,
     "2": 579,
     "3": 581,
-    "4": 579,
-    "6": 60
+    "4": 579
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.5%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -3086,7 +3215,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.62
+  "giay": 1.74
  },
  "EURDKK|D1": {
   "ma": "EURDKK",
@@ -3098,6 +3227,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 3,
    "chenh_bps": 1.08,
@@ -3136,6 +3266,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.06,
@@ -3154,6 +3285,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 0.93,
@@ -3183,7 +3315,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.55
+  "giay": 1.72
  },
  "EURGBP|D1": {
   "ma": "EURGBP",
@@ -3195,6 +3327,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 1,
    "chenh_bps": 7.02,
@@ -3233,6 +3366,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.8,
@@ -3251,6 +3385,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 2,
    "chenh_bps": 3.12,
@@ -3280,7 +3415,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.62
+  "giay": 3.8
  },
  "EURHKD|D1": {
   "ma": "EURHKD",
@@ -3292,6 +3427,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 10,
    "chenh_bps": 7.67,
@@ -3330,6 +3466,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.04,
@@ -3348,6 +3485,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 4,
    "chenh_bps": 3.58,
@@ -3377,7 +3515,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.34
+  "giay": 2.41
  },
  "EURHUF|D1": {
   "ma": "EURHUF",
@@ -3389,6 +3527,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 1,
    "chenh_bps": 9.58,
@@ -3427,6 +3566,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 3.97,
@@ -3444,28 +3584,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 12.67,
-   "null_trung_vi_bps": 6.82,
-   "p": 0.1109,
-   "dat": false,
+   "null_trung_vi_bps": 4.2,
+   "p": 0.0005,
+   "dat": true,
    "trung_binh_bps": {
     "0": 6.23,
     "1": 0.05,
     "2": -0.69,
     "3": 2.94,
-    "4": -6.45,
-    "6": 1.23
+    "4": -6.45
    },
    "so_quan_sat": {
     "0": 590,
     "1": 590,
     "2": 589,
     "3": 591,
-    "4": 590,
-    "6": 52
+    "4": 590
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.6%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -3475,8 +3616,8 @@
    "p": 0.5187,
    "dat": false
   },
-  "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.73
+  "cau_tra_loi": "CO: M3_ngay_trong_tuan",
+  "giay": 1.78
  },
  "EURILS|D1": {
   "ma": "EURILS",
@@ -3488,6 +3629,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 3,
    "chenh_bps": 8.72,
@@ -3526,6 +3668,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.25,
@@ -3544,6 +3687,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 6,
+   "nhom_bi_loai": [],
    "nhom_cao": 6,
    "nhom_thap": 4,
    "chenh_bps": 28.14,
@@ -3575,7 +3719,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.03
+  "giay": 1.88
  },
  "EURJPY|D1": {
   "ma": "EURJPY",
@@ -3587,6 +3731,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 1,
    "chenh_bps": 9.09,
@@ -3625,6 +3770,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.19,
@@ -3643,6 +3789,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5
+   ],
    "nhom_cao": 2,
    "nhom_thap": 4,
    "chenh_bps": 2.44,
@@ -3672,7 +3821,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.51
+  "giay": 3.93
  },
  "EURMXN|D1": {
   "ma": "EURMXN",
@@ -3684,6 +3833,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 11,
    "chenh_bps": 239.2,
@@ -3722,6 +3872,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 63.65,
@@ -3740,6 +3891,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 2,
    "chenh_bps": 140.59,
@@ -3769,7 +3921,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.46
+  "giay": 1.55
  },
  "EURNOK|D1": {
   "ma": "EURNOK",
@@ -3781,6 +3933,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 6,
    "nhom_thap": 1,
    "chenh_bps": 8.64,
@@ -3819,6 +3972,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.32,
@@ -3836,28 +3990,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 2,
    "chenh_bps": 7.46,
-   "null_trung_vi_bps": 8.14,
-   "p": 0.5617,
+   "null_trung_vi_bps": 4.76,
+   "p": 0.087,
    "dat": false,
    "trung_binh_bps": {
     "0": 5.71,
     "1": -0.04,
     "2": -1.75,
     "3": 3.26,
-    "4": -1.63,
-    "6": -1.28
+    "4": -1.63
    },
    "so_quan_sat": {
     "0": 690,
     "1": 692,
     "2": 688,
     "3": 691,
-    "4": 690,
-    "6": 49
+    "4": 690
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.7%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -3868,7 +4023,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.82
+  "giay": 2.27
  },
  "EURNZD|D1": {
   "ma": "EURNZD",
@@ -3880,6 +4035,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 10,
    "chenh_bps": 6.27,
@@ -3918,6 +4074,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.01,
@@ -3935,28 +4092,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
+   "nhom_cao": 3,
    "nhom_thap": 4,
-   "chenh_bps": 5.2,
-   "null_trung_vi_bps": 6.23,
-   "p": 0.6402,
+   "chenh_bps": 2.31,
+   "null_trung_vi_bps": 3.99,
+   "p": 0.8836,
    "dat": false,
    "trung_binh_bps": {
     "0": -0.78,
     "1": -0.34,
     "2": 0.06,
     "3": 1.51,
-    "4": -0.8,
-    "6": 4.4
+    "4": -0.8
    },
    "so_quan_sat": {
     "0": 1303,
     "1": 1310,
     "2": 1300,
     "3": 1312,
-    "4": 1308,
-    "6": 137
+    "4": 1308
    }
   },
   "diem_thang_PIT": {
@@ -3966,7 +4125,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.18
+  "giay": 3.23
  },
  "EURPLN|D1": {
   "ma": "EURPLN",
@@ -3978,6 +4137,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 5,
    "chenh_bps": 7.44,
@@ -4016,6 +4176,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.02,
@@ -4033,28 +4194,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 0,
    "nhom_thap": 4,
-   "chenh_bps": 10.51,
-   "null_trung_vi_bps": 5.63,
-   "p": 0.1054,
-   "dat": false,
+   "chenh_bps": 9.65,
+   "null_trung_vi_bps": 3.53,
+   "p": 0.0005,
+   "dat": true,
    "trung_binh_bps": {
     "0": 3.45,
     "1": 0.31,
     "2": -0.86,
     "3": 3.04,
-    "4": -6.2,
-    "6": 4.31
+    "4": -6.2
    },
    "so_quan_sat": {
     "0": 590,
     "1": 590,
     "2": 590,
     "3": 591,
-    "4": 590,
-    "6": 50
+    "4": 590
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.7%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -4064,8 +4226,8 @@
    "p": 0.6733,
    "dat": false
   },
-  "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.65
+  "cau_tra_loi": "CO: M3_ngay_trong_tuan",
+  "giay": 1.7
  },
  "EURRUB|D1": {
   "ma": "EURRUB",
@@ -4077,6 +4239,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 5,
    "chenh_bps": 31.11,
@@ -4115,6 +4278,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 12.2,
@@ -4133,6 +4297,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 22.51,
@@ -4162,7 +4327,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.66
+  "giay": 1.7
  },
  "EURRUR|D1": {
   "ma": "EURRUR",
@@ -4174,6 +4339,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 5,
    "chenh_bps": 21.35,
@@ -4212,6 +4378,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 8.66,
@@ -4230,6 +4397,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 3,
    "chenh_bps": 16.5,
@@ -4259,7 +4427,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.4
+  "giay": 2.36
  },
  "EURSEK|D1": {
   "ma": "EURSEK",
@@ -4271,6 +4439,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 6,
    "nhom_thap": 12,
    "chenh_bps": 6.44,
@@ -4309,6 +4478,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.3,
@@ -4326,28 +4496,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 3,
    "nhom_thap": 1,
    "chenh_bps": 7.39,
-   "null_trung_vi_bps": 5.62,
-   "p": 0.3008,
-   "dat": false,
+   "null_trung_vi_bps": 3.45,
+   "p": 0.0025,
+   "dat": true,
    "trung_binh_bps": {
     "0": 3.27,
     "1": -3.06,
     "2": -0.33,
     "3": 4.33,
-    "4": 0.01,
-    "6": -2.22
+    "4": 0.01
    },
    "so_quan_sat": {
     "0": 693,
     "1": 693,
     "2": 692,
     "3": 693,
-    "4": 692,
-    "6": 50
+    "4": 692
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.7%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -4357,8 +4528,8 @@
    "p": 0.9202,
    "dat": false
   },
-  "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.82
+  "cau_tra_loi": "CO: M3_ngay_trong_tuan",
+  "giay": 1.88
  },
  "EURSGD|D1": {
   "ma": "EURSGD",
@@ -4370,6 +4541,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 9,
    "chenh_bps": 5.76,
@@ -4408,6 +4580,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.48,
@@ -4426,6 +4599,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 6.39,
@@ -4455,7 +4631,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.25
+  "giay": 1.37
  },
  "EURTRY|D1": {
   "ma": "EURTRY",
@@ -4467,6 +4643,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 10,
    "chenh_bps": 12.69,
@@ -4505,6 +4682,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.26,
@@ -4523,6 +4701,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 14.17,
@@ -4552,7 +4731,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.08
+  "giay": 2.32
  },
  "EURUSD|D1": {
   "ma": "EURUSD",
@@ -4564,6 +4743,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 1,
    "chenh_bps": 9.6,
@@ -4602,6 +4782,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.59,
@@ -4620,6 +4801,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 4,
    "chenh_bps": 4.32,
@@ -4649,7 +4831,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M1_thang_trong_nam",
-  "giay": 5.87
+  "giay": 5.72
  },
  "EURZAR|D1": {
   "ma": "EURZAR",
@@ -4661,6 +4843,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 9,
    "chenh_bps": 12.32,
@@ -4699,6 +4882,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 5.81,
@@ -4717,6 +4901,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 2,
    "chenh_bps": 24.11,
@@ -4746,7 +4931,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.54
+  "giay": 1.61
  },
  "GBPAUD|D1": {
   "ma": "GBPAUD",
@@ -4758,6 +4943,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 2,
    "chenh_bps": 7.07,
@@ -4796,6 +4982,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.02,
@@ -4813,28 +5000,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 4.92,
-   "null_trung_vi_bps": 5.98,
-   "p": 0.6822,
+   "null_trung_vi_bps": 3.96,
+   "p": 0.2754,
    "dat": false,
    "trung_binh_bps": {
     "0": -3.09,
     "1": -0.84,
     "2": 1.83,
     "3": 0.75,
-    "4": -1.33,
-    "6": -1.56
+    "4": -1.33
    },
    "so_quan_sat": {
     "0": 1307,
     "1": 1309,
     "2": 1306,
     "3": 1307,
-    "4": 1307,
-    "6": 134
+    "4": 1307
    }
   },
   "diem_thang_PIT": {
@@ -4844,7 +5033,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.97
+  "giay": 3.55
  },
  "GBPCAD|D1": {
   "ma": "GBPCAD",
@@ -4856,6 +5045,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 5,
    "chenh_bps": 6.96,
@@ -4894,6 +5084,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.68,
@@ -4911,28 +5102,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 3,
-   "nhom_thap": 6,
-   "chenh_bps": 3.24,
-   "null_trung_vi_bps": 5.12,
-   "p": 0.8291,
+   "nhom_thap": 4,
+   "chenh_bps": 2.62,
+   "null_trung_vi_bps": 3.45,
+   "p": 0.7446,
    "dat": false,
    "trung_binh_bps": {
     "0": -1.26,
     "1": -0.03,
     "2": 1.0,
     "3": 1.1,
-    "4": -1.53,
-    "6": -2.15
+    "4": -1.53
    },
    "so_quan_sat": {
     "0": 1303,
     "1": 1303,
     "2": 1303,
     "3": 1301,
-    "4": 1301,
-    "6": 160
+    "4": 1301
    }
   },
   "diem_thang_PIT": {
@@ -4942,7 +5135,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.06
+  "giay": 2.99
  },
  "GBPCHF|D1": {
   "ma": "GBPCHF",
@@ -4954,6 +5147,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 12,
    "chenh_bps": 7.35,
@@ -4992,6 +5186,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.59,
@@ -5010,6 +5205,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 3.64,
@@ -5039,7 +5237,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.62
+  "giay": 4.19
  },
  "GBPCZK|D1": {
   "ma": "GBPCZK",
@@ -5051,6 +5249,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 6.03,
@@ -5089,6 +5288,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.22,
@@ -5107,6 +5307,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 14.53,
@@ -5145,6 +5346,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 9,
    "chenh_bps": 7.55,
@@ -5183,6 +5385,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.0,
@@ -5201,6 +5404,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 11.45,
@@ -5230,7 +5436,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.29
+  "giay": 1.48
  },
  "GBPHKD|D1": {
   "ma": "GBPHKD",
@@ -5242,6 +5448,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 10,
    "chenh_bps": 13.4,
@@ -5280,6 +5487,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.3,
@@ -5298,6 +5506,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 2,
    "chenh_bps": 8.26,
@@ -5324,7 +5533,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.71
+  "giay": 0.68
  },
  "GBPHUF|D1": {
   "ma": "GBPHUF",
@@ -5336,6 +5545,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 4,
    "chenh_bps": 11.38,
@@ -5374,6 +5584,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 4.41,
@@ -5391,11 +5602,14 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 0,
    "nhom_thap": 4,
-   "chenh_bps": 46.76,
-   "null_trung_vi_bps": 8.45,
+   "chenh_bps": 21.37,
+   "null_trung_vi_bps": 6.4,
    "p": 0.0005,
    "dat": true,
    "trung_binh_bps": {
@@ -5403,16 +5617,14 @@
     "1": 1.37,
     "2": 1.61,
     "3": 1.07,
-    "4": -14.41,
-    "6": 32.35
+    "4": -14.41
    },
    "so_quan_sat": {
     "0": 472,
     "1": 473,
     "2": 470,
     "3": 471,
-    "4": 471,
-    "6": 105
+    "4": 471
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.2%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -5423,7 +5635,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.65
+  "giay": 1.48
  },
  "GBPJPY|D1": {
   "ma": "GBPJPY",
@@ -5435,6 +5647,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 8,
    "chenh_bps": 7.46,
@@ -5473,6 +5686,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.49,
@@ -5491,6 +5705,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5
+   ],
    "nhom_cao": 2,
    "nhom_thap": 4,
    "chenh_bps": 3.98,
@@ -5520,7 +5737,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.87
+  "giay": 4.15
  },
  "GBPMXN|D1": {
   "ma": "GBPMXN",
@@ -5532,6 +5749,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 9,
    "chenh_bps": 12.13,
@@ -5570,6 +5788,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.86,
@@ -5588,6 +5807,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 31.7,
@@ -5617,7 +5837,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.47
+  "giay": 1.39
  },
  "GBPNOK|D1": {
   "ma": "GBPNOK",
@@ -5629,6 +5849,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 12,
    "chenh_bps": 8.27,
@@ -5667,6 +5888,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.37,
@@ -5684,28 +5906,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 12.7,
-   "null_trung_vi_bps": 10.02,
-   "p": 0.3473,
-   "dat": false,
+   "null_trung_vi_bps": 5.76,
+   "p": 0.007,
+   "dat": true,
    "trung_binh_bps": {
     "0": 5.79,
     "1": 1.38,
     "2": -0.68,
     "3": 1.76,
-    "4": -6.91,
-    "6": 4.56
+    "4": -6.91
    },
    "so_quan_sat": {
     "0": 590,
     "1": 590,
     "2": 589,
     "3": 591,
-    "4": 590,
-    "6": 38
+    "4": 590
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.7%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -5715,8 +5938,8 @@
    "p": 0.0449,
    "dat": false
   },
-  "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.15
+  "cau_tra_loi": "CO: M3_ngay_trong_tuan",
+  "giay": 1.79
  },
  "GBPNZD|D1": {
   "ma": "GBPNZD",
@@ -5728,6 +5951,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 12,
    "chenh_bps": 9.27,
@@ -5766,6 +5990,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.85,
@@ -5783,28 +6008,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 3,
    "nhom_thap": 4,
    "chenh_bps": 6.15,
-   "null_trung_vi_bps": 6.17,
-   "p": 0.5042,
+   "null_trung_vi_bps": 4.19,
+   "p": 0.1274,
    "dat": false,
    "trung_binh_bps": {
     "0": -1.82,
     "1": -0.62,
     "2": 1.75,
     "3": 2.29,
-    "4": -3.85,
-    "6": -0.62
+    "4": -3.85
    },
    "so_quan_sat": {
     "0": 1299,
     "1": 1305,
     "2": 1306,
     "3": 1306,
-    "4": 1306,
-    "6": 152
+    "4": 1306
    }
   },
   "diem_thang_PIT": {
@@ -5814,7 +6041,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.04
+  "giay": 3.39
  },
  "GBPPLN|D1": {
   "ma": "GBPPLN",
@@ -5826,6 +6053,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 12,
    "chenh_bps": 9.04,
@@ -5864,6 +6092,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 4.31,
@@ -5881,28 +6110,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 3,
    "nhom_thap": 4,
-   "chenh_bps": 23.85,
-   "null_trung_vi_bps": 9.06,
-   "p": 0.0155,
+   "chenh_bps": 12.08,
+   "null_trung_vi_bps": 5.22,
+   "p": 0.0015,
    "dat": true,
    "trung_binh_bps": {
     "0": 1.63,
     "1": 2.07,
     "2": 0.79,
     "3": 2.51,
-    "4": -9.57,
-    "6": 14.28
+    "4": -9.57
    },
    "so_quan_sat": {
     "0": 590,
     "1": 590,
     "2": 590,
     "3": 591,
-    "4": 590,
-    "6": 44
+    "4": 590
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.7%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -5913,7 +6143,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.04
+  "giay": 1.64
  },
  "GBPSEK|D1": {
   "ma": "GBPSEK",
@@ -5925,6 +6155,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 12,
    "chenh_bps": 12.63,
@@ -5963,6 +6194,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.93,
@@ -5980,28 +6212,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 0,
    "nhom_thap": 4,
-   "chenh_bps": 24.92,
-   "null_trung_vi_bps": 8.89,
-   "p": 0.013,
+   "chenh_bps": 13.05,
+   "null_trung_vi_bps": 5.14,
+   "p": 0.0015,
    "dat": true,
    "trung_binh_bps": {
     "0": 4.95,
     "1": -1.16,
     "2": 1.47,
     "3": 2.79,
-    "4": -8.1,
-    "6": 16.82
+    "4": -8.1
    },
    "so_quan_sat": {
     "0": 590,
     "1": 590,
     "2": 589,
     "3": 591,
-    "4": 589,
-    "6": 38
+    "4": 589
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.7%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -6012,7 +6245,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.07
+  "giay": 1.75
  },
  "GBPSGD|D1": {
   "ma": "GBPSGD",
@@ -6024,6 +6257,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 6,
    "chenh_bps": 6.17,
@@ -6062,6 +6296,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.14,
@@ -6080,6 +6315,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 12.21,
@@ -6109,7 +6345,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.8
+  "giay": 2.25
  },
  "GBPTRY|D1": {
   "ma": "GBPTRY",
@@ -6121,6 +6357,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 6,
    "nhom_thap": 10,
    "chenh_bps": 32.17,
@@ -6159,6 +6396,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.81,
@@ -6177,6 +6415,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 35.25,
@@ -6203,7 +6442,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 0.75
+  "giay": 0.72
  },
  "GBPUSD|D1": {
   "ma": "GBPUSD",
@@ -6215,6 +6454,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 2,
    "chenh_bps": 7.13,
@@ -6253,6 +6493,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.67,
@@ -6271,6 +6512,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 4,
    "chenh_bps": 6.25,
@@ -6300,7 +6542,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 3.74
+  "giay": 3.67
  },
  "GBPZAR|D1": {
   "ma": "GBPZAR",
@@ -6312,6 +6554,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 12,
    "chenh_bps": 15.34,
@@ -6350,6 +6593,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 5.54,
@@ -6368,6 +6612,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 2,
    "chenh_bps": 21.39,
@@ -6397,7 +6642,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.65
+  "giay": 1.61
  },
  "HKDJPY|D1": {
   "ma": "HKDJPY",
@@ -6409,6 +6654,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 11,
    "chenh_bps": 19.02,
@@ -6447,6 +6693,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 5.74,
@@ -6465,6 +6712,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 13.19,
@@ -6494,7 +6744,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.21
+  "giay": 1.27
  },
  "MXNJPY|D1": {
   "ma": "MXNJPY",
@@ -6506,6 +6756,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 7,
    "chenh_bps": 40.12,
@@ -6544,6 +6795,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 10.08,
@@ -6562,6 +6814,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 3,
    "chenh_bps": 32.82,
@@ -6588,7 +6841,7 @@
    "loi": "chi 184 quan sat PIT"
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 0.88
+  "giay": 0.91
  },
  "NOKJPY|D1": {
   "ma": "NOKJPY",
@@ -6600,6 +6853,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 5,
    "nhom_thap": 9,
    "chenh_bps": 17.6,
@@ -6638,6 +6892,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 6.55,
@@ -6656,6 +6911,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 19.49,
@@ -6685,7 +6943,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.17
+  "giay": 1.62
  },
  "NOKSEK|D1": {
   "ma": "NOKSEK",
@@ -6697,6 +6955,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 9,
    "chenh_bps": 8.14,
@@ -6735,6 +6994,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.48,
@@ -6753,6 +7013,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 14.84,
@@ -6782,7 +7045,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.29
+  "giay": 1.21
  },
  "NZDCAD|D1": {
   "ma": "NZDCAD",
@@ -6794,6 +7057,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 5,
    "chenh_bps": 8.16,
@@ -6832,6 +7096,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.76,
@@ -6849,28 +7114,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 4,
-   "nhom_thap": 6,
-   "chenh_bps": 4.93,
-   "null_trung_vi_bps": 5.89,
-   "p": 0.6462,
+   "nhom_thap": 2,
+   "chenh_bps": 3.45,
+   "null_trung_vi_bps": 3.85,
+   "p": 0.6057,
    "dat": false,
    "trung_binh_bps": {
     "0": 1.48,
     "1": -0.04,
     "2": -1.62,
     "3": 0.72,
-    "4": 1.83,
-    "6": -3.1
+    "4": 1.83
    },
    "so_quan_sat": {
     "0": 1305,
     "1": 1309,
     "2": 1307,
     "3": 1307,
-    "4": 1306,
-    "6": 137
+    "4": 1306
    }
   },
   "diem_thang_PIT": {
@@ -6880,7 +7146,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.11
+  "giay": 3.21
  },
  "NZDCHF|D1": {
   "ma": "NZDCHF",
@@ -6892,6 +7158,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 8,
    "chenh_bps": 6.09,
@@ -6930,6 +7197,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.65,
@@ -6947,28 +7215,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 1,
-   "nhom_thap": 6,
-   "chenh_bps": 8.18,
-   "null_trung_vi_bps": 7.27,
-   "p": 0.4108,
+   "nhom_thap": 3,
+   "chenh_bps": 5.09,
+   "null_trung_vi_bps": 4.96,
+   "p": 0.4713,
    "dat": false,
    "trung_binh_bps": {
     "0": 0.94,
     "1": 1.49,
     "2": -2.32,
     "3": -3.6,
-    "4": 1.24,
-    "6": -6.69
+    "4": 1.24
    },
    "so_quan_sat": {
     "0": 1298,
     "1": 1304,
     "2": 1305,
     "3": 1306,
-    "4": 1303,
-    "6": 155
+    "4": 1303
    }
   },
   "diem_thang_PIT": {
@@ -6978,7 +7247,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.94
+  "giay": 2.97
  },
  "NZDDKK|D1": {
   "ma": "NZDDKK",
@@ -6990,6 +7259,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 3,
    "chenh_bps": 14.82,
@@ -7028,6 +7298,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.92,
@@ -7046,6 +7317,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 5.09,
@@ -7072,7 +7344,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.7
+  "giay": 0.74
  },
  "NZDHUF|D1": {
   "ma": "NZDHUF",
@@ -7084,6 +7356,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 4,
    "chenh_bps": 16.45,
@@ -7122,6 +7395,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.79,
@@ -7139,28 +7413,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 26.15,
-   "null_trung_vi_bps": 12.52,
-   "p": 0.019,
+   "null_trung_vi_bps": 9.63,
+   "p": 0.001,
    "dat": true,
    "trung_binh_bps": {
     "0": 11.09,
     "1": -3.7,
     "2": 5.37,
     "3": -0.66,
-    "4": -15.06,
-    "6": -0.98
+    "4": -15.06
    },
    "so_quan_sat": {
     "0": 296,
     "1": 295,
     "2": 294,
     "3": 296,
-    "4": 295,
-    "6": 71
+    "4": 295
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.1%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -7171,7 +7446,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.16
+  "giay": 1.11
  },
  "NZDJPY|D1": {
   "ma": "NZDJPY",
@@ -7183,6 +7458,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 8,
    "chenh_bps": 14.77,
@@ -7221,6 +7497,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.85,
@@ -7238,28 +7515,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 4,
-   "nhom_thap": 6,
-   "chenh_bps": 10.67,
-   "null_trung_vi_bps": 8.59,
-   "p": 0.3293,
+   "nhom_thap": 3,
+   "chenh_bps": 2.66,
+   "null_trung_vi_bps": 5.63,
+   "p": 0.95,
    "dat": false,
    "trung_binh_bps": {
     "0": 1.11,
     "1": 2.07,
     "2": 1.28,
     "3": -0.24,
-    "4": 2.42,
-    "6": -8.26
+    "4": 2.42
    },
    "so_quan_sat": {
     "0": 1296,
     "1": 1302,
     "2": 1302,
     "3": 1308,
-    "4": 1307,
-    "6": 155
+    "4": 1307
    }
   },
   "diem_thang_PIT": {
@@ -7269,7 +7548,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.58
+  "giay": 3.04
  },
  "NZDMXN|D1": {
   "ma": "NZDMXN",
@@ -7281,6 +7560,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 7,
    "chenh_bps": 14.03,
@@ -7319,6 +7599,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 7.21,
@@ -7337,6 +7618,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 25.99,
@@ -7366,7 +7648,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.2
+  "giay": 1.34
  },
  "NZDSEK|D1": {
   "ma": "NZDSEK",
@@ -7378,6 +7660,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 5,
    "nhom_thap": 12,
    "chenh_bps": 15.95,
@@ -7416,6 +7699,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.5,
@@ -7434,6 +7718,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 1,
    "chenh_bps": 8.04,
@@ -7460,7 +7745,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.7
+  "giay": 0.75
  },
  "NZDSGD|D1": {
   "ma": "NZDSGD",
@@ -7472,6 +7757,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 8,
    "chenh_bps": 6.37,
@@ -7510,6 +7796,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.07,
@@ -7528,6 +7815,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 8.68,
@@ -7557,7 +7845,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.4
+  "giay": 2.94
  },
  "NZDUSD|D1": {
   "ma": "NZDUSD",
@@ -7569,6 +7857,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 8,
    "chenh_bps": 8.48,
@@ -7607,6 +7896,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.79,
@@ -7625,6 +7915,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 0,
    "chenh_bps": 2.65,
@@ -7654,7 +7945,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.44
+  "giay": 4.1
  },
  "PLNJPY|D1": {
   "ma": "PLNJPY",
@@ -7666,6 +7957,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 9,
    "chenh_bps": 28.25,
@@ -7704,6 +7996,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.21,
@@ -7722,6 +8015,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 23.23,
@@ -7748,7 +8044,7 @@
    "loi": "chi 129 quan sat PIT"
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 0.88
+  "giay": 0.9
  },
  "SEKJPY|D1": {
   "ma": "SEKJPY",
@@ -7760,6 +8056,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 9,
    "chenh_bps": 13.06,
@@ -7798,6 +8095,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 8.01,
@@ -7816,6 +8114,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 16.61,
@@ -7845,7 +8146,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.2
+  "giay": 1.19
  },
  "SEKNOK|D1": {
   "ma": "SEKNOK",
@@ -7857,6 +8158,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 8,
    "chenh_bps": 10.59,
@@ -7895,6 +8197,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 12.5,
@@ -7913,6 +8216,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 58.3,
@@ -7939,7 +8245,7 @@
    "loi": "chi 136 quan sat PIT"
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 0.97
+  "giay": 0.98
  },
  "SGDHKD|D1": {
   "ma": "SGDHKD",
@@ -7951,6 +8257,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 10,
    "chenh_bps": 9.76,
@@ -7989,6 +8296,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.7,
@@ -8007,6 +8315,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 2,
    "chenh_bps": 3.32,
@@ -8033,7 +8342,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.73
+  "giay": 0.76
  },
  "SGDJPY|D1": {
   "ma": "SGDJPY",
@@ -8045,6 +8354,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 7,
    "chenh_bps": 7.87,
@@ -8083,6 +8393,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.89,
@@ -8101,6 +8412,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 11.74,
@@ -8130,7 +8442,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.59
+  "giay": 2.61
  },
  "SP500|D1": {
   "ma": "SP500",
@@ -8142,6 +8454,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 9,
    "chenh_bps": 13.61,
@@ -8180,6 +8493,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 9.43,
@@ -8198,6 +8512,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 14.29,
@@ -8226,7 +8541,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M1_thang_trong_nam, M2_tuan_giao_thang, M3_ngay_trong_tuan",
-  "giay": 9.92
+  "giay": 9.43
  },
  "TRYJPY|D1": {
   "ma": "TRYJPY",
@@ -8238,6 +8553,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 11,
    "chenh_bps": 28.16,
@@ -8276,6 +8592,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 4.6,
@@ -8294,6 +8611,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 35.8,
@@ -8323,7 +8643,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.46
+  "giay": 1.23
  },
  "TS_BTC|D1": {
   "ma": "TS_BTC",
@@ -8335,6 +8655,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 9,
    "chenh_bps": 57.14,
@@ -8373,6 +8694,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 20.05,
@@ -8391,6 +8713,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 7,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 52.49,
@@ -8423,7 +8746,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.25
+  "giay": 2.58
  },
  "TS_ETH|D1": {
   "ma": "TS_ETH",
@@ -8435,6 +8758,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 6,
    "chenh_bps": 90.84,
@@ -8473,6 +8797,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 37.93,
@@ -8491,6 +8816,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 7,
+   "nhom_bi_loai": [],
    "nhom_cao": 5,
    "nhom_thap": 3,
    "chenh_bps": 81.36,
@@ -8535,6 +8861,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 21.76,
@@ -8573,6 +8900,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.28,
@@ -8591,6 +8919,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 3,
    "chenh_bps": 9.7,
@@ -8619,7 +8948,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.74
+  "giay": 2.84
  },
  "TS_QQQ|D1": {
   "ma": "TS_QQQ",
@@ -8631,6 +8960,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 9,
    "chenh_bps": 17.82,
@@ -8669,6 +8999,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.23,
@@ -8687,6 +9018,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 12.81,
@@ -8715,7 +9047,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.61
+  "giay": 2.98
  },
  "TS_SPY|D1": {
   "ma": "TS_SPY",
@@ -8727,6 +9059,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 9,
    "chenh_bps": 15.9,
@@ -8765,6 +9098,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.06,
@@ -8783,6 +9117,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 9.42,
@@ -8811,7 +9146,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.4
+  "giay": 2.47
  },
  "TS_VNM|D1": {
   "ma": "TS_VNM",
@@ -8823,6 +9158,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 9,
    "chenh_bps": 25.27,
@@ -8861,6 +9197,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 9.56,
@@ -8879,6 +9216,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 24.55,
@@ -8907,7 +9245,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.27
+  "giay": 2.13
  },
  "US500CASH|D1": {
   "ma": "US500CASH",
@@ -8919,6 +9257,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 20.57,
@@ -8957,6 +9296,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.83,
@@ -8974,28 +9314,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
-   "nhom_thap": 6,
-   "chenh_bps": 8.32,
-   "null_trung_vi_bps": 11.16,
-   "p": 0.7756,
+   "nhom_thap": 4,
+   "chenh_bps": 6.22,
+   "null_trung_vi_bps": 8.46,
+   "p": 0.7606,
    "dat": false,
    "trung_binh_bps": {
     "0": 7.01,
     "1": 6.27,
     "2": 7.78,
     "3": 2.12,
-    "4": 1.56,
-    "6": -0.54
+    "4": 1.56
    },
    "so_quan_sat": {
     "0": 767,
     "1": 776,
     "2": 774,
     "3": 776,
-    "4": 764,
-    "6": 169
+    "4": 764
    }
   },
   "diem_thang_PIT": {
@@ -9005,7 +9346,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.98
+  "giay": 2.3
  },
  "US500M|D1": {
   "ma": "US500M",
@@ -9017,6 +9358,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 31.8,
@@ -9055,6 +9397,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.52,
@@ -9072,28 +9415,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 30.16,
-   "null_trung_vi_bps": 24.46,
-   "p": 0.3478,
-   "dat": false,
+   "null_trung_vi_bps": 15.4,
+   "p": 0.0155,
+   "dat": true,
    "trung_binh_bps": {
     "0": 21.73,
     "1": 0.96,
     "2": 12.29,
     "3": -8.43,
-    "4": -0.93,
-    "5": 0.23
+    "4": -0.93
    },
    "so_quan_sat": {
     "0": 334,
     "1": 337,
     "2": 336,
     "3": 335,
-    "4": 330,
-    "5": 28
+    "4": 330
    },
    "canh_bao_nhan": "nhan thu lech mot ngay (khong co T6, CN chiem 19.6%) - bar dong dau la ngay TRUOC phien, da +1"
   },
@@ -9103,8 +9447,8 @@
    "p": 0.5935,
    "dat": false
   },
-  "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.15
+  "cau_tra_loi": "CO: M3_ngay_trong_tuan",
+  "giay": 1.49
  },
  "USDARS|D1": {
   "ma": "USDARS",
@@ -9116,6 +9460,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 8,
    "nhom_thap": 10,
    "chenh_bps": 36.5,
@@ -9154,6 +9499,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 7.21,
@@ -9172,6 +9518,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 21.89,
@@ -9201,7 +9548,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.36
+  "giay": 1.37
  },
  "USDCAD|D1": {
   "ma": "USDCAD",
@@ -9213,6 +9560,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 4,
    "chenh_bps": 6.06,
@@ -9251,6 +9599,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.72,
@@ -9269,6 +9618,9 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [
+    5
+   ],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.86,
@@ -9298,7 +9650,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 3.61
+  "giay": 3.59
  },
  "USDCHF|D1": {
   "ma": "USDCHF",
@@ -9310,6 +9662,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 12,
    "chenh_bps": 8.25,
@@ -9348,6 +9701,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.67,
@@ -9365,28 +9719,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 6.25,
-   "null_trung_vi_bps": 5.81,
-   "p": 0.4403,
+   "null_trung_vi_bps": 4.03,
+   "p": 0.09,
    "dat": false,
    "trung_binh_bps": {
     "0": 1.3,
     "1": -0.23,
     "2": -1.54,
     "3": -4.95,
-    "4": 0.23,
-    "6": -3.2
+    "4": 0.23
    },
    "so_quan_sat": {
     "0": 1294,
     "1": 1298,
     "2": 1295,
     "3": 1295,
-    "4": 1294,
-    "6": 166
+    "4": 1294
    }
   },
   "diem_thang_PIT": {
@@ -9396,7 +9752,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.42
+  "giay": 3.38
  },
  "USDCLP|D1": {
   "ma": "USDCLP",
@@ -9408,6 +9764,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 12,
    "chenh_bps": 27.48,
@@ -9446,6 +9803,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.93,
@@ -9464,6 +9822,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 16.82,
@@ -9493,7 +9852,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 1.25
+  "giay": 1.28
  },
  "USDCNH|D1": {
   "ma": "USDCNH",
@@ -9505,6 +9864,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 3,
    "nhom_thap": 5,
    "chenh_bps": 4.92,
@@ -9543,6 +9903,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.62,
@@ -9561,6 +9922,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.68,
@@ -9587,7 +9949,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.77
+  "giay": 0.69
  },
  "USDCOP|D1": {
   "ma": "USDCOP",
@@ -9599,6 +9961,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 5,
    "chenh_bps": 21.73,
@@ -9637,6 +10000,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 5.43,
@@ -9655,6 +10019,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 17.52,
@@ -9681,7 +10046,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.78
+  "giay": 0.88
  },
  "USDJPY|D1": {
   "ma": "USDJPY",
@@ -9693,6 +10058,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 12,
    "chenh_bps": 3.76,
@@ -9731,6 +10097,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.27,
@@ -9748,19 +10115,21 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    4
+   ],
    "nhom_cao": 3,
-   "nhom_thap": 4,
-   "chenh_bps": 4.64,
-   "null_trung_vi_bps": 2.97,
-   "p": 0.082,
-   "dat": false,
+   "nhom_thap": 0,
+   "chenh_bps": 4.5,
+   "null_trung_vi_bps": 2.51,
+   "p": 0.034,
+   "dat": true,
    "trung_binh_bps": {
     "0": -1.8,
     "1": -1.66,
     "2": -0.96,
     "3": 2.7,
-    "4": -1.94,
     "6": -0.03
    },
    "so_quan_sat": {
@@ -9768,7 +10137,6 @@
     "1": 2884,
     "2": 2871,
     "3": 2884,
-    "4": 1432,
     "6": 2817
    }
   },
@@ -9778,8 +10146,8 @@
    "p": 0.5137,
    "dat": false
   },
-  "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 6.12
+  "cau_tra_loi": "CO: M3_ngay_trong_tuan",
+  "giay": 6.4
  },
  "XAUAUDM|D1": {
   "ma": "XAUAUDM",
@@ -9791,6 +10159,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 6,
    "chenh_bps": 33.55,
@@ -9829,6 +10198,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.49,
@@ -9847,6 +10217,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 6,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 17.08,
@@ -9874,7 +10245,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.02
+  "giay": 0.94
  },
  "XAUEURM|D1": {
   "ma": "XAUEURM",
@@ -9886,6 +10257,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 37.86,
@@ -9924,6 +10296,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.02,
@@ -9942,6 +10315,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 6,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 13.0,
@@ -9969,7 +10343,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.84
+  "giay": 0.91
  },
  "XAUGBPM|D1": {
   "ma": "XAUGBPM",
@@ -9981,6 +10355,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 35.45,
@@ -10019,6 +10394,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.95,
@@ -10037,6 +10413,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 6,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 13.93,
@@ -10064,7 +10441,7 @@
    "loi": "chi 0 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.19
+  "giay": 0.92
  },
  "XAUUSD|D1": {
   "ma": "XAUUSD",
@@ -10076,6 +10453,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 21.31,
@@ -10114,6 +10492,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.41,
@@ -10132,6 +10511,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 13.66,
@@ -10161,7 +10541,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.59
+  "giay": 2.68
  },
  "XAUUSDM|D1": {
   "ma": "XAUUSDM",
@@ -10173,6 +10553,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 9,
    "chenh_bps": 19.36,
@@ -10211,6 +10592,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.28,
@@ -10229,6 +10611,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 6,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 5.7,
@@ -10259,7 +10642,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.0
+  "giay": 2.14
  },
  "XM_AUDUSD|D1": {
   "ma": "XM_AUDUSD",
@@ -10271,6 +10654,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 8,
    "chenh_bps": 12.16,
@@ -10309,6 +10693,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.28,
@@ -10326,28 +10711,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 4.54,
-   "null_trung_vi_bps": 11.31,
-   "p": 0.928,
+   "null_trung_vi_bps": 5.32,
+   "p": 0.6572,
    "dat": false,
    "trung_binh_bps": {
     "0": 0.83,
     "1": 1.26,
     "2": 0.02,
     "3": 0.73,
-    "4": -3.29,
-    "6": -1.03
+    "4": -3.29
    },
    "so_quan_sat": {
     "0": 1067,
     "1": 1069,
     "2": 1068,
     "3": 1066,
-    "4": 1067,
-    "6": 36
+    "4": 1067
    }
   },
   "diem_thang_PIT": {
@@ -10357,7 +10743,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.09
+  "giay": 2.55
  },
  "XM_AUS200CASH|D1": {
   "ma": "XM_AUS200CASH",
@@ -10369,6 +10755,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 7,
    "nhom_thap": 9,
    "chenh_bps": 22.46,
@@ -10407,6 +10794,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.6,
@@ -10425,6 +10813,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 4,
    "chenh_bps": 12.58,
@@ -10453,7 +10842,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.69
+  "giay": 2.01
  },
  "XM_EU50CASH|D1": {
   "ma": "XM_EU50CASH",
@@ -10465,6 +10854,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 8,
    "chenh_bps": 18.24,
@@ -10503,6 +10893,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.27,
@@ -10521,6 +10912,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 15.36,
@@ -10549,7 +10941,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.92
+  "giay": 2.01
  },
  "XM_EURUSD|D1": {
   "ma": "XM_EURUSD",
@@ -10561,6 +10953,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 5,
    "chenh_bps": 7.84,
@@ -10599,6 +10992,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.87,
@@ -10616,28 +11010,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
-   "nhom_cao": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
+   "nhom_cao": 3,
    "nhom_thap": 4,
-   "chenh_bps": 4.08,
-   "null_trung_vi_bps": 7.9,
-   "p": 0.8586,
+   "chenh_bps": 2.54,
+   "null_trung_vi_bps": 3.76,
+   "p": 0.8151,
    "dat": false,
    "trung_binh_bps": {
     "0": -1.22,
     "1": 0.39,
     "2": 0.32,
     "3": 1.3,
-    "4": -1.25,
-    "6": 2.83
+    "4": -1.25
    },
    "so_quan_sat": {
     "0": 1067,
     "1": 1069,
     "2": 1067,
     "3": 1066,
-    "4": 1067,
-    "6": 36
+    "4": 1067
    }
   },
   "diem_thang_PIT": {
@@ -10647,7 +11042,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.56
+  "giay": 2.59
  },
  "XM_FRA40CASH|D1": {
   "ma": "XM_FRA40CASH",
@@ -10659,6 +11054,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 8,
    "chenh_bps": 18.12,
@@ -10697,6 +11093,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 3.55,
@@ -10714,28 +11111,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 16.79,
-   "null_trung_vi_bps": 13.21,
-   "p": 0.2679,
+   "null_trung_vi_bps": 9.88,
+   "p": 0.054,
    "dat": false,
    "trung_binh_bps": {
     "0": -8.75,
     "1": 5.6,
     "2": 8.04,
     "3": 0.2,
-    "4": 4.27,
-    "6": -0.07
+    "4": 4.27
    },
    "so_quan_sat": {
     "0": 766,
     "1": 778,
     "2": 777,
     "3": 779,
-    "4": 764,
-    "6": 163
+    "4": 764
    }
   },
   "diem_thang_PIT": {
@@ -10745,7 +11143,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.35
+  "giay": 2.39
  },
  "XM_GBPUSD|D1": {
   "ma": "XM_GBPUSD",
@@ -10757,6 +11155,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 8,
    "chenh_bps": 10.75,
@@ -10795,6 +11194,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.3,
@@ -10812,28 +11212,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 4,
    "chenh_bps": 4.6,
-   "null_trung_vi_bps": 8.3,
-   "p": 0.8341,
+   "null_trung_vi_bps": 4.0,
+   "p": 0.3558,
    "dat": false,
    "trung_binh_bps": {
     "0": -2.11,
     "1": 1.2,
     "2": 1.29,
     "3": 0.47,
-    "4": -3.31,
-    "6": 1.1
+    "4": -3.31
    },
    "so_quan_sat": {
     "0": 1066,
     "1": 1069,
     "2": 1068,
     "3": 1066,
-    "4": 1067,
-    "6": 36
+    "4": 1067
    }
   },
   "diem_thang_PIT": {
@@ -10855,6 +11256,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 8,
    "chenh_bps": 23.62,
@@ -10893,6 +11295,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 3.98,
@@ -10910,28 +11313,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 10.97,
-   "null_trung_vi_bps": 13.7,
-   "p": 0.7131,
+   "null_trung_vi_bps": 10.31,
+   "p": 0.4378,
    "dat": false,
    "trung_binh_bps": {
     "0": -0.13,
     "1": 8.23,
     "2": 9.39,
     "3": -1.57,
-    "4": 0.84,
-    "6": -1.13
+    "4": 0.84
    },
    "so_quan_sat": {
     "0": 757,
     "1": 772,
     "2": 773,
     "3": 776,
-    "4": 763,
-    "6": 161
+    "4": 763
    }
   },
   "diem_thang_PIT": {
@@ -10941,7 +11345,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.4
+  "giay": 2.03
  },
  "XM_GOLD|D1": {
   "ma": "XM_GOLD",
@@ -10953,6 +11357,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 23.19,
@@ -10991,6 +11396,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.77,
@@ -11008,28 +11414,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 13.19,
-   "null_trung_vi_bps": 19.29,
-   "p": 0.6877,
+   "null_trung_vi_bps": 7.72,
+   "p": 0.057,
    "dat": false,
    "trung_binh_bps": {
     "0": -1.08,
     "1": 1.33,
     "2": 5.17,
     "3": 1.83,
-    "4": 12.11,
-    "6": 3.37
+    "4": 12.11
    },
    "so_quan_sat": {
     "0": 1062,
     "1": 1070,
     "2": 1067,
     "3": 1067,
-    "4": 1053,
-    "6": 25
+    "4": 1053
    }
   },
   "diem_thang_PIT": {
@@ -11039,7 +11447,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.63
+  "giay": 2.93
  },
  "XM_HK50CASH|D1": {
   "ma": "XM_HK50CASH",
@@ -11051,6 +11459,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 3,
    "chenh_bps": 44.7,
@@ -11089,6 +11498,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 18.51,
@@ -11107,6 +11517,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 23.5,
@@ -11132,7 +11543,7 @@
    "loi": "chi 1 quan sat PIT"
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 0.92
+  "giay": 0.91
  },
  "XM_JP225CASH|D1": {
   "ma": "XM_JP225CASH",
@@ -11144,6 +11555,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 7,
    "chenh_bps": 18.37,
@@ -11182,6 +11594,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 10.1,
@@ -11199,28 +11612,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 10.16,
-   "null_trung_vi_bps": 14.89,
-   "p": 0.8196,
+   "null_trung_vi_bps": 10.85,
+   "p": 0.5697,
    "dat": false,
    "trung_binh_bps": {
     "0": 6.07,
     "1": 5.78,
     "2": 9.88,
     "3": -0.28,
-    "4": 2.05,
-    "6": 8.58
+    "4": 2.05
    },
    "so_quan_sat": {
     "0": 771,
     "1": 776,
     "2": 775,
     "3": 777,
-    "4": 768,
-    "6": 155
+    "4": 768
    }
   },
   "diem_thang_PIT": {
@@ -11230,7 +11644,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.24
+  "giay": 2.21
  },
  "XM_SILVER|D1": {
   "ma": "XM_SILVER",
@@ -11242,6 +11656,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 37.06,
@@ -11280,6 +11695,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.75,
@@ -11297,28 +11713,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 21.52,
-   "null_trung_vi_bps": 40.41,
-   "p": 0.7926,
+   "null_trung_vi_bps": 14.44,
+   "p": 0.1149,
    "dat": false,
    "trung_binh_bps": {
     "0": 1.4,
     "1": 0.37,
     "2": 12.76,
     "3": -8.76,
-    "4": 11.91,
-    "6": 1.59
+    "4": 11.91
    },
    "so_quan_sat": {
     "0": 1062,
     "1": 1069,
     "2": 1067,
     "3": 1067,
-    "4": 1054,
-    "6": 15
+    "4": 1054
    }
   },
   "diem_thang_PIT": {
@@ -11328,7 +11746,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.64
+  "giay": 2.63
  },
  "XM_UK100CASH|D1": {
   "ma": "XM_UK100CASH",
@@ -11340,6 +11758,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 3,
    "chenh_bps": 14.91,
@@ -11378,6 +11797,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.54,
@@ -11395,28 +11815,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 13.42,
-   "null_trung_vi_bps": 10.97,
-   "p": 0.2939,
+   "null_trung_vi_bps": 8.15,
+   "p": 0.072,
    "dat": false,
    "trung_binh_bps": {
     "0": -2.97,
     "1": 5.71,
     "2": 8.76,
     "3": -4.66,
-    "4": 1.72,
-    "6": -1.26
+    "4": 1.72
    },
    "so_quan_sat": {
     "0": 733,
     "1": 775,
     "2": 779,
     "3": 779,
-    "4": 764,
-    "6": 166
+    "4": 764
    }
   },
   "diem_thang_PIT": {
@@ -11426,7 +11847,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.23
+  "giay": 2.04
  },
  "XM_US100CASH|D1": {
   "ma": "XM_US100CASH",
@@ -11438,6 +11859,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 20.98,
@@ -11476,6 +11898,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.08,
@@ -11493,28 +11916,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
    "nhom_thap": 4,
    "chenh_bps": 13.69,
-   "null_trung_vi_bps": 13.92,
-   "p": 0.5142,
+   "null_trung_vi_bps": 10.3,
+   "p": 0.2119,
    "dat": false,
    "trung_binh_bps": {
     "0": 12.17,
     "1": 8.49,
     "2": 11.38,
     "3": 1.36,
-    "4": -1.52,
-    "6": 2.06
+    "4": -1.52
    },
    "so_quan_sat": {
     "0": 762,
     "1": 770,
     "2": 769,
     "3": 770,
-    "4": 759,
-    "6": 164
+    "4": 759
    }
   },
   "diem_thang_PIT": {
@@ -11524,7 +11948,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.52
+  "giay": 2.11
  },
  "XM_US100_SEP26|D1": {
   "ma": "XM_US100_SEP26",
@@ -11536,6 +11960,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 25.18,
@@ -11574,6 +11999,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.5,
@@ -11592,6 +12018,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 18.1,
@@ -11620,7 +12047,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.66
+  "giay": 1.57
  },
  "XM_US2000CASH|D1": {
   "ma": "XM_US2000CASH",
@@ -11632,6 +12059,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 3,
    "chenh_bps": 43.2,
@@ -11670,6 +12098,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.07,
@@ -11688,6 +12117,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 12.43,
@@ -11716,7 +12146,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.4
+  "giay": 1.39
  },
  "XM_US30CASH|D1": {
   "ma": "XM_US30CASH",
@@ -11728,6 +12158,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 19.42,
@@ -11766,6 +12197,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.56,
@@ -11783,28 +12215,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 0,
-   "nhom_thap": 6,
-   "chenh_bps": 4.36,
-   "null_trung_vi_bps": 10.6,
-   "p": 0.9735,
+   "nhom_thap": 4,
+   "chenh_bps": 3.79,
+   "null_trung_vi_bps": 7.92,
+   "p": 0.9425,
    "dat": false,
    "trung_binh_bps": {
     "0": 5.86,
     "1": 4.19,
     "2": 5.78,
     "3": 2.29,
-    "4": 2.07,
-    "6": 1.51
+    "4": 2.07
    },
    "so_quan_sat": {
     "0": 774,
     "1": 782,
     "2": 780,
     "3": 783,
-    "4": 771,
-    "6": 163
+    "4": 771
    }
   },
   "diem_thang_PIT": {
@@ -11814,7 +12247,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.22
+  "giay": 2.13
  },
  "XM_US30_SEP26|D1": {
   "ma": "XM_US30_SEP26",
@@ -11826,6 +12259,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 3,
    "chenh_bps": 27.96,
@@ -11864,6 +12298,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.94,
@@ -11882,6 +12317,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 8.8,
@@ -11910,7 +12346,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.64
+  "giay": 1.56
  },
  "XM_US500CASH|D1": {
   "ma": "XM_US500CASH",
@@ -11922,6 +12358,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 20.61,
@@ -11960,6 +12397,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.67,
@@ -11977,28 +12415,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 2,
-   "nhom_thap": 6,
-   "chenh_bps": 8.12,
-   "null_trung_vi_bps": 11.12,
-   "p": 0.7711,
+   "nhom_thap": 4,
+   "chenh_bps": 5.92,
+   "null_trung_vi_bps": 8.26,
+   "p": 0.7851,
    "dat": false,
    "trung_binh_bps": {
     "0": 7.07,
     "1": 6.36,
     "2": 7.58,
     "3": 2.36,
-    "4": 1.67,
-    "6": -0.54
+    "4": 1.67
    },
    "so_quan_sat": {
     "0": 772,
     "1": 781,
     "2": 780,
     "3": 782,
-    "4": 769,
-    "6": 169
+    "4": 769
    }
   },
   "diem_thang_PIT": {
@@ -12008,7 +12447,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.19
+  "giay": 2.62
  },
  "XM_US500_SEP26|D1": {
   "ma": "XM_US500_SEP26",
@@ -12020,6 +12459,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 25.44,
@@ -12058,6 +12498,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.31,
@@ -12076,6 +12517,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 11.06,
@@ -12104,7 +12546,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.71
+  "giay": 1.57
  },
  "XM_USDCAD|D1": {
   "ma": "XM_USDCAD",
@@ -12116,6 +12558,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 10,
    "nhom_thap": 4,
    "chenh_bps": 10.34,
@@ -12154,6 +12597,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 4.62,
@@ -12171,28 +12615,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 4,
    "nhom_thap": 2,
    "chenh_bps": 3.41,
-   "null_trung_vi_bps": 7.58,
-   "p": 0.925,
+   "null_trung_vi_bps": 3.73,
+   "p": 0.5882,
    "dat": false,
    "trung_binh_bps": {
     "0": 0.22,
     "1": 0.03,
     "2": -1.1,
     "3": 0.29,
-    "4": 2.31,
-    "6": 2.19
+    "4": 2.31
    },
    "so_quan_sat": {
     "0": 1067,
     "1": 1069,
     "2": 1068,
     "3": 1066,
-    "4": 1067,
-    "6": 36
+    "4": 1067
    }
   },
   "diem_thang_PIT": {
@@ -12202,7 +12648,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 2.66
+  "giay": 2.58
  },
  "XM_USDCHF|D1": {
   "ma": "XM_USDCHF",
@@ -12214,6 +12660,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 12,
    "chenh_bps": 10.37,
@@ -12252,6 +12699,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.81,
@@ -12269,28 +12717,30 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    5,
+    6
+   ],
    "nhom_cao": 0,
-   "nhom_thap": 6,
-   "chenh_bps": 5.47,
-   "null_trung_vi_bps": 9.08,
-   "p": 0.7986,
+   "nhom_thap": 3,
+   "chenh_bps": 5.45,
+   "null_trung_vi_bps": 4.43,
+   "p": 0.2934,
    "dat": false,
    "trung_binh_bps": {
     "0": 1.07,
     "1": 0.16,
     "2": -0.9,
     "3": -4.38,
-    "4": -0.23,
-    "6": -4.4
+    "4": -0.23
    },
    "so_quan_sat": {
     "0": 1066,
     "1": 1069,
     "2": 1068,
     "3": 1066,
-    "4": 1067,
-    "6": 36
+    "4": 1067
    }
   },
   "diem_thang_PIT": {
@@ -12300,7 +12750,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.25
+  "giay": 2.77
  },
  "XM_XAUEUR|D1": {
   "ma": "XM_XAUEUR",
@@ -12312,6 +12762,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 23.53,
@@ -12350,6 +12801,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.63,
@@ -12368,6 +12820,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 6.77,
@@ -12396,7 +12849,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 1.48
+  "giay": 1.81
  },
  "YH_AEX|D1": {
   "ma": "YH_AEX",
@@ -12408,6 +12861,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 9,
    "chenh_bps": 19.87,
@@ -12446,6 +12900,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 7.06,
@@ -12464,6 +12919,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 3,
    "chenh_bps": 6.77,
@@ -12492,7 +12948,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 4.06
+  "giay": 3.89
  },
  "YH_ASX200|D1": {
   "ma": "YH_ASX200",
@@ -12504,6 +12960,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 9,
    "chenh_bps": 14.61,
@@ -12542,6 +12999,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 4.98,
@@ -12559,28 +13017,29 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    6
+   ],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 8.21,
-   "null_trung_vi_bps": 6.41,
-   "p": 0.2374,
+   "null_trung_vi_bps": 5.49,
+   "p": 0.1284,
    "dat": false,
    "trung_binh_bps": {
     "0": 0.19,
     "1": 5.92,
     "2": 3.19,
     "3": 1.34,
-    "4": -2.3,
-    "6": 2.83
+    "4": -2.3
    },
    "so_quan_sat": {
     "0": 1663,
     "1": 1735,
     "2": 1733,
     "3": 1718,
-    "4": 920,
-    "6": 754
+    "4": 920
    }
   },
   "diem_thang_PIT": {
@@ -12590,7 +13049,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.64
+  "giay": 3.66
  },
  "YH_AUDUSD|D1": {
   "ma": "YH_AUDUSD",
@@ -12602,6 +13061,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 8,
    "chenh_bps": 11.11,
@@ -12640,6 +13100,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.13,
@@ -12657,19 +13118,21 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    4
+   ],
    "nhom_cao": 2,
    "nhom_thap": 6,
    "chenh_bps": 8.67,
-   "null_trung_vi_bps": 6.92,
-   "p": 0.2464,
+   "null_trung_vi_bps": 5.71,
+   "p": 0.1114,
    "dat": false,
    "trung_binh_bps": {
     "0": -0.25,
     "1": 1.45,
     "2": 3.52,
     "3": -2.08,
-    "4": -0.93,
     "6": -5.15
    },
    "so_quan_sat": {
@@ -12677,7 +13140,6 @@
     "1": 1053,
     "2": 1055,
     "3": 1051,
-    "4": 433,
     "6": 621
    }
   },
@@ -12688,7 +13150,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.59
+  "giay": 2.44
  },
  "YH_BAC|D1": {
   "ma": "YH_BAC",
@@ -12700,6 +13162,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 33.31,
@@ -12738,6 +13201,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 1.29,
@@ -12756,6 +13220,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 12.8,
@@ -12784,7 +13249,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.05
+  "giay": 3.67
  },
  "YH_BOVESPA|D1": {
   "ma": "YH_BOVESPA",
@@ -12796,6 +13261,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 10,
    "chenh_bps": 17.24,
@@ -12834,6 +13300,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 16.63,
@@ -12852,6 +13319,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 22.69,
@@ -12880,7 +13348,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang, M3_ngay_trong_tuan",
-  "giay": 4.11
+  "giay": 3.53
  },
  "YH_CAC40|D1": {
   "ma": "YH_CAC40",
@@ -12892,6 +13360,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 9,
    "chenh_bps": 19.85,
@@ -12930,6 +13399,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 8.5,
@@ -12948,6 +13418,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 8.52,
@@ -12976,7 +13447,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 4.0
+  "giay": 4.12
  },
  "YH_DAUTUONG|D1": {
   "ma": "YH_DAUTUONG",
@@ -12988,6 +13459,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 7,
    "chenh_bps": 34.66,
@@ -13026,6 +13498,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.8,
@@ -13044,6 +13517,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 11.63,
@@ -13072,7 +13546,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M1_thang_trong_nam",
-  "giay": 3.03
+  "giay": 3.58
  },
  "YH_DAUWTI|D1": {
   "ma": "YH_DAUWTI",
@@ -13084,6 +13558,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 11,
    "chenh_bps": 36.53,
@@ -13122,6 +13597,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 10.09,
@@ -13140,6 +13616,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 25.34,
@@ -13168,7 +13645,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.07
+  "giay": 3.54
  },
  "YH_DAX|D1": {
   "ma": "YH_DAX",
@@ -13180,6 +13657,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 9,
    "chenh_bps": 23.31,
@@ -13218,6 +13696,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 7.63,
@@ -13236,6 +13715,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 3,
    "chenh_bps": 5.25,
@@ -13264,7 +13744,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M1_thang_trong_nam, M2_tuan_giao_thang",
-  "giay": 4.4
+  "giay": 4.16
  },
  "YH_DONG|D1": {
   "ma": "YH_DONG",
@@ -13276,6 +13756,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 8,
    "chenh_bps": 18.99,
@@ -13314,6 +13795,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.05,
@@ -13332,6 +13814,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 3,
    "chenh_bps": 16.77,
@@ -13360,7 +13843,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.1
+  "giay": 3.35
  },
  "YH_DOWJONES|D1": {
   "ma": "YH_DOWJONES",
@@ -13372,6 +13855,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 16.56,
@@ -13410,6 +13894,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 3.85,
@@ -13428,6 +13913,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 3,
    "chenh_bps": 6.15,
@@ -13456,7 +13942,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.76
+  "giay": 4.16
  },
  "YH_EURUSD|D1": {
   "ma": "YH_EURUSD",
@@ -13468,6 +13954,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 5,
    "chenh_bps": 8.45,
@@ -13506,6 +13993,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.94,
@@ -13523,19 +14011,21 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    4
+   ],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 4.34,
-   "null_trung_vi_bps": 5.78,
-   "p": 0.7711,
+   "null_trung_vi_bps": 4.89,
+   "p": 0.6207,
    "dat": false,
    "trung_binh_bps": {
     "0": -2.28,
     "1": 2.07,
     "2": 2.01,
     "3": -2.03,
-    "4": 1.71,
     "6": -1.36
    },
    "so_quan_sat": {
@@ -13543,7 +14033,6 @@
     "1": 1177,
     "2": 1179,
     "3": 1177,
-    "4": 492,
     "6": 687
    }
   },
@@ -13554,7 +14043,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.73
+  "giay": 3.05
  },
  "YH_EUSTOXX50|D1": {
   "ma": "YH_EUSTOXX50",
@@ -13566,6 +14055,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 8,
    "chenh_bps": 14.49,
@@ -13604,6 +14094,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 2.91,
@@ -13622,6 +14113,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 13.86,
@@ -13650,7 +14142,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.41
+  "giay": 2.6
  },
  "YH_FTSE100|D1": {
   "ma": "YH_FTSE100",
@@ -13662,6 +14154,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 9,
    "chenh_bps": 14.77,
@@ -13700,6 +14193,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 9.18,
@@ -13718,6 +14212,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 7.73,
@@ -13746,7 +14241,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 4.6
+  "giay": 5.38
  },
  "YH_GBPUSD|D1": {
   "ma": "YH_GBPUSD",
@@ -13758,6 +14253,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 8,
    "chenh_bps": 9.06,
@@ -13796,6 +14292,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 0.95,
@@ -13813,19 +14310,21 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    4
+   ],
    "nhom_cao": 2,
    "nhom_thap": 6,
    "chenh_bps": 7.48,
-   "null_trung_vi_bps": 4.86,
-   "p": 0.0945,
-   "dat": false,
+   "null_trung_vi_bps": 4.11,
+   "p": 0.0405,
+   "dat": true,
    "trung_binh_bps": {
     "0": -1.82,
     "1": 0.61,
     "2": 2.71,
     "3": -0.91,
-    "4": 0.39,
     "6": -4.77
    },
    "so_quan_sat": {
@@ -13833,7 +14332,6 @@
     "1": 1180,
     "2": 1181,
     "3": 1179,
-    "4": 491,
     "6": 691
    }
   },
@@ -13843,8 +14341,8 @@
    "p": 0.6035,
    "dat": false
   },
-  "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.85
+  "cau_tra_loi": "CO: M3_ngay_trong_tuan",
+  "giay": 3.02
  },
  "YH_HANGSENG|D1": {
   "ma": "YH_HANGSENG",
@@ -13856,6 +14354,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 8,
    "chenh_bps": 19.08,
@@ -13894,6 +14393,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 10.92,
@@ -13912,6 +14412,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 17.26,
@@ -13940,7 +14441,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang, M3_ngay_trong_tuan",
-  "giay": 4.45
+  "giay": 4.36
  },
  "YH_IBEX35|D1": {
   "ma": "YH_IBEX35",
@@ -13952,6 +14453,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 6,
    "chenh_bps": 12.96,
@@ -13990,6 +14492,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 5.91,
@@ -14008,6 +14511,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 10.99,
@@ -14036,7 +14540,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.79
+  "giay": 4.28
  },
  "YH_KHIDOT|D1": {
   "ma": "YH_KHIDOT",
@@ -14048,6 +14552,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 1,
    "chenh_bps": 69.44,
@@ -14086,6 +14591,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 5.1,
@@ -14104,6 +14610,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 32.55,
@@ -14132,7 +14639,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.9
+  "giay": 2.94
  },
  "YH_KOSPI|D1": {
   "ma": "YH_KOSPI",
@@ -14144,6 +14651,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 9,
    "chenh_bps": 20.85,
@@ -14182,6 +14690,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 12.11,
@@ -14200,6 +14709,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 11.81,
@@ -14228,7 +14738,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 3.38
+  "giay": 3.25
  },
  "YH_NASDAQ|D1": {
   "ma": "YH_NASDAQ",
@@ -14240,6 +14750,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 9,
    "chenh_bps": 15.61,
@@ -14278,6 +14789,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 6.7,
@@ -14296,6 +14808,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 17.55,
@@ -14324,7 +14837,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang, M3_ngay_trong_tuan",
-  "giay": 5.62
+  "giay": 5.32
  },
  "YH_NGO|D1": {
   "ma": "YH_NGO",
@@ -14336,6 +14849,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 7,
    "chenh_bps": 46.3,
@@ -14374,6 +14888,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.71,
@@ -14392,6 +14907,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 1,
    "chenh_bps": 7.57,
@@ -14420,7 +14936,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M1_thang_trong_nam",
-  "giay": 2.96
+  "giay": 3.17
  },
  "YH_NIKKEI|D1": {
   "ma": "YH_NIKKEI",
@@ -14432,6 +14948,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 9.76,
@@ -14470,6 +14987,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 5.03,
@@ -14488,6 +15006,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 9.36,
@@ -14516,7 +15035,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 5.16
+  "giay": 5.06
  },
  "YH_RUSSELL2000|D1": {
   "ma": "YH_RUSSELL2000",
@@ -14528,6 +15047,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 10,
    "chenh_bps": 14.6,
@@ -14566,6 +15086,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 9.87,
@@ -14584,6 +15105,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 11.07,
@@ -14612,7 +15134,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 4.1
+  "giay": 4.04
  },
  "YH_SENSEX|D1": {
   "ma": "YH_SENSEX",
@@ -14624,6 +15146,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 12,
    "nhom_thap": 1,
    "chenh_bps": 15.07,
@@ -14662,6 +15185,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 18.47,
@@ -14680,6 +15204,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 8.94,
@@ -14708,7 +15233,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 3.11
+  "giay": 2.84
  },
  "YH_SMI|D1": {
   "ma": "YH_SMI",
@@ -14720,6 +15245,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 12.32,
@@ -14758,6 +15284,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 9.11,
@@ -14776,6 +15303,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 3,
    "chenh_bps": 5.13,
@@ -14804,7 +15332,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M2_tuan_giao_thang",
-  "giay": 4.0
+  "giay": 4.15
  },
  "YH_TAIWAN|D1": {
   "ma": "YH_TAIWAN",
@@ -14816,6 +15344,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 9,
    "chenh_bps": 25.97,
@@ -14854,6 +15383,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 6.87,
@@ -14872,6 +15402,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 2,
    "nhom_thap": 0,
    "chenh_bps": 15.72,
@@ -14900,7 +15431,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M3_ngay_trong_tuan",
-  "giay": 2.79
+  "giay": 2.83
  },
  "YH_TSX|D1": {
   "ma": "YH_TSX",
@@ -14912,6 +15443,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 9,
    "chenh_bps": 15.7,
@@ -14950,6 +15482,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 0,
    "chenh_bps": 8.68,
@@ -14968,6 +15501,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 0,
    "chenh_bps": 10.11,
@@ -14996,7 +15530,7 @@
    "dat": false
   },
   "cau_tra_loi": "CO: M1_thang_trong_nam, M2_tuan_giao_thang, M3_ngay_trong_tuan",
-  "giay": 4.56
+  "giay": 4.69
  },
  "YH_USDCAD|D1": {
   "ma": "YH_USDCAD",
@@ -15008,6 +15542,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 4,
    "chenh_bps": 7.4,
@@ -15046,6 +15581,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.58,
@@ -15063,19 +15599,21 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    4
+   ],
    "nhom_cao": 6,
-   "nhom_thap": 4,
-   "chenh_bps": 6.26,
-   "null_trung_vi_bps": 4.39,
-   "p": 0.1609,
+   "nhom_thap": 2,
+   "chenh_bps": 4.5,
+   "null_trung_vi_bps": 3.69,
+   "p": 0.3078,
    "dat": false,
    "trung_binh_bps": {
     "0": 0.63,
     "1": -0.68,
     "2": -1.55,
     "3": 1.43,
-    "4": -3.31,
     "6": 2.95
    },
    "so_quan_sat": {
@@ -15083,7 +15621,6 @@
     "1": 1190,
     "2": 1193,
     "3": 1190,
-    "4": 497,
     "6": 696
    }
   },
@@ -15094,7 +15631,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.39
+  "giay": 2.37
  },
  "YH_USDCHF|D1": {
   "ma": "YH_USDCHF",
@@ -15106,6 +15643,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 9,
    "nhom_thap": 12,
    "chenh_bps": 10.07,
@@ -15144,6 +15682,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 1.07,
@@ -15161,19 +15700,21 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    4
+   ],
    "nhom_cao": 0,
-   "nhom_thap": 4,
-   "chenh_bps": 5.79,
-   "null_trung_vi_bps": 5.52,
-   "p": 0.4433,
+   "nhom_thap": 2,
+   "chenh_bps": 4.47,
+   "null_trung_vi_bps": 4.62,
+   "p": 0.5352,
    "dat": false,
    "trung_binh_bps": {
     "0": 1.08,
     "1": -0.61,
     "2": -3.39,
     "3": 0.18,
-    "4": -4.7,
     "6": 0.41
    },
    "so_quan_sat": {
@@ -15181,7 +15722,6 @@
     "1": 1189,
     "2": 1193,
     "3": 1190,
-    "4": 496,
     "6": 696
    }
   },
@@ -15192,7 +15732,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.08
+  "giay": 2.77
  },
  "YH_USDJPY|D1": {
   "ma": "YH_USDJPY",
@@ -15204,6 +15744,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 11,
    "nhom_thap": 8,
    "chenh_bps": 8.07,
@@ -15242,6 +15783,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 2.21,
@@ -15259,19 +15801,21 @@
   },
   "M3_ngay_trong_tuan": {
    "ten": "thu",
-   "so_nhom": 6,
+   "so_nhom": 5,
+   "nhom_bi_loai": [
+    4
+   ],
    "nhom_cao": 3,
    "nhom_thap": 1,
    "chenh_bps": 3.01,
-   "null_trung_vi_bps": 5.32,
-   "p": 0.9095,
+   "null_trung_vi_bps": 4.42,
+   "p": 0.8031,
    "dat": false,
    "trung_binh_bps": {
     "0": -0.43,
     "1": -0.93,
     "2": -0.34,
     "3": 2.08,
-    "4": 1.51,
     "6": 1.95
    },
    "so_quan_sat": {
@@ -15279,7 +15823,6 @@
     "1": 1546,
     "2": 1544,
     "3": 1541,
-    "4": 649,
     "6": 899
    }
   },
@@ -15290,7 +15833,7 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 3.31
+  "giay": 3.04
  },
  "YH_VANG|D1": {
   "ma": "YH_VANG",
@@ -15302,6 +15845,7 @@
   "M1_thang_trong_nam": {
    "ten": "thang",
    "so_nhom": 12,
+   "nhom_bi_loai": [],
    "nhom_cao": 1,
    "nhom_thap": 6,
    "chenh_bps": 19.0,
@@ -15340,6 +15884,7 @@
   "M2_tuan_giao_thang": {
    "ten": "giao_thang",
    "so_nhom": 2,
+   "nhom_bi_loai": [],
    "nhom_cao": 0,
    "nhom_thap": 1,
    "chenh_bps": 0.97,
@@ -15358,6 +15903,7 @@
   "M3_ngay_trong_tuan": {
    "ten": "thu",
    "so_nhom": 5,
+   "nhom_bi_loai": [],
    "nhom_cao": 4,
    "nhom_thap": 1,
    "chenh_bps": 7.74,
@@ -15386,6 +15932,6 @@
    "dat": false
   },
   "cau_tra_loi": "KHONG co mua vu do duoc",
-  "giay": 2.83
+  "giay": 2.87
  }
 }

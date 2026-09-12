@@ -1,0 +1,68 @@
+=== DAY CHUYEN: US500CASH ===
+-- 0. kiem mang --
+  mql5          OK
+  tradingview   OK
+  github        OK
+-- 1a. theo TAI SAN --
+  [toan luc] tran truy van moi nguon nang len 40
+  github             lay ve  500  moi    0  (94s)
+  lean_algo          lay ve    0  moi    0  (97s)
+  tradingview_pine   lay ve    3  moi    0  (151s)
+  mql5_code          lay ve  107  moi   69  (160s)
+  blog               lay ve   27  moi    0  (168s)
+  arxiv              lay ve  100  moi    0  (193s)
+  openalex           lay ve   87  moi    0  (248s)
+  stackexchange      lay ve  224  moi    0  (315s)
+  hackernews         lay ve  249  moi    0  (404s)
+  quantconnect       lay ve    0  moi    0  (407s)
+  crossref           lay ve  160  moi    0  (487s)
+  semantic           lay ve  100  moi   82  (556s)
+-- 1b. theo TEN HE THONG --
+  github             lay ve  124  moi    0  (118s)
+  lean_algo          lay ve   40  moi    0  (120s)
+  tradingview_pine   lay ve  134  moi    0  (186s)
+  mql5_code          lay ve  111  moi   73  (194s)
+  blog               lay ve   27  moi    0  (202s)
+  arxiv              lay ve  100  moi    0  (220s)
+  openalex           lay ve    0  moi    0  (279s)
+  stackexchange      lay ve   12  moi    0  (377s)
+  hackernews         lay ve   37  moi    0  (499s)
+  quantconnect       lay ve    0  moi    0  (508s)
+  crossref           lay ve  590  moi    1  (711s)
+  [het ngan sach] dung truoc semantic
+-- 1c. MQL5 Code Base (file .mq5 that) --
+  vong 1: tai 57 | moi 9 | trang {'experts': 26, 'indicators': 26}
+  vong 2: tai 60 | moi 43 | trang {'experts': 27, 'indicators': 27}
+  vong 3: tai 5 | moi 0 | trang {'experts': 28, 'indicators': 1}
+-- 2a. doc song song --
+  500 tai lieu chua doc (uu tien nguon ma nguon)
+  ... 50/500  doc duoc 0  (47s)
+  ... 100/500  doc duoc 0  (90s)
+  ... 150/500  doc duoc 0  (135s)
+  ... 200/500  doc duoc 0  (177s)
+  ... 250/500  doc duoc 31  (201s)
+  ... 300/500  doc duoc 81  (235s)
+  ... 350/500  doc duoc 128  (275s)
+  ... 400/500  doc duoc 177  (307s)
+  ... 450/500  doc duoc 180  (313s)
+  ... 500/500  doc duoc 180  (338s)
+   doc duoc 180/500 (0.68 s/ban)
+-- 2b. boc co che --
+  + 114 ma nguon tu bang `artifact` (file .mq5 that)
+  114 ban doc co dau hieu chua luat (tren tong chua boc)
+  ... 10/114  (270s)
+  ... 20/114  (270s)
+  ... 30/114  (270s)
+  ... 40/114  (270s)
+  ... 50/114  (297s)
+  ... 60/114  (355s)
+  ... 70/114  (412s)
+  ... 80/114  (485s)
+  ... 90/114  (497s)
+  ... 100/114  (583s)
+  ... 110/114  (650s)
+   kho co che: 1420 -> 1460 (+40)
+
+=== XONG 2962s ===
+{'mang': {'mql5': 'OK', 'tradingview': 'OK', 'github': 'OK'}, 'san': {'tai_san': {'ma': 'US500CASH', 'tu_khoa': 20, 'nguon_chay': 12, 'tai_lieu_moi': 151, 'giay': 556.0, 'toan_luc': 40, 'chi_tiet': [{'nguon': 'github', 'lay_ve': 500, 'moi': 0}, {'nguon': 'lean_algo', 'lay_ve': 0, 'moi': 0}, {'nguon': 'tradingview_pine', 'lay_ve': 3, 'moi': 0}, {'nguon': 'mql5_code', 'lay_ve': 107, 'moi': 69}, {'nguon': 'blog', 'lay_ve': 27, 'moi': 0}, {'nguon': 'arxiv', 'lay_ve': 100, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 87, 'moi': 0}, {'nguon': 'stackexchange', 'lay_ve': 224, 'moi': 0}, {'nguon': 'hackernews', 'lay_ve': 249, 'moi': 0}, {'nguon': 'quantconnect', 'lay_ve': 0, 'moi': 0}, {'nguon': 'crossref', 'lay_ve': 160, 'moi': 0}, {'nguon': 'semantic', 'lay_ve': 100, 'moi': 82}], 'nguon_bo_qua_vi_loi': ['rss_reddit_quant']}, 'he_pho_thong': {'tu_khoa': 30, 'nguon_chay': 11, 'tai_lieu_moi': 74, 'giay': 711.3, 'chi_tiet': [{'nguon': 'github', 'lay_ve': 124, 'moi': 0}, {'nguon': 'lean_algo', 'lay_ve': 40, 'moi': 0}, {'nguon': 'tradingview_pine', 'lay_ve': 134, 'moi': 0}, {'nguon': 'mql5_code', 'lay_ve': 111, 'moi': 73}, {'nguon': 'blog', 'lay_ve': 27, 'moi': 0}, {'nguon': 'arxiv', 'lay_ve': 100, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 0, 'moi': 0}, {'nguon': 'stackexchange', 'lay_ve': 12, 'moi': 0}, {'nguon': 'hackernews', 'lay_ve': 37, 'moi': 0}, {'nguon': 'quantconnect', 'lay_ve': 0, 'moi': 0}, {'nguon': 'crossref', 'lay_ve': 590, 'moi': 1}]}, 'mql5': {'tai_duoc': 122, 'ghi_moi': 52}, 'giay': 1858.4}, 'boc': {'doc': {'tai_lieu': 500, 'doc_duoc': 180, 'hong': 320, 'giay': 338.1, 'giay_moi_ban': 0.68, 'theo_nguon': {'github': 180}}, 'boc': {'ban': 114, 'co_che_moi': 18, 'tu_choi': 51, 'loi': 1, 'giay': 676.2, 'giay_moi_ban': 5.9, 'suat_tren_100_ban': 15.8, 'ly_do_tu_choi': {"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 12, 'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 11, 'trung dieu kien': 4, "thieu truong bat buoc 'vao'": 3, "ho '1' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'pha_v": 3, "ho '-1' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'pha_": 3, "['suy bien tren MOI tai san do duoc (chuoi kiem 100.000%, XA": 2, "thieu truong bat buoc 'ho'": 2}}, 'co_che_truoc': 1420, 'co_che_sau': 1460, 'giay': 1097.5}, 'giay': 2962.0}
+\\\'"\']': 2}}, 'co_che_truoc': 1420, 'co_che_sau': 1442, 'giay': 1076.0}, 'giay': 2945.0}

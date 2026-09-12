@@ -144,7 +144,7 @@
   },
   "TT_boc": {
    "ma": "TT_boc",
-   "so_lan_chay": 9,
+   "so_lan_chay": 10,
    "trang_thai": "XONG",
    "lan": "LLM",
    "lenh": [
@@ -153,8 +153,8 @@
     "400",
     "250"
    ],
-   "bat_dau": 1789189303.683704,
-   "xong": 1789189664.0883508,
+   "bat_dau": 1789193283.0489326,
+   "xong": 1789193803.8843882,
    "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
@@ -163,22 +163,22 @@
      "so_dong": 0
     }
    },
-   "log": "=== QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 1418 | tai lieu chua khai thac: 10152\n\nvong  1 | doc   0/400 | ung vien   0 | co che 1418 -> 1420 (+2) | 354s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3415 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 354s | co che 1418 -> 1420 (+2) ===\n",
-   "giay": 360.4,
+   "log": "=== QWEN HET CONG SUAT (doc 400 x boc 250) x 24 vong ===\nco che truoc: 1420 | tai lieu chua khai thac: 10661\n\nvong  1 | doc   0/400 | ung vien   0 | co che 1420 -> 1460 (+40) | 501s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3744 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 502s | co che 1420 -> 1460 (+40) ===\n",
+   "giay": 520.8,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "TT_san_nguon": {
    "ma": "TT_san_nguon",
    "so_lan_chay": 5,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys; sys.path.insert(0,'.')\nfrom nhan import day_chuyen as D\nprint(D.mot_luot('US500CASH'))"
    ],
-   "bat_dau": 1789190584.3409703,
-   "xong": null,
-   "ma_thoat": null,
+   "bat_dau": 1789190579.761988,
+   "xong": 1789193543.5606756,
+   "ma_thoat": 0,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet",
    "cong": {
     "ket": "DAT",
@@ -187,8 +187,8 @@
      "so_dong": 0
     }
    },
-   "log": "guon': 'arxiv', 'lay_ve': 0, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 162, 'moi': 0}, {'nguon': 'stackexchange', 'lay_ve': 224, 'moi': 0}, {'nguon': 'hackernews', 'lay_ve': 249, 'moi': 0}], 'nguon_bo_qua_vi_loi': ['rss_reddit_quant']}, 'he_pho_thong': {'tu_khoa': 30, 'nguon_chay': 7, 'tai_lieu_moi': 109, 'giay': 650.8, 'chi_tiet': [{'nguon': 'github', 'lay_ve': 221, 'moi': 33}, {'nguon': 'lean_algo', 'lay_ve': 40, 'moi': 0}, {'nguon': 'tradingview_pine', 'lay_ve': 135, 'moi': 0}, {'nguon': 'mql5_code', 'lay_ve': 114, 'moi': 74}, {'nguon': 'blog', 'lay_ve': 27, 'moi': 0}, {'nguon': 'arxiv', 'lay_ve': 0, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 698, 'moi': 2}]}, 'mql5': {'tai_duoc': 180, 'ghi_moi': 180}, 'giay': 2542.7}, 'boc': {'doc': {'tai_lieu': 500, 'doc_duoc': 0, 'hong': 500, 'giay': 344.4, 'giay_moi_ban': 0.69, 'theo_nguon': {}}, 'boc': {'ban': 102, 'co_che_moi': 23, 'tu_choi': 54, 'loi': 0, 'giay': 561.9, 'giay_moi_ban': 5.5, 'suat_tren_100_ban': 22.5, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 14, \"thieu truong bat buoc 'vao'\": 9, 'trung dieu kien': 5, 'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 4, 'vao[1]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'demarker\\\\\\' khong biet, va k': 2, 'vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, \"thieu truong bat buoc 'ho'\": 2}}, 'co_che_truoc': 1216, 'co_che_sau': 1263, 'giay': 988.2}, 'giay': 3539.1}\n",
-   "giay": 3549.9
+   "log": "i': 79, 'giay': 714.1, 'chi_tiet': [{'nguon': 'github', 'lay_ve': 8, 'moi': 0}, {'nguon': 'lean_algo', 'lay_ve': 40, 'moi': 0}, {'nguon': 'tradingview_pine', 'lay_ve': 134, 'moi': 0}, {'nguon': 'mql5_code', 'lay_ve': 113, 'moi': 73}, {'nguon': 'blog', 'lay_ve': 27, 'moi': 0}, {'nguon': 'arxiv', 'lay_ve': 100, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 0, 'moi': 0}, {'nguon': 'stackexchange', 'lay_ve': 12, 'moi': 0}, {'nguon': 'hackernews', 'lay_ve': 37, 'moi': 0}, {'nguon': 'quantconnect', 'lay_ve': 0, 'moi': 0}, {'nguon': 'crossref', 'lay_ve': 590, 'moi': 6}]}, 'mql5': {'tai_duoc': 122, 'ghi_moi': 70}, 'giay': 1865.2}, 'boc': {'doc': {'tai_lieu': 500, 'doc_duoc': 180, 'hong': 320, 'giay': 338.8, 'giay_moi_ban': 0.68, 'theo_nguon': {'github': 180}}, 'boc': {'ban': 114, 'co_che_moi': 22, 'tu_choi': 57, 'loi': 0, 'giay': 653.9, 'giay_moi_ban': 5.7, 'suat_tren_100_ban': 19.3, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 21, '[\\'chay loi: KeyError: \"chi bao \\\\\\'khac\\\\\\' khong biet, va khong': 4, \"ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph\": 4, \"thieu truong bat buoc 'vao'\": 3, '[\\'chay loi: KeyError: \"chi bao \\\\\\'ind\\\\\\' khong biet, va khong ': 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'modec\\\\\\' khong biet, va khon': 2, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.987%, XAU\": 2, '[\\'chay loi: KeyError: \"du lieu khong co cot \\\\\\'ask\\\\\\'\"\\']': 2}}, 'co_che_truoc': 1420, 'co_che_sau': 1442, 'giay': 1076.0}, 'giay': 2945.0}\n",
+   "giay": 2963.8
   },
   "C1_toan_hang_chet": {
    "ma": "C1_toan_hang_chet",
@@ -939,6 +939,18 @@
    "ma": "TT_boc",
    "ai": "qwen",
    "van": "Ket qua TT_boc cho thay he thong co the tim ra co che moi (1418 -> 1420, +2 co che) NHUNG bi KHAU DOC HONG: 0/400 tai lieu duoc doc thanh cong. Day khong phai het tai lieu (con 3415 ban chua doc) ma la loi trong qua trinh doc. So co che tang them tu phep thu duy nhat nay, nhung toc do rat cham (354s/vong). Trong buc tranh chung, viec tim thay co che moi van tiep tuc xay ra, nhung can giai quyet truong hop 0/400 tai lieu duoc doc de tang hieu suat."
+  },
+  {
+   "luc": "2026-09-12 13:13:06",
+   "ma": "TT_san_nguon",
+   "ai": "qwen",
+   "van": "Viec `TT_san_nguon` da ket thuc thanh cong (DAT) sau 2962 giay. He thong da tim kiem va tai ve 151 tai lieu moi va 52 file MQL5 cho tai san US500CASH. Qua trinh 'boc' co che tu 180 tai lieu da doc da them 18 co che moi vao kho (tong 1460), voi 51 co che bi tu Choi do loi (chủ yếu là trùng lặp điều kiện vào hoặc suy biến). Kết quả `so_dong: 0` cho thấy chưa có chiến lược hoàn chỉnh nào được sinh ra ngay lập tức, nhưng nguồn lực (file mã nguồn và cơ chế) đã được bổ sung đáng kể để phục vụ các bước kiểm thử tiếp theo."
+  },
+  {
+   "luc": "2026-09-12 13:17:17",
+   "ma": "TT_boc",
+   "ai": "qwen",
+   "van": "Chay 24 vong, moi vong doc 400 tai lieu + boc 250 co che. Ket qua: 0 co che moi hop le. Log ghi \"KHAU DOC HONG\" - kho van con 3744 tai lieu chua doc nhung LLM khong the chuyen thanh co che giao dich hop le. File BOC_LAI_TOAN_KHO.json xac nhan: trong 5121 lan thu, chi 40 duoc chap thuan (phần lớn bị loại vì trùng tên hoặc sai danh mục). Con so 0 nay la CHUA_DO_DUOC - he thong co du lieu nhung co_che khong the sinh ra tu do. Day la nghẽn cổ điển: LLM dien truong khong hieu quy tac giao dich thuc su tu van ban tho."
   }
  ],
  "de_xuat": [
@@ -1781,12 +1793,45 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-12 12:08:18"
+  },
+  {
+   "ma": "Thiet_ke_US500",
+   "ten": "Thiet ke chien luoc giao dich US500 tu nguon moi",
+   "vi_sao": "Sau TT_san_nguon, da co 151 tai lieu va 18 co che moi, can tong hop thanh lenh giao dich thuc te.",
+   "lan": "CPU",
+   "lenh": [
+    "_thiet_ke.py",
+    "US500CASH"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 13:13:17"
+  },
+  {
+   "ma": "TT_ghep_co_che",
+   "ten": "GHEP CO CHE TAP: lap danh sach tat ca co che hop le tu TT_chi_bao + B1_corpus_vang de test",
+   "vi_sao": "TT_boc cho thay 0 co che moi tu van ban tho. TT_chi_bao da boc 1460 co che, B1_corpus_vang da lay 192 JSON that su. Can ghep hai nguon nay de co tap co che chat luong cao test tren tester.",
+   "lan": "CPU",
+   "lenh": [
+    "_ghep_co_che.py"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 13:17:26"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789193147.0037766
+   "luc": 1789193803.8485985
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,
