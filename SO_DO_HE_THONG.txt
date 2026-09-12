@@ -8,6 +8,18 @@ Về dự án the brain:
 Mục tiêu: hệ thống dược tạo ra như 1 phòng nghiên cứu để thu thập mọi chiến lược giao dịch, kiến thức giao dịch và các sản phẩm như hệ thống giao dịch, ea, chỉ báo. Sau đó được tậphowpj kiểm định và tinh chỉnh qua phòng lab của chúng ta nhăm fmucj đích là tìm ra những hệ thống giao dịch có lợi nhuận để sử dụng
 Hệ thống tập trung xây dựng trên nền tảng fx, mục tiêu là lợi nhuận còn lại không phải những mô hình kinh tế hay quản trị quỹ để mà cần đề cao quá nhiều tiêu chí học thuật hay cá chỉ tiêu chặt chẽ. Mục đich cuối cùng là có tiền chấp nhận ả chi phí và rủi ro cao
 
+*** LÀM RÕ "FX" (chủ dự án, 12/09/2026) ***
+"FX" ở đây KHÔNG có nghĩa là chỉ đánh cặp tiền. Sàn fx vẫn có chỉ số, hàng hoá, kim loại - tất cả đều dùng được.
+Ý là tập trung vào KIỂU GIAO DỊCH LONG/SHORT hai chiều, có đòn bẩy, và tìm cách tạo ra lợi nhuận từ đó.
+Nên: chọn tài sản theo việc nó có kiếm được tiền không, không theo việc nó thuộc lớp nào.
+
+*** VỀ CÁC TRỤ NGOÀI SƠ ĐỒ (chủ dự án, 12/09/2026) ***
+BANKER KHÔNG BỎ. Chỉ là phải xây xong BA MODULE THẬT (Seeker / Quantlab / Evo) trước đã, rồi mới quay lại.
+Đừng gạch nó khỏi hệ, chỉ hạ thứ tự ưu tiên.
+
+*** VỀ CÁCH DÙNG MÁY (chủ dự án, 12/09/2026) ***
+Chạy ĐA LUỒNG. Được phép gọi qwen ultracode hết cỡ. Được phép dùng 95% CPU.
+
 
 Sơ đồ hệ thống:
 

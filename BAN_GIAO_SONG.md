@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
-- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
 - git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
 ### 2026-09-06 22:55:00 — chup trang thai
 
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 11484, 0 phut), dieu_khien_xa.py (pid 15316, 300 phut)
 - `qwen_ultra.log`: ~ 12:05:03 | san sang 0 | CPU   28% / muc tieu 90%  |  con 12.4 loi  |  dang chay 1  [LLM:1]
 - git: 7a9b17e O 5 XONG: khong co template nao de viet - va GMMA thi ngu phap DA noi duoc
+### 2026-09-12 12:09:13 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5592, 0 phut), dieu_khien_xa.py (pid 15316, 303 phut)
+- `qwen_ultra.log`: ## De xuat tiep th
+- git: be14d01 VIET LAI ke hoach theo SO DO THAT cua chu du an (Desktop/hethong.txt)
