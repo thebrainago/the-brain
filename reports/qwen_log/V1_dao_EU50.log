@@ -4,3 +4,29 @@
 === moKho train  2016.06.01 -> 2021.06.01
   1297 pass, 18.6s
 === moKho holdout  2021.06.01 -> 2026.07.29
+  1297 pass, 18.5s
+-> reports/DEM_A_MO_KHO_EU50Cash.json
+
+chan DUONG ca hai doan : 43
+chan AM   ca hai doan : 592
+
+########## CHANG B: dao chieu 592 chan am
+
+=== dao train  2016.06.01 -> 2021.06.01
+  593 pass, 12.3s
+=== dao holdout  2021.06.01 -> 2026.07.29
+  593 pass, 18.4s
+-> reports/DEM_B_DAO_EU50Cash.json
+
+dao chieu -> duong ca hai doan: 51/592
+
+TONG CHAN DUONG: 94 (goc 43 + dao 51)
+-> reports/DEM_CHAN_DUONG_EU50Cash.json
+
+########## CHANG C: ma tran tuong quan 94 chan
+
+=== lo 0: 40 slot
+=== lo 1: 40 slot
+=== lo 2: 14 slot
+
+ghep duoc 94 chuoi von

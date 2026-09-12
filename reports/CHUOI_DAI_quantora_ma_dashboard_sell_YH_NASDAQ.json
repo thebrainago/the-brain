@@ -1,0 +1,122 @@
+{
+ "ten": "quantora_ma_dashboard_sell",
+ "ma": "YH_NASDAQ",
+ "so_bar": 13995,
+ "so_nam": 55.51,
+ "mde": 0.541,
+ "he": {
+  "cagr": 0.0038,
+  "vol": 0.1345,
+  "sharpe": 0.0958,
+  "sharpe_log": 0.0283,
+  "maxdd": -0.6292,
+  "calmar": 0.0061,
+  "chay": false,
+  "ngay_chay": null,
+  "phoi_nhiem": 0.1796,
+  "so_lenh": 271,
+  "phoi_nhiem_vao": 0.1796
+ },
+ "mua_giu": {
+  "cagr": 0.0433,
+  "vol": 0.2033,
+  "sharpe": 0.3104,
+  "sharpe_log": 0.208,
+  "maxdd": -0.8496,
+  "calmar": 0.0509,
+  "chay": false,
+  "ngay_chay": null,
+  "phoi_nhiem": 0.9999
+ },
+ "sharpe_tren_mde": 0.177,
+ "ban_do_he_so": {
+  "x0.50": 0.085,
+  "x0.75": 0.106,
+  "x1.00": 0.096,
+  "x1.50": 0.078,
+  "x2.00": 0.007,
+  "x3.00": -0.047
+ },
+ "o_tren_mde": 0,
+ "theo_giai_doan": [
+  {
+   "tu": 1971,
+   "cagr": 12.58,
+   "sharpe": 1.247,
+   "bh_cagr": -10.55,
+   "lenh": 23
+  },
+  {
+   "tu": 1976,
+   "cagr": -1.53,
+   "sharpe": -0.238,
+   "bh_cagr": 13.97,
+   "lenh": 12
+  },
+  {
+   "tu": 1981,
+   "cagr": 5.77,
+   "sharpe": 0.867,
+   "bh_cagr": 3.47,
+   "lenh": 34
+  },
+  {
+   "tu": 1986,
+   "cagr": 7.87,
+   "sharpe": 0.713,
+   "bh_cagr": -3.16,
+   "lenh": 23
+  },
+  {
+   "tu": 1991,
+   "cagr": -2.78,
+   "sharpe": -0.538,
+   "bh_cagr": 16.05,
+   "lenh": 21
+  },
+  {
+   "tu": 1996,
+   "cagr": -6.1,
+   "sharpe": -0.219,
+   "bh_cagr": 12.61,
+   "lenh": 23
+  },
+  {
+   "tu": 2001,
+   "cagr": 0.78,
+   "sharpe": 0.142,
+   "bh_cagr": -6.03,
+   "lenh": 45
+  },
+  {
+   "tu": 2006,
+   "cagr": -3.75,
+   "sharpe": -0.101,
+   "bh_cagr": -2.4,
+   "lenh": 48
+  },
+  {
+   "tu": 2011,
+   "cagr": -7.16,
+   "sharpe": -0.635,
+   "bh_cagr": 6.96,
+   "lenh": 28
+  },
+  {
+   "tu": 2016,
+   "cagr": -2.2,
+   "sharpe": -0.155,
+   "bh_cagr": 14.43,
+   "lenh": 18
+  },
+  {
+   "tu": 2021,
+   "cagr": -1.57,
+   "sharpe": -0.028,
+   "bh_cagr": 6.73,
+   "lenh": 23
+  }
+ ],
+ "giai_doan_duong": 4,
+ "so_giai_doan": 11
+}

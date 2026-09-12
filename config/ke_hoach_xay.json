@@ -429,9 +429,9 @@
     "khong_phai_phan_quyet_am": "DE_QT_EA_NGOAI.json = AM, nhung do la MOT EA tren US500Cash H1 - mot ket qua am le. quan_tri_da_loc.json rong la ket qua cua mot BO LOC khac, khong phai cua phep thu train/holdout o tren."
    },
    "viec_ngay": [
-    "XONG - bon phep thu cua khoi 7 deu AM: trailing (placebo p 0,596) · xep hang cap (0/3 ma) · gop deu (thua mua-giu 0/3 ma) · z5 tren chuoi dai (AM tren ca 55,5 va 98,6 nam, 0/48 o tren MDE o ca hai).",
-    "KET LUAN KHOI 7: khong co duong vong nao qua tuong MDE trong nhung thu da thu. Ung vien manh nhat cua du an la mot hien tuong che do sau 2002.",
-    "VIEC TIEP: doi chieu quantora va Sonic R H4 bang DUNG phep thu nay (chuoi dai + ban do MDE + tach giai doan). Neu ca hai cung la hien tuong che do thi ket luan cua ca du an la: nhung gi tim duoc deu song trong MOT che do, va cau hoi dung khong con la 'tim edge' ma la 'nhan ra che do dang o dau'."
+    "XONG ca nam phep thu cua khoi 7. Xem KET_LUAN_KHOI_7.",
+    "Sonic R H4 KHONG nam trong doc_kho() (no la he EA/chi bao, danh gia rieng) - chua chay duoc qua _thu_chuoi_dai.py. Neu muon do thi phai dua no vao kho truoc.",
+    "DE XUAT cho chu du an: dung quy tac nhan CHE DO dinh nghia TRUOC (vi du: lam phat, do doc duong cong lai suat, bien dong thuc hien), roi moi do xem z5/quantora co bat dung che do cua chung khong. Chia giai doan sau khi nhin du lieu la khop in-sample."
    ],
    "ket_qua_placebo_trailing": {
     "trang_thai": "AM",
@@ -533,6 +533,45 @@
     "ket_luan": "Mua-khi-giam-sau tren chi so co phieu My la mot hien tuong CHE DO sau 2002, khong phai mot co che ben vung. Truoc do no AM suot ~40 nam. Cua so 6,3 nam cua XM_US100CASH nam TRON trong giai doan thuan loi. Dau hieu manh nhat: tren NASDAQ z5 chi phoi nhiem 21% so bar ma sut giam -89,7% - TE HON mua-giu (-85,0%) phoi nhiem 100%. No don phoi nhiem vao dung nhung giai doan xau nhat, dung nhu 'mua dip roi dip roi tiep'.",
     "day_la_KHAM_PHA_LAI_CHU_KHONG_PHAI_PHAT_HIEN_MOI": "Du an DA biet dieu nay duoi mot ten khac: memory `ibs-la-hien-tuong-cua-mot-thoi-ky` ghi IBS chi ton tai sau 2000. z5 la CUNG MOT hien tuong phat bieu bang tu vung khac. Bai hoc quy trinh: mot ung vien moi phai duoc doi chieu voi so bai hoc TRUOC khi mung.",
     "khong_co_nghia_la_z5_khong_kiem_duoc_tien": "Mot edge phu thuoc che do van co the chay tiep mot thoi gian. Nhung no doi cach dung khac: khong duoc coi la co che ben vung, phai co dieu kien TAT theo che do, va kich thuoc vi the phai tinh theo rui ro che do dao chieu."
+   },
+   "ket_qua_quantora_chuoi_dai": {
+    "trang_thai": "AM - cung la HIEN TUONG CHE DO, nhung o THOI DAI NGUOC LAI",
+    "luc": "2026-09-12",
+    "nguon": "_thu_chuoi_dai.py · reports/CHUOI_DAI_quantora_ma_dashboard_sell_*.json",
+    "co_che": "chong EMA: close >= ema20/50/100/200, chieu BAN (-1)",
+    "YH_NASDAQ_55_5_nam": {
+     "sharpe": 0.096,
+     "mde": 0.541,
+     "sharpe_tren_mde": 0.18,
+     "cagr_pct": 0.38,
+     "maxdd_pct": -62.9,
+     "so_lenh": 271,
+     "phoi_nhiem_pct": 18.0,
+     "mua_giu_cagr_pct": 4.33,
+     "ban_do": "0/6 o tren MDE (Sharpe 0,01 den 0,11)",
+     "giai_doan_duong": "4/11, va ba cai duong deu TRUOC 1991 (+12,58 · +5,77 · +7,87); 2001-2025 gan nhu toan am"
+    },
+    "SP500_98_6_nam": {
+     "sharpe": 0.075,
+     "mde": 0.813,
+     "sharpe_tren_mde": 0.09,
+     "ban_do": "0/6 o tren MDE",
+     "giai_doan_duong": "10/20 nhung PHAN CUM RO: DUONG lien tuc 1957-1986 (sau giai doan: +2,61 +5,36 +5,75 +4,37 +1,32 +0,41), AM gan nhu lien tuc 1987-2026 (tam giai doan, chi 2002-2006 duong +0,59)"
+    },
+    "ket_luan": "quantora la ANH GUONG cua z5. Ca hai deu la hien tuong che do, nhung o hai thoi dai NGUOC NHAU: z5 (mua, quay-ve-trung-binh) song sau 2002; quantora (ban, xu huong) song truoc 1987. Dieu do hop ly ve co che: mot he BAN an o che do gau/lam phat, mot he MUA-DIP an o che do bo co ho tro thanh khoan."
+   },
+   "KET_LUAN_KHOI_7": {
+    "trang_thai": "nam phep thu, nam ket qua AM",
+    "bang": [
+     "1. trailing            AM   placebo p 0,596 (ban that duoi TRUNG VI phan bo max ban gia)",
+     "2. xep hang cap        AM   0/3 ma; 77-93% cap BAT KY hon he don -> '39/45' la ti le nen",
+     "3. gop deu khong chon  AM   Calmar x4 so voi he don NHUNG thua mua-giu 0/3 ma",
+     "4. z5 tren chuoi dai   AM   -0,141 tren 55,5 nam · -0,081 tren 98,6 nam · 0/48 o tren MDE",
+     "5. quantora chuoi dai  AM   0,18x MDE tren 55,5 nam · 0,09x tren 98,6 nam · 0/6 o tren MDE"
+    ],
+    "mot_cau": "Khong co duong vong nao qua tuong MDE trong nhung thu da thu, va CA HAI he tung duoc coi la 'song sot' deu la hien tuong che do chu khong phai co che ben vung.",
+    "dieu_nay_KHONG_noi_gi": "No KHONG noi rang khong the kiem tien. Mot edge phu thuoc che do van chay duoc trong che do cua no. No noi rang: (a) dung goi chung la 'co che', (b) phai co dieu kien TAT theo che do, (c) size theo rui ro che do dao chieu, (d) dung ky vong chung song sot ngoai che do.",
+    "huong_tiep_theo_de_xuat": "Hai he song o HAI che do nguoc nhau la mot dau hieu, khong phai mot ket qua. Cau hoi dung tiep theo khong con la 'tim them edge' ma la 'nhan ra dang o che do nao'. NHUNG phai canh giac: chia giai doan SAU KHI nhin du lieu la khop chuyen in-sample. Bat ky he chuyen-che-do nao cung phai co quy tac nhan che do dinh nghia TRUOC, va placebo tren chinh quy tac do."
    }
   }
  },
