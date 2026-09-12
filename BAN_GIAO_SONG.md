@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `placebo.log`: DAT (ban that noi len khoi dam dich)
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
 - `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
 - git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
 ### 2026-09-06 22:57:55 — chup trang thai
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 16312, 0 phut), dieu_khien_xa.py (pid 15316, 309 phut)
 - `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 393 phut); TT_boc (thuong truc, con 55 phut); TT_chi_bao (thuong truc,
 - git: 53a7bc6 Q1 XONG: nhan/ho_so_song.py - dac tinh SONG + moc MAGNETIC cho 159 ma
+### 2026-09-12 12:18:42 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3328, 0 phut), dieu_khien_xa.py (pid 15316, 312 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 388 phut); TT_boc (thuong truc, con 50 phut); TT_chi_bao (thuong truc,
+- git: 876f31f QUANTLAB NOI SINH: nhan/quy_luat_song.py - TU TIM QUY LUAT SONG, da ma da khung

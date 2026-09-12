@@ -1,4 +1,40 @@
-# CLAUDE.md — lab/ (THE BRAIN)
+# HUONG DAN CHO CLAUDE CODE — lab/ (THE BRAIN)
+
+## LUAT SO 0 — DOI CHIEU SO DO TRUOC MOI PHIEN (chot 12/09/2026)
+
+**Nguon duy nhat cua CAU TRUC he thong la `Desktop/hethong.txt`**, ban chep dong bo
+o `lab/SO_DO_HE_THONG.txt`. Moi phien PHAI mo no ra doi chieu truoc khi lam gi.
+
+Vi sao co luat nay: phien 12/09 toi lam ca ngay theo `KE_HOACH_XAY.md` va so
+`van_de` cua lab, nen xep ca BANKER va NGHI vao "viec phai hoan thien" - hai thu
+**khong co trong so do**. Chu du an phai hoi "lam gi co banker nao?" toi moi biet.
+
+So do that: **BA module** - SEEKER (phe u + bo loc) · QUANTLAB (tong quan tai san ·
+**co che quan li** · chien luoc · noi sinh · luong uu tien) · EVO (+ FINDER).
+
+Ba dieu trong so do ma de lam nguoc:
+
+1. **MUC TIEU LA TIEN, khong phai chat che hoc thuat.** Nguyen van: *"khong phai
+   nhung mo hinh kinh te hay quan tri quy de ma can de cao qua nhieu tieu chi hoc
+   thuat hay cac chi tieu chat che. Muc dich cuoi cung la co tien chap nhan ca chi
+   phi va rui ro cao"*.
+   MDE / FDR / placebo la **NHAN CANH BAO**, khong phai CONG CHAN. Chi chan khi
+   thua mua-giu o CUNG RUI RO - do moi la cau hoi tien.
+2. **QUAN LI LENH quan trong hon ENTRY** - "module quan trong trong toan bo he thong".
+3. **"FX" = KIEU GIAO DICH LONG/SHORT**, khong phai chi cap tien. San fx co ca chi
+   so, hang hoa, kim loai. Chon tai san theo viec no co ra tien khong, khong theo lop.
+
+**Khong duoc dung lai o muc mo ta.** Chu du an: *"toi muon claude phai lam duoc he
+thong do va co the nang cap phat trien hon ca mo ta cua toi"*. So do la SAN, khong
+phai TRAN.
+
+## VAN HANH (chot 12/09/2026)
+- Duyet san moi de xuat, **lam lien tuc khong cho duyet**.
+- `q ultracode` - ngan sach thoai mai: CPU 95% (10 nhan / 20 luong), lan CPU 6 ·
+  LLM 3 · MANG 3 · NHE 8 · **TESTER 1** (mot terminal64.exe la rang buoc VAT LY,
+  ngan sach khong mua duoc cai thu hai). Token 8.000 · timeout 300s · thu lai 5.
+- Chay DA LUONG cho moi viec khong dung chung trang thai.
+
 
 File nay tu nap moi khi doc file trong `lab/`. Muc dich: dung mat 15 phut dau
 phien de tim lai luat. Ban day du van o `../AGENTS.md`.

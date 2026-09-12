@@ -29,8 +29,8 @@
   "bang ten: 5/6 file, 8 khai bao, ~160 dv moi khai bao giu duoc."
  ],
  "temperature": 0,
- "max_tokens": 4000,
- "timeout_giay": 180,
+ "max_tokens": 8000,
+ "timeout_giay": 300,
  "nhip_vong_giay": 20.0,
  "gio_bao_cao": 23,
  "nghi_den": 0,
@@ -53,13 +53,15 @@
   "Ban cu khai LLM=1,2 va MIEN lan LLM khoi ngan sach: che do nghi ha muc tieu",
   "xuong 35% ma may van 97%."
  ],
- "che_do": "ultra",
+ "che_do": "ultracode",
  "muc_tieu_cpu_ultra": 95.0,
  "tran_lan": {
-  "CPU": 3,
-  "LLM": 2,
-  "MANG": 2,
-  "NHE": 4,
+  "CPU": 6,
+  "LLM": 3,
+  "MANG": 3,
+  "NHE": 8,
   "TESTER": 1
- }
+ },
+ "so_lan_thu_lai": 5,
+ "toi_da_phut_mac_dinh": 1440
 }

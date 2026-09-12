@@ -32,6 +32,8 @@ viec do va phong; nhan xet cua qwen chay o hai luong nen.
     q nghi [phut]    CHOI GAME: ha CPU + khoa lan TESTER/CPU/LLM (mac dinh 60 phut, tu tro lai)
     q thuc           bo che do nghi ngay
     q cpu <N>        doi muc tieu CPU (an ngay, khong can khoi dong lai)
+    q ultracode [N]  NGAN SACH THOAI MAI: CPU 95% (10 nhan/20 luong), lan cao,
+                     token 8.000, timeout 300s, thu lai 5, tran viec 1.440 phut
     q kiem           tu kiem ca duong: mo hinh, cong, dieu toc, bang
 """
 from __future__ import annotations
@@ -507,11 +509,49 @@ def main(argv: list) -> int:
         return 0
     if lenh == "kiem":
         return kiem()
-    if lenh in ("nghi", "thuc", "cpu", "ultra", "thuong"):
+    if lenh in ("nghi", "thuc", "cpu", "ultra", "ultracode", "thuong"):
         import json as _j
         c = {}
         if CH.CAU_HINH_NGOAI.exists():
             c = _j.loads(CH.CAU_HINH_NGOAI.read_text(encoding="utf-8-sig"))
+        if lenh == "ultracode":
+            # ULTRACODE = che do CHU DU AN DUYET NGAN SACH THOAI MAI (12/09/2026).
+            #
+            #   "Cho phep goi qwen thoai mai ngan sach (tao mode ultracode cho no).
+            #    Xay da luong co the cho phep dung may 10 nhan 20 luong toi da 95% cpu"
+            #
+            # Khac `ultra` o BA cho, va ca ba deu la ngan sach chu khong phai toc do:
+            #   1. Tran CPU 95% thay vi 65%   -> 19/20 luong
+            #   2. Tran lan CAO, de bo dieu toc tu ghim theo phep do that thay vi
+            #      bi chan cung. Khi TESTER khong chay thi con 19 loi cho cac lan
+            #      khac; khi no chay (nang 9,0) thi bo dieu toc tu ha cac lan kia.
+            #   3. Ngan sach MOI LOI GOI rong ra: token, timeout, so lan thu lai,
+            #      va tran phut mot viec. Day moi la "thoai mai ngan sach" - nang
+            #      tran lan ma de token 4.000 thi viec van cut giua chung.
+            #
+            # TESTER VAN LA 1. Do khong phai lua chon: may co MOT terminal64.exe,
+            # hai viec tester cung luc ghi de ket qua cua nhau VA khong ai bao loi.
+            # Ngan sach khong mua duoc them mot cai terminal.
+            c["muc_tieu_cpu"] = float(argv[1]) if len(argv) > 1 else 95.0
+            c["nghi_den"] = 0
+            c["che_do"] = "ultracode"
+            tran = dict(c.get("tran_lan") or {})
+            tran.update({"CPU": 6, "LLM": 3, "MANG": 3, "NHE": 8, "TESTER": 1})
+            c["tran_lan"] = tran
+            c["max_tokens"] = 8000
+            c["timeout_giay"] = 300
+            c["so_lan_thu_lai"] = 5
+            c["toi_da_phut_mac_dinh"] = 1440
+            CH.CAU_HINH_NGOAI.write_text(_j.dumps(c, ensure_ascii=False, indent=1),
+                                         encoding="utf-8")
+            print("che do ULTRACODE: muc tieu CPU %.0f%% ca may (10 nhan / 20 luong)."
+                  % c["muc_tieu_cpu"])
+            print("lan: CPU 6 · LLM 3 · MANG 3 · NHE 8 · TESTER 1 (tester la rang buoc VAT LY).")
+            print("ngan sach moi loi goi: token 8.000 · timeout 300s · thu lai 5 · "
+                  "tran mot viec 1.440 phut.")
+            print("Ha xuong: `q ultra 65` hoac `q thuong`. Nghi han: `q nghi 120`.")
+            print("Dot dang chay se thay trong ~%gs." % CH.nap()["nhip_vong_giay"])
+            return 0
         if lenh in ("ultra", "thuong"):
             # ULTRA = chay lien tuc HO TRO viec xay, trong mot TRAN CPU chua cho
             # nguoi dung. Khac `nghi` (choi game, khoa lan) va khac mac dinh 85%
