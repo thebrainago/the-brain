@@ -64,3 +64,40 @@ quay_ve_keltner_low_vol        volatility_regime_high          -0.120    164.31 
 ########## CHANG D: cong ra tien o sut giam 50-60%
 
 === cap 0: ban_khi_sma5_cheo_xuong_sma8__dao + fast_sma_cuts_above_slow_sma
+   ghep     dinh  10.25%/nam @ DD 20.35%  lot 0.0/16.0/16.0 | DD20  10.25%/nam @ DD 20.35%  lot 0.0/16.0/16.0 | 50-60%   --
+   chi_a    dinh   6.00%/nam @ DD 23.49%  lot 0.0/16.0/0.0 | DD20   5.52%/nam @ DD 22.11%  lot 0.0/14.4/0.0 | 50-60%   --
+   chi_b    dinh   6.43%/nam @ DD 19.00%  lot 0.0/0.0/16.0 | DD20   6.43%/nam @ DD 19.00%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_EU50Cash.json
+=== cap 1: phan_ky_giam_gia_voi_bo_loc_xu_huo + tai_can_bang_etf_don_bay__dao
+   ghep     dinh  17.44%/nam @ DD 19.01%  lot 0.0/16.0/16.0 | DD20  17.44%/nam @ DD 19.01%  lot 0.0/16.0/16.0 | 50-60%  15.56%/nam @ DD 50.01%  lot 0.0/16.0/8.0
+   chi_a    dinh  13.35%/nam @ DD 27.24%  lot 0.0/16.0/0.0 | DD20   9.61%/nam @ DD 22.07%  lot 0.0/9.6/0.0 | 50-60%   --
+   chi_b    dinh   9.61%/nam @ DD 35.13%  lot 0.0/0.0/16.0 | DD20   4.83%/nam @ DD 22.16%  lot 0.0/0.0/6.4 | 50-60%   --
+   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_EU50Cash.json
+=== cap 2: candle_body_wick_pressure_sell_div + fast_sma_cuts_above_slow_sma
+   ghep     dinh  12.65%/nam @ DD 17.12%  lot 0.0/16.0/16.0 | DD20   9.85%/nam @ DD 17.50%  lot 0.0/16.0/2.4 | 50-60%   --
+   chi_a    dinh   9.29%/nam @ DD 18.33%  lot 0.0/16.0/0.0 | DD20   9.29%/nam @ DD 18.33%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh   6.43%/nam @ DD 19.00%  lot 0.0/0.0/16.0 | DD20   6.43%/nam @ DD 19.00%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_EU50Cash.json
+=== cap 3: candle_body_wick_pressure_sell_div + phan_ky_giam_gia_voi_bo_loc_xu_huo
+   ghep     dinh  17.27%/nam @ DD 19.05%  lot 0.0/16.0/16.0 | DD20  17.27%/nam @ DD 19.05%  lot 0.0/16.0/16.0 | 50-60%   --
+   chi_a    dinh   9.29%/nam @ DD 18.33%  lot 0.0/16.0/0.0 | DD20   9.29%/nam @ DD 18.33%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh  13.35%/nam @ DD 27.24%  lot 0.0/0.0/16.0 | DD20   9.61%/nam @ DD 22.07%  lot 0.0/0.0/9.6 | 50-60%   --
+   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_EU50Cash.json
+=== cap 4: ban_khi_sma5_cheo_xuong_sma8__dao + candle_body_wick_pressure_sell_div
+   ghep     dinh  12.39%/nam @ DD 12.02%  lot 0.0/16.0/16.0 | DD20   9.92%/nam @ DD 17.85%  lot 0.0/16.0/8.8 | 50-60%   --
+   chi_a    dinh   6.00%/nam @ DD 23.49%  lot 0.0/16.0/0.0 | DD20   5.52%/nam @ DD 22.11%  lot 0.0/14.4/0.0 | 50-60%   --
+   chi_b    dinh   9.29%/nam @ DD 18.33%  lot 0.0/0.0/16.0 | DD20   9.29%/nam @ DD 18.33%  lot 0.0/0.0/16.0 | 50-60%   --
+   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_EU50Cash.json
+=== cap 5: fvg_bearish_formation + quay_ve_keltner_low_vol
+   ghep     dinh  16.08%/nam @ DD 20.35%  lot 0.0/16.0/16.0 | DD20  16.08%/nam @ DD 20.35%  lot 0.0/16.0/16.0 | 50-60%   --
+   chi_a    dinh  11.59%/nam @ DD 30.11%  lot 0.0/16.0/0.0 | DD20   7.18%/nam @ DD 21.92%  lot 0.0/8.0/0.0 | 50-60%   --
+   chi_b    dinh   9.41%/nam @ DD 29.54%  lot 0.0/0.0/16.0 | DD20   6.49%/nam @ DD 22.26%  lot 0.0/0.0/9.6 | 50-60%   --
+   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --
+-> reports/DEM_D_RA_TIEN_EU50Cash.json
+
+XONG sau 17.3 phut

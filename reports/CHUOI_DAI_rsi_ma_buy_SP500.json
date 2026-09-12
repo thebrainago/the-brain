@@ -1,0 +1,185 @@
+{
+ "ten": "rsi_ma_buy",
+ "ma": "SP500",
+ "so_bar": 24754,
+ "so_nam": 98.56,
+ "mde": 0.813,
+ "he": {
+  "cagr": 0.0188,
+  "vol": 0.1028,
+  "sharpe": 0.2327,
+  "sharpe_log": 0.1813,
+  "maxdd": -0.6871,
+  "calmar": 0.0274,
+  "chay": false,
+  "ngay_chay": null,
+  "phoi_nhiem": 0.4944,
+  "so_lenh": 1822,
+  "phoi_nhiem_vao": 0.4944
+ },
+ "mua_giu": {
+  "cagr": 0.0037,
+  "vol": 0.1852,
+  "sharpe": 0.1128,
+  "sharpe_log": 0.02,
+  "maxdd": -0.8868,
+  "calmar": 0.0042,
+  "chay": false,
+  "ngay_chay": null,
+  "phoi_nhiem": 1.0
+ },
+ "sharpe_tren_mde": 0.286,
+ "ban_do_he_so": {
+  "x0.50": 0.243,
+  "x0.75": 0.27,
+  "x1.00": 0.233,
+  "x1.50": 0.255,
+  "x2.00": 0.262,
+  "x3.00": 0.283
+ },
+ "o_tren_mde": 0,
+ "theo_giai_doan": [
+  {
+   "tu": 1927,
+   "cagr": 6.74,
+   "sharpe": 0.545,
+   "bh_cagr": -22.37,
+   "lenh": 73
+  },
+  {
+   "tu": 1932,
+   "cagr": 6.41,
+   "sharpe": 0.38,
+   "bh_cagr": 11.31,
+   "lenh": 90
+  },
+  {
+   "tu": 1937,
+   "cagr": -3.18,
+   "sharpe": -0.168,
+   "bh_cagr": -17.56,
+   "lenh": 85
+  },
+  {
+   "tu": 1942,
+   "cagr": 2.95,
+   "sharpe": 0.381,
+   "bh_cagr": 4.78,
+   "lenh": 90
+  },
+  {
+   "tu": 1947,
+   "cagr": -0.58,
+   "sharpe": -0.025,
+   "bh_cagr": 3.16,
+   "lenh": 87
+  },
+  {
+   "tu": 1952,
+   "cagr": 5.43,
+   "sharpe": 0.745,
+   "bh_cagr": 7.95,
+   "lenh": 84
+  },
+  {
+   "tu": 1957,
+   "cagr": 5.31,
+   "sharpe": 0.839,
+   "bh_cagr": 2.87,
+   "lenh": 71
+  },
+  {
+   "tu": 1962,
+   "cagr": 7.38,
+   "sharpe": 1.586,
+   "bh_cagr": -3.21,
+   "lenh": 71
+  },
+  {
+   "tu": 1967,
+   "cagr": 11.85,
+   "sharpe": 1.974,
+   "bh_cagr": -0.96,
+   "lenh": 60
+  },
+  {
+   "tu": 1972,
+   "cagr": 4.02,
+   "sharpe": 0.518,
+   "bh_cagr": -4.65,
+   "lenh": 90
+  },
+  {
+   "tu": 1977,
+   "cagr": 4.81,
+   "sharpe": 0.627,
+   "bh_cagr": -3.04,
+   "lenh": 80
+  },
+  {
+   "tu": 1982,
+   "cagr": 3.4,
+   "sharpe": 0.4,
+   "bh_cagr": 8.31,
+   "lenh": 98
+  },
+  {
+   "tu": 1987,
+   "cagr": 0.63,
+   "sharpe": 0.112,
+   "bh_cagr": 4.8,
+   "lenh": 101
+  },
+  {
+   "tu": 1992,
+   "cagr": -0.52,
+   "sharpe": -0.047,
+   "bh_cagr": 6.27,
+   "lenh": 109
+  },
+  {
+   "tu": 1997,
+   "cagr": -1.74,
+   "sharpe": -0.108,
+   "bh_cagr": 3.4,
+   "lenh": 105
+  },
+  {
+   "tu": 2002,
+   "cagr": -2.25,
+   "sharpe": -0.218,
+   "bh_cagr": -1.54,
+   "lenh": 105
+  },
+  {
+   "tu": 2007,
+   "cagr": -10.61,
+   "sharpe": -0.899,
+   "bh_cagr": -7.75,
+   "lenh": 107
+  },
+  {
+   "tu": 2012,
+   "cagr": -4.34,
+   "sharpe": -0.621,
+   "bh_cagr": 5.76,
+   "lenh": 124
+  },
+  {
+   "tu": 2017,
+   "cagr": 4.15,
+   "sharpe": 0.538,
+   "bh_cagr": 9.65,
+   "lenh": 100
+  },
+  {
+   "tu": 2022,
+   "cagr": 0.54,
+   "sharpe": 0.106,
+   "bh_cagr": 4.09,
+   "lenh": 94
+  }
+ ],
+ "giai_doan_duong": 13,
+ "so_giai_doan": 20
+}

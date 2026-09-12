@@ -1,0 +1,103 @@
+
+########## CHANG A: mo kho = 1354 co che
+
+=== moKho train  2016.06.01 -> 2021.06.01
+  1297 pass, 92.2s
+=== moKho holdout  2021.06.01 -> 2026.07.29
+  1297 pass, 18.5s
+-> reports/DEM_A_MO_KHO_HK50Cash.json
+
+chan DUONG ca hai doan : 40
+chan AM   ca hai doan : 449
+
+########## CHANG B: dao chieu 449 chan am
+
+=== dao train  2016.06.01 -> 2021.06.01
+  450 pass, 18.4s
+=== dao holdout  2021.06.01 -> 2026.07.29
+  450 pass, 12.3s
+-> reports/DEM_B_DAO_HK50Cash.json
+
+dao chieu -> duong ca hai doan: 46/449
+
+TONG CHAN DUONG: 86 (goc 40 + dao 46)
+-> reports/DEM_CHAN_DUONG_HK50Cash.json
+
+########## CHANG C: ma tran tuong quan 86 chan
+
+=== lo 0: 40 slot
+=== lo 1: 40 slot
+=== lo 2: 6 slot
+
+ghep duoc 86 chuoi von
+-> reports/DEM_C_MATRAN_HK50Cash.json
+
+--- 10 he DON tot nhat ---
+engulfing_sell__dao                                99.01    0.23%    428.1
+ban_khi_sma5_cheo_xuong_sma8__dao                  53.02    0.13%    421.9
+cisd_reversal                                     111.75    0.29%    389.9
+squeeze_long_default__dao                         192.84    0.53%    362.3
+ban_khi_gia_tren_dai_tren_bollinger__dao           56.87    0.17%    341.5
+mua_zscore20_close_tren_2                          56.87    0.17%    341.5
+statarb_z_score_sell_signal__dao                   56.87    0.17%    341.5
+z_score_mean_reversion__dao                        56.87    0.17%    341.5
+z_score_mean_reversion_sell__dao                   56.87    0.17%    341.5
+ma_crossover_sell__dao                             40.86    0.16%    261.5
+
+--- 15 CAP tot nhat ---
+cisd_reversal                  engulfing_sell__dao             -0.037    210.76    0.23%    900.2
+ban_khi_gia_tren_dai_tren_boll engulfing_sell__dao             +0.176    155.88    0.20%    785.4
+engulfing_sell__dao            mua_zscore20_close_tren_2       +0.176    155.88    0.20%    785.4
+engulfing_sell__dao            statarb_z_score_sell_signal__d  +0.176    155.88    0.20%    785.4
+engulfing_sell__dao            z_score_mean_reversion__dao     +0.176    155.88    0.20%    785.4
+engulfing_sell__dao            z_score_mean_reversion_sell__d  +0.176    155.88    0.20%    785.4
+ban_khi_sma5_cheo_xuong_sma8__ engulfing_sell__dao             -0.002    152.03    0.20%    778.6
+chap_nhan_vao_khi_bien_dong_ng engulfing_sell__dao             -0.073    146.55    0.20%    718.8
+ban_khi_gia_tren_dai_tren_boll cisd_reversal                   -0.017    168.62    0.27%    619.8
+cisd_reversal                  mua_zscore20_close_tren_2       -0.017    168.62    0.27%    619.8
+cisd_reversal                  statarb_z_score_sell_signal__d  -0.017    168.62    0.27%    619.8
+cisd_reversal                  z_score_mean_reversion__dao     -0.017    168.62    0.27%    619.8
+cisd_reversal                  z_score_mean_reversion_sell__d  -0.017    168.62    0.27%    619.8
+ban_khi_gia_tren_dai_tren_boll ban_khi_sma5_cheo_xuong_sma8__  -0.001    109.89    0.18%    614.8
+ban_khi_sma5_cheo_xuong_sma8__ mua_zscore20_close_tren_2       -0.001    109.89    0.18%    614.8
+
+########## CHANG D: cong ra tien o sut giam 50-60%
+
+=== cap 0: cisd_reversal + engulfing_sell__dao
+   ghep     dinh  15.73%/nam @ DD 24.63%  lot 0.0/16.0/16.0 | DD20  15.00%/nam @ DD 21.45%  lot 0.0/13.6/16.0 | 50-60%   --
+   chi_a    dinh  10.67%/nam @ DD 20.15%  lot 0.0/16.0/0.0 | DD20  10.67%/nam @ DD 20.15%  lot 0.0/16.0/0.0 | 50-60%   --
+   chi_b    dinh   9.86%/nam @ DD 28.46%  lot 0.0/0.0/16.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/0.0/11.2 | 50-60%   --
+   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0
+-> reports/DEM_D_RA_TIEN_HK50Cash.json
+=== cap 1: ban_khi_gia_tren_dai_tren_bollinge + engulfing_sell__dao
+   ghep     dinh  13.19%/nam @ DD 22.92%  lot 0.0/16.0/16.0 | DD20  12.93%/nam @ DD 22.11%  lot 0.0/16.0/15.2 | 50-60%   --
+   chi_a    dinh   6.61%/nam @ DD 30.38%  lot 0.0/16.0/0.0 | DD20   4.99%/nam @ DD 21.99%  lot 0.0/11.2/0.0 | 50-60%   --
+   chi_b    dinh   9.86%/nam @ DD 28.46%  lot 0.0/0.0/16.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/0.0/11.2 | 50-60%   --
+   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0
+-> reports/DEM_D_RA_TIEN_HK50Cash.json
+=== cap 2: engulfing_sell__dao + mua_zscore20_close_tren_2
+   ghep     dinh  13.19%/nam @ DD 22.92%  lot 0.0/16.0/16.0 | DD20  12.93%/nam @ DD 22.11%  lot 0.0/15.2/16.0 | 50-60%   --
+   chi_a    dinh   9.86%/nam @ DD 28.46%  lot 0.0/16.0/0.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/11.2/0.0 | 50-60%   --
+   chi_b    dinh   6.61%/nam @ DD 30.38%  lot 0.0/0.0/16.0 | DD20   4.99%/nam @ DD 21.99%  lot 0.0/0.0/11.2 | 50-60%   --
+   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0
+-> reports/DEM_D_RA_TIEN_HK50Cash.json
+=== cap 3: engulfing_sell__dao + statarb_z_score_sell_signal__dao
+   ghep     dinh  13.19%/nam @ DD 22.92%  lot 0.0/16.0/16.0 | DD20  12.93%/nam @ DD 22.11%  lot 0.0/15.2/16.0 | 50-60%   --
+   chi_a    dinh   9.86%/nam @ DD 28.46%  lot 0.0/16.0/0.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/11.2/0.0 | 50-60%   --
+   chi_b    dinh   6.61%/nam @ DD 30.38%  lot 0.0/0.0/16.0 | DD20   4.99%/nam @ DD 21.99%  lot 0.0/0.0/11.2 | 50-60%   --
+   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0
+-> reports/DEM_D_RA_TIEN_HK50Cash.json
+=== cap 4: engulfing_sell__dao + z_score_mean_reversion__dao
+   ghep     dinh  13.19%/nam @ DD 22.92%  lot 0.0/16.0/16.0 | DD20  12.93%/nam @ DD 22.11%  lot 0.0/15.2/16.0 | 50-60%   --
+   chi_a    dinh   9.86%/nam @ DD 28.46%  lot 0.0/16.0/0.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/11.2/0.0 | 50-60%   --
+   chi_b    dinh   6.61%/nam @ DD 30.38%  lot 0.0/0.0/16.0 | DD20   4.99%/nam @ DD 21.99%  lot 0.0/0.0/11.2 | 50-60%   --
+   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0
+-> reports/DEM_D_RA_TIEN_HK50Cash.json
+=== cap 5: engulfing_sell__dao + z_score_mean_reversion_sell__dao
+   ghep     dinh  13.19%/nam @ DD 22.92%  lot 0.0/16.0/16.0 | DD20  12.93%/nam @ DD 22.11%  lot 0.0/15.2/16.0 | 50-60%   --
+   chi_a    dinh   9.86%/nam @ DD 28.46%  lot 0.0/16.0/0.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/11.2/0.0 | 50-60%   --
+   chi_b    dinh   6.61%/nam @ DD 30.38%  lot 0.0/0.0/16.0 | DD20   4.99%/nam @ DD 21.99%  lot 0.0/0.0/11.2 | 50-60%   --
+   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0
+-> reports/DEM_D_RA_TIEN_HK50Cash.json
+
+XONG sau 18.9 phut

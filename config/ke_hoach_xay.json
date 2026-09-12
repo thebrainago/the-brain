@@ -429,9 +429,10 @@
     "khong_phai_phan_quyet_am": "DE_QT_EA_NGOAI.json = AM, nhung do la MOT EA tren US500Cash H1 - mot ket qua am le. quan_tri_da_loc.json rong la ket qua cua mot BO LOC khac, khong phai cua phep thu train/holdout o tren."
    },
    "viec_ngay": [
-    "XONG ca nam phep thu cua khoi 7. Xem KET_LUAN_KHOI_7.",
-    "Sonic R H4 KHONG nam trong doc_kho() (no la he EA/chi bao, danh gia rieng) - chua chay duoc qua _thu_chuoi_dai.py. Neu muon do thi phai dua no vao kho truoc.",
-    "DE XUAT cho chu du an: dung quy tac nhan CHE DO dinh nghia TRUOC (vi du: lam phat, do doc duong cong lai suat, bien dong thuc hien), roi moi do xem z5/quantora co bat dung che do cua chung khong. Chia giai doan sau khi nhin du lieu la khop in-sample."
+    "DO LAI MDE voi phi = 0 cho YH_NASDAQ va SP500, roi so lai. Hien dang so Sharpe-khong-phi voi MDE-co-phi - khong nhat quan.",
+    "Chay _thu_chuoi_dai.py cho vai dai dien khac cua 89 nhom (khong phai ca 89 - chung tuong quan rat cao), de xem ho loc xu huong co dong nhat khong.",
+    "Neu ho nay giu duoc: no KHAC z5/quantora o cho no khong phu thuoc che do (10/11 giai doan duong tren NASDAQ). Do moi la ung vien 'co che' dau tien.",
+    "Nhung phai tra loi: tren CFD co phi 5,8%/nam thi no con lai gi? Do la cau hoi ve CONG CU, va no quyet dinh nhieu hon tin hieu."
    ],
    "ket_qua_placebo_trailing": {
     "trang_thai": "AM",
@@ -572,6 +573,49 @@
     "mot_cau": "Khong co duong vong nao qua tuong MDE trong nhung thu da thu, va CA HAI he tung duoc coi la 'song sot' deu la hien tuong che do chu khong phai co che ben vung.",
     "dieu_nay_KHONG_noi_gi": "No KHONG noi rang khong the kiem tien. Mot edge phu thuoc che do van chay duoc trong che do cua no. No noi rang: (a) dung goi chung la 'co che', (b) phai co dieu kien TAT theo che do, (c) size theo rui ro che do dao chieu, (d) dung ky vong chung song sot ngoai che do.",
     "huong_tiep_theo_de_xuat": "Hai he song o HAI che do nguoc nhau la mot dau hieu, khong phai mot ket qua. Cau hoi dung tiep theo khong con la 'tim them edge' ma la 'nhan ra dang o che do nao'. NHUNG phai canh giac: chia giai doan SAU KHI nhin du lieu la khop chuyen in-sample. Bat ky he chuyen-che-do nao cung phai co quy tac nhan che do dinh nghia TRUOC, va placebo tren chinh quy tac do."
+   },
+   "ket_qua_quet_ca_kho_chuoi_dai": {
+    "trang_thai": "DUONG CO DIEU KIEN - ho LOC XU HUONG song tren chuoi dai",
+    "luc": "2026-09-12",
+    "nguon": "_quet_chuoi_dai.py · reports/QUET_CHUOI_DAI_YH_NASDAQ.json · _thu_chuoi_dai.py · reports/CHUOI_DAI_rsi_ma_buy_*.json",
+    "quet": {
+     "kho": 1398,
+     "chay_duoc": 1239,
+     "hong_hoac_khong_kich_hoat": 159,
+     "vuot_MDE_0_541": 131,
+     "vuot_MDE_va_hon_mua_giu_cung_sut_giam": 131,
+     "giay": 6,
+     "KHU_TRUNG_THEO_DUONG_VI_THE": "131 TEN chi la 89 duong vi the khac nhau. Nhom lon nhat gom 8 ten (kinematic_physics, mtf_ma_sma_trend_following, sma_trend_following_buy...). Va ca 89 deu la bien the cua MOT y: LONG khi gia tren trung binh dong. Dung dem 131 nhu 131 phep thu doc lap."
+    },
+    "ung_vien_dau_bang_rsi_ma_buy": {
+     "co_che": "mua khi RSI tren nguong VA gia tren trung binh dong",
+     "NASDAQ_55_5_nam": {
+      "sharpe": 0.778,
+      "mde": 0.541,
+      "ti_so": 1.44,
+      "cagr_pct": 8.19,
+      "maxdd_pct": -31.3,
+      "phoi_nhiem_pct": 51.6,
+      "so_lenh": 935,
+      "ban_do": "6/6 o tren MDE (0,61-0,78) - CAO NGUYEN THAT",
+      "giai_doan_duong": "10/11 (cai am duy nhat la -0,21%)"
+     },
+     "SP500_98_6_nam": {
+      "sharpe": 0.233,
+      "mde": 0.813,
+      "ti_so": 0.29,
+      "ban_do": "0/6 o tren MDE",
+      "giai_doan_duong": "13/20, am lien tuc 1992-2016"
+     }
+    },
+    "BAY_PHI_QUA_DEM_DA_PHAT_HIEN": {
+     "van_de": "`chi_phi.tu_du_lieu` gan `phi_nam_mua = 5,758%/nam` (SP500) va 5,807% (NASDAQ) - do la muc phi CUA HOM NAY do tu XM 22/08/2026, ap cho CA 99 NAM lich su. Chinh canh bao trong `cp.canh_bao` da noi: 'chi phu giai doan gan day, KHONG phai ca lich su'.",
+     "hau_qua": "SP500 gia THO CAGR 6,33%/nam; sau phi con 0,37%. Phi an 94% loi suat. Va no THIEN VI co he thong moi he o ngoai thi truong mot phan thoi gian: rsi_ma_buy phoi nhiem 51,6% nen chi tra phi mot nua -> tiet kiem ~2,9%/nam, LON HON ca uu the do duoc.",
+     "da_tach": "Chay lai voi phi = 0 (chi so tho) de tach 'dinh thoi diem' khoi 'tranh phi':\n  NASDAQ  rsi_ma_buy CAGR 11,50% Sharpe 1,054 maxDD -25,4%\n          mua-giu    CAGR 10,57% Sharpe 0,596 maxDD -77,9%\n  SP500   rsi_ma_buy CAGR  4,83% Sharpe 0,510 maxDD -48,0%\n          mua-giu    CAGR  6,32% Sharpe 0,424 maxDD -86,2%\n=> UU THE SONG SOT khi bo phi, nen KHONG phai hien vat chi phi.",
+     "nhung_van_con_le_thuoc": "So sanh Sharpe-khong-phi voi MDE-co-phi la KHONG NHAT QUAN (MDE trong cache tinh voi chi phi). Con so 1,44x va 0,29x o tren deu mang van de do. Muon ket luan chac thi phai do lai MDE voi cung cau hinh chi phi."
+    },
+    "doc_the_nao": "NASDAQ: uu the MANH va co hinh dang dung - cao nguyen 6/6, 10/11 giai doan duong ke ca thap nien 70. SP500 99 nam: uu the MONG - Sharpe 0,510 so voi 0,424, va no LAM GIAM loi suat (4,83% so voi 6,32%), chi thang nho cat sut giam. Am lien tuc 1992-2016.\nDay la hieu ung TRUNG BINH DONG DINH THOI DIEM da duoc tai lieu hoa rong rai (Faber 2007 va ca dong tai lieu 200-day MA). Viec no la THU DA BIET la diem CONG cho do ben, khong phai diem tru - mot hieu ung that thi phai co nguoi khac cung thay.",
+    "dieu_quan_trong_nhat_ve_thuc_te": "Voi phi qua dem THAT cua CFD (~5,8%/nam), tren chan troi nhieu thap ky thi KHONG CO GI chay duoc, ke ca mua-giu (SP500 0,37%/nam). Cong cu quan trong hon tin hieu. Dieu nay khop voi ket luan cu cua du an: phi qua dem la chi phi quyet dinh, khong phai spread."
    }
   }
  },

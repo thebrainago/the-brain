@@ -4,12 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 4d5d3d0 ban giao: con hai he qua ca hai cong; viec mai la placebo + da tai san + chia nam
-### 2026-09-06 21:08:39 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8016, 0 phut)
-- `placebo.log`: DAT (ban that noi len khoi dam dich)
-- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
 - `so_mua_giu.log`: THANG mua-giu o cung sut giam: 43/268
 - `tester_da_ma.log`: -> reports/TESTER_DA_MA.json
 - `tester_holdout.log`: duong o CA HAI doan: 13/225
@@ -404,3 +398,9 @@
 - `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
 - `qwen_ultra.log`: ~ 09:28:51 | san sang 12 | CPU    6% / muc tieu 35%  |  con  5.8 loi  |  dang chay 0  [trong]
 - git: 8f9c130 khoi 7 viec 1: ho TRAILING TRUOT PLACEBO - va mot loi thong ke trong chinh phep thu
+### 2026-09-12 10:19:26 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14108, 0 phut), dieu_khien_xa.py (pid 15316, 193 phut)
+- `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
+- `qwen_ultra.log`: ~ 10:18:55 | san sang 8 | CPU   20% / muc tieu 90%  |  con 14.0 loi  |  dang chay 1  [TESTER:1]
+- git: ae0286c bao cao 12/09 phan 3: khoi 7 - 5 phep thu, 5 ket qua AM

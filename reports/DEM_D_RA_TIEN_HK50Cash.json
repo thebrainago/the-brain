@@ -1,0 +1,716 @@
+[
+ {
+  "a": "cisd_reversal",
+  "b": "engulfing_sell__dao",
+  "r": -0.0374,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 24.63,
+    "lenh": 144,
+    "pct_nam": 15.73,
+    "sharpe": 1.856355
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     13.6,
+     16.0
+    ],
+    "dd": 21.45,
+    "lenh": 144,
+    "pct_nam": 15.0,
+    "sharpe": 1.993138
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 43.92
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 20.15,
+    "lenh": 68,
+    "pct_nam": 10.67,
+    "sharpe": 1.270876
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 20.15,
+    "lenh": 68,
+    "pct_nam": 10.67,
+    "sharpe": 1.270876
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 20.15
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 28.46,
+    "lenh": 76,
+    "pct_nam": 9.86,
+    "sharpe": 4.21908
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     11.2
+    ],
+    "dd": 22.15,
+    "lenh": 76,
+    "pct_nam": 7.67,
+    "sharpe": 4.361583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.52,
+    "lenh": 5,
+    "pct_nam": -0.14,
+    "sharpe": -0.010324
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.05,
+    "lenh": 5,
+    "pct_nam": -0.89,
+    "sharpe": -0.010816
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.7,
+     0.0,
+     0.0
+    ],
+    "dd": 50.16,
+    "lenh": 5,
+    "pct_nam": -2.75,
+    "sharpe": -0.010523
+   },
+   "dd_max_do_duoc": 57.19
+  }
+ },
+ {
+  "a": "ban_khi_gia_tren_dai_tren_bollinger__dao",
+  "b": "engulfing_sell__dao",
+  "r": 0.1758,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.92,
+    "lenh": 169,
+    "pct_nam": 13.19,
+    "sharpe": 2.797248
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     15.2
+    ],
+    "dd": 22.11,
+    "lenh": 169,
+    "pct_nam": 12.93,
+    "sharpe": 2.782867
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 30.38,
+    "lenh": 93,
+    "pct_nam": 6.61,
+    "sharpe": 2.021465
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     11.2,
+     0.0
+    ],
+    "dd": 21.99,
+    "lenh": 93,
+    "pct_nam": 4.99,
+    "sharpe": 2.138843
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.38
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 28.46,
+    "lenh": 76,
+    "pct_nam": 9.86,
+    "sharpe": 4.21908
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     11.2
+    ],
+    "dd": 22.15,
+    "lenh": 76,
+    "pct_nam": 7.67,
+    "sharpe": 4.361583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.52,
+    "lenh": 5,
+    "pct_nam": -0.14,
+    "sharpe": -0.010324
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.05,
+    "lenh": 5,
+    "pct_nam": -0.89,
+    "sharpe": -0.010816
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.7,
+     0.0,
+     0.0
+    ],
+    "dd": 50.16,
+    "lenh": 5,
+    "pct_nam": -2.75,
+    "sharpe": -0.010523
+   },
+   "dd_max_do_duoc": 57.19
+  }
+ },
+ {
+  "a": "engulfing_sell__dao",
+  "b": "mua_zscore20_close_tren_2",
+  "r": 0.1758,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.92,
+    "lenh": 169,
+    "pct_nam": 13.19,
+    "sharpe": 2.797248
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     15.2,
+     16.0
+    ],
+    "dd": 22.11,
+    "lenh": 169,
+    "pct_nam": 12.93,
+    "sharpe": 2.782867
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 28.46,
+    "lenh": 76,
+    "pct_nam": 9.86,
+    "sharpe": 4.21908
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     11.2,
+     0.0
+    ],
+    "dd": 22.15,
+    "lenh": 76,
+    "pct_nam": 7.67,
+    "sharpe": 4.361583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 30.38,
+    "lenh": 93,
+    "pct_nam": 6.61,
+    "sharpe": 2.021465
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     11.2
+    ],
+    "dd": 21.99,
+    "lenh": 93,
+    "pct_nam": 4.99,
+    "sharpe": 2.138843
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.38
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.52,
+    "lenh": 5,
+    "pct_nam": -0.14,
+    "sharpe": -0.010324
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.05,
+    "lenh": 5,
+    "pct_nam": -0.89,
+    "sharpe": -0.010816
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.7,
+     0.0,
+     0.0
+    ],
+    "dd": 50.16,
+    "lenh": 5,
+    "pct_nam": -2.75,
+    "sharpe": -0.010523
+   },
+   "dd_max_do_duoc": 57.19
+  }
+ },
+ {
+  "a": "engulfing_sell__dao",
+  "b": "statarb_z_score_sell_signal__dao",
+  "r": 0.1758,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.92,
+    "lenh": 169,
+    "pct_nam": 13.19,
+    "sharpe": 2.797248
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     15.2,
+     16.0
+    ],
+    "dd": 22.11,
+    "lenh": 169,
+    "pct_nam": 12.93,
+    "sharpe": 2.782867
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 28.46,
+    "lenh": 76,
+    "pct_nam": 9.86,
+    "sharpe": 4.21908
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     11.2,
+     0.0
+    ],
+    "dd": 22.15,
+    "lenh": 76,
+    "pct_nam": 7.67,
+    "sharpe": 4.361583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 30.38,
+    "lenh": 93,
+    "pct_nam": 6.61,
+    "sharpe": 2.021465
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     11.2
+    ],
+    "dd": 21.99,
+    "lenh": 93,
+    "pct_nam": 4.99,
+    "sharpe": 2.138843
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.38
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.52,
+    "lenh": 5,
+    "pct_nam": -0.14,
+    "sharpe": -0.010324
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.05,
+    "lenh": 5,
+    "pct_nam": -0.89,
+    "sharpe": -0.010816
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.7,
+     0.0,
+     0.0
+    ],
+    "dd": 50.16,
+    "lenh": 5,
+    "pct_nam": -2.75,
+    "sharpe": -0.010523
+   },
+   "dd_max_do_duoc": 57.19
+  }
+ },
+ {
+  "a": "engulfing_sell__dao",
+  "b": "z_score_mean_reversion__dao",
+  "r": 0.1758,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.92,
+    "lenh": 169,
+    "pct_nam": 13.19,
+    "sharpe": 2.797248
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     15.2,
+     16.0
+    ],
+    "dd": 22.11,
+    "lenh": 169,
+    "pct_nam": 12.93,
+    "sharpe": 2.782867
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 28.46,
+    "lenh": 76,
+    "pct_nam": 9.86,
+    "sharpe": 4.21908
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     11.2,
+     0.0
+    ],
+    "dd": 22.15,
+    "lenh": 76,
+    "pct_nam": 7.67,
+    "sharpe": 4.361583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 30.38,
+    "lenh": 93,
+    "pct_nam": 6.61,
+    "sharpe": 2.021465
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     11.2
+    ],
+    "dd": 21.99,
+    "lenh": 93,
+    "pct_nam": 4.99,
+    "sharpe": 2.138843
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.38
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.52,
+    "lenh": 5,
+    "pct_nam": -0.14,
+    "sharpe": -0.010324
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.05,
+    "lenh": 5,
+    "pct_nam": -0.89,
+    "sharpe": -0.010816
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.7,
+     0.0,
+     0.0
+    ],
+    "dd": 50.16,
+    "lenh": 5,
+    "pct_nam": -2.75,
+    "sharpe": -0.010523
+   },
+   "dd_max_do_duoc": 57.19
+  }
+ },
+ {
+  "a": "engulfing_sell__dao",
+  "b": "z_score_mean_reversion_sell__dao",
+  "r": 0.1758,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.92,
+    "lenh": 169,
+    "pct_nam": 13.19,
+    "sharpe": 2.797248
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     15.2,
+     16.0
+    ],
+    "dd": 22.11,
+    "lenh": 169,
+    "pct_nam": 12.93,
+    "sharpe": 2.782867
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 28.46,
+    "lenh": 76,
+    "pct_nam": 9.86,
+    "sharpe": 4.21908
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     11.2,
+     0.0
+    ],
+    "dd": 22.15,
+    "lenh": 76,
+    "pct_nam": 7.67,
+    "sharpe": 4.361583
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.46
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 30.38,
+    "lenh": 93,
+    "pct_nam": 6.61,
+    "sharpe": 2.021465
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     11.2
+    ],
+    "dd": 21.99,
+    "lenh": 93,
+    "pct_nam": 4.99,
+    "sharpe": 2.138843
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.38
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 3.52,
+    "lenh": 5,
+    "pct_nam": -0.14,
+    "sharpe": -0.010324
+   },
+   "dd20": {
+    "lot": [
+     0.6,
+     0.0,
+     0.0
+    ],
+    "dd": 20.05,
+    "lenh": 5,
+    "pct_nam": -0.89,
+    "sharpe": -0.010816
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     1.7,
+     0.0,
+     0.0
+    ],
+    "dd": 50.16,
+    "lenh": 5,
+    "pct_nam": -2.75,
+    "sharpe": -0.010523
+   },
+   "dd_max_do_duoc": 57.19
+  }
+ }
+]

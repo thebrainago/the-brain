@@ -1,0 +1,666 @@
+[
+ {
+  "a": "ban_khi_sma5_cheo_xuong_sma8__dao",
+  "b": "fast_sma_cuts_above_slow_sma",
+  "r": 0.0664,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 20.35,
+    "lenh": 135,
+    "pct_nam": 10.25,
+    "sharpe": 2.349448
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 20.35,
+    "lenh": 135,
+    "pct_nam": 10.25,
+    "sharpe": 2.349448
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 22.7
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 23.49,
+    "lenh": 69,
+    "pct_nam": 6.0,
+    "sharpe": 2.104918
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     14.4,
+     0.0
+    ],
+    "dd": 22.11,
+    "lenh": 69,
+    "pct_nam": 5.52,
+    "sharpe": 2.101711
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 23.49
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.0,
+    "lenh": 66,
+    "pct_nam": 6.43,
+    "sharpe": 2.811443
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.0,
+    "lenh": 66,
+    "pct_nam": 6.43,
+    "sharpe": 2.811443
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 19.0
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.65,
+    "lenh": 6,
+    "pct_nam": -0.04,
+    "sharpe": -0.002581
+   },
+   "dd20": {
+    "lot": [
+     0.7,
+     0.0,
+     0.0
+    ],
+    "dd": 18.19,
+    "lenh": 6,
+    "pct_nam": -0.25,
+    "sharpe": -0.002456
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 49.8
+  }
+ },
+ {
+  "a": "phan_ky_giam_gia_voi_bo_loc_xu_huong__dao",
+  "b": "tai_can_bang_etf_don_bay__dao",
+  "r": -0.201,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 19.01,
+    "lenh": 182,
+    "pct_nam": 17.44,
+    "sharpe": 1.314356
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 19.01,
+    "lenh": 182,
+    "pct_nam": 17.44,
+    "sharpe": 1.314356
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.0,
+     16.0,
+     8.0
+    ],
+    "dd": 50.01,
+    "lenh": 182,
+    "pct_nam": 15.56,
+    "sharpe": 1.338191
+   },
+   "dd_max_do_duoc": 58.7
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 27.24,
+    "lenh": 81,
+    "pct_nam": 13.35,
+    "sharpe": 1.202043
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     9.6,
+     0.0
+    ],
+    "dd": 22.07,
+    "lenh": 81,
+    "pct_nam": 9.61,
+    "sharpe": 1.40382
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 27.24
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 35.13,
+    "lenh": 101,
+    "pct_nam": 9.61,
+    "sharpe": 1.459809
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     6.4
+    ],
+    "dd": 22.16,
+    "lenh": 101,
+    "pct_nam": 4.83,
+    "sharpe": 1.464158
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 35.13
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.65,
+    "lenh": 6,
+    "pct_nam": -0.04,
+    "sharpe": -0.002581
+   },
+   "dd20": {
+    "lot": [
+     0.7,
+     0.0,
+     0.0
+    ],
+    "dd": 18.19,
+    "lenh": 6,
+    "pct_nam": -0.25,
+    "sharpe": -0.002456
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 49.8
+  }
+ },
+ {
+  "a": "candle_body_wick_pressure_sell_divergence",
+  "b": "fast_sma_cuts_above_slow_sma",
+  "r": -0.0015,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 17.12,
+    "lenh": 146,
+    "pct_nam": 12.65,
+    "sharpe": 3.205168
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     2.4
+    ],
+    "dd": 17.5,
+    "lenh": 146,
+    "pct_nam": 9.85,
+    "sharpe": 2.858172
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 18.24
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 18.33,
+    "lenh": 80,
+    "pct_nam": 9.29,
+    "sharpe": 3.55318
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 18.33,
+    "lenh": 80,
+    "pct_nam": 9.29,
+    "sharpe": 3.55318
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 18.33
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.0,
+    "lenh": 66,
+    "pct_nam": 6.43,
+    "sharpe": 2.811443
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 19.0,
+    "lenh": 66,
+    "pct_nam": 6.43,
+    "sharpe": 2.811443
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 19.0
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.65,
+    "lenh": 6,
+    "pct_nam": -0.04,
+    "sharpe": -0.002581
+   },
+   "dd20": {
+    "lot": [
+     0.7,
+     0.0,
+     0.0
+    ],
+    "dd": 18.19,
+    "lenh": 6,
+    "pct_nam": -0.25,
+    "sharpe": -0.002456
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 49.8
+  }
+ },
+ {
+  "a": "candle_body_wick_pressure_sell_divergence",
+  "b": "phan_ky_giam_gia_voi_bo_loc_xu_huong__dao",
+  "r": -0.0122,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 19.05,
+    "lenh": 161,
+    "pct_nam": 17.27,
+    "sharpe": 1.576099
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 19.05,
+    "lenh": 161,
+    "pct_nam": 17.27,
+    "sharpe": 1.576099
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 26.7
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 18.33,
+    "lenh": 80,
+    "pct_nam": 9.29,
+    "sharpe": 3.55318
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 18.33,
+    "lenh": 80,
+    "pct_nam": 9.29,
+    "sharpe": 3.55318
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 18.33
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 27.24,
+    "lenh": 81,
+    "pct_nam": 13.35,
+    "sharpe": 1.202043
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     9.6
+    ],
+    "dd": 22.07,
+    "lenh": 81,
+    "pct_nam": 9.61,
+    "sharpe": 1.40382
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 27.24
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.65,
+    "lenh": 6,
+    "pct_nam": -0.04,
+    "sharpe": -0.002581
+   },
+   "dd20": {
+    "lot": [
+     0.7,
+     0.0,
+     0.0
+    ],
+    "dd": 18.19,
+    "lenh": 6,
+    "pct_nam": -0.25,
+    "sharpe": -0.002456
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 49.8
+  }
+ },
+ {
+  "a": "ban_khi_sma5_cheo_xuong_sma8__dao",
+  "b": "candle_body_wick_pressure_sell_divergence",
+  "r": -0.001,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 12.02,
+    "lenh": 149,
+    "pct_nam": 12.39,
+    "sharpe": 2.835407
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     8.8
+    ],
+    "dd": 17.85,
+    "lenh": 149,
+    "pct_nam": 9.92,
+    "sharpe": 2.508128
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 22.84
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 23.49,
+    "lenh": 69,
+    "pct_nam": 6.0,
+    "sharpe": 2.104918
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     14.4,
+     0.0
+    ],
+    "dd": 22.11,
+    "lenh": 69,
+    "pct_nam": 5.52,
+    "sharpe": 2.101711
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 23.49
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 18.33,
+    "lenh": 80,
+    "pct_nam": 9.29,
+    "sharpe": 3.55318
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 18.33,
+    "lenh": 80,
+    "pct_nam": 9.29,
+    "sharpe": 3.55318
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 18.33
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.65,
+    "lenh": 6,
+    "pct_nam": -0.04,
+    "sharpe": -0.002581
+   },
+   "dd20": {
+    "lot": [
+     0.7,
+     0.0,
+     0.0
+    ],
+    "dd": 18.19,
+    "lenh": 6,
+    "pct_nam": -0.25,
+    "sharpe": -0.002456
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 49.8
+  }
+ },
+ {
+  "a": "fvg_bearish_formation",
+  "b": "quay_ve_keltner_low_vol",
+  "r": -0.132,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 20.35,
+    "lenh": 277,
+    "pct_nam": 16.08,
+    "sharpe": 1.320186
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 20.35,
+    "lenh": 277,
+    "pct_nam": 16.08,
+    "sharpe": 1.320186
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 29.34
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 30.11,
+    "lenh": 206,
+    "pct_nam": 11.59,
+    "sharpe": 1.279693
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     8.0,
+     0.0
+    ],
+    "dd": 21.92,
+    "lenh": 206,
+    "pct_nam": 7.18,
+    "sharpe": 1.317957
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 30.11
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 29.54,
+    "lenh": 71,
+    "pct_nam": 9.41,
+    "sharpe": 1.116301
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     9.6
+    ],
+    "dd": 22.26,
+    "lenh": 71,
+    "pct_nam": 6.49,
+    "sharpe": 1.140427
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 29.54
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 2.65,
+    "lenh": 6,
+    "pct_nam": -0.04,
+    "sharpe": -0.002581
+   },
+   "dd20": {
+    "lot": [
+     0.7,
+     0.0,
+     0.0
+    ],
+    "dd": 18.19,
+    "lenh": 6,
+    "pct_nam": -0.25,
+    "sharpe": -0.002456
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 49.8
+  }
+ }
+]

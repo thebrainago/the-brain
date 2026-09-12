@@ -91,15 +91,15 @@
   },
   "S2_mql5_code_base": {
    "ma": "S2_mql5_code_base",
-   "so_lan_chay": 4,
+   "so_lan_chay": 5,
    "trang_thai": "XONG",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys, json, pathlib; sys.path.insert(0,'.')\nfrom nhan import ma_nguon as MN\nr = MN.thu_thap(so_bai=40)\nprint(json.dumps(r, ensure_ascii=False, default=str)[:3000])\npathlib.Path('reports/QWEN_MA_NGUON.json').write_text(json.dumps(r, ensure_ascii=False, default=str), encoding='utf-8')"
    ],
-   "bat_dau": 1789172617.9492497,
-   "xong": 1789173059.5040915,
+   "bat_dau": 1789183876.428725,
+   "xong": 1789184196.9406598,
    "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
@@ -111,8 +111,8 @@
      "nguong": 0.0
     }
    },
-   "log": "loai_ma\": \"tien_ich\"}, {\"id\": \"19172\", \"tieu_de\": \"Alligator\", \"url\": \"https://www.mql5.com/en/code/19172\", \"file\": \"alligator.mq5\", \"byte\": 35704, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19166\", \"tieu_de\": \"HarVesteR\", \"url\": \"https://www.mql5.com/en/code/19166\", \"file\": \"harvester.mq5\", \"byte\": 48642, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19150\", \"tieu_de\": \"Flat Channel\", \"url\": \"https://www.mql5.com/en/code/19150\", \"file\": \"flat_channel.mq5\", \"byte\": 53568, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19137\", \"tieu_de\": \"Vortex Indicator System\", \"url\": \"https://www.mql5.com/en/code/19137\", \"file\": \"vortex_indicator_system.mq5\", \"byte\": 29760, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19119\", \"tieu_de\": \"Multi Stochastic\", \"url\": \"https://www.mql5.com/en/code/19119\", \"file\": \"multi_stochastic.mq5\", \"byte\": 39126, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19110\", \"tieu_de\": \"Multi Time Frame Trader\", \"url\": \"https://www.mql5.com/en/code/19110\", \"file\": \"multi_time_frame_trader.mq5\", \"byte\": 33644, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19102\", \"tieu_de\": \"This is a cross-platform МТ45 Expert Advisor\", \"url\": \"https://www.mql5.com/en/code/19102\", \"file\": \"mt45.mq4\", \"byte\": 10458, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19089\", \"tieu_de\": \"OpenTime\", \"url\": \"https://www.mql5.com/en/code/19089\", \"file\": \"opentime.mq5\", \"byte\": 35970, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19070\", \"tieu_de\": \"Pending orders by time\", \"url\": \"htt\n",
-   "giay": 441.6
+   "log": ": \"https://www.mql5.com/en/code/17246\", \"file\": \"Autotrade.mq5\", \"byte\": 20930, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17239\", \"tieu_de\": \"2MA_4Level\", \"url\": \"https://www.mql5.com/en/code/17239\", \"file\": \"2ma_4level.mq5\", \"byte\": 26116, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17236\", \"tieu_de\": \"Altarius RSI Stohastic\", \"url\": \"https://www.mql5.com/en/code/17236\", \"file\": \"Altarius_RSI_Stohastic.mq5\", \"byte\": 33354, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17231\", \"tieu_de\": \"gazonkos\", \"url\": \"https://www.mql5.com/en/code/17231\", \"file\": \"gazonkos.mq5\", \"byte\": 23572, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17227\", \"tieu_de\": \"SendClose\", \"url\": \"https://www.mql5.com/en/code/17227\", \"file\": \"sendclose.mq5\", \"byte\": 21022, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17210\", \"tieu_de\": \"Forex Profit\", \"url\": \"https://www.mql5.com/en/code/17210\", \"file\": \"forex_profit.mq5\", \"byte\": 26354, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17209\", \"tieu_de\": \"Master_MM_Droid\", \"url\": \"https://www.mql5.com/en/code/17209\", \"file\": \"master_mm_droid.mq5\", \"byte\": 103166, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17206\", \"tieu_de\": \"BigBarSound\", \"url\": \"https://www.mql5.com/en/code/17206\", \"file\": \"bigbarsound.mq5\", \"byte\": 2272, \"moi\": true, \"loai_ma\": \"chi_bao\"}, {\"id\": \"17199\", \"tieu_de\": \"Money Fixed Risk\", \"url\": \"https://www.mql5.com/en/code/17199\", \"file\": \"money_fixed_risk.mq5\", \"byte\": 10212, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"17195\", \"tieu_d\n",
+   "giay": 320.5
   },
   "X0_bo_test": {
    "ma": "X0_bo_test",
@@ -144,8 +144,8 @@
   },
   "TT_boc": {
    "ma": "TT_boc",
-   "so_lan_chay": 7,
-   "trang_thai": "XONG",
+   "so_lan_chay": 8,
+   "trang_thai": "DANG_CHAY",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -153,9 +153,9 @@
     "400",
     "250"
    ],
-   "bat_dau": 1789180372.0387743,
-   "xong": 1789180752.655803,
-   "ma_thoat": 0,
+   "bat_dau": 1789184357.1565156,
+   "xong": null,
+   "ma_thoat": null,
    "cong": {
     "ket": "DAT",
     "vi_sao": "log co: co che, KHAU DOC HONG",
@@ -441,13 +441,61 @@
   "V1_dao_EU50": {
    "ma": "V1_dao_EU50",
    "so_lan_chay": 1,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "TESTER",
    "lenh": [
     "_dem_ghep.py",
     "EU50Cash"
    ],
    "bat_dau": 1789182815.156936,
+   "xong": 1789183856.4077172,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "lan dau do tren ma nay: 0 chan ban duong. Da dat moc, lan sau so sanh duoc.",
+    "so": {
+     "so_dong": 0,
+     "chan_ban": 0,
+     "chan_ban_truoc": null
+    }
+   },
+   "log": "0%   --\n   chi_b    dinh  13.35%/nam @ DD 27.24%  lot 0.0/0.0/16.0 | DD20   9.61%/nam @ DD 22.07%  lot 0.0/0.0/9.6 | 50-60%   --\n   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --\n-> reports/DEM_D_RA_TIEN_EU50Cash.json\n=== cap 4: ban_khi_sma5_cheo_xuong_sma8__dao + candle_body_wick_pressure_sell_div\n   ghep     dinh  12.39%/nam @ DD 12.02%  lot 0.0/16.0/16.0 | DD20   9.92%/nam @ DD 17.85%  lot 0.0/16.0/8.8 | 50-60%   --\n   chi_a    dinh   6.00%/nam @ DD 23.49%  lot 0.0/16.0/0.0 | DD20   5.52%/nam @ DD 22.11%  lot 0.0/14.4/0.0 | 50-60%   --\n   chi_b    dinh   9.29%/nam @ DD 18.33%  lot 0.0/0.0/16.0 | DD20   9.29%/nam @ DD 18.33%  lot 0.0/0.0/16.0 | 50-60%   --\n   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --\n-> reports/DEM_D_RA_TIEN_EU50Cash.json\n=== cap 5: fvg_bearish_formation + quay_ve_keltner_low_vol\n   ghep     dinh  16.08%/nam @ DD 20.35%  lot 0.0/16.0/16.0 | DD20  16.08%/nam @ DD 20.35%  lot 0.0/16.0/16.0 | 50-60%   --\n   chi_a    dinh  11.59%/nam @ DD 30.11%  lot 0.0/16.0/0.0 | DD20   7.18%/nam @ DD 21.92%  lot 0.0/8.0/0.0 | 50-60%   --\n   chi_b    dinh   9.41%/nam @ DD 29.54%  lot 0.0/0.0/16.0 | DD20   6.49%/nam @ DD 22.26%  lot 0.0/0.0/9.6 | 50-60%   --\n   mua_giu  dinh  -0.04%/nam @ DD  2.65%  lot 0.1/0.0/0.0 | DD20  -0.25%/nam @ DD 18.19%  lot 0.7/0.0/0.0 | 50-60%   --\n-> reports/DEM_D_RA_TIEN_EU50Cash.json\n\nXONG sau 17.3 phut\n",
+   "giay": 1041.3
+  },
+  "V1_dao_HK50": {
+   "ma": "V1_dao_HK50",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "TESTER",
+   "lenh": [
+    "_dem_ghep.py",
+    "HK50Cash"
+   ],
+   "bat_dau": 1789183936.5204825,
+   "xong": 1789185078.4743888,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "lan dau do tren ma nay: 0 chan ban duong. Da dat moc, lan sau so sanh duoc.",
+    "so": {
+     "so_dong": 0,
+     "chan_ban": 0,
+     "chan_ban_truoc": null
+    }
+   },
+   "log": " lot 0.0/0.0/11.2 | 50-60%   --\n   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0\n-> reports/DEM_D_RA_TIEN_HK50Cash.json\n=== cap 4: engulfing_sell__dao + z_score_mean_reversion__dao\n   ghep     dinh  13.19%/nam @ DD 22.92%  lot 0.0/16.0/16.0 | DD20  12.93%/nam @ DD 22.11%  lot 0.0/15.2/16.0 | 50-60%   --\n   chi_a    dinh   9.86%/nam @ DD 28.46%  lot 0.0/16.0/0.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/11.2/0.0 | 50-60%   --\n   chi_b    dinh   6.61%/nam @ DD 30.38%  lot 0.0/0.0/16.0 | DD20   4.99%/nam @ DD 21.99%  lot 0.0/0.0/11.2 | 50-60%   --\n   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0\n-> reports/DEM_D_RA_TIEN_HK50Cash.json\n=== cap 5: engulfing_sell__dao + z_score_mean_reversion_sell__dao\n   ghep     dinh  13.19%/nam @ DD 22.92%  lot 0.0/16.0/16.0 | DD20  12.93%/nam @ DD 22.11%  lot 0.0/15.2/16.0 | 50-60%   --\n   chi_a    dinh   9.86%/nam @ DD 28.46%  lot 0.0/16.0/0.0 | DD20   7.67%/nam @ DD 22.15%  lot 0.0/11.2/0.0 | 50-60%   --\n   chi_b    dinh   6.61%/nam @ DD 30.38%  lot 0.0/0.0/16.0 | DD20   4.99%/nam @ DD 21.99%  lot 0.0/0.0/11.2 | 50-60%   --\n   mua_giu  dinh  -0.14%/nam @ DD  3.52%  lot 0.1/0.0/0.0 | DD20  -0.89%/nam @ DD 20.05%  lot 0.6/0.0/0.0 | 50-60%  -2.75%/nam @ DD 50.16%  lot 1.7/0.0/0.0\n-> reports/DEM_D_RA_TIEN_HK50Cash.json\n\nXONG sau 18.9 phut\n",
+   "giay": 1142.0
+  },
+  "V1_dao_US2000": {
+   "ma": "V1_dao_US2000",
+   "so_lan_chay": 1,
+   "trang_thai": "DANG_CHAY",
+   "lan": "TESTER",
+   "lenh": [
+    "_dem_ghep.py",
+    "US2000Cash"
+   ],
+   "bat_dau": 1789185138.5689545,
    "xong": null,
    "ma_thoat": null
   }
@@ -650,6 +698,24 @@
    "ma": "V1_dao_FRA40",
    "ai": "qwen",
    "van": "Ket qua nay sinh ra tu 1 phep thu duy nhat tren FRA40Cash. So luong: 0 chan ban, 0 dong, 6 lenh mua_giu (am -0.51%/nam). Day la lan dau do nen chua co so sanh duoc. Tuy nhien, file bao cao cho thay cac ghep dao chieu co kha quan: ghep 'ban_zscore20_close_duoi_am2' + 'mua_rsi2_cheo_xuong_15__dao' dat 23.04%/nam @ DD 48.30% voi 291 lenh. Sharpe 1.48. Con so nay la AM (chua vuot nguong DAT) vi DD > 40%. He thong da dat moc de so sanh o lan sau."
+  },
+  {
+   "luc": "2026-09-12 10:31:13",
+   "ma": "V1_dao_EU50",
+   "ai": "qwen",
+   "van": "Lan dau tien chay tren EU50Cash, chua co du lieu truoc de so sanh. Ket qua hien thiet lap 5 cap ghep: tat ca deu AM (do duoc nhung chua vuot nguong). Ghep 'phan_ky_giam_gia__dao' + 'tai_can_bang_etf_don_bay__dao' cho ket qua tot nhat: 17.44%/nam, DD 19.01%, Sharpe 1.31, 182 lenh. So chan ban = 0 la do chua co muc mua-giu truoc do trong lan nay. Con so nay chi co gia tri khi co muc so sanh tu cac lan truoc."
+  },
+  {
+   "luc": "2026-09-12 10:36:54",
+   "ma": "S2_mql5_code_base",
+   "ai": "qwen",
+   "van": "Viec S2_mql5_code_base da chay xong, ket qua DAT voi ghi_moi = 73. He thong da tai thanh cong 73 file .mq5 moi tu MQL5 Code Base (so_bai=40). Tat ca cac file deu duoc phan loai: tien_ich, chien_luoc, chi_bao. Khong co file trung lap. Day la nguon code DUY NHAT de lay EA testable cho MT5 Strategy Tester. So 73 file nay se la dau vao cho viec phan tich chieu sau."
+  },
+  {
+   "luc": "2026-09-12 10:51:29",
+   "ma": "V1_dao_HK50",
+   "ai": "qwen",
+   "van": "Ket qua nay sinh ra tu 5 phep thu ghep khau dao chieu (engulfing_sell__dao) voi 5 khau ban. So chan ban duong = 0, xac nhan day la lan dau tien do tren bo du lieu HK50Cash. He thong da dat moc \"base case\" cho muc mua_giu: -2.75%/nam @ DD 50.16% (lot 1.7). Cac so ghep hien tai chi co the tin duoc sau khi co so sanh vs lan sau. Con so lenh trong mau: 144-169 lenh/ghép, du de danh gia."
   }
  ],
  "de_xuat": [
@@ -1236,12 +1302,66 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-12 10:12:51"
+  },
+  {
+   "ma": "V2_toi_uu_EU50",
+   "ten": "Toi uu tham so tren EU50Cash",
+   "vi_sao": "Ghep 'phan_ky_giam_gia__dao' + 'tai_can_bang_etf_don_bay__dao' cho ket qua tot nhat: 17.44%/nam, DD 19.01%, Sharpe 1.31, 182 lenh. Can toi uu them de vuot nguong.",
+   "lan": "CPU",
+   "lenh": [
+    "_toi_uu.py",
+    "EU50Cash"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 10:31:20"
+  },
+  {
+   "ma": "S3_test_strategy_eas",
+   "ten": "Test MT5 EA from MQL5 Code Base (chi chon loai chien_luoc)",
+   "vi_sao": "Da co 73 file .mq5 moi tu S2, trong do co cac file loai 'chien_luoc' nhu MA Reverse, Money Fixed Margin, SimpleTrade, The Puncher. Can test tren MT5 Strategy Tester de tim he MUA-GIU thang.",
+   "lan": "CPU",
+   "lenh": [
+    "_test_ea.py",
+    "--source",
+    "mql5",
+    "--strategy-only"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 10:37:02"
+  },
+  {
+   "ma": "V1_dao_HK50_L2",
+   "ten": "Chay lai V1_dao_HK50 de co so sanh lan 2",
+   "vi_sao": "Lan dau tien da dat moc: 0 chan ban duong, mua_giu -2.75%/nam @ DD 50.16%. Can so sanh de xac nhan tinh kha thi cua ghep khau dao chieu.",
+   "lan": "TESTER",
+   "lenh": [
+    "_dem_ghep.py",
+    "HK50Cash",
+    "--chay_lai"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 10:51:33"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789183135.5010862
+   "luc": 1789185158.6002297
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,
@@ -1262,6 +1382,14 @@
   "chan_ban_V1_dao_FRA40": {
    "gia_tri": 0,
    "luc": 1789182755.113135
+  },
+  "chan_ban_V1_dao_EU50": {
+   "gia_tri": 0,
+   "luc": 1789183856.402778
+  },
+  "chan_ban_V1_dao_HK50": {
+   "gia_tri": 0,
+   "luc": 1789185078.469583
   }
  },
  "ngay_da_mo": [
