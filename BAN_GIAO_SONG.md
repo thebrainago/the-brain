@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
-- `placebo_bichan_dama.log`: ######## US30Cash
 - `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
 - `tester_holdout2.log`: duong o CA HAI doan: 15/242
 - git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 11428, 0 phut), dieu_khien_xa.py (pid 15316, 343 phut)
 - `qwen_ultra.log`: ~ 12:49:05 | san sang 0 | CPU    4% / muc tieu 95%  |  con 18.1 loi  |  dang chay 1  [MANG:1]
 - git: 3e865b8 MOC DANH GIA SAI da che mat mot tin hieu that - chu du an chi ra
+### 2026-09-12 12:56:00 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12740, 0 phut), dieu_khien_xa.py (pid 15316, 350 phut)
+- `qwen_ultra.log`: ~ 12:55:06 | san sang 0 | CPU   13% / muc tieu 95%  |  con 16.3 loi  |  dang chay 1  [MANG:1]
+- git: dc582d4 QUANTLAB: nhan/dap_quan_tri.py - cay cau con thieu giua HO 1 (entry) va HO 2 (quan tri)
