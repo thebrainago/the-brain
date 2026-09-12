@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
-- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
-- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
 ### 2026-09-06 22:25:49 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 19260, 0 phut)
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 3404, 0 phut), dieu_khien_xa.py (pid 15316, 271 phut)
 - `qwen_ultra.log`: ~ 11:37:02 | san sang 4 | CPU  100% / muc tieu 90%  |  con -2.0 loi  |  dang chay 1  [TESTER:1]
 - git: d892a73 DINH CHINH: chang 4->5 KHONG nghen - 0/1.132 co che vuot noi MDE
+### 2026-09-12 11:54:26 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2020, 0 phut), dieu_khien_xa.py (pid 15316, 288 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 413 phut); TT_boc (thuong truc, con 9 phut); TT_chi_bao (thuong truc, 
+- git: d85ef9c O 3: kho lanh 1.252 -> 1.374 (+122) va them CHOT GAC de khong tai dien

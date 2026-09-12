@@ -38,7 +38,20 @@ from nhan import ngu_phap as NP  # noqa: E402
 from nhan import so as SO  # noqa: E402
 
 RA = LAB / "reports" / "TRUY_CHANG_4_5.json"
-MA, KHUNG = "XM_US500CASH", "D1"
+
+#: DUNG CHUOI KIEM CHUAN CUA CHINH HE, khong tu chon khung.
+#:
+#: Ban dau file nay hardcode `XM_US500CASH` D1 va bao 43 co che "nem loi
+#: KhungThieuGio". SAI - do la loi cua BO DO, khong phai cua co che. Co che
+#: theo PHIEN (`gio_trong_ngay`, `orb_pha_vo`, `thanh_ly_cuoi_ngay`) can khung
+#: CO GIO; chay chung tren D1 thi tat nhien nem loi.
+#:
+#: `loc_co_che` da chot chuyen nay tu 05/09 va ghi ro ly do: "Lay D1 lam chuoi
+#: kiem thi cong se tu choi dung 11 cai do vi mot ly do khong lien quan gi den
+#: chat luong cua chung." Do lai 12/09 tren H1: **43/43 chay duoc**.
+from nhan import loc_co_che as LCC  # noqa: E402
+
+MA, KHUNG = LCC.MA_KIEM, LCC.KHUNG_KIEM
 
 
 def main(argv: list[str]) -> int:
