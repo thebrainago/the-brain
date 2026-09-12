@@ -429,9 +429,9 @@
     "khong_phai_phan_quyet_am": "DE_QT_EA_NGOAI.json = AM, nhung do la MOT EA tren US500Cash H1 - mot ket qua am le. quan_tri_da_loc.json rong la ket qua cua mot BO LOC khac, khong phai cua phep thu train/holdout o tren."
    },
    "viec_ngay": [
-    "XONG - trailing: AM (placebo p 0,596). XONG - ghep: AM (xep hang cap khong mang thong tin 0/3 ma; gop deu thua mua-giu 0/3 ma).",
-    "KET LUAN TAM CUA KHOI 7: hai don bay duoc ky vong 'di vong qua tuong MDE' deu khong di vong duoc. Gop deu chi giam PHUONG SAI, va giam phuong sai tren mot ro khong co alpha thi van khong co alpha.",
-    "CAU HOI CHO CHU DU AN: kho 1.216 co che deu la chan co Sharpe duoi MDE. Thu duy nhat tung qua het cong la z5 / quantora / Sonic R H4 - nhung he RIENG LE co bien do lon. Huong con lai la dao sau vao chinh chung, chu khong phai to hop lai kho."
+    "XONG - bon phep thu cua khoi 7 deu AM: trailing (placebo p 0,596) · xep hang cap (0/3 ma) · gop deu (thua mua-giu 0/3 ma) · z5 tren chuoi dai (AM tren ca 55,5 va 98,6 nam, 0/48 o tren MDE o ca hai).",
+    "KET LUAN KHOI 7: khong co duong vong nao qua tuong MDE trong nhung thu da thu. Ung vien manh nhat cua du an la mot hien tuong che do sau 2002.",
+    "VIEC TIEP: doi chieu quantora va Sonic R H4 bang DUNG phep thu nay (chuoi dai + ban do MDE + tach giai doan). Neu ca hai cung la hien tuong che do thi ket luan cua ca du an la: nhung gi tim duoc deu song trong MOT che do, va cau hoi dung khong con la 'tim edge' ma la 'nhan ra che do dang o dau'."
    ],
    "ket_qua_placebo_trailing": {
     "trang_thai": "AM",
@@ -498,6 +498,41 @@
      "Diem `lai/sut_giam` dung khap cac script ghep la USD CHIA CHO PHAN TRAM - van xep hang dung (ti le thuan Calmar khi VON co dinh) nhung KHONG phai Calmar. Calmar that = diem x 100 / VON. Dem so voi mot moc don vi khac la sai.",
      "Ban dau `_gop_khong_chon.py` boc mau bang ca kho (p = 1,0000 ca ba ma). Nguyen nhan: MOI chan sau khu trung deu da duong tren train (73/73, 67/67, 52/52), tuc buoc loc khong loai ai - khong the dung chinh no lam null. Do la CHUA_DO_DUOC, khong phai AM. Da bo phep thu do va ghi ro `loc_duong_train_vo_hieu`."
     ]
+   },
+   "ket_qua_z5_chuoi_dai": {
+    "trang_thai": "AM - z5 la HIEN TUONG CUA MOT THOI KY",
+    "luc": "2026-09-12",
+    "nguon": "_z5_chuoi_dai.py · reports/Z5_CHUOI_DAI.json",
+    "vi_sao_phai_do": "z5 la ung vien manh nhat du an tung co: XM_US100CASH D1 cho Sharpe 1,158 · Calmar 1,04 · alpha 10,36%/nam (t=2,85) · placebo p=0,01, DA qua FDR (dong 1836). NHUNG MDE do duoc cua chinh chuoi do la 1,135 -> Sharpe/MDE = 1,02. No nam DUNG TREN SAN PHAT HIEN, noi khong phan biet duoc 'nho ma that' voi 'khong co ma may'.",
+    "YH_NASDAQ_55_5_nam": {
+     "so_bar": 13995,
+     "tu_den": "1971-02-05 .. 2026-08-11",
+     "z5": {
+      "cagr_pct": -2.26,
+      "sharpe": -0.141,
+      "maxdd_pct": -89.7,
+      "so_lenh": 1529,
+      "phoi_nhiem_pct": 21.0
+     },
+     "mua_giu": {
+      "cagr_pct": 4.33,
+      "sharpe": 0.31,
+      "maxdd_pct": -85.0
+     },
+     "sharpe_tren_mde": -0.26,
+     "ban_do_48_o": "0/48 o co Sharpe > MDE 0,541 · tot nhat 0,15 · trung vi -0,03",
+     "giai_doan_duong": "5/11 (moi giai doan truoc 1991 deu AM manh: -10,6 · -6,95 · -6,21 · -12,02; ba giai doan duong deu la 2011+)"
+    },
+    "SP500_98_6_nam": {
+     "tu_den": "1927 .. 2026",
+     "z5_sharpe": -0.081,
+     "sharpe_tren_mde": -0.1,
+     "ban_do_48_o": "0/48 o co Sharpe > MDE 0,813 · tot nhat 0,11 · trung vi -0,04",
+     "giai_doan_duong": "10/20, va phan bo KHONG ngau nhien: AM lien tuc 1962-2001 (chin giai doan: -9,25 · -13,21 · -15,22 · -8,88 · -4,42 · -5,76 · -0,80 · -0,82), DUONG lien tuc 2002-2026 (nam giai doan: +4,97 · +10,09 · +2,96 · +3,46 · +4,24)"
+    },
+    "ket_luan": "Mua-khi-giam-sau tren chi so co phieu My la mot hien tuong CHE DO sau 2002, khong phai mot co che ben vung. Truoc do no AM suot ~40 nam. Cua so 6,3 nam cua XM_US100CASH nam TRON trong giai doan thuan loi. Dau hieu manh nhat: tren NASDAQ z5 chi phoi nhiem 21% so bar ma sut giam -89,7% - TE HON mua-giu (-85,0%) phoi nhiem 100%. No don phoi nhiem vao dung nhung giai doan xau nhat, dung nhu 'mua dip roi dip roi tiep'.",
+    "day_la_KHAM_PHA_LAI_CHU_KHONG_PHAI_PHAT_HIEN_MOI": "Du an DA biet dieu nay duoi mot ten khac: memory `ibs-la-hien-tuong-cua-mot-thoi-ky` ghi IBS chi ton tai sau 2000. z5 la CUNG MOT hien tuong phat bieu bang tu vung khac. Bai hoc quy trinh: mot ung vien moi phai duoc doi chieu voi so bai hoc TRUOC khi mung.",
+    "khong_co_nghia_la_z5_khong_kiem_duoc_tien": "Mot edge phu thuoc che do van co the chay tiep mot thoi gian. Nhung no doi cach dung khac: khong duoc coi la co che ben vung, phai co dieu kien TAT theo che do, va kich thuoc vi the phai tinh theo rui ro che do dao chieu."
    }
   }
  },
