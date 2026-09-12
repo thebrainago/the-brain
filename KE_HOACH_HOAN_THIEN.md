@@ -1,204 +1,178 @@
-# KẾ HOẠCH HOÀN THIỆN HỆ THỐNG
+# KẾ HOẠCH HOÀN THIỆN THE BRAIN
 
-> Chốt 12/09/2026. Thay `KE_HOACH_XAY.md` làm tài liệu điều hướng chính.
-> `KE_HOACH_XAY.md` là kế hoạch **xây năng lực** (6 khối, đã xong 5, khối 1 đóng
-> có điều kiện). Tài liệu này là kế hoạch **hoàn thiện dây chuyền** — khác nhau
-> ở chỗ: khối thì xong là xong, còn dây chuyền thì phải **thông từ đầu đến cuối**.
-
----
-
-## 1. Hệ thống là một dây chuyền 8 chặng
-
-Đo 12/09/2026. Con số là trạng thái thật trong `nao.db`, không phải mục tiêu.
-
-```
- CHẶNG                          HIỆN CÓ      LỌT QUA      GHI CHÚ
- ─────────────────────────────────────────────────────────────────────────
- 1  NGUỒN                       73 BẬT          —        4 nguồn thu hoạch = 0
- 2  TÀI LIỆU                    10.479          —
- 3  NỘI DUNG (đã đọc)            7.154        68%        3.325 chưa đọc
- 4  CƠ CHẾ (đã bóc)              1.418        20%        570 là mã nguồn
- 5  GIẢ THUYẾT (đã đăng ký)        383        27%        ◄── NÚT THẮT
- 6  KẾT QUẢ (đã chấm cổng)       1.280          —        FDR 1.807, bác 406
- 7  PASS                            14        3,7%
- 8  CHẠM TIỀN                        1          —        1 hệ chạy, 1 hạn mức
-```
-
-### ĐÍNH CHÍNH 12/09 — chặng 4→5 KHÔNG nghẽn
-
-Bản đầu của tài liệu này gọi chặng 4→5 là nút thắt, với hai chứng cứ, và **cả
-hai đều sai**:
-
-1. *"567 ứng viên treo trong `candidate_queue`"* — SAI. Con trỏ tiêu thụ
-   (`reports/quantlab_candidate_cursor.json`) đang ở **id 637**, mà id lớn nhất
-   trong bảng cũng là **637**. Đã rút hết. Bảng đó là **nhật ký chỉ-ghi-thêm**
-   (trigger chặn UPDATE/DELETE) nên hàng vẫn nằm đó vĩnh viễn — đó là dấu vết
-   kiểm toán, không phải tồn đọng.
-
-2. *"1.035 cơ chế chưa bao giờ được chấm"* — ĐÚNG SỐ, SAI CÁCH ĐỌC. Chạy cả
-   1.132 cơ chế "lành lặn" trên `XM_US500CASH` D1 (4.054 bar, MDE 1,097):
-
-   ```
-   Sharpe tốt nhất 0,877 · phân vị 95% 0,486 · TRUNG VỊ 0,001
-   >>> vượt MDE: 0 / 1.132  =  0,0%
-   ```
-
-   **Không một cái nào.** Chúng không bị kẹt — chúng bị **cổng MDE loại đúng
-   như thiết kế**, vì không cái nào đủ tín hiệu để phân biệt với nhiễu.
-
-**Hệ quả cho kế hoạch:** H1 (thông chặng 4→5) **bị huỷ**. Đẩy tỉ lệ 27% lên cao
-hơn nghĩa là đăng ký những giả thuyết không thể phát hiện được, đốt ngân sách
-FDR mà không đổi kết cục. Và "tỉ lệ thông" ở mục 6 là **thước đo sai** — sửa ở
-mục 6.
-
-Dây chuyền **đang thông**. Cái thiếu không phải đường ống mà là **tín hiệu đủ lớn
-để đo được** — cùng bức tường `MDE ≈ 2,98/√năm` đã đo sáng nay.
+> **Nguồn duy nhất của cấu trúc: `Desktop/hethong.txt` (chủ dự án, 11/09/2026).**
+> Bản trước của tài liệu này dựng theo `KE_HOACH_XAY.md` và sổ `van_de` của lab —
+> **sai cấu trúc**, đã chuyển vào `nhat_ky/KE_HOACH_HOAN_THIEN_SAI_CAU_TRUC_12_09.md`.
+> Lab đã mọc thêm BANKER và NGHI, hai thứ **không có trong sơ đồ**, và tôi đã
+> xếp chúng vào việc phải làm.
 
 ---
 
-## 2. Sáu trụ — trạng thái và phần còn thiếu
+## 0. Hai điều chỉnh về TINH THẦN — đọc trước khi đọc việc
 
-| trụ | nhịp tim | mã chết | phần chưa hoàn thiện |
-|---|---|---:|---|
-| SEEKER | nghi 04/09 | 1 | 4 nguồn BẬT mà thu hoạch = 0; 17 PDF ảnh chưa OCR |
-| QUANTLAB | nghi 04/09 | 0 | **không chấm được 16 EA đặt lệnh thật** (thiếu template) |
-| NGHI | nghi 01/09 | 0 | — |
-| BANKER | nghi 11/09 | 0 | 3/4 phần chưa làm (giáo trình, nhận định, mục VN) |
-| EVO | nghi 01/09 | 0 | — |
-| FINDER | song 04/09 | 0 | 3 công cụ ngoài ≥70 điểm chờ người xem |
-| **DIEU_PHOI** | **dung 01/09** | — | **control plane TẮT 11 ngày** |
+**(a) Mục tiêu là TIỀN, không phải chặt chẽ học thuật.** Chủ dự án viết:
 
-Sản lượng vẫn lành (10.479 tài liệu · 238 bài học · 41.524 chỉ số vận hành), tức
-các trụ **chạy được**, chỉ là **không ai gọi chúng**.
+> *"mục tiêu là lợi nhuận còn lại không phải những mô hình kinh tế hay quản trị
+> quỹ để mà cần đề cao quá nhiều tiêu chí học thuật hay các chỉ tiêu chặt chẽ.
+> Mục đích cuối cùng là có tiền chấp nhận cả chi phí và rủi ro cao"*
 
----
+Phiên 12/09 tôi làm ngược: lấy **MDE / FDR / placebo làm tường chặn** rồi lần
+lượt tuyên bố trailing, ghép, z5, quantora là ÂM. Những phép đo đó **không sai**,
+nhưng dùng làm **cổng chặn** thì sai vai. Vai đúng là **nhãn cảnh báo** — *"cái
+này mỏng, vào tiền thì size nhỏ"* — chứ không phải *"cấm cửa"*.
 
-## 3. Việc còn lại, xếp theo ĐÒN BẨY chứ không theo thứ tự phát hiện
+Hệ quả cụ thể: một cơ chế dưới MDE **vẫn được đi tiếp**, kèm nhãn. Chỉ chặn khi
+nó **thua mua-giữ ở cùng rủi ro** — đó mới là câu hỏi tiền.
 
-Ước lượng là **giờ máy + lượt Claude**, không phải giờ người.
+**(b) QUẢN LÍ LỆNH quan trọng hơn ENTRY.** Chủ dự án viết:
 
-### ~~H1 — THÔNG CHẶNG 4→5~~ — **ĐÃ HUỶ, xem đính chính mục 1**
+> *"việc sử dụng kỹ thuật quản lí lệnh tốt còn hơn việc có 1 entry tốt"*
+> *"Riêng mục này cần chú ý vì nó là module quan trọng trong toàn bộ hệ thống"*
 
-**H1a ĐÃ ĐO XONG 12/09** (`_truy_chang_4_5.py`). 1.389 cơ chế chưa thành giả thuyết:
+Sáng 12/09 tôi chạy placebo trên họ trailing rồi đóng lại là ÂM. Theo (a), đó là
+**một nhãn**, không phải bản án. Mở lại hướng này.
 
-```
-1.132  (81,5%)  LÀNH LẶN — qua kiểm khai báo, sinh tín hiệu, kích hoạt 1,7-42,8%
-  166  (12,0%)  trượt kiểm khai báo — hầu hết chỉ THIẾU TRƯỜNG `co_che`
-   43  ( 3,1%)  KhungThieuGio — cơ chế theo PHIÊN chạy trên khung không có giờ
-   40  ( 2,9%)  không kích hoạt lần nào
-    8  ( 0,6%)  kích hoạt 100% = mua-giữ đổi tên
-```
-
-**Kết luận: H1 là việc CHẠY, không phải việc VIẾT.** Bốn phần năm kho chỉ thiếu
-người đưa vào cổng.
-
-- **H1b** Chạy 1.132 cơ chế lành lặn qua cổng. **NHƯNG KHÔNG ĐƯỢC ĐỔ THẲNG**:
-  đăng ký 1.132 giả thuyết sẽ đốt sạch ngân sách FDR tích luỹ. Phải theo đúng
-  phễu đã có — **chặn bằng MDE trước, chỉ đăng ký cái đủ lực** (đo 24/08: lọc
-  MDE cho 3 đăng ký thay vì 99). *Claude dựng phễu 1 lượt · qwen chạy mẻ*
-- **H1c** 166 cơ chế thiếu trường `co_che`: đây là lỗ của khâu BÓC, không phải
-  của cơ chế. Sửa bộ bóc để không sinh khai báo thiếu trường bắt buộc, rồi điền
-  bù cho 166 cái cũ. *Claude · 1–2 lượt*
-- **H1d** 43 cái `KhungThieuGio`: chạy trên khung CÓ GIỜ (H1/H4) hoặc bar phiên
-  (`du_lieu.nap_phien`), không phải D1. *Claude · 1 lượt*
-- **H1e** `can_mau_moi_tu_ma_nguon`: 16 file .mq5 **đặt lệnh thật** mà `mau.py`
-  chưa có template. *Claude · 2–3 lượt*
-- **H1f** 567 ứng viên treo trong `candidate_queue` — chạy sau khi phễu H1b xong.
-  *qwen*
-
-### H2 — BẬT LẠI CONTROL PLANE hoặc CHÍNH THỨC BỎ
-Hiện `q` (qwen) đang là người lái thật; `dieu_phoi` tắt 11 ngày. **Hai hệ điều
-phối cùng tồn tại là nợ kỹ thuật**, không phải dự phòng.
-- **H2a** Quyết: giữ `dieu_phoi` hay để `q` thay hẳn. *Cần chủ dự án*
-- **H2b** Nếu giữ: bật lại + kiểm hai bên không giành tester (khoá đã kín 12/09).
-  Nếu bỏ: gỡ `dieu_phoi` khỏi tài liệu, chuyển 6 trụ thành làn của `q`.
-  *Claude · 2 lượt*
-
-### H3 — HIỆU CHUẨN CỔNG PASS (NẶNG, đang mở)
-`hieu_chuan_v6`: cổng chưa từng được hiệu chuẩn bằng **V6 thật** (thiếu lớp
-bias>0, danh mục 3 chỉ số, bar D1 theo phiên). Một cổng chưa hiệu chuẩn thì 14
-PASS kia **không biết là thật hay lọt**. *Claude · 3–4 lượt*
-
-### H4 — MỞ LỚP NGUỒN ĐANG VÔ HÌNH
-- **H4a** `ocr_anh_chan_nguon`: 425 trang × 14,2s EasyOCR ≈ **100 phút máy**,
-  chạy nền một lần. *qwen · máy 100 phút*
-- **H4b** Sửa 4 nguồn thu hoạch = 0 (semantic, fxblue, etoro, quantconnect) và
-  1 nguồn chết (rss_reddit_quant). *qwen · 1–2 lượt*
-
-### H5 — BA CON SỐ **CHỈ CHỦ DỰ ÁN TRẢ LỜI ĐƯỢC**
-Mọi ngưỡng của hệ đang dùng mặc định học thuật 0,05 — là **mặc định, không phải
-chân lý**. Cần khai vào `lab/config/nguong.json`:
-1. một chiến lược thật sự tốt, sau chi phí, đáng bao nhiêu **một năm**?
-2. một chiến lược vô dụng lọt qua gây thiệt hại bao nhiêu **một năm** (gồm VPS,
-   spread, thời gian)?
-3. xác suất tiên nghiệm: trong 100 ý tưởng đưa vào, bạn nghĩ bao nhiêu cái thật?
-
-**Không ai làm thay được**, và nó chỉnh lại toàn bộ cổng phía sau.
-
-### H6 — DỌN NỢ NHỎ
-`ngu_phap_thieu_toan_hang` · `cong_cu_dang_xem` (3 công cụ ngoài) ·
-`cho_kiem_tick_mt5` · `nguon_can_trinh_duyet` · 1 mã chết.
-*qwen phần lớn · Claude 1 lượt*
+**(c) Nền tảng là FX.** Cả phiên 12/09 tôi ở chỉ số Mỹ.
 
 ---
 
-## 4. Vì sao thứ tự này
+## 1. Sơ đồ đúng — BA module
 
-**H1 đã huỷ** sau khi đo: chặng đó không nghẽn.
+### THE SEEKER
 
-**H3 lên đầu.** Hiệu chuẩn cổng là việc còn lại có giá trị cao nhất: 14 PASS hiện
-có **chưa biết là thật hay lọt**, vì cổng chưa từng được hiệu chuẩn bằng V6 thật.
-Một hệ đã hoàn thiện mà cổng chưa hiệu chuẩn thì mọi con số nó in ra đều treo.
+| mục trong sơ đồ | trạng thái |
+|---|---|
+| A. phễu fetch đa nguồn | **CÓ** `tru/seeker.py` · 73 nguồn BẬT · 10.479 tài liệu |
+| trình duyệt riêng + Gmail/social | **CÓ** `nhan/cau_browser.py` · 25 nguồn trình duyệt |
+| né chặn bot | **CÓ** (WARP · CDP · mô phỏng người dùng) |
+| quét thông minh: soi lại trang 1 rồi đi sâu | **CÓ** con trỏ biên giới · 75 trang / 4 vòng |
+| xếp hạng ưu tiên nguồn có file dùng được | **CÓ** `uu_tien` trong bảng `nguon` |
+| tự follow kênh / nhóm / cá nhân | **CÓ** telegram · 9 kênh theo dõi |
+| tự sinh từ khoá mới | **CÓ** bảng `tu_khoa` |
+| tìm kiếm ĐA NGÔN NGỮ | **CÓ** habr_nga · qiita_nhat · velog_han · cnblogs_trung |
+| nguồn có LỊCH SỬ GIAO DỊCH | **CÓ** mql5_signals · myfxbook · darwinex · collective2 · zulutrade |
+| B. bộ lọc — mq5/c++ dùng luôn | **CÓ** `nhan/doc_ma.py` · 570 mã nguồn trong kho |
+| văn bản → cơ chế | **CÓ** `nhan/doc_hieu.py` |
+| VIDEO → cơ chế | **CÓ** `nhan/doc_video.py` |
+| ẢNH → cơ chế | **CÓ** `nhan/doc_anh.py` · OCR kiểm 12/09, trùng khớp từ 78,8% |
+| xếp hàng theo chất lượng đầu vào | **CÓ** `candidate_queue` + `uu_tien` |
+| suy ngược từ lịch sử giao dịch | **CÓ** `nhan/tin_hieu_mql5.py` |
 
-**H4 sau H3** — mở thêm lớp nguồn chỉ đáng làm khi cổng đã đáng tin.
+**SEEKER đủ 14/14.** Việc còn lại là VẬN HÀNH (4 nguồn thu hoạch = 0), không phải xây.
 
-**H5 chạy song song** — nó chờ bạn, không chặn tôi.
+### THE QUANTLAB
 
-**H2 cần bạn quyết** — hai hệ điều phối cùng tồn tại là nợ, không phải dự phòng.
+#### Tổng quan tài sản — CHỖ THIẾU THẬT SỰ
+
+`nhan/ho_so_symbol.py` đã đo **159 mã**: hurst · VR(2)/VR(10) · ac1 · nửa đời ·
+efficiency ratio · nhãn tính cách · biến động năm · ATR% · biên độ bar · spread ·
+**phí qua đêm hai chiều** · độ tin chi phí.
+
+| chủ dự án yêu cầu | trạng thái |
+|---|---|
+| biên độ · chi phí · phí qua đêm | **CÓ** |
+| tính hồi quy / trend | **CÓ** (hurst → `nhan_tinh_cach`) |
+| trượt giá | **một phần** — `chi_phi.truot_gia_frac`, chưa vào hồ sơ |
+| **tính mùa vụ** (không / có / có thì cụ thể thế nào) | **THIẾU** |
+| **tương quan** (âm / dương với mã khác) | **THIẾU** |
+| **sóng zigzag**: biên độ đẩy · tần suất đẩy · tần suất hồi · biên độ hồi | **THIẾU** |
+| **mốc magnetic** | **THIẾU** |
+| **entry-time trong năm** (thời điểm xác suất cao) | **THIẾU** |
+| các dạng nến | có template, chưa thành ĐẶC TÍNH tài sản |
+| hình học / gann | có `gann_activator`, `gann_sq9` |
+
+→ **Việc xây thật đầu tiên.**
+
+#### Cơ chế QUẢN LÍ — module quan trọng nhất theo sơ đồ
+
+| chủ dự án liệt kê | trạng thái |
+|---|---|
+| ATR | có (toán hạng) |
+| trailing stop | **có, đã đo** — 5/42 hơn cả hai nửa · placebo p 0,596 |
+| hedging | có trong DSL lưới |
+| **buy/sell stop hai đầu** | **THIẾU** |
+| **market + stop hedge đối diện** | **THIẾU** |
+| DCA · DCA tính vốn | có (lưới AUDCAD / Bigmouse) |
+| đánh nhanh chốt nhanh | có |
+| chạy ĐỘC LẬP hoặc ĐẮP lên hệ khác | **CÓ** `_thu_quan_tri.py` |
+
+Kho quản trị: **42 luật đã thử**, 18 trong `quan_tri_vi_the.json`.
+Kho cơ chế 1.420 thì **0 cái có trường quản trị** — hai họ vẫn tách rời.
+
+#### Chiến lược
+
+| yêu cầu | trạng thái |
+|---|---|
+| test thô python → test phần mềm giao dịch | **CÓ** (`chay_tester_kho` + khoá tester) |
+| backtest file có sẵn trước | **CÓ** |
+| kiểm chỉ báo mũi tên / có entry | **CÓ** |
+| dựng file chiến lược từ cơ chế | **CÓ** (bộ dịch DSL → MQL5) |
+| truy ngược lịch sử giao dịch | **CÓ** |
+| **đa cặp × đa khung × đa quản lí × đa thông số** | **một phần** |
+| **kết hợp đa chỉ báo đa hệ thống** | **một phần** (`_ghep_he`) |
+| bộ tổng kết: bài học + hướng nên tránh | **CÓ** 238 bài học |
+| AI giám sát tư duy | **CÓ** EVO |
+
+#### Nội sinh · Luồng ưu tiên
+
+`nhan/noi_sinh.py` **CÓ**. Luồng ưu tiên khi chủ dự án gửi bài — **THIẾU cửa vào rõ ràng**.
+
+### THE EVO
+
+| mục | trạng thái |
+|---|---|
+| giám sát hiệu suất từng module | **CÓ** `tru/evolution.py` |
+| cắt nghĩa vấn đề + đề xuất | **CÓ** — 82 vấn đề · 39 đề xuất |
+| THE FINDER tìm công cụ / skill | **CÓ** `tru/finder.py` — 3 công cụ ≥70 điểm đang chờ |
+
+### Ba nguyên tắc vận hành
+
+| | trạng thái |
+|---|---|
+| 1. bypass — duyệt sẵn mọi đề xuất | đang theo |
+| 2. terminal thúc agent chạy tiếp (THE THORN) | **CÓ** `dieu_khien_xa.py` + `q` |
+| 3. chạy SONG SONG các trụ không liên quan | **CÓ** `q` 5 làn · nhưng `dieu_phoi` tắt từ 01/09 |
+
+### Ngoài sơ đồ
+
+`tru/banker.py` (vĩ mô FRED) và `tru/nghi.py` — **không có trong sơ đồ**. Không
+xoá, nhưng **không tính là việc phải hoàn thiện**.
 
 ---
 
-## 5. Ranh giới Claude / qwen / chủ dự án
+## 2. Việc còn lại — theo sơ đồ, không theo sổ `van_de`
 
-Giữ nguyên ranh giới đã đo 11/09 (LLM điền `co_che` cho 48 khai báo, thẩm định
-bác 41, ròng cứu 3 — 6% không dùng được cho một cổng nhưng rất tốt cho khối
-lượng đọc):
+```
+[ ] Q1  ho_so_song.py — sóng zigzag (biên độ/tần suất đẩy·hồi) + mốc magnetic
+[ ] Q2  mùa vụ + entry-time trong năm, cho từng mã
+[ ] Q3  tương quan liên mã (âm/dương) vào hồ sơ
+[ ] Q4  buy/sell stop hai đầu + market kèm stop hedge đối diện
+[ ] Q5  hạ MDE/FDR/placebo từ CỔNG CHẶN xuống NHÃN CẢNH BÁO
+[ ] Q6  đa cặp × đa khung × đa quản lí × đa thông số — chạy đủ tổ hợp
+[ ] Q7  cửa vào LUỒNG ƯU TIÊN khi chủ dự án gửi bài / giả thuyết
+[ ] S1  4 nguồn thu hoạch = 0 (semantic · fxblue · etoro · quantconnect)
+[ ] E1  quyết `dieu_phoi` bật lại hay để `q` thay hẳn      ← cần chủ dự án
+[ ] E2  3 công cụ ngoài ≥70 điểm đang chờ xem              ← cần chủ dự án
+```
 
-| việc | Claude | qwen | chủ dự án |
-|---|:--:|:--:|:--:|
-| `nhan/ngu_phap.py`, `nhan/mau.py`, schema, cổng | ✓ | ✗ | |
-| hiệu chuẩn cổng, thiết kế tầng chạm tiền | ✓ | ✗ | |
-| đọc/bóc/OCR khối lượng, chạy mẻ | ✗ | ✓ | |
-| chấm đạt/âm | ✗ | ✗ | `qwen/cong.py` chấm bằng mã |
-| ba con số ở H5 | ✗ | ✗ | ✓ |
-| giữ hay bỏ `dieu_phoi` | ✗ | ✗ | ✓ |
+**Q5 trước Q6**, vì chạy tổ hợp qua một cái cổng đặt sai vai thì lại loại sạch
+như phiên 12/09.
+
+**Q1–Q4 là xây thật.** Phần còn lại phần lớn là nối dây và vận hành.
 
 ---
 
-## 6. Cách đo tiến độ
+## 3. Đo tiến độ
 
-**Thước đầu tiên tôi đề xuất là SAI** và ghi lại đây để không ai dùng lại:
-
-> ~~tỉ lệ thông = giả thuyết / cơ chế trong kho = 27,0%~~
-
-Đẩy tỉ số này lên chỉ có nghĩa là đăng ký thêm giả thuyết **không thể phát hiện
-được** — 0/1.132 cơ chế chưa đăng ký vượt nổi MDE. Một thước đo mà cách duy nhất
-để cải thiện là làm điều sai thì là một thước đo hỏng.
-
-**Thước đúng cho việc HOÀN THIỆN HỆ:** đếm phần còn thiếu, và nó hữu hạn —
+Không đo bằng số phép thử. Đo bằng **số dòng trong sơ đồ đã CÓ**:
 
 ```
- [ ] cổng PASS hiệu chuẩn bằng V6 thật            (H3, NẶNG)
- [ ] 17 PDF ảnh đã OCR                            (H4a, ~100 phút máy)
- [ ] 166 cơ chế thiếu trường `co_che` đã điền     (lỗ khâu BÓC)
- [ ] 43 cơ chế theo PHIÊN chạy đúng khung có giờ
- [ ] 16 EA đặt lệnh thật có template trong mau.py
- [ ] 4 nguồn thu hoạch = 0 đã sửa
- [ ] BANKER 3/4 phần còn lại
- [ ] quyết giữ hay bỏ `dieu_phoi`                 (chủ dự án)
- [ ] ba con số ở H5 đã khai                       (chủ dự án)
+SEEKER      14/14   đủ
+QUANTLAB    17/24   thiếu 7
+EVO          3/3    đủ
+vận hành     2/3    dieu_phoi tắt
+──────────────────────────────
+            36/44 = 82%
 ```
 
-Chín ô. Hệ hoàn thiện khi cả chín tick. **Không ô nào trong đó là "tìm thêm
-edge"** — đó là việc khác, và nó bị chặn bởi MDE chứ không bởi độ hoàn thiện
-của hệ.
+Dán con số này vào mọi báo cáo.

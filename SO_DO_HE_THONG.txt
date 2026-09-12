@@ -1,0 +1,59 @@
+Tổng quan cho các agent làm việc với dự án the brain:
+1. Thực hiện bypass, tôi tin tưởng tuyệt đối vào sự vận hành của các AI nên cứ phê duyệt mọi đề xuất và tiến hành luôn. Trong trường hợp có nhiều đề xuất mà tôi không trả lời ngay thì cứ làm tuần tự hoặc chọn đễuaats tốt nhất
+2, Nhiều agent bị giới hạn output hoặc bị dừng giữa phiên làm việc, cái này chỉ cần chat tiếp vào khung chat là sẽ hoạt động. Nhưng trong trường hợp tôi không ngồi máy để giám sát cần có giải pháp ( đã có dự án the thorn với ý tưởng này). Cần tạo 1 hoặc 1 terminal có nhiệm vụ liên tục thúc cá agent làm việc tiếp tục ngáy au khi ngừng 
+3, Tối ưu thời gian chạy bằng cách làm các tác vụ, các trụ mà không liên quan tới nhau 1 cách song song để tối ưu thời gian 
+
+Về dự án the brain:
+
+Mục tiêu: hệ thống dược tạo ra như 1 phòng nghiên cứu để thu thập mọi chiến lược giao dịch, kiến thức giao dịch và các sản phẩm như hệ thống giao dịch, ea, chỉ báo. Sau đó được tậphowpj kiểm định và tinh chỉnh qua phòng lab của chúng ta nhăm fmucj đích là tìm ra những hệ thống giao dịch có lợi nhuận để sử dụng
+Hệ thống tập trung xây dựng trên nền tảng fx, mục tiêu là lợi nhuận còn lại không phải những mô hình kinh tế hay quản trị quỹ để mà cần đề cao quá nhiều tiêu chí học thuật hay cá chỉ tiêu chặt chẽ. Mục đich cuối cùng là có tiền chấp nhận ả chi phí và rủi ro cao
+
+
+Sơ đồ hệ thống:
+
+1. The seeker: 
+A,Bộ phễu: Hệ thống tìm kiếm kiến thức từ tất cả các nguồn có thể truy vấn
+- Phễu fetch muiltisource => nguyên lý là với mỗi bất kỳ lĩnh vực nào hệ thống sẽ đi tìm những trang web, diễn đàn , tư khoá, các trang web kiến thức tiêu biểu để tìm kiếm kiến thức dưới tất cả mọi dạng có thẻ như file, tài liẹueu bài viết,...
+- Seeker được cho hẳn toàn quyền 1 trình duyệt web riêng đã có cả gmail và các tài khoản mạng xã hội, được toàn quyền thao tác và thực hiện các tác vụ
+- Với các trang web bị chặn bot => seeker thực hiện thao tác mô phỏng người dùng hoặc đi qua những cổng để né được bot/ với các dạng file tài liệu pdf bài viết được phép search từ khoá=> tìm link có file tải tài liệu và tiến hành tải về
+- Cơ chế quét thông minh, ví dụ 1 list công cụ chỉ báo đang ở page 1 thì đến vòng quét sau sẽ biết đi nhanh lại các trang 1.2.3.. đã quét để xem có file nào mới update không thì đọc và tải về còn tiếp tục xem cá trang tiếp theo
+- Xếp hạng ưu tiên những nguồn file rõ ràng có tính ứng dụng cao và sử dụng được luôn. Tính toán để phân chia dung lượng quét, thời lượng cho mỗi nguồn dữ liệu
+- Tự biết follow các kênh, join các nhóm có nguồn chất lượng, follow cá nhân có nội dung chất lượng thuộc nguồn social, biết đọc lại các bài của những nguồn đã follow 1 lượt để update file mới ( tính toán lịch trình không cần làm hàng ngày)
+- Tự sinh và phát hiện ra từ khoá mới, bổ sung vào bộ tìm kiếm, tìm kiếm bằng đa ngôn ngữ để đọc được kiến thức từ nhiều khu vực và đất nước khác nhau, tìm kiếm đa ngôn ngữ lập trình như mql, c++, mql5 ctrader,...
+- Tìm kiếm các trader các hệ thống giao dịch có lịch sử giao dịch như mql5 signal, các bảng xếp hạng, các quỹ, myfxbook,...
+B, Bộ lọc:
+- Hiện tại vẫn đang dùng claude để điều phối chính nếu xây được cơ chế lọc và bóc tách để giảm tải token lâud ài thì càng tốt. Phương án 2 là gọi llm từ agent giá rẻ như qwen/deepseek ( nhưng ai giá rẻ sẽ cần phải giám sát kĩ và thúc đẩy làm việc liên tục nên cầnluwu ý phần này )
+- Nếu có file mql5/ file c++ ea thì sử dụng luôn
+- file dạng văn bản thì gọi Ai bóc tách cơ chế/ chuyển đổi video thành cơ chế, hình ảnh thành cơ chế
+- Phân chia chất lượng file đầu vào để xếp hàng loại nào ưu tiên trứớc
+- Từ chiến lược có lịch sử sẽ suy ngược để tìm ra phương pháp trade
+
+2, The Quantlab
+Quant lab tổng quan:
+- Tiến hành nghiên cứu đặc tính của các loại tài sản/cặp tiền để nghiên cứu ra tính chất: biên độ,chi phí, trượt giá, phí qua đêm, tính mùa vụ (không/ có/có thì cụ thể như nào), tính tương quan ( tương quan âm. tương quan dượng), tính hồi quy, trend,... cái này cậu phát triển thêm
+- Nghiên cứu các đặc điểm chung bằng zigzac để đo các sóng, biên độ thường đẩy, tần suất đẩy , tần suất hồi, biên độ hồi,... các mốc magnetic
+- Nghiên cứu các dạng entry time của các loại tài sản như thời điểm mua bán có xác suất cao trong năm
+- Các dạng nến khác nhau 
+- Các dạng phương pháp đặc biệt như hình học, gann,...
+Quantlab cơ chế quản lí:
+- Riêng mục này cần chú ý vì nó là module quan trọng trong toàn bộ hệ thống. Hiện nay xu hướng thin trường ngày càng biến động mạnh nên việc sử dụng kỹ thuật quản lí lệnh tốt còn hơn việc có 1 entry tốt: module này nghiên cứu atr . trailingstop, hedging, buy sell stop 2 đầu, 1 đầu đánh lệnh thị trường và lệnh stop hedge đối diện ở đầu đổi diện,..dca, dca tính toán vốn, hoặc đánh nhanh chốt nhanh ( có rất rất nhiều cách)
+=> cần phải tìm kiếm và bóc tách các cơ chế, cá loại chiến lược theo lối này để dựng thành các hệ thống tích hợp và bổ sung. Hệ quản lí lệnhnayf có thể quản trị độc lập hoặc làm 1 bộ quy tắc để tích hợp vào những hệ thống khác ( tét thử từng phương pháp quản lí lệnh khác nhau ) để xem hiệu quả cũng nhu ư kết quả thay đổi ra sao
+Quantlab chiến lược:
+- Test thô bằng python để lọc sau đó test bằng phần mềm giao dịch
+- Từ những dữ liệu mà seeker đem tới bắt đầu tiến hành backtest luôn những file có sẵn=> sau đó đến những chiến lược có hiệu suát tốt
+- Kiểm định cac chỉ báo dạng mũi tên hoặc có entry
+- Với những chiến lược mới chỉ có cơ chế cần dựng thành file chiến lược rồi backtest
+- Xây dựng khả năng truy ngược lịch sử giao dịch để tìm ra chiến lược rồi dựng mô phỏng chiến lược
+*Lưu ý tất cả mọi chiến lược cần test đa cặp/ đa khung ( hiện giờ tôi vẫn chưa bỏ lowtimefraem chúng ta cần tét thêm nhiều để chốt được là có bỏ hăn rkhung nhỏ không/ đa phương pháp quản lí lệnh/ đa thông số input/ nếu có thể hãy thử kết hợp đa chỉ báo đa hệ thống mà chúng ta tìm được. Phần này càng két thừa được nhiều từ các module bên trên thì càng tiết kiệm thời gian và nâng cao hiệu quả
+ Tất cả phải test trên phần mềm giao dịch để đo được hiệu quả thực tế
+ Sau đó cần có bộ tổng kết để rút ra chiến lược, nếu có cơ chế nào tìm ra hướng đi mới lập tức ghi lại và phân tích để xem có nên tiếp tục đi sâu hơn không, tìm ra hướng đi nên tránh hướng không nên tiếp tục
+=> Sau phần kết quả này cần viết luật cho AI giám sát tư duy để đúc rút và học hỏi được kiến thức và cần làm gì để cải thiện được hệ thống
+Quantlab nội sinh:
+- Đào sâu vào 1 cặp tài sản hoặc tìa sản bằng phương pháp suy ngược, ví dụ như trước 1 cú tăng hay giảmcuar tài sản A sẽ có dấu hiệu gì, trước 1 đoạn giá chạy thằng 1 trend sẽ có dấu hiệu gì,...Nghĩa là quantlab  phải tìm được logic và tiến hành nghiên cứu để tìm edge
+Quantlab luồng ưu tiên:
+-Khi tôi tìm được 1 bài viết, 1 phương pháp, giả thuyết nào đó hãy phân tích và ưu tiên luồng tôi gửi ngay nhé
+3. The evo:
+- Đây là module tổng quan, giám sát hiệu suất của từng module bên trên để tìm ra vấn đề => Báo cáo và cắt nghĩa vấn đề+ đè xuất giải pháp để gửi cho AI giám sát tìm cách sửa
+- The finder: tìm kiếm các giải pháp, skill  có rất nhiều các dự án và project hỗ trợ cho dự án này tốt hơn và liên tục có những nguồn tốt nên cần phải update và học hỏi liên tục 
+Với những gợi ý này cậu hãy dùng tư duy của mình kết hợp vào và hoàn thiện hệ thống
+

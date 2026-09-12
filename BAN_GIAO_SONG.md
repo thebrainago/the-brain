@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-06 22:25:49 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19260, 0 phut)
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo.log`: DAT (ban that noi len khoi dam dich)
 - `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
 - `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
 - `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 2020, 0 phut), dieu_khien_xa.py (pid 15316, 288 phut)
 - `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 413 phut); TT_boc (thuong truc, con 9 phut); TT_chi_bao (thuong truc, 
 - git: d85ef9c O 3: kho lanh 1.252 -> 1.374 (+122) va them CHOT GAC de khong tai dien
+### 2026-09-12 12:05:59 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11484, 0 phut), dieu_khien_xa.py (pid 15316, 300 phut)
+- `qwen_ultra.log`: ~ 12:05:03 | san sang 0 | CPU   28% / muc tieu 90%  |  con 12.4 loi  |  dang chay 1  [LLM:1]
+- git: 7a9b17e O 5 XONG: khong co template nao de viet - va GMMA thi ngu phap DA noi duoc
