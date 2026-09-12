@@ -55001,5 +55001,151 @@
   "nguon": "mql5_code",
   "_ty_le_kich_hoat": 0.1606,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "gmma_dai_ngan_tren_dai_dai",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "GMMA (Guppy): dai EMA ngan han (3-15) so voi dai EMA dai han (30-60). Khi hai dai tach nhau, nguoi giao dich ngan han va dai han dang dinh gia khac nhau - ben bi ep phai dieu chinh vi the la ben tra tien.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tb_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "ema",
+       "n": 3
+      },
+      {
+       "chi_bao": "ema",
+       "n": 5
+      },
+      {
+       "chi_bao": "ema",
+       "n": 8
+      },
+      {
+       "chi_bao": "ema",
+       "n": 10
+      },
+      {
+       "chi_bao": "ema",
+       "n": 12
+      },
+      {
+       "chi_bao": "ema",
+       "n": 15
+      }
+     ]
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "ema",
+       "n": 30
+      },
+      {
+       "chi_bao": "ema",
+       "n": 35
+      },
+      {
+       "chi_bao": "ema",
+       "n": 40
+      },
+      {
+       "chi_bao": "ema",
+       "n": 45
+      },
+      {
+       "chi_bao": "ema",
+       "n": 50
+      },
+      {
+       "chi_bao": "ema",
+       "n": 60
+      }
+     ]
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.6167,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "gmma_dai_ngan_duoi_dai_dai",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "GMMA (Guppy): dai EMA ngan han (3-15) so voi dai EMA dai han (30-60). Khi hai dai tach nhau, nguoi giao dich ngan han va dai han dang dinh gia khac nhau - ben bi ep phai dieu chinh vi the la ben tra tien.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tb_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "ema",
+       "n": 30
+      },
+      {
+       "chi_bao": "ema",
+       "n": 35
+      },
+      {
+       "chi_bao": "ema",
+       "n": 40
+      },
+      {
+       "chi_bao": "ema",
+       "n": 45
+      },
+      {
+       "chi_bao": "ema",
+       "n": 50
+      },
+      {
+       "chi_bao": "ema",
+       "n": 60
+      }
+     ]
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb_cua_cac",
+     "toan_hang": [
+      {
+       "chi_bao": "ema",
+       "n": 3
+      },
+      {
+       "chi_bao": "ema",
+       "n": 5
+      },
+      {
+       "chi_bao": "ema",
+       "n": 8
+      },
+      {
+       "chi_bao": "ema",
+       "n": 10
+      },
+      {
+       "chi_bao": "ema",
+       "n": 12
+      },
+      {
+       "chi_bao": "ema",
+       "n": 15
+      }
+     ]
+    }
+   }
+  ],
+  "ra": [],
+  "_ty_le_kich_hoat": 0.3831,
+  "_do_tren": "chuoi kiem"
  }
 ]
