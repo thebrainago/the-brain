@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `tester_holdout.log`: duong o CA HAI doan: 13/225
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
-- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
-- git: 4e33134 ban giao: con MOT he sau placebo; viec 1 la do %/nam that o don bay that
-### 2026-09-06 22:06:16 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 12708, 0 phut)
 - `don_bay.log`: when serializing dict item 'bang'
@@ -404,3 +399,8 @@
 - `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
 - `qwen_ultra.log`: ~ 11:04:59 | san sang 6 | CPU   56% / muc tieu 90%  |  con  6.7 loi  |  dang chay 1  [TESTER:1]
 - git: 3202e14 SUA LAI ket luan "ho loc xu huong song": khop co mau thi no KHONG vuot MDE
+### 2026-09-12 11:32:06 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6044, 0 phut), dieu_khien_xa.py (pid 15316, 266 phut)
+- `qwen_ultra.log`: ~ 11:31:01 | san sang 3 | CPU   81% / muc tieu 90%  |  con  1.9 loi  |  dang chay 1  [TESTER:1]
+- git: b9ef6d9 tru: bit CUA GIET cua khoa tester - khoi 6 chi chan duong PHONG, khong chan duong GIET

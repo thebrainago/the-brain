@@ -84,5 +84,48 @@
    "pct_nam": 3.37,
    "sharpe": 0.002513
   }
+ },
+ {
+  "bo": [
+   "macd_histogram_duong_2",
+   "ban_pha_vo_inh_phien_ny__dao",
+   "fast_sma_cuts_above_slow_sma"
+  ],
+  "ba_chan": {
+   "lot": [
+    0.0,
+    16.0,
+    16.0,
+    16.0
+   ],
+   "dd": 12.12,
+   "lenh": 245,
+   "pct_nam": 34.79,
+   "sharpe": 1.607103
+  },
+  "mot_chan_tot_nhat": {
+   "lot": [
+    0.0,
+    0.0,
+    16.0,
+    0.0
+   ],
+   "dd": 32.94,
+   "lenh": 119,
+   "pct_nam": 25.48,
+   "sharpe": 1.74619
+  },
+  "mua_giu": {
+   "lot": [
+    1.2,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dd": 91.97,
+   "lenh": 6,
+   "pct_nam": 3.37,
+   "sharpe": 0.002513
+  }
  }
 ]
