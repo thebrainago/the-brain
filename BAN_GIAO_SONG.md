@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
-### 2026-09-06 22:55:00 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 21080, 0 phut)
-- `don_bay.log`: when serializing dict item 'bang'
 - `placebo.log`: DAT (ban that noi len khoi dam dich)
 - `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
 - `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 5592, 0 phut), dieu_khien_xa.py (pid 15316, 303 phut)
 - `qwen_ultra.log`: ## De xuat tiep th
 - git: be14d01 VIET LAI ke hoach theo SO DO THAT cua chu du an (Desktop/hethong.txt)
+### 2026-09-12 12:15:21 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16312, 0 phut), dieu_khien_xa.py (pid 15316, 309 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 393 phut); TT_boc (thuong truc, con 55 phut); TT_chi_bao (thuong truc,
+- git: 53a7bc6 Q1 XONG: nhan/ho_so_song.py - dac tinh SONG + moc MAGNETIC cho 159 ma

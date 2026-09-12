@@ -1,0 +1,125 @@
+{
+ "ma": "GBPUSD",
+ "khung": {
+  "D1": {
+   "khung": "D1",
+   "so_doan": 822,
+   "so_cap": 421,
+   "bar": 8634,
+   "luat": {
+    "L1_hoi_theo_co_day": {
+     "hoi_khi_day_NHO_pct": 80.25,
+     "hoi_khi_day_LON_pct": 50.96,
+     "chenh": -29.3,
+     "p": 0.0025
+    },
+    "L2_nho_ty_le_hoi": {
+     "tu_tuong_quan": -0.056,
+     "p": 0.1247
+    },
+    "L3_ben_huong": {
+     "ty_le_cung_chieu_pct": 42.86,
+     "null_pct": 50.0,
+     "p": 0.005
+    },
+    "L4_cum_bien_do": {
+     "tu_tuong_quan": 0.3863,
+     "p": 0.0025
+    },
+    "L5_hoi_dung_o_moc_thang": {
+     "kc_trung_vi_pct": 1.0643,
+     "null_pct": 13.4208,
+     "gan_hon_lan": 12.61,
+     "p": 0.0083
+    }
+   }
+  },
+  "H4": {
+   "khung": "H4",
+   "so_doan": 4552,
+   "so_cap": 2319,
+   "bar": 43961,
+   "luat": {
+    "L1_hoi_theo_co_day": {
+     "hoi_khi_day_NHO_pct": 81.48,
+     "hoi_khi_day_LON_pct": 48.27,
+     "chenh": -33.21,
+     "p": 0.0025
+    },
+    "L2_nho_ty_le_hoi": {
+     "tu_tuong_quan": -0.0625,
+     "p": 0.005
+    },
+    "L3_ben_huong": {
+     "ty_le_cung_chieu_pct": 49.01,
+     "null_pct": 50.02,
+     "p": 0.1546
+    },
+    "L4_cum_bien_do": {
+     "tu_tuong_quan": 0.4156,
+     "p": 0.0025
+    },
+    "L5_hoi_dung_o_moc_thang": {
+     "kc_trung_vi_pct": 0.8595,
+     "null_pct": 14.2251,
+     "gan_hon_lan": 16.55,
+     "p": 0.0083
+    },
+    "L6_gio_bat_dau_song": {
+     "gio_dong_nhat": 4,
+     "dam_hon_deu_lan": 6.437,
+     "null_lan": 1.201,
+     "p": 0.0025
+    }
+   }
+  },
+  "H1": {
+   "khung": "H1",
+   "so_doan": 17786,
+   "so_cap": 9118,
+   "bar": 171030,
+   "luat": {
+    "L1_hoi_theo_co_day": {
+     "hoi_khi_day_NHO_pct": 80.11,
+     "hoi_khi_day_LON_pct": 48.31,
+     "chenh": -31.8,
+     "p": 0.0025
+    },
+    "L2_nho_ty_le_hoi": {
+     "tu_tuong_quan": -0.0192,
+     "p": 0.0374
+    },
+    "L3_ben_huong": {
+     "ty_le_cung_chieu_pct": 45.85,
+     "null_pct": 50.01,
+     "p": 0.0025
+    },
+    "L4_cum_bien_do": {
+     "tu_tuong_quan": 0.4287,
+     "p": 0.0025
+    },
+    "L5_hoi_dung_o_moc_thang": {
+     "kc_trung_vi_pct": 0.9692,
+     "null_pct": 14.2366,
+     "gan_hon_lan": 14.689,
+     "p": 0.0083
+    },
+    "L6_gio_bat_dau_song": {
+     "gio_dong_nhat": 6,
+     "dam_hon_deu_lan": 2.072,
+     "null_lan": 1.1,
+     "p": 0.0025
+    }
+   }
+  }
+ },
+ "dat_tren_may_khung": {
+  "L1_hoi_theo_co_day": "3/3",
+  "L2_nho_ty_le_hoi": "2/3",
+  "L3_ben_huong": "2/3",
+  "L4_cum_bien_do": "3/3",
+  "L5_hoi_dung_o_moc_thang": "3/3",
+  "L6_gio_bat_dau_song": "2/2"
+ },
+ "giay": 2.6
+}
