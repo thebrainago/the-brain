@@ -5,7 +5,7 @@
   "trang_thai: CHUA_BAT_DAU | DANG_LAM | DAT | AM | CHUA_DO_DUOC"
  ],
  "chot_luc": "2026-09-11",
- "dang_o": "1 (cua vao tri thuc) - khoi duy nhat con lai",
+ "dang_o": "7 (chap nhan MDE - san co che Sharpe lon)",
  "moc_dau": {
   "ngu_phap_toan_hang": 43,
   "tai_lieu_da_boc": 327,
@@ -28,9 +28,9 @@
  "khoi": {
   "1": {
    "ten": "Cua vao tri thuc - 1A khau doc truoc, 1B tu vung sau",
-   "trang_thai": "DANG_LAM",
+   "trang_thai": "DONG_CO_DIEU_KIEN",
    "bat_dau": "2026-09-11",
-   "xong": null,
+   "xong": "2026-09-12",
    "cong": {
     "corpus_tang_A_noi_duoc": {
      "nay": 0.22,
@@ -122,7 +122,8 @@
     "tang A 6,7%% con xa 35%%: 140/150 cau van 'khong tach duoc cap'",
     "tang C van 12 toan hang chet - chi giam sau khi chay LAI khau boc tren kho",
     "tuong_quan / trang_thai_lat / dem_lien_tiep can duong doc rieng (chung nhan mot danh sach toan hang hoac mot dieu kien con)"
-   ]
+   ],
+   "ly_do_dong": "Chu du an duyet 12/09. Cong `ca_kiem_nhin_truoc` DAT (43/43 toan hang qua phep cat, hieu chuan hai chieu). Ba cong con lai GHI NHAN LA CHUA DAT kem ly do do duoc, KHONG phai bo qua: (a) corpus_tang_A 22,0%/35% - mau so sai, can corpus vang; (b) toan_hang_chua_ai_dung 11/<=6 - ca 11 cong lai chi thieu 31 cau luat tren 270.564 cau, ha xuong 6 chi thoa mot con so; (c) tang_B 150/<=80 - cung ho ly do. CAN CU DONG: thu hoach uoc tinh cua ca 1A+1B la 100-200 khai bao tren kho da co 1.181 co che, trong khi rang buoc dang siet la MDE chu khong phai so gia thuyet."
   },
   "2": {
    "ten": "Vong phan hoi - so bai hoc + tra cuu ket qua am",
@@ -358,6 +359,48 @@
     "thu tren EA co CHO cho quan tri (khong co SL/TP rieng chat)",
     "EA giam sat chay THAT (khong backtest duoc) - can tai khoan song"
    ]
+  },
+  "7": {
+   "ten": "Chap nhan MDE - san co che Sharpe LON, khong san them gia thuyet",
+   "trang_thai": "DANG_LAM",
+   "bat_dau": "2026-09-12",
+   "xong": null,
+   "vi_sao": "TUONG DO DUOC 12/09 tren 53 ma D1 giao dich (phan vi 10-90% cua hang so: 2,63-3,64, nen ngoai suy dung duoc):    MDE ~= 2,98 / can(so nam)\n  MDE 0,50 -> 35 nam · MDE 0,30 -> 98 nam · MDE 0,20 -> 221 nam\nTot nhat hien co 0,54 (22 nam). Chuoi 99 nam SP500 daily - dai nhat trong kho - chi dua duoc xuong ~0,30, va chi cho MOT ma.\nBA DON BAY CON LAI DEU CAN HOAC DI NGUOC:\n  chi phi: tuong quan(spread,MDE)=0,391 tren 14 ma cung do dai, doc 0,026 MDE moi 1 bps; cac ma tot da o ~1 bps nen khong con gi de thang.\n  gop lop: da do, 0,535 -> 0,511.\n  khung nho hon: TE HON - EURUSD H1 4,74 · US500CASH M5 10,33 (phi moi lenh at het).\n=> He chi nhin thay edge co Sharpe that tren ~0,3-0,5. Dieu nay giai thich dung moi thu da gap: 324 phep thu 0 thang mua-giu · 914 phep thu 1 song · FDR 0/703 · pheu bao 98% CHUA_DU_LUC.",
+   "huong": [
+    "QUAN TRI VI THE la don bay khong phai vuot MDE. No SUA mot he DA qua cong chu khong phai mot gia thuyet moi phai tu chung minh - nen no di vong qua tuong. Do da co: trailing cho lai holdout x4,8; dat hue la luat quan tri duy nhat song sot. Kho 262 co che TOAN LA tin hieu VAO, 0 co che quan tri.",
+    "GHEP song o holdout con he don thi khong (39/45 cap giu hang vs 822->40). Ghep khong vuot MDE tung chan - no cong chan.",
+    "Lan TESTER cua q dang chay day V1_dao_* / V5_bo_ba_* / V6_khung_nho_* - day chinh la san Sharpe lon, cu de no chay.",
+    "KHONG quay lai quet them tham so hay them gia thuyet: do la lam nhieu hon o phia KHONG bi siet."
+   ],
+   "cong": {
+    "co_che_quan_tri_trong_kho": {
+     "nay": 0,
+     "can": 10,
+     "dat": false,
+     "ghi_chu": "Dem co che co truong quan tri (trailing/dat hue/thoat theo thoi gian/chia lenh) trong kho, khong phai tin hieu vao."
+    },
+    "he_qua_hai_cong_co_quan_tri": {
+     "nay": 0,
+     "can": 1,
+     "dat": false,
+     "ghi_chu": "Mot he da qua ca hai cong, duoc gan quan tri, va VAN qua sau khi gan."
+    }
+   }
   }
+ },
+ "tuong_mde": {
+  "cong_thuc": "MDE ~= 2,98 / can(so nam), D1 giao dich",
+  "do_luc": "2026-09-12",
+  "n_ma": 53,
+  "phan_vi_hang_so": [
+   2.634,
+   2.809,
+   2.976,
+   3.347,
+   3.635
+  ],
+  "trung_vi_mde_hien_tai": 1.167,
+  "thap_nhat": 0.356,
+  "ghi_chu": "Da lam moi CA 156 muc bang ma hien tai (_lam_moi_mde.py): 140 y nguyen, 12 doi, 4 hong (deu la ngoai lai che do nghien_cuu - 0/383 gia thuyet den tu nhom nay nen vo hai). Ty le moi/cu trung vi 1,015. Tuc noi lo 'nua bang do ma cu sinh ra' la CO THAT nhung KHONG DANG KE."
  }
 }

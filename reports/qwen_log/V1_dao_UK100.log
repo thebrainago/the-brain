@@ -1,0 +1,64 @@
+
+########## CHANG A: mo kho = 1137 co che
+
+=== moKho train  2016.06.01 -> 2021.06.01
+  1083 pass, 74.0s
+=== moKho holdout  2021.06.01 -> 2026.07.29
+  1083 pass, 24.6s
+-> reports/DEM_A_MO_KHO_UK100Cash.json
+
+chan DUONG ca hai doan : 13
+chan AM   ca hai doan : 557
+
+########## CHANG B: dao chieu 557 chan am
+
+=== dao train  2016.06.01 -> 2021.06.01
+  558 pass, 18.4s
+=== dao holdout  2021.06.01 -> 2026.07.29
+  558 pass, 18.5s
+-> reports/DEM_B_DAO_UK100Cash.json
+
+dao chieu -> duong ca hai doan: 16/557
+
+TONG CHAN DUONG: 29 (goc 13 + dao 16)
+-> reports/DEM_CHAN_DUONG_UK100Cash.json
+
+########## CHANG C: ma tran tuong quan 29 chan
+
+=== lo 0: 29 slot
+
+ghep duoc 29 chuoi von
+-> reports/DEM_C_MATRAN_UK100Cash.json
+
+--- 10 he DON tot nhat ---
+bearish_engulfing__dao                            169.54    0.48%    350.7
+rsi_3_10                                          203.36    0.60%    341.1
+rsi_2_3                                           196.19    0.64%    306.5
+hoi_quy_trung_binh_xac_nhan_ong_luong_cat_lo_t    326.45    1.15%    283.9
+aegis_quantum_lite__dao                            63.86    0.26%    243.7
+fvg_sell_reversal                                  63.86    0.26%    243.7
+mua_rsi14_tren_70__dao                             63.86    0.26%    243.7
+rsi_overbought_reversal_from_wilder_smoothed_r     63.86    0.26%    243.7
+rsi_overbought_sell                                63.86    0.26%    243.7
+ban_quay_ve_keltner_low_vol                       158.04    0.99%    159.5
+
+--- 15 CAP tot nhat ---
+gamma_duong_keo_ve__dao        rsi_3_10                        -0.214    296.84    0.61%    487.9
+gamma_duong_keo_ve__dao        rsi_2_3                         -0.188    289.67    0.61%    474.7
+bearish_engulfing__dao         rsi_3_10                        +0.062    372.90    0.79%    472.6
+aegis_quantum_lite__dao        bearish_engulfing__dao          -0.000    233.40    0.50%    464.6
+bearish_engulfing__dao         fvg_sell_reversal               -0.000    233.40    0.50%    464.6
+bearish_engulfing__dao         mua_rsi14_tren_70__dao          -0.000    233.40    0.50%    464.6
+bearish_engulfing__dao         rsi_overbought_reversal_from_w  -0.000    233.40    0.50%    464.6
+bearish_engulfing__dao         rsi_overbought_sell             -0.000    233.40    0.50%    464.6
+bearish_engulfing__dao         hoi_quy_trung_binh_xac_nhan_on  -0.101    495.99    1.07%    464.3
+hoi_quy_trung_binh_xac_nhan_on rsi_3_10                        -0.076    529.81    1.17%    451.1
+aegis_quantum_lite__dao        rsi_2_3                         -0.001    260.05    0.59%    437.6
+fvg_sell_reversal              rsi_2_3                         -0.001    260.05    0.59%    437.6
+mua_rsi14_tren_70__dao         rsi_2_3                         -0.001    260.05    0.59%    437.6
+rsi_2_3                        rsi_overbought_reversal_from_w  -0.001    260.05    0.59%    437.6
+rsi_2_3                        rsi_overbought_sell             -0.001    260.05    0.59%    437.6
+
+########## CHANG D: cong ra tien o sut giam 50-60%
+
+=== cap 0: gamma_duong_keo_ve__dao + rsi_3_10

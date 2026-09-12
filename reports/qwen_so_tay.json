@@ -92,27 +92,27 @@
   "S2_mql5_code_base": {
    "ma": "S2_mql5_code_base",
    "so_lan_chay": 4,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys, json, pathlib; sys.path.insert(0,'.')\nfrom nhan import ma_nguon as MN\nr = MN.thu_thap(so_bai=40)\nprint(json.dumps(r, ensure_ascii=False, default=str)[:3000])\npathlib.Path('reports/QWEN_MA_NGUON.json').write_text(json.dumps(r, ensure_ascii=False, default=str), encoding='utf-8')"
    ],
    "bat_dau": 1789172617.9492497,
-   "xong": null,
-   "ma_thoat": null,
+   "xong": 1789173059.5040915,
+   "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
-    "vi_sao": "ghi_moi = 71 > 0",
+    "vi_sao": "ghi_moi = 73 > 0",
     "so": {
      "so_dong": 0,
      "truong": "ghi_moi",
-     "gia_tri": 71,
+     "gia_tri": 73,
      "nguong": 0.0
     }
    },
-   "log": " 80742, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"20000\", \"tieu_de\": \"N Candles v6\", \"url\": \"https://www.mql5.com/en/code/20000\", \"file\": \"n_candles_v6.mq5\", \"byte\": 43152, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19981\", \"tieu_de\": \"Pipsover 2\", \"url\": \"https://www.mql5.com/en/code/19981\", \"file\": \"pipsover_2.mq5\", \"byte\": 38736, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19977\", \"tieu_de\": \"MACDSimpleReshetov\", \"url\": \"https://www.mql5.com/en/code/19977\", \"file\": \"macdsimplereshetov.mq5\", \"byte\": 17272, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"17561\", \"tieu_de\": \"UmnickTrader\", \"url\": \"https://www.mql5.com/en/code/17561\", \"file\": \"umnicktrader.mq5\", \"byte\": 33076, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19971\", \"tieu_de\": \"Channels\", \"url\": \"https://www.mql5.com/en/code/19971\", \"file\": \"channels.mq5\", \"byte\": 21006, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19968\", \"tieu_de\": \"Invest System 4.5\", \"url\": \"https://www.mql5.com/en/code/19968\", \"file\": \"invest_system_4.5.mq5\", \"byte\": 30768, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19963\", \"tieu_de\": \"TrailingStopAndTake\", \"url\": \"https://www.mql5.com/en/code/19963\", \"file\": \"trailingstopandtake.mq5\", \"byte\": 39102, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19951\", \"tieu_de\": \"Trend Me Leave Me\", \"url\": \"https://www.mql5.com/en/code/19951\", \"file\": \"trend_me_leave_me.mq5\", \"byte\": 43064, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19945\", \"tieu_de\": \"EMA Cross Contest Hedged\", \"url\": \"https\n",
-   "giay": 560.8
+   "log": "loai_ma\": \"tien_ich\"}, {\"id\": \"19172\", \"tieu_de\": \"Alligator\", \"url\": \"https://www.mql5.com/en/code/19172\", \"file\": \"alligator.mq5\", \"byte\": 35704, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19166\", \"tieu_de\": \"HarVesteR\", \"url\": \"https://www.mql5.com/en/code/19166\", \"file\": \"harvester.mq5\", \"byte\": 48642, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19150\", \"tieu_de\": \"Flat Channel\", \"url\": \"https://www.mql5.com/en/code/19150\", \"file\": \"flat_channel.mq5\", \"byte\": 53568, \"moi\": true, \"loai_ma\": \"tien_ich\"}, {\"id\": \"19137\", \"tieu_de\": \"Vortex Indicator System\", \"url\": \"https://www.mql5.com/en/code/19137\", \"file\": \"vortex_indicator_system.mq5\", \"byte\": 29760, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19119\", \"tieu_de\": \"Multi Stochastic\", \"url\": \"https://www.mql5.com/en/code/19119\", \"file\": \"multi_stochastic.mq5\", \"byte\": 39126, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19110\", \"tieu_de\": \"Multi Time Frame Trader\", \"url\": \"https://www.mql5.com/en/code/19110\", \"file\": \"multi_time_frame_trader.mq5\", \"byte\": 33644, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19102\", \"tieu_de\": \"This is a cross-platform МТ45 Expert Advisor\", \"url\": \"https://www.mql5.com/en/code/19102\", \"file\": \"mt45.mq4\", \"byte\": 10458, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19089\", \"tieu_de\": \"OpenTime\", \"url\": \"https://www.mql5.com/en/code/19089\", \"file\": \"opentime.mq5\", \"byte\": 35970, \"moi\": true, \"loai_ma\": \"chien_luoc\"}, {\"id\": \"19070\", \"tieu_de\": \"Pending orders by time\", \"url\": \"htt\n",
+   "giay": 441.6
   },
   "X0_bo_test": {
    "ma": "X0_bo_test",
@@ -457,6 +457,12 @@
    "ma": "B1_do_corpus",
    "ai": "qwen",
    "van": "Việc `B1_do_corpus` hoàn tất với trạng thái DAT. Kết quả cho thấy 43 toán hạng và 1181 cơ chế trong kho dữ liệu. Ở Tạng A, tỷ lệ \"KHÔNG NÓI\" chiếm 73.3%, phản ánh chính sách bảo mật chặt chẽ của LLM đối với các thuật ngữ giao dịch cụ thể. Tạng B xác nhận LLM hiểu rõ từ vựng phương pháp (như \"vùng\", \"sóng\") nhưng từ chối diễn đạt chúng thành luật. Tạng C lập bản đồ chi tiết các cơ chế, với \"xu_hướng\" và \"quay_ve_trung_binh\" là phổ biến nhất. Dữ liệu này là nền tảng metadata để lựa chọn đối tượng kiểm tra edge trong các bước tiếp theo."
+  },
+  {
+   "luc": "2026-09-12 07:31:22",
+   "ma": "S2_mql5_code_base",
+   "ai": "qwen",
+   "van": "Viec da thu thap thanh cong 73 file MQL5 moi tu Code Base, bao gom ca .mq4 va .mq5. So luong file nay la du de lam nguon cho viec phan tich sau. Tat ca 73 bai deu duoc danh dau \"moi\" (trung = 0), chura co trong co so du lieu hien tai. De xuat tiep tuc voi viec phan tich noi dung cac file nay de tim he giao dich thich hop."
   }
  ],
  "de_xuat": [
@@ -882,12 +888,32 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-12 07:25:58"
+  },
+  {
+   "ma": "S3_mql5_chien_luoc",
+   "ten": "Phân tích chiến lược từ 73 file MQL5 mới thu thập",
+   "vi_sao": "S2 đã thu thập được 73 file MQL5/MQ4 mới, cần phân tích để tìm hệ giao dịch phù hợp với mục tiêu mua-giữ cùng mức sụt giảm",
+   "lan": "LLM",
+   "lenh": [
+    "_phan_tich_mql5.py",
+    "--source",
+    "QWEN_MA_NGUON.json",
+    "--target",
+    "chien_luoc"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 07:31:25"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789172979.1618085
+   "luc": 1789174784.3622024
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,
