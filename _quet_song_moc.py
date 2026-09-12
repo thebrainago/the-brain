@@ -49,12 +49,18 @@ import numpy as np  # noqa: E402
 RA = LAB / "reports" / "QUET_SONG_MOC.json"
 
 MA = ["AUDCAD", "EURUSD", "GBPUSD", "EURGBP", "USDJPY", "XAUUSD",
-      "XM_US500CASH", "XM_US100CASH"]
+      "XM_US500CASH", "XM_US100CASH", "XM_US30CASH", "XM_GER40CASH",
+      "XM_UK100CASH", "XM_JP225CASH", "XM_AUS200CASH", "XM_FRA40CASH",
+      "XM_EU50CASH", "XM_HK50CASH", "XM_US2000CASH", "XM_GOLD"]
 KHUNG = ["H1", "H4", "D1"]
 Z = [-1.0, -1.5, -2.0, -2.5]
 GIU = [5, 20, 60, 120]
 #: Khoang cach toi moc, tinh bang ATR. Nho = phai rat gan moc moi vao.
 KC_ATR = [0.5, 1.0, 2.0]
+#: Nguong cua chinh du an (`sang_loc.so_lenh_min`). Lan quet dau khong co no nen
+#: o dau bang la mot cau hinh 2 LENH voi CAGR khop sut giam 421% - maxDD gan 0
+#: lam don bay khop phong len tram lan. Chan o TRAIN, truoc khi nhin holdout.
+SO_LENH_TOI_THIEU = 30
 
 
 def spec(chieu: int, z: float, giu: int, kc: float) -> dict:
@@ -93,36 +99,61 @@ def _mot(args) -> list[dict]:
         return [{"ma": ma, "khung": khung, "loi": str(e)[:60]}]
     if len(df) < 500:
         return [{"ma": ma, "khung": khung, "loi": "chi %d bar" % len(df)}]
+    # TACH TRAIN / HOLDOUT. Quet 1.152 cau hinh tren CA CHUOI la chon tham so
+    # bang chinh du lieu se doc ket qua - dung tinh huong da so sanh ma lan quet
+    # 12/09 sang mac phai (o dau bang co 2 LENH, CAGR@dd 421%).
+    # Chon tren TRAIN, doc tren HOLDOUT. Con so duy nhat duoc tin la con so holdout.
+    tr, ho = DL.hai_nua(df, 0.6)
+    if len(tr) < 300 or len(ho) < 300:
+        return [{"ma": ma, "khung": khung, "loi": "train %d / holdout %d bar qua ngan"
+                 % (len(tr), len(ho))}]
     c = CP.tu_du_lieu(ma, df)
     cp = c[0] if isinstance(c, tuple) else c
-    bh = B._chi_so(MP.mua_giu(df, cp, ma=ma, khung=khung))
+    ctr = CP.tu_du_lieu(ma, tr); ctr = ctr[0] if isinstance(ctr, tuple) else ctr
+    cho = CP.tu_du_lieu(ma, ho); cho = cho[0] if isinstance(cho, tuple) else cho
+    bh_tr = B._chi_so(MP.mua_giu(tr, ctr, ma=ma, khung=khung))
+    bh = B._chi_so(MP.mua_giu(ho, cho, ma=ma, khung=khung))
     ra = []
     for z in Z:
         for giu in GIU:
             for kc in KC_ATR:
                 try:
-                    v = np.zeros(len(df))
-                    for ch in (1, -1):
-                        v = v + np.asarray(NP.sinh_tu_spec(spec(ch, z, giu, kc), df), float)
-                    v = np.clip(v, -1.0, 1.0)
-                    kh = float(np.mean(np.abs(v) > 0))
-                    if kh < 0.002:
+                    def _chay(d, cpx):
+                        v = np.zeros(len(d))
+                        for ch in (1, -1):
+                            v = v + np.asarray(
+                                NP.sinh_tu_spec(spec(ch, z, giu, kc), d), float)
+                        v = np.clip(v, -1.0, 1.0)
+                        kq = MP.chay(d, v, cpx, ma=ma, khung=khung,
+                                     don_bay=1.0, gop="so_hoc")
+                        return B._chi_so(kq), int(kq.so_lenh), float(np.mean(np.abs(v) > 0))
+
+                    htr, n_tr, kh_tr = _chay(tr, ctr)
+                    if n_tr < SO_LENH_TOI_THIEU or kh_tr < 0.002:
                         continue
-                    kq = MP.chay(df, v, cp, ma=ma, khung=khung, don_bay=1.0, gop="so_hoc")
-                    h = B._chi_so(kq)
-                    L = abs(bh["maxdd"]) / max(abs(h["maxdd"]), 1e-9)
+                    hho, n_ho, kh_ho = _chay(ho, cho)
+                    Ltr = abs(bh_tr["maxdd"]) / max(abs(htr["maxdd"]), 1e-9)
+                    Lho = abs(bh["maxdd"]) / max(abs(hho["maxdd"]), 1e-9)
                     ra.append({
                         "ma": ma, "khung": khung, "z": z, "giu": giu, "kc_atr": kc,
-                        "cagr_pct": round(h["cagr"] * 100, 3),
-                        "sharpe": round(h["sharpe"], 3),
-                        "maxdd_pct": round(h["maxdd"] * 100, 2),
-                        "so_lenh": int(kq.so_lenh), "kich_hoat": round(kh, 4),
-                        "L_khop_dd": round(L, 2),
-                        "cagr_khop_dd": round(h["cagr"] * 100 * L, 3),
+                        # --- TRAIN: dung de XEP HANG, khong dung de ket luan
+                        "tr_cagr_pct": round(htr["cagr"] * 100, 3),
+                        "tr_sharpe": round(htr["sharpe"], 3),
+                        "tr_so_lenh": n_tr,
+                        "tr_cagr_khop_dd": round(htr["cagr"] * 100 * Ltr, 3),
+                        "tr_hon_mua_giu": bool(htr["cagr"] * Ltr > bh_tr["cagr"]
+                                               and htr["sharpe"] > bh_tr["sharpe"]),
+                        # --- HOLDOUT: con so DUY NHAT duoc tin
+                        "cagr_pct": round(hho["cagr"] * 100, 3),
+                        "sharpe": round(hho["sharpe"], 3),
+                        "maxdd_pct": round(hho["maxdd"] * 100, 2),
+                        "so_lenh": n_ho, "kich_hoat": round(kh_ho, 4),
+                        "L_khop_dd": round(Lho, 2),
+                        "cagr_khop_dd": round(hho["cagr"] * 100 * Lho, 3),
                         "bh_cagr_pct": round(bh["cagr"] * 100, 3),
                         "bh_sharpe": round(bh["sharpe"], 3),
-                        "hon_mua_giu": bool(h["cagr"] * L > bh["cagr"]
-                                            and h["sharpe"] > bh["sharpe"]),
+                        "hon_mua_giu": bool(hho["cagr"] * Lho > bh["cagr"]
+                                            and hho["sharpe"] > bh["sharpe"]),
                     })
                 except Exception:
                     continue
@@ -142,8 +173,27 @@ def main(argv: list[str]) -> int:
         for r in ex.map(_mot, viec):
             ket.extend(r)
     ok = [r for r in ket if "loi" not in r]
+    # CHON TREN TRAIN. Day la buoc quyet dinh: lay cac o dau bang cua TRAIN roi
+    # doc ket qua HOLDOUT cua chung. Xep hang bang holdout la tu lua.
+    tren_train = sorted([r for r in ok if r["tr_hon_mua_giu"]],
+                        key=lambda r: -r["tr_cagr_khop_dd"])
     hon = [r for r in ok if r["hon_mua_giu"]]
     duong = [r for r in ok if r["cagr_pct"] > 0]
+    giu_hang = [r for r in tren_train[:20] if r["hon_mua_giu"]]
+    print("\n--- CHON TREN TRAIN, DOC TREN HOLDOUT ---")
+    print("  o hon mua-giu tren TRAIN   : %d" % len(tren_train))
+    print("  trong 20 o dau bang TRAIN, con hon mua-giu o HOLDOUT: %d/20"
+          % len(giu_hang))
+    if tren_train:
+        print("\n  %-14s %-5s %6s %5s %6s | %9s %8s | %9s %8s %6s %s"
+              % ("ma", "khung", "z", "giu", "kcATR",
+                 "TR CAGR%", "TR Shrp", "HO CAGR%", "HO Shrp", "lenh", "giu hang"))
+        for r in tren_train[:20]:
+            print("  %-14s %-5s %6.1f %5d %6.1f | %9.2f %8.3f | %9.2f %8.3f %6d %s"
+                  % (r["ma"], r["khung"], r["z"], r["giu"], r["kc_atr"],
+                     r["tr_cagr_pct"], r["tr_sharpe"],
+                     r["cagr_pct"], r["sharpe"], r["so_lenh"],
+                     "CO" if r["hon_mua_giu"] else "-"))
     print("\n%d o chay duoc / %.0fs · NET duong %d · HON mua-giu %d"
           % (len(ok), time.time() - t0, len(duong), len(hon)))
     hon.sort(key=lambda r: -r["cagr_khop_dd"])

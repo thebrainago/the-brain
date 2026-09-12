@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
-- git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
-### 2026-09-06 22:57:55 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 15404, 0 phut)
 - `don_bay.log`: when serializing dict item 'bang'
 - `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
 - `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 3328, 0 phut), dieu_khien_xa.py (pid 15316, 312 phut)
 - `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 388 phut); TT_boc (thuong truc, con 50 phut); TT_chi_bao (thuong truc,
 - git: 876f31f QUANTLAB NOI SINH: nhan/quy_luat_song.py - TU TIM QUY LUAT SONG, da ma da khung
+### 2026-09-12 12:25:34 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8216, 0 phut), dieu_khien_xa.py (pid 15316, 319 phut)
+- `qwen_ultra.log`: ~ 12:25:04 | san sang 0 | CPU   18% / muc tieu 95%  |  con 15.5 loi  |  dang chay 1  [MANG:1]
+- git: e81fc01 QUANTLAB: toan hang moc_ky + quet 1.133 cau hinh - edge CO THAT nhung mong hon phi
