@@ -188,5 +188,55 @@ class CONG_PHAI_NAM_O_CUA(unittest.TestCase):
                            "tat cong ma so nap khong tang -> cong khong lam gi")
 
 
+class KHO_KHONG_DUOC_CHUA_HANG_CHET(unittest.TestCase):
+    """Mot khai bao truot `kiem_khai_bao` thi KHONG BAO GIO vao duoc cong.
+
+    Do 12/09/2026: 166/1.418 co che trong kho truot cong cua CHINH NO, va 122
+    trong so do truot chi vi **thieu truong `co_che`** - mot lo metadata, khong
+    phai loi logic. Chung nam trong kho nhu hang chet tu truoc 05/09 (luc
+    `boc_ma_llm._dien_co_che` ra doi), va khong bai kiem nao gac.
+
+    Bai kiem nay chia hai loai va gac tung loai khac nhau:
+
+      METADATA (chi thieu/hong `co_che`)  -> phai bang 0. Dien bu duoc bang may
+                                             (`_va_co_che_thieu.py`), khong co
+                                             ly do de ton tai.
+      NOI DUNG (dieu kien hang dung, hai  -> duoc phep ton tai nhung KHONG DUOC
+                ve giong het, thieu `vao`)   TANG. Do la loi cua khau BOC; chan
+                                             tran de no khong am tham phinh.
+    """
+
+    #: Tran hang loi NOI DUNG, chot theo so do duoc 12/09/2026. Ha duoc thi ha,
+    #: nhung khong duoc nang ma khong co ly do ghi kem.
+    TRAN_LOI_NOI_DUNG = 44
+
+    def _phan_loai(self):
+        from nhan import ngu_phap as NP
+        meta, noi_dung = [], []
+        for s in NP.doc_kho():
+            loi = NP.kiem_khai_bao(s)
+            if not loi:
+                continue
+            (meta if all("co_che" in x for x in loi) else noi_dung).append(
+                (s.get("ten"), loi))
+        return meta, noi_dung
+
+    def test_khong_con_khai_bao_truot_chi_vi_co_che(self):
+        meta, _ = self._phan_loai()
+        self.assertEqual(
+            [t for t, _ in meta][:20], [],
+            "%d khai bao truot cong CHI vi thieu `co_che` - chay "
+            "`python _va_co_che_thieu.py --that`" % len(meta))
+
+    def test_loi_noi_dung_khong_duoc_tang(self):
+        _, nd = self._phan_loai()
+        self.assertLessEqual(
+            len(nd), self.TRAN_LOI_NOI_DUNG,
+            "hang loi NOI DUNG tang tu %d len %d - khau BOC dang sinh them "
+            "dieu kien vo nghia (hang dung, hai ve giong het, thieu `vao`). "
+            "Vi du: %s" % (self.TRAN_LOI_NOI_DUNG, len(nd),
+                           [t for t, _ in nd[:3]]))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,427 @@
+{
+ "ghi_that": true,
+ "kho": 1418,
+ "lanh_truoc": 1252,
+ "lanh_sau": 1374,
+ "da_dien": 122,
+ "khong_dien_ly_do_khac": [
+  {
+   "ten": "supertrend_long",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "supertrend_short",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "lowmapbuffer_gan_gia_tri_tai_day_tro_thanh_muc_thap_nhat_noi",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "highmapbuffer_gan_gia_tri_tai_day_tro_thanh_muc_cao_nhat_noi",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "liquidity_sweep_mua",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "liquidity_sweep_ban",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fvg_bullish_gap_detected",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fvg_bearish_gap_detected",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fvg_gap_up",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fvg_gap_down",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "mitigation_bullish_buffer",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "mitigation_bearish_buffer",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "trend_following_strength_buy",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "trend_following_strength_sell",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "buy_signal_from_bullish_candle_strength_pressure_state",
+   "loi": "'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi nhiem nay - man hinh"
+  },
+  {
+   "ten": "sell_signal_from_bearish_candle_strength_pressure_state",
+   "loi": "'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi nhiem nay - man hinh"
+  },
+  {
+   "ten": "gia_mo_phien",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "pivothighbreakarrow",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "pivotlowbreakarrow",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fvg_bullish",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fvg_bearish",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "pivot_cao",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "pivot_thap",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "spread_vuot_nguong",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "velocity_duong",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "velocity_am",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "supertrend_buy_arrow",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "supertrend_sell_arrow",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fast_slow_color_bullish_cross",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "fast_slow_color_bearish_cross",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "garch_volatility_low_initialization",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "cvd_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "cvd_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay_2",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "silver_bullet_time_window_bullish_fvg",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "silver_bullet_time_window_bullish_fvg_2",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "zigzag_lowmapbuffer_peak_to_buy_reversal",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "zigzag_highmapbuffer_bottom_to_sell_reversal",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "bullish_fvg",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "bearish_fvg",
+   "loi": "thieu truong bat buoc 'co_che'"
+  },
+  {
+   "ten": "inside_bar_bullish_signal",
+   "loi": "vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin"
+  },
+  {
+   "ten": "inside_bar_bearish_signal",
+   "loi": "vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin"
+  },
+  {
+   "ten": "simple_price_ea",
+   "loi": "vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len low' khong mang thon"
+  },
+  {
+   "ten": "fvg_bullish_entry",
+   "loi": "vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high' khong mang thong ti"
+  },
+  {
+   "ten": "fvg_bearish_entry",
+   "loi": "vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' khong mang thong tin"
+  }
+ ],
+ "chi_tiet": [
+  {
+   "ten": "orb_long",
+   "nguon": "AAPL_Pro.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "orb_short",
+   "nguon": "AAPL_Pro.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "steepma_long",
+   "nguon": "SteepMA.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "steepma_short",
+   "nguon": "SteepMA.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "buysignal",
+   "nguon": "Aegis_Quantum_Lite.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "sellsignal",
+   "nguon": "Aegis_Quantum_Lite.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "first_buy",
+   "nguon": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ma_crossover_buy",
+   "nguon": "lyapunov.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ma_crossover_sell",
+   "nguon": "lyapunov.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "rsi_sell",
+   "nguon": "Grid_EA_Pro.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "rsi_buy",
+   "nguon": "Grid_EA_Pro.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "breakout_buy",
+   "nguon": "Hon-Matrix.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "breakout_sell",
+   "nguon": "Hon-Matrix.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "h1h4_buy_signal",
+   "nguon": "OHLCMTF_Scalper_MAIN.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "h1h4_sell_signal",
+   "nguon": "OHLCMTF_Scalper_MAIN.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "breakout_buy_2",
+   "nguon": "SilviosEAbest26.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "breakout_sell_2",
+   "nguon": "SilviosEAbest26.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "breakout_previous_high",
+   "nguon": "VR_Breakdown_level.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "breakdown_previous_low",
+   "nguon": "VR_Breakdown_level.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ema_rsi_long",
+   "nguon": "EA.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ema_rsi_short",
+   "nguon": "EA.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ema_rsi_bear",
+   "nguon": "ema_rsi_risk_ea.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "mua_khi_thap_nhat",
+   "nguon": "meanreversion.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ban_khi_cao_nhat",
+   "nguon": "meanreversion.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "mua_ma_rsi",
+   "nguon": "smart_trend_follower.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ban_ma_rsi",
+   "nguon": "smart_trend_follower.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "bullbreakout",
+   "nguon": "martingalebreakout.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "bearbreakout",
+   "nguon": "martingalebreakout.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "mua_rsi_50",
+   "nguon": "rsijmartingale1.5.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ban_rsi_50",
+   "nguon": "rsijmartingale1.5.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "orb_long_2",
+   "nguon": "SessionORB_EA_g4y.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "orb_short_2",
+   "nguon": "SessionORB_EA_g4y.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "mua_khi_stochastic_cat_len_50",
+   "nguon": "Stochastic_Protector.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "ban_khi_stochastic_cat_xuong_50",
+   "nguon": "Stochastic_Protector.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "swing_high_confirmed_buffer",
+   "nguon": "SMC_Pullback_v1_0.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "swing_low_confirmed_buffer",
+   "nguon": "SMC_Pullback_v1_0.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "hurstbuffer_inptrendthreshold",
+   "nguon": "HurstExponentRegimeSwitch.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "hurstbuffer_inpreversionthreshold",
+   "nguon": "HurstExponentRegimeSwitch.mq5",
+   "co_che_truoc": "",
+   "con_truot": []
+  },
+  {
+   "ten": "supertrend_xuong_sang_len",
+   "nguon": "Super_Trend_Indicator.mq5",
+   "co_che_truoc": "sieu_xu_huong",
+   "con_truot": []
+  },
+  {
+   "ten": "supertrend_len_sang_xuong",
+   "nguon": "Super_Trend_Indicator.mq5",
+   "co_che_truoc": "sieu_xu_huong",
+   "con_truot": []
+  }
+ ]
+}

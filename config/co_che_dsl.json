@@ -10047,7 +10047,9 @@
    }
   ],
   "nguon": "AAPL_Pro.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\", \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\", \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `AAPL_Pro.mq5` (orb_long), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "orb_short",
@@ -10073,7 +10075,9 @@
    }
   ],
   "nguon": "AAPL_Pro.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\", \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\", \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `AAPL_Pro.mq5` (orb_short), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "steepma_long",
@@ -10095,7 +10099,9 @@
   ],
   "ra": [],
   "nguon": "SteepMA.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SteepMA.mq5` (steepma_long), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "steepma_short",
@@ -10117,7 +10123,9 @@
   ],
   "ra": [],
   "nguon": "SteepMA.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SteepMA.mq5` (steepma_short), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "buysignal",
@@ -10148,7 +10156,9 @@
    }
   ],
   "nguon": "Aegis_Quantum_Lite.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Aegis_Quantum_Lite.mq5` (buysignal), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "sellsignal",
@@ -10179,7 +10189,9 @@
    }
   ],
   "nguon": "Aegis_Quantum_Lite.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Aegis_Quantum_Lite.mq5` (sellsignal), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "supertrend_long",
@@ -10247,7 +10259,9 @@
    }
   ],
   "nguon": "Sniper_Gold_Hybrid_Recovery_EA.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Sniper_Gold_Hybrid_Recovery_EA.mq5` (first_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ma_crossover_buy",
@@ -10269,7 +10283,9 @@
   ],
   "ra": [],
   "nguon": "lyapunov.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `lyapunov.mq5` (ma_crossover_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ma_crossover_sell",
@@ -10291,7 +10307,9 @@
   ],
   "ra": [],
   "nguon": "lyapunov.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"sma\", \"n\": 20}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"sma\", \"n\": 5}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `lyapunov.mq5` (ma_crossover_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "rsi_sell",
@@ -10311,7 +10329,9 @@
    }
   ],
   "nguon": "Grid_EA_Pro.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 70}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 70}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Grid_EA_Pro.mq5` (rsi_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "rsi_buy",
@@ -10331,7 +10351,9 @@
    }
   ],
   "nguon": "Grid_EA_Pro.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Grid_EA_Pro.mq5` (rsi_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "breakout_buy",
@@ -10357,7 +10379,9 @@
   ],
   "ra": [],
   "nguon": "Hon-Matrix.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Hon-Matrix.mq5` (breakout_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "breakout_sell",
@@ -10383,7 +10407,9 @@
   ],
   "ra": [],
   "nguon": "Hon-Matrix.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 20}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 20}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Hon-Matrix.mq5` (breakout_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "h1h4_buy_signal",
@@ -10432,7 +10458,9 @@
   ],
   "ra": [],
   "nguon": "OHLCMTF_Scalper_MAIN.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}}, {\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 4}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}}, {\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 4}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `OHLCMTF_Scalper_MAIN.mq5` (h1h4_buy_signal), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "h1h4_sell_signal",
@@ -10481,7 +10509,9 @@
   ],
   "ra": [],
   "nguon": "OHLCMTF_Scalper_MAIN.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}}, {\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 4}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}}, {\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 4}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `OHLCMTF_Scalper_MAIN.mq5` (h1h4_sell_signal), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "breakout_buy_2",
@@ -10506,7 +10536,9 @@
    }
   ],
   "nguon": "SilviosEAbest26.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 48}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 48}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SilviosEAbest26.mq5` (breakout_buy_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "breakout_sell_2",
@@ -10531,7 +10563,9 @@
    }
   ],
   "nguon": "SilviosEAbest26.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 48}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 48}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SilviosEAbest26.mq5` (breakout_sell_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "breakout_previous_high",
@@ -10556,7 +10590,9 @@
    }
   ],
   "nguon": "VR_Breakdown_level.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `VR_Breakdown_level.mq5` (breakout_previous_high), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "breakdown_previous_low",
@@ -10581,7 +10617,9 @@
    }
   ],
   "nguon": "VR_Breakdown_level.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `VR_Breakdown_level.mq5` (breakdown_previous_low), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ema_rsi_long",
@@ -10613,7 +10651,9 @@
   ],
   "ra": [],
   "nguon": "EA.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `EA.mq5` (ema_rsi_long), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ema_rsi_short",
@@ -10645,7 +10685,9 @@
   ],
   "ra": [],
   "nguon": "EA.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 70}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"hang\": 70}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `EA.mq5` (ema_rsi_short), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ema_rsi_bear",
@@ -10677,7 +10719,9 @@
   ],
   "ra": [],
   "nguon": "ema_rsi_risk_ea.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 70}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"hang\": 70}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `ema_rsi_risk_ea.mq5` (ema_rsi_bear), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "mua_khi_thap_nhat",
@@ -10702,7 +10746,9 @@
    }
   ],
   "nguon": "meanreversion.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 200}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 200}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `meanreversion.mq5` (mua_khi_thap_nhat), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ban_khi_cao_nhat",
@@ -10727,7 +10773,9 @@
    }
   ],
   "nguon": "meanreversion.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 200}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 200}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `meanreversion.mq5` (ban_khi_cao_nhat), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "mua_ma_rsi",
@@ -10769,7 +10817,9 @@
    }
   ],
   "nguon": "smart_trend_follower.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 10}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}}, {\"phai\": {\"hang\": 30}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 10}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}}, {\"phai\": {\"hang\": 30}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `smart_trend_follower.mq5` (mua_ma_rsi), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ban_ma_rsi",
@@ -10811,7 +10861,9 @@
    }
   ],
   "nguon": "smart_trend_follower.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 10}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}}, {\"phai\": {\"hang\": 70}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 10}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}}, {\"phai\": {\"hang\": 70}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `smart_trend_follower.mq5` (ban_ma_rsi), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "bullbreakout",
@@ -10836,7 +10888,9 @@
    }
   ],
   "nguon": "martingalebreakout.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `martingalebreakout.mq5` (bullbreakout), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "bearbreakout",
@@ -10861,7 +10915,9 @@
    }
   ],
   "nguon": "martingalebreakout.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `martingalebreakout.mq5` (bearbreakout), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "mua_rsi_50",
@@ -10881,7 +10937,9 @@
    }
   ],
   "nguon": "rsijmartingale1.5.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `rsijmartingale1.5.mq5` (mua_rsi_50), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ban_rsi_50",
@@ -10901,7 +10959,9 @@
    }
   ],
   "nguon": "rsijmartingale1.5.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `rsijmartingale1.5.mq5` (ban_rsi_50), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "orb_long_2",
@@ -10939,7 +10999,9 @@
   ],
   "ra": [],
   "nguon": "SessionORB_EA_g4y.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tong_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 5}, {\"hang\": 0.0005}]}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tong_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 5}, {\"hang\": 0.0005}]}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SessionORB_EA_g4y.mq5` (orb_long_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "orb_short_2",
@@ -10977,7 +11039,9 @@
   ],
   "ra": [],
   "nguon": "SessionORB_EA_g4y.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tong_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 5}, {\"hang\": -0.0005}]}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [], \"vao\": [{\"phai\": {\"chi_bao\": \"tong_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 5}, {\"hang\": -0.0005}]}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SessionORB_EA_g4y.mq5` (orb_short_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "mua_khi_stochastic_cat_len_50",
@@ -10997,7 +11061,9 @@
    }
   ],
   "nguon": "Stochastic_Protector.mq5",
-  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Stochastic_Protector.mq5` (mua_khi_stochastic_cat_len_50), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ban_khi_stochastic_cat_xuong_50",
@@ -11017,7 +11083,9 @@
    }
   ],
   "nguon": "Stochastic_Protector.mq5",
-  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}"
+  "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Stochastic_Protector.mq5` (ban_khi_stochastic_cat_xuong_50), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "swing_high_confirmed_buffer",
@@ -11043,7 +11111,9 @@
   ],
   "nguon": "SMC_Pullback_v1_0.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tuyet_doi\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SMC_Pullback_v1_0.mq5` (swing_high_confirmed_buffer), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "swing_low_confirmed_buffer",
@@ -11069,7 +11139,9 @@
   ],
   "nguon": "SMC_Pullback_v1_0.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tuyet_doi\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SMC_Pullback_v1_0.mq5` (swing_low_confirmed_buffer), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "hurstbuffer_inptrendthreshold",
@@ -11094,7 +11166,9 @@
   ],
   "nguon": "HurstExponentRegimeSwitch.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0.5}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `HurstExponentRegimeSwitch.mq5` (hurstbuffer_inptrendthreshold), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "hurstbuffer_inpreversionthreshold",
@@ -11119,11 +11193,13 @@
   ],
   "nguon": "HurstExponentRegimeSwitch.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0.5}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `HurstExponentRegimeSwitch.mq5` (hurstbuffer_inpreversionthreshold), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "supertrend_xuong_sang_len",
-  "co_che": "sieu_xu_huong",
+  "co_che": "Luat rut TU MA NGUON `Super_Trend_Indicator.mq5` (supertrend_xuong_sang_len), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: sieu_xu_huong",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -11183,11 +11259,12 @@
   ],
   "nguon": "Super_Trend_Indicator.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"hang\": 1, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"hang\": 1}}], \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"hang\": 1, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"hang\": 1, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"hang\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "supertrend_len_sang_xuong",
-  "co_che": "sieu_xu_huong",
+  "co_che": "Luat rut TU MA NGUON `Super_Trend_Indicator.mq5` (supertrend_len_sang_xuong), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: sieu_xu_huong",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -11247,7 +11324,8 @@
   ],
   "nguon": "Super_Trend_Indicator.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"hang\": 1, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"hang\": 1}}], \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"hang\": 1, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"hang\": 1, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\", \"hang\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "sessionhighsweepbuy",
@@ -11288,7 +11366,9 @@
   ],
   "nguon": "Dynamic_Session_Sweep_Detector.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Dynamic_Session_Sweep_Detector.mq5` (sessionhighsweepbuy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "sessionlowsweepsell",
@@ -11329,7 +11409,9 @@
   ],
   "nguon": "Dynamic_Session_Sweep_Detector.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Dynamic_Session_Sweep_Detector.mq5` (sessionlowsweepsell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "decayzones_score_smoothing_signal",
@@ -11373,11 +11455,13 @@
   ],
   "nguon": "Liquidity_Void_Decay_Oscillator.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 5}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 5}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 5}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Liquidity_Void_Decay_Oscillator.mq5` (decayzones_score_smoothing_signal), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ob_bullish_rectangle_created",
-  "co_che": "OrderBlockDetector.mq5",
+  "co_che": "Luat rut TU MA NGUON `OrderBlockDetector.mq5` (ob_bullish_rectangle_created), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: OrderBlockDetector.mq5",
   "ho": "pha_vo",
   "chieu": 1,
   "giu": 1,
@@ -11407,11 +11491,12 @@
   ],
   "nguon": "OrderBlockDetector.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [{\"phai\": {\"hang\": 0}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"bien_do\"}}], \"vao\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "ob_bearish_rectangle_created",
-  "co_che": "OrderBlockDetector.mq5",
+  "co_che": "Luat rut TU MA NGUON `OrderBlockDetector.mq5` (ob_bearish_rectangle_created), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: OrderBlockDetector.mq5",
   "ho": "pha_vo",
   "chieu": -1,
   "giu": 1,
@@ -11441,7 +11526,8 @@
   ],
   "nguon": "OrderBlockDetector.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [{\"phai\": {\"hang\": 0}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"bien_do\"}}], \"vao\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "ihsmc_zone_detected_armed_active_breakout_score_update",
@@ -11467,7 +11553,9 @@
   ],
   "nguon": "IHSMC_V2.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `IHSMC_V2.mq5` (ihsmc_zone_detected_armed_active_breakout_score_update), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ihsmc_zone_detected_armed_active_breakdown_score_update",
@@ -11493,7 +11581,9 @@
   ],
   "nguon": "IHSMC_V2.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `IHSMC_V2.mq5` (ihsmc_zone_detected_armed_active_breakdown_score_update), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "bullish_fvg_alert_or_arrow",
@@ -11524,7 +11614,9 @@
   ],
   "nguon": "Fair_Value_Gap_Scanner_MT5.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"high\"}, {\"chi_bao\": \"gia\", \"cot\": \"high\"}]}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Fair_Value_Gap_Scanner_MT5.mq5` (bullish_fvg_alert_or_arrow), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "bearish_fvg_alert_or_arrow",
@@ -11555,7 +11647,9 @@
   ],
   "nguon": "Fair_Value_Gap_Scanner_MT5.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"low\"}, {\"chi_bao\": \"gia\", \"cot\": \"low\"}]}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Fair_Value_Gap_Scanner_MT5.mq5` (bearish_fvg_alert_or_arrow), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "mo_box_hoac_nhan_label_theo_khung_gio",
@@ -11610,7 +11704,9 @@
   ],
   "nguon": "smc_entry.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 14}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `smc_entry.mq5` (gia_cat_len_ema), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_xuong_ema",
@@ -11632,7 +11728,9 @@
   ],
   "nguon": "smc_entry.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 14}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `smc_entry.mq5` (gia_cat_xuong_ema), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "macd_histogram_duong",
@@ -11681,7 +11779,9 @@
   ],
   "nguon": "Adaptive_MACD.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 9}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Adaptive_MACD.mq5` (macd_histogram_duong), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "macd_histogram_am",
@@ -11730,7 +11830,9 @@
   ],
   "nguon": "Adaptive_MACD.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 9}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Adaptive_MACD.mq5` (macd_histogram_am), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "lowmapbuffer_gan_gia_tri_tai_day_tro_thanh_muc_thap_nhat_noi",
@@ -11817,7 +11919,9 @@
   ],
   "nguon": "Auto_ZigZag_Fibonacci_Golden_Zone.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"close\"}, {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}]}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Auto_ZigZag_Fibonacci_Golden_Zone.mq5` (kpg_golden_zone_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "kpg_golden_zone_sell",
@@ -11852,7 +11956,9 @@
   ],
   "nguon": "Auto_ZigZag_Fibonacci_Golden_Zone.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"close\"}, {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}]}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Auto_ZigZag_Fibonacci_Golden_Zone.mq5` (kpg_golden_zone_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "liquidity_sweep_mua",
@@ -12053,7 +12159,9 @@
   ],
   "nguon": "Reverse_RSI_Bands.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 30}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Reverse_RSI_Bands.mq5` (rsi_oversold_rebound_from_wilder_smoothed_rsi), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "rsi_overbought_reversal_from_wilder_smoothed_rsi",
@@ -12074,7 +12182,9 @@
   ],
   "nguon": "Reverse_RSI_Bands.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 70}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Reverse_RSI_Bands.mq5` (rsi_overbought_reversal_from_wilder_smoothed_rsi), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "fvg_gap_up",
@@ -12588,7 +12698,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_vuot_ema20), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_duoi_ema20",
@@ -12610,7 +12722,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_duoi_ema20), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_vuot_ema50",
@@ -12632,7 +12746,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_vuot_ema50), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_duoi_ema50",
@@ -12654,7 +12770,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_duoi_ema50), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_vuot_ema100",
@@ -12676,7 +12794,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 100}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_vuot_ema100), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_duoi_ema100",
@@ -12698,7 +12818,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 100}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_duoi_ema100), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_vuot_ema200",
@@ -12720,7 +12842,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 200}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_vuot_ema200), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_duoi_ema200",
@@ -12745,7 +12869,9 @@
   ],
   "nguon": "Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 200}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Moving_Average_Dashboard_MT5_v1_00.mq5` (gia_duoi_ema200), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "atr_ratio_high_state",
@@ -12771,7 +12897,9 @@
   ],
   "nguon": "Quantora_Market_Volatility_Monitor.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"atr\", \"n\": 14}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"atr\", \"n\": 14}, \"n\": 20}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Market_Volatility_Monitor.mq5` (atr_ratio_high_state), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "atr_ratio_extreme_state",
@@ -12797,7 +12925,9 @@
   ],
   "nguon": "Quantora_Market_Volatility_Monitor.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"atr\", \"n\": 14}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"atr\", \"n\": 14}, \"n\": 50}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Quantora_Market_Volatility_Monitor.mq5` (atr_ratio_extreme_state), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "heikin_ashi_bull_strong",
@@ -12832,7 +12962,9 @@
   ],
   "nguon": "SHK_Professional_Heikin_Ashi_Signals.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"than_nen\"}, \"n\": 14}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"than_nen\"}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SHK_Professional_Heikin_Ashi_Signals.mq5` (heikin_ashi_bull_strong), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "heikin_ashi_bear_strong",
@@ -12867,7 +12999,9 @@
   ],
   "nguon": "SHK_Professional_Heikin_Ashi_Signals.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"than_nen\"}, \"n\": 14}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"than_nen\"}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SHK_Professional_Heikin_Ashi_Signals.mq5` (heikin_ashi_bear_strong), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "rsi_histogram_buy_seed",
@@ -12901,7 +13035,9 @@
   ],
   "nguon": "RSI_Histogram_EN.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}], \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `RSI_Histogram_EN.mq5` (rsi_histogram_buy_seed), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "rsi_histogram_sell_seed",
@@ -12935,7 +13071,9 @@
   ],
   "nguon": "RSI_Histogram_EN.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [{\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}], \"vao\": [{\"phai\": {\"hang\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"rsi\", \"n\": 14}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `RSI_Histogram_EN.mq5` (rsi_histogram_sell_seed), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_mo_phien",
@@ -13039,7 +13177,9 @@
   ],
   "nguon": "MACD_TradingView_Style.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MACD_TradingView_Style.mq5` (macd_cat_len_tin_hieu_sau_khi_ema_nhanh_cham_va_uong_tin_hie), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "macd_cat_xuong_tin_hieu_sau_khi_ema_nhanh_cham_va_uong_tin_h",
@@ -13061,7 +13201,9 @@
   ],
   "nguon": "MACD_TradingView_Style.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MACD_TradingView_Style.mq5` (macd_cat_xuong_tin_hieu_sau_khi_ema_nhanh_cham_va_uong_tin_h), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "cat_len_ma_xuat_hien",
@@ -13083,7 +13225,9 @@
   ],
   "nguon": "MA_Length_AuTo-_AKM.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 0}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MA_Length_AuTo-_AKM.mq5` (cat_len_ma_xuat_hien), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "cat_xuong_ma_xuat_hien",
@@ -13105,7 +13249,9 @@
   ],
   "nguon": "MA_Length_AuTo-_AKM.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 0}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MA_Length_AuTo-_AKM.mq5` (cat_xuong_ma_xuat_hien), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_duong_du_bao_alpha_beta_khi_sai_lech_duong",
@@ -13148,7 +13294,9 @@
   ],
   "nguon": "Alpha_Beta_Channel_-_AKM.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}], \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Alpha_Beta_Channel_-_AKM.mq5` (gia_cat_duong_du_bao_alpha_beta_khi_sai_lech_duong), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_duong_du_bao_alpha_beta_khi_sai_lech_am",
@@ -13191,7 +13339,9 @@
   ],
   "nguon": "Alpha_Beta_Channel_-_AKM.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}], \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Alpha_Beta_Channel_-_AKM.mq5` (gia_cat_duong_du_bao_alpha_beta_khi_sai_lech_am), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_duong_du_bao_tang",
@@ -13217,7 +13367,9 @@
   ],
   "nguon": "Alpha_Beta_Trend.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Alpha_Beta_Trend.mq5` (gia_cat_duong_du_bao_tang), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_duong_du_bao_giam",
@@ -13243,7 +13395,9 @@
   ],
   "nguon": "Alpha_Beta_Trend.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Alpha_Beta_Trend.mq5` (gia_cat_duong_du_bao_giam), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "kci_plus_buffer_arrow",
@@ -13272,7 +13426,9 @@
   ],
   "nguon": "KCI-Directional_X.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"zscore\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 3}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `KCI-Directional_X.mq5` (kci_plus_buffer_arrow), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "kci_minus_buffer_arrow",
@@ -13301,7 +13457,9 @@
   ],
   "nguon": "KCI-Directional_X.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"zscore\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 3}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `KCI-Directional_X.mq5` (kci_minus_buffer_arrow), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "swinghighbuf_duoc_gan_khi_co_dinh_cao_cuc_bo_swing_high",
@@ -13336,7 +13494,9 @@
   ],
   "nguon": "LW_MarketStructure_SMC.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"high\"}, {\"chi_bao\": \"gia\", \"cot\": \"high\"}, {\"chi_bao\": \"gia\", \"cot\": \"high\"}]}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `LW_MarketStructure_SMC.mq5` (swinghighbuf_duoc_gan_khi_co_dinh_cao_cuc_bo_swing_high), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "swinglowbuf_duoc_gan_khi_co_dinh_thap_cuc_bo_swing_low",
@@ -13371,7 +13531,9 @@
   ],
   "nguon": "LW_MarketStructure_SMC.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"low\"}, {\"chi_bao\": \"gia\", \"cot\": \"low\"}, {\"chi_bao\": \"gia\", \"cot\": \"low\"}]}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `LW_MarketStructure_SMC.mq5` (swinglowbuf_duoc_gan_khi_co_dinh_thap_cuc_bo_swing_low), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_tren_50_phan_tram_than_nen",
@@ -13412,7 +13574,9 @@
   ],
   "nguon": "Multi_Timeframe_Candle_Map.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Multi_Timeframe_Candle_Map.mq5` (gia_tren_50_phan_tram_than_nen), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_duoi_50_phan_tram_than_nen",
@@ -13453,7 +13617,9 @@
   ],
   "nguon": "Multi_Timeframe_Candle_Map.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Multi_Timeframe_Candle_Map.mq5` (gia_duoi_50_phan_tram_than_nen), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "demand_zone_touch_rejection",
@@ -13501,7 +13667,9 @@
   ],
   "nguon": "zSRZones.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 20}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `zSRZones.mq5` (demand_zone_touch_rejection), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "supply_zone_touch_rejection",
@@ -13549,7 +13717,9 @@
   ],
   "nguon": "zSRZones.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 20}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 20}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `zSRZones.mq5` (supply_zone_touch_rejection), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "price_enters_support_zone_and_signals_buy",
@@ -13588,7 +13758,9 @@
   ],
   "nguon": "Adaptive_Support_Resistance_Zones.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 20}, {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 20}]}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Adaptive_Support_Resistance_Zones.mq5` (price_enters_support_zone_and_signals_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "price_enters_resistance_zone_and_signals_sell",
@@ -13627,7 +13799,9 @@
   ],
   "nguon": "Adaptive_Support_Resistance_Zones.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 20}, {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 20}]}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Adaptive_Support_Resistance_Zones.mq5` (price_enters_resistance_zone_and_signals_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "fvg_bullish",
@@ -13768,7 +13942,7 @@
  },
  {
   "ten": "macd_histogram_duong_2",
-  "co_che": "ExtHistogramBuffer >= 0",
+  "co_che": "Luat rut TU MA NGUON `MacdColor.mq5` (macd_histogram_duong_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: ExtHistogramBuffer >= 0",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -13814,11 +13988,12 @@
   ],
   "nguon": "MacdColor.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 26}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "macd_histogram_am_2",
-  "co_che": "ExtHistogramBuffer < 0",
+  "co_che": "Luat rut TU MA NGUON `MacdColor.mq5` (macd_histogram_am_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: ExtHistogramBuffer < 0",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -13864,7 +14039,8 @@
   ],
   "nguon": "MacdColor.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 26}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "velocity_duong",
@@ -13928,7 +14104,7 @@
  },
  {
   "ten": "news_candle_filter",
-  "co_che": "gia_phien",
+  "co_che": "Luat rut TU MA NGUON `Momentum_Candles.mq5` (news_candle_filter), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: gia_phien",
   "ho": "phien",
   "chieu": 1,
   "giu": 1,
@@ -13964,7 +14140,8 @@
   ],
   "nguon": "Momentum_Candles.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"bien_do\"}, \"n\": 3}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tre\", \"cua\": {\"chi_bao\": \"bien_do\"}, \"n\": 1}}, {\"phai\": {\"chi_bao\": \"gia\", \"cot\": \"open\"}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "macdint_150_filtered_volume_buy",
@@ -13999,7 +14176,9 @@
   ],
   "nguon": "MACDint_150.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"khoi_luong\"}, \"n\": 150}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"khoi_luong\"}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 150}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MACDint_150.mq5` (macdint_150_filtered_volume_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "macdint_150_filtered_volume_sell",
@@ -14034,11 +14213,13 @@
   ],
   "nguon": "MACDint_150.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"khoi_luong\"}, \"n\": 150}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"khoi_luong\"}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 150}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MACDint_150.mq5` (macdint_150_filtered_volume_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_len_kalman",
-  "co_che": "gia cat len duong Kalman",
+  "co_che": "Luat rut TU MA NGUON `Kalman_Filter.mq5` (gia_cat_len_kalman), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: gia cat len duong Kalman",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -14061,7 +14242,8 @@
   ],
   "nguon": "Kalman_Filter.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "gia_cat_xuong_kalman",
@@ -14114,7 +14296,9 @@
   ],
   "nguon": "Fourier_DFT_Cycle.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Fourier_DFT_Cycle.mq5` (gia_cat_len_duong_du_bao_dft), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_xuong_duong_du_bao_dft",
@@ -14140,11 +14324,13 @@
   ],
   "nguon": "Fourier_DFT_Cycle.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Fourier_DFT_Cycle.mq5` (gia_cat_xuong_duong_du_bao_dft), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "supertrend_buy",
-  "co_che": "supertrend_cross_up",
+  "co_che": "Luat rut TU MA NGUON `Supertrend.mq5` (supertrend_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: supertrend_cross_up",
   "ho": "xu_huong",
   "chieu": 1,
   "giu": 1,
@@ -14182,11 +14368,12 @@
   ],
   "nguon": "Supertrend.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"thap_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "supertrend_sell",
-  "co_che": "supertrend_cross_down",
+  "co_che": "Luat rut TU MA NGUON `Supertrend.mq5` (supertrend_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: supertrend_cross_down",
   "ho": "xu_huong",
   "chieu": -1,
   "giu": 1,
@@ -14224,7 +14411,8 @@
   ],
   "nguon": "Supertrend.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"cao_nhat\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true
  },
  {
   "ten": "supertrend_xu_huong_tang",
@@ -14523,7 +14711,9 @@
   ],
   "nguon": "PrecisionSniper.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 50}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 26}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `PrecisionSniper.mq5` (buy_ema_cross_trend_filter), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "sell_ema_cross_trend_filter",
@@ -14567,7 +14757,9 @@
   ],
   "nguon": "PrecisionSniper.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}, {\"phai\": {\"chi_bao\": \"ema\", \"n\": 50}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 26}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `PrecisionSniper.mq5` (sell_ema_cross_trend_filter), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "z_score_inpextreme",
@@ -14614,7 +14806,9 @@
   ],
   "nguon": "StatArb_Spread_ZScore.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": -1}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"zscore\", \"cua\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"n\": 1}}, {\"phai\": {\"hang\": -1}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"zscore\", \"cua\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `StatArb_Spread_ZScore.mq5` (z_score_inpextreme), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "z_score_inpextreme_2",
@@ -14643,7 +14837,9 @@
   ],
   "nguon": "StatArb_Spread_ZScore.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"zscore\", \"cua\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `StatArb_Spread_ZScore.mq5` (z_score_inpextreme_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "momentum_bull_arrow",
@@ -14673,7 +14869,9 @@
   ],
   "nguon": "XANDER_Pulse_Candles.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 5}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `XANDER_Pulse_Candles.mq5` (momentum_bull_arrow), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "momentum_bear_arrow",
@@ -14703,7 +14901,9 @@
   ],
   "nguon": "XANDER_Pulse_Candles.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 5}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `XANDER_Pulse_Candles.mq5` (momentum_bear_arrow), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_tren_duong_tren_kernel_vung_atr",
@@ -14744,7 +14944,9 @@
   ],
   "nguon": "Nadaraya_Watson.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Nadaraya_Watson.mq5` (gia_cat_tren_duong_tren_kernel_vung_atr), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "gia_cat_duoi_duong_duoi_kernel_vung_atr",
@@ -14785,7 +14987,9 @@
   ],
   "nguon": "Nadaraya_Watson.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Nadaraya_Watson.mq5` (gia_cat_duoi_duong_duoi_kernel_vung_atr), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "extalmabuffer_tang_len",
@@ -14815,7 +15019,9 @@
   ],
   "nguon": "Gaussian_Filter.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Gaussian_Filter.mq5` (extalmabuffer_tang_len), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "extalmabuffer_giam_xuong",
@@ -14845,7 +15051,9 @@
   ],
   "nguon": "Gaussian_Filter.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 2}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Gaussian_Filter.mq5` (extalmabuffer_giam_xuong), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "cvd_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
@@ -14948,7 +15156,9 @@
   ],
   "nguon": "Institutional_Toxic_Flow.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"khoi_luong\"}, \"n\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"khoi_luong\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"khoi_luong\"}, \"n\": 30}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"khoi_luong\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Institutional_Toxic_Flow.mq5` (toxic_volume_spike_tren_trung_binh_nen), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "toxic_volume_spike_duoi_trung_binh_nen",
@@ -14972,7 +15182,9 @@
   ],
   "nguon": "Institutional_Toxic_Flow.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"khoi_luong\"}, \"n\": 30}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"khoi_luong\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Institutional_Toxic_Flow.mq5` (toxic_volume_spike_duoi_trung_binh_nen), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ema9_cat_len_ema21_2",
@@ -14994,7 +15206,9 @@
   ],
   "nguon": "Sniper_Pro.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 21}, \"phep\": \"cheo_len\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 9}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Sniper_Pro.mq5` (ema9_cat_len_ema21_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "ema9_cat_xuong_ema21_2",
@@ -15016,7 +15230,9 @@
   ],
   "nguon": "Sniper_Pro.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 21}, \"phep\": \"cheo_xuong\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 9}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `Sniper_Pro.mq5` (ema9_cat_xuong_ema21_2), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "silver_bullet_time_window_bullish_fvg",
@@ -15124,7 +15340,9 @@
   ],
   "nguon": "ASQ_SuperTrend.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 14}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `ASQ_SuperTrend.mq5` (supertrend_bull_arrow_buy), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "supertrend_bear_arrow_sell",
@@ -15150,7 +15368,9 @@
   ],
   "nguon": "ASQ_SuperTrend.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 14}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `ASQ_SuperTrend.mq5` (supertrend_bear_arrow_sell), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "quet_dinh_voi_rau_nen_du_tren",
@@ -15228,7 +15448,9 @@
   ],
   "nguon": "SMC_Liquidity_Detector.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"cao_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"high\"}, {\"chi_bao\": \"gia\", \"cot\": \"high\"}]}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"cao_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"high\"}, {\"chi_bao\": \"gia\", \"cot\": \"high\"}]}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"bien_do\"}, \"n\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"than_nen\"}}, {\"phai\": {\"hang\": 0}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"tuyet_doi\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SMC_Liquidity_Detector.mq5` (quet_dinh_voi_rau_nen_du_tren), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "quet_day_voi_rau_nen_duoi",
@@ -15306,7 +15528,9 @@
   ],
   "nguon": "SMC_Liquidity_Detector.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"thap_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"low\"}, {\"chi_bao\": \"gia\", \"cot\": \"low\"}]}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}, {\"phai\": {\"chi_bao\": \"thap_nhat_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"gia\", \"cot\": \"low\"}, {\"chi_bao\": \"gia\", \"cot\": \"low\"}]}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"close\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"bien_do\"}, \"n\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"than_nen\"}}, {\"phai\": {\"hang\": 0}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"tuyet_doi\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `SMC_Liquidity_Detector.mq5` (quet_day_voi_rau_nen_duoi), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "zigzag_lowmapbuffer_peak_to_buy_reversal",
@@ -15420,7 +15644,9 @@
   ],
   "nguon": "MACD_vTradingview.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MACD_vTradingview.mq5` (macd_buffer_duong), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "macd_buffer_am",
@@ -15442,7 +15668,9 @@
   ],
   "nguon": "MACD_vTradingview.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"ema\", \"n\": 26}, \"phep\": \"<\", \"trai\": {\"chi_bao\": \"ema\", \"n\": 12}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MACD_vTradingview.mq5` (macd_buffer_am), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "signalbuffer_tinh_tu_sma_cua_macd",
@@ -15480,7 +15708,9 @@
   ],
   "nguon": "MACD_vTradingview.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"hang\": 0}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"tb_cua_cac\", \"toan_hang\": [{\"chi_bao\": \"ema\", \"n\": 12}, {\"chi_bao\": \"doi\", \"cua\": {\"chi_bao\": \"ema\", \"n\": 26}, \"n\": 1}]}, \"n\": 9}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `MACD_vTradingview.mq5` (signalbuffer_tinh_tu_sma_cua_macd), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "cham_vao_vung_cau",
@@ -15521,7 +15751,9 @@
   ],
   "nguon": "ExMachina_SupplyDemand.mq5",
   "van_tay": "{\"chieu\": 1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \"<=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `ExMachina_SupplyDemand.mq5` (cham_vao_vung_cau), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "cham_vao_vung_cung",
@@ -15562,7 +15794,9 @@
   ],
   "nguon": "ExMachina_SupplyDemand.mq5",
   "van_tay": "{\"chieu\": -1, \"giu\": 1, \"ra\": null, \"vao\": [{\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}, \"n\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}, {\"phai\": {\"chi_bao\": \"tb\", \"cua\": {\"chi_bao\": \"gia\", \"cot\": \"low\"}, \"n\": 1}, \"phep\": \">=\", \"trai\": {\"chi_bao\": \"gia\", \"cot\": \"high\"}}]}",
-  "nguon_lan": "chi_bao"
+  "nguon_lan": "chi_bao",
+  "_ly_do_may_dien": true,
+  "co_che": "Luat rut TU MA NGUON `ExMachina_SupplyDemand.mq5` (cham_vao_vung_cung), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc."
  },
  {
   "ten": "inside_bar_bullish_signal",
