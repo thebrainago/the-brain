@@ -24,11 +24,35 @@
  8  CHẠM TIỀN                        1          —        1 hệ chạy, 1 hạn mức
 ```
 
-**Nút thắt là chặng 4→5: 1.035/1.418 cơ chế chưa bao giờ được chấm cổng**, cộng
-**567 ứng viên treo** trong `candidate_queue`.
+### ĐÍNH CHÍNH 12/09 — chặng 4→5 KHÔNG nghẽn
 
-Đây không phải vấn đề đầu vào. Kho đã dày gấp đôi trong hai ngày (689 → 1.418).
-Vấn đề là **hàng vào kho rồi nằm đó**.
+Bản đầu của tài liệu này gọi chặng 4→5 là nút thắt, với hai chứng cứ, và **cả
+hai đều sai**:
+
+1. *"567 ứng viên treo trong `candidate_queue`"* — SAI. Con trỏ tiêu thụ
+   (`reports/quantlab_candidate_cursor.json`) đang ở **id 637**, mà id lớn nhất
+   trong bảng cũng là **637**. Đã rút hết. Bảng đó là **nhật ký chỉ-ghi-thêm**
+   (trigger chặn UPDATE/DELETE) nên hàng vẫn nằm đó vĩnh viễn — đó là dấu vết
+   kiểm toán, không phải tồn đọng.
+
+2. *"1.035 cơ chế chưa bao giờ được chấm"* — ĐÚNG SỐ, SAI CÁCH ĐỌC. Chạy cả
+   1.132 cơ chế "lành lặn" trên `XM_US500CASH` D1 (4.054 bar, MDE 1,097):
+
+   ```
+   Sharpe tốt nhất 0,877 · phân vị 95% 0,486 · TRUNG VỊ 0,001
+   >>> vượt MDE: 0 / 1.132  =  0,0%
+   ```
+
+   **Không một cái nào.** Chúng không bị kẹt — chúng bị **cổng MDE loại đúng
+   như thiết kế**, vì không cái nào đủ tín hiệu để phân biệt với nhiễu.
+
+**Hệ quả cho kế hoạch:** H1 (thông chặng 4→5) **bị huỷ**. Đẩy tỉ lệ 27% lên cao
+hơn nghĩa là đăng ký những giả thuyết không thể phát hiện được, đốt ngân sách
+FDR mà không đổi kết cục. Và "tỉ lệ thông" ở mục 6 là **thước đo sai** — sửa ở
+mục 6.
+
+Dây chuyền **đang thông**. Cái thiếu không phải đường ống mà là **tín hiệu đủ lớn
+để đo được** — cùng bức tường `MDE ≈ 2,98/√năm` đã đo sáng nay.
 
 ---
 
@@ -53,7 +77,7 @@ các trụ **chạy được**, chỉ là **không ai gọi chúng**.
 
 Ước lượng là **giờ máy + lượt Claude**, không phải giờ người.
 
-### H1 — THÔNG CHẶNG 4→5 (đòn bẩy cao nhất)
+### ~~H1 — THÔNG CHẶNG 4→5~~ — **ĐÃ HUỶ, xem đính chính mục 1**
 
 **H1a ĐÃ ĐO XONG 12/09** (`_truy_chang_4_5.py`). 1.389 cơ chế chưa thành giả thuyết:
 
@@ -120,14 +144,17 @@ chân lý**. Cần khai vào `lab/config/nguong.json`:
 
 ## 4. Vì sao thứ tự này
 
-**H1 trước** vì nó là chặng hẹp nhất: kho đã có 1.418 cơ chế mà 73% chưa vào
-cổng. Mọi việc làm dày thêm đầu vào (H4) đều **vô nghĩa khi chặng 5 còn tắc** —
-đổ thêm nước vào ống đang nghẹt.
+**H1 đã huỷ** sau khi đo: chặng đó không nghẽn.
 
-**H3 trước H4** vì hiệu chuẩn cổng quyết định 14 PASS hiện có là thật hay lọt.
-Chạy thêm hàng qua một cái cổng chưa hiệu chuẩn là nhân bản nghi ngờ.
+**H3 lên đầu.** Hiệu chuẩn cổng là việc còn lại có giá trị cao nhất: 14 PASS hiện
+có **chưa biết là thật hay lọt**, vì cổng chưa từng được hiệu chuẩn bằng V6 thật.
+Một hệ đã hoàn thiện mà cổng chưa hiệu chuẩn thì mọi con số nó in ra đều treo.
+
+**H4 sau H3** — mở thêm lớp nguồn chỉ đáng làm khi cổng đã đáng tin.
 
 **H5 chạy song song** — nó chờ bạn, không chặn tôi.
+
+**H2 cần bạn quyết** — hai hệ điều phối cùng tồn tại là nợ, không phải dự phòng.
 
 ---
 
@@ -148,13 +175,30 @@ lượng đọc):
 
 ---
 
-## 6. Cách đo tiến độ — một con số duy nhất
+## 6. Cách đo tiến độ
 
-Không đo bằng "đã làm bao nhiêu việc". Đo bằng **tỉ lệ lọt của chặng hẹp nhất**:
+**Thước đầu tiên tôi đề xuất là SAI** và ghi lại đây để không ai dùng lại:
+
+> ~~tỉ lệ thông = giả thuyết / cơ chế trong kho = 27,0%~~
+
+Đẩy tỉ số này lên chỉ có nghĩa là đăng ký thêm giả thuyết **không thể phát hiện
+được** — 0/1.132 cơ chế chưa đăng ký vượt nổi MDE. Một thước đo mà cách duy nhất
+để cải thiện là làm điều sai thì là một thước đo hỏng.
+
+**Thước đúng cho việc HOÀN THIỆN HỆ:** đếm phần còn thiếu, và nó hữu hạn —
 
 ```
-tỉ lệ thông = giả thuyết đã đăng ký / cơ chế trong kho
-12/09: 383 / 1.418 = 27,0%
+ [ ] cổng PASS hiệu chuẩn bằng V6 thật            (H3, NẶNG)
+ [ ] 17 PDF ảnh đã OCR                            (H4a, ~100 phút máy)
+ [ ] 166 cơ chế thiếu trường `co_che` đã điền     (lỗ khâu BÓC)
+ [ ] 43 cơ chế theo PHIÊN chạy đúng khung có giờ
+ [ ] 16 EA đặt lệnh thật có template trong mau.py
+ [ ] 4 nguồn thu hoạch = 0 đã sửa
+ [ ] BANKER 3/4 phần còn lại
+ [ ] quyết giữ hay bỏ `dieu_phoi`                 (chủ dự án)
+ [ ] ba con số ở H5 đã khai                       (chủ dự án)
 ```
 
-Dán con số này vào mọi báo cáo. H1 xong mà nó không nhúc nhích thì H1 sai chỗ.
+Chín ô. Hệ hoàn thiện khi cả chín tick. **Không ô nào trong đó là "tìm thêm
+edge"** — đó là việc khác, và nó bị chặn bởi MDE chứ không bởi độ hoàn thiện
+của hệ.
