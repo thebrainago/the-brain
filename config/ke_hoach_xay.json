@@ -429,10 +429,9 @@
     "khong_phai_phan_quyet_am": "DE_QT_EA_NGOAI.json = AM, nhung do la MOT EA tren US500Cash H1 - mot ket qua am le. quan_tri_da_loc.json rong la ket qua cua mot BO LOC khac, khong phai cua phep thu train/holdout o tren."
    },
    "viec_ngay": [
-    "DO LAI MDE voi phi = 0 cho YH_NASDAQ va SP500, roi so lai. Hien dang so Sharpe-khong-phi voi MDE-co-phi - khong nhat quan.",
-    "Chay _thu_chuoi_dai.py cho vai dai dien khac cua 89 nhom (khong phai ca 89 - chung tuong quan rat cao), de xem ho loc xu huong co dong nhat khong.",
-    "Neu ho nay giu duoc: no KHAC z5/quantora o cho no khong phu thuoc che do (10/11 giai doan duong tren NASDAQ). Do moi la ung vien 'co che' dau tien.",
-    "Nhung phai tra loi: tren CFD co phi 5,8%/nam thi no con lai gi? Do la cau hoi ve CONG CU, va no quyet dinh nhieu hon tin hieu."
+    "XONG sau phep thu. Khoi 7 co the dong voi ket luan: khong co duong vong qua MDE, va moi thu tim duoc deu la hien tuong che do.",
+    "CAU HOI CON LAI cho chu du an, va no la cau hoi ve CONG CU chu khong ve tin hieu: voi phi qua dem CFD ~5,8%/nam, mua-giu SP500 99 nam chi con 0,37%/nam. Cong cu an het. Neu muon giu chan troi dai thi phai doi cong cu (futures? ETF? co phieu?), khong phai doi tin hieu.",
+    "Neu van muon o lai CFD: chan troi phai NGAN (thang/quy), va luc do MDE cao hon nua - tuc chi nhung edge RAT lon moi thay duoc. Do la mot lua chon co the, nhung phai noi ro la lua chon chu khong phai phat hien."
    ],
    "ket_qua_placebo_trailing": {
     "trang_thai": "AM",
@@ -568,9 +567,10 @@
      "2. xep hang cap        AM   0/3 ma; 77-93% cap BAT KY hon he don -> '39/45' la ti le nen",
      "3. gop deu khong chon  AM   Calmar x4 so voi he don NHUNG thua mua-giu 0/3 ma",
      "4. z5 tren chuoi dai   AM   -0,141 tren 55,5 nam · -0,081 tren 98,6 nam · 0/48 o tren MDE",
-     "5. quantora chuoi dai  AM   0,18x MDE tren 55,5 nam · 0,09x tren 98,6 nam · 0/6 o tren MDE"
+     "5. quantora chuoi dai  AM   0,18x MDE tren 55,5 nam · 0,09x tren 98,6 nam · 0/6 o tren MDE",
+     "6. quet ca kho chuoi dai  AM   131/1239 'vuot MDE' nhung do la 89 duong vi the cua CUNG MOT y (long khi tren MA), va tren NUA HOLDOUT thi khong cai nao vuot MDE: NASDAQ 0,391 vs mua-giu 0,392 (bang nhau), SP500 -0,175 vs +0,232 (thua)."
     ],
-    "mot_cau": "Khong co duong vong nao qua tuong MDE trong nhung thu da thu, va CA HAI he tung duoc coi la 'song sot' deu la hien tuong che do chu khong phai co che ben vung.",
+    "mot_cau": "Sau sau phep thu: khong co duong vong nao qua tuong MDE, va CA BA ho co che tung co ve song (quay-ve-trung-binh, xu huong ban, loc xu huong mua) deu la hien tuong che do o BA thoi ky khac nhau. Tren nua holdout cua chuoi dai nhat, khong co gi vuot MDE va thu tot nhat chi BANG mua-giu.",
     "dieu_nay_KHONG_noi_gi": "No KHONG noi rang khong the kiem tien. Mot edge phu thuoc che do van chay duoc trong che do cua no. No noi rang: (a) dung goi chung la 'co che', (b) phai co dieu kien TAT theo che do, (c) size theo rui ro che do dao chieu, (d) dung ky vong chung song sot ngoai che do.",
     "huong_tiep_theo_de_xuat": "Hai he song o HAI che do nguoc nhau la mot dau hieu, khong phai mot ket qua. Cau hoi dung tiep theo khong con la 'tim them edge' ma la 'nhan ra dang o che do nao'. NHUNG phai canh giac: chia giai doan SAU KHI nhin du lieu la khop chuyen in-sample. Bat ky he chuyen-che-do nao cung phai co quy tac nhan che do dinh nghia TRUOC, va placebo tren chinh quy tac do."
    },
@@ -615,8 +615,35 @@
      "nhung_van_con_le_thuoc": "So sanh Sharpe-khong-phi voi MDE-co-phi la KHONG NHAT QUAN (MDE trong cache tinh voi chi phi). Con so 1,44x va 0,29x o tren deu mang van de do. Muon ket luan chac thi phai do lai MDE voi cung cau hinh chi phi."
     },
     "doc_the_nao": "NASDAQ: uu the MANH va co hinh dang dung - cao nguyen 6/6, 10/11 giai doan duong ke ca thap nien 70. SP500 99 nam: uu the MONG - Sharpe 0,510 so voi 0,424, va no LAM GIAM loi suat (4,83% so voi 6,32%), chi thang nho cat sut giam. Am lien tuc 1992-2016.\nDay la hieu ung TRUNG BINH DONG DINH THOI DIEM da duoc tai lieu hoa rong rai (Faber 2007 va ca dong tai lieu 200-day MA). Viec no la THU DA BIET la diem CONG cho do ben, khong phai diem tru - mot hieu ung that thi phai co nguoi khac cung thay.",
-    "dieu_quan_trong_nhat_ve_thuc_te": "Voi phi qua dem THAT cua CFD (~5,8%/nam), tren chan troi nhieu thap ky thi KHONG CO GI chay duoc, ke ca mua-giu (SP500 0,37%/nam). Cong cu quan trong hon tin hieu. Dieu nay khop voi ket luan cu cua du an: phi qua dem la chi phi quyet dinh, khong phai spread."
-   }
+    "dieu_quan_trong_nhat_ve_thuc_te": "Voi phi qua dem THAT cua CFD (~5,8%/nam), tren chan troi nhieu thap ky thi KHONG CO GI chay duoc, ke ca mua-giu (SP500 0,37%/nam). Cong cu quan trong hon tin hieu. Dieu nay khop voi ket luan cu cua du an: phi qua dem la chi phi quyet dinh, khong phai spread.",
+    "SUA_LAI_SAU_KHI_KHOP_CO_MAU": {
+     "van_de": "`do_luc.mde_cua` tinh MDE tren NUA HOLDOUT (`DL.hai_nua(df, 0.6)[1]`), khong tren ca chuoi. YH_NASDAQ: MDE 0,541 la cua 5.598 bar, trong khi toi do Sharpe tren ca 13.995 bar. Khong cung co mau thi ti so 1,44x vo nghia - cung ho loi voi viec so mot CUC DAI voi tung ban le trong placebo trailing.",
+     "do_lai_tren_DUNG_nua_holdout": {
+      "YH_NASDAQ_2004_2026_5598_bar": {
+       "rsi_ma_buy": 0.391,
+       "mean_reversion_z5": 0.337,
+       "quantora_sell": -0.123,
+       "MUA_GIU": 0.392,
+       "mde": 0.541
+      },
+      "SP500_1987_2026_9902_bar": {
+       "rsi_ma_buy": -0.175,
+       "mean_reversion_z5": 0.269,
+       "quantora_sell": -0.167,
+       "MUA_GIU": 0.232,
+       "mde": 0.813
+      }
+     },
+     "ket_luan_sua_lai": "KHONG co cai nao vuot MDE tren nua holdout cua ca hai chuoi.\n  NASDAQ 2004-2026: rsi_ma_buy 0,391 so voi mua-giu 0,392 - BANG NHAU. Bo loc xu huong khong them gi o thoi ky hien dai.\n  SP500 1987-2026: rsi_ma_buy -0,175 so voi mua-giu +0,232 - bo loc LAM HAI.\nUu the do duoc o luot truoc (Sharpe 0,778 tren ca 55 nam) den TOAN BO tu nua DAU du lieu, tuc giai doan truoc ~1990.",
+     "vay_ho_LOC_XU_HUONG_cung_la_hien_tuong_che_do": "Ba co che, ba thoi ky:\n  quantora (ban, xu huong)        song truoc 1987\n  rsi_ma_buy (loc xu huong, mua)  song truoc ~1990\n  z5 (mua dip, quay ve TB)        song sau 2002\nKhop voi tai lieu ben ngoai: hieu ung dinh thoi diem bang trung binh dong suy giam sau khi no tro nen pho bien. Khong co cai nao la 'co che ben vung'."
+    }
+   },
+   "ba_loi_phep_so_da_mac_trong_mot_phien": [
+    "so MOT CUC DAI (tot nhat cua 40) voi TUNG BAN GIA LE -> p 0,0249 thay vi 0,5958",
+    "dua chuoi PHAN TRAM vao `_sut_giam` von nhan LAI USD tren VON -> sut giam mua-giu US100 ra 0,4% thay vi 35,5%",
+    "so Sharpe tren CA CHUOI (13.995 bar) voi MDE tinh tren NUA HOLDOUT (5.598 bar) -> ti so 1,44x thay vi duoi 1",
+    "MAU CHUNG cua ca ba: hai ve cua phep so khong cung co mau/don vi/pham vi. Truoc khi tin mot ti so, hoi 'hai ve nay co cung nen khong'."
+   ]
   }
  },
  "tuong_mde": {
