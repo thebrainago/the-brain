@@ -1,53 +1,66 @@
-# TIEP TUC NGAY MAI — chot phien 2026-09-12 00:14
+# TIEP TUC MAI — chot 12/09/2026 (toi)
 
-khoi 2-6 DAT: so bai hoc, anh chup bat bien, tang cham tien, 4 cua vao, khoa tester + de quan tri len EA ngoai. Cuu mat du lieu kho co che 1149->3
+## Trang thai luc tat may
 
-## Trang thai do duoc luc chot
-> May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
-> duoc. Cot "doi" so voi moc 2026-09-07.
+    kho co che      2.741   (dau phien 2.554, +187 tu 684 file chi bao)
+    mo coi that     5       (dau phien 26)
+    tren duong chay 148     (dau phien 107)
+    EVO             22/22 TOT
+    o C             8,7 GB trong   (co luc chi con 177 MB)
+    nao.db-wal      0 MB    (da gop truoc khi tat - DUNG bo qua buoc nay)
+    git             dc4e038
 
-| chi so | hom nay | doi |
-|---|---:|---:|
-| file test (lab) | 96 | +8 |
-| ham test (lab) | 1379 | +150 |
-| file test (ds/) | 82 |  |
-| bang gia .parquet | 269 |  |
-| dong so FDR | 1807 |  |
-|   trong do bac bo | 406 |  |
-| ung vien xep hang | 567 |  |
-| ban doc da thu | 10115 | +3457 |
-| co che trong thu vien | 32 |  |
-| van de con mo | 12 |  |
-|   muc NANG | 3 |  |
-| viec dang CHO | 2 |  |
-| file .py o goc lab | 260 | +17 |
+## BON VIEC DAU PHIEN, THEO THU TU
 
-- co DUNG_LAI: **CO (he dang nam im)**
-- viec CHO theo loai: bac_cau_san=1, mt5_tick=1
-- commit hom nay:
-```
-5feb032 go ky tu 0x08 con sot trong doc_hieu - chinh du an DA CO bai kiem bat no
-b99022f MAT DU LIEU: kho co che tut 1.149 -> 3 vi doc-sua-ghi khong khoa. Da cuu va da va.
-```
-- file dang doi luc chot: **3**
+**1. Chay lai pheu `to_hop` — no CHUA XONG.** Lan chay toi 12/09 moi den CHANG 1
+(258.020 o) thi bi dung de tat may. Day la lan dau tien pheu chay tren du lieu
+DA SUA, nen bang xep hang cu (`reports/TO_HOP.json`) van la bang BAN - 120/120
+dong dau deu la EURMXN voi so lieu tu 68 bar hong.
 
-## Mot doan doc la hieu ca phien
+    python -u -m nhan.to_hop --khung D1
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+Xong thi cham tien: `python -c "...V._cham_tien(print)"` hoac `b vong`.
 
-## Viec tiep theo, theo thu tu
+**2. Xem hai bai test do.** Bo test chot phien chay den 94% thi bi cat. Truoc do
+thay 2 chu `F` (o moc 59% va 63%) nhung chua kip biet la bai nao:
 
-1. (chua dien)
+    python b.py test
 
-## KHONG DUOC QUEN
-- **Cột kết quả GIỐNG HỆT NHAU trên toàn bảng** = tham số không có tác dụng.
-  Dấu hiệu chung của 3 lỗi khác nhau trong phiên này. Kiểm đầu tiên.
-- **EA nhiều-slot có thể làm lệch số — CHƯA TRUY RA.** Mọi đường vốn của ma trận
-  ghép đều từ EA đó. Cần đối chứng switch-vs-nhiều-slot trên D1 với 40 slot.
-- **Khử trùng theo ĐƯỜNG VỐN**, không theo tên: 11-13% kho là hàng trùng.
-- **Script ở `lab/` phải có `__main__` guard.**
-- **2012-2015 H4 và D1 có số bar y hệt nhau** — MT5 dồn bar NGÀY vào khung nhỏ.
-- **Phí qua đêm 1,56 bps/đêm ĐẮT HƠN spread 0,98**; chân BÁN được **nhận** +0,18.
-- **`Model=0/4` không chạy được**: M1 trong máy chỉ có từ 2026-05-28.
-- **`PositionClosePartial` dưới min lot thất bại IM LẶNG** — chạy ở lot ≥ 2× min.
-- Tài khoản MT5 là **THẬT** (trade_mode=2), số dư 0, và là **CHUẨN** không phải Micro.
+**3. Boc not kho.** Duong LLM da thong (ghim thang AiBox, tran 20.000/ngay) va
+684 file chi bao vua ra 93%. Con **97% kho chua boc**: 5.131 file ma nguon,
+3.771 tai lieu hoc thuat. Hang doi da nap san:
+
+    python day_viec.py        # xao_ma_llm, xao_hoc_thuat, noi_sinh_da_ma...
+
+**4. Dua quan tri vi the ra tester.** 49/75 khai bao dich duoc sang MQL5 va chen
+duoc vao EA ngoai. Buoc con thieu la DO that:
+
+    b quan-tri --cap <EA.mq5> --khai-bao <i>   # sinh cap GOC / CO-QUAN-TRI
+    # roi dua CA HAI vao `chay_tester_kho.py` va so ket qua
+
+## CAN NGUOI (30 giay)
+
+`b xa` roi nhan bot Telegram mot cau. `chat_id` van la 0 nen EVO KHONG gui duoc
+canh bao nao ra ngoai - khi he cam VPS chay nhieu thang, do la duong duy nhat
+de biet co chuyen.
+
+## BA BAY MOI, DA CHAN NHUNG PHAI NHO
+
+1. **Dia day khong hien ra nhu loi dia.** No hien ra nhu "boc 684 file -> 0 co
+   che" va "viec XONG rc=0 ma kho khong doi". Thu pham 12/09 la `nao.db-wal`
+   1,4 GB. Kiem `b don-dia` + `b evo` TRUOC khi tin bat ky ket qua rong nao.
+
+2. **Bo do ket luan "khong co" phai chung minh no THAY DUOC cai co.** Ban do mu
+   ba lan trong mot phien, moi lan deu bao mo coi cho thu dang chay hang ngay.
+   Lay ba thu chac chan CO ra thu truoc khi tin mot danh sach rong.
+
+3. **Du lieu hong bom ra ket qua dep.** EURMXN 68 bar lech x10 -> "942%/nam"
+   tren mot cap di ngang 9 nam, va no chiem tron 120/120 dong dau bang. Da sua
+   (neo truot) va da noi cong `dung_duoc` vao pheu, nhung con so nao qua dep
+   thi van phai truy nguoc ve du lieu truoc.
+
+## DUONG DAN DA DOI
+
+`data/` va `data_khung/` gio nam o **F:\TheBrain_luu\**. Doi cho duoc bang bien
+`BRAIN_DATA` / `BRAIN_CACHE`, hoac sua `nhan/duong_dan.py`. Neu o F khong gan
+duoc thi hai ham do tu roi ve duong cu trong lab.
