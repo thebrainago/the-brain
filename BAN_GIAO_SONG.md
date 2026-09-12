@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_da_ma.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
 - `z5_nam.log`: hai nam tot nhat chiem 54% tong lai
 - git: 5eea5aa ban giao: da co %/nam that; viec mai la danh muc 3 chi so My + doi chieu mua-giu chi so + demo
 ### 2026-09-06 23:05:54 — chup trang thai
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 8216, 0 phut), dieu_khien_xa.py (pid 15316, 319 phut)
 - `qwen_ultra.log`: ~ 12:25:04 | san sang 0 | CPU   18% / muc tieu 95%  |  con 15.5 loi  |  dang chay 1  [MANG:1]
 - git: e81fc01 QUANTLAB: toan hang moc_ky + quet 1.133 cau hinh - edge CO THAT nhung mong hon phi
+### 2026-09-12 12:32:55 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10068, 0 phut), dieu_khien_xa.py (pid 15316, 326 phut)
+- `qwen_ultra.log`: ~ 12:31:04 | san sang 0 | CPU    6% / muc tieu 95%  |  con 17.9 loi  |  dang chay 1  [MANG:1]
+- git: 8919af8 Quet TRAIN/HOLDOUT 18 ma: chon THAM SO tren train khong mang thong tin - va XM_US100CASH la mot cu cherry-pick cua chinh toi

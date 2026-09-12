@@ -111,8 +111,33 @@ def _mot(args) -> list[dict]:
     cp = c[0] if isinstance(c, tuple) else c
     ctr = CP.tu_du_lieu(ma, tr); ctr = ctr[0] if isinstance(ctr, tuple) else ctr
     cho = CP.tu_du_lieu(ma, ho); cho = cho[0] if isinstance(cho, tuple) else cho
-    bh_tr = B._chi_so(MP.mua_giu(tr, ctr, ma=ma, khung=khung))
-    bh = B._chi_so(MP.mua_giu(ho, cho, ma=ma, khung=khung))
+    # MOC CHO MOT HE LONG/SHORT PHAI LA max(MUA-GIU, BAN-GIU, 0), khong phai
+    # rieng mua-giu. Chu du an chi ra 12/09: *"mua giu the test ban giu chua? Ma
+    # voi cac cap fx dau can lam test hold vi no dau phai chi so"*.
+    #
+    # Hai ly do, ca hai do duoc:
+    #  1. BAN-GIU KHONG PHAI ANH GUONG cua mua-giu, vi phi qua dem BAT DOI XUNG.
+    #     EURGBP D1 holdout: mua -2,75% / ban -0,41% (chan mua tra 2,84%/nam,
+    #     chan ban NHAN 0,19%). USDJPY: mua +2,32% / ban -9,16%.
+    #  2. CAP FX KHONG CO DRIFT CAU TRUC nhu chi so. Do that: tren FX **ca hai
+    #     chan deu AM** (EURGBP -2,75/-0,41 · EURUSD -2,73/-0,08 · GBPUSD
+    #     -2,00/-0,88 · AUDCAD -0,26/-3,84). Nen so mot he FX voi "mua-giu" la
+    #     so voi mot moc THUA - va do la ly do 5 ma "hon mua-giu" o lan quet
+    #     truoc chi la LO IT HON.
+    # Them so 0 (giu tien mat): neu ca hai chan deu am thi khong giao dich la
+    # lua chon tot hon ca hai.
+    def _moc(d, cpx):
+        mua = B._chi_so(MP.chay(d, np.ones(len(d)), cpx, ma=ma, khung=khung,
+                                don_bay=1.0, gop="so_hoc"))
+        ban = B._chi_so(MP.chay(d, -np.ones(len(d)), cpx, ma=ma, khung=khung,
+                                don_bay=1.0, gop="so_hoc"))
+        tot = mua if mua["cagr"] >= ban["cagr"] else ban
+        return {**tot, "ben": "mua" if mua["cagr"] >= ban["cagr"] else "ban",
+                "mua_cagr": mua["cagr"], "ban_cagr": ban["cagr"],
+                "cagr_moc": max(mua["cagr"], ban["cagr"], 0.0)}
+
+    bh_tr = _moc(tr, ctr)
+    bh = _moc(ho, cho)
     ra = []
     for z in Z:
         for giu in GIU:
@@ -141,8 +166,7 @@ def _mot(args) -> list[dict]:
                         "tr_sharpe": round(htr["sharpe"], 3),
                         "tr_so_lenh": n_tr,
                         "tr_cagr_khop_dd": round(htr["cagr"] * 100 * Ltr, 3),
-                        "tr_hon_mua_giu": bool(htr["cagr"] * Ltr > bh_tr["cagr"]
-                                               and htr["sharpe"] > bh_tr["sharpe"]),
+                        "tr_hon_mua_giu": bool(htr["cagr"] * Ltr > bh_tr["cagr_moc"]),
                         # --- HOLDOUT: con so DUY NHAT duoc tin
                         "cagr_pct": round(hho["cagr"] * 100, 3),
                         "sharpe": round(hho["sharpe"], 3),
@@ -152,8 +176,12 @@ def _mot(args) -> list[dict]:
                         "cagr_khop_dd": round(hho["cagr"] * 100 * Lho, 3),
                         "bh_cagr_pct": round(bh["cagr"] * 100, 3),
                         "bh_sharpe": round(bh["sharpe"], 3),
-                        "hon_mua_giu": bool(hho["cagr"] * Lho > bh["cagr"]
-                                            and hho["sharpe"] > bh["sharpe"]),
+                        "bh_ben": bh["ben"],
+                        "bh_mua_cagr_pct": round(bh["mua_cagr"] * 100, 3),
+                        "bh_ban_cagr_pct": round(bh["ban_cagr"] * 100, 3),
+                        "moc_cagr_pct": round(bh["cagr_moc"] * 100, 3),
+                        # HON MOC = hon max(mua-giu, ban-giu, tien mat) o cung sut giam
+                        "hon_mua_giu": bool(hho["cagr"] * Lho > bh["cagr_moc"]),
                     })
                 except Exception:
                     continue
