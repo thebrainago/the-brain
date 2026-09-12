@@ -287,15 +287,26 @@
   "V1_dao_UK100": {
    "ma": "V1_dao_UK100",
    "so_lan_chay": 1,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "TESTER",
    "lenh": [
     "_dem_ghep.py",
     "UK100Cash"
    ],
    "bat_dau": 1789172617.9302533,
-   "xong": null,
-   "ma_thoat": null
+   "xong": 1789175486.4697652,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "lan dau do tren ma nay: 0 chan ban duong. Da dat moc, lan sau so sanh duoc.",
+    "so": {
+     "so_dong": 0,
+     "chan_ban": 0,
+     "chan_ban_truoc": null
+    }
+   },
+   "log": "m @ DD 22.44%  lot 0.0/0.0/8.0 | 50-60%   --\n   mua_giu  dinh  -0.32%/nam @ DD  7.20%  lot 0.1/0.0/0.0 | DD20  -0.99%/nam @ DD 21.25%  lot 0.3/0.0/0.0 | 50-60%  -2.88%/nam @ DD 54.47%  lot 0.8/0.0/0.0\n-> reports/DEM_D_RA_TIEN_UK100Cash.json\n=== cap 4: bearish_engulfing__dao + fvg_sell_reversal\n   ghep     dinh  16.67%/nam @ DD 22.06%  lot 0.0/16.0/16.0 | DD20  16.67%/nam @ DD 22.06%  lot 0.0/16.0/16.0 | 50-60%   --\n   chi_a    dinh  13.89%/nam @ DD 28.70%  lot 0.0/16.0/0.0 | DD20   8.87%/nam @ DD 22.44%  lot 0.0/8.0/0.0 | 50-60%   --\n   chi_b    dinh   7.22%/nam @ DD 25.78%  lot 0.0/0.0/16.0 | DD20   5.80%/nam @ DD 22.28%  lot 0.0/0.0/12.0 | 50-60%   --\n   mua_giu  dinh  -0.32%/nam @ DD  7.20%  lot 0.1/0.0/0.0 | DD20  -0.99%/nam @ DD 21.25%  lot 0.3/0.0/0.0 | 50-60%  -2.88%/nam @ DD 54.47%  lot 0.8/0.0/0.0\n-> reports/DEM_D_RA_TIEN_UK100Cash.json\n=== cap 5: bearish_engulfing__dao + mua_rsi14_tren_70__dao\n   ghep     dinh  16.67%/nam @ DD 22.06%  lot 0.0/16.0/16.0 | DD20  16.67%/nam @ DD 22.06%  lot 0.0/16.0/16.0 | 50-60%   --\n   chi_a    dinh  13.89%/nam @ DD 28.70%  lot 0.0/16.0/0.0 | DD20   8.87%/nam @ DD 22.44%  lot 0.0/8.0/0.0 | 50-60%   --\n   chi_b    dinh   7.22%/nam @ DD 25.78%  lot 0.0/0.0/16.0 | DD20   5.80%/nam @ DD 22.28%  lot 0.0/0.0/12.0 | 50-60%   --\n   mua_giu  dinh  -0.32%/nam @ DD  7.20%  lot 0.1/0.0/0.0 | DD20  -0.99%/nam @ DD 21.25%  lot 0.3/0.0/0.0 | 50-60%  -2.88%/nam @ DD 54.47%  lot 0.8/0.0/0.0\n-> reports/DEM_D_RA_TIEN_UK100Cash.json\n\nXONG sau 47.5 phut\n",
+   "giay": 2868.5
   },
   "P2_ghep_da_tai_san": {
    "ma": "P2_ghep_da_tai_san",
@@ -913,11 +924,15 @@
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789174804.415833
+   "luc": 1789175486.4256864
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,
    "luc": 1789145447.6875875
+  },
+  "chan_ban_V1_dao_UK100": {
+   "gia_tri": 0,
+   "luc": 1789175486.4632452
   }
  },
  "ngay_da_mo": [

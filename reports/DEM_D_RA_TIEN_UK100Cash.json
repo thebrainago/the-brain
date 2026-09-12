@@ -405,5 +405,362 @@
    },
    "dd_max_do_duoc": 96.9
   }
+ },
+ {
+  "a": "aegis_quantum_lite__dao",
+  "b": "bearish_engulfing__dao",
+  "r": -0.0003,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.06,
+    "lenh": 204,
+    "pct_nam": 16.67,
+    "sharpe": 1.474322
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.06,
+    "lenh": 204,
+    "pct_nam": 16.67,
+    "sharpe": 1.474322
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.17
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 25.78,
+    "lenh": 86,
+    "pct_nam": 7.22,
+    "sharpe": 1.325934
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     12.0,
+     0.0
+    ],
+    "dd": 22.28,
+    "lenh": 86,
+    "pct_nam": 5.8,
+    "sharpe": 1.330281
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 25.78
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 28.7,
+    "lenh": 118,
+    "pct_nam": 13.89,
+    "sharpe": 1.650802
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     8.0
+    ],
+    "dd": 22.44,
+    "lenh": 118,
+    "pct_nam": 8.87,
+    "sharpe": 1.716207
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.7
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 7.2,
+    "lenh": 6,
+    "pct_nam": -0.32,
+    "sharpe": -0.010567
+   },
+   "dd20": {
+    "lot": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "dd": 21.25,
+    "lenh": 6,
+    "pct_nam": -0.99,
+    "sharpe": -0.010124
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 54.47,
+    "lenh": 6,
+    "pct_nam": -2.88,
+    "sharpe": -0.008672
+   },
+   "dd_max_do_duoc": 96.9
+  }
+ },
+ {
+  "a": "bearish_engulfing__dao",
+  "b": "fvg_sell_reversal",
+  "r": -0.0003,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.06,
+    "lenh": 204,
+    "pct_nam": 16.67,
+    "sharpe": 1.474322
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.06,
+    "lenh": 204,
+    "pct_nam": 16.67,
+    "sharpe": 1.474322
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.17
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 28.7,
+    "lenh": 118,
+    "pct_nam": 13.89,
+    "sharpe": 1.650802
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     8.0,
+     0.0
+    ],
+    "dd": 22.44,
+    "lenh": 118,
+    "pct_nam": 8.87,
+    "sharpe": 1.716207
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.7
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 25.78,
+    "lenh": 86,
+    "pct_nam": 7.22,
+    "sharpe": 1.325934
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     12.0
+    ],
+    "dd": 22.28,
+    "lenh": 86,
+    "pct_nam": 5.8,
+    "sharpe": 1.330281
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 25.78
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 7.2,
+    "lenh": 6,
+    "pct_nam": -0.32,
+    "sharpe": -0.010567
+   },
+   "dd20": {
+    "lot": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "dd": 21.25,
+    "lenh": 6,
+    "pct_nam": -0.99,
+    "sharpe": -0.010124
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 54.47,
+    "lenh": 6,
+    "pct_nam": -2.88,
+    "sharpe": -0.008672
+   },
+   "dd_max_do_duoc": 96.9
+  }
+ },
+ {
+  "a": "bearish_engulfing__dao",
+  "b": "mua_rsi14_tren_70__dao",
+  "r": -0.0003,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.06,
+    "lenh": 204,
+    "pct_nam": 16.67,
+    "sharpe": 1.474322
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 22.06,
+    "lenh": 204,
+    "pct_nam": 16.67,
+    "sharpe": 1.474322
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.17
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 28.7,
+    "lenh": 118,
+    "pct_nam": 13.89,
+    "sharpe": 1.650802
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     8.0,
+     0.0
+    ],
+    "dd": 22.44,
+    "lenh": 118,
+    "pct_nam": 8.87,
+    "sharpe": 1.716207
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 28.7
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 25.78,
+    "lenh": 86,
+    "pct_nam": 7.22,
+    "sharpe": 1.325934
+   },
+   "dd20": {
+    "lot": [
+     0.0,
+     0.0,
+     12.0
+    ],
+    "dd": 22.28,
+    "lenh": 86,
+    "pct_nam": 5.8,
+    "sharpe": 1.330281
+   },
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 25.78
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "dd": 7.2,
+    "lenh": 6,
+    "pct_nam": -0.32,
+    "sharpe": -0.010567
+   },
+   "dd20": {
+    "lot": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "dd": 21.25,
+    "lenh": 6,
+    "pct_nam": -0.99,
+    "sharpe": -0.010124
+   },
+   "dd_chu_du_an": {
+    "lot": [
+     0.8,
+     0.0,
+     0.0
+    ],
+    "dd": 54.47,
+    "lenh": 6,
+    "pct_nam": -2.88,
+    "sharpe": -0.008672
+   },
+   "dd_max_do_duoc": 96.9
+  }
  }
 ]
