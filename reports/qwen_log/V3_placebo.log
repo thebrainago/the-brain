@@ -1,0 +1,38 @@
+40 co che qua train+holdout -> dich duoc 40
+  bien dich xong: 41 co che x 201 do dich = 8241 pass/symbol
+
+=== US100Cash ...
+  104s
+  41 co che co ket qua | DAT placebo (p<=0,05): 5
+    mean_reversion_z5                          that  1374.58  dich_tv    81.96  p=0.0050
+    quantora_ma_dashboard_sell                 that   324.92  dich_tv  -174.48  p=0.0050
+    rsi_mua_qua_ban                            that   419.76  dich_tv    11.30  p=0.0149
+    martingale_level_1                         that  1266.54  dich_tv    50.98  p=0.0199
+    pine_ichimoku_cloud_close_duoi_ema377_clos that   568.82  dich_tv   151.96  p=0.0249
+
+=== US500Cash ...
+  94s
+  41 co che co ket qua | DAT placebo (p<=0,05): 3
+    engulfing_sell                             that    36.42  dich_tv    -4.09  p=0.0100
+    mean_reversion_z5                          that   245.27  dich_tv     4.77  p=0.0149
+    quantora_ma_dashboard_sell                 that    62.58  dich_tv   -42.30  p=0.0249
+
+=== US30Cash ...
+  104s
+  41 co che co ket qua | DAT placebo (p<=0,05): 6
+    pine_everyday_0003_ema14_close_tre12_duoi_ that  1658.11  dich_tv    25.09  p=0.0100
+    quantora_ma_dashboard_sell                 that   418.10  dich_tv  -248.91  p=0.0100
+    mean_reversion_z5                          that  1392.22  dich_tv   -23.69  p=0.0199
+    dailyzonerecovery_buy                      that  1364.54  dich_tv     1.91  p=0.0299
+    vung_discount_rebound                      that  1610.33  dich_tv   232.95  p=0.0398
+    pine_strategy_macd_and_r_rsi10_tren_51     that   839.29  dich_tv  -539.83  p=0.0398
+
+=== GER40Cash ...
+  125s
+  41 co che co ket qua | DAT placebo (p<=0,05): 4
+    pine_price_action_tradin_rsi7_duoi_30      that   577.62  dich_tv   -34.16  p=0.0100
+    z_score_reversion                          that   430.55  dich_tv   -26.00  p=0.0100
+    mua_khi_gia_duoi_dai_duoi_bollinger        that   430.55  dich_tv   -26.00  p=0.0100
+    phi_bao_hiem_bien_dong_gian_no             that   561.12  dich_tv   -19.21  p=0.0498
+
+-> reports/PLACEBO_RONG.json

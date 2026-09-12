@@ -1,0 +1,416 @@
+[
+ {
+  "a": "grid_ea_pro_rsi_buy_signal",
+  "b": "mua_rsi5_cheo_len_30__dao",
+  "r": -0.0877,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 2.99,
+    "lenh": 198,
+    "pct_nam": 2.34,
+    "sharpe": 2.012569
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.44
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 3.61,
+    "lenh": 66,
+    "pct_nam": 0.99,
+    "sharpe": 1.765728
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.61
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 3.36,
+    "lenh": 132,
+    "pct_nam": 1.47,
+    "sharpe": 2.250581
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.36
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     2.0,
+     0.0,
+     0.0
+    ],
+    "dd": 2.21,
+    "lenh": 6,
+    "pct_nam": 0.31,
+    "sharpe": 0.015173
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.21
+  }
+ },
+ {
+  "a": "mua_rsi5_cheo_len_30__dao",
+  "b": "vung_cung_supply_zone__dao",
+  "r": -0.309,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 5.74,
+    "lenh": 320,
+    "pct_nam": 3.38,
+    "sharpe": 0.833782
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 7.68
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 3.36,
+    "lenh": 132,
+    "pct_nam": 1.47,
+    "sharpe": 2.250581
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.36
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 7.86,
+    "lenh": 188,
+    "pct_nam": 2.16,
+    "sharpe": 0.487259
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 7.86
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     2.0,
+     0.0,
+     0.0
+    ],
+    "dd": 2.21,
+    "lenh": 6,
+    "pct_nam": 0.31,
+    "sharpe": 0.015173
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.21
+  }
+ },
+ {
+  "a": "ema9_cat_xuong_ema21_2__dao",
+  "b": "mua_khi_rsi_10_close_ma200_va_close_ma5",
+  "r": 0.0582,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 3.3,
+    "lenh": 166,
+    "pct_nam": 1.87,
+    "sharpe": 2.235324
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.3
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 2.29,
+    "lenh": 60,
+    "pct_nam": 0.87,
+    "sharpe": 2.981114
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.29
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 2.66,
+    "lenh": 106,
+    "pct_nam": 1.07,
+    "sharpe": 1.935862
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.66
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     2.0,
+     0.0,
+     0.0
+    ],
+    "dd": 2.21,
+    "lenh": 6,
+    "pct_nam": 0.31,
+    "sharpe": 0.015173
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.21
+  }
+ },
+ {
+  "a": "ema9_cat_xuong_ema21__dao",
+  "b": "mua_khi_rsi_10_close_ma200_va_close_ma5",
+  "r": 0.0582,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 3.3,
+    "lenh": 166,
+    "pct_nam": 1.87,
+    "sharpe": 2.235324
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.3
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 2.29,
+    "lenh": 60,
+    "pct_nam": 0.87,
+    "sharpe": 2.981114
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.29
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 2.66,
+    "lenh": 106,
+    "pct_nam": 1.07,
+    "sharpe": 1.935862
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.66
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     2.0,
+     0.0,
+     0.0
+    ],
+    "dd": 2.21,
+    "lenh": 6,
+    "pct_nam": 0.31,
+    "sharpe": 0.015173
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.21
+  }
+ },
+ {
+  "a": "ema_rsi_risk_ea__dao",
+  "b": "mua_khi_rsi_10_close_ma200_va_close_ma5",
+  "r": 0.0582,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 3.3,
+    "lenh": 166,
+    "pct_nam": 1.87,
+    "sharpe": 2.235324
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.3
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 2.29,
+    "lenh": 60,
+    "pct_nam": 0.87,
+    "sharpe": 2.981114
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.29
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 2.66,
+    "lenh": 106,
+    "pct_nam": 1.07,
+    "sharpe": 1.935862
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.66
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     2.0,
+     0.0,
+     0.0
+    ],
+    "dd": 2.21,
+    "lenh": 6,
+    "pct_nam": 0.31,
+    "sharpe": 0.015173
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.21
+  }
+ },
+ {
+  "a": "ema9_cat_xuong_ema21_2__dao",
+  "b": "mua_rsi5_cheo_len_30__dao",
+  "r": -0.0555,
+  "ghep": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     16.0
+    ],
+    "dd": 3.15,
+    "lenh": 192,
+    "pct_nam": 2.23,
+    "sharpe": 2.580081
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.35
+  },
+  "chi_a": {
+   "dinh": {
+    "lot": [
+     0.0,
+     16.0,
+     0.0
+    ],
+    "dd": 2.29,
+    "lenh": 60,
+    "pct_nam": 0.87,
+    "sharpe": 2.981114
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.29
+  },
+  "chi_b": {
+   "dinh": {
+    "lot": [
+     0.0,
+     0.0,
+     16.0
+    ],
+    "dd": 3.36,
+    "lenh": 132,
+    "pct_nam": 1.47,
+    "sharpe": 2.250581
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 3.36
+  },
+  "mua_giu": {
+   "dinh": {
+    "lot": [
+     2.0,
+     0.0,
+     0.0
+    ],
+    "dd": 2.21,
+    "lenh": 6,
+    "pct_nam": 0.31,
+    "sharpe": 0.015173
+   },
+   "dd20": null,
+   "dd_chu_du_an": null,
+   "dd_max_do_duoc": 2.21
+  }
+ }
+]

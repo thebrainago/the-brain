@@ -383,7 +383,7 @@
      "nay": 0,
      "can": 1,
      "dat": false,
-     "ghi_chu": "Mot he da qua ca hai cong, duoc gan quan tri, va VAN qua sau khi gan."
+     "ghi_chu": "12/09 - HO TRAILING TRUOT PLACEBO. Xem muc ket_qua_placebo_trailing."
     }
    },
    "da_do_truoc_khi_giao_viec": {
@@ -429,10 +429,29 @@
     "khong_phai_phan_quyet_am": "DE_QT_EA_NGOAI.json = AM, nhung do la MOT EA tren US500Cash H1 - mot ket qua am le. quan_tri_da_loc.json rong la ket qua cua mot BO LOC khac, khong phai cua phep thu train/holdout o tren."
    },
    "viec_ngay": [
-    "V7_placebo_trailing: chay placebo cho RIENG ho trailing tren he nen da co. Day la phep thu quyet dinh - 5/42 chi hon ky vong ngau nhien 2,4 lan, nen phai co placebo moi biet la bien do that hay dam nhieu. Bo placebo da co san.",
-    "Neu placebo DAT: dua trailing thanh mot TRUONG cua khai bao trong doc_kho(), de no thua huong ca pheu (MDE, FDR, holdout, khu trung) thay vi song trong kho rieng.",
-    "Neu placebo KHONG DAT: ghi am kem ly do; don bay con lai la GHEP (39/45 cap giu hang o holdout trong khi he don tut 822 -> 40)."
-   ]
+    "XONG - V7_placebo_trailing: AM. Trailing KHONG duoc dua vao doc_kho(); no chi la mot cuc dai cua 40 lan thu, va ban gia con cho cuc dai cao hon.",
+    "TIEP THEO - GHEP. Do da co va manh hon trailing nhieu: 39/45 cap giu hang o holdout trong khi he don tut 822 -> 40. Ghep khong phai vuot MDE tung chan - no CONG chan, nen cung di vong qua tuong giong nhu quan tri dinh lam.",
+    "Truoc khi chay: ap dung dung bai hoc vua roi - moi con so 'tot nhat trong N' phai so voi phan bo MAX-cua-N cua ban gia, khong so voi tung ban le."
+   ],
+   "ket_qua_placebo_trailing": {
+    "trang_thai": "AM",
+    "luc": "2026-09-12",
+    "nguon": "reports/PLACEBO_QUAN_TRI.json · _placebo_quan_tri.py",
+    "so_ban_gia": 400,
+    "ty_le_that": "5/40 = 12,5% hon ca hai nua",
+    "ty_le_gia": "31/400 = 7,8% hon ca hai nua",
+    "p_dem": 0.1988,
+    "p_bien_do": 0.5958,
+    "phan_vi_max_ban_gia": {
+     "50%": 4385,
+     "90%": 4385,
+     "95%": 4752
+    },
+    "moc_that_tot_nhat": 3870,
+    "ket_luan": "Ban that tot nhat (+3.870$/nam) nam DUOI TRUNG VI cua phan bo max ban gia (+4.385$). Tuc lay 40 bo nut TRAILING NGAU NHIEN roi chon cai tot nhat thi THUONG duoc nhieu hon bo tot nhat ma 40 tac gia EA that da chon. Ca hai tieu chi deu truot: dem p=0,199 · bien do p=0,596.",
+    "day_la_AM_chu_khong_phai_CHUA_DO_DUOC": "Bo do chay du 400 ban, va no BIET NOI KHONG theo chieu nguoc: ti le ban gia la 7,8% chu khong phai 0%, nen khong phai truong hop 'null factory 0% lot'.",
+    "LOI_DA_SUA_TRONG_CHINH_PHEP_THU": "Ban dau script in p = 0,0249 'DAT'. Sai phep so: no dem bao nhieu ban gia LE dat >= moc, trong khi moc la CAI TOT NHAT TRONG 40 ban that - mot cuc dai. Cung ho loi voi chay 40 phep thu roi bao p cua cai tot nhat ma khong hieu chinh. So dung la max-cua-40 voi max-cua-40: 0,0249 -> 0,5958. Da va trong _placebo_quan_tri.py, kem ghi chu day du."
+   }
   }
  },
  "tuong_mde": {

@@ -1,0 +1,108 @@
+
+########## CHANG A: mo kho = 1172 co che
+
+=== moKho train  2016.06.01 -> 2021.06.01
+  1118 pass, 67.6s
+=== moKho holdout  2021.06.01 -> 2026.07.29
+  1118 pass, 30.7s
+-> reports/DEM_A_MO_KHO_JP225Cash.json
+
+chan DUONG ca hai doan : 203
+chan AM   ca hai doan : 243
+
+########## CHANG B: dao chieu 243 chan am
+
+=== dao train  2016.06.01 -> 2021.06.01
+  244 pass, 24.5s
+=== dao holdout  2021.06.01 -> 2026.07.29
+  244 pass, 30.6s
+-> reports/DEM_B_DAO_JP225Cash.json
+
+dao chieu -> duong ca hai doan: 108/243
+
+TONG CHAN DUONG: 311 (goc 203 + dao 108)
+-> reports/DEM_CHAN_DUONG_JP225Cash.json
+
+########## CHANG C: ma tran tuong quan 311 chan
+
+=== lo 0: 40 slot
+=== lo 1: 40 slot
+=== lo 2: 40 slot
+=== lo 3: 40 slot
+=== lo 4: 40 slot
+=== lo 5: 40 slot
+=== lo 6: 40 slot
+=== lo 7: 31 slot
+
+ghep duoc 311 chuoi von
+-> reports/DEM_C_MATRAN_JP225Cash.json
+
+--- 10 he DON tot nhat ---
+mua_rsi5_cheo_len_30__dao                          10.10    0.02%    584.4
+mua_khi_rsi_10_close_ma200_va_close_ma5             8.35    0.01%    583.9
+vung_cung_supply_zone__dao                         18.95    0.03%    561.0
+ema9_cat_xuong_ema21_2__dao                         5.88    0.01%    520.4
+ema9_cat_xuong_ema21__dao                           5.88    0.01%    520.4
+ema_rsi_risk_ea__dao                                5.88    0.01%    520.4
+vao_ban_khi_quet_cao_roi_dao_gia__dao              29.79    0.06%    511.4
+liquidity_sweep_detector                           22.68    0.05%    472.7
+afstar_sell_3_4_8_4__dao                           31.19    0.07%    439.6
+ma_cross_short__dao                                30.33    0.07%    433.5
+
+--- 15 CAP tot nhat ---
+grid_ea_pro_rsi_buy_signal     mua_rsi5_cheo_len_30__dao       -0.088     16.83    0.02%    951.0
+mua_rsi5_cheo_len_30__dao      vung_cung_supply_zone__dao      -0.309     29.05    0.03%    944.1
+ema9_cat_xuong_ema21_2__dao    mua_khi_rsi_10_close_ma200_va_  +0.058     14.23    0.02%    895.0
+ema9_cat_xuong_ema21__dao      mua_khi_rsi_10_close_ma200_va_  +0.058     14.23    0.02%    895.0
+ema_rsi_risk_ea__dao           mua_khi_rsi_10_close_ma200_va_  +0.058     14.23    0.02%    895.0
+ema9_cat_xuong_ema21_2__dao    mua_rsi5_cheo_len_30__dao       -0.056     15.98    0.02%    894.1
+ema9_cat_xuong_ema21__dao      mua_rsi5_cheo_len_30__dao       -0.056     15.98    0.02%    894.1
+ema_rsi_risk_ea__dao           mua_rsi5_cheo_len_30__dao       -0.056     15.98    0.02%    894.1
+mua_khi_rsi_10_close_ma200_va_ vung_cung_supply_zone__dao      +0.288     27.30    0.03%    850.6
+afstar_sell_3_4_8_4__dao       mua_rsi5_cheo_len_30__dao       -0.258     41.29    0.05%    846.4
+bb_stochrsi_reversal_buy__dao  vung_cung_supply_zone__dao      -0.275     26.75    0.03%    838.6
+mua_rsi5_cheo_len_30__dao      phi_bao_hiem_bien_dong_gian_no  -0.052     27.84    0.03%    807.1
+afstar_sell_3_4_8_4__dao       bb_stochrsi_reversal_buy__dao   -0.242     38.99    0.05%    792.2
+bb_stochrsi_reversal_buy__dao  grid_ea_pro_rsi_buy_signal      -0.122     14.53    0.02%    768.8
+breakout_xu_huong_giam__dao    mua_rsi5_cheo_len_30__dao       -0.004     19.67    0.03%    765.4
+
+########## CHANG D: cong ra tien o sut giam 50-60%
+
+=== cap 0: grid_ea_pro_rsi_buy_signal + mua_rsi5_cheo_len_30__dao
+   ghep     dinh   2.34%/nam @ DD  2.99%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --
+   chi_a    dinh   0.99%/nam @ DD  3.61%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   1.47%/nam @ DD  3.36%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --
+   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --
+-> reports/DEM_D_RA_TIEN_JP225Cash.json
+=== cap 1: mua_rsi5_cheo_len_30__dao + vung_cung_supply_zone__dao
+   ghep     dinh   3.38%/nam @ DD  5.74%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --
+   chi_a    dinh   1.47%/nam @ DD  3.36%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   2.16%/nam @ DD  7.86%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --
+   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --
+-> reports/DEM_D_RA_TIEN_JP225Cash.json
+=== cap 2: ema9_cat_xuong_ema21_2__dao + mua_khi_rsi_10_close_ma200_va_clos
+   ghep     dinh   1.87%/nam @ DD  3.30%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --
+   chi_a    dinh   0.87%/nam @ DD  2.29%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   1.07%/nam @ DD  2.66%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --
+   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --
+-> reports/DEM_D_RA_TIEN_JP225Cash.json
+=== cap 3: ema9_cat_xuong_ema21__dao + mua_khi_rsi_10_close_ma200_va_clos
+   ghep     dinh   1.87%/nam @ DD  3.30%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --
+   chi_a    dinh   0.87%/nam @ DD  2.29%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   1.07%/nam @ DD  2.66%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --
+   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --
+-> reports/DEM_D_RA_TIEN_JP225Cash.json
+=== cap 4: ema_rsi_risk_ea__dao + mua_khi_rsi_10_close_ma200_va_clos
+   ghep     dinh   1.87%/nam @ DD  3.30%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --
+   chi_a    dinh   0.87%/nam @ DD  2.29%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   1.07%/nam @ DD  2.66%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --
+   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --
+-> reports/DEM_D_RA_TIEN_JP225Cash.json
+=== cap 5: ema9_cat_xuong_ema21_2__dao + mua_rsi5_cheo_len_30__dao
+   ghep     dinh   2.23%/nam @ DD  3.15%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --
+   chi_a    dinh   0.87%/nam @ DD  2.29%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --
+   chi_b    dinh   1.47%/nam @ DD  3.36%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --
+   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --
+-> reports/DEM_D_RA_TIEN_JP225Cash.json
+
+XONG sau 31.0 phut

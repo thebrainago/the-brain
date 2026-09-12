@@ -4,31 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
-- `loi_ra_D1.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LOI_RA_D1.json
-- `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
-- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
-- `tham_dinh_v2.log`: da go 12 cau khoi kho
-- git: 5a484c8 2026-09-06 (chieu): tham dinh co_che + bao cao + ban giao
-### 2026-09-06 18:46:09 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 4700, 0 phut)
-- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
-- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
-- `tester_z5.log`: -> reports/TESTER_Z5.json
-- `tham_dinh_v2.log`: da go 12 cau khoi kho
-- git: 660c08b ban giao: he da PASS ra tester lan dau + viec 0 la truy chenh lech 463 vs 305 lenh
-### 2026-09-06 19:27:11 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17540, 0 phut)
-- `boc_lai_vung.log`: tu choi vao[0]: vung.tao[0]: trong mot bar 'low' <= 'close' LUON dun 2
-- `quet_D1_0906c.log`: TONG: {'LOAI': 15772, 'CHUA_DU_LUC': 18123, 'NEN_GOP': 10697, 'SAN_SANG_V4': 12} (416.6s, 8 tien trinh)
-- `tester_da_ma.log`: -> reports/TESTER_DA_MA.json
-- `tester_holdout.log`: duong o CA HAI doan: 1/27
-- `tester_kho.log`: UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM
-- `tester_z5.log`: -> reports/TESTER_Z5.json
-- git: f2768f9 ban giao: tester la cong chinh; 3 viec deu tren tester, khong quet Python nua
-### 2026-09-06 19:48:05 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 19360, 0 phut)
 - `so_mua_giu.log`: THANG mua-giu o cung sut giam: 43/268
@@ -404,3 +379,28 @@
 - `test_day_du.log`: .......................................................................................
 - `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
 - git: 3857117 bao cao 12/09 + do MDE: 83/156 muc do ma CU sinh ra (van tay khong co phien ban ma)
+### 2026-09-12 08:11:50 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16200, 0 phut), dieu_khien_xa.py (pid 15316, 65 phut)
+- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
+- `hang_doi_toan_hang.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HANG_DOI_TOAN_HANG.json
+- `lam_moi_mde.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LAM_MOI_MDE.json
+- `ly_do_tu_choi.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LY_DO_TU_CHOI.json
+- `mau_khong_tach_cap.log`: - Or is this normal when we finally cross under the 200-day moving average after a long time being above it
+- `qwen_ultra.log`: 3. **`ghi_nhat_ky`**: Da ghi nhat ky chuan xac: con so 0 sinh ra tu phep thu dem d
+- `test_day_du.log`: .......................................................................................
+- `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
+- git: b1c2ff5 bao cao 12/09 phan 2: dong khoi 1, mo khoi 7, placebo trailing dang chay
+### 2026-09-12 08:47:58 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14656, 0 phut), dieu_khien_xa.py (pid 15316, 102 phut)
+- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
+- `hang_doi_toan_hang.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HANG_DOI_TOAN_HANG.json
+- `lam_moi_mde.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LAM_MOI_MDE.json
+- `ly_do_tu_choi.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LY_DO_TU_CHOI.json
+- `mau_khong_tach_cap.log`: - Or is this normal when we finally cross under the 200-day moving average after a long time being above it
+- `placebo_quan_tri.log`: ... 150/400  hon ca hai 11/150  (2483s)
+- `qwen_ultra.log`: [x] TT_chi_bao             DAT  |  log co: co che, khai bao, kho
+- `test_day_du.log`: .......................................................................................
+- `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
+- git: b1c2ff5 bao cao 12/09 phan 2: dong khoi 1, mo khoi 7, placebo trailing dang chay

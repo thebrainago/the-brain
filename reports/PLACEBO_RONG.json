@@ -198,13 +198,13 @@
    "trung_vi": 151.96,
    "p": 0.0249
   },
-  "mua_khi_gia_duoi_dai_duoi_bollinger": {
+  "z_score_reversion": {
    "that": 58.97,
    "so_dich": 200,
    "trung_vi": -4.07,
    "p": 0.3831
   },
-  "z_score_reversion": {
+  "mua_khi_gia_duoi_dai_duoi_bollinger": {
    "that": 58.97,
    "so_dich": 200,
    "trung_vi": -4.07,
@@ -428,13 +428,13 @@
    "trung_vi": 5.89,
    "p": 0.6766
   },
-  "mua_khi_gia_duoi_dai_duoi_bollinger": {
+  "z_score_reversion": {
    "that": 12.7,
    "so_dich": 200,
    "trung_vi": -3.88,
    "p": 0.3682
   },
-  "z_score_reversion": {
+  "mua_khi_gia_duoi_dai_duoi_bollinger": {
    "that": 12.7,
    "so_dich": 200,
    "trung_vi": -3.88,
@@ -700,13 +700,13 @@
    "trung_vi": -20.65,
    "p": 0.8657
   },
-  "mua_khi_gia_duoi_dai_duoi_bollinger": {
+  "z_score_reversion": {
    "that": -464.36,
    "so_dich": 200,
    "trung_vi": -24.64,
    "p": 0.9204
   },
-  "z_score_reversion": {
+  "mua_khi_gia_duoi_dai_duoi_bollinger": {
    "that": -464.36,
    "so_dich": 200,
    "trung_vi": -24.64,
@@ -747,61 +747,61 @@
   "bullish_order_block_reversal": {
    "that": -318.08,
    "so_dich": 200,
-   "trung_vi": 121.54,
+   "trung_vi": 121.34,
    "p": 0.7861
   },
   "buy_liquidity_sweep": {
    "that": 42.96,
    "so_dich": 200,
-   "trung_vi": 63.26,
+   "trung_vi": 64.2,
    "p": 0.5124
   },
   "phan_ky_nghich_mua": {
    "that": -413.06,
    "so_dich": 200,
-   "trung_vi": 13.06,
+   "trung_vi": 12.27,
    "p": 0.806
   },
   "bullish_fvg_pullback": {
    "that": -89.98,
    "so_dich": 200,
-   "trung_vi": 6.67,
+   "trung_vi": 0.58,
    "p": 0.607
   },
   "fair_value_gap_bullish": {
    "that": -156.64,
    "so_dich": 200,
-   "trung_vi": 41.81,
+   "trung_vi": 41.51,
    "p": 0.6915
   },
   "smc_buy_zone_reversal": {
    "that": -89.54,
    "so_dich": 200,
-   "trung_vi": 186.12,
+   "trung_vi": 183.35,
    "p": 0.6866
   },
   "vung_discount_rebound": {
    "that": -369.31,
    "so_dich": 200,
-   "trung_vi": 169.27,
+   "trung_vi": 162.52,
    "p": 0.8955
   },
   "pine_cm_rsi_2_strat_close_tre4_duoi_sma5_close_tre4": {
    "that": -895.19,
    "so_dich": 200,
-   "trung_vi": -79.96,
+   "trung_vi": -80.76,
    "p": 0.9453
   },
   "thoat_lenh_vao_lenh_xu_huong_giam": {
    "that": 370.98,
    "so_dich": 200,
-   "trung_vi": -206.43,
+   "trung_vi": -206.17,
    "p": 0.1194
   },
   "ichimoku_scalper_bullish": {
    "that": -577.48,
    "so_dich": 200,
-   "trung_vi": 83.71,
+   "trung_vi": 81.83,
    "p": 0.9154
   },
   "mean_reversion_z5": {
@@ -813,49 +813,49 @@
   "vung_cau_demand_zone": {
    "that": -207.06,
    "so_dich": 200,
-   "trung_vi": 17.29,
+   "trung_vi": 19.18,
    "p": 0.6816
   },
   "dailyzonerecovery_buy": {
    "that": 360.72,
    "so_dich": 200,
-   "trung_vi": 6.36,
+   "trung_vi": 4.12,
    "p": 0.2239
   },
   "ea_original": {
    "that": -596.74,
    "so_dich": 200,
-   "trung_vi": -391.84,
+   "trung_vi": -392.11,
    "p": 0.6567
   },
   "macd_stochastic_doub_close_duoi_sma100_close": {
    "that": 382.77,
    "so_dich": 200,
-   "trung_vi": 59.8,
-   "p": 0.0995
+   "trung_vi": 59.72,
+   "p": 0.0945
   },
   "macd_stochastic_doub_sma3_cheo_len_sma2": {
    "that": 28.72,
    "so_dich": 200,
-   "trung_vi": -157.46,
+   "trung_vi": -158.04,
    "p": 0.3433
   },
   "phi_bao_hiem_bien_dong_gian_no": {
    "that": 561.12,
    "so_dich": 200,
-   "trung_vi": -19.32,
+   "trung_vi": -19.21,
    "p": 0.0498
   },
   "martingale_level_1": {
    "that": 246.06,
    "so_dich": 200,
-   "trung_vi": -202.59,
+   "trung_vi": -203.12,
    "p": 0.1244
   },
   "pine_cm_rsi_2_strat_close_tre1_duoi_sma5_close_tre1": {
    "that": -371.04,
    "so_dich": 200,
-   "trung_vi": -217.82,
+   "trung_vi": -222.1,
    "p": 0.6269
   },
   "pine_cm_rsi_2_strat_close_tre3_duoi_sma5_close_tre3": {
@@ -873,7 +873,7 @@
   "pine_strategy_macd_and_r_rsi10_tren_51": {
    "that": -537.61,
    "so_dich": 200,
-   "trung_vi": -287.7,
+   "trung_vi": -284.01,
    "p": 0.7264
   },
   "gamma_duong_keo_ve": {
@@ -897,7 +897,7 @@
   "pine_everyday_0003_ema14_close_tre12_duoi_sma56_close_tre1": {
    "that": 386.46,
    "so_dich": 200,
-   "trung_vi": -38.91,
+   "trung_vi": -38.46,
    "p": 0.0647
   },
   "giai_chap_vol_target": {
@@ -909,7 +909,7 @@
   "quantora_ma_dashboard_sell": {
    "that": -443.64,
    "so_dich": 200,
-   "trung_vi": -216.97,
+   "trung_vi": -217.0,
    "p": 0.806
   },
   "pine_price_action_tradin_rsi7_duoi_30": {
@@ -921,20 +921,20 @@
   "macd_crossover": {
    "that": -1.14,
    "so_dich": 200,
-   "trung_vi": -27.92,
-   "p": 0.4328
+   "trung_vi": -27.91,
+   "p": 0.4279
   },
   "pine_ichimoku_cloud_close_duoi_ema377_close": {
    "that": -5.47,
    "so_dich": 200,
-   "trung_vi": 13.63,
-   "p": 0.5473
+   "trung_vi": 11.32,
+   "p": 0.5423
   },
   "pine_ichimoku_cloud_close_duoi_ema144_close": {
    "that": 100.58,
    "so_dich": 200,
-   "trung_vi": -34.11,
-   "p": 0.2687
+   "trung_vi": -35.16,
+   "p": 0.2637
   },
   "van_toc_gia_ong_hoc": {
    "that": -461.92,
@@ -945,31 +945,31 @@
   "sma4_10_cross_up": {
    "that": -139.66,
    "so_dich": 200,
-   "trung_vi": -39.78,
+   "trung_vi": -39.85,
    "p": 0.6368
   },
   "engulfing_sell": {
    "that": 138.35,
    "so_dich": 200,
-   "trung_vi": -69.34,
+   "trung_vi": -69.35,
    "p": 0.0647
-  },
-  "mua_khi_gia_duoi_dai_duoi_bollinger": {
-   "that": 430.55,
-   "so_dich": 200,
-   "trung_vi": -26.16,
-   "p": 0.01
   },
   "z_score_reversion": {
    "that": 430.55,
    "so_dich": 200,
-   "trung_vi": -26.16,
+   "trung_vi": -26.0,
+   "p": 0.01
+  },
+  "mua_khi_gia_duoi_dai_duoi_bollinger": {
+   "that": 430.55,
+   "so_dich": 200,
+   "trung_vi": -26.0,
    "p": 0.01
   },
   "ema_cross_ea5": {
    "that": 186.56,
    "so_dich": 200,
-   "trung_vi": -82.04,
+   "trung_vi": -82.01,
    "p": 0.0697
   },
   "rsi_mua_qua_ban": {
@@ -987,8 +987,8 @@
   "__mua_giu__": {
    "that": 330.98,
    "so_dich": 200,
-   "trung_vi": 331.02,
-   "p": 0.7512
+   "trung_vi": 331.03,
+   "p": 0.9005
   }
  }
 }

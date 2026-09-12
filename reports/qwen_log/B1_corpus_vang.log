@@ -1,18 +1,8 @@
 === QWEN HET CONG SUAT (doc 300 x boc 200) x 6 vong ===
-co che truoc: 1075 | tai lieu chua khai thac: 9788
+co che truoc: 1263 | tai lieu chua khai thac: 10152
 
-vong  1 | doc   0/300 | ung vien  66 | co che 1075 -> 1149 (+74) | 954s
-         boc: {'ban': 66, 'co_che_moi': 12, 'tu_choi': 43, 'loi': 1, 'giay': 529.4, 'giay_moi_ban': 8.0, 'suat_tren_100_ban': 18.2, 'ly_do_tu_choi': {"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 10, 'trung dieu kien': 7, 'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 6, "thieu truong bat buoc 'vao'": 4, "['suy bien tren MOI tai san do duoc (chuoi kiem 100.000%, XA": 2, "vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'clos": 2, 'vao[3]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.720%, XAU": 2}}
-vong  2 | doc   0/300 | ung vien  19 | co che 1149 -> 20 (+-1129) | 887s
-         boc: {'ban': 19, 'co_che_moi': 25, 'tu_choi': 31, 'loi': 0, 'giay': 208.2, 'giay_moi_ban': 11.0, 'suat_tren_100_ban': 131.6, 'ly_do_tu_choi': {"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU": 10, "thieu truong bat buoc 'vao'": 8, "ra[0] phai co 'trai' va 'phai'": 3, "vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'clos": 3, 'vao[0].phai: toan hang phai la dict': 2, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.640%, XAU": 1, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.860%, XAU": 1, 'trung dieu kien': 1}}
-vong  3 | doc   0/300 | ung vien   0 | co che 20 -> 1181 (+1161) | 655s
+vong  1 | doc   0/300 | ung vien   0 | co che 1263 -> 1263 (+0) | 463s
          boc: {'ban': 0, 'co_che_moi': 0}
-  !! ung vien 0 NHUNG kho con 3411 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.
+  !! ung vien 0 NHUNG kho con 3415 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.
 
-=== XONG 2497s | co che 1075 -> 1181 (+106) ===
-oc (chuoi kiem 0.000%, XAUU": 10, 'vao[0].phai: toan hang phai la dict': 10, 'trung dieu kien': 5, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.740%, XAU": 2, "thieu truong bat buoc 'vao'": 1, '["da co co che ten \'mean_reversion_long\'"]': 1, '["da co co che ten \'mean_reversion_short\'"]': 1, "['suy bien tren MOI tai san do duoc (chuoi kiem 99.980%, XAU": 1}}
-vong  4 | doc   0/300 | ung vien   0 | co che 34 -> 1181 (+1147) | 623s
-         boc: {'ban': 0, 'co_che_moi': 0}
-  !! ung vien 0 NHUNG kho con 3411 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.
-
-=== XONG 3808s | co che 891 -> 1181 (+290) ===
+=== XONG 463s | co che 1263 -> 1263 (+0) ===

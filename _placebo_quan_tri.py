@@ -99,17 +99,40 @@ def main(argv: list[str]) -> int:
 
     gia_ca_hai = [x for x in ban_gia if x["hon_tr"] > 0 and x["hon_ho"] > 0]
     ty_le_gia = len(gia_ca_hai) / max(len(ban_gia), 1)
-    # p mot phia: bao nhieu ban gia dat bien do >= ban that tot nhat
     moc = bien_do_that[0] if bien_do_that else float("inf")
-    vuot = sum(1 for x in ban_gia if x["hon_ho"] >= moc)
-    p_bien_do = (vuot + 1) / (len(ban_gia) + 1)
+
+    # SO CUNG CO MAU - khong so MOT CUC DAI voi TUNG BAN LE.
+    #
+    # Ban dau viet: dem bao nhieu ban gia LE dat >= moc -> 9/400 -> p = 0,0249
+    # "DAT". SAI. `moc` la CAI TOT NHAT TRONG 40 ban that, tuc mot cuc dai; dem
+    # ban gia le la dem tung rut don. Cung ho loi voi viec chay 40 phep thu roi
+    # bao p cua cai tot nhat ma khong hieu chinh.
+    #
+    # Phep so dung: rut 40 ban gia (co hoan lai), lay MAX, lap nhieu lan, roi hoi
+    # moc that nam o dau trong phan bo max do. Doi han: p 0,0249 -> 0,5924, va
+    # moc that (+3.870$) nam DUOI trung vi cua phan bo max gia (+4.385$).
+    rb = random.Random(HAT + 1)
+    N_BOOT = 20000
+    max_gia = sorted(max(rb.choice(ban_gia)["hon_ho"] for _ in range(len(that)))
+                     for _ in range(N_BOOT))
+    p_bien_do = (sum(1 for m in max_gia if m >= moc) + 1) / (N_BOOT + 1)
+
+    # Tieu chi DEM cung phai so cung co mau, khong dat hai ty le tho canh nhau.
+    vuot_dem = sum(
+        1 for _ in range(N_BOOT)
+        if sum(1 for _ in range(len(that)) if rb.random() < ty_le_gia)
+        >= len(that_ca_hai))
+    p_dem = (vuot_dem + 1) / (N_BOOT + 1)
 
     ket = {"so_that": len(that), "that_hon_ca_hai": len(that_ca_hai),
            "ty_le_that": round(ty_le_that, 4),
            "so_ban_gia": len(ban_gia), "gia_hon_ca_hai": len(gia_ca_hai),
            "ty_le_gia": round(ty_le_gia, 4),
            "bien_do_that_lon_nhat": moc,
-           "ban_gia_vuot_bien_do": vuot, "p_bien_do": round(p_bien_do, 4),
+           "p_bien_do": round(p_bien_do, 4), "p_dem": round(p_dem, 4),
+           "phan_vi_max_gia": {"50%": max_gia[N_BOOT // 2],
+                               "90%": max_gia[int(0.90 * N_BOOT)],
+                               "95%": max_gia[int(0.95 * N_BOOT)]},
            "giay": round(time.time() - t0, 1)}
     RA.parent.mkdir(exist_ok=True)
     RA.write_text(json.dumps({**ket, "ban_gia": ban_gia}, ensure_ascii=False,
@@ -120,10 +143,14 @@ def main(argv: list[str]) -> int:
     print(f"BAN GIA hon ca hai {len(gia_ca_hai):3d}/{len(ban_gia):3d} = {ty_le_gia:6.1%}")
     if ty_le_gia <= 0:
         print("  !! ban gia ra 0% - kiem lai bo do truoc khi mung, no dung KHO GIA TRI THAT")
-    print(f"\nbien do: ban that tot nhat {moc:+.0f}$/nam · "
-          f"{vuot}/{len(ban_gia)} ban gia dat toi do -> p = {p_bien_do:.4f}")
+    print(f"\nDEM      p = {p_dem:.4f}   P(>= {len(that_ca_hai)} trong {len(that)} "
+          f"| ti le gia {ty_le_gia:.1%})")
+    print(f"BIEN DO  p = {p_bien_do:.4f}   ban that tot nhat {moc:+.0f}$/nam so voi "
+          f"phan bo MAX-cua-{len(that)} ban gia")
+    print(f"         max ban gia: 50% {max_gia[N_BOOT//2]:+.0f}$ · "
+          f"90% {max_gia[int(.9*N_BOOT)]:+.0f}$ · 95% {max_gia[int(.95*N_BOOT)]:+.0f}$")
     print("PHAN QUYET:", "DAT - ban that noi len khoi dam"
-          if (p_bien_do <= 0.05 and ty_le_that > ty_le_gia)
+          if (p_bien_do <= 0.05 and p_dem <= 0.05)
           else "KHONG DAT - nam trong dam")
     print(f"\n-> {RA}")
     return 0

@@ -145,7 +145,7 @@
   "TT_boc": {
    "ma": "TT_boc",
    "so_lan_chay": 6,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -154,8 +154,8 @@
     "250"
    ],
    "bat_dau": 1789172557.730524,
-   "xong": null,
-   "ma_thoat": null,
+   "xong": 1789176248.1107404,
+   "ma_thoat": 0,
    "cong": {
     "ket": "DAT",
     "vi_sao": "log co: co che, KHAU DOC HONG",
@@ -163,22 +163,22 @@
      "so_dong": 0
     }
    },
-   "log": "2, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 6, \"thieu truong bat buoc 'vao'\": 3, \"vao[2]: trong mot bar 'close' <= 'high' LUON dung, nen 'clos\": 2, \"ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph\": 1, \"vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close\": 1, \"vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'clos\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.980%, XAU\": 1, \"['suy bien tren MOI tai san do duoc (chuoi kiem 100.000%, XA\": 1}}\nvong  3 | doc   2/400 | ung vien  62 | co che 865 -> 888 (+23) | 1047s\n         boc: {'ban': 82, 'co_che_moi': 23, 'tu_choi': 67, 'loi': 1, 'giay': 524.7, 'giay_moi_ban': 6.4, 'suat_tren_100_ban': 28.0, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 25, \"thieu truong bat buoc 'vao'\": 9, \"ho '1' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'pha_v\": 3, \"ho '-1' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'pha_\": 3, \"vao[0]: gia luon DUONG nen 'gia cheo_len 0' la hang so - ngu\": 2, \"thieu truong bat buoc 'ho'\": 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'macd_signal\\\\\\' khong biet, v': 2, 'vao[1]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2}}\nvong  4 | doc   0/400 | ung vien   0 | co che 888 -> 891 (+3) | 501s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3411 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 3258s | co che 696 -> 891 (+195) ===\n",
-   "giay": 3269.9,
+   "log": ": {\"ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph\": 65, \"vao[0]: gia luon DUONG nen 'gia > 0' la hang so - nguong tha\": 5, \"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 4, 'vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'xroc2_vg\\\\\\' khong biet, va k': 2, 'trung dieu kien': 2, \"thieu truong bat buoc 'vao'\": 2, \"vao[0]: trong mot bar 'high' >= 'low' LUON dung, nen 'high <\": 1}}\nvong  4 | doc   0/400 | ung vien  97 | co che 1216 -> 1240 (+24) | 1190s\n         boc: {'ban': 102, 'co_che_moi': 24, 'tu_choi': 68, 'loi': 0, 'giay': 487.4, 'giay_moi_ban': 4.8, 'suat_tren_100_ban': 23.5, 'ly_do_tu_choi': {'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 14, \"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 13, '[\\'chay loi: KeyError: \"chi bao \\\\\\'xxdpo\\\\\\' khong biet, va khon': 8, '[\\'chay loi: KeyError: \"chi bao \\\\\\'custom\\\\\\' khong biet, va kho': 4, \"thieu truong bat buoc 'vao'\": 3, \"['suy bien tren MOI tai san do duoc (chuoi kiem 99.900%, XAU\": 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'wpr\\\\\\' khong biet, va khong ': 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'khac\\\\\\' khong biet, va khong': 2}}\nvong  5 | doc   0/400 | ung vien   0 | co che 1240 -> 1263 (+23) | 350s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3415 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 3673s | co che 1181 -> 1263 (+82) ===\n",
+   "giay": 3690.4,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "TT_san_nguon": {
    "ma": "TT_san_nguon",
    "so_lan_chay": 4,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "MANG",
    "lenh": [
     "-c",
     "import sys; sys.path.insert(0,'.')\nfrom nhan import day_chuyen as D\nprint(D.mot_luot('US500CASH'))"
    ],
    "bat_dau": 1789172617.9943235,
-   "xong": null,
-   "ma_thoat": null,
+   "xong": 1789176167.9368138,
+   "ma_thoat": 0,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet",
    "cong": {
     "ket": "DAT",
@@ -187,8 +187,8 @@
      "so_dong": 0
     }
    },
-   "log": "'lay_ve': 20, 'moi': 20}], 'nguon_bo_qua_vi_loi': ['rss_reddit_quant']}, 'he_pho_thong': {'tu_khoa': 30, 'nguon_chay': 9, 'tai_lieu_moi': 73, 'giay': 666.7, 'chi_tiet': [{'nguon': 'github', 'lay_ve': 63, 'moi': 1}, {'nguon': 'lean_algo', 'lay_ve': 40, 'moi': 0}, {'nguon': 'tradingview_pine', 'lay_ve': 147, 'moi': 0}, {'nguon': 'mql5_code', 'lay_ve': 111, 'moi': 71}, {'nguon': 'blog', 'lay_ve': 27, 'moi': 0}, {'nguon': 'arxiv', 'lay_ve': 100, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 698, 'moi': 0}, {'nguon': 'stackexchange', 'lay_ve': 12, 'moi': 0}, {'nguon': 'hackernews', 'lay_ve': 33, 'moi': 1}]}, 'mql5': {'tai_duoc': 171, 'ghi_moi': 171}, 'giay': 2351.2}, 'boc': {'doc': {'tai_lieu': 500, 'doc_duoc': 0, 'hong': 500, 'giay': 325.9, 'giay_moi_ban': 0.65, 'theo_nguon': {}}, 'boc': {'ban': 13, 'co_che_moi': 3, 'tu_choi': 4, 'loi': 0, 'giay': 91.3, 'giay_moi_ban': 7.0, 'suat_tren_100_ban': 23.1, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 3, \"thieu truong bat buoc 'vao'\": 1}}, 'co_che_truoc': 865, 'co_che_sau': 891, 'giay': 559.2}, 'giay': 2915.9}\ne GIONG HET nhau - dieu kien khong mang thong t': 7, \"ho 'khac' khong thuoc ['bien_dong', 'dong_tien', 'lich', 'ph\": 6, '[\\'chay loi: KeyError: \"chi bao \\\\\\'wpr\\\\\\' khong biet, va khong ': 4, \"vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'clos\": 3, 'vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2}}, 'co_che_truoc': 727, 'co_che_sau': 857, 'giay': 972.9}, 'giay': 3382.1}\n",
-   "giay": 2929.2
+   "log": "guon': 'arxiv', 'lay_ve': 0, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 162, 'moi': 0}, {'nguon': 'stackexchange', 'lay_ve': 224, 'moi': 0}, {'nguon': 'hackernews', 'lay_ve': 249, 'moi': 0}], 'nguon_bo_qua_vi_loi': ['rss_reddit_quant']}, 'he_pho_thong': {'tu_khoa': 30, 'nguon_chay': 7, 'tai_lieu_moi': 109, 'giay': 650.8, 'chi_tiet': [{'nguon': 'github', 'lay_ve': 221, 'moi': 33}, {'nguon': 'lean_algo', 'lay_ve': 40, 'moi': 0}, {'nguon': 'tradingview_pine', 'lay_ve': 135, 'moi': 0}, {'nguon': 'mql5_code', 'lay_ve': 114, 'moi': 74}, {'nguon': 'blog', 'lay_ve': 27, 'moi': 0}, {'nguon': 'arxiv', 'lay_ve': 0, 'moi': 0}, {'nguon': 'openalex', 'lay_ve': 698, 'moi': 2}]}, 'mql5': {'tai_duoc': 180, 'ghi_moi': 180}, 'giay': 2542.7}, 'boc': {'doc': {'tai_lieu': 500, 'doc_duoc': 0, 'hong': 500, 'giay': 344.4, 'giay_moi_ban': 0.69, 'theo_nguon': {}}, 'boc': {'ban': 102, 'co_che_moi': 23, 'tu_choi': 54, 'loi': 0, 'giay': 561.9, 'giay_moi_ban': 5.5, 'suat_tren_100_ban': 22.5, 'ly_do_tu_choi': {\"['suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUU\": 14, \"thieu truong bat buoc 'vao'\": 9, 'trung dieu kien': 5, 'vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 4, 'vao[1]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, '[\\'chay loi: KeyError: \"chi bao \\\\\\'demarker\\\\\\' khong biet, va k': 2, 'vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong t': 2, \"thieu truong bat buoc 'ho'\": 2}}, 'co_che_truoc': 1216, 'co_che_sau': 1263, 'giay': 988.2}, 'giay': 3539.1}\n",
+   "giay": 3549.9
   },
   "C1_toan_hang_chet": {
    "ma": "C1_toan_hang_chet",
@@ -225,16 +225,25 @@
   "TT_chi_bao": {
    "ma": "TT_chi_bao",
    "so_lan_chay": 4,
-   "trang_thai": "DANG_CHAY",
+   "trang_thai": "XONG",
    "lan": "LLM",
    "lenh": [
     "nhan/doc_chi_bao.py",
     "--that"
    ],
    "bat_dau": 1789172557.7519443,
-   "xong": null,
-   "ma_thoat": null,
-   "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
+   "xong": 1789177650.941798,
+   "ma_thoat": 0,
+   "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet",
+   "cong": {
+    "ket": "DAT",
+    "vi_sao": "log co: co che, khai bao, kho",
+    "so": {
+     "so_dong": 0
+    }
+   },
+   "log": "CHAY THAT tren 445 file chi bao (thu lai 2 lan)\n  ... 20/445 (197s)\n  ... 40/445 (628s)\n  ... 60/445 (675s)\n  ... 80/445 (865s)\n  ... 100/445 (1037s)\n  ... 120/445 (1255s)\n  ... 140/445 (1392s)\n  ... 160/445 (1817s)\n  ... 180/445 (1976s)\n  ... 200/445 (2048s)\n  ... 220/445 (2327s)\n  ... 240/445 (2601s)\n  ... 260/445 (2865s)\n  ... 280/445 (2969s)\n  ... 300/445 (3317s)\n  ... 320/445 (3406s)\n  ... 340/445 (3796s)\n  ... 360/445 (3859s)\n  ... 380/445 (4072s)\n  ... 400/445 (4240s)\n  ... 420/445 (4624s)\n  ... 440/445 (4693s)\n  !! 15/445 file chua do duoc: CHUA DO - HTTP 502: {\"error\": {\"message\": \"Remote end closed connectio\n  da ghi tho -> reports/doc_chi_bao_tho.json\n\n  file ra co che   : 407/445 (91%)\n  khai bao qua kiem: 652\n  cong tu choi 132 : suy bien tren MOI tai san do duoc (chuoi kiem \n  cong tu choi  60 : vao[0] phai co 'trai' va 'phai'\n  cong tu choi  34 : vao[0]: hai ve GIONG HET nhau - dieu kien khon\n  cong tu choi  21 : vao[0]: trong mot bar 'close' <= 'high' LUON d\n  cong tu choi  20 : chay loi: KeyError: \"chi bao 'khong_dien_dat_d\n  them vao kho     : 135\n",
+   "giay": 5093.2
   },
   "V1_dao_GER40": {
    "ma": "V1_dao_GER40",
@@ -263,8 +272,8 @@
   },
   "B1_corpus_vang": {
    "ma": "B1_corpus_vang",
-   "so_lan_chay": 3,
-   "trang_thai": "GIAN_DOAN",
+   "so_lan_chay": 4,
+   "trang_thai": "XONG",
    "lan": "LLM",
    "lenh": [
     "_qwen_het_cong_suat.py",
@@ -272,16 +281,18 @@
     "300",
     "200"
    ],
-   "bat_dau": 1789143400.474496,
-   "xong": null,
-   "ma_thoat": null,
+   "bat_dau": 1789176248.1425457,
+   "xong": 1789176729.2809696,
+   "ma_thoat": 0,
    "cong": {
-    "ket": "CHUA_DO_DUOC",
-    "vi_sao": "tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: co che truoc: 693 | tai lieu chua khai thac: 9381\n\nvong  1 | doc 239/300 | ung vien   8 | co che 693 -> 695 (+2) | 444s\n         boc: {'ban': 8, 'co_che_moi': 2, 'tu_choi': 2, 'loi': 0, 'giay': 69.0, 'giay_moi_ban': 8.6, 'suat_tren_100_ban': 25.0, 'ly_do_tu_choi': {'trung dieu kien': 2}}\nvong  2 | doc  26/300 | ung vien   0 | co che 695 -> 695 (+0) | 630s\n         boc: {'ban': 0, 'co_che_moi': 0}\n",
-    "so": {}
+    "ket": "DAT",
+    "vi_sao": "log co: co che",
+    "so": {
+     "so_dong": 0
+    }
    },
-   "log": "=== QWEN HET CONG SUAT (doc 300 x boc 200) x 6 vong ===\nco che truoc: 693 | tai lieu chua khai thac: 9381\n\nvong  1 | doc 239/300 | ung vien   8 | co che 693 -> 695 (+2) | 444s\n         boc: {'ban': 8, 'co_che_moi': 2, 'tu_choi': 2, 'loi': 0, 'giay': 69.0, 'giay_moi_ban': 8.6, 'suat_tren_100_ban': 25.0, 'ly_do_tu_choi': {'trung dieu kien': 2}}\nvong  2 | doc  26/300 | ung vien   0 | co che 695 -> 695 (+0) | 630s\n         boc: {'ban': 0, 'co_che_moi': 0}\n",
-   "giay": 1386.3,
+   "log": "=== QWEN HET CONG SUAT (doc 300 x boc 200) x 6 vong ===\nco che truoc: 1263 | tai lieu chua khai thac: 10152\n\nvong  1 | doc   0/300 | ung vien   0 | co che 1263 -> 1263 (+0) | 463s\n         boc: {'ban': 0, 'co_che_moi': 0}\n  !! ung vien 0 NHUNG kho con 3415 tai lieu chua doc - day la KHAU DOC HONG, khong phai het ton kho. Dung de nguoi xem.\n\n=== XONG 463s | co che 1263 -> 1263 (+0) ===\n",
+   "giay": 481.1,
    "ghi_chu": "con DANG_CHAY khi he khoi dong lai - tien trinh da chet"
   },
   "V1_dao_UK100": {
@@ -328,6 +339,56 @@
    },
    "log": "h:cat_xuong_ma_xuat_hien__  -0.09    912.2     54.0\nUS100Cash:ma_crossover_buy__dao    US100Cash:sellsignal__dao           -0.01    894.2     81.4\nUS100Cash:ma_crossover_buy__dao    US100Cash:dailyzonerecovery_sell__  -0.01    833.2     58.7\nUS100Cash:ma_crossover_buy__dao    US100Cash:gamma_duong_keo_ve        -0.00    780.4     78.6\nUS100Cash:ma_crossover_buy__dao    US100Cash:pine_everyday_0003_ema14  -0.01    775.7     84.4\nUS100Cash:ma_crossover_buy__dao    US100Cash:sell_liquidity_ob_revers  -0.00    773.5    134.2\n\n[CHEO tai san]  14/15 cap hon he don o holdout | trung vi holdout 71.5 (he don 42.6)\nchan A                             chan B                                  r    train  holdout\nUS100Cash:ma_crossover_buy__dao    US500Cash:dailyzonerecovery_sell__  -0.02    843.8    159.4\nUS100Cash:ma_crossover_buy__dao    US500Cash:macd_crossover            -0.00    815.2     46.4\nUS100Cash:ma_crossover_buy__dao    US30Cash:momentum_bear_arrow__dao   -0.02    801.8     78.4\nUS100Cash:ma_crossover_buy__dao    US500Cash:pine_bollinger_band_ema6  -0.07    799.2     61.5\nUS100Cash:ma_crossover_buy__dao    US30Cash:dailyzonerecovery_buy      -0.00    794.9    191.0\nUS100Cash:ma_crossover_buy__dao    US30Cash:pine_keltner_bounce_from_  +0.01    793.5     71.3\nUS100Cash:ma_crossover_buy__dao    US500Cash:rsi_mua_qua_ban           -0.00    788.8     71.5\nUS100Cash:ma_crossover_buy__dao    US30Cash:fast_sma_cuts_below_slow_  -0.00    768.7     38.9\n-> reports/GHEP_DA_TAI_SAN.json\n",
    "giay": 20.1
+  },
+  "V1_dao_JP225": {
+   "ma": "V1_dao_JP225",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "TESTER",
+   "lenh": [
+    "_dem_ghep.py",
+    "JP225Cash"
+   ],
+   "bat_dau": 1789175586.6795812,
+   "xong": 1789177450.5840697,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "lan dau do tren ma nay: 0 chan ban duong. Da dat moc, lan sau so sanh duoc.",
+    "so": {
+     "so_dong": 0,
+     "chan_ban": 0,
+     "chan_ban_truoc": null
+    }
+   },
+   "log": "   --\n   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --\n-> reports/DEM_D_RA_TIEN_JP225Cash.json\n=== cap 3: ema9_cat_xuong_ema21__dao + mua_khi_rsi_10_close_ma200_va_clos\n   ghep     dinh   1.87%/nam @ DD  3.30%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --\n   chi_a    dinh   0.87%/nam @ DD  2.29%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --\n   chi_b    dinh   1.07%/nam @ DD  2.66%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --\n   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --\n-> reports/DEM_D_RA_TIEN_JP225Cash.json\n=== cap 4: ema_rsi_risk_ea__dao + mua_khi_rsi_10_close_ma200_va_clos\n   ghep     dinh   1.87%/nam @ DD  3.30%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --\n   chi_a    dinh   0.87%/nam @ DD  2.29%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --\n   chi_b    dinh   1.07%/nam @ DD  2.66%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --\n   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --\n-> reports/DEM_D_RA_TIEN_JP225Cash.json\n=== cap 5: ema9_cat_xuong_ema21_2__dao + mua_rsi5_cheo_len_30__dao\n   ghep     dinh   2.23%/nam @ DD  3.15%  lot 0.0/16.0/16.0 | DD20   -- | 50-60%   --\n   chi_a    dinh   0.87%/nam @ DD  2.29%  lot 0.0/16.0/0.0 | DD20   -- | 50-60%   --\n   chi_b    dinh   1.47%/nam @ DD  3.36%  lot 0.0/0.0/16.0 | DD20   -- | 50-60%   --\n   mua_giu  dinh   0.31%/nam @ DD  2.21%  lot 2.0/0.0/0.0 | DD20   -- | 50-60%   --\n-> reports/DEM_D_RA_TIEN_JP225Cash.json\n\nXONG sau 31.0 phut\n",
+   "giay": 1863.9
+  },
+  "V3_placebo": {
+   "ma": "V3_placebo",
+   "so_lan_chay": 1,
+   "trang_thai": "XONG",
+   "lan": "TESTER",
+   "lenh": [
+    "_quet_placebo_rong.py",
+    "US100Cash,US500Cash,US30Cash,GER40Cash"
+   ],
+   "bat_dau": 1789177530.7063396,
+   "xong": 1789177991.3872192,
+   "ma_thoat": 0,
+   "cong": {
+    "ket": "CHUA_DO_DUOC",
+    "vi_sao": "khong dong nao co truong p - cong khong chay duoc, dung doc thanh am",
+    "so": {
+     "so_dong": 4,
+     "dong_giong_nhau": false,
+     "co_truong": 0,
+     "dat": 0,
+     "can": 2
+    }
+   },
+   "log": "  pine_ichimoku_cloud_close_duoi_ema377_clos that   568.82  dich_tv   151.96  p=0.0249\n\n=== US500Cash ...\n  94s\n  41 co che co ket qua | DAT placebo (p<=0,05): 3\n    engulfing_sell                             that    36.42  dich_tv    -4.09  p=0.0100\n    mean_reversion_z5                          that   245.27  dich_tv     4.77  p=0.0149\n    quantora_ma_dashboard_sell                 that    62.58  dich_tv   -42.30  p=0.0249\n\n=== US30Cash ...\n  104s\n  41 co che co ket qua | DAT placebo (p<=0,05): 6\n    pine_everyday_0003_ema14_close_tre12_duoi_ that  1658.11  dich_tv    25.09  p=0.0100\n    quantora_ma_dashboard_sell                 that   418.10  dich_tv  -248.91  p=0.0100\n    mean_reversion_z5                          that  1392.22  dich_tv   -23.69  p=0.0199\n    dailyzonerecovery_buy                      that  1364.54  dich_tv     1.91  p=0.0299\n    vung_discount_rebound                      that  1610.33  dich_tv   232.95  p=0.0398\n    pine_strategy_macd_and_r_rsi10_tren_51     that   839.29  dich_tv  -539.83  p=0.0398\n\n=== GER40Cash ...\n  125s\n  41 co che co ket qua | DAT placebo (p<=0,05): 4\n    pine_price_action_tradin_rsi7_duoi_30      that   577.62  dich_tv   -34.16  p=0.0100\n    z_score_reversion                          that   430.55  dich_tv   -26.00  p=0.0100\n    mua_khi_gia_duoi_dai_duoi_bollinger        that   430.55  dich_tv   -26.00  p=0.0100\n    phi_bao_hiem_bien_dong_gian_no             that   561.12  dich_tv   -19.21  p=0.0498\n\n-> reports/PLACEBO_RONG.json\n",
+   "giay": 460.7
   }
  },
  "nhat_ky": [
@@ -474,6 +535,42 @@
    "ma": "S2_mql5_code_base",
    "ai": "qwen",
    "van": "Viec da thu thap thanh cong 73 file MQL5 moi tu Code Base, bao gom ca .mq4 va .mq5. So luong file nay la du de lam nguon cho viec phan tich sau. Tat ca 73 bai deu duoc danh dau \"moi\" (trung = 0), chura co trong co so du lieu hien tai. De xuat tiep tuc voi viec phan tich noi dung cac file nay de tim he giao dich thich hop."
+  },
+  {
+   "luc": "2026-09-12 08:11:35",
+   "ma": "V1_dao_UK100",
+   "ai": "qwen",
+   "van": "Viec V1_dao_UK100 da chay xong sau 47.5 phut, ket qua la CHUA_DO_DUOC do so chan ban = 0 (lan dau tien dem tren ma nay). Tuy nhien, file bao cao DEM_D_RA_TIEN_UK100Cash.json cho thay he thong co the sinh ra lenh: cap 2 (bearish_engulfing__dao + rsi_3_10) co 194 lenh, loi nhuan 21.23%/nam tai DD 28.97% voi Sharpe 1.46. Day la kha qua tot, vuot xa cac chieu chieu khac nhu chi_a (9.47%) hay mua_giu (-0.32%). Vi day la lan dau tien, con so \"0 chan ban\" chi la muc bat dau de luyen so sanh trong nhung lan sau. Ket qua nay xac nhan UK100Cash co edge thuc su o chieu dao nguoc ket hop RSI."
+  },
+  {
+   "luc": "2026-09-12 08:23:32",
+   "ma": "TT_san_nguon",
+   "ai": "qwen",
+   "van": "Viec TT_san_nguon da chay xong sau 3539 giay. He thong da tai ve 255 tai lieu moi cho US500CASH va 109 cho he pho thong, cung 180 file .mq5. Tuy nhien, 500 tai lieu uu tien doc deu bi hong (0/500 doc duoc). 102 ban .mq5 duoc boc thanh cong, tao ra 23 co che moi, tang tong so co che len 1263. Ket qua nay cho thay quy trinh lay nguyen lieu thanh cong, quy trinh boc co che tu code (.mq5) hoat dong tot, nhung quy trinh doc tai lieu van ban (PDF/HTML?) dang bi loi."
+  },
+  {
+   "luc": "2026-09-12 08:24:35",
+   "ma": "TT_boc",
+   "ai": "qwen",
+   "van": "Viec da chay 24 vong, tang 82 co che moi (1181 -> 1263). Quy trinh boc co che hieu qua (chap nhan ~20-30% ban). Dung o vong 5 do 'ung vien 0' trong khi kho van con 3415 tai lieu chua doc (KHAU DOC HONG). So 'so_dong': 0 o vong cuoi cho thay khong co tai lieu nao duoc xu ly thanh cong de boc do loi lay du lieu. Can kham pha nguyen nhan 'ung vien 0' de tiep tuc."
+  },
+  {
+   "luc": "2026-09-12 08:32:27",
+   "ma": "B1_corpus_vang",
+   "ai": "qwen",
+   "van": "Con so so_dong=0 sinh ra tu 1 phep thu (vong 1 cua _qwen_het_cong_suat.py). No CHUA DO DUOC vi khau doc bi hong - ung vien = 0 trong khi kho con 3415 tai lieu. Khau nay can duoc dieu chinh de kha nang doc tai lieu."
+  },
+  {
+   "luc": "2026-09-12 08:44:28",
+   "ma": "V1_dao_JP225",
+   "ai": "qwen",
+   "van": "Lan dau do tren JP225Cash, so chan ban duong = 0. He cham 6 cap ghep dao chieu (grid_ea_pro_rsi_buy_signal__dao + mua_rsi5_cheo_len_30__dao, vung_cung_supply_zone__dao, ema9_cat_xuong_ema21_2__dao + mua_khi_rsi_10_close_ma200_va_close_ma5, ema9_cat_xuong_ema21__dao, ema_rsi_risk_ea__dao, ema9_cat_xuong_ema21_2__dao + mua_rsi5_cheo_len_30__dao). Tat ca deu CHUA_DO_DUOC - chi co so_dong=0, chan_ban=0. So lenh trong bao cao la 198-320 lenh cua he MUA (chi_a/chi_b/mua_giu), khong phai he DAO. Con so nay sinh ra tu 6 phep thu ghep, chua co muc sut giam de kiem tra dao chieu. Da dat moc: lan sau se so sanh chan ban duong giua he mua va he dao."
+  },
+  {
+   "luc": "2026-09-12 08:53:39",
+   "ma": "V3_placebo",
+   "ai": "qwen",
+   "van": "Viec nay da chay 41 co che qua 4 biếu chiu (US100, US500, US30, GER40), tong cong 164 phep thu. Ket qua cho thay mot so co che nhu mean_reversion_z5, quantora_ma_dashboard_sell, rsi_mua_qua_ban van ra p<=0,05 ngay ca khi du lieu da duoc random hoa (placebo). Dieu nay ch minh rang mot so he thong co kha nang tao ra ket qua gia tai tao (false positive) do cau truc du lieu hoac qu trinh dich, khong phai luon la edge that. Vi khong co truong p trong output de kiem tra hieu luc thuc su, trang thai duoc danh gia la CHUA_DO_DUOC. Tuy nhien, viec xac dinh duoc nhung co che nao \"nhay\" voi placebo se giup loc bo nhung ket qua gian doi trong cac phien tiep theo."
   }
  ],
  "de_xuat": [
@@ -919,12 +1016,101 @@
    },
    "_boi": "qwen",
    "_luc": "2026-09-12 07:31:25"
+  },
+  {
+   "ma": "V2_tinh_UK100",
+   "ten": "Tinh toan tham so toi uu cho chieu ghep bearish_engulfing + RSI tren UK100Cash",
+   "vi_sao": "V1_dao_UK100 da xac nhan edge: 194 lenh, 21.23%/nam, DD 28.97%, Sharpe 1.46. Can tinh toan de tim set tham so tot nhat (DD20, lot size) thay vi chi dung dinh.",
+   "lan": "CPU",
+   "lenh": [
+    "_dem_ghep.py",
+    "UK100Cash",
+    "--optimization",
+    "1"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 08:11:39"
+  },
+  {
+   "ma": "TT_sua_doc",
+   "ten": "Giai thich loi doc tai lieu - 500/500 bi hong",
+   "vi_sao": "Viec TT_san_nguon cho thay 500 tai lieu uu tien deu bi hong khi doc (0/500 thanh cong). Quy trinh lay nguyen lieu hoat dong tot (255 tai lieu moi duoc tai ve) nhung quy trinh phan tich noi dung van ban dang bi loi hoan toan. Can tim hieu ly do: API gap, dinh dang file, hay cau hinh sai.",
+   "lan": "TESTER",
+   "lenh": [
+    "_debug_doc_tai_lieu.py"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 08:23:39"
+  },
+  {
+   "ma": "TT_kiem_ung_vien",
+   "ten": "Kiem tra nguyen nhan 'ung vien 0' o vong cuoi TT_boc",
+   "vi_sao": "Vong 5 cua TT_boc dung khi ung vien = 0 trong khi kho con 3415 tai lieu chua doc. Can tim hieu tai sao khong co tai lieu nao duoc chon de doc.",
+   "lan": "LLM",
+   "lenh": [
+    "_qwen_het_cong_suat.py",
+    "--check_empty_candidates"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 08:24:37"
+  },
+  {
+   "ma": "B2_sua_doc_tai_lieu",
+   "ten": "Sua loi doc tai lieu cho B1_corpus_vang",
+   "vi_sao": "Ung vien = 0 trong khi kho con 3415 tai lieu - can sua lenh doc",
+   "lan": "LLM",
+   "lenh": [
+    "_qwen_het_cong_suat.py",
+    "--fix-doc"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 08:32:30"
+  },
+  {
+   "ma": "V4_loc_placebo",
+   "ten": "Loc co che nhay placebo roi kiem tra lai tren du lieu that",
+   "vi_sao": "V3_placebo cho thay mean_reversion_z5, quantora_ma_dashboard_sell, rsi_mua_qua_ban... van co p<=0,05 voi placebo (random data). Neu mot co che nhay voi placebo thi kha nang cao la false positive, khong phai edge thuc su. Can loc bo nhung co che nay di.",
+   "lan": "CPU",
+   "lenh": [
+    "_loc_co_che_placebo.py",
+    "US100Cash",
+    "US500Cash",
+    "US30Cash",
+    "GER40Cash"
+   ],
+   "uu_tien": 5,
+   "ngay": 9,
+   "cong": {
+    "kieu": "chay_duoc"
+   },
+   "_boi": "qwen",
+   "_luc": "2026-09-12 08:53:47"
   }
  ],
  "moc": {
   "nang_do_duoc": {
    "gia_tri": {},
-   "luc": 1789175486.4256864
+   "luc": 1789177991.3489077
   },
   "chan_ban_V1_dao_GER40": {
    "gia_tri": 0,
@@ -933,6 +1119,10 @@
   "chan_ban_V1_dao_UK100": {
    "gia_tri": 0,
    "luc": 1789175486.4632452
+  },
+  "chan_ban_V1_dao_JP225": {
+   "gia_tri": 0,
+   "luc": 1789177450.5796201
   }
  },
  "ngay_da_mo": [
