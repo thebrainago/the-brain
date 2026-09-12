@@ -1,0 +1,81 @@
+# kiem_v5
+# Bo kiem thu toan lab - lan chot cuoi
+# python b.py test
+
+bringing up nodes...
+bringing up nodes...
+
+...........uuuu.....................u..uuuuu...uu....................... [  3%]
+................................uu............uuuuuu..............uuuuu. [  7%]
+........................................................................ [ 12%]
+........uuuuuuu..uuuu................................................... [ 16%]
+...................................uuu.................................. [ 20%]
+.........uuu....................uuu............u.uu.........uuu.....uu.. [ 24%]
+......u.uuuuu...u.uuuuu.u.uu......uu.u...............uuu.uuuu..u.uuuuuuu [ 27%]
+uuuuuuuuuuuuuuuuuuuu.................................................... [ 30%]
+uuuuuuuuuuuuu..................uuuuuuuu.uuuuu..uuuuu.uuuuuuuuuuuuuu...uu [ 32%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuuuuuuuuuuuuu..uuuuu.uuuuuuuuuu [ 32%]
+uuuuuuuuuu..uuuuuuuuuu.u..........................u....uuuu.........u..u [ 35%]
+.........................u......u......u...........................uuuuu [ 39%]
+u......................uuuuuu........................................... [ 43%]
+..............u..u....u........u..uuuuuuuuu.....................uuuu.... [ 47%]
+...........................u...u............u....................u...u.. [ 51%]
+u...uu.u................u.u....u.........................u....u.......u. [ 55%]
+.......uu..............................u.............u.......u.......... [ 60%]
+..................u..u......u.........uuuuuu..........u......u.......... [ 64%]
+........................................................................ [ 68%]
+............u...uu...................................................... [ 73%]
+...........uuuu....u.u.u.uu.uuuuuu.u.uu.uuu.u.uu..uuu................... [ 76%]
+........................................................................ [ 80%]
+......................................uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 83%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 83%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 83%]
+uuuu.................................................................... [ 87%]
+........................................................................ [ 92%]
+...s................................F................................... [ 97%]
+.........................................                                [100%]
+================================== FAILURES ===================================
+_ NguongTRAIN_PhaiKICH_HOAT_O_HOLDOUT.test_moi_toan_hang_goc_deu_kich_hoat_duoc_o_HOLDOUT _
+[gw2] win32 -- Python 3.14.3 C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe
+
+self = <test_nguong_chuyen_duoc.NguongTRAIN_PhaiKICH_HOAT_O_HOLDOUT testMethod=test_moi_toan_hang_goc_deu_kich_hoat_duoc_o_HOLDOUT>
+
+    def test_moi_toan_hang_goc_deu_kich_hoat_duoc_o_HOLDOUT(self):
+        """Quet ca bo: khong toan hang nao duoc de nguong train ra 0 bar o holdout."""
+        tr, ho = self._hai_nua_that()
+        chet = []
+        for t in NS.TOAN_HANG_GOC:
+            try:
+                x_tr = NP.toan_hang(tr, t).dropna()
+                if len(x_tr) < 200:
+                    continue
+                x_ho = NP.toan_hang(ho, t).to_numpy(float)
+            except Exception:
+                continue
+            # Chi xet nhung nguong ma BO SINH thuc su dung - `nguong_tu_lich_su`
+            # da bo cac nguong suy bien (dung vao bien cua dai luong bi chan).
+            for pv, q in NS.nguong_tu_lich_su(tr, t).items():
+                duoi = pv <= 0.5
+                n_ho = int(np.nansum(x_ho < q) if duoi else np.nansum(x_ho > q))
+                if n_ho == 0:
+                    chet.append("%s @q%.0f" % (NS._ten(t), pv * 100))
+>       self.assertEqual(
+            chet, [],
+            "nguong lay tu TRAIN KHONG kich hoat lan nao o HOLDOUT:\n  %s"
+            % "\n  ".join(chet))
+E       AssertionError: Lists differ: ['heiken @q2', 'heiken @q5', 'heiken @q98'] != []
+E       
+E       First list contains 3 additional elements.
+E       First extra element 0:
+E       'heiken @q2'
+E       
+E       - ['heiken @q2', 'heiken @q5', 'heiken @q98']
+E       + [] : nguong lay tu TRAIN KHONG kich hoat lan nao o HOLDOUT:
+E         heiken @q2
+E         heiken @q5
+E         heiken @q98
+
+test_nguong_chuyen_duoc.py:131: AssertionError
+=========================== short test summary info ===========================
+FAILED test_nguong_chuyen_duoc.py::NguongTRAIN_PhaiKICH_HOAT_O_HOLDOUT::test_moi_toan_hang_goc_deu_kich_hoat_duoc_o_HOLDOUT
+1 failed, 1532 passed, 1 skipped, 523 subtests passed in 1560.33s (0:26:00)

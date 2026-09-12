@@ -7,7 +7,7 @@ if __name__ == "__main__":
     # chay het ca bai quet/ghi bao cao, ke ca khi nguoi goi chi muon
     # dung mot ham trong file.
 
-    lab=Path(r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    lab=Path(__file__).resolve().parent
     rd=lab.parent/"data"
     SPREAD={"AUDCAD":0.00022,"AUDCHF":0.00025,"AUDNZD":0.00026,"EURCAD":0.00020,"EURGBP":0.00026,"EURNZD":0.00030,"GBPCAD":0.00030}
     def atr(h,l,c,n=14):

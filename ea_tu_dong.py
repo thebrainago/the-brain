@@ -62,7 +62,12 @@ KHO_EA = REPORTS / "ea"
 #: Thu muc du lieu cua tung terminal + duong toi metaeditor/terminal cua no.
 #: May nay co NAM thu muc du lieu MT5 (bai hoc 29/07: phai quet het truoc khi
 #: ket luan "khong tim thay").
-_DAT = Path(r"C:\Users\SV STORE\AppData\Roaming\MetaQuotes\Terminal")
+# Thu muc DU LIEU MT5 doc qua `nhan.duong_dan` - ten nguoi dung khac nhau tren
+# moi may, va VPS chac chan khong co "SV STORE".
+from nhan.duong_dan import mt5_du_lieu as _mt5_du_lieu
+
+_DAT = _mt5_du_lieu() or Path(
+    r"C:\Users\SV STORE\AppData\Roaming\MetaQuotes\Terminal")
 _CAI = Path(r"C:\Program Files")
 
 #: ten -> (thu muc DU LIEU, thu muc CAI DAT, symbol mac dinh co lich su that).

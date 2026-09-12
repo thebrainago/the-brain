@@ -42,9 +42,17 @@ phien de tim lai luat. Ban day du van o `../AGENTS.md`.
 ## Vao phien / ket phien
 ```
 b vao              trang thai song + ban giao hom qua  (~2 giay)
+b ban-do           SINH ban do tu ma nguon - DOC TRUOC KHI XAY GI MOI
 b ket "tom tat"    chot ngay: git commit + sinh TIEP_TUC_MAI.md moi
 b                  menu day du
 ```
+
+**`b ban-do` truoc khi xay module moi.** Phien 12/09 toi xay lai BA thu da co
+(`uu_tien.py`, `noi_sinh.py`, va mot EVO thu hai canh `tru/evolution.py`). Ban do
+nay sinh TU MA NGUON (`nhan/ban_do.py`) nen khong bao gio cu, va no tra loi dung
+cau hoi can: **module nao khong nam tren duong chay nao**. Do 12/09: 31 mo coi
+that (sau khi tach 151 script chay tay + 11 ha tang), trong do co ca
+`nhan/han_muc.py` - cai KILL-SWITCH cua he.
 Python **duy nhat**: `C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe`.
 Khong dung `WindowsApps\python.exe`. `b.cmd` da tro dung san.
 

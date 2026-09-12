@@ -7,7 +7,7 @@ if __name__ == "__main__":
     # chay het ca bai quet/ghi bao cao, ke ca khi nguoi goi chi muon
     # dung mot ham trong file.
 
-    lab=Path(r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    lab=Path(__file__).resolve().parent
     rd=lab.parent/"data"
     files=sorted([f for f in rd.glob("*.parquet") if "_m1_mq" in f.name.lower()])
     def atr(h,l,c,n=14):

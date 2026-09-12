@@ -31,7 +31,7 @@ import json
 import sys
 import warnings
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500")
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
@@ -45,6 +45,7 @@ _sp.loader.exec_module(MV)
 MV.SWAP_NGAY = 0.0405
 
 from nhan import du_lieu as DL
+from pathlib import Path
 
 #: He NEN de dap co che len. Doi o day thi doi ca bang.
 NEN = dict(buoc=36.0, kc_bs=36.0, nhom_dau=4, he_so_1=2.0, he_so_2=1.6,

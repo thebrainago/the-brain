@@ -1,0 +1,34 @@
+# suy_nguoc_d1
+# QUANTLAB noi sinh: suy nguoc dau hieu truoc su kien, D1
+# python -m nhan.suy_nguoc quet D1 10
+
+quet 154/159 ma trong 29s
+
+DAU HIEU TRUOC SU KIEN - 154 ma, khung D1, chan troi 10 bar
+SU KIEN       DAU HIEU              MA   LECH TV    DAT  CUNG DAU
+cu_tang       xa_tb20              154    -0.122     54       71%
+cu_tang       doc_20               154    -0.118     54       73%
+cu_giam       doc_20               154    -0.021     54       51%
+cu_tang       vi_tri_20            154    -0.111     52       70%
+cu_giam       xa_tb20              154    -0.001     47       50%
+cu_giam       vi_tri_20            154    -0.012     44       52%
+cu_tang       bd20_tren_bd60       154     0.144     43       82%
+cu_giam       bd20_tren_bd60       154     0.088     31       77%
+cu_tang       chuoi_cung_chieu     154    -0.069     28       76%
+cu_tang       ibs                  154    -0.058     26       71%
+cu_tang       nen_bien_dong        154     0.095     19       84%
+chay_thang    bd20_tren_bd60       154    -0.034     18       60%
+cu_tang       ac1_20               154     0.018     16       56%
+cu_tang       bien_do_nen          154     0.079     15       88%
+cu_giam       nen_bien_dong        154     0.062     15       80%
+cu_giam       bien_do_nen          154     0.057     13       81%
+chay_thang    ac1_20               154     0.030      7       56%
+cu_giam       ibs                  154     0.017      7       58%
+cu_giam       ac1_20               154     0.008      7       51%
+cu_giam       chuoi_cung_chieu     154    -0.007      7       54%
+chay_thang    xa_tb20              154    -0.003      7       51%
+cu_giam       than_tren_bien       154     0.028      5       71%
+
+KHONG dau hieu nao dong thuan tren da tai san. Do la ket qua - no noi rang cac 'dau hieu bao truoc' o day khong chung.
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\SUY_NGUOC.json

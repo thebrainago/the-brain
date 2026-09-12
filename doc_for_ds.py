@@ -8,7 +8,7 @@ if __name__ == "__main__":
     # dung mot ham trong file.
 
     DESK = Path(r"C:\Users\SV STORE\Desktop")
-    LAB = Path(r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    LAB = Path(__file__).resolve().parent
     REP = LAB / "reports"
     f = DESK / "for ds.txt"
     try: txt = f.read_text(encoding="utf-8-sig")

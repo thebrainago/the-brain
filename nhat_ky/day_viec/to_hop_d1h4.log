@@ -1,0 +1,129 @@
+# to_hop_d1h4
+# Q6 to hop day du: da ma x D1+H4 x da cau truc x da luat
+# python -m nhan.to_hop D1 H4 --tien-trinh 10
+
+ma: 159 -> 145 (bo 14 ban sao)
+cap (ma, khung) co du du lieu: 161
+co che kich hoat trong [2%, 60%]: 868
+
+CHANG 1 - 139748 o
+  chang 1: 139748 o -> 127057 ket qua, 3360 loi, 941s
+    loi dau: KhungThieuGio: DSL chi_bao='gio': co che theo PHIEN nhung khung chi co mot gio duy nhat ([21]) - can khung noi ngay
+
+CHANG 2 - 3000 o (200 song sot x 7 cau truc + 8 luat)
+  chang 2: 3000 o -> 2912 ket qua, 0 loi, 14s
+
+CHANG 3 - 95 o (do do nhay thong so)
+  chang 3: 95 o -> 93 ket qua, 0 loi, 3s
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\TO_HOP.json
+# TONG KET TO HOP
+
+*2912 o chang 2 / 145 ma / khung D1, H4 / 961 giay*
+
+Xep hang bang `cagr_dd20`: lai %/nam khi quy ca hai ve cung ngan sach
+sut giam 20%. `hon_moc` = thang **max(mua-giu, ban-giu, tien mat)**.
+
+## DOC BANG NAY NHU THE NAO
+
+Chang 1 da CHON top 200 o theo chinh `cagr_dd20`, roi chang 2 mo rong
+dung nhung o do. Nen con so `hon_moc` o day **bi thoi len boi chinh phep
+chon** - no khong phai ti le thanh cong cua mot lan quet mu.
+
+Cai bang nay tra loi duoc, va chi tra loi duoc, mot cau: *voi nhung o da
+co ve co gi, thi doi CAU TRUC hay doi LUAT lam ket qua thay doi ra sao*.
+Do la dung cau hoi chu du an dat ra cho module quan li lenh. Muon biet
+ti le thanh cong THAT thi phai doc chang 1 (chua chon), hoac chay lai
+tren holdout.
+
+## Theo CAU TRUC VAO LENH
+
+| cau truc vao lenh | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| thi_truong | 1714 | 27.705 | 202.272 | 96% | 722 |
+| dca_deu | 200 | 24.963 | 165.741 | 98% | 87 |
+| dca_von | 200 | 20.593 | 139.504 | 98% | 68 |
+| hai_dau_oco | 199 | 5.165 | 33.671 | 84% | 25 |
+| tt_hedge | 200 | 3.354 | 64.178 | 64% | 11 |
+| hai_dau_giu | 199 | 1.172 | 39.839 | 67% | 44 |
+| nhanh | 200 | 0.226 | 36.382 | 51% | 46 |
+
+**NEN DI**: thi_truong (trung vi 27.705, 1650/1714 o duong)
+
+**NEN TRANH**: nhanh (trung vi 0.226, chi 102/200 o duong)
+
+## Theo LUAT QUAN TRI
+
+| luat quan tri | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| sl2_tp4 | 200 | 32.963 | 105.328 | 99% | 82 |
+| sl2_tp4_hue1 | 200 | 26.603 | 202.272 | 99% | 81 |
+| sl3_trail2 | 195 | 24.886 | 64.307 | 97% | 80 |
+| sl2_tp4_chot1 | 200 | 24.028 | 129.870 | 99% | 80 |
+| sl2_tp6_hue2_trail2 | 196 | 19.459 | 81.056 | 99% | 79 |
+| sl2_trail1 | 200 | 18.397 | 80.473 | 99% | 81 |
+| khong_gi | 123 | 14.582 | 71.434 | 98% | 80 |
+| - | 1398 | 11.989 | 165.741 | 80% | 363 |
+| chot_nhanh_sl1_tp1 | 200 | 5.876 | 84.860 | 78% | 77 |
+
+**NEN DI**: sl2_tp4 (trung vi 32.963, 198/200 o duong)
+
+**NEN TRANH**: chot_nhanh_sl1_tp1 (trung vi 5.876, chi 155/200 o duong)
+
+## Theo HO CO CHE
+
+| ho co che | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| vi_mo | 15 | 24.768 | 40.946 | 93% | 13 |
+| dong_tien | 30 | 22.802 | 57.255 | 93% | 14 |
+| bien_dong | 462 | 21.746 | 202.272 | 90% | 170 |
+| xu_huong | 1821 | 19.765 | 88.574 | 88% | 545 |
+| pha_vo | 229 | 18.044 | 202.272 | 84% | 115 |
+| quay_ve_trung_binh | 355 | 16.138 | 72.745 | 87% | 146 |
+
+**NEN DI**: vi_mo (trung vi 24.768, 13/15 o duong)
+
+**NEN TRANH**: quay_ve_trung_binh (trung vi 16.138, chi 308/355 o duong)
+
+## Theo TAI SAN
+
+| tai san | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| TRYJPY | 1170 | 24.395 | 88.352 | 97% | 943 |
+| USDARS | 30 | 21.343 | 71.434 | 100% | 5 |
+| GBPTRY | 1607 | 19.068 | 202.272 | 84% | 37 |
+| YH_DAUWTI | 75 | 0.118 | 2.851 | 64% | 14 |
+| GBPZAR | 30 | -1.135 | 1.004 | 13% | 4 |
+
+**NEN DI**: TRYJPY (trung vi 24.395, 1139/1170 o duong)
+
+**NEN TRANH**: GBPZAR (trung vi -1.135, chi 3/30 o duong)
+
+## Cai duy nhat dang theo tiep
+
+1003/2912 o thang duoc moc. 
+
+| ma | khung | co che | cau truc | luat | dd20 | moc |
+|---|---|---|---|---|---:|---:|
+| GBPTRY | D1 | fvg_bullish_formation | thi_truong | sl2_tp4_hue1 | 202.272 | 59.937 |
+| GBPTRY | D1 | ict_silver_bullet_fvg_long | thi_truong | sl2_tp4_hue1 | 202.272 | 59.937 |
+| GBPTRY | D1 | luat_long_rsi_swing | dca_deu | - | 165.741 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_von | - | 139.504 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_von | - | 137.809 | 59.937 |
+| GBPTRY | D1 | fvg_bullish_formation | thi_truong | sl2_tp4_chot1 | 129.870 | 59.937 |
+| GBPTRY | D1 | ict_silver_bullet_fvg_long | thi_truong | sl2_tp4_chot1 | 129.870 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_von | - | 126.852 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_deu | - | 126.304 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_deu | - | 125.356 | 59.937 |
+| GBPTRY | D1 | luat_long_rsi_swing | dca_von | - | 124.627 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_von | - | 124.065 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_deu | - | 118.201 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_von | - | 117.346 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_von | - | 110.414 | 59.937 |
+| GBPTRY | D1 | pine_volatility_swi_do_lech2 | dca_deu | - | 109.204 | 59.937 |
+| GBPTRY | D1 | fvg_bullish_formation | thi_truong | - | 107.391 | 59.937 |
+| GBPTRY | D1 | ict_silver_bullet_fvg_long | thi_truong | - | 107.391 | 59.937 |
+| GBPTRY | D1 | fvg_bullish_formation | thi_truong | sl2_tp4 | 105.328 | 59.937 |
+| GBPTRY | D1 | ict_silver_bullet_fvg_long | thi_truong | sl2_tp4 | 105.328 | 59.937 |
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\TO_HOP_TONG_KET.md

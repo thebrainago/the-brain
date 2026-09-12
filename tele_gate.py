@@ -1,8 +1,8 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import json, sys, time
 from pathlib import Path
 import requests
-L = Path(r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+L = Path(__file__).resolve().parent
 C = L / "config" / "tele_bridge.json"
 IN = L / "reports" / "tele_inbox.json"
 DK = Path(r"C:\Users\SV STORE\Desktop")

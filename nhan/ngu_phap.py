@@ -50,6 +50,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from numpy.lib.stride_tricks import sliding_window_view
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -147,6 +148,309 @@ def toan_hang(df: pd.DataFrame, t: dict) -> pd.Series:
 _NHO_TOAN_HANG: dict[int, dict] = {}
 
 
+#: Cac mau nen `mau_nen` noi duoc. Gia tri tra ve CO DAU theo chieu:
+#: duong = mau TANG, am = mau GIAM, 0 = khong co mau. Nho vay mot dieu kien
+#: `mau_nen(nhan_chim) > 0` la "nhan chim TANG" ma khong can them toan hang.
+MAU_NEN = ("nhan_chim", "doji", "bua", "sao_bang", "trong", "ngoai",
+           "ba_nen", "rau_duoi", "rau_tren", "nen_dac")
+
+
+def _atr_series(df: pd.DataFrame, n: int) -> pd.Series:
+    """ATR kieu Wilder, tra ve Series cung chi muc voi df."""
+    h, l, c = (_cot(df, "high"), _cot(df, "low"), _cot(df, "close"))
+    tr = pd.concat([h - l, (h - c.shift(1)).abs(), (l - c.shift(1)).abs()],
+                   axis=1).max(axis=1)
+    return tr.ewm(alpha=1.0 / max(n, 1), adjust=False).mean()
+
+
+def _heiken(df: pd.DataFrame, lay: str) -> pd.Series:
+    """Heikin-Ashi - toan hang CO TRANG THAI thu hai cua ngu phap.
+
+    `ha_open[i] = (ha_open[i-1] + ha_close[i-1]) / 2` - phu thuoc chinh no o bar
+    truoc, nen khong ghep tu cac toan hang cua so duoc. 5 co che trong kho nhac
+    toi no.
+
+    `lay`: "chieu" (+1/-1 theo than nen HA) | "than" (than HA chia bien do that)
+           | "khong_rau_duoi" / "khong_rau_tren" (nen HA khong co rau phia do -
+           dau hieu xu huong manh theo cach doc co dien)
+    """
+    o = _cot(df, "open").to_numpy(float)
+    h = _cot(df, "high").to_numpy(float)
+    l = _cot(df, "low").to_numpy(float)
+    c = _cot(df, "close").to_numpy(float)
+    n = len(df)
+    ha_c = (o + h + l + c) / 4.0
+    ha_o = np.empty(n)
+    ha_o[0] = (o[0] + c[0]) / 2.0
+    for i in range(1, n):
+        ha_o[i] = (ha_o[i - 1] + ha_c[i - 1]) / 2.0
+    ha_h = np.maximum.reduce([h, ha_o, ha_c])
+    ha_l = np.minimum.reduce([l, ha_o, ha_c])
+    if lay == "chieu":
+        return pd.Series(np.sign(ha_c - ha_o), index=df.index)
+    if lay == "than":
+        bien = np.where(ha_h - ha_l > 0, ha_h - ha_l, np.nan)
+        return pd.Series((ha_c - ha_o) / bien, index=df.index)
+    if lay == "khong_rau_duoi":
+        return pd.Series(
+            (np.abs(np.minimum(ha_o, ha_c) - ha_l) < 1e-12).astype(float),
+            index=df.index)
+    if lay == "khong_rau_tren":
+        return pd.Series(
+            (np.abs(ha_h - np.maximum(ha_o, ha_c)) < 1e-12).astype(float),
+            index=df.index)
+    raise KeyError("'heiken': khong biet lay='%s' (co: chieu, than, "
+                   "khong_rau_duoi, khong_rau_tren)" % lay)
+
+
+def _supertrend(df: pd.DataFrame, n: int, k: float, lay: str) -> pd.Series:
+    """Supertrend - toan hang CO TRANG THAI dau tien cua ngu phap.
+
+    ## Vi sao no khong viet duoc bang cac toan hang co san
+
+    Moi toan hang khac deu la mot ham cua MOT CUA SO du lieu: doc n bar gan
+    nhat, ra mot so. Supertrend thi khong - duong bien cua no **chot lai** va
+    chi noi long khi xu huong lat:
+
+        bien tren[i] = min(bien tren tho[i], bien tren[i-1])   khi con xu huong giam
+        chieu[i]     = lat khi gia dong cua xuyen qua bien dang giu
+
+    Tuc gia tri tai bar i phu thuoc vao gia tri tai bar i-1, khong phai vao mot
+    cua so co dinh. Do dung la "toan tu co nho" - va do la ly do khong cach nao
+    ghep no tu `tb`/`atr`/`cao_nhat` duoc.
+
+    Do 12/09/2026: **16 co che trong kho nhac toi supertrend** ma ngu phap
+    khong noi duoc.
+
+    `lay`: "chieu" (+1 tang / -1 giam) | "duong" (gia tri duong bien) |
+           "khoang_cach" (gia cach duong bien, chia ATR - khong phu thuoc thang do)
+
+    KHONG NHIN TRUOC: moi buoc chi doc bar i va trang thai tai i-1.
+    """
+    c = _cot(df, "close").to_numpy(float)
+    hl2 = ((_cot(df, "high") + _cot(df, "low")) / 2.0).to_numpy(float)
+    a = _atr_series(df, n).to_numpy(float)
+    m = len(df)
+    tren = np.full(m, np.nan)
+    duoi = np.full(m, np.nan)
+    chieu = np.zeros(m)
+    duong = np.full(m, np.nan)
+    ch = 1.0
+    for i in range(m):
+        if not np.isfinite(a[i]):
+            continue
+        tt, td = hl2[i] + k * a[i], hl2[i] - k * a[i]
+        if i > 0 and np.isfinite(tren[i - 1]):
+            # Bien SIET LAI, chi noi long khi gia pha qua -> day la cho "co nho"
+            tt = min(tt, tren[i - 1]) if c[i - 1] <= tren[i - 1] else tt
+            td = max(td, duoi[i - 1]) if c[i - 1] >= duoi[i - 1] else td
+            ch = chieu[i - 1] or 1.0
+            if c[i] > tren[i - 1]:
+                ch = 1.0
+            elif c[i] < duoi[i - 1]:
+                ch = -1.0
+        tren[i], duoi[i], chieu[i] = tt, td, ch
+        duong[i] = td if ch > 0 else tt
+    if lay == "chieu":
+        return pd.Series(chieu, index=df.index)
+    if lay == "duong":
+        return pd.Series(duong, index=df.index)
+    if lay == "khoang_cach":
+        with np.errstate(divide="ignore", invalid="ignore"):
+            return pd.Series((c - duong) / np.where(a > 0, a, np.nan),
+                             index=df.index)
+    raise KeyError("'supertrend': khong biet lay='%s' (co: chieu, duong, "
+                   "khoang_cach)" % lay)
+
+
+# ------------------------------------------------------------- HINH HOC
+#: Nam muc thoai lui Fibonacci chuan. `lay` nhan ca ba cach viet cua cung mot
+#: ti le: so (0.618), chuoi ("0.618"), va dang phan tram ("61.8").
+MUC_FIBO = (0.236, 0.382, 0.5, 0.618, 0.786)
+
+
+def _hoi_quy_truot(y: pd.Series, n: int) -> tuple[pd.Series, pd.Series, pd.Series]:
+    """Hoi quy tuyen tinh tren cua so n bar KET THUC TAI BAR i.
+
+    Tra ve `(doc, r2, gia_tri)`:
+      doc      he so goc theo DON VI CUA `y` TREN MOI BAR (chua chuan hoa)
+      r2       do khop cua duong, 0..1 - "duong nay co that su la mot duong khong"
+      gia_tri  gia tri cua duong tai chinh bar i (dung de so voi gia)
+
+    VI SAO TINH BANG TICH CHAP chu khong `rolling().apply(np.polyfit)`: trong so
+    `k - trung binh k` la CO DINH nen tu so cua he so goc chi la mot phep tich
+    chap voi nhan co dinh - chay trong C, khong mot lan goi Python nao cho moi
+    bar. `polyfit` tren 20.000 bar ton hang giay; `toan_hang` da tung ngon 30%
+    mot luot quet (do 01/09) nen mot toan hang moi khong duoc phep dat hon cai
+    da co.
+
+    R^2 tinh bang `b^2 * Sxx / Syy` - dung dai luong da co san, khong can chay
+    lai phep khop lan hai.
+
+    KHONG NHIN TRUOC: cua so cua bar i la [i-n+1 .. i]. Bar i da dong khi ta
+    doc no, nen lay ca bar i la hop le (khac `fibo` va `donchian` - xem duoi).
+    """
+    n = max(int(n), 2)
+    v = np.asarray(y, dtype=float)
+    m = len(v)
+    k = np.arange(n, dtype=float)
+    w = k - k.mean()
+    sxx = float(np.dot(w, w))
+
+    tu = np.full(m, np.nan)
+    if m >= n:
+        # np.convolve(v, w[::-1])[i] = tong_j v[j]*w[j-(i-n+1)] tren dung cua so
+        # [i-n+1 .. i]. Chi doc qua khu vi nhan chay LUI.
+        tu[:] = np.convolve(v, w[::-1])[:m]
+        tu[: n - 1] = np.nan
+
+    doc = pd.Series(tu / sxx, index=y.index)
+    tb = y.rolling(n).mean()
+    # Tong binh phuong lech quanh trung binh. Dung `var(ddof=0)*n` chu khong
+    # `sum(y^2) - n*tb^2`: cach sau tru hai so gan bang nhau va mat chu so co
+    # nghia khi gia lon (BTC ~ 1e5), cach nay pandas tinh bang thuat toan on dinh.
+    ss = y.rolling(n).var(ddof=0) * n
+    r2 = (doc * doc * sxx) / ss.where(ss > 0)
+    gia_tri = tb + doc * ((n - 1) / 2.0)
+    return doc, r2.clip(0.0, 1.0), gia_tri
+
+
+def _song_fibo(df: pd.DataFrame, n: int, huong) -> tuple:
+    """Doan song n bar KET THUC TAI BAR i-1 -> (dinh, day, la_song_tang).
+
+    ## DICH MOT BAR - cung ly do voi `donchian`
+
+    Neo Fibonacci phai la mot doan song DA XONG. Neu cua so om ca bar i thi
+    `dinh` chay theo chinh bar dang xet: gia khong bao gio vuot duoc muc 0,0 va
+    `vi_tri` bi ep cung trong [0; 1] - moi dieu kien dang "gia cham muc 0,618"
+    tro thanh mot dieu kien KHAC han cai nguoi viet dinh noi. Do la kieu nhin
+    truoc kin nhat: no khong lam ket qua dep len, no lam co che im lang.
+
+    ## CHIEU CUA SONG quyet dinh muc thoai lui nam o dau
+
+    Trong mot song TANG (day den TRUOC, dinh den SAU), thoai lui do NGUOC XUONG
+    tu dinh: muc f nam o `dinh - f*(dinh-day)`. Trong song GIAM thi nguoc lai.
+    Lay nham chieu la lay guong cua muc dung (0,382 thanh 0,618), nen chieu duoc
+    suy tu VI TRI cua dinh/day trong cua so, khong doan.
+
+    `huong`: "tu_dong" (mac dinh) | 1 / "tang" | -1 / "giam" - ep chieu khi co
+    che noi ro no chi mua thoai lui trong xu huong tang.
+    """
+    n = max(int(n), 2)
+    h = _cot(df, "high").to_numpy(float)
+    l = _cot(df, "low").to_numpy(float)
+    m = len(h)
+    dinh = np.full(m, np.nan)
+    day = np.full(m, np.nan)
+    tang = np.full(m, np.nan)
+    if m > n:
+        ch = sliding_window_view(h, n)
+        cl = sliding_window_view(l, n)
+        so = m - n                      # hang r om bar [r .. r+n-1] -> gan cho bar r+n
+        dinh[n:] = ch.max(axis=1)[:so]
+        day[n:] = cl.min(axis=1)[:so]
+        tang[n:] = (ch.argmax(axis=1)[:so] >= cl.argmin(axis=1)[:so]).astype(float)
+
+    if isinstance(huong, str):
+        huong = huong.lower()
+    if huong in ("tu_dong", "auto", None, ""):
+        pass
+    elif huong in (1, 1.0, "1", "tang", "len"):
+        tang = np.where(np.isfinite(dinh), 1.0, np.nan)
+    elif huong in (-1, -1.0, "-1", "giam", "xuong"):
+        tang = np.where(np.isfinite(dinh), 0.0, np.nan)
+    else:
+        raise KeyError("'fibo': khong biet huong='%s' (co: tu_dong, 1/tang, "
+                       "-1/giam)" % huong)
+    return dinh, day, tang
+
+
+def _ti_le_fibo(lay) -> float | None:
+    """"0.618" -> 0,618 · "61.8" -> 0,618 · 1.618 -> 1,618. None neu khong phai so.
+
+    CHI coi la viet theo phan tram khi >= 10. Nguong "> 1" de hong mot dang khai
+    bao dung: `1.618` la muc MO RONG that su ton tai (161,8%), doi no thanh
+    1,6% la doc sai mot khai bao dung ma khong mot loi bao nao.
+    """
+    try:
+        f = float(lay)
+    except (TypeError, ValueError):
+        return None
+    return f / 100.0 if f >= 10.0 else f
+
+
+def _mau_nen(df: pd.DataFrame, mau: str) -> pd.Series:
+    """Mau nen hop thanh, CO DAU theo chieu.
+
+    ## Vi sao can toan hang nay
+
+    Do 12/09/2026: ngu phap co `than_nen`, `bien_do`, `ibs`, `dem_lien_tiep` -
+    du de noi tung manh cua mot mau nen, nhung KHONG noi duoc mau nen. Ket qua
+    la 41 co che ten "nen" + 20 "candle" + 10 "engulf" trong kho deu la ban NHAP
+    TU NGOAI, va bo sinh noi sinh khong tu dat ra duoc mot mau nen nao. Tuc mot
+    dong nguyen trong so do (*"Cac dang nen khac nhau"*) chua bao gio duoc quet
+    mot cach he thong.
+
+    ## Moi mau deu CHUAN HOA, khong dung nguong tuyet doi
+
+    "Than nen dai" la dai so voi cai gi? O day moi nguong deu tinh theo BIEN DO
+    CUA CHINH BAR (hoac bar truoc), nen mot mau nen dinh nghia tren EURUSD dung
+    y nguyen tren XAUUSD. Mot mau nen khai bang so pip la mau nen cua mot tai
+    san, khong phai mot mau nen.
+    """
+    if mau not in MAU_NEN:
+        raise KeyError("'mau_nen': khong biet mau='%s' (co: %s)"
+                       % (mau, ", ".join(MAU_NEN)))
+    o = _cot(df, "open").astype(float)
+    h = _cot(df, "high").astype(float)
+    l = _cot(df, "low").astype(float)
+    c = _cot(df, "close").astype(float)
+    bien = (h - l).replace(0.0, np.nan)
+    than = c - o
+    than_abs = than.abs()
+    chieu = np.sign(than)
+    tren = h - np.maximum(o, c)          # rau tren
+    duoi = np.minimum(o, c) - l          # rau duoi
+
+    if mau == "nen_dac":
+        return (than_abs / bien) * chieu
+    if mau == "rau_tren":
+        return tren / bien
+    if mau == "rau_duoi":
+        return duoi / bien
+    if mau == "doji":
+        # Than cang nho so voi bien do thi cang "doji". Khong co dau - doji la
+        # trang thai LUONG LU, gan cho no mot chieu la bia them thong tin.
+        return 1.0 - (than_abs / bien)
+    if mau == "bua":
+        # Bua: rau duoi dai, than nho, nam o nua tren bar. Duong khi la bua
+        # (dao chieu TANG), am khi la hinh guong cua no (sao bang nguoc).
+        diem = (duoi / bien) - (tren / bien) - (than_abs / bien)
+        return diem
+    if mau == "sao_bang":
+        return (tren / bien) - (duoi / bien) - (than_abs / bien)
+    if mau == "trong":
+        # Inside bar: ca bien do nam gon trong bar truoc. Tra ve do "gon".
+        co = (h < h.shift(1)) & (l > l.shift(1))
+        return co.astype(float) * (1.0 - bien / (h.shift(1) - l.shift(1))
+                                   .replace(0.0, np.nan))
+    if mau == "ngoai":
+        co = (h > h.shift(1)) & (l < l.shift(1))
+        return co.astype(float) * chieu
+    if mau == "nhan_chim":
+        # Than bar nay TRUM than bar truoc VA nguoc chieu bar truoc.
+        tren_truoc = np.maximum(o.shift(1), c.shift(1))
+        duoi_truoc = np.minimum(o.shift(1), c.shift(1))
+        trum = (np.maximum(o, c) >= tren_truoc) & (np.minimum(o, c) <= duoi_truoc)
+        doi_chieu = (chieu * np.sign(than.shift(1))) < 0
+        return (trum & doi_chieu).astype(float) * chieu
+    # ba_nen: ba bar lien tiep cung chieu, than moi bar chiem phan lon bien do
+    dac = (than_abs / bien) > 0.5
+    cung = (chieu == chieu.shift(1)) & (chieu == chieu.shift(2))
+    ba = dac & dac.shift(1) & dac.shift(2) & cung
+    return ba.astype(float) * chieu
+
+
 def _nho_cua(df: pd.DataFrame) -> dict:
     k = id(df)
     d = _NHO_TOAN_HANG.get(k)
@@ -187,6 +491,19 @@ BI_DANH: dict[str, dict | None] = {
     "high": {"cot": "high"}, "low": {"cot": "low"},
     "open": {"cot": "open"}, "close": {"cot": "close"},
     "hl2": {"cot": "hl2"}, "hlc3": {"cot": "hlc3"}, "ohlc4": {"cot": "ohlc4"},
+    # Hinh hoc - CHI nhung ten la mot cach viet khac cua dung phep tinh o day.
+    #
+    # `trendline` KHONG co trong bang nay du no la tu duoc nhac nhieu: duong xu
+    # huong ve tay di qua HAI dinh nguoi ta chon, con `duong_xu_huong` la hoi
+    # quy tren n bar. Hai thu khac nhau, va gan bi danh giua chung la "che ra
+    # mot co che khong ai viet" - dung dieu ma ghi chu cua bang nay cam.
+    # `slope` cung khong: do doc cua ho la gia/bar, cua ta la ATR/bar.
+    "fib": None, "fibonacci": None, "fibonacci_retracement": None,
+    "fib_618": {"lay": "0.618"}, "fib_382": {"lay": "0.382"},
+    "angle": None,
+    # `ta.linreg(src, len, offset=0)` cua Pine tra ve GIA TRI duong tai bar
+    # hien tai, khong phai do doc.
+    "linreg": {"lay": "gia_tri"}, "linearregression": {"lay": "gia_tri"},
 }
 #: Bi danh -> ten that. Tach khoi BI_DANH cho de doc.
 BI_DANH_TEN = {
@@ -198,6 +515,10 @@ BI_DANH_TEN = {
     "bb_basis": "bollinger", "middleband": "bollinger",
     "high": "gia", "low": "gia", "open": "gia", "close": "gia",
     "hl2": "gia", "hlc3": "gia", "ohlc4": "gia",
+    "fib": "fibo", "fibonacci": "fibo", "fibonacci_retracement": "fibo",
+    "fib_618": "fibo", "fib_382": "fibo",
+    "angle": "goc",
+    "linreg": "duong_xu_huong", "linearregression": "duong_xu_huong",
 }
 
 
@@ -250,6 +571,8 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         return _cot(df, "high") - _cot(df, "low")
     if cb == "than_nen":
         return _cot(df, "close") - _cot(df, "open")
+    if cb == "mau_nen":
+        return _mau_nen(df, str(t.get("mau", "nhan_chim")).lower())
     if cb == "khoi_luong":
         return _cot(df, "tick_volume") if "tick_volume" in df.columns \
             else pd.Series(np.nan, index=df.index)
@@ -382,6 +705,114 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         tin = MAU_MOD.ema(duong, n_tin)
         return tin if lay == "tin_hieu" else duong - tin
 
+    if cb == "donchian":
+        # Kenh Donchian: cao nhat / thap nhat n bar. Viet duoc bang
+        # `cao_nhat`/`thap_nhat` nhung 12 co che trong kho goi ten "donchian",
+        # va mot toan hang dung ten giup bo doc khong phai doan cau truc.
+        #
+        # DICH MOT BAR: kenh phai tinh tren n bar TRUOC bar hien tai. Khong dich
+        # thi `gia >= donchian_tren` LUON DUNG o dinh mới - vi chinh bar do da
+        # duoc dua vao phep max. Do la mot cach nhin truoc rat kin.
+        hi_ = _cot(df, "high").rolling(n).max().shift(1)
+        lo_ = _cot(df, "low").rolling(n).min().shift(1)
+        lay = str(t.get("lay", "tren")).lower()
+        if lay == "tren":
+            return hi_
+        if lay == "duoi":
+            return lo_
+        if lay == "giua":
+            return (hi_ + lo_) / 2.0
+        if lay == "do_rong":
+            return (hi_ - lo_) / ((hi_ + lo_) / 2.0).replace(0, np.nan)
+        if lay == "vi_tri":
+            return (_cot(df, "close") - lo_) / (hi_ - lo_).replace(0, np.nan)
+        raise KeyError("'donchian': khong biet lay='%s' (co: tren, duoi, giua, "
+                       "do_rong, vi_tri)" % lay)
+    if cb == "ichimoku":
+        # 10 co che trong kho nhac toi. Tenkan/Kijun la trung diem kenh; hai
+        # duong may (senkou) tren BIEU DO duoc ve DICH TOI 26 bar, nghia la gia
+        # tri nhin thay tai bar i duoc tinh tu du lieu cua bar i-26 - HOP LE.
+        # Ve dung the la `.shift(+dich)`, KHONG phai shift(-dich).
+        h_, l_ = _cot(df, "high"), _cot(df, "low")
+        n_t = int(t.get("n_tenkan", 9) or 9)
+        n_k = int(t.get("n_kijun", 26) or 26)
+        n_b = int(t.get("n_senkou_b", 52) or 52)
+        dich = int(t.get("dich", n_k) or n_k)
+
+        def _giua(m):
+            return (h_.rolling(m).max() + l_.rolling(m).min()) / 2.0
+
+        tenkan, kijun = _giua(n_t), _giua(n_k)
+        lay = str(t.get("lay", "kijun")).lower()
+        if lay == "tenkan":
+            return tenkan
+        if lay == "kijun":
+            return kijun
+        if lay == "senkou_a":
+            return ((tenkan + kijun) / 2.0).shift(dich)
+        if lay == "senkou_b":
+            return _giua(n_b).shift(dich)
+        if lay == "day_may":
+            return (((tenkan + kijun) / 2.0).shift(dich)
+                    - _giua(n_b).shift(dich))
+        if lay == "chikou":
+            # Gia dong cua cua CHINH bar nay, doi chieu voi gia `dich` bar truoc.
+            # Tra ve CHENH LECH de dung duoc ngay, va no chi doc qua khu.
+            return _cot(df, "close") - _cot(df, "close").shift(dich)
+        raise KeyError("'ichimoku': khong biet lay='%s' (co: tenkan, kijun, "
+                       "senkou_a, senkou_b, day_may, chikou)" % lay)
+    if cb == "vwap":
+        # Gia trung binh theo KHOI LUONG trong n bar.
+        #
+        # Khong co cot khoi luong thi tra NaN chu KHONG lang le rot ve trung
+        # binh thuong: mot "vwap" ma that ra la SMA se trong nhu mot chi bao
+        # khac han, va khong ai biet.
+        # KIEM KHAI BAO TRUOC, kiem du lieu SAU. Nguoc lai thi mot `lay` go sai
+        # se di lot tren moi bang khong co cot khoi luong, roi nem loi o mot ma
+        # khac vao mot luc khac - loi chuyen cho la loi kho tim nhat.
+        lay = str(t.get("lay", "gia")).lower()
+        if lay not in ("gia", "lech"):
+            raise KeyError("'vwap': khong biet lay='%s' (co: gia, lech)" % lay)
+        if "tick_volume" not in df.columns:
+            return pd.Series(np.nan, index=df.index)
+        kl = _cot(df, "tick_volume")
+        tp = (_cot(df, "high") + _cot(df, "low") + _cot(df, "close")) / 3.0
+        tong_kl = kl.rolling(n).sum()
+        v = (tp * kl).rolling(n).sum() / tong_kl.replace(0, np.nan)
+        if lay == "gia":
+            return v
+        return (_cot(df, "close") - v) / v.replace(0, np.nan)
+    if cb == "heiken":
+        return _heiken(df, str(t.get("lay", "chieu")).lower())
+    if cb == "keltner":
+        # Dai Keltner: EMA(n) +- k * ATR(n_atr). Cung ho voi `bollinger` nhung
+        # do rong theo BIEN DO THAT (ATR) thay vi do lech chuan cua gia dong.
+        #
+        # Them 12/09/2026: **12 co che trong kho nhac toi "keltner" ma ngu phap
+        # khong noi duoc** - chung hoac bi dich gan dung, hoac nam im. Cung luc
+        # do co donchian 12, supertrend 16, ichimoku 10, renko 9, vwap 6.
+        x = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
+        k = float(t.get("k", 2.0) or 2.0)
+        giua = x.ewm(span=n, adjust=False).mean()
+        a = _atr_series(df, int(t.get("n_atr", n) or n))
+        lay = str(t.get("lay", "duoi")).lower()
+        if lay == "giua":
+            return giua
+        if lay == "tren":
+            return giua + k * a
+        if lay == "duoi":
+            return giua - k * a
+        if lay == "do_rong":
+            return (2.0 * k * a) / giua.replace(0, np.nan)
+        if lay == "phan_tram_b":
+            tren, duoi = giua + k * a, giua - k * a
+            return (x - duoi) / (tren - duoi).replace(0, np.nan)
+        raise KeyError("'keltner': khong biet lay='%s' (co: giua, tren, duoi, "
+                       "do_rong, phan_tram_b)" % lay)
+    if cb == "supertrend":
+        return _supertrend(df, n, float(t.get("k", 3.0) or 3.0),
+                           str(t.get("lay", "chieu")).lower())
     if cb == "bollinger":
         # `lay`: "tren" | "giua" | "duoi" | "do_rong" | "phan_tram_b".
         # Ngu phap da viet duoc dai nay bang `tuyen_tinh`, nhung phai go ba tang
@@ -545,6 +976,128 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         can = np.sqrt(nen.where(nen > 0))
         return (can + huong * k * goc / 360.0) ** 2
 
+    # --- HINH HOC: fibo · duong_xu_huong · goc (them 12/09/2026) ---
+    #
+    # So do he thong co dong: *"Cac dang phuong phap dac biet nhu hinh hoc,
+    # gann,..."*. Gann da co tu 08/09 (`gann_sq9`), hinh hoc thi chua co gi.
+    #
+    # DO DUOC (12/09, tren kho 1.764 co che va corpus 150 cau/tang):
+    #   kho:    28 co che nhac "fib" · 9 "retrace" · 4 "angle" · 3 "trendline"
+    #   corpus: nhom tu vung `hinh_hoc` la nhom thieu lon thu NHI o tang KHAU DOC
+    #           (16/150 cau) va thu NHI o tang NGU PHAP (3/150)
+    # Tuc day khong phai mot y tuong dep - la mot lo thung do dem duoc.
+    #
+    # CA BA DEU TRA VE SO KHONG THANG DO (tru cac muc GIA, xem tung nhanh). Do
+    # 12/09 cho biet vi sao phai vay: nguong `atr14 < 0,003472` hoc tu train
+    # kich hoat 1.719 lan o train va **0 lan o holdout** - mot toan hang tra ve
+    # gia tho bien ca co che thanh co che cua MOT tai san o MOT thoi ky.
+    if cb == "fibo":
+        # Muc thoai lui Fibonacci giua dinh/day cua n bar gan nhat.
+        #
+        # `lay`:
+        #   "vi_tri" (mac dinh)  gia dang o muc thoai lui nao - SO LIEN TUC:
+        #                        0 = dang o dau song (dinh, neu song tang),
+        #                        1 = da thoai lui het ve goc, >1 = pha qua goc,
+        #                        <0 = dang lam dinh moi. Khong thang do.
+        #   0.236/0.382/0.5/0.618/0.786 (hay "muc" + truong `muc`)
+        #                        MUC GIA cua thoai lui do - de so voi `gia`
+        #                        (`gia cheo_xuong fibo(0.618)`). Day la gia, nen
+        #                        no thang do - dung nhu `donchian` lay=tren.
+        #   "khoang_cach"        (gia - muc) chia BIEN DO SONG - khong thang do,
+        #                        dung khi muon "gia cach muc 0,618 bao xa".
+        # Ti le > 1 la muc MO RONG (1.272 / 1.618) - cung cong thuc, nam ben kia
+        # goc song; 3 co che trong kho noi toi "extension" lam muc chot loi.
+        #
+        # `dinh`/`day` KHONG lo ra o day: `donchian` lay=tren/duoi da lam dung
+        # viec do (co dich mot bar y het), va hai ten cho mot phep tinh la cach
+        # bang "toan hang con thieu" bat dau noi doi.
+        lay = str(t.get("lay", "vi_tri")).lower()
+        dinh, day_, tang = _song_fibo(df, n, t.get("huong", "tu_dong"))
+        bien = dinh - day_
+        bien = np.where(bien > 0, bien, np.nan)
+        c = _cot(df, "close").to_numpy(float)
+        if lay == "vi_tri":
+            # Do SAU cua thoai lui, do tu dau song. Cung mot cong thuc cho ca
+            # hai chieu nho lay goc song lam moc.
+            sau = np.where(tang > 0, dinh - c, c - day_)
+            return pd.Series(sau / bien, index=df.index)
+        # "muc" va "khoang_cach" lay ti le tu truong `muc`; con lai thi CHINH
+        # `lay` la ti le ("0.618" / "61.8" / 0.618).
+        f = (_ti_le_fibo(t.get("muc", 0.618)) if lay in ("muc", "khoang_cach")
+             else _ti_le_fibo(lay))
+        if f is None or not (0.0 <= f <= 2.0):
+            raise KeyError(
+                "'fibo': khong biet lay='%s' (co: vi_tri, khoang_cach, muc, "
+                "hay mot ti le trong [0; 2] - %s la nam muc thoai lui chuan, "
+                "viet '0.618' hay '61.8'; > 1 la muc MO RONG nhu 1.618)"
+                % (lay, ", ".join(str(x) for x in MUC_FIBO)))
+        muc_gia = np.where(tang > 0, dinh - f * bien, day_ + f * bien)
+        if lay == "khoang_cach":
+            return pd.Series((c - muc_gia) / bien, index=df.index)
+        return pd.Series(muc_gia, index=df.index)
+
+    if cb in ("duong_xu_huong", "goc"):
+        # Duong hoi quy tuyen tinh n bar, va GOC cua no.
+        #
+        # `chuan` - chia do doc cho cai gi de het thang do:
+        #   "atr" (mac dinh)  ATR(n_atr) cua khung. Do doc thanh "bao nhieu ATR
+        #                     moi bar", so sanh duoc giua US500 va EURUSD.
+        #   "nguon"           trung binh |doi| cua chinh chuoi nguon n bar. Dung
+        #                     khi `cua` KHONG phai gia (`duong_xu_huong` cua
+        #                     rsi chang han): chia cho ATR khi do la chia hai
+        #                     don vi khac nhau, ra mot so khong doc duoc.
+        #
+        # `goc` = arctan cua do doc da chuan hoa, theo DO. No khong them thong
+        # tin so voi `lay="doc"` nhung no CHAN LAI trong (-90; 90): do doc co
+        # duoi rat day (mot nen khe gia lam no gap hang chuc lan), nen mot
+        # nguong hoc tren train de thanh nguong khong bao gio cham lai o holdout.
+        # 45 do = gia di dung MOT ATR moi bar.
+        #
+        # DA DO, DUNG TIN QUA MUC (EURUSD D1, train 7.232 bar / holdout 4.822):
+        # chuan hoa ATR chuyen duoc o q5..q95 nhung **q2 va q98 ra 0 lan kich
+        # hoat o holdout**. ATR(n) la mau so lam muot cham, con do doc thi nhay
+        # ngay - nen dung duoi phan phoi van con mui che do. Ba cach chua, ca ba
+        # deu viet duoc bang ngu phap hien co:
+        #   n_atr lon hon (n_atr=100 -> q2 co 9 lan, q98 co 15)
+        #   chuan="nguon"          -> q2 62 lan, q98 24 - chuyen duoc o MOI muc
+        #   boc trong `phan_vi`    -> chuyen duoc o moi muc (cach chuan cua lab)
+        # De doi chieu: `atr14` THO o cung phep do ra 0 lan o q2/q5 va **949 lan
+        # o q90 trong khi train chi 724** - tuc gap doi ti le. Chuan hoa khong
+        # phai la thuoc chua bach benh, no chi ha benh xuong hai bac.
+        x = (toan_hang(df, t["cua"]) if isinstance(t.get("cua"), dict)
+             else _cot(df, str(t.get("cot", "close")).lower()))
+        doc, r2, gia_tri = _hoi_quy_truot(x, n)
+        chuan = str(t.get("chuan", "atr")).lower()
+        if chuan == "atr":
+            thang = _atr_series(df, int(t.get("n_atr", n) or n))
+        elif chuan == "nguon":
+            thang = x.diff().abs().rolling(max(int(n), 2)).mean()
+        else:
+            raise KeyError("'%s': khong biet chuan='%s' (co: atr, nguon)"
+                           % (cb, chuan))
+        thang = thang.where(thang > 0)
+        doc_chuan = doc / thang
+
+        if cb == "goc":
+            lay = str(t.get("lay", "do")).lower()
+            if lay == "do":
+                return np.degrees(np.arctan(doc_chuan))
+            if lay == "radian":
+                return np.arctan(doc_chuan)
+            raise KeyError("'goc': khong biet lay='%s' (co: do, radian)" % lay)
+
+        lay = str(t.get("lay", "doc")).lower()
+        if lay == "doc":
+            return doc_chuan
+        if lay == "r2":
+            return r2
+        if lay == "gia_tri":
+            return gia_tri                 # MUC GIA cua duong tai bar nay
+        if lay == "lech":
+            return (x - gia_tri) / thang   # gia dang cach duong may ATR
+        raise KeyError("'duong_xu_huong': khong biet lay='%s' (co: doc, r2, "
+                       "gia_tri, lech)" % lay)
+
     # --- toan tu BIEN DOI: nhan mot toan hang con ---
     con = t.get("cua")
     if con is None:
@@ -556,6 +1109,19 @@ def _toan_hang_tinh(df: pd.DataFrame, t: dict) -> pd.Series:
         return x.rolling(n).std()
     if cb == "phuong_sai":                 # 72 lan trong ma that
         return x.rolling(n).var()
+    if cb == "lech_tb":
+        # (x - trung binh n) / trung binh n  -> khoang cach TI LE toi duong
+        # trung binh. Khac `zscore` o MAU SO: zscore chia cho do lech chuan, cai
+        # nay chia cho chinh trung binh, nen doc duoc thang la "cach MA bao
+        # nhieu phan tram".
+        #
+        # Them 12/09/2026 de dich duoc dac trung `dist_ma200_atr` cua `ds/mimic`.
+        # Luu y cai bay o ben do: TEN co chu "atr" nhung CONG THUC chia cho
+        # ma200, tuc no la PHAN TRAM chu khong phai so lan ATR. Mot luat hoc ra
+        # `dist_ma200_atr <= 0,02` nghia la 2%, khong phai 0,02 ATR - lech nhau
+        # hai bac do lon.
+        tb_ = x.rolling(n).mean()
+        return (x - tb_) / tb_.replace(0, np.nan)
     if cb == "zscore":
         sd = x.rolling(n).std()
         return (x - x.rolling(n).mean()) / sd.replace(0, np.nan)
@@ -607,6 +1173,8 @@ CHI_BAO_CO = {
     "tuyen_tinh", "tuong_quan",
     # muc gia hinh hoc (08/09/2026)
     "gann_sq9",
+    # HINH HOC (12/09/2026) - dong "hinh hoc, gann,..." cua so do he thong
+    "fibo", "duong_xu_huong", "goc",
     # moc neo theo chu ky (magnetic) - them 12/09 sau quy luat L5
     "moc_ky",
     # co nho trang thai
@@ -625,6 +1193,9 @@ CHI_BAO_NHAN_COT = {
     "cao_nhat", "thap_nhat", "tb", "do_lech", "phuong_sai", "zscore",
     "phan_vi", "doi", "doi_pct", "tre", "tuyet_doi", "tong", "rsi", "cci",
     "gann_sq9",
+    # `duong_xu_huong`/`goc` khop duong tren MOT chuoi nguon -> nhan `cot`.
+    # `fibo` thi KHONG: no neo vao dinh/day, tuc luon can ca high lan low.
+    "duong_xu_huong", "goc",
 }
 
 

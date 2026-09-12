@@ -20,6 +20,25 @@
  ],
  "viec": [
   {
+   "ma": "M0_don_mo_coi",
+   "ten": "Don tien trinh mo coi (thu lam he TU TE LIET)",
+   "vi_sao": "12/09: 24 worker mo coi an 19,5/20 loi hon 20 phut. Bo dieu toc thay CPU 100% nen tu choi phong viec - he nam im voi bang viec day, khong loi, khong canh bao. Tren VPS nhieu thang thi do la te liet ma khong ai biet.",
+   "lan": "NHE",
+   "uu_tien": 0,
+   "ngay": 1,
+   "toi_da_phut": 10,
+   "lap": 200,
+   "cach_nhau_gio": 0.25,
+   "lenh": [
+    "-m",
+    "nhan.don_mo_coi",
+    "--don"
+   ],
+   "cong": {
+    "kieu": "chay_duoc"
+   }
+  },
+  {
    "ma": "N0_don_dia",
    "ten": "Do dia truoc khi cho tester chay - bay B4 cua 08/09",
    "vi_sao": "Tester treo 2 gio, tieu 12 giay CPU, log ghi 'low disk space'. C: chi con 13,4 GB. Do TRUOC moi phien tester, dung doi no treo roi moi doan.",
@@ -707,6 +726,170 @@
     "C2_so_bai_hoc"
    ],
    "ghi_chu": "Thoat ma 3 khi chua co nhan/bai_hoc.py - dung doc la AM."
+  },
+  {
+   "ma": "L1_boc_llm_kho",
+   "ten": "LLM boc co che tu kho van ban (200 ban doc moi luot)",
+   "vi_sao": "doc_hieu tat dinh chi rut 4 dieu kien tu 24.244 cau - phan lon cau khong phai luat, nhung phan con lai thi LLM doc duoc. Quota vua thong 12/09, va cong van chan nhu cu nen sinh de khong nguy.",
+   "lan": "LLM",
+   "uu_tien": 1,
+   "ngay": 1,
+   "toi_da_phut": 240,
+   "lap": 20,
+   "cach_nhau_gio": 0.5,
+   "lenh": [
+    "-c",
+    "import sys;sys.path.insert(0,'.');from nhan import boc_llm as B;r=B.boc(gioi_han=200, luong=6, ghi_kho=True);import json;print(json.dumps(r, ensure_ascii=False, default=str)[:2000])"
+   ],
+   "cong": {
+    "kieu": "chay_duoc"
+   }
+  },
+  {
+   "ma": "Q1_to_hop_toan_hang_moi",
+   "ten": "To hop D1+H4 voi toan hang MOI (mau nen, 5 chi bao, hinh hoc)",
+   "vi_sao": "Mau nen, supertrend/keltner/donchian/ichimoku/heiken va fibo/duong_xu_huong/goc deu them ngay 12/09 va CHUA BAO GIO duoc quet tren ca kho.",
+   "lan": "CPU",
+   "uu_tien": 2,
+   "ngay": 1,
+   "toi_da_phut": 180,
+   "lenh": [
+    "-m",
+    "nhan.to_hop",
+    "D1",
+    "H4",
+    "--tien-trinh",
+    "2"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/TO_HOP.json"
+   }
+  },
+  {
+   "ma": "Q2_suy_nguoc_H4",
+   "ten": "Suy nguoc dau hieu truoc su kien tren H4",
+   "vi_sao": "D1 da chay (126/154 ma cung dau ve bien dong no ra truoc cu tang). Chua biet H4 co giong khong - va neu khac thi do la mot phat hien ve KHUNG.",
+   "lan": "CPU",
+   "uu_tien": 3,
+   "ngay": 1,
+   "toi_da_phut": 120,
+   "lenh": [
+    "-m",
+    "nhan.suy_nguoc",
+    "quet",
+    "H4",
+    "2"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/SUY_NGUOC.json"
+   }
+  },
+  {
+   "ma": "Q3_ho_so_song_H4",
+   "ten": "Ho so song + moc magnetic tren H4 cho toan kho",
+   "vi_sao": "Ho so song moi chay D1. Chan troi song cua H4 khac han, va `to_hop` dung `tre_xac_nhan_bar` cua ho so nay.",
+   "lan": "CPU",
+   "uu_tien": 4,
+   "ngay": 1,
+   "toi_da_phut": 120,
+   "lenh": [
+    "-m",
+    "nhan.ho_so_song",
+    "quet",
+    "H4",
+    "2"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/HO_SO_SONG.json"
+   }
+  },
+  {
+   "ma": "Q4_quan_tri_H4",
+   "ten": "Quet ca hai ho quan tri tren H4",
+   "vi_sao": "Chan troi giu lenh vua duoc sua (theo tung co che thay vi 60 cung), nen moi so quan tri cu deu phai do lai.",
+   "lan": "CPU",
+   "uu_tien": 5,
+   "ngay": 1,
+   "toi_da_phut": 120,
+   "lenh": [
+    "_quet_quan_tri.py",
+    "H4",
+    "0",
+    "2"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/QUET_QUAN_TRI_H4.json"
+   }
+  },
+  {
+   "ma": "E1_evo_bao_xa",
+   "ten": "EVO do suc khoe + bao ra Telegram khi tap van de DOI",
+   "vi_sao": "Dich la VPS 24/7 nhieu thang khong nguoi truc. Bo giam sat chi ghi vao reports/ thi trong khoang do bang khong co.",
+   "lan": "NHE",
+   "uu_tien": 2,
+   "ngay": 1,
+   "toi_da_phut": 15,
+   "lap": 50,
+   "cach_nhau_gio": 1.0,
+   "lenh": [
+    "-m",
+    "nhan.evo",
+    "--ghi",
+    "--xa"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/EVO_SUC_KHOE.md"
+   }
+  },
+  {
+   "ma": "V1_san_sang_vps",
+   "ten": "Do lai do san sang chuyen VPS",
+   "vi_sao": "Moi lan them module/phu thuoc la danh sach 'phai cai tren VPS' doi. Do lai de no khong cu dan.",
+   "lan": "NHE",
+   "uu_tien": 6,
+   "ngay": 1,
+   "toi_da_phut": 15,
+   "lap": 20,
+   "cach_nhau_gio": 3.0,
+   "lenh": [
+    "-m",
+    "nhan.san_sang_vps"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/SAN_SANG_VPS.md"
+   }
+  },
+  {
+   "ma": "V2_vong_day_du",
+   "ten": "VONG DAY DU: SEEKER -> QUANTLAB -> EVO (6 chang)",
+   "vi_sao": "Do 12/09: `day_chuyen.mot_luot` chi chay san->doc->boc roi dung; to_hop/suy_nguoc/quan tri nam ngoai day chuyen. Khong lap lich thi tren VPS chung chi chay khi co nguoi go tay.",
+   "lan": "CPU",
+   "uu_tien": 7,
+   "ngay": 1,
+   "toi_da_phut": 240,
+   "lap": 30,
+   "cach_nhau_gio": 6.0,
+   "lenh": [
+    "-m",
+    "nhan.vong_day_du",
+    "--ma",
+    "XM_US500CASH",
+    "--khung",
+    "D1",
+    "--tien-trinh",
+    "2",
+    "--nhanh"
+   ],
+   "cong": {
+    "kieu": "chay_duoc",
+    "file": "reports/VONG_DAY_DU.json"
+   }
   }
  ]
 }

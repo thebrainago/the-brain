@@ -1,0 +1,139 @@
+ma: 159 -> 145 (bo 14 ban sao)
+cap (ma, khung) co du du lieu: 140
+co che kich hoat trong [2%, 60%]: 1843
+
+CHANG 1 - 258020 o
+  chang 1: 258020 o -> 238620 ket qua, 3640 loi, 3124s
+    loi dau: KhungThieuGio: DSL chi_bao='gio': co che theo PHIEN nhung khung chi co mot gio duy nhat ([21]) - can khung noi ngay
+
+CHANG 2 - 3000 o (200 song sot x 7 cau truc + 8 luat)
+  chang 2: 3000 o -> 2934 ket qua, 0 loi, 28s
+
+CHANG 3 - 0 o (do do nhay thong so)
+
+CHANG 4 - HOLDOUT - 5868 o (2934 he x train/hold)
+  chang 4: 5868 o -> 5439 ket qua, 0 loi, 41s
+  giu ca hai dau: 2609 he - THANG MOC O HOLDOUT: 1
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\TO_HOP.json
+# TONG KET TO HOP
+
+*2934 o chang 2 / 145 ma / khung --khung, D1 / 3196 giay*
+
+Xep hang bang `cagr_dd20`: lai %/nam khi quy ca hai ve cung ngan sach
+sut giam 20%. `hon_moc` = thang **max(mua-giu, ban-giu, tien mat)**.
+
+## DOC BANG NAY NHU THE NAO
+
+Chang 1 da CHON top 200 o theo chinh `cagr_dd20`, roi chang 2 mo rong
+dung nhung o do. Nen con so `hon_moc` o day **bi thoi len boi chinh phep
+chon** - no khong phai ti le thanh cong cua mot lan quet mu.
+
+Cai bang nay tra loi duoc, va chi tra loi duoc, mot cau: *voi nhung o da
+co ve co gi, thi doi CAU TRUC hay doi LUAT lam ket qua thay doi ra sao*.
+Do la dung cau hoi chu du an dat ra cho module quan li lenh. Muon biet
+ti le thanh cong THAT thi phai doc chang 1 (chua chon), hoac chay lai
+tren holdout.
+
+## Theo CAU TRUC VAO LENH
+
+| cau truc vao lenh | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| thi_truong | 1767 | 127.754 | 695.588 | 100% | 345 |
+| nhanh | 200 | 100.061 | 283.429 | 100% | 1 |
+| tt_hedge | 177 | 60.787 | 263.188 | 99% | 1 |
+| hai_dau_oco | 199 | 23.821 | 89.270 | 91% | 0 |
+| hai_dau_giu | 199 | 21.786 | 62.501 | 90% | 0 |
+| dca_deu | 196 | 17.782 | 136.812 | 100% | 3 |
+| dca_von | 196 | 13.474 | 133.299 | 100% | 1 |
+
+**NEN DI**: thi_truong (trung vi 127.754, 1765/1767 o duong)
+
+**NEN TRANH**: dca_von (trung vi 13.474, chi 196/196 o duong)
+
+## Theo LUAT QUAN TRI
+
+| luat quan tri | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| sl2_trail1 | 200 | 312.000 | 695.588 | 100% | 130 |
+| sl3_trail2 | 198 | 215.317 | 536.493 | 100% | 98 |
+| sl2_tp6_hue2_trail2 | 200 | 163.107 | 465.220 | 100% | 56 |
+| sl2_tp4 | 200 | 134.361 | 257.967 | 100% | 20 |
+| chot_nhanh_sl1_tp1 | 200 | 120.100 | 222.139 | 100% | 1 |
+| khong_gi | 169 | 115.280 | 235.120 | 100% | 26 |
+| sl2_tp4_hue1 | 200 | 107.219 | 294.349 | 100% | 8 |
+| sl2_tp4_chot1 | 200 | 93.501 | 176.002 | 100% | 2 |
+| - | 1367 | 35.525 | 283.429 | 97% | 10 |
+
+**NEN DI**: sl2_trail1 (trung vi 312.000, 200/200 o duong)
+
+**NEN TRANH**: - (trung vi 35.525, chi 1325/1367 o duong)
+
+## Theo HO CO CHE
+
+| ho co che | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| pha_vo | 449 | 104.183 | 621.910 | 100% | 38 |
+| quay_ve_trung_binh | 569 | 97.670 | 695.588 | 99% | 84 |
+| phien | 15 | 97.040 | 301.878 | 100% | 2 |
+| bien_dong | 475 | 96.839 | 568.171 | 95% | 51 |
+| xu_huong | 1411 | 89.882 | 647.647 | 99% | 175 |
+| vi_mo | 15 | 82.044 | 401.999 | 100% | 1 |
+
+**NEN DI**: pha_vo (trung vi 104.183, 448/449 o duong)
+
+**NEN TRANH**: vi_mo (trung vi 82.044, chi 15/15 o duong)
+
+## Theo TAI SAN
+
+| tai san | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| EURMXN | 2889 | 95.968 | 695.588 | 99% | 332 |
+| GBPTRY | 45 | 56.266 | 124.666 | 84% | 19 |
+
+**NEN DI**: EURMXN (trung vi 95.968, 2854/2889 o duong)
+
+**NEN TRANH**: GBPTRY (trung vi 56.266, chi 37/45 o duong)
+
+## CHANG 4 - HOLDOUT (chang quyet dinh)
+
+Chon tren 60% dau, DO tren 40% sau. Ba chang tren deu chon tren
+chinh so chung do, nen chi bang nay noi duoc co gi that hay khong.
+
+**1/2609 he thang moc o holdout.**
+
+Tieu chi: hai nua deu thang moc CUA CHINH NO, va ti le
+`hold/train` nam trong [0.33, 3.0] (hai nua cung co).
+
+| ma | khung | co che | cau truc | luat | dd20 train | dd20 HOLD | ti le | moc hold |
+|---|---|---|---|---|---:|---:|---:|---:|
+| GBPTRY | D1 | ns_nen_bua_<_q20_giu3 | thi_truong | - | 164.30 | **82.94** | 0.51 | 80.99 |
+
+## Cai duy nhat dang theo tiep
+
+351/2934 o thang duoc moc. 
+
+| ma | khung | co che | cau truc | luat | dd20 | moc |
+|---|---|---|---|---|---:|---:|
+| EURMXN | D1 | chieu_theo_hoi_ve_trung_binh | thi_truong | sl2_trail1 | 695.588 | 221.758 |
+| EURMXN | D1 | trend_following_daily_breako | thi_truong | sl2_trail1 | 647.647 | 221.758 |
+| EURMXN | D1 | song_tang_weis | thi_truong | sl2_trail1 | 647.538 | 221.758 |
+| EURMXN | D1 | bat_xu_huong_giam_khi_toc_o_ | thi_truong | sl2_trail1 | 646.964 | 221.758 |
+| EURMXN | D1 | bat_xu_huong_tang_khi_gia_ph | thi_truong | sl2_trail1 | 641.178 | 221.758 |
+| EURMXN | D1 | mean_reversion_buy | thi_truong | sl2_trail1 | 639.475 | 221.758 |
+| EURMXN | D1 | dao_dong_quanh_sma_20_ky | thi_truong | sl2_trail1 | 639.364 | 221.758 |
+| EURMXN | D1 | ban_khong_theo_xu_huong_sma_ | thi_truong | sl2_trail1 | 638.346 | 221.758 |
+| EURMXN | D1 | giao_dich_cap_tai_san_pair_t | thi_truong | sl2_trail1 | 638.346 | 221.758 |
+| EURMXN | D1 | ma_cut_tang | thi_truong | sl2_trail1 | 636.834 | 221.758 |
+| EURMXN | D1 | magrid_buy_switch | thi_truong | sl2_trail1 | 636.220 | 221.758 |
+| EURMXN | D1 | quay_ve_trung_binh_ma_don_gi | thi_truong | sl2_trail1 | 633.967 | 221.758 |
+| EURMXN | D1 | ns_donchian55_<_q5_giu5 | thi_truong | sl2_trail1 | 621.910 | 221.758 |
+| EURMXN | D1 | ns_donchian55_<_q10_giu5 | thi_truong | sl2_trail1 | 614.893 | 221.758 |
+| EURMXN | D1 | ns_donchian55_<_q20_giu5 | thi_truong | sl2_trail1 | 613.701 | 221.758 |
+| EURMXN | D1 | cci_zero_line_bearish | thi_truong | sl2_trail1 | 600.493 | 221.758 |
+| EURMXN | D1 | he_thong_su_dung_tin_hieu_ca | thi_truong | sl2_trail1 | 592.898 | 221.758 |
+| EURMXN | D1 | thoat_lenh_vao_lenh_xu_huong | thi_truong | sl2_trail1 | 589.857 | 221.758 |
+| EURMXN | D1 | lenh_ban_xu_huong_giam | thi_truong | sl2_trail1 | 572.428 | 221.758 |
+| EURMXN | D1 | bullish_rsi_divergence | thi_truong | sl2_trail1 | 569.897 | 221.758 |
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\TO_HOP_TONG_KET.md

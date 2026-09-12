@@ -1,0 +1,32 @@
+# ns_v4
+# Noi sinh EURUSD: dem lenh holdout DUNG (KHONG_KICH_HOAT vs MAT_DAU)
+# python _noi_sinh_chay.py --ma EURUSD --khung D1
+
+=== NOI SINH: EURUSD.D1 ===
+  ca chuoi 14322 bar  1971-01-03 -> 2026-07-26
+  TRAIN     8593 bar  1971-01-03 -> 2004-06-28
+  HOLDOUT   5729 bar  2004-06-29 -> 2026-07-26
+  spread do duoc 1.63 bps | phi giu 2.460 %/nam | do_tin SAN
+  moc mua-giu: TRAIN S=+0.047 (CAGR -0.05%, DD -69.1%) | HOLDOUT S=-0.254 (CAGR -2.70%, DD -52.7%)
+  sinh 3175 co che tu chinh TRAIN (867s)
+  cham diem xong: 2842 co che du 30 lenh (1082s)
+  vuot moc tren TRAIN: 1018
+
+  -- TOP 10 tren TRAIN, gio cham HOLDOUT (lan duy nhat) --
+  co che                                         S_tr chenh_tr   S_ho chenh_ho  lenh  l_ho  ket
+  ns2_rsi14>q80_cci20>q80_giu5                  0.653   +0.606 -0.208   +0.046   167   115  giu_dau
+  ns_zscore60_>_q80_giu2                        0.640   +0.593 -0.347   -0.093   156   129  mat_dau
+  ns2_ibs<q5_stochastic14>q80_giu5              0.631   +0.584  0.000   +0.254    56     0  KHONG_KICH_HOAT
+  ns_rsi14_>_q90_giu5                           0.631   +0.584 -0.199   +0.055   103    54  giu_dau
+  ns2_rsi4>q80_nen_sao_bang>q95_giu5            0.627   +0.580 -0.361   -0.107    56    21  mat_dau
+  ns2_rsi4>q80_nen_rau_tren>q95_giu5            0.627   +0.580 -0.361   -0.107    56    21  mat_dau
+  ns2_zscore60>q80_cci20>q80_giu5               0.622   +0.575 -0.204   +0.050   136   101  giu_dau
+  ns2_rsi14>q80_zscore20>q80_giu5               0.615   +0.568 -0.193   +0.061   166   115  giu_dau
+  ns2_rsi14>q80_rsi4>q80_giu5                   0.608   +0.560 -0.255   -0.001   177   121  mat_dau
+  ns_rsi14_>_q80_giu2                           0.607   +0.560 -0.257   -0.003   200   143  mat_dau
+
+  giu dau ngoai mau: 4/10
+  KHONG KICH HOAT o holdout: 1/10  <- nguong tu TRAIN nam ngoai phan phoi HOLDOUT.
+     Day KHONG phai ket qua am - la phep thu chua chay duoc.
+  CANH BAO boi so phep thu: da cham diem 2842 co che tren TRAIN; nguong Bonferroni cho 10 lan nhin holdout la p < 0.0050
+  -> reports/noi_sinh_eurusd_d1.csv  (1083s)

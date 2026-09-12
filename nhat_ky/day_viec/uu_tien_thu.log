@@ -1,0 +1,19 @@
+# uu_tien_thu
+# Q7: thu luong uu tien bang mot cau luat tieng Viet
+# python -m nhan.uu_tien "Mua khi RSI 14 duoi 30, thoat khi RSI tren 55."
+
+chu du an go thang
+  nguon: Mua khi RSI 14 duoi 30, thoat khi RSI tren 55.
+  doc bang: van_ban · 46 ky tu
+
+CO CHE DOC DUOC: 0
+
+CONG TU CHOI: 1
+  mua_rsi14_duoi_30: da co co che ten 'mua_rsi14_duoi_30'
+
+HE DA TUNG DI HUONG NAY:
+  [bay_do_luong] DOC KY FILE .SET NGUOI DUNG DUA TRUOC KHI CHAY BAT KY BANG NAO.
+      sau thang x0,881; khong doi diem vao — 2.356 lenh trung 100% ngay, trung ca so
+  [quy_tac_nguoi_dung] Ba con so cua THIET_KE muc 11
+  [bay_do_luong] Viet regex qua heredoc/chuoi khong-raw:  thanh ky tu BACKSPACE 0x08, regex im lang khong khop gi
+      2 lan trong 1 phien; _kiem_tra_cuu tut 17/20 -> 0/20; doc_hieu chi con nhanh rong

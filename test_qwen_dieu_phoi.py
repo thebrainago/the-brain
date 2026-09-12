@@ -226,3 +226,20 @@ def test_dieu_toc_HOC_suat_that_va_lay_max_voi_bang_khai():
     truoc = dt.do_duoc["LLM"]
     dt.hoc("LLM", 0.1)
     assert dt.do_duoc["LLM"] > truoc * 0.8, "tut xuong qua nhanh sau mot phep do thap"
+
+
+def test_cong_khai_SAI_khong_lam_sap_ca_vong():
+    """Mot viec khai `cong` sai kieu phai bi danh CHUA_DO_DUOC, KHONG duoc nem
+    loi len `mot_vong`.
+
+    Do 12/09/2026: mot viec khai `"cong": "<chuoi>"` (thay vi dict) lam
+    `spec.get` nem AttributeError, loi troi len tan `chay()` va **ca qwen dung**.
+    Tren VPS chay nhieu thang thi do la chet ca he vi mot dong khai bao.
+    """
+    from qwen import cong as CONG
+    for xau in ("mot chuoi", ["danh", "sach"], 42):
+        viec = {"ma": "THU_KHAI_SAI", "ten": "thu", "lan": "NHE",
+                "lenh": ["-c", "pass"], "cong": xau}
+        r = CONG.cham(viec, 0, 0.0, "", None)
+        assert isinstance(r, dict), "cham() phai tra dict, khong duoc nem"
+        assert r.get("ket") != "DAT", "khai bao `cong` sai ma van cho DAT"

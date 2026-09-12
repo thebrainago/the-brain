@@ -1,0 +1,24 @@
+chay 27/159 ma trong 30s
+
+HO 1 - CAU TRUC VAO LENH (dd20 = lai %%/nam quy ve cung sut giam 20%%)
+CAU TRUC          MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+dca_von           27     -1.386      3.361       3        0   -0.472
+dca_deu           27     -1.487      2.645       3        0   -0.488
+thi_truong        27     -1.595      1.282       1        0   -0.535
+hai_dau_giu       27     -1.620      1.825       2        1   -0.924
+hai_dau_oco       27     -1.640      2.083       3        1   -0.948
+nhanh             27     -1.705      1.333       1        0   -1.042
+tt_hedge          27     -1.850      1.162       2        0   -1.525
+
+HO 2 - LUAT QUAN TRI
+LUAT                      MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+khong_gi                  27     -1.628      1.797       2        0   -0.814
+sl2_trail1                27     -1.632      3.038       1        0   -1.088
+sl3_trail2                27     -1.640      0.700       1        0   -0.913
+sl2_tp4                   27     -1.642      0.280       2        0   -1.323
+sl2_tp4_hue1              27     -1.642      0.376       1        0   -1.236
+sl2_tp4_chot1             27     -1.642      0.501       2        0   -1.299
+sl2_tp6_hue2_trail2       27     -1.642      0.199       1        0   -1.246
+chot_nhanh_sl1_tp1        27     -1.692     -0.342       0        0   -1.617
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\QUET_QUAN_TRI_H4.json

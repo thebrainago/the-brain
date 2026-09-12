@@ -1,0 +1,81 @@
+# kiem_v4
+# Bo kiem thu toan lab - sau khi sua thut le BAY 6 + bang anh xa mimic
+# python b.py test
+
+bringing up nodes...
+bringing up nodes...
+
+...................uuuu.......................................uu.uuuuuu. [  4%]
+..................................................uu..............uuuuu. [  8%]
+u.........u.uu.uu...................................................uuuu [ 12%]
+..uuu..uuu.u............................................................ [ 16%]
+..........................................uuu........................... [ 21%]
+..............................uuu......uuu...uu.......uuuuuu.uuuuuuuuu.. [ 24%]
+.uuu.......uuuuuuu..uuuuuuuuuuuuuuuuuuuuuuuuuuuu........................ [ 26%]
+.FF..F........uuu......uuu.............................................. [ 30%]
+uuuuuuuuuuuuu..............uuuuuuuu.uuuuu.uuuuu.uuuuuuuuuuuuuu....uuuuuu [ 32%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuuu..uuuuuu.uuuuuuuuuuuuu [ 32%]
+uuuuuuu.uuuuuuuuuuu.....................u.uuuu...u..........u........u.. [ 35%]
+....................................u................................... [ 40%]
+uuuuuu.........................uuuuuu................................... [ 44%]
+..............uuuu...u.u.u.u....u......uuuu.uuuuuu.....................u [ 47%]
+uuu...............................uu............u....................... [ 51%]
+...u.u........u..............u.....uu.......................u........... [ 56%]
+....u..........u.....u................u.......................u......... [ 60%]
+........u.u...........u...........u.............................uuuuuu.. [ 64%]
+........................................................................ [ 69%]
+...................u...uu............................................... [ 73%]
+.................u..uuuuu.u..uuuuuuuu..uuu.uu.u.uuu.uuu................. [ 76%]
+...................................................................uuuuu [ 81%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 81%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 81%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu........................................ [ 83%]
+........................................................................ [ 88%]
+........................................................................ [ 93%]
+.s...................................................................... [ 97%]
+................................                                         [100%]
+================================== FAILURES ===================================
+______ CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN.test_DICH_MOT_PHAN_bi_tu_choi ______
+[gw5] win32 -- Python 3.14.3 C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe
+
+self = <test_cua_vao.CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN testMethod=test_DICH_MOT_PHAN_bi_tu_choi>
+
+    def test_DICH_MOT_PHAN_bi_tu_choi(self):
+        """Bo mot dieu kien khong dich duoc thi luat con lai LONG HON luat goc:
+        no kich hoat nhieu hon han, an mot suat FDR, va khi truot thi ket luan
+        'suy nguoc khong an' - trong khi cai truot la ban dich."""
+        r = self.MC.dich_luat({"conditions": ["rsi_14 <= 25.0000",
+                                              "price_position <= 0.2000"],
+                               "pos_ratio": 0.7, "samples": 90})
+>       self.assertFalse(r["nhan"])
+E       AssertionError: True is not false
+
+test_cua_vao.py:173: AssertionError
+_ CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN.test_ban_do_khong_duoc_bia_toan_hang_gan_dung _
+[gw5] win32 -- Python 3.14.3 C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe
+
+self = <test_cua_vao.CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN testMethod=test_ban_do_khong_duoc_bia_toan_hang_gan_dung>
+
+    def test_ban_do_khong_duoc_bia_toan_hang_gan_dung(self):
+        """Hai dac trung la bieu thuc PHAI la None. Ep chung vao mot toan hang
+        gan dung se cho ra mot luat KHAC luat cua trader."""
+>       self.assertIsNone(self.MC.BAN_DO["price_position"])
+E       AssertionError: {'chi_bao': 'stochastic', 'n': 20} is not None
+
+test_cua_vao.py:196: AssertionError
+_ CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN.test_dac_trung_la_BIEU_THUC_thi_tu_choi_va_ghi_hang_doi _
+[gw5] win32 -- Python 3.14.3 C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe
+
+self = <test_cua_vao.CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN testMethod=test_dac_trung_la_BIEU_THUC_thi_tu_choi_va_ghi_hang_doi>
+
+    def test_dac_trung_la_BIEU_THUC_thi_tu_choi_va_ghi_hang_doi(self):
+        r = self.MC.dich_dieu_kien("price_position <= 0.2000")
+>       self.assertFalse(r["nhan"])
+E       AssertionError: True is not false
+
+test_cua_vao.py:163: AssertionError
+=========================== short test summary info ===========================
+FAILED test_cua_vao.py::CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN::test_DICH_MOT_PHAN_bi_tu_choi
+FAILED test_cua_vao.py::CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN::test_ban_do_khong_duoc_bia_toan_hang_gan_dung
+FAILED test_cua_vao.py::CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN::test_dac_trung_la_BIEU_THUC_thi_tu_choi_va_ghi_hang_doi
+3 failed, 1521 passed, 1 skipped, 523 subtests passed in 866.06s (0:14:26)

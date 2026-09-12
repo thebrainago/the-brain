@@ -1,13 +1,13 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """run_mt5_flag.py - tick-test MT5 that cho he flagship LuoiDoiXung (EURCAD, MOC).
 Chay qua Task Scheduler de tranh timeout/dup. Ghi ket qua reports/mt5_ultima.json.
 """
 import json, sys, time
 from pathlib import Path
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import mt5_worker as m
 
-LAB = Path(r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+LAB = Path(__file__).resolve().parent
 ten = "ultima_tickcheck"
 TU, DEN = "2023.01.01", "2026.07.31"
 

@@ -26,7 +26,7 @@ do la chuyen mot khoan lo giao dich thanh mot khoan lo doi song. Kho ket qua
 cua chinh du an nay co san mot vi du: DCA voi bom von cho -100,5% o MOI muc von.
 """
 import sys, json, warnings
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
@@ -61,6 +61,7 @@ print(f"{spec['ten'][:40]} | {MA} {KHUNG} L={L:.0f} | {n} bar, {nam:.1f} nam\n")
 # vao `bien_don_bay.ap_luat_von` (mot ban cai dat, dinh that va dinh lam viec
 # tach nhau) va goi tu day. Ket qua dung: xem `_chan_dd_holdout.py`.
 from nhan import bien_don_bay as B
+from pathlib import Path
 
 
 def chay(rut_quy=0.0, chan_dd=None):

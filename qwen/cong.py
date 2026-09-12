@@ -120,6 +120,18 @@ def cham(viec: dict, ma_thoat: int, bat_dau: float, log_duoi: str,
                         "Duoi log: %s" % (ma_thoat, (log_duoi or "")[-400:]))
         return ra
 
+    # MOT VIEC KHAI SAI KHONG DUOC LAM SAP CA VONG LAP.
+    #
+    # Do 12/09/2026: mot viec moi khai `"cong": "boc duoc >= 1 co che"` (chuoi
+    # thay vi dict) lam `spec.get` nem AttributeError, va loi do troi len tan
+    # `mot_vong` -> `chay` -> **ca qwen dung**. Tren VPS chay nhieu thang thi do
+    # la chet ca he vi mot dong khai bao.
+    if not isinstance(spec, dict):
+        ra["vi_sao"] = ("khai bao `cong` phai la dict {kieu, file}, nhan %r. "
+                        "Viec nay bi danh CHUA_DO_DUOC - cac viec khac van chay."
+                        % (spec if len(str(spec)) < 120 else type(spec).__name__))
+        return ra
+
     files = spec.get("file")
     files = [files] if isinstance(files, str) else list(files or [])
     dat_file = []

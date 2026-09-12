@@ -26,7 +26,7 @@ import json
 import sys
 import warnings
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
@@ -37,6 +37,7 @@ from nhan import chi_phi as CP
 from nhan import du_lieu as DL
 from nhan import mo_phong as MP
 from nhan import ngu_phap as NP
+from pathlib import Path
 
 KHUNG, L = "D1", 2.0
 KICH_BAN = [

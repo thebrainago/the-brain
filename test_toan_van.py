@@ -237,5 +237,52 @@ class TranSoTabTrinhDuyet(unittest.TestCase):
                       "doc_gan khong dong tab cua chinh no -> ro ri tro lai")
 
 
+class VoMainRongKhongDuocNuotCaTrang(unittest.TestCase):
+    """Bien the THU BA cua "khoa oan" - lan nay do chinh bo boc gay ra.
+
+    `tu_html` uu tien khoi <article>/<main> neu co, va truoc 12/09/2026 no
+    khong bao gio hoi lai xem khoi do co CHU hay khong. Trang dung khung
+    React/Next thuong co the <main> la mot vo rong, noi dung dung vao cho khac.
+
+    Do that 12/09/2026 tren `fxblue.com/tools-for-download/fx-blue-trading-
+    simulator/user-guide/metaTrader4`: trang **501.856 byte**, co **dung 1 khoi
+    <main> dai 503 byte boc ra 0 ky tu chu**, trong khi ca trang boc ra
+    **32.594 ky tu**. Nguong `len(vb) < 400` bien 32.594 ky tu do thanh mot chu
+    "khong doc duoc" - va `doc_toan_van` ghi nhan ay VINH VIEN.
+
+    Day khong phai loi rieng cua fxblue: moi trang dung vo SPA deu roi vao day.
+    """
+
+    def _thay_lay(self, html):
+        cu = TV._lay
+        TV._lay = lambda url, timeout=35: html
+        self.addCleanup(lambda: setattr(TV, "_lay", cu))
+
+    def test_main_RONG_thi_lui_ve_ca_trang(self):
+        than = "Doan van that ve cach mo phong lenh trong MT4. " * 40
+        self._thay_lay(f"<html><body><main><div></div></main>"
+                       f"<div id='noi-dung'>{than}</div></body></html>")
+        r = TV.tu_html("https://www.fxblue.com/x", "khac")
+        self.assertIsNotNone(r, "vo <main> rong van nuot ca trang")
+        self.assertGreater(len(r["van_ban"]), 400)
+        self.assertIn("mo phong lenh trong MT4", r["van_ban"])
+
+    def test_main_CO_CHU_thi_van_uu_tien_khoi_do(self):
+        """Noi long khong duoc pha muc dich cu: co than bai thi bo dieu huong."""
+        than = "Than bai that nam trong the main va dai hon bon tram ky tu. " * 12
+        self._thay_lay(f"<html><body><nav>Dang nhap Dang ky Lien he</nav>"
+                       f"<main>{than}</main>"
+                       f"<footer>Dieu khoan su dung</footer></body></html>")
+        r = TV.tu_html("https://vidu.com/x", "blog")
+        self.assertIsNotNone(r)
+        self.assertNotIn("Dieu khoan su dung", r["van_ban"],
+                         "da co than bai ma van gom ca chan trang")
+
+    def test_trang_THAT_SU_RONG_van_tra_None(self):
+        """Vo SPA cua eToro: 0 the <a>, 0 ky tu chu - khong co gi de cuu."""
+        self._thay_lay("<html><body><main></main><div></div></body></html>")
+        self.assertIsNone(TV.tu_html("https://www.etoro.com/people/x", "khac"))
+
+
 if __name__ == "__main__":
     unittest.main()

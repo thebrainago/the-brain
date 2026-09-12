@@ -1,0 +1,63 @@
+# EVO - SUC KHOE HE THONG
+
+*2026-09-12 21:58:45*
+
+TOT 18 · XAU 2 · CHUA DO 1
+
+`CHUA_DO` khong phai `XAU`. Mot chi so khong do duoc thi noi la khong
+do duoc - quy no ve 'xau' la cach mot bo giam sat tu bia ra van de.
+
+| chi so | gia tri | trang thai | bang chung |
+|---|---:|---|---|
+| `seeker.ty_le_doc` | 0.668 | TOT | 7564/11325 tai lieu co ban van |
+| `seeker.nguon_rong` | 3 | TOT | rong: mql5_ma_nguon, quantconnect, rss_reddit_quant |
+| `quantlab.kho_co_che` | 2554 | TOT | 2554 co che, 2517 (99%) co truong `co_che` giai thich |
+| `quantlab.ho_so_song` | 2.9 | TOT | HO_SO_SONG.json ghi lan cuoi cach day 3 gio |
+| `quantlab.ho_so_mua_vu` | 8.6 | TOT | HO_SO_MUA_VU.json ghi lan cuoi cach day 9 gio |
+| `quantlab.ho_so_tuong_quan` | 7.9 | TOT | HO_SO_TUONG_QUAN_D1.json ghi lan cuoi cach day 8 gio |
+| `quantlab.ho_so_suy_nguoc` | 2.9 | TOT | SUY_NGUOC.json ghi lan cuoi cach day 3 gio |
+| `quantlab.ho_so_to_hop` | 1.0 | TOT | TO_HOP.json ghi lan cuoi cach day 1 gio |
+| `quantlab.ket_qua` | 1280 | TOT | 1280 dong trong ket_qua |
+| `evo.van_de_mo` | 90 | XAU | 90 van de chua dong |
+| `evo.bai_hoc` | 238 | TOT | 238 the bai hoc |
+| `evo.finder` | None | CHUA_DO | san_cong_cu = Finder cua so do |
+| `xay.hang_doi` | 33 | TOT | {'xong': 27, 'loi': 3, 'dang': 1, 'cho': 2} |
+| `xay.viec_hong` | 3 | XAU | kiem_v3(loi), kiem_v4(loi), kiem_v5(loi) |
+| `may.mo_coi` | 0 | TOT | 0 tien trinh, 0% CPU |
+| `phanh.chua_khai` | 0 | TOT | 1/1 he da khai han muc |
+| `phanh.vua_ngat` | 0 | TOT | chua he nao vuot tran |
+| `thong_luong.tang_cam` | 0 | TOT | 9 tang deu co dau ra |
+| `thong_luong.nut_that` | ban doc -> thanh phan 4.2% | TOT | 6759 vao -> 285 ra. Day la cho dang gioi han san luong ca he - noi rong cho khac khong lam |
+| `dia.con_trong` | 6.4 | TOT | 6.4 GB trong / 119 GB tong (95% da dung) |
+| `dia.nao_db` | 1333 | TOT | bang `noi_dung` (toan van tai lieu) chiem phan lon - do la du lieu THAT, khong phai rac; m |
+
+## Van de + cat nghia + de xuat
+
+### `evo.van_de_mo` — van de con mo
+
+**Do duoc:** 90 van de chua dong
+
+**Cat nghia:** Van de mo don lai: dang ghi nhan nhanh hon dang dong.
+
+**De xuat:** chua co lenh san - can nguoi quyet dinh.
+
+### `xay.viec_hong` — viec loi / qua han
+
+**Do duoc:** kiem_v3(loi), kiem_v4(loi), kiem_v5(loi)
+
+**Cat nghia:** Mot viec xay hong. Hang doi tuan tu KHONG dung lai o loi, nen viec sau van chay - phai doc log de biet cai gi hong.
+
+**De xuat (chay duoc):**
+
+```
+xem nhat_ky/day_viec/<ma>.log roi `python day_viec.py --lam-lai <ma>`
+```
+
+## Chua do duoc (KHONG phai ket luan am)
+
+- `evo.finder`: san_cong_cu = Finder cua so do
+
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\EVO_SUC_KHOE.md
+ghi 0 van de moi vao so
+EVO: CHUA GUI DUOC. Thuong la `chat_id` = 0 trong config/tele_bridge.json - cau Telegram chi bat duoc chat_id sau khi chu du an nhan cho bot mot lan. Chay `b xa` roi nhan gi do.

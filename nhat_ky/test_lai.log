@@ -1,0 +1,66 @@
+bringing up nodes...
+bringing up nodes...
+
+.........................................................uuu..uuu....... [  4%]
+........................................................................ [  8%]
+.............................uuuu...................uuuuuuuuuuuuuuuuuuuu [ 11%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 11%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 11%]
+uuuuuuuuuuuuuuuuu....................................................... [ 14%]
+...........................................s............................ [ 19%]
+..uuuuuu................................................................ [ 23%]
+...........................uuuu...................................uuu... [ 27%]
+...uuu...uu.......uuuuuu.uuuuuuuuu...uuu.......uuuuuuu..uuuuuuuuuuuuuuuu [ 28%]
+uuuuuuuuuuuu............................................................ [ 32%]
+......................................................................uu [ 36%]
+u...............................uuuu........uuuuuuuu.................uu. [ 40%]
+...uuuuuu....uuuuu..........uuuuuuu.uuuu................................ [ 43%]
+........................................................................ [ 47%]
+...................................uuuuuuuuuuu.uuu.uuu.uuu.uuu.......... [ 50%]
+........................................................................ [ 55%]
+........................................................................ [ 59%]
+................................uuu..................................... [ 63%]
+.............uuuuuu.........u..........uu.uu......uuuuuu................ [ 67%]
+.........u...........u...u.uu.uu.uuuuuu.uuuuuuuuuuuuuuuuuuuuuuuuuuuuu... [ 68%]
+........................................................................ [ 73%]
+...............................................uuuuuuuuuuuuu............ [ 76%]
+.uuuuuuuu.uuuuu.uuuuu.uuuuuuuuuuuuuu...uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 77%]
+uuuuuuuuuuuuuuuuuuuuuu..uuuuu.uuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuu.......... [ 78%]
+.......uuuu............................................................. [ 82%]
+........................................................................ [ 86%]
+........................................................................ [ 91%]
+.................F...................................................... [ 95%]
+........................................................................ [100%]
+================================== FAILURES ===================================
+_________ VongPhaiDU_SAU_CHANG.test_vong_ghi_so_va_liet_ke_chang_hong _________
+[gw1] win32 -- Python 3.14.7 C:\Python314\python.exe
+
+self = <test_vong_day_du.VongPhaiDU_SAU_CHANG testMethod=test_vong_ghi_so_va_liet_ke_chang_hong>
+
+    def test_vong_ghi_so_va_liet_ke_chang_hong(self):
+        """Chay `vong` voi moi chang bi thay bang mot ham hong: phai chay HET,
+        ghi so, va liet ke du cac chang hong."""
+        goc = {}
+        for t in ("_san_boc", "_ho_so", "_noi_sinh", "_suy_nguoc", "_to_hop",
+                  "_evo"):
+            goc[t] = getattr(V, t)
+    
+            def no(*a, **k):
+                raise RuntimeError("hong")
+            setattr(V, t, no)
+        goc_han = dict(V.HAN_GIO)
+        for k in V.HAN_GIO:
+            V.HAN_GIO[k] = 0.0            # ep chay moi chang
+        try:
+            k = V.vong("XM_US500CASH", ("D1",), sp=1, in_ra=lambda *a: None)
+        finally:
+            for t, f in goc.items():
+                setattr(V, t, f)
+            V.HAN_GIO.update(goc_han)
+>       self.assertEqual(len(k["chang"]), 6, "khong chay du 6 chang")
+E       AssertionError: 7 != 6 : khong chay du 6 chang
+
+test_vong_day_du.py:102: AssertionError
+=========================== short test summary info ===========================
+FAILED test_vong_day_du.py::VongPhaiDU_SAU_CHANG::test_vong_ghi_so_va_liet_ke_chang_hong
+1 failed, 1632 passed, 1 skipped, 526 subtests passed in 2526.20s (0:42:06)

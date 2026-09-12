@@ -28,8 +28,9 @@ import time
 import warnings
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from pathlib import Path
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 warnings.filterwarnings("ignore")
 
 KHUNG = "D1"
@@ -44,7 +45,7 @@ SO_LUONG = int(os.environ.get("LUONG", "8"))
 def _mot_ma(ma: str, tens: list[str]) -> list[dict]:
     import warnings as w
     w.filterwarnings("ignore")
-    sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     import numpy as np
     from nhan import chi_phi as CP
     from nhan import cong_ra_tien as CRT

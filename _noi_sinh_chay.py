@@ -13,6 +13,9 @@ day la buoc KHAM PHA. Ung vien nao song moi di tiep qua `cong`.
 """
 from __future__ import annotations
 
+#: Duoi so lenh nay o HOLDOUT thi phep thu CHUA CHAY DUOC, khong phai thua.
+LENH_HO_TOI_THIEU = 10
+
 import argparse
 import sys
 import time
@@ -35,10 +38,23 @@ BAO = Path(__file__).resolve().parent / "reports"
 
 
 def _cham(df, spec, cp, ma, khung):
-    """Sharpe cua co che va cua moc mua-giu tren CUNG doan df."""
+    """Sharpe cua co che va cua moc mua-giu tren CUNG doan df.
+
+    Tra ve kem `so_lenh`. `bien_don_bay._chi_so` KHONG co khoa do - va lan dau
+    toi viet `h.get("so_lenh")` thi no tra `None` cho moi dong, roi co
+    `KHONG_KICH_HOAT` bat cho **ca 10/10** ung vien. Bao cao khi do noi "khong
+    co gi kich hoat o holdout" trong khi that ra chua ai dem ca.
+    Cung ho loi voi chinh cai no dinh bat: doc mot con so khong ton tai roi
+    dung gia tri mac dinh nhu mot phep do.
+    """
+    import numpy as _np
+    from nhan import mo_phong as _MP
     th = NP.sinh_tu_spec(spec, df)
-    h = B.do_bien(df, th, cp, cac_don_bay=(1.0,), co_tuc=False,
-                  ma=ma, khung=khung)[0][0]
+    h = dict(B.do_bien(df, th, cp, cac_don_bay=(1.0,), co_tuc=False,
+                       ma=ma, khung=khung)[0][0])
+    v = _np.clip(_np.nan_to_num(_np.asarray(th, float).reshape(-1)), -1.0, 1.0)
+    v = _np.r_[0.0, v[:-1]]          # engine dich mot bar, dem tren ban DA dich
+    h["so_lenh"] = int(_MP.dem_lenh(v))
     return h
 
 
@@ -104,7 +120,7 @@ def chay(ma: str, khung: str, top_k: int = 10, cap: int = 2500,
 
     print(f"\n  -- TOP {top_k} tren TRAIN, gio cham HOLDOUT (lan duy nhat) --")
     print(f"  {'co che':<44}{'S_tr':>7}{'chenh_tr':>9}{'S_ho':>7}{'chenh_ho':>9}"
-          f"{'lenh':>6}{'phoi':>6}")
+          f"{'lenh':>6}{'l_ho':>6}  ket")
     song = []
     for r in hang[:top_k]:
         try:
@@ -113,12 +129,32 @@ def chay(ma: str, khung: str, top_k: int = 10, cap: int = 2500,
             continue
         c_ho = h["sharpe"] - bh_ho["sharpe"]
         r["S_ho"], r["chenh_ho"] = h["sharpe"], c_ho
-        if c_ho > 0:
+        # KHONG KICH HOAT khac han THUA. Do 12/09/2026: nguong lay tu phan vi
+        # TRAIN la mot SO TUYET DOI; voi dai luong phu thuoc thang do, so do co
+        # the nam NGOAI HAN phan phoi cua HOLDOUT:
+        #   `atr14 < 0,003472` kich hoat 1.719 lan o TRAIN, **0 lan o HOLDOUT**
+        # Sharpe khi do la 0,000; va vi moc holdout AM (-0,254) nen "chenh" ra
+        # DUONG - bay trong top 10 khong vao lenh nao van duoc dem la "giu dau".
+        # Mot he khong giao dich khong phai mot he thang.
+        lenh_ho = int(h.get("so_lenh") or 0)
+        r["lenh_ho"] = lenh_ho
+        if lenh_ho < LENH_HO_TOI_THIEU:
+            r["ket"] = "KHONG_KICH_HOAT"
+        elif c_ho > 0:
+            r["ket"] = "giu_dau"
             song.append(r)
+        else:
+            r["ket"] = "mat_dau"
         print(f"  {r['ten'][:43]:<44}{r['S_tr']:>7.3f}{r['chenh_tr']:>+9.3f}"
-              f"{h['sharpe']:>7.3f}{c_ho:>+9.3f}{r['lenh']:>6}{r['pn']*100:>5.0f}%")
+              f"{h['sharpe']:>7.3f}{c_ho:>+9.3f}{r['lenh']:>6}{lenh_ho:>6}"
+              f"  {r['ket']}")
 
+    im = [r for r in hang[:top_k] if r.get("ket") == "KHONG_KICH_HOAT"]
     print(f"\n  giu dau ngoai mau: {len(song)}/{min(top_k, len(hang))}")
+    if im:
+        print(f"  KHONG KICH HOAT o holdout: {len(im)}/{min(top_k, len(hang))}"
+              f"  <- nguong tu TRAIN nam ngoai phan phoi HOLDOUT.")
+        print(f"     Day KHONG phai ket qua am - la phep thu chua chay duoc.")
     print(f"  CANH BAO boi so phep thu: da cham diem {len(hang)} co che tren TRAIN; "
           f"nguong Bonferroni cho {top_k} lan nhin holdout la p < {0.05/max(top_k,1):.4f}")
     BAO.mkdir(exist_ok=True)

@@ -67,6 +67,31 @@ def main() -> int:
     else:
         print(f"  {'git':22s}: CHUA CO — khong co duong lui khi sua hong")
 
+    # EVO: mot dong suc khoe + dung cai dang XAU. Doc tu bao cao DA CO, khong
+    # chay lai phep do nao - vao phien phai duoi 3 giay.
+    #
+    # Vi sao de o day: hom 12/09/2026 toi ghi lai mot bai hoc rang bo do "rau
+    # nen hong" DA dem duoc 154 bar hong cua GBPZAR tu truoc ma khong ai doc -
+    # roi suyt lap lai y het voi EVO. Mot bo giam sat khong nam tren duong vao
+    # phien thi bang khong co.
+    try:
+        import json as _js
+        _ev = LAB / "reports" / "EVO_SUC_KHOE.md"
+        _js_ev = LAB / "reports" / "EVO_SUC_KHOE.json"
+        if _ev.exists():
+            _d = _ev.read_text(encoding="utf-8").splitlines()
+            _tom = next((x for x in _d if x.startswith("TOT ")), "")
+            print(f"\n--- EVO (suc khoe module) ---   {_tom}")
+            for _l in _d:
+                if _l.startswith("### `"):
+                    print("  XAU: " + _l[5:].replace("` — ", " — ").rstrip())
+            print("  chi tiet: b evo    (tuoi bao cao: %.1f gio)"
+                  % ((time.time() - _ev.stat().st_mtime) / 3600))
+        else:
+            print("\n--- EVO --- chua co bao cao. Chay: b evo")
+    except Exception as _e:
+        print(f"\n--- EVO --- khong doc duoc bao cao: {_e}")
+
     f = LAB / "TIEP_TUC_MAI.md"
     print("\n" + "=" * 78)
     print(f"BAN GIAO — {f.name}")

@@ -42,7 +42,7 @@ def _chay_social():
         s_.close()
     except Exception:
         return "social: CDP 9222 khong mo (bo qua - can Chrome .browser_thebrain2)"
-    app_py = r"C:\Users\SV STORE\AppData\Local\Python\bin\python.exe"
+    app_py = sys.executable
     lab = pathlib.Path(__file__).parent
     try:
         r = subprocess.run([app_py, str(lab / "doc_cdp.py")], cwd=str(lab),
@@ -120,7 +120,7 @@ def _chay_telegram():
 def _chay_reddit(so=25):
     """Reddit qua trinh duyet that (Playwright) - JSON API bi chan 403."""
     import subprocess
-    app_py = r"C:\Users\SV STORE\AppData\Local\Python\bin\python.exe"
+    app_py = sys.executable
     lab = pathlib.Path(__file__).parent
     try:
         r = subprocess.run([app_py, str(lab / "nguon_reddit_sim.py")], cwd=str(lab),
@@ -135,7 +135,7 @@ def _chay_reddit(so=25):
 def _chay_dien_dan():
     """Dien dan (futures.io, quant, forexfactory, smartlab, traderviet) qua Playwright."""
     import subprocess
-    app_py = r"C:\Users\SV STORE\AppData\Local\Python\bin\python.exe"
+    app_py = sys.executable
     lab = pathlib.Path(__file__).parent
     try:
         r = subprocess.run([app_py, str(lab / "nguon_dien_dan.py")], cwd=str(lab),

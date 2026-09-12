@@ -1,0 +1,5 @@
+# do_kho_sau_xao
+# DO lai kho co che sau khi xao - so voi moc 2.554
+# python -u -c "import sys;sys.path.insert(0,'.');from nhan import ngu_phap as NP;print('kho co che:', len(NP.doc_kho()))"
+
+kho co che: 2554

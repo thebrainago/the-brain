@@ -24,7 +24,7 @@ BANG = Path(os.environ.get("QWEN_BANG") or (QWEN / "NHIEM_VU.json"))
 CO_DUNG = LAB / "DUNG_QWEN"          # cham file nay -> vong lap thoat em
 CAU_HINH_NGOAI = LAB / "config" / "qwen.json"
 
-PY = Path(r"C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe")
+PY = Path(sys.executable)
 if not PY.exists():
     PY = Path(sys.executable)
 

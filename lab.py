@@ -48,7 +48,12 @@ UA = {"User-Agent": "Mozilla/5.0 (quant research lab)"}
 NGUONG_DIEM = 8
 
 # MT5 (dung terminal MetaQuotes co du lieu M1 sau)
-MT5 = Path(r"C:\Program Files\MetaTrader 5\terminal64.exe")
+# Duong MT5 doc qua `nhan.duong_dan`: bien BRAIN_MT5 -> cac cho cai thong
+# thuong -> mac dinh. Go cung o day thi he gay ngay khi chuyen VPS, va dich do
+# da duoc chu du an chot 12/09/2026.
+from nhan.duong_dan import mt5_exe as _mt5_exe
+
+MT5 = _mt5_exe() or Path(r"C:\Program Files\MetaTrader 5\terminal64.exe")
 MT5_DATA = Path(r"C:\Users\SV STORE\AppData\Roaming\MetaQuotes\Terminal"
                 r"\D0E8209F77C8CF37AD8BF550E51FF075")
 EA = "LuoiDoiXung"

@@ -64,7 +64,11 @@ from nhan import boc_ma_llm as BM
 
 #: Tran ky tu mot vung gui cho LLM. Cung muc voi `boc_ma_llm.MAX_VUNG`.
 MAX_VUNG = 16000
-LUONG = 6
+#: LUONG cao hon so nhan la DUNG o day: moi luong dung 8-10 giay CHO MANG
+#: (goi LLM), khong an CPU. Do 12/09: 684 file x ~32s/file (hai tang x hai
+#: lan thu) / 6 luong = 61 phut; 12 luong ha con ~30 phut ma CPU van ranh
+#: cho pheu chay song song.
+LUONG = 12
 
 #: Cho phep mot `if(...)` dung TRUOC cho gan, tren CUNG MOT DONG.
 #:

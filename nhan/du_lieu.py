@@ -25,8 +25,13 @@ import pandas as pd
 
 LAB = Path(__file__).resolve().parent.parent
 GOC = LAB.parent
-DATA = GOC / "data"
-CACHE = LAB / "data_khung"
+# DATA / CACHE doi cho duoc - `nhan/duong_dan.py` la MOT cho duy nhat quyet
+# dinh. 12/09/2026: o C day 100% va moi khau ghi that bai AM (SQLite nem
+# "disk is full", ham boc tra ve rong, hang doi thay rc=0 nen bao "XONG").
+# `data_khung` la CACHE (tai tao duoc tu `data/`) nen day sang o F truoc tien.
+from nhan import duong_dan as _DD          # noqa: E402
+DATA = _DD.kho_gia()
+CACHE = _DD.cache_khung()
 
 QUY_KHUNG = {"M1": "1min", "M5": "5min", "M15": "15min", "M30": "30min",
              "H1": "1h", "H4": "4h", "D1": "1D"}
@@ -531,11 +536,16 @@ def _ghi_cache(df: pd.DataFrame, dich: Path) -> None:
 
 
 def nap(ma: str, khung: str = "H1", tu: str | None = None, den: str | None = None,
-        cache: bool = True) -> pd.DataFrame:
+        cache: bool = True, sua_bar: bool = True) -> pd.DataFrame:
     """Nap bar cua `ma` o `khung`. Tu dong gop tu khung goc + cache ra parquet.
 
     TU CHOI khi khung yeu cau NHO HON khung that cua du lieu - noi suy nguoc
     la che ra bar khong ton tai.
+
+    `sua_bar=True` (mac dinh tu 12/09/2026): chay `sua_bar_hong` - kep `open` ve
+    trong bien do bar va bo bar lech dau thap phan. Dat `False` khi muon DO
+    chinh do hong (vi do qua `nap()` da sua thi bao cao se rong, va ta se ket
+    luan "khong co van de" tu chinh cai vua sua).
     """
     ma = ma.upper()
     khung = khung.upper()
@@ -582,12 +592,144 @@ def nap(ma: str, khung: str = "H1", tu: str | None = None, den: str | None = Non
             _CAT_DOAN[(ma, khung)] = _ghi_chu
         if cache:
             _ghi_cache(df, f_cache)
+    if sua_bar:
+        df, _sua = sua_bar_hong(df)
+        if _sua:
+            _DA_SUA[(ma, khung)] = _sua
     if tu:
         df = df[df.index >= pd.Timestamp(tu)]
     if den:
         df = df[df.index <= pd.Timestamp(den)]
     return df
 
+
+#: (ma, khung) -> bao cao nhung gi `sua_bar_hong` da sua o lan nap gan nhat.
+#: De doc duoc khi can, khong de am tham.
+_DA_SUA: dict[tuple, dict] = {}
+
+
+def sua_bar_hong(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """Sua bar KHONG THE TON TAI. Tra (df, bao cao nhung gi da sua).
+
+    ## CAI DA TIM RA 12/09/2026
+
+    Truy mot ket qua vo ly (GBPZAR "591%/nam" dung dau bang xep hang quan tri)
+    ra day. Tren GBPZAR doan 09/2023 - 01/2024:
+
+        ngay          open      high       low     close
+        2023-09-20  23.2418  233.2900   23.0767   23.2998      <- high x10
+        2023-09-25 228.8610  231.9860   22.8440   23.1779      <- open x10 NUA
+        2023-11-05 225.7250  226.5070   22.5124   22.5723
+
+    **Ca cot `high` bi nhan 10 tren toan doan**, va rai rac `open` cung vay.
+    Hau qua: duong von mua-giu vot len 9,19 lan roi ve 0,787, sut giam bao ra
+    -91,67%, trong khi gia that chi di tu 19,62 den 22,32 suot 11 nam.
+
+    Bay "rau nen hong" (`kiem` BAY 2) DA BAO 154 bar tren ma nay. Khong ai doc.
+    Do la ho benh `noi-day-truoc-khi-xay-them`: bo do da co, chi la khong noi
+    vao duong chay.
+
+    ## BA PHEP SUA, THEO THU TU
+
+    1. **Khoi phuc thang thap phan**: gia tri lech body dung mot luy thua cua 10
+       thi chia/nhan lai. Day la phep sua DUNG - no tra lai gia that, khong doan.
+    2. **Kep ve bien**: `open`/`close` nam ngoai [low, high] sau buoc 1 thi kep
+       vao. `open` la gia da khop nen phai nam trong bien do bar; nam ngoai thi
+       lenh vao o `open[i+1]` khop o mot muc chua tung ton tai.
+    3. **Bo bar** con lai khong cuu duoc bang hai buoc tren.
+
+    KHONG dung o day: cat chuoi ve doan open THAT - do van la `cat_theo_chat_luong`.
+    """
+    if not all(k in df.columns for k in ("open", "high", "low", "close")):
+        return df, {}
+    bc: dict = {}
+    d = {k: df[k].to_numpy(dtype=float).copy() for k in ("open", "high", "low", "close")}
+    n = len(df)
+    if n < 3:
+        return df, {}
+
+    # --- 1) KHOI PHUC THANG THAP PHAN
+    # Neo = trung vi cua ba cot con lai tren CUNG bar. Dung neo cung bar chu
+    # khong dung bar ben canh: doan hong o day dai lien tuc hang thang, neo
+    # theo hang xom se keo theo chinh cai hong.
+    da_sua = {}
+    for ten in ("open", "high", "low", "close"):
+        khac = [d[k] for k in ("open", "high", "low", "close") if k != ten]
+        neo = np.median(np.vstack(khac), axis=0)
+        tot = neo > 0
+        ty = np.ones(n)
+        ty[tot] = d[ten][tot] / neo[tot]
+        for he in (10.0, 100.0, 0.1, 0.01):
+            k = tot & (np.abs(ty / he - 1.0) < 0.25)
+            if k.any():
+                d[ten][k] = d[ten][k] / he
+                da_sua[ten] = da_sua.get(ten, 0) + int(k.sum())
+    if da_sua:
+        bc["khoi_phuc_thang_x10"] = da_sua
+
+    # --- 1b) NEO TRUOT THEO THOI GIAN
+    #
+    # Buoc 1 neo vao BA COT CON LAI CUNG BAR, nen no mu khi >=2 cot cung lech.
+    # Do la truong hop cua EURMXN (tim ra 12/09/2026, sau khi 120/120 dong dau
+    # bang pheu deu la EURMXN voi "CAGR 942%/nam" tren mot ma di ngang 9 nam):
+    #
+    #     2023-06-26   open 186.86   high 187.57   low 18.65   close 187.24
+    #
+    # Ba cot x10, mot cot dung -> trung vi ba cot con lai cung x10 -> ty le 1,0
+    # -> khong sua gi. 26 bar nhu vay du de sinh ra loi suat gia 2,32 (log).
+    #
+    # Neo thu hai: GIA THAM CHIEU TRUOT, cap nhat tu chinh cac bar DA SUA. Gia
+    # khong nhay 10 lan trong mot bar, nen bat ky cot nao lech dung mot luy
+    # thua cua 10 so voi neo deu la loi thang do - khong phai bien dong.
+    # Neo trai theo gia that nen tai san tang truong that khong bi dung cham.
+    hop_le = np.isfinite(d["low"]) & (d["low"] > 0)
+    if hop_le.sum() >= 5:
+        moc = np.median(np.concatenate([d[k][hop_le][:21]
+                                        for k in ("open", "high", "low", "close")]))
+        sua_truot = {}
+        for i in range(n):
+            for ten in ("open", "high", "low", "close"):
+                v = d[ten][i]
+                if not np.isfinite(v) or v <= 0 or moc <= 0:
+                    continue
+                # luy thua cua 10 dua `v` ve gan `moc` nhat
+                mu = int(round(np.log10(moc / v)))
+                if mu and abs(np.log10((v * 10.0 ** mu) / moc)) < 0.35 <= abs(
+                        np.log10(v / moc)):
+                    d[ten][i] = v * 10.0 ** mu
+                    sua_truot[ten] = sua_truot.get(ten, 0) + 1
+            gt = [d[k][i] for k in ("open", "high", "low", "close")
+                  if np.isfinite(d[k][i]) and d[k][i] > 0]
+            if gt:
+                # neo di chuyen cham (1/20) - mot bar hong con sot lai khong
+                # duoc phep keo neo di theo no.
+                moc = 0.95 * moc + 0.05 * float(np.median(gt))
+        if sua_truot:
+            bc["neo_truot_x10"] = sua_truot
+
+    # --- 2) KEP VE BIEN
+    hi = np.maximum.reduce([d["high"], d["open"], d["close"]])
+    lo = np.minimum.reduce([d["low"], d["open"], d["close"]])
+    kep = int(np.sum((d["open"] > d["high"]) | (d["open"] < d["low"])
+                     | (d["close"] > d["high"]) | (d["close"] < d["low"])))
+    if kep:
+        bc["kep_ve_bien"] = kep
+    d["high"], d["low"] = hi, lo
+
+    # --- 3) BO BAR CON LAI KHONG CUU DUOC
+    body_tren = np.maximum(d["open"], d["close"])
+    body_duoi = np.minimum(d["open"], d["close"])
+    xau = (~np.isfinite(body_tren) | (body_duoi <= 0)
+           | (d["high"] > body_tren * 3.0) | (d["low"] < body_duoi / 3.0))
+    if xau.any():
+        bc["bo_bar_khong_cuu_duoc"] = int(xau.sum())
+
+    moi = df.copy()
+    for k in ("open", "high", "low", "close"):
+        moi[k] = d[k]
+    if xau.any():
+        moi = moi[~xau]
+    return moi, bc
 
 
 def chan_doan_do_phan_giai(cac_khung=("H1", "H4"), cac_ma=None) -> list[dict]:
@@ -852,15 +994,49 @@ def doan_dai_nhat(cua_so: list[tuple[int, int]]) -> tuple[int, int] | None:
     return max(cua_so, key=lambda d: d[1] - d[0], default=None) if cua_so else None
 
 
+def _giao_cua_so(a: list, b: list) -> list:
+    """Giao cua hai danh sach doan nam [(tu, den), ...]. `b` rong = khong rang buoc."""
+    if not b:
+        return list(a)
+    if not a:
+        return []
+    ra = []
+    for t1, d1 in a:
+        for t2, d2 in b:
+            t, d = max(t1, t2), min(d1, d2)
+            if t <= d:
+                ra.append((t, d))
+    return sorted(ra)
+
+
 def cat_theo_chat_luong(df: pd.DataFrame, ma: str = "",
                        co_phien: bool | None = None) -> tuple:
-    """Cat df ve doan co open THAT dai nhat. Tra (df_da_cat, bao_cao).
+    """Cat df ve doan co open THAT **va** rau nen THAT dai nhat.
 
     Dung khi mot chuoi dai co mang bi nhiem: SP500 co 98,6 nam nhung open chi
     that o 1927-1959 va 2007-2026. Lay ca chuoi la backtest tren gia bia.
+
+    ## HAI TIEU CHI, VA CHUNG CHI VAO HAI GIAI DOAN NGUOC NHAU (do 12/09/2026)
+
+    Truoc hom nay ham nay chi xet mot tieu chi: `open` co that khong. No cat
+    SP500 ve cua so **(1928, 1961)** - va cua so do la **100% BAR KHONG RAU**
+    (`high` = than tren, `low` = than duoi). Tuc bo du lieu "da lam sach" ma
+    `do_luc` va `gop_lop` dung suot la mot doan ma high/low duoc CHE ra tu
+    open/close. Moi ATR, moi phep cham SL/TP, moi IBS tren do la hu cau.
+
+        SP500  24.754 bar (35,5% khong rau)  --cat theo open-->  8.508 bar (100%)
+
+    Ly do: `open` bia va `rau` bia la hai TAT KHAC NHAU cua hai thoi ky khac
+    nhau, va toi da gia dinh chung di cung nhau.
+
+    Nen gio cat theo GIAO cua hai cua so. Chuoi nao khong con doan nao thoa ca
+    hai thi tra ve rong - do la cau tra loi dung: chuoi do khong backtest duoc
+    theo kieu co cham high/low.
     """
     bc = kiem(df, ma, co_phien=co_phien)
-    cua_so = bc.get("cua_so_open_that") or []
+    cua_so = _giao_cua_so(bc.get("cua_so_open_that") or [],
+                          bc.get("cua_so_rau_that") or [])
+    bc["cua_so_dung_duoc"] = cua_so
     doan = doan_dai_nhat(cua_so)
     if not doan:
         return df.iloc[0:0], bc
@@ -938,6 +1114,86 @@ def kiem(df: pd.DataFrame, ma: str = "", co_phien: bool | None = None) -> dict:
     if hong.sum() > 0:
         bc["canh_bao"].append(f"{int(hong.sum())} bar co rau > 10% (kiem tay: "
                               "SNB 2015-01-15, Brexit 2016-06-24 la THAT, phai giu)")
+
+    # BAY 4: OPEN NAM NGOAI HIGH/LOW CUA CHINH BAR DO.
+    #
+    # Mot bar nhu vay khong ton tai duoc: `open` la mot gia da khop trong bar,
+    # nen no phai nam trong [low, high]. Do la du lieu hong, khong phai bien dong.
+    #
+    # VI SAO NGUY: quy tac vao lenh cua du an la `open[i+1]` (CLAUDE.md muc 1).
+    # Mot open nam ngoai bien do cho phep he "khop" o mot muc gia chua tung ton
+    # tai - va no khong bao loi, chi lam ket qua dep hoac xau len mot chut.
+    # Do 12/09/2026: 192 bar tren 12 ma Yahoo (YH_VANG 56, YH_USDJPY 37).
+    ngoai = (o > hi * (1 + 1e-4)) | (o < lo * (1 - 1e-4))
+    bc["so_bar_open_ngoai_bien"] = int(ngoai.sum())
+    if ngoai.sum() > 0:
+        bc["canh_bao"].append(
+            f"{int(ngoai.sum())} bar co open NAM NGOAI high/low cua chinh no - "
+            "bar khong ton tai duoc; vao lenh o open[i+1] se khop gia khong that")
+
+    # BAY 5: LECH DAU THAP PHAN (nhay dung ~10 lan roi tra lai).
+    #
+    # Do 12/09/2026 tren GBPZAR: 16 bar co |log(o[i+1]/o[i])| = 2,3085 ~ log(10).
+    # Gia that di tu 19,6 den 22,3 trong 11 nam, nhung duong von mua-giu vot len
+    # **9,19 lan** roi ve 0,787 - va sut giam bao ra la -91,67%. Toan bo bang xep
+    # hang quan tri hom do co GBPZAR dung dau voi "591%/nam".
+    #
+    # Phan biet voi bien dong that: mot cap FX D1 khong the nhay 3 lan trong mot
+    # bar. Ke ca SNB 2015 (CHF) cung chi ~30%.
+    NHAY = np.log(3.0)
+    lech = {}
+    for ten in ("open", "close"):
+        v = df[ten].to_numpy(dtype=float)
+        if not np.all(v > 0) or len(v) < 2:
+            continue
+        rr = np.abs(np.diff(np.log(v)))
+        n = int(np.sum(rr > NHAY))
+        if n:
+            lech[ten] = n
+    if lech:
+        bc["so_bar_nhay_phi_ly"] = lech
+        bc["canh_bao"].append(
+            "nhay > 3 lan trong MOT bar o %s - gan nhu chac chan la LECH DAU "
+            "THAP PHAN trong du lieu, khong phai bien dong"
+            % ", ".join("%s:%d" % kv for kv in lech.items()))
+        bc["dung_duoc"] = False
+
+    # BAY 6: BAR KHONG RAU (high = than tren VA low = than duoi).
+    #
+    # Mot bar nhu vay noi rang gia chua bao gio ra khoi khoang open-close trong
+    # ca phien. Tren D1 do gan nhu khong the - no la dau vet cua bo du lieu chi
+    # luu OPEN/CLOSE roi CHE high/low ra tu chung.
+    #
+    # Do 12/09/2026: **39.681 bar tren 128/159 ma**. Nang nhat: YH_BAC 41,6%,
+    # SP500 35,5% (1927-2017), YH_NIKKEI 33,6%, USDJPY 25,7% (1971-2015).
+    #
+    # VI SAO NGUY: `high`/`low` la hai cot quyet dinh cua moi phep cham SL/TP,
+    # cua ATR, cua IBS va cua moi mau nen. Bar khong rau lam ATR THAP hon that
+    # (TR = high-low bi thu nho) -> SL/TP tinh theo ATR dat QUA GAN -> so lenh
+    # va ket qua deu sai. Khong bao loi.
+    #
+    # Cung ho voi BAY 1 (open bia): ca hai deu la "mot cot duoc che tu cot khac".
+    khong_rau = ((np.abs(hi - np.maximum(o, c)) < 1e-12)
+                 & (np.abs(np.minimum(o, c) - lo) < 1e-12))
+    bc["so_bar_khong_rau"] = int(khong_rau.sum())
+    if khong_rau.sum():
+        ty_kr = float(khong_rau.mean())
+        bc["ty_le_bar_khong_rau"] = round(ty_kr, 4)
+        theo_nam_kr = pd.Series(khong_rau, index=df.index).groupby(
+            df.index.year).mean()
+        ban_kr = _gom_doan([int(y) for y, v in theo_nam_kr.items() if v > 0.20])
+        bc["nam_nhieu_bar_khong_rau"] = ban_kr
+        bc["cua_so_rau_that"] = _gom_doan(
+            [int(y) for y, v in theo_nam_kr.items() if v <= 0.20])
+        if ty_kr > 0.05:
+            bc["canh_bao"].append(
+                "%.1f%% bar KHONG CO RAU (high=than tren va low=than duoi) - "
+                "high/low nhieu kha nang duoc CHE tu open/close. ATR bi thu nho "
+                "nen SL/TP theo ATR dat qua gan.%s"
+                % (ty_kr * 100,
+                   (" Nang nhat cac nam %s." % ban_kr) if ban_kr else ""))
+    else:
+        bc["cua_so_rau_that"] = _gom_doan(sorted({int(y) for y in df.index.year}))
 
     # BAY 3: spread
     if "spread" in df.columns:

@@ -62,6 +62,37 @@ class MaNguonSach(unittest.TestCase):
                 hong.append(f"{p.name}:{e.lineno} {e.msg}")
         self.assertEqual(hong, [])
 
+    def test_khong_file_nao_co_ESCAPE_SEQUENCE_SAI(self):
+        r"""`"\d"` trong chuoi KHONG-raw la mot qua bom hen gio.
+
+        Python hom nay chi canh bao va giu nguyen hai ky tu, nhung:
+          * `"\b"` thi KHONG canh bao gi ca - no thanh ky tu BACKSPACE 0x08, va
+            mot regex chua `\b` viet qua chuoi khong-raw se **im lang khong khop
+            gi**. Du an da mat mot phien vi dung loi do (`_kiem_tra_cuu` tut
+            17/20 -> 0/20, `doc_hieu` chi con nhanh rong).
+          * Python tuong lai se bien canh bao nay thanh SyntaxError.
+
+        Cach sua luon la mot trong hai: them `r` truoc chuoi, hoac nhan doi
+        dau `\`.
+        """
+        import ast
+        import warnings
+        xau = []
+        for p in _cac_file_py():
+            with warnings.catch_warnings(record=True) as w:
+                warnings.simplefilter("always")
+                try:
+                    ast.parse(p.read_text(encoding="utf-8-sig"))
+                except SyntaxError:
+                    continue        # da co bai kiem rieng o tren
+                for x in w:
+                    if "escape sequence" in str(x.message):
+                        xau.append(f"{p.name}: {x.message}")
+        self.assertEqual(
+            xau, [],
+            "escape sequence khong hop le - them `r` truoc chuoi hoac nhan doi "
+            "dau `\\`:\n  " + "\n  ".join(xau))
+
 
 
 class DuongLLM(unittest.TestCase):

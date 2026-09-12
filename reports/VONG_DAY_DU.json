@@ -1,0 +1,68 @@
+{
+ "ma": "XM_US500CASH",
+ "khung": [
+  "D1"
+ ],
+ "luc": "2026-09-12 23:18:33",
+ "giay": 0.0,
+ "chang": [
+  {
+   "ten": "1 SAN_BOC (SEEKER)",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  },
+  {
+   "ten": "2 HO_SO (QUANTLAB tong quan)",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  },
+  {
+   "ten": "3 NOI_SINH (QUANTLAB noi sinh)",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  },
+  {
+   "ten": "4 SUY_NGUOC (QUANTLAB noi sinh)",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  },
+  {
+   "ten": "5 TO_HOP (QUANTLAB chien luoc)",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  },
+  {
+   "ten": "6 DA_THOI_DAI (chong hien tuong che do)",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  },
+  {
+   "ten": "7 CHAM_TIEN (LUAT SO 0)",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  },
+  {
+   "ten": "8 EVO",
+   "ok": false,
+   "giay": 0.0,
+   "loi": "RuntimeError: hong"
+  }
+ ],
+ "hong": [
+  "1 SAN_BOC (SEEKER)",
+  "2 HO_SO (QUANTLAB tong quan)",
+  "3 NOI_SINH (QUANTLAB noi sinh)",
+  "4 SUY_NGUOC (QUANTLAB noi sinh)",
+  "5 TO_HOP (QUANTLAB chien luoc)",
+  "6 DA_THOI_DAI (chong hien tuong che do)",
+  "7 CHAM_TIEN (LUAT SO 0)",
+  "8 EVO"
+ ]
+}

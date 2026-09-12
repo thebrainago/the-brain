@@ -49,21 +49,123 @@ TOAN_HANG_GOC = [
     {"chi_bao": "rsi", "cot": "close", "n": 4},
     {"chi_bao": "zscore", "cua": {"chi_bao": "gia", "cot": "close"}, "n": 20},
     {"chi_bao": "zscore", "cua": {"chi_bao": "gia", "cot": "close"}, "n": 60},
-    {"chi_bao": "than_nen"},
-    {"chi_bao": "bien_do"},
+    # PHU THUOC THANG DO -> phai so voi PHAN VI TRUOT cua chinh no.
+    #
+    # Do 12/09/2026 tren EURUSD: nguong `atr14 < 0,003472` (phan vi 20 cua
+    # TRAIN) kich hoat 1.719 lan o TRAIN va **0 lan o HOLDOUT** - trung vi ATR
+    # holdout la 0,00927, nam tren ca phan vi 20 cua train. Bay co che "song
+    # sot" that ra khong vao lenh nao, va bao cao dem chung la "giu dau 9/10".
+    #
+    # Mot nguong TUYET DOI tren dai luong phu thuoc thang do chi dung trong
+    # dung che do bien dong da lay no. `phan_vi` truot thi chuyen duoc.
+    {"chi_bao": "phan_vi", "cua": {"chi_bao": "than_nen"}, "n": 250},
+    {"chi_bao": "phan_vi", "cua": {"chi_bao": "bien_do"}, "n": 250},
     {"chi_bao": "doi_pct", "cua": {"chi_bao": "gia", "cot": "close"}, "n": 1},
     {"chi_bao": "doi_pct", "cua": {"chi_bao": "gia", "cot": "close"}, "n": 5},
-    {"chi_bao": "atr", "n": 14},
+    {"chi_bao": "phan_vi", "cua": {"chi_bao": "atr", "n": 14}, "n": 250},
     {"chi_bao": "adx", "n": 14},
     {"chi_bao": "cci", "cot": "close", "n": 20},
     {"chi_bao": "stochastic", "n": 14},
-    {"chi_bao": "dong_luong", "cot": "close", "n": 10},
+    {"chi_bao": "phan_vi", "cua": {"chi_bao": "dong_luong", "cot": "close",
+                                  "n": 10}, "n": 250},
     {"chi_bao": "phan_vi", "cua": {"chi_bao": "atr", "n": 14}, "n": 250},
     {"chi_bao": "phan_vi", "cua": {"chi_bao": "bien_do"}, "n": 100},
+    # CAC DANG NEN - dong "Cac dang nen khac nhau" cua so do, them 12/09/2026.
+    # Chi lay cac mau LIEN TUC o day: mau roi rac (nhan_chim/trong/ngoai/ba_nen
+    # chi khac 0 o 2-14% bar) thi phan vi vo nghia - chung duoc sinh rieng o
+    # `sinh_mau_nen`.
+    {"chi_bao": "mau_nen", "mau": "doji"},
+    {"chi_bao": "mau_nen", "mau": "bua"},
+    {"chi_bao": "mau_nen", "mau": "sao_bang"},
+    {"chi_bao": "mau_nen", "mau": "nen_dac"},
+    {"chi_bao": "mau_nen", "mau": "rau_duoi"},
+    {"chi_bao": "mau_nen", "mau": "rau_tren"},
+    # NAM CHI BAO THEM 12/09/2026 - 72 co che trong kho nhac ten chung ma ngu
+    # phap khong noi duoc. Chi lay dang KHONG PHU THUOC THANG DO (xem ghi chu o
+    # tren): `%b`, `vi tri trong kenh`, `khoang cach chia ATR`, `than chia bien
+    # do`. Dang gia tri tho (duong keltner, kijun, chikou) khong vao day - nguong
+    # tuyet doi cua chung khong chuyen duoc sang tai san khac.
+    {"chi_bao": "keltner", "n": 20, "k": 2.0, "lay": "phan_tram_b"},
+    {"chi_bao": "donchian", "n": 20, "lay": "vi_tri"},
+    {"chi_bao": "donchian", "n": 55, "lay": "vi_tri"},
+    {"chi_bao": "supertrend", "n": 10, "k": 3.0, "lay": "khoang_cach"},
+    {"chi_bao": "heiken", "lay": "than"},
 ]
+
+#: Mau nen ROI RAC: chi khac 0 o mot phan nho so bar, nen dung phan vi la sai.
+#: Chung duoc dung truc tiep: `mau_nen(nhan_chim) > 0` da la mot dieu kien day du.
+MAU_NEN_ROI_RAC = ("nhan_chim", "trong", "ngoai", "ba_nen")
+
+#: Chi bao ROI RAC (chi nhan vai gia tri) - phan vi vo nghia, dung truc tiep.
+CHI_BAO_ROI_RAC = ({"chi_bao": "supertrend", "n": 10, "k": 3.0, "lay": "chieu"},
+                   {"chi_bao": "heiken", "lay": "chieu"})
+
+#: Lap luan kinh te cho TUNG MAU NEN. Cong `kiem_khai_bao` tu choi mot khai bao
+#: khong noi duoc "vi sao co nguoi tra tien cho phoi nhiem nay", va do la chot
+#: chan DUNG: mot bo sinh tu dong khong duoc de ra hang loat co che vo danh.
+CO_CHE_NEN = {
+    ("nhan_chim", "cao"): ("dao_chieu",
+        "Than bar trum het than bar truoc va nguoc chieu: ben thua cuoc bi buoc "
+        "dong vi the trong mot bar, va lenh dong do la cau mua that."),
+    ("nhan_chim", "thap"): ("dao_chieu",
+        "Nhan chim chieu giam: ben mua bi quet sach trong mot bar, lenh cat lo "
+        "cua ho la nguon cung ban ep."),
+    ("bua", "cao"): ("quay_ve_trung_binh",
+        "Rau duoi dai ma dong cua ve gan dinh bar: gia da xuong sau roi bi mua "
+        "het - dau vet cua mot ben mua lon hap thu nguon cung."),
+    ("bua", "thap"): ("quay_ve_trung_binh",
+        "Hinh guong cua bua: rau tren dai, gia len cao roi bi ban het."),
+    ("sao_bang", "cao"): ("quay_ve_trung_binh",
+        "Rau tren dai ma dong cua ve gan day bar: cau mua da can o vung cao, "
+        "ai ban vao do duoc tra cong."),
+    ("sao_bang", "thap"): ("quay_ve_trung_binh",
+        "Nguoc lai: cau mua manh o vung thap sau khi gia bi day xuong."),
+    ("doji", "cao"): ("bien_dong",
+        "Than gan bang khong voi bien do rong: hai ben can bang sau mot cuoc "
+        "giang co - trang thai truoc mot buoc doi che do bien dong."),
+    ("trong", "cao"): ("bien_dong",
+        "Ca bien do nam gon trong bar truoc: bien do co lai, va phoi nhiem mua "
+        "luc bien dong re la mua quyen chon gia re."),
+    ("ngoai", "cao"): ("bien_dong",
+        "Bar trum ca hai dau bar truoc theo chieu tang: bien do no ra kem huong "
+        "ro, ai giu vi the qua do doi duoc tra phan bu rui ro."),
+    ("ngoai", "thap"): ("bien_dong",
+        "Bar ngoai chieu giam: cung su no bien do nhung ve phia ban."),
+    ("ba_nen", "cao"): ("xu_huong",
+        "Ba bar tang lien tiep than day: dong lenh mua co to chuc duoc giai "
+        "ngan dan chu khong het trong mot bar."),
+    ("ba_nen", "thap"): ("xu_huong",
+        "Ba bar giam lien tiep than day: mot chuong trinh ban dang chay dan."),
+    ("nen_dac", "cao"): ("xu_huong",
+        "Than chiem gan het bien do theo chieu tang: khong co giang co, mot ben "
+        "kiem soat ca bar."),
+    ("nen_dac", "thap"): ("xu_huong",
+        "Than dac chieu giam: ben ban kiem soat ca bar."),
+    ("rau_duoi", "cao"): ("quay_ve_trung_binh",
+        "Rau duoi dai la dau vet cau mua hap thu nguon cung o vung thap."),
+    ("rau_tren", "cao"): ("quay_ve_trung_binh",
+        "Rau tren dai la dau vet nguon cung chan lai o vung cao."),
+}
 
 #: Phan vi lam nguong. Doi xung hai duoi de khong thien ve mot chieu.
 PHAN_VI = (0.02, 0.05, 0.10, 0.20, 0.80, 0.90, 0.95, 0.98)
+
+#: Mot nguong phai chon duoc it nhat bay nhieu ti le bar cua TRAIN.
+#:
+#: Duoi muc nay co HAI cach hong, ca hai deu im lang:
+#:   * nguong dung vao BIEN cua mot dai luong bi chan (`ibs > q95` voi q95 = 1,0)
+#:     -> khong bar nao dung, ke ca trong TRAIN;
+#:   * nguong o duoi cuc hiem -> TRAIN co vai chuc bar nhung HOLDOUT co the
+#:     khong co bar nao (do 12/09: `nen_doji @q2`), va khi do phep thu khong
+#:     chay duoc chu khong phai ra ket qua am.
+#: 2% cung khop voi bo cham diem: duoi 30 lenh thi no da bo ung vien roi.
+TY_LE_KICH_HOAT_TOI_THIEU = 0.02
+
+#: Nguong phai cach BIEN cua phan phoi it nhat bay nhieu phan cua bien do.
+#: Dai luong bi chan (ibs, diem mau nen, than Heikin-Ashi deu nam trong mot
+#: khoang dong) co phan vi cuc bien nam sat bien, va cai cham bien thuong la
+#: DI THUONG DU LIEU chu khong phai trang thai thi truong.
+LE_BIEN_TOI_THIEU = 0.05
 
 #: So bar giu vi the.
 CAC_GIU = (1, 2, 3, 5, 10)
@@ -144,6 +246,31 @@ CO_CHE_CUA = {
     ("adx", "cao"): ("xu_huong",
         "Chi so xu huong manh cho biet thi truong dang o che do co huong, noi "
         "phan bu cho viec di theo xu huong duoc tra."),
+    ("keltner", "cao"): ("bien_dong",
+        "Gia nam o mep tren dai Keltner - dai do rong theo BIEN DO THAT chu "
+        "khong theo do lech chuan, nen mep tren la noi rui ro bien dong duoc "
+        "tra cong cao nhat."),
+    ("keltner", "thap"): ("quay_ve_trung_binh",
+        "Gia rot xuong duoi dai Keltner: ban qua da so voi bien do that cua "
+        "chinh tai san do, va nguoi hap thu nguon cung duoc chiet khau."),
+    ("donchian", "cao"): ("pha_vo",
+        "Gia o dinh kenh n bar: lenh cho mua tren dinh va lenh cat lo cua ben "
+        "ban nam cung mot cho, nen khi cham thi ca hai cung day mot chieu."),
+    ("donchian", "thap"): ("pha_vo",
+        "Gia o day kenh n bar: lenh cat lo cua ben mua bi quet, tao nguon cung "
+        "ban ep trong mot khoang gia hep."),
+    ("supertrend", "cao"): ("xu_huong",
+        "Gia cach duong Supertrend nhieu ATR ve phia tren: xu huong dang duoc "
+        "nuoi bang dong lenh mua lien tuc, va duong bien chot lai phia sau."),
+    ("supertrend", "thap"): ("xu_huong",
+        "Gia cach duong Supertrend nhieu ATR ve phia duoi: chuong trinh ban "
+        "dang chay va duong bien chot lai phia tren."),
+    ("heiken", "cao"): ("xu_huong",
+        "Than nen Heikin-Ashi chiem gan het bien do theo chieu tang - HA lam "
+        "muot nhieu trong bar nen than day o day la dau hieu ap luc mot chieu "
+        "keo dai qua nhieu bar, khong phai mot cu nhay le."),
+    ("heiken", "thap"): ("xu_huong",
+        "Than HA day chieu giam: ap luc ban keo dai qua nhieu bar."),
     ("adx", "thap"): ("quay_ve_trung_binh",
         "Xu huong yeu la che do di ngang, noi gia dao quanh trung binh va nguoi "
         "cung cap thanh khoan o ca hai phia deu duoc tra cong."),
@@ -152,8 +279,13 @@ CO_CHE_CUA = {
 
 def _co_che_cua(th, cao):
     """(ho, cau co che) cho mot toan hang o mot chieu nguong. None = chua khai."""
-    return CO_CHE_CUA.get((str(th.get("chi_bao", "")).lower(),
-                           "cao" if cao else "thap"))
+    cb = str(th.get("chi_bao", "")).lower()
+    if cb == "mau_nen":
+        # Moi MAU NEN mot lap luan rieng - gop chung thanh mot dong "mau nen"
+        # thi cong `kiem_khai_bao` nhan mot cau vo nghia cho ca muoi mau.
+        return CO_CHE_NEN.get((str(th.get("mau", "")).lower(),
+                               "cao" if cao else "thap"))
+    return CO_CHE_CUA.get((cb, "cao" if cao else "thap"))
 
 
 def _ten(t: dict) -> str:
@@ -162,6 +294,8 @@ def _ten(t: dict) -> str:
     n = t.get("n")
     cua = t.get("cua")
     goc = f"{cb}{n if n else ''}"
+    if cb == "mau_nen":
+        goc = "nen_%s" % t.get("mau", "?")
     if isinstance(cua, dict) and cua.get("chi_bao") != "gia":
         goc += f"_cua_{cua.get('chi_bao')}{cua.get('n') or ''}"
     return goc
@@ -178,7 +312,39 @@ def nguong_tu_lich_su(df: pd.DataFrame, toan_hang: dict,
     s = s[np.isfinite(s)]
     if len(s) < 200:
         return {}
-    return {p: float(np.quantile(s, p)) for p in phan_vi}
+    ra = {}
+    for p in phan_vi:
+        q = float(np.quantile(s, p))
+        # BO NGUONG SUY BIEN. Voi mot dai luong BI CHAN (ibs trong [0,1], diem
+        # mau nen trong [-1,1]), phan vi cuc bien roi dung vao bien: `ibs > q95`
+        # voi q95 = 1,0 thi **khong bar nao dung**, ke ca trong chinh TRAIN.
+        # Do 12/09/2026: 6 toan hang sinh ra dieu kien chet kieu nay
+        # (ibs@q95, nen_doji@q95, nen_bua@q5, nen_sao_bang@q5, rau_duoi@q5,
+        # rau_tren@q5). Chung khong bao loi - chung chi lam ra co che khong bao
+        # gio kich hoat, va nhung co che do chiem cho trong moi bang xep hang.
+        cao = float(np.mean(s > q))
+        thap = float(np.mean(s < q))
+        ben = cao if p >= 0.5 else thap
+        if ben < TY_LE_KICH_HOAT_TOI_THIEU:
+            continue
+        # BO NGUONG SAT BIEN. Voi mot dai luong BI CHAN, phan vi cuc bien cua
+        # TRAIN co the nam sat bien - va cai cham bien do thuong la mot DI
+        # THUONG cua du lieu chu khong phai mot trang thai thi truong.
+        #
+        # Do 12/09/2026: `heiken than` (nam trong [-1, 1]) tren EURUSD D1
+        #     TRAIN   min -1,0000  q2 -0,9881   -> 145 bar
+        #     HOLDOUT min -0,8927  cung nguong  -> **0 bar**
+        # Nen than HA = -1,0000 nghia la nen lap kin bien do, tuc bar KHONG CO
+        # RAU - dau vet cua high/low duoc CHE tu open/close (`du_lieu` BAY 6).
+        # TRAIN con 2% bar nhu vay, HOLDOUT khong con cai nao. Nguong sinh ra tu
+        # do khong phai mot luat, la mot cai bay.
+        bien = float(s.max() - s.min())
+        if bien > 0:
+            gan_bien = min(abs(q - s.min()), abs(s.max() - q)) / bien
+            if gan_bien < LE_BIEN_TOI_THIEU:
+                continue
+        ra[p] = q
+    return ra
 
 
 def sinh(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=CAC_GIU,

@@ -88,10 +88,36 @@ class CuaUuTienDocDuocFILE(unittest.TestCase):
         self.assertTrue(kq["co_che"] or kq["tu_choi"],
                         "mot bai co luat ro rang ma khong ra co che nao")
 
-    def test_nguon_khong_nhan_ra_thi_noi_ro(self):
+    def test_URL_GO_SAI_thi_noi_ro_chu_khong_coi_la_van_xuoi(self):
+        """Hop dong doi 12/09/2026: cua nay NHAN van ban dan thang (de chu du an
+        go thang mot cau luat). Nhung mot URL go sai thi van phai bao la go sai -
+        neu doc no nhu van xuoi thi ket qua se la "0 co che", va chu du an se
+        tuong BAI VIET khong co gi thay vi biet minh go sai duong dan."""
+        for xau in ("htp://quantifiedstrategies.com/rsi-2",
+                    "C:/khong/co/file/nay.txt", "www.mql5.com/x"):
+            kq = UT.xu_ly(xau, ghi_kho=False)
+            self.assertFalse(kq["nhan"], xau)
+            self.assertIn("duong dan", kq["ly_do"][0].lower(), xau)
+
+    def test_van_ban_qua_ngan_hoac_mot_tu_thi_tu_choi(self):
+        for xau in ("rsi", "mua", "abc def"):
+            kq = UT.xu_ly(xau, ghi_kho=False)
+            self.assertFalse(kq["nhan"], xau)
+            self.assertIn("khong nhan ra nguon", kq["ly_do"][0])
+
+    def test_van_ban_khong_co_luat_thi_NOI_RO_0_co_che(self):
+        """Khong phai "khong nhan ra nguon" - da doc duoc, chi la khong co luat.
+        Hai cau tra loi khac han nhau ve mat hanh dong."""
         kq = UT.xu_ly("khong phai url cung khong phai file", ghi_kho=False)
-        self.assertFalse(kq["nhan"])
-        self.assertIn("khong nhan ra nguon", kq["ly_do"][0])
+        self.assertTrue(kq["nhan"])
+        self.assertEqual(kq["co_che"], [])
+
+    def test_cau_luat_tieng_Viet_go_thang_thi_DOC_DUOC(self):
+        kq = UT.xu_ly("Mua khi RSI 14 duoi 30, thoat khi RSI tren 55.",
+                      ghi_kho=False)
+        self.assertTrue(kq["nhan"])
+        self.assertGreaterEqual(len(kq["co_che"]), 1,
+                                "cua rieng cua chu du an khong doc duoc tieng Viet")
 
     def test_KHONG_ket_luan_tot_xau(self):
         """Cua nay rut ngan duong TU LINK DEN UNG VIEN. No khong backtest va
@@ -132,17 +158,19 @@ class CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN(unittest.TestCase):
         self.assertEqual(r["dieu_kien"]["trai"], {"chi_bao": "rsi", "n": 14})
         self.assertEqual(r["dieu_kien"]["phai"], {"hang": 30.0})
 
-    def test_dac_trung_la_BIEU_THUC_thi_tu_choi_va_ghi_hang_doi(self):
-        r = self.MC.dich_dieu_kien("price_position <= 0.2000")
+    def test_dac_trung_LA_thi_tu_choi_va_ghi_hang_doi(self):
+        """Dac trung khong co trong bang anh xa phai bi TU CHOI kem ten, de no
+        vao hang doi tu vung - khong duoc im lang bo qua."""
+        r = self.MC.dich_dieu_kien("dac_trung_chua_he_co <= 0.2000")
         self.assertFalse(r["nhan"])
-        self.assertEqual(r["thieu_tu_vung"], "price_position")
+        self.assertEqual(r["thieu_tu_vung"], "dac_trung_chua_he_co")
 
     def test_DICH_MOT_PHAN_bi_tu_choi(self):
         """Bo mot dieu kien khong dich duoc thi luat con lai LONG HON luat goc:
         no kich hoat nhieu hon han, an mot suat FDR, va khi truot thi ket luan
         'suy nguoc khong an' - trong khi cai truot la ban dich."""
         r = self.MC.dich_luat({"conditions": ["rsi_14 <= 25.0000",
-                                              "price_position <= 0.2000"],
+                                              "dac_trung_chua_he_co <= 0.2000"],
                                "pos_ratio": 0.7, "samples": 90})
         self.assertFalse(r["nhan"])
         self.assertIn("LONG HON", r["ly_do"][0])
@@ -164,11 +192,56 @@ class CauNoiMimicKHONG_DUOC_DICH_MOT_PHAN(unittest.TestCase):
         self.assertEqual(kq["spec"], [],
                          "luat co pos_ratio duoi nguong van duoc dich")
 
-    def test_ban_do_khong_duoc_bia_toan_hang_gan_dung(self):
-        """Hai dac trung la bieu thuc PHAI la None. Ep chung vao mot toan hang
-        gan dung se cho ra mot luat KHAC luat cua trader."""
-        self.assertIsNone(self.MC.BAN_DO["price_position"])
-        self.assertIsNone(self.MC.BAN_DO["dist_ma200_atr"])
+    def test_anh_xa_phai_TRUNG_TUNG_SO_voi_mimic(self):
+        """Ep mot dac trung vao toan hang GAN DUNG se cho ra luat KHAC luat cua
+        trader. Nen bang anh xa khong duoc kiem bang mat - phai chay CA HAI ben
+        tren cung du lieu va so tung so.
+
+        Truoc 12/09/2026 hai dac trung nay de `None` vi ngu phap chua noi duoc.
+        Cach sua DUNG la them toan hang (`lech_tb`) va he so thang do, khong
+        phai ep vao mot toan hang gan giong. Bai kiem nay la bang chung cho
+        viec do - neu ai doi anh xa sang mot thu 'gan dung' thi no do ngay."""
+        import numpy as np
+        import sys as _sys
+        from pathlib import Path as _P
+        _sys.path.insert(0, str(_P(__file__).resolve().parent.parent / "ds"))
+        try:
+            from mimic.features import compute_features
+        except Exception as e:
+            self.skipTest("khong import duoc ds/mimic: %s" % e)
+        from nhan import du_lieu as DL
+        from nhan import ngu_phap as NP
+        try:
+            df = DL.nap("EURUSD", "D1").tail(600).reset_index(drop=False)
+        except Exception as e:
+            self.skipTest("khong co du lieu: %s" % e)
+
+        class _B:
+            pass
+
+        b = _B()
+        for k in ("open", "high", "low", "close"):
+            setattr(b, k, df[k].to_numpy(float))
+        d = df.rename(columns={df.columns[0]: "t"}).set_index("t")
+
+        cap = [("price_position", self.MC.BAN_DO["price_position"],
+                self.MC.HE_SO_NGUONG.get("price_position", 1.0)),
+               ("dist_ma200_atr", self.MC.BAN_DO["dist_ma200_atr"], 1.0)]
+        for ten, th, he_so in cap:
+            self.assertIsNotNone(th, "%s chua co anh xa" % ten)
+            dsl = NP.toan_hang(d, th).to_numpy(float)
+            lech = []
+            for t in range(250, len(df)):
+                f = compute_features(b, t)
+                if ten not in f:
+                    continue
+                lech.append(abs(f[ten] * he_so - dsl[t - 1]))
+            self.assertGreater(len(lech), 100, "khong du diem so sanh")
+            self.assertLess(
+                max(lech), 1e-9,
+                "'%s': anh xa DSL lech voi mimic toi %.3e - day la anh xa GAN "
+                "DUNG, no se cho ra mot luat khac luat cua trader"
+                % (ten, max(lech)))
 
 
 

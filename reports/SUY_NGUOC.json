@@ -1,0 +1,6307 @@
+{
+ "khung": "H4",
+ "so_ma": 27,
+ "k_toi": 10,
+ "giay": 53.4,
+ "bang": [
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "nen_bien_dong",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0661,
+   "dat": 0,
+   "cung_dau": 26,
+   "ty_le_cung_dau": 0.963,
+   "p_dau_gop": 4.172325134277343e-07,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "nen_bien_dong",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0533,
+   "dat": 1,
+   "cung_dau": 25,
+   "ty_le_cung_dau": 0.926,
+   "p_dau_gop": 5.647540092468304e-06,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "bd20_tren_bd60",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0967,
+   "dat": 4,
+   "cung_dau": 24,
+   "ty_le_cung_dau": 0.889,
+   "p_dau_gop": 4.923343658447297e-05,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "bd20_tren_bd60",
+   "so_ma": 27,
+   "lech_trung_vi": 0.1072,
+   "dat": 3,
+   "cung_dau": 22,
+   "ty_le_cung_dau": 0.815,
+   "p_dau_gop": 0.0015137195587158318,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "ibs",
+   "so_ma": 27,
+   "lech_trung_vi": -0.036,
+   "dat": 0,
+   "cung_dau": 22,
+   "ty_le_cung_dau": 0.815,
+   "p_dau_gop": 0.0015137195587158318,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "xa_tb20",
+   "so_ma": 27,
+   "lech_trung_vi": 0.023,
+   "dat": 0,
+   "cung_dau": 22,
+   "ty_le_cung_dau": 0.815,
+   "p_dau_gop": 0.0015137195587158318,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "doc_20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0824,
+   "dat": 11,
+   "cung_dau": 21,
+   "ty_le_cung_dau": 0.778,
+   "p_dau_gop": 0.005924612283706698,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "bien_do_nen",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0202,
+   "dat": 0,
+   "cung_dau": 21,
+   "ty_le_cung_dau": 0.778,
+   "p_dau_gop": 0.005924612283706698,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "xa_tb20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.1193,
+   "dat": 9,
+   "cung_dau": 20,
+   "ty_le_cung_dau": 0.741,
+   "p_dau_gop": 0.019157290458679307,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "chuoi_cung_chieu",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0473,
+   "dat": 0,
+   "cung_dau": 20,
+   "ty_le_cung_dau": 0.741,
+   "p_dau_gop": 0.019157290458679307,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "vi_tri_20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.116,
+   "dat": 9,
+   "cung_dau": 19,
+   "ty_le_cung_dau": 0.704,
+   "p_dau_gop": 0.05223898589611087,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "than_tren_bien",
+   "so_ma": 27,
+   "lech_trung_vi": 0.016,
+   "dat": 0,
+   "cung_dau": 19,
+   "ty_le_cung_dau": 0.704,
+   "p_dau_gop": 0.05223898589611087,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "nen_bien_dong",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0176,
+   "dat": 0,
+   "cung_dau": 18,
+   "ty_le_cung_dau": 0.667,
+   "p_dau_gop": 0.12207812070846653,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "ibs",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0069,
+   "dat": 0,
+   "cung_dau": 18,
+   "ty_le_cung_dau": 0.667,
+   "p_dau_gop": 0.12207812070846653,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "ac1_20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0469,
+   "dat": 0,
+   "cung_dau": 17,
+   "ty_le_cung_dau": 0.63,
+   "p_dau_gop": 0.24778856337070632,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "vi_tri_20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0447,
+   "dat": 4,
+   "cung_dau": 17,
+   "ty_le_cung_dau": 0.63,
+   "p_dau_gop": 0.24778856337070632,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "doc_20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0439,
+   "dat": 7,
+   "cung_dau": 17,
+   "ty_le_cung_dau": 0.63,
+   "p_dau_gop": 0.24778856337070632,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "chuoi_cung_chieu",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0207,
+   "dat": 1,
+   "cung_dau": 17,
+   "ty_le_cung_dau": 0.63,
+   "p_dau_gop": 0.24778856337070632,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "bien_do_nen",
+   "so_ma": 27,
+   "lech_trung_vi": 0.019,
+   "dat": 0,
+   "cung_dau": 17,
+   "ty_le_cung_dau": 0.63,
+   "p_dau_gop": 0.24778856337070632,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "vi_tri_20",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0175,
+   "dat": 0,
+   "cung_dau": 17,
+   "ty_le_cung_dau": 0.63,
+   "p_dau_gop": 0.24778856337070632,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "xa_tb20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.039,
+   "dat": 6,
+   "cung_dau": 16,
+   "ty_le_cung_dau": 0.593,
+   "p_dau_gop": 0.4420683383941678,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "ac1_20",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0269,
+   "dat": 1,
+   "cung_dau": 16,
+   "ty_le_cung_dau": 0.593,
+   "p_dau_gop": 0.4420683383941678,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "chuoi_cung_chieu",
+   "so_ma": 27,
+   "lech_trung_vi": -0.02,
+   "dat": 0,
+   "cung_dau": 16,
+   "ty_le_cung_dau": 0.593,
+   "p_dau_gop": 0.4420683383941678,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "ac1_20",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0137,
+   "dat": 0,
+   "cung_dau": 16,
+   "ty_le_cung_dau": 0.593,
+   "p_dau_gop": 0.4420683383941678,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "than_tren_bien",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0103,
+   "dat": 0,
+   "cung_dau": 16,
+   "ty_le_cung_dau": 0.593,
+   "p_dau_gop": 0.4420683383941678,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_giam",
+   "dau_hieu": "ibs",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0125,
+   "dat": 0,
+   "cung_dau": 15,
+   "ty_le_cung_dau": 0.556,
+   "p_dau_gop": 0.7011080384254506,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "than_tren_bien",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0032,
+   "dat": 0,
+   "cung_dau": 15,
+   "ty_le_cung_dau": 0.556,
+   "p_dau_gop": 0.7011080384254506,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "bd20_tren_bd60",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0073,
+   "dat": 0,
+   "cung_dau": 14,
+   "ty_le_cung_dau": 0.519,
+   "p_dau_gop": 1.0000000000000058,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "chay_thang",
+   "dau_hieu": "doc_20",
+   "so_ma": 27,
+   "lech_trung_vi": 0.0035,
+   "dat": 0,
+   "cung_dau": 14,
+   "ty_le_cung_dau": 0.519,
+   "p_dau_gop": 1.0000000000000058,
+   "so_ma_doc_lap": 14
+  },
+  {
+   "su_kien": "cu_tang",
+   "dau_hieu": "bien_do_nen",
+   "so_ma": 27,
+   "lech_trung_vi": -0.0006,
+   "dat": 0,
+   "cung_dau": 14,
+   "ty_le_cung_dau": 0.519,
+   "p_dau_gop": 1.0000000000000058,
+   "so_ma_doc_lap": 14
+  }
+ ],
+ "chi_tiet": {
+  "AUDCAD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0026,
+     "tb_chung": 1.001,
+     "lech_chuan": 0.0083,
+     "p_xoay": 0.389,
+     "so_su_kien": 2087
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9992,
+     "tb_chung": 0.9995,
+     "lech_chuan": -0.0006,
+     "p_xoay": 0.4638,
+     "so_su_kien": 2087
+    },
+    "ibs": {
+     "tb_su_kien": 0.4896,
+     "tb_chung": 0.5002,
+     "lech_chuan": -0.036,
+     "p_xoay": 0.0349,
+     "so_su_kien": 2090
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4718,
+     "tb_chung": 0.5089,
+     "lech_chuan": -0.127,
+     "p_xoay": 0.005,
+     "so_su_kien": 2087
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2143,
+     "tb_chung": -0.0055,
+     "lech_chuan": -0.1453,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2087
+    },
+    "doc_20": {
+     "tb_su_kien": -0.3989,
+     "tb_chung": -0.0096,
+     "lech_chuan": -0.1539,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2087
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4389,
+     "tb_chung": 0.4328,
+     "lech_chuan": 0.024,
+     "p_xoay": 0.1222,
+     "so_su_kien": 2090
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0507,
+     "tb_chung": 0.0845,
+     "lech_chuan": -0.058,
+     "p_xoay": 0.0299,
+     "so_su_kien": 2090
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0662,
+     "tb_chung": -0.0693,
+     "lech_chuan": 0.0147,
+     "p_xoay": 0.3616,
+     "so_su_kien": 2086
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9922,
+     "tb_chung": 0.9834,
+     "lech_chuan": 0.0453,
+     "p_xoay": 0.1671,
+     "so_su_kien": 2078
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0055,
+     "tb_chung": 1.001,
+     "lech_chuan": 0.023,
+     "p_xoay": 0.2618,
+     "so_su_kien": 2088
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0148,
+     "tb_chung": 0.9995,
+     "lech_chuan": 0.0335,
+     "p_xoay": 0.0723,
+     "so_su_kien": 2088
+    },
+    "ibs": {
+     "tb_su_kien": 0.5111,
+     "tb_chung": 0.5002,
+     "lech_chuan": 0.0374,
+     "p_xoay": 0.0324,
+     "so_su_kien": 2090
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5381,
+     "tb_chung": 0.5089,
+     "lech_chuan": 0.1,
+     "p_xoay": 0.02,
+     "so_su_kien": 2088
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1518,
+     "tb_chung": -0.0055,
+     "lech_chuan": 0.1095,
+     "p_xoay": 0.0224,
+     "so_su_kien": 2088
+    },
+    "doc_20": {
+     "tb_su_kien": 0.221,
+     "tb_chung": -0.0096,
+     "lech_chuan": 0.0912,
+     "p_xoay": 0.0374,
+     "so_su_kien": 2088
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.426,
+     "tb_chung": 0.4328,
+     "lech_chuan": -0.0267,
+     "p_xoay": 0.1022,
+     "so_su_kien": 2090
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1282,
+     "tb_chung": 0.0845,
+     "lech_chuan": 0.0187,
+     "p_xoay": 0.2818,
+     "so_su_kien": 2090
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0753,
+     "tb_chung": -0.0693,
+     "lech_chuan": -0.0277,
+     "p_xoay": 0.2494,
+     "so_su_kien": 2085
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0022,
+     "tb_chung": 0.9834,
+     "lech_chuan": 0.0967,
+     "p_xoay": 0.02,
+     "so_su_kien": 2085
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9947,
+     "tb_chung": 1.001,
+     "lech_chuan": -0.0319,
+     "p_xoay": 0.2219,
+     "so_su_kien": 2088
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9951,
+     "tb_chung": 0.9995,
+     "lech_chuan": -0.0095,
+     "p_xoay": 0.3167,
+     "so_su_kien": 2088
+    },
+    "ibs": {
+     "tb_su_kien": 0.5006,
+     "tb_chung": 0.5002,
+     "lech_chuan": 0.0015,
+     "p_xoay": 0.5012,
+     "so_su_kien": 2090
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4935,
+     "tb_chung": 0.5089,
+     "lech_chuan": -0.0527,
+     "p_xoay": 0.0823,
+     "so_su_kien": 2088
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0787,
+     "tb_chung": -0.0055,
+     "lech_chuan": -0.051,
+     "p_xoay": 0.0873,
+     "so_su_kien": 2088
+    },
+    "doc_20": {
+     "tb_su_kien": -0.2054,
+     "tb_chung": -0.0096,
+     "lech_chuan": -0.0774,
+     "p_xoay": 0.0324,
+     "so_su_kien": 2088
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4374,
+     "tb_chung": 0.4328,
+     "lech_chuan": 0.0179,
+     "p_xoay": 0.207,
+     "so_su_kien": 2090
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.011,
+     "tb_chung": 0.0845,
+     "lech_chuan": -0.0315,
+     "p_xoay": 0.1147,
+     "so_su_kien": 2090
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0707,
+     "tb_chung": -0.0693,
+     "lech_chuan": -0.0062,
+     "p_xoay": 0.4613,
+     "so_su_kien": 2084
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.989,
+     "tb_chung": 0.9834,
+     "lech_chuan": 0.0288,
+     "p_xoay": 0.2344,
+     "so_su_kien": 2079
+    }
+   },
+   "ma": "AUDCAD",
+   "khung": "H4",
+   "bar": 20902
+  },
+  "AUDCHF": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0095,
+     "tb_chung": 1.0011,
+     "lech_chuan": 0.0421,
+     "p_xoay": 0.0948,
+     "so_su_kien": 2093
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0056,
+     "tb_chung": 0.9998,
+     "lech_chuan": 0.0127,
+     "p_xoay": 0.2843,
+     "so_su_kien": 2093
+    },
+    "ibs": {
+     "tb_su_kien": 0.4835,
+     "tb_chung": 0.5046,
+     "lech_chuan": -0.0717,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4779,
+     "tb_chung": 0.5167,
+     "lech_chuan": -0.1315,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2093
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2149,
+     "tb_chung": -0.0174,
+     "lech_chuan": -0.1328,
+     "p_xoay": 0.005,
+     "so_su_kien": 2093
+    },
+    "doc_20": {
+     "tb_su_kien": -0.2816,
+     "tb_chung": -0.0152,
+     "lech_chuan": -0.1014,
+     "p_xoay": 0.015,
+     "so_su_kien": 2093
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.439,
+     "tb_chung": 0.44,
+     "lech_chuan": -0.0038,
+     "p_xoay": 0.3965,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.1199,
+     "tb_chung": 0.0993,
+     "lech_chuan": -0.0901,
+     "p_xoay": 0.0075,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0487,
+     "tb_chung": -0.0626,
+     "lech_chuan": 0.0647,
+     "p_xoay": 0.1047,
+     "so_su_kien": 2090
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9996,
+     "tb_chung": 0.9798,
+     "lech_chuan": 0.0965,
+     "p_xoay": 0.0175,
+     "so_su_kien": 2090
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0182,
+     "tb_chung": 1.0011,
+     "lech_chuan": 0.0862,
+     "p_xoay": 0.0125,
+     "so_su_kien": 2093
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0299,
+     "tb_chung": 0.9998,
+     "lech_chuan": 0.0652,
+     "p_xoay": 0.005,
+     "so_su_kien": 2093
+    },
+    "ibs": {
+     "tb_su_kien": 0.4997,
+     "tb_chung": 0.5046,
+     "lech_chuan": -0.0167,
+     "p_xoay": 0.1995,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5035,
+     "tb_chung": 0.5167,
+     "lech_chuan": -0.0447,
+     "p_xoay": 0.1746,
+     "so_su_kien": 2093
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0753,
+     "tb_chung": -0.0174,
+     "lech_chuan": -0.039,
+     "p_xoay": 0.212,
+     "so_su_kien": 2093
+    },
+    "doc_20": {
+     "tb_su_kien": -0.1305,
+     "tb_chung": -0.0152,
+     "lech_chuan": -0.0439,
+     "p_xoay": 0.1895,
+     "so_su_kien": 2093
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4462,
+     "tb_chung": 0.44,
+     "lech_chuan": 0.0244,
+     "p_xoay": 0.1147,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0506,
+     "tb_chung": 0.0993,
+     "lech_chuan": -0.02,
+     "p_xoay": 0.2618,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0683,
+     "tb_chung": -0.0626,
+     "lech_chuan": -0.0267,
+     "p_xoay": 0.3392,
+     "so_su_kien": 2093
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0029,
+     "tb_chung": 0.9798,
+     "lech_chuan": 0.1125,
+     "p_xoay": 0.005,
+     "so_su_kien": 2093
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0131,
+     "tb_chung": 1.0011,
+     "lech_chuan": 0.0604,
+     "p_xoay": 0.0524,
+     "so_su_kien": 2089
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0119,
+     "tb_chung": 0.9998,
+     "lech_chuan": 0.0263,
+     "p_xoay": 0.1222,
+     "so_su_kien": 2089
+    },
+    "ibs": {
+     "tb_su_kien": 0.4979,
+     "tb_chung": 0.5046,
+     "lech_chuan": -0.0228,
+     "p_xoay": 0.1471,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5098,
+     "tb_chung": 0.5167,
+     "lech_chuan": -0.0234,
+     "p_xoay": 0.3117,
+     "so_su_kien": 2089
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0005,
+     "tb_chung": -0.0174,
+     "lech_chuan": 0.0113,
+     "p_xoay": 0.394,
+     "so_su_kien": 2089
+    },
+    "doc_20": {
+     "tb_su_kien": 0.1167,
+     "tb_chung": -0.0152,
+     "lech_chuan": 0.0502,
+     "p_xoay": 0.1097,
+     "so_su_kien": 2089
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4462,
+     "tb_chung": 0.44,
+     "lech_chuan": 0.0246,
+     "p_xoay": 0.1172,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0014,
+     "tb_chung": 0.0993,
+     "lech_chuan": -0.0402,
+     "p_xoay": 0.0823,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0537,
+     "tb_chung": -0.0626,
+     "lech_chuan": 0.0414,
+     "p_xoay": 0.1571,
+     "so_su_kien": 2086
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.992,
+     "tb_chung": 0.9798,
+     "lech_chuan": 0.0592,
+     "p_xoay": 0.0973,
+     "so_su_kien": 2086
+    }
+   },
+   "ma": "AUDCHF",
+   "khung": "H4",
+   "bar": 20934
+  },
+  "AUDNZD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0001,
+     "tb_chung": 1.0009,
+     "lech_chuan": -0.0041,
+     "p_xoay": 0.4788,
+     "so_su_kien": 2088
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0182,
+     "tb_chung": 0.9993,
+     "lech_chuan": 0.0399,
+     "p_xoay": 0.0549,
+     "so_su_kien": 2088
+    },
+    "ibs": {
+     "tb_su_kien": 0.4789,
+     "tb_chung": 0.4962,
+     "lech_chuan": -0.0581,
+     "p_xoay": 0.0125,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5008,
+     "tb_chung": 0.5108,
+     "lech_chuan": -0.0335,
+     "p_xoay": 0.2419,
+     "so_su_kien": 2088
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0742,
+     "tb_chung": 0.0069,
+     "lech_chuan": -0.0554,
+     "p_xoay": 0.0973,
+     "so_su_kien": 2088
+    },
+    "doc_20": {
+     "tb_su_kien": -0.1469,
+     "tb_chung": 0.0148,
+     "lech_chuan": -0.0623,
+     "p_xoay": 0.0898,
+     "so_su_kien": 2088
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4438,
+     "tb_chung": 0.4342,
+     "lech_chuan": 0.0379,
+     "p_xoay": 0.0324,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.1022,
+     "tb_chung": 0.0191,
+     "lech_chuan": -0.0515,
+     "p_xoay": 0.0399,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0977,
+     "tb_chung": -0.0858,
+     "lech_chuan": -0.0572,
+     "p_xoay": 0.1122,
+     "so_su_kien": 2088
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9734,
+     "tb_chung": 0.979,
+     "lech_chuan": -0.026,
+     "p_xoay": 0.2968,
+     "so_su_kien": 2083
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0102,
+     "tb_chung": 1.0009,
+     "lech_chuan": 0.0459,
+     "p_xoay": 0.1297,
+     "so_su_kien": 2092
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0203,
+     "tb_chung": 0.9993,
+     "lech_chuan": 0.0443,
+     "p_xoay": 0.0249,
+     "so_su_kien": 2092
+    },
+    "ibs": {
+     "tb_su_kien": 0.4945,
+     "tb_chung": 0.4962,
+     "lech_chuan": -0.0057,
+     "p_xoay": 0.4115,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5261,
+     "tb_chung": 0.5108,
+     "lech_chuan": 0.0508,
+     "p_xoay": 0.1696,
+     "so_su_kien": 2092
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1087,
+     "tb_chung": 0.0069,
+     "lech_chuan": 0.0696,
+     "p_xoay": 0.0823,
+     "so_su_kien": 2092
+    },
+    "doc_20": {
+     "tb_su_kien": 0.1935,
+     "tb_chung": 0.0148,
+     "lech_chuan": 0.0688,
+     "p_xoay": 0.1022,
+     "so_su_kien": 2092
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.432,
+     "tb_chung": 0.4342,
+     "lech_chuan": -0.0088,
+     "p_xoay": 0.3691,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0363,
+     "tb_chung": 0.0191,
+     "lech_chuan": 0.0073,
+     "p_xoay": 0.4289,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0829,
+     "tb_chung": -0.0858,
+     "lech_chuan": 0.0137,
+     "p_xoay": 0.4065,
+     "so_su_kien": 2092
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9767,
+     "tb_chung": 0.979,
+     "lech_chuan": -0.0107,
+     "p_xoay": 0.409,
+     "so_su_kien": 2092
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9845,
+     "tb_chung": 1.0009,
+     "lech_chuan": -0.0814,
+     "p_xoay": 0.0175,
+     "so_su_kien": 2092
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9799,
+     "tb_chung": 0.9993,
+     "lech_chuan": -0.0407,
+     "p_xoay": 0.0499,
+     "so_su_kien": 2092
+    },
+    "ibs": {
+     "tb_su_kien": 0.4907,
+     "tb_chung": 0.4962,
+     "lech_chuan": -0.0186,
+     "p_xoay": 0.202,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5286,
+     "tb_chung": 0.5108,
+     "lech_chuan": 0.0592,
+     "p_xoay": 0.0823,
+     "so_su_kien": 2092
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0933,
+     "tb_chung": 0.0069,
+     "lech_chuan": 0.0591,
+     "p_xoay": 0.0748,
+     "so_su_kien": 2092
+    },
+    "doc_20": {
+     "tb_su_kien": 0.1355,
+     "tb_chung": 0.0148,
+     "lech_chuan": 0.0464,
+     "p_xoay": 0.1347,
+     "so_su_kien": 2092
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4288,
+     "tb_chung": 0.4342,
+     "lech_chuan": -0.0212,
+     "p_xoay": 0.1796,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0291,
+     "tb_chung": 0.0191,
+     "lech_chuan": 0.0043,
+     "p_xoay": 0.4638,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.1085,
+     "tb_chung": -0.0858,
+     "lech_chuan": -0.109,
+     "p_xoay": 0.005,
+     "so_su_kien": 2092
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9569,
+     "tb_chung": 0.979,
+     "lech_chuan": -0.1038,
+     "p_xoay": 0.015,
+     "so_su_kien": 2087
+    }
+   },
+   "ma": "AUDNZD",
+   "khung": "H4",
+   "bar": 20934
+  },
+  "EURCAD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0218,
+     "tb_chung": 1.0021,
+     "lech_chuan": 0.0899,
+     "p_xoay": 0.005,
+     "so_su_kien": 2089
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0029,
+     "tb_chung": 0.9935,
+     "lech_chuan": 0.0174,
+     "p_xoay": 0.2269,
+     "so_su_kien": 2089
+    },
+    "ibs": {
+     "tb_su_kien": 0.4917,
+     "tb_chung": 0.5016,
+     "lech_chuan": -0.0336,
+     "p_xoay": 0.0449,
+     "so_su_kien": 2092
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5194,
+     "tb_chung": 0.4986,
+     "lech_chuan": 0.0702,
+     "p_xoay": 0.0898,
+     "so_su_kien": 2089
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1212,
+     "tb_chung": 0.0237,
+     "lech_chuan": 0.0625,
+     "p_xoay": 0.0898,
+     "so_su_kien": 2089
+    },
+    "doc_20": {
+     "tb_su_kien": 0.2708,
+     "tb_chung": 0.0255,
+     "lech_chuan": 0.0888,
+     "p_xoay": 0.0524,
+     "so_su_kien": 2089
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4368,
+     "tb_chung": 0.4359,
+     "lech_chuan": 0.0035,
+     "p_xoay": 0.4314,
+     "so_su_kien": 2092
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1157,
+     "tb_chung": 0.1341,
+     "lech_chuan": -0.0077,
+     "p_xoay": 0.3915,
+     "so_su_kien": 2092
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0575,
+     "tb_chung": -0.0688,
+     "lech_chuan": 0.0499,
+     "p_xoay": 0.1546,
+     "so_su_kien": 2084
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9734,
+     "tb_chung": 0.9755,
+     "lech_chuan": -0.0099,
+     "p_xoay": 0.414,
+     "so_su_kien": 2081
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0225,
+     "tb_chung": 1.0021,
+     "lech_chuan": 0.0934,
+     "p_xoay": 0.0075,
+     "so_su_kien": 2091
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9963,
+     "tb_chung": 0.9935,
+     "lech_chuan": 0.0052,
+     "p_xoay": 0.3815,
+     "so_su_kien": 2091
+    },
+    "ibs": {
+     "tb_su_kien": 0.5164,
+     "tb_chung": 0.5016,
+     "lech_chuan": 0.0501,
+     "p_xoay": 0.0075,
+     "so_su_kien": 2092
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5428,
+     "tb_chung": 0.4986,
+     "lech_chuan": 0.1495,
+     "p_xoay": 0.005,
+     "so_su_kien": 2091
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.3308,
+     "tb_chung": 0.0237,
+     "lech_chuan": 0.1968,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2091
+    },
+    "doc_20": {
+     "tb_su_kien": 0.581,
+     "tb_chung": 0.0255,
+     "lech_chuan": 0.201,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2090
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4444,
+     "tb_chung": 0.4359,
+     "lech_chuan": 0.0333,
+     "p_xoay": 0.0723,
+     "so_su_kien": 2092
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.2146,
+     "tb_chung": 0.1341,
+     "lech_chuan": 0.0334,
+     "p_xoay": 0.1272,
+     "so_su_kien": 2092
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0613,
+     "tb_chung": -0.0688,
+     "lech_chuan": 0.0332,
+     "p_xoay": 0.2394,
+     "so_su_kien": 2085
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9908,
+     "tb_chung": 0.9755,
+     "lech_chuan": 0.0697,
+     "p_xoay": 0.0623,
+     "so_su_kien": 2079
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0062,
+     "tb_chung": 1.0021,
+     "lech_chuan": 0.0187,
+     "p_xoay": 0.2643,
+     "so_su_kien": 2090
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0215,
+     "tb_chung": 0.9935,
+     "lech_chuan": 0.0518,
+     "p_xoay": 0.01,
+     "so_su_kien": 2090
+    },
+    "ibs": {
+     "tb_su_kien": 0.5117,
+     "tb_chung": 0.5016,
+     "lech_chuan": 0.0344,
+     "p_xoay": 0.0648,
+     "so_su_kien": 2092
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5258,
+     "tb_chung": 0.4986,
+     "lech_chuan": 0.0919,
+     "p_xoay": 0.01,
+     "so_su_kien": 2090
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1717,
+     "tb_chung": 0.0237,
+     "lech_chuan": 0.0948,
+     "p_xoay": 0.0125,
+     "so_su_kien": 2090
+    },
+    "doc_20": {
+     "tb_su_kien": 0.3176,
+     "tb_chung": 0.0255,
+     "lech_chuan": 0.1057,
+     "p_xoay": 0.005,
+     "so_su_kien": 2090
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4366,
+     "tb_chung": 0.4359,
+     "lech_chuan": 0.0027,
+     "p_xoay": 0.4589,
+     "so_su_kien": 2092
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.196,
+     "tb_chung": 0.1341,
+     "lech_chuan": 0.0257,
+     "p_xoay": 0.197,
+     "so_su_kien": 2092
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0556,
+     "tb_chung": -0.0688,
+     "lech_chuan": 0.0585,
+     "p_xoay": 0.0574,
+     "so_su_kien": 2086
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9733,
+     "tb_chung": 0.9755,
+     "lech_chuan": -0.01,
+     "p_xoay": 0.4239,
+     "so_su_kien": 2081
+    }
+   },
+   "ma": "EURCAD",
+   "khung": "H4",
+   "bar": 20928
+  },
+  "EURGBP": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0168,
+     "tb_chung": 1.0015,
+     "lech_chuan": 0.0689,
+     "p_xoay": 0.0374,
+     "so_su_kien": 2083
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9864,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.0105,
+     "p_xoay": 0.3416,
+     "so_su_kien": 2083
+    },
+    "ibs": {
+     "tb_su_kien": 0.4866,
+     "tb_chung": 0.4932,
+     "lech_chuan": -0.0223,
+     "p_xoay": 0.1197,
+     "so_su_kien": 2092
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4843,
+     "tb_chung": 0.4813,
+     "lech_chuan": 0.0103,
+     "p_xoay": 0.4539,
+     "so_su_kien": 2083
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0014,
+     "tb_chung": -0.0381,
+     "lech_chuan": 0.0255,
+     "p_xoay": 0.2768,
+     "so_su_kien": 2083
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0255,
+     "tb_chung": -0.0997,
+     "lech_chuan": 0.0271,
+     "p_xoay": 0.3416,
+     "so_su_kien": 2083
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4387,
+     "tb_chung": 0.4331,
+     "lech_chuan": 0.022,
+     "p_xoay": 0.1771,
+     "so_su_kien": 2092
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.164,
+     "tb_chung": 0.0979,
+     "lech_chuan": 0.0292,
+     "p_xoay": 0.1671,
+     "so_su_kien": 2092
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0791,
+     "tb_chung": -0.0639,
+     "lech_chuan": -0.0715,
+     "p_xoay": 0.0873,
+     "so_su_kien": 2079
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0111,
+     "tb_chung": 0.9757,
+     "lech_chuan": 0.1595,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2077
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0262,
+     "tb_chung": 1.0015,
+     "lech_chuan": 0.1111,
+     "p_xoay": 0.0075,
+     "so_su_kien": 2092
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9895,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.005,
+     "p_xoay": 0.409,
+     "so_su_kien": 2092
+    },
+    "ibs": {
+     "tb_su_kien": 0.4997,
+     "tb_chung": 0.4932,
+     "lech_chuan": 0.0224,
+     "p_xoay": 0.1671,
+     "so_su_kien": 2092
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5175,
+     "tb_chung": 0.4813,
+     "lech_chuan": 0.1233,
+     "p_xoay": 0.0075,
+     "so_su_kien": 2092
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.2011,
+     "tb_chung": -0.0381,
+     "lech_chuan": 0.1542,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2092
+    },
+    "doc_20": {
+     "tb_su_kien": 0.3883,
+     "tb_chung": -0.0997,
+     "lech_chuan": 0.1784,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2092
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.433,
+     "tb_chung": 0.4331,
+     "lech_chuan": -0.0003,
+     "p_xoay": 0.4813,
+     "so_su_kien": 2092
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.2065,
+     "tb_chung": 0.0979,
+     "lech_chuan": 0.048,
+     "p_xoay": 0.0399,
+     "so_su_kien": 2092
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0582,
+     "tb_chung": -0.0639,
+     "lech_chuan": 0.0267,
+     "p_xoay": 0.2918,
+     "so_su_kien": 2082
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9887,
+     "tb_chung": 0.9757,
+     "lech_chuan": 0.0586,
+     "p_xoay": 0.1047,
+     "so_su_kien": 2082
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0075,
+     "tb_chung": 1.0015,
+     "lech_chuan": 0.0267,
+     "p_xoay": 0.2145,
+     "so_su_kien": 2092
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0011,
+     "tb_chung": 0.9924,
+     "lech_chuan": 0.0153,
+     "p_xoay": 0.2219,
+     "so_su_kien": 2092
+    },
+    "ibs": {
+     "tb_su_kien": 0.4876,
+     "tb_chung": 0.4932,
+     "lech_chuan": -0.0189,
+     "p_xoay": 0.187,
+     "so_su_kien": 2092
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4865,
+     "tb_chung": 0.4813,
+     "lech_chuan": 0.0179,
+     "p_xoay": 0.3167,
+     "so_su_kien": 2092
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0116,
+     "tb_chung": -0.0381,
+     "lech_chuan": 0.0171,
+     "p_xoay": 0.2893,
+     "so_su_kien": 2092
+    },
+    "doc_20": {
+     "tb_su_kien": 0.0097,
+     "tb_chung": -0.0997,
+     "lech_chuan": 0.04,
+     "p_xoay": 0.1446,
+     "so_su_kien": 2092
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4308,
+     "tb_chung": 0.4331,
+     "lech_chuan": -0.0087,
+     "p_xoay": 0.3217,
+     "so_su_kien": 2092
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.088,
+     "tb_chung": 0.0979,
+     "lech_chuan": -0.0044,
+     "p_xoay": 0.4738,
+     "so_su_kien": 2092
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0739,
+     "tb_chung": -0.0639,
+     "lech_chuan": -0.0469,
+     "p_xoay": 0.1197,
+     "so_su_kien": 2092
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9783,
+     "tb_chung": 0.9757,
+     "lech_chuan": 0.012,
+     "p_xoay": 0.3741,
+     "so_su_kien": 2092
+    }
+   },
+   "ma": "EURGBP",
+   "khung": "H4",
+   "bar": 20928
+  },
+  "EURNZD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0119,
+     "tb_chung": 1.0011,
+     "lech_chuan": 0.0533,
+     "p_xoay": 0.0723,
+     "so_su_kien": 2089
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0096,
+     "tb_chung": 0.9996,
+     "lech_chuan": 0.0217,
+     "p_xoay": 0.1571,
+     "so_su_kien": 2089
+    },
+    "ibs": {
+     "tb_su_kien": 0.4929,
+     "tb_chung": 0.494,
+     "lech_chuan": -0.0036,
+     "p_xoay": 0.4763,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4916,
+     "tb_chung": 0.4943,
+     "lech_chuan": -0.009,
+     "p_xoay": 0.4389,
+     "so_su_kien": 2089
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0174,
+     "tb_chung": 0.0112,
+     "lech_chuan": -0.0192,
+     "p_xoay": 0.3491,
+     "so_su_kien": 2089
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0525,
+     "tb_chung": 0.0031,
+     "lech_chuan": -0.0211,
+     "p_xoay": 0.3865,
+     "so_su_kien": 2089
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4517,
+     "tb_chung": 0.4369,
+     "lech_chuan": 0.0581,
+     "p_xoay": 0.005,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0645,
+     "tb_chung": 0.0052,
+     "lech_chuan": -0.0295,
+     "p_xoay": 0.1471,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0567,
+     "tb_chung": -0.0687,
+     "lech_chuan": 0.057,
+     "p_xoay": 0.1272,
+     "so_su_kien": 2089
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0168,
+     "tb_chung": 0.9802,
+     "lech_chuan": 0.1828,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2085
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0034,
+     "tb_chung": 1.0011,
+     "lech_chuan": 0.0115,
+     "p_xoay": 0.3766,
+     "so_su_kien": 2093
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0128,
+     "tb_chung": 0.9996,
+     "lech_chuan": 0.0287,
+     "p_xoay": 0.1097,
+     "so_su_kien": 2093
+    },
+    "ibs": {
+     "tb_su_kien": 0.5088,
+     "tb_chung": 0.494,
+     "lech_chuan": 0.0504,
+     "p_xoay": 0.01,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5219,
+     "tb_chung": 0.4943,
+     "lech_chuan": 0.0931,
+     "p_xoay": 0.0249,
+     "so_su_kien": 2093
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.2035,
+     "tb_chung": 0.0112,
+     "lech_chuan": 0.1297,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2093
+    },
+    "doc_20": {
+     "tb_su_kien": 0.2025,
+     "tb_chung": 0.0031,
+     "lech_chuan": 0.0757,
+     "p_xoay": 0.0623,
+     "so_su_kien": 2093
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4395,
+     "tb_chung": 0.4369,
+     "lech_chuan": 0.0103,
+     "p_xoay": 0.3117,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1811,
+     "tb_chung": 0.0052,
+     "lech_chuan": 0.0744,
+     "p_xoay": 0.0125,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0541,
+     "tb_chung": -0.0687,
+     "lech_chuan": 0.0695,
+     "p_xoay": 0.0748,
+     "so_su_kien": 2086
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9822,
+     "tb_chung": 0.9802,
+     "lech_chuan": 0.0098,
+     "p_xoay": 0.4364,
+     "so_su_kien": 2085
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9924,
+     "tb_chung": 1.0011,
+     "lech_chuan": -0.0428,
+     "p_xoay": 0.1272,
+     "so_su_kien": 2092
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9979,
+     "tb_chung": 0.9996,
+     "lech_chuan": -0.0036,
+     "p_xoay": 0.4289,
+     "so_su_kien": 2092
+    },
+    "ibs": {
+     "tb_su_kien": 0.4925,
+     "tb_chung": 0.494,
+     "lech_chuan": -0.0051,
+     "p_xoay": 0.3865,
+     "so_su_kien": 2093
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4876,
+     "tb_chung": 0.4943,
+     "lech_chuan": -0.0227,
+     "p_xoay": 0.2868,
+     "so_su_kien": 2092
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0355,
+     "tb_chung": 0.0112,
+     "lech_chuan": -0.0315,
+     "p_xoay": 0.1845,
+     "so_su_kien": 2092
+    },
+    "doc_20": {
+     "tb_su_kien": -0.1376,
+     "tb_chung": 0.0031,
+     "lech_chuan": -0.0534,
+     "p_xoay": 0.0923,
+     "so_su_kien": 2092
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4461,
+     "tb_chung": 0.4369,
+     "lech_chuan": 0.0362,
+     "p_xoay": 0.0524,
+     "so_su_kien": 2093
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0115,
+     "tb_chung": 0.0052,
+     "lech_chuan": -0.007,
+     "p_xoay": 0.389,
+     "so_su_kien": 2093
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0558,
+     "tb_chung": -0.0687,
+     "lech_chuan": 0.0616,
+     "p_xoay": 0.0599,
+     "so_su_kien": 2090
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9836,
+     "tb_chung": 0.9802,
+     "lech_chuan": 0.017,
+     "p_xoay": 0.3267,
+     "so_su_kien": 2088
+    }
+   },
+   "ma": "EURNZD",
+   "khung": "H4",
+   "bar": 20931
+  },
+  "EURUSD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0013,
+     "tb_chung": 1.0016,
+     "lech_chuan": -0.0014,
+     "p_xoay": 0.4913,
+     "so_su_kien": 4399
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9841,
+     "tb_chung": 0.9923,
+     "lech_chuan": -0.0146,
+     "p_xoay": 0.1446,
+     "so_su_kien": 4399
+    },
+    "ibs": {
+     "tb_su_kien": 0.4943,
+     "tb_chung": 0.5013,
+     "lech_chuan": -0.025,
+     "p_xoay": 0.0474,
+     "so_su_kien": 4399
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4982,
+     "tb_chung": 0.498,
+     "lech_chuan": 0.0008,
+     "p_xoay": 0.4314,
+     "so_su_kien": 4399
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0158,
+     "tb_chung": 0.0002,
+     "lech_chuan": 0.0096,
+     "p_xoay": 0.389,
+     "so_su_kien": 4399
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0128,
+     "tb_chung": -0.0066,
+     "lech_chuan": -0.0021,
+     "p_xoay": 0.4264,
+     "so_su_kien": 4399
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4176,
+     "tb_chung": 0.4259,
+     "lech_chuan": -0.0331,
+     "p_xoay": 0.0424,
+     "so_su_kien": 4399
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0034,
+     "tb_chung": 0.0512,
+     "lech_chuan": -0.0209,
+     "p_xoay": 0.1297,
+     "so_su_kien": 4399
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0584,
+     "tb_chung": -0.0485,
+     "lech_chuan": -0.0471,
+     "p_xoay": 0.0673,
+     "so_su_kien": 4392
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9689,
+     "tb_chung": 0.9779,
+     "lech_chuan": -0.0431,
+     "p_xoay": 0.0923,
+     "so_su_kien": 4390
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0033,
+     "tb_chung": 1.0016,
+     "lech_chuan": 0.0073,
+     "p_xoay": 0.399,
+     "so_su_kien": 4394
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9774,
+     "tb_chung": 0.9923,
+     "lech_chuan": -0.0265,
+     "p_xoay": 0.0424,
+     "so_su_kien": 4394
+    },
+    "ibs": {
+     "tb_su_kien": 0.5031,
+     "tb_chung": 0.5013,
+     "lech_chuan": 0.0064,
+     "p_xoay": 0.3192,
+     "so_su_kien": 4399
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5032,
+     "tb_chung": 0.498,
+     "lech_chuan": 0.0173,
+     "p_xoay": 0.3142,
+     "so_su_kien": 4394
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0168,
+     "tb_chung": 0.0002,
+     "lech_chuan": 0.0101,
+     "p_xoay": 0.404,
+     "so_su_kien": 4394
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0102,
+     "tb_chung": -0.0066,
+     "lech_chuan": -0.0012,
+     "p_xoay": 0.4564,
+     "so_su_kien": 4394
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.426,
+     "tb_chung": 0.4259,
+     "lech_chuan": 0.0004,
+     "p_xoay": 0.4863,
+     "so_su_kien": 4399
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0123,
+     "tb_chung": 0.0512,
+     "lech_chuan": -0.017,
+     "p_xoay": 0.1746,
+     "so_su_kien": 4399
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0527,
+     "tb_chung": -0.0485,
+     "lech_chuan": -0.0197,
+     "p_xoay": 0.2444,
+     "so_su_kien": 4388
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9736,
+     "tb_chung": 0.9779,
+     "lech_chuan": -0.0205,
+     "p_xoay": 0.2693,
+     "so_su_kien": 4386
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9868,
+     "tb_chung": 1.0016,
+     "lech_chuan": -0.0657,
+     "p_xoay": 0.01,
+     "so_su_kien": 4399
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9809,
+     "tb_chung": 0.9923,
+     "lech_chuan": -0.0202,
+     "p_xoay": 0.0698,
+     "so_su_kien": 4399
+    },
+    "ibs": {
+     "tb_su_kien": 0.4962,
+     "tb_chung": 0.5013,
+     "lech_chuan": -0.0181,
+     "p_xoay": 0.0948,
+     "so_su_kien": 4399
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4976,
+     "tb_chung": 0.498,
+     "lech_chuan": -0.0013,
+     "p_xoay": 0.4589,
+     "so_su_kien": 4399
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0217,
+     "tb_chung": 0.0002,
+     "lech_chuan": -0.0133,
+     "p_xoay": 0.3616,
+     "so_su_kien": 4399
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0408,
+     "tb_chung": -0.0066,
+     "lech_chuan": -0.0117,
+     "p_xoay": 0.3691,
+     "so_su_kien": 4399
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4256,
+     "tb_chung": 0.4259,
+     "lech_chuan": -0.001,
+     "p_xoay": 0.4638,
+     "so_su_kien": 4399
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0296,
+     "tb_chung": 0.0512,
+     "lech_chuan": -0.0353,
+     "p_xoay": 0.02,
+     "so_su_kien": 4399
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0596,
+     "tb_chung": -0.0485,
+     "lech_chuan": -0.0527,
+     "p_xoay": 0.0249,
+     "so_su_kien": 4394
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9558,
+     "tb_chung": 0.9779,
+     "lech_chuan": -0.1058,
+     "p_xoay": 0.0025,
+     "so_su_kien": 4394
+    }
+   },
+   "ma": "EURUSD",
+   "khung": "H4",
+   "bar": 43996
+  },
+  "GBPCAD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0048,
+     "tb_chung": 1.0016,
+     "lech_chuan": 0.0152,
+     "p_xoay": 0.3766,
+     "so_su_kien": 2090
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9765,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.0292,
+     "p_xoay": 0.0873,
+     "so_su_kien": 2090
+    },
+    "ibs": {
+     "tb_su_kien": 0.5021,
+     "tb_chung": 0.508,
+     "lech_chuan": -0.0201,
+     "p_xoay": 0.1471,
+     "so_su_kien": 2090
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5081,
+     "tb_chung": 0.5149,
+     "lech_chuan": -0.023,
+     "p_xoay": 0.3616,
+     "so_su_kien": 2090
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0139,
+     "tb_chung": 0.047,
+     "lech_chuan": -0.0394,
+     "p_xoay": 0.2369,
+     "so_su_kien": 2090
+    },
+    "doc_20": {
+     "tb_su_kien": 0.0715,
+     "tb_chung": 0.0936,
+     "lech_chuan": -0.008,
+     "p_xoay": 0.414,
+     "so_su_kien": 2090
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4381,
+     "tb_chung": 0.4352,
+     "lech_chuan": 0.0115,
+     "p_xoay": 0.3042,
+     "so_su_kien": 2090
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0823,
+     "tb_chung": 0.1678,
+     "lech_chuan": -0.0367,
+     "p_xoay": 0.1272,
+     "so_su_kien": 2090
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0535,
+     "tb_chung": -0.0752,
+     "lech_chuan": 0.095,
+     "p_xoay": 0.02,
+     "so_su_kien": 2089
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9814,
+     "tb_chung": 0.9781,
+     "lech_chuan": 0.0152,
+     "p_xoay": 0.4015,
+     "so_su_kien": 2088
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0137,
+     "tb_chung": 1.0016,
+     "lech_chuan": 0.0564,
+     "p_xoay": 0.0873,
+     "so_su_kien": 2076
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9764,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.0294,
+     "p_xoay": 0.1322,
+     "so_su_kien": 2076
+    },
+    "ibs": {
+     "tb_su_kien": 0.5265,
+     "tb_chung": 0.508,
+     "lech_chuan": 0.0628,
+     "p_xoay": 0.005,
+     "so_su_kien": 2090
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5311,
+     "tb_chung": 0.5149,
+     "lech_chuan": 0.055,
+     "p_xoay": 0.0898,
+     "so_su_kien": 2076
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1833,
+     "tb_chung": 0.047,
+     "lech_chuan": 0.0881,
+     "p_xoay": 0.0424,
+     "so_su_kien": 2076
+    },
+    "doc_20": {
+     "tb_su_kien": 0.2291,
+     "tb_chung": 0.0936,
+     "lech_chuan": 0.0494,
+     "p_xoay": 0.197,
+     "so_su_kien": 2076
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4381,
+     "tb_chung": 0.4352,
+     "lech_chuan": 0.0115,
+     "p_xoay": 0.3491,
+     "so_su_kien": 2090
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.2622,
+     "tb_chung": 0.1678,
+     "lech_chuan": 0.0405,
+     "p_xoay": 0.0873,
+     "so_su_kien": 2090
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0968,
+     "tb_chung": -0.0752,
+     "lech_chuan": -0.0949,
+     "p_xoay": 0.0399,
+     "so_su_kien": 2075
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9946,
+     "tb_chung": 0.9781,
+     "lech_chuan": 0.0759,
+     "p_xoay": 0.0698,
+     "so_su_kien": 2072
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9929,
+     "tb_chung": 1.0016,
+     "lech_chuan": -0.0404,
+     "p_xoay": 0.0923,
+     "so_su_kien": 2085
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9707,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.0397,
+     "p_xoay": 0.0324,
+     "so_su_kien": 2085
+    },
+    "ibs": {
+     "tb_su_kien": 0.5199,
+     "tb_chung": 0.508,
+     "lech_chuan": 0.0403,
+     "p_xoay": 0.0299,
+     "so_su_kien": 2090
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5292,
+     "tb_chung": 0.5149,
+     "lech_chuan": 0.0484,
+     "p_xoay": 0.0923,
+     "so_su_kien": 2085
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1265,
+     "tb_chung": 0.047,
+     "lech_chuan": 0.0514,
+     "p_xoay": 0.0923,
+     "so_su_kien": 2085
+    },
+    "doc_20": {
+     "tb_su_kien": 0.226,
+     "tb_chung": 0.0936,
+     "lech_chuan": 0.0483,
+     "p_xoay": 0.1147,
+     "so_su_kien": 2084
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4343,
+     "tb_chung": 0.4352,
+     "lech_chuan": -0.0032,
+     "p_xoay": 0.4713,
+     "so_su_kien": 2090
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.2278,
+     "tb_chung": 0.1678,
+     "lech_chuan": 0.0257,
+     "p_xoay": 0.1571,
+     "so_su_kien": 2090
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0786,
+     "tb_chung": -0.0752,
+     "lech_chuan": -0.015,
+     "p_xoay": 0.3766,
+     "so_su_kien": 2084
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9817,
+     "tb_chung": 0.9781,
+     "lech_chuan": 0.0164,
+     "p_xoay": 0.3616,
+     "so_su_kien": 2084
+    }
+   },
+   "ma": "GBPCAD",
+   "khung": "H4",
+   "bar": 20908
+  },
+  "GBPUSD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0065,
+     "tb_chung": 1.0018,
+     "lech_chuan": 0.0216,
+     "p_xoay": 0.182,
+     "so_su_kien": 4396
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9693,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.0417,
+     "p_xoay": 0.005,
+     "so_su_kien": 4396
+    },
+    "ibs": {
+     "tb_su_kien": 0.4932,
+     "tb_chung": 0.5047,
+     "lech_chuan": -0.0402,
+     "p_xoay": 0.005,
+     "so_su_kien": 4396
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5008,
+     "tb_chung": 0.5068,
+     "lech_chuan": -0.0199,
+     "p_xoay": 0.2768,
+     "so_su_kien": 4396
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.036,
+     "tb_chung": 0.0073,
+     "lech_chuan": -0.0267,
+     "p_xoay": 0.2344,
+     "so_su_kien": 4396
+    },
+    "doc_20": {
+     "tb_su_kien": -0.141,
+     "tb_chung": 0.0219,
+     "lech_chuan": -0.0563,
+     "p_xoay": 0.0549,
+     "so_su_kien": 4396
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4244,
+     "tb_chung": 0.426,
+     "lech_chuan": -0.0062,
+     "p_xoay": 0.3441,
+     "so_su_kien": 4396
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.023,
+     "tb_chung": 0.0389,
+     "lech_chuan": -0.0273,
+     "p_xoay": 0.0748,
+     "so_su_kien": 4396
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0643,
+     "tb_chung": -0.053,
+     "lech_chuan": -0.0526,
+     "p_xoay": 0.0673,
+     "so_su_kien": 4390
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9853,
+     "tb_chung": 0.9789,
+     "lech_chuan": 0.031,
+     "p_xoay": 0.2045,
+     "so_su_kien": 4387
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0137,
+     "tb_chung": 1.0018,
+     "lech_chuan": 0.0546,
+     "p_xoay": 0.01,
+     "so_su_kien": 4395
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9785,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.0251,
+     "p_xoay": 0.0424,
+     "so_su_kien": 4395
+    },
+    "ibs": {
+     "tb_su_kien": 0.5063,
+     "tb_chung": 0.5047,
+     "lech_chuan": 0.0054,
+     "p_xoay": 0.3466,
+     "so_su_kien": 4396
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4997,
+     "tb_chung": 0.5068,
+     "lech_chuan": -0.0238,
+     "p_xoay": 0.2419,
+     "so_su_kien": 4395
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0515,
+     "tb_chung": 0.0073,
+     "lech_chuan": -0.0363,
+     "p_xoay": 0.1147,
+     "so_su_kien": 4395
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0864,
+     "tb_chung": 0.0219,
+     "lech_chuan": -0.0374,
+     "p_xoay": 0.1397,
+     "so_su_kien": 4395
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4331,
+     "tb_chung": 0.426,
+     "lech_chuan": 0.0284,
+     "p_xoay": 0.0324,
+     "so_su_kien": 4396
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0168,
+     "tb_chung": 0.0389,
+     "lech_chuan": -0.0097,
+     "p_xoay": 0.3092,
+     "so_su_kien": 4396
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0592,
+     "tb_chung": -0.053,
+     "lech_chuan": -0.0289,
+     "p_xoay": 0.2195,
+     "so_su_kien": 4392
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9786,
+     "tb_chung": 0.9789,
+     "lech_chuan": -0.0014,
+     "p_xoay": 0.4738,
+     "so_su_kien": 4392
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9982,
+     "tb_chung": 1.0018,
+     "lech_chuan": -0.0167,
+     "p_xoay": 0.2369,
+     "so_su_kien": 4395
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9713,
+     "tb_chung": 0.9924,
+     "lech_chuan": -0.0381,
+     "p_xoay": 0.005,
+     "so_su_kien": 4395
+    },
+    "ibs": {
+     "tb_su_kien": 0.5064,
+     "tb_chung": 0.5047,
+     "lech_chuan": 0.0059,
+     "p_xoay": 0.3167,
+     "so_su_kien": 4396
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5093,
+     "tb_chung": 0.5068,
+     "lech_chuan": 0.0083,
+     "p_xoay": 0.4314,
+     "so_su_kien": 4395
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0153,
+     "tb_chung": 0.0073,
+     "lech_chuan": 0.0049,
+     "p_xoay": 0.4464,
+     "so_su_kien": 4395
+    },
+    "doc_20": {
+     "tb_su_kien": 0.0049,
+     "tb_chung": 0.0219,
+     "lech_chuan": -0.0059,
+     "p_xoay": 0.4015,
+     "so_su_kien": 4395
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4194,
+     "tb_chung": 0.426,
+     "lech_chuan": -0.0261,
+     "p_xoay": 0.0449,
+     "so_su_kien": 4396
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0337,
+     "tb_chung": 0.0389,
+     "lech_chuan": -0.0023,
+     "p_xoay": 0.4489,
+     "so_su_kien": 4396
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0653,
+     "tb_chung": -0.053,
+     "lech_chuan": -0.0572,
+     "p_xoay": 0.0075,
+     "so_su_kien": 4393
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9724,
+     "tb_chung": 0.9789,
+     "lech_chuan": -0.0315,
+     "p_xoay": 0.1421,
+     "so_su_kien": 4393
+    }
+   },
+   "ma": "GBPUSD",
+   "khung": "H4",
+   "bar": 43961
+  },
+  "NZDCAD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.002,
+     "tb_chung": 1.0008,
+     "lech_chuan": 0.0059,
+     "p_xoay": 0.4239,
+     "so_su_kien": 2094
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0108,
+     "tb_chung": 0.9984,
+     "lech_chuan": 0.0267,
+     "p_xoay": 0.1397,
+     "so_su_kien": 2094
+    },
+    "ibs": {
+     "tb_su_kien": 0.4773,
+     "tb_chung": 0.4981,
+     "lech_chuan": -0.0701,
+     "p_xoay": 0.005,
+     "so_su_kien": 2094
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4727,
+     "tb_chung": 0.5066,
+     "lech_chuan": -0.116,
+     "p_xoay": 0.0075,
+     "so_su_kien": 2094
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1827,
+     "tb_chung": -0.0101,
+     "lech_chuan": -0.1193,
+     "p_xoay": 0.0075,
+     "so_su_kien": 2094
+    },
+    "doc_20": {
+     "tb_su_kien": -0.1982,
+     "tb_chung": -0.0236,
+     "lech_chuan": -0.0684,
+     "p_xoay": 0.0599,
+     "so_su_kien": 2094
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4375,
+     "tb_chung": 0.4373,
+     "lech_chuan": 0.0011,
+     "p_xoay": 0.4613,
+     "so_su_kien": 2094
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0755,
+     "tb_chung": 0.0671,
+     "lech_chuan": -0.0604,
+     "p_xoay": 0.0299,
+     "so_su_kien": 2094
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0586,
+     "tb_chung": -0.0705,
+     "lech_chuan": 0.0559,
+     "p_xoay": 0.1222,
+     "so_su_kien": 2090
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9775,
+     "tb_chung": 0.9825,
+     "lech_chuan": -0.0255,
+     "p_xoay": 0.2718,
+     "so_su_kien": 2083
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9971,
+     "tb_chung": 1.0008,
+     "lech_chuan": -0.0188,
+     "p_xoay": 0.3092,
+     "so_su_kien": 2088
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0072,
+     "tb_chung": 0.9984,
+     "lech_chuan": 0.019,
+     "p_xoay": 0.2219,
+     "so_su_kien": 2088
+    },
+    "ibs": {
+     "tb_su_kien": 0.5093,
+     "tb_chung": 0.4981,
+     "lech_chuan": 0.0375,
+     "p_xoay": 0.0424,
+     "so_su_kien": 2094
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5529,
+     "tb_chung": 0.5066,
+     "lech_chuan": 0.1583,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2088
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.2482,
+     "tb_chung": -0.0101,
+     "lech_chuan": 0.1786,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2088
+    },
+    "doc_20": {
+     "tb_su_kien": 0.3729,
+     "tb_chung": -0.0236,
+     "lech_chuan": 0.1555,
+     "p_xoay": 0.0025,
+     "so_su_kien": 2088
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4308,
+     "tb_chung": 0.4373,
+     "lech_chuan": -0.0252,
+     "p_xoay": 0.1247,
+     "so_su_kien": 2094
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1753,
+     "tb_chung": 0.0671,
+     "lech_chuan": 0.0458,
+     "p_xoay": 0.0449,
+     "so_su_kien": 2094
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0811,
+     "tb_chung": -0.0705,
+     "lech_chuan": -0.0498,
+     "p_xoay": 0.1621,
+     "so_su_kien": 2088
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9949,
+     "tb_chung": 0.9825,
+     "lech_chuan": 0.063,
+     "p_xoay": 0.1022,
+     "so_su_kien": 2088
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9905,
+     "tb_chung": 1.0008,
+     "lech_chuan": -0.0517,
+     "p_xoay": 0.0873,
+     "so_su_kien": 2090
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9938,
+     "tb_chung": 0.9984,
+     "lech_chuan": -0.0101,
+     "p_xoay": 0.3516,
+     "so_su_kien": 2090
+    },
+    "ibs": {
+     "tb_su_kien": 0.485,
+     "tb_chung": 0.4981,
+     "lech_chuan": -0.044,
+     "p_xoay": 0.0125,
+     "so_su_kien": 2094
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5122,
+     "tb_chung": 0.5066,
+     "lech_chuan": 0.019,
+     "p_xoay": 0.3192,
+     "so_su_kien": 2090
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0232,
+     "tb_chung": -0.0101,
+     "lech_chuan": 0.023,
+     "p_xoay": 0.2868,
+     "so_su_kien": 2090
+    },
+    "doc_20": {
+     "tb_su_kien": 0.0342,
+     "tb_chung": -0.0236,
+     "lech_chuan": 0.0227,
+     "p_xoay": 0.3192,
+     "so_su_kien": 2090
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4439,
+     "tb_chung": 0.4373,
+     "lech_chuan": 0.0256,
+     "p_xoay": 0.1247,
+     "so_su_kien": 2094
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0105,
+     "tb_chung": 0.0671,
+     "lech_chuan": -0.0329,
+     "p_xoay": 0.1397,
+     "so_su_kien": 2094
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0818,
+     "tb_chung": -0.0705,
+     "lech_chuan": -0.0531,
+     "p_xoay": 0.0723,
+     "so_su_kien": 2088
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9914,
+     "tb_chung": 0.9825,
+     "lech_chuan": 0.0455,
+     "p_xoay": 0.1197,
+     "so_su_kien": 2088
+    }
+   },
+   "ma": "NZDCAD",
+   "khung": "H4",
+   "bar": 20947
+  },
+  "US500CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0203,
+     "tb_chung": 1.004,
+     "lech_chuan": 0.0615,
+     "p_xoay": 0.0798,
+     "so_su_kien": 1564
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9866,
+     "tb_chung": 0.9911,
+     "lech_chuan": -0.0072,
+     "p_xoay": 0.4165,
+     "so_su_kien": 1564
+    },
+    "ibs": {
+     "tb_su_kien": 0.5131,
+     "tb_chung": 0.541,
+     "lech_chuan": -0.0933,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1568
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4891,
+     "tb_chung": 0.6036,
+     "lech_chuan": -0.3842,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1564
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2895,
+     "tb_chung": 0.3153,
+     "lech_chuan": -0.3535,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1564
+    },
+    "doc_20": {
+     "tb_su_kien": -0.6092,
+     "tb_chung": 0.7759,
+     "lech_chuan": -0.4509,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1564
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4539,
+     "tb_chung": 0.4591,
+     "lech_chuan": -0.02,
+     "p_xoay": 0.202,
+     "so_su_kien": 1568
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1454,
+     "tb_chung": 0.3176,
+     "lech_chuan": -0.0717,
+     "p_xoay": 0.0299,
+     "so_su_kien": 1568
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0708,
+     "tb_chung": -0.0642,
+     "lech_chuan": -0.0311,
+     "p_xoay": 0.2993,
+     "so_su_kien": 1548
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9985,
+     "tb_chung": 0.967,
+     "lech_chuan": 0.119,
+     "p_xoay": 0.015,
+     "so_su_kien": 1535
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0151,
+     "tb_chung": 1.004,
+     "lech_chuan": 0.0417,
+     "p_xoay": 0.182,
+     "so_su_kien": 1558
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9816,
+     "tb_chung": 0.9911,
+     "lech_chuan": -0.0153,
+     "p_xoay": 0.3367,
+     "so_su_kien": 1558
+    },
+    "ibs": {
+     "tb_su_kien": 0.5294,
+     "tb_chung": 0.541,
+     "lech_chuan": -0.0387,
+     "p_xoay": 0.0599,
+     "so_su_kien": 1568
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5371,
+     "tb_chung": 0.6036,
+     "lech_chuan": -0.2231,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1558
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1025,
+     "tb_chung": 0.3153,
+     "lech_chuan": -0.2442,
+     "p_xoay": 0.005,
+     "so_su_kien": 1558
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0668,
+     "tb_chung": 0.7759,
+     "lech_chuan": -0.2743,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1557
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4569,
+     "tb_chung": 0.4591,
+     "lech_chuan": -0.0088,
+     "p_xoay": 0.3491,
+     "so_su_kien": 1568
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1409,
+     "tb_chung": 0.3176,
+     "lech_chuan": -0.0736,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1568
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0652,
+     "tb_chung": -0.0642,
+     "lech_chuan": -0.0048,
+     "p_xoay": 0.4938,
+     "so_su_kien": 1556
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0283,
+     "tb_chung": 0.967,
+     "lech_chuan": 0.2318,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1556
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9869,
+     "tb_chung": 1.004,
+     "lech_chuan": -0.0649,
+     "p_xoay": 0.0873,
+     "so_su_kien": 1568
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9762,
+     "tb_chung": 0.9911,
+     "lech_chuan": -0.0239,
+     "p_xoay": 0.2244,
+     "so_su_kien": 1568
+    },
+    "ibs": {
+     "tb_su_kien": 0.538,
+     "tb_chung": 0.541,
+     "lech_chuan": -0.0101,
+     "p_xoay": 0.3441,
+     "so_su_kien": 1568
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.6089,
+     "tb_chung": 0.6036,
+     "lech_chuan": 0.0179,
+     "p_xoay": 0.2943,
+     "so_su_kien": 1568
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.3771,
+     "tb_chung": 0.3153,
+     "lech_chuan": 0.0361,
+     "p_xoay": 0.1895,
+     "so_su_kien": 1568
+    },
+    "doc_20": {
+     "tb_su_kien": 0.7219,
+     "tb_chung": 0.7759,
+     "lech_chuan": -0.0176,
+     "p_xoay": 0.3491,
+     "so_su_kien": 1568
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4499,
+     "tb_chung": 0.4591,
+     "lech_chuan": -0.0355,
+     "p_xoay": 0.0723,
+     "so_su_kien": 1568
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3776,
+     "tb_chung": 0.3176,
+     "lech_chuan": 0.025,
+     "p_xoay": 0.2195,
+     "so_su_kien": 1568
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0797,
+     "tb_chung": -0.0642,
+     "lech_chuan": -0.0734,
+     "p_xoay": 0.0623,
+     "so_su_kien": 1568
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9568,
+     "tb_chung": 0.967,
+     "lech_chuan": -0.0384,
+     "p_xoay": 0.212,
+     "so_su_kien": 1567
+    }
+   },
+   "ma": "US500CASH",
+   "khung": "H4",
+   "bar": 15689
+  },
+  "US500M": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0151,
+     "tb_chung": 1.0061,
+     "lech_chuan": 0.0306,
+     "p_xoay": 0.2993,
+     "so_su_kien": 997
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9714,
+     "tb_chung": 0.986,
+     "lech_chuan": -0.0223,
+     "p_xoay": 0.2768,
+     "so_su_kien": 997
+    },
+    "ibs": {
+     "tb_su_kien": 0.4989,
+     "tb_chung": 0.5373,
+     "lech_chuan": -0.1253,
+     "p_xoay": 0.0025,
+     "so_su_kien": 997
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4607,
+     "tb_chung": 0.5964,
+     "lech_chuan": -0.4418,
+     "p_xoay": 0.0025,
+     "so_su_kien": 997
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.397,
+     "tb_chung": 0.2955,
+     "lech_chuan": -0.3727,
+     "p_xoay": 0.0025,
+     "so_su_kien": 997
+    },
+    "doc_20": {
+     "tb_su_kien": -0.8113,
+     "tb_chung": 0.7444,
+     "lech_chuan": -0.4694,
+     "p_xoay": 0.0025,
+     "so_su_kien": 997
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4596,
+     "tb_chung": 0.4634,
+     "lech_chuan": -0.0147,
+     "p_xoay": 0.3242,
+     "so_su_kien": 997
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0331,
+     "tb_chung": 0.2808,
+     "lech_chuan": -0.0998,
+     "p_xoay": 0.0274,
+     "so_su_kien": 997
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0554,
+     "tb_chung": -0.0467,
+     "lech_chuan": -0.0419,
+     "p_xoay": 0.2668,
+     "so_su_kien": 997
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0039,
+     "tb_chung": 0.9682,
+     "lech_chuan": 0.1293,
+     "p_xoay": 0.0349,
+     "so_su_kien": 997
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0083,
+     "tb_chung": 1.0061,
+     "lech_chuan": 0.0076,
+     "p_xoay": 0.4065,
+     "so_su_kien": 997
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9439,
+     "tb_chung": 0.986,
+     "lech_chuan": -0.064,
+     "p_xoay": 0.0274,
+     "so_su_kien": 997
+    },
+    "ibs": {
+     "tb_su_kien": 0.5319,
+     "tb_chung": 0.5373,
+     "lech_chuan": -0.0178,
+     "p_xoay": 0.2918,
+     "so_su_kien": 997
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5487,
+     "tb_chung": 0.5964,
+     "lech_chuan": -0.1553,
+     "p_xoay": 0.0349,
+     "so_su_kien": 997
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0328,
+     "tb_chung": 0.2955,
+     "lech_chuan": -0.1767,
+     "p_xoay": 0.0224,
+     "so_su_kien": 997
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0312,
+     "tb_chung": 0.7444,
+     "lech_chuan": -0.234,
+     "p_xoay": 0.01,
+     "so_su_kien": 997
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4583,
+     "tb_chung": 0.4634,
+     "lech_chuan": -0.0196,
+     "p_xoay": 0.2668,
+     "so_su_kien": 997
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1414,
+     "tb_chung": 0.2808,
+     "lech_chuan": -0.0562,
+     "p_xoay": 0.1097,
+     "so_su_kien": 997
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0358,
+     "tb_chung": -0.0467,
+     "lech_chuan": 0.0528,
+     "p_xoay": 0.2893,
+     "so_su_kien": 997
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0241,
+     "tb_chung": 0.9682,
+     "lech_chuan": 0.2026,
+     "p_xoay": 0.015,
+     "so_su_kien": 997
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9784,
+     "tb_chung": 1.0061,
+     "lech_chuan": -0.0943,
+     "p_xoay": 0.0698,
+     "so_su_kien": 995
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.933,
+     "tb_chung": 0.986,
+     "lech_chuan": -0.0806,
+     "p_xoay": 0.02,
+     "so_su_kien": 995
+    },
+    "ibs": {
+     "tb_su_kien": 0.5265,
+     "tb_chung": 0.5373,
+     "lech_chuan": -0.0352,
+     "p_xoay": 0.1421,
+     "so_su_kien": 997
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5963,
+     "tb_chung": 0.5964,
+     "lech_chuan": -0.0003,
+     "p_xoay": 0.4389,
+     "so_su_kien": 995
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.3267,
+     "tb_chung": 0.2955,
+     "lech_chuan": 0.0168,
+     "p_xoay": 0.4115,
+     "so_su_kien": 995
+    },
+    "doc_20": {
+     "tb_su_kien": 0.6849,
+     "tb_chung": 0.7444,
+     "lech_chuan": -0.018,
+     "p_xoay": 0.3691,
+     "so_su_kien": 995
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4561,
+     "tb_chung": 0.4634,
+     "lech_chuan": -0.0279,
+     "p_xoay": 0.1945,
+     "so_su_kien": 997
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.332,
+     "tb_chung": 0.2808,
+     "lech_chuan": 0.0207,
+     "p_xoay": 0.3092,
+     "so_su_kien": 997
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.071,
+     "tb_chung": -0.0467,
+     "lech_chuan": -0.1174,
+     "p_xoay": 0.0299,
+     "so_su_kien": 994
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9703,
+     "tb_chung": 0.9682,
+     "lech_chuan": 0.0076,
+     "p_xoay": 0.4613,
+     "so_su_kien": 994
+    }
+   },
+   "ma": "US500M",
+   "khung": "H4",
+   "bar": 9973
+  },
+  "USDJPY": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0178,
+     "tb_chung": 1.002,
+     "lech_chuan": 0.0645,
+     "p_xoay": 0.005,
+     "so_su_kien": 4390
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.015,
+     "tb_chung": 0.9999,
+     "lech_chuan": 0.0278,
+     "p_xoay": 0.0399,
+     "so_su_kien": 4390
+    },
+    "ibs": {
+     "tb_su_kien": 0.5084,
+     "tb_chung": 0.5197,
+     "lech_chuan": -0.0405,
+     "p_xoay": 0.0025,
+     "so_su_kien": 4393
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5087,
+     "tb_chung": 0.5322,
+     "lech_chuan": -0.0794,
+     "p_xoay": 0.005,
+     "so_su_kien": 4390
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0611,
+     "tb_chung": 0.0868,
+     "lech_chuan": -0.0916,
+     "p_xoay": 0.0025,
+     "so_su_kien": 4390
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0262,
+     "tb_chung": 0.2089,
+     "lech_chuan": -0.0824,
+     "p_xoay": 0.0125,
+     "so_su_kien": 4390
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4271,
+     "tb_chung": 0.4264,
+     "lech_chuan": 0.0026,
+     "p_xoay": 0.394,
+     "so_su_kien": 4393
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0187,
+     "tb_chung": 0.0916,
+     "lech_chuan": -0.0473,
+     "p_xoay": 0.015,
+     "so_su_kien": 4393
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0698,
+     "tb_chung": -0.0567,
+     "lech_chuan": -0.0638,
+     "p_xoay": 0.0324,
+     "so_su_kien": 4377
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9861,
+     "tb_chung": 0.9725,
+     "lech_chuan": 0.0584,
+     "p_xoay": 0.0349,
+     "so_su_kien": 4369
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0071,
+     "tb_chung": 1.002,
+     "lech_chuan": 0.0209,
+     "p_xoay": 0.2569,
+     "so_su_kien": 4385
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0088,
+     "tb_chung": 0.9999,
+     "lech_chuan": 0.0165,
+     "p_xoay": 0.1796,
+     "so_su_kien": 4385
+    },
+    "ibs": {
+     "tb_su_kien": 0.5091,
+     "tb_chung": 0.5197,
+     "lech_chuan": -0.0377,
+     "p_xoay": 0.015,
+     "so_su_kien": 4393
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.509,
+     "tb_chung": 0.5322,
+     "lech_chuan": -0.0785,
+     "p_xoay": 0.0125,
+     "so_su_kien": 4385
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.045,
+     "tb_chung": 0.0868,
+     "lech_chuan": -0.0816,
+     "p_xoay": 0.0125,
+     "so_su_kien": 4385
+    },
+    "doc_20": {
+     "tb_su_kien": 0.0337,
+     "tb_chung": 0.2089,
+     "lech_chuan": -0.0614,
+     "p_xoay": 0.0549,
+     "so_su_kien": 4385
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4244,
+     "tb_chung": 0.4264,
+     "lech_chuan": -0.0079,
+     "p_xoay": 0.3292,
+     "so_su_kien": 4393
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0164,
+     "tb_chung": 0.0916,
+     "lech_chuan": -0.0463,
+     "p_xoay": 0.0274,
+     "so_su_kien": 4393
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0518,
+     "tb_chung": -0.0567,
+     "lech_chuan": 0.0235,
+     "p_xoay": 0.2369,
+     "so_su_kien": 4381
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9821,
+     "tb_chung": 0.9725,
+     "lech_chuan": 0.0413,
+     "p_xoay": 0.1147,
+     "so_su_kien": 4380
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.003,
+     "tb_chung": 1.002,
+     "lech_chuan": 0.0042,
+     "p_xoay": 0.4663,
+     "so_su_kien": 4391
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9957,
+     "tb_chung": 0.9999,
+     "lech_chuan": -0.0076,
+     "p_xoay": 0.3292,
+     "so_su_kien": 4391
+    },
+    "ibs": {
+     "tb_su_kien": 0.5198,
+     "tb_chung": 0.5197,
+     "lech_chuan": 0.0001,
+     "p_xoay": 0.4863,
+     "so_su_kien": 4393
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5477,
+     "tb_chung": 0.5322,
+     "lech_chuan": 0.0525,
+     "p_xoay": 0.0399,
+     "so_su_kien": 4391
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1553,
+     "tb_chung": 0.0868,
+     "lech_chuan": 0.0424,
+     "p_xoay": 0.0599,
+     "so_su_kien": 4391
+    },
+    "doc_20": {
+     "tb_su_kien": 0.4086,
+     "tb_chung": 0.2089,
+     "lech_chuan": 0.07,
+     "p_xoay": 0.01,
+     "so_su_kien": 4391
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.42,
+     "tb_chung": 0.4264,
+     "lech_chuan": -0.0255,
+     "p_xoay": 0.0474,
+     "so_su_kien": 4393
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0747,
+     "tb_chung": 0.0916,
+     "lech_chuan": -0.0073,
+     "p_xoay": 0.3267,
+     "so_su_kien": 4393
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0696,
+     "tb_chung": -0.0567,
+     "lech_chuan": -0.063,
+     "p_xoay": 0.0125,
+     "so_su_kien": 4389
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9679,
+     "tb_chung": 0.9725,
+     "lech_chuan": -0.0197,
+     "p_xoay": 0.2294,
+     "so_su_kien": 4389
+    }
+   },
+   "ma": "USDJPY",
+   "khung": "H4",
+   "bar": 43940
+  },
+  "XAUAUDM": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0144,
+     "tb_chung": 1.0034,
+     "lech_chuan": 0.0485,
+     "p_xoay": 0.217,
+     "so_su_kien": 625
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9695,
+     "tb_chung": 0.9969,
+     "lech_chuan": -0.0511,
+     "p_xoay": 0.1571,
+     "so_su_kien": 625
+    },
+    "ibs": {
+     "tb_su_kien": 0.5307,
+     "tb_chung": 0.5249,
+     "lech_chuan": 0.0197,
+     "p_xoay": 0.2868,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5894,
+     "tb_chung": 0.547,
+     "lech_chuan": 0.145,
+     "p_xoay": 0.0549,
+     "so_su_kien": 625
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.4373,
+     "tb_chung": 0.3062,
+     "lech_chuan": 0.0802,
+     "p_xoay": 0.1995,
+     "so_su_kien": 625
+    },
+    "doc_20": {
+     "tb_su_kien": 0.9951,
+     "tb_chung": 0.6137,
+     "lech_chuan": 0.1325,
+     "p_xoay": 0.0823,
+     "so_su_kien": 625
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.442,
+     "tb_chung": 0.4467,
+     "lech_chuan": -0.0186,
+     "p_xoay": 0.3367,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3264,
+     "tb_chung": 0.2251,
+     "lech_chuan": 0.0422,
+     "p_xoay": 0.2319,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0519,
+     "tb_chung": -0.0487,
+     "lech_chuan": -0.0153,
+     "p_xoay": 0.4564,
+     "so_su_kien": 625
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0249,
+     "tb_chung": 0.9789,
+     "lech_chuan": 0.2071,
+     "p_xoay": 0.0125,
+     "so_su_kien": 625
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0331,
+     "tb_chung": 1.0034,
+     "lech_chuan": 0.1314,
+     "p_xoay": 0.0224,
+     "so_su_kien": 625
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.025,
+     "tb_chung": 0.9969,
+     "lech_chuan": 0.0524,
+     "p_xoay": 0.1272,
+     "so_su_kien": 625
+    },
+    "ibs": {
+     "tb_su_kien": 0.5384,
+     "tb_chung": 0.5249,
+     "lech_chuan": 0.0455,
+     "p_xoay": 0.1322,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5587,
+     "tb_chung": 0.547,
+     "lech_chuan": 0.0402,
+     "p_xoay": 0.3267,
+     "so_su_kien": 625
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.5081,
+     "tb_chung": 0.3062,
+     "lech_chuan": 0.1235,
+     "p_xoay": 0.1097,
+     "so_su_kien": 625
+    },
+    "doc_20": {
+     "tb_su_kien": 0.8435,
+     "tb_chung": 0.6137,
+     "lech_chuan": 0.0799,
+     "p_xoay": 0.1895,
+     "so_su_kien": 625
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4652,
+     "tb_chung": 0.4467,
+     "lech_chuan": 0.0719,
+     "p_xoay": 0.0274,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.4032,
+     "tb_chung": 0.2251,
+     "lech_chuan": 0.0742,
+     "p_xoay": 0.1172,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0284,
+     "tb_chung": -0.0487,
+     "lech_chuan": 0.0963,
+     "p_xoay": 0.1746,
+     "so_su_kien": 624
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0221,
+     "tb_chung": 0.9789,
+     "lech_chuan": 0.1944,
+     "p_xoay": 0.0349,
+     "so_su_kien": 618
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0008,
+     "tb_chung": 1.0034,
+     "lech_chuan": -0.0118,
+     "p_xoay": 0.404,
+     "so_su_kien": 623
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9825,
+     "tb_chung": 0.9969,
+     "lech_chuan": -0.0268,
+     "p_xoay": 0.3217,
+     "so_su_kien": 623
+    },
+    "ibs": {
+     "tb_su_kien": 0.5305,
+     "tb_chung": 0.5249,
+     "lech_chuan": 0.019,
+     "p_xoay": 0.3017,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5817,
+     "tb_chung": 0.547,
+     "lech_chuan": 0.1189,
+     "p_xoay": 0.0848,
+     "so_su_kien": 623
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.4892,
+     "tb_chung": 0.3062,
+     "lech_chuan": 0.1119,
+     "p_xoay": 0.0673,
+     "so_su_kien": 623
+    },
+    "doc_20": {
+     "tb_su_kien": 0.9752,
+     "tb_chung": 0.6137,
+     "lech_chuan": 0.1256,
+     "p_xoay": 0.0524,
+     "so_su_kien": 623
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4401,
+     "tb_chung": 0.4467,
+     "lech_chuan": -0.0258,
+     "p_xoay": 0.182,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.368,
+     "tb_chung": 0.2251,
+     "lech_chuan": 0.0595,
+     "p_xoay": 0.1297,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.045,
+     "tb_chung": -0.0487,
+     "lech_chuan": 0.0176,
+     "p_xoay": 0.3766,
+     "so_su_kien": 622
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9977,
+     "tb_chung": 0.9789,
+     "lech_chuan": 0.0843,
+     "p_xoay": 0.1147,
+     "so_su_kien": 618
+    }
+   },
+   "ma": "XAUAUDM",
+   "khung": "H4",
+   "bar": 6259
+  },
+  "XAUEURM": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0065,
+     "tb_chung": 1.0036,
+     "lech_chuan": 0.0127,
+     "p_xoay": 0.4264,
+     "so_su_kien": 625
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9619,
+     "tb_chung": 0.9953,
+     "lech_chuan": -0.0584,
+     "p_xoay": 0.1222,
+     "so_su_kien": 625
+    },
+    "ibs": {
+     "tb_su_kien": 0.5401,
+     "tb_chung": 0.531,
+     "lech_chuan": 0.0315,
+     "p_xoay": 0.187,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5924,
+     "tb_chung": 0.5467,
+     "lech_chuan": 0.154,
+     "p_xoay": 0.0698,
+     "so_su_kien": 625
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.4317,
+     "tb_chung": 0.271,
+     "lech_chuan": 0.0937,
+     "p_xoay": 0.1696,
+     "so_su_kien": 625
+    },
+    "doc_20": {
+     "tb_su_kien": 0.8573,
+     "tb_chung": 0.5435,
+     "lech_chuan": 0.1034,
+     "p_xoay": 0.1521,
+     "so_su_kien": 625
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4551,
+     "tb_chung": 0.4406,
+     "lech_chuan": 0.0568,
+     "p_xoay": 0.0698,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3696,
+     "tb_chung": 0.2234,
+     "lech_chuan": 0.0597,
+     "p_xoay": 0.1496,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0721,
+     "tb_chung": -0.0236,
+     "lech_chuan": -0.2286,
+     "p_xoay": 0.01,
+     "so_su_kien": 625
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0074,
+     "tb_chung": 0.9757,
+     "lech_chuan": 0.1399,
+     "p_xoay": 0.0549,
+     "so_su_kien": 625
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0463,
+     "tb_chung": 1.0036,
+     "lech_chuan": 0.1816,
+     "p_xoay": 0.005,
+     "so_su_kien": 625
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0423,
+     "tb_chung": 0.9953,
+     "lech_chuan": 0.0822,
+     "p_xoay": 0.0374,
+     "so_su_kien": 625
+    },
+    "ibs": {
+     "tb_su_kien": 0.5356,
+     "tb_chung": 0.531,
+     "lech_chuan": 0.016,
+     "p_xoay": 0.3716,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5623,
+     "tb_chung": 0.5467,
+     "lech_chuan": 0.0525,
+     "p_xoay": 0.3017,
+     "so_su_kien": 625
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.392,
+     "tb_chung": 0.271,
+     "lech_chuan": 0.0705,
+     "p_xoay": 0.2519,
+     "so_su_kien": 625
+    },
+    "doc_20": {
+     "tb_su_kien": 0.7355,
+     "tb_chung": 0.5435,
+     "lech_chuan": 0.0632,
+     "p_xoay": 0.2419,
+     "so_su_kien": 625
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4574,
+     "tb_chung": 0.4406,
+     "lech_chuan": 0.0655,
+     "p_xoay": 0.0399,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.304,
+     "tb_chung": 0.2234,
+     "lech_chuan": 0.0329,
+     "p_xoay": 0.2968,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0191,
+     "tb_chung": -0.0236,
+     "lech_chuan": 0.0212,
+     "p_xoay": 0.4165,
+     "so_su_kien": 625
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9955,
+     "tb_chung": 0.9757,
+     "lech_chuan": 0.0874,
+     "p_xoay": 0.197,
+     "so_su_kien": 622
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9825,
+     "tb_chung": 1.0036,
+     "lech_chuan": -0.0895,
+     "p_xoay": 0.0623,
+     "so_su_kien": 624
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9571,
+     "tb_chung": 0.9953,
+     "lech_chuan": -0.0668,
+     "p_xoay": 0.0474,
+     "so_su_kien": 624
+    },
+    "ibs": {
+     "tb_su_kien": 0.5228,
+     "tb_chung": 0.531,
+     "lech_chuan": -0.028,
+     "p_xoay": 0.1621,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.571,
+     "tb_chung": 0.5467,
+     "lech_chuan": 0.0819,
+     "p_xoay": 0.1596,
+     "so_su_kien": 624
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.3365,
+     "tb_chung": 0.271,
+     "lech_chuan": 0.0382,
+     "p_xoay": 0.2544,
+     "so_su_kien": 624
+    },
+    "doc_20": {
+     "tb_su_kien": 0.6417,
+     "tb_chung": 0.5435,
+     "lech_chuan": 0.0324,
+     "p_xoay": 0.3491,
+     "so_su_kien": 624
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4286,
+     "tb_chung": 0.4406,
+     "lech_chuan": -0.0468,
+     "p_xoay": 0.1047,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.2976,
+     "tb_chung": 0.2234,
+     "lech_chuan": 0.0303,
+     "p_xoay": 0.2618,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0354,
+     "tb_chung": -0.0236,
+     "lech_chuan": -0.0557,
+     "p_xoay": 0.212,
+     "so_su_kien": 624
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.974,
+     "tb_chung": 0.9757,
+     "lech_chuan": -0.0073,
+     "p_xoay": 0.4564,
+     "so_su_kien": 623
+    }
+   },
+   "ma": "XAUEURM",
+   "khung": "H4",
+   "bar": 6259
+  },
+  "XAUGBPM": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0054,
+     "tb_chung": 1.0038,
+     "lech_chuan": 0.0067,
+     "p_xoay": 0.4389,
+     "so_su_kien": 621
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9689,
+     "tb_chung": 0.996,
+     "lech_chuan": -0.0479,
+     "p_xoay": 0.1671,
+     "so_su_kien": 621
+    },
+    "ibs": {
+     "tb_su_kien": 0.531,
+     "tb_chung": 0.5263,
+     "lech_chuan": 0.0161,
+     "p_xoay": 0.3267,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.6002,
+     "tb_chung": 0.5423,
+     "lech_chuan": 0.1939,
+     "p_xoay": 0.0274,
+     "so_su_kien": 621
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.4452,
+     "tb_chung": 0.2713,
+     "lech_chuan": 0.1012,
+     "p_xoay": 0.1496,
+     "so_su_kien": 621
+    },
+    "doc_20": {
+     "tb_su_kien": 0.906,
+     "tb_chung": 0.5415,
+     "lech_chuan": 0.1193,
+     "p_xoay": 0.0923,
+     "so_su_kien": 621
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4469,
+     "tb_chung": 0.4417,
+     "lech_chuan": 0.0203,
+     "p_xoay": 0.3192,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.384,
+     "tb_chung": 0.217,
+     "lech_chuan": 0.0679,
+     "p_xoay": 0.1197,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0542,
+     "tb_chung": -0.0399,
+     "lech_chuan": -0.065,
+     "p_xoay": 0.2319,
+     "so_su_kien": 621
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0212,
+     "tb_chung": 0.9747,
+     "lech_chuan": 0.2064,
+     "p_xoay": 0.015,
+     "so_su_kien": 621
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0347,
+     "tb_chung": 1.0038,
+     "lech_chuan": 0.1309,
+     "p_xoay": 0.0274,
+     "so_su_kien": 625
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0321,
+     "tb_chung": 0.996,
+     "lech_chuan": 0.0635,
+     "p_xoay": 0.1397,
+     "so_su_kien": 625
+    },
+    "ibs": {
+     "tb_su_kien": 0.539,
+     "tb_chung": 0.5263,
+     "lech_chuan": 0.0433,
+     "p_xoay": 0.1521,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5366,
+     "tb_chung": 0.5423,
+     "lech_chuan": -0.0191,
+     "p_xoay": 0.414,
+     "so_su_kien": 625
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.3549,
+     "tb_chung": 0.2713,
+     "lech_chuan": 0.0486,
+     "p_xoay": 0.2843,
+     "so_su_kien": 625
+    },
+    "doc_20": {
+     "tb_su_kien": 0.6455,
+     "tb_chung": 0.5415,
+     "lech_chuan": 0.0341,
+     "p_xoay": 0.3192,
+     "so_su_kien": 625
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4526,
+     "tb_chung": 0.4417,
+     "lech_chuan": 0.0423,
+     "p_xoay": 0.1596,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.4048,
+     "tb_chung": 0.217,
+     "lech_chuan": 0.0763,
+     "p_xoay": 0.1147,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0149,
+     "tb_chung": -0.0399,
+     "lech_chuan": 0.1135,
+     "p_xoay": 0.1172,
+     "so_su_kien": 625
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.987,
+     "tb_chung": 0.9747,
+     "lech_chuan": 0.0548,
+     "p_xoay": 0.2768,
+     "so_su_kien": 623
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9812,
+     "tb_chung": 1.0038,
+     "lech_chuan": -0.0957,
+     "p_xoay": 0.0673,
+     "so_su_kien": 623
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9576,
+     "tb_chung": 0.996,
+     "lech_chuan": -0.0678,
+     "p_xoay": 0.0474,
+     "so_su_kien": 623
+    },
+    "ibs": {
+     "tb_su_kien": 0.5248,
+     "tb_chung": 0.5263,
+     "lech_chuan": -0.0051,
+     "p_xoay": 0.404,
+     "so_su_kien": 625
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5737,
+     "tb_chung": 0.5423,
+     "lech_chuan": 0.1051,
+     "p_xoay": 0.1122,
+     "so_su_kien": 623
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.4144,
+     "tb_chung": 0.2713,
+     "lech_chuan": 0.0832,
+     "p_xoay": 0.0948,
+     "so_su_kien": 623
+    },
+    "doc_20": {
+     "tb_su_kien": 0.8001,
+     "tb_chung": 0.5415,
+     "lech_chuan": 0.0847,
+     "p_xoay": 0.1297,
+     "so_su_kien": 623
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4249,
+     "tb_chung": 0.4417,
+     "lech_chuan": -0.0654,
+     "p_xoay": 0.0499,
+     "so_su_kien": 625
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.2848,
+     "tb_chung": 0.217,
+     "lech_chuan": 0.0276,
+     "p_xoay": 0.2943,
+     "so_su_kien": 625
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0301,
+     "tb_chung": -0.0399,
+     "lech_chuan": 0.0443,
+     "p_xoay": 0.2594,
+     "so_su_kien": 622
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9777,
+     "tb_chung": 0.9747,
+     "lech_chuan": 0.0134,
+     "p_xoay": 0.399,
+     "so_su_kien": 621
+    }
+   },
+   "ma": "XAUGBPM",
+   "khung": "H4",
+   "bar": 6259
+  },
+  "XAUUSD": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0153,
+     "tb_chung": 1.0024,
+     "lech_chuan": 0.0525,
+     "p_xoay": 0.0299,
+     "so_su_kien": 3466
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9789,
+     "tb_chung": 0.9904,
+     "lech_chuan": -0.0186,
+     "p_xoay": 0.1372,
+     "so_su_kien": 3466
+    },
+    "ibs": {
+     "tb_su_kien": 0.5226,
+     "tb_chung": 0.5187,
+     "lech_chuan": 0.0138,
+     "p_xoay": 0.192,
+     "so_su_kien": 3467
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5442,
+     "tb_chung": 0.5414,
+     "lech_chuan": 0.0097,
+     "p_xoay": 0.4115,
+     "so_su_kien": 3466
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1418,
+     "tb_chung": 0.1695,
+     "lech_chuan": -0.016,
+     "p_xoay": 0.3541,
+     "so_su_kien": 3466
+    },
+    "doc_20": {
+     "tb_su_kien": 0.3427,
+     "tb_chung": 0.3569,
+     "lech_chuan": -0.0046,
+     "p_xoay": 0.4763,
+     "so_su_kien": 3466
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4438,
+     "tb_chung": 0.4381,
+     "lech_chuan": 0.022,
+     "p_xoay": 0.1496,
+     "so_su_kien": 3467
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1566,
+     "tb_chung": 0.0981,
+     "lech_chuan": 0.0255,
+     "p_xoay": 0.1646,
+     "so_su_kien": 3467
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0495,
+     "tb_chung": -0.0544,
+     "lech_chuan": 0.0243,
+     "p_xoay": 0.2768,
+     "so_su_kien": 3458
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9659,
+     "tb_chung": 0.9734,
+     "lech_chuan": -0.0324,
+     "p_xoay": 0.202,
+     "so_su_kien": 3453
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0082,
+     "tb_chung": 1.0024,
+     "lech_chuan": 0.0236,
+     "p_xoay": 0.2219,
+     "so_su_kien": 3467
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.969,
+     "tb_chung": 0.9904,
+     "lech_chuan": -0.0347,
+     "p_xoay": 0.0449,
+     "so_su_kien": 3467
+    },
+    "ibs": {
+     "tb_su_kien": 0.5114,
+     "tb_chung": 0.5187,
+     "lech_chuan": -0.0256,
+     "p_xoay": 0.0848,
+     "so_su_kien": 3467
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5207,
+     "tb_chung": 0.5414,
+     "lech_chuan": -0.0705,
+     "p_xoay": 0.0723,
+     "so_su_kien": 3467
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0781,
+     "tb_chung": 0.1695,
+     "lech_chuan": -0.0529,
+     "p_xoay": 0.1272,
+     "so_su_kien": 3467
+    },
+    "doc_20": {
+     "tb_su_kien": 0.1932,
+     "tb_chung": 0.3569,
+     "lech_chuan": -0.0535,
+     "p_xoay": 0.1446,
+     "so_su_kien": 3467
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4341,
+     "tb_chung": 0.4381,
+     "lech_chuan": -0.016,
+     "p_xoay": 0.2244,
+     "so_su_kien": 3467
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0112,
+     "tb_chung": 0.0981,
+     "lech_chuan": -0.0378,
+     "p_xoay": 0.0524,
+     "so_su_kien": 3467
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0594,
+     "tb_chung": -0.0544,
+     "lech_chuan": -0.0241,
+     "p_xoay": 0.2594,
+     "so_su_kien": 3467
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9852,
+     "tb_chung": 0.9734,
+     "lech_chuan": 0.0505,
+     "p_xoay": 0.0898,
+     "so_su_kien": 3467
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9931,
+     "tb_chung": 1.0024,
+     "lech_chuan": -0.0377,
+     "p_xoay": 0.0798,
+     "so_su_kien": 3467
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.96,
+     "tb_chung": 0.9904,
+     "lech_chuan": -0.0494,
+     "p_xoay": 0.005,
+     "so_su_kien": 3467
+    },
+    "ibs": {
+     "tb_su_kien": 0.5188,
+     "tb_chung": 0.5187,
+     "lech_chuan": 0.0004,
+     "p_xoay": 0.4713,
+     "so_su_kien": 3467
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.539,
+     "tb_chung": 0.5414,
+     "lech_chuan": -0.008,
+     "p_xoay": 0.414,
+     "so_su_kien": 3467
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1756,
+     "tb_chung": 0.1695,
+     "lech_chuan": 0.0036,
+     "p_xoay": 0.4464,
+     "so_su_kien": 3467
+    },
+    "doc_20": {
+     "tb_su_kien": 0.3677,
+     "tb_chung": 0.3569,
+     "lech_chuan": 0.0035,
+     "p_xoay": 0.4613,
+     "so_su_kien": 3467
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4276,
+     "tb_chung": 0.4381,
+     "lech_chuan": -0.0415,
+     "p_xoay": 0.005,
+     "so_su_kien": 3467
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0704,
+     "tb_chung": 0.0981,
+     "lech_chuan": -0.0121,
+     "p_xoay": 0.2768,
+     "so_su_kien": 3467
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0743,
+     "tb_chung": -0.0544,
+     "lech_chuan": -0.0973,
+     "p_xoay": 0.0025,
+     "so_su_kien": 3466
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9497,
+     "tb_chung": 0.9734,
+     "lech_chuan": -0.1017,
+     "p_xoay": 0.0025,
+     "so_su_kien": 3465
+    }
+   },
+   "ma": "XAUUSD",
+   "khung": "H4",
+   "bar": 34673
+  },
+  "XAUUSDM": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0115,
+     "tb_chung": 1.0024,
+     "lech_chuan": 0.0374,
+     "p_xoay": 0.1995,
+     "so_su_kien": 1484
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.983,
+     "tb_chung": 0.9934,
+     "lech_chuan": -0.0172,
+     "p_xoay": 0.2544,
+     "so_su_kien": 1484
+    },
+    "ibs": {
+     "tb_su_kien": 0.5466,
+     "tb_chung": 0.5259,
+     "lech_chuan": 0.0724,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1492
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5756,
+     "tb_chung": 0.5391,
+     "lech_chuan": 0.1234,
+     "p_xoay": 0.0249,
+     "so_su_kien": 1484
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.3617,
+     "tb_chung": 0.1992,
+     "lech_chuan": 0.0943,
+     "p_xoay": 0.0773,
+     "so_su_kien": 1484
+    },
+    "doc_20": {
+     "tb_su_kien": 0.6911,
+     "tb_chung": 0.4043,
+     "lech_chuan": 0.0935,
+     "p_xoay": 0.0798,
+     "so_su_kien": 1483
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4465,
+     "tb_chung": 0.4405,
+     "lech_chuan": 0.0239,
+     "p_xoay": 0.1646,
+     "so_su_kien": 1492
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3619,
+     "tb_chung": 0.1341,
+     "lech_chuan": 0.0973,
+     "p_xoay": 0.01,
+     "so_su_kien": 1492
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.045,
+     "tb_chung": -0.0462,
+     "lech_chuan": 0.0058,
+     "p_xoay": 0.4813,
+     "so_su_kien": 1472
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9912,
+     "tb_chung": 0.9737,
+     "lech_chuan": 0.0763,
+     "p_xoay": 0.0923,
+     "so_su_kien": 1470
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0172,
+     "tb_chung": 1.0024,
+     "lech_chuan": 0.0603,
+     "p_xoay": 0.0673,
+     "so_su_kien": 1490
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9924,
+     "tb_chung": 0.9934,
+     "lech_chuan": -0.0016,
+     "p_xoay": 0.4738,
+     "so_su_kien": 1490
+    },
+    "ibs": {
+     "tb_su_kien": 0.5221,
+     "tb_chung": 0.5259,
+     "lech_chuan": -0.0132,
+     "p_xoay": 0.2968,
+     "so_su_kien": 1492
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5263,
+     "tb_chung": 0.5391,
+     "lech_chuan": -0.0433,
+     "p_xoay": 0.2369,
+     "so_su_kien": 1490
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1758,
+     "tb_chung": 0.1992,
+     "lech_chuan": -0.0136,
+     "p_xoay": 0.4314,
+     "so_su_kien": 1490
+    },
+    "doc_20": {
+     "tb_su_kien": 0.378,
+     "tb_chung": 0.4043,
+     "lech_chuan": -0.0086,
+     "p_xoay": 0.4613,
+     "so_su_kien": 1490
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4379,
+     "tb_chung": 0.4405,
+     "lech_chuan": -0.0101,
+     "p_xoay": 0.3342,
+     "so_su_kien": 1492
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0777,
+     "tb_chung": 0.1341,
+     "lech_chuan": -0.024,
+     "p_xoay": 0.2643,
+     "so_su_kien": 1492
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0542,
+     "tb_chung": -0.0462,
+     "lech_chuan": -0.0386,
+     "p_xoay": 0.2893,
+     "so_su_kien": 1490
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.99,
+     "tb_chung": 0.9737,
+     "lech_chuan": 0.0711,
+     "p_xoay": 0.1197,
+     "so_su_kien": 1490
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9855,
+     "tb_chung": 1.0024,
+     "lech_chuan": -0.0688,
+     "p_xoay": 0.0399,
+     "so_su_kien": 1491
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9442,
+     "tb_chung": 0.9934,
+     "lech_chuan": -0.0815,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1491
+    },
+    "ibs": {
+     "tb_su_kien": 0.5229,
+     "tb_chung": 0.5259,
+     "lech_chuan": -0.0104,
+     "p_xoay": 0.3367,
+     "so_su_kien": 1492
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5443,
+     "tb_chung": 0.5391,
+     "lech_chuan": 0.0175,
+     "p_xoay": 0.3616,
+     "so_su_kien": 1491
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.2393,
+     "tb_chung": 0.1992,
+     "lech_chuan": 0.0233,
+     "p_xoay": 0.3217,
+     "so_su_kien": 1491
+    },
+    "doc_20": {
+     "tb_su_kien": 0.5017,
+     "tb_chung": 0.4043,
+     "lech_chuan": 0.0317,
+     "p_xoay": 0.2544,
+     "so_su_kien": 1491
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4256,
+     "tb_chung": 0.4405,
+     "lech_chuan": -0.0586,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1492
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1434,
+     "tb_chung": 0.1341,
+     "lech_chuan": 0.004,
+     "p_xoay": 0.4414,
+     "so_su_kien": 1492
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0638,
+     "tb_chung": -0.0462,
+     "lech_chuan": -0.0849,
+     "p_xoay": 0.0274,
+     "so_su_kien": 1489
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9739,
+     "tb_chung": 0.9737,
+     "lech_chuan": 0.0009,
+     "p_xoay": 0.4688,
+     "so_su_kien": 1489
+    }
+   },
+   "ma": "XAUUSDM",
+   "khung": "H4",
+   "bar": 14927
+  },
+  "XM_AUS200CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0128,
+     "tb_chung": 1.0013,
+     "lech_chuan": 0.0583,
+     "p_xoay": 0.0998,
+     "so_su_kien": 1577
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0057,
+     "tb_chung": 0.9902,
+     "lech_chuan": 0.0344,
+     "p_xoay": 0.1047,
+     "so_su_kien": 1577
+    },
+    "ibs": {
+     "tb_su_kien": 0.4981,
+     "tb_chung": 0.5254,
+     "lech_chuan": -0.0895,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1581
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4986,
+     "tb_chung": 0.5593,
+     "lech_chuan": -0.2067,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1577
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1979,
+     "tb_chung": 0.1358,
+     "lech_chuan": -0.2144,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1577
+    },
+    "doc_20": {
+     "tb_su_kien": -0.2864,
+     "tb_chung": 0.3411,
+     "lech_chuan": -0.2298,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1577
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4699,
+     "tb_chung": 0.4609,
+     "lech_chuan": 0.0345,
+     "p_xoay": 0.0673,
+     "so_su_kien": 1581
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": -0.0582,
+     "tb_chung": 0.1703,
+     "lech_chuan": -0.0963,
+     "p_xoay": 0.005,
+     "so_su_kien": 1581
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0827,
+     "tb_chung": -0.0912,
+     "lech_chuan": 0.0408,
+     "p_xoay": 0.2419,
+     "so_su_kien": 1564
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.997,
+     "tb_chung": 0.98,
+     "lech_chuan": 0.0808,
+     "p_xoay": 0.0549,
+     "so_su_kien": 1558
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0178,
+     "tb_chung": 1.0013,
+     "lech_chuan": 0.0833,
+     "p_xoay": 0.0349,
+     "so_su_kien": 1574
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0047,
+     "tb_chung": 0.9902,
+     "lech_chuan": 0.0322,
+     "p_xoay": 0.0973,
+     "so_su_kien": 1574
+    },
+    "ibs": {
+     "tb_su_kien": 0.5183,
+     "tb_chung": 0.5254,
+     "lech_chuan": -0.0233,
+     "p_xoay": 0.1696,
+     "so_su_kien": 1581
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5351,
+     "tb_chung": 0.5593,
+     "lech_chuan": -0.0823,
+     "p_xoay": 0.0549,
+     "so_su_kien": 1574
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.0001,
+     "tb_chung": 0.1358,
+     "lech_chuan": -0.0874,
+     "p_xoay": 0.0474,
+     "so_su_kien": 1574
+    },
+    "doc_20": {
+     "tb_su_kien": 0.1485,
+     "tb_chung": 0.3411,
+     "lech_chuan": -0.0705,
+     "p_xoay": 0.1047,
+     "so_su_kien": 1573
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4622,
+     "tb_chung": 0.4609,
+     "lech_chuan": 0.0051,
+     "p_xoay": 0.4015,
+     "so_su_kien": 1581
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0841,
+     "tb_chung": 0.1703,
+     "lech_chuan": -0.0363,
+     "p_xoay": 0.1945,
+     "so_su_kien": 1581
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0809,
+     "tb_chung": -0.0912,
+     "lech_chuan": 0.0494,
+     "p_xoay": 0.1995,
+     "so_su_kien": 1572
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0176,
+     "tb_chung": 0.98,
+     "lech_chuan": 0.1781,
+     "p_xoay": 0.01,
+     "so_su_kien": 1562
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0056,
+     "tb_chung": 1.0013,
+     "lech_chuan": 0.0216,
+     "p_xoay": 0.2768,
+     "so_su_kien": 1581
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9925,
+     "tb_chung": 0.9902,
+     "lech_chuan": 0.0051,
+     "p_xoay": 0.4264,
+     "so_su_kien": 1581
+    },
+    "ibs": {
+     "tb_su_kien": 0.5187,
+     "tb_chung": 0.5254,
+     "lech_chuan": -0.0221,
+     "p_xoay": 0.1496,
+     "so_su_kien": 1581
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5459,
+     "tb_chung": 0.5593,
+     "lech_chuan": -0.0457,
+     "p_xoay": 0.1746,
+     "so_su_kien": 1581
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0789,
+     "tb_chung": 0.1358,
+     "lech_chuan": -0.0366,
+     "p_xoay": 0.1721,
+     "so_su_kien": 1581
+    },
+    "doc_20": {
+     "tb_su_kien": 0.1681,
+     "tb_chung": 0.3411,
+     "lech_chuan": -0.0633,
+     "p_xoay": 0.0773,
+     "so_su_kien": 1581
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4721,
+     "tb_chung": 0.4609,
+     "lech_chuan": 0.0427,
+     "p_xoay": 0.0474,
+     "so_su_kien": 1581
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.241,
+     "tb_chung": 0.1703,
+     "lech_chuan": 0.0298,
+     "p_xoay": 0.1796,
+     "so_su_kien": 1581
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0822,
+     "tb_chung": -0.0912,
+     "lech_chuan": 0.0432,
+     "p_xoay": 0.1646,
+     "so_su_kien": 1581
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9826,
+     "tb_chung": 0.98,
+     "lech_chuan": 0.0123,
+     "p_xoay": 0.3915,
+     "so_su_kien": 1579
+    }
+   },
+   "ma": "XM_AUS200CASH",
+   "khung": "H4",
+   "bar": 15814
+  },
+  "XM_EU50CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0325,
+     "tb_chung": 1.0027,
+     "lech_chuan": 0.1259,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1269
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9829,
+     "tb_chung": 0.9699,
+     "lech_chuan": 0.0249,
+     "p_xoay": 0.2244,
+     "so_su_kien": 1269
+    },
+    "ibs": {
+     "tb_su_kien": 0.51,
+     "tb_chung": 0.5289,
+     "lech_chuan": -0.0619,
+     "p_xoay": 0.015,
+     "so_su_kien": 1270
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4851,
+     "tb_chung": 0.5731,
+     "lech_chuan": -0.2961,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1269
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.3106,
+     "tb_chung": 0.1871,
+     "lech_chuan": -0.2946,
+     "p_xoay": 0.005,
+     "so_su_kien": 1269
+    },
+    "doc_20": {
+     "tb_su_kien": -0.566,
+     "tb_chung": 0.4871,
+     "lech_chuan": -0.3525,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1268
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4695,
+     "tb_chung": 0.4618,
+     "lech_chuan": 0.0289,
+     "p_xoay": 0.1521,
+     "so_su_kien": 1270
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0685,
+     "tb_chung": 0.2605,
+     "lech_chuan": -0.0785,
+     "p_xoay": 0.0249,
+     "so_su_kien": 1270
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0565,
+     "tb_chung": -0.0596,
+     "lech_chuan": 0.0154,
+     "p_xoay": 0.3915,
+     "so_su_kien": 1268
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0074,
+     "tb_chung": 0.9714,
+     "lech_chuan": 0.1474,
+     "p_xoay": 0.0224,
+     "so_su_kien": 1261
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0241,
+     "tb_chung": 1.0027,
+     "lech_chuan": 0.0904,
+     "p_xoay": 0.0299,
+     "so_su_kien": 1260
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0052,
+     "tb_chung": 0.9699,
+     "lech_chuan": 0.0678,
+     "p_xoay": 0.0224,
+     "so_su_kien": 1260
+    },
+    "ibs": {
+     "tb_su_kien": 0.5114,
+     "tb_chung": 0.5289,
+     "lech_chuan": -0.0576,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1270
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4996,
+     "tb_chung": 0.5731,
+     "lech_chuan": -0.2473,
+     "p_xoay": 0.005,
+     "so_su_kien": 1260
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2285,
+     "tb_chung": 0.1871,
+     "lech_chuan": -0.246,
+     "p_xoay": 0.005,
+     "so_su_kien": 1260
+    },
+    "doc_20": {
+     "tb_su_kien": -0.2678,
+     "tb_chung": 0.4871,
+     "lech_chuan": -0.2527,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1260
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4699,
+     "tb_chung": 0.4618,
+     "lech_chuan": 0.0304,
+     "p_xoay": 0.1521,
+     "so_su_kien": 1270
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0969,
+     "tb_chung": 0.2605,
+     "lech_chuan": -0.0669,
+     "p_xoay": 0.0474,
+     "so_su_kien": 1270
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0558,
+     "tb_chung": -0.0596,
+     "lech_chuan": 0.0188,
+     "p_xoay": 0.3915,
+     "so_su_kien": 1249
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0159,
+     "tb_chung": 0.9714,
+     "lech_chuan": 0.1823,
+     "p_xoay": 0.02,
+     "so_su_kien": 1247
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9998,
+     "tb_chung": 1.0027,
+     "lech_chuan": -0.0123,
+     "p_xoay": 0.4389,
+     "so_su_kien": 1270
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9614,
+     "tb_chung": 0.9699,
+     "lech_chuan": -0.0164,
+     "p_xoay": 0.2594,
+     "so_su_kien": 1270
+    },
+    "ibs": {
+     "tb_su_kien": 0.5282,
+     "tb_chung": 0.5289,
+     "lech_chuan": -0.0024,
+     "p_xoay": 0.4514,
+     "so_su_kien": 1270
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5717,
+     "tb_chung": 0.5731,
+     "lech_chuan": -0.0049,
+     "p_xoay": 0.4489,
+     "so_su_kien": 1270
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.2025,
+     "tb_chung": 0.1871,
+     "lech_chuan": 0.0091,
+     "p_xoay": 0.414,
+     "so_su_kien": 1270
+    },
+    "doc_20": {
+     "tb_su_kien": 0.4746,
+     "tb_chung": 0.4871,
+     "lech_chuan": -0.0042,
+     "p_xoay": 0.4564,
+     "so_su_kien": 1270
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4689,
+     "tb_chung": 0.4618,
+     "lech_chuan": 0.0266,
+     "p_xoay": 0.1721,
+     "so_su_kien": 1270
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.4157,
+     "tb_chung": 0.2605,
+     "lech_chuan": 0.0635,
+     "p_xoay": 0.0549,
+     "so_su_kien": 1270
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0505,
+     "tb_chung": -0.0596,
+     "lech_chuan": 0.0457,
+     "p_xoay": 0.1945,
+     "so_su_kien": 1270
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9671,
+     "tb_chung": 0.9714,
+     "lech_chuan": -0.0177,
+     "p_xoay": 0.3541,
+     "so_su_kien": 1270
+    }
+   },
+   "ma": "XM_EU50CASH",
+   "khung": "H4",
+   "bar": 12705
+  },
+  "XM_FRA40CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0276,
+     "tb_chung": 1.0023,
+     "lech_chuan": 0.1099,
+     "p_xoay": 0.02,
+     "so_su_kien": 1087
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9836,
+     "tb_chung": 0.971,
+     "lech_chuan": 0.0262,
+     "p_xoay": 0.202,
+     "so_su_kien": 1087
+    },
+    "ibs": {
+     "tb_su_kien": 0.5224,
+     "tb_chung": 0.531,
+     "lech_chuan": -0.0283,
+     "p_xoay": 0.1571,
+     "so_su_kien": 1088
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4976,
+     "tb_chung": 0.5708,
+     "lech_chuan": -0.2469,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1087
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.3001,
+     "tb_chung": 0.1844,
+     "lech_chuan": -0.2871,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1087
+    },
+    "doc_20": {
+     "tb_su_kien": -0.5082,
+     "tb_chung": 0.4778,
+     "lech_chuan": -0.3287,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1086
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.466,
+     "tb_chung": 0.4619,
+     "lech_chuan": 0.016,
+     "p_xoay": 0.3042,
+     "so_su_kien": 1088
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0349,
+     "tb_chung": 0.2314,
+     "lech_chuan": -0.0832,
+     "p_xoay": 0.0274,
+     "so_su_kien": 1088
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0504,
+     "tb_chung": -0.0679,
+     "lech_chuan": 0.0886,
+     "p_xoay": 0.0823,
+     "so_su_kien": 1086
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0023,
+     "tb_chung": 0.9713,
+     "lech_chuan": 0.125,
+     "p_xoay": 0.0424,
+     "so_su_kien": 1078
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0308,
+     "tb_chung": 1.0023,
+     "lech_chuan": 0.1238,
+     "p_xoay": 0.0224,
+     "so_su_kien": 1078
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9982,
+     "tb_chung": 0.971,
+     "lech_chuan": 0.0568,
+     "p_xoay": 0.0499,
+     "so_su_kien": 1078
+    },
+    "ibs": {
+     "tb_su_kien": 0.513,
+     "tb_chung": 0.531,
+     "lech_chuan": -0.0591,
+     "p_xoay": 0.02,
+     "so_su_kien": 1088
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4984,
+     "tb_chung": 0.5708,
+     "lech_chuan": -0.2444,
+     "p_xoay": 0.005,
+     "so_su_kien": 1078
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2308,
+     "tb_chung": 0.1844,
+     "lech_chuan": -0.246,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1078
+    },
+    "doc_20": {
+     "tb_su_kien": -0.2533,
+     "tb_chung": 0.4778,
+     "lech_chuan": -0.2437,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1078
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4697,
+     "tb_chung": 0.4619,
+     "lech_chuan": 0.0299,
+     "p_xoay": 0.1571,
+     "so_su_kien": 1088
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0074,
+     "tb_chung": 0.2314,
+     "lech_chuan": -0.0948,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1088
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0486,
+     "tb_chung": -0.0679,
+     "lech_chuan": 0.0975,
+     "p_xoay": 0.0798,
+     "so_su_kien": 1070
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.013,
+     "tb_chung": 0.9713,
+     "lech_chuan": 0.1684,
+     "p_xoay": 0.0274,
+     "so_su_kien": 1068
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0043,
+     "tb_chung": 1.0023,
+     "lech_chuan": 0.0088,
+     "p_xoay": 0.3791,
+     "so_su_kien": 1088
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9523,
+     "tb_chung": 0.971,
+     "lech_chuan": -0.0389,
+     "p_xoay": 0.1347,
+     "so_su_kien": 1088
+    },
+    "ibs": {
+     "tb_su_kien": 0.5301,
+     "tb_chung": 0.531,
+     "lech_chuan": -0.0031,
+     "p_xoay": 0.4938,
+     "so_su_kien": 1088
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5771,
+     "tb_chung": 0.5708,
+     "lech_chuan": 0.0213,
+     "p_xoay": 0.3167,
+     "so_su_kien": 1088
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.2056,
+     "tb_chung": 0.1844,
+     "lech_chuan": 0.0125,
+     "p_xoay": 0.3641,
+     "so_su_kien": 1088
+    },
+    "doc_20": {
+     "tb_su_kien": 0.451,
+     "tb_chung": 0.4778,
+     "lech_chuan": -0.0089,
+     "p_xoay": 0.4314,
+     "so_su_kien": 1088
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4668,
+     "tb_chung": 0.4619,
+     "lech_chuan": 0.0188,
+     "p_xoay": 0.2868,
+     "so_su_kien": 1088
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3162,
+     "tb_chung": 0.2314,
+     "lech_chuan": 0.0359,
+     "p_xoay": 0.187,
+     "so_su_kien": 1088
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0514,
+     "tb_chung": -0.0679,
+     "lech_chuan": 0.0835,
+     "p_xoay": 0.1047,
+     "so_su_kien": 1087
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9498,
+     "tb_chung": 0.9713,
+     "lech_chuan": -0.087,
+     "p_xoay": 0.0823,
+     "so_su_kien": 1087
+    }
+   },
+   "ma": "XM_FRA40CASH",
+   "khung": "H4",
+   "bar": 10886
+  },
+  "XM_GER40CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0191,
+     "tb_chung": 1.0022,
+     "lech_chuan": 0.0706,
+     "p_xoay": 0.0549,
+     "so_su_kien": 1571
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9992,
+     "tb_chung": 0.9902,
+     "lech_chuan": 0.016,
+     "p_xoay": 0.2793,
+     "so_su_kien": 1571
+    },
+    "ibs": {
+     "tb_su_kien": 0.5118,
+     "tb_chung": 0.5319,
+     "lech_chuan": -0.0684,
+     "p_xoay": 0.005,
+     "so_su_kien": 1573
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.514,
+     "tb_chung": 0.5658,
+     "lech_chuan": -0.1766,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1571
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1309,
+     "tb_chung": 0.1909,
+     "lech_chuan": -0.1911,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1571
+    },
+    "doc_20": {
+     "tb_su_kien": -0.3261,
+     "tb_chung": 0.4795,
+     "lech_chuan": -0.2682,
+     "p_xoay": 0.005,
+     "so_su_kien": 1571
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4614,
+     "tb_chung": 0.4487,
+     "lech_chuan": 0.0491,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1573
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1316,
+     "tb_chung": 0.2738,
+     "lech_chuan": -0.0592,
+     "p_xoay": 0.0374,
+     "so_su_kien": 1573
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0681,
+     "tb_chung": -0.0589,
+     "lech_chuan": -0.0434,
+     "p_xoay": 0.2444,
+     "so_su_kien": 1557
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.004,
+     "tb_chung": 0.9684,
+     "lech_chuan": 0.1443,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1549
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0279,
+     "tb_chung": 1.0022,
+     "lech_chuan": 0.107,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1560
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0196,
+     "tb_chung": 0.9902,
+     "lech_chuan": 0.0521,
+     "p_xoay": 0.0175,
+     "so_su_kien": 1560
+    },
+    "ibs": {
+     "tb_su_kien": 0.5227,
+     "tb_chung": 0.5319,
+     "lech_chuan": -0.0314,
+     "p_xoay": 0.0898,
+     "so_su_kien": 1573
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5174,
+     "tb_chung": 0.5658,
+     "lech_chuan": -0.165,
+     "p_xoay": 0.01,
+     "so_su_kien": 1560
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1025,
+     "tb_chung": 0.1909,
+     "lech_chuan": -0.1742,
+     "p_xoay": 0.005,
+     "so_su_kien": 1560
+    },
+    "doc_20": {
+     "tb_su_kien": -0.082,
+     "tb_chung": 0.4795,
+     "lech_chuan": -0.187,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1559
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4591,
+     "tb_chung": 0.4487,
+     "lech_chuan": 0.0404,
+     "p_xoay": 0.0599,
+     "so_su_kien": 1573
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1221,
+     "tb_chung": 0.2738,
+     "lech_chuan": -0.0631,
+     "p_xoay": 0.0499,
+     "so_su_kien": 1573
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0466,
+     "tb_chung": -0.0589,
+     "lech_chuan": 0.0579,
+     "p_xoay": 0.1845,
+     "so_su_kien": 1557
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0193,
+     "tb_chung": 0.9684,
+     "lech_chuan": 0.2062,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1551
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9989,
+     "tb_chung": 1.0022,
+     "lech_chuan": -0.0137,
+     "p_xoay": 0.3192,
+     "so_su_kien": 1572
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9884,
+     "tb_chung": 0.9902,
+     "lech_chuan": -0.0031,
+     "p_xoay": 0.4788,
+     "so_su_kien": 1572
+    },
+    "ibs": {
+     "tb_su_kien": 0.525,
+     "tb_chung": 0.5319,
+     "lech_chuan": -0.0236,
+     "p_xoay": 0.1895,
+     "so_su_kien": 1573
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5699,
+     "tb_chung": 0.5658,
+     "lech_chuan": 0.0137,
+     "p_xoay": 0.4289,
+     "so_su_kien": 1572
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.249,
+     "tb_chung": 0.1909,
+     "lech_chuan": 0.0345,
+     "p_xoay": 0.2344,
+     "so_su_kien": 1572
+    },
+    "doc_20": {
+     "tb_su_kien": 0.4341,
+     "tb_chung": 0.4795,
+     "lech_chuan": -0.0151,
+     "p_xoay": 0.3865,
+     "so_su_kien": 1572
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4501,
+     "tb_chung": 0.4487,
+     "lech_chuan": 0.0053,
+     "p_xoay": 0.389,
+     "so_su_kien": 1573
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3395,
+     "tb_chung": 0.2738,
+     "lech_chuan": 0.0273,
+     "p_xoay": 0.2219,
+     "so_su_kien": 1573
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0593,
+     "tb_chung": -0.0589,
+     "lech_chuan": -0.0019,
+     "p_xoay": 0.4813,
+     "so_su_kien": 1572
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9774,
+     "tb_chung": 0.9684,
+     "lech_chuan": 0.0362,
+     "p_xoay": 0.2569,
+     "so_su_kien": 1572
+    }
+   },
+   "ma": "XM_GER40CASH",
+   "khung": "H4",
+   "bar": 15732
+  },
+  "XM_JP225CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0264,
+     "tb_chung": 1.0025,
+     "lech_chuan": 0.1053,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1587
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0278,
+     "tb_chung": 0.9993,
+     "lech_chuan": 0.0575,
+     "p_xoay": 0.0299,
+     "so_su_kien": 1587
+    },
+    "ibs": {
+     "tb_su_kien": 0.5132,
+     "tb_chung": 0.5314,
+     "lech_chuan": -0.0609,
+     "p_xoay": 0.005,
+     "so_su_kien": 1592
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5046,
+     "tb_chung": 0.5598,
+     "lech_chuan": -0.1872,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1304,
+     "tb_chung": 0.1931,
+     "lech_chuan": -0.1958,
+     "p_xoay": 0.005,
+     "so_su_kien": 1587
+    },
+    "doc_20": {
+     "tb_su_kien": -0.213,
+     "tb_chung": 0.469,
+     "lech_chuan": -0.2337,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4585,
+     "tb_chung": 0.458,
+     "lech_chuan": 0.0022,
+     "p_xoay": 0.4489,
+     "so_su_kien": 1592
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0433,
+     "tb_chung": 0.2529,
+     "lech_chuan": -0.0895,
+     "p_xoay": 0.01,
+     "so_su_kien": 1592
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0703,
+     "tb_chung": -0.0556,
+     "lech_chuan": -0.0759,
+     "p_xoay": 0.0823,
+     "so_su_kien": 1575
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9991,
+     "tb_chung": 0.9735,
+     "lech_chuan": 0.1072,
+     "p_xoay": 0.0249,
+     "so_su_kien": 1572
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0259,
+     "tb_chung": 1.0025,
+     "lech_chuan": 0.1032,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1580
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0226,
+     "tb_chung": 0.9993,
+     "lech_chuan": 0.047,
+     "p_xoay": 0.0474,
+     "so_su_kien": 1580
+    },
+    "ibs": {
+     "tb_su_kien": 0.5276,
+     "tb_chung": 0.5314,
+     "lech_chuan": -0.0125,
+     "p_xoay": 0.2569,
+     "so_su_kien": 1592
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5199,
+     "tb_chung": 0.5598,
+     "lech_chuan": -0.1352,
+     "p_xoay": 0.005,
+     "so_su_kien": 1580
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.04,
+     "tb_chung": 0.1931,
+     "lech_chuan": -0.1411,
+     "p_xoay": 0.01,
+     "so_su_kien": 1580
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0274,
+     "tb_chung": 0.469,
+     "lech_chuan": -0.1701,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1579
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4608,
+     "tb_chung": 0.458,
+     "lech_chuan": 0.011,
+     "p_xoay": 0.2843,
+     "so_su_kien": 1592
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1237,
+     "tb_chung": 0.2529,
+     "lech_chuan": -0.0552,
+     "p_xoay": 0.0349,
+     "so_su_kien": 1592
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0722,
+     "tb_chung": -0.0556,
+     "lech_chuan": -0.0858,
+     "p_xoay": 0.0648,
+     "so_su_kien": 1574
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0111,
+     "tb_chung": 0.9735,
+     "lech_chuan": 0.1573,
+     "p_xoay": 0.015,
+     "so_su_kien": 1568
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.01,
+     "tb_chung": 1.0025,
+     "lech_chuan": 0.0334,
+     "p_xoay": 0.2444,
+     "so_su_kien": 1592
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9934,
+     "tb_chung": 0.9993,
+     "lech_chuan": -0.0119,
+     "p_xoay": 0.3092,
+     "so_su_kien": 1592
+    },
+    "ibs": {
+     "tb_su_kien": 0.5284,
+     "tb_chung": 0.5314,
+     "lech_chuan": -0.0101,
+     "p_xoay": 0.3342,
+     "so_su_kien": 1592
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5581,
+     "tb_chung": 0.5598,
+     "lech_chuan": -0.0058,
+     "p_xoay": 0.4389,
+     "so_su_kien": 1592
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.1943,
+     "tb_chung": 0.1931,
+     "lech_chuan": 0.0007,
+     "p_xoay": 0.4738,
+     "so_su_kien": 1592
+    },
+    "doc_20": {
+     "tb_su_kien": 0.4405,
+     "tb_chung": 0.469,
+     "lech_chuan": -0.0098,
+     "p_xoay": 0.4115,
+     "so_su_kien": 1591
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4644,
+     "tb_chung": 0.458,
+     "lech_chuan": 0.0252,
+     "p_xoay": 0.1471,
+     "so_su_kien": 1592
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.2946,
+     "tb_chung": 0.2529,
+     "lech_chuan": 0.0178,
+     "p_xoay": 0.3067,
+     "so_su_kien": 1592
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0796,
+     "tb_chung": -0.0556,
+     "lech_chuan": -0.124,
+     "p_xoay": 0.01,
+     "so_su_kien": 1591
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9584,
+     "tb_chung": 0.9735,
+     "lech_chuan": -0.063,
+     "p_xoay": 0.0948,
+     "so_su_kien": 1589
+    }
+   },
+   "ma": "XM_JP225CASH",
+   "khung": "H4",
+   "bar": 15926
+  },
+  "XM_UK100CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0212,
+     "tb_chung": 1.0018,
+     "lech_chuan": 0.0894,
+     "p_xoay": 0.0274,
+     "so_su_kien": 1559
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9974,
+     "tb_chung": 0.992,
+     "lech_chuan": 0.0103,
+     "p_xoay": 0.3441,
+     "so_su_kien": 1559
+    },
+    "ibs": {
+     "tb_su_kien": 0.5114,
+     "tb_chung": 0.5205,
+     "lech_chuan": -0.0304,
+     "p_xoay": 0.1197,
+     "so_su_kien": 1564
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.49,
+     "tb_chung": 0.5555,
+     "lech_chuan": -0.2254,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1559
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2338,
+     "tb_chung": 0.1295,
+     "lech_chuan": -0.2316,
+     "p_xoay": 0.005,
+     "so_su_kien": 1559
+    },
+    "doc_20": {
+     "tb_su_kien": -0.4694,
+     "tb_chung": 0.3351,
+     "lech_chuan": -0.2883,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1559
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4576,
+     "tb_chung": 0.4463,
+     "lech_chuan": 0.0432,
+     "p_xoay": 0.0499,
+     "so_su_kien": 1564
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0505,
+     "tb_chung": 0.1971,
+     "lech_chuan": -0.0634,
+     "p_xoay": 0.0249,
+     "so_su_kien": 1564
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0825,
+     "tb_chung": -0.077,
+     "lech_chuan": -0.0252,
+     "p_xoay": 0.3766,
+     "so_su_kien": 1542
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0226,
+     "tb_chung": 0.9746,
+     "lech_chuan": 0.2026,
+     "p_xoay": 0.005,
+     "so_su_kien": 1540
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0371,
+     "tb_chung": 1.0018,
+     "lech_chuan": 0.1629,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1555
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0377,
+     "tb_chung": 0.992,
+     "lech_chuan": 0.0883,
+     "p_xoay": 0.005,
+     "so_su_kien": 1555
+    },
+    "ibs": {
+     "tb_su_kien": 0.5081,
+     "tb_chung": 0.5205,
+     "lech_chuan": -0.0413,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1564
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5029,
+     "tb_chung": 0.5555,
+     "lech_chuan": -0.1811,
+     "p_xoay": 0.005,
+     "so_su_kien": 1555
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1884,
+     "tb_chung": 0.1295,
+     "lech_chuan": -0.2026,
+     "p_xoay": 0.005,
+     "so_su_kien": 1555
+    },
+    "doc_20": {
+     "tb_su_kien": -0.1494,
+     "tb_chung": 0.3351,
+     "lech_chuan": -0.1736,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1554
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4533,
+     "tb_chung": 0.4463,
+     "lech_chuan": 0.0267,
+     "p_xoay": 0.1796,
+     "so_su_kien": 1564
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.016,
+     "tb_chung": 0.1971,
+     "lech_chuan": -0.0783,
+     "p_xoay": 0.015,
+     "so_su_kien": 1564
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0558,
+     "tb_chung": -0.077,
+     "lech_chuan": 0.0967,
+     "p_xoay": 0.0673,
+     "so_su_kien": 1553
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0175,
+     "tb_chung": 0.9746,
+     "lech_chuan": 0.1809,
+     "p_xoay": 0.01,
+     "so_su_kien": 1552
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0055,
+     "tb_chung": 1.0018,
+     "lech_chuan": 0.0171,
+     "p_xoay": 0.3691,
+     "so_su_kien": 1564
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9808,
+     "tb_chung": 0.992,
+     "lech_chuan": -0.0217,
+     "p_xoay": 0.207,
+     "so_su_kien": 1564
+    },
+    "ibs": {
+     "tb_su_kien": 0.5178,
+     "tb_chung": 0.5205,
+     "lech_chuan": -0.0091,
+     "p_xoay": 0.3367,
+     "so_su_kien": 1564
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5301,
+     "tb_chung": 0.5555,
+     "lech_chuan": -0.0876,
+     "p_xoay": 0.0175,
+     "so_su_kien": 1564
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0402,
+     "tb_chung": 0.1295,
+     "lech_chuan": -0.0569,
+     "p_xoay": 0.0948,
+     "so_su_kien": 1564
+    },
+    "doc_20": {
+     "tb_su_kien": 0.1888,
+     "tb_chung": 0.3351,
+     "lech_chuan": -0.0524,
+     "p_xoay": 0.1471,
+     "so_su_kien": 1564
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4537,
+     "tb_chung": 0.4463,
+     "lech_chuan": 0.0283,
+     "p_xoay": 0.1197,
+     "so_su_kien": 1564
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1758,
+     "tb_chung": 0.1971,
+     "lech_chuan": -0.0092,
+     "p_xoay": 0.389,
+     "so_su_kien": 1564
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0667,
+     "tb_chung": -0.077,
+     "lech_chuan": 0.0471,
+     "p_xoay": 0.1771,
+     "so_su_kien": 1564
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9852,
+     "tb_chung": 0.9746,
+     "lech_chuan": 0.0447,
+     "p_xoay": 0.2145,
+     "so_su_kien": 1564
+    }
+   },
+   "ma": "XM_UK100CASH",
+   "khung": "H4",
+   "bar": 15645
+  },
+  "XM_US100CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.07,
+     "tb_chung": 1.0052,
+     "lech_chuan": 0.2388,
+     "p_xoay": 0.0274,
+     "so_su_kien": 216
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0055,
+     "tb_chung": 0.9898,
+     "lech_chuan": 0.0256,
+     "p_xoay": 0.3691,
+     "so_su_kien": 216
+    },
+    "ibs": {
+     "tb_su_kien": 0.5156,
+     "tb_chung": 0.5442,
+     "lech_chuan": -0.0949,
+     "p_xoay": 0.0623,
+     "so_su_kien": 217
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4966,
+     "tb_chung": 0.6136,
+     "lech_chuan": -0.3924,
+     "p_xoay": 0.005,
+     "so_su_kien": 216
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2905,
+     "tb_chung": 0.3194,
+     "lech_chuan": -0.3625,
+     "p_xoay": 0.01,
+     "so_su_kien": 216
+    },
+    "doc_20": {
+     "tb_su_kien": -0.5601,
+     "tb_chung": 0.7909,
+     "lech_chuan": -0.4438,
+     "p_xoay": 0.0025,
+     "so_su_kien": 216
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4885,
+     "tb_chung": 0.4634,
+     "lech_chuan": 0.0982,
+     "p_xoay": 0.0648,
+     "so_su_kien": 217
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.4101,
+     "tb_chung": 0.3404,
+     "lech_chuan": 0.0281,
+     "p_xoay": 0.3317,
+     "so_su_kien": 217
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0864,
+     "tb_chung": -0.0624,
+     "lech_chuan": -0.1172,
+     "p_xoay": 0.1646,
+     "so_su_kien": 216
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0153,
+     "tb_chung": 0.967,
+     "lech_chuan": 0.1764,
+     "p_xoay": 0.1297,
+     "so_su_kien": 216
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0232,
+     "tb_chung": 1.0052,
+     "lech_chuan": 0.0661,
+     "p_xoay": 0.3117,
+     "so_su_kien": 211
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9361,
+     "tb_chung": 0.9898,
+     "lech_chuan": -0.0871,
+     "p_xoay": 0.1421,
+     "so_su_kien": 211
+    },
+    "ibs": {
+     "tb_su_kien": 0.5766,
+     "tb_chung": 0.5442,
+     "lech_chuan": 0.1071,
+     "p_xoay": 0.0623,
+     "so_su_kien": 217
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5669,
+     "tb_chung": 0.6136,
+     "lech_chuan": -0.1566,
+     "p_xoay": 0.1397,
+     "so_su_kien": 211
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.0375,
+     "tb_chung": 0.3194,
+     "lech_chuan": -0.1675,
+     "p_xoay": 0.1022,
+     "so_su_kien": 211
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0081,
+     "tb_chung": 0.7909,
+     "lech_chuan": -0.2625,
+     "p_xoay": 0.0873,
+     "so_su_kien": 211
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4279,
+     "tb_chung": 0.4634,
+     "lech_chuan": -0.1384,
+     "p_xoay": 0.0075,
+     "so_su_kien": 217
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.424,
+     "tb_chung": 0.3404,
+     "lech_chuan": 0.0337,
+     "p_xoay": 0.3815,
+     "so_su_kien": 217
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0618,
+     "tb_chung": -0.0624,
+     "lech_chuan": 0.0028,
+     "p_xoay": 0.4763,
+     "so_su_kien": 203
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.015,
+     "tb_chung": 0.967,
+     "lech_chuan": 0.1752,
+     "p_xoay": 0.1022,
+     "so_su_kien": 198
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0427,
+     "tb_chung": 1.0052,
+     "lech_chuan": 0.138,
+     "p_xoay": 0.1197,
+     "so_su_kien": 217
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0127,
+     "tb_chung": 0.9898,
+     "lech_chuan": 0.0372,
+     "p_xoay": 0.2943,
+     "so_su_kien": 217
+    },
+    "ibs": {
+     "tb_su_kien": 0.5861,
+     "tb_chung": 0.5442,
+     "lech_chuan": 0.1387,
+     "p_xoay": 0.0249,
+     "so_su_kien": 217
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.6187,
+     "tb_chung": 0.6136,
+     "lech_chuan": 0.0172,
+     "p_xoay": 0.4439,
+     "so_su_kien": 217
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.463,
+     "tb_chung": 0.3194,
+     "lech_chuan": 0.0854,
+     "p_xoay": 0.2718,
+     "so_su_kien": 217
+    },
+    "doc_20": {
+     "tb_su_kien": 1.1911,
+     "tb_chung": 0.7909,
+     "lech_chuan": 0.1315,
+     "p_xoay": 0.2045,
+     "so_su_kien": 217
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4822,
+     "tb_chung": 0.4634,
+     "lech_chuan": 0.0735,
+     "p_xoay": 0.1247,
+     "so_su_kien": 217
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.8894,
+     "tb_chung": 0.3404,
+     "lech_chuan": 0.2215,
+     "p_xoay": 0.015,
+     "so_su_kien": 217
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0526,
+     "tb_chung": -0.0624,
+     "lech_chuan": 0.0478,
+     "p_xoay": 0.3716,
+     "so_su_kien": 215
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9327,
+     "tb_chung": 0.967,
+     "lech_chuan": -0.1254,
+     "p_xoay": 0.1845,
+     "so_su_kien": 215
+    }
+   },
+   "ma": "XM_US100CASH",
+   "khung": "H4",
+   "bar": 2177
+  },
+  "XM_US30CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0283,
+     "tb_chung": 1.0035,
+     "lech_chuan": 0.0976,
+     "p_xoay": 0.0175,
+     "so_su_kien": 1587
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9739,
+     "tb_chung": 0.9892,
+     "lech_chuan": -0.0245,
+     "p_xoay": 0.192,
+     "so_su_kien": 1587
+    },
+    "ibs": {
+     "tb_su_kien": 0.5239,
+     "tb_chung": 0.533,
+     "lech_chuan": -0.031,
+     "p_xoay": 0.1172,
+     "so_su_kien": 1591
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5145,
+     "tb_chung": 0.578,
+     "lech_chuan": -0.2122,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1543,
+     "tb_chung": 0.2603,
+     "lech_chuan": -0.2372,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "doc_20": {
+     "tb_su_kien": -0.3075,
+     "tb_chung": 0.6378,
+     "lech_chuan": -0.3014,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4475,
+     "tb_chung": 0.4524,
+     "lech_chuan": -0.0194,
+     "p_xoay": 0.207,
+     "so_su_kien": 1591
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1728,
+     "tb_chung": 0.2738,
+     "lech_chuan": -0.0418,
+     "p_xoay": 0.1546,
+     "so_su_kien": 1591
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.078,
+     "tb_chung": -0.0621,
+     "lech_chuan": -0.0739,
+     "p_xoay": 0.1122,
+     "so_su_kien": 1572
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9928,
+     "tb_chung": 0.9666,
+     "lech_chuan": 0.1013,
+     "p_xoay": 0.0549,
+     "so_su_kien": 1559
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.025,
+     "tb_chung": 1.0035,
+     "lech_chuan": 0.0846,
+     "p_xoay": 0.02,
+     "so_su_kien": 1581
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0012,
+     "tb_chung": 0.9892,
+     "lech_chuan": 0.019,
+     "p_xoay": 0.2469,
+     "so_su_kien": 1581
+    },
+    "ibs": {
+     "tb_su_kien": 0.523,
+     "tb_chung": 0.533,
+     "lech_chuan": -0.034,
+     "p_xoay": 0.0798,
+     "so_su_kien": 1591
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5232,
+     "tb_chung": 0.578,
+     "lech_chuan": -0.1832,
+     "p_xoay": 0.005,
+     "so_su_kien": 1581
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.137,
+     "tb_chung": 0.2603,
+     "lech_chuan": -0.2273,
+     "p_xoay": 0.005,
+     "so_su_kien": 1581
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0456,
+     "tb_chung": 0.6378,
+     "lech_chuan": -0.2179,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1580
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4672,
+     "tb_chung": 0.4524,
+     "lech_chuan": 0.0574,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1591
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.0201,
+     "tb_chung": 0.2738,
+     "lech_chuan": -0.1051,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1591
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.06,
+     "tb_chung": -0.0621,
+     "lech_chuan": 0.0096,
+     "p_xoay": 0.4314,
+     "so_su_kien": 1579
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0176,
+     "tb_chung": 0.9666,
+     "lech_chuan": 0.1969,
+     "p_xoay": 0.01,
+     "so_su_kien": 1579
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.9991,
+     "tb_chung": 1.0035,
+     "lech_chuan": -0.0176,
+     "p_xoay": 0.3591,
+     "so_su_kien": 1591
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 1.0013,
+     "tb_chung": 0.9892,
+     "lech_chuan": 0.0192,
+     "p_xoay": 0.202,
+     "so_su_kien": 1591
+    },
+    "ibs": {
+     "tb_su_kien": 0.5438,
+     "tb_chung": 0.533,
+     "lech_chuan": 0.0368,
+     "p_xoay": 0.0798,
+     "so_su_kien": 1591
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5956,
+     "tb_chung": 0.578,
+     "lech_chuan": 0.0588,
+     "p_xoay": 0.1197,
+     "so_su_kien": 1591
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.4012,
+     "tb_chung": 0.2603,
+     "lech_chuan": 0.0806,
+     "p_xoay": 0.0524,
+     "so_su_kien": 1591
+    },
+    "doc_20": {
+     "tb_su_kien": 0.7694,
+     "tb_chung": 0.6378,
+     "lech_chuan": 0.042,
+     "p_xoay": 0.1895,
+     "so_su_kien": 1591
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4464,
+     "tb_chung": 0.4524,
+     "lech_chuan": -0.0237,
+     "p_xoay": 0.1845,
+     "so_su_kien": 1591
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3319,
+     "tb_chung": 0.2738,
+     "lech_chuan": 0.024,
+     "p_xoay": 0.2643,
+     "so_su_kien": 1591
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0831,
+     "tb_chung": -0.0621,
+     "lech_chuan": -0.0974,
+     "p_xoay": 0.0224,
+     "so_su_kien": 1591
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9632,
+     "tb_chung": 0.9666,
+     "lech_chuan": -0.013,
+     "p_xoay": 0.389,
+     "so_su_kien": 1585
+    }
+   },
+   "ma": "XM_US30CASH",
+   "khung": "H4",
+   "bar": 15919
+  },
+  "XM_US500CASH": {
+   "cu_tang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.0201,
+     "tb_chung": 1.004,
+     "lech_chuan": 0.0611,
+     "p_xoay": 0.0748,
+     "so_su_kien": 1587
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9853,
+     "tb_chung": 0.991,
+     "lech_chuan": -0.0091,
+     "p_xoay": 0.3641,
+     "so_su_kien": 1587
+    },
+    "ibs": {
+     "tb_su_kien": 0.5148,
+     "tb_chung": 0.5408,
+     "lech_chuan": -0.087,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1591
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.4926,
+     "tb_chung": 0.6024,
+     "lech_chuan": -0.3688,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.2711,
+     "tb_chung": 0.3118,
+     "lech_chuan": -0.3406,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "doc_20": {
+     "tb_su_kien": -0.5811,
+     "tb_chung": 0.7697,
+     "lech_chuan": -0.4395,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1587
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4546,
+     "tb_chung": 0.459,
+     "lech_chuan": -0.0172,
+     "p_xoay": 0.2444,
+     "so_su_kien": 1591
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1691,
+     "tb_chung": 0.3164,
+     "lech_chuan": -0.0614,
+     "p_xoay": 0.0449,
+     "so_su_kien": 1591
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0693,
+     "tb_chung": -0.0637,
+     "lech_chuan": -0.0269,
+     "p_xoay": 0.3342,
+     "so_su_kien": 1571
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0013,
+     "tb_chung": 0.9669,
+     "lech_chuan": 0.1305,
+     "p_xoay": 0.0175,
+     "so_su_kien": 1558
+    }
+   },
+   "cu_giam": {
+    "nen_bien_dong": {
+     "tb_su_kien": 1.015,
+     "tb_chung": 1.004,
+     "lech_chuan": 0.0416,
+     "p_xoay": 0.1721,
+     "so_su_kien": 1581
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9845,
+     "tb_chung": 0.991,
+     "lech_chuan": -0.0104,
+     "p_xoay": 0.3766,
+     "so_su_kien": 1581
+    },
+    "ibs": {
+     "tb_su_kien": 0.5304,
+     "tb_chung": 0.5408,
+     "lech_chuan": -0.0348,
+     "p_xoay": 0.0648,
+     "so_su_kien": 1591
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.5375,
+     "tb_chung": 0.6024,
+     "lech_chuan": -0.2179,
+     "p_xoay": 0.005,
+     "so_su_kien": 1581
+    },
+    "xa_tb20": {
+     "tb_su_kien": -0.1024,
+     "tb_chung": 0.3118,
+     "lech_chuan": -0.242,
+     "p_xoay": 0.005,
+     "so_su_kien": 1581
+    },
+    "doc_20": {
+     "tb_su_kien": -0.0706,
+     "tb_chung": 0.7697,
+     "lech_chuan": -0.2734,
+     "p_xoay": 0.0025,
+     "so_su_kien": 1580
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4575,
+     "tb_chung": 0.459,
+     "lech_chuan": -0.0059,
+     "p_xoay": 0.389,
+     "so_su_kien": 1591
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.1364,
+     "tb_chung": 0.3164,
+     "lech_chuan": -0.075,
+     "p_xoay": 0.0125,
+     "so_su_kien": 1591
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.0653,
+     "tb_chung": -0.0637,
+     "lech_chuan": -0.0077,
+     "p_xoay": 0.4364,
+     "so_su_kien": 1579
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 1.0293,
+     "tb_chung": 0.9669,
+     "lech_chuan": 0.2362,
+     "p_xoay": 0.0075,
+     "so_su_kien": 1579
+    }
+   },
+   "chay_thang": {
+    "nen_bien_dong": {
+     "tb_su_kien": 0.986,
+     "tb_chung": 1.004,
+     "lech_chuan": -0.068,
+     "p_xoay": 0.0574,
+     "so_su_kien": 1591
+    },
+    "bien_do_nen": {
+     "tb_su_kien": 0.9751,
+     "tb_chung": 0.991,
+     "lech_chuan": -0.0255,
+     "p_xoay": 0.182,
+     "so_su_kien": 1591
+    },
+    "ibs": {
+     "tb_su_kien": 0.5387,
+     "tb_chung": 0.5408,
+     "lech_chuan": -0.0069,
+     "p_xoay": 0.3741,
+     "so_su_kien": 1591
+    },
+    "vi_tri_20": {
+     "tb_su_kien": 0.6103,
+     "tb_chung": 0.6024,
+     "lech_chuan": 0.0267,
+     "p_xoay": 0.3192,
+     "so_su_kien": 1591
+    },
+    "xa_tb20": {
+     "tb_su_kien": 0.3842,
+     "tb_chung": 0.3118,
+     "lech_chuan": 0.0423,
+     "p_xoay": 0.1746,
+     "so_su_kien": 1591
+    },
+    "doc_20": {
+     "tb_su_kien": 0.729,
+     "tb_chung": 0.7697,
+     "lech_chuan": -0.0133,
+     "p_xoay": 0.4339,
+     "so_su_kien": 1591
+    },
+    "than_tren_bien": {
+     "tb_su_kien": 0.4511,
+     "tb_chung": 0.459,
+     "lech_chuan": -0.0304,
+     "p_xoay": 0.0998,
+     "so_su_kien": 1591
+    },
+    "chuoi_cung_chieu": {
+     "tb_su_kien": 0.3872,
+     "tb_chung": 0.3164,
+     "lech_chuan": 0.0295,
+     "p_xoay": 0.1621,
+     "so_su_kien": 1591
+    },
+    "ac1_20": {
+     "tb_su_kien": -0.078,
+     "tb_chung": -0.0637,
+     "lech_chuan": -0.068,
+     "p_xoay": 0.0723,
+     "so_su_kien": 1591
+    },
+    "bd20_tren_bd60": {
+     "tb_su_kien": 0.9573,
+     "tb_chung": 0.9669,
+     "lech_chuan": -0.0361,
+     "p_xoay": 0.2145,
+     "so_su_kien": 1590
+    }
+   },
+   "ma": "XM_US500CASH",
+   "khung": "H4",
+   "bar": 15919
+  }
+ }
+}

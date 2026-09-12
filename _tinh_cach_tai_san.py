@@ -27,11 +27,12 @@ import warnings
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
 import numpy as np
+from pathlib import Path
 
 KHUNG = "D1"
 NGUON = "reports/quet_rong_d1.json"
@@ -42,7 +43,7 @@ SO_LUONG = int(os.environ.get("LUONG", "10"))
 def _mot(ma: str) -> dict | None:
     import warnings as w
     w.filterwarnings("ignore")
-    sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     from nhan import du_lieu as DL
     from nhan import tinh_cach as TC
     try:

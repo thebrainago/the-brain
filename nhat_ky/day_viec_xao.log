@@ -1,0 +1,9 @@
+[2026-09-12 21:38:51] >>> xao_ma_llm  XAO LAI kho ma nguon: 5.131 file ma_nguon moi boc 152 (3%) - chay bo boc LLM hien tai len phan chua dong toi
+[2026-09-12 21:42:32] <<< xao_ma_llm  XONG  221s  rc=0
+[2026-09-12 21:42:32] >>> xao_hoc_thuat  XAO LAI kho hoc thuat: 3.771 tai lieu moi boc 175 (5%)
+[2026-09-12 21:46:15] <<< xao_hoc_thuat  XONG  222s  rc=0
+[2026-09-12 21:46:15] >>> do_kho_sau_xao  DO lai kho co che sau khi xao - so voi moc 2.554
+[2026-09-12 21:46:18] <<< do_kho_sau_xao  XONG  3s  rc=0
+[2026-09-12 21:46:18] >>> noi_sinh_da_ma  NOI SINH tren cac ma co du lieu dai nhat - sinh co che tu chinh lich su
+[2026-09-12 21:46:20] <<< noi_sinh_da_ma  XONG  2s  rc=0
+[2026-09-12 21:46:21] >>> to_hop_sau_xao  TO HOP lai voi kho da phinh - xem hieu suat co tang khong

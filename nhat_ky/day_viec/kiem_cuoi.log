@@ -1,0 +1,75 @@
+# kiem_cuoi
+# Bo kiem thu toan lab (song song) - lan chot
+# python b.py test
+
+bringing up nodes...
+bringing up nodes...
+
+...........u.....uuu.......................................uuuuu.uuu.... [  4%]
+...............................................uu.............u.u.uuuu.. [  8%]
+........uu.uuu.....................................................uuuuu [ 12%]
+uu.uuuu................................................................. [ 17%]
+...................................uuu.................................. [ 21%]
+..........................uuu......uuu...uu.......uuuuuu.uuuuuuuuu....uu [ 25%]
+u........uuuuuuu..uuuuuuuuuuuuuuuuuuuuuuuuuuuu..........F............... [ 27%]
+......u.u.u........uuu............................................uuuuuu [ 31%]
+uuuuuuu.............uuuuuuuu.uuuuu.uuuuu.uuuuuuuuuuuuuu...uuuuuuuuuuuuuu [ 32%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu..uuuuu.uuuuuuuuuuuuuuuu.uuuu.u [ 33%]
+uuuuuuu.uuu.............u..........uuuu.....u...u.....u........u........ [ 36%]
+...................................u...................................u [ 41%]
+uuuuu.........................................................uuuuuu.... [ 45%]
+...............u..uu...u........u..u.uuuuuu.u......................uuuu. [ 49%]
+..............................................u...................u.u..u [ 54%]
+...u.u...................................u..............uu..uu.......... [ 58%]
+...............u...........u..........u...................u............. [ 63%]
+........uuuuuu........................u.............u................... [ 67%]
+.............uuuu..................................uu..uu............... [ 71%]
+..u.....u........u.................................................uuuu. [ 76%]
+....uuuu.uuuuuu.u.uuu.uuu.u.uu.uuu...................................... [ 79%]
+.........F.............................................................. [ 84%]
+...uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuuuuuuuuuuuuuu [ 84%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 84%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu............................... [ 86%]
+........................................................................ [ 91%]
+.........s.............................................................. [ 96%]
+....................................................                     [100%]
+================================== FAILURES ===================================
+__________ CuaUuTienDocDuocFILE.test_nguon_khong_nhan_ra_thi_noi_ro ___________
+[gw5] win32 -- Python 3.14.3 C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe
+
+self = <test_cua_vao.CuaUuTienDocDuocFILE testMethod=test_nguon_khong_nhan_ra_thi_noi_ro>
+
+    def test_nguon_khong_nhan_ra_thi_noi_ro(self):
+        kq = UT.xu_ly("khong phai url cung khong phai file", ghi_kho=False)
+>       self.assertFalse(kq["nhan"])
+E       AssertionError: True is not false
+
+test_cua_vao.py:93: AssertionError
+___________ HashPhaiDOI_KHI_NOI_DUNG_DOI.test_bam_lai_khi_file_doi ____________
+[gw3] win32 -- Python 3.14.3 C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe
+
+self = <test_anh_chup.HashPhaiDOI_KHI_NOI_DUNG_DOI testMethod=test_bam_lai_khi_file_doi>
+
+    def test_bam_lai_khi_file_doi(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "thu.bin"
+            p.write_bytes(b"x" * 5000)
+            h1 = AC.hash_file(p)
+            p.write_bytes(b"y" * 5000)          # cung KICH THUOC, khac noi dung
+            h2 = AC.hash_file(p)
+>           self.assertNotEqual(
+                h1, h2,
+                "bo dem dang khoa theo kich thuoc - mot file bi sua ma giu nguyen "
+                "so byte se di lot")
+E           AssertionError: '75d0878b8974254f2150d1f569930205' == '75d0878b8974254f2150d1f569930205' : bo dem dang khoa theo kich thuoc - mot file bi sua ma giu nguyen so byte se di lot
+
+test_anh_chup.py:30: AssertionError
+============================== warnings summary ===============================
+test_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc
+  <unknown>:6: SyntaxWarning: "\L" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\L"? A raw string is also an option.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED test_cua_vao.py::CuaUuTienDocDuocFILE::test_nguon_khong_nhan_ra_thi_noi_ro
+FAILED test_anh_chup.py::HashPhaiDOI_KHI_NOI_DUNG_DOI::test_bam_lai_khi_file_doi
+2 failed, 1470 passed, 1 skipped, 1 warning, 523 subtests passed in 755.76s (0:12:35)

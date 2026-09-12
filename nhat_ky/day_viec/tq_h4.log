@@ -1,0 +1,36 @@
+# tq_h4
+# Q3 tuong quan H4
+# python -m nhan.ho_so_tuong_quan H4
+
+gom 27/159 ma · 8630 hang
+tinh 325 cap trong 4s
+
+325 cap · on dinh trung vi 0.885
+  cap cao bi loai vi TRUNG CONG CU: 3/42
+  cap am bi loai vi QUAN HE CO HOC: 4/12
+  cap TUONG QUAN CAO (>= 0.7): 39   <- dung chay hai he tren ca hai
+  cap TUONG QUAN AM  (<= -0.3): 8   <- ung vien GHEP
+
+10 cap CAO nhat (r · on dinh · bien do · bar chung):
+  XAUUSD|XAUUSDM                 +0.985  1.00  0.006  2908
+  XM_EU50CASH|XM_FRA40CASH       +0.970  1.00  0.024  2714
+  XAUEURM|XAUGBPM                +0.957  1.00  0.043  1217
+  XM_EU50CASH|XM_GER40CASH       +0.953  1.00  0.019  2708
+  XM_US30CASH|XM_US500CASH       +0.944  1.00  0.052  2754
+  XAUEURM|XAUUSDM                +0.919  1.00  0.056  1217
+  XM_FRA40CASH|XM_GER40CASH      +0.914  1.00  0.045  2706
+  XAUAUDM|XAUGBPM                +0.903  0.95  0.074  1217
+  XAUEURM|XAUUSD                 +0.901  1.00  0.053  1217
+  XAUAUDM|XAUEURM                +0.900  1.00  0.074  1217
+
+10 cap AM nhat - ung vien ghep:
+  AUDCHF|EURNZD                  -0.495  0.69  0.189  3493
+  USDJPY|XAUUSDM                 -0.383  0.78  0.152  2910
+  AUDCHF|EURCAD                  -0.365  0.88  0.129  3490
+  AUDCAD|EURNZD                  -0.358  0.81  0.146  3487
+  EURNZD|US500M                  -0.329  1.00  0.076  1675
+  EURNZD|XM_US500CASH            -0.326  0.97  0.115  2730
+  EURCAD|XM_UK100CASH            -0.319  0.84  0.139  2676
+  EURNZD|XM_US30CASH             -0.309  0.93  0.120  2730
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HO_SO_TUONG_QUAN_D1.json

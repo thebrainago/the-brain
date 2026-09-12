@@ -1,0 +1,54 @@
+quet 154/159 ma trong 53s
+
+DAU HIEU TRUOC SU KIEN - 154 ma, khung D1, chan troi 10 bar
+SU KIEN       DAU HIEU              MA   LECH TV    DAT  CUNG DAU    p DAU GOP
+cu_tang       bien_do_nen          154     0.079     15       88%     1.33e-23
+cu_tang       nen_bien_dong        154     0.095     19       84%     8.24e-19
+cu_tang       bd20_tren_bd60       154     0.144     43       82%     4.78e-16
+cu_giam       bien_do_nen          154     0.057     13       81%     2.10e-15
+cu_giam       nen_bien_dong        154     0.062     15       80%     3.60e-14
+cu_giam       bd20_tren_bd60       154     0.088     31       77%     2.21e-11
+cu_tang       chuoi_cung_chieu     154    -0.069     28       76%     7.16e-11
+cu_tang       doc_20               154    -0.118     54       73%     1.54e-08
+cu_tang       than_tren_bien       154     0.028      0       72%     4.08e-08
+cu_tang       xa_tb20              154    -0.122     54       71%     1.05e-07
+cu_giam       than_tren_bien       154     0.028      5       71%     1.05e-07
+cu_tang       ibs                  154    -0.058     26       71%     2.62e-07
+cu_tang       vi_tri_20            154    -0.111     52       70%     6.33e-07
+chay_thang    nen_bien_dong        154    -0.028      5       64%     4.90e-04
+chay_thang    bd20_tren_bd60       154    -0.034     18       60%     1.92e-02
+cu_giam       ibs                  154     0.017      7       58%     6.35e-02
+cu_tang       ac1_20               154     0.018     16       56%     1.25e-01
+chay_thang    ac1_20               154     0.030      7       56%     1.71e-01
+chay_thang    bien_do_nen          154    -0.010      5       56%     1.71e-01
+chay_thang    chuoi_cung_chieu     154     0.007      4       55%     2.95e-01
+chay_thang    ibs                  154     0.005      1       55%     2.95e-01
+cu_giam       chuoi_cung_chieu     154    -0.007      7       54%     3.75e-01
+
+DAU HIEU DONG THUAN DA TAI SAN (p dau gop <= 0.001):
+  truoc cu_tang      thi bien_do_nen        CAO hon 0.079 do lech chuan
+      136/154 ma cung dau, 15 ma dat rieng le
+  truoc cu_tang      thi nen_bien_dong      CAO hon 0.095 do lech chuan
+      130/154 ma cung dau, 19 ma dat rieng le
+  truoc cu_tang      thi bd20_tren_bd60     CAO hon 0.144 do lech chuan
+      126/154 ma cung dau, 43 ma dat rieng le
+  truoc cu_giam      thi bien_do_nen        CAO hon 0.057 do lech chuan
+      125/154 ma cung dau, 13 ma dat rieng le
+  truoc cu_giam      thi nen_bien_dong      CAO hon 0.062 do lech chuan
+      123/154 ma cung dau, 15 ma dat rieng le
+  truoc cu_giam      thi bd20_tren_bd60     CAO hon 0.088 do lech chuan
+      118/154 ma cung dau, 31 ma dat rieng le
+  truoc cu_tang      thi chuoi_cung_chieu   THAP hon 0.069 do lech chuan
+      117/154 ma cung dau, 28 ma dat rieng le
+  truoc cu_tang      thi doc_20             THAP hon 0.118 do lech chuan
+      112/154 ma cung dau, 54 ma dat rieng le
+  truoc cu_tang      thi than_tren_bien     CAO hon 0.028 do lech chuan
+      111/154 ma cung dau, 0 ma dat rieng le
+  truoc cu_tang      thi xa_tb20            THAP hon 0.122 do lech chuan
+      110/154 ma cung dau, 54 ma dat rieng le
+
+  DOC KEM: cac ma KHONG doc lap nen p tren la CHAN DUOI lac quan. Uoc so ma doc lap: ~79.
+  Va do lech chi vai phan tram do lech chuan - do la mot XU HUONG
+  co that, khong phai mot tin hieu giao dich duoc ngay.
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\SUY_NGUOC.json

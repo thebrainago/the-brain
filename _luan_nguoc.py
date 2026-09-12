@@ -28,13 +28,14 @@ import json
 import sys
 import warnings
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
 import numpy as np
 
 from nhan import dau_chan as DC
+from pathlib import Path
 
 NGUON = "reports/signal_ho_so.json"
 RA = "reports/luan_nguoc.json"

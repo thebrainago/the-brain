@@ -194,7 +194,25 @@ def tu_html(url: str, kieu: str = "khac") -> dict | None:
         return None
     # trang dien dan/blog thuong co phan noi dung trong <article>/<div class=post>
     khoi = re.findall(r"<(?:article|main)\b[^>]*>(.*?)</(?:article|main)>", h, re.S | re.I)
-    vb = _sach(" ".join(khoi) if khoi else h)
+    vb = _sach(" ".join(khoi)) if khoi else ""
+    # VO <main> RONG KHONG DUOC NUOT CA TRANG (sua 12/09/2026).
+    #
+    # Truoc hom nay cau tren la `" ".join(khoi) if khoi else h`: he chon khoi
+    # <article>/<main> NEU CO, va khong bao gio hoi lai xem khoi do co chu hay
+    # khong. Voi trang dung khung React/Next thi the <main> thuong la mot vo
+    # rong, noi dung duoc dung vao cho khac.
+    #
+    # Do that 12/09/2026 tren `fxblue.com/tools-for-download/fx-blue-trading-
+    # simulator/user-guide/metaTrader4`: trang 501.856 byte, **1 khoi <main>
+    # dai 503 byte va boc ra DUNG 0 ky tu chu**, trong khi ca trang boc ra
+    # **32.594 ky tu**. Nguong `len(vb) < 400` ben duoi bien 32.594 ky tu do
+    # thanh mot chu "khong doc duoc" - va `doc_toan_van` ghi nhan ay VINH VIEN.
+    #
+    # Nen: khoi chi duoc dung khi no THAT SU co chu; khong thi lui ve ca trang.
+    # Day khong phai loi rieng cua fxblue - moi trang dung SPA shell deu roi
+    # vao day.
+    if len(vb) < 400:
+        vb = _sach(h)
     vb = re.sub(r"\n{3,}", "\n\n", vb)
     if len(vb) < 400:
         return None
@@ -280,10 +298,17 @@ def tu_youtube(url: str) -> dict | None:
 #: `lab/.browser_darwinex` 1,5 GB co phien dang nhap that).
 #:
 #: Day la day noi con thieu, khong phai mot tinh nang moi.
+#: `fxblue.com` BI GO khoi danh sach nay ngay 12/09/2026. Do that cung ngay
+#: bang `requests` + UA that: trang chu tra **200 / 525.989 ky tu**, trang
+#: huong dan `/tools-for-download/fx-blue-trading-simulator/user-guide/
+#: metaTrader4` tra **33.223 ky tu CHU** - khong Cloudflare, khong doi dang
+#: nhap, khong render bang JS. Giu ten no o day nghia la moi lan doc mot dia
+#: chi fxblue he phai thu con Chrome TRUOC (va CDP thuong TAT, tuc mot vong
+#: hong roi moi lui ve `tu_html`) cho mot trang von doc thang duoc.
 CAN_TRINH_DUYET = (
     "reddit.com", "mql5.com", "myfxbook.com", "darwinex.com", "t.me",
     "x.com", "twitter.com", "facebook.com", "discord.com", "tiktok.com",
-    "collective2.com", "fxblue.com", "tradingview.com", "quantconnect.com",
+    "collective2.com", "tradingview.com", "quantconnect.com",
 )
 
 

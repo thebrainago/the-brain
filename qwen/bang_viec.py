@@ -22,6 +22,11 @@ import time
 from . import cau_hinh as CH
 
 
+#: Tran gio TOI DA cho mot viec lan TESTER, bat ke che do ngan sach nao.
+#: Khop voi `test_qwen_dieu_phoi.test_lan_TESTER_trong_bang_that_deu_co_han_gio`.
+TRAN_PHUT_TESTER = 480
+
+
 class BangViec:
     def __init__(self, duong=None) -> None:
         self.duong = duong or CH.BANG
@@ -41,7 +46,16 @@ class BangViec:
             v.setdefault("phu_thuoc", [])
             v.setdefault("lap", 1)
             v.setdefault("can_nguoi", False)
-            v.setdefault("toi_da_phut", CH.nap()["toi_da_phut_mac_dinh"])
+            # TRAN GIO CUA LAN TESTER LA RANG BUOC VAT LY, KHONG PHAI NGAN SACH.
+            # May co MOT `terminal64.exe`; mot viec tester treo la ca lan dung im
+            # (`nhan/khoa_tester.py`). Che do `ultracode` nang tran mac dinh len
+            # 1.440 phut theo duyet cua chu du an - dung cho LLM/CPU/MANG, nhung
+            # ap luon cho TESTER thi mot lan treo an het mot ngay. Do la loi toi
+            # mac 12/09/2026 va `test_qwen_dieu_phoi` bat duoc ngay.
+            mac = CH.nap()["toi_da_phut_mac_dinh"]
+            if v["lan"] == "TESTER":
+                mac = min(mac, TRAN_PHUT_TESTER)
+            v.setdefault("toi_da_phut", mac)
             thay[v["ma"]] = v
         # phu thuoc tro toi ma khong ton tai la loi cua nguoi viet bang
         for v in ds:

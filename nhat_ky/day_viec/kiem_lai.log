@@ -1,0 +1,55 @@
+# kiem_lai
+# Chay lai bo kiem thu (SONG SONG) sau khi sua cong/mo phong/doc_hieu
+# python b.py test
+
+bringing up nodes...
+bringing up nodes...
+
+.......................u.uuu............................u.uuuu....u..uu. [  4%]
+....................................................uu..........uuu..... [  8%]
+.u.uu............uuuuu...............................................uuu [ 12%]
+uuuu.uuuu............................................................... [ 17%]
+.........................uu.u........................................... [ 21%]
+...........................uuu......uuu...uu.........uuuuuu.uuuuuuuuu... [ 25%]
+uuu.........uuuuuuu...uuuuuuuuuuuuuuuuuuuuuuuuuuuu........F............. [ 27%]
+..........uuu.......uuu................................................. [ 31%]
+......u..........uuuuuuuuuuuuu.............uuuuuuu.u.uuuuu..uuuuu.uuuuuu [ 34%]
+uuuuuuuu...uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu..uuuu [ 34%]
+u.uuu.uuuuuuuuuuuuuuuuuu.uuuuuuuuuuu............u........u.......uuuuu.. [ 36%]
+................u....................................................... [ 41%]
+uuuuuu...................................................uuuuu..u.uuuu.. [ 45%]
+...uuuuuuu.....u...u...........u.uuu..u.u..........uuu..uu.............. [ 48%]
+........u...uuuu.........................u..........u................... [ 53%]
+.....................u....................u..u.................u........ [ 57%]
+.......uu...................................u...........u.......u....... [ 62%]
+................uuuuuu......................................u........... [ 66%]
+.uu.u..u................................................................ [ 71%]
+........................................................................ [ 76%]
+..uuuuu.u..uuuuuuuu.u.uuu..uuu.uuu...uuu................................ [ 79%]
+.............................................uuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu. [ 82%]
+uuuuuuuuuuuuu.uuuuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuuu [ 82%]
+uuuuuuuuuuuuuu.......................................................... [ 86%]
+........................................................................ [ 91%]
+..................................s..................................... [ 96%]
+....................................................                     [100%]
+================================== FAILURES ===================================
+__________ CuaUuTienDocDuocFILE.test_nguon_khong_nhan_ra_thi_noi_ro ___________
+[gw5] win32 -- Python 3.14.3 C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe
+
+self = <test_cua_vao.CuaUuTienDocDuocFILE testMethod=test_nguon_khong_nhan_ra_thi_noi_ro>
+
+    def test_nguon_khong_nhan_ra_thi_noi_ro(self):
+        kq = UT.xu_ly("khong phai url cung khong phai file", ghi_kho=False)
+>       self.assertFalse(kq["nhan"])
+E       AssertionError: True is not false
+
+test_cua_vao.py:93: AssertionError
+============================== warnings summary ===============================
+test_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc
+  <unknown>:6: SyntaxWarning: "\L" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\L"? A raw string is also an option.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED test_cua_vao.py::CuaUuTienDocDuocFILE::test_nguon_khong_nhan_ra_thi_noi_ro
+1 failed, 1471 passed, 1 skipped, 1 warning, 523 subtests passed in 673.77s (0:11:13)

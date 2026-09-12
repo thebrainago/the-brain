@@ -1,0 +1,28 @@
+# qt_d1_sach
+# Quet quan tri D1 CHAY LAI sau khi sua bar hong (16 ma dinh)
+# python _quet_quan_tri.py D1 0 10
+
+chay 154/159 ma trong 11s
+
+HO 1 - CAU TRUC VAO LENH (dd20 = lai %%/nam quy ve cung sut giam 20%%)
+CAU TRUC          MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+dca_deu          154     -0.522     30.277      34       23   -0.141
+dca_von          154     -0.534     31.659      35       25   -0.142
+thi_truong       154     -0.547     37.371      40       30   -0.146
+hai_dau_oco      154     -0.610     10.681      37       19   -0.180
+hai_dau_giu      154     -0.616     15.285      42       21   -0.176
+tt_hedge         154     -0.637     20.457      22       10   -0.252
+nhanh            154     -0.748     66.980      18       12   -0.181
+
+HO 2 - LUAT QUAN TRI
+LUAT                      MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+sl2_tp6_hue2_trail2      154     -0.539     65.347      36       22   -0.201
+sl3_trail2               154     -0.552    284.270      39       25   -0.158
+sl2_tp4_hue1             154     -0.597     55.776      45       28   -0.173
+sl2_tp4                  154     -0.613    112.633      29       19   -0.200
+sl2_trail1               154     -0.621     90.388      46       27   -0.149
+sl2_tp4_chot1            154     -0.624     82.087      32       22   -0.193
+khong_gi                 144     -0.639     85.982      35       23   -0.162
+chot_nhanh_sl1_tp1       154     -0.762     70.988      26       17   -0.323
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\QUET_QUAN_TRI_D1.json

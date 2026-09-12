@@ -1,0 +1,140 @@
+# to_hop_v2
+# Q6 to hop CO CHANG HOLDOUT + moc quy dung phep (D1+H4)
+# python -m nhan.to_hop D1 H4 --tien-trinh 10
+
+ma: 159 -> 145 (bo 14 ban sao)
+cap (ma, khung) co du du lieu: 161
+co che kich hoat trong [2%, 60%]: 868
+
+CHANG 1 - 139748 o
+  chang 1: 139748 o -> 127062 ket qua, 3360 loi, 1161s
+    loi dau: KhungThieuGio: DSL chi_bao='gio': co che theo PHIEN nhung khung chi co mot gio duy nhat ([21]) - can khung noi ngay
+
+CHANG 2 - 3000 o (200 song sot x 7 cau truc + 8 luat)
+  chang 2: 3000 o -> 2988 ket qua, 0 loi, 17s
+
+CHANG 3 - 0 o (do do nhay thong so)
+
+CHANG 4 - HOLDOUT - 80 o (40 he x train/hold)
+  chang 4: 80 o -> 80 ket qua, 0 loi, 3s
+  giu ca hai dau: 40 he - THANG MOC O HOLDOUT: 0
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\TO_HOP.json
+# TONG KET TO HOP
+
+*2988 o chang 2 / 145 ma / khung D1, H4 / 1185 giay*
+
+Xep hang bang `cagr_dd20`: lai %/nam khi quy ca hai ve cung ngan sach
+sut giam 20%. `hon_moc` = thang **max(mua-giu, ban-giu, tien mat)**.
+
+## DOC BANG NAY NHU THE NAO
+
+Chang 1 da CHON top 200 o theo chinh `cagr_dd20`, roi chang 2 mo rong
+dung nhung o do. Nen con so `hon_moc` o day **bi thoi len boi chinh phep
+chon** - no khong phai ti le thanh cong cua mot lan quet mu.
+
+Cai bang nay tra loi duoc, va chi tra loi duoc, mot cau: *voi nhung o da
+co ve co gi, thi doi CAU TRUC hay doi LUAT lam ket qua thay doi ra sao*.
+Do la dung cau hoi chu du an dat ra cho module quan li lenh. Muon biet
+ti le thanh cong THAT thi phai doc chang 1 (chua chon), hoac chay lai
+tren holdout.
+
+## Theo CAU TRUC VAO LENH
+
+| cau truc vao lenh | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| thi_truong | 1791 | 159.965 | 755.282 | 100% | 587 |
+| nhanh | 200 | 106.880 | 161.890 | 100% | 0 |
+| tt_hedge | 199 | 50.636 | 155.255 | 98% | 0 |
+| hai_dau_oco | 200 | 27.383 | 89.111 | 100% | 0 |
+| hai_dau_giu | 200 | 21.776 | 60.992 | 100% | 0 |
+| dca_deu | 199 | 13.556 | 46.916 | 100% | 0 |
+| dca_von | 199 | 8.491 | 52.995 | 100% | 0 |
+
+**NEN DI**: thi_truong (trung vi 159.965, 1791/1791 o duong)
+
+**NEN TRANH**: dca_von (trung vi 8.491, chi 199/199 o duong)
+
+## Theo LUAT QUAN TRI
+
+| luat quan tri | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| sl2_trail1 | 200 | 498.224 | 755.282 | 100% | 188 |
+| sl3_trail2 | 198 | 322.884 | 546.146 | 100% | 182 |
+| sl2_tp6_hue2_trail2 | 198 | 309.105 | 439.425 | 100% | 153 |
+| khong_gi | 195 | 193.948 | 237.489 | 100% | 35 |
+| chot_nhanh_sl1_tp1 | 200 | 148.773 | 222.206 | 100% | 1 |
+| sl2_tp4 | 200 | 144.031 | 199.374 | 100% | 2 |
+| sl2_tp4_hue1 | 200 | 119.628 | 276.625 | 100% | 21 |
+| sl2_tp4_chot1 | 200 | 99.644 | 138.754 | 100% | 2 |
+| - | 1397 | 35.528 | 224.073 | 100% | 3 |
+
+**NEN DI**: sl2_trail1 (trung vi 498.224, 200/200 o duong)
+
+**NEN TRANH**: - (trung vi 35.528, chi 1392/1397 o duong)
+
+## Theo HO CO CHE
+
+| ho co che | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| dong_tien | 15 | 126.262 | 655.449 | 100% | 4 |
+| quay_ve_trung_binh | 415 | 113.951 | 694.600 | 100% | 89 |
+| xu_huong | 1859 | 113.318 | 755.282 | 100% | 364 |
+| bien_dong | 432 | 113.185 | 641.041 | 100% | 90 |
+| pha_vo | 222 | 82.578 | 635.208 | 99% | 37 |
+| lich | 30 | 81.335 | 232.454 | 100% | 2 |
+| vi_mo | 15 | 31.110 | 228.103 | 100% | 1 |
+
+**NEN DI**: dong_tien (trung vi 126.262, 15/15 o duong)
+
+**NEN TRANH**: vi_mo (trung vi 31.110, chi 15/15 o duong)
+
+## Theo TAI SAN
+
+| tai san | o | dd20 trung vi | tot nhat | ti le duong | hon moc |
+|---|---:|---:|---:|---:|---:|
+| EURMXN | 2964 | 112.806 | 755.282 | 100% | 577 |
+| GBPTRY | 24 | 49.956 | 202.272 | 92% | 10 |
+
+**NEN DI**: EURMXN (trung vi 112.806, 2961/2964 o duong)
+
+**NEN TRANH**: GBPTRY (trung vi 49.956, chi 22/24 o duong)
+
+## CHANG 4 - HOLDOUT (chang quyet dinh)
+
+Chon tren 60% dau, DO tren 40% sau. Ba chang tren deu chon tren
+chinh so chung do, nen chi bang nay noi duoc co gi that hay khong.
+
+**0/40 he thang moc o holdout.**
+
+Khong he nao song sang nua sau. Do la ket qua manh nhat co the
+rut ra tu mot lan quet: khong gian nay khong chua edge ben.
+
+## Cai duy nhat dang theo tiep
+
+587/2988 o thang duoc moc. 
+
+| ma | khung | co che | cau truc | luat | dd20 | moc |
+|---|---|---|---|---|---:|---:|
+| EURMXN | D1 | vao_lenh_mua_theo_rsi_histoa | thi_truong | sl2_trail1 | 755.282 | 221.758 |
+| EURMXN | D1 | pine_pekipek_s_ppo_sma2_tre1 | thi_truong | sl2_trail1 | 751.233 | 221.758 |
+| EURMXN | D1 | pine_cm_rsi_2_strat_close_tr | thi_truong | sl2_trail1 | 750.018 | 221.758 |
+| EURMXN | D1 | alma_trend_filter | thi_truong | sl2_trail1 | 749.632 | 221.758 |
+| EURMXN | D1 | macd_stochastic_doub_sma3_ch | thi_truong | sl2_trail1 | 699.932 | 221.758 |
+| EURMXN | D1 | chieu_theo_hoi_ve_trung_binh | thi_truong | sl2_trail1 | 694.600 | 221.758 |
+| EURMXN | D1 | gaussian_filter | thi_truong | sl2_trail1 | 659.200 | 221.758 |
+| EURMXN | D1 | at_lenh_cho_buy_stop_khi_inh | thi_truong | sl2_trail1 | 655.449 | 221.758 |
+| EURMXN | D1 | quet_thanh_khoan_tao_chan_ga | thi_truong | sl2_trail1 | 655.449 | 221.758 |
+| EURMXN | D1 | anglespeed_buy | thi_truong | sl2_trail1 | 647.830 | 221.758 |
+| EURMXN | D1 | song_tang_weis | thi_truong | sl2_trail1 | 647.830 | 221.758 |
+| EURMXN | D1 | xu_huong_tang_dua_tren_ong_c | thi_truong | sl2_trail1 | 647.830 | 221.758 |
+| EURMXN | D1 | hann_filter_trend_reversal | thi_truong | sl2_trail1 | 647.693 | 221.758 |
+| EURMXN | D1 | renko_reversal_buy | thi_truong | sl2_trail1 | 647.693 | 221.758 |
+| EURMXN | D1 | vao_lenh_mua_khi_rsi_thich_u | thi_truong | sl2_trail1 | 647.693 | 221.758 |
+| EURMXN | D1 | buy_signal | thi_truong | sl2_trail1 | 641.041 | 221.758 |
+| EURMXN | D1 | bat_xu_huong_tang_khi_gia_ph | thi_truong | sl2_trail1 | 640.756 | 221.758 |
+| EURMXN | D1 | shannon_entropy_trend_entry | thi_truong | sl2_trail1 | 640.608 | 221.758 |
+| EURMXN | D1 | geometric_signal_validator_b | thi_truong | sl2_trail1 | 640.040 | 221.758 |
+| EURMXN | D1 | mean_reversion_buy | thi_truong | sl2_trail1 | 639.506 | 221.758 |
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\TO_HOP_TONG_KET.md

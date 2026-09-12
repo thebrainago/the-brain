@@ -5,6 +5,22 @@ Chu du an 05/09/2026: *"thay doi quan diem ve viec phai chap nhan he thong dca,
 chap nhan DD cao hon. Con neu cu tim he single shot ma dat duoc cac tieu chi thi
 cac to chuc tai chinh ho da lam truoc roi"*.
 
+## RANH GIOI VOI `vao_lenh.moc_dd20` (ghi 12/09/2026 - DOC TRUOC KHI SUA)
+
+Hai ham cung tim don bay bang CHIA DOI de khop mot muc sut giam, va chung
+KHONG trung nhau:
+
+    `cong_ra_tien.mua_giu_khop_dd`  chi MUA-GIU (`np.ones`). La mot phan cua
+                                    CONG - di kem nguong MUC_CAGR/TRAN_DD/
+                                    MIN_LENH/MIN_NAM va luoi DON_BAY.
+    `vao_lenh.moc_dd20`             `max(mua-giu, BAN-GIU, tien mat)`. La MOC
+                                    cua PHEU `to_hop`, khong co nguong nao.
+
+Voi he long/short thi lay mot minh mua-giu lam moc la SAI (sua 11/09): ban-giu
+khong phai anh guong cua mua-giu vi phi qua dem bat doi xung. Nen trong pheu
+dung `moc_dd20`; o cong thi `mua_giu_khop_dd` du vi cong con hoi them nhieu thu.
+**Dung hop nhat hai ham** - chung phuc vu hai cau hoi khac nhau.
+
 DAY LA CONG THU HAI, KHONG PHAI CONG CU NOI LONG. Hai cong hoi hai cau khac
 nhau va khong duoc tron:
 

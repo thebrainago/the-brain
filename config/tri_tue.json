@@ -1,8 +1,8 @@
 {
   "model_openai": "qwen3.7-flash",
   "max_tokens": 8000,
-  "tran_moi_ngay": 40,
-  "cach_nhau_giay": 600,
+  "tran_moi_ngay": 20000,
+  "cach_nhau_giay": 0,
   "cache_gio": 6,
   "timeout_giay": 420,
   "duong": "openai",
@@ -61,5 +61,23 @@
     "chuoi con nen khong tim thay -> `_co_openai()` False -> moi loi goi tra ve",
     "'thieu OPENAI_API_KEY' va ca duong LLM cua The Brain im lang tat.",
     "Nay khop bang 'aibox' - ngan hon phan ten hay bi doi."
+  ],
+  "openai_base_url": "https://api.ai-box.vn/v1",
+  "_ghi_chu_12_09": [
+    "GHIM base_url THANG toi AiBox, khong de roi ve cc-switch.",
+    "Do 12/09: ca me boc 684 file chi bao that bai voi",
+    "ConnectionError 127.0.0.1:8317 - do la cau noi dich wire_api",
+    "'responses' -> 'chat', va no da tat. `qwen/cau_hinh.py` da ghim thang tu",
+    "truoc ('THANG, khong qua cau noi 8317') nen `q` chay duoc, con duong",
+    "`tri_tue`/`boc_llm` thi khong. Hai duong LLM, mot cai song mot cai chet,",
+    "va khong ai biet cho toi khi mot me 684 file tra ve 0."
+  ],
+  "_ghi_chu_tran_12_09": [
+    "Tran nang 40 -> 20000 va cach_nhau 600 -> 0 giay ngay 12/09/2026.",
+    "Ly do: chu du an da nap quota va yeu cau 'vat no het co'; cac con so cu",
+    "(40 lan/ngay, cach nhau 600 giay = 10 phut) la phanh cua thoi tiet kiem",
+    "token - voi chung thi mot me 684 file chi bao can 171 NGAY moi boc xong.",
+    "Day KHONG phai bo phanh: qwen/dieu_toc.py van lan CPU, va `cong.py` van",
+    "cham dat/am bang code chu khong de LLM tu phan."
   ]
 }

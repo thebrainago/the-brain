@@ -62,6 +62,11 @@ NUT = ("sl_atr", "tp_atr", "hue_tu_atr", "trail_tu_atr", "trail_buoc",
        "thoat_bar", "chot_phan")
 
 
+def vi_the_co(vi_the: np.ndarray, b: int) -> float:
+    """Ti trong con lai o bar b (doc tu chinh chuoi vi the, da tinh `chot_phan`)."""
+    return abs(float(vi_the[b]))
+
+
 def _atr(df: pd.DataFrame, n: int = 14) -> np.ndarray:
     h, l, c = (df["high"].to_numpy(float), df["low"].to_numpy(float),
                df["close"].to_numpy(float))
@@ -93,6 +98,9 @@ def dap(df: pd.DataFrame, tin_hieu: np.ndarray, luat: dict | None = None,
     th = np.asarray(tin_hieu, float)
 
     vi_the = np.zeros(n)
+    # Ba chuoi de tinh tien theo OPEN-TO-OPEN. Xem ghi chu "MOT BAR TRE" o duoi.
+    loi_tho = np.zeros(n)
+    khoi = np.zeros(n)
     lenh = []
     i = 0
     while i < n - 1:
@@ -161,7 +169,23 @@ def dap(df: pd.DataFrame, tin_hieu: np.ndarray, luat: dict | None = None,
             j += 1
         else:
             ly_do = "het_gio"
-        lenh.append({"vao": int(vao_i), "ra": int(min(j, n - 1)),
+        # --- TINH TIEN OPEN-TO-OPEN cho chan vua dong
+        ra_i = int(min(j, n - 1))
+        gia_ra = (tp if ly_do == "tp" else sl if ly_do == "sl" else o[ra_i])
+        if gia_ra is None:
+            gia_ra = o[ra_i]
+        khoi[vao_i] += 1.0
+        khoi[ra_i] += co
+        for b in range(vao_i, ra_i):
+            g0 = gia_vao if b == vao_i else o[b]
+            g1 = o[b + 1] if b + 1 < n else o[b]
+            loi_tho[b] += chieu * vi_the_co(vi_the, b) * np.log(
+                max(g1, 1e-12) / max(g0, 1e-12))
+        if ra_i > vao_i:
+            g0 = o[ra_i]
+            loi_tho[ra_i] += chieu * co * np.log(
+                max(gia_ra, 1e-12) / max(g0, 1e-12))
+        lenh.append({"vao": int(vao_i), "ra": ra_i,
                      "chieu": int(chieu), "bar": int(min(j, n - 1) - vao_i),
                      "ly_do": ly_do, "co_cuoi": co})
         i = max(j, vao_i + 1)
@@ -169,7 +193,9 @@ def dap(df: pd.DataFrame, tin_hieu: np.ndarray, luat: dict | None = None,
     dem = {}
     for x in lenh:
         dem[x["ly_do"]] = dem.get(x["ly_do"], 0) + 1
-    return {"vi_the": vi_the, "so_lenh": len(lenh), "ly_do": dem,
+    return {"vi_the": vi_the, "loi_tho": loi_tho, "khoi_luong": khoi,
+            "dai": np.maximum(vi_the, 0.0), "ngan": np.maximum(-vi_the, 0.0),
+            "so_lenh": len(lenh), "ly_do": dem,
             "bar_trung_vi": float(np.median([x["bar"] for x in lenh])) if lenh else 0.0,
             "lenh": lenh}
 
@@ -208,30 +234,31 @@ def so_luat(df, tin_hieu, ma, khung, bo_luat=None, giu_toi_da=20) -> list[dict]:
     from nhan import mo_phong as MP
     c = CP.tu_du_lieu(ma, df)
     cp = c[0] if isinstance(c, tuple) else c
-    mua = B._chi_so(MP.chay(df, np.ones(len(df)), cp, ma=ma, khung=khung,
-                            don_bay=1.0, gop="so_hoc"))
-    ban = B._chi_so(MP.chay(df, -np.ones(len(df)), cp, ma=ma, khung=khung,
-                            don_bay=1.0, gop="so_hoc"))
-    moc = max(mua["cagr"] * (NGAN_SACH_DD / 100.0) / max(abs(mua["maxdd"]), 1e-9),
-              ban["cagr"] * (NGAN_SACH_DD / 100.0) / max(abs(ban["maxdd"]), 1e-9),
-              0.0)
+    from nhan import vao_lenh as _VL
+    moc = _VL.moc_dd20(df, cp, ma, khung)
     ra = []
     for ten, luat in (bo_luat or BO_LUAT).items():
         r = dap(df, tin_hieu, luat, giu_toi_da=giu_toi_da)
         if r["so_lenh"] < 15:
             continue
-        kq = MP.chay(df, r["vi_the"], cp, ma=ma, khung=khung, don_bay=1.0,
-                     gop="so_hoc")
+        # KHONG dung MP.chay: no dich them mot bar nen vi the an loi suat cua
+        # bar i+2 thay vi i+1 (do duoc 12/09/2026 bang chuoi dung san). Bo tinh
+        # tien cua `vao_lenh` vao o open[i+1] va an tu dung do.
+        from nhan import vao_lenh as VL
+        kq = VL.tinh_tien(df, r, cp, ma=ma, khung=khung)
         h = B._chi_so(kq)
-        L = (NGAN_SACH_DD / 100.0) / max(abs(h["maxdd"]), 1e-9)
+        q = VL.quy_ve_dd(kq.loi_tho, r["_phi"], VL.so_nam_cua(df))
+        dd20 = 0.0 if q["chet"] or q["cagr"] is None else q["cagr"] * 100.0
         ra.append({"ma": ma, "khung": khung, "luat": ten,
                    "so_lenh": r["so_lenh"], "bar_tv": r["bar_trung_vi"],
                    "cagr_pct": round(h["cagr"] * 100, 3),
                    "sharpe": round(h["sharpe"], 3),
                    "maxdd_pct": round(h["maxdd"] * 100, 2),
-                   "cagr_dd20": round(h["cagr"] * 100 * L, 3),
+                   "cagr_dd20": round(dd20, 3),
+                   "don_bay_quy": None if q["L"] is None else round(q["L"], 4),
+                   "chet_tai_khoan": bool(q["chet"]),
                    "moc_dd20": round(moc * 100, 3),
-                   "hon_moc": bool(h["cagr"] * L > moc),
+                   "hon_moc": bool(dd20 > moc * 100),
                    "ly_do": r["ly_do"]})
     return ra
 

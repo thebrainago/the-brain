@@ -1,0 +1,46 @@
+{
+ "ma": "US500CASH",
+ "khung": {
+  "D1": {
+   "khung": "D1",
+   "so_doan": 434,
+   "so_cap": 209,
+   "bar": 4027,
+   "luat": {
+    "L1_hoi_theo_co_day": {
+     "hoi_khi_day_NHO_pct": 83.77,
+     "hoi_khi_day_LON_pct": 49.36,
+     "chenh": -34.4,
+     "p": 0.0025
+    },
+    "L2_nho_ty_le_hoi": {
+     "tu_tuong_quan": 0.0177,
+     "p": 0.3915
+    },
+    "L3_ben_huong": {
+     "ty_le_cung_chieu_pct": 48.56,
+     "null_pct": 54.33,
+     "p": 0.0424
+    },
+    "L4_cum_bien_do": {
+     "tu_tuong_quan": 0.3651,
+     "p": 0.0025
+    },
+    "L5_hoi_dung_o_moc_thang": {
+     "kc_trung_vi_pct": 1.6734,
+     "null_pct": 46.1765,
+     "gan_hon_lan": 27.594,
+     "p": 0.0083
+    }
+   }
+  }
+ },
+ "dat_tren_may_khung": {
+  "L1_hoi_theo_co_day": "1/1",
+  "L2_nho_ty_le_hoi": "0/1",
+  "L3_ben_huong": "1/1",
+  "L4_cum_bien_do": "1/1",
+  "L5_hoi_dung_o_moc_thang": "1/1"
+ },
+ "giay": 2.2
+}

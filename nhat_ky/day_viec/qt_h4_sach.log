@@ -1,0 +1,28 @@
+# qt_h4_sach
+# Quet quan tri H4 CHAY LAI sau khi sua bar hong
+# python _quet_quan_tri.py H4 0 10
+
+chay 27/159 ma trong 9s
+
+HO 1 - CAU TRUC VAO LENH (dd20 = lai %%/nam quy ve cung sut giam 20%%)
+CAU TRUC          MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+thi_truong        27     -1.284      4.177       5        1   -0.478
+dca_von           27     -1.343     68.243       6        5   -0.338
+dca_deu           27     -1.365     59.400       6        5   -0.306
+tt_hedge          27     -1.510      5.555       2        1   -0.554
+hai_dau_giu       27     -1.551      4.101       4        1   -0.604
+hai_dau_oco       27     -1.597      2.860       4        1   -0.676
+nhanh             27     -1.705      1.333       1        0   -1.042
+
+HO 2 - LUAT QUAN TRI
+LUAT                      MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+khong_gi                  27     -1.431      2.390       2        0   -0.397
+sl2_tp4                   27     -1.570      2.542       3        2   -0.629
+sl3_trail2                27     -1.593      4.245       4        0   -0.706
+sl2_tp4_hue1              27     -1.598      0.323       3        0   -0.865
+sl2_tp4_chot1             27     -1.600      3.242       3        1   -0.668
+sl2_trail1                27     -1.602      5.997       4        1   -0.653
+sl2_tp6_hue2_trail2       27     -1.624      0.274       1        0   -0.767
+chot_nhanh_sl1_tp1        27     -1.739     -0.045       0        0   -1.565
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\QUET_QUAN_TRI_H4.json

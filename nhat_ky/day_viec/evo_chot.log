@@ -1,0 +1,72 @@
+# evo_chot
+# EVO suc khoe + ghi van de vao so
+# python -m nhan.evo --ghi
+
+# EVO - SUC KHOE HE THONG
+
+*2026-09-12 15:14:08*
+
+TOT 8 · XAU 3 · CHUA DO 1
+
+`CHUA_DO` khong phai `XAU`. Mot chi so khong do duoc thi noi la khong
+do duoc - quy no ve 'xau' la cach mot bo giam sat tu bia ra van de.
+
+| chi so | gia tri | trang thai | bang chung |
+|---|---:|---|---|
+| `seeker.ty_le_doc` | 0.668 | TOT | 7336/10988 tai lieu co ban van |
+| `seeker.nguon_rong` | 5 | XAU | rong: etoro, fxblue, mql5_ma_nguon, quantconnect, rss_reddit_quant |
+| `quantlab.kho_co_che` | 1460 | TOT | 1460 co che, 1423 (97%) co truong `co_che` giai thich |
+| `quantlab.ho_so_song` | 1.4 | TOT | HO_SO_SONG.json ghi lan cuoi cach day 1 gio |
+| `quantlab.ho_so_mua_vu` | 1.8 | TOT | HO_SO_MUA_VU.json ghi lan cuoi cach day 2 gio |
+| `quantlab.ho_so_tuong_quan` | 1.1 | TOT | HO_SO_TUONG_QUAN_D1.json ghi lan cuoi cach day 1 gio |
+| `quantlab.ket_qua` | 1280 | TOT | 1280 dong trong ket_qua |
+| `evo.van_de_mo` | 86 | XAU | 86 van de chua dong |
+| `evo.bai_hoc` | 238 | TOT | 238 the bai hoc |
+| `evo.finder` | None | CHUA_DO | san_cong_cu = Finder cua so do |
+| `xay.hang_doi` | 17 | TOT | {'xong': 12, 'loi': 3, 'dang': 1, 'cho': 1} |
+| `xay.viec_hong` | 3 | XAU | kiem_bo(loi), kiem_lai(loi), kiem_cuoi(loi) |
+
+## Van de + cat nghia + de xuat
+
+### `seeker.nguon_rong` — nguon chua mang ve tai lieu nao
+
+**Do duoc:** rong: etoro, fxblue, mql5_ma_nguon, quantconnect, rss_reddit_quant
+
+**Cat nghia:** Nguon co the bi CHAN tren may nay, hoac bo doc cua no chua tung duoc goi. Hai chuyen khac han nhau - phai do tung nguon truoc khi goi la 'nguon chet'.
+
+**De xuat (chay duoc):**
+
+```
+python -m nhan.kham_pha_nguon   # do lai tung nguon, tach 'chan' khoi 'chua chay'
+```
+
+### `evo.van_de_mo` — van de con mo
+
+**Do duoc:** 86 van de chua dong
+
+**Cat nghia:** Van de mo don lai: dang ghi nhan nhanh hon dang dong.
+
+**De xuat:** chua co lenh san - can nguoi quyet dinh.
+
+### `xay.viec_hong` — viec loi / qua han
+
+**Do duoc:** kiem_bo(loi), kiem_lai(loi), kiem_cuoi(loi)
+
+**Cat nghia:** Mot viec xay hong. Hang doi tuan tu KHONG dung lai o loi, nen viec sau van chay - phai doc log de biet cai gi hong.
+
+**De xuat (chay duoc):**
+
+```
+xem nhat_ky/day_viec/<ma>.log roi `python day_viec.py --lam-lai <ma>`
+```
+
+## Chua do duoc (KHONG phai ket luan am)
+
+- `evo.finder`: san_cong_cu = Finder cua so do
+
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\EVO_SUC_KHOE.md
+khong ghi duoc van de 'EVO: nguon chua mang ve tai lieu nao': table van_de has no column named tieu_de
+khong ghi duoc van de 'EVO: van de con mo': table van_de has no column named tieu_de
+khong ghi duoc van de 'EVO: viec loi / qua han': table van_de has no column named tieu_de
+ghi 0 van de moi vao so

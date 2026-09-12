@@ -69,16 +69,24 @@ def _khoi_tao() -> None:
         cn.executescript(_SCHEMA)
 
 
-def hash_file(p: Path | str, dung_dem: bool = True) -> str:
-    """Bam noi dung file. `dung_dem=False` thi BAM LAI that, khong tin bo dem.
+def hash_file(p: Path | str, dung_dem: bool = False) -> str:
+    """Bam noi dung file. `dung_dem=True` moi tin bo dem.
 
-    Vi sao can co duong khong-dem: bo dem khoa theo (duong dan, so byte, mtime),
-    va mot file bi ghi de voi CUNG kich thuoc trong CUNG mot giay se giu nguyen
-    khoa - tuc mot thay doi di lot. Bai kiem `test_bam_lai_khi_file_doi` bat
-    dung tinh huong do.
+    ## MAC DINH DOI 12/09/2026: TU `True` SANG `False`
 
-    `kiem()` la noi PHAT HIEN thay doi nen no khong duoc tin bo dem. `ghim_ca_kho()`
-    thi can toc do hon (269 file parquet) va no dang GHI chu khong dang KIEM.
+    Bo dem khoa theo `(duong dan, so byte, mtime_ns)`. Mot file bi ghi de voi
+    CUNG kich thuoc trong cung mot nhip dong ho cua he tep se giu nguyen khoa -
+    tuc mot thay doi DI LOT, im lang. Ghi chu cu cua chinh ham nay da noi ro
+    dieu do, va `test_bam_lai_khi_file_doi` bat duoc that (tren Windows/NTFS,
+    hai lan ghi 5.000 byte lien tiep cho cung `mtime_ns`).
+
+    Nhung mac dinh khi do van la `True`, tuc **duong NGUY HIEM la duong mac
+    dinh** va duong an toan phai duoc nho. Mot bo "chup anh" de phat hien thay
+    doi ma bo sot thay doi thi te hon la khong co.
+
+    Nen gio: mac dinh BAM LAI. Ai can toc do thi khai ro `dung_dem=True` -
+    `ghim_ca_kho()` (269 file parquet) dang GHI chu khong dang KIEM, no duoc
+    phep tin bo dem.
     """
     p = Path(p)
     st = p.stat()
@@ -116,9 +124,10 @@ def ghim(ma: str, ghi_chu: str = "") -> dict:
             "so_byte=excluded.so_byte,so_dong=excluded.so_dong,"
             "khung_goc=excluded.khung_goc,tu=excluded.tu,den=excluded.den,"
             "ghim_luc=excluded.ghim_luc,ghi_chu=excluded.ghi_chu",
-            (ma, str(p), hash_file(p), p.stat().st_size, b.get("so_dong"),
+            (ma, str(p), hash_file(p, dung_dem=True), p.stat().st_size, b.get("so_dong"),
              b.get("khung_goc"), tu, den, SO.bay_gio(), ghi_chu))
-    return {"nhan": True, "ly_do": [], "file": str(p), "hash": hash_file(p)}
+    return {"nhan": True, "ly_do": [], "file": str(p),
+            "hash": hash_file(p, dung_dem=True)}
 
 
 def ghim_theo_ma() -> dict[str, dict]:

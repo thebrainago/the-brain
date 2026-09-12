@@ -65,6 +65,38 @@ MAC_DINH = {
 }
 
 
+#: DIEU KIEN CHI LA NHAN CANH BAO, KHONG CHAN. Quyet dinh cua chu du an 11/09:
+#:
+#:   "khong phai nhung mo hinh kinh te hay quan tri quy de ma can de cao qua
+#:    nhieu tieu chi hoc thuat hay cac chi tieu chat che. Muc dich cuoi cung la
+#:    co tien chap nhan ca chi phi va rui ro cao"
+#:
+#: Ranh gioi khong tuy tien: cai gi noi ve TIEN va ve TINH DUNG cua con so thi
+#: van chan (thang moc, phi do duoc, du lenh, khong an khe gia dao ngay). Cai gi
+#: chi noi "chua du bang chung theo chuan hoc thuat" thi ha xuong nhan.
+NHAN_MEM = {
+    "4_alpha_duong_co_y_nghia": "alpha khong dat muc y nghia thong ke",
+    "5_placebo": "placebo yeu - co the la ngau nhien",
+    "6_dang_ky_truoc": "khong dang ky truoc - rui ro tu lua minh khi quet rong",
+    "9_siet_phoi_nhiem_cao": "phoi nhiem cao ma chua chung minh duoc bu rui ro",
+    "10_qua_fdr_online": "khong qua nguong FDR online",
+}
+#: Cai VAN CHAN. Liet ke tuong minh de them mot dieu kien moi khong tu dong roi
+#: vao ben nao ma khong ai quyet dinh.
+CHAN_CUNG = ("1_loi_hon_mua_giu", "2_sharpe_hon_mua_giu", "3_calmar_hon_mua_giu",
+             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay")
+
+
+def che_do_cong() -> str:
+    """'nhan' (mac dinh) = cac tieu chi hoc thuat chi dan nhan. 'chan' = ban cu.
+
+    Doi bang `"che_do_cong": "chan"` trong config/nguong.json. Ban cu duoc giu
+    nguyen ven chu khong xoa: so `verdict_chan` van duoc tinh va ghi trong moi
+    phan quyet, nen bat ky luc nao cung doi chieu duoc hai cach doc.
+    """
+    return str(nguong().get("che_do_cong", "nhan")).lower()
+
+
 def nguong() -> dict:
     n = dict(MAC_DINH)
     if NGUONG_FILE.exists():
@@ -842,14 +874,25 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
                 f"{kq_fdr['nguong_fdr']:.5f} (phep thu thu {kq_fdr['thu_tu_trong_ho']} "
                 f"cua epoch '{kq_fdr['ho']}')")
 
-    qua_het = all(dk.values())
+    # --- CHAN CUNG hay NHAN CANH BAO (xem NHAN_MEM o dau file)
+    cd_cong = che_do_cong()
+    qua_het_chan = all(dk.values())
+    if cd_cong == "nhan":
+        thieu = [k for k in dk if k not in NHAN_MEM and k not in CHAN_CUNG]
+        if thieu:
+            raise KeyError("dieu kien chua phan loai chan/nhan: %s" % thieu)
+        qua_het = all(v for k, v in dk.items() if k not in NHAN_MEM)
+    else:
+        qua_het = qua_het_chan
+    nhan = [NHAN_MEM[k] for k, v in dk.items() if k in NHAN_MEM and not v]
+
     if qua_het and che_do == "nghien_cuu":
         # Tran cua che do nghien cuu. Khong bao gio PASS: chua ai chung minh
         # duoc rang thu nay giao dich duoc.
         verdict = "CO_CO_CHE"
         ly_do.append("qua het cong o che do nghien cuu - moi noi duoc ve CO CHE, "
                      "can chuoi giao dich duoc + chi phi DO DUOC de chung nhan")
-    elif qua_het and not da_dang_ky:
+    elif qua_het and not da_dang_ky and cd_cong != "nhan":
         verdict = "EXPLORATORY"
         ly_do.append("qua het cong nhung KHONG dang ky truoc -> khong bao gio PASS")
     elif qua_het and not tren_holdout:
@@ -861,8 +904,24 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         verdict = "FAIL"
         ly_do += [f"truot: {k}" for k, v in dk.items() if not v]
 
+    # Ban cu tinh song song de khong mat dau vet: doc `verdict_chan` la biet
+    # ung vien nay co qua duoc cong hoc thuat hay khong, du che do nao dang bat.
+    if qua_het_chan and che_do == "nghien_cuu":
+        v_chan = "CO_CO_CHE"
+    elif qua_het_chan and not da_dang_ky:
+        v_chan = "EXPLORATORY"
+    elif qua_het_chan and not tren_holdout:
+        v_chan = "UNG_VIEN"
+    elif qua_het_chan:
+        v_chan = "PASS"
+    else:
+        v_chan = "FAIL"
+    if nhan:
+        ly_do += ["NHAN: " + x for x in nhan]
+
     ra = {
         "verdict": verdict, "dieu_kien": dk, "ly_do": ly_do,
+        "nhan": nhan, "verdict_chan": v_chan, "che_do_cong": cd_cong,
         "so_sanh": ss, "placebo": pl, "giai_doan": giai_doan,
         "da_chay_placebo": pl is not None,
         "truot_cong_re": da_truot_re,

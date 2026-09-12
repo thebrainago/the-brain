@@ -27,6 +27,11 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b hinh-dang       hinh dang do co khac NGAU NHIEN khong (so voi chuoi null)
     b mde-nap [khung] nap TRUOC bang MDE cho ca be mat (D1: ~4 phut, mot lan)
     b thanh-phan      kho THANH PHAN thu hoi tu he bi loai + toan hang con thieu
+    b vong [--nhanh]  MOT LENH ca ba tru: SEEKER -> QUANTLAB -> EVO (6 chang)
+    b luat            15 LUAT DOC KET QUA (sinh tu loi da xay ra that)
+    b suy-nguoc [quet KHUNG]  truoc cu di manh co DAU HIEU gi (do dong thuan da ma)
+    b evo [--ghi]     EVO: suc khoe TUNG MODULE + cat nghia + de xuat chay duoc
+    b xay [--xem]     hang doi VIEC XAY (tuan tu, lien tuc, ben qua su co)
     b san             EVO di san cong cu/du an ngoai de tich hop
     b san-xem         xem kho cong cu da tim duoc
     b san-quet        nhat lai cong cu tu TOAN BO ban doc da co (khong tai gi moi)
@@ -40,7 +45,18 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b lui <file>      tra mot file ve ban da chot
     b qwen [lenh]     HE TU CHAY: qwen lam tiep bang viec (xem qwen/DOC_TRUOC.md)
                       `b qwen` = `q`. `b qwen trang-thai` xem bang. `b qwen kiem`.
-    b ban-do          ban do thu muc + file nao lam gi
+    b ban-do          SINH ban do tu ma nguon + chi ra module MO COI
+    b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
+    b phanh           han muc / kill-switch cua he chay that
+    b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
+    b luan-lenh       truy nguoc tu DANH SACH LENH that -> luat vao lenh
+    b chuyen          mang he sang KHUNG / TAI SAN khac (giu ty le kich hoat)
+    b dau-chan        400 ho so signal -> KIEU chien luoc x tai san
+    b im-lang         tang nao dang cam + nut that cua day chuyen
+    b don-dia         gop WAL (thu phinh lang le an gap doi dia)
+    b tien-ich        58 file tien ich bi bo: cai nao dang lay ve
+    b nen-tang        ma chien luoc tu cTrader / NinjaTrader / ...
+    b quy-luat [MA]   song co QUY LUAT khong (6 cau hoi + moc magnetic)
     b profile <file>  do cProfile mot script, in 25 dong ton nhat
 
 Nguyen tac: file nay chi DIEU HUONG. Khong co logic nghien cuu nao o day.
@@ -56,9 +72,12 @@ LAB = Path(__file__).resolve().parent
 GOC = LAB.parent
 DS = GOC / "ds"
 
-PY = Path(r"C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe")
-if not PY.exists():
-    PY = Path(sys.executable)
+# Trinh thong dich: `sys.executable`, khong go cung.
+#
+# Duong cu (`AppData\Local\Python\pythoncore-3.14-64\python.exe`) khong chi la
+# duong cua mot MAY - no la duong cua mot BAN CAI. Nang Python len 3.15, hoac
+# chuyen sang moi truong ao, hoac chuyen VPS: ca ba deu lam `b` gay ngay.
+PY = Path(sys.executable)
 
 
 def chay(cmd: list, cwd: Path = LAB) -> int:
@@ -192,6 +211,33 @@ def c_san(a):
     return chay([PY, LAB / "nhan" / "san_cong_cu.py", *a])
 
 
+def c_suy_nguoc(a):
+    """SUY NGUOC: truoc mot cu di manh thi co dau hieu gi (QUANTLAB noi sinh)."""
+    return chay([PY, "-m", "nhan.suy_nguoc", *a])
+
+
+def c_luat(_):
+    """15 luat doc con so - sinh tu loi da xay ra that."""
+    p = LAB / "LUAT_GIAM_SAT.md"
+    print(p.read_text(encoding="utf-8") if p.exists() else "chua co LUAT_GIAM_SAT.md")
+    return 0
+
+
+def c_vong(a):
+    """MOT LENH chay ca ba tru: SEEKER -> QUANTLAB -> EVO."""
+    return chay([PY, "-m", "nhan.vong_day_du", *a])
+
+
+def c_evo(a):
+    """EVO: suc khoe tung module + cat nghia + de xuat. `b evo --ghi` ghi van de."""
+    return chay([PY, "-m", "nhan.evo", *a])
+
+
+def c_xay(a):
+    """Hang doi VIEC XAY, chay tuan tu va lien tuc."""
+    return chay([PY, LAB / "day_viec.py", *a])
+
+
 def c_san_quet(_):
     return chay([PY, "-c",
                  "import sys;sys.path.insert(0,'.');"
@@ -265,9 +311,201 @@ def c_profile(a):
     return rc
 
 
-def c_ban_do(_):
-    print((LAB / "BAN_DO.md").read_text(encoding="utf-8")
-          if (LAB / "BAN_DO.md").exists() else "chua co BAN_DO.md")
+def c_phanh(a):
+    """Khai / xem / mo lai HAN MUC - cai phanh cua he chay that.
+
+    Them 12/09: EVO bat dau canh `phanh.chua_khai` va de xuat `b phanh <he>`.
+    Mot de xuat khong go duoc la mot loi khuyen rong - dung benh ma chinh
+    `nhan/evo.py` sinh ra de tranh.
+
+        b phanh                      liet ke han muc cua moi he
+        b phanh <he> --dd 20 --lenh 10 --phoi-nhiem 1.0 --von 1000
+        b phanh-mo <he>              mo lai sau khi bi ngat (PHAI co nguoi)
+    """
+    from nhan import han_muc as HM
+    from nhan import so as SO
+    a = a or []
+    if not a or a[0].startswith("-"):
+        HM._khoi_tao()
+        hs = SO.nhieu("SELECT * FROM han_muc ORDER BY he")
+        if not hs:
+            print("chua he nao khai han muc.")
+        for r in hs:
+            print("%-46s dd %5.1f%% | %2d lenh/ngay | phoi nhiem %.2f | von %.0f%s"
+                  % (r["he"][:46], (r["tran_sut_giam"] or 0) * 100,
+                     r["tran_lenh_ngay"] or 0, r["tran_phoi_nhiem"] or 0,
+                     r["tran_von"] or 0, "  [NGAT]" if r["ngat"] else ""))
+        chay = [r["ma"] for r in
+                SO.nhieu("SELECT ma FROM he_chay WHERE trang_thai <> 'DUNG'")]
+        thieu = [m for m in chay if not HM.cua(m)]
+        if thieu:
+            print("")
+            print("%d he DANG CHAY ma chua khai han muc:" % len(thieu))
+            for m in thieu:
+                print("   %s" % m)
+        return
+
+    def _so(ten, mac_dinh):
+        return float(a[a.index(ten) + 1]) if ten in a else mac_dinh
+
+    r = HM.dat(a[0], tran_sut_giam=_so("--dd", 20.0) / 100.0,
+               tran_lenh_ngay=int(_so("--lenh", 10)),
+               tran_phoi_nhiem=_so("--phoi-nhiem", 1.0),
+               tran_von=_so("--von", 1000.0))
+    print(r)
+
+
+def c_phanh_mo(a):
+    """Mo lai mot he da bi ngat. Theo thiet ke PHAI co nguoi lam viec nay."""
+    from nhan import han_muc as HM
+    if not a:
+        print("can ten he: b phanh-mo <he>")
+        return
+    print(HM.mo_lai(a[0], nguoi="nguoi_dung"))
+
+
+def c_quy_luat(a):
+    """SONG CO QUY LUAT KHONG - sau cau hoi, moi cau mot quy luat ung vien.
+
+    `ho_so_song` MO TA song; file nay hoi song co QUY LUAT khong - do la cho
+    sinh ra co che. Do 12/09 tren US500CASH D1: 4/5 quy luat dat, trong do
+    L5 "hoi dung o moc thang" (1,67% so voi null 46,18%) chinh la **moc
+    magnetic** ma so do neu ra.
+    """
+    return chay([PY, LAB / "nhan" / "quy_luat_song.py", *(a or [])])
+
+
+def c_tien_ich(a):
+    """58 file "TIEN ICH" bi bo o khau boc: cai nao dang LAY VE dung?
+
+    Chu du an 05/09: *"tien ich thi can xem xem cai nao phu hop de lay ve"*.
+    `phan_loai_ma` bo chung CO CHU DICH (khong dat lenh, khong buffer, khong lop
+    quan tri) - dung cho khau boc co che, nhung "khong co co che" khong co nghia
+    la "khong dung duoc": 31 file co `OnTick`, 19 co giao dien, 17 co
+    `OnChartEvent`. Do la cong cu van hanh.
+    """
+    return chay([PY, LAB / "nhan" / "tien_ich_xet.py", *(a or [])])
+
+
+def c_nen_tang(a):
+    """Ma nguon chien luoc tu cac NEN TANG GIAO DICH KHAC (cTrader, NinjaTrader...).
+
+    Dong so do: *"tim kiem da ngon ngu lap trinh nhu mql, c++, mql5 ctrader,..."*
+    """
+    return chay([PY, LAB / "nhan" / "nen_tang.py", *(a or [])])
+
+
+def c_don_dia(a):
+    """DON DIA: gop WAL + bao cai gi dang chiem cho.
+
+    12/09/2026: o C con 177 MB va ba me boc lien tiep bao "XONG rc=0" ma kho
+    khong nhich mot dong - loi that la `disk is full` bi nuot qua ba lop.
+    Thu pham chinh la `nao.db-wal` 1,4 GB (bang dung chinh `nao.db`): WAL chi
+    duoc gop khi mot checkpoint chay tron, tien trinh bi giet giua chung thi
+    no o lai va lon len lang le.
+    """
+    return chay([PY, "-m", "nhan.gop_wal", "--het", *(a or [])])
+
+
+def c_im_lang(a):
+    """TANG NAO DANG CAM - bang thong luong tung khau cua ca day chuyen.
+
+    Noi 12/09: `do_im_lang` mo coi. No tra loi noi so ma chu du an neu ra:
+    *"so nhat la gio no bug hoac bo sot ma khong biet tai dau"*. Do 12/09:
+    9 tang deu co dau ra, nut that la `ban doc -> thanh phan` 4,2%.
+    """
+    return chay([PY, LAB / "nhan" / "do_im_lang.py", *(a or [])])
+
+
+def c_dau_chan(a):
+    """LUAN NGUOC kieu chien luoc tu 400 ho so signal cong khai.
+
+    Noi 12/09: `tin_hieu_mql5` + `dau_chan` deu mo coi, va
+    `reports/signal_ho_so.json` (400 ho so) nam do tu truoc. Ba manh canh nhau
+    ma khong ai noi. Ket qua: luoi_dca 142 tai khoan, tai san dau bang AUDCAD 70.
+
+        b dau-chan                  phan loai het + bang tai san theo kieu
+        b dau-chan --kieu luoi_dca  cac tai khoan mot kieu, xep theo SONG BAO LAU
+    """
+    return chay([PY, "-m", "nhan.luan_dau_chan", *(a or [])])
+
+
+def c_chuyen(a):
+    """MANG MOT HE SANG KHUNG / TAI SAN KHAC ma no van la chinh no.
+
+    Gom ba module tung mo coi: `doi_khung` · `ngoai_sinh` · `quy_doi_tham_so`.
+    Nguyen tac chung: giu TY LE KICH HOAT, khong giu con so - cai khong doi khi
+    sang cho khac la DO HIEM cua su kien, khong phai nguong.
+
+        b chuyen --khung H4      he dang co -> khung khac
+        b chuyen --ma XAUUSDM    he DA PASS -> tai san khac
+    """
+    return chay([PY, "-m", "nhan.chuyen_he", *(a or [])])
+
+
+def c_luan_lenh(a):
+    """TRUY NGUOC tu DANH SACH LENH that -> luat vao lenh.
+
+    Dong so do: *"Xay dung kha nang truy nguoc lich su giao dich de tim ra
+    chien luoc roi dung mo phong chien luoc"*. Hai manh (`doc_lenh_tester` doc
+    bao cao tester, `mimic_cau_noi` dich luat sang DSL) deu mo coi cho toi
+    12/09 - hieu chuan da chay dung: tu 305 lenh cua he z5 no lay lai duoc
+    chinh luat cua z5 (`stochastic(20) <= 16,16`, ty le vao 0,629 = 2,52 lan nen).
+
+        b luan-lenh                        doc bao cao mac dinh
+        b luan-lenh <bao_cao.htm>          doc mot bao cao khac
+        b luan-lenh <bao_cao.htm> --luat <MA>   chung luat tu lenh that
+    """
+    return chay([PY, LAB / "nhan" / "doc_lenh_tester.py", *(a or [])])
+
+
+def c_quan_tri(a):
+    """CHUOI QUAN TRI VI THE - module chu du an goi la quan trong nhat.
+
+    Noi 12/09 sau khi ban do cho thay ca BA manh deu mo coi:
+    `quan_tri_dsl` (75 khai bao) · `dich_mq5_qtvt` · `de_quan_tri`.
+
+        b quan-tri              xem kho 75 khai bao
+        b quan-tri --dich-het   bao nhieu dich duoc sang MQL5, cai nao khong
+        b quan-tri --dich 3     in khoi MQL5 cua mot khai bao
+        b quan-tri --cap <EA.mq5> --khai-bao 3   sinh cap GOC / CO QUAN TRI
+    """
+    return chay([PY, "-m", "nhan.chuoi_quan_tri", *(a or [])])
+
+
+def c_quantlab(a):
+    """QUY TRINH QUANTLAB CHUAN 4 buoc (`CLAUDE.md`, chot 05/09).
+
+    Noi vao `b` ngay 12/09 sau khi `b ban-do` cho thay `day_chuyen_quantlab.py`
+    MO COI: quy trinh duoc ghi la CHUAN trong CLAUDE.md nhung khong cua vao nao
+    goi toi, tuc no chi chay khi co nguoi nho ra ma go tay. Do 12/09: chay het
+    19 giay va cho 127 co che + 8 ung vien - no van tot nguyen, chi la bi bo quen.
+    """
+    from nhan import day_chuyen_quantlab as DQ
+    kieu = "hoi_quy"
+    for x in (a or []):
+        if not x.startswith("-"):
+            kieu = x
+            break
+    DQ.chay(kieu=kieu, lam_moi="--moi" in (a or []))
+
+
+def c_ban_do(a):
+    """SINH lai ban do roi in. Khong in ban cu.
+
+    Truoc 12/09 lenh nay chi `print` file `BAN_DO.md`. File do viet TAY va da
+    cu 13 ngay, bo sot 11 module - tuc lenh nay dang phuc vu thong tin sai.
+    Nay no goi `nhan.ban_do.sinh()` doc thang tu ma nguon; `b ban-do --cu` neu
+    that su muon xem ban da ghi.
+    """
+    if "--cu" in (a or []):
+        print((LAB / "BAN_DO.md").read_text(encoding="utf-8")
+              if (LAB / "BAN_DO.md").exists() else "chua co BAN_DO.md")
+        return
+    from nhan import ban_do as BD
+    vb = BD.sinh(in_ra=None)
+    (LAB / "BAN_DO.md").write_text(vb, encoding="utf-8")
+    print(vb)
     return 0
 
 
@@ -452,10 +690,20 @@ LENH = {
     "hinh-dang": c_hinh_dang,
     "bg": c_bg, "bg-xem": c_bg_xem, "xa": c_xa, "xa-thu": c_xa_thu,
     "thanh-phan": c_thanh_phan, "san": c_san, "san-xem": c_san_xem, "san-quet": c_san_quet,
+    "evo": c_evo, "xay": c_xay, "suy-nguoc": c_suy_nguoc, "luat": c_luat,
+    "vong": c_vong,
     "tai-khoan": c_tai_khoan, "trinh-duyet": c_trinh_duyet,
     "ds": c_ds, "tim": c_tim,
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
+    "quantlab": c_quantlab, "ql": c_quantlab,
+    "phanh": c_phanh, "phanh-mo": c_phanh_mo,
+    "quan-tri": c_quan_tri, "qt": c_quan_tri,
+    "luan-lenh": c_luan_lenh, "chuyen": c_chuyen,
+    "dau-chan": c_dau_chan, "im-lang": c_im_lang,
+    "don-dia": c_don_dia,
+    "tien-ich": c_tien_ich, "nen-tang": c_nen_tang,
+    "quy-luat": c_quy_luat,
     # --- day chuyen 03/09/2026 ---
     "day-chuyen": c_day_chuyen, "dc": c_day_chuyen,
     "san-nguon": c_san, "boc": c_boc,

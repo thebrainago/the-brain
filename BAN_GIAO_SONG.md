@@ -4,128 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 19416, 0 phut)
-- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
-- `placebo_bichan_dama.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
-- git: 3e17b71 do cong `co_che`: no KHONG cat vao thit - va toi phai rut lai ket luan cach day 20 phut
-### 2026-09-06 23:10:35 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 4332, 0 phut)
-- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
-- `placebo_bichan_dama.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
-- git: bb7289c ban giao: 3 muc chu du an chot - seeker uu tien nguon co file, sua bo loc, tiep tuc z5
-### 2026-09-06 23:27:05 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5184, 0 phut)
-- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
-- `placebo_bichan_dama.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_rong.log`: -> reports/PLACEBO_RONG.json
-- `placebo_sau.log`: -> reports/PLACEBO_RONG.json
-- `tester_holdout2.log`: duong o CA HAI doan: 15/242
-- git: 6c5423b dien muc ban giao 06/09: mot doan doc la hieu ca phien
-### 2026-09-06 23:34:53 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13316, 0 phut)
-- `bi_chan.log`: co >=25 lenh VA sharpe >=0,8: 4/109
-- `don_bay.log`: when serializing dict item 'bang'
-- `placebo2.log`: KHONG DAT - con so cua ban that nam trong dam
-- `placebo_bichan.log`: DAT (ban that noi len khoi dam dich)
-- `placebo_bichan_dama.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_da_ma2.log`: -> reports/PLACEBO_DA_MA.json
-- `placebo_rong.log`: -> reports/PLACEBO_RONG.json
-- `placebo_sau.log`: -> reports/PLACEBO_RONG.json
-- git: 6c5423b dien muc ban giao 06/09: mot doan doc la hieu ca phien
-### 2026-09-07 14:13:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 4724, 0 phut), dieu_khien_xa.py (pid 2716, 20 phut)
-- `dieu_phoi_nen.log`: [Mon 09/07/2026 13:52:33.63] thay DUNG_LAI - khong khoi dong watchdog
-- git: 90bf715 chot ban giao song cuoi phien 06/09
-### 2026-09-07 16:43:19 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13220, 0 phut)
-- `DEM_GHEP.log`: @@@@ QT XONG 16:37
-- git: aadc9c0 ban giao 07/09: dien hai muc tay + bao cao phien
-### 2026-09-07 17:24:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3680, 0 phut)
-- `DEM_GHEP.log`: @@@@ XONG 17:19
-- git: 0c05cc1 truy xong vi sao ghep khong chuyen sang H4: chan H4 tuong quan voi nhau cao hon
-### 2026-09-07 20:07:23 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8352, 0 phut)
-- `DEM_GHEP.log`: A_be_nguyen   : >=25 lenh ca hai  84 | DUONG ca hai   4 | lai holdout   1140.59
-- git: edd7ec7 ghi chu phep thu H1 dang chay nen luc chot phien
-### 2026-09-07 21:27:16 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1184, 0 phut)
-- `DEM_GHEP.log`: B_chi_chu_ky  : >=25 lenh ca hai  75 | DUONG ca hai  40 | lai holdout  13741.14
-- git: 47d9c14 RUT LAI con so H1 cua _da_khung: EA nhieu-slot vs EA switch cho ket qua khac han
-### 2026-09-07 22:21:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18292, 0 phut)
-- `DEM_GHEP.log`: B_chi_chu_ky  : >=25 lenh ca hai  75 | DUONG ca hai  40 | lai holdout  13741.14
-- git: 47d9c14 RUT LAI con so H1 cua _da_khung: EA nhieu-slot vs EA switch cho ket qua khac han
-### 2026-09-07 22:39:49 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12248, 0 phut)
-- `DEM_GHEP.log`: @@@@ XONG 22:37
-- git: 47d9c14 RUT LAI con so H1 cua _da_khung: EA nhieu-slot vs EA switch cho ket qua khac han
-### 2026-09-07 23:08:45 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9300, 0 phut)
-- `DEM_GHEP.log`: @@@@ XONG 22:37
-- git: 9777f58 kho he thong quan li lenh: DSL + kho 75 co che + bo dich MQL5 hai che do
-### 2026-09-07 23:38:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19772, 0 phut)
-- `DEM_GHEP.log`: @@@@ XONG 23:33
-- git: cdc2857 luan phien 50 luat quan tri x 4 he nen: KHONG luat nao qua cong (>=3 he nen)
-### 2026-09-07 23:56:49 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17580, 0 phut)
-- `DEM_GHEP.log`: @@@@ XONG 23:33
-- git: 9f488f9 ban giao 07/09: nut that la CHAN BAN; kho quan li lenh xong nhung chua luat nao qua cong; Qwen chay tiep tu phien sau
-### 2026-09-07 23:58:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 20672, 0 phut)
-- `DEM_GHEP.log`: @@@@ XONG 23:33
-- git: 3f2d65c chot not ban giao song 07/09
-### 2026-09-08 14:30:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 15904, 0 phut), dieu_khien_xa.py (pid 1984, 24 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
-- git: 3f2d65c chot not ban giao song 07/09
-### 2026-09-08 14:40:20 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3432, 0 phut), dieu_khien_xa.py (pid 1984, 34 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
-- git: 3f2d65c chot not ban giao song 07/09
-### 2026-09-08 14:44:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12552, 0 phut), dieu_khien_xa.py (pid 1984, 38 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
-- git: 3f2d65c chot not ban giao song 07/09
-### 2026-09-08 15:01:21 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8768, 0 phut), dieu_khien_xa.py (pid 1984, 55 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
-- git: 3f2d65c chot not ban giao song 07/09
-### 2026-09-08 15:26:25 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 14492, 0 phut)
 - `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
 - git: 3f2d65c chot not ban giao song 07/09
@@ -404,3 +282,125 @@
 - dang chay: ban_giao_song.py (pid 13756, 0 phut), dieu_khien_xa.py (pid 15316, 360 phut)
 - `qwen_ultra.log`: ~ 13:05:06 | san sang 0 | CPU   48% / muc tieu 95%  |  con  9.4 loi  |  dang chay 1  [MANG:1]
 - git: f233587 Q2: nhan/ho_so_mua_vu.py - mua vu + entry-time cho 159 ma, va mot BAY NHAN DU LIEU
+### 2026-09-12 13:24:43 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9768, 0 phut), dieu_khien_xa.py (pid 15316, 378 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 323 phut); TT_boc (thuong truc, con 53 phut); TT_chi_bao (thuong truc,
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 14:03:13 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9156, 0 phut), dieu_khien_xa.py (pid 15316, 417 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 283 phut); TT_boc (thuong truc, con 13 phut); TT_chi_bao (thuong truc,
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 14:21:15 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13028, 0 phut), dieu_khien_xa.py (pid 15316, 435 phut)
+- `qwen_ultra.log`: ~ 14:21:09 | san sang 0 | CPU   57% / muc tieu 95%  |  con  7.7 loi  |  dang chay 1  [LLM:1]
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 14:54:28 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1944, 0 phut), dieu_khien_xa.py (pid 15316, 468 phut)
+- `qwen_ultra.log`: 3. **`ghi_nhat_ky('B1_corpus_vang', ...)`**: Đã ghi nhật ký, xác định rõ kết quả này là **CHƯA ĐỦ** do lỗi khâu chọn ứng viên (candidate selec
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 15:27:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3268, 0 phut), dieu_khien_xa.py (pid 15316, 501 phut)
+- `qwen_ultra.log`: ~ 15:27:12 | san sang 0 | CPU   23% / muc tieu 95%  |  con 14.3 loi  |  dang chay 2  [LLM:2]
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 15:53:40 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3956, 0 phut), dieu_khien_xa.py (pid 15316, 527 phut)
+- `qwen_ultra.log`: ~ 15:53:16 | san sang 0 | CPU   43% / muc tieu 95%  |  con 10.5 loi  |  dang chay 1  [LLM:1]
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 16:12:40 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9496, 0 phut), dieu_khien_xa.py (pid 15316, 546 phut)
+- `qwen_ultra.log`: ~ 16:11:17 | san sang 0 | CPU   53% / muc tieu 95%  |  con  8.4 loi  |  dang chay 1  [LLM:1]
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 16:14:46 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12900, 0 phut), dieu_khien_xa.py (pid 15316, 548 phut)
+- `qwen_ultra.log`: ~ 16:13:17 | san sang 0 | CPU   53% / muc tieu 95%  |  con  8.4 loi  |  dang chay 1  [LLM:1]
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 16:41:19 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13768, 0 phut), dieu_khien_xa.py (pid 15316, 575 phut)
+- `qwen_ultra.log`: ~ 16:41:19 | san sang 0 | CPU   49% / muc tieu 95%  |  con  9.3 loi  |  dang chay 2  [LLM:2]
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 16:56:07 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9680, 0 phut), dieu_khien_xa.py (pid 15316, 590 phut)
+- `qwen_ultra.log`: qwen> !! tac tu loi: OpenAIPermissionDeniedError: Error code: 403 - {'error': {'message': 'insufficient user quota, remaining: -190.0 đ (request id: 2
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 17:03:25 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10788, 0 phut), dieu_khien_xa.py (pid 15316, 597 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 103 phut); TT_boc (thuong truc, con 50 phut); TT_chi_bao (thuong truc,
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 17:21:26 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12744, 0 phut), dieu_khien_xa.py (pid 15316, 615 phut)
+- `qwen_ultra.log`: ~ 17:21:20 | san sang 0 | CPU    9% / muc tieu 95%  |  con 17.1 loi  |  dang chay 1  [MANG:1]
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 17:51:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10808, 0 phut), dieu_khien_xa.py (pid 15316, 645 phut)
+- `qwen_ultra.log`: qwen> !! tac tu loi: OpenAIPermissionDeniedError: Error code: 403 - {'error': {'message': 'insufficient user quota, remaining: -190.0 đ (request id: 2
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 18:07:20 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16956, 0 phut), dieu_khien_xa.py (pid 15316, 661 phut)
+- `qwen_ultra.log`: qwen> !! tac tu loi: OpenAIPermissionDeniedError: Error code: 403 - {'error': {'message': 'insufficient user quota, remaining: -190.0 đ (request id: 2
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 18:13:57 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14712, 0 phut), dieu_khien_xa.py (pid 15316, 668 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 33 phut); TT_boc (thuong truc, con 53 phut); TT_chi_bao (thuong truc, 
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 18:25:50 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 4464, 0 phut), dieu_khien_xa.py (pid 15316, 679 phut)
+- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 23 phut); TT_boc (thuong truc, con 43 phut); TT_chi_bao (thuong truc, 
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 18:47:09 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17028, 0 phut), dieu_khien_xa.py (pid 15316, 701 phut)
+- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 19:05:45 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17548, 0 phut)
+- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 19:28:42 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15520, 0 phut)
+- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 20:18:28 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14656, 0 phut)
+- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 20:29:06 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17632, 0 phut)
+- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 20:40:32 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 23504, 0 phut)
+- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 21:24:10 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9144, 0 phut)
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 21:29:00 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 23140, 0 phut)
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
+### 2026-09-12 22:11:22 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14108, 0 phut)
+- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """tinh_trang.py - In tinh trang hien tai de biet dang lam viec toi dau."""
 import sys
+from pathlib import Path
 
 
 if __name__ == "__main__":
@@ -8,7 +9,7 @@ if __name__ == "__main__":
     # chay het ca bai quet/ghi bao cao, ke ca khi nguoi goi chi muon
     # dung mot ham trong file.
 
-    sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     from nhan import so as SO
     from nhan import doc_trinh_duyet as DT
 

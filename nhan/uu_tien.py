@@ -21,8 +21,21 @@ den luc do thi cau hoi da nguoi.
     5. hoi `bai_hoc.tra` xem huong nay da tung di chua
     6. tra ve MOT ban tom tat doc duoc ngay
 
-Cai KHONG lam: khong backtest, khong ket luan tot/xau. Do la viec cua quantlab
-va cua cong. Cua nay chi rut ngan duong TU LINK DEN UNG VIEN.
+Cai `xu_ly` KHONG lam: khong backtest. Do la viec cua quantlab va cua cong.
+
+## BO SUNG 12/09/2026 - `phan_tich_ngay()`
+
+Chu du an viet "hay **phan tich** va uu tien luong toi gui ngay nhe". Doc lai
+thi "ngay" khong chi la doc ngay - la co CAU TRA LOI ngay. Truoc bo sung nay,
+sau khi `xu_ly` dang ky xong, ung vien van phai cho mot vong quantlab moi biet
+no co gi khong; ma hang doi do tung de 555 dong nam yen 13 ngay.
+
+Nen `phan_tich_ngay()` lam not hai viec:
+    1. xep hang doi QUANTLAB o **uu_tien = 0** (thap hon moi nguon may tu quet)
+    2. chay LUON mot lan kiem tren nhom tai san dai dien, ket luan bang TIEN
+
+Day la kiem NHANH, khong phai phan quyet: it ma, mot cau truc, khong holdout.
+No tra loi "co dang dao sau khong", con "co giao dich duoc khong" van la cong.
 """
 from __future__ import annotations
 
@@ -94,7 +107,29 @@ def _lay_van_ban(nguon: str) -> dict:
             f"lay duoc {len(vb)} ky tu - qua ngan de doc. Trang co the dang chan "
             f"bot; thu `b mang` (bat WARP) hoac mo CDP cho `doc_trinh_duyet`.")}
 
-    return {"nhan": False, "ly_do": "khong nhan ra nguon - can URL hoac duong dan file"}
+    # DINH GO SAI MOT DUONG DAN / URL. Phai noi ro, dung im lang coi no la van
+    # xuoi: mot URL go thieu chu "h" ma bi doc thanh "bai viet" se tra ve "0 co
+    # che" - va chu du an se tuong bai viet do khong co gi, thay vi biet minh go sai.
+    t = nguon.strip()
+    mot_tu = " " not in t
+    if mot_tu and (("/" in t) or ("\\" in t) or t.lower().startswith(("ht", "www."))
+                   or Path(t).suffix):
+        return {"nhan": False, "ly_do":
+                "trong giong mot duong dan/URL nhung khong mo duoc: %r. "
+                "Kiem lai chinh ta, hoac dan NOI DUNG vao thay vi duong dan."
+                % t[:80]}
+
+    # VAN BAN DAN THANG. Truoc 12/09/2026 cua nay chi nhan URL/file, nen khi chu
+    # du an go thang mot y tuong ("mua khi RSI 14 duoi 30, thoat khi tren 55")
+    # thi no tra ve "khong nhan ra nguon". Do la dung cai luong nay sinh ra de
+    # phuc vu, nen phai nhan - va neu van ban khong co luat nao thi `xu_ly` se
+    # bao "0 co che" kem danh sach cum chua hieu, ro hon "khong nhan ra nguon".
+    if len(t) >= 12 and not mot_tu:
+        return {"nhan": True, "van_ban": t,
+                "tieu_de": "chu du an go thang", "cach": "van_ban"}
+    return {"nhan": False, "ly_do":
+            "khong nhan ra nguon - can URL, duong dan file, hoac mot cau "
+            "(tu 12 ky tu tro len va nhieu hon mot tu)"}
 
 
 def xu_ly(nguon: str, ghi_kho: bool = True) -> dict:
@@ -119,6 +154,10 @@ def xu_ly(nguon: str, ghi_kho: bool = True) -> dict:
 
     try:
         bai = DH.doc_bai(vb, tieu_de, nguon)
+        if not bai and len(vb) < 120:
+            # Guard 120 ky tu cua `doc_bai` la de loc rac trong kho may quet.
+            # Thu cua CHU DU AN thi khong phai rac - mot cau luat cung tinh.
+            bai = DH.doc_bai(vb, tieu_de, nguon, toi_thieu=0)
     except Exception as e:
         return {"nhan": False, "ly_do": [f"doc_hieu nem loi: {type(e).__name__}: {e}"],
                 "nguon": nguon, "so_ky_tu": len(vb)}
@@ -160,6 +199,89 @@ def xu_ly(nguon: str, ghi_kho: bool = True) -> dict:
             "cum_chua_hieu": chua_hieu, "bai_hoc_lien_quan": da_thu}
 
 
+#: Nhom tai san dai dien de tra loi ngay. It ma nhung du lop (FX chinh, vang,
+#: chi so My) - cot de noi "co gi o day khong", khong phai de ket luan.
+MA_KIEM = ("EURUSD", "GBPUSD", "USDJPY", "XAUUSD", "XM_US500CASH", "XM_US100CASH")
+KHUNG_KIEM = ("D1", "H4")
+
+
+def phan_tich_ngay(kq: dict, xep_hang: bool = True, in_ra=print) -> dict:
+    """Xep hang doi o uu tien 0 VA chay kiem nhanh cho cac co che vua nhan.
+
+    `kq` la ket qua cua `xu_ly`. Tra ve chinh `kq`, them khoa `kiem_nhanh`.
+    """
+    import numpy as np
+    ten = [c["ten"] for c in (kq.get("co_che") or []) if c.get("ten")]
+    if not ten:
+        kq["kiem_nhanh"] = []
+        return kq
+
+    if xep_hang:
+        try:
+            from . import hang_doi as HD
+            r = HD.nap([{"tai_san": m, "khung": k, "template": t, "tham_so": {}}
+                        for t in ten for m in MA_KIEM for k in KHUNG_KIEM],
+                       nguon="chu_du_an", uu_tien=0)
+            in_ra("")
+            in_ra("XEP HANG DOI uu tien 0: them %d, da co %d"
+                  % (r.get("them", 0), r.get("da_co", 0)))
+        except Exception as e:
+            in_ra("khong xep duoc hang doi: %s: %s" % (type(e).__name__, e))
+
+    from . import du_lieu as DL
+    from . import ngu_phap as NP
+    from . import vao_lenh as VL
+    kho = {x.get("ten"): x for x in NP.doc_kho()}
+    bang = []
+    for t in ten:
+        spec = kho.get(t)
+        if spec is None:
+            continue
+        for ma in MA_KIEM:
+            for khung in KHUNG_KIEM:
+                try:
+                    df = DL.nap(ma, khung)
+                except Exception:
+                    continue
+                if len(df) < 800:
+                    continue
+                try:
+                    th = np.nan_to_num(np.asarray(NP.sinh_tu_spec(spec, df),
+                                                  float).reshape(-1), nan=0.0)
+                except Exception:
+                    continue
+                if int(np.sum(np.abs(th) > 0)) < 30:
+                    continue
+                b = VL.so_cau_truc(df, th, ma, khung, cac=["thi_truong"],
+                                   giu_toi_da=60)
+                if b:
+                    b[0]["co_che"] = t
+                    bang.append(b[0])
+    bang.sort(key=lambda d: -d["cagr_dd20"])
+    kq["kiem_nhanh"] = bang[:60]
+
+    in_ra("")
+    if not bang:
+        in_ra("KIEM NHANH: khong o nao du lenh de do "
+              "(co che qua thua tren nhom dai dien).")
+        return kq
+    in_ra("KIEM NHANH - %d o - xep bang TIEN o cung sut giam 20%%:" % len(bang))
+    in_ra("  %-24s %-14s %-4s %7s %9s %8s"
+          % ("CO CHE", "MA", "KH", "CHAN", "DD20%", "MOC%"))
+    for d in bang[:10]:
+        in_ra("  %-24s %-14s %-4s %7d %9.3f %8.3f%s"
+              % (str(d["co_che"])[:24], d["ma"], d["khung"], d["so_chan"],
+                 d["cagr_dd20"], d["moc_dd20"],
+                 "  <- hon moc" if d["hon_moc"] else ""))
+    hon = sum(1 for d in bang if d["hon_moc"])
+    in_ra("  => %d/%d o thang moc (max mua-giu / ban-giu / tien mat)."
+          % (hon, len(bang)))
+    if not hon:
+        in_ra("     Chua phai ket an: moi la mot cau truc, khong quan tri, "
+              "khong holdout.")
+    return kq
+
+
 def in_ra(kq: dict) -> None:
     if not kq["nhan"]:
         print("KHONG XU LY DUOC:", "; ".join(kq["ly_do"]))
@@ -189,6 +311,10 @@ def in_ra(kq: dict) -> None:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print('go: python -m nhan.uu_tien <url hoac duong dan file>')
+        print('go: python -m nhan.uu_tien <url hoac duong dan file> [--chi-doc]')
         sys.exit(2)
-    in_ra(xu_ly(sys.argv[1]))
+    _kq = xu_ly(sys.argv[1])
+    in_ra(_kq)
+    # Mac dinh PHAN TICH LUON. `--chi-doc` de ve hanh vi cu (chi boc, khong do).
+    if _kq.get("nhan") and "--chi-doc" not in sys.argv:
+        phan_tich_ngay(_kq)

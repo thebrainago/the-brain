@@ -176,6 +176,32 @@ class TestFdrV2(unittest.TestCase):
                 **self._epoch_kw())
         self.assertFalse(ra["dieu_kien"]["5_placebo"])
         self.assertEqual(ra["p_hop_thanh_fdr"], 1.0)
+        # Tu 12/09/2026 placebo la NHAN CANH BAO chu khong chan (che do "nhan",
+        # `config/nguong.json`). Nen cai phai kiem la: no VAN tieu mot suat FDR
+        # voi p=1, VAN hien ra thanh nhan, va ban doc cu VAN tra FAIL.
+        self.assertIn("placebo yeu - co the la ngau nhien", ra["nhan"])
+        self.assertEqual(ra["verdict_chan"], "FAIL")
+        self.assertEqual(ra["verdict"], "PASS")
+
+    def test_che_do_CHAN_van_tra_FAIL_khi_placebo_truot(self):
+        """Duong quay lai phai con: dat che_do_cong='chan' la ve y nguyen ban cu."""
+        idx = pd.date_range("2026-01-01", periods=100, freq="h")
+        kq_he = SimpleNamespace(
+            so_lenh=100, loi=np.zeros(100), index=idx, vi_the=np.ones(100))
+        so_sanh = {
+            "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
+                   "phoi_nhiem": 0.5, "so_bar": 100},
+            "mua_giu_net": {"tong_lai_pct": 1.0, "sharpe": 0.1, "calmar": 0.1},
+            "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 5.0},
+        }
+        placebo_truot = {"p_xau_nhat": 0.80, "null_hop_le": True,
+                         "bootstrap_hop_le": True}
+        with mock.patch.object(CONG.DO, "so_sanh", return_value=so_sanh),                 mock.patch.object(CONG.DO, "hieu_qua_giai_doan", return_value=[]),                 mock.patch.object(CONG, "placebo", return_value=placebo_truot),                 mock.patch.object(CONG, "che_do_cong", return_value="chan"):
+            ra = CONG.xet(
+                None, kq_he, SimpleNamespace(), SimpleNamespace(do_tin="DO", canh_bao=None),
+                da_dang_ky=True, tren_holdout=True,
+                economic_plan_hash="economic-plan-placebo-chan",
+                **self._epoch_kw())
         self.assertEqual(ra["verdict"], "FAIL")
 
 

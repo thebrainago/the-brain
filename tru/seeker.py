@@ -23,6 +23,7 @@ import json
 import re
 import sys
 import time
+import uuid
 from datetime import datetime, timezone
 from html import unescape
 from pathlib import Path
@@ -697,6 +698,206 @@ def n_semantic_scholar(tu_khoa: list[str]) -> list[dict]:
         time.sleep(3)
     return ra
 
+# ------------------------------------------------- FXBLUE / ETORO (12/09/2026)
+#
+# HAI NGUON NAY RUT KHOI `NGUON_TRINH_DUYET` VA VE DUONG `requests`.
+#
+# Chan doan 12/09/2026 - do that, khong phai doan. Hai dia chi seed cu:
+#
+#   fxblue  https://www.fxblue.com/marketdata/systemlist                 -> 404
+#   etoro   https://www.etoro.com/strategy-investing/copy-open-book-...  -> 404
+#
+# Ca hai nam trong `NGUON_TRINH_DUYET` nen chi duoc doc khi con Chrome CDP dang
+# mo. So cai ghi chung "chay sach": so_lan 4 va 3, so_loi 0, loi_lien_tuc 0 -
+# va **thu_hoach 0**. Do la vi mot trang 404 KHONG NEM NGOAI LE: 200 hay 404
+# thi `_duyet_tai_lieu` cung chi tra ve danh sach rong, va vong lap van ghi
+# `lan_cuoi` nhu mot luot thanh cong. Trieu chung nhin tu ngoai la "nguon im
+# lang"; nguyen nhan that la HAI DIA CHI SEED DA CHET.
+#
+# Do lai cung ngay bang `requests` + UA that: `www.fxblue.com` tra 200 /
+# 525.989 ky tu, `www.etoro.com` tra 200 / 181.219 ky tu, khong Cloudflare,
+# khong doi dang nhap. Hai ten mien do khong con ly do gi de chiem mot suat
+# trong ngan sach CDP (90 giay/luot, va CDP thuong TAT - luc do: `cdp_dang_
+# chay()` tra None).
+
+
+#: Duong dan fxblue KHONG mang noi dung nghien cuu: tai khoan, phap ly, quang
+#: cao moi gioi / prop firm. Loc NGAY O DAY chu khong loc sau, vi mot ban ghi
+#: rac trong `tai_lieu` con an mot suat cua hang doi `doc_toan_van`.
+FXBLUE_BO = ("/login", "/register", "/reset-password", "/about/", "/contact",
+             "/faq", "/brokers", "/prop-firms", "/demo-accounts",
+             "/competitions", "/news/n1cm/", "/news/scorecm/")
+
+#: 100 trong 235 dia chi cua sitemap la trang WIDGET theo tung ma - do that
+#: 12/09: 50 trang `/market-data/tools/chart/<MA>` + 50 trang
+#: `/market-data/tools/technical-analysis/<MA>` (EURUSD, XAUUSD, SP500...).
+#: Chung dung chung mot khung trang, chi khac ma, nen nhat ca vao se them 100
+#: ban ghi gan nhu trung nhau va hang doi doc bi chung chiem - dung cai bay
+#: "406 URL TradingView chet lam bao het ton kho" mot lan nua.
+FXBLUE_WIDGET = re.compile(
+    r"/market-data/tools/(?:chart|technical-analysis)/[A-Z0-9]+/?$")
+
+
+def n_fxblue(tu_khoa: list[str]) -> list[dict]:
+    """FX Blue qua SITEMAP - cho duy nhat con liet ke duoc noi dung that.
+
+    VI SAO SITEMAP chu khong phai boc anchor trang chu. Do 12/09/2026: trang
+    chu tra ve 525.989 ky tu HTML nhung chi **5.146 ky tu CHU** va **64 the
+    <a>**, gan het la thanh dieu huong lap lai (`/tools-for-download` 11 lan,
+    `/market-data` 7 lan). Boc anchor kieu `NGUON_TRINH_DUYET` o day cho ra vai
+    chuc muc menu, khong mot bai nao. `robots.txt` cua ho tro thang sang
+    sitemap, va sitemap co **235 dia chi** kem `lastmod`.
+
+    Bang chung la kho nay dang doc: trang huong dan
+    `/tools-for-download/fx-blue-trading-simulator/user-guide/metaTrader4` do
+    duoc **33.223 ky tu chu**, trong do co ca doan giai thich chi bao da khung
+    NHIN TRUOC duoc trong backtest truc quan cua MT4 - dung loai van ban du an
+    nay di tim. Bai tastyfx do duoc 4.351 ky tu.
+
+    `tu_khoa` khong dung: sitemap la mot danh sach dong, khong phai o tim kiem.
+    Giu tham so de dung chung chu ky goi `NGUON[ma]["ham"](tk)`.
+    """
+    txt = _lay("https://www.fxblue.com/sitemap.xml", timeout=30)
+    if not txt:
+        return []
+    ra = []
+    for kh in re.findall(r"<url>(.*?)</url>", txt, re.S):
+        m = re.search(r"<loc>\s*(.*?)\s*</loc>", kh, re.S)
+        if not m:
+            continue
+        u = m.group(1).strip()
+        duong = u.split("fxblue.com", 1)[-1] if "fxblue.com" in u else u
+        if duong.strip("/") == "" or any(b in duong for b in FXBLUE_BO):
+            continue
+        if FXBLUE_WIDGET.search(u):
+            continue
+        # TIEU DE LAY TU DUONG DAN, KHONG TU THE <title>. Do that 12/09: bai
+        # `/news/tastyfx/japanese-yen-soars-as-the-nikkei-logs-its-worst-day-
+        # since-1987` co <title> la **"Discord"** - khung trang dung chung nen
+        # the <title> bi ghi de. Duong dan thi luon ta dung bai, va doc no
+        # khong ton them lan tai trang nao (235 dia chi = 235 request neu doi
+        # doc title).
+        #
+        # GHEP CA DUONG DAN chu khong lay mot doan cuoi. Ban dau ham nay lay
+        # `rsplit("/", 1)[-1]` va do la mot loi do duoc ngay: 25 trong 103 muc
+        # co doan cuoi la `metaTrader4` (18 muc) hoac `metaTrader5` (7 muc) -
+        # tat ca deu thanh cung mot tieu de "[fxblue] metaTrader4". Tieu de la
+        # thu duy nhat nguoi (va tang xep hang) nhin thay truoc khi mo bai.
+        ten = " / ".join(p.replace("-", " ").strip()
+                         for p in duong.strip("/").split("/") if p)
+        if len(ten) < 4:
+            continue
+        if "/tools-for-download/" in duong:
+            hang, loai = "B", "ma_nguon"
+        elif "/news/" in duong:
+            hang, loai = "B", "blog"
+        else:
+            # Trang cong cu chung (sentiment, correlation-matrix, market-ranges):
+            # do duoc 3.552 ky tu va phan lon la mo ta giao dien -> hang C, co
+            # mat trong kho nhung khong tranh suat doc voi hang A/B.
+            hang, loai = "C", "cong_cu"
+        mod = re.search(r"<lastmod>\s*(.*?)\s*</lastmod>", kh, re.S)
+        ra.append({"tieu_de": f"[fxblue] {ten[:200]}", "url": u,
+                   "tom_tat": "fxblue sitemap"
+                              + (f", cap nhat {mod.group(1)[:10]}" if mod else ""),
+                   "hang": hang, "loai": loai})
+    return ra
+
+
+#: BO LOC BANG XEP HANG ETORO. Khong lay "top gain" tho.
+#:
+#: Do that 12/09/2026: bang tho co **3.636.551 tai khoan** va dung dau la rac
+#: thong ke - khong loc gi thi nguoi dan dau la `DiegoButron` voi Gain
+#: **6.923.152%**, tai khoan moi mo 6 thang va **0 nguoi copy**. Do la hieu ung
+#: von be, khong phai mot thanh tich.
+#:
+#: Loc lai con **477 nguoi**: co nguoi copy that (>=50), dang ky >=2 nam
+#: (104 tuan), >=100 lenh. Tuc mot chuoi von du dai de noi duoc dieu gi.
+ETORO_LOC = {
+    "istestaccount": "false", "blocked": "false", "popularinvestor": "true",
+    "copiersmin": "50", "weekssinceregistrationmin": "104", "tradesmin": "100",
+}
+
+#: Moi luot lay mot trang 50 nguoi va DI TIEP, khong doc lai trang 1 mai (bai
+#: hoc cua `_con_tro`: `n_mql5_code` tung dung o 35 tai lieu vi the).
+#: 477 nguoi / 50 = 10 luot la di het mot vong.
+ETORO_MOI_TRANG = 50
+
+
+def n_etoro(tu_khoa: list[str]) -> list[dict]:
+    """eToro qua API xep hang CONG KHAI `/sapi/rankings/rankings/`.
+
+    VI SAO KHONG BOC HTML - day la ket luan AM co bang chung, khong phai mot
+    lan thu that bai. Do 12/09/2026 bang `requests` + UA that:
+
+        /discover/people     200, 181.219 byte
+        /discover            200, 181.219 byte
+        /people/             200, 181.219 byte
+        /people/jaynemesis   200, 181.219 byte
+
+    **Dung cung mot so byte cho moi duong dan** - may chu khong he dinh tuyen,
+    no tra ve vo SPA roi JS dung noi dung sau. Vo do co **0 the <a>, 2 the
+    <div>, 0 ky tu chu**. Khong bo chon nao cuu duoc mot trang khong co gi.
+
+    Nhung chinh trang do goi mot API CONG KHAI khong can khoa, va API do tra ve
+    nhieu hon moi thu boc duoc tu DOM: Gain, AnnualizedReturn, RiskScore,
+    PeakToValley (sut giam dinh-day), WinRatio, Trades, ProfitableMonthsPct,
+    Exposure, LongPosPct... Nen duong doc cua `etoro` la JSON, khong phai DOM.
+
+    Ban ghi duoc dong goi DAY DU vao `tom_tat` va de o HANG C **co y**: trang
+    `/people/<ten>` la vo SPA nen `doc_toan_van` khong bao gio doc duoc no.
+    Hang A/B se day 50 dia chi chet mot luot vao hang doi doc roi tung cai bi
+    danh dau "khong doc duoc" - dung cai bay da tung lam bao "het ton kho".
+    """
+    ct = _con_tro("etoro")
+    trang = max(1, int(ct.get("trang") or 1))
+    tham = {"client_request_id": str(uuid.uuid4()), "period": "OneYearAgo",
+            "sort": "-gain", "pageSize": str(ETORO_MOI_TRANG),
+            "page": str(trang), **ETORO_LOC}
+    u = ("https://www.etoro.com/sapi/rankings/rankings/?"
+         + "&".join(f"{k}={v}" for k, v in tham.items()))
+    txt = _lay(u, timeout=30)
+    if not txt:
+        return []
+    try:
+        d = json.loads(txt)
+    except Exception:
+        return []
+    muc = d.get("Items") or []
+    # Het trang -> quay ve dau. `TotalRows` la so nguoi QUA BO LOC (477 khi do),
+    # khong phai 3,6 trieu tai khoan cua bang tho.
+    tong = int(d.get("TotalRows") or 0)
+    het = (not muc) or trang * ETORO_MOI_TRANG >= tong
+    ct["trang"] = 1 if het else trang + 1
+    ct["tong_qua_loc"] = tong
+    ct["vong"] = int(ct.get("vong", 0)) + (1 if het else 0)
+    _ghi_con_tro("etoro", ct)
+    ra = []
+    for it in muc:
+        ten = str(it.get("UserName") or "").strip()
+        if not ten:
+            continue
+        so = {"lai 1 nam %": it.get("Gain"),
+              "lai/nam %": it.get("AnnualizedReturn"),
+              "sut giam dinh-day %": it.get("PeakToValley"),
+              "diem rui ro": it.get("RiskScore"), "nguoi copy": it.get("Copiers"),
+              "so lenh": it.get("Trades"), "thang %": it.get("WinRatio"),
+              "thang co lai %": it.get("ProfitableMonthsPct"),
+              "phoi nhiem %": it.get("Exposure"),
+              "lenh mua %": it.get("LongPosPct"),
+              "so tuan hoat dong": it.get("ActiveWeeks"),
+              "tuan tu khi dang ky": it.get("WeeksSinceRegistration"),
+              "nuoc": it.get("Country")}
+        tom = "; ".join(f"{k} {v}" for k, v in so.items() if v is not None)
+        ra.append({
+            "tieu_de": f"[etoro] {ten} - lai/nam {it.get('AnnualizedReturn')}%, "
+                       f"sut giam {it.get('PeakToValley')}%, "
+                       f"{it.get('Copiers')} nguoi copy",
+            "url": f"https://www.etoro.com/people/{ten}",
+            "tom_tat": tom[:1900], "hang": "C", "loai": "track_record"})
+    return ra
+
+
 
 NGUON = {
     # Hai nguon HOC THUAT xuong uu_tien 3 ngay 30/08/2026 — do that, khong
@@ -723,6 +924,17 @@ NGUON = {
     # --- them 01/09: Pine Script kem MA, khong can CDP ---
     "tradingview_pine": {"ham": n_tradingview_pine, "chu_ky": 21600, "uu_tien": 1,
                          "loai": "ma_nguon"},
+    # --- chuyen tu NGUON_TRINH_DUYET sang day 12/09: ca hai doc duoc bang
+    # `requests`, nen giu chung ben do la tu buoc minh doi CDP (dang TAT) de
+    # doc mot thu khong can CDP. Xem khoi chu thich tren `n_fxblue`.
+    #
+    # `uu_tien` 3, khong phai 2 cua ban cu: chua co MOT ban ghi nao tu hai
+    # nguon nay (thu_hoach 0 sau 7 luot cong lai) nen chung chua chung minh
+    # duoc gi. Co so lieu ve roi hang moi duoc nang.
+    "fxblue":        {"ham": n_fxblue, "chu_ky": 86400, "uu_tien": 3,
+                      "loai": "cong_cu"},
+    "etoro":         {"ham": n_etoro, "chu_ky": 86400, "uu_tien": 3,
+                      "loai": "track_record"},
 }
 
 # Nguon DA KIEM THAT ngay 15/08 va KHONG vao duoc bang `requests`.
@@ -765,11 +977,9 @@ NGUON_TRINH_DUYET = {
                      "hang": "B", "loai": "track_record", "chu_ky": 43200, "uu_tien": 1},
     "collective2":  {"kieu": "trang", "trang": ["https://www.collective2.com/"],
                      "hang": "B", "loai": "track_record", "chu_ky": 86400, "uu_tien": 2},
-    "fxblue":       {"kieu": "trang", "trang": ["https://www.fxblue.com/marketdata/systemlist"],
-                     "hang": "B", "loai": "track_record", "chu_ky": 86400, "uu_tien": 2},
-    "etoro":        {"kieu": "trang",
-                     "trang": ["https://www.etoro.com/strategy-investing/copy-open-book-strategies/"],
-                     "hang": "B", "loai": "track_record", "chu_ky": 86400, "uu_tien": 2},
+    # `fxblue` va `etoro` DA RUT KHOI BANG NAY ngay 12/09/2026 - ca hai seed cu
+    # tra 404 va ca hai ten mien doc duoc bang `requests`. Chung nay o `NGUON`
+    # voi `n_fxblue` / `n_etoro`; chu thich chan doan day du nam tren `n_fxblue`.
     "zulutrade":    {"kieu": "trang", "trang": ["https://www.zulutrade.com/"],
                      "hang": "B", "loai": "track_record", "chu_ky": 86400, "uu_tien": 2},
     "darwinex":     {"kieu": "trang",

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import asyncio, sys
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 MUC_TIEU = [
   ("Reddit r/algotrading", "https://www.reddit.com/r/algotrading/hot/"),
   ("Reddit r/quant", "https://www.reddit.com/r/quant/hot/"),

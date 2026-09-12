@@ -7,7 +7,7 @@
   "an 60% thi lan CPU tu co lai - do la hanh vi dung. Muon chay mot lan voi muc",
   "khac ma khong sua file: `QWEN_CPU=70 q` (hoac set QWEN_CPU=70 tren cmd)."
  ],
- "muc_tieu_cpu": 95.0,
+ "muc_tieu_cpu": 62.0,
  "_ghi_chu_tran_lan": [
   "TESTER = 1 la RANG BUOC VAT LY, dung nang len. `chay_tester_kho` ghi de cung",
   "mot MQL5/Experts/<TEN_EA>.mq5, cung mot .ini, cung mot .xml, va may chi co",
@@ -29,8 +29,8 @@
   "bang ten: 5/6 file, 8 khai bao, ~160 dv moi khai bao giu duoc."
  ],
  "temperature": 0,
- "max_tokens": 8000,
- "timeout_giay": 300,
+ "max_tokens": 32000,
+ "timeout_giay": 600,
  "nhip_vong_giay": 20.0,
  "gio_bao_cao": 23,
  "nghi_den": 0,
@@ -56,12 +56,14 @@
  "che_do": "ultracode",
  "muc_tieu_cpu_ultra": 95.0,
  "tran_lan": {
-  "CPU": 6,
-  "LLM": 3,
-  "MANG": 3,
-  "NHE": 8,
+  "CPU": 3,
+  "LLM": 6,
+  "MANG": 4,
+  "NHE": 6,
   "TESTER": 1
  },
  "so_lan_thu_lai": 5,
- "toi_da_phut_mac_dinh": 1440
+ "toi_da_phut_mac_dinh": 1440,
+ "_ghi_chu_ultracode_max": "12/09/2026 chu du an: 'nap day quota, vat het co, bat ultracode maxtoken'. LLM 3->6 lan (quota da thong, va lan LLM cho o MANG chu khong an CPU). token 8.000->32.000: cat giua chung lam hong ca luot goi chu khong tiet kiem. timeout 300->600s theo token. TESTER VAN LA 1 - may co MOT terminal64.exe, ngan sach khong mua duoc cai thu hai (`nhan/khoa_tester.py`).",
+ "_ghi_chu_ha_tran": "12/09/2026 19:10 - chu du an choi game, ha tran CPU 95% -> 62%. Lan CPU 6->3 (lan nay moi cai mo them 4-6 tien trinh con nen no moi la thu an CPU that). LAN LLM GIU 6: no cho o MANG, khong an CPU - va do la lan dang lam ra viec nhat luc nay."
 }

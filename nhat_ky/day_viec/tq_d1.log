@@ -1,0 +1,39 @@
+# tq_d1
+# Q3 tuong quan D1 (ghi lai sau khi tach file)
+# python -m nhan.ho_so_tuong_quan D1
+
+gom 158/159 ma · 28875 hang
+tinh 11960 cap trong 39s
+  gia <= 0 (o hong lich su, da bo): YH_DAUWTI x1
+
+11960 cap · on dinh trung vi 0.988
+  cap cao bi loai vi TRUNG CONG CU: 21/328
+  cap am bi loai vi QUAN HE CO HOC: 137/386
+  cap TUONG QUAN CAO (>= 0.7): 307   <- dung chay hai he tren ca hai
+  cap TUONG QUAN AM  (<= -0.3): 249   <- ung vien GHEP
+
+10 cap CAO nhat (r · on dinh · bien do · bar chung):
+  GBPHKD|GBPUSD                  +0.981  1.00  0.005  727
+  XM_US30_SEP26|YH_DOWJONES      +0.973  1.00  0.009  2556
+  XM_US30CASH|YH_DOWJONES        +0.971  1.00  0.016  3770
+  YH_CAC40|YH_EUSTOXX50          +0.969  1.00  0.023  4853
+  AUDHKD|AUDUSD                  +0.969  1.00  0.020  852
+  XM_US2000CASH|YH_RUSSELL2000   +0.967  1.00  0.020  2238
+  DKKSEK|EURSEK                  +0.963  1.00  0.007  887
+  XM_EU50CASH|XM_FRA40CASH       +0.961  1.00  0.022  3832
+  TS_SPY|YH_DOWJONES             +0.960  1.00  0.041  5029
+  SP500|YH_DOWJONES              +0.957  1.00  0.038  8697
+
+10 cap AM nhat - ung vien ghep:
+  EURAUD|NZDCHF                  -0.637  0.93  0.154  6467
+  AUDSGD|USDCAD                  -0.631  1.00  0.094  1735
+  EURAUD|NZDJPY                  -0.549  0.67  0.169  6454
+  AUDHKD|EURNOK                  -0.534  1.00  0.059  852
+  AUDTHB|USDCAD                  -0.529  1.00  0.055  589
+  NZDJPY|XM_USDCAD               -0.522  0.73  0.179  5369
+  TS_SPY|XM_USDCAD               -0.519  0.63  0.198  5027
+  AUDJPY|CHFNOK                  -0.512  0.81  0.143  1777
+  NZDSGD|USDCAD                  -0.510  0.86  0.142  4873
+  SP500|XM_USDCAD                -0.508  0.61  0.199  5167
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HO_SO_TUONG_QUAN_D1.json

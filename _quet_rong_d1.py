@@ -18,8 +18,9 @@ import sys
 import time
 import warnings
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from pathlib import Path
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 warnings.filterwarnings("ignore")
 
 KHUNG = "D1"
@@ -31,7 +32,7 @@ def _mot_ma(ma: str) -> list[dict]:
     """Ca 262 co che tren MOT ma. Chay trong tien trinh con."""
     import warnings as w
     w.filterwarnings("ignore")
-    sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     from nhan import da_thoi_dai as DT
     from nhan import do_luc as DL
     from nhan import ngu_phap as NP

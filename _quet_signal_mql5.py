@@ -29,7 +29,7 @@ import sys
 import time
 import warnings
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
@@ -38,6 +38,7 @@ import requests
 
 from nhan import dau_chan as DC
 from nhan import tin_hieu_mql5 as TH
+from pathlib import Path
 
 RA = "reports/signal_ho_so.json"
 SO_TRANG = 14

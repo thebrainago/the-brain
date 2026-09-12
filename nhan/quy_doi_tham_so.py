@@ -146,8 +146,13 @@ def quy_doi(khai: list[dict], atr_goc: float, atr_dich: float,
             nv = v
             (ngo if dv == "khong_ro" else giu).append(k["ten"])
         if nv != v:
+            # `chu_thich` KHONG bat buoc: ham nay duoc goi ca tu `rut_khai_bao`
+            # (co chu thich, doc tu ma nguon EA) lan tu `chuyen_he` (chi co ten
+            # + gia tri). Doi no thanh truong bat buoc lam ham no voi moi nguoi
+            # goi thu hai, va loi do khong hien ra o docstring.
             doi.append({"ten": k["ten"], "cu": v, "moi": round(nv, 6),
-                        "don_vi": dv, "chu_thich": k["chu_thich"][:60]})
+                        "don_vi": dv,
+                        "chu_thich": str(k.get("chu_thich") or "")[:60]})
         moi[k["ten"]] = nv
     return {"tham_so": moi, "ty_le_atr": round(ty_atr, 6),
             "ty_le_diem": round(ty_diem, 6), "da_doi": doi,

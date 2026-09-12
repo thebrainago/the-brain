@@ -5,13 +5,14 @@ Khac han cau hoi cua cong ("co thang mua-giu ve Sharpe/Calmar khong").
 Chay o nhieu muc don bay, tren TRAIN, khong cham holdout.
 """
 import sys, json, warnings
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
 import numpy as np
 from nhan import bien_don_bay as B, chi_phi as CP, da_thoi_dai as DT
 from nhan import du_lieu as DU, ngu_phap as NP
+from pathlib import Path
 
 MUC_CAGR, MUC_DD = 0.20, 0.60
 DON_BAY = (1.0, 2.0, 3.0, 4.0, 5.0, 6.0)

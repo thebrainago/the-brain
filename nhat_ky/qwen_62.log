@@ -1,0 +1,269 @@
+!! 2 viec con DANG_CHAY tu lan truoc -> danh dau GIAN_DOAN
+
+==============================================================================
+QWEN DIEU PHOI — muc tieu CPU 62% tren 20 loi
+==============================================================================
+dung: `q dung` (hoac tao file lab/DUNG_QWEN) | Ctrl-C cung an toan
+[x] ngay1 uu0 NHE    M0_don_mo_coi          DAT       Don tien trinh mo coi (thu lam he TU TE LIET)  20s
+[x] ngay1 uu0 NHE    N0_don_dia             DAT       Do dia truoc khi cho tester chay - bay B4 cua 08  20s
+[~] ngay1 uu0 CPU    X0_bo_test             DAT       THUONG TRUC: chay bo test cua lab (4 cai dang HO  922s
+[x] ngay1 uu1 LLM    TT_boc                 DAT       THUONG TRUC: qwen doc toan van + boc co che (moi  380s
+[x] ngay1 uu1 LLM    TT_chi_bao             DAT       THUONG TRUC: qwen boc co che tu file CHI BAO (ha  160s
+[x] ngay1 uu1 TESTER V1_dao_GER40           CHUA_DO_DUOC Dao chieu + ghep tren GER40Cash  2047s
+[x] ngay1 uu1 TESTER V1_dao_UK100           CHUA_DO_DUOC Dao chieu + ghep tren UK100Cash  2868s
+[x] ngay1 uu1 TESTER V1_dao_JP225           CHUA_DO_DUOC Dao chieu + ghep tren JP225Cash  1863s
+[ ] ngay1 uu1 NHE    C1_khau_doc                      [CLAUDE] Khoi 1A - sua khau doc: loai_cau co do   <- CAN NGUOI
+[x] ngay1 uu1 NHE    C1_toan_hang_chet      DAT       [CLAUDE] Khoi 1A - truy 12 toan hang CHUA AI DUN  <- CAN NGUOI
+[x] ngay1 uu1 LLM    L1_boc_llm_kho         DAT       LLM boc co che tu kho van ban (200 ban doc moi l  160s
+[x] ngay1 uu2 TESTER V1_dao_AUS200          CHUA_DO_DUOC Dao chieu + ghep tren AUS200Cash  1321s
+[x] ngay1 uu2 TESTER V1_dao_FRA40           CHUA_DO_DUOC Dao chieu + ghep tren FRA40Cash  1001s
+[x] ngay1 uu2 CPU    B1_do_corpus           DAT       THUONG TRUC: do lai tran ngu phap (tang A/B/C) -  301s
+[x] ngay1 uu2 LLM    B1_corpus_vang         DAT       qwen dung CORPUS VANG: cau THAT SU phat bieu mot  761s
+[~] ngay1 uu2 CPU    Q1_to_hop_toan_hang_moi           To hop D1+H4 voi toan hang MOI (mau nen, 5 chi b
+[x] ngay1 uu2 NHE    E1_evo_bao_xa          DAT       EVO do suc khoe + bao ra Telegram khi tap van de  20s
+[x] ngay1 uu3 CPU    P1_ghep_holdout        DAT       Cham lai cap tren train + doc holdout (KHONG ton  20s
+[x] ngay1 uu3 CPU    P2_ghep_da_tai_san     DAT       Ghep cheo tai san (KHONG ton tester)  20s
+[x] ngay1 uu3 CPU    Q2_suy_nguoc_H4        DAT       Suy nguoc dau hieu truoc su kien tren H4  60s
+[x] ngay1 uu4 CPU    P3_tinh_cach           DAT       Do tinh cach tai san (Hurst) cho cac ma vua chay  60s
+[x] ngay1 uu4 MANG   TT_san_nguon           DAT       THUONG TRUC: day chuyen san nguon moi (seeker ->  2162s
+[x] ngay1 uu4 CPU    Q3_ho_so_song_H4       DAT       Ho so song + moc magnetic tren H4 cho toan kho  20s
+[x] ngay1 uu5 CPU    Q4_quan_tri_H4         DAT       Quet ca hai ho quan tri tren H4  40s
+[x] ngay1 uu6 NHE    V1_san_sang_vps        DAT       Do lai do san sang chuyen VPS  20s
+[x] ngay2 uu1 TESTER V3_placebo             CHUA_DO_DUOC Placebo rong cho chan dao chieu tren 4 ma  460s
+[x] ngay2 uu2 TESTER V1_dao_EU50            CHUA_DO_DUOC Dao chieu + ghep tren EU50Cash  1041s
+[x] ngay2 uu2 TESTER V1_dao_HK50            CHUA_DO_DUOC Dao chieu + ghep tren HK50Cash  1142s
+[x] ngay2 uu2 TESTER V1_dao_US2000          CHUA_DO_DUOC Dao chieu + ghep tren US2000Cash  1041s
+[x] ngay2 uu2 TESTER V2_dat_hue             AM        Bat DAT HUE vao cap ra tien  120s
+[x] ngay2 uu2 MANG   S2_mql5_code_base      AM        THUONG TRUC: tai ma nguon MQL5 Code Base (nguon   20s
+[x] ngay2 uu3 TESTER V5_bo_ba_US100         CHUA_DO_DUOC Ghep BO BA tren US100Cash + khu trung theo duong  400s
+[x] ngay2 uu3 TESTER V5_bo_ba_GER40         CHUA_DO_DUOC Ghep BO BA tren GER40Cash + khu trung theo duong  1081s
+[ ] ngay2 uu3 NHE    C2_so_bai_hoc                    [CLAUDE] Khoi 2 - bang bai_hoc + nhan/bai_hoc.py  <- CAN NGUOI
+[ ] ngay2 uu3 LLM    B2_the_bai_hoc                   qwen phan loai 1.255 dong FAIL + 192 JSON thanh   <- cho C2_so_bai_hoc
+[ ] ngay3 uu1 NHE    M1_tai_du_lieu                   TAI M1 VE MT5 (viec cua chu du an - can giao die  <- CAN NGUOI
+[ ] ngay3 uu1 TESTER R1_doi_chung_slot                Doi chung EA switch vs EA nhieu-slot tren D1 voi  <- CAN NGUOI
+[ ] ngay3 uu2 TESTER V4_stop_hai_dau                  Lenh stop hai dau (gia thuyet #2 - breakout grid  <- cho M1_tai_du_lieu
+[x] ngay3 uu3 CPU    S1_do_suat_doc_ma      DAT       Do suat boc theo LOP NGUON (reddit_td / hackerne  60s
+[x] ngay3 uu4 TESTER V6_khung_nho_GER40     CHUA_DO_DUOC Quet chan TRUC TIEP tren H4 cua GER40Cash  200s
+[x] ngay3 uu4 TESTER V6_khung_nho_UK100     CHUA_DO_DUOC Quet chan TRUC TIEP tren H4 cua UK100Cash  200s
+[x] ngay3 uu4 TESTER V6_khung_nho_JP225     CHUA_DO_DUOC Quet chan TRUC TIEP tren H4 cua JP225Cash  180s
+  [>] X0_bo_test             CPU    pid 2412   THUONG TRUC: chay bo test cua lab (4 cai  (ok (con 6.3 loi))
+  [>] Q1_to_hop_toan_hang_moi CPU    pid 13488  To hop D1+H4 voi toan hang MOI (mau nen,  (ok (con 6.3 loi))
+  ~ 19:18:11 | san sang 0 | CPU   30% / muc tieu 62%  |  con  6.3 loi  |  dang chay 2  [CPU:2]
+  ~ 19:20:11 | san sang 0 | CPU   50% / muc tieu 62%  |  con  2.3 loi  |  dang chay 2  [CPU:2]
+  ~ 19:22:11 | san sang 0 | CPU   54% / muc tieu 62%  |  con  1.6 loi  |  dang chay 2  [CPU:2]
+  ~ 19:24:12 | san sang 0 | CPU   58% / muc tieu 62%  |  con  0.9 loi  |  dang chay 2  [CPU:2]
+  ~ 19:26:12 | san sang 0 | CPU   60% / muc tieu 62%  |  con  0.4 loi  |  dang chay 2  [CPU:2]
+  ~ 19:28:12 | san sang 0 | CPU   60% / muc tieu 62%  |  con  0.3 loi  |  dang chay 2  [CPU:2]
+  ~ 19:30:12 | san sang 0 | CPU   65% / muc tieu 62%  |  con -0.5 loi  |  dang chay 2  [CPU:2]
+  [>] M0_don_mo_coi          NHE    pid 23272  Don tien trinh mo coi (thu lam he TU TE   (ok (con 0.4 loi))
+  [x] M0_don_mo_coi          DAT  |  chay xong, ma thoat 0
+  qwen> **Ket qua M0_don_mo_coi da duoc xu ly:**
+         
+         (1) **Log ket qua**: Chay xong trong 20 giay, ma thoat 0. Con so duy nhat: `so_dong = 0`.
+         
+         (2) **File bao cao**: Khong co file JSON/MD nao duoc sinh ra cho viec nay.
+         
+         (3) **Nhat ky da duoc ghi**: 
+         - 0 tien trinh mo coi duoc tim thay trong mien 20 cay dieu phoi
+         - Ket qua AM THUC, khong phai hong/thieu du lieu
+         - He thong dang hoat dong dung, khong co risk deadlock
+         
+         (4) **De xuat tiep theo**: `K2_kiem_tra_2` da duoc xep vao hang cho. Viec nay se kich hoat gi
+  ~ 19:32:13 | san sang 0 | CPU   58% / muc tieu 62%  |  con  0.7 loi  |  dang chay 2  [CPU:2]
+  ~ 19:34:13 | san sang 0 | CPU   56% / muc tieu 62%  |  con  1.3 loi  |  dang chay 2  [CPU:2]
+  [>] B1_do_corpus           CPU    pid 2764   THUONG TRUC: do lai tran ngu phap (tang   (ok (con 2.2 loi))
+  ~ 19:36:13 | san sang 0 | CPU   51% / muc tieu 62%  |  con  2.2 loi  |  dang chay 3  [CPU:3]
+  [>] S2_mql5_code_base      MANG   pid 21576  THUONG TRUC: tai ma nguon MQL5 Code Base  (ok (con 1.9 loi))
+  [x] S2_mql5_code_base      AM  |  ghi_moi = 0, khong vuot 0 - lan chay nay KHONG them duoc gi (khac han 'chay hong')
+  ~ 19:38:13 | san sang 0 | CPU   54% / muc tieu 62%  |  con  1.5 loi  |  dang chay 3  [CPU:3]
+  qwen> Da hoan thanh ca 4 buoc:
+         
+         1. **`doc_ket_qua('S2_mql5_code_base')`**: Trạng thái XONG, kết quả **AM** — `ghi_moi = 0`, không vượt ngưỡng 0.
+         2. **`doc_file_bao_cao('QWEN_MA_NGUON.json')`**: File tồn tại nhưng rỗng — `nhìn_thấy=0, tải_được=0, ghi_mới=0`. Chỉ truy cập được 2 trang (experts, indicators) nhưng không phân tích được nội dung.
+         3. **`ghi_nhat_ky`**: Đã viết 4 câu, giải thích con số 0 sinh từ 2 phép thu, chưa có khả năng kết nối web MQL5.
+         4. **`de_xuat_viec('S3_tim_mql5_da_co')`**: Đề xuất kiểm tra code MQL5 đã có sẵn trong lab — vì việc thu t
+  [x] B1_do_corpus           DAT  |  chay xong, ma thoat 0, file ra co 4 dong
+  ~ 19:40:14 | san sang 1 | CPU   62% / muc tieu 62%  |  con  0.1 loi  |  dang chay 2  [CPU:2]
+  qwen> Đã hoàn tất xử lý việc `B1_do_corpus`:
+         
+         1. **Kết quả**: **DAT** (chạy xong, thoát 0, file ra có 4 dòng).
+         2. **Phân tích**:
+            - Tổng cộng 300 câu đã thử (150 Tạng A + 150 Tạng B).
+            - Tỷ lệ **82% KHÔNG_NÓI** cho thấy bộ lọc ngữ pháp đang chặn mạnh các mô tả kỹ thuật do thiếu từ vựng cốt lõi ('vùng', 'sóng', 'hình_học').
+            - Dữ liệu đầu vào bị nghẽn ở khâu phân loại, cần mở rộng từ khóa để giải phóng mẫu phân tích thực sự.
+         3. **Đề xuất tiếp theo**: Đã xếp việc `B2_kiem_co_che` vào hàng chờ để kiểm tra hiệu suất của 14 cơ chế "CHUA
+  ~ 19:42:14 | san sang 1 | CPU   56% / muc tieu 62%  |  con  1.2 loi  |  dang chay 2  [CPU:2]
+  [t] X0_bo_test             qua gio, da giet
+  ~ 19:44:14 | san sang 1 | CPU   54% / muc tieu 62%  |  con  1.6 loi  |  dang chay 1  [CPU:1]
+  ~ 19:46:15 | san sang 1 | CPU   55% / muc tieu 62%  |  con  1.4 loi  |  dang chay 1  [CPU:1]
+  [>] M0_don_mo_coi          NHE    pid 23512  Don tien trinh mo coi (thu lam he TU TE   (ok (con 1.2 loi))
+  [x] M0_don_mo_coi          DAT  |  chay xong, ma thoat 0
+  qwen> Da hoan tat pho tuong cho viec `M0_don_mo_coi`:
+         
+         **Ket qua:**
+         - **Trang thai:** DAT (chay xong, ma thoat 0)
+         - **So do duoc:** `so_dong = 0` — khong co tien trinh mo coi trong mien 12 cay dieu phoi
+         
+         **Nhat ky da ghi:** Ket qua 0 dong khang dinh he khong co tinh chat tu te liet o muc M0. Co the la cac tiep diem khong lap lai o muc do co ban, hoac phuong phap do khong bat duoc hien tuong nay.
+         
+         **De xuat tiep theo:** Da xep viec `M1_tu_te_liet` vao hang doi de kiem tra tu te liet o muc M1 (cap cao hon). Neu M1 cung am thi co t
+  ~ 19:48:15 | san sang 1 | CPU   58% / muc tieu 62%  |  con  0.8 loi  |  dang chay 1  [CPU:1]
+  ~ 19:50:15 | san sang 1 | CPU   51% / muc tieu 62%  |  con  2.2 loi  |  dang chay 1  [CPU:1]
+  ~ 19:52:15 | san sang 1 | CPU   51% / muc tieu 62%  |  con  2.1 loi  |  dang chay 1  [CPU:1]
+  ~ 19:54:15 | san sang 1 | CPU   51% / muc tieu 62%  |  con  2.2 loi  |  dang chay 1  [CPU:1]
+  ~ 19:56:16 | san sang 1 | CPU   52% / muc tieu 62%  |  con  1.9 loi  |  dang chay 1  [CPU:1]
+  ~ 19:58:16 | san sang 1 | CPU   49% / muc tieu 62%  |  con  2.7 loi  |  dang chay 1  [CPU:1]
+  ~~ bang viec vua doi -> da nap lai (43 viec, moi: V2_vong_day_du)
+  [>] V2_vong_day_du         CPU    pid 4132   VONG DAY DU: SEEKER -> QUANTLAB -> EVO (  (ok (con 2.7 loi))
+  ~ 20:00:16 | san sang 1 | CPU   61% / muc tieu 62%  |  con  0.3 loi  |  dang chay 2  [CPU:2]
+  ~ 20:02:16 | san sang 2 | CPU   66% / muc tieu 62%  |  con -0.8 loi  |  dang chay 2  [CPU:2]
+  ~ 20:04:17 | san sang 2 | CPU   76% / muc tieu 62%  |  con -2.8 loi  |  dang chay 2  [CPU:2]
+  ~ 20:06:18 | san sang 3 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 2  [CPU:2]
+  ~ 20:08:18 | san sang 3 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 2  [CPU:2]
+  [x] V2_vong_day_du         DAT  |  chay xong, ma thoat 0
+  ~ 20:10:19 | san sang 3 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:12:19 | san sang 3 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:14:19 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:16:20 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:18:20 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.5 loi  |  dang chay 1  [CPU:1]
+  ~ 20:20:21 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:22:21 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:24:22 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:26:22 | san sang 4 | CPU   99% / muc tieu 62%  |  con -7.5 loi  |  dang chay 1  [CPU:1]
+  ~ 20:28:22 | san sang 4 | CPU   99% / muc tieu 62%  |  con -7.4 loi  |  dang chay 1  [CPU:1]
+  ~ 20:30:23 | san sang 4 | CPU   99% / muc tieu 62%  |  con -7.4 loi  |  dang chay 1  [CPU:1]
+  ~ 20:32:23 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:34:23 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:36:24 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:38:24 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 1  [CPU:1]
+  ~ 20:40:25 | san sang 4 | CPU  100% / muc tieu 62%  |  con -7.5 loi  |  dang chay 1  [CPU:1]
+  ~ 20:42:25 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 1  [CPU:1]
+  ~ 20:44:25 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 1  [CPU:1]
+  ~ 20:46:25 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.7 loi  |  dang chay 1  [CPU:1]
+  ~ 20:48:26 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.9 loi  |  dang chay 1  [CPU:1]
+  ~ 20:50:26 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.7 loi  |  dang chay 1  [CPU:1]
+  ~ 20:52:26 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.9 loi  |  dang chay 1  [CPU:1]
+  ~ 20:54:26 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 1  [CPU:1]
+  ~ 20:56:27 | san sang 4 | CPU   88% / muc tieu 62%  |  con -5.2 loi  |  dang chay 1  [CPU:1]
+  [>] M0_don_mo_coi          NHE    pid 1816   Don tien trinh mo coi (thu lam he TU TE   (ok (con 0.8 loi))
+  [>] E1_evo_bao_xa          NHE    pid 8476   EVO do suc khoe + bao ra Telegram khi ta  (ok (con 0.8 loi))
+  [x] M0_don_mo_coi          DAT  |  chay xong, ma thoat 0
+  [x] E1_evo_bao_xa          DAT  |  chay xong, ma thoat 0
+  ~ 20:58:27 | san sang 2 | CPU   52% / muc tieu 62%  |  con  1.9 loi  |  dang chay 1  [CPU:1]
+  qwen> Ket qua `M0_don_mo_coi`:
+         - **Trang thai**: DAT (chay xong, ma thoat 0)
+         - **So lieu**: 0 dong/tien trinh mo coi duoc tim thay trong 12 cay dieu phoi
+         - **Bao cao**: Khong co file bao cao rieng (kiem tra `liet_ke_bao_cao(loc='M0')` tra ve rong)
+         - **Nhat ky**: Da ghi (xác nhận hệ thống không có risk deadlock/tự tê liệt)
+         
+         **Phân tích**:
+         - Khau nay chi la phep kiem tra an toan, kham pha xem co tien trinh "mo coi" (zombie/orphan) gay tranh chung tai nguyen hay khong.
+         - Ket qua 0 dong = he thong sach se, khong co deadlock. Day la 
+  qwen> Da hoan thanh ca 4 buoc theo yeu cau:
+         
+         **1. Doc ket qua:** Viec `E1_evo_bao_xa` chay xong, ma thoat 0, thoi gian 20 giay. Ket qua: **DAT**.
+         
+         **2. Doc bao cao:** File `EVO_SUC_KHOE.md` cho thay he thong o trang thai tot:
+         - 14 chi so **TOT** (kho co che 2554, ty le doc 66.8%, ho_so_song/mua_vu/tuong_quan/suy_nguoc deu du lieu cap nhat)
+         - 2 chi so **XAU**: `evo.van_de_mo` = 90 van de chua dong, `xay.viec_hong` = 3 viec loi (kiem_v3/v4/v5)
+         - 1 chi so **CHUA_DO**: `evo.finder` = None (Finder cua so do khong tim thay)
+         
+         
+  ~ 21:00:27 | san sang 2 | CPU   40% / muc tieu 62%  |  con  4.3 loi  |  dang chay 1  [CPU:1]
+  ~ 21:02:27 | san sang 2 | CPU   37% / muc tieu 62%  |  con  5.0 loi  |  dang chay 1  [CPU:1]
+  ~ 21:04:28 | san sang 2 | CPU   39% / muc tieu 62%  |  con  4.7 loi  |  dang chay 1  [CPU:1]
+  ~ 21:06:28 | san sang 3 | CPU   37% / muc tieu 62%  |  con  5.0 loi  |  dang chay 1  [CPU:1]
+  ~ 21:08:28 | san sang 3 | CPU   34% / muc tieu 62%  |  con  5.7 loi  |  dang chay 1  [CPU:1]
+  ~ 21:10:28 | san sang 3 | CPU   33% / muc tieu 62%  |  con  5.8 loi  |  dang chay 1  [CPU:1]
+  ~ 21:12:28 | san sang 3 | CPU   32% / muc tieu 62%  |  con  6.1 loi  |  dang chay 1  [CPU:1]
+  [>] M0_don_mo_coi          NHE    pid 20596  Don tien trinh mo coi (thu lam he TU TE   (ok (con 4.9 loi))
+  [x] M0_don_mo_coi          DAT  |  chay xong, ma thoat 0
+  qwen> Ket qua cho thay he thong hien tai khong co tien trinh nao o trang thai "mo coi". Log xac nhan rang da kiem tra het 6 cay dieu phoi va khong tim thay gi.
+         
+         De xuat viec tiep theo? **KHONG** - Ket qua nay chi la mot phep kiem tra trang thai don gian, chua de xuat huong di tiep theo ro rang. Can them thong tin ve cau hinh he thong hoac cac yeu cau kha thi khac truoc khi de xuat cong tiep.
+  ~ 21:14:28 | san sang 3 | CPU   42% / muc tieu 62%  |  con  4.0 loi  |  dang chay 1  [CPU:1]
+  [!] Q1_to_hop_toan_hang_moi CHUA_DO_DUOC  |  tien trinh thoat ma 15 - day la HONG, khong phai ket qua am. Duoi log: llish_rsi_divergence | th
+  ~ 21:16:28 | san sang 3 | CPU   36% / muc tieu 62%  |  con  5.3 loi  |  dang chay 0  [trong]
+  qwen> Da hoan tat ca 4 buoc theo yeu cau:
+         
+         1. **Doc ket qua**: Viec `Q1_to_hop_toan_hang_moi` co trang thai **LOI** (ma thoat 15), cong = **CHUA_DO_DUOC**. Tien trinh bi huy giua dang chay sau ~7057 giay.
+         2. **Doc bao cao**: File `TO_HOP_TONG_KET.md` ton tai, cho thay day la ket qua cua nhung phep thu da chay truoc do (2934 o chang 2). Tuy nhien, do viec nay fail nen khong co so lieu hop le nao duoc sinh ra tu lan chay cuoi cung. Bao cao hien co hien tuong fit qua muc nang (DD20 train ~600-700 vs Muc MOC ~220) va chi co duy nhat 1/2609 he thong thang moc tren holdout.
+    
+  ~ 21:18:29 | san sang 3 | CPU   67% / muc tieu 62%  |  con -1.1 loi  |  dang chay 0  [trong]
+  ~ 21:20:29 | san sang 3 | CPU   98% / muc tieu 62%  |  con -7.1 loi  |  dang chay 0  [trong]
+  ~ 21:22:29 | san sang 3 | CPU   99% / muc tieu 62%  |  con -7.3 loi  |  dang chay 0  [trong]
+  ~ 21:24:29 | san sang 3 | CPU   99% / muc tieu 62%  |  con -7.5 loi  |  dang chay 0  [trong]
+  ~ 21:26:29 | san sang 3 | CPU   94% / muc tieu 62%  |  con -6.4 loi  |  dang chay 0  [trong]
+  ~ 21:28:29 | san sang 3 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 0  [trong]
+  ~ 21:30:29 | san sang 4 | CPU   85% / muc tieu 62%  |  con -4.6 loi  |  dang chay 0  [trong]
+  ~ 21:32:29 | san sang 4 | CPU   81% / muc tieu 62%  |  con -3.8 loi  |  dang chay 0  [trong]
+  ~ 21:34:29 | san sang 4 | CPU   78% / muc tieu 62%  |  con -3.3 loi  |  dang chay 0  [trong]
+  ~ 21:36:29 | san sang 4 | CPU   82% / muc tieu 62%  |  con -4.0 loi  |  dang chay 0  [trong]
+  ~ 21:38:29 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 0  [trong]
+  ~ 21:40:29 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.9 loi  |  dang chay 0  [trong]
+  ~ 21:42:29 | san sang 4 | CPU   95% / muc tieu 62%  |  con -6.7 loi  |  dang chay 0  [trong]
+  ~ 21:44:29 | san sang 4 | CPU   94% / muc tieu 62%  |  con -6.5 loi  |  dang chay 0  [trong]
+  ~ 21:46:29 | san sang 4 | CPU   96% / muc tieu 62%  |  con -6.7 loi  |  dang chay 0  [trong]
+  ~ 21:48:34 | san sang 4 | CPU   95% / muc tieu 62%  |  con -6.7 loi  |  dang chay 0  [trong]
+  ~ 21:50:46 | san sang 5 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 0  [trong]
+  ~ 21:52:58 | san sang 5 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 0  [trong]
+  ~ 21:55:09 | san sang 5 | CPU  100% / muc tieu 62%  |  con -7.6 loi  |  dang chay 0  [trong]
+  ~ 21:57:13 | san sang 5 | CPU   66% / muc tieu 62%  |  con -0.8 loi  |  dang chay 0  [trong]
+  [>] M0_don_mo_coi          NHE    pid 21224  Don tien trinh mo coi (thu lam he TU TE   (ok (con 1.7 loi))
+  [>] TT_san_nguon           MANG   pid 23052  THUONG TRUC: day chuyen san nguon moi (s  (ok (con 1.7 loi))
+  [x] M0_don_mo_coi          DAT  |  chay xong, ma thoat 0
+  qwen> Ket qua `M0_don_mo_coi` da duoc xu ly:
+         
+         1. **Log**: He thong quet 9 mien cay dieu phoi, khong tim thay tien trinh mo coi nao.
+         2. **Bao cao**: Khong co file bao cao rieng tu viec nay.
+         3. **Nhat ky**: Da ghi vao nhat ky, xac nhan he dang trong trang thai dung, khong co vuong mam tiep tuc.
+         4. **De xuat**: Khong co viec moi duoc mo ra truc tiep tu ket qua nay. He dang 'trong' sau khi da cham xong cac luot truong truoc. Cac viec TESTER dang chay (V1_dao, V6_khung_nho) se tiep tuc xu ly.
+         
+         **Tóm tat**: He thong khong co vuong mam tiep tuc
+  [>] E1_evo_bao_xa          NHE    pid 9132   EVO do suc khoe + bao ra Telegram khi ta  (ok (con 7.2 loi))
+  [x] E1_evo_bao_xa          DAT  |  chay xong, ma thoat 0
+  ~ 21:59:14 | san sang 3 | CPU   28% / muc tieu 62%  |  con  6.7 loi  |  dang chay 1  [MANG:1]
+  ~ 22:01:14 | san sang 3 | CPU   37% / muc tieu 62%  |  con  5.0 loi  |  dang chay 1  [MANG:1]
+  ~ 22:03:14 | san sang 3 | CPU   31% / muc tieu 62%  |  con  6.3 loi  |  dang chay 1  [MANG:1]
+  [>] V1_san_sang_vps        NHE    pid 2300   Do lai do san sang chuyen VPS  (ok (con 6.5 loi))
+  [x] V1_san_sang_vps        DAT  |  chay xong, ma thoat 0
+  ~ 22:05:14 | san sang 3 | CPU   32% / muc tieu 62%  |  con  5.9 loi  |  dang chay 1  [MANG:1]
+  qwen> Da hoan thanh ca 4 buoc theo yeu cau:
+         
+         **1. Ket qua V1_san_sang_vps:**
+         - Trang thai: **XONG**, ma thoat: 0
+         - Cong: **DAT** (chay xong, khong loi)
+         - So duoc: `so_dong = 0` (khong co loi nghiem trong)
+         
+         **2. Bao cao SAN_SANG_VPS.md da duoc doc:**
+         - 26 duong dan tuyet doi can sua (path co dinh C:\...)
+         - 1.55 GB tai lieu can chuyen (nao.db 1.40GB + data/reports)
+         - 3 dieu kien can lap tren VPS: Telegram session, cc-switch.db, MT5 terminal
+         - 3 viec con dang cho: bat EVO ra Telegram, nap quota LLM, chon 
+  ~ 22:07:14 | san sang 3 | CPU   35% / muc tieu 62%  |  con  5.3 loi  |  dang chay 1  [MANG:1]
+  ~ 22:09:15 | san sang 3 | CPU   32% / muc tieu 62%  |  con  5.9 loi  |  dang chay 1  [MANG:1]
+  ~ 22:11:15 | san sang 3 | CPU   29% / muc tieu 62%  |  con  6.6 loi  |  dang chay 1  [MANG:1]
+  ~ 22:13:15 | san sang 4 | CPU   76% / muc tieu 62%  |  con -2.8 loi  |  dang chay 1  [MANG:1]
+  ~ 22:15:15 | san sang 4 | CPU   78% / muc tieu 62%  |  con -3.2 loi  |  dang chay 1  [MANG:1]
+  ~ 22:17:15 | san sang 4 | CPU   76% / muc tieu 62%  |  con -2.8 loi  |  dang chay 1  [MANG:1]
+  ~ 22:19:16 | san sang 4 | CPU   76% / muc tieu 62%  |  con -2.8 loi  |  dang chay 1  [MANG:1]
+  ~ 22:21:16 | san sang 4 | CPU   72% / muc tieu 62%  |  con -2.0 loi  |  dang chay 1  [MANG:1]
+  ~ 22:23:16 | san sang 4 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 1  [MANG:1]
+  ~ 22:25:16 | san sang 4 | CPU   94% / muc tieu 62%  |  con -6.4 loi  |  dang chay 1  [MANG:1]
+  [!] TT_san_nguon           CHUA_DO_DUOC  |  tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log: ... 50/500  doc duoc 0  (3
+  ~ 22:27:17 | san sang 4 | CPU   92% / muc tieu 62%  |  con -6.0 loi  |  dang chay 0  [trong]
+  ~ 22:29:17 | san sang 5 | CPU   97% / muc tieu 62%  |  con -7.0 loi  |  dang chay 0  [trong]
+  ~ 22:31:17 | san sang 5 | CPU   79% / muc tieu 62%  |  con -3.4 loi  |  dang chay 0  [trong]
+  ~ 22:33:17 | san sang 5 | CPU   76% / muc tieu 62%  |  con -2.8 loi  |  dang chay 0  [trong]
+  ~ 22:35:17 | san sang 5 | CPU   72% / muc tieu 62%  |  con -2.0 loi  |  dang chay 0  [trong]
+  ~ 22:37:17 | san sang 5 | CPU   71% / muc tieu 62%  |  con -1.9 loi  |  dang chay 0  [trong]
+  ~ 22:39:17 | san sang 6 | CPU   76% / muc tieu 62%  |  con -2.8 loi  |  dang chay 0  [trong]
+  ~ 22:41:17 | san sang 6 | CPU   81% / muc tieu 62%  |  con -3.8 loi  |  dang chay 0  [trong]
+  ~ 22:43:17 | san sang 6 | CPU   79% / muc tieu 62%  |  con -3.3 loi  |  dang chay 0  [trong]
+  ~ 22:45:17 | san sang 6 | CPU   87% / muc tieu 62%  |  con -5.1 loi  |  dang chay 0  [trong]
+  ~ 22:47:17 | san sang 6 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 0  [trong]
+  ~ 22:49:17 | san sang 6 | CPU   91% / muc tieu 62%  |  con -5.8 loi  |  dang chay 0  [trong]
+  ~ 22:51:17 | san sang 6 | CPU   92% / muc tieu 62%  |  con -5.9 loi  |  dang chay 0  [trong]
+  ~ 22:53:17 | san sang 7 | CPU   89% / muc tieu 62%  |  con -5.4 loi  |  dang chay 0  [trong]
+  ~ 22:55:17 | san sang 7 | CPU   86% / muc tieu 62%  |  con -4.7 loi  |  dang chay 0  [trong]
+  ~ 22:57:17 | san sang 7 | CPU   85% / muc tieu 62%  |  con -4.7 loi  |  dang chay 0  [trong]

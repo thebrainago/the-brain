@@ -38,7 +38,7 @@ import re
 import sys
 import warnings
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
@@ -47,6 +47,7 @@ import pandas as pd
 import requests
 
 from nhan import du_lieu as DL
+from pathlib import Path
 
 SID = 2359404
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "

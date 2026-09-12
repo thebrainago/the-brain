@@ -7,9 +7,13 @@ if __name__ == "__main__":
     # chay het ca bai quet/ghi bao cao, ke ca khi nguoi goi chi muon
     # dung mot ham trong file.
 
-    DESK = Path(r"C:\Users\SV STORE\Desktop")
+    # Doc qua `nhan.duong_dan`: VPS thuong KHONG co Desktop, va `desktop()` lui
+    # ve chinh LAB trong truong hop do thay vi nem loi - mot script bao cao
+    # khong duoc chet chi vi may khong co cho ghi quen thuoc.
+    from nhan.duong_dan import LAB, desktop
+
+    DESK = desktop()
     OUT = DESK / "Bao_cao"; OUT.mkdir(exist_ok=True)
-    LAB = Path(r"C:\Users\SV STORE\Downloads\Research SP500\lab")
     REP = LAB / "reports"
     now = time.strftime("%Y-%m-%d %H:%M:%S")
     def read(p, tail=3000):

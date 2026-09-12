@@ -1,0 +1,28 @@
+# qt_d1
+# Q4+quan tri: quet ca hai ho tren toan bo ma, khung D1
+# python _quet_quan_tri.py D1 0 10
+
+chay 154/159 ma trong 9s
+
+HO 1 - CAU TRUC VAO LENH (dd20 = lai %%/nam quy ve cung sut giam 20%%)
+CAU TRUC          MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+dca_von          154     -0.619     17.205      36       25   -0.136
+dca_deu          154     -0.685     15.732      34       24   -0.131
+nhanh            154     -0.892     11.886      20       12   -0.178
+thi_truong       154     -0.899     17.243      34       24   -0.146
+hai_dau_giu      154     -0.904     15.539      34       17   -0.191
+hai_dau_oco      154     -0.905     12.614      31       16   -0.180
+tt_hedge         154     -0.962      9.572      17       11   -0.243
+
+HO 2 - LUAT QUAN TRI
+LUAT                      MA    DD20 TV   DD20 TOT   DUONG  HON MOC   SHARPE
+sl3_trail2               154     -0.865     21.385      33       23   -0.157
+sl2_tp4_chot1            154     -0.919     15.168      28       19   -0.179
+sl2_trail1               154     -0.962     11.157      38       24   -0.147
+sl2_tp4_hue1             154     -0.968     15.036      34       22   -0.167
+sl2_tp6_hue2_trail2      154     -1.015     25.854      30       18   -0.199
+sl2_tp4                  154     -1.037     23.942      24       15   -0.197
+khong_gi                 144     -1.155      8.355      26       18   -0.151
+chot_nhanh_sl1_tp1       154     -1.262    119.034      24       13   -0.304
+
+-> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\QUET_QUAN_TRI_D1.json

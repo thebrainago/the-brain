@@ -41,6 +41,13 @@ TRAN_SUT_GIAM = 60.0    # %
 MIN_LENH_NAM = 20.0
 CENT = 100.0            # 1 USD chuan = 100 USD cent
 
+#: Bo dem von = bao nhieu lan sut giam LICH SU.
+#: 1,0 la con so cua nguoi lac quan: no gia dinh tuong lai khong sut sau hon
+#: qua khu. Do bang bootstrap khoi ([[v7-leverage-and-v6-rejected]]) cho ~2 lan,
+#: va [[sut-giam-dinh-dat-lai]] ghi ro: chan DD chi lam nhieu chu khong giam
+#: sut giam THAT. De 1,0 thi bang diem se bao "130%/nam" cho mot he 26%/nam.
+BO_DEM_SUT_GIAM = 2.0
+
 
 def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
          so_lenh_nam: float, so_nam: float, chay: bool = False,
@@ -96,6 +103,43 @@ def tu_ket_qua_luoi(r: dict, von_can: float, so_nam: float, **kw) -> dict:
     return cham(lai_nam=r.get("lai_nam", 0.0), von_can=von_can,
                 sut_giam_pct=100.0 * von_can / max(von_can, 1e-9),
                 so_lenh_nam=r.get("ro_nam", 0.0), so_nam=so_nam, **kw)
+
+
+def tu_to_hop(dong: dict, so_nam: float = 0.0) -> dict:
+    """Mot dong `top` cua `nhan/to_hop.py` -> bang diem TIEN.
+
+    Vi sao co ham nay: ban do sinh ngay 12/09 (`nhan/ban_do.py`) cho thay
+    `cham_diem` **MO COI** - khong duong chay nao goi toi, du `CLAUDE.md` ghi
+    no la buoc 5 cua QUY TRINH QUANTLAB CHUAN. Ca `cong_ra_tien` cung vay.
+    Tuc hai module hien than truc tiep cua LUAT SO 0 (*"muc dich cuoi cung la
+    co tien"*) khong nam tren duong chay nao - dung hinh dang cua luat L7.
+
+    ## Don vi: quy uoc VON DANH NGHIA 100
+
+    `to_hop` chay theo ty le, khong theo tien tuyet doi. Neo ve von danh nghia
+    100 don vi thi hai ve cung don vi tien:
+
+        von_can  = sut giam sau nhat  (% cua 100 = so tien dem sut)
+        lai_nam  = CAGR               (% cua 100 = so tien lai mot nam)
+
+    Dung ban **da quy ve DD 20%** (`cagr_dd20`), khong dung ban goc: cau hinh
+    goc cua bang `top` deu sut 90-98%, va `quy_ve_dd` da do THAT o don bay do
+    bang phan doi - chinh xac hon la chia tuyen tinh `cagr/maxdd`.
+    Bai hoc `diem-lai-chia-sut-giam-lech-don-vi`: khong bao gio chia mot so
+    TIEN cho mot so PHAN TRAM.
+    """
+    dd20 = float(dong.get("cagr_dd20") or 0.0)
+    nam = float(so_nam or dong.get("so_nam") or 0.0)
+    sl = float(dong.get("so_lenh") or 0.0)
+    von = 20.0 * BO_DEM_SUT_GIAM
+    return cham(
+        lai_nam=dd20, von_can=von, sut_giam_pct=20.0,
+        so_lenh_nam=(sl / nam if nam > 0 else sl),
+        so_nam=nam, chay=bool(dong.get("chet_tai_khoan")),
+        da_qua_cong_that=False,
+        ten="%s %s %s/%s" % (dong.get("ma", ""), dong.get("khung", ""),
+                             str(dong.get("co_che", ""))[:18],
+                             dong.get("luat", "")))
 
 
 def bang(cac_diem: list[dict], in_ra=print, tran: int = 25) -> None:

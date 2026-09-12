@@ -91,7 +91,10 @@ def zigzag(df: pd.DataFrame, boi_atr: float = BOI_ATR) -> dict:
     atr = _atr(df)
     n = len(df)
     if n < BAR_TOI_THIEU:
-        return {"loi": "chi %d bar, can >= %d" % (n, BAR_TOI_THIEU)}
+        # `moc` phai LUON co mat. Truoc 12/09/2026 nhanh nay tra ve dict chi co
+        # khoa `loi`, nen moi nguoi goi `zigzag(df)["moc"]` deu nem KeyError thay
+        # vi doc duoc loi - tuc mot ham doi HINH DANG tra ve theo du lieu vao.
+        return {"moc": [], "loi": "chi %d bar, can >= %d" % (n, BAR_TOI_THIEU)}
 
     moc, chieu = [], 0           # chieu: +1 dang tim dinh, -1 dang tim day
     i_cuc, gia_cuc = ATR_N, h[ATR_N]

@@ -1,0 +1,41 @@
+# kiem_chot
+# Bo kiem thu toan lab - lan chot
+# python b.py test
+
+bringing up nodes...
+bringing up nodes...
+
+...........u..uuu....................................u.....uuuuuu.u..... [  4%]
+...............................................u.u............uuuuuu.... [  8%]
+.......uuuuu........................................................uuuu [ 12%]
+.uuu...uuuu....................................uuu...................uuu [ 16%]
+........................................................................ [ 21%]
+..uuu................................................................... [ 26%]
+......uuu......uuu...uu........uuuuuu.uuuuuuuuu...uuu........uuuuuuu..uu [ 28%]
+uuu.uuuuuuu.uuuuuu.uu.uuuuuuuu.......................................u.. [ 31%]
+..u.uuuuuuuuuuuuu............u...uuuuuuuu.uuuu.u.uuuuu.uuuuuuuuuuuuu.u.. [ 33%]
+.uuuuuuuuuuuuuuuuuuuuuu.uuuuuuuu.uuuuuuuuuuuuuuuuuuuuuuuuu.....uuuuu.uuu [ 34%]
+uuuuuuuuuuuuuuuuu.uuuuuuuuuuu...........u.......u.............uuuu...... [ 36%]
+..u..................................................................... [ 41%]
+uuuuuu........................uuuuuu.................................... [ 45%]
+..............uuuuu.u...u...u.........uuuuuuu.u...u..................uuu [ 49%]
+u...............................u...................................u... [ 53%]
+...uu...u....u.u...........................u.....uu..........u.......... [ 58%]
+...............u...u.........................u.......................... [ 62%]
+.............u...u............uu.......u..........uuuuuu................ [ 66%]
+..................................u..u..u..............u....u........... [ 71%]
+....................................................................u..u [ 76%]
+..u.uuuu.u.u.uuuuuu.uuu.uuu.uuu.uuu..................................... [ 79%]
+....................................................uuuuuuuuuuuuuuuuuuuu [ 82%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 82%]
+uuuuuuuuuuuuuuuuu....................................................... [ 86%]
+........................................................................ [ 91%]
+......s................................................................. [ 96%]
+.......................................................                  [100%]
+============================== warnings summary ===============================
+test_ma_nguon_sach.py::MaNguonSach::test_moi_file_deu_bien_dich_duoc
+  <unknown>:6: SyntaxWarning: "\L" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\L"? A raw string is also an option.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1475 passed, 1 skipped, 1 warning, 523 subtests passed in 674.82s (0:11:14)

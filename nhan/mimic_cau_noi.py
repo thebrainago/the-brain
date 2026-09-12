@@ -59,8 +59,9 @@ BAN_DO: dict[str, dict | None] = {
                    "cua": {"chi_bao": "gia", "cot": "close"}},
     "momentum_20": {"chi_bao": "doi_pct", "n": 20,
                     "cua": {"chi_bao": "gia", "cot": "close"}},
-    "price_position": None,
-    "dist_ma200_atr": None,
+    "price_position": {"chi_bao": "stochastic", "n": 20},
+    "dist_ma200_atr": {"chi_bao": "lech_tb",
+                       "cua": {"chi_bao": "gia", "cot": "close"}, "n": 200},
 }
 
 _DK = re.compile(r"^\s*([a-z0-9_]+)\s*(<=|>=|<|>)\s*(-?\d+(?:\.\d+)?)\s*$", re.I)
@@ -68,6 +69,14 @@ _DK = re.compile(r"^\s*([a-z0-9_]+)\s*(<=|>=|<|>)\s*(-?\d+(?:\.\d+)?)\s*$", re.I
 
 def co_mimic() -> bool:
     return (DS / "mimic" / "pipeline.py").exists()
+
+
+#: Nguong cua mimic va cua DSL co the khac THANG DO du cung mot dai luong.
+#: `price_position` cua mimic nam trong [0, 1]; `stochastic` cua DSL la cung
+#: cong thuc nhung NHAN 100. Dich ma quen he so nay thi `price_position <= 0,2`
+#: thanh `stochastic <= 0,2` - mot dieu kien gan nhu khong bao gio dung, va no
+#: se im lang bien moi luat hoc duoc thanh mot luat chet.
+HE_SO_NGUONG = {"price_position": 100.0}
 
 
 def dich_dieu_kien(dk: str) -> dict:
@@ -84,8 +93,10 @@ def dich_dieu_kien(dk: str) -> dict:
         return {"nhan": False,
                 "ly_do": f"dac trung {ten!r} la BIEU THUC, ngu phap chua noi gon duoc",
                 "thieu_tu_vung": ten}
+    nguong *= HE_SO_NGUONG.get(ten, 1.0)
     return {"nhan": True, "ly_do": "",
-            "dieu_kien": {"trai": dict(trai), "phep": phep, "phai": {"hang": nguong}}}
+            "dieu_kien": {"trai": dict(trai), "phep": phep,
+                          "phai": {"hang": nguong}}}
 
 
 def dich_luat(luat: dict, chieu: int = 1, ten: str = "",

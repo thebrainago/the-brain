@@ -55,18 +55,29 @@ else:
 #: Hanh dong MO vi the MUA.
 HD_MUA = (r"(?:buy(?:s|ing)?|go(?:es|ing)? long|enter(?:s|ing)? (?:a |the )?long"
           r"|open(?:s|ing)? (?:a |the )?long|take (?:a |the )?long"
-          r"|long (?:entry|signal|position|setup)|mua vao|vao lenh mua)")
+          r"|long (?:entry|signal|position|setup)|mua vao|vao lenh mua"
+          # TIENG VIET CO DAU + DANG NGAN (them 12/09/2026). Truoc do chi co
+          # "mua vao"/"vao lenh mua" khong dau, nen chu du an go "Mua khi RSI 14
+          # duoi 30" vao luong uu tien cua chinh ho thi he tra ve 0 co che.
+          # Dang ngan PHAI di kem tu dieu kien: tran "mua" khong rang buoc se
+          # nuot "mua vu" (mua vu = seasonality, mot tu khoa cua chinh du an).
+          r"|(?:mua|mua)\s+(?:khi|neu|nếu|ngay khi)"
+          r"|mua vào|vào lệnh mua|mở lệnh mua)")
 #: Hanh dong MO vi the BAN. Phai kiem TRUOC `HD_RA`: "sell short" co chu "sell".
 HD_BAN = (r"(?:sell(?:s|ing)? short|short(?:s|ing)? (?:the |a )?(?:market|stock|index|position)"
           r"|go(?:es|ing)? short|enter(?:s|ing)? (?:a |the )?short"
           r"|open(?:s|ing)? (?:a |the )?short|short (?:entry|signal|position|setup)"
-          r"|ban khong|vao lenh ban)")
+          r"|ban khong|vao lenh ban"
+          r"|(?:ban|bán)\s+(?:khi|neu|nếu|ngay khi)"
+          r"|bán khống|vào lệnh bán|mở lệnh bán)")
 #: Hanh dong DONG vi the.
 HD_RA = (r"(?:sell(?:s|ing)?|exit(?:s|ing)?|close(?:s|ing)? (?:the |our |any )?(?:position|trade|long|short)"
-         r"|take profit|liquidat|cover(?:s|ing)? (?:the )?short|thoat lenh|chot loi|dong lenh)")
+         r"|take profit|liquidat|cover(?:s|ing)? (?:the )?short|thoat lenh|chot loi|dong lenh"
+         r"|(?:thoat|thoát|chot|chốt|dong|đóng)\s+(?:khi|neu|nếu|lenh|lệnh|lai|lời)"
+         r"|thoát lệnh|chốt lời|đóng lệnh)")
 
 #: Tu bat dau MENH DE DIEU KIEN.
-NEU = r"(?:when(?:ever)?|if|once|as soon as|provided that|so long as|khi|neu)"
+NEU = r"(?:when(?:ever)?|if|once|as soon as|provided that|so long as|khi|neu|nếu)"
 
 #: Nhan dang dang BANG/DAU DONG: "Entry: ...", "Buy rule - ...", "Exit signal:"
 NHAN_VAO = re.compile(
@@ -90,11 +101,11 @@ SO_SANH: tuple[tuple[str, str], ...] = (
     (r"(?:clos(?:es|ed|ing)|fall(?:s|ing)?|drop(?:s|ping)?|dip(?:s|ping)?"
      r"|declin(?:es|ing)|trad(?:es|ing)|settl(?:es|ing))?\s*"
      r"(?:is |are |be |go(?:es)? )?(?:below|under|beneath|less than|lower than"
-     r"|smaller than|duoi|nho hon)", "<"),
+     r"|smaller than|duoi|nho hon|dưới|nhỏ hơn|thấp hơn)", "<"),
     (r"(?:clos(?:es|ed|ing)|ris(?:es|ing)|climb(?:s|ing)?|jump(?:s|ing)?"
      r"|trad(?:es|ing)|settl(?:es|ing))?\s*"
      r"(?:is |are |be |go(?:es)? )?(?:above|over|exceed(?:s|ing)?|greater than"
-     r"|higher than|larger than|tren|lon hon)", ">"),
+     r"|higher than|larger than|tren|lon hon|trên|lớn hơn|cao hơn)", ">"),
     (r"<=", "<="), (r">=", ">="), (r"<", "<"), (r">", ">"),
 )
 _SO_SANH_RE = [(re.compile(p, re.I), phep) for p, phep in SO_SANH]
@@ -734,9 +745,16 @@ def dieu_kien_trong_cau(cau: str, thay_the: dict | None = None):
 #: ... when Y". Neu khong tach, ve RA bi mat trang va co che thanh "giu 1 bar"
 #: - sai han y tac gia. Do that 23/08: bai priceactionlab ta ca vao lan ra
 #: trong mot cau, va he chi doc duoc ve vao.
+#: Noi chuyen tu ve VAO sang ve RA. Hai dang:
+#:     "... and exit when ..."   co lien tu
+#:     "... , exit when ..."     chi mot dau phay
+#: Dang thu hai TRUOT truoc 12/09/2026, va hau qua khong phai la mat ve RA - no
+#: nang hon the: ve RA bi NUOT VAO ve VAO, sinh ra spec `rsi < 30 VA rsi > 55`,
+#: mot co che khong bao gio kich hoat duoc. Khong bao loi, khong bao gi.
 _NOI_RA = re.compile(
-    r"[,;]?\s*\b(?:and|then)\s+(?:we\s+)?(?:to\s+)?"
-    r"(exit|sell|close (?:the )?(?:position|trade)|cover)\b", re.I)
+    r"(?:[,;]\s*|\s+)(?:(?:and|then)\s+)?(?:we\s+)?(?:to\s+)?"
+    r"\b(exit|sell|close (?:the )?(?:position|trade)|cover"
+    r"|thoat|thoát|chot|chốt|dong lenh|đóng lệnh)\b", re.I)
 
 
 def tach_vao_ra(cau: str):
@@ -1000,15 +1018,21 @@ TRAN_MOI_TAI_LIEU = 3
 GAN_NHAU = 1500
 
 
-def doc_bai(van_ban: str, tieu_de: str = "", nguon: str = "") -> list[dict]:
+def doc_bai(van_ban: str, tieu_de: str = "", nguon: str = "",
+            toi_thieu: int = 120) -> list[dict]:
     """Van xuoi -> danh sach {spec, bang_chung, ...}. KHONG cham du lieu gia.
 
     Chi tra ve nhung gi CU PHAP dung duoc. Viec quyet dinh co nhan hay khong
     la cua `nhan/ngu_phap.them_co_che` (ty le kich hoat + phep cat nhin truoc)
     va cuoi cung la cua QUANTLAB.
     """
+    # `toi_thieu` mac dinh 120: mot "tai lieu" ngan hon the la rac, va kho SEEKER
+    # co hang nghin manh nhu vay. Nhung khi CHU DU AN go thang mot cau luat
+    # ("mua khi RSI 14 duoi 30") thi guard nay nuot no va tra ve 0 ma khong noi
+    # gi - do 12/09/2026. Nen cho nguoi goi ha xuong, va chi nguoi goi biet minh
+    # dang doc gi moi duoc ha.
     vb = _chuan(van_ban)
-    if len(vb) < 120 or la_ma_nguon(vb):
+    if len(vb) < toi_thieu or la_ma_nguon(vb):
         return []
     vao_ds, ra_ds = [], []
     for vt, c in cac_cau(vb):

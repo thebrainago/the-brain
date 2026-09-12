@@ -75,7 +75,8 @@ def _loi_suat_tien(df: pd.DataFrame) -> np.ndarray:
 def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
          lai_suat_nam: np.ndarray | None = None, ma: str = "", khung: str = "",
          da_dich: bool = False, don_bay: float = 1.0,
-         gop: str = "tu_dong", nguong_chay: float = 0.0) -> KetQua:
+         gop: str = "tu_dong", nguong_chay: float = 0.0,
+         phi_them: np.ndarray | None = None) -> KetQua:
     """Chay mot chien luoc. `tin_hieu[i]` la phoi nhiem biet tai close[i].
 
     da_dich=True chi dung cho CANARY (khi can dat vi the dung bien mot bar).
@@ -114,6 +115,15 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
     10/1929. Moi ket luan CAGR o L>1 truoc 03/09/2026 deu phai xem lai.
     (Sharpe thi khong sao: no bat bien theo ti le.)
 
+    `phi_them`: chi phi PHAN TRAM VON cong them o tung bar, do NGUOI GOI tinh.
+
+    Vi sao can (do 12/09/2026): phi o day tinh tren `doi = |diff(v)|`, tuc tren
+    phoi nhiem RONG. Mot cau truc HEDGE mo dong thoi mot chan mua va mot chan
+    ban thi `v` khong doi -> he THU 0 DONG SPREAD cho hai lenh that. Tuong tu
+    phi qua dem tinh tren `v` = 0 trong khi ngoai doi phai tra ca hai chan.
+    Ket qua la moi cau truc hedge trong deu hon that, va cang hedge nhieu cang
+    "lai". `nhan/vao_lenh.py` tinh phan chenh do roi day vao day.
+
     `nguong_chay`: von con lai (ti le so voi von truoc bar do) ma duoi no thi
     coi la chay tai khoan. 0,0 = chay sach. San that cat lenh som hon (XM cat
     o muc ky quy 20%), nen 0,0 la CHAN DUOI lac quan.
@@ -149,7 +159,15 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
     else:
         raise ValueError(f"gop phai la log|so_hoc|tu_dong, nhan {gop!r}")
 
-    phi_tong = phi_sp + phi_tr + phi_gi
+    if phi_them is not None:
+        pt = np.nan_to_num(np.asarray(phi_them, float).reshape(-1), nan=0.0)
+        if len(pt) != n:
+            raise ValueError(f"phi_them dai {len(pt)} nhung du lieu {n} bar")
+        if np.any(pt < 0):
+            raise ValueError("phi_them am - phi khong duoc la khoan thu")
+    else:
+        pt = np.zeros(n)
+    phi_tong = phi_sp + phi_tr + phi_gi + pt
     canh = list(cp.canh_bao)
     von_mang = None
     chay_tk, bar_chay, ngay_chay = False, None, None
@@ -182,7 +200,7 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
         ma=ma, khung=khung, index=idx, vi_the=v, loi=loi, loi_tho=loi_tho, r=r,
         chi_phi_spread=float(np.nansum(phi_sp)),
         chi_phi_truot=float(np.nansum(phi_tr)),
-        chi_phi_giu=float(np.nansum(phi_gi)),
+        chi_phi_giu=float(np.nansum(phi_gi) + np.nansum(pt)),
         so_lan_doi=int(np.sum(doi > 1e-12)),
         so_lenh=dem_lenh(v),
         phoi_nhiem=float(np.mean(np.abs(v))),

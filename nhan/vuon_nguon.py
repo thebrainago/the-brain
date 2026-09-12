@@ -54,8 +54,14 @@ LAN = {
     "xa_hoi": {
         "mo_ta": "dien dan va mang xa hoi qua trinh duyet - noi nguoi ta KE",
         "tien_to": ("browser_",),
+        # `fxblue` va `etoro` RUT khoi lan nay 12/09/2026: tu hom do ca hai doc
+        # bang `requests` (sitemap XML va API JSON), khong qua trinh duyet nua
+        # - xem `seeker.n_fxblue` / `n_etoro`. De chung o day thi suat cua
+        # chung duoc cong vao lan "qua trinh duyet", tuc ngan sach gio chia
+        # theo mot phep do KHONG dung duong chay that. `_lan_cua` mac dinh tra
+        # "hoc_thuat" nen bo ten ra la du.
         "ten": {"reddit_td", "x", "tiktok", "facebook", "youtube", "telegram",
-                "mql5_signals", "myfxbook", "collective2", "fxblue", "etoro",
+                "mql5_signals", "myfxbook", "collective2",
                 "zulutrade", "darwinex"},
     },
 }

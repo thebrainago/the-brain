@@ -1,5 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-"""doc_web_moi.py - DOC WEB BEN: thu requests truoc, neu loi hay noi dung rong
+# -*- coding: utf-8 -*-
+r"""doc_web_moi.py - DOC WEB BEN: thu requests truoc, neu loi hay noi dung rong
 (intentionally-nhom) thi thu Playwright headless (render JS). Tra ve van ban + nguon.
 Kem kiem TRA NOI DUNG (marker) chu khong tin moi check status code.
 

@@ -29,11 +29,12 @@ import json
 import sys
 import warnings
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.stdout.reconfigure(encoding="utf-8")
 warnings.filterwarnings("ignore")
 
 from nhan import chi_phi as CP
+from pathlib import Path
 
 NGUONG_GIA = 0.02        # gia lech qua 2% = khong cung phoi nhiem
 NGUONG_CHENH = 1.0       # chi xet dong chenh >= 1 diem %/nam

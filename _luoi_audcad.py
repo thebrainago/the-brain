@@ -40,8 +40,9 @@ import sys
 import time
 import warnings
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from pathlib import Path
 
-sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 warnings.filterwarnings("ignore")
 
 MA = "AUDCAD"
@@ -63,7 +64,7 @@ LOT = (("phang", 1.0), ("cong", 0.5), ("cong", 1.0), ("nhan", 1.15), ("nhan", 1.
 def _mot(cfg) -> dict | None:
     import warnings as w
     w.filterwarnings("ignore")
-    sys.path.insert(0, r"C:\Users\SV STORE\Downloads\Research SP500\lab")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     from nhan import du_lieu as DL
     from nhan import luoi as L
 
