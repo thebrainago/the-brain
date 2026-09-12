@@ -126,9 +126,28 @@ def _lay_cau(so_can: int) -> tuple[list, list]:
 
 
 def _do_mot_cau(cau: str) -> tuple[str, list[str], int]:
-    """-> (trang_thai, loi_kiem_khai_bao, so_ky_tu_bi_bo_sot)"""
+    """-> (trang_thai, loi_kiem_khai_bao, so_ky_tu_bi_bo_sot)
+
+    DO TREN DUONG CHAY THAT, khong tren mot duong tat.
+
+    Duong that la `co_che_trong_bai`, va viec DAU TIEN no lam voi mot cau la
+    `tach_vao_ra` - roi phan loai tren ve VAO, doc ve VAO, doc ve RA rieng.
+    Ban truoc cua ham nay goi thang `dieu_kien_trong_cau(ca_cau)`, bo qua khau
+    tach. Do 12/09/2026 cho thay hai duong ra ket qua KHAC HAN:
+
+        "buy signals when RSI crosses above 50 and sell signals when RSI
+         crosses below 50"
+        duong tat  -> vao = [rsi cheo_len 50] VA [rsi cheo_xuong 50]
+                      mot dieu kien VAO TU MAU THUAN, kich hoat 0,00%
+        duong that -> vao = [rsi cheo_len 50] · ra = [rsi cheo_xuong 50]
+
+    Ba trong 102 cau doc duoc dang bi tron kieu nay, va ca ba deu bao
+    `bo_sot` rong - tuc bo do dang cham chung la NOI_DUOC. Khau `tach_vao_ra`
+    da dung tu truoc; chi rieng bo do di duong khac.
+    """
+    phan_vao, phan_ra = DH.tach_vao_ra(cau)
     try:
-        ket = DH.dieu_kien_trong_cau(cau)
+        ket = DH.dieu_kien_trong_cau(phan_vao)
     except Exception as e:  # bo doc nem loi cung la mot ket qua, khong phai su co
         return "KHONG_NOI", [f"doc_hieu nem loi: {type(e).__name__}"], len(cau)
 
@@ -143,11 +162,29 @@ def _do_mot_cau(cau: str) -> tuple[str, list[str], int]:
     # `co_che` va `ho` la truong BAT BUOC cua kiem_khai_bao. Thieu chung thi
     # MOI cau deu bi bac, va bang doc y het "bo doc hong" - toi da suyt ket luan
     # dung nhu vay luc 19:40 ngay 11/09, trong khi bo doc ra dieu kien cho 12/150.
+    # Ve RA doc RIENG, dung thu tu day chuyen dung: neo lai toan hang ben phai
+    # cua dieu kien VAO de cum TRO LAI ("the average") trong ve ra hieu duoc.
+    dk_ra: list = []
+    if phan_ra:
+        neo = next((d["phai"] for d in reversed(dieu_kien)
+                    if isinstance(d.get("phai"), dict) and d["phai"].get("chi_bao")),
+                   None)
+        try:
+            kr = DH.dieu_kien_trong_cau(phan_ra, thay_the=neo)
+            dk_ra = list(kr[0] if isinstance(kr, (list, tuple)) and len(kr) == 2 else kr)
+        except Exception:
+            dk_ra = []
+
     spec = {"ten": "thu", "ho": "xu_huong", "chieu": 1, "giu": 1,
-            "vao": list(dieu_kien), "ra": [],
+            "vao": list(dieu_kien), "ra": dk_ra,
             "co_che": "cau do corpus - khong dang ky, chi de kiem cu phap"}
     loi = NP.kiem_khai_bao(spec)
     bo_sot = len((con_lai or "").strip())
+    # Ve RA co chu ma khong doc ra dieu kien nao thi do la VAN BAN BI BO THAT,
+    # phai cong vao `bo_sot`. Khong cong thi mot cau doc duoc nua van duoc cham
+    # NOI_DUOC - dung cai bay ma `bo_sot` sinh ra de bat.
+    if phan_ra and not dk_ra:
+        bo_sot += len(phan_ra.strip())
 
     if loi:
         return "KHONG_NOI", loi, bo_sot

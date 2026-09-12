@@ -1,0 +1,22 @@
+{
+ "hinh_dang_luat": 1185,
+ "ra_dieu_kien": 102,
+ "co_ve_thu_hai": 3,
+ "vi_du": [
+  {
+   "cau": "It's buy when RSI 5 crosses above 30, which is the green the green vertical lines, and sell when you close below the chandelier 221, which is the red these are the red vertical lines",
+   "so_dk": 2,
+   "bo_sot": ""
+  },
+  {
+   "cau": "The script applies a 14-period RSI on TSLA, generating buy signals when RSI crosses above 50 and sell signals when RSI crosses below 50",
+   "so_dk": 2,
+   "bo_sot": ""
+  },
+  {
+   "cau": "Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K line crosses below the %D line",
+   "so_dk": 2,
+   "bo_sot": ""
+  }
+ ]
+}

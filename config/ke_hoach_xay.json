@@ -45,9 +45,10 @@
      "ghi_chu": "dieu_kien_trong_cau nay tra PHAN BO SOT that duoi tien to 'bo_sot:'."
     },
     "toan_hang_chua_ai_dung": {
-     "nay": 12,
+     "nay": 11,
      "can": 6,
-     "dat": false
+     "dat": false,
+     "ghi_chu": "12/09 - CONG NAY CAN HIEU CHUAN LAI, ly do o reports/HANG_DOI_TOAN_HANG.json. Quet 270.564 cau duy nhat tu 5.277 ban doc: ca 11 toan hang chet CONG LAI chi thieu 31 cau luat (bollinger 14, dong_luong 9, trang_thai_lat 5, tuong_quan/phuong_sai/obv 1). Ha 11 -> 6 la lam duoc, nhung no khong mang lai san luong - no chi lam thoa mot con so. KIEM CHIEU NGUOC (doc tay 42 cau `loai_cau` tu choi): voi tuong_quan 14/14 cau la ngon ngu RUI RO/DANH MUC (shrinkage, da cong tuyen, tuong quan giua cac EA), khong mot cau nao la luat vao lenh - tu choi la DUNG. dong_luong 13/14 la van ke chuyen hoc thuat. => tu vung song trong kho KHONG co nghia la co nguyen lieu de sinh co che."
     },
     "tang_B_bi_tu_choi": {
      "nay": 150,
@@ -67,9 +68,10 @@
      "ghi_chu": "Bo test day du sau khi va: 1.242 pass / 3 fail / 728s (truoc dot nay: 1.239 pass / 4 fail). Cai bot di dung la gann_sq9. Ba cai con lai co tu truoc va khong lien quan: banker thieu khoi tin_dung (2), va hien phap bao 6 module cua phien 07/09 chua co test."
     },
     "ca_kiem_nhin_truoc": {
-     "nay": false,
+     "nay": true,
      "can": true,
-     "dat": false
+     "dat": true,
+     "ghi_chu": "12/09: `MoiToanHangDeuKHONG_NHIN_TRUOC` trong test_ngu_phap_toan_hang.py. 43/43 toan hang qua phep CAT, moi cai kich hoat 43-51%% so bar va chiu 76-80 moc cat. HAI CHIEU: `test_do_nhay_bay_phai_rung` chen rsi.shift(-1) va doi phep cat GAO LEN. Phai them khung `_df_that` (1.500 bar co hinh dang nen that): `_df` cu cho 5 toan hang ra chuoi HANG SO (bien_do=2,0; ibs=0,5; than_nen=0 vi open==close; khoi_luong=1000; thang chi co thang 1 vi 400 bar gio = 16 ngay) nen phep cat tren chung khong chung minh gi."
     },
     "bo_doc_sinh_toan_hang_moi": {
      "nay": [
@@ -88,7 +90,13 @@
      "dat": true,
      "ghi_chu": "1.679/4.198 ban (40,0%%) chua chuoi thoat \\uXXXX chua giai ma - dang duoc doc qua mot lop rac."
     },
-    "ghi_chu_cong_35": "Cong 35% CAN HIEU CHUAN LAI - xem KE_HOACH_XAY.md. Tang A tron hai cau hoi: 'cau nay co phai mot luat khong' va 'ngu phap co noi duoc khong'. Mau so dung la CORPUS VANG (viec B1_corpus_vang cua qwen)."
+    "ghi_chu_cong_35": "Cong 35% CAN HIEU CHUAN LAI - xem KE_HOACH_XAY.md. Tang A tron hai cau hoi: 'cau nay co phai mot luat khong' va 'ngu phap co noi duoc khong'. Mau so dung la CORPUS VANG (viec B1_corpus_vang cua qwen).",
+    "bollinger_la_zscore_doi_ten": {
+     "ghi_chu": "12/09 - vi sao `bollinger` 0 lan dung trong kho 891 co che: bo doc KHONG bo sot no, no DICH thanh zscore. 'Go long when price closes above the 20-period Bollinger upper band' -> zscore(close,20) > 2,0. Dung ve toan hoc (close > sma+k*sd <=> zscore > k) nen 0 lan la DUNG, khong phai lo hong. Cai THAT SU khong noi duoc la `lay='do_rong'` (bandwidth/squeeze) va `lay='phan_tram_b'` (%B) - hai cai do khong quy ve mot phep so sanh zscore duoc."
+    },
+    "ba_hinh_dang_cau_bi_tu_choi": {
+     "ghi_chu": "12/09 - do tren 6 cau luat Bollinger that: nut that cua 1A KHONG phai tu vung ma la HINH DANG CAU. Ba ly do tu choi gap ngay trong mau nho: (1) 'cau ta ca chieu mua lan chieu ban' - ma 'buy when X, sell when Y' la cach nguoi ta phat bieu luat PHO BIEN NHAT, va ngu phap noi duoc: do la HAI khai bao chieu +1 va -1, khong phai mot; (2) \"cau co 'or' giua hai so sanh - ngu phap chi co VA\"; (3) 'cau mo ta hai kha nang cung luc'. Dang do so cau tung ly do chan bang _ly_do_tu_choi.py."
+    }
    },
    "da_lam": [
     "_corpus_ngu_phap.py - bo do ba tang, hat co dinh, da chay truoc/sau",

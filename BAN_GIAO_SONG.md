@@ -4,21 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi_nen.log`: [Sun 09/06/2026 10:20:33.79] thay DUNG_LAI - khong khoi dong watchdog
-- git: c5134d5 dien 2 muc ban giao 05/09: mot doan doc la hieu ca phien + 4 viec mai theo thu tu chu du an chot
-### 2026-09-06 16:29:29 — phien 06/09: do ho loi ra (182.550 o) -> SAN_SANG_V4 = 0; sua duong LLM chet (cc_switch_provider sai ten); ap cong kiem_khai_bao cho 169 co che da o trong kho
-
-### 2026-09-06 16:29:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6692, 0 phut)
-- `loi_ra_D1.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LOI_RA_D1.json
-- `quet_D1_0906.log`: TONG: {'LOAI': 18812, 'CHUA_DU_LUC': 18599, 'NEN_GOP': 10706, 'SAN_SANG_V4': 15} (506.8s, 8 tien trinh)
-- `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
-- git: 91c2b49 do spread that cho ca be mat: 44 -> 86 ma giao dich duoc
-### 2026-09-06 16:35:00 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5304, 0 phut)
-- `loi_ra_D1.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LOI_RA_D1.json
 - `quet_D1_0906.log`: TONG: {'LOAI': 18812, 'CHUA_DU_LUC': 18599, 'NEN_GOP': 10706, 'SAN_SANG_V4': 15} (506.8s, 8 tien trinh)
 - `quet_D1_0906b.log`: TONG: {'LOAI': 15125, 'CHUA_DU_LUC': 16997, 'NEN_GOP': 9949, 'SAN_SANG_V4': 13} (386.2s, 8 tien trinh)
 - git: 20da25d dien 2 muc ban giao 06/09: mot doan doc la hieu ca phien + 3 viec mai theo thu tu moi
@@ -404,3 +389,18 @@
 - `test_day_du.log`: 3 failed, 1373 passed, 2 skipped, 1 warning, 479 subtests passed in 1074.15s (0:17:54)
 - `theo_doi.log`: }
 - git: df3a5e5 2026-09-12: khoi 2-6 DAT: so bai hoc, anh chup bat bien, tang cham tien, 4 cua vao, khoa tester + de quan tri len EA ngoai. Cuu mat du lieu kho co che 1149->3
+### 2026-09-12 00:22:51 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16628, 0 phut)
+- `de_qt_chay.log`: luat 14 · GridEA.mq5                           lenh  1759 · lai     -108.8
+- `doc_video2.log`: }
+- `qwen_ultra.log`: **Đã đề xuất:** `V1_dao_SP500` để kiểm tra xem edge này có tồn tại trên thị trường Mỹ hay
+- `test_day_du.log`: 3 failed, 1373 passed, 2 skipped, 1 warning, 479 subtests passed in 1074.15s (0:17:54)
+- `theo_doi.log`: }
+- git: aa328d5 ban giao song cuoi phien + dong sach truoc khi tat may
+### 2026-09-12 07:09:20 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8820, 0 phut), dieu_khien_xa.py (pid 15316, 3 phut)
+- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
+- `test_day_du.log`: .........................................................
+- git: aa328d5 ban giao song cuoi phien + dong sach truoc khi tat may

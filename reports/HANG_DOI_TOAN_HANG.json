@@ -1,0 +1,222 @@
+{
+ "so_cau_quet": 270564,
+ "so_ban_doc": 5277,
+ "bang": [
+  {
+   "toan_hang": "bollinger",
+   "nhac": 392,
+   "la_luat": 14,
+   "doc_ra": 0,
+   "thieu": 14
+  },
+  {
+   "toan_hang": "dong_luong",
+   "nhac": 1869,
+   "la_luat": 9,
+   "doc_ra": 0,
+   "thieu": 9
+  },
+  {
+   "toan_hang": "trang_thai_lat",
+   "nhac": 570,
+   "la_luat": 5,
+   "doc_ra": 0,
+   "thieu": 5
+  },
+  {
+   "toan_hang": "tuong_quan",
+   "nhac": 1499,
+   "la_luat": 1,
+   "doc_ra": 0,
+   "thieu": 1
+  },
+  {
+   "toan_hang": "phuong_sai",
+   "nhac": 1086,
+   "la_luat": 1,
+   "doc_ra": 0,
+   "thieu": 1
+  },
+  {
+   "toan_hang": "obv",
+   "nhac": 16,
+   "la_luat": 1,
+   "doc_ra": 0,
+   "thieu": 1
+  },
+  {
+   "toan_hang": "dem_lien_tiep",
+   "nhac": 259,
+   "la_luat": 0,
+   "doc_ra": 0,
+   "thieu": 0
+  },
+  {
+   "toan_hang": "tong",
+   "nhac": 137,
+   "la_luat": 0,
+   "doc_ra": 0,
+   "thieu": 0
+  },
+  {
+   "toan_hang": "smma",
+   "nhac": 44,
+   "la_luat": 0,
+   "doc_ra": 0,
+   "thieu": 0
+  },
+  {
+   "toan_hang": "wma",
+   "nhac": 27,
+   "la_luat": 0,
+   "doc_ra": 0,
+   "thieu": 0
+  },
+  {
+   "toan_hang": "gann_sq9",
+   "nhac": 23,
+   "la_luat": 0,
+   "doc_ra": 0,
+   "thieu": 0
+  }
+ ],
+ "vi_du_bo_sot": {
+  "bollinger": [
+   {
+    "cau": "Dưới đây là các bước chi tiết bot sử dụng để \"đồng ý\" vào một lệnh Buy hoặc Sell:\n---\n### Bước 1: Tín hiệu từ Indicator chính (Chỉ báo phân tích chính)\nBot sử dụng chỉ báo bạn chọn trong mục 5.21 \"Chọn tín hiệu mở lệnh\" (ví dụ: CCI, Stochastic, RSI, Supertrend, UTBOT, SMC, Bollinger Bands, Pinbar...",
+    "nguon": "https://t.me/vutruea/1129021",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "Long Entry : Price crosses above upper band",
+    "nguon": "https://github.com/ksingla-GL/keltner-channels-strategy",
+    "doc_ra_gi": [
+     "gia",
+     "zscore"
+    ]
+   },
+   {
+    "cau": "Short Entry : Price crosses below lower band",
+    "nguon": "https://github.com/ksingla-GL/keltner-channels-strategy",
+    "doc_ra_gi": [
+     "gia",
+     "zscore"
+    ]
+   },
+   {
+    "cau": "The exit is typically signaled when the momentum histogram changes color (showing a slowing of the trend) or the price touches the opposite Bollinger Band",
+    "nguon": "https://github.com/Agentic-TradeOS/Bollinger-Squeeze-Strategy",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "A long signal is triggered when the price closes below the lower band and volume is above its 20-day average",
+    "nguon": "https://github.com/chromedome04/Volume-Filtered-Bollinger-Bands-Trading-Strategy",
+    "doc_ra_gi": [
+     "gia",
+     "zscore"
+    ]
+   },
+   {
+    "cau": "When a stock's RSI is below 30, and the Bollinger Bands are moving downward and breaking below the lower band, use the account's available margin balance to execute short selling",
+    "nguon": "https://medium.com/@DolphinDB_Inc/why-your-backtests-fail-in-margin-trading-securities-lending-and-how-to-fix-it-8f1c2d592baf",
+    "doc_ra_gi": [
+     "gia",
+     "zscore"
+    ]
+   }
+  ],
+  "wma": [],
+  "smma": [],
+  "obv": [
+   {
+    "cau": "Phase 2 (runner) : exits on the breakeven stop, a 4h close back\npast the Keltner middle, OBV crossing below its SMA, or the Friday\n3:30pm New York cutoff",
+    "nguon": "https://github.com/NadirAliOfficial/alpaca-momentum-bot",
+    "doc_ra_gi": []
+   }
+  ],
+  "dong_luong": [
+   {
+    "cau": "Carhart [15] extended this with a momentum factor defined by a self-financing portfolio\nlong high-momentum stocks and short low-momentum stocks",
+    "nguon": "http://arxiv.org/abs/2607.18001v1",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "Furthermore, it incorporates momentum oscillators by scanning for Relative Strength Index (RSI) crossovers from overbought or oversold territories, alongside Stochastic oscillator crosses (below 20 for buys, above 80 for sells)",
+    "nguon": "https://www.tradingview.com/script/PaWMFCg6-Auto-Fibo-Multi-Channel-Reversal-Retest-by-WiselyWealth/",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "Joe ea bot\n35+ USD\nXAUUSD price ↓ Market condition filter ↓ Trend filter ↓ Momentum confirmation ↓ Entry signal ↓ Risk calculator ↓ Lot size ↓ Stop loss / Take profit ↓ Trade ↓ Position management ↓ Daily-loss / drawdown protection\n27 applications",
+    "nguon": "https://www.mql5.com/en",
+    "doc_ra_gi": [
+     "gia"
+    ]
+   },
+   {
+    "cau": "The exit is typically signaled when the momentum histogram changes color (showing a slowing of the trend) or the price touches the opposite Bollinger Band",
+    "nguon": "https://github.com/Agentic-TradeOS/Bollinger-Squeeze-Strategy",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "Momentum Confirmation — Close higher than previous close for buys, lower for sells",
+    "nguon": "https://www.mql5.com/en/code/71189",
+    "doc_ra_gi": [
+     "gia",
+     "tre"
+    ]
+   },
+   {
+    "cau": "The indicator excels at confirming established trends and warning of weakening momentum before actual price reversals occur, making it valuable for both trend following strategies and determining optimal entry/exit points",
+    "nguon": "https://www.mql5.com/en/code/58198",
+    "doc_ra_gi": []
+   }
+  ],
+  "phuong_sai": [
+   {
+    "cau": "The\nexit-clock draws have mean 1.001 and variance 0.668, while the equilibrium residual\ndraws have mean 0.833",
+    "nguon": "http://arxiv.org/abs/2609.02525v1",
+    "doc_ra_gi": []
+   }
+  ],
+  "tuong_quan": [
+   {
+    "cau": "Pairs traders wait for weakness in the correlation and then go long the under-performer while simultaneously\nshort selling the over-performer, closing the positions as the relationship returns to statistical norms",
+    "nguon": "https://github.com/Xinyi6/Pairs-Trading",
+    "doc_ra_gi": []
+   }
+  ],
+  "dem_lien_tiep": [],
+  "trang_thai_lat": [
+   {
+    "cau": "On the flip side, Volume Cluster S/R levels above the current price give you objective resistance targets where selling pressure is likely to emerge, helping you plan exits before the crowd",
+    "nguon": "https://www.tradingview.com/u/QuantAlgo/",
+    "doc_ra_gi": [
+     "gia",
+     "khoi_luong"
+    ]
+   },
+   {
+    "cau": "Exit: z-score crosses back through the exit threshold, or regime shifts to Volatile_Trending",
+    "nguon": "https://github.com/pawansigar570-arch/quant-statistical-arbitrage-system",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "Close on Trend Flip   – Exits trades instantly when candle colors reverse",
+    "nguon": "https://www.mql5.com/en/code/64833",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "the focus is on the parabolic sar as first signal to indicate a buy or sell secondly it looks where the closed of bar or candle indicated on the chart if the third candle back was below sma and previous candle closed was above sma and sar flipped below the price",
+    "nguon": "https://www.mql5.com/en/code/65407",
+    "doc_ra_gi": []
+   },
+   {
+    "cau": "that constitute as a buy signal, if macd shows bullish move and sar flipped below price but previous candle close (close[1]) is still below the sma it waits for 5 candles window for price to close above the sma",
+    "nguon": "https://www.mql5.com/en/code/65407",
+    "doc_ra_gi": []
+   }
+  ],
+  "tong": [],
+  "gann_sq9": []
+ }
+}

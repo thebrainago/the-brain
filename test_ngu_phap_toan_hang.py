@@ -41,6 +41,41 @@ def _df(n: int = 300) -> pd.DataFrame:
                          "close": g, "tick_volume": 1000.0})
 
 
+
+def _df_that(n: int = 1500) -> pd.DataFrame:
+    """Khung co HINH DANG NEN THAT - `_df` o tren khong dung duoc cho phep cat.
+
+    Do 12/09/2026 khi dung `_df` lam khung cho bai kiem nhin truoc: nam toan
+    hang ra chuoi HANG SO nen khong nguong nao chia duoc tin hieu, va phep cat
+    tren mot tin hieu hang so khong chung minh duoc gi.
+
+        bien_do     high-low   = (g+1)-(g-1) = 2,0 o MOI bar
+        ibs         (c-l)/(h-l) = 1/2        o MOI bar
+        than_nen    |c-o|      = 0           vi `_df` dat open = close
+        khoi_luong  tick_volume = 1000,0     o MOI bar
+        thang       400 bar gio = 16 ngay    -> chi co thang 1
+
+    Day khong phai loi cua `_df`: bai kiem "goi duoc khong" khong can hinh dang
+    nen. Nhung no la loi neu dem dung cho bai kiem "co nhin truoc khong" - va
+    ca hai bai deu o trong file nay, nen ghi ro o day de lan sau khong lam lai.
+
+    1.500 bar gio = 62 ngay, du de `thang` va `ngay_trong_thang` doi gia tri.
+    """
+    r = np.random.default_rng(20260912)
+    idx = pd.date_range("2020-01-01", periods=n, freq="h")
+    dong = 100.0 + np.cumsum(r.normal(0, 0.4, n))
+    mo = np.empty(n)
+    mo[0] = dong[0]
+    mo[1:] = dong[:-1] + r.normal(0, 0.1, n - 1)      # khe gia nho giua hai bar
+    rau_tren = np.abs(r.normal(0, 0.25, n))
+    rau_duoi = np.abs(r.normal(0, 0.25, n))
+    cao = np.maximum(mo, dong) + rau_tren
+    thap = np.minimum(mo, dong) - rau_duoi
+    return pd.DataFrame(
+        {"open": mo, "high": cao, "low": thap, "close": dong,
+         "tick_volume": np.round(r.lognormal(7.0, 0.5, n))}, index=idx)
+
+
 #: Toan hang can doi so rieng ngoai `n`. Khong co day thi bai kiem se bao chung
 #: "khong chay duoc" trong khi that ra chung chi thieu doi so.
 _DOI_SO = {
@@ -218,6 +253,98 @@ class BangConThieuPhaiCHAM_LAI(unittest.TestCase):
         self.assertTrue(thieu_han, "phai con toan hang that su chua co")
         self.assertTrue(chi_hep, "phai con bien the chua nhan duoc")
         self.assertTrue({x["chi_bao"] for x in chi_hep} <= NP.CHI_BAO_CO)
+
+
+class MoiToanHangDeuKHONG_NHIN_TRUOC(unittest.TestCase):
+    """Cong `ca_kiem_nhin_truoc` cua khoi 1 (KE_HOACH_XAY.md).
+
+    `test_goi_that_tung_ten_mot` chung minh moi toan hang GOI DUOC. No khong noi
+    gi ve viec toan hang do co doc bar tuong lai hay khong. Mot toan hang goi
+    duoc ma ro ri thi con te hon mot toan hang khong goi duoc: cai thu hai nem
+    loi, cai thu nhat tra ve mot edge gia va di tiep qua moi cong phia sau.
+
+    Bai kiem chay `kiem_khong_nhin_truoc` (phep CAT) tren TUNG toan hang mot.
+
+    HAI DIEU PHAI DUNG cung luc, neu khong bai kiem nay vo nghia:
+
+      1. Tin hieu phai THUC SU KICH HOAT. Luc cua phep cat ti le voi tan suat
+         kich hoat - do 06/09/2026: mot ro ri co y lam lech 16/400 bar van lot
+         vi co che chi kich hoat 2,75% so bar. Nen nguong o day dat tai PHAN VI
+         cua chinh toan hang do, va bai kiem TU CHOI ("khong do duoc", khong
+         phai "dat") neu khong tim duoc nguong nao cho ti le kich hoat 5-95%.
+      2. Bay phai tung bat duoc cai gi. `test_do_nhay_bay_phai_rung` chen mot
+         ro ri co y roi doi hoi phep cat GAO LEN. Mot bay chua bao gio rung thi
+         khong phan biet duoc voi mot bay hong.
+    """
+
+    #: Ti le kich hoat chap nhan duoc. Ngoai khoang nay thi phep cat gan nhu
+    #: chac chan khong cham vao bar tin hieu -> ket qua "dat" khong mang tin.
+    SAN, TRAN = 0.05, 0.95
+
+    def _khai_bao(self, cb: str, df: pd.DataFrame):
+        """-> (spec, ti_le_kich_hoat) hoac (None, ly_do) neu khong do duoc."""
+        t = {"chi_bao": cb, "n": 14}
+        t.update(_DOI_SO.get(cb, {}))
+        if cb in _CAN_CUA:
+            t["cua"] = {"chi_bao": "gia", "cot": "close"}
+        s = pd.Series(NP.toan_hang(df, t)).astype(float)
+        if not np.isfinite(s.to_numpy()).any():
+            return None, "toan hang tra toan NaN"
+
+        # Quet vai phan vi thay vi chi lay trung vi: chuoi roi rac (`gio`,
+        # `ngay_trong_tuan`, `trang_thai_lat`) co the cho ti le 0% hoac 100% o
+        # trung vi trong khi mot phan vi khac lai chia doi dep.
+        for q in (0.5, 0.4, 0.6, 0.3, 0.7, 0.2, 0.8):
+            nguong = float(np.nanquantile(s.to_numpy(), q))
+            if not np.isfinite(nguong):
+                continue
+            spec = {"ten": f"nhin_truoc_{cb}", "ho": "xu_huong", "chieu": 1,
+                    "giu": 1, "ra": [],
+                    "vao": [{"trai": t, "phep": ">", "phai": {"hang": nguong}}],
+                    "co_che": "khai bao toi thieu de kiem nhin truoc - khong dang ky"}
+            ti_le = float(np.mean(np.abs(NP.sinh_tu_spec(spec, df)) > 0))
+            if self.SAN <= ti_le <= self.TRAN:
+                return spec, ti_le
+        return None, "khong tim duoc nguong cho ti le kich hoat 5-95%"
+
+    def test_tung_toan_hang_qua_phep_cat(self):
+        df = _df_that()
+        ro_ri, khong_do_duoc = [], []
+        for cb in sorted(NP.CHI_BAO_CO):
+            with self.subTest(chi_bao=cb):
+                spec, phu = self._khai_bao(cb, df)
+                if spec is None:
+                    khong_do_duoc.append(f"{cb}: {phu}")
+                    continue
+                ok, mo_ta = NP.kiem_khong_nhin_truoc(spec, df)
+                if not ok:
+                    ro_ri.append(f"{cb} (kich hoat {phu:.0%}): {mo_ta}")
+        self.assertEqual(ro_ri, [], "toan hang DOC BAR TUONG LAI: " + str(ro_ri))
+        # `CHUA_DO_DUOC` khong duoc im lang thanh `DAT` - ba trang thai, khong hai.
+        self.assertEqual(khong_do_duoc, [],
+                         "toan hang khong dung duoc phep cat: " + str(khong_do_duoc))
+
+    def test_do_nhay_bay_phai_rung(self):
+        """Hieu chuan chieu nguoc. Chen ro ri co y vao `rsi` roi doi phep cat bat."""
+        df = _df_that()
+        spec, _ = self._khai_bao("rsi", df)
+        self.assertIsNotNone(spec)
+
+        goc = NP.toan_hang
+
+        def _ro_ri(d, t):
+            x = goc(d, t)
+            if isinstance(t, dict) and t.get("chi_bao") == "rsi":
+                return pd.Series(x).shift(-1)      # doc RSI cua bar KE TIEP
+            return x
+
+        NP.toan_hang = _ro_ri
+        try:
+            ok, mo_ta = NP.kiem_khong_nhin_truoc(spec, df)
+        finally:
+            NP.toan_hang = goc
+        self.assertFalse(ok, "chen ro ri co y ma phep cat van bao dat - BAY HONG")
+        self.assertIn("NHIN TRUOC", mo_ta)
 
 
 if __name__ == "__main__":
