@@ -4,18 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 15992, 0 phut), dieu_khien_xa.py (pid 15140, 44 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
-- git: 5fc7e24 them cong `khong_trong_log` + viec X0_bo_test: 4 test dang hong tu truoc dot nay
-### 2026-09-08 20:07:30 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13108, 0 phut), dieu_khien_xa.py (pid 15140, 82 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
-- git: 48aedc8 doc: nhip 'Claude giao viec - qwen lam viec' + q ban-giao la cua vao khi quay lai
-### 2026-09-08 20:21:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18424, 0 phut), dieu_khien_xa.py (pid 15140, 96 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
 - git: a723f95 do duoc bo dieu toc tren tai that: 0 -> 83% khong vot, va S2 la AM chu khong DAT
 ### 2026-09-08 20:31:53 — chup trang thai
 
@@ -404,3 +392,15 @@
 
 - dang chay: ban_giao_song.py (pid 7004, 0 phut)
 - git: bbb81e5 b mach: canary cho TUNG CHANG duong ong, khong chi cho engine
+### 2026-09-13 16:31:18 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14272, 0 phut)
+- git: f8859cd So NGAN SACH TAI NGUYEN: cua vao chung cho moi viec nang
+### 2026-09-13 16:44:09 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12788, 0 phut)
+- git: f8859cd So NGAN SACH TAI NGUYEN: cua vao chung cho moi viec nang
+### 2026-09-13 16:47:08 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14272, 0 phut)
+- git: f8859cd So NGAN SACH TAI NGUYEN: cua vao chung cho moi viec nang

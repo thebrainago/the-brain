@@ -44,6 +44,11 @@ if __name__ == "__main__":
         (LAB / "reports" / "THU_HOI_PAYLOAD.json").write_text(
             json.dumps(tong, ensure_ascii=False, indent=1), encoding="utf-8")
         if b.get("chan_mang"):
+            from nhan import ngan_sach as NS
+            if NS.thong_duong("https://www.mql5.com/en/code/43355",
+                              "mql5.com", print):
+                print("  da doi IP, di tiep ngay", flush=True)
+                continue
             # mql5 bop toc do sau ~50 luot nhanh. Day KHONG phai het viec:
             # cong `_duong_ra_song` da xac nhan la loi DUONG RA, va khong URL
             # nao bi loai. Nghi roi di tiep, dung dung han.

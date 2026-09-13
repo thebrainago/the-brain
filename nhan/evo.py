@@ -579,6 +579,8 @@ def ghi_van_de(xau: list[dict], in_ra=print) -> int:
         return 0
     them = 0
     for c in xau:
+        if c["ten"] in CHI_SO_TU_CHIEU:
+            continue        # mot thuoc do khong duoc lam thay doi thu no do
         try:
             _ma, tinh_trang = TEVO.bao_van_de_gop(
                 "VUA", "EVO/%s: %s" % (c["ten"], c["mo_ta"]),
@@ -591,9 +593,99 @@ def ghi_van_de(xau: list[dict], in_ra=print) -> int:
         except Exception as e:
             if in_ra:
                 in_ra("khong ghi duoc van de '%s': %s" % (c["ten"], e))
+    # DONG van de da het hieu luc - dung ham chung voi duong supervisor.
+    # Truoc 13/09 duong nay chi biet MO: o C len 30,8 GB ma `dia_thap` van
+    # nam trong so, va mot so van de chi dai ra thi khong ai doc no nua.
+    try:
+        dong = TEVO.dong_van_de_het_hieu_luc()
+        dong += dong_van_de_theo_chi_so(in_ra=None)
+        if dong and in_ra:
+            in_ra("dong %d van de da het hieu luc: %s"
+                  % (len(dong), ", ".join(dong[:6])))
+    except Exception as e:
+        if in_ra:
+            in_ra("khong dong duoc van de cu: %s" % repr(e)[:100])
     if in_ra:
         in_ra("ghi %d van de moi vao so" % them)
     return them
+
+
+#: Chi so TU CHIEU - do chinh so van de - nen KHONG duoc sinh ra van de.
+#:
+#: `evo.van_de_mo` dem so van de dang mo. Neu no duoc phep ghi mot van de khi
+#: vuot nguong thi no tu nuoi minh: nhieu van de -> XAU -> ghi them mot van de
+#: -> van nhieu. Do 13/09: ban ghi cua no la `gia_tri: 90, so_lan_tai_phat: 8`.
+#: Mot thuoc do khong duoc lam thay doi thu no dang do.
+CHI_SO_TU_CHIEU = {"evo.van_de_mo"}
+
+#: Van de do LLM chan doan ma KHONG tai phat sau bay nhieu ngay thi dong.
+#: LLM chan doan lai MOI LUOT, nen khong tai phat la mot PHEP DO chu khong
+#: phai mot su im lang. Dat 2 ngay: du de mot su co that keo qua mot dem
+#: khong bi dong oan, va du ngan de so khong phinh.
+NGAY_KHONG_TAI_PHAT = 2
+
+
+def dong_van_de_theo_chi_so(in_ra=print) -> list:
+    """Dong van de do LLM/EVO ghi ma CHI SO goc cua no nay da TOT.
+
+    ## VI SAO CAN THEM CAI NAY
+
+    `tru/evolution.dong_van_de_het_hieu_luc` chi dong duoc cai nam trong
+    `EVO_TU_QUAN` (danh sach ma co dinh). Van de do LLM chan doan mang ma sinh
+    (`llm_e502b66769`, `vd_tick_test_bi_khoa`) khong nam trong danh sach do,
+    nen **khong co duong dong nao** - chung tich lai vinh vien.
+
+    Do 13/09: 7/23 van de con mo la loai nay, trong do it nhat hai cai da het
+    tu lau (`vd_tick_test_bi_khoa` = "dia duoi nguong an toan" trong khi dia
+    da 30,8 GB; `EVO/xay.viec_hong` trong khi chi so do dang TOT).
+
+    May man la chung CO ghi `chi_so` trong bang chung. Nen dong duoc bang
+    chinh phep do goc: chi so nay TOT -> van de sinh ra tu no het hieu luc.
+    """
+    import json as _json
+    try:
+        from nhan import so as SO
+    except Exception:
+        return []
+    from datetime import datetime as _dt
+    hien = {c["ten"]: c["trang_thai"] for c in do_het()["chi_so"]}
+    nay = _dt.now()
+    da_dong = []
+    for m in SO.van_de_mo():
+        bc = m.get("bang_chung")
+        if isinstance(bc, str):
+            try:
+                bc = _json.loads(bc)
+            except Exception:
+                bc = {}
+        bc = bc or {}
+        ten = bc.get("chi_so")
+        if ten and hien.get(ten) == TOT:
+            SO.dong_van_de(m["ma"], "chi so `%s` da TOT tro lai" % ten)
+            da_dong.append(m["ma"])
+            if in_ra:
+                in_ra("  dong %s (chi so %s da TOT)" % (m["ma"], ten))
+            continue
+        # KHONG TAI PHAT = bang chung. Van de do LLM chan doan khong ghi
+        # `chi_so` thi khong dong theo chi so duoc - nhung LLM chan doan LAI
+        # moi luot, nen viec no KHONG con neu ra la mot phep do, khong phai
+        # mot su im lang. Do 13/09: `vd_tick_test_bi_khoa` ("dia duoi nguong")
+        # nam trong so trong khi dia da 30,8 GB, va khong co duong nao dong.
+        if not m["ma"].startswith(("llm_", "vd_")):
+            continue
+        gan = bc.get("lan_gan_nhat") or m.get("phat_hien_luc")
+        if not gan:
+            continue
+        try:
+            tuoi = (nay - _dt.strptime(str(gan)[:19], "%Y-%m-%d %H:%M:%S")).days
+        except Exception:
+            continue
+        if tuoi >= NGAY_KHONG_TAI_PHAT:
+            SO.dong_van_de(m["ma"], "khong tai phat %d ngay" % tuoi)
+            da_dong.append(m["ma"])
+            if in_ra:
+                in_ra("  dong %s (khong tai phat %d ngay)" % (m["ma"], tuoi))
+    return da_dong
 
 
 #: Nho lan bao xa gan nhat, de khong gui lap.

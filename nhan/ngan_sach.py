@@ -90,6 +90,87 @@ RAM_TOI_THIEU_GB = 3.0
 TRAN_TIEN_TRINH_PYTHON = 28
 
 
+# ------------------------------------------------------------ DOI IP
+#: Duong doi IP co san tren may nay. Cloudflare WARP bat/tat = doi ca dai IP.
+WARP = Path(r"C:\Program Files\Cloudflare\Cloudflare WARP\warp-cli.exe")
+
+
+def _warp(lenh: str) -> bool:
+    import subprocess
+    if not WARP.exists():
+        return False
+    try:
+        r = subprocess.run([str(WARP), lenh], capture_output=True, text=True,
+                           timeout=30)
+        return "success" in (r.stdout or "").lower()
+    except Exception:
+        return False
+
+
+def warp_dang_bat() -> bool:
+    import subprocess
+    if not WARP.exists():
+        return False
+    try:
+        r = subprocess.run([str(WARP), "status"], capture_output=True,
+                           text=True, timeout=20)
+        ra = (r.stdout or "").lower()
+        return "connected" in ra and "disconnected" not in ra
+    except Exception:
+        return False
+
+
+def doi_ip(in_ra=print) -> bool:
+    """Lat WARP -> doi ca dai IP thoat. Tra True neu da lat duoc.
+
+    ## VI SAO DAY LA MOT CO CHE, KHONG PHAI MOT GHI CHU
+
+    Memory cua du an tung ghi **"bat WARP la thong"** (mql5). Ngay 13/09/2026
+    toi do lai va ket luan nguoc: *"tat WARP moi thong"* - roi HAI TIENG SAU
+    do lai lan nua va no lai nguoc tiep:
+
+        14:5x  WARP bat  -> RemoteDisconnected / 403      WARP tat -> 200
+        16:5x  WARP tat  -> RemoteDisconnected (3/3)      WARP bat -> 200
+
+    Ca hai ket luan deu la suy dien tu MOT quan sat. Co che that: **mql5 cam
+    theo IP sau ~50-150 luot**. Duong nao cung chay cho toi khi IP do bi cam;
+    lat WARP la doi sang mot IP chua bi cam.
+
+    Nen dieu dung phai lam khong phai chon mot ben, ma la: **di du cham de
+    khong bi cam, va khi bi cam thi DOI IP** - hai thu, va ca hai deu la viec
+    cua bo dieu phoi chu khong phai cua nguoi doc ghi chu.
+    """
+    bat = warp_dang_bat()
+    ok = _warp("disconnect" if bat else "connect")
+    time.sleep(8)
+    in_ra("doi IP: WARP %s -> %s" % ("bat" if bat else "tat",
+                                     "tat" if bat else "bat"))
+    return ok
+
+
+def thong_duong(thu_url: str, host: str, in_ra=print) -> bool:
+    """Duong toi `host` con song khong; neu khong thi THU DOI IP mot lan.
+
+    Tra True neu (sau cung) di duoc.
+    """
+    import requests
+
+    def _thu() -> bool:
+        try:
+            r = requests.get(thu_url, timeout=15,
+                             headers={"User-Agent": "Mozilla/5.0"})
+            return r.status_code == 200 and len(r.text) > 5000
+        except Exception:
+            return False
+
+    if _thu():
+        return True
+    in_ra("  %s khong vao duoc - thu doi IP" % host)
+    if not doi_ip(in_ra):
+        return False
+    return _thu()
+
+
 class HetCho(RuntimeError):
     """Khong con cho cho viec nay LUC NAY. Day la `CHUA_DO_DUOC` - viec chua
     chay, khong phai viec da chay va that bai."""

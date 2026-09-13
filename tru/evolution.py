@@ -1297,15 +1297,31 @@ def _den_han_san() -> bool:
     return (time.time() - cu) > CHU_KY_SAN_GIAY
 
 
-def mot_luot() -> dict:
-    SO.nhip_tim(TRU, "chay")
-    vh = do_van_hanh()
-    sk = do_suc_khoe_day_chuyen()
-    vd = phat_hien(vh, sk)
-    for v in vd:
-        SO.bao_van_de(v["ma"], v["muc"], v["mo_ta"], v.get("bc"))
-    # TU DONG LAI: van de cua EVO ma luot nay khong con kich hoat nua
-    dang_kich_hoat = {v["ma"] for v in vd}
+def dong_van_de_het_hieu_luc(dang_kich_hoat: set | None = None) -> list:
+    """Dong van de EVO ma DIEU KIEN PHAT HIEN khong con dung nua.
+
+    ## VI SAO PHAI LA MOT HAM RIENG
+
+    Logic nay truoc 13/09/2026 nam GON TRONG `mot_luot()` - tuc chi duong
+    supervisor 24/7 moi dong van de. Duong chay tay (`b evo --ghi` ->
+    `nhan/evo.ghi_van_de`) chi biet MO, khong biet dong.
+
+    Hau qua do duoc chieu 13/09: o C da tu 233 MB len 30,8 GB va EVO bao
+    `dia.con_trong = 30.8 TOT`, nhung van de `dia_thap` ("Dia con 7.6 GB ->
+    MT5 tick-test bi KHOA") **van MO**, keo theo `vd_tick_test_bi_khoa`. Hai
+    dong rac trong mot so 24 dong - va mot so van de chi dai ra thi khong ai
+    doc no nua. Chinh ghi chu cua `EVO_TU_QUAN` da canh bao dieu nay ("da xay
+    ra that voi `dia_thap`"), nhung canh bao nam o mot duong con duong kia
+    thi khong.
+
+    Day la ho loi quen thuoc cua lab: **mot luat chi song neu no nam o cho HEP
+    NHAT**. Nen no thanh ham, va CA HAI duong deu goi.
+
+    `dang_kich_hoat=None` -> tu do lai de biet cai gi con dung.
+    """
+    if dang_kich_hoat is None:
+        dang_kich_hoat = {v["ma"] for v in
+                          phat_hien(do_van_hanh(), do_suc_khoe_day_chuyen())}
     da_dong = []
     for m in SO.van_de_mo():
         ma = m["ma"]
@@ -1317,6 +1333,18 @@ def mot_luot() -> dict:
         elif ma in EVO_TU_QUAN:
             SO.dong_van_de(ma, "dieu kien phat hien khong con dung")
             da_dong.append(ma)
+    return da_dong
+
+
+def mot_luot() -> dict:
+    SO.nhip_tim(TRU, "chay")
+    vh = do_van_hanh()
+    sk = do_suc_khoe_day_chuyen()
+    vd = phat_hien(vh, sk)
+    for v in vd:
+        SO.bao_van_de(v["ma"], v["muc"], v["mo_ta"], v.get("bc"))
+    # TU DONG LAI: van de cua EVO ma luot nay khong con kich hoat nua
+    da_dong = dong_van_de_het_hieu_luc({v["ma"] for v in vd})
     # SAN CONG CU NGOAI. Nua viec con lai cua EVO (chu du an chot 30/08): khong
     # chi canh he hong, ma con di tim du an/cong cu da co san de tich hop.
     # Tan suat thap - GitHub search khong khoa cho 10 lan/phut, va kho cong cu

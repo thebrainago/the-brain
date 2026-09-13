@@ -103,3 +103,71 @@ class BaoCaoPhaiDOC_DUOC(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+# ------------------------------------------- SO VAN DE PHAI DONG LAI DUOC
+#
+# Them 13/09/2026. So van de chi MO ma khong DONG thi khong ai doc no nua -
+# va do khong phai suy doan: chieu 13/09 no co 24 dong, trong do
+#   `dia_thap`            "Dia con 7.6 GB" trong khi dia da 30,8 GB
+#   `EVO/xay.viec_hong`   trong khi chi so do dang TOT
+#   `EVO/evo.van_de_mo`   mot VAN DE ve viec CO VAN DE - vong tu nuoi
+#
+# Ba duong dong, ba ho loi khac nhau:
+#   1. `dong_van_de_het_hieu_luc` chi nam trong `mot_luot()` (duong
+#      supervisor); duong chay tay `b evo` chi biet MO.
+#   2. Van de do LLM ghi mang ma sinh, khong nam trong `EVO_TU_QUAN`, nen
+#      khong co duong dong nao ca.
+#   3. `evo.van_de_mo` do CHINH so van de ma lai duoc phep ghi them mot van
+#      de - mot thuoc do khong duoc lam thay doi thu no dang do.
+
+class SoVanDePhaiDongLaiDuoc(unittest.TestCase):
+
+    def test_chi_so_tu_chieu_khong_duoc_sinh_van_de(self):
+        from nhan import evo as EVO
+        self.assertIn("evo.van_de_mo", EVO.CHI_SO_TU_CHIEU)
+
+    def test_ham_dong_dung_chung_cho_CA_HAI_duong(self):
+        """Mot luat chi song neu no nam o cho HEP NHAT."""
+        from tru import evolution as TEVO
+        from nhan import evo as EVO
+        self.assertTrue(callable(TEVO.dong_van_de_het_hieu_luc))
+        self.assertTrue(callable(EVO.dong_van_de_theo_chi_so))
+        import inspect
+        ma = inspect.getsource(EVO.ghi_van_de)
+        self.assertIn("dong_van_de_het_hieu_luc", ma,
+                      "duong chay tay khong goi ham dong -> so chi dai ra")
+
+    def test_dong_khi_chi_so_goc_da_TOT(self):
+        import json
+        from nhan import evo as EVO
+        from nhan import so as SO
+        ma = "thu_dong_theo_chi_so"
+        SO.bao_van_de(ma, "VUA", "thu", {"chi_so": "dia.con_trong"})
+        try:
+            mo = {x["ma"] for x in SO.van_de_mo()}
+            self.assertIn(ma, mo, "chua ghi duoc van de thu - bo do mu")
+            EVO.dong_van_de_theo_chi_so(in_ra=None)
+            self.assertNotIn(ma, {x["ma"] for x in SO.van_de_mo()},
+                             "chi so `dia.con_trong` dang TOT ma van de van mo")
+        finally:
+            SO.dong_van_de(ma, "don test")
+
+    def test_KHONG_dong_khi_chi_so_goc_van_XAU(self):
+        """Chieu nguoc lai - mot cong dong TAT CA cung vo dung."""
+        from nhan import evo as EVO
+        from nhan import so as SO
+        ma = "thu_khong_duoc_dong"
+        SO.bao_van_de(ma, "VUA", "thu", {"chi_so": "chi_so_khong_ton_tai_xyz"})
+        try:
+            EVO.dong_van_de_theo_chi_so(in_ra=None)
+            self.assertIn(ma, {x["ma"] for x in SO.van_de_mo()},
+                          "dong ca van de ma chi so goc khong do duoc")
+        finally:
+            SO.dong_van_de(ma, "don test")
+
+    def test_nguong_khong_tai_phat_hop_ly(self):
+        from nhan import evo as EVO
+        self.assertGreaterEqual(EVO.NGAY_KHONG_TAI_PHAT, 1,
+                                "dong ngay trong ngay se dong oan su co that")
+        self.assertLessEqual(EVO.NGAY_KHONG_TAI_PHAT, 7)

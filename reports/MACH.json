@@ -15,6 +15,13 @@
    "goi_y": "python -m nhan.gop_wal"
   },
   {
+   "chang": "tien_trinh",
+   "gia_tri": 18,
+   "trang_thai": "TOT",
+   "mo_ta": "18 tien trinh python (tran 28), RAM trong 18.7 GB",
+   "goi_y": "python -m nhan.ngan_sach --don"
+  },
+  {
    "chang": "kho_co_che",
    "gia_tri": 3037,
    "trang_thai": "TOT",
@@ -30,9 +37,9 @@
   },
   {
    "chang": "pheu_ung_vien",
-   "gia_tri": 80,
+   "gia_tri": 81,
    "trang_thai": "TOT",
-   "mo_ta": "80/120 ban dau bang qua bo loc (ton 3806)",
+   "mo_ta": "81/120 ban dau bang qua bo loc (ton 3806)",
    "goi_y": "b go-html; kiem boc_llm.DAU_HIEU_LUAT co phu lop nguon moi"
   },
   {
@@ -66,30 +73,5 @@
  ],
  "do": 0,
  "chua_do_duoc": 0,
- "giay": 99.8,
- "mutation": {
-  "be": [
-   [
-    "dia",
-    true
-   ],
-   [
-    "kho_co_che",
-    true
-   ],
-   [
-    "bang_quan_tri",
-    true
-   ],
-   [
-    "pheu_html_tho",
-    true
-   ],
-   [
-    "engine",
-    true
-   ]
-  ],
-  "khong_nhay": []
- }
+ "giay": 104.0
 }
