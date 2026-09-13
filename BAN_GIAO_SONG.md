@@ -5,26 +5,6 @@
 > do. `b ket` doc file nay khi chot phien.
 
 - `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
-- `ghim_ca_kho.log`: }
-- `qwen_ultra.log`: [!] X0_bo_test             CHUA_DO_DUOC  |  tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log: summary info =============
-- `test_day_du.log`: 3 failed, 1299 passed, 1 skipped, 1 warning, 468 subtests passed in 1082.15s (0:18:02)
-- git: 5e6c83d trang thai: khoi 2, 3, 4 DAT; kho co che 689 -> 820 trong phien
-### 2026-09-11 22:16:27 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 23588, 0 phut)
-- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
-- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
-- `doc_video.log`: }
-- `ghim_ca_kho.log`: }
-- `qwen_ultra.log`: ~ 22:16:15 | san sang 11 | CPU   36% / muc tieu 65%  |  con  5.8 loi  |  dang chay 2  [CPU:1, LLM:1]
-- `test_day_du.log`: ..........................................................
-- `theo_doi.log`: }
-- git: a6de503 khoi 6: khoa tester - va bo quet cho thay 9 duong phong VAN o ngoai khoa
-### 2026-09-11 22:41:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10504, 0 phut)
-- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
-- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
 - `doc_video.log`: }
 - `ghim_ca_kho.log`: }
 - `qwen_ultra.log`: ~ 22:40:18 | san sang 12 | CPU   37% / muc tieu 65%  |  con  5.7 loi  |  dang chay 2  [CPU:1, LLM:1]
@@ -404,3 +384,23 @@
 
 - dang chay: ban_giao_song.py (pid 19464, 0 phut)
 - git: b76ed43 Do ho quan tri bang PYTHON - module quan trong nhat khong nam cho MT5
+### 2026-09-13 18:48:36 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14452, 0 phut)
+- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
+### 2026-09-13 18:55:14 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8340, 0 phut)
+- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
+### 2026-09-13 19:03:52 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18184, 0 phut)
+- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
+### 2026-09-13 19:09:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11560, 0 phut)
+- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
+### 2026-09-13 19:18:03 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1236, 0 phut)
+- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)

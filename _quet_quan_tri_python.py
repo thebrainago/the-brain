@@ -162,9 +162,31 @@ def main() -> int:
     khung = lay("--khung", "D1")
     so_ma = int(lay("--so-ma", "25"))
 
-    kho = DU.kho()
-    ma_co = sorted({(k[0] if isinstance(k, tuple) else str(k).split("|")[0])
-                    for k in kho})[:so_ma]
+    # CHON MA CO DU LIEU CUA KHUNG DANG HOI, khong lay N ma dau bang chu cai.
+    #
+    # Do 13/09: lay 80 ma dau -> 72 cai la cap exotic chi co nguon D1, va
+    # `du_lieu` TU CHOI tao H4 tu bar ngay ("khong noi suy nguoc" - chot chan
+    # dung). Ket qua la mot bang H4 dung tren 8 ma, de doc nham thanh "H4
+    # thieu du lieu" trong khi EURUSD H4 co 43.996 bar.
+    #
+    # `--ma` de chi dinh tay; khong thi tu loc theo so bar cua chinh khung do.
+    chi_dinh = lay("--ma", "")
+    if chi_dinh:
+        ma_co = [x.strip() for x in chi_dinh.split(",") if x.strip()]
+    else:
+        kho = DU.kho()
+        tat = sorted({(k[0] if isinstance(k, tuple) else str(k).split("|")[0])
+                      for k in kho})
+        ma_co = []
+        for m in tat:
+            if len(ma_co) >= so_ma:
+                break
+            try:
+                d = DU.nap(m, khung)
+            except Exception:
+                continue
+            if d is not None and len(d) >= 2000:
+                ma_co.append(m)
     print("%d ma, khung %s, %d bo luat" % (len(ma_co), khung, len(bo_luat())),
           flush=True)
 

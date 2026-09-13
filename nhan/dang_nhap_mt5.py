@@ -158,3 +158,106 @@ if __name__ == "__main__":
         else "XM"
     print(json.dumps({k: v for k, v in dang_nhap(san).items()
                       if k != "mat_khau"}, ensure_ascii=False, indent=1))
+
+
+# ==================================================== MO DUNG SAN, KHONG DOAN
+#
+#: Dau hieu nhan ra tung san tu `account_info().company`.
+DAU_HIEU_SAN = {
+    "XM": ("trading point", "xm "),
+    "Exness": ("exness",),
+    "FXCE": ("fxce",),
+    "Ultima": ("ultima",),
+}
+
+
+class SaiSan(RuntimeError):
+    """Da noi duoc voi MT5 nhung KHONG phai san minh hoi."""
+
+
+def _dung_san(san: str, cong_ty: str, server: str) -> bool:
+    t = ((cong_ty or "") + " " + (server or "")).lower()
+    return any(d in t for d in DAU_HIEU_SAN.get(san, (san.lower(),)))
+
+
+import contextlib as _ctx
+
+
+@_ctx.contextmanager
+def mo(san: str = "XM", cho_giay: int = 60, dong_cai_khac: bool = True,
+       in_ra=print):
+    """Mo MT5 CUA DUNG SAN `san`, dam bao khong noi nham terminal khac.
+
+    ## CAI BAY DO DUOC 13/09/2026
+
+    `mt5.initialize(path=X)` **khong bao dam** ban dang noi voi ban cai X.
+    `path` chi dung de KHOI DONG mot terminal khi chua co cai nao chay; neu
+    da co mot terminal dang chay thi API gan vao CAI DO, bat ke duong dan.
+
+    Do that: truyen `path` cua XM Global MT5, va API tra ve
+
+        tai khoan: 263579653 | Exness-MT5Real37 | Exness Technologies Ltd
+        TONG SO MA SAN CUNG CAP: 43   (nhom `Cent`, hau to `c`)
+
+    tuc toan bo so lieu la cua Exness cent. Khong mot thong bao nao canh bao.
+    Moi phep do chi phi / danh sach ma / lich su cua lab deu co the lang le
+    lay tu SAI SAN theo duong nay - va ket qua van "hop ly" nen khong ai nghi.
+
+    Nen ham nay: dong terminal khac -> mo dung ban cai -> **KIEM LAI
+    `account_info()` co dung san khong**, sai thi nem `SaiSan`.
+    """
+    import subprocess
+    import time as _t
+    import MetaTrader5 as mt5
+
+    exe = EXE.get(san)
+    if not exe or not Path(exe).exists():
+        raise SaiSan("khong thay terminal64 cua %s" % san)
+
+    if dong_cai_khac:
+        try:
+            import psutil
+            for p in psutil.process_iter(["name", "exe"]):
+                if (p.info.get("name") or "").lower() != "terminal64.exe":
+                    continue
+                if (p.info.get("exe") or "").lower() != str(exe).lower():
+                    p.kill()
+        except Exception:
+            subprocess.run(["taskkill", "/F", "/IM", "terminal64.exe"],
+                           capture_output=True)
+        _t.sleep(3)
+
+    k = khoa(san)
+    tham = {"path": str(exe), "timeout": cho_giay * 1000}
+    if k.get("login") and k.get("mat_khau"):
+        sv = k.get("server_chay_duoc") or (k.get("servers") or [""])[0]
+        tham.update(login=int(k["login"]), password=k["mat_khau"], server=sv)
+    if not mt5.initialize(**tham):
+        raise SaiSan("khong mo duoc MT5 cua %s: %s" % (san, mt5.last_error()))
+
+    a = mt5.account_info()
+    cong_ty = getattr(a, "company", "") if a else ""
+    server = getattr(a, "server", "") if a else ""
+    if not _dung_san(san, cong_ty, server):
+        mt5.shutdown()
+        raise SaiSan("hoi %s nhung dang noi voi `%s` / `%s` - API gan vao mot "
+                     "terminal khac dang chay" % (san, cong_ty, server))
+    if in_ra:
+        in_ra("MT5 %s: %s @ %s" % (san, getattr(a, "login", "?"), server))
+    try:
+        yield mt5
+    finally:
+        mt5.shutdown()
+
+
+def ma_cua_san(san: str = "XM", in_ra=print) -> dict:
+    """Danh sach ma THAT cua mot san, kem nhom va so ma dang chon."""
+    import collections
+    with mo(san, in_ra=in_ra) as mt5:
+        s = mt5.symbols_get() or []
+        nhom = collections.Counter(
+            (x.path.split(chr(92))[0] if x.path else "?") for x in s)
+        return {"san": san, "so_ma": len(s),
+                "dang_chon": sum(1 for x in s if x.visible),
+                "nhom": dict(nhom.most_common(15)),
+                "ten": sorted(x.name for x in s)}
