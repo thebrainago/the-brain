@@ -156,8 +156,9 @@ TOI_THIEU = 800
 
 def go_kho(gioi_han: int = 500, luong: int = 8, in_ra=print) -> dict:
     """Go `gioi_han` ban doc HTML tho, ghi de `van_ban`. Tra ve bang dem."""
-    from nhan import dia as _DIA
-    _DIA.du_cho(viec="go kho HTML")
+    from nhan import ngan_sach as _NS
+    with _NS.xin("CPU_NANG", "go kho HTML", cho_giay=60, ram_gb=2.0):
+        pass    # cua vao: kiem dia + RAM + tien trinh mo coi
     ds = ung_vien(gioi_han)
     in_ra(f"  {len(ds)} ban HTML tho")
     if not ds:

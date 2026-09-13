@@ -485,7 +485,11 @@ def thu_hoi_sai_loai(gioi_han: int = 30, ngan_sach_giay: float = 180.0,
                 if bao["mang_hong"] >= 5:
                     bao["chan_mang"] = True
                     break
-        time.sleep(NHIP_TAI_GIAY if nhip_giay is None else nhip_giay)
+        # NHIP THEO HOST, khong phai sleep co dinh trong tien trinh nay.
+        # Hai tien trinh cung cao mql5 ma moi cai tu dem nhip cua rieng minh
+        # thi tong lai van nhanh gap doi va van bi chan - do 13/09.
+        from nhan import ngan_sach as NS
+        NS.cho_nhip("www.mql5.com")
     if bao["xem"]:
         SO.ghi_chi_so("ma_nguon_thu_hoi_sai_loai", float(bao["sua_duoc"]), bao)
     return bao
@@ -630,6 +634,8 @@ def thu_hoi_github(gioi_han: int = 30, ngan_sach_giay: float = 240.0,
             bao["bo_cuoc"] += 1
             continue
         bao["thu_lai"] += 1
+        from nhan import ngan_sach as NS
+        NS.cho_nhip("api.github.com")     # 60 luot/GIO khi khong co token
         try:
             kq = TV.tu_github(r["url"], so_file=4)
         except Exception:

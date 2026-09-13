@@ -58,9 +58,20 @@ def con_gb(duong: Path | str = LAB) -> float:
         return float("inf")      # khong do duoc thi dung chan mu
 
 
-def du_cho(can_gb: float = NGUONG_GB, viec: str = "",
+def du_cho(can_gb: float | None = None, viec: str = "",
            duong: Path | str = LAB) -> float:
-    """Tra so GB con trong, NEM `DiaDay` neu duoi nguong."""
+    """Tra so GB con trong, NEM `DiaDay` neu duoi nguong.
+
+    `can_gb=None` -> doc `NGUONG_GB` LUC GOI, khong phai luc import.
+
+    Ban dau chu ky la `can_gb: float = NGUONG_GB`. Python tinh gia tri mac
+    dinh mot lan luc dinh nghia ham, nen sua `dia.NGUONG_GB` luc chay KHONG
+    doi duoc nguong cua cong - va mot bai kiem chinh dieu do bao "DID NOT
+    RAISE". Mot cong khong chinh duoc luc chay thi cung khong THU duoc luc
+    chay, va mot cong chua ai thu la mot cong chua biet co nhay khong.
+    """
+    if can_gb is None:
+        can_gb = NGUONG_GB
     gb = con_gb(duong)
     if gb < can_gb:
         raise DiaDay(

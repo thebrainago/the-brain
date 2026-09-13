@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
-- git: 6940a29 he tu chay `q`: qwen lam tiep bang viec, code cham cong, CPU giu ~85%
-### 2026-09-08 19:29:35 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 15992, 0 phut), dieu_khien_xa.py (pid 15140, 44 phut)
 - `dieu_phoi_nen.log`: [Tue 09/08/2026 18:44:39.57] thay DUNG_LAI - khong khoi dong watchdog
 - git: 5fc7e24 them cong `khong_trong_log` + viec X0_bo_test: 4 test dang hong tu truoc dot nay
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 18064, 0 phut)
 - git: 285bf7a Bon bai test do da xanh + khau VIDEO TREN DIA (nang luc bi mot ghi chu sai chan mot thang)
+### 2026-09-13 16:20:54 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 7004, 0 phut)
+- git: bbb81e5 b mach: canary cho TUNG CHANG duong ong, khong chi cho engine

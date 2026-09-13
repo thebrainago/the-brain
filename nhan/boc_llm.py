@@ -411,8 +411,9 @@ def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
     from nhan import boc_ma_llm as BM       # noqa: F401  (dung o vong duoi)
     # Het dia thi me boc chay het, ghi khong duoc, va bao "0 co che moi" - dung
     # hinh dang cua mot ket qua am. Chan o dau me.
-    from nhan import dia as _DIA
-    _DIA.du_cho(viec="boc mot me")
+    from nhan import ngan_sach as _NS
+    _NS_giu = _NS.xin("LLM", "boc mot me", cho_giay=120)
+    _NS_giu.__enter__()
     if df_kiem is None:
         from nhan import loc_co_che as LCC
         df_kiem = LCC.df_kiem_chuan()
@@ -437,6 +438,7 @@ def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
             if i % 10 == 0:
                 in_ra(f"  ... {i}/{len(ds)}  ({time.time()-t0:.0f}s)")
 
+    _NS_giu.__exit__(None, None, None)
     da_co = {NP.van_tay_dieu_kien(c) for c in NP.doc_kho()}
     moi, tu_choi, loi = 0, 0, 0
     ly_do = {}

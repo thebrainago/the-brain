@@ -187,8 +187,24 @@ def c_engine() -> dict:
                goi_y="b canary  (xem ca mutation audit)")
 
 
-CHANG = (c_dia, c_wal, c_kho_co_che, c_pheu_html, c_pheu_ung_vien,
-         c_duong_llm, c_bang_quan_tri, c_tester, c_engine)
+def c_tien_trinh() -> dict:
+    """Tien trinh python MO COI tich lai lam may khong sinh duoc tien trinh moi.
+
+    Do 13/09: 34 tien trinh sot lai tu cac luot pytest va agent bi cat ngang
+    -> `ENOMEM: uv_spawn`. Trieu chung doc ra la "bo test chet o 56%", khong
+    phai "may het bo nho" - lai dung ho loi khau do hong doc nhu ket qua am.
+    """
+    from nhan import ngan_sach as NS
+    m = NS.may()
+    n = m["python"]
+    return _kq("tien_trinh", n, n <= NS.TRAN_TIEN_TRINH_PYTHON,
+               "%d tien trinh python (tran %d), RAM trong %.1f GB"
+               % (n, NS.TRAN_TIEN_TRINH_PYTHON, m["ram_trong_gb"]),
+               goi_y="python -m nhan.ngan_sach --don")
+
+
+CHANG = (c_dia, c_wal, c_tien_trinh, c_kho_co_che, c_pheu_html,
+         c_pheu_ung_vien, c_duong_llm, c_bang_quan_tri, c_tester, c_engine)
 
 
 def chay(in_ra=print) -> dict:
@@ -277,6 +293,15 @@ def be_thu(in_ra=print) -> dict:
         ket.append(("engine", c_engine()["trang_thai"] == CHUA))
     finally:
         CN.chay_het = cu4
+
+    # 6. Be chang TIEN TRINH: ha tran xuong duoi so dang chay.
+    from nhan import ngan_sach as NS
+    cu5 = NS.TRAN_TIEN_TRINH_PYTHON
+    try:
+        NS.TRAN_TIEN_TRINH_PYTHON = -1
+        ket.append(("tien_trinh", c_tien_trinh()["trang_thai"] == DO))
+    finally:
+        NS.TRAN_TIEN_TRINH_PYTHON = cu5
 
     in_ra("=== MUTATION AUDIT: mach dap co that su nhay khong? ===")
     for ten, bat in ket:

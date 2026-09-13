@@ -18,7 +18,8 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b trang-thai      bang dieu khien (van hanh cua dieu phoi)
     b chay / b dung   bat / dung dieu phoi 24/7
     b canary          tu kiem engine (5 canary)
-    b mach [--be]     MACH DAP 9 chang duong ong (--be = mutation audit)
+    b mach [--be]     MACH DAP 10 chang duong ong (--be = mutation audit)
+    b ngan-sach [--don]  SO NGAN SACH tai nguyen (dia/RAM/LLM/tester/nhip host)
     b phan-loai       389 file ma -> 4 lan + BANG SUAT BOC tung lan
     b chi-bao [N]     boc co che tu file CHI BAO (N = test me; --that = chay het)
     b loc [--khung K] loc TINH truoc pheu: suy bien / trung hanh vi / spec hong
@@ -154,6 +155,17 @@ def c_test_me(a):
     song du lau, va me nao chet ta BIET la me nao.
     """
     return chay([PY, LAB / "chay_test_tung_me.py", *a], cwd=LAB)
+
+
+def c_ngan_sach(a):
+    """b ngan-sach [--don] - SO NGAN SACH TAI NGUYEN.
+
+    Cua vao chung cho moi viec nang: dia, RAM, so tien trinh, lop LLM/TESTER/
+    CPU_NANG/BANG_THONG, va NHIP TOI THIEU theo tung host. `--don` giet tien
+    trinh python mo coi. Xem dau `nhan/ngan_sach.py` de biet moi con so den
+    tu phep do nao.
+    """
+    return chay([PY, "-m", "nhan.ngan_sach", *a], cwd=LAB)
 
 
 def c_mach(a):
@@ -757,6 +769,7 @@ LENH = {
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
     "quan-tri": c_quan_tri, "qt": c_quan_tri,
     "bench-qt": c_bench_qt, "go-html": c_go_html, "mach": c_mach,
+    "ngan-sach": c_ngan_sach, "ns": c_ngan_sach,
     "test-me": c_test_me,
     "luan-lenh": c_luan_lenh, "chuyen": c_chuyen,
     "dau-chan": c_dau_chan, "im-lang": c_im_lang,

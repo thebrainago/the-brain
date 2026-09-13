@@ -150,8 +150,9 @@ def mot_video(f: Path, model=None, ten_model: str = MODEL,
 def quet(thu_muc: str | Path, gioi_han: int = 0, ten_model: str = MODEL,
          ngon_ngu: str | None = "vi", in_ra=print) -> dict:
     from faster_whisper import WhisperModel
-    from nhan import dia as DIA
-    DIA.du_cho(viec="doc video cuc bo")
+    from nhan import ngan_sach as NS
+    with NS.xin("CPU_NANG", "doc video cuc bo", cho_giay=120, ram_gb=3.0):
+        pass
 
     ds = [f for f in tim(thu_muc) if not da_doc(f)]
     if gioi_han:
