@@ -84,7 +84,12 @@ def viet_ini(ten: str, symbol: str, khung: str, ho_tu: int, ho_den: int,
     hinh - va bang ket qua thieu mot dong doc y het "ho do khong vao lenh".
     """
     p = XM_DATA / f"{ten}.ini"
-    p.write_text(f"""[Tester]
+    # TU DANG NHAP trong chinh `.ini` - xem `bi_mat.khoi_common_ini`.
+    # Khong co khoi nay thi tester chet voi "tester not started because the
+    # account is not specified", va thong bao do KHONG noi gi ve dang nhap.
+    from nhan import bi_mat as _BM
+    _chung = _BM.khoi_common_ini("XM")
+    p.write_text(_chung + f"""[Tester]
 Expert={TEN_EA}.ex5
 Symbol={symbol}
 Period={khung}
@@ -144,7 +149,21 @@ def co_lich_su(symbol: str) -> bool:
     if not goc.exists():
         return True          # khong kiem duoc thi cho chay, dung chan mu
     co = {p.name for p in goc.glob("*/history/*") if p.is_dir()}
-    return symbol in co
+    if symbol in co:
+        return True
+    # CHUA CO LICH SU KHAC VOI KHONG CO MA.
+    #
+    # Do 13/09/2026, ngay sau khi dang nhap lai XM: `bases/XM.COM-MT5/history`
+    # RONG, vi MT5 chi tai lich su khi co ai do YEU CAU mot ma - va nguoi yeu
+    # cau dau tien chinh la luot tester nay. Cong cu nay khi do chan dung cai
+    # luot se tao ra thu no doi hoi: mot vong quan quanh.
+    #
+    # Nen khi kho lich su con RONG (moi dang nhap), cho chay - cong `so_lenh
+    # == 0` phia sau van bat duoc that bai that. Chi chan khi kho DA co ma
+    # khac ma khong co ma nay: luc do "khong co ma" moi la ket luan dung.
+    if not co:
+        return True
+    return False
 
 
 #: Ten khac nhau cho cung mot tai san giua cac san. Khong doan duoc bang chuoi:

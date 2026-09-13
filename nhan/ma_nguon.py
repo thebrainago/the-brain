@@ -564,10 +564,10 @@ def han_muc_github() -> dict:
 
     Dat `GITHUB_TOKEN` thi tran len **5.000/gio** - hon 83 lan.
     """
-    import os
     import requests
-    tok = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
-    h = {"Authorization": "Bearer " + tok} if tok else {}
+    from nhan import bi_mat as _BM
+    tok = _BM.token_github()
+    h = _BM.dau_github()
     try:
         r = requests.get("https://api.github.com/rate_limit", headers=h,
                          timeout=15).json()

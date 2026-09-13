@@ -122,7 +122,12 @@ def bien_dich(duong: Path) -> str:
 def viet_ini(ten: str, symbol: str, so_co_che: int, tu: str, den: str,
              deposit: int = 10000) -> Path:
     p = XM_DATA / f"{ten}.ini"
-    p.write_text(f"""[Tester]
+    # TU DANG NHAP trong chinh `.ini` - xem `bi_mat.khoi_common_ini`.
+    # Khong co khoi nay thi tester chet voi "tester not started because the
+    # account is not specified", va thong bao do KHONG noi gi ve dang nhap.
+    from nhan import bi_mat as _BM
+    _chung = _BM.khoi_common_ini("XM")
+    p.write_text(_chung + f"""[Tester]
 Expert={TEN_EA}.ex5
 Symbol={symbol}
 Period={KHUNG_CHAY}

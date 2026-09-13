@@ -56,8 +56,18 @@ BO_QUA_MA = re.compile(r"(test|__init__|setup|conftest|/docs?/|example.*plot|_pl
 
 def _lay(url: str, timeout: int = 30, nhi_phan: bool = False):
     import requests
+    h = dict(UA)
+    # TOKEN GITHUB nang han muc API tu 60 luot/GIO len 5.000. `tu_github` an
+    # mot luot API moi repo de liet ke file, nen khong token thi 1.013 repo
+    # lien quan trong kho = 17 gio.
+    if "github.com" in url or "githubusercontent.com" in url:
+        try:
+            from nhan import bi_mat as _BM
+            h.update(_BM.dau_github())
+        except Exception:
+            pass
     try:
-        r = requests.get(url, timeout=timeout, headers=UA)
+        r = requests.get(url, timeout=timeout, headers=h)
         if r.status_code != 200:
             return None
         return r.content if nhi_phan else r.text
