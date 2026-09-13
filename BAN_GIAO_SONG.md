@@ -4,22 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 3240, 0 phut), dieu_khien_xa.py (pid 8360, 67 phut)
-- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
-- git: 100b071 trang thai khoi 1A + ghi ro cong nao DAT, cong nao CHUA
-### 2026-09-11 19:40:36 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3200, 0 phut), dieu_khien_xa.py (pid 8360, 68 phut)
-- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
-- git: 17faff1 bo test day du sau khoi 1A: 1.242 pass / 3 fail (truoc: 1.239 / 4)
-### 2026-09-11 19:53:28 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16916, 0 phut), dieu_khien_xa.py (pid 8360, 81 phut)
-- `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
-- git: 17faff1 bo test day du sau khoi 1A: 1.242 pass / 3 fail (truoc: 1.239 / 4)
-### 2026-09-11 20:47:14 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 20852, 0 phut), dieu_khien_xa.py (pid 8360, 135 phut)
 - `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
 - `boc_lai2.log`: ... 2000/5121 ban · kho 781
 - `qwen_ultra.log`: ~ 20:46:02 | san sang 12 | CPU   31% / muc tieu 65%  |  con  6.7 loi  |  dang chay 3  [CPU:1, LLM:1, MANG:1]
@@ -404,3 +388,19 @@
 
 - dang chay: ban_giao_song.py (pid 20216, 0 phut)
 - git: e00f3e4 WARP thanh tai nguyen doc quyen co so: hai he con het gianh nhau mot cong tac
+### 2026-09-13 18:16:33 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2256, 0 phut)
+- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
+### 2026-09-13 18:18:48 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17928, 0 phut)
+- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
+### 2026-09-13 18:27:38 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13936, 0 phut)
+- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
+### 2026-09-13 18:29:40 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 21148, 0 phut)
+- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong

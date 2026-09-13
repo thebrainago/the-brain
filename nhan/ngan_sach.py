@@ -120,6 +120,21 @@ def warp_dang_bat() -> bool:
         return False
 
 
+#: CO CHO PHEP LAT WARP KHONG. Mac dinh **KHONG**.
+#:
+#: 13/09/2026 toi them `doi_ip()` de ne lenh cam IP cua mql5, va no lat WARP
+#: 5 lan trong mot luot. Hau qua: MT5 mat ket noi toi may chu giao dich (san
+#: chan IP VPN), va chu du an phai hoi *"sao cu tu bat vpn len lam gi the?"*.
+#:
+#: Sau do tim ra nguyen nhan THAT cua moi thu: **DNS cua may (VNPT
+#: 123.23.23.23 / IPv6 2001:ee0:23::23) chan ten mien san**. Sua o card mang
+#: sang 1.1.1.1/8.8.8.8 thi mql5, xm.com, myfxbook, fxblue deu thong ma
+#: khong can WARP.
+#:
+#: WARP chi la cai va cho DNS hong. DNS da sua thi cai va phai go - mot cai
+#: va con nam do se lai lat cong tac toan cuc duoi chan he khac.
+CHO_DOI_IP = False
+
 #: Viec DANG GIU WARP o mot trang thai co dinh. Chung nao con the nay thi
 #: `doi_ip` KHONG duoc lat WARP.
 _THE_WARP = GOC / "config" / "warp_dang_giu"
@@ -182,6 +197,9 @@ def doi_ip(in_ra=print) -> bool:
     khong bi cam, va khi bi cam thi DOI IP** - hai thu, va ca hai deu la viec
     cua bo dieu phoi chu khong phai cua nguoi doc ghi chu.
     """
+    if not CHO_DOI_IP:
+        in_ra("  doi IP DA TAT (DNS da sua tan goc o card mang) - khong lat WARP")
+        return False
     giu = warp_bi_giu()
     if giu:
         # KHONG lat WARP khi co viec khac dang giu no. Tra False = "khong doi
