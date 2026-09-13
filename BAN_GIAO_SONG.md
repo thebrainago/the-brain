@@ -4,110 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
-- `doc_video.log`: }
-- `ghim_ca_kho.log`: }
-- `qwen_ultra.log`: ~ 22:40:18 | san sang 12 | CPU   37% / muc tieu 65%  |  con  5.7 loi  |  dang chay 2  [CPU:1, LLM:1]
-- `test_day_du.log`: 1354 passed, 1 skipped, 1 warning, 478 subtests passed in 935.92s (0:15:35)
-- `theo_doi.log`: }
-- git: 5469043 BO TEST SACH: 1.354 pass / 0 fail (dau phien 1.239 / 4)
-### 2026-09-11 22:52:07 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18100, 0 phut)
-- `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
-- `doc_video.log`: }
-- `qwen_ultra.log`: ~ 22:50:19 | san sang 12 | CPU   21% / muc tieu 65%  |  con  8.9 loi  |  dang chay 1  [LLM:1]
-- `test_day_du.log`: 1354 passed, 1 skipped, 1 warning, 478 subtests passed in 935.92s (0:15:35)
-- `theo_doi.log`: }
-- git: 5469043 BO TEST SACH: 1.354 pass / 0 fail (dau phien 1.239 / 4)
-### 2026-09-12 00:15:26 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14224, 0 phut)
-- `de_qt_chay.log`: luat 14 · GridEA.mq5                           lenh  1759 · lai     -108.8
-- `doc_video2.log`: }
-- `qwen_ultra.log`: **Đã đề xuất:** `V1_dao_SP500` để kiểm tra xem edge này có tồn tại trên thị trường Mỹ hay
-- `test_day_du.log`: 3 failed, 1373 passed, 2 skipped, 1 warning, 479 subtests passed in 1074.15s (0:17:54)
-- `theo_doi.log`: }
-- git: df3a5e5 2026-09-12: khoi 2-6 DAT: so bai hoc, anh chup bat bien, tang cham tien, 4 cua vao, khoa tester + de quan tri len EA ngoai. Cuu mat du lieu kho co che 1149->3
-### 2026-09-12 00:22:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16628, 0 phut)
-- `de_qt_chay.log`: luat 14 · GridEA.mq5                           lenh  1759 · lai     -108.8
-- `doc_video2.log`: }
-- `qwen_ultra.log`: **Đã đề xuất:** `V1_dao_SP500` để kiểm tra xem edge này có tồn tại trên thị trường Mỹ hay
-- `test_day_du.log`: 3 failed, 1373 passed, 2 skipped, 1 warning, 479 subtests passed in 1074.15s (0:17:54)
-- `theo_doi.log`: }
-- git: aa328d5 ban giao song cuoi phien + dong sach truoc khi tat may
-### 2026-09-12 07:09:20 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8820, 0 phut), dieu_khien_xa.py (pid 15316, 3 phut)
-- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
-- `test_day_du.log`: .........................................................
-- git: aa328d5 ban giao song cuoi phien + dong sach truoc khi tat may
-### 2026-09-12 07:39:45 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13100, 0 phut), dieu_khien_xa.py (pid 15316, 33 phut)
-- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
-- `hang_doi_toan_hang.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HANG_DOI_TOAN_HANG.json
-- `lam_moi_mde.log`: ... 40/156  (484s)
-- `ly_do_tu_choi.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LY_DO_TU_CHOI.json
-- `mau_khong_tach_cap.log`: - Or is this normal when we finally cross under the 200-day moving average after a long time being above it
-- `qwen_ultra.log`: ~ 07:38:40 | san sang 12 | CPU   91% / muc tieu 90%  |  con -0.2 loi  |  dang chay 4  [LLM:2, MANG:1, TESTER:1]
-- `test_day_du.log`: .......................................................................................
-- `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
-- git: 3857117 bao cao 12/09 + do MDE: 83/156 muc do ma CU sinh ra (van tay khong co phien ban ma)
-### 2026-09-12 07:51:58 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1868, 0 phut), dieu_khien_xa.py (pid 15316, 46 phut)
-- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
-- `hang_doi_toan_hang.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HANG_DOI_TOAN_HANG.json
-- `lam_moi_mde.log`: ... 120/156  (1375s)
-- `ly_do_tu_choi.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LY_DO_TU_CHOI.json
-- `mau_khong_tach_cap.log`: - Or is this normal when we finally cross under the 200-day moving average after a long time being above it
-- `qwen_ultra.log`: ~ 07:50:42 | san sang 12 | CPU   97% / muc tieu 90%  |  con -1.5 loi  |  dang chay 4  [LLM:2, MANG:1, TESTER:1]
-- `test_day_du.log`: .......................................................................................
-- `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
-- git: 3857117 bao cao 12/09 + do MDE: 83/156 muc do ma CU sinh ra (van tay khong co phien ban ma)
-### 2026-09-12 08:11:50 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16200, 0 phut), dieu_khien_xa.py (pid 15316, 65 phut)
-- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
-- `hang_doi_toan_hang.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HANG_DOI_TOAN_HANG.json
-- `lam_moi_mde.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LAM_MOI_MDE.json
-- `ly_do_tu_choi.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LY_DO_TU_CHOI.json
-- `mau_khong_tach_cap.log`: - Or is this normal when we finally cross under the 200-day moving average after a long time being above it
-- `qwen_ultra.log`: 3. **`ghi_nhat_ky`**: Da ghi nhat ky chuan xac: con so 0 sinh ra tu phep thu dem d
-- `test_day_du.log`: .......................................................................................
-- `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
-- git: b1c2ff5 bao cao 12/09 phan 2: dong khoi 1, mo khoi 7, placebo trailing dang chay
-### 2026-09-12 08:47:58 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14656, 0 phut), dieu_khien_xa.py (pid 15316, 102 phut)
-- `dieu_phoi_nen.log`: [Sat 09/12/2026  7:05:58.25] thay DUNG_LAI - khong khoi dong watchdog
-- `hang_doi_toan_hang.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\HANG_DOI_TOAN_HANG.json
-- `lam_moi_mde.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LAM_MOI_MDE.json
-- `ly_do_tu_choi.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LY_DO_TU_CHOI.json
-- `mau_khong_tach_cap.log`: - Or is this normal when we finally cross under the 200-day moving average after a long time being above it
-- `placebo_quan_tri.log`: ... 150/400  hon ca hai 11/150  (2483s)
-- `qwen_ultra.log`: [x] TT_chi_bao             DAT  |  log co: co che, khai bao, kho
-- `test_day_du.log`: .......................................................................................
-- `ve_thu_hai.log`: Stochastic Crossover Strategy: Enters a Buy position when the Stochastic %K line crosses above the %D line, and enters a Sell position when the %K lin
-- git: b1c2ff5 bao cao 12/09 phan 2: dong khoi 1, mo khoi 7, placebo trailing dang chay
-### 2026-09-12 09:30:43 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16688, 0 phut), dieu_khien_xa.py (pid 15316, 144 phut)
-- `lam_moi_mde.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\LAM_MOI_MDE.json
-- `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
-- `qwen_ultra.log`: ~ 09:28:51 | san sang 12 | CPU    6% / muc tieu 35%  |  con  5.8 loi  |  dang chay 0  [trong]
-- git: 8f9c130 khoi 7 viec 1: ho TRAILING TRUOT PLACEBO - va mot loi thong ke trong chinh phep thu
-### 2026-09-12 10:19:26 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14108, 0 phut), dieu_khien_xa.py (pid 15316, 193 phut)
-- `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
-- `qwen_ultra.log`: ~ 10:18:55 | san sang 8 | CPU   20% / muc tieu 90%  |  con 14.0 loi  |  dang chay 1  [TESTER:1]
-- git: ae0286c bao cao 12/09 phan 3: khoi 7 - 5 phep thu, 5 ket qua AM
-### 2026-09-12 10:54:01 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 6300, 0 phut), dieu_khien_xa.py (pid 15316, 228 phut)
 - `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
 - `qwen_ultra.log`: ~ 10:52:58 | san sang 6 | CPU   22% / muc tieu 90%  |  con  9.0 loi  |  dang chay 2  [LLM:1, TESTER:1]
@@ -404,3 +300,107 @@
 
 - dang chay: ban_giao_song.py (pid 1236, 0 phut)
 - git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
+### 2026-09-13 19:25:25 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5548, 0 phut)
+- git: cfb2090 b he: BANG CAC HE DA QUA CONG - mat xich cuoi cung, va no dang thieu
+### 2026-09-13 20:07:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15884, 0 phut)
+- git: d1e981a to_hop CLI: --khung chua bao gio duoc bat
+### 2026-09-13 20:14:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6776, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 20:16:31 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19404, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 20:17:58 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17924, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 20:55:02 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13596, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 21:04:22 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17896, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 21:06:00 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9840, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 21:15:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13012, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 21:45:37 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11800, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 21:59:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17428, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:16:22 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15412, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:16:55 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11408, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:21:27 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17020, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:28:02 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8616, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:34:18 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17128, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:37:20 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6276, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:45:37 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9196, 0 phut)
+- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
+### 2026-09-13 22:48:18 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6916, 0 phut)
+- git: 8381e8e Ban giao: chang 4 da sua, viec dau tien cua phien sau la chay lai pheu
+### 2026-09-13 23:09:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 21072, 0 phut)
+- git: 8381e8e Ban giao: chang 4 da sua, viec dau tien cua phien sau la chay lai pheu
+### 2026-09-13 23:42:28 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19240, 0 phut)
+- git: 41202f3 Ban giao: bay dieu chu du an chot toi 13/09 + nut that so luong phep thu
+### 2026-09-13 23:49:58 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5184, 0 phut)
+- git: 41202f3 Ban giao: bay dieu chu du an chot toi 13/09 + nut that so luong phep thu
+### 2026-09-13 23:58:26 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19384, 0 phut)
+- git: 75944b6 Ban giao muc 8: kien truc cho ENGINE TO HOP - gia mot o, phan tang, seeker doi vai
+### 2026-09-14 00:04:15 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17496, 0 phut)
+- git: 75944b6 Ban giao muc 8: kien truc cho ENGINE TO HOP - gia mot o, phan tang, seeker doi vai
+### 2026-09-14 00:10:01 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12100, 0 phut)
+- git: f2a11db Ban giao muc 9-12: HEPHAESTUS, ghep khong duoc loc truoc, hai lan, nhip giam sat
+### 2026-09-14 00:15:36 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19540, 0 phut)
+- git: 760800e He thong: them module HEPHAESTUS + hai lan uu tien; ban giao muc 13 (ke hoach 8 luong)

@@ -213,5 +213,21 @@
    "hon_mua_giu_cagr": 6.394,
    "hon_mua_giu_sharpe": 1.371
   }
+ ],
+ "so_qua_pheu": 1,
+ "qua_pheu": [
+  {
+   "he": "GBPTRY.D1.ns_nen_bua_<_q20_giu3",
+   "ma": "GBPTRY",
+   "khung": "D1",
+   "cau_truc": "thi_truong",
+   "luat": "-",
+   "dd20_train": 164.299,
+   "dd20_hold": 82.941,
+   "moc_hold": 80.988,
+   "chan_hold": 60,
+   "ty_le_hai_nua": 0.505,
+   "hon_moc": 1.953
+  }
  ]
 }

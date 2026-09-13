@@ -2,9 +2,9 @@
  "chang": [
   {
    "chang": "dia",
-   "gia_tri": 30.8,
+   "gia_tri": 29.2,
    "trang_thai": "TOT",
-   "mo_ta": "30.8 GB trong (can >= 2.0)",
+   "mo_ta": "29.2 GB trong (can >= 2.0)",
    "goi_y": "b don-dia; xoa Tester/logs cua MT5; cache trinh duyet"
   },
   {
@@ -18,14 +18,14 @@
    "chang": "tien_trinh",
    "gia_tri": 18,
    "trang_thai": "TOT",
-   "mo_ta": "18 tien trinh python (tran 28), RAM trong 18.7 GB",
+   "mo_ta": "18 tien trinh python (tran 28), RAM trong 17.6 GB",
    "goi_y": "python -m nhan.ngan_sach --don"
   },
   {
    "chang": "kho_co_che",
-   "gia_tri": 3037,
+   "gia_tri": 3222,
    "trang_thai": "TOT",
-   "mo_ta": "3037 co che (moc cao nhat 3037, san 2429)",
+   "mo_ta": "3222 co che (moc cao nhat 3222, san 2577)",
    "goi_y": "git show HEAD:lab/config/co_che_dsl.json | dem; hoac config/co_che_dsl.json.lui"
   },
   {
@@ -37,16 +37,16 @@
   },
   {
    "chang": "pheu_ung_vien",
-   "gia_tri": 81,
-   "trang_thai": "TOT",
-   "mo_ta": "81/120 ban dau bang qua bo loc (ton 3806)",
+   "gia_tri": 0,
+   "trang_thai": "DO",
+   "mo_ta": "0/120 ban dau bang qua bo loc (ton 3656)",
    "goi_y": "b go-html; kiem boc_llm.DAU_HIEU_LUAT co phu lop nguon moi"
   },
   {
    "chang": "duong_llm",
    "gia_tri": "qwen3.7-flash",
    "trang_thai": "TOT",
-   "mo_ta": "openai | ok | da goi 1744/20000",
+   "mo_ta": "openai | ok | da goi 2586/20000",
    "goi_y": "kiem cc-switch provider + OPENAI_API_KEY"
   },
   {
@@ -58,9 +58,9 @@
   },
   {
    "chang": "tester_lich_su",
-   "gia_tri": 1,
+   "gia_tri": 3,
    "trang_thai": "TOT",
-   "mo_ta": "1/3 ma mau co lich su (EURUSD)",
+   "mo_ta": "3/3 ma mau co lich su (US500Cash, US100Cash, EURUSD)",
    "goi_y": "mo MT5, dang nhap tai khoan, chay mot luot de tai lich su"
   },
   {
@@ -71,7 +71,7 @@
    "goi_y": "b canary  (xem ca mutation audit)"
   }
  ],
- "do": 0,
+ "do": 1,
  "chua_do_duoc": 0,
- "giay": 104.0
+ "giay": 192.1
 }
