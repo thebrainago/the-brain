@@ -409,6 +409,10 @@ def boc(gioi_han: int = 50, luong: int = 6, ghi_kho: bool = True,
     va duoc dem vao con so co che). Nen o day tu nap chuoi kiem chuan.
     """
     from nhan import boc_ma_llm as BM       # noqa: F401  (dung o vong duoi)
+    # Het dia thi me boc chay het, ghi khong duoc, va bao "0 co che moi" - dung
+    # hinh dang cua mot ket qua am. Chan o dau me.
+    from nhan import dia as _DIA
+    _DIA.du_cho(viec="boc mot me")
     if df_kiem is None:
         from nhan import loc_co_che as LCC
         df_kiem = LCC.df_kiem_chuan()

@@ -174,6 +174,14 @@ def kiem_khai_bao(spec: dict) -> list[str]:
     return loi
 
 
+class KhongQuyDoiDuoc(Exception):
+    """`atr` <= 0 (khong do duoc tren du lieu that). Loi 12/09: ban cu `return
+    nut if atr <= 0 else ...` IM LANG tra ve pip/diem CHUA quy doi - roi dich_mq5_qtvt
+    doc nham dict do la "khong co", ghi 0.0, va ca bang luat sinh ra GIONG HET
+    nhau (14/15 luat = 1759 lenh/-108,76/1,3121). Tu 12/09: atr<=0 phai NEM LOI
+    ngay tai day, khong duoc de no troi xuong tang duoi roi bien mat thanh so 0."""
+
+
 def sang_atr(spec: dict, atr: float, gia_diem: float = 0.01) -> dict:
     """Quy MOI so do khoang cach ve boi cua ATR, dung du lieu tai san dich.
 
@@ -181,6 +189,11 @@ def sang_atr(spec: dict, atr: float, gia_diem: float = 0.01) -> dict:
     voi ma 5 chu so; voi chi so thi tac gia thuong go 'pip' ma y la DIEM - nen
     ham nay nhan `gia_diem` chu khong doan).
     """
+    if not (isinstance(atr, (int, float)) and atr > 0):
+        raise KhongQuyDoiDuoc(
+            "atr=%r khong do duoc/khong hop le - can do tren du lieu THAT cua "
+            "symbol+khung se chay (vd nhan/du_lieu.nap), khong duoc mac dinh 0"
+            % (atr,))
     import copy
     ra = copy.deepcopy(spec)
 
@@ -189,7 +202,7 @@ def sang_atr(spec: dict, atr: float, gia_diem: float = 0.01) -> dict:
             if set(nut) & {"pip", "diem"} and len(nut) == 1:
                 k, v = next(iter(nut.items()))
                 gia = v * gia_diem * (10 if k == "pip" else 1)
-                return {"atr": round(gia / atr, 4)} if atr > 0 else nut
+                return {"atr": round(gia / atr, 4)}
             return {k: _di(v) for k, v in nut.items()}
         if isinstance(nut, list):
             return [_di(x) for x in nut]

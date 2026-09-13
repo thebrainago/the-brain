@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-- dang chay: ban_giao_song.py (pid 3956, 0 phut)
-- `dieu_phoi_nen.log`: [Tue 09/08/2026 14:06:01.52] thay DUNG_LAI - khong khoi dong watchdog
-- git: 3f2d65c chot not ban giao song 07/09
 ### 2026-09-08 15:44:35 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 8216, 0 phut)
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 2324, 0 phut)
 - git: dc4e038 Ban do sinh tu ma nguon + noi 21 module mo coi + fix dia day lam 3 me boc that bai em
+### 2026-09-12 23:28:51 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 7508, 0 phut)
+- git: 25f63f0 Chot phien 12/09: ban giao cho phien mai

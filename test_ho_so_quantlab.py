@@ -95,34 +95,62 @@ class ZigzagPhaiLuanPhien(unittest.TestCase):
 class NhanThuCuaFX_PhaiDuocSUA(unittest.TestCase):
     """FX chay CN 22:00 -> T6 22:00 UTC. Bar D1 dong 22:00 mang nhan cua ngay
     HOM TRUOC phien, nen chuoi 'khong co thu Sau, co Chu Nhat' la dau hieu lech
-    mot ngay chu khong phai mot phat hien mua vu."""
+    mot ngay chu khong phai mot phat hien mua vu.
 
-    def _idx_fx(self, tuan=30):
-        # dung bar: CN..T5 (dai dien cho phien T2..T6), KHONG co T6
-        ngay = []
-        d = pd.Timestamp("2020-01-05")            # mot Chu Nhat
-        for _ in range(tuan):
-            ngay += [d + pd.Timedelta(days=k) for k in range(5)]
-            d += pd.Timedelta(days=7)
+    SUA 13/09/2026: ban dau lop nay dung idx NAIVE (khong tz, gio 00:00) de mo
+    phong "FX" - nhung do KHONG PHAI hinh dang du lieu FX THAT trong kho (bar
+    FX/CFD SAN dong dau 21:00 UTC dong nhat, xem `ho_so_mua_vu._gio_utc_
+    chiem_da_so`). Voi bo dem CHOT CHAN moi (gio UTC doc lap xac nhan thong
+    ke T6/CN), mot idx naive-00:00-nhung-mang-mau-hinh-T6/CN la MAU THUAN va
+    dung phai tra ve None - bai kiem CU kiem tra bang `assertNotIn(5, set(...))`
+    tren ket qua do van "xanh" mot cach VO NGHIA (`set(np.unique(None))` =
+    `{None}`, va `5 not in {None}` la True du dung hay sai). Da sua idx cho
+    DUNG hinh dang that (tz=UTC, gio=21) va them bai kiem rieng cho truong hop
+    MAU THUAN de khong con lo hong "test xanh nhung khong kiem gi ca" nay.
+    """
+
+    def _idx_fx(self, tuan=30, gio=21, tz="UTC"):
+        # dung bar: CN..T5 (dai dien cho phien T2..T6), KHONG co T6, dong dau
+        # gio 21:00 UTC - DUNG hinh dang that cua 82/159 ma nguon SAN trong kho.
+        d0 = pd.Timestamp("2020-01-05", tz=tz)     # mot Chu Nhat
+        ngay = [d0 + pd.Timedelta(days=7 * w + k, hours=gio)
+               for w in range(tuan) for k in range(5)]
         return pd.DatetimeIndex(ngay)
 
     def test_chuoi_thieu_thu_sau_duoc_dich_len_mot_ngay(self):
         idx = self._idx_fx()
         nhan, cach = MV.thu_da_sua(idx)
+        self.assertIsNotNone(nhan, "gio UTC=21 + mau hinh T6/CN phai KHOP nhau "
+                             "va dich duoc, khong duoc tra None")
         ten = set(np.unique(nhan))
         self.assertNotIn(5, ten, "sau khi sua van con nhan thu Bay")
         self.assertNotIn(6, ten, "sau khi sua van con nhan Chu Nhat")
         self.assertIsInstance(cach, str)
+        self.assertNotEqual(cach, "")
 
     def test_chuoi_du_nam_ngay_thuong_thi_KHONG_bi_dich(self):
-        ngay = []
-        d = pd.Timestamp("2020-01-06")            # thu Hai
-        for _ in range(30):
-            ngay += [d + pd.Timedelta(days=k) for k in range(5)]
-            d += pd.Timedelta(days=7)
-        nhan, _ = MV.thu_da_sua(pd.DatetimeIndex(ngay))
+        # Gio=0 (kieu Yahoo) + T2-T6 binh thuong: DAY moi la hinh dang that cua
+        # nguon KHONG can dich trong kho (77/159 ma). Dung gio=21 o day se la
+        # mot to hop khong co that (hour=21 luon di kem mau hinh CN/T6 trong
+        # toan bo du lieu that) va dung bi CHOT CHAN bat - xem bai kiem ke tiep.
+        d0 = pd.Timestamp("2020-01-06")             # thu Hai, naive
+        ngay = [d0 + pd.Timedelta(days=7 * w + k)
+               for w in range(30) for k in range(5)]
+        nhan, ghi = MV.thu_da_sua(pd.DatetimeIndex(ngay))
+        self.assertIsNotNone(nhan)
         self.assertEqual(set(np.unique(nhan)), {0, 1, 2, 3, 4},
                          "chuoi da dung lai bi dich them")
+        self.assertEqual(ghi, "")
+
+    def test_mau_hinh_T6_CN_nhung_gio_UTC_noi_khac_thi_KHONG_DOAN(self):
+        """Day chinh la lo hong da sua: mot chuoi mang dung "dau hieu thong ke"
+        (khong T6, nhieu CN) nhung GIO GOC lai noi "khong can dich" (vd du lieu
+        naive/Yahoo bi ghep nham voi mot chu ky FX) - hai tin hieu MAU THUAN,
+        `thu_da_sua` phai tra None thay vi tin mu quang vao thong ke."""
+        idx = self._idx_fx(gio=0, tz=None)         # gio noi KHONG can dich
+        nhan, ghi = MV.thu_da_sua(idx)
+        self.assertIsNone(nhan)
+        self.assertIn("MAU THUAN", ghi)
 
     def test_nguong_nhom_toi_thieu_ton_tai_va_hop_le(self):
         self.assertGreater(MV.TY_LE_NHOM_TOI_THIEU, 0.0)

@@ -1,5 +1,5 @@
 {
- "trang_thai": "AM",
+ "trang_thai": "CHUA_DO_DUOC",
  "ea": "EA Snippets_Breakout_Breakout1.mq5",
  "symbol": "US500Cash",
  "khung": "H1",
@@ -13,8 +13,17 @@
   "lai": -108.76,
   "sut_giam": 1.3121
  },
+ "so_luat_cham_duoc_vi_the": 1,
  "so_luat_doi_so_lenh": 0,
- "ly_do": "KHONG luat nao doi so lenh - quan tri khong cham vao vi the nao. Moi con so lai/lo deu vo nghia o day.",
+ "luat_cham_duoc": [
+  {
+   "luat": 6,
+   "ten": "BlueMoon_EA_v3_4_Netting_Volume_Fix.mq5",
+   "lenh": 1759,
+   "lai": -99.19
+  }
+ ],
+ "ly_do": "KHONG luat nao doi SO LENH so voi moc - khong phan biet duoc 'quan tri khong cham vi the nao' voi 'chenh lech lai/DD la nhieu do khac'. (1 luat co lai/DD khac moc nhung KHONG doi so lenh - xem 'luat_cham_duoc' de doi chieu tay, KHONG dung de ket luan)",
  "ket": [
   {
    "luat": 0,

@@ -51,11 +51,11 @@
   "phi_re_pct_nam": 5.052,
   "kenh_dat": "XM",
   "symbol_dat": "USDTRY",
-  "phi_dat_pct_nam": 42.028,
-  "chenh_diem_pct_nam": 36.976,
+  "phi_dat_pct_nam": 50.214,
+  "chenh_diem_pct_nam": 45.162,
   "tat_ca": {
    "Exness": 5.052,
-   "XM": 42.028
+   "XM": 50.214
   },
   "symbol_tung_san": {
    "Exness": "USDTRYM",
@@ -73,11 +73,11 @@
   "phi_re_pct_nam": 6.541,
   "kenh_dat": "XM",
   "symbol_dat": "EURTRYMICRO",
-  "phi_dat_pct_nam": 42.87,
-  "chenh_diem_pct_nam": 36.329,
+  "phi_dat_pct_nam": 42.588,
+  "chenh_diem_pct_nam": 36.047,
   "tat_ca": {
    "Exness": 6.541,
-   "XM": 42.87
+   "XM": 42.588
   },
   "symbol_tung_san": {
    "Exness": "EURTRYM",
@@ -95,12 +95,12 @@
   "phi_re_pct_nam": 0.0,
   "kenh_dat": "XM",
   "symbol_dat": "USDZAR",
-  "phi_dat_pct_nam": 9.355,
-  "chenh_diem_pct_nam": 9.355,
+  "phi_dat_pct_nam": 9.292,
+  "chenh_diem_pct_nam": 9.292,
   "tat_ca": {
    "FXCE": 0.0,
    "Exness": 4.42,
-   "XM": 9.355
+   "XM": 9.292
   },
   "symbol_tung_san": {
    "FXCE": "USDZAR",
@@ -119,12 +119,12 @@
   "phi_re_pct_nam": 3.0,
   "kenh_dat": "XM",
   "symbol_dat": "SILVERMICRO",
-  "phi_dat_pct_nam": 11.576,
-  "chenh_diem_pct_nam": 8.576,
+  "phi_dat_pct_nam": 11.23,
+  "chenh_diem_pct_nam": 8.23,
   "tat_ca": {
    "FXCE": 3.0,
    "Exness": 5.936,
-   "XM": 11.576
+   "XM": 11.23
   },
   "symbol_tung_san": {
    "FXCE": "BAC",
@@ -165,12 +165,12 @@
   "phi_re_pct_nam": 0.0,
   "kenh_dat": "XM",
   "symbol_dat": "USDMXN",
-  "phi_dat_pct_nam": 7.2,
-  "chenh_diem_pct_nam": 7.2,
+  "phi_dat_pct_nam": 7.177,
+  "chenh_diem_pct_nam": 7.177,
   "tat_ca": {
    "FXCE": 0.0,
    "Exness": 4.857,
-   "XM": 7.2
+   "XM": 7.177
   },
   "symbol_tung_san": {
    "FXCE": "USDMXN",
@@ -186,13 +186,13 @@
   "so_kenh": 2,
   "kenh_re": "XM",
   "symbol_re": "EU50CASH",
-  "phi_re_pct_nam": 5.312,
+  "phi_re_pct_nam": 5.256,
   "kenh_dat": "FXCE",
   "symbol_dat": "EUSTX50",
   "phi_dat_pct_nam": 11.666,
-  "chenh_diem_pct_nam": 6.354,
+  "chenh_diem_pct_nam": 6.41,
   "tat_ca": {
-   "XM": 5.312,
+   "XM": 5.256,
    "FXCE": 11.666
   },
   "symbol_tung_san": {
@@ -233,12 +233,12 @@
   "phi_re_pct_nam": -0.0,
   "kenh_dat": "XM",
   "symbol_dat": "HK50CASH",
-  "phi_dat_pct_nam": 5.667,
-  "chenh_diem_pct_nam": 5.667,
+  "phi_dat_pct_nam": 5.96,
+  "chenh_diem_pct_nam": 5.96,
   "tat_ca": {
    "Exness": -0.0,
    "FXCE": 2.909,
-   "XM": 5.667
+   "XM": 5.96
   },
   "symbol_tung_san": {
    "Exness": "HK50M",
@@ -250,6 +250,50 @@
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
+  "phoi_nhiem": "XAUEUR",
+  "so_kenh": 2,
+  "kenh_re": "Exness",
+  "symbol_re": "XAUEURM",
+  "phi_re_pct_nam": 3.034,
+  "kenh_dat": "XM",
+  "symbol_dat": "XAUEURMICRO",
+  "phi_dat_pct_nam": 8.731,
+  "chenh_diem_pct_nam": 5.697,
+  "tat_ca": {
+   "Exness": 3.034,
+   "XM": 8.731
+  },
+  "symbol_tung_san": {
+   "Exness": "XAUEURM",
+   "XM": "XAUEURMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "EURHUF",
+  "so_kenh": 2,
+  "kenh_re": "XM",
+  "symbol_re": "EURHUFMICRO",
+  "phi_re_pct_nam": 6.74,
+  "kenh_dat": "Exness",
+  "symbol_dat": "EURHUFM",
+  "phi_dat_pct_nam": 12.349,
+  "chenh_diem_pct_nam": 5.609,
+  "tat_ca": {
+   "XM": 6.74,
+   "Exness": 12.349
+  },
+  "symbol_tung_san": {
+   "XM": "EURHUFMICRO",
+   "Exness": "EURHUFM"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
   "phoi_nhiem": "USDHUF",
   "so_kenh": 3,
   "kenh_re": "Exness",
@@ -257,12 +301,12 @@
   "phi_re_pct_nam": 0.0,
   "kenh_dat": "XM",
   "symbol_dat": "USDHUF",
-  "phi_dat_pct_nam": 5.586,
-  "chenh_diem_pct_nam": 5.586,
+  "phi_dat_pct_nam": 5.535,
+  "chenh_diem_pct_nam": 5.535,
   "tat_ca": {
    "Exness": 0.0,
    "FXCE": 0.0,
-   "XM": 5.586
+   "XM": 5.535
   },
   "symbol_tung_san": {
    "Exness": "USDHUFM",
@@ -285,7 +329,7 @@
   "chenh_diem_pct_nam": 5.508,
   "tat_ca": {
    "FXCE": 1.257,
-   "XM": 5.758,
+   "XM": 5.768,
    "Exness": 6.765
   },
   "symbol_tung_san": {
@@ -296,28 +340,6 @@
   "tin_cay": "VUA",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "XAUEUR",
-  "so_kenh": 2,
-  "kenh_re": "Exness",
-  "symbol_re": "XAUEURM",
-  "phi_re_pct_nam": 3.034,
-  "kenh_dat": "XM",
-  "symbol_dat": "XAUEURMICRO",
-  "phi_dat_pct_nam": 8.147,
-  "chenh_diem_pct_nam": 5.113,
-  "tat_ca": {
-   "Exness": 3.034,
-   "XM": 8.147
-  },
-  "symbol_tung_san": {
-   "Exness": "XAUEURM",
-   "XM": "XAUEURMICRO"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "US30",
@@ -331,7 +353,7 @@
   "chenh_diem_pct_nam": 5.055,
   "tat_ca": {
    "FXCE": 1.414,
-   "XM": 5.798,
+   "XM": 5.716,
    "Exness": 6.469
   },
   "symbol_tung_san": {
@@ -399,7 +421,7 @@
   "chenh_diem_pct_nam": 4.547,
   "tat_ca": {
    "FXCE": 2.572,
-   "XM": 5.807,
+   "XM": 5.729,
    "Exness": 7.119
   },
   "symbol_tung_san": {
@@ -410,28 +432,6 @@
   "tin_cay": "VUA",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "EURHUF",
-  "so_kenh": 2,
-  "kenh_re": "XM",
-  "symbol_re": "EURHUFMICRO",
-  "phi_re_pct_nam": 7.855,
-  "kenh_dat": "Exness",
-  "symbol_dat": "EURHUFM",
-  "phi_dat_pct_nam": 12.349,
-  "chenh_diem_pct_nam": 4.494,
-  "tat_ca": {
-   "XM": 7.855,
-   "Exness": 12.349
-  },
-  "symbol_tung_san": {
-   "XM": "EURHUFMICRO",
-   "Exness": "EURHUFM"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "BTCJPY",
@@ -522,6 +522,28 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
+  "phoi_nhiem": "SWI20",
+  "so_kenh": 2,
+  "kenh_re": "XM",
+  "symbol_re": "SWI20CASH",
+  "phi_re_pct_nam": 2.991,
+  "kenh_dat": "FXCE",
+  "symbol_dat": "SWI20",
+  "phi_dat_pct_nam": 6.704,
+  "chenh_diem_pct_nam": 3.713,
+  "tat_ca": {
+   "XM": 2.991,
+   "FXCE": 6.704
+  },
+  "symbol_tung_san": {
+   "XM": "SWI20CASH",
+   "FXCE": "SWI20"
+  },
+  "tin_cay": "VUA",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
   "phoi_nhiem": "EURZAR",
   "so_kenh": 2,
   "kenh_re": "Exness",
@@ -529,11 +551,11 @@
   "phi_re_pct_nam": 4.47,
   "kenh_dat": "XM",
   "symbol_dat": "EURZARMICRO",
-  "phi_dat_pct_nam": 8.409,
-  "chenh_diem_pct_nam": 3.939,
+  "phi_dat_pct_nam": 8.097,
+  "chenh_diem_pct_nam": 3.627,
   "tat_ca": {
    "Exness": 4.47,
-   "XM": 8.409
+   "XM": 8.097
   },
   "symbol_tung_san": {
    "Exness": "EURZARM",
@@ -544,22 +566,22 @@
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "SWI20",
+  "phoi_nhiem": "FRA40",
   "so_kenh": 2,
   "kenh_re": "XM",
-  "symbol_re": "SWI20CASH",
-  "phi_re_pct_nam": 2.979,
+  "symbol_re": "FRA40CASH",
+  "phi_re_pct_nam": 5.271,
   "kenh_dat": "FXCE",
-  "symbol_dat": "SWI20",
-  "phi_dat_pct_nam": 6.704,
-  "chenh_diem_pct_nam": 3.725,
+  "symbol_dat": "FRA40",
+  "phi_dat_pct_nam": 8.888,
+  "chenh_diem_pct_nam": 3.617,
   "tat_ca": {
-   "XM": 2.979,
-   "FXCE": 6.704
+   "XM": 5.271,
+   "FXCE": 8.888
   },
   "symbol_tung_san": {
-   "XM": "SWI20CASH",
-   "FXCE": "SWI20"
+   "XM": "FRA40CASH",
+   "FXCE": "FRA40"
   },
   "tin_cay": "VUA",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -610,26 +632,28 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "FRA40",
-  "so_kenh": 2,
-  "kenh_re": "XM",
-  "symbol_re": "FRA40CASH",
-  "phi_re_pct_nam": 5.427,
-  "kenh_dat": "FXCE",
-  "symbol_dat": "FRA40",
-  "phi_dat_pct_nam": 8.888,
-  "chenh_diem_pct_nam": 3.461,
+  "phoi_nhiem": "USDNOK",
+  "so_kenh": 3,
+  "kenh_re": "FXCE",
+  "symbol_re": "USDNOK",
+  "phi_re_pct_nam": 0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "USDNOK",
+  "phi_dat_pct_nam": 3.325,
+  "chenh_diem_pct_nam": 3.325,
   "tat_ca": {
-   "XM": 5.427,
-   "FXCE": 8.888
+   "FXCE": 0.0,
+   "Exness": 3.088,
+   "XM": 3.325
   },
   "symbol_tung_san": {
-   "XM": "FRA40CASH",
-   "FXCE": "FRA40"
+   "FXCE": "USDNOK",
+   "Exness": "USDNOKM",
+   "XM": "USDNOK"
   },
-  "tin_cay": "VUA",
+  "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "AUDJPY",
@@ -643,37 +667,13 @@
   "chenh_diem_pct_nam": 3.285,
   "tat_ca": {
    "FXCE": -3.221,
-   "XM": -1.294,
+   "XM": -1.34,
    "Exness": 0.064
   },
   "symbol_tung_san": {
    "FXCE": "AUDJPY",
    "XM": "AUDJPYMICRO",
    "Exness": "AUDJPYM"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "USDNOK",
-  "so_kenh": 3,
-  "kenh_re": "FXCE",
-  "symbol_re": "USDNOK",
-  "phi_re_pct_nam": 0.0,
-  "kenh_dat": "XM",
-  "symbol_dat": "USDNOK",
-  "phi_dat_pct_nam": 3.281,
-  "chenh_diem_pct_nam": 3.281,
-  "tat_ca": {
-   "FXCE": 0.0,
-   "Exness": 3.088,
-   "XM": 3.281
-  },
-  "symbol_tung_san": {
-   "FXCE": "USDNOK",
-   "Exness": "USDNOKM",
-   "XM": "USDNOK"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -691,7 +691,7 @@
   "chenh_diem_pct_nam": 3.234,
   "tat_ca": {
    "FXCE": -3.234,
-   "XM": -2.72,
+   "XM": -2.869,
    "Exness": -0.0
   },
   "symbol_tung_san": {
@@ -711,12 +711,12 @@
   "phi_re_pct_nam": 0.0,
   "kenh_dat": "XM",
   "symbol_dat": "USDPLN",
-  "phi_dat_pct_nam": 3.045,
-  "chenh_diem_pct_nam": 3.045,
+  "phi_dat_pct_nam": 2.874,
+  "chenh_diem_pct_nam": 2.874,
   "tat_ca": {
    "FXCE": 0.0,
    "Exness": 0.407,
-   "XM": 3.045
+   "XM": 2.874
   },
   "symbol_tung_san": {
    "FXCE": "USDPLN",
@@ -728,28 +728,6 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "CHFSGD",
-  "so_kenh": 2,
-  "kenh_re": "Exness",
-  "symbol_re": "CHFSGDM",
-  "phi_re_pct_nam": 2.124,
-  "kenh_dat": "XM",
-  "symbol_dat": "CHFSGDMICRO",
-  "phi_dat_pct_nam": 5.13,
-  "chenh_diem_pct_nam": 3.006,
-  "tat_ca": {
-   "Exness": 2.124,
-   "XM": 5.13
-  },
-  "symbol_tung_san": {
-   "Exness": "CHFSGDM",
-   "XM": "CHFSGDMICRO"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
   "phoi_nhiem": "SGDJPY",
   "so_kenh": 2,
   "kenh_re": "Exness",
@@ -757,11 +735,11 @@
   "phi_re_pct_nam": 0.029,
   "kenh_dat": "XM",
   "symbol_dat": "SGDJPYMICRO",
-  "phi_dat_pct_nam": 2.747,
-  "chenh_diem_pct_nam": 2.718,
+  "phi_dat_pct_nam": 2.839,
+  "chenh_diem_pct_nam": 2.81,
   "tat_ca": {
    "Exness": 0.029,
-   "XM": 2.747
+   "XM": 2.839
   },
   "symbol_tung_san": {
    "Exness": "SGDJPYM",
@@ -779,17 +757,39 @@
   "phi_re_pct_nam": 4.405,
   "kenh_dat": "XM",
   "symbol_dat": "GOLDMICRO",
-  "phi_dat_pct_nam": 7.062,
-  "chenh_diem_pct_nam": 2.657,
+  "phi_dat_pct_nam": 7.12,
+  "chenh_diem_pct_nam": 2.715,
   "tat_ca": {
    "Exness": 4.405,
    "FXCE": 4.477,
-   "XM": 7.062
+   "XM": 7.12
   },
   "symbol_tung_san": {
    "Exness": "XAUUSDM",
    "FXCE": "XAUUSD",
    "XM": "GOLDMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "EURDKK",
+  "so_kenh": 2,
+  "kenh_re": "Exness",
+  "symbol_re": "EURDKKM",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "EURDKKMICRO",
+  "phi_dat_pct_nam": 2.651,
+  "chenh_diem_pct_nam": 2.651,
+  "tat_ca": {
+   "Exness": -0.0,
+   "XM": 2.651
+  },
+  "symbol_tung_san": {
+   "Exness": "EURDKKM",
+   "XM": "EURDKKMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -803,12 +803,12 @@
   "phi_re_pct_nam": -0.0,
   "kenh_dat": "XM",
   "symbol_dat": "JP225CASH",
-  "phi_dat_pct_nam": 2.522,
-  "chenh_diem_pct_nam": 2.522,
+  "phi_dat_pct_nam": 2.511,
+  "chenh_diem_pct_nam": 2.511,
   "tat_ca": {
    "Exness": -0.0,
    "FXCE": 1.142,
-   "XM": 2.522
+   "XM": 2.511
   },
   "symbol_tung_san": {
    "Exness": "JP225M",
@@ -827,11 +827,11 @@
   "phi_re_pct_nam": 0.858,
   "kenh_dat": "XM",
   "symbol_dat": "GBPNOKMICRO",
-  "phi_dat_pct_nam": 3.282,
-  "chenh_diem_pct_nam": 2.424,
+  "phi_dat_pct_nam": 3.23,
+  "chenh_diem_pct_nam": 2.372,
   "tat_ca": {
    "Exness": 0.858,
-   "XM": 3.282
+   "XM": 3.23
   },
   "symbol_tung_san": {
    "Exness": "GBPNOKM",
@@ -853,7 +853,7 @@
   "chenh_diem_pct_nam": 2.332,
   "tat_ca": {
    "FXCE": -2.332,
-   "XM": -1.763,
+   "XM": -1.731,
    "Exness": -0.0
   },
   "symbol_tung_san": {
@@ -866,22 +866,22 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "EURDKK",
+  "phoi_nhiem": "CHFSGD",
   "so_kenh": 2,
   "kenh_re": "Exness",
-  "symbol_re": "EURDKKM",
-  "phi_re_pct_nam": -0.0,
+  "symbol_re": "CHFSGDM",
+  "phi_re_pct_nam": 2.124,
   "kenh_dat": "XM",
-  "symbol_dat": "EURDKKMICRO",
-  "phi_dat_pct_nam": 2.326,
-  "chenh_diem_pct_nam": 2.326,
+  "symbol_dat": "CHFSGDMICRO",
+  "phi_dat_pct_nam": 4.394,
+  "chenh_diem_pct_nam": 2.27,
   "tat_ca": {
-   "Exness": -0.0,
-   "XM": 2.326
+   "Exness": 2.124,
+   "XM": 4.394
   },
   "symbol_tung_san": {
-   "Exness": "EURDKKM",
-   "XM": "EURDKKMICRO"
+   "Exness": "CHFSGDM",
+   "XM": "CHFSGDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -899,7 +899,7 @@
   "chenh_diem_pct_nam": 2.263,
   "tat_ca": {
    "FXCE": -2.263,
-   "XM": -0.52,
+   "XM": -0.543,
    "Exness": -0.0
   },
   "symbol_tung_san": {
@@ -912,22 +912,22 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "EURSEK",
+  "phoi_nhiem": "NZDSGD",
   "so_kenh": 2,
   "kenh_re": "Exness",
-  "symbol_re": "EURSEKM",
+  "symbol_re": "NZDSGDM",
   "phi_re_pct_nam": -0.0,
   "kenh_dat": "XM",
-  "symbol_dat": "EURSEKMICRO",
-  "phi_dat_pct_nam": 2.221,
-  "chenh_diem_pct_nam": 2.221,
+  "symbol_dat": "NZDSGDMICRO",
+  "phi_dat_pct_nam": 2.218,
+  "chenh_diem_pct_nam": 2.218,
   "tat_ca": {
    "Exness": -0.0,
-   "XM": 2.221
+   "XM": 2.218
   },
   "symbol_tung_san": {
-   "Exness": "EURSEKM",
-   "XM": "EURSEKMICRO"
+   "Exness": "NZDSGDM",
+   "XM": "NZDSGDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -945,13 +945,59 @@
   "chenh_diem_pct_nam": 2.197,
   "tat_ca": {
    "FXCE": -2.197,
-   "XM": -0.484,
+   "XM": -0.502,
    "Exness": -0.0
   },
   "symbol_tung_san": {
    "FXCE": "USDJPY",
    "XM": "USDJPY",
    "Exness": "USDJPYM"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "EURSEK",
+  "so_kenh": 2,
+  "kenh_re": "Exness",
+  "symbol_re": "EURSEKM",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "EURSEKMICRO",
+  "phi_dat_pct_nam": 2.183,
+  "chenh_diem_pct_nam": 2.183,
+  "tat_ca": {
+   "Exness": -0.0,
+   "XM": 2.183
+  },
+  "symbol_tung_san": {
+   "Exness": "EURSEKM",
+   "XM": "EURSEKMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "EURJPY",
+  "so_kenh": 3,
+  "kenh_re": "FXCE",
+  "symbol_re": "EURJPY",
+  "phi_re_pct_nam": -0.857,
+  "kenh_dat": "XM",
+  "symbol_dat": "EURJPYMICRO",
+  "phi_dat_pct_nam": 1.271,
+  "chenh_diem_pct_nam": 2.128,
+  "tat_ca": {
+   "FXCE": -0.857,
+   "Exness": -0.0,
+   "XM": 1.271
+  },
+  "symbol_tung_san": {
+   "FXCE": "EURJPY",
+   "Exness": "EURJPYM",
+   "XM": "EURJPYMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -965,11 +1011,11 @@
   "phi_re_pct_nam": 2.643,
   "kenh_dat": "XM",
   "symbol_dat": "EURNOKMICRO",
-  "phi_dat_pct_nam": 4.719,
-  "chenh_diem_pct_nam": 2.076,
+  "phi_dat_pct_nam": 4.754,
+  "chenh_diem_pct_nam": 2.111,
   "tat_ca": {
    "Exness": 2.643,
-   "XM": 4.719
+   "XM": 4.754
   },
   "symbol_tung_san": {
    "Exness": "EURNOKM",
@@ -1002,22 +1048,22 @@
   "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "EURPLN",
+  "phoi_nhiem": "EURSGD",
   "so_kenh": 2,
   "kenh_re": "Exness",
-  "symbol_re": "EURPLNM",
-  "phi_re_pct_nam": 2.358,
+  "symbol_re": "EURSGDM",
+  "phi_re_pct_nam": -0.0,
   "kenh_dat": "XM",
-  "symbol_dat": "EURPLNMICRO",
-  "phi_dat_pct_nam": 4.391,
-  "chenh_diem_pct_nam": 2.033,
+  "symbol_dat": "EURSGDMICRO",
+  "phi_dat_pct_nam": 2.032,
+  "chenh_diem_pct_nam": 2.032,
   "tat_ca": {
-   "Exness": 2.358,
-   "XM": 4.391
+   "Exness": -0.0,
+   "XM": 2.032
   },
   "symbol_tung_san": {
-   "Exness": "EURPLNM",
-   "XM": "EURPLNMICRO"
+   "Exness": "EURSGDM",
+   "XM": "EURSGDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1046,28 +1092,26 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "EURJPY",
-  "so_kenh": 3,
-  "kenh_re": "FXCE",
-  "symbol_re": "EURJPY",
-  "phi_re_pct_nam": -0.857,
+  "phoi_nhiem": "EURPLN",
+  "so_kenh": 2,
+  "kenh_re": "Exness",
+  "symbol_re": "EURPLNM",
+  "phi_re_pct_nam": 2.358,
   "kenh_dat": "XM",
-  "symbol_dat": "EURJPYMICRO",
-  "phi_dat_pct_nam": 1.119,
-  "chenh_diem_pct_nam": 1.976,
+  "symbol_dat": "EURPLNMICRO",
+  "phi_dat_pct_nam": 4.357,
+  "chenh_diem_pct_nam": 1.999,
   "tat_ca": {
-   "FXCE": -0.857,
-   "Exness": -0.0,
-   "XM": 1.119
+   "Exness": 2.358,
+   "XM": 4.357
   },
   "symbol_tung_san": {
-   "FXCE": "EURJPY",
-   "Exness": "EURJPYM",
-   "XM": "EURJPYMICRO"
+   "Exness": "EURPLNM",
+   "XM": "EURPLNMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "BTCXAG",
@@ -1092,6 +1136,30 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
+  "phoi_nhiem": "CHFJPY",
+  "so_kenh": 3,
+  "kenh_re": "FXCE",
+  "symbol_re": "CHFJPY",
+  "phi_re_pct_nam": 1.271,
+  "kenh_dat": "XM",
+  "symbol_dat": "CHFJPYMICRO",
+  "phi_dat_pct_nam": 3.159,
+  "chenh_diem_pct_nam": 1.888,
+  "tat_ca": {
+   "FXCE": 1.271,
+   "Exness": 1.619,
+   "XM": 3.159
+  },
+  "symbol_tung_san": {
+   "FXCE": "CHFJPY",
+   "Exness": "CHFJPYM",
+   "XM": "CHFJPYMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
   "phoi_nhiem": "GER40",
   "so_kenh": 2,
   "kenh_re": "FXCE",
@@ -1099,11 +1167,11 @@
   "phi_re_pct_nam": 2.885,
   "kenh_dat": "XM",
   "symbol_dat": "GER40CASH",
-  "phi_dat_pct_nam": 4.794,
-  "chenh_diem_pct_nam": 1.909,
+  "phi_dat_pct_nam": 4.756,
+  "chenh_diem_pct_nam": 1.871,
   "tat_ca": {
    "FXCE": 2.885,
-   "XM": 4.794
+   "XM": 4.756
   },
   "symbol_tung_san": {
    "FXCE": "GER30",
@@ -1114,22 +1182,22 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "NZDSGD",
+  "phoi_nhiem": "EURHKD",
   "so_kenh": 2,
   "kenh_re": "Exness",
-  "symbol_re": "NZDSGDM",
-  "phi_re_pct_nam": -0.0,
+  "symbol_re": "EURHKDM",
+  "phi_re_pct_nam": 1.125,
   "kenh_dat": "XM",
-  "symbol_dat": "NZDSGDMICRO",
-  "phi_dat_pct_nam": 1.847,
-  "chenh_diem_pct_nam": 1.847,
+  "symbol_dat": "EURHKDMICRO",
+  "phi_dat_pct_nam": 2.902,
+  "chenh_diem_pct_nam": 1.777,
   "tat_ca": {
-   "Exness": -0.0,
-   "XM": 1.847
+   "Exness": 1.125,
+   "XM": 2.902
   },
   "symbol_tung_san": {
-   "Exness": "NZDSGDM",
-   "XM": "NZDSGDMICRO"
+   "Exness": "EURHKDM",
+   "XM": "EURHKDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1140,13 +1208,13 @@
   "so_kenh": 3,
   "kenh_re": "XM",
   "symbol_re": "GBPCHFMICRO",
-  "phi_re_pct_nam": -1.787,
+  "phi_re_pct_nam": -1.769,
   "kenh_dat": "Exness",
   "symbol_dat": "GBPCHFM",
   "phi_dat_pct_nam": -0.0,
-  "chenh_diem_pct_nam": 1.787,
+  "chenh_diem_pct_nam": 1.769,
   "tat_ca": {
-   "XM": -1.787,
+   "XM": -1.769,
    "FXCE": -1.626,
    "Exness": -0.0
   },
@@ -1160,52 +1228,6 @@
   "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "CHFJPY",
-  "so_kenh": 3,
-  "kenh_re": "FXCE",
-  "symbol_re": "CHFJPY",
-  "phi_re_pct_nam": 1.271,
-  "kenh_dat": "XM",
-  "symbol_dat": "CHFJPYMICRO",
-  "phi_dat_pct_nam": 2.994,
-  "chenh_diem_pct_nam": 1.723,
-  "tat_ca": {
-   "FXCE": 1.271,
-   "Exness": 1.619,
-   "XM": 2.994
-  },
-  "symbol_tung_san": {
-   "FXCE": "CHFJPY",
-   "Exness": "CHFJPYM",
-   "XM": "CHFJPYMICRO"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "EURSGD",
-  "so_kenh": 2,
-  "kenh_re": "Exness",
-  "symbol_re": "EURSGDM",
-  "phi_re_pct_nam": -0.0,
-  "kenh_dat": "XM",
-  "symbol_dat": "EURSGDMICRO",
-  "phi_dat_pct_nam": 1.689,
-  "chenh_diem_pct_nam": 1.689,
-  "tat_ca": {
-   "Exness": -0.0,
-   "XM": 1.689
-  },
-  "symbol_tung_san": {
-   "Exness": "EURSGDM",
-   "XM": "EURSGDMICRO"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
   "phoi_nhiem": "NZDJPY",
   "so_kenh": 3,
   "kenh_re": "FXCE",
@@ -1213,12 +1235,12 @@
   "phi_re_pct_nam": -1.037,
   "kenh_dat": "XM",
   "symbol_dat": "NZDJPYMICRO",
-  "phi_dat_pct_nam": 0.58,
-  "chenh_diem_pct_nam": 1.617,
+  "phi_dat_pct_nam": 0.618,
+  "chenh_diem_pct_nam": 1.655,
   "tat_ca": {
    "FXCE": -1.037,
    "Exness": -0.0,
-   "XM": 0.58
+   "XM": 0.618
   },
   "symbol_tung_san": {
    "FXCE": "NZDJPY",
@@ -1230,46 +1252,48 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "AUDNZD",
+  "phoi_nhiem": "EURNZD",
   "so_kenh": 3,
-  "kenh_re": "FXCE",
-  "symbol_re": "AUDNZD",
-  "phi_re_pct_nam": -1.266,
+  "kenh_re": "Exness",
+  "symbol_re": "EURNZDM",
+  "phi_re_pct_nam": 0.953,
   "kenh_dat": "XM",
-  "symbol_dat": "AUDNZDMICRO",
-  "phi_dat_pct_nam": 0.338,
-  "chenh_diem_pct_nam": 1.604,
+  "symbol_dat": "EURNZDMICRO",
+  "phi_dat_pct_nam": 2.56,
+  "chenh_diem_pct_nam": 1.607,
   "tat_ca": {
-   "FXCE": -1.266,
-   "Exness": -0.0,
-   "XM": 0.338
+   "Exness": 0.953,
+   "FXCE": 0.962,
+   "XM": 2.56
   },
   "symbol_tung_san": {
-   "FXCE": "AUDNZD",
-   "Exness": "AUDNZDM",
-   "XM": "AUDNZDMICRO"
+   "Exness": "EURNZDM",
+   "FXCE": "EURNZD",
+   "XM": "EURNZDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "EURHKD",
-  "so_kenh": 2,
+  "phoi_nhiem": "EURAUD",
+  "so_kenh": 3,
   "kenh_re": "Exness",
-  "symbol_re": "EURHKDM",
-  "phi_re_pct_nam": 1.125,
+  "symbol_re": "EURAUDM",
+  "phi_re_pct_nam": 2.443,
   "kenh_dat": "XM",
-  "symbol_dat": "EURHKDMICRO",
-  "phi_dat_pct_nam": 2.698,
-  "chenh_diem_pct_nam": 1.573,
+  "symbol_dat": "EURAUDMICRO",
+  "phi_dat_pct_nam": 3.912,
+  "chenh_diem_pct_nam": 1.469,
   "tat_ca": {
-   "Exness": 1.125,
-   "XM": 2.698
+   "Exness": 2.443,
+   "FXCE": 3.134,
+   "XM": 3.912
   },
   "symbol_tung_san": {
-   "Exness": "EURHKDM",
-   "XM": "EURHKDMICRO"
+   "Exness": "EURAUDM",
+   "FXCE": "EURAUD",
+   "XM": "EURAUDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1287,7 +1311,7 @@
   "chenh_diem_pct_nam": 1.468,
   "tat_ca": {
    "FXCE": -1.468,
-   "XM": -0.263,
+   "XM": -0.602,
    "Exness": -0.0
   },
   "symbol_tung_san": {
@@ -1300,6 +1324,54 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
+  "phoi_nhiem": "USDHKD",
+  "so_kenh": 3,
+  "kenh_re": "Exness",
+  "symbol_re": "USDHKDM",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "USDHKD",
+  "phi_dat_pct_nam": 1.411,
+  "chenh_diem_pct_nam": 1.411,
+  "tat_ca": {
+   "Exness": -0.0,
+   "FXCE": 0.0,
+   "XM": 1.411
+  },
+  "symbol_tung_san": {
+   "Exness": "USDHKDM",
+   "FXCE": "USDHKD",
+   "XM": "USDHKD"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "GBPAUD",
+  "so_kenh": 3,
+  "kenh_re": "Exness",
+  "symbol_re": "GBPAUDM",
+  "phi_re_pct_nam": 0.998,
+  "kenh_dat": "XM",
+  "symbol_dat": "GBPAUDMICRO",
+  "phi_dat_pct_nam": 2.371,
+  "chenh_diem_pct_nam": 1.373,
+  "tat_ca": {
+   "Exness": 0.998,
+   "FXCE": 1.824,
+   "XM": 2.371
+  },
+  "symbol_tung_san": {
+   "Exness": "GBPAUDM",
+   "FXCE": "GBPAUD",
+   "XM": "GBPAUDMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
   "phoi_nhiem": "CADJPY",
   "so_kenh": 3,
   "kenh_re": "FXCE",
@@ -1307,12 +1379,12 @@
   "phi_re_pct_nam": -1.005,
   "kenh_dat": "XM",
   "symbol_dat": "CADJPYMICRO",
-  "phi_dat_pct_nam": 0.341,
-  "chenh_diem_pct_nam": 1.346,
+  "phi_dat_pct_nam": 0.356,
+  "chenh_diem_pct_nam": 1.361,
   "tat_ca": {
    "FXCE": -1.005,
    "Exness": -0.0,
-   "XM": 0.341
+   "XM": 0.356
   },
   "symbol_tung_san": {
    "FXCE": "CADJPY",
@@ -1324,52 +1396,28 @@
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "EURCAD",
+  "phoi_nhiem": "AUDNZD",
   "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "EURCADM",
-  "phi_re_pct_nam": 0.295,
+  "kenh_re": "FXCE",
+  "symbol_re": "AUDNZD",
+  "phi_re_pct_nam": -1.266,
   "kenh_dat": "XM",
-  "symbol_dat": "EURCADMICRO",
-  "phi_dat_pct_nam": 1.571,
-  "chenh_diem_pct_nam": 1.276,
+  "symbol_dat": "AUDNZDMICRO",
+  "phi_dat_pct_nam": 0.08,
+  "chenh_diem_pct_nam": 1.346,
   "tat_ca": {
-   "Exness": 0.295,
-   "FXCE": 0.915,
-   "XM": 1.571
-  },
-  "symbol_tung_san": {
-   "Exness": "EURCADM",
-   "FXCE": "EURCAD",
-   "XM": "EURCADMICRO"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "USDHKD",
-  "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "USDHKDM",
-  "phi_re_pct_nam": -0.0,
-  "kenh_dat": "XM",
-  "symbol_dat": "USDHKD",
-  "phi_dat_pct_nam": 1.244,
-  "chenh_diem_pct_nam": 1.244,
-  "tat_ca": {
+   "FXCE": -1.266,
    "Exness": -0.0,
-   "FXCE": 0.0,
-   "XM": 1.244
+   "XM": 0.08
   },
   "symbol_tung_san": {
-   "Exness": "USDHKDM",
-   "FXCE": "USDHKD",
-   "XM": "USDHKD"
+   "FXCE": "AUDNZD",
+   "Exness": "AUDNZDM",
+   "XM": "AUDNZDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "AUDUSD",
@@ -1383,37 +1431,13 @@
   "chenh_diem_pct_nam": 1.212,
   "tat_ca": {
    "Exness": -0.0,
-   "XM": 0.733,
+   "XM": 0.438,
    "FXCE": 1.212
   },
   "symbol_tung_san": {
    "Exness": "AUDUSDM",
    "XM": "AUDUSD",
    "FXCE": "AUDUSD"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "EURNZD",
-  "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "EURNZDM",
-  "phi_re_pct_nam": 0.953,
-  "kenh_dat": "XM",
-  "symbol_dat": "EURNZDMICRO",
-  "phi_dat_pct_nam": 2.161,
-  "chenh_diem_pct_nam": 1.208,
-  "tat_ca": {
-   "Exness": 0.953,
-   "FXCE": 0.962,
-   "XM": 2.161
-  },
-  "symbol_tung_san": {
-   "Exness": "EURNZDM",
-   "FXCE": "EURNZD",
-   "XM": "EURNZDMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1442,6 +1466,30 @@
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
+  "phoi_nhiem": "NZDCAD",
+  "so_kenh": 3,
+  "kenh_re": "Exness",
+  "symbol_re": "NZDCADM",
+  "phi_re_pct_nam": 0.399,
+  "kenh_dat": "XM",
+  "symbol_dat": "NZDCADMICRO",
+  "phi_dat_pct_nam": 1.589,
+  "chenh_diem_pct_nam": 1.19,
+  "tat_ca": {
+   "Exness": 0.399,
+   "FXCE": 0.812,
+   "XM": 1.589
+  },
+  "symbol_tung_san": {
+   "Exness": "NZDCADM",
+   "FXCE": "NZDCAD",
+   "XM": "NZDCADMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
   "phoi_nhiem": "EURGBP",
   "so_kenh": 3,
   "kenh_re": "Exness",
@@ -1453,7 +1501,7 @@
   "chenh_diem_pct_nam": 1.173,
   "tat_ca": {
    "Exness": 1.877,
-   "XM": 2.837,
+   "XM": 2.618,
    "FXCE": 3.05
   },
   "symbol_tung_san": {
@@ -1466,72 +1514,70 @@
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "NZDCHF",
-  "so_kenh": 3,
-  "kenh_re": "XM",
-  "symbol_re": "NZDCHFMICRO",
-  "phi_re_pct_nam": -1.128,
-  "kenh_dat": "Exness",
-  "symbol_dat": "NZDCHFM",
-  "phi_dat_pct_nam": -0.0,
-  "chenh_diem_pct_nam": 1.128,
-  "tat_ca": {
-   "XM": -1.128,
-   "FXCE": -1.036,
-   "Exness": -0.0
-  },
-  "symbol_tung_san": {
-   "XM": "NZDCHFMICRO",
-   "FXCE": "NZDCHF",
-   "Exness": "NZDCHFM"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "GBPAUD",
+  "phoi_nhiem": "EURCAD",
   "so_kenh": 3,
   "kenh_re": "Exness",
-  "symbol_re": "GBPAUDM",
-  "phi_re_pct_nam": 0.998,
+  "symbol_re": "EURCADM",
+  "phi_re_pct_nam": 0.295,
   "kenh_dat": "XM",
-  "symbol_dat": "GBPAUDMICRO",
-  "phi_dat_pct_nam": 2.095,
-  "chenh_diem_pct_nam": 1.097,
+  "symbol_dat": "EURCADMICRO",
+  "phi_dat_pct_nam": 1.43,
+  "chenh_diem_pct_nam": 1.135,
   "tat_ca": {
-   "Exness": 0.998,
-   "FXCE": 1.824,
-   "XM": 2.095
+   "Exness": 0.295,
+   "FXCE": 0.915,
+   "XM": 1.43
   },
   "symbol_tung_san": {
-   "Exness": "GBPAUDM",
-   "FXCE": "GBPAUD",
-   "XM": "GBPAUDMICRO"
+   "Exness": "EURCADM",
+   "FXCE": "EURCAD",
+   "XM": "EURCADMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "EURAUD",
+  "phoi_nhiem": "USDDKK",
   "so_kenh": 3,
   "kenh_re": "Exness",
-  "symbol_re": "EURAUDM",
-  "phi_re_pct_nam": 2.443,
+  "symbol_re": "USDDKKM",
+  "phi_re_pct_nam": -0.0,
   "kenh_dat": "XM",
-  "symbol_dat": "EURAUDMICRO",
-  "phi_dat_pct_nam": 3.527,
-  "chenh_diem_pct_nam": 1.084,
+  "symbol_dat": "USDDKK",
+  "phi_dat_pct_nam": 1.13,
+  "chenh_diem_pct_nam": 1.13,
   "tat_ca": {
-   "Exness": 2.443,
-   "FXCE": 3.134,
-   "XM": 3.527
+   "Exness": -0.0,
+   "FXCE": 0.0,
+   "XM": 1.13
   },
   "symbol_tung_san": {
-   "Exness": "EURAUDM",
-   "FXCE": "EURAUD",
-   "XM": "EURAUDMICRO"
+   "Exness": "USDDKKM",
+   "FXCE": "USDDKK",
+   "XM": "USDDKK"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "GBPDKK",
+  "so_kenh": 2,
+  "kenh_re": "Exness",
+  "symbol_re": "GBPDKKM",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "GBPDKKMICRO",
+  "phi_dat_pct_nam": 1.081,
+  "chenh_diem_pct_nam": 1.081,
+  "tat_ca": {
+   "Exness": -0.0,
+   "XM": 1.081
+  },
+  "symbol_tung_san": {
+   "Exness": "GBPDKKM",
+   "XM": "GBPDKKMICRO"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1549,13 +1595,37 @@
   "chenh_diem_pct_nam": 1.047,
   "tat_ca": {
    "FXCE": -1.047,
-   "XM": -0.947,
+   "XM": -0.763,
    "Exness": -0.0
   },
   "symbol_tung_san": {
    "FXCE": "CADCHF",
    "XM": "CADCHFMICRO",
    "Exness": "CADCHFM"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "NZDCHF",
+  "so_kenh": 3,
+  "kenh_re": "FXCE",
+  "symbol_re": "NZDCHF",
+  "phi_re_pct_nam": -1.036,
+  "kenh_dat": "Exness",
+  "symbol_dat": "NZDCHFM",
+  "phi_dat_pct_nam": -0.0,
+  "chenh_diem_pct_nam": 1.036,
+  "tat_ca": {
+   "FXCE": -1.036,
+   "XM": -0.947,
+   "Exness": -0.0
+  },
+  "symbol_tung_san": {
+   "FXCE": "NZDCHF",
+   "XM": "NZDCHFMICRO",
+   "Exness": "NZDCHFM"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1573,61 +1643,13 @@
   "chenh_diem_pct_nam": 0.969,
   "tat_ca": {
    "Exness": 1.782,
-   "XM": 2.46,
+   "XM": 2.477,
    "FXCE": 2.751
   },
   "symbol_tung_san": {
    "Exness": "EURUSDM",
    "XM": "EURUSD",
    "FXCE": "EURUSD"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "NZDCAD",
-  "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "NZDCADM",
-  "phi_re_pct_nam": 0.399,
-  "kenh_dat": "XM",
-  "symbol_dat": "NZDCADMICRO",
-  "phi_dat_pct_nam": 1.353,
-  "chenh_diem_pct_nam": 0.954,
-  "tat_ca": {
-   "Exness": 0.399,
-   "FXCE": 0.812,
-   "XM": 1.353
-  },
-  "symbol_tung_san": {
-   "Exness": "NZDCADM",
-   "FXCE": "NZDCAD",
-   "XM": "NZDCADMICRO"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "USDDKK",
-  "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "USDDKKM",
-  "phi_re_pct_nam": -0.0,
-  "kenh_dat": "XM",
-  "symbol_dat": "USDDKK",
-  "phi_dat_pct_nam": 0.938,
-  "chenh_diem_pct_nam": 0.938,
-  "tat_ca": {
-   "Exness": -0.0,
-   "FXCE": 0.0,
-   "XM": 0.938
-  },
-  "symbol_tung_san": {
-   "Exness": "USDDKKM",
-   "FXCE": "USDDKK",
-   "XM": "USDDKK"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1641,12 +1663,12 @@
   "phi_re_pct_nam": -0.0,
   "kenh_dat": "XM",
   "symbol_dat": "USDSEK",
-  "phi_dat_pct_nam": 0.86,
-  "chenh_diem_pct_nam": 0.86,
+  "phi_dat_pct_nam": 0.961,
+  "chenh_diem_pct_nam": 0.961,
   "tat_ca": {
    "Exness": -0.0,
    "FXCE": 0.0,
-   "XM": 0.86
+   "XM": 0.961
   },
   "symbol_tung_san": {
    "Exness": "USDSEKM",
@@ -1658,26 +1680,28 @@
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "GBPDKK",
-  "so_kenh": 2,
-  "kenh_re": "Exness",
-  "symbol_re": "GBPDKKM",
-  "phi_re_pct_nam": -0.0,
-  "kenh_dat": "XM",
-  "symbol_dat": "GBPDKKMICRO",
-  "phi_dat_pct_nam": 0.851,
-  "chenh_diem_pct_nam": 0.851,
+  "phoi_nhiem": "AUS200",
+  "so_kenh": 3,
+  "kenh_re": "XM",
+  "symbol_re": "AUS200CASH",
+  "phi_re_pct_nam": 7.468,
+  "kenh_dat": "FXCE",
+  "symbol_dat": "AUS200",
+  "phi_dat_pct_nam": 8.295,
+  "chenh_diem_pct_nam": 0.827,
   "tat_ca": {
-   "Exness": -0.0,
-   "XM": 0.851
+   "XM": 7.468,
+   "Exness": 7.951,
+   "FXCE": 8.295
   },
   "symbol_tung_san": {
-   "Exness": "GBPDKKM",
-   "XM": "GBPDKKMICRO"
+   "XM": "AUS200CASH",
+   "Exness": "AUS200M",
+   "FXCE": "AUS200"
   },
-  "tin_cay": "CAO",
+  "tin_cay": "VUA",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "GBPUSD",
@@ -1691,13 +1715,37 @@
   "chenh_diem_pct_nam": 0.795,
   "tat_ca": {
    "Exness": 0.321,
-   "XM": 0.99,
+   "XM": 0.999,
    "FXCE": 1.116
   },
   "symbol_tung_san": {
    "Exness": "GBPUSDM",
    "XM": "GBPUSD",
    "FXCE": "GBPUSD"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "USDCNH",
+  "so_kenh": 3,
+  "kenh_re": "Exness",
+  "symbol_re": "USDCNHM",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "USDCNH",
+  "phi_dat_pct_nam": 0.789,
+  "chenh_diem_pct_nam": 0.789,
+  "tat_ca": {
+   "Exness": -0.0,
+   "FXCE": 0.0,
+   "XM": 0.789
+  },
+  "symbol_tung_san": {
+   "Exness": "USDCNHM",
+   "FXCE": "USDCNH",
+   "XM": "USDCNH"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
@@ -1711,12 +1759,12 @@
   "phi_re_pct_nam": -0.408,
   "kenh_dat": "XM",
   "symbol_dat": "GBPNZDMICRO",
-  "phi_dat_pct_nam": 0.386,
-  "chenh_diem_pct_nam": 0.794,
+  "phi_dat_pct_nam": 0.378,
+  "chenh_diem_pct_nam": 0.786,
   "tat_ca": {
    "FXCE": -0.408,
    "Exness": -0.0,
-   "XM": 0.386
+   "XM": 0.378
   },
   "symbol_tung_san": {
    "FXCE": "GBPNZD",
@@ -1739,7 +1787,7 @@
   "chenh_diem_pct_nam": 0.726,
   "tat_ca": {
    "FXCE": -0.726,
-   "XM": -0.382,
+   "XM": -0.281,
    "Exness": -0.0
   },
   "symbol_tung_san": {
@@ -1759,11 +1807,11 @@
   "phi_re_pct_nam": -0.0,
   "kenh_dat": "XM",
   "symbol_dat": "GBPSEKMICRO",
-  "phi_dat_pct_nam": 0.714,
-  "chenh_diem_pct_nam": 0.714,
+  "phi_dat_pct_nam": 0.703,
+  "chenh_diem_pct_nam": 0.703,
   "tat_ca": {
    "Exness": -0.0,
-   "XM": 0.714
+   "XM": 0.703
   },
   "symbol_tung_san": {
    "Exness": "GBPSEKM",
@@ -1785,7 +1833,7 @@
   "chenh_diem_pct_nam": 0.668,
   "tat_ca": {
    "Exness": 6.3,
-   "XM": 6.854,
+   "XM": 6.811,
    "FXCE": 6.968
   },
   "symbol_tung_san": {
@@ -1798,28 +1846,50 @@
   "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
-  "phoi_nhiem": "AUS200",
+  "phoi_nhiem": "USDSGD",
   "so_kenh": 3,
-  "kenh_re": "XM",
-  "symbol_re": "AUS200CASH",
-  "phi_re_pct_nam": 7.637,
-  "kenh_dat": "FXCE",
-  "symbol_dat": "AUS200",
-  "phi_dat_pct_nam": 8.295,
-  "chenh_diem_pct_nam": 0.658,
+  "kenh_re": "Exness",
+  "symbol_re": "USDSGDM",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "USDSGD",
+  "phi_dat_pct_nam": 0.531,
+  "chenh_diem_pct_nam": 0.531,
   "tat_ca": {
-   "XM": 7.637,
-   "Exness": 7.951,
-   "FXCE": 8.295
+   "Exness": -0.0,
+   "FXCE": 0.0,
+   "XM": 0.531
   },
   "symbol_tung_san": {
-   "XM": "AUS200CASH",
-   "Exness": "AUS200M",
-   "FXCE": "AUS200"
+   "Exness": "USDSGDM",
+   "FXCE": "USDSGD",
+   "XM": "USDSGD"
   },
-  "tin_cay": "VUA",
+  "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+ },
+ {
+  "phoi_nhiem": "GBPSGD",
+  "so_kenh": 2,
+  "kenh_re": "Exness",
+  "symbol_re": "GBPSGDM",
+  "phi_re_pct_nam": -0.0,
+  "kenh_dat": "XM",
+  "symbol_dat": "GBPSGDMICRO",
+  "phi_dat_pct_nam": 0.48,
+  "chenh_diem_pct_nam": 0.48,
+  "tat_ca": {
+   "Exness": -0.0,
+   "XM": 0.48
+  },
+  "symbol_tung_san": {
+   "Exness": "GBPSGDM",
+   "XM": "GBPSGDMICRO"
+  },
+  "tin_cay": "CAO",
+  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
+  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "USDCAD",
@@ -1833,7 +1903,7 @@
   "chenh_diem_pct_nam": 0.448,
   "tat_ca": {
    "FXCE": -0.448,
-   "XM": -0.26,
+   "XM": -0.271,
    "Exness": -0.0
   },
   "symbol_tung_san": {
@@ -1857,7 +1927,7 @@
   "chenh_diem_pct_nam": 0.408,
   "tat_ca": {
    "FXCE": -0.408,
-   "XM": -0.258,
+   "XM": -0.06,
    "Exness": -0.0
   },
   "symbol_tung_san": {
@@ -1868,54 +1938,6 @@
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
   "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "USDCNH",
-  "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "USDCNHM",
-  "phi_re_pct_nam": -0.0,
-  "kenh_dat": "XM",
-  "symbol_dat": "USDCNH",
-  "phi_dat_pct_nam": 0.375,
-  "chenh_diem_pct_nam": 0.375,
-  "tat_ca": {
-   "Exness": -0.0,
-   "FXCE": 0.0,
-   "XM": 0.375
-  },
-  "symbol_tung_san": {
-   "Exness": "USDCNHM",
-   "FXCE": "USDCNH",
-   "XM": "USDCNH"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "USDSGD",
-  "so_kenh": 3,
-  "kenh_re": "Exness",
-  "symbol_re": "USDSGDM",
-  "phi_re_pct_nam": -0.0,
-  "kenh_dat": "XM",
-  "symbol_dat": "USDSGD",
-  "phi_dat_pct_nam": 0.325,
-  "chenh_diem_pct_nam": 0.325,
-  "tat_ca": {
-   "Exness": -0.0,
-   "FXCE": 0.0,
-   "XM": 0.325
-  },
-  "symbol_tung_san": {
-   "Exness": "USDSGDM",
-   "FXCE": "USDSGD",
-   "XM": "USDSGD"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "BNBUSD",
@@ -1942,48 +1964,26 @@
  {
   "phoi_nhiem": "NZDUSD",
   "so_kenh": 3,
-  "kenh_re": "XM",
+  "kenh_re": "FXCE",
   "symbol_re": "NZDUSD",
-  "phi_re_pct_nam": 2.382,
-  "kenh_dat": "Exness",
-  "symbol_dat": "NZDUSDM",
-  "phi_dat_pct_nam": 2.686,
-  "chenh_diem_pct_nam": 0.304,
-  "tat_ca": {
-   "XM": 2.382,
-   "FXCE": 2.674,
-   "Exness": 2.686
-  },
-  "symbol_tung_san": {
-   "XM": "NZDUSD",
-   "FXCE": "NZDUSD",
-   "Exness": "NZDUSDM"
-  },
-  "tin_cay": "CAO",
-  "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
- },
- {
-  "phoi_nhiem": "GBPSGD",
-  "so_kenh": 2,
-  "kenh_re": "Exness",
-  "symbol_re": "GBPSGDM",
-  "phi_re_pct_nam": -0.0,
+  "phi_re_pct_nam": 2.674,
   "kenh_dat": "XM",
-  "symbol_dat": "GBPSGDMICRO",
-  "phi_dat_pct_nam": 0.006,
-  "chenh_diem_pct_nam": 0.006,
+  "symbol_dat": "NZDUSD",
+  "phi_dat_pct_nam": 2.688,
+  "chenh_diem_pct_nam": 0.014,
   "tat_ca": {
-   "Exness": -0.0,
-   "XM": 0.006
+   "FXCE": 2.674,
+   "Exness": 2.686,
+   "XM": 2.688
   },
   "symbol_tung_san": {
-   "Exness": "GBPSGDM",
-   "XM": "GBPSGDMICRO"
+   "FXCE": "NZDUSD",
+   "Exness": "NZDUSDM",
+   "XM": "NZDUSD"
   },
   "tin_cay": "CAO",
   "co_che": "phi giu qua dem co dinh theo bieu phi tung san",
-  "dieu_kien_de_sai": "Exness doi bieu phi; rui ro doi tac cua Exness tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
+  "dieu_kien_de_sai": "FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol khong that su cung phoi nhiem (kiem contract size)"
  },
  {
   "phoi_nhiem": "UKOIL",

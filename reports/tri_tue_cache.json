@@ -1,4 +1,22 @@
 {
+ "43e3e8f153595e2f0d689c170a74e0eb9143a21e": {
+  "luc": 1789267621.469887,
+  "ket_qua": {
+   "van_ban": "OK",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 3.8
+  }
+ },
+ "67250464ee2f55b7b86a03b82d65d4e01f5eab43": {
+  "luc": 1789266933.0551462,
+  "ket_qua": {
+   "van_ban": "{\n  \"chan_doan\": [\n    {\n      \"van_de\": \"Đĩa cứng dưới ngưỡng an toàn, khóa kiểm định MT5\",\n      \"bang_chung\": \"dia_trong_gb=8.8 (<15), mt5_tick_test='KHOA (dia < 15GB)'\",\n      \"muc\": \"NANG\"\n    },\n    {\n      \"van_de\": \"Tru NGHI và BANKER dừng hoạt động quá hạn\",\n      \"bang_chung\": \"NGHI tre_giay=1007420 (>360h), BANKER tre_giay=126581 (>720h), trang_thai='nghi', dung_im=true\",\n      \"muc\": \"NANG\"\n    },\n    {\n      \"van_de\": \"Vòng lặp SEEKER chạy trống chiếm 90% chu kỳ\",\n      \"bang_chung\": \"seeker_ty_le_vong_rong=0.9, viec_treo=0, viec_loi=0 nhưng không sinh artifact mới\",\n      \"muc\": \"VUA\"\n    },\n    {\n      \"van_de\": \"Nguồn dữ liệu chết hoặc không thu hoạch được\",\n      \"bang_chung\": \"quantconnect/mql5_ma_nguon/reddit_quant thu_hoach=0, fxblue gọi >=3 lần nhưng 0 tài liệu, rss_quantpedia_blog loi=1\",\n      \"muc\": \"VUA\"\n    },\n    {\n      \"van_de\": \"Lỗi xử lý LLM/EVO tích lũy làm nghẽn pipeline\",\n      \"bang_chung\": \"llm_e92fd83040, llm_e502b66769, evo_xay_viec_hong, evo_evo_van_de_mo đều báo lỗi/quá hạn\",\n      \"muc\": \"VUA\"\n    },\n    {\n      \"van_de\": \"Tỷ lệ null_lot bằng 0 nhưng vẫn ghi nhận chi tiết giả thuyết null\",\n      \"bang_chung\": \"null_ty_le_lot=0.0 trong khi null_chi_tiet liệt kê 10 ca EURCAD H4\",\n      \"muc\": \"NHE\"\n    }\n  ],\n  \"de_xuat\": [\n    {\n      \"viec\": \"Giải phóng đĩa và mở khóa MT5\",\n      \"vi_sao\": \"Dưới 15GB khiến tick-test bị chặn, ngăn chặn bước quyết định cuối cùng của dự án\",\n      \"kiem_the_nao\": \"Xóa cache/logs cũ, di chuyển artifact sang ổ khác, xác nhận mt5_tick_test chuyển thành 'MO'\"\n    },\n    {\n      \"viec\": \"Reset trạng thái tru NGHI và BANKER\",\n      \"vi_sao\": \"Dừng im quá hạn làm nghẽn dây chuyền xử lý và phân tích rủi ro\",\n      \"kiem_the_nao\": \"Gửi lệnh restart/trạng thái 'chay', theo dõi tre_giay giảm về <60s trong 5 phút\"\n    },\n    {\n      \"viec\": \"Thêm cơ chế early-exit cho SEEKER\",\n      \"vi_sao\": \"90% vòng lặp chạy vô ích gây lãng phí tài nguyên CPU/RAM\",\n      \"kiem_the_nao\": \"Kiểm tra log vòng lặp, đặt điều kiện dừng nếu không tìm thấy pattern mới sau 3 lần quét liên tiếp\"\n    },\n    {\n      \"viec\": \"Tắt hoặc sửa các nguồn không thu hoạch được\",\n      \"vi_sao\": \"fxblue, quantconnect, mql5_ma_nguon tiêu tốn API call mà không trả về dữ liệu\",\n      \"kiem_the_nao\": \"Chuyển status sang 'TAT' hoặc cập nhật endpoint/API key, kiểm tra phản hồi HTTP response\"\n    },\n    {\n      \"viec\": \"Xử lý backlog lỗi EVO/LLM\",\n      \"vi_sao\": \"Công việc hỏng/quá hạn tích tụ làm chậm tiến độ tổng thể\",\n      \"kiem_the_nao\": \"Quét queue công việc còn dang dở, xóa task lỗi, kích hoạt lại worker pool\"\n    },\n    {\n      \"viec\": \"Phân tách rõ ràng giữa giả thuyết null và thực tế vận hành\",\n      \"vi_sao\": \"null_ty_le_lot=0.0 chứng minh nhà máy null hiện tại không sản xuất, trong khi null_chi_tiet là danh sách kiểm thử lịch sử\",\n      \"kiem_the_nao\": \"Cập nhật dashboard để hiển thị riêng 'null_rate_active' và 'null_history_log', tránh nhầm lẫn khi đọc báo cáo\"\n    }\n  ],\n  \"cau_hoi_cho_nguoi\": [\n    \"Có nên tạm dừng nguồn 'semantic' đang báo lỗi im để ưu tiên giải phóng đĩa trước không?\",\n    \"Tham số early-exit cho SEEKER nên đặt ở ngưỡng bao nhiêu vòng lặp để cân bằng giữa khám phá và hiệu suất?\",\n    \"Nguồn nào trong danh sách 'không thu hoạch' có giá trị chiến lược cao nhất để ưu tiên khôi phục API?\"\n  ]\n}",
+   "duong": "openai",
+   "model": "qwen3.7-flash",
+   "giay": 43.8
+  }
+ },
  "046fa600f1f25e4bf8a7796bbc51564ff802d269": {
   "luc": 1789225513.7723215,
   "ket_qua": {
@@ -6,15 +24,6 @@
    "duong": "openai",
    "model": "qwen3.7-flash",
    "giay": 7.8
-  }
- },
- "43e3e8f153595e2f0d689c170a74e0eb9143a21e": {
-  "luc": 1789224298.5648499,
-  "ket_qua": {
-   "van_ban": "OK",
-   "duong": "openai",
-   "model": "qwen3.7-flash",
-   "giay": 10.1
   }
  },
  "b82950a7ac7e206ac7d203d473139f5438d81d75": {

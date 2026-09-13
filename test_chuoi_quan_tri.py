@@ -100,3 +100,82 @@ def test_chuoi_nam_tren_duong_chay():
     for t in ("nhan/chuoi_quan_tri.py", "nhan/quan_tri_dsl.py",
               "nhan/dich_mq5_qtvt.py", "nhan/de_quan_tri.py"):
         assert t in toi, "%s van mo coi" % t
+
+
+# =========================================================== CONG (1) + (2)
+# `sinh_khoi_nhieu` sinh BANG nhieu luat trong MOT EA (dung boi `de_quan_tri.
+# chen_tu_spec` va `_de_qt_ea_ngoai.py`). Loi 11/09: goi ham nay voi cac spec
+# CHUA quy ve ATR (`_atr0` cu tra 0.0 lang le cho moi dict khac `{'atr': x}`)
+# lam ca 14 luat sinh ra GIONG HET nhau (1759 lenh / -108,76 / DD 1,3121), va
+# bang do bi doc nham thanh ket luan "AM" thay vi mot loi ky thuat.
+ATR_THAT, GIA_DIEM_THAT = 74.24, 0.1   # da do tren US500CASH D1 (dong tren)
+
+
+def test_sinh_khoi_nhieu_tu_kho_that_KHONG_toan_0():
+    """Kho THAT (75 khai bao, loc qua cong), quy ATR that -> bang PHAI KHAC
+    NHAU giua cac luat. Day la doi chung voi bang hong ngay 11/09."""
+    ds = [c for c in QD.doc_kho() if not QD.kiem_khai_bao(c)][:14]
+    assert len(ds) >= 10
+    _, luat = DQ.sinh_khoi_nhieu(ds, khung="D1", magic=0,
+                                 atr=ATR_THAT, gia_diem=GIA_DIEM_THAT)
+    assert len(luat) >= 10
+    gia_tri = {ten: [lay(x) for x in luat] for ten, lay, _ in DQ._COT_BANG_NHIEU}
+    hang = [tuple(gia_tri[c][i] for c in gia_tri) for i in range(1, len(luat))]
+    assert len(set(hang)) > 1, (
+        "moi luat cho CUNG mot bo tham so - dung lai dang bug 11/09")
+    assert not all(not any(h) for h in hang), "ca bang toan 0"
+
+
+def test_sinh_khoi_nhieu_thieu_atr_bi_tu_choi():
+    """Cong (1): khong duoc doan/mac dinh atr - phai NEM LOI ngay."""
+    specs = [{"ten": "a", "dat_hue": {"tu": {"pip": 10}}}]
+    with pytest.raises(DQ.KhongDichDuoc):
+        DQ.sinh_khoi_nhieu(specs, khung="D1")
+    with pytest.raises(DQ.KhongDichDuoc):
+        DQ.sinh_khoi_nhieu(specs, khung="D1", atr=0)
+    with pytest.raises(DQ.KhongDichDuoc):
+        DQ.sinh_khoi_nhieu(specs, khung="D1", atr=-5)
+
+
+def test_sinh_khoi_nhieu_mot_luat_toan_0_bi_tu_choi():
+    """Cong (2): mot luat (khac luat 0 - moc) khong co tham so kich hoat nao
+    khac 0 -> tu choi sinh file, bao ro 'CHUA_DO_DUOC: bang luat toan 0'."""
+    specs = [{"ten": "rong", "chan": {"so_vi_the_toi_da": 0}},
+             {"ten": "co_luat", "dat_hue": {"tu": {"pip": 10}}}]
+    with pytest.raises(DQ.KhongDichDuoc) as e:
+        DQ.sinh_khoi_nhieu(specs, khung="D1", atr=ATR_THAT, gia_diem=GIA_DIEM_THAT)
+    assert "CHUA_DO_DUOC" in str(e.value)
+    assert "bang luat toan 0" in str(e.value)
+
+
+def test_sinh_khoi_nhieu_moi_luat_giong_het_nhau_bi_tu_choi():
+    """Cong (2): tat ca luat cho CUNG mot bo tham so sau khi quy ATR - dau
+    hieu dien hinh cua loi 11/09 (vd atr/gia_diem dau vao sai)."""
+    specs = [{"ten": "x", "dat_hue": {"tu": {"pip": 10}}},
+             {"ten": "y", "dat_hue": {"tu": {"pip": 10}}}]
+    with pytest.raises(DQ.KhongDichDuoc) as e:
+        DQ.sinh_khoi_nhieu(specs, khung="D1", atr=ATR_THAT, gia_diem=GIA_DIEM_THAT)
+    assert "CHUA_DO_DUOC" in str(e.value)
+
+
+def test_dich_nhieu_di_qua_ca_atr_that_va_cong_bang_toan_0():
+    """`chuoi_quan_tri.dich_nhieu` la duong CHUOI QUAN TRI de sinh bang N luat -
+    phai tu do ATR that (khong nhan tham so tu ben ngoai) roi qua cong (2)."""
+    k = CQ.dich_nhieu(so_luat=14, khung="D1", ma="US500CASH", in_ra=None)
+    assert k["atr"] > 0
+    assert len(k["luat"]) >= 10
+    assert "QT_A_DatHue" in k["khoi"]
+
+
+def test_kiem_bang_luat_bo_qua_cot_mac_dinh_khac_0():
+    """`QT_A_TiaTy` (mac dinh 0,5) va `QT_A_NhoiLx` (mac dinh 1,0) KHONG duoc
+    tinh la 'luat co cham vi the' - neu tinh ca hai cot nay thi cong khong bao
+    gio bat duoc mot luat rong that (moi cot khac deu 0)."""
+    gia_tri = {
+        "QT_A_DatHue": [0.0, 0.0],
+        "QT_A_TiaTy": [0.5, 0.5],
+        "QT_A_NhoiLx": [1.0, 1.0],
+        "QT_A_TranVT": [0, 0],
+    }
+    with pytest.raises(DQ.KhongDichDuoc):
+        DQ.kiem_bang_luat(gia_tri)

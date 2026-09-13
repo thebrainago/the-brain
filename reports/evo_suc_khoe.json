@@ -1,33 +1,33 @@
 {
  "van_hanh": {
-  "luc": "2026-09-01 18:53:34",
+  "luc": "2026-09-13 10:58:18",
   "tru": {
    "SEEKER": {
-    "lan_cuoi": "2026-09-01 18:39:58",
-    "tre_giay": 816,
+    "lan_cuoi": "2026-09-13 10:43:16",
+    "tre_giay": 902,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "QUANTLAB": {
-    "lan_cuoi": "2026-09-01 18:53:10",
-    "tre_giay": 24,
+    "lan_cuoi": "2026-09-13 10:39:27",
+    "tre_giay": 1131,
     "trang_thai": "chay",
     "dung_im": false
    },
    "NGHI": {
-    "lan_cuoi": "2026-09-01 17:43:49",
-    "tre_giay": 4185,
+    "lan_cuoi": "2026-09-13 10:02:50",
+    "tre_giay": 3328,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "BANKER": {
-    "lan_cuoi": "2026-09-01 18:37:44",
-    "tre_giay": 950,
+    "lan_cuoi": "2026-09-13 10:57:43",
+    "tre_giay": 35,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "EVO": {
-    "lan_cuoi": "2026-09-01 18:53:34",
+    "lan_cuoi": "2026-09-13 10:58:18",
     "tre_giay": 0,
     "trang_thai": "chay",
     "dung_im": false
@@ -35,60 +35,61 @@
   },
   "tai_nguyen": {
    "tab": {
-    "cong": 9224,
-    "so_tab": 1
+    "cong": null,
+    "so_tab": null
    },
    "chrome": {
-    "gb": 0.65,
-    "so_tien_trinh": 10
+    "gb": 0.0,
+    "so_tien_trinh": 0
    },
-   "ram_dung_pct": 26.6,
-   "ram_trong_gb": 25.2,
-   "cpu_pct": 66.8
+   "ram_dung_pct": 39.3,
+   "ram_trong_gb": 20.8,
+   "cpu_pct": 25.3
   },
   "viec": {
    "QUANTLAB": {
-    "XONG": 1835
+    "CHO": 12,
+    "XONG": 1888
    }
   },
   "viec_treo": 0,
   "viec_loi": 0,
-  "viec_cho": 0,
-  "seeker_ty_le_vong_rong": 0.92,
-  "gian_doan_7ngay_gio": 150.9,
-  "gian_doan_lan": 4,
-  "may_tat_7ngay_gio": 0,
+  "viec_cho": 12,
+  "seeker_ty_le_vong_rong": 0.86,
+  "gian_doan_7ngay_gio": 166.6,
+  "gian_doan_lan": 1,
+  "may_tat_7ngay_gio": 166.6,
   "he_chet_7ngay_gio": 0,
-  "chua_ro_7ngay_gio": 150.9,
+  "chua_ro_7ngay_gio": 0,
   "he_chet_lan": 0,
-  "gio_do_duoc_7ngay": 17.1,
+  "gio_do_duoc_7ngay": 1.4,
   "ty_le_song_7ngay": 1.0,
   "watchdog": {
-   "so_lan": 2,
+   "so_lan": 1,
    "gio": 24,
    "theo_rc": {
-    "15": 2
+    "15": 1
    },
-   "lan_cuoi": "2026-08-31 21:46:06",
-   "moi_gio": 0.08
+   "lan_cuoi": "2026-09-13 09:57:25",
+   "moi_gio": 0.04
   },
-  "dia_trong_gb": 15.4,
-  "mt5_tick_test": "GO",
+  "dia_trong_gb": 7.6,
+  "mt5_tick_test": "KHOA (dia < 15GB)",
   "so_toan_ven": {
    "lanh": true,
-   "mo_ta": "1858 dong lien mach"
+   "mo_ta": "17677 dong lien mach"
   },
   "nguon": {
    "arxiv": {
-    "lan": 11,
+    "lan": 43,
     "loi": 0,
-    "thu_hoach": 171,
+    "thu_hoach": 241,
     "trang_thai": "BAT"
    },
    "github": {
-    "lan": 7,
+    "lan": 40,
     "loi": 0,
-    "thu_hoach": 209,
+    "thu_hoach": 2413,
     "trang_thai": "BAT"
    },
    "mql5_signals": {
@@ -98,57 +99,57 @@
     "trang_thai": "BAT"
    },
    "stackexchange": {
-    "lan": 7,
+    "lan": 34,
     "loi": 0,
-    "thu_hoach": 89,
+    "thu_hoach": 161,
     "trang_thai": "BAT"
    },
    "hackernews": {
-    "lan": 7,
+    "lan": 34,
     "loi": 0,
-    "thu_hoach": 46,
+    "thu_hoach": 159,
     "trang_thai": "BAT"
    },
    "semantic": {
-    "lan": 3,
+    "lan": 17,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 235,
     "trang_thai": "BAT"
    },
    "openalex": {
-    "lan": 7,
+    "lan": 38,
     "loi": 0,
-    "thu_hoach": 304,
+    "thu_hoach": 1824,
     "trang_thai": "BAT"
    },
    "lean_algo": {
-    "lan": 4,
+    "lan": 35,
     "loi": 0,
     "thu_hoach": 40,
     "trang_thai": "BAT"
    },
    "mql5_code": {
-    "lan": 5,
+    "lan": 38,
     "loi": 0,
-    "thu_hoach": 37,
+    "thu_hoach": 1166,
     "trang_thai": "BAT"
    },
    "blog": {
-    "lan": 5,
+    "lan": 38,
     "loi": 0,
-    "thu_hoach": 33,
+    "thu_hoach": 39,
     "trang_thai": "BAT"
    },
    "quantconnect": {
-    "lan": 5,
+    "lan": 29,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "crossref": {
-    "lan": 4,
+    "lan": 26,
     "loi": 0,
-    "thu_hoach": 83,
+    "thu_hoach": 1459,
     "trang_thai": "BAT"
    },
    "myfxbook": {
@@ -164,15 +165,15 @@
     "trang_thai": "BAT"
    },
    "fxblue": {
-    "lan": 4,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 103,
     "trang_thai": "BAT"
    },
    "etoro": {
-    "lan": 3,
+    "lan": 5,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 100,
     "trang_thai": "BAT"
    },
    "zulutrade": {
@@ -218,9 +219,9 @@
     "trang_thai": "BAT"
    },
    "telegram": {
-    "lan": 7,
+    "lan": 9,
     "loi": 0,
-    "thu_hoach": 26,
+    "thu_hoach": 42,
     "trang_thai": "BAT"
    },
    "mql5_ma_nguon": {
@@ -297,7 +298,7 @@
    },
    "rss_reddit_quant": {
     "lan": 1,
-    "loi": 6,
+    "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
@@ -386,15 +387,15 @@
     "trang_thai": "BAT"
    },
    "rss_tradingview_blog": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 60,
+    "thu_hoach": 68,
     "trang_thai": "BAT"
    },
    "rss_aligrithm": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 17,
+    "thu_hoach": 19,
     "trang_thai": "BAT"
    },
    "rss_betterbuyandhold": {
@@ -506,138 +507,473 @@
     "trang_thai": "BAT"
    },
    "tradingview_pine": {
-    "lan": 2,
+    "lan": 35,
+    "loi": 0,
+    "thu_hoach": 24,
+    "trang_thai": "BAT"
+   },
+   "rss_factorinvestor": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_fxmacrodata": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 4,
+    "trang_thai": "BAT"
+   },
+   "rss_gatambook": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 8,
+    "trang_thai": "BAT"
+   },
+   "rss_investresolve": {
+    "lan": 1,
     "loi": 0,
     "thu_hoach": 9,
     "trang_thai": "BAT"
+   },
+   "rss_jonathankinlay": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_mebfaber": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 8,
+    "trang_thai": "BAT"
+   },
+   "rss_morguelabs": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 5,
+    "trang_thai": "BAT"
+   },
+   "rss_outcastbeta": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_oxford_capital": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_papertoprofit": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_philosophicaleconomics": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_quant_galore": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 12,
+    "trang_thai": "BAT"
+   },
+   "rss_quantfiction": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 9,
+    "trang_thai": "BAT"
+   },
+   "rss_quantforhire": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_quantifiableedges": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
+   },
+   "rss_quantish": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 4,
+    "trang_thai": "BAT"
+   },
+   "rss_quantjourney": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 9,
+    "trang_thai": "BAT"
+   },
+   "rss_returnstacked": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
    }
   },
-  "tai_lieu": 3273,
-  "seeker_da_boc": 236,
-  "seeker_tai_lieu_artifact": 2260,
-  "seeker_ung_vien": 555,
+  "tai_lieu": 11771,
+  "seeker_da_boc": 2341,
+  "seeker_tai_lieu_artifact": 6849,
+  "seeker_ung_vien": 616,
   "seeker_gia_thuyet_tu_tai_lieu": 4,
-  "seeker_nang_suat_100": 1.69,
-  "nghi_co_che_noi_sinh": 371,
+  "seeker_nang_suat_100": 0.17,
+  "nghi_co_che_noi_sinh": 383,
   "nang_suat_nguon": {
-   "collective2": {
-    "da_boc": 1,
+   "arxiv": {
+    "da_boc": 71,
     "gia_thuyet": 0
    },
-   "crossref": {
-    "da_boc": 1,
-    "gia_thuyet": 0
-   },
-   "github": {
+   "cnblogs_trung": {
     "da_boc": 3,
     "gia_thuyet": 0
    },
-   "openalex": {
-    "da_boc": 188,
+   "collective2": {
+    "da_boc": 5,
     "gia_thuyet": 0
    },
-   "quantpedia": {
+   "cong_cu_ngoai": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "crossref": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "elitetrader": {
+    "da_boc": 5,
+    "gia_thuyet": 0
+   },
+   "github": {
+    "da_boc": 679,
+    "gia_thuyet": 0
+   },
+   "habr_nga": {
     "da_boc": 1,
     "gia_thuyet": 0
    },
-   "reddit_td": {
+   "hackernews": {
+    "da_boc": 23,
+    "gia_thuyet": 0
+   },
+   "lean_algo": {
+    "da_boc": 26,
+    "gia_thuyet": 0
+   },
+   "mql5_bai_viet": {
+    "da_boc": 19,
+    "gia_thuyet": 0
+   },
+   "mql5_code": {
+    "da_boc": 637,
+    "gia_thuyet": 0
+   },
+   "mql5_ma_expert": {
+    "da_boc": 15,
+    "gia_thuyet": 0
+   },
+   "mql5_signals": {
+    "da_boc": 7,
+    "gia_thuyet": 0
+   },
+   "myfxbook": {
+    "da_boc": 6,
+    "gia_thuyet": 0
+   },
+   "openalex": {
+    "da_boc": 187,
+    "gia_thuyet": 0
+   },
+   "paperswithcode": {
     "da_boc": 4,
+    "gia_thuyet": 0
+   },
+   "qiita_nhat": {
+    "da_boc": 22,
+    "gia_thuyet": 0
+   },
+   "quantconnect_forum": {
+    "da_boc": 9,
+    "gia_thuyet": 0
+   },
+   "quantpedia": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "reddit_td": {
+    "da_boc": 50,
+    "gia_thuyet": 0
+   },
+   "rss_aligrithm": {
+    "da_boc": 9,
+    "gia_thuyet": 1
+   },
+   "rss_alphaarchitect": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_alvarezquant": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_beyondpassive": {
+    "da_boc": 5,
+    "gia_thuyet": 0
+   },
+   "rss_buildalpha": {
+    "da_boc": 4,
+    "gia_thuyet": 0
+   },
+   "rss_concretumgroup": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_crackingmarkets": {
+    "da_boc": 9,
+    "gia_thuyet": 0
+   },
+   "rss_fh_financial_hacker": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_gatambook": {
+    "da_boc": 3,
+    "gia_thuyet": 0
+   },
+   "rss_hangukquant": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_jonathankinlay": {
+    "da_boc": 5,
+    "gia_thuyet": 0
+   },
+   "rss_morguelabs": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_mql5_articles": {
+    "da_boc": 11,
+    "gia_thuyet": 0
+   },
+   "rss_mrzepczynski": {
+    "da_boc": 10,
+    "gia_thuyet": 0
+   },
+   "rss_newtraderu": {
+    "da_boc": 12,
+    "gia_thuyet": 0
+   },
+   "rss_papertoprofit": {
+    "da_boc": 4,
+    "gia_thuyet": 0
+   },
+   "rss_philosophicaleconomics": {
+    "da_boc": 3,
+    "gia_thuyet": 0
+   },
+   "rss_priceactionlab": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_qoppac": {
+    "da_boc": 3,
+    "gia_thuyet": 0
+   },
+   "rss_quant_galore": {
+    "da_boc": 3,
+    "gia_thuyet": 0
+   },
+   "rss_quantdare": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_quantfiction": {
+    "da_boc": 4,
+    "gia_thuyet": 0
+   },
+   "rss_quantforhire": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_quantinsti": {
+    "da_boc": 10,
+    "gia_thuyet": 0
+   },
+   "rss_quantish": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_quantitativo": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_quantjourney": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_quantpedia_blog": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_quantumtrading": {
+    "da_boc": 4,
+    "gia_thuyet": 0
+   },
+   "rss_reddit_algotrading": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_reddit_algotrading_nam": {
+    "da_boc": 5,
+    "gia_thuyet": 0
+   },
+   "rss_returnstacked": {
+    "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_thinknewfound": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_tr8dr": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "rss_tradingmarkets": {
+    "da_boc": 3,
+    "gia_thuyet": 0
+   },
+   "rss_tradingview_blog": {
+    "da_boc": 26,
     "gia_thuyet": 0
    },
    "telegram": {
     "da_boc": 35,
     "gia_thuyet": 0
    },
-   "tiktok": {
-    "da_boc": 3,
+   "telegram_bobvolmanchannel": {
+    "da_boc": 7,
     "gia_thuyet": 0
    },
-   "rss_aligrithm": {
-    "da_boc": 0,
-    "gia_thuyet": 1
+   "telegram_mqlfree": {
+    "da_boc": 17,
+    "gia_thuyet": 0
+   },
+   "telegram_pdf_bobvolmanchannel": {
+    "da_boc": 16,
+    "gia_thuyet": 0
+   },
+   "telegram_vutruea": {
+    "da_boc": 49,
+    "gia_thuyet": 0
+   },
+   "tiktok": {
+    "da_boc": 22,
+    "gia_thuyet": 0
    },
    "tradingview_pine": {
-    "da_boc": 0,
+    "da_boc": 78,
     "gia_thuyet": 1
    },
    "tradingview_scripts": {
-    "da_boc": 0,
+    "da_boc": 45,
     "gia_thuyet": 1
    },
+   "trang_quantifiedstrategies": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "velog_han": {
+    "da_boc": 1,
+    "gia_thuyet": 0
+   },
+   "x": {
+    "da_boc": 7,
+    "gia_thuyet": 0
+   },
    "youtube": {
-    "da_boc": 0,
+    "da_boc": 69,
     "gia_thuyet": 1
+   },
+   "zulutrade": {
+    "da_boc": 1,
+    "gia_thuyet": 0
    }
   },
   "thanh_phan": {
-   "tong": 282,
-   "dien_dat_duoc": 183,
+   "tong": 285,
+   "dien_dat_duoc": 186,
    "toan_hang_con_thieu": [
     {
-     "chi_bao": "tuong_quan",
-     "tong_lan": 122,
-     "con_thieu": "ngu phap chua co toan hang 'tuong_quan'"
+     "chi_bao": "vwap",
+     "tong_lan": 18,
+     "con_thieu": "ngu phap chua co toan hang 'vwap'"
     },
     {
-     "chi_bao": "macd",
-     "tong_lan": 115,
-     "con_thieu": "ngu phap chua co toan hang 'macd'"
+     "chi_bao": "atr",
+     "tong_lan": 12,
+     "con_thieu": "'atr' trong ngu phap luon tinh tren close, khong nhan cot"
     },
     {
-     "chi_bao": "phuong_sai",
-     "tong_lan": 73,
-     "con_thieu": "ngu phap chua co toan hang 'phuong_sai'"
+     "chi_bao": "linreg",
+     "tong_lan": 10,
+     "con_thieu": "ngu phap chua co toan hang 'linreg'"
     },
     {
-     "chi_bao": "wma",
-     "tong_lan": 56,
-     "con_thieu": "ngu phap chua co toan hang 'wma'"
+     "chi_bao": "vwma",
+     "tong_lan": 10,
+     "con_thieu": "ngu phap chua co toan hang 'vwma'"
+    },
+    {
+     "chi_bao": "mfi",
+     "tong_lan": 8,
+     "con_thieu": "ngu phap chua co toan hang 'mfi'"
+    },
+    {
+     "chi_bao": "sar",
+     "tong_lan": 8,
+     "con_thieu": "ngu phap chua co toan hang 'sar'"
+    },
+    {
+     "chi_bao": "hull",
+     "tong_lan": 8,
+     "con_thieu": "ngu phap chua co toan hang 'hull'"
     },
     {
      "chi_bao": "adx",
-     "tong_lan": 52,
-     "con_thieu": "ngu phap chua co toan hang 'adx'"
+     "tong_lan": 4,
+     "con_thieu": "'adx' trong ngu phap luon tinh tren close, khong nhan cot"
     },
     {
-     "chi_bao": "smma",
-     "tong_lan": 46,
-     "con_thieu": "ngu phap chua co toan hang 'smma'"
+     "chi_bao": "supertrend",
+     "tong_lan": 4,
+     "con_thieu": "ngu phap chua co toan hang 'supertrend'"
     },
     {
-     "chi_bao": "dong_luong",
-     "tong_lan": 36,
-     "con_thieu": "ngu phap chua co toan hang 'dong_luong'"
-    },
-    {
-     "chi_bao": "bollinger",
-     "tong_lan": 35,
-     "con_thieu": "ngu phap chua co toan hang 'bollinger'"
-    },
-    {
-     "chi_bao": "cci",
-     "tong_lan": 33,
-     "con_thieu": "ngu phap chua co toan hang 'cci'"
-    },
-    {
-     "chi_bao": "obv",
-     "tong_lan": 29,
-     "con_thieu": "ngu phap chua co toan hang 'obv'"
-    },
-    {
-     "chi_bao": "stochastic",
-     "tong_lan": 20,
-     "con_thieu": "ngu phap chua co toan hang 'stochastic'"
-    },
-    {
-     "chi_bao": "tong",
-     "tong_lan": 19,
-     "con_thieu": "ngu phap chua co toan hang 'tong'"
+     "chi_bao": "ma",
+     "tong_lan": 4,
+     "con_thieu": "ngu phap chua co toan hang 'ma'"
     }
    ]
   },
   "do_sau_nguon": {
    "mql5_code": {
-    "trang_da_quet": 12,
+    "trang_da_quet": 3,
+    "vong": 0,
+    "bien_da_biet": {}
+   },
+   "etoro": {
+    "trang_da_quet": 0,
     "vong": 0,
     "bien_da_biet": {}
    },
@@ -648,30 +984,32 @@
    }
   },
   "gia_thuyet": {
-   "FAIL": 367,
-   "PASS": 1,
+   "CO_CO_CHE": 1,
+   "FAIL": 376,
+   "PASS": 3,
    "QUARANTINED_V2": 7
   }
  },
  "day_chuyen": {
-  "so_ket_qua_tho": 1307,
-  "so_ket_qua_du_phong": 904,
-  "so_ket_qua": 368,
-  "so_gt_da_ket": 368,
+  "so_ket_qua_tho": 1284,
+  "so_dong_da_supersede": 897,
+  "so_ket_qua": 380,
+  "so_gt_da_ket": 380,
   "theo_verdict": {
-   "FAIL": 367,
-   "PASS": 1
+   "CO_CO_CHE": 1,
+   "FAIL": 376,
+   "PASS": 3
   },
-  "ty_le_qua_cong": 0.0027,
-  "null_ty_le_lot": 0.0,
-  "null_do_luc": "2026-09-01 09:23:09",
+  "ty_le_qua_cong": 0.0079,
+  "null_ty_le_lot": 0.5,
+  "null_do_luc": "2026-09-13 09:34:32",
   "null_chi_tiet": {
    "so_ca": 10,
    "tai_san": "EURCAD",
    "khung": "H4"
   },
   "cong_co_luc": true,
-  "cong_co_luc_luc": "2026-09-01 09:23:11",
+  "cong_co_luc_luc": "2026-09-13 09:34:34",
   "cong_co_luc_chi_tiet": [
    {
     "p": 0.5,
@@ -705,24 +1043,54 @@
     "truot": []
    }
   ],
-  "ung_vien_n": 106,
-  "ung_vien_p_trung_vi": 0.375,
-  "ung_vien_duoi_005": 0.1792,
-  "fdr_da_bac_bo": 1,
-  "fdr_tong": 272,
-  "fdr_tong_tho": 1799,
-  "khop_ba_tang": false
+  "ung_vien_n": 108,
+  "ung_vien_p_trung_vi": 0.36,
+  "ung_vien_duoi_005": 0.1944,
+  "fdr_da_bac_bo": 3,
+  "fdr_tong": 284,
+  "fdr_tho_kham_pha": 35,
+  "fdr_tho_epoch_chet": 675,
+  "fdr_tho_do_dac": 1101,
+  "fdr_ho_do_dac": [
+   "do_luc",
+   "do_mde",
+   "do_mde2",
+   "null_hieu_chuan",
+   "test_che_do",
+   "thu_luc_cong"
+  ],
+  "fdr_trung_trong_epoch": 131,
+  "fdr_trung_trong_epoch_song": 0,
+  "fdr_mo_coi": 23,
+  "fdr_mo_coi_moi": 0,
+  "fdr_mo_coi_cu_khong_doi_soat_duoc": 23,
+  "fdr_tong_tho": 1811,
+  "gt_fail_truoc_fdr": 96,
+  "khop_ba_tang": true
  },
  "van_de": [
   {
+   "ma": "dia_thap",
+   "muc": "NANG",
+   "mo_ta": "Dia con 7.6 GB (< 15) -> MT5 tick-test bi KHOA, tuc dang tu cam minh lam buoc quyet dinh cua chinh du an",
+   "bc": {
+    "goi_y": "lab/.browser_thebrain2 (848MB, INVENTORY ghi la mo nham), lab/.browser_darwinex_tmp (480MB tmp)"
+   }
+  },
+  {
    "ma": "quet_nong",
    "muc": "NANG",
-   "mo_ta": "92% lan chay SEEKER khong thu duoc gi moi, NHUNG chua nguon nao di het mot vong bien gioi - day la DO SAU QUET, khong phai chu ky qua day",
+   "mo_ta": "86% lan chay SEEKER khong thu duoc gi moi, NHUNG chua nguon nao di het mot vong bien gioi - day la DO SAU QUET, khong phai chu ky qua day",
    "bc": {
-    "ty_le": 0.92,
+    "ty_le": 0.86,
     "do_sau": {
      "mql5_code": {
-      "trang_da_quet": 12,
+      "trang_da_quet": 3,
+      "vong": 0,
+      "bien_da_biet": {}
+     },
+     "etoro": {
+      "trang_da_quet": 0,
       "vong": 0,
       "bien_da_biet": {}
      },
@@ -737,94 +1105,381 @@
   {
    "ma": "ngu_phap_thieu_toan_hang",
    "muc": "VUA",
-   "mo_ta": "12 toan hang xuat hien trong ma THAT ma ngu phap chua dien dat duoc. Xep theo so lan dung: tuong_quan (122 lan), macd (115 lan), phuong_sai (73 lan), wma (56 lan), adx (52 lan), smma (46 lan). (183/282 thanh phan thu hoi duoc la viet ra duoc.)",
+   "mo_ta": "10 toan hang xuat hien trong ma THAT ma ngu phap chua dien dat duoc. Xep theo so lan dung: vwap (18 lan), atr (12 lan), linreg (10 lan), vwma (10 lan), mfi (8 lan), sar (8 lan). (186/285 thanh phan thu hoi duoc la viet ra duoc.)",
    "bc": {
     "con_thieu": [
      {
-      "chi_bao": "tuong_quan",
-      "tong_lan": 122,
-      "con_thieu": "ngu phap chua co toan hang 'tuong_quan'"
+      "chi_bao": "vwap",
+      "tong_lan": 18,
+      "con_thieu": "ngu phap chua co toan hang 'vwap'"
      },
      {
-      "chi_bao": "macd",
-      "tong_lan": 115,
-      "con_thieu": "ngu phap chua co toan hang 'macd'"
+      "chi_bao": "atr",
+      "tong_lan": 12,
+      "con_thieu": "'atr' trong ngu phap luon tinh tren close, khong nhan cot"
      },
      {
-      "chi_bao": "phuong_sai",
-      "tong_lan": 73,
-      "con_thieu": "ngu phap chua co toan hang 'phuong_sai'"
+      "chi_bao": "linreg",
+      "tong_lan": 10,
+      "con_thieu": "ngu phap chua co toan hang 'linreg'"
      },
      {
-      "chi_bao": "wma",
-      "tong_lan": 56,
-      "con_thieu": "ngu phap chua co toan hang 'wma'"
+      "chi_bao": "vwma",
+      "tong_lan": 10,
+      "con_thieu": "ngu phap chua co toan hang 'vwma'"
+     },
+     {
+      "chi_bao": "mfi",
+      "tong_lan": 8,
+      "con_thieu": "ngu phap chua co toan hang 'mfi'"
+     },
+     {
+      "chi_bao": "sar",
+      "tong_lan": 8,
+      "con_thieu": "ngu phap chua co toan hang 'sar'"
+     },
+     {
+      "chi_bao": "hull",
+      "tong_lan": 8,
+      "con_thieu": "ngu phap chua co toan hang 'hull'"
      },
      {
       "chi_bao": "adx",
-      "tong_lan": 52,
-      "con_thieu": "ngu phap chua co toan hang 'adx'"
+      "tong_lan": 4,
+      "con_thieu": "'adx' trong ngu phap luon tinh tren close, khong nhan cot"
      },
      {
-      "chi_bao": "smma",
-      "tong_lan": 46,
-      "con_thieu": "ngu phap chua co toan hang 'smma'"
+      "chi_bao": "supertrend",
+      "tong_lan": 4,
+      "con_thieu": "ngu phap chua co toan hang 'supertrend'"
      },
      {
-      "chi_bao": "dong_luong",
-      "tong_lan": 36,
-      "con_thieu": "ngu phap chua co toan hang 'dong_luong'"
-     },
-     {
-      "chi_bao": "bollinger",
-      "tong_lan": 35,
-      "con_thieu": "ngu phap chua co toan hang 'bollinger'"
-     },
-     {
-      "chi_bao": "cci",
-      "tong_lan": 33,
-      "con_thieu": "ngu phap chua co toan hang 'cci'"
-     },
-     {
-      "chi_bao": "obv",
-      "tong_lan": 29,
-      "con_thieu": "ngu phap chua co toan hang 'obv'"
-     },
-     {
-      "chi_bao": "stochastic",
-      "tong_lan": 20,
-      "con_thieu": "ngu phap chua co toan hang 'stochastic'"
-     },
-     {
-      "chi_bao": "tong",
-      "tong_lan": 19,
-      "con_thieu": "ngu phap chua co toan hang 'tong'"
+      "chi_bao": "ma",
+      "tong_lan": 4,
+      "con_thieu": "ngu phap chua co toan hang 'ma'"
      }
     ]
    }
   },
   {
+   "ma": "nang_suat_doc_thap",
+   "muc": "VUA",
+   "mo_ta": "Nang suat doc = 0.17 gia thuyet/100 bai (4 truy nguyen ve URL tren 2341 bai da boc; 616 ung vien tu 6849 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
+   "bc": {
+    "theo_nguon": {
+     "arxiv": {
+      "da_boc": 71,
+      "gia_thuyet": 0
+     },
+     "cnblogs_trung": {
+      "da_boc": 3,
+      "gia_thuyet": 0
+     },
+     "collective2": {
+      "da_boc": 5,
+      "gia_thuyet": 0
+     },
+     "cong_cu_ngoai": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "crossref": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "elitetrader": {
+      "da_boc": 5,
+      "gia_thuyet": 0
+     },
+     "github": {
+      "da_boc": 679,
+      "gia_thuyet": 0
+     },
+     "habr_nga": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "hackernews": {
+      "da_boc": 23,
+      "gia_thuyet": 0
+     },
+     "lean_algo": {
+      "da_boc": 26,
+      "gia_thuyet": 0
+     },
+     "mql5_bai_viet": {
+      "da_boc": 19,
+      "gia_thuyet": 0
+     },
+     "mql5_code": {
+      "da_boc": 637,
+      "gia_thuyet": 0
+     },
+     "mql5_ma_expert": {
+      "da_boc": 15,
+      "gia_thuyet": 0
+     },
+     "mql5_signals": {
+      "da_boc": 7,
+      "gia_thuyet": 0
+     },
+     "myfxbook": {
+      "da_boc": 6,
+      "gia_thuyet": 0
+     },
+     "openalex": {
+      "da_boc": 187,
+      "gia_thuyet": 0
+     },
+     "paperswithcode": {
+      "da_boc": 4,
+      "gia_thuyet": 0
+     },
+     "qiita_nhat": {
+      "da_boc": 22,
+      "gia_thuyet": 0
+     },
+     "quantconnect_forum": {
+      "da_boc": 9,
+      "gia_thuyet": 0
+     },
+     "quantpedia": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "reddit_td": {
+      "da_boc": 50,
+      "gia_thuyet": 0
+     },
+     "rss_aligrithm": {
+      "da_boc": 9,
+      "gia_thuyet": 1
+     },
+     "rss_alphaarchitect": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_alvarezquant": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "rss_beyondpassive": {
+      "da_boc": 5,
+      "gia_thuyet": 0
+     },
+     "rss_buildalpha": {
+      "da_boc": 4,
+      "gia_thuyet": 0
+     },
+     "rss_concretumgroup": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_crackingmarkets": {
+      "da_boc": 9,
+      "gia_thuyet": 0
+     },
+     "rss_fh_financial_hacker": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "rss_gatambook": {
+      "da_boc": 3,
+      "gia_thuyet": 0
+     },
+     "rss_hangukquant": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_jonathankinlay": {
+      "da_boc": 5,
+      "gia_thuyet": 0
+     },
+     "rss_morguelabs": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "rss_mql5_articles": {
+      "da_boc": 11,
+      "gia_thuyet": 0
+     },
+     "rss_mrzepczynski": {
+      "da_boc": 10,
+      "gia_thuyet": 0
+     },
+     "rss_newtraderu": {
+      "da_boc": 12,
+      "gia_thuyet": 0
+     },
+     "rss_papertoprofit": {
+      "da_boc": 4,
+      "gia_thuyet": 0
+     },
+     "rss_philosophicaleconomics": {
+      "da_boc": 3,
+      "gia_thuyet": 0
+     },
+     "rss_priceactionlab": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "rss_qoppac": {
+      "da_boc": 3,
+      "gia_thuyet": 0
+     },
+     "rss_quant_galore": {
+      "da_boc": 3,
+      "gia_thuyet": 0
+     },
+     "rss_quantdare": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_quantfiction": {
+      "da_boc": 4,
+      "gia_thuyet": 0
+     },
+     "rss_quantforhire": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_quantinsti": {
+      "da_boc": 10,
+      "gia_thuyet": 0
+     },
+     "rss_quantish": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_quantitativo": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "rss_quantjourney": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_quantpedia_blog": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_quantumtrading": {
+      "da_boc": 4,
+      "gia_thuyet": 0
+     },
+     "rss_reddit_algotrading": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "rss_reddit_algotrading_nam": {
+      "da_boc": 5,
+      "gia_thuyet": 0
+     },
+     "rss_returnstacked": {
+      "da_boc": 2,
+      "gia_thuyet": 0
+     },
+     "rss_thinknewfound": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_tr8dr": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "rss_tradingmarkets": {
+      "da_boc": 3,
+      "gia_thuyet": 0
+     },
+     "rss_tradingview_blog": {
+      "da_boc": 26,
+      "gia_thuyet": 0
+     },
+     "telegram": {
+      "da_boc": 35,
+      "gia_thuyet": 0
+     },
+     "telegram_bobvolmanchannel": {
+      "da_boc": 7,
+      "gia_thuyet": 0
+     },
+     "telegram_mqlfree": {
+      "da_boc": 17,
+      "gia_thuyet": 0
+     },
+     "telegram_pdf_bobvolmanchannel": {
+      "da_boc": 16,
+      "gia_thuyet": 0
+     },
+     "telegram_vutruea": {
+      "da_boc": 49,
+      "gia_thuyet": 0
+     },
+     "tiktok": {
+      "da_boc": 22,
+      "gia_thuyet": 0
+     },
+     "tradingview_pine": {
+      "da_boc": 78,
+      "gia_thuyet": 1
+     },
+     "tradingview_scripts": {
+      "da_boc": 45,
+      "gia_thuyet": 1
+     },
+     "trang_quantifiedstrategies": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "velog_han": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
+     "x": {
+      "da_boc": 7,
+      "gia_thuyet": 0
+     },
+     "youtube": {
+      "da_boc": 69,
+      "gia_thuyet": 1
+     },
+     "zulutrade": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     }
+    },
+    "gia_thuyet_noi_sinh": 383
+   }
+  },
+  {
+   "ma": "null_lot_qua_nhieu",
+   "muc": "NANG",
+   "mo_ta": "Null factory lot 50% (muc tieu 10%) - cong dang san xuat phat hien sai",
+   "bc": {
+    "so_ca": 10,
+    "tai_san": "EURCAD",
+    "khung": "H4"
+   }
+  },
+  {
    "ma": "nguon_khong_thu_hoach",
    "muc": "VUA",
-   "mo_ta": "Nguon semantic, quantconnect, fxblue, etoro da goi >=3 lan ma chua thu duoc tai lieu nao",
+   "mo_ta": "Nguon quantconnect da goi >=3 lan ma chua thu duoc tai lieu nao",
    "bc": {
     "nguon": [
-     "semantic",
-     "quantconnect",
-     "fxblue",
-     "etoro"
+     "quantconnect"
     ]
    }
   }
  ],
  "da_sua": [],
- "san_cong_cu": null,
+ "san_cong_cu": {},
  "bai_hoc": {
-  "tong": 228,
+  "tong": 238,
   "theo_loai": {
-   "bay_do_luong": 133,
-   "huong_dang_mo": 58,
-   "huong_nen_tranh": 8,
+   "bay_do_luong": 140,
+   "huong_dang_mo": 60,
+   "huong_nen_tranh": 9,
    "quy_tac_nguoi_dung": 29
   }
  }

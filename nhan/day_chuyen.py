@@ -118,12 +118,25 @@ def boc(so_doc: int = 500, so_boc: int = 200, ma_kiem: str = "US500CASH",
     d = DS.doc(gioi_han=so_doc, luong=12, in_ra=in_ra)
     in_ra(f"   doc duoc {d.get('doc_duoc')}/{d.get('tai_lieu')} "
           f"({d.get('giay_moi_ban')} s/ban)")
+    # 2a-bis. GO HTML - khau nay PHAI nam giua doc va boc.
+    #
+    # Do 13/09/2026: 3.948/5.486 ban chua boc la trang HTML tho (2.727 trang
+    # repo github ~289.000 ky tu, 859 trang mql5.com/code ~60.000). Bo loc dau
+    # vao cua `boc_llm` chan chung - dung viec cua no - nhung khong ai dung
+    # sau, nen ca lop nguon do khong bao gio den duoc LLM. Truoc khi noi khau
+    # nay: `boc_llm.boc(300)` tim duoc **8** ung vien tren ca kho. Sau: **785**.
+    in_ra("-- 2a-bis. go HTML tho --")
+    from nhan import go_html as GH
+    g = GH.go_kho(gioi_han=max(so_doc, so_boc), luong=14, in_ra=in_ra)
+    in_ra(f"   go {g.get('ban')} ban ({g.get('rong')} rong), "
+          f"giam {g.get('giam_lan')} lan")
+
     in_ra("-- 2b. boc co che --")
     df = DU.nap(ma_kiem, "H4")
     b = BL.boc(gioi_han=so_boc, luong=8, ghi_kho=True, df_kiem=df, in_ra=in_ra)
     sau = len(NP.doc_kho())
     in_ra(f"   kho co che: {truoc} -> {sau} (+{sau - truoc})")
-    return {"doc": d, "boc": b, "co_che_truoc": truoc, "co_che_sau": sau,
+    return {"doc": d, "go_html": g, "boc": b, "co_che_truoc": truoc, "co_che_sau": sau,
             "giay": round(time.time() - t0, 1)}
 
 

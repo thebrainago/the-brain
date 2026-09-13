@@ -97,6 +97,14 @@ TU_KHOA_TELEGRAM = (
     "forex ea", "expert advisor mt5", "mql5 source", "trading bot",
     "robot forex", "chien luoc forex", "scalping vang", "giao dich thuat toan",
     "quant trading", "algo trading vietnam", "pine script", "backtest ea",
+    # --- them 13/09/2026: nham HO QUAN TRI VI THE rieng (trailing/hedge/
+    # grid/martingale), theo yeu cau chu du an. Kem tieng Nga vi cong dong
+    # grid/hedge EA (Ilan/Ultima-kieu) tap trung o do - `mql5.com` von la san
+    # cua Nga truoc khi dich sang tieng Anh (xem `TRUY_VAN` cua seeker_deep.py
+    # ap dung cach nay cho tim theo TEN, o day ap cho tim KENH).
+    "grid ea forex", "hedging ea mt5", "trailing stop ea",
+    "martingale forex bot", "сетка форекс советник", "хеджирование форекс",
+    "quan ly von giao dich", "nhoi lenh forex",
 )
 
 #: Duoi muc nay thi mot kenh chua du de dat mot suat ngan sach mang.

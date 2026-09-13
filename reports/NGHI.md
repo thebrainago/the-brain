@@ -1,11 +1,11 @@
 # TRU NGHI - bien kien thuc thanh co che kiem dinh duoc
-*2026-09-01 17:43:49*
+*2026-09-13 10:02:50*
 
 > Tru nay KHONG ket luan gi ve tien. No chi de xuat. Moi con so van di
 > qua `nhan/cong.py` va van ton ngan sach FDR nhu mau viet tay.
 
 ## 1. Doi chieu vong truoc
-- De xuat da ghi so: **33** (bi tu choi truoc kiem dinh 7, da co ket qua 15, dang cho 11)
+- De xuat da ghi so: **45** (bi tu choi truoc kiem dinh 8, da co ket qua 15, dang cho 22)
 
 | Co che | Ho | Ket qua |
 |---|---|---|
@@ -24,20 +24,20 @@
 
 ## 2. Vong nay
 - Doc 8 tai lieu hang A/B
-- Nhan duoc 6 de xuat, **qua ba cua kiem: 5**
+- Nhan duoc 6 de xuat, **qua ba cua kiem: 4**
 - Trong do 0 co nguon truy nguyen
   ve tai lieu (5-6 truoc day luon la 0 - moi co che la cua LLM).
 - Tai san dung de kiem: EURCAD
 
 ### Da nhan vao kho co che
-- `ban_dinh_climax_vol_cao`
-- `mua_day_climax_vol_cao`
-- `quay_ve_vwap_tb_low_vol`
-- `quay_ve_keltner_low_vol`
-- `ban_quay_ve_keltner_low_vol`
+- `macro_duration_trend_filter`
+- `intraday_vol_expansion_reversion`
+- `institutional_absorption_support`
+- `stat_arb_divergence_fade`
 
 ### Bi tu choi (va vi sao - vong sau se doc lai muc nay)
-- `quay_ve_ta_can_bang_etf_vol_thap`: vao[0] phep '=' khong hop le; ra[0] phep '=' khong hop le
+- `rebalance_fx_low_vol_reversion`: suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUUSD H1 0.000%, EURUSD H1 0.000%) - khong du lenh de kiem dinh bao gio
+- `liquidity_sweep_reversal`: suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUUSD H1 0.000%, EURUSD H1 0.000%) - khong du lenh de kiem dinh bao gio
 
 ## 3. Ba cua kiem moi de xuat phai qua
 

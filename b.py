@@ -49,6 +49,8 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
     b phanh           han muc / kill-switch cua he chay that
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
+    b bench-qt [MA]   BAN DO 11 ho quan tri tren tester (engine vao CO DINH)
+    b go-html [N]     go trang HTML tho trong kho ra van ban (khau truoc BOC)
     b luan-lenh       truy nguoc tu DANH SACH LENH that -> luat vao lenh
     b chuyen          mang he sang KHUNG / TAI SAN khac (giu ty le kich hoat)
     b dau-chan        400 ho so signal -> KIEU chien luoc x tai san
@@ -139,6 +141,33 @@ def c_phan_loai(a):
     """b phan-loai - chia kho ma thanh 4 lan + bang suat boc tung lan."""
     return chay([PY, LAB / "nhan" / "phan_loai_ma.py",
                  *(a or ["--suat"])], cwd=LAB)
+
+
+def c_bench_qt(a):
+    """b bench-qt [MA] - BAN DO HO QUAN TRI tren MT5 tester.
+
+    Khac `b quan-tri`: cai do chen quan tri vao EA NGOAI (tra loi "co cai thien
+    EA co san khong"); cai nay co dinh ENGINE VAO roi chi doi HO QUAN TRI (tra
+    loi "ho nao manh hon ho nao"). Xem dau file `chay_bench_quan_tri.py`.
+
+        b bench-qt                 US500Cash H1, engine donchian
+        b bench-qt --ma EURUSD     mot ma khac
+        b bench-qt --quet          quet DA TAI SAN x DA ENGINE (co phan chung)
+    """
+    if "--quet" in a:
+        return chay([PY, LAB / "_quet_bench_qt.py",
+                     *[x for x in a if x != "--quet"]], cwd=LAB)
+    return chay([PY, LAB / "chay_bench_quan_tri.py", *a], cwd=LAB)
+
+
+def c_go_html(a):
+    """b go-html [N] - go trang HTML tho trong kho ra van ban.
+
+    KHAU DUNG TRUOC `b boc`. Do 13/09: 3.948/5.486 ban chua boc la trang HTML
+    tho, nen `boc_llm` chi tim duoc 8 ung vien tren ca kho. Go xong: 785.
+    `b go-html --xem` chi dem, khong sua gi.
+    """
+    return chay([PY, LAB / "nhan" / "go_html.py", *a], cwd=LAB)
 
 
 def c_chi_bao(a):
@@ -468,6 +497,7 @@ def c_quan_tri(a):
         b quan-tri              xem kho 75 khai bao
         b quan-tri --dich-het   bao nhieu dich duoc sang MQL5, cai nao khong
         b quan-tri --dich 3     in khoi MQL5 cua mot khai bao
+        b quan-tri --dich-nhieu in BANG N luat trong MOT EA (qua cong (1)+(2))
         b quan-tri --cap <EA.mq5> --khai-bao 3   sinh cap GOC / CO QUAN TRI
     """
     return chay([PY, "-m", "nhan.chuoi_quan_tri", *(a or [])])
@@ -699,6 +729,7 @@ LENH = {
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
     "quan-tri": c_quan_tri, "qt": c_quan_tri,
+    "bench-qt": c_bench_qt, "go-html": c_go_html,
     "luan-lenh": c_luan_lenh, "chuyen": c_chuyen,
     "dau-chan": c_dau_chan, "im-lang": c_im_lang,
     "don-dia": c_don_dia,

@@ -1,0 +1,71 @@
+
+######## US500Cash | vao=donchian ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_US500Cash_H1.json
+  US500Cash | donchian | moc sharpe -0.36 | cao nguyen: luoi_dca, stop_2_dau, dat_hue, tia
+
+######## US500Cash | vao=deu_dan ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_US500Cash_H1.json
+  US500Cash | deu_dan | moc sharpe -0.38 | cao nguyen: hue_trailing, trailing, luoi_dca, tia, dat_hue, hedge, stop_2_dau, tp_co_dinh
+
+######## US500Cash | vao=quay_ve ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_US500Cash_H1.json
+  US500Cash | quay_ve | moc sharpe -0.13 | cao nguyen: tt_stop_doi, trailing, hue_trailing, stop_2_dau
+
+######## EURUSD | vao=donchian ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_EURUSD_H1.json
+  EURUSD | donchian | moc sharpe -0.56 | cao nguyen: -
+
+######## EURUSD | vao=deu_dan ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_EURUSD_H1.json
+  EURUSD | deu_dan | moc sharpe -1.50 | cao nguyen: luoi_dca, tt_stop_doi, stop_2_dau
+
+######## EURUSD | vao=quay_ve ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_EURUSD_H1.json
+  EURUSD | quay_ve | moc sharpe -2.66 | cao nguyen: tia, hue_trailing, trailing, hedge, stop_2_dau, luoi_dca, dat_hue, tt_stop_doi, tp_co_dinh
+
+######## XAUUSD | vao=donchian ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  XAUUSD | donchian | moc sharpe 0.00 | cao nguyen: -
+
+######## XAUUSD | vao=deu_dan ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  XAUUSD | deu_dan | moc sharpe 0.00 | cao nguyen: -
+
+######## XAUUSD | vao=quay_ve ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  XAUUSD | quay_ve | moc sharpe 0.00 | cao nguyen: -
+
+######## US100Cash | vao=donchian ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_US100Cash_H1.json
+  US100Cash | donchian | moc sharpe -0.62 | cao nguyen: stop_2_dau, dat_hue, tia, hue_trailing, trailing, hedge, tp_co_dinh
+
+######## US100Cash | vao=deu_dan ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_US100Cash_H1.json
+  US100Cash | deu_dan | moc sharpe -0.15 | cao nguyen: hue_trailing, trailing, tia
+
+######## US100Cash | vao=quay_ve ########
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_US100Cash_H1.json
+  US100Cash | quay_ve | moc sharpe -0.75 | cao nguyen: stop_2_dau, dat_hue, trailing, tia, hue_trailing, hedge, tt_stop_doi
+
+==== XONG 12 luot ====

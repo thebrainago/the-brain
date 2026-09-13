@@ -126,9 +126,15 @@ QT_LotGoc=%.2f||%.2f||0||0||N
 
 def main() -> int:
     kho = {c["ten"]: c for c in BB.lay_chan()}
+    # `sang_atr` o day la du thua-nhung-vo-hai (idempotent: sau lan quy doi
+    # dau, moi dict con lai la {'atr': x} nen lan quy thu hai trong
+    # `sinh_khoi_nhieu` khong dung gi ca) - giu lai de KHONG doi hanh vi cu,
+    # nhung tu 12/09 `sinh_khoi_nhieu` tu no cung BAT BUOC atr/gia_diem that
+    # (khong con nhan mac dinh) nen phai truyen xuong o day.
     ds = [QD.sang_atr(x, ATR_DIEM, GIA_DIEM) for x in QD.doc_kho()]
     luat_ma, luat = Q.sinh_khoi_nhieu(ds, khung="D1", magic=26091800,
-                                      lot_goc=LOT)
+                                      lot_goc=LOT, atr=ATR_DIEM,
+                                      gia_diem=GIA_DIEM)
     print("%d luat quan tri (luat 0 = MOC tat het quan tri)" % len(luat),
           flush=True)
 

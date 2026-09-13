@@ -281,3 +281,23 @@ dung: `q dung` (hoac tao file lab/DUNG_QWEN) | Ctrl-C cung an toan
   ~ 23:21:18 | san sang 8 | CPU   64% / muc tieu 62%  |  con -0.5 loi  |  dang chay 0  [trong]
   ~ 23:23:18 | san sang 8 | CPU   64% / muc tieu 62%  |  con -0.5 loi  |  dang chay 0  [trong]
   ~ 23:25:18 | san sang 8 | CPU   64% / muc tieu 62%  |  con -0.5 loi  |  dang chay 0  [trong]
+  ~ 23:27:18 | san sang 8 | CPU   64% / muc tieu 62%  |  con -0.4 loi  |  dang chay 0  [trong]
+  [>] M0_don_mo_coi          NHE    pid 20004  Don tien trinh mo coi (thu lam he TU TE   (ok (con 0.4 loi))
+  [>] E1_evo_bao_xa          NHE    pid 21276  EVO do suc khoe + bao ra Telegram khi ta  (ok (con 0.4 loi))
+  [x] M0_don_mo_coi          DAT  |  chay xong, ma thoat 0
+  [x] E1_evo_bao_xa          DAT  |  chay xong, ma thoat 0
+  [>] S2_mql5_code_base      MANG   pid 18424  THUONG TRUC: tai ma nguon MQL5 Code Base  (ok (con 2.3 loi))
+  [>] TT_san_nguon           MANG   pid 20280  THUONG TRUC: day chuyen san nguon moi (s  (ok (con 2.3 loi))
+  [x] S2_mql5_code_base      AM  |  ghi_moi = 0, khong vuot 0 - lan chay nay KHONG them duoc gi (khac han 'chay hong')
+  qwen> Ket qua `E1_evo_bao_xa` cho thay he thong dang hoat dong tot, khong co van de nao can xu ly. Khong co viec tiep theo duoc mo ra tu ket qua nay. He thong dang o trang thai on dinh, 22 chi so suc khoe deu TOT, khong co muc XAU hay loi lo.
+  qwen> Da hoan tat:
+         
+         1. **`doc_ket_qua('M0_don_mo_coi')`**: Ket qua **DAT** - chay xong, ma thoat 0, `so_dong: 0`. Log xac nhan: "khong co tien trinh mo coi (mien 5 cay dieu phoi)".
+         
+         2. **File bao cao**: Khong co file nao trong `lab/reports/` lien quan den viec nay de doc them.
+         
+         3. **`ghi_nhat_ky`**: Da viet nhat ky xac nhan M0 DAT, he khong co deadlock don mo.
+         
+         4. **`de_xuat_viec`**: Da xep `M1_don_mo_xu_ly` vao hang cho - tiep tuc kiem tra deadlock o giai doan xu ly de bao che chu ky song tien trinh.
+  ~ 23:29:18 | san sang 4 | CPU   31% / muc tieu 62%  |  con  6.1 loi  |  dang chay 1  [MANG:1]
+  [>] TT_boc                 LLM    pid 5004   THUONG TRUC: qwen doc toan van + boc co   (ok (con 8.1 loi))

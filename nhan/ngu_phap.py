@@ -1696,17 +1696,82 @@ def chuan_hoa_ten(ten: str) -> str:
     return t[:60]
 
 
-def doc_kho() -> list[dict]:
+class KhoDocHong(RuntimeError):
+    """File kho CO nhung doc khong ra. Khac han voi kho RONG.
+
+    Ten loai nay ton tai vi mot ly do cu the: xem `doc_kho`.
+    """
+
+
+def doc_kho(cho_rong_khi_hong: bool = False) -> list[dict]:
+    """Doc kho co che.
+
+    ## VI SAO HAM NAY KHONG DUOC NUOT LOI - chuyen 13/09/2026
+
+    Kho tut tu **2.741 co che xuong 130** trong mot buoi sang, va lan nay chot
+    chong teo cua `luu_kho` KHONG chan duoc. Duong di cua loi:
+
+        doc_kho()  gap loi doc  ->  `except Exception: return []`
+        them_co_che: ds = doc_kho() = []  ->  ds.append(spec)
+        luu_kho([spec]): `cu = len(doc_kho())` cung = 0
+                         chot la `if not ep and cu and moi < cu*0.8`
+                         -> `cu` bang 0 nen menh de TAT, chot khong chay
+        ghi de 2.741 co che bang 1
+
+    Mot lan doc hong la du. Va hom do may dang nghet bo nho (mot bo test 8
+    tien trinh bao `paging file too small`), nen `json.loads` tren file 2,1 MB
+    hoan toan co the nem `MemoryError` - ma `MemoryError` LA mot `Exception`.
+
+    Day dung la ho loi ma ca du an nay da gap nhieu lan duoi mot ten khac:
+    **khau doc hong doc y het mot ket qua rong**. Nen o day phan biet ba
+    truong hop, khong phai hai:
+
+        file khong ton tai        -> kho rong THAT, tra []
+        file ton tai, doc duoc    -> tra noi dung
+        file ton tai, doc KHONG   -> NEM `KhoDocHong`, khong bao gio tra []
+
+    `cho_rong_khi_hong=True` chi danh cho cho nao that su can mot con so de
+    hien thi (bang trang thai), khong bao gio cho duong GHI.
+    """
+    if not KHO_CO_CHE.exists():
+        return []
     try:
         d = json.loads(KHO_CO_CHE.read_text(encoding="utf-8-sig"))
-        return d if isinstance(d, list) else []
-    except Exception:
-        return []
+    except Exception as e:
+        if cho_rong_khi_hong:
+            return []
+        raise KhoDocHong(
+            "kho %s CO (%d byte) nhung doc khong ra: %s. KHONG duoc coi day la "
+            "kho rong - mot lan ghi sau do se xoa sach kho."
+            % (KHO_CO_CHE.name, KHO_CO_CHE.stat().st_size, repr(e)[:150])) from e
+    if not isinstance(d, list):
+        raise KhoDocHong("kho khong phai mot danh sach: %s" % type(d).__name__)
+    return d
 
 
 #: Bao nhieu phan tram kho duoc phep BIEN MAT trong mot lan ghi. Vuot nguong
 #: nay thi tu choi ghi - gan nhu chac chan la mot lan doc-sua-ghi bi chen ngang.
 NGUONG_HAO_HUT = 0.20
+
+import shutil as _shutil  # noqa: E402
+
+#: MOC CAO NHAT kho tung dat. Chot hao hut so voi moc nay chu khong chi so voi
+#: lan ghi truoc - neu khong thi bao mon tung buoc nho luon lot qua.
+MOC_CAO = KHO_CO_CHE.with_suffix(".moc_cao")
+
+
+def _doc_moc_cao() -> int:
+    try:
+        return int(MOC_CAO.read_text(encoding="utf-8").strip())
+    except Exception:
+        return 0
+
+
+def _ghi_moc_cao(n: int) -> None:
+    try:
+        MOC_CAO.write_text(str(int(n)), encoding="utf-8")
+    except Exception:
+        pass
 
 
 class KhoBiTeoLai(RuntimeError):
@@ -1738,16 +1803,77 @@ def luu_kho(ds: list[dict], ep: bool = False) -> None:
        Muon ghi nho that (don kho) thi phai noi ro `ep=True`.
     """
     KHO_CO_CHE.parent.mkdir(parents=True, exist_ok=True)
-    cu = len(doc_kho())
     moi = len(ds or [])
-    if not ep and cu and moi < cu * (1 - NGUONG_HAO_HUT):
+
+    # CHOT 0 - CON CHO GHI KHONG.
+    #
+    # Them 13/09/2026 sau khi kho bi ghi de HAI lan trong mot buoi. Nguyen nhan
+    # chung cua ca hai: o C tut ve 233 MB, pytest 6 nhan chet voi `paging file
+    # too small`, va mot lan ghi khong tron ven doc y het mot kho rong. Xem
+    # `nhan/dia.py` - het dia khong hien ra nhu loi dia.
+    from nhan import dia as _DIA
+    _DIA.du_cho(_DIA.NGUONG_KHO_GB, "ghi kho co che", KHO_CO_CHE.parent)
+
+    # CHOT 1 - DOC PHAI THANH CONG TRUOC KHI GHI.
+    #
+    # Truoc 13/09 day la `cu = len(doc_kho())` voi `doc_kho` nuot moi loi. Mot
+    # lan doc hong -> `cu = 0` -> chot duoi TAT (vi no doi `cu` khac 0) -> ghi
+    # de ca kho. Xem ghi chu day du trong `doc_kho`.
+    cu = len(doc_kho())          # nem KhoDocHong neu file co ma doc khong ra
+
+    # CHOT 2 - MOC CAO NHAT, khong chi lan ghi truoc.
+    #
+    # Chot ty le 20% chi so voi LAN NGAY TRUOC, nen mot chuoi ghi moi lan nho
+    # di 19% van bao mon ca kho ma khong lan nao bi chan: 2.741 -> 130 chi can
+    # 15 buoc. Moc cao nhat lam cho bao mon dan cung bi chan.
+    moc = _doc_moc_cao()
+    nen = max(cu, moc)
+    if not ep and nen and moi < nen * (1 - NGUONG_HAO_HUT):
         raise KhoBiTeoLai(
-            f"tu choi ghi: kho {cu} -> {moi} co che (mat {cu - moi}, "
-            f"{(cu - moi) / cu:.0%}). Gan nhu chac chan la mot lan doc-sua-ghi "
-            f"bi chen ngang. Muon ghi nho that thi goi luu_kho(ds, ep=True).")
+            f"tu choi ghi: kho {cu} -> {moi} co che (moc cao nhat tung thay "
+            f"{moc}; mat {nen - moi}, {(nen - moi) / nen:.0%}). Gan nhu chac "
+            f"chan la mot lan doc-sua-ghi bi chen ngang, hoac mot lan doc hong. "
+            f"Muon ghi nho that thi goi luu_kho(ds, ep=True).")
+
+    # CHOT 3 - BAN LUI MOT BUOC. Khoa va chot deu co the bi vuot (vd `ep=True`
+    # dung sai); mot ban sao cua trang thai TRUOC lan ghi thi khong.
+    if cu and KHO_CO_CHE.exists():
+        try:
+            _shutil.copy2(KHO_CO_CHE, KHO_CO_CHE.with_suffix(".json.lui"))
+        except Exception:
+            pass
+
     tam = KHO_CO_CHE.with_suffix(".json.tam")
     tam.write_text(json.dumps(ds, ensure_ascii=False, indent=1), encoding="utf-8")
     tam.replace(KHO_CO_CHE)      # thay the NGUYEN TU, khong de lai file nua voi
+    _ghi_moc_cao(max(moi, moc))
+    if moi < cu:
+        _ghi_nhat_ky_ghi(cu, moi, ep)
+
+
+#: Nhat ky MOI lan ghi lam kho NHO DI, kem vet goi.
+#:
+#: Vi sao can: 13/09/2026 kho bi xoa HAI lan trong mot buoi. Lan mot truy ra
+#: duoc nguyen nhan (`doc_kho` nuot loi). Lan hai thi khong - chot da chac,
+#: khong test nao ghi thang vao file, khong cho nao goi `ep=True`, va van mat.
+#: Suy luan tu ma nguon het duong; can mot vet goi THAT.
+#:
+#: Ghi noi tiep, khong bao gio xoa. File nay nho (chi ghi khi kho nho di) va
+#: no la thu duy nhat tra loi duoc "ai da ghi" sau khi su viec xay ra.
+NHAT_KY_GHI = KHO_CO_CHE.parent.parent / "nhat_ky" / "kho_co_che_ghi.log"
+
+
+def _ghi_nhat_ky_ghi(cu: int, moi: int, ep: bool) -> None:
+    import traceback
+    try:
+        NHAT_KY_GHI.parent.mkdir(parents=True, exist_ok=True)
+        vet = "".join(traceback.format_stack(limit=14)[:-1])
+        with NHAT_KY_GHI.open("a", encoding="utf-8") as f:
+            f.write("\n=== %s | pid %d | %d -> %d co che | ep=%s ===\n%s"
+                    % (time.strftime("%Y-%m-%d %H:%M:%S"), os.getpid(),
+                       cu, moi, ep, vet))
+    except Exception:
+        pass
 
 
 @contextmanager

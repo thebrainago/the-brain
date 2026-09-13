@@ -1,0 +1,20 @@
+  bien dich xong
+  chay optimization (~275 pass) ...
+  ghi BENCH_QUAN_TRI_US500Cash_H1.json
+
+TRANG THAI: DAT 
+
+MOC (chi luoi an toan): 927 lenh, lai -312.22, sharpe -0.36, DD 3.36%
+
+ho                 P1     P2   lenh       lai  sharpe     DD%     d.lai  y nghia
+stop_2_dau        2.5    0.5   1200    253.49    0.80    0.65    565.71  P1 = khoang dat stop boi ATR | P2 = SL boi ATR
+luoi_dca          0.5    1.5   4098    389.45    0.12    7.83    701.67  P1 = buoc nhoi boi ATR | P2 = TP chung boi ATR
+hedge             2.5    2.5    878   -215.78   -0.14    4.44     96.44  P1 = lot khoa x lot goc | P2 = lo de khoa, boi ATR
+tt_stop_doi       0.5    2.5    839   -459.90   -0.19    6.17   -147.68  P1 = khoang stop doi dien | P2 = lot stop x lot goc
+tia               2.5    1.0   1418   -190.79   -0.25    2.95    121.43  P1 = ty le dong (0..0,9) | P2 = lai de tia
+dat_hue           2.5    1.0   1418   -190.79   -0.25    2.95    121.43  P2 = lai de keo SL ve hoa von
+moc               2.5    2.5    927   -312.22   -0.36    3.36      0.00  (khong dung tham so)
+hue_trailing      2.0    1.0   2001   -238.46   -0.41    2.45     73.76  P1 = khoang trail | P2 = lai kich hoat
+trailing          1.5    0.5   2312   -223.21   -0.45    2.32     89.01  P1 = khoang trail boi ATR | P2 = lai bat dau trail
+tp_co_dinh        2.5    2.5   2751   -591.65   -0.84    6.00   -279.43  P1 = TP boi ATR
+thoi_gian         2.5    2.5   4528   -426.30   -2.33    4.29   -114.08  P1 = so nen thi dong

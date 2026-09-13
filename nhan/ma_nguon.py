@@ -52,6 +52,33 @@ DUOI_NHAN = (".mq5", ".mq4")
 
 _CHU_DE = {"experts": "EA", "indicators": "chi bao"}
 
+#: URL trang MOT BAI trong MQL5 Code Base (khong phai trang danh sach, khong
+#: phai trang tai). Dinh nghia MOT LAN o day va dung chung voi
+#: `tru/seeker._doc_dinh_tuyen` - truoc 13/09 hai noi giu hai ban regex rieng,
+#: va do la dung mau bay "sua mot cho, quen cho kia" cua chinh du an nay.
+#: CHUOI, khong phai regex da `re.compile` san: bo test an toan
+#: `test_ma_nguon.KhongChayMaTaiVe` quet chuoi con `compile(` trong CA FILE de
+#: khoa `compile()` builtin, va no bat nham chinh `re.compile(`.
+RE_URL_CODE_MQL5 = r"https?://(www\.)?mql5\.com/[a-z]{2}/code/\d+"
+
+#: Dau hieu ma nguon MQL THAT (dat lenh/quan ly vi the), doi lap voi trang
+#: HTML cua landing page (dieu huong + mo ta + binh luan, khong mot dong ma).
+#: Do tren `mql5.com/en/code/43355` (chu du an dua ra ngay 12/09): trang dai
+#: 62.924 ky tu nhung **0 lan** xuat hien ca ba tu nay.
+DAU_HIEU_MA_MQL = ("OnTick", "OrderSend", "CTrade", "OnCalculate", "OrderModify",
+                   "PositionOpen", "OnInit")
+
+
+def co_dau_hieu_ma_that(van_ban: str) -> bool:
+    """True neu VAN_BAN co it nhat mot API dat-lenh/tinh-toan cua MQL that.
+
+    Dung o hai cho: (1) `tai_ma_nguon` tu kiem lai chinh no truoc khi tra ve -
+    phong khi trang tai bi doi cau truc va vo tinh tra ve mot trang loi thay
+    vi file; (2) `thu_hoi_sai_loai` - phan biet ban ghi noi_dung nao THAT SU
+    la ma (bo qua) voi ban nao chi la vo trang landing (thu tai lai).
+    """
+    return any(d in (van_ban or "") for d in DAU_HIEU_MA_MQL)
+
 
 def _lay(url: str, timeout: int = 30, nhi_phan: bool = False):
     """Tai mot trang/file cua MQL5.
@@ -68,16 +95,47 @@ def _lay(url: str, timeout: int = 30, nhi_phan: bool = False):
     Cai that su can: (1) DNS khong bi dau doc - `nhan/dns_vuot.py` hoac mot
     duong VPN nhu Cloudflare WARP; (2) mot `User-Agent` that; (3) nghi giua
     cac lan goi. Khong can gi them.
+
+    SUA 13/09/2026 - HAI TANG DNS, giong `tru/seeker._lay` (thieu cai nay la
+    NGUYEN NHAN chinh cua "859 trang mql5.com bi luu thanh HTML tho"). Do
+    duoc tren so cai: cot `cach='mql5_download'` (ham nay THANH CONG) chi co
+    **25 dong, tat ca cung ngay 03/09** - trong khi `_doc_dinh_tuyen` (goi ham
+    nay TRUOC TIEN cho moi URL `mql5.com/.../code/N` tu 03/09) van chay deu
+    moi ngay va **813 dong moi** roi vao `kieu='khac'` (HTML trang, khong ma)
+    trong ba lan quet 08-12/09. Tuc ham nay THAT BAI IM LANG dung luc DNS bi
+    dau doc, va nguoi goi (`tru.seeker._doc_dinh_tuyen`) am tham ROT VE bo doc
+    HTML chung - bo do co hai tang DNS (`tru.seeker._lay`) nen VAN lay duoc
+    trang, chi la lay dung TRANG LANDING chu khong phai FILE MA. Ket qua duoc
+    ghi nhu MOT LAN DOC THANH CONG binh thuong (khong phai `khong_doc_duoc`)
+    nen khong bao gio duoc thu lai - xem `thu_hoi_sai_loai()` o duoi cho phan
+    thu lai cac ban da lo o giai doan truoc khi co sua nay.
     """
     from nhan import duyet_nguoi as DN
-    try:
+    from nhan import dns_vuot as DV
+    dau_trang = {"User-Agent": DN.UA, "Accept-Encoding": DN._MA_NEN}
+
+    def _thu():
         import requests
-        r = requests.get(url, timeout=timeout,
-                         headers={"User-Agent": DN.UA,
-                                  "Accept-Encoding": DN._MA_NEN})
+        r = requests.get(url, timeout=timeout, headers=dau_trang)
         if r.status_code != 200:
             return None
         return r.content if nhi_phan else r.text
+
+    can_vuot = any(t in url for t in DV.BAN_DO)
+    try:
+        kq = _thu()
+        if kq is not None:
+            return kq
+    except Exception:
+        pass
+    if not can_vuot:
+        return None
+    # THAT BAI VOI DNS THAT -> thu lai VOI ban do IP tay (dns_vuot), y het
+    # chien luoc da hieu chuan cua `tru/seeker._lay`. Khong lam vinh vien: chi
+    # bat trong pham vi cua lan goi nay roi tra lai nguyen trang.
+    try:
+        with DV.Bat():
+            return _thu()
     except Exception:
         return None
 
@@ -278,6 +336,94 @@ def _bao_mau_con_thieu(bao: dict) -> None:
     else:
         SO.dong_van_de("can_mau_moi_tu_ma_nguon",
                        "moi chien luoc thu duoc deu co template tuong ung")
+
+
+#: Sau bao nhieu lan thu lai khong thanh cong thi BO CUOC voi mot dia chi -
+#: khong xoa, khong khoa vinh vien (van con la mot ban doc HTML dung duoc cho
+#: tang BOC van xuoi), chi ngung goi mang lai cho no moi vong. Neu khong co
+#: tran nay, mot URL bi chan vinh vien (vi du bai da bi go) se bi thu MOI VONG
+#: `mot_luot()` chay - dung mau "406 URL chet chiem hang doi" da tung xay ra
+#: o tang `khong_doc_duoc`.
+TRAN_THU_LAI_SAI_LOAI = 3
+
+
+def thu_hoi_sai_loai(gioi_han: int = 30, ngan_sach_giay: float = 180.0) -> dict:
+    """Thu tai lai PAYLOAD THAT cho cac `noi_dung` da bi luu SAI LOAI.
+
+    VI SAO CAN HAM NAY (rieng voi `thu_hoi_khong_doc_duoc`, von lam viec voi
+    dia chi hong HAN). O day dia chi KHONG hong - no da tra ve 200 va mot dong
+    van ban that (trang landing), nen `kieu` cua no la 'khac'/'ma_nguon' chu
+    khong phai 'khong_doc_duoc'. Truoc ham nay, mot ban ghi nhu the duoc coi
+    la "da doc xong" VINH VIEN - khong con cong nao dua no tro lai hang doi.
+    Do 13/09/2026: 983 ban ghi mql5.com/en/code/N dang o trang thai nay, 813
+    ban trong so la SAU khi `_doc_dinh_tuyen` da duoc noi day (03/09) - tuc
+    khong phai "chua noi day", ma la "noi day roi van that bai IM LANG" (xem
+    chu thich o `_lay`, da sua tai chinh ham do).
+
+    Chi quet URL khop `RE_URL_CODE_MQL5` VA thieu dau hieu ma that. Moi lan
+    thu KHONG thanh cong duoc dem vao `ket_boc` (`sai_loai:N`) va dung lai o
+    `TRAN_THU_LAI_SAI_LOAI` - xem `TRAN_THU_LAI_SAI_LOAI`.
+    """
+    t0 = time.time()
+    ds = SO.nhieu(
+        "SELECT id, van_tay, url, tai_lieu_id, van_ban, ket_boc FROM noi_dung "
+        "WHERE url LIKE '%mql5.com/%/code/%' AND cach != 'mql5_download' "
+        "ORDER BY id DESC LIMIT ?", max(int(gioi_han) * 4, 1))
+    bao = {"xem": 0, "khop_mau": 0, "thu_lai": 0, "sua_duoc": 0,
+          "bo_cuoc": 0, "van_sai": 0}
+    for r in ds:
+        if bao["thu_lai"] >= gioi_han or time.time() - t0 > ngan_sach_giay:
+            break
+        url = r["url"] or ""
+        if not re.match(RE_URL_CODE_MQL5, url):
+            continue
+        bao["xem"] += 1
+        if co_dau_hieu_ma_that(r["van_ban"]):
+            continue                       # da la ma that, khong co gi de sua
+        bao["khop_mau"] += 1
+        ket_boc = r["ket_boc"] or ""
+        m = re.search(r"sai_loai:(\d+)", ket_boc)
+        so_lan_truoc = int(m.group(1)) if m else 0
+        if so_lan_truoc >= TRAN_THU_LAI_SAI_LOAI:
+            continue                       # da bo cuoc voi dia chi nay
+        bao["thu_lai"] += 1
+        bai = tai_ma_nguon({"url": url, "tieu_de": ""})
+        # KHONG doi hoi `co_dau_hieu_ma_that` o day: `tai_ma_nguon` da tu bao
+        # dam noi dung la mot FILE .mq4/.mq5 THAT (theo dung link tai + kiem
+        # kich thuoc + giai ma) - do la khac voi ban ghi CU dang xet (van_ban
+        # cua landing page). Doi hoi ca marker se loai OAN cac script/tien
+        # ich that su khong dat lenh (vi du 17996 "clear chart objects": ma
+        # that 1.390 ky tu nhung 0/7 marker, vi no khong co OnTick/OrderSend -
+        # phat hien khi do trong phien 13/09, ban dau ham nay tu choi nham no).
+        if bai and bai.get("noi_dung"):
+            with SO.ket_noi() as cn:
+                cn.execute(
+                    "UPDATE noi_dung SET kieu='ma_nguon', cach='mql5_download', "
+                    "so_ky_tu=?, so_ky_tu_goc=?, van_ban=?, luc=?, da_boc=0, "
+                    "ket_boc='sua_boi_thu_hoi_sai_loai' WHERE id=?",
+                    (len(bai["noi_dung"]), len(bai["noi_dung"]), bai["noi_dung"],
+                     SO.bay_gio(), r["id"]))
+            bao["sua_duoc"] += 1
+            # Nap lai vao artifact voi noi dung MOI - artifact cu (neu co) ung
+            # voi van_tay CU se con lai nhu mot ban ghi rac, chap nhan duoc:
+            # no la HTML that su tung doc duoc, khong phai du lieu bia dat.
+            try:
+                from tru import seeker as SK
+                SK._noi_dung_artifact(r["van_tay"])
+            except Exception:
+                pass
+        else:
+            bao["van_sai"] += 1
+            moi = so_lan_truoc + 1
+            with SO.ket_noi() as cn:
+                cn.execute("UPDATE noi_dung SET ket_boc=? WHERE id=?",
+                          (f"sai_loai:{moi}", r["id"]))
+            if moi >= TRAN_THU_LAI_SAI_LOAI:
+                bao["bo_cuoc"] += 1
+        time.sleep(0.3)
+    if bao["xem"]:
+        SO.ghi_chi_so("ma_nguon_thu_hoi_sai_loai", float(bao["sua_duoc"]), bao)
+    return bao
 
 
 if __name__ == "__main__":

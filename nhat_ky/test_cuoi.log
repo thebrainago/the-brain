@@ -1,0 +1,221 @@
+bringing up nodes...
+bringing up nodes...
+
+.....u.........u.......u................................................ [  3%]
+........................................................................ [  8%]
+.............u.uuu...................................................... [ 11%]
+................F....................................uuu...............u [ 15%]
+uu...........................uuuuuuu..uuuuuuuuuuuuuuuuuuuuuuuuuuuu...... [ 17%]
+........................................................................ [ 21%]
+........................................................................ [ 26%]
+......uuu......uuu...uu.......uuuuuu.uuuuuuuuu...uuu......uuuuuuuu...... [ 28%]
+..........uu....uuuuuu....uuuuu......uuuuuuu.uuuu....................... [ 30%]
+........................................uuu............................. [ 34%]
+uuuu............s......................................uuuuuu........... [ 38%]
+........................................................................ [ 42%]
+............................................uuuuuu...................... [ 46%]
+.............uuuuuu..................................uuuu............... [ 49%]
+.......................................................................F [ 54%]
+.uuuuuuuuuuu.uuu.uuu.uuu.uuu............................................ [ 56%]
+................................................................FINTERNALERROR> def worker_internal_error(
+INTERNALERROR>         self, node: WorkerController, formatted_error: str
+INTERNALERROR>     ) -> None:
+INTERNALERROR>         """
+INTERNALERROR>         pytest_internalerror() was called on the worker.
+INTERNALERROR>     
+INTERNALERROR>         pytest_internalerror() arguments are an excinfo and an excrepr, which can't
+INTERNALERROR>         be serialized, so we go with a poor man's solution of raising an exception
+INTERNALERROR>         here ourselves using the formatted message.
+INTERNALERROR>         """
+INTERNALERROR>         self._active_nodes.remove(node)
+INTERNALERROR>         try:
+INTERNALERROR> >           assert False, formatted_error
+INTERNALERROR> E           AssertionError: Traceback (most recent call last):
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\main.py", line 330, in wrap_session
+INTERNALERROR> E                 session.exitstatus = doit(config, session) or 0
+INTERNALERROR> E                                      ~~~~^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\main.py", line 384, in _main
+INTERNALERROR> E                 config.hook.pytest_runtestloop(session=session)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+INTERNALERROR> E                 return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+INTERNALERROR> E                 return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 167, in _multicall
+INTERNALERROR> E                 raise exception
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\logging.py", line 816, in pytest_runtestloop
+INTERNALERROR> E                 return (yield)  # Run all the tests.
+INTERNALERROR> E                         ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\terminal.py", line 708, in pytest_runtestloop
+INTERNALERROR> E                 result = yield
+INTERNALERROR> E                          ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+INTERNALERROR> E                 res = hook_impl.function(*args)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\remote.py", line 206, in pytest_runtestloop
+INTERNALERROR> E                 self.run_one_test()
+INTERNALERROR> E                 ~~~~~~~~~~~~~~~~~^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\remote.py", line 227, in run_one_test
+INTERNALERROR> E                 self.config.hook.pytest_runtest_protocol(item=item, nextitem=nextitem)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+INTERNALERROR> E                 return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+INTERNALERROR> E                 return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 167, in _multicall
+INTERNALERROR> E                 raise exception
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\warnings.py", line 90, in pytest_runtest_protocol
+INTERNALERROR> E                 return (yield)
+INTERNALERROR> E                         ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\assertion\__init__.py", line 205, in pytest_runtest_protocol
+INTERNALERROR> E                 return (yield)
+INTERNALERROR> E                         ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\unittest.py", line 612, in pytest_runtest_protocol
+INTERNALERROR> E                 return (yield)
+INTERNALERROR> E                         ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\faulthandler.py", line 102, in pytest_runtest_protocol
+INTERNALERROR> E                 return (yield)
+INTERNALERROR> E                         ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+INTERNALERROR> E                 res = hook_impl.function(*args)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 118, in pytest_runtest_protocol
+INTERNALERROR> E                 runtestprotocol(item, nextitem=nextitem)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 139, in runtestprotocol
+INTERNALERROR> E                 reports.append(call_and_report(item, "call", log))
+INTERNALERROR> E                                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 254, in call_and_report
+INTERNALERROR> E                 report: TestReport = ihook.pytest_runtest_makereport(item=item, call=call)
+INTERNALERROR> E                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+INTERNALERROR> E                 return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+INTERNALERROR> E                 return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 167, in _multicall
+INTERNALERROR> E                 raise exception
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\tmpdir.py", line 347, in pytest_runtest_makereport
+INTERNALERROR> E                 rep = yield
+INTERNALERROR> E                       ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR> E                 teardown.throw(exception)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\skipping.py", line 280, in pytest_runtest_makereport
+INTERNALERROR> E                 rep = yield
+INTERNALERROR> E                       ^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+INTERNALERROR> E                 res = hook_impl.function(*args)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 385, in pytest_runtest_makereport
+INTERNALERROR> E                 return TestReport.from_item_and_call(item, call)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\reports.py", line 438, in from_item_and_call
+INTERNALERROR> E                 longrepr = _format_failed_longrepr(item, call, excinfo)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\reports.py", line 263, in _format_failed_longrepr
+INTERNALERROR> E                 longrepr = item.repr_failure(excinfo)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1749, in repr_failure
+INTERNALERROR> E                 return self._repr_failure_py(excinfo, style=style)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\nodes.py", line 448, in _repr_failure_py
+INTERNALERROR> E                 return excinfo.getrepr(
+INTERNALERROR> E                        ~~~~~~~~~~~~~~~^
+INTERNALERROR> E                     funcargs=True,
+INTERNALERROR> E                     ^^^^^^^^^^^^^^
+INTERNALERROR> E                 ...<5 lines>...
+INTERNALERROR> E                     truncate_args=truncate_args,
+INTERNALERROR> E                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E                 )
+INTERNALERROR> E                 ^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\_code\code.py", line 774, in getrepr
+INTERNALERROR> E                 return fmt.repr_excinfo(self)
+INTERNALERROR> E                        ~~~~~~~~~~~~~~~~^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\_code\code.py", line 1224, in repr_excinfo
+INTERNALERROR> E                 reprtraceback = self.repr_traceback(excinfo_)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\_code\code.py", line 1150, in repr_traceback
+INTERNALERROR> E                 self.repr_traceback_entry(entry, excinfo if last == entry else None)
+INTERNALERROR> E                 ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\_code\code.py", line 1080, in repr_traceback_entry
+INTERNALERROR> E                 source = self._getentrysource(entry)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\_code\code.py", line 916, in _getentrysource
+INTERNALERROR> E                 source = entry.getsource(self.astcache)
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\_code\code.py", line 302, in getsource
+INTERNALERROR> E                 astnode, _, end = getstatementrange_ast(
+INTERNALERROR> E                                   ~~~~~~~~~~~~~~~~~~~~~^
+INTERNALERROR> E                     self.lineno, source, astnode=astnode
+INTERNALERROR> E                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR> E                 )
+INTERNALERROR> E                 ^
+INTERNALERROR> E               File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\_code\source.py", line 193, in getstatementrange_ast
+INTERNALERROR> E                 astnode = ast.parse(content, "source", "exec")
+INTERNALERROR> E               File "C:\Python314\Lib\ast.py", line 46, in parse
+INTERNALERROR> E                 return compile(source, filename, mode, flags,
+INTERNALERROR> E                                _feature_version=feature_version, optimize=optimize)
+INTERNALERROR> E             MemoryError
+INTERNALERROR> E           assert False
+INTERNALERROR> 
+INTERNALERROR> ..\..\..\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py:232: AssertionError
+INTERNALERROR> Traceback (most recent call last):
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\main.py", line 330, in wrap_session
+INTERNALERROR>     session.exitstatus = doit(config, session) or 0
+INTERNALERROR>                          ~~~~^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\main.py", line 384, in _main
+INTERNALERROR>     config.hook.pytest_runtestloop(session=session)
+INTERNALERROR>     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+INTERNALERROR>     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+INTERNALERROR>            ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+INTERNALERROR>     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+INTERNALERROR>            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 167, in _multicall
+INTERNALERROR>     raise exception
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR>     teardown.throw(exception)
+INTERNALERROR>     ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\logging.py", line 816, in pytest_runtestloop
+INTERNALERROR>     return (yield)  # Run all the tests.
+INTERNALERROR>             ^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 139, in _multicall
+INTERNALERROR>     teardown.throw(exception)
+INTERNALERROR>     ~~~~~~~~~~~~~~^^^^^^^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\terminal.py", line 708, in pytest_runtestloop
+INTERNALERROR>     result = yield
+INTERNALERROR>              ^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+INTERNALERROR>     res = hook_impl.function(*args)
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 138, in pytest_runtestloop
+INTERNALERROR>     self.loop_once()
+INTERNALERROR>     ~~~~~~~~~~~~~~^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 163, in loop_once
+INTERNALERROR>     call(**kwargs)
+INTERNALERROR>     ~~~~^^^^^^^^^^
+INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 217, in worker_workerfinished
+INTERNALERROR>     assert not crashitem, (crashitem, node)
+INTERNALERROR> AssertionError: ('test_chan_hang_so.py::KHO_KHONG_DUOC_CHUA_HANG_CHET::test_khong_con_khai_bao_truot_chi_vi_co_che', <WorkerController gw2>)
+INTERNALERROR> assert not 'test_chan_hang_so.py::KHO_KHONG_DUOC_CHUA_HANG_CHET::test_khong_con_khai_bao_truot_chi_vi_co_che'
+
+3 failed, 1055 passed, 1 skipped, 158 subtests passed in 180.86s (0:03:00)

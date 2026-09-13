@@ -131,16 +131,23 @@ def chen(ma_ea: str, khoi_qt: str, khung: str = "D1",
 
 
 def chen_tu_spec(ma_ea: str, specs: list[dict], khung: str = "D1",
-                 magic: int = 0, lot_goc: float = 0.1) -> tuple[str, list[dict]]:
+                 magic: int = 0, lot_goc: float = 0.1, atr: float = None,
+                 gia_diem: float = 0.01) -> tuple[str, list[dict]]:
     """Chen kho luat quan tri vao EA ngoai. -> (ma moi, luat da nap).
 
     `sinh_khoi_nhieu` tra ve CA danh sach luat da nap, va con so do phai di kem
     ma: `QT_MaLuat = k` chi co nghia khi biet k tro toi luat nao. Vut no di la
     cach nhanh nhat de doc mot bang ket qua ma khong biet dong nao la luat gi.
+
+    `atr`/`gia_diem` la BAT BUOC, do THAT tren symbol+khung se chay (vd
+    `nhan.chuoi_quan_tri._atr_cua`). Loi 12/09: goi thang `specs` (con nguyen
+    don vi pip/tien tu kho) ma khong quy ve ATR lam ca 14 luat sinh ra GIONG
+    HET nhau - `Q.sinh_khoi_nhieu` tu no da tu choi (nem `KhongDichDuoc`) neu
+    thieu `atr`, o day chi truyen tiep khong doan them.
     """
     from nhan import dich_mq5_qtvt as Q
     khoi, luat = Q.sinh_khoi_nhieu(specs, khung=khung, magic=magic,
-                                   lot_goc=lot_goc)
+                                   lot_goc=lot_goc, atr=atr, gia_diem=gia_diem)
     return chen(ma_ea, khoi, khung=khung), luat
 
 
@@ -171,18 +178,27 @@ def kiem_da_chen(ma: str) -> list[str]:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("go: python -m nhan.de_quan_tri <duong dan .mq5>")
+        print("go: python -m nhan.de_quan_tri <duong dan .mq5> [symbol] [khung]")
         raise SystemExit(2)
     p = Path(sys.argv[1])
+    symbol = sys.argv[2] if len(sys.argv) > 2 else "US500CASH"
+    khung = sys.argv[3] if len(sys.argv) > 3 else "D1"
     ma = p.read_text(encoding="utf-8", errors="ignore")
     from nhan import quan_tri_dsl as QT
+    from nhan import chuoi_quan_tri as CQ
     kho = [c for c in QT.doc_kho() if not QT.kiem_khai_bao(c)][:12]
-    moi, luat = chen_tu_spec(ma, kho, khung="D1", magic=20260911)
+    # ATR PHAI do tren du lieu THAT - ban cu goi chen_tu_spec khong co atr, moi
+    # so pip/tien trong kho roi ve 0 lang le va bang luat sinh ra GIONG HET
+    # nhau ca 12/14 luat (do 12/09, xem reports/DE_QT_EA Snippets_...mq5).
+    atr, diem = CQ._atr_cua(symbol, khung)
+    moi, luat = chen_tu_spec(ma, kho, khung=khung, magic=20260911,
+                             atr=atr, gia_diem=diem)
     loi = kiem_da_chen(moi)
     ra = GOC / "reports" / ("DE_QT_" + p.stem[:40] + ".mq5")
     ra.parent.mkdir(exist_ok=True)
     ra.write_text(moi, encoding="utf-8")
-    print(json.dumps({"ea": p.name, "luat_nap": len(luat),
+    print(json.dumps({"ea": p.name, "symbol": symbol, "khung": khung,
+                      "atr": atr, "gia_diem": diem, "luat_nap": len(luat),
                       "byte_truoc": len(ma), "byte_sau": len(moi),
                       "loi_chen": loi, "ra": str(ra)},
                      ensure_ascii=False, indent=1))

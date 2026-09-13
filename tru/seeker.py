@@ -65,6 +65,16 @@ TU_KHOA_GOC = [
     "intraday seasonality", "order flow imbalance", "expert advisor mql5",
     "algorithmic trading python", "portfolio optimization robust",
     "overfitting backtest deflated sharpe", "regime switching model",
+    # --- them 13/09/2026: HO QUAN TRI VI THE (trailing/hedge/tia lenh/limit
+    # stop...), theo yeu cau chu du an *"module quan li lenh ... co the dung
+    # seeker tim co che ngoai"*. Day la tu khoa CHO NGUON KEYWORD-DRIVEN
+    # (`n_github`, `n_tradingview_pine`) - `n_mql5_code` duyet theo DANH MUC
+    # chu khong theo tu khoa nen khong dung duoc lop nay (xem MQL5_DANH_MUC).
+    "trailing stop ea mql5", "break even stop expert advisor",
+    "partial close scale out strategy", "hedging ea forex",
+    "grid trading ea mql5", "straddle buy stop sell stop expert advisor",
+    "martingale position sizing risk", "recovery zone forex ea",
+    "position sizing algorithm trading", "time stop exit strategy backtest",
 ]
 
 
@@ -1837,10 +1847,16 @@ def _doc_dinh_tuyen(t: dict) -> dict | None:
     doc trang bai, tim link `/en/code/download/<id>/<ten>.mq5` va tai FILE DON
     (co tran kich thuoc, co xu ly UTF-16 cua MetaEditor, khong dong den .zip).
     Day chi la mot dong noi day.
+
+    SUA 13/09/2026: regex URL chuyen sang `MN.RE_URL_CODE_MQL5` (dung chung,
+    khong giu hai ban rieng) va `MN.tai_ma_nguon` nay da co hai tang DNS giong
+    ham `_lay` o duoi - truoc do no THIEU tang do va la ly do 813 ban ghi moi
+    van roi ve HTML trang ngay ca SAU khi cua dinh tuyen nay da mo (xem chu
+    thich o `nhan/ma_nguon._lay`).
     """
+    from nhan import ma_nguon as MN
     u = str(t.get("url") or "")
-    if re.match(r"https?://(www\.)?mql5\.com/[a-z]{2}/code/\d+", u):
-        from nhan import ma_nguon as MN
+    if re.match(MN.RE_URL_CODE_MQL5, u):
         r = MN.tai_ma_nguon({"url": u, "tieu_de": t.get("tieu_de") or ""})
         if r and r.get("noi_dung"):
             vb = r["noi_dung"]
@@ -2287,6 +2303,26 @@ def mot_luot(ngan_sach_giay: int = 600) -> dict:
                            ngan_sach_giay=max(60, int(ngan_sach_giay * 0.35)))
     backfill = backfill_document_artifacts(gioi_han=500)
 
+    # ---- TANG 2b: THU HOI - hai loai "im lang bo dat", them 13/09/2026 -----
+    # Ca hai ham nay TUNG TON TAI ma KHONG AI GOI: `thu_hoi_khong_doc_duoc`
+    # (dinh nghia 01/09) va `MN.thu_hoi_sai_loai` (moi) deu la "dead code" cho
+    # toi dong nay - mot dia chi hong han hay mot trang bi luu SAI LOAI (landing
+    # page thay vi file ma) deu bi ket lai VINH VIEN vi khong vong nao dua no
+    # tro lai hang doi. Ngan sach nho (~5% moi ben): day la sua loi ket qua cu,
+    # khong phai tang thu hoach chinh.
+    thu_hoi = {}
+    try:
+        thu_hoi["khong_doc_duoc"] = thu_hoi_khong_doc_duoc(
+            gioi_han=10, ngan_sach_giay=max(20, int(ngan_sach_giay * 0.05)))
+    except Exception as e:
+        thu_hoi["khong_doc_duoc"] = {"loi": f"{type(e).__name__}: {str(e)[:100]}"}
+    try:
+        from nhan import ma_nguon as _MN_THU_HOI
+        thu_hoi["sai_loai"] = _MN_THU_HOI.thu_hoi_sai_loai(
+            gioi_han=10, ngan_sach_giay=max(20, int(ngan_sach_giay * 0.05)))
+    except Exception as e:
+        thu_hoi["sai_loai"] = {"loi": f"{type(e).__name__}: {str(e)[:100]}"}
+
     # ---- TANG 1d: MA NGUON EA/CHI BAO -> CodeArtifact ---------------------
     # Van xuoi mo ta co che bang tieng nguoi, va tieng nguoi mo ho o dung cho
     # quan trong nhat: "mua khi RSI thap" khong noi nguong bao nhieu, khung nao,
@@ -2419,7 +2455,7 @@ def mot_luot(ngan_sach_giay: int = 600) -> dict:
             "ma_nguon": ma_nguon, "bai_viet": bai_viet,
             "browser": browser, "vuon_nguon": vuon,
             "con_doc": con_doc, "con_boc": con_boc,
-            "cho_giay": cho, "chi_tiet": chi_tiet}
+            "cho_giay": cho, "chi_tiet": chi_tiet, "thu_hoi": thu_hoi}
 
 
 def viet_bao_cao(den_han, tong_moi, tong, hang, ban_doc, backfill, con_doc) -> None:

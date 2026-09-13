@@ -1,103 +1,19 @@
-bringing up nodes...
-bringing up nodes...
-
-..................................................uuu..uuu.....F........ [  4%]
+.................................................................. [  3%]
 ........................................................................ [  8%]
-..................................uuuu.............uuuuuuuuuuuuuuuuuuuuu [ 11%]
-uuuuuuuuuuuuuuuu.uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 11%]
-uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.uuuuuuuuu.uuuuuu.uuuuuu.uuuuu.uuu [ 11%]
-uuuuuuuuuuuuuuuuuuuuuu.................................................. [ 14%]
-...................................................s.................... [ 18%]
-........uuuuuu.......................................................... [ 22%]
-.....................................uuuu............................... [ 27%]
-.................uuu......uuu...uu.......uuuuuu.uuuuuuuuu...uuu.......uu [ 29%]
-uuuuu..uuuuuuuuuuuuuuuuuuuuuuuuuuuu..................................... [ 32%]
-.....uuuu............................................................... [ 36%]
-.........uuu...........................uuuu........uuuuuuuu............. [ 39%]
-...uu....uuuuuu....uuuuu......uuuuuuu................................... [ 42%]
-...............................................................uuuuuu... [ 46%]
-.......................uuuuuu........................................... [ 50%]
+.........F.............................................................. [ 12%]
+........................................................................ [ 16%]
+............................................................... [ 20%]
+........................................................................ [ 24%]
+.................................................................... [ 28%]
+...................................................s.................... [ 32%]
+....................................... [ 34%]
+............................................ [ 37%]
+.................................................................... [ 41%]
+................................................................. [ 44%]
+........................................ [ 47%]
+.....................................................................F.F [ 51%]
 ........................................................................ [ 55%]
-..................................................uuu................... [ 59%]
-.uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu........................ [ 60%]
-........................................................................ [ 65%]
-.......................uuuuuuuuuuu.uuu.uuu.uuu.uuu...................... [ 68%]
-........................................................................ [ 72%]
-...........................uuuuuuuuuuuuu.............uuuuuuuu.uuuuu.uuuu [ 75%]
-u.uuuuuuuuuuuuuu...uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu [ 75%]
-uu..uuuuu.uuuuuuuuuuuuuuuuuuuu.uuuuuuuuuuu.................uuuu......... [ 77%]
-........................................................................ [ 81%]
-........................................................................ [ 86%]
-........................................................................ [ 90%]
-........................................................................ [ 94%]
-........................................................................ [ 99%]
-.F..FF........                                                           [100%]
-================================== FAILURES ===================================
-_________________ test_thieu_so_nam_thi_bo_qua_chu_khong_doan _________________
-[gw1] win32 -- Python 3.14.7 C:\Python314\python.exe
-
-tmp_path = WindowsPath('C:/Users/SV STORE/AppData/Local/Temp/pytest-of-SV STORE/pytest-340/popen-gw1/test_thieu_so_nam_thi_bo_qua_c0')
-monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002238E0A2060>
-
-    def test_thieu_so_nam_thi_bo_qua_chu_khong_doan(tmp_path, monkeypatch):
-        """Dong khong co `so_nam` phai bi BO, khong duoc lay tong lenh lam lenh/nam."""
-        so = tmp_path / "reports"
-        so.mkdir()
-        (so / "TO_HOP.json").write_text(json.dumps({
-            "top": [{k: v for k, v in _TOT.items() if k != "so_nam"}],
-            "holdout": []}), encoding="utf-8")
-        monkeypatch.setattr(V, "LAB", tmp_path)
-        k = V._cham_tien(lambda *a: None)
->       assert k.get("thieu_nam") == 1
-E       AssertionError: assert 0 == 1
-E        +  where 0 = <built-in method get of dict object at 0x0000022390434D80>('thieu_nam')
-E        +    where <built-in method get of dict object at 0x0000022390434D80> = {'cham': 1, 'thieu_nam': 0, 'chay_duoc': 1, 'qua_holdout': 0}.get
-
-test_cham_tien.py:77: AssertionError
-________ Chuyen.test_dat_la_co_theo_dung_sai_chu_khong_phai_phan_quyet ________
-[gw2] win32 -- Python 3.14.7 C:\Python314\python.exe
-
-self = <test_ngoai_sinh.Chuyen testMethod=test_dat_la_co_theo_dung_sai_chu_khong_phai_phan_quyet>
-
-    def test_dat_la_co_theo_dung_sai_chu_khong_phai_phan_quyet(self):
-        r = NGS.chuyen(self.gt, "US500CASH", "H4", dung_sai=1e-9)
-        self.assertFalse(r["dat"], "dung sai sat 0 thi gan nhu khong bao gio dat")
-        r2 = NGS.chuyen(self.gt, "US500CASH", "H4", dung_sai=10.0)
->       self.assertTrue(r2["dat"])
-                        ^^^^^^^^^
-E       TypeError: 'NoneType' object is not subscriptable
-
-test_ngoai_sinh.py:126: TypeError
-________ Chuyen.test_tham_so_moi_van_chay_duoc_that_tren_tai_san_dich _________
-[gw2] win32 -- Python 3.14.7 C:\Python314\python.exe
-
-self = <test_ngoai_sinh.Chuyen testMethod=test_tham_so_moi_van_chay_duoc_that_tren_tai_san_dich>
-
-    def test_tham_so_moi_van_chay_duoc_that_tren_tai_san_dich(self):
-        """Chinh xong ma khong chay duoc thi la chinh hong."""
-        r = NGS.chuyen(self.gt, "US500CASH", "H4")
->       t = NGS.ty_le_kich_hoat("US500CASH", "H4", r["template"], r["tham_so_moi"])
-                                                   ^^^^^^^^^^^^^
-E       TypeError: 'NoneType' object is not subscriptable
-
-test_ngoai_sinh.py:118: TypeError
-____________ Chuyen.test_tra_du_ca_hai_ben_de_nguoi_doc_doi_chieu _____________
-[gw2] win32 -- Python 3.14.7 C:\Python314\python.exe
-
-self = <test_ngoai_sinh.Chuyen testMethod=test_tra_du_ca_hai_ben_de_nguoi_doc_doi_chieu>
-
-    def test_tra_du_ca_hai_ben_de_nguoi_doc_doi_chieu(self):
-        r = NGS.chuyen(self.gt, "US500CASH", "H4")
-        for k in ("tu", "template", "tai_san_goc", "tham_so_goc", "ty_le_goc",
-                  "tai_san_dich", "tham_so_moi", "ty_le_moi",
-                  "ty_le_neu_giu_nguyen_so", "lech_log", "dat"):
->           self.assertIn(k, r)
-E           TypeError: argument of type 'NoneType' is not a container or iterable
-
-test_ngoai_sinh.py:104: TypeError
-=========================== short test summary info ===========================
-FAILED test_cham_tien.py::test_thieu_so_nam_thi_bo_qua_chu_khong_doan - Asser...
-FAILED test_ngoai_sinh.py::Chuyen::test_dat_la_co_theo_dung_sai_chu_khong_phai_phan_quyet
-FAILED test_ngoai_sinh.py::Chuyen::test_tham_so_moi_van_chay_duoc_that_tren_tai_san_dich
-FAILED test_ngoai_sinh.py::Chuyen::test_tra_du_ca_hai_ben_de_nguoi_doc_doi_chieu
-4 failed, 1643 passed, 1 skipped, 526 subtests passed in 2509.31s (0:41:49)
+.................................................................. [ 59%]
+.................................................................. [ 63%]
+............................F.................... [ 66%]
+.............................................................

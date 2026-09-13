@@ -20,6 +20,17 @@ CONG: it nhat mot luat lam DOI SO LENH so voi moc. Khong doi so lenh nghia la
 quan tri khong cham vao vi the nao - luc do moi con so lai/lo deu vo nghia, va
 day la trang thai CHUA_DO_DUOC chu khong phai "quan tri khong an".
 
+## SUA 12/09: `so_luat_doi_so_lenh == 0` PHAI LA CHUA_DO_DUOC, KHONG DUOC LA "AM"
+
+Ban truoc do (11/09) coi MOI chenh lech - ke ca lai/DD ma KHONG doi so lenh - la
+bang chung "DAT", va rong lai xem "khong chenh gi ca" la "AM". Hai loi cong mot
+chieu: mot bang luat toan 0 (do khau quy don vi bi bo qua) cho CA BA con so
+(lenh/lai/DD) GIONG HET moc o 14/15 luat -> ban cu doc thanh "AM" (**quan tri
+khong an**) trong khi day la mot LOI KY THUAT tai khau sinh bang, khong phai
+mot ket luan ve quan tri. So lenh la bang chung DUY NHAT khong the nham voi lam
+tron/spread model; lai/DD chenh MA khong doi lenh chi duoc ghi lai de tham
+khao, khong duoc dung de ket luan DAT/AM.
+
 Chay:  python _de_qt_ea_ngoai.py [symbol] [duong dan .mq5]
 """
 from __future__ import annotations
@@ -34,6 +45,7 @@ GOC = Path(__file__).resolve().parent
 sys.path.insert(0, str(GOC))
 
 import chay_tester_kho as C  # noqa: E402
+from nhan import chuoi_quan_tri as CQ  # noqa: E402
 from nhan import de_quan_tri as DQ  # noqa: E402
 from nhan import khoa_tester as KT  # noqa: E402
 from nhan import quan_tri_dsl as QT  # noqa: E402
@@ -97,8 +109,28 @@ def chay(symbol: str = "US500Cash", nguon_ea: str | None = None,
         return {"trang_thai": "CHUA_DO_DUOC",
                 "ly_do": f"kho quan tri chi co {len(kho)} luat qua cong"}
 
+    # ATR PHAI do tren du lieu THAT cua symbol+khung SE CHAY - khong duoc mac
+    # dinh/doan. Loi 11/09: goi `chen_tu_spec` khong co atr lam moi so pip/tien
+    # trong kho ve 0 lang le, ca 14 luat sinh ra GIONG HET moc.
+    try:
+        atr, diem = CQ._atr_cua(symbol, khung)
+    except Exception as e:
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": f"khong do duoc ATR tren {symbol} {khung}: {e}"}
+    if not (atr and atr > 0):
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": f"ATR do duoc tren {symbol} {khung} khong hop le: {atr!r}"}
+
     ma_goc = ea.read_text(encoding="utf-8", errors="ignore")
-    ma_moi, luat = DQ.chen_tu_spec(ma_goc, kho, khung=khung, magic=0)
+    try:
+        ma_moi, luat = DQ.chen_tu_spec(ma_goc, kho, khung=khung, magic=0,
+                                       atr=atr, gia_diem=diem)
+    except QT.KhongQuyDoiDuoc as e:
+        return {"trang_thai": "CHUA_DO_DUOC", "ly_do": str(e)}
+    except Exception as e:
+        # `dich_mq5_qtvt.KhongDichDuoc` bao gom ca cong (2) "bang luat toan 0" -
+        # day CHINH la loi 12/09, nen phai ra CHUA_DO_DUOC chu khong crash.
+        return {"trang_thai": "CHUA_DO_DUOC", "ly_do": str(e)}
     loi_chen = DQ.kiem_da_chen(ma_moi)
     if loi_chen:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "; ".join(loi_chen)}
@@ -141,26 +173,41 @@ def chay(symbol: str = "US500Cash", nguon_ea: str | None = None,
                     "lai": C._so(d.get("Profit")),
                     "sut_giam": C._so(d.get("Equity DD %", d.get("Drawdown", 0)))})
     ket.sort(key=lambda x: x["luat"])
+    kq = quyet_dinh(ket, ea=ea.name, symbol=symbol, khung=khung,
+                    cua_so=f"{tu}..{den}", giay=round(time.time() - t0))
+    RA.parent.mkdir(exist_ok=True)
+    RA.write_text(json.dumps(kq, ensure_ascii=False, indent=1), encoding="utf-8")
+    return kq
+
+
+def quyet_dinh(ket: list[dict], ea: str = "?", symbol: str = "?",
+               khung: str = "?", cua_so: str = "?", giay: float = 0.0) -> dict:
+    """Tach rieng khoi `chay()` de TEST DUOC ma khong can chay tester that.
+
+    Day CHINH la khau bi doc SAI ngay 11/09: mot bang luat TOAN 0 (do khau quy
+    don vi bi bo qua o thuong nguon) cho ca 14/15 luat GIONG HET moc ve CA BA
+    con so (lenh/lai/DD) - va ban cu ket luan "AM" (quan tri khong an) thay vi
+    "CHUA_DO_DUOC" (khau do hong).
+
+    Cong: `so_luat_doi_so_lenh > 0` la dieu kien BAT BUOC cho trang thai DAT.
+    So lenh la bang chung DUY NHAT khong the nham voi sai so lam tron/spread
+    model; lai/DD lech ma KHONG doi lenh (vd luat `dat_hue`/`trailing` doi GIA
+    THOAT that) van duoc ghi vao `luat_cham_duoc` de nguoi doc doi chieu tay,
+    nhung KHONG du de tu no ket luan DAT.
+    """
     moc = next((x for x in ket if x["luat"] == 0), None)
     if not moc:
-        return {"trang_thai": "CHUA_DO_DUOC",
-                "ly_do": "khong co pass QT_MaLuat=0 - khong co MOC de so"}
+        return {"trang_thai": "CHUA_DO_DUOC", "ea": ea, "symbol": symbol,
+                "khung": khung, "cua_so": cua_so, "giay": giay,
+                "ly_do": "khong co pass QT_MaLuat=0 - khong co MOC de so",
+                "ket": ket}
     if not moc["lenh"]:
         # EA ngoai khong dat lenh nao thi khong the ket luan gi ve quan tri.
-        return {"trang_thai": "CHUA_DO_DUOC", "moc": moc,
+        return {"trang_thai": "CHUA_DO_DUOC", "ea": ea, "symbol": symbol,
+                "khung": khung, "cua_so": cua_so, "giay": giay, "moc": moc,
                 "ly_do": "EA ngoai KHONG dat lenh nao o moc - doi symbol/cua so",
                 "ket": ket}
 
-    # CONG: bat ky SO NAO doi - khong chi so lenh.
-    #
-    # Lan dat cong dau tien cua toi chi hoi "so lenh co doi khong", va no SAI:
-    # mot luat `dat_hue` hay `trailing` doi GIA THOAT chu khong doi SO LENH. Chay
-    # that 23:2x ngay 11/09: 0/14 luat doi so lenh, nhung luat 6 doi LAI tu
-    # -108,76 sang -99,20 - tuc quan tri CO cham vao vi the, va cong cua toi se
-    # bao "AM" cho mot nang luc dang chay dung.
-    #
-    # Chi nhung luat NHOI hay CAT SOM moi doi so lenh; ca ho `dat_hue`/`trailing`
-    # - tuc phan lon kho quan tri - khong bao gio doi no.
     def _khac(a, b, eps=1e-9):
         return abs(float(a or 0) - float(b or 0)) > eps
 
@@ -168,24 +215,40 @@ def chay(symbol: str = "US500Cash", nguon_ea: str | None = None,
         x["lenh"] != moc["lenh"] or _khac(x["lai"], moc["lai"])
         or _khac(x["sut_giam"], moc["sut_giam"]))]
     doi_lenh = [x for x in doi if x["lenh"] != moc["lenh"]]
-    kq = {
-        "trang_thai": "DAT" if doi else "AM",
-        "ea": ea.name, "symbol": symbol, "khung": khung, "cua_so": f"{tu}..{den}",
-        "giay": round(time.time() - t0),
-        "so_luat": len(ket) - 1,
-        "moc_tat_quan_tri": moc,
+    luat_cham_duoc = [{"luat": x["luat"], "ten": x["ten"],
+                       "lenh": x["lenh"], "lai": x["lai"]} for x in doi[:8]]
+
+    if not doi_lenh:
+        # SO LENH khong doi o BAT KY luat nao - CHUA_DO_DUOC, khong phai "AM".
+        # (lai/DD co the lech vi ly do khac quan tri: lam tron dau phay dong,
+        # spread model... nen KHONG du bang chung de tu no ket luan DAT/AM.)
+        ghi_chu_lai = (
+            (" (%d luat co lai/DD khac moc nhung KHONG doi so lenh - xem "
+             "'luat_cham_duoc' de doi chieu tay, KHONG dung de ket luan)"
+             % len(doi)) if doi else " Moi con so deu giong het moc."
+        )
+        return {
+            "trang_thai": "CHUA_DO_DUOC",
+            "ea": ea, "symbol": symbol, "khung": khung, "cua_so": cua_so,
+            "giay": giay, "so_luat": len(ket) - 1, "moc_tat_quan_tri": moc,
+            "so_luat_cham_duoc_vi_the": len(doi),
+            "so_luat_doi_so_lenh": len(doi_lenh),
+            "luat_cham_duoc": luat_cham_duoc,
+            "ly_do": ("KHONG luat nao doi SO LENH so voi moc - khong phan "
+                      "biet duoc 'quan tri khong cham vi the nao' voi 'chenh "
+                      "lech lai/DD la nhieu do khac'." + ghi_chu_lai),
+            "ket": ket,
+        }
+    return {
+        "trang_thai": "DAT",
+        "ea": ea, "symbol": symbol, "khung": khung, "cua_so": cua_so,
+        "giay": giay, "so_luat": len(ket) - 1, "moc_tat_quan_tri": moc,
         "so_luat_cham_duoc_vi_the": len(doi),
-        "so_luat_doi_SO_LENH": len(doi_lenh),
-        "luat_cham_duoc": [{"luat": x["luat"], "ten": x["ten"],
-                            "lenh": x["lenh"], "lai": x["lai"]} for x in doi[:8]],
-        "ly_do": ("" if doi else
-                  "KHONG luat nao doi duoc so nao - quan tri khong cham vao vi "
-                  "the nao. Moi con so lai/lo deu vo nghia o day."),
+        "so_luat_doi_so_lenh": len(doi_lenh),
+        "luat_cham_duoc": luat_cham_duoc,
+        "ly_do": "",
         "ket": ket,
     }
-    RA.parent.mkdir(exist_ok=True)
-    RA.write_text(json.dumps(kq, ensure_ascii=False, indent=1), encoding="utf-8")
-    return kq
 
 
 if __name__ == "__main__":

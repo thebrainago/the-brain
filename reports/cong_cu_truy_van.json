@@ -285,5 +285,36 @@
   "so_tu": 6,
   "sao_toi_thieu": 100,
   "nhu_cau": "kiem_dinh_thong_ke"
+ },
+ "chrome profile cache bloat cleanup": {
+  "ket": "RONG",
+  "so_ket_qua": 0,
+  "duong_hong": [],
+  "luc": "2026-09-13 09:34:16",
+  "so_tu": 5,
+  "sao_toi_thieu": 0,
+  "nhu_cau": "dia_va_tick_test"
+ },
+ "backtest overfitting": {
+  "ket": "LOI",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "arxiv: HTTP 429"
+  ],
+  "luc": "2026-09-13 09:34:40",
+  "so_tu": 2,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "phuong_phap_chong_qua_khop"
+ },
+ "deflated sharpe ratio": {
+  "ket": "LOI",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "arxiv: HTTP 429"
+  ],
+  "luc": "2026-09-13 09:34:49",
+  "so_tu": 3,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "phuong_phap_chong_qua_khop"
  }
 }

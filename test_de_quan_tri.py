@@ -115,13 +115,19 @@ class CHEN_VAO_EA_NGOAI_THAT(unittest.TestCase):
     EA = (GOC / "downloaded_codes" / "github" /
           "EA Snippets_Breakout_Breakout1.mq5")
 
+    # Hang so ATR/gia_diem dung CHUNG voi test_chuoi_quan_tri.py: da do THAT
+    # tren US500CASH D1 (trung vi ATR ~74,24 diem). Dung hang so co san thay vi
+    # nap lai du lieu trong test - nhanh va van la mot con so THAT, khong doan.
+    ATR, GIA_DIEM = 74.24, 0.1
+
     @unittest.skipUnless(EA.exists(), "chua co EA ngoai trong kho")
     def test_chen_duoc_vao_EA_that(self):
         from nhan import quan_tri_dsl as QT
         kho = [c for c in QT.doc_kho() if not QT.kiem_khai_bao(c)][:6]
         self.assertGreaterEqual(len(kho), 2, "kho quan tri qua it luat")
         ma = self.EA.read_text(encoding="utf-8", errors="ignore")
-        moi, luat = DQ.chen_tu_spec(ma, kho, khung="D1", magic=0)
+        moi, luat = DQ.chen_tu_spec(ma, kho, khung="D1", magic=0,
+                                    atr=self.ATR, gia_diem=self.GIA_DIEM)
         self.assertEqual(DQ.kiem_da_chen(moi), [])
         self.assertGreater(len(moi), len(ma) * 1.5,
                            "ma sau khi chen khong lon hon bao nhieu - chen hut?")
@@ -133,9 +139,111 @@ class CHEN_VAO_EA_NGOAI_THAT(unittest.TestCase):
         from nhan import quan_tri_dsl as QT
         kho = [c for c in QT.doc_kho() if not QT.kiem_khai_bao(c)][:6]
         ma = self.EA.read_text(encoding="utf-8", errors="ignore")
-        moi, _ = DQ.chen_tu_spec(ma, kho, khung="D1", magic=0)
+        moi, _ = DQ.chen_tu_spec(ma, kho, khung="D1", magic=0,
+                                 atr=self.ATR, gia_diem=self.GIA_DIEM)
         self.assertIn("QT_MaLuat", moi)
         self.assertIn("QT_ChonLuat(QT_MaLuat)", moi)
+
+    @unittest.skipUnless(EA.exists(), "chua co EA ngoai trong kho")
+    def test_chen_tu_spec_TU_CHOI_neu_thieu_atr(self):
+        """Loi goc 12/09: goi chen_tu_spec khong co atr lam ca bang luat ve 0
+        lang le. Tu 12/09 phai NEM LOI ngay, khong duoc am tham sinh file hong."""
+        from nhan import dich_mq5_qtvt as DQV
+        from nhan import quan_tri_dsl as QT
+        kho = [c for c in QT.doc_kho() if not QT.kiem_khai_bao(c)][:6]
+        ma = self.EA.read_text(encoding="utf-8", errors="ignore")
+        with self.assertRaises(DQV.KhongDichDuoc):
+            DQ.chen_tu_spec(ma, kho, khung="D1", magic=0)
+
+    @unittest.skipUnless(EA.exists(), "chua co EA ngoai trong kho")
+    def test_bang_luat_tu_kho_that_KHONG_toan_0(self):
+        """Cong (2): kho THAT (75 khai bao da qua `kiem_khai_bao`), sau khi quy
+        ATR that, phai sinh ra bang KHAC NHAU giua cac luat - khong duoc y het
+        moc nhu bang hong ngay 11/09 (1759 lenh / -108,76 / DD 1,3121 o 14/15
+        luat)."""
+        import re
+        from nhan import dich_mq5_qtvt as DQV
+        from nhan import quan_tri_dsl as QT
+        kho = [c for c in QT.doc_kho() if not QT.kiem_khai_bao(c)][:14]
+        ma = self.EA.read_text(encoding="utf-8", errors="ignore")
+        moi, luat = DQ.chen_tu_spec(ma, kho, khung="D1", magic=0,
+                                    atr=self.ATR, gia_diem=self.GIA_DIEM)
+        self.assertGreaterEqual(len(luat), 3)
+        # doc lai chinh mang QT_A_DatHue tu ma sinh ra - phai co it nhat HAI
+        # gia tri KHAC NHAU (khong phai het thay deu 0.0000 hoac het thay
+        # giong nhau).
+        gia = re.findall(r"QT_A_DatHue\[\d+\] = ([\d.]+);", moi)
+        self.assertGreater(len(set(gia)), 1,
+                           "QT_A_DatHue toan mot gia tri - bang luat 'im lang'")
+
+
+class QuyetDinhTrangThai_EaNgoai(unittest.TestCase):
+    """`_de_qt_ea_ngoai.quyet_dinh` - khau DOC ket qua tester va chot DAT/AM/
+    CHUA_DO_DUOC. Day chinh la khau bi doc SAI ngay 11/09: mot bang luat toan
+    0 (loi o `sinh_khoi_nhieu`, da sua o cong (1)/(2)) khien 14/15 luat GIONG
+    HET moc, va ban cu ket luan "AM" (quan tri khong an) thay vi "CHUA_DO_DUOC"
+    (khau do hong). Test nay khoa lai dung du lieu cua bao cao hong do, tach
+    khoi viec chay tester that (khong duoc chay - chi co MOT terminal64.exe)."""
+
+    def setUp(self):
+        import _de_qt_ea_ngoai as DQE
+        self.DQE = DQE
+
+    def test_bang_toan_0_la_CHUA_DO_DUOC_khong_phai_AM(self):
+        """Du lieu THAT cua reports/DE_QT_EA_NGOAI.json hong ngay 11/09: ca 14
+        luat GIONG HET moc (1759 lenh / -108,76 / DD 1,3121). so_luat_doi_
+        so_lenh == 0 -> phai la CHUA_DO_DUOC, TUYET DOI khong duoc la AM."""
+        moc = {"luat": 0, "ten": "__tat_quan_tri__",
+              "lenh": 1759, "lai": -108.76, "sut_giam": 1.3121}
+        ket = [moc] + [
+            {"luat": i, "ten": "luat_%d" % i,
+             "lenh": 1759, "lai": -108.76, "sut_giam": 1.3121}
+            for i in range(1, 15)
+        ]
+        kq = self.DQE.quyet_dinh(ket, ea="EA.mq5", symbol="US500Cash",
+                                 khung="H1", cua_so="2018..2026", giay=35)
+        self.assertEqual(kq["trang_thai"], "CHUA_DO_DUOC")
+        self.assertNotEqual(kq["trang_thai"], "AM")
+        self.assertEqual(kq["so_luat_doi_so_lenh"], 0)
+
+    def test_lai_khac_moc_MA_KHONG_doi_lenh_van_la_CHUA_DO_DUOC(self):
+        """Truong hop luat 6 that (BlueMoon) trong bao cao hong: lai/DD lech
+        (-99,19 thay vi -108,76) nhung SO LENH khong doi. Ban cu (11/09) coi
+        day la bang chung DAT; nay khong du - phai la CHUA_DO_DUOC va ghi lai
+        chenh lech do de tham khao, khong dung de ket luan."""
+        moc = {"luat": 0, "ten": "__tat_quan_tri__",
+              "lenh": 1759, "lai": -108.76, "sut_giam": 1.3121}
+        ket = [moc,
+               {"luat": 1, "ten": "khac", "lenh": 1759,
+                "lai": -108.76, "sut_giam": 1.3121},
+               {"luat": 6, "ten": "BlueMoon.mq5", "lenh": 1759,
+                "lai": -99.19, "sut_giam": 1.3271}]
+        kq = self.DQE.quyet_dinh(ket, ea="EA.mq5", symbol="US500Cash",
+                                 khung="H1", cua_so="2018..2026", giay=35)
+        self.assertEqual(kq["trang_thai"], "CHUA_DO_DUOC")
+        self.assertEqual(kq["so_luat_doi_so_lenh"], 0)
+        self.assertEqual(kq["so_luat_cham_duoc_vi_the"], 1)
+
+    def test_it_nhat_mot_luat_doi_SO_LENH_la_DAT(self):
+        moc = {"luat": 0, "ten": "__tat_quan_tri__",
+              "lenh": 1759, "lai": -108.76, "sut_giam": 1.3121}
+        ket = [moc,
+               {"luat": 1, "ten": "nhoi", "lenh": 1802,
+                "lai": -95.0, "sut_giam": 1.5}]
+        kq = self.DQE.quyet_dinh(ket, ea="EA.mq5", symbol="US500Cash",
+                                 khung="H1", cua_so="2018..2026", giay=35)
+        self.assertEqual(kq["trang_thai"], "DAT")
+        self.assertEqual(kq["so_luat_doi_so_lenh"], 1)
+
+    def test_khong_co_moc_la_CHUA_DO_DUOC(self):
+        ket = [{"luat": 1, "ten": "x", "lenh": 10, "lai": 1.0, "sut_giam": 0.1}]
+        kq = self.DQE.quyet_dinh(ket)
+        self.assertEqual(kq["trang_thai"], "CHUA_DO_DUOC")
+
+    def test_moc_khong_dat_lenh_nao_la_CHUA_DO_DUOC(self):
+        ket = [{"luat": 0, "ten": "moc", "lenh": 0, "lai": 0.0, "sut_giam": 0.0}]
+        kq = self.DQE.quyet_dinh(ket)
+        self.assertEqual(kq["trang_thai"], "CHUA_DO_DUOC")
 
 
 if __name__ == "__main__":

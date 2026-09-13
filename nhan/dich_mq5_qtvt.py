@@ -25,7 +25,7 @@ ban dung CHUNG mot khoi luat de khong lech nhau.
 Chan truoc chot, chot truoc quan tri chi tiet: mot tran cung bi vuot thi moi
 luat khac deu vo nghia.
 
-## BA BAY DA SAP THAT, DA BIT TRONG MA SINH RA
+## BON BAY DA SAP THAT, DA BIT TRONG MA SINH RA
 
 1. **Hanh dong sinh Y DINH, khong dat lenh thang.** Nen khung tin hieu doi luc
    00:00 nam NGOAI phien CFD -> dat thang o do thi "Market closed", khong dau
@@ -34,6 +34,13 @@ luat khac deu vo nghia.
    kiem `SYMBOL_VOLUME_MIN` va **bao ra bien dem** thay vi im.
 3. **Nhoi khong tran = chay tai khoan** (do 07/09: lot_x 1,5 -> DD 99,98% ngay
    trong mau). `sinh_khoi` **TU CHOI** spec co nhoi ma khong co tran.
+4. **Bang NHIEU luat (`sinh_khoi_nhieu`) im lang ve 0 neu bo qua `sang_atr`.**
+   Do 11/09: `_atr0` cu tra 0.0 cho MOI dict khac `{'atr': x}`, va 141/146 gia
+   tri trong kho la don vi `pip` - ca 14 luat sinh ra GIONG HET moc (1759 lenh
+   / -108,76 / DD 1,3121), bang tester doc nham thanh "AM". Tu 12/09:
+   `sinh_khoi_nhieu` **BAT BUOC** `atr`/`gia_diem` that (khong nhan mac dinh,
+   tu quy doi bang `quan_tri_dsl.sang_atr` truoc khi rut so) va **TU CHOI**
+   qua cong `kiem_bang_luat` neu mot luat toan 0 hoac moi luat giong het nhau.
 """
 from __future__ import annotations
 
@@ -463,8 +470,98 @@ def _g(x, *duong, md=0.0):
     return nut if nut is not None else md
 
 
+def _atr0(x, *duong):
+    """Doc mot truong khoang cach cua bang NHIEU luat - PHAI da qua `sang_atr`.
+
+    Loi goc 12/09: ban cu tra 0.0 IM LANG cho moi dict khac `{'atr': x}` - tuc
+    141/146 khai bao trong kho (don vi 'pip') roi thanh 0 het, va ca bang 14
+    luat sinh ra GIONG HET moc (1759 lenh / -108,76 / DD 1,3121). Nay: thieu
+    truong (path rong, x.get(...) tra None) van la 0.0 HOP LE (luat khong dung
+    truong do); nhung CO dict o do ma khong phai `{'atr': x}` (vd van con
+    `{'pip': 10}` chua quy doi) la loi va phai NEM ra, khong duoc lang le hoa 0.
+    """
+    v = _g(x, *duong)
+    if isinstance(v, dict):
+        if "atr" in v:
+            return _atr(v, 0)
+        raise KhongDichDuoc(
+            "CHUA_DO_DUOC: truong %s con don vi chua quy ve ATR: %s - goi "
+            "quan_tri_dsl.sang_atr(spec, atr, gia_diem) TRUOC khi dua vao "
+            "sinh_khoi_nhieu" % (".".join(duong), v))
+    return 0.0
+
+
+#: Cac cot cua bang NHIEU luat: ten mang MQL5 -> (ham rut so tu 1 spec, dinh dang).
+#: Tach thanh hang so de dung CHUNG cho ca sinh ma (`_hang`) lan cong kiem
+#: "bang toan 0" (`kiem_bang_luat`) - hai duong doc phai thay CUNG mot du lieu.
+_COT_BANG_NHIEU = (
+    ("QT_A_DatHue",    lambda x: _atr0(x, "dat_hue", "tu"), "%.4f"),
+    ("QT_A_TrKhoang",  lambda x: _atr0(x, "trailing", "khoang"), "%.4f"),
+    ("QT_A_TrBatDau",  lambda x: _atr0(x, "trailing", "bat_dau"), "%.4f"),
+    ("QT_A_TiaTu",     lambda x: _atr0(x, "tia", "tu"), "%.4f"),
+    ("QT_A_TiaTy",     lambda x: float(_g(x, "tia", "ty_le", md=0.5)), "%.4f"),
+    ("QT_A_NhoiKh",    lambda x: _atr0(x, "nhoi", "khoang"), "%.4f"),
+    ("QT_A_NhoiLx",    lambda x: float(_g(x, "nhoi", "lot_x", md=1.0)), "%.4f"),
+    ("QT_A_NhoiChieu", lambda x: 1 if x.get("nhoi") else 0, "%d"),
+    ("QT_A_ChotTien",  lambda x: _so(_g(x, "chot", "tien"), 0), "%.4f"),
+    ("QT_A_ChotAtr",   lambda x: _atr0(x, "chot", "muc"), "%.4f"),
+    ("QT_A_CatHoa",    lambda x: _atr0(x, "cat_hoa", "tu"), "%.4f"),
+    ("QT_A_TranVT",    lambda x: int(_g(x, "chan", "so_vi_the_toi_da", md=0)), "%d"),
+    ("QT_A_TranLot",   lambda x: float(_g(x, "chan", "lot_toi_da", md=0)), "%.4f"),
+    ("QT_A_TranLo",    lambda x: _so(_g(x, "chan", "lo_toi_da"), 0), "%.4f"),
+    ("QT_A_TranTuoi",  lambda x: int(_so(_g(x, "chan", "tuoi_gio_toi_da"), 0)), "%d"),
+)
+
+
+#: Cot LOAI TRU khoi phep thu "toan 0": day la ty le/he so co GIA TRI MAC DINH
+#: khac 0 (`ty_le=0.5`, `lot_x=1.0`) du luat co dung co che tuong ung hay khong
+#: - tu chung KHONG phai bang chung quan tri "cham" duoc vi the nao. Neu tinh
+#: ca hai cot nay thi moi hang deu co gia tri >0, va cong khong bao gio bat
+#: duoc mot luat rong that (da do 12/09 khi viet test: luat chi co 'chan.so_vi_
+#: the_toi_da=0' van "any(h)=True" vi TiaTy/NhoiLx mac dinh, ket qua la cong MU).
+_COT_MAC_DINH_KHAC_0 = ("QT_A_TiaTy", "QT_A_NhoiLx")
+
+
+def kiem_bang_luat(gia_tri: "dict[str, list[float]]") -> None:
+    """Cong (2): tu choi sinh file neu bang luat la 'bo phan im lang'.
+
+    Do 12/09: khi khau quy doi don vi bi bo qua, TOAN BO 14 luat ra CUNG mot bo
+    tham so (toan 0.0) - tester bao "14/15 luat GIONG HET nhau" va dieu do bi
+    doc NHAM thanh ket luan khoa hoc "AM" thay vi mot loi ky thuat o khau sinh
+    bang. Cong nay chan tai NGUON, truoc khi ghi bat ky file .mq5 nao:
+
+        1. mot luat (khac luat 0 - MOC tat quan tri, luon dung la toan 0) co
+           TOAN BO cot KICH HOAT bang 0 -> no khong the cham vao vi the nao;
+        2. moi luat cho CUNG mot bo tham so -> quy doi da chay nhung khong
+           luat nao khac luat nao (dau hieu ATR/gia_diem dau vao sai).
+
+    Ca hai deu la CHUA_DO_DUOC (khau do hong), khong phai AM (he thong te).
+    """
+    ten_cot = list(gia_tri)
+    if not ten_cot:
+        return
+    n = len(gia_tri[ten_cot[0]])
+    cot_kich_hoat = [c for c in ten_cot if c not in _COT_MAC_DINH_KHAC_0]
+    hang_kich_hoat = [tuple(gia_tri[c][i] for c in cot_kich_hoat) for i in range(1, n)]
+    hang_day_du = [tuple(gia_tri[c][i] for c in ten_cot) for i in range(1, n)]
+    if not hang_kich_hoat:
+        return
+    toan_0 = [i for i, h in enumerate(hang_kich_hoat, start=1) if not any(h)]
+    if toan_0:
+        raise KhongDichDuoc(
+            "CHUA_DO_DUOC: bang luat toan 0 - luat thu %s khong co tham so "
+            "kich hoat nao khac 0 sau khi quy ATR, quan tri se KHONG cham vao "
+            "vi the nao (kiem lai atr/gia_diem truyen vao sinh_khoi_nhieu)" % toan_0)
+    if len(set(hang_day_du)) == 1:
+        raise KhongDichDuoc(
+            "CHUA_DO_DUOC: bang luat toan 0 - tat ca %d luat cho CUNG mot bo "
+            "tham so, khong luat nao khac luat nao sau khi quy ATR (kiem lai "
+            "atr/gia_diem dau vao, hoac kho specs dau vao bi trung)" % len(hang_day_du))
+
+
 def sinh_khoi_nhieu(specs: list[dict], khung: str = "D1", magic: int = 0,
-                    lot_goc: float = 0.1) -> tuple[str, list[dict]]:
+                    lot_goc: float = 0.1, atr: float = None,
+                    gia_diem: float = 0.01) -> tuple[str, list[dict]]:
     """K luat quan tri trong MOT EA, chon bang `QT_MaLuat`. Tra (ma, luat da nap).
 
     Vi sao gop: mot luot tester ton ~130 giay boot va gan nhu 0 giay tinh, nen
@@ -473,44 +570,37 @@ def sinh_khoi_nhieu(specs: list[dict], khung: str = "D1", magic: int = 0,
 
     **Luat 0 LUON la moc tat het quan tri**, va no nam trong CUNG lan chay - so
     voi moc cua mot lan boot khac la so hai thu khac nhau.
+
+    `atr`/`gia_diem` LA BAT BUOC va phai do tren DU LIEU THAT cua symbol+khung
+    se chay (vd `chuoi_quan_tri._atr_cua`) - **khong duoc doan/mac dinh**. Do
+    12/09: goi ham nay ma khong quy doi don vi truoc lam ca 14 luat GIONG HET
+    moc [[cong-pass-phai-hieu-chuan-hai-chieu]].
     """
+    if not (isinstance(atr, (int, float)) and atr > 0):
+        raise KhongDichDuoc(
+            "CHUA_DO_DUOC: thieu atr thuc do (nhan %r) - goi voi atr>0 do tren "
+            "du lieu that cua symbol+khung se chay, khong duoc mac dinh 0" % (atr,))
+    from . import quan_tri_dsl as QD
     dat = [{"ten": "__tat_quan_tri__", "lop": "moc"}]
     for s in specs:
         nh = s.get("nhoi") or {}
         chan = s.get("chan") or {}
         if nh and not (chan.get("so_vi_the_toi_da") or chan.get("lot_toi_da")):
             continue          # nhoi khong tran = cong thuc chay tai khoan
-        dat.append(s)
+        dat.append(QD.sang_atr(s, atr, gia_diem))
     if len(dat) < 2:
         raise KhongDichDuoc("khong luat nao dich duoc")
 
-    def _hang(ten, lay, dinh="%.4f"):
-        d = ["   ArrayResize(%s, %d);" % (ten, len(dat))]
-        for i, x in enumerate(dat):
-            d.append("   %s[%d] = %s;" % (ten, i, dinh % lay(x)))
+    def _hang(ten, gia, dinh="%.4f"):
+        d = ["   ArrayResize(%s, %d);" % (ten, len(gia))]
+        for i, v in enumerate(gia):
+            d.append("   %s[%d] = %s;" % (ten, i, dinh % v))
         return "\n".join(d) + "\n"
 
-    def _atr0(x, *duong):
-        v = _g(x, *duong)
-        return _atr(v, 0) if isinstance(v, dict) and "atr" in v else 0.0
+    gia_tri = {ten: [lay(x) for x in dat] for ten, lay, _ in _COT_BANG_NHIEU}
+    kiem_bang_luat(gia_tri)          # cong (2): tu choi neu bang la "im lang"
 
-    nap = (
-        _hang("QT_A_DatHue",    lambda x: _atr0(x, "dat_hue", "tu"))
-        + _hang("QT_A_TrKhoang",  lambda x: _atr0(x, "trailing", "khoang"))
-        + _hang("QT_A_TrBatDau",  lambda x: _atr0(x, "trailing", "bat_dau"))
-        + _hang("QT_A_TiaTu",     lambda x: _atr0(x, "tia", "tu"))
-        + _hang("QT_A_TiaTy",     lambda x: float(_g(x, "tia", "ty_le", md=0.5)))
-        + _hang("QT_A_NhoiKh",    lambda x: _atr0(x, "nhoi", "khoang"))
-        + _hang("QT_A_NhoiLx",    lambda x: float(_g(x, "nhoi", "lot_x", md=1.0)))
-        + _hang("QT_A_NhoiChieu", lambda x: 1 if x.get("nhoi") else 0, "%d")
-        + _hang("QT_A_ChotTien",  lambda x: _so(_g(x, "chot", "tien"), 0))
-        + _hang("QT_A_ChotAtr",   lambda x: _atr0(x, "chot", "muc"))
-        + _hang("QT_A_CatHoa",    lambda x: _atr0(x, "cat_hoa", "tu"))
-        + _hang("QT_A_TranVT",    lambda x: int(_g(x, "chan", "so_vi_the_toi_da", md=0)), "%d")
-        + _hang("QT_A_TranLot",   lambda x: float(_g(x, "chan", "lot_toi_da", md=0)))
-        + _hang("QT_A_TranLo",    lambda x: _so(_g(x, "chan", "lo_toi_da"), 0))
-        + _hang("QT_A_TranTuoi",  lambda x: int(_so(_g(x, "chan", "tuoi_gio_toi_da"), 0)), "%d")
-    )
+    nap = "".join(_hang(ten, gia_tri[ten], dinh) for ten, _, dinh in _COT_BANG_NHIEU)
     ma = NHIEU % {"k": len(dat), "max": len(dat) - 1, "magic": magic,
                   "lot_goc": "%.2f" % lot_goc, "nap": nap}
     than = KHOI % {"ten": "kho gop", "lop": "gop", "luat": "gop", "khung": khung,

@@ -40,6 +40,7 @@ SINH RA cap file .mq5; viec dua vao tester di theo duong da co
 
 Chay:  python -m nhan.chuoi_quan_tri --kho
        python -m nhan.chuoi_quan_tri --dich 3
+       python -m nhan.chuoi_quan_tri --dich-nhieu
        python -m nhan.chuoi_quan_tri --cap <duong/dan/EA.mq5> --khai-bao 3
 """
 from __future__ import annotations
@@ -156,6 +157,34 @@ def dich_het(khung: str = "D1", ma: str = "US500CASH",
             "tu_choi": {k: len(v) for k, v in tu_choi.items()}}
 
 
+def dich_nhieu(so_luat: int = 14, khung: str = "D1", ma: str = "US500CASH",
+               magic: int = 0, lot_goc: float = 0.1, in_ra=print) -> dict:
+    """N khai bao dau tien qua cong -> MOT bang MQL5 (`QT_MaLuat` chon luat).
+
+    Day la duong `de_quan_tri.chen_tu_spec`/`_de_qt_ea_ngoai.py` dung de do
+    NHIEU luat trong MOT lan boot tester. No PHAI di qua `_atr_cua` (ATR THAT
+    tren `ma`+`khung`) roi `dich_mq5_qtvt.kiem_bang_luat` (cong (2)) - do 11/09
+    bo qua ca hai lam 14/15 luat sinh ra GIONG HET nhau va bi doc nham thanh
+    "AM" [[cong-pass-phai-hieu-chuan-hai-chieu]]. Neu kho khong co du luat qua
+    cong, hoac bang ra toan 0, ham nay NEM LOI - khong tra ve mot bang ho.
+    """
+    from nhan import dich_mq5_qtvt as DQ
+    from nhan import quan_tri_dsl as QD
+    ds = [c for c in kho(in_ra=None) if not QD.kiem_khai_bao(c)][:so_luat]
+    if len(ds) < 2:
+        raise DQ.KhongDichDuoc(
+            "CHUA_DO_DUOC: kho chi co %d khai bao qua cong (can >= 2)" % len(ds))
+    atr, diem = _atr_cua(ma, khung)
+    khoi, luat = DQ.sinh_khoi_nhieu(ds, khung=khung, magic=magic,
+                                    lot_goc=lot_goc, atr=atr, gia_diem=diem)
+    if in_ra:
+        in_ra("BANG %d LUAT (quy theo ATR %s %s = %.5f, gia_diem=%.4f)"
+              % (len(luat) - 1, ma, khung, atr, diem))
+        for i, x in enumerate(luat):
+            in_ra("  %2d  %s" % (i, str(x.get("ten"))[:40]))
+    return {"khoi": khoi, "luat": luat, "atr": atr, "gia_diem": diem}
+
+
 def cap_doi_chieu(duong_ea: str, chi_so: int = 0, khung: str = "D1",
                   in_ra=print) -> dict:
     """Sinh CAP file: ban GOC va ban CO QUAN TRI cua cung mot EA.
@@ -207,6 +236,9 @@ def main(argv: list[str]) -> int:
             i = int(argv[argv.index("--khai-bao") + 1])
         k = cap_doi_chieu(argv[argv.index("--cap") + 1], i)
         print(json.dumps(k, ensure_ascii=False, indent=1))
+        return 0
+    if "--dich-nhieu" in argv:
+        dich_nhieu()
         return 0
     kho()
     return 0

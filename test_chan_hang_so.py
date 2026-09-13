@@ -149,21 +149,45 @@ class CONG_PHAI_NAM_O_CUA(unittest.TestCase):
     """
 
     def test_nap_vao_mau_tu_choi_spec_khong_qua_cong(self):
+        """CHAY TREN KHO TAM, khong bao gio tren kho THAT.
+
+        Ban truoc cua bai kiem nay lam dung nhu vay: `goc = NP.doc_kho()` ->
+        `NP.luu_kho(goc + [hong])` -> `finally: NP.luu_kho(goc)` tren kho
+        SAN XUAT. No la mot trong hai nguyen nhan lam kho tut 2.975 -> 21 ngay
+        13/09/2026:
+
+          * chay 6 nhan song song thi hai nhan cung doc-sua-ghi mot file;
+          * neu mot lan `doc_kho()` hong (dia day -> `paging file too small`),
+            `goc` thanh `[]` va `finally` GHI DE ca kho bang danh sach rong;
+          * va ke ca khi khong hong, mot lan `finally` khong chay (tien trinh
+            bi giet) de lai `thu_khong_co_co_che` nam trong kho that - dung cai
+            lam bai kiem `test_khong_con_khai_bao_truot_chi_vi_co_che` do.
+
+        Bai kiem khong duoc sua du lieu san xuat. Do la luat, khong phai gu.
+        """
+        import json
+        import tempfile
+        from pathlib import Path as _P
         from nhan import mau as MAU
         MAU.MAU.pop("thu_khong_co_co_che", None)
         goc = NP.doc_kho()
         hong = {"ten": "thu_khong_co_co_che", "ho": "pha_vo", "chieu": 1,
                 "giu": 1, "vao": [_ve(GIA, ">", {"chi_bao": "gia",
                                                  "cot": "open"})]}
-        NP.luu_kho(goc + [hong])
-        try:
-            NP.nap_vao_mau()
-            self.assertNotIn("thu_khong_co_co_che", MAU.MAU,
-                             "spec thieu 'co_che' van vao duoc MAU.MAU")
-            self.assertIn("thu_khong_co_co_che", NP.BI_TU_CHOI_KHI_NAP)
-        finally:
-            NP.luu_kho(goc)
-            MAU.MAU.pop("thu_khong_co_co_che", None)
+        kho_that, moc_that = NP.KHO_CO_CHE, NP.MOC_CAO
+        with tempfile.TemporaryDirectory() as tm:
+            f = _P(tm) / "co_che_dsl.json"
+            f.write_text(json.dumps(goc + [hong], ensure_ascii=False),
+                         encoding="utf-8")
+            NP.KHO_CO_CHE, NP.MOC_CAO = f, f.with_suffix(".moc_cao")
+            try:
+                NP.nap_vao_mau()
+                self.assertNotIn("thu_khong_co_co_che", MAU.MAU,
+                                 "spec thieu 'co_che' van vao duoc MAU.MAU")
+                self.assertIn("thu_khong_co_co_che", NP.BI_TU_CHOI_KHI_NAP)
+            finally:
+                NP.KHO_CO_CHE, NP.MOC_CAO = kho_that, moc_that
+                MAU.MAU.pop("thu_khong_co_co_che", None)
 
     def test_ban_ghi_tu_choi_khong_bi_vut_di(self):
         """Mot muc bi tu choi im lang thi khong ai biet kho vua nho di, va con

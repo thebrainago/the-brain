@@ -1,0 +1,572 @@
+
+=== 2026-09-13 10:25:46 | pid 1436 | 2975 -> 2000 co che | ep=True ===
+  File "<string>", line 5, in <module>
+    NP.luu_kho(ds[:2000], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1842, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:39:58 | pid 10568 | 3034 -> 3033 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 249, in call_and_report
+    call = CallInfo.from_call(
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\unittest.py", line 410, in runtest
+    testcase(result=self)
+  File "C:\Python314\Lib\unittest\case.py", line 725, in __call__
+    return self.run(*args, **kwds)
+  File "C:\Python314\Lib\unittest\case.py", line 669, in run
+    self._callTestMethod(testMethod)
+  File "C:\Python314\Lib\unittest\case.py", line 615, in _callTestMethod
+    result = method()
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_chan_hang_so.py", line 165, in test_nap_vao_mau_tu_choi_spec_khong_qua_cong
+    NP.luu_kho(goc)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1842, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:44:39 | pid 17800 | 100 -> 85 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 95, in test_chot_bat_duoc_BAO_MON_DAN
+    NP.luu_kho(ds[:n])
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:44:39 | pid 17800 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 107, in test_ep_van_ghi_duoc_nho_that
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:44:39 | pid 17800 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 115, in test_co_ban_lui_sau_moi_lan_ghi
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:49:46 | pid 18192 | 3035 -> 3034 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 249, in call_and_report
+    call = CallInfo.from_call(
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\unittest.py", line 410, in runtest
+    testcase(result=self)
+  File "C:\Python314\Lib\unittest\case.py", line 725, in __call__
+    return self.run(*args, **kwds)
+  File "C:\Python314\Lib\unittest\case.py", line 669, in run
+    self._callTestMethod(testMethod)
+  File "C:\Python314\Lib\unittest\case.py", line 615, in _callTestMethod
+    result = method()
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_chan_hang_so.py", line 165, in test_nap_vao_mau_tu_choi_spec_khong_qua_cong
+    NP.luu_kho(goc)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:50:08 | pid 5888 | 3034 -> 3033 co che | ep=False ===
+  File "<string>", line 6, in <module>
+    print('bo rac:', n, '->', len(ds)); NP.luu_kho(ds)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:51:03 | pid 10568 | 100 -> 85 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 95, in test_chot_bat_duoc_BAO_MON_DAN
+    NP.luu_kho(ds[:n])
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1842, in luu_kho
+    _shutil.copy2(KHO_CO_CHE, KHO_CO_CHE.with_suffix(".json.lui"))
+
+=== 2026-09-13 10:51:04 | pid 10568 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 107, in test_ep_van_ghi_duoc_nho_that
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1842, in luu_kho
+    _shutil.copy2(KHO_CO_CHE, KHO_CO_CHE.with_suffix(".json.lui"))
+
+=== 2026-09-13 10:51:04 | pid 10568 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 115, in test_co_ban_lui_sau_moi_lan_ghi
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1842, in luu_kho
+    _shutil.copy2(KHO_CO_CHE, KHO_CO_CHE.with_suffix(".json.lui"))
+
+=== 2026-09-13 10:51:50 | pid 16876 | 100 -> 85 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 95, in test_chot_bat_duoc_BAO_MON_DAN
+    NP.luu_kho(ds[:n])
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:51:50 | pid 16876 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 107, in test_ep_van_ghi_duoc_nho_that
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:51:50 | pid 16876 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 115, in test_co_ban_lui_sau_moi_lan_ghi
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:53:47 | pid 10496 | 100 -> 85 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 95, in test_chot_bat_duoc_BAO_MON_DAN
+    NP.luu_kho(ds[:n])
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:53:47 | pid 10496 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 107, in test_ep_van_ghi_duoc_nho_that
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:53:47 | pid 10496 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 115, in test_co_ban_lui_sau_moi_lan_ghi
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:54:33 | pid 17524 | 100 -> 85 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 95, in test_chot_bat_duoc_BAO_MON_DAN
+    NP.luu_kho(ds[:n])
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:54:33 | pid 17524 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 107, in test_ep_van_ghi_duoc_nho_that
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 10:54:33 | pid 17524 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 115, in test_co_ban_lui_sau_moi_lan_ghi
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 11:02:33 | pid 2296 | 100 -> 85 co che | ep=False ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 95, in test_chot_bat_duoc_BAO_MON_DAN
+    NP.luu_kho(ds[:n])
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 11:02:33 | pid 2296 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 107, in test_ep_van_ghi_duoc_nho_that
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)
+
+=== 2026-09-13 11:02:33 | pid 2296 | 100 -> 5 co che | ep=True ===
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\test_kho_khong_teo.py", line 115, in test_co_ban_lui_sau_moi_lan_ghi
+    NP.luu_kho(ds[:5], ep=True)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\ngu_phap.py", line 1851, in luu_kho
+    _ghi_nhat_ky_ghi(cu, moi, ep)

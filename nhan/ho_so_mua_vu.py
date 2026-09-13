@@ -73,43 +73,103 @@ def _loi_suat(df: pd.DataFrame) -> pd.Series:
     return np.log(df["close"]).diff()
 
 
-def thu_da_sua(idx: pd.DatetimeIndex) -> tuple[np.ndarray, str]:
-    """Nhan THU da hieu chinh lech moc bar. -> (nhan, ghi_chu)
+#: Ty le bar phai cung MOT gio UTC de coi la "dong nhat" - duoi nguong nay thi
+#: khong the doc "gio goc" tu du lieu (mixed-source hoac qua nhieu lo hong).
+TY_LE_GIO_DONG_NHAT = 0.95
 
-    CAI BAY DA SAP O DAY (do 12/09/2026). Bar D1 cua nhieu cap FX **khong co bar
-    THU SAU**, trong khi "CHU NHAT" lai chiem du ~20% so bar voi bien do binh
-    thuong:
 
-        EURUSD D1   T2 20,1% · T3 20,1% · T4 20,0% · T5 20,1% · CN 19,7% · T6 0%
+def _gio_utc_chiem_da_so(idx: pd.DatetimeIndex) -> int | None:
+    """Gio UTC (0-23) ma >=95% so bar dung - `None` neu khong dong nhat.
 
-    Tuc bar duoc dong dau o gio may chu (UTC+2/+3) nen phien THU SAU roi sang
-    nhan CHU NHAT. Doc thang `dayofweek` thi "chu nhat la thu tot nhat" - 23/43
-    ma trong lan quet dau bao vay, va do la mot HIEN VAT NHAN, khong phai hieu
-    ung lich.
+    Day la TIN HIEU GOC (13/09/2026), thay cho viec doan qua ty le T6/CN. Kiem
+    tren ca 159 ma cua kho (`ma so_dong_bo` = idx.hour luc goi ham nay - LUON la
+    UTC vi `quet_mot` da tz_convert("UTC") truoc khi goi): dung MOT trong hai
+    gia tri suot toan bo lich su, khong tron lan:
+        gio = 21  (82/159 ma - toan bo la ban SAN/broker: XM/Exness/MetaQuotes)
+        gio = 0   (77/159 ma - Yahoo/nguon khac, da la ngay lich dung)
+    Khong co ma nao o giua hay doi gio giua cac doan lich su.
+    """
+    if len(idx) == 0:
+        return None
+    vc = pd.Series(idx.hour).value_counts(normalize=True)
+    if vc.empty or vc.iloc[0] < TY_LE_GIO_DONG_NHAT:
+        return None
+    return int(vc.index[0])
 
-    Phan biet voi bar CHU NHAT THAT: chi so CFD co bar CN that, nhung no la mot
-    phien MO LAI ngan - chi 4,2%% so bar va bien do 0,227%% so voi 1,3%% cua ngay
-    thuong (XM_US500CASH). Nen dau hieu la SO LUONG, khong phai ten.
 
-    HUONG DICH: tuan FX chay CN 22:00 -> T6 22:00 UTC. Bar dong dau CHU NHAT
-    chua phien THU HAI; bar dong dau THU NAM chua phien THU SAU. Tuc
-    **ngay_phien = ngay_dong_dau + 1**. Anh xa {CN,T2,T3,T4,T5} -> {T2,T3,T4,T5,T6},
-    dung nam ngay lam viec.
+def thu_da_sua(idx: pd.DatetimeIndex) -> tuple[np.ndarray | None, str]:
+    """Nhan THU da hieu chinh lech moc bar. -> (nhan, ghi_chu). `nhan=None`
+    nghia la KHONG the ket luan - goi phai coi day la CHUA_DO_DUOC, khong duoc
+    tu doan.
 
-    (Ban dau toi dich -2 va no cho ra T7/CN co phien day du - vo ly, vi thu bay
-    va chu nhat khong co phien. Dau hieu de nhan ra mot phep dich SAI: sau khi
-    dich van con ngay cuoi tuan mang gia tri binh thuong.)
+    SUA 13/09/2026 - CAI BAY CU (do 05/09-12/09): ban dau ham nay chi doan qua
+    THONG KE GIAN TIEP (ty le bar T6/CN thap/cao). Chu du an chi ra dung: mot
+    con so bps dung ma gan sai ngay thi KHONG viet duoc luat giao dich, va mot
+    canh bao ma khong ai doc thi khong khac gi khong co canh bao - 41/50 phat
+    hien mua vu M3 van "di qua" mang theo canh bao nay ma khong ai chan lai.
 
-    Luat: neu thu 6 gan nhu khong co (<2%%) ma CN co nhieu (>10%%) thi dich +1.
+    NGUYEN NHAN GOC (do truc tiep, khong doan qua % T6/CN nua): bar D1 cua kho
+    nay dong o **21:00 UTC** cho toan bo 82/159 ma nguon SAN (XM/Exness/
+    MetaQuotes) - day la NUA DEM gio may chu (UTC+3, khong doi theo DST) chu
+    khong phai nua dem UTC. Tuc ngay-lich cua chinh cai timestamp (tinh theo
+    UTC) LUON it hon ngay giao dich THAT mot ngay: bar dong dau "CN 21:00 UTC"
+    la nua dem THU HAI gio may chu, chua du lieu cua phien THU HAI. 77/159 ma
+    con lai (Yahoo va vai nguon khac) dong bar dung 00:00 - ngay lich la ngay
+    that, khong can dich.
+
+    Kiem tra cheo (13/09/2026, script doi chieu ca 159 ma): tin hieu GIO nay va
+    tin hieu THONG KE cu (T6<2%% va CN>10%%) khop nhau 100% - 0 sai lech ca hai
+    chieu. Nen ham nay VAN giu phep thong ke lam **co so xac nhan doc lap thu
+    hai**, khong bo di: neu hai tin hieu MAU THUAN nhau (vi du du lieu mix
+    nhieu nguon giua chung mot ma, hoac gio UTC la mot gia tri la khong phai
+    0 hay 21) thi day chinh la truong hop "khong chac" ma ban dau ham nay
+    khong co cach bat - tra `None` de nguoi goi ha ket qua ve CHUA_DO_DUOC
+    thay vi in lang le mot canh bao roi van tinh `dat` nhu khong co gi xay ra.
+
+    HUONG DICH khi gio xac nhan CAN dich (gio_utc >= 12, tuc bar dong buoi
+    toi UTC = nua dem gio may chu cua NGAY UTC KE TIEP): `ngay_phien =
+    ngay_dong_dau + 1`. Anh xa {CN,T2,T3,T4,T5} -> {T2,T3,T4,T5,T6}, dung nam
+    ngay lam viec. (Dich -2 se cho T7/CN mang gia tri phien day du - vo ly, do
+    la dau hieu mot phep dich SAI.)
     """
     t = idx.dayofweek.to_numpy()
     n = max(len(t), 1)
     p6 = float((t == 4).sum()) / n
     pcn = float((t == 6).sum()) / n
-    if p6 < 0.02 and pcn > 0.10:
-        return (t + 1) % 7, ("nhan thu lech mot ngay (khong co T6, CN chiem "
-                             "%.1f%%) - bar dong dau la ngay TRUOC phien, da +1"
-                             % (100 * pcn))
+    thong_ke_can_dich = p6 < 0.02 and pcn > 0.10
+
+    gio = _gio_utc_chiem_da_so(idx)
+    if gio is None:
+        goc_can_dich = None                 # khong doc duoc gio goc dong nhat
+    elif gio == 0:
+        goc_can_dich = False
+    elif gio >= 12:
+        goc_can_dich = True
+    else:
+        goc_can_dich = None                 # gio la (1..11) - mau hinh la, khong doan
+
+    if goc_can_dich is None:
+        if thong_ke_can_dich:
+            return None, ("MAU THUAN/KHONG RO: thong ke nghi lech nhan (T6=%.1f%%, "
+                          "CN=%.1f%%) nhung KHONG doc duoc gio UTC dong nhat de "
+                          "xac nhan tu goc - khong doan, CHUA_DO_DUOC"
+                          % (100 * p6, 100 * pcn))
+        return t, ""
+
+    if goc_can_dich != thong_ke_can_dich:
+        return None, ("MAU THUAN: gio goc (%s UTC) noi %s nhung thong ke T6/CN "
+                      "(T6=%.1f%%, CN=%.1f%%) noi %s - hai tin hieu doc lap "
+                      "khong khop, khong doan, CHUA_DO_DUOC"
+                      % (gio, "CAN dich" if goc_can_dich else "KHONG can dich",
+                         100 * p6, 100 * pcn,
+                         "CAN dich" if thong_ke_can_dich else "KHONG can dich"))
+
+    if goc_can_dich:
+        return (t + 1) % 7, ("nhan thu DA SUA +1 ngay: bar dong dau %02d:00 UTC "
+                             "= nua dem gio may chu (UTC+3), tuc ngay-lich UTC "
+                             "cua timestamp it hon ngay giao dich that 1 ngay. "
+                             "Xac nhan cheo bang thong ke (T6=%.1f%%, CN=%.1f%%)."
+                             % (gio, 100 * p6, 100 * pcn))
     return t, ""
 
 
@@ -214,9 +274,18 @@ def quet_mot(ma: str, khung: str = "D1") -> dict:
     ra["M1_thang_trong_nam"] = _nhom(r, idx.month.to_numpy(), "thang")
     ra["M2_tuan_giao_thang"] = _nhom(r, giao_thang, "giao_thang", nhom_deu=False)
     thu, ghi = thu_da_sua(idx)
-    ra["M3_ngay_trong_tuan"] = _nhom(r, thu, "thu")
-    if ghi:
-        ra["M3_ngay_trong_tuan"]["canh_bao_nhan"] = ghi
+    if thu is None:
+        # CHOT CHAN (13/09/2026): khong con duong nao de M3 "dat=True" mang
+        # theo mot nhan thu KHONG XAC DINH duoc - chi mot canh_bao_nhan ma
+        # khong ai chan da de lot 41/50 phat hien truoc do. Ha thang ve
+        # CHUA_DO_DUOC (ba trang thai cua du an: DAT/AM/CHUA_DO_DUOC - khau do
+        # hong LUON la CHUA_DO_DUOC, khong bao gio la AM/DAT).
+        ra["M3_ngay_trong_tuan"] = {"trang_thai": "CHUA_DO_DUOC", "vi_sao": ghi,
+                                    "dat": False}
+    else:
+        ra["M3_ngay_trong_tuan"] = _nhom(r, thu, "thu")
+        if ghi:
+            ra["M3_ngay_trong_tuan"]["canh_bao_nhan"] = ghi
     if len(set(idx.hour)) > 1:
         ra["M4_gio_trong_ngay"] = _nhom(r, idx.hour.to_numpy(), "gio")
     ra["diem_thang_PIT"] = _diem_pit(r, idx.month.to_numpy())

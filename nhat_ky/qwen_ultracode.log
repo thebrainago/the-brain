@@ -411,3 +411,29 @@ dung: `q dung` (hoac tao file lab/DUNG_QWEN) | Ctrl-C cung an toan
   ~ 23:21:41 | san sang 8 | CPU   65% / muc tieu 62%  |  con -0.5 loi  |  dang chay 0  [trong]
   ~ 23:23:41 | san sang 8 | CPU   65% / muc tieu 62%  |  con -0.5 loi  |  dang chay 0  [trong]
   ~ 23:25:41 | san sang 8 | CPU   64% / muc tieu 62%  |  con -0.4 loi  |  dang chay 0  [trong]
+  ~ 23:27:41 | san sang 8 | CPU   64% / muc tieu 62%  |  con -0.3 loi  |  dang chay 0  [trong]
+  [>] M0_don_mo_coi          NHE    pid 22352  Don tien trinh mo coi (thu lam he TU TE   (ok (con 0.7 loi))
+  [>] E1_evo_bao_xa          NHE    pid 21576  EVO do suc khoe + bao ra Telegram khi ta  (ok (con 0.7 loi))
+  [x] M0_don_mo_coi          DAT  |  chay xong, ma thoat 0
+  [x] E1_evo_bao_xa          DAT  |  chay xong, ma thoat 0
+  [>] S2_mql5_code_base      MANG   pid 18544  THUONG TRUC: tai ma nguon MQL5 Code Base  (ok (con 2.5 loi))
+  [>] TT_san_nguon           MANG   pid 8780   THUONG TRUC: day chuyen san nguon moi (s  (ok (con 2.5 loi))
+  qwen> Ket qua `E1_evo_bao_xa` cho thay he thong EVO dang on dinh tot: 22/22 chi so TOT, 0 van de XAU. Khau nay la "bao ca" - chi kiem tra va bao xa khi co loi, nen ket qua "0 van de" la trang thai binh thuong, khong phai loi.
+         
+         Khau nay khong mo ra viec tiep theo ro rang vi he dang chay tot. Neu muon tiep tuc, can xem bang vieh de xem co viec nao dang cho nao can xu ly khong.
+  [x] S2_mql5_code_base      AM  |  ghi_moi = 0, khong vuot 0 - lan chay nay KHONG them duoc gi (khac han 'chay hong')
+  qwen> Da hoan tat 4 buoc:
+         
+         **(1) Ket qua `M0_don_mo_coi`:**
+         - Trang thai: XONG, ma thoat: 0
+         - Cong: **DAT** (chay xong, khong loi)
+         - So do duoc: `so_dong = 0`
+         - Log: "khong co tien trinh mo coi (mien 5 cay dieu phoi)"
+         
+         **(2) File bao cao:** Khong co file JSON/MD nao tu viec nay trong `lab/reports/`. Chi co `don_bay.log` (tu viec cu).
+         
+         **(3) Nhat ky da duoc viet:** Ket qua AM that su — 0 tien trinh tim thay sau 1 phep thu toan bo tap du lieu. Gia thuyet "co che dieu phoi tu te" bi bac bo.
+         
+         **(4
+  [>] TT_boc                 LLM    pid 17732  THUONG TRUC: qwen doc toan van + boc co   (ok (con 8.4 loi))
+  ~ 23:29:41 | san sang 3 | CPU   20% / muc tieu 62%  |  con  4.4 loi  |  dang chay 2  [LLM:1, MANG:1]
