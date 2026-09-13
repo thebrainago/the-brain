@@ -692,6 +692,15 @@ def main(argv: list[str]) -> int:
             sp = int(argv[i + 1]); i += 2
         elif a == "--tong-ket":
             tong_ket(); return 0
+        elif a in ("--khung", "-k"):
+            # `--khung` chua bao gio duoc bat: no roi xuong nhanh `else` nen CA
+            # "--khung" LAN "D1" thanh ten khung. Chay duoc chi vi
+            # `khung_dung_duoc` lang le bo cai khong co du lieu - va ban
+            # TO_HOP.json cu ghi lai dung dau vet: `"khung": ["--khung","D1"]`.
+            kh.append(argv[i + 1]); i += 2
+        elif a.startswith("-"):
+            raise SystemExit("khong hieu tham so %r. Dung: --khung D1 [--ma N] "
+                             "[--co-che N] [--tien-trinh N] [--tong-ket]" % a)
         else:
             kh.append(a); i += 1
     ket = chay(tuple(kh) if kh else KHUNG_MAC_DINH, gh_ma, gh_cc, sp)

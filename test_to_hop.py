@@ -341,3 +341,24 @@ def test_cong_tat_duoc_de_do_lai():
     kien chon trong ham - khong thi khong ai do lai duoc anh huong cua no."""
     from nhan import to_hop as TH
     assert isinstance(TH.DOI_CHI_PHI_DO_DUOC, bool)
+
+
+def test_cli_hieu_tham_so_khung():
+    """`--khung D1` truoc day roi xuong nhanh `else` nen CA "--khung" lan "D1"
+    thanh ten khung - ban TO_HOP.json cu ghi lai dau vet:
+    `"khung": ["--khung", "D1"]`. Chay duoc chi vi khung rac bi bo lang le."""
+    import pytest
+
+    from nhan import to_hop as TH
+    thay = {}
+    goc = TH.chay
+    TH.chay = lambda kh, a, b, c: thay.setdefault("kh", kh) or {}
+    goc_tk = TH.tong_ket
+    TH.tong_ket = lambda *a, **k: None
+    try:
+        TH.main(["--khung", "D1"])
+        assert thay["kh"] == ("D1",)
+        with pytest.raises(SystemExit):
+            TH.main(["--khhung", "D1"])
+    finally:
+        TH.chay, TH.tong_ket = goc, goc_tk
