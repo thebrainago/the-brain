@@ -179,3 +179,57 @@ def test_kiem_bang_luat_bo_qua_cot_mac_dinh_khac_0():
     }
     with pytest.raises(DQ.KhongDichDuoc):
         DQ.kiem_bang_luat(gia_tri)
+
+
+# ------------------------------------------------------- CON SO PHAI KHA DI
+#
+# Them 13/09/2026. Sua quy doi don vi (pip -> ATR) lam bang luat het toan 0,
+# nhung no CHUA du: con so DAU VAO van co the la rac. Do tren 128 gia tri
+# khoang cach cua kho that:
+#
+#   * 4 khai bao co `{"pip": False}` / `{"pip": True}` - mot input kieu BOOL
+#     cua EA bi boc nham lam do lon. `float(False)` = 0.0 nen no lang le thanh
+#     0 ATR: dung hinh dang cua bo phan im lang ma ca phien 12/09 di truy.
+#   * 11/128 gia tri duoi 1 pip, ke ca `0.0` va `0,05 pip`.
+#
+# Phan vi kho: p10=1, p50=45, p90=500, max=6.000 pip - nen khoang 1..5.000
+# khong cat mat phan than cua phan bo.
+
+
+@pytest.mark.parametrize("gia", [True, False])
+def test_bool_trong_truong_khoang_cach_bi_chan(gia):
+    loi = QD.kiem_con_so({"ten": "x", "trailing": {"khoang": {"pip": gia}}})
+    assert loi, "pip=%r phai bi chan" % gia
+    assert "khong phai mot con so" in loi[0]
+
+
+@pytest.mark.parametrize("gia", [0.0, 0.05, 0.3, 0.99])
+def test_khoang_cach_qua_nho_bi_chan(gia):
+    assert QD.kiem_con_so({"ten": "x", "trailing": {"khoang": {"pip": gia}}})
+
+
+@pytest.mark.parametrize("gia", [1.0, 20, 45, 500, 5000])
+def test_khoang_cach_binh_thuong_di_qua(gia):
+    """Cong phai HIEU CHUAN HAI CHIEU: mot cong tu choi TAT CA cho so lieu y
+    het mot cong tot."""
+    assert QD.kiem_con_so(
+        {"ten": "x", "trailing": {"khoang": {"pip": gia}}}) == []
+
+
+def test_khong_cham_vao_truong_KHONG_phai_khoang_cach():
+    """`tia.ty_le` = 0,5 va `nhoi.lot_x` = 1,0 la TY LE chu khong phai khoang
+    cach - chan chung theo nguong pip la sai loai."""
+    assert QD.kiem_con_so(
+        {"ten": "x", "tia": {"ty_le": 0.5}, "nhoi": {"lot_x": 1.0}}) == []
+
+
+def test_kho_that_phan_duoc_hai_nhom():
+    """Lay thu chac chan CO ra thu truoc khi tin mot con so.
+
+    Cong nay phai chan MOT PHAN kho - chan sach hoac khong chan cai nao deu
+    nghia la no khong do gi.
+    """
+    ds = QD.doc_kho()
+    assert len(ds) > 50, "kho quan tri rong - bo do mu"
+    chan = sum(1 for d in ds if QD.kiem_con_so(d))
+    assert 0 < chan < len(ds), "chan %d/%d - cong khong do gi" % (chan, len(ds))

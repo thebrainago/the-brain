@@ -70,6 +70,7 @@ input int    InpATRKy     = 14;
 input double InpSLCung    = 3.0;    // luoi an toan: SL cung, boi ATR
 input int    InpGiuToiDa  = 120;    // luoi an toan: tran so nen giu
 input int    InpNhoiMax   = 5;      // tran so vi the cho ho luoi/dca
+input double InpLoRongPct = 25.0;   // luoi an toan: tran LO TROI, %% von
 
 CTrade   trade;
 int      h_atr = INVALID_HANDLE;
@@ -509,6 +510,14 @@ void OnTick()
       g_bar_vao++;
       //--- LUOI AN TOAN, ap cho MOI ho khong tru ho nao.
       if(g_bar_vao >= InpGiuToiDa) { DongHet(); g_bar_vao = 0; return; }
+      //--- TANG 3: tran LO TROI. Duy nhat tang nay cham duoc ho `luoi_dca`,
+      //--- vi ho do co y khong dat SL tung lenh.
+      if(InpLoRongPct > 0.0)
+        {
+         double von = AccountInfoDouble(ACCOUNT_BALANCE);
+         if(von > 0.0 && LaiRong() < -von * InpLoRongPct / 100.0)
+           { DongHet(); g_bar_vao = 0; return; }
+        }
       if(InpHoQT == QT_THOI_GIAN && g_bar_vao >= (int)MathMax(InpP1, 1.0))
         { DongHet(); g_bar_vao = 0; return; }
       //--- Mot chan khop thi huy chan con lai.

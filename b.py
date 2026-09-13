@@ -18,6 +18,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b trang-thai      bang dieu khien (van hanh cua dieu phoi)
     b chay / b dung   bat / dung dieu phoi 24/7
     b canary          tu kiem engine (5 canary)
+    b mach [--be]     MACH DAP 9 chang duong ong (--be = mutation audit)
     b phan-loai       389 file ma -> 4 lan + BANG SUAT BOC tung lan
     b chi-bao [N]     boc co che tu file CHI BAO (N = test me; --that = chay het)
     b loc [--khung K] loc TINH truoc pheu: suy bien / trung hanh vi / spec hong
@@ -153,6 +154,20 @@ def c_test_me(a):
     song du lau, va me nao chet ta BIET la me nao.
     """
     return chay([PY, LAB / "chay_test_tung_me.py", *a], cwd=LAB)
+
+
+def c_mach(a):
+    """b mach [--be] - MACH DAP DUONG ONG: 9 chang, ~1,5 phut.
+
+    `b canary` hoi "engine backtest con dung khong". `b mach` hoi "**day
+    chuyen co dang chay khong**" - o dia, WAL, kho co che, pheu HTML, pheu ung
+    vien, duong LLM, bang quan tri, lich su tester, engine.
+
+    `--be` chay mutation audit: co tinh be tung chang roi doi mach phai BAT.
+    Trong luot chay dau tien no tim ra HAI chang TOT GIA, mot trong so do nam
+    ngay trong chinh no.
+    """
+    return chay([PY, "-m", "nhan.mach", *a], cwd=LAB)
 
 
 def c_bench_qt(a):
@@ -741,7 +756,7 @@ LENH = {
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
     "quan-tri": c_quan_tri, "qt": c_quan_tri,
-    "bench-qt": c_bench_qt, "go-html": c_go_html,
+    "bench-qt": c_bench_qt, "go-html": c_go_html, "mach": c_mach,
     "test-me": c_test_me,
     "luan-lenh": c_luan_lenh, "chuyen": c_chuyen,
     "dau-chan": c_dau_chan, "im-lang": c_im_lang,

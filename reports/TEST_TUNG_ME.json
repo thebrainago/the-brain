@@ -1,101 +1,27 @@
 {
- "xanh": 0,
- "do": 0,
+ "xanh": 1687,
+ "do": 1,
  "bo_qua": 0,
  "loi": 0,
- "so_me": 11,
+ "so_me": 17,
  "me_chet": [
   {
-   "me": 3,
+   "me": 12,
    "file": [
-    "test_cong_do_phan_giai.py",
-    "test_cong_fdr_v2.py",
-    "test_cong_ra_tien.py",
-    "test_cua_vao.py",
-    "test_da_thoi_dai.py",
-    "test_danh_muc.py",
-    "test_dap_quan_tri.py",
-    "test_dau_chan.py",
-    "test_day_chuyen.py",
-    "test_day_chuyen_quantlab.py",
-    "test_de_quan_tri.py",
-    "test_dich_mq5.py"
+    "test_mimic_ban_do.py",
+    "test_muc_tieu_va_noi_sinh.py",
+    "test_nen.py",
+    "test_neo_truot_x10.py",
+    "test_ngoai_sinh.py",
+    "test_ngu_phap_toan_hang.py",
+    "test_ngu_phap_trung.py",
+    "test_nguon_bai_viet.py"
    ],
-   "duoi": ": Not properly terminated\n[gw9] node down: Not properly terminated\n[gw10] node down: Not properly terminated\n[gw11] node down: Not properly terminated\n[gw12] node down: Not properly terminated\n[gw13] node down: Not properly terminated\n[gw14] node down: Not properly terminated\n\nno tests ran in 38.81s"
-  },
-  {
-   "me": 4,
-   "file": [
-    "test_dieu_phoi_chet.py",
-    "test_dieu_phoi_control.py",
-    "test_dns_vuot.py",
-    "test_do_im_lang.py",
-    "test_do_luc.py",
-    "test_do_on_dinh.py",
-    "test_do_phan_giai_va_phien.py",
-    "test_do_tai_nguyen.py",
-    "test_doc_hieu.py",
-    "test_doc_hieu_viet.py",
-    "test_doc_ma.py",
-    "test_don_bay.py"
-   ],
-   "duoi": ": Not properly terminated\n[gw9] node down: Not properly terminated\n[gw10] node down: Not properly terminated\n[gw11] node down: Not properly terminated\n[gw12] node down: Not properly terminated\n[gw13] node down: Not properly terminated\n[gw14] node down: Not properly terminated\n\nno tests ran in 39.95s"
-  },
-  {
-   "me": 5,
-   "file": [
-    "test_don_bay_va_carry.py",
-    "test_don_mo_coi.py",
-    "test_ea_tu_dong.py",
-    "test_evo.py",
-    "test_evo_bao_xa.py",
-    "test_evo_phanh.py",
-    "test_evolution.py",
-    "test_finder_nguon_moi.py",
-    "test_ghi_so_fdr.py",
-    "test_gian_doan.py",
-    "test_go_html.py",
-    "test_gop_lop.py"
-   ],
-   "duoi": ": Not properly terminated\n[gw9] node down: Not properly terminated\n[gw10] node down: Not properly terminated\n[gw11] node down: Not properly terminated\n[gw12] node down: Not properly terminated\n[gw13] node down: Not properly terminated\n[gw14] node down: Not properly terminated\n\nno tests ran in 40.81s"
-  },
-  {
-   "me": 6,
-   "file": [
-    "test_han_ngach_nguon.py",
-    "test_hang_doi.py",
-    "test_hien_phap.py",
-    "test_hieu_chuan_to_hop.py",
-    "test_hinh_dang_vs_null.py",
-    "test_hinh_hoc.py",
-    "test_ho_so_mua_vu.py",
-    "test_ho_so_quantlab.py",
-    "test_ho_so_symbol.py",
-    "test_ho_so_tai_san.py",
-    "test_hop_dong.py",
-    "test_ket_qua_hoat_dong.py"
-   ],
-   "duoi": ": Not properly terminated\n[gw9] node down: Not properly terminated\n[gw10] node down: Not properly terminated\n[gw11] node down: Not properly terminated\n[gw12] node down: Not properly terminated\n[gw13] node down: Not properly terminated\n[gw14] node down: Not properly terminated\n\nno tests ran in 30.25s"
-  },
-  {
-   "me": 10,
-   "file": [
-    "test_seeker_artifacts.py",
-    "test_so_concurrency_v2.py",
-    "test_so_sach_fdr.py",
-    "test_sua_bar_hong.py",
-    "test_suy_giam.py",
-    "test_suy_nguoc.py",
-    "test_tai_khoan_nen_tang.py",
-    "test_tham_so_dsl_va_lan_can.py",
-    "test_thu_hoi_thanh_phan.py",
-    "test_tin_hieu_mql5.py",
-    "test_tinh_cach.py",
-    "test_to_hop.py"
-   ],
-   "duoi": "frozen importlib._bootstrap_external>\", line 851, in get_code\n  File \"<frozen importlib._bootstrap_external>\", line 950, in get_data\nobject address  : 00000234EF92DF00\nobject refcount : 3\nobject type     : 00007FFC4CFE0860\nobject type name: MemoryError\nobject repr     : MemoryError()\nlost sys.stderr"
+   "duoi": "QUA GIO 900s"
   }
  ],
- "bai_do": [],
- "giay": 257.4
+ "bai_do": [
+  "test_ma_nguon.py::ThuHoiSaiLoai::test_bo_cuoc_sau_TRAN_lan_that_bai_lien_tiep"
+ ],
+ "giay": 1948.6
 }

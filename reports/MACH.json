@@ -1,0 +1,95 @@
+{
+ "chang": [
+  {
+   "chang": "dia",
+   "gia_tri": 30.8,
+   "trang_thai": "TOT",
+   "mo_ta": "30.8 GB trong (can >= 2.0)",
+   "goi_y": "b don-dia; xoa Tester/logs cua MT5; cache trinh duyet"
+  },
+  {
+   "chang": "wal",
+   "gia_tri": 0,
+   "trang_thai": "TOT",
+   "mo_ta": "nao.db-wal 0 MB (nguong 500)",
+   "goi_y": "python -m nhan.gop_wal"
+  },
+  {
+   "chang": "kho_co_che",
+   "gia_tri": 3037,
+   "trang_thai": "TOT",
+   "mo_ta": "3037 co che (moc cao nhat 3037, san 2429)",
+   "goi_y": "git show HEAD:lab/config/co_che_dsl.json | dem; hoac config/co_che_dsl.json.lui"
+  },
+  {
+   "chang": "pheu_html_tho",
+   "gia_tri": 16,
+   "trang_thai": "TOT",
+   "mo_ta": "16 ban HTML tho chua go (nguong 300)",
+   "goi_y": "b go-html 500"
+  },
+  {
+   "chang": "pheu_ung_vien",
+   "gia_tri": 80,
+   "trang_thai": "TOT",
+   "mo_ta": "80/120 ban dau bang qua bo loc (ton 3806)",
+   "goi_y": "b go-html; kiem boc_llm.DAU_HIEU_LUAT co phu lop nguon moi"
+  },
+  {
+   "chang": "duong_llm",
+   "gia_tri": "qwen3.7-flash",
+   "trang_thai": "TOT",
+   "mo_ta": "openai | ok | da goi 1744/20000",
+   "goi_y": "kiem cc-switch provider + OPENAI_API_KEY"
+  },
+  {
+   "chang": "bang_quan_tri",
+   "gia_tri": "59/75",
+   "trang_thai": "TOT",
+   "mo_ta": "59/75 khai bao co con so dung duoc",
+   "goi_y": "0 hoac tat ca deu qua -> cong khong do gi"
+  },
+  {
+   "chang": "tester_lich_su",
+   "gia_tri": 1,
+   "trang_thai": "TOT",
+   "mo_ta": "1/3 ma mau co lich su (EURUSD)",
+   "goi_y": "mo MT5, dang nhap tai khoan, chay mot luot de tai lich su"
+  },
+  {
+   "chang": "engine",
+   "gia_tri": true,
+   "trang_thai": "TOT",
+   "mo_ta": "canary engine dat",
+   "goi_y": "b canary  (xem ca mutation audit)"
+  }
+ ],
+ "do": 0,
+ "chua_do_duoc": 0,
+ "giay": 99.8,
+ "mutation": {
+  "be": [
+   [
+    "dia",
+    true
+   ],
+   [
+    "kho_co_che",
+    true
+   ],
+   [
+    "bang_quan_tri",
+    true
+   ],
+   [
+    "pheu_html_tho",
+    true
+   ],
+   [
+    "engine",
+    true
+   ]
+  ],
+  "khong_nhay": []
+ }
+}

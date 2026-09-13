@@ -347,7 +347,42 @@ def _bao_mau_con_thieu(bao: dict) -> None:
 TRAN_THU_LAI_SAI_LOAI = 3
 
 
-def thu_hoi_sai_loai(gioi_han: int = 30, ngan_sach_giay: float = 180.0) -> dict:
+def _duong_ra_song(chu: str = "https://www.mql5.com/en/code/", giay: int = 12) -> bool:
+    """Duong ra toi mql5 con song khong - hoi THANG, khong suy tu so lan hong.
+
+    Phan biet nay la thu duy nhat ngan mot su co mang tam thoi loai vinh vien
+    ca mot lop nguon. Xem ghi chu trong `thu_hoi_sai_loai`.
+    """
+    import requests
+    try:
+        r = requests.get(chu + "43355", timeout=giay,
+                         headers={"User-Agent": "Mozilla/5.0"})
+        return r.status_code == 200 and len(r.text) > 5000
+    except Exception:
+        return False
+
+
+def go_bo_cuoc_do_mang(in_ra=print) -> int:
+    """Xoa dau `sai_loai:N` cho cac URL bi loai trong mot dot MANG HONG.
+
+    Chay sau khi da sua duong ra. Do 13/09: 29 URL bi loai oan vi WARP.
+    """
+    if not _duong_ra_song():
+        in_ra("duong ra VAN HONG - chua go bo cuoc (go bay gio se loai lai)")
+        return 0
+    n = SO.chay("UPDATE noi_dung SET ket_boc=NULL WHERE ket_boc LIKE 'sai_loai:%'")
+    in_ra("da go dau bo cuoc cho %d ban ghi" % n)
+    return n
+
+
+#: Giay nghi giua hai luot tai. Do 13/09: chay 0,3 giay/luot thi mql5 cho qua
+#: ~50 luot roi chan ca IP; nghi 8 giay thi di duoc lau hon nhieu. Mot bo thu
+#: thap chay hang gio KHONG duoc voi - voi la tu chan duong cua chinh minh.
+NHIP_TAI_GIAY = 8.0
+
+
+def thu_hoi_sai_loai(gioi_han: int = 30, ngan_sach_giay: float = 180.0,
+                     nhip_giay: float | None = None) -> dict:
     """Thu tai lai PAYLOAD THAT cho cac `noi_dung` da bi luu SAI LOAI.
 
     VI SAO CAN HAM NAY (rieng voi `thu_hoi_khong_doc_duoc`, von lam viec voi
@@ -371,6 +406,16 @@ def thu_hoi_sai_loai(gioi_han: int = 30, ngan_sach_giay: float = 180.0) -> dict:
         "ORDER BY id DESC LIMIT ?", max(int(gioi_han) * 4, 1))
     bao = {"xem": 0, "khop_mau": 0, "thu_lai": 0, "sua_duoc": 0,
           "bo_cuoc": 0, "van_sai": 0}
+    # HOI DUONG RA MOT LAN MOI LUOT, khong phai moi lan that bai.
+    #
+    # Ban dau goi `_duong_ra_song()` ngay trong nhanh that bai. Hai cai gia:
+    # mot luot 40 URL hong se ton them 40 luot HTTP, va - te hon - bai kiem
+    # `test_bo_cuoc_sau_TRAN_lan_that_bai_lien_tiep` bong phu thuoc vao MANG
+    # THAT, nen no do ngay khi mql5 dang bop toc do. Mot bai kiem don vi phai
+    # xanh ke ca khi rut day mang.
+    #
+    # `None` = chua hoi. Chi hoi khi that su gap that bai dau tien.
+    _song = None
     for r in ds:
         if bao["thu_lai"] >= gioi_han or time.time() - t0 > ngan_sach_giay:
             break
@@ -414,13 +459,33 @@ def thu_hoi_sai_loai(gioi_han: int = 30, ngan_sach_giay: float = 180.0) -> dict:
                 pass
         else:
             bao["van_sai"] += 1
-            moi = so_lan_truoc + 1
-            with SO.ket_noi() as cn:
-                cn.execute("UPDATE noi_dung SET ket_boc=? WHERE id=?",
-                          (f"sai_loai:{moi}", r["id"]))
-            if moi >= TRAN_THU_LAI_SAI_LOAI:
-                bao["bo_cuoc"] += 1
-        time.sleep(0.3)
+            # MOT SU CO MANG KHONG DUOC DOT HAN MUC THU LAI.
+            #
+            # Do 13/09/2026, va no da lam mat viec that: Cloudflare WARP dang
+            # BAT tren may nay, va mql5.com chan dai IP cua WARP. Suat thu hoi
+            # tut 88% -> 24% -> 0/25 va **29 URL hoan toan tot bi day len
+            # `sai_loai:3` roi loai VINH VIEN**. Tat WARP thi chinh trang do
+            # tra 200 voi 62.851 ky tu.
+            #
+            # Nen dem lan that bai phai hoi "hong vi NOI DUNG hay vi DUONG
+            # RA": chi noi dung moi tinh. Cung y voi `thu_hoi_github`, va cung
+            # ho voi luat lon cua du an - khau do hong khong duoc doc thanh
+            # ket qua am.
+            if _song is None:
+                _song = _duong_ra_song()
+            if _song:
+                moi = so_lan_truoc + 1
+                with SO.ket_noi() as cn:
+                    cn.execute("UPDATE noi_dung SET ket_boc=? WHERE id=?",
+                               (f"sai_loai:{moi}", r["id"]))
+                if moi >= TRAN_THU_LAI_SAI_LOAI:
+                    bao["bo_cuoc"] += 1
+            else:
+                bao["mang_hong"] = bao.get("mang_hong", 0) + 1
+                if bao["mang_hong"] >= 5:
+                    bao["chan_mang"] = True
+                    break
+        time.sleep(NHIP_TAI_GIAY if nhip_giay is None else nhip_giay)
     if bao["xem"]:
         SO.ghi_chi_so("ma_nguon_thu_hoi_sai_loai", float(bao["sua_duoc"]), bao)
     return bao
@@ -431,3 +496,183 @@ if __name__ == "__main__":
     SO.khoi_tao()
     r = thu_thap(so_bai=3)
     print(json.dumps(r, ensure_ascii=False, indent=1)[:3000])
+
+
+# ============================================ THU HOI PAYLOAD TU GITHUB
+#
+# Cung ho voi `thu_hoi_sai_loai` (mql5) nhung MOT LOP NGUON KHAC va, quan
+# trong hon, mot lop DANG VOI TOI DUOC.
+#
+# Do 13/09/2026:
+#   * `mql5.com` **bi chan**: `RemoteDisconnected` qua duong thuong, va **403**
+#     qua `dns_vuot`. Cloudflare WARP da BAT SAN ma van chan - tuc ghi chu cu
+#     "bat WARP la thong" khong con dung. Suat thu hoi tut 88% -> 24% -> 0/25
+#     roi ton kho dung im. Do la `CHUA_DO_DUOC`, khong phai het viec.
+#   * `raw.githubusercontent.com` **thong** (200, 0,3 giay), va `toan_van.
+#     tu_github` keo ve 40.213 byte ma that tu `smart-money-concepts`.
+#   * Trong kho co **2.998 ban ghi github** dang o dang README da go HTML,
+#     khong mot dong ma nao.
+#
+# Nen khi mot duong bi chan, viec dung khong phai la quay vong tren no - la
+# di duong con lai. Ham nay lam viec do.
+
+#: Dau hieu MA CHIEN LUOC cho ngon ngu KHONG phai MQL (python/pine/c++).
+#: `co_dau_hieu_ma_that` chi biet API cua MQL nen no bao "khong phai ma" cho
+#: mot file `smc.py` 40 KB - dung cai bay bo do mu ma lab da gap ba lan.
+DAU_HIEU_MA_CHUNG = (
+    "def ", "class ", "import ", "strategy.entry", "ta.crossover",
+    "self.buy", "SetHoldings", "OrderSend", "OnTick", "#include",
+)
+
+
+def co_dau_hieu_ma_bat_ky(van_ban: str) -> bool:
+    vb = van_ban or ""
+    return co_dau_hieu_ma_that(vb) or sum(d in vb for d in DAU_HIEU_MA_CHUNG) >= 2
+
+
+TRAN_THU_LAI_GITHUB = 2
+
+#: Tu khoa trong TEN repo/duong dan cho biet no co dinh den giao dich khong.
+#: Chi doc TEN - khong ton mot luot API nao, trong khi tran la 60 luot/gio.
+TU_KHOA_GIAO_DICH = (
+    "trad", "forex", "mql", "metatrader", "strategy", "backtest", "quant",
+    "indicator", "candle", "ohlc", "ticker", "stock", "crypto", "algo",
+    "finance", "market", "invest", "signal", "-ea", "_ea", "bot", "price",
+    "fx", "option", "future", "hedge", "portfolio", "trend", "scalp",
+)
+
+
+def _lien_quan_giao_dich(url: str) -> bool:
+    u = (url or "").lower()
+    return any(t in u for t in TU_KHOA_GIAO_DICH)
+
+
+def han_muc_github() -> dict:
+    """Con bao nhieu luot API GitHub.
+
+    DO 13/09/2026: khong co token thi tran la **60 luot/GIO**. `tu_github`
+    dung `api.github.com/.../git/trees` de liet ke file, nen moi repo an it
+    nhat mot luot - 2.998 repo trong kho se can ~50 GIO cho rieng viec liet ke.
+
+    Day la mot tran THAT, khong phai mot loi, va no phai duoc DOC RA chu khong
+    de cho bo thu hoi cao den khi het luot roi that bai im lang (dung ho voi
+    "het quota API -> me boc chay 2 giay -> bao 0/20 co che").
+
+    Dat `GITHUB_TOKEN` thi tran len **5.000/gio** - hon 83 lan.
+    """
+    import os
+    import requests
+    tok = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    h = {"Authorization": "Bearer " + tok} if tok else {}
+    try:
+        r = requests.get("https://api.github.com/rate_limit", headers=h,
+                         timeout=15).json()
+        c = (r.get("resources") or {}).get("core") or {}
+        return {"tran": c.get("limit"), "con_lai": c.get("remaining"),
+                "co_token": bool(tok)}
+    except Exception as e:
+        return {"loi": repr(e)[:120], "co_token": bool(tok)}
+
+
+def thu_hoi_github(gioi_han: int = 30, ngan_sach_giay: float = 240.0,
+                   in_ra=print) -> dict:
+    """Tai MA THAT cho cac ban ghi github dang chi co README.
+
+    Tra bang dem. `chan_mang` = True nghia la duong ra hong chu khong phai het
+    viec - cho goi biet de DUNG chu khong quay vong (bai hoc 406 URL chet).
+    """
+    import time as _t
+    from nhan import toan_van as TV
+    t0 = _t.time()
+
+    # HAN MUC TRUOC, KHONG CAO MU. Het luot thi `tu_github` tra None cho MOI
+    # repo, va bang dem se doc y het "kho github khong co ma nao" - mot ket
+    # luan am tinh sinh ra tu mot cai tran.
+    hm = han_muc_github()
+    con = hm.get("con_lai")
+    if isinstance(con, int) and con < 5:
+        return {"xem": 0, "thu_lai": 0, "sua_duoc": 0, "het_han_muc": True,
+                "han_muc": hm, "giay": 0.0,
+                "ly_do": "con %s/%s luot API GitHub - dat GITHUB_TOKEN de len "
+                         "5.000/gio" % (con, hm.get("tran"))}
+    if isinstance(con, int):
+        gioi_han = min(gioi_han, max(con - 2, 1))
+    # XEP THEO DO LIEN QUAN, KHONG THEO id.
+    #
+    # Do 13/09/2026: trong 3.270 ban ghi github cua kho, **2.257 (69%) co ten
+    # repo khong dinh dang gi den giao dich** (`ZenBerry/skydive`,
+    # `shishutu-manager`, `static-web-apps-testing-org/...`). Voi tran API 60
+    # luot/GIO, cao theo `id DESC` nghia la dot gan het ngan sach vao rac roi
+    # ket luan "kho github khong co ma nao".
+    #
+    # Loc bang TEN URL chu khong bang noi dung: ten co san trong bang, khong
+    # ton mot luot API nao de biet.
+    ds = SO.nhieu(
+        "SELECT id, url, van_ban, ket_boc FROM noi_dung "
+        "WHERE url LIKE '%github.com/%' AND (cach IS NULL OR "
+        "cach NOT LIKE 'github_payload%') ORDER BY id DESC LIMIT ?",
+        max(int(gioi_han) * 40, 400)) or []
+    ds.sort(key=lambda r: 0 if _lien_quan_giao_dich(r["url"]) else 1)
+    ds = ds[:max(int(gioi_han) * 4, 1)]
+    bao = {"xem": 0, "thu_lai": 0, "sua_duoc": 0, "da_co_ma": 0,
+           "bo_cuoc": 0, "that_bai": 0, "chan_mang": False}
+    lien_tiep_hong = 0
+    for r in ds:
+        if bao["thu_lai"] >= gioi_han or _t.time() - t0 > ngan_sach_giay:
+            break
+        bao["xem"] += 1
+        if co_dau_hieu_ma_bat_ky(r["van_ban"] or ""):
+            bao["da_co_ma"] += 1
+            continue
+        kb = str(r["ket_boc"] or "")
+        m = re.search(r"github_payload:(\d+)", kb)
+        if m and int(m.group(1)) >= TRAN_THU_LAI_GITHUB:
+            bao["bo_cuoc"] += 1
+            continue
+        bao["thu_lai"] += 1
+        try:
+            kq = TV.tu_github(r["url"], so_file=4)
+        except Exception:
+            kq = None
+        vb = (kq or {}).get("van_ban") or ""
+        if len(vb) > 500 and co_dau_hieu_ma_bat_ky(vb):
+            with SO.ket_noi() as cn:
+                cn.execute(
+                    "UPDATE noi_dung SET van_ban=?, so_ky_tu=?, kieu='ma_nguon',"
+                    " cach=?, da_boc=0 WHERE id=?",
+                    (vb, len(vb), (kq.get("cach") or "github_payload")[:80],
+                     r["id"]))
+            bao["sua_duoc"] += 1
+            lien_tiep_hong = 0
+        else:
+            bao["that_bai"] += 1
+            lien_tiep_hong += 1
+            n = int(m.group(1)) + 1 if m else 1
+            with SO.ket_noi() as cn:
+                cn.execute("UPDATE noi_dung SET ket_boc=? WHERE id=?",
+                           ("github_payload:%d" % n, r["id"]))
+            # DUONG RA HONG khac HET VIEC - nhung phai PHAN BIET duoc, khong
+            # duoc suy tu so lan hong lien tiep.
+            #
+            # Ban dau o day viet `lien_tiep_hong >= 8 -> chan_mang = True`. Do
+            # 13/09 ngay sau do: tam repo hong lien tiep la `ZenBerry/skydive`,
+            # `Ren1116/shishutu-manager`, `static-web-apps-testing-org/...`,
+            # `Devozitt/Schedule-` - tuc **repo khong lien quan giao dich**,
+            # va `tu_github` tra None hoan toan DUNG. Bo do do bien mot ket qua
+            # am tinh THAT thanh mot `CHUA_DO_DUOC` gia.
+            #
+            # Day la cai bay "hieu chuan cong hai chieu" nhin tu chieu con lai:
+            # mot cong bao hong khi khong hong cung vo dung nhu mot cong khong
+            # bao gio hong. Nen nay hoi THANG duong mang, khong suy dien.
+            if lien_tiep_hong >= 8:
+                hm2 = han_muc_github()
+                con2 = hm2.get("con_lai")
+                if hm2.get("loi") or (isinstance(con2, int) and con2 < 3):
+                    bao["chan_mang"] = True
+                    bao["han_muc"] = hm2
+                    in_ra("  duong ra HONG that (%s) -> dung" % hm2)
+                    break
+                lien_tiep_hong = 0   # mang van tot: chi la repo khong lien quan
+    bao["giay"] = round(_t.time() - t0, 1)
+    bao["han_muc"] = hm
+    return bao

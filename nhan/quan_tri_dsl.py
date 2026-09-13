@@ -171,6 +171,73 @@ def kiem_khai_bao(spec: dict) -> list[str]:
             for f, x in v.items():
                 if isinstance(x, dict) and not (set(x) & set(DON_VI)):
                     loi.append("%s.%s thieu don vi (%s)" % (k, f, "|".join(DON_VI)))
+    loi += kiem_con_so(spec)
+    return loi
+
+
+#: Khoang cach hop le, tinh bang PIP. Ngoai khoang nay thi gan nhu chac chan
+#: la boc nham mot tham so khac chu khong phai mot khoang cach.
+PIP_TOI_THIEU = 1.0
+PIP_TOI_DA = 5000.0
+
+#: Truong CHAC CHAN la khoang cach gia (khac `ty_le`, `lot_x`, `so_vi_the`).
+TRUONG_KHOANG_CACH = {
+    ("dat_hue", "tu"), ("trailing", "khoang"), ("trailing", "bat_dau"),
+    ("tia", "tu"), ("nhoi", "khoang"), ("chot", "muc"), ("cat_hoa", "tu"),
+    ("hedge", "tu"),
+}
+
+
+def kiem_con_so(spec: dict) -> list[str]:
+    """Con so trong khai bao co DUNG LOAI va CO KHA DI khong.
+
+    ## HAI THU DO DUOC 13/09/2026 tren 128 gia tri khoang cach cua kho
+
+    1. **`{"pip": False}`** - mot gia tri BOOLEAN nam trong truong khoang cach,
+       tren 4 khai bao (`Prime_Quantum_AI`, `MartingalePulse`, `tarantella`...).
+       No den tu bo boc nhat mot input kieu `bool` cua EA (`InpUseTrailing =
+       false`) roi doc no nhu mot do lon. `float(False)` = 0.0, nen no lang le
+       thanh **0 ATR** - dung hinh dang cua bo phan im lang ma ca phien 12/09
+       di truy.
+
+    2. **11/128 gia tri duoi 1 pip**, trong do co `0.0` va `0,05 pip`. Mot
+       khoang trailing 0,05 pip khong phai mot co che chat - no la mot con so
+       boc nham (thuong la mot phan tram hay mot he so nhan).
+
+    Phan vi cua kho: p10 = 1, p50 = 45, p90 = 500, max = 6.000 pip. Nen khoang
+    hop le 1..5.000 khong cat mat phan than cua phan bo.
+
+    ## VI SAO CHAN O DAY CHU KHONG SUA CON SO
+
+    Ta khong biet tac gia y gi khi go `0.3`. Doan ho la bia. Chan lai thi khai
+    bao do van con CAU TRUC dung (ho nao ghep voi ho nao), va cau truc do van
+    dung duoc: `chay_bench_quan_tri.py` QUET do lon tren mot luoi ATR thay vi
+    tin con so boc duoc. Mat con so, khong mat co che.
+    """
+    loi = []
+    for nhom, truong in sorted(TRUONG_KHOANG_CACH):
+        v = spec.get(nhom)
+        if not isinstance(v, dict):
+            continue
+        x = v.get(truong)
+        if not isinstance(x, dict):
+            continue
+        for dv, so in x.items():
+            if dv not in ("pip", "diem"):
+                continue
+            if isinstance(so, bool) or not isinstance(so, (int, float)):
+                loi.append("%s.%s = %r khong phai mot con so (thuong la mot "
+                           "input kieu bool bi boc nham lam do lon)"
+                           % (nhom, truong, so))
+                continue
+            quy = float(so) * (1.0 if dv == "pip" else 0.1)
+            if quy < PIP_TOI_THIEU:
+                loi.append("%s.%s = %s %s qua nho (< %g pip) - gan nhu chac "
+                           "chan la boc nham mot ty le/he so"
+                           % (nhom, truong, so, dv, PIP_TOI_THIEU))
+            elif quy > PIP_TOI_DA:
+                loi.append("%s.%s = %s %s qua lon (> %g pip)"
+                           % (nhom, truong, so, dv, PIP_TOI_DA))
     return loi
 
 

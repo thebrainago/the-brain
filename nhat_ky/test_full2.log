@@ -1,0 +1,23 @@
+129 file test -> 17 me x 8 file, 2 nhan moi me
+  me  1/17  73 passed, 6 subtests passed in 19.41s
+  me  2/17  117 passed in 93.43s (0:01:33)
+  me  3/17  101 passed in 36.05s
+  me  4/17  119 passed, 9 subtests passed in 9.16s
+  me  5/17  96 passed, 4 subtests passed in 12.37s
+  me  6/17  169 passed, 61 subtests passed in 20.71s
+  me  7/17  119 passed, 7 subtests passed in 15.22s
+  me  8/17  118 passed, 36 subtests passed in 449.51s (0:07:29)
+  me  9/17  125 passed in 16.94s
+  me 10/17  72 passed, 12 subtests passed in 18.99s
+  me 11/17  1 failed, 96 passed, 23 subtests passed in 109.01s (0:01:49)
+        DO  test_ma_nguon.py::ThuHoiSaiLoai::test_bo_cuoc_sau_TRAN_lan_that_bai_lien_tiep
+  me 12/17  QUA GIO 900s (test_mimic_ban_do.py...)
+  me 13/17  100 passed in 114.31s (0:01:54)
+  me 14/17  152 passed, 140 subtests passed in 45.55s
+  me 15/17  91 passed in 20.78s
+  me 16/17  120 passed in 12.53s
+  me 17/17  19 passed in 5.12s
+
+=== TONG: 1687 xanh · 1 DO · 0 bo qua · 0 loi · 1949s ===
+   DO  test_ma_nguon.py::ThuHoiSaiLoai::test_bo_cuoc_sau_TRAN_lan_that_bai_lien_tiep
+   ME CHET 12: test_mimic_ban_do.py test_muc_tieu_va_noi_sinh.py test_nen.py test_neo_truot_x10.py test_ngoai_sinh.py test_ngu_phap_toan_hang.py test_ngu_phap_trung.py test_nguon_bai_viet.py

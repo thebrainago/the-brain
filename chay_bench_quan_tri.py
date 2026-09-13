@@ -115,6 +115,7 @@ InpATRKy=14||14||0||0||N
 InpSLCung=3.0||3.0||0||0||N
 InpGiuToiDa=120||120||0||0||N
 InpNhoiMax=5||5||0||0||N
+InpLoRongPct=25.0||25.0||0||0||N
 """, encoding="utf-16")
     return p
 

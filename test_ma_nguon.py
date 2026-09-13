@@ -377,8 +377,15 @@ class ThuHoiSaiLoai(unittest.TestCase):
         self.assertEqual(bao["khop_mau"], 0)
 
     def test_bo_cuoc_sau_TRAN_lan_that_bai_lien_tiep(self):
+        """DUONG RA SONG ma tai van hong -> moi duoc dem la mot lan bo cuoc.
+
+        `_duong_ra_song` phai bi GIA LAP o day. Ban dau bai nay khong gia lap
+        no, va the la mot bai kiem don vi bong phu thuoc vao mang that: no do
+        ngay khi mql5 dang bop toc do, bao `ket_boc is None`. Mot bai kiem
+        don vi phai xanh ke ca khi rut day mang.
+        """
         self._chen_ban_sai_loai()
-        with unittest.mock.patch.object(MN, "tai_ma_nguon", return_value=None):
+        with unittest.mock.patch.object(MN, "_duong_ra_song", return_value=True),              unittest.mock.patch.object(MN, "tai_ma_nguon", return_value=None):
             for _ in range(MN.TRAN_THU_LAI_SAI_LOAI):
                 MN.thu_hoi_sai_loai(gioi_han=5)
             row = SO.mot("SELECT ket_boc FROM noi_dung "
@@ -388,6 +395,26 @@ class ThuHoiSaiLoai(unittest.TestCase):
             with unittest.mock.patch.object(MN, "tai_ma_nguon") as m2:
                 MN.thu_hoi_sai_loai(gioi_han=5)
             m2.assert_not_called()
+
+    def test_MANG_HONG_khong_duoc_dot_han_muc_thu_lai(self):
+        """Chieu nguoc lai cua bai tren, va la bai hoc dat nhat ngay 13/09.
+
+        Cloudflare WARP chan mql5 ca buoi. Bo thu hoi chay 4 me, moi lan hong
+        lai cong mot vach, va **29 URL hoan toan tot bi loai VINH VIEN**. Tat
+        WARP thi chinh nhung trang do tra 200 voi 62.851 ky tu.
+
+        Nen: hong vi DUONG RA thi khong duoc dem.
+        """
+        self._chen_ban_sai_loai()
+        with unittest.mock.patch.object(MN, "_duong_ra_song", return_value=False),              unittest.mock.patch.object(MN, "tai_ma_nguon", return_value=None):
+            for _ in range(MN.TRAN_THU_LAI_SAI_LOAI + 2):
+                MN.thu_hoi_sai_loai(gioi_han=5)
+        row = SO.mot("SELECT ket_boc FROM noi_dung "
+                     "WHERE url='https://www.mql5.com/en/code/74894'")
+        self.assertIsNone(
+            row["ket_boc"],
+            "mang hong ma van cong vach bo cuoc - mot su co tam thoi se loai "
+            "vinh vien ca mot lop nguon")
 
 
 if __name__ == "__main__":
