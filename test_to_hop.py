@@ -362,3 +362,20 @@ def test_cli_hieu_tham_so_khung():
             TH.main(["--khhung", "D1"])
     finally:
         TH.chay, TH.tong_ket = goc, goc_tk
+
+
+def test_chang_chon_KHONG_duoc_cham_nua_holdout():
+    """Chang 1/2/3 phai chay tren `train`. Neu chung chay tren "het" thi chang 4
+    khong con la holdout: he lot toi do da duoc chon bang chinh du lieu sap dung
+    de kiem. Do dem 13/09 khi con lo nay: 592/2.248 = 26% "qua holdout"."""
+    import inspect
+
+    from nhan import to_hop as TH
+    src = inspect.getsource(TH.chay)
+    v1 = [l for l in src.splitlines() if "v1 = [(" in l]
+    assert v1 and '"train"' in v1[0], v1
+    for l in src.splitlines():
+        if "v2.append((" in l or "v3.append((" in l:
+            assert '"train"' in l, l
+    # chi chang 4 duoc cham ca hai nua
+    assert 'for ph in ("train", "hold")' in src

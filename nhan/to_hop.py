@@ -429,7 +429,18 @@ def chay(cac_khung=KHUNG_MAC_DINH, gh_ma: int = 0, gh_co_che: int = 0,
           % (KICH_HOAT[0] * 100, KICH_HOAT[1] * 100, len(cc)))
 
     # --- CHANG 1
-    v1 = [(m, k, s, "thi_truong", None, None) for m, k in o_mk for s in cc]
+    # CHON TREN NUA TRAIN, KHONG TREN CA CHUOI.
+    #
+    # Truoc 13/09 day la tuple 6 phan tu -> `phan` mac dinh "het" -> chang 1 va
+    # 2 chon tren TOAN BO chuoi, gom ca nua sau ma chang 4 sap dung lam holdout.
+    # Chang 4 vi the khong co gi ngoai mau: he lot toi do da duoc chon bang
+    # chinh du lieu sap dung de kiem.
+    #
+    # Hau qua do duoc dem 13/09: **592/2.248 = 26% qua holdout**. Luat cua du an
+    # goi dung ten no: *nhieu PASS trong mot ngay la tin hieu HONG, khong phai
+    # tin vui*. Lan chay truoc do ra 1/2.609 chi vi EURMXN bar hong nuot ca bang
+    # - tuc lo hong nay bi mot lo hong khac che mat.
+    v1 = [(m, k, s, "thi_truong", None, None, "train") for m, k in o_mk for s in cc]
     in_ra("\nCHANG 1 - %d o" % len(v1))
     r1 = _chay_lo(v1, sp, in_ra, "chang 1")
     r1.sort(key=lambda d: -d["cagr_dd20"])
@@ -447,9 +458,9 @@ def chay(cac_khung=KHUNG_MAC_DINH, gh_ma: int = 0, gh_co_che: int = 0,
         if s is None:
             continue
         for ct in VL.CAU_TRUC:
-            v2.append((d["ma"], d["khung"], s, ct, None, None))
+            v2.append((d["ma"], d["khung"], s, ct, None, None, "train"))
         for lt in DQ.BO_LUAT:
-            v2.append((d["ma"], d["khung"], s, "thi_truong", lt, None))
+            v2.append((d["ma"], d["khung"], s, "thi_truong", lt, None, "train"))
     in_ra("\nCHANG 2 - %d o (%d song sot x %d cau truc + %d luat)"
           % (len(v2), len(song1), len(VL.CAU_TRUC), len(DQ.BO_LUAT)))
     r2 = _chay_lo(v2, sp, in_ra, "chang 2")
@@ -468,7 +479,7 @@ def chay(cac_khung=KHUNG_MAC_DINH, gh_ma: int = 0, gh_co_che: int = 0,
         if s is None or d.get("luat") not in (None, "-"):
             continue
         for tm in LUOI_THAM:
-            v3.append((d["ma"], d["khung"], s, d["cau_truc"], None, tm))
+            v3.append((d["ma"], d["khung"], s, d["cau_truc"], None, tm, "train"))
     in_ra("\nCHANG 3 - %d o (do do nhay thong so)" % len(v3))
     r3 = _chay_lo(v3, sp, in_ra, "chang 3") if v3 else []
 
