@@ -76,6 +76,9 @@ KICH_HOAT = (0.02, 0.60)
 #: Bao nhieu o song sot moi chang.
 GIU_CHANG1 = 200
 GIU_CHANG2 = 40
+#: HAN NGACH: mot ma (chang 1) hay mot he (chang 2) duoc chiem toi da bao nhieu
+#: PHAN cua suat giu. Xem `giu_co_han_ngach`.
+HAN_NGACH = 0.04
 #: Luoi thong so cho chang 3. Nho co y: muc dich la do DO NHAY, khong phai tim
 #: so dep nhat - "cao nguyen hay cai gai" (memory `cao-nguyen-hay-cai-gai`).
 LUOI_THAM = [
@@ -85,6 +88,62 @@ LUOI_THAM = [
     {"sl_atr": 2.0, "tp_atr": 4.0, "k_dat": 0.25},
     {"sl_atr": 2.0, "tp_atr": 4.0, "k_dat": 1.0},
 ]
+
+
+# --------------------------------------------------------------- HAN NGACH GIU
+def giu_co_han_ngach(ds: list[dict], n: int, khoa=lambda d: d["ma"],
+                     ti_le: float = HAN_NGACH) -> list[dict]:
+    """Giu `n` o tot nhat NHUNG khong de mot ma (hay mot he) chiem het.
+
+    ## VI SAO CO HAM NAY
+
+    Chang 1 truoc do la `r1.sort(-cagr_dd20)[:200]` - mot phep sort tren MOT so
+    vo huong, khong rang buoc gi ve ma. Hau qua do duoc, hai lan, va ca hai lan
+    deu ghi lai trong chinh file nay ma khong sua tan goc:
+
+      * lan chay 12/09 (truoc khi sua bar hong): 200 o song sot -> **2 ma**
+        (EURMXN 2.567 cap holdout / GBPTRY 42). 120/120 dong dau bang la EURMXN.
+      * ghi chu o chang 4: *"200 o song sot gan nhu chi nam tren TRYJPY, GBPTRY,
+        USDARS - ba dong tien sup do"*.
+
+    Hai lan do duoc do hai nguyen nhan khac han nhau (bar hong x10; dong tien
+    mat gia mot chieu). Cai CHUNG khong phai nguyen nhan - la phep chon. Bat ky
+    ma nao cham diem cao mot cach CO HE THONG deu an tron 200 suat, va chang
+    2/3/4 - tuc toan bo phan con lai cua pheu - khong con nhin thay thi truong
+    nua. Quet 145 ma roi kiem dinh tren 2 ma la **tra tien cho 145 ma de biet
+    ve 2 ma**.
+
+    Sua bar hong chi go duoc mot nguyen nhan. Han ngach go CAI PHEP CHON, nen
+    lan sau co nguyen nhan thu ba thi no khong an het bang nua.
+
+    ## KHONG HA MOT NGUONG NAO
+
+    Van giu dung `n` o. Han ngach chi doi o thu 9 cua ma dan dau lay o thu nhat
+    cua ma xep sau. Neu it ma qua khong du `n` thi tran tu noi len cho toi khi
+    du - nen ham khong bao gio tra ve it hon `min(n, len(ds))`.
+    """
+    if n <= 0 or not ds:
+        return []
+    tran = max(1, int(round(n * ti_le)))
+    con = list(ds)
+    ra: list[dict] = []
+    # `dem` song NGOAI vong lap: tran la tran cua CA lan chon, khong phai cua
+    # moi luot. De no ben trong thi moi luot lai cho them `tran` o nua cho ma
+    # dan dau - han ngach khong con la han ngach.
+    dem: dict = {}
+    while con and len(ra) < n:
+        thua = []
+        for d in con:
+            k = khoa(d)
+            if dem.get(k, 0) < tran and len(ra) < n:
+                dem[k] = dem.get(k, 0) + 1
+                ra.append(d)
+            else:
+                thua.append(d)
+        if len(thua) == len(con):       # khong nhan them duoc gi -> noi tran
+            tran *= 2
+        con = thua
+    return ra
 
 
 # ------------------------------------------------------------------ TIA KHONG GIAN
@@ -273,6 +332,21 @@ def _chay_lo(viecs, sp, in_ra=print, nhan=""):
     return tot
 
 
+def _in_tap_trung(in_ra, nhan, tat_ca, giu, khoa, ten_khoa):
+    """In DO TAP TRUNG cua suat giu. Mot con so, nhung no la con so tra loi
+    "pheu dang hoc ve thi truong hay ve mot ma"."""
+    if not giu:
+        return
+    cu = {}
+    for d in tat_ca[:len(giu)]:
+        cu[khoa(d)] = cu.get(khoa(d), 0) + 1
+    dan = max(cu.values()) if cu else 0
+    in_ra("  %s giu %d o: %d %s khac nhau (khong han ngach: %d %s, "
+          "cai dan dau chiem %d)"
+          % (nhan, len(giu), len({khoa(d) for d in giu}), ten_khoa,
+             len(cu), ten_khoa, dan))
+
+
 def chay(cac_khung=KHUNG_MAC_DINH, gh_ma: int = 0, gh_co_che: int = 0,
          sp: int = 10, in_ra=print) -> dict:
     from nhan import ho_so_symbol as HSS
@@ -300,7 +374,10 @@ def chay(cac_khung=KHUNG_MAC_DINH, gh_ma: int = 0, gh_co_che: int = 0,
     in_ra("\nCHANG 1 - %d o" % len(v1))
     r1 = _chay_lo(v1, sp, in_ra, "chang 1")
     r1.sort(key=lambda d: -d["cagr_dd20"])
-    song1 = r1[:GIU_CHANG1]
+    # HAN NGACH THEO MA - xem `giu_co_han_ngach`. Khong ha nguong nao, chi
+    # khong cho mot ma an tron suat giu roi bit mat ca chang 2/3/4.
+    song1 = giu_co_han_ngach(r1, GIU_CHANG1, lambda d: d["ma"])
+    _in_tap_trung(in_ra, "chang 1", r1, song1, lambda d: d["ma"], "ma")
 
     # --- CHANG 2: cau truc x luat
     from nhan import dap_quan_tri as DQ
@@ -318,7 +395,12 @@ def chay(cac_khung=KHUNG_MAC_DINH, gh_ma: int = 0, gh_co_che: int = 0,
           % (len(v2), len(song1), len(VL.CAU_TRUC), len(DQ.BO_LUAT)))
     r2 = _chay_lo(v2, sp, in_ra, "chang 2")
     r2.sort(key=lambda d: -d["cagr_dd20"])
-    song2 = r2[:GIU_CHANG2]
+    # O chang 2 moi HE xuat hien 15 lan (7 cau truc + 8 luat), nen khoa la
+    # (ma, co che) - neu khoa theo ma khong thi mot he van chiem duoc 15 suat
+    # trong 40 mot cach hop le.
+    _k2 = (lambda d: (d["ma"], d["co_che"]))
+    song2 = giu_co_han_ngach(r2, GIU_CHANG2, _k2)
+    _in_tap_trung(in_ra, "chang 2", r2, song2, _k2, "he")
 
     # --- CHANG 3: luoi thong so tren dinh
     v3 = []

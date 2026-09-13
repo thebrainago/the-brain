@@ -25,6 +25,29 @@ DUNG duoc thu khong thay.
      cong truot phai hien ra, khong duoc gop chung voi PASS sach.
   3. **Tuoi**. Mot he qua cong ba thang truoc, tren the he cong da doi, thi
      khong con la mot phat hien - no la mot ghi chep lich su.
+
+## HAI NGUON, VA KHONG DUOC TRON
+
+Do 13/09/2026: `to_hop` chay 110 phut, chang 4 (holdout) la phep thu duy nhat
+co nghia trong ca pheu - va ket qua cua no **khong di dau ca**. No nam trong
+`reports/TO_HOP.json`; `vong_day_du._cham_tien` doc ra, IN mot bang roi tra ve
+mot cai dict dem. Khong dong nao vao `nao.db`, nen bang nay - cho duy nhat tra
+loi "phong nghien cuu dang co gi" - khong bao gio thay chung.
+
+Do la hinh dang that cua *"tong the he thong dang chua lam duoc gi"*: khong
+phai khau nao hong, ma la khau cuoi khong noi vao dau nen **khong co gi tich
+luy lai**.
+
+Nen bang nay doc HAI nguon va in thanh HAI khoi rieng:
+
+    A. `nao.db/ket_qua`      he da qua CONG THAT (`nhan/cong.py`)
+    B. `reports/TO_HOP.json` he qua HOLDOUT CUA PHEU, chua qua cong that
+
+Khong duoc cong hai con so lai. Qua holdout cua pheu la *"canh bac co ky vong
+duong do duoc"* (chu cua `cham_diem`), chua phai phat hien. Va khoi B **khong
+duoc ghi vao `ket_qua`**: lam vay la chiem suat FDR bang mot phep DO
+(memory `do-dac-khong-duoc-chiem-suat-fdr`), va lan sau doc lai se tuong la
+xac nhan.
 """
 from __future__ import annotations
 
@@ -96,6 +119,65 @@ def thu_hoach(chi_pass: bool = True) -> list[dict]:
     return ra
 
 
+def tu_pheu(tep: Path | None = None) -> list[dict]:
+    """He QUA HOLDOUT CUA PHEU. Nguon B - xem docstring dau file.
+
+    `dd20_*` = lai %/nam khi quy ca he lan moc ve CUNG ngan sach sut giam 20%.
+    `moc_hold` = max(mua-giu, ban-giu, tien mat) tren chinh nua holdout. Nen
+    `hon_moc = dd20_hold - moc_hold` la con so TIEN, doc duoc thang.
+    """
+    tep = tep or (GOC / "reports" / "TO_HOP.json")
+    if not tep.exists():
+        return []
+    try:
+        d = json.loads(tep.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    ra = []
+    for r in (d.get("holdout") or []):
+        if not r.get("qua_holdout"):
+            continue
+        dh, mh = r.get("dd20_hold"), r.get("moc_hold")
+        ra.append({
+            "he": "%s.%s.%s" % (r.get("ma"), r.get("khung"), r.get("co_che")),
+            "ma": r.get("ma"), "khung": r.get("khung"),
+            "cau_truc": r.get("cau_truc"), "luat": r.get("luat"),
+            "dd20_train": r.get("dd20_train"), "dd20_hold": dh,
+            "moc_hold": mh, "chan_hold": r.get("chan_hold"),
+            "ty_le_hai_nua": r.get("ty_le_hold_tren_train"),
+            "hon_moc": (None if dh is None or mh is None
+                        else round(dh - mh, 3)),
+        })
+    ra.sort(key=lambda x: -(x["hon_moc"] if x["hon_moc"] is not None else -9e9))
+    return ra
+
+
+def _khoi_pheu(in_ra, ds: list[dict]) -> None:
+    in_ra("")
+    in_ra("=" * 96)
+    in_ra("QUA HOLDOUT CUA PHEU (chua qua cong that): %d he" % len(ds))
+    in_ra("=" * 96)
+    if not ds:
+        in_ra("  (khong co - chay `python -m nhan.to_hop --khung D1`)")
+        return
+    in_ra("%-46s %9s %9s %9s %8s %6s"
+          % ("he", "dd20 tr", "dd20 hd", "moc hd", "hon moc", "chan"))
+    for d in ds[:25]:
+        in_ra("  %-44s %9s %9s %9s %8s %6s"
+              % (d["he"][:44], _n(d["dd20_train"]), _n(d["dd20_hold"]),
+                 _n(d["moc_hold"]), _n(d["hon_moc"]),
+                 d["chan_hold"] if d["chan_hold"] is not None else "?"))
+    if len(ds) > 25:
+        in_ra("  ... con %d dong nua trong reports/TO_HOP.json" % (len(ds) - 25))
+    in_ra("")
+    in_ra("`dd20` = lai %/nam khi quy ve cung ngan sach sut giam 20%. `tr`/`hd` "
+          "= nua chon / nua kiem.")
+    in_ra("`moc hd` = max(mua-giu, ban-giu, tien mat) tren CHINH nua kiem. "
+          "`hon moc` am nghia la thua moc.")
+    in_ra("CAC DONG NAY CHUA QUA `nhan/cong.py` - la canh bac co ky vong duong "
+          "do duoc, chua phai phat hien.")
+
+
 def bang(in_ra=print, chi_pass: bool = True) -> dict:
     ds = thu_hoach(chi_pass)
     sach = [d for d in ds if d["sach"]]
@@ -122,8 +204,13 @@ def bang(in_ra=print, chi_pass: bool = True) -> dict:
           "voi cac dong con lai")
     in_ra("cot `d.Shrp` = Sharpe cua he TRU Sharpe mua-giu cung ma. Am nghia "
           "la mua-giu tot hon.")
+    ph = tu_pheu()
+    _khoi_pheu(in_ra, ph)
+    in_ra("")
+    in_ra("TONG: %d he qua CONG THAT (%d sach) + %d he qua HOLDOUT CUA PHEU"
+          % (len(ds), len(sach), len(ph)))
     ra = {"so_he": len(ds), "so_sach": len(sach), "so_hon_mua_giu": len(hon),
-          "he": ds}
+          "he": ds, "so_qua_pheu": len(ph), "qua_pheu": ph}
     (GOC / "reports" / "BANG_HE.json").write_text(
         json.dumps(ra, ensure_ascii=False, indent=1), encoding="utf-8")
     return ra

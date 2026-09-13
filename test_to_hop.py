@@ -196,3 +196,86 @@ def test_tran_kich_hoat_060_co_co_so():
     from nhan import to_hop as TH
     assert TH.KICH_HOAT[1] <= 0.60
     assert TH.VUNG_SINH_LOI[1] <= TH.KICH_HOAT[1]
+
+
+# ----------------------------------------------------- HAN NGACH THEO MA
+#
+# Do that 12/09: chang 1 giu 200 o -> chi 2 ma. Phep chon `sort()[:200]` cho
+# phep mot ma an tron suat giu, va khi do thi chang 2/3/4 khong con do thi
+# truong nua ma do mot ma.
+
+def _o(ma, diem, co_che="c"):
+    return {"ma": ma, "co_che": co_che, "cagr_dd20": diem}
+
+
+def test_han_ngach_chan_mot_ma_an_tron():
+    from nhan import to_hop as TH
+    # EURMXN chiem tron 50 diem cao nhat - dung hinh dang do duoc 12/09.
+    ds = [_o("EURMXN", 1000 - i) for i in range(50)]
+    for j in range(10):
+        ds += [_o("MA%d" % j, 10 - j - i * 0.01) for i in range(50)]
+    ds.sort(key=lambda d: -d["cagr_dd20"])
+
+    assert len({d["ma"] for d in ds[:20]}) == 1      # khong han ngach: 1 ma
+
+    giu = TH.giu_co_han_ngach(ds, 20, ti_le=0.1)     # tran = 2
+    assert len(giu) == 20
+    dem = {}
+    for d in giu:
+        dem[d["ma"]] = dem.get(d["ma"], 0) + 1
+    assert max(dem.values()) == 2, dem
+    assert len(dem) == 10, dem
+    assert dem["EURMXN"] == 2                        # van duoc phan cua no
+
+
+def test_han_ngach_KHONG_doi_gi_khi_da_da_dang():
+    """Hieu chuan chieu nguoc: mot bo loc luon ra tay thi vo dung nhu mot bo
+    loc khong bao gio ra tay. Khi khong ma nao vuot tran, ket qua phai GIONG
+    HET `sort()[:n]`."""
+    from nhan import to_hop as TH
+    ds = [_o("MA%02d" % i, 100 - i) for i in range(60)]
+    giu = TH.giu_co_han_ngach(ds, 20)
+    assert [d["ma"] for d in giu] == [d["ma"] for d in ds[:20]]
+
+
+def test_han_ngach_van_giu_du_n_khi_it_ma():
+    """Chi co 2 ma ma doi 20 o: tran phai tu noi len, khong duoc tra ve 4 o
+    roi lam chang sau doi."""
+    from nhan import to_hop as TH
+    ds = [_o("A", 100 - i) for i in range(30)] + \
+         [_o("B", 50 - i) for i in range(30)]
+    ds.sort(key=lambda d: -d["cagr_dd20"])
+    giu = TH.giu_co_han_ngach(ds, 20)
+    assert len(giu) == 20
+
+
+def test_han_ngach_giu_dung_cai_TOT_NHAT_cua_moi_ma():
+    """Khong duoc doi thu tu trong noi bo mot ma: o dau tien cua EURUSD phai
+    la o diem cao nhat cua EURUSD."""
+    from nhan import to_hop as TH
+    ds = [_o("X", 100), _o("X", 99), _o("Y", 98), _o("X", 97), _o("Y", 96)]
+    giu = TH.giu_co_han_ngach(ds, 4, ti_le=0.25)   # tran = 1
+    diem = {}
+    for d in giu:
+        diem.setdefault(d["ma"], []).append(d["cagr_dd20"])
+    assert diem["X"][0] == 100 and diem["Y"][0] == 98
+
+
+def test_han_ngach_chang2_khoa_theo_HE_khong_theo_ma():
+    """Mot he xuat hien 15 lan o chang 2 (7 cau truc + 8 luat). Khoa theo ma
+    thi mot he van chiem tron suat giu mot cach hop le."""
+    from nhan import to_hop as TH
+    ds = [_o("EURUSD", 100 - i, co_che="he_A") for i in range(15)]
+    ds += [_o("EURUSD", 80 - i, co_che="he_B") for i in range(15)]
+    ds += [_o("GOLD", 70 - i, co_che="he_C") for i in range(15)]
+    ds.sort(key=lambda d: -d["cagr_dd20"])
+    k = lambda d: (d["ma"], d["co_che"])       # noqa: E731
+    giu = TH.giu_co_han_ngach(ds, 12, k, ti_le=1 / 3.0)   # tran = 4
+    assert len({k(d) for d in giu}) == 3
+    assert len(giu) == 12
+
+
+def test_han_ngach_rong_va_n_0():
+    from nhan import to_hop as TH
+    assert TH.giu_co_han_ngach([], 10) == []
+    assert TH.giu_co_han_ngach([_o("A", 1)], 0) == []
