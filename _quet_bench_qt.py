@@ -14,8 +14,14 @@ import json, subprocess, sys, time
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+#: Ten ma THAT tren tai khoan XM dang dung. Do 13/09: `XAUUSD` KHONG ton tai
+#: tren tai khoan nay (vang ten la `GOLD`), va 3/12 luot quet dau tien bi
+#: mat vi the - cong `co_lich_su` bat duoc nhung chi sau khi da chay.
 MA = sys.argv[1].split(",") if len(sys.argv) > 1 else [
-    "US500Cash", "EURUSD", "XAUUSD", "US100Cash"]
+    "US500Cash", "US100Cash", "GER40Cash",      # chi so
+    "EURUSD", "GBPUSD", "USDJPY",               # cap chinh
+    "GOLD",                                     # kim loai (KHONG phai XAUUSD)
+]
 VAO = [("donchian", 0, 20), ("deu_dan", 1, 20), ("quay_ve", 2, 20)]
 
 import chay_bench_quan_tri as B
