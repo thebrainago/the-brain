@@ -12,6 +12,13 @@ Vi sao co luat nay: phien 12/09 toi lam ca ngay theo `KE_HOACH_XAY.md` va so
 So do that: **BA module** - SEEKER (phe u + bo loc) · QUANTLAB (tong quan tai san ·
 **co che quan li** · chien luoc · noi sinh · luong uu tien) · EVO (+ FINDER).
 
+**BO SUNG 13/09/2026 (chu du an duyet):** them **HEPHAESTUS** (`nhan/hephaestus.py`,
+`b hepha`) - module DE CO CHE. Ranh gioi moi: **SEEKER chi lo NGUON VAO** (chi bao,
+y tuong ghep) · **HEPHAESTUS de co che** (rai luoi tham so, ghep nut) · **QUANTLAB
+test**. Ly do: kho chi rong 8 chi bao vi do rong phu thuoc vao "co ai viet bai ve no
+khong"; 20 kieu dung Ichimoku la 1 chi bao + luoi tham so, khong phai 20 lan boc
+tai lieu. Xem `SO_DO_HE_THONG.txt` muc bo sung va `../BAN_GIAO_HE_THONG.md` muc 9.
+
 Ba dieu trong so do ma de lam nguoc:
 
 1. **MUC TIEU LA TIEN, khong phai chat che hoc thuat.** Nguyen van: *"khong phai

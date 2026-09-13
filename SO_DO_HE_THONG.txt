@@ -69,3 +69,43 @@ Quantlab luồng ưu tiên:
 - The finder: tìm kiếm các giải pháp, skill  có rất nhiều các dự án và project hỗ trợ cho dự án này tốt hơn và liên tục có những nguồn tốt nên cần phải update và học hỏi liên tục 
 Với những gợi ý này cậu hãy dùng tư duy của mình kết hợp vào và hoàn thiện hệ thống
 
+
+================================================================================
+BO SUNG SAU SO DO GOC — duyet 13/09/2026
+================================================================================
+Phan nay KHONG co trong ban goc `Desktop/hethong.txt`. Chu du an duyet mieng
+toi 13/09/2026. Neu muon no thanh LUAT SO 0 thi phai chep vao `hethong.txt`.
+
+HEPHAESTUS  (nhan/hephaestus.py, goi tat `b hepha`) — MODULE DE CO CHE
+--------------------------------------------------------------------------
+Ranh gioi ba viec, tu nay khong ai lam ho ai:
+
+    SEEKER       chi lo NGUON VAO  — mang ve chi bao, phuong phap, y tuong ghep
+    HEPHAESTUS   DE CO CHE         — rai luoi tham so, ghep nut, sinh to hop
+    QUANTLAB     TEST              — pheu, quan li lenh, cong
+
+Hai be:
+  tu_vung      tu sinh tu khoa / chi bao / huong tim kiem, DAY NGUOC ve SEEKER.
+               Seeker khong tu nghi ra "di tim Ichimoku"; Hephaestus bao no di.
+  duc_co_che   lay chi bao trong thu vien, rai luoi tham so, ghep 2-3 nut.
+
+VI SAO CAN: kho co che hien chi rong 8 chi bao (EMA 546 · RSI 525 · SMA 463 ·
+zscore 239 · ATR 114 · Donchian 80 · ADX 36 · Stoch 35 · MACD 15; Bollinger,
+Ichimoku, VWAP, Pivot, Fibonacci, volume, FVG, order block deu = 0) — vi do
+rong dang phu thuoc vao viec CO AI VIET BAI ve no hay khong.
+
+Chu du an: "10 trader chau A co 20 kieu dung Ichimoku". Tuc cai bien thien nam
+o CACH GHEP va NGUONG, khong o ban than chi bao. 20 kieu dung KHONG phai 20 lan
+boc tai lieu — la 1 chi bao + luoi tham so + to hop, do MAY sinh.
+
+LUONG UU TIEN — HAI LAN (lam ro phan da co trong so do goc)
+--------------------------------------------------------------------------
+    LAN NHANH (khai thac)  so huu MT5 TESTER (=1 lan vat ly)
+    LAN CHAM  (xay may)    so huu CPU nhieu nhan (Python)
+Hai tai nguyen khac nhau nen chay song song that, khong tranh nhau.
+
+Luat vao lan nhanh: qua holdout THAT · hon moc o CUNG RUI RO · chi phi
+do_tin=SAN · chay duoc that (du von, lot khong kep).
+Gioi han viec do dang cua lan nhanh: 3. Moi viec co han chot.
+
+Chi tiet day du: `Downloads/Research SP500/BAN_GIAO_HE_THONG.md` muc 9, 11, 13.
