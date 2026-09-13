@@ -122,5 +122,1518 @@
   "cai_gai": null,
   "cap_trung": null,
   "ho": {}
+ },
+ {
+  "ma": "EURUSD",
+  "vao": "quay_ve",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -1.34482,
+  "moc_lenh": 42,
+  "cao_nguyen": [
+   "luoi_dca",
+   "hue_trailing",
+   "trailing",
+   "tia",
+   "thoi_gian",
+   "tp_co_dinh",
+   "dat_hue"
+  ],
+  "cai_gai": [
+   "hedge",
+   "stop_2_dau",
+   "tt_stop_doi"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "luoi_dca": {
+    "sh_max": 3.197089,
+    "sh_tv": 1.3233,
+    "ty_le": 1.0,
+    "lai": 18003.77,
+    "lenh": 178,
+    "dd": 36.7726
+   },
+   "tia": {
+    "sh_max": 2.060823,
+    "sh_tv": 0.7909,
+    "ty_le": 1.0,
+    "lai": 5320.56,
+    "lenh": 95,
+    "dd": 13.7074
+   },
+   "tp_co_dinh": {
+    "sh_max": 1.977165,
+    "sh_tv": 0.0933,
+    "ty_le": 1.0,
+    "lai": 2745.65,
+    "lenh": 225,
+    "dd": 20.2216
+   },
+   "hue_trailing": {
+    "sh_max": 1.7207,
+    "sh_tv": 0.9021,
+    "ty_le": 1.0,
+    "lai": 7108.85,
+    "lenh": 86,
+    "dd": 17.7196
+   },
+   "trailing": {
+    "sh_max": 1.7207,
+    "sh_tv": 0.9021,
+    "ty_le": 1.0,
+    "lai": 7108.85,
+    "lenh": 86,
+    "dd": 17.7196
+   },
+   "thoi_gian": {
+    "sh_max": 1.328574,
+    "sh_tv": 0.1966,
+    "ty_le": 1.0,
+    "lai": 1264.93,
+    "lenh": 190,
+    "dd": 35.1035
+   },
+   "hedge": {
+    "sh_max": 0.064063,
+    "sh_tv": -1.1003,
+    "ty_le": 0.52,
+    "lai": 451.15,
+    "lenh": 39,
+    "dd": 57.6092
+   },
+   "tt_stop_doi": {
+    "sh_max": -0.433366,
+    "sh_tv": -1.6498,
+    "ty_le": 0.32,
+    "lai": -6611.91,
+    "lenh": 48,
+    "dd": 97.3142
+   },
+   "dat_hue": {
+    "sh_max": -0.524756,
+    "sh_tv": -0.9529,
+    "ty_le": 0.8,
+    "lai": -2381.89,
+    "lenh": 56,
+    "dd": 47.8631
+   },
+   "stop_2_dau": {
+    "sh_max": -0.842049,
+    "sh_tv": -2.9868,
+    "ty_le": 0.16,
+    "lai": -8603.39,
+    "lenh": 92,
+    "dd": 97.5326
+   },
+   "moc": {
+    "sh_max": -1.34482,
+    "sh_tv": -1.3448,
+    "ty_le": 0.0,
+    "lai": -6285.31,
+    "lenh": 42,
+    "dd": 71.906
+   }
+  }
+ },
+ {
+  "ma": "GBPUSD",
+  "vao": "donchian",
+  "trang_thai": "AM",
+  "ly_do": "",
+  "moc_sharpe": -0.472908,
+  "moc_lenh": 36,
+  "cao_nguyen": [],
+  "cai_gai": [
+   "hedge",
+   "hue_trailing",
+   "luoi_dca",
+   "stop_2_dau",
+   "tia",
+   "trailing",
+   "tt_stop_doi"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "luoi_dca": {
+    "sh_max": 1.728161,
+    "sh_tv": -1.4798,
+    "ty_le": 0.32,
+    "lai": 38310.21,
+    "lenh": 188,
+    "dd": 63.1345
+   },
+   "trailing": {
+    "sh_max": 0.602273,
+    "sh_tv": -1.4492,
+    "ty_le": 0.16,
+    "lai": 2789.68,
+    "lenh": 85,
+    "dd": 31.9329
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.528612,
+    "sh_tv": -0.7134,
+    "ty_le": 0.36,
+    "lai": 12050.29,
+    "lenh": 44,
+    "dd": 31.7508
+   },
+   "hue_trailing": {
+    "sh_max": 0.092499,
+    "sh_tv": -1.4492,
+    "ty_le": 0.2,
+    "lai": 388.73,
+    "lenh": 94,
+    "dd": 38.4157
+   },
+   "hedge": {
+    "sh_max": 0.000605,
+    "sh_tv": -1.1973,
+    "ty_le": 0.12,
+    "lai": 8.46,
+    "lenh": 43,
+    "dd": 52.3294
+   },
+   "tia": {
+    "sh_max": -0.027578,
+    "sh_tv": -0.7433,
+    "ty_le": 0.32,
+    "lai": -84.1,
+    "lenh": 170,
+    "dd": 29.8722
+   },
+   "stop_2_dau": {
+    "sh_max": -0.194297,
+    "sh_tv": -2.7904,
+    "ty_le": 0.12,
+    "lai": -2060.77,
+    "lenh": 46,
+    "dd": 77.005
+   },
+   "moc": {
+    "sh_max": -0.472908,
+    "sh_tv": -0.4729,
+    "ty_le": 0.0,
+    "lai": -3041.77,
+    "lenh": 36,
+    "dd": 66.8201
+   },
+   "tp_co_dinh": {
+    "sh_max": -1.185392,
+    "sh_tv": -2.2737,
+    "ty_le": 0.0,
+    "lai": -3406.48,
+    "lenh": 194,
+    "dd": 52.4491
+   },
+   "dat_hue": {
+    "sh_max": -1.634828,
+    "sh_tv": -2.1268,
+    "ty_le": 0.0,
+    "lai": -7938.2,
+    "lenh": 54,
+    "dd": 82.2722
+   },
+   "thoi_gian": {
+    "sh_max": -1.988482,
+    "sh_tv": -5.0,
+    "ty_le": 0.0,
+    "lai": -2574.73,
+    "lenh": 190,
+    "dd": 38.8868
+   }
+  }
+ },
+ {
+  "ma": "GBPUSD",
+  "vao": "deu_dan",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": 0.064351,
+  "moc_lenh": 32,
+  "cao_nguyen": [
+   "tia"
+  ],
+  "cai_gai": [
+   "dat_hue",
+   "hedge",
+   "hue_trailing",
+   "luoi_dca",
+   "stop_2_dau",
+   "tp_co_dinh",
+   "trailing"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "tia": {
+    "sh_max": 2.382271,
+    "sh_tv": 1.2281,
+    "ty_le": 0.96,
+    "lai": 7592.76,
+    "lenh": 76,
+    "dd": 13.9546
+   },
+   "hue_trailing": {
+    "sh_max": 2.205237,
+    "sh_tv": 0.002,
+    "ty_le": 0.4,
+    "lai": 8388.4,
+    "lenh": 96,
+    "dd": 22.7824
+   },
+   "trailing": {
+    "sh_max": 2.205237,
+    "sh_tv": 0.0925,
+    "ty_le": 0.52,
+    "lai": 8388.4,
+    "lenh": 96,
+    "dd": 22.7824
+   },
+   "luoi_dca": {
+    "sh_max": 1.570228,
+    "sh_tv": -0.7235,
+    "ty_le": 0.32,
+    "lai": 23229.37,
+    "lenh": 112,
+    "dd": 55.9003
+   },
+   "tp_co_dinh": {
+    "sh_max": 0.621622,
+    "sh_tv": -0.0344,
+    "ty_le": 0.4,
+    "lai": 2067.08,
+    "lenh": 100,
+    "dd": 24.1671
+   },
+   "dat_hue": {
+    "sh_max": 0.497856,
+    "sh_tv": -0.3316,
+    "ty_le": 0.2,
+    "lai": 2448.53,
+    "lenh": 45,
+    "dd": 31.6042
+   },
+   "hedge": {
+    "sh_max": 0.442269,
+    "sh_tv": -1.6259,
+    "ty_le": 0.08,
+    "lai": 1771.16,
+    "lenh": 44,
+    "dd": 30.2245
+   },
+   "stop_2_dau": {
+    "sh_max": 0.306829,
+    "sh_tv": -1.6186,
+    "ty_le": 0.04,
+    "lai": 1598.11,
+    "lenh": 33,
+    "dd": 40.7012
+   },
+   "moc": {
+    "sh_max": 0.064351,
+    "sh_tv": 0.0644,
+    "ty_le": 0.0,
+    "lai": 344.43,
+    "lenh": 32,
+    "dd": 38.3065
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.052688,
+    "sh_tv": -2.5648,
+    "ty_le": 0.0,
+    "lai": 621.15,
+    "lenh": 36,
+    "dd": 71.261
+   },
+   "thoi_gian": {
+    "sh_max": -2.6806,
+    "sh_tv": -3.5845,
+    "ty_le": 0.0,
+    "lai": -1443.89,
+    "lenh": 129,
+    "dd": 24.2135
+   }
+  }
+ },
+ {
+  "ma": "GBPUSD",
+  "vao": "quay_ve",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": 0.777182,
+  "moc_lenh": 33,
+  "cao_nguyen": [
+   "luoi_dca"
+  ],
+  "cai_gai": [
+   "dat_hue",
+   "hedge",
+   "hue_trailing",
+   "tia",
+   "tp_co_dinh",
+   "trailing"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "luoi_dca": {
+    "sh_max": 2.087054,
+    "sh_tv": 1.1452,
+    "ty_le": 0.6,
+    "lai": 29151.03,
+    "lenh": 103,
+    "dd": 22.6004
+   },
+   "hue_trailing": {
+    "sh_max": 1.976277,
+    "sh_tv": 0.4166,
+    "ty_le": 0.44,
+    "lai": 9057.31,
+    "lenh": 125,
+    "dd": 36.9226
+   },
+   "trailing": {
+    "sh_max": 1.976277,
+    "sh_tv": 0.3101,
+    "ty_le": 0.4,
+    "lai": 9057.31,
+    "lenh": 125,
+    "dd": 36.9226
+   },
+   "tp_co_dinh": {
+    "sh_max": 1.76387,
+    "sh_tv": 0.6896,
+    "ty_le": 0.4,
+    "lai": 5773.09,
+    "lenh": 170,
+    "dd": 27.0706
+   },
+   "tia": {
+    "sh_max": 1.761362,
+    "sh_tv": 0.7236,
+    "ty_le": 0.36,
+    "lai": 6197.17,
+    "lenh": 69,
+    "dd": 22.7543
+   },
+   "dat_hue": {
+    "sh_max": 1.110066,
+    "sh_tv": 0.2554,
+    "ty_le": 0.2,
+    "lai": 6121.23,
+    "lenh": 43,
+    "dd": 28.903
+   },
+   "hedge": {
+    "sh_max": 0.921052,
+    "sh_tv": -0.6405,
+    "ty_le": 0.04,
+    "lai": 11114.82,
+    "lenh": 42,
+    "dd": 42.0556
+   },
+   "moc": {
+    "sh_max": 0.777182,
+    "sh_tv": 0.7772,
+    "ty_le": 0.0,
+    "lai": 5998.23,
+    "lenh": 33,
+    "dd": 38.1984
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.6937,
+    "sh_tv": -1.638,
+    "ty_le": 0.0,
+    "lai": 3451.25,
+    "lenh": 36,
+    "dd": 28.6525
+   },
+   "stop_2_dau": {
+    "sh_max": -0.948778,
+    "sh_tv": -2.5243,
+    "ty_le": 0.0,
+    "lai": -5405.36,
+    "lenh": 40,
+    "dd": 61.4767
+   },
+   "thoi_gian": {
+    "sh_max": -2.168964,
+    "sh_tv": -2.169,
+    "ty_le": 0.0,
+    "lai": -1947.84,
+    "lenh": 261,
+    "dd": 42.8636
+   }
+  }
+ },
+ {
+  "ma": "USDJPY",
+  "vao": "donchian",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -1.178101,
+  "moc_lenh": 41,
+  "cao_nguyen": [
+   "hue_trailing",
+   "trailing",
+   "tp_co_dinh",
+   "stop_2_dau",
+   "hedge",
+   "tia",
+   "dat_hue"
+  ],
+  "cai_gai": [
+   "luoi_dca",
+   "tt_stop_doi"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "stop_2_dau": {
+    "sh_max": 1.201651,
+    "sh_tv": -0.6703,
+    "ty_le": 0.76,
+    "lai": 1918.13,
+    "lenh": 39,
+    "dd": 26.9858
+   },
+   "hue_trailing": {
+    "sh_max": 1.086399,
+    "sh_tv": -0.0411,
+    "ty_le": 0.64,
+    "lai": 6676.53,
+    "lenh": 62,
+    "dd": 46.701
+   },
+   "trailing": {
+    "sh_max": 1.086399,
+    "sh_tv": -0.0411,
+    "ty_le": 0.68,
+    "lai": 6676.53,
+    "lenh": 62,
+    "dd": 46.701
+   },
+   "hedge": {
+    "sh_max": 0.863364,
+    "sh_tv": -0.6794,
+    "ty_le": 0.72,
+    "lai": 8348.14,
+    "lenh": 69,
+    "dd": 56.4129
+   },
+   "tp_co_dinh": {
+    "sh_max": 0.432489,
+    "sh_tv": -0.5734,
+    "ty_le": 0.8,
+    "lai": 2908.64,
+    "lenh": 131,
+    "dd": 62.5549
+   },
+   "luoi_dca": {
+    "sh_max": 0.351834,
+    "sh_tv": -3.0295,
+    "ty_le": 0.32,
+    "lai": 5378.07,
+    "lenh": 123,
+    "dd": 80.7169
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.186807,
+    "sh_tv": -1.1173,
+    "ty_le": 0.52,
+    "lai": 5952.55,
+    "lenh": 27,
+    "dd": 94.6072
+   },
+   "tia": {
+    "sh_max": -0.364709,
+    "sh_tv": -1.0205,
+    "ty_le": 0.6,
+    "lai": -1591.44,
+    "lenh": 72,
+    "dd": 47.1065
+   },
+   "dat_hue": {
+    "sh_max": -0.632132,
+    "sh_tv": -1.1773,
+    "ty_le": 0.6,
+    "lai": -4140.15,
+    "lenh": 49,
+    "dd": 74.0538
+   },
+   "moc": {
+    "sh_max": -1.178101,
+    "sh_tv": -1.1781,
+    "ty_le": 0.0,
+    "lai": -7548.33,
+    "lenh": 41,
+    "dd": 93.6762
+   },
+   "thoi_gian": {
+    "sh_max": -3.577168,
+    "sh_tv": -5.0,
+    "ty_le": 0.0,
+    "lai": -3968.28,
+    "lenh": 187,
+    "dd": 43.7145
+   }
+  }
+ },
+ {
+  "ma": "USDJPY",
+  "vao": "deu_dan",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -0.59858,
+  "moc_lenh": 39,
+  "cao_nguyen": [
+   "luoi_dca",
+   "stop_2_dau"
+  ],
+  "cai_gai": [
+   "dat_hue",
+   "hedge",
+   "hue_trailing",
+   "thoi_gian",
+   "tia",
+   "tp_co_dinh",
+   "trailing",
+   "tt_stop_doi"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "thoi_gian": {
+    "sh_max": 3.484019,
+    "sh_tv": -1.5352,
+    "ty_le": 0.4,
+    "lai": 2666.22,
+    "lenh": 129,
+    "dd": 15.0772
+   },
+   "luoi_dca": {
+    "sh_max": 2.38314,
+    "sh_tv": 0.4614,
+    "ty_le": 0.76,
+    "lai": 20083.04,
+    "lenh": 81,
+    "dd": 32.7368
+   },
+   "stop_2_dau": {
+    "sh_max": 1.509084,
+    "sh_tv": -0.2346,
+    "ty_le": 0.64,
+    "lai": 3992.5,
+    "lenh": 43,
+    "dd": 25.8548
+   },
+   "hedge": {
+    "sh_max": 1.042541,
+    "sh_tv": -1.2007,
+    "ty_le": 0.24,
+    "lai": 10111.93,
+    "lenh": 45,
+    "dd": 34.7935
+   },
+   "hue_trailing": {
+    "sh_max": 0.595175,
+    "sh_tv": -1.0724,
+    "ty_le": 0.32,
+    "lai": 2774.31,
+    "lenh": 90,
+    "dd": 24.4222
+   },
+   "trailing": {
+    "sh_max": 0.595175,
+    "sh_tv": -0.9797,
+    "ty_le": 0.32,
+    "lai": 2774.31,
+    "lenh": 90,
+    "dd": 24.4222
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.474357,
+    "sh_tv": -1.0662,
+    "ty_le": 0.28,
+    "lai": 5617.76,
+    "lenh": 38,
+    "dd": 73.5235
+   },
+   "tia": {
+    "sh_max": 0.270036,
+    "sh_tv": -1.4512,
+    "ty_le": 0.2,
+    "lai": 839.66,
+    "lenh": 118,
+    "dd": 39.8862
+   },
+   "tp_co_dinh": {
+    "sh_max": -0.159135,
+    "sh_tv": -0.7049,
+    "ty_le": 0.4,
+    "lai": -210.52,
+    "lenh": 125,
+    "dd": 45.9291
+   },
+   "dat_hue": {
+    "sh_max": -0.362745,
+    "sh_tv": -1.845,
+    "ty_le": 0.2,
+    "lai": -2398.7,
+    "lenh": 67,
+    "dd": 74.9031
+   },
+   "moc": {
+    "sh_max": -0.59858,
+    "sh_tv": -0.5986,
+    "ty_le": 0.0,
+    "lai": -3313.69,
+    "lenh": 39,
+    "dd": 76.3477
+   }
+  }
+ },
+ {
+  "ma": "USDJPY",
+  "vao": "quay_ve",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": 1.690843,
+  "moc_lenh": 31,
+  "cao_nguyen": [
+   "thoi_gian"
+  ],
+  "cai_gai": [
+   "hue_trailing",
+   "stop_2_dau",
+   "trailing"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "thoi_gian": {
+    "sh_max": 5.941483,
+    "sh_tv": 5.9415,
+    "ty_le": 1.0,
+    "lai": 3707.72,
+    "lenh": 224,
+    "dd": 13.0078
+   },
+   "stop_2_dau": {
+    "sh_max": 2.397132,
+    "sh_tv": -0.003,
+    "ty_le": 0.04,
+    "lai": 11637.28,
+    "lenh": 89,
+    "dd": 25.3679
+   },
+   "hue_trailing": {
+    "sh_max": 2.247145,
+    "sh_tv": 1.5699,
+    "ty_le": 0.4,
+    "lai": 10241.95,
+    "lenh": 90,
+    "dd": 19.2651
+   },
+   "trailing": {
+    "sh_max": 2.247145,
+    "sh_tv": 1.4108,
+    "ty_le": 0.36,
+    "lai": 10241.95,
+    "lenh": 90,
+    "dd": 19.2651
+   },
+   "moc": {
+    "sh_max": 1.690843,
+    "sh_tv": 1.6908,
+    "ty_le": 0.0,
+    "lai": 11038.52,
+    "lenh": 31,
+    "dd": 31.3881
+   },
+   "tia": {
+    "sh_max": 1.511792,
+    "sh_tv": 1.0517,
+    "ty_le": 0.0,
+    "lai": 5025.33,
+    "lenh": 78,
+    "dd": 22.4773
+   },
+   "hedge": {
+    "sh_max": 1.395693,
+    "sh_tv": -0.6643,
+    "ty_le": 0.0,
+    "lai": 6353.83,
+    "lenh": 44,
+    "dd": 30.5466
+   },
+   "dat_hue": {
+    "sh_max": 1.287215,
+    "sh_tv": 0.9307,
+    "ty_le": 0.0,
+    "lai": 7240.29,
+    "lenh": 50,
+    "dd": 25.5153
+   },
+   "tp_co_dinh": {
+    "sh_max": 0.932009,
+    "sh_tv": 0.5573,
+    "ty_le": 0.0,
+    "lai": 3823.38,
+    "lenh": 117,
+    "dd": 26.612
+   },
+   "luoi_dca": {
+    "sh_max": 0.58448,
+    "sh_tv": -0.1996,
+    "ty_le": 0.0,
+    "lai": 6939.75,
+    "lenh": 90,
+    "dd": 42.2504
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.267529,
+    "sh_tv": -1.1176,
+    "ty_le": 0.0,
+    "lai": 3068.15,
+    "lenh": 38,
+    "dd": 65.6826
+   }
+  }
+ },
+ {
+  "ma": "GOLD",
+  "vao": "donchian",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -1.914964,
+  "moc_lenh": 10,
+  "cao_nguyen": [
+   "tt_stop_doi",
+   "tia",
+   "dat_hue",
+   "hedge",
+   "hue_trailing"
+  ],
+  "cai_gai": [
+   "luoi_dca",
+   "stop_2_dau",
+   "trailing"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "luoi_dca": {
+    "sh_max": 1.033802,
+    "sh_tv": -4.0487,
+    "ty_le": 0.28,
+    "lai": 4178.55,
+    "lenh": 36,
+    "dd": 55.9717
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.05029,
+    "sh_tv": -0.0813,
+    "ty_le": 1.0,
+    "lai": 2616.23,
+    "lenh": 6,
+    "dd": 59.8139
+   },
+   "tia": {
+    "sh_max": 0.014358,
+    "sh_tv": -0.6822,
+    "ty_le": 1.0,
+    "lai": 32.38,
+    "lenh": 17,
+    "dd": 54.8232
+   },
+   "hedge": {
+    "sh_max": -0.043595,
+    "sh_tv": -1.3685,
+    "ty_le": 0.8,
+    "lai": -909.36,
+    "lenh": 11,
+    "dd": 87.4071
+   },
+   "trailing": {
+    "sh_max": -0.071668,
+    "sh_tv": -1.6158,
+    "ty_le": 0.56,
+    "lai": -382.75,
+    "lenh": 12,
+    "dd": 37.9126
+   },
+   "hue_trailing": {
+    "sh_max": -0.236803,
+    "sh_tv": -1.6158,
+    "ty_le": 0.6,
+    "lai": -1004.75,
+    "lenh": 13,
+    "dd": 44.274
+   },
+   "stop_2_dau": {
+    "sh_max": -0.283627,
+    "sh_tv": -1.9085,
+    "ty_le": 0.52,
+    "lai": -4657.58,
+    "lenh": 8,
+    "dd": 61.4736
+   },
+   "dat_hue": {
+    "sh_max": -0.312525,
+    "sh_tv": -0.9564,
+    "ty_le": 0.8,
+    "lai": -2972.18,
+    "lenh": 10,
+    "dd": 57.416
+   },
+   "moc": {
+    "sh_max": -1.914964,
+    "sh_tv": -1.915,
+    "ty_le": 0.0,
+    "lai": -9764.89,
+    "lenh": 10,
+    "dd": 98.4353
+   },
+   "thoi_gian": {
+    "sh_max": -1.985067,
+    "sh_tv": -3.9136,
+    "ty_le": 0.0,
+    "lai": -864.65,
+    "lenh": 27,
+    "dd": 32.6862
+   },
+   "tp_co_dinh": {
+    "sh_max": -2.197402,
+    "sh_tv": -3.3304,
+    "ty_le": 0.0,
+    "lai": -2233.19,
+    "lenh": 36,
+    "dd": 48.0241
+   }
+  }
+ },
+ {
+  "ma": "GOLD",
+  "vao": "deu_dan",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -0.404814,
+  "moc_lenh": 8,
+  "cao_nguyen": [
+   "luoi_dca",
+   "thoi_gian",
+   "hedge",
+   "tt_stop_doi"
+  ],
+  "cai_gai": [
+   "dat_hue",
+   "hue_trailing",
+   "stop_2_dau",
+   "tia",
+   "tp_co_dinh",
+   "trailing"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "luoi_dca": {
+    "sh_max": 7.867163,
+    "sh_tv": 1.2867,
+    "ty_le": 0.72,
+    "lai": 15681.11,
+    "lenh": 30,
+    "dd": 31.0838
+   },
+   "tp_co_dinh": {
+    "sh_max": 1.373301,
+    "sh_tv": -0.7624,
+    "ty_le": 0.4,
+    "lai": 1830.56,
+    "lenh": 16,
+    "dd": 20.7464
+   },
+   "hue_trailing": {
+    "sh_max": 0.778867,
+    "sh_tv": -0.6998,
+    "ty_le": 0.36,
+    "lai": 4721.89,
+    "lenh": 10,
+    "dd": 34.2364
+   },
+   "trailing": {
+    "sh_max": 0.778867,
+    "sh_tv": -0.6998,
+    "ty_le": 0.36,
+    "lai": 4721.89,
+    "lenh": 10,
+    "dd": 34.2364
+   },
+   "thoi_gian": {
+    "sh_max": 0.740628,
+    "sh_tv": 0.7406,
+    "ty_le": 0.6,
+    "lai": 214.11,
+    "lenh": 18,
+    "dd": 14.8001
+   },
+   "hedge": {
+    "sh_max": 0.159468,
+    "sh_tv": -0.1798,
+    "ty_le": 0.76,
+    "lai": 4138.06,
+    "lenh": 8,
+    "dd": 63.2419
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.041699,
+    "sh_tv": -0.2074,
+    "ty_le": 0.88,
+    "lai": 2207.35,
+    "lenh": 6,
+    "dd": 63.0771
+   },
+   "stop_2_dau": {
+    "sh_max": -0.205178,
+    "sh_tv": -0.6519,
+    "ty_le": 0.24,
+    "lai": -502.32,
+    "lenh": 7,
+    "dd": 17.1488
+   },
+   "dat_hue": {
+    "sh_max": -0.336003,
+    "sh_tv": -0.7539,
+    "ty_le": 0.4,
+    "lai": -4716.76,
+    "lenh": 9,
+    "dd": 83.2391
+   },
+   "tia": {
+    "sh_max": -0.347987,
+    "sh_tv": -0.7976,
+    "ty_le": 0.16,
+    "lai": -276.14,
+    "lenh": 25,
+    "dd": 19.0443
+   },
+   "moc": {
+    "sh_max": -0.404814,
+    "sh_tv": -0.4048,
+    "ty_le": 0.0,
+    "lai": -7577.75,
+    "lenh": 8,
+    "dd": 85.7272
+   }
+  }
+ },
+ {
+  "ma": "GOLD",
+  "vao": "quay_ve",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": 0.108599,
+  "moc_lenh": 6,
+  "cao_nguyen": [
+   "tp_co_dinh",
+   "luoi_dca",
+   "hue_trailing",
+   "trailing",
+   "tia"
+  ],
+  "cai_gai": [],
+  "cap_trung": [],
+  "ho": {
+   "luoi_dca": {
+    "sh_max": 4.423625,
+    "sh_tv": 1.85,
+    "ty_le": 0.88,
+    "lai": 10196.37,
+    "lenh": 45,
+    "dd": 39.2259
+   },
+   "hue_trailing": {
+    "sh_max": 3.962427,
+    "sh_tv": 1.3734,
+    "ty_le": 0.92,
+    "lai": 12936.15,
+    "lenh": 15,
+    "dd": 11.8391
+   },
+   "trailing": {
+    "sh_max": 3.962427,
+    "sh_tv": 1.3563,
+    "ty_le": 0.92,
+    "lai": 12936.15,
+    "lenh": 15,
+    "dd": 11.8391
+   },
+   "tp_co_dinh": {
+    "sh_max": 3.712034,
+    "sh_tv": 2.8567,
+    "ty_le": 1.0,
+    "lai": 9115.7,
+    "lenh": 20,
+    "dd": 18.8202
+   },
+   "tia": {
+    "sh_max": 1.225003,
+    "sh_tv": 0.5626,
+    "ty_le": 0.92,
+    "lai": 3715.6,
+    "lenh": 15,
+    "dd": 20.3535
+   },
+   "moc": {
+    "sh_max": 0.108599,
+    "sh_tv": 0.1086,
+    "ty_le": 0.0,
+    "lai": 3774.73,
+    "lenh": 6,
+    "dd": 44.0887
+   },
+   "hedge": {
+    "sh_max": 0.029373,
+    "sh_tv": -0.1945,
+    "ty_le": 0.0,
+    "lai": 1262.15,
+    "lenh": 5,
+    "dd": 51.4584
+   },
+   "tt_stop_doi": {
+    "sh_max": 0.003853,
+    "sh_tv": -0.1714,
+    "ty_le": 0.0,
+    "lai": 63.17,
+    "lenh": 6,
+    "dd": 35.6402
+   },
+   "dat_hue": {
+    "sh_max": -0.093398,
+    "sh_tv": -0.1486,
+    "ty_le": 0.0,
+    "lai": -1574.73,
+    "lenh": 8,
+    "dd": 58.8233
+   },
+   "stop_2_dau": {
+    "sh_max": -0.431004,
+    "sh_tv": -2.1479,
+    "ty_le": 0.0,
+    "lai": -7722.68,
+    "lenh": 6,
+    "dd": 80.9324
+   },
+   "thoi_gian": {
+    "sh_max": -2.280683,
+    "sh_tv": -4.8508,
+    "ty_le": 0.0,
+    "lai": -1081.89,
+    "lenh": 35,
+    "dd": 34.0424
+   }
+  }
+ },
+ {
+  "ma": "USDCHF",
+  "vao": "donchian",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -3.438642,
+  "moc_lenh": 41,
+  "cao_nguyen": [
+   "tia",
+   "luoi_dca",
+   "hue_trailing",
+   "trailing",
+   "tp_co_dinh",
+   "tt_stop_doi",
+   "hedge",
+   "dat_hue",
+   "stop_2_dau"
+  ],
+  "cai_gai": [],
+  "cap_trung": [],
+  "ho": {
+   "luoi_dca": {
+    "sh_max": 1.483461,
+    "sh_tv": -0.5869,
+    "ty_le": 1.0,
+    "lai": 8937.51,
+    "lenh": 136,
+    "dd": 41.8374
+   },
+   "hue_trailing": {
+    "sh_max": 0.964663,
+    "sh_tv": -0.6783,
+    "ty_le": 1.0,
+    "lai": 3056.54,
+    "lenh": 83,
+    "dd": 29.5452
+   },
+   "trailing": {
+    "sh_max": 0.899614,
+    "sh_tv": -0.6956,
+    "ty_le": 1.0,
+    "lai": 2935.27,
+    "lenh": 80,
+    "dd": 29.421
+   },
+   "tia": {
+    "sh_max": 0.261073,
+    "sh_tv": -0.3384,
+    "ty_le": 1.0,
+    "lai": 665.8,
+    "lenh": 101,
+    "dd": 24.4757
+   },
+   "tp_co_dinh": {
+    "sh_max": -0.280808,
+    "sh_tv": -0.9352,
+    "ty_le": 1.0,
+    "lai": -1025.3,
+    "lenh": 101,
+    "dd": 34.9465
+   },
+   "stop_2_dau": {
+    "sh_max": -0.687725,
+    "sh_tv": -2.4554,
+    "ty_le": 0.76,
+    "lai": -2658.22,
+    "lenh": 35,
+    "dd": 48.2543
+   },
+   "hedge": {
+    "sh_max": -0.756641,
+    "sh_tv": -1.8301,
+    "ty_le": 0.96,
+    "lai": -3244.08,
+    "lenh": 36,
+    "dd": 54.6582
+   },
+   "tt_stop_doi": {
+    "sh_max": -0.878878,
+    "sh_tv": -1.5309,
+    "ty_le": 0.92,
+    "lai": -10340.28,
+    "lenh": 13,
+    "dd": 103.1103
+   },
+   "dat_hue": {
+    "sh_max": -1.780408,
+    "sh_tv": -2.0979,
+    "ty_le": 1.0,
+    "lai": -6154.58,
+    "lenh": 63,
+    "dd": 69.1494
+   },
+   "moc": {
+    "sh_max": -3.438642,
+    "sh_tv": -3.4386,
+    "ty_le": 0.0,
+    "lai": -9950.01,
+    "lenh": 41,
+    "dd": 99.5431
+   },
+   "thoi_gian": {
+    "sh_max": -4.123109,
+    "sh_tv": -5.0,
+    "ty_le": 0.0,
+    "lai": -3921.07,
+    "lenh": 184,
+    "dd": 42.5462
+   }
+  }
+ },
+ {
+  "ma": "USDCHF",
+  "vao": "deu_dan",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -2.698632,
+  "moc_lenh": 48,
+  "cao_nguyen": [
+   "tp_co_dinh",
+   "hue_trailing",
+   "trailing",
+   "tia",
+   "tt_stop_doi",
+   "hedge",
+   "stop_2_dau",
+   "dat_hue"
+  ],
+  "cai_gai": [
+   "luoi_dca",
+   "thoi_gian"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "hue_trailing": {
+    "sh_max": 1.633237,
+    "sh_tv": -0.721,
+    "ty_le": 1.0,
+    "lai": 6741.43,
+    "lenh": 79,
+    "dd": 18.3252
+   },
+   "trailing": {
+    "sh_max": 1.567799,
+    "sh_tv": -0.721,
+    "ty_le": 1.0,
+    "lai": 6076.47,
+    "lenh": 74,
+    "dd": 20.2084
+   },
+   "tp_co_dinh": {
+    "sh_max": 0.732605,
+    "sh_tv": 0.157,
+    "ty_le": 1.0,
+    "lai": 2536.19,
+    "lenh": 87,
+    "dd": 26.5508
+   },
+   "stop_2_dau": {
+    "sh_max": 0.638018,
+    "sh_tv": -1.2471,
+    "ty_le": 0.84,
+    "lai": 2831.44,
+    "lenh": 39,
+    "dd": 30.3559
+   },
+   "luoi_dca": {
+    "sh_max": 0.203622,
+    "sh_tv": -2.7689,
+    "ty_le": 0.48,
+    "lai": 2439.83,
+    "lenh": 125,
+    "dd": 74.4572
+   },
+   "tia": {
+    "sh_max": 0.065449,
+    "sh_tv": -0.7813,
+    "ty_le": 1.0,
+    "lai": 176.57,
+    "lenh": 74,
+    "dd": 18.4961
+   },
+   "hedge": {
+    "sh_max": 0.050679,
+    "sh_tv": -1.1811,
+    "ty_le": 0.8,
+    "lai": 361.36,
+    "lenh": 37,
+    "dd": 34.3077
+   },
+   "tt_stop_doi": {
+    "sh_max": -0.346012,
+    "sh_tv": -0.9121,
+    "ty_le": 0.92,
+    "lai": -1153.18,
+    "lenh": 33,
+    "dd": 22.9911
+   },
+   "dat_hue": {
+    "sh_max": -0.801173,
+    "sh_tv": -1.2692,
+    "ty_le": 1.0,
+    "lai": -3089.28,
+    "lenh": 48,
+    "dd": 45.1631
+   },
+   "thoi_gian": {
+    "sh_max": -2.520738,
+    "sh_tv": -5.0,
+    "ty_le": 0.4,
+    "lai": -1294.06,
+    "lenh": 129,
+    "dd": 19.3793
+   },
+   "moc": {
+    "sh_max": -2.698632,
+    "sh_tv": -2.6986,
+    "ty_le": 0.0,
+    "lai": -9727.58,
+    "lenh": 48,
+    "dd": 97.8054
+   }
+  }
+ },
+ {
+  "ma": "USDCHF",
+  "vao": "quay_ve",
+  "trang_thai": "DAT",
+  "ly_do": "",
+  "moc_sharpe": -0.532596,
+  "moc_lenh": 42,
+  "cao_nguyen": [
+   "thoi_gian",
+   "luoi_dca",
+   "tp_co_dinh",
+   "trailing",
+   "hue_trailing"
+  ],
+  "cai_gai": [
+   "hedge",
+   "tia",
+   "tt_stop_doi"
+  ],
+  "cap_trung": [],
+  "ho": {
+   "thoi_gian": {
+    "sh_max": 3.624131,
+    "sh_tv": 3.6241,
+    "ty_le": 1.0,
+    "lai": 2307.37,
+    "lenh": 231,
+    "dd": 12.1204
+   },
+   "tp_co_dinh": {
+    "sh_max": 2.686385,
+    "sh_tv": 0.653,
+    "ty_le": 0.8,
+    "lai": 3927.9,
+    "lenh": 227,
+    "dd": 18.2088
+   },
+   "luoi_dca": {
+    "sh_max": 1.714174,
+    "sh_tv": 1.0953,
+    "ty_le": 0.84,
+    "lai": 14154.01,
+    "lenh": 214,
+    "dd": 58.4449
+   },
+   "trailing": {
+    "sh_max": 1.326299,
+    "sh_tv": -0.2184,
+    "ty_le": 0.88,
+    "lai": 5313.11,
+    "lenh": 101,
+    "dd": 29.3245
+   },
+   "hue_trailing": {
+    "sh_max": 0.919633,
+    "sh_tv": -0.2532,
+    "ty_le": 0.76,
+    "lai": 3717.57,
+    "lenh": 98,
+    "dd": 33.376
+   },
+   "hedge": {
+    "sh_max": 0.313369,
+    "sh_tv": -1.0683,
+    "ty_le": 0.08,
+    "lai": 2708.23,
+    "lenh": 53,
+    "dd": 42.7706
+   },
+   "tia": {
+    "sh_max": 0.023318,
+    "sh_tv": -0.5074,
+    "ty_le": 0.52,
+    "lai": 83.18,
+    "lenh": 77,
+    "dd": 37.5699
+   },
+   "tt_stop_doi": {
+    "sh_max": -0.298989,
+    "sh_tv": -1.1066,
+    "ty_le": 0.04,
+    "lai": -1889.43,
+    "lenh": 41,
+    "dd": 40.5724
+   },
+   "moc": {
+    "sh_max": -0.532596,
+    "sh_tv": -0.5326,
+    "ty_le": 0.0,
+    "lai": -2702.2,
+    "lenh": 42,
+    "dd": 49.1567
+   },
+   "dat_hue": {
+    "sh_max": -0.565503,
+    "sh_tv": -0.8231,
+    "ty_le": 0.0,
+    "lai": -3253.66,
+    "lenh": 55,
+    "dd": 71.1363
+   },
+   "stop_2_dau": {
+    "sh_max": -0.930281,
+    "sh_tv": -3.4915,
+    "ty_le": 0.0,
+    "lai": -7176.67,
+    "lenh": 43,
+    "dd": 88.8117
+   }
+  }
+ },
+ {
+  "ma": "US500Cash",
+  "vao": "donchian",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "0 lenh tren TOAN BO 275 pass - engine vao khong kich hoat hoac tester khong chay",
+  "moc_sharpe": null,
+  "moc_lenh": null,
+  "cao_nguyen": null,
+  "cai_gai": null,
+  "cap_trung": null,
+  "ho": {}
+ },
+ {
+  "ma": "US500Cash",
+  "vao": "deu_dan",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "0 lenh tren TOAN BO 275 pass - engine vao khong kich hoat hoac tester khong chay",
+  "moc_sharpe": null,
+  "moc_lenh": null,
+  "cao_nguyen": null,
+  "cai_gai": null,
+  "cap_trung": null,
+  "ho": {}
+ },
+ {
+  "ma": "US500Cash",
+  "vao": "quay_ve",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "0 lenh tren TOAN BO 275 pass - engine vao khong kich hoat hoac tester khong chay",
+  "moc_sharpe": null,
+  "moc_lenh": null,
+  "cao_nguyen": null,
+  "cai_gai": null,
+  "cap_trung": null,
+  "ho": {}
+ },
+ {
+  "ma": "US100Cash",
+  "vao": "donchian",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "0 lenh tren TOAN BO 275 pass - engine vao khong kich hoat hoac tester khong chay",
+  "moc_sharpe": null,
+  "moc_lenh": null,
+  "cao_nguyen": null,
+  "cai_gai": null,
+  "cap_trung": null,
+  "ho": {}
+ },
+ {
+  "ma": "US100Cash",
+  "vao": "deu_dan",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "0 lenh tren TOAN BO 275 pass - engine vao khong kich hoat hoac tester khong chay",
+  "moc_sharpe": null,
+  "moc_lenh": null,
+  "cao_nguyen": null,
+  "cai_gai": null,
+  "cap_trung": null,
+  "ho": {}
+ },
+ {
+  "ma": "US100Cash",
+  "vao": "quay_ve",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "0 lenh tren TOAN BO 275 pass - engine vao khong kich hoat hoac tester khong chay",
+  "moc_sharpe": null,
+  "moc_lenh": null,
+  "cao_nguyen": null,
+  "cai_gai": null,
+  "cap_trung": null,
+  "ho": {}
  }
 ]
