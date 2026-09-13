@@ -279,3 +279,65 @@ def test_han_ngach_rong_va_n_0():
     from nhan import to_hop as TH
     assert TH.giu_co_han_ngach([], 10) == []
     assert TH.giu_co_han_ngach([_o("A", 1)], 0) == []
+
+
+# ------------------------------------------- CHI PHI KHAI KHONG DUOC VAO PHEU
+#
+# `lab/CLAUDE.md`: "Chi phi phai DO DUOC. `cp.do_tin` la KHAI thi khong bao gio
+# PASS." Luat co tu lau; `to_hop` chua bao gio doc `do_tin`.
+#
+# Do 13/09 tren mot luot chang 1 sach: 8 ma dan dau deu KHAI (nen chung
+# 90/159). Bo chung di thi top 40 doi tu "cagr_dd20 tv 5,6 / moc 0,0 / vuot moc
+# 39/40" thanh "1,7 / 2,2 / 26/40" - so nho hon nhung la so that.
+
+class _Phi:
+    def __init__(self, dt):
+        self.do_tin = dt
+
+
+def test_bo_ma_chi_phi_KHAI(monkeypatch):
+    from nhan import chi_phi as CP
+    from nhan import du_lieu as DL
+    from nhan import to_hop as TH
+    bang = {"EURGBP": "SAN", "AUDCAD": "SAN", "CHFDKK": "KHAI",
+            "EURRUR": "KHAI"}
+    monkeypatch.setattr(DL, "nap", lambda m, k: None)
+    monkeypatch.setattr(CP, "tu_du_lieu", lambda m, df: _Phi(bang[m]))
+    giu, bo = TH.ma_co_chi_phi_do_duoc(list(bang))
+    assert sorted(giu) == ["AUDCAD", "EURGBP"]
+    assert sorted(bo) == ["CHFDKK", "EURRUR"]
+    assert all("KHAI" in v for v in bo.values())
+
+
+def test_ma_do_chi_phi_that_bai_cung_bi_bo_KHONG_im_lang(monkeypatch):
+    """Do chi phi nem loi -> bo, nhung phai co ly do. Bo im lang la cach mot
+    con so 'quet 145 ma' tro thanh sai."""
+    from nhan import chi_phi as CP
+    from nhan import du_lieu as DL
+    from nhan import to_hop as TH
+
+    def no(m, df):
+        raise ValueError("khong co nguon")
+    monkeypatch.setattr(DL, "nap", lambda m, k: None)
+    monkeypatch.setattr(CP, "tu_du_lieu", no)
+    giu, bo = TH.ma_co_chi_phi_do_duoc(["X"])
+    assert giu == [] and "X" in bo and bo["X"]
+
+
+def test_cong_nay_KHONG_duoc_bo_sach(monkeypatch):
+    """Hieu chuan chieu nguoc: tat ca SAN thi khong duoc bo ai. Mot cong tu
+    choi tat ca cho so lieu y het mot cong tot."""
+    from nhan import chi_phi as CP
+    from nhan import du_lieu as DL
+    from nhan import to_hop as TH
+    monkeypatch.setattr(DL, "nap", lambda m, k: None)
+    monkeypatch.setattr(CP, "tu_du_lieu", lambda m, df: _Phi("SAN"))
+    giu, bo = TH.ma_co_chi_phi_do_duoc(["A", "B", "C"])
+    assert giu == ["A", "B", "C"] and bo == {}
+
+
+def test_cong_tat_duoc_de_do_lai():
+    """`DOI_CHI_PHI_DO_DUOC` phai la mot hang so doc duoc, khong phai mot dieu
+    kien chon trong ham - khong thi khong ai do lai duoc anh huong cua no."""
+    from nhan import to_hop as TH
+    assert isinstance(TH.DOI_CHI_PHI_DO_DUOC, bool)

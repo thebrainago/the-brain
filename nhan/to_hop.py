@@ -79,6 +79,8 @@ GIU_CHANG2 = 40
 #: HAN NGACH: mot ma (chang 1) hay mot he (chang 2) duoc chiem toi da bao nhieu
 #: PHAN cua suat giu. Xem `giu_co_han_ngach`.
 HAN_NGACH = 0.04
+#: Bo ma khong DO duoc chi phi. Xem `ma_co_chi_phi_do_duoc`.
+DOI_CHI_PHI_DO_DUOC = True
 #: Luoi thong so cho chang 3. Nho co y: muc dich la do DO NHAY, khong phai tim
 #: so dep nhat - "cao nguyen hay cai gai" (memory `cao-nguyen-hay-cai-gai`).
 LUOI_THAM = [
@@ -144,6 +146,54 @@ def giu_co_han_ngach(ds: list[dict], n: int, khoa=lambda d: d["ma"],
             tran *= 2
         con = thua
     return ra
+
+
+def ma_co_chi_phi_do_duoc(cac_ma: list[str], khung: str = "D1") -> tuple:
+    """Bo ma ma chi phi chi la KHAI BAO, khong phai phep do. -> (giu, bo)
+
+    ## LUAT NAY DA CO, NO CHI KHONG NAM TREN DUONG CHAY
+
+    `lab/CLAUDE.md`: *"**Chi phi phai DO DUOC.** `cp.do_tin` la `KHAI` thi
+    **khong bao gio PASS**."* Tuc moi o chay tren mot ma KHAI la mot o khong
+    the ra ket qua - tien may do la tien vut di theo dung luat cua chinh du an.
+    Nhung `to_hop` truoc gio khong doc `do_tin` mot lan nao. Dung hinh dang cua
+    luat L7: *cong cu khong nam tren duong chay thi bang khong co*.
+
+    ## VA NO KHONG PHAI MOT GOC KHUAT - NO LA DINH BANG XEP HANG
+
+    Do 13/09/2026 tren mot luot chang 1 sach (26-60 ma x 45-120 co che, sau khi
+    bar hong da duoc sua): tam ma dan dau la EURCNH · CHFDKK · CHFPLN · CHFSEK ·
+    EURRUR · EURRUB · AUDPLN · AUDHKD - **8/8 deu KHAI**, tren nen chung ca vu
+    tru chi 90/159 la KHAI. Nguoc lai EURGBP · AUDCAD · XM_US100CASH (noi ca
+    chin he da qua cong dang nam) deu SAN.
+
+    Co ly do co che chu khong phai trung hop: ma khong co nguon phi la ma san
+    khong bao gia lien tuc - tuc cap neo (DKK neo EUR, CNH quan ly), cap chet
+    (EURRUR), cap mong. Chung co bien dong THAP, va `cagr_dd20` quy moi thu ve
+    cung ngan sach sut giam 20% nen no PHAT don bay rat lon cho chuoi it bien
+    dong. Ket qua: **pheu thuong cho su thieu hieu biet** - ma nao chua ai do
+    phi thi ma do len dau bang.
+
+    Bo chung KHONG ha nguong nao: theo luat cua du an chung von khong the PASS.
+    Nhung khong duoc bo IM LANG - danh sach tra ve de con di do phi cho chung.
+    """
+    from nhan import chi_phi as CP
+    from nhan import du_lieu as DL
+    giu, bo = [], {}
+    for m in cac_ma:
+        try:
+            c = CP.tu_du_lieu(m, DL.nap(m, khung))
+            c = c[0] if isinstance(c, tuple) else c
+            dt = str(getattr(c, "do_tin", "KHAI"))
+        except Exception as e:
+            bo[m] = "khong do duoc chi phi: %s" % type(e).__name__
+            continue
+        if dt == "KHAI":
+            bo[m] = "chi phi KHAI (khong phai phep do)"
+        else:
+            giu.append(m)
+    return giu, bo
+
 
 
 # ------------------------------------------------------------------ TIA KHONG GIAN
@@ -360,6 +410,15 @@ def chay(cac_khung=KHUNG_MAC_DINH, gh_ma: int = 0, gh_co_che: int = 0,
     if gh_ma:
         ma = ma[:gh_ma]
     in_ra("ma: %d -> %d (bo %d ban sao)" % (len(ma0), len(ma), len(bo_trung)))
+
+    if DOI_CHI_PHI_DO_DUOC:
+        truoc = len(ma)
+        ma, bo_phi = ma_co_chi_phi_do_duoc(ma, "D1")
+        if bo_phi:
+            in_ra("ma: %d -> %d (bo %d ma chi phi KHAI - theo luat cua du an "
+                  "chung khong the PASS)" % (truoc, len(ma), len(bo_phi)))
+            in_ra("     %s%s" % (", ".join(sorted(bo_phi)[:12]),
+                                 " ..." if len(bo_phi) > 12 else ""))
 
     cap_khung = {m: khung_dung_duoc(m, cac_khung) for m in ma}
     o_mk = [(m, k) for m in ma for k in cap_khung[m]]
