@@ -1,0 +1,27 @@
+127 file test -> 11 me x 12 file, 3 nhan moi me
+  me  1/11  141 passed, 6 subtests passed in 19.50s
+  me  2/11  1 failed, 136 passed in 87.82s (0:01:27)
+  me  3/11  173 passed, 13 subtests passed in 10.69s
+  me  4/11  209 passed, 1 skipped, 65 subtests passed in 35.92s
+  me  5/11  199 passed, 39 subtests passed in 413.35s (0:06:53)
+  me  6/11  2 failed, 153 passed in 19.82s
+  me  7/11  1 failed, 146 passed, 35 subtests passed in 122.72s (0:02:02)
+Traceback (most recent call last):
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\chay_test_tung_me.py", line 129, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\chay_test_tung_me.py", line 117, in main
+    r = chay(int(lay("--me", "12")), int(lay("--nhan", "3")),
+             lay("--tu-khoa", ""))
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\chay_test_tung_me.py", line 90, in chay
+    r = subprocess.run(lenh, cwd=str(LAB), capture_output=True, text=True,
+                       errors="replace", timeout=1800)
+  File "C:\Python314\Lib\subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1664, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['C:\\Python314\\python.exe', '-m', 'pytest', '-q', '-p', 'no:cacheprovider', '--no-header', '-rf', '-n', '3', '--dist', 'loadfile', 'test_mau_nen.py', 'test_mau_v2.py', 'test_mimic_ban_do.py', 'test_muc_tieu_va_noi_sinh.py', 'test_nen.py', 'test_neo_truot_x10.py', 'test_ngoai_sinh.py', 'test_ngu_phap_toan_hang.py', 'test_ngu_phap_trung.py', 'test_nguon_bai_viet.py', 'test_nguon_track_record.py', 'test_nguon_xa_hoi.py']' timed out after 1800 seconds

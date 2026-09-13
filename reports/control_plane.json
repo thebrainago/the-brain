@@ -4,14 +4,14 @@
  "pid": 1708,
  "process_created_epoch": 1789268250.6108367,
  "started_epoch": 1789268250.9971144,
- "updated_epoch": 1789272883.9679918,
- "updated_at": "2026-09-13 11:14:43",
+ "updated_epoch": 1789273197.586286,
+ "updated_at": "2026-09-13 11:19:57",
  "status": "running",
  "live": true,
  "ready": true,
  "health": "unhealthy",
  "cpu": {
-  "current_percent": 44.7,
+  "current_percent": 50.2,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -23,7 +23,7 @@
    "QUANTLAB": {
     "lane": "compute",
     "started_epoch": 1789272327.4665232,
-    "elapsed_seconds": 556.5
+    "elapsed_seconds": 870.1
    }
   },
   "pending": []
@@ -66,19 +66,24 @@
    "stderr_tail": ""
   },
   "SEEKER": {
-   "status": "ok",
-   "rc": 0,
-   "giay": 305.6,
-   "fatal": [],
-   "degraded": [],
+   "status": "error",
+   "rc": 1,
+   "giay": 0.3,
+   "fatal": [
+    "rc=1",
+    "nhip_khong_cap_nhat"
+   ],
+   "degraded": [
+    "stdout_khong_co_json"
+   ],
    "skip_reason": "",
    "nhip": {
     "luc": "2026-09-13 11:03:24",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "tfiction\": \"9/40 bai\"\n    },\n    {\n     \"quantforhire\": \"10/40 bai\"\n    },\n    {\n     \"quant_galore\": \"12/40 bai\"\n    },\n    {\n     \"quantjourney\": \"9/40 bai\"\n    },\n    {\n     \"quantifiableedges\": \"10/40 bai\"\n    },\n    {\n     \"quantish\": \"4/40 bai\"\n    },\n    {\n     \"returnstacked\": \"10/40 bai\"\n    },\n    {\n     \"rulyfi\": \"5/40 bai\"\n    },\n    {\n     \"sixfigureinvesting\": \"10/40 bai\"\n    }\n   ]\n  },\n  \"tim\": {\n   \"da_thu\": 1,\n   \"them\": [],\n   \"khong_dat\": [],\n   \"khong_co_feed\": 1\n  },\n  \"sua",
-   "stderr_tail": ""
+   "stdout_tail": "",
+   "stderr_tail": "OpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, givi"
   },
   "NGHI": {
    "status": "ok",

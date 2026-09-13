@@ -88,8 +88,21 @@ def test_go_lam_tang_ty_le_qua_pheu():
 
 
 def test_go_khong_no_voi_dau_vao_rac():
+    """Bo go chay tren ca kho nen no gap moi hinh dang dau vao.
+
+    Ban dau bai nay chi GOI `GH.go(...)` ma khong khang dinh gi - va hien phap
+    cua lab (`test_hien_phap.KhongTestRong`) bat dung no ngay trong ngay viet
+    ra. Mot bai tu bao PASSED ma khong kiem gi thi te hon khong co bai, vi no
+    lam bang so xanh dep len ma khong gac cai nao.
+    """
     for vb in ("", None, "khong phai html", "<html>", "<<<<>>>>"):
-        GH.go(vb or "")
+        assert isinstance(GH.go(vb or ""), str)
+    assert GH.go("") == ""              # rong vao thi rong ra, khong bia
+    assert "RSI" in GH.go("Vao lenh khi RSI duoi 30")   # van xuoi di qua nguyen
+    # THE that thi khong duoc sot; con `<<<<>>>>` thi bs4 coi la VAN BAN chu
+    # khong phai the, va giu nguyen no moi dung - do khong phai HTML.
+    assert "<p>" not in GH.go("<div><p>Cat lo 1%</p></div>")
+    assert GH.go("<<<<>>>>") == "<<<<>>>>"
 
 
 def test_hau_to_khong_go_hai_lan():

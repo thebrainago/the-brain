@@ -103358,25 +103358,6 @@
   "_do_tren": "chuoi kiem"
  },
  {
-  "ten": "thu_khong_co_co_che",
-  "ho": "pha_vo",
-  "chieu": 1,
-  "giu": 1,
-  "vao": [
-   {
-    "trai": {
-     "chi_bao": "gia",
-     "cot": "close"
-    },
-    "phep": ">",
-    "phai": {
-     "chi_bao": "gia",
-     "cot": "open"
-    }
-   }
-  ]
- },
- {
   "ten": "long_margin_breakout",
   "co_che": "Mua gia margined khi RSI quá mua và giá đóng cửa vượt mở cửa, tận dụng đà tăng ngắn hạn với đòn bẩy 150% để tối đa hóa lợi nhuận.",
   "ho": "xu_huong",
@@ -105672,5 +105653,135 @@
   "nguon": "https://quantjourney.substack.com/p/the-treasury-short-squeeze-setup",
   "_ty_le_kich_hoat": 0.5,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "phan_phoi_ca_map_retest_inh",
+  "co_che": "Tận dụng vùng tích lũy khối lượng bán tại đỉnh xu hướng tăng. Sau khi giá phá vỡ hỗ trợ và hồi test vùng phân phối, xác nhận bằng nến giảm mạnh để vào lệnh theo xu hướng giảm tiếp diễn.",
+  "ho": "xu_huong",
+  "giu": 100,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "chieu": 1,
+  "nguon": "boc_llm",
+  "_ty_le_kich_hoat": 0.471,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "hoi_ve_vung_phan_ung_va_chia_lenh",
+  "co_che": "Luat rut TU MA NGUON `boc_llm` (hoi_ve_vung_phan_ung_va_chia_lenh), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: Biến động",
+  "ho": "bien_dong",
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 10
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "chieu": 1,
+  "nguon": "boc_llm",
+  "_ly_do_may_dien": true,
+  "_ty_le_kich_hoat": 0.9105,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "khung_gio_thuc_thi_00h_en_00h30",
+  "co_che": "Giao dịch viên trả phí vì việc chốt lệnh đúng khung giờ bán lẻ tan ca giúp tránh biến động giả, đảm bảo lợi nhuận thực từ sự điều hòa giá chuẩn xác.",
+  "ho": "phien",
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   }
+  ],
+  "chieu": 1,
+  "nguon": "boc_llm",
+  "_ty_le_kich_hoat": 0.9235,
+  "_do_tren": "EURUSD H1"
  }
 ]

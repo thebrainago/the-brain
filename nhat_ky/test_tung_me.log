@@ -1,0 +1,19 @@
+127 file test -> 11 me x 12 file, 3 nhan moi me
+  me  1/11  INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 266, in worker_errordown
+  me  2/11  INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 266, in worker_errordown
+  me  3/11  CHET  (test_cong_do_phan_giai.py)
+  me  4/11  CHET  (test_dieu_phoi_chet.py)
+  me  5/11  CHET  (test_don_bay_va_carry.py)
+  me  6/11  CHET  (test_han_ngach_nguon.py)
+  me  7/11  INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 266, in worker_errordown
+  me  8/11  INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 267, in worker_errordown
+  me  9/11  INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 266, in worker_errordown
+  me 10/11  CHET  (test_seeker_artifacts.py)
+  me 11/11  INTERNALERROR>   File "C:\Users\SV STORE\AppData\Roaming\Python\Python314\site-packages\xdist\dsession.py", line 266, in worker_errordown
+
+=== TONG: 0 xanh · 0 DO · 0 bo qua · 0 loi · 257s ===
+   ME CHET 3: test_cong_do_phan_giai.py test_cong_fdr_v2.py test_cong_ra_tien.py test_cua_vao.py test_da_thoi_dai.py test_danh_muc.py test_dap_quan_tri.py test_dau_chan.py test_day_chuyen.py test_day_chuyen_quantlab.py test_de_quan_tri.py test_dich_mq5.py
+   ME CHET 4: test_dieu_phoi_chet.py test_dieu_phoi_control.py test_dns_vuot.py test_do_im_lang.py test_do_luc.py test_do_on_dinh.py test_do_phan_giai_va_phien.py test_do_tai_nguyen.py test_doc_hieu.py test_doc_hieu_viet.py test_doc_ma.py test_don_bay.py
+   ME CHET 5: test_don_bay_va_carry.py test_don_mo_coi.py test_ea_tu_dong.py test_evo.py test_evo_bao_xa.py test_evo_phanh.py test_evolution.py test_finder_nguon_moi.py test_ghi_so_fdr.py test_gian_doan.py test_go_html.py test_gop_lop.py
+   ME CHET 6: test_han_ngach_nguon.py test_hang_doi.py test_hien_phap.py test_hieu_chuan_to_hop.py test_hinh_dang_vs_null.py test_hinh_hoc.py test_ho_so_mua_vu.py test_ho_so_quantlab.py test_ho_so_symbol.py test_ho_so_tai_san.py test_hop_dong.py test_ket_qua_hoat_dong.py
+   ME CHET 10: test_seeker_artifacts.py test_so_concurrency_v2.py test_so_sach_fdr.py test_sua_bar_hong.py test_suy_giam.py test_suy_nguoc.py test_tai_khoan_nen_tang.py test_tham_so_dsl_va_lan_can.py test_thu_hoi_thanh_phan.py test_tin_hieu_mql5.py test_tinh_cach.py test_to_hop.py

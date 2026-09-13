@@ -1,66 +1,93 @@
-# TIEP TUC MAI — chot 12/09/2026 (toi)
+# TIEP TUC MAI — chot 13/09/2026
 
-## Trang thai luc tat may
+Phien nay chu du an doi muc tieu giua chung: *"Muc tieu van chua phai la ra
+nhieu co che hay kiem tien ma cai he thong phai tot da."* Nen ca ngay la SUA
+HE. Bao cao day du: `../BAO_CAO_2026_09_13.md`.
 
-    kho co che      2.741   (dau phien 2.554, +187 tu 684 file chi bao)
-    mo coi that     5       (dau phien 26)
-    tren duong chay 148     (dau phien 107)
-    EVO             22/22 TOT
-    o C             8,7 GB trong   (co luc chi con 177 MB)
-    nao.db-wal      0 MB    (da gop truoc khi tat - DUNG bo qua buoc nay)
-    git             dc4e038
+## DANG CHAY KHI TAT MAY
+
+**Boc 55 video khoa hoc** (`_boc_video_khoa_hoc.py`, 4 tien trinh, ~7,8 gio).
+Chu du an giao: *"may khoa hoc do that ra toi da hoc roi nhung cho bro coi nhu
+bai tap. Boc va test 14gb du lieu do di. Xong roi xoa."*
+
+    xem tien do:  tail -1 nhat_ky/video_lat{0,1,2,3}.log
+    chay tiep:    python _boc_video_khoa_hoc.py        (tu bo qua file da doc)
+    dem duoc gi:  python -m nhan.doc_video_cuc_bo --xem
+
+**Xong roi thi con HAI viec nua, dung quen:**
+1. `python _xao_toan_kho.py 300 16` — boc co che tu 55 ban doc moi. **Day moi
+   la phep thu that**: van xuoi tieng Viet noi -> co che. Chua ai do suat do.
+2. Chi khi (1) xong moi **xoa `F:\TeraBoxDownload`** (14,2 GB).
+
+## TRANG THAI LUC TAT MAY
+
+    kho co che      3.033   (dau phien 2.741; da bi xoa 2 lan va khoi phuc du)
+    o C trong       31,5 GB (dau phien 8,6 -> co luc 233 MB)
+    o F trong       4,6 GB
+    ung vien pheu   785 (truoc khi go HTML: 8)
+    bo test         ~1.115 xanh / 4 do (dang truy, xem duoi)
+    git             0547bd0
 
 ## BON VIEC DAU PHIEN, THEO THU TU
 
-**1. Chay lai pheu `to_hop` — no CHUA XONG.** Lan chay toi 12/09 moi den CHANG 1
-(258.020 o) thi bi dung de tat may. Day la lan dau tien pheu chay tren du lieu
-DA SUA, nen bang xep hang cu (`reports/TO_HOP.json`) van la bang BAN - 120/120
-dong dau deu la EURMXN voi so lieu tu 68 bar hong.
+**1. Bon bai test DO.** Da biet nam trong me 2/6/7 cua `b test-me`, dang chay
+lai de lay ten. Xem `nhat_ky/test_do.log`. **Dung chay `b test` (8 tien trinh)
+khi may dang ban** — no chet giua chung 4 lan trong ngay 13/09. Dung:
 
-    python -u -m nhan.to_hop --khung D1
+    b test-me                  chia me, me nao chet thi biet la me nao
+    b test-me --nhan 1 --me 8  khi van chet
 
-Xong thi cham tien: `python -c "...V._cham_tien(print)"` hoac `b vong`.
+**2. Quet ban do quan tri rong hon.** `b bench-qt --quet` moi chay 3 ma x 3
+engine = 9 luot. Cot `tren deu_dan` (phep thu phan chung) chi co 3 quan sat
+nen chua ket luan chac duoc ho nao that su qua.
 
-**2. Xem hai bai test do.** Bo test chot phien chay den 94% thi bi cat. Truoc do
-thay 2 chu `F` (o moc 59% va 63%) nhung chua kip biet la bai nao:
+    python _quet_bench_qt.py US500Cash,US100Cash,EURUSD,GBPUSD,USDJPY,GOLD,GER40Cash
+    python _tong_bench_qt.py
 
-    python b.py test
+**3. `dat_hue` la ung vien quan tri THUAN dang theo** — hon moc ca LAI lan SUT
+GIAM o **9/9** luot, va no giu chieu (khac `stop_2_dau`). Nen thu ghep no vao
+cac he DA PASS thay vi chi do tren ban do.
 
-**3. Boc not kho.** Duong LLM da thong (ghim thang AiBox, tran 20.000/ngay) va
-684 file chi bao vua ra 93%. Con **97% kho chua boc**: 5.131 file ma nguon,
-3.771 tai lieu hoc thuat. Hang doi da nap san:
+**4. Khau tai payload vua sua chua chay het.** `ma_nguon.thu_hoi_sai_loai()` do
+duoc 31/40 URL sua duoc; con ~3.500 trang landing chua tai lai.
 
-    python day_viec.py        # xao_ma_llm, xao_hoc_thuat, noi_sinh_da_ma...
+## BAY MOI, DA CHAN NHUNG PHAI NHO
 
-**4. Dua quan tri vi the ra tester.** 49/75 khai bao dich duoc sang MQL5 va chen
-duoc vao EA ngoai. Buoc con thieu la DO that:
+1. **Mot lan DOC hong co the xoa sach kho.** `doc_kho()` tung nuot loi va tra
+   `[]`, roi `luu_kho` lay `cu = 0` nen chot chong teo TAT. Nay `doc_kho` nem
+   `KhoDocHong`, chot so voi MOC CAO NHAT, va co ban lui `.json.lui`. Khi thay
+   so co che tut bat thuong: **dung ghi tiep bat cu thu gi**, kiem
+   `git show HEAD:lab/config/co_che_dsl.json` va `config/co_che_dsl.json.lui`
+   truoc. Vet goi cua moi lan ghi lam kho nho di o `nhat_ky/kho_co_che_ghi.log`.
 
-    b quan-tri --cap <EA.mq5> --khai-bao <i>   # sinh cap GOC / CO-QUAN-TRI
-    # roi dua CA HAI vao `chay_tester_kho.py` va so ket qua
+2. **Het dia khong hien ra nhu loi dia.** Ca hai lan mat du lieu hom nay deu
+   bat nguon tu o C con 233 MB. Nay co cong `nhan/dia.py` chan o `luu_kho`,
+   `boc_llm.boc`, `go_html.go_kho`. Kiem nhanh: `python -m nhan.dia`.
 
-## CAN NGUOI (30 giay)
+3. **Tien trinh python mo coi tich lai lam may khong sinh duoc tien trinh moi.**
+   Do 13/09: 34 tien trinh con sot -> `ENOMEM: uv_spawn`, pytest chet im lang.
+   `taskkill /F /IM python.exe` truoc khi chay bo test lon.
 
-`b xa` roi nhan bot Telegram mot cau. `chat_id` van la 0 nen EVO KHONG gui duoc
-canh bao nao ra ngoai - khi he cam VPS chay nhieu thang, do la duong duy nhat
-de biet co chuyen.
+4. **Mot ghi chu chua kiem cung la mot cai bay.** `doc_video.py` ghi
+   *"faster_whisper can ffmpeg nen hien tai chua bat"* - SAI, no giai ma bang
+   PyAV. Mot nang luc co san bi khai la khong co, va khong ai thu lai suot mot
+   thang. Luat *"lay ba thu chac chan CO ra thu"* phai ap cho ca NANG LUC.
 
-## BA BAY MOI, DA CHAN NHUNG PHAI NHO
+5. **Bai test khong duoc sua du lieu san xuat.** `test_chan_hang_so` tung
+   doc-sua-ghi kho THAT. Nay co cong o `conftest.py` (theo tung bai khi mot
+   nhan, theo ca phien duoi xdist).
 
-1. **Dia day khong hien ra nhu loi dia.** No hien ra nhu "boc 684 file -> 0 co
-   che" va "viec XONG rc=0 ma kho khong doi". Thu pham 12/09 la `nao.db-wal`
-   1,4 GB. Kiem `b don-dia` + `b evo` TRUOC khi tin bat ky ket qua rong nao.
+## CONG CU MOI
 
-2. **Bo do ket luan "khong co" phai chung minh no THAY DUOC cai co.** Ban do mu
-   ba lan trong mot phien, moi lan deu bao mo coi cho thu dang chay hang ngay.
-   Lay ba thu chac chan CO ra thu truoc khi tin mot danh sach rong.
+    b go-html [N]     go trang HTML tho -> van ban  (khau TRUOC `b boc`)
+    b bench-qt [MA]   ban do 11 ho quan tri vi the; `--quet` da tai san
+    b test-me         chay bo test theo me (ben khi may nghet)
+    python -m nhan.dia                 con bao nhieu GB truoc nguong chan ghi
+    python -m nhan.doc_video_cuc_bo --xem   video tren dia da doc bao nhieu
+    python _tong_bench_qt.py           tong hop ban do quan tri
 
-3. **Du lieu hong bom ra ket qua dep.** EURMXN 68 bar lech x10 -> "942%/nam"
-   tren mot cap di ngang 9 nam, va no chiem tron 120/120 dong dau bang. Da sua
-   (neo truot) va da noi cong `dung_duoc` vao pheu, nhung con so nao qua dep
-   thi van phai truy nguoc ve du lieu truoc.
+## DIA — con can nguoi
 
-## DUONG DAN DA DOI
-
-`data/` va `data_khung/` gio nam o **F:\TheBrain_luu\**. Doi cho duoc bang bien
-`BRAIN_DATA` / `BRAIN_CACHE`, hoac sua `nhan/duong_dan.py`. Neu o F khong gan
-duoc thi hai ham do tu roi ve duong cu trong lab.
+    F:\Zalo Data          60,3 GB   don trong chinh Zalo, thuong lay lai 40-50
+    F:\Riot Games         44,1 GB   game
+    F:\Chuyen_tu_C\Apple_iTunes  5,7 GB  da chuyen tu C sang, xoa duoc neu khong can

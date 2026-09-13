@@ -4,7 +4,7 @@ Dich: **VPS chay 24/7 nhieu thang** (chu du an chot 12/09/2026).
 
 ## 1. DA SAN SANG
 
-- duong dan tuyet doi go cung trong ma nguon: **26** <- PHAI SUA truoc khi chuyen
+- duong dan tuyet doi go cung trong ma nguon: **27** <- PHAI SUA truoc khi chuyen
   - `C:\Users\SV STORE\Downloads\Research SP500\lab` (chup_darwinex.py, 10x)
   - `C:\Program Files\XM MT5\terminal64.exe` (chay_tester_z5.py, 4x)
   - `C:\Users\SV STORE\Downloads\Research SP500` (cross_pair_quet.py, 4x)

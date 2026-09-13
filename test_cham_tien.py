@@ -66,11 +66,23 @@ def test_so_lenh_nam_chia_dung_so_nam():
 
 
 def test_thieu_so_nam_thi_bo_qua_chu_khong_doan(tmp_path, monkeypatch):
-    """Dong khong co `so_nam` phai bi BO, khong duoc lay tong lenh lam lenh/nam."""
+    """Dong khong co `so_nam` phai bi BO, khong duoc lay tong lenh lam lenh/nam.
+
+    Bai nay dung `ma` = `US500CASH` cho toi 13/09/2026 va do la mot bo do MU:
+    `_cham_tien._nam()` nay co duong lui - thieu `so_nam` thi no NAP GIA THAT
+    cua ma do roi tu tinh ra (them vi `TO_HOP.json` cu khong co truong nay va
+    chay lai ca pheu mat ~110 phut). Voi mot ma CO THAT trong kho, duong lui
+    do luon thanh cong, nen `thieu_nam` mai mai bang 0 va bai kiem do khong
+    con gac gi.
+
+    Hop dong DUNG bay gio la: thieu `so_nam` VA khong suy ra duoc tu du lieu
+    -> bo dong do. Nen o day phai dung mot ma KHONG co trong kho.
+    """
     so = tmp_path / "reports"
     so.mkdir()
     (so / "TO_HOP.json").write_text(json.dumps({
-        "top": [{k: v for k, v in _TOT.items() if k != "so_nam"}],
+        "top": [{k: v for k, v in _TOT.items() if k != "so_nam"}
+                | {"ma": "MA_KHONG_TON_TAI_XYZ"}],
         "holdout": []}), encoding="utf-8")
     monkeypatch.setattr(V, "LAB", tmp_path)
     k = V._cham_tien(lambda *a: None)

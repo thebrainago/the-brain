@@ -12,6 +12,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b xa              bat DIEU KHIEN XA qua Telegram (tat may / dung he tu xa)
     b xa-thu          kiem cau hinh Telegram + gui mot tin thu
     b test [tu-khoa]  chay test SONG SONG (8 tien trinh, ~1 phut thay vi 6)
+    b test-me         chay test theo ME (ben khi may nghet - xem chay_test_tung_me.py)
     b test1 [tu-khoa] chay test MOT tien trinh (khi nghi song song lam sai)
     b toan-canh       MOT man hinh: dau vao + kho co che + tang kham pha
     b trang-thai      bang dieu khien (van hanh cua dieu phoi)
@@ -141,6 +142,17 @@ def c_phan_loai(a):
     """b phan-loai - chia kho ma thanh 4 lan + bang suat boc tung lan."""
     return chay([PY, LAB / "nhan" / "phan_loai_ma.py",
                  *(a or ["--suat"])], cwd=LAB)
+
+
+def c_test_me(a):
+    """b test-me - chay ca bo test bang NHIEU tien trinh pytest NGAN.
+
+    Dung khi `b test` chet giua chung. Do 13/09: `b test` chet 4 lan lien o
+    56-94% khong ban tom tat, vi mot tien trinh pytest song suot ~1.060 bai
+    tich du bo nho tren mot may dang nghet paging. Chia me thi khong me nao
+    song du lau, va me nao chet ta BIET la me nao.
+    """
+    return chay([PY, LAB / "chay_test_tung_me.py", *a], cwd=LAB)
 
 
 def c_bench_qt(a):
@@ -730,6 +742,7 @@ LENH = {
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
     "quan-tri": c_quan_tri, "qt": c_quan_tri,
     "bench-qt": c_bench_qt, "go-html": c_go_html,
+    "test-me": c_test_me,
     "luan-lenh": c_luan_lenh, "chuyen": c_chuyen,
     "dau-chan": c_dau_chan, "im-lang": c_im_lang,
     "don-dia": c_don_dia,

@@ -129,10 +129,40 @@ class DuongLLM(unittest.TestCase):
         self.assertEqual(TT.MAC_DINH["duong"], "tat")
 
     def test_phanh_chi_phi_con_nguyen(self):
+        """Phanh phai nam o MAC DINH, khong o cau hinh dang chay.
+
+        Ban cu doi `cau_hinh()["tran_moi_ngay"] <= 100` va `cach_nhau_giay >=
+        60`. Ngay 12/09/2026 chu du an nap quota va yeu cau *"vat no het co"*,
+        nen tran duoc nang 40 -> 20.000 va cach_nhau 600 -> 0 **co chu dich, co
+        ghi ly do** ngay trong `config` (`_ghi_chu_tran_12_09`). Voi con so cu
+        thi mot me 684 file chi bao can 171 NGAY moi boc xong.
+
+        Tu 13/09 bai nay gac hai thu KHAC, va ca hai deu ben khi nguoi dung doi
+        han muc:
+
+          1. **MAC DINH phai giu phanh chat.** Do la thu mot may moi, mot ban
+             sao moi, mot nguoi moi nhan duoc. Noi loi o day la noi loi cho
+             tat ca; noi loi o `cau_hinh()` chi la noi cho may nay.
+          2. **Tran dang chay phai HUU HAN va phai co ghi chu giai thich.** Mot
+             han muc bi nang len ma khong ai ghi ly do la mot han muc khong ai
+             ra quyet dinh - do moi la "mat phanh".
+        """
         from nhan import tri_tue as TT
+        md = TT.MAC_DINH
+        self.assertEqual(md["duong"], "tat")
+        self.assertLessEqual(md["tran_moi_ngay"], 100)
+        self.assertGreaterEqual(md["cach_nhau_giay"], 60)
+
         c = TT.cau_hinh()
-        self.assertLessEqual(c["tran_moi_ngay"], 100)
-        self.assertGreaterEqual(c["cach_nhau_giay"], 60)
+        self.assertIsInstance(c["tran_moi_ngay"], int)
+        self.assertGreater(c["tran_moi_ngay"], 0, "tran phai HUU HAN")
+        self.assertLessEqual(c["tran_moi_ngay"], 100000)
+        if c["tran_moi_ngay"] > md["tran_moi_ngay"]:
+            ghi = " ".join(str(v) for k, v in c.items()
+                           if k.startswith("_ghi_chu"))
+            self.assertIn("ran", ghi,
+                          "tran duoc nang cao hon mac dinh ma khong co ghi "
+                          "chu nao giai thich - xem `_ghi_chu_tran_*`")
 
 if __name__ == "__main__":
     unittest.main()

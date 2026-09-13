@@ -1,0 +1,98 @@
+......F................................................................. [ 16%]
+........................................................................ [ 32%]
+................F.F..................................................... [ 49%]
+........................................................................ [ 65%]
+............................................................ [ 79%]
+........................................................................ [ 95%]
+......F............                               [100%]
+================================== FAILURES ===================================
+_________________ test_thieu_so_nam_thi_bo_qua_chu_khong_doan _________________
+
+tmp_path = WindowsPath('C:/Users/SV STORE/AppData/Local/Temp/pytest-of-SV STORE/pytest-388/test_thieu_so_nam_thi_bo_qua_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002256380AC40>
+
+    def test_thieu_so_nam_thi_bo_qua_chu_khong_doan(tmp_path, monkeypatch):
+        """Dong khong co `so_nam` phai bi BO, khong duoc lay tong lenh lam lenh/nam."""
+        so = tmp_path / "reports"
+        so.mkdir()
+        (so / "TO_HOP.json").write_text(json.dumps({
+            "top": [{k: v for k, v in _TOT.items() if k != "so_nam"}],
+            "holdout": []}), encoding="utf-8")
+        monkeypatch.setattr(V, "LAB", tmp_path)
+        k = V._cham_tien(lambda *a: None)
+>       assert k.get("thieu_nam") == 1
+E       AssertionError: assert 0 == 1
+E        +  where 0 = <built-in method get of dict object at 0x000002253790AF80>('thieu_nam')
+E        +    where <built-in method get of dict object at 0x000002253790AF80> = {'cham': 1, 'thieu_nam': 0, 'chay_duoc': 1, 'qua_holdout': 0}.get
+
+test_cham_tien.py:77: AssertionError
+_______ KhongTestRong.test_khong_ham_test_nao_tu_pass_ma_khong_kiem_gi ________
+
+self = <test_hien_phap.KhongTestRong testMethod=test_khong_ham_test_nao_tu_pass_ma_khong_kiem_gi>
+
+    def test_khong_ham_test_nao_tu_pass_ma_khong_kiem_gi(self):
+        rong = []
+        for f in sorted(LAB.glob("test_*.py")):
+            if f.name in BO_QUA_FILE_TEST:
+                continue
+            cay = ast.parse(f.read_text(encoding="utf-8-sig"))
+            for ten, node in _cac_ham_test(cay):
+                if _la_test_rong(node):
+                    rong.append(f"{f.name}::{ten}")
+>       self.assertEqual(
+            rong, [],
+            "test rong (tu bao PASSED ma khong kiem gi):\n  " + "\n  ".join(rong))
+E       AssertionError: Lists differ: ['test_go_html.py::test_go_khong_no_voi_dau_vao_rac'] != []
+E       
+E       First list contains 1 additional elements.
+E       First extra element 0:
+E       'test_go_html.py::test_go_khong_no_voi_dau_vao_rac'
+E       
+E       - ['test_go_html.py::test_go_khong_no_voi_dau_vao_rac']
+E       + [] : test rong (tu bao PASSED ma khong kiem gi):
+E         test_go_html.py::test_go_khong_no_voi_dau_vao_rac
+
+test_hien_phap.py:85: AssertionError
+_ MoiModuleDeuCoNguoiKiem.test_module_moi_khong_duoc_ra_doi_ma_khong_co_test __
+
+self = <test_hien_phap.MoiModuleDeuCoNguoiKiem testMethod=test_module_moi_khong_duoc_ra_doi_ma_khong_co_test>
+
+    def test_module_moi_khong_duoc_ra_doi_ma_khong_co_test(self):
+        thieu = sorted(k for k, n in self._ban_do().items()
+                       if n == 0 and k not in CHUA_CO_TEST)
+>       self.assertEqual(
+            thieu, [],
+            "module khong co file test nao nhac den, va khong nam trong "
+            "CHUA_CO_TEST:\n  " + "\n  ".join(thieu) +
+            "\n\nViet test, hoac them vao CHUA_CO_TEST kem ly do.")
+E       AssertionError: Lists differ: ['nhan/doc_video_cuc_bo.py', 'nhan/gop_wal.py'] != []
+E       
+E       First list contains 2 additional elements.
+E       First extra element 0:
+E       'nhan/doc_video_cuc_bo.py'
+E       
+E       - ['nhan/doc_video_cuc_bo.py', 'nhan/gop_wal.py']
+E       + [] : module khong co file test nao nhac den, va khong nam trong CHUA_CO_TEST:
+E         nhan/doc_video_cuc_bo.py
+E         nhan/gop_wal.py
+E       
+E       Viet test, hoac them vao CHUA_CO_TEST kem ly do.
+
+test_hien_phap.py:128: AssertionError
+___________________ DuongLLM.test_phanh_chi_phi_con_nguyen ____________________
+
+self = <test_ma_nguon_sach.DuongLLM testMethod=test_phanh_chi_phi_con_nguyen>
+
+    def test_phanh_chi_phi_con_nguyen(self):
+        from nhan import tri_tue as TT
+        c = TT.cau_hinh()
+>       self.assertLessEqual(c["tran_moi_ngay"], 100)
+E       AssertionError: 20000 not less than or equal to 100
+
+test_ma_nguon_sach.py:134: AssertionError
+=========================== short test summary info ===========================
+FAILED test_cham_tien.py::test_thieu_so_nam_thi_bo_qua_chu_khong_doan - Asser...
+FAILED test_hien_phap.py::KhongTestRong::test_khong_ham_test_nao_tu_pass_ma_khong_kiem_gi
+FAILED test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test
+FAILED test_ma_nguon_sach.py::DuongLLM::test_phanh_chi_phi_con_nguyen - Asser...
+4 failed, 435 passed, 35 subtests passed in 860.73s (0:14:20)
