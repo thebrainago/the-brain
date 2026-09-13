@@ -147,3 +147,52 @@ class LuoiThamSoPhaiDO_DO_NHAY(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+# --------------------------------------------- THU TU DUYET PHAI THEO PHEP DO
+#
+# Them 13/09/2026. `co_che_dung_duoc` truoc do xep theo TEN (bang chu cai), nen
+# khi `gioi_han` cat bot thi cai bi cat la cai co ten van bang Z - hoan toan
+# ngau nhien so voi chat luong.
+#
+# Do tren 1.276 ket qua da cham:
+#     phoi nhiem 10-25%: 494 phep thu (39%), ty le PASS 1,2%, CAGR tv -0,42%
+#     phoi nhiem 25-40%: 104 phep thu ( 8%), ty le PASS 4,8%, CAGR tv +0,86%
+# Pheu tieu 39% cong suc vao vung ngheo nhat va 8% vao vung tot nhat.
+#
+# `_ty_le_kich_hoat` trong kho du bao phoi nhiem that voi r = 0,964 (97 cap),
+# nen no xep hang truoc duoc.
+
+def test_thu_tu_duyet_uu_tien_vung_sinh_loi():
+    from nhan import to_hop as TH
+    ds = TH.co_che_dung_duoc()
+    assert len(ds) > 200, "kho qua nho de kiem thu tu"
+    lo, hi = TH.VUNG_SINH_LOI
+    n = min(300, len(ds) // 2)
+    dau = sum(1 for s in ds[:n]
+              if lo <= float(s["_ty_le_kich_hoat"]) <= hi)
+    cuoi = sum(1 for s in ds[-n:]
+               if lo <= float(s["_ty_le_kich_hoat"]) <= hi)
+    assert dau > cuoi * 3, (
+        "%d/%d cai DUYET DAU nam trong vung sinh loi, %d/%d cai CUOI - thu tu "
+        "khong uu tien gi" % (dau, n, cuoi, n))
+
+
+def test_van_giu_DU_co_che_khong_loai_them():
+    """Doi thu tu KHONG duoc lam mat co che nao - do la mot cong tra hinh."""
+    from nhan import ngu_phap as NP
+    from nhan import to_hop as TH
+    lo, hi = TH.KICH_HOAT
+    du = [s for s in NP.doc_kho()
+          if s.get("_ty_le_kich_hoat") is not None
+          and lo <= float(s["_ty_le_kich_hoat"]) <= hi]
+    assert len(TH.co_che_dung_duoc()) == len(du)
+
+
+def test_tran_kich_hoat_060_co_co_so():
+    """Tran tren KHONG duoc noi: nhom >=60% la nhom TE NHAT (356 mau, CAGR
+    tv -1,89%, ty le PASS 0%). Ghi chu goc cua no khong neu phep do nao, nen
+    phep do nam o day."""
+    from nhan import to_hop as TH
+    assert TH.KICH_HOAT[1] <= 0.60
+    assert TH.VUNG_SINH_LOI[1] <= TH.KICH_HOAT[1]

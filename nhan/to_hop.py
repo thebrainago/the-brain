@@ -131,16 +131,45 @@ def khung_dung_duoc(ma: str, cac_khung) -> list[str]:
     return ra
 
 
+#: VUNG SINH LOI, do tren 1.276 ket qua da cham (13/09/2026):
+#:
+#:     phoi nhiem     n     CAGR tv   Sharpe tv   ty le PASS
+#:     0-10%        127      -0,19      -0,23        3,1%
+#:     10-25%       494      -0,42      -0,15        1,2%
+#:     25-40%       104      +0,86      +0,20        4,8%   <- tot nhat
+#:     40-60%       195      +0,82      +0,15        0,0%
+#:     >=60%        356      -1,89      -0,30        0,0%   <- te nhat
+#:
+#: Hai dieu rut ra, va ca hai deu nguoc voi truc giac dau tien cua toi:
+#:
+#: 1. **Tran 0,60 CO CO SO** du ghi chu cua no khong neu phep do nao. Nhom
+#:    >=60% te nhat tren 356 mau. Noi van la lam hong them.
+#: 2. **Pheu dang tieu 39% cong suc vao vung ngheo nhat** (10-25%, ty le
+#:    trung 1,2%) va chi 8% vao vung tot nhat (25-40%, ty le trung 4,8%).
+#:
+#: Nen thu tu duyet KHONG duoc la bang chu cai. `_ty_le_kich_hoat` trong kho
+#: du bao phoi nhiem that voi **r = 0,964** (97 cap doi chieu duoc), nen no
+#: xep hang truoc duoc.
+VUNG_SINH_LOI = (0.25, 0.40)
+
+
 def co_che_dung_duoc(gioi_han: int = 0) -> list[dict]:
-    """Co che co ti le kich hoat nam trong khoang dung duoc."""
+    """Co che co ti le kich hoat nam trong khoang dung duoc.
+
+    Xep theo KHOANG CACH toi vung sinh loi, khong theo ten. Khong loai them
+    gi - chi doi thu tu, de khi `gioi_han` cat bot thi cai bi cat la cai it
+    hua hen nhat chu khong phai cai co ten van bang Z.
+    """
     from nhan import ngu_phap as NP
+    giua = sum(VUNG_SINH_LOI) / 2.0
     ds = []
     for s in NP.doc_kho():
         t = s.get("_ty_le_kich_hoat")
         if t is None or not (KICH_HOAT[0] <= float(t) <= KICH_HOAT[1]):
             continue
         ds.append(s)
-    ds.sort(key=lambda s: str(s.get("ten", "")))
+    ds.sort(key=lambda s: (abs(float(s.get("_ty_le_kich_hoat")) - giua),
+                           str(s.get("ten", ""))))
     return ds[:gioi_han] if gioi_han else ds
 
 
