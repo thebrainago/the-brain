@@ -166,7 +166,19 @@ def co_lich_su(symbol: str) -> bool:
     # khac ma khong co ma nay: luc do "khong co ma" moi la ket luan dung.
     if not co:
         return True
-    return False
+    # CHUA TAI khac KHONG CO MA - lan hai cua cung mot bai hoc.
+    #
+    # Ban sua dau tien cho chay khi kho lich su RONG. Nhung sau khi cai lai
+    # MT5 ngay 13/09, kho co lich su cua 10 ma (EURUSD, GOLD...) ma CHUA co
+    # US500Cash - va cong lai chan US500Cash, mot ma hoan toan hop le, chi vi
+    # chua ai yeu cau no bao gio. Cong lai tu chan dung cai luot se tai no ve.
+    #
+    # Nen cong nay chi con canh mot thu: TEN MA VIET SAI. Ma sai thi cong
+    # `so_lenh == 0` phia sau van bat duoc, va `goi_y_ma` chi ra ten gan dung
+    # (do la cach `XAUUSD` -> `GOLD` duoc tim ra). Chi phi cua mot lan chay
+    # thua la 90 giay; chi phi cua mot lan chan oan la ca mot ma khong bao
+    # gio duoc do.
+    return True
 
 
 #: Ten khac nhau cho cung mot tai san giua cac san. Khong doan duoc bang chuoi:

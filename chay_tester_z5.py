@@ -52,9 +52,52 @@ from pathlib import Path
 
 LAB = Path(__file__).resolve().parent
 
-XM_EXE = Path(r"C:\Program Files\XM MT5\terminal64.exe")
-XM_DATA = (Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal"
-           / "656C351524AFFE300FAFE576FA4C7845")
+#: DUONG DAN MT5 - DO CHU KHONG GHIM CUNG.
+#:
+#: Ngay 13/09/2026 hai duong dan nay deu ghim cung, va ca hai cung SAI trong
+#: mot buoi: toi xoa nham thu muc du lieu khi don dia, MT5 phai cai lai, va
+#: ban moi nam o `C:\Program Files\XM Global MT5` voi thu muc du lieu
+#: `BB16F565...` chu khong con `656C3515...`.
+#:
+#: Mot duong dan ghim cung la cai bay ngu suot cho toi ngay no sai - va khi
+#: no sai thi trieu chung doc duoc la "tester khong chay", khong phai "duong
+#: dan sai". Ca buoi chieu 13/09 mat vi dung ho loi do.
+def _thu_muc_mt5():
+    """(exe, thu_muc_du_lieu) cua ban MT5 DUNG DUOC nhat.
+
+    Xep theo so ma CO LICH SU GIA roi den dung luong: mot thu muc vua dung
+    lai, chua dang nhap, chua tai gi thi khong dung duoc du no ton tai.
+    """
+    goc = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal"
+    ung = []
+    for d in goc.glob("*"):
+        if not d.is_dir() or len(d.name) != 32:
+            continue
+        so_ma = len(list(d.glob("bases/*/history/*")))
+        try:
+            cd = sum(f.stat().st_size for f in d.glob("bases/*/history/*/*"))
+        except Exception:
+            cd = 0
+        exe = None
+        try:
+            o = (d / "origin.txt").read_bytes().decode("utf-16", "ignore")
+            o = o.strip().lstrip("\ufeff")
+            if o and (Path(o) / "terminal64.exe").exists():
+                exe = Path(o) / "terminal64.exe"
+        except Exception:
+            pass
+        ung.append((so_ma, cd, d, exe))
+    ung.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    for _, _, d, exe in ung:
+        if exe:
+            return exe, d
+    # Khong do duoc thi ve ban cu - de loi hien ra la "khong thay terminal",
+    # chu khong phai mot duong dan im lang tro sai cho.
+    return (Path(r"C:\Program Files\XM MT5\terminal64.exe"),
+            goc / "656C351524AFFE300FAFE576FA4C7845")
+
+
+XM_EXE, XM_DATA = _thu_muc_mt5()
 
 EA = "MeanRevZ5.ex5"
 SYMBOL = "US100Cash"

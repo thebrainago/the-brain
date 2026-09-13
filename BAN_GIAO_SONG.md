@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
-- `boc_lai2.log`: ... 2000/5121 ban · kho 781
-- `qwen_ultra.log`: ~ 20:46:02 | san sang 12 | CPU   31% / muc tieu 65%  |  con  6.7 loi  |  dang chay 3  [CPU:1, LLM:1, MANG:1]
-- git: 1aecb9c khoi 3: ca kiem bat duoc lo hong trong chinh bo phat hien thay doi
-### 2026-09-11 21:11:33 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 23664, 0 phut)
-- `boc_lai.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
 - `boc_lai2.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\BOC_LAI_TOAN_KHO.json
 - `ghim_ca_kho.log`: }
 - `qwen_ultra.log`: [!] X0_bo_test             CHUA_DO_DUOC  |  tien trinh thoat ma 1 - day la HONG, khong phai ket qua am. Duoi log: summary info =============
@@ -404,3 +396,11 @@
 
 - dang chay: ban_giao_song.py (pid 21148, 0 phut)
 - git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
+### 2026-09-13 18:32:30 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16764, 0 phut)
+- git: b76ed43 Do ho quan tri bang PYTHON - module quan trong nhat khong nam cho MT5
+### 2026-09-13 18:35:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19464, 0 phut)
+- git: b76ed43 Do ho quan tri bang PYTHON - module quan trong nhat khong nam cho MT5
