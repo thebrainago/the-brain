@@ -282,6 +282,47 @@ def co_che_dung_duoc(gioi_han: int = 0) -> list[dict]:
     return ds[:gioi_han] if gioi_han else ds
 
 
+
+# ------------------------------------------------------- NAP GIA MOT LAN MOI MA
+#: Bang gia da nap, giu trong BO NHO cua tung tien trinh con.
+#:
+#: `du_lieu.nap` co cache - nhung la cache ra PARQUET TREN DIA. Moi o cua pheu
+#: doc lai file do. Do 13/09/2026 tren XM_US100CASH D1:
+#:
+#:     nap du lieu             0,798 giay
+#:     sinh tin hieu           0,002 giay
+#:     mo phong + tinh tien    0,038 giay
+#:     ------------------------------------
+#:     tinh toan THAT          0,040 giay/o     do duoc o chang 1: 0,56 giay/o
+#:
+#: Tuc **14/15 thoi gian cua ca pheu la doc lai cung mot bang gia**. Voi 2.319
+#: co che tren mot ma, do la 2.319 lan doc lai mot file khong he doi.
+#:
+#: `v1` von da xep theo (ma, khung) - `for m, k in o_mk for s in cc` - va
+#: `Pool.map` giu nguyen thu tu, nen mot tien trinh con chay lien tiep nhieu o
+#: cua CUNG mot ma. Chi can nho 4 bang gan nhat la gan nhu trung het.
+#:
+#: Bang gia phai duoc coi la CHI DOC. Neu mot khau nao them cot vao no thi khau
+#: sau se thay - `test_cache_khong_doi_ket_qua` canh dung cho do.
+_NHO_GIA: dict = {}
+_NHO_THU_TU: list = []
+NHO_TOI_DA = 4
+
+
+def _nap_nho(ma: str, khung: str):
+    k = (ma, khung)
+    if k in _NHO_GIA:
+        return _NHO_GIA[k]
+    from nhan import du_lieu as DL
+    df = DL.nap(ma, khung)
+    _NHO_GIA[k] = df
+    _NHO_THU_TU.append(k)
+    while len(_NHO_THU_TU) > NHO_TOI_DA:
+        _NHO_GIA.pop(_NHO_THU_TU.pop(0), None)
+    return df
+
+
+
 # ------------------------------------------------------------------- MOT O
 def _mot_o(viec):
     """Mot (ma, khung, co che) o chang 1, hoac day du o chang 2/3/4.
@@ -295,7 +336,7 @@ def _mot_o(viec):
         from nhan import du_lieu as DL
         from nhan import ngu_phap as NP
         from nhan import vao_lenh as VL
-        df = DL.nap(ma, khung)
+        df = _nap_nho(ma, khung)
         # CONG CHAT LUONG - doc `dung_duoc` cua `du_lieu.kiem`.
         #
         # Bo do da co tu lau va bao dung, nhung khong noi nao doc no. Hau qua do

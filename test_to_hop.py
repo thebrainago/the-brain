@@ -379,3 +379,48 @@ def test_chang_chon_KHONG_duoc_cham_nua_holdout():
             assert '"train"' in l, l
     # chi chang 4 duoc cham ca hai nua
     assert 'for ph in ("train", "hold")' in src
+
+
+# --------------------------------------------- NHO BANG GIA TRONG BO NHO
+#
+# `du_lieu.nap` cache ra PARQUET TREN DIA, nen moi o cua pheu doc lai file.
+# Do 13/09 tren XM_US100CASH D1: nap 0,798s · sinh tin hieu 0,002s · mo phong
+# 0,038s -> tinh toan THAT chi 0,040s/o trong khi chang 1 tra 0,56s/o.
+# 14/15 thoi gian la doc lai cung mot bang gia khong he doi.
+
+def test_cache_KHONG_doi_ket_qua():
+    """Diem chet cua cache la chia chung mot doi tuong: neu mot khau them cot
+    vao bang gia thi khau sau thay bang khac. Chay cung mot o hai lan (lan hai
+    an cache) phai ra so Y HET."""
+    from nhan import ngu_phap as NP
+    from nhan import to_hop as TH
+    cc = [s for s in NP.doc_kho()][:40]
+    v = [("XM_US100CASH", "D1", s, "thi_truong", None, None) for s in cc]
+    TH._NHO_GIA.clear(); TH._NHO_THU_TU.clear()
+    a = [TH._mot_o(x) for x in v]           # lan 1: nap that
+    b = [TH._mot_o(x) for x in v]           # lan 2: tu cache
+    assert TH._NHO_GIA, "cache khong giu gi ca"
+    n = 0
+    for x, y in zip(a, b):
+        if not x or "cagr_dd20" not in x:
+            continue
+        n += 1
+        # so MOI truong so, khong chi vai cot chon san - mot cot bi lech ma
+        # khong nam trong danh sach thi phep kiem nay vo dung
+        cot = [k for k, v in x.items() if isinstance(v, (int, float))]
+        assert cot, x
+        assert {c: x[c] for c in cot} == {c: y.get(c) for c in cot}, (x, y)
+    assert n >= 10, "khong du o de ket luan (%d)" % n
+
+
+def test_cache_khong_phinh_vo_han():
+    """Mot tien trinh con di qua 72 ma; giu het la om ca kho gia trong RAM."""
+    from nhan import to_hop as TH
+    TH._NHO_GIA.clear(); TH._NHO_THU_TU.clear()
+    for i in range(TH.NHO_TOI_DA + 6):
+        TH._NHO_GIA[("M%d" % i, "D1")] = object()
+        TH._NHO_THU_TU.append(("M%d" % i, "D1"))
+        while len(TH._NHO_THU_TU) > TH.NHO_TOI_DA:
+            TH._NHO_GIA.pop(TH._NHO_THU_TU.pop(0), None)
+    assert len(TH._NHO_GIA) == TH.NHO_TOI_DA
+    TH._NHO_GIA.clear(); TH._NHO_THU_TU.clear()
