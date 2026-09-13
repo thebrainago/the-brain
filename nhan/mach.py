@@ -110,7 +110,39 @@ def c_pheu_html() -> dict:
 
 
 def c_pheu_ung_vien() -> dict:
-    """SO UNG VIEN QUA PHEU - con so da nam o 8/5.486 suot mot thang."""
+    """SO UNG VIEN QUA PHEU - va no phai HIEU CHUAN HAI CHIEU.
+
+    ## VI SAO KHONG THE CHI DEM SO UNG VIEN
+
+    "0/120 ban dau bang qua bo loc" co HAI nghia hoan toan khac nhau, va chung
+    doi hoi hai hanh dong nguoc nhau:
+
+      a) **bo loc hong** - no dang chan ca mot lop nguon. Da xay ra HAI lan:
+         03/09 bo loc viet cho van xuoi dem ap len ma nguon (0/300 ban github);
+         04/09 mau tieng Viet viet KHONG DAU nen 161/180 bai Telegram cham 0.
+         Hanh dong: sua `boc_llm.DAU_HIEU_LUAT`.
+      b) **kho da can hang co luat** - bo loc dung, hang thi khong co gi.
+         Hanh dong: di tim NGUON MOI. Sua bo loc luc nay chi lam no de dai hon
+         va dot tien LLM vao rac.
+
+    Dem mot chieu khong phan biet duoc hai cai. Do la dung hinh dang cua luat
+    `cong-pass-phai-hieu-chuan-hai-chieu`: *mot cong tu choi TAT CA cho so lieu
+    y het mot cong tot*.
+
+    Nen o day cham CA ban DA BOC (mau chac chan co luat - chung da ra co che
+    that). Neu mau do van chay qua nguong ma ton kho thi khong, bo loc SONG va
+    ket luan la (b).
+
+    ## DO 13/09/2026
+
+        400 ban da boc     : 400/400 cham >= 1 diem (trung vi 2)
+        3.656 ban ton kho  :   0/3656 cham >= 1 diem - MOI loai, ke ca 24 EA
+
+    Doc tay 5 ban ngau nhien trong ton kho: mot trang dieu huong QuantConnect,
+    mot app khoa man hinh Windows tieng Ba Tu, mot thong bao ban quyen, khung
+    trang TikTok, mot danh sach file cua repo game server. Tuc la (b) - va
+    goi y cu ("b go-html; kiem DAU_HIEU_LUAT") chi thang sang hanh dong SAI.
+    """
     from nhan import boc_llm as BL
     from nhan import so as SO
     ton = SO.mot("SELECT COUNT(*) n FROM noi_dung WHERE da_boc=0 AND "
@@ -120,12 +152,31 @@ def c_pheu_ung_vien() -> dict:
     if ton < 200:
         return _kq("pheu_ung_vien", n, True,
                    "%d ung vien / %d ban ton (ton it, khong ket luan)" % (n, ton))
-    # Duoi 5% la dau hieu mot BO LOC dang chan ca lop nguon, khong phai dau
-    # hieu kho ngheo. Do 13/09: 8/5.486 = 0,15% khi khau go HTML chua noi day.
-    ty = n / min(ton, 120) if ton else 0
-    return _kq("pheu_ung_vien", n, n >= 6,
-               "%d/120 ban dau bang qua bo loc (ton %d)" % (n, ton),
-               goi_y="b go-html; kiem boc_llm.DAU_HIEU_LUAT co phu lop nguon moi")
+    if n >= 6:
+        return _kq("pheu_ung_vien", n, True,
+                   "%d/120 ban dau bang qua bo loc (ton %d)" % (n, ton))
+
+    # KHONG QUA AI CA -> hoi chieu nguoc truoc khi ket toi bo loc.
+    mau = SO.nhieu("SELECT van_ban FROM noi_dung WHERE da_boc=1 AND "
+                   "so_ky_tu>800 ORDER BY id DESC LIMIT 150") or []
+    if not mau:
+        return _kq("pheu_ung_vien", n, None,
+                   "0/120 qua bo loc, va KHONG co ban da boc nao de hieu "
+                   "chuan -> chua ket luan duoc la bo loc hay la kho",
+                   chua=True)
+    song = sum(1 for r in mau if BL._diem_luat(dict(r)["van_ban"]) >= 1)
+    ty = song / len(mau)
+    if ty >= 0.5:
+        # Bo loc SONG. Ton kho khong co luat that -> van de o SEEKER.
+        return _kq("pheu_ung_vien", n, True,
+                   "0/120 qua bo loc NHUNG %d/%d ban da boc van qua (%.0f%%) "
+                   "-> bo loc song, KHO CAN HANG CO LUAT (ton %d la rac)"
+                   % (song, len(mau), 100 * ty, ton),
+                   goi_y="khong sua bo loc - di tim NGUON MOI: b san-nguon")
+    return _kq("pheu_ung_vien", n, False,
+               "0/120 qua bo loc VA chi %d/%d ban da boc qua (%.0f%%) "
+               "-> BO LOC HONG" % (song, len(mau), 100 * ty),
+               goi_y="kiem boc_llm.DAU_HIEU_LUAT co phu lop nguon moi; b go-html")
 
 
 def c_duong_llm() -> dict:

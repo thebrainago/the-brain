@@ -53,6 +53,10 @@ def main() -> int:
              if x and "cagr_dd20" in x]
     print("%d o co ket qua trong %.0f giay" % (len(r), time.time() - t0))
 
+    import json
+    (LAB / "reports" / "CHANG1_MAU.json").write_text(
+        json.dumps(r, ensure_ascii=False, default=float), encoding="utf-8")
+
     r.sort(key=lambda d: -d["cagr_dd20"])
     for n in (40, 200):
         top = r[:n]

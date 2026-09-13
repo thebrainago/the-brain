@@ -108,3 +108,60 @@ def test_mutation_audit_bat_duoc_het():
     assert not r["khong_nhay"], (
         "chang KHONG NHAY: %s - mach dap dang bao TOT ma khong do gi"
         % ", ".join(r["khong_nhay"]))
+
+
+# ------------------------------- PHEU UNG VIEN PHAI HIEU CHUAN HAI CHIEU
+#
+# "0/120 qua bo loc" co HAI nghia doi hoi hai hanh dong NGUOC NHAU:
+#   a) bo loc hong  -> sua `boc_llm.DAU_HIEU_LUAT`
+#   b) kho can hang -> di tim nguon moi; sua bo loc luc nay chi dot tien LLM
+#                      vao rac
+# Dem mot chieu khong phan biet duoc. Do 13/09: ton kho 0/3.656 nhung ban da
+# boc 400/400 -> la (b), trong khi mach cu bao DO va goi y dung viec cua (a).
+
+def _gia_lap(monkeypatch, ton, qua_ton, ty_mau, co_mau=True):
+    from nhan import boc_llm as BL
+    from nhan import mach as M
+    from nhan import so as SO
+    monkeypatch.setattr(SO, "mot", lambda *a, **k: {"n": ton})
+    monkeypatch.setattr(BL, "ung_vien", lambda n=120: [{}] * qua_ton)
+    mau = [{"van_ban": "x"}] * 100 if co_mau else []
+    monkeypatch.setattr(SO, "nhieu", lambda *a, **k: mau)
+    n = {"i": 0}
+
+    def diem(_vb):
+        n["i"] += 1
+        return 1 if n["i"] <= int(100 * ty_mau) else 0
+    monkeypatch.setattr(BL, "_diem_luat", diem)
+    return M.c_pheu_ung_vien()
+
+
+def test_kho_can_hang_KHONG_duoc_bao_bo_loc_hong(monkeypatch):
+    """Ton kho 0 qua, nhung mau da boc van qua het -> bo loc SONG."""
+    r = _gia_lap(monkeypatch, ton=3656, qua_ton=0, ty_mau=1.0)
+    assert r["trang_thai"] != "DO", r
+    assert "CAN HANG" in r["mo_ta"]
+    assert "nguon" in r["goi_y"].lower()
+    assert "DAU_HIEU_LUAT" not in r["goi_y"]
+
+
+def test_bo_loc_hong_THI_phai_bao_DO(monkeypatch):
+    """Chieu nguoc: mau da boc CUNG truot -> bo loc that su hong."""
+    r = _gia_lap(monkeypatch, ton=3656, qua_ton=0, ty_mau=0.1)
+    assert r["trang_thai"] == "DO", r
+    assert "BO LOC HONG" in r["mo_ta"]
+    assert "DAU_HIEU_LUAT" in r["goi_y"]
+
+
+def test_khong_co_mau_hieu_chuan_thi_CHUA_DO_DUOC(monkeypatch):
+    """Khong co ban da boc nao -> khong ket luan duoc. Ba trang thai, khong
+    phai hai: day khong phai `DO`."""
+    r = _gia_lap(monkeypatch, ton=3656, qua_ton=0, ty_mau=1.0, co_mau=False)
+    assert r["trang_thai"] not in ("TOT", "DO"), r
+
+
+def test_van_TOT_khi_ung_vien_chay_binh_thuong(monkeypatch):
+    """Hieu chuan chieu con lai: duong chay tot thi khong duoc doi gi - va
+    khong duoc ton mot cau truy van hieu chuan nao."""
+    r = _gia_lap(monkeypatch, ton=3656, qua_ton=40, ty_mau=0.0)
+    assert r["trang_thai"] == "TOT", r
