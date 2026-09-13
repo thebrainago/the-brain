@@ -201,7 +201,10 @@ def chay(symbol: str, khung: str, so: int = 0, loc: str = "",
     ngoi tren mot may.
     """
     from nhan import khoa_tester as KT
-    with KT.giu(f"chay_tester_kho {symbol} {khung}"):
+    from nhan import ngan_sach as NS
+    # MT5 KHONG ket noi duoc toi may chu giao dich qua Cloudflare WARP. Giu
+    # WARP TAT suot luot chay, va cam bo cao mql5 lat no giua chung.
+    with NS.giu_warp(False, "MT5 tester"), KT.giu(f"chay_tester_kho {symbol} {khung}"):
         return _chay_trong_khoa(symbol, khung, so, loc, tu, den)
 
 

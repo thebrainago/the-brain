@@ -130,7 +130,10 @@ def chay(symbol: str = "US500Cash", khung: str = "H1", vao_kieu: int = 0,
          tu: str = "2016.01.01", den: str = "2026.07.29",
          lot: float = 1.0) -> dict:
     from nhan import khoa_tester as KT
-    with KT.giu(f"bench_quan_tri {symbol} {khung}"):
+    from nhan import ngan_sach as NS
+    # MT5 KHONG ket noi duoc toi may chu giao dich qua Cloudflare WARP. Giu
+    # WARP TAT suot luot chay, va cam bo cao mql5 lat no giua chung.
+    with NS.giu_warp(False, "MT5 tester"), KT.giu(f"bench_quan_tri {symbol} {khung}"):
         return _trong_khoa(symbol, khung, vao_kieu, vao_n, nhanh, tu, den, lot)
 
 

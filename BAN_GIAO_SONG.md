@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: c8dd97f dieu toc: bo mien tru cho lan LLM/MANG - do that 7,7 loi thay vi 1,2 nhu khai
-### 2026-09-11 19:13:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9428, 0 phut), dieu_khien_xa.py (pid 8360, 41 phut)
 - `dieu_phoi_nen.log`: [Fri 09/11/2026 18:31:55.08] thay DUNG_LAI - khong khoi dong watchdog
 - git: 18c60ea ke hoach XAY he thong: 6 khoi + bo do tran ngu phap; baseline lat lai hai gia dinh
 ### 2026-09-11 19:39:10 — chup trang thai
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 18372, 0 phut)
 - git: 340d7fb So van de phai DONG lai duoc - ba duong, ba ho loi
+### 2026-09-13 17:30:56 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 916, 0 phut)
+- git: 9a844cc Tester TU DANG NHAP: khoi [Common] trong .ini + mot cua doc khoa

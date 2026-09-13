@@ -120,6 +120,48 @@ def warp_dang_bat() -> bool:
         return False
 
 
+#: Viec DANG GIU WARP o mot trang thai co dinh. Chung nao con the nay thi
+#: `doi_ip` KHONG duoc lat WARP.
+_THE_WARP = GOC / "config" / "warp_dang_giu"
+
+
+@contextmanager
+def giu_warp(bat: bool, viec: str = ""):
+    """Giu WARP o mot trang thai va CAM `doi_ip` lat no trong luc do.
+
+    ## VI SAO CAN - hai he con gianh nhau mot cong tac
+
+    13/09/2026, hai thu cung chay:
+      * bo thu hoi payload mql5: bi cam IP thi goi `doi_ip()` de lat WARP sang
+        mot dai IP khac. No lat **5 lan** trong mot luot.
+      * MT5 tester: KHONG ket noi duoc toi may chu giao dich qua WARP (san
+        chan IP VPN). Trieu chung doc duoc la `not synchronized with trade
+        server` / `cannot select symbol in market watch` - khong mot chu nao
+        nhac den WARP.
+
+    Hai he deu dung, va chung pha nhau vi WARP la mot cong tac TOAN CUC ma
+    khong ai ghi so. Day la dung loai xung dot ma `ngan_sach` sinh ra de xu:
+    mot tai nguyen doc quyen thi phai co the, khong phai co thoa thuan ngam.
+    """
+    _THE_WARP.parent.mkdir(parents=True, exist_ok=True)
+    _THE_WARP.write_text("%s|%s" % ("bat" if bat else "tat", viec),
+                         encoding="utf-8")
+    try:
+        if warp_dang_bat() != bat:
+            _warp("connect" if bat else "disconnect")
+            time.sleep(8)
+        yield
+    finally:
+        _THE_WARP.unlink(missing_ok=True)
+
+
+def warp_bi_giu() -> str:
+    try:
+        return _THE_WARP.read_text(encoding="utf-8")
+    except Exception:
+        return ""
+
+
 def doi_ip(in_ra=print) -> bool:
     """Lat WARP -> doi ca dai IP thoat. Tra True neu da lat duoc.
 
@@ -140,6 +182,12 @@ def doi_ip(in_ra=print) -> bool:
     khong bi cam, va khi bi cam thi DOI IP** - hai thu, va ca hai deu la viec
     cua bo dieu phoi chu khong phai cua nguoi doc ghi chu.
     """
+    giu = warp_bi_giu()
+    if giu:
+        # KHONG lat WARP khi co viec khac dang giu no. Tra False = "khong doi
+        # duoc IP", de nguoi goi biet ma nghi cho thay vi tuong da doi roi.
+        in_ra("  WARP dang bi giu boi: %s -> KHONG lat" % giu)
+        return False
     bat = warp_dang_bat()
     ok = _warp("disconnect" if bat else "connect")
     time.sleep(8)
