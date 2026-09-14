@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `qwen_ultra.log`: 3. **`ghi_nhat_ky('B1_corpus_vang', ...)`**: Đã ghi nhật ký, xác định rõ kết quả này là **CHƯA ĐỦ** do lỗi khâu chọn ứng viên (candidate selec
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 15:27:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3268, 0 phut), dieu_khien_xa.py (pid 15316, 501 phut)
-- `qwen_ultra.log`: ~ 15:27:12 | san sang 0 | CPU   23% / muc tieu 95%  |  con 14.3 loi  |  dang chay 2  [LLM:2]
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 15:53:40 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 3956, 0 phut), dieu_khien_xa.py (pid 15316, 527 phut)
 - `qwen_ultra.log`: ~ 15:53:16 | san sang 0 | CPU   43% / muc tieu 95%  |  con 10.5 loi  |  dang chay 1  [LLM:1]
@@ -404,3 +396,11 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: 8c88446 bo do quan tri lenh: chan hai cho no thuong cho cai SAP CHET
+### 2026-09-14 22:05:57 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15316, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: 0937f72 bang 11 ho: in them SUT GIAM THAT, va cot "o>moc" chi tinh tren o sach
