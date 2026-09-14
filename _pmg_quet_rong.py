@@ -30,6 +30,19 @@ Chay:  python _pmg_quet_rong.py --g0            (chay cong G0 rong truoc)
 """
 from __future__ import annotations
 
+import os
+
+# PHAI DAT TRUOC KHI `import numpy`. Windows dung `spawn` nen moi tien trinh con
+# import lai file nay tu dau - do la ly do dat o day chay duoc cho ca tien trinh con.
+#
+# Vi sao: numpy/BLAS tu mo NHIEU LUONG moi tien trinh. Mo 10 tien trinh con tuong
+# la 10/20 luong = 50% CPU, thuc te an het 20 luong = 98%. Do 14/09, chu du an
+# dang choi game phai cat ngang hai lan. Cai chot "cho khi qua tran" khong cuu duoc
+# vi mot cau hinh chay lien 5 giay het cong suat roi moi den luot kiem tra.
+for _k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ.setdefault(_k, "1")
+
 import itertools
 import json
 import sys
@@ -114,6 +127,7 @@ def _cac_cau_hinh(ma, phien, atr_tf, direction, don_bay_dinh=1.0, luoi=None):
 
 # ------------------------------------------------------------------ CONG G0
 def _g0_mot_ma(args) -> list[dict]:
+    TC.ha_uu_tien_minh()
     ma, khung, cac_atr_tf, cac_phien, so_null = args
     from nhan import du_lieu as DL
     ra = []
@@ -185,6 +199,7 @@ def chay_g0_rong(hang=None, luong: int = 0, so_null: int = 200) -> dict:
 # ---------------------------------------------------------------- QUET ENGINE
 def _quet_mot_nhom(args) -> list[dict]:
     """Mot nhom = mot (ma, atr_tf). Doc du lieu MOT LAN cho ca nhom."""
+    TC.ha_uu_tien_minh()
     ma, atr_tf, cac_o = args     # cac_o = [(phien, h, direction), ...]
     from nhan import du_lieu as DL
     from nhan import chi_phi as CP

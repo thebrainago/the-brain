@@ -4,14 +4,14 @@
  "pid": 11532,
  "process_created_epoch": 1789386726.3797207,
  "started_epoch": 1789386726.7300165,
- "updated_epoch": 1789394536.9511397,
- "updated_at": "2026-09-14 21:02:16",
+ "updated_epoch": 1789394736.4174306,
+ "updated_at": "2026-09-14 21:05:36",
  "status": "running",
  "live": true,
  "ready": true,
  "health": "unhealthy",
  "cpu": {
-  "current_percent": 95.2,
+  "current_percent": 66.0,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -19,14 +19,16 @@
  },
  "workers": {
   "max": 3,
-  "running": {},
-  "pending": [
-   "QUANTLAB"
-  ]
+  "running": {
+   "QUANTLAB": {
+    "lane": "compute",
+    "started_epoch": 1789394575.5596213,
+    "elapsed_seconds": 160.9
+   }
+  },
+  "pending": []
  },
- "backpressure": [
-  "cpu_95.2_vuot_nguong_khoi_dong_80.0"
- ],
+ "backpressure": [],
  "last_results": {
   "EVO": {
    "status": "ok",

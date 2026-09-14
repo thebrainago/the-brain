@@ -120,9 +120,28 @@ def so_luong_goi_y(lan_moi_luong: float = 1.0) -> int:
         tong = psutil.cpu_count(logical=True) or 4
     except ImportError:
         tong = os.cpu_count() or 4
-    nen = cpu_hien_tai(0.5)
-    con = max(0.0, tran() - nen) / 100.0 * tong
+    # Do NEN nhieu lan roi lay CAO NHAT, khong lay mot lat cat. Phan nen cua may
+    # nay (he 24/7 cua chu du an) dao dong 23-56% - lay dung luc no thap thi tinh
+    # ra thua luong, va tong se vuot tran ngay khi no len lai.
+    nen = max(cpu_hien_tai(0.4) for _ in range(3))
+    # Chua LE AN TOAN 30%: phan nen con dao dong tiep sau khi do xong, va vuot
+    # tran mot lan lam nguoi dung giat game thi te hon la chay cham hon mot chut.
+    con = max(0.0, tran() - nen) * 0.70 / 100.0 * tong
     return max(1, min(tong - 1, int(con / max(0.2, lan_moi_luong))))
+
+
+def ha_uu_tien_minh() -> bool:
+    """Ha muc uu tien cua CHINH tien trinh nay - de game cua nguoi dung luon thang.
+
+    Tran CPU giu cho may khong nong; muc uu tien giu cho may khong GIAT. Can ca hai.
+    """
+    try:
+        import psutil
+        p = psutil.Process()
+        p.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS if os.name == "nt" else 10)
+        return True
+    except Exception:
+        return False
 
 
 def _cli(argv: list) -> int:
