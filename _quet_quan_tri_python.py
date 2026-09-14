@@ -295,12 +295,22 @@ def main() -> int:
 
     print("\n%d/%d ma DO DUOC, %d bo qua: %s"
           % (ra["so_ma_do_duoc"], len(ma_co), len(BO_QUA), dict(ly_do)))
-    print("\n%-14s %6s %6s %8s %10s %12s  %s"
-          % ("ho", "so_ma", "so_o", "o>moc", "hinh", "o>mua-giu", ""))
-    for h, d in ra["ho"].items():
-        print("%-14s %6d %6d %7.0f%% %10s %11.0f%%"
-              % (h, d["so_ma"], d["o"], 100 * d["ty_le_hon_moc"],
-                 d["hinh_dang"], 100 * d["ty_le_hon_mua_giu"]))
+    print()
+    print("%-15s %6s %9s %8s %11s %11s %10s  %s"
+          % ("cach quan lenh", "so o", "sut giam", "te nhat", "o cuc doan",
+             "o>moc SACH", "o>mua-giu", "trang thai"))
+    print("-" * 97)
+    for h, v in ra["ho"].items():
+        tt = "KHONG DOC DUOC" if v["hinh_dang"].startswith("KHONG") else v["hinh_dang"]
+        print("%-15s %6d %8.0f%% %7.0f%% %10.0f%% %10.0f%% %9.0f%%  %s"
+              % (h, v["o"], v["sut_giam_that_tv"], v["sut_giam_that_te_nhat"],
+                 100 * v["ty_le_cuc_doan"], 100 * v["ty_le_hon_moc_sach"],
+                 100 * v["ty_le_hon_mua_giu"], tt))
+    print()
+    print("  'sut giam' la sut giam THAT truoc khi quy ve ngan sach 20%.")
+    print("  'o>moc SACH' chi tinh tren o co sut giam that < %.0f%%."
+          % NGUONG_SUT_GIAM_DOC_DUOC)
+    print("  Vuot nguong do thi `cagr_dd20` la ngoai suy tu duong von sat 0.")
     return 0
 
 
