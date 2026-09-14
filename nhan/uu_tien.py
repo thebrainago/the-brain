@@ -309,10 +309,147 @@ def in_ra(kq: dict) -> None:
                 print(f"      {t['bang_chung']}")
 
 
+
+# ============================================================== HAI LAN
+#
+# BAN GIAO 13/09 MUC 11 - bai toan "AUDCAD co hy vong ma cu di xay may".
+#
+# Chu du an: *"ta dang thay co hy vong o AUDCAD trong khi do cu mat thoi gian xay
+# 1 he thong dai han nhu nay rat phi. Bai toan do sau nay cung tuong tu neu ta
+# test nhieu hon."*
+#
+# Day la bai toan KHAI THAC vs XAY MAY, va no se lap lai mai - cang test nhieu
+# cang hay gap. Loi giai la HAI LAN TACH HAN, ngan sach co dinh, khong tranh nhau:
+#
+#     LAN NHANH  thu DA CO dau hieu ra tien -> tester that -> demo -> tien that
+#     LAN CHAM   Hephaestus · thu vien chi bao · engine to hop · bang dac tinh
+#
+# Chia tai nguyen theo rang buoc VAT LI nen hai lan tu nhien khong tranh nhau:
+# `TESTER = 1` la lan nhanh so huu; CPU nhieu nhan la lan cham so huu. Lan cham
+# chay Python, lan nhanh chay MT5 - hai tai nguyen khac nhau, song song duoc.
+#
+# Va dieu dang noi nhat: module nay **da nam trong so do** tu dau (QUANTLAB co
+# "luong uu tien") va **chua bao gio chay mot lan nao**. Dung ho loi so 1 cua he:
+# bo phan co ton tai, luat co viet ra, nhung no khong nam tren duong chay.
+
+_BANG_LAN = Path(__file__).resolve().parent.parent / "reports" / "HAI_LAN.json"
+
+#: Gioi han viec dang do dang cua LAN NHANH. Qua 3 thi khong nhan them du hap dan
+#: den may - neu khong, lan nhanh nuot het va ta lai khong bao gio xay xong may.
+WIP_LAN_NHANH = 3
+
+#: Han chot mac dinh cua mot viec trong lan nhanh (ngay). Het han ma chua ra tien
+#: thi TRA VE KHO, khong gia han im lang.
+HAN_MAC_DINH_NGAY = 14
+
+
+def _doc_lan() -> dict:
+    if _BANG_LAN.exists():
+        try:
+            return json.loads(_BANG_LAN.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {"nhanh": [], "cham": [], "kho": []}
+
+
+def _ghi_lan(d: dict) -> None:
+    _BANG_LAN.parent.mkdir(parents=True, exist_ok=True)
+    _BANG_LAN.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def du_dieu_kien_lan_nhanh(viec: dict) -> tuple[bool, list[str]]:
+    """Bon luat vao LAN NHANH (ban giao muc 11). Viet ra, khong de cam tinh.
+
+    1. da qua holdout THAT (nua sau chua he bi cham luc chon), va
+    2. hon moc `max(mua-giu, ban-giu, tien mat)` o CUNG RUI RO, va
+    3. chi phi `do_tin = SAN` (do duoc, khong phai khai bao), va
+    4. chay duoc that: du von, lot toi thieu khong kep, so lenh du de khong may rui.
+    """
+    thieu = []
+    if not viec.get("qua_holdout_that"):
+        thieu.append("chua qua holdout THAT (nua sau phai khong bi cham luc chon)")
+    if not viec.get("hon_moc_cung_rui_ro"):
+        thieu.append("chua hon moc mua-giu/ban-giu/tien mat o CUNG RUI RO")
+    if viec.get("do_tin_chi_phi") != "SAN":
+        thieu.append(f"chi phi do_tin={viec.get('do_tin_chi_phi')!r}, can 'SAN'")
+    if not viec.get("chay_duoc_that"):
+        thieu.append("chua chung minh chay duoc that (von / lot toi thieu / so lenh)")
+    return (not thieu), thieu
+
+
+def them_viec_lan(ten: str, lan: str = "cham", mo_ta: str = "", nguon: str = "",
+                  han_ngay: int = HAN_MAC_DINH_NGAY, **bang_chung) -> dict:
+    """Them mot viec vao mot lan. Lan nhanh bi chan boi WIP va boi bon luat."""
+    import datetime as _dt
+    d = _doc_lan()
+    if any(v["ten"] == ten for v in d["nhanh"] + d["cham"]):
+        return {"nhan": False, "ly_do": [f"da co viec ten {ten!r} trong bang"]}
+    viec = {"ten": ten, "mo_ta": mo_ta, "nguon": nguon,
+            "mo_luc": _dt.date.today().isoformat(), **bang_chung}
+    if lan == "nhanh":
+        if len(d["nhanh"]) >= WIP_LAN_NHANH:
+            return {"nhan": False, "ly_do": [
+                f"LAN NHANH da co {len(d['nhanh'])} viec (tran WIP {WIP_LAN_NHANH}). "
+                f"Xong hoac tra ve kho mot viec truoc da."]}
+        ok, thieu = du_dieu_kien_lan_nhanh(viec)
+        if not ok:
+            return {"nhan": False, "ly_do": thieu}
+        viec["han"] = (_dt.date.today() + _dt.timedelta(days=han_ngay)).isoformat()
+    d[lan].append(viec)
+    _ghi_lan(d)
+    return {"nhan": True, "viec": viec, "lan": lan}
+
+
+def het_han() -> list[dict]:
+    """Viec lan nhanh da qua han. Het han ma chua ra tien thi TRA VE KHO."""
+    import datetime as _dt
+    hom_nay = _dt.date.today().isoformat()
+    return [v for v in _doc_lan()["nhanh"] if v.get("han", "9999") < hom_nay]
+
+
+def tra_ve_kho(ten: str, ly_do: str = "het han, chua ra tien") -> bool:
+    import datetime as _dt
+    d = _doc_lan()
+    for i, v in enumerate(d["nhanh"]):
+        if v["ten"] == ten:
+            v["tra_ve_luc"] = _dt.date.today().isoformat()
+            v["ly_do_tra"] = ly_do
+            d["kho"].append(d["nhanh"].pop(i))
+            _ghi_lan(d)
+            return True
+    return False
+
+
+def bang_lan(in_ra=print) -> dict:
+    d = _doc_lan()
+    qua = {v["ten"] for v in het_han()}
+    in_ra("")
+    in_ra("HAI LAN — khai thac vs xay may   (ban giao 13/09 muc 11)")
+    in_ra(f"  LAN NHANH  {len(d['nhanh'])}/{WIP_LAN_NHANH} viec   "
+          f"so huu TESTER=1 · moi viec co HAN CHOT")
+    if not d["nhanh"]:
+        in_ra("     (trong - chua he nao du bon luat vao lan nhanh)")
+    for v in d["nhanh"]:
+        co = "  << QUA HAN" if v["ten"] in qua else ""
+        in_ra(f"     {v['ten']:<34} han {v.get('han','?')}{co}")
+        if v.get("mo_ta"):
+            in_ra(f"       {v['mo_ta'][:88]}")
+    in_ra(f"  LAN CHAM   {len(d['cham'])} viec   so huu CPU nhieu nhan · khong WIP")
+    for v in d["cham"]:
+        in_ra(f"     {v['ten']:<34} {v.get('mo_ta','')[:60]}")
+    if d["kho"]:
+        in_ra(f"  KHO        {len(d['kho'])} viec da tra ve")
+    in_ra("")
+    return d
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print('go: python -m nhan.uu_tien <url hoac duong dan file> [--chi-doc]')
         sys.exit(2)
+    if sys.argv[1] == "--lan":
+        bang_lan()
+        sys.exit(0)
     _kq = xu_ly(sys.argv[1])
     in_ra(_kq)
     # Mac dinh PHAN TICH LUON. `--chi-doc` de ve hanh vi cu (chi boc, khong do).

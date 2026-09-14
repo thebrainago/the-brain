@@ -1,17 +1,17 @@
 {
  "schema": 1,
- "instance_id": "ab65a38bfd754f2bb9669100a958ded7",
- "pid": 1708,
- "process_created_epoch": 1789268250.6108367,
- "started_epoch": 1789268250.9971144,
- "updated_epoch": 1789273197.586286,
- "updated_at": "2026-09-13 11:19:57",
+ "instance_id": "92df56fa793e4200b62e5be076b8e498",
+ "pid": 11532,
+ "process_created_epoch": 1789386726.3797207,
+ "started_epoch": 1789386726.7300165,
+ "updated_epoch": 1789389481.1829753,
+ "updated_at": "2026-09-14 19:38:01",
  "status": "running",
  "live": true,
  "ready": true,
  "health": "unhealthy",
  "cpu": {
-  "current_percent": 50.2,
+  "current_percent": 22.2,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -20,10 +20,10 @@
  "workers": {
   "max": 3,
   "running": {
-   "QUANTLAB": {
-    "lane": "compute",
-    "started_epoch": 1789272327.4665232,
-    "elapsed_seconds": 870.1
+   "SEEKER": {
+    "lane": "external",
+    "started_epoch": 1789389288.1875584,
+    "elapsed_seconds": 193.0
    }
   },
   "pending": []
@@ -31,34 +31,29 @@
  "backpressure": [],
  "last_results": {
   "EVO": {
-   "status": "error",
-   "rc": 1,
-   "giay": 0.5,
-   "fatal": [
-    "rc=1",
-    "nhip_khong_cap_nhat"
-   ],
-   "degraded": [
-    "stdout_khong_co_json"
-   ],
-   "skip_reason": "",
-   "nhip": {
-    "luc": "2026-09-13 10:58:23",
-    "trang_thai": "nghi"
-   },
-   "resource_guard": "job",
-   "stdout_tail": "",
-   "stderr_tail": "OpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still fai"
-  },
-  "BANKER": {
    "status": "ok",
    "rc": 0,
-   "giay": 0.6,
+   "giay": 9.7,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-13 10:57:43",
+    "luc": "2026-09-14 19:24:56",
+    "trang_thai": "nghi"
+   },
+   "resource_guard": "job",
+   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nang_suat_doc_thap\",\n  \"null_lot_qua_nhieu\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [\n  \"don_viec_treo: 1 viec CHAY mo coi -> LOI (khong bao gio thanh XONG)\",\n  \"xep_lai_viec_loi: 1 viec duoc thu lai\",\n  \"dong_van_de_da_het: tru_dung_im_BANKER, tru_dung_im_NGHI\"\n ],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 22,\n \"tru_dung_im\": [],\n \"dia_gb\": 28.0,\n \"tai_lieu\": 11818,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
+   "stderr_tail": ""
+  },
+  "BANKER": {
+   "status": "ok",
+   "rc": 0,
+   "giay": 50.4,
+   "fatal": [],
+   "degraded": [],
+   "skip_reason": "",
+   "nhip": {
+    "luc": "2026-09-14 18:55:36",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
@@ -66,58 +61,53 @@
    "stderr_tail": ""
   },
   "SEEKER": {
-   "status": "error",
-   "rc": 1,
-   "giay": 0.3,
-   "fatal": [
-    "rc=1",
-    "nhip_khong_cap_nhat"
-   ],
-   "degraded": [
-    "stdout_khong_co_json"
-   ],
-   "skip_reason": "",
-   "nhip": {
-    "luc": "2026-09-13 11:03:24",
-    "trang_thai": "nghi"
-   },
-   "resource_guard": "job",
-   "stdout_tail": "",
-   "stderr_tail": "OpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, giving up.\nOpenBLAS error: Memory allocation still failed after 10 retries, givi"
-  },
-  "NGHI": {
    "status": "ok",
    "rc": 0,
-   "giay": 80.5,
+   "giay": 282.4,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-13 10:02:50",
+    "luc": "2026-09-14 19:19:45",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "iem dinh bao gio\"\n   ]\n  }\n ],\n \"co_nguon_tu_tai_lieu\": 0,\n \"ly_do_chon\": \"Tat ca 6 co che deu duoc thiet ke theo dang 'A KHI B' ket hop dieu kien che do (phan_vi cua bien dong/khoi luong/do dai xu huong) voi dieu kien vao/ra, gom theo kinh nghiem 1.700 phep thu truoc do. Moi co che dinh ro ai la ben chiu phi qua dem (index fund, macro hedge, market maker, execution desk, stat arb) va co che nao bu chi phi 5-7%/nam (toc do hoi ve, premium quyen, alpha xu huong, hedging t\",\n \"mau_dang_co\": 2736\n}",
+   "stdout_tail": "    },\n    {\n     \"quantfiction\": \"9/40 bai\"\n    },\n    {\n     \"quantforhire\": \"10/40 bai\"\n    },\n    {\n     \"quant_galore\": \"12/40 bai\"\n    },\n    {\n     \"quantjourney\": \"9/40 bai\"\n    },\n    {\n     \"quantifiableedges\": \"10/40 bai\"\n    },\n    {\n     \"quantish\": \"4/40 bai\"\n    },\n    {\n     \"returnstacked\": \"10/40 bai\"\n    },\n    {\n     \"rulyfi\": \"5/40 bai\"\n    },\n    {\n     \"sixfigureinvesting\": \"10/40 bai\"\n    }\n   ]\n  },\n  \"tim\": {\n   \"da_thu\": 2,\n   \"them\": [],\n   \"khong_dat\": [\n    {\n     \"",
    "stderr_tail": ""
   },
-  "QUANTLAB": {
+  "NGHI": {
    "status": "error",
-   "rc": -9,
-   "giay": 1200.1,
+   "rc": 1,
+   "giay": 87.6,
    "fatal": [
-    "qua_gio"
+    "rc=1"
    ],
    "degraded": [
     "stdout_khong_co_json"
    ],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-13 10:39:27",
-    "trang_thai": "chay"
+    "luc": "2026-09-14 19:01:29",
+    "trang_thai": "nghi"
    },
-   "resource_guard": "none",
+   "resource_guard": "job",
    "stdout_tail": "",
-   "stderr_tail": "frozen importlib._bootstrap>\", line 1333, in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 1267, in _find_spec\n  File \"<frozen importlib._bootstrap_external>\", line 1292, in find_spec\n  File \"<frozen importlib._bootstrap_external>\", line 1264, in _get_spec\n  File \"<frozen importlib._bootstrap_external>\", line 1251, in _path_importer_cache\n  File \"<frozen importlib._bootstrap_external>\", line 1227, in _path_hooks\n  File \"<frozen zipimport>\", line 78, in __init__\nMemoryError"
+   "stderr_tail": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                     indent=1, default=str)[:6000])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\SV STORE\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u1ea5' in position 491: character maps to <undefined>"
+  },
+  "QUANTLAB": {
+   "status": "skipped",
+   "rc": 0,
+   "giay": 801.8,
+   "fatal": [],
+   "degraded": [],
+   "skip_reason": "nhom hop khong duong (trung vi Sharpe -0.106)",
+   "nhip": {
+    "luc": "2026-09-14 19:36:49",
+    "trang_thai": "nghi"
+   },
+   "resource_guard": "job",
+   "stdout_tail": "  \"sharpe\": -0.141,\n       \"tong_lai_pct\": -12.22\n      },\n      {\n       \"tai_san\": \"XM_SILVER\",\n       \"loai\": \"vang\",\n       \"so_lenh\": 410,\n       \"sharpe\": -0.445,\n       \"tong_lai_pct\": -73.2\n      },\n      {\n       \"tai_san\": \"XM_US2000CASH\",\n       \"loai\": \"chi_so_my\",\n       \"so_lenh\": 186,\n       \"sharpe\": -0.445,\n       \"tong_lai_pct\": -28.85\n      },\n      {\n       \"tai_san\": \"XM_US500CASH\",\n       \"loai\": \"chi_so_my\",\n       \"so_lenh\": 292,\n       \"sharpe\": -0.616,\n       \"tong_lai_",
+   "stderr_tail": ""
   }
  }
 }

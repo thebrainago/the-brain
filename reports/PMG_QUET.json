@@ -1,0 +1,619 @@
+{
+ "ma": "EURGBP",
+ "khung": "M5",
+ "atr_tf": "H1",
+ "phien": "ALL",
+ "post_hoc": false,
+ "ten_luoi": "prereg_v1_2026_09_14",
+ "luoi": {
+  "h": [
+   0.5,
+   1.0,
+   2.0,
+   3.0
+  ],
+  "size_mode": [
+   "flat",
+   "linear",
+   "geometric",
+   "inverse"
+  ],
+  "tp_dist": [
+   0.5,
+   1.0,
+   2.0
+  ],
+  "max_legs": [
+   6,
+   12
+  ],
+  "step_mode": [
+   "fixed"
+  ],
+  "tp_mode": [
+   "avg_plus"
+  ],
+  "anchor_mode": [
+   "static"
+  ]
+ },
+ "so_o_luoi_prereg": 96,
+ "so_chay": 8,
+ "so_bo_g1": 0,
+ "so_do_duoc": 8,
+ "so_song": 0,
+ "do_tin_chi_phi": "SAN",
+ "spread_bps": 0.8161742415409371,
+ "giay": 535.3,
+ "bo_dem_phep_thu": 48,
+ "ly_do_bo_g1": {},
+ "ket_qua": [
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-linear-tpavg_plus-stdd0.03.t240.sl6.n6",
+   "van_tay": "c5b0c42aeb20d66d",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 30830,
+   "so_lenh": 62984,
+   "ro_moi_nam": 2291.546092796093,
+   "lai_tong": 0.2408530607122148,
+   "equity_cuoi": 1.2408530607122148,
+   "cagr": 0.016169343680535464,
+   "dd_max": 0.10699637968376391,
+   "ty_le_thang_ro": 0.9776192020759001,
+   "lai_ro_trung_vi": 4.1545853977875e-05,
+   "lai_ro_tb": 2.9747148822785206e-05,
+   "lai_ro_xau_nhat": -0.021671324654075397,
+   "giu_bar_trung_vi": 5.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 6,
+   "swap_tich": 0.03423624783022666,
+   "chi_phi_tich": 0.6420152896640208,
+   "swap_tren_lai": 0.1421457868502411,
+   "khe_truot_atr_tb": 0.4021116386318686,
+   "khe_truot_atr_p95": 1.460609552424031,
+   "khe_truot_so_lan": 387,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 1,
+    "lai_mtm": 8.396229717842763e-06,
+    "don_bay": 0.047619047619047616,
+    "giu_bar": 0
+   },
+   "von_toi_thieu": 0.16049456952564586,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 30127,
+    "sl_cung": 392,
+    "time": 310,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 2.1040604954024147
+   },
+   "g1": {
+    "d_be_atr": 0.8333333333333334,
+    "don_bay_dinh": 1.0
+   },
+   "g3": {
+    "that": 0.2408530607122148,
+    "ban": {
+     "dao_dau": 1.2694864269665622,
+     "xao_khoi": -0.5089690306875402,
+     "gbm": -0.5680762393469289
+    },
+    "tach_khoi_moi_ban": false,
+    "kem_nhat_hon": -1.0286333662543474
+   },
+   "g4": {
+    "lai_tung_doan": [
+     -0.02039380448935746,
+     0.0911228156783297,
+     0.16520923363691864
+    ],
+    "so_doan_duong": 2,
+    "so_doan_do_duoc": 3,
+    "on_dinh": false
+   }
+  },
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-linear-tpavg_plus-stdd0.03.t240.sl6.n12",
+   "van_tay": "9656b5e7849ae622",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 31997,
+   "so_lenh": 69342,
+   "ro_moi_nam": 2378.2873931623935,
+   "lai_tong": 0.13803864965829704,
+   "equity_cuoi": 1.138038649658297,
+   "cagr": 0.009657471912307924,
+   "dd_max": 0.026715921128885683,
+   "ty_le_thang_ro": 0.9866549989061475,
+   "lai_ro_trung_vi": 1.1632147459195163e-05,
+   "lai_ro_tb": 1.1693062070546865e-05,
+   "lai_ro_xau_nhat": -0.006582900382592127,
+   "giu_bar_trung_vi": 5.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 12,
+   "swap_tich": 0.011246796414593,
+   "chi_phi_tich": 0.22485746099839882,
+   "swap_tren_lai": 0.08147570584349738,
+   "khe_truot_atr_tb": 0.40766670751871564,
+   "khe_truot_atr_p95": 1.581785090741508,
+   "khe_truot_so_lan": 401,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 1,
+    "lai_mtm": 2.260523385573185e-06,
+    "don_bay": 0.01282051282051282,
+    "giu_bar": 0
+   },
+   "von_toi_thieu": 0.040073881693328525,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 31554,
+    "sl_cung": 293,
+    "time": 149,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 2.1040604954024147
+   },
+   "g1": {
+    "d_be_atr": 1.8333333333333333,
+    "don_bay_dinh": 1.0
+   },
+   "g3": {
+    "that": 0.13803864965829704,
+    "ban": {
+     "dao_dau": 0.3404723225785584,
+     "xao_khoi": -0.2674706354932075,
+     "gbm": -0.22536414954401773
+    },
+    "tach_khoi_moi_ban": false,
+    "kem_nhat_hon": -0.20243367292026138
+   },
+   "g4": {
+    "lai_tung_doan": [
+     0.008501501103550746,
+     0.07717745865353365,
+     0.05010269962471359
+    ],
+    "so_doan_duong": 3,
+    "so_doan_do_duoc": 3,
+    "on_dinh": true
+   }
+  },
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-flat-tpavg_plus-stdd0.03.t240.sl6.n6",
+   "van_tay": "316c89a668264701",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 12549,
+   "so_lenh": 36151,
+   "ro_moi_nam": 932.7477106227107,
+   "lai_tong": 0.1100372905727669,
+   "equity_cuoi": 1.110037290572767,
+   "cagr": 0.007789597418245586,
+   "dd_max": 0.21921187459256491,
+   "ty_le_thang_ro": 0.8778388716232369,
+   "lai_ro_trung_vi": 0.00030211431561683044,
+   "lai_ro_tb": 6.477682998019084e-05,
+   "lai_ro_xau_nhat": -0.02478631906594153,
+   "giu_bar_trung_vi": 26.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 6,
+   "swap_tich": 0.06840916254454228,
+   "chi_phi_tich": 0.6344379863041061,
+   "swap_tren_lai": 0.6216907212860151,
+   "khe_truot_atr_tb": 0.6666523882570186,
+   "khe_truot_atr_p95": 2.488936089040577,
+   "khe_truot_so_lan": 167,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 1,
+    "lai_mtm": 8.70815417000903e-05,
+    "don_bay": 0.16666666666666666,
+    "giu_bar": 38
+   },
+   "von_toi_thieu": 0.3288178118888474,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 10889,
+    "time": 1061,
+    "sl_cung": 597,
+    "sl_dd": 1,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 4.208120990804829
+   },
+   "g1": {
+    "d_be_atr": 1.25,
+    "don_bay_dinh": 1.0
+   },
+   "g3": {
+    "that": 0.1100372905727669,
+    "ban": {
+     "dao_dau": 4.495664708955704,
+     "xao_khoi": -0.42093640126831344,
+     "gbm": -0.2798254862062093
+    },
+    "tach_khoi_moi_ban": false,
+    "kem_nhat_hon": -4.385627418382937
+   },
+   "g4": {
+    "lai_tung_doan": [
+     -0.1412658722953133,
+     0.06622794234788065,
+     0.1904131808545122
+    ],
+    "so_doan_duong": 2,
+    "so_doan_do_duoc": 3,
+    "on_dinh": false
+   }
+  },
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-flat-tpavg_plus-stdd0.03.t240.sl6.n12",
+   "van_tay": "f2e0823a0775833b",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 12715,
+   "so_lenh": 43299,
+   "ro_moi_nam": 945.0862332112333,
+   "lai_tong": 0.08113426196751661,
+   "equity_cuoi": 1.0811342619675166,
+   "cagr": 0.005815260141427858,
+   "dd_max": 0.14492027869300456,
+   "ty_le_thang_ro": 0.8929610696028313,
+   "lai_ro_trung_vi": 0.0001585824572536143,
+   "lai_ro_tb": 3.9365097436303546e-05,
+   "lai_ro_xau_nhat": -0.021138377760463456,
+   "giu_bar_trung_vi": 26.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 12,
+   "swap_tich": 0.039736143486954104,
+   "chi_phi_tich": 0.3796568084481296,
+   "swap_tren_lai": 0.4897578719932536,
+   "khe_truot_atr_tb": 0.6703927907612035,
+   "khe_truot_atr_p95": 2.4329345486886718,
+   "khe_truot_so_lan": 179,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 1,
+    "lai_mtm": 4.354077085004515e-05,
+    "don_bay": 0.08333333333333333,
+    "giu_bar": 38
+   },
+   "von_toi_thieu": 0.21738041803950683,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 11192,
+    "time": 957,
+    "sl_cung": 565,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 4.208120990804829
+   },
+   "g1": {
+    "d_be_atr": 2.75,
+    "don_bay_dinh": 1.0
+   },
+   "g3": {
+    "that": 0.08113426196751661,
+    "ban": {
+     "dao_dau": 2.2344785158136684,
+     "xao_khoi": -0.15291247352255843,
+     "gbm": -0.17041298861706022
+    },
+    "tach_khoi_moi_ban": false,
+    "kem_nhat_hon": -2.153344253846152
+   },
+   "g4": {
+    "lai_tung_doan": [
+     -0.09717791405966048,
+     0.06474534686897426,
+     0.10067181794803282
+    ],
+    "so_doan_duong": 2,
+    "so_doan_do_duoc": 3,
+    "on_dinh": false
+   }
+  },
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-flat-tpavg_plus-stdd0.03.t240.sl6.n12",
+   "van_tay": "42638fbd42afebbd",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 25757,
+   "so_lenh": 60541,
+   "ro_moi_nam": 1914.4778693528694,
+   "lai_tong": 0.05642530231963416,
+   "equity_cuoi": 1.0564253023196342,
+   "cagr": 0.004088286291617393,
+   "dd_max": 0.07090541312330764,
+   "ty_le_thang_ro": 0.965795706021664,
+   "lai_ro_trung_vi": 6.334771383992299e-05,
+   "lai_ro_tb": 2.402525968714003e-05,
+   "lai_ro_xau_nhat": -0.009926231910340144,
+   "giu_bar_trung_vi": 6.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 12,
+   "swap_tich": 0.031209868507478738,
+   "chi_phi_tich": 0.5311834429345537,
+   "swap_tren_lai": 0.5531183214700955,
+   "khe_truot_atr_tb": 0.4462917603500305,
+   "khe_truot_atr_p95": 1.5300375583871588,
+   "khe_truot_so_lan": 361,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 1,
+    "lai_mtm": 1.4693402006230039e-05,
+    "don_bay": 0.08333333333333333,
+    "giu_bar": 0
+   },
+   "von_toi_thieu": 0.10635811968496146,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 24852,
+    "sl_cung": 473,
+    "time": 431,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 2.1040604954024147
+   },
+   "g1": {
+    "d_be_atr": 2.75,
+    "don_bay_dinh": 1.0
+   },
+   "g3": {
+    "that": 0.05642530231963416,
+    "ban": {
+     "dao_dau": 0.2203470303777728,
+     "xao_khoi": -0.343080504156568,
+     "gbm": -0.28825716242390254
+    },
+    "tach_khoi_moi_ban": false,
+    "kem_nhat_hon": -0.16392172805813865
+   },
+   "g4": {
+    "lai_tung_doan": [
+     -0.004191839111148621,
+     0.014148621355083435,
+     0.042135675497453784
+    ],
+    "so_doan_duong": 2,
+    "so_doan_do_duoc": 3,
+    "on_dinh": false
+   }
+  },
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-flat-tpavg_plus-stdd0.03.t240.sl6.n12",
+   "van_tay": "76ac5c564a56aaa4",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 7400,
+   "so_lenh": 34343,
+   "ro_moi_nam": 550.030525030525,
+   "lai_tong": -0.07841246993496176,
+   "equity_cuoi": 0.9215875300650382,
+   "cagr": -0.006051094762655751,
+   "dd_max": 0.19932902309630313,
+   "ty_le_thang_ro": 0.7513513513513513,
+   "lai_ro_trung_vi": 0.0002635001245408636,
+   "lai_ro_tb": 3.663700366796574e-05,
+   "lai_ro_xau_nhat": -0.02091541585847334,
+   "giu_bar_trung_vi": 108.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 12,
+   "swap_tich": 0.04703876316771121,
+   "chi_phi_tich": 0.3024875339101967,
+   "swap_tren_lai": 0.599888808587804,
+   "khe_truot_atr_tb": 1.008742700836961,
+   "khe_truot_atr_p95": 5.347963133513373,
+   "khe_truot_so_lan": 91,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 2,
+    "lai_mtm": 4.713335354650239e-05,
+    "don_bay": 0.16666666666666666,
+    "giu_bar": 87
+   },
+   "von_toi_thieu": 0.29899353464445466,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 4644,
+    "time": 2162,
+    "sl_cung": 593,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 8.416241981609659
+   },
+   "g1": {
+    "d_be_atr": 2.75,
+    "don_bay_dinh": 1.0
+   }
+  },
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-flat-tpavg_plus-stdd0.03.t240.sl6.n6",
+   "van_tay": "bda0e460c9a41f15",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 7298,
+   "so_lenh": 27301,
+   "ro_moi_nam": 542.4490231990233,
+   "lai_tong": -0.21894595694917873,
+   "equity_cuoi": 0.7810540430508213,
+   "cagr": -0.018199720382896745,
+   "dd_max": 0.4168746918666032,
+   "ty_le_thang_ro": 0.7263633872293779,
+   "lai_ro_trung_vi": 0.00048784459425141313,
+   "lai_ro_tb": 4.74137328238573e-05,
+   "lai_ro_xau_nhat": -0.02599987332027409,
+   "giu_bar_trung_vi": 112.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 6,
+   "swap_tich": 0.08402564691176634,
+   "chi_phi_tich": 0.48094573218592357,
+   "swap_tren_lai": 0.38377345753532316,
+   "khe_truot_atr_tb": 0.9198732655122973,
+   "khe_truot_atr_p95": 5.347963133513373,
+   "khe_truot_so_lan": 91,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 2,
+    "lai_mtm": 9.426670709300478e-05,
+    "don_bay": 0.3333333333333333,
+    "giu_bar": 87
+   },
+   "von_toi_thieu": 0.6253120377999049,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 4444,
+    "time": 2260,
+    "sl_cung": 590,
+    "sl_dd": 3,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 8.416241981609659
+   },
+   "g1": {
+    "d_be_atr": 1.25,
+    "don_bay_dinh": 1.0
+   }
+  },
+  {
+   "ma": "PMG-EURGBP-ALL-H1-h0.5-AGAINST-fixed-flat-tpavg_plus-stdd0.03.t240.sl6.n6",
+   "van_tay": "da20bc0a813ad9b5",
+   "o": [
+    "EURGBP",
+    "ALL",
+    "H1"
+   ],
+   "so_ro": 29689,
+   "so_lenh": 63776,
+   "ro_moi_nam": 2206.7373321123323,
+   "lai_tong": -0.21931177568688853,
+   "equity_cuoi": 0.7806882243131115,
+   "cagr": -0.018233907088239465,
+   "dd_max": 0.33718837932447254,
+   "ty_le_thang_ro": 0.9555727710599885,
+   "lai_ro_trung_vi": 0.00013001106629270676,
+   "lai_ro_tb": 3.262233763185097e-05,
+   "lai_ro_xau_nhat": -0.0232657226345534,
+   "giu_bar_trung_vi": 6.0,
+   "dinh_don_bay": 1.0,
+   "dinh_so_tang": 6,
+   "swap_tich": 0.06782765177909475,
+   "chi_phi_tich": 1.1200087058598123,
+   "swap_tren_lai": 0.3092750107314452,
+   "khe_truot_atr_tb": 0.46887200753223934,
+   "khe_truot_atr_p95": 1.553879362164547,
+   "khe_truot_so_lan": 391,
+   "ro_treo_cuoi_mau": {
+    "so_tang": 1,
+    "lai_mtm": 2.9386804012460077e-05,
+    "don_bay": 0.16666666666666666,
+    "giu_bar": 0
+   },
+   "von_toi_thieu": 0.5057825689867088,
+   "so_nam": 13.453798767967145,
+   "ly_do_dong": {
+    "tp": 28342,
+    "sl_cung": 652,
+    "time": 692,
+    "sl_dd": 2,
+    "MTM_cuoi_mau": 1
+   },
+   "chay_tai_khoan": false,
+   "bar_chay": -1,
+   "trang_thai": "DU",
+   "phan_giai": {
+    "trang_thai": "DU",
+    "ly_do": "",
+    "bien_do_nen": 0.00022999999999995246,
+    "atr_trung_vi": 0.0009678678278849107,
+    "buoc_tren_bien_do": 2.1040604954024147,
+    "tp_tren_bien_do": 2.1040604954024147
+   },
+   "g1": {
+    "d_be_atr": 1.25,
+    "don_bay_dinh": 1.0
+   }
+  }
+ ]
+}

@@ -1,11 +1,11 @@
 # TRU NGHI - bien kien thuc thanh co che kiem dinh duoc
-*2026-09-13 10:02:50*
+*2026-09-14 19:01:29*
 
 > Tru nay KHONG ket luan gi ve tien. No chi de xuat. Moi con so van di
 > qua `nhan/cong.py` va van ton ngan sach FDR nhu mau viet tay.
 
 ## 1. Doi chieu vong truoc
-- De xuat da ghi so: **45** (bi tu choi truoc kiem dinh 8, da co ket qua 15, dang cho 22)
+- De xuat da ghi so: **51** (bi tu choi truoc kiem dinh 10, da co ket qua 15, dang cho 26)
 
 | Co che | Ho | Ket qua |
 |---|---|---|
@@ -24,20 +24,18 @@
 
 ## 2. Vong nay
 - Doc 8 tai lieu hang A/B
-- Nhan duoc 6 de xuat, **qua ba cua kiem: 4**
+- Nhan duoc 6 de xuat, **qua ba cua kiem: 6**
 - Trong do 0 co nguon truy nguyen
   ve tai lieu (5-6 truoc day luon la 0 - moi co che la cua LLM).
 - Tai san dung de kiem: EURCAD
 
 ### Da nhan vao kho co che
-- `macro_duration_trend_filter`
-- `intraday_vol_expansion_reversion`
-- `institutional_absorption_support`
-- `stat_arb_divergence_fade`
-
-### Bi tu choi (va vi sao - vong sau se doc lai muc nay)
-- `rebalance_fx_low_vol_reversion`: suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUUSD H1 0.000%, EURUSD H1 0.000%) - khong du lenh de kiem dinh bao gio
-- `liquidity_sweep_reversal`: suy bien tren MOI tai san do duoc (chuoi kiem 0.000%, XAUUSD H1 0.000%, EURUSD H1 0.000%) - khong du lenh de kiem dinh bao gio
+- `reversion_rsi_low_vol_fx`
+- `reversion_volume_spike_failure`
+- `reversion_session_open_gap_fill`
+- `carry_offset_vol_expansion_long`
+- `reversion_zscore_extreme_filter`
+- `trend_pullback_reversion_entry`
 
 ## 3. Ba cua kiem moi de xuat phai qua
 

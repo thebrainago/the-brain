@@ -316,5 +316,38 @@
   "so_tu": 3,
   "sao_toi_thieu": 50,
   "nhu_cau": "phuong_phap_chong_qua_khop"
+ },
+ "multiple testing finance": {
+  "ket": "LOI",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "arxiv: ReadTimeout: HTTPSConnectionPool(host='export.arxiv.org', port=443): Read timed out. (read ti"
+  ],
+  "luc": "2026-09-14 18:52:57",
+  "so_tu": 3,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "phuong_phap_chong_qua_khop"
+ },
+ "transaction cost slippage": {
+  "ket": "LOI",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "arxiv: HTTP 429"
+  ],
+  "luc": "2026-09-14 18:53:21",
+  "so_tu": 3,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "phuong_phap_chi_phi_giao_dich"
+ },
+ "market impact execution": {
+  "ket": "LOI",
+  "so_ket_qua": 0,
+  "duong_hong": [
+   "arxiv: HTTP 429"
+  ],
+  "luc": "2026-09-14 18:53:45",
+  "so_tu": 3,
+  "sao_toi_thieu": 50,
+  "nhu_cau": "phuong_phap_chi_phi_giao_dich"
  }
 }

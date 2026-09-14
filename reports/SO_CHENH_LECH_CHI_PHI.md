@@ -1,5 +1,5 @@
 # SO CHENH LECH CHI PHI TRIEN KHAI
-*Do luc 2026-09-13 09:45:46 tren cac terminal MT5 dang cai.*
+*Do luc 2026-09-14 19:01:22 tren cac terminal MT5 dang cai.*
 
 > **Day khong phai gia thuyet, day la phep tru.** Khong ton slot ngan sach
 > thong ke nao. Khong can backtest, khong can placebo.
@@ -9,50 +9,30 @@
 > TUYET DOI, ty le nay GIAM khi gia tang, nen **dung ap cho ca lich su**
 > (CLAUDE.md muc 13-14).
 
-## Chenh lech dang ke (62 phoi nhiem >= 1 diem %/nam, do tin CAO)
+## Chenh lech dang ke (20 phoi nhiem >= 1 diem %/nam, do tin CAO)
 
 | Phoi nhiem | Kenh re | %/nam | Kenh dat | %/nam | CHENH | Dieu kien de sai |
 |---|---|---|---|---|---|---|
-| `ETHBTC` | Exness | +0.47 | FXCE | +481.85 | **+481.38** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `BATUSD` | Exness | +0.00 | FXCE | +149.21 | **+149.21** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `USDTRY` | Exness | +5.05 | XM | +50.21 | **+45.16** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `EURTRY` | Exness | +6.54 | XM | +42.59 | **+36.05** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `USDZAR` | FXCE | +0.00 | XM | +9.29 | **+9.29** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 | `XAGUSD` | FXCE | +3.00 | XM | +11.23 | **+8.23** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `BCHUSD` | Exness | +8.10 | FXCE | +16.14 | **+8.04** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
 | `USDMXN` | FXCE | +0.00 | XM | +7.18 | **+7.18** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `LTCUSD` | Exness | +6.57 | FXCE | +12.90 | **+6.34** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `XAUEUR` | Exness | +3.03 | XM | +8.73 | **+5.70** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `EURHUF` | XM | +6.74 | Exness | +12.35 | **+5.61** | XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khon |
-| `USDHUF` | Exness | +0.00 | XM | +5.54 | **+5.54** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `BTCUSD` | FXCE | +1.56 | Exness | +6.39 | **+4.83** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `XRPUSD` | FXCE | +2.21 | Exness | +6.80 | **+4.59** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `BTCJPY` | FXCE | +2.95 | Exness | +7.24 | **+4.29** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `USDHUF` | FXCE | +0.00 | XM | +5.54 | **+5.54** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 | `ADP` | FXCE | +3.00 | XM | +7.18 | **+4.18** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 | `ING` | FXCE | +3.00 | XM | +7.18 | **+4.18** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `ETHUSD` | FXCE | +2.19 | Exness | +6.24 | **+4.06** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `EURZAR` | Exness | +4.47 | XM | +8.10 | **+3.63** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `XPDUSD` | XM | -0.00 | Exness | +3.56 | **+3.56** | XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khon |
-| `BTCAUD` | FXCE | +3.78 | Exness | +7.24 | **+3.47** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 | `USDNOK` | FXCE | +0.00 | XM | +3.33 | **+3.33** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `AUDJPY` | FXCE | -3.22 | Exness | +0.06 | **+3.29** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `AUDCHF` | FXCE | -3.23 | Exness | -0.00 | **+3.23** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 | `USDPLN` | FXCE | +0.00 | XM | +2.87 | **+2.87** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `SGDJPY` | Exness | +0.03 | XM | +2.84 | **+2.81** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `XAUUSD` | Exness | +4.41 | XM | +7.12 | **+2.71** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `EURDKK` | Exness | -0.00 | XM | +2.65 | **+2.65** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `GBPNOK` | Exness | +0.86 | XM | +3.23 | **+2.37** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `USDCHF` | FXCE | -2.33 | Exness | -0.00 | **+2.33** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `CHFSGD` | Exness | +2.12 | XM | +4.39 | **+2.27** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `GBPJPY` | FXCE | -2.26 | Exness | -0.00 | **+2.26** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `NZDSGD` | Exness | -0.00 | XM | +2.22 | **+2.22** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `USDJPY` | FXCE | -2.20 | Exness | -0.00 | **+2.20** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `EURSEK` | Exness | -0.00 | XM | +2.18 | **+2.18** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
+| `XAUUSD` | FXCE | +4.48 | XM | +7.12 | **+2.64** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 | `EURJPY` | FXCE | -0.86 | XM | +1.27 | **+2.13** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
-| `EURNOK` | Exness | +2.64 | XM | +4.75 | **+2.11** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `XPTUSD` | XM | -0.00 | Exness | +2.07 | **+2.07** | XM doi bieu phi; rui ro doi tac cua XM tang; hai symbol khon |
-| `EURSGD` | Exness | -0.00 | XM | +2.03 | **+2.03** | Exness doi bieu phi; rui ro doi tac cua Exness tang; hai sym |
-| `BTCXAU` | FXCE | +5.20 | Exness | +7.21 | **+2.00** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `CHFJPY` | FXCE | +1.27 | XM | +3.16 | **+1.89** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `AUDJPY` | FXCE | -3.22 | XM | -1.34 | **+1.88** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `GBPJPY` | FXCE | -2.26 | XM | -0.54 | **+1.72** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `USDJPY` | FXCE | -2.20 | XM | -0.50 | **+1.70** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `NZDJPY` | FXCE | -1.04 | XM | +0.62 | **+1.66** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `EURNZD` | FXCE | +0.96 | XM | +2.56 | **+1.60** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `USDHKD` | FXCE | +0.00 | XM | +1.41 | **+1.41** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `CADJPY` | FXCE | -1.00 | XM | +0.36 | **+1.36** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `AUDNZD` | FXCE | -1.27 | XM | +0.08 | **+1.35** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
+| `USDDKK` | FXCE | +0.00 | XM | +1.13 | **+1.13** | FXCE doi bieu phi; rui ro doi tac cua FXCE tang; hai symbol  |
 
 ## Canh bao doc so
 

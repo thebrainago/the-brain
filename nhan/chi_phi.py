@@ -417,6 +417,96 @@ def _luu_spread(ma: str, r: dict) -> None:
     _ghi_cau_hinh(d)
 
 
+
+#: Uu tien khung khi di tim mot ban CO COT SPREAD. H1 truoc M1 vi doc nhanh hon
+#: 50 lan ma spread trung vi khong khac dang ke (M1 chi them do phan giai gio).
+_UU_TIEN_KHUNG_SPREAD = ("H1", "M30", "M15", "M5", "M1", "H4")
+
+
+def do_spread_tu_ban_khac(ma: str, toi_da_dong: int = 400_000) -> dict | None:
+    """Do spread tu MOT BAN KHAC cua chinh ma nay - ban CO cot `spread`.
+
+    ## Lo hong ham nay va
+
+    `tu_du_lieu` do spread tu chinh `df` duoc truyen vao. Khi `df` khong co cot
+    `spread` no roi xuong nhanh du phong cuoi cung: `chung = 1.0e-4` va
+    **`do_tin = "KHAI"`**. Hai hau qua, va hau qua thu hai moi la cai dat:
+
+      1. spread thanh mot con so BIA (1,0 bps) - da biet.
+      2. ca mo hinh chi phi bi ha xuong `KHAI`, **ke ca khi phi qua dem da do
+         duoc tu san voi `tin_cay = CAO`**. Ma luat du an la `do_tin = KHAI` thi
+         khong bao gio PASS, va `ho_so_symbol.chon_ung_vien` loai thang.
+
+    Do 14/09/2026: trong 87 ma con `KHAI`, co **22 ma** thuoc dung nhom nay -
+    phi day du, tin_cay CAO, chi thieu moi cot spread. AUDCAD la mot trong so do,
+    va no chinh la ma co tin hieu G0 manh nhat cua ho PMG. Tuc mot cai bay do
+    luong dang giau di dung tai san dang co hy vong.
+
+    Vi sao no xay ra ma khong ai thay: `du_lieu.kho()` chon ban theo DO PHU, nen
+    voi AUDCAD no chon `audcad_mt5_daily.parquet` (33 nam, KHONG co cot spread)
+    thay vi `AUDCAD_D1_xm.parquet` (25,7 nam, CO cot spread). Va rieng bar D1 cua
+    XM thi cot spread bang 0 toan bo - chi H1/M1 moi co spread THAT.
+
+    Nen ham nay di tim trong CAC BAN KHAC cua cung ma. Khong can MT5 chay.
+    Ket qua ghi vao dung cho ma `_spread_da_luu` doc, nen `tu_du_lieu` tu dung
+    duoc ma khong phai sua gi them.
+    """
+    from nhan import du_lieu as DL
+    ban = (DL.kho().get(ma) or {}).get("cac_ban") or []
+    ung = [b for b in ban if "spread" in (b.get("cot") or [])
+           and b.get("khung_goc") in _UU_TIEN_KHUNG_SPREAD]
+    if not ung:
+        return None
+    ung.sort(key=lambda b: (_UU_TIEN_KHUNG_SPREAD.index(b["khung_goc"]),
+                            0 if b.get("nguon") == "san" else 1))
+    for b in ung:
+        try:
+            df = pd.read_parquet(b["file"], columns=["time", "close", "spread"])
+        except Exception:
+            continue
+        if len(df) > toi_da_dong:
+            df = df.iloc[-toi_da_dong:]
+        df = df.set_index(pd.to_datetime(df["time"])).drop(columns=["time"])
+        theo_gio, chung, cb = do_spread(ma, df)
+        if chung <= 0:
+            continue
+        r = {"chung": chung, "theo_gio": {str(g): v for g, v in theo_gio.items()},
+             "san": b.get("nguon", "?"), "symbol": Path(b["file"]).stem,
+             "so_bar": int(len(df)), "khung": b["khung_goc"],
+             "tu": str(df.index[0].date()), "den": str(df.index[-1].date()),
+             "do_luc": time.strftime("%Y-%m-%d %H:%M:%S"),
+             "canh_bao": cb, "cach": "ban_khac_cua_cung_ma"}
+        _luu_spread(ma, r)
+        return r
+    return None
+
+
+def nap_spread_ca_kho(cac_ma=None, in_ra=print) -> dict:
+    """Nap TRUOC spread cho moi ma chua co, tu ban khac cua chinh no.
+
+    Nap truoc chu khong do lazy giua vong quet - dung bai hoc cua `nap_truoc_mde`:
+    mot phep do ton file I/O nam trong vong lap song song thi hoac lam cham ca
+    vong, hoac bi vai tien trinh do lai cung mot thu.
+    """
+    from nhan import du_lieu as DL
+    mas = list(cac_ma or sorted(DL.kho()))
+    ra = {"da_co": 0, "do_moi": 0, "khong_co_ban": 0}
+    for ma in mas:
+        if _spread_da_luu(ma):
+            ra["da_co"] += 1
+            continue
+        r = do_spread_tu_ban_khac(ma)
+        if r:
+            ra["do_moi"] += 1
+            in_ra(f"  {ma:14s} {r['khung']:3s} {r['chung']*1e4:6.3f} bps "
+                  f"({r['so_bar']} bar {r['tu']}..{r['den']})")
+        else:
+            ra["khong_co_ban"] += 1
+    in_ra(f"spread: {ra['da_co']} da co · {ra['do_moi']} do moi · "
+          f"{ra['khong_co_ban']} khong co ban nao co cot spread")
+    return ra
+
+
 def bao_dam_spread(ma: str, toi_da_gio: float = 168.0) -> dict | None:
     """Lay spread do tu bar MT5, do lai neu ban cu qua han."""
     cu = _spread_da_luu(ma)

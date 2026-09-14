@@ -54,6 +54,8 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b phanh           han muc / kill-switch cua he chay that
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
     b bench-qt [MA]   BAN DO 11 ho quan tri tren tester (engine vao CO DINH)
+    b pmg [g0|quet|so|bang]  PMG: ho quan li lenh KHONG CO TIN HIEU VAO (luoi ro)
+    b uu-tien lan     HAI LAN: khai thac (WIP<=3, co han chot) vs xay may
     b go-html [N]     go trang HTML tho trong kho ra van ban (khau truoc BOC)
     b luan-lenh       truy nguoc tu DANH SACH LENH that -> luat vao lenh
     b chuyen          mang he sang KHUNG / TAI SAN khac (giu ty le kich hoat)
@@ -739,11 +741,21 @@ def c_uu_tien(a: list) -> int:
     Mot link -> toan van -> co che -> dang ky, ngay trong phien. Khong phai cho
     hang doi 10.000 tai lieu may tu quet.
     """
+    from nhan import uu_tien as UT
+    if a and a[0] == "lan":
+        # HAI LAN (ban giao 13/09 muc 11): khai thac vs xay may, ngan sach tach han
+        UT.bang_lan()
+        het = UT.het_han()
+        if het:
+            print("  QUA HAN - tra ve kho hoac gia han CO Y THUC:")
+            for v in het:
+                print(f"     {v['ten']}  (han {v['han']})")
+        return 0
     if not a:
         print('go: b uu-tien <url hoac duong dan file>')
+        print('    b uu-tien lan          HAI LAN: khai thac (WIP<=3) vs xay may')
         print('vi du: b uu-tien https://www.youtube.com/watch?v=...')
         return 2
-    from nhan import uu_tien as UT
     UT.in_ra(UT.xu_ly(a[0]))
     return 0
 
@@ -754,6 +766,65 @@ def c_video(a: list) -> int:
     import json as _j
     print(_j.dumps(DV.mot_luot(int(a[0]) if a else 20), ensure_ascii=False, indent=1))
     return 0
+
+
+def c_pmg(a: list) -> int:
+    """`b pmg ...` - PMG: ho quan li lenh KHONG CO TIN HIEU VAO.
+
+    Dac ta cua chu du an (`tai_lieu/PMG_DAC_TA.md`, vao qua LUONG UU TIEN
+    14/09/2026), xep thang vao module QUAN LI LENH. Day la ho ma ban giao 13/09
+    muc 4.B'.2 doi: bench cu gan quan tri len mot engine vao CO DINH roi hoi
+    "them quan tri thi doi gi"; PMG khong co entry nao ca, no song hoan toan
+    bang luoi + chot ro.
+
+        b pmg g0 [MA...]   CONG G0 - o nao co bat doi xung that (re, chay TRUOC)
+        b pmg bang         in lai ban do G0 da co
+        b pmg quet MA      G1 -> G2 -> G3 -> G4 tren mot o da qua G0
+        b pmg so           so LOAI TRU (o nao da dong, dong o cong nao)
+
+    Thu tu la BAT BUOC, khong phai goi y: engine PMG duoi random walk co ky vong
+    bang dung `-chi phi`, nen chay G2 trên mot o chua qua G0 la dot CPU vao mot o
+    da biet truoc ket qua. `b pmg quet` tu choi o chua co ket qua G0.
+    """
+    from nhan import pmg_g0 as G0
+    lenh = (a[0] if a else "g0").lower()
+    if lenh == "g0":
+        ma = a[1:] or ["US500CASH", "XM_US500CASH", "XM_US100CASH", "XAUUSDM",
+                       "EURGBP", "AUDCAD"]
+        b = G0.chay_bang(ma, "M5", "H1")
+        G0.in_bang(b)
+        G0.nap_ket_qua_vao_so(b)
+        return 0
+    if lenh == "bang":
+        import json as _j
+        if not G0.BANG_G0.exists():
+            print("chua co ban do G0 - chay `b pmg g0` truoc")
+            return 1
+        G0.in_bang(_j.loads(G0.BANG_G0.read_text(encoding="utf-8")))
+        return 0
+    if lenh == "so":
+        so = G0.doc_loai_tru()
+        if not so:
+            print("so loai tru rong")
+            return 0
+        vv = sum(1 for d in so if d.get("vinh_vien"))
+        print(f"SO LOAI TRU: {len(so)} dong ({vv} dong VINH VIEN - chet o G0)")
+        print(f"{'ma':<16}{'phien':<14}{'tf':<5}{'h':>5}{'cong':>6}  ghi chu")
+        for d in so[-40:]:
+            print(f"{d['ma']:<16}{d['phien']:<14}{d['atr_tf']:<5}{float(d['h']):5g}"
+                  f"{d['cong']:>6}  {str(d.get('ghi_chu',''))[:60]}")
+        return 0
+    if lenh == "quet":
+        if len(a) < 2:
+            print("go: b pmg quet <MA> [KHUNG] [ATR_TF]")
+            return 2
+        from nhan import pmg_quet as Q
+        r = Q.quet(a[1], a[2] if len(a) > 2 else "M5", a[3] if len(a) > 3 else "H1")
+        Q.in_ket_qua(r)
+        return 0
+    print("b pmg [g0|bang|quet MA|so]")
+    return 2
+
 
 
 LENH = {
@@ -779,7 +850,7 @@ LENH = {
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
     "quan-tri": c_quan_tri, "qt": c_quan_tri,
-    "bench-qt": c_bench_qt, "go-html": c_go_html, "mach": c_mach,
+    "bench-qt": c_bench_qt, "pmg": c_pmg, "go-html": c_go_html, "mach": c_mach,
     "ngan-sach": c_ngan_sach, "ns": c_ngan_sach, "he": c_he,
     "test-me": c_test_me,
     "luan-lenh": c_luan_lenh, "chuyen": c_chuyen,

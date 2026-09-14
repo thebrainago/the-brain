@@ -189,6 +189,29 @@ bao IPC timeout — dung thu dang chan `PASS`. Mac dinh `luong = so_nhan - 4`.
   Ho 2 **ghep duoc voi moi he**, va do 05/09 no QUAN TRONG HON ho 1 voi lop luoi:
   entry co tinh SAI van cho 92-97%/nam.
 
+### `ho 3` — PMG: quan li lenh KHONG CO TIN HIEU VAO (14/09/2026)
+Dac ta chu du an dua qua LUONG UU TIEN, xep thang vao module quan li lenh:
+`tai_lieu/PMG_DAC_TA.md` (nguyen van) + `tai_lieu/PMG_TRIEN_KHAI.md` (da dung gi,
+do duoc gi). Cua vao: **`b pmg g0` -> `b pmg quet MA`**. Bon module `nhan/pmg*.py`.
+
+Ba dieu phai thuoc truoc khi doc bat ky so nao cua ho nay:
+- **Ky vong duoi random walk = `-chi phi`.** Khong co entry signal thi khong co gi
+  khac de ky vong. Moi so duong phai chi ra duoc bat doi xung that o dung timescale.
+- **BAR KHONG DO DUOC PMG khi buoc luoi hep hon nen.** Bar chi noi O/H/L/C nen moi
+  mo hinh duong di deu phai ghe ca hai cuc tri; luoi nghich chieu duoc tang khong
+  mot cu dao chieu moi nen. Do 14/09 tren random walk khong chi phi: buoc/bien_do
+  = 0,54 cho **+720%**, o 3,24 cho **-2,3%** (dap an dung la 0). Da chan bang
+  `NGUONG_PHAN_GIAI = 2.0` -> `trang_thai = CHUA_DO_DUOC`, KHONG phai `AM`.
+- **Null cua ER phai la DAO DAU, khong phai block bootstrap.** Block bootstrap giu
+  nguyen TRUNG BINH CUA KHOI, ma do chinh la tu so cua ER -> null nuot mat tin
+  hieu (do: ER that 0,2011 vs null 0,2006 tren chuoi AR(+0,6) dung san).
+
+Ban do G0 14/09 (M5, ATR H1, 200 null, FDR-BH 10%, 25/48 o song): **cap cheo FX va
+vang HOI QUY o moi thang do** (AUDCAD/EURGBP 8/8 o, XAUUSDM 7/8), con **chi so gan
+nhu khong co gi** (US500 va XM_US500 moi cai 1/8, **US100 0/8**). US100 co xu huong
+nghieng `WITH` nguoc dau voi FX nhung **khong qua FDR** - la gia thuyet de quet lai,
+KHONG phai phat hien.
+
 ### Bo loc co che (buoc 2) hoi gi
 KHONG hoi "co lai khong" (do la viec `cham_diem`). Hoi **"co dung lai duoc khong"**:
 >=2 nut van · khong trung · co tham so SO · co it nhat mot nut QUAN TRI.

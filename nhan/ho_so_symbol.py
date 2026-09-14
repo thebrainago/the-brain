@@ -114,7 +114,14 @@ def quet(cac_ma=None, khung: str = "D1", luong: int = 10, in_ra=print) -> list[d
     from concurrent.futures import ProcessPoolExecutor, as_completed
 
     from nhan import du_lieu as DL
+    from nhan import chi_phi as CP
     mas = list(cac_ma or sorted(DL.kho()))
+    # NAP TRUOC spread. Ban D1 duoc `kho()` chon theo do phu thuong KHONG co cot
+    # `spread` (va rieng bar D1 cua XM thi cot do bang 0 toan bo), nen khong co
+    # buoc nay thi `tu_du_lieu` roi xuong spread BIA 1,0 bps va ha ca mo hinh
+    # xuong `KHAI` - ke ca khi phi qua dem da do duoc voi tin_cay CAO.
+    # Do 14/09: 22 ma bi giau di theo dung duong do, trong co AUDCAD.
+    CP.nap_spread_ca_kho(mas, in_ra=in_ra)
     ra = []
     with ProcessPoolExecutor(max_workers=luong) as ex:
         fu = {ex.submit(mot, m, khung): m for m in mas}

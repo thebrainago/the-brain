@@ -1,71 +1,61 @@
 {
  "chan_doan": [
   {
-   "van_de": "Đĩa cứng dưới ngưỡng an toàn, khóa kiểm định MT5",
-   "bang_chung": "dia_trong_gb=8.8 (<15), mt5_tick_test='KHOA (dia < 15GB)'",
+   "van_de": "Tru NGHI va BANKER dung im qua han",
+   "bang_chung": "tre_giay: 118165 & 114872, trang_thai: nghi, dung_im: true",
    "muc": "NANG"
   },
   {
-   "van_de": "Tru NGHI và BANKER dừng hoạt động quá hạn",
-   "bang_chung": "NGHI tre_giay=1007420 (>360h), BANKER tre_giay=126581 (>720h), trang_thai='nghi', dung_im=true",
+   "van_de": "Null factory lot ty le cao (50%)",
+   "bang_chung": "null_ty_le_lot: 0.5, chi tiet: 5/10 ca khong co edge van lot qua cong",
    "muc": "NANG"
   },
   {
-   "van_de": "Vòng lặp SEEKER chạy trống chiếm 90% chu kỳ",
-   "bang_chung": "seeker_ty_le_vong_rong=0.9, viec_treo=0, viec_loi=0 nhưng không sinh artifact mới",
+   "van_de": "SEEKER chay vong lap trong, tiep thu thong tin yeu",
+   "bang_chung": "quet_nong: 88% lan chay khong thu duoc gi moi, nang_suat_doc_thap: 0.27 gia thuyet/100 bai, llm_953b89aae3: vong lap chiem 90% chu ky",
    "muc": "VUA"
   },
   {
-   "van_de": "Nguồn dữ liệu chết hoặc không thu hoạch được",
-   "bang_chung": "quantconnect/mql5_ma_nguon/reddit_quant thu_hoach=0, fxblue gọi >=3 lần nhưng 0 tài liệu, rss_quantpedia_blog loi=1",
+   "van_de": "Tich luy loi xu ly LLM/EVO gay nghẽn pipeline",
+   "bang_chung": "tru_loi_EVO/QUANTLAB/SEEKER: khong lanh manh (lan 1 lien tiep), llm_5cf5cc4505: loi xu ly tich luy",
    "muc": "VUA"
   },
   {
-   "van_de": "Lỗi xử lý LLM/EVO tích lũy làm nghẽn pipeline",
-   "bang_chung": "llm_e92fd83040, llm_e502b66769, evo_xay_viec_hong, evo_evo_van_de_mo đều báo lỗi/quá hạn",
+   "van_de": "Thieu moc hieu chuan that de kiem dinh cong",
+   "bang_chung": "cong_chua_co_moc_he_that: cong dang dung tin hieu NHAN TAO, V6 da bi loai",
    "muc": "VUA"
-  },
-  {
-   "van_de": "Tỷ lệ null_lot bằng 0 nhưng vẫn ghi nhận chi tiết giả thuyết null",
-   "bang_chung": "null_ty_le_lot=0.0 trong khi null_chi_tiet liệt kê 10 ca EURCAD H4",
-   "muc": "NHE"
   }
  ],
  "de_xuat": [
   {
-   "viec": "Giải phóng đĩa và mở khóa MT5",
-   "vi_sao": "Dưới 15GB khiến tick-test bị chặn, ngăn chặn bước quyết định cuối cùng của dự án",
-   "kiem_the_nao": "Xóa cache/logs cũ, di chuyển artifact sang ổ khác, xác nhận mt5_tick_test chuyển thành 'MO'"
+   "viec": "Khoi dong lai hoac dieu chinh tham so cho NGHI & BANKER",
+   "vi_sao": "Dung im qua han ngan duong truyen du lieu xuong cac tru con lai",
+   "kiem_the_nao": "Chay manual restart, theo doi lan_cuoi va dung_im sau 15 phut, xac nhan tre_giay < 300"
   },
   {
-   "viec": "Reset trạng thái tru NGHI và BANKER",
-   "vi_sao": "Dừng im quá hạn làm nghẽn dây chuyền xử lý và phân tích rủi ro",
-   "kiem_the_nao": "Gửi lệnh restart/trạng thái 'chay', theo dõi tre_giay giảm về <60s trong 5 phút"
+   "viec": "Sieat chat luong null factory, giam mien dung len 10%",
+   "vi_sao": "50% null lot lam loang phep tinh, tang false positive, khong phu hop muc tieu",
+   "kiem_the_nao": "Cap nhat nguong edge trong null factory, bat buoc check sharpe/alpha truoc khi gui len cong, so sanh ty le lot sau 24h"
   },
   {
-   "viec": "Thêm cơ chế early-exit cho SEEKER",
-   "vi_sao": "90% vòng lặp chạy vô ích gây lãng phí tài nguyên CPU/RAM",
-   "kiem_the_nao": "Kiểm tra log vòng lặp, đặt điều kiện dừng nếu không tìm thấy pattern mới sau 3 lần quét liên tiếp"
+   "viec": "Ngung quet nong, chuyen SEEKER sang che doc chuan hoa + OCR",
+   "vi_sao": "Quet sach khong sinh tai lieu moi, nang suat doc thap, cham chan luong viec",
+   "kiem_the_nao": "Tat che quet tu nhien, chay script doc_pdf.quet_thu_muc voi file da tai lai, do luong gia thuyet/100 bai sau 3 lan chay"
   },
   {
-   "viec": "Tắt hoặc sửa các nguồn không thu hoạch được",
-   "vi_sao": "fxblue, quantconnect, mql5_ma_nguon tiêu tốn API call mà không trả về dữ liệu",
-   "kiem_the_nao": "Chuyển status sang 'TAT' hoặc cập nhật endpoint/API key, kiểm tra phản hồi HTTP response"
+   "viec": "Xac dinh he thuc te lam moc hieu chuan thay the V6",
+   "vi_sao": "Cong dang kiem dinh bang tin hieu nhan tao, ket qua khong tin cay de loai bo null",
+   "kiem_the_nao": "Lua chon 1 he tien that cua chu du an, cai dat vao cong_co_luc_chi_tiet, so sanh output voi he cu trong 1 tuan"
   },
   {
-   "viec": "Xử lý backlog lỗi EVO/LLM",
-   "vi_sao": "Công việc hỏng/quá hạn tích tụ làm chậm tiến độ tổng thể",
-   "kiem_the_nao": "Quét queue công việc còn dang dở, xóa task lỗi, kích hoạt lại worker pool"
-  },
-  {
-   "viec": "Phân tách rõ ràng giữa giả thuyết null và thực tế vận hành",
-   "vi_sao": "null_ty_le_lot=0.0 chứng minh nhà máy null hiện tại không sản xuất, trong khi null_chi_tiet là danh sách kiểm thử lịch sử",
-   "kiem_the_nao": "Cập nhật dashboard để hiển thị riêng 'null_rate_active' và 'null_history_log', tránh nhầm lẫn khi đọc báo cáo"
+   "viec": "Giam toc do vong lap SEEKER, them checkpoint",
+   "vi_sao": "Chiem 90% chu ky ma khong sinh viec, gay troi CPU/RAM vo ich",
+   "kiem_the_nao": "Them sleep/throttle giua lan quet, theo doi viec_cho va seeker_ty_le_vong_rong den khi <0.5"
   }
  ],
  "cau_hoi_cho_nguoi": [
-  "Có nên tạm dừng nguồn 'semantic' đang báo lỗi im để ưu tiên giải phóng đĩa trước không?",
-  "Tham số early-exit cho SEEKER nên đặt ở ngưỡng bao nhiêu vòng lặp để cân bằng giữa khám phá và hiệu suất?",
-  "Nguồn nào trong danh sách 'không thu hoạch' có giá trị chiến lược cao nhất để ưu tiên khôi phục API?"
+  "He thuc te nao se duoc chon lam moc hieu chuan thay the V6?",
+  "Co nen tam dung null factory cho den khi sieat duoc nguong 10% hay duy tri de lay du lieu?",
+  "Tai lieu Telegram bi mat, ban co backup goc hay can tim nguon thay the?"
  ]
 }

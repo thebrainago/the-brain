@@ -1,0 +1,23 @@
+  US500CASH        M5   100000 bar  ATR(H1) 14.68111  bien do nen 3.23975
+  XM_US500CASH     M5    99963 bar  ATR(H1) 14.98877  bien do nen 3.25000
+  XM_US100CASH     M5    99815 bar  ATR(H1) 76.74544  bien do nen 16.50000
+  XAUUSDM          M5   648392 bar  ATR(H1) 4.34884  bien do nen 0.99600
+  EURGBP           M5  1001167 bar  ATR(H1) 0.00097  bien do nen 0.00023
+  AUDCAD           M5  1001026 bar  ATR(H1) 0.00134  bien do nen 0.00034
+
+BAN DO G0 — ER thuc so voi null   (M5, ATR H1, FDR-BH 10%, 200 chuoi null)
+  W = trend persistence (chi WITH dang test) · A = hoi quy (chi AGAINST)
+  .  = khong khac null -> LOAI o nay khoi ho PMG · ?  = chua do duoc
+  in HOA = qua FDR; in thuong = huong de xuat nhung KHONG qua FDR
+
+tai san / phien               0.1    0.2    0.3    0.5    0.8    1.2      2      3
+AUDCAD                          A      A      A      A      A      A      A      A
+EURGBP                          A      A      A      A      A      A      A      A
+US500CASH                       a      a      a      w      A      w      a      a
+XAUUSDM                         A      A      A      A      A      A      A      a
+XM_US100CASH                    a      a      w      w      w      w      w      w
+XM_US500CASH                    a      a      w      A      a      w      a      a
+
+  25/48 o song qua FDR · 48 o do duoc · 386.2s
+so loai tru: them 1 dong (tong 23)
+

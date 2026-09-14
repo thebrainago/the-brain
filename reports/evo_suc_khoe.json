@@ -1,33 +1,33 @@
 {
  "van_hanh": {
-  "luc": "2026-09-13 10:58:18",
+  "luc": "2026-09-14 19:24:50",
   "tru": {
    "SEEKER": {
-    "lan_cuoi": "2026-09-13 10:43:16",
-    "tre_giay": 902,
+    "lan_cuoi": "2026-09-14 19:19:45",
+    "tre_giay": 305,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "QUANTLAB": {
-    "lan_cuoi": "2026-09-13 10:39:27",
-    "tre_giay": 1131,
+    "lan_cuoi": "2026-09-14 19:23:31",
+    "tre_giay": 79,
     "trang_thai": "chay",
     "dung_im": false
    },
    "NGHI": {
-    "lan_cuoi": "2026-09-13 10:02:50",
-    "tre_giay": 3328,
+    "lan_cuoi": "2026-09-14 19:01:29",
+    "tre_giay": 1401,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "BANKER": {
-    "lan_cuoi": "2026-09-13 10:57:43",
-    "tre_giay": 35,
+    "lan_cuoi": "2026-09-14 18:55:36",
+    "tre_giay": 1754,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "EVO": {
-    "lan_cuoi": "2026-09-13 10:58:18",
+    "lan_cuoi": "2026-09-14 19:24:50",
     "tre_giay": 0,
     "trang_thai": "chay",
     "dung_im": false
@@ -42,52 +42,51 @@
     "gb": 0.0,
     "so_tien_trinh": 0
    },
-   "ram_dung_pct": 39.3,
-   "ram_trong_gb": 20.8,
-   "cpu_pct": 25.3
+   "ram_dung_pct": 27.3,
+   "ram_trong_gb": 24.9,
+   "cpu_pct": 27.0
   },
   "viec": {
    "QUANTLAB": {
-    "CHO": 12,
-    "XONG": 1888
+    "CHAY": 1,
+    "CHO": 49,
+    "XONG": 1906
    }
   },
-  "viec_treo": 0,
+  "viec_treo": 1,
   "viec_loi": 0,
-  "viec_cho": 12,
+  "viec_cho": 49,
   "seeker_ty_le_vong_rong": 0.86,
-  "gian_doan_7ngay_gio": 166.6,
-  "gian_doan_lan": 1,
-  "may_tat_7ngay_gio": 166.6,
+  "gian_doan_7ngay_gio": 165.7,
+  "gian_doan_lan": 2,
+  "may_tat_7ngay_gio": 165.7,
   "he_chet_7ngay_gio": 0,
   "chua_ro_7ngay_gio": 0,
   "he_chet_lan": 0,
-  "gio_do_duoc_7ngay": 1.4,
+  "gio_do_duoc_7ngay": 2.3,
   "ty_le_song_7ngay": 1.0,
   "watchdog": {
-   "so_lan": 1,
+   "so_lan": 0,
    "gio": 24,
-   "theo_rc": {
-    "15": 1
-   },
-   "lan_cuoi": "2026-09-13 09:57:25",
-   "moi_gio": 0.04
+   "theo_rc": {},
+   "lan_cuoi": null,
+   "moi_gio": 0.0
   },
-  "dia_trong_gb": 7.6,
-  "mt5_tick_test": "KHOA (dia < 15GB)",
+  "dia_trong_gb": 28.0,
+  "mt5_tick_test": "GO",
   "so_toan_ven": {
    "lanh": true,
-   "mo_ta": "17677 dong lien mach"
+   "mo_ta": "18566 dong lien mach"
   },
   "nguon": {
    "arxiv": {
-    "lan": 43,
+    "lan": 44,
     "loi": 0,
     "thu_hoach": 241,
     "trang_thai": "BAT"
    },
    "github": {
-    "lan": 40,
+    "lan": 41,
     "loi": 0,
     "thu_hoach": 2413,
     "trang_thai": "BAT"
@@ -99,13 +98,13 @@
     "trang_thai": "BAT"
    },
    "stackexchange": {
-    "lan": 34,
+    "lan": 35,
     "loi": 0,
     "thu_hoach": 161,
     "trang_thai": "BAT"
    },
    "hackernews": {
-    "lan": 34,
+    "lan": 35,
     "loi": 0,
     "thu_hoach": 159,
     "trang_thai": "BAT"
@@ -117,39 +116,39 @@
     "trang_thai": "BAT"
    },
    "openalex": {
-    "lan": 38,
+    "lan": 39,
     "loi": 0,
-    "thu_hoach": 1824,
+    "thu_hoach": 1826,
     "trang_thai": "BAT"
    },
    "lean_algo": {
-    "lan": 35,
+    "lan": 36,
     "loi": 0,
     "thu_hoach": 40,
     "trang_thai": "BAT"
    },
    "mql5_code": {
-    "lan": 38,
+    "lan": 39,
     "loi": 0,
     "thu_hoach": 1166,
     "trang_thai": "BAT"
    },
    "blog": {
-    "lan": 38,
+    "lan": 39,
     "loi": 0,
     "thu_hoach": 39,
     "trang_thai": "BAT"
    },
    "quantconnect": {
-    "lan": 29,
+    "lan": 30,
     "loi": 0,
     "thu_hoach": 0,
     "trang_thai": "BAT"
    },
    "crossref": {
-    "lan": 26,
+    "lan": 27,
     "loi": 0,
-    "thu_hoach": 1459,
+    "thu_hoach": 1465,
     "trang_thai": "BAT"
    },
    "myfxbook": {
@@ -165,13 +164,13 @@
     "trang_thai": "BAT"
    },
    "fxblue": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
     "thu_hoach": 103,
     "trang_thai": "BAT"
    },
    "etoro": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
     "thu_hoach": 100,
     "trang_thai": "BAT"
@@ -219,7 +218,7 @@
     "trang_thai": "BAT"
    },
    "telegram": {
-    "lan": 9,
+    "lan": 10,
     "loi": 0,
     "thu_hoach": 42,
     "trang_thai": "BAT"
@@ -231,33 +230,33 @@
     "trang_thai": "TAT"
    },
    "rss_allocatesmartly": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 11,
+    "thu_hoach": 12,
     "trang_thai": "BAT"
    },
    "rss_alphaarchitect": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 7,
+    "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_fh_financial_hacker": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
     "thu_hoach": 10,
     "trang_thai": "BAT"
    },
    "rss_followingthetrend": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
     "thu_hoach": 4,
     "trang_thai": "BAT"
    },
    "rss_mql5_articles": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 12,
+    "thu_hoach": 16,
     "trang_thai": "BAT"
    },
    "rss_mrzepczynski": {
@@ -399,21 +398,21 @@
     "trang_thai": "BAT"
    },
    "rss_betterbuyandhold": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
     "thu_hoach": 3,
     "trang_thai": "BAT"
    },
    "rss_beyondpassive": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 13,
+    "thu_hoach": 14,
     "trang_thai": "BAT"
    },
    "rss_capitalspectator": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 13,
+    "thu_hoach": 22,
     "trang_thai": "BAT"
    },
    "tradingview_scripts": {
@@ -495,19 +494,19 @@
     "trang_thai": "BAT"
    },
    "rss_concretumgroup": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
-    "thu_hoach": 12,
+    "thu_hoach": 21,
     "trang_thai": "BAT"
    },
    "rss_crackingmarkets": {
-    "lan": 5,
+    "lan": 6,
     "loi": 0,
     "thu_hoach": 12,
     "trang_thai": "BAT"
    },
    "tradingview_pine": {
-    "lan": 35,
+    "lan": 36,
     "loi": 0,
     "thu_hoach": 24,
     "trang_thai": "BAT"
@@ -619,14 +618,26 @@
     "loi": 0,
     "thu_hoach": 10,
     "trang_thai": "BAT"
+   },
+   "rss_rulyfi": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 5,
+    "trang_thai": "BAT"
+   },
+   "rss_sixfigureinvesting": {
+    "lan": 1,
+    "loi": 0,
+    "thu_hoach": 10,
+    "trang_thai": "BAT"
    }
   },
-  "tai_lieu": 11771,
-  "seeker_da_boc": 2341,
-  "seeker_tai_lieu_artifact": 6849,
-  "seeker_ung_vien": 616,
+  "tai_lieu": 11818,
+  "seeker_da_boc": 2442,
+  "seeker_tai_lieu_artifact": 8057,
+  "seeker_ung_vien": 654,
   "seeker_gia_thuyet_tu_tai_lieu": 4,
-  "seeker_nang_suat_100": 0.17,
+  "seeker_nang_suat_100": 0.16,
   "nghi_co_che_noi_sinh": 383,
   "nang_suat_nguon": {
    "arxiv": {
@@ -654,7 +665,7 @@
     "gia_thuyet": 0
    },
    "github": {
-    "da_boc": 679,
+    "da_boc": 683,
     "gia_thuyet": 0
    },
    "habr_nga": {
@@ -674,7 +685,7 @@
     "gia_thuyet": 0
    },
    "mql5_code": {
-    "da_boc": 637,
+    "da_boc": 722,
     "gia_thuyet": 0
    },
    "mql5_ma_expert": {
@@ -690,7 +701,7 @@
     "gia_thuyet": 0
    },
    "openalex": {
-    "da_boc": 187,
+    "da_boc": 186,
     "gia_thuyet": 0
    },
    "paperswithcode": {
@@ -726,7 +737,7 @@
     "gia_thuyet": 0
    },
    "rss_beyondpassive": {
-    "da_boc": 5,
+    "da_boc": 6,
     "gia_thuyet": 0
    },
    "rss_buildalpha": {
@@ -839,6 +850,14 @@
    },
    "rss_returnstacked": {
     "da_boc": 2,
+    "gia_thuyet": 0
+   },
+   "rss_rulyfi": {
+    "da_boc": 4,
+    "gia_thuyet": 0
+   },
+   "rss_sixfigureinvesting": {
+    "da_boc": 1,
     "gia_thuyet": 0
    },
    "rss_thinknewfound": {
@@ -968,7 +987,7 @@
   },
   "do_sau_nguon": {
    "mql5_code": {
-    "trang_da_quet": 3,
+    "trang_da_quet": 6,
     "vong": 0,
     "bien_da_biet": {}
    },
@@ -1002,14 +1021,14 @@
   },
   "ty_le_qua_cong": 0.0079,
   "null_ty_le_lot": 0.5,
-  "null_do_luc": "2026-09-13 09:34:32",
+  "null_do_luc": "2026-09-14 18:52:38",
   "null_chi_tiet": {
    "so_ca": 10,
    "tai_san": "EURCAD",
    "khung": "H4"
   },
   "cong_co_luc": true,
-  "cong_co_luc_luc": "2026-09-13 09:34:34",
+  "cong_co_luc_luc": "2026-09-14 18:52:40",
   "cong_co_luc_chi_tiet": [
    {
     "p": 0.5,
@@ -1039,7 +1058,7 @@
     "p": 0.6,
     "verdict": "NGHI_NHIN_TRUOC",
     "sharpe": 2.972,
-    "alpha_nam_pct": 19.909,
+    "alpha_nam_pct": 19.905,
     "truot": []
    }
   ],
@@ -1070,14 +1089,6 @@
  },
  "van_de": [
   {
-   "ma": "dia_thap",
-   "muc": "NANG",
-   "mo_ta": "Dia con 7.6 GB (< 15) -> MT5 tick-test bi KHOA, tuc dang tu cam minh lam buoc quyet dinh cua chinh du an",
-   "bc": {
-    "goi_y": "lab/.browser_thebrain2 (848MB, INVENTORY ghi la mo nham), lab/.browser_darwinex_tmp (480MB tmp)"
-   }
-  },
-  {
    "ma": "quet_nong",
    "muc": "NANG",
    "mo_ta": "86% lan chay SEEKER khong thu duoc gi moi, NHUNG chua nguon nao di het mot vong bien gioi - day la DO SAU QUET, khong phai chu ky qua day",
@@ -1085,7 +1096,7 @@
     "ty_le": 0.86,
     "do_sau": {
      "mql5_code": {
-      "trang_da_quet": 3,
+      "trang_da_quet": 6,
       "vong": 0,
       "bien_da_biet": {}
      },
@@ -1164,7 +1175,7 @@
   {
    "ma": "nang_suat_doc_thap",
    "muc": "VUA",
-   "mo_ta": "Nang suat doc = 0.17 gia thuyet/100 bai (4 truy nguyen ve URL tren 2341 bai da boc; 616 ung vien tu 6849 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
+   "mo_ta": "Nang suat doc = 0.16 gia thuyet/100 bai (4 truy nguyen ve URL tren 2442 bai da boc; 654 ung vien tu 8057 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
    "bc": {
     "theo_nguon": {
      "arxiv": {
@@ -1192,7 +1203,7 @@
       "gia_thuyet": 0
      },
      "github": {
-      "da_boc": 679,
+      "da_boc": 683,
       "gia_thuyet": 0
      },
      "habr_nga": {
@@ -1212,7 +1223,7 @@
       "gia_thuyet": 0
      },
      "mql5_code": {
-      "da_boc": 637,
+      "da_boc": 722,
       "gia_thuyet": 0
      },
      "mql5_ma_expert": {
@@ -1228,7 +1239,7 @@
       "gia_thuyet": 0
      },
      "openalex": {
-      "da_boc": 187,
+      "da_boc": 186,
       "gia_thuyet": 0
      },
      "paperswithcode": {
@@ -1264,7 +1275,7 @@
       "gia_thuyet": 0
      },
      "rss_beyondpassive": {
-      "da_boc": 5,
+      "da_boc": 6,
       "gia_thuyet": 0
      },
      "rss_buildalpha": {
@@ -1379,6 +1390,14 @@
       "da_boc": 2,
       "gia_thuyet": 0
      },
+     "rss_rulyfi": {
+      "da_boc": 4,
+      "gia_thuyet": 0
+     },
+     "rss_sixfigureinvesting": {
+      "da_boc": 1,
+      "gia_thuyet": 0
+     },
      "rss_thinknewfound": {
       "da_boc": 1,
       "gia_thuyet": 0
@@ -1472,7 +1491,11 @@
    }
   }
  ],
- "da_sua": [],
+ "da_sua": [
+  "don_viec_treo: 1 viec CHAY mo coi -> LOI (khong bao gio thanh XONG)",
+  "xep_lai_viec_loi: 1 viec duoc thu lai",
+  "dong_van_de_da_het: tru_dung_im_BANKER, tru_dung_im_NGHI"
+ ],
  "san_cong_cu": {},
  "bai_hoc": {
   "tong": 238,

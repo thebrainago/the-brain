@@ -1,20 +1,20 @@
 {
  "de_xuat": [
   {
-   "ten": "rebalance_fx_low_vol_reversion",
-   "co_che": "Nha dau tu to chuc (index fund) phai mua lai khi gia dao luyen khoi vung trung binh de duy tri ty le quyen loi, va ho tra phi qua dem thong qua toc do hoi ve nhanh hon chi phi tai chinh 5-7%/nam trong che do bien dong thap.",
+   "ten": "reversion_rsi_low_vol_fx",
+   "co_che": "Nhà giao dịch thanh khoản MUA khi thị trường đi vào trạng thái tích lũy biến động thấp, tận dụng áp lực lệnh chặn stop và sự điều chỉnh của dòng tiền ngắn hạn để chốt lời khi giá hồi về trung bình. Phí qua đêm được bù bởi tần suất giao dịch cao và thời gian nắm giữ ngắn (dưới 15 bar), tránh chi phí carry dài hạn.",
    "ho": "quay_ve_trung_binh",
    "chieu": 1,
-   "giu": 15,
+   "giu": 12,
    "vao": [
     {
      "trai": {
       "chi_bao": "rsi",
       "n": 14
      },
-     "phep": "<",
+     "phep": "<=",
      "phai": {
-      "hang": 0.3
+      "hang": 30
      }
     },
     {
@@ -22,130 +22,202 @@
       "chi_bao": "phan_vi",
       "cua": {
        "chi_bao": "atr",
-       "n": 14
+       "n": 20
       },
-      "n": 250
+      "n": 100
      },
      "phep": "<",
      "phai": {
-      "hang": 0.2
+      "hang": 0.25
      }
     }
    ],
-   "ra": [],
-   "dieu_kien_sai": "Bien dong nam trong top 30% hoac xu huong tang/giam duoi 10 bar lien tuc",
-   "nguon": ""
-  },
-  {
-   "ten": "macro_duration_trend_filter",
-   "co_che": "Quỹ macro hedge fund xoay truong sang tai san co muc doi dien gia lam mat gia tri tien te, chi chiu phi qua dem 5-7%/nam vi chi so loai bo cac ky han co su thay doi loi suat am, bao bo chi phi tai chinh bang alpha tu xu huong dai han.",
-   "ho": "xu_huong",
-   "chieu": 1,
-   "giu": 40,
-   "vao": [
+   "ra": [
     {
      "trai": {
-      "chi_bao": "gia",
-      "cot": "close"
+      "chi_bao": "rsi",
+      "n": 14
      },
-     "phep": ">",
+     "phep": ">=",
      "phai": {
-      "chi_bao": "sma",
-      "n": 50
+      "hang": 55
      }
     },
     {
      "trai": {
-      "chi_bao": "doi_pct",
+      "chi_bao": "tb",
       "cua": {
-       "chi_bao": "tb",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 20
+       "chi_bao": "gia",
+       "cot": "close"
       },
       "n": 20
      },
      "phep": ">",
      "phai": {
-      "hang": 0.005
+      "chi_bao": "gia",
+      "cot": "close"
      }
     }
    ],
-   "ra": [],
-   "dieu_kien_sai": "Loi suat 10 nam giam qua 2% trong 20 bar gan nhat",
+   "dieu_kien_sai": "Biến động trung bình 20 bar tăng vọt trên 75% phân vị trong khi giá vẫn nằm dưới vùng quá bán, cho thấy xu hướng giảm mạnh đang hình thành thay vì tích lũy.",
    "nguon": ""
   },
   {
-   "ten": "liquidity_sweep_reversal",
-   "co_che": "Nha giao dich don bay va maker thanh ly lenh dung lo sau khi quet thanh cao cu, chi chiu phi qua dem ngan han vi tin hieu dao chieu xay ra nhanh, phi tai chinh duoc bu boi toc do quay ve trung binh khi thanh khuan gap.",
-   "ho": "pha_vo",
+   "ten": "reversion_volume_spike_failure",
+   "co_che": "Nhà tạo lập thị trường và quỹ làm market pay for the liquidity provision when a volume spike fails to sustain a breakout, forcing early buyers to cover and pushing price back to equilibrium. Overnight cost is irrelevant due to intraday swing nature (held max 8 bars).",
+   "ho": "quay_ve_trung_binh",
    "chieu": -1,
    "giu": 8,
    "vao": [
     {
      "trai": {
-      "chi_bao": "cao_nhat",
-      "cua": {
-       "chi_bao": "gia",
-       "cot": "high"
-      },
-      "n": 20
-     },
-     "phep": "<",
-     "phai": {
-      "chi_bao": "gia",
-      "cot": "high"
-     }
-    },
-    {
-     "trai": {
       "chi_bao": "phan_vi",
       "cua": {
-       "chi_bao": "khoi_luong"
+       "chi_bao": "khoi_luong",
+       "n": 20
       },
-      "n": 50
+      "n": 100
      },
      "phep": ">",
      "phai": {
-      "hang": 0.7
+      "hang": 0.85
      }
     },
     {
      "trai": {
-      "chi_bao": "gia",
-      "cot": "close"
-     },
-     "phep": "<",
-     "phai": {
-      "chi_bao": "cao_nhat",
+      "chi_bao": "zscore",
       "cua": {
        "chi_bao": "gia",
-       "cot": "high"
+       "cot": "close"
       },
       "n": 20
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 1.5
      }
     }
    ],
-   "ra": [],
-   "dieu_kien_sai": "Xu huong tang manh (do dai > 15 bar) hoac bien dong thu hep (phan_vi atr < 0.1)",
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     },
+     "phep": "<=",
+     "phai": {
+      "hang": 0
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 10
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     }
+    }
+   ],
+   "dieu_kien_sai": "Xu hướng chính (SMA 50) đang tăng mạnh và giá đóng cửa liên tục cao hơn SMA 50 trong 5 bar gần nhất, cho thấy đây là breakout thực sự chứ không phải false move.",
    "nguon": ""
   },
   {
-   "ten": "intraday_vol_expansion_reversion",
-   "co_che": "Nha tao lap quyen chon (market maker) ban call khi bien dong ngan han gian no vuot nguong, chi chiu phi qua dem ngan han vi posotion hedging tu dong khi bien dong quay ve, phi tai chinh duoc bao bo boi premium ban quyen.",
-   "ho": "bien_dong",
-   "chieu": -1,
-   "giu": 5,
+   "ten": "reversion_session_open_gap_fill",
+   "co_che": "Các quỹ danh mục và nhà giao dịch algorithmic mua lại khoảng trống giá sau phiên mở cửa khi thiếu thanh khoản xác nhận xu hướng, bù đắp chi phí qua đêm bằng việc chỉ nắm giữ trong khung giờ thanh khoản cao (dưới 10 bar).",
+   "ho": "phien",
+   "chieu": 1,
+   "giu": 10,
    "vao": [
     {
      "trai": {
       "chi_bao": "phan_vi",
       "cua": {
-       "chi_bao": "bien_do"
+       "chi_bao": "bien_do",
+       "n": 1
       },
-      "n": 50
+      "n": 20
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0.75
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
+     },
+     "phep": "<",
+     "phai": {
+      "hang": -1.2
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "open"
+      },
+      "n": 1
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 5
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "dieu_kien_sai": "Khối lượng phiên hiện tại nhỏ hơn 30% trung bình 20 phiên, cho thấy thiếu sự tham gia của dòng tiền tổ chức để duy trì bất kỳ chuyển động nào.",
+   "nguon": ""
+  },
+  {
+   "ten": "carry_offset_vol_expansion_long",
+   "co_che": "Quỹ quản lý rủi ro MUA khi biến động mở rộng đột ngột sau giai đoạn tích lũy dài, bù đắp chi phí qua đêm 5-7%/năm bằng cách nắm giữ đến khi biến động thu hẹp trở lại (volatility crush), tận dụng premium từ các nhà giao dịch ngắn hạn đang chốt lời sớm. Thời gian nắm giữ trung bình 25 bar được cân bằng bởi lợi nhuận gộp nhanh trong 5-7 bar đầu.",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 25,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 200
      },
      "phep": ">",
      "phai": {
@@ -154,35 +226,144 @@
     },
     {
      "trai": {
-      "chi_bao": "than_nen"
-     },
-     "phep": ">",
-     "phai": {
-      "chi_bao": "tb",
+      "chi_bao": "phan_vi",
       "cua": {
-       "chi_bao": "than_nen"
+       "chi_bao": "tb",
+       "cua": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "n": 50
       },
-      "n": 20
+      "n": 200
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.3
      }
     }
    ],
-   "ra": [],
-   "dieu_kien_sai": "Xu huong dai han (do dai > 30 bar) khong dao chieu",
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "atr",
+       "n": 14
+      },
+      "n": 200
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.4
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 10
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     }
+    }
+   ],
+   "dieu_kien_sai": "Xu hướng dài hạn (SMA 200) đang nghiêng mạnh xuống và giá đóng cửa liên tục dưới SMA 200 trong 10 bar, cho thấy đây là breakdown xu hướng chứ không phải vol expansion tạm thời.",
    "nguon": ""
   },
   {
-   "ten": "institutional_absorption_support",
-   "co_che": "So do thuc thi lenh (execution desk) cua quy tuong ho tich luy tai muc ho tro dai han, chi chiu phi qua dem 30 bar vi chi phi tai chinh duoc bu boi toc do gia quay ve khi thanh khuan cuc cao cho thay ap luc ban da het.",
+   "ten": "reversion_zscore_extreme_filter",
+   "co_che": "Các quỹ index rebalancing và market maker bù đắp chi phí vốn bằng cách bắt điểm cực trị thống kê khi độ lệch chuẩn vượt ngưỡng an toàn, chờ dòng tiền định hướng lại portfolio để đẩy giá về fair value. Nắm giữ ngắn (15 bar) để tối ưu hóa tỷ lệ lợi nhuận/vốn.",
    "ho": "quay_ve_trung_binh",
-   "chieu": 1,
-   "giu": 30,
+   "chieu": -1,
+   "giu": 15,
    "vao": [
     {
      "trai": {
-      "chi_bao": "gia",
-      "cot": "low"
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 60
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 2.5
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "phan_vi",
+      "cua": {
+       "chi_bao": "khoi_luong",
+       "n": 20
+      },
+      "n": 100
+     },
+     "phep": "<",
+     "phai": {
+      "hang": 0.2
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 60
      },
      "phep": "<=",
+     "phai": {
+      "hang": 1.0
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 5
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     }
+    }
+   ],
+   "dieu_kien_sai": "ADX (tính qua tb của diff) tăng liên tục 5 bar, cho thấy momentum đang hình thành và z-score cao có thể tiếp tục mở rộng thay vì hồi.",
+   "nguon": ""
+  },
+  {
+   "ten": "trend_pullback_reversion_entry",
+   "co_che": "Nhà giao dịch theo xu hướng MUA khi giá điều chỉnh sâu trong xu hướng chính đang tăng, bù đắp chi phí qua đêm bằng việc thoát lệnh khi giá chạm đường trung bình động ngắn hạn, tận dụng dòng tiền follow-trend quay lại.",
+   "ho": "quay_ve_trung_binh",
+   "chieu": 1,
+   "giu": 18,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 50
+     },
+     "phep": ">",
      "phai": {
       "chi_bao": "tb",
       "cua": {
@@ -194,78 +375,54 @@
     },
     {
      "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "khoi_luong"
-      },
-      "n": 100
-     },
-     "phep": ">",
-     "phai": {
-      "hang": 0.9
-     }
-    },
-    {
-     "trai": {
-      "chi_bao": "phan_vi",
-      "cua": {
-       "chi_bao": "than_nen"
-      },
-      "n": 50
-     },
-     "phep": "<",
-     "phai": {
-      "hang": 0.3
-     }
-    }
-   ],
-   "ra": [],
-   "dieu_kien_sai": "Gia dong cua nam duoi 50% than nen",
-   "nguon": ""
-  },
-  {
-   "ten": "stat_arb_divergence_fade",
-   "co_che": "Fund giao dich so hoc (stat arb) phai trung hoa sai lech gia tri tuyet doi giua hai tai san co quan he tinh theo thoi gian thuc, chi chiu phi qua dem 15 bar vi phi tai chinh duoc bu boi toc do hoi ve trung binh khi sai lech vuot nguong 2 do lech chuan.",
-   "ho": "quay_ve_trung_binh",
-   "chieu": 1,
-   "giu": 15,
-   "vao": [
-    {
-     "trai": {
       "chi_bao": "zscore",
       "cua": {
-       "chi_bao": "doi",
-       "cua": {
-        "chi_bao": "gia",
-        "cot": "close"
-       },
-       "n": 20
+       "chi_bao": "gia",
+       "cot": "close"
       },
-      "n": 200
+      "n": 20
+     },
+     "phep": "<",
+     "phai": {
+      "hang": -1.8
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 20
      },
      "phep": ">",
      "phai": {
-      "hang": 2.0
+      "chi_bao": "gia",
+      "cot": "close"
      }
     },
     {
      "trai": {
-      "chi_bao": "phan_vi",
+      "chi_bao": "tb",
       "cua": {
-       "chi_bao": "atr"
+       "chi_bao": "gia",
+       "cot": "close"
       },
-      "n": 100
+      "n": 10
      },
-     "phep": "<",
+     "phep": ">",
      "phai": {
-      "hang": 0.4
+      "chi_bao": "gia",
+      "cot": "close"
      }
     }
    ],
-   "ra": [],
-   "dieu_kien_sai": "Xu huong nam trong che do dao dong (do dai < 10 bar) hoac zscore am",
+   "dieu_kien_sai": "Đường SMA 50 cắt xuống dưới SMA 200 và giữ nguyên vị trí này trong 5 bar, cho thấy xu hướng dài hạn đã đảo chiều sang giảm.",
    "nguon": ""
   }
  ],
- "ly_do_chon": "Tat ca 6 co che deu duoc thiet ke theo dang 'A KHI B' ket hop dieu kien che do (phan_vi cua bien dong/khoi luong/do dai xu huong) voi dieu kien vao/ra, gom theo kinh nghiem 1.700 phep thu truoc do. Moi co che dinh ro ai la ben chiu phi qua dem (index fund, macro hedge, market maker, execution desk, stat arb) va co che nao bu chi phi 5-7%/nam (toc do hoi ve, premium quyen, alpha xu huong, hedging tu dong). Khong su dung nguong tuyet doi cho gia/ATR/khoi luong, thay bang phan_vi/zscore/do_lech de dam bao kha nang kiem dinh va ty le kich hoat nam trong khoang 0.5%-40%. Gia tri giu <=20 bar de giam toc do tieu hao phi qua dem, cac truong hop >20 bar da co giai thich truong trong co_che."
+ "ly_do_chon": "Tất cả 6 cơ chế đều tuân thủ nghiêm ngặt mô hình 'A KHI B' bằng cách kết hợp tín hiệu kỹ thuật (RSI/Z-score) với điều kiện chế độ thị trường (phan_vi của ATR/biến độ/khối lượng). Cơ chế thứ 4 giải thích rõ cơ chế bù đắp chi phí qua đêm 5-7%/năm thông qua việc tận dụng volatility crush và lợi nhuận nhanh ở 5-7 bar đầu. Không dùng ngưỡng tuyệt đối cho giá, ưu tiên phân vị và z-score để đảm bảo tính tổng quát và khả năng kiểm định. Nguồn ý tưởng để trống vì không khớp với tài liệu cung cấp."
 }

@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 6300, 0 phut), dieu_khien_xa.py (pid 15316, 228 phut)
-- `placebo_quan_tri.log`: -> C:\Users\SV STORE\Downloads\Research SP500\lab\reports\PLACEBO_QUAN_TRI.json
-- `qwen_ultra.log`: ~ 10:52:58 | san sang 6 | CPU   22% / muc tieu 90%  |  con  9.0 loi  |  dang chay 2  [LLM:1, TESTER:1]
-- git: 3202e14 SUA LAI ket luan "ho loc xu huong song": khop co mau thi no KHONG vuot MDE
 ### 2026-09-12 11:05:14 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 3904, 0 phut), dieu_khien_xa.py (pid 15316, 239 phut)
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 19540, 0 phut)
 - git: 760800e He thong: them module HEPHAESTUS + hai lan uu tien; ban giao muc 13 (ke hoach 8 luong)
+### 2026-09-14 00:17:18 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1756, 0 phut)
+- git: e33dac9 Chot phien 13/09: bao cao bench + pheu, nhat ky, go khoa tester/warp
