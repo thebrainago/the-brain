@@ -114130,5 +114130,209 @@
   "nguon": "",
   "_ty_le_kich_hoat": 0.0261,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rsi_dao_chieu_dsl_n14_vao30_ra55",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Ban qua da ngan han -> ap luc mua quay lai. Vao khi RSI duoi 30, giu den khi RSI vuot 55. Ban DSL cua `mau.m_rsi_dao_chieu`, da kiem khop tin hieu 100%.",
+  "nguon": "nhan/mau.py::m_rsi_dao_chieu",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 55.0
+    }
+   }
+  ]
+ },
+ {
+  "ten": "ou_quay_ve_dsl_n200_z2_mua",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Gia dao quanh mot muc can bang. Chan MUA: vao khi lech qua 2 do lech chuan khoi trung binh truot 200, ra khi ve trong 0.3. Mot trong HAI chan cua `mau.m_ou_quay_ve` (ban Python danh hai chieu; DSL moi spec mot chieu nen phai tach doi).",
+  "nguon": "nhan/mau.py::m_ou_quay_ve",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -2.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "tuyet_doi",
+     "cua": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 200
+     }
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.3
+    }
+   }
+  ]
+ },
+ {
+  "ten": "ou_quay_ve_dsl_n200_z2_ban",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Gia dao quanh mot muc can bang. Chan BAN: vao khi lech qua 2 do lech chuan khoi trung binh truot 200, ra khi ve trong 0.3. Mot trong HAI chan cua `mau.m_ou_quay_ve` (ban Python danh hai chieu; DSL moi spec mot chieu nen phai tach doi).",
+  "nguon": "nhan/mau.py::m_ou_quay_ve",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 2.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "tuyet_doi",
+     "cua": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 200
+     }
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.3
+    }
+   }
+  ]
+ },
+ {
+  "ten": "ou_quay_ve_dsl_n50_z2.5_mua",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Gia dao quanh mot muc can bang. Chan MUA: vao khi lech qua 2.5 do lech chuan khoi trung binh truot 50, ra khi ve trong 0.3. Mot trong HAI chan cua `mau.m_ou_quay_ve` (ban Python danh hai chieu; DSL moi spec mot chieu nen phai tach doi).",
+  "nguon": "nhan/mau.py::m_ou_quay_ve",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 50
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -2.5
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "tuyet_doi",
+     "cua": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 50
+     }
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.3
+    }
+   }
+  ]
+ },
+ {
+  "ten": "ou_quay_ve_dsl_n50_z2.5_ban",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Gia dao quanh mot muc can bang. Chan BAN: vao khi lech qua 2.5 do lech chuan khoi trung binh truot 50, ra khi ve trong 0.3. Mot trong HAI chan cua `mau.m_ou_quay_ve` (ban Python danh hai chieu; DSL moi spec mot chieu nen phai tach doi).",
+  "nguon": "nhan/mau.py::m_ou_quay_ve",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 50
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 2.5
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "tuyet_doi",
+     "cua": {
+      "chi_bao": "zscore",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 50
+     }
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.3
+    }
+   }
+  ]
  }
 ]

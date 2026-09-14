@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\chay_tester_kho.py", line 308, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\chay_tester_kho.py", line 292, in main
+    r = chay(symbol, khung, so, loc, lay("--tu", "2011.01.01"),
+             lay("--den", "2026.07.29"))
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\chay_tester_kho.py", line 207, in chay
+    with NS.giu_warp(False, "MT5 tester"), KT.giu(f"chay_tester_kho {symbol} {khung}"):
+                                           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Users\SV STORE\Downloads\Research SP500\lab\nhan\khoa_tester.py", line 116, in giu
+    raise TesterDangBan(r["ly_do"])
+nhan.khoa_tester.TesterDangBan: tester dang bi giu boi pid 20020 (chay_tester_kho AUDCAD H4) tu 2026-09-14 22:45:27. Hai viec tester cung luc se ghi de ket qua cua nhau VA khong ai bao loi.

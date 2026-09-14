@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 17028, 0 phut), dieu_khien_xa.py (pid 15316, 701 phut)
-- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 19:05:45 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17548, 0 phut)
-- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
 ### 2026-09-12 19:28:42 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 15520, 0 phut)
@@ -404,3 +396,11 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: b6f406c con so DUONG duy nhat cua ngay, sau khi qua het cac phep doi chung
+### 2026-09-14 22:46:41 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20256, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: 6ca8e5b lan nhanh CO HANG lan dau: 3 he vao, he thu 4 bi tran WIP chan dung luat
