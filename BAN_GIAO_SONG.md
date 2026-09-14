@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `qwen_ultra.log`: ~ 17:21:20 | san sang 0 | CPU    9% / muc tieu 95%  |  con 17.1 loi  |  dang chay 1  [MANG:1]
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 17:51:16 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10808, 0 phut), dieu_khien_xa.py (pid 15316, 645 phut)
-- `qwen_ultra.log`: qwen> !! tac tu loi: OpenAIPermissionDeniedError: Error code: 403 - {'error': {'message': 'insufficient user quota, remaining: -190.0 đ (request id: 2
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 18:07:20 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 16956, 0 phut), dieu_khien_xa.py (pid 15316, 661 phut)
 - `qwen_ultra.log`: qwen> !! tac tu loi: OpenAIPermissionDeniedError: Error code: 403 - {'error': {'message': 'insufficient user quota, remaining: -190.0 đ (request id: 2
@@ -404,3 +396,11 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: a2557e6 ghep he: bat duoc bay GOP THO, va phep doi chung giet ket qua ghep
+### 2026-09-14 22:34:50 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18832, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: d467fde DINH CHINH: "4/5 he qua cong am o nua sau" la SAI - do tin hieu cat lech lat
