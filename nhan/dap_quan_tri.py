@@ -238,7 +238,16 @@ def so_luat(df, tin_hieu, ma, khung, bo_luat=None, giu_toi_da=20) -> list[dict]:
     moc = _VL.moc_dd20(df, cp, ma, khung)
     ra = []
     for ten, luat in (bo_luat or BO_LUAT).items():
-        r = dap(df, tin_hieu, luat, giu_toi_da=giu_toi_da)
+        # Mot bo luat co the la (a) dict nut cua ho MOT vi the, hoac (b) cap
+        # `(ten_ho, tham_so)` cua ho NHIEU vi the. Hai engine khac nhau nhung
+        # tu day tro xuong di CHUNG mot duong tinh tien - do la ly do
+        # `quan_tri_nhieu.dap_nhieu` xuat dung ba mang ma `tinh_tien` doc.
+        if isinstance(luat, tuple):
+            from nhan import quan_tri_nhieu as QN
+            r = QN.dap_nhieu(df, tin_hieu, luat[0], luat[1],
+                             giu_toi_da=max(giu_toi_da, QN.GIU_TOI_DA))
+        else:
+            r = dap(df, tin_hieu, luat, giu_toi_da=giu_toi_da)
         if r["so_lenh"] < 15:
             continue
         # KHONG dung MP.chay: no dich them mot bar nen vi the an loi suat cua

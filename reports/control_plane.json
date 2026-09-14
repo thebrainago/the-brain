@@ -4,14 +4,14 @@
  "pid": 11532,
  "process_created_epoch": 1789386726.3797207,
  "started_epoch": 1789386726.7300165,
- "updated_epoch": 1789394736.4174306,
- "updated_at": "2026-09-14 21:05:36",
- "status": "running",
+ "updated_epoch": 1789395056.6521387,
+ "updated_at": "2026-09-14 21:10:56",
+ "status": "stopping",
  "live": true,
- "ready": true,
+ "ready": false,
  "health": "unhealthy",
  "cpu": {
-  "current_percent": 66.0,
+  "current_percent": 55.1,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -23,7 +23,7 @@
    "QUANTLAB": {
     "lane": "compute",
     "started_epoch": 1789394575.5596213,
-    "elapsed_seconds": 160.9
+    "elapsed_seconds": 481.1
    }
   },
   "pending": []

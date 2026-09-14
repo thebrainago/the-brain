@@ -15,12 +15,13 @@ chuyen hong.
 ## KHAC GI BAN DO MT5
 
     MT5 `b bench-qt`      11 ho, 3 ma, moc = luoi an toan cua chinh EA
-    Python file nay       6 ho, HANG CHUC ma, moc = max(mua-giu, ban-giu, tien)
+    Python file nay       11 ho, HANG CHUC ma, moc = max(mua-giu, ban-giu, tien)
 
-Python chi lam duoc ho MOT VI THE (`dap_quan_tri.dap` mo mot vi the mot luc):
-moc · tp_co_dinh · dat_hue · trailing · hue_trailing · tia. Nam ho con lai
-(hedge, luoi_dca, stop_2_dau, tt_stop_doi, thoi_gian) can mo phong nhieu vi
-the - do la viec cua tester.
+**CAP NHAT 14/09/2026: da du 11 ho.** Truoc do file nay chi lam duoc sau ho mot
+vi the (moc · tp_co_dinh · dat_hue · trailing · hue_trailing · tia), con nam ho
+nhieu vi the (hedge · luoi_dca · stop_2_dau · tt_stop_doi · thoi_gian) phai cho
+tester. `nhan/quan_tri_nhieu.py` mo phong duoc chung bang Python, di chung mot
+duong tinh tien, nen bang nay gio day du va doi chieu duoc voi ban do MT5.
 
 Nhung sau ho nay dung la cho phat hien manh nhat cua ban do MT5 nam: `dat_hue`
 hon moc CA LAI LAN SUT GIAM o 9/9 luot. File nay kiem lai dieu do tren nhieu
@@ -46,6 +47,7 @@ sys.path.insert(0, str(LAB))
 
 from nhan import dap_quan_tri as DQ   # noqa: E402
 from nhan import du_lieu as DU        # noqa: E402
+from nhan import quan_tri_nhieu as QN  # noqa: E402
 
 #: LUOI AN TOAN giong ban do MT5: SL cung 3 ATR + tran 120 nen.
 SL_CUNG = 3.0
@@ -64,6 +66,11 @@ def bo_luat() -> dict:
             ra["hue_trailing|%.1f|%.1f" % (x, y)] = {
                 "sl_atr": SL_CUNG, "hue_tu_atr": x,
                 "trail_tu_atr": x, "trail_buoc": y}
+    # NAM HO NHIEU VI THE (14/09/2026). Truoc do file nay chi lam duoc 6/11 ho
+    # va nam ho con lai treo vao MT5 tester - tuc treo vao mot cu bam chuot.
+    # `quan_tri_nhieu.dap_nhieu` mo phong duoc chung bang Python; tu day bang
+    # nay la bang DAY DU 11 ho, doi chieu duoc voi ban do MT5.
+    ra.update(QN.bo_luat())
     return ra
 
 

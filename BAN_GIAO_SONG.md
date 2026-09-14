@@ -4,20 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: be14d01 VIET LAI ke hoach theo SO DO THAT cua chu du an (Desktop/hethong.txt)
-### 2026-09-12 12:15:21 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16312, 0 phut), dieu_khien_xa.py (pid 15316, 309 phut)
-- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 393 phut); TT_boc (thuong truc, con 55 phut); TT_chi_bao (thuong truc,
-- git: 53a7bc6 Q1 XONG: nhan/ho_so_song.py - dac tinh SONG + moc MAGNETIC cho 159 ma
-### 2026-09-12 12:18:42 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3328, 0 phut), dieu_khien_xa.py (pid 15316, 312 phut)
-- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 388 phut); TT_boc (thuong truc, con 50 phut); TT_chi_bao (thuong truc,
-- git: 876f31f QUANTLAB NOI SINH: nhan/quy_luat_song.py - TU TIM QUY LUAT SONG, da ma da khung
-### 2026-09-12 12:25:34 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8216, 0 phut), dieu_khien_xa.py (pid 15316, 319 phut)
 - `qwen_ultra.log`: ~ 12:25:04 | san sang 0 | CPU   18% / muc tieu 95%  |  con 15.5 loi  |  dang chay 1  [MANG:1]
 - git: e81fc01 QUANTLAB: toan hang moc_ky + quet 1.133 cau hinh - edge CO THAT nhung mong hon phi
 ### 2026-09-12 12:32:55 — chup trang thai
@@ -404,3 +390,17 @@
 - `dieu_phoi.log`: 2026-09-14 20:57:00 EVO       ok          11.2s guard=job
 - `supervisor_stdio.log`: 2026-09-14 20:57:00 EVO       ok          11.2s guard=job
 - git: 64ec765 PMG: cong G0 phai khop ca KHUNG CHAY, khong chi (ma, phien, atr_tf)
+### 2026-09-14 21:05:44 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17884, 0 phut), dieu_khien_xa.py (pid 16196, 133 phut), dieu_phoi.py (pid 11532, 133 phut), quantlab.py (pid 20476, 2 phut)
+- `dieu_phoi.log`: 2026-09-14 21:02:55 QUANTLAB  bat_dau   lane=compute
+- `supervisor_stdio.log`: 2026-09-14 21:02:55 QUANTLAB  bat_dau   lane=compute
+- git: 6bece1f tran CPU: khoa luong numpy - do moi la thu an het may
+### 2026-09-14 21:12:45 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1860, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: 6bece1f tran CPU: khoa luong numpy - do moi la thu an het may
