@@ -1,5 +1,39 @@
 {
- "nhanh": [],
+ "nhanh": [
+  {
+   "ten": "AUDCAD.H4.rsi_dao_chieu",
+   "mo_ta": "lai 8.75%/nam o nua sau · sut giam 8.8% · hon moc 8.47% · 96 lenh · don bay 2.39",
+   "nguon": "nao.db/ket_qua + holdout 60/40 cua _vao_lan_nhanh.py",
+   "mo_luc": "2026-09-14",
+   "qua_holdout_that": true,
+   "hon_moc_cung_rui_ro": true,
+   "do_tin_chi_phi": "SAN",
+   "chay_duoc_that": true,
+   "han": "2026-09-28"
+  },
+  {
+   "ten": "AUDCAD.H4.ou_quay_ve",
+   "mo_ta": "lai 6.79%/nam o nua sau · sut giam 14.1% · hon moc 6.51% · 167 lenh · don bay 2.20",
+   "nguon": "nao.db/ket_qua + holdout 60/40 cua _vao_lan_nhanh.py",
+   "mo_luc": "2026-09-14",
+   "qua_holdout_that": true,
+   "hon_moc_cung_rui_ro": true,
+   "do_tin_chi_phi": "SAN",
+   "chay_duoc_that": true,
+   "han": "2026-09-28"
+  },
+  {
+   "ten": "EURGBP.H4.mat_can_bang_lenh_dong_cua",
+   "mo_ta": "lai 3.61%/nam o nua sau · sut giam 8.0% · hon moc 3.61% · 45 lenh · don bay 3.13",
+   "nguon": "nao.db/ket_qua + holdout 60/40 cua _vao_lan_nhanh.py",
+   "mo_luc": "2026-09-14",
+   "qua_holdout_that": true,
+   "hon_moc_cung_rui_ro": true,
+   "do_tin_chi_phi": "SAN",
+   "chay_duoc_that": true,
+   "han": "2026-09-28"
+  }
+ ],
  "cham": [
   {
    "ten": "PMG - engine quan li lenh khong entry",

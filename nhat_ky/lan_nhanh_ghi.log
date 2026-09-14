@@ -1,0 +1,28 @@
+KIEM BON LUAT VAO LAN NHANH (ban giao 13/09 muc 11)
+
+he                                        lai hd     moc  hon moc  sut giam  lenh     L  chi phi  ket luan
+----------------------------------------------------------------------------------------------------------------------
+AUDCAD.H4.rsi_dao_chieu                    8.75%   0.28%    8.47%     8.84%    96  2.39      SAN  DAT
+AUDCAD.H4.ou_quay_ve                       6.79%   0.28%    6.51%    14.06%   167  2.20      SAN  DAT
+EURGBP.H4.mat_can_bang_lenh_dong_cua       3.61%   0.00%    3.61%     8.04%    45  3.13      SAN  DAT
+EURGBP.H4.ou_quay_ve                       3.09%   0.00%    3.09%     6.38%   175  0.88      SAN  DAT
+AUDCAD.H4.mat_can_bang_lenh_dong_cua      -2.01%   0.28%   -2.28%    15.44%    44  1.37      SAN  thieu: chua qua holdout THAT ; chua hon moc 
+
+4/5 he DAT ca bon luat
+  AUDCAD.H4.rsi_dao_chieu                             VAO LAN
+  AUDCAD.H4.ou_quay_ve                                VAO LAN
+  EURGBP.H4.mat_can_bang_lenh_dong_cua                VAO LAN
+  EURGBP.H4.ou_quay_ve                                KHONG: LAN NHANH da co 3 viec (tran WIP 3). Xon
+
+
+HAI LAN — khai thac vs xay may   (ban giao 13/09 muc 11)
+  LAN NHANH  3/3 viec   so huu TESTER=1 · moi viec co HAN CHOT
+     AUDCAD.H4.rsi_dao_chieu            han 2026-09-28
+       lai 8.75%/nam o nua sau · sut giam 8.8% · hon moc 8.47% · 96 lenh · don bay 2.39
+     AUDCAD.H4.ou_quay_ve               han 2026-09-28
+       lai 6.79%/nam o nua sau · sut giam 14.1% · hon moc 6.51% · 167 lenh · don bay 2.20
+     EURGBP.H4.mat_can_bang_lenh_dong_cua han 2026-09-28
+       lai 3.61%/nam o nua sau · sut giam 8.0% · hon moc 3.61% · 45 lenh · don bay 3.13
+  LAN CHAM   1 viec   so huu CPU nhieu nhan · khong WIP
+     PMG - engine quan li lenh khong entry dac ta v0.2 chu du an dua 14/09; G0->G1->G2->G3 da dung, dan
+

@@ -4,22 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-- dang chay: ban_giao_song.py (pid 16956, 0 phut), dieu_khien_xa.py (pid 15316, 661 phut)
-- `qwen_ultra.log`: qwen> !! tac tu loi: OpenAIPermissionDeniedError: Error code: 403 - {'error': {'message': 'insufficient user quota, remaining: -190.0 đ (request id: 2
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 18:13:57 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14712, 0 phut), dieu_khien_xa.py (pid 15316, 668 phut)
-- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 33 phut); TT_boc (thuong truc, con 53 phut); TT_chi_bao (thuong truc, 
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 18:25:50 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 4464, 0 phut), dieu_khien_xa.py (pid 15316, 679 phut)
-- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 23 phut); TT_boc (thuong truc, con 43 phut); TT_chi_bao (thuong truc, 
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 18:47:09 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 17028, 0 phut), dieu_khien_xa.py (pid 15316, 701 phut)
 - `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
 - git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
@@ -404,3 +388,19 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: d467fde DINH CHINH: "4/5 he qua cong am o nua sau" la SAI - do tin hieu cat lech lat
+### 2026-09-14 22:36:10 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14204, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: b6f406c con so DUONG duy nhat cua ngay, sau khi qua het cac phep doi chung
+### 2026-09-14 22:41:58 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18176, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: b6f406c con so DUONG duy nhat cua ngay, sau khi qua het cac phep doi chung
