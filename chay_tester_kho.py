@@ -210,7 +210,31 @@ def chay(symbol: str, khung: str, so: int = 0, loc: str = "",
 
 def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
                      tu: str = "2011.01.01", den: str = "2026.07.29") -> dict:
-    kho = [c for c in NP.doc_kho() if not NP.kiem_khai_bao(c)]
+    # BO CO CHE NAO THI PHAI NOI RO BO CAI NAO VA VI SAO.
+    #
+    # Truoc 14/09 dong nay chi loc im lang, va nguoi doc chi thay mot con so
+    # cuoi ("dich duoc 1"). Do 14/09: **44/3233 co che trong kho khong qua
+    # `kiem_khai_bao`** va bi vut moi luot chay ma khong ai biet. Toi da suyt
+    # chay tester tren MOT he roi tuong do la ket qua cua ca ba he o lan nhanh -
+    # chi phat hien vi tinh co dem lai so co che.
+    tat_ca = NP.doc_kho()
+    kho, hong = [], []
+    for c in tat_ca:
+        loi = NP.kiem_khai_bao(c)
+        (hong if loi else kho).append((c, loi))
+    kho = [c for c, _ in kho]
+    if hong:
+        import collections as _cl
+        dem = _cl.Counter(str(l[0])[:70] for _, l in hong)
+        print("  %d/%d co che BI BO vi khai bao hong:" % (len(hong), len(tat_ca)))
+        for ly_do, n in dem.most_common(6):
+            print("     %4d  %s" % (n, ly_do))
+        if loc:
+            trung = [c.get("ten", "?") for c, _ in hong
+                     if loc in json.dumps(c, ensure_ascii=False)]
+            if trung:
+                print("     TRONG DO co %d cai KHOP BO LOC '%s': %s"
+                      % (len(trung), loc, ", ".join(trung[:6])))
     if loc:
         kho = [c for c in kho if loc in json.dumps(c, ensure_ascii=False)]
     if so:
@@ -218,6 +242,9 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
     ma, dat = D.sinh_ea(kho, TEN_EA, khung=khung)
     bo = [c for c in kho if c.get("_khong_dich")]
     print("kho %d -> dich duoc %d, bo %d" % (len(kho), len(dat), len(bo)))
+    if bo:
+        print("  khong dich duoc: %s"
+              % ", ".join(str(c.get("ten", "?")) for c in bo[:8]))
 
     src = XM_DATA / "MQL5" / "Experts" / f"{TEN_EA}.mq5"
     src.write_text(ma, encoding="utf-8")

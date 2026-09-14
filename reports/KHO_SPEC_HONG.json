@@ -1,0 +1,52 @@
+{
+ "thieu_co_che": [
+  "supertrend_long",
+  "supertrend_short",
+  "lowmapbuffer_gan_gia_tri_tai_day_tro_thanh_muc_thap_nhat_noi",
+  "highmapbuffer_gan_gia_tri_tai_day_tro_thanh_muc_cao_nhat_noi",
+  "liquidity_sweep_mua",
+  "liquidity_sweep_ban",
+  "fvg_bullish_gap_detected",
+  "fvg_bearish_gap_detected",
+  "fvg_gap_up",
+  "fvg_gap_down",
+  "mitigation_bullish_buffer",
+  "mitigation_bearish_buffer",
+  "trend_following_strength_buy",
+  "trend_following_strength_sell",
+  "gia_mo_phien",
+  "pivothighbreakarrow",
+  "pivotlowbreakarrow",
+  "fvg_bullish",
+  "fvg_bearish",
+  "pivot_cao",
+  "pivot_thap",
+  "spread_vuot_nguong",
+  "velocity_duong",
+  "velocity_am",
+  "supertrend_buy_arrow",
+  "supertrend_sell_arrow",
+  "fast_slow_color_bullish_cross",
+  "fast_slow_color_bearish_cross",
+  "garch_volatility_low_initialization",
+  "cvd_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay",
+  "cvd_buffer_cap_gia_tri_theo_delta_va_reset_theo_ngay_2",
+  "silver_bullet_time_window_bullish_fvg",
+  "silver_bullet_time_window_bullish_fvg_2",
+  "zigzag_lowmapbuffer_peak_to_buy_reversal",
+  "zigzag_highmapbuffer_bottom_to_sell_reversal",
+  "bullish_fvg",
+  "bearish_fvg"
+ ],
+ "khac": [
+  "buy_signal_from_bullish_candle_strength_pressure_state",
+  "sell_signal_from_bearish_candle_strength_pressure_state"
+ ],
+ "dieu_kien_vo_nghia": [
+  "inside_bar_bullish_signal",
+  "inside_bar_bearish_signal",
+  "simple_price_ea",
+  "fvg_bullish_entry",
+  "fvg_bearish_entry"
+ ]
+}

@@ -1843,6 +1843,34 @@ def luu_kho(ds: list[dict], ep: bool = False) -> None:
         except Exception:
             pass
 
+    # CHOT 3 - SPEC HONG KHONG DUOC VAO KHO IM LANG.
+    #
+    # `kiem_khai_bao` la cong cua ngu phap, nhung truoc 14/09/2026 `luu_kho`
+    # khong he goi no. Hau qua: spec hong ghi vao kho BINH THUONG, roi den luc
+    # chay tester moi bi loc ra - va thu nguoi doc nhan duoc chi la mot con so
+    # nho hon mong doi, khong mot loi giai thich.
+    #
+    # Do 14/09: **44/3233 co che trong kho khong qua cong**, bi vut moi luot
+    # chay tester suot nhieu ngay ma khong ai biet. Chinh toi cung sap dung bay:
+    # them 5 spec voi `ho="hoi_quy"` (khong thuoc danh sach hop le), tester bao
+    # "dich duoc 1" thay vi 6, va neu khong tinh co dem lai so co che thi da
+    # chay tester tren MOT he roi tuong la ket qua cua ca ba.
+    #
+    # Khong TU CHOI ghi - kho dang co 44 cai hong tu truoc, tu choi la lam do ca
+    # nhung duong ghi hop le khac. Nhung phai KEU TO, va phai keu dung cai moi.
+    try:
+        hong_moi = [(x.get("ten", "?"), kiem_khai_bao(x)) for x in (ds or [])]
+        hong_moi = [(t, l) for t, l in hong_moi if l]
+    except Exception:
+        hong_moi = []
+    if hong_moi:
+        import sys as _sys
+        print("[luu_kho] CANH BAO: %d/%d spec KHONG qua `kiem_khai_bao` - chung "
+              "se bi loc bo im lang o moi luot chay tester:" % (len(hong_moi), len(ds or [])),
+              file=_sys.stderr)
+        for t, l in hong_moi[:8]:
+            print("            %-44s %s" % (str(t)[:44], str(l[0])[:70]), file=_sys.stderr)
+
     tam = KHO_CO_CHE.with_suffix(".json.tam")
     tam.write_text(json.dumps(ds, ensure_ascii=False, indent=1), encoding="utf-8")
     tam.replace(KHO_CO_CHE)      # thay the NGUYEN TU, khong de lai file nua voi
