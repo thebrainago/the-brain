@@ -4,30 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `qwen_ultra.log`: ~ 12:25:04 | san sang 0 | CPU   18% / muc tieu 95%  |  con 15.5 loi  |  dang chay 1  [MANG:1]
-- git: e81fc01 QUANTLAB: toan hang moc_ky + quet 1.133 cau hinh - edge CO THAT nhung mong hon phi
-### 2026-09-12 12:32:55 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10068, 0 phut), dieu_khien_xa.py (pid 15316, 326 phut)
-- `qwen_ultra.log`: ~ 12:31:04 | san sang 0 | CPU    6% / muc tieu 95%  |  con 17.9 loi  |  dang chay 1  [MANG:1]
-- git: 8919af8 Quet TRAIN/HOLDOUT 18 ma: chon THAM SO tren train khong mang thong tin - va XM_US100CASH la mot cu cherry-pick cua chinh toi
-### 2026-09-12 12:49:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11428, 0 phut), dieu_khien_xa.py (pid 15316, 343 phut)
-- `qwen_ultra.log`: ~ 12:49:05 | san sang 0 | CPU    4% / muc tieu 95%  |  con 18.1 loi  |  dang chay 1  [MANG:1]
-- git: 3e865b8 MOC DANH GIA SAI da che mat mot tin hieu that - chu du an chi ra
-### 2026-09-12 12:56:00 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12740, 0 phut), dieu_khien_xa.py (pid 15316, 350 phut)
-- `qwen_ultra.log`: ~ 12:55:06 | san sang 0 | CPU   13% / muc tieu 95%  |  con 16.3 loi  |  dang chay 1  [MANG:1]
-- git: dc582d4 QUANTLAB: nhan/dap_quan_tri.py - cay cau con thieu giua HO 1 (entry) va HO 2 (quan tri)
-### 2026-09-12 13:06:08 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13756, 0 phut), dieu_khien_xa.py (pid 15316, 360 phut)
-- `qwen_ultra.log`: ~ 13:05:06 | san sang 0 | CPU   48% / muc tieu 95%  |  con  9.4 loi  |  dang chay 1  [MANG:1]
-- git: f233587 Q2: nhan/ho_so_mua_vu.py - mua vu + entry-time cho 159 ma, va mot BAY NHAN DU LIEU
-### 2026-09-12 13:24:43 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 9768, 0 phut), dieu_khien_xa.py (pid 15316, 378 phut)
 - `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 323 phut); TT_boc (thuong truc, con 53 phut); TT_chi_bao (thuong truc,
 - git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
@@ -404,3 +380,27 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: 6bece1f tran CPU: khoa luong numpy - do moi la thu an het may
+### 2026-09-14 21:24:02 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1824, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: d4f68e8 quan tri lenh: du 11/11 ho chay bang Python, khong con treo vao MT5
+### 2026-09-14 21:50:31 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 7588, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: d4f68e8 quan tri lenh: du 11/11 ho chay bang Python, khong con treo vao MT5
+### 2026-09-14 21:58:01 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 21396, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: d4f68e8 quan tri lenh: du 11/11 ho chay bang Python, khong con treo vao MT5

@@ -95,6 +95,25 @@ def _ho(ten: str) -> str:
     return ten.split("|")[0]
 
 
+#: Sut giam THAT (truoc khi quy ve ngan sach 20%) ma tren do con so `cagr_dd20`
+#: KHONG con doc duoc.
+#:
+#: Vi sao phai co nguong nay - do 14/09/2026:
+#:
+#:   ho `luoi_dca` dung dau bang voi 81% o "hon moc" va hinh dang "cao nguyen".
+#:   Nhung sut giam THAT cua no la **trung vi 95,9%, te nhat 100,0%**, va 45/65
+#:   o tren 90%. `cagr_dd20` quy ve 20% bang cach chia don bay xuong 0,12 roi
+#:   bao "17,6%/nam".
+#:
+#:   Phep quy do chi dung khi duong von con GIONG chinh no sau khi thu nho. Voi
+#:   mot duong da di sat 0, no la ngoai suy tu MOT lan suyt chet: duoi cai duoi
+#:   ma mau chua thay, giam don bay 8 lan khong cuu duoc. Va ho khac chi kem
+#:   `luoi_dca` **1 diem %/nam** trong khi sut giam that chi 28%.
+#:
+#: Nen: o nao vuot nguong nay van duoc tinh, nhung bi GAN CO va bao cao rieng.
+NGUONG_SUT_GIAM_DOC_DUOC = 60.0
+
+
 #: Ma bi bo qua va VI SAO. Mot ma bo qua khong duoc bien mat im lang: neu the
 #: thi "quet 60 ma" la mot con so sai, va ty le tinh tren no cung sai.
 BO_QUA: dict = {}
@@ -102,6 +121,31 @@ BO_QUA: dict = {}
 #: Cot bat buoc. Do 13/09: mot so bang gia trong kho chi co `close` (chuoi
 #: chi so, khong phai bar OHLC) -> `KeyError: 'high'` lam sap ca luot quet.
 COT_CAN = ("open", "high", "low", "close")
+
+
+#: Ma phai co CHI PHI DO DUOC moi duoc vao bang. Khong phai de "chat che" - de
+#: bang khong bi cap chet chiem dau.
+#:
+#: Co che cua bay (da ghi trong ban giao 13/09 muc 3.2, va `to_hop` da chan):
+#: ma khong co nguon phi = san khong bao gia lien tuc = cap neo (DKK neo EUR),
+#: cap chet (EURRUR), cap mong. Chung BIEN DONG RAT THAP, ma `cagr_dd20` quy moi
+#: thu ve cung ngan sach sut giam 20% nen **phat don bay khong lo cho chuoi it
+#: bien dong**. Ket qua: bang thuong cho su thieu hieu biet.
+#:
+#: Do 14/09 khi chua co chan nay: 12 dong dau bang deu la EURRUB / EURRUR.
+DOI_CHI_PHI_DO_DUOC = True
+
+
+def _chi_phi_do_duoc(ma: str, df) -> tuple[bool, str]:
+    from nhan import chi_phi as CP
+    try:
+        c = CP.tu_du_lieu(ma, df)
+        cp = c[0] if isinstance(c, tuple) else c
+    except Exception as e:
+        return False, "khong do duoc chi phi: %s" % repr(e)[:40]
+    if cp.do_tin not in ("DO", "SAN"):
+        return False, "chi phi KHAI BAO (do_tin=%s) - cap neo/chet/mong" % cp.do_tin
+    return True, ""
 
 
 def mot_ma(ma: str, khung: str, in_ra=print) -> list:
@@ -120,6 +164,11 @@ def mot_ma(ma: str, khung: str, in_ra=print) -> list:
     if len(df) < 800:
         BO_QUA[ma] = "chi %d bar (< 800)" % len(df)
         return []
+    if DOI_CHI_PHI_DO_DUOC:
+        ok, vi_sao = _chi_phi_do_duoc(ma, df)
+        if not ok:
+            BO_QUA[ma] = vi_sao
+            return []
     th = tin_hieu_donchian(df)
     if abs(th).sum() < 30:
         BO_QUA[ma] = "engine vao chi kich hoat %d lan" % int(abs(th).sum())
@@ -147,20 +196,45 @@ def tong_hop(ds: list) -> dict:
             if h == "moc":
                 continue
             d = ho_dem.setdefault(h, {"o": 0, "hon_moc_noi_bo": 0,
-                                      "hon_mua_giu": 0, "ma": set()})
+                                      "hon_mua_giu": 0, "ma": set(),
+                                      "cuc_doan": 0, "sut_giam": [],
+                                      "o_sach": 0, "hon_moc_sach": 0})
             d["o"] += 1
             d["ma"].add(khoa[0])
+            dd = abs(r.get("maxdd_pct", 0.0))
+            d["sut_giam"].append(dd)
+            cuc_doan = dd > NGUONG_SUT_GIAM_DOC_DUOC
+            if cuc_doan:
+                d["cuc_doan"] += 1
+            else:
+                d["o_sach"] += 1
             if r["cagr_dd20"] > moc["cagr_dd20"]:
                 d["hon_moc_noi_bo"] += 1
+                if not cuc_doan:
+                    d["hon_moc_sach"] += 1
             if r["hon_moc"]:
                 d["hon_mua_giu"] += 1
     for h, d in ho_dem.items():
         d["so_ma"] = len(d.pop("ma"))
+        dd = sorted(d.pop("sut_giam") or [0.0])
+        d["sut_giam_that_tv"] = round(dd[len(dd) // 2], 1)
+        d["sut_giam_that_te_nhat"] = round(dd[-1], 1)
+        d["ty_le_cuc_doan"] = round(d["cuc_doan"] / max(d["o"], 1), 3)
         d["ty_le_hon_moc"] = round(d["hon_moc_noi_bo"] / max(d["o"], 1), 3)
+        # Ty le tinh TREN O SACH - do moi la con so duoc phep doc. O cuc doan
+        # van duoc dem va bao cao, chi khong duoc chiem cho trong xep hang.
+        d["ty_le_hon_moc_sach"] = round(d["hon_moc_sach"] / max(d["o_sach"], 1), 3)
         d["ty_le_hon_mua_giu"] = round(d["hon_mua_giu"] / max(d["o"], 1), 3)
-        d["hinh_dang"] = ("cao_nguyen" if d["ty_le_hon_moc"] >= 0.6 else
-                          "cai_gai" if d["ty_le_hon_moc"] <= 0.2 else "lo_cho")
-    return dict(sorted(ho_dem.items(), key=lambda x: -x[1]["ty_le_hon_moc"]))
+        if d["ty_le_cuc_doan"] >= 0.5:
+            # Qua nua so o co sut giam that vuot nguong -> `cagr_dd20` cua ho nay
+            # la ngoai suy tu nhung duong von da di sat 0. Khong xep hang.
+            d["hinh_dang"] = "KHONG_DOC_DUOC_sut_giam_cuc_doan"
+        else:
+            d["hinh_dang"] = ("cao_nguyen" if d["ty_le_hon_moc_sach"] >= 0.6 else
+                              "cai_gai" if d["ty_le_hon_moc_sach"] <= 0.2 else "lo_cho")
+    return dict(sorted(ho_dem.items(),
+                       key=lambda x: (x[1]["ty_le_cuc_doan"] >= 0.5,
+                                      -x[1]["ty_le_hon_moc_sach"])))
 
 
 def main() -> int:
