@@ -4,14 +4,14 @@
  "pid": 11532,
  "process_created_epoch": 1789386726.3797207,
  "started_epoch": 1789386726.7300165,
- "updated_epoch": 1789393181.5720437,
- "updated_at": "2026-09-14 20:39:41",
+ "updated_epoch": 1789394502.461142,
+ "updated_at": "2026-09-14 21:01:42",
  "status": "running",
  "live": true,
  "ready": true,
  "health": "unhealthy",
  "cpu": {
-  "current_percent": 36.7,
+  "current_percent": 93.5,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -19,13 +19,7 @@
  },
  "workers": {
   "max": 3,
-  "running": {
-   "QUANTLAB": {
-    "lane": "compute",
-    "started_epoch": 1789392399.8041604,
-    "elapsed_seconds": 781.8
-   }
-  },
+  "running": {},
   "pending": []
  },
  "backpressure": [],
@@ -33,27 +27,27 @@
   "EVO": {
    "status": "ok",
    "rc": 0,
-   "giay": 10.6,
+   "giay": 11.2,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-14 20:25:33",
+    "luc": "2026-09-14 20:56:59",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nang_suat_doc_thap\",\n  \"null_lot_qua_nhieu\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 21,\n \"tru_dung_im\": [],\n \"dia_gb\": 27.9,\n \"tai_lieu\": 11848,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
+   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nang_suat_doc_thap\",\n  \"null_lot_qua_nhieu\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 22,\n \"tru_dung_im\": [],\n \"dia_gb\": 25.5,\n \"tai_lieu\": 11856,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
    "stderr_tail": ""
   },
   "BANKER": {
    "status": "ok",
    "rc": 0,
-   "giay": 0.6,
+   "giay": 0.7,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-14 19:55:40",
+    "luc": "2026-09-14 20:56:47",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
@@ -61,19 +55,23 @@
    "stderr_tail": ""
   },
   "SEEKER": {
-   "status": "ok",
-   "rc": 0,
-   "giay": 641.6,
-   "fatal": [],
-   "degraded": [],
+   "status": "error",
+   "rc": 1,
+   "giay": 547.0,
+   "fatal": [
+    "rc=1"
+   ],
+   "degraded": [
+    "stdout_khong_co_json"
+   ],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-14 20:25:16",
+    "luc": "2026-09-14 20:49:24",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "morguelabs\": \"5/40 bai\"\n    },\n    {\n     \"outcastbeta\": \"10/40 bai\"\n    },\n    {\n     \"oxford_capital\": \"10/40 bai\"\n    },\n    {\n     \"papertoprofit\": \"12/40 bai\"\n    },\n    {\n     \"philosophicaleconomics\": \"10/40 bai\"\n    },\n    {\n     \"quantfiction\": \"9/40 bai\"\n    },\n    {\n     \"quantforhire\": \"10/40 bai\"\n    },\n    {\n     \"quant_galore\": \"12/40 bai\"\n    },\n    {\n     \"quantjourney\": \"9/40 bai\"\n    },\n    {\n     \"quantifiableedges\": \"10/40 bai\"\n    },\n    {\n     \"quantish\": \"4/40 bai\"\n    },",
-   "stderr_tail": ""
+   "stdout_tail": "",
+   "stderr_tail": "print(json.dumps(mot_luot(), ensure_ascii=False, indent=1)[:5000])\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\SV STORE\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u1ed1' in position 787: character maps to <undefined>"
   },
   "NGHI": {
    "status": "error",
@@ -95,18 +93,18 @@
    "stderr_tail": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                     indent=1, default=str)[:6000])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\SV STORE\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u1ea5' in position 491: character maps to <undefined>"
   },
   "QUANTLAB": {
-   "status": "ok",
+   "status": "skipped",
    "rc": 0,
-   "giay": 871.2,
+   "giay": 995.9,
    "fatal": [],
    "degraded": [],
-   "skip_reason": "",
+   "skip_reason": "nhom hop khong duong (trung vi Sharpe -0.154)",
    "nhip": {
-    "luc": "2026-09-14 20:24:38",
+    "luc": "2026-09-14 20:59:41",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "a 0.145 < MDE 0.839 cua EURGBP D1 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"tai_san\": \"AUDCAD\",\n     \"khung\": \"H4\",\n     \"ly_do\": \"Sharpe kham pha 0.241 < MDE 1.345 cua AUDCAD H4 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"tai_san\": \"YH_NIKKEI\",\n     \"khung\": \"D1\",\n     \"ly_do\": \"Sharpe kham pha -0.154 < MDE 0.676 cua YH_NIKKEI D1 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"tai_san\": \"YH_CAC40\",\n     \"khung\": \"D1\",\n     \"ly_do\": \"Sharpe kham pha -0.",
+   "stdout_tail": " \"tong_lai_pct\": -0.48\n      },\n      {\n       \"tai_san\": \"XM_SILVER\",\n       \"loai\": \"vang\",\n       \"so_lenh\": 105,\n       \"sharpe\": -0.113,\n       \"tong_lai_pct\": -28.47\n      },\n      {\n       \"tai_san\": \"XM_US2000CASH\",\n       \"loai\": \"chi_so_my\",\n       \"so_lenh\": 44,\n       \"sharpe\": -0.176,\n       \"tong_lai_pct\": -12.45\n      },\n      {\n       \"tai_san\": \"XM_US500CASH\",\n       \"loai\": \"chi_so_my\",\n       \"so_lenh\": 72,\n       \"sharpe\": -0.122,\n       \"tong_lai_pct\": -12.0\n      },\n      {",
    "stderr_tail": ""
   }
  }

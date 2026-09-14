@@ -4,20 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-12 11:54:26 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 2020, 0 phut), dieu_khien_xa.py (pid 15316, 288 phut)
-- `qwen_ultra.log`: ... khong co viec chay duoc ngay. 7 viec dang cho: X0_bo_test (thuong truc, con 413 phut); TT_boc (thuong truc, con 9 phut); TT_chi_bao (thuong truc, 
-- git: d85ef9c O 3: kho lanh 1.252 -> 1.374 (+122) va them CHOT GAC de khong tai dien
-### 2026-09-12 12:05:59 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11484, 0 phut), dieu_khien_xa.py (pid 15316, 300 phut)
-- `qwen_ultra.log`: ~ 12:05:03 | san sang 0 | CPU   28% / muc tieu 90%  |  con 12.4 loi  |  dang chay 1  [LLM:1]
-- git: 7a9b17e O 5 XONG: khong co template nao de viet - va GMMA thi ngu phap DA noi duoc
-### 2026-09-12 12:09:13 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5592, 0 phut), dieu_khien_xa.py (pid 15316, 303 phut)
-- `qwen_ultra.log`: ## De xuat tiep th
 - git: be14d01 VIET LAI ke hoach theo SO DO THAT cua chu du an (Desktop/hethong.txt)
 ### 2026-09-12 12:15:21 — chup trang thai
 
@@ -404,3 +390,17 @@
 - `supervisor_stdio.log`: 2026-09-14 20:14:35 SEEKER    bat_dau   lane=external
 - `watchdog.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - git: 2a5c40f PMG: ket qua quet that + ba lo hong lo ra khi doc ket qua
+### 2026-09-14 20:39:54 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10228, 0 phut), dieu_khien_xa.py (pid 16196, 107 phut), dieu_phoi.py (pid 11532, 107 phut), quantlab.py (pid 18840, 13 phut)
+- `dieu_phoi.log`: 2026-09-14 20:26:39 QUANTLAB  bat_dau   lane=compute
+- `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
+- `supervisor_stdio.log`: 2026-09-14 20:26:39 QUANTLAB  bat_dau   lane=compute
+- `watchdog.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
+- git: 64ec765 PMG: cong G0 phai khop ca KHUNG CHAY, khong chi (ma, phien, atr_tf)
+### 2026-09-14 20:57:10 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18544, 0 phut), dieu_khien_xa.py (pid 16196, 125 phut), dieu_phoi.py (pid 11532, 125 phut), quantlab.py (pid 2696, 14 phut)
+- `dieu_phoi.log`: 2026-09-14 20:57:00 EVO       ok          11.2s guard=job
+- `supervisor_stdio.log`: 2026-09-14 20:57:00 EVO       ok          11.2s guard=job
+- git: 64ec765 PMG: cong G0 phai khop ca KHUNG CHAY, khong chi (ma, phien, atr_tf)

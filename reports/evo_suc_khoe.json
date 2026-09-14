@@ -1,33 +1,33 @@
 {
  "van_hanh": {
-  "luc": "2026-09-14 20:25:26",
+  "luc": "2026-09-14 20:56:52",
   "tru": {
    "SEEKER": {
-    "lan_cuoi": "2026-09-14 20:25:16",
-    "tre_giay": 10,
+    "lan_cuoi": "2026-09-14 20:49:24",
+    "tre_giay": 448,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "QUANTLAB": {
-    "lan_cuoi": "2026-09-14 20:24:38",
-    "tre_giay": 48,
-    "trang_thai": "nghi",
+    "lan_cuoi": "2026-09-14 20:43:10",
+    "tre_giay": 822,
+    "trang_thai": "chay",
     "dung_im": false
    },
    "NGHI": {
     "lan_cuoi": "2026-09-14 19:01:29",
-    "tre_giay": 5037,
+    "tre_giay": 6923,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "BANKER": {
-    "lan_cuoi": "2026-09-14 19:55:40",
-    "tre_giay": 1786,
+    "lan_cuoi": "2026-09-14 20:56:47",
+    "tre_giay": 5,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "EVO": {
-    "lan_cuoi": "2026-09-14 20:25:26",
+    "lan_cuoi": "2026-09-14 20:56:52",
     "tre_giay": 0,
     "trang_thai": "chay",
     "dung_im": false
@@ -42,27 +42,27 @@
     "gb": 0.0,
     "so_tien_trinh": 0
    },
-   "ram_dung_pct": 40.2,
-   "ram_trong_gb": 20.5,
-   "cpu_pct": 36.1
+   "ram_dung_pct": 35.6,
+   "ram_trong_gb": 22.0,
+   "cpu_pct": 26.5
   },
   "viec": {
    "QUANTLAB": {
-    "CHO": 34,
-    "XONG": 1946
+    "CHO": 29,
+    "XONG": 1963
    }
   },
   "viec_treo": 0,
   "viec_loi": 0,
-  "viec_cho": 34,
+  "viec_cho": 29,
   "seeker_ty_le_vong_rong": 0.88,
-  "gian_doan_7ngay_gio": 164.7,
+  "gian_doan_7ngay_gio": 164.2,
   "gian_doan_lan": 2,
-  "may_tat_7ngay_gio": 164.7,
+  "may_tat_7ngay_gio": 164.2,
   "he_chet_7ngay_gio": 0,
   "chua_ro_7ngay_gio": 0,
   "he_chet_lan": 0,
-  "gio_do_duoc_7ngay": 3.3,
+  "gio_do_duoc_7ngay": 3.8,
   "ty_le_song_7ngay": 1.0,
   "watchdog": {
    "so_lan": 0,
@@ -71,11 +71,11 @@
    "lan_cuoi": null,
    "moi_gio": 0.0
   },
-  "dia_trong_gb": 27.9,
+  "dia_trong_gb": 25.5,
   "mt5_tick_test": "GO",
   "so_toan_ven": {
    "lanh": true,
-   "mo_ta": "18569 dong lien mach"
+   "mo_ta": "18570 dong lien mach"
   },
   "nguon": {
    "arxiv": {
@@ -331,25 +331,25 @@
     "trang_thai": "BAT"
    },
    "rss_buildalpha": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 5,
+    "thu_hoach": 11,
     "trang_thai": "BAT"
    },
    "rss_gestaltu": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
     "thu_hoach": 4,
     "trang_thai": "BAT"
    },
    "rss_hangukquant": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 16,
+    "thu_hoach": 18,
     "trang_thai": "BAT"
    },
    "rss_headlandstech": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
     "thu_hoach": 5,
     "trang_thai": "BAT"
@@ -631,10 +631,10 @@
     "trang_thai": "BAT"
    }
   },
-  "tai_lieu": 11848,
+  "tai_lieu": 11856,
   "seeker_da_boc": 2442,
-  "seeker_tai_lieu_artifact": 8087,
-  "seeker_ung_vien": 691,
+  "seeker_tai_lieu_artifact": 8095,
+  "seeker_ung_vien": 705,
   "seeker_gia_thuyet_tu_tai_lieu": 4,
   "seeker_nang_suat_100": 0.16,
   "nghi_co_che_noi_sinh": 383,
@@ -1174,7 +1174,7 @@
   {
    "ma": "nang_suat_doc_thap",
    "muc": "VUA",
-   "mo_ta": "Nang suat doc = 0.16 gia thuyet/100 bai (4 truy nguyen ve URL tren 2442 bai da boc; 691 ung vien tu 8087 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
+   "mo_ta": "Nang suat doc = 0.16 gia thuyet/100 bai (4 truy nguyen ve URL tren 2442 bai da boc; 705 ung vien tu 8095 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
    "bc": {
     "theo_nguon": {
      "arxiv": {

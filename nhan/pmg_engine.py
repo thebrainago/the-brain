@@ -413,6 +413,15 @@ def mo_phong(df, cf: "PMG.CauHinh", cp=None, atr_arr=None,
                 _dong_ro(Ci, i, "chay_tai_khoan")
             break
 
+    # Tai khoan chay thi vong lap `break` giua chung -> phan duoi cua duong von
+    # con nguyen gia tri khoi tao 1.0, tuc "quay ve hoa von". Phai keo bang muc
+    # da chay, neu khong thi phep quy ve cung muc sut giam doc ra mot cu hoi phuc
+    # khong he ton tai.
+    if st.duong is not None:
+        i_cuoi = st.bar_chay if st.chay_tai_khoan and st.bar_chay >= 0 else n - 1
+        if i_cuoi < n - 1:
+            st.duong[i_cuoi + 1:] = st.duong[i_cuoi]
+
     # ---- ro chua dong o cuoi mau: MARK-TO-MARKET (muc 5.4)
     ro_treo = None
     if st.tong_q > 0:
@@ -566,6 +575,10 @@ def _chi_so(cf, st, df, ro_treo, pg) -> dict:
         "phan_giai": pg,
     }
     if st.duong is not None:
+        q = lai_nam_o_cung_dd(st.duong, nam)
+        out["lai_nam_dd20"] = q["lai_nam"]        # <- CON SO DE SO SANH BANG TIEN
+        out["don_bay_can_dd20"] = q["don_bay"]
+        out["chay_o_dd20"] = q["chay"]
         out["duong_cong"] = st.duong
     return out
 
@@ -575,6 +588,55 @@ def _dem_loai(cac_ro) -> dict:
     for r in cac_ro:
         d[r["loai"]] = d.get(r["loai"], 0) + 1
     return d
+
+
+
+# ------------------------------------------------- LAI O CUNG MUC RUI RO
+#: Ngan sach sut giam ma moi cau hinh duoc quy ve de SO DUOC VOI NHAU bang tien.
+#: Cung quy uoc `cagr_dd20` ma phan con lai cua du an dang dung.
+NGAN_SACH_DD = 0.20
+
+
+def lai_nam_o_cung_dd(duong, so_nam: float, muc_dd: float = NGAN_SACH_DD,
+                      don_bay_toi_da: float = 50.0) -> dict:
+    """Nang don bay den khi sut giam dat `muc_dd`, roi hoi lai moi nam duoc bao nhieu.
+
+    Vi sao can: mot cau hinh lai 2%/nam voi sut giam 2% va mot cau hinh lai 8%/nam
+    voi sut giam 30% khong so truc tiep duoc. Quy ca hai ve cung mot ngan sach sut
+    giam thi moi biet cai nao ra tien hon **o cung muc dau don**.
+
+    KHONG duoc gop bang log. Loi suat co don bay la `prod(1 + L*r)`, khong phai
+    `(S_T/S_0)^L` - hai cai nay lech nhau rat xa khi bien dong lon, va cach sai
+    con lam mat luon kha nang chay tai khoan.
+    """
+    e = np.asarray(duong, float)
+    e = e[np.isfinite(e) & (e > 0)]
+    if len(e) < 10 or so_nam <= 0:
+        return {"don_bay": 0.0, "lai_nam": 0.0, "dd": 0.0, "chay": True}
+    r = np.diff(e) / e[:-1]
+    r = r[np.isfinite(r)]
+
+    def _chay_thu(L):
+        v = np.cumprod(1.0 + L * r)
+        if (v <= 0).any():                      # chay tai khoan
+            return None, 1.0
+        dd = float(1.0 - (v / np.maximum.accumulate(v)).min())
+        return float(v[-1]), dd
+
+    lo, hi = 0.0, don_bay_toi_da
+    for _ in range(40):
+        giua = (lo + hi) / 2
+        _, dd = _chay_thu(giua)
+        if dd > muc_dd:
+            hi = giua
+        else:
+            lo = giua
+    L = lo
+    cuoi, dd = _chay_thu(L)
+    if cuoi is None or L <= 1e-9:
+        return {"don_bay": 0.0, "lai_nam": 0.0, "dd": dd, "chay": True}
+    return {"don_bay": L, "lai_nam": cuoi ** (1.0 / so_nam) - 1.0, "dd": dd,
+            "chay": False, "cham_tran_don_bay": L >= don_bay_toi_da * 0.999}
 
 
 # --------------------------------------------------- BAT BIEN VOI TIE-BREAK
