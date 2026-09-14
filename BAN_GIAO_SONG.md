@@ -4,22 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-
-- dang chay: ban_giao_song.py (pid 3956, 0 phut), dieu_khien_xa.py (pid 15316, 527 phut)
-- `qwen_ultra.log`: ~ 15:53:16 | san sang 0 | CPU   43% / muc tieu 95%  |  con 10.5 loi  |  dang chay 1  [LLM:1]
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 16:12:40 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9496, 0 phut), dieu_khien_xa.py (pid 15316, 546 phut)
-- `qwen_ultra.log`: ~ 16:11:17 | san sang 0 | CPU   53% / muc tieu 95%  |  con  8.4 loi  |  dang chay 1  [LLM:1]
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 16:14:46 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12900, 0 phut), dieu_khien_xa.py (pid 15316, 548 phut)
-- `qwen_ultra.log`: ~ 16:13:17 | san sang 0 | CPU   53% / muc tieu 95%  |  con  8.4 loi  |  dang chay 1  [LLM:1]
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 16:41:19 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 13768, 0 phut), dieu_khien_xa.py (pid 15316, 575 phut)
 - `qwen_ultra.log`: ~ 16:41:19 | san sang 0 | CPU   49% / muc tieu 95%  |  con  9.3 loi  |  dang chay 2  [LLM:2]
 - git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
@@ -404,3 +388,19 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: 0937f72 bang 11 ho: in them SUT GIAM THAT, va cot "o>moc" chi tinh tren o sach
+### 2026-09-14 22:16:45 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20276, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: 092c590 gan 11 ho quan tri len HE DA CO EDGE: khong ho nao cai thien
+### 2026-09-14 22:30:43 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13568, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: 092c590 gan 11 ho quan tri len HE DA CO EDGE: khong ho nao cai thien
