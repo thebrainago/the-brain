@@ -55,6 +55,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
     b bench-qt [MA]   BAN DO 11 ho quan tri tren tester (engine vao CO DINH)
     b pmg [g0|quet|so|bang]  PMG: ho quan li lenh KHONG CO TIN HIEU VAO (luoi ro)
+    b tran-cpu [60|80|95]  TRAN CPU ca may - moi viec nang tu ha theo
     b uu-tien lan     HAI LAN: khai thac (WIP<=3, co han chot) vs xay may
     b go-html [N]     go trang HTML tho trong kho ra van ban (khau truoc BOC)
     b luan-lenh       truy nguoc tu DANH SACH LENH that -> luat vao lenh
@@ -827,6 +828,31 @@ def c_pmg(a: list) -> int:
 
 
 
+def c_tran_cpu(a: list) -> int:
+    """`b tran-cpu [so]` - TRAN CPU cua ca may. Moi viec nang tu ha theo con so nay.
+
+    May nay la may CA NHAN cua chu du an. Khong so nay thi moi lan chu du an choi
+    game lai phai cat ngang phien de sua tay.
+
+        b tran-cpu          xem dang de bao nhieu, may dang chay bao nhieu
+        b tran-cpu 60       choi game nang
+        b tran-cpu 80       vua lam vua dung may
+        b tran-cpu 95       di ngu, de may chay het suc
+    """
+    from nhan import tran_cpu as TC
+    if a:
+        cu = TC.tran(lam_moi=True)
+        moi = TC.dat_tran(float(a[0]))
+        print(f"tran CPU: {cu:.0f}%  ->  {moi:.0f}%")
+        print("viec dang chay se tu ha trong vong mot phut (chung doc lai moi 30 giay).")
+        return 0
+    print(f"tran CPU dang khai  : {TC.tran(lam_moi=True):.0f}%")
+    print(f"CPU toan may bay gio: {TC.cpu_hien_tai(1.0):.0f}%")
+    print(f"so tien trinh nen mo: {TC.so_luong_goi_y()}")
+    return 0
+
+
+
 LENH = {
     "vao": c_vao, "ket": c_ket,
     "qwen": c_qwen, "q": c_qwen,
@@ -850,7 +876,7 @@ LENH = {
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
     "quan-tri": c_quan_tri, "qt": c_quan_tri,
-    "bench-qt": c_bench_qt, "pmg": c_pmg, "go-html": c_go_html, "mach": c_mach,
+    "bench-qt": c_bench_qt, "pmg": c_pmg, "tran-cpu": c_tran_cpu, "go-html": c_go_html, "mach": c_mach,
     "ngan-sach": c_ngan_sach, "ns": c_ngan_sach, "he": c_he,
     "test-me": c_test_me,
     "luan-lenh": c_luan_lenh, "chuyen": c_chuyen,
