@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-12 21:29:00 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 23140, 0 phut)
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 22:11:22 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14108, 0 phut)
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
 ### 2026-09-12 23:27:10 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 2324, 0 phut)
@@ -404,3 +396,11 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: c7c7d57 spec hong khong duoc bien mat im lang - sua ca hai dau
+### 2026-09-14 23:12:31 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6848, 0 phut)
+- git: ec63bcf tester: "0 lenh" khong duoc tra ve tro troi + `--khung` bi bo qua
+### 2026-09-14 23:18:38 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 21192, 0 phut)
+- git: ec63bcf tester: "0 lenh" khong duoc tra ve tro troi + `--khung` bi bo qua
