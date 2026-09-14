@@ -4,22 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 20:29:06 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17632, 0 phut)
-- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 20:40:32 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 23504, 0 phut)
-- `qwen_ultra.log`: AttributeError: 'str' object has no attribute 'get'
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
-### 2026-09-12 21:24:10 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9144, 0 phut)
-- git: 015853f Q2 sua tiep: FX khong chay T7/CN - loai bar cuoi tuan bang mot luat TI LE chung
 ### 2026-09-12 21:29:00 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 23140, 0 phut)
@@ -404,3 +388,19 @@
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: 49ca60d lan nhanh di duoc toi tester: viet ban DSL cho hai he ket, va ba lo hong tren duong
+### 2026-09-14 22:55:40 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 12176, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: c7c7d57 spec hong khong duoc bien mat im lang - sua ca hai dau
+### 2026-09-14 23:00:36 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19764, 0 phut)
+- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
+- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
+- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
+- git: c7c7d57 spec hong khong duoc bien mat im lang - sua ca hai dau

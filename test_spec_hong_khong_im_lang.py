@@ -144,3 +144,37 @@ def test_chay_tester_kho_co_in_ly_do_bo():
     assert "BI BO vi khai bao hong" in s, "tester khong con bao ly do bo co che"
     assert "KHOP BO LOC" in s, "tester khong con bao co che bi bo NAM TRONG bo loc"
     assert "khong dich duoc" in s, "tester khong con liet ke co che khong dich duoc"
+
+
+# ============ TESTER: "0 lenh" khong duoc tra ve tro troi
+def test_tester_co_ham_chan_doan_log():
+    """MT5 bao '0 lenh' cho MOI kieu hong. Phai doc log moi biet ly do that."""
+    import chay_tester_kho as C
+    assert hasattr(C, "chan_doan_log")
+    manh = [m for m, _ in C.DAU_HIEU_HONG]
+    for can in ("authorization on", "not synchronized with",
+                "cannot synchronize history", "unknown symbol"):
+        assert can in manh, f"thieu dau hieu '{can}'"
+
+
+def test_tester_coi_TAT_CA_0_LENH_la_CHUA_DO_DUOC():
+    """Ba trang thai chu khong phai hai: moi co che 0 lenh la hong MOI TRUONG.
+
+    Do 14/09: hai luot x 628 giay, 6/6 co che 0 lenh KE CA moc mua-giu, va ly do
+    that (`authorization ... Invalid account`) chi nam trong log terminal.
+    """
+    s = (LAB / "chay_tester_kho.py").read_text(encoding="utf-8-sig")
+    assert 'all(int(d.get("lenh") or 0) == 0 for d in ket)' in s
+    assert '"chua_do": True' in s
+    assert "hong MOI TRUONG" in s
+
+
+def test_tester_ini_dung_KHUNG_duoc_truyen_vao():
+    """`--khung H4` phai vao `.ini`, khong bi hang so `KHUNG_CHAY` de len.
+
+    Do 14/09: truyen `--khung H4` nhung log MT5 ghi `on AUDCAD,H1` - he H4 bi do
+    tren H1 ma khong ai biet.
+    """
+    s = (LAB / "chay_tester_kho.py").read_text(encoding="utf-8-sig")
+    assert "Period={khung or KHUNG_CHAY}" in s
+    assert "khung=khung" in s, "viet_ini khong nhan `khung` tu nguoi goi"

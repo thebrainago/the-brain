@@ -120,7 +120,7 @@ def bien_dich(duong: Path) -> str:
 
 
 def viet_ini(ten: str, symbol: str, so_co_che: int, tu: str, den: str,
-             deposit: int = 10000) -> Path:
+             deposit: int = 10000, khung: str = "") -> Path:
     p = XM_DATA / f"{ten}.ini"
     # TU DANG NHAP trong chinh `.ini` - xem `bi_mat.khoi_common_ini`.
     # Khong co khoi nay thi tester chet voi "tester not started because the
@@ -130,7 +130,7 @@ def viet_ini(ten: str, symbol: str, so_co_che: int, tu: str, den: str,
     p.write_text(_chung + f"""[Tester]
 Expert={TEN_EA}.ex5
 Symbol={symbol}
-Period={KHUNG_CHAY}
+Period={khung or KHUNG_CHAY}
 Model=2
 ExecutionMode=0
 Optimization=1
@@ -152,6 +152,58 @@ InpLot=0.10||0.10||0||0||N
 InpMagic=26090601||26090601||0||0||N
 """, encoding="utf-16")
     return p
+
+
+
+#: Cac cau trong log terminal/tester noi rang luot chay HONG VI MOI TRUONG,
+#: khong phai vi chien luoc. Moi cau deu dan toi bao cao "0 lenh".
+DAU_HIEU_HONG = [
+    ("authorization on", "khong dang nhap duoc tai khoan"),
+    ("Invalid account", "tai khoan khong hop le"),
+    ("not synchronized with", "terminal chua dong bo voi may chu giao dich"),
+    ("cannot synchronize history", "khong tai duoc lich su gia cua ma nay"),
+    ("unknown symbol", "ten ma khong co tren terminal"),
+    ("no history", "khong co lich su gia"),
+]
+
+
+def chan_doan_log(gio_lui: float = 1.0) -> list[str]:
+    """Doc log terminal + tester, tra ve nhung cau giai thich vi sao luot chay hong.
+
+    ## Vi sao ham nay ton tai
+
+    MT5 bao "0 lenh" cho MOI kieu hong: khong dang nhap, sai ten ma, thieu lich
+    su, EA khong khop. Bao cao tra ve mot bang toan so 0 va **khong mot loi nao**
+    noi ly do - nguoi doc se di truy chien luoc trong khi loi nam o moi truong.
+
+    Do 14/09/2026: chay 2 luot x 628 giay, ca 6 co che deu 0 lenh KE CA moc
+    mua-giu. Ly do that chi co trong log terminal:
+        `'342418441': authorization on XMGlobal-MT5 17 failed (Invalid account)`
+        `terminal is not synchronized with the trade server before start`
+    """
+    import re
+    import time as _t
+    ra, gioi_han = [], _t.time() - gio_lui * 3600
+    for thu_muc in ("logs", "Tester/logs"):
+        d = XM_DATA / thu_muc
+        if not d.exists():
+            continue
+        for f in sorted(d.glob("2*.log"))[-2:]:
+            try:
+                if f.stat().st_mtime < gioi_han:
+                    continue
+                s = f.read_bytes().decode("utf-16-le", errors="replace")
+            except Exception:
+                continue
+            for dong in s.split(chr(10)):
+                for manh, y_nghia in DAU_HIEU_HONG:
+                    if manh.lower() in dong.lower():
+                        cau = re.sub(r"\s+", " ", dong.strip())[:130]
+                        moi = f"{y_nghia}: {cau}"
+                        if moi not in ra:
+                            ra.append(moi)
+                        break
+    return ra
 
 
 def doc_xml(f: Path) -> list[dict]:
@@ -255,7 +307,7 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
     print("  bien dich xong (%d co che)" % len(dat))
 
     ten = "kho_%s_%s" % (symbol, khung)
-    ini = viet_ini(ten, symbol, len(dat), tu, den)
+    ini = viet_ini(ten, symbol, len(dat), tu, den, khung=khung)
     for hs in (".xml", ".htm"):
         f = XM_DATA / (ten + hs)
         if f.exists():
@@ -301,6 +353,23 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
             "ky_vong": _so(d.get("Expected Payoff")),
             "ho": dat[i].get("ho"), "co_che": str(dat[i].get("co_che"))[:110]})
     ket.sort(key=lambda x: -x["sharpe"])
+
+    # TAT CA 0 LENH = HONG MOI TRUONG, khong phai ket qua chien luoc.
+    #
+    # Dau hieu chac nhat la moc `__mua_giu__` cung 0 lenh: mua roi giu ma khong
+    # vao lenh nao thi loi khong nam o chien luoc. Do 14/09/2026: hai luot chay
+    # x 628 giay, 6/6 co che deu 0 lenh, va ly do that chi nam trong log
+    # terminal chu khong o bao cao:
+    #     `'342418441': authorization on XMGlobal-MT5 17 failed (Invalid account)`
+    #     `terminal is not synchronized with the trade server before start`
+    # Bao cao thi chi la mot bang toan so 0 - doc no nhu ket qua la di truy
+    # chien luoc trong khi loi nam o moi truong.
+    if ket and all(int(d.get("lenh") or 0) == 0 for d in ket):
+        return {"loi": ("TAT CA %d co che deu 0 lenh - hong MOI TRUONG, khong "
+                        "phai ket qua chien luoc" % len(ket)),
+                "chua_do": True, "giay": giay, "so_pass": len(ket), "ket": ket,
+                "chan_doan": chan_doan_log()}
+
     ra = {"symbol": symbol, "khung": khung, "so_co_che": len(dat),
           "so_pass": len(ket), "giay": giay, "ghi_chu": hong, "ket": ket,
           "bo_dich": [{"ten": c["ten"], "vi_sao": c["_khong_dich"]} for c in bo]}
@@ -320,6 +389,11 @@ def main() -> int:
              lay("--den", "2026.07.29"))
     if r.get("loi"):
         print("LOI:", r["loi"])
+        for c in (r.get("chan_doan") or [])[:6]:
+            print("   ->", c)
+        if r.get("chua_do"):
+            print("   => TRANG THAI: CHUA_DO_DUOC, khong phai AM. Sua moi truong")
+            print("      roi chay lai; dung doc bang so nhu mot ket luan.")
         return 1
     print("\n%d pass, %ss  %s" % (r["so_pass"], r["giay"], r.get("ghi_chu", "")))
     print("\n%-42s %6s %9s %6s %7s %7s" % ("co che", "lenh", "lai", "PF",
