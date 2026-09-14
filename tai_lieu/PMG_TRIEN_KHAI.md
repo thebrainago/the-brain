@@ -136,7 +136,7 @@ Kho không có dữ liệu M5 cho **UK100 và GER40** — chỉ có D1. Hai tài
 
 ---
 
-## 5. Bốn chỗ đặc tả nói một đằng, toán đòi một nẻo
+## 5. Sáu chỗ đặc tả nói một đằng, toán đòi một nẻo
 
 ### 5.1 Điều kiện G1 tách làm hai, không phải một
 
@@ -160,7 +160,29 @@ theo hướng vị thế, nên "giá quay về gốc" là một khoản **lỗ c
 ngừng thêm tầng, rổ vẫn mở. Cấu hình chỉ có `max_legs` mà không có `max_basket_dd` /
 `time_stop` / `hard_sl_atr` là **martingale chờ chết** — đúng thứ §1.6 muốn cấm. G1 từ chối.
 
-### 5.4 So bốn hàm SIZE phải CHUẨN HOÁ ĐÒN BẨY, nếu không là so quy mô
+### 5.4 Mã định danh §8.7 KHÔNG duy nhất — và đặc tả bảo dùng nó làm khoá dedupe
+
+Đặc tả §8.7 cho chuỗi:
+
+```
+PMG-{asset}-{session}-{atr_tf}-h{h}-{direction}-{step_mode}-{size_mode}-tp{tp_mode}-st{stop_mode}
+```
+
+Chuỗi đó **không phân biệt được `tp_dist`**, cũng như `size_r` và `step_g`. Hai cấu hình
+khác hẳn nhau — `tp_dist = 0,5` và `tp_dist = 2,0` trên cùng một lưới — cho ra y hệt một
+mã. Mà §8.7 lại nói: *"Hash rút gọn từ chuỗi này làm khoá dedupe. Bắt buộc, nếu không
+QuantLab sẽ chạy trùng hàng nghìn lần."* Dùng nó làm khoá dedupe thì ta không chạy trùng —
+ta **đánh rơi im lặng** mọi biến thể `tp_dist` trừ một cái.
+
+Lỗ hổng này tự nó lộ ra: ngày 14/09 tôi dùng mã đó để dựng lại cấu hình duy nhất sống sót
+của AUDCAD, đoán `tp_dist = 2,0` trong khi thật ra là `1,0`, và ra một kết quả khác hẳn.
+
+Đã sửa: `ma_dinh_danh` thêm `tp_dist` (và `size_r` / `step_g` khi chúng có nghĩa). Khoá
+dedupe THẬT vẫn là `van_tay()` — hash của toàn bộ dataclass — nên kho chưa bao giờ mất
+cấu hình nào; chỗ hỏng chỉ nằm ở chuỗi cho người đọc. Có test chiều ngược: mọi cấu hình
+trong lưới prereg phải có mã riêng.
+
+### 5.5 So bốn hàm SIZE phải CHUẨN HOÁ ĐÒN BẨY, nếu không là so quy mô
 
 Đặc tả §1.4 hỏi thẳng *"nếu flat không thắng thì mọi hàm tăng size chỉ là đòn bẩy trá
 hình"*, và §7.3 đòi bảng so sánh bốn hàm ở cùng `h*`. Bảng đó chỉ trả lời được câu hỏi nếu
@@ -177,6 +199,23 @@ luận về "hình dạng hàm size". `sinh_cau_hinh` chia ngược `phoi_nhiem_
 
 (Đo 14/09 trên EURGBP M5 khi chưa chuẩn hoá: `flat` cháy tài khoản ở −98%. Đó không phải
 kết luận về cơ chế, là kết luận về cỡ lot.)
+
+### 5.6 "Bi quan" về thứ tự khớp KHÔNG có nghĩa là kết quả tệ hơn
+
+Tên `bi_quan` mô tả **giả định về thứ tự khớp** (chạm cực trị bất lợi cho vị thế hiện có
+trước), không mô tả kết quả. Và chiều của nó **đảo ngược theo `direction`**:
+
+- `WITH`: chạm cực trị bất lợi trước = rổ breakout bị cản trước khi kịp nhồi thêm → đúng
+  là bản tệ hơn.
+- `AGAINST`: chạm cực trị bất lợi trước = **khớp sâu hơn, nhiều tầng hơn ở giá tốt hơn**,
+  rồi cú hồi về mới ăn TP → bản này **lãi hơn**.
+
+Đo 14/09 trên cấu hình AUDCAD duy nhất sống sót: `bi_quan` **+2,753%** còn `lac_quan`
+**+0,199%** — chênh 14 lần, và bản mang tên "bi quan" là bản đẹp hơn. Đọc nhầm nó làm số
+thận trọng thì một hệ bằng không thành một hệ có vẻ dùng được.
+
+Đã thêm `lai_than_trong = min(hai bản)` và `ban_than_trong` vào `do_bat_bien`; cổng `song`
+của phễu giờ đòi **bản thận trọng phải dương**, chứ không chỉ đòi "không lật dấu".
 
 ---
 
@@ -211,6 +250,38 @@ chi phí một vòng ≈ **1,0 bps**. Tức **kỳ vọng = −chi phí**, khôn
 
 ---
 
+## 7b. Kết quả quét thật (G1→G4, ba ô, 14/09)
+
+```
+ô                  G0        G1                     G2 đo được   SỐNG
+XM_US100CASH     0/8 qua   không cấp CPU (G0 phủ quyết)              -
+AUDCAD           8/8 qua   giữ 120                  64/120           1
+XAUUSDM          7/8 qua   giữ 64, BỎ 32 vô nghiệm  64/64            0
+```
+
+Cấu hình dẫn đầu theo LÃI là `h = 0,5` với **+22,16%** — và **cổng độ phân giải gắn nó
+`CHUA_DO_DUOC`** (ở AUDCAD `h = 0,5` cho 1,97× biên độ nến, vừa trượt ngưỡng 2,0). Không
+có cổng đó thì con số đẹp nhất của cả lần quét lại chính là con số ảo nhất.
+
+Cái duy nhất qua G3 + G4:
+
+```
+PMG-AUDCAD-ALL-H1-h0.8-AGAINST-fixed-linear-tpavg_plus1-stdd0.03.t240.sl6.n12
+  G3  thật +2,75%  vs  đảo dấu −0,06 · xáo khối −5,21 · GBM −9,64
+  G4  ba giai đoạn +0,30% · +0,08% · +2,47%
+  bất biến tie-break:  "bi quan" +2,753%  |  "lạc quan" +0,199%
+```
+
+**Bản mang tên "bi quan" lại là bản ĐẸP hơn** — xem §5.6. Số phải đọc là bản thận trọng:
+**+0,199% / 13,5 năm = 0,015%/năm**. Mốc mua-giữ AUDCAD cùng kỳ là −0,44%/năm.
+
+Đọc cho đúng: **cơ chế thật, và gần như bằng không về mặt tiền.** Bản `đảo dấu` là bản
+yếu nhất trong ba placebo (−0,06%) trong khi `xáo khối` (−5,21%) và `GBM` (−9,64%) âm hẳn
+— tức lưới này không sống bằng drift mà bằng **cấu trúc chuỗi** của chính AUDCAD, đúng thứ
+G0 đã chỉ ra. Nó chỉ quá nhỏ để dùng.
+
+---
+
 ## 8. Còn thiếu — việc của phiên sau
 
 1. **G6 (MT5 single-run)** chưa nối. `TESTER = 1` là ràng buộc vật lý; PMG phải đi qua
@@ -221,8 +292,9 @@ chi phí một vòng ≈ **1,0 bps**. Tức **kỳ vọng = −chi phí**, khôn
 3. **Trục D3 (scale)**: mới chạy `atr_tf = H1`. Cần M15/H4/D1. `atr_khung` đã hỗ trợ.
 4. **UK100, GER40** — thiếu dữ liệu khung nhỏ. Việc của SEEKER, không phải của QuantLab.
 5. **Tick data** cho miền `h < 0,3 ATR` (hai mẫu tham chiếu M1/M2). Chưa có.
-6. `do_bat_bien` đã viết nhưng **chưa chạy trên cấu hình sống sót** — phải chạy trước khi
-   đọc bất kỳ số nào của cấu hình đó như một kết luận.
+6. ~~`do_bat_bien` chưa chạy trên cấu hình sống sót~~ — **đã chạy** (§7b), và nó lật cách
+   đọc kết quả: xem §5.6. Việc còn lại là chạy nó cho *mọi* ứng viên vào G3, việc đó đã
+   nối vào `pmg_quet.quet` nhưng lần quét 14/09 chạy bằng bản mã cũ hơn nên chưa có.
 
 ---
 
@@ -230,7 +302,7 @@ chi phí một vòng ≈ **1,0 bps**. Tức **kỳ vọng = −chi phí**, khôn
 
 | câu hỏi | trả lời |
 |---|---|
-| tick hay bar M1? | **bar M5 đủ cho `h ≥ 0,5–0,8`; cần tick cho `h < 0,3`** — đo được, xem §2 |
+| tick hay bar M1? | **bar M5 đủ cho `h ≥ 0,5–0,8`; cần tick cho `h < 0,3`** — đo được, xem §2. Và ngay trong vùng đo được, hai giả định thứ tự khớp vẫn chênh 14 lần (§5.6) — nên số phải đọc luôn là bản thận trọng |
 | quét cả `WITH` lẫn `AGAINST`? | **Không cần quét cả hai** — G0 đã chỉ định hướng cho từng ô, và dấu **đảo ngược giữa FX và chỉ số**. Quét cả hai ở mọi ô là nhân đôi số phép thử để lấy thông tin G0 cho không |
 | ngưỡng vốn để cắt config đòi margin cao | engine ghi `dinh_don_bay`, `von_toi_thieu` (= DD đỉnh × 1,5) và `chay_tai_khoan` cho mọi cấu hình. **Con số ngưỡng thì cần chủ dự án chốt** |
 | 8 bucket phiên có đúng không | đã dựng theo **giờ sàn** (MT5 server = Europe/Helsinki, tự có DST) — không dùng offset UTC cố định. **Chưa quét, nên chưa biết bucket nào vô giá trị** |

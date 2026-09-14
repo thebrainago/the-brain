@@ -347,7 +347,9 @@ def quet(ma: str, khung: str = "M5", atr_tf: str = "H1", phien: str = "ALL",
     song = [r for r in du if r.get("lai_tong", 0) > 0
             and r.get("g3", {}).get("tach_khoi_moi_ban")
             and r.get("g4", {}).get("on_dinh")
-            and r.get("bat_bien", {}).get("dung_duoc")]
+            and r.get("bat_bien", {}).get("dung_duoc")
+            # phai DUONG o ban THAN TRONG, khong phai o ban dep hon trong hai ban
+            and r.get("bat_bien", {}).get("lai_than_trong", -1) > 0]
     ra = {
         "ma": ma, "khung": khung, "atr_tf": atr_tf, "phien": phien,
         "post_hoc": post_hoc,

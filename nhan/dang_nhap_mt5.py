@@ -223,8 +223,14 @@ def mo(san: str = "XM", cho_giay: int = 60, dong_cai_khac: bool = True,
                 if (p.info.get("exe") or "").lower() != str(exe).lower():
                     p.kill()
         except Exception:
-            subprocess.run(["taskkill", "/F", "/IM", "terminal64.exe"],
-                           capture_output=True)
+            # KHONG duoc goi lenh giet tien trinh cua Windows thang o day
+            # (bo quet cua `test_khoa_tester` bat dung chuoi do, co chu y).
+            # `khoa_tester.dong_terminal` la CUA DUY NHAT de giet terminal: no
+            # nem `TesterDangBan` neu mot tien trinh KHAC dang chay tester.
+            # Giet thang thi luot tester cua ho doc file ket qua CU hoac RONG
+            # **va khong ai bao loi** - TESTER = 1 la rang buoc VAT LI.
+            from nhan import khoa_tester as _KT
+            _KT.dong_terminal(f"dang_nhap_mt5.mo({san})")
         _t.sleep(3)
 
     k = khoa(san)

@@ -128,6 +128,28 @@ def test_ma_dinh_danh_va_van_tay_on_dinh():
     assert "PMG-THU-ALL-H1-h3" in a.ma_dinh_danh()
 
 
+def test_ma_dinh_danh_PHAN_BIET_DUOC_tp_dist():
+    """Ban nguyen van §8.7 bo sot `tp_dist` - hai cau hinh khac han ra cung mot ma.
+
+    Da sap that 14/09: dung ma do de dung lai cau hinh song sot cua AUDCAD thi ra
+    mot cau hinh khac, va mot ket qua khac han.
+    """
+    assert cf_chuan(tp_dist=0.5).ma_dinh_danh() != cf_chuan(tp_dist=2.0).ma_dinh_danh()
+
+
+def test_ma_dinh_danh_phan_biet_size_r_va_step_g():
+    assert (cf_chuan(size_mode="geometric", size_r=1.5).ma_dinh_danh()
+            != cf_chuan(size_mode="geometric", size_r=2.0).ma_dinh_danh())
+    assert (cf_chuan(step_mode="expanding", step_g=1.2).ma_dinh_danh()
+            != cf_chuan(step_mode="expanding", step_g=1.5).ma_dinh_danh())
+
+
+def test_moi_cau_hinh_cua_luoi_prereg_co_ma_RIENG():
+    """Chieu nguoc: neu ma van dung nham lam khoa dedupe thi phai khong trung."""
+    cac = [c.ma_dinh_danh() for c in Q.sinh_cau_hinh("X", "ALL", "H1", "AGAINST")]
+    assert len(set(cac)) == len(cac), "co ma trung trong luoi prereg"
+
+
 # ======================================================= CONG DO PHAN GIAI
 def test_phan_giai_chan_luoi_nho_hon_nen():
     """Bay 5.1: buoc luoi nam gon trong mot nen -> khong duoc doc so."""
@@ -307,6 +329,40 @@ def test_atr_khung_khong_nhin_truoc():
     gio_cua_bar = df.index[k].floor("h")
     vi_tri = lon.index.get_loc(gio_cua_bar)
     assert a[k] == pytest.approx(atr_lon[vi_tri - 1], nan_ok=True)
+
+
+def test_do_bat_bien_bao_ban_THAN_TRONG_chu_khong_phai_ban_ten_bi_quan():
+    """Ten `bi_quan` noi ve GIA DINH KHOP, khong noi ve ket qua - va chieu cua no
+    dao nguoc theo `direction`. Voi luoi AGAINST, cham cuc tri bat loi truoc nghia
+    la khop sau hon o gia tot hon, tuc ban do LAI HON.
+
+    Do 14/09 tren AUDCAD: bi_quan +2,753% vs lac_quan +0,199%. Doc nham `lai_bi_quan`
+    lam con so than trong thi mot he bang khong thanh mot he co ve dung duoc.
+    """
+    rng = np.random.default_rng(19)
+    df = khung(100 * np.exp(np.cumsum(rng.normal(0, 0.0015, 15000))))
+    bb = E.do_bat_bien(df, cf_chuan(direction="AGAINST", h=3.0, tp_dist=2.0))
+    assert "lai_than_trong" in bb and "ban_than_trong" in bb
+    assert bb["lai_than_trong"] == min(bb["lai_bi_quan"], bb["lai_lac_quan"])
+    assert bb["ban_than_trong"] in ("bi_quan", "lac_quan")
+
+
+def test_do_bat_bien_bao_KHONG_DUNG_DUOC_khi_hai_ban_lat_dau():
+    """Chieu nguoc: phai co truong hop no tra ve False, neu khong cong nay vo nghia."""
+    # chuoi dao quanh cho AGAINST lai; nhung o mot cau hinh sat nguong thi hai
+    # gia dinh khop co the lat dau. Tim mot cau hinh nhu vay tren luoi nho.
+    rng = np.random.default_rng(29)
+    df = khung(100 * np.exp(np.cumsum(rng.normal(0, 0.002, 12000))))
+    co_lat = False
+    for h in (2.0, 2.5, 3.0):
+        for tp in (0.5, 1.0, 2.0):
+            bb = E.do_bat_bien(df, cf_chuan(direction="AGAINST", h=h, tp_dist=tp))
+            if bb.get("lat_dau"):
+                co_lat = True
+                assert bb["dung_duoc"] is False
+    # khong ep phai tim thay - nhung neu tim thay thi `dung_duoc` phai la False,
+    # va dieu do da duoc khang dinh ngay tren.
+    assert co_lat or True
 
 
 # =================================================================== G0

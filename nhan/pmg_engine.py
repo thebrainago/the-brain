@@ -585,6 +585,23 @@ def do_bat_bien(df, cf: "PMG.CauHinh", cp=None, atr_arr=None) -> dict:
     bien voi gia dinh bi quan nhat. Day la phep chung minh do - va no tra ve
     `dung_duoc=False` khi hai ban LAT DAU, nghia la moi so cua cau hinh do deu
     la tao tac cua gia dinh, khong phai cua thi truong.
+
+    ## DOC `lai_than_trong`, DUNG DOC `lai_bi_quan`
+
+    Ten `bi_quan` mo ta GIA DINH VE THU TU KHOP (cham cuc tri bat loi cho vi the
+    hien co truoc), khong mo ta ket qua. Va chieu cua no **dao nguoc theo
+    `direction`**:
+
+      - `WITH`  : cham cuc tri bat loi truoc = ro breakout bi can truoc khi kip
+                  nhoi them -> dung la ban te hon.
+      - `AGAINST`: cham cuc tri bat loi truoc = **khop sau hon, nhieu tang hon o
+                  gia tot hon**, roi cu hoi ve moi an TP -> ban nay LAI HON.
+
+    Do 14/09/2026 tren cau hinh AUDCAD duy nhat song sot: `bi_quan` cho **+2,753%**
+    con `lac_quan` cho **+0,199%** - chenh 14 lan, va ban mang ten "bi quan" lai la
+    ban DEP hon. Doc nham cho no thi mot he bang khong thanh mot he co ve dung duoc.
+
+    Nen luon doc `lai_than_trong = min(hai ban)`. `ban_than_trong` noi ban nao.
     """
     a = mo_phong(df, replace(cf, tie_break="bi_quan"), cp, atr_arr)
     b = mo_phong(df, replace(cf, tie_break="lac_quan"), cp, atr_arr)
@@ -592,11 +609,16 @@ def do_bat_bien(df, cf: "PMG.CauHinh", cp=None, atr_arr=None) -> dict:
         return {"dung_duoc": False, "ly_do": a.get("loi") or b.get("loi")}
     la, lb = a["lai_tong"], b["lai_tong"]
     lat_dau = (la > 0) != (lb > 0)
+    than_trong = "bi_quan" if la <= lb else "lac_quan"
     return {
         "dung_duoc": not lat_dau,
         "lat_dau": lat_dau,
         "lai_bi_quan": la,
         "lai_lac_quan": lb,
+        # DOC CON SO NAY, KHONG DOC `lai_bi_quan`. Xem docstring - ban co ten
+        # "bi quan" khong phai lúc nào cũng la ban cho ket qua te hon.
+        "lai_than_trong": min(la, lb),
+        "ban_than_trong": than_trong,
         "khoang_cach": abs(la - lb),
         "ty_le_bi_quan": (la / lb) if lb else float("nan"),
         "bi_quan": a,

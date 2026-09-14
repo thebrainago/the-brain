@@ -1,12 +1,12 @@
 # SEEKER V2 - funnel thu thap va truy nguyen
-*2026-09-14 19:19:46*
+*2026-09-14 19:59:34*
 
 ## 1. Thu vien THAT SU co gi
 
 | Kieu ban doc | So ban | Ky tu | ~trang A4 |
 |---|---|---|---|
 | ma_nguon | 1308 | 27,615,647 | 6904 |
-| bai_bao | 1186 | 23,349,524 | 5837 |
+| bai_bao | 1216 | 23,471,386 | 5868 |
 | bai_bao_go_html | 2376 | 17,322,634 | 4331 |
 | khac | 912 | 7,113,930 | 1778 |
 | dien_dan | 214 | 2,291,242 | 573 |
@@ -20,10 +20,10 @@
 | uu_tien | 5 | 16,226 | 4 |
 | khong_doc_duoc | 231 | 0 | 0 |
 | hong | 406 | 0 | 0 |
-| **TONG** | **7937** | **81,692,657** | **20423** |
+| **TONG** | **7967** | **81,814,519** | **20454** |
 
-- Muc luc: 11818 tai lieu ({"A": 843, "B": 7185, "C": 3422, "pdf": 16, "telegram": 352})
-- DocumentArtifact bat bien: **8057**
+- Muc luc: 11848 tai lieu ({"A": 844, "B": 7187, "C": 3449, "pdf": 16, "telegram": 352})
+- DocumentArtifact bat bien: **8087**
 - Con cho DOC: **1682** | con cho artifact backfill: **0**
 
 > Truoc 16/08 cot 'ky tu' nay la **0**: he chi luu tieu de va tom tat (456 ban ghi = 51 trang A4), va mot repo 22.851 sao nam trong so voi dung 49 ky tu mo ta.
@@ -33,9 +33,9 @@
 - Tai lieu moi: 0
 - Ban doc keo ve: 0 (0 ky tu), that bai 30
 - Artifact tu DOC: moi 0, da co 0, loi 0
-- Backfill: xem 7, moi 7, da co 0, bo qua 0
+- Backfill: xem 15, moi 15, da co 0, bo qua 0
 
 ## 3. Bien gioi V2
 - SEEKER khong goi LLM/BOC, khong sinh co che va khong xep backtest.
 - Dau ra cua SEEKER la artifact da chuan hoa, co fingerprint va provenance.
-- Candidate dang cho Quantlab: **654** (do tang phan tich tao, khong phai SEEKER).
+- Candidate dang cho Quantlab: **678** (do tang phan tich tao, khong phai SEEKER).

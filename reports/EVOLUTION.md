@@ -1,24 +1,24 @@
 # EVOLUTION - SUC KHOE DAY CHUYEN
-*2026-09-14 19:24:50*
+*2026-09-14 20:10:16*
 
 > Do bang SUC KHOE, khong do bang so PASS. Mot he lanh manh hieu chuan tot ke ca khi tim duoc it edge.
 
 ## 1. Bon tru
 | Tru | Lan cuoi | Tre | Trang thai |
 |---|---|---|---|
-| SEEKER | 2026-09-14 19:19:45 | 5 phut | nghi |
-| QUANTLAB | 2026-09-14 19:23:31 | 1 phut | chay |
-| NGHI | 2026-09-14 19:01:29 | 23 phut | nghi |
-| BANKER | 2026-09-14 18:55:36 | 29 phut | nghi |
-| EVO | 2026-09-14 19:24:50 | 0 phut | chay |
+| SEEKER | 2026-09-14 19:59:34 | 10 phut | nghi |
+| QUANTLAB | 2026-09-14 20:10:10 | 0 phut | chay |
+| NGHI | 2026-09-14 19:01:29 | 68 phut | nghi |
+| BANKER | 2026-09-14 19:55:40 | 14 phut | nghi |
+| EVO | 2026-09-14 20:10:16 | 0 phut | chay |
 
 ## 2. San luong
-- Tai lieu da thu: **11818**
+- Tai lieu da thu: **11848**
 - Gia thuyet: {"CO_CO_CHE": 1, "FAIL": 376, "PASS": 3, "QUARANTINED_V2": 7}
 - Gia thuyet co ket qua cuoi: **380** (chua 904 dong lich su da supersede, invalidated hoac quarantine)
-- Viec: cho 49 / treo 1 / loi 0
+- Viec: cho 31 / treo 0 / loi 0
 - Ty le vong lap rong cua SEEKER: **86%**
-- Nang suat doc cua SEEKER: **0.16 gia thuyet/100 bai** (4 gia thuyet truy nguyen ve URL tai lieu, tren 2442 bai da boc; 654 ung vien tu 8057 artifact tai lieu). Noi sinh khong tinh vao day: 383 gia thuyet.
+- Nang suat doc cua SEEKER: **0.16 gia thuyet/100 bai** (4 gia thuyet truy nguyen ve URL tai lieu, tren 2442 bai da boc; 678 ung vien tu 8087 artifact tai lieu). Noi sinh khong tinh vao day: 383 gia thuyet.
 - Thanh phan thu hoi duoc tu ban doc: **285** (186 viet ra duoc bang ngu phap hien tai). Day la phan giu lai tu nhung he KHONG qua cong.
 - Do sau quet (con tro bien gioi): etoro 0 trang/vong 0, mql5_code 6 trang/vong 0, tradingview_scripts 0 trang/vong 0
 
@@ -42,10 +42,10 @@
   - 131 truong hop trung suat nam TRON trong cac epoch da chet (15-16/08, truoc khi lord_v2 chong trung)
 
 ## 4. Tai nguyen + toan ven
-- **Thoi gian song 7 ngay: 100.0%** (mat 165.7 gio qua 2 lan gian doan - may ngu hoac tat, khong phai tru chet)
+- **Thoi gian song 7 ngay: 100.0%** (mat 164.9 gio qua 2 lan gian doan - may ngu hoac tat, khong phai tru chet)
 - Supervisor restart 24h: **0 lan** (do duoc, khong lan nao)
 - Dia trong: **28.0 GB** - MT5 tick-test: **GO**
-- So cai: LANH (18566 dong lien mach)
+- So cai: LANH (18569 dong lien mach)
 
 ## 5. Nguon
 | Nguon | Lan goi | Loi | Thu hoach | Trang thai |
@@ -100,30 +100,30 @@
 | rss_mebfaber | 1 | 0 | 8 | BAT |
 | rss_morguelabs | 1 | 0 | 5 | BAT |
 | rss_mql5_articles | 7 | 0 | 16 | BAT |
-| rss_mrzepczynski | 6 | 0 | 26 | BAT |
+| rss_mrzepczynski | 7 | 0 | 38 | BAT |
 | rss_newtraderu | 6 | 0 | 24 | BAT |
 | rss_outcastbeta | 1 | 0 | 10 | BAT |
 | rss_oxford_capital | 1 | 0 | 10 | BAT |
 | rss_papertoprofit | 1 | 0 | 12 | BAT |
 | rss_philosophicaleconomics | 1 | 0 | 10 | BAT |
-| rss_priceactionlab | 6 | 0 | 19 | BAT |
-| rss_qoppac | 6 | 0 | 15 | BAT |
+| rss_priceactionlab | 7 | 0 | 21 | BAT |
+| rss_qoppac | 7 | 0 | 16 | BAT |
 | rss_quant_galore | 1 | 0 | 12 | BAT |
 | rss_quantdare | 6 | 0 | 12 | BAT |
 | rss_quantfiction | 1 | 0 | 9 | BAT |
 | rss_quantforhire | 1 | 0 | 10 | BAT |
 | rss_quantifiableedges | 1 | 0 | 10 | BAT |
-| rss_quantinsti | 6 | 0 | 16 | BAT |
+| rss_quantinsti | 7 | 0 | 16 | BAT |
 | rss_quantish | 1 | 0 | 4 | BAT |
 | rss_quantitativo | 6 | 0 | 15 | BAT |
 | rss_quantjourney | 1 | 0 | 9 | BAT |
-| rss_quantpedia_blog | 5 | 1 | 11 | BAT |
+| rss_quantpedia_blog | 6 | 1 | 11 | BAT |
 | rss_quantumtrading | 6 | 0 | 10 | BAT |
-| rss_reddit_algotrading | 6 | 0 | 25 | BAT |
+| rss_reddit_algotrading | 7 | 0 | 31 | BAT |
 | rss_reddit_algotrading_nam | 6 | 0 | 12 | BAT |
-| rss_reddit_quant | 1 | 0 | 0 | BAT |
+| rss_reddit_quant | 2 | 0 | 9 | BAT |
 | rss_returnstacked | 1 | 0 | 10 | BAT |
-| rss_robotwealth | 6 | 0 | 12 | BAT |
+| rss_robotwealth | 7 | 0 | 12 | BAT |
 | rss_rulyfi | 1 | 0 | 5 | BAT |
 | rss_sixfigureinvesting | 1 | 0 | 10 | BAT |
 | rss_thinknewfound | 6 | 0 | 10 | BAT |
@@ -143,7 +143,7 @@
 | youtube | 5 | 0 | 176 | BAT |
 | zulutrade | 3 | 0 | 31 | BAT |
 
-## 6. Van de dang mo (22)
+## 6. Van de dang mo (21)
 > Mot PHAT HIEN = mot dong. Dien dat khac di khong de ra dong moi; no cong vao `x<n> lan`. Xem `CHU_DE_VAN_DE` trong tru/evolution.py.
 - **[NANG]** `llm_6a6818d9c6` - [LLM chan doan] Null factory lot ty le cao (50%)
 - **[NANG]** `quet_nong` - 88% lan chay SEEKER khong thu duoc gi moi, NHUNG chua nguon nao di het mot vong bien gioi - day la DO SAU QUET, khong phai chu ky qua day
@@ -152,7 +152,6 @@
 - **[NANG]** `null_lot_qua_nhieu` - Null factory: 5/10 ca KHONG CO EDGE van lot qua cong (50% so voi muc tieu 10%) - cong dang san xuat phat hien sai, phai siet truoc khi tin bat ky PASS nao
 - **[VUA]** `tru_loi_NGHI` - Tru NGHI khong lanh manh (lan 1 lien tiep)
 - **[VUA]** `llm_d6a2c4a6e3` - [LLM chan doan] Thieu moc hieu chuan that de kiem dinh cong
-- **[VUA]** `tru_loi_EVO` - Tru EVO khong lanh manh (lan 1 lien tiep)
 - **[VUA]** `llm_5cf5cc4505` **x2 lan** (gan nhat 2026-09-14 18:54:43) - [LLM chan doan] Lỗi xử lý LLM/EVO tích lũy làm nghẽn pipeline
 - **[VUA]** `llm_953b89aae3` - [LLM chan doan] Vòng lặp SEEKER chạy trống chiếm 90% chu kỳ
 - **[VUA]** `nang_suat_doc_thap` - Nang suat doc = 0.27 gia thuyet/100 bai (4 truy nguyen ve URL tren 1479 bai da boc; 567 ung vien tu 3278 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.
@@ -160,6 +159,7 @@
 - **[VUA]** `evo_xay_viec_hong` - EVO: viec loi / qua han
 - **[VUA]** `evo_evo_van_de_mo` - EVO: van de con mo
 - **[VUA]** `tai_lai_pdf_telegram` - 11 ban PDF tu Telegram trong so chi co 992-1.530 ky tu lop chu (slide xuat thanh ANH). File goc da mat khoi data/telegram. Can tai lai roi chay nhan/doc_pdf.quet_thu_muc - duong OCR da kiem chay thong 12/09 (trung khop tu 78,8%).
+- **[VUA]** `cong_chua_co_moc_he_that` - Sau khi V6 bi loai lam moc hieu chuan (12/09), cong van CHUA co phep hieu chuan bang mot he THAT. Hai phep dang co (null_ty_le_lot, thu_luc_cong) deu dung tin hieu NHAN TAO. Can chon mot he that khac lam moc - ung vien: he da chay tien that cua chu du an.
 
 ## 6b. Kho ma dang cho NGUOI doc de doi chieu (4)
 > Doc de DOI CHIEU voi cong, khong bao gio de THAY cong.
@@ -171,9 +171,7 @@
 | https://github.com/quantopian/zipline | `nhan/chi_phi.py, nhan/mo_phong.py` | mo hinh truot gia + phi giao dich cua mot engine 20.041 sao; mo hinh chi phi cua ta tu viet va la thu quyet dinh ca du an |
 
 ## 7. EVO da tu sua trong luot nay
-- don_viec_treo: 1 viec CHAY mo coi -> LOI (khong bao gio thanh XONG)
-- xep_lai_viec_loi: 1 viec duoc thu lai
-- dong_van_de_da_het: tru_dung_im_BANKER, tru_dung_im_NGHI
+- Khong co gi can sua.
 
 > EVO chi tu sua nhung viec da khai bao truoc: `don_viec_treo`, `don_cache_khung`, `xep_lai_viec_loi`, `gian_nguon_chet`, `dong_van_de_da_het`, `gop_van_de_trung_lap`, `xep_hang_doc_cong_cu`. Ngoai danh sach do thi chi ghi van de va cho nguoi - khong tu sua code.
 

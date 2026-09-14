@@ -4,3 +4,8 @@
   me  3/12  170 passed, 9 subtests passed in 36.58s
   me  4/12  214 passed, 1 skipped, 65 subtests passed in 38.38s
   me  5/12  196 passed, 43 subtests passed in 40.76s
+  me  6/12  1 failed, 156 passed in 457.65s (0:07:37)
+        DO  test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test
+  me  7/12  1 failed, 142 passed, 12 subtests passed in 105.62s (0:01:45)
+        DO  test_khoa_tester.py::CuaGIETCungPhaiCoKhoa::test_khong_con_file_nao_taskkill_thang
+  me  8/12  133 passed, 23 subtests passed in 1133.16s (0:18:53)

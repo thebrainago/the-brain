@@ -1,33 +1,33 @@
 {
  "van_hanh": {
-  "luc": "2026-09-14 19:24:50",
+  "luc": "2026-09-14 20:10:16",
   "tru": {
    "SEEKER": {
-    "lan_cuoi": "2026-09-14 19:19:45",
-    "tre_giay": 305,
+    "lan_cuoi": "2026-09-14 19:59:34",
+    "tre_giay": 642,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "QUANTLAB": {
-    "lan_cuoi": "2026-09-14 19:23:31",
-    "tre_giay": 79,
+    "lan_cuoi": "2026-09-14 20:10:10",
+    "tre_giay": 6,
     "trang_thai": "chay",
     "dung_im": false
    },
    "NGHI": {
     "lan_cuoi": "2026-09-14 19:01:29",
-    "tre_giay": 1401,
+    "tre_giay": 4127,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "BANKER": {
-    "lan_cuoi": "2026-09-14 18:55:36",
-    "tre_giay": 1754,
+    "lan_cuoi": "2026-09-14 19:55:40",
+    "tre_giay": 876,
     "trang_thai": "nghi",
     "dung_im": false
    },
    "EVO": {
-    "lan_cuoi": "2026-09-14 19:24:50",
+    "lan_cuoi": "2026-09-14 20:10:16",
     "tre_giay": 0,
     "trang_thai": "chay",
     "dung_im": false
@@ -42,28 +42,27 @@
     "gb": 0.0,
     "so_tien_trinh": 0
    },
-   "ram_dung_pct": 27.3,
-   "ram_trong_gb": 24.9,
-   "cpu_pct": 27.0
+   "ram_dung_pct": 21.1,
+   "ram_trong_gb": 27.0,
+   "cpu_pct": 16.2
   },
   "viec": {
    "QUANTLAB": {
-    "CHAY": 1,
-    "CHO": 49,
-    "XONG": 1906
+    "CHO": 31,
+    "XONG": 1937
    }
   },
-  "viec_treo": 1,
+  "viec_treo": 0,
   "viec_loi": 0,
-  "viec_cho": 49,
+  "viec_cho": 31,
   "seeker_ty_le_vong_rong": 0.86,
-  "gian_doan_7ngay_gio": 165.7,
+  "gian_doan_7ngay_gio": 164.9,
   "gian_doan_lan": 2,
-  "may_tat_7ngay_gio": 165.7,
+  "may_tat_7ngay_gio": 164.9,
   "he_chet_7ngay_gio": 0,
   "chua_ro_7ngay_gio": 0,
   "he_chet_lan": 0,
-  "gio_do_duoc_7ngay": 2.3,
+  "gio_do_duoc_7ngay": 3.1,
   "ty_le_song_7ngay": 1.0,
   "watchdog": {
    "so_lan": 0,
@@ -76,7 +75,7 @@
   "mt5_tick_test": "GO",
   "so_toan_ven": {
    "lanh": true,
-   "mo_ta": "18566 dong lien mach"
+   "mo_ta": "18569 dong lien mach"
   },
   "nguon": {
    "arxiv": {
@@ -260,49 +259,49 @@
     "trang_thai": "BAT"
    },
    "rss_mrzepczynski": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 26,
+    "thu_hoach": 38,
     "trang_thai": "BAT"
    },
    "rss_priceactionlab": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 19,
+    "thu_hoach": 21,
     "trang_thai": "BAT"
    },
    "rss_qoppac": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 15,
+    "thu_hoach": 16,
     "trang_thai": "BAT"
    },
    "rss_quantinsti": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
     "thu_hoach": 16,
     "trang_thai": "BAT"
    },
    "rss_quantpedia_blog": {
-    "lan": 5,
+    "lan": 6,
     "loi": 1,
     "thu_hoach": 11,
     "trang_thai": "BAT"
    },
    "rss_reddit_algotrading": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
-    "thu_hoach": 25,
+    "thu_hoach": 31,
     "trang_thai": "BAT"
    },
    "rss_reddit_quant": {
-    "lan": 1,
+    "lan": 2,
     "loi": 0,
-    "thu_hoach": 0,
+    "thu_hoach": 9,
     "trang_thai": "BAT"
    },
    "rss_robotwealth": {
-    "lan": 6,
+    "lan": 7,
     "loi": 0,
     "thu_hoach": 12,
     "trang_thai": "BAT"
@@ -632,10 +631,10 @@
     "trang_thai": "BAT"
    }
   },
-  "tai_lieu": 11818,
+  "tai_lieu": 11848,
   "seeker_da_boc": 2442,
-  "seeker_tai_lieu_artifact": 8057,
-  "seeker_ung_vien": 654,
+  "seeker_tai_lieu_artifact": 8087,
+  "seeker_ung_vien": 678,
   "seeker_gia_thuyet_tu_tai_lieu": 4,
   "seeker_nang_suat_100": 0.16,
   "nghi_co_che_noi_sinh": 383,
@@ -1175,7 +1174,7 @@
   {
    "ma": "nang_suat_doc_thap",
    "muc": "VUA",
-   "mo_ta": "Nang suat doc = 0.16 gia thuyet/100 bai (4 truy nguyen ve URL tren 2442 bai da boc; 654 ung vien tu 8057 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
+   "mo_ta": "Nang suat doc = 0.16 gia thuyet/100 bai (4 truy nguyen ve URL tren 2442 bai da boc; 678 ung vien tu 8087 artifact tai lieu). Day la thuoc do cua SEEKER, KHONG phai so tai lieu.",
    "bc": {
     "theo_nguon": {
      "arxiv": {
@@ -1491,11 +1490,7 @@
    }
   }
  ],
- "da_sua": [
-  "don_viec_treo: 1 viec CHAY mo coi -> LOI (khong bao gio thanh XONG)",
-  "xep_lai_viec_loi: 1 viec duoc thu lai",
-  "dong_van_de_da_het: tru_dung_im_BANKER, tru_dung_im_NGHI"
- ],
+ "da_sua": [],
  "san_cong_cu": {},
  "bai_hoc": {
   "tong": 238,

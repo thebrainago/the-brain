@@ -4,14 +4,14 @@
  "pid": 11532,
  "process_created_epoch": 1789386726.3797207,
  "started_epoch": 1789386726.7300165,
- "updated_epoch": 1789389481.1829753,
- "updated_at": "2026-09-14 19:38:01",
+ "updated_epoch": 1789391719.4146576,
+ "updated_at": "2026-09-14 20:15:19",
  "status": "running",
  "live": true,
  "ready": true,
  "health": "unhealthy",
  "cpu": {
-  "current_percent": 22.2,
+  "current_percent": 33.9,
   "hard_limit_percent": 85.0,
   "launch_limit_percent": 80.0,
   "guard": "windows_job",
@@ -20,10 +20,15 @@
  "workers": {
   "max": 3,
   "running": {
+   "QUANTLAB": {
+    "lane": "compute",
+    "started_epoch": 1789391407.9078796,
+    "elapsed_seconds": 311.5
+   },
    "SEEKER": {
     "lane": "external",
-    "started_epoch": 1789389288.1875584,
-    "elapsed_seconds": 193.0
+    "started_epoch": 1789391675.1905203,
+    "elapsed_seconds": 44.2
    }
   },
   "pending": []
@@ -33,27 +38,27 @@
   "EVO": {
    "status": "ok",
    "rc": 0,
-   "giay": 9.7,
+   "giay": 7.9,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-14 19:24:56",
+    "luc": "2026-09-14 20:10:21",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nang_suat_doc_thap\",\n  \"null_lot_qua_nhieu\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [\n  \"don_viec_treo: 1 viec CHAY mo coi -> LOI (khong bao gio thanh XONG)\",\n  \"xep_lai_viec_loi: 1 viec duoc thu lai\",\n  \"dong_van_de_da_het: tru_dung_im_BANKER, tru_dung_im_NGHI\"\n ],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 22,\n \"tru_dung_im\": [],\n \"dia_gb\": 28.0,\n \"tai_lieu\": 11818,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
+   "stdout_tail": "{\n \"van_de_moi\": [\n  \"quet_nong\",\n  \"ngu_phap_thieu_toan_hang\",\n  \"nang_suat_doc_thap\",\n  \"null_lot_qua_nhieu\",\n  \"nguon_khong_thu_hoach\"\n ],\n \"da_sua\": [],\n \"san_cong_cu\": {},\n \"van_de_dang_mo\": 21,\n \"tru_dung_im\": [],\n \"dia_gb\": 28.0,\n \"tai_lieu\": 11848,\n \"phan_tich_sau\": {\n  \"bo_qua\": \"chua den ky (6 gio)\"\n }\n}",
    "stderr_tail": ""
   },
   "BANKER": {
    "status": "ok",
    "rc": 0,
-   "giay": 50.4,
+   "giay": 0.6,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-14 18:55:36",
+    "luc": "2026-09-14 19:55:40",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
@@ -63,16 +68,16 @@
   "SEEKER": {
    "status": "ok",
    "rc": 0,
-   "giay": 282.4,
+   "giay": 313.0,
    "fatal": [],
    "degraded": [],
    "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-14 19:19:45",
+    "luc": "2026-09-14 19:59:34",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "    },\n    {\n     \"quantfiction\": \"9/40 bai\"\n    },\n    {\n     \"quantforhire\": \"10/40 bai\"\n    },\n    {\n     \"quant_galore\": \"12/40 bai\"\n    },\n    {\n     \"quantjourney\": \"9/40 bai\"\n    },\n    {\n     \"quantifiableedges\": \"10/40 bai\"\n    },\n    {\n     \"quantish\": \"4/40 bai\"\n    },\n    {\n     \"returnstacked\": \"10/40 bai\"\n    },\n    {\n     \"rulyfi\": \"5/40 bai\"\n    },\n    {\n     \"sixfigureinvesting\": \"10/40 bai\"\n    }\n   ]\n  },\n  \"tim\": {\n   \"da_thu\": 2,\n   \"them\": [],\n   \"khong_dat\": [\n    {\n     \"",
+   "stdout_tail": " {\n     \"philosophicaleconomics\": \"10/40 bai\"\n    },\n    {\n     \"quantfiction\": \"9/40 bai\"\n    },\n    {\n     \"quantforhire\": \"10/40 bai\"\n    },\n    {\n     \"quant_galore\": \"12/40 bai\"\n    },\n    {\n     \"quantjourney\": \"9/40 bai\"\n    },\n    {\n     \"quantifiableedges\": \"10/40 bai\"\n    },\n    {\n     \"quantish\": \"4/40 bai\"\n    },\n    {\n     \"returnstacked\": \"10/40 bai\"\n    },\n    {\n     \"rulyfi\": \"5/40 bai\"\n    },\n    {\n     \"sixfigureinvesting\": \"10/40 bai\"\n    }\n   ]\n  },\n  \"tim\": {\n   \"da_thu\": 2,",
    "stderr_tail": ""
   },
   "NGHI": {
@@ -95,18 +100,18 @@
    "stderr_tail": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                     indent=1, default=str)[:6000])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\SV STORE\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\u1ea5' in position 491: character maps to <undefined>"
   },
   "QUANTLAB": {
-   "status": "skipped",
+   "status": "ok",
    "rc": 0,
-   "giay": 801.8,
+   "giay": 817.9,
    "fatal": [],
    "degraded": [],
-   "skip_reason": "nhom hop khong duong (trung vi Sharpe -0.106)",
+   "skip_reason": "",
    "nhip": {
-    "luc": "2026-09-14 19:36:49",
+    "luc": "2026-09-14 20:08:05",
     "trang_thai": "nghi"
    },
    "resource_guard": "job",
-   "stdout_tail": "  \"sharpe\": -0.141,\n       \"tong_lai_pct\": -12.22\n      },\n      {\n       \"tai_san\": \"XM_SILVER\",\n       \"loai\": \"vang\",\n       \"so_lenh\": 410,\n       \"sharpe\": -0.445,\n       \"tong_lai_pct\": -73.2\n      },\n      {\n       \"tai_san\": \"XM_US2000CASH\",\n       \"loai\": \"chi_so_my\",\n       \"so_lenh\": 186,\n       \"sharpe\": -0.445,\n       \"tong_lai_pct\": -28.85\n      },\n      {\n       \"tai_san\": \"XM_US500CASH\",\n       \"loai\": \"chi_so_my\",\n       \"so_lenh\": 292,\n       \"sharpe\": -0.616,\n       \"tong_lai_",
+   "stdout_tail": "a 0.145 < MDE 0.839 cua EURGBP D1 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"tai_san\": \"AUDCAD\",\n     \"khung\": \"H4\",\n     \"ly_do\": \"Sharpe kham pha 0.241 < MDE 1.345 cua AUDCAD H4 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"tai_san\": \"YH_NIKKEI\",\n     \"khung\": \"D1\",\n     \"ly_do\": \"Sharpe kham pha -0.154 < MDE 0.676 cua YH_NIKKEI D1 - confirmation se FAIL du dung hay sai\"\n    },\n    {\n     \"tai_san\": \"YH_CAC40\",\n     \"khung\": \"D1\",\n     \"ly_do\": \"Sharpe kham pha -0.",
    "stderr_tail": ""
   }
  }

@@ -1,2 +1,38 @@
   LOAI_O_G0: khong h nao qua FDR o o nay
-  AUDCAD M5 ATR(H1) ALL: 8/8 muc h qua G0; G1 giu 120 / bo 0 / luoi prereg 120 o
+  AUDCAD M5 ATR(H1) ALL: 8/8 muc h qua G
+PMG QUET — AUDCAD M5 ATR(H1) phien ALL
+PMG QUET — AUDCAD M5 ATR(H1) phien ALL
+  luoi prereg `prereg_v1_2026_09_14` 120 o · chay 120 · bo o G1 0 · do duoc 64 · SONG 1
+  chi phi: spread 1.902 bps, do_tin=SAN · bo dem phep thu tich luy 384
+
+     lai %    dd %     ro   lenh  don bay  swap/lai            tt  cau hinh
+     22.16   13.66  16062  44844      1.0      0.26  CHUA_DO_DUOC  PMG-AUDCAD-ALL-H1-h0.5-AGAINST-fixed-geometric-tpavg_plus-stdd0.
+     14.21    8.85  11725  26375      1.0      0.27            DU  PMG-AUDCAD-ALL-H1-h0.8-AGAINST-fixed-linear-tpavg_plus-stdd0.03.
+     13.47   16.16  14871  41676      1.0      0.60  CHUA_DO_DUOC  PMG-AUDCAD-ALL-H1-h0.5-AGAINST-fixed-linear-tpavg_plus-stdd0.03.
+      7.40    6.53  12571  28040      1.0      0.26            DU  PMG-AUDCAD-ALL-H1-h0.8-AGAINST-fixed-geometric-tpavg_plus-stdd0.
+      5.58    6.06  15285  49153      1.0      0.49  CHUA_DO_DUOC  PMG-AUDCAD-ALL-H1-h0.5-AGAINST-fixed-linear-tpavg_plus-stdd0.03.
+      3.14    7.27   6546  18938      1.0      0.78            DU  PMG-AUDCAD-ALL-H1-h0.8-AGAINST-fixed-geometric-tpavg_plus-stdd0.
+      2.75    2.45  11733  26952      0.7      0.38            DU  PMG-AUDCAD-ALL-H1-h0.8-AGAINST-fixed-linear-tpavg_plus-stdd0.03.
+      0.00    0.18  12375  28077      0.2     22.92            DU  PMG-AUDCAD-ALL-H1-h0.8-AGAINST-fixed-geometric-tpavg_plus-stdd0.
+     -0.01    0.02   3854   5817      0.0      0.68            DU  PMG-AUDCAD-ALL-H1-h2-AGAINST-fixed-geometric-tpavg_plus-stdd0.03
+     -0.01    0.01   2735   3128      0.0      0.10            DU  PMG-AUDCAD-ALL-H1-h3-AGAINST-fixed-geometric-tpavg_plus-stdd0.03
+  XAUUSDM M5 ATR(H1) ALL: 7/8 muc h qua G0; G1 giu 64 / bo 32 / luoi prereg 120 o
+
+PMG QUET — XAUUSDM M5 ATR(H1) phien ALL
+  luoi prereg `prereg_v1_2026_09_14` 120 o · chay 64 · bo o G1 32 · do duoc 64 · SONG 0
+  chi phi: spread 10.983 bps, do_tin=SAN · bo dem phep thu tich luy 384
+  G1 bo vi: {'vo nghiem': 32}
+
+     lai %    dd %     ro   lenh  don bay  swap/lai            tt  cau hinh
+     -0.23    0.24   3350   4761      0.0      0.01            DU  PMG-XAUUSDM-ALL-H1-h2-AGAINST-fixed-geometric-tpavg_plus-stdd0.0
+     -0.25    0.25   2799   4468      0.0      0.02            DU  PMG-XAUUSDM-ALL-H1-h2-AGAINST-fixed-geometric-tpavg_plus-stdd0.0
+     -0.66    0.67    830   2629      0.1      0.02            DU  PMG-XAUUSDM-ALL-H1-h0.8-AGAINST-fixed-geometric-tpavg_plus-stdd0
+     -0.91    0.92   6163  11545      0.0      0.01            DU  PMG-XAUUSDM-ALL-H1-h1.2-AGAINST-fixed-geometric-tpavg_plus-stdd0
+     -1.06    1.07   3892   8947      0.1      0.02            DU  PMG-XAUUSDM-ALL-H1-h1.2-AGAINST-fixed-geometric-tpavg_plus-stdd0
+     -3.29    3.31   8343  19990      0.1      0.01            DU  PMG-XAUUSDM-ALL-H1-h0.8-AGAINST-fixed-geometric-tpavg_plus-stdd0
+    -11.74   11.88   3350   4761      0.1      0.01            DU  PMG-XAUUSDM-ALL-H1-h2-AGAINST-fixed-linear-tpavg_plus-stdd0.03.t
+    -12.53   12.65   2799   4468      0.2      0.02            DU  PMG-XAUUSDM-ALL-H1-h2-AGAINST-fixed-linear-tpavg_plus-stdd0.03.t
+    -12.82   13.13    786   2561      0.6      0.02            DU  PMG-XAUUSDM-ALL-H1-h0.8-AGAINST-fixed-linear-tpavg_plus-stdd0.03
+    -15.18   15.37   3350   4761      0.1      0.01            DU  PMG-XAUUSDM-ALL-H1-h2-AGAINST-fixed-geometric-tpavg_plus-stdd0.0
+
+-> reports/PMG_QUET.json

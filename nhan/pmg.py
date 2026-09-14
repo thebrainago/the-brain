@@ -153,10 +153,35 @@ class CauHinh:
 
     # -------------------------------------------------------------- dinh danh
     def ma_dinh_danh(self) -> str:
-        """Dac ta muc 8.7. Khoa dedupe giua CAC PHIEN lam viec khac nhau."""
+        """Dac ta muc 8.7, CO SUA: them cac tham so SO ma ban goc bo sot.
+
+        Ban nguyen van cua dac ta la:
+
+            PMG-{asset}-{session}-{atr_tf}-h{h}-{direction}-{step_mode}
+                -{size_mode}-tp{tp_mode}-st{stop_mode}
+
+        Chuoi do **khong phan biet duoc `tp_dist`** (cung nhu `size_r`, `step_g`).
+        Tuc hai cau hinh khac han nhau - vi du `tp_dist = 0,5` va `tp_dist = 2,0`
+        tren cung mot luoi - cho ra y het mot ma. Va dac ta lai noi (§8.7): *"Hash
+        rut gon tu chuoi nay lam khoa dedupe. Bat buoc, neu khong QuantLab se chay
+        trung hang nghin lan"*. Dung ma nay lam khoa dedupe thi ta khong chay trung
+        - ta **danh roi im lang** moi bien the `tp_dist` tru mot cai.
+
+        Lo hong nay tu no lo ra: ngay 14/09 toi dung ma nay de dung lai cau hinh
+        duy nhat song sot cua AUDCAD, dung nham `tp_dist`, va ra mot ket qua khac
+        han (-0,169%/nam thay vi +0,20%/nam).
+
+        Nen o day them `tp_dist`, va them `size_r` / `step_g` khi chung co nghia.
+        Khoa dedupe THAT van la `van_tay()` - hash cua TOAN BO dataclass, khong
+        phai chuoi nay; chuoi nay de NGUOI doc.
+        """
+        sm = self.size_mode + (f"{self.size_r:g}" if self.size_mode == "geometric" else "")
+        st = self.step_mode + (f"{self.step_g:g}" if self.step_mode == "expanding" else "")
+        tp = self.tp_mode + (f"{self.tp_money:g}" if self.tp_mode == "money"
+                             else f"{self.trail_giveback:g}" if self.tp_mode == "trail"
+                             else f"{self.tp_dist:g}")
         return (f"PMG-{self.ma}-{self.phien}-{self.atr_tf}-h{self.h:g}"
-                f"-{self.direction}-{self.step_mode}-{self.size_mode}"
-                f"-tp{self.tp_mode}-st{self.che_do_stop()}")
+                f"-{self.direction}-{st}-{sm}-tp{tp}-st{self.che_do_stop()}")
 
     def che_do_stop(self) -> str:
         p = []
