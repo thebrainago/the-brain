@@ -1,24 +1,24 @@
 # EVOLUTION - SUC KHOE DAY CHUYEN
-*2026-09-14 20:10:16*
+*2026-09-14 20:25:26*
 
 > Do bang SUC KHOE, khong do bang so PASS. Mot he lanh manh hieu chuan tot ke ca khi tim duoc it edge.
 
 ## 1. Bon tru
 | Tru | Lan cuoi | Tre | Trang thai |
 |---|---|---|---|
-| SEEKER | 2026-09-14 19:59:34 | 10 phut | nghi |
-| QUANTLAB | 2026-09-14 20:10:10 | 0 phut | chay |
-| NGHI | 2026-09-14 19:01:29 | 68 phut | nghi |
-| BANKER | 2026-09-14 19:55:40 | 14 phut | nghi |
-| EVO | 2026-09-14 20:10:16 | 0 phut | chay |
+| SEEKER | 2026-09-14 20:25:16 | 0 phut | nghi |
+| QUANTLAB | 2026-09-14 20:24:38 | 0 phut | nghi |
+| NGHI | 2026-09-14 19:01:29 | 83 phut | nghi |
+| BANKER | 2026-09-14 19:55:40 | 29 phut | nghi |
+| EVO | 2026-09-14 20:25:26 | 0 phut | chay |
 
 ## 2. San luong
 - Tai lieu da thu: **11848**
 - Gia thuyet: {"CO_CO_CHE": 1, "FAIL": 376, "PASS": 3, "QUARANTINED_V2": 7}
 - Gia thuyet co ket qua cuoi: **380** (chua 904 dong lich su da supersede, invalidated hoac quarantine)
-- Viec: cho 31 / treo 0 / loi 0
-- Ty le vong lap rong cua SEEKER: **86%**
-- Nang suat doc cua SEEKER: **0.16 gia thuyet/100 bai** (4 gia thuyet truy nguyen ve URL tai lieu, tren 2442 bai da boc; 678 ung vien tu 8087 artifact tai lieu). Noi sinh khong tinh vao day: 383 gia thuyet.
+- Viec: cho 34 / treo 0 / loi 0
+- Ty le vong lap rong cua SEEKER: **88%**
+- Nang suat doc cua SEEKER: **0.16 gia thuyet/100 bai** (4 gia thuyet truy nguyen ve URL tai lieu, tren 2442 bai da boc; 691 ung vien tu 8087 artifact tai lieu). Noi sinh khong tinh vao day: 383 gia thuyet.
 - Thanh phan thu hoi duoc tu ban doc: **285** (186 viet ra duoc bang ngu phap hien tai). Day la phan giu lai tu nhung he KHONG qua cong.
 - Do sau quet (con tro bien gioi): etoro 0 trang/vong 0, mql5_code 6 trang/vong 0, tradingview_scripts 0 trang/vong 0
 
@@ -42,9 +42,9 @@
   - 131 truong hop trung suat nam TRON trong cac epoch da chet (15-16/08, truoc khi lord_v2 chong trung)
 
 ## 4. Tai nguyen + toan ven
-- **Thoi gian song 7 ngay: 100.0%** (mat 164.9 gio qua 2 lan gian doan - may ngu hoac tat, khong phai tru chet)
+- **Thoi gian song 7 ngay: 100.0%** (mat 164.7 gio qua 2 lan gian doan - may ngu hoac tat, khong phai tru chet)
 - Supervisor restart 24h: **0 lan** (do duoc, khong lan nao)
-- Dia trong: **28.0 GB** - MT5 tick-test: **GO**
+- Dia trong: **27.9 GB** - MT5 tick-test: **GO**
 - So cai: LANH (18569 dong lien mach)
 
 ## 5. Nguon
@@ -80,7 +80,7 @@
 | rss_aligrithm | 6 | 0 | 19 | BAT |
 | rss_allocatesmartly | 7 | 0 | 12 | BAT |
 | rss_alphaarchitect | 7 | 0 | 10 | BAT |
-| rss_alvarezquant | 6 | 0 | 4 | BAT |
+| rss_alvarezquant | 7 | 0 | 4 | BAT |
 | rss_betterbuyandhold | 6 | 0 | 3 | BAT |
 | rss_beyondpassive | 6 | 0 | 14 | BAT |
 | rss_buildalpha | 6 | 0 | 5 | BAT |
@@ -126,9 +126,9 @@
 | rss_robotwealth | 7 | 0 | 12 | BAT |
 | rss_rulyfi | 1 | 0 | 5 | BAT |
 | rss_sixfigureinvesting | 1 | 0 | 10 | BAT |
-| rss_thinknewfound | 6 | 0 | 10 | BAT |
-| rss_tr8dr | 6 | 0 | 10 | BAT |
-| rss_tradingmarkets | 6 | 0 | 9 | BAT |
+| rss_thinknewfound | 7 | 0 | 10 | BAT |
+| rss_tr8dr | 7 | 0 | 10 | BAT |
+| rss_tradingmarkets | 7 | 0 | 9 | BAT |
 | rss_tradingview_blog | 6 | 0 | 68 | BAT |
 | semantic | 17 | 0 | 235 | BAT |
 | smartlab_nga | 2 | 0 | 16 | BAT |

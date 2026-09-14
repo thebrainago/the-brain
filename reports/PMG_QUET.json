@@ -1,4 +1,12 @@
 {
+ "XM_US100CASH": {
+  "trang_thai": "LOAI_O_G0",
+  "ly_do": "khong h nao qua FDR o o nay",
+  "ma": "XM_US100CASH",
+  "phien": "ALL",
+  "atr_tf": "H1",
+  "ket_qua": []
+ },
  "AUDCAD": {
   "ma": "AUDCAD",
   "khung": "M5",
@@ -44,10 +52,11 @@
   "so_bo_g1": 0,
   "so_do_duoc": 64,
   "so_song": 1,
+  "so_vao_g3": 5,
   "do_tin_chi_phi": "SAN",
   "spread_bps": 1.9019040172439297,
-  "giay": 2037.3,
-  "bo_dem_phep_thu": 288,
+  "giay": 2178.7,
+  "bo_dem_phep_thu": 384,
   "ly_do_bo_g1": {},
   "ket_qua": [
    {
@@ -172,6 +181,14 @@
      "so_doan_duong": 2,
      "so_doan_do_duoc": 3,
      "on_dinh": false
+    },
+    "bat_bien": {
+     "dung_duoc": true,
+     "lat_dau": "False",
+     "lai_bi_quan": 0.14209045185160307,
+     "lai_lac_quan": 0.04245265703486556,
+     "khoang_cach": 0.09963779481673751,
+     "ty_le_bi_quan": 3.3470331841634056
     }
    },
    {
@@ -296,6 +313,14 @@
      "so_doan_duong": 1,
      "so_doan_do_duoc": 3,
      "on_dinh": false
+    },
+    "bat_bien": {
+     "dung_duoc": false,
+     "lat_dau": "True",
+     "lai_bi_quan": 0.07395755113187308,
+     "lai_lac_quan": -0.07646646460471274,
+     "khoang_cach": 0.15042401573658581,
+     "ty_le_bi_quan": -0.9671893622150667
     }
    },
    {
@@ -420,6 +445,14 @@
      "so_doan_duong": 2,
      "so_doan_do_duoc": 3,
      "on_dinh": false
+    },
+    "bat_bien": {
+     "dung_duoc": false,
+     "lat_dau": "True",
+     "lai_bi_quan": 0.0314136414473678,
+     "lai_lac_quan": -0.13509914856231964,
+     "khoang_cach": 0.16651279000968744,
+     "ty_le_bi_quan": -0.23252286769873357
     }
    },
    {
@@ -492,6 +525,14 @@
      "so_doan_duong": 3,
      "so_doan_do_duoc": 3,
      "on_dinh": true
+    },
+    "bat_bien": {
+     "dung_duoc": true,
+     "lat_dau": "False",
+     "lai_bi_quan": 0.027534867974476684,
+     "lai_lac_quan": 0.001989245836030662,
+     "khoang_cach": 0.025545622138446022,
+     "ty_le_bi_quan": 13.8418628184336
     }
    },
    {
@@ -564,6 +605,14 @@
      "so_doan_duong": 1,
      "so_doan_do_duoc": 3,
      "on_dinh": false
+    },
+    "bat_bien": {
+     "dung_duoc": false,
+     "lat_dau": "True",
+     "lai_bi_quan": 1.3411993315726178e-05,
+     "lai_lac_quan": -0.003106897243096096,
+     "khoang_cach": 0.0031203092364118223,
+     "ty_le_bi_quan": -0.004316844834675257
     }
    },
    {
@@ -6560,14 +6609,6 @@
    }
   ]
  },
- "XM_US100CASH": {
-  "trang_thai": "LOAI_O_G0",
-  "ly_do": "khong h nao qua FDR o o nay",
-  "ma": "XM_US100CASH",
-  "phien": "ALL",
-  "atr_tf": "H1",
-  "ket_qua": []
- },
  "XAUUSDM": {
   "ma": "XAUUSDM",
   "khung": "M5",
@@ -6613,10 +6654,11 @@
   "so_bo_g1": 32,
   "so_do_duoc": 64,
   "so_song": 0,
+  "so_vao_g3": 0,
   "do_tin_chi_phi": "SAN",
   "spread_bps": 10.98275021793895,
-  "giay": 412.7,
-  "bo_dem_phep_thu": 384,
+  "giay": 476.3,
+  "bo_dem_phep_thu": 480,
   "ly_do_bo_g1": {
    "vo nghiem": 32
   },

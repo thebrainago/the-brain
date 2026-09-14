@@ -1,5 +1,5 @@
 # SEEKER V2 - funnel thu thap va truy nguyen
-*2026-09-14 19:59:34*
+*2026-09-14 20:25:16*
 
 ## 1. Thu vien THAT SU co gi
 
@@ -33,9 +33,9 @@
 - Tai lieu moi: 0
 - Ban doc keo ve: 0 (0 ky tu), that bai 30
 - Artifact tu DOC: moi 0, da co 0, loi 0
-- Backfill: xem 15, moi 15, da co 0, bo qua 0
+- Backfill: xem 0, moi 0, da co 0, bo qua 0
 
 ## 3. Bien gioi V2
 - SEEKER khong goi LLM/BOC, khong sinh co che va khong xep backtest.
 - Dau ra cua SEEKER la artifact da chuan hoa, co fingerprint va provenance.
-- Candidate dang cho Quantlab: **678** (do tang phan tich tao, khong phai SEEKER).
+- Candidate dang cho Quantlab: **691** (do tang phan tich tao, khong phai SEEKER).

@@ -1,25 +1,32 @@
 {
- "xanh": 1705,
- "do": 0,
- "bo_qua": 0,
+ "xanh": 1739,
+ "do": 2,
+ "bo_qua": 1,
  "loi": 0,
- "so_me": 17,
+ "so_me": 12,
  "me_chet": [
   {
-   "me": 12,
+   "me": 9,
    "file": [
-    "test_mau_v2.py",
-    "test_mimic_ban_do.py",
-    "test_muc_tieu_va_noi_sinh.py",
-    "test_nen.py",
-    "test_neo_truot_x10.py",
     "test_ngoai_sinh.py",
     "test_ngu_phap_toan_hang.py",
-    "test_ngu_phap_trung.py"
+    "test_ngu_phap_trung.py",
+    "test_nguon_bai_viet.py",
+    "test_nguon_track_record.py",
+    "test_nguon_xa_hoi.py",
+    "test_nguong_chuyen_duoc.py",
+    "test_nha_may_luc.py",
+    "test_nha_may_null.py",
+    "test_pham_vi.py",
+    "test_pham_vi_quet.py",
+    "test_phoi_nhiem_holdout.py"
    ],
-   "duoi": "QUA GIO 900s"
+   "duoi": "QUA GIO 1800s"
   }
  ],
- "bai_do": [],
- "giay": 2028.5
+ "bai_do": [
+  "test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test",
+  "test_khoa_tester.py::CuaGIETCungPhaiCoKhoa::test_khong_con_file_nao_taskkill_thang"
+ ],
+ "giay": 3928.4
 }

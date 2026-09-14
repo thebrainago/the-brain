@@ -9,3 +9,12 @@
   me  7/12  1 failed, 142 passed, 12 subtests passed in 105.62s (0:01:45)
         DO  test_khoa_tester.py::CuaGIETCungPhaiCoKhoa::test_khong_con_file_nao_taskkill_thang
   me  8/12  133 passed, 23 subtests passed in 1133.16s (0:18:53)
+  me  9/12  QUA GIO 1800s (test_ngoai_sinh.py...)
+  me 10/12  230 passed, 140 subtests passed in 107.53s (0:01:47)
+  me 11/12  176 passed in 27.61s
+  me 12/12  38 passed in 6.33s
+
+=== TONG: 1739 xanh · 2 DO · 1 bo qua · 0 loi · 3928s ===
+   DO  test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test
+   DO  test_khoa_tester.py::CuaGIETCungPhaiCoKhoa::test_khong_con_file_nao_taskkill_thang
+   ME CHET 9: test_ngoai_sinh.py test_ngu_phap_toan_hang.py test_ngu_phap_trung.py test_nguon_bai_viet.py test_nguon_track_record.py test_nguon_xa_hoi.py test_nguong_chuyen_duoc.py test_nha_may_luc.py test_nha_may_null.py test_pham_vi.py test_pham_vi_quet.py test_phoi_nhiem_holdout.py

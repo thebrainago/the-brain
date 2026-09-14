@@ -278,11 +278,16 @@ def quet(ma: str, khung: str = "M5", atr_tf: str = "H1", phien: str = "ALL",
     huong_g0, g0_ghi = None, ""
     if bat_g0:
         bang = _doc_bang_g0()
+        # KHUNG phai khop, khong chi (ma, phien, atr_tf). G0 do ER tren chuoi close
+        # CUA KHUNG CHAY, nen cua so ER va ca phan xu WITH/AGAINST deu doi theo
+        # khung. Muon dung ket qua G0 cua M5 de cap phep cho mot lan quet D1 la
+        # muon lay phan xu cua mot phep do khac.
         o_g0 = [r for r in (bang.get("o") or [])
-                if r["ma"] == ma and r["phien"] == phien and r["atr_tf"] == atr_tf]
+                if r["ma"] == ma and r["phien"] == phien and r["atr_tf"] == atr_tf
+                and r.get("khung") == khung]
         if not o_g0:
             return {"trang_thai": "CHUA_DO_DUOC",
-                    "ly_do": f"chua chay G0 cho ({ma}, {phien}, {atr_tf}) - "
+                    "ly_do": f"chua chay G0 cho ({ma}, {phien}, {atr_tf}, khung {khung}) - "
                              f"chay `b pmg g0` truoc; dac ta cam cap CPU cho o chua qua G0"}
         song = [r for r in o_g0 if r.get("qua_fdr")]
         if not song:

@@ -492,6 +492,19 @@ def test_quet_tu_choi_o_chua_chay_G0(monkeypatch):
     assert "G0" in r["ly_do"]
 
 
+def test_quet_KHONG_muon_phan_xu_G0_cua_khung_khac(monkeypatch):
+    """G0 do ER tren chuoi close CUA KHUNG CHAY, nen phan xu doi theo khung.
+
+    Ket qua G0 cua M5 khong duoc dung de cap phep cho mot lan quet D1.
+    """
+    bang = {"o": [{"ma": "X", "phien": "ALL", "atr_tf": "H1", "khung": "M5",
+                   "h": 0.8, "qua_fdr": True, "ket_luan": "AGAINST"}]}
+    monkeypatch.setattr(Q, "_doc_bang_g0", lambda: bang)
+    r = Q.quet("X", khung="D1", bat_g0=True)
+    assert r["trang_thai"] == "CHUA_DO_DUOC"
+    assert "khung D1" in r["ly_do"]
+
+
 # ============================================================== PHIEN / DST
 def test_bucket_phien_phu_het_va_weekend_de_len_tren():
     idx = pd.date_range("2024-03-04", periods=24 * 14, freq="h")

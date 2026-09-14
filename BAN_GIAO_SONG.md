@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 6044, 0 phut), dieu_khien_xa.py (pid 15316, 266 phut)
-- `qwen_ultra.log`: ~ 11:31:01 | san sang 3 | CPU   81% / muc tieu 90%  |  con  1.9 loi  |  dang chay 1  [TESTER:1]
-- git: b9ef6d9 tru: bit CUA GIET cua khoa tester - khoi 6 chi chan duong PHONG, khong chan duong GIET
-### 2026-09-12 11:37:37 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 3404, 0 phut), dieu_khien_xa.py (pid 15316, 271 phut)
-- `qwen_ultra.log`: ~ 11:37:02 | san sang 4 | CPU  100% / muc tieu 90%  |  con -2.0 loi  |  dang chay 1  [TESTER:1]
-- git: d892a73 DINH CHINH: chang 4->5 KHONG nghen - 0/1.132 co che vuot noi MDE
 ### 2026-09-12 11:54:26 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 2020, 0 phut), dieu_khien_xa.py (pid 15316, 288 phut)
@@ -404,3 +396,11 @@
 - `supervisor_stdio.log`: 2026-09-14 19:36:50 QUANTLAB  skipped    801.8s guard=job
 - `watchdog.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - git: cb35788 don script tam cua phien PMG
+### 2026-09-14 20:15:47 — chup trang thai
+
+- dang chay: b.py (pid 12268, 43 phut), ban_giao_song.py (pid 6856, 0 phut), chay_test_tung_me.py (pid 12144, 43 phut), dieu_khien_xa.py (pid 16196, 83 phut), dieu_phoi.py (pid 11532, 83 phut), quantlab.py (pid 6344, 5 phut), seeker.py (pid 13848, 1 phut)
+- `dieu_phoi.log`: 2026-09-14 20:14:35 SEEKER    bat_dau   lane=external
+- `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
+- `supervisor_stdio.log`: 2026-09-14 20:14:35 SEEKER    bat_dau   lane=external
+- `watchdog.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
+- git: 2a5c40f PMG: ket qua quet that + ba lo hong lo ra khi doc ket qua
