@@ -1,0 +1,162 @@
+{
+ "khung": "D1",
+ "luoi": [
+  "trailing|0.5|0.5",
+  "trailing|0.5|1.0",
+  "trailing|0.5|2.0",
+  "trailing|1.0|0.5",
+  "trailing|1.0|1.0",
+  "trailing|1.0|2.0",
+  "trailing|1.5|0.5",
+  "trailing|1.5|1.0",
+  "trailing|1.5|2.0",
+  "trailing|2.0|0.5",
+  "trailing|2.0|1.0",
+  "trailing|2.0|2.0"
+ ],
+ "vang": {
+  "XAUUSD": {
+   "het": 2.2889999999999997,
+   "train": 3.7729999999999997,
+   "holdout": 0.387,
+   "so_o": 12,
+   "ty_le_duong": 0.833
+  },
+  "XM_GOLD": {
+   "het": 1.6705,
+   "train": 2.5069999999999997,
+   "holdout": -0.694,
+   "so_o": 12,
+   "ty_le_duong": 0.917
+  },
+  "XAUUSDM": {
+   "het": -1.7365,
+   "train": -1.955,
+   "holdout": -5.348,
+   "so_o": 12,
+   "ty_le_duong": 0.0
+  },
+  "XM_SILVER": {
+   "het": -0.188,
+   "train": -0.613,
+   "holdout": -1.583,
+   "so_o": 12,
+   "ty_le_duong": 0.417
+  }
+ },
+ "doi_chung": {
+  "EURUSD": {
+   "het": 2.3155,
+   "train": 8.4275,
+   "holdout": -0.2185,
+   "so_o": 12,
+   "ty_le_duong": 1.0
+  },
+  "GBPUSD": {
+   "het": -0.516,
+   "train": -0.509,
+   "holdout": -1.1625,
+   "so_o": 12,
+   "ty_le_duong": 0.0
+  },
+  "USDJPY": {
+   "het": 1.13,
+   "train": 3.9029999999999996,
+   "holdout": -1.388,
+   "so_o": 12,
+   "ty_le_duong": 1.0
+  },
+  "AUDUSD": {
+   "het": -0.481,
+   "train": -1.409,
+   "holdout": -1.2894999999999999,
+   "so_o": 12,
+   "ty_le_duong": 0.083
+  },
+  "XM_US500CASH": {
+   "het": -5.117,
+   "train": -5.379,
+   "holdout": -7.3535,
+   "so_o": 12,
+   "ty_le_duong": 0.0
+  },
+  "XM_US100CASH": {
+   "het": -3.7225,
+   "train": -6.8925,
+   "holdout": -0.7635,
+   "so_o": 12,
+   "ty_le_duong": 0.083
+  },
+  "XM_GER40CASH": {
+   "het": -3.1255,
+   "train": -2.0845000000000002,
+   "holdout": -9.001000000000001,
+   "so_o": 12,
+   "ty_le_duong": 0.0
+  },
+  "AUDCAD": {
+   "het": -0.7115,
+   "train": -1.216,
+   "holdout": -1.1985000000000001,
+   "so_o": 12,
+   "ty_le_duong": 0.0
+  },
+  "EURGBP": {
+   "het": -0.64,
+   "train": -1.0154999999999998,
+   "holdout": -1.546,
+   "so_o": 12,
+   "ty_le_duong": 0.0
+  },
+  "NZDCAD": {
+   "het": -0.7955000000000001,
+   "train": -1.2225,
+   "holdout": -1.9580000000000002,
+   "so_o": 12,
+   "ty_le_duong": 0.0
+  }
+ },
+ "placebo": {
+  "XAUUSD": {
+   "that": 2.2889999999999997,
+   "dao_dau": 0.16849999999999987,
+   "xao_khoi": -1.5345
+  },
+  "XM_GOLD": {
+   "that": 1.6704999999999999,
+   "dao_dau": 0.9914999999999998,
+   "xao_khoi": -3.4600000000000004
+  },
+  "XAUUSDM": {
+   "that": -1.7365,
+   "dao_dau": -2.7590000000000003,
+   "xao_khoi": -0.38050000000000006
+  },
+  "XM_SILVER": {
+   "that": -0.18800000000000003,
+   "dao_dau": 0.9709999999999999,
+   "xao_khoi": -1.5635
+  },
+  "EURUSD": {
+   "that": 2.3155,
+   "dao_dau": 2.3794999999999997,
+   "xao_khoi": 1.0105
+  },
+  "GBPUSD": {
+   "that": -0.516,
+   "dao_dau": -0.5535,
+   "xao_khoi": -1.5380000000000003
+  },
+  "USDJPY": {
+   "that": 1.13,
+   "dao_dau": 0.5379999999999999,
+   "xao_khoi": 1.6855
+  },
+  "AUDUSD": {
+   "that": -0.481,
+   "dao_dau": -0.621,
+   "xao_khoi": 0.20950000000000002
+  }
+ },
+ "giay": 56.1
+}

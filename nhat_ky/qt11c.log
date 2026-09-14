@@ -15,3 +15,62 @@
   24/90 EURGBP        88 dong  (2 phut)
   25/90 EURHKD        88 dong  (2 phut)
   26/90 EURHUF        88 dong  (2 phut)
+  28/90 EURJPY        88 dong  (2 phut)
+  30/90 EURNOK        88 dong  (2 phut)
+  31/90 EURNZD        88 dong  (2 phut)
+  32/90 EURPLN        88 dong  (2 phut)
+  35/90 EURSEK        88 dong  (2 phut)
+  36/90 EURTRY        88 dong  (2 phut)
+  37/90 EURUSD        85 dong  (2 phut)
+  38/90 EURZAR        88 dong  (2 phut)
+  39/90 GBPAUD        88 dong  (2 phut)
+  40/90 GBPCAD        88 dong  (3 phut)
+  41/90 GBPCHF        88 dong  (3 phut)
+  43/90 GBPJPY        88 dong  (3 phut)
+  45/90 GBPNOK        88 dong  (3 phut)
+  46/90 GBPNZD        88 dong  (3 phut)
+  48/90 GBPSEK        88 dong  (3 phut)
+  49/90 GBPSGD        88 dong  (3 phut)
+  50/90 GBPUSD        88 dong  (3 phut)
+  52/90 NZDCAD        86 dong  (3 phut)
+  53/90 NZDCHF        88 dong  (3 phut)
+  54/90 NZDJPY        88 dong  (3 phut)
+  55/90 NZDSGD        88 dong  (4 phut)
+  56/90 NZDUSD        88 dong  (4 phut)
+  57/90 SGDJPY        88 dong  (4 phut)
+  58/90 SP500         85 dong  (4 phut)
+  66/90 US500CASH     88 dong  (4 phut)
+  67/90 USDCAD        88 dong  (4 phut)
+  68/90 USDCHF        88 dong  (4 phut)
+  70/90 USDJPY        85 dong  (5 phut)
+  72/90 XAUUSD        88 dong  (5 phut)
+  73/90 XAUUSDM       88 dong  (5 phut)
+  74/90 XM_AUDUSD     88 dong  (5 phut)
+  75/90 XM_AUS200CASH  88 dong  (5 phut)
+  76/90 XM_EU50CASH   88 dong  (5 phut)
+  77/90 XM_EURUSD     88 dong  (5 phut)
+  78/90 XM_FRA40CASH  88 dong  (5 phut)
+  79/90 XM_GBPUSD     88 dong  (5 phut)
+  80/90 XM_GER40CASH  88 dong  (5 phut)
+  81/90 XM_GOLD       88 dong  (5 phut)
+  82/90 XM_JP225CASH  88 dong  (5 phut)
+  83/90 XM_SILVER     88 dong  (6 phut)
+  84/90 XM_UK100CASH  88 dong  (6 phut)
+  85/90 XM_US100CASH  88 dong  (6 phut)
+  87/90 XM_US2000CASH  88 dong  (6 phut)
+  88/90 XM_US30CASH   88 dong  (6 phut)
+  90/90 XM_US500CASH  88 dong  (6 phut)
+
+61/90 ma DO DUOC, 29 bo qua: {'chi phi KHAI BAO': 19, "thieu cot ['open', 'high', 'low']": 8, "thieu cot ['open', 'high', 'low', 'close']": 2}
+
+ho              so_ma   so_o    o>moc       hinh    o>mua-giu  
+stop_2_dau         58    173      49% cao_nguyen          10%
+trailing           61   1525      48%     lo_cho          12%
+hue_trailing       61   1525      47%     lo_cho          12%
+tia                61    305      48%     lo_cho          10%
+thoi_gian          61    244      34%     lo_cho           9%
+luoi_dca           61    549      81% KHONG_DOC_DUOC_sut_giam_cuc_doan          43%
+dat_hue            61    305      44% KHONG_DOC_DUOC_sut_giam_cuc_doan          12%
+tt_stop_doi        61    182      31% KHONG_DOC_DUOC_sut_giam_cuc_doan           7%
+tp_co_dinh         61    305      22% KHONG_DOC_DUOC_sut_giam_cuc_doan           6%
+hedge              61    183      11% KHONG_DOC_DUOC_sut_giam_cuc_doan           4%
