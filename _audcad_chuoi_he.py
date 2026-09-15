@@ -23,7 +23,19 @@ TUNG SLOT theo tung nen. Tu do do duoc:
   - sut giam cua DANH MUC, do truc tiep
   - va moc mua-giu di qua DUNG bo thuc thi do [[v6-doi-chieu-dung-cach]]
 
-Chay:  python _audcad_chuoi_he.py [--tu 2021.03.19 --den 2026.07.29]
+## HAI DIEM VAN HANH (do that tren HOLDOUT 5,36 nam, lot MICRO/von 10.000)
+
+Duong bien lai-DD la TUYEN TINH voi lot (fixed-lot), da xac nhan bang chay that:
+
+    lot 20  -> DD 20,6%   ~15%/nam don   (than trong)
+    lot 36  -> DD 30,2%   ~27%/nam don   (muc chu du an dua ra 15/09)
+
+Nhan lot ×3 (lot 15) KHONG dat 27% - chi 11%/nam o DD 17%: cot `%/nam@DD20` la
+BAT BIEN cua he (~Calmar 0,5), khong scale theo lot. De 27%/nam phai chap nhan
+DD ~30%, va do la lua chon rui ro cua chu du an (chap nhan rui ro cao). Lot 36
+KHONG stop-out (da chay that).
+
+Chay:  python _audcad_chuoi_he.py [--lot 36] [--tu ... --den ...]
 """
 from __future__ import annotations
 
@@ -50,7 +62,7 @@ VON = 10000
 #: don bay >100 lan tu mot chu so y nghia. Luot dau chay o 0,10 cho
 #: `__mua_giu__` ra "+19,80%/nam" vi DD = 0,00. Cung co lenh voi cac luot quet
 #: don de so sanh duoc truc tiep.
-LOT = 5.0
+LOT = 36.0  # diem van hanh 27%/nam @ DD 30% (chu du an chon)
 CHUNG = Path.home() / "AppData/Roaming/MetaQuotes/Terminal/Common/Files"
 
 
@@ -179,6 +191,8 @@ def main() -> int:
     symbol = lay("--ma", "AUDCADmicro")
     khung = lay("--khung", "H4")
     tu, den = lay("--tu", "2021.03.19"), lay("--den", "2026.07.29")
+    global LOT
+    LOT = float(lay("--lot", str(LOT)))
     ten_he = dai_dien()
     print("=" * 74)
     print("CHUOI HE AUDCAD - %d cum doc lap + 2 moc, chay CHUNG mot EA" % len(ten_he))
