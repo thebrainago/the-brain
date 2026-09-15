@@ -176,3 +176,29 @@ trong ma, cua so khoi dong 500 bar. `heiken` thi CHINH XAC (0,5^60).
 3. He dao nguoc tu lich su trade (passview -> tu dang nhap) - chua co.
 4. Cham diem tinh chat -> co che quan li ghi vao tung cap.
 5. Hai he AUDCAD van CHUA ra demo - CAN NGUOI mo tai khoan demo XM.
+
+## QUET TOAN KHO — ket qua co nghia DAU TIEN
+
+    hon moc AUDCAD : 199/2539  (7,84%)   moc mua-giu  +1,13%/nam
+    hon moc EURGBP : 112/2539  (4,41%)   moc ban-giu  +0,36%/nam
+    GIAO (hon moc CA HAI): **38**   ky vong neu doc lap 8,8  -> **4,33 lan**
+
+Danh sach giao mach lac: `ou_quay_ve_dsl` ca hai chan, RSI qua mua/qua ban,
+pairs_trading mean-reversion. Dinh `ou_quay_ve_dsl_n200_z2_mua` (+7,43/+8,19).
+
+**BA CANH BAO, doc kem hoac dung doc:**
+  1. 38 co che nay TUONG QUAN RAT CAO (cung mot ho) -> ~1-2 phat hien doc lap
+  2. ky vong 8,8 gia dinh doc lap -> 4,33 lan la CHAN TREN
+  3. hai tai san deu la cap cheo FX tren CUNG cua so
+
+**HAI LOI DA SUA, ca hai lam bang ket qua khong doc duoc:**
+  - moc mua-giu BIEN MAT o quy mo lon (chi tim trong top 25)
+  - chi co MOT moc cho vu tru HAI CHIEU -> co che BAN so voi moc MUA.
+    Them `__ban_giu__`. Tren EURGBP: "hon moc" tut **584 -> 123** (4,7 lan).
+
+### VIEC TIEP CUA HUONG NAY
+1. Chay 38 co che giao tren tai san THU BA va cua so THU HAI (nua dau) -
+   day moi la phep thu that. Hien chung chi qua mot cua so holdung.
+2. Chay `nha_may_null` / placebo tren chinh 38 cai nay.
+3. Ho nay la RSI/OU mean-reversion tren cap cheo FX - trung voi
+   [[ibs-la-hien-tuong-cua-mot-thoi-ky]]. Phai kiem theo THOI KY truoc khi tin.
