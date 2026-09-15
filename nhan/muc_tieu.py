@@ -42,6 +42,48 @@ from nhan import so as SO
 #: Tu khoa cho tung ma. Viet ra day chu khong sinh tu dong: mot bo tu khoa la
 #: mot GIA THUYET ve noi kien thuc nam, va no phai doc duoc va sua duoc.
 TU_KHOA_THEO_MA = {
+    # ------------------------------------------------------------ AUDCAD
+    #
+    # Chu du an 15/09/2026: *"Lung suc khap moi noi tren the gioi nay system
+    # hieu qua voi audcad."*
+    #
+    # AUDCAD la tai san TIEM NANG NHAT cua du an - PASS duy nhat
+    # (`AUDCAD.H4.rsi_dao_chieu`) nam o day, va 68% he DCA song >= 2 nam trong
+    # 400 ho so signal cong khai cung o day [[luan-nguoc-400-signal-audcad]].
+    # Vay ma `_cac_tu_khoa("AUDCAD")` NEM LOI cho den hom nay: bo may chien
+    # dich co san nhung tai san nay chua bao gio duoc khai. Quet kho chung roi
+    # ket luan "khong co gi cho AUDCAD" la ket luan sai cho.
+    #
+    # Bon nhom, co chu dich:
+    #   1. CHINH CAP - ten goi, va ca `AUD/CAD` co gach cheo
+    #   2. CO CHE SONG TREN NO - luoi/DCA (do do duoc), hoi quy, tuong quan
+    #   3. VI SAO no hoi quy - hai dong tien hang hoa, RBA vs BoC, quang vs dau
+    #   4. DA NGON NGU - cong dong Nga/Nhat/Trung viet EA rat manh va ho KHONG
+    #      viet bang tieng Anh [[bo-do-luat-mu-voi-phi-anh]]
+    "AUDCAD": [
+        "AUDCAD trading strategy", "AUD/CAD trading strategy",
+        "AUDCAD expert advisor", "AUDCAD EA mt4 mt5",
+        "AUDCAD mean reversion strategy", "AUDCAD grid strategy",
+        "AUDCAD DCA martingale expert advisor",
+        "AUDCAD range trading system", "AUDCAD backtest",
+        "AUDCAD correlation AUDUSD USDCAD triangular",
+        "commodity currency pair mean reversion",
+        "AUD CAD interest rate differential carry",
+        "iron ore oil currency spread trade",
+        "RBA BoC policy divergence AUD CAD",
+        "AUDCAD seasonality month",
+        "cross pair mean reversion forex system",
+        "AUDNZD AUDCAD range bound pairs",
+        # --- Nga: cong dong MQL lon nhat ---
+        "AUDCAD советник форекс", "AUDCAD стратегия торговли",
+        "сеточный советник AUDCAD",
+        # --- Nhat ---
+        "AUDCAD 自動売買 EA", "AUDCAD 手法 検証",
+        # --- Trung ---
+        "AUDCAD 交易策略", "AUDCAD 量化 回测",
+        # --- Tay Ban Nha / Bo Dao Nha ---
+        "estrategia AUDCAD forex", "estrategia AUDCAD robo",
+    ],
     "US500CASH": [
         "S&P 500 trading strategy", "SPX trading strategy", "SPY trading strategy",
         "ES futures trading strategy", "emini S&P 500 strategy",

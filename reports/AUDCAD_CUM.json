@@ -1,0 +1,64 @@
+{
+ "so_he": 16,
+ "so_cum": 8,
+ "nguong": 0.7,
+ "p_theo_cum": 0.0013530703202347743,
+ "cum": [
+  {
+   "dai_dien": "dashboard_mean_reversion_signal",
+   "he": [
+    "dashboard_mean_reversion_signal",
+    "rsi_dashboard_buy_signal",
+    "rsi_xu_huong_mua",
+    "mua_khi_rsi_vao_vung_qua_ban",
+    "net_rsi_signal"
+   ]
+  },
+  {
+   "dai_dien": "rsi_xuong_nguong_cao",
+   "he": [
+    "rsi_xuong_nguong_cao",
+    "ban_inh_rsi_a_khung_thoi_gian",
+    "ban_khi_rsi_qua_mua",
+    "vao_lenh_rsi_qua_mua"
+   ]
+  },
+  {
+   "dai_dien": "buy_rsi_cross_up",
+   "he": [
+    "buy_rsi_cross_up",
+    "yes_rsi_bb_sniper_long"
+   ]
+  },
+  {
+   "dai_dien": "ou_quay_ve_dsl_n50_z2.5_mua",
+   "he": [
+    "ou_quay_ve_dsl_n50_z2.5_mua"
+   ]
+  },
+  {
+   "dai_dien": "pairs_trading_vao_long",
+   "he": [
+    "pairs_trading_vao_long"
+   ]
+  },
+  {
+   "dai_dien": "arjun_07_p_statistical_arbitrage_pairs_trading",
+   "he": [
+    "arjun_07_p_statistical_arbitrage_pairs_trading"
+   ]
+  },
+  {
+   "dai_dien": "liqsweep_ifvg_ao_chieu_giam",
+   "he": [
+    "liqsweep_ifvg_ao_chieu_giam"
+   ]
+  },
+  {
+   "dai_dien": "ns_doi_pct5_<_q20_giu5",
+   "he": [
+    "ns_doi_pct5_<_q20_giu5"
+   ]
+  }
+ ]
+}
