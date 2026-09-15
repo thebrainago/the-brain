@@ -1,0 +1,55 @@
+  44/3280 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+     TRONG DO co 4 cai KHOP BO LOC 'supertrend,heiken': supertrend_long, supertrend_short, supertrend_buy_arrow, supertrend_sell_arrow
+  4 co che se ra 0 lenh VI LOI KHAI (nguong tinh bang DON VI GIA), khong phai vi thi truong:
+       supertrend_xuong_sang_len                      CHET_MOI_NOI
+       supertrend_len_sang_xuong                      CHET_MOI_NOI
+       supertrend_buy                                 CHET_MOI_NOI
+       supertrend_sell                                CHET_MOI_NOI
+     doc `nhan/thang_gia.py`. Mot dong 0 o day KHONG phai ket qua.
+  gop 2 co che TRUNG HANH VI (cung mot chuoi tin hieu):
+     supertrend_xuong_sang_len                <- supertrend_buy
+     supertrend_len_sang_xuong                <- supertrend_sell
+kho 94 -> dich duoc 95, bo 0
+  bien dich xong (95 co che)
+  chay optimization 95 pass ...
+
+95 pass, 20.3s  
+lot 5 - von 10.000 USD - 2021.03.19 -> 2026.07.29 (5.36 nam)
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+ns_heiken_<_q2_giu10                          147    216.70   1.21    0.56    2.33       +3.23
+vdub_sniper_v1_supertrend_crossover_buy        70    197.84   1.36    0.49    2.54       +2.74
+ns_heiken_>_q98_giu3                            5     73.97 256.07    0.47    0.17      +12.47
+ns_heiken_>_q98_giu5                            5     62.51  20.17    0.41    0.26       +7.68
+ns_supertrend10_<_q2_giu10                    113    100.98   1.14    0.37    1.58       +2.27
+ns_heiken_<_q5_giu10                          298    244.41   1.12    0.33    2.74       +3.11
+ns_heiken_>_q98_giu10                           5     84.81   9.23    0.31    0.28       +9.20
+ns_supertrend10_<_q5_giu10                    223    136.94   1.09    0.25    2.30       +2.12
+ns_heiken_<_q2_giu3                           159     23.80   1.03    0.19    1.25       +0.70
+ns_heiken_>_q98_giu2                            5     35.84   6.14    0.19    0.12       +8.84
+ns_supertrend10_<_q10_giu10                   282     50.12   1.03    0.07    3.30       +0.56
+ns_heiken_>_q98_giu1                            5     15.02   2.74    0.04    0.11       +4.79
+supertrend_xu_huong_tang                       17    132.06   1.18    0.04    4.26       +1.13
+__mua_giu__                                    17    132.06   1.18    0.04    4.26       +1.13
+supertrend_len_sang_xuong                       0      0.00   0.00    0.00    0.00     CHUA_DO
+supertrend_xuong_sang_len                       0      0.00   0.00    0.00    0.00     CHUA_DO
+ns_supertrend10_<_q20_giu10                   371   -128.11   0.95   -0.14    4.21       -1.17
+ns_heiken_<_q10_giu10                         398   -247.90   0.92   -0.25    4.42       -2.20
+supertrend_xu_huong_giam                       17   -812.41   0.34   -0.26   10.03       -3.24
+ns_heiken_<_q20_giu10                         521   -376.91   0.90   -0.29    5.18       -2.89
+ns_heiken_<_q5_giu3                           398    -94.57   0.95   -0.31    3.05       -1.19
+heiken_ashi_ma_crossover                      414   -394.31   0.87   -0.38    6.32       -2.45
+ns_supertrend10_<_q5_giu5                     283   -144.56   0.91   -0.42    2.89       -1.95
+ns_heiken_<_q10_giu3                          610   -261.24   0.91   -0.58    4.00       -2.58
+ns_supertrend10_<_q10_giu5                    402   -291.53   0.86   -0.61    3.84       -3.02
+
+moc mua-giu o cung rui ro: +1.13%/nam  ->  10/94 co che hon moc
+CANH BAO do phan giai: 3/25 co che co DD% < 0,20 - cot cuoi dang
+   NGOAI SUY don bay >100 lan tu mot chu so y nghia (sai so ~17%).
+   Chay lai voi `--lot` lon hon de DO o co lenh that.

@@ -299,3 +299,73 @@ def test_gop_trung_hanh_vi_KHONG_do_duoc_thi_CHO_CHAY():
     kho = [{"ten": "a"}, {"ten": "b"}]
     moi, bd = C._gop_trung_hanh_vi(kho, "MA_KHONG_CO_THAT_XYZ", "H4")
     assert len(moi) == 2 and bd == {}
+
+
+# ========== HAI TOAN HANG CO TRANG THAI (15/09/2026) - cai cuoi cung
+@pytest.mark.parametrize("lay", ["chieu", "than", "khong_rau_duoi", "khong_rau_tren"])
+def test_heiken_dich_duoc_moi_bien_the(lay):
+    m = _ma({"chi_bao": "heiken", "lay": lay})
+    assert "for(int k" in m, "heiken phai lap tu mot moc lui"
+
+
+def test_heiken_khoi_dong_DU_DAI_de_chinh_xac():
+    """`ha_open[i] = (ha_open[i-1] + ha_close[i-1])/2` - anh huong cua hat
+    giong giam theo 0,5^k. 60 bar cho 8,7e-19, duoi do phan giai `double`.
+
+    Day KHONG phai xap xi, no chinh xac trong so hoc dau phay dong - nhung chi
+    khi so bar khoi dong con du. Ha xuong 20 thi sai so len 9,5e-7.
+    """
+    assert D.BoDich.KHOI_DONG_HA >= 50, (
+        "khoi dong %d bar cho sai so 0,5^%d - qua lon"
+        % (D.BoDich.KHOI_DONG_HA, D.BoDich.KHOI_DONG_HA))
+
+
+@pytest.mark.parametrize("lay", ["chieu", "duong", "khoang_cach"])
+def test_supertrend_dich_duoc_moi_bien_the(lay):
+    m = _ma({"chi_bao": "supertrend", "n": 10, "k": 3.0, "lay": lay})
+    assert "iATR" in m and "for(int j" in m
+
+
+def test_supertrend_GHI_RO_no_la_XAP_XI():
+    """Khac `heiken`: trang thai supertrend la mot CAI CHOT, khong suy giam.
+
+    Khong so bar khoi dong nao lam no chinh xac ve mat toan hoc - cai cuu duoc
+    la chi bao nay LAT thuong xuyen. Mot xap xi khong duoc ghi ra la mot xap xi
+    se bi doc nhu mot phep tinh dung.
+    """
+    s = (LAB / "nhan" / "dich_mq5.py").read_text(encoding="utf-8-sig")
+    i = s.index("def _cb_supertrend")
+    than = s[i:i + 2000]
+    assert "XAP XI" in than, "khong ghi ro supertrend la xap xi"
+    assert D.BoDich.KHOI_DONG_ST >= 300
+
+
+def test_bi_danh_phai_doi_TRONG_BO_DICH_khong_chi_trong_ngu_phap():
+    """`stoch` (9 co che) va `bb_upper`/`bb_lower` (2) bi bo voi ly do "chua
+    dich duoc chi bao" - trong khi ngu phap CO hieu, no chi doi ten truoc khi
+    tinh. Mot co che chay duoc bang Python nhung vo hinh voi trong tai, chi vi
+    mot cai ten khac.
+    """
+    for t in ({"chi_bao": "stoch", "n": 14},
+              {"chi_bao": "bb_upper", "n": 20, "k": 2.0},
+              {"chi_bao": "bb_lower", "n": 20, "k": 2.0}):
+        assert _ma(t).strip(), t
+
+
+def test_bollinger_KHONG_dung_iBands():
+    """`iBands` dung do lech chuan TONG THE (chia n); `rolling.std()` cua pandas
+    chia (n-1). Lech mot he so sqrt(n/(n-1)) - nho nhung khong bang khong, va
+    no hien ra duoi dang "MT5 lech Python mot chut" khong ai truy duoc.
+    """
+    assert "iBands" not in _ma({"chi_bao": "bollinger", "n": 20, "lay": "tren"})
+
+
+def test_DO_PHU_BO_DICH_dat_100_phan_tram():
+    """Chan neo cuoi cung. Dau phien 15/09: 2.654/3.216 (82,5%)."""
+    from nhan import ngu_phap as NP
+    kho = [c for c in NP.doc_kho() if not NP.kiem_khai_bao(c)]
+    if len(kho) < 2000:
+        pytest.skip("may khong co kho that")
+    _, dat = D.sinh_ea(kho, "DoPhu", khung="H4")
+    ty = len(dat) / len(kho)
+    assert ty >= 0.99, "bo dich chi con phu %.1f%% kho (da tung 100%%)" % (100 * ty)

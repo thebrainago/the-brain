@@ -40,7 +40,8 @@ CHI_BAO_DICH_DUOC = {
     "tong", "bien_do", "than_nen", "ibs", "khoi_luong", "gio", "ngay_trong_tuan",
     "ngay_trong_thang", "thang", "tuyen_tinh",
     "adx", "cci", "donchian", "keltner",
-    "stochastic", "dong_luong", "macd", "mau_nen",
+    "stochastic", "dong_luong", "macd", "mau_nen", "bollinger",
+    "heiken", "supertrend",
 }
 PHEP_MQL = {"<": "<", "<=": "<=", ">": ">", ">=": ">=", "==": "==", "!=": "!="}
 
@@ -58,6 +59,20 @@ GOI_MT5 = {
 COT_HAM = {"open": "iOpen", "high": "iHigh", "low": "iLow", "close": "iClose"}
 COT_TONG_HOP = {"hl2": ("high", "low"), "hlc3": ("high", "low", "close"),
                 "ohlc4": ("open", "high", "low", "close")}
+
+
+def _doi_bi_danh(t: dict) -> dict:
+    """Ten khac -> ten chinh, dung CUNG bang voi `nhan/ngu_phap.py`.
+
+    Khong chep bang sang day: mot ban chep se lac hau ngay lan them bi danh
+    sau, va lac hau trong im lang (co che chay duoc bang Python, vo hinh voi
+    tester).
+    """
+    try:
+        from nhan import ngu_phap as _NP
+        return _NP._doi_bi_danh(t)
+    except Exception:
+        return t
 
 
 class KhongDichDuoc(Exception):
@@ -92,6 +107,15 @@ class BoDich:
                 return self._cb_gop_danh_sach(t, cb_nhom)
             raise KhongDichDuoc("chua dich duoc nhom '%s'"
                                 % t.get("chi_bao", "toan_hang"))
+        # BI DANH PHAI DOI O DAY, y nhu `ngu_phap._doi_bi_danh`.
+        #
+        # Do 15/09/2026: `stoch` (9 co che) va `bb_upper`/`bb_lower` (2) bi bo
+        # voi ly do "chua dich duoc chi bao" - trong khi ngu phap CO hieu chung,
+        # no chi doi ten truoc khi tinh. Bo dich thi doc `chi_bao` THO. Tuc mot
+        # co che chay duoc bang Python nhung vo hinh voi trong tai, chi vi mot
+        # cai ten khac. Doi o day thi ca lop lech do bien mat, ke ca nhung bi
+        # danh them vao sau nay.
+        t = _doi_bi_danh(t)
         cb = str(t.get("chi_bao", "")).lower()
         if cb not in CHI_BAO_DICH_DUOC:
             raise KhongDichDuoc("chua dich duoc chi bao '%s'" % cb)
@@ -430,6 +454,148 @@ class BoDich:
                 "   if(!(g[0] == g[1] && g[0] == g[2])) return(0.0);\n"
                 "   return(g[0]);")
         raise KhongDichDuoc("mau_nen `mau` khong biet: %r" % t.get("mau"))
+
+    def _cb_bollinger(self, t: dict) -> str:
+        """SMA(n) +- k * do lech chuan(n) - y het ban Python.
+
+        Dung `_gop_tb` / `_cb_do_lech` da co san thay vi `iBands`: `iBands`
+        dung do lech chuan TONG THE (chia n) con `pandas.rolling.std()` mac
+        dinh chia (n-1). Hai cong thuc lech nhau mot he so sqrt(n/(n-1)) - nho
+        nhung khong bang khong, va no se hien ra duoi dang "MT5 lech Python mot
+        chut" ma khong ai truy duoc.
+        """
+        n = int(t.get("n", 20) or 20)
+        k = float(t.get("k", 2.0) or 2.0)
+        lay = str(t.get("lay", "duoi")).lower()
+        nguon = t.get("cua") or {"chi_bao": "gia",
+                                 "cot": str(t.get("cot", "close")).lower()}
+        f = self.toan_hang(nguon)
+        giua = "%s(s)" % self._gop_tb(f, n)
+        sd = "%s(s)" % self._cb_do_lech({"cua": nguon, "n": n})
+        if lay == "giua":
+            return self._than("   return(%s);" % giua)
+        if lay == "tren":
+            return self._than("   return(%s + (%.10g) * %s);" % (giua, k, sd))
+        if lay == "duoi":
+            return self._than("   return(%s - (%.10g) * %s);" % (giua, k, sd))
+        if lay == "do_rong":
+            return self._than(
+                "   double g = %s; if(g == 0.0) return(0.0);\n"
+                "   return(2.0 * (%.10g) * %s / g);" % (giua, k, sd))
+        if lay == "phan_tram_b":
+            return self._than(
+                "   double g = %s, d = (%.10g) * %s;\n"
+                "   if(d == 0.0) return(0.0);\n"
+                "   return((%s(s) - (g - d)) / (2.0 * d));" % (giua, k, sd, f))
+        raise KhongDichDuoc("bollinger `lay` khong biet: %r" % t.get("lay"))
+
+    #: Bao nhieu bar khoi dong cho `heiken`. Anh huong cua hat giong giam theo
+    #: 0,5^k, nen 60 bar cho sai so ~8,7e-19 - duoi do phan giai cua `double`.
+    #: Tuc day KHONG phai xap xi, no chinh xac trong so hoc dau phay dong.
+    KHOI_DONG_HA = 60
+
+    #: Bao nhieu bar khoi dong cho `supertrend`. KHAC HAN `heiken`: trang thai
+    #: cua supertrend la mot CAI CHOT, khong phai mot trung binh suy giam - no
+    #: co the giu nguyen bao lau cung neu xu huong khong lat. 500 bar hau nhu
+    #: luon chua it nhat mot lan lat (do chinh la diem cua chi bao nay), va sau
+    #: lan lat dau tien thi trang thai la CHINH XAC. Nhung "hau nhu luon" khong
+    #: phai "luon" - xem ghi chu trong `_cb_supertrend`.
+    KHOI_DONG_ST = 500
+
+    def _cb_heiken(self, t: dict) -> str:
+        """Heikin-Ashi. `lay`: chieu | than | khong_rau_duoi | khong_rau_tren.
+
+        `ha_open[i] = (ha_open[i-1] + ha_close[i-1]) / 2` - phu thuoc chinh no
+        o bar truoc. Mot ham theo `shift` khong co trang thai, nen phai tinh
+        lai tu mot moc lui. Anh huong cua moc do giam theo **0,5^k**: sau 60
+        bar la 8,7e-19, duoi do phan giai cua `double`. Nen day khong phai mot
+        phep xap xi ma la chinh xac trong so hoc dau phay dong.
+        """
+        lay = str(t.get("lay", "chieu")).lower()
+        if lay not in ("chieu", "than", "khong_rau_duoi", "khong_rau_tren"):
+            raise KhongDichDuoc("heiken `lay` khong biet: %r" % t.get("lay"))
+        than = (
+            "   int m = s + %d;\n"
+            "   double ho = (iOpen(_Symbol,KHUNG,m) + iClose(_Symbol,KHUNG,m)) / 2.0;\n"
+            "   double hc = ho;\n"
+            "   for(int k = m; k >= s; k--)\n"
+            "     {\n"
+            "      double o=iOpen(_Symbol,KHUNG,k), h=iHigh(_Symbol,KHUNG,k),\n"
+            "             l=iLow(_Symbol,KHUNG,k), c=iClose(_Symbol,KHUNG,k);\n"
+            "      double c2 = (o + h + l + c) / 4.0;\n"
+            "      if(k < m) ho = (ho + hc) / 2.0;\n"
+            "      hc = c2;\n"
+            "      if(k == s)\n"
+            "        {\n"
+            "         double hh = MathMax(h, MathMax(ho, hc));\n"
+            "         double hl = MathMin(l, MathMin(ho, hc));\n"
+            "         %s\n"
+            "        }\n"
+            "     }\n"
+            "   return(0.0);" % (self.KHOI_DONG_HA, {
+                "chieu": "return((hc > ho) ? 1.0 : ((hc < ho) ? -1.0 : 0.0));",
+                "than": ("double b = hh - hl; if(b <= 0.0) return(0.0);\n"
+                         "         return((hc - ho) / b);"),
+                "khong_rau_duoi":
+                    "return((MathAbs(MathMin(ho,hc) - hl) < 1e-12) ? 1.0 : 0.0);",
+                "khong_rau_tren":
+                    "return((MathAbs(hh - MathMax(ho,hc)) < 1e-12) ? 1.0 : 0.0);",
+            }[lay]))
+        return self._than(than)
+
+    def _cb_supertrend(self, t: dict) -> str:
+        """Supertrend. `lay`: chieu | duong | khoang_cach.
+
+        ## Day la mot XAP XI, khac `heiken`
+
+        Trang thai cua supertrend la mot CAI CHOT: duong bien chot lai va chi
+        noi long khi xu huong lat. No khong suy giam theo thoi gian nhu
+        Heikin-Ashi, nen khong co so bar khoi dong nao lam no chinh xac ve mat
+        toan hoc.
+
+        Cai cuu duoc la ban chat cua chinh chi bao: no LAT thuong xuyen (do la
+        diem cua no). Sau lan lat DAU TIEN trong cua so khoi dong, trang thai
+        la chinh xac. Voi 500 bar, mot chuoi khong lat lan nao la rat hiem -
+        nhung "rat hiem" khong phai "khong bao gio".
+
+        Nen quy tac doc: neu mot he supertrend qua cong, **doi chieu so lenh
+        MT5 voi so tin hieu Python truoc khi tin**. Chenh lech o vai lenh dau
+        cua so la binh thuong; chenh lech he thong la dau hieu cua so khoi dong
+        chua du.
+        """
+        lay = str(t.get("lay", "chieu")).lower()
+        if lay not in ("chieu", "duong", "khoang_cach"):
+            raise KhongDichDuoc("supertrend `lay` khong biet: %r" % t.get("lay"))
+        n = int(t.get("n", 10) or 10)
+        k = float(t.get("k", 3.0) or 3.0)
+        i_atr = self._dang_ky_atr(n)
+        ra = {"chieu": "return(ch);",
+              "duong": "return(duong);",
+              "khoang_cach": ("double a = Chi(h_atr%d, s); if(a <= 0.0) "
+                              "return(0.0);\n         return((iClose("
+                              "_Symbol,KHUNG,s) - duong) / a);" % i_atr)}[lay]
+        return self._than(
+            "   int m = s + %d;\n"
+            "   double ch = 1.0, tren = 0.0, duoi = 0.0, duong = 0.0;\n"
+            "   bool dau = true;\n"
+            "   for(int j = m; j >= s; j--)\n"
+            "     {\n"
+            "      double a = Chi(h_atr%d, j);\n"
+            "      if(a <= 0.0) continue;\n"
+            "      double hl2 = (iHigh(_Symbol,KHUNG,j) + iLow(_Symbol,KHUNG,j)) / 2.0;\n"
+            "      double c = iClose(_Symbol,KHUNG,j);\n"
+            "      double tt = hl2 + (%.10g) * a, td = hl2 - (%.10g) * a;\n"
+            "      if(dau) { tren = tt; duoi = td; dau = false; }\n"
+            "      else\n"
+            "        {\n"
+            "         tren = (tt < tren || iClose(_Symbol,KHUNG,j+1) > tren) ? tt : tren;\n"
+            "         duoi = (td > duoi || iClose(_Symbol,KHUNG,j+1) < duoi) ? td : duoi;\n"
+            "        }\n"
+            "      if(ch > 0.0 && c < duoi) ch = -1.0;\n"
+            "      else if(ch < 0.0 && c > tren) ch = 1.0;\n"
+            "      duong = (ch > 0.0) ? duoi : tren;\n"
+            "     }\n"
+            "   %s" % (self.KHOI_DONG_ST, i_atr, k, k, ra))
 
     # --- bien doi ---
     def _cb_tre(self, t: dict) -> str:
