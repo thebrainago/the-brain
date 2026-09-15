@@ -40,7 +40,7 @@ CHI_BAO_DICH_DUOC = {
     "tong", "bien_do", "than_nen", "ibs", "khoi_luong", "gio", "ngay_trong_tuan",
     "ngay_trong_thang", "thang", "tuyen_tinh",
     "adx", "cci", "donchian", "keltner",
-    "stochastic", "dong_luong", "macd",
+    "stochastic", "dong_luong", "macd", "mau_nen",
 }
 PHEP_MQL = {"<": "<", "<=": "<=", ">": ">", ">=": ">=", "==": "==", "!=": "!="}
 
@@ -355,6 +355,81 @@ class BoDich:
         return self._than("   return(Chi(h_ma%d, s) - Chi(h_ma%d, s));"
                           % (self._dang_ky_ma(nhanh, "MODE_EMA"),
                              self._dang_ky_ma(cham, "MODE_EMA")))
+
+    #: Mau nen -> bieu thuc MQL5. Moi mau la so hoc OHLC thuan tren bar hien
+    #: tai va toi da hai bar truoc - khong trang thai, khong de quy.
+    #:
+    #: MOI MAU DEU CHUAN HOA THEO BIEN DO CUA CHINH BAR, y het ban Python: mot
+    #: mau nen khai bang so pip la mau nen cua MOT TAI SAN, khong phai mot mau
+    #: nen. Do cung la ly do chung khong dinh bay `thang_gia`.
+    MAU_NEN_BT = {
+        "nen_dac":   "(ta / bien) * ch",
+        "rau_tren":  "(tren / bien)",
+        "rau_duoi":  "(duoi / bien)",
+        "doji":      "(1.0 - ta / bien)",
+        "bua":       "(duoi / bien - tren / bien - ta / bien)",
+        "sao_bang":  "(tren / bien - duoi / bien - ta / bien)",
+    }
+
+    def _cb_mau_nen(self, t: dict) -> str:
+        """Mau nen hop thanh, CO DAU theo chieu - y het `ngu_phap._mau_nen`.
+
+        135 co che trong kho dung toan hang nay, va truoc 15/09/2026 **khong
+        cai nao ra noi MT5 tester** - tuc mot dong nguyen trong so do cua chu
+        du an (*"Cac dang nen khac nhau"*) chua bao gio duoc trong tai cham.
+
+        `bien = 0` (bar khong bien do) tra ve 0.0 chu khong chia cho khong.
+        Ban Python thay `0` bang NaN va NaN roi ve khong tin hieu - cung ket
+        qua, khac duong di.
+        """
+        mau = str(t.get("mau", "")).lower()
+        dau = ("   double o=iOpen(_Symbol,KHUNG,s), h=iHigh(_Symbol,KHUNG,s),\n"
+               "          l=iLow(_Symbol,KHUNG,s), c=iClose(_Symbol,KHUNG,s);\n"
+               "   double bien = h - l; if(bien <= 0.0) return(0.0);\n"
+               "   double than = c - o, ta = MathAbs(than);\n"
+               "   double ch = (than > 0.0) ? 1.0 : ((than < 0.0) ? -1.0 : 0.0);\n"
+               "   double tren = h - MathMax(o, c), duoi = MathMin(o, c) - l;\n")
+        if mau in self.MAU_NEN_BT:
+            return self._than(dau + "   return(%s);" % self.MAU_NEN_BT[mau])
+        # --- cac mau can BAR TRUOC ---
+        truoc = ("   double o1=iOpen(_Symbol,KHUNG,s+1), h1=iHigh(_Symbol,KHUNG,s+1),\n"
+                 "          l1=iLow(_Symbol,KHUNG,s+1), c1=iClose(_Symbol,KHUNG,s+1);\n")
+        if mau == "trong":
+            return self._than(
+                dau + truoc +
+                "   if(!(h < h1 && l > l1)) return(0.0);\n"
+                "   double b1 = h1 - l1; if(b1 <= 0.0) return(0.0);\n"
+                "   return(1.0 - bien / b1);")
+        if mau == "ngoai":
+            return self._than(
+                dau + truoc +
+                "   if(!(h > h1 && l < l1)) return(0.0);\n   return(ch);")
+        if mau == "nhan_chim":
+            return self._than(
+                dau + truoc +
+                "   double tr1 = MathMax(o1, c1), du1 = MathMin(o1, c1);\n"
+                "   double t1 = c1 - o1;\n"
+                "   double c1d = (t1 > 0.0) ? 1.0 : ((t1 < 0.0) ? -1.0 : 0.0);\n"
+                "   bool trum = (MathMax(o,c) >= tr1 && MathMin(o,c) <= du1);\n"
+                "   if(!(trum && ch * c1d < 0.0)) return(0.0);\n"
+                "   return(ch);")
+        if mau == "ba_nen":
+            return self._than(
+                dau +
+                "   double e[3], a[3], b[3], g[3];\n"
+                "   for(int k = 0; k < 3; k++)\n"
+                "     {\n"
+                "      double oo=iOpen(_Symbol,KHUNG,s+k), cc=iClose(_Symbol,KHUNG,s+k);\n"
+                "      double bb=iHigh(_Symbol,KHUNG,s+k)-iLow(_Symbol,KHUNG,s+k);\n"
+                "      if(bb <= 0.0) return(0.0);\n"
+                "      e[k] = cc - oo; a[k] = MathAbs(e[k]) / bb;\n"
+                "      g[k] = (e[k] > 0.0) ? 1.0 : ((e[k] < 0.0) ? -1.0 : 0.0);\n"
+                "      b[k] = bb;\n"
+                "     }\n"
+                "   if(!(a[0] > 0.5 && a[1] > 0.5 && a[2] > 0.5)) return(0.0);\n"
+                "   if(!(g[0] == g[1] && g[0] == g[2])) return(0.0);\n"
+                "   return(g[0]);")
+        raise KhongDichDuoc("mau_nen `mau` khong biet: %r" % t.get("mau"))
 
     # --- bien doi ---
     def _cb_tre(self, t: dict) -> str:

@@ -279,6 +279,67 @@ def _so(x, mac_dinh=0.0):
         return mac_dinh
 
 
+
+
+def _gop_trung_hanh_vi(kho: list, symbol: str, khung: str) -> tuple:
+    """Bo co che sinh ra CHUOI TIN HIEU Y HET nhau. Tra (kho da gop, bi_danh).
+
+    ## Vi sao phai o day
+
+    `nhan/loc_co_che._van_tay_hanh_vi` co tu truoc va no CHAY DUNG - do 15/09
+    tren XM_US100CASH H1, `ns_nen_bua_>_q90_giu10` va
+    `ns_nen_rau_duoi_>_q90_giu10` cho cung mot bam `013c96e1f1ddb02a`. Nhung
+    `chay_tester_kho` doc thang `ngu_phap.doc_kho()` va chi ap `kiem_khai_bao`,
+    nen no chua bao gio thay bo loc do.
+
+    Hau qua do duoc cung ngay: mot luot 135 co che `mau_nen`, trong do
+    `bua` <-> `rau_duoi` va `sao_bang` <-> `rau_tren` la CUNG MOT THU. Trong
+    nen, ba phan `rau duoi / rau tren / than` cong lai bang 1, nen
+
+        bua      = duoi/bien - tren/bien - |than|/bien = 2*(duoi/bien) - 1
+        sao_bang = 2*(tren/bien) - 1
+
+    Hai bien doi tuyen tinh TANG, nen sau `phan_vi` chung xep hang y het nhau.
+    Do duoc: lech toi da 1,1e-16, Spearman 1,000000.
+
+    Cai dat nhat khong phai luot tester thua ma la **hai co che giong het nhau
+    trong nhu hai xac nhan doc lap** - va neu ca hai cung qua cong thi nguoi
+    doc se tin gap doi vao mot thu duy nhat.
+
+    Do tren CHINH tai san va khung sap chay, khong phai mot chuoi chuan: hai co
+    che co the trung tren ma nay va khac tren ma khac.
+    """
+    import hashlib
+    try:
+        import numpy as np
+        from nhan import du_lieu as DL
+    except Exception:
+        return kho, {}
+    goc = symbol.replace("micro", "").replace("Cash", "")
+    for thu in (goc, symbol):
+        try:
+            df = DL.nap(thu, khung)
+            break
+        except Exception:
+            df = None
+    if df is None or len(df) < 200:
+        return kho, {}          # khong do duoc thi CHO CHAY, dung chan mu
+    nhom: dict = {}
+    ra, bi_danh = [], {}
+    for c in kho:
+        try:
+            a = np.nan_to_num(np.asarray(NP.sinh_tu_spec(c, df), dtype=float))
+            vt = hashlib.blake2b(a.tobytes(), digest_size=8).hexdigest()
+        except Exception:
+            ra.append(c)        # khong do duoc thi giu lai
+            continue
+        if vt in nhom:
+            bi_danh.setdefault(nhom[vt], []).append(str(c.get("ten")))
+            continue
+        nhom[vt] = str(c.get("ten"))
+        ra.append(c)
+    return ra, bi_danh
+
 def chay(symbol: str, khung: str, so: int = 0, loc: str = "",
          tu: str = "2011.01.01", den: str = "2026.07.29",
          lot: float = 0.10) -> dict:
@@ -364,6 +425,13 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
     from nhan import thang_gia as TG
     for dong in TG.canh_bao_cho_ma([c.get("ten") for c in kho], symbol):
         print("  " + dong)
+
+    kho, bi_danh = _gop_trung_hanh_vi(kho, symbol, khung)
+    if bi_danh:
+        print("  gop %d co che TRUNG HANH VI (cung mot chuoi tin hieu):"
+              % sum(len(v) for v in bi_danh.values()))
+        for giu, bo in list(bi_danh.items())[:6]:
+            print("     %-40s <- %s" % (giu[:40], ", ".join(x[:34] for x in bo[:3])))
 
     ma, dat = D.sinh_ea(kho, TEN_EA, khung=khung)
     bo = [c for c in kho if c.get("_khong_dich")]
