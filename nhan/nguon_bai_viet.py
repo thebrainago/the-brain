@@ -184,6 +184,74 @@ TRANG: dict[str, dict] = {
                    "duong lach: ho da noi khong. Muon doc tiep thi hoac qua "
                    "CDP voi trinh duyet that cua nguoi dung, hoac mua goi cua "
                    "ho. Da giu lai 1 bai lay duoc luc con duoc phuc vu."},
+
+    # ---------------------------------------------------------------------
+    # DIEN DAN GIAO DICH THEO QUOC GIA (them 15/09/2026)
+    #
+    # Chu du an: *"o vietnam co dien dan traderviet, vay o hang bao nhieu nuoc
+    # kia cung co nhung dien dan nhu the."*
+    #
+    # Do 15/09 tren so THAT truoc khi them: 11.999 ban doc thi **92,9% tieng
+    # Anh**; nam nguon phi-Anh dang co (qiita/habr/smart-lab/cnblogs/velog) deu
+    # la blog KY THUAT chung, khong mot cai nao la dien dan GIAO DICH.
+    #
+    # `_do_dien_dan_quoc_gia.py` da do 18 ung vien va ghi
+    # `reports/DIEN_DAN_QUOC_GIA.json`: **7 VAO DUOC co link**, 10 khong vao
+    # duoc (forexfactory, babypips, mmgp, fx168, pantip... - phan lon Cloudflare),
+    # 1 vao duoc nhung 0 link (kaskus - trang dung JS).
+    #
+    # Chi dang ky 7 cai DA DO. Khong dang ky theo danh tieng: danh sach "bi
+    # chan tren may nay" do 22/08 hoa ra phan lon SAI khi do lai, nen ca hai
+    # chieu deu phai do chu khong doan.
+    "mql5_forum_ru": {
+        "seed": ["https://www.mql5.com/ru/forum"],
+        "mau_link": r"^https://www\.mql5\.com/ru/forum/\d+",
+        "loai_tru": r"/(?:page|search|users|login|register)/",
+        "ua": UA_BOT, "hang": "A", "loai": "dien_dan", "cham_giay": 8.0,
+        "bat": True,
+        "ghi_chu": "180 KB / 106 link. Cong dong MQL lon nhat va ho viet bang "
+                   "tieng Nga. Cham 8 giay: mql5 cam theo IP sau ~50-150 luot "
+                   "[[mql5-bi-chan-vi-dns-va-vi-chinh-ta]]."},
+    "traderviet": {
+        "seed": ["https://traderviet.com/",
+                 "https://traderviet.com/forums/robot-ea-indicator.44/"],
+        "mau_link": r"^https://traderviet\.com/threads/",
+        "loai_tru": r"/(?:page-\d+|login|register|members)/",
+        "ua": UA_BOT, "hang": "B", "loai": "dien_dan", "cham_giay": 3.0,
+        "bat": True,
+        "ghi_chu": "156 KB / 89 link. Chuyen muc robot-ea-indicator la cho co "
+                   "mat do EA cao nhat."},
+    "thaiforexschool": {
+        "seed": ["https://www.thaiforexschool.com/"],
+        "mau_link": r"^https://www\.thaiforexschool\.com/[a-z0-9\-/]+",
+        "loai_tru": r"/(?:tag|page|login|register)/",
+        "ua": UA_BOT, "hang": "B", "loai": "dien_dan", "cham_giay": 3.0,
+        "bat": True,
+        "ghi_chu": "96 KB / 55 link. Cong dong Thai, co muc chia se EA."},
+    "note_fx": {
+        "seed": ["https://note.com/hashtag/FX%E8%87%AA%E5%8B%95%E5%A3%B2%E8%B2%B7"],
+        "mau_link": r"^https://note\.com/[a-z0-9_]+/n/",
+        "loai_tru": r"/(?:hashtag|login|signup)/",
+        "ua": UA_BOT, "hang": "B", "loai": "dien_dan", "cham_giay": 3.0,
+        "bat": True,
+        "ghi_chu": "1,0 MB / 50 link. Hashtag `FX tu dong mua ban` - cong dong "
+                   "EA Nhat viet bai dai."},
+    "fxon": {
+        "seed": ["https://fx-on.com/"],
+        "mau_link": r"^https://fx-on\.com/(?:program|blog)/",
+        "loai_tru": r"/(?:login|cart|mypage)/",
+        "ua": UA_BOT, "hang": "A", "loai": "dien_dan", "cham_giay": 3.0,
+        "bat": True,
+        "ghi_chu": "247 KB / 28 link. Cho ban EA cua Nhat - moi san pham co mo "
+                   "ta co che va duong von."},
+    "smartlab_blog": {
+        "seed": ["https://smart-lab.ru/blogs/"],
+        "mau_link": r"^https://smart-lab\.ru/(?:blog|company)/",
+        "loai_tru": r"/(?:page\d+|login)/",
+        "ua": UA_BOT, "hang": "B", "loai": "dien_dan", "cham_giay": 3.0,
+        "bat": True,
+        "ghi_chu": "61 KB / 1 link o trang goc - it, nhung nguon Nga con lai "
+                   "deu chan. Giu de do lai sau."},
 }
 
 #: Bai ngan hon nguong nay thi doc them trang goc. Duoi 1.500 ky tu thuong chi
@@ -433,7 +501,34 @@ def thu_thap_trang(ma: str, so_trang: int = 6, ngan_sach_giay: int = 120) -> dic
                 bao["ky_tu"] += len(vb)
     bao["con_cho"] = len(tt["cho"])
     _luu_bien_gioi(bg)
+    _ghi_so_nguon_trang(ma, bao)
     return bao
+
+
+def _ghi_so_nguon_trang(ma: str, bao: dict) -> None:
+    """Mot nguon thu duoc hang thi PHAI co dong trong so `nguon`.
+
+    Do 15/09/2026: sau khi them 6 dien dan quoc gia, ca sau deu thu duoc ban
+    doc va `tai_lieu.nguon` ghi dung `trang_<ma>` - nhung bang `nguon` KHONG co
+    dong nao. Ly do: doan ghi so chi nam trong `thu_thap_tat_ca`, con ai goi
+    thang `thu_thap_trang` thi nguon do vo hinh.
+
+    Hau qua khong phai mat du lieu ma la mat DIEU HUONG: bang nang suat theo
+    nguon cua EVO join tren `nguon`, thu tu doc theo nang suat cung vay - nen
+    mot nguon dang chay tot se khong bao gio duoc uu tien, va mot nguon chet
+    cung khong ai biet. Cung ho voi loi `_ten_nguon` o tren.
+    """
+    ct = TRANG.get(ma) or {}
+    try:
+        SO.chay("INSERT INTO nguon(ma,ten,loai,url,chu_ky_giay,lan_cuoi,so_lan,"
+                "thu_hoach,trang_thai) VALUES(?,?,?,?,?,?,1,?,'BAT') "
+                "ON CONFLICT(ma) DO UPDATE SET lan_cuoi=excluded.lan_cuoi, "
+                "so_lan=so_lan+1, thu_hoach=thu_hoach+excluded.thu_hoach",
+                "trang_" + ma, "duyet trang " + ma, ct.get("loai", "blog"),
+                (ct.get("seed") or [""])[0], 21600, time.time(),
+                int(bao.get("ban_doc_moi") or 0))
+    except Exception:
+        pass          # ghi so hong khong duoc lam hong luot thu thap
 
 
 def _ten_nguon(ma: str, la_trang: bool = False) -> str:
