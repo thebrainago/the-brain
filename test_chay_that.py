@@ -49,6 +49,7 @@ class MT5Gia:
     ORDER_TYPE_BUY, ORDER_TYPE_SELL = 0, 1
     TRADE_ACTION_DEAL = 1
     TIMEFRAME_H4 = 16388
+    ORDER_FILLING_FOK, ORDER_FILLING_IOC, ORDER_FILLING_RETURN = 0, 1, 2
 
     def __init__(self, loai_tk=CT.TK_DEMO, vi_the=(), n_bar=400):
         self.loai_tk, self._vt, self.da_gui = loai_tk, list(vi_the), []
@@ -65,6 +66,9 @@ class MT5Gia:
 
     def symbol_select(self, ma, bat=True):
         return True
+
+    def symbol_info(self, ma):
+        return types.SimpleNamespace(filling_mode=2)   # IOC
 
     def symbol_info_tick(self, ma):
         return _Tick()

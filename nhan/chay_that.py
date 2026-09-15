@@ -162,17 +162,40 @@ def _ly_do_that_bai() -> list:
     return ra[:6] or ["log khong noi gi bat thuong - xem %s" % f]
 
 
-def _mt5(cho_giay: float = 120.0):
-    """Mo MT5 va TU DANG NHAP. Dong terminal cu truoc - may chi co MOT.
+def _mt5(cho_giay: float = 120.0, live: bool = False):
+    """Mo MT5. Hai che do:
 
-    Tai khoan khai NGAY o day chu khong dua vao trang thai truoc do: do dung
-    bai hoc cua `bi_mat.khoi_common_ini` (*"dang nhap dong lenh KHONG luu tai
-    khoan vao ho so terminal"*), va do la dieu kien de he chay hang thang tren
-    VPS ma khong co nguoi bam `File -> Login`.
+    `live=False` (backtest/dien tap): dong terminal cu, tu dang nhap tai khoan
+    trong config. Tu chu, chay duoc tren VPS khong nguoi.
+
+    `live=True` (GUI LENH THAT): KET NOI vao terminal DANG CHAY cua nguoi dung -
+    KHONG dong no. Gui lenh that can AlgoTrading bat, ma AlgoTrading la setting
+    UI cua terminal co cua so; ban headless do `initialize(login=...)` khoi dong
+    LUON tat Algo. Nen live mode gan vao terminal that (nguoi dung da dang nhap
+    + bam Ctrl+E), kiem `trade_allowed` roi moi tra ve.
     """
     import MetaTrader5 as mt5
     from chay_tester_z5 import XM_EXE, dong_terminal
     from nhan import bi_mat as BM
+    if live:
+        # GAN VAO TERMINAL DANG CHAY - khong path login, khong dong terminal.
+        # `initialize()` tran (khong tham so) gan vao instance dang mo; neu
+        # khong co terminal nao chay no khoi dong mot ban headless (Algo tat),
+        # va `trade_allowed` se False -> ta bao dung.
+        if not mt5.initialize(timeout=int(cho_giay * 1000)):
+            if not mt5.initialize(path=str(XM_EXE), timeout=int(cho_giay * 1000)):
+                raise ChuaDoDuoc(
+                    "khong gan duoc vao terminal dang chay. Mo MT5, dang nhap "
+                    "demo, bam AlgoTrading (Ctrl+E) roi chay lai. %s"
+                    % (mt5.last_error(),))
+        ti = mt5.terminal_info()
+        if ti is None or not getattr(ti, "trade_allowed", False):
+            mt5.shutdown()
+            raise ChuaDoDuoc(
+                "AlgoTrading TAT tren terminal dang chay (Ctrl+E de bat). Live "
+                "mode gan vao terminal cua ban chu khong tu khoi dong - dung "
+                "vay: ban headless luon tat Algo.")
+        return mt5
     # `nhan/dang_nhap_mt5.py` ton tai tu truoc voi dung muc dich nay ("de
     # tester chay duoc khi khong co nguoi") va nam MO COI. Toi da viet lai mot
     # ban thu hai o day ma khong biet - dung cai benh minh dang di chua. Nay
@@ -246,9 +269,26 @@ def _dong_het(mt5, ma: str, magic: int) -> list:
             "type": mt5.ORDER_TYPE_SELL if ban else mt5.ORDER_TYPE_BUY,
             "price": (t.bid if ban else t.ask) if t else 0.0,
             "magic": int(magic), "deviation": 20,
+            "type_filling": _filling(mt5, ma),
             "comment": "chay_that dong"})
         ra.append({"ticket": int(p.ticket), "ma_tra_ve": int(getattr(r, "retcode", -1))})
     return ra
+
+
+def _filling(mt5, ma: str) -> int:
+    """Che do khop lenh symbol NAY chap nhan. 10030 = sai che do khop.
+
+    `symbol_info.filling_mode` la bitmask: 1 = FOK, 2 = IOC. Broker/symbol khac
+    nhau chap nhan khac nhau; khong set thi mac dinh cua terminal co the sai ->
+    order_send tra 10030 (unsupported filling). Do 15/09 tren AUDCAD# demo XM.
+    """
+    s = mt5.symbol_info(ma)
+    fm = int(getattr(s, "filling_mode", 0)) if s else 0
+    if fm & 2:
+        return mt5.ORDER_FILLING_IOC
+    if fm & 1:
+        return mt5.ORDER_FILLING_FOK
+    return mt5.ORDER_FILLING_RETURN
 
 
 def _mo(mt5, ma: str, magic: int, lot: float, mua: bool) -> dict:
@@ -264,7 +304,8 @@ def _mo(mt5, ma: str, magic: int, lot: float, mua: bool) -> dict:
         "action": mt5.TRADE_ACTION_DEAL, "symbol": ma, "volume": float(lot),
         "type": mt5.ORDER_TYPE_BUY if mua else mt5.ORDER_TYPE_SELL,
         "price": t.ask if mua else t.bid, "magic": int(magic),
-        "deviation": 20, "comment": "chay_that"})
+        "deviation": 20, "type_filling": _filling(mt5, ma),
+        "comment": "chay_that"})
     rc = int(getattr(r, "retcode", -1))
     # 10027 = AlgoTrading tat tren terminal - mot rao VAN HANH, khong phai loi
     # co che. Bot khong tu bat duoc; can nguoi bam nut AlgoTrading (Ctrl+E) mot
@@ -281,9 +322,16 @@ def _mo(mt5, ma: str, magic: int, lot: float, mua: bool) -> dict:
 
 # ------------------------------------------------------------------ NHIP
 def mot_nhip(that: bool = False, cho_tien_that: bool = False,
-             chi_he: str = "") -> list:
-    """Mot vong quyet dinh cho MOI he dang bat. Tra ve danh sach ban ghi."""
+             chi_he: str = "", live: bool | None = None) -> list:
+    """Mot vong quyet dinh cho MOI he dang bat. Tra ve danh sach ban ghi.
+
+    `live` mac dinh = `that`: gui lenh THAT thi phai vao terminal cua nguoi
+    dung (co AlgoTrading). Dien tap (`that=False`) doc bar/tin hieu tu ban
+    headless cung duoc.
+    """
     from nhan import han_muc as HM
+    if live is None:
+        live = that
     d = danh_sach()
     if not d:
         return [{"trang_thai": "CHUA_DO_DUOC",
@@ -292,8 +340,12 @@ def mot_nhip(that: bool = False, cho_tien_that: bool = False,
     # rang buoc voi `chay_tester_kho.chay`; thieu no thi luot chay chet voi mot
     # loi khong noi gi ve WARP.
     from nhan import ngan_sach as NS
-    with NS.giu_warp(False, "chay_that"):
-        return _trong_warp(mt5_moi=_mt5(), that=that,
+    import contextlib
+    # LIVE: KHONG dong WARP - terminal cua nguoi dung DA ket noi may chu, dong
+    # WARP giua chung co the ngat no. Chi backtest/dien tap moi ep WARP tat.
+    ngu_canh = contextlib.nullcontext() if live else NS.giu_warp(False, "chay_that")
+    with ngu_canh:
+        return _trong_warp(mt5_moi=_mt5(live=live), that=that,
                            cho_tien_that=cho_tien_that, chi_he=chi_he, d=d)
 
 
