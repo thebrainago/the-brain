@@ -65,10 +65,29 @@ fac326d bo dich MQL5 la nut that: 563 -> 226 co che khong ra noi tester
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+AUDCAD H4 la he MANH NHAT du an tung dung: chon 40 tren TRAIN 2016-2021, **16
+song holdout** = 7,24x nen, gom thanh **8 cum doc lap** (tuong quan trung vi
+0,173), **placebo 8/8 qua, danh muc p=0,0000** - edge tu TIMING that. Duong bien
+lai-DD tuyen tinh: lot 36 = **+27%/nam @ DD30%** (nhung 2022 va 2024 gan hu_ - la
+hoi quy nen loi khong deu). Duong RA LENH LIVE da thong dau-cuoi tren demo
+(retcode 10009). HAI thu bi loai dung phep: **M15 khung thap** (placebo danh muc
+p=0,49 - spread an het edge, H4 moi dung) va **chuyen 8 cum sang cap khac**
+(EURGBP/NZDCAD AM o chi phi THAT du Python flat-cost bao duong - tester la trong
+tai). Ket luan: muon ghep cap thi phai CHON RIENG tung cap, khong chuyen cum.
 
 ## Viec tiep theo, theo thu tu
 
-1. (chua dien)
+1. **EURGBP chon RIENG** (train H4 da xong: `reports/TESTER_KHO_EURGBPmicro_H4.json`).
+   Chay chuoi da nhan `--ma EURGBP --khung H4`:
+   `_audcad_chon_va_xac_nhan.py` -> `_audcad_gom_cum.py` -> `_audcad_placebo.py`.
+   Neu EURGBP co danh muc rieng qua placebo + tuong quan chuoi von THAP voi AUDCAD
+   -> ghep hai cap thanh danh muc da tai san (nang Calmar, khong chi tang don bay).
+   Can TESTER_EURGBP_H4_TRAIN.json + _HOLDOUT.json truoc khi chay buoc chon.
+2. **Quyet dinh don bay lot demo** (chu du an: 27% it, khong so rui ro). Hien
+   verify lot 0,1/chan. 27%/nam = lot 0,9/chan tren 25k; muon hon thi nang tiep
+   theo duong bien trong AUDCAD_TONG_KET.md. Doi `b demo` lot roi chay `nhip --that`.
+3. **Cron nhip --that moi 4h** (bar H4 dong) de tu dong 24/7. Terminal phai mo +
+   Algo bat (che do live gan vao terminal nguoi dung, khong headless).
+4. Passview: san Telegram/social lay tai khoan AUDCAD nguoi that de doc quan tri lenh.
 
 
