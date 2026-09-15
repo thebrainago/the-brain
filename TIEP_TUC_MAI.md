@@ -68,3 +68,42 @@ tren vang truoc day se ra 0 lenh. Kiem: `b ten-ma XAUUSD GOLD`.
 
 5. **Quy ket cho THANG GIA thi moi thu khac phai giu nguyen.** Ban do dau tien
    tron khung (H4/D1) va bat oan ngay. Sau nay do bat cu chieu nao cung vay.
+
+---
+
+# BO SUNG cuoi phien 15/09 — sau khi chu du an giao them viec
+
+## DA XONG
+
+1. **Duong ra tien** (`nhan/chay_that.py`, `b demo`). Chan lai o mot cho
+   CAN NGUOI: **tai khoan XM dang dang nhap la TIEN THAT, so du 0,00** - can
+   mot tai khoan DEMO. Da chay het duong o che do dien tap.
+2. **Nut that toc do**: `sua_bar_hong` ton 8,12s moi lan `nap()` tren chuoi
+   SACH, chay SAU cache. Da them cong do vector hoa: **25-40 lan nhanh hon,
+   ket qua giong het tren 7 ma**. `test_ngoai_sinh` treo >30 phut -> 195 giay.
+3. **Seeker da ngon ngu**: bang `tu_khoa` that 241 tu **100% ASCII**; ban doc
+   **92,9% tieng Anh**. Da nap 166 cum x 15 thu tieng -> **391 tu, 103 phi-ASCII**.
+   Dang ky **6 dien dan quoc gia** da do la vao duoc (mql5 Nga, traderviet,
+   thaiforexschool, note_fx, fx-on, smart-lab).
+4. **`b tai-san <MA>`** - noi `nhan/ho_so_tai_san.py` (816 dong, MO COI) vao
+   cua vao. Them tach song theo chieu + `b dem-nen`.
+
+## CON LAI, THEO THU TU CHU DU AN DUA
+
+1. **Khau boc tach** (thuc quan noi hai module lon nhat) - CHUA danh gia.
+   Ba module MO COI nam dung o day: `nhan/doc_pdf.py`, `nhan/doc_anh.py`
+   (ca hai co OCR), va `nhan/tu_dang_nhap.py`.
+2. **He dao nguoc tu lich su trade** (passview -> tu dang nhap -> truy nguoc
+   -> chien luoc) - CHUA co. `nhan/tu_dang_nhap.py` la manh dau tien.
+3. **Thuat toan cham diem tinh chat -> co che quan li, ghi vao tung cap.**
+   `nhan/tinh_cach_chieu.py` la ban nhap (MO COI, nay da co test). Con thieu:
+   tuong quan -> chien luoc cap (EURUSD vs GBPUSD), mua vu -> lich vao lenh.
+4. **Quan li lenh khong phu thuoc entry** - dang do, xem `b pmg`.
+5. **Noi sinh tren AUDCAD** - cap tiem nang nhat ma chua dao sau.
+6. **EVO chua tich hop skill/cong cu ngoai** - `b san` co san, chua chay.
+
+## SO PHAI NHO
+
+    ho so song chi co cho 27/158 ma (131 ma du lieu goc la NGAY)
+    bo dich MQL5 phu 2.991/3.217 (con 226: mau_nen 135, supertrend 40, heiken 40)
+    dem nen KHONG du bao duoc gi (r<=0,195 tren 134 ma) - chi de MO TA
