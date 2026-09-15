@@ -23,6 +23,7 @@ import numpy as np
 LAB = Path(__file__).resolve().parent
 sys.path.insert(0, str(LAB))
 _KHUNG = (sys.argv[sys.argv.index("--khung")+1] if "--khung" in sys.argv else "H4")
+_MA = (sys.argv[sys.argv.index("--ma")+1] if "--ma" in sys.argv else "AUDCAD")
 
 #: Tren nguong nay coi la CUNG mot phat hien.
 NGUONG_CUM = 0.7
@@ -32,14 +33,14 @@ def main() -> int:
     from nhan import du_lieu as DL
     from nhan import ngu_phap as NP
 
-    d = json.loads((LAB / "reports" / ("AUDCAD_CHON_XAC_NHAN_%s.json" % _KHUNG))
+    d = json.loads((LAB / "reports" / ("CHON_XAC_NHAN_%s_%s.json" % (_MA,_KHUNG)))
                    .read_text(encoding="utf-8"))
     ten = [x["ten"] for x in d["song"]]
     print("=" * 74)
     print("16 HE SONG SOT LA BAO NHIEU PHAT HIEN DOC LAP?")
     print("=" * 74)
     kho = {c.get("ten"): c for c in NP.doc_kho()}
-    df = DL.nap("AUDCAD", _KHUNG, tu="2021-03-19", den="2026-07-29")
+    df = DL.nap(_MA, _KHUNG, tu="2021-03-19", den="2026-07-29")
     v = {}
     for t in ten:
         c = kho.get(t)
@@ -112,7 +113,7 @@ def main() -> int:
     print("  neu dem %d cum -> p = %.3g  <- con so dung hon" % (k, duoi))
     print("  (van la chan duoi: cac cum chua chac doc lap hoan toan)")
 
-    ra = LAB / "reports" / ("AUDCAD_CUM_%s.json" % _KHUNG)
+    ra = LAB / "reports" / ("CUM_%s_%s.json" % (_MA,_KHUNG))
     ra.write_text(json.dumps(
         {"so_he": n, "so_cum": len(cum), "nguong": NGUONG_CUM,
          "p_theo_cum": duoi,

@@ -31,10 +31,10 @@ LAB = Path(__file__).resolve().parent
 sys.path.insert(0, str(LAB))
 
 import sys as _sys
-_KHUNG = (_sys.argv[_sys.argv.index("--khung")+1]
-          if "--khung" in _sys.argv else "H4")
-TRAIN = ("reports/TESTER_AUDCAD_%s_TRAIN.json" % _KHUNG, "2016.01.01", "2021.03.19")
-HOLD = ("reports/TESTER_AUDCAD_%s_HOLDOUT.json" % _KHUNG, "2021.03.19", "2026.07.29")
+_KHUNG = (_sys.argv[_sys.argv.index("--khung")+1] if "--khung" in _sys.argv else "H4")
+_MA = (_sys.argv[_sys.argv.index("--ma")+1] if "--ma" in _sys.argv else "AUDCAD")
+TRAIN = ("reports/TESTER_%s_%s_TRAIN.json" % (_MA,_KHUNG), "2016.01.01", "2021.03.19")
+HOLD = ("reports/TESTER_%s_%s_HOLDOUT.json" % (_MA,_KHUNG), "2021.03.19", "2026.07.29")
 
 #: So lenh toi thieu de mot ket qua co nghia. Bai hoc: "ung vien UK100 tot nhat
 #: chi co 32 lenh" - mot Sharpe dep tren 12 lenh khong noi len gi.
@@ -101,7 +101,7 @@ def main() -> int:
               % (k[:42], a[k]["pct"], b[k]["pct"], b[k]["lenh"], b[k]["dd"],
                  "  <- song" if b[k]["pct"] > moc_b else ""))
 
-    ra = LAB / "reports" / ("AUDCAD_CHON_XAC_NHAN_%s.json" % _KHUNG)
+    ra = LAB / "reports" / ("CHON_XAC_NHAN_%s_%s.json" % (_MA,_KHUNG))
     ra.write_text(json.dumps(
         {"moc_train": moc_a, "moc_holdout": moc_b, "ty_le_nen": p_nen,
          "so_chon": len(chon), "so_song": len(song), "boi_so_nen": boi,
