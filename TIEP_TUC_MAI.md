@@ -97,4 +97,4 @@ tai). Ket luan: muon ghep cap thi phai CHON RIENG tung cap, khong chuyen cum.
    Algo bat (che do live gan vao terminal nguoi dung, khong headless).
 4. Passview: san Telegram/social lay tai khoan AUDCAD nguoi that de doc quan tri lenh.
 
-
+> Đối chiếu mô tả 16/09: ~60%, xem reports/DOI_CHIEU_MO_TA_20260916.md
