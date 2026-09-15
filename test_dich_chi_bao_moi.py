@@ -369,3 +369,40 @@ def test_DO_PHU_BO_DICH_dat_100_phan_tram():
     _, dat = D.sinh_ea(kho, "DoPhu", khung="H4")
     ty = len(dat) / len(kho)
     assert ty >= 0.99, "bo dich chi con phu %.1f%% kho (da tung 100%%)" % (100 * ty)
+
+
+# ============ HAI MOC, khong phai mot (15/09/2026)
+def test_sinh_ea_them_CA_HAI_moc_mua_va_ban():
+    """`hethong.txt`: *"'FX' = KIEU GIAO DICH LONG/SHORT hai chieu"*.
+
+    Bang chi co moc MUA-giu thi mot co che BAN dang duoc so voi moc NGUOC
+    CHIEU - va tren mot cap dang giam thi no "thang moc" ma khong chung minh
+    duoc gi. Do 15/09 tren EURGBP: doi sang moc cao hon trong hai chieu lam so
+    co che "hon moc" tut tu **584 xuong 123** (4,7 lan).
+    """
+    _, dat = D.sinh_ea([{
+        "ten": "thu", "ho": "quay_ve_trung_binh", "chieu": 1, "giu": 1,
+        "co_che": "Ca thu duong dich - khong dang ky vao he.",
+        "vao": [{"trai": {"chi_bao": "rsi", "n": 2}, "phep": "<",
+                 "phai": {"hang": 10.0}}], "ra": []}], khung="H4")
+    ten = [c["ten"] for c in dat]
+    assert "__mua_giu__" in ten and "__ban_giu__" in ten, ten
+
+
+def test_hai_moc_NGUOC_CHIEU_nhau():
+    assert D.SPEC_MUA_GIU["chieu"] == 1
+    assert D.SPEC_BAN_GIU["chieu"] == -1
+    assert D.SPEC_BAN_GIU["vao"] == D.SPEC_MUA_GIU["vao"], (
+        "hai moc phai khac DUNG chieu, khong khac dieu kien")
+
+
+def test_bang_ket_qua_GHIM_ca_hai_moc_du_khong_lot_top():
+    """Luot quet toan kho dau tien (2.621 co che) bao `moc: CHUA_DO_DUOC` -
+    khong phai vi moi truong ma vi code chi tim moc trong `ket[:25]`, ma bang
+    xep theo Sharpe. Cang nhieu co che thi moc cang chac chan bien mat.
+    """
+    s = (LAB / "chay_tester_kho.py").read_text(encoding="utf-8-sig")
+    assert "for d0 in (d_mua, d_ban):" in s, "khong ghim hai moc vao bang"
+    assert 'moc CAO HON trong hai chieu' in s, (
+        "khong so voi moc cao hon trong hai chieu")
+    assert "ket\"][:25]" not in s.split("def main")[1].split("moc =")[0], ""

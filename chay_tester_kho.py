@@ -610,13 +610,32 @@ def main() -> int:
     print("\n%-42s %6s %9s %6s %7s %7s %11s"
           % ("co che", "lenh", "lai", "PF", "sharpe", "DD%",
              "%%/nam@DD%g" % NGAN_SACH_DD_PCT))
-    moc = None
-    for d in r["ket"][:25]:
+    # MOC MUA-GIU PHAI TIM TREN CA BANG, KHONG PHAI TOP 25.
+    #
+    # Do 15/09/2026, luot quet toan kho dau tien (2.621 co che): dong cuoi bao
+    # `moc mua-giu: CHUA_DO_DUOC`. Ly do khong phai moi truong - la vong nay
+    # chi quet `ket[:25]`, ma bang xep theo Sharpe nen `__mua_giu__`
+    # (Sharpe 0,04) nam tit duoi. Cang nhieu co che thi moc cang chac chan
+    # bien mat: dung o quy mo lon nhat thi bang ket qua mat cai doi chieu duy
+    # nhat co nghia. [[the-brain-gauntlet]]
+    for d in r["ket"]:
         d["pct_nam_cung_rui_ro"] = chuan_hoa_cung_rui_ro(
             d["lai"], d["dd_pct"], nam)
-        if str(d["ten"]).startswith("__mua_giu__"):
-            moc = d["pct_nam_cung_rui_ro"]
-    for d in r["ket"][:25]:
+    def _moc(ten):
+        return next((d for d in r["ket"]
+                     if str(d["ten"]).startswith(ten)), None)
+
+    d_mua, d_ban = _moc("__mua_giu__"), _moc("__ban_giu__")
+    moc = d_mua["pct_nam_cung_rui_ro"] if d_mua else None
+    moc_ban = d_ban["pct_nam_cung_rui_ro"] if d_ban else None
+    # GHIM CA HAI MOC vao bang du chung khong lot top. Mot bang khong co moc
+    # thi moi con so trong no deu khong doc duoc; va voi mot vu tru LONG/SHORT
+    # thi mot co che BAN so voi moc MUA la so SAI CHIEU.
+    hien = list(r["ket"][:25])
+    for d0 in (d_mua, d_ban):
+        if d0 is not None and d0 not in hien:
+            hien.append(d0)
+    for d in hien:
         v = d.get("pct_nam_cung_rui_ro")
         print("%-42s %6d %9.2f %6.2f %7.2f %7.2f %11s"
               % (str(d["ten"])[:42], d["lenh"], d["lai"], d["pf"],
@@ -632,15 +651,35 @@ def main() -> int:
                    if not str(d["ten"]).startswith("__mua_giu__"))
         print("\nmoc mua-giu o cung rui ro: %+.2f%%/nam  ->  %d/%d co che hon moc"
               % (moc, len(hon), n_co))
+        # SO VOI MOC CAO HON TRONG HAI CHIEU.
+        #
+        # Do 15/09/2026, quet toan kho: tren AUDCAD (cap TANG trong cua so)
+        # dinh bang toan la RSI qua ban -> MUA; tren EURGBP (cap GIAM) dinh
+        # bang toan la RSI qua mua -> BAN. Cung mot ho, chieu thang LAT theo
+        # dung chieu troi cua tung cap. Do la chu ky cua DRIFT DOI LOT EDGE, va
+        # khong co moc ban-giu thi khong phan biet duoc bang bang ket qua.
+        if moc_ban is not None:
+            cao = max(moc, moc_ban)
+            hon2 = [d for d in r["ket"]
+                    if not str(d["ten"]).startswith(("__mua_giu__", "__ban_giu__"))
+                    and (d.get("pct_nam_cung_rui_ro") or -9e9) > cao]
+            print("moc BAN-giu o cung rui ro : %+.2f%%/nam" % moc_ban)
+            print("  -> so voi moc CAO HON trong hai chieu (%+.2f%%/nam): "
+                  "**%d/%d** co che hon" % (cao, len(hon2), n_co))
+            print("     Tren mot cap DANG TROI, thang moc nguoc chieu khong")
+            print("     chung minh gi - do la drift doi lot edge.")
+        else:
+            print("moc BAN-giu: KHONG CO trong bang - vu tru nay la long/short,")
+            print("   mot co che BAN dang duoc so voi moc MUA (sai chieu).")
     else:
         print("\nmoc mua-giu: CHUA_DO_DUOC o cung rui ro - dung ket luan 'hon moc'")
     # MT5 in `Equity DD %` voi HAI chu so thap phan. Lot 0,10 tren von 10.000 cho
     # DD ~0,03% - tuc MOT chu so y nghia, va cot cuoi dang nhan no len >100 lan.
     # Sai so +-0,005 tren 0,03 la +-17% truyen thang vao ket qua. Phai noi ra.
-    tho = [d for d in r["ket"][:25] if 0 < float(d["dd_pct"]) < 0.20]
+    tho = [d for d in hien if 0 < float(d["dd_pct"]) < 0.20]
     if tho:
         print("CANH BAO do phan giai: %d/%d co che co DD%% < 0,20 - cot cuoi dang"
-              % (len(tho), len(r["ket"][:25])))
+              % (len(tho), len(hien)))
         print("   NGOAI SUY don bay >100 lan tu mot chu so y nghia (sai so ~17%).")
         print("   Chay lai voi `--lot` lon hon de DO o co lenh that.")
     return 0

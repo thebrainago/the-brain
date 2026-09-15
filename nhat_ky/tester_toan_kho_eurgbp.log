@@ -1,0 +1,67 @@
+  44/3280 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+  141 co che se ra 0 lenh VI LOI KHAI (nguong tinh bang DON VI GIA), khong phai vi thi truong:
+       mua_rsi_qua_ban_xu_huong_tang                  CHET_MOI_NOI
+       ban_rsi_qua_mua_xu_huong_giam                  CHET_MOI_NOI
+       mua_khi_gia_thap_nhat_trong_200_bar            CHET_MOI_NOI
+       ban_khi_gia_cao_nhat_trong_200_bar             CHET_MOI_NOI
+       engulfing_buy                                  CHET_MOI_NOI
+       engulfing_sell                                 CHET_MOI_NOI
+       orb_long                                       CHET_MOI_NOI
+       orb_short                                      CHET_MOI_NOI
+       rsi_sell                                       CHET_MOI_NOI
+       breakout_buy                                   CHET_MOI_NOI
+     doc `nhan/thang_gia.py`. Mot dong 0 o day KHONG phai ket qua.
+  gop 606 co che TRUNG HANH VI (cung mot chuoi tin hieu):
+     mua_close_tren_sma200                    <- mua_close_cheo_len_sma200, pine_cm_rsi_2_strat_close_tren_sma, macd_sma_200_strateg_close_tren_sm
+     pine_cm_rsi_2_strat_close_duoi_sma200_cl <- macd_sma_200_strateg_close_duoi_sm, vao_lenh_ban
+     macd_stochastic_doub_close_tren_sma100_c <- my_ma100
+     mua_rsi30_tren_50_rsi2_duoi_15           <- mua_khi_rsi_30_tren_50_va_rsi_2_qu
+     mua_rsi_qua_ban_xu_huong_tang            <- mua_khi_gia_thap_nhat_trong_200_ba, engulfing_buy, thanh_ly_cuoi_ngay
+     ban_rsi_qua_mua_xu_huong_giam            <- ban_khi_gia_cao_nhat_trong_200_bar, engulfing_sell, orb_short
+kho 2630 -> dich duoc 2632, bo 0
+  bien dich xong (2632 co che)
+  chay optimization 2632 pass ...
+
+2632 pass, 32.3s  
+lot 5 - von 10.000 USD - 2021.03.19 -> 2026.07.29 (5.36 nam)
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+buy_ema_cross_trend_filter                     44    135.35   1.93    4.40    1.14       +4.06
+ns_doi_pct5_<_q20_giu2                         20     91.43   2.35    3.34    0.64       +4.82
+mean_reversion_short                           68     67.35   1.31    2.36    0.79       +2.98
+rsi_qua_mua_manh                               70     64.57   1.22    1.76    0.96       +2.39
+hap_thu_khoi_luong                             58    281.91   1.81    1.37    1.60       +5.80
+ou_quay_ve_dsl_n50_z2.5_ban                    58    673.64   2.38    1.33    2.80       +7.60
+sell_rsi_overbought_filter                    101    233.14   1.33    1.27    2.42       +3.34
+vao_lenh_ban_khi_rsi_qua_mua_cat_len           79    162.65   1.32    1.24    2.02       +2.82
+ban_khi_rsi_qua_mua                            71    399.09   1.53    1.20    1.97       +6.54
+ban_inh_rsi_a_khung_thoi_gian                  57    342.36   2.11    1.18    1.21       +8.75
+ou_quay_ve_dsl_n200_z2_ban                     26    627.35   4.44    1.15    3.87       +5.38
+ban_khi_rsi_vao_vung_qua_mua                   71    391.29   1.49    1.09    2.18       +5.90
+dieu_kien_vao_khi_chi_bao_rsi_14_tang_len_     27    503.27   2.09    1.07    2.70       +6.09
+ou_quay_ve_dsl_n200_z2_mua                     26    458.20   3.74    1.05    1.74       +8.19
+tin_hieu_qua_mua_da_khung_sell                 61    528.07   1.73    1.05    2.64       +6.49
+pairs_trading_short_entry_exit                 82    629.14   2.02    1.04    2.71       +7.37
+vao_lenh_rsi_qua_mua                           57    399.43   1.71    1.01    2.28       +5.76
+mtf_rsi_overbought_exhaustion                  57    452.78   2.30    0.99    1.69       +8.34
+rsi_xuong_nguong_cao                           64    241.58   1.47    0.94    1.88       +4.35
+vao_lenh_short_theo_z_score                    23    477.25   5.49    0.90    3.83       +4.23
+ns_doi_pct1_<_q20_giu3                         46     56.87   1.26    0.87    1.49       +1.38
+rsi_dashboard_sell_signal                      63    264.01   1.47    0.84    2.42       +3.74
+reversion_zscore_extreme_filter                16    166.29   2.44    0.84    1.28       +4.42
+pairs_trading_aapl_msft_mean_reversion_sho     25    327.35   3.33    0.81    1.59       +6.66
+macd_color_crossover                          146    119.30   1.17    0.81    2.63       +1.63
+__mua_giu__                                    17   -757.64   0.34   -0.19    9.83       -3.07
+__ban_giu__                                    17     56.84   1.09    0.01    5.83       +0.36
+
+moc mua-giu o cung rui ro: -3.07%/nam  ->  584/2631 co che hon moc
+moc BAN-giu o cung rui ro : +0.36%/nam
+  -> so voi moc CAO HON trong hai chieu (+0.36%/nam): **123/2631** co che hon
+     Tren mot cap DANG TROI, thang moc nguoc chieu khong
+     chung minh gi - do la drift doi lot edge.

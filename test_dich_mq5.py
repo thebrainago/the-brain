@@ -40,12 +40,22 @@ class SinhEA_CHO_NHIEU_CO_CHE(unittest.TestCase):
         self.assertGreaterEqual(len(dat), 1)
         self.assertIn("VAO", ma)
 
-    def test_them_mua_giu_la_MOC_bat_buoc(self):
-        """Moi bang ket qua phai co dong mua-giu de so sanh. Bo no di thi mot he
-        'co lai' khong con doi chieu duoc voi viec khong lam gi ca."""
+    def test_them_HAI_MOC_la_bat_buoc(self):
+        """Moi bang ket qua phai co dong moc de so sanh. Bo no di thi mot he
+        'co lai' khong con doi chieu duoc voi viec khong lam gi ca.
+
+        TU 15/09/2026 LA HAI MOC, khong phai mot. `hethong.txt` chot *"'FX' =
+        KIEU GIAO DICH LONG/SHORT hai chieu"*, nen mot bang chi co moc MUA-giu
+        dang so mot co che BAN voi moc NGUOC CHIEU - va tren mot cap dang giam
+        thi no "thang moc" ma khong chung minh gi. Do tren EURGBP: doi sang moc
+        cao hon trong hai chieu lam so co che "hon moc" tut **584 -> 123**.
+        """
         _, co = D.sinh_ea([_spec()], khung="D1", them_mua_giu=True)
         _, khong = D.sinh_ea([_spec()], khung="D1", them_mua_giu=False)
-        self.assertEqual(len(co), len(khong) + 1)
+        self.assertEqual(len(co), len(khong) + 2)
+        ten = [c["ten"] for c in co]
+        self.assertIn("__mua_giu__", ten)
+        self.assertIn("__ban_giu__", ten)
 
     def test_KHONG_dich_duoc_thi_BO_kem_ly_do(self):
         """Sinh ra mot EA KHAC voi khai bao la dang hong te nhat: no van chay,

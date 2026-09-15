@@ -1085,6 +1085,20 @@ SPEC_MUA_GIU = {
              "phai": {"chi_bao": "gia", "cot": "low"}}],
 }
 
+#: MOC THU HAI: BAN VA GIU. Bat buoc voi mot vu tru LONG/SHORT.
+#:
+#: `Desktop/hethong.txt`: *"'FX' = KIEU GIAO DICH LONG/SHORT hai chieu"*. Nhung
+#: bang ket qua chi co MOT moc MUA-giu, nen mot co che BAN dang duoc so voi moc
+#: cua chieu NGUOC LAI - va tren mot tai san giam thi no "thang moc" ma khong
+#: chung minh duoc gi.
+#:
+#: Do 15/09/2026, quet toan kho: tren AUDCAD (cap TANG trong cua so) dinh bang
+#: toan la RSI qua ban -> MUA; tren EURGBP (cap GIAM) dinh bang toan la RSI qua
+#: mua -> BAN. Cung mot ho, chieu thang LAT theo dung chieu troi cua tung cap -
+#: chu ky cua DRIFT DOI LOT EDGE. Khong co moc ban-giu thi khong phan biet duoc
+#: hai thu do bang bang ket qua.
+SPEC_BAN_GIU = dict(SPEC_MUA_GIU, ten="__ban_giu__", chieu=-1)
+
 
 def sinh_ea(cac_spec: list[dict], ten: str = "KhoCoChe", khung: str = "D1",
             them_mua_giu: bool = True) -> tuple[str, list[dict]]:
@@ -1096,7 +1110,7 @@ def sinh_ea(cac_spec: list[dict], ten: str = "KhoCoChe", khung: str = "D1",
     bd = BoDich()
     dat, dk_ma, sw_vao, sw_ra, sw_chieu, sw_giu, sw_cora = [], [], [], [], [], [], []
     if them_mua_giu:
-        cac_spec = [dict(SPEC_MUA_GIU)] + list(cac_spec)
+        cac_spec = [dict(SPEC_MUA_GIU), dict(SPEC_BAN_GIU)] + list(cac_spec)
     for c in cac_spec:
         try:
             bt_vao = bd.dieu_kien(c.get("vao") or [])
