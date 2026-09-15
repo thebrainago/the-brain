@@ -178,7 +178,23 @@ DAU_HIEU_HONG = [
 ]
 
 
-def chan_doan_log(gio_lui: float = 1.0) -> list[str]:
+def _sau_moc(dong: str, moc: float) -> bool:
+    """Dong log MT5 co dau thoi gian `HH:MM:SS.mmm` - no co sau `moc` khong.
+
+    File log gom ca ngay nen `mtime` cua file khong noi duoc dong nao la moi.
+    """
+    import re
+    import time as _t
+    m = re.search(r"\b(\d{2}):(\d{2}):(\d{2})\.\d{3}\b", dong)
+    if not m:
+        return False
+    g, ph, gy = (int(x) for x in m.groups())
+    t = _t.localtime(moc)
+    hom_nay = _t.mktime((t.tm_year, t.tm_mon, t.tm_mday, g, ph, gy, 0, 0, -1))
+    return hom_nay >= moc - 5
+
+
+def chan_doan_log(gio_lui: float = 1.0, tu_luc: float | None = None) -> list[str]:
     """Doc log terminal + tester, tra ve nhung cau giai thich vi sao luot chay hong.
 
     ## Vi sao ham nay ton tai
@@ -194,7 +210,15 @@ def chan_doan_log(gio_lui: float = 1.0) -> list[str]:
     """
     import re
     import time as _t
-    ra, gioi_han = [], _t.time() - gio_lui * 3600
+    # CHI DOC DONG CUA CHINH LUOT NAY.
+    #
+    # Do 15/09/2026: mot luot chay DUNG ten ma (`AUDCADmicro`) that bai vi ly do
+    # khac, va chan doan in ra `symbol AUDCAD not exist` - dong log cua luot
+    # TRUOC do mot tieng, voi ten ma sai. Toi doc va suyt di sua lai thu da dung.
+    # Mot bo chan doan tra ve nguyen nhan CU con nguy hiem hon khong chan doan
+    # gi: no co ve dang tra loi. `tu_luc` la moc bat dau luot chay.
+    ra = []
+    gioi_han = float(tu_luc) if tu_luc else _t.time() - gio_lui * 3600
     for thu_muc in ("logs", "Tester/logs"):
         d = XM_DATA / thu_muc
         if not d.exists():
@@ -207,6 +231,8 @@ def chan_doan_log(gio_lui: float = 1.0) -> list[str]:
             except Exception:
                 continue
             for dong in s.split(chr(10)):
+                if tu_luc and not _sau_moc(dong, gioi_han):
+                    continue
                 for manh, y_nghia in DAU_HIEU_HONG:
                     if manh.lower() in dong.lower():
                         cau = re.sub(r"\s+", " ", dong.strip())[:130]
@@ -390,7 +416,7 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
         # (`symbol AUDCAD not exist`). Nguoi doc mat 20 phut di truy bo dich
         # MQL5 cho mot loi sai TEN MA.
         return {"loi": "khong thay bang ket qua", "giay": giay, "chua_do": True,
-                "chan_doan": chan_doan_log(),
+                "chan_doan": chan_doan_log(tu_luc=t0),
                 "goi_y_ma": TM.goi_y_ma(symbol)}
 
     dong = doc_xml(f)
@@ -424,7 +450,7 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
         return {"loi": ("TAT CA %d co che deu 0 lenh - hong MOI TRUONG, khong "
                         "phai ket qua chien luoc" % len(ket)),
                 "chua_do": True, "giay": giay, "so_pass": len(ket), "ket": ket,
-                "chan_doan": chan_doan_log()}
+                "chan_doan": chan_doan_log(tu_luc=t0)}
 
     ra = {"symbol": symbol, "khung": khung, "so_co_che": len(dat),
           "so_pass": len(ket), "giay": giay, "ghi_chu": hong, "ket": ket,

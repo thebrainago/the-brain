@@ -1,0 +1,47 @@
+  44/3260 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+     TRONG DO co 2 cai KHOP BO LOC 'donchian,keltner,cci,adx': trend_following_strength_buy, trend_following_strength_sell
+  2 co che se ra 0 lenh VI LOI KHAI (nguong tinh bang DON VI GIA), khong phai vi thi truong:
+       donchian_breakout_tren                         CHET_MOI_NOI
+       donchian_breakout_duoi                         CHET_MOI_NOI
+     doc `nhan/thang_gia.py`. Mot dong 0 o day KHONG phai ket qua.
+kho 289 -> dich duoc 290, bo 0
+  bien dich xong (290 co che)
+  chay optimization 290 pass ...
+
+290 pass, 20.3s  
+lot 5 - von 10.000 USD - 2021.03.19 -> 2026.07.29 (5.36 nam)
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+ns_keltner20_<_q2_giu10                        40     90.66   1.37    0.79    1.09       +2.92
+ns_keltner20_<_q2_giu5                         43     18.95   1.08    0.31    0.98       +0.71
+ns_cci20_<_q2_giu5                             72     21.18   1.05    0.20    0.87       +0.90
+ironhawk_sell                                   5    254.57   0.00    0.09    1.40       +5.96
+ns_adx14_<_q20_giu2                           209      9.26   1.01    0.07    1.33       +0.26
+ironhawk_buy                                    2     44.98   0.00    0.02    0.81       +1.99
+fibonacci_retracement_long                      1     13.72   0.00    0.01    0.56       +0.90
+ns_donchian55_<_q2_giu10                      130      1.36   1.00    0.00    3.58       +0.01
+chi_giao_dich_trong_khung_gio_luan_on_va_n      0      0.00   0.00    0.00    0.00     CHUA_DO
+fibozigzag_reversal                             0      0.00   0.00    0.00    0.00     CHUA_DO
+fibonacci_retracement_short                     0      0.00   0.00    0.00    0.00     CHUA_DO
+donchian_breakout_duoi                          0      0.00   0.00    0.00    0.00     CHUA_DO
+donchian_breakout_tren                          0      0.00   0.00    0.00    0.00     CHUA_DO
+sell_golden_zone_retracement                   35     -8.22   0.99   -0.00    5.67       -0.05
+cci_adaptive_long                               7    -16.40   0.35   -0.09    0.27       -2.38
+golden_zone_pullback_sell                      72   -188.12   0.88   -0.10    6.34       -1.13
+fib_structure_map_long_entry                  228    -75.37   0.96   -0.11    3.74       -0.76
+__mua_giu__                                    17   -757.64   0.34   -0.19    9.83       -3.07
+fib_structure_map_short_entry                 228   -134.40   0.91   -0.20    3.96       -1.30
+mua_cci20_duoi_am100                          165   -301.95   0.85   -0.26    5.53       -2.14
+ban_cho_khi_gia_cat_xuong_inh_kenh_donchia      6    -23.73   0.24   -0.29    0.32       -2.96
+ns_donchian20_<_q2_giu5                       105    -49.25   0.92   -0.33    1.40       -1.35
+adaptive_cci_overbought_reversal              255   -348.32   0.87   -0.34    7.80       -1.73
+ns_donchian20_<_q2_giu10                      101   -103.22   0.87   -0.38    2.57       -1.55
+cci_donchian_lower_breakout                   295   -648.66   0.76   -0.40    8.67       -2.98
+
+moc mua-giu o cung rui ro: -3.07%/nam  ->  19/289 co che hon moc

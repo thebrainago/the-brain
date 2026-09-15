@@ -1,0 +1,2015 @@
+{
+ "so": 37,
+ "co_che": [
+  {
+   "ten": "volatility_regime_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 1,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       2.339588
+      ]
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       2.339588
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Volatility_Regime.mq5",
+   "_ly_do_may_dien": true,
+   "co_che": "Luat rut TU MA NGUON `Volatility_Regime.mq5` (Volatility_Regime), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "volatility_regime",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.0171,
+    "EURUSD.H1": 0.022,
+    "GBPUSD.H1": 0.022,
+    "USDJPY.H1": 0.0188,
+    "XAUUSD.H1": 0.0278,
+    "US500Cash.H1": 0.0286
+   }
+  },
+  {
+   "ten": "bat_xu_huong_tang_theo_bar_xanh_lien_tuc_atr",
+   "co_che": "Nha dau tu chuyen nghiep chi tra tien cho cac tin hieu co do tin cay cao de tranh gap trong thi truong. Day bar dong cua nam tren mo cua qua 3 phiên lien tiep cho thay ap luc mua chiem uu the, giup loai bo ti le sai so cua dao nguoc ngan han va xac nhan su tiep diem cua phe mua. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 1,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.87167
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Consecutive_Bars_v1_50.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "bat_xu_huong_tang_theo_bar_xanh_lien_tuc",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.2026,
+    "EURUSD.H1": 0.1519,
+    "GBPUSD.H1": 0.1452,
+    "USDJPY.H1": 0.186,
+    "XAUUSD.H1": 0.1689,
+    "US500Cash.H1": 0.1514
+   }
+  },
+  {
+   "ten": "bat_xu_huong_giam_theo_bar_do_lien_tuc_atr",
+   "co_che": "Cac quyen quan ly von dung day bar do lien tiep nhu mot co che loc tin hieu ban. Khi gia dong cua nam duoi mo cua qua 3 phiên lien tiep, do cho thay ap luc ban chiem uu the, giup han che toc do mat tien khi giao dich theo phe giam manh va tranh cac dao lach ngan han. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "ho": "xu_huong",
+   "chieu": -1,
+   "giu": 1,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.87167
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Consecutive_Bars_v1_50.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "bat_xu_huong_giam_theo_bar_do_lien_tuc",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.2026,
+    "EURUSD.H1": 0.1519,
+    "GBPUSD.H1": 0.1452,
+    "USDJPY.H1": 0.186,
+    "XAUUSD.H1": 0.1689,
+    "US500Cash.H1": 0.1514
+   }
+  },
+  {
+   "ten": "ban_khi_do_phuc_tap_tang_atr",
+   "ho": "bien_dong",
+   "chieu": -1,
+   "giu": 10,
+   "co_che": "Do phuc tap cao cho thay thi truong vo chuc, dau tu them pheo ban de phong ngua mat von khi gia dao dong manh. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.350938
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_xuong",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.350938
+      ]
+     }
+    }
+   ],
+   "nguon": "Shannon_Entropy.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "ban_khi_do_phuc_tap_tang",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9936,
+    "EURUSD.H1": 0.9641,
+    "GBPUSD.H1": 0.9602,
+    "USDJPY.H1": 0.9798,
+    "XAUUSD.H1": 0.9464,
+    "US500Cash.H1": 0.9259
+   }
+  },
+  {
+   "ten": "chap_nhan_rui_ro_chiu_mua_cao_hoac_ban_thap_de_tim_diem_bat_atr",
+   "co_che": "Luat rut TU MA NGUON `mql5_code` (chap_nhan_rui_ro_chiu_mua_cao_hoac_ban_thap_de_tim_diem_bat_), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: Bieu do ty le than nen [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "ho": "xu_huong",
+   "giu": 10,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.081886
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "chieu": 1,
+   "nguon": "mql5_code",
+   "_ly_do_may_dien": true,
+   "_chuan_hoa_tu": "chap_nhan_rui_ro_chiu_mua_cao_hoac_ban_thap_de_tim_diem_bat",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9988,
+    "EURUSD.H1": 0.9982,
+    "GBPUSD.H1": 0.9979,
+    "USDJPY.H1": 0.9982,
+    "XAUUSD.H1": 0.9978,
+    "US500Cash.H1": 0.9978
+   }
+  },
+  {
+   "ten": "quantora_volatility_monitor_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Thiet bi loc bien dong giup nha dau tu tranh giao dich trong khoang trang tich luy yeu, chi vao lenh khi thanh phan bien dong vuot nguong de dam bao muc tieu loi nhuan rat cao hon chi phi giao dich. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 1
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.175469
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Quantora_Market_Volatility_Monitor.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "quantora_volatility_monitor",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9999,
+    "EURUSD.H1": 0.9985,
+    "GBPUSD.H1": 0.998,
+    "USDJPY.H1": 0.9988,
+    "XAUUSD.H1": 0.9959,
+    "US500Cash.H1": 0.9967
+   }
+  },
+  {
+   "ten": "consecutive_up_bars_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Biet xu huong tang ngan han khi gia lien tuc dong tren mo qua ba muc, cho thay suc manh mua chiem uu the. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.350938
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Consecutive_Bars_v1_50.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "consecutive_up_bars",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9941,
+    "EURUSD.H1": 0.9641,
+    "GBPUSD.H1": 0.9602,
+    "USDJPY.H1": 0.9799,
+    "XAUUSD.H1": 0.9464,
+    "US500Cash.H1": 0.9269
+   }
+  },
+  {
+   "ten": "consecutive_down_bars_atr",
+   "ho": "xu_huong",
+   "chieu": -1,
+   "giu": 1,
+   "co_che": "Biet xu huong giam ngan han khi gia lien tuc dong duoi mo qua ba muc, cho thay ap luc ban chiem uu the. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.350938
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Consecutive_Bars_v1_50.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "consecutive_down_bars",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9941,
+    "EURUSD.H1": 0.9641,
+    "GBPUSD.H1": 0.9602,
+    "USDJPY.H1": 0.9799,
+    "XAUUSD.H1": 0.9464,
+    "US500Cash.H1": 0.9269
+   }
+  },
+  {
+   "ten": "shannon_entropy_compression_buy_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 20,
+   "co_che": "Pho nhiem thap hieu thi thj truong dang nen nhe, cac phe mua dang bi ap luot, khi gap nguong thap thi nang luong se phat ra, ben doi la nguoi ban tai muc do loang thap de phong rui ro. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren USDJPY.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_xuong",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       3.137498
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Shannon_Entropy.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "shannon_entropy_compression_buy",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.117,
+    "EURUSD.H1": 0.124,
+    "GBPUSD.H1": 0.1148,
+    "USDJPY.H1": 0.1133,
+    "XAUUSD.H1": 0.1722,
+    "US500Cash.H1": 0.1493
+   }
+  },
+  {
+   "ten": "shannon_entropy_expansion_sell_atr",
+   "ho": "bien_dong",
+   "chieu": -1,
+   "giu": 20,
+   "co_che": "Pho nhiem cao hieu thi thj truong mat kiem soat, nguoi mua co xu huong cam ket tai gia cao, ben doi ban de phong thua, giao dich o muc do loang cuc dai de chuyen huong. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.406779
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Shannon_Entropy.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "shannon_entropy_expansion_sell",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.2839,
+    "EURUSD.H1": 0.6306,
+    "GBPUSD.H1": 0.6871,
+    "USDJPY.H1": 0.4734,
+    "XAUUSD.H1": 0.7713,
+    "US500Cash.H1": 0.8279
+   }
+  },
+  {
+   "ten": "candle_body_ratio_momentum_long_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 5,
+   "co_che": "Thân nến lớn phản ánh động lượng mua mạnh, khi giá đóng cửa cao hơn mở cửa với tỷ lệ thân vượt ngưỡng 0.7, thị trường thường duy trì đà tăng do áp lực giao dịch một chiều chiếm ưu thế. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.081886
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "CandleBodyRatio.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "candle_body_ratio_momentum_long",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9567,
+    "EURUSD.H1": 0.952,
+    "GBPUSD.H1": 0.9498,
+    "USDJPY.H1": 0.9563,
+    "XAUUSD.H1": 0.9511,
+    "US500Cash.H1": 0.9567
+   }
+  },
+  {
+   "ten": "tin_hieu_mo_rong_bien_dong_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Cac fund xu huong chi tra tien cho phep phoi nhiem nay vi khi ATR vuot nguong, tran dich truong co muc tieu lon, ho can dau vao sach de toi da hoa loi nhuan. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.175469
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Quantora_Market_Volatility_Monitor.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "tin_hieu_mo_rong_bien_dong",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 1.0,
+    "EURUSD.H1": 1.0,
+    "GBPUSD.H1": 1.0,
+    "USDJPY.H1": 1.0,
+    "XAUUSD.H1": 1.0,
+    "US500Cash.H1": 1.0
+   }
+  },
+  {
+   "ten": "gold_atr_trend_buy_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 1,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "ema",
+      "n": 20
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.175469
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "cheo_xuong",
+     "phai": {
+      "chi_bao": "ema",
+      "n": 20
+     }
+    }
+   ],
+   "co_che": "Thị trường vàng có xu hướng mạnh khi dòng tiền tổ chức vào lệnh theo đà biến động thực tế. Điều kiện giá vượt EMA kết hợp ATR cao xác nhận momentum đủ lớn để bù spread, tránh tín hiệu giả. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "nguon": "Gold_Spread_ATR_Trend_Panel_MT5.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "gold_atr_trend_buy",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.5057,
+    "EURUSD.H1": 0.5001,
+    "GBPUSD.H1": 0.5032,
+    "USDJPY.H1": 0.5203,
+    "XAUUSD.H1": 0.5305,
+    "US500Cash.H1": 0.5762
+   }
+  },
+  {
+   "ten": "gold_atr_trend_sell_atr",
+   "ho": "xu_huong",
+   "chieu": -1,
+   "giu": 1,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "cheo_xuong",
+     "phai": {
+      "chi_bao": "ema",
+      "n": 20
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.435835
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "ema",
+      "n": 20
+     }
+    }
+   ],
+   "co_che": "Khi xu hướng giảm hình thành, việc chờ giá phá vỡ EMA xuống cùng ATR duy trì mức cao xác nhận áp lực bán thực sự. Chiến lược tối ưu hóa tỷ lệ rủi ro lợi nhuận bằng cách chỉ tham gia khi biến động đủ lớn. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "nguon": "Gold_Spread_ATR_Trend_Panel_MT5.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "gold_atr_trend_sell",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.4943,
+    "EURUSD.H1": 0.4999,
+    "GBPUSD.H1": 0.4968,
+    "USDJPY.H1": 0.4797,
+    "XAUUSD.H1": 0.4695,
+    "US500Cash.H1": 0.4238
+   }
+  },
+  {
+   "ten": "nen_than_dai_xac_nhan_xu_huong_tang_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Các quỹ giao dịch biên và nhà làm thị trường trả phí cao để nắm bắt các nến có thân lớn vì chúng thể hiện sự áp lực mua/bán quyết liệt, thường dẫn đến biến động giá tiếp diễn trong ngắn hạn. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.070188
+      ]
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "CandleBodyRatio.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "nen_than_dai_xac_nhan_xu_huong_tang",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.4543,
+    "EURUSD.H1": 0.4416,
+    "GBPUSD.H1": 0.4421,
+    "USDJPY.H1": 0.4515,
+    "XAUUSD.H1": 0.4452,
+    "US500Cash.H1": 0.4666
+   }
+  },
+  {
+   "ten": "markov_chain_matrix_long_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 100,
+   "co_che": "Cac quyen quyet toan danh gia cao xac suat ke thua xu huong, nen cham mua khi ty le chuyen trang thai bull > 60% de bat dau theo dong tien institutional. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.070188
+      ]
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "<=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.046792
+      ]
+     }
+    }
+   ],
+   "nguon": "Markov_Chain_Matrix.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "markov_chain_matrix_long",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9998,
+    "EURUSD.H1": 0.9987,
+    "GBPUSD.H1": 0.9984,
+    "USDJPY.H1": 0.9987,
+    "XAUUSD.H1": 0.9972,
+    "US500Cash.H1": 0.9997
+   }
+  },
+  {
+   "ten": "markov_chain_matrix_short_atr",
+   "ho": "xu_huong",
+   "chieu": -1,
+   "giu": 100,
+   "co_che": "Nha dau co ban thuc hien short khi xac suat bear > 60% de hedging tai san khi muc do bat dau cua ap luc ban vuot qua diem dac biet. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.070188
+      ]
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "<=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.046792
+      ]
+     }
+    }
+   ],
+   "nguon": "Markov_Chain_Matrix.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "markov_chain_matrix_short",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9998,
+    "EURUSD.H1": 0.9988,
+    "GBPUSD.H1": 0.9983,
+    "USDJPY.H1": 0.9985,
+    "XAUUSD.H1": 0.9968,
+    "US500Cash.H1": 0.9997
+   }
+  },
+  {
+   "ten": "shannon_entropy_trend_start_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Chỉ số entropy đo lường độ hỗn loạn của thị trường. Khi giá trị giảm xuống dưới ngưỡng thấp, biến động thu hẹp cho thấy lực bán/cháy đã cạn kiệt và xu hướng mới đang hình thành. Nhà đầu tư chấp nhận chi phí để vào lệnh sớm tại điểm chuyển đổi pha từ tích lũy sang phá vỡ. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_xuong",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.726392
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Shannon_Entropy.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "shannon_entropy_trend_start",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.1754,
+    "EURUSD.H1": 0.14,
+    "GBPUSD.H1": 0.1387,
+    "USDJPY.H1": 0.1621,
+    "XAUUSD.H1": 0.1616,
+    "US500Cash.H1": 0.1453
+   }
+  },
+  {
+   "ten": "shannon_entropy_range_warning_atr",
+   "ho": "bien_dong",
+   "chieu": -1,
+   "giu": 1,
+   "co_che": "Khi entropy tăng vượt ngưỡng cao, thị trường chuyển sang trạng thái hỗn loạn, không có xu hướng rõ ràng. Giao dịch theo xu hướng sẽ mất dần lợi thế. Nhà giao dịch trả tiền để thoát lệnh hoặc đảo chiều phòng ngừa rủi ro khi độ nhiễu tín hiệu đạt cực đại. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       1.016949
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Shannon_Entropy.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "shannon_entropy_range_warning",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.1897,
+    "EURUSD.H1": 0.1529,
+    "GBPUSD.H1": 0.1471,
+    "USDJPY.H1": 0.1806,
+    "XAUUSD.H1": 0.1579,
+    "US500Cash.H1": 0.1451
+   }
+  },
+  {
+   "ten": "bat_song_bien_ong_mo_rong_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 30,
+   "co_che": "Nhà giao dịch thanh khoản mua khi biến động mở rộng để bắt sóng breakout, đối tác bán là người chốt lời sớm hoặc market maker cung cấp thanh khoản tại vùng kháng cự cũ. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.175469
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "phep": "<=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.116979
+      ]
+     }
+    }
+   ],
+   "nguon": "Quantora_Market_Volatility_Monitor.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "bat_song_bien_ong_mo_rong",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 1.0,
+    "EURUSD.H1": 1.0,
+    "GBPUSD.H1": 1.0,
+    "USDJPY.H1": 1.0,
+    "XAUUSD.H1": 1.0,
+    "US500Cash.H1": 1.0
+   }
+  },
+  {
+   "ten": "ty_le_than_nen_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Thân nến chiếm tỷ lệ lớn trên toàn bộ biên độ cho thấy động lượng mua/bán mạnh, xác nhận xu hướng ngắn hạn tiếp diễn. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.05849
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "CandleBodyRatio.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "ty_le_than_nen",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.463,
+    "EURUSD.H1": 0.4518,
+    "GBPUSD.H1": 0.452,
+    "USDJPY.H1": 0.46,
+    "XAUUSD.H1": 0.4543,
+    "US500Cash.H1": 0.476
+   }
+  },
+  {
+   "ten": "fibstructure_buy_signal_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Dựa trên cấu trúc thị trường và xác nhận phá vỡ điểm đổi chiều (CHoCH), kết hợp với mô hình engulfing để lọc nhiễu, đảm bảo giao dịch theo dòng chảy chính và tránh vào lệnh khi thị trường đang điều chỉnh mạnh hoặc chưa có đủ khoảng cách an toàn sau tín hiệu trước. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do",
+      "cot": "structure_bias"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.116979
+      ]
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "bien_do",
+      "cot": "bull_engulf_ctx"
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "bien_do",
+      "cot": "conf_width"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.175469
+      ]
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "bien_do",
+      "cot": "is_choch"
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "bien_do",
+      "cot": "is_bull_break"
+     },
+     "phep": ">",
+     "phai": {
+      "hang": 0
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "bien_do",
+      "cot": "bars_since_buy"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.584897
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "FibStructureEngine.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "fibstructure_buy_signal",
+   "_so_hang_doi": 3,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.8601,
+    "EURUSD.H1": 0.7816,
+    "GBPUSD.H1": 0.7683,
+    "USDJPY.H1": 0.8271,
+    "XAUUSD.H1": 0.7548,
+    "US500Cash.H1": 0.7163
+   }
+  },
+  {
+   "ten": "renko_trend_reversal_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 100,
+   "co_che": "Bắt xu hướng theo biến động giá thuần túy, loại bỏ nhiễu thời gian. Người mua vào khi giá tạo nến Renko mới đủ lớn để xác nhận đảo chiều tăng, tránh giao dịch ngược dòng. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "doi",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "close"
+      },
+      "n": 1
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       1.169794
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Renko_Subwindow_ATRTrend.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "renko_trend_reversal",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9535,
+    "EURUSD.H1": 0.9588,
+    "GBPUSD.H1": 0.9647,
+    "USDJPY.H1": 0.9459,
+    "XAUUSD.H1": 0.9757,
+    "US500Cash.H1": 0.9836
+   }
+  },
+  {
+   "ten": "wave_mtf_trend_buy_atr",
+   "co_che": "Chi bao xu ly xu the tang bang cach cho buffer bien do xac nhan chieu duong lien tuc qua so bar nguong de loai bo nhieu. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 50,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "bien_do",
+       "phep": ">",
+       "phai": 0
+      },
+      "n": 5
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.584897
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "bien_do",
+       "phep": ">",
+       "phai": 0
+      },
+      "n": 5
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.584897
+      ]
+     }
+    }
+   ],
+   "nguon": "wavemtf.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "wave_mtf_trend_buy",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9932,
+    "EURUSD.H1": 0.9271,
+    "GBPUSD.H1": 0.9176,
+    "USDJPY.H1": 0.9707,
+    "XAUUSD.H1": 0.9179,
+    "US500Cash.H1": 0.8635
+   }
+  },
+  {
+   "ten": "wave_mtf_trend_sell_atr",
+   "co_che": "Chi bao xu ly xu the giam bang cach cho buffer bien do xac nhan chieu am lien tuc qua so bar nguong de loai bo nhieu. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "ho": "xu_huong",
+   "chieu": -1,
+   "giu": 50,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "bien_do",
+       "phep": "<",
+       "phai": 0
+      },
+      "n": 5
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.584897
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "bien_do",
+       "phep": "<",
+       "phai": 0
+      },
+      "n": 5
+     },
+     "phep": "<",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.584897
+      ]
+     }
+    }
+   ],
+   "nguon": "wavemtf.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "wave_mtf_trend_sell",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9932,
+    "EURUSD.H1": 0.9271,
+    "GBPUSD.H1": 0.9176,
+    "USDJPY.H1": 0.9707,
+    "XAUUSD.H1": 0.9179,
+    "US500Cash.H1": 0.8635
+   }
+  },
+  {
+   "ten": "shannon_entropy_short_atr",
+   "ho": "bien_dong",
+   "chieu": -1,
+   "giu": 1,
+   "co_che": "Khi pho nhiem tang qua nguong, su bat quyet cao, thanh khoan tang, nguoi ban de phong dao nguoc hoac dung xu huong. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.116979
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "Shannon_Entropy.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "shannon_entropy_short",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9999,
+    "EURUSD.H1": 0.999,
+    "GBPUSD.H1": 0.9986,
+    "USDJPY.H1": 0.999,
+    "XAUUSD.H1": 0.997,
+    "US500Cash.H1": 0.9992
+   }
+  },
+  {
+   "ten": "candlebodyratio_trend_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Dau tu theo xu huong tang khi gia dong nam tren trung binh dong va co nang luong mua manh duoc do boi ty le than nen cao, chong lai cac muc ngam giam. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "ema",
+      "n": 20
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.070188
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "CandleBodyRatio.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "candlebodyratio_trend",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.2915,
+    "EURUSD.H1": 0.2742,
+    "GBPUSD.H1": 0.2765,
+    "USDJPY.H1": 0.2897,
+    "XAUUSD.H1": 0.2906,
+    "US500Cash.H1": 0.3225
+   }
+  },
+  {
+   "ten": "candle_body_ratio_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Luat rut TU MA NGUON `CandleBodyRatio.mq5` (Candle Body Ratio), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.05849
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "CandleBodyRatio.mq5",
+   "_ly_do_may_dien": true,
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "candle_body_ratio",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.2565,
+    "EURUSD.H1": 0.2567,
+    "GBPUSD.H1": 0.2565,
+    "USDJPY.H1": 0.257,
+    "XAUUSD.H1": 0.2565,
+    "US500Cash.H1": 0.2548
+   }
+  },
+  {
+   "ten": "candlebodyratio_momentum_atr",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Tỷ lệ thân nến lớn phản ánh áp lực giao dịch mạnh và sự đồng thuận của thị trường trong phiên, thường là tín hiệu tiếp nối xu hướng khi giá đóng cửa gần đỉnh hoặc trũng nhất. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.076037
+      ]
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "gia",
+      "cot": "open"
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": "<=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.040943
+      ]
+     }
+    }
+   ],
+   "nguon": "CandleBodyRatio.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "candlebodyratio_momentum",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.4625,
+    "EURUSD.H1": 0.4517,
+    "GBPUSD.H1": 0.4505,
+    "USDJPY.H1": 0.4604,
+    "XAUUSD.H1": 0.4532,
+    "US500Cash.H1": 0.4756
+   }
+  },
+  {
+   "ten": "t3_velocity_tape_ban_atr",
+   "co_che": "Cắt xuống dưới 50 cho thấy động lượng tăng giá cạn kiệt và áp lực bán gia tăng. Nhà giao dịch đóng lệnh mua hoặc mở bán để bắt nhịp đà giảm. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "ho": "bien_dong",
+   "chieu": -1,
+   "giu": 10,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_xuong",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       5.848969
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       5.848969
+      ]
+     }
+    }
+   ],
+   "nguon": "t3_velocity_tape.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "t3_velocity_tape_ban",
+   "_so_hang_doi": 2,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.764,
+    "EURUSD.H1": 0.9581,
+    "GBPUSD.H1": 0.9804,
+    "USDJPY.H1": 0.8168,
+    "XAUUSD.H1": 0.9004,
+    "US500Cash.H1": 0.6849
+   }
+  },
+  {
+   "ten": "hl_cross_signal_demarker_breakout_atr",
+   "ho": "pha_vo",
+   "chieu": 1,
+   "giu": 1,
+   "co_che": "Các nhà giao dịch theo xu hướng cần vào lệnh ngay khi giá phá vỡ đỉnh tích lũy ngắn hạn để bắt trọn đà tăng, tránh mất điểm đẹp khi thị trường bứt phá mạnh sau giai đoạn sideway. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 20
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "ema",
+      "n": 14
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "ema",
+      "n": 7
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.081886
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "hlcrosssigfordemarker.mq5",
+   "nguon_lan": "chi_bao",
+   "_chuan_hoa_tu": "hl_cross_signal_demarker_breakout",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.1173,
+    "EURUSD.H1": 0.107,
+    "GBPUSD.H1": 0.1085,
+    "USDJPY.H1": 0.1151,
+    "XAUUSD.H1": 0.1139,
+    "US500Cash.H1": 0.1402
+   }
+  },
+  {
+   "ten": "kiem_tra_bien_dong_thi_truong_bang_chi_so_atr_de_chon_mua_ca_atr",
+   "ho": "bien_dong",
+   "chieu": 1,
+   "giu": 100,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.175469
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "https://www.mql5.com/en/code/71467",
+   "_ly_do_may_dien": true,
+   "co_che": "Luat rut TU MA NGUON `https://www.mql5.com/en/code/71467` (kiem_tra_bien_dong_thi_truong_bang_chi_so_atr_de_chon_mua_ca), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "_chuan_hoa_tu": "kiem_tra_bien_dong_thi_truong_bang_chi_so_atr_de_chon_mua_ca",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 1.0,
+    "EURUSD.H1": 1.0,
+    "GBPUSD.H1": 1.0,
+    "USDJPY.H1": 1.0,
+    "XAUUSD.H1": 1.0,
+    "US500Cash.H1": 1.0
+   }
+  },
+  {
+   "ten": "lenh_mua_xu_huong_giam_va_dao_ngach_atr",
+   "co_che": "Xu huong giam ket hop dao ngach [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "ho": "xu_huong",
+   "giu": 100,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 5
+     },
+     "phep": "cheo_xuong",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 4
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.116223
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 1
+     }
+    }
+   ],
+   "chieu": 1,
+   "nguon": "https://www.mql5.com/en/code/26001",
+   "_chuan_hoa_tu": "lenh_mua_xu_huong_giam_va_dao_ngach",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.8884,
+    "EURUSD.H1": 0.8499,
+    "GBPUSD.H1": 0.8389,
+    "USDJPY.H1": 0.8473,
+    "XAUUSD.H1": 0.8113,
+    "US500Cash.H1": 0.7078
+   }
+  },
+  {
+   "ten": "lenh_ban_xu_huong_tang_va_dao_ngach_atr",
+   "co_che": "Xu huong tang ket hop dao ngach [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren XAUUSD.H1]",
+   "ho": "xu_huong",
+   "giu": 100,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 5
+     },
+     "phep": "cheo_len",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 4
+     }
+    },
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.116223
+      ]
+     }
+    }
+   ],
+   "ra": [
+    {
+     "trai": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "phep": "<=",
+     "phai": {
+      "chi_bao": "tb",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 1
+     }
+    }
+   ],
+   "chieu": 1,
+   "nguon": "https://www.mql5.com/en/code/26001",
+   "_chuan_hoa_tu": "lenh_ban_xu_huong_tang_va_dao_ngach",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.7988,
+    "EURUSD.H1": 0.7749,
+    "GBPUSD.H1": 0.7593,
+    "USDJPY.H1": 0.7921,
+    "XAUUSD.H1": 0.759,
+    "US500Cash.H1": 0.6869
+   }
+  },
+  {
+   "ten": "fx_trailing_stop_chieu_theo_xu_huong_tang_giam_di_chuyen_sto_atr",
+   "co_che": "Luat rut TU MA NGUON `https://www.mql5.com/en/code/75916` (fx_trailing_stop_chieu_theo_xu_huong_tang_giam_di_chuyen_sto), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: True [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "ho": "xu_huong",
+   "chieu": 1,
+   "giu": 500,
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "atr",
+      "n": 14
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.233959
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "nguon": "https://www.mql5.com/en/code/75916",
+   "_ly_do_may_dien": true,
+   "_chuan_hoa_tu": "fx_trailing_stop_chieu_theo_xu_huong_tang_giam_di_chuyen_sto",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 1.0,
+    "EURUSD.H1": 1.0,
+    "GBPUSD.H1": 1.0,
+    "USDJPY.H1": 1.0,
+    "XAUUSD.H1": 1.0,
+    "US500Cash.H1": 1.0
+   }
+  },
+  {
+   "ten": "candle_size_range_atr",
+   "co_che": "Lọc nến có biên độ giá vượt ngưỡng để xác định điểm vào lệnh khi biến động mạnh, giảm rủi ro trong thị trường sideway. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "ho": "bien_dong",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "bien_do"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.116979
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "giu": 1,
+   "chieu": 1,
+   "nguon": "https://www.mql5.com/en/code/53012",
+   "_chuan_hoa_tu": "candle_size_range",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.9999,
+    "EURUSD.H1": 0.999,
+    "GBPUSD.H1": 0.9986,
+    "USDJPY.H1": 0.999,
+    "XAUUSD.H1": 0.997,
+    "US500Cash.H1": 0.9992
+   }
+  },
+  {
+   "ten": "candle_size_shadow_atr",
+   "co_che": "Nhận diện bóng nến dài vượt ngưỡng để phát hiện tín hiệu đảo chiều hoặc từ chối giá tại các vùng quan trọng. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+   "ho": "bien_dong",
+   "vao": [
+    {
+     "trai": {
+      "chi_bao": "than_nen"
+     },
+     "phep": ">=",
+     "phai": {
+      "chi_bao": "tuyen_tinh",
+      "toan_hang": [
+       {
+        "chi_bao": "atr",
+        "n": 14
+       }
+      ],
+      "he_so": [
+       0.116979
+      ]
+     }
+    }
+   ],
+   "ra": [],
+   "giu": 1,
+   "chieu": 1,
+   "nguon": "https://www.mql5.com/en/code/53012",
+   "_chuan_hoa_tu": "candle_size_shadow",
+   "_so_hang_doi": 1,
+   "_xep_loai_sau": "ON_DINH",
+   "_ty_le_sau": {
+    "AUDCAD.H1": 0.4197,
+    "EURUSD.H1": 0.4017,
+    "GBPUSD.H1": 0.4024,
+    "USDJPY.H1": 0.4143,
+    "XAUUSD.H1": 0.4085,
+    "US500Cash.H1": 0.4265
+   }
+  }
+ ]
+}

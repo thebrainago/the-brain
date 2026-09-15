@@ -1,0 +1,42 @@
+  44/3260 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+kho 27 -> dich duoc 28, bo 0
+  bien dich xong (28 co che)
+  chay optimization 28 pass ...
+
+28 pass, 20.3s  
+lot 5 - von 10.000 USD - 2021.03.19 -> 2026.07.29 (5.36 nam)
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+wave_mtf_trend_buy_atr                         21    144.68   1.17    0.06    4.22       +1.24
+__mua_giu__                                    17    132.06   1.18    0.04    4.26       +1.13
+t3_velocity_tape_ban_atr                        0      0.00   0.00    0.00    0.00     CHUA_DO
+lenh_ban_xu_huong_tang_va_dao_ngach_atr       110    -42.43   0.97   -0.03    4.79       -0.33
+lenh_mua_xu_huong_giam_va_dao_ngach_atr        33    -68.16   0.92   -0.03    6.09       -0.42
+renko_trend_reversal_atr                       63   -228.02   0.84   -0.15    6.91       -1.27
+wave_mtf_trend_sell_atr                        21   -828.97   0.40   -0.36   10.18       -3.26
+shannon_entropy_compression_buy_atr            11   -149.08   0.13   -0.53    1.86       -3.21
+ban_khi_do_phuc_tap_tang_atr                   52   -889.32   0.43   -0.61   10.38       -3.45
+candle_body_ratio_momentum_long_atr          1190  -1946.50   0.72   -1.35   19.62       -4.04
+gold_atr_trend_buy_atr                        559  -1526.11   0.59   -1.49   16.93       -3.64
+shannon_entropy_expansion_sell_atr             97   -746.16   0.44   -1.70    8.22       -3.67
+gold_atr_trend_sell_atr                       560  -1995.14   0.45   -2.08   20.43       -3.97
+candlebodyratio_momentum_atr                 2030  -3625.44   0.56   -3.62   36.45       -4.05
+volatility_regime_atr                         107   -301.09   0.29   -5.00    3.28       -3.72
+hl_cross_signal_demarker_breakout_atr         631  -1166.47   0.45   -5.00   11.93       -3.98
+shannon_entropy_trend_start_atr              1610  -1987.62   0.59   -5.00   19.95       -4.06
+candlebodyratio_trend_atr                    1702  -3201.24   0.45   -5.00   32.07       -4.07
+candle_body_ratio_atr                        2071  -3288.24   0.51   -5.00   32.97       -4.07
+bat_xu_huong_giam_theo_bar_do_lien_tuc_atr   1976  -3516.51   0.47   -5.00   35.40       -4.05
+shannon_entropy_range_warning_atr            1803  -3561.79   0.43   -5.00   35.80       -4.05
+bat_xu_huong_tang_theo_bar_xanh_lien_tuc_a   1976  -3728.63   0.45   -5.00   37.39       -4.07
+candle_size_shadow_atr                       2489  -4250.59   0.49   -5.00   42.59       -4.07
+nen_than_dai_xac_nhan_xu_huong_tang_atr      2625  -4344.52   0.50   -5.00   43.53       -4.07
+ty_le_than_nen_atr                           2659  -4405.79   0.50   -5.00   44.14       -4.07
+
+moc mua-giu o cung rui ro: +1.13%/nam  ->  1/27 co che hon moc

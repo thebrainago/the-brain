@@ -244,6 +244,17 @@ def canh_bao_cho_ma(ten_co_che: list, ma: str) -> list:
 #: khong doan: mot danh sach ten viet tay se lac hau ngay lan them chi bao sau.
 NGUONG_DON_VI_GIA = 0.25     # he so bien thien cua (do lon / muc gia)
 
+#: BIEN DO hay MUC GIA - chia ATR chi cuu duoc cai dau.
+#:
+#: Ban chuan hoa dau tien cuu ca `aapl_call_breakout_above_322_50`
+#: (`close > 322.50`) va cho ra dung 0,500 o ca sau bac gia - mot con so nhin
+#: rat khoe. No vo nghia: `close > k x ATR` la so MUC GIA voi mot boi cua BIEN
+#: DO, va ty le close/ATR quanh quan 200-1.000 o moi tai san nen dieu kien lat
+#: qua lat lai quanh giua. Cai dang cuu la `than_nen`, `bien_do`, `do_lech` -
+#: nhung dai luong CUNG THU NGUYEN voi ATR. Phan biet duoc bang mot phep do:
+#: bien do thi `|toan hang| / ATR` co bac 1; muc gia thi bac hang tram.
+BOI_ATR_TOI_DA = 20.0
+
 
 def don_vi_gia(t: dict, ds: list | None = None) -> bool:
     """Toan hang nay co THU NGUYEN GIA khong - DO tren cac bac gia."""
@@ -271,6 +282,24 @@ def _atr_trung_vi(df, n: int = 14) -> float:
     from nhan import ngu_phap as NP
     v = np.asarray(NP.toan_hang(df, {"chi_bao": "atr", "n": n}), float)
     return float(np.nanmedian(v))
+
+
+def la_bien_do(t: dict, ds: list | None = None, n_atr: int = 14) -> bool:
+    """Toan hang nay la BIEN DO (cung thu nguyen ATR) hay la MUC GIA."""
+    import numpy as np
+    from nhan import ngu_phap as NP
+    ds = ds if ds is not None else chuoi()
+    boi = []
+    for _, df, _ in ds:
+        try:
+            v = np.asarray(NP.toan_hang(df, t), float)
+        except Exception:
+            continue
+        m = float(np.nanmedian(np.abs(v)))
+        a = _atr_trung_vi(df, n_atr)
+        if np.isfinite(m) and a > 0:
+            boi.append(m / a)
+    return bool(boi) and float(np.median(boi)) <= BOI_ATR_TOI_DA
 
 
 def chuan_hoa(spec: dict, ds: list | None = None, n_atr: int = 14) -> dict | None:
@@ -309,6 +338,8 @@ def chuan_hoa(spec: dict, ds: list | None = None, n_atr: int = 14) -> dict | Non
                     continue          # `than_nen > 0` khong dinh don vi gia
                 if not don_vi_gia(a, ds):
                     continue
+                if not la_bien_do(a, ds, n_atr):
+                    continue          # MUC GIA - chia ATR khong cuu duoc
                 dk[kia] = {"chi_bao": "tuyen_tinh",
                            "toan_hang": [{"chi_bao": "atr", "n": n_atr}],
                            "he_so": [round(float(c) / atr, 6)]}
