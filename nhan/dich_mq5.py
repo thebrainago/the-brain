@@ -294,7 +294,7 @@ class BoDich:
             raise KhongDichDuoc("'%s' can 'toan_hang' khong rong" % cb)
         fs = [self.toan_hang(x) for x in ds[:24]]
         if cb == "tb_cua_cac":
-            return self._than("   return((%s) / %d.0;);".replace(";);", ");")
+            return self._than("   return((%s) / %d.0);"
                               % (" + ".join("%s(s)" % f for f in fs), len(fs)))
         if cb == "tong_cua_cac":
             return self._than("   return(%s);"
