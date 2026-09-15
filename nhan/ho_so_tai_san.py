@@ -620,6 +620,34 @@ def tom_tat(ma: str, khung: str = "D1") -> str:
     except Exception:
         pass
 
+    # DON THUOC: tinh cach -> CHIEU dat luoi, BUOC, CHAN TROI.
+    #
+    # `nhan/tinh_cach_chieu.py` ra doi 15/09 de tra loi dung cau hoi cua chu du
+    # an (*"cap co trend thi danh ve chieu thuan trend, cap sideway ta danh ve
+    # giua"*) - roi nam MO COI ngay tu hom do. Do la nua sau cua chinh module
+    # nay: ho so NOI tai san the nao, don thuoc noi NEN LAM GI voi no.
+    try:
+        from nhan import tinh_cach_chieu as TCC
+        dt = TCC.don_thuoc(ma)
+        c = dt.get("chieu") or {}
+        if c.get("chieu"):
+            dong.append("Don thuoc: dat luoi chieu **%s** (do tin %s) - %s"
+                        % (c["chieu"], c.get("do_tin"), str(c.get("vi_sao"))[:90]))
+        else:
+            dong.append("Don thuoc: CHUA_DO_DUOC chieu - %s"
+                        % str(c.get("vi_sao"))[:100])
+        b = dt.get("buoc") or {}
+        ct = dt.get("chan_troi") or dt.get("giu") or {}
+        if b.get("buoc_pct"):
+            dong.append("  buoc luoi toi thieu %s%% (%.1fx bien do nen)"
+                        % (_r(b["buoc_pct"], 3), TCC.BOI_BUOC_TOI_THIEU))
+        if ct.get("giu_bar"):
+            dong.append("  giu lenh toi thieu %s bar (tu nua doi)"
+                        % _r(ct["giu_bar"], 0))
+    except Exception as e:
+        dong.append("Don thuoc: CHUA_DO_DUOC (%s: %s)"
+                    % (type(e).__name__, str(e)[:70]))
+
     gd = ghep_duoc(ma, khung, ho_so_da_co=h)
     if gd.get("trang_thai") == CHUA_DO_DUOC:
         dong.append("Ghep duoc: CHUA_DO_DUOC (%s)" % gd["vi_sao"])

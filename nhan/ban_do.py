@@ -98,6 +98,33 @@ def _khoa(p: Path) -> str:
     return str(p.relative_to(LAB)).replace("\\", "/")
 
 
+def _chuoi_trong(cay) -> str:
+    """Noi moi CHUOI trong mot cay `ast` lai. Bo qua chu thich va docstring.
+
+    `b.py` goi nhieu module bang `python -c "from nhan import X as Y; ..."`,
+    tuc mot canh THAT nam trong mot chuoi. Nhung neu quet van ban THO thi mot
+    dong chu thich nhac toi `from nhan import X` cung thanh canh - va ban do tu
+    ve them canh cho chinh no.
+
+    Docstring cung bi bo: chung la chuoi, nhung chung MO TA chu khong GOI.
+    """
+    ra = []
+    than = {ast.Module, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef}
+    bo_qua = set()
+    for nut in ast.walk(cay):
+        if type(nut) in than:
+            con = getattr(nut, "body", None) or []
+            if (con and isinstance(con[0], ast.Expr)
+                    and isinstance(con[0].value, ast.Constant)
+                    and isinstance(con[0].value.value, str)):
+                bo_qua.add(id(con[0].value))
+    for nut in ast.walk(cay):
+        if (isinstance(nut, ast.Constant) and isinstance(nut.value, str)
+                and id(nut) not in bo_qua):
+            ra.append(nut.value)
+    return "\n".join(ra)
+
+
 def do_thi() -> dict:
     """{file: set(file duoc no goi)}. Doc `import` + goi lenh trong chuoi."""
     fs = _cac_file()
@@ -114,16 +141,89 @@ def do_thi() -> dict:
             vb = p.read_text(encoding="utf-8-sig", errors="ignore")
         except Exception:
             continue
-        # import nhan.X / from nhan import X / from . import X
-        for m in re.findall(r"(?:from|import)\s+((?:nhan|tru|qwen)[\w.]*)", vb):
+        # DOC IMPORT BANG `ast`, KHONG BANG REGEX.
+        #
+        # Loi tim ra 15/09/2026: mau cu la
+        #     r"from\s+nhan\s+import\s+\(?([\w, ]+)"
+        # va lop ky tu `[\w, ]` **khong co xuong dong**. Nen mot import nhieu
+        # dong chi bat duoc DONG DAU:
+        #
+        #     from nhan import (canary as CANARY, chi_phi as CP, cong as CONG,
+        #                       ngu_phap as NP, quant_plan as QP, so as SO)
+        #                                       ^^^^^^^^^^ rung mat
+        #
+        # `tru/quantlab.py` co import `quant_plan` o dong THU BA, nen ban do
+        # bao `nhan/quant_plan.py` la MO COI suot nhieu ngay - trong khi tru
+        # QUANTLAB goi no moi luot. Mot ban do rung canh thi bao MO COI NHAM, va
+        # chinh CLAUDE.md canh bao: *"mot ban do bao nham con te hon ban do cu:
+        # no khien nguoi doc xoa thu dang chay"*.
+        #
+        # `ast` doc dung moi dang import va khong quan tam xuong dong. File nao
+        # khong phan tich duoc (cu phap hong, Python 2) thi lui ve regex cu.
+        da_bang_ast = False
+        try:
+            cay = ast.parse(vb)
+            da_bang_ast = True
+        except SyntaxError:
+            cay = None
+        if da_bang_ast:
+            for nut in ast.walk(cay):
+                if isinstance(nut, ast.Import):
+                    for a in nut.names:
+                        if a.name in ten_theo_mo_dun:
+                            canh[k].add(ten_theo_mo_dun[a.name])
+                elif isinstance(nut, ast.ImportFrom):
+                    goc_mo = nut.module or ""
+                    if nut.level:          # `from . import X` / `from .X import`
+                        tm = k.rsplit("/", 1)[0] if "/" in k else ""
+                        for a in nut.names:
+                            for ung in ("%s/%s.py" % (tm, a.name),
+                                        "%s/%s.py" % (tm, goc_mo)):
+                                if ung in tap_khoa:
+                                    canh[k].add(ung)
+                        continue
+                    if goc_mo in ten_theo_mo_dun:
+                        canh[k].add(ten_theo_mo_dun[goc_mo])
+                    for a in nut.names:
+                        ung = "%s.%s" % (goc_mo, a.name) if goc_mo else a.name
+                        if ung in ten_theo_mo_dun:
+                            canh[k].add(ten_theo_mo_dun[ung])
+        # QUET THEM TREN VAN BAN THO - `ast` KHONG DU.
+        #
+        # Docstring cua ham nay noi "doc `import` **+ goi lenh trong chuoi**",
+        # va nua sau do khong phai trang tri: `b.py` goi nhieu module bang
+        #     python -c "from nhan import chi_tieu as CT; ..."
+        # tuc import nam trong mot CHUOI, khong phai mot nut `ast.Import`.
+        #
+        # Ban dau toi thay ca khoi bang `ast` va ngay lap tuc co BON mo coi MOI
+        # (`chi_tieu`, `telegram`, `kham_pha_nguon`, `nguon_tinix`) - deu la
+        # module `b.py` dang goi hang ngay. Mot "cai tien" lam rung canh thi
+        # cung la mot ban do bao nham, chi theo chieu nguoc lai.
+        #
+        # Nen: `ast` cho do CHINH XAC, regex cho cai nam trong chuoi. HOP ca hai.
+        # Quet tren CHUOI, khong tren van ban tho: chu thich KHONG phai canh.
+        #
+        # Ban dau toi quet `vb` nguyen ban, va chinh doan chu thich o tren (co
+        # vi du `from nhan import chi_tieu as CT`) tu tao ra mot canh MA
+        # `ban_do -> chi_tieu`. Mot ban do tu ve them canh cho chinh no thi moi
+        # con so mo coi trong no deu bot dang tin.
+        van = _chuoi_trong(cay) if da_bang_ast else vb
+        for m in re.findall(r"(?:from|import)\s+((?:nhan|tru|qwen)[\w.]*)", van):
             if m in ten_theo_mo_dun:
                 canh[k].add(ten_theo_mo_dun[m])
         for goi, tap in (("nhan", "nhan"), ("tru", "tru"), ("qwen", "qwen")):
-            for m in re.findall(r"from\s+%s\s+import\s+\(?([\w, ]+)" % goi, vb):
+            # `[\w,\s]` CO xuong dong - mau cu dung `[\w, ]` nen mot import
+            # nhieu dong chi bat duoc dong dau.
+            for m in re.findall(
+                    r"from\s+%s\s+import\s+\(?([\w,\s]+)" % goi, van):
                 for t in re.split(r"[,\s]+", m):
                     ung = "%s.%s" % (tap, t.strip())
                     if t.strip() and ung in ten_theo_mo_dun:
                         canh[k].add(ten_theo_mo_dun[ung])
+        # `python -m nhan.X` trong mot chuoi lenh.
+        for m in re.findall(r"-m\s+((?:nhan|tru|qwen)[\w.]*)", van):
+            if m in ten_theo_mo_dun:
+                canh[k].add(ten_theo_mo_dun[m])
         # `from . import X` - import TUONG DOI, giai nghia theo thu muc cua
         # chinh file. Bo qua khau nay thi ca goi `qwen/` bao MO COI trong khi
         # `q.cmd` dang chay no hang ngay: bo do mu cho ra AM TINH GIA, khong

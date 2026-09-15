@@ -360,6 +360,60 @@ def tu_trinh_duyet(url: str, kieu: str = "khac") -> dict | None:
 
 
 # ------------------------------------------------------------------- CUA RA
+#: Duoi file phai boc bang bo doc rieng chu khong phai bo boc HTML.
+DUOI_PDF = (".pdf",)
+DUOI_ANH = (".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff")
+
+
+def _la_file_boc_rieng(u: str) -> bool:
+    goc = u.split("?")[0].split("#")[0]
+    return goc.endswith(DUOI_PDF + DUOI_ANH)
+
+
+def tu_file_tai_ve(url: str) -> dict | None:
+    """Tai file ve thu muc tam roi boc bang `doc_pdf` / `doc_anh`.
+
+    PDF cua Telegram phan lon la ANH QUET - `doc_pdf` co duong OCR rieng cho
+    truong hop do [[pdf-telegram-la-anh-can-ocr]]. Neu chi lay lop van ban thi
+    ~6 lan so trang tra ve rong ma khong bao loi.
+    """
+    import tempfile
+    b = _lay(url, timeout=60, nhi_phan=True)
+    if not b:
+        return None
+    goc = url.lower().split("?")[0].split("#")[0]
+    duoi = ".pdf" if goc.endswith(DUOI_PDF) else Path(goc).suffix or ".bin"
+    tam = Path(tempfile.gettempdir()) / ("toan_van_tam" + duoi)
+    try:
+        tam.write_bytes(b)
+    except OSError:
+        return None
+    try:
+        if duoi == ".pdf":
+            from nhan import doc_pdf as DP
+            kq = DP.doc_file(tam, ocr=True)
+            vb = _sach(str(kq.get("van_ban") or ""))
+            cach = "pdf:" + str(kq.get("cach") or kq.get("duong") or "doc_pdf")
+        else:
+            from nhan import doc_anh as DA
+            kq = DA.doc(tam)
+            vb = _sach(str(kq.get("van_ban") or ""))
+            cach = "anh:ocr"
+    except Exception as e:
+        _ghi_loi(url, "%s: %s" % (type(e).__name__, str(e)[:90]))
+        return None
+    finally:
+        try:
+            tam.unlink()
+        except OSError:
+            pass
+    if len(vb) < 200:
+        _ghi_loi(url, "boc ra chi %d ky tu - coi nhu khong doc duoc" % len(vb))
+        return None
+    return {"van_ban": vb, "kieu": "tai_lieu", "cach": cach,
+            "so_ky_tu": len(vb)}
+
+
 def doc(url: str, goi_y: str = "") -> dict | None:
     """Doc mot dia chi bat ky. Tu chon bo boc theo dang nguon.
 
@@ -378,6 +432,18 @@ def doc(url: str, goi_y: str = "") -> dict | None:
     # Video: lay PHU DE truoc, re hon va sach hon nhieu so voi boc trang.
     if r is None and ("youtube.com/watch" in u or "youtu.be/" in u):
         r = tu_youtube(url)
+    # FILE TAI VE (PDF / anh) - phai boc bang bo doc rieng, khong phai `tu_html`.
+    #
+    # So do cua chu du an ghi ro: *"voi cac dang file tai lieu pdf bai viet
+    # duoc phep search tu khoa => tim link co file tai tai lieu va tien hanh
+    # tai ve"*. Va `nhan/doc_pdf.py` (co OCR cho trang la ANH) cung
+    # `nhan/doc_anh.py` da ton tai tu truoc - ca hai deu MO COI den 15/09/2026.
+    #
+    # Truoc khi noi: mot URL `.pdf` bat ky (ngoai arxiv) roi xuong `tu_html`,
+    # va `tu_html` doc mot file nhi phan ra chuoi rac roi ghi vao kho nhu mot
+    # "ban doc". Khong ai bao loi - chi la mot ban doc vo nghia.
+    if r is None and _la_file_boc_rieng(u):
+        r = tu_file_tai_ve(url)
     if r is None and "arxiv.org" in u:
         r = tu_arxiv(url)
     elif r is None and "github.com" in u:

@@ -97,3 +97,64 @@ def test_bat_duoc_duong_ghep_tu_chuoi():
     canh = BD.do_thi()
     assert "nhan/doc_lenh_tester.py" in canh["b.py"]
     assert "nhan/dieu_khien_xa.py" not in canh["b.py"]   # file do o GOC lab
+
+
+# ===== BAN DO RUNG CANH THI BAO MO COI NHAM (15/09/2026)
+def test_import_NHIEU_DONG_khong_duoc_rung_canh(tmp_path):
+    r"""Mau cu `[\w, ]` khong co xuong dong, nen mot import nhieu dong chi bat
+    duoc DONG DAU.
+
+    `tru/quantlab.py` co `quant_plan` o dong THU BA cua mot import ba dong, nen
+    ban do bao `nhan/quant_plan.py` MO COI suot nhieu ngay - trong khi tru
+    QUANTLAB goi no moi luot. CLAUDE.md canh bao dung dieu nay: *"mot ban do
+    bao nham con te hon ban do cu: no khien nguoi doc xoa thu dang chay"*.
+    """
+    from nhan import ban_do as BD
+    canh = BD.do_thi()
+    assert "nhan/quant_plan.py" in canh.get("tru/quantlab.py", set()), (
+        "canh tru/quantlab -> quant_plan bi rung: import nhieu dong chua doc het")
+
+
+def test_import_TRONG_CHUOI_van_duoc_tinh_la_canh():
+    """`b.py` goi nhieu module bang `python -c "from nhan import X as Y; ..."`.
+
+    Do la canh THAT. Toi da co mot lan thay ca khoi bang `ast` va ngay lap tuc
+    co BON mo coi MOI (`chi_tieu`, `telegram`, `kham_pha_nguon`,
+    `nguon_tinix`) - deu la module `b.py` dang goi hang ngay.
+    """
+    from nhan import ban_do as BD
+    canh = BD.do_thi()
+    for m in ("chi_tieu", "telegram", "kham_pha_nguon", "nguon_tinix"):
+        assert "nhan/%s.py" % m in canh.get("b.py", set()), (
+            "mat canh b.py -> %s (import nam trong chuoi)" % m)
+
+
+def test_CHU_THICH_khong_duoc_tinh_la_canh():
+    """Ban do khong duoc tu ve them canh cho chinh no.
+
+    Quet van ban THO thi mot dong chu thich nhac toi `from nhan import X` cung
+    thanh canh - va luc do moi con so mo coi trong ban do deu bot dang tin.
+    """
+    from nhan import ban_do as BD
+    import ast as _ast
+    from pathlib import Path as _P
+    lab = _P(__file__).resolve().parent
+    van = (lab / "nhan" / "ban_do.py").read_text(encoding="utf-8")
+    assert "from nhan import chi_tieu" in van, (
+        "bai kiem nay can mot vi du import trong chu thich cua ban_do.py")
+    canh = BD.do_thi()
+    assert "nhan/chi_tieu.py" not in canh.get("nhan/ban_do.py", set()), (
+        "chu thich cua ban_do dang tu tao ra mot canh MA")
+
+
+def test_KHONG_CON_MO_COI(tmp_path):
+    """Chan neo: 15/09/2026 dua so mo coi ve 0 va so module tren duong chay
+    tu 172 len 191. Mot module moi khong duoc ra doi ma khong co cua vao.
+    """
+    from nhan import ban_do as BD
+    d = BD.sinh()
+    mo_coi = d.get("mo_coi") if isinstance(d, dict) else None
+    if mo_coi is None:
+        import pytest
+        pytest.skip("ban_do.sinh() khong tra ve khoa `mo_coi`")
+    assert not mo_coi, "co %d module MO COI: %s" % (len(mo_coi), list(mo_coi)[:6])

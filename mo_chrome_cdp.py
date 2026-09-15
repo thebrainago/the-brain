@@ -44,6 +44,40 @@ def cdp_song(port):
     except Exception:
         return False
 
+def _tu_dang_nhap(port):
+    """Dang nhap san cac site da co mat khau, ngay sau khi CDP bat.
+
+    `nhan/tu_dang_nhap.py` co tu truoc va nam MO COI den 15/09/2026 - tuc
+    Chrome mo len voi mot ho so CHUA dang nhap, roi SEEKER di doc cac trang
+    can dang nhap va nhan ve trang dang nhap. Trieu chung nhin tu ngoai la
+    "trang nay khong doc duoc", khong phai "chua dang nhap".
+
+    Khong chan luot mo trinh duyet neu khau nay hong: mot Chrome co CDP ma
+    chua dang nhap van hon la khong co Chrome nao.
+    """
+    try:
+        from nhan import tu_dang_nhap as TDN
+    except Exception as e:
+        print("   (khong nap duoc tu_dang_nhap: %s)" % str(e)[:70])
+        return
+    try:
+        site = TDN.danh_sach_site()
+    except Exception as e:
+        print("   (khong doc duoc kho tai khoan: %s)" % str(e)[:70])
+        return
+    if not site:
+        print("   khong site nao co san mat khau trong config/tai_khoan.json")
+        return
+    print("   tu dang nhap %d site: %s ..." % (len(site), ", ".join(list(site)[:5])))
+    try:
+        kq = TDN.dang_nhap_tat(int(port))
+    except Exception as e:
+        print("   (tu dang nhap loi: %s: %s)" % (type(e).__name__, str(e)[:60]))
+        return
+    for k, v in (kq or {}).items():
+        print("     %-22s %s" % (str(k)[:22], str(v)[:60]))
+
+
 def main():
     # Bo CO (`--hien`...) ra khoi doi so vi tri. Truoc 30/08 khong loc, nen
     # `mo_chrome_cdp.py --hien` chay thanh `--remote-debugging-port=--hien`:
@@ -97,6 +131,7 @@ def main():
         time.sleep(2)
         if cdp_song(port):
             print("CDP %s OPEN - doc_cdp/doc_trinh_duyet ket noi duoc" % port)
+            _tu_dang_nhap(port)
             return
     print("KHONG thay CDP sau 40s (co the profile dang bi Chrome khac giu khoa -> dong no roi chay lai)")
 

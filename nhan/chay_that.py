@@ -173,6 +173,16 @@ def _mt5(cho_giay: float = 120.0):
     import MetaTrader5 as mt5
     from chay_tester_z5 import XM_EXE, dong_terminal
     from nhan import bi_mat as BM
+    # `nhan/dang_nhap_mt5.py` ton tai tu truoc voi dung muc dich nay ("de
+    # tester chay duoc khi khong co nguoi") va nam MO COI. Toi da viet lai mot
+    # ban thu hai o day ma khong biet - dung cai benh minh dang di chua. Nay
+    # goi no truoc; no chon dung server chay duoc trong danh sach, thu nay chi
+    # tu lam khi no khong dung duoc.
+    try:
+        from nhan import dang_nhap_mt5 as DN5
+        DN5.san_sang("XM", in_ra=lambda *a: None)
+    except Exception:
+        pass
     dong_terminal()
     time.sleep(2)
     d = BM.lay("mt5", "XM") or {}
@@ -349,6 +359,57 @@ def _trong_warp(mt5_moi, that: bool, cho_tien_that: bool, chi_he: str,
         mt5.shutdown()
 
 
+def _cli_suy_giam(argv: list) -> int:
+    """He DANG CHAY co con giong cai da kiem dinh khong.
+
+    `nhan/suy_giam.py` co tu truoc va nam MO COI - vi truoc 15/09 khong he nao
+    CHAY THAT ca, nen khong co gi de so. Nay `chay_that` da co, no co viec.
+
+    Moc backtest lay tu bang tester da luu (`reports/TESTER_KHO_*.json`), khong
+    uoc luong: `suy_giam.do` noi ro *"truyen sai o day thi moi ket luan sau deu
+    sai, nen ham khong tu doan chung"*.
+    """
+    import math
+    from nhan import suy_giam as SG
+    d = danh_sach()
+    if not d:
+        print("chua he nao duoc dang ky - xem `b demo`")
+        return 0
+    print("%-22s %-14s %s" % ("he", "trang thai", "mo ta"))
+    for he, c in d.items():
+        moc = _moc_backtest(c)
+        if moc is None:
+            print("%-22s %-14s %s" % (he[:22], "CHUA_DO_DUOC",
+                                      "khong co bang tester cho %s/%s de lay moc"
+                                      % (c["ma"], c["khung"])))
+            continue
+        tb, sd = moc
+        k = SG.do(he, tb, sd)
+        print("%-22s %-14s %s" % (he[:22], k["trang_thai"], k["mo_ta"][:96]))
+    return 0
+
+
+def _moc_backtest(c: dict):
+    """(trung binh, do lech) MOI LENH tu bang tester da luu. None = chua co."""
+    import math
+    f = LAB / "reports" / ("TESTER_KHO_%s_%s.json" % (c["ma"], c["khung"]))
+    if not f.exists():
+        return None
+    try:
+        r = json.loads(f.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    d = next((x for x in r.get("ket") or [] if x.get("ten") == c["co_che"]), None)
+    if not d or not d.get("lenh"):
+        return None
+    n = int(d["lenh"])
+    tb = float(d.get("ky_vong") or (float(d["lai"]) / max(n, 1)))
+    # Do lech MOI LENH suy tu Sharpe cua tester: sharpe = tb / sd * sqrt(n).
+    sh = float(d.get("sharpe") or 0.0)
+    sd = abs(tb) * math.sqrt(n) / abs(sh) if sh else abs(tb) * 3.0
+    return tb, (sd if sd > 0 else abs(tb) * 3.0)
+
+
 def _cli(argv: list) -> int:
     from nhan import khoa_tester as KT
     lenh = argv[0] if argv else "xem"
@@ -372,6 +433,8 @@ def _cli(argv: list) -> int:
                            encoding="utf-8")
         print("%s: %s" % (argv[1], "BAT" if lenh == "bat" else "TAT"))
         return 0
+    if lenh == "suy-giam":
+        return _cli_suy_giam(argv[1:])
     if lenh == "nhip":
         that = "--that" in argv
         with KT.giu("chay_that.nhip"):
