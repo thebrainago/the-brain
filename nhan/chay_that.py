@@ -180,12 +180,16 @@ def _mt5(cho_giay: float = 120.0):
     # tu lam khi no khong dung duoc.
     try:
         from nhan import dang_nhap_mt5 as DN5
-        DN5.san_sang("XM", in_ra=lambda *a: None)
+        DN5.san_sang("XM_DEMO", in_ra=lambda *a: None)
     except Exception:
         pass
     dong_terminal()
     time.sleep(2)
-    d = BM.lay("mt5", "XM") or {}
+    # UU TIEN TAI KHOAN DEMO. Tester dung `XM` (co the la tien that, no chi
+    # backtest); nhung chay_that GUI LENH nen phai vao DEMO neu co. Chu du an
+    # dua tai khoan demo 15/09/2026 - truoc do chot an toan chan het vi tk dang
+    # dang nhap la tien that.
+    d = BM.lay("mt5", "XM_DEMO") or BM.lay("mt5", "XM") or {}
     tham = {"path": str(XM_EXE), "timeout": int(cho_giay * 1000)}
     if d.get("login") and d.get("mat_khau"):
         tham.update(login=int(d["login"]), password=str(d["mat_khau"]),
@@ -229,6 +233,7 @@ def _vi_the(mt5, ma: str, magic: int) -> float:
 
 
 def _dong_het(mt5, ma: str, magic: int) -> list:
+    mt5.symbol_select(ma, True)
     ra = []
     for p in (mt5.positions_get(symbol=ma) or []):
         if int(p.magic) != int(magic):
@@ -247,6 +252,11 @@ def _dong_het(mt5, ma: str, magic: int) -> list:
 
 
 def _mo(mt5, ma: str, magic: int, lot: float, mua: bool) -> dict:
+    # PHAI symbol_select TRUOC khi lay gia. `_bar` da select nhung `_mo`/
+    # `_dong_het` thi khong, nen tick tra None -> "khong co gia" ngay khi co
+    # tin hieu that (do 15/09 tren demo XM). Symbol chi vao Market Watch khi
+    # co ai yeu cau; nguoi yeu cau dau tien chinh la lenh nay.
+    mt5.symbol_select(ma, True)
     t = mt5.symbol_info_tick(ma)
     if t is None:
         raise ChuaDoDuoc("khong co gia cho %s" % ma)
@@ -255,7 +265,16 @@ def _mo(mt5, ma: str, magic: int, lot: float, mua: bool) -> dict:
         "type": mt5.ORDER_TYPE_BUY if mua else mt5.ORDER_TYPE_SELL,
         "price": t.ask if mua else t.bid, "magic": int(magic),
         "deviation": 20, "comment": "chay_that"})
-    return {"ma_tra_ve": int(getattr(r, "retcode", -1)),
+    rc = int(getattr(r, "retcode", -1))
+    # 10027 = AlgoTrading tat tren terminal - mot rao VAN HANH, khong phai loi
+    # co che. Bot khong tu bat duoc; can nguoi bam nut AlgoTrading (Ctrl+E) mot
+    # lan tren terminal MT5 (setting nay giu qua cac lan khoi dong).
+    if rc == 10027:
+        raise ChuaDoDuoc(
+            "AlgoTrading TAT tren terminal (retcode 10027). Mo MT5, dang nhap "
+            "demo, bam nut AlgoTrading (Ctrl+E) roi chay lai. Bot khong tu bat "
+            "duoc - day la chot an toan cua terminal.")
+    return {"ma_tra_ve": rc,
             "mo_ta": str(getattr(r, "comment", "")),
             "ticket": int(getattr(r, "order", 0) or 0)}
 
