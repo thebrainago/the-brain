@@ -123,6 +123,17 @@ def _pv(a, q):
     return float(np.nanpercentile(a, q)) if len(a) else float("nan")
 
 
+def _theo_chieu(doan: list, len_tren: bool) -> dict:
+    """Thong ke cac doan DAY theo mot chieu. `len_tren=True` = day di LEN."""
+    x = [d for d in doan if bool(d["len"]) is len_tren]
+    if not x:
+        return {"so": 0}
+    b = np.array([d["bien_pct"] for d in x], float)
+    t = np.array([d["bar"] for d in x], float)
+    return {"so": len(x), "bien_do_pct_trung_vi": _pv(b, 50),
+            "bar_trung_vi": _pv(t, 50)}
+
+
 def dac_tinh_song(df: pd.DataFrame, boi_atr: float = BOI_ATR) -> dict:
     """-> bien do day/hoi, tan suat, ti le hoi, tre xac nhan."""
     z = zigzag(df, boi_atr)
@@ -168,6 +179,15 @@ def dac_tinh_song(df: pd.DataFrame, boi_atr: float = BOI_ATR) -> dict:
                           "p75": _pv(ty_le_hoi, 75)},
         "bar_moi_day": {"trung_vi": _pv(bar_day, 50)},
         "bar_moi_hoi": {"trung_vi": _pv(bar_hoi, 50)},
+        # TACH CHIEU (them 15/09/2026). Chu du an: *"bao nhieu song day/giam,
+        # day bao nhieu giam bao nhieu / trong bao lau"*. Truong `len` cua moi
+        # doan da co san tu zigzag - chi chua ai gop lai.
+        #
+        # Con so nay tra loi duoc mot cau rat cu the: mot tai san co doi xung
+        # khong. Neu song day LEN dai hon song day XUONG mot cach on dinh thi
+        # chan MUA va chan BAN khong the dung cung tham so.
+        "day_len": _theo_chieu(day, True),
+        "day_xuong": _theo_chieu(day, False),
         "song_moi_nam": round(len(moc) / nam, 2),
         # SO NAY QUYET DINH DUNG DUOC HAY KHONG: mot co che xay tren dinh zigzag
         # phai lui di tung nay bar, neu khong la nhin truoc.

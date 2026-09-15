@@ -1,0 +1,1456 @@
+{
+ "khung": "D1",
+ "so_ma": 145,
+ "ket": [
+  {
+   "ma": "AUDCAD",
+   "so_bar": 8612,
+   "chuoi": 0.968,
+   "than_bd": 0.4225,
+   "doji": 9.09,
+   "ty_le_tang": 51.8,
+   "ha_chuoi_tang": 3.845,
+   "ha_than_bd": 0.4691
+  },
+  {
+   "ma": "AUDCHF",
+   "so_bar": 8542,
+   "chuoi": 0.996,
+   "than_bd": 0.4465,
+   "doji": 10.33,
+   "ty_le_tang": 52.48,
+   "ha_chuoi_tang": 4.083,
+   "ha_than_bd": 0.4383
+  },
+  {
+   "ma": "AUDHKD",
+   "so_bar": 854,
+   "chuoi": 0.902,
+   "than_bd": 0.479,
+   "doji": 10.77,
+   "ty_le_tang": 52.69,
+   "ha_chuoi_tang": 4.009,
+   "ha_than_bd": 0.4229
+  },
+  {
+   "ma": "AUDHUF",
+   "so_bar": 1757,
+   "chuoi": 1.03,
+   "than_bd": 0.4422,
+   "doji": 9.22,
+   "ty_le_tang": 56.61,
+   "ha_chuoi_tang": 4.254,
+   "ha_than_bd": 0.3996
+  },
+  {
+   "ma": "AUDJPY",
+   "so_bar": 8571,
+   "chuoi": 0.99,
+   "than_bd": 0.4345,
+   "doji": 11.04,
+   "ty_le_tang": 53.87,
+   "ha_chuoi_tang": 4.438,
+   "ha_than_bd": 0.4311
+  },
+  {
+   "ma": "AUDNOK",
+   "so_bar": 1248,
+   "chuoi": 1.018,
+   "than_bd": 0.397,
+   "doji": 12.1,
+   "ty_le_tang": 63.05,
+   "ha_chuoi_tang": 3.732,
+   "ha_than_bd": 0.3171
+  },
+  {
+   "ma": "AUDNZD",
+   "so_bar": 8540,
+   "chuoi": 1.014,
+   "than_bd": 0.4058,
+   "doji": 11.59,
+   "ty_le_tang": 50.77,
+   "ha_chuoi_tang": 3.82,
+   "ha_than_bd": 0.4263
+  },
+  {
+   "ma": "AUDPLN",
+   "so_bar": 1200,
+   "chuoi": 1.012,
+   "than_bd": 0.3993,
+   "doji": 10.67,
+   "ty_le_tang": 57.8,
+   "ha_chuoi_tang": 4.172,
+   "ha_than_bd": 0.3454
+  },
+  {
+   "ma": "AUDSEK",
+   "so_bar": 1781,
+   "chuoi": 1.009,
+   "than_bd": 0.3958,
+   "doji": 12.58,
+   "ty_le_tang": 59.4,
+   "ha_chuoi_tang": 3.917,
+   "ha_than_bd": 0.349
+  },
+  {
+   "ma": "AUDSGD",
+   "so_bar": 1742,
+   "chuoi": 0.99,
+   "than_bd": 0.4339,
+   "doji": 11.31,
+   "ty_le_tang": 58.45,
+   "ha_chuoi_tang": 4.045,
+   "ha_than_bd": 0.3839
+  },
+  {
+   "ma": "AUDUSD",
+   "so_bar": 8645,
+   "chuoi": 0.962,
+   "than_bd": 0.45,
+   "doji": 10.98,
+   "ty_le_tang": 53.37,
+   "ha_chuoi_tang": 4.224,
+   "ha_than_bd": 0.4267
+  },
+  {
+   "ma": "AUDZAR",
+   "so_bar": 1826,
+   "chuoi": 1.01,
+   "than_bd": 0.4336,
+   "doji": 11.5,
+   "ty_le_tang": 50.66,
+   "ha_chuoi_tang": 3.712,
+   "ha_than_bd": 0.4124
+  },
+  {
+   "ma": "CADCHF",
+   "so_bar": 8463,
+   "chuoi": 0.992,
+   "than_bd": 0.4428,
+   "doji": 11.0,
+   "ty_le_tang": 51.26,
+   "ha_chuoi_tang": 3.989,
+   "ha_than_bd": 0.4253
+  },
+  {
+   "ma": "CADJPY",
+   "so_bar": 6671,
+   "chuoi": 0.975,
+   "than_bd": 0.4625,
+   "doji": 9.49,
+   "ty_le_tang": 52.57,
+   "ha_chuoi_tang": 4.566,
+   "ha_than_bd": 0.4503
+  },
+  {
+   "ma": "CADMXN",
+   "so_bar": 1747,
+   "chuoi": 1.011,
+   "than_bd": 0.4804,
+   "doji": 9.39,
+   "ty_le_tang": 50.49,
+   "ha_chuoi_tang": 3.913,
+   "ha_than_bd": 0.4781
+  },
+  {
+   "ma": "CADSGD",
+   "so_bar": 878,
+   "chuoi": 0.982,
+   "than_bd": 0.3725,
+   "doji": 12.19,
+   "ty_le_tang": 55.2,
+   "ha_chuoi_tang": 4.069,
+   "ha_than_bd": 0.3673
+  },
+  {
+   "ma": "CHFDKK",
+   "so_bar": 1785,
+   "chuoi": 0.998,
+   "than_bd": 0.4452,
+   "doji": 10.08,
+   "ty_le_tang": 61.63,
+   "ha_chuoi_tang": 4.367,
+   "ha_than_bd": 0.3674
+  },
+  {
+   "ma": "CHFHUF",
+   "so_bar": 2462,
+   "chuoi": 1.009,
+   "than_bd": 0.4385,
+   "doji": 9.95,
+   "ty_le_tang": 58.21,
+   "ha_chuoi_tang": 3.984,
+   "ha_than_bd": 0.3803
+  },
+  {
+   "ma": "CHFJPY",
+   "so_bar": 8708,
+   "chuoi": 0.99,
+   "than_bd": 0.4239,
+   "doji": 10.86,
+   "ty_le_tang": 52.18,
+   "ha_chuoi_tang": 4.301,
+   "ha_than_bd": 0.4196
+  },
+  {
+   "ma": "CHFMXN",
+   "so_bar": 1849,
+   "chuoi": 0.983,
+   "than_bd": 0.4966,
+   "doji": 9.52,
+   "ty_le_tang": 48.93,
+   "ha_chuoi_tang": 3.688,
+   "ha_than_bd": 0.4978
+  },
+  {
+   "ma": "CHFNOK",
+   "so_bar": 1785,
+   "chuoi": 1.056,
+   "than_bd": 0.4328,
+   "doji": 11.65,
+   "ty_le_tang": 59.1,
+   "ha_chuoi_tang": 4.07,
+   "ha_than_bd": 0.3767
+  },
+  {
+   "ma": "CHFPLN",
+   "so_bar": 1786,
+   "chuoi": 1.03,
+   "than_bd": 0.4006,
+   "doji": 12.6,
+   "ty_le_tang": 60.77,
+   "ha_chuoi_tang": 3.923,
+   "ha_than_bd": 0.3447
+  },
+  {
+   "ma": "CHFSEK",
+   "so_bar": 877,
+   "chuoi": 1.063,
+   "than_bd": 0.3983,
+   "doji": 13.34,
+   "ty_le_tang": 63.17,
+   "ha_chuoi_tang": 3.8,
+   "ha_than_bd": 0.3315
+  },
+  {
+   "ma": "CHFSGD",
+   "so_bar": 1786,
+   "chuoi": 0.984,
+   "than_bd": 0.4009,
+   "doji": 13.55,
+   "ty_le_tang": 57.7,
+   "ha_chuoi_tang": 3.783,
+   "ha_than_bd": 0.338
+  },
+  {
+   "ma": "DE40",
+   "so_bar": 3522,
+   "chuoi": 0.982,
+   "than_bd": 0.4717,
+   "doji": 9.57,
+   "ty_le_tang": 54.49,
+   "ha_chuoi_tang": 4.519,
+   "ha_than_bd": 0.4607
+  },
+  {
+   "ma": "DKKSEK",
+   "so_bar": 888,
+   "chuoi": 1.02,
+   "than_bd": 0.4013,
+   "doji": 13.4,
+   "ty_le_tang": 59.55,
+   "ha_chuoi_tang": 3.805,
+   "ha_than_bd": 0.3352
+  },
+  {
+   "ma": "EURAUD",
+   "so_bar": 6672,
+   "chuoi": 0.986,
+   "than_bd": 0.4416,
+   "doji": 11.15,
+   "ty_le_tang": 48.39,
+   "ha_chuoi_tang": 3.823,
+   "ha_than_bd": 0.4247
+  },
+  {
+   "ma": "EURCAD",
+   "so_bar": 6672,
+   "chuoi": 0.982,
+   "than_bd": 0.4375,
+   "doji": 10.54,
+   "ty_le_tang": 51.36,
+   "ha_chuoi_tang": 4.027,
+   "ha_than_bd": 0.4112
+  },
+  {
+   "ma": "EURCHF",
+   "so_bar": 8633,
+   "chuoi": 0.991,
+   "than_bd": 0.3809,
+   "doji": 13.55,
+   "ty_le_tang": 50.99,
+   "ha_chuoi_tang": 3.896,
+   "ha_than_bd": 0.3549
+  },
+  {
+   "ma": "EURCNH",
+   "so_bar": 883,
+   "chuoi": 1.019,
+   "than_bd": 0.452,
+   "doji": 11.21,
+   "ty_le_tang": 54.81,
+   "ha_chuoi_tang": 4.091,
+   "ha_than_bd": 0.4161
+  },
+  {
+   "ma": "EURCZK",
+   "so_bar": 2958,
+   "chuoi": 0.946,
+   "than_bd": 0.3571,
+   "doji": 15.35,
+   "ty_le_tang": 53.57,
+   "ha_chuoi_tang": 3.521,
+   "ha_than_bd": 0.2943
+  },
+  {
+   "ma": "EURDKK",
+   "so_bar": 2701,
+   "chuoi": 1.004,
+   "than_bd": 0.2287,
+   "doji": 26.66,
+   "ty_le_tang": 54.2,
+   "ha_chuoi_tang": 3.222,
+   "ha_than_bd": 0.1895
+  },
+  {
+   "ma": "EURGBP",
+   "so_bar": 8638,
+   "chuoi": 0.976,
+   "than_bd": 0.4355,
+   "doji": 10.49,
+   "ty_le_tang": 49.87,
+   "ha_chuoi_tang": 4.059,
+   "ha_than_bd": 0.4145
+  },
+  {
+   "ma": "EURHKD",
+   "so_bar": 4494,
+   "chuoi": 0.966,
+   "than_bd": 0.4567,
+   "doji": 9.7,
+   "ty_le_tang": 50.37,
+   "ha_chuoi_tang": 4.241,
+   "ha_than_bd": 0.4383
+  },
+  {
+   "ma": "EURHUF",
+   "so_bar": 3003,
+   "chuoi": 1.019,
+   "than_bd": 0.4144,
+   "doji": 10.46,
+   "ty_le_tang": 54.94,
+   "ha_chuoi_tang": 3.935,
+   "ha_than_bd": 0.389
+  },
+  {
+   "ma": "EURILS",
+   "so_bar": 3329,
+   "chuoi": 0.954,
+   "than_bd": 0.3529,
+   "doji": 14.87,
+   "ty_le_tang": 53.46,
+   "ha_chuoi_tang": 3.448,
+   "ha_than_bd": 0.312
+  },
+  {
+   "ma": "EURJPY",
+   "so_bar": 8516,
+   "chuoi": 1.001,
+   "than_bd": 0.452,
+   "doji": 10.23,
+   "ty_le_tang": 52.64,
+   "ha_chuoi_tang": 4.498,
+   "ha_than_bd": 0.4436
+  },
+  {
+   "ma": "EURMXN",
+   "so_bar": 2439,
+   "chuoi": 0.989,
+   "than_bd": 0.434,
+   "doji": 9.68,
+   "ty_le_tang": 49.2,
+   "ha_chuoi_tang": 3.575,
+   "ha_than_bd": 0.4005
+  },
+  {
+   "ma": "EURNOK",
+   "so_bar": 3501,
+   "chuoi": 0.99,
+   "than_bd": 0.4177,
+   "doji": 10.68,
+   "ty_le_tang": 51.99,
+   "ha_chuoi_tang": 4.031,
+   "ha_than_bd": 0.3924
+  },
+  {
+   "ma": "EURNZD",
+   "so_bar": 6672,
+   "chuoi": 1.028,
+   "than_bd": 0.4286,
+   "doji": 11.44,
+   "ty_le_tang": 48.69,
+   "ha_chuoi_tang": 4.01,
+   "ha_than_bd": 0.4181
+  },
+  {
+   "ma": "EURPLN",
+   "so_bar": 3002,
+   "chuoi": 1.001,
+   "than_bd": 0.415,
+   "doji": 12.03,
+   "ty_le_tang": 52.37,
+   "ha_chuoi_tang": 3.942,
+   "ha_than_bd": 0.3551
+  },
+  {
+   "ma": "EURRUB",
+   "so_bar": 2962,
+   "chuoi": 1.036,
+   "than_bd": 0.4389,
+   "doji": 12.22,
+   "ty_le_tang": 49.7,
+   "ha_chuoi_tang": 3.449,
+   "ha_than_bd": 0.4972
+  },
+  {
+   "ma": "EURRUR",
+   "so_bar": 4690,
+   "chuoi": 1.065,
+   "than_bd": 0.4163,
+   "doji": 12.09,
+   "ty_le_tang": 50.17,
+   "ha_chuoi_tang": 3.912,
+   "ha_than_bd": 0.4164
+  },
+  {
+   "ma": "EURSEK",
+   "so_bar": 3514,
+   "chuoi": 0.973,
+   "than_bd": 0.4206,
+   "doji": 11.3,
+   "ty_le_tang": 52.16,
+   "ha_chuoi_tang": 4.045,
+   "ha_than_bd": 0.3669
+  },
+  {
+   "ma": "EURSGD",
+   "so_bar": 1786,
+   "chuoi": 0.953,
+   "than_bd": 0.3936,
+   "doji": 12.09,
+   "ty_le_tang": 54.93,
+   "ha_chuoi_tang": 3.695,
+   "ha_than_bd": 0.343
+  },
+  {
+   "ma": "EURTRY",
+   "so_bar": 4102,
+   "chuoi": 1.018,
+   "than_bd": 0.4038,
+   "doji": 12.41,
+   "ty_le_tang": 55.16,
+   "ha_chuoi_tang": 4.704,
+   "ha_than_bd": 0.4
+  },
+  {
+   "ma": "EURUSD",
+   "so_bar": 14322,
+   "chuoi": 0.885,
+   "than_bd": 0.3474,
+   "doji": 20.72,
+   "ty_le_tang": 50.49,
+   "ha_chuoi_tang": 3.931,
+   "ha_than_bd": 0.5634
+  },
+  {
+   "ma": "EURZAR",
+   "so_bar": 2762,
+   "chuoi": 0.993,
+   "than_bd": 0.4331,
+   "doji": 10.61,
+   "ty_le_tang": 51.09,
+   "ha_chuoi_tang": 3.783,
+   "ha_than_bd": 0.4005
+  },
+  {
+   "ma": "GBPAUD",
+   "so_bar": 6672,
+   "chuoi": 1.007,
+   "than_bd": 0.4432,
+   "doji": 10.85,
+   "ty_le_tang": 49.56,
+   "ha_chuoi_tang": 4.019,
+   "ha_than_bd": 0.4245
+  },
+  {
+   "ma": "GBPCAD",
+   "so_bar": 6673,
+   "chuoi": 0.969,
+   "than_bd": 0.4434,
+   "doji": 10.49,
+   "ty_le_tang": 51.34,
+   "ha_chuoi_tang": 4.082,
+   "ha_than_bd": 0.4205
+  },
+  {
+   "ma": "GBPCHF",
+   "so_bar": 8597,
+   "chuoi": 0.992,
+   "than_bd": 0.415,
+   "doji": 11.67,
+   "ty_le_tang": 52.46,
+   "ha_chuoi_tang": 4.175,
+   "ha_than_bd": 0.4302
+  },
+  {
+   "ma": "GBPCZK",
+   "so_bar": 883,
+   "chuoi": 1.016,
+   "than_bd": 0.4095,
+   "doji": 13.02,
+   "ty_le_tang": 56.51,
+   "ha_chuoi_tang": 3.957,
+   "ha_than_bd": 0.3515
+  },
+  {
+   "ma": "GBPDKK",
+   "so_bar": 1783,
+   "chuoi": 0.97,
+   "than_bd": 0.3955,
+   "doji": 12.79,
+   "ty_le_tang": 57.01,
+   "ha_chuoi_tang": 4.03,
+   "ha_than_bd": 0.3526
+  },
+  {
+   "ma": "GBPHUF",
+   "so_bar": 2463,
+   "chuoi": 1.01,
+   "than_bd": 0.4146,
+   "doji": 12.06,
+   "ty_le_tang": 55.02,
+   "ha_chuoi_tang": 4.15,
+   "ha_than_bd": 0.3858
+  },
+  {
+   "ma": "GBPJPY",
+   "so_bar": 8643,
+   "chuoi": 1.016,
+   "than_bd": 0.4319,
+   "doji": 10.3,
+   "ty_le_tang": 53.12,
+   "ha_chuoi_tang": 4.368,
+   "ha_than_bd": 0.4358
+  },
+  {
+   "ma": "GBPMXN",
+   "so_bar": 2260,
+   "chuoi": 1.016,
+   "than_bd": 0.448,
+   "doji": 10.31,
+   "ty_le_tang": 50.73,
+   "ha_chuoi_tang": 3.72,
+   "ha_than_bd": 0.4101
+  },
+  {
+   "ma": "GBPNOK",
+   "so_bar": 2989,
+   "chuoi": 0.994,
+   "than_bd": 0.4231,
+   "doji": 11.27,
+   "ty_le_tang": 54.71,
+   "ha_chuoi_tang": 3.987,
+   "ha_than_bd": 0.3699
+  },
+  {
+   "ma": "GBPNZD",
+   "so_bar": 6676,
+   "chuoi": 1.022,
+   "than_bd": 0.436,
+   "doji": 10.7,
+   "ty_le_tang": 49.64,
+   "ha_chuoi_tang": 4.027,
+   "ha_than_bd": 0.4166
+  },
+  {
+   "ma": "GBPPLN",
+   "so_bar": 2996,
+   "chuoi": 1.01,
+   "than_bd": 0.4149,
+   "doji": 11.58,
+   "ty_le_tang": 54.43,
+   "ha_chuoi_tang": 4.047,
+   "ha_than_bd": 0.3971
+  },
+  {
+   "ma": "GBPSEK",
+   "so_bar": 2988,
+   "chuoi": 0.997,
+   "than_bd": 0.411,
+   "doji": 11.78,
+   "ty_le_tang": 54.94,
+   "ha_chuoi_tang": 4.116,
+   "ha_than_bd": 0.3755
+  },
+  {
+   "ma": "GBPSGD",
+   "so_bar": 3462,
+   "chuoi": 0.978,
+   "than_bd": 0.406,
+   "doji": 11.87,
+   "ty_le_tang": 51.72,
+   "ha_chuoi_tang": 3.973,
+   "ha_than_bd": 0.366
+  },
+  {
+   "ma": "GBPTRY",
+   "so_bar": 877,
+   "chuoi": 1.016,
+   "than_bd": 0.3347,
+   "doji": 14.82,
+   "ty_le_tang": 64.15,
+   "ha_chuoi_tang": 4.379,
+   "ha_than_bd": 0.3035
+  },
+  {
+   "ma": "GBPUSD",
+   "so_bar": 8634,
+   "chuoi": 0.978,
+   "than_bd": 0.4349,
+   "doji": 11.04,
+   "ty_le_tang": 51.39,
+   "ha_chuoi_tang": 4.216,
+   "ha_than_bd": 0.4162
+  },
+  {
+   "ma": "GBPZAR",
+   "so_bar": 2852,
+   "chuoi": 0.97,
+   "than_bd": 0.4413,
+   "doji": 9.82,
+   "ty_le_tang": 50.19,
+   "ha_chuoi_tang": 3.955,
+   "ha_than_bd": 0.4031
+  },
+  {
+   "ma": "HKDJPY",
+   "so_bar": 1780,
+   "chuoi": 0.99,
+   "than_bd": 0.4706,
+   "doji": 9.89,
+   "ty_le_tang": 58.31,
+   "ha_chuoi_tang": 4.552,
+   "ha_than_bd": 0.4477
+  },
+  {
+   "ma": "MXNJPY",
+   "so_bar": 1272,
+   "chuoi": 1.032,
+   "than_bd": 0.4786,
+   "doji": 10.46,
+   "ty_le_tang": 60.32,
+   "ha_chuoi_tang": 5.013,
+   "ha_than_bd": 0.4593
+  },
+  {
+   "ma": "NOKJPY",
+   "so_bar": 1786,
+   "chuoi": 1.011,
+   "than_bd": 0.4545,
+   "doji": 10.47,
+   "ty_le_tang": 61.54,
+   "ha_chuoi_tang": 4.596,
+   "ha_than_bd": 0.3902
+  },
+  {
+   "ma": "NOKSEK",
+   "so_bar": 1786,
+   "chuoi": 0.965,
+   "than_bd": 0.3919,
+   "doji": 12.6,
+   "ty_le_tang": 61.79,
+   "ha_chuoi_tang": 3.7,
+   "ha_than_bd": 0.3108
+  },
+  {
+   "ma": "NZDCAD",
+   "so_bar": 6672,
+   "chuoi": 0.984,
+   "than_bd": 0.4242,
+   "doji": 11.02,
+   "ty_le_tang": 52.34,
+   "ha_chuoi_tang": 4.097,
+   "ha_than_bd": 0.4136
+  },
+  {
+   "ma": "NZDCHF",
+   "so_bar": 6672,
+   "chuoi": 1.01,
+   "than_bd": 0.4368,
+   "doji": 10.25,
+   "ty_le_tang": 53.61,
+   "ha_chuoi_tang": 4.357,
+   "ha_than_bd": 0.4182
+  },
+  {
+   "ma": "NZDDKK",
+   "so_bar": 887,
+   "chuoi": 0.959,
+   "than_bd": 0.4516,
+   "doji": 10.26,
+   "ty_le_tang": 54.52,
+   "ha_chuoi_tang": 4.019,
+   "ha_than_bd": 0.4146
+  },
+  {
+   "ma": "NZDHUF",
+   "so_bar": 1548,
+   "chuoi": 1.052,
+   "than_bd": 0.4057,
+   "doji": 11.18,
+   "ty_le_tang": 56.02,
+   "ha_chuoi_tang": 4.208,
+   "ha_than_bd": 0.3871
+  },
+  {
+   "ma": "NZDJPY",
+   "so_bar": 6672,
+   "chuoi": 1.028,
+   "than_bd": 0.4497,
+   "doji": 10.75,
+   "ty_le_tang": 54.95,
+   "ha_chuoi_tang": 4.759,
+   "ha_than_bd": 0.4439
+  },
+  {
+   "ma": "NZDMXN",
+   "so_bar": 1852,
+   "chuoi": 1.026,
+   "than_bd": 0.4644,
+   "doji": 9.34,
+   "ty_le_tang": 49.81,
+   "ha_chuoi_tang": 3.93,
+   "ha_than_bd": 0.4875
+  },
+  {
+   "ma": "NZDSEK",
+   "so_bar": 886,
+   "chuoi": 0.938,
+   "than_bd": 0.3835,
+   "doji": 14.79,
+   "ty_le_tang": 56.74,
+   "ha_chuoi_tang": 3.675,
+   "ha_than_bd": 0.309
+  },
+  {
+   "ma": "NZDSGD",
+   "so_bar": 4875,
+   "chuoi": 1.014,
+   "than_bd": 0.4087,
+   "doji": 12.1,
+   "ty_le_tang": 52.05,
+   "ha_chuoi_tang": 4.053,
+   "ha_than_bd": 0.3887
+  },
+  {
+   "ma": "NZDUSD",
+   "so_bar": 8449,
+   "chuoi": 0.989,
+   "than_bd": 0.4501,
+   "doji": 10.44,
+   "ty_le_tang": 52.4,
+   "ha_chuoi_tang": 4.225,
+   "ha_than_bd": 0.4331
+  },
+  {
+   "ma": "PLNJPY",
+   "so_bar": 1232,
+   "chuoi": 1.021,
+   "than_bd": 0.452,
+   "doji": 8.77,
+   "ty_le_tang": 59.17,
+   "ha_chuoi_tang": 4.444,
+   "ha_than_bd": 0.4044
+  },
+  {
+   "ma": "SEKJPY",
+   "so_bar": 1786,
+   "chuoi": 1.0,
+   "than_bd": 0.4365,
+   "doji": 10.25,
+   "ty_le_tang": 61.3,
+   "ha_chuoi_tang": 4.24,
+   "ha_than_bd": 0.3754
+  },
+  {
+   "ma": "SEKNOK",
+   "so_bar": 1295,
+   "chuoi": 1.03,
+   "than_bd": 0.3188,
+   "doji": 16.37,
+   "ty_le_tang": 50.97,
+   "ha_chuoi_tang": 3.503,
+   "ha_than_bd": 0.2686
+  },
+  {
+   "ma": "SGDHKD",
+   "so_bar": 886,
+   "chuoi": 1.007,
+   "than_bd": 0.4448,
+   "doji": 10.05,
+   "ty_le_tang": 61.85,
+   "ha_chuoi_tang": 4.083,
+   "ha_than_bd": 0.3619
+  },
+  {
+   "ma": "SGDJPY",
+   "so_bar": 4908,
+   "chuoi": 0.968,
+   "than_bd": 0.4431,
+   "doji": 10.17,
+   "ty_le_tang": 54.01,
+   "ha_chuoi_tang": 4.381,
+   "ha_than_bd": 0.4141
+  },
+  {
+   "ma": "SP500",
+   "so_bar": 24754,
+   "chuoi": 1.035,
+   "than_bd": 0.4288,
+   "doji": 8.17,
+   "ty_le_tang": 53.05,
+   "ha_chuoi_tang": 4.463,
+   "ha_than_bd": 0.6267
+  },
+  {
+   "ma": "TRYJPY",
+   "so_bar": 1786,
+   "chuoi": 1.014,
+   "than_bd": 0.3589,
+   "doji": 17.08,
+   "ty_le_tang": 53.13,
+   "ha_chuoi_tang": 3.251,
+   "ha_than_bd": 0.3081
+  },
+  {
+   "ma": "US500CASH",
+   "so_bar": 4027,
+   "chuoi": 0.968,
+   "than_bd": 0.4657,
+   "doji": 10.88,
+   "ty_le_tang": 55.35,
+   "ha_chuoi_tang": 5.229,
+   "ha_than_bd": 0.4654
+  },
+  {
+   "ma": "US500M",
+   "so_bar": 1701,
+   "chuoi": 0.963,
+   "than_bd": 0.4874,
+   "doji": 10.23,
+   "ty_le_tang": 55.05,
+   "ha_chuoi_tang": 5.368,
+   "ha_than_bd": 0.4834
+  },
+  {
+   "ma": "USDARS",
+   "so_bar": 1998,
+   "chuoi": 0.971,
+   "than_bd": 0.4897,
+   "doji": 15.87,
+   "ty_le_tang": 63.84,
+   "ha_chuoi_tang": 7.853,
+   "ha_than_bd": 0.6361
+  },
+  {
+   "ma": "USDCAD",
+   "so_bar": 8646,
+   "chuoi": 0.98,
+   "than_bd": 0.4366,
+   "doji": 10.65,
+   "ty_le_tang": 52.37,
+   "ha_chuoi_tang": 4.274,
+   "ha_than_bd": 0.4256
+  },
+  {
+   "ma": "USDCHF",
+   "so_bar": 6645,
+   "chuoi": 0.954,
+   "than_bd": 0.4495,
+   "doji": 10.56,
+   "ty_le_tang": 51.25,
+   "ha_chuoi_tang": 4.154,
+   "ha_than_bd": 0.4271
+  },
+  {
+   "ma": "USDCLP",
+   "so_bar": 2031,
+   "chuoi": 0.986,
+   "than_bd": 0.5197,
+   "doji": 8.96,
+   "ty_le_tang": 52.33,
+   "ha_chuoi_tang": 4.325,
+   "ha_than_bd": 0.5368
+  },
+  {
+   "ma": "USDJPY",
+   "so_bar": 15763,
+   "chuoi": 0.976,
+   "than_bd": 0.4633,
+   "doji": 7.45,
+   "ty_le_tang": 52.64,
+   "ha_chuoi_tang": 4.021,
+   "ha_than_bd": 0.5628
+  },
+  {
+   "ma": "XAUAUDM",
+   "so_bar": 1218,
+   "chuoi": 0.976,
+   "than_bd": 0.4375,
+   "doji": 10.92,
+   "ty_le_tang": 51.4,
+   "ha_chuoi_tang": 4.733,
+   "ha_than_bd": 0.4436
+  },
+  {
+   "ma": "XAUEURM",
+   "so_bar": 1218,
+   "chuoi": 0.995,
+   "than_bd": 0.4437,
+   "doji": 11.17,
+   "ty_le_tang": 53.45,
+   "ha_chuoi_tang": 4.71,
+   "ha_than_bd": 0.464
+  },
+  {
+   "ma": "XAUGBPM",
+   "so_bar": 1218,
+   "chuoi": 0.991,
+   "than_bd": 0.4566,
+   "doji": 9.03,
+   "ty_le_tang": 51.89,
+   "ha_chuoi_tang": 4.814,
+   "ha_than_bd": 0.4744
+  },
+  {
+   "ma": "XAUUSD",
+   "so_bar": 5670,
+   "chuoi": 0.948,
+   "than_bd": 0.4514,
+   "doji": 10.56,
+   "ty_le_tang": 52.62,
+   "ha_chuoi_tang": 4.629,
+   "ha_than_bd": 0.4508
+  },
+  {
+   "ma": "XAUUSDM",
+   "so_bar": 3835,
+   "chuoi": 0.966,
+   "than_bd": 0.45,
+   "doji": 10.27,
+   "ty_le_tang": 52.5,
+   "ha_chuoi_tang": 4.391,
+   "ha_than_bd": 0.4606
+  },
+  {
+   "ma": "XM_AUDUSD",
+   "so_bar": 5374,
+   "chuoi": 0.956,
+   "than_bd": 0.4648,
+   "doji": 10.31,
+   "ty_le_tang": 52.4,
+   "ha_chuoi_tang": 4.287,
+   "ha_than_bd": 0.4381
+  },
+  {
+   "ma": "XM_AUS200CASH",
+   "so_bar": 3152,
+   "chuoi": 0.982,
+   "than_bd": 0.456,
+   "doji": 10.79,
+   "ty_le_tang": 52.2,
+   "ha_chuoi_tang": 4.566,
+   "ha_than_bd": 0.4285
+  },
+  {
+   "ma": "XM_EU50CASH",
+   "so_bar": 4007,
+   "chuoi": 0.95,
+   "than_bd": 0.4643,
+   "doji": 10.31,
+   "ty_le_tang": 53.68,
+   "ha_chuoi_tang": 4.398,
+   "ha_than_bd": 0.4555
+  },
+  {
+   "ma": "XM_EURUSD",
+   "so_bar": 5373,
+   "chuoi": 0.965,
+   "than_bd": 0.4631,
+   "doji": 9.62,
+   "ty_le_tang": 50.44,
+   "ha_chuoi_tang": 4.171,
+   "ha_than_bd": 0.4388
+  },
+  {
+   "ma": "XM_FRA40CASH",
+   "so_bar": 4028,
+   "chuoi": 0.978,
+   "than_bd": 0.4626,
+   "doji": 10.55,
+   "ty_le_tang": 54.06,
+   "ha_chuoi_tang": 4.433,
+   "ha_than_bd": 0.4596
+  },
+  {
+   "ma": "XM_GBPUSD",
+   "so_bar": 5373,
+   "chuoi": 1.014,
+   "than_bd": 0.4574,
+   "doji": 10.46,
+   "ty_le_tang": 50.44,
+   "ha_chuoi_tang": 4.175,
+   "ha_than_bd": 0.442
+  },
+  {
+   "ma": "XM_GER40CASH",
+   "so_bar": 4003,
+   "chuoi": 0.981,
+   "than_bd": 0.4716,
+   "doji": 9.77,
+   "ty_le_tang": 54.33,
+   "ha_chuoi_tang": 4.52,
+   "ha_than_bd": 0.4541
+  },
+  {
+   "ma": "XM_GOLD",
+   "so_bar": 5347,
+   "chuoi": 0.937,
+   "than_bd": 0.4441,
+   "doji": 10.45,
+   "ty_le_tang": 53.27,
+   "ha_chuoi_tang": 4.641,
+   "ha_than_bd": 0.4476
+  },
+  {
+   "ma": "XM_JP225CASH",
+   "so_bar": 4023,
+   "chuoi": 0.962,
+   "than_bd": 0.48,
+   "doji": 10.22,
+   "ty_le_tang": 52.9,
+   "ha_chuoi_tang": 4.602,
+   "ha_than_bd": 0.4537
+  },
+  {
+   "ma": "XM_SILVER",
+   "so_bar": 5337,
+   "chuoi": 0.943,
+   "than_bd": 0.4275,
+   "doji": 11.62,
+   "ty_le_tang": 53.58,
+   "ha_chuoi_tang": 4.399,
+   "ha_than_bd": 0.4365
+  },
+  {
+   "ma": "XM_UK100CASH",
+   "so_bar": 3997,
+   "chuoi": 0.978,
+   "than_bd": 0.4484,
+   "doji": 10.66,
+   "ty_le_tang": 53.27,
+   "ha_chuoi_tang": 4.56,
+   "ha_than_bd": 0.426
+  },
+  {
+   "ma": "XM_US100CASH",
+   "so_bar": 3995,
+   "chuoi": 0.968,
+   "than_bd": 0.4775,
+   "doji": 10.69,
+   "ty_le_tang": 55.62,
+   "ha_chuoi_tang": 5.263,
+   "ha_than_bd": 0.4764
+  },
+  {
+   "ma": "XM_US2000CASH",
+   "so_bar": 2302,
+   "chuoi": 0.976,
+   "than_bd": 0.4603,
+   "doji": 9.17,
+   "ty_le_tang": 53.02,
+   "ha_chuoi_tang": 4.394,
+   "ha_than_bd": 0.4267
+  },
+  {
+   "ma": "XM_US30CASH",
+   "so_bar": 4054,
+   "chuoi": 0.986,
+   "than_bd": 0.4585,
+   "doji": 11.0,
+   "ty_le_tang": 54.47,
+   "ha_chuoi_tang": 4.95,
+   "ha_than_bd": 0.4565
+  },
+  {
+   "ma": "XM_US500CASH",
+   "so_bar": 4054,
+   "chuoi": 0.967,
+   "than_bd": 0.4651,
+   "doji": 10.78,
+   "ty_le_tang": 55.35,
+   "ha_chuoi_tang": 5.228,
+   "ha_than_bd": 0.4659
+  },
+  {
+   "ma": "XM_USDCAD",
+   "so_bar": 5375,
+   "chuoi": 0.978,
+   "than_bd": 0.4468,
+   "doji": 10.12,
+   "ty_le_tang": 51.55,
+   "ha_chuoi_tang": 4.239,
+   "ha_than_bd": 0.4399
+  },
+  {
+   "ma": "XM_USDCHF",
+   "so_bar": 5374,
+   "chuoi": 0.962,
+   "than_bd": 0.4528,
+   "doji": 10.29,
+   "ty_le_tang": 52.18,
+   "ha_chuoi_tang": 4.252,
+   "ha_than_bd": 0.4212
+  },
+  {
+   "ma": "XM_XAUEUR",
+   "so_bar": 2302,
+   "chuoi": 0.98,
+   "than_bd": 0.4495,
+   "doji": 9.9,
+   "ty_le_tang": 54.37,
+   "ha_chuoi_tang": 4.255,
+   "ha_than_bd": 0.4311
+  },
+  {
+   "ma": "YH_AEX",
+   "so_bar": 8633,
+   "chuoi": 0.978,
+   "than_bd": 0.4928,
+   "doji": 9.52,
+   "ty_le_tang": 51.65,
+   "ha_chuoi_tang": 4.188,
+   "ha_than_bd": 0.555
+  },
+  {
+   "ma": "YH_ASX200",
+   "so_bar": 8524,
+   "chuoi": 0.986,
+   "than_bd": 0.5908,
+   "doji": 6.15,
+   "ty_le_tang": 52.9,
+   "ha_chuoi_tang": 4.349,
+   "ha_than_bd": 0.6063
+  },
+  {
+   "ma": "YH_AUDUSD",
+   "so_bar": 5265,
+   "chuoi": 0.943,
+   "than_bd": 0.0214,
+   "doji": 79.15,
+   "ty_le_tang": 53.78,
+   "ha_chuoi_tang": 3.835,
+   "ha_than_bd": 0.4753
+  },
+  {
+   "ma": "YH_BAC",
+   "so_bar": 6513,
+   "chuoi": 0.849,
+   "than_bd": 0.6982,
+   "doji": 7.43,
+   "ty_le_tang": 50.07,
+   "ha_chuoi_tang": 3.654,
+   "ha_than_bd": 0.734
+  },
+  {
+   "ma": "YH_BOVESPA",
+   "so_bar": 8246,
+   "chuoi": 1.034,
+   "than_bd": 0.5544,
+   "doji": 8.9,
+   "ty_le_tang": 50.15,
+   "ha_chuoi_tang": 4.704,
+   "ha_than_bd": 0.5167
+  },
+  {
+   "ma": "YH_CAC40",
+   "so_bar": 9257,
+   "chuoi": 0.962,
+   "than_bd": 0.4805,
+   "doji": 9.7,
+   "ty_le_tang": 51.54,
+   "ha_chuoi_tang": 3.998,
+   "ha_than_bd": 0.5408
+  },
+  {
+   "ma": "YH_DAUTUONG",
+   "so_bar": 6515,
+   "chuoi": 0.966,
+   "than_bd": 0.5333,
+   "doji": 8.96,
+   "ty_le_tang": 52.43,
+   "ha_chuoi_tang": 4.173,
+   "ha_than_bd": 0.5292
+  },
+  {
+   "ma": "YH_DAUWTI",
+   "so_bar": 6518,
+   "chuoi": 0.962,
+   "than_bd": 0.462,
+   "doji": 10.22,
+   "ty_le_tang": 51.83,
+   "ha_chuoi_tang": 4.304,
+   "ha_than_bd": 0.4722
+  },
+  {
+   "ma": "YH_DAX",
+   "so_bar": 9765,
+   "chuoi": 0.992,
+   "than_bd": 0.4904,
+   "doji": 8.07,
+   "ty_le_tang": 52.48,
+   "ha_chuoi_tang": 4.1,
+   "ha_than_bd": 0.5851
+  },
+  {
+   "ma": "YH_DONG",
+   "so_bar": 6516,
+   "chuoi": 0.937,
+   "than_bd": 0.625,
+   "doji": 9.09,
+   "ty_le_tang": 51.75,
+   "ha_chuoi_tang": 3.658,
+   "ha_than_bd": 0.5967
+  },
+  {
+   "ma": "YH_DOWJONES",
+   "so_bar": 8713,
+   "chuoi": 0.976,
+   "than_bd": 0.5106,
+   "doji": 9.8,
+   "ty_le_tang": 53.56,
+   "ha_chuoi_tang": 4.773,
+   "ha_than_bd": 0.5013
+  },
+  {
+   "ma": "YH_EURUSD",
+   "so_bar": 5889,
+   "chuoi": 0.922,
+   "than_bd": 0.0195,
+   "doji": 72.75,
+   "ty_le_tang": 53.27,
+   "ha_chuoi_tang": 3.765,
+   "ha_than_bd": 0.4761
+  },
+  {
+   "ma": "YH_EUSTOXX50",
+   "so_bar": 4854,
+   "chuoi": 0.958,
+   "than_bd": 0.4959,
+   "doji": 10.63,
+   "ty_le_tang": 52.34,
+   "ha_chuoi_tang": 4.165,
+   "ha_than_bd": 0.5112
+  },
+  {
+   "ma": "YH_FTSE100",
+   "so_bar": 10764,
+   "chuoi": 0.988,
+   "than_bd": 0.5501,
+   "doji": 9.08,
+   "ty_le_tang": 52.77,
+   "ha_chuoi_tang": 4.468,
+   "ha_than_bd": 0.5149
+  },
+  {
+   "ma": "YH_GBPUSD",
+   "so_bar": 5901,
+   "chuoi": 0.935,
+   "than_bd": 0.0217,
+   "doji": 72.38,
+   "ty_le_tang": 52.77,
+   "ha_chuoi_tang": 3.782,
+   "ha_than_bd": 0.478
+  },
+  {
+   "ma": "YH_HANGSENG",
+   "so_bar": 9775,
+   "chuoi": 0.97,
+   "than_bd": 0.5103,
+   "doji": 8.43,
+   "ty_le_tang": 49.41,
+   "ha_chuoi_tang": 4.284,
+   "ha_than_bd": 0.5994
+  },
+  {
+   "ma": "YH_IBEX35",
+   "so_bar": 8384,
+   "chuoi": 1.002,
+   "than_bd": 0.487,
+   "doji": 10.33,
+   "ty_le_tang": 51.98,
+   "ha_chuoi_tang": 4.2,
+   "ha_than_bd": 0.5339
+  },
+  {
+   "ma": "YH_KHIDOT",
+   "so_bar": 6517,
+   "chuoi": 0.967,
+   "than_bd": 0.4699,
+   "doji": 9.93,
+   "ty_le_tang": 47.99,
+   "ha_chuoi_tang": 4.037,
+   "ha_than_bd": 0.486
+  },
+  {
+   "ma": "YH_KOSPI",
+   "so_bar": 7303,
+   "chuoi": 0.972,
+   "than_bd": 0.5022,
+   "doji": 9.22,
+   "ty_le_tang": 49.17,
+   "ha_chuoi_tang": 4.304,
+   "ha_than_bd": 0.5775
+  },
+  {
+   "ma": "YH_NASDAQ",
+   "so_bar": 13995,
+   "chuoi": 1.01,
+   "than_bd": 0.5385,
+   "doji": 6.3,
+   "ty_le_tang": 54.49,
+   "ha_chuoi_tang": 4.99,
+   "ha_than_bd": 0.6781
+  },
+  {
+   "ma": "YH_NGO",
+   "so_bar": 6523,
+   "chuoi": 0.985,
+   "than_bd": 0.5385,
+   "doji": 8.09,
+   "ty_le_tang": 51.17,
+   "ha_chuoi_tang": 4.134,
+   "ha_than_bd": 0.517
+  },
+  {
+   "ma": "YH_NIKKEI",
+   "so_bar": 13919,
+   "chuoi": 0.958,
+   "than_bd": 0.5187,
+   "doji": 6.14,
+   "ty_le_tang": 49.06,
+   "ha_chuoi_tang": 4.083,
+   "ha_than_bd": 0.6918
+  },
+  {
+   "ma": "YH_RUSSELL2000",
+   "so_bar": 9803,
+   "chuoi": 1.05,
+   "than_bd": 0.6333,
+   "doji": 6.71,
+   "ty_le_tang": 54.45,
+   "ha_chuoi_tang": 4.861,
+   "ha_than_bd": 0.5687
+  },
+  {
+   "ma": "YH_SENSEX",
+   "so_bar": 7172,
+   "chuoi": 0.994,
+   "than_bd": 0.5225,
+   "doji": 8.55,
+   "ty_le_tang": 47.09,
+   "ha_chuoi_tang": 4.601,
+   "ha_than_bd": 0.5559
+  },
+  {
+   "ma": "YH_SMI",
+   "so_bar": 8977,
+   "chuoi": 1.012,
+   "than_bd": 0.4983,
+   "doji": 9.15,
+   "ty_le_tang": 52.88,
+   "ha_chuoi_tang": 4.356,
+   "ha_than_bd": 0.5343
+  },
+  {
+   "ma": "YH_TAIWAN",
+   "so_bar": 7134,
+   "chuoi": 0.966,
+   "than_bd": 0.5375,
+   "doji": 8.24,
+   "ty_le_tang": 47.32,
+   "ha_chuoi_tang": 4.328,
+   "ha_than_bd": 0.5855
+  },
+  {
+   "ma": "YH_TSX",
+   "so_bar": 11830,
+   "chuoi": 1.062,
+   "than_bd": 0.5723,
+   "doji": 8.06,
+   "ty_le_tang": 52.74,
+   "ha_chuoi_tang": 4.698,
+   "ha_than_bd": 0.5946
+  },
+  {
+   "ma": "YH_USDCAD",
+   "so_bar": 5957,
+   "chuoi": 0.961,
+   "than_bd": 0.0197,
+   "doji": 72.5,
+   "ty_le_tang": 45.56,
+   "ha_chuoi_tang": 3.649,
+   "ha_than_bd": 0.4726
+  },
+  {
+   "ma": "YH_USDCHF",
+   "so_bar": 5955,
+   "chuoi": 0.909,
+   "than_bd": 0.021,
+   "doji": 72.16,
+   "ty_le_tang": 44.51,
+   "ha_chuoi_tang": 3.744,
+   "ha_than_bd": 0.4609
+  },
+  {
+   "ma": "YH_USDJPY",
+   "so_bar": 7723,
+   "chuoi": 0.978,
+   "than_bd": 0.0525,
+   "doji": 57.1,
+   "ty_le_tang": 49.95,
+   "ha_chuoi_tang": 4.028,
+   "ha_than_bd": 0.4688
+  },
+  {
+   "ma": "YH_VANG",
+   "so_bar": 6511,
+   "chuoi": 0.913,
+   "than_bd": 0.6,
+   "doji": 8.83,
+   "ty_le_tang": 51.65,
+   "ha_chuoi_tang": 4.094,
+   "ha_than_bd": 0.6166
+  }
+ ]
+}

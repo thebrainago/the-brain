@@ -581,8 +581,44 @@ def tom_tat(ma: str, khung: str = "D1") -> str:
                        _r(sg["tre_xac_nhan_bar_trung_vi"], 1)))
         if "_canh_bao" in sg:
             dong.append("  CANH BAO: %s" % sg["_canh_bao"])
+        # NHUNG SO NAY DA DO TU LAU MA KHONG AI IN RA.
+        #
+        # Chu du an 15/09 hoi: *"1 nam co bao nhieu song, bao nhieu song day/
+        # giam, day bao nhieu giam bao nhieu / trong bao lau"*. Kiem lai thi
+        # `HO_SO_SONG.json` da co du `song_moi_nam`, `bar_moi_day`,
+        # `bar_moi_hoi` tu truoc - chi la `tom_tat` khong in. Mot so da do ma
+        # khong hien ra thi voi nguoi dung no bang chua do.
+        _s = _song_theo_key().get("%s|%s" % (ma, "H4"), {}).get("song", {})
+        if _s:
+            dong.append("  nhip: **%s song/nam** | day keo %s bar, hoi %s bar"
+                        % (_r(_s.get("song_moi_nam"), 1),
+                           _r((_s.get("bar_moi_day") or {}).get("trung_vi"), 1),
+                           _r((_s.get("bar_moi_hoi") or {}).get("trung_vi"), 1)))
+            ln, xu = _s.get("day_len") or {}, _s.get("day_xuong") or {}
+            if ln.get("so") and xu.get("so"):
+                dong.append("  doi xung: day LEN %d cai, %s%% / %s bar  |  day "
+                            "XUONG %d cai, %s%% / %s bar"
+                            % (ln["so"], _r(ln.get("bien_do_pct_trung_vi")),
+                               _r(ln.get("bar_trung_vi"), 1),
+                               xu["so"], _r(xu.get("bien_do_pct_trung_vi")),
+                               _r(xu.get("bar_trung_vi"), 1)))
         dong.append("  -> TP/SL nen lay tu bien do day/hoi THUC TE o tren, "
                     "khong phai boi so ATR dat tay")
+
+    try:
+        from nhan import dem_nen as DN
+        _d = DN.ho_so(ma, khung)
+        _t = _d["bo_dem"]["thuong"]
+        dong.append("Nen: tang %s%% | than/bien do %s | doji %s%% | chuoi cung "
+                    "mau %s lan ngau nhien"
+                    % (_r(_t["ty_le_tang_pct"], 1),
+                       _r(_t["than_tren_bien_do"]["trung_vi"], 3),
+                       _r(_t["doji_pct"], 1), _r(_d["hon_ngau_nhien_tb"], 3)))
+        dong.append("  (do 15/09 tren 134 ma: dem nen KHONG noi them gi so voi "
+                    "hurst - chuoi gan nhu hang so giua cac ma. Doc de MO TA, "
+                    "dung dung de du bao.)")
+    except Exception:
+        pass
 
     gd = ghep_duoc(ma, khung, ho_so_da_co=h)
     if gd.get("trang_thai") == CHUA_DO_DUOC:
