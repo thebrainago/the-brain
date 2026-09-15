@@ -126,3 +126,29 @@ def test_khoi_common_ini_lay_server_dau_khi_chua_biet_cai_nao_chay_duoc(kho):
     ghi(kho, {"mt5": {"XM": {"login": 1, "mat_khau": "m",
                              "servers": ["A", "B"]}}})
     assert "Server=A" in BM.khoi_common_ini("XM")
+
+
+# ------------------------------------------------ CHE KHOA KHI IN RA
+def test_che_giu_hai_ky_tu_dau_va_khong_lo_do_dai_that():
+    assert BM.che("Vietanh1234$") .startswith("Vi")
+    assert "etanh" not in BM.che("Vietanh1234$")
+    assert BM.che("") == "(rong)"
+    assert BM.che("ab") == "ab***"       # chuoi ngan van phai duoc che
+
+
+def test_khoi_common_ini_CHE_khong_lo_mat_khau(kho):
+    """Ngay 14/09 toi in khoi `[Common]` ra man hinh de kiem va mat khau hien
+    nguyen ven vao nhat ky hoi thoai. Ban `_che` la cai duoc phep in."""
+    ghi(kho, {"mt5": {"XM": {"login": 1, "mat_khau": "SieuBiMat123",
+                             "server_chay_duoc": "XMGlobal-MT5 10"}}})
+    s = BM.khoi_common_ini_che("XM")
+    assert "SieuBiMat123" not in s
+    assert "Login=1" in s and "Server=XMGlobal-MT5 10" in s
+    assert "Password=Si" in s
+
+
+def test_ban_KHONG_che_van_co_mat_khau_that(kho):
+    """Chieu nguoc: ban goc phai van dung duoc cho tester."""
+    ghi(kho, {"mt5": {"XM": {"login": 1, "mat_khau": "SieuBiMat123",
+                             "server_chay_duoc": "XMGlobal-MT5 10"}}})
+    assert "SieuBiMat123" in BM.khoi_common_ini("XM")

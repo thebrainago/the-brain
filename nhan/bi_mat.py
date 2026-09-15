@@ -61,6 +61,34 @@ def dau_github() -> dict:
     return {"Authorization": "Bearer " + t} if t else {}
 
 
+def che(s: str, giu_dau: int = 2) -> str:
+    """Che mot chuoi bi mat de IN RA duoc ma khong lo. `abcdef123` -> `ab*******`.
+
+    Co ham nay vi ngay 14/09/2026 toi in khoi `[Common]` cua file `.ini` ra man
+    hinh de kiem, cat chuoi o 22 ky tu - nhung mat khau ngan hon cho cat, nen no
+    hien nguyen ven vao nhat ky hoi thoai. Module nay sinh ra de tranh dung viec
+    do, va toi da di vong qua no.
+
+    Luat: **khong bao gio in truc tiep gia tri tra ve cua `lay()` hay
+    `khoi_common_ini()`**. Muon kiem thi dung `co()` (tra bool) hoac ham nay.
+    """
+    s = str(s or "")
+    if not s:
+        return "(rong)"
+    return s[:giu_dau] + "*" * max(len(s) - giu_dau, 3)
+
+
+def khoi_common_ini_che(san: str = "XM") -> str:
+    """Ban CHE cua `khoi_common_ini` - dung khi muon IN RA de kiem."""
+    ra = []
+    for d in khoi_common_ini(san).split(chr(10)):
+        if d.lower().startswith("password="):
+            ra.append("Password=" + che(d.split("=", 1)[1]))
+        else:
+            ra.append(d)
+    return chr(10).join(ra)
+
+
 def khoi_common_ini(san: str = "XM") -> str:
     """Khoi `[Common]` cho file `.ini` cua tester - de terminal TU dang nhap.
 
