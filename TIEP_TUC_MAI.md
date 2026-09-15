@@ -77,6 +77,13 @@ tai). Ket luan: muon ghep cap thi phai CHON RIENG tung cap, khong chuyen cum.
 
 ## Viec tiep theo, theo thu tu
 
+0. **ĐỌC `TON_VIEC.md` mục C trước** — anh giao tối 15/09, xếp trên mọi việc cũ:
+   C0 báo cáo TOÀN The Brain (không chỉ AUDCAD) · C1 sửa quản trị AUDCAD không
+   nhất quán (RSI-cross-30 mà giữ 20 vs 50 bar) · C2 test TRAILING trên AUDCAD H4
+   (`_quan_tri_ghep.py`, tổng quát `--khung`) · C3 họ chiến lược mới nến-vol-lớn ở
+   RSI cực trị + râu nến quét · C4 chạy lại quy trình tìm tài liệu + tự nghiên cứu.
+
+
 1. **EURGBP chon RIENG** (train H4 da xong: `reports/TESTER_KHO_EURGBPmicro_H4.json`).
    Chay chuoi da nhan `--ma EURGBP --khung H4`:
    `_audcad_chon_va_xac_nhan.py` -> `_audcad_gom_cum.py` -> `_audcad_placebo.py`.

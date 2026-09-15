@@ -139,3 +139,58 @@ lỗi chính của dự án này (`b ban-do` vẫn truy ra 31 module mồ côi).
 
 **Việc đầu tiên của phiên sau nên là: chạy `b ban-do`, đối chiếu mọi thứ dựng
 hôm nay, cắm hết vào đường chạy — trước khi xây thêm bất cứ cái gì.**
+
+---
+
+## C. ANH GIAO TỐI 15→16/09 — GHI ĐỂ MAI LÀM
+
+### C0. Báo cáo phải là TOÀN THE BRAIN, không chỉ AUDCAD
+Sáng mai `b vao` rồi viết một báo cáo tổng: 3 module (SEEKER · QUANTLAB ·
+EVO/FINDER) + HEPHAESTUS + PMG đang ở đâu, cái gì mới trong tuần, nút thắt hiện
+tại — KHÔNG chỉ AUDCAD. (Hôm nay tôi báo cáo lệch, chỉ nói AUDCAD.)
+
+### C1. AUDCAD — quản trị lệnh KHÔNG NHẤT QUÁN (lỗ hổng thật)  ← SỬA TRƯỚC
+Anh chỉ đúng: cùng một nhóm thoát RSI (cụm 1 và cụm 3 đều VÀO khi RSI(14) cắt
+lên 30) nhưng **cụm 1 giữ 20 bar, cụm 3 giữ 50 bar** — khi kích hoạt sẽ mở 1–3
+lệnh cùng lúc mà mỗi lệnh quản lý một kiểu. Mở 1–3 lệnh thì không sao, nhưng
+**cách quản lý lệnh phải NHẤT QUÁN cho cả danh mục**. Việc:
+- Gộp các cụm trùng tín hiệu vào (RSI-cross-30 long) thành MỘT chân, một chính
+  sách thoát duy nhất (đừng để hai hằng số giữ khác nhau trên cùng entry).
+- Định nghĩa 1 chính sách quản trị chung cho cả 8 chân, rồi mới so với hiện tại.
+
+### C2. Thêm TRAILING STOP vào AUDCAD — xem có tốt hơn không
+Anh: *"khi add trailingstop vào xem xem có đạt được hiệu quả tốt hơn không."*
+Harness ĐÃ CÓ: `_quan_tri_ghep.py` (sweep 5 nhánh: trailing · đặt-huề · tỉa ·
+nhồi · kiểu-ra; mốc mua-giữ KHÔNG chịu quản trị để so cùng rủi ro). Việc:
+- Tổng quát hoá nó cho **AUDCAD H4** (hiện cứng US100Cash/H1/D1): thêm `--khung`,
+  đặt symbol `AUDCADmicro`, `sinh(khung="H4")`.
+- **Model=0 (every-tick) cần tick M1** — máy chỉ có M1 từ 2026-05-28, phải TẢI M1
+  AUDCAD nhiều năm trước khi chạy trailing-trong-nến; nếu không thì như hiện tại
+  chỉ đo được quản trị THEO NẾN ĐÓNG (Model=2). Ghi rõ giới hạn này khi báo số.
+- Chạy trên 2 chân mạnh nhất trước: cụm 4 `ou_quay_ve_dsl_n50_z2.5_mua` (PF 2,75)
+  + cụm 1 `dashboard_mean_reversion_signal` (PF 1,86).
+- Nhớ luật: [[trailing-la-co-che-manh-nhat-do-duoc]] (holdout x4,8) NHƯNG
+  [[quan-tri-chi-dat-hue-song-sot]] (trailing −68% trên hệ thoát nhanh) và
+  [[quan-tri-can-cho-de-hoat-dong]] (trailing cần CHỖ; hệ giữ 5–60 bar này có chỗ).
+  Tester là trọng tài, không tin số Python.
+
+### C3. HỌ CHIẾN LƯỢC MỚI — nến vol lớn ở RSI cực trị + râu nến quét
+Anh: *"test thử chiến lược bắt những cây nến vol lớn khi RSI quá bán quá mua
+(thử các số <30 và >70), thử vào lệnh ở những cây có độ dài đột biến (râu nến
+quét)… dạng đánh như này có thể nghĩ thêm ra nhiều kiểu nữa."* Đây là một HỌ, mở
+lưới ý tưởng chứ không một hệ:
+- **Nến vol đột biến + RSI cực trị**: volume(hoặc range) > k×trung bình VÀ RSI<X
+  (quét X ∈ 20/25/30) cho long, RSI>Y (quét 70/75/80) cho short. Vào đảo chiều.
+- **Râu nến quét (wick sweep / stop-hunt)**: nến có râu dưới/trên dài đột biến
+  (râu > k×thân, hoặc > k×ATR) quét qua đáy/đỉnh gần rồi đóng thân ngược lại →
+  vào theo hướng đóng nến. (Gần cụm 7 liqsweep_ifvg đã sống — mở rộng họ này.)
+- **Biến thể để nghĩ thêm**: kết hợp vol-spike + wick + RSI; lọc theo phiên;
+  ngưỡng theo ATR thay hằng số; thử cả M15/H1/H4; xác nhận nến sau.
+- Quét như PMG-G0 (placebo khối vị thế, FDR-BH), rồi ra tester thật.
+
+### C4. Rồi CHẠY LẠI quy trình tìm tài liệu + tự nghiên cứu
+Sau khi bổ sung họ C3 vào nhiệm vụ: `b san-nguon AUDCAD` / `b day-chuyen AUDCAD`
+(3 luồng: săn nguồn theo tài sản + tên hệ + MQL5 → đọc song song → bóc cơ chế)
++ `b noi-sinh AUDCAD H4` (sinh cơ chế từ chính lịch sử), nhắm đúng vol-spike /
+wick-sweep / RSI-extreme để nạp thêm ứng viên vào kho rồi lọc.
+
