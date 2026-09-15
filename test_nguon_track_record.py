@@ -308,3 +308,42 @@ def test_co_che_theo_nguon_noi_duoc_ve_tai_lieu():
     assert sum(d.values()) > 50, (
         "chi noi duoc %d co che ve nguon - phep noi dang hong" % sum(d.values()))
     assert max(d.values()) > 20, "khong nguon nao co qua 20 co che - dang nghi"
+
+
+def test_prior_phai_la_SUAT_THAT_chu_khong_phai_mot_nua():
+    """Nguon TOT NHAT khong duoc vinh vien thua mot nguon CHUA AI THU.
+
+    Do 15/09/2026, sau khi da sua tu so: hang doi doc toan van VAN la 60/60
+    `semantic` - mot nguon hoc thuat chua tung duoc doc mot bai nao.
+
+    Ly do nam o PRIOR: Laplace (k+1)/(n+2) tin truoc rang "cu 2 bai doc thi 1
+    ra co che" (50%). Nhung suat THAT cua ca he chi 0,304 va nguon tot nhat
+    (`mql5_code`) chay o 0,459 - nen voi prior 0,5, ngay ca no cung luon thua
+    mot nguon chua thu, va hang doi doc bi nguon moi chiem mai mai.
+    """
+    from tru import seeker as S
+    # mot nguon TOT (46 co che / 100 bai) va mot nguon TE (0/100)
+    doc = {"tot": 100, "te": 100}
+    d = S._cham_theo_prior_that(doc, {"tot": 46, "te": 0})
+    assert d["tot"] > d["chua_ai_thu"], (
+        "nguon tot nhat (46/100) van thua nguon chua thu (%.4f vs %.4f)"
+        % (d["tot"], d["chua_ai_thu"]))
+    # nhung nguon chua thu VAN phai tren nguon da chung minh la te
+    assert d["chua_ai_thu"] > d["te"], "nguon moi khong con duoc tham do"
+
+
+def test_nguon_chua_thu_lay_SUAT_TOAN_HE_khong_phai_hang_so():
+    from tru import seeker as S
+    d = S._cham_theo_prior_that({"a": 200}, {"a": 20})
+    assert abs(d.mac_dinh - 0.10) < 1e-9, d.mac_dinh
+    assert d["ten_la_hoac"] == d.mac_dinh, "khong dung __missing__"
+
+
+def test_cho_goi_dung___missing___chu_khong_get_voi_hang_so():
+    """`.get(ng, 0.5)` bo qua `__missing__` - sua mot dau thi hong dau kia."""
+    from pathlib import Path as _P
+    s = (_P(__file__).resolve().parent / "tru" / "seeker.py").read_text(
+        encoding="utf-8-sig")
+    assert 'diem_ns.get(' not in s, (
+        "van con `.get()` voi hang so mac dinh - `__missing__` se bi bo qua")
+    assert "-diem_ns[t[" in s

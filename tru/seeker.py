@@ -1778,7 +1778,56 @@ def _diem_nang_suat() -> dict:
     # (do 15/09: 772/3.241 co che noi duoc, va chung cho dung bang suat da
     # biet: mql5_code 332, github 196, tradingview_pine 137, youtube 21).
     nhan = _co_che_theo_nguon()
-    return {ng: (nhan.get(ng, 0) + 1) / (n + 2) for ng, n in doc.items()}
+    return _cham_theo_prior_that(doc, nhan)
+
+
+#: Do MANH cua prior, tinh bang "so bai tuong duong". 20 bai thi mot nguon moi
+#: con duoc thu vai chuc luot truoc khi so lieu cua chinh no de len - cung con
+#: so `vuon_nguon.MIN_B` da chon cho cung viec nay.
+SUC_PRIOR_BAI = 20.0
+
+#: Dung khi chua do duoc gi ca (kho rong). Xap xi suat toan he do 15/09/2026.
+SUAT_MAC_DINH = 0.30
+
+
+class _DiemNguon(dict):
+    """Dict diem nang suat; nguon CHUA TUNG THU lay SUAT TOAN HE, khong phai 0,5.
+
+    ## Vi sao khong dung `.get(ng, 0.5)`
+
+    Do 15/09/2026, sau khi da sua tu so: hang doi doc toan van van la **60/60
+    `semantic`** - dung mot nguon hoc thuat chua tung duoc doc mot bai nao.
+
+    Ly do khong nam o tu so nua ma o PRIOR. Laplace `(k+1)/(n+2)` co nghia la
+    tin truoc rang "cu 2 bai doc thi 1 ra co che" - tuc 50%. Nhung suat THAT
+    cua ca he do duoc chi **0,304**, va nguon TOT NHAT (`mql5_code`) chay o
+    **0,459**. Voi prior 0,5 thi ngay ca nguon tot nhat cung **vinh vien thua**
+    mot nguon chua ai thu - va hang doi doc bi nguon moi chiem mai mai.
+
+    Do la vong luan quan hoan chinh: tai lieu hoc thuat duoc doc -> truot cong
+    boc -> khong bao gio tinh la "da boc" -> mau so dung yen -> giu nguyen
+    khoi diem lac quan -> lai dung dau hang doi doc.
+
+    Prior dung la SUAT DA DO cua chinh he (empirical Bayes): nguon moi khoi
+    diem bang mot nguon TRUNG BINH, khong phai bang mot nguon trong mo.
+    """
+
+    def __init__(self, *a, mac_dinh: float = SUAT_MAC_DINH, **k):
+        super().__init__(*a, **k)
+        self.mac_dinh = float(mac_dinh)
+
+    def __missing__(self, khoa):
+        return self.mac_dinh
+
+
+def _cham_theo_prior_that(doc: dict, nhan: dict) -> "_DiemNguon":
+    tong_k = sum(nhan.get(ng, 0) for ng in doc)
+    tong_n = sum(doc.values())
+    p0 = (tong_k / tong_n) if tong_n else SUAT_MAC_DINH
+    d = _DiemNguon(mac_dinh=p0)
+    for ng, n in doc.items():
+        d[ng] = (nhan.get(ng, 0) + p0 * SUC_PRIOR_BAI) / (n + SUC_PRIOR_BAI)
+    return d
 
 
 def _co_che_theo_nguon() -> dict:
@@ -1972,7 +2021,9 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
         "WHERE n.id IS NULL AND t.url LIKE 'http%' AND t.tu_khoa IN('A','B') "
         "ORDER BY CASE t.tu_khoa WHEN 'A' THEN 0 ELSE 1 END, t.diem DESC, t.id DESC "
         "LIMIT ?", gioi_han * 30)
-    ds.sort(key=lambda t: (-diem_ns.get(t["nguon"], 0.5),
+    # `diem_ns[...]` chu khong `.get(..., 0.5)`: gia tri mac dinh phai la SUAT
+    # TOAN HE do duoc (xem `_DiemNguon`), khong phai mot hang so lac quan.
+    ds.sort(key=lambda t: (-diem_ns[t["nguon"]],
                            0 if t["tu_khoa"] == "A" else 1,
                            -(t["diem"] or 0), -t["id"]))
     ds = ds[:gioi_han * 3]
