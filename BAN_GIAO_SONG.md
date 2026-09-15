@@ -4,30 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 15884, 0 phut)
-- git: d1e981a to_hop CLI: --khung chua bao gio duoc bat
-### 2026-09-13 20:14:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6776, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 20:16:31 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19404, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 20:17:58 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17924, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 20:55:02 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13596, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 21:04:22 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17896, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 21:06:00 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 9840, 0 phut)
 - git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
 ### 2026-09-13 21:15:16 — chup trang thai
@@ -404,3 +380,27 @@
 
 - dang chay: ban_giao_song.py (pid 13112, 0 phut)
 - git: 831ef88 SUA: chuyen 8 cum AUDCAD sang cap khac THAT BAI o chi phi that
+### 2026-09-15 23:54:55 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11300, 0 phut)
+- git: 3ac4666 Dien tay bàn giao mai: doan tom tat + 4 viec tiep
+### 2026-09-15 23:58:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 7728, 0 phut)
+- git: 3ac4666 Dien tay bàn giao mai: doan tom tat + 4 viec tiep
+### 2026-09-16 00:08:25 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18608, 0 phut)
+- git: 7193bb4 Ghi viec anh giao toi 15/09: bao cao toan Brain, sua quan tri AUDCAD khong nhat quan, test trailing, ho chien luoc nen-vol/rau-net, chay lai quy trinh nghien cuu
+### 2026-09-16 00:14:14 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5572, 0 phut)
+- git: 7193bb4 Ghi viec anh giao toi 15/09: bao cao toan Brain, sua quan tri AUDCAD khong nhat quan, test trailing, ho chien luoc nen-vol/rau-net, chay lai quy trinh nghien cuu
+### 2026-09-16 00:17:19 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14404, 0 phut)
+- git: c0a1b21 Doi chieu The Brain vs mo ta goc 16/09: tong ~60%, loi la HEPHAESTUS chua co + dac tinh tai san ~40%
+### 2026-09-16 00:17:53 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18924, 0 phut)
+- git: c0a1b21 Doi chieu The Brain vs mo ta goc 16/09: tong ~60%, loi la HEPHAESTUS chua co + dac tinh tai san ~40%
