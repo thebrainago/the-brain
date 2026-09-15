@@ -1757,13 +1757,52 @@ def _diem_nang_suat() -> dict:
     doc = {r["ng"]: r["n"] for r in SO.nhieu(
         "SELECT t.nguon ng, COUNT(*) n FROM noi_dung nd "
         "JOIN tai_lieu t ON t.id = nd.tai_lieu_id WHERE nd.da_boc=1 GROUP BY t.nguon")}
-    # Tu so lay tu `gia_thuyet` chu KHONG tu `de_xuat`: bang `de_xuat` chi duoc
-    # ghi boi `boc_co_che`, va ham do la LEGACY V1 ma `mot_luot()` khong goi.
-    # Doc no thi moi nguon deu ra 0 va thu tu nay tro thanh vo nghia.
-    nhan = {r["ng"]: r["n"] for r in SO.nhieu(
-        "SELECT t.nguon ng, COUNT(*) n FROM gia_thuyet g "
-        "JOIN tai_lieu t ON t.url = g.nguon GROUP BY t.nguon")}
+    # TU SO PHAI DEM DUOC CAI GI DO. Do 15/09/2026: ban truoc lay tu so tu
+    # `gia_thuyet` noi `t.url = g.nguon`, nhung `gia_thuyet.nguon` chua nhung
+    # gia tri nhu `'kham_pha'` chu khong phai URL - phep noi do khop **4/387
+    # dong**. Tuc moi nguon deu ra tu so 1 (Laplace), va ham nay tro thanh
+    #
+    #     diem(nguon) = 1 / (so tai lieu da boc + 2)
+    #
+    # tuc **xep hang nguon theo NGHICH DAO so tai lieu**: nguon doc cang it
+    # cang duoc uu tien cao. Do dung nguoc voi nang suat. Top 10 luc do la
+    # facebook va cac blog rss it bai; `mql5_code` - nguon tot nhat he thong,
+    # 66,6 co che tren 100 tai lieu - khong co mat.
+    #
+    # Va chinh chu thich cu o day da canh bao dung cai bay nay cho mot bang
+    # KHAC (`de_xuat`), roi ban sua lai roi vao lai no o bang thu hai.
+    # [[luat-khong-nam-tren-duong-chay]]
+    #
+    # Nay dem tu KHO CO CHE - cai duy nhat la san pham that cua khau boc.
+    # `co_che.nguon` la URL tai lieu, noi thang duoc voi `tai_lieu.url`
+    # (do 15/09: 772/3.241 co che noi duoc, va chung cho dung bang suat da
+    # biet: mql5_code 332, github 196, tradingview_pine 137, youtube 21).
+    nhan = _co_che_theo_nguon()
     return {ng: (nhan.get(ng, 0) + 1) / (n + 2) for ng, n in doc.items()}
+
+
+def _co_che_theo_nguon() -> dict:
+    """{ten nguon: so co che trong kho sinh ra tu nguon do}.
+
+    Doc kho co che roi noi `co_che.nguon` (URL) ve `tai_lieu.url`. Co che sinh
+    tu noi sinh / de co che khong co URL nen khong thuoc nguon nao - dung, vi
+    chung khong ton mot luot doc nao cua seeker.
+    """
+    try:
+        from nhan import ngu_phap as NP
+    except Exception:
+        return {}
+    try:
+        url_nguon = {r["url"]: r["nguon"] for r in SO.nhieu(
+            "SELECT url, nguon FROM tai_lieu WHERE url IS NOT NULL") or []}
+        ra: dict = {}
+        for c in NP.doc_kho():
+            ng = url_nguon.get(str(c.get("nguon") or ""))
+            if ng:
+                ra[ng] = ra.get(ng, 0) + 1
+        return ra
+    except Exception:
+        return {}
 
 
 def _nguyen_nhan(url: str, loi: str) -> str:

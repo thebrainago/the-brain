@@ -115625,5 +115625,872 @@
   "_chuan_hoa_tu": "lenh_ban_xu_huong_tang_va_dao_ngach",
   "_ty_le_kich_hoat": 0.7988,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "candle_size_shadow_atr",
+  "co_che": "Nhận diện bóng nến dài vượt ngưỡng để phát hiện tín hiệu đảo chiều hoặc từ chối giá tại các vùng quan trọng. [CHUAN HOA 15/09/2026: hang so don vi gia doi thanh k x ATR(14), giu do hiem do tren US500Cash.H1]",
+  "ho": "bien_dong",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "tuyen_tinh",
+     "toan_hang": [
+      {
+       "chi_bao": "atr",
+       "n": 14
+      }
+     ],
+     "he_so": [
+      0.116979
+     ]
+    }
+   }
+  ],
+  "ra": [],
+  "giu": 1,
+  "chieu": 1,
+  "nguon": "https://www.mql5.com/en/code/53012",
+  "_chuan_hoa_tu": "candle_size_shadow",
+  "_ty_le_kich_hoat": 0.4197,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "vdub_sniper_v1_supertrend_crossover_buy",
+  "co_che": "He thong nay ket hop ATR de tao vung bao ve dong lac, giup giao dich vien chot vao chinh xac o diem chuyen huong, giam thiet loi khi giao dich theo xu huong nguoc.",
+  "chieu": 1,
+  "giu": 24,
+  "ho": "xu_huong",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;1543/",
+  "_ty_le_kich_hoat": 0.0425,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "vdub_sniper_v1_supertrend_crossover_sell",
+  "co_che": "He thong nay ket hop ATR de tao vung bao ve dong lac, giup giao dich vien chot vao chinh xac o diem chuyen huong, giam thiet loi khi giao dich theo xu huong nguoc.",
+  "chieu": -1,
+  "giu": 24,
+  "ho": "xu_huong",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;1543/",
+  "_ty_le_kich_hoat": 0.0853,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "vao_lenh_mua_theo_xu_huong_tang_voi_rsi_thap",
+  "co_che": "Chiến lược dựa trên Larry Connors, sử dụng sự phân kỳ của hai đường trung bình động và điều kiện RSI quá bán để tìm điểm vào lệnh khi thị trường có xu hướng tăng.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 30
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 30
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 53.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2241/",
+  "_ty_le_kich_hoat": 0.2467,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "vao_lenh_ban_theo_xu_huong_giam_voi_rsi_cao",
+  "co_che": "Áp dụng nguyên tắc ngược lại cho xu hướng giảm, kích hoạt lệnh bán khi đường trung bình ngắn nằm dưới dài và chỉ số RSI vượt ngưỡng quá mua.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 30
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 200
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 30
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 60.0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://www.tradingview.com/script/PUB;2241/",
+  "_ty_le_kich_hoat": 0.0162,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "tqqq_qqq_backtest_strategy",
+  "co_che": "Dau tu chiu chi phi de theo doi luat nay vi no ket hop bat cuoc dao ngach voi vung an toan khi thi truong co hieu ung lan truyen tu VIX va RSI, tich hop quan ly rui ro qua profit target va year-end exit.",
+  "ho": "xu_huong",
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": -0.015
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 25.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "doi",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 20
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 45.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "doi_pct",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 0.1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "thang",
+     "n": 12
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 12.0
+    }
+   }
+  ],
+  "chieu": 1,
+  "nguon": "https://github.com/jiahongc/qqq-tqqq-strategy",
+  "_ty_le_kich_hoat": 0.8851,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "luat_loc_xu_huong_tang_theo_bo_trung_binh_dong",
+  "co_che": "Yeu cau gia dong cua nam tren cac duong trung binh dong 20, 50, 150 va 200 ngay de xac nhan xu huong tang manh, loai tru cac co phieu dang suy yeu hoac dao luyen.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 20,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 150
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "https://github.com/tes423ash-a11y/japan-stock-portal",
+  "_ty_le_kich_hoat": 0.692,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "dualma_xu_huong",
+  "co_che": "Nhà giao dịch trả phí để sử dụng tín hiệu phân kỳ giữa hai đường trung bình động, giúp lọc nhiễu giá và chỉ vào lệnh khi xu hướng thực sự hình thành.",
+  "ho": "xu_huong",
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 5
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 5
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "chieu": 1,
+  "nguon": "https://github.com/samchuit/SolidRockQuant",
+  "_ty_le_kich_hoat": 0.5637,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "loc_theo_khung_gio_london",
+  "co_che": "Luat rut TU MA NGUON `https://github.com/FelBenitez/5m-ORB-Strategy` (loc_theo_khung_gio_london), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: True",
+  "ho": "phien",
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 7.0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gio"
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 16.0
+    }
+   }
+  ],
+  "ra": [],
+  "chieu": 1,
+  "nguon": "https://github.com/FelBenitez/5m-ORB-Strategy",
+  "_ly_do_may_dien": true,
+  "_ty_le_kich_hoat": 0.4385,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "loc_moi_truong_vi_mo",
+  "co_che": "Bộ lọc môi trường vĩ mô này đảm bảo chỉ tham gia thị trường khi chỉ số nền tảng có cấu trúc xu hướng tăng rõ ràng, giảm thiểu rủi ro giao dịch逆势.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 10
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 10
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "boc_llm",
+  "_ty_le_kich_hoat": 0.4451,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "sell_cap_nhat_2024",
+  "co_che": "Đảo điều kiện biến động sang tăng kèm lọc xu hướng chính bằng MA100 để tránh lệnh ngược dòng.",
+  "ho": "xu_huong",
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "atr",
+     "n": 50
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "atr",
+     "n": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 100
+    }
+   }
+  ],
+  "ra": [],
+  "chieu": 1,
+  "nguon": "boc_llm",
+  "_ty_le_kich_hoat": 0.2461,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "long_renko_keltner",
+  "co_che": "Phoi nhiem do cao vi cach ly tin hieu voi nhieu bar thoi gian, giam toc do giao dich va loai bo nhieu, thich hop cho auto-trader va webhook automation.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 9
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/emkpgqhB-Renko-Keltner-Trend-Engine-Brick-Based-Buy-Sell-Signals/",
+  "_ty_le_kich_hoat": 0.6089,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "short_renko_keltner",
+  "co_che": "Phoi nhiem do cao vi cach ly tin hieu voi nhieu bar thoi gian, giam toc do giao dich va loai bo nhieu, thich hop cho auto-trader va webhook automation.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 9
+    }
+   }
+  ],
+  "nguon": "https://www.tradingview.com/script/emkpgqhB-Renko-Keltner-Trend-Engine-Brick-Based-Buy-Sell-Signals/",
+  "_ty_le_kich_hoat": 0.524,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "kich_hoat_theo_do_lech_z_score",
+  "co_che": "Luat rut TU MA NGUON `boc_llm` (kich_hoat_theo_do_lech_z_score), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: Do lech Z-score tu dong",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 10,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 2.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "zscore",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 0.0
+    }
+   }
+  ],
+  "nguon": "boc_llm",
+  "_ly_do_may_dien": true,
+  "_ty_le_kich_hoat": 0.3298,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "phan_tram_bollinger_b",
+  "co_che": "Moi truong dao dong Bollinger",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 10,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 1.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "nguon": "boc_llm",
+  "_ty_le_kich_hoat": 0.3821,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rsi_ngan_han_nhanh",
+  "co_che": "Luat rut TU MA NGUON `boc_llm` (rsi_ngan_han_nhanh), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: Do cuong tuong doi nhanh",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 5,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 9
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 9
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 50.0
+    }
+   }
+  ],
+  "nguon": "boc_llm",
+  "_ly_do_may_dien": true,
+  "_ty_le_kich_hoat": 0.3036,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ti_le_phuong_sai",
+  "co_che": "Kiem dinh bien dong tuong doi",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 15,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "doi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 10
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 1.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "doi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 10
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 1.0
+    }
+   }
+  ],
+  "nguon": "boc_llm",
+  "_ty_le_kich_hoat": 0.4429,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "so_so_hurst",
+  "co_che": "Do luong tinh khach quan cua thi truong",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 20,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 50
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 50
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.5
+    }
+   }
+  ],
+  "nguon": "boc_llm",
+  "_ty_le_kich_hoat": 0.4023,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "kiem_dinh_adf",
+  "co_che": "Luat rut TU MA NGUON `boc_llm` (kiem_dinh_adf), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: Loc che do tinh don gian",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 10,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 50
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 0.05
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "phan_vi",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 50
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.05
+    }
+   }
+  ],
+  "nguon": "boc_llm",
+  "_ly_do_may_dien": true,
+  "_ty_le_kich_hoat": 0.0817,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "trend_death_cross",
+  "co_che": "Luat rut TU MA NGUON `http://arxiv.org/abs/2607.20093v1` (trend_death_cross), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: SMA 50/200",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 50
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 50
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "http://arxiv.org/abs/2607.20093v1",
+  "_ly_do_may_dien": true,
+  "_ty_le_kich_hoat": 0.2797,
+  "_do_tren": "chuoi kiem"
  }
 ]

@@ -262,3 +262,49 @@ class BocEtoroTuAPIXepHang(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ===== DIEM NANG SUAT PHAI DEM DUOC CAI GI DO (15/09/2026)
+def test_diem_nang_suat_KHONG_duoc_xep_theo_nghich_dao_so_tai_lieu():
+    """Do 15/09: tu so lay tu `gia_thuyet` noi `t.url = g.nguon` - ma cot do
+    chua `'kham_pha'` chu khong phai URL, nen phep noi khop **4/387 dong**.
+
+    Khi tu so luon = 0, ham tro thanh `1 / (so tai lieu + 2)`, tuc XEP HANG
+    NGUON THEO NGHICH DAO SO TAI LIEU: nguon doc cang it cang duoc uu tien.
+    Top 10 luc do la facebook va cac blog rss it bai; `mql5_code` - nguon tot
+    nhat he thong (66,6 co che/100 tai lieu) - khong co mat.
+
+    Bai kiem nay dung mot nguon NANG SUAT CAO va mot nguon NANG SUAT 0 co cung
+    co mau, roi doi nguon nang suat cao phai duoc xep tren.
+    """
+    import types
+    from tru import seeker as S
+    doc = {"tot": 100, "te": 100}
+    cc = {"tot": 60, "te": 0}
+    cu_doc, cu_cc = S.SO.nhieu, S._co_che_theo_nguon
+    S.SO.nhieu = lambda *a, **k: [{"ng": k_, "n": v} for k_, v in doc.items()]
+    S._co_che_theo_nguon = lambda: cc
+    try:
+        d = S._diem_nang_suat()
+    finally:
+        S.SO.nhieu, S._co_che_theo_nguon = cu_doc, cu_cc
+    assert d["tot"] > d["te"] * 5, (
+        "nguon 60 co che/100 bai khong duoc xep tren nguon 0 co che/100 bai: %s"
+        % d)
+
+
+def test_co_che_theo_nguon_noi_duoc_ve_tai_lieu():
+    """Neu phep noi hong thi moi nguon deu ra 0 va khong ai bao loi.
+
+    Day chinh la cach loi cu song sot: mot tu so luon bang 0 nhin y het mot tu
+    so dung khi moi nguon deu chua co gi.
+    """
+    from tru import seeker as S
+    d = S._co_che_theo_nguon()
+    assert isinstance(d, dict)
+    if not d:
+        import pytest
+        pytest.skip("may khong co kho co che that")
+    assert sum(d.values()) > 50, (
+        "chi noi duoc %d co che ve nguon - phep noi dang hong" % sum(d.values()))
+    assert max(d.values()) > 20, "khong nguon nao co qua 20 co che - dang nghi"
