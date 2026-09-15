@@ -608,6 +608,67 @@ def nap(ma: str, khung: str = "H1", tu: str | None = None, den: str | None = Non
 _DA_SUA: dict[tuple, dict] = {}
 
 
+#: Nguong cua CONG DO. Chat hon nguong sua that (0,35) de cong luon nghieng ve
+#: phia CHO CHAY - mot lan chay thua ton vai giay, mot lan chan oan lam lot mot
+#: bar hong x10 vao backtest.
+NGUONG_DO_LECH_BAC = 0.30
+
+
+def _co_bar_lech_bac(d: dict, n: int) -> bool:
+    """Co bar nao dang nghi lech MOT BAC 10 so voi neo truot khong.
+
+    ## Vi sao co ham nay
+
+    Do 15/09/2026 tren EURUSD H1 (171.113 bar):
+
+        nap KHONG sua bar     0,63 s
+        rieng `sua_bar_hong`  8,12 s   <- va bao cao sua la {} : KHONG sua gi ca
+        nap CO sua bar        8,13 s
+
+    Vong tuan tu ben duoi chay Python thuan tren `n x 4` o, moi o goi
+    `np.log10` va moi bar goi `np.median` - 700.000 vong cho mot chuoi khong co
+    mot bar hong nao. Va `nap()` chay no SAU cache, nen cache parquet khong cuu
+    duoc gi: moi lan goi deu tra gia lai tu dau.
+
+    Hau qua o duong chay that: `ngoai_sinh.chuyen` goi `nap` mot lan cho MOI
+    ung vien lan can, nen mot bai test cua no chay **hon 30 phut CPU** va lam
+    ca me 10 cua `chay_test_tung_me` qua gio 1800s. Khong ai doc duoc ket qua
+    cua me do trong nhieu ngay.
+
+    ## Vi sao cong nay dung
+
+    Neo cua vong tuan tu chi doi khi co bar DUOC SUA. Neu khong bar nao dang
+    nghi thi khong bar nao duoc sua, va luc do neo truot bang dung
+    `ewm(alpha=0,05)` tren trung vi OHLC tung bar - tinh duoc mot lan bang C.
+
+    Neo cho bar `i` la neo TRUOC khi cap nhat bang bar `i`, nen chuoi ewm phai
+    duoc gieo bang `moc` ban dau roi dich mot bar - y het vong lap.
+
+    Nguong 0,30 (so voi 0,35 cua phep sua that) de cong nghieng ve phia cho
+    chay. Chan oan mot chuoi co bar hong dat hon nhieu so voi chay thua.
+    """
+    cot = ("open", "high", "low", "close")
+    m = np.vstack([d[k] for k in cot]).astype(float)
+    m[~np.isfinite(m) | (m <= 0)] = np.nan
+    hop_le = np.isfinite(d["low"]) & (d["low"] > 0)
+    if hop_le.sum() < 5 or n < 1:
+        return True                      # khong do duoc thi CHO CHAY
+    moc0 = float(np.median(np.concatenate([d[k][hop_le][:21] for k in cot])))
+    if not np.isfinite(moc0) or moc0 <= 0:
+        return True
+    with np.errstate(invalid="ignore"):
+        giua = np.nanmedian(m, axis=0)   # trung vi OHLC tung bar
+    # Neo tai bar i = ewm cua cac bar TRUOC do, gieo bang `moc0`.
+    chuoi = pd.Series(np.concatenate([[moc0], giua[:-1]]))
+    neo = chuoi.ffill().ewm(alpha=0.05, adjust=False).mean().to_numpy(
+        float, copy=True)
+    neo[~np.isfinite(neo) | (neo <= 0)] = moc0
+    with np.errstate(invalid="ignore", divide="ignore"):
+        lech = np.abs(np.log10(m / neo[None, :]))
+    return bool(np.nanmax(lech) >= NGUONG_DO_LECH_BAC) if np.isfinite(
+        np.nanmax(lech)) else True
+
+
 def sua_bar_hong(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     """Sua bar KHONG THE TON TAI. Tra (df, bao cao nhung gi da sua).
 
@@ -683,7 +744,7 @@ def sua_bar_hong(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     # thua cua 10 so voi neo deu la loi thang do - khong phai bien dong.
     # Neo trai theo gia that nen tai san tang truong that khong bi dung cham.
     hop_le = np.isfinite(d["low"]) & (d["low"] > 0)
-    if hop_le.sum() >= 5:
+    if hop_le.sum() >= 5 and _co_bar_lech_bac(d, n):
         moc = np.median(np.concatenate([d[k][hop_le][:21]
                                         for k in ("open", "high", "low", "close")]))
         sua_truot = {}
