@@ -1493,6 +1493,44 @@ def khoi_tao_tu_khoa() -> None:
         for t in TU_KHOA_GOC:
             cn.execute("INSERT OR IGNORE INTO tu_khoa(tu,linh_vuc,diem,sinh_tu,luc) "
                        "VALUES(?,'tai_chinh',2.0,'goc',?)", (t, SO.bay_gio()))
+    nap_tu_khoa_da_ngon_ngu()
+
+
+def nap_tu_khoa_da_ngon_ngu(diem: float = 2.0) -> int:
+    """Nap 166 cum tu cua 15 thu tieng vao bang `tu_khoa`. Tra ve so cum MOI.
+
+    ## Vi sao phai co dong nay
+
+    Do 15/09/2026 tren so THAT:
+
+        bang `tu_khoa` (cai seeker thuc su truy van)  241 tu, **100% ASCII**
+        11.999 ban doc da thu                         **92,9% tieng Anh**
+        92 nguon trong so                             52 `.com`, **0 ten mien quoc gia**
+
+    Trong khi `nhan/tu_khoa_da_ngon_ngu.py` co san 166 cum x 15 thu tieng tu
+    truoc do - va **khong mot duong chay nao goi toi**. `vuon_nguon` con co mot
+    bang THU HAI (7 tieng, 19 cum) cung khong ai goi. Hai bang, khong bang nao
+    duoc dung. [[luat-khong-nam-tren-duong-chay]]
+
+    Va no tu siet lai: `mo_rong_tu_khoa` sinh tu khoa moi TU CHINH cac ban doc,
+    ma ban doc thi 93% tieng Anh - nen he cang chay cang don ngu.
+    """
+    try:
+        from nhan import tu_khoa_da_ngon_ngu as TK
+    except Exception:
+        return 0
+    them = 0
+    with SO.ket_noi() as cn:
+        for m, cac in TK.theo_ngon_ngu().items():
+            if m == "en":
+                continue          # lop nen da co san trong TU_KHOA_GOC
+            for t in cac:
+                cur = cn.execute(
+                    "INSERT OR IGNORE INTO tu_khoa(tu,linh_vuc,diem,sinh_tu,luc) "
+                    "VALUES(?,'tai_chinh',?,?,?)",
+                    (t, diem, "ngon_ngu:" + m, SO.bay_gio()))
+                them += cur.rowcount
+    return them
 
 
 def tu_khoa_dung(n: int = 6) -> list[str]:

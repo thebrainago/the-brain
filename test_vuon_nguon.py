@@ -174,3 +174,47 @@ class CongLanXaHoi(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class BoLocHaTangPhaiTHUC_SU_LOC(unittest.TestCase):
+    """Do 15/09/2026: `mien_ung_vien` tra 31 ung vien thi 27 la rac.
+
+    Bo loc CO ton tai nhung chi chan theo NHAN con mien va DUOI, nen ba nhom di
+    thang qua: cho trong may (`localhost`), ten trong vi du (`example.com`,
+    `companyname.net`), va cong cu lap trinh (`get.docker.com`). Mot bo loc lot
+    87% la mot bo loc chua chay.
+    """
+
+    def test_chan_cho_trong_may_va_ten_vi_du(self):
+        for m in ("localhost", "example.com", "www.example.com",
+                  "companyname.net", "your-backend-domain", "0.0.0.0"):
+            self.assertTrue(VN._la_ha_tang(m), m)
+
+    def test_chan_do_theo_doi_va_cong_cu_lap_trinh(self):
+        for m in ("googletagmanager.com", "addtoany.com", "get.docker.com",
+                  "download.pytorch.org", "abuseipdb.com", "virustotal.com"):
+            self.assertTrue(VN._la_ha_tang(m), m)
+
+    def test_chan_mien_con_ha_tang(self):
+        for m in ("no-cache.hubspot.com", "cta-service-cms2.hubspot.com",
+                  "cdn-ilaapkf.nitrocdn.com"):
+            self.assertTrue(VN._la_ha_tang(m), m)
+
+    def test_NHA_CUNG_CAP_BLOG_khong_phai_ha_tang(self):
+        """Chieu nguoc, va no da bat duoc mot lan toi dinh chan ca `.blogspot.com`.
+
+        `qoppac.blogspot.com` la blog cua Rob Carver - mot trong nhung nguon tot
+        nhat trong ca kho. Mot mien con mot nguoi viet van la mot nguon.
+        """
+        for m in ("qoppac.blogspot.com", "financial-hacker.com",
+                  "priceactionlab.com", "smart-lab.ru", "habr.com",
+                  "qiita.com", "zhihu.com"):
+            self.assertFalse(VN._la_ha_tang(m), m)
+
+    def test_bo_loc_that_su_giam_so_ung_vien(self):
+        """Chan neo: neu ai do noi long lai thi rac quay ve ma khong ai thay."""
+        rac = ["localhost", "example.com", "googletagmanager.com",
+               "get.docker.com", "addtoany.com", "no-cache.hubspot.com"]
+        that = ["qoppac.blogspot.com", "financial-hacker.com", "smart-lab.ru"]
+        self.assertEqual(sum(VN._la_ha_tang(m) for m in rac), len(rac))
+        self.assertEqual(sum(VN._la_ha_tang(m) for m in that), 0)

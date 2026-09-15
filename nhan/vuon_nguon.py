@@ -239,12 +239,67 @@ DUOI_HA_TANG = (".amazonaws.com", ".googleusercontent.com", ".wpenginepowered.co
                 ".substackcdn.com", ".gstatic.com")
 
 
+#: Mien KHONG BAO GIO la mot nguon kien thuc, du chung xuat hien rat nhieu lan
+#: trong ban doc. Do 15/09/2026: `mien_ung_vien` tra ve 31 ung vien thi 27 la
+#: rac loai nay - `localhost` 74 lan, `googletagmanager.com` 10,
+#: `example.com` 4, `get.docker.com`, `addtoany.com`, `no-cache.hubspot.com`.
+#: Bo loc CO ton tai nhung chi chan theo NHAN con mien va duoi, nen ba nhom
+#: duoi day di thang qua. Mot bo loc lot 87% la mot bo loc chua chay.
+MIEN_KHONG_BAO_GIO = {
+    # cho trong may, khong phai tren mang
+    "localhost", "localhost.localdomain", "0.0.0.0", "::1",
+    # ten dat trong tai lieu/vi du, khong phai trang that
+    "example.com", "example.org", "example.net", "domain.com", "site.com",
+    "companyname.net", "your-backend-domain", "yourdomain.com", "test.com",
+    # do theo doi / quang cao / nhung
+    "googletagmanager.com", "google-analytics.com", "doubleclick.net",
+    "addtoany.com", "addthis.com", "sharethis.com", "gravatar.com",
+    "hotjar.com", "segment.io", "mixpanel.com", "clarity.ms",
+    # cong cu lap trinh, khong phai nguon kien thuc giao dich
+    "get.docker.com", "download.pytorch.org", "pypi.org", "npmjs.com",
+    "registry.npmjs.org", "nodejs.org", "golang.org", "rustup.rs",
+    # tra cuu an ninh / ha tang
+    "abuseipdb.com", "virustotal.com", "ipinfo.io", "whois.com",
+}
+
+#: Nhan con mien la HA TANG du ten mien goc co that.
+NHAN_HA_TANG_THEM = {"no-cache", "cta-service-cms2", "js", "css", "fonts",
+                     "track", "tracking", "pixel", "analytics", "tag",
+                     "download", "downloads", "dl", "mirror", "mirrors"}
+
+#: Duoi ten mien cua nha cung cap CDN/hosting dung chung.
+#: CHI ha tang THAT SU. `test_khong_bo_nham_blog_that` da bat duoc mot lan toi
+#: dinh chan ca `.blogspot.com` - ma `qoppac.blogspot.com` la blog cua Rob
+#: Carver, mot trong nhung nguon tot nhat trong ca kho. Nha cung cap blog KHONG
+#: phai ha tang: mot mien con mot nguoi viet van la mot nguon.
+DUOI_HA_TANG_THEM = (".nitrocdn.com", ".hubspot.com", ".hsforms.com",
+                     ".cloudflare.com", ".jsdelivr.net", ".unpkg.com",
+                     ".bootstrapcdn.com", ".fontawesome.com")
+
+
 def _la_ha_tang(mien: str) -> bool:
+    """Mien nay co phai HA TANG (khong bao gio la nguon kien thuc) khong.
+
+    Ba nhom lot qua ban cu, do 15/09/2026 tren chinh ket qua cua
+    `mien_ung_vien`: cho trong may (`localhost`), ten trong vi du
+    (`example.com`, `companyname.net`), va cong cu lap trinh
+    (`get.docker.com`). Chung khong chia nhan con mien nao voi `NHAN_HA_TANG`
+    nen bo loc khong thay - va nguoi doc phai tu bo qua 27/31 dong moi lan.
+    """
+    mien = str(mien or "").strip().lower().rstrip(".")
+    if not mien or "." not in mien and mien != "localhost":
+        return True
     if re.fullmatch(r"[\d.]+", mien) or mien.startswith("127."):
         return True
-    if any(mien.endswith(d) for d in DUOI_HA_TANG):
+    if mien in MIEN_KHONG_BAO_GIO:
         return True
-    return bool(set(mien.split(".")) & NHAN_HA_TANG)
+    # `a.b.example.com` cung la vi du.
+    goc = ".".join(mien.split(".")[-2:])
+    if goc in MIEN_KHONG_BAO_GIO:
+        return True
+    if any(mien.endswith(d) for d in DUOI_HA_TANG + DUOI_HA_TANG_THEM):
+        return True
+    return bool(set(mien.split(".")) & (NHAN_HA_TANG | NHAN_HA_TANG_THEM))
 
 
 #: Duong feed pho bien. Thu tu theo xac suat trung, do that tren 27 feed dang co.
