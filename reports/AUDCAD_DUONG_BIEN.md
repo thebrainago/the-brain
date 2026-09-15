@@ -20,3 +20,29 @@ Tài khoản KHÔNG stop-out ở mức này (đã chạy thật).
 2. DD 30% = có lúc tài khoản mất 30% thật. Đó là rủi ro, không phải con số giấy.
 3. 8 cụm chọn trên TRAIN (2016-2021) rồi xác nhận HOLDOUT, nhưng việc GOM CỤM
    dùng tín hiệu HOLDOUT → rò rỉ nhỏ. Chưa chạy placebo trên chính 8 cụm.
+
+## Ổn định theo thời kỳ (lot 36, holdout)
+
+Cả hai nửa holdout đều dương → KHÔNG phải hiện tượng một thời kỳ:
+- nửa đầu 2021-03 → 2023-11: ~21%/năm
+- nửa sau  2023-11 → 2026-07: ~32%/năm
+
+**Nhưng lãi KHÔNG đều theo năm** — 27%/năm là trung bình, không phải đều:
+
+| năm | lãi USD (lot 36) |
+|---|---:|
+| 2021 | +1.354 |
+| 2022 | **−64** (gần hoà) |
+| 2023 | +4.599 |
+| 2024 | **−537** (âm nhẹ) |
+| 2025 | +4.987 |
+| 2026 (½) | +3.894 |
+
+Hai năm gần hoà/âm; lãi dồn vào 2023/2025/2026. Bản chất hồi quy trên cặp chéo:
+năm AUDCAD trending thì mean-reversion thua. Vào đúng 2022 hoặc 2024 thì cả năm
+không lãi mà vẫn chịu DD.
+
+## Việc kiểm định còn thiếu (trước khi ra tiền thật)
+- Placebo/null trên chính 8 cụm (chưa chạy).
+- 8 cụm chọn trên TRAIN nhưng GOM CỤM dùng tín hiệu HOLDOUT (rò rỉ nhỏ).
+- Tất cả trên MỘT tài sản, MỘT khung.
