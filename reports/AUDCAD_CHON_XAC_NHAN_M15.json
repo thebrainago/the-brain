@@ -1,0 +1,299 @@
+{
+ "moc_train": -1.1990183542266997,
+ "moc_holdout": -1.005419192935697,
+ "ty_le_nen": 0.01216640502354788,
+ "so_chon": 40,
+ "so_song": 17,
+ "boi_so_nen": 34.93225806451613,
+ "song": [
+  {
+   "ten": "ban_khi_xu_huong_giam_duoc_xac_nhan_boi_dong_luong_rsi_mua_k",
+   "train": {
+    "pct": 4.855454712930363,
+    "lenh": 101,
+    "sharpe": 0.490751,
+    "pf": 1.361426,
+    "dd": 3.172
+   },
+   "holdout": {
+    "pct": 4.286580745147361,
+    "lenh": 85,
+    "sharpe": 0.381069,
+    "pf": 1.277656,
+    "dd": 2.0143
+   }
+  },
+  {
+   "ten": "martingale_sma_crossover_buy",
+   "train": {
+    "pct": 4.852042167682513,
+    "lenh": 86,
+    "sharpe": 0.442248,
+    "pf": 1.388773,
+    "dd": 2.5077
+   },
+   "holdout": {
+    "pct": -0.17170892677399463,
+    "lenh": 98,
+    "sharpe": -0.023302,
+    "pf": 0.984617,
+    "dd": 4.0129
+   }
+  },
+  {
+   "ten": "vao_ban_hoi_ngach",
+   "train": {
+    "pct": 3.958617817922949,
+    "lenh": 70,
+    "sharpe": 0.543141,
+    "pf": 1.430105,
+    "dd": 2.9329
+   },
+   "holdout": {
+    "pct": 1.4214187318988047,
+    "lenh": 158,
+    "sharpe": 0.14291,
+    "pf": 1.093556,
+    "dd": 4.3098
+   }
+  },
+  {
+   "ten": "breakdown_buy",
+   "train": {
+    "pct": 2.735660577280652,
+    "lenh": 123,
+    "sharpe": 0.350234,
+    "pf": 1.179811,
+    "dd": 3.2523
+   },
+   "holdout": {
+    "pct": 3.918892239314098,
+    "lenh": 132,
+    "sharpe": 0.449232,
+    "pf": 1.271852,
+    "dd": 2.7277
+   }
+  },
+  {
+   "ten": "rsi_overbought_reversal",
+   "train": {
+    "pct": 1.3686689458862533,
+    "lenh": 220,
+    "sharpe": 0.171333,
+    "pf": 1.063835,
+    "dd": 2.6696
+   },
+   "holdout": {
+    "pct": 0.45195156473127884,
+    "lenh": 232,
+    "sharpe": 0.052144,
+    "pf": 1.018756,
+    "dd": 2.0762
+   }
+  },
+  {
+   "ten": "mua_khi_xu_huong_tang_duoc_xac_nhan_boi_dong_luong_rsi_ban_k",
+   "train": {
+    "pct": 1.17987702782536,
+    "lenh": 93,
+    "sharpe": 0.162369,
+    "pf": 1.112539,
+    "dd": 4.3655
+   },
+   "holdout": {
+    "pct": 3.993507912958716,
+    "lenh": 106,
+    "sharpe": 0.387257,
+    "pf": 1.305283,
+    "dd": 2.6919
+   }
+  },
+  {
+   "ten": "mua_rsi14_duoi_25",
+   "train": {
+    "pct": 0.8106577135058579,
+    "lenh": 221,
+    "sharpe": 0.073809,
+    "pf": 1.036803,
+    "dd": 3.9231
+   },
+   "holdout": {
+    "pct": 1.3962358419902676,
+    "lenh": 231,
+    "sharpe": 0.127828,
+    "pf": 1.068567,
+    "dd": 3.3962
+   }
+  },
+  {
+   "ten": "hoi_ve_vung_phan_ung_va_chia_lenh",
+   "train": {
+    "pct": 0.7250180843662246,
+    "lenh": 197,
+    "sharpe": 0.075801,
+    "pf": 1.047876,
+    "dd": 6.8199
+   },
+   "holdout": {
+    "pct": -0.8620753182143059,
+    "lenh": 202,
+    "sharpe": -0.052606,
+    "pf": 0.964216,
+    "dd": 3.6734
+   }
+  },
+  {
+   "ten": "vao_lenh_mua_khi_gia_ong_cua_ha_xuong_duoi_muc_thap_nhat_cua",
+   "train": {
+    "pct": 0.6812994409133966,
+    "lenh": 241,
+    "sharpe": 0.058265,
+    "pf": 1.038908,
+    "dd": 7.2026
+   },
+   "holdout": {
+    "pct": -0.6453822199623205,
+    "lenh": 246,
+    "sharpe": -0.046677,
+    "pf": 0.969383,
+    "dd": 5.3134
+   }
+  },
+  {
+   "ten": "rsi_nghich_chi_ban_doc_lap",
+   "train": {
+    "pct": 0.3095526165323381,
+    "lenh": 419,
+    "sharpe": 0.057299,
+    "pf": 1.021506,
+    "dd": 8.3622
+   },
+   "holdout": {
+    "pct": 0.8999704766762706,
+    "lenh": 475,
+    "sharpe": 0.092242,
+    "pf": 1.034935,
+    "dd": 4.0869
+   }
+  },
+  {
+   "ten": "vao_lenh_mua_khi_rsi_cat_len_nguong_20",
+   "train": {
+    "pct": 0.2770062850425914,
+    "lenh": 133,
+    "sharpe": 0.072409,
+    "pf": 1.021024,
+    "dd": 2.7044
+   },
+   "holdout": {
+    "pct": 6.727555571276689,
+    "lenh": 139,
+    "sharpe": 1.326736,
+    "pf": 1.400651,
+    "dd": 1.4909
+   }
+  },
+  {
+   "ten": "fvg_finder_voi_rsi_filter",
+   "train": {
+    "pct": 0.24151400179053262,
+    "lenh": 36,
+    "sharpe": 0.168659,
+    "pf": 1.043716,
+    "dd": 1.7449
+   },
+   "holdout": {
+    "pct": 11.740019636676614,
+    "lenh": 50,
+    "sharpe": 2.897875,
+    "pf": 2.269271,
+    "dd": 0.5674
+   }
+  },
+  {
+   "ten": "ou_quay_ve_dsl_n200_z2_mua",
+   "train": {
+    "pct": 0.20945198062549686,
+    "lenh": 388,
+    "sharpe": 0.047968,
+    "pf": 1.015491,
+    "dd": 6.0875
+   },
+   "holdout": {
+    "pct": 5.521911818489333,
+    "lenh": 424,
+    "sharpe": 0.604818,
+    "pf": 1.224935,
+    "dd": 2.1432
+   }
+  },
+  {
+   "ten": "buy_discount_retest",
+   "train": {
+    "pct": -0.14783013837591508,
+    "lenh": 88,
+    "sharpe": -0.045621,
+    "pf": 0.98457,
+    "dd": 2.3665
+   },
+   "holdout": {
+    "pct": 1.8209259051862103,
+    "lenh": 126,
+    "sharpe": 0.512775,
+    "pf": 1.144491,
+    "dd": 2.0254
+   }
+  },
+  {
+   "ten": "buy_liquidity_sweep_ob_reversal",
+   "train": {
+    "pct": -0.34995004600245627,
+    "lenh": 100,
+    "sharpe": -0.073687,
+    "pf": 0.976666,
+    "dd": 2.1316
+   },
+   "holdout": {
+    "pct": 3.5784788704793513,
+    "lenh": 99,
+    "sharpe": 0.731711,
+    "pf": 1.298197,
+    "dd": 1.7161
+   }
+  },
+  {
+   "ten": "mua_theo_rsi",
+   "train": {
+    "pct": -0.3832918581985312,
+    "lenh": 419,
+    "sharpe": -0.072234,
+    "pf": 0.972761,
+    "dd": 8.6368
+   },
+   "holdout": {
+    "pct": 0.08794937742275799,
+    "lenh": 474,
+    "sharpe": 0.009534,
+    "pf": 1.003633,
+    "dd": 4.3821
+   }
+  },
+  {
+   "ten": "chieu_ma_10_150_tang",
+   "train": {
+    "pct": -0.4417859776757571,
+    "lenh": 211,
+    "sharpe": -0.04471,
+    "pf": 0.97015,
+    "dd": 7.6331
+   },
+   "holdout": {
+    "pct": 0.14023420294382305,
+    "lenh": 214,
+    "sharpe": 0.012061,
+    "pf": 1.008189,
+    "dd": 5.4346
+   }
+  }
+ ]
+}
