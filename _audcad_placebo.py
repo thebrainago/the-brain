@@ -37,6 +37,7 @@ import numpy as np
 LAB = Path(__file__).resolve().parent
 sys.path.insert(0, str(LAB))
 
+_KHUNG = (sys.argv[sys.argv.index("--khung")+1] if "--khung" in sys.argv else "H4")
 TU, DEN = "2021-03-19", "2026-07-29"
 #: Chi phi mot vong (vao+ra) theo bps - spread AUDCAD ~1 bps + truot. Dung de
 #: null va that CUNG chiu, khong lam lech phep so sanh.
@@ -69,10 +70,10 @@ def main() -> int:
     from nhan import ngu_phap as NP
 
     n_null = int(sys.argv[sys.argv.index("--n") + 1]) if "--n" in sys.argv else 2000
-    d = json.loads((LAB / "reports" / "AUDCAD_CUM.json").read_text(encoding="utf-8"))
+    d = json.loads((LAB / "reports" / ("AUDCAD_CUM_%s.json" % _KHUNG)).read_text(encoding="utf-8"))
     ten = [c["dai_dien"] for c in d["cum"]]
     kho = {c.get("ten"): c for c in NP.doc_kho()}
-    df = DL.nap("AUDCAD", "H4", tu=TU, den=DEN)
+    df = DL.nap("AUDCAD", _KHUNG, tu=TU, den=DEN)
     c = df["close"].to_numpy(float)
     ret = np.concatenate([[0.0], np.diff(np.log(c))])   # loi suat log tung bar
     rng = np.random.default_rng(0)
@@ -147,7 +148,7 @@ def main() -> int:
         print("=> Phan lon cum co timing that su mang thong tin. Edge co that,")
         print("   trong pham vi mot tai san mot khung mot cua so.")
 
-    ra = LAB / "reports" / "AUDCAD_PLACEBO.json"
+    ra = LAB / "reports" / ("AUDCAD_PLACEBO_%s.json" % _KHUNG)
     ra.write_text(json.dumps(
         {"n_null": n_null, "p_danh_muc": p_dm, "cum_qua": dat, "so_cum": len(ps),
          "p_tung_cum": {t: p for t, p in zip(ten, ps)}},
