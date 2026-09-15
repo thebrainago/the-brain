@@ -4,116 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-### 2026-09-12 23:27:10 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 2324, 0 phut)
-- git: dc4e038 Ban do sinh tu ma nguon + noi 21 module mo coi + fix dia day lam 3 me boc that bai em
-### 2026-09-12 23:28:51 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 7508, 0 phut)
-- git: 25f63f0 Chot phien 12/09: ban giao cho phien mai
-### 2026-09-13 15:15:05 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11860, 0 phut)
-- git: 285bf7a Bon bai test do da xanh + khau VIDEO TREN DIA (nang luc bi mot ghi chu sai chan mot thang)
-### 2026-09-13 15:49:06 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18064, 0 phut)
-- git: 285bf7a Bon bai test do da xanh + khau VIDEO TREN DIA (nang luc bi mot ghi chu sai chan mot thang)
-### 2026-09-13 16:20:54 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 7004, 0 phut)
-- git: bbb81e5 b mach: canary cho TUNG CHANG duong ong, khong chi cho engine
-### 2026-09-13 16:31:18 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14272, 0 phut)
-- git: f8859cd So NGAN SACH TAI NGUYEN: cua vao chung cho moi viec nang
-### 2026-09-13 16:44:09 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12788, 0 phut)
-- git: f8859cd So NGAN SACH TAI NGUYEN: cua vao chung cho moi viec nang
-### 2026-09-13 16:47:08 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14272, 0 phut)
-- git: f8859cd So NGAN SACH TAI NGUYEN: cua vao chung cho moi viec nang
-### 2026-09-13 16:52:18 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14624, 0 phut)
-- git: 340d7fb So van de phai DONG lai duoc - ba duong, ba ho loi
-### 2026-09-13 16:54:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16168, 0 phut)
-- git: 340d7fb So van de phai DONG lai duoc - ba duong, ba ho loi
-### 2026-09-13 17:02:58 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12752, 0 phut)
-- git: 340d7fb So van de phai DONG lai duoc - ba duong, ba ho loi
-### 2026-09-13 17:20:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18500, 0 phut)
-- git: 340d7fb So van de phai DONG lai duoc - ba duong, ba ho loi
-### 2026-09-13 17:27:22 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18372, 0 phut)
-- git: 340d7fb So van de phai DONG lai duoc - ba duong, ba ho loi
-### 2026-09-13 17:30:56 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 916, 0 phut)
-- git: 9a844cc Tester TU DANG NHAP: khoi [Common] trong .ini + mot cua doc khoa
-### 2026-09-13 17:53:46 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 20216, 0 phut)
-- git: e00f3e4 WARP thanh tai nguyen doc quyen co so: hai he con het gianh nhau mot cong tac
-### 2026-09-13 18:16:33 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 2256, 0 phut)
-- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
-### 2026-09-13 18:18:48 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17928, 0 phut)
-- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
-### 2026-09-13 18:27:38 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13936, 0 phut)
-- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
-### 2026-09-13 18:29:40 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 21148, 0 phut)
-- git: 2fa664f Chan doan: DNS nha mang chan ten mien san - khong phai MT5 hong
-### 2026-09-13 18:32:30 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 16764, 0 phut)
-- git: b76ed43 Do ho quan tri bang PYTHON - module quan trong nhat khong nam cho MT5
-### 2026-09-13 18:35:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19464, 0 phut)
-- git: b76ed43 Do ho quan tri bang PYTHON - module quan trong nhat khong nam cho MT5
-### 2026-09-13 18:48:36 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14452, 0 phut)
-- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
-### 2026-09-13 18:55:14 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8340, 0 phut)
-- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
-### 2026-09-13 19:03:52 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18184, 0 phut)
-- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
-### 2026-09-13 19:09:17 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11560, 0 phut)
-- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
-### 2026-09-13 19:18:03 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1236, 0 phut)
-- git: b35ef8b Duong dan MT5: DO chu khong GHIM CUNG + go cong tu chan chinh minh (lan hai)
-### 2026-09-13 19:25:25 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5548, 0 phut)
-- git: cfb2090 b he: BANG CAC HE DA QUA CONG - mat xich cuoi cung, va no dang thieu
-### 2026-09-13 20:07:29 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 15884, 0 phut)
 - git: d1e981a to_hop CLI: --khung chua bao gio duoc bat
 ### 2026-09-13 20:14:29 — chup trang thai
@@ -404,3 +294,113 @@
 
 - dang chay: ban_giao_song.py (pid 21192, 0 phut)
 - git: ec63bcf tester: "0 lenh" khong duoc tra ve tro troi + `--khung` bi bo qua
+### 2026-09-14 23:26:53 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20384, 0 phut)
+- git: 9949922 chot phien 14/09: nhat ky chay + bao cao
+### 2026-09-14 23:39:13 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20348, 0 phut)
+- git: 9949922 chot phien 14/09: nhat ky chay + bao cao
+### 2026-09-15 00:19:59 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 21208, 0 phut)
+- git: 9949922 chot phien 14/09: nhat ky chay + bao cao
+### 2026-09-15 00:33:27 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17252, 0 phut)
+- git: 9949922 chot phien 14/09: nhat ky chay + bao cao
+### 2026-09-15 00:49:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17500, 0 phut)
+- git: 9949922 chot phien 14/09: nhat ky chay + bao cao
+### 2026-09-15 00:51:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 4268, 0 phut)
+- git: 9949922 chot phien 14/09: nhat ky chay + bao cao
+### 2026-09-15 13:20:21 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3608, 0 phut), dieu_khien_xa.py (pid 16032, 70 phut)
+- `dieu_phoi_nen.log`: [Tue 09/15/2026 12:10:10.94] thay DUNG_LAI - khong khoi dong watchdog
+- git: 9c36e1c hai cong CO ma khong nam tren duong chay: ten ma + thang gia
+### 2026-09-15 13:36:20 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2524, 0 phut), dieu_khien_xa.py (pid 16032, 86 phut)
+- `dieu_phoi_nen.log`: [Tue 09/15/2026 12:10:10.94] thay DUNG_LAI - khong khoi dong watchdog
+- git: 9c36e1c hai cong CO ma khong nam tren duong chay: ten ma + thang gia
+### 2026-09-15 14:22:47 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15764, 0 phut), dieu_khien_xa.py (pid 16032, 132 phut)
+- git: 9c36e1c hai cong CO ma khong nam tren duong chay: ten ma + thang gia
+### 2026-09-15 14:37:41 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2356, 0 phut), dieu_khien_xa.py (pid 16032, 147 phut)
+- git: 6ba7361 go ky tu 0x08 lot vao regex + don hack trong toan tu GOP
+### 2026-09-15 15:58:27 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3396, 0 phut), dieu_khien_xa.py (pid 16032, 228 phut)
+- git: c8c41eb ban giao: trang thai cuoi phien 15/09
+### 2026-09-15 16:17:05 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2304, 0 phut), dieu_khien_xa.py (pid 16032, 246 phut)
+- git: 78b35ed bo do luat MU voi tieng Nga/Nhat/Trung/Han/Thai - lan thu BA cung ho loi
+### 2026-09-15 16:33:59 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2676, 0 phut), dieu_khien_xa.py (pid 16032, 263 phut)
+- git: 7bf9556 ban giao: do suat that theo nguon + viec tiep cua khau boc tach
+### 2026-09-15 18:18:46 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5664, 0 phut), dieu_khien_xa.py (pid 16032, 368 phut)
+- git: 833cff5 ban giao: bo dich phu 100%, 19% kho la ban trung, seeker doc nguoc chieu nang suat
+### 2026-09-15 18:29:11 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13592, 0 phut), dieu_khien_xa.py (pid 16032, 379 phut)
+- git: 56d0933 ban giao: ket qua quet toan kho + ba canh bao doc kem
+### 2026-09-15 18:51:08 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14096, 0 phut), dieu_khien_xa.py (pid 16032, 400 phut)
+- git: d596fa5 vong day du: bang tong ket phai liet ke CA TAM chang
+### 2026-09-15 19:50:51 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10352, 0 phut), dieu_khien_xa.py (pid 16032, 460 phut)
+- git: 4c871b6 CHUOI 8 HE CHO AUDCAD: +9,16%/nam @DD20 ngoai mau, moc +1,16%
+### 2026-09-15 20:35:41 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13804, 0 phut), dieu_khien_xa.py (pid 16032, 505 phut)
+- git: 158c6e9 canh bao CDP tat trong khau doc + ban giao passview/AUDCAD
+### 2026-09-15 20:43:42 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18932, 0 phut), dieu_khien_xa.py (pid 16032, 513 phut)
+- git: a5eaa14 AUDCAD: on dinh theo thoi ky - ca hai nua duong nhung lai KHONG deu
+### 2026-09-15 21:06:53 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20228, 0 phut), dieu_khien_xa.py (pid 16032, 536 phut)
+- git: a5eaa14 AUDCAD: on dinh theo thoi ky - ca hai nua duong nhung lai KHONG deu
+### 2026-09-15 21:31:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19500, 0 phut), dieu_khien_xa.py (pid 16032, 561 phut)
+- git: 32d8b45 dang ky 8 chan AUDCAD tren demo (AUDCAD#, verify lot 0.1)
+### 2026-09-15 21:44:03 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17504, 0 phut), dieu_khien_xa.py (pid 16032, 573 phut)
+- git: 4bfbeee che do LIVE: gan vao terminal nguoi dung + duong gui lenh THONG dau-cuoi
+### 2026-09-15 22:29:13 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15964, 0 phut), dieu_khien_xa.py (pid 16032, 619 phut)
+- git: 4bfbeee che do LIVE: gan vao terminal nguoi dung + duong gui lenh THONG dau-cuoi
+### 2026-09-15 22:50:27 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20176, 0 phut), dieu_khien_xa.py (pid 16032, 640 phut)
+- git: 63213c2 tong quat hoa pipeline AUDCAD cho da khung (--khung)
+### 2026-09-15 23:03:45 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11688, 0 phut), dieu_khien_xa.py (pid 16032, 653 phut)
+- git: 63213c2 tong quat hoa pipeline AUDCAD cho da khung (--khung)
+### 2026-09-15 23:23:42 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 10936, 0 phut), dieu_khien_xa.py (pid 16032, 673 phut)
+- git: fca0696 housekeeping: commit tien ich che mat khau (che/khoi_common_ini_che)
+### 2026-09-15 23:49:42 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13112, 0 phut)
+- git: 831ef88 SUA: chuyen 8 cum AUDCAD sang cap khac THAT BAI o chi phi that

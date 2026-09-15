@@ -109,3 +109,4 @@ VIEC TIEP THEO
 - **2026-09-07 16:41** — ghep he: chan am re hon chan manh; dao chieu tang doi chan duong; loi the ghep SONG o holdout (39/45 cap) trong khi bang he don la nhieu (test 1229, fdr 1807, viec cho 2)
 - **2026-09-07 23:55** — kho quan li lenh: DSL + 75 co che + EA giam sat de len EA ngoai; luan phien 50 luat x 4 he nen -> khong luat nao qua cong (test 1229, fdr 1807, viec cho 2)
 - **2026-09-12 00:14** — khoi 2-6 DAT: so bai hoc, anh chup bat bien, tang cham tien, 4 cua vao, khoa tester + de quan tri len EA ngoai. Cuu mat du lieu kho co che 1149->3 (test 1379, fdr 1807, viec cho 2)
+- **2026-09-15 23:53** — AUDCAD 8 cum hoi quy H4 qua placebo p=0,0000 (+27%/nam@DD30 lot36); duong live thong tren demo (lenh 10009); loai M15 va loai chuyen cum sang cap khac o chi phi that. Pipeline chon/gom/placebo nhan --ma --khung. EURGBP train H4 xong. Mai: EURGBP chon RIENG, quyet dinh don bay lot demo, cron nhip --that 4h. (test 2081, fdr 1811, viec cho 34)

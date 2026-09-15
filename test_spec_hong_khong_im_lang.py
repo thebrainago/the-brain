@@ -178,3 +178,104 @@ def test_tester_ini_dung_KHUNG_duoc_truyen_vao():
     s = (LAB / "chay_tester_kho.py").read_text(encoding="utf-8-sig")
     assert "Period={khung or KHUNG_CHAY}" in s
     assert "khung=khung" in s, "viet_ini khong nhan `khung` tu nguoi goi"
+
+
+# ====== BO DICH MQL5 PHAI GIU DUNG DAU CUA `than_nen`
+def test_than_nen_dich_sang_mq5_phai_CO_DAU():
+    """14/09/2026: `_cb_than_nen` boc `MathAbs` con `ngu_phap` thi khong.
+
+    Hau qua: `mat_can_bang_lenh_dong_cua` co dieu kien `than_nen < 0` (nen
+    giam). `MathAbs(...) < 0` khong bao gio dung -> EA chay du 5,4 nam tren
+    EURGBPmicro H4, ghi du bao cao, ra **0 lenh**, khong mot dong loi. Ban
+    Python cua cung co che ban 98 tin hieu tren cung cua so do.
+
+    56/3189 co che hop le trong kho dung `than_nen` tran - tat ca deu dinh.
+    """
+    s = (LAB / "nhan" / "dich_mq5.py").read_text(encoding="utf-8-sig")
+    i = s.index("def _cb_than_nen")
+    than = s[i:i + 1600]
+    j = than.index("return self._than")
+    assert "MathAbs" not in than[j:j + 200], (
+        "than_nen dich sang MQL5 dang MAT DAU - `than_nen < 0` khong bao gio dung")
+
+
+def test_than_nen_python_la_close_tru_open_co_dau():
+    """Chieu nguoc: neu ban Python doi sang tri tuyet doi thi test tren vo nghia."""
+    import numpy as np
+    import pandas as pd
+    df = pd.DataFrame({"open": [10.0, 10.0], "high": [11.0, 11.0],
+                       "low": [9.0, 9.0], "close": [9.5, 10.5]},
+                      index=pd.date_range("2020-01-01", periods=2, freq="h"))
+    v = np.asarray(NP._toan_hang_tinh(df, {"chi_bao": "than_nen"}), float)
+    assert v[0] < 0 and v[1] > 0, "than_nen ban Python phai CO DAU"
+
+
+# ============ TEN MA: cong CO ma khong nam tren duong chay (15/09/2026)
+def test_dau_hieu_hong_khop_voi_cai_MT5_that_su_in():
+    """Bang dau hieu phai bat duoc HAI dong MT5 that su in khi sai ten ma.
+
+    15/09/2026: `--ma AUDCAD` dot mot luot boot terminal roi tra ve "khong thay
+    bang ket qua" tro troi. Log MT5 noi thang:
+        `Tester  cannot select symbol in market watch`
+        `Tester  symbol AUDCAD not exist`
+    `DAU_HIEU_HONG` luc do co `unknown symbol` - khong khop mot ky tu nao voi
+    hai dong do. Mot bo do khong thay duoc cai chac chan CO thi khong phai bo do.
+    """
+    import chay_tester_kho as C
+    manh = [m.lower() for m, _ in C.DAU_HIEU_HONG]
+    for dong in ("Tester  cannot select symbol in market watch",
+                 "Tester  symbol AUDCAD not exist"):
+        assert any(m in dong.lower() for m in manh), (
+            "khong dau hieu nao bat duoc dong log THAT: %r" % dong)
+
+
+def test_nhanh_khong_thay_bang_ket_qua_phai_CHAN_DOAN():
+    """Nhanh nay tung la nhanh DUY NHAT khong goi `chan_doan_log`."""
+    s = (LAB / "chay_tester_kho.py").read_text(encoding="utf-8-sig")
+    i = s.index('return {"loi": "khong thay bang ket qua"')
+    khoi = s[i:i + 400]
+    assert "chan_doan" in khoi, "khong thay bang ket qua ma khong chan doan gi"
+    assert "goi_y_ma" in khoi, "khong goi y ten ma gan dung"
+
+
+def test_tester_kiem_ten_ma_TRUOC_khi_boot_terminal():
+    """Cong kiem ten ma phai nam tren duong chay CHINH, khong chi o bench."""
+    s = (LAB / "chay_tester_kho.py").read_text(encoding="utf-8-sig")
+    i = s.index("def _chay_trong_khoa")
+    j = s.index("dong_terminal()", i)
+    assert "ten_ma" in s[i:j], (
+        "chay_tester_kho khong kiem ten ma truoc khi boot terminal")
+
+
+def test_ten_ma_cham_theo_MAY_CHU_dang_dung_khong_gop_bases():
+    """Kho lich su cua mot tai khoan DA CHET khong duoc tra loi thay may chu song.
+
+    `AUDCAD` chi ton tai duoi `bases/XMGlobal-MT5 17` (tai khoan hong tu 14/09);
+    may chu dang dung la `XMGlobal-MT5 10` va chi co `AUDCADmicro`. Ban cu gop
+    het `bases/*/history/*` nen tra loi "co" - va luot tester di toi cung roi
+    chet.
+    """
+    from nhan import ten_ma as TM
+    d = Path(__import__("tempfile").mkdtemp())
+    (d / "config").mkdir()
+    (d / "config" / "common.ini").write_text(
+        "[Common]\nLogin=1\nServer=MAY CHU SONG\n", encoding="utf-8")
+    for sv, ma in (("MAY CHU SONG", ["AUDCADmicro"]), ("MAY CHU CHET", ["AUDCAD"])):
+        (d / "bases" / sv / "history" / ma[0]).mkdir(parents=True)
+    assert TM.may_chu(d) == "MAY CHU SONG"
+    assert TM.ma_co_lich_su(xm_data=d) == ["AUDCADmicro"], (
+        "ma_co_lich_su dang gop ca base cua may chu da chet")
+    k = TM.kiem_ten("AUDCAD", xm_data=d)
+    assert k["trang_thai"] == "NGHI_NGO"
+    assert k["o_may_chu_khac"] == ["MAY CHU CHET"]
+    assert "AUDCADmicro" in k["goi_y"], "khong goi y duoc duoi `micro`"
+    assert TM.canh_bao("AUDCAD", xm_data=d), "khong in canh bao nao"
+    assert not TM.canh_bao("AUDCADmicro", xm_data=d), "canh bao oan ma dung"
+
+
+def test_bench_quan_tri_dung_CHUNG_cong_ten_ma_voi_tester():
+    """Hai duong chay khong duoc co hai ban kiem ten ma khac nhau."""
+    s = (LAB / "chay_bench_quan_tri.py").read_text(encoding="utf-8-sig")
+    i = s.index("def co_lich_su")
+    assert "ten_ma" in s[i:i + 1600], (
+        "chay_bench_quan_tri van giu ban kiem ten ma rieng")
