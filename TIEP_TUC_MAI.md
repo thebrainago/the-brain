@@ -107,3 +107,29 @@ tren vang truoc day se ra 0 lenh. Kiem: `b ten-ma XAUUSD GOLD`.
     ho so song chi co cho 27/158 ma (131 ma du lieu goc la NGAY)
     bo dich MQL5 phu 2.991/3.217 (con 226: mau_nen 135, supertrend 40, heiken 40)
     dem nen KHONG du bao duoc gi (r<=0,195 tren 134 ma) - chi de MO TA
+
+## KHAU BOC TACH — do xong cuoi phien 15/09
+
+    12.006 tai lieu -> 7.994 co toan van (66,6%) -> 5.869 du dai -> 2.442 da boc
+    bo dich MQL5 phu 2.991/3.217 (93%, dau phien 82,5%)
+
+**SUAT THAT THEO NGUON** (tai lieu vao -> co che ra) - con so quyet dinh:
+
+    mql5_code          1.166 ->  776   66,6/100
+    tradingview_pine     696 ->  147   21,1/100
+    youtube              109 ->   21   19,3/100
+    github             3.309 ->  205    6,2/100
+    HOC THUAT          3.767 ->    0   **0,00/100**   <- 31% ca kho
+
+Da sua hai cho lam nghen:
+  - bo do luat MU voi tieng Nga/Nhat/Trung/Han/Thai -> ton kho boc 16 -> 165
+  - `_diem_nang_suat` xep hang nguon theo NGHICH DAO so tai lieu (phep noi khop
+    4/387 dong) -> nay dem tu kho co che, 772/3.241 noi duoc
+
+**VIEC TIEP CUA KHAU NAY:**
+1. 4.114 tai lieu chua co toan van, nhung **80% la sieu du lieu hoc thuat**
+   (suat 0). Chi nen lay toan van cho ~660 cai con lai (mql5_code 192,
+   stackexchange 161, github 110, fxblue 103, etoro 100, tradingview 93).
+2. `nhan/doc_pdf.py` + `nhan/doc_anh.py` van MO COI - ca hai co OCR.
+3. Ha uu tien thu thap cua nhom hoc thuat; ngan sach do dang bi chiem boi nguon
+   suat 0.
