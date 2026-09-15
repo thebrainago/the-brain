@@ -120,7 +120,7 @@ def bien_dich(duong: Path) -> str:
 
 
 def viet_ini(ten: str, symbol: str, so_co_che: int, tu: str, den: str,
-             deposit: int = 10000, khung: str = "") -> Path:
+             deposit: int = 10000, khung: str = "", lot: float = 0.10) -> Path:
     p = XM_DATA / f"{ten}.ini"
     # TU DANG NHAP trong chinh `.ini` - xem `bi_mat.khoi_common_ini`.
     # Khong co khoi nay thi tester chet voi "tester not started because the
@@ -148,7 +148,7 @@ ShutdownTerminal=1
 
 [TesterInputs]
 InpMaCoChe=0||0||1||{so_co_che - 1}||Y
-InpLot=0.10||0.10||0||0||N
+InpLot={lot:g}||{lot:g}||0||0||N
 InpMagic=26090601||26090601||0||0||N
 """, encoding="utf-16")
     return p
@@ -163,6 +163,17 @@ DAU_HIEU_HONG = [
     ("not synchronized with", "terminal chua dong bo voi may chu giao dich"),
     ("cannot synchronize history", "khong tai duoc lich su gia cua ma nay"),
     ("unknown symbol", "ten ma khong co tren terminal"),
+    # BANG DAU HIEU PHAI KHOP VOI CAI MAY THAT SU IN RA.
+    #
+    # Do 15/09/2026: `--ma AUDCAD` dot mot luot boot terminal roi tra ve
+    # "khong thay bang ket qua" tro troi. Log MT5 noi thang, hai dong:
+    #     `Tester  cannot select symbol in market watch`
+    #     `Tester  symbol AUDCAD not exist`
+    # `unknown symbol` o tren khong khop mot ky tu nao voi hai dong do. Mot
+    # bang dau hieu khong bat duoc cai chac chan CO thi khong phai bang dau
+    # hieu. [[luat-do-phai-thay-duoc-cai-co]]
+    ("not exist", "ten ma khong co tren may chu dang dang nhap"),
+    ("cannot select symbol", "khong chon duoc ma trong Market Watch"),
     ("no history", "khong co lich su gia"),
 ]
 
@@ -243,7 +254,8 @@ def _so(x, mac_dinh=0.0):
 
 
 def chay(symbol: str, khung: str, so: int = 0, loc: str = "",
-         tu: str = "2011.01.01", den: str = "2026.07.29") -> dict:
+         tu: str = "2011.01.01", den: str = "2026.07.29",
+         lot: float = 0.10) -> dict:
     """Chay ca kho qua MT5 Strategy Tester.
 
     KHOA TESTER (11/09/2026): ham nay ghi de cung mot .mq5 / .ini / .xml va may
@@ -257,11 +269,12 @@ def chay(symbol: str, khung: str, so: int = 0, loc: str = "",
     # MT5 KHONG ket noi duoc toi may chu giao dich qua Cloudflare WARP. Giu
     # WARP TAT suot luot chay, va cam bo cao mql5 lat no giua chung.
     with NS.giu_warp(False, "MT5 tester"), KT.giu(f"chay_tester_kho {symbol} {khung}"):
-        return _chay_trong_khoa(symbol, khung, so, loc, tu, den)
+        return _chay_trong_khoa(symbol, khung, so, loc, tu, den, lot)
 
 
 def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
-                     tu: str = "2011.01.01", den: str = "2026.07.29") -> dict:
+                     tu: str = "2011.01.01", den: str = "2026.07.29",
+                     lot: float = 0.10) -> dict:
     # BO CO CHE NAO THI PHAI NOI RO BO CAI NAO VA VI SAO.
     #
     # Truoc 14/09 dong nay chi loc im lang, va nguoi doc chi thay mot con so
@@ -269,6 +282,28 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
     # `kiem_khai_bao`** va bi vut moi luot chay ma khong ai biet. Toi da suyt
     # chay tester tren MOT he roi tuong do la ket qua cua ca ba he o lan nhanh -
     # chi phat hien vi tinh co dem lai so co che.
+    # `--loc a,b,c` = HOP cua ba bo loc, khong phai giao. Truoc 14/09 day la mot
+    # chuoi duy nhat, nen ba he cua lan nhanh khong the vao CHUNG mot me: hai he
+    # dau ten co `_dsl_`, he thu ba (`mat_can_bang_lenh_dong_cua`, ho `phien`)
+    # khong chia chuoi con nao voi chung. Ma TESTER=1 la rang buoc VAT LY - moi
+    # me thua la mot luot boot terminal doc chiem may.
+    # KIEM TEN MA TRUOC KHI DOT MOT LUOT BOOT TERMINAL.
+    #
+    # Cong nay da co tu 13/09 (`chay_bench_quan_tri.goi_y_ma`, chinh no tim ra
+    # `XAUUSD -> GOLD`) nhung chi duoc goi trong chinh file do - duong chay
+    # CHINH khong bao gio thay no. Nay ca hai dung chung `nhan/ten_ma.py`.
+    from nhan import ten_ma as TM
+    for dong in TM.canh_bao(symbol):
+        print("  " + dong)
+
+    mau_loc = [x.strip() for x in str(loc or "").split(",") if x.strip()]
+
+    def _khop(c) -> bool:
+        if not mau_loc:
+            return True
+        j = json.dumps(c, ensure_ascii=False)
+        return any(m in j for m in mau_loc)
+
     tat_ca = NP.doc_kho()
     kho, hong = [], []
     for c in tat_ca:
@@ -281,16 +316,29 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
         print("  %d/%d co che BI BO vi khai bao hong:" % (len(hong), len(tat_ca)))
         for ly_do, n in dem.most_common(6):
             print("     %4d  %s" % (n, ly_do))
-        if loc:
-            trung = [c.get("ten", "?") for c, _ in hong
-                     if loc in json.dumps(c, ensure_ascii=False)]
+        if mau_loc:
+            trung = [c.get("ten", "?") for c, _ in hong if _khop(c)]
             if trung:
                 print("     TRONG DO co %d cai KHOP BO LOC '%s': %s"
                       % (len(trung), loc, ", ".join(trung[:6])))
-    if loc:
-        kho = [c for c in kho if loc in json.dumps(c, ensure_ascii=False)]
+    if mau_loc:
+        kho = [c for c in kho if _khop(c)]
+        if not kho:
+            print("  BO LOC '%s' KHONG KHOP CO CHE NAO trong %d cai hop le - "
+                  "khong co gi de chay." % (loc, len(tat_ca) - len(hong)))
     if so:
         kho = kho[:so]
+    # CO CHE NAO SE RA 0 LENH VI LOI KHAI, NOI TRUOC KHI CHAY.
+    #
+    # 15/09/2026: 13/60 co che `than_nen` ra dung 0 lenh tren AUDCADmicro H4.
+    # Khong phai loi dich (ban Python cung 0 tin hieu), khong phai thi truong:
+    # loi khai so `close - open` (DON VI GIA) voi hang so `0.5`, nen no chet
+    # sach tren moi cap FX va song tren vang/chi so. Mot dong 0 nhu vay nam
+    # canh cac dong that va doc y het mot ket qua am. Xem `nhan/thang_gia.py`.
+    from nhan import thang_gia as TG
+    for dong in TG.canh_bao_cho_ma([c.get("ten") for c in kho], symbol):
+        print("  " + dong)
+
     ma, dat = D.sinh_ea(kho, TEN_EA, khung=khung)
     bo = [c for c in kho if c.get("_khong_dich")]
     print("kho %d -> dich duoc %d, bo %d" % (len(kho), len(dat), len(bo)))
@@ -307,7 +355,7 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
     print("  bien dich xong (%d co che)" % len(dat))
 
     ten = "kho_%s_%s" % (symbol, khung)
-    ini = viet_ini(ten, symbol, len(dat), tu, den, khung=khung)
+    ini = viet_ini(ten, symbol, len(dat), tu, den, khung=khung, lot=lot)
     for hs in (".xml", ".htm"):
         f = XM_DATA / (ten + hs)
         if f.exists():
@@ -335,7 +383,15 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
     f = next((XM_DATA / (ten + h) for h in (".xml", ".htm")
               if (XM_DATA / (ten + h)).exists()), None)
     if f is None:
-        return {"loi": "khong thay bang ket qua", "giay": giay, "chua_do": True}
+        # KHONG TRA VE "khong thay bang ket qua" TRO TROI.
+        #
+        # Do 15/09/2026: nhanh nay la nhanh DUY NHAT khong goi `chan_doan_log`,
+        # trong khi log terminal ghi dung mot dong noi het moi chuyen
+        # (`symbol AUDCAD not exist`). Nguoi doc mat 20 phut di truy bo dich
+        # MQL5 cho mot loi sai TEN MA.
+        return {"loi": "khong thay bang ket qua", "giay": giay, "chua_do": True,
+                "chan_doan": chan_doan_log(),
+                "goi_y_ma": TM.goi_y_ma(symbol)}
 
     dong = doc_xml(f)
     ket = []
@@ -378,6 +434,60 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
     return ra
 
 
+
+#: Ngan sach sut giam de chuan hoa MOI cau hinh ve cung mot muc rui ro.
+#: Giong `pmg_engine.NGAN_SACH_DD` - co tinh la mot con so, khong phai hai.
+NGAN_SACH_DD_PCT = 20.0
+
+
+def chuan_hoa_cung_rui_ro(lai_usd: float, dd_pct: float, nam: float,
+                          deposit: float = 10000.0,
+                          ngan_sach: float = NGAN_SACH_DD_PCT):
+    """`lai`/`DD%` cua tester -> **%/nam o cung ngan sach sut giam**.
+
+    ## Vi sao cot nay bat buoc
+
+    Tester chay LOT CO DINH 0,10 tren von 10.000, nen con so `lai` phu thuoc vao
+    mot lua chon tuy tien. Do 14/09 tren AUDCADmicro: mot he lai 14,12 USD voi
+    sut giam 0,07%, mot he khac lai 8,33 USD voi sut giam 0,10%. Doc cot `lai`
+    thi he dau hon 69%; doc o cung rui ro thi no chi hon 19%. Va moc mua-giu co
+    sut giam 0,23% - gap ba - nen so thang cot `lai` voi no la mot phep so sai.
+
+    Luat cua chu du an: *chi chan khi thua mua-giu o CUNG RUI RO*. Cot nay la
+    cho duy nhat cau hoi do duoc tra loi.
+
+    Lot co dinh -> lai va sut giam CUNG ti le tuyen tinh voi don bay, nen he so
+    la `ngan_sach / dd_pct`. Gop bang SO HOC (khong phai log): don bay gop bang
+    log cho `(S_T/S_0)^L` va thoi ket qua len hang chuc lan.
+
+    Tra `None` khi khong do duoc: sut giam 0 (chua du lenh de co duong cong) hay
+    thua qua nang den muc chay tai khoan - ca hai deu la CHUA_DO_DUOC, khong
+    duoc in ra thanh mot con so.
+    """
+    try:
+        dd_pct, nam = float(dd_pct), float(nam)
+    except (TypeError, ValueError):
+        return None
+    if dd_pct <= 0 or nam <= 0:
+        return None
+    don_bay = ngan_sach / dd_pct
+    tong = 1.0 + float(lai_usd) * don_bay / float(deposit)
+    if tong <= 0:            # chay tai khoan o muc don bay do
+        return None
+    return (tong ** (1.0 / nam) - 1.0) * 100.0
+
+
+def _so_nam(tu: str, den: str) -> float:
+    """`2013.02.21` -> so nam duong lich giua hai moc."""
+    import datetime as _dt
+    try:
+        a = _dt.date(*[int(x) for x in str(tu).split(".")])
+        b = _dt.date(*[int(x) for x in str(den).split(".")])
+    except Exception:
+        return 0.0
+    return max((b - a).days / 365.25, 0.0)
+
+
 def main() -> int:
     def lay(c, md):
         return sys.argv[sys.argv.index(c) + 1] if c in sys.argv else md
@@ -385,23 +495,60 @@ def main() -> int:
     khung = lay("--khung", "D1")
     so = int(lay("--so", "0"))
     loc = lay("--loc", "")
+    lot = float(lay("--lot", "0.10"))
     r = chay(symbol, khung, so, loc, lay("--tu", "2011.01.01"),
-             lay("--den", "2026.07.29"))
+             lay("--den", "2026.07.29"), lot=lot)
     if r.get("loi"):
         print("LOI:", r["loi"])
         for c in (r.get("chan_doan") or [])[:6]:
             print("   ->", c)
+        if r.get("goi_y_ma"):
+            print("   y ban dinh noi ten ma la: %s"
+                  % ", ".join(r["goi_y_ma"]))
         if r.get("chua_do"):
             print("   => TRANG THAI: CHUA_DO_DUOC, khong phai AM. Sua moi truong")
             print("      roi chay lai; dung doc bang so nhu mot ket luan.")
         return 1
+    tu, den = lay("--tu", "2011.01.01"), lay("--den", "2026.07.29")
+    nam = _so_nam(tu, den)
     print("\n%d pass, %ss  %s" % (r["so_pass"], r["giay"], r.get("ghi_chu", "")))
-    print("\n%-42s %6s %9s %6s %7s %7s" % ("co che", "lenh", "lai", "PF",
-                                           "sharpe", "DD%"))
+    print("lot %g - von 10.000 USD - %s -> %s (%.2f nam)" % (lot, tu, den, nam))
+    print("\n%-42s %6s %9s %6s %7s %7s %11s"
+          % ("co che", "lenh", "lai", "PF", "sharpe", "DD%",
+             "%%/nam@DD%g" % NGAN_SACH_DD_PCT))
+    moc = None
     for d in r["ket"][:25]:
-        print("%-42s %6d %9.2f %6.2f %7.2f %7.2f"
+        d["pct_nam_cung_rui_ro"] = chuan_hoa_cung_rui_ro(
+            d["lai"], d["dd_pct"], nam)
+        if str(d["ten"]).startswith("__mua_giu__"):
+            moc = d["pct_nam_cung_rui_ro"]
+    for d in r["ket"][:25]:
+        v = d.get("pct_nam_cung_rui_ro")
+        print("%-42s %6d %9.2f %6.2f %7.2f %7.2f %11s"
               % (str(d["ten"])[:42], d["lenh"], d["lai"], d["pf"],
-                 d["sharpe"], d["dd_pct"]))
+                 d["sharpe"], d["dd_pct"],
+                 "CHUA_DO" if v is None else "%+.2f" % v))
+    # Cau hoi tien: hon moc MUA-GIU o CUNG rui ro chua. In thang ra day de khong
+    # ai phai tu tinh lai - da mot lan toi so cot `lai` voi moc co sut giam gap ba.
+    if moc is not None:
+        hon = [d for d in r["ket"]
+               if not str(d["ten"]).startswith("__mua_giu__")
+               and (d.get("pct_nam_cung_rui_ro") or -9e9) > moc]
+        n_co = sum(1 for d in r["ket"]
+                   if not str(d["ten"]).startswith("__mua_giu__"))
+        print("\nmoc mua-giu o cung rui ro: %+.2f%%/nam  ->  %d/%d co che hon moc"
+              % (moc, len(hon), n_co))
+    else:
+        print("\nmoc mua-giu: CHUA_DO_DUOC o cung rui ro - dung ket luan 'hon moc'")
+    # MT5 in `Equity DD %` voi HAI chu so thap phan. Lot 0,10 tren von 10.000 cho
+    # DD ~0,03% - tuc MOT chu so y nghia, va cot cuoi dang nhan no len >100 lan.
+    # Sai so +-0,005 tren 0,03 la +-17% truyen thang vao ket qua. Phai noi ra.
+    tho = [d for d in r["ket"][:25] if 0 < float(d["dd_pct"]) < 0.20]
+    if tho:
+        print("CANH BAO do phan giai: %d/%d co che co DD%% < 0,20 - cot cuoi dang"
+              % (len(tho), len(r["ket"][:25])))
+        print("   NGOAI SUY don bay >100 lan tu mot chu so y nghia (sai so ~17%).")
+        print("   Chay lai voi `--lot` lon hon de DO o co lenh that.")
     return 0
 
 

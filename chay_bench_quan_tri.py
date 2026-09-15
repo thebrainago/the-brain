@@ -138,70 +138,40 @@ def chay(symbol: str = "US500Cash", khung: str = "H1", vao_kieu: int = 0,
 
 
 def co_lich_su(symbol: str) -> bool:
-    """Symbol co lich su trong kho cua tester khong.
+    """Symbol co CHAY DUOC tren may chu dang dang nhap khong.
 
     Do 13/09/2026: chay `XAUUSD` het 2 x 90 giay roi tra ve 0 lenh tren MOI
-    pass. Tai khoan XM nay **khong co ma XAUUSD** - vang o day ten la `GOLD`
-    (va `GOLDmicro`). Cong `so_lenh == 0` bat duoc, nhung no bat SAU khi da
-    chay xong; va mot bang "0 lenh" nam canh cac bang that thi rat de bi doc
-    thanh "quan tri khong an tren vang".
+    pass. Tai khoan XM nay **khong co ma XAUUSD**. Kiem TRUOC thi mat 1 mili
+    giay va bao duoc dung ten ma.
 
-    Kiem TRUOC thi mat 1 mili giay va bao duoc dung ten ma.
+    15/09/2026 - SUA LAN HAI, va lan nay quan trong hon: ban cu gop TAT CA
+    `bases/*/history/*`, nen kho lich su cua mot tai khoan DA CHET van tra loi
+    "co". Do la cach `AUDCAD` qua duoc cong nay trong khi may chu dang dung
+    (`XMGlobal-MT5 10`) chi co `AUDCADmicro`. Nay uy thac cho
+    `nhan/ten_ma.py`, cham theo DUNG may chu trong `config/common.ini`.
+
+    Van KHONG chan khi chi thieu lich su: `US500Cash` ngay 13/09 la ma hop le
+    ma chua ai yeu cau bao gio, va nguoi yeu cau dau tien chinh la luot tester
+    bi chan - mot vong quan quanh. Chi chan khi co kho ma DAY DU cua may chu
+    va ma khong nam trong do.
     """
-    goc = XM_DATA / "bases"
-    if not goc.exists():
-        return True          # khong kiem duoc thi cho chay, dung chan mu
-    co = {p.name for p in goc.glob("*/history/*") if p.is_dir()}
-    if symbol in co:
-        return True
-    # CHUA CO LICH SU KHAC VOI KHONG CO MA.
-    #
-    # Do 13/09/2026, ngay sau khi dang nhap lai XM: `bases/XM.COM-MT5/history`
-    # RONG, vi MT5 chi tai lich su khi co ai do YEU CAU mot ma - va nguoi yeu
-    # cau dau tien chinh la luot tester nay. Cong cu nay khi do chan dung cai
-    # luot se tao ra thu no doi hoi: mot vong quan quanh.
-    #
-    # Nen khi kho lich su con RONG (moi dang nhap), cho chay - cong `so_lenh
-    # == 0` phia sau van bat duoc that bai that. Chi chan khi kho DA co ma
-    # khac ma khong co ma nay: luc do "khong co ma" moi la ket luan dung.
-    if not co:
-        return True
-    # CHUA TAI khac KHONG CO MA - lan hai cua cung mot bai hoc.
-    #
-    # Ban sua dau tien cho chay khi kho lich su RONG. Nhung sau khi cai lai
-    # MT5 ngay 13/09, kho co lich su cua 10 ma (EURUSD, GOLD...) ma CHUA co
-    # US500Cash - va cong lai chan US500Cash, mot ma hoan toan hop le, chi vi
-    # chua ai yeu cau no bao gio. Cong lai tu chan dung cai luot se tai no ve.
-    #
-    # Nen cong nay chi con canh mot thu: TEN MA VIET SAI. Ma sai thi cong
-    # `so_lenh == 0` phia sau van bat duoc, va `goi_y_ma` chi ra ten gan dung
-    # (do la cach `XAUUSD` -> `GOLD` duoc tim ra). Chi phi cua mot lan chay
-    # thua la 90 giay; chi phi cua mot lan chan oan la ca mot ma khong bao
-    # gio duoc do.
-    return True
+    from nhan import ten_ma as TM
+    return TM.kiem_ten(symbol).get("trang_thai") != "KHONG_CO"
 
 
-#: Ten khac nhau cho cung mot tai san giua cac san. Khong doan duoc bang chuoi:
-#: `XAUUSD` va `GOLD` khong chung mot ky tu nao.
-BI_DANH = {"XAUUSD": ["GOLD", "GOLDmicro"], "XAGUSD": ["SILVER", "SILVERmicro"],
-           "SPX500": ["US500Cash"], "NAS100": ["US100Cash"],
-           "DE40": ["GER40Cash"], "DAX": ["GER40Cash"]}
+#: Giu ten cu de nguoi goi khong phai doi; nguon that o `nhan/ten_ma.py`.
+def _bi_danh():
+    from nhan import ten_ma as TM
+    return TM.BI_DANH
+
+
+BI_DANH = _bi_danh()
 
 
 def goi_y_ma(symbol: str, n: int = 6) -> list:
-    """Ten ma gan dung. Thu BI DANH truoc, roi chuoi con, roi do giong nhau."""
-    import difflib
-    goc = XM_DATA / "bases"
-    co = sorted({p.name for p in goc.glob("*/history/*") if p.is_dir()})
-    ra = [x for x in BI_DANH.get(symbol.upper(), []) if x in co]
-    kh = symbol.upper().replace("CASH", "").replace("MICRO", "")
-    for cat in (kh, kh[:4], kh[:3]):
-        if len(ra) >= n or len(cat) < 3:
-            break
-        ra += [x for x in co if cat in x.upper() and x not in ra]
-    ra += [x for x in difflib.get_close_matches(symbol, co, n=n, cutoff=0.5)
-           if x not in ra]
-    return ra[:n]
+    """Ten ma gan dung - uy thac cho `nhan/ten_ma.py` (dung chung voi tester)."""
+    from nhan import ten_ma as TM
+    return TM.goi_y_ma(symbol, n)
 
 
 def _trong_khoa(symbol, khung, vao_kieu, vao_n, nhanh, tu, den, lot=1.0) -> dict:

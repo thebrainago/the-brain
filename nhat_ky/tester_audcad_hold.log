@@ -1,0 +1,22 @@
+  44/3233 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+kho 5 -> dich duoc 6, bo 0
+  bien dich xong (6 co che)
+  chay optimization 6 pass ...
+
+6 pass, 30.4s  
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+rsi_dao_chieu_dsl_n14_vao30_ra55               60     10.21   2.90    1.43    0.03       +9.98
+ou_quay_ve_dsl_n50_z2.5_mua                    56      8.46   2.62    1.22    0.04       +7.10
+ou_quay_ve_dsl_n200_z2_mua                     30      8.80   4.27    0.82    0.04       +6.62
+ou_quay_ve_dsl_n50_z2.5_ban                    46      4.19   1.68    0.76    0.03       +4.29
+__mua_giu__                                    17      0.25   1.02    0.00    0.10       +0.09
+ou_quay_ve_dsl_n200_z2_ban                     27     -1.33   0.86   -0.15    0.06       -0.89
+
+moc mua-giu o cung rui ro: +0.09%/nam  ->  4/5 co che hon moc

@@ -2049,15 +2049,28 @@ def _them_co_che_trong_khoa(spec: dict,
             # choi khi suy bien tren TAT CA cho do duoc.
             da_do = [f"chuoi kiem {ty_le:.3%}"]
             chua_do = []
+            # DO HET, KHONG DUNG O CHUOI DAU TIEN DAT.
+            #
+            # Ban cu `break` ngay khi mot chuoi dat, nen spec chi mang ve MOT
+            # con so - va do la con so cua chuoi MAY MAN. `ty_le_than_nen`
+            # (`close - open > 0.5`, tuc mot hang so DON VI GIA) vao kho voi
+            # `_ty_le_kich_hoat = 0,5202` do tren XAUUSD, trong khi tren moi cap
+            # FX no la **0,000** - va nam thang sau no van ra 0 lenh moi luot
+            # tester, moi lan chi hien ra la mot dong 0 lan giua cac dong that.
+            # Do them mot chuoi ton vai chuc mili giay; giu ca bang thi cau hoi
+            # "co che nay song o dau" tra loi duoc bat cu luc nao sau do.
+            # Xem `nhan/thang_gia.py`.
+            theo_chuoi = {"chuoi kiem": round(ty_le, 4)}
             for ten_ma, df_them in _chuoi_do_them():
                 tl2 = _ty_le_kich_hoat(spec, df_them)
                 if tl2 is None:
                     chua_do.append(ten_ma)
                     continue
                 da_do.append(f"{ten_ma} {tl2:.3%}")
-                if _kich_hoat_dat(tl2):
+                theo_chuoi[ten_ma] = round(tl2, 4)
+                if _kich_hoat_dat(tl2) and not _kich_hoat_dat(ty_le):
                     ty_le, do_tren = tl2, ten_ma
-                    break
+            spec = dict(spec, _ty_le_theo_chuoi=theo_chuoi)
             if not _kich_hoat_dat(ty_le):
                 huong = ("mua-giu tra hinh" if ty_le > TY_LE_NHIEU_KHO
                          else "khong du lenh de kiem dinh bao gio")

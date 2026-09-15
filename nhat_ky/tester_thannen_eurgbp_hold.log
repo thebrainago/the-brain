@@ -1,0 +1,56 @@
+  44/3233 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+     TRONG DO co 2 cai KHOP BO LOC 'than_nen': buy_signal_from_bullish_candle_strength_pressure_state, sell_signal_from_bearish_candle_strength_pressure_state
+  14 co che se ra 0 lenh VI LOI KHAI (nguong tinh bang DON VI GIA), khong phai vi thi truong:
+       engulfing_buy                                  CHET_MOI_NOI
+       engulfing_sell                                 CHET_MOI_NOI
+       quet_dinh_voi_rau_nen_du_tren                  CHET_MOI_NOI
+       quet_day_voi_rau_nen_duoi                      CHET_MOI_NOI
+       chap_nhan_rui_ro_chiu_mua_cao_hoac_ban_thap_de PHU_THUOC_THANG_GIA
+       candle_body_ratio_momentum_long                PHU_THUOC_THANG_GIA
+       nen_than_dai_xac_nhan_xu_huong_tang            PHU_THUOC_THANG_GIA
+       ty_le_than_nen                                 PHU_THUOC_THANG_GIA
+       candlebodyratio_trend                          PHU_THUOC_THANG_GIA
+       candle_body_ratio                              PHU_THUOC_THANG_GIA
+     doc `nhan/thang_gia.py`. Mot dong 0 o day KHONG phai ket qua.
+kho 61 -> dich duoc 60, bo 2
+  khong dich duoc: quet_dinh_voi_rau_nen_du_tren, quet_day_voi_rau_nen_duoi
+  bien dich xong (60 co che)
+  chay optimization 60 pass ...
+
+60 pass, 20.3s  
+lot 5 - von 10.000 USD - 2021.03.19 -> 2026.07.29 (5.36 nam)
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+hap_thu_khoi_luong                             58    281.91   1.81    1.37    1.60       +5.80
+weekly_day_reversal_sell                       17    374.86   1.69    0.10    5.42       +2.45
+candle_size_shadow                              0      0.00   0.00    0.00    0.00     CHUA_DO
+su_dung_bo_loc_kich_thuoc_nen_e_xac_inh_ie      0      0.00   0.00    0.00    0.00     CHUA_DO
+lenh_ban_xu_huong_tang_va_dao_ngach             0      0.00   0.00    0.00    0.00     CHUA_DO
+lenh_mua_xu_huong_giam_va_dao_ngach             0      0.00   0.00    0.00    0.00     CHUA_DO
+candlebodyratio_momentum                        0      0.00   0.00    0.00    0.00     CHUA_DO
+candle_body_ratio                               0      0.00   0.00    0.00    0.00     CHUA_DO
+candlebodyratio_trend                           0      0.00   0.00    0.00    0.00     CHUA_DO
+ty_le_than_nen                                  0      0.00   0.00    0.00    0.00     CHUA_DO
+nen_than_dai_xac_nhan_xu_huong_tang             0      0.00   0.00    0.00    0.00     CHUA_DO
+candle_body_ratio_momentum_long                 0      0.00   0.00    0.00    0.00     CHUA_DO
+chap_nhan_rui_ro_chiu_mua_cao_hoac_ban_tha      0      0.00   0.00    0.00    0.00     CHUA_DO
+engulfing_sell                                  0      0.00   0.00    0.00    0.00     CHUA_DO
+engulfing_buy                                   0      0.00   0.00    0.00    0.00     CHUA_DO
+__mua_giu__                                    17   -757.64   0.34   -0.19    9.83       -3.07
+vao_lenh_khi_bien_ong_thuc_te_co_lai           83   -939.70   0.62   -0.39   10.85       -3.49
+ns_phan_vi250_cua_than_nen_<_q20_giu10        559  -1102.64   0.79   -0.68   11.83       -3.78
+ns_phan_vi250_cua_than_nen_<_q10_giu10        379   -785.31   0.78   -0.69    9.55       -3.30
+ns_phan_vi250_cua_than_nen_<_q10_giu5         485   -808.03   0.76   -1.08    8.56       -3.83
+ns_phan_vi250_cua_than_nen_>_q90_giu10        340  -1134.59   0.69   -1.09   13.13       -3.48
+ns_phan_vi250_cua_than_nen_>_q80_giu10        524  -1750.38   0.70   -1.12   19.17       -3.69
+ns_phan_vi250_cua_than_nen_<_q10_giu3         548   -592.28   0.76   -1.26    6.45       -3.71
+ghim_gia_tuan_dao_han                         253   -477.86   0.68   -1.59    5.76       -3.33
+mat_can_bang_lenh_dong_cua                     53    -59.22   0.78   -1.61    1.39       -1.65
+
+moc mua-giu o cung rui ro: -3.07%/nam  ->  3/59 co che hon moc

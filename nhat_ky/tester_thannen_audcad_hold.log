@@ -1,0 +1,44 @@
+  44/3233 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+     TRONG DO co 2 cai KHOP BO LOC 'than_nen': buy_signal_from_bullish_candle_strength_pressure_state, sell_signal_from_bearish_candle_strength_pressure_state
+kho 61 -> dich duoc 60, bo 2
+  khong dich duoc: quet_dinh_voi_rau_nen_du_tren, quet_day_voi_rau_nen_duoi
+  bien dich xong (60 co che)
+  chay optimization 60 pass ...
+
+60 pass, 20.2s  
+lot 5 - von 10.000 USD - 2021.03.19 -> 2026.07.29 (5.36 nam)
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+__mua_giu__                                    17    132.06   1.18    0.04    4.26       +1.13
+vao_lenh_khi_bien_ong_thuc_te_co_lai           83     37.72   1.03    0.02    4.85       +0.29
+candle_size_shadow                              0      0.00   0.00    0.00    0.00     CHUA_DO
+su_dung_bo_loc_kich_thuoc_nen_e_xac_inh_ie      0      0.00   0.00    0.00    0.00     CHUA_DO
+lenh_ban_xu_huong_tang_va_dao_ngach             0      0.00   0.00    0.00    0.00     CHUA_DO
+lenh_mua_xu_huong_giam_va_dao_ngach             0      0.00   0.00    0.00    0.00     CHUA_DO
+candlebodyratio_momentum                        0      0.00   0.00    0.00    0.00     CHUA_DO
+candle_body_ratio                               0      0.00   0.00    0.00    0.00     CHUA_DO
+candlebodyratio_trend                           0      0.00   0.00    0.00    0.00     CHUA_DO
+ty_le_than_nen                                  0      0.00   0.00    0.00    0.00     CHUA_DO
+nen_than_dai_xac_nhan_xu_huong_tang             0      0.00   0.00    0.00    0.00     CHUA_DO
+candle_body_ratio_momentum_long                 0      0.00   0.00    0.00    0.00     CHUA_DO
+chap_nhan_rui_ro_chiu_mua_cao_hoac_ban_tha      0      0.00   0.00    0.00    0.00     CHUA_DO
+engulfing_sell                                  0      0.00   0.00    0.00    0.00     CHUA_DO
+engulfing_buy                                   0      0.00   0.00    0.00    0.00     CHUA_DO
+ns_phan_vi250_cua_than_nen_<_q10_giu10        371   -156.12   0.94   -0.17    4.22       -1.43
+weekly_day_reversal_sell                       17   -837.64   0.21   -0.28    9.60       -3.51
+pha_day_hut_quet_stop                          85    -63.45   0.86   -0.48    2.01       -1.21
+ns_phan_vi250_cua_than_nen_<_q20_giu10        547   -679.41   0.83   -0.51    7.88       -3.47
+ghim_gia_tuan_dao_han                         242   -138.18   0.88   -0.52    2.51       -2.16
+ns_phan_vi250_cua_than_nen_>_q90_giu10        348   -564.98   0.81   -0.64    7.11       -3.18
+ns_phan_vi250_cua_than_nen_>_q80_giu10        529   -869.56   0.80   -0.67   10.82       -3.22
+ns_phan_vi250_cua_than_nen_>_q90_giu5         459   -412.80   0.84   -0.71    5.71       -2.87
+ns_phan_vi250_cua_than_nen_>_q80_giu5         796   -941.76   0.79   -0.96   10.65       -3.57
+ns_phan_vi250_cua_than_nen_<_q10_giu5         472   -584.52   0.79   -0.99    6.70       -3.51
+
+moc mua-giu o cung rui ro: +1.13%/nam  ->  0/59 co che hon moc
