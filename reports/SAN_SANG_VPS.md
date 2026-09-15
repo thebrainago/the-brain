@@ -14,11 +14,11 @@ Dich: **VPS chay 24/7 nhieu thang** (chu du an chot 12/09/2026).
 
 ## 2. PHAI MANG THEO
 
-Tong **1.75 GB**:
+Tong **1.76 GB**:
 
 - `nao.db` — 1.59 GB
+- `reports` — 0.08 GB
 - `data` — 0.07 GB
-- `reports` — 0.07 GB
 - `config` — 0.01 GB
 - `thu_vien.db` — 0.00 GB
 

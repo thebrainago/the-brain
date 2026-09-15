@@ -72,6 +72,16 @@ SO = LAB / "reports" / "VONG_DAY_DU.json"
 #: doc tu day chu khong go cung con so. Ban cu go cung 6; them hai chang moi
 #: (CHAM_TIEN, DA_THOI_DAI) lam test do voi "7 != 6" - test do dang kiem mot
 #: CON SO chu khong kiem mot TINH CHAT.
+#: Ten DAY DU tung chang, dung cho bang tong ket - de mot chang BI BO van co
+#: mot dong kem ly do. Ban cu chi ghi chang DA CHAY, nen nguoi doc thay 5 dong
+#: va khong phan biet duoc "bo qua co chu dich" voi "bien mat im lang" - dung
+#: cai luat ba trang thai cua du an.
+TEN_HIEN = ("1 SAN_BOC (SEEKER)", "2 HO_SO (QUANTLAB tong quan)",
+            "3 NOI_SINH (QUANTLAB noi sinh)", "4 SUY_NGUOC (QUANTLAB noi sinh)",
+            "5 TO_HOP (QUANTLAB chien luoc)",
+            "6 DA_THOI_DAI (chong hien tuong che do)",
+            "7 CHAM_TIEN (LUAT SO 0)", "8 EVO")
+
 TEN_CHANG = ("_san_boc", "_ho_so", "_noi_sinh", "_suy_nguoc", "_to_hop",
              "_da_thoi_dai", "_cham_tien", "_evo")
 
@@ -388,9 +398,12 @@ def vong(ma: str = "US500CASH", cac_khung=("D1",), sp: int = 4,
     t0 = time.time()
     khung = cac_khung[0]
     chang = []
+    bo_qua = []
     if not nhanh:
         chang.append(_chang("1 SAN_BOC (SEEKER)", _san_boc, in_ra,
                             ma=ma, in_ra=in_ra))
+    else:
+        bo_qua.append(("1 SAN_BOC (SEEKER)", "--nhanh: bo khau cham nhat"))
     chang.append(_chang("2 HO_SO (QUANTLAB tong quan)", _ho_so, in_ra,
                         khung=khung, sp=sp, in_ra=in_ra))
     chang.append(_chang("3 NOI_SINH (QUANTLAB noi sinh)", _noi_sinh, in_ra,
@@ -400,11 +413,15 @@ def vong(ma: str = "US500CASH", cac_khung=("D1",), sp: int = 4,
                             in_ra, khung=khung, sp=sp, in_ra=in_ra))
     else:
         in_ra("\n=== 4 SUY_NGUOC === con moi - bo qua")
+        bo_qua.append(("4 SUY_NGUOC (QUANTLAB noi sinh)",
+                       "ho so con moi (< %sh)" % HAN_GIO["suy_nguoc"]))
     if _tuoi("TO_HOP.json") > HAN_GIO["to_hop"]:
         chang.append(_chang("5 TO_HOP (QUANTLAB chien luoc)", _to_hop, in_ra,
                             cac_khung=cac_khung, sp=sp, in_ra=in_ra))
     else:
         in_ra("\n=== 5 TO_HOP === con moi - bo qua")
+        bo_qua.append(("5 TO_HOP (QUANTLAB chien luoc)",
+                       "ho so con moi (< %sh)" % HAN_GIO["to_hop"]))
     chang.append(_chang("6 DA_THOI_DAI (chong hien tuong che do)", _da_thoi_dai,
                         in_ra, in_ra=in_ra))
     chang.append(_chang("7 CHAM_TIEN (LUAT SO 0)", _cham_tien, in_ra,
@@ -414,6 +431,7 @@ def vong(ma: str = "US500CASH", cac_khung=("D1",), sp: int = 4,
     ket = {"ma": ma, "khung": list(cac_khung),
            "luc": time.strftime("%Y-%m-%d %H:%M:%S"),
            "giay": round(time.time() - t0, 1), "chang": chang,
+           "bo_qua": [{"ten": t, "vi_sao": v} for t, v in bo_qua],
            "hong": [c["ten"] for c in chang if not c["ok"]]}
     SO.parent.mkdir(exist_ok=True)
     SO.write_text(json.dumps(ket, ensure_ascii=False, indent=1, default=str),
@@ -421,9 +439,18 @@ def vong(ma: str = "US500CASH", cac_khung=("D1",), sp: int = 4,
     in_ra("")
     in_ra("=" * 62)
     in_ra("VONG DAY DU xong trong %.0f phut" % (ket["giay"] / 60))
-    for c in chang:
-        in_ra("  %-34s %-5s %7.0fs" % (c["ten"], "ok" if c["ok"] else "HONG",
-                                       c["giay"]))
+    theo_ten = {c["ten"]: c for c in chang}
+    bo_theo_ten = dict(bo_qua)
+    for ten in TEN_HIEN:
+        c = theo_ten.get(ten)
+        if c is not None:
+            in_ra("  %-36s %-7s %6.0fs" % (ten, "ok" if c["ok"] else "HONG",
+                                           c["giay"]))
+        else:
+            in_ra("  %-36s %-7s %s" % (ten, "BO QUA",
+                                       bo_theo_ten.get(ten, "KHONG RO VI SAO")))
+    in_ra("  (%d/%d chang chay, %d bo qua)"
+          % (len(chang), len(TEN_HIEN), len(TEN_HIEN) - len(chang)))
     if ket["hong"]:
         in_ra("  CHANG HONG: %s" % ", ".join(ket["hong"]))
     in_ra("-> %s" % SO)

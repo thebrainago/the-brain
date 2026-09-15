@@ -116492,5 +116492,40 @@
   "_ly_do_may_dien": true,
   "_ty_le_kich_hoat": 0.2797,
   "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rsi_mean_reversion",
+  "co_che": "Luat rut TU MA NGUON `http://arxiv.org/abs/2607.20093v1` (rsi_mean_reversion), CHUA co lap luan kinh te: gia thuyet nay kiem chinh dieu kien do co duoc tra tien hay khong, khong kiem cai bot goc. Mo hinh ghi: RSI 14",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 500,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30.0
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70.0
+    }
+   }
+  ],
+  "nguon": "http://arxiv.org/abs/2607.20093v1",
+  "_ly_do_may_dien": true,
+  "_ty_le_kich_hoat": 0.4043,
+  "_do_tren": "chuoi kiem"
  }
 ]

@@ -1,32 +1,29 @@
 {
- "xanh": 1739,
- "do": 2,
+ "xanh": 1928,
+ "do": 1,
  "bo_qua": 1,
  "loi": 0,
- "so_me": 12,
+ "so_me": 15,
  "me_chet": [
   {
-   "me": 9,
+   "me": 10,
    "file": [
-    "test_ngoai_sinh.py",
-    "test_ngu_phap_toan_hang.py",
-    "test_ngu_phap_trung.py",
-    "test_nguon_bai_viet.py",
-    "test_nguon_track_record.py",
-    "test_nguon_xa_hoi.py",
-    "test_nguong_chuyen_duoc.py",
-    "test_nha_may_luc.py",
-    "test_nha_may_null.py",
-    "test_pham_vi.py",
-    "test_pham_vi_quet.py",
-    "test_phoi_nhiem_holdout.py"
+    "test_mach.py",
+    "test_mau_bo_sung.py",
+    "test_mau_nen.py",
+    "test_mau_v2.py",
+    "test_mimic_ban_do.py",
+    "test_muc_tieu_va_noi_sinh.py",
+    "test_nen.py",
+    "test_neo_truot_x10.py",
+    "test_ngan_sach.py",
+    "test_ngoai_sinh.py"
    ],
    "duoi": "QUA GIO 1800s"
   }
  ],
  "bai_do": [
-  "test_hien_phap.py::MoiModuleDeuCoNguoiKiem::test_module_moi_khong_duoc_ra_doi_ma_khong_co_test",
-  "test_khoa_tester.py::CuaGIETCungPhaiCoKhoa::test_khong_con_file_nao_taskkill_thang"
+  "test_ma_nguon_sach.py::MaNguonSach::test_khong_co_ky_tu_dieu_khien_lac"
  ],
- "giay": 3928.4
+ "giay": 2846.3
 }

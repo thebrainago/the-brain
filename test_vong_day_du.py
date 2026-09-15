@@ -112,3 +112,33 @@ class VongPhaiDU_SAU_CHANG(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+def test_bang_tong_ket_liet_ke_CA_TAM_CHANG():
+    """Ban cu chi ghi chang DA CHAY, nen mot vong `--nhanh` in ra 5 dong va
+    nguoi doc khong phan biet duoc "bo qua co chu dich" voi "bien mat im lang".
+
+    Do 15/09/2026: `b vong --nhanh` in cac chang 2,3,6,7,8 - thieu 1,4,5 ma
+    khong mot dong nao noi vi sao trong BANG (chi co mot dong roi o giua log).
+    """
+    from nhan import vong_day_du as V
+    assert len(V.TEN_HIEN) == len(V.TEN_CHANG) == 8
+    s = (Path(__file__).resolve().parent / "nhan" / "vong_day_du.py").read_text(
+        encoding="utf-8-sig")
+    assert "BO QUA" in s and "KHONG RO VI SAO" in s, (
+        "bang tong ket khong con phan biet BO QUA voi HONG")
+    assert "chang chay, %d bo qua" in s
+
+
+def test_moi_chang_BI_BO_deu_ghi_LY_DO():
+    """Mot chang bi bo ma khong ro ly do thi khong doc duoc - phai la
+    CHUA_DO_DUOC co giai thich, khong phai mot cho trong.
+    """
+    from nhan import vong_day_du as V
+    s = (Path(__file__).resolve().parent / "nhan" / "vong_day_du.py").read_text(
+        encoding="utf-8-sig")
+    assert s.count("bo_qua.append(") == 3, (
+        "co %d cho bo chang ma ghi ly do - phai du ba (nhanh, suy_nguoc, to_hop)"
+        % s.count("bo_qua.append("))
+    assert '"bo_qua": [{"ten": t, "vi_sao": v} for t, v in bo_qua]' in s, (
+        "ly do bo chang khong duoc ghi vao file ket qua")
