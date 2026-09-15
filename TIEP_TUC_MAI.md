@@ -133,3 +133,46 @@ Da sua hai cho lam nghen:
 2. `nhan/doc_pdf.py` + `nhan/doc_anh.py` van MO COI - ca hai co OCR.
 3. Ha uu tien thu thap cua nhom hoc thuat; ngan sach do dang bi chiem boi nguon
    suat 0.
+
+---
+
+# PHIEN "LAM TIEP" — 15/09 toi
+
+## BO DICH MQL5 PHU 100% KHO
+
+    dau phien 15/09   2.654 / 3.216   (82,5%)
+    bay gio           3.237 / 3.237   (100%)
+
+Da them: tuyen_tinh · adx · cci · donchian · keltner · stochastic · dong_luong ·
+macd · bon toan tu GOP · mau_nen (10 mau) · bollinger · heiken · supertrend ·
+va BI DANH (`stoch`, `bb_upper`, `bb_lower` - bo dich nay goi thang
+`ngu_phap._doi_bi_danh`).
+
+**`supertrend` la XAP XI** (trang thai la cai chot, khong suy giam) - da ghi ro
+trong ma, cua so khoi dong 500 bar. `heiken` thi CHINH XAC (0,5^60).
+
+## HAI PHAT HIEN HE THONG
+
+1. **19% kho la BAN TRUNG HANH VI.** 616/3.236 co che sinh ra chuoi tin hieu Y
+   HET mot co che khac tren AUDCAD H4. `loc_co_che._van_tay_hanh_vi` co tu
+   truoc va chay dung, nhung `chay_tester_kho` doc thang kho nen chua bao gio
+   goi no. Nay da noi vao (`_gop_trung_hanh_vi`).
+   Vi du chac chan: `bua == 2*rau_duoi - 1` va `sao_bang == 2*rau_tren - 1`
+   (lech 1,1e-16, Spearman 1,000000) - bon ten mau chi la HAI mau.
+
+2. **Seeker doc nguoc chieu nang suat.** `_diem_nang_suat` co tu so noi
+   `t.url = g.nguon` ma cot do chua `'kham_pha'` -> khop 4/387 dong -> tu so
+   luon 0 -> ham thanh `1/(n+2)` = xep hang theo NGHICH DAO so tai lieu.
+   Va prior 0,5 lam nguon TOT NHAT (mql5_code 0,459) vinh vien thua nguon CHUA
+   AI THU. Nay prior = suat that do duoc (0,3044).
+   Hang doi doc: **60/60 `semantic` -> 60/60 `mql5_code`**.
+
+## VIEC TIEP
+
+1. **Quet toan kho tren tester** dang chay (AUDCAD H4 holdout, 2.620 co che
+   duy nhat) - `nhat_ky/tester_toan_kho_audcad.log`. Doc ket qua PHAI theo
+   luat cuc dai-trong-N, va phai lap lai tren EURGBP truoc khi tin.
+2. `nhan/doc_pdf.py` + `nhan/doc_anh.py` van MO COI (ca hai co OCR).
+3. He dao nguoc tu lich su trade (passview -> tu dang nhap) - chua co.
+4. Cham diem tinh chat -> co che quan li ghi vao tung cap.
+5. Hai he AUDCAD van CHUA ra demo - CAN NGUOI mo tai khoan demo XM.
