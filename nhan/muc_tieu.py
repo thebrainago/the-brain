@@ -143,6 +143,15 @@ HE_THONG_PHO_THONG = [
     "MACD divergence strategy", "RSI-2 mean reversion Connors",
     "internal bar strength IBS strategy", "gap and go strategy",
     "seasonality turn of month strategy", "pairs trading statistical arbitrage",
+    # --- PASSVIEW: tai khoan MT5 chia se mat khau XEM (chu du an 15/09/2026) ---
+    # Nguoi ban tin hieu giau duoc LUAT nhung nhieu nguoi chia se mat khau
+    # investor (chi doc) de nguoi khac theo doi live. Tim thay = doc duoc lich
+    # su lenh THAT qua MetaTrader5.history_deals_get. Xem `nhan/passview.py`.
+    "MT5 investor password signal", "MT5 investor password free forex",
+    "tai khoan xem MT5 mat khau", "MT5 read only account share signal",
+    "MT5 investor login password telegram", "форекс инвестор пароль MT5",
+    "MT5 投資家パスワード シグナル", "MT5 观摩账户 密码 信号",
+    "copy trade investor password AUDCAD", "myfxbook AUDCAD account history",
 ]
 
 

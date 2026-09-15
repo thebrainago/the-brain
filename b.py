@@ -27,6 +27,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b thang-gia       loi khai nao co NGUONG DON VI GIA (chet sach tren FX)
     b ten-ma [MA]     ma co tren may chu dang dang nhap khong (+ ten gan dung)
     b demo            HE RA TAI KHOAN THAT: dang-ky / bat / nhip [--that]
+    b passview        tai khoan XEM MT5 -> lich su lenh: quet / boc / doc
     b tai-san <MA>    MOT CUA: tinh cach + chi phi + song + mua vu + ghep duoc
     b dem-nen <MA>    bo dem nen thuong + Heikin-Ashi (mo ta, khong du bao)
     b quet            quet_be_mat.py  (da tu goi `b loc` truoc khi quet)
@@ -246,6 +247,11 @@ def c_tai_san(a):
 def c_dem_nen(a):
     """b dem-nen <MA> [KHUNG] - bo dem nen thuong + Heikin-Ashi."""
     return chay([PY, "-m", "nhan.dem_nen", *(a or ["AUDCAD"])], cwd=LAB)
+
+
+def c_passview(a):
+    """b passview - TAI KHOAN XEM MT5 -> lich su lenh that (chi doc)."""
+    return chay([PY, "-m", "nhan.passview", *a], cwd=LAB)
 
 
 def c_demo(a):
@@ -895,7 +901,7 @@ LENH = {
     "phan-loai": c_phan_loai, "chi-bao": c_chi_bao, "loc": c_loc,
     # --- 15/09/2026: hai cong tung CO ma khong nam tren duong chay ---
     "thang-gia": c_thang_gia, "ten-ma": c_ten_ma, "demo": c_demo,
-    "tai-san": c_tai_san, "dem-nen": c_dem_nen,
+    "tai-san": c_tai_san, "dem-nen": c_dem_nen, "passview": c_passview,
     "cham-lai": c_cham_lai, "on-dinh": c_on_dinh,
     "hinh-dang": c_hinh_dang,
     "bg": c_bg, "bg-xem": c_bg_xem, "xa": c_xa, "xa-thu": c_xa_thu,
