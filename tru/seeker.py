@@ -2031,6 +2031,12 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
     cong_cu_moi = 0
     thanh_phan_moi = 0
     tam_thoi = 0
+    #: Dem loai loi tam thoi. `khong_mo_cdp` chiem da so = TRINH DUYET CHUA MO,
+    #: khong phai mang chap chon - va do la mot hanh dong khac han (mo Chrome
+    #: chu khong doi mang). Do 15/09/2026: mot chien dich bao "doc_duoc 0,
+    #: that_bai 62, hoan_lai_loi_tam_thoi 62" - nhin nhu mang hong, that ra chi
+    #: la CDP tat. Nguoi doc mat mot luot san chi vi bang khong noi ro.
+    tam_thoi_loai: dict = {}
     artifact_moi, artifact_da_co, artifact_loi = 0, 0, 0
     for t in ds:
         if doc_duoc >= gioi_han or time.time() - t0 > ngan_sach_giay:
@@ -2048,6 +2054,8 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
             # dem danh dau 83 dia chi Reddit vi `ERR_NAME_NOT_RESOLVED`.
             if TV.loi_tam_thoi():
                 tam_thoi += 1
+                _l = (TV.LOI_CUOI or {}).get("loi", "?")
+                tam_thoi_loai[_l] = tam_thoi_loai.get(_l, 0) + 1
                 continue
             # Con lai: danh dau da thu de khong keo lai mai mot dia chi hong.
             with SO.ket_noi() as cn:
@@ -2107,6 +2115,14 @@ def doc_toan_van(gioi_han: int = 8, ngan_sach_giay: int = 240) -> dict:
             "artifact_loi": artifact_loi, "cong_cu_moi": cong_cu_moi,
             "thanh_phan_moi": thanh_phan_moi,
             "hoan_lai_loi_tam_thoi": tam_thoi,
+            "tam_thoi_loai": tam_thoi_loai,
+            # Neu >=1/2 loi tam thoi la CDP tat, noi thang phai lam gi.
+            "canh_bao": (
+                "TRINH DUYET CHUA MO: %d/%d loi la khong_mo_cdp. Chay "
+                "`python mo_chrome_cdp.py` roi doc lai - day KHONG phai mang hong."
+                % (tam_thoi_loai.get("khong_mo_cdp", 0), tam_thoi)
+                if tam_thoi and tam_thoi_loai.get("khong_mo_cdp", 0) >= tam_thoi / 2
+                else ""),
             "thu_vien_ban_doc": tong["n"], "thu_vien_ky_tu": tong["k"],
             "thu_vien_trang_a4": round(tong["k"] / 4000)}
 

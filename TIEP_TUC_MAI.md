@@ -202,3 +202,44 @@ pairs_trading mean-reversion. Dinh `ou_quay_ve_dsl_n200_z2_mua` (+7,43/+8,19).
 2. Chay `nha_may_null` / placebo tren chinh 38 cai nay.
 3. Ho nay la RSI/OU mean-reversion tren cap cheo FX - trung voi
    [[ibs-la-hien-tuong-cua-mot-thoi-ky]]. Phai kiem theo THOI KY truoc khi tin.
+
+---
+
+# PASSVIEW + DAU BAI AUDCAD (15/09 khuya)
+
+## DA XONG
+- **`nhan/passview.py` + `b passview`**: tai khoan XEM MT5 (investor pass, chi
+  doc) -> `history_deals_get` -> lich su lenh THAT -> `dau_chan.phan_loai`.
+  An toan: khong bao gio order_send. Credential trong config/passview.json
+  (gitignore). Parser da siet CHONG RAC: ban dau bat 902 tai khoan, 0/902 that
+  -> nay 0 (dung, passview that chua duoc san).
+- **10 tu khoa passview** vao HE_THONG_PHO_THONG.
+- **AUDCAD**: khai 26 tu khoa (chua tung co); chuoi 8 cum -> **+9,16%/nam@DD20**
+  ngoai mau (moc +1,16), da dang hoa 2,25 lan. Da dang ky vao `b demo`.
+- **Canh bao CDP tat**: khau doc bao ro "TRINH DUYET CHUA MO" thay vi gop vao
+  "loi tam thoi" chung (mot chien dich mat 62 doc vi cai nay).
+
+## VIEC TIEP CUA AUDCAD (chu du an dua dau bai)
+
+1. **PASSVIEW can SAN TELEGRAM.** Kho hien tai (bai viet/code) khong chua post
+   chia se tai khoan - nguon that la Telegram/Zalo/social. Chay
+   `b san-he` roi `b passview quet`. Khi co tai khoan, `b passview doc <login>
+   <pass> <server>` -> phan loai cach quan li AUDCAD.
+   *(Chu du an nhan manh: passview -> dang nhap MT5 xem lich su.)*
+
+2. **KET HOP CACH DANH tren AUDCAD** (chu du an: "hedging nhoi thuan + dca
+   nguoc, hoac dca tia lenh"). Cong cu da co: `nhan/quan_tri_nhieu.py` mo phong
+   hedge/luoi_dca/stop_2_dau/tt_stop_doi/thoi_gian.
+   **NHUNG doc [[quan-tri-vi-the-lon-hon-entry]] TRUOC**: tren he DA CO EDGE,
+   moi lop quan tri phu len deu lam TE di (do 13/09, 11 ho x 5 he, moi ho am o
+   trung vi). Nen huong dung KHONG phai phu quan tri len 8 cum, ma la:
+   - hedging nhoi THUAN + dca NGUOC = mot he KHONG CAN ENTRY (ho PMG) - test
+     bang `b pmg`, so voi ket qua luoi AUDCAD da do (AM, [[luoi-audcad-do-day-du]])
+   - "dca tia lenh" = dca co CAT TUNG PHAN khi hoa - la mot bien the chua test
+
+3. **8 cum AUDCAD chua chay placebo/null.** Chung qua TRAIN->HOLDOUT (7,24 lan
+   nen) nhung viec GOM CUM dung tin hieu HOLDOUT (ro ri nho). Chay
+   `_placebo_ghep.py` hoac null tren chinh 8 cum.
+
+4. **Chuyen 8 cum sang KHUNG khac** (H1/D1) + tai san lang gieng (AUDNZD,
+   AUDCHF) bang `ngoai_sinh.chuyen` - giu ty le kich hoat.
