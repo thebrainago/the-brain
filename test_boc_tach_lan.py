@@ -416,3 +416,68 @@ class XetTienIchTheoNhuCauDAKHAI(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ===== LAN THU BA CUNG MOT HO LOI: bo do luat chi doc duoc mot vai thu tieng
+def test_bo_do_luat_phai_THAY_duoc_luat_o_MOI_thu_tieng():
+    """Cung MOT cau luat, dich sang 10 thu tieng - bo do phai thay het.
+
+    Do 15/09/2026 TRUOC khi sua: Anh 5 · Viet 4 · **Nga 0 · Nhat 0 · Thai 0**.
+    Va no bat duoc dung luc: seeker vua duoc noi vao sau dien dan quoc gia
+    (mql5 Nga, note.com Nhat, thaiforexschool). Neu khong sua thi ta vua xay
+    mot day chuyen THU VE ROI VUT DI trong im lang.
+
+    Hai lan truoc cung ho: bo loc viet cho van xuoi Anh cham ma nguon 0 diem
+    (03/09), roi cham tieng Viet CO DAU 0 diem (04/09).
+    """
+    from nhan import boc_llm as BL
+    cau = {
+        "Anh": "Buy when RSI(14) crosses below 30 and close is above the 200 "
+               "EMA. Exit after 5 bars. Stop loss 2 ATR.",
+        "Viet": "Mua khi RSI(14) cắt xuống dưới 30 và giá đóng cửa trên "
+                "EMA200. Thoát sau 5 nến. Cắt lỗ 2 ATR.",
+        "Nga": "Покупаем когда RSI(14) опускается ниже 30 и цена закрытия "
+               "выше EMA200. Выход через 5 баров. Стоп 2 ATR.",
+        "Nhat": "RSI(14)が30を下回り、終値がEMA200より上のときに買う。5本後に決済。損切りは2ATR。",
+        "Trung": "当RSI(14)下穿30且收盘价高于EMA200时买入，持有5根K线后止盈，止损2ATR。",
+        "Han": "RSI(14)가 30 아래로 내려가고 종가가 EMA200 위에 있으면 매수. 손절 2ATR.",
+        "Thai": "ซื้อเมื่อ RSI(14) ต่ำกว่า 30 และราคาปิดอยู่เหนือ EMA200 ตัดขาดทุน 2ATR",
+        "TayBanNha": "Comprar cuando RSI(14) cruza por debajo de 30 y el "
+                     "cierre está sobre la EMA200. Stop de pérdida 2 ATR.",
+        "Duc": "Kaufen wenn RSI(14) unter 30 fällt und der Schlusskurs über "
+               "der EMA200 liegt.",
+        "Indo": "Beli ketika RSI(14) turun di bawah 30 dan harga penutupan di "
+                "atas EMA200.",
+    }
+    truot = [k for k, v in cau.items()
+             if BL._diem_luat(v) < BL.DIEM_TOI_THIEU]
+    assert not truot, (
+        "bo do luat MU voi: %s - day la thu tieng seeker DANG thu ve, tai lieu "
+        "cua chung se bi vut o cong boc ma khong ai thay" % ", ".join(truot))
+
+
+def test_bo_do_luat_van_BO_van_ban_khong_phai_luat():
+    """Chieu nguoc lai. Mot bo do bat tat ca thi cung vo dung nhu bo do mu."""
+    from nhan import boc_llm as BL
+    rac = [
+        "Ngan hang trung uong chau Au giu nguyen lai suat trong cuoc hop thang "
+        "nay, theo Reuters. Thi truong phan ung tich cuc.",
+        "Cho dau vao chao, dun nong roi cho hanh vao phi thom trong 5 phut.",
+        "Đăng ký ngay hôm nay để nhận tín hiệu miễn phí từ chuyên gia hàng đầu!",
+        "Центральный банк оставил ставку без изменений на заседании в этом месяце.",
+    ]
+    bat_oan = [s for s in rac if BL._diem_luat(s) >= BL.DIEM_TOI_THIEU]
+    assert not bat_oan, "bat oan %d van ban khong phai luat" % len(bat_oan)
+
+
+def test_mau_KHONG_PHU_THUOC_NGON_NGU_bat_duoc_thu_tieng_chua_liet_ke():
+    """Ten chi bao luon viet bang chu Latin, ke ca trong bai tieng Nhat.
+
+    Nho vay mot bai tieng Ba Lan / Hy Lap / Do Thai - nhung thu tieng chua ai
+    liet ke - van qua duoc cong neu no THAT SU noi ve mot luat.
+    """
+    from nhan import boc_llm as BL
+    # Tieng Ba Lan, khong co trong danh sach tu khoa nao
+    s = "Kupuj gdy RSI(14) spadnie poniżej 30, a cena zamknięcia jest powyżej EMA200."
+    assert BL._diem_luat(s) >= BL.DIEM_TOI_THIEU, (
+        "mau khong phu thuoc ngon ngu khong hoat dong")

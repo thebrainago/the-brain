@@ -128,6 +128,62 @@ DAU_HIEU_LUAT = [
 #: dong `strategy.entry`) ma van chua tron mot chien luoc. Doi HAI dau hieu la
 #: mot rao khong co co so, va no da giet 300 ban doc tot.
 DIEM_TOI_THIEU = 1
+
+# --- LAN THU BA CUNG MOT HO LOI (15/09/2026) ------------------------------
+#
+# Hai lan truoc da ghi ngay o tren: bo loc viet cho VAN XUOI ANH thi cham ma
+# nguon 0 diem (03/09), roi cham tieng Viet CO DAU 0 diem (04/09). Lan nay:
+#
+#     cau luat y het nhau, dich sang sau thu tieng, cham bang chinh bo do:
+#       Anh 5 · Viet 4 · Viet co dau 4 · **Nga 0 · Nhat 0 · Thai 0**
+#
+# Va no bat duoc dung luc: sang nay seeker vua duoc noi vao SAU dien dan quoc
+# gia (mql5 Nga, note.com Nhat, thaiforexschool...). Neu khong sua thi ta vua
+# xay mot day chuyen THU VE ROI VUT DI trong im lang - tai lieu cham 0 diem
+# khong bao gio vao khau boc, va bang bao cao chi hien ra la "khong co gi de
+# boc". [[luat-do-phai-thay-duoc-cai-co]]
+#
+# HAI LOP MAU, co chu dich:
+#   1. TU KHOA theo tung thu tieng - cach nguoi ban dia that su viet.
+#   2. MOT MAU KHONG PHU THUOC NGON NGU: ten chi bao luon viet bang chu Latin
+#      ke ca trong bai tieng Nhat/Thai/Nga, nen "chi bao + so + phep so sanh"
+#      bat duoc luat o BAT KY thu tieng nao - ke ca thu tieng chua ai liet ke.
+DAU_HIEU_LUAT += [
+    # --- khong phu thuoc ngon ngu: ten chi bao Latin + so/phep so sanh ---
+    r"\b(rsi|ema|sma|wma|macd|atr|adx|cci|stoch|bollinger|ichimoku)\s*"
+    r"[\(\[]?\s*\d{1,4}\s*[\)\]]?",
+    r"\b(rsi|ema|sma|macd|atr|adx|cci|stoch)\b[^\n]{0,24}[<>≥≤]\s*\d",
+    r"\b(tp|sl)\s*[:=]\s*\d",
+    # --- Nga ---
+    r"поку?па(?:ем|ть|йте)?|покупк[аи]|лонг\b",
+    r"продава?(?:ть|ем|йте)?|продаж[аи]|шорт\b",
+    r"стоп[\s-]?лосс|тейк[\s-]?профит|стоп[\s-]?приказ",
+    r"когда\s+.{0,30}(rsi|ema|sma|macd|цена)",
+    r"(выше|ниже|пересека)\w*\s+.{0,20}(ema|sma|rsi|цены?)",
+    # --- Nhat ---
+    r"買[いうえ]|売[りるれ]|ロング|ショート",
+    r"損切り|利確|利食い|逆指値|指値",
+    r"(上回|下回|抜け|クロス)",
+    # --- Trung ---
+    r"买入|做多|卖出|做空|止损|止盈|多单|空单",
+    r"(上穿|下穿|突破|回踩)",
+    # --- Han ---
+    r"매수|매도|손절|익절|돌파",
+    # --- Thai ---
+    r"ซื้อ|ขาย|ตัดขาดทุน|ทำกำไร|จุดเข้า|จุดออก",
+    # --- Tay Ban Nha / Bo Dao Nha ---
+    r"\b(comprar|vender)\s+(cuando|quando|si|se)\b",
+    r"\b(stop\s+loss|stop\s+de\s+p[ée]rdida|toma\s+de\s+ganancia)\b",
+    # --- Duc ---
+    r"\b(kaufen|verkaufen)\s+(wenn|falls)\b",
+    r"\b(einstieg|ausstieg)s?(regel|signal)\b",
+    # --- Tho Nhi Ky / Indonesia / Phap / Y ---
+    r"\b(al|sat)[ıi][şs]\s+(sinyali|kural)",
+    r"\b(beli|jual)\s+(ketika|jika|saat)\b",
+    r"\b(acheter|vendre)\s+(quand|si|lorsque)\b",
+    r"\b(comprare|vendere)\s+(quando|se)\b",
+]
+
 _RX = [re.compile(p, re.I) for p in DAU_HIEU_LUAT]
 
 HE_THONG = (
