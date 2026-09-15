@@ -71,7 +71,7 @@ def dai_dien() -> list[str]:
     return [c["dai_dien"] for c in d["cum"]]
 
 
-def sinh(ten_he: list[str], khung: str) -> list[dict]:
+def sinh(ten_he: list[str], khung: str, symbol: str = "AUDCAD") -> list[dict]:
     kho = {c.get("ten"): c for c in NP.doc_kho()}
     thieu = [t for t in ten_he if t not in kho]
     if thieu:
@@ -80,7 +80,7 @@ def sinh(ten_he: list[str], khung: str) -> list[dict]:
     # de di qua cung spread / phi qua dem / gio khop.
     specs = [dict(D.SPEC_MUA_GIU), dict(D.SPEC_BAN_GIU)] + [kho[t] for t in ten_he]
     ma, dat = G.sinh_ea_ghep(specs, TEN_EA, khung=khung,
-                             tep="AUDCAD_CHUOI.csv")
+                             tep="CHUOI_%s.csv" % symbol.replace("#","").replace("micro",""))
     src = C.XM_DATA / "MQL5" / "Experts" / (TEN_EA + ".mq5")
     src.write_text(ma, encoding="utf-8")
     loi = C.bien_dich(src)
@@ -96,8 +96,9 @@ def chay(symbol: str, khung: str, tu: str, den: str, n_slot: int) -> Path:
     from nhan import bi_mat as BM
     from nhan import khoa_tester as KT
     from nhan import ngan_sach as NS
-    ten = "audcad_chuoi"
-    tep = "AUDCAD_CHUOI.csv"
+    stem = symbol.replace("#","").replace("micro","")
+    ten = "chuoi_%s" % stem.lower()
+    tep = "CHUOI_%s.csv" % stem
     (C.XM_DATA / "MQL5" / "Profiles" / "Tester").mkdir(parents=True, exist_ok=True)
     dat_set = "".join("InpLot%d=%.2f||%.2f||0||0||N\n" % (i, LOT, LOT)
                       for i in range(n_slot))
@@ -197,8 +198,12 @@ def main() -> int:
     print("=" * 74)
     print("CHUOI HE AUDCAD - %d cum doc lap + 2 moc, chay CHUNG mot EA" % len(ten_he))
     print("=" * 74)
-    dat = sinh(ten_he, khung)
+    dat = sinh(ten_he, khung, symbol)
     f = chay(symbol, khung, tu, den, len(dat))
+    import shutil as _sh
+    _luu = LAB / "reports" / ("CHUOI_VON_%s.csv" % symbol.replace("#","").replace("micro",""))
+    try: _sh.copy(f, _luu)
+    except Exception: pass
     pnl = doc(f, len(dat))
     nam = C._so_nam(tu, den)
 
