@@ -4,71 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 9840, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 21:15:16 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 13012, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 21:45:37 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11800, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 21:59:16 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17428, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:16:22 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 15412, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:16:55 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 11408, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:21:27 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17020, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:28:02 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 8616, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:34:18 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17128, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:37:20 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6276, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:45:37 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 9196, 0 phut)
-- git: 7c9a5bd Ban giao he thong: trang thai do duoc + HO LOI lap lai + viec theo thu tu
-### 2026-09-13 22:48:18 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 6916, 0 phut)
-- git: 8381e8e Ban giao: chang 4 da sua, viec dau tien cua phien sau la chay lai pheu
-### 2026-09-13 23:09:29 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 21072, 0 phut)
-- git: 8381e8e Ban giao: chang 4 da sua, viec dau tien cua phien sau la chay lai pheu
-### 2026-09-13 23:42:28 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19240, 0 phut)
-- git: 41202f3 Ban giao: bay dieu chu du an chot toi 13/09 + nut that so luong phep thu
-### 2026-09-13 23:49:58 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 5184, 0 phut)
-- git: 41202f3 Ban giao: bay dieu chu du an chot toi 13/09 + nut that so luong phep thu
-### 2026-09-13 23:58:26 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 19384, 0 phut)
-- git: 75944b6 Ban giao muc 8: kien truc cho ENGINE TO HOP - gia mot o, phan tang, seeker doi vai
-### 2026-09-14 00:04:15 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 17496, 0 phut)
 - git: 75944b6 Ban giao muc 8: kien truc cho ENGINE TO HOP - gia mot o, phan tang, seeker doi vai
 ### 2026-09-14 00:10:01 — chup trang thai
 
@@ -404,3 +339,68 @@
 
 - dang chay: ban_giao_song.py (pid 18924, 0 phut)
 - git: c0a1b21 Doi chieu The Brain vs mo ta goc 16/09: tong ~60%, loi la HEPHAESTUS chua co + dac tinh tai san ~40%
+### 2026-09-16 00:22:19 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19604, 0 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 08:58:33 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9324, 0 phut), dieu_khien_xa.py (pid 15316, 12 phut)
+- `dieu_phoi_nen.log`: [Wed 09/16/2026  8:46:13.86] thay DUNG_LAI - khong khoi dong watchdog
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 09:14:54 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 4808, 0 phut), dieu_khien_xa.py (pid 15316, 28 phut)
+- `dieu_phoi_nen.log`: [Wed 09/16/2026  8:46:13.86] thay DUNG_LAI - khong khoi dong watchdog
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 09:39:33 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6152, 0 phut), dieu_khien_xa.py (pid 15316, 53 phut)
+- `dieu_phoi_nen.log`: [Wed 09/16/2026  8:46:13.86] thay DUNG_LAI - khong khoi dong watchdog
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 10:31:41 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11360, 0 phut), dieu_khien_xa.py (pid 15316, 105 phut)
+- `dieu_phoi_nen.log`: [Wed 09/16/2026  8:46:13.86] thay DUNG_LAI - khong khoi dong watchdog
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 10:36:02 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15016, 0 phut), dieu_khien_xa.py (pid 15316, 109 phut)
+- `dieu_phoi_nen.log`: [Wed 09/16/2026  8:46:13.86] thay DUNG_LAI - khong khoi dong watchdog
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 10:54:06 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 4484, 0 phut), dieu_khien_xa.py (pid 15316, 127 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:01:34 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 1564, 0 phut), dieu_khien_xa.py (pid 15316, 135 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:14:20 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15308, 0 phut), dieu_khien_xa.py (pid 15316, 148 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:20:41 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9852, 0 phut), dieu_khien_xa.py (pid 15316, 154 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:28:11 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6748, 0 phut), dieu_khien_xa.py (pid 15316, 161 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:32:08 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 5172, 0 phut), dieu_khien_xa.py (pid 15316, 165 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:39:34 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11276, 0 phut), dieu_khien_xa.py (pid 15316, 173 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:48:12 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 7260, 0 phut), dieu_khien_xa.py (pid 15316, 182 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 11:58:35 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9188, 0 phut), dieu_khien_xa.py (pid 15316, 192 phut)
+- git: c4d8db1 luu anh ban giao song cuoi phien
