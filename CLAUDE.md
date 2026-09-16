@@ -50,9 +50,17 @@ phien de tim lai luat. Ban day du van o `../AGENTS.md`.
 ```
 b vao              trang thai song + ban giao hom qua  (~2 giay)
 b ban-do           SINH ban do tu ma nguon - DOC TRUOC KHI XAY GI MOI
+b kien-truc        SO DO KIEN TRUC: 129 module nhan theo LOP + VAI TRO + no kien truc
+b ho-so            HO SO HE THONG: mot file TU DU dua cho AI khong co dia (Claude chat)
 b ket "tom tat"    chot ngay: git commit + sinh TIEP_TUC_MAI.md moi
 b                  menu day du
 ```
+
+**`b kien-truc` truoc khi LEN KE HOACH.** `b ban-do` tra loi "co nam tren duong
+chay khong"; `b kien-truc` tra loi "he co nhung TANG gi, module nao thuoc tang nao,
+tang nao dang phinh hay rong" - tuc cau de lap ke hoach. Sinh ra `KIEN_TRUC.md`,
+doc vai tro tu docstring dong dau cua chinh module nen khong bao gio cu. Module
+moi ma quen xep lop trong `nhan/kien_truc.LOP` se hien o muc **CHUA XEP LOP**.
 
 **`b ban-do` truoc khi xay module moi.** Phien 12/09 toi xay lai BA thu da co
 (`uu_tien.py`, `noi_sinh.py`, va mot EVO thu hai canh `tru/evolution.py`). Ban do

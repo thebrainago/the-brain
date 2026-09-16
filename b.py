@@ -56,6 +56,8 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b qwen [lenh]     HE TU CHAY: qwen lam tiep bang viec (xem qwen/DOC_TRUOC.md)
                       `b qwen` = `q`. `b qwen trang-thai` xem bang. `b qwen kiem`.
     b ban-do          SINH ban do tu ma nguon + chi ra module MO COI
+    b kien-truc       SINH so do KIEN TRUC: module + VAI TRO + LOP + no kien truc
+    b ho-so           HO SO HE THONG: mot file TU DU dua cho AI khong co dia
     b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
     b phanh           han muc / kill-switch cua he chay that
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
@@ -628,6 +630,50 @@ def c_ban_do(a):
     return 0
 
 
+def c_ho_so(a):
+    """SINH HO SO HE THONG — mot file TU DU dua cho AI khong co dia.
+
+    Khac hai lenh tren o NGUOI DOC. `b ban-do` va `b kien-truc` viet cho nguoi
+    (hoac AI) dang mo repo. Lenh nay viet cho Claude chat / ChatGPT / nguoi ngoai:
+    so do + so lieu song + van de + de xuat + LUAT DOC KET QUA, gom mot file.
+
+    Muc luat doc khong phai trang tri: thieu no thi nguoi ngoai se khuyen mot
+    cach tu tin va sai, vi ho khong biet `Model=1` che ra lai gia hay placebo
+    phai hoan vi chuoi vi the.
+    """
+    if "--cu" in (a or []):
+        print((LAB / "HO_SO_HE_THONG.md").read_text(encoding="utf-8")
+              if (LAB / "HO_SO_HE_THONG.md").exists() else "chua co HO_SO_HE_THONG.md")
+        return
+    from nhan import ho_so_he as HS
+    vb = HS.sinh(in_ra=None)
+    (LAB / "HO_SO_HE_THONG.md").write_text(vb, encoding="utf-8")
+    print(vb)
+    return 0
+
+
+def c_kien_truc(a):
+    """SINH so do KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
+
+    Khac `b ban-do` o cau hoi no tra loi. `ban-do` hoi "co nam tren duong chay
+    khong" (toi duoc / mo coi). Lenh nay hoi "he co nhung TANG gi, module nao
+    thuoc tang nao, va tang nao dang phinh hay rong" - tuc cau de LEN KE HOACH,
+    khong phai cau de khoi xoa nham.
+
+    Sinh thang tu ma nguon nhu `ban-do`, vi cung mot ly do: mot so do viet tay
+    cu 13 ngay thi con te hon khong co. `b kien-truc --cu` xem ban da ghi.
+    """
+    if "--cu" in (a or []):
+        print((LAB / "KIEN_TRUC.md").read_text(encoding="utf-8")
+              if (LAB / "KIEN_TRUC.md").exists() else "chua co KIEN_TRUC.md")
+        return
+    from nhan import kien_truc as KT
+    vb = KT.sinh(in_ra=None)
+    (LAB / "KIEN_TRUC.md").write_text(vb, encoding="utf-8")
+    print(vb)
+    return 0
+
+
 
 # ---- DAY CHUYEN 03/09/2026: san -> doc -> boc -----------------------------
 def _nhan(a, i, mac_dinh):
@@ -912,6 +958,8 @@ LENH = {
     "ds": c_ds, "tim": c_tim,
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
+    "kien-truc": c_kien_truc, "kt": c_kien_truc,
+    "ho-so": c_ho_so, "hs": c_ho_so,
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
     "quan-tri": c_quan_tri, "qt": c_quan_tri,
