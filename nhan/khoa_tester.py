@@ -41,6 +41,17 @@ from pathlib import Path
 LAB = Path(__file__).resolve().parent.parent
 KHOA = LAB / "config" / "khoa_tester.json"
 
+
+def _tep(ten: str | None) -> Path:
+    """File khoa cua MOT slot. `None` -> khoa cu (mot slot, ten cu, tuong thich).
+
+    Them 16/09 cho goi G2-A: khoa phai theo SLOT chu khong toan cuc, neu khong
+    thi hai slot tester van doi nhau du chung ghi vao hai thu muc du lieu khac
+    hau. Giu nguyen ten file cu cho slot mac dinh de khong bo roi khoa dang giu
+    luc nang cap.
+    """
+    return KHOA if not ten else LAB / "config" / ("khoa_tester_%s.json" % ten)
+
 #: Khoa cu hon nguong nay ma chu giu khong con song -> thu hoi. Mot lan chay
 #: tester day du (8.241 phep thu) do duoc la 82 giay; mot lan chay nang nhat tu
 #: truoc den nay khoang 20 phut. 45 phut la bien an toan.
@@ -62,46 +73,49 @@ def _con_song(pid: int) -> bool:
         return True          # khong biet thi coi nhu CON SONG - an toan hon
 
 
-def dang_giu() -> dict | None:
+def dang_giu(ten: str | None = None) -> dict | None:
     """-> {pid, viec, luc} hoac None. Tu thu hoi khoa mo coi."""
-    if not KHOA.exists():
+    tep = _tep(ten)
+    if not tep.exists():
         return None
     try:
-        d = json.loads(KHOA.read_text(encoding="utf-8"))
+        d = json.loads(tep.read_text(encoding="utf-8"))
     except Exception:
-        KHOA.unlink(missing_ok=True)
+        tep.unlink(missing_ok=True)
         return None
     qua_han = time.time() - float(d.get("luc") or 0) > HAN_GIAY
     if qua_han or not _con_song(int(d.get("pid") or 0)):
-        KHOA.unlink(missing_ok=True)
+        tep.unlink(missing_ok=True)
         return None
     return d
 
 
-def thu_lay(viec: str) -> dict:
+def thu_lay(viec: str, ten: str | None = None) -> dict:
     """Lay khoa, KHONG cho. -> {duoc, ly_do, chu}"""
-    cu = dang_giu()
+    cu = dang_giu(ten)
     if cu and int(cu.get("pid") or 0) != os.getpid():
         return {"duoc": False, "chu": cu, "ly_do": (
             f"tester dang bi giu boi pid {cu.get('pid')} ({cu.get('viec')}) "
             f"tu {cu.get('luc_doc')}. Hai viec tester cung luc se ghi de ket qua "
             f"cua nhau VA khong ai bao loi.")}
-    KHOA.parent.mkdir(exist_ok=True)
-    KHOA.write_text(json.dumps(
-        {"pid": os.getpid(), "viec": viec, "luc": time.time(),
+    tep = _tep(ten)
+    tep.parent.mkdir(exist_ok=True)
+    tep.write_text(json.dumps(
+        {"pid": os.getpid(), "viec": viec, "slot": ten, "luc": time.time(),
          "luc_doc": time.strftime("%Y-%m-%d %H:%M:%S")},
         ensure_ascii=False), encoding="utf-8")
     return {"duoc": True, "ly_do": "", "chu": None}
 
 
-def tra() -> None:
-    d = dang_giu()
+def tra(ten: str | None = None) -> None:
+    d = dang_giu(ten)
     if d and int(d.get("pid") or 0) == os.getpid():
-        KHOA.unlink(missing_ok=True)
+        _tep(ten).unlink(missing_ok=True)
 
 
 @contextmanager
-def giu(viec: str, cho_giay: float = 0.0, nhip: float = 5.0):
+def giu(viec: str, cho_giay: float = 0.0, nhip: float = 5.0,
+        ten: str | None = None):
     """Giu khoa trong mot khoi `with`. `cho_giay > 0` thi CHO den khi lay duoc.
 
     Mac dinh KHONG cho: mot viec tester bi tu choi thi nen bao ngay de bo dieu
@@ -109,7 +123,7 @@ def giu(viec: str, cho_giay: float = 0.0, nhip: float = 5.0):
     """
     het = time.time() + cho_giay
     while True:
-        r = thu_lay(viec)
+        r = thu_lay(viec, ten)
         if r["duoc"]:
             break
         if time.time() >= het:
@@ -118,31 +132,39 @@ def giu(viec: str, cho_giay: float = 0.0, nhip: float = 5.0):
     try:
         yield r
     finally:
-        tra()
+        tra(ten)
 
 
 def phong(exe, ini, tran: int = 3600, nhip: float = 6.0,
-          dong_truoc=None, viec: str = "", cho_giay: float = 0.0) -> float:
+          dong_truoc=None, viec: str = "", cho_giay: float = 0.0,
+          ten: str | None = None) -> float:
     """PHONG terminal64 TRONG KHOA roi cho no thoat. -> so giay da chay.
 
     Mot cua duy nhat cho moi script. Truoc 11/09 moi script tu `Popen` lay, va
     quet ma nguon thay 9 file lam vay - tuc cai khoa co viet cung khong an gi.
     """
     import subprocess
-    with giu(viec or f"phong {Path(ini).name}", cho_giay=cho_giay):
+    with giu(viec or f"phong {Path(ini).name}", cho_giay=cho_giay, ten=ten):
         if dong_truoc:
             dong_truoc()
         t0 = time.time()
-        subprocess.Popen([str(exe), "/config:%s" % ini])
+        p = subprocess.Popen([str(exe), "/config:%s" % ini])
+        # CHO DUNG TIEN TRINH MINH DE RA, khong quet `tasklist` theo TEN ANH.
+        #
+        # Sua 16/09 (goi G2-A): ban cu doi den khi KHONG CON terminal64.exe nao
+        # tren may. Voi mot slot thi dung; voi hai slot thi slot nay "xong" ngay
+        # khi slot kia con dang chay, hoac ngoi doi ca luot cua slot kia. Ca hai
+        # deu sai va **khong cai nao bao loi**.
         while time.time() - t0 < tran:
-            time.sleep(nhip)
-            r = subprocess.run(["tasklist", "/FI", "IMAGENAME eq terminal64.exe"],
-                               capture_output=True, text=True)
-            if "terminal64.exe" not in r.stdout:
+            if p.poll() is not None:
                 break
+            time.sleep(nhip)
         else:
-            if dong_truoc:
-                dong_truoc()
+            try:
+                subprocess.run(["taskkill", "/F", "/T", "/PID", str(p.pid)],
+                               capture_output=True)
+            except Exception:
+                pass
         return round(time.time() - t0, 1)
 
 
@@ -161,7 +183,15 @@ def dong_terminal(viec: str = "") -> bool:
     viec cua ho.
     """
     import subprocess
+    # Nhin MOI khoa slot, khong chi khoa mac dinh. Voi nhieu slot thi
+    # `taskkill /IM terminal64.exe` giet luon terminal cua slot khac - dung cai
+    # hong ma chinh ham nay sinh ra de chan, chi khac la o quy mo slot.
     cu = dang_giu()
+    for q in sorted((LAB / "config").glob("khoa_tester_*.json")):
+        k = dang_giu(q.stem.replace("khoa_tester_", ""))
+        if k and int(k.get("pid") or 0) != os.getpid():
+            cu = k
+            break
     if cu and int(cu.get("pid") or 0) != os.getpid():
         raise TesterDangBan(
             f"KHONG giet terminal64: pid {cu.get('pid')} ({cu.get('viec')}) dang "

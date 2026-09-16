@@ -58,6 +58,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b ban-do          SINH ban do tu ma nguon + chi ra module MO COI
     b kien-truc       SINH so do KIEN TRUC: module + VAI TRO + LOP + no kien truc
     b ho-so           HO SO HE THONG: mot file TU DU dua cho AI khong co dia
+    b slot [kiem]     SLOT TESTER: may lan tester dung duoc, nang tran duoc chua
     b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
     b phanh           han muc / kill-switch cua he chay that
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
@@ -652,6 +653,20 @@ def c_ho_so(a):
     return 0
 
 
+def c_slot(a):
+    """SLOT TESTER: xem trang thai cac lan tester, va co duoc nang tran chua.
+
+    `ngan_sach.TESTER = 1` lau nay duoc goi la "rang buoc VAT LY". Do 16/09:
+    may co 6 ban cai MT5 va 8 thu muc du lieu - rang buoc nam o MA NGUON.
+    Lenh nay cho biet dang co may lan dung duoc, va con thieu gi de nang.
+    """
+    from nhan import slot_tester as ST
+    if a and a[0] in ("kiem", "k"):
+        return ST.kiem()
+    ST.bang()
+    return 0
+
+
 def c_kien_truc(a):
     """SINH so do KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
 
@@ -959,6 +974,7 @@ LENH = {
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
     "kien-truc": c_kien_truc, "kt": c_kien_truc,
+    "slot": c_slot,
     "ho-so": c_ho_so, "hs": c_ho_so,
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,
