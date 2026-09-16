@@ -218,6 +218,77 @@ BO_LUAT = {
 # ------------------------------------------------------- SO TIEN GIUA CAC LUAT
 NGAN_SACH_DD = 20.0
 
+# ------------------------------------------------- CHAN QUAN TRI BAT BUOC (G3-A)
+#
+# So do cua chu du an: *"quan li lenh tot con hon viec co 1 entry tot - module
+# quan trong trong toan bo he thong"*. Do 16/09 (`b ho-so`): 262 co che trong
+# kho la tin hieu VAO, chi 18 la quan tri; lop THU THAP co 19 module con lop
+# QUAN TRI VI THE chi 12. Dau tu dang nguoc voi hieu qua do duoc: entry tinh
+# SAI ma co lop quan tri dung van cho 92-97%/nam.
+#
+# Nen tu day mot tin hieu vao **khong duoc ghi so mot minh**. No phai di kem it
+# nhat BA bo luat quan tri, trong do bat buoc co:
+#
+#   - DAT HUE (`hue_tu_atr`) - luat DUY NHAT song sot ngoai mau (do: trailing
+#     -68%, nhoi lenh dep trong mau nhung Calmar xau ngoai mau)
+#   - TRAILING (`trail_tu_atr`) - lai holdout x4,8 khi co CHO de chay
+
+#: Ba bo luat toi thieu. Deu nam trong `BO_LUAT` nen khong sinh them engine.
+BO_BAT_BUOC = ("sl2_tp4_hue1", "sl2_trail1", "sl2_tp6_hue2_trail2")
+
+#: Duoi nguong nay thi trailing/dat hue KHONG CO CHO de hoat dong.
+#:
+#: Khong phai con so tuy y: `trail_tu_atr = 1.0` doi gia di 1 ATR **roi** hoi
+#: lai moi cat. Mot lenh giu 1-2 bar thi ca hai viec do khong kip xay ra, nen
+#: ket qua khong phai "trailing khong an thua" ma la **CHUA DO DUOC** - dung
+#: cai phan biet ma luat doc ket qua doi.
+BAR_TOI_THIEU_CHO_TRAIL = 3
+
+
+def _co_nut(luat, nut: str) -> bool:
+    return isinstance(luat, dict) and float(luat.get(nut) or 0) > 0
+
+
+def luat_co_cho(bar_trung_vi: float | None, ten: str, luat=None) -> tuple[bool, str]:
+    """Bo luat nay co CHO de hoat dong tren he giu lenh ngan nhu vay khong?"""
+    luat = BO_LUAT.get(ten, {}) if luat is None else luat
+    can_cho = _co_nut(luat, "trail_tu_atr") or _co_nut(luat, "hue_tu_atr")
+    if not can_cho:
+        return True, ""
+    if bar_trung_vi is None:
+        return True, ""
+    if bar_trung_vi < BAR_TOI_THIEU_CHO_TRAIL:
+        return False, ("giu trung vi %.1f bar < %d - trailing/dat hue khong kip "
+                       "kich hoat" % (bar_trung_vi, BAR_TOI_THIEU_CHO_TRAIL))
+    return True, ""
+
+
+def du_chan_quan_tri(ds: list[dict]) -> dict:
+    """CONG: bo ket qua nay da du chan quan tri de duoc ghi so chua?
+
+    Tra ve `{dat, ly_do, da_chay, co_hue, co_trail, thieu_cho}` - khong chi
+    True/False, vi "thieu cho" va "chua chay" la hai ket luan khac nhau va
+    tron chung lai la dung cai bay `CHUA_DO_DUOC` vs `AM`.
+    """
+    chay = [d for d in ds if d.get("luat") and d.get("luat") != "khong_gi"]
+    hue = [d for d in chay if _co_nut(BO_LUAT.get(d["luat"]), "hue_tu_atr")]
+    trail = [d for d in chay if _co_nut(BO_LUAT.get(d["luat"]), "trail_tu_atr")]
+    thieu_cho = []
+    for d in chay:
+        ok, ly = luat_co_cho(d.get("bar_tv"), d["luat"])
+        if not ok:
+            thieu_cho.append({"luat": d["luat"], "ly_do": ly})
+    ly_do = []
+    if len(chay) < 3:
+        ly_do.append("moi chay %d bo luat, can >= 3" % len(chay))
+    if not hue:
+        ly_do.append("thieu DAT HUE (`hue_tu_atr`) - luat duy nhat song ngoai mau")
+    if not trail:
+        ly_do.append("thieu TRAILING (`trail_tu_atr`)")
+    return {"dat": not ly_do, "ly_do": ly_do, "da_chay": len(chay),
+            "co_hue": len(hue), "co_trail": len(trail),
+            "thieu_cho": thieu_cho}
+
 
 def so_luat(df, tin_hieu, ma, khung, bo_luat=None, giu_toi_da=20) -> list[dict]:
     """Chay TUNG bo luat tren CUNG mot tin hieu roi so bang TIEN.
@@ -250,6 +321,9 @@ def so_luat(df, tin_hieu, ma, khung, bo_luat=None, giu_toi_da=20) -> list[dict]:
             r = dap(df, tin_hieu, luat, giu_toi_da=giu_toi_da)
         if r["so_lenh"] < 15:
             continue
+        # Bo luat can CHO ma he nay thoat qua nhanh -> ghi nhan la CHUA DO
+        # DUOC, khong phai chay roi bao ket qua kem. Xem `luat_co_cho`.
+        co_cho, ly_thieu_cho = luat_co_cho(r.get("bar_trung_vi"), ten, luat)
         # KHONG dung MP.chay: no dich them mot bar nen vi the an loi suat cua
         # bar i+2 thay vi i+1 (do duoc 12/09/2026 bang chuoi dung san). Bo tinh
         # tien cua `vao_lenh` vao o open[i+1] va an tu dung do.
@@ -268,6 +342,7 @@ def so_luat(df, tin_hieu, ma, khung, bo_luat=None, giu_toi_da=20) -> list[dict]:
                    "chet_tai_khoan": bool(q["chet"]),
                    "moc_dd20": round(moc * 100, 3),
                    "hon_moc": bool(dd20 > moc * 100),
+                   "co_cho": co_cho, "ly_do_thieu_cho": ly_thieu_cho,
                    "ly_do": r["ly_do"]})
     return ra
 

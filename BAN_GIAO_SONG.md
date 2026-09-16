@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi.log`: 2026-09-14 19:36:50 QUANTLAB  skipped    801.8s guard=job
-- `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
-- `supervisor_stdio.log`: 2026-09-14 19:36:50 QUANTLAB  skipped    801.8s guard=job
-- `watchdog.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - git: cb35788 don script tam cua phien PMG
 ### 2026-09-14 20:15:47 — chup trang thai
 
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 3572, 0 phut), dieu_khien_xa.py (pid 15316, 362 phut)
 - git: d20a266 G2-B: thu lai khi khoa ban + ghi theo lo + checkpoint WAL
+### 2026-09-16 15:46:49 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15148, 0 phut), dieu_khien_xa.py (pid 15316, 420 phut)
+- git: f68ca4b G2-C: ghi config nguyen tu + sua cuoc dua trong ngan_sach.xin()
