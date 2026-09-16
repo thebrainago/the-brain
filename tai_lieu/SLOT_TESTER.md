@@ -31,6 +31,48 @@ in ra một bảng số trông như so được.
 
 **Slot 2 phải là bản sao portable của chính XM Global MT5.**
 
+## CẬP NHẬT 16/09 (tối) — có đường rẻ hơn copy+portable
+
+Chủ dự án: *"XM có 2 tài khoản MT5 đăng nhập rồi mà?"* — đúng, nhưng đo lại thì
+**hai tài khoản đó nằm trong CÙNG một thư mục dữ liệu**:
+
+```
+BB16F565…  (XM Global MT5)
+   bases/XMGlobal-MT5 10/history  -> 14 mã
+   bases/XMGlobal-MT5 17/history  -> 13 mã
+```
+
+Hai tài khoản trong một terminal **không phải hai slot**. Slot cần thư mục dữ
+liệu riêng, vì `chay_tester_kho` ghi `.mq5`/`.ini`/`.xml` vào đó — hai lượt chạy
+cùng thư mục ghi đè nhau mà không ai báo lỗi.
+
+**Nhưng máy đã có sẵn cặp thứ hai**, chỉ là chưa nạp lịch sử:
+
+```
+656C3515…   <-  "C:\Program Files\XM MT5"   (bản cài RIÊNG, thư mục dữ liệu RIÊNG)
+   bases/   chỉ có Custom + Default, 0 mã có lịch sử
+```
+
+Nên **không cần copy + /portable nữa**. Ba bước thay vì năm:
+
+1. Mở `terminal64.exe` trong `C:\Program Files\XM MT5` — bản này riêng hoàn
+   toàn với `XM Global MT5` đang dùng, và đã có `config/accounts.dat`.
+2. Đăng nhập một trong hai tài khoản XM đã có.
+3. Tải lịch sử cho các mã sẽ chạy. **Phải cùng số bar/năm với slot 1**, nếu
+   không hai slot trả hai kết quả khác nhau vì dữ liệu khác nhau chứ không phải
+   vì cơ chế khác nhau.
+
+Rồi khai vào `config/slot_tester.json` — hai slot, hai `du_lieu` khác nhau, và
+`hau_to` khác nhau để tên file đầu ra tách hẳn (`KhoCoChe_s2.mq5`). Mẫu đầy đủ
+ở mục "Khai vào config" bên dưới, chỉ đổi `exe`/`du_lieu` của `s2` thành cặp
+`XM MT5` + `656C3515…`.
+
+`b slot` kiểm khai báo, `b slot kiem` nói còn thiếu gì. Hai phép thử bắt buộc ở
+mục dưới vẫn nguyên — chúng không phụ thuộc vào cách tạo slot.
+
+Phần copy + `/portable` bên dưới **vẫn đúng** và cần đến nếu muốn slot thứ BA,
+hoặc nếu bản `XM MT5` hoá ra hỏng.
+
 ## Các bước tay (cần chủ dự án — có bước đăng nhập)
 
 1. **Sao thư mục cài đặt**

@@ -242,6 +242,30 @@ def khoi_tao() -> None:
 
 
 # --------------------------------------------------------------- SO SU KIEN
+def nhip_ngay(in_ra=print) -> dict:
+    """Viec don dep chay MOI NGAY. Goi tu `b don-dia` va tu `dieu_phoi`.
+
+    Gom hai thu tung phai nho bang tay:
+      * `wal_checkpoint` - WAL tung phinh **1,4 GB** va lam ba me boc bao XONG
+        rc=0 trong khi kho khong doi mot dong. Dia day hien ra nhu ket qua rong.
+      * do trang trong - de biet khi nao nen `nen_gon`. Do 16/09: 59,5% so
+        trang la trang trong (0,95 GB tren 1,60 GB).
+
+    KHONG tu chay `VACUUM`: no viet lai ca DB va doi cho trong bang kich thuoc
+    DB tren cung o dia. Ham nay chi DO va BAO.
+    """
+    r = {"wal": diem_tra_wal(), "trang": do_trang_trong()}
+    t = r["trang"]
+    r["nen_duoc_gb"] = t["gb_trong"]
+    r["nen_ngay_di"] = t["ty_le_trong"] >= 0.30 and t["gb_trong"] >= 0.2
+    if in_ra:
+        in_ra("nhip ngay: WAL %.1f MB · DB %.2f GB (%.0f%% trong, thu hoi duoc "
+              "%.2f GB)%s" % (r["wal"]["wal_mb"], t["gb"], t["ty_le_trong"] * 100,
+                              t["gb_trong"],
+                              " -> NEN chay `so.nen_gon()`" if r["nen_ngay_di"] else ""))
+    return r
+
+
 def ghi_su_kien(tru: str, loai: str, noi_dung: dict) -> str:
     """Ghi mot dong vao so chi-them. Tra ve hash cua dong vua ghi."""
     with ket_noi() as cn:

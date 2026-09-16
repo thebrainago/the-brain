@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: 6bece1f tran CPU: khoa luong numpy - do moi la thu an het may
 ### 2026-09-14 21:24:02 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 1824, 0 phut)
@@ -404,3 +399,8 @@
 
 - dang chay: ban_giao_song.py (pid 2472, 0 phut), dieu_khien_xa.py (pid 15316, 507 phut)
 - git: 1be535f G5: bo _luu_tru khoi danh sach chan VPS + nen nao.db 1,59 -> 0,64 GB
+### 2026-09-16 17:58:09 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2576, 0 phut), dieu_khien_xa.py (pid 15316, 551 phut)
+- `boc_293.log`: XONG: {'so_file': 374, 'ra_co_che': 307, 'qua_kiem': 215, 'them_kho': 49}
+- git: 6778431 Me 374 file: 49 co che moi vao kho (truoc la 0) + sua hai lo hong lo ra

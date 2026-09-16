@@ -525,7 +525,14 @@ def c_don_dia(a):
     duoc gop khi mot checkpoint chay tron, tien trinh bi giet giua chung thi
     no o lai va lon len lang le.
     """
-    return chay([PY, "-m", "nhan.gop_wal", "--het", *(a or [])])
+    rc = chay([PY, "-m", "nhan.gop_wal", "--het", *(a or [])])
+    # Do them TRANG TRONG sau khi gop WAL. Gop WAL khong thu hoi trang trong -
+    # do 16/09: WAL da 0 MB ma DB van 1,59 GB, trong do 0,95 GB la trang trong
+    # tu xoa/ghi de lau ngay. Hai thu khac nhau, va lenh nay truoc gio chi bao
+    # mot nua.
+    from nhan import so as SO
+    SO.nhip_ngay()
+    return rc
 
 
 def c_im_lang(a):
