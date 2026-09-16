@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi.log`: 2026-09-14 20:57:00 EVO       ok          11.2s guard=job
-- `supervisor_stdio.log`: 2026-09-14 20:57:00 EVO       ok          11.2s guard=job
-- git: 64ec765 PMG: cong G0 phai khop ca KHUNG CHAY, khong chi (ma, phien, atr_tf)
-### 2026-09-14 21:05:44 — chup trang thai
 
 - dang chay: ban_giao_song.py (pid 17884, 0 phut), dieu_khien_xa.py (pid 16196, 133 phut), dieu_phoi.py (pid 11532, 133 phut), quantlab.py (pid 20476, 2 phut)
 - `dieu_phoi.log`: 2026-09-14 21:02:55 QUANTLAB  bat_dau   lane=compute
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 11196, 0 phut), dieu_khien_xa.py (pid 15316, 469 phut)
 - git: 9b58d7f Vong sua: doi khoa ngoai cung thanh `ban_sua` — `co_che` dang la ten CUA HAI THU
+### 2026-09-16 16:39:50 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 13348, 0 phut), dieu_khien_xa.py (pid 15316, 473 phut)
+- git: 4b9a6af G3-C(3): bat vong sua mac dinh + phong me 293 file
