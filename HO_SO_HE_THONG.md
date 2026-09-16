@@ -1,6 +1,6 @@
 # HO SO HE THONG — THE BRAIN
 
-*Sinh tu ma nguon + `nao.db` luc 2026-09-16 19:19 bang `b ho-so`.*
+*Sinh tu ma nguon + `nao.db` luc 2026-09-16 19:27 bang `b ho-so`.*
 
 > **Doc file nay the nao.** No TU DU: khong can mo repo. Moi con so o day
 > do duoc luc sinh, khong chep tu bao cao cu. Ba muc **KHONG** co trong
@@ -197,8 +197,8 @@ Moi thanh phan doc theo nam truong: **vai tro · nhiem vu · nang luc THUC TE ·
 |---|---|
 | **Vai tro** | Noi mot gia thuyet duoc phep doi doi. |
 | **Nhiem vu** | Mo phong -> pheu V0..V3 -> cong that -> cham diem tien. |
-| **Nang luc thuc te** | MDE do duoc: **30 bps/lenh** la edge nho nhat pheu con thay. Placebo hieu chuan hai chieu (null 0,005 vs nguong). 1.811 dong FDR. Engine mot cua (`mo_phong.py`) khop MT5 tester 100%. |
-| **Van de con ton** | **FDR chua tung loai ai (0/703)** — nut that that la MDE. `cong_ra_tien` MO COI. Cong chua ap cho hang trong kho: 169/540 co che khong qua noi. Do dac tung chiem suat FDR khi quen `ghi_so=False`. |
+| **Nang luc thuc te** | MDE do duoc: **30 bps/lenh** la edge nho nhat pheu con thay. Placebo hieu chuan hai chieu (null 0,005 vs nguong). 1.811 dong FDR **da ghi truoc khi tat cong FDR**. Engine mot cua (`mo_phong.py`) khop MT5 tester 100%. |
+| **Van de con ton** | **FDR DA TAT tu 04/09** theo quyet dinh chu du an (`config/nguong.json`: `bat_fdr = false`) - do truoc khi tat: 703 ket qua cham cong FDR, **0 cai truot CHI vi FDR**. So FDR van duoc GHI de con doi chieu ve sau, nhung no khong con la dieu kien PASS. Nut that that la MDE. `cong_ra_tien` MO COI. Cong chua ap cho hang trong kho: 169/540 co che khong qua noi. Do dac phai truyen `ghi_so=False` de khong ghi nham vao so ket qua. |
 | **Huong giai** | Dao thu tu: **cong ra tien la cong CUOI**, cong that ha xuong thanh NHAN (dung LUAT SO 0). Ap cong cho toan kho, khong chi hang moi. |
 
 *11 module:* `mo_phong` · `sang_loc` · `cong` · `cong_ra_tien` · `cham_diem` · `do_luong` · `do_luc` · `loc_co_che` · `danh_muc` · `nha_may_null` · `suy_giam`
@@ -266,11 +266,11 @@ Xep theo dot. **Dot sau chi co nghia neu dot truoc xong.**
 - **Hau qua:** He dung dau bang la EURGBP Sharpe 1,47 nhung **0,62%/nam voi 9 lenh/nam**. Do la mot phep do, khong phai mot he. Trai thang rang buoc 1 cua muc tieu.
 - **De xuat:** Noi `cong_ra_tien` vao `bang_he.bang()`. Xep theo **CAGR rong o cung sut giam**; Sharpe xuong cot phu.
 
-#### V2. Ban trung bom bang xep hang va tieu suat FDR
+#### V2. Ban trung bom bang xep hang
 
 - **Bang chung:** `mat_can_bang_lenh_dong_cua` xuat hien **4 lan** trong 9 he da qua cong, thanh 2 cap trung khit tung chu so. Dau bang 592 he holdout: `ns_nen_rau_tren` va `ns_nen_sao_bang` cho 6 con so y het, chiem 16/18 dong dau. Da do truoc do: 616/3.236 co che sinh tin hieu y het nhau.
-- **Hau qua:** **9 he that ra la 7.** Hai ban sao trong nhu hai xac nhan doc lap. Moi ban sao con tieu mot suat FDR, tuc vua BOM xep hang vua SIET cong.
-- **De xuat:** Khu trung bang **hash cua CHUOI TIN HIEU**, khong phai ten. Chay truoc moi thu tieu suat FDR. Chay lai bang sau khi khu.
+- **Hau qua:** **9 he that ra la 7.** Hai ban sao trong nhu hai xac nhan doc lap. Moi ban sao con ngon mot luot chay tester - lan tester la 1.
+- **De xuat:** Khu trung bang **hash cua CHUOI TIN HIEU**, khong phai ten. Chay truoc moi thu ghi vao so. Chay lai bang sau khi khu.
 
 ### Dot 2
 
@@ -410,7 +410,7 @@ Muc nay cho nguoi doc ngoai biet **phien Claude Code chay du an nay lam gi duoc*
 |---|---|
 | OS | Windows 10.0.19045 |
 | CPU | Intel64 Family 6 Model 79 Stepping 1, GenuineIntel — **10 nhan / 20 luong** |
-| RAM | 34.3 GB (trong 27.3 GB luc do) |
+| RAM | 34.3 GB (trong 27.8 GB luc do) |
 | Dia | C:\ 128GB (trong 26.9GB) · F:\ 128GB (trong 17.8GB) |
 | GPU | **khong dung** — khong thu vien nao trong he goi CUDA/GPU |
 
@@ -505,7 +505,7 @@ Loi `database is locked` **da tung gap** — day la ly do co `nhan/gop_wal.py` v
 
 ### 11.8 Git va test
 
-- Nhanh `master` · **367 commit** · 8 file dang ban · KHONG CO remote
+- Nhanh `master` · **368 commit** · 3 file dang ban · KHONG CO remote
 - `git worktree`: **dung duoc** (repo binh thuong, 1 worktree dang co). Day la duong cho nhieu phien Claude Code lam viec tach nhau — xem 11.10.
 - **Bo test:** 2026-09-16 · `pytest -q -n 8 --dist loadfile` · KHONG HOAN TAT. Chay ~10 phut, tien den 98% roi **gw5 node down: Not properly terminated**, khong in duoc dong tong ket nen KHONG CO so pass/fail. Thay 2 dau `F` trong tien trinh. Day dung la kieu hong da ghi truoc: `b test` chet giua chung tren may dang nghet -> dung `b test-me` (chia me, nhieu tien trinh pytest ngan). Tap con chay rieng thi SACH: `-k "ban_do or bang_he"` = 35 passed, 1 skipped, 68s.
 

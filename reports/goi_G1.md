@@ -64,3 +64,34 @@ Do khong phai loi cua cong — do la hinh dang that cua kho hien tai.
 he Sharpe cao ma khong ra tien khong duoc dung dau · thua mua-giu thi xuong duoi
 · bat ban trung · lech mot lenh thi KHONG phai ban trung · nguong lay tu
 `cong_ra_tien` · he it lenh bi tu choi.
+
+
+---
+
+## SUA 16/09 (toi) — toi da noi sai ve FDR
+
+Trong bao cao nay va o vai cho khac toi viet "ban trung tieu mot suat FDR" va
+"chay pheu se tieu suat FDR". **Sai.**
+
+`config/nguong.json` ghi ro:
+
+```json
+"bat_fdr": false,
+"_ghi_chu_bat_fdr": "TAT 04/09/2026 theo quyet dinh chu du an.
+                     Do truoc khi tat: 703 ket qua cham cong FDR,
+                     0 cai truot CHI vi FDR. Doi thanh true de bat lai."
+```
+
+Va `nhan/cong.py` dong 868: `_bat_fdr = bool(nguong().get("bat_fdr", False))`
+- khong bat thi `10_qua_fdr_online` **khong vao dieu kien PASS**.
+
+So FDR van duoc GHI (`lord_v2` van chay, 1.811 dong) de con doi chieu neu sau
+nay muon danh gia lai - nhung **no khong chan ai ca**. Quyet dinh cua chu du an
+da duoc thuc hien va van dang co hieu luc.
+
+Ly do THAT de mot ban trung dat gia van con nguyen, chi la khac: no **ngon mot
+luot chay tester**, ma lan tester la 1.
+
+Ly do THAT de dang ky gia thuyet truoc khi chay cung van con: do la
+**pre-registration** (`plan_hash`, dong bang ke hoach truoc khi cham holdout) -
+mot luat RIENG, khong lien quan gi den FDR.

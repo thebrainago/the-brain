@@ -77,15 +77,15 @@ VAN_DE: list[tuple[str, str, str, str, str, int]] = [
         1,
     ),
     (
-        "V2", "Ban trung bom bang xep hang va tieu suat FDR",
+        "V2", "Ban trung bom bang xep hang",
         "`mat_can_bang_lenh_dong_cua` xuat hien **4 lan** trong 9 he da qua cong, "
         "thanh 2 cap trung khit tung chu so. Dau bang 592 he holdout: "
         "`ns_nen_rau_tren` va `ns_nen_sao_bang` cho 6 con so y het, chiem 16/18 "
         "dong dau. Da do truoc do: 616/3.236 co che sinh tin hieu y het nhau.",
         "**9 he that ra la 7.** Hai ban sao trong nhu hai xac nhan doc lap. Moi ban "
-        "sao con tieu mot suat FDR, tuc vua BOM xep hang vua SIET cong.",
+        "sao con ngon mot luot chay tester - lan tester la 1.",
         "Khu trung bang **hash cua CHUOI TIN HIEU**, khong phai ten. Chay truoc moi "
-        "thu tieu suat FDR. Chay lai bang sau khi khu.",
+        "thu ghi vao so. Chay lai bang sau khi khu.",
         1,
     ),
     (
@@ -300,11 +300,15 @@ THANH_PHAN: dict[str, tuple[str, str, str, str, str]] = {
         "Noi mot gia thuyet duoc phep doi doi.",
         "Mo phong -> pheu V0..V3 -> cong that -> cham diem tien.",
         "MDE do duoc: **30 bps/lenh** la edge nho nhat pheu con thay. Placebo hieu "
-        "chuan hai chieu (null 0,005 vs nguong). 1.811 dong FDR. Engine mot cua "
+        "chuan hai chieu (null 0,005 vs nguong). 1.811 dong FDR **da ghi truoc khi "
+        "tat cong FDR**. Engine mot cua "
         "(`mo_phong.py`) khop MT5 tester 100%.",
-        "**FDR chua tung loai ai (0/703)** — nut that that la MDE. `cong_ra_tien` "
+        "**FDR DA TAT tu 04/09** theo quyet dinh chu du an (`config/nguong.json`: "
+        "`bat_fdr = false`) - do truoc khi tat: 703 ket qua cham cong FDR, **0 cai "
+        "truot CHI vi FDR**. So FDR van duoc GHI de con doi chieu ve sau, nhung no "
+        "khong con la dieu kien PASS. Nut that that la MDE. `cong_ra_tien` "
         "MO COI. Cong chua ap cho hang trong kho: 169/540 co che khong qua noi. "
-        "Do dac tung chiem suat FDR khi quen `ghi_so=False`.",
+        "Do dac phai truyen `ghi_so=False` de khong ghi nham vao so ket qua.",
         "Dao thu tu: **cong ra tien la cong CUOI**, cong that ha xuong thanh NHAN "
         "(dung LUAT SO 0). Ap cong cho toan kho, khong chi hang moi.",
     ),
