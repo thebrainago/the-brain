@@ -1,0 +1,6 @@
+2026-09-16 · `pytest -q -n 8 --dist loadfile` · KHONG HOAN TAT.
+Chay ~10 phut, tien den 98% roi **gw5 node down: Not properly terminated**,
+khong in duoc dong tong ket nen KHONG CO so pass/fail. Thay 2 dau `F` trong
+tien trinh. Day dung la kieu hong da ghi truoc: `b test` chet giua chung tren
+may dang nghet -> dung `b test-me` (chia me, nhieu tien trinh pytest ngan).
+Tap con chay rieng thi SACH: `-k "ban_do or bang_he"` = 35 passed, 1 skipped, 68s.
