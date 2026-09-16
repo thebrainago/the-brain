@@ -224,6 +224,31 @@ def von_toi_thieu(loi_ky_vong_nam: float,
 
 # ------------------------------------------------------------------ TONG HOP
 
+#: So chan TOI THIEU de mot danh muc duoc coi la mot danh muc.
+#:
+#: Do 16/09/2026 (goi G4): `danh_muc_hien_tai("PASS")` tra ve **n = 1** - mot
+#: chan duy nhat, `tuong_quan_duoi_lon_nhat = 0.0`, va `ghep_co_hon_cai_tot_nhat
+#: = false`. Mot "danh muc" mot chan khong phai danh muc: moi so cua no bang
+#: dung so cua chan do, con cot tuong quan thi luon dep vi khong co gi de tuong
+#: quan voi.
+#:
+#: Nguy hiem nam o cho bao cao van in ra mot bang trong nhu mot danh muc da duoc
+#: do. Nen tu day `ghep()` phai noi thang: CHUA DO DUOC.
+CHAN_TOI_THIEU = 2
+
+
+def du_chan_de_ghep(cac_tp: list) -> dict:
+    """Co du chan de goi day la mot danh muc chua? -> {dat, ly_do, n}"""
+    n = len(cac_tp or [])
+    if n >= CHAN_TOI_THIEU:
+        return {"dat": True, "ly_do": "", "n": n}
+    return {"dat": False, "n": n, "ly_do":
+            "moi co %d chan, can >= %d. Mot danh muc mot chan khong phai danh "
+            "muc - moi so bang dung so cua chan do, va tuong quan luon dep vi "
+            "khong co gi de tuong quan voi. Day la CHUA_DO_DUOC, khong phai "
+            "ket qua." % (n, CHAN_TOI_THIEU)}
+
+
 def ghep(cac_tp: list[ThanhPhan], *, moc_mua_giu: np.ndarray | None = None,
          index_moc: pd.DatetimeIndex | None = None) -> dict:
     """Ghep danh muc va do no. Luon kem moc mua-giu."""
@@ -272,6 +297,20 @@ def ghep(cac_tp: list[ThanhPhan], *, moc_mua_giu: np.ndarray | None = None,
         ra["mua_giu"] = None
         ra["hon_mua_giu"] = None
         ra["canh_bao"] = "chua co moc mua-giu - khong ket luan duoc gi ve %/nam"
+
+    # DAN NHAN TRANG THAI, khong chan tinh toan.
+    #
+    # Ban dau toi chan thang `ghep()` khi n < 2. Bo test bat ngay: hai bai co
+    # san goi `ghep()` voi MOT chan de kiem nhanh so voi mua-giu, va do la viec
+    # hop le. Cai nguy that khong phai viec TINH mot chan, ma la ket qua do doc
+    # y het mot danh muc DA DUOC DO - cot tuong quan dep chi vi khong co gi de
+    # tuong quan voi.
+    #
+    # Nen: van tinh du, nhung noi thang no la gi.
+    du = du_chan_de_ghep(cac_tp)
+    if not du["dat"]:
+        ra["trang_thai"] = "CHUA_DO_DUOC"
+        ra["ly_do_chua_do"] = du["ly_do"]
 
     cagr = cs.get("cagr_pct")
     if cagr:
