@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 75944b6 Ban giao muc 8: kien truc cho ENGINE TO HOP - gia mot o, phan tang, seeker doi vai
-### 2026-09-14 00:10:01 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12100, 0 phut)
 - git: f2a11db Ban giao muc 9-12: HEPHAESTUS, ghep khong duoc loc truoc, hai lan, nhip giam sat
 ### 2026-09-14 00:15:36 — chup trang thai
 
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 9188, 0 phut), dieu_khien_xa.py (pid 15316, 192 phut)
 - git: c4d8db1 luu anh ban giao song cuoi phien
+### 2026-09-16 13:19:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15956, 0 phut), dieu_khien_xa.py (pid 15316, 273 phut)
+- git: 908e2f2 G0: khoa phien ban thu vien + QUY TAC PHIEN cho nhieu phien song song

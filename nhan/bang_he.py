@@ -115,8 +115,86 @@ def thu_hoach(chi_pass: bool = True) -> list[dict]:
         s, sm = d.get("sharpe"), d.get("mua_giu_sharpe")
         d["hon_mua_giu_sharpe"] = (None if s is None or sm is None
                                    else round(s - sm, 3))
-    ra.sort(key=lambda d: (-(d["sharpe"] or -9), -(d["cagr_pct"] or -9)))
+    _danh_ban_trung(ra)
+    for d in ra:
+        d["cong_tien"] = _cong_tien(d)
+    ra.sort(key=_xep_theo_tien)
     return ra
+
+
+# ---------------------------------------------------------------- G1 (16/09)
+#: Nguong lay THANG tu `nhan/cong_ra_tien.py` - khong go lai o day. Do la
+#: cach dua CONG THU HAI len duong chay: truoc 16/09 module do MO COI, va he
+#: qua la bang nay xep theo Sharpe nen he 0,62%/nam dung dau.
+def _nguong():
+    from nhan import cong_ra_tien as CRT
+    return CRT.MUC_CAGR, CRT.TRAN_DD, CRT.MIN_LENH, CRT.MIN_NAM
+
+
+def _cong_tien(d: dict) -> dict:
+    """Cham mot he bang CAU HOI TIEN, tren chinh so da do. Khong chay lai.
+
+    Day la ban RE cua cong: no dung lai o bon nguong dem duoc. Ban DAY DU
+    (`cong_ra_tien.xet`) con do don bay thap nhat dat muc CAGR trong tran sut
+    giam, va viec do phai chay lai mo phong - xem `b he --do-lai`.
+    """
+    muc, tran, min_lenh, min_nam = _nguong()
+    c, dd = d.get("cagr_pct"), d.get("max_dd_pct")
+    n, nam = d.get("so_lenh"), d.get("so_nam")
+    hon = d.get("hon_mua_giu_cagr")
+    ly_do = []
+    if c is None or c / 100.0 < muc:
+        ly_do.append("lai %s < muc %.0f%%/nam" % (_n(c), muc * 100))
+    if dd is not None and abs(dd) / 100.0 > tran:
+        ly_do.append("sut giam %s vuot tran %.0f%%" % (_n(dd), tran * 100))
+    if n is not None and n < min_lenh:
+        ly_do.append("%d lenh < %d" % (n, min_lenh))
+    if nam is not None and nam < min_nam:
+        ly_do.append("%s nam < %.0f" % (_n(nam), min_nam))
+    if hon is not None and hon <= 0:
+        ly_do.append("KHONG hon mua-giu (%s diem)" % _n(hon))
+    return {"dat": not ly_do, "ly_do": ly_do}
+
+
+def _van_tay(d: dict) -> tuple:
+    """Dau van tay RE: bo so da do, lam tron.
+
+    Ban DUNG la hash cua CHUOI VI THE (hai co che khac ten ma vao/ra cung bar
+    thi trung) - nhung chuoi do khong nam trong `ket_qua`, phai chay lai moi
+    co. Ban nay bat duoc dung cai da thay 16/09: `mat_can_bang_lenh_dong_cua.`
+    va `...mac_dinh` trung khit SAU con so tren cung mot ma. Xac suat hai co
+    che KHAC nhau trung ca sau la khong dang ke.
+    """
+    r = lambda x, k=3: None if x is None else round(float(x), k)
+    return (str(d.get("he", "")).split(".")[0],      # cung ma
+            r(d.get("cagr_pct")), r(d.get("sharpe")), r(d.get("max_dd_pct")),
+            r(d.get("calmar")), d.get("so_lenh"))
+
+
+def _danh_ban_trung(ds: list[dict]) -> None:
+    """Danh dau ban trung. KHONG xoa - ban trung la BI DANH cua ban goc."""
+    dau: dict[tuple, str] = {}
+    for d in sorted(ds, key=lambda x: len(str(x.get("he", "")))):
+        vt = _van_tay(d)
+        goc = dau.get(vt)
+        if goc is None:
+            dau[vt] = d["he"]
+            d["ban_trung_cua"] = None
+        else:
+            d["ban_trung_cua"] = goc
+
+
+def _xep_theo_tien(d: dict):
+    """Xep hang theo CAU HOI TIEN, khong theo Sharpe.
+
+    Thu tu: (1) ban trung xuong duoi - no khong phai mot he · (2) hon mua-giu
+    bao nhieu DIEM CAGR · (3) Calmar = lai tren moi don vi sut giam. Sharpe bi
+    bo khoi khoa xep hang han: no da tung cho he 0,62%/nam dung dau bang.
+    """
+    return (1 if d.get("ban_trung_cua") else 0,
+            -(d.get("hon_mua_giu_cagr") if d.get("hon_mua_giu_cagr") is not None
+              else -9),
+            -(d.get("calmar") or -9))
 
 
 def tu_pheu(tep: Path | None = None) -> list[dict]:
@@ -181,35 +259,64 @@ def _khoi_pheu(in_ra, ds: list[dict]) -> None:
 def bang(in_ra=print, chi_pass: bool = True) -> dict:
     ds = thu_hoach(chi_pass)
     sach = [d for d in ds if d["sach"]]
-    hon = [d for d in sach if (d.get("hon_mua_giu_sharpe") or -9) > 0]
-    in_ra("=" * 96)
-    in_ra("HE DA QUA CONG: %d he  ·  %d sach (khong cong nao truot)  ·  "
-          "%d hon MUA-GIU ve Sharpe" % (len(ds), len(sach), len(hon)))
-    in_ra("=" * 96)
-    in_ra("%-40s %7s %7s %7s %8s %7s %6s %7s"
-          % ("he", "CAGR%", "Sharpe", "Calmar", "DD%", "d.Shrp", "lenh",
-             "l/tuan"))
+    trung = [d for d in ds if d.get("ban_trung_cua")]
+    rieng = [d for d in ds if not d.get("ban_trung_cua")]
+    tien = [d for d in rieng if d["cong_tien"]["dat"]]
+    hon = [d for d in rieng if (d.get("hon_mua_giu_cagr") or -9) > 0]
+    muc, tran, min_lenh, min_nam = _nguong()
+    in_ra("=" * 100)
+    in_ra("HE DA QUA CONG: %d dong = **%d he rieng** + %d ban trung  ·  "
+          "%d sach  ·  %d hon mua-giu ve TIEN  ·  **%d qua CONG RA TIEN**"
+          % (len(ds), len(rieng), len(trung), len(sach), len(hon), len(tien)))
+    in_ra("=" * 100)
+    in_ra("%-40s %7s %8s %7s %8s %7s %6s %7s  %s"
+          % ("he", "CAGR%", "mua-giu", "hon%", "DD%", "Calmar", "lenh",
+             "l/tuan", "cong tien"))
     for d in ds:
-        dau = "  " if d["sach"] else "! "
-        in_ra("%s%-38s %7s %7s %7s %8s %7s %6s %7s"
+        if d.get("ban_trung_cua"):
+            dau = "= "
+        elif not d["sach"]:
+            dau = "! "
+        else:
+            dau = "  "
+        in_ra("%s%-38s %7s %8s %7s %8s %7s %6s %7s  %s"
               % (dau, d["he"][:38],
-                 _n(d["cagr_pct"]), _n(d["sharpe"]), _n(d["calmar"]),
-                 _n(d["max_dd_pct"]), _n(d["hon_mua_giu_sharpe"]),
+                 _n(d["cagr_pct"]), _n(d.get("mua_giu_cagr")),
+                 _n(d.get("hon_mua_giu_cagr")), _n(d["max_dd_pct"]),
+                 _n(d["calmar"]),
                  d["so_lenh"] if d["so_lenh"] is not None else "?",
-                 _n(d.get("lenh_moi_tuan"))))
+                 _n(d.get("lenh_moi_tuan")),
+                 "DAT" if d["cong_tien"]["dat"] else "-"))
+        if d.get("ban_trung_cua"):
+            in_ra("      = BAN TRUNG cua `%s` (sau con so trung khit)"
+                  % d["ban_trung_cua"])
+            continue
         if not d["sach"]:
             in_ra("      ! cong TRUOT: %s" % ", ".join(d["cong_truot"]))
+        if not d["cong_tien"]["dat"]:
+            in_ra("      - cong tien: %s" % " · ".join(d["cong_tien"]["ly_do"]))
     in_ra("")
-    in_ra("dau `!` = duoc cap nhan PASS nhung co cong TRUOT - dung doc chung "
-          "voi cac dong con lai")
-    in_ra("cot `d.Shrp` = Sharpe cua he TRU Sharpe mua-giu cung ma. Am nghia "
-          "la mua-giu tot hon.")
+    in_ra("XEP THEO TIEN, khong theo Sharpe (sua 16/09). Khoa xep hang:")
+    in_ra("  (1) ban trung xuong duoi  (2) hon mua-giu bao nhieu DIEM CAGR")
+    in_ra("  (3) Calmar = lai tren moi don vi sut giam")
+    in_ra("dau `=` ban trung · `!` co cong that TRUOT")
+    in_ra("cot `hon%` = CAGR he TRU CAGR mua-giu CUNG MA. Duong ma moc AM thi "
+          "van chi la thang mot moc am.")
+    in_ra("cot `cong tien` = 4 nguong cua `nhan/cong_ra_tien.py`: lai >= %.0f%%"
+          "/nam · sut giam <= %.0f%% · >= %d lenh · >= %.0f nam · hon mua-giu."
+          % (muc * 100, tran * 100, min_lenh, min_nam))
+    if not tien:
+        in_ra("")
+        in_ra(">> KHONG HE NAO QUA CONG RA TIEN. Bang tren la bang cac PHEP DO, "
+              "chua phai bang cac he kiem duoc tien.")
     ph = tu_pheu()
     _khoi_pheu(in_ra, ph)
     in_ra("")
     in_ra("TONG: %d he qua CONG THAT (%d sach) + %d he qua HOLDOUT CUA PHEU"
           % (len(ds), len(sach), len(ph)))
-    ra = {"so_he": len(ds), "so_sach": len(sach), "so_hon_mua_giu": len(hon),
+    ra = {"so_he": len(ds), "so_he_rieng": len(rieng), "so_ban_trung": len(trung),
+          "so_sach": len(sach), "so_hon_mua_giu": len(hon),
+          "so_qua_cong_tien": len(tien),
           "he": ds, "so_qua_pheu": len(ph), "qua_pheu": ph}
     (GOC / "reports" / "BANG_HE.json").write_text(
         json.dumps(ra, ensure_ascii=False, indent=1), encoding="utf-8")
