@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: cb35788 don script tam cua phien PMG
-### 2026-09-14 20:15:47 — chup trang thai
-
-- dang chay: b.py (pid 12268, 43 phut), ban_giao_song.py (pid 6856, 0 phut), chay_test_tung_me.py (pid 12144, 43 phut), dieu_khien_xa.py (pid 16196, 83 phut), dieu_phoi.py (pid 11532, 83 phut), quantlab.py (pid 6344, 5 phut), seeker.py (pid 13848, 1 phut)
 - `dieu_phoi.log`: 2026-09-14 20:14:35 SEEKER    bat_dau   lane=external
 - `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - `supervisor_stdio.log`: 2026-09-14 20:14:35 SEEKER    bat_dau   lane=external
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 15148, 0 phut), dieu_khien_xa.py (pid 15316, 420 phut)
 - git: f68ca4b G2-C: ghi config nguyen tu + sua cuoc dua trong ngan_sach.xin()
+### 2026-09-16 16:12:40 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 6692, 0 phut), dieu_khien_xa.py (pid 15316, 446 phut)
+- git: c420e1b G3-D: don goc lab/ — no that 84 -> 65, khong xoa file nao
