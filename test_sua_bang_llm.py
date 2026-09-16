@@ -83,3 +83,30 @@ def test_loi_nhac_sua_co_ca_khai_bao_lan_loi():
     s = B._nhac_sua("EA.mq5", HONG, ["vao[0]: hai ve GIONG HET nhau"])
     assert "EA.mq5" in s and "GIONG HET" in s and "xu_huong" in s
     assert "Khong duoc doi co che" in s, "phai co rang buoc giu nguyen y nghia"
+
+
+def test_loi_nhac_sua_khong_dung_chung_ten_khoa(monkeypatch):
+    """Do 16/09: vong sua them SO 0 vi `co_che` la ten cua CA HAI thu."""
+    s = B._nhac_sua("EA.mq5", HONG, ["loi"])
+    assert "ban_sua" in s, "khoa ngoai cung phai khac ten truong ben trong"
+    i = s.rindex("Tra ve DUNG mot JSON")
+    assert "{\"ban_sua\"" in s[i:] or '"ban_sua"' in s[i:]
+
+
+def test_doc_duoc_ca_ban_sua_lan_co_che(monkeypatch):
+    """Nhan khoa moi, van chiu duoc mo hinh tra theo thoi quen cu."""
+    import types
+    for khoa in ("ban_sua", "co_che"):
+        gia = types.SimpleNamespace(
+            hoi_json=lambda *a, **k: {"json": {khoa: [dict(DAT)]}})
+        monkeypatch.setitem(sys.modules, "nhan.tri_tue", gia)
+        c, ly = B.sua_bang_llm("EA", dict(HONG), ["loi"])
+        assert c is not None and c["ho"] == "xu_huong", (khoa, ly)
+
+
+def test_mot_dict_don_cung_doc_duoc(monkeypatch):
+    import types
+    gia = types.SimpleNamespace(hoi_json=lambda *a, **k: {"json": {"ban_sua": dict(DAT)}})
+    monkeypatch.setitem(sys.modules, "nhan.tri_tue", gia)
+    c, _ = B.sua_bang_llm("EA", dict(HONG), ["loi"])
+    assert c is not None and c["ho"] == "xu_huong"

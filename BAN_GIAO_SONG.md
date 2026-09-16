@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi.log`: 2026-09-14 20:26:39 QUANTLAB  bat_dau   lane=compute
-- `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
-- `supervisor_stdio.log`: 2026-09-14 20:26:39 QUANTLAB  bat_dau   lane=compute
-- `watchdog.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - git: 64ec765 PMG: cong G0 phai khop ca KHUNG CHAY, khong chi (ma, phien, atr_tf)
 ### 2026-09-14 20:57:10 — chup trang thai
 
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 9872, 0 phut), dieu_khien_xa.py (pid 15316, 459 phut)
 - git: 933b0e4 G3-C: sua HINH THUC truoc cong boc — 4/19 -> 6/19, va do lai gia dinh
+### 2026-09-16 16:31:02 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9332, 0 phut), dieu_khien_xa.py (pid 15316, 464 phut)
+- git: 2c0ca26 G3-C(2): nap loi cong NGUOC cho LLM de sua khai bao bi tu choi

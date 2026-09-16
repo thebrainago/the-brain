@@ -191,10 +191,15 @@ QUY TAC SUA:
 - Dieu kien nao bi bao la suy bien ("hai ve giong het", "luon dung") thi **BO han
   ve do**, dung vien mot ve khac thay cho no.
 - Ve nao ban khong doc duoc tu ma nguon thi BO, dung bia.
-- `co_che` phai la MOT CAU noi VI SAO co nguoi tra tien cho phoi nhiem nay. Neu
-  ban khong biet ly do kinh te that thi ghi dung chuoi "CHUA_BIET_LY_DO".
+- Truong `co_che` BEN TRONG moi muc phai la MOT CAU noi VI SAO co nguoi tra tien
+  cho phoi nhiem nay. Neu ban khong biet ly do kinh te that thi ghi dung chuoi
+  "CHUA_BIET_LY_DO". **Day la mot CAU nam trong muc, khong phai ca cau tra loi.**
 
-Tra ve DUNG mot JSON: {{"co_che": [ ... ]}}"""
+Tra ve DUNG mot JSON co dang nay, khoa ngoai cung ten la `ban_sua`:
+
+{{"ban_sua": [{{"ten": "...", "ho": "...", "chieu": 1, "giu": 1,
+"co_che": "mot cau ly do kinh te", "vao": [{{"trai": {{...}}, "phep": "<",
+"phai": {{...}}}}]}}]}}"""
 
 
 def sua_bang_llm(ten: str, khai_bao: dict, loi: list[str],
@@ -227,7 +232,20 @@ def sua_bang_llm(ten: str, khai_bao: dict, loi: list[str],
     if isinstance(r, dict) and r.get("loi"):
         return None, "CHUA DO - %s" % str(r["loi"])[:80]
     j = (r or {}).get("json") or r or {}
-    cc = j.get("co_che") or []
+    # DOC `ban_sua` TRUOC, roi moi lui ve `co_che`.
+    #
+    # Do 16/09: vong sua dau tien them dung SO 0 (6/19 -> 6/19), va log chi ra
+    # nguyen nhan la **dung ten khoa cho hai thu**. `co_che` vua la ten DANH
+    # SACH co che, vua la ten truong LY DO KINH TE ben trong moi co che. Loi
+    # nhac sua nhac manh luat cua truong ben trong, nen mo hinh tra
+    # `{"co_che": ["Nha dau tu chap nhan rui ro..."]}` - dung mot danh sach
+    # CHUOI ly do, mat sach cau truc.
+    #
+    # Doi khoa ngoai cung thanh `ban_sua` de hai thu khong con trung ten. Van
+    # nhan `co_che` de khong vo neu mo hinh tra theo thoi quen cu.
+    cc = j.get("ban_sua") or j.get("co_che") or []
+    if isinstance(cc, dict):
+        cc = [cc]
     if not cc:
         return None, "mo hinh tra rong (khong sua duoc ma khong doi y nghia)"
     # `co_che` co the la danh sach CHUOI - mo hinh mo ta bang loi thay vi dien
