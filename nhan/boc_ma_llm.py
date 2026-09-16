@@ -172,6 +172,74 @@ def _mot(d: dict, tom_tat: str) -> dict:
             "vi_sao": "" if cc else "LLM tra ve rong"}
 
 
+def _nhac_sua(ten: str, khai_bao: dict, loi: list[str]) -> str:
+    """Loi nhac SUA: dua lai chinh khai bao + danh sach loi cua bo kiem."""
+    return f"""Khai bao JSON duoi day duoc rut tu EA `{ten}`, nhung bo kiem cu
+phap cua he **tu choi** no. Sua lai cho dat, giu nguyen Y NGHIA co che.
+
+KHAI BAO BI TU CHOI:
+```json
+{json.dumps(khai_bao, ensure_ascii=False, indent=1)[:4000]}
+```
+
+BO KIEM BAO:
+{chr(10).join("- " + str(x)[:160] for x in loi[:12])}
+
+QUY TAC SUA:
+- **Khong duoc doi co che.** `cheo_len` van la `cheo_len`, chu ky van la chu ky do.
+  Neu de dat ma phai doi y nghia thi DUNG sua - tra ve {{"co_che": []}}.
+- Dieu kien nao bi bao la suy bien ("hai ve giong het", "luon dung") thi **BO han
+  ve do**, dung vien mot ve khac thay cho no.
+- Ve nao ban khong doc duoc tu ma nguon thi BO, dung bia.
+- `co_che` phai la MOT CAU noi VI SAO co nguoi tra tien cho phoi nhiem nay. Neu
+  ban khong biet ly do kinh te that thi ghi dung chuoi "CHUA_BIET_LY_DO".
+
+Tra ve DUNG mot JSON: {{"co_che": [ ... ]}}"""
+
+
+def sua_bang_llm(ten: str, khai_bao: dict, loi: list[str],
+                 model: str = "") -> tuple[dict | None, str]:
+    """Mot luot LLM de SUA khai bao bi cong tu choi. -> (ban sua | None, ly do)
+
+    ## Vi sao dang gia
+
+    Do 16/09 tren me 12 file: `mot_file` chi thu lai khi ket qua **RONG**. Khai
+    bao bi cong tu choi thi bi bo im lang, va mo hinh **khong bao gio biet no
+    sai cho nao**. Ca me ra `them vao kho: 0` trong khi 26/30 loi la hinh thuc.
+
+    Tien le nam ngay trong file nay: me 05/09 cung `them vao kho 0` cho 80/80
+    khai bao, va sua duoc bang cach **xin them mot truong trong loi nhac**. Day
+    la cung mot bai hoc, dung o khau sau.
+
+    ## Rang buoc
+
+    Ban sua **van phai qua `kiem_khai_bao`** nhu moi khai bao khac - ham nay
+    khong duoc phep dua thang vao kho. Va no chi duoc goi MOT lan cho moi khai
+    bao: mot vong sua khong gioi han la mot cach dat tien de mo hinh lan dan
+    quanh mot co che no khong doc noi.
+    """
+    from nhan import tri_tue as TT
+    try:
+        r = TT.hoi_json(_nhac_sua(ten, khai_bao, loi),
+                        bo_qua_han_muc=True, dung_cache=False, model=model)
+    except Exception as e:
+        return None, "%s: %s" % (type(e).__name__, str(e)[:60])
+    if isinstance(r, dict) and r.get("loi"):
+        return None, "CHUA DO - %s" % str(r["loi"])[:80]
+    j = (r or {}).get("json") or r or {}
+    cc = j.get("co_che") or []
+    if not cc:
+        return None, "mo hinh tra rong (khong sua duoc ma khong doi y nghia)"
+    # `co_che` co the la danh sach CHUOI - mo hinh mo ta bang loi thay vi dien
+    # schema. `kiem_va_giu` da chan hinh dang do o dau vao chinh, nhung duong
+    # SUA di vong qua cho do nen phai chan lai o day (sap that 16/09:
+    # `AttributeError: 'str' object has no attribute 'get'`).
+    ds = [x for x in cc if isinstance(x, dict)]
+    if not ds:
+        return None, "ban sua khong phai dict: %s" % str(cc[0])[:50]
+    return ds[0], ""
+
+
 def mot_file(d: dict, tom_tat: str, so_lan: int = 2) -> dict:
     """Boc MOT file, thu lai toi da `so_lan` neu tra rong.
 
@@ -326,7 +394,8 @@ def sua_may_moc(c: dict) -> tuple[dict, list[str]]:
     return c, da
 
 
-def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]:
+def kiem_va_giu(cc: list[dict], nguon: str = "", sua_llm: bool = False,
+                in_ra=None) -> tuple[list[dict], list[str]]:
     """Moi khai bao phai qua `ngu_phap.kiem_khai_bao`. Khong qua thi BO."""
     from nhan import ngu_phap as NP
     giu, ho = [], []
@@ -369,7 +438,29 @@ def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]
             ho.append("%s: %s" % (c.get("ten", "?"), str(e)[:50]))
             continue
         if isinstance(bao, dict) and bao.get("dat") is False:
-            ho.append("%s: %s" % (c.get("ten", "?"), str(bao.get("ly_do"))[:50]))
+            bao = [str(bao.get("ly_do"))]
+        if bao:
+            # MOT luot sua bang LLM, va ban sua VAN phai qua chinh bo kiem nay.
+            if sua_llm:
+                moi, vi_sao = sua_bang_llm(c.get("ten", nguon), c, list(bao))
+                if moi is not None:
+                    moi, _ = sua_may_moc(moi)
+                    moi.setdefault("nguon", nguon)
+                    moi.setdefault("giu", 1)
+                    moi["da_sua_bang_llm"] = True
+                    try:
+                        con = NP.kiem_khai_bao(moi)
+                    except Exception as e:
+                        con = [str(e)[:60]]
+                    if not con:
+                        giu.append(moi)
+                        if in_ra:
+                            in_ra("    + SUA DUOC: %s" % str(c.get("ten"))[:44])
+                        continue
+                    bao = con
+                elif in_ra:
+                    in_ra("    - khong sua duoc: %s" % vi_sao[:50])
+            ho.append("%s: %s" % (c.get("ten", "?"), str(bao[0])[:50]))
             continue
         giu.append(c)
     return giu, ho

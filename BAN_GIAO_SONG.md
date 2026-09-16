@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 2a5c40f PMG: ket qua quet that + ba lo hong lo ra khi doc ket qua
-### 2026-09-14 20:39:54 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 10228, 0 phut), dieu_khien_xa.py (pid 16196, 107 phut), dieu_phoi.py (pid 11532, 107 phut), quantlab.py (pid 18840, 13 phut)
 - `dieu_phoi.log`: 2026-09-14 20:26:39 QUANTLAB  bat_dau   lane=compute
 - `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - `supervisor_stdio.log`: 2026-09-14 20:26:39 QUANTLAB  bat_dau   lane=compute
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 9308, 0 phut), dieu_khien_xa.py (pid 15316, 452 phut)
 - git: 8d325aa THE THORN: danh dau NGHI HUU trong chinh tai lieu cua no
+### 2026-09-16 16:26:04 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9872, 0 phut), dieu_khien_xa.py (pid 15316, 459 phut)
+- git: 933b0e4 G3-C: sua HINH THUC truoc cong boc — 4/19 -> 6/19, va do lai gia dinh
