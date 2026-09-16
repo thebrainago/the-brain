@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""Test cong FDR ban 2."""
+
 import tempfile
 import unittest
 from pathlib import Path

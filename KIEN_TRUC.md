@@ -1,6 +1,6 @@
 # KIEN TRUC HE THONG — sinh tu ma nguon
 
-*2026-09-16 10:29 · 524 file `.py` · 195 tren duong chay · 9 lop nhan · sinh boi `python -m nhan.kien_truc --ghi` (hoac `b kien-truc`)*
+*2026-09-16 16:10 · 532 file `.py` · 198 tren duong chay · 9 lop nhan · sinh boi `python -m nhan.kien_truc --ghi` (hoac `b kien-truc`)*
 
 **Dung sua tay.** Vai tro o day doc tu docstring dong dau cua chinh
 module; sua mo ta thi sua trong file `.py`, roi chay lai lenh tren.
@@ -68,7 +68,7 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 
 > `du_lieu` · `ket_qua_hoat_dong` · `mau` · `ngu_phap` · `so` · `tri_tue`
 
-## 3. Lop nhan — 129 module thu vien
+## 3. Lop nhan — 132 module thu vien
 
 ### SO & HOP DONG — 10 module
 
@@ -76,14 +76,14 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 
 - **`anh_chup`** (203 dong, 3 noi goi) — GHIM BAN DU LIEU de mot ket qua tai lap duoc.
 - **`bai_hoc`** (199 dong, 7 noi goi) — SO BAI HOC: he tu tra loi duoc "cai nay da thu chua".
-- **`bang_he`** (224 dong, 2 noi goi) — BANG CAC HE DA QUA CONG. Mat xich cuoi cung, va no dang thieu.
+- **`bang_he`** (331 dong, 4 noi goi) — BANG CAC HE DA QUA CONG. Mat xich cuoi cung, va no dang thieu.
 - **`bi_mat`** (115 dong, 7 noi goi) — MOT CUA doc khoa. Khong module nao tu mo file khoa.
-- **`duong_dan`** (159 dong, 5 noi goi) — MOT CHO duy nhat giai cac duong dan phu thuoc MAY.
+- **`duong_dan`** (159 dong, 7 noi goi) — MOT CHO duy nhat giai cac duong dan phu thuoc MAY.
 - **`hop_dong`** (618 dong, 9 noi goi) — Versioned hand-off contract from SEEKER to downstream consumers.
 - **`ket_qua_hoat_dong`** (79 dong, 4 noi goi) — Quy tac doc ket qua dang hoat dong cua THE BRAIN.
 - **`pham_vi`** (305 dong, 12 noi goi) — Pham vi ap dung cua tung ho co che - va phep thu phan chung di kem.
 - **`quant_plan`** (368 dong, 3 noi goi) — Immutable preregistration contract for the two Quantlab research lanes.
-- **`so`** (757 dong, 113 noi goi) — SO CAI CUA THE BRAIN. Mot nguon su that duy nhat cho ca 4 tru.
+- **`so`** (855 dong, 114 noi goi) — SO CAI CUA THE BRAIN. Mot nguon su that duy nhat cho ca 4 tru.
 
 ### THU THAP — Seeker di lay ve — 19 module
 
@@ -100,7 +100,7 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 - **`nen_tang`** (278 dong, 1 noi goi) — MA NGUON CHIEN LUOC TU CAC NEN TANG GIAO DICH KHAC.
 - **`nguon_bai_viet`** (634 dong, 4 noi goi) — NGUON VAN XUOI: bai viet chien luoc, lay qua RSS/Atom.
 - **`nguon_tinix`** (209 dong, 2 noi goi) — repo.tinix.ai -> ung vien cong cu cho FINDER.
-- **`san_cong_cu`** (1598 dong, 9 noi goi) — DI SAN CONG CU CO SAN, thay vi tu viet lai tu dau.
+- **`san_cong_cu`** (1598 dong, 10 noi goi) — DI SAN CONG CU CO SAN, thay vi tu viet lai tu dau.
 - **`telegram`** (669 dong, 3 noi goi) — TELEGRAM -> tai_lieu / noi_dung.
 - **`theo_doi`** (261 dong, 2 noi goi) — THEO KENH DA CHON, doc lai theo LICH do duoc.
 - **`tien_ich_xet`** (153 dong, 2 noi goi) — 58 FILE "TIEN ICH" DANG BI BO: CAI NAO DANG LAY VE?
@@ -125,7 +125,7 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 - **`doc_video_cuc_bo`** (199 dong, 3 noi goi ⚠MO COI) — VIDEO TREN DIA -> VAN BAN. Khau con thieu cua Seeker.
 - **`go_html`** (219 dong, 5 noi goi) — KHAU CON THIEU giua THU THAP va BOC: go trang HTML ra van ban.
 - **`ma_nguon`** (684 dong, 8 noi goi) — MA NGUON EA / CHI BAO -> CodeArtifact.
-- **`mau`** (540 dong, 41 noi goi) — THU VIEN MAU CHIEN LUOC (template + tham so).
+- **`mau`** (540 dong, 42 noi goi) — THU VIEN MAU CHIEN LUOC (template + tham so).
 - **`mimic_cau_noi`** (186 dong, 3 noi goi) — NOI `ds/mimic` VAO DUONG CHAY CHINH.
 - **`ngu_phap`** (2328 dong, 127 noi goi) — NGU PHAP CO CHE. Cach duy nhat kien thuc moi di vao day chuyen.
 - **`phan_loai_ma`** (298 dong, 7 noi goi) — CHIA KHO MA NGUON THANH BON LAN, TRUOC KHI BOC.
@@ -179,7 +179,7 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 
 - **`bien_don_bay`** (192 dong, 22 noi goi) — BIEN DON BAY. Don bay bao nhieu, va no tra ve duoc gi.
 - **`chuoi_quan_tri`** (248 dong, 4 noi goi) — NOI BA MANH QUAN TRI VI THE THANH MOT DUONG CHAY.
-- **`dap_quan_tri`** (310 dong, 10 noi goi) — DAP MOT BO LUAT QUAN TRI LEN MOT TIN HIEU VAO BAT KY.
+- **`dap_quan_tri`** (385 dong, 11 noi goi) — DAP MOT BO LUAT QUAN TRI LEN MOT TIN HIEU VAO BAT KY.
 - **`de_quan_tri`** (204 dong, 4 noi goi) — CHEN bo quan tri cua ta vao MOT EA NGOAI, roi do bat/tat.
 - **`luoi`** (351 dong, 2 noi goi ⚠MO COI) — MO PHONG LUOI/DCA CO TRACH NHIEM, dung duoc lai cho moi cap.
 - **`pmg`** (345 dong, 5 noi goi) — POSITION MANAGEMENT GRID ENGINE. Ho quan li lenh KHONG CO TIN HIEU VAO.
@@ -196,13 +196,13 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 
 - **`cham_diem`** (165 dong, 2 noi goi) — BANG DIEM THUC TE. Ra tien bao nhieu, rui ro the nao.
 - **`cong`** (979 dong, 25 noi goi) — CONG PASS. Noi duy nhat mot gia thuyet duoc phep doi doi.
-- **`cong_ra_tien`** (245 dong, 3 noi goi ⚠MO COI) — CONG THU HAI. Hoi "co ra tien khong", khong hoi "co that khong".
+- **`cong_ra_tien`** (245 dong, 5 noi goi) — CONG THU HAI. Hoi "co ra tien khong", khong hoi "co that khong".
 - **`danh_muc`** (304 dong, 2 noi goi) — TANG 3 - tinh von va ket hop cac gia thuyet da qua cong.
 - **`do_luc`** (559 dong, 16 noi goi) — Do LUC cua cong: edge nho nhat ma he con nhin thay duoc.
 - **`do_luong`** (145 dong, 13 noi goi) — CHI SO + ALPHA SO VOI MUA-GIU.
 - **`loc_co_che`** (389 dong, 12 noi goi) — BO LOC TINH, CHAY TRUOC PHEU V0-V3.
-- **`mo_phong`** (325 dong, 44 noi goi) — ENGINE BACKTEST. Mot cua duy nhat de bien tin hieu thanh tien.
-- **`nha_may_null`** (334 dong, 6 noi goi) — _(chua tu khai vai tro)_
+- **`mo_phong`** (325 dong, 45 noi goi) — ENGINE BACKTEST. Mot cua duy nhat de bien tin hieu thanh tien.
+- **`nha_may_null`** (336 dong, 6 noi goi) — NHA MAY NULL - sinh chuoi gia de hieu chuan cong.
 - **`sang_loc`** (643 dong, 10 noi goi) — PHEU BON VONG: V0 van tay -> V1 re -> V2 kinh te -> V3 phan chung.
 - **`suy_giam`** (116 dong, 2 noi goi) — HE DANG CHAY CO CON GIONG CAI DA KIEM DINH KHONG.
 
@@ -217,7 +217,7 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 - **`dich_mq5_qtvt`** (625 dong, 6 noi goi) — DICH KHAI BAO QUAN TRI VI THE SANG MQL5. Hai duong ra.
 - **`dich_mq5_quan_tri`** (482 dong, 2 noi goi) — EA GHEP CO QUAN TRI VI THE.
 - **`doc_lenh_tester`** (240 dong, 2 noi goi) — Doc DANH SACH LENH tu bao cao MT5 Strategy Tester.
-- **`khoa_tester`** (181 dong, 20 noi goi) — MOT CUA CO KHOA cho `terminal64.exe`.
+- **`khoa_tester`** (211 dong, 22 noi goi) — MOT CUA CO KHOA cho `terminal64.exe`.
 - **`passview`** (311 dong, 2 noi goi) — TAI KHOAN XEM (investor password) -> LICH SU LENH THAT.
 - **`san_sang_vps`** (277 dong, 2 noi goi) — HE DA CHUYEN LEN VPS DUOC CHUA.
 - **`so_lenh`** (218 dong, 3 noi goi) — SO LENH PAPER: cho mot he DA QUA CONG di tiep, khong dung o nhan.
@@ -236,52 +236,48 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 - **`don_mo_coi`** (193 dong, 5 noi goi) — Tim va don TIEN TRINH MO COI dang an CPU.
 - **`evo`** (773 dong, 7 noi goi) — THE EVO: giam sat hieu suat tung module, cat nghia, de xuat.
 - **`han_muc`** (151 dong, 5 noi goi) — KILL-SWITCH va TRAN. Cai phanh, khong phai cai ga.
-- **`kien_truc`** (368 dong, 2 noi goi) — SINH SO DO KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
+- **`kien_truc`** (368 dong, 3 noi goi) — SINH SO DO KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
 - **`mach`** (385 dong, 2 noi goi) — MACH DAP CUA DUONG ONG. Canary cho tung chang, khong chi cho engine.
 - **`muc_tieu`** (421 dong, 8 noi goi) — CHIEN DICH THEO MUC TIEU. Day moi la "The Brain + QUANTLAB".
-- **`ngan_sach`** (424 dong, 14 noi goi) — SO NGAN SACH TAI NGUYEN. Cua vao chung cho moi viec nang.
+- **`ngan_sach`** (464 dong, 15 noi goi) — SO NGAN SACH TAI NGUYEN. Cua vao chung cho moi viec nang.
 - **`tran_cpu`** (158 dong, 5 noi goi) — MOT chO khai tran CPU, va moi viec nang deu tu ha theo no.
 - **`tri_tue`** (367 dong, 13 noi goi) — Cau noi OpenAI tuy chon cho tien trinh nen 24/7.
 - **`vong_day_du`** (476 dong, 3 noi goi) — MOT LENH chay CA BA TRU theo dung so do cua chu du an.
 
-### CHUA XEP LOP — 0 module
+### CHUA XEP LOP — 3 module
 
-(khong con — moi module nhan deu da co tang)
+Module moi chua ai xep vao tang nao. Day la muc **can doc truoc
+khi lap ke hoach**: mot module khong co tang thi khong ai biet no
+thuoc ve ai, va no se bi xay lai duoi mot cai ten khac.
+
+- **`ghi_an_toan`** (178 dong, 1 noi goi ⚠MO COI) — SUA MOT FILE JSON MA KHONG MAT THAY DOI CUA NGUOI KHAC.
+- **`ho_so_he`** (1152 dong, 1 noi goi) — MOT FILE DUY NHAT dua cho mot AI KHONG CO DIA.
+- **`slot_tester`** (290 dong, 2 noi goi) — NHIEU LAN TESTER, moi lan mot terminal RIENG.
 
 ## 4. No kien truc — cho de lam ke hoach
 
-### 4.1 Khong tu khai vai tro — 25 file
+### 4.1 Khong tu khai vai tro — 15 file
 
 Khong co docstring dong dau, nen khong vao duoc ban do vai tro nao.
 Sua mot dong docstring la het no.
 
+- `_luu_tru/bao_cao_hen_gio.py` (46 dong)
+- `_luu_tru/chien_luoc_mr_tf.py` (52 dong)
+- `_luu_tru/chien_luoc_trend.py` (58 dong)
+- `_luu_tru/dang_ky_alphavantage.py` (106 dong)
+- `_luu_tru/doc_for_ds.py` (21 dong)
+- `_luu_tru/gen_kiem_ke.py` (144 dong)
+- `_luu_tru/lay_api_darwinex.py` (101 dong)
+- `_luu_tru/nap_darwinex_api.py` (114 dong)
+- `_luu_tru/placebo_d1.py` (53 dong)
+- `_luu_tru/tele_gate.py` (83 dong)
+- `_luu_tru/xac_nhan_d1.py` (53 dong)
 - `_placebo_da_ma.py` (18 dong)
 - `_quet_song_song.py` (51 dong)
 - `_tmp_quet.py` (12 dong)
-- `bao_cao_hen_gio.py` (46 dong)
-- `chien_luoc_mr.py` (58 dong)
-- `chien_luoc_mr_tf.py` (52 dong)
-- `chien_luoc_trend.py` (58 dong)
-- `dang_ky_alphavantage.py` (106 dong)
-- `doc_email.py` (77 dong)
-- `doc_for_ds.py` (21 dong)
-- `gen_kiem_ke.py` (144 dong)
-- `lay_api_darwinex.py` (101 dong)
 - `lay_du_lieu.py` (64 dong)
-- `nap_darwinex_api.py` (114 dong)
-- `nhan/nha_may_null.py` (334 dong)
-- `placebo_d1.py` (53 dong)
-- `tele_gate.py` (83 dong)
-- `test_banker_v2.py` (56 dong)
-- `test_chi_phi_v2.py` (31 dong)
-- `test_cong_fdr_v2.py` (209 dong)
-- `test_dieu_phoi_control.py` (117 dong)
-- `test_mau_v2.py` (37 dong)
-- `test_so_concurrency_v2.py` (42 dong)
-- `vao_web.py` (178 dong)
-- `xac_nhan_d1.py` (53 dong)
 
-### 4.2 Goc `lab/` — 362 file roi
+### 4.2 Goc `lab/` — 348 file roi
 
 **Ba loai khac han nhau — tron chung lai thi con so vo nghia.** Ban sinh
 dau tien cua chinh file nay bao "231 file phai don", trong khi 146 trong
@@ -289,50 +285,40 @@ so do la `test_*.py`: pytest TIM chung o goc, chung o dung cho roi.
 
 | Loai | So | Phai lam gi |
 |---|---|---|
-| `test_*.py` + `conftest.py` | 147 | khong lam gi — dung cho |
+| `test_*.py` + `conftest.py` | 152 | khong lam gi — dung cho |
 | `_*.py` chay tay mot lan | 131 | mo coi la DUNG BAN CHAT — de yen hoac xoa |
-| **con lai** | **84** | **day moi la no**: len `nhan/`, hoac doi ten `_*.py`, hoac xoa |
+| **con lai** | **65** | **day moi la no**: len `nhan/`, hoac doi ten `_*.py`, hoac xoa |
 
-84 file thuoc nhom thu ba:
+65 file thuoc nhom thu ba:
 
 - `BAN_GIAO.py` — MOT LENH de vao phien: in ban ban giao + trang thai SONG cua he.
 - `KET_PHIEN.py` — KET PHIEN — mot lenh chot ngay hom nay de mai vao lam ngay duoc.
 - `b.py` — MOT cua vao cho moi viec hang ngay cua THE BRAIN.
 - `ban_giao_song.py` — SO BAN GIAO SONG, ghi lien tuc chu khong doi cuoi phien.
 - `bang_dieu_khien.py` — MOT MAN HINH DUY NHAT de biet he dang the nao.
-- `bao_cao_hen_gio.py` ⚠MO COI — _(chua tu khai vai tro)_
 - `bo_nao.py` — Orchestrator THE BRAIN: bang cong viec + dieu phoi 8 vai.
 - `cham_lai_the_he.py` — CHAM LAI moi gia thuyet da dang ky duoi THE HE CONG hien tai.
-- `chay_backtest.py` ⚠MO COI — Chay backtest Python (mo_phong_v2) TACH NEN, ghi ket qua ra file.
 - `chay_bang_mde.py` — Chay ban NGHIEM THU cua nha may luc + nha may null, ra BANG MDE.
 - `chay_bench_quan_tri.py` — DUA 11 HO QUAN TRI VI THE RA MT5 TESTER.
-- `chay_gop_vs_don.py` ⚠MO COI — GOP RO CO HA DUOC MDE KHONG — do bang CUNG DON VI voi bang MDE don le.
 - `chay_test_tung_me.py` — chay CA bo test bang NHIEU tien trinh pytest ngan.
 - `chay_tester_kho.py` — DUA CA KHO CO CHE RA MT5 TESTER.
 - `chay_tester_z5.py` — DUA HE DA PASS RA TICK THAT.
-- `chien_luoc_mr.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `chien_luoc_mr_tf.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `chien_luoc_trend.py` ⚠MO COI — _(chua tu khai vai tro)_
+- `chien_luoc_mr.py` ⚠MO COI — CHIEN LUOC HOI QUY ban tho (thang 8) - giu lam moc doi chieu.
 - `chup_darwinex.py` ⚠MO COI — Chup man hinh trang Darwinex bang profile da dang nhap (dung cho screen-read).
 - `chuyen_giao.py` — Sao luu + ban giao THE BRAIN (chay cuoi moi phien lam viec).
 - `cross_pair_quet.py` ⚠MO COI — QUET M1 local: mo phong he grid LuoiDoiXung/mo_phong_v2
-- `dang_ky_alphavantage.py` ⚠MO COI — _(chua tu khai vai tro)_
 - `dang_nhap.py` — AUTO-LOGIN: dang nhap site/san tu dong qua Chrome CDP.
 - `darwinex_ocr.py` ⚠MO COI — LUỒNG A - NGUỒN DARWINEX (module mới, chỉ tạo file).
 - `day_viec.py` — HANG DOI VIEC XAY, chay TUAN TU va LIEN TUC.
 - `dieu_khien_xa.py` — nghe lenh Telegram, KHONG ton mot token nao cua agent.
 - `dieu_phoi.py` — Control plane 24/7 cho nam tru hien hanh cua THE BRAIN.
 - `do_on_dinh.py` — CAO NGUYEN hay CAI GAI? Do HINH DANG cua mot edge.
-- `do_spread_hang_loat.py` ⚠MO COI — DO SPREAD THAT CHO CA BE MAT, MOT LAN NOI SAN.
 - `doc_bang_trinh_duyet.py` ⚠MO COI — Doc trang bang TRINH DUYET THAT (Playwright/Chromium)
 - `doc_cdp.py` ⚠MO COI — Doc X/TikTok/Facebook qua CDP tren TRINH DUYET DA DANG NHAP
-- `doc_email.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `doc_for_ds.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `doc_otp_gmail.py` ⚠MO COI — Doc MA OTP/code tu Gmail (web CDP, da dang nhap).
+- `doc_email.py` ⚠MO COI — DOC EMAIL qua IMAP: lay ma xac minh / thu tu nguon da dang ky.
 - `doc_web_moi.py` ⚠MO COI — DOC WEB BEN: thu requests truoc, neu loi hay noi dung rong
 - `ea_tu_dong.py` ⚠MO COI — TAI EA THAT -> BIEN DICH -> CHAY STRATEGY TESTER.
 - `fl_cheo.py` ⚠MO COI — FOLLOW CHEO (cross-follow): tu 1 nguon / tai khoan chat luong,
-- `gen_kiem_ke.py` ⚠MO COI — _(chua tu khai vai tro)_
 - `giam_sat_dieu_phoi.py` — Watchdog ngoai tien trinh cho control plane.
 - `hang_doi.py` — Dong bo VPS <-> may nha qua THU MUC CHUNG, khong lan viec nhau
 - `hinh_dang_vs_null.py` — HINH DANG cua edge co phan biet duoc voi NGAU NHIEN khong?
@@ -340,16 +326,11 @@ so do la `test_*.py`: pytest TIM chung o goc, chung o dung cho roi.
 - `keywords_nguon.py` — NGAN HANG TU KHOA dung chung cho Seeker.
 - `khao_sat_daily_zone.py` ⚠MO COI — Quet tham so TP cho co che #1, do PF + Drawdown.
 - `lab.py` ⚠MO COI — Phong lab quet he thong giao dich 24/7, DeepSeek lam bo nao
-- `lay_api_darwinex.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `lay_api_darwinex_v2.py` ⚠MO COI — Mở cua so chrome cho bro dang nhap Darwinex 1 lan -> bam DA XONG -> bat token.
 - `lay_du_lieu.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `lo_mot_gio.py` ⚠MO COI — LO VIEC TU CHAY, khong can nguoi ngoi may.
 - `loc_chat_luong.py` — SEEKER: BO LOC CHAT LUONG noi dung.
 - `mo_chrome_cdp.py` — Mo Chrome da dang nhap (.browser_darwinex) kem CDP 9224.
 - `mt5_chay_ichimoku.py` ⚠MO COI — Chay EA_IchimokuCross tren MT5 Strategy Tester.
 - `mt5_worker.py` — Chay MT5 Strategy Tester THAT (worker chung cho moi vai 'test').
-- `nap_darwinex_api.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `nap_lai_ban_tho.py` ⚠MO COI — DUA BAN THO DA BOC QUA CONG, KHONG GOI LAI LLM.
 - `nap_truoc_mde.py` — Nap truoc BANG MDE cho ca be mat, thay vi do lazy giua vong quet.
 - `nguon_code.py` ⚠MO COI — SEEKER: NGUON CODE (MQL5 + Pine) tu GitHub (API cong khai).
 - `nguon_dien_dan.py` ⚠MO COI — NGUON DIEN DAN (khong can dang nhap): futures.io, Trade2Win,
@@ -359,8 +340,6 @@ so do la `test_*.py`: pytest TIM chung o goc, chung o dung cho roi.
 - `nguon_telegram.py` ⚠MO COI — Nguon Telegram cho SEEKNER: doc tin tu cac kenh/channel
 - `nguon_youtube.py` ⚠MO COI — Nguon YouTube cho SEEKNER: tim kien thuc / chien luoc /
 - `nhip_song.py` — Mot cho duy nhat doc TRANG THAI SONG cua he — dung chung cho vao/ket phien.
-- `p_null_vs_ung_vien.py` ⚠MO COI — Phan phoi p_placebo cua UNG VIEN co lech so voi phan phoi tren CHUOI NULL khong?
-- `placebo_d1.py` ⚠MO COI — _(chua tu khai vai tro)_
 - `quant_sweep.py` ⚠MO COI — QUANTLAB PARAM GRID da nhan (ProcessPoolExecutor).
 - `quet_be_mat.py` — Quet TANG KHAM PHA tren toan be mat: moi co che x moi tai san, khung D1.
 - `quet_loi_ra.py` ⚠MO COI — MOT TIN HIEU CHUA PHAI MOT CHIEN LUOC.
@@ -370,17 +349,15 @@ so do la `test_*.py`: pytest TIM chung o goc, chung o dung cho roi.
 - `seeker_deep.py` ⚠MO COI — SEEPER . sat: "bieu ten -> dao tai lieu cong khai da ngon ngu
 - `seeker_theo_doi.py` ⚠MO COI — SEEKER: theo doi ca nhan / nhom chat luong.
 - `simulator_nguoi.py` ⚠MO COI — BO MO PHONG NGUOI DUNG TREN WEB.
-- `tele_gate.py` ⚠MO COI — _(chua tu khai vai tro)_
 - `telethon_ban.py` — Nguon Telegram qua TAI KHOAN THAT (Telethon).
 - `tinh_trang.py` — In tinh trang hien tai de biet dang lam viec toi dau.
 - `toan_canh.py` — MOT MAN HINH cho biet he dang o dau — doc xong trong 30 giay.
 - `toc_do.py` — Bo dem tan so quet (rate limiter) chong spam/block tung nguon.
 - `tu_dang_ky.py` ⚠MO COI — QUY TRINH TAO TAI KHOAN TU DONG de lay du lieu.
 - `tu_follow_join.py` ⚠MO COI — SEEKER TU FOLLOW + JOIN GROUP (kiem soat spam).
-- `vao_web.py` ⚠MO COI — _(chua tu khai vai tro)_
-- `xac_nhan_d1.py` ⚠MO COI — _(chua tu khai vai tro)_
+- `vao_web.py` ⚠MO COI — VAO WEB bang trinh duyet that (dang nhap, giu phien).
 
-### 4.3 File tren 600 dong — 32 file
+### 4.3 File tren 600 dong — 33 file
 
 Khong phai loi, nhung la cho mot module dang lam nhieu hon mot viec.
 
@@ -391,44 +368,44 @@ Khong phai loi, nhung la cho mot module dang lam nhieu hon mot viec.
 - `tru/evolution.py` — 1393 dong
 - `nhan/du_lieu.py` — 1384 dong
 - `nhan/dich_mq5.py` — 1158 dong
+- `nhan/ho_so_he.py` — 1152 dong
 - `nhan/doc_hieu.py` — 1151 dong
 - `dieu_phoi.py` — 1092 dong
 - `nhan/doc_ma.py` — 1038 dong
-- `b.py` — 980 dong
+- `b.py` — 1020 dong
 - `nhan/cong.py` — 979 dong
 - `nhan/chi_phi.py` — 968 dong
 - `bo_nao.py` — 940 dong
 - `nhan/ho_so_tai_san.py` — 880 dong
+- `nhan/so.py` — 855 dong
 - `test_san_cong_cu.py` — 830 dong
 - `quant/thu_vien/pseud/tools/ohlc_anomaly_hypothesis_tool.py` — 782 dong
 - `nhan/evo.py` — 773 dong
 - `nhan/to_hop.py` — 764 dong
-- `nhan/so.py` — 757 dong
 - `chay_tester_kho.py` — 689 dong
 - `nhan/pmg_engine.py` — 688 dong
 - `nhan/vuon_nguon.py` — 685 dong
 - `nhan/ma_nguon.py` — 684 dong
-- `nhan/telegram.py` — 669 dong
 
 ### 4.4 Module trong goi nhung MO COI — 3
 
-- `nhan/cong_ra_tien.py` — CONG THU HAI. Hoi "co ra tien khong", khong hoi "co that khong".
 - `nhan/doc_video_cuc_bo.py` — VIDEO TREN DIA -> VAN BAN. Khau con thieu cua Seeker.
+- `nhan/ghi_an_toan.py` — SUA MOT FILE JSON MA KHONG MAT THAY DOI CUA NGUOI KHAC.
 - `nhan/luoi.py` — MO PHONG LUOI/DCA CO TRACH NHIEM, dung duoc lai cho moi cap.
 
 ## 5. So tong
 
 | Muc | So |
 |---|---|
-| File `.py` (bo `nhat_ky/ backups/ __pycache__/ ...`) | 524 |
-| Tren duong chay | 195 |
-| Module thu vien `nhan/` | 129 |
+| File `.py` (bo `nhat_ky/ backups/ __pycache__/ ...`) | 532 |
+| Tren duong chay | 198 |
+| Module thu vien `nhan/` | 132 |
 | — da xep lop | 129 |
-| — chua xep lop | 0 |
+| — chua xep lop | 3 |
 | Tru `tru/` | 7 |
-| File roi o goc `lab/` | 362 |
-| — `test_*.py` (dung cho) | 147 |
+| File roi o goc `lab/` | 348 |
+| — `test_*.py` (dung cho) | 152 |
 | — script `_*.py` chay tay | 131 |
-| — **con lai, la no that** | **84** |
-| Khong tu khai vai tro | 25 |
+| — **con lai, la no that** | **65** |
+| Khong tu khai vai tro | 15 |
 

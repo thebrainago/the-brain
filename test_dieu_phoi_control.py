@@ -1,3 +1,5 @@
+"""Test duong dieu khien cua dieu_phoi (bat/dung/nhip)."""
+
 import unittest
 import sys
 import json

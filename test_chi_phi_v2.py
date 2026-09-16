@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""Test mo hinh chi phi ban 2."""
+
 import unittest
 
 import numpy as np

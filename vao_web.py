@@ -3,6 +3,8 @@
 #        python vao_web.py --site <ten> [--url <duong_dan_thu_vieng>]
 # Mo ta: mo browser profile rieng cho web, cho dang nhap 1 lan, tu dong vao trang lay key,
 #        trich xuat va luu vao config/credentials.json
+"""VAO WEB bang trinh duyet that (dang nhap, giu phien)."""
+
 import argparse, json, re, time, pathlib
 from playwright.sync_api import sync_playwright
 

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""Test so cai khi nhieu tien trinh cung ghi."""
+
 import tempfile
 import unittest
 from concurrent.futures import ThreadPoolExecutor

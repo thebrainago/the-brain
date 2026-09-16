@@ -1,3 +1,5 @@
+"""CHIEN LUOC HOI QUY ban tho (thang 8) - giu lam moc doi chieu."""
+
 import numpy as np, pandas as pd, json
 from pathlib import Path
 

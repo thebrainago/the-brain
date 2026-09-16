@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""NHA MAY NULL - sinh chuoi gia de hieu chuan cong."""
+
 import sys
 from pathlib import Path
 import numpy as np

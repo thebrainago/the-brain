@@ -1,5 +1,7 @@
-﻿# THE BRAIN - doc_email: tu dong doc email cong tac (IMAP) va trich ma OTP
+# THE BRAIN - doc_email: tu dong doc email cong tac (IMAP) va trich ma OTP
 # Dung:  python doc_email.py [--tu 5]   (doc 5 email moi nhat)
+"""DOC EMAIL qua IMAP: lay ma xac minh / thu tu nguon da dang ky."""
+
 import argparse, imaplib, email, re, json, pathlib
 from email.header import decode_header
 

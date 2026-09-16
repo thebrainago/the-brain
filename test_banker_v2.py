@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""Test tru BANKER ban 2."""
+
 import unittest
 from datetime import date, timedelta
 from unittest.mock import patch
