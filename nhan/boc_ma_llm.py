@@ -521,7 +521,12 @@ def moi(so_file: int = 20, in_ra=print) -> dict:
           % (len(co), len(ds), 100 * len(co) / max(len(ds), 1), tong_cc))
     giu_tong, ho_tong = [], []
     for k in ket:
-        g, h = kiem_va_giu(k["co_che"], nguon=k["ten"])
+        # `sua_llm=True` mac dinh tu 16/09. Do tren chinh 19 khai bao cua me
+        # 12 file: khong sua 4 · sua may moc 6 · **co vong sua LLM 11**. Mot
+        # luot sua ton ~16 giay cho moi khai bao bi tu choi - re hon han so
+        # voi bo mot khai bao dung roi boc lai file tu dau.
+        g, h = kiem_va_giu(k["co_che"], nguon=k["ten"], sua_llm=sua_llm,
+                           in_ra=in_ra)
         giu_tong += g
         ho_tong += h
     in_ra("  qua KIEM KHAI BAO : %d/%d khai bao" % (len(giu_tong), tong_cc))
@@ -537,7 +542,7 @@ def moi(so_file: int = 20, in_ra=print) -> dict:
 
 
 def chay_that(gioi_han: int = 0, so_lan: int = 2, ghi_kho: bool = True,
-              in_ra=print) -> dict:
+              in_ra=print, sua_llm: bool = True) -> dict:
     """Chay tren TOAN BO file co lenh vao, ghi khai bao dat vao kho co che.
 
     Khac `moi()` o hai cho: khong cat mau, va CO ghi kho. Moi khai bao van phai

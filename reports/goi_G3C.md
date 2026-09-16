@@ -104,3 +104,57 @@ Tien le da co ngay trong file (dong 203-205): me 05/09 bi `them vao kho: 0` cho
 `test_sua_may_moc.py` — 10 bai, pass het. Nua so bai la test cua RANH GIOI:
 khong doan ten ho khac han · khong sua dieu kien suy bien · moi ve hong thi giu
 nguyen cho cong tu choi · khong doi ban goc.
+
+---
+
+# BO SUNG 16/09 (toi) — VONG SUA DA CHAY, VA CON SO CUOI
+
+## Bang do day du tren cung 19 khai bao
+
+| Buoc | Qua cong | Ghi chu |
+|---|---|---|
+| Khong sua gi | 4/19 | ban goc |
+| Sua may moc | 6/19 | bo dau ten ho, chuan hoa toan hang |
+| + vong sua LLM, khoa **cu** | **6/19** | **them dung so 0** |
+| + vong sua LLM, khoa `ban_sua` | **11/19** | 310 giay |
+
+Tu 4 len 11: **gap 2,75 lan**.
+
+## Vi sao vong sua dau tien them so 0
+
+Log noi thang:
+
+```
+- khong sua duoc: ban sua khong phai dict: Nha dau tu chap nhan rui...
+- khong sua duoc: ban sua khong phai dict: Trend-following crossover
+```
+
+Mo hinh tra `{"co_che": ["Nha dau tu chap nhan rui ro..."]}` - danh sach CHUOI,
+mat sach cau truc. Vi `co_che` la ten cua **ca hai thu**:
+
+```
+{"co_che": [ {..., "co_che": "ly do kinh te", ...} ]}
+  ^ danh sach co che            ^ truong ly do
+```
+
+Loi nhac sua nhac manh luat cua truong BEN TRONG, nen mo hinh dien dung cai do
+vao khoa NGOAI. **Day la loi thiet ke schema, khong phai loi cua mo hinh**: dung
+mot ten cho hai khai niem long nhau thi chinh nguoi doc cung nham.
+
+Doi khoa ngoai thanh `ban_sua` -> 6 len 11.
+
+## Quyet dinh
+
+Nguong dat truoc khi do: *"len 10-12/19 thi chay ca 293 file la dang; van quanh
+6-7 thi ket luan LLM khong dien duoc cho lop file nay"*. Ket qua 11/19 vuot
+nguong, nen **da phong me 293 file** (`reports/boc_293.log`), `sua_llm=True` la
+mac dinh cua `chay_that` tu nay.
+
+Uoc: 293 file x ~23s boc + ~16s/khai bao bi tu choi. Ban tho ghi ngay sau khau
+boc nen mot loi hau ky khong lam mat ca me.
+
+## Gia cua vong sua
+
+~16 giay cho moi khai bao bi tu choi. Re hon han hai lua chon con lai: boc lai
+file tu dau (~23s va van co the hong y het), hoac bo mot khai bao dung - thu ma
+file da tai ve, da khoanh vung, da ton mot luot LLM moi co.
