@@ -823,6 +823,52 @@ def diem_tra_wal(che_do: str = "TRUNCATE") -> dict:
             "wal_mb": round(t.stat().st_size / 1e6, 2) if t.exists() else 0.0}
 
 
+def do_trang_trong() -> dict:
+    """Bao nhieu phan `nao.db` la trang TRONG (thu hoi duoc).
+
+    Do 16/09: 231.700 / 389.491 trang = **59,5% la trang trong** - 0,95 GB
+    tren 1,60 GB. Con so nay tung duoc DOAN ("phan lon la trang trong") va mot
+    ban ke hoach doc lai da bat dung loi do. Nay do bang `freelist_count`.
+    """
+    with ket_noi() as cn:
+        ps = cn.execute("PRAGMA page_size").fetchone()[0]
+        pc = cn.execute("PRAGMA page_count").fetchone()[0]
+        fl = cn.execute("PRAGMA freelist_count").fetchone()[0]
+    return {"trang": pc, "trang_trong": fl,
+            "gb": round(pc * ps / 1e9, 3),
+            "gb_trong": round(fl * ps / 1e9, 3),
+            "gb_that": round((pc - fl) * ps / 1e9, 3),
+            "ty_le_trong": round(fl / max(pc, 1), 3)}
+
+
+def nen_gon(dich, in_ra=print) -> dict:
+    """`VACUUM INTO` ra mot file MOI. KHONG dong vao `nao.db` dang chay.
+
+    Dung cho hai viec: sao luu gon (backup API chep ca trang trong - ban
+    16/09 ton 1,60 GB trong khi du lieu that chi 0,65 GB), va **mang len VPS**
+    (`san_sang_vps` bao phai mang 1,77 GB, trong do `nao.db` la 1,59 GB).
+
+    Chon `VACUUM INTO` chu khong `VACUUM`:
+      * nguon CHI DOC - khong co luc nao DB dang chay bi viet lai;
+      * khong can cho trong bang kich thuoc DB tren cung o dia;
+      * mot tien trinh khac dang ghi thi cung khong sao, ban ra la anh chup.
+    """
+    dich = Path(dich)
+    dich.parent.mkdir(parents=True, exist_ok=True)
+    if dich.exists():
+        raise FileExistsError("`VACUUM INTO` doi file dich CHUA ton tai: %s" % dich)
+    t = do_trang_trong()
+    with ket_noi() as cn:
+        cn.execute("VACUUM INTO ?", (str(dich),))
+    gb = round(dich.stat().st_size / 1e9, 3)
+    ra = {"nguon_gb": t["gb"], "dich_gb": gb, "tiet_kiem_gb": round(t["gb"] - gb, 3),
+          "dich": str(dich)}
+    if in_ra:
+        in_ra("nen gon: %.2f GB -> %.2f GB (tiet kiem %.2f GB) · %s"
+              % (ra["nguon_gb"], gb, ra["tiet_kiem_gb"], dich))
+    return ra
+
+
 def mot(sql: str, *args):
     def _f():
         with ket_noi() as cn:

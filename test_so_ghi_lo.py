@@ -117,3 +117,31 @@ def test_diem_tra_wal_tra_ve_kich_thuoc(db):
         cn.execute("INSERT INTO t(i, ai) VALUES(1, 'a')")
     r = SO.diem_tra_wal()
     assert "wal_mb" in r and r["wal_mb"] >= 0
+
+
+def test_do_trang_trong_tra_du_khoa(db):
+    with SO.ghi_lo() as cn:
+        for i in range(200):
+            cn.execute("INSERT INTO t(i, ai) VALUES(?, 'x')", (i,))
+    d = SO.do_trang_trong()
+    for k in ("trang", "trang_trong", "gb", "gb_trong", "gb_that", "ty_le_trong"):
+        assert k in d
+    assert d["gb_that"] <= d["gb"] and 0.0 <= d["ty_le_trong"] <= 1.0
+
+
+def test_nen_gon_khong_dong_vao_ban_goc(db, tmp_path):
+    with SO.ghi_lo() as cn:
+        for i in range(300):
+            cn.execute("INSERT INTO t(i, ai) VALUES(?, 'x')", (i,))
+    truoc = db.stat().st_size
+    r = SO.nen_gon(tmp_path / "gon.db", in_ra=None)
+    assert db.stat().st_size == truoc, "VACUUM INTO khong duoc dong vao nguon"
+    assert (tmp_path / "gon.db").exists()
+    assert SO.mot("SELECT COUNT(*) c FROM t")["c"] == 300
+
+
+def test_nen_gon_tu_choi_ghi_de(db, tmp_path):
+    d = tmp_path / "da_co.db"
+    d.write_text("x", encoding="utf-8")
+    with pytest.raises(FileExistsError):
+        SO.nen_gon(d, in_ra=None)

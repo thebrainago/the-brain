@@ -49,7 +49,14 @@ BAO_CAO = LAB / "reports" / "SAN_SANG_VPS.md"
 #: `browser_backup_*` la KHO LUU - ma trong do khong chay nua, dem no vao lam
 #: con so "phai sua truoc khi chuyen VPS" phong len ma khong ai sua.
 BO_QUA = ("nhat_ky", "backups", "__pycache__", "nghi_huu", ".git",
-          "archive", "browser_backup")
+          "archive", "browser_backup",
+          # Them 16/09 (goi G5): `_luu_tru/` la script MO COI da chuyen ra khoi
+          # goc lab (goi G3-D). Chung khong nam tren duong chay nao, nen mot
+          # duong dan go cung trong do KHONG chan viec chuyen len VPS. Dem
+          # chung vao la thoi con so "phai sua truoc khi chuyen" len, va mot
+          # danh sach viec co muc gia khong dung thi nguoi doc bo qua ca danh
+          # sach.
+          "_luu_tru")
 
 #: Thu vien Python phai co, kem viec no phuc vu. Thieu cai nao thi mat DUNG
 #: nhanh do, khong phai mat ca he - nen bao cao phai noi ro mat gi.
