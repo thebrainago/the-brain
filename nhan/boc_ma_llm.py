@@ -224,6 +224,108 @@ def _dien_co_che(c: dict, nguon: str) -> None:
                    % (nguon or "?", ten, (" Mo hinh ghi: " + cu) if cu else ""))
 
 
+def _bo_dau(s: str) -> str:
+    """'quay_ve_trung_bình' -> 'quay_ve_trung_binh'. Khong doi gi khac."""
+    import unicodedata
+    t = unicodedata.normalize("NFD", str(s))
+    t = "".join(c for c in t if unicodedata.category(c) != "Mn")
+    return t.replace("đ", "d").replace("Đ", "D")
+
+
+def sua_may_moc(c: dict) -> tuple[dict, list[str]]:
+    """Sua nhung cho SAI HINH THUC, khong dung den LLM. -> (ban sua, da sua gi)
+
+    ## Vi sao co ham nay
+
+    Do 16/09 tren me 12 file lan CHIEN_LUOC: 9/12 file ra co che, 19 khai bao,
+    **vao kho 0**. Doc ly do nguyen van thi 26/30 loi la HINH THUC chu khong
+    phai sai y. Lon nhat la mot loi **dau tieng Viet**:
+
+        ho 'xu_hướng' khong thuoc [... 'xu_huong' ...]
+        ho 'quay_ve_trung_bình' khong thuoc [...]
+        ho 'pha_vào' khong thuoc [...]
+
+    Mo hinh doc dung co che va goi dung ten ho - chi go co dau. Bo mot khai bao
+    dung vi mot dau sac la lang phi dat nhat trong ca day chuyen: file da tai
+    ve, da khoanh vung, da ton mot luot LLM.
+
+    KHONG sua gi thuoc ve NOI DUNG. `cheo_len` khong duoc doi thanh `cheo_xuong`,
+    dieu kien suy bien khong duoc "sua" cho het suy bien - nhung cai do phai bi
+    tu choi. Ham nay chi chuan hoa CACH VIET.
+    """
+    from nhan import pham_vi as PV
+    da = []
+    c = json.loads(json.dumps(c, ensure_ascii=False))     # khong sua ban goc
+
+    # 1. Ten ho: khop lai theo ban da bo dau.
+    ho = c.get("ho")
+    if isinstance(ho, str) and ho not in PV.PHAM_VI:
+        goc = {_bo_dau(k).lower(): k for k in PV.PHAM_VI}
+        k = goc.get(_bo_dau(ho).lower())
+        if k:
+            c["ho"] = k
+            da.append("ho %r -> %r" % (ho, k))
+
+    # 2. `co_che` phai la MOT CAU. Mo hinh hay viet ca doan.
+    cq = c.get("co_che")
+    if isinstance(cq, list):
+        cq = " ".join(str(x) for x in cq)
+        da.append("co_che: danh sach -> chuoi")
+    if isinstance(cq, str):
+        cau = re.split(r"(?<=[.!?])\s+", cq.strip())
+        if len(cau) > 1:
+            cq = cau[0].strip()
+            da.append("co_che: giu cau dau")
+        if cq != c.get("co_che"):
+            c["co_che"] = cq
+
+    # 3. Bo VE KHONG DOC DUOC, nhung DANH DAU khai bao la khong day du.
+    #
+    # Mo hinh chen thang chuoi `khong_dien_dat_duoc` vao `vao` cho phan no
+    # khong doc noi. Do 16/09: mot khai bao co 5 ve, **4 ve dau hoan chinh**,
+    # ve thu 5 la chuoi do - va ca khai bao bi bo.
+    #
+    # Bo ve do thi 4 ve kia dung duoc. NHUNG co che con lai **khong con la co
+    # che trong ma nguon**: no thieu mot dieu kien. Nen phai gan `khong_day_du`
+    # va so ve da mat, de khong ai doc ket qua cua no nhu mot ban boc trung
+    # thanh. Im lang bo ve roi coi nhu day du la cach tot nhat de sinh ra mot
+    # "phat hien" ve mot co che chua ai tung viet.
+    ve = c.get("vao")
+    if isinstance(ve, list):
+        sach = [x for x in ve if isinstance(x, dict)]
+        if len(sach) != len(ve):
+            if sach:
+                c["vao"] = sach
+                c["khong_day_du"] = True
+                c["so_ve_mat"] = len(ve) - len(sach)
+                da.append("bo %d ve khong doc duoc -> danh dau khong_day_du"
+                          % (len(ve) - len(sach)))
+            else:
+                da.append("moi ve deu khong doc duoc - giu nguyen de cong tu choi")
+
+    # 4. Toan hang phai la dict; `n` phai la so nguyen.
+    for i, ve in enumerate(c.get("vao") or []):
+        if not isinstance(ve, dict):
+            continue
+        for ben in ("trai", "phai"):
+            x = ve.get(ben)
+            if isinstance(x, str) and x in ("open", "high", "low", "close"):
+                ve[ben] = {"chi_bao": "gia", "cot": x}
+                da.append("vao[%d].%s: %r -> dict gia" % (i, ben, x))
+            elif isinstance(x, (int, float)):
+                ve[ben] = {"so": x}
+                da.append("vao[%d].%s: so -> {'so': ...}" % (i, ben))
+            if isinstance(ve.get(ben), dict):
+                n = ve[ben].get("n")
+                if isinstance(n, float) and float(n).is_integer():
+                    ve[ben]["n"] = int(n)
+                    da.append("vao[%d].%s.n: %s -> %d" % (i, ben, n, int(n)))
+                elif isinstance(n, str) and n.strip().isdigit():
+                    ve[ben]["n"] = int(n.strip())
+                    da.append("vao[%d].%s.n: chuoi -> so" % (i, ben))
+    return c, da
+
+
 def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]:
     """Moi khai bao phai qua `ngu_phap.kiem_khai_bao`. Khong qua thi BO."""
     from nhan import ngu_phap as NP
@@ -254,6 +356,12 @@ def kiem_va_giu(cc: list[dict], nguon: str = "") -> tuple[list[dict], list[str]]
             continue
         c.setdefault("nguon", nguon)
         c.setdefault("giu", 1)
+        # SUA HINH THUC TRUOC KHI CHAM (16/09). Do tren me 12 file: 26/30 loi
+        # la hinh thuc chu khong sai y - lon nhat la ten ho go co dau
+        # (`quay_ve_trung_bình`). Bo mot khai bao dung vi mot dau sac la lang
+        # phi dat nhat ca day chuyen: file da tai, da khoanh vung, da ton mot
+        # luot LLM. Do duoc: qua cong 4/19 -> 6/19.
+        c, _da_sua = sua_may_moc(c)
         _dien_co_che(c, nguon)
         try:
             bao = NP.kiem_khai_bao(c) if hasattr(NP, "kiem_khai_bao") else {"dat": True}

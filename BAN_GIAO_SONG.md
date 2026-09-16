@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `dieu_phoi.log`: 2026-09-14 20:14:35 SEEKER    bat_dau   lane=external
-- `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
-- `supervisor_stdio.log`: 2026-09-14 20:14:35 SEEKER    bat_dau   lane=external
-- `watchdog.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - git: 2a5c40f PMG: ket qua quet that + ba lo hong lo ra khi doc ket qua
 ### 2026-09-14 20:39:54 — chup trang thai
 
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 6692, 0 phut), dieu_khien_xa.py (pid 15316, 446 phut)
 - git: c420e1b G3-D: don goc lab/ — no that 84 -> 65, khong xoa file nao
+### 2026-09-16 16:19:03 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9308, 0 phut), dieu_khien_xa.py (pid 15316, 452 phut)
+- git: 8d325aa THE THORN: danh dau NGHI HUU trong chinh tai lieu cua no
