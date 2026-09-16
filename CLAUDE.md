@@ -46,6 +46,24 @@ phai TRAN.
 File nay tu nap moi khi doc file trong `lab/`. Muc dich: dung mat 15 phut dau
 phien de tim lai luat. Ban day du van o `../AGENTS.md`.
 
+## QUY TAC PHIEN — khi chay NHIEU phien Claude Code (chot 16/09/2026)
+
+Nen: `HO_SO_HE_THONG.md` muc 11.10 do duoc **8 tai nguyen dung chung**, va thu
+nguy hiem nhat (**MT5 tester**) va cham **khong bao loi nao** - bang so doc y
+het mot ket qua that.
+
+- **Chi MOT phien la [GHI]**: duy nhat duoc dung MT5 tester, ghi `nao.db`,
+  sua `config/*.json`, va commit vao `master`.
+- **Cac phien khac la [DOC]**: moi phien mot `git worktree` + nhanh rieng.
+  KHONG tester · KHONG ghi `nao.db` that (dung ban chup chi doc) ·
+  KHONG sua `config/*.json` · KHONG mo Chrome CDP 9224.
+- Phien [DOC] xong viec -> phien [GHI] review, gop, chay kiem tra that.
+- Moi ket luan phai phan biet `CHUA_DO_DUOC` voi ket qua AM.
+- Ket moi goi viec: chay test lien quan + ghi `reports/goi_<ten>.md` gom:
+  da lam gi · bang chung · so truoc/sau · rui ro con lai · viec chua lam.
+
+Sau khi co slot tester (goi G2-A) thi noi ra: moi phien giu **mot slot rieng**.
+
 ## Vao phien / ket phien
 ```
 b vao              trang thai song + ban giao hom qua  (~2 giay)
