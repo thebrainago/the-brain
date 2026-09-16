@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 760800e He thong: them module HEPHAESTUS + hai lan uu tien; ban giao muc 13 (ke hoach 8 luong)
-### 2026-09-14 00:17:18 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1756, 0 phut)
 - git: e33dac9 Chot phien 13/09: bao cao bench + pheu, nhat ky, go khoa tester/warp
 ### 2026-09-14 19:38:24 — chup trang thai
 
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 7924, 0 phut), dieu_khien_xa.py (pid 15316, 316 phut)
 - git: 977da58 G1: xep bang he theo TIEN, khong theo Sharpe + bat ban trung
+### 2026-09-16 14:06:16 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 11368, 0 phut), dieu_khien_xa.py (pid 15316, 320 phut)
+- git: 434f7e8 G2-A: slot tester — go 2/4 cho ghim cung, va mot bay ghi de

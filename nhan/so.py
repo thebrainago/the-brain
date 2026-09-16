@@ -731,20 +731,118 @@ def ghi_ket_qua(gt_ma: str, chi_so: dict, cong: dict, verdict: str,
 
 
 # ------------------------------------------------------------------- TIEN ICH
-def mot(sql: str, *args):
+# --------------------------------------------------------- G2-B (16/09/2026)
+#
+# Do duoc truoc khi sua: so cai dat `busy_timeout=30000` nhung **khong mot cho
+# nao trong lab thu lai khi gap `database is locked`** (quet ca cay: 0 ket qua).
+# SQLite tu doi 30 giay roi nem loi; nguoi goi khong bat, nen mot me dai co the
+# chet o dong ghi cuoi cung sau khi da chay xong phan nang.
+#
+# Va moi ham ghi deu `isolation_level=None` (autocommit): ghi N dong la N giao
+# dich, tuc N lan tranh khoa. Khong co cho nao ghi theo LO.
+#
+# Ba ham duoi day vao dung hai lo hong do. Chung KHONG chon giua "tach DB" va
+# "mot tien trinh ghi" - xem `reports/goi_G2B.md`: chon duoc phai do luc he
+# CHAY THAT, ma he dang `DUNG_LAI`.
+
+#: So lan thu lai khi khoa ban. Nhan doi thoi gian cho moi lan (0,2s -> 3,2s).
+THU_LAI = 6
+
+
+def _ban(e: Exception) -> bool:
+    """Loi nay co phai 'cho luot' khong - hay la loi that?
+
+    Chi hai chuoi nay moi la tranh khoa. Bat rong hon (vi du moi
+    `OperationalError`) se nuot ca loi that: sai cot, sai kieu, DB hong - roi
+    thu lai sau lan, that bai, va bao mot thong diep sai ve nguyen nhan.
+    """
+    t = str(e).lower()
+    return isinstance(e, sqlite3.OperationalError) and (
+        "database is locked" in t or "database is busy" in t)
+
+
+def thu_lai(ham, *a, **k):
+    """Chay `ham`, thu lai khi khoa ban. Loi KHAC thi nem ngay, khong nuot."""
+    cho = 0.2
+    for lan in range(THU_LAI):
+        try:
+            return ham(*a, **k)
+        except Exception as e:
+            if not _ban(e) or lan == THU_LAI - 1:
+                raise
+            time.sleep(cho)
+            cho *= 2
+
+
+@contextmanager
+def ghi_lo(timeout: float = 60.0):
+    """Ghi NHIEU dong trong MOT giao dich, co thu lai khi khoa ban.
+
+        with SO.ghi_lo() as cn:
+            for r in hang:
+                cn.execute("INSERT INTO ...", r)
+
+    `BEGIN IMMEDIATE` lay khoa ghi ngay tu dau thay vi nang cap giua chung -
+    nang cap giua chung la cach sinh ra `database is locked` kinh dien khi hai
+    tien trinh cung doc roi cung muon ghi.
+    """
+    def _mo():
+        cn = sqlite3.connect(DB, timeout=timeout, isolation_level=None)
+        cn.row_factory = sqlite3.Row
+        cn.execute("PRAGMA journal_mode=WAL")
+        cn.execute("PRAGMA synchronous=NORMAL")
+        cn.execute("PRAGMA busy_timeout=%d" % int(timeout * 1000))
+        cn.execute("BEGIN IMMEDIATE")
+        return cn
+    cn = thu_lai(_mo)
+    try:
+        yield cn
+    except Exception:
+        try:
+            cn.execute("ROLLBACK")
+        except Exception:
+            pass
+        raise
+    else:
+        thu_lai(cn.execute, "COMMIT")
+    finally:
+        cn.close()
+
+
+def diem_tra_wal(che_do: str = "TRUNCATE") -> dict:
+    """Gop WAL vao DB roi cat file `-wal`.
+
+    Co that: `nao.db-wal` tung phinh **1,4 GB** va lam ba me boc bao XONG rc=0
+    trong khi kho khong doi mot dong - dia day hien ra nhu ket qua rong. Checkpoint
+    phai la mot buoc CO TEN goi duoc, khong phai thu cho SQLite tu lam.
+    """
     with ket_noi() as cn:
-        r = cn.execute(sql, args).fetchone()
-        return dict(r) if r else None
+        r = cn.execute("PRAGMA wal_checkpoint(%s)" % che_do).fetchone()
+    t = DB.parent / (DB.name + "-wal")
+    return {"ket_qua": tuple(r) if r else None,
+            "wal_mb": round(t.stat().st_size / 1e6, 2) if t.exists() else 0.0}
+
+
+def mot(sql: str, *args):
+    def _f():
+        with ket_noi() as cn:
+            r = cn.execute(sql, args).fetchone()
+            return dict(r) if r else None
+    return thu_lai(_f)
 
 
 def nhieu(sql: str, *args) -> list[dict]:
-    with ket_noi() as cn:
-        return [dict(r) for r in cn.execute(sql, args)]
+    def _f():
+        with ket_noi() as cn:
+            return [dict(r) for r in cn.execute(sql, args)]
+    return thu_lai(_f)
 
 
 def chay(sql: str, *args) -> int:
-    with ket_noi() as cn:
-        return cn.execute(sql, args).rowcount
+    def _f():
+        with ket_noi() as cn:
+            return cn.execute(sql, args).rowcount
+    return thu_lai(_f)
 
 
 if __name__ == "__main__":
