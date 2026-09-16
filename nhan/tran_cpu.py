@@ -66,16 +66,17 @@ def tran(lam_moi: bool = False) -> float:
 def dat_tran(pct: float) -> float:
     """Ghi tran moi vao `config/qwen.json`. Tra ve gia tri da ghi."""
     pct = max(5.0, min(100.0, float(pct)))
-    d = {}
-    try:
-        d = json.loads(CAU_HINH.read_text(encoding="utf-8"))
-    except Exception:
-        pass
-    d["muc_tieu_cpu"] = pct
-    CAU_HINH.parent.mkdir(parents=True, exist_ok=True)
-    tam = CAU_HINH.with_suffix(".json.tam")
-    tam.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
-    os.replace(tam, CAU_HINH)
+    # QUA `ghi_an_toan` (16/09). Hai cho hong giong het `chi_phi._ghi_cau_hinh`:
+    # ten file tam CO DINH (hai tien trinh ghi de tam cua nhau), va doc-sua-ghi
+    # NGOAI khoa (`qwen.json` con giu ca `base_url`, `model`, `model_du_phong`
+    # - ghi de ca file thi mot lan `dat_tran` cung luc voi mot lan sua model se
+    # xoa mat ban sua kia).
+    from nhan import ghi_an_toan as GAT
+
+    def _sua(cu: dict) -> dict:
+        cu["muc_tieu_cpu"] = pct
+        return cu
+    GAT.sua_json(CAU_HINH, _sua)
     _BO_NHO.update(tran=pct, luc=time.time())
     return pct
 

@@ -4,11 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: d4f68e8 quan tri lenh: du 11/11 ho chay bang Python, khong con treo vao MT5
-### 2026-09-14 21:50:31 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 7588, 0 phut)
 - `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
@@ -404,3 +399,8 @@
 - dang chay: ban_giao_song.py (pid 16216, 0 phut), dieu_khien_xa.py (pid 15316, 554 phut)
 - `boc_293.log`: XONG: {'so_file': 374, 'ra_co_che': 307, 'qua_kiem': 215, 'them_kho': 49}
 - git: d6c90ee Nhip ngay: `b don-dia` gio do CA trang trong, khong chi WAL
+### 2026-09-16 18:03:31 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3000, 0 phut), dieu_khien_xa.py (pid 15316, 557 phut)
+- `boc_293.log`: XONG: {'so_file': 374, 'ra_co_che': 307, 'qua_kiem': 215, 'them_kho': 49}
+- git: 0181ebe chi_phi: ghi bang spread qua `ghi_an_toan` — sua hai cuoc dua

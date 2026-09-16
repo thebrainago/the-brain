@@ -809,7 +809,7 @@ def doc_so_truy_van() -> dict:
 def luu_so_truy_van(d: dict) -> None:
     p = _duong_so_truy_van()
     p.parent.mkdir(exist_ok=True)
-    tam = p.with_suffix(".json.tam")
+    tam = p.with_suffix(".json.tam%d" % __import__("os").getpid())
     tam.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     tam.replace(p)
 
@@ -1008,8 +1008,10 @@ def doc_kho() -> dict:
 
 
 def luu_kho(d: dict) -> None:
+    """Ghi kho cong cu. Ten tam mang PID - xem ghi chu o `ngu_phap.luu_kho`."""
+    import os as _os
     KHO.parent.mkdir(exist_ok=True)
-    tam = KHO.with_suffix(".json.tam")
+    tam = KHO.with_suffix(".json.tam%d" % _os.getpid())
     tam.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     tam.replace(KHO)
 

@@ -67,10 +67,23 @@ def _bo_nho() -> dict:
 
 
 def _luu_bo_nho(d: dict) -> None:
-    BO_NHO.parent.mkdir(parents=True, exist_ok=True)
-    # giu 200 muc gan nhat
-    muc = sorted(d.items(), key=lambda kv: kv[1].get("luc", 0), reverse=True)[:200]
-    BO_NHO.write_text(json.dumps(dict(muc), ensure_ascii=False, indent=1), encoding="utf-8")
+    """Ghi bo nho dem cau tra loi. Qua `ghi_an_toan` (16/09).
+
+    Ban cu `write_text` THANG len file: mot tien trinh khac doc dung luc do se
+    thay JSON cut giua chung. Va duong BOC chay 6 luong song song deu goi
+    `tri_tue`, nen day khong phai truong hop hiem.
+
+    Giu 200 muc gan nhat - phep cat do lam TRONG khoa, tren ban vua doc, chu
+    khong tren ban cu ngoai bo nho cua tien trinh nay.
+    """
+    from nhan import ghi_an_toan as GAT
+
+    def _sua(cu: dict) -> dict:
+        cu.update(d)
+        muc = sorted(cu.items(), key=lambda kv: (kv[1] or {}).get("luc", 0),
+                     reverse=True)[:200]
+        return dict(muc)
+    GAT.sua_json(BO_NHO, _sua)
 
 
 # ------------------------------------------------------------------ HAN MUC

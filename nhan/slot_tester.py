@@ -123,9 +123,12 @@ def _mac_dinh() -> dict:
 
 def doc() -> list[Slot]:
     if not TEP.exists():
-        TEP.parent.mkdir(exist_ok=True)
-        TEP.write_text(json.dumps(_mac_dinh(), ensure_ascii=False, indent=1),
-                       encoding="utf-8")
+        # Qua `ghi_an_toan`: hai phien cung khoi dong se cung thay file chua co
+        # va cung sinh ban mac dinh. Ghi thang thi ban sau de len ban truoc -
+        # vo hai o day (hai ban giong nhau) nhung se khong con vo hai khi ai do
+        # them slot vao dung luc do.
+        from nhan import ghi_an_toan as GAT
+        GAT.sua_json(TEP, lambda cu: cu or _mac_dinh())
     d = json.loads(TEP.read_text(encoding="utf-8-sig"))
     return [Slot(**{k: v for k, v in s.items() if k in
                     ("ten", "exe", "du_lieu", "hau_to", "ghi_chu")})

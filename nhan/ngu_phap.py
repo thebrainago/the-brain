@@ -1871,7 +1871,19 @@ def luu_kho(ds: list[dict], ep: bool = False) -> None:
         for t, l in hong_moi[:8]:
             print("            %-44s %s" % (str(t)[:44], str(l[0])[:70]), file=_sys.stderr)
 
-    tam = KHO_CO_CHE.with_suffix(".json.tam")
+    # TEN FILE TAM PHAI MANG PID (sua 16/09).
+    #
+    # `.json.tam` co dinh: me boc 374 file chay `LUONG = 6` luong, va moi luong
+    # goi den day. Hai luong ghi cung luc thi ca hai cung ghi vao dung mot file
+    # tam roi ca hai cung `replace` - ban ra co the la mot ban LAI cua hai kho.
+    # Kho nay dang giu 4.049 co che; mot ban lai khong bao loi, no chi lam kho
+    # tut so muc, va `_ghi_nhat_ky_ghi` ben duoi moi la thu phat hien ra.
+    #
+    # Khong dung `ghi_an_toan.sua_json` o day: ham nay da tu gom `ds` day du
+    # trong bo nho tu truoc do, tuc no GHI DE co chu dich chu khong doc-sua-ghi.
+    # Chi can ten tam rieng cho moi tien trinh.
+    import os as _os
+    tam = KHO_CO_CHE.with_suffix(".json.tam%d" % _os.getpid())
     tam.write_text(json.dumps(ds, ensure_ascii=False, indent=1), encoding="utf-8")
     tam.replace(KHO_CO_CHE)      # thay the NGUYEN TU, khong de lai file nua voi
     _ghi_moc_cao(max(moi, moc))
