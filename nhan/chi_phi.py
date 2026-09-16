@@ -404,17 +404,34 @@ def _ghi_cau_hinh(d: dict) -> None:
     `_doc_luu` nuot JSONDecodeError va tra `{}`, tuc TOAN BO phi qua dem tut ve
     KHAI trong im lang. Doi ten tren cung o dia la thao tac nguyen tu.
     """
-    CAU_HINH.parent.mkdir(parents=True, exist_ok=True)
-    tam = CAU_HINH.with_suffix(".json.tam")
-    tam.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
-    os.replace(tam, CAU_HINH)
+    # QUA `ghi_an_toan` (16/09). Ban cu dung TEN FILE TAM CO DINH
+    # (`.json.tam`): hai tien trinh ghi cung luc thi ca hai cung ghi vao dung
+    # mot file tam, roi ca hai cung `os.replace` - ban ra la mot trong hai,
+    # hoac te hon la mot ban lai. Chinh docstring tren noi `dieu_phoi` chay
+    # nhieu tien trinh cung luc.
+    #
+    # `sua_json` khoa lien tien trinh cho CA khoang doc-sua-ghi, ten tam mang
+    # PID, `os.replace` co thu lai, va doc lai xac nhan.
+    from nhan import ghi_an_toan as GAT
+    GAT.sua_json(CAU_HINH, lambda _cu: d)
     _DEM_LUU.clear()
 
 
 def _luu_spread(ma: str, r: dict) -> None:
-    d = _doc_luu()
-    d.setdefault("_spread_bar_mt5", {})[chuan_hoa_phoi_nhiem(ma)] = r
-    _ghi_cau_hinh(d)
+    """Ghi mot do spread. DOC-SUA-GHI nam TRONG khoa, khong doc truoc roi ghi sau.
+
+    Ban cu doc bang ra ngoai (`_doc_luu()`), sua trong bo nho, roi ghi de ca
+    bang. Hai tien trinh do hai ma khac nhau cung luc thi ban ghi sau **xoa mat
+    do cua ban ghi truoc** - va bang nay co 1.644 symbol nen mat mot o la mat
+    im lang.
+    """
+    from nhan import ghi_an_toan as GAT
+
+    def _sua(cu: dict) -> dict:
+        cu.setdefault("_spread_bar_mt5", {})[chuan_hoa_phoi_nhiem(ma)] = r
+        return cu
+    GAT.sua_json(CAU_HINH, _sua)
+    _DEM_LUU.clear()
 
 
 

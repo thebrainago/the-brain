@@ -126,3 +126,43 @@ def test_duoc_o_lai_chi_giu_the_CU_NHAT(tmp_path, monkeypatch):
     (thu / ("%d.the" % os.getpid())).write_text("toi", encoding="utf-8")
     assert NS._duoc_o_lai("THU", 1), \
         "the cua pid da chet phai bi thu hoi, cho lai cho nguoi con song"
+
+
+# ------------------------------------------------ chi_phi qua ghi_an_toan
+def test_luu_spread_khong_xoa_do_cua_ma_khac(tmp_path, monkeypatch):
+    """Ban cu doc ca bang ra ngoai roi ghi de: hai ma ghi cung luc thi ban sau
+    xoa mat do cua ban truoc. Bang nay 1.644 symbol nen mat mot o la mat im
+    lang."""
+    from nhan import chi_phi as CP
+    cf = tmp_path / "chi_phi_do.json"
+    monkeypatch.setattr(CP, "CAU_HINH", cf)
+    CP._DEM_LUU.clear()
+    CP._luu_spread("EURUSD", {"bps": 1.0})
+    CP._luu_spread("AUDCAD", {"bps": 2.0})
+    d = json.loads(cf.read_text(encoding="utf-8"))["_spread_bar_mt5"]
+    assert set(d) >= {"EURUSD", "AUDCAD"}, "ghi ma thu hai khong duoc xoa ma dau"
+    assert d["EURUSD"]["bps"] == 1.0 and d["AUDCAD"]["bps"] == 2.0
+
+
+def _ghi_spread(goc, cf, ma, bps):
+    sys.path.insert(0, str(goc))
+    from nhan import chi_phi as CP
+    CP.CAU_HINH = Path(cf)
+    CP._DEM_LUU.clear()
+    CP._luu_spread(ma, {"bps": bps})
+    return 0
+
+
+def test_sau_tien_trinh_ghi_spread_khong_mat_o_nao(tmp_path):
+    cf = tmp_path / "chi_phi_do.json"
+    cf.write_text(json.dumps({"_spread_bar_mt5": {}}), encoding="utf-8")
+    ma = ["EURUSD", "AUDCAD", "GBPUSD", "USDJPY", "XAUUSD", "US500"]
+    ps = [mp.Process(target=_ghi_spread, args=(str(LAB), str(cf), m, i + 1.0))
+          for i, m in enumerate(ma)]
+    for p in ps:
+        p.start()
+    for p in ps:
+        p.join(120)
+    assert all(p.exitcode == 0 for p in ps), [p.exitcode for p in ps]
+    d = json.loads(cf.read_text(encoding="utf-8"))["_spread_bar_mt5"]
+    assert set(d) == set(ma), "mat %s" % (set(ma) - set(d))
