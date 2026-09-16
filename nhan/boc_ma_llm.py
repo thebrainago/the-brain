@@ -124,6 +124,10 @@ QUY TAC:
   cac ve con lai.
 - `chieu`: 1 neu la lenh MUA, -1 neu BAN.
 - Chu ky chi bao phai la SO CU THE.
+- **Du lieu CHI CO nam cot: open, high, low, close, volume.** KHONG co `bid`,
+  `ask`, `spread`, `tick`, so lenh, hay do sau thi truong. EA co doc bid/ask thi
+  dich sang `close` (hoac bo ve do neu no that su can chenh bid-ask). Do 16/09:
+  19 khai bao bi bo chi vi goi cot `bid`/`ask` khong ton tai.
 - Neu mot bien nhu `g_ORB_High` la "cao nhat cua N bar gan day" thi dich thanh
   {{"chi_bao":"cao_nhat","cua":{{"chi_bao":"gia","cot":"high"}},"n":N}}. Phan
   "CHO GAN BIEN" duoi day cho biet cac bien do duoc tinh the nao.
@@ -453,8 +457,14 @@ def kiem_va_giu(cc: list[dict], nguon: str = "", sua_llm: bool = False,
         try:
             bao = NP.kiem_khai_bao(c) if hasattr(NP, "kiem_khai_bao") else {"dat": True}
         except Exception as e:
-            ho.append("%s: %s" % (c.get("ten", "?"), str(e)[:50]))
-            continue
+            # NGOAI LE CUNG LA MOT LY DO TU CHOI, phai di tiep vao vong sua.
+            #
+            # Do tren me 374 file (16/09): 29 khai bao bi tu choi bang NGOAI LE
+            # - `KeyError: du lieu khong co cot 'bid'` (10), `'ask'` (9),
+            # `chi bao 'khong_dien_dat_duoc'` (6), `'macd_signal'` (4) - va
+            # khong cai nao duoc thu sua, vi dong `continue` o day nhay qua ca
+            # nhanh sua. Chung deu la loi CO THE NOI cho mo hinh de no sua.
+            bao = ["chay loi: %s: %s" % (type(e).__name__, str(e)[:110])]
         if isinstance(bao, dict) and bao.get("dat") is False:
             bao = [str(bao.get("ly_do"))]
         if bao:

@@ -134182,5 +134182,1821 @@
   "ra": [],
   "_ty_le_kich_hoat": 0.1776,
   "van_tay": "{\"chieu\": 1, \"giu\": 10, \"ra\": [], \"vao\": [{\"phai\": {\"hang\": 0.8769967606197332}, \"phep\": \">\", \"trai\": {\"chi_bao\": \"heiken\", \"lay\": \"than\"}}]}"
+ },
+ {
+  "ten": "aegis_quantum_lite_buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Tận dụng động lượng tăng giá khi xu hướng chính được xác nhận bởi đường trung bình động nhanh vượt lên chậm, kết hợp RSI quá mua để tối ưu hóa tỷ lệ sinh lời trên rủi ro.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "nguon": "Aegis_Quantum_Lite.mq5",
+  "_ty_le_kich_hoat": 0.0973,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "aegis_quantum_lite_sell",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Bảo vệ vốn khi momentum giảm giá hình thành do đường trung bình động ngắn hạn cắt xuống dưới dài hạn, đồng thời RSI rơi vào vùng quá bán xác nhận áp lực bán mạnh.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "nguon": "Aegis_Quantum_Lite.mq5",
+  "_ty_le_kich_hoat": 0.0473,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "stochastic_protector_buy",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Khi chi so dao dong quay len qua muc nguong cuoi cung sau khoang thoi gian nam o vung thap, cac phep doan tai lieu chup theo xu huong trung han se bat dau mua vao de bat loi xu huong tang.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "stoch"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 40
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Stochastic_Protector.mq5",
+  "_ty_le_kich_hoat": 0.0643,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "renko_zone_tap",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Thue bao chi chap nhan giao dich khi co vung ho tro/khang cu duoc xac dinh boi he thong Renko, vi day la khu vuc co xac suat cao de gia phan ung ma khong can doan huong truoc.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "nguon": "GDS_Renko_Zones_Demo.mq5",
+  "_ty_le_kich_hoat": 0.0038,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "adx_trend_pullback",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 15,
+  "co_che": "Nhà giao dịch trả phí để tận dụng sức mạnh xu hướng dài hạn được xác nhận bởi chỉ số biến động, đồng thời tận dụng các đợt điều chỉnh ngắn hạn (pullback) về vùng hỗ trợ động (EMA) để vào lệnh tại mức giá tối ưu, giảm thiểu rủi ro kéo theo và tăng tỷ lệ Risk/Reward.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "atr",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.001
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 50
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "ADX_Trend_Pullback_EA.mq5",
+  "_ty_le_kich_hoat": 0.3851,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "silvio_mean_reversion",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 24,
+  "co_che": "Dau thu co ban chiu mua o vung thap de tranh bat dot, trong khi phe ban tim loi nhap gia cao hon de bao ve loi nhuan ngan han va chong lai su quay ve.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 48
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 40
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 65
+    }
+   }
+  ],
+  "nguon": "SilviosEAbest26.mq5",
+  "_ty_le_kich_hoat": 0.0342,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ema_rsi_bearish_cross",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Dau tu ban khi he thong xac nhan chuyen huong xu huong giam do tren khung thoi gian thuc, ket hop voi RSI vao vung qua tai de tranh bat dinh, tang ty le thang bang cach theo doi dong luc ban.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 12
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 26
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "ema_rsi_risk_ea.mq5",
+  "_ty_le_kich_hoat": 0.0024,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "macd_ma_support_resistance_buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "MACD xác nhận xu hướng, giá hồi về vùng hỗ trợ và cắt qua đường trung bình động để tận dụng đà tăng tiếp theo.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "macd",
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "macd",
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "tradinglab_best_macd_strategy.mq5",
+  "_ty_le_kich_hoat": 0.0953,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "macd_ma_support_resistance_sell",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "MACD xác nhận xu hướng giảm, giá hồi lên kháng cự và cắt xuống dưới trung bình động để bán theo đà.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "macd",
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "macd",
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">=",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "tradinglab_best_macd_strategy.mq5",
+  "_ty_le_kich_hoat": 0.0561,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ma_rsi_sell",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 10,
+  "co_che": "BAN khi giá đóng cửa phá vỡ xuống dưới đường trung bình động và chỉ số RSI đạt vùng quá mua, khai thác áp lực bán gia tăng khi thị trường quá nhiệt.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "marsi_ea.mq5",
+  "_ty_le_kich_hoat": 0.0024,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "smart_trend_follower_buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Chiến lược bắt điểm hồi giá theo xu hướng chính, tận dụng sự suy yếu tạm thời của phe bán.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    },
+    "co_che": "Phe mua dài hạn chấp nhận giá cao hơn để duy trì xu hướng tăng, bên bán phải chấp nhận mức giá này vì dòng tiền lớn đang định hướng thị trường."
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "co_che": "Nến xanh xác nhận động lượng ngắn hạn phục hồi, phe mua tạm thời thắng thế khiến giá đóng cửa cao hơn mở cửa."
+   },
+   {
+    "trai": {
+     "chi_bao": "stoch",
+     "n": 14
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 30
+    },
+    "co_che": "Vùng quá bán báo hiệu phe bán đã cạn kiệt thanh khoản, nhà đầu tư có thanh khoản sẵn sàng mua lại để tối ưu giá vào lệnh."
+   }
+  ],
+  "ra": [],
+  "nguon": "smart_trend_follower.mq5",
+  "_ty_le_kich_hoat": 0.0128,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "smart_trend_follower_sell",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Chiến lược bán theo xu hướng giảm kết hợp vùng quá mua, tận dụng sự kiệt sức của phe mua.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    },
+    "co_che": "Phe bán dài hạn kiểm soát thị trường, giá đóng cửa dưới đường trung bình dài hạn xác nhận xu hướng giảm tiếp diễn."
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "co_che": "Nến đỏ xác nhận áp lực bán gia tăng trong phiên, phe mua không đủ sức đẩy giá lên cao hơn mức mở cửa."
+   },
+   {
+    "trai": {
+     "chi_bao": "stoch",
+     "n": 14
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 70
+    },
+    "co_che": "Vùng quá mua cảnh báo phe mua đã kiệt sức, nhà làm market chấp nhận bán lại ở đỉnh ngắn hạn để khóa lợi nhuận hoặc mở short."
+   }
+  ],
+  "ra": [],
+  "nguon": "smart_trend_follower.mq5",
+  "_ty_le_kich_hoat": 0.0144,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "trendsignal_ea",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Bắt xu hướng giảm để tận dụng động lượng bán, tránh mua vào vùng đỉnh khi thị trường đang trong chu kỳ điều chỉnh mạnh.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    }
+   }
+  ],
+  "nguon": "profit_labels.mq5",
+  "_ty_le_kich_hoat": 0.4716,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "macross_buy",
+  "co_che": "Mua khi SMA ngan han cat len tren SMA dai han de chon chieu theo xu huong tang.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "MACross_MT5_v107.mq5",
+  "_ty_le_kich_hoat": 0.0108,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ksu_martin",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Mua khi hai chi bao dao dong hien thi trang thai qua tai ban, co kha nang cao gia se hoi ve mien trung binh.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "cci",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": -14
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "ksu_martin.mq5",
+  "_ty_le_kich_hoat": 0.0473,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rsi_buy_oversold_cross",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 10,
+  "co_che": "Khi RSI vượt lên trên ngưỡng quá bán, động lượng giảm đã cạn kiệt và dòng tiền mua mới bắt đầu xâm nhập, tạo cơ hội bắt đáy an toàn.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 30
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "RSI_EA.mq5",
+  "_ty_le_kich_hoat": 0.1141,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rsi_sell_overbought_cross",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 10,
+  "co_che": "Khi RSI cắt xuống dưới ngưỡng quá mua, áp lực bán gia tăng mạnh, tín hiệu này cảnh báo đỉnh cục bộ và khuyến nghị chốt lời hoặc mở lệnh bán.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 70
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "RSI_EA.mq5",
+  "_ty_le_kich_hoat": 0.1832,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "atr_trader",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 50,
+  "co_che": "Vao mua khi gia vuot qua trung binh dong va hoi sau trong khoang cat trau ATR phia duoi cuc cao gan day, chong lai sur dong dat.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 50
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<=",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 50
+    }
+   }
+  ],
+  "nguon": "atrTrader.mq5",
+  "_ty_le_kich_hoat": 0.9403,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ma_cross_reversal_buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Đường trung bình động vượt lên trên giá đóng cửa qua hai phiên liên tiếp xác nhận động lượng mua chiếm ưu thế, báo hiệu sự đảo chiều hoặc bứt phá xu hướng ngắn hạn.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 14
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 14
+     },
+     "n": 2
+    }
+   }
+  ],
+  "nguon": "MovingAverage.mq5",
+  "_ty_le_kich_hoat": 0.3586,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ma_cross_reversal_sell",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Đường trung bình động hạ xuống dưới giá đóng cửa sau hai phiên liên tiếp cho thấy áp lực bán đang gia tăng, xác nhận xu hướng giảm hình thành.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 14
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 2
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "sma",
+      "n": 14
+     },
+     "n": 2
+    }
+   }
+  ],
+  "nguon": "MovingAverage.mq5",
+  "_ty_le_kich_hoat": 0.4962,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rangefollower_atr_breakout",
+  "co_che": "Dich vu duoc tra phi de bu nguyen muc tieu sinh loi tu cac pha phat do xuat theo xu huong khi bi gioi han boi do dao dong trung binh.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1440
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "atr",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "rangefollower.mq5",
+  "_ty_le_kich_hoat": 0.7119,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rangefollower_atr_breakout_sell",
+  "co_che": "Dich vu duoc tra phi de bu nguyen muc tieu sinh loi tu cac pha phat do xuat theo xu huong khi bi gioi han boi do dao dong trung binh.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1440
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "atr",
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "rangefollower.mq5",
+  "_ty_le_kich_hoat": 0.7119,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "speedup_volatility_breakout",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Thanh khoản thị trường thường bị hút về một phía khi nến thân lớn bất ngờ xuất hiện; nhà làm thị trường đặt lệnh hedge hai chiều để bán lại cho dòng tiền đuổi theo biến động, tận dụng trailing stop để chốt lời khi xu hướng xác nhận.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "than_nen"
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0.001
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "alexav_speedup_m1.mq5",
+  "_ty_le_kich_hoat": 0.5266,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "galacticexplosion_reversion",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Dau tu chuyen nghiep thich nghi mua khi gia giao dich duoi diem tham chieu trung binh de chow loi tu suc manh hoi ve, trong khi ban khi gia tren diem do de phong ngua rui ro qua mua.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "nguon": "galacticexplosion.mq5",
+  "_ty_le_kich_hoat": 0.4307,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "galacticexplosion_reversion_sell",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Dau tu chuyen nghiep thich nghi ban khi gia giao dich tren diem tham chieu trung binh de chow loi tu suc manh hoi ve, trong khi mua khi gia duoi diem do de phong ngua rui ro qua ban.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   }
+  ],
+  "nguon": "galacticexplosion.mq5",
+  "_ty_le_kich_hoat": 0.5655,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "larry_connors_rsi_long",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Mua khi RSI ngat xuong duoi muc qua ban va gia nam tren trung binh dong quy dinh de chiu theo xu huong tang dai han.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 10
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 200
+    }
+   }
+  ],
+  "nguon": "larryconnersrsi2.mq5",
+  "_ty_le_kich_hoat": 0.295,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "harvester_macd_threshold",
+  "ho": "bien_dong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Nha dau tu chi tra tien de bat loi khi chieu kim MACD xuong duoi muc tham chieu khong, danh vao suc hoi phuc ngan han cua gia.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "macd",
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "harvester.mq5",
+  "_ty_le_kich_hoat": 0.4009,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "harvester_macd_reversal",
+  "ho": "bien_dong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Thanh toan cho phep thiet lap vi tri ban khi chieu kim MACD vuot len tren muc khong, khai thác muc do qua mua va keo gia xuong.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "macd",
+     "n": 1
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 0
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "harvester.mq5",
+  "_ty_le_kich_hoat": 0.5989,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "cci_ma_crossover_buy",
+  "co_che": "Khach hang thanh phan muon bat dau chieu tang khi do lech gia quay ve trung binh, yeu cau vao lenh nhanh de tranh mat diem tot khi xu huong moi hinh thanh.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "cci",
+     "n": 2
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "iCCI_iMA.mq5",
+  "_ty_le_theo_chuoi": {
+   "chuoi kiem": 0.0,
+   "XAUUSD H1": 0.0,
+   "EURUSD H1": 0.2114
+  },
+  "_ty_le_kich_hoat": 0.2114,
+  "_do_tren": "EURUSD H1"
+ },
+ {
+  "ten": "cci_ma_crossover_sell",
+  "co_che": "Nha dau tu co co quan can phong nguu rui ro khi do lech gia xuong manh, yeu cau ban ngay khi co dau hieu dao chieu de khong bi gap gia.",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "cci",
+     "n": 2
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "iCCI_iMA.mq5",
+  "_ty_le_theo_chuoi": {
+   "chuoi kiem": 0.0,
+   "XAUUSD H1": 0.0,
+   "EURUSD H1": 0.2114
+  },
+  "_ty_le_kich_hoat": 0.2114,
+  "_do_tren": "EURUSD H1"
+ },
+ {
+  "ten": "pha_vo_vung_tich_luy_mua",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Nhà đầu tư chấp nhận rủi ro thanh khoản thấp để bắt đà tăng mạnh khi giá thoát khỏi vùng tích lũy, nơi các lệnh chờ mua đã cạn kiệt và dòng tiền mới đẩy giá lên nhanh.",
+  "vao": [
+   {
+    "vung": {
+     "tao": [
+      {
+       "trai": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "phep": ">",
+       "phai": {
+        "chi_bao": "gia",
+        "cot": "open"
+       }
+      }
+     ],
+     "tren": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 100
+     },
+     "duoi": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 100
+     },
+     "song": 100,
+     "huy": "cham"
+    },
+    "quan_he": "xuyen_len"
+   }
+  ],
+  "ra": [],
+  "nguon": "nevalyashka_breakdownlevel.mq5",
+  "_ty_le_kich_hoat": 0.0312,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "thung_vung_ho_tro_ban",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Người bán trả phí vì cơ chế này khai thác sự sụp đổ của vùng hỗ trợ phiên, nơi áp lực bán gia tăng đột biến khi các lệnh stop-loss kích hoạt đồng loạt tạo đà giảm mạnh.",
+  "vao": [
+   {
+    "vung": {
+     "tao": [
+      {
+       "trai": {
+        "chi_bao": "gia",
+        "cot": "close"
+       },
+       "phep": ">",
+       "phai": {
+        "chi_bao": "gia",
+        "cot": "open"
+       }
+      }
+     ],
+     "tren": {
+      "chi_bao": "cao_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "high"
+      },
+      "n": 100
+     },
+     "duoi": {
+      "chi_bao": "thap_nhat",
+      "cua": {
+       "chi_bao": "gia",
+       "cot": "low"
+      },
+      "n": 100
+     },
+     "song": 100,
+     "huy": "cham"
+    },
+    "quan_he": "xuyen_xuong"
+   }
+  ],
+  "ra": [],
+  "nguon": "nevalyashka_breakdownlevel.mq5",
+  "_ty_le_kich_hoat": 0.0036,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "giao_dich_cat_ngang_ema",
+  "co_che": "Các quỹ định lượng và trader chuyên nghiệp thường tìm kiếm điểm vào lệnh khi giá điều chỉnh sâu về vùng hỗ trợ động, nơi EMA nhanh cắt xuống EMA chậm xác nhận lực bán cạn kiệt, tạo lợi thế rủi ro/lợi nhuận cao cho phe mua.",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 14
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 50
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 14
+     },
+     "n": 3
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "ema",
+      "n": 50
+     },
+     "n": 3
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "intersection_2_ima.mq5",
+  "_ty_le_kich_hoat": 0.0122,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "bullish_engulfing_gap",
+  "co_che": "Nến tăng bao trọn kèm gap lên thể hiện áp lực mua đột biến, thanh khoản hút mạnh khiến giá phá vỡ kháng cự và đảo chiều xu hướng giảm ngắn hạn.",
+  "ho": "pha_vo",
+  "chieu": 1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "bullish_and_bearish_engulfing.mq5",
+  "_ty_le_kich_hoat": 0.0304,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "bearish_engulfing_gap",
+  "co_che": "Nến giảm bao trọn kèm gap xuống thể hiện áp lực bán gia tăng đột biến, dòng tiền thoát hàng nhanh chóng khiến giá phá vỡ hỗ trợ và tiếp tục giảm.",
+  "ho": "pha_vo",
+  "chieu": -1,
+  "giu": 1,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "open"
+    },
+    "phep": ">",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "open"
+     },
+     "n": 1
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "phep": "<",
+    "phai": {
+     "chi_bao": "tre",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 1
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "bullish_and_bearish_engulfing.mq5",
+  "_ty_le_kich_hoat": 0.0174,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "bollinger_mean_reversion",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 25,
+  "co_che": "Khách hàng trả phí để khai thác quy luật hồi về giá trị trung tâm khi giá vượt quá biên biến động thống kê, mua vào tại vùng quá bán để tối đa hóa tỷ suất sinh lời trên mỗi chu kỳ dao động.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "tb",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "close"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "nguon": "bollinger.mq5",
+  "_ty_le_kich_hoat": 0.4269,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rsi_qualified_buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 1,
+  "co_che": "Khối lượng mua tích lũy ngầm khi chỉ số sức mạnh giảm giá duy trì dưới ngưỡng trung tính, báo hiệu khả năng đảo chiều tăng giá khi lực bán cạn kiệt.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 45
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 14
+     },
+     "n": 3
+    },
+    "phep": "<=",
+    "phai": {
+     "hang": 45
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "trade_on_qualified_rsi.mq5",
+  "_ty_le_kich_hoat": 0.1884,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "rsi_qualified_sell",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 1,
+  "co_che": "Áp lực bán gia tăng liên tục khi RSI vượt trên vùng cân bằng, xác nhận xu hướng giảm đang hình thành và cơ hội vào lệnh theo dòng tiền bán.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 55
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "rsi",
+      "n": 14
+     },
+     "n": 3
+    },
+    "phep": ">=",
+    "phai": {
+     "hang": 55
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "trade_on_qualified_rsi.mq5",
+  "_ty_le_kich_hoat": 0.3548,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ibs_rsi_cci_momentum_entry",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 100,
+  "co_che": "Dau tu theo xu huong tang khi cac chi bao dong luc hieu chinh ve vung qua ban, chong lai su bat nguyen cua thi truong.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 30
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "cci",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": -100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ibs",
+     "n": 14
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "hang": 0.2
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Exp_IBS_RSI_CCI_v4.mq5",
+  "_ty_le_kich_hoat": 0.1402,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ibs_rsi_cci_momentum_exit",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 100,
+  "co_che": "Ban khi dong luc giam toc do trong vung qua mua, tranh sa xuat khi gia khong con duoc ho tro boi cac yeu to ky thuat.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 70
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "cci",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 100
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "ibs",
+     "n": 14
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "hang": 0.8
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Exp_IBS_RSI_CCI_v4.mq5",
+  "_ty_le_kich_hoat": 0.2785,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ma_cross_trend_follow_buy",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 20,
+  "co_che": "Bắt nhịp xu hướng tăng khi đường trung bình ngắn hạn cắt lên đường dài hạn, xác nhận động lượng mua từ dòng tiền tổ chức đang đẩy giá lên.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 9
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 21
+    }
+   }
+  ],
+  "nguon": "ma_cross.mq5",
+  "_ty_le_kich_hoat": 0.5246,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "ma_cross_trend_follow_sell",
+  "ho": "xu_huong",
+  "chieu": -1,
+  "giu": 20,
+  "co_che": "Mở vị thế bán khi đường ngắn hạn cắt xuống đường dài hạn, phản ánh sự suy yếu động lượng tăng và dòng tiền rút khỏi thị trường.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 9
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 21
+    }
+   }
+  ],
+  "nguon": "ma_cross.mq5",
+  "_ty_le_kich_hoat": 0.5218,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "mean_reversion_pullback",
+  "ho": "quay_ve_trung_binh",
+  "chieu": 1,
+  "giu": 10,
+  "co_che": "Dau tu gia dinh gia se trung binh ve sau khi dao manh khoi pham vi giao dich ngan han, chieu huu co mua o muc do roi ra sau khi gap de toi da hoa loi nhuan khi gia quay lai.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "cao_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "high"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "very_blonde_system.mq5",
+  "_ty_le_kich_hoat": 0.006,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "mean_reversion_rally",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 10,
+  "co_che": "Ban khi gia co xu huong tang qua muc do cho phep sau khi dao tu thap gan day, khai thác luc ban cua nguoi mua bi trap va xu huong trung binh ve cua thi truong.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "thap_nhat",
+     "cua": {
+      "chi_bao": "gia",
+      "cot": "low"
+     },
+     "n": 20
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "very_blonde_system.mq5",
+  "_ty_le_kich_hoat": 0.006,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "bezier_reopen_buy",
+  "co_che": "Khach hang thanh phan theo xu huong trung han tren khung thang 15, chong lai phe ban co quyen khi gia hoi phuc sau sua chon, ben doi la nguoi cham soc tai muc gia thap.",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 45,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": ">",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Exp_Bezier_ReOpen.mq5",
+  "_ty_le_kich_hoat": 0.8759,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "bezier_reopen_sell",
+  "co_che": "Dau tu theo do lech so sanh voi vung cung cau cu, ban khi gia bi ep xuong qua mui ten bieu do, ben doi la nguoi mua bat toc do giam.",
+  "ho": "bien_dong",
+  "chieu": -1,
+  "giu": 45,
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 20
+    }
+   },
+   {
+    "trai": {
+     "chi_bao": "rsi",
+     "n": 14
+    },
+    "phep": "<",
+    "phai": {
+     "hang": 50
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "Exp_Bezier_ReOpen.mq5",
+  "_ty_le_kich_hoat": 0.7901,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "cog_candle_momentum_sell",
+  "ho": "quay_ve_trung_binh",
+  "chieu": -1,
+  "giu": 10,
+  "co_che": "Ban khi dong luc giam xuat hien sau khi gia co xu huong tang, chong lai su mat muc cua nguoi mua va bat xu huong dao chieu de bao ve von.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "phep": "cheo_xuong",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 14
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "exp_centerofgravitycandle.mq5",
+  "_ty_le_kich_hoat": 0.5298,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "dual_ma_crossover_trend",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 100,
+  "co_che": "Mua khi duong trung binh nhanh cat len tren duong trung binh cham de bat dau xu huong tang gia.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "ema",
+     "n": 9
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "ema",
+     "n": 21
+    }
+   }
+  ],
+  "nguon": "exp_x2ma_jfatl.mq5",
+  "_ty_le_kich_hoat": 0.9606,
+  "_do_tren": "chuoi kiem"
+ },
+ {
+  "ten": "macross_trend_follow",
+  "ho": "xu_huong",
+  "chieu": 1,
+  "giu": 25,
+  "co_che": "Đường MA nhanh phản ứng với biến động giá gần đây hơn, cho phép nhà giao dịch nắm bắt đà tăng trước khi dòng tiền tổ chức điều chỉnh vị thế dài hạn.",
+  "vao": [
+   {
+    "trai": {
+     "chi_bao": "sma",
+     "n": 9
+    },
+    "phep": "cheo_len",
+    "phai": {
+     "chi_bao": "sma",
+     "n": 21
+    }
+   }
+  ],
+  "ra": [],
+  "nguon": "MACross_MT5_v107.mq5",
+  "_ty_le_kich_hoat": 0.6328,
+  "_do_tren": "chuoi kiem"
  }
 ]

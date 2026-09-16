@@ -110,3 +110,30 @@ def test_mot_dict_don_cung_doc_duoc(monkeypatch):
     monkeypatch.setitem(sys.modules, "nhan.tri_tue", gia)
     c, _ = B.sua_bang_llm("EA", dict(HONG), ["loi"])
     assert c is not None and c["ho"] == "xu_huong"
+
+
+def test_NGOAI_LE_cung_di_vao_vong_sua(monkeypatch):
+    """Do 16/09 tren me 374 file: 29 khai bao bi tu choi bang ngoai le
+    (KeyError cot 'bid'/'ask', chi bao khong biet) va KHONG cai nao duoc thu
+    sua, vi dong `continue` nhay qua ca nhanh sua."""
+    from nhan import ngu_phap as NP
+    goi = {"n": 0, "loi": None}
+
+    def no_tung(c):
+        raise KeyError("du lieu khong co cot 'bid'")
+    monkeypatch.setattr(NP, "kiem_khai_bao", no_tung)
+
+    def bat(ten, kb, loi, model=""):
+        goi["n"] += 1
+        goi["loi"] = loi
+        return None, "thu roi"
+    monkeypatch.setattr(B, "sua_bang_llm", bat)
+    B.kiem_va_giu([dict(HONG)], nguon="t", sua_llm=True)
+    assert goi["n"] == 1, "ngoai le phai di vao vong sua, khong duoc `continue`"
+    assert any("bid" in str(x) for x in goi["loi"]),         "phai nap chinh noi dung ngoai le cho mo hinh"
+
+
+def test_loi_nhac_boc_noi_ro_chi_co_nam_cot():
+    s = B._nhac("EA.mq5", ["vung"], "tom tat")
+    assert "open, high, low, close, volume" in s
+    assert "bid" in s and "ask" in s

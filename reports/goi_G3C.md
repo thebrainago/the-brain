@@ -158,3 +158,60 @@ boc nen mot loi hau ky khong lam mat ca me.
 ~16 giay cho moi khai bao bi tu choi. Re hon han hai lua chon con lai: boc lai
 file tu dau (~23s va van co the hong y het), hoac bo mot khai bao dung - thu ma
 file da tai ve, da khoanh vung, da ton mot luot LLM moi co.
+
+---
+
+# ME 374 FILE DA XONG — 16/09 17:44
+
+```
+374 file lan CHIEN_LUOC · 3.718 giay (62 phut)
+  ra co che      : 307  (82%)
+  qua kiem       : 215
+  THEM VAO KHO   :  49
+```
+
+Truoc goi nay: **0**. Kho co che tu 4.000 len **4.049**.
+
+## Ly do tu choi, xep theo so luong
+
+| so | ly do | sua duoc khong |
+|---|---|---|
+| **68** | suy bien tren MOI tai san do duoc | **khong** — dung phai bi tu choi |
+| 10 | `KeyError: du lieu khong co cot 'bid'` | co |
+| 9 | `KeyError: ... 'ask'` | co |
+| 6 | `chi bao 'khong_dien_dat_duoc' khong biet` | co |
+| 4 | `chi bao 'macd_signal' khong biet` | co |
+
+**68 muc suy bien la ket qua DUNG.** Cong bat chung vi chung khong mang thong
+tin - do la cong lam viec, khong phai cong hong.
+
+## Lo hong lo ra: NGOAI LE khong di vao vong sua
+
+29 muc con lai (10+9+6+4) bi tu choi bang **ngoai le**, va khong cai nao duoc
+thu sua: trong `kiem_va_giu`, khoi `except` goi `continue` **truoc** nhanh sua.
+
+```python
+except Exception as e:
+    ho.append(...)
+    continue          # <- nhay qua ca vong sua
+```
+
+Da sua: ngoai le gio thanh mot ly do tu choi binh thuong va di tiep vao vong
+sua, kem nguyen van noi dung ngoai le de mo hinh biet no sai cho nao.
+
+## Va sua o GOC: loi nhac chua bao gio noi co nhung cot nao
+
+19/29 muc la mo hinh goi cot `bid` / `ask` — du lieu cua he **chi co nam cot**
+(`open, high, low, close, volume`). Loi nhac boc chua bao gio noi dieu do, nen
+mo hinh doc EA thay `SymbolInfoDouble(_Symbol, SYMBOL_BID)` va dich thang.
+
+Da them vao `_nhac`: neu ra ro nam cot, va bao "EA co doc bid/ask thi dich sang
+`close`". Sua o goc re hon sua o ngon: mot dong trong loi nhac tranh duoc 19
+luot sua.
+
+## Con lai
+
+49 co che moi dang **nam trong kho, chua qua pheu**. `gia_thuyet` van 387,
+`candidate_queue` van 705, `ket_qua` van 1.284 - chung chua thanh gia thuyet
+nao. Buoc sau la cho chung qua `sang_loc` roi `cong`, va do la mot me tinh toan
+dai, khong phai mot lenh.

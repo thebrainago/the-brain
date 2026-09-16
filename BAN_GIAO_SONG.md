@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: 6bece1f tran CPU: khoa luong numpy - do moi la thu an het may
-### 2026-09-14 21:12:45 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 1860, 0 phut)
 - `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
 - `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 10296, 0 phut), dieu_khien_xa.py (pid 15316, 483 phut)
 - git: 41fa0bc G3-B: Sonic R qua CONG RA TIEN — he dau tien, nhung chua phai phat hien
+### 2026-09-16 17:13:12 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2472, 0 phut), dieu_khien_xa.py (pid 15316, 507 phut)
+- git: 1be535f G5: bo _luu_tru khoi danh sach chan VPS + nen nao.db 1,59 -> 0,64 GB
