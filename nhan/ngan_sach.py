@@ -358,6 +358,33 @@ def _dang_giu(lop: str) -> int:
     return n
 
 
+def _duoc_o_lai(lop: str, tran: int) -> bool:
+    """The cua TA co nam trong `tran` the CU NHAT khong?
+
+    Xep theo (thoi diem tao, pid) nen moi tien trinh deu ra cung mot thu tu -
+    khong can ai lam trong tai. Hai tien trinh cung chiem cho thi ke den sau tu
+    biet minh khong duoc o lai, tra the roi cho.
+    """
+    import psutil
+    thu = _KHOA / lop
+    ds = []
+    for f in thu.glob("*.the"):
+        try:
+            pid = int(f.stem)
+        except Exception:
+            f.unlink(missing_ok=True)
+            continue
+        if not psutil.pid_exists(pid):
+            f.unlink(missing_ok=True)
+            continue
+        try:
+            ds.append((f.stat().st_mtime, pid))
+        except OSError:
+            continue
+    ds.sort()
+    return os.getpid() in [p for _, p in ds[:tran]]
+
+
 @contextmanager
 def xin(lop: str, viec: str = "", cho_giay: float = 0.0, ram_gb: float = 0.0):
     """Xin mot cho o lop tai nguyen `lop`. Nem `HetCho` neu khong con.
@@ -387,9 +414,22 @@ def xin(lop: str, viec: str = "", cho_giay: float = 0.0, ram_gb: float = 0.0):
     the = thu / ("%d.the" % os.getpid())
     het = time.time() + cho_giay
     while True:
-        if tran is None or _dang_giu(lop) < tran:
+        if tran is None:
             the.write_text(viec or "?", encoding="utf-8")
             break
+        # GIU THE TRUOC ROI MOI DEM (sua 16/09, goi G2-C).
+        #
+        # Ban cu la "dem roi moi giu": hai tien trinh cung thay `_dang_giu <
+        # tran` roi CA HAI cung ghi the - va voi `TESTER: 1` thi do la hai luot
+        # tester cung luc, dung cai hong ghi de ket qua ma khong bao loi.
+        #
+        # Nay giu the truoc, dem sau, va chi nhung the CU NHAT duoc o lai. Ai
+        # den sau tu tra the roi cho. Nho vay khong co khe cua so nao giua
+        # "thay con cho" va "chiem cho".
+        the.write_text(viec or "?", encoding="utf-8")
+        if _duoc_o_lai(lop, tran):
+            break
+        the.unlink(missing_ok=True)
         if time.time() >= het:
             raise HetCho("lop %s day (%d/%s) - viec `%s` chua chay"
                          % (lop, _dang_giu(lop), tran, viec))

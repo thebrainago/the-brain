@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- git: e33dac9 Chot phien 13/09: bao cao bench + pheu, nhat ky, go khoa tester/warp
-### 2026-09-14 19:38:24 — chup trang thai
-
-- dang chay: b.py (pid 12268, 5 phut), ban_giao_song.py (pid 6708, 0 phut), chay_test_tung_me.py (pid 12144, 5 phut), dieu_khien_xa.py (pid 16196, 46 phut), dieu_phoi.py (pid 11532, 46 phut), seeker.py (pid 16376, 3 phut), test_go_html.py (pid 13260, 1 phut)
 - `dieu_phoi.log`: 2026-09-14 19:36:50 QUANTLAB  skipped    801.8s guard=job
 - `dieu_phoi_nen.log`: 2026-09-14 18:52:06 WATCHDOG khoi dong supervisor
 - `supervisor_stdio.log`: 2026-09-14 19:36:50 QUANTLAB  skipped    801.8s guard=job
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 11368, 0 phut), dieu_khien_xa.py (pid 15316, 320 phut)
 - git: 434f7e8 G2-A: slot tester — go 2/4 cho ghim cung, va mot bay ghi de
+### 2026-09-16 14:48:33 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 3572, 0 phut), dieu_khien_xa.py (pid 15316, 362 phut)
+- git: d20a266 G2-B: thu lai khi khoa ban + ghi theo lo + checkpoint WAL
