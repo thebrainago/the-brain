@@ -5,14 +5,6 @@
 > do. `b ket` doc file nay khi chot phien.
 
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: 6ca8e5b lan nhanh CO HANG lan dau: 3 he vao, he thu 4 bi tran WIP chan dung luat
-### 2026-09-14 22:49:32 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14872, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: 49ca60d lan nhanh di duoc toi tester: viet ban DSL cho hai he ket, va ba lo hong tren duong
 ### 2026-09-14 22:55:40 — chup trang thai
 
@@ -404,3 +396,11 @@
 
 - dang chay: ban_giao_song.py (pid 20876, 0 phut), dieu_khien_xa.py (pid 11560, 259 phut)
 - git: 00903e5 bo mau .mq5 + bai do moc + prompt cho phien cloud
+### 2026-09-18 22:39:43 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 18308, 0 phut)
+- git: 8750314 don viec ton: BANKER nap lai FRED, ban do het thoi so mo coi
+### 2026-09-18 22:42:44 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 8620, 0 phut)
+- git: 8750314 don viec ton: BANKER nap lai FRED, ban do het thoi so mo coi

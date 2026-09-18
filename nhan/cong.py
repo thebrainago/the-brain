@@ -52,6 +52,14 @@ MAC_DINH = {
     "so_hat_placebo": 5,
     "n_bootstrap": 199,
     "so_lenh_toi_thieu": 30,
+    # --- TANG 2 KINH TE (chu du an dua vao 18/09/2026, tu tong ket SP500) ---
+    # Sinh ra de giet MARTINGALE TRA HINH: tp=0,1xATR / sl=4,0xATR cho rr=0,025
+    # va winrate 100% tren 15-20 lenh. Bonferroni KHONG bat duoc, vi breakeven
+    # winrate cua rr=0,025 la 97,6% nen 100% vuot qua ngon lanh. Dung toan hoc,
+    # vo gia tri kinh te. Tren SP500 no da sinh ra 2.081 ung vien kieu nay.
+    "rr_thuc_te_toi_thieu": 0.2,     # MIN_RR: lai TB lenh thang / lo TB lenh thua
+    "edge_tren_spread_toi_thieu": 3.0,  # MIN_EDGE_MULT: lai rong >= 3x chi phi spread
+
     "fdr_muc_tieu": 0.10,
     # So lan mot gia thuyet duoc phep DA NHIN holdout truoc lan nay ma van con
     # co the PASS. 0 = chi lan nhin DAU TIEN moi chung nhan duoc. Xem
@@ -148,6 +156,49 @@ def bootstrap_dung(v: np.ndarray, rng: np.random.Generator, dai_khoi: int) -> np
         ra[i:i + dai] = v[vt]
         i += dai
     return ra
+
+
+def lai_theo_lenh(vi_the, loi):
+    """Gop chuoi loi THEO BAR thanh loi THEO LENH.
+
+    `KetQua.loi` la loi tung bar (`v * r - phi`), khong phai tung lenh. Muon do
+    R:R THUC TE thi phai gop lai: moi doan `vi_the` khong doi la mot lenh.
+
+    Do nay khac tp/sl KHAI BAO o cho no la cai da xay ra that - ke ca khi lenh
+    thoat bang timeout chu khong cham tp/sl nao.
+    """
+    import numpy as _np
+    v = _np.asarray(vi_the, dtype=float)
+    l = _np.asarray(loi, dtype=float)
+    if v.size == 0 or l.size == 0:
+        return _np.array([])
+    n = min(v.size, l.size)
+    v, l = v[:n], l[:n]
+    ra, dang, tich = [], None, 0.0
+    for i in range(n):
+        if v[i] != dang:
+            if dang not in (None, 0.0):
+                ra.append(tich)
+            dang, tich = v[i], 0.0
+        if v[i] != 0.0:
+            tich += l[i]
+    if dang not in (None, 0.0):
+        ra.append(tich)
+    return _np.array(ra, dtype=float)
+
+
+def rr_thuc_te(vi_the, loi) -> float:
+    """Lai TB cua lenh THANG chia |lo TB cua lenh THUA|. 0 = khong do duoc."""
+    import numpy as _np
+    x = lai_theo_lenh(vi_the, loi)
+    if x.size == 0:
+        return 0.0
+    thang, thua = x[x > 0], x[x < 0]
+    if thang.size == 0:
+        return 0.0
+    if thua.size == 0:
+        return float("inf")          # chua tung thua - de dieu kien khac xet
+    return float(_np.mean(thang) / abs(_np.mean(thua)))
 
 
 def kiem_ks(v_that: np.ndarray, v_gia: np.ndarray) -> float:
@@ -710,6 +761,30 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         if not dk["7_chi_phi_do_duoc"]:
             ly_do.append(f"mo hinh chi phi do_tin={cp.do_tin} (chua do tu du lieu/san)")
     dk["8_du_lenh"] = (kq_he.so_lenh or 0) >= n["so_lenh_toi_thieu"]
+
+    # ---- TANG 2 KINH TE: chan martingale tra hinh -------------------------
+    try:
+        _rr = rr_thuc_te(kq_he.vi_the, kq_he.loi)
+    except Exception:
+        _rr = 0.0
+    dk["12_rr_thuc_te"] = _rr >= n["rr_thuc_te_toi_thieu"]
+    if not dk["12_rr_thuc_te"]:
+        ly_do.append("rr thuc te %.3f < %.2f - lai TB mot lenh thang qua nho so "
+                     "voi lo TB mot lenh thua (dang martingale tra hinh)"
+                     % (_rr, n["rr_thuc_te_toi_thieu"]))
+
+    try:
+        import numpy as _np
+        _lai_rong = float(_np.nansum(kq_he.loi))
+        _phi_sp = float(abs(kq_he.chi_phi_spread or 0.0))
+    except Exception:
+        _lai_rong = _phi_sp = 0.0
+    dk["13_edge_vuot_spread"] = (_phi_sp <= 0) or (
+        _lai_rong >= n["edge_tren_spread_toi_thieu"] * _phi_sp)
+    if not dk["13_edge_vuot_spread"]:
+        ly_do.append("lai rong %.4f < %.1fx chi phi spread %.4f - edge mong so "
+                     "voi chi phi, dung loai edge song duoc ngoai doi"
+                     % (_lai_rong, n["edge_tren_spread_toi_thieu"], _phi_sp))
 
     # ---- 11: khong duoc song bang KHE GIA o moc dao ngay ------------------
     # Do 30/08/2026: tren FX H4 cua kho nay, bar 00:00 MO THAP gia tao roi hoi
