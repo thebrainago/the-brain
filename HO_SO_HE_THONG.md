@@ -1,6 +1,6 @@
 # HO SO HE THONG — THE BRAIN
 
-*Sinh tu ma nguon + `nao.db` luc 2026-09-16 19:27 bang `b ho-so`.*
+*Sinh tu ma nguon + `nao.db` luc 2026-09-18 20:47 bang `b ho-so`.*
 
 > **Doc file nay the nao.** No TU DU: khong can mo repo. Moi con so o day
 > do duoc luc sinh, khong chep tu bao cao cu. Ba muc **KHONG** co trong
@@ -364,26 +364,25 @@ Moi dong duoi day la mot loi DA SAP THAT trong du an nay, khong phai ly thuyet.
 
 | Muc | So |
 |---|---|
-| File `.py` | 535 |
+| File `.py` | 590 |
 | Tren duong chay | 199 |
 | Module loi `nhan/` | 132 |
-| File goc `lab/` | 351 (155 test · 131 script chay tay · **65 no that**) |
+| File goc `lab/` | 354 (157 test · 131 script chay tay · **66 no that**) |
 | File > 600 dong | 34 |
 | Module trong goi van mo coi | 2 |
 | `nao.db` | 1.6 GB |
-| Van de con mo trong so | 23 |
+| Van de con mo trong so | 18 |
 
 ## 10. Nang luc cong cu cua phien lam viec
 
 Muc nay cho nguoi doc ngoai biet **phien Claude Code chay du an nay lam gi duoc**, de dung giao viec ma cong cu khong lam noi — hoac nguoc lai, dung de xuat lam tay thu da tu dong.
 
-**8 plugin dang bat:**
+**7 plugin dang bat:**
 
 - `double-shot-latte@superpowers-marketplace`
 - `episodic-memory@superpowers-marketplace`
 - `feature-dev@claude-code-plugins`
 - `financial-analysis@claude-for-financial-services`
-- `hookify@claude-code-plugins`
 - `security-guidance@claude-code-plugins`
 - `superpowers@superpowers-marketplace`
 - `trading-skills@agiprolabs-claude-trading-skills`
@@ -410,8 +409,8 @@ Muc nay cho nguoi doc ngoai biet **phien Claude Code chay du an nay lam gi duoc*
 |---|---|
 | OS | Windows 10.0.19045 |
 | CPU | Intel64 Family 6 Model 79 Stepping 1, GenuineIntel — **10 nhan / 20 luong** |
-| RAM | 34.3 GB (trong 27.8 GB luc do) |
-| Dia | C:\ 128GB (trong 26.9GB) · F:\ 128GB (trong 17.8GB) |
+| RAM | 34.3 GB (trong 19.0 GB luc do) |
+| Dia | C:\ 128GB (trong 28.0GB) · F:\ 128GB (trong 17.8GB) |
 | GPU | **khong dung** — khong thu vien nao trong he goi CUDA/GPU |
 
 ### 11.2 Python va engine
@@ -439,19 +438,19 @@ Muc nay cho nguoi doc ngoai biet **phien Claude Code chay du an nay lam gi duoc*
 | Loai | SQLite, journal **wal**, `busy_timeout` 5000 ms |
 | Kich thuoc | 1595.4 MB · WAL 0.0 MB |
 | Trang | 389491 x 4096 B = 1.60 GB |
-| Tong dong | **225,608** tren 26 bang |
+| Tong dong | **225,619** tren 26 bang |
 
-| Trang TRONG | 231671 trang = 0.95 GB (**59.5% DB**), thu hoi duoc bang VACUUM |
+| Trang TRONG | 231670 trang = 0.95 GB (**59.5% DB**), thu hoi duoc bang VACUUM |
 | Du lieu THAT | 0.65 GB |
 
-**Da DO, khong doan:** 1595.4 MB cho **225,608 dong**, trong do 231671 trang = 0.95 GB (**59.5% DB**), thu hoi duoc bang VACUUM. Phan con lai (0.65 GB) la du lieu that — chu yeu toan van tai lieu o `noi_dung`/`artifact`. VACUUM can cho trong bang kich thuoc DB tren CUNG o.
+**Da DO, khong doan:** 1595.4 MB cho **225,619 dong**, trong do 231670 trang = 0.95 GB (**59.5% DB**), thu hoi duoc bang VACUUM. Phan con lai (0.65 GB) la du lieu that — chu yeu toan van tai lieu o `noi_dung`/`artifact`. VACUUM can cho trong bang kich thuoc DB tren CUNG o.
 
 | Bang | Dong | | Bang | Dong |
 |---|---|---|---|---|
 | `vi_mo` | 113,419 | | `thanh_phan` | 285 |
-| `chi_so_vh` | 51,382 | | `bai_hoc` | 238 |
-| `su_kien` | 19,160 | | `anh_chup` | 181 |
-| `tai_lieu` | 12,078 | | `van_de` | 134 |
+| `chi_so_vh` | 51,386 | | `bai_hoc` | 238 |
+| `su_kien` | 19,165 | | `anh_chup` | 181 |
+| `tai_lieu` | 12,078 | | `van_de` | 136 |
 | `artifact` | 10,202 | | `nguon` | 98 |
 | `noi_dung` | 8,055 | | `khang_dinh` | 60 |
 | `lenh_paper` | 3,573 | | `de_xuat` | 59 |
@@ -505,7 +504,7 @@ Loi `database is locked` **da tung gap** — day la ly do co `nhan/gop_wal.py` v
 
 ### 11.8 Git va test
 
-- Nhanh `master` · **368 commit** · 3 file dang ban · KHONG CO remote
+- Nhanh `master` · **373 commit** · 6 file dang ban · KHONG CO remote
 - `git worktree`: **dung duoc** (repo binh thuong, 1 worktree dang co). Day la duong cho nhieu phien Claude Code lam viec tach nhau — xem 11.10.
 - **Bo test:** 2026-09-16 · `pytest -q -n 8 --dist loadfile` · KHONG HOAN TAT. Chay ~10 phut, tien den 98% roi **gw5 node down: Not properly terminated**, khong in duoc dong tong ket nen KHONG CO so pass/fail. Thay 2 dau `F` trong tien trinh. Day dung la kieu hong da ghi truoc: `b test` chet giua chung tren may dang nghet -> dung `b test-me` (chia me, nhieu tien trinh pytest ngan). Tap con chay rieng thi SACH: `-k "ban_do or bang_he"` = 35 passed, 1 skipped, 68s.
 
@@ -539,7 +538,7 @@ Tai nguyen dung chung, xep theo **do nguy hiem khi va cham**:
 |---|---|---|---|
 | 1 | **MT5 tester, 1 lan** | `TESTER = 1`; 8.241 phep thu = 82 giay khi nhoi mot lan boot, nhung hai viec khong the chay cung luc | Moi ket luan cuoi cung phai qua tester. Ca 10 nhan / 20 luong CPU khong giup duoc gi o khau nay |
 | 2 | **Suat boc tai lieu** | 12.078 tai lieu -> 18 mau (**0,15%%**); LLM dien 48 khai bao, tham dinh bac 41, rong **3** | Kho x6 ma ung vien cham cong van 21 — them dau vao khong di qua duoc khau nay |
-| 3 | **Dia** | C: con 26.9GB | `nao.db` 1595.4 MB cho 225,608 dong; WAL tung phinh 1,4 GB va lam ba me boc bao XONG ma kho khong doi |
+| 3 | **Dia** | C: con 28.0GB | `nao.db` 1595.4 MB cho 225,619 dong; WAL tung phinh 1,4 GB va lam ba me boc bao XONG ma kho khong doi |
 | 4 | **Mang / nguon bi chan** | mql5.com cam theo IP sau ~50-150 luot; phai di 8 giay/luot + doi IP | Chang [1] cua so do bi cat nhip, khong phai vi may yeu |
 | 5 | **Mot luong ghi `nao.db`** | SQLite WAL: nhieu doc, **mot ghi**, `busy_timeout` 5000 ms | Moi tru + qwen + script tay deu ghi chung mot so |
 

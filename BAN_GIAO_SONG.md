@@ -4,18 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: 0937f72 bang 11 ho: in them SUT GIAM THAT, va cot "o>moc" chi tinh tren o sach
-### 2026-09-14 22:16:45 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 20276, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: 092c590 gan 11 ho quan tri len HE DA CO EDGE: khong ho nao cai thien
-### 2026-09-14 22:30:43 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 13568, 0 phut)
 - `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
@@ -404,3 +392,15 @@
 - dang chay: ban_giao_song.py (pid 14220, 0 phut), dieu_khien_xa.py (pid 11560, 22 phut)
 - `dieu_phoi_nen.log`: [Fri 09/18/2026 18:13:35.88] thay DUNG_LAI - khong khoi dong watchdog
 - git: a06e09a SUA: FDR da TAT tu 04/09 — toi viet sai o nhieu cho
+### 2026-09-18 20:17:05 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15316, 0 phut), dieu_khien_xa.py (pid 11560, 123 phut)
+- git: 00d9b08 go TAI_KHOAN_VA_MA_KHOA.txt khoi git (van con tren dia)
+### 2026-09-18 20:17:45 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20164, 0 phut), dieu_khien_xa.py (pid 11560, 124 phut)
+- git: 00d9b08 go TAI_KHOAN_VA_MA_KHOA.txt khoi git (van con tren dia)
+### 2026-09-18 20:30:29 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16404, 0 phut), dieu_khien_xa.py (pid 11560, 136 phut)
+- git: 96a1710 lab/: README + .gitignore rieng, de dung mot minh tren GitHub
