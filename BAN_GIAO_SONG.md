@@ -4,18 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: 49ca60d lan nhanh di duoc toi tester: viet ban DSL cho hai he ket, va ba lo hong tren duong
-### 2026-09-14 22:55:40 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 12176, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: c7c7d57 spec hong khong duoc bien mat im lang - sua ca hai dau
-### 2026-09-14 23:00:36 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 19764, 0 phut)
 - `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
@@ -404,3 +392,15 @@
 
 - dang chay: ban_giao_song.py (pid 8620, 0 phut)
 - git: 8750314 don viec ton: BANKER nap lai FRED, ban do het thoi so mo coi
+### 2026-09-18 23:11:04 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17344, 0 phut)
+- git: bab76a8 nap tong ket SP500 vao ha tang: them TANG 2 KINH TE vao cong
+### 2026-09-18 23:11:47 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 22260, 0 phut)
+- git: bab76a8 nap tong ket SP500 vao ha tang: them TANG 2 KINH TE vao cong
+### 2026-09-18 23:12:58 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 15000, 0 phut)
+- git: bab76a8 nap tong ket SP500 vao ha tang: them TANG 2 KINH TE vao cong

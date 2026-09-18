@@ -1,0 +1,67 @@
+  44/4049 co che BI BO vi khai bao hong:
+       37  thieu truong bat buoc 'co_che'
+        2  'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien cho phoi 
+        2  vao[0]: hai ve GIONG HET nhau - dieu kien khong mang thong tin
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close cheo_len 
+        1  vao[0]: trong mot bar 'close' <= 'high' LUON dung, nen 'close >= high'
+        1  vao[0]: trong mot bar 'close' >= 'low' LUON dung, nen 'close <= low' k
+  14 co che se ra 0 lenh VI LOI KHAI (nguong tinh bang DON VI GIA), khong phai vi thi truong:
+       mua_rsi_qua_ban_xu_huong_tang                  CHET_MOI_NOI
+       ban_rsi_qua_mua_xu_huong_giam                  CHET_MOI_NOI
+       rsi_sell                                       CHET_MOI_NOI
+       mua_ma_rsi                                     CHET_MOI_NOI
+       ban_ma_rsi                                     CHET_MOI_NOI
+       hurstbuffer_inpreversionthreshold              CHET_MOI_NOI
+       stc_crossover_mean_reversion                   PHU_THUOC_THANG_GIA
+       vao_mua_khi_chi_bao_rsi_200_xuong_duoi_muc_30_ CHET_MOI_NOI
+       vao_ban_khi_chi_bao_rsi_200_len_tren_muc_70_ch CHET_MOI_NOI
+       mua_close_tren_ema200_ema50_cheo_len_ema200_rs CHET_MOI_NOI
+     doc `nhan/thang_gia.py`. Mot dong 0 o day KHONG phai ket qua.
+  gop 107 co che TRUNG HANH VI (cung mot chuoi tin hieu):
+     mua_rsi30_tren_50_rsi2_duoi_15           <- mua_khi_rsi_30_tren_50_va_rsi_2_qu
+     pine_stochastic_rsi_doub_rsi14_cheo_len_ <- rsi_cross_up_from_30, vr_rsi_robot, reverse_rsi_bands
+     s_ban_rsi14_cheo_xuong_70                <- rsi_cross_down_from_70, harmonicrsiscanner, rsi_level_reversal_sell
+     ban_rsi_qua_mua_xu_huong_giam            <- rsi_sell, ban_ma_rsi, hurstbuffer_inpreversionthreshold
+     mua_rsi14_duoi_30                        <- rsi_oversold_rebound_from_wilder_s, fvg_buy_reversal, algoforge_fvg_finder
+     rsi_overbought_sell                      <- rsi_overbought_reversal_from_wilde, fvg_sell_reversal
+kho 666 -> dich duoc 668, bo 0
+  bien dich xong (668 co che)
+  chay optimization 668 pass ...
+
+668 pass, 30.6s  
+lot 5 - von 10.000 USD - 2013.01.01 -> 2026.09.01 (13.66 nam)
+
+co che                                       lenh       lai     PF  sharpe     DD%  %/nam@DD20
+nguoi_tra_tien_vi_chien_luoc_nay_ket_hop_x     22    425.91   7.65    2.19    1.37       +3.61
+reversion_zscore_extreme_filter                40    368.48   2.14    1.31    1.27       +3.40
+rsi_sell_overbought_cross                     168    557.66   1.53    1.21    1.54       +4.07
+rsi_xuong_nguong_cao                          164    608.91   1.56    1.13    1.78       +3.88
+dashboard_mean_reversion_signal               167   1102.29   1.73    1.11    2.78       +4.36
+ban_khi_rsi_qua_mua                           173    627.22   1.51    0.97    2.21       +3.34
+rsi_dashboard_buy_signal                      176    741.78   1.54    0.93    3.12       +2.88
+rsi_dashboard_sell_signal                     157    522.51   1.45    0.84    1.73       +3.52
+silviobuyentry                                 20    357.63   5.07    0.84    1.37       +3.12
+net_rsi_signal                                177    622.32   1.46    0.83    2.92       +2.63
+pairs_trading_mean_reversion_down              35   1083.22   7.02    0.83    1.82       +5.91
+bat_ay_rsi_a_khung_thoi_gian                  146    624.35   1.63    0.80    2.84       +2.70
+ban_khi_rsi_vao_vung_qua_mua                  170    512.45   1.39    0.76    2.22       +2.82
+vao_long_khi_rsi_2_duoi_3                     412    621.56   1.24    0.75    2.29       +3.22
+vao_long_khi_rsi_2_duoi_2                     270    449.29   1.23    0.71    1.75       +3.07
+rsi_price_action_breakout                       8    130.96  10.53    0.70    0.46       +3.33
+vao_lenh_rsi_qua_mua                          137    521.27   1.46    0.68    2.39       +2.68
+rsi_dao_chieu_dsl_n14_vao30_ra55              141    780.00   1.61    0.68    3.46       +2.76
+mua_khi_rsi_vao_vung_qua_ban                  192    558.07   1.30    0.63    3.45       +2.07
+rsi_buy_oversold_cross                        192    365.38   1.27    0.63    2.49       +1.90
+ban_inh_rsi_a_khung_thoi_gian                 133    396.42   1.39    0.63    2.13       +2.34
+rsi_xu_huong_mua                              173    645.91   1.34    0.62    3.45       +2.35
+pairs_trading_mean_reversion_z_score_signa    199    775.85   1.52    0.57    2.88       +3.20
+vao_long_khi_rsi_14_cheo_xuong_30             190    319.64   1.20    0.54    4.42       +0.99
+rsi_vuot_nguong_thap                          183    349.96   1.25    0.53    2.71       +1.70
+__mua_giu__                                    42     18.58   1.01    0.00    9.12       +0.03
+__ban_giu__                                    42  -1759.17   0.38   -0.32   21.43       -1.30
+
+moc mua-giu o cung rui ro: +0.03%/nam  ->  100/667 co che hon moc
+moc BAN-giu o cung rui ro : -1.30%/nam
+  -> so voi moc CAO HON trong hai chieu (+0.03%/nam): **100/667** co che hon
+     Tren mot cap DANG TROI, thang moc nguoc chieu khong
+     chung minh gi - do la drift doi lot edge.
