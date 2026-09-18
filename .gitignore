@@ -49,7 +49,8 @@ reports/*.html
 reports/*.prof
 *.err
 *.out
-nhat_ky/
+# nhat_ky/ KHONG chan: du an co chu y commit ban giao phien
+# (150 commit tu 30/08). Chan no la noi sai su that.
 backups/
 
 # --- TRANG THAI RUNTIME ------------------------------------------------------
