@@ -4,14 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 19764, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: c7c7d57 spec hong khong duoc bien mat im lang - sua ca hai dau
-### 2026-09-14 23:12:31 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 6848, 0 phut)
 - git: ec63bcf tester: "0 lenh" khong duoc tra ve tro troi + `--khung` bi bo qua
 ### 2026-09-14 23:18:38 — chup trang thai
@@ -404,3 +396,11 @@
 
 - dang chay: ban_giao_song.py (pid 15000, 0 phut)
 - git: bab76a8 nap tong ket SP500 vao ha tang: them TANG 2 KINH TE vao cong
+### 2026-09-18 23:29:00 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14184, 0 phut)
+- git: cbb184e AUDCAD H4: tester that 668 co che — tan suat va Sharpe loai tru nhau
+### 2026-09-18 23:47:57 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 848, 0 phut)
+- git: cbb184e AUDCAD H4: tester that 668 co che — tan suat va Sharpe loai tru nhau
