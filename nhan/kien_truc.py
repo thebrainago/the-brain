@@ -54,6 +54,52 @@ from nhan import ban_do as BD                                    # noqa: E402
 
 TEP = LAB / "KIEN_TRUC.md"
 
+#: Vai tro cua tung THU MUC. Viet tay, cung ly do voi LOP ben duoi: khong co
+#: cach nao doc duoc "thu muc nay de lam gi" tu ma nguon. Va cung mot cai
+#: phanh: thu muc khong co trong bang thi KHONG bi bo qua, no hien ra o muc
+#: "chua khai vai tro" cuoi muc 0, nen them thu muc moi la bao cao keu ngay.
+THU_MUC_GOC = {
+    "lab": "**The Brain** — toan bo he 24/7 (tru + nhan + cua vao). "
+           "Moi thu con lai o goc la Phase 1 (SP500), da dong.",
+    "ds": "Ho so giao viec cho agent ngoai (DeepSeek). Git rieng, gop vao 30/08.",
+    "nap_tay": "Kho NAP TAY: repo github + file chu du an tu tha vao. "
+               "Nguyen lieu tho, Seeker doc tu day.",
+    "reports": "Bao cao Phase 1 SP500 (co truoc `lab/reports`).",
+    "co_che_ds": "Co che do DeepSeek viet ra, cho kiem dinh.",
+    "V6_DONG_GOI": "Ban dong goi he V6 de chay that (bat/ps1 + code).",
+    "so_do": "So do he thong dang html/svg/png.",
+    "ea": "EA MQL5 xuat ra de chay MT5 (V7_SP500).",
+    "data": "Du lieu goc Phase 1 (co tuc do).",
+    "output_multi_indicator_us500cash": "Ket qua quet indicator_master tren us500cash.",
+    "output_multi_indicator": "Ket qua quet indicator_master (rong).",
+}
+
+THU_MUC_LAB = {
+    "tru": "**Bay tru** — Seeker/Quantlab/Evolution/Banker/Finder/Nghi. Tang tren.",
+    "nhan": "**Lop nhan** — module thu vien, tang duoi cua moi tru. Xem muc 3.",
+    "quant": "Lane nghien cuu Quantlab V2 (thu_vien/pseud + ket qua).",
+    "qwen": "Bang viec + vong chay tu dong cua qwen — cua vao thu 4.",
+    "config": "Cau hinh: api_keys, chi_phi_do, co_che_dsl...",
+    "reports": "**Dau ra chinh** — ket qua may sinh (json/csv) cua kiem dinh.",
+    "nhat_ky": "Ban giao song + log theo phien.",
+    "downloaded_codes": "File Seeker tai ve (github/mql5/myfxbook/tradingview/transcripts).",
+    "data": "Du lieu gia da nap (csv).",
+    "data_khung": "Du lieu gia theo khung, dang parquet.",
+    "roles": "Mo ta vai tro cho agent (BANKER/CHUNG/QUANTLAB/SEEKER).",
+    "prompts": "Prompt cac vai.",
+    "tai_lieu": "Dac ta viet tay (PMG, SLOT_TESTER).",
+    "nghi_huu": "Module DA NGHI HUU, giu lai de tra cuu — khong nam tren duong chay.",
+    "_luu_tru": "Script cu cat di. Phan lon muc 4.1 nam o day.",
+    "archive": "Script/anh chup cu cat di.",
+    "browser_backup_20260821": "Ban sao ho so trinh duyet Seeker (21/08).",
+    ".browser_darwinex": "Ho so trinh duyet RIENG cua Seeker, dang chay.",
+    "ma_tai_ve": "Cho ma tai ve (rong).",
+}
+
+#: Cache/ha tang — dem lam nhieu so, khong phai kien truc.
+BO_QUA_TM = {".git", ".claude", "__pycache__", ".pytest_cache",
+             ".mermaid", ".mermaid-cache", "node_modules", ".venv"}
+
 #: Nam tru theo so do cua chu du an (Desktop/hethong.txt - LUAT SO 0).
 #: Thu tu o day la thu tu XUAT HIEN trong bao cao, khong phai thu tu uu tien.
 TRU = ("seeker", "quantlab", "evolution", "banker", "finder", "nghi")
@@ -177,6 +223,30 @@ def _dong_module(k: str, d: dict, hien_goi: bool = True) -> str:
     return "- **`%s`** (%d dong%s) — %s" % (ten, d["dong"].get(k, 0), dau, vt)
 
 
+def _do_thu_muc(goc: Path, bang: dict) -> tuple[list, list]:
+    """Do THAT tren dia: moi thu muc con cap 1 co bao nhieu file, bao nhieu MB.
+
+    Tra ve (da_khai, chua_khai). Dung luong o day tung la thu cuu mot phien:
+    dia day hien ra nhu ket qua rong chu khong bao loi.
+    """
+    da, chua = [], []
+    for p in sorted(goc.iterdir()):
+        if not p.is_dir() or p.name in BO_QUA_TM:
+            continue
+        n = b = 0
+        for f in p.rglob("*"):
+            if "__pycache__" in f.parts:
+                continue
+            try:
+                if f.is_file():
+                    n += 1
+                    b += f.stat().st_size
+            except OSError:
+                pass
+        (da if p.name in bang else chua).append((p.name, n, b / 1e6))
+    return da, chua
+
+
 def sinh(in_ra=print) -> str:
     """Dung bao cao. Tra ve chuoi de `--ghi` ghi thang xuong file."""
     d = _thu_thap()
@@ -199,6 +269,36 @@ def sinh(in_ra=print) -> str:
     W("Nguon cau truc goc van la `Desktop/hethong.txt` (LUAT SO 0) — file nay")
     W("khong thay the no, no chi cho thay CAI DA XAY toi dau so voi so do do.")
     W("")
+
+    # ---- 0. THU MUC ------------------------------------------------------
+    GOC = LAB.parent
+    W("## 0. Thu muc — cai gi nam o dau")
+    W("")
+    W("So file va MB o day DO THAT tren dia luc chay; vai tro thi viet tay")
+    W("(`THU_MUC_GOC` / `THU_MUC_LAB` trong `nhan/kien_truc.py`). Cache va")
+    W("`.git` khong dem.")
+    W("")
+    for ten, g, bang in (("`%s/` — goc du an" % GOC.name, GOC, THU_MUC_GOC),
+                         ("`lab/` — The Brain", LAB, THU_MUC_LAB)):
+        da, chua = _do_thu_muc(g, bang)
+        W("### %s" % ten)
+        W("")
+        W("| Thu muc | File | MB | Vai tro |")
+        W("|---|---:|---:|---|")
+        for nm, n, mb in sorted(da, key=lambda x: -x[1]):
+            W("| `%s/` | %d | %.0f | %s |" % (nm, n, mb, bang[nm]))
+        W("")
+        if chua:
+            W("**Chua khai vai tro — %d thu muc:** %s"
+              % (len(chua), " · ".join("`%s/` (%d file)" % (nm, n)
+                                       for nm, n, _ in chua)))
+            W("")
+    kho = sorted(LAB.glob("*.db"))
+    if kho:
+        W("**Kho o goc `lab/`:** "
+          + " · ".join("`%s` %.0f MB" % (k.name, k.stat().st_size / 1e6)
+                       for k in kho))
+        W("")
 
     # ---- 1. CUA VAO -------------------------------------------------------
     W("## 1. Cua vao — bon duong chay that")
