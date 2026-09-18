@@ -48,8 +48,13 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(LAB))
 
 TEP = LAB / "BAN_DO.md"
+# 18/09: them co_che_ds / so_do / mau_thu. Ba cho nay chuyen vao `lab/` khi gom
+# kho, va chung la DU LIEU chu khong phai module: co_che_ds la co che tho cho
+# kiem dinh, so_do la html/svg, mau_thu la bo mau .mq5 cho phien cloud. De
+# nguyen thi ban do bao 72 mo coi trong khi mo coi THAT chi co 19 — mot con so
+# bi thoi len gap bon lam nguoi doc tuong no kien truc phinh ra sau khi gom kho.
 BO_QUA = ("nhat_ky", "backups", "__pycache__", "nghi_huu", ".git", "archive",
-          "browser_backup", "reports", "data")
+          "browser_backup", "reports", "data", "co_che_ds", "so_do", "mau_thu")
 
 #: Cac cua vao - tu day lan ra thi biet cai gi thuc su duoc chay.
 CUA_VAO = ("b.py", "dieu_phoi.py", "day_viec.py", "BAN_GIAO.py", "KET_PHIEN.py")

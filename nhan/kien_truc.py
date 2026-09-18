@@ -73,6 +73,8 @@ THU_MUC_GOC = {
 
 THU_MUC_LAB = {
     "bao_cao": "Bao cao phien The Brain (tu 15/08). Gom ve day 18/09.",
+    "mau_thu": "Bo mau .mq5 THAT + `do_moc.py` — bai do chay duoc TREN CLOUD "
+               "(khong can nao.db/MT5). Moc 18/09: thay 22 diem vao lenh, ra 0 co che.",
     "co_che_ds": "Co che do DeepSeek viet ra, cho kiem dinh.",
     "so_do": "So do he thong dang html/svg/png.",
     "tru": "**Bay tru** — Seeker/Quantlab/Evolution/Banker/Finder/Nghi. Tang tren.",

@@ -1,38 +1,38 @@
 {
- "luc": "2026-09-14 20:56:47",
+ "luc": "2026-09-18 22:36:03",
  "che_do": {
   "duong_cong": {
    "nhan": "DOC",
-   "gia_tri": 1.054,
+   "gia_tri": 1.022,
    "quy_tac": "10y-3m < 0 = dao nguoc; < 0,5 = phang",
-   "ngay": "2026-09-11",
+   "ngay": "2026-09-18",
    "y_nghia": "dao nguoc di truoc suy thoai 6-18 thang; day la BOI CANH, khong phai tin hieu vao lenh"
   },
   "xu_huong_lai_suat": {
    "nhan": "TANG",
-   "gia_tri": 0.455,
-   "doi_90_ngay_diem": 0.455,
+   "gia_tri": 0.549,
+   "doi_90_ngay_diem": 0.549,
    "quy_tac": "|doi loi suat 10y trong 90 ngay| > 0,25 diem",
    "y_nghia": "lop vi mo DUY NHAT tung vuot mua-giu qua 64 nam trong du an nay la nghieng size theo THAY DOI loi suat 10y (memory macro-tilt-lead)"
   },
   "bien_dong": {
    "nhan": "BINH THUONG",
-   "gia_tri": 17.489999771118164,
+   "gia_tri": 15.220000267028809,
    "quy_tac": "VIX > 25 cao, < 15 thap",
    "y_nghia": "tren SP500 khung ngay: VIX cao = MUA (nguoc truc quan thong thuong)"
   },
   "cau_truc_ky_han_vix": {
    "nhan": "BINH THUONG",
-   "gia_tri": 1.176,
+   "gia_tri": 1.216,
    "quy_tac": "VIX3M/VIX < 1",
-   "ngay": "2026-09-11",
+   "ngay": "2026-09-18",
    "y_nghia": "co che 01 cua du an tung AM TINH (IC +0,106 nhung placebo 10,2%) - dung dung lam tin hieu, chi doc lam boi canh"
   },
   "tin_dung": {
    "nhan": "DE",
-   "gia_tri": 0.7524,
-   "doi_90_ngay_pct": 2.61,
-   "ngay": "2026-09-11",
+   "gia_tri": 0.7502,
+   "doi_90_ngay_pct": 2.26,
+   "ngay": "2026-09-18",
    "quy_tac": "ty le HYG/LQD giam > 2% trong 90 ngay = tin dung cang",
    "y_nghia": "PROXY tu gia hai ETF, khong phai chenh loi suat. No lan ca rui ro ky han va dong tien vao ETF, nen co the lech voi `tin_dung_that` (BAMLH0A0HYM2) - luc lech thi tin ban THAT"
   },
@@ -45,131 +45,131 @@
   },
   "dieu_kien_tai_chinh": {
    "nhan": "LONG HON TRUNG BINH",
-   "gia_tri": -0.564,
+   "gia_tri": -0.56,
    "quy_tac": "NFCI > 0 = chat hon trung binh lich su (chi so da chuan hoa)",
    "y_nghia": "chi so tong hop 105 bien cua Chicago Fed - do dieu kien tai chinh TONG THE, khong suy ra tu gia mot tai san nao"
   },
   "thanh_khoan": {
    "nhan": "DI NGANG",
-   "gia_tri": 6740619.0,
-   "doi_90_ngay_pct": 0.23,
+   "gia_tri": 6746548.0,
+   "doi_90_ngay_pct": 0.15,
    "quy_tac": "|doi bang can doi Fed trong 90 ngay| > 1%",
    "y_nghia": "thanh khoan he thong. Doc lam boi canh cho tai san rui ro"
   },
   "tin_dung_that": {
    "nhan": "BINH THUONG",
    "gia_tri": 2.7,
-   "doi_90_ngay_diem": -0.01,
+   "doi_90_ngay_diem": 0.04,
    "quy_tac": "chenh loi suat HY - kho bac; doi > 0,5 diem trong 90 ngay",
    "y_nghia": "gia rui ro tin dung do THANG. Ban `tin_dung` (HYG/LQD) la proxy tu gia ETF, giu lai de doi chieu"
   },
   "dola": {
    "nhan": "ON DINH",
-   "gia_tri": 99.50499725341797,
+   "gia_tri": 100.35700225830078,
    "quy_tac": "|doi chi so dola 90 ngay| > 1 diem",
-   "doi_90_ngay": -0.035,
+   "doi_90_ngay": -0.493,
    "y_nghia": "DXY nang ve EUR (~58%). Dola manh len thuong siet tai san rui ro va hang hoa. Doi chieu voi DTWEXBGS (ro rong hon) truoc khi ket luan ve suc manh dola noi chung"
   }
  },
  "so_lieu": {
   "LS10Y": {
-   "ngay": "2026-09-11",
-   "gia_tri": 4.941999912261963,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_tri": 5.0,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "LS3M": {
-   "ngay": "2026-09-11",
-   "gia_tri": 3.888000011444092,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_tri": 3.9779999256134033,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "VIX": {
-   "ngay": "2026-09-14",
-   "gia_tri": 17.489999771118164,
+   "ngay": "2026-09-18",
+   "gia_tri": 15.220000267028809,
    "tuoi_ngay": 0,
    "stale": false
   },
   "VIX3M": {
-   "ngay": "2026-09-11",
-   "gia_tri": 18.780000686645508,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_tri": 18.510000228881836,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "USD": {
-   "ngay": "2026-09-14",
-   "gia_tri": 99.50499725341797,
+   "ngay": "2026-09-18",
+   "gia_tri": 100.35700225830078,
    "tuoi_ngay": 0,
    "stale": false
   },
   "HYG": {
-   "ngay": "2026-09-11",
-   "gia_tri": 78.7699966430664,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_tri": 78.5,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "LQD": {
-   "ngay": "2026-09-11",
-   "gia_tri": 104.68499755859375,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_tri": 104.6449966430664,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "LS10Y/LS3M": {
-   "ngay": "2026-09-11",
-   "gia_a": 4.941999912261963,
-   "gia_b": 3.888000011444092,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_a": 5.0,
+   "gia_b": 3.9779999256134033,
+   "tuoi_ngay": 0,
    "stale": false
   },
-  "duong_cong_10y_3m": 1.054,
+  "duong_cong_10y_3m": 1.022,
   "VIX3M/VIX": {
-   "ngay": "2026-09-11",
-   "gia_a": 18.780000686645508,
-   "gia_b": 15.970000267028809,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_a": 18.510000228881836,
+   "gia_b": 15.220000267028809,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "HYG/LQD": {
-   "ngay": "2026-09-11",
-   "gia_a": 78.7699966430664,
-   "gia_b": 104.68499755859375,
-   "tuoi_ngay": 3,
+   "ngay": "2026-09-18",
+   "gia_a": 78.5,
+   "gia_b": 104.6449966430664,
+   "tuoi_ngay": 0,
    "stale": false
   },
   "DFF": {
-   "ngay": "2026-09-10",
+   "ngay": "2026-09-16",
    "gia_tri": 3.63,
-   "tuoi_ngay": 4,
+   "tuoi_ngay": 2,
    "stale": false
   },
   "NFCI": {
-   "ngay": "2026-09-04",
-   "gia_tri": -0.564,
-   "tuoi_ngay": 10,
+   "ngay": "2026-09-11",
+   "gia_tri": -0.56,
+   "tuoi_ngay": 7,
    "stale": false
   },
   "BAMLH0A0HYM2": {
-   "ngay": "2026-09-10",
+   "ngay": "2026-09-17",
    "gia_tri": 2.7,
-   "tuoi_ngay": 4,
+   "tuoi_ngay": 1,
    "stale": false
   },
   "VN_CPI": {
    "ngay": "2025-12-31",
    "gia_tri": 3.3099931421974,
-   "tuoi_ngay": 257,
+   "tuoi_ngay": 261,
    "stale": false
   },
   "VN_GDP": {
    "ngay": "2025-12-31",
    "gia_tri": 8.01882998978245,
-   "tuoi_ngay": 257,
+   "tuoi_ngay": 261,
    "stale": false
   },
   "VN_TYGIA": {
    "ngay": "2024-12-31",
    "gia_tri": 24164.8858333333,
-   "tuoi_ngay": 622,
+   "tuoi_ngay": 626,
    "stale": true
   }
  },
@@ -178,6 +178,6 @@
   "VN_TYGIA"
  ],
  "ham_y": [
-  "Loi suat 10y tang 0.455 diem trong 90 ngay -> lop nghieng size theo thay doi loi suat dang co tin hieu; day la lop DUY NHAT tung vuot mua-giu qua 64 nam trong du an."
+  "Loi suat 10y tang 0.549 diem trong 90 ngay -> lop nghieng size theo thay doi loi suat dang co tin hieu; day la lop DUY NHAT tung vuot mua-giu qua 64 nam trong du an."
  ]
 }

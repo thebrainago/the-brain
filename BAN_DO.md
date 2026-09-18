@@ -1,6 +1,6 @@
 # BAN DO HE THONG — sinh tu ma nguon
 
-*2026-09-15 18:42 · 515 file .py · 191 tren duong chay · **0 MO COI THAT** · 3 ha tang · 14 kho cu `quant/` · 162 script chay tay*
+*2026-09-18 22:36 · 538 file .py · 199 tren duong chay · **19 MO COI THAT** · 2 ha tang · 14 kho cu `quant/` · 148 script chay tay*
 
 Sinh boi `python -m nhan.ban_do --ghi`. **Dung sua tay** - ban viet
 tay ngay 30/08 da loi thoi 13 ngay va bo sot 11 module, va mot ban do
@@ -19,7 +19,25 @@ Day la module trong goi (`nhan/`, `tru/`, `qwen/`), khong phai script
 chay tay - nen moi dong o day hoac (a) can noi vao mot cua vao,
 hoac (b) la ha tang cho thu chua xay xong.
 
-- (khong co)
+- `_luu_tru/bao_cao_hen_gio.py` — (khong co docstring)
+- `_luu_tru/chay_backtest.py` — Chay backtest Python (mo_phong_v2) TACH NEN, ghi ket qua ra file.
+- `_luu_tru/chay_gop_vs_don.py` — GOP RO CO HA DUOC MDE KHONG — do bang CUNG DON VI voi bang MDE don le.
+- `_luu_tru/chien_luoc_mr_tf.py` — (khong co docstring)
+- `_luu_tru/chien_luoc_trend.py` — (khong co docstring)
+- `_luu_tru/dang_ky_alphavantage.py` — (khong co docstring)
+- `_luu_tru/do_spread_hang_loat.py` — DO SPREAD THAT CHO CA BE MAT, MOT LAN NOI SAN.
+- `_luu_tru/doc_for_ds.py` — (khong co docstring)
+- `_luu_tru/doc_otp_gmail.py` — Doc MA OTP/code tu Gmail (web CDP, da dang nhap).
+- `_luu_tru/gen_kiem_ke.py` — (khong co docstring)
+- `_luu_tru/lay_api_darwinex.py` — (khong co docstring)
+- `_luu_tru/lay_api_darwinex_v2.py` — Mở cua so chrome cho bro dang nhap Darwinex 1 lan -> bam DA XONG -> bat token.
+- `_luu_tru/lo_mot_gio.py` — LO VIEC TU CHAY, khong can nguoi ngoi may.
+- `_luu_tru/nap_darwinex_api.py` — (khong co docstring)
+- `_luu_tru/nap_lai_ban_tho.py` — DUA BAN THO DA BOC QUA CONG, KHONG GOI LAI LLM.
+- `_luu_tru/p_null_vs_ung_vien.py` — Phan phoi p_placebo cua UNG VIEN co lech so voi phan phoi tren CHUOI NULL khong?
+- `_luu_tru/placebo_d1.py` — (khong co docstring)
+- `_luu_tru/tele_gate.py` — (khong co docstring)
+- `_luu_tru/xac_nhan_d1.py` — (khong co docstring)
 
 ## Kho cu `quant/` — 14 file
 
@@ -28,27 +46,27 @@ la XEM CO GI DANG LAY roi don di, khong phai noi vao duong chay.
 
 `auto_kham_pha` · `chay_tat_ca` · `co_che_A_cung_cau_engulfing` · `co_che_B_ichimoku_chikou_di` · `co_che_C_ema_rsi` · `co_che_D_premium_choch` · `du_lieu` · `ket_hop_hoc` · `kiem_dinh` · `metrics` · `run_ohlc_anomaly_hypothesis` · `ohlc_anomaly_hypothesis_tool` · `tim_ichimoku_cross` · `tin_hieu`
 
-## Ha tang cho script chay tay — 3 module
+## Ha tang cho script chay tay — 2 module
 
 Khong cua vao nao goi THANG, nhung mot script chay tay co goi. Do la
 thu vien hop le, khong phai lo hong - de chung chung voi muc tren thi
 lai che mat dung cai can doc.
 
-- `nhan/cong_ra_tien.py` — CONG THU HAI. Hoi "co ra tien khong", khong hoi "co that khong".
 - `nhan/doc_video_cuc_bo.py` — VIDEO TREN DIA -> VAN BAN. Khau con thieu cua Seeker.
 - `nhan/luoi.py` — MO PHONG LUOI/DCA CO TRACH NHIEM, dung duoc lai cho moi cap.
 
-## Script chay tay (`_*.py` va file goc lab) — 162 file
+## Script chay tay (`_*.py` va file goc lab) — 148 file
 
 Mo coi la DUNG ban chat: moi cai tra loi mot cau hoi cu the mot lan.
 Liet ke gon de khong che mat muc tren.
 
-`_audit_tru` · `_bo_doc_mu_o_dau` · `_boc_lai_toan_kho` · `_boc_lai_vung` · `_boc_video_khoa_hoc` · `_cao_mql5` · `_cao_mql5_sau` · `_chan_dd_holdout` · `_chay_go_html` · `_chien_dich_sp500` · `_chuan_hoa_thang_gia` · `_cong_ra_tien_quet` · `_da_khung` · `_dang_ky_6_he` · `_dang_ky_github` · `_de_qt_ea_ngoai` · `_dien_co_che` · `_do_dem_nen` · `_do_dien_dan_quoc_gia` · `_do_ma_mt5` · `_do_tap_trung_chang1` · `_do_thoi_gian_giu` · `_doc_boc_toan_luc` · `_doc_roi_boc` · `_dsl_cho_he_lan_nhanh` · `_ghep_h4` · `_ghep_he_qua_cong` · `_github_toan_luc` · `_gop_khong_chon` · `_hang_doi_toan_hang` · `_hieu_chuan_v6` · `_hinh_dang_audcad_rsi` · `_hinh_dang_song_sot` · `_kiem_cong_co_che` · `_kiem_tra_cuu` · `_lam_moi_mde` · `_linh_hoat` · `_luan_nguoc` · `_luoi_audcad` · `_luoi_audcad_chang2` · `_luoi_fx_song_bao_lau` · `_luong2_qwen` · `_ly_do_tu_choi` · `_ma_tran_ghep` · `_mo_xe_z5` · `_muc_tieu_20pc` · `_nap_viec_qwen` · `_nhap_bai_hoc` · `_noi_sinh_khop_rui_ro` · `_noi_sinh_xu_huong_chay` · `_placebo_da_ma` · `_placebo_ghep` · `_placebo_quan_tri` · `_placebo_tester` · `_placebo_xu_huong` · `_pmg_quet_rong` · `_qt_kiem_vang` · `_qt_tren_he_that` · `_quay_quan_tri` · `_quet_chuoi_dai` · `_quet_nen_dat` · `_quet_quan_tri_python` · `_quet_rong_d1` · `_quet_signal_mql5` · `_quet_song_moc` · `_quet_song_song` · `_quet_tester_da_ma` · `_san_4_gia_thuyet` · `_san_he_pho_thong` · `_san_quan_tri_lenh` · `_so_quan_tri` · `_so_sanh_chi_so` · `_so_voi_mua_giu` · `_sonic_r_don_bay` · `_sonic_r_kiem_chung` · `_sonic_r_placebo` · `_sonic_r_tpsl` · `_sua_ten_kho` · `_tai_chi_so_xm` · `_tester_holdout` · `_tham_dinh_co_che` · `_thu_chuoi_dai` · `_thu_day_chuyen_video` · `_thu_dien_dan` · `_thu_doi_khung` · `_thu_hai_cach` · `_thu_hoi_payload` · `_thu_mql5` · `_thu_quan_tri` · `_thu_tia` · `_tmp_quet` · `_toan_luc` · `_tong_bench_qt` · `_trend_don_bay` · `_trend_theo_che_do` · `_truy_chang_4_5` · `_tv_toan_luc` · `_va_co_che_thieu` · `_va_duong_dan` · `_va_python_exe` · `_vao_lan_nhanh` · `_von_va_lot` · `_xac_minh_chenh_lech` · `_xao_toan_kho` · `_z5_chuoi_dai` · `_z5_don_bay` · `_z5_theo_nam` · `bao_cao_hen_gio` · `chay_backtest` · `chay_gop_vs_don` · `chien_luoc_mr` · `chien_luoc_mr_tf` · `chien_luoc_trend` · `chup_darwinex` · `conftest` · `cross_pair_quet` · `dang_ky_alphavantage` · `darwinex_ocr` · `do_spread_hang_loat` · `doc_bang_trinh_duyet` · `doc_cdp` · `doc_email` · `doc_for_ds` · `doc_otp_gmail` · `doc_web_moi` · `ea_tu_dong` · `fl_cheo` · `gen_kiem_ke` · `ichimoku_cross` · `khao_sat_daily_zone` · `lab` · `lay_api_darwinex` · `lay_api_darwinex_v2` · `lay_du_lieu` · `lo_mot_gio` · `mt5_chay_ichimoku` · `nap_darwinex_api` · `nap_lai_ban_tho` · `nguon_code` · `nguon_dien_dan` · `nguon_kham_pha` · `nguon_reddit` · `nguon_reddit_sim` · `nguon_telegram` · `nguon_youtube` · `__init__` · `p_null_vs_ung_vien` · `placebo_d1` · `quant_sweep` · `quet_loi_ra` · `__init__` · `rem_via_tele` · `run_mt5_flag` · `seeker_cong_dong` · `seeker_deep` · `seeker_theo_doi` · `simulator_nguoi` · `tele_gate` · `tu_dang_ky` · `tu_follow_join` · `vao_web` · `xac_nhan_d1`
+`_audcad_chon_va_xac_nhan` · `_audcad_chuoi_he` · `_audcad_gom_cum` · `_audcad_luan_nguoc` · `_audcad_placebo` · `_audcad_them_cap` · `_audit_tru` · `_bo_doc_mu_o_dau` · `_boc_lai_toan_kho` · `_boc_lai_vung` · `_boc_video_khoa_hoc` · `_cao_mql5` · `_cao_mql5_sau` · `_chan_dd_holdout` · `_chay_go_html` · `_chien_dich_sp500` · `_chuan_hoa_thang_gia` · `_cong_ra_tien_quet` · `_da_khung` · `_dang_ky_6_he` · `_dang_ky_github` · `_de_qt_ea_ngoai` · `_dien_co_che` · `_do_dem_nen` · `_do_dien_dan_quoc_gia` · `_do_ma_mt5` · `_do_tap_trung_chang1` · `_do_thoi_gian_giu` · `_doc_boc_toan_luc` · `_doc_roi_boc` · `_dsl_cho_he_lan_nhanh` · `_ghep_h4` · `_ghep_he_qua_cong` · `_github_toan_luc` · `_gop_khong_chon` · `_hang_doi_toan_hang` · `_hieu_chuan_v6` · `_hinh_dang_audcad_rsi` · `_hinh_dang_song_sot` · `_kiem_cong_co_che` · `_kiem_tra_cuu` · `_lam_moi_mde` · `_linh_hoat` · `_luan_nguoc` · `_luoi_audcad` · `_luoi_audcad_chang2` · `_luoi_fx_song_bao_lau` · `_luong2_qwen` · `_ly_do_tu_choi` · `_ma_tran_ghep` · `_mo_xe_z5` · `_muc_tieu_20pc` · `_nap_viec_qwen` · `_nhap_bai_hoc` · `_noi_sinh_khop_rui_ro` · `_noi_sinh_xu_huong_chay` · `_placebo_da_ma` · `_placebo_ghep` · `_placebo_quan_tri` · `_placebo_tester` · `_placebo_xu_huong` · `_pmg_quet_rong` · `_qt_kiem_vang` · `_qt_tren_he_that` · `_quay_quan_tri` · `_quet_chuoi_dai` · `_quet_nen_dat` · `_quet_quan_tri_python` · `_quet_rong_d1` · `_quet_signal_mql5` · `_quet_song_moc` · `_quet_song_song` · `_quet_tester_da_ma` · `_san_4_gia_thuyet` · `_san_he_pho_thong` · `_san_quan_tri_lenh` · `_so_quan_tri` · `_so_sanh_chi_so` · `_so_voi_mua_giu` · `_sonic_r_don_bay` · `_sonic_r_kiem_chung` · `_sonic_r_placebo` · `_sonic_r_tpsl` · `_sua_ten_kho` · `_tai_chi_so_xm` · `_tester_holdout` · `_tham_dinh_co_che` · `_thu_chuoi_dai` · `_thu_day_chuyen_video` · `_thu_dien_dan` · `_thu_doi_khung` · `_thu_hai_cach` · `_thu_hoi_payload` · `_thu_mql5` · `_thu_quan_tri` · `_thu_tia` · `_tmp_quet` · `_toan_luc` · `_tong_bench_qt` · `_trend_don_bay` · `_trend_theo_che_do` · `_truy_chang_4_5` · `_tv_toan_luc` · `_va_co_che_thieu` · `_va_duong_dan` · `_va_python_exe` · `_vao_lan_nhanh` · `_von_va_lot` · `_xac_minh_chenh_lech` · `_xao_toan_kho` · `_z5_chuoi_dai` · `_z5_don_bay` · `_z5_theo_nam` · `chien_luoc_mr` · `chup_darwinex` · `conftest` · `cross_pair_quet` · `darwinex_ocr` · `doc_bang_trinh_duyet` · `doc_cdp` · `doc_email` · `doc_web_moi` · `ea_tu_dong` · `fl_cheo` · `ichimoku_cross` · `khao_sat_daily_zone` · `lab` · `lay_du_lieu` · `mo_phong_v2` · `mt5_chay_ichimoku` · `nguon_code` · `nguon_dien_dan` · `nguon_kham_pha` · `nguon_reddit` · `nguon_reddit_sim` · `nguon_telegram` · `nguon_youtube` · `quant_sweep` · `quet_loi_ra` · `rem_via_tele` · `run_mt5_flag` · `seeker_cong_dong` · `seeker_deep` · `seeker_theo_doi` · `simulator_nguoi` · `tu_dang_ky` · `tu_follow_join` · `vao_web`
 
 ## Tren duong chay
 
 ### nhan/
 
+- `nhan/__init__.py` — nhan - hat nhan dung chung cua THE BRAIN.
 - `nhan/anh_chup.py` — GHIM BAN DU LIEU de mot ket qua tai lap duoc.
 - `nhan/bai_hoc.py` — SO BAI HOC: he tu tra loi duoc "cai nay da thu chua".
 - `nhan/ban_do.py` — SINH ban do he thong TU CHINH MA NGUON.
@@ -67,6 +85,7 @@ Liet ke gon de khong che mat muc tren.
 - `nhan/chuoi_quan_tri.py` — NOI BA MANH QUAN TRI VI THE THANH MOT DUONG CHAY.
 - `nhan/chuyen_he.py` — MANG MOT HE SANG CHO KHAC MA NO VAN LA CHINH NO.
 - `nhan/cong.py` — CONG PASS. Noi duy nhat mot gia thuyet duoc phep doi doi.
+- `nhan/cong_ra_tien.py` — CONG THU HAI. Hoi "co ra tien khong", khong hoi "co that khong".
 - `nhan/da_thoi_dai.py` — CHAY MOT CO CHE TREN MOI CUA SO DU LIEU SACH, khong chi mot.
 - `nhan/dang_nhap_mt5.py` — TU DANG NHAP MT5, de tester chay duoc khi khong co nguoi.
 - `nhan/danh_muc.py` — TANG 3 - tinh von va ket hop cac gia thuyet da qua cong.
@@ -101,11 +120,13 @@ Liet ke gon de khong che mat muc tren.
 - `nhan/duong_dan.py` — MOT CHO duy nhat giai cac duong dan phu thuoc MAY.
 - `nhan/duyet_nguoi.py` — DUYET NHU NGUOI: giu phien, co Referer, nhip khong deu.
 - `nhan/evo.py` — THE EVO: giam sat hieu suat tung module, cat nghia, de xuat.
+- `nhan/ghi_an_toan.py` — SUA MOT FILE JSON MA KHONG MAT THAY DOI CUA NGUOI KHAC.
 - `nhan/go_html.py` — KHAU CON THIEU giua THU THAP va BOC: go trang HTML ra van ban.
 - `nhan/gop_lop.py` — GOP LOP - kiem dinh MOT co che tren CA MOT LOP TAI SAN, ton MOT suat FDR.
 - `nhan/gop_wal.py` — GOP `nao.db-wal` VAO DB. Cai phanh cho mot kieu day dia lang le.
 - `nhan/han_muc.py` — KILL-SWITCH va TRAN. Cai phanh, khong phai cai ga.
 - `nhan/hang_doi.py` — HANG DOI VIEC cua QUANTLAB. Chong nghen, chay song song duoc.
+- `nhan/ho_so_he.py` — MOT FILE DUY NHAT dua cho mot AI KHONG CO DIA.
 - `nhan/ho_so_mua_vu.py` — TINH MUA VU va ENTRY-TIME cua mot tai san.
 - `nhan/ho_so_song.py` — DAC TINH SONG va MOC MAGNETIC cua mot tai san.
 - `nhan/ho_so_symbol.py` — HO SO TAI SAN: tra loi "co gia thuyet nay thi thu tren cai gi".
@@ -115,6 +136,7 @@ Liet ke gon de khong che mat muc tren.
 - `nhan/ket_qua_hoat_dong.py` — Quy tac doc ket qua dang hoat dong cua THE BRAIN.
 - `nhan/kham_pha_nguon.py` — SO DANG KY CAC KENH TU TIM NGUON MOI.
 - `nhan/khoa_tester.py` — MOT CUA CO KHOA cho `terminal64.exe`.
+- `nhan/kien_truc.py` — SINH SO DO KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
 - `nhan/loc_co_che.py` — BO LOC TINH, CHAY TRUOC PHEU V0-V3.
 - `nhan/luan_dau_chan.py` — 400 HO SO SIGNAL -> KIEU CHIEN LUOC. Noi hai manh mo coi.
 - `nhan/ma_nguon.py` — MA NGUON EA / CHI BAO -> CodeArtifact.
@@ -130,8 +152,9 @@ Liet ke gon de khong che mat muc tren.
 - `nhan/ngu_phap.py` — NGU PHAP CO CHE. Cach duy nhat kien thuc moi di vao day chuyen.
 - `nhan/nguon_bai_viet.py` — NGUON VAN XUOI: bai viet chien luoc, lay qua RSS/Atom.
 - `nhan/nguon_tinix.py` — repo.tinix.ai -> ung vien cong cu cho FINDER.
-- `nhan/nha_may_null.py` — 
+- `nhan/nha_may_null.py` — NHA MAY NULL - sinh chuoi gia de hieu chuan cong.
 - `nhan/noi_sinh.py` — LUONG 3. Tu sinh co che tu CHINH LICH SU cua ma, khong doi nguon ngoai.
+- `nhan/passview.py` — TAI KHOAN XEM (investor password) -> LICH SU LENH THAT.
 - `nhan/pham_vi.py` — Pham vi ap dung cua tung ho co che - va phep thu phan chung di kem.
 - `nhan/phan_loai_ma.py` — CHIA KHO MA NGUON THANH BON LAN, TRUOC KHI BOC.
 - `nhan/pmg.py` — POSITION MANAGEMENT GRID ENGINE. Ho quan li lenh KHONG CO TIN HIEU VAO.
@@ -148,6 +171,7 @@ Liet ke gon de khong che mat muc tren.
 - `nhan/san_cong_cu.py` — DI SAN CONG CU CO SAN, thay vi tu viet lai tu dau.
 - `nhan/san_sang_vps.py` — HE DA CHUYEN LEN VPS DUOC CHUA.
 - `nhan/sang_loc.py` — PHEU BON VONG: V0 van tay -> V1 re -> V2 kinh te -> V3 phan chung.
+- `nhan/slot_tester.py` — NHIEU LAN TESTER, moi lan mot terminal RIENG.
 - `nhan/so.py` — SO CAI CUA THE BRAIN. Mot nguon su that duy nhat cho ca 4 tru.
 - `nhan/so_lenh.py` — SO LENH PAPER: cho mot he DA QUA CONG di tiep, khong dung o nhan.
 - `nhan/suy_giam.py` — HE DANG CHAY CO CON GIONG CAI DA KIEM DINH KHONG.
@@ -186,6 +210,7 @@ Liet ke gon de khong che mat muc tren.
 
 ### qwen/
 
+- `qwen/__init__.py` — qwen/ - He tu chay cua The Brain khi khong con token Claude.
 - `qwen/bang_viec.py` — Doc NHIEM_VU.json, giai phu thuoc, chon viec de phong.
 - `qwen/cau_hinh.py` — MOT noi giu moi hang so cua he qwen.
 - `qwen/chay.py` — VONG LAP DIEU PHOI. Mot lenh `q` la du de he chay tiep nhieu ngay.

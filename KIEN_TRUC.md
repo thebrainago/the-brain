@@ -1,6 +1,6 @@
 # KIEN TRUC HE THONG — sinh tu ma nguon
 
-*2026-09-18 20:07 · 588 file `.py` · 199 tren duong chay · 9 lop nhan · sinh boi `python -m nhan.kien_truc --ghi` (hoac `b kien-truc`)*
+*2026-09-18 22:38 · 538 file `.py` · 199 tren duong chay · 9 lop nhan · sinh boi `python -m nhan.kien_truc --ghi` (hoac `b kien-truc`)*
 
 **Dung sua tay.** Vai tro o day doc tu docstring dong dau cua chinh
 module; sua mo ta thi sua trong file `.py`, roi chay lai lenh tren.
@@ -17,7 +17,7 @@ So file va MB o day DO THAT tren dia luc chay; vai tro thi viet tay
 
 | Thu muc | File | MB | Vai tro |
 |---|---:|---:|---|
-| `lab/` | 3516 | 1892 | **The Brain** — toan bo he 24/7 (tru + nhan + cua vao). Moi thu con lai o goc la Phase 1 (SP500), da dong. |
+| `lab/` | 5922 | 2754 | **The Brain** — toan bo he 24/7 (tru + nhan + cua vao). Moi thu con lai o goc la Phase 1 (SP500), da dong. |
 | `ds/` | 1418 | 62 | Ho so giao viec cho agent ngoai (DeepSeek). Git rieng, gop vao 30/08. |
 | `sp500_phase1/` | 1321 | 1470 | **Phase 1 SP500 — DA DONG 18/09.** Dong bang: `ma/` 256 script, `tai_lieu/`, `nut_bam/`, `reports/` 1,4 GB ket qua tho. Khong module song nao goi vao day. |
 | `nap_tay/` | 1040 | 8 | Kho NAP TAY: repo github + file chu du an tu tha vao. Nguyen lieu tho, Seeker doc tu day. |
@@ -27,22 +27,23 @@ So file va MB o day DO THAT tren dia luc chay; vai tro thi viet tay
 
 | Thu muc | File | MB | Vai tro |
 |---|---:|---:|---|
-| `.browser_darwinex/` | 931 | 90 | Ho so trinh duyet RIENG cua Seeker, dang chay. |
+| `.browser_darwinex/` | 3301 | 952 | Ho so trinh duyet RIENG cua Seeker, dang chay. |
 | `reports/` | 736 | 91 | **Dau ra chinh** — ket qua may sinh (json/csv) cua kiem dinh. |
-| `nhat_ky/` | 502 | 1 | Ban giao song + log theo phien. |
+| `nhat_ky/` | 516 | 1 | Ban giao song + log theo phien. |
 | `downloaded_codes/` | 317 | 5 | File Seeker tai ve (github/mql5/myfxbook/tradingview/transcripts). |
 | `nhan/` | 133 | 2 | **Lop nhan** — module thu vien, tang duoi cua moi tru. Xem muc 3. |
 | `data/` | 114 | 75 | Du lieu gia da nap (csv). |
 | `nghi_huu/` | 86 | 0 | Module DA NGHI HUU, giu lai de tra cuu — khong nam tren duong chay. `v1_goc/` la The Brain V1 (26 script + 4 nut bam) go ve 18/09. |
 | `co_che_ds/` | 51 | 0 | Co che do DeepSeek viet ra, cho kiem dinh. |
 | `quant/` | 37 | 15 | Lane nghien cuu Quantlab V2 (thu_vien/pseud + ket qua). |
-| `config/` | 35 | 10 | Cau hinh: api_keys, chi_phi_do, co_che_dsl... |
+| `config/` | 36 | 10 | Cau hinh: api_keys, chi_phi_do, co_che_dsl... |
 | `archive/` | 23 | 0 | Script/anh chup cu cat di. |
 | `_luu_tru/` | 20 | 0 | Script cu cat di. Phan lon muc 4.1 nam o day. |
 | `browser_backup_20260821/` | 18 | 0 | Ban sao ho so trinh duyet Seeker (21/08). |
 | `bao_cao/` | 16 | 0 | Bao cao phien The Brain (tu 15/08). Gom ve day 18/09. |
 | `qwen/` | 16 | 0 | Bang viec + vong chay tu dong cua qwen — cua vao thu 4. |
 | `tai_lieu/` | 15 | 0 | Dac ta viet tay (PMG, SLOT_TESTER). |
+| `mau_thu/` | 11 | 0 | Bo mau .mq5 THAT + `do_moc.py` — bai do chay duoc TREN CLOUD (khong can nao.db/MT5). Moc 18/09: thay 22 diem vao lenh, ra 0 co che. |
 | `so_do/` | 11 | 1 | So do he thong dang html/svg/png. |
 | `tru/` | 7 | 0 | **Bay tru** — Seeker/Quantlab/Evolution/Banker/Finder/Nghi. Tang tren. |
 | `roles/` | 4 | 0 | Mo ta vai tro cho agent (BANKER/CHUNG/QUANTLAB/SEEKER). |
@@ -272,7 +273,7 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 
 *Giu he chay 24/7 va tu thay duoc minh dang hong cho nao.*
 
-- **`ban_do`** (409 dong, 7 noi goi) — SINH ban do he thong TU CHINH MA NGUON.
+- **`ban_do`** (414 dong, 7 noi goi) — SINH ban do he thong TU CHINH MA NGUON.
 - **`canary`** (236 dong, 6 noi goi) — CHIM HOANG MAI. Gac chinh cai engine dang duoc dung.
 - **`day_chuyen`** (157 dong, 4 noi goi) — NOI CA DAY CHUYEN 03/09/2026 THANH MOT CHO GOI.
 - **`day_chuyen_quantlab`** (152 dong, 2 noi goi) — QUY TRINH CHUAN: ma nguon -> co che -> he thong.
@@ -281,7 +282,7 @@ TRU NGHI. Bien thu doc duoc thanh thu kiem dinh duoc, roi HOC TU KET QUA.
 - **`don_mo_coi`** (193 dong, 5 noi goi) — Tim va don TIEN TRINH MO COI dang an CPU.
 - **`evo`** (773 dong, 7 noi goi) — THE EVO: giam sat hieu suat tung module, cat nghia, de xuat.
 - **`han_muc`** (151 dong, 5 noi goi) — KILL-SWITCH va TRAN. Cai phanh, khong phai cai ga.
-- **`kien_truc`** (473 dong, 3 noi goi) — SINH SO DO KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
+- **`kien_truc`** (475 dong, 4 noi goi) — SINH SO DO KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
 - **`mach`** (385 dong, 2 noi goi) — MACH DAP CUA DUONG ONG. Canary cho tung chang, khong chi cho engine.
 - **`muc_tieu`** (421 dong, 8 noi goi) — CHIEN DICH THEO MUC TIEU. Day moi la "The Brain + QUANTLAB".
 - **`ngan_sach`** (464 dong, 15 noi goi) — SO NGAN SACH TAI NGUYEN. Cua vao chung cho moi viec nang.
@@ -296,7 +297,7 @@ khi lap ke hoach**: mot module khong co tang thi khong ai biet no
 thuoc ve ai, va no se bi xay lai duoi mot cai ten khac.
 
 - **`ghi_an_toan`** (178 dong, 5 noi goi) — SUA MOT FILE JSON MA KHONG MAT THAY DOI CUA NGUOI KHAC.
-- **`ho_so_he`** (1156 dong, 1 noi goi) — MOT FILE DUY NHAT dua cho mot AI KHONG CO DIA.
+- **`ho_so_he`** (1156 dong, 2 noi goi) — MOT FILE DUY NHAT dua cho mot AI KHONG CO DIA.
 - **`slot_tester`** (293 dong, 2 noi goi) — NHIEU LAN TESTER, moi lan mot terminal RIENG.
 
 ## 4. No kien truc — cho de lam ke hoach
@@ -322,7 +323,7 @@ Sua mot dong docstring la het no.
 - `_tmp_quet.py` (12 dong)
 - `lay_du_lieu.py` (64 dong)
 
-### 4.2 Goc `lab/` — 352 file roi
+### 4.2 Goc `lab/` — 354 file roi
 
 **Ba loai khac han nhau — tron chung lai thi con so vo nghia.** Ban sinh
 dau tien cua chinh file nay bao "231 file phai don", trong khi 146 trong
@@ -330,7 +331,7 @@ so do la `test_*.py`: pytest TIM chung o goc, chung o dung cho roi.
 
 | Loai | So | Phai lam gi |
 |---|---|---|
-| `test_*.py` + `conftest.py` | 155 | khong lam gi — dung cho |
+| `test_*.py` + `conftest.py` | 157 | khong lam gi — dung cho |
 | `_*.py` chay tay mot lan | 131 | mo coi la DUNG BAN CHAT — de yen hoac xoa |
 | **con lai** | **66** | **day moi la no**: len `nhan/`, hoac doi ten `_*.py`, hoac xoa |
 
@@ -417,8 +418,8 @@ Khong phai loi, nhung la cho mot module dang lam nhieu hon mot viec.
 - `nhan/ho_so_he.py` — 1156 dong
 - `nhan/doc_hieu.py` — 1151 dong
 - `dieu_phoi.py` — 1092 dong
+- `b.py` — 1080 dong
 - `nhan/doc_ma.py` — 1038 dong
-- `b.py` — 1027 dong
 - `nhan/chi_phi.py` — 985 dong
 - `nhan/cong.py` — 979 dong
 - `bo_nao.py` — 940 dong
@@ -442,14 +443,14 @@ Khong phai loi, nhung la cho mot module dang lam nhieu hon mot viec.
 
 | Muc | So |
 |---|---|
-| File `.py` (bo `nhat_ky/ backups/ __pycache__/ ...`) | 588 |
+| File `.py` (bo `nhat_ky/ backups/ __pycache__/ ...`) | 538 |
 | Tren duong chay | 199 |
 | Module thu vien `nhan/` | 132 |
 | — da xep lop | 129 |
 | — chua xep lop | 3 |
 | Tru `tru/` | 7 |
-| File roi o goc `lab/` | 352 |
-| — `test_*.py` (dung cho) | 155 |
+| File roi o goc `lab/` | 354 |
+| — `test_*.py` (dung cho) | 157 |
 | — script `_*.py` chay tay | 131 |
 | — **con lai, la no that** | **66** |
 | Khong tu khai vai tro | 15 |

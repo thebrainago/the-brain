@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 20256, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
 - git: 6ca8e5b lan nhanh CO HANG lan dau: 3 he vao, he thu 4 bi tran WIP chan dung luat
 ### 2026-09-14 22:49:32 — chup trang thai
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 16832, 0 phut), dieu_khien_xa.py (pid 11560, 255 phut)
 - git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 22:33:10 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 20876, 0 phut), dieu_khien_xa.py (pid 11560, 259 phut)
+- git: 00903e5 bo mau .mq5 + bai do moc + prompt cho phien cloud
