@@ -1,0 +1,62 @@
+# .gitignore RIENG cho repo The Brain (khi lab/ dung mot minh tren GitHub).
+# Ban o goc du an van giu nguyen — hai ban phai noi cung mot thu.
+
+# --- BI MAT: khong bao gio commit -------------------------------------------
+config/api_keys.json
+config/credentials*.json
+config/passview.json
+**/api_keys.json
+**/credentials*.json
+**/tai_khoan.json
+**/email_cong_tac.json
+**/mo_them_tai_khoan.json
+**/tele_bridge.json
+**/telethon*.session
+**/telethon*_hash.txt
+*.env
+!template.env
+nguon_config.json
+TAI_KHOAN_VA_MA_KHOA.txt
+
+# --- HO SO TRINH DUYET: co phien dang nhap ----------------------------------
+.browser_*/
+browser_backup_*/
+
+# --- KHO + DU LIEU: to, may tu sinh lai duoc --------------------------------
+nao.db
+nao.db-*
+*.db
+*.db-wal
+*.db-shm
+data/
+data_khung/
+downloaded_codes/
+quant/data/
+quant/tai_lieu/
+quant/pseud.zip
+*.parquet
+*.zip
+*.pdf
+*.docx
+
+# --- KET QUA CHAY: giu .md/.json de tra lai duoc, bo log va bang tho --------
+reports/*.log
+reports/*.jsonl
+reports/*.csv
+reports/*.htm
+reports/*.html
+reports/*.prof
+*.err
+*.out
+nhat_ky/
+backups/
+
+# --- TRANG THAI RUNTIME ------------------------------------------------------
+DUNG_LAI
+dieu_phoi.lock
+.dieu_phoi.lock.*
+
+# --- PYTHON ------------------------------------------------------------------
+__pycache__/
+*.pyc
+.pytest_cache/
