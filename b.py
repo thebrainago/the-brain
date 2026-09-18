@@ -57,6 +57,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
                       `b qwen` = `q`. `b qwen trang-thai` xem bang. `b qwen kiem`.
     b ban-do          SINH ban do tu ma nguon + chi ra module MO COI
     b kien-truc       SINH so do KIEN TRUC: module + VAI TRO + LOP + no kien truc
+    b github          DAY lab/ len GitHub rieng (thebrainago/the-brain, rieng tu)
     b ho-so           HO SO HE THONG: mot file TU DU dua cho AI khong co dia
     b slot [kiem]     SLOT TESTER: may lan tester dung duoc, nang tran duoc chua
     b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
@@ -674,6 +675,57 @@ def c_slot(a):
     return 0
 
 
+def c_github(a):
+    """DAY lab/ len GitHub rieng (thebrainago/the-brain, repo RIENG TU).
+
+    Vi sao phai co lenh nay: repo GitHub chi chua `lab/`, khong chua ca du an -
+    goc du an co `sp500_phase1/` (da dong) va `nap_tay/` (ma cua nguoi khac),
+    hai thu khong nen day di. Nen moi lan day phai TACH lich su cua rieng
+    `lab/` ra (`git subtree split`) roi day nhanh do len `main`.
+
+    Token doc tu `config/gh_token.txt` (da nam trong .gitignore). Lenh tat han
+    credential helper: Git Credential Manager tren may nay treo cho mot cua so
+    dang nhap khong bao gio hien ra.
+
+        b github            day len
+        b github --xem      chi in trang thai, khong day
+    """
+    import os as _os, subprocess as _sp
+    kho = LAB / "config" / "gh_token.txt"
+    if not kho.exists():
+        print("thieu config/gh_token.txt - tao token scope `repo` roi luu vao do")
+        return 1
+    tok = kho.read_text(encoding="utf-8").strip()
+    url = "https://%s@github.com/thebrainago/the-brain.git" % tok
+    che = lambda s: s.replace(tok, "***")
+
+    if "--xem" in (a or []):
+        r = _sp.run(["git", "log", "-1", "--format=%h %s"], cwd=str(GOC),
+                    capture_output=True, text=True)
+        print("commit moi nhat o may:", r.stdout.strip())
+        print("repo               : https://github.com/thebrainago/the-brain (rieng tu)")
+        return 0
+
+    print("1/2 tach lich su cua rieng lab/ ...")
+    _sp.run(["git", "branch", "-D", "the-brain"], cwd=str(GOC),
+            capture_output=True, text=True)
+    r = _sp.run(["git", "subtree", "split", "--prefix=lab", "-b", "the-brain"],
+                cwd=str(GOC), capture_output=True, text=True, timeout=1800)
+    if r.returncode:
+        print("tach that bai:", che(r.stderr)[-500:])
+        return r.returncode
+
+    print("2/2 day len GitHub ...")
+    env = dict(_os.environ, GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="never")
+    r = _sp.run(["git", "-c", "credential.helper=",
+                 "-c", "credential.interactive=never",
+                 "push", url, "the-brain:main", "--force"],
+                cwd=str(GOC), capture_output=True, text=True, env=env, timeout=1800)
+    print(che(r.stdout + r.stderr)[-600:])
+    print("=> " + ("XONG" if r.returncode == 0 else "LOI, ma thoat %d" % r.returncode))
+    return r.returncode
+
+
 def c_kien_truc(a):
     """SINH so do KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
 
@@ -981,6 +1033,7 @@ LENH = {
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
     "kien-truc": c_kien_truc, "kt": c_kien_truc,
+    "github": c_github, "gh": c_github,
     "slot": c_slot,
     "ho-so": c_ho_so, "hs": c_ho_so,
     "quantlab": c_quantlab, "ql": c_quantlab,
