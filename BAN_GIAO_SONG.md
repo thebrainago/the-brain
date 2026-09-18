@@ -4,10 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 6848, 0 phut)
-- git: ec63bcf tester: "0 lenh" khong duoc tra ve tro troi + `--khung` bi bo qua
-### 2026-09-14 23:18:38 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 21192, 0 phut)
 - git: ec63bcf tester: "0 lenh" khong duoc tra ve tro troi + `--khung` bi bo qua
 ### 2026-09-14 23:26:53 — chup trang thai
@@ -404,3 +400,7 @@
 
 - dang chay: ban_giao_song.py (pid 848, 0 phut)
 - git: cbb184e AUDCAD H4: tester that 668 co che — tan suat va Sharpe loai tru nhau
+### 2026-09-18 23:49:17 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 2236, 0 phut)
+- git: a62b7be AUDCAD: luoi hai chieu CO TIA LENH — holdout +13,26%/nam, Calmar 3,75

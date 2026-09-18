@@ -1,79 +1,38 @@
-# TIEP TUC NGAY MAI — chot phien 2026-09-15 23:53
+# TIEP TUC NGAY MAI — chot phien 2026-09-19 00:00
 
-AUDCAD 8 cum hoi quy H4 qua placebo p=0,0000 (+27%/nam@DD30 lot36); duong live thong tren demo (lenh 10009); loai M15 va loai chuyen cum sang cap khac o chi phi that. Pipeline chon/gom/placebo nhan --ma --khung. EURGBP train H4 xong. Mai: EURGBP chon RIENG, quyet dinh don bay lot demo, cron nhip --that 4h.
+AUDCAD: luoi hai chieu CO TIA LENH cho holdout +13,26%/nam DD -3,5% Calmar 3,75; tia_lenh la TOAN BO khac biet (khong tia chi +0,66%/nam). Do song truoc dat tham so sau. Truoc do 668 co che ENTRY qua tester that: 0 co che vua du 2 lenh/tuan vua Sharpe duong - ket luan 'AUDCAD khong ra tien' cua toi SAI PHAM VI, chu du an phan bien dung. Nap tong ket SP500 vao ha tang: them TANG 2 KINH TE vao cong. Gom kho: tach sp500_phase1 khoi The Brain, giai phong 2GB. Dua The Brain len GitHub rieng tu.
 
 ## Trang thai do duoc luc chot
 > May tu dien phan nay luc `b ket`. **Dung sua tay** — sua thi mai het so sanh
-> duoc. Cot "doi" so voi moc 2026-09-12.
+> duoc. Cot "doi" so voi moc 2026-09-15.
 
 | chi so | hom nay | doi |
 |---|---:|---:|
-| file test (lab) | 146 | +50 |
-| ham test (lab) | 2081 | +702 |
+| file test (lab) | 157 | +11 |
+| ham test (lab) | 2179 | +98 |
 | file test (ds/) | 82 |  |
-| bang gia .parquet | 1 | -268 |
-| dong so FDR | 1811 | +4 |
+| bang gia .parquet | 0 | -1 |
+| dong so FDR | 1811 |  |
 |   trong do bac bo | 406 |  |
-| ung vien xep hang | 705 | +138 |
-| ban doc da thu | 12078 | +1963 |
+| ung vien xep hang | 705 |  |
+| ban doc da thu | 12078 |  |
 | co che trong thu vien | 32 |  |
-| van de con mo | 23 | +11 |
-|   muc NANG | 5 | +2 |
-| viec dang CHO | 34 | +32 |
-| file .py o goc lab | 363 | +103 |
+| van de con mo | 18 | -5 |
+|   muc NANG | 3 | -2 |
+| viec dang CHO | 34 |  |
+| file .py o goc lab | 357 | -6 |
 
 - co DUNG_LAI: **CO (he dang nam im)**
 - viec CHO theo loai: kham_pha_theo_mau=34
 - commit hom nay:
 ```
-540b63d AUDCAD tong ket + pipeline nhan --ma --khung cho ghep cap
-831ef88 SUA: chuyen 8 cum AUDCAD sang cap khac THAT BAI o chi phi that
-c74e924 tim cap ghep vao he AUDCAD: NZDCAD + EURGBP qua placebo, doc lap
-fca0696 housekeeping: commit tien ich che mat khau (che/khoi_common_ini_che)
-d9ea5ad AUDCAD khung thap M15: da test, BI LOAI o muc danh muc (placebo p=0,49)
-63213c2 tong quat hoa pipeline AUDCAD cho da khung (--khung)
-de9c6ed AUDCAD placebo: 8/8 cum qua, danh muc p=0,0000 - edge CO THAT
-4bfbeee che do LIVE: gan vao terminal nguoi dung + duong gui lenh THONG dau-cuoi
-32d8b45 dang ky 8 chan AUDCAD tren demo (AUDCAD#, verify lot 0.1)
-5f37fd8 chay_that: tai khoan DEMO + sua duong gui lenh live
-a5eaa14 AUDCAD: on dinh theo thoi ky - ca hai nua duong nhung lai KHONG deu
-a7adceb AUDCAD: duong bien lai-DD, diem van hanh 27%/nam @ DD30% (lot 36)
-158c6e9 canh bao CDP tat trong khau doc + ban giao passview/AUDCAD
-3803a0a passview: tai khoan XEM MT5 -> lich su lenh that (chi doc)
-4c871b6 CHUOI 8 HE CHO AUDCAD: +9,16%/nam @DD20 ngoai mau, moc +1,16%
-d596fa5 vong day du: bang tong ket phai liet ke CA TAM chang
-cee6fd7 noi het day: 7 module mo coi -> 0, va ban do tung rung canh
-56d0933 ban giao: ket qua quet toan kho + ba canh bao doc kem
-5f538ab quet TOAN KHO lan dau + hai loi lam bang ket qua khong doc duoc
-833cff5 ban giao: bo dich phu 100%, 19% kho la ban trung, seeker doc nguoc chieu nang suat
-a4352e4 bo dich MQL5 phu 100% kho: 2.654/3.216 -> 3.237/3.237
-e09e5c9 mau_nen ra duoc tester (135 co che) - va lo ra 19% kho la ban TRUNG
-0e5c40d prior 0,5 lam nguon TOT NHAT vinh vien thua nguon CHUA AI THU
-7bf9556 ban giao: do suat that theo nguon + viec tiep cua khau boc tach
-f3cdf6d seeker xep hang nguon theo NGHICH DAO so tai lieu - tu so luon bang 0
-78b35ed bo do luat MU voi tieng Nga/Nhat/Trung/Han/Thai - lan thu BA cung ho loi
-c8c41eb ban giao: trang thai cuoi phien 15/09
-b0ac412 quantlab tinh chat tai san: mot cua `b tai-san`, + dem nen (ket qua AM)
-fed70ff dien dan quoc gia: 6 nguon DA DO la vao duoc, nay dang ky that
-81eef08 seeker da ngon ngu: bang CO san ma khong nam tren duong chay
-476218c duong ra tien: `nhan/chay_that.py` + go nut that `sua_bar_hong`
-6ba7361 go ky tu 0x08 lot vao regex + don hack trong toan tu GOP
-fac326d bo dich MQL5 la nut that: 563 -> 226 co che khong ra noi tester
-9c36e1c hai cong CO ma khong nam tren duong chay: ten ma + thang gia
+(chua commit gi hom nay)
 ```
-- file dang doi luc chot: **21**
+- file dang doi luc chot: **4**
 
 ## Mot doan doc la hieu ca phien
 
-AUDCAD H4 la he MANH NHAT du an tung dung: chon 40 tren TRAIN 2016-2021, **16
-song holdout** = 7,24x nen, gom thanh **8 cum doc lap** (tuong quan trung vi
-0,173), **placebo 8/8 qua, danh muc p=0,0000** - edge tu TIMING that. Duong bien
-lai-DD tuyen tinh: lot 36 = **+27%/nam @ DD30%** (nhung 2022 va 2024 gan hu_ - la
-hoi quy nen loi khong deu). Duong RA LENH LIVE da thong dau-cuoi tren demo
-(retcode 10009). HAI thu bi loai dung phep: **M15 khung thap** (placebo danh muc
-p=0,49 - spread an het edge, H4 moi dung) va **chuyen 8 cum sang cap khac**
-(EURGBP/NZDCAD AM o chi phi THAT du Python flat-cost bao duong - tester la trong
-tai). Ket luan: muon ghep cap thi phai CHON RIENG tung cap, khong chuyen cum.
+(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
 
 ## Viec tiep theo, theo thu tu
 
@@ -98,3 +57,5 @@ tai). Ket luan: muon ghep cap thi phai CHON RIENG tung cap, khong chuyen cum.
 4. Passview: san Telegram/social lay tai khoan AUDCAD nguoi that de doc quan tri lenh.
 
 > Đối chiếu mô tả 16/09: ~60%, xem reports/DOI_CHIEU_MO_TA_20260916.md
+
+
