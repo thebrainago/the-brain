@@ -4,46 +4,6 @@
 > chung (het token, may ngu) thi day van la ban giao day du toi luc
 > do. `b ket` doc file nay khi chot phien.
 
-- dang chay: ban_giao_song.py (pid 9816, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: a2557e6 ghep he: bat duoc bay GOP THO, va phep doi chung giet ket qua ghep
-### 2026-09-14 22:33:57 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 20820, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: a2557e6 ghep he: bat duoc bay GOP THO, va phep doi chung giet ket qua ghep
-### 2026-09-14 22:34:50 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18832, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: d467fde DINH CHINH: "4/5 he qua cong am o nua sau" la SAI - do tin hieu cat lech lat
-### 2026-09-14 22:36:10 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 14204, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: b6f406c con so DUONG duy nhat cua ngay, sau khi qua het cac phep doi chung
-### 2026-09-14 22:41:58 — chup trang thai
-
-- dang chay: ban_giao_song.py (pid 18176, 0 phut)
-- `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
-- `supervisor_stdio.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
-- `watchdog.log`: 2026-09-14 21:08:57 WATCHDOG thay DUNG_LAI; cho supervisor dung co trat tu
-- git: b6f406c con so DUONG duy nhat cua ngay, sau khi qua het cac phep doi chung
-### 2026-09-14 22:46:41 — chup trang thai
-
 - dang chay: ban_giao_song.py (pid 20256, 0 phut)
 - `dieu_phoi.log`: 2026-09-14 21:08:53 nhan yeu cau dung - khong nhan them viec, doi cac tru hien tai.
 - `dieu_phoi_nen.log`: [Mon 09/14/2026 21:10:55.09] watchdog thoat (ma -1)
@@ -404,3 +364,43 @@
 
 - dang chay: ban_giao_song.py (pid 5856, 0 phut), dieu_khien_xa.py (pid 11560, 159 phut)
 - git: 5003ecc them lenh `b github`: day lab/ len repo rieng bang mot lenh
+### 2026-09-18 20:57:12 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 17692, 0 phut), dieu_khien_xa.py (pid 11560, 163 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 21:00:42 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 19148, 0 phut), dieu_khien_xa.py (pid 11560, 167 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 21:14:51 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 22468, 0 phut), dieu_khien_xa.py (pid 11560, 181 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 21:55:14 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14480, 0 phut), dieu_khien_xa.py (pid 11560, 221 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 21:55:45 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 14876, 0 phut), dieu_khien_xa.py (pid 11560, 222 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 21:59:25 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 9896, 0 phut), dieu_khien_xa.py (pid 11560, 225 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 22:06:15 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16196, 0 phut), dieu_khien_xa.py (pid 11560, 232 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 22:20:52 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16596, 0 phut), dieu_khien_xa.py (pid 11560, 247 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 22:23:34 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 7716, 0 phut), dieu_khien_xa.py (pid 11560, 250 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
+### 2026-09-18 22:28:41 — chup trang thai
+
+- dang chay: ban_giao_song.py (pid 16832, 0 phut), dieu_khien_xa.py (pid 11560, 255 phut)
+- git: 8930ad0 go lab/data/ khoi git; thoi chan nhat_ky/
