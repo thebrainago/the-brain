@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE BRAIN — Sơ đồ quy trình</title>
+<style>
+  :root { --bg:#0f172a; --panel:#1e293b; --line:#334155; --txt:#e2e8f0; --mut:#94a3b8; --acc:#38bdf8; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt); font-family:"Segoe UI",Arial,sans-serif; }
+  header { padding:28px 32px 10px; border-bottom:1px solid var(--line); }
+  header h1 { margin:0 0 6px; font-size:26px; color:#fff; }
+  header p { margin:0; color:var(--mut); font-size:14px; }
+  main { padding:24px 32px 60px; max-width:1320px; margin:0 auto; }
+  section { margin-top:34px; }
+  section h2 { font-size:20px; color:var(--acc); border-left:4px solid var(--acc); padding-left:10px; margin:0 0 4px; }
+  section p.desc { color:var(--mut); font-size:13.5px; margin:4px 0 14px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px; overflow:auto; }
+  .card img { display:block; max-width:100%; height:auto; margin:0 auto; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:1000px){ .grid{grid-template-columns:1fr;} }
+  footer { border-top:1px solid var(--line); padding:18px 32px 30px; color:var(--mut); font-size:12.5px; }
+  a { color:var(--acc); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧠 THE BRAIN — Sơ đồ quy trình dây chuyền nghiên cứu</h1>
+  <p>Cập nhật 09/08/2026 · chốt sau 5 vòng phản biện Claude × DeepSeek · chạy 24/7 trên VPS 2 vCPU / 1–2 GB</p>
+</header>
+<main>
+  <section>
+    <h2>1 · Tổng quan dây chuyền</h2>
+    <p class="desc">Từ nguồn → khám phá (tập sàng 28 thị trường) → sổ khẳng định → sổ đăng ký → cổng xác nhận → kết luận. Kèm hai luồng bên: vận hành 24/7 và sức khoẻ dây chuyền.</p>
+    <div class="card"><img src="so_do_tong_quan.svg" alt="Sơ đồ tổng quan"></div>
+  </section>
+  <section>
+    <h2>2 · Vòng lặp tự sinh 24/7</h2>
+    <p class="desc">Thợ DeepSeek viết đúng một hàm <code>do()</code>, Claude giám sát; mỗi vòng là một lần bốc thăm khẳng định mới, kết quả ghi sổ khám phá — chưa phải edge.</p>
+    <div class="card"><img src="so_do_vong_lap.svg" alt="Vòng lặp tự sinh"></div>
+  </section>
+  <section>
+    <h2>3 · Cổng PASS (6 điều kiện)</h2>
+    <p class="desc">Muốn gọi là edge phải qua đủ cửa trên tập xác nhận chưa từng nhìn: đăng ký trước, cost model đối xứng, 6 điều kiện PASS, placebo + walk-forward, FDR toàn cục.</p>
+    <div class="card"><img src="so_do_cong_pass.svg" alt="Cổng PASS"></div>
+  </section>
+</main>
+<footer>
+  File gốc: <a href="so_do_tong_quan.svg">so_do_tong_quan.svg</a> ·
+  <a href="so_do_vong_lap.svg">so_do_vong_lap.svg</a> ·
+  <a href="so_do_cong_pass.svg">so_do_cong_pass.svg</a> ·
+  tái tạo bằng <a href="tao_so_do.py">tao_so_do.py</a> (python so_do\tao_so_do.py) ·
+  bản viết: <a href="SO_DO_THE_BRAIN.md">SO_DO_THE_BRAIN.md</a>
+</footer>
+</body>
+</html>

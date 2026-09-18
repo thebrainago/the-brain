@@ -1,0 +1,259 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1680" viewBox="0 0 1240 1680" font-family="Segoe UI, Arial, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker><marker id="arD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+<text x="620" y="44" font-size="30" fill="#0f172a" text-anchor="middle" font-weight="bold">THE BRAIN — SƠ ĐỒ QUY TRÌNH DÂY CHUYỀN NGHIÊN CỨU</text>
+<text x="620" y="74" font-size="15" fill="#475569" text-anchor="middle" font-weight="normal">Chốt 09/08/2026 sau 5 vòng phản biện Claude × DeepSeek · chạy 24/7 trên VPS 2 vCPU/1–2 GB</text>
+<rect x="120" y="96" width="18" height="18" rx="4" fill="#eff6ff" stroke="#1e40af" stroke-width="1.4"/>
+<text x="144" y="109" font-size="12" fill="#334155" text-anchor="start" font-weight="normal">Tầng 0 · Nguồn</text>
+<rect x="283.12" y="96" width="18" height="18" rx="4" fill="#fffbeb" stroke="#b45309" stroke-width="1.4"/>
+<text x="307.12" y="109" font-size="12" fill="#334155" text-anchor="start" font-weight="normal">Tầng 1 · Khám phá</text>
+<rect x="468.08000000000004" y="96" width="18" height="18" rx="4" fill="#eef2ff" stroke="#4338ca" stroke-width="1.4"/>
+<text x="492.08000000000004" y="109" font-size="12" fill="#334155" text-anchor="start" font-weight="normal">Tầng 2 · Sổ khẳng định</text>
+<rect x="690.72" y="96" width="18" height="18" rx="4" fill="#fdf2f8" stroke="#be185d" stroke-width="1.4"/>
+<text x="714.72" y="109" font-size="12" fill="#334155" text-anchor="start" font-weight="normal">Tầng 3 · Sổ đăng ký</text>
+<rect x="889.6" y="96" width="18" height="18" rx="4" fill="#f0fdf4" stroke="#166534" stroke-width="1.4"/>
+<text x="913.6" y="109" font-size="12" fill="#334155" text-anchor="start" font-weight="normal">Tầng 4 · Cổng xác nhận</text>
+<rect x="1112.24" y="96" width="18" height="18" rx="4" fill="#fef2f2" stroke="#991b1b" stroke-width="1.4"/>
+<text x="1136.24" y="109" font-size="12" fill="#334155" text-anchor="start" font-weight="normal">Tầng 5 · Kết luận</text>
+<rect x="370.0" y="184" width="500" height="156" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.3"/>
+<rect x="370.0" y="150" width="500" height="34" rx="10" fill="#1e40af" stroke="#1e40af" stroke-width="0"/>
+<rect x="370.0" y="180" width="500" height="4" rx="0" fill="#1e40af" stroke="#1e40af" stroke-width="0"/>
+<text x="620.0" y="172.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TẦNG 0 — NGUỒN: THU THẬP TỰ ĐỘNG</text>
+<text x="620.0" y="207" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">DỮ LIỆU: Yahoo Finance 31 thị trường (chỉ số · FX · hàng</text>
+<text x="620.0" y="224" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">hóa) · MT5</text>
+<text x="620.0" y="244" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">Ý TƯỞNG: arXiv · GitHub (freqtrade…) · YouTube phụ đề ·</text>
+<text x="620.0" y="261" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">IMAP · track record · nạp tay</text>
+<text x="620.0" y="281" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">CÔNG NGHỆ: HuggingFace models/datasets/papers · GitHub</text>
+<text x="620.0" y="298" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">trending → BRAIN_cong_nghe (101)</text>
+<text x="620.0" y="322" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Kho: THƯ VIỆN (23 hàm/công thức) · dữ liệu</text>
+<text x="620.0" y="339" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">cập nhật 08:21 mỗi sáng</text>
+<rect x="370.0" y="402" width="500" height="173" rx="10" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.3"/>
+<rect x="370.0" y="368" width="500" height="34" rx="10" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<rect x="370.0" y="398" width="500" height="4" rx="0" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<text x="620.0" y="390.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TẦNG 1 — KHÁM PHÁ · TẬP SÀNG (KHÔNG PHẢI EDGE)</text>
+<text x="620.0" y="425" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">28 thị trường → 7 nhóm tương quan (châu Âu · châu Á · châu</text>
+<text x="620.0" y="442" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">Mỹ · kim loại · năng lượng · nông sản · FX)</text>
+<text x="620.0" y="462" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">DeepSeek thợ viết ĐÚNG 1 hàm do(); Claude giám sát ·</text>
+<text x="620.0" y="479" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">brain_co_che.py: 3 hạt, p theo nhóm, trung vị</text>
+<text x="620.0" y="499" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Chặn lỗi thợ: nhìn trước · thiếu null · gọi mạng/xoá file</text>
+<text x="620.0" y="516" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">· cum kết quả</text>
+<text x="620.0" y="540" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Kết quả: BRAIN_TU_SINH (51 phép thử) ·</text>
+<text x="620.0" y="557" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">BRAIN_CO_CHE · BRAIN_sang — không tốn slot</text>
+<text x="620.0" y="574" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">FDR</text>
+<rect x="370.0" y="637" width="500" height="139" rx="10" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.3"/>
+<rect x="370.0" y="603" width="500" height="34" rx="10" fill="#4338ca" stroke="#4338ca" stroke-width="0"/>
+<rect x="370.0" y="633" width="500" height="4" rx="0" fill="#4338ca" stroke="#4338ca" stroke-width="0"/>
+<text x="620.0" y="625.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TẦNG 2 — SỔ KHẲNG ĐỊNH (brain_khang_dinh.py)</text>
+<text x="620.0" y="660" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Khẳng định nguyên tử KD_* — 11 sổ: 1 CHƯA_TEST · 3</text>
+<text x="620.0" y="677" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">ĐANG_SÀNG · 7 ĐÃ_ĐÓNG_SỔ</text>
+<text x="620.0" y="697" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">“Không có điều kiện bác bỏ → không phải khẳng định, chỉ là</text>
+<text x="620.0" y="714" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">nhận xét”</text>
+<text x="620.0" y="738" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Tra sổ TRƯỚC khi test: biến thể là số vô</text>
+<text x="620.0" y="755" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">nghĩa — khẳng định nguyên tử mới là thứ trả</text>
+<text x="620.0" y="772" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">tiền</text>
+<rect x="370.0" y="838" width="500" height="122" rx="10" fill="#fdf2f8" stroke="#f9a8d4" stroke-width="1.3"/>
+<rect x="370.0" y="804" width="500" height="34" rx="10" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<rect x="370.0" y="834" width="500" height="4" rx="0" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<text x="620.0" y="826.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TẦNG 3 — SỔ ĐĂNG KÝ (324 giả thuyết)</text>
+<text x="620.0" y="861" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">CHỈ NGƯỜI ký mới vào sổ — máy 24/7 không bao giờ tự thêm</text>
+<text x="620.0" y="881" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Ngân sách FDR toàn cục q = 10% · siết dần theo số phép thử</text>
+<text x="620.0" y="898" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">tích lũy</text>
+<text x="620.0" y="922" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">plan_hash bắt buộc ở tầng dữ liệu ·</text>
+<text x="620.0" y="939" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">pre-registration · sổ chỉ-thêm, chống chạy</text>
+<text x="620.0" y="956" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">chui</text>
+<rect x="370.0" y="1022" width="500" height="207" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="370.0" y="988" width="500" height="34" rx="10" fill="#166534" stroke="#166534" stroke-width="0"/>
+<rect x="370.0" y="1018" width="500" height="4" rx="0" fill="#166534" stroke="#166534" stroke-width="0"/>
+<text x="620.0" y="1010.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TẦNG 4 — CỔNG XÁC NHẬN (tập xác nhận chưa từng nhìn)</text>
+<text x="620.0" y="1045" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">sp500 · dowjones · nasdaq · russell2000 · us500cash ·</text>
+<text x="620.0" y="1062" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">us500m</text>
+<text x="620.0" y="1082" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">PASS = 6 điều kiện đồng thời: 1) net &gt; buyhold 2) sharpe &gt;</text>
+<text x="620.0" y="1099" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">buyhold 3) calmar &gt; buyhold</text>
+<text x="620.0" y="1119" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">4) alpha Newey-West p ≤ ngưỡng 5) placebo p xấu nhất (≥5</text>
+<text x="620.0" y="1136" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">hạt) 6) pre_registered = true</text>
+<text x="620.0" y="1160" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Siết thêm khi exposure &gt; 95%: p ≤ 0,01 + ≥1</text>
+<text x="620.0" y="1177" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">giai đoạn con dương · SPA cho chọn-trong-mẻ</text>
+<text x="620.0" y="1194" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">· Null factory cho chọn-theo-thời-gian</text>
+<text x="620.0" y="1214" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Mốc = buyhold CFD · cost model ĐỐI XỨNG 2 vế</text>
+<text x="620.0" y="1231" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">(Vòng 6: phí bất đối xứng = 63% “edge” giả)</text>
+<rect x="370.0" y="1291" width="500" height="122" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.3"/>
+<rect x="370.0" y="1257" width="500" height="34" rx="10" fill="#991b1b" stroke="#991b1b" stroke-width="0"/>
+<rect x="370.0" y="1287" width="500" height="4" rx="0" fill="#991b1b" stroke="#991b1b" stroke-width="0"/>
+<text x="620.0" y="1279.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TẦNG 5 — KẾT LUẬN</text>
+<text x="620.0" y="1314" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">SONG SÓT (PASS): hạn 3/6/12 tháng (hạng C/B/A) · tái kiểm</text>
+<text x="620.0" y="1331" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">quý bằng lịch Lan-DeMets — không cộng FDR</text>
+<text x="620.0" y="1351" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">EXPLORATORY: kho chờ người duyệt · âm tính:</text>
+<text x="620.0" y="1368" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">CLOSED_UNLESS_TRIGGERED kèm điều kiện để sai</text>
+<text x="620.0" y="1392" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Hiện tại: 0 song sót / 324 phép thử — âm tính</text>
+<text x="620.0" y="1409" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">hợp lệ, không được tinh chỉnh tham số</text>
+<text x="28" y="140" font-size="16" fill="#0f172a" text-anchor="start" font-weight="bold">VẬN HÀNH 24/7</text>
+<rect x="20" y="148" width="340" height="2" rx="1" fill="#94a3b8" stroke="#94a3b8" stroke-width="0"/>
+<rect x="20" y="199" width="340" height="80" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="165" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="195" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="187.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">NHỊP TIM &amp; HÀNG ĐỢI</text>
+<text x="32" y="224" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">BRAIN_nhip_tim.json mỗi 5 giây ·</text>
+<text x="32" y="239" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">trạng thái nghỉ/đang chạy</text>
+<text x="32" y="257" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Hàng đợi BRAIN_hang_doi: 14 chờ ·</text>
+<text x="32" y="272" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">11 xong</text>
+<rect x="20" y="327" width="340" height="65" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="293" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="323" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="315.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">CHẠY HẰNG NGÀY</text>
+<text x="32" y="352" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">cập nhật dữ liệu → thu thập nguồn</text>
+<text x="32" y="367" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">→ chạy cửa ải → cập nhật báo cáo</text>
+<text x="32" y="382" font-size="12" fill="#0f172a" text-anchor="start" font-weight="bold">KHÔNG bao giờ tự tinh chỉnh tham số</text>
+<rect x="20" y="440" width="340" height="95" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="406" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="436" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="428.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">THỢ DEEPSEEK — TỰ SINH (ds_tho.py)</text>
+<text x="32" y="465" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">DeepSeek viết ĐÚNG 1 hàm do();</text>
+<text x="32" y="480" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Claude giám sát, soi từng lỗi</text>
+<text x="32" y="498" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">quét an toàn: nhìn trước · thiếu</text>
+<text x="32" y="513" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">null · gọi mạng/xoá file · cum</text>
+<text x="32" y="528" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">kết quả</text>
+<rect x="20" y="583" width="340" height="80" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="549" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="579" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="571.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">ĐẾM PHÉP THỬ &amp; FDR</text>
+<text x="32" y="608" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">+51 phép thử khám phá hôm nay</text>
+<text x="32" y="623" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">(BRAIN_dem_phep_thu)</text>
+<text x="32" y="641" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">FDR toàn cục siết dần theo số</text>
+<text x="32" y="656" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">phép thử tích lũy</text>
+<rect x="20" y="711" width="340" height="80" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="677" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="707" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="699.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">BÁO CÁO TỰ ĐỘNG</text>
+<text x="32" y="736" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">THE_BRAIN.md · BRAIN_BAO_CAO.md ·</text>
+<text x="32" y="751" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">BRAIN_nhat_ky.md</text>
+<text x="32" y="769" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Báo cáo tuần: “N dòng bị sửa hồi</text>
+<text x="32" y="784" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">tố” — chỉ dismiss sau khi xem</text>
+<rect x="20" y="839" width="340" height="125" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="805" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="835" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="827.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">QUY TẮC DỪNG</text>
+<text x="32" y="864" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">0,0017 × V &gt; C → TIẾP TỤC · ngược</text>
+<text x="32" y="879" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">lại DỪNG</text>
+<text x="32" y="897" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">3 chẩn đoán: không edge (dừng</text>
+<text x="32" y="912" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">hẳn) · thiếu lực (tăng mẫu) · nhìn</text>
+<text x="32" y="927" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">sai chỗ (đổi bề mặt)</text>
+<text x="32" y="945" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Dừng theo BỀ MẶT tìm kiếm, không</text>
+<text x="32" y="960" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">phải “thị trường không có edge”</text>
+<rect x="20" y="1012" width="340" height="155" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="978" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="1008" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="1000.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">3 CON SỐ → MỌI NGƯỠNG</text>
+<text x="32" y="1037" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">1) Edge tốt sau chi phí đáng bao</text>
+<text x="32" y="1052" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">nhiêu/năm?</text>
+<text x="32" y="1070" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">2) Chiến lược vô dụng lọt qua gây</text>
+<text x="32" y="1085" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">thiệt hại bao nhiêu/năm?</text>
+<text x="32" y="1103" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">3) Xác suất ý tưởng ngẫu nhiên là</text>
+<text x="32" y="1118" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">tốt?</text>
+<text x="32" y="1136" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Tuition budget: thăm dò = tiền</text>
+<text x="32" y="1151" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">học phí, đánh giá bằng cập nhật</text>
+<text x="32" y="1166" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">niềm tin</text>
+<rect x="20" y="1215" width="340" height="125" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="20" y="1181" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="20" y="1211" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="190.0" y="1203.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">NGƯỜI DUYỆT — GIỮ NGƯỜI TRONG VÒNG LẶP</text>
+<text x="32" y="1240" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Chỉ trình thứ đã qua cổng + có cơ</text>
+<text x="32" y="1255" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">chế · màn hình 60 giây: cơ chế ·</text>
+<text x="32" y="1270" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">net vs mua-giữ · alpha t ·</text>
+<text x="32" y="1285" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">placebo p · đồ thị vốn</text>
+<text x="32" y="1303" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Không phản hồi = PENDING · không</text>
+<text x="32" y="1318" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">bao giờ tự động duyệt · gom cụm</text>
+<text x="32" y="1333" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">cùng cơ chế</text>
+<text x="888" y="140" font-size="16" fill="#0f172a" text-anchor="start" font-weight="bold">SỨC KHOẺ DÂY CHUYỀN</text>
+<rect x="880" y="148" width="340" height="2" rx="1" fill="#94a3b8" stroke="#94a3b8" stroke-width="0"/>
+<rect x="880" y="199" width="340" height="125" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="880" y="165" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="880" y="195" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="1050.0" y="187.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">CANARY — ĐÃ CHỨNG MINH NHẠY (canary.py)</text>
+<text x="892" y="224" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">5 con: luôn mua = đúng buyhold ·</text>
+<text x="892" y="239" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">luôn bán · đứng ngoài = 0 · trễ 1</text>
+<text x="892" y="254" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">bar (alpha ≈ 0) · biết trước (t &gt;</text>
+<text x="892" y="269" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">20)</text>
+<text x="892" y="287" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Tự kiểm độ nhạy: bắt 8/8 sau khi</text>
+<text x="892" y="302" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">sửa · t &gt; 5 trên tập sàng = nghi</text>
+<text x="892" y="317" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">nhìn trước</text>
+<rect x="880" y="372" width="340" height="95" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="880" y="338" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="880" y="368" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="1050.0" y="360.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">MUTATION AUDIT HẰNG THÁNG</text>
+<text x="892" y="397" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Point-in-time test = ca cố định:</text>
+<text x="892" y="412" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">dịch close lên 1 bar → dây chuyền</text>
+<text x="892" y="427" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">phải gào</text>
+<text x="892" y="445" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Chèn lỗi: đảo dấu phí · spread âm</text>
+<text x="892" y="460" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">· cost bất đối xứng giữa 2 vế</text>
+<rect x="880" y="515" width="340" height="80" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="880" y="481" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="880" y="511" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="1050.0" y="503.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">HIỆU CHUẨN</text>
+<text x="892" y="540" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Placebo FDR phải đúng target (5%)</text>
+<text x="892" y="555" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">· sai số ngoài mẫu z ~ N(0,1)</text>
+<text x="892" y="573" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Quá nhiều PASS/ngày = tín hiệu</text>
+<text x="892" y="588" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">HỎNG, không phải tin vui</text>
+<rect x="880" y="643" width="340" height="155" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="880" y="609" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="880" y="639" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="1050.0" y="631.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">HẠN DÙNG BẤT ĐỐI XỨNG</text>
+<text x="892" y="668" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">PASS (tuyên bố về tiền): hết hạn</text>
+<text x="892" y="683" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">3/6/12 tháng theo hậu quả</text>
+<text x="892" y="701" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Âm tính (tuyên bố về vắng mặt):</text>
+<text x="892" y="716" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">CLOSED_UNLESS_TRIGGERED — điều</text>
+<text x="892" y="731" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">kiện sai viết theo LỚP SỰ KIỆN,</text>
+<text x="892" y="746" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">không theo ngày</text>
+<text x="892" y="764" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Trigger xuất hiện →</text>
+<text x="892" y="779" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">REOPENED_EXPLORATORY, đi lại từ</text>
+<text x="892" y="794" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">đầu</text>
+<rect x="880" y="846" width="340" height="155" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="880" y="812" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="880" y="842" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="1050.0" y="834.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">MÔ PHỎNG SONG NGỮ + DANH MỤC</text>
+<text x="892" y="871" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">1 khai báo template+tham số</text>
+<text x="892" y="886" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">(YAML) → 2 backend: Python + MQL5</text>
+<text x="892" y="901" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">EA · conformance test bắt buộc</text>
+<text x="892" y="919" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">MT5 chỉ every-tick/real ticks ·</text>
+<text x="892" y="934" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">tắt swap trong tester, Python</text>
+<text x="892" y="949" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">cộng cost_model</text>
+<text x="892" y="967" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Danh mục: cấm optimizer · equal</text>
+<text x="892" y="982" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">weight/inverse-vol/ERC đăng ký</text>
+<text x="892" y="997" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">trước · Kelly vẫn là tham số</text>
+<rect x="880" y="1049" width="340" height="140" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="880" y="1015" width="340" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="880" y="1045" width="340" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="1050.0" y="1037.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">LIVE &amp; ĐỐI CHIẾU + SỨC CHỨA</text>
+<text x="892" y="1074" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">magic = mã chiến lược · comment =</text>
+<text x="892" y="1089" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">attempt_id · khớp</text>
+<text x="892" y="1104" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">symbol+side+attempt_id+volume</text>
+<text x="892" y="1122" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">CUSUM trên residual → WARN (dừng</text>
+<text x="892" y="1137" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">mở lệnh) → CRITICAL (halt)</text>
+<text x="892" y="1155" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Scale-aware validation: lệnh lớn</text>
+<text x="892" y="1170" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">tự đẩy giá →</text>
+<text x="892" y="1185" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">CAPACITY_CONSTRAINED</text>
+<line x1="620" y1="340" x2="620" y2="340" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="620" y="340" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">hằng ngày + nạp tay</text>
+<line x1="620" y1="575" x2="620" y2="575" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="620" y="575" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">phép thử đo được →</text>
+<line x1="620" y1="776" x2="620" y2="776" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="620" y="776" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">người ký →</text>
+<line x1="620" y1="960" x2="620" y2="960" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="620" y="960" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">chạy cổng xác nhận</text>
+<line x1="620" y1="1229" x2="620" y2="1229" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="360" y1="470.5" x2="370.0" y2="408" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="8,5" marker-end="url(#arD)"/>
+<text x="364.0" y="396" font-size="11.5" fill="#64748b" text-anchor="end" font-weight="normal">thợ sinh phép thử mới</text>
+<line x1="360" y1="606.0" x2="370.0" y2="844" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="8,5" marker-end="url(#arD)"/>
+<text x="364.0" y="832" font-size="11.5" fill="#64748b" text-anchor="end" font-weight="normal">FDR siết dần</text>
+<line x1="870.0" y1="1317" x2="880" y2="244.5" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="8,5" marker-end="url(#arD)"/>
+<text x="876.0" y="1307" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">kết luận → báo cáo &amp; canary giám sát</text>
+<rect x="130.0" y="1414" width="980" height="139" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.3"/>
+<rect x="130.0" y="1380" width="980" height="34" rx="10" fill="#0f172a" stroke="#0f172a" stroke-width="0"/>
+<rect x="130.0" y="1410" width="980" height="4" rx="0" fill="#0f172a" stroke="#0f172a" stroke-width="0"/>
+<text x="620.0" y="1402.0" font-size="15" fill="#e2e8f0" text-anchor="middle" font-weight="bold">KẾT QUẢ NGÀY 09/08/2026</text>
+<text x="620.0" y="1437" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">+51 phép thử khám phá tự sinh · 2 lỗi engine THẬT bị bắt nhờ canary:</text>
+<text x="620.0" y="1457" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">phí qua đêm bất đối xứng (~2%/năm alpha giả, 63% “edge” Volatility System) · lệch 1 bar (+26,8%/năm, t trung vị −0,74 →</text>
+<text x="620.0" y="1474" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">+10,05)</text>
+<text x="620.0" y="1494" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Phát hiện chi phí: giữ SP500 dài chênh 5,5%/năm giữa các sàn · XM futures CFD swap = 0 (rẻ hơn cash 1,2–2,7%/năm) →</text>
+<text x="620.0" y="1511" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">alpha phép trừ ưu tiên cao</text>
+<text x="620.0" y="1535" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Vòng 6 chốt: mốc = cách RẺ NHẤT có cùng phơi nhiễm theo từng lớp tài sản · cổng máy kiểm</text>
+<text x="620.0" y="1552" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">được tính đối xứng chi phí 2 vế</text>
+</svg>

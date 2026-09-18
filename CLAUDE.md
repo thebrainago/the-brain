@@ -17,7 +17,7 @@ So do that: **BA module** - SEEKER (phe u + bo loc) · QUANTLAB (tong quan tai s
 y tuong ghep) · **HEPHAESTUS de co che** (rai luoi tham so, ghep nut) · **QUANTLAB
 test**. Ly do: kho chi rong 8 chi bao vi do rong phu thuoc vao "co ai viet bai ve no
 khong"; 20 kieu dung Ichimoku la 1 chi bao + luoi tham so, khong phai 20 lan boc
-tai lieu. Xem `SO_DO_HE_THONG.txt` muc bo sung va `../BAN_GIAO_HE_THONG.md` muc 9.
+tai lieu. Xem `SO_DO_HE_THONG.txt` muc bo sung va `tai_lieu/BAN_GIAO_HE_THONG.md` muc 9.
 
 Ba dieu trong so do ma de lam nguoc:
 

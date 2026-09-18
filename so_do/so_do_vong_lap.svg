@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1150" height="1080" viewBox="0 0 1150 1080" font-family="Segoe UI, Arial, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker><marker id="arD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+<text x="575" y="40" font-size="24" fill="#0f172a" text-anchor="middle" font-weight="bold">VÒNG LẶP TỰ SINH 24/7 — THỢ DEEPSEEK × CLAUDE GIÁM SÁT</text>
+<text x="575" y="68" font-size="13.5" fill="#475569" text-anchor="middle" font-weight="normal">Mỗi vòng = 1 lần bốc thăm khẳng định mới · kết quả ghi sổ, không tự duyệt · KHÔNG phải edge cho tới khi qua cổng</text>
+<rect x="360.0" y="134" width="430" height="88" rx="10" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.3"/>
+<rect x="360.0" y="100" width="430" height="34" rx="10" fill="#4338ca" stroke="#4338ca" stroke-width="0"/>
+<rect x="360.0" y="130" width="430" height="4" rx="0" fill="#4338ca" stroke="#4338ca" stroke-width="0"/>
+<text x="575.0" y="122.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">SỔ KHẲNG ĐỊNH KD_* (brain_khang_dinh.py)</text>
+<text x="575.0" y="157" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">11 khẳng định nguyên tử: 1 CHƯA_TEST · 3</text>
+<text x="575.0" y="174" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">ĐANG_SÀNG · 7 ĐÃ_ĐÓNG_SỔ</text>
+<text x="575.0" y="198" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">“Không có điều kiện bác bỏ → không</text>
+<text x="575.0" y="215" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">phải khẳng định”</text>
+<rect x="360.0" y="286" width="430" height="88" rx="10" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.3"/>
+<rect x="360.0" y="252" width="430" height="34" rx="10" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<rect x="360.0" y="282" width="430" height="4" rx="0" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<text x="575.0" y="274.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">ĐỀ XUẤT KHẲNG ĐỊNH MỚI (DeepSeek)</text>
+<text x="575.0" y="309" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Đọc sổ → đề nghị câu chưa ai trả lời, kèm cách đo</text>
+<text x="575.0" y="333" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Có điều kiện trên kết quả các vòng</text>
+<text x="575.0" y="350" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">trước → adaptive search, phải trả giá</text>
+<text x="575.0" y="367" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">online FDR</text>
+<rect x="360.0" y="438" width="430" height="71" rx="10" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.3"/>
+<rect x="360.0" y="404" width="430" height="34" rx="10" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<rect x="360.0" y="434" width="430" height="4" rx="0" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<text x="575.0" y="426.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">VIẾT ĐÚNG 1 HÀM do(khoa, df, rng)</text>
+<text x="575.0" y="461" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Thợ không chọn dữ liệu, không chọn ngưỡng, không</text>
+<text x="575.0" y="478" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">viết kết luận</text>
+<text x="575.0" y="502" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">→ thợ vụng KHÔNG thể tự che edge giả</text>
+<rect x="360.0" y="573" width="430" height="88" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.3"/>
+<rect x="360.0" y="539" width="430" height="34" rx="10" fill="#92400e" stroke="#92400e" stroke-width="0"/>
+<rect x="360.0" y="569" width="430" height="4" rx="0" fill="#92400e" stroke="#92400e" stroke-width="0"/>
+<text x="575.0" y="561.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">QUÉT AN TOÀN + CLAUDE SOI</text>
+<text x="575.0" y="596" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Nhìn trước (close[i] thay open[i+1]) · thiếu null</text>
+<text x="575.0" y="613" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">· gọi mạng / xoá file · cum kết quả</text>
+<text x="575.0" y="633" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">HỎNG → cho sửa ≤ 4 vòng, hết giờ thì bỏ · OK →</text>
+<text x="575.0" y="650" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">chạy</text>
+<rect x="30.0" y="603" width="250" height="48" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="30.0" y="569" width="250" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="30.0" y="599" width="250" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="155.0" y="591.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">SỬA CODE (tối đa 4 vòng)</text>
+<text x="42.0" y="627" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">hết giờ 900s hoặc vẫn</text>
+<text x="42.0" y="641" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">hỏng → LOẠI</text>
+<line x1="360.0" y1="651" x2="280.0" y2="609.0" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="240.0" y="601.0" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">lỗi</text>
+<line x1="155.0" y1="569" x2="360.0" y2="600.0" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="8,5" marker-end="url(#arD)"/>
+<text x="352.0" y="592.0" font-size="11.5" fill="#64748b" text-anchor="end" font-weight="normal">sửa lại → quét lại</text>
+<rect x="360.0" y="725" width="430" height="88" rx="10" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.3"/>
+<rect x="360.0" y="691" width="430" height="34" rx="10" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<rect x="360.0" y="721" width="430" height="4" rx="0" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<text x="575.0" y="713.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">brain_co_che.py — CHẠY ĐÚNG BỘ KỶ LUẬT</text>
+<text x="575.0" y="748" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">28 thị trường × 7 nhóm tương quan × 3 hạt ngẫu</text>
+<text x="575.0" y="765" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">nhiên</text>
+<text x="575.0" y="785" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">p theo NHÓM (28 dòng không phải 28 phép thử độc</text>
+<text x="575.0" y="802" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">lập) · trung vị · p hạt xấu nhất</text>
+<rect x="360.0" y="877" width="430" height="88" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="360.0" y="843" width="430" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="360.0" y="873" width="430" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="575.0" y="865.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">GHI SỔ KHÁM PHÁ</text>
+<text x="575.0" y="900" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">BRAIN_TU_SINH.md (phép thử #1…51) ·</text>
+<text x="575.0" y="917" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">BRAIN_CO_CHE.md · BRAIN_sang.parquet</text>
+<text x="575.0" y="941" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Kèm đề xuất tiếp theo vào</text>
+<text x="575.0" y="958" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">BRAIN_DE_XUAT_DS — CHƯA AI DUYỆT</text>
+<rect x="360.0" y="1029" width="430" height="88" rx="10" fill="#fdf2f8" stroke="#f9a8d4" stroke-width="1.3"/>
+<rect x="360.0" y="995" width="430" height="34" rx="10" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<rect x="360.0" y="1025" width="430" height="4" rx="0" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<text x="575.0" y="1017.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">NGƯỜI CHỌN → brain_khang_dinh.py</text>
+<text x="575.0" y="1052" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Con người đọc đề xuất, chọn cái đáng test → khẳng</text>
+<text x="575.0" y="1069" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">định mới, đăng ký, tốn FDR</text>
+<text x="575.0" y="1089" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">Không phản hồi = PENDING · không bao giờ tự động</text>
+<text x="575.0" y="1106" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">duyệt</text>
+<line x1="575" y1="222" x2="575" y2="252" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="575" y1="374" x2="575" y2="404" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="575" y1="509" x2="575" y2="539" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="575" y1="661" x2="575" y2="691" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="575" y="691" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">sạch →</text>
+<line x1="575" y1="813" x2="575" y2="843" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="575" y1="965" x2="575" y2="995" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="320.0" y1="1056.0" x2="320.0" y2="161.0" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="8,5" marker-end="url(#arD)"/>
+<text x="314.0" y="608.5" font-size="11.5" fill="#64748b" text-anchor="end" font-weight="normal">khẳng định mới quay về sổ → vòng sau có điều kiện trên vòng trước</text>
+<rect x="820.0" y="286" width="300" height="125" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="820.0" y="252" width="300" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="820.0" y="282" width="300" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="970.0" y="274.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TẠI SAO TẦNG NÀY AN TOÀN</text>
+<text x="832.0" y="308" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">Tầng 1: không cổng nào, không tốn</text>
+<text x="832.0" y="323" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">slot FDR — muốn thành edge phải:</text>
+<text x="832.0" y="341" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">người ký + lập hồ sơ +</text>
+<text x="832.0" y="356" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">pre-registration + chạy TẬP XÁC NHẬN</text>
+<text x="832.0" y="377" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Ngưỡng t &gt; 5 trên tập sàng =</text>
+<text x="832.0" y="392" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">nghi nhìn trước, chứng minh</text>
+<text x="832.0" y="407" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">ngược mới thôi</text>
+<rect x="820.0" y="735" width="300" height="95" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.3"/>
+<rect x="820.0" y="701" width="300" height="34" rx="10" fill="#92400e" stroke="#92400e" stroke-width="0"/>
+<rect x="820.0" y="731" width="300" height="4" rx="0" fill="#92400e" stroke="#92400e" stroke-width="0"/>
+<text x="970.0" y="723.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">RỦI RO CHÍNH: CHỌN LỌC THEO THỜI GIAN</text>
+<text x="832.0" y="757" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">Vòng n sinh ra có điều kiện trên</text>
+<text x="832.0" y="772" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">vòng n−1 → SPA mù trước kiểu chọn</text>
+<text x="832.0" y="787" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">lọc này</text>
+<text x="832.0" y="805" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">Hướng xử lý: online FDR (LORD/LOND…)</text>
+<text x="832.0" y="820" font-size="12" fill="#0f172a" text-anchor="start" font-weight="normal">· hoặc đề xuất CẢ MẺ trước khi chạy</text>
+<rect x="820.0" y="1009" width="300" height="125" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="820.0" y="975" width="300" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="820.0" y="1005" width="300" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="970.0" y="997.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">CHẠY SONG SONG NHIỀU THỢ</text>
+<text x="832.0" y="1034" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">ds_tho.py --tho &lt;id&gt; · toàn</text>
+<text x="832.0" y="1049" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">văn hội thoại lưu</text>
+<text x="832.0" y="1064" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">reports/ds/ để Claude soi</text>
+<text x="832.0" y="1079" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">lại</text>
+<text x="832.0" y="1097" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">Log: _tusinh_tho0/1.log ·</text>
+<text x="832.0" y="1112" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">hàng đợi:</text>
+<text x="832.0" y="1127" font-size="15" fill="#475569" text-anchor="start" font-weight="normal">BRAIN_hang_doi.parquet</text>
+</svg>

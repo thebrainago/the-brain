@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>THE BRAIN 4D — Bản đồ hệ thống</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Segoe UI,Tahoma,sans-serif;background:#0b0f1a;color:#e8eef7;height:100vh;display:flex;flex-direction:column}
+  #top{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#10162a;border-bottom:1px solid #2a3550}
+  #top h1{font-size:16px;margin:0;color:#8fd0ff}
+  .tab{padding:7px 16px;border-radius:8px;cursor:pointer;border:1px solid #2a3550;background:#161d36;font-size:13px}
+  .tab.on{background:#1f5f8f;border-color:#2f86c8;color:#fff}
+  #wrap{flex:1;position:relative;overflow:hidden}
+  #view3d{position:absolute;inset:0}
+  #viewflow{position:absolute;inset:0;overflow:auto;display:none;padding:24px}
+  #legend{position:absolute;left:14px;bottom:14px;background:rgba(10,14,24,.85);border:1px solid #2a3550;border-radius:10px;padding:10px 14px;font-size:12px;line-height:1.8;z-index:5;max-width:300px}
+  #legend .k{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+  #hint{position:absolute;left:14px;top:10px;font-size:12px;color:#7c8aa8;z-index:5}
+  #panel{position:absolute;right:14px;top:10px;bottom:14px;width:340px;background:rgba(10,14,24,.92);border:1px solid #2a3550;border-radius:12px;padding:14px;overflow:auto;z-index:6;font-size:13px;line-height:1.55}
+  #panel h2{margin:0 0 4px;font-size:14px}
+  .mis{border:1px solid #2a3550;border-radius:10px;padding:10px 12px;margin-bottom:10px;cursor:pointer;transition:.15s}
+  .mis:hover{background:#14203a}
+  .mis.sel{outline:2px solid #4d9de0;background:#16284a}
+  .mis .t{font-weight:700;font-size:13px;margin-bottom:4px}
+  .mis ul{margin:6px 0 0;padding-left:18px}
+  .mis li{margin:2px 0}
+  .tag{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:10px;margin-left:8px;vertical-align:2px}
+  /* flow SVG */
+  .box{fill:#141b34;stroke:#2a3550;stroke-width:1.5;rx:8}
+  .boxS{stroke:#ff6b6b} .boxQ{stroke:#4d9de0} .boxB{stroke:#b06bff} .boxC{stroke:#ffd166}
+  .boxE{stroke:#3ddc97;stroke-dasharray:5 4}
+  .txt{fill:#e8eef7;font-size:12px;text-anchor:middle}
+  .txts{fill:#9fb0cc;font-size:10.5px;text-anchor:middle}
+  .arrow{stroke:#5a6a8c;stroke-width:1.6;fill:none;marker-end:url(#ar)}
+  .lbl{fill:#8fd0ff;font-size:11px;text-anchor:middle}
+  pre{background:#141b34;border:1px solid #2a3550;border-radius:8px;padding:10px;font-size:12px;color:#cfe0f5;overflow:auto}
+</style>
+</head>
+<body>
+<div id="top">
+  <h1>🧠 THE BRAIN — Bản đồ hệ thống 4D</h1>
+  <div class="tab on" data-v="3d">Không gian 4D</div>
+  <div class="tab" data-v="flow">Sơ đồ luồng hệ thống</div>
+</div>
+<div id="wrap">
+  <div id="view3d">
+    <div id="hint">🖱 kéo xoay · cuộn zoom · bấm vào quả cầu để xem nhiệm vụ (bảng bên phải)</div>
+    <div id="panel"></div>
+    <div id="legend">
+      <div><span class="k" style="background:#ffd166"></span><b>Lõi kết luận</b> — MT5/DB/chống overfit</div>
+      <div><span class="k" style="background:#ff6b6b"></span><b>Seeker</b> — hiện tại · kinh nghiệm người thật</div>
+      <div><span class="k" style="background:#4d9de0"></span><b>QuantLab</b> — tương lai · nghiên cứu & anomaly</div>
+      <div><span class="k" style="background:#b06bff"></span><b>Banker</b> — vĩ mô · regime (trục Z)</div>
+      <div><span class="k" style="background:#3ddc97;border-radius:50%"></span><b>Evolution</b> — thời gian/meta (trục T)</div>
+    </div>
+  </div>
+  <div id="viewflow">
+    <svg id="flow" width="100%" height="100%" viewBox="0 0 1000 760"></svg>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const MISSIONS = {
+  core: { c:'#ffd166', t:'LÕI KẾT LUẬN', d:'Cỗ máy xác minh — nơi mọi giả thuyết phải qua.',
+    items:['Chạy MT5 Strategy Tester THẬT (không phải mô phỏng Python).',
+           'Chống overfit: FDR toàn cục, placebo, walk-forward, kiểm chéo cặp.',
+           'Ra phán quyết cuối: THAT / AO / CHUA_RO.',
+           'Verdict của LLM KHÔNG phải bằng chứng thống kê — chỉ MT5 mới quyết.']},
+  seeker:{ c:'#ff6b6b', t:'SEEKER — hiện tại · kinh nghiệm', d:'Kế thừa di sản người giỏi đã trả giá.',
+    items:['Quét nguồn thật: passview, EA có mã nguồn, track record, GitHub/MQL5.',
+           'Vai REVERSER: đo ngược luật từ tài khoản thật (bước lưới, lot, TP, SL).',
+           'Playbook ULTIMA: nguồn → luật → tài sản hợp → EA → test → tối ưu → kiểm chéo.',
+           'Thực dụng: chỉ giữ thứ đang hiệu quả thực tế.']},
+  quantlab:{c:'#4d9de0', t:'QUANTLAB — tương lai · nghiên cứu', d:'Khám phá quy luật mới, bài bản.',
+    items:['Quét anomaly thống kê trên OHLCV (momentum exhaustion, absorption, vol regime shift).',
+           'LLM chỉ lý luận trên evidence của engine — GROUNDING, không được bịa số.',
+           'Hypothesis bắt buộc khai: direction, horizon, regime, FALSIFICATION condition.',
+           'Adversarial review: Quant Advocate ↔ Market Critic → Risk Officer (APPROVED/REJECTED_NOISE).']},
+  banker:{ c:'#b06bff', t:'BANKER — bối cảnh vĩ mô', d:'Mắt thời tiết kinh tế — phủ lên mọi thứ.',
+    items:['Học có hệ thống: CFA, FRED, COT, báo cáo NHTW, phân tích chuyên sâu.',
+           'Phân loại regime: risk-on/risk-off, kỳ vọng lãi suất, hướng USD/vàng.',
+           'Xuất macro_brief hàng ngày → nuôi bias V6 (macro_score).',
+           'Nghiêng hướng lọc cho Seeker/QuantLab theo bối cảnh kinh tế.']},
+  evolution:{ c:'#3ddc97', t:'EVOLUTION — thời gian / meta', d:'Tự phát hiện vấn đề & tự cải thiện hệ thống.',
+    items:['Theo dõi telemetry của chính hệ: lỗi task, năng suất nguồn, queue kẹt, disk, token.',
+           'Phát hiện vấn đề → tìm giải pháp thật (GitHub/package có bằng chứng).',
+           'Đề xuất cải tiến 3 mức: 1-tự sửa · 2-soạn patch chờ duyệt · 3-chỉ người (EA/lõi).',
+           'Ví dụ: "cần cao trang JS" → tìm Playwright → đề xuất cài, như bro duyệt Chromium hôm qua.']}
+};
+
+const panel = document.getElementById('panel');
+function renderPanel(selId){
+  panel.innerHTML = '<h2>🧭 Nhiệm vụ từng phần</h2>';
+  for (const k in MISSIONS){
+    const m = MISSIONS[k];
+    const div = document.createElement('div');
+    div.className = 'mis' + (k===selId?' sel':'');
+    div.id = 'mis-'+k;
+    div.innerHTML = `<div class="t" style="color:${m.c}">${m.t}<span class="tag" style="background:${m.c}22;color:${m.c};border:1px solid ${m.c}44">${m.d}</span></div><ul>${m.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    div.addEventListener('click', ()=>{ renderPanel(k); });
+    panel.appendChild(div);
+  }
+  if(selId){ const el=document.getElementById('mis-'+selId); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+}
+renderPanel('core');
+
+// ---------- 3D ----------
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b0f1a);
+const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 200);
+camera.position.set(14,10,18);
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+document.getElementById('view3d').appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping=true; controls.dampingFactor=0.06; controls.autoRotate=true; controls.autoRotateSpeed=0.6;
+
+scene.add(new THREE.AmbientLight(0xffffff,1.1));
+const dl=new THREE.DirectionalLight(0xffffff,1.4); dl.position.set(10,16,8); scene.add(dl);
+scene.add(new THREE.GridHelper(26,26,0x2a3550,0x1a2436));
+scene.add(new THREE.AxesHelper(13));
+
+const pickables = {};
+// core
+const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.5,1),new THREE.MeshStandardMaterial({color:0xffd166,emissive:0x7a4a00,roughness:.35,metalness:.4}));
+scene.add(core); pickables.core=core;
+// seeker
+const seeker=new THREE.Mesh(new THREE.SphereGeometry(.55,24,24),new THREE.MeshStandardMaterial({color:0xff6b6b,emissive:0x5a1a1a}));
+scene.add(seeker); pickables.seeker=seeker;
+// quantlab
+const ql=new THREE.Mesh(new THREE.SphereGeometry(.7,24,24),new THREE.MeshStandardMaterial({color:0x4d9de0,emissive:0x142a44}));
+scene.add(ql); pickables.quantlab=ql;
+// banker
+const banker=new THREE.Mesh(new THREE.SphereGeometry(.62,24,24),new THREE.MeshStandardMaterial({color:0xb06bff,emissive:0x3a1a5a}));
+scene.add(banker); pickables.banker=banker;
+// evolution ring indicator
+const evo=new THREE.Mesh(new THREE.SphereGeometry(11,32,32),new THREE.MeshBasicMaterial({color:0x3ddc97,wireframe:true,transparent:true,opacity:.16}));
+scene.add(evo);
+const evoRing=new THREE.Mesh(new THREE.TorusGeometry(11,.06,12,80),new THREE.MeshBasicMaterial({color:0x3ddc97,transparent:true,opacity:.8}));
+evoRing.rotation.x=Math.PI/2.2; scene.add(evoRing);
+
+// raycaster click
+const rc=new THREE.Raycaster(); const mouse=new THREE.Vector2();
+renderer.domElement.addEventListener('click',(e)=>{
+  const r=renderer.domElement.getBoundingClientRect();
+  mouse.x=((e.clientX-r.left)/r.width)*2-1; mouse.y=-((e.clientY-r.top)/r.height)*2+1;
+  rc.setFromCamera(mouse,camera);
+  for(const k in pickables){
+    if(rc.intersectObject(pickables[k],false).length){ renderPanel(k); return; }
+  }
+});
+
+const clock=new THREE.Clock();
+function animate(){
+  const t=clock.getElapsedTime();
+  seeker.position.set(4.2*Math.cos(t*0.5),0,4.2*Math.sin(t*0.5));
+  ql.position.set(7.6*Math.cos(-t*0.32+1.2),0,7.6*Math.sin(-t*0.32+1.2));
+  core.rotation.y=t*0.4;
+  banker.position.y=6.2+Math.sin(t*0.8)*0.4;
+  evoRing.rotation.z=t*0.12; evo.rotation.y=t*0.03;
+  controls.update(); renderer.render(scene,camera); requestAnimationFrame(animate);
+}
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+animate();
+
+// ---------- so do luong (SVG) ----------
+const S = document.getElementById('flow');
+const NS = 'http://www.w3.org/2000/svg';
+function box(x,y,w,h,cls,title,sub){const g=document.createElementNS(NS,'g');const r=document.createElementNS(NS,'rect');r.setAttribute('x',x);r.setAttribute('y',y);r.setAttribute('width',w);r.setAttribute('height',h);r.setAttribute('rx',8);r.setAttribute('class','box '+cls);g.appendChild(r);
+ const t=document.createElementNS(NS,'text');t.setAttribute('x',x+w/2);t.setAttribute('y',y+26);t.setAttribute('class','txt');t.textContent=title;g.appendChild(t);
+ const s2=document.createElementNS(NS,'text');s2.setAttribute('x',x+w/2);s2.setAttribute('y',y+46);s2.setAttribute('class','txts');s2.textContent=sub;g.appendChild(s2);
+ return g;}
+function arrow(x1,y1,x2,y2,label){const g=document.createElementNS(NS,'g');const l=document.createElementNS(NS,'line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('class','arrow');g.appendChild(l);if(label){const t=document.createElementNS(NS,'text');t.setAttribute('x',(x1+x2)/2+8);t.setAttribute('y',(y1+y2)/2-4);t.setAttribute('class','lbl');t.textContent=label;g.appendChild(t);}return g;}
+const defs=document.createElementNS(NS,'defs');
+defs.innerHTML='<marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5a6a8c"/></marker>';
+S.appendChild(defs);
+// nguon
+S.appendChild(box(60,40,300,70,'','NGUỒN NGOÀI','người thật · passview · GitHub · arXiv · FRED · COT'));
+// 3 tru
+S.appendChild(box(60,170,300,86,'boxS','SEEKER','kinh nghiệm thực dụng · kế thừa'));
+S.appendChild(box(60,290,300,86,'boxQ','QUANTLAB','anomaly + hypothesis có falsification'));
+S.appendChild(box(60,410,300,86,'boxB','BANKER','macro_brief · regime · bối cảnh'));
+// lo
+S.appendChild(box(430,250,300,110,'boxC','LÕI KẾT LUẬN','MT5 tester THẬT + chống overfit'));
+S.appendChild(box(430,420,300,86,'','KẾT QUẢ','THAT / AO / CHUA_RO'));
+// evolution
+S.appendChild(box(800,250,160,220,'boxE','EVOLUTION','tự phát hiện vấn đề → tìm giải pháp → cải thiện'));
+// arrows
+S.appendChild(arrow(210,110,210,170,''));
+S.appendChild(arrow(210,256,430,300,'cơ chế/giả thuyết'));
+S.appendChild(arrow(210,376,430,300,'macro_brief'));
+S.appendChild(arrow(125,300,125,170,'')); // khong
+S.appendChild(arrow(730,305,800,340,'telemetry'));
+S.appendChild(arrow(800,470,580,470)); S.appendChild(arrow(580,470,580,506));
+// evolution ve nguon
+const evA=document.createElementNS(NS,'g');const el=document.createElementNS(NS,'line');el.setAttribute('x1',880);el.setAttribute('y1',250);el.setAttribute('x2',880);el.setAttribute('y2',120);el.setAttribute('class','arrow');evA.appendChild(el);const et=document.createElementNS(NS,'text');et.setAttribute('x',890);et.setAttribute('y',180);et.setAttribute('class','lbl');et.setAttribute('transform','rotate(90 890 180)');et.textContent='de xuât cai tiên';evA.appendChild(et);S.appendChild(evA);
+// chu thich duoi
+const foot=document.createElementNS(NS,'text');foot.setAttribute('x',60);foot.setAttribute('y',660);foot.setAttribute('class','txts');foot.setAttribute('text-anchor','start');
+foot.textContent='Evolution = chiều thứ 4 (thời gian/meta): nó không phải hộp cạnh 3 trụ, mà bao quanh và thay đổi cả hệ.';
+S.appendChild(foot);
+
+// ---------- tab switch ----------
+document.querySelectorAll('.tab').forEach(tb=>{
+  tb.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on')); tb.classList.add('on');
+    const v=tb.getAttribute('data-v');
+    document.getElementById('view3d').style.display = v==='3d'?'block':'none';
+    document.getElementById('viewflow').style.display = v==='flow'?'block':'none';
+  });
+});
+</script>
+</body>
+</html>

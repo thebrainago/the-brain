@@ -65,7 +65,8 @@ def kho_gia() -> Path:
     f = Path("F:/TheBrain_luu/data")
     if f.exists():
         return f
-    return GOC / "data"
+    return LAB / "data"          # 18/09: khong con `<goc>/data` — goc du an
+                                 # chi con The Brain, Phase 1 o sp500_phase1/
 
 
 def python_exe() -> str:

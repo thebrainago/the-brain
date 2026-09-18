@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1150" height="1150" viewBox="0 0 1150 1150" font-family="Segoe UI, Arial, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker><marker id="arD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+<text x="575" y="40" font-size="24" fill="#0f172a" text-anchor="middle" font-weight="bold">CỔNG XÁC NHẬN — 6 ĐIỀU KIỆN PASS (Tầng 4)</text>
+<text x="575" y="68" font-size="13.5" fill="#475569" text-anchor="middle" font-weight="normal">Một kết luận chỉ được gọi EDGE khi qua đủ cửa này trên TẬP XÁC NHẬN — chưa từng nhìn lúc sàng</text>
+<rect x="150.0" y="134" width="460" height="37" rx="10" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.3"/>
+<rect x="150.0" y="100" width="460" height="34" rx="10" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<rect x="150.0" y="130" width="460" height="4" rx="0" fill="#b45309" stroke="#b45309" stroke-width="0"/>
+<text x="380.0" y="122.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">GIẢ THUYẾT ĐÃ SÀNG, CÓ CƠ CHẾ</text>
+<text x="380.0" y="161" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">chưa đăng ký · chưa tốn slot FDR nào</text>
+<rect x="150.0" y="235" width="460" height="71" rx="10" fill="#fdf2f8" stroke="#f9a8d4" stroke-width="1.3"/>
+<rect x="150.0" y="201" width="460" height="34" rx="10" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<rect x="150.0" y="231" width="460" height="4" rx="0" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<text x="380.0" y="223.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">ĐÃ ĐĂNG KÝ TRƯỚC + plan_hash? (quyết định)</text>
+<text x="380.0" y="258" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">plan_hash bắt buộc ở tầng dữ liệu → bắt chạy chui,</text>
+<text x="380.0" y="275" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">không chỉ bắt sửa file</text>
+<text x="380.0" y="295" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">KHÔNG → tối đa EXPLORATORY, không bao giờ PASS</text>
+<rect x="680.0" y="241" width="300" height="48" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="680.0" y="207" width="300" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="680.0" y="237" width="300" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="830.0" y="229.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">EXPLORATORY</text>
+<text x="692.0" y="265" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">kho chờ — không cần người nhìn,</text>
+<text x="692.0" y="279" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">không phải edge</text>
+<line x1="610.0" y1="241" x2="680.0" y2="241" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="634.0" y="233" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">chưa ký</text>
+<rect x="150.0" y="370" width="460" height="88" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="150.0" y="336" width="460" height="34" rx="10" fill="#166534" stroke="#166534" stroke-width="0"/>
+<rect x="150.0" y="366" width="460" height="4" rx="0" fill="#166534" stroke="#166534" stroke-width="0"/>
+<text x="380.0" y="358.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">CHẠY TRÊN TẬP XÁC NHẬN</text>
+<text x="380.0" y="393" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">sp500 · dowjones · nasdaq · russell2000 · us500cash</text>
+<text x="380.0" y="410" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">· us500m</text>
+<text x="380.0" y="434" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">6 thị trường này chưa bao giờ bị nhìn lúc</text>
+<text x="380.0" y="451" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">sàng</text>
+<rect x="150.0" y="522" width="460" height="105" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.3"/>
+<rect x="150.0" y="488" width="460" height="34" rx="10" fill="#92400e" stroke="#92400e" stroke-width="0"/>
+<rect x="150.0" y="518" width="460" height="4" rx="0" fill="#92400e" stroke="#92400e" stroke-width="0"/>
+<text x="380.0" y="510.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">COST MODEL ĐỐI XỨNG 2 VẾ? (quyết định)</text>
+<text x="380.0" y="545" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Chiến lược và mốc phải dùng CÙNG hàm chi phí trên</text>
+<text x="380.0" y="562" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">cùng chuỗi phơi nhiễm</text>
+<text x="380.0" y="582" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Mốc = cách RẺ NHẤT có cùng phơi nhiễm theo lớp tài</text>
+<text x="380.0" y="599" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">sản (ETF ~0,1%/năm cho chỉ số)</text>
+<text x="380.0" y="619" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">KHÔNG → TỪ CHỐI — bài học Vòng 6 (63% “edge” giả)</text>
+<rect x="680.0" y="532" width="300" height="48" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.3"/>
+<rect x="680.0" y="498" width="300" height="34" rx="10" fill="#991b1b" stroke="#991b1b" stroke-width="0"/>
+<rect x="680.0" y="528" width="300" height="4" rx="0" fill="#991b1b" stroke="#991b1b" stroke-width="0"/>
+<text x="830.0" y="520.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">TỪ CHỐI</text>
+<text x="692.0" y="556" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">lỗi mô hình chi phí, không phải</text>
+<text x="692.0" y="570" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">tín hiệu</text>
+<line x1="610.0" y1="538" x2="680.0" y2="538" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="610.0" y="530" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">mất đối xứng</text>
+<rect x="150.0" y="691" width="460" height="173" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="150.0" y="657" width="460" height="34" rx="10" fill="#166534" stroke="#166534" stroke-width="0"/>
+<rect x="150.0" y="687" width="460" height="4" rx="0" fill="#166534" stroke="#166534" stroke-width="0"/>
+<text x="380.0" y="679.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">6 ĐIỀU KIỆN PASS — ĐỒNG THỜI</text>
+<text x="380.0" y="714" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">1. net_return &gt; buyhold_net_return</text>
+<text x="380.0" y="734" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">2. net_sharpe &gt; buyhold_net_sharpe (không phải do</text>
+<text x="380.0" y="751" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">liều cao hơn)</text>
+<text x="380.0" y="771" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">3. net_calmar &gt; buyhold_net_calmar (không phải do ôm</text>
+<text x="380.0" y="788" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">sụt giảm)</text>
+<text x="380.0" y="808" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">4. alpha_vs_buyhold &gt; 0, p ≤ ngưỡng (Newey-West —</text>
+<text x="380.0" y="825" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">chặn đòn bẩy trá hình)</text>
+<text x="380.0" y="845" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">5. placebo_p ≤ ngưỡng — p XẤU NHẤT trong ≥ 5 hạt null</text>
+<text x="380.0" y="865" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="bold">6. pre_registered = true</text>
+<rect x="680.0" y="701" width="300" height="90" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+<rect x="680.0" y="667" width="300" height="34" rx="10" fill="#334155" stroke="#334155" stroke-width="0"/>
+<rect x="680.0" y="697" width="300" height="4" rx="0" fill="#334155" stroke="#334155" stroke-width="0"/>
+<text x="830.0" y="689.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">SIẾT THÊM KHI EXPOSURE &gt; 95%</text>
+<text x="692.0" y="725" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">alpha &amp; placebo p ≤ 0,01 + ≥1</text>
+<text x="692.0" y="739" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">giai đoạn con dương</text>
+<text x="692.0" y="756" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">Lý do: cơ chế VIX IC +0,106</text>
+<text x="692.0" y="770" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">nhưng placebo 10,2% — gần như</text>
+<text x="692.0" y="784" font-size="14" fill="#475569" text-anchor="start" font-weight="normal">là mua-giữ</text>
+<rect x="150.0" y="928" width="460" height="122" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="150.0" y="894" width="460" height="34" rx="10" fill="#166534" stroke="#166534" stroke-width="0"/>
+<rect x="150.0" y="924" width="460" height="4" rx="0" fill="#166534" stroke="#166534" stroke-width="0"/>
+<text x="380.0" y="916.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">PLACEBO + WALK-FORWARD + THỜI ĐẠI</text>
+<text x="380.0" y="951" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Null factory: block bootstrap theo chính chuỗi vào</text>
+<text x="380.0" y="968" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">lệnh (phải CỤM như thật)</text>
+<text x="380.0" y="988" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Walk-forward 2 nửa · REGIME_LOCKED: mốc cấu trúc</text>
+<text x="380.0" y="1005" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">đăng ký trước (1971, 1987, 2000, 2008…)</text>
+<text x="380.0" y="1029" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Edge chỉ sống sau một mốc → cần cơ chế</text>
+<text x="380.0" y="1046" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">kinh tế + dữ liệu ngoài mẫu sau phát hiện</text>
+<rect x="150.0" y="1114" width="460" height="88" rx="10" fill="#fdf2f8" stroke="#f9a8d4" stroke-width="1.3"/>
+<rect x="150.0" y="1080" width="460" height="34" rx="10" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<rect x="150.0" y="1110" width="460" height="4" rx="0" fill="#be185d" stroke="#be185d" stroke-width="0"/>
+<text x="380.0" y="1102.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">FDR TOÀN CỤC q = 10%</text>
+<text x="380.0" y="1137" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Ngưỡng tính trên TOÀN BỘ 324 phép thử tích lũy, không</text>
+<text x="380.0" y="1154" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">phải riêng lần chạy</text>
+<text x="380.0" y="1178" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Thêm giả thuyết = tự động siết ngưỡng</text>
+<text x="380.0" y="1195" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">cho tất cả</text>
+<rect x="150.0" y="1266" width="460" height="122" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.3"/>
+<rect x="150.0" y="1232" width="460" height="34" rx="10" fill="#991b1b" stroke="#991b1b" stroke-width="0"/>
+<rect x="150.0" y="1262" width="460" height="4" rx="0" fill="#991b1b" stroke="#991b1b" stroke-width="0"/>
+<text x="380.0" y="1254.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="bold">SONG SÓT — KẾT LUẬN ĐƯỢC KÝ</text>
+<text x="380.0" y="1289" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Hạn dùng 3/6/12 tháng (hạng C/B/A) · tái kiểm quý</text>
+<text x="380.0" y="1306" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">bằng lịch Lan-DeMets</text>
+<text x="380.0" y="1326" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">Không cộng FDR cho bảo trì · hết hạn = quay lại từ</text>
+<text x="380.0" y="1343" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal">đầu</text>
+<text x="380.0" y="1367" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">Hiện tại: 0 song sót / 324 — quá nhiều</text>
+<text x="380.0" y="1384" font-size="17" fill="#475569" text-anchor="middle" font-weight="normal">PASS/ngày là tín hiệu HỎNG dây chuyền</text>
+<line x1="380" y1="171" x2="380" y2="201" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="380" y1="306" x2="380" y2="336" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="380" y="336" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">đã ký →</text>
+<line x1="380" y1="458" x2="380" y2="488" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="380" y1="627" x2="380" y2="657" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="380" y="657" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">đối xứng →</text>
+<line x1="380" y1="864" x2="380" y2="894" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="380" y="894" font-size="11.5" fill="#64748b" text-anchor="start" font-weight="normal">đủ 6 điều kiện</text>
+<line x1="380" y1="1050" x2="380" y2="1080" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+<line x1="380" y1="1202" x2="380" y2="1232" stroke="#475569" stroke-width="2.2" marker-end="url(#ar)"/>
+</svg>

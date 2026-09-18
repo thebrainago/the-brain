@@ -37,7 +37,8 @@ import numpy as np
 import pandas as pd
 
 GOC = Path(__file__).resolve().parent.parent
-DATA = GOC.parent / "data"
+DATA = GOC / "data"          # 18/09: ve trong lab/ — goc du an chi con
+                            # The Brain, Phase 1 nam trong sp500_phase1/
 NAO = GOC / "nao.db"
 
 CO_TUC_FILE = DATA / "sp500_co_tuc_do.parquet"

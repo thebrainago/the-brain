@@ -64,17 +64,17 @@ THU_MUC_GOC = {
     "ds": "Ho so giao viec cho agent ngoai (DeepSeek). Git rieng, gop vao 30/08.",
     "nap_tay": "Kho NAP TAY: repo github + file chu du an tu tha vao. "
                "Nguyen lieu tho, Seeker doc tu day.",
-    "reports": "Bao cao Phase 1 SP500 (co truoc `lab/reports`).",
-    "co_che_ds": "Co che do DeepSeek viet ra, cho kiem dinh.",
-    "V6_DONG_GOI": "Ban dong goi he V6 de chay that (bat/ps1 + code).",
-    "so_do": "So do he thong dang html/svg/png.",
-    "ea": "EA MQL5 xuat ra de chay MT5 (V7_SP500).",
-    "data": "Du lieu goc Phase 1 (co tuc do).",
-    "output_multi_indicator_us500cash": "Ket qua quet indicator_master tren us500cash.",
-    "output_multi_indicator": "Ket qua quet indicator_master (rong).",
+    "sp500_phase1": "**Phase 1 SP500 — DA DONG 18/09.** Dong bang: `ma/` 256 "
+                    "script, `tai_lieu/`, `nut_bam/`, `reports/` 1,4 GB ket qua "
+                    "tho. Khong module song nao goi vao day.",
+    "V6_DONG_GOI": "He V6 dong goi CHAY THAT moi sang — tu chua (`%~dp0`), "
+                   "khong phu thuoc goc. Dung dong.",
 }
 
 THU_MUC_LAB = {
+    "bao_cao": "Bao cao phien The Brain (tu 15/08). Gom ve day 18/09.",
+    "co_che_ds": "Co che do DeepSeek viet ra, cho kiem dinh.",
+    "so_do": "So do he thong dang html/svg/png.",
     "tru": "**Bay tru** — Seeker/Quantlab/Evolution/Banker/Finder/Nghi. Tang tren.",
     "nhan": "**Lop nhan** — module thu vien, tang duoi cua moi tru. Xem muc 3.",
     "quant": "Lane nghien cuu Quantlab V2 (thu_vien/pseud + ket qua).",
@@ -88,7 +88,8 @@ THU_MUC_LAB = {
     "roles": "Mo ta vai tro cho agent (BANKER/CHUNG/QUANTLAB/SEEKER).",
     "prompts": "Prompt cac vai.",
     "tai_lieu": "Dac ta viet tay (PMG, SLOT_TESTER).",
-    "nghi_huu": "Module DA NGHI HUU, giu lai de tra cuu — khong nam tren duong chay.",
+    "nghi_huu": "Module DA NGHI HUU, giu lai de tra cuu — khong nam tren duong chay. "
+                "`v1_goc/` la The Brain V1 (26 script + 4 nut bam) go ve 18/09.",
     "_luu_tru": "Script cu cat di. Phan lon muc 4.1 nam o day.",
     "archive": "Script/anh chup cu cat di.",
     "browser_backup_20260821": "Ban sao ho so trinh duyet Seeker (21/08).",
@@ -370,8 +371,12 @@ def sinh(in_ra=print) -> str:
     W("## 4. No kien truc — cho de lam ke hoach")
     W("")
 
+    # `nghi_huu/` va `co_che_ds/` khong tinh la NO: mot ben da nghi huu, mot ben
+    # la CO CHE tho cho kiem dinh chu khong phai module. Bat chung khai vai tro la
+    # bat bao cao keu ve thu khong ai dinh dung nua (18/09, sau khi gom v1_goc).
     khong_vt = sorted(k for k, v in d["vai_tro"].items()
-                      if not v and not k.endswith("__init__.py"))
+                      if not v and not k.endswith("__init__.py")
+                      and not k.startswith(("nghi_huu/", "co_che_ds/")))
     W("### 4.1 Khong tu khai vai tro — %d file" % len(khong_vt))
     W("")
     W("Khong co docstring dong dau, nen khong vao duoc ban do vai tro nao.")

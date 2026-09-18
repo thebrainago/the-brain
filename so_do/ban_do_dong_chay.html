@@ -1,0 +1,650 @@
+<title>Bản đồ dòng chảy The Brain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+:root{
+  --nen:        #0b1015;
+  --nen-2:      #121a22;
+  --nen-3:      #18222c;
+  --vien:       #26333f;
+  --vien-manh:  #35485a;
+  --chu:        #dce6ee;
+  --chu-2:      #93a6b6;
+  --chu-3:      #64788a;
+  --dong:       #46a9a0;   /* dòng chảy khoẻ */
+  --nghen:      #d2603f;   /* nút thắt */
+  --tat:        #6b7b89;   /* đang tắt */
+  --dong-2:     #4e86b8;   /* nhánh phụ */
+  --dong-3:     #b98b3c;   /* hạt nhân dùng chung */
+  --sang:       #e6b95e;   /* còn sống */
+  --brass:      #c9973f;
+  --suong:      #0b1015;
+}
+
+:root[data-theme="light"]{
+  --nen:#eef1f4; --nen-2:#e3e8ee; --nen-3:#d8dfe7; --vien:#c3cdd8; --vien-manh:#9dacbb;
+  --chu:#16202a; --chu-2:#4a5c6c; --chu-3:#70828f;
+  --dong:#1f7a72; --nghen:#b8442a; --tat:#8c9aa6; --dong-2:#2f6693; --dong-3:#8e6516;
+  --brass:#8e6516; --sang:#a8781f; --suong:#eef1f4;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --nen:#eef1f4; --nen-2:#e3e8ee; --nen-3:#d8dfe7; --vien:#c3cdd8; --vien-manh:#9dacbb;
+    --chu:#16202a; --chu-2:#4a5c6c; --chu-3:#70828f;
+    --dong:#1f7a72; --nghen:#b8442a; --tat:#8c9aa6; --dong-2:#2f6693; --dong-3:#8e6516;
+    --brass:#8e6516; --sang:#a8781f; --suong:#eef1f4;
+  }
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--nen); color:var(--chu);
+  font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  font-size:14px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;text-wrap:balance;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+.khung{max-width:1400px;margin:0 auto;padding-inline:20px;padding-block:0}
+
+/* ---------- đầu trang ---------- */
+header{border-bottom:1px solid var(--vien);background:var(--nen-2)}
+.dau{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;padding-block:22px 18px}
+.nhan-tren{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:6px}
+h1{font-size:clamp(26px,4.4vw,40px);font-weight:700;letter-spacing:-.015em;line-height:1.05}
+.phu{color:var(--chu-2);max-width:62ch;margin-top:8px;font-size:14px}
+.moc{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--vien);border-radius:2px;overflow:hidden}
+.moc div{padding:9px 15px;border-right:1px solid var(--vien);background:var(--nen-3)}
+.moc div:last-child{border-right:0}
+.moc .k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--chu-3);display:block}
+.moc .v{font-family:"IBM Plex Mono",monospace;font-size:17px;font-weight:600;line-height:1.3}
+.moc .v.xau{color:var(--nghen)}
+.moc .v.tot{color:var(--dong)}
+
+/* ---------- sân khấu 3D ---------- */
+.san{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:0;border-bottom:1px solid var(--vien)}
+#canvas-boc{position:relative;height:min(74vh,720px);min-height:440px;overflow:hidden;background:var(--nen);cursor:grab}
+#canvas-boc.keo{cursor:grabbing}
+#canvas-boc canvas{display:block;width:100%;height:100%}
+.nhan-lop{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.nhan3d{
+  position:absolute;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;
+  font-family:"IBM Plex Sans Condensed",sans-serif;font-weight:600;font-size:11.5px;
+  letter-spacing:.02em;padding:1px 5px;border-radius:2px;
+  background:color-mix(in srgb,var(--nen) 72%,transparent);
+  text-shadow:0 1px 3px var(--nen);
+}
+.nhan3d b{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:10.5px;opacity:.85;margin-left:5px;font-variant-numeric:tabular-nums}
+.goi-y{position:absolute;left:16px;bottom:14px;font-size:11px;color:var(--chu-3);font-family:"IBM Plex Mono",monospace;pointer-events:none}
+
+/* ---------- thanh bên ---------- */
+.ben{border-left:1px solid var(--vien);background:var(--nen-2);display:flex;flex-direction:column;min-width:0}
+.o-ben{padding:16px 18px;border-bottom:1px solid var(--vien)}
+.o-ben:last-child{border-bottom:0}
+.tieu-ben{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--chu-3);margin-bottom:10px}
+#ten-nut{font-family:"IBM Plex Sans Condensed",sans-serif;font-size:21px;font-weight:700;line-height:1.15;margin-bottom:3px}
+#loai-nut{font-size:11.5px;color:var(--chu-3);font-family:"IBM Plex Mono",monospace;margin-bottom:12px}
+#mo-ta-nut{font-size:13px;color:var(--chu-2);line-height:1.5}
+.so-list{display:flex;flex-direction:column;gap:0;margin-top:12px}
+.so-hang{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 0;border-bottom:1px solid var(--vien)}
+.so-hang:last-child{border-bottom:0}
+.so-hang span:first-child{color:var(--chu-3);font-size:12px}
+.so-hang span:last-child{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.vien-trang{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:2px;border:1px solid currentColor;margin-top:2px}
+.chu-thich{display:flex;flex-direction:column;gap:7px}
+.ct{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--chu-2)}
+.ct i{width:22px;height:3px;border-radius:2px;flex:none;display:block}
+.ct .cham{width:11px;height:11px;border-radius:50%;border:1px solid var(--vien-manh)}
+
+/* ---------- phần đọc ---------- */
+main{padding-block:36px 56px}
+section{margin-bottom:44px}
+.dau-muc{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.dau-muc h2{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.dau-muc .stt{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--brass);letter-spacing:.12em}
+.dan{color:var(--chu-2);max-width:70ch;margin:0 0 20px}
+
+.bang-boc{overflow-x:auto;border:1px solid var(--vien);border-radius:2px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:660px}
+th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--chu-3);text-align:left;padding:10px 14px;background:var(--nen-3);border-bottom:1px solid var(--vien);font-weight:500}
+td{padding:10px 14px;border-bottom:1px solid var(--vien);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.thanh{position:relative;display:block;height:4px;border-radius:2px;background:var(--vien);margin-top:5px;overflow:hidden}
+.thanh i{position:absolute;inset:0 auto 0 0;display:block;border-radius:2px}
+tr.diem td{background:color-mix(in srgb,var(--nghen) 9%,transparent)}
+
+.luoi-the{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--vien);border:1px solid var(--vien);border-radius:2px;overflow:hidden}
+.the{background:var(--nen-2);padding:16px 17px}
+.the h3{font-size:14.5px;font-weight:600;margin-bottom:4px}
+.the .sn{font-family:"IBM Plex Mono",monospace;font-size:25px;font-weight:600;line-height:1.1;letter-spacing:-.02em}
+.the p{margin:7px 0 0;font-size:12.5px;color:var(--chu-2);line-height:1.45}
+.the .ghi{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--chu-3);margin-bottom:9px}
+
+.dut{border-left:2px solid var(--nghen);padding:2px 0 2px 16px;margin:20px 0;color:var(--chu-2);max-width:70ch}
+.dut b{color:var(--chu)}
+
+footer{border-top:1px solid var(--vien);color:var(--chu-3);font-size:12px;padding-block:18px 30px;font-family:"IBM Plex Mono",monospace}
+
+@media (max-width:960px){
+  .san{grid-template-columns:1fr}
+  .ben{border-left:0;border-top:1px solid var(--vien)}
+  #canvas-boc{height:56vh;min-height:360px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header>
+  <div class="khung dau">
+    <div>
+      <div class="nhan-tren">Đo ngày 11/09/2026 · nao.db + reports/ + AST 174 file</div>
+      <h1>Bản đồ dòng chảy The Brain</h1>
+      <p class="phu">Sơ đồ này không vẽ ai sở hữu cái gì — nó vẽ <b>bao nhiêu thứ đi qua mỗi mối nối</b>.
+      Độ dày cạnh là lưu lượng thật, kích thước nút là tồn kho thật. Kéo để xoay, lăn để phóng, bấm vào nút để xem số.</p>
+    </div>
+    <div class="moc">
+      <div><span class="k">Tài liệu</span><span class="v mono">9.419</span></div>
+      <div><span class="k">Đã bóc</span><span class="v mono xau">3,5%</span></div>
+      <div><span class="k">Tổ hợp đã chấm</span><span class="v mono">35.937</span></div>
+      <div><span class="k">Qua holdout</span><span class="v mono xau">1</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="san">
+  <div id="canvas-boc">
+    <div class="nhan-lop" id="nhan-lop"></div>
+    <div class="goi-y">kéo · xoay &nbsp;|&nbsp; lăn · phóng &nbsp;|&nbsp; bấm · chi tiết</div>
+  </div>
+
+  <aside class="ben">
+    <div class="o-ben">
+      <div class="tieu-ben">Nút đang chọn</div>
+      <div id="ten-nut">Bóc tách</div>
+      <div id="loai-nut">khâu · nhan/boc_llm.py + qwen/</div>
+      <div id="mo-ta-nut">Khâu biến tài liệu thành cơ chế máy đọc được. Toàn hệ đứng sau nút này.</div>
+      <div class="so-list" id="so-nut"></div>
+      <div id="trang-thai-nut"></div>
+    </div>
+    <div class="o-ben">
+      <div class="tieu-ben">Chú thích</div>
+      <div class="chu-thich">
+        <div class="ct"><i style="background:var(--dong)"></i> dòng chảy khoẻ</div>
+        <div class="ct"><i style="background:var(--nghen)"></i> nút thắt — lưu lượng &lt; 5% đầu vào</div>
+        <div class="ct"><i style="background:var(--dong-2)"></i> nhánh phụ / cố vấn</div>
+        <div class="ct"><i style="background:var(--dong-3)"></i> hạt nhân dùng chung <span class="mono">nhan/</span></div>
+        <div class="ct"><i style="background:var(--tat)"></i> đang tắt từ 01/09</div>
+        <div class="ct"><span class="cham" style="background:var(--nen-3)"></span> đường kính ∝ tồn kho (log)</div>
+      </div>
+    </div>
+    <div class="o-ben">
+      <div class="tieu-ben">Vận hành lúc đo</div>
+      <div class="so-list">
+        <div class="so-hang"><span>Control plane</span><span style="color:var(--nghen)">TẮT 10 ngày</span></div>
+        <div class="so-hang"><span>Lần <span class="mono">q</span> cuối</span><span>08/09 · 5 xong / 2 lỗi</span></div>
+        <div class="so-hang"><span>File chưa commit</span><span>9</span></div>
+        <div class="so-hang"><span>Bộ test</span><span>1.239 · 4 hỏng</span></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<main class="khung">
+
+  <section>
+    <div class="dau-muc"><span class="stt">01</span><h2>Phễu, đo từng chặng</h2></div>
+    <p class="dan">Mỗi dòng là một chặng thật trong sổ cái. Cột cuối là tỉ lệ sống sót so với chặng ngay trên nó —
+    chỗ nào tụt xuống một chữ số là chỗ quyết định tốc độ của cả hệ.</p>
+    <div class="bang-boc">
+      <table>
+        <thead><tr><th>Chặng</th><th>Ở đâu</th><th style="text-align:right">Số lượng</th><th style="text-align:right">Sống sót</th></tr></thead>
+        <tbody id="bang-pheu"></tbody>
+      </table>
+    </div>
+    <div class="dut"><b>Nút thắt nằm ở chặng 3.</b> 9.092 tài liệu chưa bóc, trong khi hệ đã chấm 35.937 tổ hợp
+    trên đúng kho cơ chế cũ. Đào rất sâu một cái giếng cạn: mỗi vòng quét thêm làm tăng số phép thử trên cùng vài trăm
+    cơ chế, tức là tăng overfit chứ không tăng cơ hội.</div>
+  </section>
+
+  <section>
+    <div class="dau-muc"><span class="stt">02</span><h2>Kho cơ chế bị xé làm bốn</h2></div>
+    <p class="dan">Tài sản có giá trị nhất của dự án hiện không có chủ. Bốn mảnh dưới đây không nói chuyện được với nhau,
+    và <span class="mono">evolution.py</span> chỉ đo được mảnh đầu tiên — nên EVO đang mù với phần lớn việc hệ làm.</p>
+    <div class="luoi-the" id="luoi-kho"></div>
+  </section>
+
+  <section>
+    <div class="dau-muc"><span class="stt">03</span><h2>Hạt nhân — module nào cả hệ dựa vào</h2></div>
+    <p class="dan">Đếm bằng AST trên 174 file (<span class="mono">tru/ · nhan/ · _*.py · qwen/</span>): số người import trực tiếp.
+    Sáu module đầu là điểm gãy chung — sửa sai một cái trong đó thì sai lan ra mọi kết quả.</p>
+    <div class="bang-boc">
+      <table>
+        <thead><tr><th>Module</th><th>Việc</th><th style="text-align:right">Người dùng</th></tr></thead>
+        <tbody id="bang-hat-nhan"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="dau-muc"><span class="stt">04</span><h2>Cổng ra tiền — nơi 35.937 tổ hợp chết</h2></div>
+    <p class="dan">Cổng chấm theo tiền và rủi ro, không theo Sharpe hay p-value. Dưới đây là lý do trượt, đếm trên toàn bộ lần chấm.
+    Một tổ hợp trượt nhiều điều kiện cùng lúc nên tổng lớn hơn 35.937.</p>
+    <div class="bang-boc">
+      <table>
+        <thead><tr><th>Điều kiện trượt</th><th style="text-align:right">Số lần</th><th>Tỉ lệ trên toàn bộ</th></tr></thead>
+        <tbody id="bang-cong"></tbody>
+      </table>
+    </div>
+    <div class="dut">Người sống sót duy nhất: <b class="mono">pine_cm_rsi_2</b> trên <b class="mono">TS_QQQ</b> —
+    đòn bẩy 3, CAGR holdout 24,6%, sụt giảm 65,7%, hơn mua-giữ 7,2 điểm phần trăm ở cùng sụt giảm.
+    Dữ liệu Yahoo, chưa phải symbol đang giao dịch được trên sàn.</div>
+  </section>
+
+  <footer class="khung">
+    Nguồn số: <span>nao.db</span> (20 bảng) · <span>reports/</span> (192 JSON) · <span>thu_vien.db</span> ·
+    git log · <span>reports/dieu_phoi_nen.log</span> · quét AST 174 file · đo 11/09/2026.
+  </footer>
+</main>
+
+<script>
+/* ============================ DỮ LIỆU ĐO ĐƯỢC ============================ */
+const NUT = [
+  // tầng nguồn
+  {id:'ng_hoc', ten:'Nguồn học thuật', loai:'nguồn · arxiv/openalex/crossref', y:34, x:-20, z:-8, ton:3611, mau:'dong',
+   mo:'Ba nguồn học thuật cho thu hoạch lớn nhất phễu. Rẻ, ổn định, nhưng xa nhất so với thứ chạy được.',
+   so:[['openalex','1.816'],['crossref','1.450'],['arxiv','222'],['tài liệu về','3.611']]},
+  {id:'ng_ma', ten:'Nguồn mã nguồn', loai:'nguồn · github/mql5/tradingview', y:34, x:14, z:-14, ton:3497, mau:'dong',
+   mo:'Nguồn giá trị nhất vì dịch máy được — không cần LLM hiểu, dịch thẳng ra tester.',
+   so:[['github','1.220'],['mql5_code','564'],['tradingview','123'],['tài liệu về','3.497']]},
+  {id:'ng_cd', ten:'Cộng đồng', loai:'nguồn · reddit/SE/HN + 5 ngữ hệ', y:34, x:24, z:12, ton:913, mau:'dong',
+   mo:'Nga, Trung, Nhật, Hàn, Anh. Đa ngôn ngữ đã chạy thật, không phải kế hoạch.',
+   so:[['reddit_td','270'],['stackexchange','161'],['habr (Nga)','128'],['cnblogs (Trung)','72']]},
+  {id:'ng_xh', ten:'Social + video', loai:'nguồn · telegram/x/tiktok/yt', y:34, x:-2, z:22, ton:718, mau:'dong',
+   mo:'Telegram đã mở được đường vào. Video mới dừng ở tải về — chưa có khâu chuyển thành cơ chế.',
+   so:[['telegram','394'],['x','134'],['tiktok','101'],['youtube','109']]},
+  {id:'ng_tr', ten:'Sổ lệnh thật', loai:'nguồn · myfxbook/darwinex/signal', y:34, x:-26, z:14, ton:120, mau:'dong2',
+   mo:'Đường suy ngược: từ lịch sử giao dịch tìm lại phương pháp. Hai nguồn (fxblue, etoro) thu hoạch 0.',
+   so:[['darwinex','39'],['myfxbook','38'],['mql5_signals','36'],['thu hoạch 0','2 nguồn']]},
+
+  // seeker
+  {id:'seeker', ten:'SEEKER', loai:'trụ · tru/seeker.py · 113 KB', y:22, x:0, z:0, ton:4316, mau:'dong', lon:1,
+   mo:'74 nguồn BẬT, trình duyệt riêng, vượt DNS, dedup + provenance. Phụ thuộc 16 module hạt nhân — trụ nặng nhất hệ.',
+   so:[['nguồn BẬT','74'],['từ khoá','210'],['artifact đã đẻ','4.316'],['phụ thuộc nhan/','16']]},
+
+  // kho thô
+  {id:'tai_lieu', ten:'Kho tài liệu', loai:'bảng · nao.db/tai_lieu', y:12, x:-15, z:4, ton:9419, mau:'dong', lon:1,
+   mo:'Kho thô. Chín nghìn tài liệu có truy nguyên, đứng chờ trước một khâu bóc chỉ tiêu hoá được 3,5%.',
+   so:[['tổng','9.419'],['chưa khai thác','9.092'],['đã khai thác','327'],['học thuật / mã nguồn','3.611 / 3.497']]},
+  {id:'ma_code', ten:'CodeArtifact', loai:'artifact · .mq5 / .pine / .py', y:12, x:18, z:6, ton:471, mau:'dong',
+   mo:'Đường tắt của cả hệ: mã nguồn dịch thẳng ra MQL5 được, bỏ qua khâu LLM. 389 file đã bóc ra spec trong 1,01 giây.',
+   so:[['CodeArtifact','471'],['file đã bóc spec','389'],['thời gian bóc 389 file','1,01 giây']]},
+
+  // bóc tách — NÚT THẮT
+  {id:'boc', ten:'Bóc tách', loai:'khâu · nhan/boc_llm.py + qwen/', y:1, x:-4, z:0, ton:327, mau:'nghen', lon:1,
+   mo:'Khâu biến tài liệu thành cơ chế máy đọc được. Toàn hệ đứng sau nút này. Đã đo: LLM điền cơ chế cho 48 khai báo, thẩm định bác 41, ròng cứu 3.',
+   so:[['thông qua','327 / 9.419'],['tỉ lệ','3,5%'],['LLM điền / được nhận','48 / 3'],['CandidateArtifact','567']]},
+
+  // kho cơ chế xé bốn
+  {id:'kho_gt', ten:'nao.db · giả thuyết', y:-11, x:-24, z:-10, ton:383, mau:'dong', loai:'kho cơ chế · mảnh 1/4',
+   mo:'Sổ cái chính thức. Có pre-registration, có plan_hash, có FDR. Nhưng chỉ ghi nhận một phần nhỏ việc hệ thật sự làm.',
+   so:[['giả thuyết','383'],['FAIL','373'],['PASS','2'],['cách ly','7']]},
+  {id:'kho_tv', ten:'thu_vien.db', y:-11, x:-2, z:-22, ton:32, mau:'tat', loai:'kho cơ chế · mảnh 2/4',
+   mo:'Kho của hệ trước 15/08. Vẫn còn 32 cơ chế trong đó, không nối vào đường chạy hiện tại.',
+   so:[['cơ chế','32'],['bài theo dõi','32'],['macro_brief','222']]},
+  {id:'kho_dsl', ten:'DSL quản trị', y:-11, x:20, z:-16, ton:75, mau:'dong2', loai:'kho cơ chế · mảnh 3/4',
+   mo:'Kho quản lý lệnh dựng 07/09. 0 nút van chưa ánh xạ, 49 dịch được ra MQL5, EA giám sát đè lên EA ngoài đã biên dịch đạt.',
+   so:[['cơ chế quản trị','75'],['dịch ra MQL5','49'],['luật qua cổng','0 / 50']]},
+  {id:'kho_json', ten:'reports/*.json', y:-11, x:24, z:8, ton:192, mau:'nghen', loai:'kho cơ chế · mảnh 4/4',
+   mo:'Ba tuần công việc gần nhất nằm ở đây, ngoài mọi sổ cái. 243 script _*.py sinh ra chúng và không ghi về nao.db.',
+   so:[['file JSON','192'],['script _*.py','243'],['EVO đọc được','không']]},
+
+  // quantlab
+  {id:'ql1', ten:'Làn xác nhận', loai:'quantlab · candidate_validation', y:-22, x:-16, z:6, ton:567, mau:'dong',
+   mo:'Nhận ứng viên từ Seeker, đóng băng analysis plan, tinh chỉnh trên train, xác nhận trên holdout sạch.',
+   so:[['ứng viên xếp hàng','567'],['đã thành giả thuyết','383'],['kết quả đã chấm','1.280']]},
+  {id:'ql2', ten:'Làn tự khám phá', loai:'quantlab · autonomous_discovery', y:-22, x:12, z:14, ton:383, mau:'dong',
+   mo:'Tự sinh giả thuyết bằng 15 template viết tay. Ledger, universe, ngân sách FDR và holdout riêng — không dùng chung với làn 1.',
+   so:[['quay về TB','187'],['xu hướng','68'],['lịch','63'],['phá vỡ / dòng tiền','19 / 15']]},
+
+  // cổng
+  {id:'cong', ten:'Cổng học thuật', loai:'nhan/cong.py · canary · MDE', y:-32, x:-6, z:0, ton:1280, mau:'dong', lon:1,
+   mo:'Placebo → FDR LORD theo họ × thế hệ × quý → alpha Newey-West → MDE. Canary gác engine trước mọi p-value.',
+   so:[['kết quả đã chấm','1.280'],['PASS','14'],['dòng sổ FDR','1.807'],['FDR bác bỏ','406']]},
+
+  // tester
+  {id:'tester', ten:'MT5 Tester', loai:'thực thi thật · làn = 1', y:-42, x:10, z:-6, ton:8241, mau:'dong',
+   mo:'Ràng buộc vật lý: máy chỉ có một terminal64.exe, hai việc tester cùng lúc ghi đè nhau và không ai báo lỗi.',
+   so:[['phép thử / lần boot','8.241'],['thời gian','82 giây'],['cơ chế ra tester','360 / 408'],['qua holdout','13 / 225']]},
+
+  // cổng ra tiền
+  {id:'ra_tien', ten:'Cổng ra tiền', loai:'nhan/cong_ra_tien.py', y:-52, x:-8, z:6, ton:35937, mau:'nghen', lon:1,
+   mo:'Cổng thứ hai, chấm bằng tiền và rủi ro: lãi · sụt giảm · hơn mua-giữ ở CÙNG sụt giảm · đủ lệnh · sống sót ngoài mẫu.',
+   so:[['tổ hợp đã chấm','35.937'],['đạt train','50'],['đạt holdout','1'],['tỉ lệ','1 / 35.937']]},
+  {id:'song', ten:'Còn sống', loai:'pine_cm_rsi_2 · TS_QQQ', y:-61, x:-8, z:6, ton:1, mau:'sang',
+   mo:'Đòn bẩy 3, CAGR holdout 24,6%, sụt giảm 65,7%. Dữ liệu Yahoo — chưa phải symbol giao dịch được trên sàn.',
+   so:[['CAGR holdout','24,6%'],['sụt giảm','−65,7%'],['số lệnh','254'],['hơn mua-giữ','+7,2 đpt']]},
+
+  // hạt nhân
+  {id:'nhan', ten:'nhan/ — hạt nhân', loai:'75 module dùng chung', y:-14, x:-44, z:-2, ton:2000, mau:'dong3', lon:1, cot:1,
+   mo:'Không trụ nào được lách qua đây. ngu_phap là cửa duy nhất cho kiến thức mới vào hệ; so là sổ cái chỉ-thêm; du_lieu chọn bản theo độ phủ.',
+   so:[['module','75'],['ngu_phap','57 người dùng'],['so','51'],['du_lieu','50'],['chi_phi','30']]},
+
+  // bên lề
+  {id:'banker', ten:'BANKER', loai:'trụ · vĩ mô point-in-time', y:-4, x:44, z:-4, ton:113242, mau:'dong2',
+   mo:'113 nghìn dòng vĩ mô có vintage. Phát regime máy đọc được cho Quantlab, nhưng không được tự biến nhận định thành lệnh.',
+   so:[['dòng vĩ mô','113.242'],['chuỗi','30'],['macro brief','222'],['phụ thuộc nhan/','1']]},
+  {id:'evo', ten:'EVOLUTION', loai:'trụ · đo sức khoẻ', y:-26, x:42, z:12, ton:81, mau:'tat',
+   mo:'Đo SLO, heartbeat, queue depth, drift, dead-letter. Lần đo cuối 01/09 — và nó chỉ đọc được nao.db, tức là mù với reports/.',
+   so:[['vấn đề đã ghi','81'],['còn mở','12'],['mức NẶNG còn mở','3'],['lần đo cuối','01/09']]},
+  {id:'nghi', ten:'NGHI', loai:'trụ · sinh giả thuyết', y:4, x:-40, z:20, ton:0, mau:'tat',
+   mo:'Sinh CandidateArtifact từ tri thức đã truy nguyên. Trạng thái DISABLED khi không có provider LLM riêng.',
+   so:[['giả thuyết đã sinh','0'],['trạng thái','DISABLED']]},
+  {id:'finder', ten:'FINDER', loai:'trụ · tìm công cụ ngoài', y:10, x:40, z:16, ton:148, mau:'nghen',
+   mo:'Tìm repo/skill ngoài để vá lỗ của hệ. Tìm được 148 thẻ nhưng 104 nằm im ở TẠM HOÃN — tìm được mà không tiêu hoá được.',
+   so:[['thẻ đã tìm','148'],['TẠM HOÃN','104'],['đọc tham khảo','30'],['chờ xác nhận','5']]},
+];
+
+const CANH = [
+  ['ng_hoc','seeker',3611,'dong'], ['ng_ma','seeker',3497,'dong'],
+  ['ng_cd','seeker',913,'dong'],   ['ng_xh','seeker',718,'dong'],
+  ['ng_tr','seeker',120,'dong2'],
+  ['seeker','tai_lieu',9419,'dong'], ['seeker','ma_code',471,'dong'],
+  ['tai_lieu','boc',327,'nghen'],
+  ['ma_code','kho_dsl',389,'dong'],
+  ['boc','kho_gt',567,'dong'], ['boc','kho_json',192,'nghen'],
+  ['kho_gt','ql1',567,'dong'], ['kho_gt','ql2',383,'dong'],
+  ['kho_dsl','ql2',75,'dong2'], ['kho_json','ql2',192,'nghen'],
+  ['kho_tv','ql2',32,'tat'],
+  ['ql1','cong',1280,'dong'], ['ql2','cong',383,'dong'],
+  ['cong','tester',225,'dong'],
+  ['tester','ra_tien',8241,'dong'],
+  ['ra_tien','song',1,'sang'],
+  ['nhan','seeker',16,'dong3'], ['nhan','boc',13,'dong3'], ['nhan','ql1',17,'dong3'],
+  ['nhan','cong',9,'dong3'], ['nhan','ql2',17,'dong3'],
+  ['banker','ql2',113242,'dong2'],
+  ['evo','kho_gt',383,'tat'],
+  ['nghi','boc',0,'tat'],
+  ['finder','boc',148,'nghen'],
+];
+
+const PHEU = [
+  ['Nguồn đang BẬT','nao.db/nguon',74,null],
+  ['Tài liệu thu về','nao.db/tai_lieu','9.419',null],
+  ['Đã bóc thành cơ chế','tai_lieu.da_khai_thac=1','327','3,5%'],
+  ['CandidateArtifact','nao.db/artifact','567','—'],
+  ['Giả thuyết đăng ký','nao.db/gia_thuyet','383','67,5%'],
+  ['Kết quả đã chấm','nao.db/ket_qua','1.280','—'],
+  ['Qua cổng học thuật','ket_qua.verdict=PASS','14','1,1%'],
+  ['Tổ hợp qua cổng ra tiền','reports/cong_ra_tien.json','35.937','—'],
+  ['Đạt train','verdict=RA_TIEN','50','0,14%'],
+  ['Đạt holdout','holdout.verdict=RA_TIEN','1','2,0%'],
+];
+
+const KHO = [
+  ['mảnh 1/4','nao.db · giả thuyết','383','Có pre-registration, có FDR, EVO đọc được. Nhưng chỉ ghi một phần nhỏ việc thật.','dong'],
+  ['mảnh 2/4','thu_vien.db','32','Kho của hệ trước 15/08, không nối vào đường chạy hiện tại.','tat'],
+  ['mảnh 3/4','config/co_che_dsl.json','75','Kho quản lý lệnh, 49 dịch được ra MQL5. Sinh 07/09, chưa có sổ.','dong2'],
+  ['mảnh 4/4','reports/*.json','192','Ba tuần công việc gần nhất. Ngoài mọi sổ cái, EVO không thấy.','nghen'],
+];
+
+const HAT_NHAN = [
+  ['ngu_phap','cửa duy nhất cho kiến thức mới vào hệ',57],
+  ['so','sổ cái chỉ-thêm + hàng đợi việc + nhịp tim',51],
+  ['du_lieu','nạp bar, chọn bản theo độ phủ',50],
+  ['chi_phi','spread ĐO từ cột spread của bar',30],
+  ['mo_phong','engine backtest, vào lệnh open[i+1]',20],
+  ['mau','15 template viết tay',19],
+  ['bien_don_bay','biên đòn bẩy đo được',15],
+  ['boc_llm','gọi LLM bóc cơ chế',13],
+  ['tri_tue','tri thức dùng chung',10],
+  ['pham_vi','phép thử phân chứng theo lớp',10],
+];
+
+const CONG_TRUOT = [
+  ['1 · không có lãi',35062],
+  ['3 · không hơn mua-giữ ở cùng sụt giảm',23144],
+  ['6 · không sống sót ngoài mẫu',16195],
+  ['4 · không đủ lệnh',8467],
+  ['2 · sụt giảm quá ngưỡng',2815],
+];
+
+/* ============================ BẢNG HTML ============================ */
+(function bang(){
+  document.getElementById('bang-pheu').innerHTML = PHEU.map(([a,b,c,d],i)=>
+    `<tr${i===2?' class="diem"':''}><td>${a}</td><td class="mono" style="color:var(--chu-3);font-size:12px">${b}</td>
+     <td class="n">${c}</td><td class="n" style="color:${d&&d.startsWith('3,5')||d&&(d.startsWith('0,')||d.startsWith('1,')||d.startsWith('2,'))?'var(--nghen)':'var(--chu-2)'}">${d??''}</td></tr>`).join('');
+
+  document.getElementById('luoi-kho').innerHTML = KHO.map(([g,t,n,p,m])=>
+    `<div class="the"><div class="ghi">${g}</div><h3 class="mono" style="font-size:13px">${t}</h3>
+     <div class="sn" style="color:var(--${m==='tat'?'tat':m==='nghen'?'nghen':m==='dong2'?'dong-2':'dong'})">${n}</div>
+     <p>${p}</p></div>`).join('');
+
+  document.getElementById('bang-hat-nhan').innerHTML = HAT_NHAN.map(([m,v,n])=>
+    `<tr><td class="mono" style="font-weight:500">${m}</td><td style="color:var(--chu-2)">${v}</td>
+     <td class="n">${n}<span class="thanh"><i style="width:${n/57*100}%;background:var(--dong-3)"></i></span></td></tr>`).join('');
+
+  document.getElementById('bang-cong').innerHTML = CONG_TRUOT.map(([t,n])=>
+    `<tr><td>${t}</td><td class="n">${n.toLocaleString('vi-VN')}</td>
+     <td style="width:42%"><span class="thanh" style="margin-top:8px"><i style="width:${n/35937*100}%;background:var(--nghen)"></i></span></td></tr>`).join('');
+})();
+
+/* ============================ SÂN KHẤU 3D ============================ */
+(function ba_chieu(){
+  const boc = document.getElementById('canvas-boc');
+  const lop = document.getElementById('nhan-lop');
+  if(!window.THREE){ boc.innerHTML='<div style="padding:24px;color:var(--chu-2)">Không nạp được thư viện 3D.</div>'; return; }
+
+  const mau = () => {
+    const s = getComputedStyle(document.documentElement);
+    const g = n => new THREE.Color(s.getPropertyValue(n).trim() || '#888');
+    return {nen:g('--nen'), dong:g('--dong'), nghen:g('--nghen'), tat:g('--tat'),
+            dong2:g('--dong-2'), dong3:g('--dong-3'), sang:g('--sang'), vien:g('--vien-manh')};
+  };
+  let C = mau();
+  const tra = k => ({dong:C.dong, nghen:C.nghen, tat:C.tat, dong2:C.dong2, dong3:C.dong3, sang:C.sang}[k] || C.dong);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(C.nen.getHex(), 150, 340);
+  const cam = new THREE.PerspectiveCamera(42, 1, 1, 600);
+  const ren = new THREE.WebGLRenderer({antialias:true, alpha:false});
+  ren.setPixelRatio(Math.min(devicePixelRatio, 2));
+  boc.insertBefore(ren.domElement, lop);
+
+  scene.add(new THREE.AmbientLight(0xffffff, .72));
+  const den = new THREE.DirectionalLight(0xffffff, .85); den.position.set(40, 70, 60); scene.add(den);
+  const den2 = new THREE.DirectionalLight(0xffffff, .3); den2.position.set(-60, -30, -40); scene.add(den2);
+
+  // ---- nút
+  const nhomNut = new THREE.Group(); scene.add(nhomNut);
+  const meshTheoId = {};
+  NUT.forEach(n=>{
+    const r = 1.9 + Math.log10(Math.max(n.ton,1)+1) * (n.lon?1.55:1.05);
+    const hinh = n.cot
+      ? new THREE.CylinderGeometry(2.4, 2.4, 66, 20, 1, true)
+      : new THREE.IcosahedronGeometry(r, 1);
+    const vl = new THREE.MeshStandardMaterial({
+      color: tra(n.mau), roughness:.55, metalness:.15,
+      transparent: !!n.cot, opacity: n.cot ? .3 : 1,
+      side: n.cot ? THREE.DoubleSide : THREE.FrontSide,
+      flatShading: !n.cot,
+    });
+    const m = new THREE.Mesh(hinh, vl);
+    m.position.set(n.x, n.y, n.z);
+    m.userData = n; m.userData.rGoc = r;
+    nhomNut.add(m); meshTheoId[n.id] = m;
+
+    if(!n.cot){
+      const vien = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(r*1.14, 1),
+        new THREE.MeshBasicMaterial({color:tra(n.mau), transparent:true, opacity:.12, side:THREE.BackSide})
+      );
+      vien.position.copy(m.position); vien.userData.quang = n.id; nhomNut.add(vien);
+    }
+  });
+
+  // ---- cạnh: hình trụ, bán kính ∝ log(lưu lượng)
+  const nhomCanh = new THREE.Group(); scene.add(nhomCanh);
+  const canhTheoNut = {};
+  CANH.forEach(([a,b,luu,mk])=>{
+    const A = meshTheoId[a], B = meshTheoId[b]; if(!A||!B) return;
+    const p1 = A.position, p2 = B.position;
+    const d = new THREE.Vector3().subVectors(p2,p1); const dai = d.length();
+    const bk = 0.16 + Math.log10(Math.max(luu,1)+1) * 0.26;
+    const g = new THREE.CylinderGeometry(bk, bk, dai, 7, 1, true);
+    const vl = new THREE.MeshStandardMaterial({
+      color: tra(mk), roughness:.65, metalness:.05,
+      transparent:true, opacity: mk==='tat' ? .22 : mk==='dong3' ? .32 : .58,
+    });
+    const m = new THREE.Mesh(g, vl);
+    m.position.copy(p1).add(p2).multiplyScalar(.5);
+    m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), d.clone().normalize());
+    m.userData = {a, b, mk, luu};
+    nhomCanh.add(m);
+    (canhTheoNut[a] = canhTheoNut[a]||[]).push(m);
+    (canhTheoNut[b] = canhTheoNut[b]||[]).push(m);
+  });
+
+  // ---- mặt phẳng tầng (rất mờ, chỉ để mắt bắt được độ sâu)
+  [34, 22, 12, 1, -11, -22, -32, -42, -52].forEach(y=>{
+    const g = new THREE.RingGeometry(0.5, 46, 44, 1);
+    const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
+      color:C.vien, transparent:true, opacity:.045, side:THREE.DoubleSide}));
+    m.rotation.x = Math.PI/2; m.position.y = y; m.userData.vong = 1; scene.add(m);
+  });
+
+  // ---- nhãn HTML
+  const nhan = {};
+  NUT.forEach(n=>{
+    const el = document.createElement('div');
+    el.className = 'nhan3d';
+    el.innerHTML = `${n.ten}<b>${n.ton>=1000? (n.ton/1000).toFixed(n.ton>=10000?0:1).replace('.',',')+'k' : n.ton}</b>`;
+    el.style.color = '#'+tra(n.mau).getHexString();
+    lop.appendChild(el); nhan[n.id] = el;
+  });
+
+  // ---- điều khiển quỹ đạo tự viết (không phụ thuộc OrbitControls)
+  let goc = {phi: 1.16, theta: 0.62, r: 168, tam: new THREE.Vector3(0,-10,0)};
+  let tuXoay = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let keo = false, truoc = null;
+
+  function datCam(){
+    cam.position.set(
+      goc.tam.x + goc.r*Math.sin(goc.phi)*Math.sin(goc.theta),
+      goc.tam.y + goc.r*Math.cos(goc.phi),
+      goc.tam.z + goc.r*Math.sin(goc.phi)*Math.cos(goc.theta)
+    );
+    cam.lookAt(goc.tam);
+  }
+
+  boc.addEventListener('pointerdown', e=>{ keo=true; truoc={x:e.clientX,y:e.clientY}; tuXoay=false; boc.classList.add('keo'); boc.setPointerCapture(e.pointerId); });
+  boc.addEventListener('pointerup',   e=>{ keo=false; boc.classList.remove('keo'); });
+  boc.addEventListener('pointermove', e=>{
+    if(keo && truoc){
+      goc.theta -= (e.clientX-truoc.x)*.006;
+      goc.phi   = Math.max(.22, Math.min(2.75, goc.phi - (e.clientY-truoc.y)*.005));
+      truoc = {x:e.clientX, y:e.clientY};
+    } else { doChuot(e); }
+  });
+  boc.addEventListener('wheel', e=>{ e.preventDefault(); goc.r = Math.max(80, Math.min(330, goc.r + e.deltaY*.16)); }, {passive:false});
+
+  // ---- chọn nút
+  const ray = new THREE.Raycaster(); const chuot = new THREE.Vector2(); let dangRe = null;
+  function doChuot(e){
+    const r = ren.domElement.getBoundingClientRect();
+    chuot.x = ((e.clientX-r.left)/r.width)*2-1;
+    chuot.y = -((e.clientY-r.top)/r.height)*2+1;
+    ray.setFromCamera(chuot, cam);
+    const va = ray.intersectObjects(nhomNut.children.filter(o=>o.userData && o.userData.id));
+    const id = va.length ? va[0].object.userData.id : null;
+    if(id !== dangRe){ dangRe = id; veSang(id); boc.style.cursor = id ? 'pointer' : (keo?'grabbing':'grab'); }
+  }
+  boc.addEventListener('click', ()=>{ if(dangRe) chon(dangRe); });
+
+  function veSang(id){
+    nhomCanh.children.forEach(c=>{
+      const lq = !id || c.userData.a===id || c.userData.b===id;
+      const goc_op = c.userData.mk==='tat' ? .22 : c.userData.mk==='dong3' ? .32 : .58;
+      c.material.opacity = id ? (lq ? Math.min(.92, goc_op+.34) : goc_op*.28) : goc_op;
+    });
+    NUT.forEach(n=>{ nhan[n.id].style.opacity = !id ? 1 : (n.id===id || (canhTheoNut[id]||[]).some(c=>c.userData.a===n.id||c.userData.b===n.id) ? 1 : .28); });
+  }
+
+  function chon(id){
+    const n = NUT.find(x=>x.id===id); if(!n) return;
+    document.getElementById('ten-nut').textContent = n.ten;
+    document.getElementById('loai-nut').textContent = n.loai || '';
+    document.getElementById('mo-ta-nut').textContent = n.mo || '';
+    document.getElementById('so-nut').innerHTML = (n.so||[]).map(([k,v])=>
+      `<div class="so-hang"><span>${k}</span><span>${v}</span></div>`).join('');
+    const ten = {dong:'đang chảy', nghen:'nút thắt', tat:'đang tắt', dong2:'nhánh phụ', dong3:'hạt nhân', sang:'còn sống'}[n.mau];
+    const cs  = {dong:'--dong', nghen:'--nghen', tat:'--tat', dong2:'--dong-2', dong3:'--dong-3', sang:'--sang'}[n.mau];
+    document.getElementById('trang-thai-nut').innerHTML =
+      `<span class="vien-trang" style="color:var(${cs})">${ten}</span>`;
+  }
+  chon('boc');
+  veSang(null);
+
+  // ---- vòng vẽ
+  const tam4 = new THREE.Vector3();
+  function co(){
+    const w = boc.clientWidth, h = boc.clientHeight;
+    if(ren.domElement.width !== Math.floor(w*Math.min(devicePixelRatio,2))) { ren.setSize(w,h,false); }
+    cam.aspect = w/h; cam.updateProjectionMatrix();
+  }
+  new ResizeObserver(co).observe(boc); co();
+
+  let t0 = performance.now();
+  function ve(t){
+    const dt = Math.min((t-t0)/1000, .05); t0 = t;
+    if(tuXoay) goc.theta += dt*.085;
+    datCam();
+
+    // hào quang nhấp nháy nhẹ ở nút thắt
+    const nhip = .5 + .5*Math.sin(t*.0022);
+    nhomNut.children.forEach(o=>{
+      if(o.userData.quang){
+        const n = NUT.find(x=>x.id===o.userData.quang);
+        o.material.opacity = (n && n.mau==='nghen') ? .1 + nhip*.26 : .12;
+      }
+    });
+
+    ren.render(scene, cam);
+
+    // chiếu nhãn
+    const w = boc.clientWidth, h = boc.clientHeight;
+    NUT.forEach(n=>{
+      const m = meshTheoId[n.id]; if(!m) return;
+      tam4.copy(m.position); if(n.cot) tam4.y += 34;
+      tam4.project(cam);
+      const el = nhan[n.id];
+      const truoc_cam = tam4.z < 1;
+      el.style.display = truoc_cam ? 'block' : 'none';
+      if(truoc_cam){
+        el.style.left = ((tam4.x*.5+.5)*w) + 'px';
+        el.style.top  = ((-tam4.y*.5+.5)*h - (n.cot?0:(m.userData.rGoc*1.9+9))) + 'px';
+      }
+    });
+    requestAnimationFrame(ve);
+  }
+  requestAnimationFrame(ve);
+
+  // ---- theo chủ đề sáng/tối
+  function doiChuDe(){
+    C = mau();
+    scene.fog.color.set(C.nen); ren.setClearColor(C.nen, 1);
+    nhomNut.children.forEach(o=>{
+      const id = o.userData.id || o.userData.quang; if(!id) return;
+      const n = NUT.find(x=>x.id===id); if(n) o.material.color.set(tra(n.mau));
+    });
+    nhomCanh.children.forEach(c=> c.material.color.set(tra(c.userData.mk)));
+    NUT.forEach(n=> nhan[n.id].style.color = '#'+tra(n.mau).getHexString());
+  }
+  ren.setClearColor(C.nen, 1);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', doiChuDe);
+  new MutationObserver(doiChuDe).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+})();
+</script>
