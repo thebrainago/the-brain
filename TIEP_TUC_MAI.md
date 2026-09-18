@@ -32,11 +32,36 @@ AUDCAD: luoi hai chieu CO TIA LENH cho holdout +13,26%/nam DD -3,5% Calmar 3,75;
 
 ## Mot doan doc la hieu ca phien
 
-(dien tay: phien nay tim ra dieu gi, cai gi lat nguoc ket luan cu)
+**TIA LENH la toan bo su khac biet tren AUDCAD.** Cung mot bo tham so luoi,
+chi bat/tat `tia_lenh`: holdout **+0,66%/nam -> +13,26%/nam**, sut giam
+**−15,6% -> −3,5%**, Calmar 3,75, 578 lenh/nam. Va no giai luon bai toan tan
+suat ma ENTRY khong giai duoc.
+
+Truoc do trong cung phien, toi da quet **668 co che entry** qua MT5 tester that
+va ket luan "AUDCAD khong ra tien duoc bang entry don thuan" — dung so lieu
+(0/147 co che du 2 lenh/tuan co Sharpe duong) nhung **SAI PHAM VI**. Chu du an
+phan bien: tren FX tien nam o QUAN TRI VI THE. Phan bien do dung, va
+`nhan/luoi.py` — module co san day du `tia_lenh`/`he_so_buoc`/`hai_chieu` —
+van dang nam trong danh sach MO COI, chua duong chay nao goi toi.
+
+Cach lam khac lan nay: **do song truoc, dat tham so sau**. Spacing lay tu phan
+vi do duoc (gia lui truoc khi ve muc vao: p90 0,325% ~29 pip · p99 0,711% ·
+p99,9 2,054% · max 13,202% ket 1.527 bar), khong chon tay con so nao.
 
 ## Viec tiep theo, theo thu tu
 
-0. **ĐỌC `TON_VIEC.md` mục C trước** — anh giao tối 15/09, xếp trên mọi việc cũ:
+0. **ĐỌC `VIEC_MAI_19092026.md` TRƯỚC** — chủ dự án chốt tối 18/09:
+   (a) **săn EA có tỉa lệnh, rút lõi quản trị lệnh** — bản `tia_lenh` hiện tại
+   là bản THÔ nhất mà đã +12,6 điểm %/năm; tìm bản tinh vi hơn trong EA thật
+   (`BatChotCap`, `PartialClose`, `basket close`, `zone recovery`).
+   (b) **nâng lot để nâng lợi nhuận**, chấp nhận DD cao hơn — nhưng PHẢI đo:
+   lỗ treo đỉnh 11% vốn sẽ chạm margin call trước khi DD chạm ngưỡng, và CAGR
+   ở đòn bẩy L không phải L×CAGR ([[don-bay-gop-log-sai]]).
+   (c) bắt buộc trước khi tin số: **MT5 tester** cho cấu hình nền · kiểm cú lùi
+   13,2%/1.527 bar rơi vào nửa nào · placebo cho lưới (null = ngẫu nhiên hoá
+   BƯỚC và HƯỚNG, không phải điểm vào).
+
+1. **ĐỌC `TON_VIEC.md` mục C** — anh giao tối 15/09 — anh giao tối 15/09, xếp trên mọi việc cũ:
    C0 báo cáo TOÀN The Brain (không chỉ AUDCAD) · C1 sửa quản trị AUDCAD không
    nhất quán (RSI-cross-30 mà giữ 20 vs 50 bar) · C2 test TRAILING trên AUDCAD H4
    (`_quan_tri_ghep.py`, tổng quát `--khung`) · C3 họ chiến lược mới nến-vol-lớn ở
