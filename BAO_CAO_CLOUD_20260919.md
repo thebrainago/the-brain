@@ -242,3 +242,79 @@ NGUOC (doc ten tu chinh ma nguon bo dieu phoi).
   trang_thai_lat.
 - So do tren random walk chi tra loi "co chay khong". Ky vong duoi random walk
   bang **-chi phi**, nen khong duoc doc chung nhu dau hieu co edge.
+
+---
+
+# PHAN 3 — MAY DE QUAN TRI LENH, VA HAI LOI NO LAM LO RA
+
+## DE CAU HINH QUAN TRI, KHONG CHI TIN HIEU VAO
+
+Hai phan tren de ra tin hieu VAO. Bang chung cua chinh du an noi do la nua IT
+GIA TRI HON: 18/09 tren AUDCAD, cung bo tham so luoi, chi bat/tat `tia_lenh`
+thi holdout di tu +0,66%/nam len +13,26%/nam; cung phien do 668 co che ENTRY
+qua tester that cho **0** co che dat yeu cau.
+
+`hephaestus.duc_quan_tri` - 9 khuon, 84 cau hinh cho `mo_phong_v2`, moi khuon
+mot luan diem. `b hepha qt [so] [--ma X --khung Y]`.
+
+Khuon `luoi_tia` TU TAT cat hoa, vi hai co che tranh viec cua nhau (do 19/09).
+
+## LOI 1 — CAT HOA GAT BIEN DO TRONG NEN
+
+Cung MOT duong gia, chi khac o cho nen co bien do hay khong:
+
+| | lai/nam | so lan am |
+|---|---:|---:|
+| nen CO bien do (hi > lo) | **+234** | **0/12** |
+| nen KHONG bien do (hi = lo = c) | **-208** | **12/12** |
+
+Dap an dung tren random walk co chi phi la AM. Toan bo "lai" den tu bien do
+trong nen: cung mot bar, bo mo phong nap tang o DAY bar roi dong cap o DINH
+bar - mua o day ban o dinh trong mot nen.
+
+TP dung dinh bar thi DUNG (lenh cho dat san o muc biet truoc); muc ghep cua
+`cat_hoa` thi DOI theo ro. Chi sua `cat_hoa`.
+
+**Anh huong:** `cat_hoa_tu=2` la MAC DINH, nen moi ket qua `mo_phong_v2` truoc
+19/09 deu chua phan nay. Dau DOI CHIEU tren cac cau hinh do duoc. Ban cu giu
+lai duoi `cat_hoa_gia="tot_nhat"` de do be chenh lech tren du lieu THAT.
+
+`nhan/luoi.py` - module cho ket qua AUDCAD - KHONG dung duong nay (docstring
+cua no ghi ro luat "bat loi truoc"), nen ket qua do khong bi anh huong.
+
+## LOI 2 — PHAN QUYET TREN MOT DUONG MAU KHONG PHAN BIET DUOC GI
+
+Chay tren chuoi DA BI PHA EDGE (hoan vi loi suat, giu nguyen ket cau bar), ty
+le cau hinh duoc cham `CHAY_DUOC` van la **50%**.
+
+Khong phai vi cong hong. Luoi co hinh dang tra thuong **trung vi DUONG, ky
+vong AM**: phan lon duong mau cho lai nho deu, mot thieu so cho lo rat sau. Nen
+tren MOT duong, xac suat "trong nhu co lai" von da gan mot nua - ke ca khi
+khong con edge nao.
+
+Tuc `cham_diem` cham mot luot chay don le thi **ve mat cau truc** khong phan
+biet duoc luoi co edge voi luoi khong co. No do "duong nay co lai khong", con
+cau hoi that la "co lai hon muc NGAU NHIEN khong".
+
+`danh_gia_vs_null` do dung cau do: xep ket qua that vao phan bo null cua chinh
+cau hinh do. Khong du ban null thi tra `CHUA_DO_DUOC` - xep hang voi mot ban
+null la bia thu hang. Van chua phai p-value dung nghia, nen doc nhu THU HANG
+va van phai qua `cong.lord_v2` voi `plan_hash`.
+
+Bai test khoa lai chinh su that "50%" do, **khong** khoa mot nguong mong muon
+- de khong ai vo tinh "sua" no bang cach noi long nguong.
+
+## LOI 3 — `cham_diem.tu_ket_qua_luoi` bia ra ly do
+
+`sut_giam_pct = 100 * von_can / von_can` = LUON BANG 100, nen moi cau hinh luoi
+deu dinh "sut giam 100% > tran 60%" roi bi ha mot bac. Khong ai bat duoc vi
+`cham_diem` la module MO COI - cong nay chua tung chay that lan nao.
+
+## CON LAI
+
+- Ba loi tren deu tim ra bang cach CHAY THAT tren chuoi ngau nhien. Chua co
+  cai nao trong so chung tim ra duoc bang doc ma.
+- Chua co ket luan nao ve chuyen cau hinh nao ra tien: tat ca so o day deu do
+  tren chuoi tong hop, va chung chi tra loi "cong co trung thuc khong".
+- Buoc tiep: `b hepha qt 200 --ma AUDCAD --khung H4` tren may co du lieu, doc
+  `TY LE LOT TREN NHIEU` truoc khi doc bang xep hang.
