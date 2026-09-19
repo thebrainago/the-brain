@@ -726,6 +726,48 @@ def c_github(a):
     return r.returncode
 
 
+def c_hepha(a):
+    """HEPHAESTUS - DE CO CHE. `b hepha [do|duc|tu-vung] [so]`
+
+    So do he thong (LUAT SO 0) khai lenh nay tu 13/09 nhung module chua tung
+    duoc viet, nen he chi biet may mo cai co san. Ba viec:
+
+        b hepha do        ngu phap NOI DUOC bao nhieu, kho DANG DUNG bao nhieu
+        b hepha duc 200   de 200 co che moi, in lo + plan_hash de tien dang ky
+        b hepha tu-vung   huong tim kiem day nguoc ve SEEKER, uu tien cho TRONG
+
+    `duc` KHONG tu ghi vao kho: vao kho la viec cua `ngu_phap.them_co_che`, va
+    no can du lieu that de do ty le kich hoat. Lenh nay chi de ra va dang ky.
+    """
+    from nhan import hephaestus as HP
+    viec = (a[0] if a else "do").lower()
+    so = next((int(x) for x in (a or [])[1:] if str(x).isdigit()), 200)
+
+    if viec == "do":
+        r = HP.do_phu()
+        print("ngu phap NOI DUOC : %d toan hang" % r["so_noi_duoc"])
+        print("kho DANG DUNG     : %d" % r["so_dang_dung"])
+        print("BO TRONG          : %d" % len(r["bo_trong"]))
+        print("  " + ", ".join(r["bo_trong"]))
+        return
+
+    if viec in ("tu-vung", "tu_vung"):
+        for h in HP.tu_vung(so_huong=so if so != 200 else 10):
+            print("%-16s %s" % (h["chi_bao"], " · ".join(h["tu_khoa"])))
+        return
+
+    ds = HP.duc(han_ngach=so)
+    lo = HP.dang_ky_lo(ds)
+    from collections import Counter
+    for k, v in Counter(x["khuon"] for x in ds).most_common():
+        print("  %-18s %d" % (k, v))
+    print("\nde ra   : %d co che" % len(ds))
+    print("plan_hash: %s   (tien dang ky - FDR tinh %d suat)"
+          % (lo["plan_hash"], lo["so_phep_thu"]))
+    print("\nDe nhieu la luong thien NEU tra du gia FDR. De nhieu roi chi khai")
+    print("vai cai dep la gian lan - nen con so tren phai di kem moi ket luan.")
+
+
 def c_kien_truc(a):
     """SINH so do KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
 
@@ -1033,6 +1075,7 @@ LENH = {
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
     "kien-truc": c_kien_truc, "kt": c_kien_truc,
+    "hepha": c_hepha, "hephaestus": c_hepha,
     "github": c_github, "gh": c_github,
     "slot": c_slot,
     "ho-so": c_ho_so, "hs": c_ho_so,
