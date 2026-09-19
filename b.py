@@ -734,10 +734,13 @@ def c_hepha(a):
 
         b hepha do        ngu phap NOI DUOC bao nhieu, kho DANG DUNG bao nhieu
         b hepha duc 200   de 200 co che moi, in lo + plan_hash de tien dang ky
+        b hepha bien-the  rai luoi tham so quanh co che DA CO trong kho
+        b hepha ghep      ghep doi co che trong kho thanh he hai dieu kien
         b hepha tu-vung   huong tim kiem day nguoc ve SEEKER, uu tien cho TRONG
 
-    `duc` KHONG tu ghi vao kho: vao kho la viec cua `ngu_phap.them_co_che`, va
-    no can du lieu that de do ty le kich hoat. Lenh nay chi de ra va dang ky.
+    Khong lenh nao o day tu ghi vao kho: vao kho la viec cua
+    `ngu_phap.them_co_che`, va no can du lieu that de do ty le kich hoat. Lenh
+    nay chi DE RA va DANG KY.
     """
     from nhan import hephaestus as HP
     viec = (a[0] if a else "do").lower()
@@ -754,6 +757,27 @@ def c_hepha(a):
     if viec in ("tu-vung", "tu_vung"):
         for h in HP.tu_vung(so_huong=so if so != 200 else 10):
             print("%-16s %s" % (h["chi_bao"], " · ".join(h["tu_khoa"])))
+        return
+
+    if viec in ("bien-the", "bien_the", "ghep"):
+        from nhan import ngu_phap as NP
+        kho = NP.doc_kho(cho_rong_khi_hong=True)
+        if not kho:
+            print("kho rong (khong doc duoc nao.db) - lenh nay can kho that")
+            return
+        if viec == "ghep":
+            ds = HP.ghep_lo(kho, han_ngach=so)
+        else:
+            ds = []
+            for g in kho:
+                ds += HP.bien_the(g, han_ngach=6)
+                if len(ds) >= so:
+                    break
+            ds = ds[:so]
+        lo = HP.dang_ky_lo(ds)
+        print("tu %d co che trong kho -> %d ban moi" % (len(kho), len(ds)))
+        print("plan_hash: %s   (FDR tinh %d suat)"
+              % (lo["plan_hash"], lo["so_phep_thu"]))
         return
 
     ds = HP.duc(han_ngach=so)

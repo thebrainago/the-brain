@@ -287,3 +287,93 @@ class MoiCoCheDeRaDeuCHAY_DUOC(unittest.TestCase):
                 song += 1
         self.assertGreater(song / len(self.ds), 0.6,
                            "qua nua so co che de ra khong kich hoat noi")
+
+
+#: Mot co che "boc tu tai lieu" - dung hinh dang cai `doc_ma` tra ve.
+GOC = {"ten": "tac_gia_rsi14_30", "ho": "quay_ve_trung_binh", "chieu": 1,
+       "giu": 5, "nguon": "tai_lieu",
+       "co_che": "Tac gia mua khi RSI cham vung qua ban tren khung gio.",
+       "vao": [{"trai": {"chi_bao": "rsi", "n": 14}, "phep": "<",
+                "phai": {"hang": 30.0}}]}
+
+GOC2 = {"ten": "tac_gia_tren_ema200", "ho": "xu_huong", "chieu": 1, "giu": 5,
+        "nguon": "tai_lieu",
+        "co_che": "Tac gia chi mua khi gia con nam tren duong trung binh dai.",
+        "vao": [{"trai": {"chi_bao": "gia", "cot": "close"}, "phep": ">",
+                 "phai": {"chi_bao": "ema", "n": 200, "cot": "close"}}]}
+
+
+class RaiLuoiThamSoQuanhBAN_TAC_GIA(unittest.TestCase):
+    """*"10 trader chau A co 20 kieu dung Ichimoku"* - bien thien nam o NGUONG
+    va CACH GHEP, khong o ban than chi bao. 20 kieu khong phai 20 lan boc tai
+    lieu; la 1 chi bao + luoi tham so, do MAY sinh."""
+
+    def setUp(self):
+        self.ds = HP.bien_the(GOC)
+
+    def test_sinh_ra_nhieu_ban(self):
+        self.assertGreaterEqual(len(self.ds), 4)
+
+    def test_moi_ban_deu_hop_le(self):
+        for s in self.ds:
+            self.assertEqual(NP.kiem_khai_bao(s), [], s["ten"])
+
+    def test_KHONG_tra_lai_chinh_ban_goc(self):
+        goc = NP.van_tay_dieu_kien(GOC)
+        self.assertNotIn(goc, [NP.van_tay_dieu_kien(s) for s in self.ds])
+
+    def test_cac_ban_khac_nhau_that(self):
+        vt = [NP.van_tay_dieu_kien(s) for s in self.ds]
+        self.assertEqual(len(vt), len(set(vt)))
+
+    def test_doi_ca_CHU_KY_lan_NGUONG(self):
+        n = {s["vao"][0]["trai"]["n"] for s in self.ds}
+        v = {s["vao"][0]["phai"]["hang"] for s in self.ds}
+        self.assertGreater(len(n), 1, "khong doi chu ky lan nao")
+        self.assertGreater(len(v), 1, "khong doi nguong lan nao")
+
+    def test_giu_nguyen_HO_va_CHIEU_cua_ban_goc(self):
+        for s in self.ds:
+            self.assertEqual(s["ho"], GOC["ho"])
+            self.assertEqual(s["chieu"], GOC["chieu"])
+
+    def test_khong_de_ra_nguong_KHONG_CHAM_TOI_DUOC(self):
+        for s in self.ds:
+            for d in s["vao"]:
+                self.assertTrue(HP.nguong_dat_duoc(d), s["ten"])
+
+    def test_ton_trong_han_ngach(self):
+        self.assertLessEqual(len(HP.bien_the(GOC, han_ngach=3)), 3)
+
+    def test_xac_dinh(self):
+        a = [s["ten"] for s in HP.bien_the(GOC)]
+        b = [s["ten"] for s in HP.bien_the(GOC)]
+        self.assertEqual(a, b)
+
+
+class GhepHAI_HE_DA_CO(unittest.TestCase):
+    """*"ket hop cac he thong va ly thuyet lai voi nhau"*. Ghep mot kich hoat
+    voi mot bo loc cho ra thu khong ban goc nao co."""
+
+    def test_ghep_duoc_hai_co_che(self):
+        s = HP.ghep(GOC, GOC2)
+        self.assertIsNotNone(s)
+        self.assertEqual(len(s["vao"]), 2)
+        self.assertEqual(NP.kiem_khai_bao(s), [])
+
+    def test_TU_CHOI_ghep_hai_co_che_NGUOC_CHIEU(self):
+        """Mua va ban cung luc khong phai mot co che - la mot mau thuan."""
+        nguoc = dict(GOC2, chieu=-1)
+        self.assertIsNone(HP.ghep(GOC, nguoc))
+
+    def test_TU_CHOI_ghep_mot_co_che_voi_CHINH_NO(self):
+        self.assertIsNone(HP.ghep(GOC, dict(GOC, ten="ten_khac")))
+
+    def test_ghep_nhieu_khong_sinh_ban_trung(self):
+        ds = HP.ghep_lo([GOC, GOC2], han_ngach=50)
+        vt = [NP.van_tay_dieu_kien(s) for s in ds]
+        self.assertEqual(len(vt), len(set(vt)))
+
+    def test_cau_giai_thich_NOI_CA_HAI_ve(self):
+        s = HP.ghep(GOC, GOC2)
+        self.assertGreaterEqual(len(s["co_che"]), 25)

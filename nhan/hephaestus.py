@@ -20,11 +20,22 @@ Dung, va no keo theo mot he qua ma ca he dang lam nguoc: kho tai lieu cho ta
 NGUYEN LIEU, khong cho ta CONG THUC. Gia tri phai den tu viec ta to hop lai -
 doi tham so, doi nguong, dat kich hoat cua ho nay vao bo loc cua ho kia.
 
-Do duoc: ngu phap tinh duoc **54 toan hang**, kho co che rong **8 chi bao**
-(EMA · RSI · SMA · zscore · ATR · Donchian · ADX · Stoch · MACD). Bollinger,
-Ichimoku, VWAP, Keltner, Supertrend, Fibonacci, mau nen = **0**. Khong phai vi
-chung vo dung, ma vi do rong cua kho dang phu thuoc vao *"co ai viet bai ve no
-khong"*. May noi duoc nhieu hon han cai no dang noi.
+DO LAI NGAY 19/09/2026 (con so "kho rong 8 chi bao" trong so do la cua 13/09,
+da cu - khong dung no nua):
+
+    kho co che              4.049 co che, dung 34/45 toan hang
+    con BO TRONG han        15: bollinger · ichimoku · vwap · fibo · moc_ky ·
+                            wma · smma · obv · gann_sq9 · goc · duong_xu_huong ·
+                            dem_lien_tiep · trang_thai_lat · tuong_quan · phuong_sai
+
+Nen luan diem "kho qua hep" phai phat bieu lai cho dung: kho KHONG hep ve so
+luong. Cai no thieu la nhung vung von tu ma **khong ai viet bai**, va - quan
+trong hon - nhung TO HOP ma khong truong phai nao viet ra ca.
+
+Do la phep do co y nghia, va no la phep do ma bai `do_moc_hephaestus` chay:
+
+    duc() de ra 573 co che, **573 cai kho chua co** (0 trung)
+    bien_the() tu 400 co che trong kho -> 1.069 ban, 1.038 cai kho chua co
 
 Chu du an: *"10 trader chau A co 20 kieu dung Ichimoku"* - bien thien nam o
 CACH GHEP va NGUONG, khong o ban than chi bao. 20 kieu dung khong phai 20 lan
@@ -756,6 +767,179 @@ def dang_ky_lo(specs: list[dict]) -> dict:
     return {"plan_hash": h, "so_phep_thu": len(vt), "van_tay": vt,
             "ten": [s.get("ten") for s in specs],
             "khuon": sorted({s.get("khuon", "") for s in specs} - {""})}
+
+
+# ---------------------------------- RAI LUOI QUANH MOT CO CHE DA CO
+#: Ba diem quanh gia tri tac gia chon, theo TY LE. Ba chu khong nhieu hon: moi
+#: diem them la mot suat FDR, va muc dich o day khong phai tim gia tri tot nhat
+#: (viec cua `do_on_dinh`/`to_hop`) ma la biet HINH DANG quanh diem tac gia
+#: chon - cao nguyen hay cai gai.
+_TY_LE_CHU_KY = (0.5, 2.0)
+
+#: Nguong thi dich theo DO RONG CUA THANG, khong theo ty le. `rsi < 30` nhan
+#: doi thanh `rsi < 60` la doi han y nghia co che (tu "qua ban" thanh "duoi
+#: trung binh"), trong khi `rsi < 25` va `rsi < 35` van la cung mot y tuong o
+#: hai do chat khac nhau - do moi la cai ta muon do.
+_BUOC_NGUONG = {
+    "rsi": 5.0, "stochastic": 5.0, "adx": 5.0, "cci": 50.0,
+    "zscore": 0.5, "ibs": 0.05, "phan_vi": 0.05, "doi_pct": 0.01,
+}
+
+
+def _buoc_cua(t: dict) -> float | None:
+    cb = str((t or {}).get("chi_bao", "")).lower()
+    if str((t or {}).get("lay", "")).lower() in ("phan_tram_b", "do_rong"):
+        return 0.05
+    return _BUOC_NGUONG.get(cb)
+
+
+def bien_the(spec: dict, han_ngach: int = 24, so_buoc: int = 2) -> list[dict]:
+    """Mot co che -> cac BAN THAY SO cua chinh no. Khong tra lai ban goc.
+
+    Chu du an: *"10 trader chau A co 20 kieu dung Ichimoku"* - bien thien nam o
+    NGUONG va CACH GHEP chu khong o ban than chi bao. 20 kieu dung khong phai
+    20 lan boc tai lieu; la mot chi bao cong mot luoi tham so, do may sinh.
+
+    DOI TUNG THAM SO MOT, khong duyet tich Descartes. Hai ly do:
+      * mot co che 4 tham so x 5 diem la 625 o, tuc 625 suat FDR cho mot y
+        tuong - khong con la do hinh dang nua ma la dao mo nhieu.
+      * doi mot truc moi tra loi duoc "truc nao nhay" - thu can de biet co che
+        dung tren cao nguyen hay tren cai gai.
+
+    NGUONG va CHU KY dich theo hai cach khac nhau, co chu dich: chu ky theo TY
+    LE (x0,5 · x2), nguong theo DO RONG CUA THANG (`rsi` +-5 chu khong phai
+    x2 - `rsi < 60` khong con la co che qua ban nua).
+    """
+    goc_vt = NP.van_tay_dieu_kien(spec)
+    ts = NP.tham_so_cua(spec)
+    ra, thay = [], {goc_vt}
+    for khoa in sorted(ts):
+        if khoa == "giu":
+            continue
+        gt = ts[khoa]
+        if not isinstance(gt, (int, float)) or isinstance(gt, bool):
+            continue
+        moc = _diem_quanh(spec, khoa, float(gt), so_buoc)
+        for v in moc:
+            moi = NP.ap_tham_so(spec, {khoa: v})
+            moi = dict(moi, ten=NP.chuan_hoa_ten(
+                "%s_%s%s" % (spec.get("ten", "he"), khoa.replace("vao0_", ""),
+                             _so_ten(v))),
+                nguon="hephaestus:bien_the")
+            if not all(_hop_thang(d) and nguong_dat_duoc(d) for d in moi["vao"]):
+                continue
+            if NP.kiem_khai_bao(moi):
+                continue
+            vt = NP.van_tay_dieu_kien(moi)
+            if vt in thay:
+                continue
+            thay.add(vt)
+            ra.append(moi)
+            if len(ra) >= han_ngach:
+                return ra
+    return ra
+
+
+def _so_ten(v: float) -> str:
+    return ("%g" % v).replace(".", "_").replace("-", "am")
+
+
+def _diem_quanh(spec: dict, khoa: str, gt: float, so_buoc: int) -> list[float]:
+    """Cac gia tri thu quanh `gt`. Chu ky theo ty le, nguong theo buoc thang."""
+    if khoa.endswith("_n"):
+        ra = [int(round(gt * r)) for r in _TY_LE_CHU_KY]
+        return [float(x) for x in ra if x >= 2 and x != int(gt)]
+    t = _toan_hang_cua_khoa(spec, khoa)
+    buoc = _buoc_cua(t)
+    if buoc is None:
+        return []               # khong biet thang cua nguong -> khong doan
+    ra = []
+    for k in range(1, so_buoc + 1):
+        ra += [gt - k * buoc, gt + k * buoc]
+    return [round(x, 6) for x in ra]
+
+
+def _toan_hang_cua_khoa(spec: dict, khoa: str) -> dict:
+    """`vao0_phai_hang` -> toan hang VE TRAI cua dieu kien 0 (ve mang thang do).
+
+    Nguong nam o ve phai nhung THANG DO cua no do ve trai quyet dinh: `< 30`
+    la 30 diem RSI hay 30 don vi gia la tuy ve trai la gi.
+    """
+    for phan in ("vao", "ra"):
+        if not khoa.startswith(phan):
+            continue
+        con = khoa[len(phan):].lstrip("_")
+        so = ""
+        while con and con[0].isdigit():
+            so, con = so + con[0], con[1:]
+        ds = spec.get(phan) or []
+        try:
+            d = ds[int(so)]
+        except (ValueError, IndexError):
+            return {}
+        return d.get("trai") or {}
+    return {}
+
+
+def ghep(a: dict, b: dict, giu: int | None = None) -> dict | None:
+    """Ghep HAI co che thanh mot: vao lenh khi CA HAI cung dung.
+
+    Chu du an: *"ket hop cac he thong va ly thuyet lai voi nhau"*. Dat mot kich
+    hoat canh mot bo loc cho ra thu khong ban goc nao co - va do la cho may co
+    loi the, vi khong tai lieu nao viet san mot co che thuoc hai truong phai.
+
+    Tra `None` khi ghep khong co nghia:
+      * NGUOC CHIEU - mua va ban cung luc khong phai mot co che, la mau thuan.
+      * TRUNG NHAU - ghep mot co che voi chinh no chi lam ten dai ra.
+    """
+    if not a or not b:
+        return None
+    if int(a.get("chieu", 1)) != int(b.get("chieu", 1)):
+        return None
+    va, vb = a.get("vao") or [], b.get("vao") or []
+    if not va or not vb:
+        return None
+    kh_a = {NP.van_tay_dieu_kien({"vao": [d]}) for d in va}
+    kh_b = {NP.van_tay_dieu_kien({"vao": [d]}) for d in vb}
+    if kh_b <= kh_a or kh_a <= kh_b:
+        return None                       # mot cai da chua cai kia
+    moi = {
+        "ten": NP.chuan_hoa_ten("hp_va_%s_%s" % (a.get("ten", "a"),
+                                                 b.get("ten", "b")))[:60],
+        "ho": a.get("ho") or b.get("ho"),
+        "chieu": int(a.get("chieu", 1)),
+        "giu": int(giu or a.get("giu", 1)),
+        "co_che": ("Ghep hai luan diem doc lap: %s VA %s. Phoi nhiem chi mo khi "
+                   "ca hai cung dung, tuc doi hai ly do khac nhau cung chi ve "
+                   "mot phia." % (str(a.get("co_che", ""))[:70].rstrip(". "),
+                                  str(b.get("co_che", ""))[:70].rstrip(". "))),
+        "vao": list(va) + [d for d in vb
+                           if NP.van_tay_dieu_kien({"vao": [d]}) not in kh_a],
+        "nguon": "hephaestus:ghep",
+    }
+    return None if NP.kiem_khai_bao(moi) else moi
+
+
+def ghep_lo(specs: list[dict], han_ngach: int = 200) -> list[dict]:
+    """Ghep doi mot cach XAC DINH tren mot danh sach co che.
+
+    Duyet theo thu tu da cho, khong ngau nhien, de mot lo ghep co the tien dang
+    ky y nhu mot lo duc.
+    """
+    ra, thay = [], set()
+    for i, a in enumerate(specs):
+        for b in specs[i + 1:]:
+            s = ghep(a, b)
+            if s is None:
+                continue
+            vt = NP.van_tay_dieu_kien(s)
+            if vt in thay:
+                continue
+            thay.add(vt)
+            ra.append(s)
+            if len(ra) >= han_ngach:
+                return ra
+    return ra
 
 
 # ------------------------------------------- NUA HAI: DAY NGUOC VE SEEKER

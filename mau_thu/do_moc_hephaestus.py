@@ -12,19 +12,25 @@ edge vi no dang chi may mo nhung thu san co"*, va *"neu co he thong ra tien thi
 cha ai up len"*.
 
 Dich cua hai cau do la mot phep do: **he dang may mo trong bao nhieu phan cua
-cai no co the noi?** Ngu phap tinh duoc 54 toan hang. Kho co che - thu sinh ra
-tu viec boc tai lieu - rong dung 8 chi bao, vi do rong cua no phu thuoc vao
-"co ai viet bai ve no khong".
+cai no co the noi, va no co de ra duoc thu chua ai co khong?**
 
 ## MOC 19/09/2026
 
-    ngu phap NOI DUOC          54 toan hang
-    kho (boc tu tai lieu)       8 chi bao        <- truoc
-    hephaestus DE RA           29 chi bao        <- sau
+    kho co che              4.049 co che, dung 34/45 toan hang
+    con bo trong han        15 toan hang (ichimoku · vwap · fibo · bollinger ·
+                            moc_ky · wma · smma · obv · gann_sq9 · goc ·
+                            duong_xu_huong · dem_lien_tiep · trang_thai_lat ·
+                            tuong_quan · phuong_sai)
 
-Con so thu ba khong phai "da tim ra edge". No la **do rong cua khong gian gia
-thuyet** - va do moi la thu module nay chiu trach nhiem. Viec tra loi "cai nao
-ra tien" thuoc QUANTLAB, va no can MT5 tester chu khong chay o day.
+    duc()        de 573 co che - **573 cai kho CHUA CO** (0 trung)
+    bien_the()   tu 400 co che kho -> 1.069 ban, 1.038 cai kho chua co
+
+Con so "kho rong 8 chi bao" trong so do la cua 13/09 va da cu; bai nay do lai
+moi lan chay nen no khong the cu theo cach do.
+
+Nhung con so tren KHONG phai "da tim ra edge". Chung la **do rong cua khong
+gian gia thuyet** - thu duy nhat module nay chiu trach nhiem. Tra loi "cai nao
+ra tien" la viec cua QUANTLAB va no can MT5 tester, khong chay o day.
 
 ## DOC CON SO NAY CHO DUNG
 
@@ -59,9 +65,12 @@ def do(kho: list | None = None) -> dict:
 
 
 def main() -> int:
-    # Kho rong: tren cloud khong co `nao.db`. Tren may chu du an, bo `kho=None`
-    # de doc kho that - luc do con so "da co" moi dung.
-    r = do(kho=[])
+    # Doc kho THAT khi doc duoc. Do voi kho rong thi con so "de ra" trong dep
+    # hon that, vi khong ai tru di phan da co.
+    kho = NP.doc_kho(cho_rong_khi_hong=True)
+    r = do(kho=kho)
+    print("  kho hien co         : %d co che, dung %d toan hang"
+          % (len(kho), r["phu"]["so_dang_dung"]))
     ds, lo = r["ds"], r["lo"]
 
     print("  %-20s %d" % ("khuon", len(HP.KHUON)))
@@ -70,7 +79,8 @@ def main() -> int:
 
     print("\n  ngu phap NOI DUOC   : %d toan hang" % r["phu"]["so_noi_duoc"])
     print("  hephaestus DUNG TOI : %d" % len(r["chi_bao"]))
-    print("  de ra               : %d co che" % len(ds))
+    print("  de ra               : %d co che (KHO CHUA CO - da tru phan trung)"
+          % len(ds))
     print("  plan_hash           : %s" % lo["plan_hash"])
     print("  so suat FDR lo nay dat: %d" % lo["so_phep_thu"])
 
