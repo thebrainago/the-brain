@@ -943,9 +943,9 @@ def _khuon_bien_dong_do_lech(giu_mac_dinh: int) -> list[dict]:
                 ra.append(_spec(
                     _ten("vol_thap", n_atr, n_xep, v), "bien_dong", 1,
                     [{"trai": t, "phep": "<", "phai": {"hang": v}}],
-                    "Bien dong co tu tuong quan nen giai doan hep bat thuong "
-                    "thuong ket thuc bang mot cu dich manh; do bang phan_vi de "
-                    "nguong con co nghia tren ma khac va thoi ky khac.",
+                    "Do lech tinh tren gia DONG CUA nen no chi thay bien dong "
+                    "TRONG PHIEN; mot thi truong dung yen ca phien roi nhay qua "
+                    "dem van cho do lech thap, va do la luc quyen chon re nhat.",
                     giu_mac_dinh))
             for v in (0.8, 0.9):
                 ra.append(_spec(
