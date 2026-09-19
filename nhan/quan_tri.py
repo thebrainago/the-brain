@@ -125,7 +125,11 @@ NUT_CHAY_DUOC = {"buoc", "kc_bs", "tp", "chot_tien", "dung_lo", "he_so_1",
                  "thoat_theo_gio", "vol_min", "vol_max",
                  # them 05/09 sau khi cai vao `mo_phong_v2`. Truoc do 35/86 file
                  # tien ich bi gat chi vi thieu ba nut nay - khong phai vi rong.
-                 "trailing_tu", "trailing_buoc", "breakeven_tu"}
+                 "trailing_tu", "trailing_buoc", "breakeven_tu",
+                 # them 19/09 cung luc voi hai nut moi cua `mo_phong_v2`:
+                 # nha lai mot phan dinh lai ca ro, va tia mot phan vi the.
+                 # Ca hai boc ra tu EA that bang `quan_tri_than`.
+                 "chot_lui_tu", "chot_lui_ty", "tia_tu", "tia_ty"}
 
 #: Dau hieu de nhan mot file la CO quan tri vi the. BAN 2 - mo rong theo tu
 #: vung do duoc, va them tieng Viet (kho co ma nguon cua nguoi Viet).

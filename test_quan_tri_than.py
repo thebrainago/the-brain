@@ -87,16 +87,28 @@ class ChotTheoLUIKHOIDINH(unittest.TestCase):
         self.nut = QTT.boc_than(MQL_CHOT_LUI)["nut_van"]
 
     def test_boc_duoc_muc_vu_trang(self):
-        self.assertEqual(self.nut.get("_chot_lui_tu"), 45.0)
+        self.assertEqual(self.nut.get("chot_lui_tu"), 45.0)
 
     def test_boc_duoc_ty_le_lui(self):
-        self.assertEqual(self.nut.get("_chot_lui_ty"), 0.9)
+        self.assertEqual(self.nut.get("chot_lui_ty"), 0.9)
 
-    def test_danh_dau_la_CHUA_MO_PHONG(self):
-        """`mo_phong_v2` chua co nut nay. Bo im lang la mat ca mot co che."""
-        self.assertTrue(
-            all(k.startswith("_") for k in ("_chot_lui_tu", "_chot_lui_ty")),
-            "nut chua mo phong duoc phai mang tien to `_`")
+    def test_NOI_DUOC_VAO_BO_MO_PHONG(self):
+        """Tu 19/09 hai nut nay CHAY DUOC, nen chung khong con mang tien to `_`.
+
+        Boc ra mot co che ma khong co cho chay no thi van la bo lo - chi la bo
+        lo mot cach co ghi chep. Bai nay khoa ca duong: ten nut phai la ten
+        `mo_phong_v2` nhan that, va phai nam trong `NUT_CHAY_DUOC` de
+        `quan_tri.loc` dem no khi xet "co du hai nut chay duoc khong".
+        """
+        import inspect
+
+        import mo_phong_v2 as MP
+        from nhan import quan_tri as QT
+        nhan = set(inspect.signature(MP.mo_phong).parameters)
+        for k in ("chot_lui_tu", "chot_lui_ty", "tia_tu", "tia_ty"):
+            self.assertFalse(k.startswith("_"), k)
+            self.assertIn(k, nhan, "`mo_phong_v2` khong nhan nut '%s'" % k)
+            self.assertIn(k, QT.NUT_CHAY_DUOC, k)
 
 
 class ChanDuoiVaChotLaiCaRo(unittest.TestCase):
@@ -167,10 +179,10 @@ class TiaLenhDocTuThanHam(unittest.TestCase):
         self.nut = QTT.boc_than(MQL_TIA)["nut_van"]
 
     def test_nhan_ra_co_tia_lenh(self):
-        self.assertEqual(self.nut.get("_tia_ty"), 0.5)
+        self.assertEqual(self.nut.get("tia_ty"), 0.5)
 
     def test_boc_duoc_muc_lai_kich_hoat_tia(self):
-        self.assertEqual(self.nut.get("_tia_tu"), 30.0)
+        self.assertEqual(self.nut.get("tia_tu"), 30.0)
 
 
 class DocDUOC_CO_CHE_nhung_KHONG_DOC_DUOC_SO(unittest.TestCase):
@@ -187,7 +199,7 @@ class DocDUOC_CO_CHE_nhung_KHONG_DOC_DUOC_SO(unittest.TestCase):
         self.r = QTT.boc_than(src)
 
     def test_khong_bia_ra_con_so(self):
-        self.assertNotIn("_chot_lui_tu", self.r["nut_van"])
+        self.assertNotIn("chot_lui_tu", self.r["nut_van"])
 
     def test_nhung_phai_BAO_RA_la_co_co_che(self):
         self.assertTrue(any("chot_lui" in x for x in self.r["thieu"]),
@@ -199,7 +211,7 @@ class TyLeLuiViet_BANG_HOAC_NHO_HON(unittest.TestCase):
 
     def test_nhan_ca_hai_cach_viet(self):
         src = MQL_CHOT_LUI.replace("profits<(peakwin*0.9)", "profits<=(peakwin*0.7)")
-        self.assertEqual(QTT.boc_than(src)["nut_van"].get("_chot_lui_ty"), 0.7)
+        self.assertEqual(QTT.boc_than(src)["nut_van"].get("chot_lui_ty"), 0.7)
 
 
 class NoiVaoDUONG_CHAY_THAT(unittest.TestCase):

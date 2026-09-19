@@ -49,9 +49,12 @@ chay 0,01 lot con cai kia 1,0 lot la hai co che khac han nhau. Bo boc tra ve
 
 ## NUT CO TIEN TO `_` LA CHUA MO PHONG DUOC
 
-`mo_phong_v2` chua co nut cho "rot dinh lai ca ro" (`_chot_lui_*`) va cho tia
-mot phan vi the (`_tia_*`). Van boc ra va danh dau, dung nhu `quan_tri.py` da
-lam voi `trailing`: **biet dang bo lo gi con hon bo im lang**.
+Quy uoc giu nguyen tu `quan_tri.py`: **biet dang bo lo gi con hon bo im lang**.
+
+Nhung tu 19/09/2026 ca bon nut cua module nay DA mo phong duoc: `mo_phong_v2`
+nhan them `chot_lui_tu`/`chot_lui_ty` (nha lai mot phan dinh lai ca ro) va
+`tia_tu`/`tia_ty` (dong mot phan vi the), nen chung bo tien to `_`. Cho trong
+con lai la o cac nut khac, khong o day nua.
 """
 from __future__ import annotations
 
@@ -185,13 +188,13 @@ def boc_than(src: str) -> dict:
     # --- tia mot phan vi the ---
     m = _TIA.search(src)
     if m:
-        nut["_tia_ty"] = float(m.group(1))
+        nut["tia_ty"] = float(m.group(1))
         for dk, than in _cac_if(src):
             if "PositionClosePartial" not in than:
                 continue
             mm = re.search(rf"POSITION_PROFIT[^<>]*>=?[ \t]*({_SO})", dk)
             if mm:
-                nut["_tia_tu"] = float(mm.group(1))
+                nut["tia_tu"] = float(mm.group(1))
             break
 
     return {"nut_van": nut, "ham_lai_ro": sorted(ham_lai),
@@ -247,8 +250,8 @@ def _doc_nguong(dk: str, bien_lai: set, bien_dinh: set, hang: dict,
         a = _hang_so(m_vu.group(2), hang)
         b = _hang_so(m_lui.group(3), hang)
         if a is not None and b is not None:
-            nut.setdefault("_chot_lui_tu", a)
-            nut.setdefault("_chot_lui_ty", b)
+            nut.setdefault("chot_lui_tu", a)
+            nut.setdefault("chot_lui_ty", b)
         else:
             # DOC DUOC CO CHE nhung KHONG doc duoc so. Hai thu nay khac nhau va
             # phai bao khac nhau: im lang o day thi ban quet doc y het "EA nay
