@@ -120,6 +120,7 @@ _THANG = {
     "cci": THANG_CHAN, "doi_pct": THANG_CHAN,
     # dau
     "supertrend": THANG_CHIEU, "heiken": THANG_CHIEU, "mau_nen": THANG_CHIEU,
+    "trang_thai_lat": THANG_CHIEU,
     # DAO QUANH KHONG. `macd` la HIEU cua hai duong gia, nen do lon cua no
     # theo thang gia va mot nguong nhu `macd < 0,0034` chi dung cho dung mot
     # tai san o dung mot thoi ky - chinh cai bay `atr14 < 0,003472` da ghi
@@ -875,6 +876,45 @@ def _khuon_gia_khoi_luong(giu_mac_dinh: int) -> list[dict]:
     return ra
 
 
+def _khuon_che_do_lat(giu_mac_dinh: int) -> list[dict]:
+    """CO CHE DO CO NHO: bat o mot nguong, va chi tat o mot nguong KHAC.
+
+    Luan diem: che do thi truong khong doi tung bar, no doi tung doan - vi cai
+    lam no doi la vi the cua nhung nguoi lon, ma ho vao ra trong nhieu phien
+    chu khong trong mot nen. Mot bo loc khong nho thi o vung ranh gioi se bat
+    tat lien tuc, va moi lan tat la mot lan dong lenh giua doan - dung luc te
+    nhat. Mot co co nho thi giu nguyen cho den khi co bang chung NGUOC.
+
+    Khoang giua hai nguong la vung tre. No khong phai tham so trang tri: no
+    chinh la phat bieu "bao nhieu bang chung thi du de tin rang che do da doi".
+
+    `trang_thai_lat` tra ve -1 / 0 / +1 nen dung ca hai chieu: `> 0` la dang o
+    che do TANG, `< 0` la dang o che do GIAM.
+    """
+    ra = []
+    for n in CHU_KY_NGAN:
+        rsi = {"chi_bao": "rsi", "n": n}
+        for bat, tat in ((55.0, 45.0), (60.0, 50.0)):
+            co = {"chi_bao": "trang_thai_lat",
+                  "len": {"trai": rsi, "phep": ">", "phai": {"hang": bat}},
+                  "xuong": {"trai": rsi, "phep": "<", "phai": {"hang": tat}}}
+            ra.append(_spec(
+                _ten("lat_rsi", n, bat, tat, "tang"), "xu_huong", 1,
+                [{"trai": co, "phep": ">", "phai": {"hang": 0}}],
+                "Che do doi theo doan chu khong theo bar, vi nguoi lon vao ra "
+                "trong nhieu phien; giu nguyen huong cho den khi co bang chung "
+                "nguoc thi khong bi dong lenh giua doan.",
+                giu_mac_dinh))
+            ra.append(_spec(
+                _ten("lat_rsi", n, bat, tat, "giam"), "xu_huong", -1,
+                [{"trai": co, "phep": "<", "phai": {"hang": 0}}],
+                "Chieu con lai cua cung mot co: da vao che do giam thi giu ban "
+                "cho den khi suc mua lay lai duoc nguong tren, thay vi dao "
+                "chieu o moi lan gia nhich len.",
+                giu_mac_dinh))
+    return ra
+
+
 #: THU TU LA THU TU UU TIEN. Khuon dung truoc duoc de truoc, nen mot han ngach
 #: nho luon la TAP CON DAU cua han ngach lon - xin 20 hom nay roi 100 ngay mai
 #: khong phai dang ky lai tu dau.
@@ -897,6 +937,7 @@ KHUON = (
     ("gia_khoi_luong", _khuon_gia_khoi_luong),
     ("lich_thang", _khuon_lich_thang),
     ("lich_phien", _khuon_lich),
+    ("che_do_lat", _khuon_che_do_lat),
 )
 
 
