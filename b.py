@@ -726,6 +726,42 @@ def c_github(a):
     return r.returncode
 
 
+def c_tho(a):
+    """THO CODE: giao mot don hang viet ma cho LLM re. `b tho <don_hang.json>`
+
+    Chia viec, va no den tu mot quan sat cu the chu khong tu so thich:
+
+        NGUOI / mo hinh manh   quyet dinh XAY GI, va viet BAI TEST (= dac ta)
+        LLM RE                 go phan cai dat cho den khi bai test xanh
+        CODE                   cham dat/khong - `pytest`, khong ai tu phan
+
+    Viet duoc bai test dung la phan kho. Dien cho no xanh la phan lap lai, va
+    do la phan dang tra tien cho mot mo hinh re.
+
+    `b tho don.json --thu` chay kho: in loi nhac se gui, khong goi LLM.
+    """
+    import json
+    from qwen import tho_code as TC
+    if not a:
+        print("dung: b tho <don_hang.json> [--thu]")
+        print("mau co san: don_hang_mau.json")
+        return
+    don = json.loads(Path(a[0]).read_text(encoding="utf-8-sig"))
+    don.setdefault("goc", str(LAB))
+    if "--thu" in a:
+        goc = Path(don["goc"])
+        print(TC._nhac(don, goc, "(chay kho - chua co loi that)")[:4000])
+        return
+    r = TC.lam(don)
+    print("%s  (%d vong)" % (r["trang_thai"], r["so_vong"]))
+    if r.get("ly_do"):
+        print(r["ly_do"][:1500])
+    if r["trang_thai"] == "CHUA_DO_DUOC":
+        print("\n^ CHUA_DO_DUOC khac KHONG_DAT: duong LLM hong hoac lenh cham")
+        print("  khong chay duoc, nen chua noi duoc gi ve viec mo hinh co sua")
+        print("  noi hay khong. Kiem `q kiem` truoc khi ket luan.")
+
+
 def _sau(co: str, a) -> str | None:
     """Gia tri dung sau mot co trong danh sach doi so, hoac None."""
     a = list(a or [])
@@ -1158,6 +1194,7 @@ LENH = {
     "ban-do": c_ban_do, "profile": c_profile,
     "kien-truc": c_kien_truc, "kt": c_kien_truc,
     "hepha": c_hepha, "hephaestus": c_hepha,
+    "tho": c_tho, "tho-code": c_tho,
     "github": c_github, "gh": c_github,
     "slot": c_slot,
     "ho-so": c_ho_so, "hs": c_ho_so,
