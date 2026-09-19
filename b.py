@@ -737,10 +737,12 @@ def c_hepha(a):
         b hepha bien-the  rai luoi tham so quanh co che DA CO trong kho
         b hepha ghep      ghep doi co che trong kho thanh he hai dieu kien
         b hepha tu-vung   huong tim kiem day nguoc ve SEEKER, uu tien cho TRONG
+        b hepha nap 200   de 200 co che roi NAP vao kho (chay KHO mac dinh)
+        b hepha nap 200 --that   ghi THAT vao kho
 
-    Khong lenh nao o day tu ghi vao kho: vao kho la viec cua
-    `ngu_phap.them_co_che`, va no can du lieu that de do ty le kich hoat. Lenh
-    nay chi DE RA va DANG KY.
+    `nap` chay KHO neu khong co `--that`. Kho co che la du lieu san xuat - no
+    da tung tut 2.975 xuong 21 co che trong mot buoi sang - nen mot lenh go
+    nham khong duoc phep sua no.
     """
     from nhan import hephaestus as HP
     viec = (a[0] if a else "do").lower()
@@ -757,6 +759,24 @@ def c_hepha(a):
     if viec in ("tu-vung", "tu_vung"):
         for h in HP.tu_vung(so_huong=so if so != 200 else 10):
             print("%-16s %s" % (h["chi_bao"], " · ".join(h["tu_khoa"])))
+        return
+
+    if viec == "nap":
+        that = "--that" in (a or [])
+        r = HP.nap(HP.duc(han_ngach=so), that=that)
+        print("%s: %d nhan · %d trung kho · %d tu choi"
+              % ("GHI THAT" if that else "chay KHO", r["nhan"], r["trung"],
+                 r["tu_choi"]))
+        print("plan_hash: %s   (FDR tinh %d suat)"
+              % (r["plan_hash"], r["so_phep_thu"]))
+        print("do ty le kich hoat: %s" % r["do_kich_hoat"])
+        if r["do_kich_hoat"] == "CHUA_DO_DUOC":
+            print("  ^ khong nap duoc chuoi kiem nao - con so 'nhan' o tren MOI")
+            print("    chi la qua cong CU PHAP, chua ai do ty le kich hoat ca.")
+        for k, v in sorted(r["ly_do"].items(), key=lambda x: -x[1])[:5]:
+            print("   %3dx %s" % (v, k))
+        if not that:
+            print("\nchua ghi gi. Them `--that` de ghi vao kho.")
         return
 
     if viec in ("bien-the", "bien_the", "ghep"):

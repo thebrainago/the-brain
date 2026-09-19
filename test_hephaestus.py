@@ -377,3 +377,82 @@ class GhepHAI_HE_DA_CO(unittest.TestCase):
     def test_cau_giai_thich_NOI_CA_HAI_ve(self):
         s = HP.ghep(GOC, GOC2)
         self.assertGreaterEqual(len(s["co_che"]), 25)
+
+
+class NapVaoKhoPhaiCHAY_KHO_MAC_DINH(unittest.TestCase):
+    """`nap()` noi may de voi kho that - va do la cho de gay hong nhat.
+
+    Ngay 19/09 chinh toi goi `them_co_che` mot lan de "xem thu no chay khong",
+    va no GHI THAT vao `config/co_che_dsl.json` ngay lap tuc. Kho la du lieu
+    san xuat; mot lenh go nham khong duoc phep sua no. Nen `nap` chay KHO
+    (`that=False`) o mac dinh, va chi ghi khi duoc bao ro.
+    """
+
+    def setUp(self):
+        self.ds = HP.duc(han_ngach=8)
+
+    def _kho_tam(self):
+        """Tra (thu muc tam, ham don dep) - tro kho sang cho khac, y nhu
+        `test_chan_hang_so.test_nap_vao_mau_tu_choi_spec_khong_qua_cong`."""
+        import json
+        import tempfile
+        from pathlib import Path
+        tm = tempfile.TemporaryDirectory()
+        f = Path(tm.name) / "co_che_dsl.json"
+        f.write_text(json.dumps([], ensure_ascii=False), encoding="utf-8")
+        cu = (NP.KHO_CO_CHE, NP.MOC_CAO)
+        NP.KHO_CO_CHE, NP.MOC_CAO = f, f.with_suffix(".moc_cao")
+
+        def don():
+            NP.KHO_CO_CHE, NP.MOC_CAO = cu
+            tm.cleanup()
+        return f, don
+
+    def test_MAC_DINH_khong_ghi_gi(self):
+        f, don = self._kho_tam()
+        try:
+            r = HP.nap(self.ds)
+            self.assertFalse(r["da_ghi"])
+            self.assertEqual(len(NP.doc_kho(cho_rong_khi_hong=True)), 0,
+                             "chay kho ma van ghi vao kho")
+        finally:
+            don()
+
+    def test_co_bao_RO_thi_moi_ghi(self):
+        f, don = self._kho_tam()
+        try:
+            r = HP.nap(self.ds, that=True)
+            self.assertTrue(r["da_ghi"])
+            self.assertGreater(len(NP.doc_kho(cho_rong_khi_hong=True)), 0)
+        finally:
+            don()
+
+    def test_LUON_tien_dang_ky_du_chi_chay_kho(self):
+        """Lo da sinh ra la da ton tai. Khong dang ky no thi lan sau chay lai
+        cung lo do se trong nhu mot lo moi, va FDR dem hai lan."""
+        f, don = self._kho_tam()
+        try:
+            r = HP.nap(self.ds)
+            self.assertIn("plan_hash", r)
+            self.assertEqual(r["so_phep_thu"], len(self.ds))
+        finally:
+            don()
+
+    def test_bao_ro_CHUA_DO_DUOC_khi_khong_co_du_lieu(self):
+        """Khong co chuoi kiem thi phep do ty le kich hoat KHONG chay duoc.
+        Bao "dat" luc do la noi doi: chua ai do gi ca."""
+        f, don = self._kho_tam()
+        try:
+            r = HP.nap(self.ds, df_kiem=None)
+            self.assertIn(r["do_kich_hoat"], ("DA_DO", "CHUA_DO_DUOC"))
+        finally:
+            don()
+
+    def test_khong_nap_lai_cai_kho_DA_CO(self):
+        f, don = self._kho_tam()
+        try:
+            HP.nap(self.ds, that=True)
+            r2 = HP.nap(self.ds, that=True)
+            self.assertEqual(r2["nhan"], 0, "nap lai cung lo ma van vao kho")
+        finally:
+            don()

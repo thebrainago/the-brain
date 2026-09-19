@@ -942,6 +942,69 @@ def ghep_lo(specs: list[dict], han_ngach: int = 200) -> list[dict]:
     return ra
 
 
+# ----------------------------------------------------- NOI VAO KHO CO CHE
+def nap(specs: list[dict], that: bool = False, df_kiem=None) -> dict:
+    """De ra roi NAP vao kho. CHAY KHO o mac dinh - phai bao ro moi ghi.
+
+    ## VI SAO MAC DINH LA CHAY KHO
+
+    Ngay 19/09/2026, de "xem thu no chay khong", toi goi `them_co_che` mot lan
+    tu dong lenh. No GHI THAT vao `config/co_che_dsl.json` ngay lap tuc - kho
+    san xuat, thu ma ca he doc. Khong co gi hoi lai, khong co gi canh bao.
+
+    Kho co che la du lieu san xuat va no da tung tut 2.975 -> 21 co che trong
+    mot buoi sang vi nhung chuyen nho hon the (xem `ngu_phap.doc_kho`). Mot
+    lenh go nham khong duoc phep sua no. Nen: `that=False` thi ham nay do het
+    moi thu va bao cao, nhung khong cham vao kho.
+
+    ## LUON TIEN DANG KY, KE CA KHI CHAY KHO
+
+    Lo da sinh ra la da ton tai. Neu khong dang ky no, lan sau chay lai dung lo
+    do se trong nhu mot lo MOI va FDR dem hai lan cho mot lan thu. `plan_hash`
+    tra ve o day chinh la `economic_plan_hash` ma `cong.lord_v2` doi.
+
+    ## `do_kich_hoat` PHAN BIET HAI THU KHAC NHAU
+
+    `DA_DO`        co chuoi kiem, ty le kich hoat da duoc do that.
+    `CHUA_DO_DUOC` khong nap duoc chuoi nao (vi du tren cloud, khong co `data/`)
+                   nen phep do do KHONG CHAY. Bao "dat" luc do la noi doi: chua
+                   ai do gi ca. Day la cung mot luat voi `CHUA_DO_DUOC` vs `AM`
+                   ma du an dung o moi cho khac.
+    """
+    lo = dang_ky_lo(specs)
+    kho = NP.doc_kho(cho_rong_khi_hong=True)
+    da_co = {NP.van_tay_dieu_kien(s) for s in kho}
+
+    co_chuoi = bool(NP._chuoi_do_them()) or df_kiem is not None
+    ra = {**lo, "da_ghi": bool(that), "nhan": 0, "trung": 0, "tu_choi": 0,
+          "ly_do": {}, "do_kich_hoat": "DA_DO" if co_chuoi else "CHUA_DO_DUOC"}
+
+    for s in specs:
+        if NP.van_tay_dieu_kien(s) in da_co:
+            ra["trung"] += 1
+            continue
+        if not that:
+            # Chay kho: kiem duoc gi thi kiem, nhung KHONG goi `them_co_che`
+            # vi ham do ghi. Phep do ty le kich hoat nam trong do, nen ban chay
+            # kho khong thay the duoc ban that - va `do_kich_hoat` noi ro dieu do.
+            loi = NP.kiem_khai_bao(s)
+            if loi:
+                ra["tu_choi"] += 1
+                ra["ly_do"][loi[0][:60]] = ra["ly_do"].get(loi[0][:60], 0) + 1
+            else:
+                ra["nhan"] += 1
+            continue
+        kq = NP.them_co_che(dict(s), df_kiem=df_kiem)
+        if kq.get("nhan"):
+            ra["nhan"] += 1
+            da_co.add(NP.van_tay_dieu_kien(s))
+        else:
+            ra["tu_choi"] += 1
+            for x in (kq.get("ly_do") or [])[:1]:
+                ra["ly_do"][str(x)[:60]] = ra["ly_do"].get(str(x)[:60], 0) + 1
+    return ra
+
+
 # ------------------------------------------- NUA HAI: DAY NGUOC VE SEEKER
 def _chi_bao_trong(t, ra: set) -> None:
     if isinstance(t, dict):
