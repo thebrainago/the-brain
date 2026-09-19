@@ -200,3 +200,38 @@ class TyLeLuiViet_BANG_HOAC_NHO_HON(unittest.TestCase):
     def test_nhan_ca_hai_cach_viet(self):
         src = MQL_CHOT_LUI.replace("profits<(peakwin*0.9)", "profits<=(peakwin*0.7)")
         self.assertEqual(QTT.boc_than(src)["nut_van"].get("_chot_lui_ty"), 0.7)
+
+
+class NoiVaoDUONG_CHAY_THAT(unittest.TestCase):
+    """`quan_tri.boc_mot` la buoc 1 cua `day_chuyen_quantlab` - duong chay that.
+
+    Viet mot module moi ma khong noi vao day thi no la module MO COI: theo luat
+    cua du an, module khong duoc goi tu mot cua vao that thi *bang khong co*.
+    """
+
+    def setUp(self):
+        from nhan import quan_tri as QT
+        self.QT = QT
+        self.s = QT.boc_mot(MQL_CHOT_LUI, ten="thu.mq5")
+
+    def test_boc_mot_thay_duoc_nut_tu_than_ham(self):
+        self.assertIsNotNone(self.s, "than ham co nut ma spec van None")
+        self.assertEqual(self.s["nut_van"].get("dung_lo"), 120.0)
+
+    def test_ghi_ro_nut_den_tu_than_ham(self):
+        """Phai truy duoc nguon cua tung con so, khong tron voi input tac gia."""
+        self.assertEqual(self.s["input_goc"].get("dung_lo"), "than_ham")
+
+    def test_INPUT_THANG_khi_ca_hai_cung_noi_mot_nut(self):
+        """Input la so nguoi chay THAT SU dat; hang so trong ma chi la mac dinh."""
+        src = MQL_CHOT_LUI.replace(
+            "input double InpLot = 1.0;",
+            "input double InpLot = 1.0;\ninput double MaxLossUSD = 500;")
+        s = self.QT.boc_mot(src, ten="thu.mq5")
+        self.assertEqual(s["nut_van"].get("dung_lo"), 500.0)
+        self.assertEqual(s["input_goc"].get("dung_lo"), "MaxLossUSD")
+
+    def test_QUA_DUOC_BUOC_LOC(self):
+        """Dich cuoi: `loc` doi >= 2 nut chay duoc. Truoc day khong file nao du."""
+        giu, _ = self.QT.loc([self.s], in_ra=lambda *a, **k: None)
+        self.assertEqual(len(giu), 1, "co che co du nut ma van bi loc bo")

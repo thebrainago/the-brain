@@ -46,6 +46,8 @@ from __future__ import annotations
 import json
 import re
 
+from nhan import quan_tri_than as QTT
+
 #: Ten input -> nut van cua `mo_phong_v2.mo_phong`. Khoa la regex tren TEN input
 #: (khong phan biet hoa thuong), gia tri la (ten_nut, he_so_quy_doi, ghi_chu).
 #: Ten input -> nut van cua `mo_phong_v2.mo_phong`.
@@ -188,6 +190,19 @@ def boc_mot(src: str, ten: str = "") -> dict | None:
     dh = dau_hieu_cua(src)
     ins = doc_input(src)
     nut = anh_xa(ins)
+    # THAN HAM, khong chi ten input. Rat nhieu EA viet nguong quan tri THANG
+    # trong ma: `if(peakwin>=45 && profits<(peakwin*0.9)) CloseAll();` khong co
+    # mot `input` nao mo ta, nen `anh_xa` mu hoan toan. Do 19/09 tren 10 file
+    # mau: theo ten input 5 nut / 0 file du 2 nut; them than ham thi 26 nut /
+    # 5 file du 2 nut. Xem `nhan/quan_tri_than.py` va `mau_thu/do_moc_quan_tri.py`.
+    #
+    # GIA TRI TU INPUT THANG khi ca hai cung noi ve mot nut: input la con so
+    # nguoi chay THAT SU dat duoc, con hang so trong ma chi la mac dinh cua tac
+    # gia. Nen than ham chi DIEN CHO TRONG, khong ghi de.
+    than = QTT.boc_than(src)
+    for k, v in than["nut_van"].items():
+        if k not in nut:
+            nut[k] = (v, "than_ham")
     if not nut:
         return None
     chay = {k for k in nut if k in NUT_CHAY_DUOC}
@@ -203,6 +218,10 @@ def boc_mot(src: str, ten: str = "") -> dict | None:
         "dau_hieu": dh, "so_input": len(ins),
         "nut_van": {k: v[0] for k, v in nut.items()},
         "input_goc": {k: v[1] for k, v in nut.items()},
+        # Doc duoc co che ma khong doc duoc so - phai theo spec ra ngoai, khong
+        # thi ban quet doc y het "EA nay khong co co che gi" (lan CHUA_DO_DUOC
+        # voi AM).
+        "thieu": than["thieu"],
     }
 
 

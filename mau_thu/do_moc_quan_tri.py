@@ -16,15 +16,20 @@ so luoi, chi bat/tat `tia_lenh` thi holdout di tu **+0,66%/nam len
 Tuc ho co che dang TRONG lai chinh la ho ra tien nhat da do duoc. Khong co bai
 do rieng thi khong biet no dang day len hay dung im.
 
-## HAI BO BOC, DO CANH NHAU
+## DO CAI GI
 
-  `quan_tri.boc_mot`      doc TEN INPUT cua tac gia
-  `quan_tri_than.boc_than` doc THAN HAM - ma that su chay
+Cot TRUOC  : chi anh xa TEN INPUT (`quan_tri.anh_xa`) - duong chay cu.
+Cot SAU    : `quan_tri.boc_mot`, tuc da gop them `quan_tri_than.boc_than`
+             doc THAN HAM. Day la duong chay THAT sau 19/09.
 
 Moc 19/09/2026 tren 10 file mau:
 
-    theo ten input : 5 file ra nut ·  5 nut · **0** file >= 2 nut
-    theo than ham  : 8 file ra nut · 26 nut · **5** file >= 2 nut
+    TRUOC : 10 file ra nut · 10 nut · **0** file >= 2 nut
+    SAU   :  6 file ra nut · 29 nut · **5** file >= 2 nut
+
+Cot "file ra nut" TUT XUONG la dung: `anh_xa` tra ve nut cho ca file khong co
+quan tri gi (mot `_risk_pct` le), con `boc_mot` co nguong hai dau hieu nen gat
+chung. Con so phai nhin la cot CUOI.
 
 Con so dang de y la cot cuoi. `quan_tri.loc` gat moi co che duoi 2 nut chay
 duoc, nen truoc bai nay ca bo mau ra **khong co che quan tri nao dung duoc** -
@@ -46,11 +51,12 @@ def do() -> dict:
     dong, thieu = [], {}
     for p in sorted(MAU.glob("*.mq5")):
         src = p.read_text(encoding="utf-8", errors="ignore")
+        # TRUOC: chi anh xa ten input, khong dung `boc_mot` - `boc_mot` nay da
+        # gop than ham vao roi, lay no lam moc cu thi do chinh no voi chinh no.
+        cu = sorted(QT.anh_xa(QT.doc_input(src)).keys())
         s = QT.boc_mot(src, ten=p.name)
-        cu = sorted((s or {}).get("nut_van", {}).keys())
-        r = QTT.boc_than(src)
-        moi = r["nut_van"]
-        for x in r["thieu"]:
+        moi = (s or {}).get("nut_van", {})
+        for x in QTT.boc_than(src)["thieu"]:
             thieu[x] = thieu.get(x, 0) + 1
         dong.append((p.name, cu, moi))
     return {"dong": dong, "thieu": thieu}
@@ -66,7 +72,7 @@ def _dem(ds, chi_chay_duoc=False):
 
 def main() -> int:
     r = do()
-    print("  %-40s %-14s %s" % ("file", "ten input", "than ham"))
+    print("  %-40s %-14s %s" % ("file", "TRUOC", "SAU (duong chay)"))
     for ten, cu, moi in r["dong"]:
         print("  %-40s %-14s %s" % (
             ten[:40], ",".join(cu) or "-",
@@ -75,7 +81,8 @@ def main() -> int:
     cu_ds = [x[1] for x in r["dong"]]
     moi_ds = [list(x[2]) for x in r["dong"]]
     print("\n  file mau : %d" % len(r["dong"]))
-    for nhan, ds in (("theo TEN INPUT", cu_ds), ("theo THAN HAM ", moi_ds)):
+    for nhan, ds in (("TRUOC (chi ten input)", cu_ds),
+                     ("SAU   (+ than ham)  ", moi_ds)):
         f, n, hai = _dem(ds)
         fc, nc, haic = _dem(ds, chi_chay_duoc=True)
         print("  %s : %d file ra nut · %d nut · %d file >= 2 nut"
