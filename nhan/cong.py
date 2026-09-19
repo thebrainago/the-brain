@@ -201,19 +201,34 @@ def rr_thuc_te(vi_the, loi) -> float:
     return float(_np.mean(thang) / abs(_np.mean(thua)))
 
 
-def kiem_ks(v_that: np.ndarray, v_gia: np.ndarray) -> float:
+def kiem_ks(v_that: np.ndarray, v_gia: np.ndarray) -> float | None:
     """KS-test: phan phoi khoang cach giua cac lan vao lenh cua null phai
-    KHONG phan biet duoc voi that. p thap = null sinh sai."""
+    KHONG phan biet duoc voi that. p thap = null sinh sai.
+
+    `None` = KHONG DO DUOC (qua it lan vao lenh, hoac phep kiem nem loi).
+
+    ## VI SAO KHONG DUOC TRA 1,0 NUA (sua 19/09/2026)
+
+    Ban cu tra 1,0 cho ca hai truong hop - "null giong that" va "khong do
+    duoc". Ben goi lam: `bs_hop_le = min(ks) > 0,01`. Nen mot phep kiem HONG
+    tra 1,0 se lam null BOOTSTRAP duoc NHAN la hop le, va cac p-value cua no o
+    lai trong ket luan: mot null co the sai hoan toan van duoc dung de phan xu
+    mot chien luoc.
+
+    Day la cong HIEU CHUAN NULL. Mot cong hieu chuan tu nhan minh "dat" khi no
+    khong chay duoc thi nguy hiem hon la khong co cong - vi no con phat ra mot
+    con so de nguoi ta tin.
+    """
     def khoang(v):
         k = np.flatnonzero(np.diff((np.abs(v) > 1e-12).astype(int)) == 1)
         return np.diff(k) if len(k) > 2 else np.array([1.0])
     a, b = khoang(v_that), khoang(v_gia)
     if len(a) < 5 or len(b) < 5:
-        return 1.0
+        return None
     try:
         return float(stats.ks_2samp(a, b).pvalue)
     except Exception:
-        return 1.0
+        return None
 
 
 def null_quay_vong(v: np.ndarray, rng: np.random.Generator) -> np.ndarray:
@@ -287,6 +302,7 @@ def placebo(df, kq_he, cp, n_boot: int | None = None, so_hat: int | None = None,
 
     # --- TANG 2: day du, hai null ----------------------------------------
     ps, ks, chi_tiet = [p1], [], {"quay_vong": [round(p1, 4)], "bootstrap": []}
+    ks_khong_do = 0
     for hat in range(1, max(so_hat // 2, 1) + 1):
         p, _ = _mot_hat(_qv, hat, n_boot)
         ps.append(p)
@@ -296,7 +312,11 @@ def placebo(df, kq_he, cp, n_boot: int | None = None, so_hat: int | None = None,
         ps.append(p)
         chi_tiet["bootstrap"].append(round(p, 4))
         if v_cuoi is not None:
-            ks.append(kiem_ks(v, v_cuoi))
+            _p_ks = kiem_ks(v, v_cuoi)
+            if _p_ks is None:
+                ks_khong_do += 1        # dem rieng, KHONG coi la "null dat"
+            else:
+                ks.append(_p_ks)
 
     # KS chi phan xu null BOOTSTRAP. Null quay vong dung theo cau tao, nen
     # bootstrap hong khong duoc phep giet ca phep kiem nua - chi bi loai bo.
@@ -311,6 +331,9 @@ def placebo(df, kq_he, cp, n_boot: int | None = None, so_hat: int | None = None,
         "do_dai_khoi": dk,
         "ks_p_min": round(float(min(ks)), 4) if ks else None,
         "bootstrap_hop_le": bs_hop_le if ks else None,
+        # So lan KS KHONG DO DUOC. Khac han so lan do duoc va truot: mot con
+        # so o day nghia la phep hieu chuan null da im lang o bay nhieu hat.
+        "ks_khong_do_duoc": ks_khong_do,
         "null_hop_le": True,          # luon co it nhat null quay vong hop le
         "n_bootstrap": n_boot, "so_hat": len(ps), "tang": 2,
     }

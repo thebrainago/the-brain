@@ -111,13 +111,20 @@ def cot_goc(f) -> list[str]:
             return []
 
 
-def so_dong_goc(f) -> int:
-    """So dong cua parquet, doc tu metadata."""
+def so_dong_goc(f) -> int | None:
+    """So dong cua parquet, doc tu metadata. `None` = KHONG DOC DUOC.
+
+    Ban cu tra 0 khi loi, va 0 doc y het mot file rong that. Ham nay nuoi
+    `ban["so_dong"]` va `uoc_so_nam` cua `kho()`, ma `kho()` CHON BAN THEO DO
+    PHU - nen mot parquet hong khong chi bi bo qua trong im lang: no co the
+    day mot ban tot xuong hang, hoac lam ca mot ma bien khoi danh sach chay
+    duoc, voi ly do "file nay 0 dong".
+    """
     try:
         import pyarrow.parquet as pq
         return int(pq.ParquetFile(f).metadata.num_rows)
     except Exception:
-        return 0
+        return None
 
 
 #: Bo nho dem cua `kho()` trong MOT tien trinh.
@@ -181,6 +188,8 @@ def kho(lam_moi: bool = False) -> dict[str, dict]:
                 break
         ma = ma.upper()
         cot = cot_goc(p)
+        # `None` = khong doc duoc metadata. Giu nguyen `None` vao ban do de
+        # ben doc phan biet duoc voi mot file rong THAT.
         so_dong = so_dong_goc(p)
         ban = {"ma": ma, "file": p, "khung_goc": khung_goc,
                "kich_thuoc": p.stat().st_size,
@@ -188,6 +197,7 @@ def kho(lam_moi: bool = False) -> dict[str, dict]:
                "du_ohlc": all(c in cot for c in ("open", "high", "low", "close")),
                "co_spread": "spread" in cot,
                "so_dong": so_dong,
+               "doc_duoc_so_dong": so_dong is not None,
                "uoc_so_nam": round(so_dong / BAR_MOI_NAM[khung_goc], 2)
                if khung_goc in BAR_MOI_NAM and so_dong else 0.0}
         ban_theo_ma.setdefault(ma, []).append(ban)
