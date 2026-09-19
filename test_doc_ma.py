@@ -293,3 +293,156 @@ class CongTacCauHinh(unittest.TestCase):
         cc = DM.doc_chien_luoc(CONG_TAC.replace("input(true)", "input(false)"),
                                tien_to="t")["co_che"]
         self.assertEqual(cc[0]["vao"][0]["phai"]["n"], 10)
+
+
+# ---------------------------------------------------------------------------
+# MQL5 KIEU C - nut that do duoc ngay 18/09/2026
+# ---------------------------------------------------------------------------
+# `mau_thu/do_moc.py` do duoc: 10 file .mq5 mau -> 22 diem vao lenh -> 0 co che.
+# Nguyen nhan khong phai ngu phap thieu toan hang, ma la bo doc KHONG NHIN THAY
+# cac bien: MQL5 khai bao co KIEU o dau dong (`bool x=...`, `double y=...`) nen
+# `_GAN_BOOL`/`_GAN` - von viet cho Pine (`x = ...`) - truot sach. Bien khong
+# vao bang thi `_no_dieu_kien` gap `downbreakout` la mot dinh danh tran, khong
+# truy nguoc duoc, va BO CA CO CHE.
+#
+# Bon lop trong mot: khai bao co kieu · toan tu `&&`/`||`/`!` · truong cua
+# MqlRates (`rates[0].close`) · `CopyBuffer` noi mot mang voi handle chi bao.
+
+MQL_KHAI_BAO_CO_KIEU = """
+input int InpMaChuKy = 50;
+int MaHandle = iMA(NULL,0,InpMaChuKy,0,MODE_SMA,PRICE_CLOSE);
+void OnTick()
+  {
+   double MaValues[];
+   MqlRates current[];
+   ArraySetAsSeries(MaValues,true);
+   ArraySetAsSeries(current,true);
+   CopyRates(_Symbol,_Period,0,3,current);
+   CopyBuffer(MaHandle,0,0,10,MaValues);
+   bool trenMa = current[0].close > MaValues[0];
+   double rsiv = iRSI(_Symbol,_Period,14,PRICE_CLOSE);
+   bool quaBan = rsiv < 30;
+   if(trenMa && quaBan)
+     {
+      CTrade trade;
+      trade.Buy(0.1,_Symbol);
+     }
+  }
+"""
+
+
+class KhaiBaoCoKieuCuaMQL5(unittest.TestCase):
+    """MQL5 khai bao bien co KIEU o dau dong. Khong bat thi ca chuoi dut."""
+
+    def setUp(self):
+        self.vb = DM._chuan_hoa(MQL_KHAI_BAO_CO_KIEU)
+
+    def test_bien_bool_co_kieu_vao_duoc_bang(self):
+        ten = {t[1] for t in DM._bang_bool(self.vb)}
+        self.assertIn("trenMa", ten, "`bool trenMa = ...` phai vao bang bool")
+        self.assertIn("quaBan", ten)
+
+    def test_bo_dau_cham_phay_cuoi_bieu_thuc(self):
+        """`x = a > b;` con dau `;` thi khong phep so sanh nao fullmatch duoc."""
+        for _, ten, bt in DM._bang_bool(self.vb):
+            self.assertFalse(bt.rstrip().endswith(";"),
+                             f"{ten} con dau ; -> moi regex so sanh deu truot")
+
+    def test_bien_chi_bao_co_kieu_vao_duoc_bang_ky_hieu(self):
+        """`double rsiv = iRSI(...)` - khai bao co kieu, van phai ra chi bao."""
+        bang = {t[1]: t[2] for t in DM._bang_ky_hieu(self.vb)}
+        self.assertIn("rsiv", bang)
+        self.assertEqual(bang["rsiv"].get("chi_bao"), "rsi")
+
+    def test_input_co_kieu_giai_duoc_chu_ky(self):
+        """`iMA(...,InpMaChuKy,...)` - chu ky nam trong mot input MQL5."""
+        bang = {t[1]: t[2] for t in DM._bang_ky_hieu(self.vb)}
+        self.assertIn("MaHandle", bang)
+        self.assertEqual(bang["MaHandle"].get("tham_so"), [50.0])
+
+
+class ToanTuBooleanKieuC(unittest.TestCase):
+    """`&&` `||` `!` - MQL5/Pine v6 dung chung, bo tach chi biet `and`/`or`."""
+
+    def test_tach_va_hieu_dau_va_kieu_c(self):
+        self.assertEqual(DM._tach_va("a > b && c < d"), ["a > b", "c < d"])
+
+    def test_tach_va_khong_cat_trong_ngoac(self):
+        self.assertEqual(DM._tach_va("(a && b) > c"), ["(a && b) > c"])
+
+    def test_hoac_kieu_c_van_bi_tu_choi(self):
+        """`||` khong dien dat duoc bang danh sach VA - phai bao ra, khong nuot."""
+        dk, ho = DM._no_dieu_kien("close > 10 || close < 5", 0, [], [])
+        self.assertEqual(dk, [], "gap `||` thi khong duoc tra ve dieu kien nao")
+        self.assertTrue(ho, "phai bao vao `chua_dien_dat_duoc`")
+
+    def test_phu_dinh_dao_phep_so_sanh(self):
+        """`!(rsi < 30)` la `rsi >= 30`. Bo qua dau `!` la doi han y nghia."""
+        vb = DM._chuan_hoa(
+            "double rsiv = iRSI(_Symbol,_Period,14,PRICE_CLOSE);\n"
+            "bool quaBan = rsiv < 30;\n")
+        bang_cb, bang_bl = DM._bang_ky_hieu(vb), DM._bang_bool(vb)
+        dk, ho = DM._no_dieu_kien("!quaBan", len(vb), bang_cb, bang_bl)
+        self.assertEqual(ho, [], "phu dinh mot so sanh don phai dich duoc")
+        self.assertEqual(len(dk), 1)
+        self.assertEqual(dk[0]["phep"], ">=", "`!(x < 30)` phai thanh `x >= 30`")
+
+
+class TruongCuaMqlRates(unittest.TestCase):
+    """`current[0].close` - dang viet gia pho bien nhat cua MQL5."""
+
+    def setUp(self):
+        self.vb = DM._chuan_hoa(MQL_KHAI_BAO_CO_KIEU)
+        self.bang = DM._bang_ky_hieu(self.vb)
+        self.bl = DM._bang_bool(self.vb)
+
+    def test_truong_gia_doc_duoc(self):
+        t = DM._toan_hang("current[0].close", len(self.vb), self.bang, self.bl)
+        self.assertEqual(t, {"chi_bao": "gia", "cot": "close"})
+
+    def test_giu_do_tre_cua_chi_so(self):
+        """`current[1].high` la nhin lui 1 bar - mat do tre la doi y nghia."""
+        t = DM._toan_hang("current[1].high", len(self.vb), self.bang, self.bl)
+        self.assertEqual(t, {"chi_bao": "tre",
+                             "cua": {"chi_bao": "gia", "cot": "high"}, "n": 1})
+
+    def test_khong_nhan_bua_truong_la(self):
+        """`Tradesinfo.initup` la co trang thai cua EA, khong phai gia."""
+        self.assertIsNone(
+            DM._toan_hang("Tradesinfo.initup", len(self.vb), self.bang, self.bl))
+
+
+class CopyBufferNoiMangVoiHandle(unittest.TestCase):
+    """`CopyBuffer(MaHandle,0,0,10,MaValues)` -> `MaValues[k]` la chi bao do."""
+
+    def setUp(self):
+        self.vb = DM._chuan_hoa(MQL_KHAI_BAO_CO_KIEU)
+        self.bang = DM._bang_ky_hieu(self.vb)
+        self.bl = DM._bang_bool(self.vb)
+
+    def test_mang_dem_thua_ke_chi_bao_cua_handle(self):
+        t = DM._toan_hang("MaValues[0]", len(self.vb), self.bang, self.bl)
+        self.assertIsNotNone(t, "`MaValues[0]` phai tro ve chinh iMA cua handle")
+        self.assertEqual(t.get("chi_bao"), "sma")
+        self.assertEqual(t.get("n"), 50)
+
+
+class MotEAMQL5DayDuRaDuocCoChe(unittest.TestCase):
+    """Bai kiem ca chuoi: tu `trade.Buy` nguoc ve hai dieu kien goc."""
+
+    def setUp(self):
+        self.d = DM.doc_chien_luoc(MQL_KHAI_BAO_CO_KIEU, nguon="thu")
+
+    def test_tim_thay_diem_vao_lenh(self):
+        self.assertEqual(self.d["so_vao_lenh"], 1)
+
+    def test_ra_duoc_co_che(self):
+        self.assertTrue(self.d["co_che"], self.d["chua_dien_dat_duoc"])
+
+    def test_giu_du_ca_hai_ve(self):
+        """Bo mot ve lam dieu kien LONG hon ban goc - do la noi doi."""
+        self.assertEqual(self.d["co_che"][0]["so_dieu_kien"], 2)
+
+    def test_khai_bao_qua_duoc_kiem_cu_phap(self):
+        for s in self.d["co_che"]:
+            self.assertEqual(NP.kiem_khai_bao(s), [], s["ten"])

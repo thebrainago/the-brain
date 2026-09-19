@@ -134,14 +134,33 @@ _THANG_GIA = {"gia", "ema", "sma", "cao_nhat", "thap_nhat", "atr", "do_lech",
 _TEN = r"[A-Za-z_][A-Za-z0-9_]*"
 _SO = r"[-+]?\d+(?:\.\d+)?"
 
+#: TU KHOA KIEU o dau mot khai bao bien C/MQL5: `bool up = ...`, `double ma =
+#: ...`, `input int Chu_ky = 14;`. Vi sao day la mot LOP loi chu khong phai mot
+#: cho: ca `_GAN_BOOL` lan `_GAN` cua `thu_hoi_thanh_phan` deu viet cho Pine,
+#: noi bien khong co kieu (`ma89 = ema(close,89)`). Gap MQL5 thi ca hai truot
+#: SACH, bang ky hieu rong, va moi bien trung gian thanh mot dinh danh tran ma
+#: `_no_dieu_kien` khong truy nguoc duoc. Do 18/09/2026 tren 10 file .mq5 mau:
+#: 22 diem vao lenh -> 0 co che, va day la nguyen nhan hang dau.
+_KIEU_C = (r"(?:(?:static|const|extern|input|sinput|virtual)[ \t]+)*"
+           r"(?:bool|char|uchar|short|ushort|int|uint|long|ulong|float|double"
+           r"|datetime|color|string)[ \t]+")
+
+#: TRUONG GIA cua `MqlRates` - dang viet gia pho bien nhat cua MQL5:
+#: `rates[0].close`. Chi nhan khi co CHI SO (`[k]`) va truong thuoc bang nay;
+#: `Tradesinfo.initup` (co trang thai cua EA, khong co chi so) van bi tu choi.
+_TRUONG_GIA = {"open": "open", "high": "high", "low": "low", "close": "close"}
+
+#: Mot ve cua phep so sanh: ten (co the co `[k]` va `.truong`), hoac so.
+_VE = rf"{_TEN}(?:\[\d+\])?(?:\.{_TEN})?|{_SO}"
+
 #: `ten = <loi goi chi bao>` - bat ca Pine (`ema(close,89)`, `ta.ema(...)`) lan
 #: MQL (`iMA(...)`, `iRSI(...)`).
 _GAN_CB = re.compile(
-    rf"^[ \t]*({_TEN})[ \t]*=[ \t]*((?:ta\.)?{_TEN}[ \t]*\([^\n]*)", re.M)
+    rf"^[ \t]*(?:{_KIEU_C})?({_TEN})[ \t]*=[ \t]*"
+    rf"((?:ta\.)?{_TEN}[ \t]*\([^\n]*)", re.M)
 
 #: So sanh hai ve. Chan `==` va `!=` (khong phai phep cua ngu phap) va chan `=>`.
-_SS = re.compile(
-    rf"({_TEN}(?:\[\d+\])?|{_SO})[ \t]*(>=|<=|>|<)[ \t]*({_TEN}(?:\[\d+\])?|{_SO})")
+_SS = re.compile(rf"({_VE})[ \t]*(>=|<=|>|<)[ \t]*({_VE})")
 
 #: `crossover(a, b)` / `crossunder(a, b)` cua Pine, va ban `ta.` cua v5.
 _CHEO = re.compile(rf"(?:ta\.)?(crossover|crossunder)[ \t]*\(([^,]+),([^)]+)\)")
@@ -335,6 +354,72 @@ def _chon_nhanh_cau_hinh(bt: str, vi_tri: int, bang_bt: list) -> str | None:
     return nhanh[0][1] if m.group(1).lower() == "true" else nhanh[1][1]
 
 
+#: `CopyRates(sym,tf,bat_dau,so_bar,mang)` va ho hang cua no. Nhom 4 la so bar
+#: duoc chep, nhom 5 la ten mang nhan.
+_CHEP = re.compile(
+    rf"\b(CopyRates|CopyHigh|CopyLow|CopyClose|CopyOpen|CopyBuffer)[ \t]*\("
+    rf"([^;]*?)\)")
+_AS_SERIES = re.compile(rf"\bArraySetAsSeries[ \t]*\([ \t]*({_TEN})[ \t]*,"
+                        rf"[ \t]*true[ \t]*\)", re.I)
+_COT_CHEP = {"CopyHigh": "high", "CopyLow": "low",
+             "CopyClose": "close", "CopyOpen": "open"}
+
+
+def _bang_mang(vb: str, bang_so: list) -> list[tuple[int, str, dict]]:
+    """Mang do `Copy*` do day -> mo ta du de doc `mang[k]` ve mot toan hang.
+
+    HAI THU PHAI CO CUNG LUC, thieu mot la sai:
+
+      1. **Mang nhan gi.** `CopyBuffer(MaHandle,...,MaValues)` lam `MaValues`
+         thanh chinh chi bao cua `MaHandle`; `CopyRates(...,current)` lam
+         `current[k].close` thanh gia dong cua. Day la cach MQL5 doc chi bao -
+         khong dich duoc thi mot EA MQL5 dien hinh khong ra duoc gi.
+      2. **CHIEU CUA CHI SO.** Mac dinh mang MQL5 KHONG phai chuoi thoi gian:
+         `mang[0]` la bar CU NHAT trong doan vua chep, khong phai bar hien tai.
+         Chi khi co `ArraySetAsSeries(mang,true)` thi `[0]` moi la bar moi nhat.
+         Doc nham chieu la doi han do tre - dung cai bay `Open[i+1]` cua du an,
+         va no IM LANG: bang so van ra, chi la ra cua mot co che khac.
+
+    Nen: khong biet chieu VA khong biet so bar thi tra `_so_bar=None` va
+    `_toan_hang` TU CHOI, thay vi doan mot do tre.
+    """
+    chuoi = {m.group(1) for m in _AS_SERIES.finditer(vb)}
+    ra = []
+    for m in _CHEP.finditer(vb):
+        ds = [x.strip() for x in m.group(2).split(",")]
+        if len(ds) < 5:
+            continue
+        ten = re.sub(r"\[\s*\]$", "", ds[4]).strip()
+        if not re.fullmatch(_TEN, ten):
+            continue
+        n = _giai_so(ds[3], m.start(), bang_so)
+        d = {"_mang": True, "_chuoi": ten in chuoi,
+             "_so_bar": int(n) if n is not None and n > 0 else None}
+        ham = m.group(1)
+        if ham == "CopyBuffer":
+            d["_goc"] = ds[0]                  # ten handle, giai sau
+        elif ham == "CopyRates":
+            d["_truong"] = True                # phai viet `mang[k].close`
+        else:
+            d["cot"] = _COT_CHEP[ham]
+        ra.append((m.start(), ten, d))
+    return ra
+
+
+def _giai_so(x: str, vi_tri: int, bang_so: list) -> float | None:
+    """So tho, hoac lan gan GAN NHAT TRUOC `vi_tri` cua mot bien so."""
+    x = x.strip()
+    if re.fullmatch(_SO, x):
+        return float(x)
+    gt = None
+    for pos, ten, v in bang_so:
+        if pos >= vi_tri:
+            break
+        if ten == x:
+            gt = v
+    return gt
+
+
 def _bang_ky_hieu(vb: str) -> list[tuple[int, str, dict]]:
     """(vi tri, ten bien, toan hang) cho moi bien duoc gan bang mot chi bao.
 
@@ -369,6 +454,20 @@ def _bang_ky_hieu(vb: str) -> list[tuple[int, str, dict]]:
         if m.group(1) not in da:
             ra.append((m.start(), m.group(1),
                        {"chi_bao": "gia", "cot": m.group(2), "_thang": 1}))
+    # MANG do `Copy*` do day. Dang ky o vi tri LOI GOI chu khong o cho khai bao
+    # mang: `_toan_hang_goc` lay lan gan gan nhat TRUOC cho dung, va mang chi
+    # co noi dung sau khi `Copy*` chay.
+    for pos, ten, d in _bang_mang(vb, bang_so):
+        if "_goc" in d:
+            # `CopyBuffer(MaHandle,...)` -> tra ve dung chi bao cua handle do.
+            goc = None
+            for p2, t2, v2 in ra:
+                if p2 < pos and t2 == d["_goc"]:
+                    goc = v2
+            if goc is None:
+                continue                       # khong biet handle la chi bao gi
+            d = dict(d, _goc=goc)
+        ra.append((pos, ten, d))
     ra.sort(key=lambda x: x[0])
     return ra
 
@@ -488,6 +587,56 @@ def _tuyen_tinh(bt: str, vi_tri: int, bang: list, bang_bt: list,
     return d
 
 
+#: `mang[k]` hoac `mang[k].truong` - hai dang doc mot mang MQL5.
+_O_MANG = re.compile(rf"^({_TEN})\[(\d+)\](?:\.({_TEN}))?$")
+
+
+def _tu_mang(tu: str, vi_tri: int, bang: list) -> dict | None:
+    """`MaValues[0]` / `current[1].close` -> toan hang. `{}` = co nhan, phai bo.
+
+    Tra ba thu khac nhau, va phan biet chung la quan trong:
+      `None` - khong phai o cua mot mang da biet, de duong khac doc tiep.
+      `{}`   - DUNG la mang do `Copy*` do, nhung khong suy duoc do tre (khong
+               `ArraySetAsSeries` va so bar khong phai hang so). Tu choi han
+               chu khong doan: doan sai chieu la doi co che ma khong bao loi.
+      dict   - toan hang that.
+    """
+    m = _O_MANG.match(tu.strip())
+    if not m:
+        return None
+    ten, k, truong = m.group(1), int(m.group(2)), m.group(3)
+    d = None
+    for pos, t, v in bang:
+        if pos >= vi_tri:
+            break
+        if t == ten and v.get("_mang"):
+            d = v
+    if d is None:
+        return None
+    # CHIEU CUA CHI SO - xem `_bang_mang`.
+    if d["_chuoi"]:
+        tre = k
+    elif d["_so_bar"] is not None:
+        tre = d["_so_bar"] - 1 - k             # [0] la bar CU NHAT cua doan chep
+    else:
+        return {}
+    if tre < 0:
+        return {}
+    if d.get("_truong"):                       # MqlRates: bat buoc co truong
+        if truong is None or truong.lower() not in _TRUONG_GIA:
+            return {}
+        goc = {"chi_bao": "gia", "cot": _TRUONG_GIA[truong.lower()]}
+    elif truong is not None:
+        return {}                              # mang so ma lai doc truong
+    elif "cot" in d:
+        goc = {"chi_bao": "gia", "cot": d["cot"]}
+    else:
+        goc = _tu_thanh_phan(d["_goc"])
+        if goc is None:
+            return {}
+    return goc if tre == 0 else {"chi_bao": "tre", "cua": goc, "n": tre}
+
+
 def _toan_hang(tu: str, vi_tri: int, bang: list,
                bang_bt: list | None = None, sau: int = 0) -> dict | None:
     """Mot ve cua phep so sanh -> toan hang ngu phap, hoac None neu khong dich duoc."""
@@ -497,6 +646,13 @@ def _toan_hang(tu: str, vi_tri: int, bang: list,
     # gio dung, vi `highest` gom ca nen hien tai - cong bao "kich hoat 0,000%".
     # Ma pha vo that luon viet `highest(high,34)[1]`. Cung ho loi voi quy tac
     # `Open[i+1]` cua du an: mat do tre la doi hoan toan y nghia.
+    # MANG MQL5 (`MaValues[0]`, `current[0].close`) - phai xet TRUOC hau to
+    # `[k]` chung, vi chieu chi so cua mang MQL5 phu thuoc ArraySetAsSeries chu
+    # khong mac nhien la nhin lui k bar.
+    t_mang = _tu_mang(tu, vi_tri, bang)
+    if t_mang is not None:
+        return t_mang if t_mang != {} else None
+
     tre = 0
     m_tre = re.search(r"\[(\d+)\]$", tu)
     if m_tre:
@@ -768,17 +924,67 @@ _LA_KIEM_LOI = re.compile(
     r"|IsStopped|!\s*\w+\.(Buy|Sell)")
 
 #: Gan mot bien BOOL: `ten = <bieu thuc co so sanh hoac ket noi>`.
-_GAN_BOOL = re.compile(rf"^[ \t]*({_TEN})[ \t]*=[ \t]*([^\n]+)$", re.M)
+_GAN_BOOL = re.compile(
+    rf"^[ \t]*(?:{_KIEU_C})?({_TEN})[ \t]*=[ \t]*([^\n]+)$", re.M)
+
+#: Khai bao NHIEU bien tren mot dong: `double price=0, sl=0, tp=0;`. Phai cat o
+#: dau phay MUC NGOAI CUNG, khong thi `price` mang bieu thuc `0, sl=0, tp=0`.
+_KHAI_TIEP = re.compile(rf",[ \t]*({_TEN})[ \t]*=[ \t]*")
+
+
+def _cat_khai_bao(bt: str) -> list[tuple[str, str]]:
+    """`0, sl=0, tp=price+5;` -> [("", "0"), ("sl","0"), ("tp","price+5")].
+
+    Tra ve hang tu DAU voi ten rong (no thuoc bien da bat o ngoai), roi tung
+    khai bao tiep theo. Cat o MUC NGOAI CUNG: `MathMax(a, b)` co dau phay ben
+    trong ngoac va cat o do la lam hong bieu thuc.
+    """
+    bt = bt.strip().rstrip(";").strip()
+    ra, sau, ten, muc = [], 0, "", 0
+    i = 0
+    while i < len(bt):
+        c = bt[i]
+        if c in "([":
+            muc += 1
+        elif c in ")]":
+            muc -= 1
+        elif c == "," and muc == 0:
+            m = _KHAI_TIEP.match(bt, i)
+            if m:
+                ra.append((ten, bt[sau:i].strip()))
+                ten, sau = m.group(1), m.end()
+                i = m.end()
+                continue
+        i += 1
+    ra.append((ten, bt[sau:].strip()))
+    return [(t, b) for t, b in ra if b]
 
 
 def _bang_bool(vb: str) -> list[tuple[int, str, str]]:
-    """(vi tri, ten, bieu thuc) cho moi bien duoc gan mot bieu thuc."""
-    return [(m.start(), m.group(1), m.group(2).strip())
-            for m in _GAN_BOOL.finditer(vb)]
+    """(vi tri, ten, bieu thuc) cho moi bien duoc gan mot bieu thuc.
+
+    Hai khau de mat ma deu do MQL5 viet kieu C:
+
+      1. **Dau `;` cuoi dong.** `_no_dieu_kien` doi phep so sanh `fullmatch` ca
+         ve; con mot dau `;` thi `a > b;` khong bao gio khop, va ca co che roi
+         vao `chua_dien_dat_duoc` voi ly do nhin nhu mot bieu thuc hop le.
+      2. **Nhieu bien mot dong.** `double price=0, sl=0, tp=0;` - khong cat thi
+         `price` mang bieu thuc `0, sl=0, tp=0` con `sl`/`tp` bien mat.
+    """
+    ra = []
+    for m in _GAN_BOOL.finditer(vb):
+        for k, (ten, bt) in enumerate(_cat_khai_bao(m.group(2))):
+            ra.append((m.start(), ten or m.group(1), bt))
+    return ra
 
 
 def _tach_va(bt: str) -> list[str]:
-    """Tach mot bieu thuc theo `and` o MUC NGOAI CUNG."""
+    """Tach mot bieu thuc theo `and` HOAC `&&` o MUC NGOAI CUNG.
+
+    `&&` phai ngang hang voi `and`: MQL5 va Pine v6 deu viet kieu C. Chi biet
+    `and` thi `upbreakout && current[0].close < MaValues[0]` di nguyen khoi vao
+    `_SS`, khong fullmatch duoc phep so sanh nao, va ca co che bi bo.
+    """
     ra, sau, muc = [], 0, 0
     i = 0
     while i < len(bt):
@@ -787,6 +993,10 @@ def _tach_va(bt: str) -> list[str]:
             muc += 1
         elif c in ")]":
             muc -= 1
+        elif muc == 0 and bt.startswith("&&", i):
+            ra.append(bt[sau:i])
+            sau = i + 2
+            i += 1
         elif muc == 0 and bt.startswith("and", i) and \
                 (i == 0 or not bt[i - 1].isalnum()) and \
                 (i + 3 >= len(bt) or not bt[i + 3].isalnum()):
@@ -796,6 +1006,12 @@ def _tach_va(bt: str) -> list[str]:
         i += 1
     ra.append(bt[sau:])
     return [_boc_ngoac(x.strip()) for x in ra if x.strip()]
+
+
+#: Dao chieu mot phep so sanh, de dich `!(a < b)`. `cheo_len`/`cheo_xuong`
+#: KHONG co trong bang: phu dinh mot phep cat KHONG phai phep cat nguoc lai
+#: (`!crossover` dung ca luc hai duong khong cat nhau), nen gap thi tu choi.
+_DAO_PHEP = {">": "<=", ">=": "<", "<": ">=", "<=": ">"}
 
 
 def _boc_ngoac(s: str) -> str:
@@ -832,8 +1048,22 @@ def _no_dieu_kien(bt: str, vi_tri: int, bang_cb: list, bang_bl: list,
         return [], [bt[:60]]
     dk, ho = [], []
     for ve in _tach_va(bt):
-        if " or " in f" {ve} ":
+        ve = ve.strip().rstrip(";").strip()
+        if not ve:
+            continue
+        if " or " in f" {ve} " or "||" in ve:
             ho.append(ve[:60])          # `or` khong dien dat duoc bang danh sach VA
+            continue
+        # PHU DINH. Bo dau `!` rui doc tiep la doi han y nghia, nen phai dao
+        # phep so sanh. Chi lam khi ve trong no ra DUNG MOT dieu kien: `!(a &&
+        # b)` la `!a || !b` - mot phep HOAC, khong xep duoc vao danh sach VA.
+        if ve.startswith("!") and not ve.startswith("!="):
+            d2, h2 = _no_dieu_kien(_boc_ngoac(ve[1:].strip()), vi_tri,
+                                   bang_cb, bang_bl, sau + 1)
+            if not h2 and len(d2) == 1 and d2[0]["phep"] in _DAO_PHEP:
+                dk.append(dict(d2[0], phep=_DAO_PHEP[d2[0]["phep"]]))
+            else:
+                ho.append(ve[:60])
             continue
         m = _SS.fullmatch(ve) or _SS.search(ve)
         if m and m.group(0).strip() == ve:
