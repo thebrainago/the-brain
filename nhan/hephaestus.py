@@ -1327,3 +1327,462 @@ def tu_vung(kho: list[dict] | None = None, so_huong: int = 10) -> list[dict]:
         if len(ra) >= so_huong:
             break
     return ra
+
+
+# =========================================================================
+# NUA BA: DE CAU HINH QUAN TRI LENH
+# =========================================================================
+# Hai nua tren de ra TIN HIEU VAO. Bang chung cua chinh du an noi do la nua IT
+# GIA TRI HON:
+#
+#   * 18/09 tren AUDCAD: cung mot bo tham so luoi, chi bat/tat `tia_lenh` thi
+#     holdout di tu +0,66%/nam len +13,26%/nam, sut giam tu -15,6% xuong -3,5%.
+#     Tia lenh la TOAN BO khac biet.
+#   * Cung phien do, 668 co che ENTRY qua MT5 tester that: **0** co che vua du
+#     2 lenh/tuan vua Sharpe duong.
+#   * `quan_tri.py`: *"entry co tinh SAI van cho 92-97%/nam"* voi lop luoi.
+#
+# Nen phan nay de ra CAU HINH cho `mo_phong_v2.mo_phong` - mot ho co che khong
+# can tin hieu vao nao ca.
+
+#: Buoc luoi (pip) - thua so 2 giua cac muc de luoi phu rong ma it o.
+BUOC_LUOI = (15.0, 30.0, 60.0, 120.0)
+#: TP tinh tu gia trung binh cua ro (pip).
+TP_LUOI = (20.0, 40.0, 80.0)
+
+
+def _cf(ten, khuon, nut, luan) -> dict:
+    return {"ten": NP.chuan_hoa_ten("qt_" + ten), "khuon": khuon,
+            "nut": dict(nut), "co_che": luan}
+
+
+def van_tay_quan_tri(cf: dict) -> str:
+    """Van tay theo NUT VAN, bo qua ten - hai cau hinh cung nut la mot."""
+    return json.dumps(cf.get("nut") or {}, sort_keys=True, default=str)
+
+
+def _qt_tran(_):
+    """Luoi tran: chi buoc va TP. Luan diem: gia di qua mot muc nhieu lan hon
+    so lan no di qua muc do MOT lan, nen ai dat lenh hai chieu quanh mot vung
+    se duoc tra cho viec om chenh lech tam thoi."""
+    ra = []
+    for b in BUOC_LUOI:
+        for tp in TP_LUOI:
+            ra.append(_cf("tran_b%g_tp%g" % (b, tp), "luoi_tran",
+                          {"buoc": b, "tp": tp},
+                          "Gia di qua mot vung nhieu lan hon so lan no roi han "
+                          "khoi do; ai om chenh lech tam thoi duoc tra cho viec "
+                          "do, va tien do la phi thanh khoan."))
+    return ra
+
+
+def _qt_cat_hoa(_):
+    """+ CAT HOA. Luan diem: ghep lenh moi nhat voi cu nhat rui dong ca cap
+    hien thuc hoa phan hoi ve ma khong phai cho ca ro ve diem hoa von - tuc
+    lay tien ve som hon nhieu, va giam dung cai chan lon nhat cua ro."""
+    ra = []
+    for b in (30.0, 60.0):
+        for tu in (2, 3, 4):
+            for bien in (0.0, 4.0):
+                ra.append(_cf("cathoa_b%g_n%d_c%g" % (b, tu, bien),
+                              "luoi_cat_hoa",
+                              {"buoc": b, "tp": 60.0, "cat_hoa_tu": tu,
+                               "bien_cap": bien},
+                              "Ghep lenh moi nhat voi cu nhat roi dong ca cap "
+                              "hien thuc hoa phan hoi ve ma khong phai cho ca "
+                              "ro ve hoa von - tien ve som hon nhieu."))
+    return ra
+
+
+def _qt_tia(_):
+    """+ TIA MOT PHAN. Luan diem: cat bot khi lai da co thi phan con lai chay
+    bang von da thu hoi, tuc rui ro con lai la rui ro cua tien lai.
+
+    CAT HOA PHAI TAT. Do 19/09: voi `cat_hoa_tu=2` (mac dinh) thi `tia` kich
+    hoat 0 lan tren 60.000 bar - cat hoa dong cac cap truoc khi lai ca ro kip
+    cham nguong. De ra mot cau hinh "co tia" ma de cat hoa bat la de ra mot
+    cau hinh KHONG tia, va bang so se bao "tia vo dung".
+    """
+    ra = []
+    for b in (30.0, 60.0):
+        for tu in (2.0, 5.0):
+            for ty in (0.3, 0.5):
+                ra.append(_cf("tia_b%g_t%g_ty%g" % (b, tu, ty), "luoi_tia",
+                              {"buoc": b, "tp": 60.0, "cat_hoa_tu": 999,
+                               "tia_tu": tu, "tia_ty": ty},
+                              "Cat bot khi lai da co thi phan con lai chay bang "
+                              "von da thu hoi - rui ro con lai la rui ro cua "
+                              "tien lai, khong phai cua von goc."))
+    return ra
+
+
+def _qt_chot_lui(_):
+    """+ NHA LAI MOT PHAN DINH LAI. Luan diem: mot ro dang lai la mot ro da
+    dung; giu no mo them chi de an not phan duoi cua bien dong la doi mot rui
+    ro lon lay mot phan thuong nho."""
+    ra = []
+    for b in (30.0, 60.0):
+        for tu in (2.0, 5.0, 10.0):
+            for ty in (0.7, 0.85):
+                ra.append(_cf("chotlui_b%g_t%g_ty%g" % (b, tu, ty),
+                              "luoi_chot_lui",
+                              {"buoc": b, "tp": 120.0, "chot_lui_tu": tu,
+                               "chot_lui_ty": ty},
+                              "Mot ro dang lai la mot ro da dung; giu no mo "
+                              "them de an not phan duoi cua bien dong la doi "
+                              "rui ro lon lay phan thuong nho."))
+    return ra
+
+
+def _qt_hedge(_):
+    """+ KHOA LO. Luan diem: khi ro da ket, cai giet tai khoan khong phai huong
+    gia ma la TOC DO no di tiep. Mot vi the nguoc dong bang lo do lai, doi lay
+    thoi gian de ro chinh cho gia hoi."""
+    ra = []
+    for b in (30.0, 60.0):
+        for tu in (4, 6, 8):
+            for ty in (0.5, 1.0):
+                ra.append(_cf("hedge_b%g_n%d_ty%g" % (b, tu, ty), "luoi_hedge",
+                              {"buoc": b, "tp": 60.0, "hedge_tu": tu,
+                               "hedge_ty": ty, "hedge_go": 10.0},
+                              "Khi ro da ket, cai giet tai khoan khong phai "
+                              "huong gia ma la toc do no di tiep; mot vi the "
+                              "nguoc mua lai thoi gian cho ro chinh."))
+    return ra
+
+
+def _qt_thoat_gio(_):
+    """+ DONG RO THEO THOI GIAN. Luan diem: mot ro ket ba ngay tren cap neo ve
+    trung binh khong phai tin hieu can them tang - la tin hieu CHE DO da doi,
+    va gia dinh neo ve trung binh khong con hieu luc."""
+    ra = []
+    for b in (30.0, 60.0):
+        for bar in (48, 120, 240):
+            ra.append(_cf("thoatgio_b%g_%dbar" % (b, bar), "luoi_thoat_gio",
+                          {"buoc": b, "tp": 60.0, "thoat_sau_bar": bar},
+                          "Mot ro ket nhieu ngay tren cap neo ve trung binh la "
+                          "tin hieu che do da doi, khong phai tin hieu can nap "
+                          "them tang - gia dinh ban dau het hieu luc."))
+    return ra
+
+
+def _qt_chan_von(_):
+    """+ TRAN TANG va DUNG LO. Luan diem: luoi khong chet vi sai huong, no
+    chet vi HET VON truoc khi gia hoi. Tran tang la thu duy nhat chan duoi."""
+    ra = []
+    for b in (30.0, 60.0):
+        for tran in (5, 8, 12):
+            ra.append(_cf("chanvon_b%g_tran%d" % (b, tran), "luoi_chan_von",
+                          {"buoc": b, "tp": 60.0, "tang_toi_da": tran},
+                          "Luoi khong chet vi sai huong, no chet vi het von "
+                          "truoc khi gia hoi; tran tang la thu duy nhat chan "
+                          "duoi mot cach chac chan."))
+    return ra
+
+
+def _qt_trailing(_):
+    """+ TRAILING tren gia trung binh cua ro."""
+    ra = []
+    for b in (30.0, 60.0):
+        for tu in (20.0, 40.0):
+            for buoc_t in (10.0, 20.0):
+                ra.append(_cf("trail_b%g_t%g_s%g" % (b, tu, buoc_t),
+                              "luoi_trailing",
+                              {"buoc": b, "tp": 200.0, "trailing_tu": tu,
+                               "trailing_buoc": buoc_t},
+                              "Keo moc dong theo gia tot nhat ro da cham: doi "
+                              "mot phan lai da co lay kha nang an het mot cu "
+                              "dich dai, thay vi chot cung o mot muc."))
+    return ra
+
+
+def _qt_bat_doi_xung(_):
+    """+ LUOI BAT DOI XUNG theo EMA. Luan diem: phi qua dem khong doi xung -
+    tren AUDCAD giu MUA duoc tra -0,263%/nam con giu BAN mat +3,853%/nam. Mot
+    cai luoi doi xung hoan hao dang tra tien cho mot ben ma khong biet."""
+    ra = []
+    for b in (30.0, 60.0):
+        for n in (50, 200):
+            for nguoc in (False, True):
+                ra.append(_cf("lech_b%g_ema%d%s" % (b, n, "_nguoc" if nguoc else ""),
+                              "luoi_bat_doi_xung",
+                              {"buoc": b, "tp": 60.0, "lech_ema": n,
+                               "entry_nguoc": nguoc},
+                              "Phi qua dem khong doi xung giua hai chieu, nen "
+                              "mot cai luoi doi xung hoan hao dang tra tien cho "
+                              "mot ben ma khong biet minh dang tra."))
+    return ra
+
+
+#: THU TU LA THU TU UU TIEN - xem `duc`. Ho `tia` va `chot_lui` xep ngay sau
+#: luoi tran vi chung la hai ho DA CHUNG MINH GIA TRI BANG SO tren AUDCAD.
+KHUON_QT = (
+    ("luoi_tran", _qt_tran),
+    ("luoi_tia", _qt_tia),
+    ("luoi_chot_lui", _qt_chot_lui),
+    ("luoi_cat_hoa", _qt_cat_hoa),
+    ("luoi_chan_von", _qt_chan_von),
+    ("luoi_hedge", _qt_hedge),
+    ("luoi_thoat_gio", _qt_thoat_gio),
+    ("luoi_trailing", _qt_trailing),
+    ("luoi_bat_doi_xung", _qt_bat_doi_xung),
+)
+
+
+def duc_quan_tri(han_ngach: int = 200, khuon: str | None = None) -> list[dict]:
+    """DE CAU HINH QUAN TRI LENH. Xac dinh, khong trung, khong RNG."""
+    ra, thay = [], set()
+    for ten_khuon, ham in KHUON_QT:
+        if khuon and ten_khuon != khuon:
+            continue
+        for cf in ham(None):
+            if len(ra) >= han_ngach:
+                return ra
+            vt = van_tay_quan_tri(cf)
+            if vt in thay:
+                continue
+            thay.add(vt)
+            ra.append(cf)
+    return ra
+
+
+def kiem_phan_giai(cf: dict, df) -> dict:
+    """Chuoi bar co DU MIN de mo phong cau hinh nay khong? BA trang thai.
+
+    Day la luat `pmg_engine.NGUONG_PHAN_GIAI`, ap cho luoi tinh bang PIP thay
+    vi bang ATR. Buoc luoi phai rong >= 2 lan BIEN DO MOT NEN, khong thi ca cai
+    luoi nam gon trong mot nen va ket qua la tao tac cua gia dinh duong di
+    trong bar chu khong phai cua thi truong. Do 14/09 tren random walk khong
+    chi phi: buoc/bien_do = 0,54 cho ra **+720%** trong khi dap an la ~0.
+
+    Tra `CHUA_DO_DUOC`, **khong bao gio** tra `AM`: ham nay noi ve DO MIN cua
+    du lieu, khong noi ve co che.
+    """
+    import numpy as _np
+    hi = _np.asarray(df["high"], float)
+    lo = _np.asarray(df["low"], float)
+    bien_do = float(_np.median(hi - lo)) / PIP_QT
+    nut = cf.get("nut") or {}
+    buoc = float(nut.get("buoc", 0.0) or 0.0)
+    tp = float(nut.get("tp", 0.0) or 0.0)
+    if not _np.isfinite(bien_do) or bien_do <= 0:
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "bien do bar khong hop le", "buoc_tren_bien_do": 0.0}
+    ty_buoc, ty_tp = buoc / bien_do, tp / bien_do
+    thieu = []
+    # MOI NUT LA MOT KHOANG CACH GIA deu phai qua nguong, khong chi `buoc` va
+    # `tp`. Do 19/09/2026: ban dau ham nay chi kiem hai nut do, va cac cau hinh
+    # `trailing` di lot het - `trailing_buoc = 10 pip` tren chuoi co bien do nen
+    # 14,4 pip cho ra **12.805%/nam tren random walk** voi sut giam 4,67. Do la
+    # dung chu ky cua loi "AUDCAD 6.557%/nam voi von 41 USD".
+    #
+    # Va lai chay theo dung mot duong don dieu voi do min: trailing_buoc
+    # 5 -> +1.267/nam · 10 -> +1.197 · 20 -> +820 · 30 -> +519 · 60 -> +34 ·
+    # 120 (8,3x nen) -> **-12**, tuc dap an dung (= -chi phi) chi hien ra khi
+    # buoc trailing rong hon nen may lan. Khong phai mot cau hinh tot o do phan
+    # giai cao; la mot phep do khong hop le.
+    for k, nhan in (("trailing_buoc", "buoc trailing"),
+                    ("trailing_tu", "nguong bat trailing"),
+                    ("breakeven_tu", "nguong hoa von"),
+                    ("kc_bs", "khoang cach buy-sell"),
+                    ("cho_lui", "do lui lenh cho"),
+                    ("hedge_go", "nguong go khoa"),
+                    ("tp_nhanh", "tp nhanh"),
+                    ("bien_cap", "bien cap cat hoa")):
+        v = nut.get(k)
+        if v is None or float(v) <= 0.0:
+            continue                    # khong dat = khong dung, khong phai loi
+        ty = float(v) / bien_do
+        if ty < NGUONG_PHAN_GIAI_QT:
+            thieu.append("%s %.2fx bien do nen (can >= %g)"
+                         % (nhan, ty, NGUONG_PHAN_GIAI_QT))
+    if ty_buoc < NGUONG_PHAN_GIAI_QT:
+        thieu.append("buoc luoi %.2fx bien do nen (can >= %g)"
+                     % (ty_buoc, NGUONG_PHAN_GIAI_QT))
+    if ty_tp < NGUONG_PHAN_GIAI_QT:
+        thieu.append("tp %.2fx bien do nen (can >= %g)"
+                     % (ty_tp, NGUONG_PHAN_GIAI_QT))
+    return {"trang_thai": "DU" if not thieu else "CHUA_DO_DUOC",
+            "ly_do": "; ".join(thieu), "bien_do_nen_pip": bien_do,
+            "buoc_tren_bien_do": ty_buoc, "tp_tren_bien_do": ty_tp}
+
+
+#: Nut do bang TIEN, khong bang pip: `chot_lui_tu`, `tia_tu`, `dung_lo`,
+#: `chot_tien`. Quy chung ve khoang cach gia can biet LOT cua ro tai thoi diem
+#: do, ma lot thi doi theo so tang - nen khong co mot con so kiem duoc truoc
+#: khi chay. Chung KHONG duoc kiem o day, va do la mot lo hong da biet:
+#: `chot_lui_ty = 0,9` tren mot ro lai mong van la mot khoang cach duoi nen.
+#: Cach chan that la do LAI DINH quy ra pip trong chinh vong mo phong.
+NUT_THEO_TIEN = ("chot_lui_tu", "tia_tu", "dung_lo", "chot_tien")
+
+
+#: Cung nguong voi `pmg_engine.NGUONG_PHAN_GIAI` - mot con so, mot cho.
+NGUONG_PHAN_GIAI_QT = 2.0
+PIP_QT = 1e-4
+
+
+def chay_lo(cfs: list[dict], df, so_nam: float | None = None) -> dict:
+    """Chay ca lo qua `mo_phong_v2` roi cham diem bang `cham_diem`.
+
+    Cau hinh khong du PHAN GIAI bi cham `CHUA_DO_DUOC` va **khong duoc chay**:
+    chay roi bao AM mot cau hinh ma bar khong do noi la bia ra mot ket luan.
+    """
+    import numpy as _np
+
+    import mo_phong_v2 as MP
+    from nhan import cham_diem as CD
+
+    n = len(df)
+    nam = float(so_nam if so_nam is not None else n / (24.0 * 252.0))
+    hi = _np.asarray(df["high"], float)
+    lo_ = _np.asarray(df["low"], float)
+    d = {"hi": hi, "lo": lo_, "c": _np.asarray(df["close"], float),
+         "sp": _np.full(n, 1.0), "thu": _np.ones(n, dtype=int),
+         "n": n, "pv": 0.0714, "nam": nam}
+
+    dong = []
+    for cf in cfs:
+        pg = kiem_phan_giai(cf, df)
+        if pg["trang_thai"] != "DU":
+            dong.append({"ten": cf["ten"], "khuon": cf.get("khuon", ""),
+                         "phan_giai": pg,
+                         "diem": {"muc": "CHUA_DO_DUOC", "ly_do": [pg["ly_do"]],
+                                  "lai_pct_nam": None}})
+            continue
+        try:
+            r = MP.mo_phong(d, **cf["nut"])
+        except Exception as e:
+            dong.append({"ten": cf["ten"], "khuon": cf.get("khuon", ""),
+                         "phan_giai": pg,
+                         "diem": {"muc": "CHUA_DO_DUOC",
+                                  "ly_do": ["chay loi: %s" % type(e).__name__],
+                                  "lai_pct_nam": None}})
+            continue
+        von = max(float(r.get("von") or 0.0) * CD.BO_DEM_SUT_GIAM, 1e-9)
+        dong.append({"ten": cf["ten"], "khuon": cf.get("khuon", ""),
+                     "phan_giai": pg, "ket_qua": r,
+                     "diem": CD.tu_ket_qua_luoi(r, von_can=von, so_nam=nam,
+                                                ten=cf["ten"])})
+    vt = sorted(van_tay_quan_tri(c) for c in cfs)
+    h = hashlib.sha256("\n".join(vt).encode("utf-8")).hexdigest()[:32]
+    return {"dong": dong, "plan_hash": h, "so_phep_thu": len(vt),
+            "so_nam": nam}
+
+
+def chuoi_null(df, hat: int = 0):
+    """Mot ban KHONG CON EDGE cua chuoi gia, GIU NGUYEN ket cau bar.
+
+    Hoan vi loi suat bar-sang-bar cua `close`, roi dung lai high/low bang dung
+    cac do lech (high - close) va (close - low) cua chinh bar do, mang theo
+    trong cung mot hoan vi. Nho vay:
+
+      * BIEN DO NEN giu nguyen phan phoi - dieu kien song con, vi phep kiem
+        phan giai va moi tao tac trong-bar deu phu thuoc vao no;
+      * TU TUONG QUAN bi pha - va do la thu ma mot cai luoi song bang.
+
+    Vi sao khong dung random walk chuan: bien do nen cua no khong giong bien do
+    that, nen ty le lot do duoc tren no khong noi gi ve cong dang chay tren du
+    lieu that.
+
+    Day KHONG phai placebo cua mot co che (cai do la ngau nhien hoa BUOC va
+    HUONG). Day la hieu chuan CONG: mot cong tu choi tat ca cho so lieu y het
+    mot cong tot, nen phai do ca hai chieu.
+    """
+    import numpy as _np
+    import pandas as _pd
+    c = _np.asarray(df["close"], float)
+    hi = _np.asarray(df["high"], float)
+    lo = _np.asarray(df["low"], float)
+    r = _np.diff(_np.log(c))
+    tren, duoi = hi - c, c - lo
+    rng = _np.random.default_rng(hat)
+    thu_tu = rng.permutation(len(r))
+    c2 = _np.empty(len(c))
+    c2[0] = c[0]
+    c2[1:] = c[0] * _np.exp(_np.cumsum(r[thu_tu]))
+    t2 = _np.r_[tren[0], tren[1:][thu_tu]]
+    d2 = _np.r_[duoi[0], duoi[1:][thu_tu]]
+    op2 = _np.r_[c2[0], c2[:-1]]
+    return _pd.DataFrame(
+        {"open": op2, "high": c2 + _np.abs(t2), "low": c2 - _np.abs(d2),
+         "close": c2,
+         "tick_volume": _np.asarray(df.get("tick_volume", 1.0), float)},
+        index=df.index)
+
+
+def hieu_chuan(cfs: list[dict], df, so_lan: int = 5) -> dict:
+    """Lo nay lot qua cong bao nhieu lan tren chuoi DA BI PHA EDGE.
+
+    Luat cua du an: *"Hieu chuan cong phai HAI CHIEU"* - mot cong tu choi TAT
+    CA cho so lieu y het mot cong tot. Ham nay do chieu con lai: cai gi lot qua
+    khi dang le khong duoc phep lot.
+
+    `ty_le_lot` cao nghia la moi ket qua cua lo nay dang bi nghi ngo, KHONG
+    phai la lo nay tot. Do 19/09 dung cach nay ma tim ra `cat_hoa` gat bien do
+    trong nen: ty le lot 42% tren nhieu, va sau khi sua con 2,9%.
+    """
+    from collections import Counter
+    dem: Counter = Counter()
+    lot: Counter = Counter()
+    for k in range(so_lan):
+        r = chay_lo(cfs, chuoi_null(df, hat=k))
+        for d in r["dong"]:
+            dem[d["diem"]["muc"]] += 1
+            if d["diem"]["muc"] == "CHAY_DUOC":
+                lot[d["ten"]] += 1
+    tong = max(sum(dem.values()), 1)
+    return {"muc": dict(dem), "so_lan": so_lan,
+            "ty_le_lot": dem["CHAY_DUOC"] / tong,
+            "lot_nhieu_lan": lot.most_common(10)}
+
+
+def danh_gia_vs_null(cfs: list[dict], df, so_null: int = 20) -> dict:
+    """Ket qua THAT so voi PHAN BO NULL cua chinh cau hinh do.
+
+    ## VI SAO KHONG DUOC PHAN QUYET TREN MOT DUONG
+
+    Do 19/09/2026: chay `hieu_chuan` tren chuoi DA BI PHA EDGE, ty le cau hinh
+    duoc cham `CHAY_DUOC` van la **50%**. Khong phai vi cong hong, ma vi mot
+    cai luoi co hinh dang tra thuong **trung vi DUONG, ky vong AM**: phan lon
+    duong mau cho lai nho deu, mot thieu so cho lo rat sau. Nen tren MOT duong,
+    xac suat no "trong nhu co lai" von da gan mot nua - ke ca khi khong co edge
+    nao.
+
+    Tuc `cham_diem` cham mot luot chay don le thi **ve mat cau truc** khong
+    phan biet duoc luoi co edge voi luoi khong co. No do "duong nay co lai
+    khong", trong khi cau hoi that la "co lai hon MUC NGAU NHIEN khong".
+
+    ## CACH DO
+
+    Chay cau hinh tren `so_null` ban hoan vi (xem `chuoi_null`) roi hoi: ket
+    qua THAT nam o phan vi nao cua phan bo do. `vuot_null = 0,95` nghia la no
+    hon 95% cac lan chay tren chuoi khong con edge.
+
+    Day van CHUA phai mot p-value dung nghia (cac ban null khong doc lap hoan
+    toan voi nhau), nen doc no nhu mot THU HANG, va van phai qua `cong.lord_v2`
+    voi `plan_hash` truoc khi goi la phat hien.
+    """
+    import numpy as _np
+    that = {d["ten"]: d for d in chay_lo(cfs, df)["dong"]}
+    gom: dict = {t: [] for t in that}
+    for k in range(so_null):
+        for d in chay_lo(cfs, chuoi_null(df, hat=k))["dong"]:
+            r = d.get("ket_qua")
+            gom[d["ten"]].append(None if r is None else float(r.get("lai_nam", 0.0)))
+
+    dong = []
+    for ten, d in that.items():
+        r = d.get("ket_qua")
+        ds = [x for x in gom.get(ten, []) if x is not None]
+        if r is None or len(ds) < max(5, so_null // 2):
+            # Khong du ban null de xep hang -> KHONG ket luan. Bia mot thu hang
+            # o day la bia ca phan quyet.
+            dong.append({**d, "vuot_null": None,
+                         "ghi_chu": "CHUA_DO_DUOC: khong du ban null"})
+            continue
+        lai = float(r.get("lai_nam", 0.0))
+        dong.append({**d, "vuot_null": float(_np.mean([lai > x for x in ds])),
+                     "null_trung_vi": float(_np.median(ds))})
+    dong.sort(key=lambda x: (x.get("vuot_null") is None, -(x.get("vuot_null") or 0)))
+    return {"dong": dong, "so_null": so_null,
+            "plan_hash": chay_lo(cfs, df)["plan_hash"], "so_phep_thu": len(cfs)}

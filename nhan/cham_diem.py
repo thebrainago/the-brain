@@ -99,9 +99,40 @@ def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
 
 
 def tu_ket_qua_luoi(r: dict, von_can: float, so_nam: float, **kw) -> dict:
-    """Ban tien cho ket qua cua `mo_phong_v2.mo_phong`."""
+    """Ban tien cho ket qua cua `mo_phong_v2.mo_phong`.
+
+    ## LOI DA SUA 19/09/2026
+
+    Ban cu tinh `sut_giam_pct = 100 * von_can / max(von_can, 1e-9)`, tuc LUON
+    BANG 100 tren moi dau vao. Hau qua: moi cau hinh luoi deu dinh "sut giam
+    100% > tran 60%" roi bi ha mot bac, voi mot ly do BIA RA. Mot he lai
+    25%/nam tren von da tinh du dem cung bi cham la MONG.
+
+    Khong ai bat duoc vi `cham_diem` la module MO COI (xem `tu_to_hop`): cong
+    nay chua tung chay that lan nao. Mot cong khong ai di qua thi khong ai biet
+    no hong - va no van in ra mot bang diem trong nhu that.
+
+    Dung ra: sut giam do bang SO TIEN sut sau nhat (`r["von"]` cua `mo_phong`)
+    chia cho SO VON PHAI BO RA. Bo ra 2.000 de om mot cu sut 1.000 la sut 50%
+    von, khong phai 100%.
+    """
+    dd = r.get("von")
+    von = max(float(von_can), 1e-9)
+    if dd is None:
+        # Khong co sut giam trong ket qua thi KHONG suy ra duoc - va cai nguy
+        # hiem la no LOT cong trong im lang: `abs(nan) > 60` la False, nen cong
+        # sut giam khong noi gi va cau hinh di tiep nhu da qua. Phai noi thanh
+        # loi, dung luat `CHUA_DO_DUOC` khac `AM` cua du an.
+        d = cham(lai_nam=r.get("lai_nam", 0.0), von_can=von_can,
+                 sut_giam_pct=float("nan"),
+                 so_lenh_nam=r.get("ro_nam", 0.0), so_nam=so_nam, **kw)
+        d["ly_do"] = list(d["ly_do"]) + [
+            "CHUA_DO_DUOC: ket qua khong co truong 'von' nen khong do duoc "
+            "sut giam"]
+        d["muc"] = "BO" if d["muc"] == "BO" else "MONG"
+        return d
     return cham(lai_nam=r.get("lai_nam", 0.0), von_can=von_can,
-                sut_giam_pct=100.0 * von_can / max(von_can, 1e-9),
+                sut_giam_pct=100.0 * float(dd) / von,
                 so_lenh_nam=r.get("ro_nam", 0.0), so_nam=so_nam, **kw)
 
 

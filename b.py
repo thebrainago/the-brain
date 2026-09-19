@@ -726,6 +726,12 @@ def c_github(a):
     return r.returncode
 
 
+def _sau(co: str, a) -> str | None:
+    """Gia tri dung sau mot co trong danh sach doi so, hoac None."""
+    a = list(a or [])
+    return a[a.index(co) + 1] if co in a and a.index(co) + 1 < len(a) else None
+
+
 def c_hepha(a):
     """HEPHAESTUS - DE CO CHE. `b hepha [do|duc|tu-vung] [so]`
 
@@ -737,6 +743,8 @@ def c_hepha(a):
         b hepha bien-the  rai luoi tham so quanh co che DA CO trong kho
         b hepha ghep      ghep doi co che trong kho thanh he hai dieu kien
         b hepha tu-vung   huong tim kiem day nguoc ve SEEKER, uu tien cho TRONG
+        b hepha qt 200    de 200 CAU HINH QUAN TRI LENH (ho ra tien nhat da do)
+        b hepha qt 200 --ma AUDCAD --khung H4   chay that + xep hang SO VOI NULL
         b hepha nap 200   de 200 co che roi NAP vao kho (chay KHO mac dinh)
         b hepha nap 200 --that   ghi THAT vao kho
 
@@ -759,6 +767,36 @@ def c_hepha(a):
     if viec in ("tu-vung", "tu_vung"):
         for h in HP.tu_vung(so_huong=so if so != 200 else 10):
             print("%-16s %s" % (h["chi_bao"], " · ".join(h["tu_khoa"])))
+        return
+
+    if viec in ("qt", "quan-tri"):
+        # De CAU HINH QUAN TRI LENH. Khong co du lieu thi chi liet ke; co
+        # `--ma X --khung Y` thi chay that va xep hang SO VOI NULL.
+        ds = HP.duc_quan_tri(han_ngach=so)
+        from collections import Counter
+        for k, v in Counter(c["khuon"] for c in ds).most_common():
+            print("  %-20s %d" % (k, v))
+        print("\nde ra: %d cau hinh quan tri" % len(ds))
+        ma = _sau("--ma", a)
+        if not ma:
+            print("them `--ma EURUSD --khung H1` de chay that va xep hang.")
+            return
+        from nhan import du_lieu as DL
+        df = DL.nap(ma, _sau("--khung", a) or "H1")
+        r = HP.danh_gia_vs_null(ds, df, so_null=int(_sau("--null", a) or 20))
+        hc = HP.hieu_chuan(ds, df, so_lan=3)
+        print("\nTY LE LOT TREN NHIEU: %.0f%%  <- doc con so nay TRUOC bang duoi"
+              % (100 * hc["ty_le_lot"]))
+        print("%-30s %8s %10s %8s" % ("cau hinh", "vuot", "lai/nam", "muc"))
+        for d in r["dong"][:20]:
+            if d.get("vuot_null") is None:
+                continue
+            print("%-30s %7.0f%% %10.1f %8s"
+                  % (d["ten"][:30], 100 * d["vuot_null"],
+                     (d.get("ket_qua") or {}).get("lai_nam", 0.0),
+                     d["diem"]["muc"]))
+        print("\nplan_hash: %s  (FDR tinh %d suat)"
+              % (r["plan_hash"], r["so_phep_thu"]))
         return
 
     if viec == "nap":
