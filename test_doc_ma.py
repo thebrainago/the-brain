@@ -446,3 +446,69 @@ class MotEAMQL5DayDuRaDuocCoChe(unittest.TestCase):
     def test_khai_bao_qua_duoc_kiem_cu_phap(self):
         for s in self.d["co_che"]:
             self.assertEqual(NP.kiem_khai_bao(s), [], s["ten"])
+
+
+MQL_DONCHIAN = """
+void OnTick()
+  {
+   double highs[], lows[];
+   MqlRates current[];
+   ArraySetAsSeries(current,true);
+   CopyRates(_Symbol,_Period,0,1,current);
+   CopyHigh(_Symbol,_Period,1,20,highs);
+   double highrange=highs[ArrayMaximum(highs)];
+   bool pha=current[0].close>highrange;
+   if(pha)
+     {
+      CTrade trade;
+      trade.Buy(0.1,_Symbol);
+     }
+  }
+"""
+
+#: Cung mot EA nhung lay cua so theo THOI GIAN. Do dai cua so tinh bang bar phu
+#: thuoc khung chay, nen KHONG suy ra duoc luc doc ma.
+MQL_DONCHIAN_THEO_GIO = MQL_DONCHIAN.replace(
+    "CopyHigh(_Symbol,_Period,1,20,highs);",
+    "datetime t0=TimeCurrent()-14400;\n   "
+    "CopyHigh(_Symbol,_Period,t0,TimeCurrent(),highs);")
+
+
+class DonchianKieuMQL5(unittest.TestCase):
+    """`highs[ArrayMaximum(highs)]` - dang viet pha vo pho bien nhat cua MQL5."""
+
+    def setUp(self):
+        self.vb = DM._chuan_hoa(MQL_DONCHIAN)
+        self.bang = DM._bang_ky_hieu(self.vb)
+        self.bl = DM._bang_bool(self.vb)
+
+    def test_ra_dung_cao_nhat_va_do_dai_cua_so(self):
+        t = DM._toan_hang("highs[ArrayMaximum(highs)]", len(self.vb),
+                          self.bang, self.bl)
+        self.assertEqual(t, {"chi_bao": "tre", "n": 1,
+                             "cua": {"chi_bao": "cao_nhat", "n": 20,
+                                     "cua": {"chi_bao": "gia", "cot": "high"}}})
+
+    def test_giu_do_tre_cua_bat_dau(self):
+        """`CopyHigh(...,1,20,...)` bat dau tu bar DA DONG -> phai co `tre 1`.
+
+        Mat do tre nay la gop ca nen hien tai vao dinh: `high > cao_nhat(20)`
+        khong bao gio dung va cong bao "kich hoat 0,000%".
+        """
+        t = DM._toan_hang("highs[ArrayMaximum(highs)]", len(self.vb),
+                          self.bang, self.bl)
+        self.assertEqual(t.get("chi_bao"), "tre")
+        self.assertEqual(t.get("n"), 1)
+
+    def test_ca_chuoi_ra_co_che_ho_pha_vo(self):
+        d = DM.doc_chien_luoc(MQL_DONCHIAN, nguon="thu")
+        self.assertEqual(d["chua_dien_dat_duoc"], [])
+        self.assertEqual(len(d["co_che"]), 1)
+        self.assertEqual(d["co_che"][0]["ho"], "pha_vo")
+
+    def test_cua_so_theo_THOI_GIAN_thi_tu_choi(self):
+        """Do dai cua so tinh bang bar phu thuoc khung -> khong duoc doan."""
+        d = DM.doc_chien_luoc(MQL_DONCHIAN_THEO_GIO, nguon="thu")
+        self.assertEqual(d["co_che"], [],
+                         "khong suy duoc do dai cua so ma van ra co che")
+        self.assertTrue(d["chua_dien_dat_duoc"], "phai bao ra, khong duoc im")

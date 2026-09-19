@@ -393,8 +393,16 @@ def _bang_mang(vb: str, bang_so: list) -> list[tuple[int, str, dict]]:
         if not re.fullmatch(_TEN, ten):
             continue
         n = _giai_so(ds[3], m.start(), bang_so)
+        bd = _giai_so(ds[2], m.start(), bang_so)
         d = {"_mang": True, "_chuoi": ten in chuoi,
-             "_so_bar": int(n) if n is not None and n > 0 else None}
+             "_so_bar": int(n) if n is not None and 0 < n < 100000 else None,
+             # `CopyHigh(sym,tf,bat_dau,so_bar,mang)` nhan DOI SO 3 la vi tri
+             # bar bat dau. Dang `CopyHigh(sym,tf,thoi_diem_dau,thoi_diem_cuoi,
+             # mang)` cung khop cung mot chu ky - phan biet bang chinh doi so 4:
+             # o dang thoi gian no la mot `datetime` (hang chuc trieu), khong
+             # phai so bar. Khong phan biet duoc thi `_bat_dau=None` va ben
+             # doc TU CHOI, vi do dai cua so khong suy ra duoc.
+             "_bat_dau": int(bd) if bd is not None and 0 <= bd < 100000 else None}
         ham = m.group(1)
         if ham == "CopyBuffer":
             d["_goc"] = ds[0]                  # ten handle, giai sau
@@ -590,6 +598,46 @@ def _tuyen_tinh(bt: str, vi_tri: int, bang: list, bang_bt: list,
 #: `mang[k]` hoac `mang[k].truong` - hai dang doc mot mang MQL5.
 _O_MANG = re.compile(rf"^({_TEN})\[(\d+)\](?:\.({_TEN}))?$")
 
+#: `highs[ArrayMaximum(highs)]` - dang viet DONCHIAN cua MQL5.
+_DINH_MANG = re.compile(
+    rf"^({_TEN})\[[ \t]*Array(Maximum|Minimum)[ \t]*\([ \t]*({_TEN})[^)]*\)[ \t]*\]$")
+
+
+def _dinh_mang(tu: str, vi_tri: int, bang: list) -> dict | None:
+    """`highs[ArrayMaximum(highs)]` -> `cao_nhat(n) tre k`. `{}` = phai bo.
+
+    Day la cach MQL5 viet Donchian, va no la dang pha vo pho bien nhat trong
+    kho EA. Hai chi tiet quyet dinh dung/sai:
+
+      * **DO DAI CUA SO** la doi so `so_bar` cua `CopyHigh`. Dang
+        `CopyHigh(sym,tf,thoi_diem_dau,thoi_diem_cuoi,mang)` KHONG suy ra duoc
+        so bar (do dai phu thuoc khung), nen tu choi han.
+      * **DO TRE** la doi so `bat_dau`. Ban goc gan nhu luon lay `bat_dau=1` -
+        dinh cua cac bar DA DONG. Mat do tre nay la gop ca nen hien tai vao
+        dinh, tuc dieu kien `high > cao_nhat(n)` khong bao gio dung va cong bao
+        "kich hoat 0,000%" - dung cai bay da ghi trong `_toan_hang`.
+
+    Khac `_tu_mang`: chieu chi so khong anh huong gi o day, vi lay cuc tri ca
+    mang thi `ArraySetAsSeries` doi thu tu nhung khong doi ket qua.
+    """
+    m = _DINH_MANG.match(tu.strip())
+    if not m or m.group(1) != m.group(3):
+        return None
+    d = None
+    for pos, t, v in bang:
+        if pos >= vi_tri:
+            break
+        if t == m.group(1) and v.get("_mang"):
+            d = v
+    if d is None:
+        return None
+    if d["_so_bar"] is None or d["_bat_dau"] is None or "cot" not in d:
+        return {}
+    goc = {"chi_bao": "cao_nhat" if m.group(2) == "Maximum" else "thap_nhat",
+           "n": d["_so_bar"], "cua": {"chi_bao": "gia", "cot": d["cot"]}}
+    tre = d["_bat_dau"]
+    return goc if tre == 0 else {"chi_bao": "tre", "cua": goc, "n": tre}
+
 
 def _tu_mang(tu: str, vi_tri: int, bang: list) -> dict | None:
     """`MaValues[0]` / `current[1].close` -> toan hang. `{}` = co nhan, phai bo.
@@ -649,9 +697,10 @@ def _toan_hang(tu: str, vi_tri: int, bang: list,
     # MANG MQL5 (`MaValues[0]`, `current[0].close`) - phai xet TRUOC hau to
     # `[k]` chung, vi chieu chi so cua mang MQL5 phu thuoc ArraySetAsSeries chu
     # khong mac nhien la nhin lui k bar.
-    t_mang = _tu_mang(tu, vi_tri, bang)
-    if t_mang is not None:
-        return t_mang if t_mang != {} else None
+    for _f in (_tu_mang, _dinh_mang):
+        t_mang = _f(tu, vi_tri, bang)
+        if t_mang is not None:
+            return t_mang if t_mang != {} else None
 
     tre = 0
     m_tre = re.search(r"\[(\d+)\]$", tu)
