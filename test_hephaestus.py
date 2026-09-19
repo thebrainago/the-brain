@@ -64,17 +64,36 @@ class ThangDoPhaiDUNG(unittest.TestCase):
     """Bay da sap that: `open < 2` kich hoat 100% so bar."""
 
     def setUp(self):
-        self.ds = HP.duc(han_ngach=400)
+        # CA LO, khong phai 400 cai dau. Ban truoc cua bai nay lay `han_ngach=
+        # 400` va vi the khong bao gio nhin thay cac khuon xep cuoi - dung luc
+        # khuon `nen_manh` moi them vao roi ma bai van xanh.
+        self.ds = HP.duc(han_ngach=100000)
 
-    def test_toan_hang_THANG_GIA_khong_bao_gio_so_voi_hang_so(self):
+    def test_THANG_GIA_khong_bao_gio_so_voi_hang_so_KHAC_0(self):
+        """Nguong theo don vi gia chi dung cho MOT ma o MOT thoi ky.
+
+        Hang so 0 la ngoai le that su: `than_nen > 0` ("nen tang") khong deo
+        theo don vi nao ca. Nhung no chi hop le khi ve trai DAO QUANH 0 - mot
+        `ema20 > 0` thi luon dung va khong mang thong tin nao.
+        """
         xau = []
         for s in self.ds:
             for d in s["vao"]:
-                if "hang" not in (d.get("phai") or {}):
+                p = d.get("phai") or {}
+                if "hang" not in p or HP.thang_do(d["trai"]) != HP.THANG_GIA:
                     continue
-                if HP.thang_do(d["trai"]) == HP.THANG_GIA:
+                if float(p["hang"]) != 0.0 or not HP.quanh_khong(d["trai"]):
                     xau.append((s["ten"], d))
         self.assertEqual(xau, [], "toan hang thang gia so voi hang so tran")
+
+    def test_KHOI_LUONG_khong_bao_gio_so_voi_hang_so(self):
+        """So hop dong moi bar khac han giua cac ma va truot theo nam, nen
+        `khoi_luong > 300` la nguong cua dung mot ma o dung mot nam."""
+        for s in self.ds:
+            for d in s["vao"]:
+                if "hang" in (d.get("phai") or {}):
+                    self.assertNotEqual(HP.thang_do(d["trai"]), HP.THANG_KL,
+                                        s["ten"])
 
     def test_hai_ve_cung_thang_do_khi_khong_phai_hang_so(self):
         xau = []
