@@ -196,3 +196,61 @@ void Kiem()
         self.assertEqual(n.get("chot_lui_tu"), 45.0)
         self.assertEqual(n.get("chot_lui_ty"), 0.9)
         self.assertEqual(n.get("dung_lo"), 120.0)
+
+
+class KHONG_NHAN_BUA_TRAILING(unittest.TestCase):
+    """Bo sung 19/09 sau khi mot ban cai dat lot qua bo test dau.
+
+    Ban do bat MOI so sanh dang `X > BIEN*_Point` la nguong trailing. Nhung
+    `*_Point` la cach viet "N diem" cua MQL5 va no co mat o KHAP NOI: loc
+    spread, khoang cach dat TP, khoang cach toi thieu toi SL cua san, buoc
+    luoi... Khong cai nao trong so do la trailing.
+
+    Dau hieu PHAN BIET khong nam o `_Point` ma o cho: mot vong trailing phai
+    SUA LENH (`PositionModify`) trong chinh nhanh do. Loc spread thi `return`.
+    """
+
+    def test_loc_spread_KHONG_phai_trailing(self):
+        src = """
+input int MaxSpread = 30;
+void OnTick()
+{
+   double sp = SymbolInfoInteger(_Symbol,SYMBOL_SPREAD);
+   if(sp > MaxSpread*_Point)
+      return;
+   trade.Buy(0.1,_Symbol);
+}
+"""
+        n = QTT.boc_than(src)["nut_van"]
+        self.assertNotIn("trailing_tu", n)
+        self.assertNotIn("trailing_buoc", n)
+
+    def test_khoang_cach_TP_KHONG_phai_buoc_trailing(self):
+        src = """
+input int TakeProfitPoints = 200;
+void OnTick()
+{
+   double tp = SymbolInfoDouble(_Symbol,SYMBOL_ASK) - TakeProfitPoints*_Point;
+   trade.Buy(0.1,_Symbol,tp);
+}
+"""
+        self.assertNotIn("trailing_buoc", QTT.boc_than(src)["nut_van"])
+
+    def test_khoang_cach_toi_thieu_cua_san_KHONG_phai_trailing(self):
+        src = """
+input int StopLevel = 50;
+void OnTick()
+{
+   double kc = SymbolInfoInteger(_Symbol,SYMBOL_TRADE_STOPS_LEVEL);
+   if(kc > StopLevel*_Point)
+      Print("san doi khoang cach lon hon");
+}
+"""
+        self.assertNotIn("trailing_tu", QTT.boc_than(src)["nut_van"])
+
+    def test_VAN_boc_duoc_trailing_that(self):
+        """Hieu chuan chieu nguoc. Khong co bai nay thi cach de nhat de lam ba
+        bai tren xanh la TAT han duong trailing di."""
+        n = QTT.boc_than(MQL_TRAILING)["nut_van"]
+        self.assertEqual(n.get("trailing_tu"), 150.0)
+        self.assertEqual(n.get("trailing_buoc"), 50.0)

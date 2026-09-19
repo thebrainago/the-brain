@@ -81,9 +81,15 @@ _HEDGE = re.compile(
 #: `PositionClosePartial(sym, vol*0.5)` - tia mot phan vi the.
 _TIA = re.compile(rf"PositionClosePartial[ \t]*\([^;]*?\*[ \t]*({_SO})")
 
-#: Khai bao ham kieu C, de cat than ham.
+#: `gia - gia_mo > TrailingStart*_Point` - so sanh voi trailing start (diem).
+_TRAILING_START = re.compile(rf"([>][ \t]*)({_TEN})[ \t]*\*[ \t]*_Point")
+
+#: `sl_moi = gia - TrailingStep*_Point` - tru buoc trailing (diem).
+_TRAILING_STEP = re.compile(rf"-[ \t]*({_TEN})[ \t]*\*[ \t]*_Point")
+
+#: Khai bao ham kieu C, de cat than ham. Cho phep ca `void f(){...}` (ngoac mo cung tren dong).
 _HAM = re.compile(rf"^[ \t]*(?:static[ \t]+)?(?:void|int|double|bool|long|datetime"
-                  rf"|string|float)[ \t]+({_TEN})[ \t]*\([^;{{]*\)[ \t]*$", re.M)
+                  rf"|string|float)[ \t]+({_TEN})[ \t]*\([^;{{]*\)[ \t]*(\{{|$)", re.M)
 
 
 def _bo_chu_thich(src: str) -> str:
@@ -122,9 +128,13 @@ def _cac_ham(src: str) -> dict:
     """Ten ham -> than ham (tu dau `{` toi `}` can bang)."""
     ra = {}
     for m in _HAM.finditer(src):
-        i = src.find("{", m.end())
-        if i < 0:
-            continue
+        # Kiem tra neu `{` da o cuoi match (ngoac mo cung dong)
+        if m.group(2) == "{":
+            i = m.end() - 1  # Vi tri cua `{` la m.end() - 1
+        else:
+            i = src.find("{", m.end())
+            if i < 0:
+                continue
         muc, j = 0, i
         while j < len(src):
             if src[j] == "{":
@@ -197,6 +207,52 @@ def boc_than(src: str) -> dict:
                 nut["tia_tu"] = float(mm.group(1))
             break
 
+    # --- trailing stop: nguong bat dau va buoc ---
+    for dk, than in _cac_if(src):
+        # Trailing phai sua lenh PositionModify trong chinh nhanh do
+        if "PositionModify" not in than:
+            continue
+
+        # Tim nguong bat dau: `gia - gia_mo > TrailingStart*_Point`
+        # Phai co PositionModify trong than moi la trailing that, khong phai loc gi khac
+        if "_Point" in dk:
+            m_trailing_tu = _TRAILING_START.search(dk)
+            if m_trailing_tu:
+                var_name = m_trailing_tu.group(2)
+                v = _hang_so(var_name, hang)
+                if v is not None:
+                    nut.setdefault("trailing_tu", v)
+                else:
+                    # Phat hien pattern nhung khong doc duoc hang so
+                    thieu.append(f"trailing_tu: `{var_name}` khong phai hang so")
+
+        # Tim buoc trailing: `sl_moi = gia - TrailingStep*_Point`
+        m_trailing_buoc = _TRAILING_STEP.search(than)
+        if m_trailing_buoc:
+            var_name = m_trailing_buoc.group(1)
+            v = _hang_so(var_name, hang)
+            if v is not None:
+                nut.setdefault("trailing_buoc", v)
+            else:
+                # Phat hien pattern nhung khong doc duoc hang so
+                thieu.append(f"trailing_buoc: `{var_name}` khong phai hang so")
+
+    # --- basket TP theo diem (khong phai pip) ---
+    for dk, than in _cac_if(src):
+        # Tim pattern: `diem >= BasketTPPoints` va than co dong ro
+        if _goi_ham_dong(than, ham_dong) and "_Point" in src:
+            # Kiem tra neu dk co dau hieu cua diem: bien duoc tinh bang chia cho _Point
+            m_basket = re.search(rf"({_TEN})[ \t]*(<=|>=)[ \t]*({_TEN}|{_SO})", dk)
+            if m_basket:
+                var_left = m_basket.group(1)
+                op = m_basket.group(2)
+                var_right = m_basket.group(3)
+                # Tim xem var_left co duoc tinh bang chia cho _Point khong
+                if re.search(rf"{var_left}[ \t]*=.*/_Point", src):
+                    v = _hang_so(var_right, hang)
+                    if v is not None and op.startswith(">"):
+                        nut.setdefault("tp_ro_diem", v)
+
     return {"nut_van": nut, "ham_lai_ro": sorted(ham_lai),
             "ham_dong_ro": sorted(ham_dong), "bien_lai_ro": sorted(bien_lai),
             "bien_dinh": sorted(bien_dinh), "thieu": sorted(set(thieu))}
@@ -223,8 +279,20 @@ def _cac_if(src: str) -> list[tuple[str, str]]:
         con = src[j + 1:j + 400]
         # Than cua `if`: mot khoi `{...}`, hoac dung mot lenh toi dau `;`.
         k = con.find("{")
-        if 0 <= k <= 3:
-            ra.append((dk, con[:con.find("}") if "}" in con else len(con)]))
+        if 0 <= k <= 20:  # Cho phep khoang trang/xuong dong truoc ngoac mo
+            # Khoi `{...}` - tim ngoac dong tuong ung bang so sanh can bang,
+            # khong tim ngoac dong dau tien (chi do khong duoc vi co the co
+            # ngoac dong lom trong)
+            muc, i = 0, k
+            while i < len(con):
+                if con[i] == "{":
+                    muc += 1
+                elif con[i] == "}":
+                    muc -= 1
+                    if muc == 0:
+                        break
+                i += 1
+            ra.append((dk, con[:i]))
         else:
             ra.append((dk, con[:con.find(";") + 1 if ";" in con else len(con)]))
     return ra

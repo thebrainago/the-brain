@@ -475,3 +475,47 @@ class NapVaoKhoPhaiCHAY_KHO_MAC_DINH(unittest.TestCase):
             self.assertEqual(r2["nhan"], 0, "nap lai cung lo ma van vao kho")
         finally:
             don()
+
+
+class TrungTenGiuaHaiKHUON(unittest.TestCase):
+    """Trung ten thi DOI TEN, khong duoc bo - va nhat la khong duoc bo IM LANG.
+
+    Do 19/09/2026: khuon `bien_dong_do_lech` dung cung nhan tham so voi
+    `che_do_bien_dong` (`vol_thap_14_100_0_1`...), nen ca **16** co che cua no
+    bien mat khoi lo day du. Chay rieng khuon do thi ra 16, chay chung ra 0, va
+    khong mot dong nao bao.
+
+    Bai kiem cu cua chinh toi khong bat duoc vi no chi hoi "ten nay co trong lo
+    khong" - ma ten DO co trong lo, chi la thuoc mot co che KHAC. Doi hoi dung
+    la: moi co che de rieng tung khuon phai co mat trong lo chung, dem theo
+    VAN TAY.
+
+    Hai co che khac van tay la hai phep thu khac nhau; trung ten chi la trung
+    nhan. Bo mot phep thu vi nhan cua no da co nguoi dung la mat mot cau hoi ma
+    khong ai biet da mat.
+    """
+
+    def setUp(self):
+        self.het = HP.duc(han_ngach=100000)
+
+    def test_ten_trong_lo_khong_trung_nhau(self):
+        ten = [s["ten"] for s in self.het]
+        self.assertEqual(len(ten), len(set(ten)))
+
+    def test_MOI_co_che_cua_MOI_khuon_deu_co_mat_trong_lo_chung(self):
+        co = {NP.van_tay_dieu_kien(s) for s in self.het}
+        thieu = []
+        for ten_khuon, _ in HP.KHUON:
+            for s in HP.duc(han_ngach=100000, khuon=ten_khuon):
+                if NP.van_tay_dieu_kien(s) not in co:
+                    thieu.append((ten_khuon, s["ten"]))
+        self.assertEqual(thieu[:5], [],
+                         "%d co che bi mat khi chay ca lo" % len(thieu))
+
+    def test_moi_khuon_deu_dong_gop_it_nhat_mot_co_che(self):
+        """Mot khuon ra 0 trong lo chung la mot khuon da chet ma khong ai bao."""
+        dem = {}
+        for s in self.het:
+            dem[s["khuon"]] = dem.get(s["khuon"], 0) + 1
+        chet = [t for t, _ in HP.KHUON if dem.get(t, 0) == 0]
+        self.assertEqual(chet, [], "khuon khong dong gop co che nao: %s" % chet)
