@@ -2261,3 +2261,99 @@ def danh_gia_vs_null(cfs: list[dict], df, so_null: int = 20) -> dict:
     dong.sort(key=lambda x: (x.get("vuot_null") is None, -(x.get("vuot_null") or 0)))
     return {"dong": dong, "so_null": so_null,
             "plan_hash": chay_lo(cfs, df)["plan_hash"], "so_phep_thu": len(cfs)}
+
+
+# ------------------------------------------------------- GHEP QUAN TRI LENH
+#: Nut NEN cua moi luoi. Moi khuon quan tri deu dat chung, nen khi ghep hai
+#: khuon chung se DUNG DO - va do khong phai mau thuan, chi la hai ban cua
+#: cung mot cai nen. Lay theo ve THU NHAT.
+NUT_NEN = frozenset({"buoc", "tp"})
+
+
+def ghep_quan_tri(a: dict, b: dict) -> dict | None:
+    """Ghep hai cau hinh quan tri thanh MOT. `None` khi ghep khong co nghia.
+
+    ## VI SAO CAN HAM NAY
+
+    `CLAUDE.md` do duoc: *"ho 2 QUAN TRI VI THE ... do 05/09 no QUAN TRONG HON
+    ho 1 voi lop luoi: entry co tinh SAI van cho 92-97%/nam"*. Tuc day la
+    module ra tien nhat cua ca he.
+
+    Nhung `duc_quan_tri` chi de duoc cau hinh MOT KHUON: mot luoi + dung mot
+    co che phu. Mot EA luoi that ngoai doi chay **bon den sau** co che cung
+    luc - cat hoa, tia, chot lui, chan von, hedge - va chinh su KET HOP do
+    moi la cai lam no song qua mot cu sut. De tung cai mot roi ket luan "quan
+    tri lenh khong an thua" la ket luan ve mot thu khac.
+
+    Moi khuon phu deu DA gom san luoi nen (`buoc`, `tp`), nen ghep hai khuon
+    phu = luoi + HAI co che. Do la hinh dang that.
+
+    ## KHI NAO TRA `None`
+
+    * cung khuon - ghep mot co che voi chinh no chi lam ten dai ra;
+    * dung do mot nut KHONG PHAI nut nen - hai ve dang noi khac nhau ve cung
+      mot thu, va lay bua mot ben la bia ra mot cau hinh thu ba khong ai
+      dinh viet.
+    """
+    if not a or not b or a.get("khuon") == b.get("khuon"):
+        return None
+    na, nb = dict(a.get("nut") or {}), dict(b.get("nut") or {})
+    if not na or not nb:
+        return None
+    # BO VE CHI CO NUT NEN. `luoi_tran` la luoi TRAN - `nut` cua no dung bang
+    # `NUT_NEN`. Ghep no voi mot khuon phu KHONG cho hai co che: moi khuon phu
+    # da gom san luoi nen, nen `tran + tia` chi la `tia` voi `buoc`/`tp` khac
+    # - mot bien the tham so doi lot mot phep ghep.
+    #
+    # Do 20/09/2026: khong co chot nay thi 400 cap dau TOAN LA `tran + X`
+    # (`tran` dung dau danh sach), va cac cap THAT - phu + phu - bi han ngach
+    # cat het. Tuc ham ghep tieu sach ngan sach de sinh ra thu no khong dinh
+    # sinh.
+    if not (set(na) - NUT_NEN) or not (set(nb) - NUT_NEN):
+        return None
+    dung_do = (set(na) & set(nb)) - NUT_NEN
+    if dung_do:
+        return None
+    nut = dict(nb)
+    nut.update(na)          # ve THU NHAT thang o cac nut nen
+    return {
+        "ten": chuan_hoa_ten_qt("%s__%s" % (a["ten"], b["ten"])),
+        "khuon": "ghep:%s+%s" % (a["khuon"], b["khuon"]),
+        "nut": nut,
+        "co_che": ("Hai co che quan tri chay CUNG LUC. %s VA: %s"
+                   % (str(a.get("co_che", "")).rstrip(". "),
+                      str(b.get("co_che", "")).rstrip(". "))),
+    }
+
+
+def chuan_hoa_ten_qt(t: str) -> str:
+    """Ten cau hinh quan tri: cat cho ngan ma van phan biet duoc."""
+    t = "".join(c if (c.isalnum() or c in "_+.") else "_" for c in str(t))
+    return t[:72]
+
+
+def ghep_lo_quan_tri(cfs: list[dict], han_ngach: int = 200) -> list[dict]:
+    """Ghep doi XAC DINH tren mot danh sach cau hinh quan tri.
+
+    Duyet theo thu tu da cho, khong RNG, de mot lo ghep co the tien dang ky y
+    het mot lo duc: xin 20 hom nay roi 100 ngay mai thi 20 cai dau van la 20
+    cai cu.
+
+    KHONG ghep ba tro len. Do la lua chon ve NGAN SACH FDR: so cap da la
+    O(n^2), so bo ba la O(n^3), va moi cau hinh them la mot suat that. Ghep ba
+    chi dang lam sau khi mot cap nao do da chung minh duoc gia tri.
+    """
+    ra, thay = [], set()
+    for i, a in enumerate(cfs):
+        for b in cfs[i + 1:]:
+            if len(ra) >= han_ngach:
+                return ra
+            cf = ghep_quan_tri(a, b)
+            if cf is None:
+                continue
+            vt = van_tay_quan_tri(cf)
+            if vt in thay:
+                continue
+            thay.add(vt)
+            ra.append(cf)
+    return ra

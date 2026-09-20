@@ -1,6 +1,6 @@
 # EVO - SUC KHOE HE THONG
 
-*2026-09-20 00:34:00*
+*2026-09-20 19:22:42*
 
 TOT 15 · XAU 4 · CHUA DO 1
 
@@ -12,21 +12,21 @@ do duoc - quy no ve 'xau' la cach mot bo giam sat tu bia ra van de.
 | `seeker.ty_le_doc` | 0.0 | XAU | 0/0 tai lieu co ban van |
 | `seeker.nguon_rong` | 38 | XAU | rong: arxiv, blog, cnblogs_trung, collective2, crossref, darwinex, elitetrader, etoro, fac |
 | `quantlab.kho_co_che` | 4049 | TOT | 4049 co che, 4012 (99%) co truong `co_che` giai thich |
-| `quantlab.ho_so_song` | 22.8 | TOT | HO_SO_SONG.json ghi lan cuoi cach day 23 gio |
-| `quantlab.ho_so_mua_vu` | 22.8 | TOT | HO_SO_MUA_VU.json ghi lan cuoi cach day 23 gio |
-| `quantlab.ho_so_tuong_quan` | 22.8 | TOT | HO_SO_TUONG_QUAN_D1.json ghi lan cuoi cach day 23 gio |
-| `quantlab.ho_so_suy_nguoc` | 22.8 | TOT | SUY_NGUOC.json ghi lan cuoi cach day 23 gio |
-| `quantlab.ho_so_to_hop` | 22.8 | TOT | TO_HOP.json ghi lan cuoi cach day 23 gio |
+| `quantlab.ho_so_song` | 41.6 | TOT | HO_SO_SONG.json ghi lan cuoi cach day 42 gio |
+| `quantlab.ho_so_mua_vu` | 41.6 | TOT | HO_SO_MUA_VU.json ghi lan cuoi cach day 42 gio |
+| `quantlab.ho_so_tuong_quan` | 41.6 | TOT | HO_SO_TUONG_QUAN_D1.json ghi lan cuoi cach day 42 gio |
+| `quantlab.ho_so_suy_nguoc` | 41.6 | TOT | SUY_NGUOC.json ghi lan cuoi cach day 42 gio |
+| `quantlab.ho_so_to_hop` | 41.6 | TOT | TO_HOP.json ghi lan cuoi cach day 42 gio |
 | `quantlab.ket_qua` | 0 | XAU | 0 dong trong ket_qua |
-| `evo.van_de_mo` | 1 | TOT | 1 MO / 10 da sua |
+| `evo.van_de_mo` | 1 | TOT | 1 MO / 12 da sua |
 | `evo.bai_hoc` | 3 | XAU | 3 the bai hoc |
-| `evo.finder` | 22.8 | TOT | san_cong_cu = Finder cua so do |
+| `evo.finder` | 41.6 | TOT | san_cong_cu = Finder cua so do |
 | `xay.hang_doi` | 31 | TOT | {'xong': 23, 'cho': 8} |
 | `xay.viec_hong` | 0 | TOT |  |
 | `may.mo_coi` | 0 | TOT | 0 tien trinh, 0% CPU |
 | `phanh.doc_duoc` | None | CHUA_DO | OperationalError: no such table: he_chay |
 | `thong_luong.tang_cam` | 0 | TOT | 9 tang deu co dau ra |
-| `dia.con_trong` | 29.4 | TOT | 29.4 GB trong / 252 GB tong (3% da dung) |
+| `dia.con_trong` | 29.5 | TOT | 29.5 GB trong / 252 GB tong (3% da dung) |
 | `dia.nao_db` | 0 | TOT | bang `noi_dung` (toan van tai lieu) chiem phan lon - do la du lieu THAT, khong phai rac; m |
 | `dia.wal` | 0 | TOT | khong co WAL ton dong |
 

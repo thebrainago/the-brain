@@ -870,10 +870,21 @@ def c_hepha(a):
     if viec in ("qt", "quan-tri"):
         # De CAU HINH QUAN TRI LENH. Khong co du lieu thi chi liet ke; co
         # `--ma X --khung Y` thi chay that va xep hang SO VOI NULL.
-        ds = HP.duc_quan_tri(han_ngach=so)
+        # `--ghep`: luoi + HAI co che, hinh dang cua mot EA luoi that. Phai
+        # nam o DAY chu khong o mot lenh rieng: don hang da viet
+        # `qt ... --ghep`, va mot co go rieng se lam don chay NHAM DUONG ma
+        # khong bao gi - dung kieu lang phi mot dem may chay.
+        if "--ghep" in a:
+            don = HP.duc_quan_tri(han_ngach=500)
+            ds = HP.ghep_lo_quan_tri(don, han_ngach=so)
+            print("GHEP: %d cau hinh (tu %d cau hinh don), %.1f nut trung binh"
+                  % (len(ds), len(don),
+                     sum(len(c["nut"]) for c in ds) / max(len(ds), 1)))
+        else:
+            ds = HP.duc_quan_tri(han_ngach=so)
         from collections import Counter
-        for k, v in Counter(c["khuon"] for c in ds).most_common():
-            print("  %-20s %d" % (k, v))
+        for k, v in Counter(c["khuon"] for c in ds).most_common(12):
+            print("  %-34s %d" % (k, v))
         print("\nde ra: %d cau hinh quan tri" % len(ds))
         ma = _sau("--ma", a)
         if not ma:

@@ -1,0 +1,24 @@
+{
+  "ma": "hepha-qt-ghep",
+  "muc_tieu": "300 cau hinh GHEP quan tri (luoi + HAI co che) tren AUDCAD H4, xep hang SO VOI NULL",
+  "lan": "CPU",
+  "uu_tien": 6,
+  "han_phut": 120.0,
+  "ra_luc": "2026-09-20T19:24:14",
+  "lenh": [
+    "{py}",
+    "b.py",
+    "hepha",
+    "qt",
+    "300",
+    "--ma",
+    "AUDCAD",
+    "--khung",
+    "H4",
+    "--ghep"
+  ],
+  "ghi_chu": "CLAUDE.md do duoc: quan tri lenh QUAN TRONG HON entry (entry sai van cho 92-97%/nam). Nhung duc_quan_tri chi de duoc MOT khuon mot cau hinh, trong khi EA luoi that chay 4-6 co che cung luc. Doc TY LE LOT TREN NHIEU truoc bang diem.",
+  "cong": {
+    "kieu": "chay_duoc"
+  }
+}
