@@ -83,29 +83,48 @@ class DemPhoiNhiem(SoTam):
 
 
 def _canh_pass():
-    """Bo doi so lam `xet` di het cong. Lay tu test_cong_fdr_v2."""
-    idx = pd.date_range("2026-01-01", periods=100, freq="h")
-    kq_he = SimpleNamespace(so_lenh=100, loi=np.zeros(100), index=idx,
-                            vi_the=np.ones(100))
+    """Bo doi so lam `xet` di het cong. Lay tu test_cong_fdr_v2.
+
+    ## VI SAO CO `df` THAT (sua 20/09/2026)
+
+    Ban cu truyen `df=None` va 100 bar gio. Tu 20/09 cong
+    `11_khong_an_khe_dao_ngay` khong con HONG THI MO: khong do duoc thi
+    verdict bi chan tran o `UNG_VIEN`. Voi `df=None` thi phep do nem, nen MOI
+    bai o lop nay se ra `UNG_VIEN` - va chung khong con do duoc cai chung
+    nham (logic ha bac khi NHIN LAI holdout).
+
+    420 bar NGAY cho ~60 mau moi THU (nguong cua `khe_gio_bat_thuong` la 30),
+    va `open[i] = close[i-1]` nen khe bang 0 o moi o: mot chuoi SACH va DO
+    DUOC. Nho the cac bai duoi quay ve do dung logic cua chinh chung.
+    """
+    n = 420
+    idx = pd.date_range("2026-01-01", periods=n, freq="D")
+    gia = np.linspace(100.0, 120.0, n)
+    df_sach = pd.DataFrame(
+        {"open": np.r_[gia[0], gia[:-1]], "high": gia * 1.001,
+         "low": gia * 0.999, "close": gia}, index=idx)
+    kq_he = SimpleNamespace(so_lenh=n, loi=np.zeros(n), index=idx,
+                            vi_the=np.ones(n))
     so_sanh = {
         "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
-               "phoi_nhiem": 0.5, "so_bar": 100},
+               "phoi_nhiem": 0.5, "so_bar": n},
         "mua_giu_net": {"tong_lai_pct": 1.0, "sharpe": 0.1, "calmar": 0.1},
         "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 5.0},
     }
     return (kq_he, SimpleNamespace(),
             SimpleNamespace(do_tin="DO", canh_bao=None), so_sanh,
-            {"p_xau_nhat": 0.04, "null_hop_le": True, "bootstrap_hop_le": True})
+            {"p_xau_nhat": 0.04, "null_hop_le": True, "bootstrap_hop_le": True},
+            df_sach)
 
 
 class ChanPassOLanNhinLai(SoTam):
 
     def _xet(self, gt_ma: str, plan: str, **kw):
-        kq_he, kq_bh, cp, so_sanh, pl = _canh_pass()
+        kq_he, kq_bh, cp, so_sanh, pl, df_sach = _canh_pass()
         with mock.patch.object(CONG.DO, "so_sanh", return_value=so_sanh), \
                 mock.patch.object(CONG.DO, "hieu_qua_giai_doan", return_value=[]), \
                 mock.patch.object(CONG, "placebo", return_value=pl):
-            return CONG.xet(None, kq_he, kq_bh, cp, gt_ma=gt_ma,
+            return CONG.xet(df_sach, kq_he, kq_bh, cp, gt_ma=gt_ma,
                             da_dang_ky=True, tren_holdout=True,
                             economic_plan_hash=plan, lane="legacy",
                             family="lich", data_release="X",
@@ -134,8 +153,15 @@ class ChanPassOLanNhinLai(SoTam):
         SO.ghi_ket_qua(ma, {}, {}, "FAIL", 0.5, 0.0, 0.0)
         ra = self._xet(ma, "plan-3")
         self.assertNotEqual(ra["verdict"], "FAIL")
-        self.assertTrue(all(ra["dieu_kien"].values()),
-                        "khong dieu kien nao duoc gia vo la truot")
+        # Y cua bai: ha bac xay ra vi LAN NHIN LAI, khong phai vi mot cong
+        # CHAN nao truot. Ban cu doi `all(dieu_kien.values())` - rong hon y
+        # do, nen no vo khi mot NHAN MEM bat ky lat (o day la `12_rr_thuc_te`
+        # va `5_placebo`, ca hai deu khong chan). Xet dung cac cong CHAN.
+        chan_truot = [k for k in CONG.CHAN_CUNG if not ra["dieu_kien"].get(k, True)]
+        self.assertEqual(chan_truot, [],
+                         "co cong CHAN truot - ha bac khong con do lan nhin lai")
+        self.assertEqual(ra["cong_khong_do_duoc"], [],
+                         "co cong chan KHONG DO DUOC - ha bac khong con do lan nhin lai")
 
     def test_khai_du_lieu_moi_thi_mo_lai_duoc(self):
         """Holdout dai ra that la ly do chinh dang - nhung phai KHAI."""
@@ -149,11 +175,11 @@ class ChanPassOLanNhinLai(SoTam):
         noi 2.600 lan, nhung holdout thi khong moi lai."""
         ma = "Z.D1.doi_the_he_chi_phi"
         SO.ghi_ket_qua(ma, {}, {}, "FAIL", 0.5, 0.0, 0.0)
-        kq_he, kq_bh, cp, so_sanh, pl = _canh_pass()
+        kq_he, kq_bh, cp, so_sanh, pl, df_sach = _canh_pass()
         with mock.patch.object(CONG.DO, "so_sanh", return_value=so_sanh), \
                 mock.patch.object(CONG.DO, "hieu_qua_giai_doan", return_value=[]), \
                 mock.patch.object(CONG, "placebo", return_value=pl):
-            ra = CONG.xet(None, kq_he, kq_bh, cp, gt_ma=ma, da_dang_ky=True,
+            ra = CONG.xet(df_sach, kq_he, kq_bh, cp, gt_ma=ma, da_dang_ky=True,
                           tren_holdout=True, economic_plan_hash="plan-cp3",
                           lane="legacy", family="quay_ve_trung_binh@cp3",
                           data_release="X", decision_generation=5)

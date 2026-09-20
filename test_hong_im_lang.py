@@ -341,3 +341,109 @@ def test_gop_lop_dem_rieng_chan_roi_vi_khong_do_duoc():
     assert c is None
     assert len(bo) == 1 and bo[0]["ma"] == "KHONG_CO_MA_NAY_XYZ"
     assert bo[0]["ly_do"].startswith("CHUA_DO_DUOC"), bo[0]["ly_do"]
+
+
+# ---------------------------------------------------------------------------
+# Dot 4 (20/09/2026): CONG CHAN CUNG HONG THI MO
+#
+# Day la cho dat nhat trong ca he: mot cong CHAN CUNG ma khong do duoc thi
+# van cho di qua.
+# ---------------------------------------------------------------------------
+
+class CongChanCungHongThiMo(unittest.TestCase):
+    """Cho dat nhat trong ca he: mot cong CHAN CUNG khong do duoc ma van cho
+    di qua.
+
+    Ke thua khuon `SoTam`: `CONG.xet` GHI vao so `fdr`, nen bai kiem phai tro
+    `SO.DB` sang thu muc tam. Neu khong thi chinh bo test lam dung cai viec no
+    dang di bat - bom dong vao so quyet dinh that (do 24/08: hai lan chay
+    `pytest` da them 28 dong).
+    """
+
+    def setUp(self):
+        import tempfile
+        from pathlib import Path as _P
+        from nhan import so as SO
+        self._tmp = tempfile.TemporaryDirectory()
+        self._db_cu = SO.DB
+        SO.DB = _P(self._tmp.name) / "nao_test.db"
+        SO.khoi_tao()
+
+    def tearDown(self):
+        from nhan import so as SO
+        SO.DB = self._db_cu
+        self._tmp.cleanup()
+
+    @staticmethod
+    def _df_sach(n=420):
+        import numpy as np
+        import pandas as pd
+        idx = pd.date_range("2020-01-01", periods=n, freq="D")
+        gia = np.linspace(100.0, 120.0, n)
+        return pd.DataFrame({"open": np.r_[gia[0], gia[:-1]],
+                             "high": gia * 1.001, "low": gia * 0.999,
+                             "close": gia}, index=idx)
+
+    def _chay(self, df, ma_gt):
+        from types import SimpleNamespace
+        from unittest import mock
+        import numpy as np
+        from nhan import cong as CONG
+
+        n = 420
+        idx = self._df_sach(n).index
+        kq = SimpleNamespace(so_lenh=n, loi=np.zeros(n), index=idx,
+                             vi_the=np.ones(n))
+        so_sanh = {"he": {"tong_lai_pct": 50.0, "sharpe": 2.0, "calmar": 2.0,
+                          "phoi_nhiem": 0.5, "so_bar": n},
+                   "mua_giu_net": {"tong_lai_pct": 5.0, "sharpe": 0.2,
+                                   "calmar": 0.2},
+                   "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 20.0}}
+        pl = {"p_xau_nhat": 0.001, "null_hop_le": True, "bootstrap_hop_le": True}
+        with mock.patch.object(CONG.DO, "so_sanh", return_value=so_sanh), \
+                mock.patch.object(CONG.DO, "hieu_qua_giai_doan", return_value=[]), \
+                mock.patch.object(CONG, "placebo", return_value=pl):
+            return CONG.xet(df, kq, SimpleNamespace(),
+                            SimpleNamespace(do_tin="DO", canh_bao=None),
+                            gt_ma=ma_gt, ho="test_cong_mo",
+                            da_dang_ky=True, tren_holdout=True,
+                            che_do="giao_dich")
+
+    def test_cong_CHAN_CUNG_khong_do_duoc_thi_KHONG_duoc_PASS(self):
+        """Cong `11_khong_an_khe_dao_ngay` tung HONG THI MO.
+
+        Ban cu khoi tao `True` roi giu nguyen `True` o moi duong that bai: qua
+        it bar, chi mot o thoi gian, hay mot ngoai le bat ky. Chinh dong
+        `ly_do` ben duoi no viet *"KHONG ket luan la sach"* - tuc tac gia da
+        biet - nhung GIA TRI thi van la `True`. Van noi mot dang, so noi mot
+        dang.
+
+        Va day la cong CHAN CUNG, dung cai cong sinh ra de bat
+        `EURGBP.H4.mua_qua_dem`: he do dat `t_alpha = 14,52` va di het cong
+        nho an khe dao ngay, *"khong mot cong nao trong 10 cong cu nhin thay"*.
+        Mot cong chan cung ma hong thi mo se cho ung vien tiep theo cung kieu
+        di qua y het.
+        """
+        ra = self._chay(None, "CONG_MO.khong_do_duoc")
+        self.assertIn("11_khong_an_khe_dao_ngay", ra["cong_khong_do_duoc"])
+        self.assertNotEqual(ra["verdict"], "PASS",
+                            "cong chan cung KHONG DO DUOC ma van ra PASS")
+        # Nhung cung khong duoc FAIL: chua do duoc khong phai la ban.
+        self.assertEqual(ra["verdict"], "UNG_VIEN")
+
+    def test_HIEU_CHUAN_NGUOC_chuoi_DO_DUOC_va_SACH_thi_VAN_PASS(self):
+        """Mot cong tu choi TAT CA cho so lieu y het mot cong tot.
+
+        Neu chan tren lam PASS thanh bat kha thi thi ca he vo nghia - nen phai
+        con mot duong ra PASS tren chuoi DO DUOC va that su sach.
+        """
+        ra = self._chay(self._df_sach(), "CONG_MO.do_duoc_va_sach")
+        self.assertEqual(ra["cong_khong_do_duoc"], [])
+        self.assertIs(ra["dieu_kien"]["11_khong_an_khe_dao_ngay"], True)
+        self.assertEqual(ra["verdict"], "PASS", ra["ly_do"][-3:])
+
+    def test_moi_cong_CHAN_CUNG_deu_duoc_khai_bao_ro_rang(self):
+        """`CHAN_CUNG` liet ke tuong minh de them mot dieu kien moi khong tu
+        dong roi vao ben nao ma khong ai quyet dinh."""
+        from nhan import cong as CONG
+        self.assertIn("11_khong_an_khe_dao_ngay", CONG.CHAN_CUNG)

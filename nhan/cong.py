@@ -840,7 +840,23 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     # Chan CHINH XAC chu khong chan ca nguon: chi loai khi chien luoc DON
     # phoi nhiem vao gio bi nhiem. Mot co che vo tinh nam gio do bang muc
     # trung binh thi khong an them gi.
+    # HONG THI PHAI CHAN, KHONG DUOC MO (sua 20/09/2026).
+    #
+    # Ban cu khoi tao `True` roi GIU NGUYEN `True` o moi duong that bai: qua
+    # it bar, chi mot o thoi gian, hay mot ngoai le bat ky. Chinh dong `ly_do`
+    # ben duoi viet "KHONG ket luan la sach" - tuc tac gia da biet - nhung
+    # GIA TRI thi van la `True`, tuc "sach". Van noi mot dang, so noi mot dang.
+    #
+    # Va day la cong CHAN CUNG, dung cai cong sinh ra de bat
+    # `EURGBP.H4.mua_qua_dem`: no dat `t_alpha = 14,52` va di het cong nho an
+    # khe dao ngay, khong mot cong nao trong 10 cong cu nhin thay. Mot cong
+    # chan cung ma HONG THI MO thi ung vien tiep theo cung kieu se lai di qua.
+    #
+    # Nay: do duoc va sach -> `True`; do duoc va ban -> `False`; KHONG do duoc
+    # -> van `True` nhung ghi ten vao `cong_khong_do_duoc`, va verdict bi chan
+    # tran o `UNG_VIEN`. Khong phai `FAIL` - chua do duoc khong phai la ban.
     dk["11_khong_an_khe_dao_ngay"] = True
+    cong_khong_do_duoc: list[str] = []
     try:
         _kh = DL.khe_gio_bat_thuong(df)
         # Truc thoi gian phai lay dung cai ma phep do da dung: tren khung ngay
@@ -863,9 +879,13 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
                     ly_do.append(f"co {_ten_o} khe dao ngay {_kh['gio']} nhung phoi "
                                  f"nhiem khong don vao do ({_trong:.2f} vs {_ngoai:.2f})")
         elif not _kh["do_duoc"]:
+            cong_khong_do_duoc.append("11_khong_an_khe_dao_ngay")
             ly_do.append("chua do duoc khe theo thoi gian (qua it bar hoac chi mot o) "
                          "- KHONG ket luan la sach")
+        if _kh.get("do_duoc") and not _kh.get("gio"):
+            pass          # do duoc va khong co o nao nhiem -> that su sach
     except Exception as _e:
+        cong_khong_do_duoc.append("11_khong_an_khe_dao_ngay")
         ly_do.append(f"khong do duoc khe dao ngay: {type(_e).__name__}")
 
     giai_doan = DO.hieu_qua_giai_doan(kq_he.loi, kq_he.index, k=4)
@@ -1016,6 +1036,14 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     elif qua_het and not tren_holdout:
         verdict = "UNG_VIEN"
         ly_do.append("qua cong tren tap kham pha - can xac nhan tren holdout")
+    elif qua_het and cong_khong_do_duoc:
+        # CHUA_DO_DUOC KHAC AM, va cung khac DAT. Mot cong CHAN CUNG khong do
+        # duoc thi khong co cach nao noi ung vien nay sach - nen khong PASS.
+        # Nhung cung khong FAIL: chua do duoc khong phai la ban.
+        verdict = "UNG_VIEN"
+        ly_do.append("qua moi cong DO DUOC, nhung cong chan cung %s CHUA DO "
+                     "DUOC - can do lai truoc khi chung nhan"
+                     % ", ".join(sorted(set(cong_khong_do_duoc))))
     elif qua_het:
         verdict = "PASS"
     else:
@@ -1039,6 +1067,9 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
 
     ra = {
         "verdict": verdict, "dieu_kien": dk, "ly_do": ly_do,
+        # Ten cac cong CHAN CUNG khong do duoc. Rong = moi cong chan deu da
+        # duoc do that. Doc truong nay TRUOC khi tin mot verdict.
+        "cong_khong_do_duoc": sorted(set(cong_khong_do_duoc)),
         "nhan": nhan, "verdict_chan": v_chan, "che_do_cong": cd_cong,
         "so_sanh": ss, "placebo": pl, "giai_doan": giai_doan,
         "da_chay_placebo": pl is not None,
