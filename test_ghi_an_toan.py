@@ -48,9 +48,22 @@ def test_ham_sua_nem_loi_thi_KHONG_ghi_gi(tmp_path):
 
 
 def test_khoa_duoc_tra_sau_khi_xong(tmp_path):
+    """Kiem HOP DONG ("tra khoa roi"), khong kiem CO CHE ("file da bi xoa").
+
+    Ban cu doi `not (tmp_path / "c.json.lock").exists()`. Do la chi tiet cua
+    so do `O_CREAT|O_EXCL`; duong `fcntl.flock` (POSIX, tu 20/09/2026) CO Y
+    khong xoa file: xoa mot file trong khi nguoi khac dang cho khoa tren chinh
+    no se lam ho cho tren mot inode khong con ai dung toi. File `.lock` con
+    lai la rac vo hai, khong phai trang thai.
+
+    Cai phai kiem la: lay lai duoc ngay, khong phai doi het `cho_giay`.
+    """
     p = tmp_path / "c.json"
     GAT.sua_json(p, lambda d: {"x": 1})
-    assert not (tmp_path / "c.json.lock").exists()
+    t0 = time.time()
+    with GAT.khoa(p, cho_giay=2.0, nhip=0.05):
+        pass
+    assert time.time() - t0 < 1.0, "lay lai khoa qua cham - co ve chua duoc tra"
 
 
 def test_khoa_mo_coi_duoc_thu_hoi(tmp_path):
@@ -166,3 +179,66 @@ def test_sau_tien_trinh_ghi_spread_khong_mat_o_nao(tmp_path):
     assert all(p.exitcode == 0 for p in ps), [p.exitcode for p in ps]
     d = json.loads(cf.read_text(encoding="utf-8"))["_spread_bar_mt5"]
     assert set(d) == set(ma), "mat %s" % (set(ma) - set(d))
+
+
+@pytest.mark.skipif(GAT._fcntl is not None,
+                    reason="chi ap cho so do O_EXCL (Windows); POSIX dung flock")
+def test_khoa_RONG_khong_duoc_coi_la_chu_da_chet(tmp_path):
+    """Dua giua `O_CREAT|O_EXCL` va `os.write(fd, pid)` (sua 20/09/2026).
+
+    Hai buoc do KHONG nguyen tu. Giua chung, file da ton tai nhung con RONG.
+    Ban cu doc ra chuoi rong roi `int("" or 0)` -> `chu = 0`, va
+    `psutil.pid_exists(0)` tra `False` tren Linux -> "chu da chet" -> **xoa
+    khoa cua mot chu dang song**. Hai tien trinh cung vao vung toi han va mot
+    lan ghi bien mat.
+    """
+    tep = tmp_path / "c.json"
+    tep.write_text("{}", encoding="utf-8")
+    khoa = tmp_path / "c.json.lock"
+    khoa.write_text("", encoding="utf-8")        # khoa RONG, mtime moi tinh
+    with pytest.raises(GAT.KhongLayDuocKhoa):
+        with GAT.khoa(tep, cho_giay=0.6, nhip=0.05):
+            pass
+    assert khoa.exists(), "khoa RONG va MOI van bi cuop"
+
+
+def test_pid_khong_doc_duoc_thi_coi_la_CON_SONG(tmp_path):
+    """`pid <= 0` KHONG phai mot tien trinh - no la 'chua doc duoc pid'."""
+    assert GAT._pid_song(0) is True
+    assert GAT._pid_song(-1) is True
+
+
+def test_khoa_CU_cua_chu_DA_CHET_thi_VAN_thu_hoi_duoc(tmp_path):
+    """Hieu chuan chieu nguoc: neu khong con duong nao thu hoi khoa mo coi thi
+    mot lan tat may lam ket file do VINH VIEN."""
+    import os
+    tep = tmp_path / "c.json"
+    tep.write_text("{}", encoding="utf-8")
+    khoa = tmp_path / "c.json.lock"
+    khoa.write_text("999999999", encoding="utf-8")     # pid chac chan khong ton tai
+    cu = time.time() - GAT.HAN_KHOA_GIAY - 60
+    os.utime(khoa, (cu, cu))
+    with GAT.khoa(tep, cho_giay=2.0, nhip=0.05):
+        pass          # vao duoc la dat
+
+
+def test_khoa_QUA_HAN_van_bi_thu_hoi_du_chu_CON_SONG(tmp_path):
+    """Ghi lai mot QUYET DINH, khong phai mot loi.
+
+    Toi da viet bai nguoc lai ("chu con song thi khong duoc cuop") va no do -
+    dung, vi module CO Y thu hoi moi khoa cu hon `HAN_KHOA_GIAY`, ke ca khi
+    chu con song. Ly do: mot tien trinh TREO van "con song" nhung se khong bao
+    gio tra khoa, va khong co cach nao phan biet treo voi dang lam viec lau.
+
+    Doi lai, phep cuop phai NGUYEN TU (xem `khoa()`), neu khong hai nguoi cho
+    cung cuop mot luc va mot lan ghi bien mat.
+    """
+    import os
+    tep = tmp_path / "c.json"
+    tep.write_text("{}", encoding="utf-8")
+    kh = tmp_path / "c.json.lock"
+    kh.write_text(str(os.getpid()), encoding="utf-8")   # chu CON SONG
+    cu = time.time() - GAT.HAN_KHOA_GIAY - 60
+    os.utime(kh, (cu, cu))
+    with GAT.khoa(tep, cho_giay=2.0, nhip=0.05):
+        pass          # vao duoc la dat

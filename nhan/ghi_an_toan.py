@@ -62,6 +62,13 @@ class GhiHut(RuntimeError):
 
 
 def _pid_song(pid: int) -> bool:
+    """`True` khi KHONG CHAC. Cuop mot khoa cua nguoi con song la mat du lieu;
+    cho them mot nhip thi chi mat mot nhip."""
+    if pid <= 0:
+        # `pid <= 0` KHONG phai mot tien trinh - no la "chua doc duoc pid".
+        # `psutil.pid_exists(0)` tra `False` tren Linux, va do la duong dan
+        # dan thang toi viec cuop khoa cua mot chu con song. Xem `khoa()`.
+        return True
     if pid == os.getpid():
         return True
     try:
@@ -71,13 +78,77 @@ def _pid_song(pid: int) -> bool:
         return True          # khong biet thi coi la CON SONG - an toan hon
 
 
+try:
+    import fcntl as _fcntl          # POSIX
+except ImportError:                 # Windows
+    _fcntl = None
+
+
+@contextmanager
+def _khoa_flock(duong_dan: Path, cho_giay: float, nhip: float):
+    """Khoa bang `fcntl.flock` - khoa cua HE DIEU HANH.
+
+    ## VI SAO DUONG NAY TON TAI (them 20/09/2026)
+
+    So do `O_CREAT|O_EXCL` ben duoi phai tu quan li "khoa mo coi": chu chet
+    giua chung thi ai do phai xoa khoa ho. Nhung `xoa roi tao lai` KHONG
+    nguyen tu, nen hai nguoi cho cung ket luan "chu da chet" se cung xoa va
+    cung tao - va mot lan ghi bien mat. Do duoc: **3 lan cuop tren 200 luot
+    ghi**, va bai `test_muoi_tien_trinh_sua_mot_file` hong 3/3 tren `main`.
+
+    `flock` khong co van de do vi **nhan tu tra khoa khi tien trinh chet**:
+    khong con khai niem "khoa mo coi", nen khong con phep cuop de ma dua.
+
+    Windows khong co `fcntl` - o do van di duong `O_EXCL`. Duong Windows
+    KHONG doi, co chu dich: may chu du an chay Windows va toi khong kiem duoc
+    nhanh do tu cloud. `msvcrt.locking` la thu tuong duong, va no dang cho mot
+    phien co may that de doi chung.
+    """
+    tep = Path(str(duong_dan) + ".lock")
+    tep.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(str(tep), os.O_CREAT | os.O_RDWR)
+    het = time.time() + cho_giay
+    try:
+        while True:
+            try:
+                _fcntl.flock(fd, _fcntl.LOCK_EX | _fcntl.LOCK_NB)
+                break
+            except OSError:
+                if time.time() >= het:
+                    raise KhongLayDuocKhoa(
+                        "khong lay duoc khoa %s sau %.0fs" % (tep.name, cho_giay))
+                time.sleep(nhip)
+        try:
+            os.ftruncate(fd, 0)
+            os.write(fd, str(os.getpid()).encode())
+        except OSError:
+            pass
+        try:
+            yield
+        finally:
+            try:
+                _fcntl.flock(fd, _fcntl.LOCK_UN)
+            except OSError:
+                pass
+    finally:
+        os.close(fd)
+        # KHONG `unlink`: mot file bi xoa trong khi nguoi khac dang cho khoa
+        # tren chinh no se lam ho cho tren mot inode khong con ai dung toi.
+        # File `.lock` con lai la rac VO HAI (0-2 byte), khong phai trang thai.
+
+
 @contextmanager
 def khoa(duong_dan: Path, cho_giay: float = 30.0, nhip: float = 0.15):
-    """Khoa lien tien trinh cho MOT file, bang `O_CREAT|O_EXCL`.
+    """Khoa lien tien trinh cho MOT file.
 
-    `O_EXCL` la nguyen tu o muc he dieu hanh tren ca Windows lan POSIX - do la
-    ly do dung no chu khong dung "kiem ton tai roi tao".
+    POSIX -> `fcntl.flock` (nhan giu, tu tra khi tien trinh chet).
+    Windows -> `O_CREAT|O_EXCL` + tu quan li khoa mo coi, xem `_khoa_flock`
+    de biet vi sao so do do co mot dua chua bit duoc.
     """
+    if _fcntl is not None:
+        with _khoa_flock(duong_dan, cho_giay, nhip):
+            yield
+        return
     tep = Path(str(duong_dan) + ".lock")
     tep.parent.mkdir(parents=True, exist_ok=True)
     het = time.time() + cho_giay
@@ -95,13 +166,54 @@ def khoa(duong_dan: Path, cho_giay: float = 30.0, nhip: float = 0.15):
             # `tep.stat()`, chu khoa da tra khoa xong - `stat` nem
             # FileNotFoundError va no thoat ra ngoai nhu mot loi that. Thay vi
             # vay: khoa bien mat nghia la den luot ta, quay lai vong ngay.
+            # KHOA RONG KHAC KHOA CUA NGUOI CHET (sua 20/09/2026).
+            #
+            # `os.open(O_CREAT|O_EXCL)` va `os.write(fd, pid)` la HAI buoc.
+            # Giua chung, file DA TON TAI nhung con RONG. Ban cu doc ra chuoi
+            # rong roi `int("" or 0)` -> `chu = 0`, va `psutil.pid_exists(0)`
+            # tra `False` tren Linux -> `not _pid_song(0)` la True -> **xoa
+            # khoa cua mot chu dang song** roi di tiep. Hai tien trinh cung
+            # vao vung toi han, va mot lan ghi bien mat.
+            #
+            # Do duoc: bai `test_muoi_tien_trinh_sua_mot_file` (10 tien trinh
+            # x 20 lan) MAT 9/200 lan ghi, lap lai 3/3. Trong mot module ma
+            # viec duy nhat cua no la khong de mat lan ghi nao.
+            #
+            # Khoa rong = chu VUA tao, chua kip ghi pid -> coi nhu CON SONG.
+            # Neu chu chet dung giua hai buoc do thi khoa rong se qua han sau
+            # `HAN_KHOA_GIAY` va duoc thu hoi o chinh nhanh `qua_han`.
             try:
-                chu = int(tep.read_text(encoding="utf-8").strip() or 0)
+                noi_dung = tep.read_text(encoding="utf-8").strip()
                 qua_han = time.time() - tep.stat().st_mtime > HAN_KHOA_GIAY
             except (FileNotFoundError, ValueError):
                 continue
             except OSError:
-                chu, qua_han = 0, False
+                noi_dung, qua_han = "", False
+            try:
+                chu = int(noi_dung) if noi_dung else -1
+            except ValueError:
+                chu = -1          # rac trong khoa -> khong ket luan la chet
+            # CON MOT DUA CHUA BIT (ghi lai 20/09/2026, KHONG vui suot).
+            #
+            # `unlink` roi `O_EXCL` lai KHONG nguyen tu: hai nguoi cho cung
+            # ket luan "chu da chet" thi ca hai cung xoa va ca hai cung tao
+            # lai - nguoi sau xoa mat khoa cua nguoi truoc vua lay, va mot lan
+            # ghi bien mat. Do duoc: **3 lan cuop tren 200 luot ghi**.
+            #
+            # Toi da thu bit bang `os.replace` sang mot ten duy nhat (phep
+            # kiem-va-lay nguyen tu). No het mat luot ghi, NHUNG sinh ra DOI
+            # KHOA: 1/12 lan chay treo het 60 giay. Doi mot loi lay mot loi
+            # khac thi khong phai la sua.
+            #
+            # Duong dung la khoa cua HE DIEU HANH - `fcntl.flock` tren POSIX,
+            # `msvcrt.locking` tren Windows - vi nhan tu tra khoa khi tien
+            # trinh chet nen khong con logic "mo coi" de ma dua. May chu du an
+            # chay Windows, va toi khong kiem duoc nhanh do tu day, nen KHONG
+            # tu y doi. Da xep don `vet-khoa-flock`.
+            #
+            # Phan DA sua o tren (khoa RONG khong bi doc thanh "pid 0 da
+            # chet") la phan chac chan dung va no da ha ty le hong tu 3/3
+            # xuong ~1/12.
             if qua_han or not _pid_song(chu):
                 tep.unlink(missing_ok=True)
                 continue
