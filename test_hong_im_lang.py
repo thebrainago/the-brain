@@ -266,3 +266,78 @@ class MOI_DIEU_KIEN_CONG_PHAI_DUOC_XEP_LOAI(unittest.TestCase):
         from nhan import cong as CONG
         self.assertIn("13_edge_vuot_spread", CONG.CHAN_CUNG)
         self.assertNotIn("13_edge_vuot_spread", CONG.NHAN_MEM)
+
+
+# ---------------------------------------------------------------------------
+# Dot 3 (20/09/2026): ba cho tra `None` GOP NHIEU NGUYEN NHAN lam mot.
+#
+# Cung mot hinh dang loi o ca ba: mot phep KHONG DO DUOC (thieu `data/`, so cai
+# khong doc duoc, mo phong hong) di ra bang cung mot gia tri voi mot ket luan
+# AM that (tai san khong hop, ho chua tieu suat nao). LUAT SO 0 bat phan biet.
+# ---------------------------------------------------------------------------
+
+def test_nguong_fdr_noi_ro_khi_khong_doc_duoc_so_cai():
+    """`nguong_fdr_hien_tai = None` phai kem ly do, khong doc thanh 'ho trong'."""
+    from nhan import do_luc as DL
+
+    nguong, ly_do = DL._nguong_fdr("do_luc")
+    if nguong is None:
+        assert ly_do and "CHUA_DO_DUOC" in ly_do, (
+            "khong lay duoc nguong FDR ma khong noi vi sao - dung cai bay "
+            "CHUA_DO_DUOC bi doc thanh AM")
+    else:
+        assert ly_do is None and nguong > 0
+
+
+def test_hieu_chinh_gop_khong_bien_KHONG_DO_DUOC_thanh_ty_le_0():
+    """Spec khong sinh duoc tin hieu -> tra spec GOC + None, khong phai 0.0.
+
+    Ban cu `kh = NP._ty_le_kich_hoat(s2, df_d) or 0.0` tra ve chinh cai spec
+    khong chay duoc, dan nhan "da hieu chinh", kem `sau_khop_phan_vi = 0.0`.
+    """
+    import numpy as np
+    import pandas as pd
+    from nhan import doi_khung as DK
+    from nhan import ngu_phap as NP
+
+    n = 300
+    idx = pd.date_range("2020-01-01", periods=n, freq="h")
+    df = pd.DataFrame({"open": 1.0, "high": 1.1, "low": 0.9,
+                       "close": np.linspace(1.0, 1.2, n)}, index=idx)
+    spec = {"ten": "x", "vao": [{"trai": {"chi_bao": "dong"},
+                                 "phep": "<", "phai": {"hang": 1.05}}]}
+    bao = [{"phan": "vao", "chi_so": 0, "phep": "<", "_duoi": True,
+            "_chuoi": np.asarray(df["close"], float), "cu": 1.05,
+            "moi": 1.05, "p_goc": 0.2}]
+
+    goc = NP._ty_le_kich_hoat
+    NP._ty_le_kich_hoat = lambda *_a, **_k: None
+    try:
+        ra, hs, kh = DK._hieu_chinh_gop(spec, df, bao, muc=0.2, hien=None)
+    finally:
+        NP._ty_le_kich_hoat = goc
+
+    assert kh is None, "KHONG DO DUOC bi bien thanh ty le kich hoat = %r" % (kh,)
+    assert ra is spec, "tra ve spec da bi doi he so du khong do duoc lan nao"
+    assert hs == 1.0
+
+
+def test_ngoai_sinh_phan_biet_thieu_du_lieu_voi_co_che_khong_chay():
+    from nhan import ngoai_sinh as NS
+
+    ty = NS.ty_le_kich_hoat("KHONG_CO_MA_NAY_XYZ", "H1", "khong_co_mau", {})
+    assert ty is None
+    assert NS._LY_DO_CUOI and "CHUA_DO_DUOC" in NS._LY_DO_CUOI, (
+        "thieu du lieu phai la CHUA_DO_DUOC, khong duoc im lang: %r"
+        % (NS._LY_DO_CUOI,))
+
+
+def test_gop_lop_dem_rieng_chan_roi_vi_khong_do_duoc():
+    from nhan import gop_lop as GL
+
+    bo = []
+    c = GL._mot_chan("khong_co_mau", "KHONG_CO_MA_NAY_XYZ", "H1", {},
+                     ghi_ly_do=bo)
+    assert c is None
+    assert len(bo) == 1 and bo[0]["ma"] == "KHONG_CO_MA_NAY_XYZ"
+    assert bo[0]["ly_do"].startswith("CHUA_DO_DUOC"), bo[0]["ly_do"]

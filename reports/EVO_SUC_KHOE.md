@@ -1,8 +1,8 @@
 # EVO - SUC KHOE HE THONG
 
-*2026-09-19 02:00:49*
+*2026-09-20 00:13:30*
 
-TOT 16 · XAU 3 · CHUA DO 1
+TOT 15 · XAU 4 · CHUA DO 1
 
 `CHUA_DO` khong phai `XAU`. Mot chi so khong do duoc thi noi la khong
 do duoc - quy no ve 'xau' la cach mot bo giam sat tu bia ra van de.
@@ -10,17 +10,17 @@ do duoc - quy no ve 'xau' la cach mot bo giam sat tu bia ra van de.
 | chi so | gia tri | trang thai | bang chung |
 |---|---:|---|---|
 | `seeker.ty_le_doc` | 0.0 | XAU | 0/0 tai lieu co ban van |
-| `seeker.nguon_rong` | 0 | TOT | rong:  |
+| `seeker.nguon_rong` | 38 | XAU | rong: arxiv, blog, cnblogs_trung, collective2, crossref, darwinex, elitetrader, etoro, fac |
 | `quantlab.kho_co_che` | 4049 | TOT | 4049 co che, 4012 (99%) co truong `co_che` giai thich |
-| `quantlab.ho_so_song` | 0.3 | TOT | HO_SO_SONG.json ghi lan cuoi cach day 0 gio |
-| `quantlab.ho_so_mua_vu` | 0.3 | TOT | HO_SO_MUA_VU.json ghi lan cuoi cach day 0 gio |
-| `quantlab.ho_so_tuong_quan` | 0.3 | TOT | HO_SO_TUONG_QUAN_D1.json ghi lan cuoi cach day 0 gio |
-| `quantlab.ho_so_suy_nguoc` | 0.3 | TOT | SUY_NGUOC.json ghi lan cuoi cach day 0 gio |
-| `quantlab.ho_so_to_hop` | 0.3 | TOT | TO_HOP.json ghi lan cuoi cach day 0 gio |
+| `quantlab.ho_so_song` | 22.5 | TOT | HO_SO_SONG.json ghi lan cuoi cach day 22 gio |
+| `quantlab.ho_so_mua_vu` | 22.5 | TOT | HO_SO_MUA_VU.json ghi lan cuoi cach day 22 gio |
+| `quantlab.ho_so_tuong_quan` | 22.5 | TOT | HO_SO_TUONG_QUAN_D1.json ghi lan cuoi cach day 22 gio |
+| `quantlab.ho_so_suy_nguoc` | 22.5 | TOT | SUY_NGUOC.json ghi lan cuoi cach day 22 gio |
+| `quantlab.ho_so_to_hop` | 22.5 | TOT | TO_HOP.json ghi lan cuoi cach day 22 gio |
 | `quantlab.ket_qua` | 0 | XAU | 0 dong trong ket_qua |
-| `evo.van_de_mo` | 0 | TOT | 0 MO / 0 da sua |
+| `evo.van_de_mo` | 1 | TOT | 1 MO / 8 da sua |
 | `evo.bai_hoc` | 3 | XAU | 3 the bai hoc |
-| `evo.finder` | 0.3 | TOT | san_cong_cu = Finder cua so do |
+| `evo.finder` | 22.5 | TOT | san_cong_cu = Finder cua so do |
 | `xay.hang_doi` | 31 | TOT | {'xong': 23, 'cho': 8} |
 | `xay.viec_hong` | 0 | TOT |  |
 | `may.mo_coi` | 0 | TOT | 0 tien trinh, 0% CPU |
@@ -42,6 +42,18 @@ do duoc - quy no ve 'xau' la cach mot bo giam sat tu bia ra van de.
 
 ```
 python -m nhan.day_chuyen boc   # lay toan van cho phan con lai
+```
+
+### `seeker.nguon_rong` — nguon chua mang ve tai lieu nao
+
+**Do duoc:** rong: arxiv, blog, cnblogs_trung, collective2, crossref, darwinex, elitetrader, etoro, facebook, fxblue
+
+**Cat nghia:** Nguon co the bi CHAN tren may nay, hoac bo doc cua no chua tung duoc goi. Hai chuyen khac han nhau - phai do tung nguon truoc khi goi la 'nguon chet'.
+
+**De xuat (chay duoc):**
+
+```
+python -m nhan.kham_pha_nguon   # do lai tung nguon, tach 'chan' khoi 'chua chay'
 ```
 
 ### `quantlab.ket_qua` — ket qua da cham cong
