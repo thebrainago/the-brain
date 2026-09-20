@@ -1,0 +1,20 @@
+{
+  "ma": "vet-khoa-windows",
+  "muc_tieu": "Kiem duong khoa O_EXCL tren WINDOWS - cloud chi kiem duoc nhanh POSIX (flock)",
+  "lan": "NHE",
+  "uu_tien": 4,
+  "han_phut": 15.0,
+  "ra_luc": "2026-09-20T19:40:52",
+  "lenh": [
+    "{py}",
+    "-m",
+    "pytest",
+    "test_ghi_an_toan.py",
+    "-q",
+    "--tb=short"
+  ],
+  "ghi_chu": "Tren main: test_muoi_tien_trinh_sua_mot_file hong 3/3 (mat 9/200 luot ghi). Da them duong fcntl.flock cho POSIX -> 12/12 xanh tren cloud. Windows KHONG co fcntl nen van di duong O_CREAT|O_EXCL, va duong do con MOT dua chua bit: xoa khoa mo coi roi tao lai thi khong nguyen tu. Neu bai nay hong tren may Windows thi buoc tiep la msvcrt.locking - can may that de doi chung. Hai bai do san (test_duoc_o_lai vi container co pid 1, test_so_luong_goi_y) khong lien quan.",
+  "cong": {
+    "kieu": "pytest"
+  }
+}
