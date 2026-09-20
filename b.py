@@ -768,6 +768,45 @@ def _sau(co: str, a) -> str | None:
     return a[a.index(co) + 1] if co in a and a.index(co) + 1 < len(a) else None
 
 
+def c_cau(a):
+    """CAU NOI HAI MAY. `b cau [don <ma> <muc tieu> | trang-thai]`
+
+    Chu du an 20/09/2026: *"lam sao de phien chat nay doc duoc ket qua chay
+    tren may tinh toi"*. Tra loi: qua git - xem `tai_lieu/VAN_HANH_HAI_MAY.md`.
+
+        b cau              man hinh: con bao nhieu don, ket qua ra sao
+        b cau don <ma> "<muc tieu>" [--lan CPU] [--uu-tien 3]
+        b cau xong <ma>    doc ket qua mot don (ba trang thai)
+
+    Ben CLOUD ra don roi `git push`; may chay `q` tu keo ve. Ben MAY ghi ket
+    qua roi day len; cloud `git pull` la doc duoc.
+    """
+    from qwen import cau_git as CG
+    CG.bao_dam_thu_muc()
+    viec = (a[0] if a else "").lower()
+
+    if viec == "don":
+        if len(a) < 3:
+            print('can: b cau don <ma> "<muc tieu>"')
+            return
+        p = CG.ra_don(a[1], a[2], lan=(_sau("--lan", a) or "NHE").upper(),
+                      uu_tien=int(_sau("--uu-tien", a) or 5),
+                      han_phut=float(_sau("--han-phut", a) or 60))
+        print("-> %s" % p)
+        print("nho `git add viec/cho && git commit && git push` de may thay duoc.")
+        return
+
+    if viec == "xong":
+        if len(a) < 2:
+            print("can: b cau xong <ma>")
+            return
+        import json as _j
+        print(_j.dumps(CG.doc_ket_qua(a[1]), ensure_ascii=False, indent=2))
+        return
+
+    print(CG.bang())
+
+
 def c_hepha(a):
     """HEPHAESTUS - DE CO CHE. `b hepha [do|duc|tu-vung] [so]`
 
@@ -1217,6 +1256,7 @@ LENH = {
     "ban-do": c_ban_do, "profile": c_profile,
     "kien-truc": c_kien_truc, "kt": c_kien_truc,
     "hepha": c_hepha, "hephaestus": c_hepha,
+    "cau": c_cau, "cau-git": c_cau,
     "tho": c_tho, "tho-code": c_tho,
     "github": c_github, "gh": c_github,
     "slot": c_slot,
