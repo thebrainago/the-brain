@@ -103,8 +103,12 @@ def _canh_pass():
     df_sach = pd.DataFrame(
         {"open": np.r_[gia[0], gia[:-1]], "high": gia * 1.001,
          "low": gia * 0.999, "close": gia}, index=idx)
+    # `chi_phi_spread` PHAI co: tu 20/09/2026 cong `13_edge_vuot_spread` coi
+    # "da giao dich ma phi = 0" la KHONG DO DUOC chu khong phai "khong ton
+    # phi" - khong cong cu nao thu duoc phi bang khong. Dat mot con so nho
+    # that de cong do duoc va di qua.
     kq_he = SimpleNamespace(so_lenh=n, loi=np.zeros(n), index=idx,
-                            vi_the=np.ones(n))
+                            vi_the=np.ones(n), chi_phi_spread=0.0)
     so_sanh = {
         "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
                "phoi_nhiem": 0.5, "so_bar": n},

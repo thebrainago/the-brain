@@ -116,7 +116,7 @@ class CheDoNghienCuu(unittest.TestCase):
             {"open": np.r_[gia[0], gia[:-1]], "high": gia * 1.001,
              "low": gia * 0.999, "close": gia}, index=idx)
         kq = SimpleNamespace(so_lenh=n, loi=np.zeros(n), index=idx,
-                             vi_the=np.ones(n))
+                             vi_the=np.ones(n), chi_phi_spread=0.0)
         so_sanh = {
             "he": {"tong_lai_pct": 50.0, "sharpe": 2.0, "calmar": 2.0,
                    "phoi_nhiem": 0.5, "so_bar": n},

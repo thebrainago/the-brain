@@ -816,12 +816,39 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
                      "voi lo TB mot lenh thua (dang martingale tra hinh)"
                      % (_rr, n["rr_thuc_te_toi_thieu"]))
 
+    # CUNG HINH DANG "HONG THI MO" nhu cong 11 (sua 20/09/2026).
+    #
+    # Ban cu: ngoai le -> `_phi_sp = 0`; `chi_phi_spread is None` -> `or 0.0`
+    # -> cung bang 0. Roi `(_phi_sp <= 0)` la `True`, tuc CONG MO. Mot cong
+    # CHAN CUNG hoi "edge co day hon chi phi khong" lai di qua dung luc khong
+    # do duoc chi phi.
+    #
+    # PHAM VI HEP CO CHU DICH: chi danh dau khi phep doc THAT BAI (ngoai le,
+    # hay truong khong ton tai). `_phi_sp == 0` duoc khai TUONG MINH thi van
+    # cho di qua nhu cu - do la truong hop that cua che do nghien cuu, noi chi
+    # phi la KHAI BAO chu khong do duoc, va `7_chi_phi_do_duoc` da chan san.
+    #
+    # Toi da thu bat ca "da co lenh ma phi = 0" nua. Bo: no dung ve ly le nhung
+    # no chan ca cac chuoi nghien cuu hop le, va cai no them duoc thi cong 7 da
+    # bat. Mot chot chan chan nham tang thi khong phai la chat hon.
+    _phi_thieu = False
+    cong_khong_do_duoc: list[str] = []
     try:
         import numpy as _np
         _lai_rong = float(_np.nansum(kq_he.loi))
-        _phi_sp = float(abs(kq_he.chi_phi_spread or 0.0))
+        _sp_tho = getattr(kq_he, "chi_phi_spread", None)
+        if _sp_tho is None:
+            _phi_thieu = True
+            _phi_sp = 0.0
+        else:
+            _phi_sp = float(abs(_sp_tho))
     except Exception:
         _lai_rong = _phi_sp = 0.0
+        _phi_thieu = True
+    if _phi_thieu:
+        cong_khong_do_duoc.append("13_edge_vuot_spread")
+        ly_do.append("khong doc duoc chi phi spread - KHONG ket luan la edge "
+                     "day hon chi phi")
     dk["13_edge_vuot_spread"] = (_phi_sp <= 0) or (
         _lai_rong >= n["edge_tren_spread_toi_thieu"] * _phi_sp)
     if not dk["13_edge_vuot_spread"]:
@@ -856,7 +883,6 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     # -> van `True` nhung ghi ten vao `cong_khong_do_duoc`, va verdict bi chan
     # tran o `UNG_VIEN`. Khong phai `FAIL` - chua do duoc khong phai la ban.
     dk["11_khong_an_khe_dao_ngay"] = True
-    cong_khong_do_duoc: list[str] = []
     try:
         _kh = DL.khe_gio_bat_thuong(df)
         # Truc thoi gian phai lay dung cai ma phep do da dung: tren khung ngay

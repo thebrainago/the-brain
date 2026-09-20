@@ -393,7 +393,7 @@ class CongChanCungHongThiMo(unittest.TestCase):
         n = 420
         idx = self._df_sach(n).index
         kq = SimpleNamespace(so_lenh=n, loi=np.zeros(n), index=idx,
-                             vi_the=np.ones(n))
+                             vi_the=np.ones(n), chi_phi_spread=0.0)
         so_sanh = {"he": {"tong_lai_pct": 50.0, "sharpe": 2.0, "calmar": 2.0,
                           "phoi_nhiem": 0.5, "so_bar": n},
                    "mua_giu_net": {"tong_lai_pct": 5.0, "sharpe": 0.2,
@@ -441,6 +441,57 @@ class CongChanCungHongThiMo(unittest.TestCase):
         self.assertEqual(ra["cong_khong_do_duoc"], [])
         self.assertIs(ra["dieu_kien"]["11_khong_an_khe_dao_ngay"], True)
         self.assertEqual(ra["verdict"], "PASS", ra["ly_do"][-3:])
+
+    def test_cong_13_khong_doc_duoc_chi_phi_thi_cung_KHONG_PASS(self):
+        """Cung hinh dang "hong thi mo" o cong `13_edge_vuot_spread`.
+
+        Ban cu: `except Exception: _lai_rong = _phi_sp = 0.0`, roi
+        `(_phi_sp <= 0)` la `True` -> CONG MO. Mot cong CHAN CUNG hoi "edge co
+        day hon chi phi khong" lai di qua **dung luc khong doc duoc chi phi**.
+        """
+        from types import SimpleNamespace
+        from unittest import mock
+        import numpy as np
+        from nhan import cong as CONG
+
+        n = 420
+        df = self._df_sach(n)
+
+        class _Hong:
+            """`chi_phi_spread` NEM khi doc - dung duong `except` cua cong 13."""
+            so_lenh = n
+            loi = np.zeros(n)
+            index = df.index
+            vi_the = np.ones(n)
+
+            @property
+            def chi_phi_spread(self):
+                raise RuntimeError("khong doc duoc phi")
+
+        so_sanh = {"he": {"tong_lai_pct": 50.0, "sharpe": 2.0, "calmar": 2.0,
+                          "phoi_nhiem": 0.5, "so_bar": n},
+                   "mua_giu_net": {"tong_lai_pct": 5.0, "sharpe": 0.2,
+                                   "calmar": 0.2},
+                   "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 20.0}}
+        pl = {"p_xau_nhat": 0.001, "null_hop_le": True, "bootstrap_hop_le": True}
+        with mock.patch.object(CONG.DO, "so_sanh", return_value=so_sanh), \
+                mock.patch.object(CONG.DO, "hieu_qua_giai_doan", return_value=[]), \
+                mock.patch.object(CONG, "placebo", return_value=pl):
+            ra = CONG.xet(df, _Hong(), SimpleNamespace(),
+                          SimpleNamespace(do_tin="DO", canh_bao=None),
+                          gt_ma="CONG_MO.phi_hong", ho="test_cong_mo",
+                          da_dang_ky=True, tren_holdout=True,
+                          che_do="giao_dich")
+        self.assertIn("13_edge_vuot_spread", ra["cong_khong_do_duoc"])
+        self.assertNotEqual(ra["verdict"], "PASS")
+
+    def test_chi_phi_bang_0_KHAI_TUONG_MINH_thi_VAN_di_qua(self):
+        """Pham vi hep co chu dich: `0.0` khai TUONG MINH la truong hop that
+        cua che do nghien cuu (chi phi la KHAI BAO, va `7_chi_phi_do_duoc` da
+        chan san). Mot chot chan chan nham tang thi khong phai la chat hon."""
+        ra = self._chay(self._df_sach(), "CONG_MO.phi_khai_0")
+        self.assertNotIn("13_edge_vuot_spread", ra["cong_khong_do_duoc"])
+        self.assertEqual(ra["verdict"], "PASS", ra["ly_do"][-2:])
 
     def test_moi_cong_CHAN_CUNG_deu_duoc_khai_bao_ro_rang(self):
         """`CHAN_CUNG` liet ke tuong minh de them mot dieu kien moi khong tu

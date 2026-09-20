@@ -82,3 +82,38 @@ Ba thay đổi này đều **siết** bài kiểm cho đúng ý nó, không nớ
 `test_chuoi_fdr_chi_nhan_p_alpha_lien_tuc` và
 `test_che_do_nghien_cuu_tra_loi_duoc_cau_co_che` — đã đối chiếu
 `reports/do_main.txt`: **đỏ sẵn trên `main`**.
+
+---
+
+## CỔNG THỨ HAI, CÙNG HÌNH DẠNG: `13_edge_vuot_spread`
+
+```python
+except Exception:
+    _lai_rong = _phi_sp = 0.0
+dk["13_edge_vuot_spread"] = (_phi_sp <= 0) or (...)    # ← _phi_sp = 0 ⇒ MỞ
+```
+
+Đo hỏng → `_phi_sp = 0` → `(_phi_sp <= 0)` là `True` → **cổng mở**. Một cổng
+CHẶN CỨNG hỏi *"edge có dày hơn chi phí không"* lại đi qua **đúng lúc không đọc
+được chi phí**. Cùng tầng, cùng hình dạng với cổng 11.
+
+## PHẠM VI HẸP CÓ CHỦ ĐÍCH — VÀ MỘT THỨ TÔI ĐÃ BỎ
+
+Tôi đã thử bắt cả *"đã có lệnh mà phí = 0"* — đúng về lý lẽ (giao dịch thì phải
+trả spread). **Đã bỏ.** Hai lý do:
+
+1. Nó chặn cả các chuỗi **nghiên cứu hợp lệ**, nơi chi phí là KHAI BÁO chứ không
+   đo được — và `7_chi_phi_do_duoc` đã chặn sẵn đúng trường hợp đó.
+2. Nó buộc tôi phải bịa số vào 5 fixture, và mỗi con số bịa lại làm trượt một
+   điều kiện khác. Đó là dấu hiệu tôi đang **đánh nhau với fixture thay vì sửa
+   lỗi**.
+
+Một chốt chặn chặn nhầm tăng thì không phải là chặt hơn. Nay chỉ đánh dấu khi
+phép ĐỌC thật sự thất bại; `0.0` khai tường minh vẫn đi qua như cũ.
+
+## BẰNG CHỨNG
+- 2 bài mới, gồm **hiệu chuẩn ngược** (`0.0` khai tường minh **vẫn PASS**).
+- A/B: bài `cong_13` **đỏ trên bản cũ**, xanh trên bản mới.
+- **197 passed, 3 skipped, 6 failed** trên 13 file. Cả 6 bài đỏ đã đối chiếu
+  `reports/do_main.txt`: **đỏ sẵn** (2 ở `cong_fdr_v2`/`cong_do_phan_giai`,
+  4 ở `test_chay_that`).
