@@ -148,3 +148,39 @@ ngược bị chặn.
   `reports/do_main.txt`: **đỏ sẵn trên `main`**.
 - `test_cau_git.py` + `test_banker_diem_thoi_gian.py` +
   `test_hai_chieu_can_bang.py`: 66 passed.
+
+---
+
+## BỔ SUNG 2: nút thắt thật — `kiem_khong_nhin_truoc` gọi sai TẦNG
+
+Sau khi hạ chốt nhìn trước của `sinh_cap` xuống mức toán hạng, `sinh()` **vẫn**
+mất 153,7 giây. `cProfile` chỉ thẳng:
+
+```
+1    68.601s  sinh()
+160  68.437s  kiem_khong_nhim_truoc     <- 68,4 / 68,6 giây
+```
+
+Lời gọi đó nằm trong vòng trong cùng: **một lần cho MỖI (ngưỡng × giu)** — hàng
+trăm lần cho cùng một toán hạng — trong khi *"có đọc bar tương lai không"* là
+tính chất của **TOÁN HẠNG**, không của ngưỡng hay cửa sổ giữ.
+
+| | trước | sau |
+|---|---|---|
+| `sinh()` (1.200 bar, toán hạng đầy đủ) | **153,7 s** | **0,5 s** |
+| `sinh_cap` (300 cơ chế) | 40 s | 2,4 s |
+| `sinh_xu_huong` | — | 0,4 s |
+| cả cụm test liên quan | **quá 900 s, chưa xong** | **25 s** |
+
+Nhanh **~300×**, và kết quả gần như y nguyên (1.170 → 1.160 cơ chế). Mười cơ chế
+lệch là do chốt mức toán hạng **bảo thủ hơn**: một toán hạng trượt ở ngưỡng giữa
+thì bị loại cả cụm, thay vì lọt vài spec riêng lẻ.
+
+Đây không phải tối ưu hoá cho vui: một bước sinh 153 giây gọi 5 lần trong một
+file test là 13 phút, và nó chặn chính cái vòng "nghĩ → chạy → sửa" mà cả hệ
+đang xây.
+
+## BẰNG CHỨNG CUỐI
+**213 passed, 6 skipped, 1 failed** trong 25 giây — trên 10 file gồm cả bộ mới
+lẫn các bộ phụ thuộc. Bài đỏ duy nhất là `test_to_hop::test_cache_KHONG_doi_ket_qua`,
+đã đối chiếu `reports/do_main.txt`: **đỏ sẵn trên `main`**.

@@ -677,9 +677,10 @@ def _them_spec(ra, th, ten_th, phep, p, gt, ho, cau, ch, cac_giu, df_train,
         kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
         if not (kh_min <= kh <= kh_max):
             continue
-        ok, _ = NP.kiem_khong_nhin_truoc(spec, df_train)
-        if not ok:
-            continue
+        # Da kiem nhin truoc o muc TOAN HANG trong `sinh()`. Goi lai o day
+        # la mot lan cho MOI (nguong x giu) - hang tram lan cho cung mot
+        # toan hang. Do 20/09/2026 bang cProfile: **68,4 giay tren tong
+        # 68,6 giay** cua ca `sinh()` nam trong dung loi goi nay.
         spec["_ty_le_kich_hoat"] = round(kh, 4)
         ra.append(spec)
 
@@ -814,7 +815,28 @@ def sinh_xu_huong(df_train: pd.DataFrame, cac_cap=None, cac_giu=(1, 5, 10, 20),
     khong phai tran phoi nhiem ma la phep so voi mua-giu O CUNG MUC RUI RO.
     """
     ra: list[dict] = []
+    # Kiem nhin truoc MOT LAN cho moi TOAN HANG, roi bo qua o muc spec. Cung
+    # ly le voi `sinh()`: `a > b` chi doc qua khu khi ca `a` lan `b` chi doc
+    # qua khu. Do 20/09/2026 bang cProfile: loi goi nay chiem 68,4/68,6 giay
+    # cua `sinh()`, va ha no ve muc toan hang lam `sinh()` di tu 153,7 giay
+    # xuong 0,5 giay tren cung dau vao.
+    sach: dict[str, bool] = {}
+
+    def _sach(ten, t) -> bool:
+        if ten not in sach:
+            thu = {"ten": "probe", "ho": "xu_huong", "chieu": 1, "giu": 1,
+                   "co_che": "probe", "nguon": "probe", "ra": [],
+                   "vao": [{"trai": t, "phep": ">",
+                            "phai": {"chi_bao": "gia", "cot": "close"}}]}
+            try:
+                sach[ten] = bool(NP.kiem_khong_nhin_truoc(thu, df_train)[0])
+            except Exception:
+                sach[ten] = False
+        return sach[ten]
+
     for ten_a, ta, ten_b, tb in (cac_cap or CAP_XU_HUONG):
+        if not (_sach(ten_a, ta) and _sach(ten_b, tb)):
+            continue
         for phep in (">", "<", "cheo_len", "cheo_xuong"):
             ho, cau = CO_CHE_CAP[phep]
             # Chieu suy tu PHEP SO, khong tu tham so. `<` va `cheo_xuong` la
@@ -842,9 +864,7 @@ def sinh_xu_huong(df_train: pd.DataFrame, cac_cap=None, cac_giu=(1, 5, 10, 20),
                 kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
                 if not (kich_hoat_toi_thieu <= kh <= kich_hoat_toi_da):
                     continue
-                ok, _ = NP.kiem_khong_nhin_truoc(spec, df_train)
-                if not ok:
-                    continue
+                # Da kiem nhin truoc o muc TOAN HANG, xem `_sach` ben tren.
                 spec["_ty_le_kich_hoat"] = round(kh, 4)
                 ra.append(spec)
     return ra
