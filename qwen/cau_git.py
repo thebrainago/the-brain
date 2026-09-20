@@ -365,7 +365,12 @@ LAN = ("TESTER", "CPU", "LLM", "MANG", "NHE")
 
 #: Cac kieu cong `_cham` biet cham. Don khai kieu ngoai bang nay se LUON ra
 #: `CHUA_DO_DUOC` - nen chan ngay luc ra don thay vi sau mot dem chay.
-KIEU_CONG = ("pytest", "chay_duoc")
+#:
+#:   `chay_duoc`  0 = DAT · moi ma khac = CHUA_DO_DUOC
+#:   `pytest`     0 = DAT · 1 = AM · >= 2 = CHUA_DO_DUOC
+#:   `ba_muc`     cung quy uoc voi `pytest`, cho SCRIPT tu viet theo no.
+#:                Tach ten ra de doc don khong tuong no dang chay pytest.
+KIEU_CONG = ("pytest", "chay_duoc", "ba_muc")
 
 
 def ra_don(ma: str, muc_tieu: str, lenh: list[str] | None = None,
@@ -499,13 +504,14 @@ def _cham(kieu: str, ma_thoat: int, qua_gio: bool) -> tuple[str, str]:
     """
     if qua_gio:
         return "CHUA_DO_DUOC", "qua han - giet giua chung, khong doc duoc gi"
-    if kieu == "pytest":
+    if kieu in ("pytest", "ba_muc"):
         if ma_thoat == 0:
             return "DAT", "moi bai test deu xanh"
         if ma_thoat == 1:
             return "AM", "co bai test do (ma thoat 1)"
-        return "CHUA_DO_DUOC", ("pytest thoat %d - loi thu gom hay dung giua "
-                                "chung, khong bai nao chay" % ma_thoat)
+        return "CHUA_DO_DUOC", ("thoat %d - voi pytest la loi thu gom hay dung "
+                                "giua chung; voi script `ba_muc` la khau do "
+                                "hong" % ma_thoat)
     if kieu == "chay_duoc":
         return (("DAT", "chay xong, ma thoat 0") if ma_thoat == 0
                 else ("CHUA_DO_DUOC", "ma thoat %d" % ma_thoat))
