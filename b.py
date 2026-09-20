@@ -793,11 +793,34 @@ def c_hepha(a):
     so = next((int(x) for x in (a or [])[1:] if str(x).isdigit()), 200)
 
     if viec == "do":
+        # HAI PHEP DO KHAC NHAU, va truoc 20/09/2026 chi in mot cai.
+        #
+        # `do_phu()` khong tham so doc KHO HIEN TAI (`config/co_che_dsl.json`),
+        # tuc "cac co che dang co dung toan hang nao". Do la mot cau hoi ve
+        # LICH SU. Cau hoi ve NANG LUC - "may de co sinh ra duoc toan hang do
+        # khong" - phai do tren chinh lo duc.
+        #
+        # In moi cai dau tien thi mot dong "BO TRONG: 15" doc ra thanh
+        # "HEPHAESTUS khong voi toi 15 toan hang", trong khi lo duc phu het
+        # 45/45. Nguoi doc se di viet khuon cho thu da co khuon.
         r = HP.do_phu()
+        lo = HP.duc(han_ngach=9000)
+        rd = HP.do_phu(kho=lo)
         print("ngu phap NOI DUOC : %d toan hang" % r["so_noi_duoc"])
-        print("kho DANG DUNG     : %d" % r["so_dang_dung"])
-        print("BO TRONG          : %d" % len(r["bo_trong"]))
+        print("kho DANG DUNG     : %d   (lich su - co che da nam trong kho)"
+              % r["so_dang_dung"])
+        print("  chua co trong kho: %d" % len(r["bo_trong"]))
         print("  " + ", ".join(r["bo_trong"]))
+        print("")
+        print("MAY DE SINH DUOC  : %d   (nang luc - %d co che tu %d khuon)"
+              % (rd["so_dang_dung"], len(lo), len(HP.KHUON)))
+        if rd["bo_trong"]:
+            print("  KHUON CON THIEU : " + ", ".join(rd["bo_trong"]))
+        else:
+            print("  khong toan hang nao thieu khuon.")
+        from collections import Counter as _C
+        c = _C(x["chieu"] for x in lo)
+        print("  chieu           : %d mua / %d ban" % (c.get(1, 0), c.get(-1, 0)))
         return
 
     if viec in ("tu-vung", "tu_vung"):
