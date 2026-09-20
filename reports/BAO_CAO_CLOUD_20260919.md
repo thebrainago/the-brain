@@ -212,3 +212,50 @@ mot bai hieu chuan chieu nguoc (`ghep` cung chieu van phai lam viec).
   va 73 cap doi xung may moc.
 - Bo test HEPHAESTUS + kiem toan: **155 passed**.
 - `do_phu(kho=duc())["bo_trong"] == []` van giu (45/45 toan hang).
+
+---
+
+## XAC MINH HOI QUY: chay CA BO TEST tren HAI cay, doi chieu danh sach do
+
+Moi ket luan tren deu kem bang chung cuc bo (bai moi do tren code cu, xanh
+tren code moi). Cau con lai la cau TOAN CUC: **co lam do cai gi khac khong**.
+Cach duy nhat tra loi la chay ca bo test tren ca hai cay roi so DANH SACH
+TEN, khong so con so.
+
+`git worktree` cua `origin/main` (bb51292) + cay nhanh, cung co `pytest -q
+--tb=no -rf -p no:cacheprovider`, chay song song ~20 phut moi ben.
+
+| | `main` (bb51292) | nhanh nay |
+|---|---|---|
+| failed | **105** (102 FAILED + 3 SUBFAILED) | **85** (85 FAILED + 0 SUBFAILED) |
+| passed | 2.083 | 2.353 |
+| skipped | 45 | 46 |
+| subtests passed | 342 | 352 |
+
+**`comm` tren hai danh sach ten:**
+
+* **DO MOI (chi co o nhanh): 0.** Khong mot bai nao do them.
+* **DA SUA (chi co o main): 17 FAILED + 3 SUBFAILED**, gom tron bon nhom:
+
+      test_cong_fdr_v2            2   (xep loai `12_rr_thuc_te` / `13_edge_vuot_spread`)
+      test_cong_do_phan_giai      2 + 3 SUBFAILED
+      test_khe_dao_ngay           6
+      test_phoi_nhiem_holdout     5
+      test_lay_hong_mang          2   (`bien_dich_ung_vien._doc_con_tro`)
+
+  Ba nhom giua deu do CUNG mot nguyen nhan: hai dieu kien duoc them vao
+  `cong.xet` ma khong xep vao `NHAN_MEM` hay `CHAN_CUNG` -> `KeyError` o che
+  do mac dinh "nhan". Mot loi, hai muoi ket qua test.
+
+### Ba diem phai noi ro de con so nay khong bi doc qua tay
+
+1. **Khong co `pytest-randomly`** trong moi truong nay (khong dong seed o dau
+   ra), nen thu tu chay la thu tu file o ca hai lan - phep so danh sach hop le.
+2. **`105 - 85 = 20` khong phai la "sua 20 loi"**, ma la 20 KET QUA TEST.
+   Nguyen nhan goc it hon nhieu (phan lon la mot cai).
+3. **85 bai con do la do THIEU DAU VAO**, khong phai do code: cloud khong co
+   `data/` va `nao.db`. Phep so nay tra loi duoc "co gay them gi khong", no
+   **khong** tra loi duoc "code co dung voi du lieu that khong". Cau thu hai
+   chi may chu du an tra loi duoc.
+
+Danh sach day du luu o `reports/do_main.txt` va `reports/do_nhanh.txt`.
