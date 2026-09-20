@@ -993,6 +993,168 @@ def _khuon_doi_tuyet_doi(giu_mac_dinh: int) -> list[dict]:
     return ra
 
 
+def _khuon_ty_le_phuong_sai(giu_mac_dinh: int) -> list[dict]:
+    """TY LE PHUONG SAI (Lo-MacKinlay): thi truong dang TIEP DIEN hay HOI VE.
+
+    Toan hang `phuong_sai` la mot trong hai toan hang cuoi cung cua `ngu_phap`
+    khong co khuon nao dung (do 19/09/2026), va no xuat hien **72 lan trong ma
+    that** - tuc kho nguon co dung, con may de thi khong.
+
+    ## VI SAO KHONG PHAI LA `bien_dong_do_lech` DOI TEN
+
+    Cai bay ro rang nhat: `phan_vi(phuong_sai(n))` va `phan_vi(do_lech(n))`
+    **bang nhau tung bar**, vi can bac hai la phep don dieu tang nen no khong
+    doi THU HANG. Mot khuon nhu vay se la mot phep thu duoc tra suat FDR hai
+    lan trong khi chi hoi mot cau.
+
+    Cau hoi RIENG cua phuong sai khong nam o mot cua so, ma o hai **CHAN TRO**
+    khac nhau cua cung mot chuoi:
+
+        VR(k) = Var(doi k bar) / ( k * Var(doi 1 bar) )
+
+    Duoi buoc ngau nhien, phuong sai cong don tuyen tinh theo thoi gian nen
+    `VR = 1` dung bang dinh nghia. `VR > 1` nghia la cac buoc cung dau nhieu
+    hon ngau nhien (TIEP DIEN); `VR < 1` nghia la chung nguoc dau nhau
+    (HOI VE). Do la mot phat bieu ve **tu tuong quan**, khong phai ve do lon
+    cua bien dong - nen no khong the la mot phan vi do lech doi ten.
+
+    ## HAI CHOT PHAI CO
+
+    1. **Thang do.** Ca hai ve la phuong sai cua gia -> don vi gia binh phuong.
+       He so `k*c` khong thu nguyen, nen phep so sanh khong thu nguyen. Neu de
+       `phuong_sai(...) > 0,0001` thi lai la nguong theo tai san.
+    2. **Che do KHONG PHAI tin hieu vao.** `VR` khong noi mua hay ban, no noi
+       *nen doc tin hieu theo chieu nao*. Vi vay moi co che o day co HAI dieu
+       kien: che do + dau cua chinh cu dich, va chieu vao doi theo che do. Mot
+       ban chi co dieu kien VR se la mot he giu vi the vinh vien.
+    """
+    ra = []
+    for k in (5, 10):
+        for n in (100, 250):
+            v_k = {"chi_bao": "phuong_sai", "n": n,
+                   "cua": {"chi_bao": "doi", "n": k, "cua": GIA}}
+            v_1 = {"chi_bao": "phuong_sai", "n": n,
+                   "cua": {"chi_bao": "doi", "n": 1, "cua": GIA}}
+            dich_len = {"trai": {"chi_bao": "doi", "n": k, "cua": GIA},
+                        "phep": ">", "phai": {"hang": 0}}
+            dich_xuong = {"trai": {"chi_bao": "doi", "n": k, "cua": GIA},
+                          "phep": "<", "phai": {"hang": 0}}
+            for c in (1.2, 1.5):
+                # VR cao -> cac buoc cung dau -> di THEO cu dich vua roi.
+                ra.append(_spec(
+                    _ten("vr_tiep_dien", k, n, c), "xu_huong", 1,
+                    [{"trai": v_k, "phep": ">",
+                      "phai": {"chi_bao": "tuyen_tinh", "toan_hang": [v_1],
+                               "he_so": [float(k) * c]}}, dich_len],
+                    "Phuong sai cong don NHANH hon tuyen tinh nghia la cac "
+                    "buoc cung dau nhieu hon ngau nhien: ai phai mua van chua "
+                    "mua xong, va phan con lai cua lenh do la cai duoc tra.",
+                    giu_mac_dinh))
+                ra.append(_spec(
+                    _ten("vr_tiep_dien_ban", k, n, c), "xu_huong", -1,
+                    [{"trai": v_k, "phep": ">",
+                      "phai": {"chi_bao": "tuyen_tinh", "toan_hang": [v_1],
+                               "he_so": [float(k) * c]}}, dich_xuong],
+                    "Chieu con lai cua cung che do: buoc cung dau va cu dich "
+                    "vua roi la giam, tuc ben ban van con hang phai thoat.",
+                    giu_mac_dinh))
+            for c in (0.5, 0.7):
+                # VR thap -> cac buoc nguoc dau -> vao NGUOC cu dich vua roi.
+                ra.append(_spec(
+                    _ten("vr_hoi_ve", k, n, c), "quay_ve_trung_binh", 1,
+                    [{"trai": v_k, "phep": "<",
+                      "phai": {"chi_bao": "tuyen_tinh", "toan_hang": [v_1],
+                               "he_so": [float(k) * c]}}, dich_xuong],
+                    "Phuong sai cong don CHAM hon tuyen tinh nghia la cac buoc "
+                    "nguoc dau nhau: ai vua ban la ban vi can tien chu khong vi "
+                    "gia, nen phan chenh lech do duoc tra lai cho nguoi cam.",
+                    giu_mac_dinh))
+                ra.append(_spec(
+                    _ten("vr_hoi_ve_ban", k, n, c), "quay_ve_trung_binh", -1,
+                    [{"trai": v_k, "phep": "<",
+                      "phai": {"chi_bao": "tuyen_tinh", "toan_hang": [v_1],
+                               "he_so": [float(k) * c]}}, dich_len],
+                    "Chieu con lai: che do nguoc dau va cu dich vua roi la "
+                    "tang, tuc ben mua vua tra gia cao hon muc can bang.",
+                    giu_mac_dinh))
+    return ra
+
+
+def _khuon_gann(giu_mac_dinh: int) -> list[dict]:
+    """MUC GANN SQUARE OF 9 chieu tu mot PIVOT - toan hang cuoi chua co khuon.
+
+    `ngu_phap.gann_sq9` co tu 08/09/2026 va tinh `(sqrt(nen) + huong*k*goc/360)^2`.
+    Docstring cua no da noi ro no duoc them de **khong phai viet mot he rieng**:
+    la toan hang thi no thua huong nguyen cong placebo/holdout/MDE. Nhung cho
+    toi 19/09 khong khuon nao dung no, nen no van chua tung di qua cong nao.
+
+    ## DOC CO CHE THEO CHIEU "KET SONG", KHONG THEO CHIEU "PHA VO"
+
+    Mot muc gia thi dung duoc ca hai chieu. Chon chieu HOI VE o day vi chieu
+    pha vo da co `_khuon_pha_vo` lam voi Bollinger/Donchian/Kijun - them mot
+    ban Gann cua cung hinh dang do la hoi lai gan dung mot cau hoi. Cai RIENG
+    ma Gann tuyen bo la: nhung muc hai hoa nay la noi mot song KET THUC, chu
+    khong phai noi no tang toc.
+
+    ## THANG DO: VI SAO `goc` PHAI QUET QUA NHIEU BAC DO LON
+
+    Buoc giua hai muc xap xi `2*sqrt(nen)*k*goc/360`, tuc TY LE voi `sqrt(gia)`
+    - khong phai voi gia, cung khong phai voi bien do. Hau qua do duoc ngay tren
+    giay: voi `goc = 90` thi EURUSD (nen ~1,08) co muc cach day **42%**, con
+    XAUUSDM (nen ~2000) chi cach **0,01%**. Mot ban cho cai nay thi chet o cai
+    kia, va ca hai deu im lang: mot ben 0 lenh, mot ben kich hoat gan 100%.
+
+    DO THAT 20/09/2026 tren hai chuoi tong hop 3.000 bar cung mot hat giong,
+    chi khac muc gia (`hp_gann_ho_tro_20_*`, ty le kich hoat):
+
+        goc        0,1     0,5     2,0     8,0    45,0   180,0
+        EURUSD   0,208   0,022   0,000   0,000   0,000   0,000
+        XAUUSD   0,230   0,228   0,218   0,152   0,000   0,000
+
+    Cung mot chuoi loi suat, cung mot co che, chi doi muc gia: o `goc = 2` mot
+    ben chet han con ben kia kich hoat 21,8%. Day khong phai loi - do la ly do
+    `goc` phai quet qua BA bac do lon (0,1 -> 180). Cai ban dung duoc
+    tren mot tai san la viec cua `nguong_dat_duoc` + ty le kich hoat loc ra,
+    va viec CHUYEN sang tai san khac la viec cua `ngoai_sinh.chuyen` (giu ty
+    le kich hoat, khong giu con so) - dung nhu docstring cua `gann_sq9` ghi.
+
+    ## `tre(1)` LA BAT BUOC
+
+    `thap_nhat(n)` gom ca nen hien tai, nen `close < f(min(low))` voi `f` ha
+    muc xuong se mang mot phan thong tin cua chinh bar dang xet. Day la dung
+    cai bay da ghi o `_khuon_pha_vo` cho Donchian va no dang gia mot toan hang
+    rieng - nen lui mot bar.
+    """
+    ra = []
+    for n in (20, 55):
+        day = {"chi_bao": "tre", "n": 1,
+               "cua": {"chi_bao": "thap_nhat", "n": n,
+                       "cua": {"chi_bao": "gia", "cot": "low"}}}
+        dinh = {"chi_bao": "tre", "n": 1,
+                "cua": {"chi_bao": "cao_nhat", "n": n,
+                        "cua": {"chi_bao": "gia", "cot": "high"}}}
+        for goc in (0.1, 0.5, 2.0, 8.0, 45.0, 180.0):
+            ra.append(_spec(
+                _ten("gann_ho_tro", n, goc), "quay_ve_trung_binh", 1,
+                [{"trai": GIA, "phep": "<",
+                  "phai": {"chi_bao": "gann_sq9", "goc": goc, "k": 1.0,
+                           "huong": -1, "cua": day}}],
+                "Gia xuyen mot muc hai hoa chieu tu day song truoc: ai ban "
+                "toi do la ban vi buoc phai ban, va phan re hon muc do la cai "
+                "tra cho nguoi con cam duoc vi the.",
+                giu_mac_dinh))
+            ra.append(_spec(
+                _ten("gann_khang_cu", n, goc), "quay_ve_trung_binh", -1,
+                [{"trai": GIA, "phep": ">",
+                  "phai": {"chi_bao": "gann_sq9", "goc": goc, "k": 1.0,
+                           "huong": 1, "cua": dinh}}],
+                "Gia vuot mot muc hai hoa chieu tu dinh song truoc: ben mua "
+                "dang tra cao hon muc can bang cua chinh song do, va ban cho "
+                "ho la ban thanh khoan dung luc no dat nhat.",
+                giu_mac_dinh))
+    return ra
+
+
 #: THU TU LA THU TU UU TIEN. Khuon dung truoc duoc de truoc, nen mot han ngach
 #: nho luon la TAP CON DAU cua han ngach lon - xin 20 hom nay roi 100 ngay mai
 #: khong phai dang ky lai tu dau.
@@ -1018,6 +1180,8 @@ KHUON = (
     ("che_do_lat", _khuon_che_do_lat),
     ("bien_dong_do_lech", _khuon_bien_dong_do_lech),
     ("doi_tuyet_doi", _khuon_doi_tuyet_doi),
+    ("ty_le_phuong_sai", _khuon_ty_le_phuong_sai),
+    ("gann", _khuon_gann),
 )
 
 
