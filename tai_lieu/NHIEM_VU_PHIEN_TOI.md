@@ -165,3 +165,35 @@ Không vượt được phép so đó thì BANKER là chi phí, dù báo cáo c�
 - **Không để một phép CHƯA_ĐO_ĐƯỢC đi ra im lặng.** Cả đợt 3 phiên trước là
   nhóm lỗi này.
 - **Không sửa bài test cho xanh.** Bài test là đặc tả.
+
+---
+
+# ĐÃ LÀM TRONG ĐÊM 20→21/09 (cập nhật cuối đêm)
+
+Máy chủ dự án **TẮT** cả đêm, nên mọi thứ dưới đây là phần không cần máy.
+
+| Việc | Trạng thái |
+|---|---|
+| **VIỆC 1 — cầu nối hai máy** | **XONG phần code**, 43 bài trên repo git thật. Chưa chạy vòng thật vì máy tắt. |
+| Hàng đợi cho máy | **7 đơn** trong `viec/cho/` |
+| **VIỆC 3 — BANKER point-in-time** | **XONG**: lời khai point-in-time là SAI, đã thêm chiều `ngay_biet` |
+| BANKER — phép so edge/chi phí | **XONG**: `so_co_che_do` + `chuoi_che_do` |
+| NỘI SINH lệch chiều + luận điểm nói ngược | **XONG**: 3.669 long/0 short → cân; và `sinh()` nhanh 300× |
+| Cổng chặn cứng **hỏng thì mở** (2 cổng) | **XONG** |
+
+## VIỆC ĐẦU TIÊN KHI MÁY BẬT
+
+```
+q cau            xem cầu nối + 7 đơn đang chờ
+q mot-vong       chạy một vòng, xác nhận đơn `cau-kiem` đi hết vòng
+```
+
+**Chưa đi hết một vòng thì cầu chưa tồn tại.** Mọi thứ khác chờ sau đó.
+
+## CÒN NGUYÊN, CHƯA ĐỘNG TỚI
+
+- **VIỆC 2** (chạy thật 968 cơ chế + 84 cấu hình quản trị) — cần máy.
+- Độ trễ công bố của BANKER mới là **ƯỚC TÍNH**; nguồn ngày thật là **ALFRED**,
+  và cloud **không nối được** (proxy trả 403 CONNECT cho fred/alfred/cftc).
+- `_luu_seri` chưa ghi vào `vi_mo_ban` — bảng có, đường ghi chưa nối.
+- Chưa có phép so "cùng ngân sách FDR, có BANKER vs không BANKER".
