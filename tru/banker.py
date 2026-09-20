@@ -2,8 +2,30 @@
 """banker.py - TRU BANKER. Vi mo cap nhat lien tuc + phan tich sat sao.
 
 Khac ban cu (`lab/banker.py` viet brief roi thoi): o day moi seri vi mo duoc
-LUU VAO SO theo thoi gian, nen sau nay tra loi duoc cau hoi "luc do ta biet gi"
-(point-in-time) chu khong phai lay ban moi nhat ap nguoc cho qua khu.
+LUU VAO SO theo thoi gian.
+
+## LOI DA SUA 20/09/2026 - CAU "POINT-IN-TIME" O TREN TUNG LA MOT LOI KHAI
+
+Doan nay truoc viet: *"nen sau nay tra loi duoc cau hoi 'luc do ta biet gi'
+(point-in-time) chu khong phai lay ban moi nhat ap nguoc cho qua khu"*.
+
+**Cau do SAI voi chinh ma nguon ben duoi no.** Bang la
+`vi_mo(seri, ngay, gia_tri, PRIMARY KEY(seri, ngay))` va `ngay` lay thang tu
+cot dau CSV cua FRED - tuc **NGAY CUA SO LIEU**, khong phai ngay ta biet no.
+Ba hau qua, ca ba im lang:
+
+1. **Nhin truoc theo DO TRE CONG BO.** CPI thang 3 duoc FRED ghi `ngay =
+   2026-03-01` nhung phai giua thang 4 moi cong bo. Mot cau hoi "ngay
+   2026-03-15 ta biet gi" se tra ve so CPI thang 3 - **nhin truoc mot thang**.
+   Voi World Bank (nam mot lan) do tre la **hang nam**.
+2. **Khong co chieu BAN (vintage).** Mot con so bi sua lai khong luu o dau ca.
+3. **`INSERT OR IGNORE` NUOT ban sua.** Lan tai dau tien thang; nhung "lan
+   dau" la luc nao thi khong ghi o dau. Hai may chay cung ma nguon o hai thoi
+   diem khac nhau se co hai `nao.db` khac nhau **ma khong gi noi ra**.
+
+Nay: bang `vi_mo_ban` giu ca chieu `ngay_biet`, va `gia_tri_biet_luc()` la
+duong DUY NHAT duoc dung cho cau hoi point-in-time. Seri chua khai do tre thi
+no tra `CHUA_DO_DUOC` - **khong doan**.
 
 Nguon (deu mien phi, khong can khoa):
   - FRED (fred.stlouisfed.org/graph/fredgraph.csv) : lai suat, duong cong,
@@ -89,6 +111,39 @@ WB = {
     "VN_CPI":  ("VN", "FP.CPI.TOTL.ZG", "Lam phat Viet Nam (%/nam)"),
     "VN_GDP":  ("VN", "NY.GDP.MKTP.KD.ZG", "Tang truong GDP Viet Nam (%/nam)"),
     "VN_TYGIA": ("VN", "PA.NUS.FCRF", "Ty gia VND/USD trung binh nam"),
+}
+
+#: DO TRE CONG BO: tu NGAY CUA SO LIEU den ngay ta THAT SU biet no, tinh bang
+#: ngay lich. Day la thu bien mot chuoi vi mo thanh dung hay thanh nhin truoc.
+#:
+#: Quy uoc BAO THU: khi khong chac, khai SO LON HON. Khai thua mot tuan chi lam
+#: mat mot tuan du lieu; khai thieu mot tuan la nhin truoc mot tuan, va no
+#: khong lo ra o bat ky bang so nao.
+#:
+#: Seri KHONG co trong bang nay thi `gia_tri_biet_luc` tra `CHUA_DO_DUOC`. Do
+#: la co y: mot mac dinh `0` se lang le bien moi seri moi thanh mot nguon nhin
+#: truoc, va `0` trong y het mot con so da can nhac.
+DO_TRE_NGAY = {
+    # --- Gia thi truong: biet NGAY TRONG NGAY. Khong bao gio bi sua lai. ---
+    **{k: 0 for k in ("LS10Y", "LS3M", "LS5Y", "LS30Y", "VIX", "VIX3M", "USD",
+                      "HYG", "LQD", "TLT", "DAU", "VANG", "SP500")},
+    "EURUSD_ECB": 1,          # ty gia tham chieu ECB chot ~16:00 CET, dang ngay sau
+
+    # --- FRED theo NGAY: cong bo ngay lam viec ke tiep, gan nhu khong sua. ---
+    **{k: 1 for k in ("DGS10", "DGS2", "DFF", "T10Y2Y", "T10Y3M", "VIXCLS",
+                      "BAMLH0A0HYM2", "DTWEXBGS")},
+
+    # --- FRED theo TUAN ---
+    "WALCL": 8,               # bang can doi chot thu Tu, ra thu Nam tuan sau
+    "NFCI": 10,               # chi so tuan, cong bo tre va CO SUA LAI
+
+    # --- FRED theo THANG: FRED ghi `ngay` la DAU KY, nen do tre tinh tu do ---
+    "CPIAUCSL": 45,           # CPI thang M ra giua thang M+1; ban dieu chinh
+                              # mua vu con bi sua lai HANG NAM
+    "UNRATE": 40,             # bao cao viec lam ra thu Sau dau thang M+1
+
+    # --- World Bank: nam mot lan, va do tre la HANG NAM ---
+    **{k: 400 for k in ("VN_CPI", "VN_GDP", "VN_TYGIA")},
 }
 
 # Daily market series may legitimately stop over a weekend/holiday, but a value
@@ -548,3 +603,99 @@ def mot_luot(ep: bool = False) -> dict:
 if __name__ == "__main__":
     SO.khoi_tao()
     print(json.dumps(mot_luot(ep="--ep" in sys.argv), ensure_ascii=False, indent=1))
+
+
+# ===================================================================== DIEM THOI GIAN
+def do_tre_cua(seri: str) -> int | None:
+    """Do tre cong bo cua mot seri, hay `None` neu chua khai.
+
+    `None` KHONG duoc doc thanh 0. Xem `DO_TRE_NGAY`.
+    """
+    return DO_TRE_NGAY.get(seri)
+
+
+def ngay_biet_cua(seri: str, ngay: str) -> str | None:
+    """Ngay ta THAT SU biet mot so lieu. `None` = chua khai do tre."""
+    d = _doc_ngay(ngay)
+    tre = do_tre_cua(seri)
+    if d is None or tre is None:
+        return None
+    return (d + timedelta(days=int(tre))).strftime("%Y-%m-%d")
+
+
+def gia_tri_biet_luc(seri: str, moc: str) -> dict:
+    """Gia tri MOI NHAT ma ta da biet tinh den `moc`. Duong DUY NHAT cho
+    cau hoi point-in-time.
+
+    Tra mot dict LUON co `trang_thai`:
+      `DAT`           co so, kem `ngay` (ngay so lieu) va `ngay_biet`.
+      `AM`            khai bao du nhung khong co diem nao du cu de da biet.
+      `CHUA_DO_DUOC`  seri chua khai do tre, hay `moc` khong doc duoc.
+
+    ## VI SAO KHONG CO NHANH "MAC DINH 0 NGAY"
+
+    Mot mac dinh nhu vay se lang le bien moi seri moi thanh nguon nhin truoc,
+    va cai gia khong lo ra o dau: bang so van day, p-value van tinh duoc, chi
+    co ket luan la sai. Tu choi tra loi la ton mot seri; doan la ton ca ket
+    luan.
+    """
+    if _doc_ngay(moc) is None:
+        return {"seri": seri, "trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "moc khong doc duoc: %r" % (moc,)}
+    tre = do_tre_cua(seri)
+    if tre is None:
+        return {"seri": seri, "trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "seri '%s' chua khai DO_TRE_NGAY - khong biet luc nao "
+                         "thi ta biet so nay, nen khong tra loi point-in-time "
+                         "duoc" % seri}
+    # Loc bang NGAY SO LIEU + do tre <= moc. Lam trong SQL bang `date()` de
+    # khong phai keo ca seri ve bo nho.
+    r = SO.mot(
+        "SELECT ngay, gia_tri FROM vi_mo WHERE seri=? "
+        "AND date(ngay, ?) <= date(?) ORDER BY ngay DESC LIMIT 1",
+        seri, "+%d days" % int(tre), moc[:10])
+    if not r:
+        return {"seri": seri, "trang_thai": "AM", "do_tre_ngay": int(tre),
+                "ly_do": "khong diem nao da duoc cong bo truoc %s" % moc[:10]}
+    return {"seri": seri, "trang_thai": "DAT", "ngay": r["ngay"],
+            "gia_tri": r["gia_tri"], "do_tre_ngay": int(tre),
+            "ngay_biet": ngay_biet_cua(seri, r["ngay"]), "uoc_tinh": True}
+
+
+def do_nhin_truoc(seri: str, moc: str) -> dict:
+    """DO bang so cai nhin truoc ma phep doc ngay tho gay ra.
+
+    Bien mot loi khai thanh mot CON SO: so sanh "gia tri CUA ngay <= moc"
+    (phep doc cu) voi "gia tri ta DA BIET tinh den moc" (phep doc dung). Lech
+    bao nhieu ngay, va co lech ca gia tri khong.
+
+    Dung de kiem: neu ham nay tra `lech_ngay = 0` cho MOI seri thi hoac du
+    lieu khong co do tre nao, hoac phep do dang hong - chu khong phai "bang
+    cu von da dung".
+    """
+    tho = SO.mot("SELECT ngay, gia_tri FROM vi_mo WHERE seri=? AND ngay<=? "
+                 "ORDER BY ngay DESC LIMIT 1", seri, moc[:10])
+    dung = gia_tri_biet_luc(seri, moc)
+    if not tho:
+        return {"seri": seri, "trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "khong co diem nao <= %s" % moc[:10]}
+    if dung["trang_thai"] != "DAT":
+        return {"seri": seri, "trang_thai": dung["trang_thai"],
+                "ly_do": dung.get("ly_do"), "tho_thay": tho["ngay"]}
+    a, b = _doc_ngay(tho["ngay"]), _doc_ngay(dung["ngay"])
+    return {"seri": seri, "trang_thai": "DAT",
+            "tho_thay": tho["ngay"], "dung_ra_thay": dung["ngay"],
+            "lech_ngay": (a - b).days if a and b else None,
+            "lech_gia_tri": (None if tho["gia_tri"] is None
+                             or dung["gia_tri"] is None
+                             else round(tho["gia_tri"] - dung["gia_tri"], 6))}
+
+
+def seri_chua_khai_do_tre() -> list[str]:
+    """Seri da khai trong `SERI`/`WB` ma chua co do tre. Phai LUON rong.
+
+    Them mot seri moi ma quen khai do tre thi no khong hong ngay - no chi
+    lang le tu choi moi cau hoi point-in-time ve chinh no. Bai kiem goi ham
+    nay de cho do lo ra luc them, chu khong phai vai thang sau.
+    """
+    return sorted(k for k in list(SERI) + list(WB) if k not in DO_TRE_NGAY)
