@@ -182,3 +182,35 @@ class BangBanVintage(NenDbTam):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class KhoiMainPhaiNamCUOI(unittest.TestCase):
+    """Loi cau truc toi tu mac trong chinh goi nay (20/09/2026).
+
+    Toi noi muc DIEM THOI GIAN vao SAU khoi `if __name__ == "__main__"`. Cu
+    phap hop le, `import` van chay, moi bai kiem van xanh - nhung
+    `python -m tru.banker` se thuc thi `mot_luot()` TRUOC khi cac ham do ton
+    tai. Mot `NameError` cho duoc kich hoat, va khong bai kiem nao bat duoc vi
+    bai kiem `import` chu khong chay `__main__`.
+
+    Bai nay doc AST: khoi `__main__` phai la thu CUOI CUNG o muc file.
+    """
+
+    def test_khong_dinh_nghia_gi_sau_khoi_main(self):
+        import ast
+        for f in ("tru/banker.py", "tru/seeker.py", "tru/quantlab.py",
+                  "tru/evolution.py", "tru/nghi.py", "tru/finder.py"):
+            p = Path(f)
+            if not p.exists():
+                continue
+            cay = ast.parse(p.read_text(encoding="utf-8"))
+            vt = [i for i, n in enumerate(cay.body)
+                  if isinstance(n, ast.If) and ast.dump(n.test).find("__main__") >= 0]
+            if not vt:
+                continue
+            sau = [n for n in cay.body[vt[0] + 1:]
+                   if isinstance(n, (ast.FunctionDef, ast.ClassDef, ast.Assign))]
+            self.assertEqual(
+                [getattr(n, "name", "<gan>") for n in sau], [],
+                "%s: co dinh nghia SAU khoi __main__ - `python -m` se chay "
+                "khoi do truoc khi chung ton tai" % f)

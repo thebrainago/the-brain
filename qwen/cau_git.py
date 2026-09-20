@@ -363,10 +363,16 @@ def tom_tat(goc: Path | None = None) -> dict:
 LAN = ("TESTER", "CPU", "LLM", "MANG", "NHE")
 
 
+#: Cac kieu cong `_cham` biet cham. Don khai kieu ngoai bang nay se LUON ra
+#: `CHUA_DO_DUOC` - nen chan ngay luc ra don thay vi sau mot dem chay.
+KIEU_CONG = ("pytest", "chay_duoc")
+
+
 def ra_don(ma: str, muc_tieu: str, lenh: list[str] | None = None,
            lan: str = "NHE", uu_tien: int = 5, han_phut: float = 60.0,
            file_test: str = "", duoc_sua: list[str] | None = None,
-           ghi_chu: str = "", goc: Path | None = None) -> Path:
+           ghi_chu: str = "", cong: dict | str | None = None,
+           goc: Path | None = None) -> Path:
     """BEN CLOUD ra mot don hang. Ghi ra `viec/cho/<ma>.json`.
 
     Khong tu `git push` - viec do de cho nguoi goi gop nhieu don vao mot
@@ -399,6 +405,24 @@ def ra_don(ma: str, muc_tieu: str, lenh: list[str] | None = None,
                              "khong duoc sua de lam xanh")
     if ghi_chu:
         d["ghi_chu"] = ghi_chu
+    # CONG LA BAT BUOC khi don co lenh.
+    #
+    # Do la loi toi tu mac ngay lo don dau tien (20/09/2026): ra sau don khong
+    # kem `cong`, va `_cham` cham moi don khong khai kieu la `CHUA_DO_DUOC` -
+    # dung theo luat, nhung nghia la **ca sau don se ve CHUA_DO_DUOC bat ke
+    # chung chay the nao**. Mot dem may chay het cong suat de lay ve sau dong
+    # "khong cham duoc". Nen chan o day, luc ra don.
+    if lenh:
+        if cong is None:
+            raise ValueError(
+                "don '%s' co `lenh` nhung khong khai `cong` - moi ket qua cua "
+                "no se la CHUA_DO_DUOC du chay the nao. Khai cong=%r"
+                % (ma, list(KIEU_CONG)))
+        kieu = cong if isinstance(cong, str) else (cong or {}).get("kieu")
+        if kieu not in KIEU_CONG:
+            raise ValueError("cong.kieu phai la mot trong %r, nhan duoc %r"
+                             % (list(KIEU_CONG), kieu))
+        d["cong"] = {"kieu": kieu}
     p = thu / "cho" / ("%s.json" % ma)
     p.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
     return p
@@ -489,6 +513,30 @@ def _cham(kieu: str, ma_thoat: int, qua_gio: bool) -> tuple[str, str]:
                             "(ma thoat %d)" % ma_thoat)
 
 
+def _thay_the(lenh) -> list[str] | None:
+    """Doi cac the trong lenh cua don thanh thu that cua MAY DANG CHAY.
+
+    ## VI SAO CAN: don duoc viet tren CLOUD (Linux), chay tren WINDOWS
+
+    Cloud viet `python3`; may chu du an khong co `python3`, va `CLAUDE.md` con
+    chot Python o day la MOT duong dan cu the:
+    `...\pythoncore-3.14-64\python.exe` - khong duoc dung
+    `WindowsApps\python.exe`.
+
+    Mot don viet cung `python3` se that bai tren may voi `FileNotFoundError`,
+    va `_cham` se cham no `CHUA_DO_DUOC`. Khong sai ve luat, nhung don nao
+    cung hong vi mot ly do khong lien quan gi den noi dung don.
+
+    The `{py}` -> `sys.executable`, tuc dung chinh Python dang chay `q` - va
+    do la Python ma `b.cmd` da tro dung.
+    """
+    if not lenh:
+        return None
+    import sys
+    bang = {"{py}": sys.executable, "{goc}": str(GOC)}
+    return [bang.get(str(x), str(x)) for x in lenh]
+
+
 def chay_don(don: dict, goc: Path | None = None,
              chay_that: bool = True) -> dict:
     """BEN MAY chay MOT don roi ghi ket qua. Tra dict ket qua.
@@ -508,7 +556,7 @@ def chay_don(don: dict, goc: Path | None = None,
                 "ly_do": "lan TESTER dang ban - de don lai cho vong sau",
                 "hoan": True}
     try:
-        lenh = don.get("lenh")
+        lenh = _thay_the(don.get("lenh"))
         if not lenh:
             return dict(ghi_va_doc(ma, "CHUA_DO_DUOC",
                                    "don khong co `lenh` nen khong chay duoc gi",

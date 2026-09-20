@@ -93,3 +93,50 @@ lần tắt máy làm kẹt lằn TESTER **vĩnh viễn** mà bảng việc vẫ
 - Chưa có cơ chế cloud **trả lời** một câu `can_cloud` (mới có chiều máy→cloud).
 - `viec/dang/` đã tạo nhưng chưa dùng — `chay_don` hiện dựa vào `viec/xong/` để
   chống chạy trùng.
+
+---
+
+## BỔ SUNG (cùng đêm): hai lỗi tôi tự mắc, và hàng đợi đã xếp
+
+### Lỗi 1 — `cong` không bắt buộc: cả sáu đơn sẽ về `CHUA_DO_DUOC`
+
+Tôi ra sáu đơn đầu tiên **không kèm `cong`**. `_cham` chấm đơn không khai kiểu là
+`CHUA_DO_DUOC` — đúng theo luật, nhưng nghĩa là **cả sáu đơn sẽ về
+`CHUA_DO_DUOC` bất kể chúng chạy thế nào**. Một đêm máy chạy hết công suất để
+lấy về sáu dòng "không chấm được".
+
+Cái bẫy: **không có gì hỏng cả.** Đơn hợp lệ, máy chạy thật, kết quả ghi thật —
+chỉ là không con số nào đọc được. Nên phải chặn lúc **ra đơn**, không phải lúc
+chấm. `ra_don` nay ném `ValueError` khi đơn có `lenh` mà không khai `cong`, và
+có một bài kiểm duyệt **hàng đợi thật trong repo** chứ không phải fixture.
+
+### Lỗi 2 — định nghĩa nằm sau khối `__main__`
+
+Tôi nối mục ĐIỂM THỜI GIAN vào `tru/banker.py` **sau** `if __name__ ==
+"__main__"`. Cú pháp hợp lệ, `import` vẫn chạy, mọi bài kiểm vẫn xanh — nhưng
+`python -m tru.banker` sẽ thực thi `mot_luot()` **trước khi** các hàm đó tồn
+tại. Một `NameError` chờ được kích hoạt, và không bài kiểm nào bắt được vì bài
+kiểm `import` chứ không chạy `__main__`.
+
+Đã chuyển khối xuống cuối, và thêm bài đọc AST kiểm **cả sáu trụ**.
+
+### `{py}` — đơn viết trên Linux, chạy trên Windows
+
+Cloud viết `python3`; máy chủ dự án không có `python3`, và `CLAUDE.md` chốt
+Python ở đó là một đường dẫn cụ thể. Một đơn viết cứng `python3` sẽ hỏng trên
+máy với `FileNotFoundError` — `_cham` chấm `CHUA_DO_DUOC`, không sai về luật,
+nhưng **đơn nào cũng hỏng vì một lý do không liên quan gì đến nội dung đơn**.
+Thẻ `{py}` → `sys.executable`.
+
+### HÀNG ĐỢI ĐÃ XẾP — 6 đơn, máy có việc ngay khi bật
+
+| # | mã | lằn | việc |
+|---|---|---|---|
+| 0 | `cau-kiem` | NHE | no-op đi hết vòng — **chưa qua cái này thì cầu chưa tồn tại** |
+| 1 | `test-that` | CPU | cả bộ test trên máy CÓ `data/` + `nao.db` → biết bài nào đỏ THẬT |
+| 2 | `banker-tai` | MANG | tải vĩ mô thật (cloud bị 403 CONNECT) |
+| 3 | `banker-nhin-truoc` | NHE | đo bằng SỐ cái nhìn trước trên dữ liệu thật |
+| 4 | `hepha-nap` | CPU | nạp 968 cơ chế vào kho thật |
+| 5 | `hepha-qt-audcad` | CPU | 84 cấu hình quản trị trên AUDCAD H4, xếp hạng SO VỚI NULL |
+
+Tổng cộng **43 bài** cho `test_cau_git.py`, **159 bài** cho cả cụm liên quan.

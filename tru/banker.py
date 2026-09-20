@@ -600,11 +600,6 @@ def mot_luot(ep: bool = False) -> dict:
             "ham_y": cd["ham_y"]}
 
 
-if __name__ == "__main__":
-    SO.khoi_tao()
-    print(json.dumps(mot_luot(ep="--ep" in sys.argv), ensure_ascii=False, indent=1))
-
-
 # ===================================================================== DIEM THOI GIAN
 def do_tre_cua(seri: str) -> int | None:
     """Do tre cong bo cua mot seri, hay `None` neu chua khai.
@@ -699,3 +694,26 @@ def seri_chua_khai_do_tre() -> list[str]:
     nay de cho do lo ra luc them, chu khong phai vai thang sau.
     """
     return sorted(k for k in list(SERI) + list(WB) if k not in DO_TRE_NGAY)
+
+
+if __name__ == "__main__":
+    # PHAI nam CUOI FILE. Toi tung noi muc DIEM THOI GIAN vao sau khoi nay, va
+    # nhu the `python -m tru.banker` se chay `mot_luot()` TRUOC khi cac ham do
+    # ton tai - mot `NameError` cho duoc kich hoat, khong lo ra o bai kiem nao
+    # vi bai kiem thi `import` chu khong chay `__main__`.
+    SO.khoi_tao()
+    if "--nhin-truoc" in sys.argv:
+        # Do bang so cai nhin truoc cua phep doc tho tren TUNG seri. Chay tren
+        # may co du lieu that; cloud khong goi duoc FRED (proxy chan).
+        moc = time.strftime("%Y-%m-%d")
+        ra = [do_nhin_truoc(k, moc) for k in list(SERI) + list(WB)]
+        co = [d for d in ra if d.get("lech_ngay")]
+        print(json.dumps({"moc": moc, "so_seri": len(ra),
+                          "co_nhin_truoc": len(co),
+                          "nang_nhat": sorted(co, key=lambda d: -d["lech_ngay"])[:10],
+                          "chua_do_duoc": [d["seri"] for d in ra
+                                           if d["trang_thai"] == "CHUA_DO_DUOC"]},
+                         ensure_ascii=False, indent=1))
+    else:
+        print(json.dumps(mot_luot(ep="--ep" in sys.argv), ensure_ascii=False,
+                         indent=1))

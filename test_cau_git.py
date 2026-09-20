@@ -388,7 +388,7 @@ class ChamDon(unittest.TestCase):
 
     def test_chay_THAT_mot_don_va_ghi_ket_qua(self):
         CG.ra_don("ok", "in ra", lenh=["python3", "-c", "print('xin chao')"],
-                  goc=self.goc)
+                  cong="chay_duoc", goc=self.goc)
         d = CG.don_dang_cho(goc=self.goc)[0]
         d["cong"] = {"kieu": "chay_duoc"}
         r = CG.chay_don(d, goc=self.goc)
@@ -397,7 +397,8 @@ class ChamDon(unittest.TestCase):
         self.assertEqual(CG.doc_ket_qua("ok", goc=self.goc)["trang_thai"], "DAT")
 
     def test_lenh_hong_KHONG_lam_q_nem_ma_thanh_ket_qua_tren_dia(self):
-        CG.ra_don("hong", "chay thu", lenh=["khong_co_lenh_nay_xyz"], goc=self.goc)
+        CG.ra_don("hong", "chay thu", lenh=["khong_co_lenh_nay_xyz"],
+                  cong="chay_duoc", goc=self.goc)
         d = CG.don_dang_cho(goc=self.goc)[0]
         d["cong"] = {"kieu": "chay_duoc"}
         r = CG.chay_don(d, goc=self.goc)
@@ -414,16 +415,16 @@ class ChamDon(unittest.TestCase):
         """Mot `terminal64.exe` la rang buoc VAT LY. Hai viec tester cung luc
         ghi de ket qua cua nhau VA KHONG AI BAO LOI."""
         CG.ra_don("t1", "tester", lenh=["python3", "-c", "pass"], lan="TESTER",
-                  uu_tien=1, goc=self.goc)
+                  uu_tien=1, cong="chay_duoc", goc=self.goc)
         CG.ra_don("t2", "tester", lenh=["python3", "-c", "pass"], lan="TESTER",
-                  uu_tien=2, goc=self.goc)
+                  uu_tien=2, cong="chay_duoc", goc=self.goc)
         self.assertTrue(CG._lay_khoa(self.goc / "viec"))
         r = CG.chay_don(CG.don_dang_cho(goc=self.goc)[0], goc=self.goc)
         self.assertTrue(r.get("hoan"), r)
         self.assertEqual(r["trang_thai"], "CHUA_DO_DUOC", r)
         # va `chay_mot_don_dang_cho` phai NHAY QUA chu khong dung ca hang doi
         CG.ra_don("nhe", "viec nhe", lenh=["python3", "-c", "pass"], lan="NHE",
-                  uu_tien=9, goc=self.goc)
+                  uu_tien=9, cong="chay_duoc", goc=self.goc)
         r2 = CG.chay_mot_don_dang_cho(goc=self.goc)
         self.assertEqual(r2["ma"], "nhe",
                          "don TESTER dang ban lai chan ca cac don NHE phia sau")
@@ -440,7 +441,7 @@ class ChamDon(unittest.TestCase):
 
     def test_khoa_duoc_TRA_LAI_sau_khi_don_chay_xong(self):
         CG.ra_don("t", "x", lenh=["python3", "-c", "pass"], lan="TESTER",
-                  goc=self.goc)
+                  cong="chay_duoc", goc=self.goc)
         d = CG.don_dang_cho(goc=self.goc)[0]; d["cong"] = {"kieu": "chay_duoc"}
         CG.chay_don(d, goc=self.goc)
         self.assertFalse((self.goc / "viec" / ".khoa_tester").exists(),
@@ -504,3 +505,91 @@ class MocVaoVongQ(unittest.TestCase):
         viec day."""
         self.assertIn("submit", self._goi_trong("chay_don_cloud"),
                       "chay_don_cloud khong dua vao luong nen")
+
+
+class TheTrongLenh(unittest.TestCase):
+    """Don viet tren CLOUD (Linux) phai chay duoc tren MAY (Windows)."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.goc = Path(self.tmp.name)
+        CG.bao_dam_thu_muc(goc=self.goc)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_the_py_doi_thanh_python_dang_chay(self):
+        """May chu du an khong co `python3`, va CLAUDE.md chot Python o do la
+        MOT duong dan cu the. Mot don viet cung `python3` se hong tren may voi
+        mot ly do khong lien quan gi den noi dung don."""
+        import sys
+        self.assertEqual(CG._thay_the(["{py}", "-c", "pass"])[0], sys.executable)
+
+    def test_chay_that_bang_the_py(self):
+        CG.ra_don("t", "x", lenh=["{py}", "-c", "print('ok')"],
+                  cong="chay_duoc", goc=self.goc)
+        d = CG.don_dang_cho(goc=self.goc)[0]; d["cong"] = {"kieu": "chay_duoc"}
+        r = CG.chay_don(d, goc=self.goc)
+        self.assertEqual(r["trang_thai"], "DAT", r)
+        self.assertIn("ok", "\n".join(r["bang_chung"]["dong_cuoi"]))
+
+    def test_khong_co_the_thi_giu_nguyen(self):
+        self.assertEqual(CG._thay_the(["a", "b"]), ["a", "b"])
+        self.assertIsNone(CG._thay_the(None))
+
+
+class DonPhaiKHAI_CONG(unittest.TestCase):
+    """Loi toi tu mac ngay lo don dau tien (20/09/2026).
+
+    Ra sau don khong kem `cong`. `_cham` cham don khong khai kieu la
+    `CHUA_DO_DUOC` - dung theo luat, nhung nghia la ca sau don se ve
+    `CHUA_DO_DUOC` **bat ke chung chay the nao**. Mot dem may chay het cong
+    suat de lay ve sau dong "khong cham duoc".
+
+    Cai bay o day: khong co gi HONG ca. Don hop le, may chay that, ket qua ghi
+    that - chi la khong con so nao doc duoc. Nen phai chan luc RA DON.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.goc = Path(self.tmp.name)
+        CG.bao_dam_thu_muc(goc=self.goc)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_don_co_lenh_ma_khong_khai_cong_thi_NEM(self):
+        with self.assertRaises(ValueError) as e:
+            CG.ra_don("x", "y", lenh=["{py}", "-c", "pass"], goc=self.goc)
+        self.assertIn("CHUA_DO_DUOC", str(e.exception))
+
+    def test_kieu_cong_LA_thi_NEM(self):
+        for la in ("pytest3", "chay", "PYTEST", "", {}, {"kieu": "x"}):
+            with self.assertRaises(ValueError, msg=la):
+                CG.ra_don("x", "y", lenh=["a"], cong=la, goc=self.goc)
+
+    def test_HIEU_CHUAN_NGUOC_kieu_dung_thi_di_qua_va_ghi_vao_don(self):
+        import json as _j
+        for k in CG.KIEU_CONG:
+            p = CG.ra_don("d-%s" % k, "y", lenh=["a"], cong=k, goc=self.goc)
+            self.assertEqual(_j.loads(p.read_text(encoding="utf-8"))["cong"],
+                             {"kieu": k})
+
+    def test_don_KHONG_co_lenh_van_ra_duoc_khong_can_cong(self):
+        """Don thuan tuy la ghi chu / cau hoi cho nguoi thi khong can cong."""
+        CG.ra_don("ghi-chu", "doc giup toi X", goc=self.goc)
+        self.assertEqual(len(CG.don_dang_cho(goc=self.goc)), 1)
+
+    def test_MOI_don_dang_nam_trong_hang_doi_THAT_deu_cham_duoc(self):
+        """Chot chan tren hang doi that trong repo, khong phai fixture.
+
+        Mot don da day len ma khong cham duoc thi khong ai biet cho toi khi
+        may chay xong no.
+        """
+        for d in CG.don_dang_cho():
+            if not d.get("lenh"):
+                continue
+            kieu = (d.get("cong") or {}).get("kieu")
+            self.assertIn(kieu, CG.KIEU_CONG,
+                          "don '%s' trong viec/cho/ co lenh ma cong.kieu=%r"
+                          % (d["ma"], kieu))

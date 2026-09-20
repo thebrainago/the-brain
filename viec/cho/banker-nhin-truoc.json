@@ -1,0 +1,18 @@
+{
+  "ma": "banker-nhin-truoc",
+  "muc_tieu": "Do cai nhin truoc cua phep doc tho tren TUNG seri, bang du lieu that",
+  "lan": "NHE",
+  "uu_tien": 3,
+  "han_phut": 5.0,
+  "ra_luc": "2026-09-20T17:48:25",
+  "lenh": [
+    "{py}",
+    "-m",
+    "tru.banker",
+    "--nhin-truoc"
+  ],
+  "ghi_chu": "Tren fixture: CPI lech 73 ngay, VN_GDP lech 365, SP500 lech 0. Can con so tren du lieu THAT. Neu MOI seri deu lech 0 thi phep do dang hong, khong phai 'bang cu von da dung'. Phu thuoc banker-tai.",
+  "cong": {
+    "kieu": "chay_duoc"
+  }
+}
