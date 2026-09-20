@@ -133,3 +133,82 @@ nen dang xet.
   (no doc bang `toan_hang_con_thieu` tu corpus SEEKER, khong doc lo duc).
 - Ca 52 co che moi moi chi chay tren chuoi TONG HOP. Tren may chu du an phai
   chay `b hepha nap 714 --that` voi du lieu that truoc khi tin con so nao.
+
+---
+
+## Dot 5 (20/09/2026) — MAY DE DANG CHOI TREN NUA SAN
+
+`CLAUDE.md` LUAT SO 0: *"'FX' = KIEU GIAO DICH LONG/SHORT, khong phai chi cap
+tien"*. Do la phat bieu ve SAN CHOI, va no rang buoc truc tiep may de.
+
+**Do duoc truoc khi sua**: lo duc 714 co che lech **484 long / 230 short**, va
+**10 trong 23 khuon sinh DUNG MOT CHIEU**:
+
+| Khuon | long | short |
+|---|---|---|
+| `thuan_xu_the` | **84** | 0 |
+| `doi_pct` | 24 | 0 |
+| `lich_phien` | 12 | 0 |
+| `fibo` | 12 | 0 |
+| `nen_bien_dong` | 12 | 0 |
+| `lich_thang` | 11 | 0 |
+| `dong_tien` | 6 | 0 |
+| `hoi_ve_vwap` | 6 | 0 |
+| `macd` | 4 | 0 |
+| `nen_manh` | 4 | 0 |
+
+Vi sao la loi chu khong phai khau vi: tren mot chuoi di len trong mau, mot may
+de nghieng ve mua se tim ra "edge" **chi vi so luong phep thu** - ma suat FDR
+thi bi tieu that. Nguoc lai, tren mot tai san di xuong no se khong thay gi,
+trong khi do dung la nua kia cua san choi.
+
+**Sau khi sua: 968 co che, 484 long / 484 short, moi khuon can dung, 0 trung
+ten, 0 khai bao hong.**
+
+### HAI cach guong - dung lan la hong im lang
+
+* Dieu kien **khong co chieu** (lich, nen hep, khoi luong tren trung binh):
+  guong bang `_ban_doi_xung` - GIU dieu kien, lat `chieu`. Hai co che do la
+  hai **gia thuyet canh tranh** ve cung mot cua so ("thu Hai la ngay mua hay
+  ngay ban"), thu rieng chu khong ghep.
+* Dieu kien **da co chieu** (`nhanh > cham`, `macd > 0`, `than_nen > 0`):
+  phai doi CHINH DIEU KIEN. Lat nhan thoi thi hai co che kich hoat cung bar
+  theo hai huong nguoc nhau.
+
+### `fibo`: ghim `huong` la SUA LOI, khong phai them ban
+
+Ban cu de `huong` mac dinh `tu_dong`, tuc muc thoai lui suy tu chieu song gan
+nhat - co the tang, co the giam - nhung ca ba co che deu gan `chieu = 1`. Hau
+qua: **cung co che do kich hoat MUA khi gia cham muc thoai lui cua mot song
+GIAM**, tuc mua dung vao vung ma luan diem cua chinh no noi la co lenh cho BAN
+dong lai. Khong sai cu phap, khong nem loi, va trung binh cua hai nua nguoc
+nhau la mot con so nho gan khong - hinh dang im lang dien hinh.
+
+### MOT BAI KIEM CUA CHINH TOI XANH VI RONG
+
+Ban dau `test_cap_CO_DIEU_KIEN_KHAC_NHAU_thi_khong_duoc_kich_hoat_trung` ghep
+cap theo **hau to** `_ban`. Nhung ten co hai dang (`hp_vot_ban` va
+`hp_thuan_ban_ema10_ema14`), nen no duyet **DUNG 0 cap** - xanh 6/6 ma khong
+kiem gi. Da them bai `test_co_du_cap_de_bai_nay_co_nghia` doi >= 100 cap va
+sua phep ghep cap; nay duyet **114 cap** that.
+
+### VA MOT TIEN DE CUA TOI CUNG SAI
+
+Phep do dau tien bao 103 cap "kich hoat trung", ke ca
+`hp_thuan_ema10_ema14` vs `hp_thuan_ban_ema10_ema14` - hai dieu kien **khong
+the cung dung**. Nguyen nhan khong phai co che: `sinh_tu_spec` tra chuoi VI
+THE, va `giu` giu vi the them nhieu bar sau kich hoat nen hai lenh no o hai
+thoi diem khac nhau van chong nhau. Ep `giu = 1` de chuoi tro ve dung cac bar
+KICH HOAT: cung hai co che do, trung **0** bar. Bai kiem phai do cai no dinh
+do.
+
+### Chot chan con lai
+`ghep()` da tu choi ghep hai co che nguoc chieu tu truoc. Nhan doi so ban BAN
+lam rui ro do lon hon han, nen `GhepKHONG_DUOC_TRON_HAI_CHIEU` khoa lai, kem
+mot bai hieu chuan chieu nguoc (`ghep` cung chieu van phai lam viec).
+
+### Bang chung
+- `test_hai_chieu_can_bang.py`: **9 passed**, duyet that 114 cap doi dieu kien
+  va 73 cap doi xung may moc.
+- Bo test HEPHAESTUS + kiem toan: **155 passed**.
+- `do_phu(kho=duc())["bo_trong"] == []` van giu (45/45 toan hang).

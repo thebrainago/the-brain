@@ -357,6 +357,35 @@ def _spec(ten, ho, chieu, vao, luan, giu) -> dict:
             "co_che": luan, "vao": vao, "nguon": "hephaestus"}
 
 
+def _ban_doi_xung(specs: list[dict], luan: str) -> list[dict]:
+    """Nhan doi mot lo co che DIEU KIEN KHONG CO CHIEU sang ve BAN.
+
+    ## KHI NAO DUOC DUNG HAM NAY - VA KHI NAO KHONG
+
+    Chi dung cho khuon ma **dieu kien khong mang thong tin ve huong**: lich
+    (ngay trong thang, gio, thu), nen bien dong (Bollinger hep), khoi luong
+    tren trung binh. Nhung dieu kien do noi "luc nay khac luc khac", chung
+    khong noi "len" hay "xuong". Gan cung `chieu = 1` cho chung la **tu tra
+    loi mat mot nua cau hoi**: no bien "cuoi thang co dong lenh khac thuong"
+    thanh "cuoi thang thi MUA", va tren mot chuoi di len trong mau thi moi bo
+    loc thoi gian nao cung se trong nhu co edge.
+
+    KHONG duoc dung cho khuon ma dieu kien DA co chieu (`nhanh > cham`,
+    `macd > 0`, `gia < vwap`). O do ve nguoc phai la mot dieu kien khac
+    (`nhanh < cham`), khong phai cung dieu kien doi nhan - neu khong hai co
+    che se kich hoat CUNG LUC theo hai huong nguoc nhau va triet tieu nhau
+    thanh mot he khong lam gi ngoai tra phi.
+    """
+    ra = []
+    for d in specs:
+        m = dict(d)
+        m["ten"] = NP.chuan_hoa_ten(d["ten"] + "_ban")
+        m["chieu"] = -d["chieu"]
+        m["co_che"] = luan
+        ra.append(m)
+    return ra
+
+
 def _khuon_qua_da_hoi_ve(giu_mac_dinh: int) -> list[dict]:
     """Do cang cham cuc tri -> vao NGUOC. Luan diem: nguoi ban bi ep ban (goi
     ky quy, chan lo, quy phai can bang danh muc) khong chon duoc gia; ai cam
@@ -433,7 +462,22 @@ def _khuon_pha_vo(giu_mac_dinh: int) -> list[dict]:
 def _khuon_thuan_xu_the(giu_mac_dinh: int) -> list[dict]:
     """Muc nhanh tren muc cham -> vao THUAN. Luan diem: dong tien lon khong
     vao het mot lan; no chia nho ra nhieu phien, nen huong da hinh thanh con
-    keo dai them mot doan do duoc."""
+    keo dai them mot doan do duoc.
+
+    ## VE BAN DA THIEU SUOT TU DAU (them 20/09/2026)
+
+    Ban cu chi sinh `nhanh > cham -> MUA`, khong bao gio sinh ve nguoc lai.
+    Rieng khuon nay la **84 co che, toan bo mot chieu**, va no la nguyen nhan
+    lon nhat cua do lech 484 long / 230 short do duoc tren ca lo duc.
+
+    Vi sao do la loi chu khong phai lua chon: `CLAUDE.md` chot *"FX = KIEU
+    GIAO DICH LONG/SHORT"*. Mot may de chi biet de ve mua se tim thay "edge"
+    tren bat ky chuoi nao di len trong mau **chi vi so luong phep thu**, va se
+    khong thay gi tren mot tai san di xuong - trong khi chinh cai thu hai moi
+    la nua kia cua san choi. Luan diem cua khuon nay (dong tien lon chia nho
+    lenh) doi xung hoan toan: nguoi ban mot vi the lon cung khong ban het mot
+    lan.
+    """
     ra, ds = [], [x for x in _muc_gia() if x[0][:3] in ("ema", "sma", "wma", "smm")]
     for ten_n, t_n in ds:
         for ten_c, t_c in ds:
@@ -446,6 +490,12 @@ def _khuon_thuan_xu_the(giu_mac_dinh: int) -> list[dict]:
                 [{"trai": t_n, "phep": ">", "phai": t_c}],
                 "Dong tien lon khong vao het mot lan ma chia ra nhieu phien, "
                 "nen huong da hinh thanh con keo dai them mot doan do duoc.",
+                giu_mac_dinh))
+            ra.append(_spec(
+                _ten("thuan_ban", ten_n, ten_c), "xu_huong", -1,
+                [{"trai": t_n, "phep": "<", "phai": t_c}],
+                "Ve doi xung: nguoi thoat mot vi the lon cung khong ban het "
+                "mot lan, nen huong xuong da hinh thanh con keo dai them.",
                 giu_mac_dinh))
     return ra
 
@@ -483,24 +533,43 @@ def _khuon_ghep(giu_mac_dinh: int) -> list[dict]:
     # su co huong. ADX thap la thi truong di ngang, noi moi pha vo deu gia.
     for ten_x, t_x, _thap, cao in _xu_the():
         for ten_m, t_m in _muc_gia():
-            if "tren" not in ten_m:
-                continue
-            ra.append(_spec(
-                _ten("phaloc", ten_m, ten_x, cao[0]), "pha_vo", 1,
-                [{"trai": GIA, "phep": ">", "phai": t_m},
-                 {"trai": t_x, "phep": ">", "phai": {"hang": cao[0]}}],
-                "Chi nhan pha vo khi thi truong that su co huong: luc di ngang "
-                "thi moi cu pha muc deu bi keo nguoc lai ngay trong phien.",
-                giu_mac_dinh))
+            # CAN DUNG BIEN - cung cai bay da ghi o `_khuon_pha_vo`: pha LEN
+            # phai do voi bien TREN, thung XUONG phai do voi bien DUOI. Lay
+            # nham bien thi ve thu hai la mot dieu kien gan nhu luon dung.
+            if "tren" in ten_m:
+                ra.append(_spec(
+                    _ten("phaloc", ten_m, ten_x, cao[0]), "pha_vo", 1,
+                    [{"trai": GIA, "phep": ">", "phai": t_m},
+                     {"trai": t_x, "phep": ">", "phai": {"hang": cao[0]}}],
+                    "Chi nhan pha vo khi thi truong that su co huong: luc di "
+                    "ngang thi moi cu pha muc deu bi keo nguoc lai trong phien.",
+                    giu_mac_dinh))
+            if "duoi" in ten_m:
+                ra.append(_spec(
+                    _ten("thungloc", ten_m, ten_x, cao[0]), "pha_vo", -1,
+                    [{"trai": GIA, "phep": "<", "phai": t_m},
+                     {"trai": t_x, "phep": ">", "phai": {"hang": cao[0]}}],
+                    "Ve BAN cua cung bo loc: mot cu thung muc chi dang theo "
+                    "khi thi truong that su co huong, con luc di ngang thi no "
+                    "bi do lai ngay.",
+                    giu_mac_dinh))
     # XAC NHAN BANG DAU: kich hoat cua ho gia, xac nhan bang mot chi bao CHIEU.
     for ten_ch, t_ch in _chieu():
-        for ten_c, t_c, duoi, _tren in _do_cang()[:8]:
+        for ten_c, t_c, duoi, tren in _do_cang()[:8]:
             ra.append(_spec(
                 _ten("xacnhan", ten_c, duoi[0], ten_ch), "quay_ve_trung_binh", 1,
                 [{"trai": t_c, "phep": "<", "phai": {"hang": duoi[0]}},
                  {"trai": t_ch, "phep": ">", "phai": {"hang": 0}}],
                 "Cho den khi ap luc ban qua da da dut han moi vao, thay vi bat "
                 "dao ngay luc no con dang chay - do la cho mat tien nhieu nhat.",
+                giu_mac_dinh))
+            ra.append(_spec(
+                _ten("xacnhan_ban", ten_c, tren[-1], ten_ch),
+                "quay_ve_trung_binh", -1,
+                [{"trai": t_c, "phep": ">", "phai": {"hang": tren[-1]}},
+                 {"trai": t_ch, "phep": "<", "phai": {"hang": 0}}],
+                "Ve doi xung: cho den khi ap luc mua qua da da dut han moi ban "
+                "xuong, thay vi bat dinh luc no con dang chay.",
                 giu_mac_dinh))
     return ra
 
@@ -520,7 +589,7 @@ def _khuon_nen_bien_dong(giu_mac_dinh: int) -> list[dict]:
                     "Bien dong co tu tuong quan: giai doan hep bat thuong "
                     "thuong ket thuc bang mot cu dich manh chu khong tan dan.",
                     giu_mac_dinh))
-    return ra
+    return ra + _ban_doi_xung(ra, 'Ve BAN cua cung mot trang thai nen. Bien dong hep bao truoc mot cu dich MANH, no khong bao truoc cu dich len - de mac dinh mua la gan mot cau tra loi vao mot cau hoi chua hoi.')
 
 
 def _khuon_lich(giu_mac_dinh: int) -> list[dict]:
@@ -543,7 +612,7 @@ def _khuon_lich(giu_mac_dinh: int) -> list[dict]:
             "Quy can bang danh muc va dong tien luong theo lich tuan, nen mot "
             "so ngay mang dong lenh khong do gia sinh ra.",
             giu_mac_dinh))
-    return ra
+    return ra + _ban_doi_xung(ra, 'Ve BAN cua cung mot cua so phien. Gio va thu la rang buoc van hanh cua nguoi khac; cai do khong co dau, nen chon san chieu mua la tu tra loi mat mot nua cau hoi.')
 
 
 def _khuon_chuoi_lien_tiep(giu_mac_dinh: int) -> list[dict]:
@@ -592,6 +661,23 @@ def _khuon_doi_pct(giu_mac_dinh: int) -> list[dict]:
                 "Cu bat manh doi dong tien that; ben mua da lo dien thi thuong "
                 "con phai mua tiep cho du khoi luong ho can.",
                 giu_mac_dinh))
+            # BON O, KHONG HAI. `sut`/`vot` la hai DAU cua cu dich; "hoi ve"
+            # va "tiep dien" la hai LUAN DIEM ve no. Ban cu chi lam duong cheo
+            # (sut -> hoi ve MUA, vot -> tiep dien MUA) nen ca bon co che deu
+            # la mua, va khuon khong bao gio hoi duoc "mot cu bat manh co bi
+            # ban lai khong" - dung cau ma mot cap FX phai tra loi ca hai ben.
+            ra.append(_spec(
+                _ten("vot_ban", n, v), "quay_ve_trung_binh", -1,
+                [{"trai": t_pct(n), "phep": ">", "phai": {"hang": v}}],
+                "Cu bat qua lon trong thoi gian qua ngan hiem khi la dinh gia "
+                "lai that; thuong la ben mua buoc phai mua, va gia lui lai sau.",
+                giu_mac_dinh))
+            ra.append(_spec(
+                _ten("sut_ban", n, v), "xu_huong", -1,
+                [{"trai": t_pct(n), "phep": "<", "phai": {"hang": -v}}],
+                "Cu sut manh doi nguon cung that; ben ban da lo dien thi "
+                "thuong con phai ban tiep cho het vi the ho can thoat.",
+                giu_mac_dinh))
     return ra
 
 
@@ -605,13 +691,19 @@ def _khuon_moc_neo(giu_mac_dinh: int) -> list[dict]:
         for lay, chieu, luan in (
                 ("dong_truoc", 1, "Dong cua ky truoc la gia tham chieu tren "
                                   "bang cua nguoi khac, nen co lenh that neo vao do."),
+                # Ve BAN cua CHINH moc do. `dong_truoc` la mot moc doi xung -
+                # gia tren no cung neo manh y nhu gia duoi no - nen chi lam
+                # mot ben la tu chon truoc cau tra loi.
+                ("dong_truoc", -1, "Cung moc tham chieu, nhin tu ben tren: gia "
+                                   "tren dong cua ky truoc cung bi hut ve do."),
                 ("thap_truoc", 1, "Day ky truoc la muc nhieu noi dat chan lo; "
                                   "qua no la cham vung ho buoc phai xu li."),
                 ("cao_truoc", -1, "Dinh ky truoc la muc nhieu noi dat chot lai; "
                                   "cham no la cham vung ho buoc phai xu li.")):
             t = {"chi_bao": "moc_ky", "ky": ky, "lay": lay}
             ra.append(_spec(
-                _ten("duoi_moc", ky, lay), "quay_ve_trung_binh", chieu,
+                _ten("duoi_moc" if chieu == 1 else "tren_moc", ky, lay),
+                "quay_ve_trung_binh", chieu,
                 [{"trai": GIA, "phep": "<" if chieu == 1 else ">", "phai": t}],
                 luan, giu_mac_dinh))
     return ra
@@ -636,6 +728,21 @@ def _khuon_hoi_ve_vwap(giu_mac_dinh: int) -> list[dict]:
             "Giu tren gia thi hanh trung binh nghia la ben mua dang chiu tra "
             "cao hon mat bang - dau hieu cua nhu cau that, khong phai nhieu.",
             giu_mac_dinh))
+        # Hai ve tren doc CUNG mot dieu kien theo hai luan diem doi nhau (ve
+        # trung binh / tiep dien). Ca hai deu phai co ban BAN, neu khong khuon
+        # chi hoi duoc nua cau hoi.
+        ra.append(_spec(
+            _ten("tren_vwap_ban", n), "quay_ve_trung_binh", -1,
+            [{"trai": GIA, "phep": ">", "phai": t}],
+            "Tren gia thi hanh trung binh la ben mua dang tra cao hon mat "
+            "bang cua chinh phien; ban cho ho la ban thanh khoan dung luc dat.",
+            giu_mac_dinh))
+        ra.append(_spec(
+            _ten("duoi_vwap_ban", n), "xu_huong", -1,
+            [{"trai": GIA, "phep": "<", "phai": t}],
+            "Giu duoi gia thi hanh trung binh nghia la ben ban dang chap nhan "
+            "re hon mat bang - dau hieu cua nguon cung that.",
+            giu_mac_dinh))
     return ra
 
 
@@ -654,6 +761,23 @@ def _khuon_macd(giu_mac_dinh: int) -> list[dict]:
             [{"trai": goc, "phep": ">", "phai": {"hang": 0}}],
             "Trung binh nhanh tren trung binh cham nghia la dong mua moi dang "
             "den nhanh hon mat bang cu - huong da hinh thanh.",
+            giu_mac_dinh))
+        # HAI VE NGUOC LA BAT BUOC o day: `macd < 0` va `cheo_xuong` la dang
+        # kinh dien cua chinh chi bao nay, va bo chung di thi khuon dang hoi
+        # "MACD co doan duoc gia len khong" chu khong phai "MACD co doan duoc
+        # gia khong" - hai cau khac han nhau tren mot chuoi co xu huong.
+        ra.append(_spec(
+            _ten("macd", nhanh, cham, "am"), "xu_huong", -1,
+            [{"trai": goc, "phep": "<", "phai": {"hang": 0}}],
+            "Trung binh nhanh duoi trung binh cham nghia la dong ban moi den "
+            "nhanh hon mat bang cu - huong xuong da hinh thanh.",
+            giu_mac_dinh))
+        ra.append(_spec(
+            _ten("macd", nhanh, cham, "cat_xuong"), "xu_huong", -1,
+            [{"trai": goc, "phep": "cheo_xuong",
+              "phai": dict(goc, lay="tin_hieu")}],
+            "Cat xuong duong tin hieu la luc toc do cua dong ban vuot chinh "
+            "muc trung binh gan day cua no - diem gia toc phia ban.",
             giu_mac_dinh))
         ra.append(_spec(
             _ten("macd", nhanh, cham, "cat_tin_hieu"), "xu_huong", 1,
@@ -704,24 +828,56 @@ def _khuon_che_do_bien_dong(giu_mac_dinh: int) -> list[dict]:
 def _khuon_fibo(giu_mac_dinh: int) -> list[dict]:
     """Thoai lui Fibonacci. Luan diem KHONG phai "con so than ki": cac muc nay
     duoc ve san tren man hinh cua rat nhieu nguoi, nen lenh cho va chan lo dong
-    lai quanh do. Cai lam no chay la SU DONG THUAN, khong phai ty le."""
+    lai quanh do. Cai lam no chay la SU DONG THUAN, khong phai ty le.
+
+    ## GHIM `huong` LA SUA LOI, KHONG PHAI THEM BAN (20/09/2026)
+
+    Ban cu de `huong` mac dinh `tu_dong`, tuc muc thoai lui duoc suy tu chieu
+    cua song gan nhat - co the tang, co the giam. Nhung ca ba co che deu gan
+    cung `chieu = 1`. Hau qua: dung co che do cung kich hoat MUA khi gia cham
+    muc thoai lui cua mot song GIAM - tuc mua dung vao vung ma luan diem cua
+    chinh no noi la co lenh cho BAN dong lai. Mot co che nhu vay khong sai cu
+    phap, khong nem loi, va trung binh cua hai nua nguoc nhau la mot con so
+    nho gan khong - hinh dang im lang dien hinh.
+
+    Nay moi co che ghim `huong` khop voi chieu vao cua no, va ve BAN la mot
+    co che rieng tren song GIAM.
+    """
     ra = []
     for n in (34, 55, 89):
         for muc in (0.382, 0.5, 0.618):
             ra.append(_spec(
                 _ten("fibo_cham", n, muc), "quay_ve_trung_binh", 1,
                 [{"trai": GIA, "phep": "cheo_xuong",
-                  "phai": {"chi_bao": "fibo", "n": n, "lay": muc}}],
+                  "phai": {"chi_bao": "fibo", "n": n, "lay": muc,
+                           "huong": "tang"}}],
                 "Cac muc thoai lui duoc ve san tren man hinh rat nhieu nguoi "
                 "nen lenh cho va chan lo dong lai quanh do; su dong thuan lam "
                 "no chay, khong phai ban than ty le.",
                 giu_mac_dinh))
+            ra.append(_spec(
+                _ten("fibo_cham_ban", n, muc), "quay_ve_trung_binh", -1,
+                [{"trai": GIA, "phep": "cheo_len",
+                  "phai": {"chi_bao": "fibo", "n": n, "lay": muc,
+                           "huong": "giam"}}],
+                "Ve doi xung trong song GIAM: thoai lui di len cham muc, va "
+                "lenh cho ban cua nguoi khac dong lai dung o do.",
+                giu_mac_dinh))
         ra.append(_spec(
             _ten("fibo_sau", n), "quay_ve_trung_binh", 1,
-            [{"trai": {"chi_bao": "fibo", "n": n, "lay": "vi_tri"},
+            [{"trai": {"chi_bao": "fibo", "n": n, "lay": "vi_tri",
+                       "huong": "tang"},
               "phep": ">", "phai": {"hang": 0.786}}],
             "Thoai lui gan het song truoc la vung nhung ai vao muon nhat dang "
             "lo; ho thoat ra thi ap luc ban can kiet nhanh.",
+            giu_mac_dinh))
+        ra.append(_spec(
+            _ten("fibo_sau_ban", n), "quay_ve_trung_binh", -1,
+            [{"trai": {"chi_bao": "fibo", "n": n, "lay": "vi_tri",
+                       "huong": "giam"},
+              "phep": ">", "phai": {"hang": 0.786}}],
+            "Cung do sau thoai lui, do trong song GIAM: ai ban muon nhat dang "
+            "lo, ho dong vi the thi ap luc mua can kiet nhanh.",
             giu_mac_dinh))
     return ra
 
@@ -749,7 +905,7 @@ def _khuon_dong_tien(giu_mac_dinh: int) -> list[dict]:
                 "no la so nguoi da that su phai giao dich; vuot muc thuong le "
                 "nghia la co ben buoc phai xong hang.",
                 giu_mac_dinh))
-    return ra
+    return ra + _ban_doi_xung(ra, 'Ve BAN cua cung mot muc khoi luong. Khoi luong do SO NGUOI phai giao dich chu khong do ben nao thang; mot cu dich kem khoi luong bat thuong co the la ben mua hoac ben ban buoc phai xong hang.')
 
 
 def _khuon_nen_manh(giu_mac_dinh: int) -> list[dict]:
@@ -774,6 +930,18 @@ def _khuon_nen_manh(giu_mac_dinh: int) -> list[dict]:
             "Nen than dai nghia la ben thang giu duoc gia toi tan luc dong cua, "
             "khong ai keo lai duoc - do la dau hieu mot ben het hang de ban.",
             giu_mac_dinh))
+        # Ve BAN cua cung hinh nen. O day dieu kien CO chieu (`than_nen` duong
+        # hay am) nen khong dung `_ban_doi_xung` duoc: phai doi chinh dieu
+        # kien, neu khong hai co che kich hoat cung luc va triet tieu nhau.
+        ra.append(_spec(
+            _ten("nen_dac_ban", k), "bien_dong", -1,
+            [{"trai": do_dai, "phep": ">",
+              "phai": {"chi_bao": "tuyen_tinh",
+                       "toan_hang": [{"chi_bao": "bien_do"}], "he_so": [k]}},
+             {"trai": {"chi_bao": "than_nen"}, "phep": "<", "phai": {"hang": 0}}],
+            "Nen than dai chieu giam: ben ban giu duoc gia toi tan luc dong "
+            "cua, khong ai do lai duoc - ben mua da het cho de do.",
+            giu_mac_dinh))
     for k in (0.2, 0.3):
         ra.append(_spec(
             _ten("nen_rong", k), "bien_dong", 1,
@@ -783,7 +951,13 @@ def _khuon_nen_manh(giu_mac_dinh: int) -> list[dict]:
             "Than ngan giua bien do rong nghia la ca hai ben deu co mat va "
             "khong ben nao thang - thong tin nguoc han voi mot nen dac.",
             giu_mac_dinh))
-    return ra
+    # `nen_rong` do `|than_nen|` nen dieu kien cua no KHONG co dau - dung dang
+    # ma `_ban_doi_xung` sinh ra de.
+    rong = [d for d in ra if "nen_rong" in d["ten"]]
+    return ra + _ban_doi_xung(
+        rong, "Ve BAN cua cung mot hinh nen. `|than_nen|` khong co dau nen "
+              "dieu kien nay khong noi huong; chon san chieu mua la tu tra "
+              "loi mat mot nua cau hoi.")
 
 
 def _khuon_dau_xu_the(giu_mac_dinh: int) -> list[dict]:
@@ -843,7 +1017,7 @@ def _khuon_lich_thang(giu_mac_dinh: int) -> list[dict]:
             "Mua vu cua dong tien: nam tai chinh, ky bao cao va lich nghi lam "
             "mot so thang mang dong lenh khac han cac thang con lai.",
             giu_mac_dinh))
-    return ra
+    return ra + _ban_doi_xung(ra, "Ve BAN cua cung mot cua so lich. Mot rang buoc van hanh theo lich noi 'luc nay co dong lenh khac thuong', no khong noi huong - nen phai thu ca hai chieu chu khong tu chon truoc mot ben.")
 
 
 def _khuon_gia_khoi_luong(giu_mac_dinh: int) -> list[dict]:
