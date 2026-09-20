@@ -11,6 +11,7 @@ import json
 import multiprocessing as mp
 import os
 import sys
+import psutil
 import time
 from pathlib import Path
 
@@ -134,9 +135,23 @@ def test_duoc_o_lai_chi_giu_the_CU_NHAT(tmp_path, monkeypatch):
     monkeypatch.setattr(NS, "_KHOA", tmp_path / "khoa")
     thu = tmp_path / "khoa" / "THU"
     thu.mkdir(parents=True)
-    cu = thu / "1.the"          # pid 1 gan nhu chac chan khong song -> bi don
+    # PID CHET THAT, khong phai pid 1.
+    #
+    # Ban cu dung `1.the` voi ghi chu "pid 1 gan nhu chac chan khong song".
+    # Trong CONTAINER thi pid 1 la tien trinh init va no CO THAT, nen
+    # `psutil.pid_exists(1)` tra True, the khong bi don, va bai kiem do tren
+    # moi may chay bang container - ke ca cloud cua chinh du an.
+    #
+    # Sinh mot tien trinh con roi cho no chet han: pid cua no chac chan khong
+    # con song, va khong phu thuoc vao may dang chay o dau.
+    import subprocess
+    con = subprocess.Popen([sys.executable, "-c", "pass"])
+    con.wait()
+    pid_chet = con.pid
+    cu = thu / ("%d.the" % pid_chet)
     cu.write_text("x", encoding="utf-8")
     (thu / ("%d.the" % os.getpid())).write_text("toi", encoding="utf-8")
+    assert not psutil.pid_exists(pid_chet), "tien trinh con chua chet han"
     assert NS._duoc_o_lai("THU", 1), \
         "the cua pid da chet phai bi thu hoi, cho lai cho nguoi con song"
 
@@ -218,8 +233,12 @@ def test_khoa_CU_cua_chu_DA_CHET_thi_VAN_thu_hoi_duoc(tmp_path):
     khoa.write_text("999999999", encoding="utf-8")     # pid chac chan khong ton tai
     cu = time.time() - GAT.HAN_KHOA_GIAY - 60
     os.utime(khoa, (cu, cu))
+    t0 = time.time()
+    vao_duoc = False
     with GAT.khoa(tep, cho_giay=2.0, nhip=0.05):
-        pass          # vao duoc la dat
+        vao_duoc = True
+    assert vao_duoc, "khong vao duoc vung toi han"
+    assert time.time() - t0 < 1.5, "phai thu hoi NGAY, khong phai cho het gio"
 
 
 def test_khoa_QUA_HAN_van_bi_thu_hoi_du_chu_CON_SONG(tmp_path):
@@ -240,5 +259,9 @@ def test_khoa_QUA_HAN_van_bi_thu_hoi_du_chu_CON_SONG(tmp_path):
     kh.write_text(str(os.getpid()), encoding="utf-8")   # chu CON SONG
     cu = time.time() - GAT.HAN_KHOA_GIAY - 60
     os.utime(kh, (cu, cu))
+    t0 = time.time()
+    vao_duoc = False
     with GAT.khoa(tep, cho_giay=2.0, nhip=0.05):
-        pass          # vao duoc la dat
+        vao_duoc = True
+    assert vao_duoc, "khoa qua han cua chu con song van chan"
+    assert time.time() - t0 < 1.5, "phai thu hoi NGAY, khong phai cho het gio"
