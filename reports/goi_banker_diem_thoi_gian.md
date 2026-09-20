@@ -84,3 +84,38 @@ lại cả hai mốc — chính nó cho thấy độ trễ này lớn đến m�
   Chưa nối được vì không tải được dữ liệu thật từ cloud để kiểm.
 - Chưa có phép so "hệ CÓ BANKER vs KHÔNG BANKER ở cùng ngân sách FDR" — đó mới
   là phép đo quyết định trụ này là edge hay là chi phí.
+
+---
+
+## BỔ SUNG: phép so quyết định BANKER là EDGE hay CHI PHÍ
+
+Câu hỏi duy nhất quyết định trụ này tồn tại hay không:
+
+> Với CÙNG một cơ chế, lọc theo chế độ vĩ mô có làm nó ra tiền hơn không?
+
+`so_co_che_do(loi_suat, che_do)` trả ba trạng thái, và hai quyết định thiết kế
+là phần thực chất:
+
+**1. So "lãi trên mỗi bar CÓ PHƠI NHIỄM", không so tổng lãi.** Lọc chế độ LUÔN
+cắt bớt số lệnh, nên tổng lãi gần như luôn giảm — so tổng thì bộ lọc nào cũng
+"thua". Câu hỏi đúng là một đồng vốn bỏ ra có được trả nhiều hơn không.
+
+**2. Báo `ty_le_giu_lenh`.** Một bộ lọc cắt 95% số lệnh để tăng 3% lãi mỗi bar
+là một bộ lọc **đã khớp vào quá khứ**, không phải một phát hiện. Phải **nhìn
+thấy được** cái giá đó, nếu không nó ẩn sau một con số đẹp.
+
+`chuoi_che_do()` dựng điều kiện chế độ **point-in-time**: mỗi mốc `t` được trả
+lời bằng *thứ ta biết tại t*, qua `gia_tri_biet_luc` — không phải giá trị CỦA
+ngày t. Seri chưa khai độ trễ → trả `None`, không đoán.
+
+### Bài hiệu chuẩn ngược
+Chế độ **ngẫu nhiên, không liên quan gì đến lợi suất**, chạy 20 lần: phải KHÔNG
+được báo `DAT` quá 14/20. Không có bài này thì một phép đo báo `DAT` cho mọi đầu
+vào vẫn xanh.
+
+### VÀ BÀI KIỂM CỦA TÔI VỪA BẮT CHÍNH TÔI
+`test_khong_dinh_nghia_gi_sau_khoi_main` — bài tôi viết hai giờ trước — bắt
+được tôi nối `GIA TRI CUA BANKER` vào **sau** khối `__main__`, đúng lại lỗi nó
+sinh ra để canh. Đã chuyển khối xuống cuối.
+
+**21 passed.**

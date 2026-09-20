@@ -214,3 +214,96 @@ class KhoiMainPhaiNamCUOI(unittest.TestCase):
                 [getattr(n, "name", "<gan>") for n in sau], [],
                 "%s: co dinh nghia SAU khoi __main__ - `python -m` se chay "
                 "khoi do truoc khi chung ton tai" % f)
+
+
+class GiaTriCuaBanker(NenDbTam):
+    """Phep so quyet dinh tru BANKER la EDGE hay la CHI PHI.
+
+    Phan tich vi mo la narrative khong the bac bo: bat ky dien bien nao cung
+    giai thich duoc SAU KHI no xay ra. Mot BANKER chi sinh van ban se LUON
+    trong dung va KHONG BAO GIO ra tien. Nen moi luat vi mo phai di qua mot
+    phep so co CON SO.
+    """
+
+    def _chuoi(self, n=1200, hat=3):
+        import numpy as np
+        import pandas as pd
+        rng = np.random.default_rng(hat)
+        idx = pd.date_range("2020-01-01", periods=n, freq="D")
+        return rng, idx
+
+    def test_che_do_CO_gia_tri_thi_bao_DAT(self):
+        """Dat san: loi suat CAO hon trong che do -> phai bao DAT."""
+        import numpy as np
+        rng, idx = self._chuoi()
+        m = np.zeros(len(idx), bool)
+        m[::2] = True                       # xen ke -> hai nhanh deu du bar
+        loi = np.where(m, rng.normal(0.002, 0.01, len(idx)),
+                       rng.normal(-0.001, 0.01, len(idx)))
+        r = B.so_co_che_do(loi, m)
+        self.assertEqual(r["trang_thai"], "DAT", r)
+        self.assertGreater(r["lai_moi_bar_trong_che_do"],
+                           r["lai_moi_bar_khong_loc"])
+
+    def test_HIEU_CHUAN_NGUOC_che_do_VO_NGHIA_thi_bao_AM(self):
+        """Mot phep do bao DAT cho moi dau vao thi vo dung.
+
+        Che do o day khong lien quan gi den loi suat, nen no khong duoc phep
+        bao la co gia tri.
+        """
+        import numpy as np
+        rng, idx = self._chuoi(hat=11)
+        loi = rng.normal(0.0005, 0.01, len(idx))
+        m = np.zeros(len(idx), bool)
+        m[::2] = True
+        dat = sum(B.so_co_che_do(rng.permutation(loi), m)["trang_thai"] == "DAT"
+                  for _ in range(20))
+        self.assertLessEqual(dat, 14,
+                             "che do ngau nhien ma bao DAT %d/20 lan" % dat)
+
+    def test_mot_nhanh_QUA_IT_BAR_la_CHUA_DO_DUOC_chu_khong_phai_AM(self):
+        """Loc che do LUON cat bot so lenh. It lenh thi phuong sai cao, nen
+        mot cai 'hon' nho tren mau nho khong noi len gi."""
+        import numpy as np
+        rng, idx = self._chuoi()
+        loi = rng.normal(0.001, 0.01, len(idx))
+        m = np.zeros(len(idx), bool)
+        m[:50] = True                       # chi 50 bar trong che do
+        r = B.so_co_che_do(loi, m)
+        self.assertEqual(r["trang_thai"], "CHUA_DO_DUOC", r)
+        self.assertIn("bar_trong", r)
+
+    def test_lich_lech_la_CHUA_DO_DUOC(self):
+        import numpy as np
+        self.assertEqual(
+            B.so_co_che_do(np.zeros(100), np.zeros(90, bool))["trang_thai"],
+            "CHUA_DO_DUOC")
+
+    def test_bao_TY_LE_GIU_LENH_de_thay_cai_gia_cua_bo_loc(self):
+        """Mot bo loc cat 95% so lenh de tang 3% lai moi bar la mot bo loc da
+        khop vao qua khu, khong phai mot phat hien. Phai NHIN THAY duoc."""
+        import numpy as np
+        rng, idx = self._chuoi()
+        m = np.zeros(len(idx), bool)
+        m[::2] = True
+        loi = rng.normal(0.001, 0.01, len(idx))
+        r = B.so_co_che_do(loi, m)
+        self.assertIn("ty_le_giu_lenh", r)
+        self.assertAlmostEqual(r["ty_le_giu_lenh"], 0.5, places=1)
+
+    def test_chuoi_che_do_la_POINT_IN_TIME(self):
+        """Moi moc duoc tra loi bang thu ta BIET tai moc do, khong phai gia
+        tri CUA ngay do. Do la ca ly do muc DIEM THOI GIAN ton tai."""
+        import pandas as pd
+        self._nap("CPIAUCSL", [("2026-01-01", 300.0), ("2026-03-01", 999.0)])
+        lich = pd.to_datetime(["2026-03-05", "2026-03-15", "2026-05-01"])
+        s = B.chuoi_che_do("CPIAUCSL", ">", 500.0, lich)
+        self.assertIsNotNone(s)
+        self.assertFalse(bool(s.iloc[0]), "05/03 da thay so cong bo giua thang 4")
+        self.assertFalse(bool(s.iloc[1]), "15/03 da thay so cong bo giua thang 4")
+        self.assertTrue(bool(s.iloc[2]), "01/05 van chua thay so cua thang 3")
+
+    def test_seri_chua_khai_do_tre_thi_chuoi_che_do_tra_None(self):
+        import pandas as pd
+        self.assertIsNone(B.chuoi_che_do("LA_HOAC", ">", 1.0,
+                                         pd.to_datetime(["2026-01-01"])))

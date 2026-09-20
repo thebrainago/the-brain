@@ -696,6 +696,98 @@ def seri_chua_khai_do_tre() -> list[str]:
     return sorted(k for k in list(SERI) + list(WB) if k not in DO_TRE_NGAY)
 
 
+# ============================================================ GIA TRI CUA BANKER
+#
+# Cau hoi DUY NHAT quyet dinh tru nay ton tai hay khong:
+#
+#     Voi CUNG mot co che, loc theo che do vi mo co lam no ra tien hon khong?
+#
+# Phan tich vi mo la **narrative khong the bac bo**: bat ky dien bien nao cung
+# giai thich duoc SAU KHI no xay ra. Mot BANKER chi sinh van ban se LUON trong
+# dung va KHONG BAO GIO ra tien. Nen moi luat vi mo phai di qua mot phep so co
+# con so, va phep so do phai point-in-time.
+
+#: Loc theo che do LUON lam giam so lenh. It lenh hon thi phuong sai cao hon,
+#: nen mot cai "hon" nho tren mot mau nho khong noi len gi. Duoi nguong nay thi
+#: ket qua la CHUA_DO_DUOC chu khong phai AM.
+TOI_THIEU_BAR_MOI_NHANH = 250
+
+
+def chuoi_che_do(seri: str, phep: str, nguong: float,
+                 lich) -> "pd.Series | None":
+    """Chuoi bool POINT-IN-TIME cua mot dieu kien che do, theo lich cua he.
+
+    Moi moc `t` trong `lich` duoc tra loi bang **thu ta biet tai t**, qua
+    `gia_tri_biet_luc` - khong phai bang gia tri CUA ngay t. Do la ca ly do
+    muc DIEM THOI GIAN ton tai.
+
+    `None` khi seri chua khai do tre: khong doan.
+    """
+    import pandas as pd
+
+    if do_tre_cua(seri) is None:
+        return None
+    ra, cuoi = [], None
+    for t in lich:
+        d = gia_tri_biet_luc(seri, str(t)[:10])
+        if d["trang_thai"] == "DAT":
+            cuoi = d["gia_tri"]
+        if cuoi is None:
+            ra.append(False)
+            continue
+        ra.append(cuoi > nguong if phep == ">" else cuoi < nguong)
+    return pd.Series(ra, index=lich, dtype=bool)
+
+
+def so_co_che_do(loi_suat, che_do) -> dict:
+    """So MOT co che chay TU DO voi chinh no chi chay TRONG che do.
+
+    `loi_suat` la chuoi loi suat RONG cua co che theo bar (0 khi khong co vi
+    the). `che_do` la chuoi bool cung lich.
+
+    Tra ba trang thai:
+      `DAT`           loc che do lam TANG lai tren moi bar co phoi nhiem
+      `AM`            do duoc va khong tang
+      `CHUA_DO_DUOC`  mot nhanh qua it bar de noi duoc gi
+
+    ## VI SAO SO "LAI TREN MOI BAR CO PHOI NHIEM" CHU KHONG SO TONG LAI
+
+    Loc che do LUON cat bot so lenh, nen tong lai gan nhu luon GIAM - so tong
+    thi bo loc nao cung "thua". Cau hoi dung la mot dong von bo ra co duoc tra
+    nhieu hon khong, tuc lai chia cho SO BAR THAT SU CAM VI THE.
+    """
+    import numpy as np
+
+    a = np.asarray(loi_suat, float)
+    m = np.asarray(che_do, bool)
+    if len(a) != len(m):
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "lich lech: %d bar loi suat vs %d bar che do"
+                         % (len(a), len(m))}
+    co = np.abs(a) > 0                       # bar that su co phoi nhiem
+    trong, ngoai = co & m, co & ~m
+    if trong.sum() < TOI_THIEU_BAR_MOI_NHANH or ngoai.sum() < TOI_THIEU_BAR_MOI_NHANH:
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "trong che do %d bar, ngoai %d bar - can >= %d moi ben"
+                         % (int(trong.sum()), int(ngoai.sum()),
+                            TOI_THIEU_BAR_MOI_NHANH),
+                "bar_trong": int(trong.sum()), "bar_ngoai": int(ngoai.sum())}
+    lai_trong = float(a[trong].mean())
+    lai_ngoai = float(a[ngoai].mean())
+    lai_chung = float(a[co].mean())
+    return {
+        "trang_thai": "DAT" if lai_trong > lai_chung else "AM",
+        "lai_moi_bar_trong_che_do": round(lai_trong, 8),
+        "lai_moi_bar_ngoai_che_do": round(lai_ngoai, 8),
+        "lai_moi_bar_khong_loc": round(lai_chung, 8),
+        "bar_trong": int(trong.sum()), "bar_ngoai": int(ngoai.sum()),
+        # Bao nhieu phan tram so lenh bi bo di de doi lay cai "hon" do. Mot bo
+        # loc cat 95% so lenh de tang 3% lai moi bar la mot bo loc da khop vao
+        # qua khu, khong phai mot phat hien.
+        "ty_le_giu_lenh": round(float(trong.sum()) / max(int(co.sum()), 1), 4),
+    }
+
+
 if __name__ == "__main__":
     # PHAI nam CUOI FILE. Toi tung noi muc DIEM THOI GIAN vao sau khoi nay, va
     # nhu the `python -m tru.banker` se chay `mot_luot()` TRUOC khi cac ham do
