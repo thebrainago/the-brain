@@ -88,11 +88,31 @@ NHAN_MEM = {
     "6_dang_ky_truoc": "khong dang ky truoc - rui ro tu lua minh khi quet rong",
     "9_siet_phoi_nhiem_cao": "phoi nhiem cao ma chua chung minh duoc bu rui ro",
     "10_qua_fdr_online": "khong qua nguong FDR online",
+    # RR THUC TE LA NHAN, KHONG PHAI CHAN (xep 19/09/2026).
+    #
+    # Dieu kien nay bat "lai TB mot lenh thang qua nho so voi lo TB mot lenh
+    # thua - dang martingale tra hinh". Do la mot canh bao that, nhung dat no
+    # lam CHAN CUNG thi no chan chinh he da ra tien nhat cua du an: mot cai
+    # luoi co dung hinh dang do - nhieu lenh thang nho, it lenh thua sau - va
+    # AUDCAD 18/09 cho holdout +13,26%/nam voi dung profile nay.
+    #
+    # LUAT SO 0: *"MDE / FDR / placebo la NHAN CANH BAO, khong phai CONG CHAN.
+    # Chi chan khi thua mua-giu o CUNG RUI RO - do moi la cau hoi tien."*
+    # RR thap khong tra loi cau hoi tien; `nguy_co_chay` va sut giam moi tra loi.
+    "12_rr_thuc_te": "RR thuc te thap - hinh dang martingale, kiem nguy co chay",
 }
 #: Cai VAN CHAN. Liet ke tuong minh de them mot dieu kien moi khong tu dong roi
 #: vao ben nao ma khong ai quyet dinh.
 CHAN_CUNG = ("1_loi_hon_mua_giu", "2_sharpe_hon_mua_giu", "3_calmar_hon_mua_giu",
-             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay")
+             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay",
+             # EDGE VUOT SPREAD LA CHAN CUNG (xep 19/09/2026).
+             #
+             # Khac `12_rr_thuc_te` o dung mot cho: day LA cau hoi tien. Mot
+             # edge mong hon chi phi thi khong phai "edge co rui ro cao" - no
+             # khong ton tai ngoai doi, va khong mot muc chap nhan rui ro nao
+             # cuu duoc no. Cung ho voi `7_chi_phi_do_duoc`, va cung ho voi
+             # luat *"chi phi phai DO DUOC"* cua `CLAUDE.md`.
+             "13_edge_vuot_spread")
 
 
 def che_do_cong() -> str:
