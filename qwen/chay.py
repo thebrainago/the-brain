@@ -399,11 +399,17 @@ class DieuPhoi:
         ton mang. Hong thi chi in mot dong - mot loi mang KHONG duoc phep giet
         mot dot chay nhieu ngay.
         """
+        # BAT MOI NGOAI LE, khong chi ImportError. Cau noi la thu MOI va chua
+        # tung chay tren may that; mot loi trong no KHONG duoc phep giet mot
+        # dot chay nhieu ngay. Neu cau hong thi `q` van phai chay bang viec
+        # cua bang `NHIEM_VU.json` nhu truoc khi co cau.
         try:
             from . import cau_git as CG
-        except ImportError:
+            r = CG.dong_bo()
+        except Exception as e:                      # noqa: BLE001
+            print("  !! cau noi git hong (%s: %s) - `q` chay tiep bang bang viec"
+                  % (type(e).__name__, e), flush=True)
             return
-        r = CG.dong_bo()
         if r.get("bo_qua"):
             return
         if r.get("trang_thai") != "DAT":
@@ -434,9 +440,11 @@ class DieuPhoi:
             return
         try:
             from . import cau_git as CG
-        except ImportError:
-            return
-        if not CG.don_dang_cho():
+            if not CG.don_dang_cho():
+                return
+        except Exception as e:                      # noqa: BLE001
+            print("  !! khong doc duoc hang doi don (%s) - bo qua vong nay"
+                  % type(e).__name__, flush=True)
             return
 
         def _lam():

@@ -593,3 +593,39 @@ class DonPhaiKHAI_CONG(unittest.TestCase):
             self.assertIn(kieu, CG.KIEU_CONG,
                           "don '%s' trong viec/cho/ co lenh ma cong.kieu=%r"
                           % (d["ma"], kieu))
+
+
+class TuKiem(unittest.TestCase):
+    """`b cau tu-kiem` - tach buoc de vo nhat ra khoi long vong `q`.
+
+    Cau noi duoc viet va kiem HOAN TOAN tren cloud, tren repo git gia lap.
+    Buoc dau tren may that la buoc de vo nhat, va neu no vo BEN TRONG `q` thi
+    trieu chung se lan voi muoi thu khac dang chay.
+    """
+
+    def test_tu_kiem_chay_het_va_bao_du_cac_khau(self):
+        ra = CG.tu_kiem(in_ra=lambda *a, **k: None)
+        self.assertIn(ra["trang_thai"], CG.TRANG_THAI)
+        ten = {b["buoc"] for b in ra["buoc"]}
+        for phai_co in ("git chay duoc", "the {py} chay duoc",
+                        "ra don -> chay -> ghi -> doc lai",
+                        "khoa lan TESTER chan duoc nguoi thu hai"):
+            self.assertIn(phai_co, ten)
+
+    def test_tu_kiem_KHONG_cham_remote_va_KHONG_ghi_vao_viec_that(self):
+        """Tu kiem phai an toan de go bat cu luc nao - ke ca giua mot dot chay."""
+        truoc = {p.name for p in (CG.VIEC / "xong").glob("*.json")}
+        CG.tu_kiem(in_ra=lambda *a, **k: None)
+        sau = {p.name for p in (CG.VIEC / "xong").glob("*.json")}
+        self.assertEqual(truoc, sau, "tu kiem da ghi vao viec/xong that")
+
+    def test_HIEU_CHUAN_NGUOC_the_py_hong_thi_tu_kiem_BAO_HONG(self):
+        """Neu tu kiem bao DAT du moi thu hong thi no vo dung."""
+        goc = CG._thay_the
+        CG._thay_the = lambda lenh: ["khong_co_lenh_nay_xyz"] if lenh else None
+        try:
+            ra = CG.tu_kiem(in_ra=lambda *a, **k: None)
+        finally:
+            CG._thay_the = goc
+        self.assertEqual(ra["trang_thai"], "CHUA_DO_DUOC")
+        self.assertTrue(ra["hong"])

@@ -796,6 +796,10 @@ def c_cau(a):
         print("nho `git add viec/cho && git commit && git push` de may thay duoc.")
         return
 
+    if viec in ("tu-kiem", "kiem"):
+        r = CG.tu_kiem()
+        return
+
     if viec == "xong":
         if len(a) < 2:
             print("can: b cau xong <ma>")

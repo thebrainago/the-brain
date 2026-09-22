@@ -613,3 +613,118 @@ def chay_mot_don_dang_cho(goc: Path | None = None) -> dict | None:
             continue
         return chay_don(d, goc=g)
     return None
+
+
+# ------------------------------------------------------------------ tu kiem
+def tu_kiem(in_ra=print) -> dict:
+    """TU KIEM CAU NOI tren may dang chay - khong can `q`, khong cham remote.
+
+    ## VI SAO CAN LENH NAY
+
+    Cau noi duoc viet va kiem HOAN TOAN tren cloud, tren mot repo git gia lap.
+    Buoc dau tien tren may that la buoc de vo nhat, va neu no vo trong long
+    vong `q` thi trieu chung se lan voi muoi thu khac dang chay.
+
+    Lenh nay tach rieng buoc do ra: chay het cac khau cua cau tren mot thu muc
+    TAM, bao tung khau mot. Khong `push`, khong `pull`, khong dung toi `nao.db`
+    hay `data/`. Chay het chua toi mot giay.
+
+    Tra dict co `trang_thai`. `DAT` moi co nghia la dang bat `q` len.
+    """
+    import subprocess
+    import tempfile
+
+    buoc, loi = [], []
+
+    def _ghi(ten, ok, ghi_chu=""):
+        buoc.append({"buoc": ten, "dat": bool(ok), "ghi_chu": ghi_chu})
+        in_ra("  %s  %-34s %s" % ("OK " if ok else "HONG", ten, ghi_chu))
+        if not ok:
+            loi.append(ten)
+
+    in_ra("TU KIEM CAU NOI HAI MAY")
+    in_ra("-" * 60)
+
+    # 1. git co chay duoc khong, va cay nay la repo chu?
+    try:
+        ma, ra, _ = _git("rev-parse", "--is-inside-work-tree")
+        _ghi("git chay duoc", ma == 0 and ra == "true", ra)
+    except Exception as e:
+        _ghi("git chay duoc", False, "%s: %s" % (type(e).__name__, e))
+
+    nh = None
+    try:
+        nh = nhanh_hien_tai()
+        _ghi("doc duoc nhanh hien tai", bool(nh), str(nh))
+    except Exception as e:
+        _ghi("doc duoc nhanh hien tai", False, "%s: %s" % (type(e).__name__, e))
+
+    # 2. doc duoc trang thai git ma khong lech duong dan
+    try:
+        d = co_viec_chua_commit()
+        xau = [x for x in d if not (GOC / x).exists()]
+        _ghi("doc dung duong dan do dang", not xau,
+             "%d muc do dang%s" % (len(d), (", LECH: %r" % xau[:3]) if xau else ""))
+    except Exception as e:
+        _ghi("doc dung duong dan do dang", False, "%s: %s" % (type(e).__name__, e))
+
+    # 3. thu muc viec + hang doi
+    try:
+        bao_dam_thu_muc()
+        cho = don_dang_cho()
+        _ghi("doc duoc hang doi don", True, "%d don dang cho" % len(cho))
+        xau = [d["ma"] for d in cho
+               if d.get("lenh") and (d.get("cong") or {}).get("kieu") not in KIEU_CONG]
+        _ghi("moi don co lenh deu KHAI CONG", not xau, ("thieu: %r" % xau) if xau else "")
+    except Exception as e:
+        _ghi("doc duoc hang doi don", False, "%s: %s" % (type(e).__name__, e))
+
+    # 4. `{py}` co tro toi mot Python CHAY DUOC khong - day la khau de vo nhat
+    #    tren Windows, noi `python3` khong ton tai.
+    try:
+        lenh = _thay_the(["{py}", "-c", "print(1)"])
+        r = subprocess.run(lenh, capture_output=True, text=True, timeout=60)
+        _ghi("the {py} chay duoc", r.returncode == 0 and "1" in r.stdout,
+             lenh[0])
+    except Exception as e:
+        _ghi("the {py} chay duoc", False, "%s: %s" % (type(e).__name__, e))
+
+    # 5. vong ghi -> doc ket qua, tren thu muc TAM (khong dung cham viec that)
+    try:
+        with tempfile.TemporaryDirectory() as t:
+            g = Path(t)
+            bao_dam_thu_muc(goc=g)
+            ra_don("tu-kiem", "thu", lenh=["{py}", "-c", "print('ok')"],
+                   cong="chay_duoc", goc=g)
+            cf = don_dang_cho(goc=g)[0]
+            kq = chay_don(cf, goc=g)
+            doc = doc_ket_qua("tu-kiem", goc=g)
+            _ghi("ra don -> chay -> ghi -> doc lai",
+                 kq.get("trang_thai") == "DAT" and doc.get("trang_thai") == "DAT",
+                 "%s / %s" % (kq.get("trang_thai"), doc.get("trang_thai")))
+            _ghi("thieu ket qua = CHUA_DO_DUOC",
+                 doc_ket_qua("khong-co", goc=g)["trang_thai"] == "CHUA_DO_DUOC")
+    except Exception as e:
+        _ghi("ra don -> chay -> ghi -> doc lai", False,
+             "%s: %s" % (type(e).__name__, e))
+
+    # 6. khoa lan TESTER
+    try:
+        with tempfile.TemporaryDirectory() as t:
+            g = Path(t)
+            bao_dam_thu_muc(goc=g)
+            mot = _lay_khoa(g / "viec")
+            hai = _lay_khoa(g / "viec")
+            _ghi("khoa lan TESTER chan duoc nguoi thu hai", mot and not hai)
+    except Exception as e:
+        _ghi("khoa lan TESTER chan duoc nguoi thu hai", False,
+             "%s: %s" % (type(e).__name__, e))
+
+    in_ra("-" * 60)
+    tt = "DAT" if not loi else "CHUA_DO_DUOC"
+    in_ra("%s%s" % (tt, ("  - hong: " + ", ".join(loi)) if loi else
+                    "  - cau san sang. Bat `q` la don bat dau chay."))
+    if tt == "DAT":
+        in_ra("")
+        in_ra("Buoc ke tiep:  q mot-vong    (chay DUNG mot vong roi thoat)")
+    return {"trang_thai": tt, "buoc": buoc, "hong": loi}
