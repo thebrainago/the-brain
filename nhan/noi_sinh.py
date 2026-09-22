@@ -277,6 +277,242 @@ CO_CHE_CUA = {
 }
 
 
+#: CHIEU SUY RA TU (ho, duoi/tren), KHONG duoc gan cung.
+#:
+#: ## LOI DA SUA 20/09/2026 - LUAN DIEM NOI NGUOC VOI LENH
+#:
+#: Truoc do ca ba bo sinh deu nhan `chieu: int = 1` va **khong loi goi nao
+#: trong ca kho truyen `-1`**. Do duoc tren chuoi tong hop 3.000 bar:
+#:
+#:     sinh            3.669 co che ... long 585  / short 0
+#:     sinh_cap        ...              long 2.998 / short 0
+#:     sinh_xu_huong   ...              long 86    / short 0
+#:
+#: Hau qua NANG HON mot cai lech thong ke. Bang `CO_CHE_CUA` co nhung o ma
+#: luan diem la mot lap luan BAN, nhung `chieu` van bi gan cung `+1`:
+#:
+#:     ns_heiken_<_q10_giu5        chieu=+1  "Than HA day chieu giam: ap luc
+#:                                            ban keo dai qua nhieu bar."
+#:     ns_supertrend10_<_q20_giu5  chieu=+1  "chuong trinh ban dang chay"
+#:     ns_donchian_<_...           chieu=+1  "nguon cung ban ep tiep"
+#:
+#: Tuc co che MUA trong khi cau `co_che` cua chinh no noi ben ban dang ep -
+#: va `LUAT_THO_CODE.md` muc 4 ghi ro cau do la **cau MAN HINH DUYET DOC**.
+#: Cong dang doc mot cau noi nguoc voi lenh ma khong cong nao bat duoc, vi
+#: khong cong nao doi chieu VAN voi SO.
+#:
+#: `bien_dong` -> `None`: bien dong CAO khong noi len hay xuong. Chon san mot
+#: chieu cho no la tu tra loi mat mot nua cau hoi, nen nhung o do phai sinh CA
+#: HAI chieu tren cung dieu kien.
+CHIEU_TU_HO = {
+    ("quay_ve_trung_binh", "thap"): 1,    # ban kiet suc -> mua
+    ("quay_ve_trung_binh", "cao"): -1,    # mua qua da   -> ban
+    ("xu_huong", "thap"): -1,             # ap luc ban con tiep -> ban
+    ("xu_huong", "cao"): 1,               # luc mua con tiep    -> mua
+    ("pha_vo", "thap"): -1,               # thung day kenh -> ban
+    ("pha_vo", "cao"): 1,                 # pha dinh kenh  -> mua
+    ("bien_dong", "thap"): None,          # KHONG suy ra duoc chieu
+    ("bien_dong", "cao"): None,
+    # `dao_chieu` chi co trong `CO_CHE_NEN` (mau nen). Mot mau dao chieu o DAY
+    # la tin hieu len, o DINH la tin hieu xuong - cung hinh dang voi `quay_ve`.
+    ("dao_chieu", "thap"): 1,
+    ("dao_chieu", "cao"): -1,
+}
+
+#: CACH DOC THU HAI cua cung mot dieu kien - ve nguoc chieu.
+#:
+#: Moi cuc tri co DUNG HAI cach doc kinh te, va chung cho hai chieu nguoc nhau:
+#:
+#:     KIET SUC    luc day gia toi day da het -> gia lui lai  (quay_ve)
+#:     CON TIEP    luc day gia van dang chay  -> gia di tiep   (xu_huong)
+#:
+#: `CO_CHE_CUA` chi khai MOT cach doc cho moi o, nen mot nua khong gian gia
+#: thuyet khong bao gio duoc sinh. Bang nay khai cach doc con lai.
+#:
+#: KHONG phai "chep luan diem cu roi lat dau": moi cau o day phai noi duoc AI
+#: TRA TIEN cho phoi nhiem theo chieu nguoc lai, va vi sao ho buoc phai tra.
+#: O nao khong noi duoc thi **khong co trong bang** - va the la khong sinh,
+#: dung luat `_co_che_cua` tra `None` da co san.
+CO_CHE_NGUOC = {
+    ("rsi", "thap"): ("xu_huong",
+        "Chuoi bar giam lien tiep thuong la mot vi the lon dang duoc thoat dan "
+        "chu khong phai tin xau moi moi bar; phan hang con lai con phai ban."),
+    ("rsi", "cao"): ("quay_ve_trung_binh",
+        "Suc mua keo dai den muc nay nghia la ai buoc phai mua thi da mua xong; "
+        "cau con lai la cau tuy y, va no bien mat ngay khi gia ngung tang."),
+    ("zscore", "thap"): ("xu_huong",
+        "Gia roi xa trung binh xuong duoi lam hang loat chan lo va lenh goi ky "
+        "quy kich hoat cung luc, va chung day tiep cung mot chieu."),
+    ("zscore", "cao"): ("quay_ve_trung_binh",
+        "Gia thoat xa len tren vung can bang la luc ben mua tra dat nhat; ban "
+        "cho ho o do la ban thanh khoan dung luc no hiem."),
+    ("cci", "thap"): ("xu_huong",
+        "Do lech am keo dai so voi gia dien hinh la dau hieu mot ben dang xa "
+        "hang theo lich chu khong theo gia - ho con phai xa tiep."),
+    ("cci", "cao"): ("quay_ve_trung_binh",
+        "Do lech duong cuc doan so voi gia dien hinh thuong la cau doi hoi "
+        "khop ngay; ben cung cap hang luc do doi duoc tra phan chenh lech."),
+    ("stochastic", "thap"): ("xu_huong",
+        "Dong cua ep o day bien do N bar nhieu phien lien la dau hieu nguon "
+        "cung chua ra het; nguoi con hang van phai ban o gia thap hon."),
+    ("stochastic", "cao"): ("quay_ve_trung_binh",
+        "Dong cua ep o dinh bien do N bar nhieu phien nghia la cau da lo het; "
+        "ai ban vao do la ban cho nguoi mua cuoi cung."),
+    ("ibs", "thap"): ("xu_huong",
+        "Dong cua o day bien do lap lai nhieu bar la dau hieu ban theo chuong "
+        "trinh chu khong phai ban thao mot lan - chuong trinh do con chay."),
+    ("ibs", "cao"): ("quay_ve_trung_binh",
+        "Dong cua o dinh bien do bar nghia la ben mua da tra het muc ho chiu "
+        "duoc trong phien; bar sau khong con ai do gia o do nua."),
+    ("doi_pct", "thap"): ("xu_huong",
+        "Mot cu giam manh mo ra vong giai chap ke tiep: ai bi goi ky quy hom "
+        "nay se phai ban vao hom sau, khong phai hom nay."),
+    ("doi_pct", "cao"): ("quay_ve_trung_binh",
+        "Mot cu tang qua nhanh hiem khi la dinh gia lai that; no thuong la "
+        "ben ban khong con hang de giao, va gia lui lai khi ho co lai."),
+    ("dong_luong", "thap"): ("xu_huong",
+        "Dong luong am sau va keo dai la dong tien dang rut co he thong; dong "
+        "rut do do bang tuan chu khong bang bar."),
+    ("dong_luong", "cao"): ("quay_ve_trung_binh",
+        "Dong luong duong cuc doan la luc nguoi vao muon nhat dang tra gia cao "
+        "nhat; ban cho ho la phia co loi the."),
+    ("than_nen", "thap"): ("xu_huong",
+        "Bar giam than dai la mot lenh ban lon dang duoc thuc thi, va lenh lon "
+        "hiem khi xong trong mot bar."),
+    ("than_nen", "cao"): ("quay_ve_trung_binh",
+        "Bar tang than dai vet het thanh khoan chao ban trong bar; het hang re "
+        "thi nguoi mua tiep phai tra dat hon, va it ai tra."),
+    ("heiken", "thap"): ("quay_ve_trung_binh",
+        "Heikin-Ashi lam muot nhieu, nen mot chuoi dai lien tiep chi xuat hien "
+        "khi mot ben xa hang theo CHUONG TRINH chu khong theo tin; chuong trinh "
+        "chay xong thi nguon cung bien mat dot ngot, khong tan dan."),
+    ("heiken", "cao"): ("quay_ve_trung_binh",
+        "Than HA day chieu tang keo dai nghia la cau da lo het qua nhieu bar; "
+        "sau do khong con ai phai mua o gia cao hon."),
+    ("supertrend", "thap"): ("quay_ve_trung_binh",
+        "Gia cach Supertrend nhieu ATR ve phia duoi la muc ma ban them khong "
+        "con re: ai ban o do dang ban cho chinh nguoi se phai mua lai."),
+    ("supertrend", "cao"): ("quay_ve_trung_binh",
+        "Gia cach Supertrend nhieu ATR ve phia tren la vung chot lai cua chuong "
+        "trinh xu huong; ho ban ra va ai mua o do nhan hang cua ho."),
+    ("donchian", "thap"): ("quay_ve_trung_binh",
+        "Day kenh n bar la noi lenh cat lo bi quet xong; het lenh buoc phai ban "
+        "thi nguon cung ep bien mat dot ngot chu khong tan dan."),
+    ("donchian", "cao"): ("quay_ve_trung_binh",
+        "Dinh kenh n bar la noi lenh cho ban cua nguoi khac dong lai; ai mua "
+        "qua do phai an het khoi lenh do truoc khi di tiep."),
+    ("keltner", "thap"): ("xu_huong",
+        "Ra khoi dai Keltner phia duoi nghia la cu dich vuot ca BIEN DO THAT "
+        "cua tai san - muc do do thuong di kem lenh ban con phai chay tiep."),
+    ("keltner", "cao"): ("quay_ve_trung_binh",
+        "Gia o mep tren dai Keltner la muc dat so voi bien do that cua chinh "
+        "tai san; ban o do la ban cho ben phai mua bang moi gia."),
+}
+
+
+#: Toan hang do DO LON, khong do HUONG. Dieu kien cua chung khong noi len hay
+#: xuong, nen phai sinh CA HAI chieu tren cung dieu kien.
+#:
+#: `adx` nam o day du `CO_CHE_CUA` dang gan cho no nhan `xu_huong`/`quay_ve`:
+#: ADX do **SUC MANH** xu huong chu khong do dau cua no - mot ADX = 40 xuat
+#: hien ca trong mot con tang lan mot con sup. Gan `chieu = +1` cho `adx cao`
+#: la doc mot con so khong dau thanh mot lenh mua.
+TOAN_HANG_KHONG_CHIEU = frozenset({"adx", "atr", "bien_do", "phan_vi"})
+
+
+def _cac_cach_doc(th, cao) -> list[tuple[str, str, int]]:
+    """Moi cach doc kinh te cua mot (toan hang, phia nguong) -> (ho, cau, chieu).
+
+    Tra rong khi khong khai duoc "vi sao" - giu nguyen luat cu cua
+    `_co_che_cua`: khong noi duoc ai tra tien thi khong sinh.
+
+    Mot o co the cho HAI cach doc (kiet suc / con tiep) va chung di HAI chieu
+    nguoc nhau; mot toan hang khong co chieu thi moi cach doc deu sinh ca hai
+    chieu. Chieu LUON suy tu `ho`, khong bao gio gan cung - do la loi da sua
+    20/09/2026, xem `CHIEU_TU_HO`.
+    """
+    cb = str(th.get("chi_bao", "")).lower()
+    phia = "cao" if cao else "thap"
+    if cb == "mau_nen":
+        khai = CO_CHE_NEN.get((str(th.get("mau", "")).lower(), phia))
+        doc = [khai] if khai else []
+    else:
+        doc = [x for x in (CO_CHE_CUA.get((cb, phia)),
+                           CO_CHE_NGUOC.get((cb, phia))) if x]
+    ra = []
+    for ho, cau in doc:
+        c = None if cb in TOAN_HANG_KHONG_CHIEU else CHIEU_TU_HO.get((ho, phia))
+        for chieu in ((1, -1) if c is None else (c,)):
+            ra.append((ho, cau, chieu))
+    return ra
+
+
+def _toan_hang_khong_nhin_truoc(th, df, q) -> bool:
+    """Kiem nhin truoc MOT LAN cho moi toan hang, thay vi moi CAP.
+
+    ## VI SAO KIEM O DAY LA DU
+
+    `A VA B` chi doc du lieu qua khu khi CA `A` lan `B` chi doc du lieu qua
+    khu - phep hoi cua hai dieu kien nhan qua thi nhan qua. Nen kiem tung
+    toan hang la du de ket luan cho moi cap dung tu chung.
+
+    ## VI SAO KIEM O MUC CAP LA LANG PHI LON
+
+    `sinh_cap` duyet to hop: ~20 toan hang cho ra hang nghin cap. Do 20/09:
+    goi `kiem_khong_nhin_truoc` tung cap mat **40 giay cho 300 co che**, tuc
+    ~9 phut cho tran mac dinh 4.000. Kiem o muc toan hang la ~20 loi goi.
+
+    Dung mot nguong GIUA (khong phai cuc bien) de phep kiem co du bar kich
+    hoat ma phan xet; nguong cuc bien co the cho ra chuoi gan nhu rong va khi
+    do phep kiem khong noi len dieu gi.
+    """
+    gt = sorted(q.items())[len(q) // 2][1] if q else None
+    if gt is None:
+        return False
+    thu = {"ten": "probe", "ho": "xu_huong", "chieu": 1, "giu": 1,
+           "co_che": "probe", "nguon": "probe", "ra": [],
+           "vao": [{"trai": th, "phep": ">", "phai": {"hang": float(gt)}}]}
+    # KHONG goi `kiem_khai_bao` o day. Spec nay la mot QUE THU, no khong bao
+    # gio vao kho - va cong khai bao se tu choi no vi `co_che` khong phai mot
+    # cau that ("'co_che' phai la MOT CAU giai thich vi sao co nguoi tra tien
+    # cho phoi nhiem nay"). Cong do dang lam dung viec cua no; chi la que thu
+    # khong phai doi tuong cua no. Goi no o day lam `sinh_cap` tra ve 0 co
+    # che - da sap that 20/09/2026 khi viet ham nay.
+    try:
+        ok, _ = NP.kiem_khong_nhin_truoc(thu, df)
+    except Exception:
+        return False
+    return bool(ok)
+
+
+def _cac_cap_nhat_tri(tha, cao_a, thb, cao_b, loc: int = 0) -> list[tuple]:
+    """MOI cach ghep hai cach doc CHI VE CUNG MOT PHIA -> [(doc_a, doc_b, chieu)].
+
+    Vi sao phai nhat tri: mot he vao lenh vi HAI ly do thi hai ly do do phai
+    cung ket luan. Ghep mot luan cu MUA voi mot luan cu BAN roi dan nhan mua
+    la mot cau `co_che` tu mau thuan - va `LUAT_THO_CODE.md` muc 4 noi day la
+    cau MAN HINH DUYET DOC.
+
+    ## VI SAO TRA VE DANH SACH CHU KHONG PHAI CAP DAU TIEN
+
+    Ban dau ham nay `return` ngay cap dau tien nhat tri. Cai do lam lai dung
+    con bug vua sua: `_cac_cach_doc` liet ke ban `CO_CHE_CUA` truoc, ma o hau
+    het o thi ban do di chieu DUONG - nen "cap dau tien nhat tri" gan nhu luon
+    la (+1, +1) va `sinh_cap` lai lech het ve MUA, chi khac la lan nay lech vi
+    THU TU DUYET chu khong vi mot tham so.
+
+    Duyet het thi ca hai chieu deu co co hoi, va moi cap mang dung hai cau
+    luan diem cua chinh no.
+    """
+    ra = []
+    for ho_a, cau_a, ch_a in _cac_cach_doc(tha, cao_a):
+        for ho_b, cau_b, ch_b in _cac_cach_doc(thb, cao_b):
+            if ch_a != ch_b or (loc and ch_a != loc):
+                continue
+            ra.append(((ho_a, cau_a), (ho_b, cau_b), ch_a))
+    return ra
+
+
 def _co_che_cua(th, cao):
     """(ho, cau co che) cho mot toan hang o mot chieu nguong. None = chua khai."""
     cb = str(th.get("chi_bao", "")).lower()
@@ -348,9 +584,20 @@ def nguong_tu_lich_su(df: pd.DataFrame, toan_hang: dict,
 
 
 def sinh(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=CAC_GIU,
-         chieu: int = 1, kich_hoat_toi_thieu: float = 0.005,
+         chieu: int = 0, kich_hoat_toi_thieu: float = 0.005,
          kich_hoat_toi_da: float = 0.95) -> list[dict]:
     """Sinh cac khai bao DSL mot dieu kien, nguong lay tu `df_train`.
+
+    ## `chieu = 0` LA MAC DINH, VA DO LA CHO DA SUA 20/09/2026
+
+    Tham so nay TUNG mac dinh `1`, va **khong loi goi nao trong ca kho truyen
+    `-1`**. Do duoc tren chuoi tong hop: `sinh` 585 co che, **585 long, 0
+    short**; `sinh_cap` 2.998/0; `sinh_xu_huong` 86/0. Ca LUONG 3 cua day
+    chuyen chi biet de ve MUA.
+
+    Nay `chieu` chi con la BO LOC: `0` lay ca hai (mac dinh), `1`/`-1` lay mot
+    ben. Chieu that cua tung co che suy tu chinh luan diem cua no - xem
+    `CHIEU_TU_HO`.
 
     `kich_hoat_toi_da` mac dinh 0,95 — KHONG phai 0,60.
 
@@ -379,40 +626,67 @@ def sinh(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=CAC_GIU,
         ten_th = _ten(th)
         for p, gt in ng.items():
             cao = p > 0.5
-            khai = _co_che_cua(th, cao)
-            if khai is None:
-                continue          # khong khai duoc "vi sao" thi khong sinh
-            ho, cau = khai
             phep = ">" if cao else "<"
-            for giu in cac_giu:
-                spec = {
-                    "ten": f"ns_{ten_th}_{phep}_q{int(p * 100)}_giu{giu}",
-                    "ho": ho, "chieu": chieu, "giu": int(giu),
-                    "co_che": (f"{cau} Nguong lay tu phan vi {p:.0%} cua chinh "
-                               f"chuoi tren TRAIN ({gt:.6g})."),
-                    "nguon": "noi_sinh",
-                    "vao": [{"trai": th, "phep": phep, "phai": {"hang": float(gt)}}],
-                    "ra": [],
-                }
-                if NP.kiem_khai_bao(spec):
+            # `chieu` KHONG con la tham so gan cung - no suy tu chinh luan diem.
+            # Tham so `chieu` cu duoc giu de khong gay loi goi cu, nhung no chi
+            # con LOC: `chieu=0` lay ca hai, `1`/`-1` lay mot ben.
+            for ho, cau, ch in _cac_cach_doc(th, cao):
+                if chieu and ch != chieu:
                     continue
-                try:
-                    tin = NP.sinh_tu_spec(spec, df_train)
-                except Exception:
-                    continue
-                kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
-                if not (kich_hoat_toi_thieu <= kh <= kich_hoat_toi_da):
-                    continue
-                ok, _ = NP.kiem_khong_nhin_truoc(spec, df_train)
-                if not ok:
-                    continue
-                spec["_ty_le_kich_hoat"] = round(kh, 4)
-                ra.append(spec)
+                _them_spec(ra, th, ten_th, phep, p, gt, ho, cau, ch, cac_giu,
+                           df_train, kich_hoat_toi_thieu, kich_hoat_toi_da)
     return ra
 
 
+def _them_spec(ra, th, ten_th, phep, p, gt, ho, cau, ch, cac_giu, df_train,
+               kh_min, kh_max) -> None:
+    """Sinh cac ban theo `giu` cho MOT cach doc, roi loc bang chinh du lieu.
+
+    ## TEN TRUNG THI DOI TEN, KHONG BO
+
+    Mot o co the cho hai cach doc ma CUNG ra mot chieu: `keltner cao` co
+    `CO_CHE_CUA` nhan `bien_dong` (khong chieu -> sinh ca hai) va
+    `CO_CHE_NGUOC` nhan `quay_ve_trung_binh` (-> chieu am). Hai duong do gap
+    nhau o chieu am va se doi cung mot ten.
+
+    Bo im lang thi mot cach doc bien mat khoi kho ma khong ai biet - dung loi
+    `duc()` cua HEPHAESTUS da mac 19/09 (16 co che `bien_dong_do_lech` bien
+    mat khoi lo day du). Nen o day DOI TEN bang cach them `ho`.
+    """
+    da_co = {x.get("ten") for x in ra}
+    for giu in cac_giu:
+        ten = ("ns_%s_%s_q%d_giu%d%s"
+               % (ten_th, phep, int(p * 100), giu, "" if ch > 0 else "_b"))
+        if ten in da_co:
+            ten = "%s_%s" % (ten, ho[:6])
+        spec = {
+            "ten": ten,
+            "ho": ho, "chieu": int(ch), "giu": int(giu),
+            "co_che": (f"{cau} Nguong lay tu phan vi {p:.0%} cua chinh "
+                       f"chuoi tren TRAIN ({gt:.6g})."),
+            "nguon": "noi_sinh",
+            "vao": [{"trai": th, "phep": phep, "phai": {"hang": float(gt)}}],
+            "ra": [],
+        }
+        if NP.kiem_khai_bao(spec):
+            continue
+        try:
+            tin = NP.sinh_tu_spec(spec, df_train)
+        except Exception:
+            continue
+        kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
+        if not (kh_min <= kh <= kh_max):
+            continue
+        # Da kiem nhin truoc o muc TOAN HANG trong `sinh()`. Goi lai o day
+        # la mot lan cho MOI (nguong x giu) - hang tram lan cho cung mot
+        # toan hang. Do 20/09/2026 bang cProfile: **68,4 giay tren tong
+        # 68,6 giay** cua ca `sinh()` nam trong dung loi goi nay.
+        spec["_ty_le_kich_hoat"] = round(kh, 4)
+        ra.append(spec)
+
+
 def sinh_cap(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=(1, 3, 5),
-             chieu: int = 1, kich_hoat_toi_thieu: float = 0.005,
+             chieu: int = 0, kich_hoat_toi_thieu: float = 0.005,
              kich_hoat_toi_da: float = 0.85, toi_da: int = 4000) -> list[dict]:
     """Ghep HAI dieu kien. Day la thu ca du an chua bao gio thu.
 
@@ -420,6 +694,13 @@ def sinh_cap(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=(1, 3, 5),
     (hoac mot khai bao nhap nguyen tu ngoai). Chua co MOT to hop nao duoc thu.
     Khong gian cap lon hon rat nhieu nen no phai di kem `toi_da` va phai qua
     cong nghiem hon - de day chinh la ly do co `sang_loc` va MDE.
+
+    ## SUA 20/09/2026 - hai loi cung mot goc
+
+    1. `chieu` bi gan tu THAM SO (mac dinh 1) nen mot cap co the ghep mot luan
+       cu MUA voi mot luan cu BAN roi van dan nhan mua.
+    2. Khong co `kiem_khong_nhin_truoc`, trong khi `sinh()` co tu dau - mot cap
+       nhin truoc y het mot co che don.
     """
     ths = list(cac_toan_hang or TOAN_HANG_GOC)
     ng = {}
@@ -428,7 +709,7 @@ def sinh_cap(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=(1, 3, 5),
             q = nguong_tu_lich_su(df_train, th, phan_vi=(0.05, 0.20, 0.80, 0.95))
         except Exception:
             q = {}
-        if q:
+        if q and _toan_hang_khong_nhin_truoc(th, df_train, q):
             ng[_ten(th)] = (th, q)
 
     ra: list[dict] = []
@@ -438,52 +719,54 @@ def sinh_cap(df_train: pd.DataFrame, cac_toan_hang=None, cac_giu=(1, 3, 5),
                 for giu in cac_giu:
                     if len(ra) >= toi_da:
                         return ra
-                    ka = _co_che_cua(tha, pa > 0.5)
-                    kb = _co_che_cua(thb, pb > 0.5)
-                    if ka is None or kb is None:
-                        continue
                     fa = ">" if pa > 0.5 else "<"
                     fb = ">" if pb > 0.5 else "<"
-                    # Ho cua mot cap lay theo dieu kien THU NHAT; cau co che
-                    # ghep ca hai luan cu de nguoi duyet thay day la gia thuyet
-                    # GHEP chu khong phai mot luan cu don.
-                    spec = {
-                        "ten": f"ns2_{ta}{fa}q{int(pa*100)}_{tb}{fb}q{int(pb*100)}_giu{giu}",
-                        "ho": ka[0], "chieu": chieu, "giu": int(giu),
-                        "co_che": f"{ka[1]} VA DONG THOI: {kb[1]}",
-                        "nguon": "noi_sinh",
-                        "vao": [
-                            {"trai": tha, "phep": fa, "phai": {"hang": float(ga)}},
-                            {"trai": thb, "phep": fb, "phai": {"hang": float(gb)}},
-                        ],
-                        "ra": [],
-                    }
-                    if NP.kiem_khai_bao(spec):
-                        continue
-                    try:
-                        tin = NP.sinh_tu_spec(spec, df_train)
-                    except Exception:
-                        continue
-                    kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
-                    if not (kich_hoat_toi_thieu <= kh <= kich_hoat_toi_da):
-                        continue
-                    spec["_ty_le_kich_hoat"] = round(kh, 4)
-                    ra.append(spec)
+                    for ka, kb, ch in _cac_cap_nhat_tri(
+                            tha, pa > 0.5, thb, pb > 0.5, chieu):
+                        _them_cap(ra, ta, tb, tha, thb, fa, fb, pa, pb, ga, gb,
+                                  ka, kb, ch, giu, df_train,
+                                  kich_hoat_toi_thieu, kich_hoat_toi_da)
     return ra
 
-# ------------------------------------------------------ SO TOAN HANG VOI NHAU
-#: Cap (nhanh, cham) de so TRUC TIEP voi nhau. Day la dang co che ma `sinh()`
-#: KHONG the de ra duoc, va do la mot lo hong cau truc chu khong phai mot tham
-#: so dat sai.
-#:
-#: Phat hien 03/09/2026, sau khi chu du an hoi "ngoai sinh khong kiem duoc
-#: chien luoc nao trendfollowing chac?": `sinh()` luon so mot toan hang voi mot
-#: HANG SO (nguong phan vi). Nhung mot bo loc xu huong la `close > sma(close,
-#: 200)` - TOAN HANG so voi TOAN HANG. Khong co duong nao trong `sinh()` de ra
-#: duoc dang do, nen ket luan am cua noi sinh truoc 03/09 khong he cham toi
-#: trend/breakout. Nang tran phoi nhiem (0,60 -> 0,95) chi them 16 co che va ca
-#: 16 deu la `giu10` - day phoi nhiem len bang cach giu lau, khong phai loc
-#: xu huong.
+
+def _them_cap(ra, ta, tb, tha, thb, fa, fb, pa, pb, ga, gb, ka, kb, ch, giu,
+              df_train, kh_min, kh_max) -> None:
+    """MOT co che ghep cho mot cach doc da nhat tri ve chieu.
+
+    Ho lay theo dieu kien THU NHAT; cau co che ghep ca hai luan cu de nguoi
+    duyet thay day la gia thuyet GHEP chu khong phai mot luan cu don.
+    """
+    spec = {
+        "ten": ("ns2_%s%sq%d_%s%sq%d_giu%d%s"
+                % (ta, fa, int(pa * 100), tb, fb, int(pb * 100), giu,
+                   "" if ch > 0 else "_b")),
+        "ho": ka[0], "chieu": int(ch), "giu": int(giu),
+        "co_che": "%s VA DONG THOI: %s" % (ka[1], kb[1]),
+        "nguon": "noi_sinh",
+        "vao": [
+            {"trai": tha, "phep": fa, "phai": {"hang": float(ga)}},
+            {"trai": thb, "phep": fb, "phai": {"hang": float(gb)}},
+        ],
+        "ra": [],
+    }
+    if any(x.get("ten") == spec["ten"] for x in ra):
+        spec["ten"] = "%s_%s" % (spec["ten"], ka[0][:6])
+    if NP.kiem_khai_bao(spec):
+        return
+    try:
+        tin = NP.sinh_tu_spec(spec, df_train)
+    except Exception:
+        return
+    kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
+    if not (kh_min <= kh <= kh_max):
+        return
+    # KHONG goi `kiem_khong_nhin_truoc` o day - da kiem o muc TOAN HANG.
+    # Xem `_toan_hang_khong_nhin_truoc` de biet vi sao the la du, va vi sao
+    # kiem o day lai la lang phi lon.
+    spec["_ty_le_kich_hoat"] = round(kh, 4)
+    ra.append(spec)
+
+
 CAP_XU_HUONG = [
     ("close", {"chi_bao": "gia", "cot": "close"},
      "sma200", {"chi_bao": "sma", "cot": "close", "n": 200}),
@@ -523,7 +806,7 @@ CO_CHE_CAP = {
 
 
 def sinh_xu_huong(df_train: pd.DataFrame, cac_cap=None, cac_giu=(1, 5, 10, 20),
-                  chieu: int = 1, kich_hoat_toi_thieu: float = 0.02,
+                  chieu: int = 0, kich_hoat_toi_thieu: float = 0.02,
                   kich_hoat_toi_da: float = 0.97) -> list[dict]:
     """Sinh co che THEO XU HUONG: so hai toan hang voi nhau.
 
@@ -532,13 +815,41 @@ def sinh_xu_huong(df_train: pd.DataFrame, cac_cap=None, cac_giu=(1, 5, 10, 20),
     khong phai tran phoi nhiem ma la phep so voi mua-giu O CUNG MUC RUI RO.
     """
     ra: list[dict] = []
+    # Kiem nhin truoc MOT LAN cho moi TOAN HANG, roi bo qua o muc spec. Cung
+    # ly le voi `sinh()`: `a > b` chi doc qua khu khi ca `a` lan `b` chi doc
+    # qua khu. Do 20/09/2026 bang cProfile: loi goi nay chiem 68,4/68,6 giay
+    # cua `sinh()`, va ha no ve muc toan hang lam `sinh()` di tu 153,7 giay
+    # xuong 0,5 giay tren cung dau vao.
+    sach: dict[str, bool] = {}
+
+    def _sach(ten, t) -> bool:
+        if ten not in sach:
+            thu = {"ten": "probe", "ho": "xu_huong", "chieu": 1, "giu": 1,
+                   "co_che": "probe", "nguon": "probe", "ra": [],
+                   "vao": [{"trai": t, "phep": ">",
+                            "phai": {"chi_bao": "gia", "cot": "close"}}]}
+            try:
+                sach[ten] = bool(NP.kiem_khong_nhin_truoc(thu, df_train)[0])
+            except Exception:
+                sach[ten] = False
+        return sach[ten]
+
     for ten_a, ta, ten_b, tb in (cac_cap or CAP_XU_HUONG):
+        if not (_sach(ten_a, ta) and _sach(ten_b, tb)):
+            continue
         for phep in (">", "<", "cheo_len", "cheo_xuong"):
             ho, cau = CO_CHE_CAP[phep]
+            # Chieu suy tu PHEP SO, khong tu tham so. `<` va `cheo_xuong` la
+            # lap luan BAN - cau cua `<` trong `CO_CHE_CAP` noi nguyen van
+            # "dung ngoai la mot vi the co gia" - nhung ban cu van gan `+1`
+            # cho chung, tuc MUA trong khi luan diem noi ben ban dang ep.
+            ch = 1 if phep in (">", "cheo_len") else -1
+            if chieu and ch != chieu:
+                continue
             for giu in cac_giu:
                 spec = {
                     "ten": f"nsx_{ten_a}_{phep}_{ten_b}_giu{giu}",
-                    "ho": ho, "chieu": chieu, "giu": int(giu),
+                    "ho": ho, "chieu": int(ch), "giu": int(giu),
                     "co_che": f"{cau} (do bang {ten_a} {phep} {ten_b})",
                     "nguon": "noi_sinh_xu_huong",
                     "vao": [{"trai": ta, "phep": phep, "phai": tb}],
@@ -553,9 +864,7 @@ def sinh_xu_huong(df_train: pd.DataFrame, cac_cap=None, cac_giu=(1, 5, 10, 20),
                 kh = float(np.mean(np.abs(np.nan_to_num(tin)) > 0))
                 if not (kich_hoat_toi_thieu <= kh <= kich_hoat_toi_da):
                     continue
-                ok, _ = NP.kiem_khong_nhin_truoc(spec, df_train)
-                if not ok:
-                    continue
+                # Da kiem nhin truoc o muc TOAN HANG, xem `_sach` ben tren.
                 spec["_ty_le_kich_hoat"] = round(kh, 4)
                 ra.append(spec)
     return ra

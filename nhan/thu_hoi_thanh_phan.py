@@ -114,8 +114,15 @@ _SO = r"[-+]?\d+(?:\.\d+)?"
 
 #: Gan bien mang gia tri so. Bat ca `n = 34`, `n = input(34)`,
 #: `n = input.int(34, ...)`, `n = input(defval=34, ...)`.
+#: Tien to KIEU cua mot khai bao C/MQL5 (`input int Chu_ky = 14;`). Khong cho
+#: phep tien to nay thi moi input cua EA MQL5 deu vo hinh voi bang bien, va
+#: `iMA(NULL,0,InpChuKy,...)` mat chu ky -> chi bao bi bo vi "thieu chu ky".
+_KIEU_C = (r"(?:(?:static|const|extern|input|sinput|virtual)[ \t]+)*"
+           r"(?:bool|char|uchar|short|ushort|int|uint|long|ulong|float|double"
+           r"|datetime|color|string)[ \t]+")
+
 _GAN = re.compile(
-    r"^[ \t]*([A-Za-z_][A-Za-z0-9_]*)[ \t]*=[ \t]*"
+    rf"^[ \t]*(?:{_KIEU_C})?([A-Za-z_][A-Za-z0-9_]*)[ \t]*=[ \t]*"
     r"(?:input(?:\.[a-z]+)?[ \t]*\(\s*(?:defval\s*=\s*)?)?"
     r"([-+]?\d+(?:\.\d+)?)", re.M)
 

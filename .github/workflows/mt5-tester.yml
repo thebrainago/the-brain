@@ -1,0 +1,146 @@
+# MT5 Strategy Tester chay tren runner Windows cua GitHub Actions.
+#
+# VI SAO CO FILE NAY
+# ------------------
+# `CLAUDE.md` ghi: *"Lan TESTER = 1 la rang buoc VAT LY, khong phai lua chon.
+# `chay_tester_kho` ghi de cung mot `.mq5` / `.ini` / `.xml` va may chi co mot
+# `terminal64.exe`. Hai viec tester cung luc thi ghi de ket qua cua nhau VA
+# KHONG AI BAO LOI."*
+#
+# Do la rang buoc vat ly cua MOT MAY. Khong phai cua bai toan. Moi runner
+# Windows cua Actions la mot may rieng voi mot terminal rieng, nen `matrix`
+# bien "1 slot" thanh "N slot" ma khong mua them may nao.
+#
+# BA THU PHAI DOC TRUOC KHI TIN MOT CON SO TU DAY
+# -----------------------------------------------
+# 1. **Du lieu phai tu CHINH SAN se giao dich.** Runner tai lich su qua tai
+#    khoan trong secrets. Doi san la doi spread, doi swap, doi ca gio nen - va
+#    `CLAUDE.md` da ghi bay "tra cuu phi theo ten symbol tho -> lang le lay phi
+#    MetaQuotes-Demo".
+# 2. **Model=1 cua MT5 noi doi khi TP < 2x bien do nen M1.** Phai Model=0/4
+#    cho ket luan cuoi. Model=2 (mo o day) chi de SANG LOC.
+# 3. **Ket qua rong khong phai ket qua am.** Buoc `kiem_ket_qua` bat dieu do:
+#    khong co file bao cao, hay bao cao 0 deal, deu la `CHUA_DO_DUOC`.
+#
+# CHAY: tab Actions -> "MT5 tester" -> Run workflow.
+name: MT5 tester
+
+on:
+  workflow_dispatch:
+    inputs:
+      ma:
+        description: "Ma (cach nhau bang dau phay), vd AUDCAD,EURGBP"
+        required: true
+        default: "AUDCAD"
+      khung:
+        description: "Khung: M5 M15 M30 H1 H4 D1"
+        required: true
+        default: "H4"
+      tu:
+        description: "Tu ngay (YYYY.MM.DD)"
+        required: true
+        default: "2015.01.01"
+      den:
+        description: "Den ngay (YYYY.MM.DD)"
+        required: true
+        default: "2023.12.31"
+
+# Mot luot tester dang chay thi luot sau XEP HANG, khong huy. Huy giua chung
+# de lai mot bao cao viet do dang, va mot bao cao do dang doc y het mot ket
+# qua am.
+concurrency:
+  group: mt5-tester
+  cancel-in-progress: false
+
+jobs:
+  # Tach danh sach ma thanh JSON cho `matrix`. Lam trong mot job rieng thay vi
+  # nhoi bieu thuc vao `matrix` - bieu thuc long nhau cua Actions khong co cach
+  # nao chay thu, nen mot cho sai chi lo ra luc chay that.
+  chuan_bi:
+    runs-on: ubuntu-latest
+    outputs:
+      ds_ma: ${{ steps.tach.outputs.ds }}
+    steps:
+      - id: tach
+        shell: bash
+        run: |
+          DS=$(printf '%s' "${{ inputs.ma }}" \
+               | tr ',' '\n' | sed 's/[[:space:]]//g' | grep -v '^$' \
+               | python3 -c 'import sys,json; print(json.dumps([l.strip() for l in sys.stdin]))')
+          echo "ds=$DS" >> "$GITHUB_OUTPUT"
+          echo "ma se chay: $DS"
+
+  tester:
+    needs: chuan_bi
+    runs-on: windows-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false        # mot ma hong khong duoc keo do ca me
+      max-parallel: 4         # tran tu dat: moi job la mot lan tai lich su
+      matrix:
+        ma: ${{ fromJSON(needs.chuan_bi.outputs.ds_ma) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Kiem secrets TRUOC khi lam gi
+        shell: pwsh
+        env:
+          MT5_LOGIN: ${{ secrets.MT5_LOGIN }}
+          MT5_SERVER: ${{ secrets.MT5_SERVER }}
+        run: |
+          # Thieu secrets thi DUNG NGAY. Chay tiep se cho mot bao cao rong, va
+          # bao cao rong doc y het "co che khong ra lenh nao".
+          if (-not $env:MT5_LOGIN -or -not $env:MT5_SERVER) {
+            Write-Error "CHUA_DO_DUOC: thieu secrets MT5_LOGIN / MT5_SERVER / MT5_PASSWORD"
+            exit 1
+          }
+          Write-Host "login=$($env:MT5_LOGIN.Substring(0,2))**  server=$env:MT5_SERVER"
+
+      - name: Cai MT5 (im lang, che do portable)
+        shell: pwsh
+        run: |
+          $url = "${{ secrets.MT5_SETUP_URL }}"
+          if (-not $url) { $url = "https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe" }
+          Invoke-WebRequest -Uri $url -OutFile mt5setup.exe -UseBasicParsing
+          # /auto cai im lang. /portable de moi thu nam trong thu muc cai dat -
+          # runner la may dung mot lan nen khong duoc dua vao AppData.
+          Start-Process .\mt5setup.exe -ArgumentList "/auto","/portable" -Wait
+          $t = Get-ChildItem -Path "C:\" -Filter terminal64.exe -Recurse -ErrorAction SilentlyContinue |
+               Select-Object -First 1 -ExpandProperty FullName
+          if (-not $t) { Write-Error "CHUA_DO_DUOC: khong tim thay terminal64.exe sau khi cai"; exit 1 }
+          "MT5=$t" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Write-Host "terminal: $t"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cai thu vien Python
+        shell: pwsh
+        run: python -m pip install --quiet numpy pandas pyarrow MetaTrader5
+
+      - name: Sinh .ini va chay tester
+        shell: pwsh
+        env:
+          MT5_LOGIN: ${{ secrets.MT5_LOGIN }}
+          MT5_PASSWORD: ${{ secrets.MT5_PASSWORD }}
+          MT5_SERVER: ${{ secrets.MT5_SERVER }}
+        run: |
+          python .github/scripts/chay_tester_ci.py `
+            --terminal "$env:MT5" `
+            --ma "${{ matrix.ma }}" `
+            --khung "${{ inputs.khung }}" `
+            --tu "${{ inputs.tu }}" --den "${{ inputs.den }}"
+
+      - name: Kiem ket qua - RONG khong phai AM
+        shell: pwsh
+        run: python .github/scripts/kiem_ket_qua_ci.py --ma "${{ matrix.ma }}"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tester-${{ matrix.ma }}-${{ inputs.khung }}
+          path: |
+            ci_out/**
+          if-no-files-found: warn

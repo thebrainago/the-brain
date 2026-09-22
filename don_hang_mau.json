@@ -1,0 +1,9 @@
+{
+  "ma": "hp-khuon-trang-thai-lat",
+  "muc_tieu": "Them khuon `che_do_lat` vao nhan/hephaestus.py dung toan hang `trang_thai_lat` - mot trong 5 toan hang ngu phap noi duoc ma may de chua dung toi",
+  "file_test": "test_khuon_trang_thai_lat.py",
+  "lenh_cham": ["python", "-m", "pytest", "test_khuon_trang_thai_lat.py", "-q"],
+  "duoc_sua": ["nhan/hephaestus.py"],
+  "so_vong_toi_da": 6,
+  "goc": "."
+}

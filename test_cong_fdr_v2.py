@@ -183,7 +183,12 @@ class TestFdrV2(unittest.TestCase):
         # voi p=1, VAN hien ra thanh nhan, va ban doc cu VAN tra FAIL.
         self.assertIn("placebo yeu - co the la ngau nhien", ra["nhan"])
         self.assertEqual(ra["verdict_chan"], "FAIL")
-        self.assertEqual(ra["verdict"], "PASS")
+        # `df=None` nen cong `11_khong_an_khe_dao_ngay` KHONG DO DUOC. Tu
+        # 20/09/2026 mot cong CHAN CUNG khong do duoc thi verdict bi chan tran
+        # o `UNG_VIEN` - khong PASS (chua chung minh duoc la sach) va cung
+        # khong FAIL (chua do duoc khong phai la ban).
+        self.assertEqual(ra["verdict"], "UNG_VIEN")
+        self.assertIn("11_khong_an_khe_dao_ngay", ra["cong_khong_do_duoc"])
 
     def test_che_do_CHAN_van_tra_FAIL_khi_placebo_truot(self):
         """Duong quay lai phai con: dat che_do_cong='chan' la ve y nguyen ban cu."""

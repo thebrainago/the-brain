@@ -1179,6 +1179,21 @@ CHI_BAO_CO = {
     "moc_ky",
     # co nho trang thai
     "trang_thai_lat", "dem_lien_tiep",
+    # BAY TOAN HANG BI LOT SO (19/09/2026). Bo dieu phoi `_toan_hang_tinh` DA
+    # tinh duoc ca bay, nhung chung khong co ten o day - ma day chinh la
+    # `thu_hoi_thanh_phan._DIEN_DAT_DUOC`, danh sach bo boc dung de quyet dinh
+    # "co dien dat duoc khong". Hau qua: moi tai lieu noi ve Donchian, Ichimoku,
+    # VWAP, Keltner, Supertrend, Heiken Ashi hay mau nen deu bi cham la KHONG
+    # DIEN DAT DUOC roi bo, trong khi ngu phap chay chung tot.
+    #
+    # Docstring o `_toan_hang_tinh` da canh bao dung lop loi nay mot lan roi
+    # ("BA TOAN HANG BAO CAO DA GIAU MAT", 01/09) va no tai dien vi bai test chi
+    # khoa MOT CHIEU: "khai ra thi phai goi duoc". Chieu con thieu - "goi duoc
+    # thi phai khai ra" - nay da co `test_moi_toan_hang_goi_duoc_deu_KHAI_RA`.
+    #
+    # Do luc do: kho co che rong 8 chi bao, con bo dieu phoi noi duoc 52.
+    "donchian", "ichimoku", "vwap", "keltner", "supertrend", "heiken",
+    "mau_nen",
     # bien doi mot toan hang con (qua truong `cua`)
     "tb", "do_lech", "phuong_sai", "zscore", "phan_vi", "doi", "doi_pct",
     "tre", "cao_nhat", "thap_nhat", "tuyet_doi", "tong",
@@ -1196,6 +1211,10 @@ CHI_BAO_NHAN_COT = {
     # `duong_xu_huong`/`goc` khop duong tren MOT chuoi nguon -> nhan `cot`.
     # `fibo` thi KHONG: no neo vao dinh/day, tuc luon can ca high lan low.
     "duong_xu_huong", "goc",
+    # `keltner` lay duong giua tu mot chuoi nguon (giong `bollinger`). Bay cai
+    # con lai cua dot 19/09 thi KHONG: `donchian`/`ichimoku`/`supertrend`/
+    # `heiken`/`mau_nen` deu can ca high lan low, con `vwap` can khoi luong.
+    "keltner",
 }
 
 

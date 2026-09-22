@@ -266,6 +266,10 @@ def doi(spec: dict, ma: str, khung_goc: str, khung_dich: str,
             "khong_co_nguong": not bao,
             "kich_hoat": {"goc": kh_g, "chi_nhan_chu_ky": kh_d_tho,
                           "khop_tung_ve": kh_bien, "sau_khop_phan_vi": kh_d},
+            # `None` o bat ky o nao tren KHONG phai ty le 0 - la khong sinh
+            # duoc tin hieu de ma do. Noi thanh loi de bao cao khong doc nham.
+            "kich_hoat_do_duoc": not any(
+                x is None for x in (kh_g, kh_d_tho, kh_bien, kh_d)),
             "bar": {"goc": len(df_g), "dich": len(df_d)}}
 
 
@@ -289,8 +293,28 @@ def _ap_he_so(spec: dict, bao: list, df_d, d: float) -> dict:
 
 
 def _hieu_chinh_gop(spec: dict, df_d, bao: list, muc: float | None,
-                    hien: float | None) -> tuple[dict, float, float]:
-    """Do nhi phan mot he so chung sao cho ty le kich hoat GOP khop ban goc."""
+                    hien: float | None) -> tuple[dict, float, float | None]:
+    """Do nhi phan mot he so chung sao cho ty le kich hoat GOP khop ban goc.
+
+    ## LOI DA SUA 20/09/2026 - `or 0.0` nuot mat `KHONG DO DUOC`
+
+    `NP._ty_le_kich_hoat` tra `None` khi **khong sinh duoc tin hieu** tu spec
+    (docstring cua no ghi ro: *"`None` = KHONG DO DUOC tren chuoi nay"*). Ban
+    cu viet `kh = NP._ty_le_kich_hoat(s2, df_d) or 0.0`, tuc doi "khong do
+    duoc" thanh "do duoc, bang 0". Hai hau qua, ca hai im lang:
+
+      1. `kh = 0.0 < muc` luon dung -> `lo = d`, phep do nhi phan bi lai ve
+         phia he so LON suot 18 vong du khong he co thong tin nao.
+      2. `tot_kh` khoi tao bang `hien` co the la `None`, nen nhanh
+         `if tot_kh is None` NHAN NGAY vong dau -> `tot = s2`. Ham tra ve mot
+         spec KHONG SINH DUOC TIN HIEU, dan nhan da hieu chinh, kem
+         `sau_khop_phan_vi = 0.0` doc y het mot phep do that bang khong.
+
+    `_ap_he_so` chi doi HANG SO nguong, khong doi cau truc spec, nen neu
+    `sinh_tu_spec` nem loi o mot he so thi no nem o moi he so. Vi vay gap
+    `None` la bang chung ve SPEC, khong phai ve `d`: dung do, tra spec GOC va
+    `None` de nguoi doc thay `CHUA_DO_DUOC` chu khong thay so 0.
+    """
     co = [b for b in bao if "_chuoi" in b]
     if not muc or not co:
         return spec, 1.0, hien
@@ -299,7 +323,9 @@ def _hieu_chinh_gop(spec: dict, df_d, bao: list, muc: float | None,
     for _ in range(18):
         d = (lo + hi) / 2
         s2 = _ap_he_so(spec, bao, df_d, d)
-        kh = NP._ty_le_kich_hoat(s2, df_d) or 0.0
+        kh = NP._ty_le_kich_hoat(s2, df_d)
+        if kh is None:
+            return spec, 1.0, None
         if tot_kh is None or abs(kh - muc) < abs(tot_kh - muc):
             tot, tot_d, tot_kh = s2, d, kh
         if kh < muc:

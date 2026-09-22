@@ -726,6 +726,243 @@ def c_github(a):
     return r.returncode
 
 
+def c_tho(a):
+    """THO CODE: giao mot don hang viet ma cho LLM re. `b tho <don_hang.json>`
+
+    Chia viec, va no den tu mot quan sat cu the chu khong tu so thich:
+
+        NGUOI / mo hinh manh   quyet dinh XAY GI, va viet BAI TEST (= dac ta)
+        LLM RE                 go phan cai dat cho den khi bai test xanh
+        CODE                   cham dat/khong - `pytest`, khong ai tu phan
+
+    Viet duoc bai test dung la phan kho. Dien cho no xanh la phan lap lai, va
+    do la phan dang tra tien cho mot mo hinh re.
+
+    `b tho don.json --thu` chay kho: in loi nhac se gui, khong goi LLM.
+    """
+    import json
+    from qwen import tho_code as TC
+    if not a:
+        print("dung: b tho <don_hang.json> [--thu]")
+        print("mau co san: don_hang_mau.json")
+        return
+    don = json.loads(Path(a[0]).read_text(encoding="utf-8-sig"))
+    don.setdefault("goc", str(LAB))
+    if "--thu" in a:
+        goc = Path(don["goc"])
+        print(TC._nhac(don, goc, "(chay kho - chua co loi that)")[:4000])
+        return
+    r = TC.lam(don)
+    print("%s  (%d vong)" % (r["trang_thai"], r["so_vong"]))
+    if r.get("ly_do"):
+        print(r["ly_do"][:1500])
+    if r["trang_thai"] == "CHUA_DO_DUOC":
+        print("\n^ CHUA_DO_DUOC khac KHONG_DAT: duong LLM hong hoac lenh cham")
+        print("  khong chay duoc, nen chua noi duoc gi ve viec mo hinh co sua")
+        print("  noi hay khong. Kiem `q kiem` truoc khi ket luan.")
+
+
+def _sau(co: str, a) -> str | None:
+    """Gia tri dung sau mot co trong danh sach doi so, hoac None."""
+    a = list(a or [])
+    return a[a.index(co) + 1] if co in a and a.index(co) + 1 < len(a) else None
+
+
+def c_cau(a):
+    """CAU NOI HAI MAY. `b cau [don <ma> <muc tieu> | trang-thai]`
+
+    Chu du an 20/09/2026: *"lam sao de phien chat nay doc duoc ket qua chay
+    tren may tinh toi"*. Tra loi: qua git - xem `tai_lieu/VAN_HANH_HAI_MAY.md`.
+
+        b cau              man hinh: con bao nhieu don, ket qua ra sao
+        b cau don <ma> "<muc tieu>" [--lan CPU] [--uu-tien 3]
+        b cau xong <ma>    doc ket qua mot don (ba trang thai)
+
+    Ben CLOUD ra don roi `git push`; may chay `q` tu keo ve. Ben MAY ghi ket
+    qua roi day len; cloud `git pull` la doc duoc.
+    """
+    from qwen import cau_git as CG
+    CG.bao_dam_thu_muc()
+    viec = (a[0] if a else "").lower()
+
+    if viec == "don":
+        if len(a) < 3:
+            print('can: b cau don <ma> "<muc tieu>"')
+            return
+        p = CG.ra_don(a[1], a[2], lan=(_sau("--lan", a) or "NHE").upper(),
+                      uu_tien=int(_sau("--uu-tien", a) or 5),
+                      han_phut=float(_sau("--han-phut", a) or 60))
+        print("-> %s" % p)
+        print("nho `git add viec/cho && git commit && git push` de may thay duoc.")
+        return
+
+    if viec in ("tu-kiem", "kiem"):
+        r = CG.tu_kiem()
+        return
+
+    if viec == "xong":
+        if len(a) < 2:
+            print("can: b cau xong <ma>")
+            return
+        import json as _j
+        print(_j.dumps(CG.doc_ket_qua(a[1]), ensure_ascii=False, indent=2))
+        return
+
+    print(CG.bang())
+
+
+def c_hepha(a):
+    """HEPHAESTUS - DE CO CHE. `b hepha [do|duc|tu-vung] [so]`
+
+    So do he thong (LUAT SO 0) khai lenh nay tu 13/09 nhung module chua tung
+    duoc viet, nen he chi biet may mo cai co san. Ba viec:
+
+        b hepha do        ngu phap NOI DUOC bao nhieu, kho DANG DUNG bao nhieu
+        b hepha duc 200   de 200 co che moi, in lo + plan_hash de tien dang ky
+        b hepha bien-the  rai luoi tham so quanh co che DA CO trong kho
+        b hepha ghep      ghep doi co che trong kho thanh he hai dieu kien
+        b hepha tu-vung   huong tim kiem day nguoc ve SEEKER, uu tien cho TRONG
+        b hepha qt 200    de 200 CAU HINH QUAN TRI LENH (ho ra tien nhat da do)
+        b hepha qt 200 --ma AUDCAD --khung H4   chay that + xep hang SO VOI NULL
+        b hepha nap 200   de 200 co che roi NAP vao kho (chay KHO mac dinh)
+        b hepha nap 200 --that   ghi THAT vao kho
+
+    `nap` chay KHO neu khong co `--that`. Kho co che la du lieu san xuat - no
+    da tung tut 2.975 xuong 21 co che trong mot buoi sang - nen mot lenh go
+    nham khong duoc phep sua no.
+    """
+    from nhan import hephaestus as HP
+    viec = (a[0] if a else "do").lower()
+    so = next((int(x) for x in (a or [])[1:] if str(x).isdigit()), 200)
+
+    if viec == "do":
+        # HAI PHEP DO KHAC NHAU, va truoc 20/09/2026 chi in mot cai.
+        #
+        # `do_phu()` khong tham so doc KHO HIEN TAI (`config/co_che_dsl.json`),
+        # tuc "cac co che dang co dung toan hang nao". Do la mot cau hoi ve
+        # LICH SU. Cau hoi ve NANG LUC - "may de co sinh ra duoc toan hang do
+        # khong" - phai do tren chinh lo duc.
+        #
+        # In moi cai dau tien thi mot dong "BO TRONG: 15" doc ra thanh
+        # "HEPHAESTUS khong voi toi 15 toan hang", trong khi lo duc phu het
+        # 45/45. Nguoi doc se di viet khuon cho thu da co khuon.
+        r = HP.do_phu()
+        lo = HP.duc(han_ngach=9000)
+        rd = HP.do_phu(kho=lo)
+        print("ngu phap NOI DUOC : %d toan hang" % r["so_noi_duoc"])
+        print("kho DANG DUNG     : %d   (lich su - co che da nam trong kho)"
+              % r["so_dang_dung"])
+        print("  chua co trong kho: %d" % len(r["bo_trong"]))
+        print("  " + ", ".join(r["bo_trong"]))
+        print("")
+        print("MAY DE SINH DUOC  : %d   (nang luc - %d co che tu %d khuon)"
+              % (rd["so_dang_dung"], len(lo), len(HP.KHUON)))
+        if rd["bo_trong"]:
+            print("  KHUON CON THIEU : " + ", ".join(rd["bo_trong"]))
+        else:
+            print("  khong toan hang nao thieu khuon.")
+        from collections import Counter as _C
+        c = _C(x["chieu"] for x in lo)
+        print("  chieu           : %d mua / %d ban" % (c.get(1, 0), c.get(-1, 0)))
+        return
+
+    if viec in ("tu-vung", "tu_vung"):
+        for h in HP.tu_vung(so_huong=so if so != 200 else 10):
+            print("%-16s %s" % (h["chi_bao"], " · ".join(h["tu_khoa"])))
+        return
+
+    if viec in ("qt", "quan-tri"):
+        # De CAU HINH QUAN TRI LENH. Khong co du lieu thi chi liet ke; co
+        # `--ma X --khung Y` thi chay that va xep hang SO VOI NULL.
+        # `--ghep`: luoi + HAI co che, hinh dang cua mot EA luoi that. Phai
+        # nam o DAY chu khong o mot lenh rieng: don hang da viet
+        # `qt ... --ghep`, va mot co go rieng se lam don chay NHAM DUONG ma
+        # khong bao gi - dung kieu lang phi mot dem may chay.
+        if "--ghep" in a:
+            don = HP.duc_quan_tri(han_ngach=500)
+            ds = HP.ghep_lo_quan_tri(don, han_ngach=so)
+            print("GHEP: %d cau hinh (tu %d cau hinh don), %.1f nut trung binh"
+                  % (len(ds), len(don),
+                     sum(len(c["nut"]) for c in ds) / max(len(ds), 1)))
+        else:
+            ds = HP.duc_quan_tri(han_ngach=so)
+        from collections import Counter
+        for k, v in Counter(c["khuon"] for c in ds).most_common(12):
+            print("  %-34s %d" % (k, v))
+        print("\nde ra: %d cau hinh quan tri" % len(ds))
+        ma = _sau("--ma", a)
+        if not ma:
+            print("them `--ma EURUSD --khung H1` de chay that va xep hang.")
+            return
+        from nhan import du_lieu as DL
+        df = DL.nap(ma, _sau("--khung", a) or "H1")
+        r = HP.danh_gia_vs_null(ds, df, so_null=int(_sau("--null", a) or 20))
+        hc = HP.hieu_chuan(ds, df, so_lan=3)
+        print("\nTY LE LOT TREN NHIEU: %.0f%%  <- doc con so nay TRUOC bang duoi"
+              % (100 * hc["ty_le_lot"]))
+        print("%-30s %8s %10s %8s" % ("cau hinh", "vuot", "lai/nam", "muc"))
+        for d in r["dong"][:20]:
+            if d.get("vuot_null") is None:
+                continue
+            print("%-30s %7.0f%% %10.1f %8s"
+                  % (d["ten"][:30], 100 * d["vuot_null"],
+                     (d.get("ket_qua") or {}).get("lai_nam", 0.0),
+                     d["diem"]["muc"]))
+        print("\nplan_hash: %s  (FDR tinh %d suat)"
+              % (r["plan_hash"], r["so_phep_thu"]))
+        return
+
+    if viec == "nap":
+        that = "--that" in (a or [])
+        r = HP.nap(HP.duc(han_ngach=so), that=that)
+        print("%s: %d nhan · %d trung kho · %d tu choi"
+              % ("GHI THAT" if that else "chay KHO", r["nhan"], r["trung"],
+                 r["tu_choi"]))
+        print("plan_hash: %s   (FDR tinh %d suat)"
+              % (r["plan_hash"], r["so_phep_thu"]))
+        print("do ty le kich hoat: %s" % r["do_kich_hoat"])
+        if r["do_kich_hoat"] == "CHUA_DO_DUOC":
+            print("  ^ khong nap duoc chuoi kiem nao - con so 'nhan' o tren MOI")
+            print("    chi la qua cong CU PHAP, chua ai do ty le kich hoat ca.")
+        for k, v in sorted(r["ly_do"].items(), key=lambda x: -x[1])[:5]:
+            print("   %3dx %s" % (v, k))
+        if not that:
+            print("\nchua ghi gi. Them `--that` de ghi vao kho.")
+        return
+
+    if viec in ("bien-the", "bien_the", "ghep"):
+        from nhan import ngu_phap as NP
+        kho = NP.doc_kho(cho_rong_khi_hong=True)
+        if not kho:
+            print("kho rong (khong doc duoc nao.db) - lenh nay can kho that")
+            return
+        if viec == "ghep":
+            ds = HP.ghep_lo(kho, han_ngach=so)
+        else:
+            ds = []
+            for g in kho:
+                ds += HP.bien_the(g, han_ngach=6)
+                if len(ds) >= so:
+                    break
+            ds = ds[:so]
+        lo = HP.dang_ky_lo(ds)
+        print("tu %d co che trong kho -> %d ban moi" % (len(kho), len(ds)))
+        print("plan_hash: %s   (FDR tinh %d suat)"
+              % (lo["plan_hash"], lo["so_phep_thu"]))
+        return
+
+    ds = HP.duc(han_ngach=so)
+    lo = HP.dang_ky_lo(ds)
+    from collections import Counter
+    for k, v in Counter(x["khuon"] for x in ds).most_common():
+        print("  %-18s %d" % (k, v))
+    print("\nde ra   : %d co che" % len(ds))
+    print("plan_hash: %s   (tien dang ky - FDR tinh %d suat)"
+          % (lo["plan_hash"], lo["so_phep_thu"]))
+    print("\nDe nhieu la luong thien NEU tra du gia FDR. De nhieu roi chi khai")
+    print("vai cai dep la gian lan - nen con so tren phai di kem moi ket luan.")
+
+
 def c_kien_truc(a):
     """SINH so do KIEN TRUC: module nao, VAI TRO gi, thuoc LOP nao.
 
@@ -1033,6 +1270,9 @@ LENH = {
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
     "kien-truc": c_kien_truc, "kt": c_kien_truc,
+    "hepha": c_hepha, "hephaestus": c_hepha,
+    "cau": c_cau, "cau-git": c_cau,
+    "tho": c_tho, "tho-code": c_tho,
     "github": c_github, "gh": c_github,
     "slot": c_slot,
     "ho-so": c_ho_so, "hs": c_ho_so,

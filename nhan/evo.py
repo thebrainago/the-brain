@@ -558,8 +558,13 @@ def ghi_van_de(xau: list[dict], in_ra=print) -> int:
     """Ghi cac chi so XAU vao so `van_de`. Khong ghi trung tieu de dang mo."""
     try:
         from nhan import so as SO
-    except Exception:
-        return 0
+    except Exception as e:
+        # KHONG tra 0. Docstring cua chinh ham nay ghi lai lan do da xay ra:
+        # loi bi `except` nuot va EVO in "ghi 0 van de moi" - doc nhu ket qua
+        # binh thuong. Nguoi sua truoc da va `try` thu hai ma bo sot cho nay.
+        if in_ra:
+            in_ra("CHUA_DO_DUOC: khong nap duoc nhan/so de ghi van de: %s" % e)
+        raise
     # DUNG `tru/evolution.bao_van_de_gop`, KHONG tu viet INSERT.
     #
     # Hai lan sai o day trong mot ngay:

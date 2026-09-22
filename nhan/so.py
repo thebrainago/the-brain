@@ -78,6 +78,22 @@ CREATE TABLE IF NOT EXISTS van_de(
 CREATE TABLE IF NOT EXISTS vi_mo(
   seri TEXT, ngay TEXT, gia_tri REAL, PRIMARY KEY(seri, ngay));
 
+-- BAN (vintage) cua mot so lieu vi mo. Them 20/09/2026.
+--
+-- `vi_mo` o tren chi co MOT hang moi (seri, ngay), nen no tra loi duoc cau
+-- "gia tri CUA ngay do la bao nhieu" nhung KHONG tra loi duoc cau
+-- "ngay do ta BIET gi" - hai cau khac nhau ca thang doi voi so lieu vi mo, va
+-- khac han ca nam voi seri cua World Bank.
+--
+-- `ngay_biet` la ngay so lieu DEN TAY ta. `uoc_tinh` = 1 nghia la no duoc suy
+-- tu `banker.DO_TRE_NGAY` chu khong phai ngay cong bo that lay tu ALFRED -
+-- phai phan biet duoc, neu khong mot uoc tinh se duoc doc nhu mot su kien.
+CREATE TABLE IF NOT EXISTS vi_mo_ban(
+  seri TEXT, ngay TEXT, ngay_biet TEXT, gia_tri REAL,
+  uoc_tinh INTEGER DEFAULT 1, luc_tai REAL,
+  PRIMARY KEY(seri, ngay, ngay_biet));
+CREATE INDEX IF NOT EXISTS ix_vi_mo_ban ON vi_mo_ban(seri, ngay_biet);
+
 CREATE TABLE IF NOT EXISTS vi_mo_seri(
   ma TEXT PRIMARY KEY, ten TEXT, nguon TEXT, chu_ky_giay INTEGER DEFAULT 86400,
   lan_cuoi REAL DEFAULT 0, so_diem INTEGER DEFAULT 0, ghi_chu TEXT);

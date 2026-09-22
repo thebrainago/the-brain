@@ -97,12 +97,29 @@ class CheDoNghienCuu(unittest.TestCase):
         from unittest import mock
         import numpy as np
         import pandas as pd
-        idx = pd.date_range("2020-01-01", periods=200, freq="D")
-        kq = SimpleNamespace(so_lenh=200, loi=np.zeros(200), index=idx,
-                             vi_the=np.ones(200))
+        # 420 bar NGAY, va mot `df` THAT.
+        #
+        # Ban cu dung 200 bar va truyen `df=None`. Tu 20/09/2026 cong
+        # `11_khong_an_khe_dao_ngay` khong con HONG THI MO: khong do duoc thi
+        # verdict bi chan tran o `UNG_VIEN`. Voi `df=None` thi phep do nem, va
+        # voi 200 bar ngay thi moi o THU chi co ~28 mau - duoi nguong 30 cua
+        # `khe_gio_bat_thuong`, tuc van khong do duoc.
+        #
+        # Day la bai kiem LUC ("neu khong con duong nao ra PASS thi ca he vo
+        # nghia"), nen no phai chay tren mot chuoi DO DUOC - neu khong no dang
+        # do mot thu khac. 420 bar cho ~60 mau moi thu, va `open[i] =
+        # close[i-1]` nen khe bang 0 o moi o: mot chuoi SACH that su.
+        n = 420
+        idx = pd.date_range("2020-01-01", periods=n, freq="D")
+        gia = np.linspace(100.0, 120.0, n)
+        df_sach = pd.DataFrame(
+            {"open": np.r_[gia[0], gia[:-1]], "high": gia * 1.001,
+             "low": gia * 0.999, "close": gia}, index=idx)
+        kq = SimpleNamespace(so_lenh=n, loi=np.zeros(n), index=idx,
+                             vi_the=np.ones(n), chi_phi_spread=0.0)
         so_sanh = {
             "he": {"tong_lai_pct": 50.0, "sharpe": 2.0, "calmar": 2.0,
-                   "phoi_nhiem": 0.5, "so_bar": 200},
+                   "phoi_nhiem": 0.5, "so_bar": n},
             "mua_giu_net": {"tong_lai_pct": 5.0, "sharpe": 0.2, "calmar": 0.2},
             # t_alpha > 5 se cham luat "nghi nhin truoc" cua cong - dung 3,0
             "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 20.0},
@@ -111,7 +128,7 @@ class CheDoNghienCuu(unittest.TestCase):
         with mock.patch.object(CONG.DO, "so_sanh", return_value=so_sanh), \
                 mock.patch.object(CONG.DO, "hieu_qua_giai_doan", return_value=[]), \
                 mock.patch.object(CONG, "placebo", return_value=pl):
-            return CONG.xet(None, kq, SimpleNamespace(),
+            return CONG.xet(df_sach, kq, SimpleNamespace(),
                             SimpleNamespace(do_tin=do_tin, canh_bao=None),
                             gt_ma=f"CHE_DO.{che_do}.{do_tin}", ho="test_che_do",
                             da_dang_ky=True, tren_holdout=True, che_do=che_do)

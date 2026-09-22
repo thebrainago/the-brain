@@ -88,11 +88,31 @@ NHAN_MEM = {
     "6_dang_ky_truoc": "khong dang ky truoc - rui ro tu lua minh khi quet rong",
     "9_siet_phoi_nhiem_cao": "phoi nhiem cao ma chua chung minh duoc bu rui ro",
     "10_qua_fdr_online": "khong qua nguong FDR online",
+    # RR THUC TE LA NHAN, KHONG PHAI CHAN (xep 19/09/2026).
+    #
+    # Dieu kien nay bat "lai TB mot lenh thang qua nho so voi lo TB mot lenh
+    # thua - dang martingale tra hinh". Do la mot canh bao that, nhung dat no
+    # lam CHAN CUNG thi no chan chinh he da ra tien nhat cua du an: mot cai
+    # luoi co dung hinh dang do - nhieu lenh thang nho, it lenh thua sau - va
+    # AUDCAD 18/09 cho holdout +13,26%/nam voi dung profile nay.
+    #
+    # LUAT SO 0: *"MDE / FDR / placebo la NHAN CANH BAO, khong phai CONG CHAN.
+    # Chi chan khi thua mua-giu o CUNG RUI RO - do moi la cau hoi tien."*
+    # RR thap khong tra loi cau hoi tien; `nguy_co_chay` va sut giam moi tra loi.
+    "12_rr_thuc_te": "RR thuc te thap - hinh dang martingale, kiem nguy co chay",
 }
 #: Cai VAN CHAN. Liet ke tuong minh de them mot dieu kien moi khong tu dong roi
 #: vao ben nao ma khong ai quyet dinh.
 CHAN_CUNG = ("1_loi_hon_mua_giu", "2_sharpe_hon_mua_giu", "3_calmar_hon_mua_giu",
-             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay")
+             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay",
+             # EDGE VUOT SPREAD LA CHAN CUNG (xep 19/09/2026).
+             #
+             # Khac `12_rr_thuc_te` o dung mot cho: day LA cau hoi tien. Mot
+             # edge mong hon chi phi thi khong phai "edge co rui ro cao" - no
+             # khong ton tai ngoai doi, va khong mot muc chap nhan rui ro nao
+             # cuu duoc no. Cung ho voi `7_chi_phi_do_duoc`, va cung ho voi
+             # luat *"chi phi phai DO DUOC"* cua `CLAUDE.md`.
+             "13_edge_vuot_spread")
 
 
 def che_do_cong() -> str:
@@ -201,19 +221,34 @@ def rr_thuc_te(vi_the, loi) -> float:
     return float(_np.mean(thang) / abs(_np.mean(thua)))
 
 
-def kiem_ks(v_that: np.ndarray, v_gia: np.ndarray) -> float:
+def kiem_ks(v_that: np.ndarray, v_gia: np.ndarray) -> float | None:
     """KS-test: phan phoi khoang cach giua cac lan vao lenh cua null phai
-    KHONG phan biet duoc voi that. p thap = null sinh sai."""
+    KHONG phan biet duoc voi that. p thap = null sinh sai.
+
+    `None` = KHONG DO DUOC (qua it lan vao lenh, hoac phep kiem nem loi).
+
+    ## VI SAO KHONG DUOC TRA 1,0 NUA (sua 19/09/2026)
+
+    Ban cu tra 1,0 cho ca hai truong hop - "null giong that" va "khong do
+    duoc". Ben goi lam: `bs_hop_le = min(ks) > 0,01`. Nen mot phep kiem HONG
+    tra 1,0 se lam null BOOTSTRAP duoc NHAN la hop le, va cac p-value cua no o
+    lai trong ket luan: mot null co the sai hoan toan van duoc dung de phan xu
+    mot chien luoc.
+
+    Day la cong HIEU CHUAN NULL. Mot cong hieu chuan tu nhan minh "dat" khi no
+    khong chay duoc thi nguy hiem hon la khong co cong - vi no con phat ra mot
+    con so de nguoi ta tin.
+    """
     def khoang(v):
         k = np.flatnonzero(np.diff((np.abs(v) > 1e-12).astype(int)) == 1)
         return np.diff(k) if len(k) > 2 else np.array([1.0])
     a, b = khoang(v_that), khoang(v_gia)
     if len(a) < 5 or len(b) < 5:
-        return 1.0
+        return None
     try:
         return float(stats.ks_2samp(a, b).pvalue)
     except Exception:
-        return 1.0
+        return None
 
 
 def null_quay_vong(v: np.ndarray, rng: np.random.Generator) -> np.ndarray:
@@ -287,6 +322,7 @@ def placebo(df, kq_he, cp, n_boot: int | None = None, so_hat: int | None = None,
 
     # --- TANG 2: day du, hai null ----------------------------------------
     ps, ks, chi_tiet = [p1], [], {"quay_vong": [round(p1, 4)], "bootstrap": []}
+    ks_khong_do = 0
     for hat in range(1, max(so_hat // 2, 1) + 1):
         p, _ = _mot_hat(_qv, hat, n_boot)
         ps.append(p)
@@ -296,7 +332,11 @@ def placebo(df, kq_he, cp, n_boot: int | None = None, so_hat: int | None = None,
         ps.append(p)
         chi_tiet["bootstrap"].append(round(p, 4))
         if v_cuoi is not None:
-            ks.append(kiem_ks(v, v_cuoi))
+            _p_ks = kiem_ks(v, v_cuoi)
+            if _p_ks is None:
+                ks_khong_do += 1        # dem rieng, KHONG coi la "null dat"
+            else:
+                ks.append(_p_ks)
 
     # KS chi phan xu null BOOTSTRAP. Null quay vong dung theo cau tao, nen
     # bootstrap hong khong duoc phep giet ca phep kiem nua - chi bi loai bo.
@@ -311,6 +351,9 @@ def placebo(df, kq_he, cp, n_boot: int | None = None, so_hat: int | None = None,
         "do_dai_khoi": dk,
         "ks_p_min": round(float(min(ks)), 4) if ks else None,
         "bootstrap_hop_le": bs_hop_le if ks else None,
+        # So lan KS KHONG DO DUOC. Khac han so lan do duoc va truot: mot con
+        # so o day nghia la phep hieu chuan null da im lang o bay nhieu hat.
+        "ks_khong_do_duoc": ks_khong_do,
         "null_hop_le": True,          # luon co it nhat null quay vong hop le
         "n_bootstrap": n_boot, "so_hat": len(ps), "tang": 2,
     }
@@ -773,12 +816,39 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
                      "voi lo TB mot lenh thua (dang martingale tra hinh)"
                      % (_rr, n["rr_thuc_te_toi_thieu"]))
 
+    # CUNG HINH DANG "HONG THI MO" nhu cong 11 (sua 20/09/2026).
+    #
+    # Ban cu: ngoai le -> `_phi_sp = 0`; `chi_phi_spread is None` -> `or 0.0`
+    # -> cung bang 0. Roi `(_phi_sp <= 0)` la `True`, tuc CONG MO. Mot cong
+    # CHAN CUNG hoi "edge co day hon chi phi khong" lai di qua dung luc khong
+    # do duoc chi phi.
+    #
+    # PHAM VI HEP CO CHU DICH: chi danh dau khi phep doc THAT BAI (ngoai le,
+    # hay truong khong ton tai). `_phi_sp == 0` duoc khai TUONG MINH thi van
+    # cho di qua nhu cu - do la truong hop that cua che do nghien cuu, noi chi
+    # phi la KHAI BAO chu khong do duoc, va `7_chi_phi_do_duoc` da chan san.
+    #
+    # Toi da thu bat ca "da co lenh ma phi = 0" nua. Bo: no dung ve ly le nhung
+    # no chan ca cac chuoi nghien cuu hop le, va cai no them duoc thi cong 7 da
+    # bat. Mot chot chan chan nham tang thi khong phai la chat hon.
+    _phi_thieu = False
+    cong_khong_do_duoc: list[str] = []
     try:
         import numpy as _np
         _lai_rong = float(_np.nansum(kq_he.loi))
-        _phi_sp = float(abs(kq_he.chi_phi_spread or 0.0))
+        _sp_tho = getattr(kq_he, "chi_phi_spread", None)
+        if _sp_tho is None:
+            _phi_thieu = True
+            _phi_sp = 0.0
+        else:
+            _phi_sp = float(abs(_sp_tho))
     except Exception:
         _lai_rong = _phi_sp = 0.0
+        _phi_thieu = True
+    if _phi_thieu:
+        cong_khong_do_duoc.append("13_edge_vuot_spread")
+        ly_do.append("khong doc duoc chi phi spread - KHONG ket luan la edge "
+                     "day hon chi phi")
     dk["13_edge_vuot_spread"] = (_phi_sp <= 0) or (
         _lai_rong >= n["edge_tren_spread_toi_thieu"] * _phi_sp)
     if not dk["13_edge_vuot_spread"]:
@@ -797,6 +867,21 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     # Chan CHINH XAC chu khong chan ca nguon: chi loai khi chien luoc DON
     # phoi nhiem vao gio bi nhiem. Mot co che vo tinh nam gio do bang muc
     # trung binh thi khong an them gi.
+    # HONG THI PHAI CHAN, KHONG DUOC MO (sua 20/09/2026).
+    #
+    # Ban cu khoi tao `True` roi GIU NGUYEN `True` o moi duong that bai: qua
+    # it bar, chi mot o thoi gian, hay mot ngoai le bat ky. Chinh dong `ly_do`
+    # ben duoi viet "KHONG ket luan la sach" - tuc tac gia da biet - nhung
+    # GIA TRI thi van la `True`, tuc "sach". Van noi mot dang, so noi mot dang.
+    #
+    # Va day la cong CHAN CUNG, dung cai cong sinh ra de bat
+    # `EURGBP.H4.mua_qua_dem`: no dat `t_alpha = 14,52` va di het cong nho an
+    # khe dao ngay, khong mot cong nao trong 10 cong cu nhin thay. Mot cong
+    # chan cung ma HONG THI MO thi ung vien tiep theo cung kieu se lai di qua.
+    #
+    # Nay: do duoc va sach -> `True`; do duoc va ban -> `False`; KHONG do duoc
+    # -> van `True` nhung ghi ten vao `cong_khong_do_duoc`, va verdict bi chan
+    # tran o `UNG_VIEN`. Khong phai `FAIL` - chua do duoc khong phai la ban.
     dk["11_khong_an_khe_dao_ngay"] = True
     try:
         _kh = DL.khe_gio_bat_thuong(df)
@@ -820,9 +905,13 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
                     ly_do.append(f"co {_ten_o} khe dao ngay {_kh['gio']} nhung phoi "
                                  f"nhiem khong don vao do ({_trong:.2f} vs {_ngoai:.2f})")
         elif not _kh["do_duoc"]:
+            cong_khong_do_duoc.append("11_khong_an_khe_dao_ngay")
             ly_do.append("chua do duoc khe theo thoi gian (qua it bar hoac chi mot o) "
                          "- KHONG ket luan la sach")
+        if _kh.get("do_duoc") and not _kh.get("gio"):
+            pass          # do duoc va khong co o nao nhiem -> that su sach
     except Exception as _e:
+        cong_khong_do_duoc.append("11_khong_an_khe_dao_ngay")
         ly_do.append(f"khong do duoc khe dao ngay: {type(_e).__name__}")
 
     giai_doan = DO.hieu_qua_giai_doan(kq_he.loi, kq_he.index, k=4)
@@ -973,6 +1062,14 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     elif qua_het and not tren_holdout:
         verdict = "UNG_VIEN"
         ly_do.append("qua cong tren tap kham pha - can xac nhan tren holdout")
+    elif qua_het and cong_khong_do_duoc:
+        # CHUA_DO_DUOC KHAC AM, va cung khac DAT. Mot cong CHAN CUNG khong do
+        # duoc thi khong co cach nao noi ung vien nay sach - nen khong PASS.
+        # Nhung cung khong FAIL: chua do duoc khong phai la ban.
+        verdict = "UNG_VIEN"
+        ly_do.append("qua moi cong DO DUOC, nhung cong chan cung %s CHUA DO "
+                     "DUOC - can do lai truoc khi chung nhan"
+                     % ", ".join(sorted(set(cong_khong_do_duoc))))
     elif qua_het:
         verdict = "PASS"
     else:
@@ -996,6 +1093,9 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
 
     ra = {
         "verdict": verdict, "dieu_kien": dk, "ly_do": ly_do,
+        # Ten cac cong CHAN CUNG khong do duoc. Rong = moi cong chan deu da
+        # duoc do that. Doc truong nay TRUOC khi tin mot verdict.
+        "cong_khong_do_duoc": sorted(set(cong_khong_do_duoc)),
         "nhan": nhan, "verdict_chan": v_chan, "che_do_cong": cd_cong,
         "so_sanh": ss, "placebo": pl, "giai_doan": giai_doan,
         "da_chay_placebo": pl is not None,

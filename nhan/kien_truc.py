@@ -139,16 +139,18 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
          "quy_doi_tham_so"),
     ),
     "SINH GIA THUYET": (
-        "Bon luong sinh: noi sinh, ngoai sinh, suy nguoc tu dau chan, to hop.",
-        ("noi_sinh", "ngoai_sinh", "suy_nguoc", "dau_chan", "luan_dau_chan",
-         "tin_hieu_mql5", "to_hop", "da_thoi_dai", "gop_lop", "chuyen_he",
-         "thu_hoi_thanh_phan"),
+        "Nam luong sinh. Bon luong dau bat nguon tu cai DA CO (lich su mot ma, "
+        "mot he da pass, dau chan nguoi khac, co che trong kho); `hephaestus` "
+        "la luong duy nhat sinh tu VON TU cua chinh ngu phap.",
+        ("hephaestus", "noi_sinh", "ngoai_sinh", "suy_nguoc", "dau_chan",
+         "luan_dau_chan", "tin_hieu_mql5", "to_hop", "da_thoi_dai", "gop_lop",
+         "chuyen_he", "thu_hoi_thanh_phan"),
     ),
     "QUAN TRI VI THE": (
         "Ho co che THU HAI. 262 co che dau la tin hieu VAO; day la nua con lai.",
         ("pmg", "pmg_engine", "pmg_g0", "pmg_quet", "quan_tri_dsl",
          "quan_tri_nhieu", "chuoi_quan_tri", "dap_quan_tri", "de_quan_tri",
-         "luoi", "vao_lenh", "bien_don_bay"),
+         "quan_tri_than", "luoi", "vao_lenh", "bien_don_bay"),
     ),
     "KIEM DINH & CONG": (
         "Noi mot gia thuyet duoc phep doi doi. Hai cong: co that khong, va co ra tien khong.",

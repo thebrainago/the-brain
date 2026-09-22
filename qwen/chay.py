@@ -388,8 +388,89 @@ class DieuPhoi:
         self.dt.c["tran_lan"] = tran
         self.c["tran_lan"] = tran
 
+    def dong_bo_git(self) -> None:
+        """Keo don tu cloud ve, day ket qua len. MOT nhip, khong bao gio nem.
+
+        Dat TRUOC `nap_lai_bang()` co chu dich: `dong_bo` co the keo ve mot
+        `NHIEM_VU.json` moi, va `nap_lai_bang` ngay sau do se nhat duoc no
+        trong cung mot vong. Dao thu tu thi don moi phai cho them mot vong.
+
+        `cau_git.dong_bo()` tu ghim nhip (`NHIP_GIAY`) nen goi moi vong khong
+        ton mang. Hong thi chi in mot dong - mot loi mang KHONG duoc phep giet
+        mot dot chay nhieu ngay.
+        """
+        # BAT MOI NGOAI LE, khong chi ImportError. Cau noi la thu MOI va chua
+        # tung chay tren may that; mot loi trong no KHONG duoc phep giet mot
+        # dot chay nhieu ngay. Neu cau hong thi `q` van phai chay bang viec
+        # cua bang `NHIEM_VU.json` nhu truoc khi co cau.
+        try:
+            from . import cau_git as CG
+            r = CG.dong_bo()
+        except Exception as e:                      # noqa: BLE001
+            print("  !! cau noi git hong (%s: %s) - `q` chay tiep bang bang viec"
+                  % (type(e).__name__, e), flush=True)
+            return
+        if r.get("bo_qua"):
+            return
+        if r.get("trang_thai") != "DAT":
+            print("  ~~ dong bo git CHUA_DO_DUOC: %s" % r.get("ly_do"), flush=True)
+            return
+        k, d = r.get("keo") or {}, r.get("day") or {}
+        if k.get("da_keo") or d.get("da_day"):
+            t = CG.tom_tat()
+            print("  ~~ git: %s%s | don cho %d, hoi cloud %d"
+                  % ("keo " if k.get("da_keo") else "",
+                     "day %d file" % d.get("so_file", 0) if d.get("da_day") else "",
+                     t["cho"], t["hoi_cloud"]), flush=True)
+
+    def chay_don_cloud(self) -> None:
+        """Chay MOT don tu cloud, o LUONG NEN.
+
+        ## VI SAO PHAI LA LUONG NEN
+
+        Mot don co `han_phut` toi 60 phut tro len. Goi thang trong `mot_vong`
+        thi suot ngan ay phut khong ai thu hoach tien trinh da xong va khong ai
+        phong viec moi - CPU tut ve 0 trong khi bang viec day. Do dung la hinh
+        dang "te liet ma khong ai biet" ma viec `M0_don_mo_coi` sinh ra de bat.
+
+        MOT don mot luc: `_don_dang_chay` la co. Khong dung `Lock` vi o day
+        khong can cho - co ban thi bo qua vong nay, vong sau lai thu.
+        """
+        if getattr(self, "_don_dang_chay", False):
+            return
+        try:
+            from . import cau_git as CG
+            if not CG.don_dang_cho():
+                return
+        except Exception as e:                      # noqa: BLE001
+            print("  !! khong doc duoc hang doi don (%s) - bo qua vong nay"
+                  % type(e).__name__, flush=True)
+            return
+
+        def _lam():
+            try:
+                r = CG.chay_mot_don_dang_cho()
+                if r and not r.get("hoan"):
+                    print("  ~~ don cloud %s -> %s (%s)"
+                          % (r.get("ma"), r.get("trang_thai"),
+                             str(r.get("ly_do"))[:70]), flush=True)
+                    # Day ngay: cloud dang cho ket qua nay de ra don tiep.
+                    # Doi het nhip la de may ranh trong luc cloud ngoi doi.
+                    CG.dong_bo(ep=True)
+            except Exception as e:                      # noqa: BLE001
+                # Mot don hong KHONG duoc giet dot chay nhieu ngay.
+                print("  !! don cloud nem: %s: %s" % (type(e).__name__, e),
+                      flush=True)
+            finally:
+                self._don_dang_chay = False
+
+        self._don_dang_chay = True
+        self.tho.submit(_lam)
+
     def mot_vong(self) -> None:
         self.nap_lai_cau_hinh()
+        self.dong_bo_git()
+        self.chay_don_cloud()
         self.nap_lai_bang()
         self.kiem_ma_doi()
         self.do_suat_lan()
@@ -509,6 +590,18 @@ def main(argv: list) -> int:
         return 0
     if lenh == "kiem":
         return kiem()
+    if lenh in ("cau", "cau-git", "git"):
+        # Man hinh cau noi hai may. `q cau day` ep mot nhip dong bo ngay thay
+        # vi doi `NHIP_GIAY` - dung khi vua ghi xong mot ket qua va muon cloud
+        # thay ngay, khong phai cho het nhip.
+        from . import cau_git as CG
+        CG.bao_dam_thu_muc()
+        if len(argv) > 1 and argv[1].lower() in ("day", "dong-bo", "sync"):
+            r = CG.dong_bo(ep=True)
+            print("dong bo: %s%s" % (r.get("trang_thai"),
+                                     "  (%s)" % r["ly_do"] if r.get("ly_do") else ""))
+        print(CG.bang())
+        return 0
     if lenh in ("nghi", "thuc", "cpu", "ultra", "ultracode", "thuong"):
         import json as _j
         c = {}
