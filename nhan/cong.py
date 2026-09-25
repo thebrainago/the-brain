@@ -92,7 +92,13 @@ NHAN_MEM = {
 #: Cai VAN CHAN. Liet ke tuong minh de them mot dieu kien moi khong tu dong roi
 #: vao ben nao ma khong ai quyet dinh.
 CHAN_CUNG = ("1_loi_hon_mua_giu", "2_sharpe_hon_mua_giu", "3_calmar_hon_mua_giu",
-             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay")
+             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay",
+             # TANG 2 KINH TE (18/09) - noi ve TIEN nen CHAN. Them 25/09/2026: commit
+             # 18/09 them hai dieu kien vao `dk` ma quen xep loai, nen o che do "nhan"
+             # (mac dinh, config/nguong.json) MOI lan `xet()` nem KeyError "dieu kien
+             # chua phan loai" - cong chinh thuc gay tu 18/09. test_cong_fdr_v2 bat
+             # duoc (3 test do) nhung chua ai sua.
+             "12_rr_thuc_te", "13_edge_vuot_spread")
 
 
 def che_do_cong() -> str:

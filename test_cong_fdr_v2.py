@@ -116,8 +116,11 @@ class TestFdrV2(unittest.TestCase):
 
     def test_chuoi_fdr_chi_nhan_p_alpha_lien_tuc(self):
         idx = pd.date_range("2026-01-01", periods=100, freq="h")
+        # loi DUONG nho chu khong phai 0 (sua 25/09/2026): tu TANG 2 KINH TE (18/09)
+        # mot "he" loi 0 co rr thuc te = 0 -> truot re -> placebo khong chay -> FDR
+        # nhan p=1, va bai nay khong con kiem duoc cai no muon kiem (so hoc FDR).
         kq_he = SimpleNamespace(
-            so_lenh=100, loi=np.zeros(100), index=idx, vi_the=np.ones(100))
+            so_lenh=100, loi=np.full(100, 1e-4), index=idx, vi_the=np.ones(100))
         kq_bh = SimpleNamespace()
         cp = SimpleNamespace(do_tin="DO", canh_bao=None)
         so_sanh = {
@@ -160,8 +163,11 @@ class TestFdrV2(unittest.TestCase):
     def test_placebo_truot_thi_tieu_suat_voi_p_bang_1(self):
         """Bo placebo khoi so hoc FDR khong duoc bien no thanh do trang tri."""
         idx = pd.date_range("2026-01-01", periods=100, freq="h")
+        # loi DUONG nho chu khong phai 0 (sua 25/09/2026): tu TANG 2 KINH TE (18/09)
+        # mot "he" loi 0 co rr thuc te = 0 -> truot re -> placebo khong chay -> FDR
+        # nhan p=1, va bai nay khong con kiem duoc cai no muon kiem (so hoc FDR).
         kq_he = SimpleNamespace(
-            so_lenh=100, loi=np.zeros(100), index=idx, vi_the=np.ones(100))
+            so_lenh=100, loi=np.full(100, 1e-4), index=idx, vi_the=np.ones(100))
         so_sanh = {
             "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
                    "phoi_nhiem": 0.5, "so_bar": 100},
@@ -188,8 +194,11 @@ class TestFdrV2(unittest.TestCase):
     def test_che_do_CHAN_van_tra_FAIL_khi_placebo_truot(self):
         """Duong quay lai phai con: dat che_do_cong='chan' la ve y nguyen ban cu."""
         idx = pd.date_range("2026-01-01", periods=100, freq="h")
+        # loi DUONG nho chu khong phai 0 (sua 25/09/2026): tu TANG 2 KINH TE (18/09)
+        # mot "he" loi 0 co rr thuc te = 0 -> truot re -> placebo khong chay -> FDR
+        # nhan p=1, va bai nay khong con kiem duoc cai no muon kiem (so hoc FDR).
         kq_he = SimpleNamespace(
-            so_lenh=100, loi=np.zeros(100), index=idx, vi_the=np.ones(100))
+            so_lenh=100, loi=np.full(100, 1e-4), index=idx, vi_the=np.ones(100))
         so_sanh = {
             "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
                    "phoi_nhiem": 0.5, "so_bar": 100},
