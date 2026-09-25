@@ -13,11 +13,13 @@ boc tach thanh co che, kiem dinh, va giu lai cai KIEM RA TIEN.
 
 | Tang | Cho | Vai tro |
 |---|---|---|
+| **Nha nghien cuu** | `nhan/nc_*.py` · `b nc` | **AI nam quyen nghien cuu** (tu 25/09/2026): doc so tay, dat gia thuyet, thi nghiem, hoc tu lenh dung/sai. Xem `tai_lieu/NHA_NGHIEN_CUU.md` |
 | Tru | `tru/` | SEEKER (thu thap) · QUANTLAB (nghien cuu) · EVOLUTION (giam sat) · BANKER · FINDER · NGHI |
 | Thu vien | `nhan/` | 132 module: du lieu, cong kiem dinh, MT5/tester, quan tri vi the, ngu phap DSL... |
 | Cua vao | `b.py` · `dieu_phoi.py` · `day_viec.py` · `qwen/NHIEM_VU.json` · `BAN_GIAO.py` | Module khong duoc goi tu mot trong bon duong nay thi *bang khong co* |
 
 `b.py` la lenh nguoi go — 41 lenh con. `python b.py` de xem danh sach.
+Bat dau o day: `python b.py nc` (ho so nghien cuu) va `python b.py nc cc` (bo cong cu).
 Hai lenh nen chay truoc khi xay them:
 
 ```

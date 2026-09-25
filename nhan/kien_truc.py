@@ -110,6 +110,12 @@ TRU = ("seeker", "quantlab", "evolution", "banker", "finder", "nghi")
 #: Tang cua `nhan/`. Viet tay - xem docstring dau file ve vi sao.
 #: Module khong co trong bang nao se hien o muc CHUA XEP LOP.
 LOP: dict[str, tuple[str, tuple[str, ...]]] = {
+    "NHA NGHIEN CUU — AI nam quyen": (
+        "Tang tren cung tu 25/09/2026: AI (Claude) quyet dinh nghien cuu gi, cac lop duoi la "
+        "bo cong cu cua no. Code do va cham; AI dat gia thuyet, doc ket qua, hoc tu lenh.",
+        ("nc_tac_tu", "nc_cong_cu", "nc_so_tay", "nc_thi_nghiem", "nc_mo_xe",
+         "nc_dac_trung", "nc_du_lieu", "nc_tu_lai"),
+    ),
     "SO & HOP DONG": (
         "Nguon su that chung. Moi tru doc va ghi qua day, khong tu giu so rieng.",
         ("so", "hop_dong", "quant_plan", "anh_chup", "bai_hoc",

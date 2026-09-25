@@ -109,3 +109,30 @@ do_tin=SAN · chay duoc that (du von, lot khong kep).
 Gioi han viec do dang cua lan nhanh: 3. Moi viec co han chot.
 
 Chi tiet day du: `Downloads/Research SP500/BAN_GIAO_HE_THONG.md` muc 9, 11, 13.
+
+
+================================================================================
+BO SUNG SAU SO DO GOC — 25/09/2026 (chu du an yeu cau thiet ke lai)
+================================================================================
+Phan nay KHONG co trong ban goc `Desktop/hethong.txt`. Chu du an yeu cau 25/09:
+"The Brain la cong cu va cac phuong an cho cau. Phan thuc thi chinh va suy luan
+chinh phai do AI nam quyen ... AI phai tu chu dong va tu duy trong viec tim kiem
+he thong trading co loi nhuan va chu dong hoc hoi tim toi." Neu muon no thanh
+LUAT SO 0 thi phai chep vao `hethong.txt`.
+
+NHA NGHIEN CUU  (nhan/nc_*.py, goi `b nc`) — TANG TREN CUNG, AI NAM QUYEN
+--------------------------------------------------------------------------
+    NHA NGHIEN CUU (AI)   quyet dinh nghien cuu gi, dat gia thuyet, doc ket qua,
+                          HOC TU LENH DUNG/SAI, ghi hieu biet va cau hoi tiep
+    CONG CU (code)        do va cham: engine, chi phi that, tien o DD20, niem phong
+    SEEKER/QUANTLAB/EVO   thanh DICH VU cho nha nghien cuu (SEEKER tim THEO YEU CAU)
+    CHU DU AN             nha tai tro: dat muc tieu, gui y tuong (`b nc hoi`), doc so tay
+
+Ba viec so do goc da noi, nay co cho nam that:
+  - "tu nhung ket qua nay ... viet luat cho AI giam sat tu duy de duc rut va hoc
+    hoi" -> so tay `nc.db` (gia thuyet, thi nghiem, hieu biet co bang chung, cau hoi)
+  - "Quantlab noi sinh ... truoc mot cu tang/giam co dau hieu gi" -> `tim_quy_luat`
+  - "quan li lenh ... test thu tung phuong phap quan li lenh" -> `mo_xe_lenh`
+    (MFE/MAE -> luat quan tri) + `thu_co_che` voi `quan_tri`
+
+Chi tiet: `tai_lieu/NHA_NGHIEN_CUU.md`. Hieu chuan: `reports/NC_HIEU_CHUAN.md`.

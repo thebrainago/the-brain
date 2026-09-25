@@ -35,6 +35,29 @@ Ba dieu trong so do ma de lam nguoc:
 thong do va co the nang cap phat trien hon ca mo ta cua toi"*. So do la SAN, khong
 phai TRAN.
 
+## LUAT SO 1 — AI LA NHA NGHIEN CUU CHINH (chot 25/09/2026)
+
+Chu du an: *"The Brain la cong cu va cac phuong an cho cau. Phan thuc thi chinh va
+suy luan chinh phai do AI nam quyen"*. Thiet ke: `tai_lieu/NHA_NGHIEN_CUU.md`.
+
+Moi phien Claude Code:
+1. **Mo dau bang `b nc`** - ho so nghien cuu (cau hoi mo, cua chu du an xep truoc;
+   gia thuyet dang song; thi nghiem tot nhat; hieu biet co bang chung; phep thu da tieu).
+2. **Tu chon viec co gia tri nhat va lam** - khong cho giao viec. Chu du an la nha
+   tai tro: dat muc tieu, gui y tuong qua `b nc hoi "..."`, doc so tay.
+3. **Moi phep do nghien cuu di qua `b nc cc <cong_cu> '<json>'`** (16 cong cu: ho so,
+   tim quy luat, thu co che, quet, mo xe lenh, thu luoi, xac nhan, niem phong...) de
+   no vao so tay `nc.db`. Khong viet them script `_*.py` roi cho mot thi nghiem moi -
+   ket qua ngoai so tay la ket qua khong ai tim lai duoc.
+4. **Ket phien**: ghi hieu biet (kem tn_id) + cau hoi moi + trang thai gia thuyet.
+
+Code do va cham, AI khong tu viet ket qua: 3 doan (niem phong mo MOT lan), van tay
+thi nghiem, phep thu dem theo dong gia thuyet, ba trang thai. Hai con so ly do:
+(a) ket qua tot nhat cua lab (AUDCAD luoi co tia, holdout +13,26%/nam) den tu vong
+nghien cuu, khong den tu pheu; (b) tren chuoi co dap an, do tim rong ~3.000 dieu
+kien thay edge yeu **3/8**, mot gia thuyet co chu dich thay **8/8** (`b nc kiem 30`).
+Hoc tu lenh dung/sai = `mo_xe_lenh`. Het token: `b nc tu-lai MA KHUNG` (khong LLM).
+
 ## VAN HANH (chot 12/09/2026)
 - Duyet san moi de xuat, **lam lien tuc khong cho duyet**.
 - `q ultracode` - ngan sach thoai mai: CPU 95% (10 nhan / 20 luong), lan CPU 6 ·
@@ -66,6 +89,7 @@ Sau khi co slot tester (goi G2-A) thi noi ra: moi phien giu **mot slot rieng**.
 
 ## Vao phien / ket phien
 ```
+b nc               HO SO NGHIEN CUU - doc dau tien (LUAT SO 1)
 b vao              trang thai song + ban giao hom qua  (~2 giay)
 b ban-do           SINH ban do tu ma nguon - DOC TRUOC KHI XAY GI MOI
 b kien-truc        SO DO KIEN TRUC: 129 module nhan theo LOP + VAI TRO + no kien truc

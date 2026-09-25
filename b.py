@@ -5,6 +5,9 @@ Vi sao co file nay: lab co ~94 file .py o muc goc, ds/ co them 40 thu muc.
 Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
 
     b                 menu
+    b nc              NHA NGHIEN CUU (AI nam quyen): ho so nghien cuu - DOC TRUOC moi phien
+    b nc cc <ten> '<json>'  goi mot cong cu nghien cuu · `b nc hoi "y tuong"` dat cau hoi
+    b nc chay|claude|tu-lai|kiem  chu ky Claude API | Claude Code | khong LLM | hieu chuan
     b vao             VAO PHIEN: trang thai song + ban giao hom qua
     b ket "tom tat"   KET PHIEN: chot git + sinh TIEP_TUC_MAI.md cho mai
     b bg ["dong"]     ghi BAN GIAO SONG (khong doi cuoi phien moi ban giao)
@@ -984,6 +987,63 @@ def c_pmg(a: list) -> int:
 
 
 
+def c_nc(a: list) -> int:
+    """`b nc ...` - NHA NGHIEN CUU: AI nam quyen nghien cuu, The Brain la bo cong cu.
+
+    Thiet ke: `tai_lieu/NHA_NGHIEN_CUU.md`. So tay (bo nho dai han): `nc.db`.
+
+        b nc                  ho so nghien cuu (doc TRUOC moi phien)
+        b nc cc               liet ke cong cu cua nha nghien cuu
+        b nc cc <ten> '<json>'  goi mot cong cu (hoac @file.json) - Claude Code dung duong nay
+        b nc hoi "y tuong"    LUONG UU TIEN: y tuong/cau hoi cua chu du an len DAU chuong trinh
+        b nc chay [--vong N] [--nhan "..."]    chu ky Claude API (can ANTHROPIC_API_KEY)
+        b nc claude [--vong N] [--nhan "..."]  chu ky Claude Code headless (`claude -p`)
+        b nc tu-lai MA [KHUNG]    chuong trinh co dinh KHONG LLM (duong nen / khi het token)
+        b nc kiem [SO_HAT]        hieu chuan HAI chieu tren chuoi co dap an
+        b nc hien-chuong          in hien chuong (loi nhac he thong cua nha nghien cuu)
+    """
+    lenh = (a[0] if a else "so-tay").lower()
+    con = a[1:]
+    if lenh in ("so-tay", "st"):
+        from nhan import nc_so_tay as ST
+        print(ST.tom_tat_md(int(con[0]) if con and con[0].isdigit() else 12))
+        print("\n(go `b nc cc` de xem cong cu, `b nc hoi \"...\"` de dat cau hoi)")
+        return 0
+    if lenh in ("cc", "cong-cu"):
+        return chay([PY, "-m", "nhan.nc_cong_cu", *con])
+    if lenh == "hoi":
+        if not con:
+            print('go: b nc hoi "cau hoi hoac y tuong" [uu_tien 0..1]')
+            return 2
+        from nhan import nc_so_tay as ST
+        uu = 1.0
+        if len(con) > 1:
+            try:
+                x = float(con[-1])
+                if 0.0 <= x <= 1.0:          # "... 2024" la mot phan cau hoi, khong phai uu tien
+                    uu, con = x, con[:-1]
+            except ValueError:
+                pass
+        i = ST.them_cau_hoi(" ".join(con), "chu du an dat qua LUONG UU TIEN", uu, "nguoi")
+        print("da xep cau hoi #%d len dau chuong trinh nghien cuu (nguon: nguoi, uu tien %.2f)"
+              % (i, uu))
+        return 0
+    if lenh in ("chay", "claude"):
+        return chay([PY, "-m", "nhan.nc_tac_tu", *(["--claude-code"] if lenh == "claude" else []),
+                     *con])
+    if lenh == "hien-chuong":
+        return chay([PY, "-m", "nhan.nc_tac_tu", "--hien-chuong"])
+    if lenh == "tu-lai":
+        if not con:
+            print("go: b nc tu-lai <MA> [KHUNG] [--khong-niem-phong]")
+            return 2
+        return chay([PY, "-m", "nhan.nc_tu_lai", *con])
+    if lenh == "kiem":
+        return chay([PY, "-m", "nhan.nc_tu_lai", "kiem", *con])
+    print(c_nc.__doc__)
+    return 2
+
+
 def c_tran_cpu(a: list) -> int:
     """`b tran-cpu [so]` - TRAN CPU cua ca may. Moi viec nang tu ha theo con so nay.
 
@@ -1059,6 +1119,8 @@ LENH = {
     "da-thu": c_da_thu, "bai-hoc": c_da_thu,
     # --- khoi 5 (11/09/2026): cac cua vao con thieu ---
     "uu-tien": c_uu_tien, "ut": c_uu_tien, "video": c_video,
+    # --- 25/09/2026: NHA NGHIEN CUU - AI nam quyen, The Brain la bo cong cu ---
+    "nc": c_nc, "nha-nghien-cuu": c_nc,
 }
 
 
