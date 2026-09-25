@@ -33,7 +33,10 @@ P_NGUONG = 0.10
 
 
 def _hon(r: dict) -> float:
-    return float(((r or {}).get("tien") or {}).get("hon_moc_pct") or -1e9)
+    """Diem xep bien the: tien tot nhat voi maxDD duoi tran chu du an (khong phai hon moc)."""
+    t = (r or {}).get("tien") or {}
+    v = t.get("cagr_duoi_tran_pct")
+    return float(v) if v is not None and t.get("co_lai") else -1e9
 
 
 def chay(ma: str, khung: str = "H4", so_null: int = 200, toi_da_luat: int = 3,
@@ -104,21 +107,22 @@ def chay(ma: str, khung: str = "H4", so_null: int = 200, toi_da_luat: int = 3,
                                        % ung[0][3].get("ly_do"))
                 ket.append({"gt": gt, "ket": "CHUA_DO_DUOC_KHAM_PHA"})
                 continue
-            ST.cap_nhat_gia_thuyet(gt, "BAC_BO", ket_luan="khong bien the nao hon moc tren kham pha "
-                                   "sau chi phi (tot nhat %+.2f%%/nam)" % max(_hon(u[3]) for u in ung))
+            ST.cap_nhat_gia_thuyet(gt, "BAC_BO", ket_luan="khong bien the nao co lai tren kham pha "
+                                   "sau chi phi (%s)" % "; ".join(str(u[3].get("ly_do"))[:80]
+                                                                 for u in ung))
             ket.append({"gt": gt, "ket": "BAC_BO_KHAM_PHA"})
             continue
         ten, sb, qb, rb = max(dat, key=lambda u: _hon(u[3]))
         q = TN.quet(ma, khung, sb, quan_tri=qb, gt_id=gt, vong_id=vong_id, toi_da_o=60)
-        _b("quet", gt=gt, bien_the=ten, hinh=q.get("hinh_dang"), ty_le=q.get("ty_le_o_hon_moc"))
+        _b("quet", gt=gt, bien_the=ten, hinh=q.get("hinh_dang"), ty_le=q.get("ty_le_o_co_lai"))
         if q.get("hinh_dang") != "CAO_NGUYEN":
-            ST.cap_nhat_gia_thuyet(gt, "BAC_BO", ket_luan="quet ra %s (ty le o hon moc %s) - khong "
+            ST.cap_nhat_gia_thuyet(gt, "BAC_BO", ket_luan="quet ra %s (ty le o co lai %s) - khong "
                                    "phai cao nguyen" % (q.get("hinh_dang") or q.get("trang_thai"),
-                                                        q.get("ty_le_o_hon_moc")))
+                                                        q.get("ty_le_o_co_lai")))
             ket.append({"gt": gt, "ket": "BAC_BO_HINH_DANG"})
             continue
         x = TN.danh_gia(ma, khung, sb, qb, "xac_nhan", gt, vong_id)
-        _b("xac_nhan", gt=gt, trang_thai=x.get("trang_thai"), hon_moc=_hon(x),
+        _b("xac_nhan", gt=gt, trang_thai=x.get("trang_thai"), cagr_duoi_tran=_hon(x),
            lenh=(x.get("lenh") or {}).get("so_lenh"))
         if x.get("trang_thai") == "CHUA_DO_DUOC":
             ST.cap_nhat_gia_thuyet(gt, "DANG_THU", ket_luan="xac nhan CHUA DO DUOC (%s) - can them "
@@ -199,7 +203,7 @@ def hoc_tu_lenh(cac_ma=("TONG_HOP_LOC_1", "TONG_HOP_LOC_2", "TONG_HOP_NHIEU_1", 
             v = TN.danh_gia(ma, khung, l["spec_de_xuat"], doan="xac_nhan")
             d.update(kv_goc_xn=(g.get("lenh") or {}).get("ky_vong_bps"),
                      kv_loc_xn=(v.get("lenh") or {}).get("ky_vong_bps"),
-                     hon_moc_loc_xn=_hon(v), xn_loc=v.get("trang_thai"))
+                     cagr_loc_xn=_hon(v), xn_loc=v.get("trang_thai"))
             d["dung"] = d["co_edge_that"] and v.get("trang_thai") == "DAT" and _hon(v) > _hon(g)
         else:
             d["dung"] = not d["co_edge_that"]
@@ -254,6 +258,95 @@ def do_bao_dong_gia(so_hat: int = 30, khung: str = "H4", so_null: int = 200) -> 
             "ty_le_p_le_0_10": round(sum(x <= 0.10 for x in p) / so_hat, 3)}
 
 
+def _ba_doan(ma: str, khung: str, spec: dict) -> tuple[str, dict]:
+    """Giao thuc cua AI: kham_pha -> (chi khi DAT) xac_nhan -> (chi khi DAT) niem_phong.
+
+    -> (doan XA NHAT ma he DAT: "" / "kham_pha" / "xac_nhan" / "niem_phong", ket qua niem phong).
+    Kham pha CHUA_DO_DUOC -> "CHUA_DO_DUOC" (ba trang thai: khau do hong khong duoc lan vao AM).
+    """
+    gt = ST.them_gia_thuyet("kiem cong: %s tren %s/%s" % (spec["ten"], ma, khung),
+                            "do ti le lot cua cong ba doan", spec.get("ho", ""),
+                            {"ma": ma, "khung": khung}, nguon="hieu_chuan")
+    tt = TN.danh_gia(ma, khung, spec, gt_id=gt).get("trang_thai")
+    if tt == "CHUA_DO_DUOC":
+        return "CHUA_DO_DUOC", {}
+    if tt != "DAT":
+        return "", {}
+    if TN.danh_gia(ma, khung, spec, doan="xac_nhan", gt_id=gt).get("trang_thai") != "DAT":
+        return "kham_pha", {}
+    n = TN.niem_phong(ma, khung, spec, gt_id=gt, cong_that=False)
+    return ("niem_phong" if n.get("trang_thai") == "DAT" else "xac_nhan"), n
+
+
+def _dem_ba_doan(ket: list[tuple[str, dict]]) -> dict:
+    den = [d for d, _ in ket]
+    dat = [n for d, n in ket if d == "niem_phong"]
+    ra = {"y_tuong": len(den), "chua_do_duoc": sum(d == "CHUA_DO_DUOC" for d in den),
+          "qua_kham_pha": sum(d in ("kham_pha", "xac_nhan", "niem_phong") for d in den),
+          "qua_xac_nhan": sum(d in ("xac_nhan", "niem_phong") for d in den),
+          "dat_niem_phong": len(dat),
+          "dat_mang_nhan_khong_hon_moc": sum(
+              any("KHONG hon moc" in x for x in ((n.get("nhan") or {}).get("canh_bao") or []))
+              for n in dat),
+          "dat_mang_nhan_beta": sum(
+              any("BETA" in x for x in ((n.get("nhan") or {}).get("canh_bao") or []))
+              for n in dat),
+          "dat_mang_nhan_beta_hoac_moc": sum(
+              any(("BETA" in x or "KHONG hon moc" in x)
+                  for x in ((n.get("nhan") or {}).get("canh_bao") or []))
+              for n in dat)}
+    ra["ty_le_dat_niem_phong"] = round(len(dat) / max(len(den), 1), 4)
+    return ra
+
+
+def y_tuong_ngau_nhien(ma: str, khung: str, so_y: int, rng) -> list[dict]:
+    """`so_y` y tuong KHONG co co che: mot dieu kien dac trung lien tuc, nguong o phan vi
+    10-30% (`<`) hoac 70-90% (`>=`) cua doan kham pha, chieu va thoi gian giu ngau nhien."""
+    import numpy as np
+    from nhan import nc_dac_trung as DT, nc_du_lieu as NDL
+    pre, a = NDL.cat_doan(NDL.nap(ma, khung), "kham_pha")
+    X = DT.tinh(pre).iloc[a:]
+    ten = sorted(t for t in X.columns if X[t].nunique() > 30)
+    ra = []
+    for i in range(so_y):
+        t = str(rng.choice(ten))
+        phep = str(rng.choice(["<", ">="]))
+        q = rng.uniform(0.1, 0.3) if phep == "<" else rng.uniform(0.7, 0.9)
+        ra.append({"ten": "ngau_nhien_%s_%d" % (ma.lower()[-12:], i),
+                   "ho": DT.HO_THEO_NHOM.get(DT.DAC_TRUNG[t][2], "xu_huong"),
+                   "chieu": int(rng.choice([1, -1])), "giu": int(rng.choice([1, 3, 5, 10])),
+                   "co_che": "Y tuong NGAU NHIEN de do ti le lot cua cong - khong co co che nao.",
+                   "vao": [DT.dieu_kien(t, phep, float(np.nanquantile(X[t].dropna(), q)))]})
+    return ra
+
+
+def do_cong_ba_doan(so_hat: int = 10, so_y: int = 20, khung: str = "H4", hat: int = 0) -> dict:
+    """Hieu chuan HAI chieu cua CHINH CONG ba doan (tieu chi chu du an 25/09).
+
+    `hieu_chuan` do ca day chuyen, trong do bo tim quy luat (null da hieu chuan) chan nhieu
+    TRUOC khi cong kip thay. Nhung AI cung dua THANG y tuong vao thu_co_che -> xac_nhan ->
+    niem_phong, va cong "chi can co lai va maxdd duoi 80%" long hon cong cu. Nen do:
+      * chieu NHIEU: y tuong ngau nhien tren NHIEU - bao nhieu lot tung doan va DAT niem phong.
+        Day la ti le "may man" ma nhan so phep thu / Sharpe giam phat phai canh.
+      * chieu CO EDGE: gia thuyet co chu dich tren HOI_QUY va HOI_QUY_YEU cung so hat.
+    """
+    import numpy as np
+    rng = np.random.default_rng(hat)
+    khong_edge = {}
+    for kb in ("NHIEU", "BETA"):
+        ket = []
+        for h in range(1, so_hat + 1):
+            ma = "TONG_HOP_%s_%d" % (kb, h)
+            ket += [_ba_doan(ma, khung, s) for s in y_tuong_ngau_nhien(ma, khung, so_y, rng)]
+        khong_edge[kb] = _dem_ba_doan(ket)
+    edge = {}
+    for kb in ("HOI_QUY", "HOI_QUY_YEU"):
+        edge[kb] = _dem_ba_doan([_ba_doan("TONG_HOP_%s_%d" % (kb, h), khung,
+                                          dict(SPEC_CO_CHU_DICH, ten="co_chu_dich_%s" % kb.lower()))
+                                 for h in range(1, so_hat + 1)])
+    return {"so_hat": so_hat, "so_y_moi_hat": so_y, "khong_edge": khong_edge, "co_edge": edge}
+
+
 def hieu_chuan(cac_ma=KICH_BAN_HIEU_CHUAN, khung: str = "H4", so_null: int = 200,
                so_hat_bao_dong: int = 0, so_hat_cong_suat: int = 0, ghi_bao_cao: bool = True,
                in_ra=print) -> dict:
@@ -265,7 +358,7 @@ def hieu_chuan(cac_ma=KICH_BAN_HIEU_CHUAN, khung: str = "H4", so_null: int = 200
     """
     db_cu = ST.DB
     ST.DB = Path(tempfile.mkdtemp(prefix="nc_hieu_chuan_")) / "nc.db"
-    ket, hl, bd, cs = [], [], None, None
+    ket, hl, bd, cs, cg = [], [], None, None, None
     try:
         for ma in cac_ma:
             in_ra("== %s" % ma)
@@ -288,6 +381,9 @@ def hieu_chuan(cac_ma=KICH_BAN_HIEU_CHUAN, khung: str = "H4", so_null: int = 200
         if so_hat_cong_suat:
             in_ra("== do cong suat: do tim rong vs gia thuyet co chu dich (%d hat)" % so_hat_cong_suat)
             cs = do_cong_suat(so_hat_cong_suat, khung, so_null)
+            in_ra("== do cong ba doan: y tuong ngau nhien tren nhieu/beta vs gia thuyet co edge")
+            # D1 them vao vi la truong hop XAU NHAT cho cong: phi nho so voi nhieu cua mot nen.
+            cg = {k: do_cong_ba_doan(10, 20, k) for k in dict.fromkeys((khung, "D1"))}
     finally:
         ST.DB = db_cu
     tom = {"so_kich_ban": len(ket),
@@ -297,7 +393,7 @@ def hieu_chuan(cac_ma=KICH_BAN_HIEU_CHUAN, khung: str = "H4", so_null: int = 200
            "bao_dong_gia": sum(1 for k in ket if not k["co_edge_that"] and k["ket_cuc"] == "DAT"),
            "hoc_tu_lenh_dung": "%d/%d" % (sum(d["dung"] for d in hl), len(hl)),
            "chi_tiet": ket, "hoc_tu_lenh": hl, "bao_dong_gia_tim_quy_luat": bd,
-           "cong_suat": cs}
+           "cong_suat": cs, "cong_ba_doan": cg}
     if ghi_bao_cao:
         L = ["# HIEU CHUAN NHA NGHIEN CUU - chuoi co dap an",
              "", "*%s · sinh boi `python b.py nc kiem` (nhan/nc_tu_lai.hieu_chuan)*" % ST.bay_gio(), "",
@@ -315,12 +411,12 @@ def hieu_chuan(cac_ma=KICH_BAN_HIEU_CHUAN, khung: str = "H4", so_null: int = 200
             tom["dung"], tom["chua_ket_luan"], tom["sai"], tom["bao_dong_gia"]), "",
             "## 2. Hoc tu lenh dung/sai (mo xe he goc -> chay lai he da loc tren xac_nhan)", "",
             "| chuoi | edge | bo loc tim ra | p_null | kv goc xn (bps) | kv loc xn (bps) | "
-            "hon moc loc xn | danh gia |", "|---|---|---|---:|---:|---:|---:|---|"]
+            "%/nam loc xn (DD<80%) | danh gia |", "|---|---|---|---:|---:|---:|---:|---|"]
         for d in hl:
             L.append("| %s | %s | %s | %s | %s | %s | %s | %s |" % (
                 d["ma"], "co" if d["co_edge_that"] else "KHONG", d.get("bo_loc") or "-",
                 d.get("p_null"), d.get("kv_goc_xn", "-"), d.get("kv_loc_xn", "-"),
-                d.get("hon_moc_loc_xn", "-"), "DUNG" if d["dung"] else "SAI"))
+                d.get("cagr_loc_xn", "-"), "DUNG" if d["dung"] else "SAI"))
         if bd:
             L += ["", "## 3. Ti le bao dong gia cua tim_quy_luat tren %d hat NHIEU THUAN" % bd["so_hat"],
                   "", "p_null <= 0,05: **%.1f%%** (ky vong ~5%%) · p_null <= 0,10: **%.1f%%** (ky vong ~10%%)"
@@ -338,6 +434,31 @@ def hieu_chuan(cac_ma=KICH_BAN_HIEU_CHUAN, khung: str = "H4", so_null: int = 200
                   "Doc: cung mot edge, cung du lieu. Moi dieu kien them vao cuoc do tim nang NGUONG "
                   "cho moi dieu kien khac. Gia tri cua nha nghien cuu (AI hay nguoi) nam o viec dat "
                   "IT gia thuyet co co so - khong phai quet nhieu hon."]
+        if cg:
+            mot = next(iter(cg.values()))
+            L += ["", "## 5. Cong ba doan theo tieu chi chu du an (co lai + maxDD < 80%)", "",
+                  "Giao thuc cua AI: chi dua sang doan sau cai DAT o doan truoc. Chuoi KHONG edge: "
+                  "y tuong NGAU NHIEN (%d hat x %d moi khung). Chuoi CO edge: mot gia thuyet co chu "
+                  "dich moi hat (%d hat). D1 la truong hop XAU NHAT: phi nho so voi nhieu mot nen."
+                  % (mot["so_hat"], mot["so_y_moi_hat"], mot["so_hat"]), "",
+                  "| khung | chuoi | y tuong | chua do duoc | DAT kham pha | DAT xac nhan | DAT niem "
+                  "phong | nhan KHONG hon moc | nhan BETA | mot trong hai |",
+                  "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
+            for kh, g in cg.items():
+                for nhom in ("khong_edge", "co_edge"):
+                    for kb, v in g[nhom].items():
+                        L.append("| %s | %s (%s) | %d | %d | %d | %d | **%d (%.1f%%)** | %d | %d | %d |" % (
+                            kh, kb, "khong edge" if nhom == "khong_edge" else "co edge", v["y_tuong"],
+                            v["chua_do_duoc"], v["qua_kham_pha"], v["qua_xac_nhan"],
+                            v["dat_niem_phong"], 100 * v["ty_le_dat_niem_phong"],
+                            v["dat_mang_nhan_khong_hon_moc"], v["dat_mang_nhan_beta"],
+                            v["dat_mang_nhan_beta_hoac_moc"]))
+            L += ["", "Doc: cong nay chi hoi \"co lai khong\" - no KHONG loc may man, va KHONG loc "
+                  "beta. Tren chuoi troi nhu chi so (BETA), he nghieng mua lot ba doan vi that su co "
+                  "lai; cai canh la nhan KHONG hon moc / BETA (cot cuoi nen bang cot DAT). Tren nhieu "
+                  "khong troi, phi chan gan het. AI thu N y tuong thi ky vong ~N x ti le o cot DAT "
+                  "cai DAT gia - vi vay niem phong ghi so phep thu cua dong gia thuyet va Sharpe "
+                  "giam phat: doc chung TRUOC khi tin mot DAT."]
         f = LAB / "reports" / "NC_HIEU_CHUAN.md"
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text("\n".join(L) + "\n", encoding="utf-8")

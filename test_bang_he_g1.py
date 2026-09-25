@@ -44,13 +44,22 @@ def test_he_sharpe_cao_ma_khong_ra_tien_khong_duoc_dung_dau():
 
 
 def test_thua_mua_giu_thi_xuong_duoi_du_cagr_cao():
+    """Xep hang van day he thua mua-giu xuong duoi. Tu 25/09 (chu du an: "chi can co
+    lai va maxdd duoi 80% la ok") thua mua-giu la NHAN, khong con truot cong tien."""
     ds = _chuan([
         _he("A.D1.thua_moc", 8.26, 0.95, -10.21, 0.81, 197, mua_giu=9.97),
         _he("B.H4.hon_moc", 4.16, 1.16, -3.72, 1.12, 62, mua_giu=0.60),
     ])
     assert ds[0]["he"] == "B.H4.hon_moc"
-    assert not ds[-1]["cong_tien"]["dat"]
-    assert any("KHONG hon mua-giu" in x for x in ds[-1]["cong_tien"]["ly_do"])
+    assert ds[-1]["cong_tien"]["dat"], "co lai + DD duoi 80% -> qua cong tien"
+    assert any("KHONG hon mua-giu" in x for x in ds[-1]["cong_tien"]["nhan"])
+
+
+def test_khong_lai_hoac_sut_giam_80_thi_truot_cong_tien():
+    ds = _chuan([_he("C.D1.lo", -1.0, -0.2, -30.0, -0.03, 120, mua_giu=0.0),
+                 _he("D.D1.sau", 30.0, 0.8, -80.0, 0.37, 120, mua_giu=0.0)])
+    for d in ds:
+        assert not d["cong_tien"]["dat"], d["he"]
 
 
 def test_bat_ban_trung_va_day_xuong_duoi():

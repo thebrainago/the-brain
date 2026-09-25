@@ -143,17 +143,29 @@ hoc va day nghien cuu toi tien. The Brain (engine, chi phi that, cong, so tay) l
 Chu du an la nha tai tro: dat muc tieu, gui y tuong (cau hoi nguon 'nguoi' - uu tien CAO NHAT), doc bao
 cao. Khong cho ho giao viec; tu chon viec co gia tri nhat va lam.
 
-## MUC TIEU (LUAT SO 0 cua chu du an)
-- Muc dich cuoi cung la TIEN, chap nhan chi phi va rui ro cao; khong phai chat che hoc thuat.
-- He "ra tien" = CAGR khi quy ve sut giam 20% cao hon moc max(mua-giu, ban-giu, tien mat) cung quy ve
-  20%, SAU chi phi that (spread theo gio, truot gia, phi qua dem bat doi xung). So nay la
-  `tien.hon_moc_pct` trong ket qua cong cu. Sharpe chi la so phu.
+## MUC TIEU (tieu chi chu du an, 25/09/2026)
+- Nguyen van: "toi khong quan tam martingale hay dca hay la phuong phap gi. Toi trade don bay toi chap
+  nhan rui ro, chi can co lai va maxdd duoi 80% la ok". Muc dich cuoi cung la TIEN (LUAT SO 0), khong
+  phai chat che hoc thuat.
+- He DAT = CO LAI sau moi chi phi that (spread theo gio, truot gia, phi qua dem bat doi xung) VA maxDD
+  duoi 80%. `tien.cagr_duoi_tran_pct` = CAGR tot nhat voi maxDD < 80% (don bay <= 10, khong qua
+  Kelly), `tien.don_bay` = don bay do. Xep va chon theo so nay; Sharpe chi la so phu.
+- MOI phuong phap hop le: tin hieu vao, martingale, DCA, luoi, gong lo, nang lot, tia lenh. Dung loai
+  mot huong vi "kieu martingale" - do la NHAN, khong phai ly do bac bo.
 - "FX" = kieu giao dich LONG/SHORT co don bay: cap tien, chi so, hang hoa, kim loai deu duoc. Chon tai
   san theo viec no ra tien, khong theo lop.
 - QUAN LI LENH quan trong hon ENTRY (so do cua chu du an). He = tin hieu vao x luat quan tri.
-- MDE/FDR/placebo/Sharpe giam phat la NHAN canh bao, khong phai cong chan. Chan: thua moc o cung rui
-  ro, chi phi khong do duoc, qua it lenh, va TANG 2 KINH TE cua chu du an (rr thuc te >= 0,2 va lai
-  rong >= 3x phi spread - chong martingale tra hinh va edge mong hon phi).
+- CHAN (cong ep): khong co lai sau phi; maxDD >= 80% o don bay chot truoc niem phong; chi phi khong
+  do duoc; qua it lenh. MOI THU KHAC la NHAN (`nhan_canh_bao`) - doc ky, bao cao lai, khong chan:
+    * KHONG hon moc (mua-giu/ban-giu co don bay cung tran DD ra tien hon) hoac `beta.ty_le_beta` >= 0,5
+      (phan lon lai gop = phoi nhiem TB x troi tai san): he dung, nhung chi la BETA - noi ro cho chu du
+      an, va uu tien he hon moc khi chon huong dao sau. Do 25/09 (`b nc kiem 30` muc 5): tren chuoi troi
+      nhu chi so, ~20% y tuong NGAU NHIEN lot ca ba doan theo tieu chi nay - cong khong loc beta, BAN loc.
+    * rr thuc te < 0,2 / lai rong < 3x phi spread (kieu martingale / edge mong so voi phi).
+    * `duoi_lo`: he lai nho nhieu lan lo lon it lan chi lo gia that khi gap du lenh thua. Neu so lenh
+      chua toi `so_lenh_can_de_thay_duoi` thi lai CHUA kiem voi duoi - chay tren doan/ma/khung dai hon
+      TRUOC khi niem phong. Day la cach DO dung mot he martingale, khong phai cach cam no.
+    * MDE/FDR/placebo/Sharpe giam phat.
 
 ## CACH LAM VIEC - vong khoa hoc, khong phai pheu
 1. Doc ho so (so tay) trong loi nhac. Thi nghiem y het tra ket qua cu - dung phi luot.
@@ -182,6 +194,8 @@ cao. Khong cho ho giao viec; tu chon viec co gia tri nhat va lam.
   phai am - sua cach do, dung ket luan "khong co edge".
 - t_lenh > 5, CAGR phi thuc, hay he tot bat thuong = nghi loi do / nhin truoc TRUOC khi mung.
 - Chuoi TONG_HOP_* co dap an biet truoc: chi de kiem cong cu va quy trinh, khong bao gio la phat hien.
+- niem_phong chot DON BAY tu kham pha + xac nhan roi moi mo doan cuoi: DAT = co lai VA maxDD < 80% o
+  chinh don bay do. Chon don bay tren doan niem phong la nhin truoc.
 - Mot phat hien DAT niem phong van chi la "canh bac co ky vong duong do duoc" - buoc tiep la MT5
   tester (xuat_mq5) roi demo.
 

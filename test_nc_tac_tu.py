@@ -164,8 +164,8 @@ def test_hien_chuong_on_dinh_va_noi_du_luat_chinh():
     import importlib
     b = importlib.reload(TT).HIEN_CHUONG
     assert a == b, "hien chuong phai TAT DINH - thay doi tung byte la mat cache prompt"
-    for cum in ("LUAT SO 0", "CAGR", "sut giam 20%", "niem_phong", "CHUA_DO_DUOC",
-                "QUAN LI LENH", "TONG_HOP", "p_null", "vao", "atr_pv"):
+    for cum in ("LUAT SO 0", "CAGR", "maxdd duoi 80%", "martingale", "DON BAY", "niem_phong",
+                "CHUA_DO_DUOC", "QUAN LI LENH", "TONG_HOP", "p_null", "vao", "atr_pv"):
         assert cum in a, cum
 
 

@@ -20,7 +20,7 @@ tien lai bao nhieu, rui ro the nao, dung vong veo hoc thuat nua"*.
 
 ## BA MUC PHAN QUYET - dat theo NGUONG CHU DU AN, khong theo thong ke
 
-  `CHAY_DUOC`  lai >= 20%/nam · sut giam <= 60% · >= 20 lenh/nam · khong chay
+  `CHAY_DUOC`  lai >= 20%/nam · sut giam < 80% · >= 20 lenh/nam · khong chay
   `MONG`       co lai nhung khong dat mot trong cac nguong tren
   `BO`         lo, hoac chay tai khoan
 
@@ -36,8 +36,14 @@ from __future__ import annotations
 import numpy as np
 
 #: Nguong cua chu du an, dat 04-05/09. Doi o day, khong rai rac trong script.
-MUC_LAI = 20.0          # %/nam tren von phai bo ra
-TRAN_SUT_GIAM = 60.0    # %
+#:
+#: TIEU CHI DUYET 25/09/2026, nguyen van chu du an: *"toi khong quan tam martingale
+#: hay dca hay la phuong phap gi. Toi trade don bay toi chap nhan rui ro, chi can co
+#: lai va maxdd duoi 80% la ok"*. `TRAN_SUT_GIAM` la MOT NGUON cho moi cong doc tran
+#: sut giam: `cong.py` (dieu kien 15), `cong_ra_tien.TRAN_DD`, `bang_he`,
+#: `nc_thi_nghiem.DD_TRAN`. Doi o day thi ca bon doi theo.
+MUC_LAI = 20.0          # %/nam tren von phai bo ra - MUC TIEU 04/09, duoi = MONG (van co lai)
+TRAN_SUT_GIAM = 80.0    # % - maxDD phai DUOI muc nay (25/09; truoc do 60)
 MIN_LENH_NAM = 20.0
 CENT = 100.0            # 1 USD chuan = 100 USD cent
 
@@ -69,9 +75,9 @@ def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
         ly_do.append("khong co lai")
     if lai_pct < MUC_LAI:
         ly_do.append("lai %.1f%%/nam < muc %.0f%%" % (lai_pct, MUC_LAI))
-    if abs(sut_giam_pct) > TRAN_SUT_GIAM:
-        ly_do.append("sut giam %.0f%% > tran %.0f%%" % (abs(sut_giam_pct),
-                                                        TRAN_SUT_GIAM))
+    if abs(sut_giam_pct) >= TRAN_SUT_GIAM:       # "maxdd DUOI 80%" -> 80 la truot
+        ly_do.append("sut giam %.0f%% >= tran %.0f%%" % (abs(sut_giam_pct),
+                                                         TRAN_SUT_GIAM))
     if so_lenh_nam < MIN_LENH_NAM:
         ly_do.append("chi %.1f lenh/nam - khong phai he thong" % so_lenh_nam)
 

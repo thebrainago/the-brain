@@ -67,6 +67,27 @@ def test_xuat_mq5_tu_choi_chuoi_tong_hop_va_khai_bao_chua_niem_phong():
     assert "TONG HOP" in lo and "chua DAT niem phong" in lo
 
 
+def test_xuat_mq5_mang_don_bay_niem_phong_da_chot_sang_hang_doi_tester():
+    """Niem phong DAT o don bay CHOT TRUOC -> tester phai chay dung muc do, khong lot tuy y."""
+    from nhan import nc_thi_nghiem as TN
+    spec = {"ten": "x_y", "ho": "quay_ve_trung_binh", "chieu": 1, "giu": 1,
+            "co_che": "mot cau du dai de qua kiem cu phap cua ngu phap",
+            "vao": [{"trai": {"chi_bao": "ibs"}, "phep": "<", "phai": {"hang": 0.2}}]}
+    s = TN.chuan_hoa_spec(spec)
+    vt = ST.van_tay("niem_phong", "AUDCAD", "H4", {k: s[k] for k in ("vao", "ra", "chieu", "giu")},
+                    None)
+    gt = ST.them_gia_thuyet("IBS day tren AUDCAD H4", "thanh khoan cuoi bar duoc tra")
+    ck = {"don_bay": 3.2, "dd_pct": 41.0, "cagr_pct": 18.5}
+    with ST.ket_noi() as cn:
+        cn.execute("INSERT INTO niem_phong(luc,van_tay,gt_id,ma,khung,spec,ket_qua,trang_thai) "
+                   "VALUES(?,?,?,?,?,?,?,?)", (ST.bay_gio(), vt, gt, "AUDCAD", "H4", "{}",
+                                               json.dumps({"tien": {"o_don_bay_cam_ket": ck}}), "DAT"))
+    r = CC.goi("xuat_mq5", {"ten": "Thu", "khung": "H4", "cac": [{"ma": "AUDCAD", "spec": spec}]})
+    assert r["trang_thai"] == "DAT", r
+    dong = json.loads(CC.HANG_DOI_TESTER.read_text(encoding="utf-8").splitlines()[-1])
+    assert dong["don_bay_cam_ket"]["AUDCAD/x_y"] == ck and dong["tran_dd_pct"] == 80.0
+
+
 def test_yeu_cau_seeker_xep_hang_doi():
     r = CC.goi("yeu_cau_seeker", {"chu_de": "EA tia lenh / basket close",
                                   "tu_khoa": ["partial close grid", "basket close mql5"]})
@@ -81,7 +102,8 @@ def test_thu_luoi_chi_ma_co_chi_phi_dung_va_ghi_so():
     ts = {"buoc": 40, "tp": 30, "tran_tang": 8, "che_do": "hai_chieu", "tia_lenh": True}
     r = CC.goi("thu_luoi", {"ma": "TONG_HOP_NHIEU_1", "khung": "H1", "tham_so": ts})
     assert r["trang_thai"] in ("DAT", "AM", "CHUA_DO_DUOC")
-    assert "lo_treo_o_dd20_pct_von" in r["tien"] and r["lenh"]["so_lenh"] > 0
+    assert "lo_treo_o_tran_pct_von" in r["tien"] and r["lenh"]["so_lenh"] > 0
+    assert r["tien"]["tran_dd_pct"] == 80.0
     assert any("TONG_HOP" in c for c in r["canh_bao"])
     r2 = CC.goi("thu_luoi", {"ma": "TONG_HOP_NHIEU_1", "khung": "H1", "tham_so": ts})
     assert "tu_so_tay" in r2

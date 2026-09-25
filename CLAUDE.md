@@ -25,8 +25,14 @@ Ba dieu trong so do ma de lam nguoc:
    nhung mo hinh kinh te hay quan tri quy de ma can de cao qua nhieu tieu chi hoc
    thuat hay cac chi tieu chat che. Muc dich cuoi cung la co tien chap nhan ca chi
    phi va rui ro cao"*.
-   MDE / FDR / placebo la **NHAN CANH BAO**, khong phai CONG CHAN. Chi chan khi
-   thua mua-giu o CUNG RUI RO - do moi la cau hoi tien.
+   MDE / FDR / placebo la **NHAN CANH BAO**, khong phai CONG CHAN.
+   **TIEU CHI DUYET (chu du an 25/09/2026, thay "chi chan khi thua mua-giu")**:
+   *"toi khong quan tam martingale hay dca hay la phuong phap gi. Toi trade don bay
+   toi chap nhan rui ro, chi can co lai va maxdd duoi 80% la ok"*. Cong CHAN chi con
+   **co lai sau phi + maxDD < 80%** (`cham_diem.TRAN_SUT_GIAM` - MOT nguon cho
+   `cong`, `cong_ra_tien`, `bang_he`, `nc_*`) + tinh dung cua so (phi do duoc, du
+   lenh, khong an khe dao ngay). Thua mua-giu o cung rui ro va "kieu martingale"
+   (tang 2 kinh te) xuong NHAN: van tinh, van hien, khong chan (THE_HE_CONG 6).
 2. **QUAN LI LENH quan trong hon ENTRY** - "module quan trong trong toan bo he thong".
 3. **"FX" = KIEU GIAO DICH LONG/SHORT**, khong phai chi cap tien. San fx co ca chi
    so, hang hoa, kim loai. Chon tai san theo viec no co ra tien khong, khong theo lop.
@@ -52,7 +58,10 @@ Moi phien Claude Code:
 4. **Ket phien**: ghi hieu biet (kem tn_id) + cau hoi moi + trang thai gia thuyet.
 
 Code do va cham, AI khong tu viet ket qua: 3 doan (niem phong mo MOT lan), van tay
-thi nghiem, phep thu dem theo dong gia thuyet, ba trang thai. Hai con so ly do:
+thi nghiem, phep thu dem theo dong gia thuyet, ba trang thai. DAT = co lai sau phi;
+`tien.cagr_duoi_tran_pct` = CAGR tot nhat voi maxDD < 80% (don bay <= 10, khong qua
+Kelly). Niem phong chot DON BAY tren kham pha + xac nhan roi moi mo: DAT = co lai VA
+maxDD < 80% o chinh don bay do. Martingale/DCA/luoi hop le. Hai con so ly do:
 (a) ket qua tot nhat cua lab (AUDCAD luoi co tia, holdout +13,26%/nam) den tu vong
 nghien cuu, khong den tu pheu; (b) tren chuoi co dap an, do tim rong ~3.000 dieu
 kien thay edge yeu **3/8**, mot gia thuyet co chu dich thay **8/8** (`b nc kiem 30`).

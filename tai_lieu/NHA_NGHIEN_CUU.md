@@ -113,7 +113,7 @@ Và chính bộ công cụ mới đã phải qua hiệu chuẩn hai chiều trư
  └───────────────┬──────────────────────────────────────────────────────────┘
                  │ dùng lại nguyên vẹn
  ┌───────────────▼──────────────────────────────────────────────────────────┐
- │ LÕI CŨ: ngu_phap · mo_phong · dap_quan_tri · vao_lenh (tiền ở DD20) ·     │
+ │ LÕI CŨ: ngu_phap · mo_phong · dap_quan_tri · vao_lenh · cham_diem (trần DD)│
  │ chi_phi · du_lieu · cong (nhãn) · dich_mq5 → MT5 tester                   │
  │ Trụ cũ thành DỊCH VỤ: SEEKER tìm theo yêu cầu (`yeu_cau_seeker`),         │
  │ qwen bóc tách, EVO giám sát                                               │
@@ -139,7 +139,7 @@ Và chính bộ công cụ mới đã phải qua hiệu chuẩn hai chiều trư
 | `nhan/nc_tac_tu.py` | Vòng tự chủ: hiến chương nghiên cứu (system prompt), vòng gọi công cụ, ngân sách công cụ/USD, nhật ký chu kỳ; driver Claude API và Claude Code headless |
 | `nhan/nc_cong_cu.py` | 16 công cụ = một danh sách, ba cách gọi (API, `b nc cc`, Python) |
 | `nhan/nc_so_tay.py` | Bộ nhớ dài hạn: 6 bảng, vân tay thí nghiệm (chạy y hệt = trả kết quả cũ, không tính phép thử), đếm phép thử theo DÒNG giả thuyết |
-| `nhan/nc_thi_nghiem.py` | Chạy hệ + quản trị; tiền ở DD20 so mốc max(mua-giữ, bán-giữ, tiền mặt); quét + hình dạng; mổ xẻ; xác nhận; niêm phong; danh mục |
+| `nhan/nc_thi_nghiem.py` | Chạy hệ + quản trị; **có lãi sau phí?** + CAGR tốt nhất với maxDD < 80% (mốc mua-giữ/bán-giữ chỉ là nhãn); quét + hình dạng; mổ xẻ; xác nhận; niêm phong với đòn bẩy chốt trước; danh mục |
 | `nhan/nc_mo_xe.py` | Tách lệnh (kể cả phí thoát, lật chiều); học bộ lọc từ lệnh thắng/thua; tìm quy luật trên bar; MFE/MAE → luật quản trị; null hiệu chuẩn cả việc dò |
 | `nhan/nc_dac_trung.py` | 26 đặc trưng ngữ cảnh viết bằng CHÍNH toán hạng ngữ pháp → luật tìm ra chạy thẳng trong engine, dịch được sang MQL5 |
 | `nhan/nc_du_lieu.py` | 3 đoạn (khám phá 60% · xác nhận 20% · niêm phong 20%); 5 kịch bản chuỗi tổng hợp có đáp án |
@@ -164,10 +164,21 @@ Và chính bộ công cụ mới đã phải qua hiệu chuẩn hai chiều trư
 - **Vân tay.** Đổi TÊN không phải phép thử mới; chạy lại y hệt không tính thêm phép thử.
 - **Đếm phép thử theo dòng** (gốc + mọi hậu duệ) → nhãn Sharpe giảm phát ở niêm phong.
 - **Ba trạng thái.** Ít lệnh / khai báo sai / chi phí KHAI → `CHUA_DO_DUOC`, không bao giờ `AM`.
-- **Cổng tiền chặn, thống kê là nhãn** (LUẬT SỐ 0): niêm phong ĐẠT khi hơn mốc ở cùng DD 20% +
-  kỳ vọng dương + chi phí đo được + **tầng 2 kinh tế** của chủ dự án (RR thực tế ≥ 0,2; lãi ròng
-  ≥ 3× phí spread — dùng chính hàm và ngưỡng của `cong.py`, nên hai cổng không thể nói hai điều
-  khác nhau); `cong.xet` (placebo, alpha) chạy với `ghi_so=False` làm nhãn.
+- **Cổng = tiêu chí chủ dự án 25/09/2026**, nguyên văn: *"tôi không quan tâm martingale hay dca
+  hay là phương pháp gì. Tôi trade đòn bẩy tôi chấp nhận rủi ro, chỉ cần có lãi và maxdd dưới 80%
+  là ok"*. CHẶN chỉ còn: **có lãi sau mọi phí** (kỳ vọng lệnh > 0) và **maxDD < 80%** — ở niêm phong
+  là maxDD ở **đòn bẩy chốt trên khám phá + xác nhận TRƯỚC khi mở** (chọn đòn bẩy trên chính đoạn
+  niêm phong là nhìn trước) — cộng tính đúng của số (chi phí đo được, đủ lệnh). Trần 80% đọc từ MỘT
+  nguồn `cham_diem.TRAN_SUT_GIAM`, dùng chung với `cong.py` (điều kiện 15), `cong_ra_tien`, `bang_he`.
+- **Nhãn, không chặn** (`nhan_canh_bao`): không hơn mốc mua-giữ/bán-giữ ở cùng trần DD ("beta, chưa
+  phải hệ"); tầng 2 kinh tế (RR thực tế < 0,2 = kiểu martingale/DCA; lãi ròng < 3× phí spread);
+  **đuôi lỗ** (hệ lãi nhỏ nhiều lần lỗ lớn ít lần cần ≥ 3/q* lệnh, q* = RR/(1+RR), mới thấy được cú
+  thua — thiếu thì ghi số lệnh cần, để AI đo trên đoạn dài hơn chứ không cấm); `cong.xet` (placebo,
+  alpha) với `ghi_so=False`; Sharpe giảm phát.
+- **Tiền đo thế nào**: `tien_duoi_tran` — tăng trưởng G(L) = Σ log(1 + L·x) lõm theo đòn bẩy L, nên
+  "có lãi ở một mức đòn bẩy nào đó" ⇔ Σx > 0, và mức tốt nhất là min(Kelly, đòn bẩy chạm DD 80%,
+  10). Không bao giờ báo CAGR ở đòn bẩy quá Kelly. Lưới: hệ số lot chạm trần tính CHÍNH XÁC trên
+  đường equity (lãi lỗ tuyến tính theo lot).
 - **Chuỗi tổng hợp** không bao giờ xuất MQL5; chỉ khai báo ĐẠT niêm phong trên mã thật mới xuất.
 
 ---
@@ -265,7 +276,7 @@ từng request và cộng vào bảng `vong`; hết ngân sách ngày thì chu k
 | trụ NGHI | qwen, 6 đề xuất / 90 phút, mù lệnh | **được thay** bởi nhà nghiên cứu; giữ để tham chiếu |
 | qwen `q` | chạy bảng viết tay | lao động bóc tách + việc MT5 dài; bảng việc có thể do nhà nghiên cứu xếp |
 | `dieu_phoi.py` | 5 trụ theo đồng hồ | giữ nguyên trong gói này (xem 8.2) |
-| cổng `cong.py` / `cong_ra_tien.py` | chặn | `cong_ra_tien`-kiểu tiền ở DD20 chặn; `cong.xet` thành NHÃN ở niêm phong (`ghi_so=False`) |
+| cổng `cong.py` / `cong_ra_tien.py` | chặn thắng mua-giữ + tầng 2 | **thế hệ cổng 6**: chặn = có lãi sau phí + maxDD < 80% + tính đúng của số; thắng mua-giữ, tầng 2 → NHÃN; `cong.xet` làm nhãn ở niêm phong (`ghi_so=False`) |
 | MT5 tester | đo thật | vẫn là trọng tài cuối: `xuat_mq5` → `reports/nc_hang_doi_tester.jsonl` |
 
 ---

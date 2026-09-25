@@ -32,6 +32,8 @@ bo sung `SO_DO_HE_THONG.txt` (danh dau ro la bo sung, khong sua so do goc), READ
 `config/nguong.json`) MOI lan `cong.xet` nem KeyError. `test_cong_fdr_v2` bat duoc (3 do) nhung
 chua ai sua. Xep ca hai vao `CHAN_CUNG` (dung chu thich "TANG 2 KINH TE: chan martingale tra
 hinh"); sua fixture hai test FDR dung "he" loi 0 (nay truot tang 2 dung nhu thiet ke).
+**Da thay cung ngay** theo tieu chi chu du an ("chi can co lai va maxdd duoi 80%"): tang 2
+xuong NHAN - xem `reports/goi_tieu_chi_tien.md`.
 
 ## 2. Bang chung (tat ca do trong phien, tai lap bang `b nc kiem 30`)
 

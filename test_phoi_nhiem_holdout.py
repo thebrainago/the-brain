@@ -85,7 +85,10 @@ class DemPhoiNhiem(SoTam):
 def _canh_pass():
     """Bo doi so lam `xet` di het cong. Lay tu test_cong_fdr_v2."""
     idx = pd.date_range("2026-01-01", periods=100, freq="h")
-    kq_he = SimpleNamespace(so_lenh=100, loi=np.zeros(100), index=idx,
+    # loi DUONG nho chu khong phai 0 (sua 25/09/2026, nhu test_cong_fdr_v2): tu TANG 2
+    # KINH TE (18/09) mot "he" loi 0 co rr thuc te = 0 -> truot dieu kien 12 -> fixture
+    # "di het cong" khong con di het cong.
+    kq_he = SimpleNamespace(so_lenh=100, loi=np.full(100, 1e-4), index=idx,
                             vi_the=np.ones(100))
     so_sanh = {
         "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,

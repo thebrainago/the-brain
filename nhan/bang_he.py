@@ -142,18 +142,20 @@ def _cong_tien(d: dict) -> dict:
     c, dd = d.get("cagr_pct"), d.get("max_dd_pct")
     n, nam = d.get("so_lenh"), d.get("so_nam")
     hon = d.get("hon_mua_giu_cagr")
-    ly_do = []
-    if c is None or c / 100.0 < muc:
-        ly_do.append("lai %s < muc %.0f%%/nam" % (_n(c), muc * 100))
-    if dd is not None and abs(dd) / 100.0 > tran:
-        ly_do.append("sut giam %s vuot tran %.0f%%" % (_n(dd), tran * 100))
+    ly_do, nhan = [], []
+    if c is None or c <= 0 or c / 100.0 < muc:
+        ly_do.append("lai %s - khong co lai (muc %.0f%%/nam)" % (_n(c), muc * 100))
+    if dd is not None and abs(dd) / 100.0 >= tran:
+        ly_do.append("sut giam %s khong duoi tran %.0f%%" % (_n(dd), tran * 100))
     if n is not None and n < min_lenh:
         ly_do.append("%d lenh < %d" % (n, min_lenh))
     if nam is not None and nam < min_nam:
         ly_do.append("%s nam < %.0f" % (_n(nam), min_nam))
     if hon is not None and hon <= 0:
-        ly_do.append("KHONG hon mua-giu (%s diem)" % _n(hon))
-    return {"dat": not ly_do, "ly_do": ly_do}
+        # 25/09 chu du an: "chi can co lai va maxdd duoi 80%" -> NHAN, khong chan. Van
+        # hien ra vi day la cach duy nhat phan biet he voi beta co don bay.
+        nhan.append("KHONG hon mua-giu (%s diem) - beta, chua phai he" % _n(hon))
+    return {"dat": not ly_do, "ly_do": ly_do, "nhan": nhan}
 
 
 def _van_tay(d: dict) -> tuple:
@@ -295,6 +297,8 @@ def bang(in_ra=print, chi_pass: bool = True) -> dict:
             in_ra("      ! cong TRUOT: %s" % ", ".join(d["cong_truot"]))
         if not d["cong_tien"]["dat"]:
             in_ra("      - cong tien: %s" % " · ".join(d["cong_tien"]["ly_do"]))
+        if d["cong_tien"].get("nhan"):
+            in_ra("      - nhan: %s" % " · ".join(d["cong_tien"]["nhan"]))
     in_ra("")
     in_ra("XEP THEO TIEN, khong theo Sharpe (sua 16/09). Khoa xep hang:")
     in_ra("  (1) ban trung xuong duoi  (2) hon mua-giu bao nhieu DIEM CAGR")
@@ -302,8 +306,8 @@ def bang(in_ra=print, chi_pass: bool = True) -> dict:
     in_ra("dau `=` ban trung · `!` co cong that TRUOT")
     in_ra("cot `hon%` = CAGR he TRU CAGR mua-giu CUNG MA. Duong ma moc AM thi "
           "van chi la thang mot moc am.")
-    in_ra("cot `cong tien` = 4 nguong cua `nhan/cong_ra_tien.py`: lai >= %.0f%%"
-          "/nam · sut giam <= %.0f%% · >= %d lenh · >= %.0f nam · hon mua-giu."
+    in_ra("cot `cong tien` = nguong cua `nhan/cong_ra_tien.py` (chu du an 25/09): co lai"
+          " (> %.0f%%/nam) · sut giam < %.0f%% · >= %d lenh · >= %.0f nam. Hon mua-giu la NHAN."
           % (muc * 100, tran * 100, min_lenh, min_nam))
     if not tien:
         in_ra("")

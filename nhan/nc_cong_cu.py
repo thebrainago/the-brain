@@ -114,7 +114,7 @@ def _ghi_cau_hoi(cau: str = "", vi_sao: str = "", uu_tien: float = 0.5,
 def _xuat_mq5(ten: str, khung: str, cac: list, **_) -> dict:
     """Chi xuat khai bao DA DAT niem phong, tren ma that. Ghi .mq5 + mot dong hang doi tester."""
     from nhan import dich_mq5 as DM
-    specs, ma_list, loi = [], set(), []
+    specs, ma_list, loi, don_bay = [], set(), [], {}
     for c in cac:
         ma = str(c.get("ma", "")).upper()
         if NDL.la_tong_hop(ma):
@@ -124,7 +124,7 @@ def _xuat_mq5(ten: str, khung: str, cac: list, **_) -> dict:
         vt = ST.van_tay("niem_phong", ma, str(khung).upper(),
                         {k: s[k] for k in ("vao", "ra", "chieu", "giu")},
                         TN.chuan_hoa_quan_tri(c.get("quan_tri")))
-        np_ = ST.mot("SELECT trang_thai FROM niem_phong WHERE van_tay=?", vt)
+        np_ = ST.mot("SELECT trang_thai, ket_qua FROM niem_phong WHERE van_tay=?", vt)
         if np_.get("trang_thai") != "DAT":
             loi.append("%s/%s: chua DAT niem phong (%s) - xuat truoc la de tester nhin doan "
                        "niem phong" % (ma, s["ten"], np_.get("trang_thai") or "chua mo"))
@@ -134,6 +134,11 @@ def _xuat_mq5(ten: str, khung: str, cac: list, **_) -> dict:
                        "can noi) - xuat phan VAO, ghi chu quan tri vao hang doi" % s["ten"])
         specs.append(s)
         ma_list.add(ma)
+        try:     # don bay niem phong da CHOT truoc khi mo - tester phai chay dung muc do
+            ck = (json.loads(np_.get("ket_qua") or "{}").get("tien") or {}).get("o_don_bay_cam_ket")
+        except Exception:
+            ck = None
+        don_bay["%s/%s" % (ma, s["ten"])] = ck
     if not specs:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": loi or ["khong co khai bao nao"]}
     nguon, dat = DM.sinh_ea(specs, ten=ten, khung=str(khung).upper())
@@ -145,10 +150,13 @@ def _xuat_mq5(ten: str, khung: str, cac: list, **_) -> dict:
         g.write(json.dumps({"luc": ST.bay_gio(), "ea": _tuong_doi(f), "khung": khung,
                             "ma": sorted(ma_list), "co_che": [s["ten"] for s in dat],
                             "quan_tri": [c.get("quan_tri") for c in cac],
+                            "don_bay_cam_ket": don_bay, "tran_dd_pct": TN.DD_TRAN * 100,
                             "trang_thai": "CHO_TESTER"}, ensure_ascii=False) + "\n")
     return {"trang_thai": "DAT", "ea": _tuong_doi(f), "so_co_che": len(dat),
-            "canh_bao": loi, "buoc_tiep": "may chu du an: chay tester (Model=4) cho hang doi "
-                                          "reports/nc_hang_doi_tester.jsonl"}
+            "canh_bao": loi, "don_bay_cam_ket": don_bay,
+            "buoc_tiep": "may chu du an: chay tester (Model=4) cho hang doi "
+                         "reports/nc_hang_doi_tester.jsonl, lot theo don_bay_cam_ket; DAT that "
+                         "= co lai va maxDD < %.0f%% trong tester" % (TN.DD_TRAN * 100)}
 
 
 def _yeu_cau_seeker(chu_de: str, tu_khoa: list, vi_sao: str = "", **_) -> dict:
@@ -192,15 +200,17 @@ CONG_CU: list[dict] = [
         vong_id=None, **_: TN.tim_quy_luat(ma, khung, chan_troi, so_null, dac_trung, gt_id, vong_id)),
     _cc("thu_co_che",
         "Chay MOT he (khai bao DSL + luat quan tri tuy chon) tren doan KHAM PHA voi chi phi that. "
-        "Tra ve lenh (so lenh, ti le thang, ky vong bps, t), TIEN o cung sut giam 20% so voi "
-        "moc max(mua-giu, ban-giu, tien mat), theo nam. Chay y het lan nua thi tra ket qua cu.",
+        "DAT = CO LAI sau moi phi (tieu chi chu du an: co lai + maxDD < 80%, phuong phap nao "
+        "cung duoc). Tra ve lenh (so lenh, ti le thang, rr, ky vong bps, t), TIEN (CAGR tot nhat "
+        "voi maxDD < 80% va don bay do), nhan_canh_bao (hon moc, kieu martingale, duoi lo - "
+        "khong chan), theo nam. Chay y het lan nua thi tra ket qua cu.",
         {"ma": _MA, "khung": _KHUNG, "spec": _SPEC, "quan_tri": _QT, "gt_id": _GT},
         ["ma", "khung", "spec"],
         lambda ma, khung, spec, quan_tri=None, gt_id=None, vong_id=None, **_:
         TN.danh_gia(ma, khung, spec, quan_tri, "kham_pha", gt_id, vong_id)),
     _cc("quet_tham_so",
         "Quet luoi tham so cua mot he tren kham pha va doc HINH DANG: CAO_NGUYEN (nhieu o lan "
-        "can cung tot - dang tin) hay CAI_GAI (mot o dep le loi - cuc dai ngau nhien). `luoi` = "
+        "can cung CO LAI - dang tin) hay CAI_GAI (mot o dep le loi - cuc dai ngau nhien). `luoi` = "
         "{duong_dan_tham_so: [gia tri]} (duong dan nhu vao0_phai_hang, vao0_trai_n, giu; them "
         "tien to qt. cho luat quan tri, vd qt.sl_atr). Bo trong -> luoi tu dong. Moi o la mot "
         "phep thu - quet co chu dich, khong quet cho co.",
@@ -225,9 +235,10 @@ CONG_CU: list[dict] = [
         "He LUOI khong can tin hieu vao (nhan/luoi.py - engine cua ket qua AUDCAD +13,26%/nam "
         "holdout voi TIA LENH). tham_so: buoc, tp, tran_tang, che_do (mua|ban|hai_chieu), lot, "
         "cho_lui, kieu_lot (phang|cong|nhan), he_so_lot, tia_lenh, bien_cap, cap_moi_bar, "
-        "chot_tien, dung_lo_tong, he_so_buoc, buoc_tran. Tra tien o cung DD 20% va LO TREO o "
-        "muc lot do (diem margin call). Chi AUDCAD (phi qua dem dang ghim) + TONG_HOP. Dung "
-        "khung M15/M5: luoi song bang duong di trong bar.",
+        "chot_tien, dung_lo_tong, he_so_buoc, buoc_tran. Martingale/DCA hop le (chu du an). "
+        "DAT = co lai sau phi, khong chay tai khoan o lot dang thu. Tra he so lot cham tran "
+        "maxDD 80% (tinh CHINH XAC tren duong equity) va LO TREO o lot do. Chi AUDCAD (phi qua "
+        "dem dang ghim) + TONG_HOP. Dung khung M15/M5: luoi song bang duong di trong bar.",
         {"ma": _MA, "khung": _KHUNG, "tham_so": {"type": "object"},
          "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
          "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
@@ -244,8 +255,9 @@ CONG_CU: list[dict] = [
         TN.danh_gia(ma, khung, spec, quan_tri, "xac_nhan", gt_id, vong_id)),
     _cc("niem_phong",
         "PHEP THU CUOI: mo doan NIEM PHONG (20% cuoi) cho MOT khai bao da dong bang. Moi khai "
-        "bao chi mo mot lan; moi dong gia thuyet toi da 3 lan. Chan: thang moc o cung sut giam "
-        "va ky vong duong, chi phi do duoc. Nhan: so phep thu, Sharpe giam phat, cong that. "
+        "bao chi mo mot lan; moi dong gia thuyet toi da 3 lan. Chan: CO LAI sau phi, chi phi do "
+        "duoc, >= 20 lenh, va maxDD < 80% o DON BAY CAM KET (chot tren kham pha + xac nhan truoc "
+        "khi mo). Nhan: hon moc, tang 2, duoi lo, so phep thu, Sharpe giam phat, cong that. "
         "Chi goi khi he da qua xac_nhan va ban san sang chap nhan ket qua.",
         {"ma": _MA, "khung": _KHUNG, "spec": _SPEC, "quan_tri": _QT, "gt_id": _GT},
         ["ma", "khung", "spec", "gt_id"],
@@ -253,8 +265,8 @@ CONG_CU: list[dict] = [
         TN.niem_phong(ma, khung, spec, quan_tri, gt_id, vong_id)),
     _cc("ghep_danh_muc",
         "Ghep 2-8 he (co the khac ma/khung) cung rui ro, do tuong quan ngay va TIEN cua ca ro "
-        "o cung sut giam 20%. Goi khi da co vai chan song rieng le - chan am nhung nguoc pha "
-        "cung co the lam ro tot len.",
+        "(CAGR tot nhat voi maxDD < 80%). Goi khi da co vai chan song rieng le - chan am nhung "
+        "nguoc pha cung co the lam ro tot len.",
         {"chan": {"type": "array", "items": {"type": "object"},
                   "description": "[{ma, khung, spec, quan_tri?}]"},
          "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]}}, ["chan"],

@@ -315,7 +315,7 @@ def tom_tat(so_dong: int = 12) -> dict:
                "ORDER BY do_tin DESC, id DESC LIMIT ?", so_dong)
     ch = nhieu("SELECT id, cau, vi_sao, uu_tien, nguon FROM cau_hoi WHERE trang_thai IN ('MO','DANG') "
                "ORDER BY (nguon='nguoi') DESC, uu_tien DESC, id ASC LIMIT ?", so_dong)
-    # Thi nghiem tot nhat theo 'hon_moc' tren kham_pha / xac_nhan
+    # Thi nghiem tot nhat theo TIEN duoi tran DD chu du an (tren kham_pha / xac_nhan)
     tot = []
     for r in nhieu("SELECT id, gt_id, loai, ma, khung, doan, tom_tat, ket_qua FROM thi_nghiem "
                    "WHERE loai IN ('thu_co_che','xac_nhan') AND trang_thai='DAT' "
@@ -324,14 +324,17 @@ def tom_tat(so_dong: int = 12) -> dict:
             kq = json.loads(r["ket_qua"] or "{}")
         except Exception:
             kq = {}
-        hm = (kq.get("tien") or {}).get("hon_moc_pct")
-        if hm is None:
+        tn_ = kq.get("tien") or {}
+        cg = tn_.get("cagr_duoi_tran_pct")
+        if cg is None:
             continue
         tot.append({"tn": r["id"], "gt": r["gt_id"], "loai": r["loai"], "ma": r["ma"],
-                    "khung": r["khung"], "doan": r["doan"], "hon_moc_pct": hm,
+                    "khung": r["khung"], "doan": r["doan"], "cagr_duoi_tran_pct": cg,
+                    "don_bay": tn_.get("don_bay"), "dd_pct": tn_.get("dd_pct"),
+                    "hon_moc_pct": tn_.get("hon_moc_pct"),
                     "so_lenh": (kq.get("lenh") or {}).get("so_lenh"),
                     "tom_tat": r["tom_tat"]})
-    tot.sort(key=lambda z: -(z["hon_moc_pct"] or -1e9))
+    tot.sort(key=lambda z: -(z["cagr_duoi_tran_pct"] or -1e9))
     gan = nhieu("SELECT id, loai, ma, khung, doan, trang_thai, tom_tat FROM thi_nghiem "
                 "ORDER BY id DESC LIMIT ?", so_dong)
     theo_ma = nhieu("SELECT ma, khung, COUNT(*) so_tn, COALESCE(SUM(so_phep_thu),0) phep_thu, "
@@ -371,9 +374,10 @@ def tom_tat_md(so_dong: int = 12) -> str:
               for g in t["gia_thuyet_dang_mo"]]
         L.append("")
     if t["thi_nghiem_tot_nhat"]:
-        L += ["## Thi nghiem tot nhat (hon moc o cung sut giam 20%)"]
-        L += ["- tn %d gt %s %s %s/%s [%s]: hon moc %+.2f%%/nam, %s lenh — %s"
-              % (x["tn"], x["gt"], x["loai"], x["ma"], x["khung"], x["doan"], x["hon_moc_pct"],
+        L += ["## Thi nghiem tot nhat (co lai, tien tot nhat voi maxDD < 80%)"]
+        L += ["- tn %d gt %s %s %s/%s [%s]: %+.2f%%/nam @x%s DD %s%% (hon moc %s), %s lenh — %s"
+              % (x["tn"], x["gt"], x["loai"], x["ma"], x["khung"], x["doan"],
+                 x["cagr_duoi_tran_pct"], x.get("don_bay"), x.get("dd_pct"), x.get("hon_moc_pct"),
                  x["so_lenh"], x["tom_tat"] or "") for x in t["thi_nghiem_tot_nhat"]]
         L.append("")
     if t["hieu_biet"]:

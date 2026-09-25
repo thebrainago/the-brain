@@ -47,6 +47,10 @@ biet:
     XU_HUONG   BAY CHI PHI: quan tinh ngan co that (tu tuong quan +0,07) nhung
                nho hon chi phi khu hoi. Dap an dung: KHONG co he ra tien - he
                nao "tim ra" o day la dang quen tru phi.
+    BETA       KHONG edge, chi TROI +6%/nam nhu mot chi so. Tu tieu chi chu du an
+               25/09 ("chi can co lai va maxdd duoi 80%") moi he nghieng MUA deu
+               "co lai" - cong KHONG chan duoc, chi NHAN "khong hon moc" canh.
+               Chuoi nay do xem nhan do co bat du khong.
 
 Chuoi tong hop KHONG BAO GIO la ket qua giao dich: `la_tong_hop()` chan chung
 khoi xuat MQL5 va khoi moi bao cao "he ra tien".
@@ -84,10 +88,14 @@ KICH_BAN = {
     "XU_HUONG": "BAY CHI PHI: loi suat tu tuong quan duong bac 1 (he so 0,07) - quan tinh "
                 "THAT nhung sau mot cu soc chi con ~3 bps, xap xi chi phi khu hoi. Dap an "
                 "dung: ho so thay quan tinh, nhung KHONG co he nao ra tien sau phi",
+    "BETA": "KHONG edge, chi troi +6%/nam nhu chi so: he nghieng mua 'co lai' nho beta. Dap an "
+            "dung: khong luat nao qua null; he DAT (tieu chi chu du an) phai mang nhan KHONG hon moc",
 }
 #: Kich ban nao co edge GIAO DICH DUOC sau chi phi - dap an cua `nc_tu_lai.hieu_chuan`.
 CO_EDGE_SAU_PHI = {"NHIEU": False, "HOI_QUY": True, "HOI_QUY_YEU": True, "LOC": True,
-                   "XU_HUONG": False}
+                   "XU_HUONG": False, "BETA": False}
+#: Troi nam (log) cua kich ban BETA - co y de Sharpe mua-giu ~0,67, gan chi so My dai han.
+TROI_BETA_NAM = 0.06
 BAR_MOI_NGAY = {"H1": 24, "H4": 6, "D1": 1}
 BAR_MOI_NAM = {"H1": 24 * 260, "H4": 6 * 260, "D1": 260}
 
@@ -280,6 +288,8 @@ def tong_hop(kich_ban: str = "NHIEU", hat: int = 1, so_bar: int = 9000,
                 mu -= k * s * do_manh
         elif kich_ban == "XU_HUONG":
             mu += 0.07 * do_manh * r_truoc
+        elif kich_ban == "BETA":
+            mu += TROI_BETA_NAM / BAR_MOI_NAM[khung]
         buoc = rng.standard_normal(m) * (s / np.sqrt(m)) + mu / m
         duong = p + np.cumsum(buoc)
         o[t] = p

@@ -57,7 +57,19 @@ la mot doi thu yeu han** so voi khi so theo bien dong.
 
 Do chinh la khe cua so mo ra khi chap nhan DD cao. No that, va no do duoc.
 
-## Sau tieu chi, khai bao TRUOC
+## 25/09/2026: CHU DU AN CHOT TIEU CHI DUYET - so voi mua-giu xuong NHAN
+
+Nguyen van: *"toi khong quan tam martingale hay dca hay la phuong phap gi. Toi
+trade don bay toi chap nhan rui ro, chi can co lai va maxdd duoi 80% la ok"*.
+
+Nen: `1_lai` = CAGR > 0 (`MUC_CAGR` = 0; 20%/nam con la muc TIEU cua
+`cham_diem`, khong phai nguong duyet), `2_sut_giam` = maxDD DUOI `TRAN_DD` =
+`cham_diem.TRAN_SUT_GIAM` (80%). Tieu chi 3 KHONG bi xoa: van tinh va tra trong
+`nhan` voi ten `3_hon_mua_giu_cung_DD`, chi khong con chan. Canh bao ben duoi
+van dung - bo chan thi "beta co don bay" qua duoc cong nay - nen bang nao doc
+ket qua cong nay PHAI hien nhan do (`bang_he` hien "KHONG hon mua-giu").
+
+## Sau tieu chi, khai bao TRUOC (ban 05/09 - xem muc 25/09 o tren)
 
   1. `lai`        CAGR >= `MUC_CAGR` sau chi phi that, o don bay duoc chon.
   2. `sut_giam`   maxDD <= `TRAN_DD`. Nguong nay la KHAI BAO CUA CHU DU AN,
@@ -81,14 +93,16 @@ import numpy as np
 import pandas as pd
 
 from nhan import bien_don_bay as B
+from nhan import cham_diem as CD
 from nhan import chi_phi as CP
 from nhan import mo_phong as MP
 
-#: Muc tieu chu du an dat 04/09: >= 20%/nam.
-MUC_CAGR = 0.20
-#: Nguong sut giam chu du an khai la chiu duoc. Noi ra tu 60% (04/09) khi chu
-#: du an doi quan diem 05/09 - nhung phai la MOT CON SO, khong duoc la "cao".
-TRAN_DD = 0.70
+#: Nguong DUYET lai: 25/09 chu du an chot "chi can co lai" -> CAGR > 0. (Muc tieu
+#: 20%/nam dat 04/09 van la `cham_diem.MUC_LAI` - muc tieu, khong phai cong.)
+MUC_CAGR = 0.0
+#: Tran sut giam chu du an khai la chiu duoc: 60% (04/09) -> 70% (05/09) -> 80%
+#: (25/09). Doc tu MOT nguon `cham_diem.TRAN_SUT_GIAM`, khong go lai o day.
+TRAN_DD = CD.TRAN_SUT_GIAM / 100.0
 #: Duoi muc nay thi khong phai he thong, la mua-giu doi ten.
 MIN_LENH = 20
 #: Duoi muc nay thi khong ket luan duoc gi ve lop chiu lo treo.
@@ -208,7 +222,7 @@ def xet(df: pd.DataFrame, vi_the, cp, ma: str = "", khung: str = "D1",
         hang.append(c)
 
     dat = [h for h in hang
-           if h["cagr"] >= muc_cagr and abs(h["maxdd"]) <= tran_dd
+           if h["cagr"] > 0 and h["cagr"] >= muc_cagr and abs(h["maxdd"]) < tran_dd
            and not h["chay"]]
     chon = min(dat, key=lambda h: h["don_bay"]) if dat else \
         max(hang, key=lambda h: h["cagr"])
@@ -217,17 +231,19 @@ def xet(df: pd.DataFrame, vi_the, cp, ma: str = "", khung: str = "D1",
           else mua_giu_khop_dd(df, cp, chon["maxdd"], ma=ma, khung=khung))
 
     dk = {
-        "1_lai": chon["cagr"] >= muc_cagr,
-        "2_sut_giam": abs(chon["maxdd"]) <= tran_dd,
-        "3_hon_mua_giu_cung_DD": chon["cagr"] > bh["cagr"],
+        "1_lai": chon["cagr"] > 0 and chon["cagr"] >= muc_cagr,
+        "2_sut_giam": abs(chon["maxdd"]) < tran_dd,
         "4_du_lenh": chon["so_lenh"] >= min_lenh,
         "5_khong_chay": not chon["chay"],
         "6_song_du": so_nam >= min_nam,
     }
+    # 25/09: NHAN, khong chan (xem docstring dau file).
+    nhan = {"3_hon_mua_giu_cung_DD": chon["cagr"] > bh["cagr"]}
     truot = [k for k, v in dk.items() if not v]
     return {
         "verdict": "RA_TIEN" if not truot else "KHONG",
         "truot": truot,
+        "nhan": nhan,
         "he": {k: chon.get(k) for k in
                ("don_bay", "cagr", "maxdd", "calmar", "sharpe", "so_lenh",
                 "phoi_nhiem", "chay")},

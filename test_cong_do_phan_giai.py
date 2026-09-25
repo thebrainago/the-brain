@@ -98,7 +98,10 @@ class CheDoNghienCuu(unittest.TestCase):
         import numpy as np
         import pandas as pd
         idx = pd.date_range("2020-01-01", periods=200, freq="D")
-        kq = SimpleNamespace(so_lenh=200, loi=np.zeros(200), index=idx,
+        # loi DUONG nho chu khong phai 0 (sua 25/09/2026, nhu test_cong_fdr_v2): tu TANG 2
+        # KINH TE (18/09) mot "he" loi 0 co rr thuc te = 0 -> truot dieu kien 12 -> fixture
+        # "di het cong" khong con di het cong.
+        kq = SimpleNamespace(so_lenh=200, loi=np.full(200, 1e-4), index=idx,
                              vi_the=np.ones(200))
         so_sanh = {
             "he": {"tong_lai_pct": 50.0, "sharpe": 2.0, "calmar": 2.0,

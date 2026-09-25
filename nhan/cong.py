@@ -79,26 +79,38 @@ MAC_DINH = {
 #:    nhieu tieu chi hoc thuat hay cac chi tieu chat che. Muc dich cuoi cung la
 #:    co tien chap nhan ca chi phi va rui ro cao"
 #:
-#: Ranh gioi khong tuy tien: cai gi noi ve TIEN va ve TINH DUNG cua con so thi
-#: van chan (thang moc, phi do duoc, du lenh, khong an khe gia dao ngay). Cai gi
-#: chi noi "chua du bang chung theo chuan hoc thuat" thi ha xuong nhan.
+#: va 25/09/2026 (THE HE CONG 6), nguyen van:
+#:
+#:   "toi khong quan tam martingale hay dca hay la phuong phap gi. Toi trade don
+#:    bay toi chap nhan rui ro, chi can co lai va maxdd duoi 80% la ok"
+#:
+#: Ranh gioi khong tuy tien: cai gi noi ve TIEN THEO TIEU CHI CHU DU AN (co lai sau
+#: phi, sut giam duoi tran) va ve TINH DUNG cua con so (phi do duoc, du lenh, khong
+#: an khe gia dao ngay) thi van chan. Cai gi noi "chua du bang chung theo chuan hoc
+#: thuat", "chua hon mua-giu" hay "kieu martingale/DCA" thi ha xuong nhan - van TINH
+#: va van GHI trong moi phan quyet, chi khong chan.
 NHAN_MEM = {
+    "1_loi_hon_mua_giu": "KHONG hon mua-giu o cung rui ro - giu tai san (co don bay) "
+                         "ra tien hon: day la beta, chua phai he",
+    "2_sharpe_hon_mua_giu": "Sharpe khong hon mua-giu",
+    "3_calmar_hon_mua_giu": "Calmar khong hon mua-giu",
     "4_alpha_duong_co_y_nghia": "alpha khong dat muc y nghia thong ke",
     "5_placebo": "placebo yeu - co the la ngau nhien",
     "6_dang_ky_truoc": "khong dang ky truoc - rui ro tu lua minh khi quet rong",
     "9_siet_phoi_nhiem_cao": "phoi nhiem cao ma chua chung minh duoc bu rui ro",
     "10_qua_fdr_online": "khong qua nguong FDR online",
+    "12_rr_thuc_te": "RR thuc te thap - kieu martingale/DCA: lai nho nhieu lan, lo lon "
+                     "it lan (rui ro duoi, chu du an chap nhan)",
+    "13_edge_vuot_spread": "lai rong chua toi 3x phi spread - edge mong, nhay voi phi that",
 }
 #: Cai VAN CHAN. Liet ke tuong minh de them mot dieu kien moi khong tu dong roi
 #: vao ben nao ma khong ai quyet dinh.
-CHAN_CUNG = ("1_loi_hon_mua_giu", "2_sharpe_hon_mua_giu", "3_calmar_hon_mua_giu",
-             "7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay",
-             # TANG 2 KINH TE (18/09) - noi ve TIEN nen CHAN. Them 25/09/2026: commit
-             # 18/09 them hai dieu kien vao `dk` ma quen xep loai, nen o che do "nhan"
-             # (mac dinh, config/nguong.json) MOI lan `xet()` nem KeyError "dieu kien
-             # chua phan loai" - cong chinh thuc gay tu 18/09. test_cong_fdr_v2 bat
-             # duoc (3 test do) nhung chua ai sua.
-             "12_rr_thuc_te", "13_edge_vuot_spread")
+#:
+#: Lich su: 18/09 them 12/13 vao `dk` ma quen xep loai -> o che do "nhan" MOI lan
+#: `xet()` nem KeyError (cong gay tu 18/09). Sang 25/09 xep tam vao CHAN_CUNG; chu du
+#: an bac cung ngay ("khong quan tam martingale hay dca") -> xuong NHAN_MEM.
+CHAN_CUNG = ("7_chi_phi_do_duoc", "8_du_lenh", "11_khong_an_khe_dao_ngay",
+             "14_co_lai_sau_phi", "15_sut_giam_duoi_tran")
 
 
 def che_do_cong() -> str:
@@ -350,7 +362,11 @@ def ky_hien_tai() -> str:
 #              thu thu 4, nen `max(p_alpha, p_placebo)` khoa cung cong lai
 #              vinh vien. 346 phan quyet FAIL cua the he 3 sinh ra tu loi nay
 #              va KHONG duoc dung lam bang chung "khong co edge".
-THE_HE_CONG = 5
+#   6 (25/09): LUAT QUYET DINH theo chu du an ("chi can co lai va maxdd duoi 80%"):
+#              chan cung = co lai sau phi (14) + maxDD duoi `cham_diem.TRAN_SUT_GIAM`
+#              (15) + ba dieu kien do dac (7, 8, 11). Hon mua-giu (1-3) va tang 2
+#              kinh te (12-13) xuong NHAN. `verdict_chan` van tinh ban chat nhat.
+THE_HE_CONG = 6
 
 
 def san_p_placebo(n_bootstrap: int | None = None) -> float:
@@ -768,7 +784,31 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
             ly_do.append(f"mo hinh chi phi do_tin={cp.do_tin} (chua do tu du lieu/san)")
     dk["8_du_lenh"] = (kq_he.so_lenh or 0) >= n["so_lenh_toi_thieu"]
 
-    # ---- TANG 2 KINH TE: chan martingale tra hinh -------------------------
+    # ---- TIEU CHI CHU DU AN (25/09): co lai sau phi + maxDD duoi tran --------
+    # `kq_he.loi` la loi suat RONG (da tru spread, truot gia, phi qua dem), nen
+    # `tong_lai_pct` > 0 chinh la "co lai" sau chi phi. Tran sut giam doc tu MOT
+    # nguon (`cham_diem.TRAN_SUT_GIAM`) de moi cong noi cung mot con so.
+    from nhan import cham_diem as _CD
+    _tran = float(_CD.TRAN_SUT_GIAM)
+    _lai_tong = he.get("tong_lai_pct")
+    dk["14_co_lai_sau_phi"] = bool(_lai_tong is not None and _lai_tong > 0)
+    if not dk["14_co_lai_sau_phi"]:
+        ly_do.append("khong co lai sau phi (tong lai %s%%)" % _lai_tong)
+    _dd = he.get("max_dd_pct")
+    if _dd is None:
+        # so_sanh thieu so (chuoi qua ngan, hoac bo test dua vao ban rut gon) ->
+        # do thang tren chuoi loi, khong doan.
+        try:
+            _v = np.exp(np.cumsum(np.nan_to_num(np.asarray(kq_he.loi, float))))
+            _dd = float((_v / np.maximum.accumulate(_v) - 1.0).min() * 100.0)
+        except Exception:
+            _dd = None
+    dk["15_sut_giam_duoi_tran"] = bool(_dd is not None and abs(_dd) < _tran)
+    if not dk["15_sut_giam_duoi_tran"]:
+        ly_do.append("sut giam %s%% khong duoi tran %.0f%% cua chu du an" % (
+            None if _dd is None else round(_dd, 2), _tran))
+
+    # ---- TANG 2 KINH TE (18/09) - tu 25/09 chi la NHAN -----------------------
     try:
         _rr = rr_thuc_te(kq_he.vi_the, kq_he.loi)
     except Exception:
@@ -776,7 +816,7 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
     dk["12_rr_thuc_te"] = _rr >= n["rr_thuc_te_toi_thieu"]
     if not dk["12_rr_thuc_te"]:
         ly_do.append("rr thuc te %.3f < %.2f - lai TB mot lenh thang qua nho so "
-                     "voi lo TB mot lenh thua (dang martingale tra hinh)"
+                     "voi lo TB mot lenh thua (kieu martingale/DCA)"
                      % (_rr, n["rr_thuc_te_toi_thieu"]))
 
     try:

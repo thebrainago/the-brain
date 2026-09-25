@@ -51,10 +51,12 @@ def test_chay_lai_y_het_tra_ket_qua_cu_va_khong_tinh_them_phep_thu():
     assert ST.mot("SELECT COUNT(*) n FROM thi_nghiem")["n"] == 1
 
 
-def test_quan_tri_chay_qua_dap_quan_tri_va_tien_quy_ve_dd20():
+def test_quan_tri_chay_qua_dap_quan_tri_va_tien_duoi_tran_dd80():
     r = TN.danh_gia(MA, "H4", SPEC, quan_tri={"sl_atr": 1.5, "tp_atr": 1.0, "thoat_bar": 3})
     assert r["trang_thai"] in ("DAT", "AM")
-    assert r["tien"]["cagr_dd20_pct"] is not None and r["tien"]["moc_dd20_pct"] is not None
+    t = r["tien"]
+    assert t["cagr_duoi_tran_pct"] is not None and t["moc_duoi_tran_pct"] is not None
+    assert t["tran_dd_pct"] == 80.0 and t["dd_pct"] < 80.0
     assert r["quan_tri"] == {"sl_atr": 1.5, "tp_atr": 1.0, "thoat_bar": 3}
 
 
