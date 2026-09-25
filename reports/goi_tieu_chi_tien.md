@@ -70,7 +70,11 @@ KeyError, sau commit 6d032d1 chet vi FAIL. Nay tang 2 la nhan va fixture dung lo
   xac nhan) · **0 sai · 0 bao dong gia**; hoc tu lenh 4/4; bao dong gia `tim_quy_luat` 6,7% / 13,3%;
   cong suat do tim rong 3/8 vs co chu dich 8/8 - GIONG HET truoc khi doi cong (bo tim quy luat co null
   rieng, chan nhieu truoc khi cong kip thay).
-- **Cong ba doan voi y tuong ngau nhien** - muc 3.
+- **Cong ba doan qua DUONG CONG CU THAT** (so tay, van tay, niem phong mot lan; `b nc kiem 30` muc 5,
+  `reports/NC_HIEU_CHUAN.md`): edge that **40/40 DAT**; y tuong ngau nhien tren NHIEU 1/200 (H4) + 3/200
+  (D1), ca 4 mang nhan; tren BETA 10/200 (H4) + 35/200 (D1), nhan BETA-hoac-moc bat 5 + 22. Nhan ban
+  NHAM tren edge that: BETA 0/40, KHONG hon moc 1/40. So D1 khop KHIT phep so doc lap o muc 3 (3/200 va
+  35/200) - hai duong do khac nhau ra cung mot so.
 
 ## 3. So truoc / sau - CUNG y tuong, CUNG du lieu
 
@@ -99,7 +103,7 @@ Doc:
 ## 4. Rui ro con lai
 
 1. **Cong moi khong loc may man va khong loc beta** - dung tieu chi chu du an, va so o muc 3 la cai
-   gia. Nhan BETA + KHONG hon moc bat 4/6 (D1) va 2/2 (H4) trong lan do thu 3 hat x 10 cai lot tren chuoi BETA; phan con lai la canh thoi
+   gia. Nhan BETA + KHONG hon moc bat 27/45 (H4 5/10, D1 22/35) cai lot tren chuoi BETA; phan con lai la canh thoi
    diem MAY MAN tren doan niem phong (t ~ 2,3) - chi so phep thu cua dong gia thuyet va Sharpe giam
    phat canh duoc. AI thu N y tuong thi ky vong ~N x 1% DAT gia tren tai san khong troi.
 2. **DD lich su khong phai DD tuong lai.** Don bay cham tran 80% trong mau nghia la mot doan xau hon

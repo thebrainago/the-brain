@@ -160,7 +160,8 @@ cao. Khong cho ho giao viec; tu chon viec co gia tri nhat va lam.
     * KHONG hon moc (mua-giu/ban-giu co don bay cung tran DD ra tien hon) hoac `beta.ty_le_beta` >= 0,5
       (phan lon lai gop = phoi nhiem TB x troi tai san): he dung, nhung chi la BETA - noi ro cho chu du
       an, va uu tien he hon moc khi chon huong dao sau. Do 25/09 (`b nc kiem 30` muc 5): tren chuoi troi
-      nhu chi so, ~20% y tuong NGAU NHIEN lot ca ba doan theo tieu chi nay - cong khong loc beta, BAN loc.
+      nhu chi so, 5-17,5% y tuong NGAU NHIEN lot ca ba doan (nhan bat ~60%); tren nhieu 0,5-1,5% - cong
+      khong loc beta va may man, BAN loc: doc nhan + so phep thu cua dong gia thuyet.
     * rr thuc te < 0,2 / lai rong < 3x phi spread (kieu martingale / edge mong so voi phi).
     * `duoi_lo`: he lai nho nhieu lan lo lon it lan chi lo gia that khi gap du lenh thua. Neu so lenh
       chua toi `so_lenh_can_de_thay_duoi` thi lai CHUA kiem voi duoi - chay tren doan/ma/khung dai hon

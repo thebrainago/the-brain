@@ -235,6 +235,27 @@ Sổ tay đếm phép thử để con số này luôn nhìn thấy được.)*
 
 ---
 
+### 5.4 Cổng theo tiêu chí chủ dự án (25/09) — đo hai chiều trên CÙNG ý tưởng
+
+Chủ dự án chốt: *"chỉ cần có lãi và maxdd dưới 80% là ok"*, mọi phương pháp. Đo cổng ba đoạn (khám
+phá → xác nhận → niêm phong, chỉ đi tiếp cái ĐẠT) với 200 ý tưởng NGẪU NHIÊN trên mỗi chuỗi không edge
+và 10 giả thuyết có chủ đích trên mỗi chuỗi có edge; số là ĐẠT niêm phong:
+
+| khung | chuỗi | cổng cũ (hơn mốc DD 20% + tầng 2) | cổng mới |
+|---|---|---:|---:|
+| H4 | nhiễu | 0/200 | 1/200 |
+| H4 | BETA (trôi +6%/năm như chỉ số) | 0/200 | 10/200 |
+| H4 | edge thật mạnh / yếu | 7/10 · **0/10** | 10/10 · 10/10 |
+| D1 | nhiễu | 0/200 | 3/200 |
+| D1 | BETA | 0/200 | 35/200 |
+| D1 | edge thật mạnh / yếu | 10/10 · 8/10 | 10/10 · 10/10 |
+
+Cổng cũ giết 15/40 edge THẬT (cả 10/10 edge yếu có lãi sau phí trên H4 — tầng 2 đòi lãi ≥ 3× spread).
+Cổng mới bắt 40/40, đổi lại để lọt may mắn (~1% trên nhiễu) và beta (5–17,5% trên chuỗi trôi). Hai loại
+đó là việc của NHÃN: tách beta (`tach_beta`) + không hơn mốc bắt 27/45 ca beta, bắn nhầm 0–1/40 trên
+edge thật; phần còn lại là canh thời điểm may mắn — chỉ số phép thử của dòng giả thuyết và Sharpe giảm
+phát cảnh được. Chi tiết: `reports/goi_tieu_chi_tien.md`.
+
 ## 6. Vận hành
 
 ```
