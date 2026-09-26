@@ -66,6 +66,14 @@ KeyError, sau commit 6d032d1 chet vi FAIL. Nay tang 2 la nhan va fixture dung lo
   + `test_bang_he_g1` + `test_cham_tien` + `test_khop_rui_ro` + `test_cong_fdr_v2` + `test_cong_tang2`:
   **110 qua**. `test_cong_do_phan_giai` + `test_phoi_nhiem_holdout` voi `nao.db` tam da khoi tao: **21/21
   qua** (truoc thay doi: 9 do).
+- **Toan bo bo test, truoc vs sau, cung may** (commit 7a19fca trong worktree vs nhanh nay, bo
+  `test_gop_lop.py` vi can du lieu that): truoc **88 do / 2117 qua**, sau **82 do / 2139 qua** (+16 test
+  moi). **8 test HET do** (6 `test_phoi_nhiem_holdout` + 2 `test_cong_do_phan_giai`), **0 test do moi
+  vi code**. Hai ten "do moi" trong lan chay chung deu da kiem rieng: `test_nc_tac_tu::test_hien_chuong_
+  on_dinh...` do chinh file hien chuong bi sua GIUA lan chay (reload thay ban moi) - chay rieng qua;
+  `test_ghi_an_toan::test_muoi_tien_trinh...` (10 tien trinh ghi mot file) chay rieng do 3/3 ca tren
+  CODE CU - chap chon theo tai may, khong phai thay doi nay. 82 do con lai = moi truong cloud (thieu du
+  lieu that, `nao.db`, tesseract, Python 3.11 vs 3.14, PID 1 song tren Linux) va do y het o ban cu.
 - **Hieu chuan day chuyen** (`b nc kiem 30`, tieu chi moi): 6 dung · 1 chua ket luan (LOC, it lenh o
   xac nhan) · **0 sai · 0 bao dong gia**; hoc tu lenh 4/4; bao dong gia `tim_quy_luat` 6,7% / 13,3%;
   cong suat do tim rong 3/8 vs co chu dich 8/8 - GIONG HET truoc khi doi cong (bo tim quy luat co null
