@@ -1000,6 +1000,7 @@ def c_nc(a: list) -> int:
         b nc claude [--vong N] [--nhan "..."]  chu ky Claude Code headless (`claude -p`)
         b nc tu-lai MA [KHUNG]    chuong trinh co dinh KHONG LLM (duong nen / khi het token)
         b nc kiem [SO_HAT]        hieu chuan HAI chieu tren chuoi co dap an
+        b nc bot [SO_HAT]         dau truong BOT TU HOC (RL kieu quang cao) vs loi cu
         b nc hien-chuong          in hien chuong (loi nhac he thong cua nha nghien cuu)
     """
     lenh = (a[0] if a else "so-tay").lower()
@@ -1040,6 +1041,8 @@ def c_nc(a: list) -> int:
         return chay([PY, "-m", "nhan.nc_tu_lai", *con])
     if lenh == "kiem":
         return chay([PY, "-m", "nhan.nc_tu_lai", "kiem", *con])
+    if lenh == "bot":
+        return chay([PY, "-m", "nhan.nc_bot_hoc", *con])
     print(c_nc.__doc__)
     return 2
 

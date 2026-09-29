@@ -88,6 +88,29 @@ con số đi qua engine + chi phí thật + cổng tiền; đoạn niêm phong m
 Và chính bộ công cụ mới đã phải qua hiệu chuẩn hai chiều trước khi được tin (mục 5) — nó đã bắt
 được một lỗi làm báo động giả gấp 2,7 lần.
 
+### 3.1 Đo thật một con "bot tự học" kiểu quảng cáo (29/09/2026, `b nc bot 5`)
+
+Chủ dự án gửi quảng cáo FatBoy Studio: log huấn luyện Q-learning/RL (Step 98.4xx, Buy/Sell/Hold,
+TP/SL/TIMEOUT, Reward, **Avg(1000) ≈ +7,9**), chú thích *"Bot đang học. Dòng đỏ là lúc nó sai … Thi
+trên dữ liệu 2026 niêm phong mới là câu trả lời"* — câu trả lời đó không có trong quảng cáo.
+`nhan/nc_bot_hoc.py` dựng đúng kiểu bot đó (A) và một bản cẩn thận (B: mạng nhỏ, phạt trọng số, dừng
+sớm), cho thi trên 25 chuỗi biết trước đáp án, cùng giao thức ba đoạn:
+
+| chuỗi (5 hạt) | bot A | bot B | lối cũ, không biết trước |
+|---|---:|---:|---:|
+| nhiễu · BETA (không edge) | 0 · 0 | 0 · 0 | 0 · 0 |
+| edge mạnh | **0/5** | **0/5** | **5/5** |
+| edge yếu | 0/5 | 0/5 | 1/5 (giả thuyết có chủ đích 10/10) |
+| LOC (edge theo chế độ biến động) | 1/5 | 5/5 | 3/5; `mo_xe_lenh` tìm đúng bộ lọc 5/5 |
+| Avg(1000) lúc học trên **nhiễu thuần** | +21…+28 bps | +10…+16 bps | – |
+
+Con số quảng cáo khoe mọc ra cả trên chuỗi không có gì — nó đo việc bot **nhớ** dữ liệu đã thấy.
+Bot không lừa được giao thức ba đoạn, nhưng rất ít khi tìm ra edge: 1/15 và 5/15, so với 9/15 của lối
+cũ. Vai trò hợp lý của ML: **máy gợi ý** điều kiện cho `mo_xe_lenh` / `thu_co_che` (bot B tìm ra LOC
+mà quét 1–2 điều kiện diễn đạt vụng) — không phải con đường chính. Học tăng cường cho **quản lí lệnh**
+(quyết định nối tiếp — ưu tiên của chủ dự án) là chỗ duy nhất RL có lợi thế cấu trúc; muốn thử thì
+phải thắng lối cũ ở đấu trường này trước.
+
 ---
 
 ## 4. Thiết kế mới: đảo quyền điều khiển
