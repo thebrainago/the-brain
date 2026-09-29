@@ -67,6 +67,17 @@ nghien cuu, khong den tu pheu; (b) tren chuoi co dap an, do tim rong ~3.000 dieu
 kien thay edge yeu **3/8**, mot gia thuyet co chu dich thay **8/8** (`b nc kiem 30`).
 Hoc tu lenh dung/sai = `mo_xe_lenh`. Het token: `b nc tu-lai MA KHUNG` (khong LLM).
 
+## TRAM + THO — cloud / may nha / model re (chot 29/09/2026)
+
+Phien cloud KHONG voi toi may nha; may nha tu KEO viec qua GitHub. Phan viec:
+- **cloud (Claude)**: nghien cuu, viet ma, GIAO viec (`b tram giao nc tu-lai AUDCAD H4`), doc ket qua
+  (`b tram doc`), quyet XAC NHAN / NIEM PHONG.
+- **tram (may nha, [GHI])**: `b tram chay` moi 5 phut (Task Scheduler) - chi chay lenh trong DANH SACH
+  TRANG (`nhan/tram.py`), day `tram/ket_qua/<id>.json` len nhanh hop thu. Cai: `b tram cai URL NHANH`.
+- **tho (model re - DeepSeek qua cc-switch)**: `b nc tho` KHAM PHA tren doan kham_pha, ghi so tay
+  nguon 'tho'. KHONG xac_nhan / niem_phong / xuat_mq5. Tram con dung model re nen ket qua cho Claude.
+- Dung khan: file `TRAM_DUNG` trong lab (tai may) hoac `tram/DUNG` tren nhanh hop thu (tu xa).
+
 ## VAN HANH (chot 12/09/2026)
 - Duyet san moi de xuat, **lam lien tuc khong cho duyet**.
 - `q ultracode` - ngan sach thoai mai: CPU 95% (10 nhan / 20 luong), lan CPU 6 ·

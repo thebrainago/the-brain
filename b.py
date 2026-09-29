@@ -987,6 +987,18 @@ def c_pmg(a: list) -> int:
 
 
 
+def c_tram(a: list) -> int:
+    """`b tram ...` - TRAM MAY NHA: keo viec tu GitHub, chay lenh trang, day ket qua (nhan/tram.py).
+
+        b tram cai URL NHANH      (may nha) tao hop thu + in lenh Task Scheduler
+        b tram chay               (may nha) mot luot keo -> chay -> day
+        b tram giao LENH...       (cloud) giao viec, vd: b tram giao nc tu-lai AUDCAD H4
+        b tram doc [ID]           (cloud) doc ket qua
+        b tram kiem LENH...       kiem danh sach trang
+    """
+    return chay([PY, "-m", "nhan.tram", *a])
+
+
 def c_nc(a: list) -> int:
     """`b nc ...` - NHA NGHIEN CUU: AI nam quyen nghien cuu, The Brain la bo cong cu.
 
@@ -1001,6 +1013,7 @@ def c_nc(a: list) -> int:
         b nc tu-lai MA [KHUNG]    chuong trinh co dinh KHONG LLM (duong nen / khi het token)
         b nc kiem [SO_HAT]        hieu chuan HAI chieu tren chuoi co dap an
         b nc bot [SO_HAT]         dau truong BOT TU HOC (RL kieu quang cao) vs loi cu
+        b nc tho [--vong N]       THO model re (DeepSeek) kham pha, ghi so tay cho Claude
         b nc hien-chuong          in hien chuong (loi nhac he thong cua nha nghien cuu)
     """
     lenh = (a[0] if a else "so-tay").lower()
@@ -1043,6 +1056,8 @@ def c_nc(a: list) -> int:
         return chay([PY, "-m", "nhan.nc_tu_lai", "kiem", *con])
     if lenh == "bot":
         return chay([PY, "-m", "nhan.nc_bot_hoc", *con])
+    if lenh == "tho":
+        return chay([PY, "-m", "nhan.nc_tho", *con])
     print(c_nc.__doc__)
     return 2
 
@@ -1124,6 +1139,7 @@ LENH = {
     "uu-tien": c_uu_tien, "ut": c_uu_tien, "video": c_video,
     # --- 25/09/2026: NHA NGHIEN CUU - AI nam quyen, The Brain la bo cong cu ---
     "nc": c_nc, "nha-nghien-cuu": c_nc,
+    "tram": c_tram,
 }
 
 
