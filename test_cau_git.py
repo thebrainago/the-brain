@@ -391,7 +391,7 @@ class ChamDon(unittest.TestCase):
                   cong="chay_duoc", goc=self.goc)
         d = CG.don_dang_cho(goc=self.goc)[0]
         d["cong"] = {"kieu": "chay_duoc"}
-        r = CG.chay_don(d, goc=self.goc)
+        r = CG.chay_don(d, goc=self.goc, kiem_trang=False)
         self.assertEqual(r["trang_thai"], "DAT", r)
         self.assertIn("xin chao", "\n".join(r["bang_chung"]["dong_cuoi"]))
         self.assertEqual(CG.doc_ket_qua("ok", goc=self.goc)["trang_thai"], "DAT")
@@ -401,14 +401,14 @@ class ChamDon(unittest.TestCase):
                   cong="chay_duoc", goc=self.goc)
         d = CG.don_dang_cho(goc=self.goc)[0]
         d["cong"] = {"kieu": "chay_duoc"}
-        r = CG.chay_don(d, goc=self.goc)
+        r = CG.chay_don(d, goc=self.goc, kiem_trang=False)
         self.assertEqual(r["trang_thai"], "CHUA_DO_DUOC", r)
         self.assertTrue((self.goc / "viec" / "xong" / "hong.json").exists(),
                         "loi khong duoc ghi xuong dia - cloud se khong bao gio biet")
 
     def test_don_KHONG_CO_LENH_la_CHUA_DO_DUOC_chu_khong_im(self):
         CG.ra_don("rong", "khong lam gi", goc=self.goc)
-        r = CG.chay_don(CG.don_dang_cho(goc=self.goc)[0], goc=self.goc)
+        r = CG.chay_don(CG.don_dang_cho(goc=self.goc)[0], goc=self.goc, kiem_trang=False)
         self.assertEqual(r["trang_thai"], "CHUA_DO_DUOC", r)
 
     def test_khoa_TESTER_chan_don_thu_hai(self):
@@ -419,13 +419,13 @@ class ChamDon(unittest.TestCase):
         CG.ra_don("t2", "tester", lenh=["python3", "-c", "pass"], lan="TESTER",
                   uu_tien=2, cong="chay_duoc", goc=self.goc)
         self.assertTrue(CG._lay_khoa(self.goc / "viec"))
-        r = CG.chay_don(CG.don_dang_cho(goc=self.goc)[0], goc=self.goc)
+        r = CG.chay_don(CG.don_dang_cho(goc=self.goc)[0], goc=self.goc, kiem_trang=False)
         self.assertTrue(r.get("hoan"), r)
         self.assertEqual(r["trang_thai"], "CHUA_DO_DUOC", r)
         # va `chay_mot_don_dang_cho` phai NHAY QUA chu khong dung ca hang doi
         CG.ra_don("nhe", "viec nhe", lenh=["python3", "-c", "pass"], lan="NHE",
                   uu_tien=9, cong="chay_duoc", goc=self.goc)
-        r2 = CG.chay_mot_don_dang_cho(goc=self.goc)
+        r2 = CG.chay_mot_don_dang_cho(goc=self.goc, kiem_trang=False)
         self.assertEqual(r2["ma"], "nhe",
                          "don TESTER dang ban lai chan ca cac don NHE phia sau")
 
@@ -443,7 +443,7 @@ class ChamDon(unittest.TestCase):
         CG.ra_don("t", "x", lenh=["python3", "-c", "pass"], lan="TESTER",
                   cong="chay_duoc", goc=self.goc)
         d = CG.don_dang_cho(goc=self.goc)[0]; d["cong"] = {"kieu": "chay_duoc"}
-        CG.chay_don(d, goc=self.goc)
+        CG.chay_don(d, goc=self.goc, kiem_trang=False)
         self.assertFalse((self.goc / "viec" / ".khoa_tester").exists(),
                          "khoa khong duoc tra lai - lan TESTER ket tu vong sau")
 
@@ -529,7 +529,7 @@ class TheTrongLenh(unittest.TestCase):
         CG.ra_don("t", "x", lenh=["{py}", "-c", "print('ok')"],
                   cong="chay_duoc", goc=self.goc)
         d = CG.don_dang_cho(goc=self.goc)[0]; d["cong"] = {"kieu": "chay_duoc"}
-        r = CG.chay_don(d, goc=self.goc)
+        r = CG.chay_don(d, goc=self.goc, kiem_trang=False)
         self.assertEqual(r["trang_thai"], "DAT", r)
         self.assertIn("ok", "\n".join(r["bang_chung"]["dong_cuoi"]))
 

@@ -94,7 +94,7 @@ def _post(d: dict, than: dict, timeout: int = 180) -> dict:
 
 
 def goi_re(nhac: str, max_tokens: int = 800) -> str:
-    """Mot loi goi KHONG cong cu (tom tat, nen log). Dung o tram."""
+    """Mot loi goi KHONG cong cu (tom tat, nen log). Dung o cau noi: `qwen/cau_git.py` tom tat ket qua don."""
     d = duong()
     r = _post(d, {"model": d["mo_hinh"], "max_tokens": max_tokens, "temperature": 0.1,
                   "messages": [{"role": "user", "content": nhac}]})

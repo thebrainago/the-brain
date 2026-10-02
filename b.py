@@ -782,12 +782,25 @@ def c_cau(a):
         b cau don <ma> "<muc tieu>" [--lan CPU] [--uu-tien 3]
         b cau xong <ma>    doc ket qua mot don (ba trang thai)
 
+    MOT KENH cho nhieu may (02/10/2026 - gop `b tram` vao day; xem qwen/cau_may.py):
+        b cau giao [--id X --lan CPU --han-phut N --vi-sao ".." --may T --can a,b] -- <lenh b ...>
+                           (cloud) ra don tu mot lenh b trong DANH SACH TRANG roi day len git
+        b cau lay          (cloud) keo ket qua + nhip tim cac may ve, in bang
+        b cau may          bang cac may (nhip tim)   · b cau dung | tiep   (cloud) dung khan tu xa
+        b cau cai URL NHANH [--ten T] [--kha-nang a,b] [--session ID] [--bao-cloud]   (may) hop thu rieng
+        b cau chay [--lien-tuc]   (may) mot luot keo -> nhan viec -> chay -> day; lich 5 phut/lan
+        b cau xem MA | duyet MA VAN_TAY   (may) duyet MOT don ngoai danh sach trang
+
     Ben CLOUD ra don roi `git push`; may chay `q` tu keo ve. Ben MAY ghi ket
     qua roi day len; cloud `git pull` la doc duoc.
     """
     from qwen import cau_git as CG
     CG.bao_dam_thu_muc()
     viec = (a[0] if a else "").lower()
+
+    if viec in ("cai", "chay", "may", "giao", "lay", "dung", "tiep", "xem", "duyet"):
+        from qwen import cau_may as CM
+        return CM.main(a)
 
     if viec == "don":
         if len(a) < 3:
@@ -1234,18 +1247,6 @@ def c_khoi_phuc(a: list) -> int:
     return chay([PY, "-m", "nhan.khoi_phuc", *a])
 
 
-def c_tram(a: list) -> int:
-    """`b tram ...` - TRAM MAY NHA: keo viec tu GitHub, chay lenh trang, day ket qua (nhan/tram.py).
-
-        b tram cai URL NHANH      (may nha) tao hop thu + in lenh Task Scheduler
-        b tram chay               (may nha) mot luot keo -> chay -> day
-        b tram giao LENH...       (cloud) giao viec, vd: b tram giao nc tu-lai AUDCAD H4
-        b tram doc [ID]           (cloud) doc ket qua
-        b tram kiem LENH...       kiem danh sach trang
-    """
-    return chay([PY, "-m", "nhan.tram", *a])
-
-
 def c_nc(a: list) -> int:
     """`b nc ...` - NHA NGHIEN CUU: AI nam quyen nghien cuu, The Brain la bo cong cu.
 
@@ -1389,7 +1390,6 @@ LENH = {
     "uu-tien": c_uu_tien, "ut": c_uu_tien, "video": c_video,
     # --- 25/09/2026: NHA NGHIEN CUU - AI nam quyen, The Brain la bo cong cu ---
     "nc": c_nc, "nha-nghien-cuu": c_nc,
-    "tram": c_tram,
     "khoi-phuc": c_khoi_phuc, "kp": c_khoi_phuc,
 }
 

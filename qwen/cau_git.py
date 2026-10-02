@@ -54,9 +54,50 @@ import subprocess
 import time
 from pathlib import Path
 
+from . import cau_trang as CT
+
 GOC = Path(__file__).resolve().parent.parent
-VIEC = GOC / "viec"
+CAU_HINH = GOC / "config" / "cau.json"
+
+
+def cau_hinh() -> dict:
+    """Cau hinh MAY-CUC-BO (`config/cau.json`, bi gitignore - cloud khong ghi duoc).
+
+    Moi truong ghi de duoc: `CAU_HOP_THU`, `CAU_NHANH`. Khong co file thi tra mac dinh: che do CU cua `q`
+    (`viec/` nam ngay trong lab, dong bo tren chinh cay lam viec).
+    """
+    c = {"ten": socket.gethostname(), "hop_thu": "", "nhanh": "",
+         "kha_nang": [platform.system().lower()], "session_cloud": "", "bao_cloud": False,
+         "nhip_bao_phut": 30, "tom_tat_re": False}
+    try:
+        d = json.loads(CAU_HINH.read_text(encoding="utf-8-sig"))
+        if isinstance(d, dict):
+            c.update(d)
+    except (OSError, ValueError):
+        pass
+    c["hop_thu"] = os.environ.get("CAU_HOP_THU", c["hop_thu"])
+    c["nhanh"] = os.environ.get("CAU_NHANH", c["nhanh"])
+    return c
+
+
+def _hop_thu_rieng() -> Path | None:
+    h = cau_hinh().get("hop_thu")
+    p = Path(h) if h else None
+    return p if p and (p / ".git").exists() else None
+
+
+#: HOP THU RIENG (ban clone chi de dong bo `viec/`), neu da `b cau cai`. Vi sao rieng: lab la noi chu du an dang
+#: lam viec - cay do dang thi cau KHONG keo duoc (luat an toan 2), tuc may nghi ca ngay chu du an dang code.
+HOP_THU = _hop_thu_rieng()
+#: Noi dat `viec/`: hop thu rieng neu co, khong thi chinh lab. Lenh van chay o LAB (du lieu, config, MT5 o do).
+MAILBOX = HOP_THU or GOC
+VIEC = MAILBOX / "viec"
 CHO, DANG, XONG, HOI = VIEC / "cho", VIEC / "dang", VIEC / "xong", VIEC / "hoi"
+MAY = VIEC / "may"
+#: Thu muc ma phien CLOUD duoc `git add` khi ra don (ben cloud - xem `day_don`).
+CLOUD_DAY = ("viec/cho", "viec/DUNG")
+#: Thoi gian cho giua cac lan thu lai push o hop thu rieng (giay). Test dat ve 0.
+NGU_GIAY = (2, 4, 8)
 
 #: Ba trang thai cua ca du an. Khong co cai thu tu.
 TRANG_THAI = ("DAT", "AM", "CHUA_DO_DUOC")
@@ -67,7 +108,7 @@ TRANG_THAI = ("DAT", "AM", "CHUA_DO_DUOC")
 #: cam phien [DOC] sua `config/*.json`, va may chay `q` dung la mot phien nhu
 #: vay doi voi ma nguon. `data/` va `nao.db` da bi gitignore san nhung van
 #: khong liet ke o day - hai lop chan tot hon mot.
-DUOC_DAY = ("viec/xong", "viec/hoi", "viec/dang", "reports")
+DUOC_DAY = ("viec/xong", "viec/hoi", "viec/dang", "viec/may", "reports")
 
 #: Vong `q` goi `dong_bo()` moi nhip. Keo/day that thi ton mang, nen chi lam
 #: khi da qua ngan nay giay ke tu lan truoc.
@@ -101,7 +142,7 @@ def _git(*doi, goc: Path | None = None, han: float = 120.0,
     mot duong dan LECH - va `dong_bo` se ket luan sai ve viec file nao dang do
     dang, tuc quyet dinh sai giua "keo duoc" va "khong duoc keo".
     """
-    r = subprocess.run(["git", *doi], cwd=str(goc or GOC), capture_output=True,
+    r = subprocess.run(["git", *doi], cwd=str(goc or MAILBOX), capture_output=True,
                        text=True, timeout=han,
                        # Git co the treo cho nhap mat khau tren may khong ai
                        # ngoi. Mot vong `q` treo vi thi la kieu chet im lang
@@ -143,30 +184,41 @@ def co_viec_chua_commit(goc: Path | None = None) -> list[str]:
 
 
 # ------------------------------------------------------------------ dong bo
-def _keo(nhanh: str, goc: Path | None = None) -> dict:
-    """`fetch` + `merge --ff-only`. KHONG rebase, KHONG merge thuong.
+def _keo(nhanh: str, goc: Path | None = None, rieng: bool = False) -> dict:
+    """`fetch` + `merge --ff-only`. KHONG merge thuong.
 
     `--ff-only` la lua chon co y: no THAT BAI thay vi tao mot merge commit tu
     dong tren may chu du an. Mot merge tu dong luc 3 gio sang, khong ai nhin,
     tren mot cay dang co viec do dang - do la cach nhanh nhat de mat viec ma
     khong ai biet. That bai o day chi ton mot vong `q`.
+
+    `rieng=True` (HOP THU RIENG - chi cau dung, khong co viec nguoi): neu ff-only that bai vi hai ben cung
+    di them commit (cloud ra don moi trong luc may vua day ket qua), dat commit cua may len tren dau remote
+    bang `rebase`. An toan vi commit cua may chi cham `DUOC_DAY`; xung dot thi HUY rebase, khong de do dang.
     """
     ma, _, loi = _git("fetch", "origin", nhanh, goc=goc, han=180.0)
     if ma != 0:
         raise LoiCau("fetch hong: %s" % (loi or "khong ro")[:200])
     ma, ra, loi = _git("merge", "--ff-only", "FETCH_HEAD", goc=goc)
-    if ma != 0:
-        raise LoiCau("khong ff-only duoc (nhanh da re) - can nguoi xu li: %s"
-                     % (loi or ra)[:200])
-    return {"da_keo": True}
+    if ma == 0:
+        return {"da_keo": True}
+    if rieng:
+        ma2, ra2, loi2 = _git("rebase", "FETCH_HEAD", goc=goc, han=180.0)
+        if ma2 == 0:
+            return {"da_keo": True, "rebase": True}
+        _git("rebase", "--abort", goc=goc)
+        raise LoiCau("rebase hop thu hong (da huy): %s" % (loi2 or ra2)[:200])
+    raise LoiCau("khong ff-only duoc (nhanh da re) - can nguoi xu li: %s"
+                 % (loi or ra)[:200])
 
 
-def _day(nhanh: str, loi_nhan: str, goc: Path | None = None) -> dict:
+def _day(nhanh: str, loi_nhan: str, goc: Path | None = None, rieng: bool = False) -> dict:
     """Commit CHI cac duong trong `DUOC_DAY` roi push. Khong co gi thi khong
-    tao commit rong."""
+    tao commit rong. `rieng=True`: push bi tu choi (remote di truoc) thi keo-rebase roi thu lai toi 4 lan."""
+    g = goc or MAILBOX
     co = []
     for d in DUOC_DAY:
-        if (goc or GOC).joinpath(d).exists():
+        if g.joinpath(d).exists():
             ma, _, _ = _git("add", "--", d, goc=goc)
             if ma == 0:
                 co.append(d)
@@ -174,23 +226,43 @@ def _day(nhanh: str, loi_nhan: str, goc: Path | None = None) -> dict:
         return {"da_day": False, "ly_do": "khong thu muc nao de day"}
     ma, ra, _ = _git("diff", "--cached", "--name-only", goc=goc)
     if ma != 0 or not ra.strip():
+        # Khong co gi moi de commit - nhung hop thu RIENG co the con commit CU chua push duoc (push hong o vong
+        # truoc, vd mat mang). Comment ben duoi hua "vong sau se day lai"; phai thuc su day, khong doi co thay doi moi.
+        # Chi lam o hop thu rieng: o che do in-place, commit chua push co the la cua CHU DU AN.
+        if rieng:
+            ma2, dem, _ = _git("rev-list", "--count", "origin/%s..HEAD" % nhanh, goc=goc)
+            if ma2 == 0 and dem.strip().isdigit() and int(dem) > 0:
+                so_file = int(dem)
+                return _day_push(nhanh, goc, so_file)
         return {"da_day": False, "ly_do": "khong co thay doi"}
     so_file = len(ra.splitlines())
     ma, _, loi = _git("commit", "-m", loi_nhan, goc=goc)
     if ma != 0:
         raise LoiCau("commit hong: %s" % (loi or "khong ro")[:200])
-    ma, _, loi = _git("push", "origin", "HEAD:%s" % nhanh, goc=goc, han=180.0)
-    if ma != 0:
-        # Commit da tao roi nhung push hong (mat mang / remote di truoc). KHONG
-        # duoc go commit ra: no la ket qua that cua may. Vong sau se keo roi
-        # day lai.
-        raise LoiCau("push hong (commit da giu lai o local): %s"
-                     % (loi or "khong ro")[:200])
-    return {"da_day": True, "so_file": so_file}
+    return _day_push(nhanh, goc, so_file, rieng)
+
+
+def _day_push(nhanh: str, goc: Path | None, so_file: int, rieng: bool = True) -> dict:
+    for lan in range(4 if rieng else 1):
+        ma, _, loi = _git("push", "origin", "HEAD:%s" % nhanh, goc=goc, han=180.0)
+        if ma == 0:
+            return {"da_day": True, "so_file": so_file}
+        if not rieng or lan == 3:
+            break
+        time.sleep(NGU_GIAY[min(lan, len(NGU_GIAY) - 1)])
+        try:
+            _keo(nhanh, goc, rieng=True)
+        except LoiCau:
+            break
+    # Commit da tao roi nhung push hong (mat mang / remote di truoc). KHONG
+    # duoc go commit ra: no la ket qua that cua may. Vong sau se keo roi
+    # day lai.
+    raise LoiCau("push hong (commit da giu lai o local): %s"
+                 % (loi or "khong ro")[:200])
 
 
 def dong_bo(nhanh: str | None = None, ep: bool = False,
-            goc: Path | None = None) -> dict:
+            goc: Path | None = None, rieng: bool | None = None) -> dict:
     """MOT nhip dong bo: keo don ve, day ket qua len.
 
     Tra ve mot dict LUON co truong `trang_thai` trong `TRANG_THAI`. Hong thi
@@ -198,7 +270,9 @@ def dong_bo(nhanh: str | None = None, ep: bool = False,
     mang khong duoc phep giet mot dot chay nhieu ngay.
     """
     global _LAN_CUOI
-    g = goc or GOC
+    g = goc or MAILBOX
+    if rieng is None:
+        rieng = HOP_THU is not None and g == HOP_THU
     if not ep and (time.time() - _LAN_CUOI) < NHIP_GIAY:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "chua toi nhip",
                 "bo_qua": True}
@@ -215,8 +289,8 @@ def dong_bo(nhanh: str | None = None, ep: bool = False,
         keo = {"da_keo": False, "ly_do": "co viec nguoi chua commit: %s"
                                          % ", ".join(nguoi[:5])}
         if not nguoi:
-            keo = _keo(nh, g)
-        day = _day(nh, "may: ket qua %s" % time.strftime("%Y-%m-%d %H:%M"), g)
+            keo = _keo(nh, g, rieng=rieng)
+        day = _day(nh, "may: ket qua %s" % time.strftime("%Y-%m-%d %H:%M"), g, rieng=rieng)
         return {"trang_thai": "DAT", "nhanh": nh, "keo": keo, "day": day,
                 "viec_nguoi_do_dang": nguoi}
     except LoiCau as e:
@@ -228,7 +302,7 @@ def dong_bo(nhanh: str | None = None, ep: bool = False,
 
 # ------------------------------------------------------------------ don hang
 def bao_dam_thu_muc(goc: Path | None = None) -> None:
-    for d in (CHO, DANG, XONG, HOI):
+    for d in (CHO, DANG, XONG, HOI, MAY):
         p = (goc / "viec" / d.name) if goc else d
         p.mkdir(parents=True, exist_ok=True)
         # Git khong theo doi thu muc rong. Thieu cai nay thi mot clone moi
@@ -246,7 +320,22 @@ def _doc_json(p: Path) -> dict | None:
         return None
 
 
-def don_dang_cho(goc: Path | None = None) -> list[dict]:
+def _may_khac_dang_lam(thu: Path, d: dict, may: str | None) -> bool:
+    """Don nay co phieu nhan viec CON SONG cua MAY KHAC (`viec/dang/<ma>.json`) khong. Phieu cu hon han + 1 gio
+    la may kia da chet -> cho phep nhan lai."""
+    if not may:
+        return False
+    p = _doc_json(thu / "dang" / ("%s.json" % d["ma"]))
+    if not p or p.get("may") == may:
+        return False
+    try:
+        tuoi = time.time() - time.mktime(time.strptime(str(p.get("luc")), "%Y-%m-%dT%H:%M:%S"))
+    except (ValueError, OverflowError):
+        return True                    # phieu hong -> than trong: coi nhu con song
+    return tuoi < float(d.get("han_phut") or 60.0) * 60.0 + 3600.0
+
+
+def don_dang_cho(goc: Path | None = None, may: str | None = None) -> list[dict]:
     """Don CHUA co ket qua, xep theo `uu_tien` roi theo ten file.
 
     Bo qua don da co `viec/xong/<ma>.json`: dong bo co the keo ve mot don cu
@@ -260,6 +349,8 @@ def don_dang_cho(goc: Path | None = None) -> list[dict]:
         if not d or not d.get("ma"):
             continue
         if (thu / "xong" / ("%s.json" % d["ma"])).exists():
+            continue
+        if _may_khac_dang_lam(thu, d, may):
             continue
         d["_duong"] = str(p)
         ra.append(d)
@@ -377,7 +468,7 @@ def ra_don(ma: str, muc_tieu: str, lenh: list[str] | None = None,
            lan: str = "NHE", uu_tien: int = 5, han_phut: float = 60.0,
            file_test: str = "", duoc_sua: list[str] | None = None,
            ghi_chu: str = "", cong: dict | str | None = None,
-           goc: Path | None = None) -> Path:
+           goc: Path | None = None, them: dict | None = None) -> Path:
     """BEN CLOUD ra mot don hang. Ghi ra `viec/cho/<ma>.json`.
 
     Khong tu `git push` - viec do de cho nguoi goi gop nhieu don vao mot
@@ -410,6 +501,10 @@ def ra_don(ma: str, muc_tieu: str, lenh: list[str] | None = None,
                              "khong duoc sua de lam xanh")
     if ghi_chu:
         d["ghi_chu"] = ghi_chu
+    # `may`: chi may co ten nay chay · `can`: kha nang may phai co (vd ["windows", "mt5"]) · `vi_sao`: ghi chu cho nguoi doc
+    for k in ("may", "can", "vi_sao"):
+        if them and them.get(k):
+            d[k] = them[k]
     # CONG LA BAT BUOC khi don co lenh.
     #
     # Do la loi toi tu mac ngay lo don dau tien (20/09/2026): ra sau don khong
@@ -451,6 +546,112 @@ def bang(goc: Path | None = None) -> str:
         d.append("   cho  %-22s [%s] %s"
                  % (x["ma"], x.get("lan", "?"), str(x.get("muc_tieu"))[:46]))
     return "\n".join(d)
+
+
+# ------------------------------------------------------------------ dung khan / nhan viec / ra don
+def dung_khan(hop: Path | None = None) -> str | None:
+    """Ly do DUNG neu co cong tac dung khan, khong thi None.
+
+    Tai may: file `CAU_DUNG` o goc lab (bi gitignore). Tu xa: file `viec/DUNG` tren nhanh (cloud tao bang
+    `b cau dung`, go bang `b cau tiep`). Hai cong tac, hai duong khac nhau: mot cai dung duoc ca khi mang chet,
+    cai kia dung duoc ca khi chu du an khong o canh may.
+    """
+    if (GOC / "CAU_DUNG").exists():
+        return "CAU_DUNG o %s" % GOC
+    if ((hop or MAILBOX) / "viec" / "DUNG").exists():
+        return "viec/DUNG tren nhanh"
+    return None
+
+
+def _hop_may(don: dict, may: str | None, kha_nang: list[str] | None) -> bool:
+    """Don co danh cho MAY nay khong: truong `may` (ten) va `can` (kha nang). Khong khai thi may nao cung lam duoc."""
+    ten = don.get("may")
+    if ten and may is not None and may not in ([ten] if isinstance(ten, str) else list(ten)):
+        return False
+    can = don.get("can")
+    if can and kha_nang is not None:
+        return set(can if isinstance(can, list) else [can]) <= set(kha_nang)
+    return True
+
+
+def nhan_viec(don: dict, may: str, nhanh: str, goc: Path | None = None) -> bool:
+    """Dat PHIEU NHAN VIEC `viec/dang/<ma>.json` roi PUSH: ai push duoc truoc la nguoi lam don do.
+
+    Hai may (nha + VPS) cung keo mot hang doi thi khong co ben thu ba phan xu - nhung git thi co: push thu hai
+    bi tu choi vi remote da di truoc. Thua thi bo don nay, lam don khac. Khong push duoc vi mat mang cung thoi
+    (commit nhan viec bi go, de khong con phieu treo)."""
+    g = goc or MAILBOX
+    ma = don["ma"]
+    p = g / "viec" / "dang" / ("%s.json" % ma)
+    cu = _doc_json(p)
+    if cu and cu.get("may") != may:
+        return False
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({"ma": ma, "may": may, "luc": time.strftime("%Y-%m-%dT%H:%M:%S")},
+                            ensure_ascii=False), encoding="utf-8")
+    _git("add", "--", "viec/dang/%s.json" % ma, goc=g)
+    ma_c, _, _ = _git("commit", "-m", "may %s nhan %s" % (may, ma), goc=g)
+    if ma_c != 0:
+        return False
+    for lan in range(3):
+        ok, _, _ = _git("push", "origin", "HEAD:%s" % nhanh, goc=g, han=120.0)
+        if ok == 0:
+            return True
+        time.sleep(NGU_GIAY[min(lan, len(NGU_GIAY) - 1)])
+        # remote di truoc: go phieu cua minh (dinh o dinh), keo lai, xem co ai nhan truoc khong
+        _git("reset", "--hard", "HEAD~1", goc=g)
+        try:
+            _keo(nhanh, g, rieng=True)
+        except LoiCau:
+            return False
+        nguoi = _doc_json(p)
+        if nguoi and nguoi.get("may") != may:
+            return False
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps({"ma": ma, "may": may, "luc": time.strftime("%Y-%m-%dT%H:%M:%S")},
+                                ensure_ascii=False), encoding="utf-8")
+        _git("add", "--", "viec/dang/%s.json" % ma, goc=g)
+        if _git("commit", "-m", "may %s nhan %s" % (may, ma), goc=g)[0] != 0:
+            return False
+    _git("reset", "--hard", "HEAD~1", goc=g)
+    return False
+
+
+def day_don(loi_nhan: str = "cloud: don moi", nhanh: str | None = None,
+            goc: Path | None = None) -> dict:
+    """BEN CLOUD: commit CHI `viec/cho` + `viec/DUNG` roi push; remote di truoc thi keo-rebase roi thu lai.
+
+    Cung ky luat voi `_day` ben may: khong bao gio `git add -A`, vi cay cua phien cloud con chua ma dang viet."""
+    g = goc or GOC
+    nh = nhanh or nhanh_hien_tai(g)
+    if not nh:
+        raise LoiCau("dang o trang thai HEAD roi - khong biet day di dau")
+    for d in CLOUD_DAY:
+        _git("add", "-A", "--", d, goc=g)
+    ma, ra, _ = _git("diff", "--cached", "--name-only", goc=g)
+    if ma != 0 or not ra.strip():
+        return {"da_day": False, "ly_do": "khong co don moi"}
+    so_file = len(ra.splitlines())
+    ma, _, loi = _git("-c", "user.name=Claude", "-c", "user.email=noreply@anthropic.com",
+                      "commit", "-m", loi_nhan, goc=g)
+    if ma != 0:
+        raise LoiCau("commit hong: %s" % (loi or "khong ro")[:200])
+    for lan in range(4):
+        ma, _, loi = _git("push", "origin", "HEAD:%s" % nh, goc=g, han=180.0)
+        if ma == 0:
+            return {"da_day": True, "so_file": so_file, "nhanh": nh}
+        time.sleep(NGU_GIAY[min(lan, len(NGU_GIAY) - 1)])
+        _keo(nh, g, rieng=True)
+    raise LoiCau("push hong (commit da giu lai o local): %s" % (loi or "khong ro")[:200])
+
+
+def lay_ket_qua(nhanh: str | None = None, goc: Path | None = None) -> dict:
+    """BEN CLOUD: keo ket qua may vua day ve (`fetch` + ff-only, khong ff duoc thi rebase commit local)."""
+    g = goc or GOC
+    nh = nhanh or nhanh_hien_tai(g)
+    if not nh:
+        raise LoiCau("dang o trang thai HEAD roi - khong biet keo tu dau")
+    return _keo(nh, g, rieng=True)
 
 
 # ------------------------------------------------------------------ chay don
@@ -520,7 +721,7 @@ def _cham(kieu: str, ma_thoat: int, qua_gio: bool) -> tuple[str, str]:
 
 
 def _thay_the(lenh) -> list[str] | None:
-    """Doi cac the trong lenh cua don thanh thu that cua MAY DANG CHAY.
+    r"""Doi cac the trong lenh cua don thanh thu that cua MAY DANG CHAY.
 
     ## VI SAO CAN: don duoc viet tren CLOUD (Linux), chay tren WINDOWS
 
@@ -543,19 +744,90 @@ def _thay_the(lenh) -> list[str] | None:
     return [bang.get(str(x), str(x)) for x in lenh]
 
 
-def chay_don(don: dict, goc: Path | None = None,
-             chay_that: bool = True) -> dict:
+HAN_TOI_DA_PHUT = 720.0          # 12 gio: mot don khai han_phut khong lo khong duoc phep chay mai
+TEP_TOI_DA, TONG_TEP_TOI_DA = 40_000, 300_000
+
+
+def phien_ban_ma(lab: Path | None = None) -> str:
+    """Ma nguon don duoc chay: commit ngan, them `+sua` neu cay co file theo doi dang do. Ket qua khong kem
+    phien ban la ket qua khong truy duoc - dac biet khi lab la noi chu du an dang sua."""
+    g = lab or GOC
+    try:
+        ma, h, _ = _git("rev-parse", "--short", "HEAD", goc=g)
+        if ma != 0 or not h:
+            return "khong phai git"
+        _, ban, _ = _git("status", "--porcelain", "--untracked-files=no", goc=g)
+        return h + ("+sua" if ban else "")
+    except Exception:                                   # noqa: BLE001
+        return "khong doc duoc"
+
+
+def tep_moi(tu_luc: float, lab: Path | None = None) -> dict:
+    """Noi dung cac bao cao NHO (md/json/jsonl/txt/csv) vua ra trong `reports/` cua lab ke tu `tu_luc`.
+
+    Hop thu rieng khong chua `reports/` cua lab, nen ket qua phai MANG THEO bao cao de cloud doc ngay,
+    khong phai hoi them mot vong. Co tran dung luong de mot don khong lam phinh repo."""
+    thu, ra, tong = (lab or GOC) / "reports", {}, 0
+    try:
+        ds = sorted(thu.rglob("*")) if thu.exists() else []
+    except OSError:
+        ds = []
+    for f in ds:
+        try:
+            if not (f.is_file() and f.suffix in (".md", ".json", ".jsonl", ".txt", ".csv")
+                    and f.stat().st_mtime >= tu_luc - 1) or tong >= TONG_TEP_TOI_DA:
+                continue
+            s_ = f.read_text(encoding="utf-8", errors="replace")[:TEP_TOI_DA]
+        except OSError:
+            continue
+        ra[str(f.relative_to(lab or GOC)).replace("\\", "/")] = s_
+        tong += len(s_)
+    return ra
+
+
+def _tom_tat_re(lenh: list, ma_thoat: int, dong_cuoi: list, tep: dict) -> str | None:
+    """Model GIA RE nen ket qua thanh vai dong cho Claude doc (tuy chon: `cau.json` -> tom_tat_re). Hong thi None."""
+    try:
+        from nhan import nc_tho as THO
+        than = json.dumps({"lenh": lenh, "ma_thoat": ma_thoat, "dong_cuoi": dong_cuoi}, ensure_ascii=False)[:24_000]
+        ds = "\n".join("## %s\n%s" % (k, v[:4000]) for k, v in tep.items())[:16_000]
+        return THO.goi_re(
+            "Tom tat ket qua mot lenh chay tren may nghien cuu giao dich, TOI DA 12 dong tieng Viet. "
+            "Chep NGUYEN VAN moi con so (lai %, DD, so lenh, trang thai DAT/AM/CHUA_DO_DUOC, loi). "
+            "Khong suy dien, khong khuyen nghi. Khong chac thi viet 'xem dong_cuoi'.\n\n" + than + "\n\n" + ds,
+            max_tokens=700)
+    except Exception:                                   # noqa: BLE001
+        return None
+
+
+def chay_don(don: dict, goc: Path | None = None, chay_that: bool = True,
+             kiem_trang: bool = True, lab: Path | None = None) -> dict:
     """BEN MAY chay MOT don roi ghi ket qua. Tra dict ket qua.
+
+    `goc` = noi dat `viec/` (hop thu) · `lab` = noi CHAY lenh (du lieu, config, MT5 o do). Mac dinh hai noi la mot.
+    `kiem_trang=True` (mac dinh): lenh phai qua danh sach trang (`cau_trang.py`) hoac da duoc chu du an duyet
+    tren may; khong thi KHONG chay, ghi `CHUA_DO_DUOC` + hoi cloud/chu du an.
 
     Khong nem: moi duong that bai deu thanh mot ket qua `CHUA_DO_DUOC` ghi
     xuong dia. Mot don lam `q` nem la mot don giet ca dot chay nhieu ngay.
     """
-    g = goc or GOC
-    thu = g / "viec"
+    hop = goc or MAILBOX
+    g = lab or goc or GOC
+    thu = hop / "viec"
     ma = don.get("ma") or "khong-ten"
     lan = str(don.get("lan") or "NHE").upper()
-    han = float(don.get("han_phut") or 60.0) * 60.0
+    han = min(float(don.get("han_phut") or 60.0), HAN_TOI_DA_PHUT) * 60.0
     kieu = str((don.get("cong") or {}).get("kieu") or "")
+
+    if kiem_trang and don.get("lenh"):
+        duoc, ly = CT.cho_phep(don.get("lenh"))
+        if not duoc:
+            return dict(ghi_va_doc(
+                ma, "CHUA_DO_DUOC", "ngoai danh sach trang - KHONG chay: %s" % ly,
+                can_cloud=True,
+                cau_hoi=("Don '%s' bi danh sach trang chan (%s). Mo rong danh sach trang trong ma "
+                         "(qwen/cau_trang.py), hay chu du an chay `b cau duyet %s` tren may." % (ma, ly[:160], ma)),
+                goc=hop))
 
     if lan == "TESTER" and not _lay_khoa(thu):
         return {"ma": ma, "trang_thai": "CHUA_DO_DUOC",
@@ -566,7 +838,7 @@ def chay_don(don: dict, goc: Path | None = None,
         if not lenh:
             return dict(ghi_va_doc(ma, "CHUA_DO_DUOC",
                                    "don khong co `lenh` nen khong chay duoc gi",
-                                   goc=g))
+                                   goc=hop))
         if not chay_that:
             return {"ma": ma, "trang_thai": "CHUA_DO_DUOC", "kho": True,
                     "ly_do": "chay KHO - khong thuc thi gi"}
@@ -574,44 +846,68 @@ def chay_don(don: dict, goc: Path | None = None,
         qua_gio = False
         try:
             r = subprocess.run([str(x) for x in lenh], cwd=str(g),
-                               capture_output=True, text=True, timeout=han)
+                               capture_output=True, text=True, encoding="utf-8", errors="replace",
+                               timeout=han, env={**os.environ, "PYTHONIOENCODING": "utf-8"})
             ma_thoat, ra, loi = r.returncode, r.stdout, r.stderr
         except subprocess.TimeoutExpired:
             ma_thoat, ra, loi, qua_gio = -9, "", "qua han %.0f phut" % (han / 60), True
         except OSError as e:
             ma_thoat, ra, loi = -1, "", "%s: %s" % (type(e).__name__, e)
         tt, ly_do = _cham(kieu, ma_thoat, qua_gio)
-        return dict(ghi_va_doc(
-            ma, tt, ly_do,
-            bang_chung={"ma_thoat": ma_thoat, "giay": round(time.time() - t0, 1),
-                        "lenh": [str(x) for x in lenh],
-                        # Giu DUOI chuoi: loi that gan nhu luon o cuoi, con
-                        # dau ra co the dai hang nghin dong.
-                        "dong_cuoi": (ra or "").splitlines()[-25:],
-                        "loi_cuoi": (loi or "").splitlines()[-15:]},
-            goc=g))
+        dong_cuoi = (ra or "").splitlines()[-25:]
+        bc = {"ma_thoat": ma_thoat, "giay": round(time.time() - t0, 1),
+              "lenh": [str(x) for x in lenh],
+              "phien_ban_ma": phien_ban_ma(g),
+              # Giu DUOI chuoi: loi that gan nhu luon o cuoi, con
+              # dau ra co the dai hang nghin dong.
+              "dong_cuoi": dong_cuoi,
+              "loi_cuoi": (loi or "").splitlines()[-15:]}
+        if hop != g:                                    # hop thu rieng: mang bao cao theo
+            bc["tep_moi"] = tep_moi(t0, g)
+            if cau_hinh().get("tom_tat_re") and don.get("lenh", [""])[1:] != CT.PING:
+                bc["tom_tat_re"] = _tom_tat_re(don.get("lenh"), ma_thoat, dong_cuoi, bc["tep_moi"])
+        return dict(ghi_va_doc(ma, tt, ly_do, bang_chung=bc, goc=hop))
     finally:
         if lan == "TESTER":
             (thu / ".khoa_tester").unlink(missing_ok=True)
 
 
-def ghi_va_doc(ma, trang_thai, ly_do="", bang_chung=None, goc=None) -> dict:
-    ghi_ket_qua(ma, trang_thai, ly_do, bang_chung=bang_chung, goc=goc)
+def ghi_va_doc(ma, trang_thai, ly_do="", bang_chung=None, goc=None, **them) -> dict:
+    ghi_ket_qua(ma, trang_thai, ly_do, bang_chung=bang_chung, goc=goc, **them)
     return doc_ket_qua(ma, goc=goc)
 
 
-def chay_mot_don_dang_cho(goc: Path | None = None) -> dict | None:
-    """Lay don uu tien cao nhat CHAY DUOC roi chay. `None` = khong co gi.
+def chay_mot_don_dang_cho(goc: Path | None = None, kiem_trang: bool = True,
+                          lab: Path | None = None, may: str | None = None,
+                          kha_nang: list[str] | None = None,
+                          nhanh_nhan: str | None = None) -> dict | None:
+    """Lay don uu tien cao nhat CHAY DUOC roi chay. `None` = khong co gi (hay dang DUNG KHAN).
 
     Bo qua don TESTER khi lan dang ban thay vi dung ca hang doi - neu khong
     mot don tester dai se chan het cac don NHE phia sau.
+
+    Hop thu rieng (da `b cau cai`): bo chay mang ten + kha nang cua may nay, bo qua don danh cho may khac, va
+    NHAN VIEC bang cach push phieu truoc khi chay (xem `nhan_viec`) - nho vay `q` va `b cau chay` va ca VPS
+    cung keo mot hang doi ma khong chay trung don.
     """
-    g = goc or GOC
-    for d in don_dang_cho(g):
-        if str(d.get("lan") or "NHE").upper() == "TESTER" \
-                and (g / "viec" / ".khoa_tester").exists():
+    hop = goc or MAILBOX
+    if dung_khan(hop):
+        return None
+    rieng = goc is None and HOP_THU is not None
+    if rieng and may is None:
+        c = cau_hinh()
+        may, kha_nang = c["ten"], c["kha_nang"]
+    lab_that = lab or (GOC if goc is None else goc)
+    nh_nhan = nhanh_nhan or (nhanh_hien_tai(hop) if rieng else None)
+    for d in don_dang_cho(hop, may=may):
+        if not _hop_may(d, may, kha_nang):
             continue
-        return chay_don(d, goc=g)
+        if str(d.get("lan") or "NHE").upper() == "TESTER" \
+                and (hop / "viec" / ".khoa_tester").exists():
+            continue
+        if nh_nhan and may and not nhan_viec(d, may, nh_nhan, goc=hop):
+            continue
+        return chay_don(d, goc=hop, kiem_trang=kiem_trang, lab=lab_that)
     return None
 
 
@@ -697,7 +993,7 @@ def tu_kiem(in_ra=print) -> dict:
             ra_don("tu-kiem", "thu", lenh=["{py}", "-c", "print('ok')"],
                    cong="chay_duoc", goc=g)
             cf = don_dang_cho(goc=g)[0]
-            kq = chay_don(cf, goc=g)
+            kq = chay_don(cf, goc=g, kiem_trang=False)      # don NOI BO cua phep tu kiem
             doc = doc_ket_qua("tu-kiem", goc=g)
             _ghi("ra don -> chay -> ghi -> doc lai",
                  kq.get("trang_thai") == "DAT" and doc.get("trang_thai") == "DAT",

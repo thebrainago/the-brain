@@ -66,9 +66,10 @@ __pycache__/
 # mau_thu/ PHAI len repo: bo mau .mq5 cho phien cloud do duoc
 !mau_thu/
 
-# tram may nha: duong dan rieng tung may (nhan/tram.py)
-config/tram.json
-TRAM_DUNG
+# cau noi hai may: cau hinh + ban duyet + cong tac dung khan la cua TUNG MAY (qwen/cau_may.py)
+config/cau.json
+config/cau_duyet.json
+CAU_DUNG
 
 # Cau noi hai may: khoa lan TESTER la trang thai CUA MAY, khong phai cua repo.
 # Day no len se lam may kia tuong lan dang ban vinh vien.

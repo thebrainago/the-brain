@@ -1,5 +1,14 @@
 # VẬN HÀNH HAI MÁY — máy anh tính, cloud nghĩ
 
+> **CẬP NHẬT 02/10/2026 — mục 6 "còn THIẾU" đã xây xong.** Cầu git chạy được và đã mở rộng: hộp thư *riêng*
+> cho máy (`b cau cai`), chạy một lượt cho Task Scheduler/cron (`b cau chay`), **nhiều máy không chạy trùng**
+> (phiếu nhận việc `viec/dang`), nhịp tim `viec/may`, **danh sách trắng lệnh** + duyệt tay (`qwen/cau_trang.py`),
+> dừng khẩn (`CAU_DUNG`, `viec/DUNG`), và máy **gọi ngược** phiên cloud bằng `claude -p --cloud` (giải quyết "cloud NGỦ
+> giữa các lượt" ở mục 1 mà không phải polling). Trạm `b tram` (29/09) đã gộp vào đây. Đọc
+> `tai_lieu/KHOI_PHUC_MAY_NHA.md` mục 6 cho bản hiện hành; file này giữ lại làm lý do thiết kế.
+> Mục 4 (MT5 trên Actions) vẫn chưa chạy lần nào.
+
+
 > Chốt 20/09/2026. Chủ dự án: *"máy tính tôi cho toàn bộ phần tính toán và cloud
 > của claude code phụ trách giám sát và suy nghĩ + gọi llm"*. Máy bật liên tục
 > **hơn 10 tiếng/ngày**.

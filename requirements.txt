@@ -31,3 +31,7 @@ langchain>=1.4
 langchain-openai>=1.6
 langgraph>=1.2
 psutil>=7.0
+
+# --- DEV: `b test` chay pytest -n 8 ---
+pytest
+pytest-xdist

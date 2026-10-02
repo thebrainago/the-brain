@@ -1,3 +1,6 @@
+> **DA THAY (02/10/2026):** `nhan/tram.py` / `b tram` da go - gop vao cau noi `b cau` (`qwen/cau_git.py` + `cau_may.py`),
+> cung mot hop thu `viec/` voi cau 20/09 cua nhanh `trading-system-optimization`. Phan `nc_tho` (thợ model rẻ) van con.
+
 # GOI VIEC: TRAM MAY NHA + THO MODEL RE (29/09/2026)
 
 Phien cloud [DOC], nhanh `claude/autonomous-trading-system-rzzt7h`. Chu du an duyet: "phan ro viec +
