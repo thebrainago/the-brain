@@ -255,6 +255,39 @@ class TestCaiHook:
             CTH.dat_session("--help")
 
 
+class TestCloudRebase:
+    """Cloud co commit cuc bo chua day + nha vua day thu chen truoc: gui / doc thu van phai chay (truoc day ff-only -> ket)."""
+
+    def _chen(self, h):
+        (h.cloud / "ma.txt").write_text("commit ma chua day cua cloud", encoding="utf-8")
+        git(h.cloud, "add", "-A")
+        git(h.cloud, "commit", "-q", "-m", "ma cloud chua day")
+        noi_nha(h, noi_dung="nha day truoc", chu_de="nha truoc")                    # origin di truoc cloud
+
+    def test_cloud_gui_duoc_khi_nha_vua_day_chen_truoc(self, hai_dau):
+        h = hai_dau
+        self._chen(h)
+        r = CTH.gui("cloud", "nha", "tra loi", goc=h.cloud, nhanh="main")           # rieng=None, tu=cloud -> rebase
+        assert r["day"]["da_day"] is True
+        log = git(h.bare, "log", "--format=%s", "main")
+        assert "ma cloud chua day" in log and "thu nha -> cloud: nha truoc" in log and "thu cloud -> nha" in log, log
+
+    def test_nha_in_place_van_chi_ff_only_khong_rebase_commit_cua_chu_du_an(self, hai_dau):
+        h = hai_dau
+        (h.nha / "ma.txt").write_text("commit ma chua day cua chu du an", encoding="utf-8")
+        git(h.nha, "add", "-A")
+        git(h.nha, "commit", "-q", "-m", "ma nha chua day")
+        CTH.gui("cloud", "nha", "cloud day truoc", goc=h.cloud, nhanh="main", rieng=True)
+        with pytest.raises(CG.LoiCau):
+            CTH.gui("nha", "cloud", "bao cao", goc=h.nha, nhanh="main")           # tu=nha: khong duoc tu y rebase cay cua nguoi
+
+    def test_cloud_doc_duoc_thu_khi_co_commit_cuc_bo_chua_day(self, hai_dau):
+        h = hai_dau
+        self._chen(h)
+        s = CTH.hook("cloud", goc=h.cloud)
+        assert "nha day truoc" in s, "ff-only that bai -> cloud khong thay thu cua nha"
+
+
 # ============================================================ CHI HUY + CAU CHI + GOP DANH THUC
 class TestChiHuyVaTietKiem:
     def _hen(self, h, phut_truoc, tu="nha", den="cloud"):

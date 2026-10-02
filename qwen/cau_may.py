@@ -428,7 +428,7 @@ def main(argv: list[str]) -> int:
                 if s:
                     print(s)
                 return 0
-            CTH.lay()
+            CTH.lay(rieng=True if ben == "cloud" else None)
             ds = CTH.doc_moi(ben, xem_tat_ca="--tat-ca" in con)
             for d in ds:
                 print(CTH.hien(d, 6000), end="\n\n")

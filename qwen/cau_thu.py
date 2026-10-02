@@ -135,6 +135,8 @@ def gui(tu: str, den: str, noi_dung: str, chu_de: str = "", tra_loi: str | None 
         rieng: bool | None = None, du_han_muc: bool = False) -> dict:
     """Ghi MOT thu va (mac dinh) day len git. Tra {id, file, day?}. Khong phai thu hop le thi nem ValueError.
 
+    Phien CLOUD (`tu == "cloud"`) gui thi duoc REBASE khi nha vua day chen truoc (cay cloud la cua rieng cloud; truoc day chi ff-only -> thu
+    nam lai local khi nha day ket qua cung luc). Cay lab cua nha (in-place) van chi ff-only.
     CAU CHI chong cai nhau: da gui `TOI_DA_THU_NUA_GIO` thu tu ben nay cho ben kia trong `CUA_SO_THU_PHUT` phut thi nem `QuaNhieuThu`
     (tru thu co chu de `XONG...` hoac `du_han_muc=True` - chi chu du an cho phep)."""
     if not BEN.match(str(tu)) or not BEN.match(str(den)):
@@ -169,7 +171,7 @@ def gui(tu: str, den: str, noi_dung: str, chu_de: str = "", tra_loi: str | None 
     if day:
         g = goc or CG.MAILBOX
         kq["day"] = _day_thu("thu %s -> %s: %s" % (tu, den, d["chu_de"] or i), nhanh, goc,
-                             rieng if rieng is not None else (CG.HOP_THU is not None and g == CG.HOP_THU))
+                             rieng if rieng is not None else ((CG.HOP_THU is not None and g == CG.HOP_THU) or tu == "cloud"))
     return kq
 
 
@@ -279,7 +281,7 @@ def hook(ben: str | None = None, goc: Path | None = None) -> str:
         f = _file_trang_thai(ben, goc).with_name("cau_thu_lay.json")
         gan = (_doc(f) or {}).get("luc", 0)
         if time.time() - float(gan) > NHIP_LAY_GIAY:
-            lay(goc=goc)
+            lay(goc=goc, rieng=True if ben == "cloud" else None)
             try:
                 f.write_text(json.dumps({"luc": time.time()}), encoding="utf-8")
             except OSError:
@@ -339,7 +341,7 @@ def cho(ben: str | None = None, toi_da_giay: float = TOI_DA_CHO_GIAY, nhip: floa
     han = dong_ho() + toi_da_giay
     giu, loi_lay = 0, ""
     while True:
-        kq = lay(goc=goc)
+        kq = lay(goc=goc, rieng=True if ben == "cloud" else None)
         loi_lay = "" if kq.get("da_lay") else str(kq.get("ly_do") or "khong keo duoc")
         moi = doc_moi(ben, goc)
         bay_gio = dong_ho()
