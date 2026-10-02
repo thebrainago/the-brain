@@ -172,7 +172,7 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
     ),
     "DIEU HANH & GIAM SAT": (
         "Giu he chay 24/7 va tu thay duoc minh dang hong cho nao.",
-        ("evo", "canary", "mach", "do_im_lang", "do_tai_nguyen", "don_mo_coi",
+        ("do_token", "evo", "canary", "mach", "do_im_lang", "do_tai_nguyen", "don_mo_coi",
          "han_muc", "ngan_sach", "tran_cpu", "ban_do", "kien_truc", "tri_tue",
          "muc_tieu", "vong_day_du", "day_chuyen", "day_chuyen_quantlab"),
     ),

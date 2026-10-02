@@ -31,7 +31,8 @@ Claude tren cloud; may nha va VPS la tay chan. Moi thu di qua MOT hop thu: `viec
     b cau xem MA | duyet MA VAN_TAY              (may) xem / duyet MOT don ngoai danh sach trang
 
 NHIEU CHIEU - noi tu BAT KY phien nao (xem `cau_thu.py`):
-    b cau noi "..." [--den cloud|nha] [--chu-de X] [--tra-loi ID]   gui THU (nha -> cloud: kem danh thuc phien cloud)
+    b cau noi "..." [--den cloud|nha] [--chu-de X] [--tra-loi ID] [--thuc]   gui THU (nha -> cloud: kem danh thuc, GOP neu vua thuc <15 phut;
+                                                                 --thuc = ep, chi cho viec CAN cloud quyet / bi chan)
     b cau thu [--hook] [--tat-ca] [--ben nha|cloud]                  doc thu moi (--hook: cho Claude Code o nha)
     b cau cho [--toi-da GIAY] [--ben nha|cloud]                      CHO thu moi (chay NEN; co thu thi thoat de Claude Code tu thuc)
     b cau hook-cai | dat-session session_XXXX                        (may nha) gan hook + khai bao phien cloud
@@ -400,13 +401,24 @@ def main(argv: list[str]) -> int:
             print(json.dumps(xem(con[0]), ensure_ascii=False, indent=1))
             return 0
         if lenh == "noi":
-            rest = [x for i, x in enumerate(con) if not (x.startswith("--") or (i > 0 and con[i - 1].startswith("--")))]
+            co_bool = {"--thuc", "--du-han-muc"}                  # co KHONG kem gia tri (cac co khac an mot gia tri)
+            rest, i = [], 0
+            while i < len(con):
+                if con[i] in co_bool:
+                    i += 1
+                elif con[i].startswith("--"):
+                    i += 2
+                else:
+                    rest.append(con[i])
+                    i += 1
             if not rest:
-                print('b cau noi "<noi dung>" [--den cloud|nha] [--chu-de X] [--tra-loi ID]')
+                print('b cau noi "<noi dung>" [--den cloud|nha] [--chu-de X] [--tra-loi ID] [--thuc] [--du-han-muc]')
                 return 2
             r = CTH.noi(" ".join(rest), den=_co(con, "--den"), chu_de=_co(con, "--chu-de", ""),
-                        tra_loi=_co(con, "--tra-loi"))
+                        tra_loi=_co(con, "--tra-loi"), ep_thuc="--thuc" in con, du_han_muc="--du-han-muc" in con)
             print(json.dumps(r, ensure_ascii=False, indent=1))
+            if r.get("qua_han_muc"):
+                return 3
             return 1 if r.get("loi_git") and not r.get("danh_thuc", {}).get("da_goi") else 0
         if lenh == "thu":
             CTH.utf8_ra()

@@ -10,6 +10,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b nc chay|claude|tu-lai|kiem  chu ky Claude API | Claude Code | khong LLM | hieu chuan
     b vao             VAO PHIEN: trang thai song + ban giao hom qua
     b khoi-phuc       CHAN DOAN MAY (sau khi cai lai Windows / may moi): con gi, thieu gi, con ban sao o dau
+    b token [file.jsonl]  DO TOKEN that cua phien Claude Code (cache doc/ghi, dau ra, ngu canh, khoan ton nhat) + khuyen nghi
     b ket "tom tat"   KET PHIEN: chot git + sinh TIEP_TUC_MAI.md cho mai
     b bg ["dong"]     ghi BAN GIAO SONG (khong doi cuoi phien moi ban giao)
     b bg-xem          xem ban giao song hien tai
@@ -1255,6 +1256,15 @@ def c_khoi_phuc(a: list) -> int:
     return chay([PY, "-m", "nhan.khoi_phuc", *a])
 
 
+def c_token(a: list) -> int:
+    """`b token [file.jsonl] [--json]` - DO TOKEN that cua mot phien Claude Code tu transcript (mac dinh: moi nhat cua thu muc nay).
+
+    Chi ra: cache doc/ghi/dau ra theo ty le gia chuan, ngu canh TB, goi 'lanh' (nghi > 1 gio), khoan 'mang theo' lon nhat,
+    kem khuyen nghi theo so do. Thiet ke + so do that: `tai_lieu/TOI_UU_TOKEN.md`.
+    """
+    return chay([PY, "-m", "nhan.do_token", *a])
+
+
 def c_nc(a: list) -> int:
     """`b nc ...` - NHA NGHIEN CUU: AI nam quyen nghien cuu, The Brain la bo cong cu.
 
@@ -1403,6 +1413,7 @@ LENH = {
     # --- 25/09/2026: NHA NGHIEN CUU - AI nam quyen, The Brain la bo cong cu ---
     "nc": c_nc, "nha-nghien-cuu": c_nc,
     "khoi-phuc": c_khoi_phuc, "kp": c_khoi_phuc,
+    "token": c_token,
 }
 
 

@@ -70,21 +70,23 @@ Vướng gói nào thì cài nhóm tối thiểu: `numpy pandas scipy requests p
 
 ## Bước 4 — Chờ thư của cloud (chạy NỀN, lúc chờ không tốn token)
 
-Chạy bằng công cụ Bash/PowerShell của Claude Code với `run_in_background = true` và `timeout = 7200000`:
+Chỉ khi chủ dự án đang làm việc với bạn (ban đêm / đi vắng để runner `b cau chay` lo). Chạy bằng công cụ Bash/PowerShell của Claude Code với `run_in_background = true` và `timeout = 3600000`:
 
 ```powershell
 .\b.cmd cau cho
 ```
 Có thư thì lệnh **thoát và in thư** → bạn được đánh thức. Làm theo thư (trong luật 1–4), trả lời bằng
-`.\b.cmd cau noi "kết quả / câu hỏi ngắn"`, rồi chạy **lại** `b cau cho`. Hết giờ không có thư (≈ 2 giờ) thì cũng chạy lại.
+`.\b.cmd cau noi "kết quả / câu hỏi ngắn"`, rồi chạy **lại** `b cau cho`. Hết giờ (55 phút) không có thư thì chạy lại **ngay, không viết gì thêm** (mỗi lần thức dậy là một lượt đọc cả ngữ cảnh; còn trong hạn cache 1 giờ thì rẻ gấp ~10).
 Đóng phiên thì tiến trình chờ mất theo; thư vẫn nằm trên git và hiện ở `SessionStart` của phiên sau.
 
 ## Cách nói chuyện (để hai Claude không nói nhảm với nhau)
 
-- Chỉ gửi thư khi **có việc**: kết quả, câu hỏi, bị chặn. Không gửi "ok / cảm ơn".
+- **Cloud chỉ huy, nhà thực thi** (chủ dự án 02/10/2026). Thấy chỉ thị sai hoặc không làm được → phản đối **đúng một lần** (bằng chứng + đề xuất); cloud quyết; bạn làm theo, không cãi lại. Việc không khứ hồi / đi ra ngoài vẫn hỏi chủ dự án.
+- Chỉ gửi thư khi **có việc**: kết quả, câu hỏi, bị chặn. Không gửi "ok / cảm ơn". Đánh thức cloud tốn một lượt đọc cả ngữ cảnh của nó: `b cau noi` tự **gộp** trong 15 phút; chỉ dùng `--thuc` khi cloud CẦN quyết hoặc bạn bị chặn.
 - Kết một chuỗi việc bằng thư có chủ đề `XONG`; bên nhận thư `XONG` không trả lời thêm.
 - Thư dài → ghi vào `reports/<tên>.md`, thư chỉ chứa đường dẫn + 3 dòng tóm tắt.
-- Hạn mức có sẵn: tối đa 20 lần thức dậy / giờ (`b cau cho` giữ thư lại nếu vượt, `b cau thu` đọc tay được).
+- Hạn mức có sẵn: 8 thư / 30 phút / một chiều (quá thì `b cau noi` từ chối: tóm tắt 3 dòng cho chủ dự án) và tối đa 20 lần thức dậy / giờ (`b cau cho` giữ thư lại, `b cau thu` đọc tay được).
+- Giữ ngữ cảnh nhỏ: lệnh nặng chỉ lấy bản tóm tắt (`b nc kiem 30` đã in 1 dòng; `b test`: chỉ báo số pass/fail + tên test fail). Sau mỗi mốc xong, chủ dự án có thể `/clear` — mọi thứ cần nhớ nằm trong thư / `reports/`.
 
 ## Việc tiếp theo, theo thứ tự (cloud chốt 02/10)
 
@@ -96,7 +98,7 @@ git -C "C:\Research SP500\lab" push --dry-run origin claude/autonomous-trading-s
 Nếu nó hỏi `Username` / `Password` thay vì mở trình duyệt: GitHub không nhận mật khẩu → báo cloud (cần Git Credential Manager hoặc token);
 **không dán token vào thư/chat**.
 
-*Chưa cần dữ liệu thật:*
+*Chưa cần dữ liệu thật (ngoài hai lệnh dưới, chạy `.\b.cmd token` sau buổi làm việc đầu tiên và báo bản tóm tắt ~25 dòng: đo token thật của phiên nhà):*
 1. `.\b.cmd test` (cần `pytest pytest-xdist`): báo số pass/fail và **tên** các test fail (không dán cả log).
 2. `.\b.cmd nc kiem 30` — hiệu chuẩn hai chiều trên chuỗi mô phỏng có đáp án, dùng sổ tay TẠM (không đụng sổ thật). Đo trên cloud:
    **294 giây**, thoát 0, kết quả: `sai 0`, `dung 6/7` (1 `chua_ket_luan`), `bao_dong_gia 0`, `hoc_tu_lenh_dung 4/4`, công suất

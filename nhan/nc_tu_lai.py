@@ -466,17 +466,43 @@ def hieu_chuan(cac_ma=KICH_BAN_HIEU_CHUAN, khung: str = "H4", so_null: int = 200
     return tom
 
 
+def _gon(r: dict) -> dict:
+    """Ban TOM TAT cua `hieu_chuan` cho dau ra mac dinh (~700 ky tu thay vi ~25.000): moi ky tu in ra se vao ngu canh cua phien
+    doc no va bi doc lai o MOI goi API sau do. Day du: `-v` hoac `reports/NC_HIEU_CHUAN.md`."""
+    g = {k: r[k] for k in ("so_kich_ban", "dung", "chua_ket_luan", "sai", "bao_dong_gia", "hoc_tu_lenh_dung", "bao_cao") if k in r}
+    bd = r.get("bao_dong_gia_tim_quy_luat") or {}
+    if bd:
+        g["bao_dong_gia_tren_nhieu"] = "%s hat: p<=0,05 %s%% · p<=0,10 %s%%" % (
+            bd.get("so_hat"), round(100 * (bd.get("ty_le_p_le_0_05") or 0), 1), round(100 * (bd.get("ty_le_p_le_0_10") or 0), 1))
+    cs = r.get("cong_suat") or {}
+    if cs:
+        g["cong_suat"] = "tim rong %s/%s · gia thuyet co chu dich %s/%s · bao dong gia tren nhieu %s" % (
+            cs.get("do_tim_rong_phat_hien"), cs.get("so_hat"), cs.get("co_chu_dich_phat_hien"), cs.get("so_hat"),
+            cs.get("co_chu_dich_bao_dong_gia_tren_nhieu"))
+    for khung, v in (r.get("cong_ba_doan") or {}).items():
+        ds = []
+        for nhom in ("khong_edge", "co_edge"):
+            for ten, x in (v.get(nhom) or {}).items():
+                ds.append("%s %s/%s" % (ten, x.get("dat_niem_phong"), x.get("y_tuong")))
+        g["cong_ba_doan_" + str(khung)] = "dat niem phong: " + " · ".join(ds)
+    return g
+
+
 def main(argv: list[str]) -> int:
     if not argv or argv[0] in ("-h", "--help"):
         print("python -m nhan.nc_tu_lai <MA> [KHUNG] [--khong-niem-phong]\n"
-              "python -m nhan.nc_tu_lai kiem [SO_HAT]  # hieu chuan hai chieu tren chuoi co dap an;\n"
-              "                                        # SO_HAT > 0: them do bao dong gia + cong suat")
+              "python -m nhan.nc_tu_lai kiem [SO_HAT] [-v]  # hieu chuan hai chieu tren chuoi co dap an;\n"
+              "                                        # SO_HAT > 0: them do bao dong gia + cong suat\n"
+              "                                        # mac dinh in MOT dong tom tat (~700 ky tu); -v = in het (~25.000 ky tu)")
         return 0
     if argv[0] == "kiem":
-        so_hat = int(argv[1]) if len(argv) > 1 and argv[1].isdigit() else 0
-        r = hieu_chuan(so_hat_bao_dong=so_hat, so_hat_cong_suat=8 if so_hat else 0)
-        print(json.dumps({k: v for k, v in r.items() if k not in ("chi_tiet", "hoc_tu_lenh")},
-                         ensure_ascii=False, default=str))
+        chi_tiet = "-v" in argv
+        con = [a for a in argv[1:] if a != "-v"]
+        so_hat = int(con[0]) if con and con[0].isdigit() else 0
+        r = hieu_chuan(so_hat_bao_dong=so_hat, so_hat_cong_suat=8 if so_hat else 0,
+                       in_ra=print if chi_tiet else (lambda *a, **k: None))
+        ra = ({k: v for k, v in r.items() if k not in ("chi_tiet", "hoc_tu_lenh")} if chi_tiet else _gon(r))
+        print(json.dumps(ra, ensure_ascii=False, default=str))
         return 0 if r["sai"] == 0 else 1
     ma = argv[0]
     khung = argv[1] if len(argv) > 1 and not argv[1].startswith("--") else "H4"
