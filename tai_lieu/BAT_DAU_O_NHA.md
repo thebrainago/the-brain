@@ -62,7 +62,7 @@ Vướng gói nào thì cài nhóm tối thiểu: `numpy pandas scipy requests p
 ```
 - `b cau cai` tạo **hộp thư riêng** (một bản clone phụ `C:\Research SP500\cau_hop_thu`, chỉ để đồng bộ `viec/`) nên thư không vướng
   commit mã của máy nhà; nó cũng khai báo phiên cloud và đánh dấu đây là máy nhà. Nó chỉ **in** lệnh `schtasks` (chạy lại mỗi 5 phút) —
-  **chưa chạy lệnh đó**: để sau khi có dữ liệu và chủ dự án đồng ý (Bước 5).
+  chủ dự án **ĐÃ DUYỆT** (02/10) bật lịch này: chạy lệnh đó khi máy lên (rồi `.\b.cmd cau chay` một lần kiểm `DAT`; huỷ: `schtasks /Delete /TN TheBrain_Cau /F`).
 - Đơn đang chờ trong `viec/cho` chỉ có `cau-kiem` (không làm gì, in `CAU NOI SONG`): chạy một lần bằng `.\b.cmd cau chay` để thấy ping `DAT`.
 - `b cau noi` ghi thư, `git push`, rồi đánh thức phiên cloud bằng `claude -p ... --cloud` (nếu có lệnh `claude`).
   `git push` lần đầu: Git Credential Manager mở trình duyệt, **chủ dự án đăng nhập GitHub một lần**.
@@ -116,7 +116,7 @@ Nếu nó hỏi `Username` / `Password` thay vì mở trình duyệt: GitHub kh�
    `reports/ho_chieu_du_lieu.json` và **đo chi phí thật** bằng `nhan/chi_phi.py` (chi phí ở mức `KHAI` thì không bao giờ PASS).
 5. Lần `nap()` đầu của mỗi mã tự **đóng băng đoạn** vào `so_cai/doan.json` → **commit + push ngay**, trước mọi nghiên cứu;
    không xoá / sinh lại file này (đoạn niêm phong tính theo NGÀY, không theo tỉ lệ bar).
-6. Bật lịch 5 phút (`schtasks`, hỏi chủ dự án) và `--ghi-so-cai`; từ đó cloud giao việc qua `b cau giao` (nghiên cứu = `b nc cc ...`) và máy tự kéo.
+6. Bật lịch 5 phút (`schtasks`, chủ dự án ĐÃ DUYỆT 02/10 — bật ngay khi máy lên) và `--ghi-so-cai` (sau khi `so_cai/doan.json` đã push); từ đó cloud giao việc qua `b cau giao` (nghiên cứu = `b nc cc ...`) và máy tự kéo.
 
 Cloud làm song song: `b nc tien-len` (giai đoạn tiến lên, 7.4), hộ chiếu dữ liệu (7.5), trần phép thử (7.6). Dữ liệu và kết quả cũ
 (SP500, V6, Ultima AUDCAD) chỉ là bối cảnh. Dữ liệu giá đã mất: đừng tự lấy từ nguồn lạ — làm theo bước 4.

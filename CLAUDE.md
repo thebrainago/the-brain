@@ -101,7 +101,7 @@ may TU KEO viec qua git (`viec/cho` -> `viec/xong`, `viec/may` = nhip tim). Chi 
   tham do bang LLM - cho bang lenh khong-LLM hoac `send_later` MOT lan; (2) dau ra lenh nang phai GON (head/cut/tom tat; `b nc kiem 30` da in
   1 dong, `-v` moi in het); (3) thu ngan, du lieu dai vao `reports/<ten>.md`; chi gui thu khi CO viec, khong "ok/cam on"; (4) `b cau noi` den cloud
   GOP lan danh thuc trong 15 phut, `--thuc` chi cho viec CAN cloud quyet; (5) nghi > 1 gio = cache het han (ghi lai 2x): chot mot dot roi nghi; (6) PHIEN MOI sau moi moc re hon giu phien dai: `b tiep --ghi` (cap nhat
-  khoi TAY cua `tai_lieu/PHIEN_HIEN_TAI.md`) roi mo phien moi, vao bang `b tiep` - mo tai lieu theo `b tiep --chi-muc`, doc dung doan bang `sed -n`.
+  khoi TAY cua `tai_lieu/PHIEN_HIEN_TAI.md`) roi mo phien moi, vao bang `b tiep` - mo tai lieu theo `b tiep --chi-muc`, doc dung doan bang `sed -n`; (7) SUBAGENT duoc phep (chu du an duyet 02/10) cho viec doc nang / tim rong / log dai (ngu canh rieng nho, chi tra ket luan; `model: haiku` cho viec co hoc), khong dung cho viec can ngu canh cua phien.
   Phien nha tu cho thu: `b cau cho` NEN (timeout 3600000) CHI khi chu du an dang lam viec voi no; het gio (55 phut) thi chay lai NGAY, khong viet
   them gi; dem / di vang de runner khong-LLM (`b cau chay`). Cua so nen ngu canh: `.claude/settings.json` (autoCompactWindow 300000), phien tuy y
   `/autocompact 300k`; `/effort high|medium` cho viec co hoc, `max` chi cho thiet ke kho. Vao phien nha lan dau: `tai_lieu/BAT_DAU_O_NHA.md`.
