@@ -118,7 +118,7 @@ def chay_he(ma: str, khung: str, spec: dict, quan_tri: dict | None = None,
         # NOI BO (chi `niem_phong` goi): kham_pha + xac_nhan lien mach, de CHOT don bay tren
         # du lieu da mo truoc khi nhin doan niem phong. Khong co trong `DOAN_MO`.
         pre, _ = NDL.cat_doan(df_full, "xac_nhan")
-        a = NDL.chi_so_doan(len(df_full), "kham_pha")[0]
+        a = NDL.chi_so_doan(len(df_full), "kham_pha", df_full)[0]
     else:
         pre, a = NDL.cat_doan(df_full, doan, _giay_phep=_giay_phep)
     if len(pre) - a < 50:

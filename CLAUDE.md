@@ -47,7 +47,7 @@ Chu du an: *"The Brain la cong cu va cac phuong an cho cau. Phan thuc thi chinh 
 suy luan chinh phai do AI nam quyen"*. Thiet ke: `tai_lieu/NHA_NGHIEN_CUU.md`.
 
 Moi phien Claude Code:
-1. **Mo dau bang `b nc`** - ho so nghien cuu (cau hoi mo, cua chu du an xep truoc;
+1. **Mo dau bang `b nc`** (phien cloud: `b cau lay` roi `b nc nhap` de co so tay cua may nha) - ho so nghien cuu (cau hoi mo, cua chu du an xep truoc;
    gia thuyet dang song; thi nghiem tot nhat; hieu biet co bang chung; phep thu da tieu).
 2. **Tu chon viec co gia tri nhat va lam** - khong cho giao viec. Chu du an la nha
    tai tro: dat muc tieu, gui y tuong qua `b nc hoi "..."`, doc so tay.
@@ -72,7 +72,9 @@ Hoc tu lenh dung/sai = `mo_xe_lenh`. Het token: `b nc tu-lai MA KHUNG` (khong LL
 May nha cai lai Windows, mat `nao.db`, `data/`, `ds/`... Chu du an: *"coi nhu du an duoc lam lai tu dau bai ban
 va khoa hoc hon"* - V6, Ultima AUDCAD, SP500 da test **khong phai bang chung** (chi la boi canh / nguon sinh gia
 thuyet). Dung `tai_lieu/KHOI_PHUC_MAY_NHA.md`: **may moi / sau khi cai lai -> doc no TRUOC, chay `b khoi-phuc`.**
-Giao thuc khoa hoc moi: muc 7 cua tai lieu do (so cai nghien cuu nam trong git, doan du lieu dong bang theo NGAY).
+Giao thuc khoa hoc moi (muc 7 cua tai lieu do): **so cai nghien cuu nam trong git** (`so_cai/nc/`, `b nc xuat|nhap`),
+**doan du lieu DONG BANG theo NGAY** (`so_cai/doan.json`: du lieu moi them khong keo doan niem phong nhay),
+ket qua cu khong phai bang chung. May nha la noi DUY NHAT ghi so cai (`b cau cai ... --ghi-so-cai`).
 
 ## KENH CLOUD <-> MAY NHA <-> VPS: MOT kenh, `b cau` (chot 02/10/2026; thay `b tram`)
 

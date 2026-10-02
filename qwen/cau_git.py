@@ -43,6 +43,15 @@ phi that, vi rang buoc chan he la lan TESTER = 1 chu khong phai token.
 `doc_ket_qua()` tra `CHUA_DO_DUOC` cho moi truong hop khong chac: file khong
 co, JSON hong, thieu truong `trang_thai`, hay `trang_thai` la mot chu la. Chi
 dung ba chu DAT / AM / CHUA_DO_DUOC moi duoc di qua.
+
+## BO SUNG 02/10/2026 - MOT kenh nhieu may (xem `cau_may.py`, `cau_trang.py`)
+
+- HOP THU RIENG (`config/cau.json`, `b cau cai`): ban clone chi de dong bo `viec/`; lenh van chay o LAB. Dong bo o do
+  duoc phep REBASE + thu lai (khong co viec nguoi), nen cloud ra don trong luc may day ket qua khong con ket.
+- `nhan_viec`: phieu `viec/dang/<ma>.json` - hai may cung keo mot hang doi, ai push truoc la nguoi lam.
+- `chay_don(kiem_trang=True)`: lenh phai qua DANH SACH TRANG hoac da duoc chu du an duyet tren may.
+- `dung_khan`: `CAU_DUNG` (tai may) / `viec/DUNG` (tu xa). `day_don` / `lay_ket_qua`: ben cloud.
+- `viec/may/<ten>.json`: nhip tim; `so_cai/`: so cai nghien cuu (nhan/nc_so_cai.py) di cung moi lan day.
 """
 from __future__ import annotations
 
@@ -68,7 +77,7 @@ def cau_hinh() -> dict:
     """
     c = {"ten": socket.gethostname(), "hop_thu": "", "nhanh": "",
          "kha_nang": [platform.system().lower()], "session_cloud": "", "bao_cloud": False,
-         "nhip_bao_phut": 30, "tom_tat_re": False}
+         "nhip_bao_phut": 30, "tom_tat_re": False, "ghi_so_cai": False}
     try:
         d = json.loads(CAU_HINH.read_text(encoding="utf-8-sig"))
         if isinstance(d, dict):
@@ -108,7 +117,7 @@ TRANG_THAI = ("DAT", "AM", "CHUA_DO_DUOC")
 #: cam phien [DOC] sua `config/*.json`, va may chay `q` dung la mot phien nhu
 #: vay doi voi ma nguon. `data/` va `nao.db` da bi gitignore san nhung van
 #: khong liet ke o day - hai lop chan tot hon mot.
-DUOC_DAY = ("viec/xong", "viec/hoi", "viec/dang", "viec/may", "reports")
+DUOC_DAY = ("viec/xong", "viec/hoi", "viec/dang", "viec/may", "so_cai", "reports")
 
 #: Vong `q` goi `dong_bo()` moi nhip. Keo/day that thi ton mang, nen chi lam
 #: khi da qua ngan nay giay ke tu lan truoc.
@@ -261,6 +270,24 @@ def _day_push(nhanh: str, goc: Path | None, so_file: int, rieng: bool = True) ->
                  % (loi or "khong ro")[:200])
 
 
+def _xuat_so_cai(hop: Path) -> None:
+    """May GHI so cai (`cau.json`: ghi_so_cai) -> xuat `nc.db` + moc doan da dong bang vao `so_cai/` cua hop thu TRUOC
+    khi day len git (xem `nhan/nc_so_cai.py`). Hong thi bo qua: khong bao gio lam hong mot nhip dong bo."""
+    try:
+        if not cau_hinh().get("ghi_so_cai"):
+            return
+        from nhan import nc_so_cai as SC
+        SC.xuat(dich=hop / "so_cai" / "nc")
+        src = Path(os.environ.get("NC_SO_CAI") or (GOC / "so_cai")) / "doan.json"
+        dst = hop / "so_cai" / "doan.json"
+        if src.exists() and src.resolve() != dst.resolve() and (
+                not dst.exists() or dst.read_bytes() != src.read_bytes()):
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_bytes(src.read_bytes())
+    except Exception:                                   # noqa: BLE001
+        pass
+
+
 def dong_bo(nhanh: str | None = None, ep: bool = False,
             goc: Path | None = None, rieng: bool | None = None) -> dict:
     """MOT nhip dong bo: keo don ve, day ket qua len.
@@ -290,6 +317,7 @@ def dong_bo(nhanh: str | None = None, ep: bool = False,
                                          % ", ".join(nguoi[:5])}
         if not nguoi:
             keo = _keo(nh, g, rieng=rieng)
+        _xuat_so_cai(g)
         day = _day(nh, "may: ket qua %s" % time.strftime("%Y-%m-%d %H:%M"), g, rieng=rieng)
         return {"trang_thai": "DAT", "nhanh": nh, "keo": keo, "day": day,
                 "viec_nguoi_do_dang": nguoi}

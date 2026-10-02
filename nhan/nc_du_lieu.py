@@ -58,7 +58,10 @@ khoi xuat MQL5 va khoi moi bao cao "he ra tien".
 from __future__ import annotations
 
 import hashlib
+import json
+import os
 import sys
+import time
 from collections import deque
 from pathlib import Path
 
@@ -70,6 +73,8 @@ if __package__ in (None, ""):
     from nhan import chi_phi as CP
 else:
     from . import chi_phi as CP
+
+LAB = Path(__file__).resolve().parent.parent
 
 #: Ranh gioi ba doan, tinh theo TI LE so bar.
 DOAN = {"kham_pha": (0.0, 0.6), "xac_nhan": (0.6, 0.8), "niem_phong": (0.8, 1.0)}
@@ -108,10 +113,99 @@ class DoanNiemPhong(PermissionError):
 
 
 # ------------------------------------------------------------------ DOAN
-def chi_so_doan(n: int, doan: str) -> tuple[int, int]:
-    """(a, b) so nguyen: doan la [a, b) cua chuoi dai n."""
+class LoiDoan(RuntimeError):
+    """Doan da DONG BANG khong con khop du lieu hien co (du lieu bi doi / thieu / lech mui gio)."""
+
+
+def _file_doan() -> Path:
+    return Path(os.environ.get("NC_SO_CAI") or (LAB / "so_cai")) / "doan.json"
+
+
+def _doc_doan() -> dict:
+    try:
+        d = json.loads(_file_doan().read_text(encoding="utf-8-sig"))
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _van_tay_tien_to(df: pd.DataFrame, n0: int) -> str:
+    """Van tay cua n0 bar DAU: chi so thoi gian + gia dong. Doi mot bar la doi van tay."""
+    h = hashlib.sha1()
+    h.update(np.asarray(df.index[:n0].asi8, dtype="int64").tobytes())
+    h.update(df["close"].to_numpy(dtype="float64")[:n0].tobytes())
+    return h.hexdigest()[:20]
+
+
+def dong_bang(ma: str, khung: str, df: pd.DataFrame) -> dict | None:
+    """DONG BANG ba doan theo MOC THOI GIAN, lan DAU thay (ma, khung); lan sau chi KIEM du lieu van khop.
+
+    ## Vi sao (02/10/2026 - lam lai tu dau)
+
+    `DOAN` tinh theo TI LE so bar. Du lieu that thi LON THEM moi ngay (MT5 them bar o cuoi) nen ranh gioi 80% nhay
+    ve phia truoc: nhung bar da tung nam trong doan NIEM PHONG - thua chi la chua mo, hay DA mo roi - bo rot sang
+    doan xac nhan va tro thanh du lieu chon mo hinh cho gia thuyet sau. Do la ro ri holdout, va no tu mat cung voi
+    may tinh: khong ai nhin thay.
+
+    Nay: lan dau ghi `t_dau / t_xac_nhan / t_niem_phong / t_cuoi` (tinh theo ti le luc do) + van tay cua cac bar do
+    vao `so_cai/doan.json` (nam trong git). Sau do doan KHONG BAO GIO di chuyen; bar moi sau `t_cuoi` khong thuoc doan
+    nao (dung de **tien len** - kiem dinh tren du lieu chua ai thay). Du lieu trong doan da dong bang bi DOI -> `LoiDoan`.
+    Dong bang lai = xoa dong tuong ung trong `so_cai/doan.json`: hanh dong CO CHU Y, de lai dau vet trong git; cac
+    ket qua niem phong cu thuoc ranh gioi cu.
+    """
+    if not isinstance(df.index, pd.DatetimeIndex) or len(df) < 100:
+        return None
+    khoa = "%s|%s" % (str(ma).upper(), str(khung).upper())
+    reg = _doc_doan()
+    k = reg.get(khoa)
+    if k is None:
+        n = len(df)
+        k = {"t_dau": str(df.index[0]),
+             "t_xac_nhan": str(df.index[chi_so_doan(n, "xac_nhan")[0]]),
+             "t_niem_phong": str(df.index[chi_so_doan(n, "niem_phong")[0]]),
+             "t_cuoi": str(df.index[n - 1]), "n0": n, "van_tay": _van_tay_tien_to(df, n),
+             "luc": time.strftime("%Y-%m-%d %H:%M:%S")}
+        reg[khoa] = k
+        f = _file_doan()
+        f.parent.mkdir(parents=True, exist_ok=True)
+        tam = f.with_suffix(".json.tam")
+        tam.write_text(json.dumps(reg, ensure_ascii=False, sort_keys=True, indent=1), encoding="utf-8")
+        os.replace(tam, f)
+    else:
+        try:
+            n0 = int(df.index.searchsorted(pd.Timestamp(k["t_cuoi"]), side="right"))
+            dau_ok = df.index[0] == pd.Timestamp(k["t_dau"])
+        except (TypeError, ValueError) as e:
+            raise LoiDoan("%s: khong doi chieu duoc moc da dong bang voi chi so thoi gian hien co (%s)" % (khoa, e))
+        if not dau_ok or n0 != int(k["n0"]) or _van_tay_tien_to(df, n0) != k["van_tay"]:
+            raise LoiDoan("%s: du lieu trong doan da dong bang (%s .. %s, %s bar) DA DOI so voi luc dong bang "
+                          "- khong ket luan gi tren ranh gioi cu. Neu day la y dinh: xoa dong nay trong "
+                          "so_cai/doan.json de dong bang lai (va coi cac niem phong cu la thuoc ranh gioi cu)."
+                          % (khoa, k["t_dau"], k["t_cuoi"], k["n0"]))
+    df.attrs["doan_dong_bang"] = dict(k)
+    return k
+
+
+def _chi_so_dong_bang(df: pd.DataFrame, doan: str, k: dict) -> tuple[int, int]:
+    try:
+        i_xn = int(df.index.searchsorted(pd.Timestamp(k["t_xac_nhan"])))
+        i_np = int(df.index.searchsorted(pd.Timestamp(k["t_niem_phong"])))
+        i_cuoi = int(df.index.searchsorted(pd.Timestamp(k["t_cuoi"]), side="right"))
+    except (TypeError, ValueError) as e:
+        raise LoiDoan("khong doi chieu duoc moc da dong bang voi du lieu (%s)" % e)
+    return {"kham_pha": (0, i_xn), "xac_nhan": (i_xn, i_np), "niem_phong": (i_np, i_cuoi)}[doan]
+
+
+def chi_so_doan(n: int, doan: str, df: pd.DataFrame | None = None) -> tuple[int, int]:
+    """(a, b) so nguyen: doan la [a, b) cua chuoi dai n.
+
+    `df` mang `attrs["doan_dong_bang"]` (chuoi that da qua `dong_bang`) thi dung MOC THOI GIAN da dong bang, khong
+    tinh theo ti le - nho vay du lieu moi them o cuoi khong keo ranh gioi nhay."""
     if doan not in DOAN:
         raise KeyError("doan '%s' khong co (co: %s)" % (doan, ", ".join(DOAN)))
+    k = df.attrs.get("doan_dong_bang") if df is not None else None
+    if k:
+        return _chi_so_dong_bang(df, doan, k)
     t0, t1 = DOAN[doan]
     return int(round(n * t0)), int(round(n * t1))
 
@@ -128,7 +222,7 @@ def cat_doan(df: pd.DataFrame, doan: str, _giay_phep: bool = False
             "doan niem_phong chi mo qua nc_thi_nghiem.niem_phong (mot lan, cho "
             "khai bao da dong bang). Kham pha tren 'kham_pha', xac nhan tren "
             "'xac_nhan'.")
-    a, b = chi_so_doan(len(df), doan)
+    a, b = chi_so_doan(len(df), doan, df)
     return df.iloc[:b], a
 
 
@@ -163,6 +257,8 @@ def nap(ma: str, khung: str = "H4") -> pd.DataFrame:
     else:
         from nhan import du_lieu as DL
         df = DL.nap(ma, khung)
+        if os.environ.get("NC_DONG_BANG", "1") != "0":
+            dong_bang(ma, khung, df)        # lan dau: ghi moc vao so cai · sau do: kiem du lieu van khop
     if len(_DEM) >= 12:
         _DEM.pop(next(iter(_DEM)))
     _DEM[khoa] = df

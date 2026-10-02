@@ -1263,9 +1263,13 @@ def c_nc(a: list) -> int:
         b nc bot [SO_HAT]         dau truong BOT TU HOC (RL kieu quang cao) vs loi cu
         b nc tho [--vong N]       THO model re (DeepSeek) kham pha, ghi so tay cho Claude
         b nc hien-chuong          in hien chuong (loi nhac he thong cua nha nghien cuu)
+        b nc xuat | nhap [--ghi-de] | so-cai   SO CAI trong git (nhan/nc_so_cai.py): sao luu chi-them cua nc.db
     """
     lenh = (a[0] if a else "so-tay").lower()
     con = a[1:]
+    if lenh in ("xuat", "nhap", "so-cai"):
+        from nhan import nc_so_cai as SC
+        return SC.main([lenh, *con])
     if lenh in ("so-tay", "st"):
         from nhan import nc_so_tay as ST
         print(ST.tom_tat_md(int(con[0]) if con and con[0].isdigit() else 12))

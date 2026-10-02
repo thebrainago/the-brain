@@ -120,6 +120,9 @@ không mở cổng nào, phiên chat tắt thì đơn vẫn nằm chờ.
 # rồi dán dòng schtasks mà lệnh `cau cai` in ra (chạy mỗi 5 phút)
 ```
 
+**Lần đầu `cau chay` phải chạy trong cửa sổ PowerShell của bạn**: lần push đầu Git Credential Manager mở trình duyệt
+để đăng nhập GitHub (một lần; sau đó Task Scheduler dùng khoá đã lưu). Đừng để lần push đầu rơi vào Task Scheduler.
+
 `cau cai` tạo **hộp thư riêng** (một bản clone chỉ để đồng bộ `viec/`), nên máy vẫn kéo việc ngay cả khi bạn đang
 sửa code trong `lab` (cầu cũ không kéo khi cây làm việc đang dở). Lệnh vẫn chạy ở `lab` thật (dữ liệu, config, MT5).
 Cloud kiểm: `b cau lay` → bảng đơn + bảng máy (nhịp tim: máy nào đang bật, đang làm gì, mã bản nào).
@@ -149,12 +152,27 @@ chỉ gồm *mã đơn + trạng thái* đã lọc ký tự — nội dung log (
 
 ## 7. Làm lại từ đầu: giao thức khoa học
 
-*(đang dựng — mục này được viết nốt khi các phần dưới đây xong; xem `git log` để biết phần nào đã có)*
+Mất `nao.db` cho thấy một lỗ hổng *thống kê*: số đếm phép thử và bản ghi niêm phong chỉ sống trong một file cục bộ.
+Máy hỏng thì p-value của mọi kết quả sau đó lạc quan, và một khai báo đã mở đoạn niêm phong có thể bị mở lại.
+Làm lại "bài bản hơn" nghĩa là đưa các thứ đó ra khỏi máy:
+
+| # | Nguyên tắc | Trạng thái |
+|---|---|---|
+| 7.1 | **Kết quả cũ chỉ là bối cảnh.** V6, Ultima AUDCAD, SP500 được chọn từ vòng tìm kiếm rộng (thiên lệch chọn lọc — CLAUDE.md LUAT SO 1, hai con số lý do) nên *không phải bằng chứng*. Muốn thử lại ý tưởng cũ: đăng ký giả thuyết **mới** trên đoạn đóng băng mới. Báo cáo cũ trong `reports/` giữ làm nguồn sinh giả thuyết và danh sách "cái đã chết". | quy tắc |
+| 7.2 | **Sổ cái nghiên cứu nằm trong git.** `so_cai/nc/<bảng>.jsonl`: bản sao *chỉ-thêm* của `nc.db` (giả thuyết, thí nghiệm + **số phép thử**, hiểu biết, câu hỏi, vòng, **niêm phong**). Đổi một hàng = thêm một dòng, không sửa dòng cũ; đưa DB về bản cũ cũng không xoá được dòng nào. `b nc xuat \| nhap [--ghi-de] \| so-cai`. Cầu tự đẩy khi máy cài với `--ghi-so-cai`. **Một người ghi** (máy nhà); cloud chỉ `b cau lay` rồi `b nc nhap` để đọc — vào phiên là biết toàn bộ việc. | **đã có** (`nhan/nc_so_cai.py`, 8 bài test) |
+| 7.3 | **Đoạn dữ liệu đóng băng theo NGÀY.** Trước đây 60/20/20 tính theo *tỉ lệ* bar: dữ liệu lớn thêm mỗi ngày thì ranh giới 80% nhảy về phía trước, bar đã nằm trong đoạn niêm phong rơi sang đoạn xác nhận — rò rỉ holdout. Nay lần đầu thấy `(mã, khung)` ghi 4 mốc thời gian + vân tay các bar vào `so_cai/doan.json` (trong git). Sau đó ranh giới **không bao giờ dịch**; bar mới sau `t_cuoi` không thuộc đoạn nào; dữ liệu trong đoạn đã đóng băng bị đổi (nhà môi giới chỉnh lịch sử, tải lại khác) → `LoiDoan`, không kết luận gì. Đóng băng lại = xoá dòng đó trong `doan.json` (có chủ ý, để dấu vết trong git; niêm phong cũ thuộc ranh giới cũ). | **đã có** (`nc_du_lieu.dong_bang`, 8 bài test) |
+| 7.4 | **Tiến lên (forward) trước khi tin.** Bar sau `t_cuoi` là dữ liệu *chưa ai nhìn*: chuẩn vàng. Hệ nào qua niêm phong phải đứng thêm một giai đoạn tiến lên (đăng ký trước `plan_hash`, đánh giá **một lần**) trước demo. Repo chỉ dùng demo. | nền đã có; **công cụ `b nc tien-len` chưa viết** |
+| 7.5 | **Hộ chiếu dữ liệu.** Mỗi chuỗi: nguồn, máy chủ MT5, bản dựng, số bar, mốc đầu/cuối, vân tay — để mọi kết quả trích đúng bản dữ liệu. `doan.json` đã giữ vân tay tiền tố; manifest đầy đủ chưa có. | một phần |
+| 7.6 | **Trần ngân sách phép thử mỗi `(mã, khung)`** và dừng khi hết ("không có edge" là kết quả hợp lệ). `dem_phep_thu` đã có; chính sách trần chưa viết. | chưa |
+| 7.7 | **Hiệu chuẩn lại sau khi dựng dữ liệu.** `b nc kiem 30` (cổng hai chiều trên chuỗi có đáp án) và `b test` phải xanh *trên máy mới* trước khi tin bất kỳ phát hiện nào. | quy tắc |
+
+Quy trình vào phiên (cloud): `b cau lay` → `b nc nhap` → `b nc`. Máy nhà ghi sổ cái: `b cau cai ... --ghi-so-cai`.
 
 ## 8. Việc kế tiếp (theo thứ tự)
 
 1. Máy nhà: mục 2 → 3 → 4, `b khoi-phuc`, `b cau cai`, thấy ping `DAT` (kênh thông).
 2. Chủ dự án: đổi repo sang **private**, bật 2FA; quyết định gộp nhánh vào `main` (PR).
 3. Tìm bản sao `ds/` (mục 1); nếu không còn, ghi nhận mất và bỏ 2 chỗ phụ thuộc.
-4. Dựng lại kho giá (mục 5) theo giao thức mục 7.
-5. Đo hiệu năng máy nhà vs VPS vs container cloud (bench), rồi quyết thuê VPS.
+4. Dựng lại kho giá (mục 5) theo giao thức mục 7 (7.3 đóng băng đoạn tự chạy lần đầu `nap`).
+5. Viết `b nc tien-len` (7.4), hộ chiếu dữ liệu (7.5), trần phép thử (7.6).
+6. Đo hiệu năng máy nhà vs VPS vs container cloud (bench), rồi quyết thuê VPS.

@@ -21,7 +21,8 @@ Claude tren cloud; may nha va VPS la tay chan. Moi thu di qua MOT hop thu: `viec
   (han muc: toi thieu `nhip_bao_phut` giua hai lan, toi da 12 lan/ngay; viec can cloud tra loi duoc uu tien).
   Tin chi gom MA DON + TRANG THAI (da loc ky tu): noi dung log khong bao gio di nguoc len cloud qua kenh nay.
 
-    b cau cai URL NHANH [--ten T] [--kha-nang a,b] [--session ID] [--bao-cloud]   (may) tao hop thu rieng
+    b cau cai URL NHANH [--ten T] [--kha-nang a,b] [--session ID] [--bao-cloud] [--ghi-so-cai]   (may) hop thu rieng
+                                                 (--ghi-so-cai: may NAY ghi so cai nghien cuu vao git - chi MOT may)
     b cau chay [--lien-tuc [--nghi GIAY]]       (may) mot luot keo -> chay -> day; Task Scheduler/cron 5 phut/lan
     b cau may                                    bang cac may (nhip tim)
     b cau giao [--id X --lan CPU --han-phut N --vi-sao ".." --may T --can a,b] -- <lenh b ...>   (cloud) ra don + day
@@ -83,7 +84,7 @@ def lich(lab: Path | None = None) -> dict:
 
 def cai(url: str, nhanh: str, hop_thu: str | None = None, ten: str | None = None,
         kha_nang: list[str] | None = None, session: str | None = None,
-        bao_cloud: bool | None = None, kiem_url: bool = True) -> dict:
+        bao_cloud: bool | None = None, kiem_url: bool = True, ghi_so_cai: bool | None = None) -> dict:
     """Tao HOP THU RIENG (ban clone chi de dong bo `viec/`) + `config/cau.json`. Chay MOT lan tren may."""
     if kiem_url and not _URL.match(url):
         raise ValueError("url phai la https://host/chu/kho (khong nhan dang khac)")
@@ -107,9 +108,12 @@ def cai(url: str, nhanh: str, hop_thu: str | None = None, ten: str | None = None
         c["session_cloud"] = session
     if bao_cloud is not None:
         c["bao_cloud"] = bool(bao_cloud)
+    if ghi_so_cai is not None:
+        c["ghi_so_cai"] = bool(ghi_so_cai)
     _ghi_cau_hinh(c)
     return {"hop_thu": str(ht), "nhanh": nhanh, "ten": t, "kha_nang": c["kha_nang"],
-            "bao_cloud": c["bao_cloud"] and bool(c["session_cloud"]), "lich": lich()}
+            "bao_cloud": c["bao_cloud"] and bool(c["session_cloud"]), "ghi_so_cai": c["ghi_so_cai"],
+            "lich": lich()}
 
 
 # ------------------------------------------------------------------ NHIP TIM
@@ -342,11 +346,12 @@ def main(argv: list[str]) -> int:
     try:
         if lenh == "cai":
             if len(con) < 2:
-                print("b cau cai URL NHANH [--ten T] [--kha-nang a,b] [--session ID] [--bao-cloud]")
+                print("b cau cai URL NHANH [--ten T] [--kha-nang a,b] [--session ID] [--bao-cloud] [--ghi-so-cai]")
                 return 2
             kn = _co(con, "--kha-nang")
             print(json.dumps(cai(con[0], con[1], ten=_co(con, "--ten"), kha_nang=kn.split(",") if kn else None,
-                                 session=_co(con, "--session"), bao_cloud=True if "--bao-cloud" in con else None),
+                                 session=_co(con, "--session"), bao_cloud=True if "--bao-cloud" in con else None,
+                                 ghi_so_cai=True if "--ghi-so-cai" in con else None),
                              ensure_ascii=False, indent=1))
             return 0
         if lenh == "chay":

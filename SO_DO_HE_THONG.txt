@@ -142,3 +142,21 @@ luat vao lan nhanh o tren): chan = co lai sau phi + maxDD < 80% + so do dung;
 hon moc / kieu martingale / beta = NHAN. Chi tiet: `reports/goi_tieu_chi_tien.md`.
 
 Chi tiet: `tai_lieu/NHA_NGHIEN_CUU.md`. Hieu chuan: `reports/NC_HIEU_CHUAN.md`.
+
+BO SUNG SAU SO DO GOC — 02/10/2026 (may nha cai lai Windows; chu du an: "lam lai tu dau bai ban va khoa hoc hon")
+--------------------------------------------------------------------------------------------------------------
+LUU Y: `Desktop/hethong.txt` (ban goc) mat theo may; ban nay trong repo la ban DUY NHAT con lai - sua o day.
+
+KENH CLOUD <-> MAY NHA <-> VPS  (qwen/cau_git.py + cau_may.py + cau_trang.py, goi `b cau`) — MOT kenh
+    PHIEN CLOUD     noi chu du an chat DUY NHAT; nghi, ra don (`b cau giao`), doc ket qua (`b cau lay`)
+    MAY NHA / VPS   tay chan: TU KEO viec qua git (cloud khong voi toi may), chay lenh TRONG DANH SACH TRANG, day ket qua;
+                    nhieu may khong chay trung (phieu nhan viec); nhip tim; dung khan; goi NGUOC phien cloud (tuy chon)
+    Thay `b tram` (29/09) - hai kenh trung nhau da gop vao hop thu `viec/` cua cau 20/09.
+
+SO CAI NGHIEN CUU NAM TRONG GIT  (nhan/nc_so_cai.py, `b nc xuat|nhap`; so_cai/nc/*.jsonl chi-them)
+    gia thuyet · thi nghiem + SO PHEP THU · hieu biet · cau hoi · vong · NIEM PHONG: khong con chi song trong `nc.db`.
+    Mot nguoi ghi (may nha); cloud nhap ban sao de doc.
+DOAN DU LIEU DONG BANG THEO NGAY  (nhan/nc_du_lieu.dong_bang, so_cai/doan.json)
+    60/20/20 tinh theo TI LE thi du lieu lon them moi ngay keo doan niem phong nhay -> ro ri holdout. Nay lan dau thay
+    (ma, khung) ghi moc thoi gian + van tay; sau do ranh gioi KHONG dich; bar moi = doan TIEN LEN chua ai nhin.
+Chi tiet + trinh tu khoi phuc: `tai_lieu/KHOI_PHUC_MAY_NHA.md`.
