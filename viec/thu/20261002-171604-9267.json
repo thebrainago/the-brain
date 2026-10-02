@@ -1,0 +1,10 @@
+{
+ "id": "20261002-171604-9267",
+ "luc": "2026-10-02T17:16:04",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "chu du an duyet het: bat lich 5 phut khi may len",
+ "tra_loi": null,
+ "noi_dung": "CHU DU AN DUYET HET de xuat (khuya 02/10). Viec cua NHA khi may len (khong lam gi toi nay): (1) BAT lich 5 phut cho runner khong-LLM: chay lenh `schtasks` do `qwen.cau_may.lich()` in ra (cung dong `b cau cai` in; dang: schtasks /Create /SC MINUTE /MO 5 /TN \"TheBrain_Cau\" /TR \"\\\"<duong dan lab>\\b.cmd\\\" cau chay\" /F), roi `.\\b.cmd cau chay` 1 lan kiem DAT. Huy: schtasks /Delete /TN TheBrain_Cau /F. (2) `--ghi-so-cai` (b cau cai lai): bat SAU khi so_cai/doan.json da tao va push. (3) Con lai nhu thu sang mai: pull -> `.\\b.cmd tiep` -> b test luu danh sach fail -> MT5 -> bo xuat M1. Cloud se mo phien MOI (vao bang b tiep) va gui thu `dat-session <id moi>`: khi nhan thi chay lenh do."
+}
