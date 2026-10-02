@@ -260,12 +260,15 @@ class MOI_DIEU_KIEN_CONG_PHAI_DUOC_XEP_LOAI(unittest.TestCase):
         self.assertIn("12_rr_thuc_te", CONG.NHAN_MEM)
         self.assertNotIn("12_rr_thuc_te", CONG.CHAN_CUNG)
 
-    def test_EDGE_VUOT_SPREAD_la_CHAN_CUNG(self):
-        """Day LA cau hoi tien: mot edge mong hon chi phi thi khong ton tai
-        ngoai doi, va khong muc chap nhan rui ro nao cuu duoc no."""
+    def test_EDGE_VUOT_SPREAD_la_NHAN_theo_tieu_chi_25_09(self):
+        """13 tung la CHAN CUNG (nhanh cloud 19/09, theo tieu chi CU "thua mua-giu thi chan").
+
+        Tieu chi chu du an 25/09 THAY no: chan chi con co lai sau phi + maxDD < 80% + tinh dung
+        cua so. "Edge chua toi 3x spread" la CANH BAO nhay voi phi that, khong phai cong chan -
+        lai rong sau phi > 0 da do duoc o cong 14."""
         from nhan import cong as CONG
-        self.assertIn("13_edge_vuot_spread", CONG.CHAN_CUNG)
-        self.assertNotIn("13_edge_vuot_spread", CONG.NHAN_MEM)
+        self.assertIn("13_edge_vuot_spread", CONG.NHAN_MEM)
+        self.assertNotIn("13_edge_vuot_spread", CONG.CHAN_CUNG)
 
 
 # ---------------------------------------------------------------------------
@@ -442,13 +445,8 @@ class CongChanCungHongThiMo(unittest.TestCase):
         self.assertIs(ra["dieu_kien"]["11_khong_an_khe_dao_ngay"], True)
         self.assertEqual(ra["verdict"], "PASS", ra["ly_do"][-3:])
 
-    def test_cong_13_khong_doc_duoc_chi_phi_thi_cung_KHONG_PASS(self):
-        """Cung hinh dang "hong thi mo" o cong `13_edge_vuot_spread`.
-
-        Ban cu: `except Exception: _lai_rong = _phi_sp = 0.0`, roi
-        `(_phi_sp <= 0)` la `True` -> CONG MO. Mot cong CHAN CUNG hoi "edge co
-        day hon chi phi khong" lai di qua **dung luc khong doc duoc chi phi**.
-        """
+    def _xet_voi_phi_hong(self):
+        """Chay `xet` voi doi tuong ket qua ma `chi_phi_spread` NEM khi doc (duong `except` cua cong 13)."""
         from types import SimpleNamespace
         from unittest import mock
         import numpy as np
@@ -482,8 +480,29 @@ class CongChanCungHongThiMo(unittest.TestCase):
                           gt_ma="CONG_MO.phi_hong", ho="test_cong_mo",
                           da_dang_ky=True, tren_holdout=True,
                           che_do="giao_dich")
+        return ra
+
+    def test_cong_13_khong_doc_duoc_chi_phi_thi_GHI_NHAN_nhung_khong_chan(self):
+        """13 la NHAN (25/09): khong doc duoc phi spread thi mat cai nhan nay - van ghi o
+        `cong_khong_do_duoc` de nguoi doc biet - nhung KHONG chan verdict.
+
+        Ban cu cua nhanh cloud (20/09): `except -> _phi_sp = 0` -> `(_phi_sp <= 0)` la True -> CONG MO,
+        tuc mot cong CHAN CUNG di qua dung luc khong doc duoc chi phi. Nay 13 khong con la cong chan."""
+        ra = self._xet_voi_phi_hong()
         self.assertIn("13_edge_vuot_spread", ra["cong_khong_do_duoc"])
-        self.assertNotEqual(ra["verdict"], "PASS")
+        self.assertEqual(ra["verdict"], "PASS", ra["ly_do"][-3:])
+
+    def test_co_che_chan_tran_van_song_khi_13_duoc_xep_lai_vao_CHAN_CUNG(self):
+        """Chinh sach doi, CO CHE khong doi: ngay nao 13 (hay cong nao) quay lai CHAN_CUNG thi
+        chi phi khong doc duoc -> verdict bi chan tran o UNG_VIEN, khong phai PASS."""
+        from unittest import mock
+        from nhan import cong as CONG
+        nhan = {k: v for k, v in CONG.NHAN_MEM.items() if k != "13_edge_vuot_spread"}
+        with mock.patch.object(CONG, "NHAN_MEM", nhan), \
+                mock.patch.object(CONG, "CHAN_CUNG", CONG.CHAN_CUNG + ("13_edge_vuot_spread",)):
+            ra = self._xet_voi_phi_hong()
+        self.assertIn("13_edge_vuot_spread", ra["cong_khong_do_duoc"])
+        self.assertEqual(ra["verdict"], "UNG_VIEN")
 
     def test_chi_phi_bang_0_KHAI_TUONG_MINH_thi_VAN_di_qua(self):
         """Pham vi hep co chu dich: `0.0` khai TUONG MINH la truong hop that

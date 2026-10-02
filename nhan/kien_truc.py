@@ -168,7 +168,7 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
         "Quy tac cua chu du an: MT5 tester TRUOC, Python SAU.",
         ("dich_mq5", "dich_mq5_ghep", "dich_mq5_qtvt", "dich_mq5_quan_tri",
          "doc_lenh_tester", "khoa_tester", "dang_nhap_mt5", "passview",
-         "chay_that", "so_lenh", "san_sang_vps", "tai_khoan_nen_tang"),
+         "chay_that", "so_lenh", "san_sang_vps", "khoi_phuc", "tai_khoan_nen_tang"),
     ),
     "DIEU HANH & GIAM SAT": (
         "Giu he chay 24/7 va tu thay duoc minh dang hong cho nao.",

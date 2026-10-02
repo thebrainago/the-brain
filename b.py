@@ -9,6 +9,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b nc cc <ten> '<json>'  goi mot cong cu nghien cuu · `b nc hoi "y tuong"` dat cau hoi
     b nc chay|claude|tu-lai|kiem  chu ky Claude API | Claude Code | khong LLM | hieu chuan
     b vao             VAO PHIEN: trang thai song + ban giao hom qua
+    b khoi-phuc       CHAN DOAN MAY (sau khi cai lai Windows / may moi): con gi, thieu gi, con ban sao o dau
     b ket "tom tat"   KET PHIEN: chot git + sinh TIEP_TUC_MAI.md cho mai
     b bg ["dong"]     ghi BAN GIAO SONG (khong doi cuoi phien moi ban giao)
     b bg-xem          xem ban giao song hien tai
@@ -1224,6 +1225,15 @@ def c_pmg(a: list) -> int:
 
 
 
+def c_khoi_phuc(a: list) -> int:
+    """`b khoi-phuc [--json]` - CHAN DOAN MAY: cong cu, goi, MT5, kho gia, nao.db, khoa, ban sao con lai.
+
+    Dung ngay sau khi cai lai Windows hoac khi doi may/len VPS. Chi DOC, khong in noi dung bi mat.
+    Huong dan day du: `tai_lieu/KHOI_PHUC_MAY_NHA.md`.
+    """
+    return chay([PY, "-m", "nhan.khoi_phuc", *a])
+
+
 def c_tram(a: list) -> int:
     """`b tram ...` - TRAM MAY NHA: keo viec tu GitHub, chay lenh trang, day ket qua (nhan/tram.py).
 
@@ -1380,6 +1390,7 @@ LENH = {
     # --- 25/09/2026: NHA NGHIEN CUU - AI nam quyen, The Brain la bo cong cu ---
     "nc": c_nc, "nha-nghien-cuu": c_nc,
     "tram": c_tram,
+    "khoi-phuc": c_khoi_phuc, "kp": c_khoi_phuc,
 }
 
 
