@@ -30,7 +30,8 @@
 | `nc.db` (sổ tay nhà nghiên cứu AI) | `lab\` | gần như rỗng: nhà nghiên cứu mới chạy trên cloud |
 | Khoá API: `config/api_keys.json`, `gh_token.txt`, `passview.json` | `lab\config` (gitignore) | mất — nhập lại bằng tay. **Không dán khoá vào chat** |
 | `ds/` — kho DeepSeek, git riêng 56 commit, 799 test | `Research SP500\ds` | **không có repo trên GitHub** → mất nếu không tìm được bản sao. Lab chỉ cần nó ở 2 chỗ: `nhan/doc_lenh_tester.py`, `test_mimic_ban_do.py` |
-| MT5: cài đặt, đăng nhập XM demo, EA, profile | `C:\Program Files\XM MT5`, `AppData\Roaming\MetaQuotes` | mất — cài lại, mở demo mới |
+| MT5: cài đặt, đăng nhập XM demo, EA, profile | `C:\Program Files\XM MT5`, `AppData\Roaming\MetaQuotes` | mất — cài lại, mở demo mới (chủ dự án cài ngày 03/10) |
+| VPS $3 (bot V6 + EURCAD chạy 24/7), `V6_DONG_GOI/` (22 file), EA `LuoiDoiXung.mq5/.ex5`, các file `.set` | VPS + máy nhà | **mất hẳn**: VPS đã hết (chủ dự án 02/10) và những file này chưa từng commit. Còn đặc tả + kết quả (`HANDOFF.md` §1, `nhan/luoi.py`, `_hieu_chuan_v6.py`, `reports/`): viết lại từ đó nếu cần, không phải bản gốc |
 | cc-switch (provider DeepSeek), Telegram, phiên trình duyệt CDP | profile người dùng | mất — làm lại khi cần |
 | `Desktop\hethong.txt`, `../AGENTS.md` | Desktop, `Research SP500\` | bản chép `SO_DO_HE_THONG.txt` và `CLAUDE.md` (rút gọn) còn trong repo |
 
@@ -200,3 +201,9 @@ Quy trình vào phiên (cloud): `b cau lay` → `b nc nhap` → `b nc`. Máy nh�
 4. Dựng lại kho giá (mục 5) theo giao thức mục 7 (7.3 đóng băng đoạn tự chạy lần đầu `nap`).
 5. Viết `b nc tien-len` (7.4), hộ chiếu dữ liệu (7.5), trần phép thử (7.6).
 6. Đo hiệu năng máy nhà vs VPS vs container cloud (bench), rồi quyết thuê VPS.
+
+**Nhật ký** (mới nhất ở dưới):
+- 02/10 chiều: nhà đã lên (Git 2.55 PortableGit, Python 3.12.10 + venv, hook cài), `git push` từ nhà lên nhánh đã chạy, và vòng đầy đủ
+  **ping → pong cloud ↔ nhà mất khoảng 2 phút** (nhà thấy thư qua `hook` khi có prompt — chưa phải `b cau cho` tự thức). Chưa `b cau cai`, chưa có MT5/dữ liệu.
+- 02/10: VPS cũ đã hết → không còn bản nào của `V6_DONG_GOI/`, `LuoiDoiXung.mq5/.ex5`, `.set`. MT5: chủ dự án cài ngày 03/10 → bước 4 (kho giá) bắt đầu từ đó.
+
