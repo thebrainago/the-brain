@@ -100,7 +100,8 @@ may TU KEO viec qua git (`viec/cho` -> `viec/xong`, `viec/may` = nhip tim). Chi 
   lai CA ngu canh); token chinh AI sinh (thinking + lenh) va mang theo ~52% tong. Quy tac: (1) GOP lenh doc lap vao MOT goi / mot script; khong
   tham do bang LLM - cho bang lenh khong-LLM hoac `send_later` MOT lan; (2) dau ra lenh nang phai GON (head/cut/tom tat; `b nc kiem 30` da in
   1 dong, `-v` moi in het); (3) thu ngan, du lieu dai vao `reports/<ten>.md`; chi gui thu khi CO viec, khong "ok/cam on"; (4) `b cau noi` den cloud
-  GOP lan danh thuc trong 15 phut, `--thuc` chi cho viec CAN cloud quyet; (5) nghi > 1 gio = cache het han (ghi lai 2x): chot mot dot roi nghi.
+  GOP lan danh thuc trong 15 phut, `--thuc` chi cho viec CAN cloud quyet; (5) nghi > 1 gio = cache het han (ghi lai 2x): chot mot dot roi nghi; (6) PHIEN MOI sau moi moc re hon giu phien dai: `b tiep --ghi` (cap nhat
+  khoi TAY cua `tai_lieu/PHIEN_HIEN_TAI.md`) roi mo phien moi, vao bang `b tiep` - mo tai lieu theo `b tiep --chi-muc`, doc dung doan bang `sed -n`.
   Phien nha tu cho thu: `b cau cho` NEN (timeout 3600000) CHI khi chu du an dang lam viec voi no; het gio (55 phut) thi chay lai NGAY, khong viet
   them gi; dem / di vang de runner khong-LLM (`b cau chay`). Cua so nen ngu canh: `.claude/settings.json` (autoCompactWindow 300000), phien tuy y
   `/autocompact 300k`; `/effort high|medium` cho viec co hoc, `max` chi cho thiet ke kho. Vao phien nha lan dau: `tai_lieu/BAT_DAU_O_NHA.md`.
@@ -139,6 +140,7 @@ Sau khi co slot tester (goi G2-A) thi noi ra: moi phien giu **mot slot rieng**.
 
 ## Vao phien / ket phien
 ```
+b tiep             BAN GIAO PHIEN (~1,5k token): trang thai + quyet dinh + viec ke tiep - DOC DAU TIEN, KHONG doc lai lich su chat / tai lieu dai
 b nc               HO SO NGHIEN CUU - doc dau tien (LUAT SO 1)
 b vao              trang thai song + ban giao hom qua  (~2 giay)
 b ban-do           SINH ban do tu ma nguon - DOC TRUOC KHI XAY GI MOI

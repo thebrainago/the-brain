@@ -10,6 +10,8 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b nc chay|claude|tu-lai|kiem  chu ky Claude API | Claude Code | khong LLM | hieu chuan
     b vao             VAO PHIEN: trang thai song + ban giao hom qua
     b khoi-phuc       CHAN DOAN MAY (sau khi cai lai Windows / may moi): con gi, thieu gi, con ban sao o dau
+    b so-sanh [--khai]  SO SANH model re (DeepSeek / Qwen) tren viec cua lab, cham bang ma: diem + token + do tre + chi phi (can API)
+    b tiep [--ghi|--chi-muc]  BAN GIAO PHIEN (~1,5k token): trang thai + quyet dinh + viec ke tiep - DOC DAU TIEN, khong doc lai lich su chat
     b token [file.jsonl]  DO TOKEN that cua phien Claude Code (cache doc/ghi, dau ra, ngu canh, khoan ton nhat) + khuyen nghi
     b ket "tom tat"   KET PHIEN: chot git + sinh TIEP_TUC_MAI.md cho mai
     b bg ["dong"]     ghi BAN GIAO SONG (khong doi cuoi phien moi ban giao)
@@ -1256,6 +1258,25 @@ def c_khoi_phuc(a: list) -> int:
     return chay([PY, "-m", "nhan.khoi_phuc", *a])
 
 
+def c_so_sanh(a: list) -> int:
+    """`b so-sanh [--khai] [--nha-cung-cap deepseek,qwen] [--task a,b] [--lan 2] [--dai] [--json]` - SO SANH model re tren viec cua lab.
+
+    9 task cham bang MA (JSON, khai bao co che qua `ngu_phap`, goi cong cu, trich so, tinh CAGR/maxDD, luat chan, tom tat khong bia,
+    tieng Viet). Khoa lay tu cc-switch (may nha) hoac bien moi truong - khong bao gio tu repo/chat. `--khai` chi in cach giai quyet.
+    Huong dan: `tai_lieu/SO_SANH_LLM.md`.
+    """
+    return chay([PY, "-m", "nhan.so_sanh_llm", *a])
+
+
+def c_tiep(a: list) -> int:
+    """`b tiep [--ghi] [--chi-muc]` - BAN GIAO PHIEN: doc `tai_lieu/PHIEN_HIEN_TAI.md` (AUTO moi + khoi TAY cua phien chi huy).
+
+    Thay cho viec doc lai lich su chat / tai lieu dai khi mo phien MOI (chi phi = so goi x kich thuoc ngu canh; phien moi chi ~90k nen).
+    `--ghi` lam moi khoi AUTO va giu nguyen TAY; `--chi-muc` liet ke tai lieu theo co (~token) de mo dung cai can.
+    """
+    return chay([PY, "-m", "nhan.phien_hien_tai", *a])
+
+
 def c_token(a: list) -> int:
     """`b token [file.jsonl] [--json]` - DO TOKEN that cua mot phien Claude Code tu transcript (mac dinh: moi nhat cua thu muc nay).
 
@@ -1414,6 +1435,8 @@ LENH = {
     "nc": c_nc, "nha-nghien-cuu": c_nc,
     "khoi-phuc": c_khoi_phuc, "kp": c_khoi_phuc,
     "token": c_token,
+    "tiep": c_tiep,
+    "so-sanh": c_so_sanh,
 }
 
 

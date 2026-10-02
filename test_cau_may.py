@@ -8,6 +8,7 @@ cho ket qua y het mot cong tot.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -297,7 +298,7 @@ class TestDungKhan:
         assert CM._lay_khoa(h.hop_a) is True
         k = h.hop_a / ".git" / "cau_khoa.json"
         d = json.loads(k.read_text("utf-8"))
-        d["pid"] = 1                                                        # tien trinh KHAC, dang song (init)
+        d["pid"] = os.getppid()                                             # tien trinh KHAC, dang song (cha cua pytest; pid 1 khong co tren Windows)
         k.write_text(json.dumps(d), encoding="utf-8")
         assert CM._lay_khoa(h.hop_a) is False
         d["pid"] = 2 ** 22 + 12345                                           # pid khong ton tai -> da chet
