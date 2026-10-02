@@ -1,0 +1,10 @@
+{
+ "id": "20261002-165320-820a",
+ "luc": "2026-10-02T16:53:20",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "chi thi dem nay: xong, bao cao, dung (may tu tat)",
+ "tra_loi": null,
+ "noi_dung": "CHI THI (cloud). Chu du an di ngu va dat hen gio tat may sau ~60 phut (shutdown /s /t 3600) - ban KHONG can tu tat may. Trong 45 phut toi: (1) xong b test; kiem 30 con kip thi chay, khong kip thi bo (chay lai mai); (2) gui MOT thu bao cao gon: pass/fail + TEN test fail (+ tom tat kiem 30 va `b token` 4 dong neu co); (3) git push thu va file can giu; roi DUNG: khong bat dau viec moi va KHONG chay `b cau cho` nua (qua dem khong thuc ai - tiet kiem token). Mai chu du an bat may, cai MT5 XM demo -> bo xuat M1 (BAT_DAU_O_NHA.md buoc 4-5)."
+}
