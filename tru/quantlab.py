@@ -81,13 +81,20 @@ TRAN_LOP_DOI_CHUNG = 3
 
 
 def _lop_doi_chung() -> set[str]:
-    """Lop khong duoc ho co che nao khai la `hop` -> chi dung de phan chung."""
-    try:
-        from nhan import pham_vi as PV
-        co_the_mang = {l for k in PV.PHAM_VI.values() for l in (k.get("hop") or [])}
-        return {l for l in PV.LOAI if l not in co_the_mang}
-    except Exception:
-        return set()
+    """Lop khong duoc ho co che nao khai la `hop` -> chi dung de phan chung.
+
+    KHONG nuot loi (sua 19/09/2026). Ban cu tra `set()` khi import hong, va
+    `set()` rong lam `lop in _lop_doi_chung()` LUON sai - moi lop deu dung
+    `TRAN_MOI_LOP` thay vi `TRAN_LOP_DOI_CHUNG`. Thuat toan chon tai san doi
+    hoan toan ma khong mot dong nao bao.
+
+    Docstring cua `_tai_san_kha_dung` ngay duoi day ke lai mot lan y het the:
+    mot dieu kien khong bao gio dung lam ca he chi nhin thay 11 tai san trong
+    khi kho co 80 bang OHLC >= 12 nam.
+    """
+    from nhan import pham_vi as PV
+    co_the_mang = {l for k in PV.PHAM_VI.values() for l in (k.get("hop") or [])}
+    return {l for l in PV.LOAI if l not in co_the_mang}
 
 
 def _tai_san_kha_dung() -> list[str]:

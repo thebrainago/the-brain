@@ -20,7 +20,9 @@ sach chep tay se lech lai; mot bai test goi that thi khong.
 """
 from __future__ import annotations
 
+import re
 import unittest
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -126,6 +128,41 @@ class MoiToanHangKhaiRaDeuGOI_DUOC(unittest.TestCase):
     def test_nhan_cot_la_tap_con_cua_co(self):
         self.assertTrue(NP.CHI_BAO_NHAN_COT <= NP.CHI_BAO_CO,
                         sorted(NP.CHI_BAO_NHAN_COT - NP.CHI_BAO_CO))
+
+    def test_moi_toan_hang_goi_duoc_deu_KHAI_RA(self):
+        """CHIEU CON THIEU, va la chieu da mat 7 toan hang (do 19/09/2026).
+
+        Bai `test_goi_that_tung_ten_mot` khoa chieu "khai ra thi phai goi
+        duoc". Chieu nguoc - "goi duoc thi phai khai ra" - khong ai khoa, nen
+        `donchian`, `ichimoku`, `vwap`, `keltner`, `supertrend`, `heiken`,
+        `mau_nen` nam trong bo dieu phoi ma khong co ten trong `CHI_BAO_CO`.
+
+        Cai gia khong phai la mot dong ma thua. `CHI_BAO_CO` CHINH LA
+        `thu_hoi_thanh_phan._DIEN_DAT_DUOC` - danh sach bo boc dung de quyet
+        dinh "co dien dat duoc khong". Mot cai ten thieu o day lam moi tai lieu
+        noi ve chi bao do bi cham la KHONG DIEN DAT DUOC roi bo, trong khi ngu
+        phap chay no tot. Docstring cua `_toan_hang_tinh` da ghi dung lop loi
+        nay tu 01/09 ("BA TOAN HANG BAO CAO DA GIAU MAT") va no van tai dien.
+
+        Doc ten tu CHINH MA NGUON chu khong tu mot danh sach chep tay - mot ban
+        chep tay thu hai se lech y het ban thu nhat.
+        """
+        src = Path(NP.__file__).read_text(encoding="utf-8")
+        than = src[src.index("def _toan_hang_tinh"):src.index("CHI_BAO_CO = {")]
+        goi = set(re.findall(r'cb\s*==\s*"(\w+)"', than))
+        df = _df()
+        thieu = []
+        for cb in sorted(goi - NP.CHI_BAO_CO):
+            t = {"chi_bao": cb, "n": 14}
+            t.update(_DOI_SO.get(cb, {}))
+            try:
+                NP.toan_hang(df, t)
+            except Exception:
+                continue          # goi khong duoc that -> khong phai lot so
+            thieu.append(cb)
+        self.assertEqual(thieu, [],
+                         "bo dieu phoi tinh duoc ma `CHI_BAO_CO` khong khai - "
+                         "bo boc se cham la 'khong dien dat duoc'")
 
     def test_ten_khong_biet_van_nem_loi(self):
         """Hieu chuan chieu nguoc: neu moi ten deu chay thi bai tren vo nghia."""

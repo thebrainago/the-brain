@@ -532,14 +532,15 @@ def bao_dam_spread(ma: str, toi_da_gio: float = 168.0) -> dict | None:
             tuoi = (time.time() -
                     time.mktime(time.strptime(cu["do_luc"], "%Y-%m-%d %H:%M:%S"))) / 3600.0
             if tuoi < toi_da_gio:
-                return cu
+                return _danh_dau_cu(cu, do_lai_duoc=True)
         except Exception:
-            return cu
+            return _danh_dau_cu(cu, do_lai_duoc=False)
     moi = do_spread_tu_bar_mt5(ma)
     if moi:
         _luu_spread(ma, moi)
-        return moi
-    return cu
+        return _danh_dau_cu(moi, do_lai_duoc=True)
+    # Do lai KHONG duoc. Tra ban cu (co con hon khong) nhung noi ro la ban cu.
+    return _danh_dau_cu(cu, do_lai_duoc=False)
 
 
 def phi_cua(ma: str, san_uu_tien: list[str] | None = None) -> dict | None:
@@ -676,6 +677,37 @@ def _khoa_cau_hinh() -> tuple | None:
         return (st.st_mtime_ns, st.st_size)
     except OSError:
         return None
+
+
+def _danh_dau_cu(d: dict | None, do_lai_duoc: bool) -> dict | None:
+    """Them `tuoi_gio` va `do_lai_duoc` vao mot ban spread da luu.
+
+    ## VI SAO CAN (sua 19/09/2026)
+
+    `spread_cua` tra ban CU khi khong do lai duoc - MT5 khong cai, khong dang
+    nhap, hay san tu choi - va no tra trong IM LANG. Ban cu co truong `do_luc`
+    nen tuoi khong bi giau, nhung khong ai buoc phai nhin: mot con so spread ba
+    thang tuoi doc Y HET mot con so vua do xong.
+
+    Va spread la dau vao cua MOI phep tinh lai/lo. `CLAUDE.md` con ghi ro
+    "spread do tu bar D1 la chan tren - H1 thap hon ~39%", tuc du an da biet
+    sai so cua chinh phep do nay den muc nao.
+
+    Ham nay KHONG doi hanh vi: tra ban cu van dung, co con hon khong. No chi
+    lam cai tuoi thanh mot truong PHAI DOC, thay vi mot thu co the nhin.
+    """
+    if not d:
+        return d
+    d = dict(d)
+    d["do_lai_duoc"] = bool(do_lai_duoc)
+    try:
+        d["tuoi_gio"] = round(
+            (time.time() - time.mktime(
+                time.strptime(d["do_luc"], "%Y-%m-%d %H:%M:%S"))) / 3600.0, 1)
+    except (KeyError, TypeError, ValueError):
+        # Khong biet tuoi thi noi la khong biet. Bao 0 gio la noi doi.
+        d["tuoi_gio"] = None
+    return d
 
 
 def _doc_luu() -> dict:
