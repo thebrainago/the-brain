@@ -76,3 +76,6 @@ CAU_DUNG
 viec/.khoa_tester
 viec/**/*.tam
 .venv/
+
+# cai dat Claude Code RIENG cua may (hook thu: b cau hook-cai)
+.claude/settings.local.json

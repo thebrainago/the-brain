@@ -29,6 +29,11 @@ Claude tren cloud; may nha va VPS la tay chan. Moi thu di qua MOT hop thu: `viec
     b cau lay                                    (cloud) keo ket qua ve + in bang
     b cau dung | tiep                            (cloud) cong tac dung khan tu xa
     b cau xem MA | duyet MA VAN_TAY              (may) xem / duyet MOT don ngoai danh sach trang
+
+NHIEU CHIEU - noi tu BAT KY phien nao (xem `cau_thu.py`):
+    b cau noi "..." [--den cloud|nha] [--chu-de X] [--tra-loi ID]   gui THU (nha -> cloud: kem danh thuc phien cloud)
+    b cau thu [--hook] [--tat-ca] [--ben nha|cloud]                  doc thu moi (--hook: cho Claude Code o nha)
+    b cau hook-cai | dat-session session_XXXX                        (may nha) gan hook + khai bao phien cloud
 """
 from __future__ import annotations
 
@@ -44,12 +49,12 @@ from pathlib import Path
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from qwen import cau_git as CG, cau_trang as CT
+from qwen import cau_git as CG, cau_thu as CTH, cau_trang as CT
 
 GOC = CG.GOC
 _TEN = re.compile(r"[^A-Za-z0-9_.-]")
 _MA_OK = re.compile(r"^[A-Za-z0-9_.-]{1,40}$")
-_SESSION = re.compile(r"^(session|cse)_[A-Za-z0-9]{10,60}$")
+_SESSION = CTH.SESSION
 _NHANH = re.compile(r"^[A-Za-z0-9._/-]{1,100}$")
 _URL = re.compile(r"^https://[A-Za-z0-9.-]+/[\w.-]+/[\w.-]+?(\.git)?$")
 TOI_DA_BAO_NGAY = 12
@@ -392,6 +397,36 @@ def main(argv: list[str]) -> int:
             return 0
         if lenh == "xem":
             print(json.dumps(xem(con[0]), ensure_ascii=False, indent=1))
+            return 0
+        if lenh == "noi":
+            rest = [x for i, x in enumerate(con) if not (x.startswith("--") or (i > 0 and con[i - 1].startswith("--")))]
+            if not rest:
+                print('b cau noi "<noi dung>" [--den cloud|nha] [--chu-de X] [--tra-loi ID]')
+                return 2
+            r = CTH.noi(" ".join(rest), den=_co(con, "--den"), chu_de=_co(con, "--chu-de", ""),
+                        tra_loi=_co(con, "--tra-loi"))
+            print(json.dumps(r, ensure_ascii=False, indent=1))
+            return 1 if r.get("loi_git") and not r.get("danh_thuc", {}).get("da_goi") else 0
+        if lenh == "thu":
+            ben = _co(con, "--ben") or (CTH.ben_mac_dinh() if "--hook" not in con else None)
+            if "--hook" in con:                       # in thang vao ngu canh cua Claude Code; khong bao gio loi
+                s = CTH.hook(ben)
+                if s:
+                    print(s)
+                return 0
+            CTH.lay()
+            ds = CTH.doc_moi(ben, xem_tat_ca="--tat-ca" in con)
+            for d in ds:
+                print(CTH.hien(d, 6000), end="\n\n")
+            CTH.danh_dau_da_doc(ben, [d["id"] for d in ds])
+            if not ds:
+                print("khong co thu moi cho %s" % ben)
+            return 0
+        if lenh == "hook-cai":
+            print(json.dumps(CTH.cai_hook(), ensure_ascii=False, indent=1))
+            return 0
+        if lenh == "dat-session":
+            print(json.dumps(CTH.dat_session(con[0]), ensure_ascii=False))
             return 0
         if lenh == "duyet":
             print(json.dumps(duyet(con[0], con[1]), ensure_ascii=False))

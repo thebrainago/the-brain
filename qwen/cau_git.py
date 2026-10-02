@@ -212,7 +212,7 @@ def _keo(nhanh: str, goc: Path | None = None, rieng: bool = False) -> dict:
     if ma == 0:
         return {"da_keo": True}
     if rieng:
-        ma2, ra2, loi2 = _git("rebase", "FETCH_HEAD", goc=goc, han=180.0)
+        ma2, ra2, loi2 = _git("rebase", "--autostash", "FETCH_HEAD", goc=goc, han=180.0)
         if ma2 == 0:
             return {"da_keo": True, "rebase": True}
         _git("rebase", "--abort", goc=goc)

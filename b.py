@@ -790,13 +790,20 @@ def c_cau(a):
         b cau cai URL NHANH [--ten T] [--kha-nang a,b] [--session ID] [--bao-cloud]   (may) hop thu rieng
         b cau chay [--lien-tuc]   (may) mot luot keo -> nhan viec -> chay -> day; lich 5 phut/lan
         b cau xem MA | duyet MA VAN_TAY   (may) duyet MOT don ngoai danh sach trang
+        b cau noi "..." [--den cloud|nha]   NHIEU CHIEU: gui thu cho phien KIA (nha -> cloud, cloud -> nha)
+        b cau thu [--tat-ca]    doc thu moi · b cau hook-cai: phien Claude Code o nha tu hien thu o cau ke tiep
 
     Ben CLOUD ra don roi `git push`; may chay `q` tu keo ve. Ben MAY ghi ket
     qua roi day len; cloud `git pull` la doc duoc.
     """
     from qwen import cau_git as CG
-    CG.bao_dam_thu_muc()
     viec = (a[0] if a else "").lower()
+
+    # Lenh THU (hook chay moi cau chu du an go) khong duoc ghi gi len dia khi khong co thu: di thang, truoc `bao_dam_thu_muc`.
+    if viec in ("noi", "thu", "hook-cai", "dat-session"):
+        from qwen import cau_may as CM
+        return CM.main(a)
+    CG.bao_dam_thu_muc()
 
     if viec in ("cai", "chay", "may", "giao", "lay", "dung", "tiep", "xem", "duyet"):
         from qwen import cau_may as CM

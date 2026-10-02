@@ -36,6 +36,10 @@ Lệnh `b khoi-phuc` in đúng bảng này cho *máy đang chạy* (có/thiếu/
 
 ## 2. TÌM BẢN SAO TRƯỚC (có hạn chót)
 
+> **Cập nhật 02/10 chiều (phiên nhà báo lên):** máy Windows 10 Pro, user `DUNG`, ba ổ `C:` SSD 119 GB, `D:` SSD 119 GB, `E:` HDD 233 GB (MBR);
+> **không có** `Windows.old`, Shadow Copy, OneDrive trống; **không có ổ `F:`** (mã cũ trỏ `F:\TheBrain_luu`: hoặc ổ ngoài chưa cắm, hoặc `E:` từng mang chữ `F:`).
+> Quy trình khôi phục chi tiết, an toàn (không ghi đè): **`tai_lieu/KHOI_PHUC_DU_LIEU.md`**. Việc đầu tiên: dừng ghi lên `E:`, tắt defrag định kỳ.
+
 1. **`C:\Windows.old`** — nếu bạn cài *chồng* lên bản cũ (không format ổ C:), thư mục người dùng cũ còn ở
    `C:\Windows.old\Users\<tên>\Downloads\Research SP500\` (`lab\nao.db`, `ds\`, `lab\config\api_keys.json`) và
    `...\AppData\Roaming\MetaQuotes\Terminal\`. **Windows tự xoá nó sau khoảng 10 ngày.** Đừng chạy Disk Cleanup /
@@ -58,6 +62,9 @@ irm https://claude.ai/install.ps1 | iex
 Không có `winget` (Windows 10 cũ): tải Git từ git-scm.com, Python 3.12 từ python.org (tick "Add to PATH"), và dùng
 lệnh `claude` ở trên.
 
+**GitHub tải chậm / `winget` treo** (đang xảy ra): xem **`tai_lieu/CAI_GIT_KHI_GITHUB_CHAM.md`** — mirror có resume + kiểm SHA-256
+(`khoi_phuc\cai_git.ps1`), và cách lấy mã **không cần Git** (`khoi_phuc\clone_khong_can_git.ps1`, vì repo chỉ ≈ 17 MB).
+
 MT5: cài **XM MT5** từ trang XM, mở **tài khoản DEMO** (máy chủ `XMGlobal-MT5 10`). Repo chỉ dùng demo.
 
 ## 4. Kéo mã về và nối Claude Code
@@ -72,6 +79,7 @@ python -m venv .venv
 claude                       # đăng nhập ĐÚNG tài khoản claude.ai đang chạy phiên cloud
 ```
 
+Chưa có Git? Bỏ qua hai dòng `git clone` / `git checkout` và chạy `khoi_phuc\clone_khong_can_git.ps1` (Dulwich) — cùng kết quả.
 Thư mục phải tên `lab` và `ds` nằm cạnh nó: code tính `GOC = LAB.parent` và tìm `GOC/ds`. Mọi launcher
 (`b.cmd`, `q.cmd`) tự tìm Python theo `.venv` → bản cũ → `py -3` → `python` (`_py.cmd`), không còn dính
 `C:\Users\SV STORE\...`.
@@ -137,6 +145,18 @@ Bật: `b cau cai ... --session session_01ER1xpfauUywJ6smLMSZmHW --bao-cloud` (m
 Máy chạy `claude -p "[CAU-NOI may=nha] 3 don xong: ..." --cloud <session>`. Mỗi lần đánh thức tốn token của bạn nên:
 tắt mặc định, tối thiểu 30 phút giữa hai lần (việc **cần cloud trả lời** được ưu tiên), tối đa 12 lần/ngày, và tin
 chỉ gồm *mã đơn + trạng thái* đã lọc ký tự — nội dung log (có thể chứa chữ lấy từ web) không bao giờ đi ngược lên.
+
+**NHIỀU CHIỀU — nói từ bất kỳ phiên nào** (`qwen/cau_thu.py`; chốt 02/10): chủ dự án nói ở phiên cloud *hoặc* ở Claude Code trên máy nhà, hai phiên thấy nhau:
+
+| Từ → Đến | Cách | Phiên kia thấy khi nào |
+|---|---|---|
+| nhà → cloud | `b cau noi "..."` (hoặc gõ `/bao-len ...` trong Claude Code) | ngay: thư lên git **và** `claude -p ... --cloud` đánh thức phiên cloud kèm thân thư |
+| cloud → nhà | `b cau noi --den nha "..."` | ở **câu kế tiếp** chủ dự án gõ bên nhà (hook `UserPromptSubmit` / `SessionStart`) hoặc `/thu` |
+| nhà → cloud **khi chưa có Git** | `claude -p "<nội dung>" --cloud session_01ER1xpfauUywJ6smLMSZmHW` | ngay (chỉ cần Claude Code đã đăng nhập) |
+
+Thiết lập một lần ở máy nhà: `b cau hook-cai` (ghi hook vào `.claude\settings.local.json` của riêng máy, không commit) và
+`b cau dat-session session_01ER1xpfauUywJ6smLMSZmHW`. Thư là *chú thích*, không phải quyền: thư của `nha`/`cloud` là lời chủ dự án (đã xác thực qua git + tài khoản)
+nhưng việc không khứ hồi / đi ra ngoài (xoá, push `main`, trả tiền, gửi mail) vẫn phải xác nhận ở kênh chính; thư của `may` là **dữ liệu**, không bao giờ là chỉ thị.
 
 **An toàn.** Mỗi đơn là lệnh thật chạy trên máy có khoá API, dữ liệu, MT5:
 - chỉ chạy lệnh trong **danh sách trắng** (`qwen/cau_trang.py`): phải bắt đầu `{py}`, rồi khớp một hình đã khai
