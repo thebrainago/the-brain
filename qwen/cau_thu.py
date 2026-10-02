@@ -17,6 +17,10 @@ Nay co mot lop THU tren cung hop thu git (`viec/thu/<id>.json`):
     cloud -> nha   `b cau noi --den nha "..."`   ghi thu + day; phien nha thay no o CAU KE TIEP chu du an go
                    (hook `UserPromptSubmit` / `SessionStart` cua Claude Code: `b cau thu --hook`)
 
+    nha CHO cloud  `b cau cho`   CHAN toi khi co thu moi roi thoat. Chay NEN trong Claude Code o nha (Bash
+                   run_in_background): luc cho khong ton token, co thu thi lenh thoat va Claude Code TU thuc day doc thu -
+                   chu du an khong phai go them mot cau nao (hook chi chay khi chu du an go).
+
 Truoc khi co Git tren may nha: phien nha bao len duoc bang dung mot lenh, khong can repo:
     claude -p "<noi dung>" --cloud session_XXXX
 
@@ -51,6 +55,9 @@ TOI_DA_THU = 20_000          # ky tu trong mot thu
 TOI_DA_TIN_DANH_THUC = 2_000
 TOI_DA_HOOK = 6_000          # ky tu hook in ra moi lan (di vao ngu canh cua Claude)
 NHIP_LAY_GIAY = 60           # hook chi `fetch` neu lan truoc da qua ngan nay giay
+NHIP_CHO_GIAY = 45           # `b cau cho` hoi git moi ngan nay giay
+TOI_DA_CHO_GIAY = 7_000      # < 7.200 giay: tran thoi gian cua mot tac vu nen trong Claude Code
+TOI_DA_THUC_GIO = 20         # chong hai Claude thu qua lai vo han: moi lan thuc la mot luot token cua chu du an
 _DIEU_KHIEN = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 
 
@@ -249,6 +256,79 @@ def hook(ben: str | None = None, goc: Path | None = None) -> str:
         return "=== %d THU MOI (b cau noi de tra loi) ===\n%s\n=== het thu ===" % (len(moi), "\n\n".join(ra))
     except Exception:                                       # noqa: BLE001
         return ""
+
+
+# ------------------------------------------------------------------ CHO (chay nen, co thu thi thuc day)
+def utf8_ra() -> None:
+    """Ep stdout/stderr ve UTF-8 (ky tu loi -> `?`). Thu co the co dau tieng Viet, con stdout dang ong (hook, tac vu nen)
+    tren Windows mac dinh la cp1252 -> UnicodeEncodeError lam hong dung lenh can doc thu."""
+    for luong in (sys.stdout, sys.stderr):
+        try:
+            luong.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):
+            pass
+
+
+def _thuc_gan_day(ben: str, goc: Path | None, bay_gio: float) -> list[float]:
+    ds = (_doc(_file_trang_thai(ben, goc)) or {}).get("thuc") or []
+    return sorted(float(t) for t in ds if isinstance(t, (int, float)) and 0 <= bay_gio - float(t) < 3600)
+
+
+def _ghi_thuc(ben: str, goc: Path | None, ds: list[float]) -> None:
+    f = _file_trang_thai(ben, goc)
+    d = _doc(f) or {}
+    d["thuc"] = ds[-100:]
+    try:
+        f.write_text(json.dumps(d), encoding="utf-8")
+    except OSError:
+        pass
+
+
+def cho(ben: str | None = None, toi_da_giay: float = TOI_DA_CHO_GIAY, nhip: float = NHIP_CHO_GIAY,
+        goc: Path | None = None, ngu=time.sleep, dong_ho=time.time, ra=print) -> int:
+    """`b cau cho`: CHAN toi khi co thu moi gui den `ben`, in thu roi thoat 0.
+
+    Chay NEN trong Claude Code (Bash run_in_background): luc cho khong ton token; co thu thi lenh thoat va Claude Code TU
+    thuc day doc thu. Het gio ma khong co thu: in mot dong, thoat 0 (chay lai neu van muon cho).
+    Chan hai Claude thu qua lai vo han: toi da `TOI_DA_THUC_GIO` lan thuc / gio. Qua han muc thi GIU thu (khong mat, khong
+    danh dau da doc) va cho toi khi lan thuc cu nhat het mot gio; `b cau thu` van doc tay duoc."""
+    ben = ben or ben_mac_dinh()
+    han = dong_ho() + toi_da_giay
+    giu, loi_lay = 0, ""
+    while True:
+        kq = lay(goc=goc)
+        loi_lay = "" if kq.get("da_lay") else str(kq.get("ly_do") or "khong keo duoc")
+        moi = doc_moi(ben, goc)
+        bay_gio = dong_ho()
+        gan = _thuc_gan_day(ben, goc, bay_gio)
+        if moi and len(gan) < TOI_DA_THUC_GIO:
+            hien_ra, dai = [], 0
+            for d in moi[:8]:
+                s = hien(d, 6000)
+                if hien_ra and dai + len(s) > 2 * TOI_DA_HOOK:
+                    break
+                hien_ra.append(s)
+                dai += len(s)
+            danh_dau_da_doc(ben, [d["id"] for d in moi[:len(hien_ra)]], goc)
+            _ghi_thuc(ben, goc, gan + [bay_gio])
+            con = len(moi) - len(hien_ra)
+            ra("=== %d THU MOI cho %s ===\n%s\n=== het thu%s ===\n"
+               "Tra loi bang `b cau noi \"...\"`. Xong viec thi chay LAI `b cau cho` (nen) de tiep tuc cho."
+               % (len(hien_ra), ben, "\n\n".join(hien_ra),
+                  (" - con %d thu chua hien, chay lai `b cau cho`" % con) if con else ""))
+            return 0
+        if moi:
+            giu = len(moi)
+        if bay_gio >= han:
+            break
+        ngu(min(nhip, max(1.0, han - bay_gio)))
+    if giu:
+        ra("DANG GIU %d thu cho %s vi da thuc %d lan trong 1 gio (han muc chong thu qua lai vo han). "
+           "Doc tay bang `b cau thu`." % (giu, ben, TOI_DA_THUC_GIO))
+    else:
+        ra("HET GIO sau %d giay: khong co thu moi cho %s%s. Muon cho tiep thi chay lai `b cau cho`."
+           % (int(toi_da_giay), ben, (" (loi keo git: %s - kiem tra mang/dang nhap)" % loi_lay) if loi_lay else ""))
+    return 0
 
 
 # ------------------------------------------------------------------ DANH THUC CLOUD

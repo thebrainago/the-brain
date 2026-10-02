@@ -33,6 +33,7 @@ Claude tren cloud; may nha va VPS la tay chan. Moi thu di qua MOT hop thu: `viec
 NHIEU CHIEU - noi tu BAT KY phien nao (xem `cau_thu.py`):
     b cau noi "..." [--den cloud|nha] [--chu-de X] [--tra-loi ID]   gui THU (nha -> cloud: kem danh thuc phien cloud)
     b cau thu [--hook] [--tat-ca] [--ben nha|cloud]                  doc thu moi (--hook: cho Claude Code o nha)
+    b cau cho [--toi-da GIAY] [--ben nha|cloud]                      CHO thu moi (chay NEN; co thu thi thoat de Claude Code tu thuc)
     b cau hook-cai | dat-session session_XXXX                        (may nha) gan hook + khai bao phien cloud
 """
 from __future__ import annotations
@@ -408,6 +409,7 @@ def main(argv: list[str]) -> int:
             print(json.dumps(r, ensure_ascii=False, indent=1))
             return 1 if r.get("loi_git") and not r.get("danh_thuc", {}).get("da_goi") else 0
         if lenh == "thu":
+            CTH.utf8_ra()
             ben = _co(con, "--ben") or (CTH.ben_mac_dinh() if "--hook" not in con else None)
             if "--hook" in con:                       # in thang vao ngu canh cua Claude Code; khong bao gio loi
                 s = CTH.hook(ben)
@@ -422,6 +424,9 @@ def main(argv: list[str]) -> int:
             if not ds:
                 print("khong co thu moi cho %s" % ben)
             return 0
+        if lenh == "cho":
+            CTH.utf8_ra()
+            return CTH.cho(ben=_co(con, "--ben"), toi_da_giay=float(_co(con, "--toi-da", CTH.TOI_DA_CHO_GIAY)))
         if lenh == "hook-cai":
             print(json.dumps(CTH.cai_hook(), ensure_ascii=False, indent=1))
             return 0

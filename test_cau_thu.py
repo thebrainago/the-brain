@@ -255,6 +255,102 @@ class TestCaiHook:
             CTH.dat_session("--help")
 
 
+# ============================================================ CHO (chay nen, co thu thi thuc day)
+class _DongHo:
+    """Dong ho gia: `ngu` chi cong thoi gian, co the kem mot viec chay luc 'dang ngu' (vd cloud gui thu)."""
+
+    def __init__(self, t0=1000.0, luc_ngu=None):
+        self.t, self.dem, self.luc_ngu = t0, 0, luc_ngu
+
+    def ngu(self, giay):
+        self.t += giay
+        self.dem += 1
+        if self.luc_ngu:
+            self.luc_ngu(self.dem)
+
+    def __call__(self):
+        return self.t
+
+
+class TestCho:
+    def _cho(self, h, dh, ra, **kw):
+        kw.setdefault("toi_da_giay", 600)
+        kw.setdefault("nhip", 45)
+        return CTH.cho("nha", goc=h.nha, ngu=dh.ngu, dong_ho=dh, ra=ra.append, **kw)
+
+    def test_co_san_thu_thi_in_ngay_danh_dau_da_doc_va_khong_ngu(self, hai_dau):
+        h = hai_dau
+        CTH.gui("cloud", "nha", "Da them b cau cho.", chu_de="cap nhat", goc=h.cloud, nhanh="main", rieng=True)
+        dh, ra = _DongHo(), []
+        assert self._cho(h, dh, ra) == 0
+        assert dh.dem == 0, "co thu san thi khong duoc ngu"
+        assert len(ra) == 1 and "1 THU MOI cho nha" in ra[0] and "Da them b cau cho." in ra[0]
+        assert "THU TU cloud" in ra[0] and "b cau cho" in ra[0]            # nhac chay LAI de tiep tuc cho
+        assert CTH.doc_moi("nha", h.nha) == [], "da in roi thi khong hien lai"
+
+    def test_thu_den_giua_luc_cho_thi_thuc_day_khong_cho_het_gio(self, hai_dau):
+        h = hai_dau
+        gui = lambda n: n == 2 and CTH.gui("cloud", "nha", "xong buoc 1", goc=h.cloud, nhanh="main", rieng=True)
+        dh, ra = _DongHo(luc_ngu=gui), []
+        assert self._cho(h, dh, ra, toi_da_giay=3600) == 0
+        assert dh.dem == 2 and "xong buoc 1" in ra[0], "phai thuc ngay khi thu den, khong doi het %d giay" % 3600
+
+    def test_het_gio_ma_khong_co_thu_thi_noi_ro_va_thoat_0(self, hai_dau):
+        h = hai_dau
+        dh, ra = _DongHo(), []
+        assert self._cho(h, dh, ra, toi_da_giay=100, nhip=45) == 0
+        assert dh.dem == 3 and dh.t == 1100.0, "ngu 45+45+10 roi dung dung han"
+        assert len(ra) == 1 and ra[0].startswith("HET GIO") and "khong co thu moi cho nha" in ra[0]
+        assert "loi keo git" not in ra[0]
+
+    def test_thu_da_hien_o_hook_thi_cho_khong_thuc_lai(self, hai_dau):
+        h = hai_dau
+        CTH.gui("cloud", "nha", "ban tin", goc=h.cloud, nhanh="main", rieng=True)
+        assert "ban tin" in CTH.hook("nha", goc=h.nha)
+        dh, ra = _DongHo(), []
+        self._cho(h, dh, ra, toi_da_giay=50)
+        assert ra[0].startswith("HET GIO")
+
+    def test_khong_keo_duoc_git_thi_bao_ly_do_chu_khong_im_lang(self, hai_dau, monkeypatch):
+        h = hai_dau
+        monkeypatch.setattr(CTH, "lay", lambda **kw: {"da_lay": False, "ly_do": "fetch hong: mang chet"})
+        dh, ra = _DongHo(), []
+        self._cho(h, dh, ra, toi_da_giay=50)
+        assert ra[0].startswith("HET GIO") and "loi keo git" in ra[0] and "mang chet" in ra[0]
+
+    def test_qua_han_muc_thuc_day_thi_giu_thu_khong_mat(self, hai_dau):
+        h = hai_dau
+        CTH.gui("cloud", "nha", "thu thu 21", goc=h.cloud, nhanh="main", rieng=True)
+        CTH._ghi_thuc("nha", h.nha, [990.0] * CTH.TOI_DA_THUC_GIO)          # da thuc 20 lan trong gio qua
+        dh, ra = _DongHo(), []
+        self._cho(h, dh, ra, toi_da_giay=300, nhip=100)
+        assert len(ra) == 1 and ra[0].startswith("DANG GIU 1 thu") and "thu thu 21" not in ra[0]
+        assert [d["noi_dung"] for d in CTH.doc_moi("nha", h.nha)] == ["thu thu 21"], "thu bi giu phai con chua doc"
+
+    def test_het_mot_gio_thi_han_muc_nha_ra_va_thu_den_noi(self, hai_dau):
+        h = hai_dau
+        CTH.gui("cloud", "nha", "thu bi giu", goc=h.cloud, nhanh="main", rieng=True)
+        CTH._ghi_thuc("nha", h.nha, [1000.0 - 3550] * CTH.TOI_DA_THUC_GIO)  # 3.550 giay truoc: con 50 giay nua moi het gio
+        dh, ra = _DongHo(), []
+        self._cho(h, dh, ra, toi_da_giay=300, nhip=100)
+        assert dh.dem == 1 and "thu bi giu" in ra[0] and "THU MOI cho nha" in ra[0]
+
+    def test_nhieu_thu_hien_tung_dot_va_khong_bo_thu_nao(self, hai_dau):
+        h = hai_dau
+        for i in range(10):
+            CTH.gui("cloud", "nha", ("thu so %d " % i) + "x" * 5000, goc=h.cloud, nhanh="main", rieng=True)
+        thay = set()
+        for _ in range(10):
+            dh, ra = _DongHo(), []
+            self._cho(h, dh, ra, toi_da_giay=10)
+            if ra[0].startswith("HET GIO"):
+                break
+            for i in range(10):
+                if "thu so %d " % i in ra[0]:
+                    thay.add(i)
+        assert thay == set(range(10)), "phai doc het 10 thu qua cac dot, thieu %s" % (set(range(10)) - thay)
+
+
 # ============================================================ CLI
 class TestCLI:
     def _chay(self, argv):
@@ -280,3 +376,15 @@ class TestCLI:
     def test_noi_khong_co_noi_dung_thi_in_cach_dung(self, hai_dau):
         rc, out = self._chay(["noi", "--den", "cloud"])
         assert rc == 2 and "b cau noi" in out
+
+    def test_cho_qua_CLI_in_thu_roi_het_gio(self, hai_dau, monkeypatch):
+        h = hai_dau
+        monkeypatch.setattr(CG, "MAILBOX", h.nha)
+        monkeypatch.setattr(CG, "HOP_THU", None)
+        CTH.gui("cloud", "nha", "Chao nha, co dau: \u1ea1 \u0111", goc=h.cloud, nhanh="main", rieng=True)
+        rc, out = self._chay(["cho", "--ben", "nha", "--toi-da", "0"])
+        assert rc == 0 and "1 THU MOI cho nha" in out and "Chao nha" in out
+        rc, out = self._chay(["cho", "--ben", "nha", "--toi-da", "0"])
+        assert rc == 0 and out.startswith("HET GIO")
+        rc, out = self._chay(["cho", "--toi-da", "khong-phai-so"])
+        assert rc == 1 and "LOI" in out
