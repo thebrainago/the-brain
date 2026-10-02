@@ -165,7 +165,8 @@ nhưng việc không khứ hồi / đi ra ngoài (xoá, push `main`, trả tiề
   báo (`b.py <lệnh b>`, `-m pytest …`, vài module/script). Ngoài danh sách → **không chạy**, ghi `CHUA_DO_DUOC` và hỏi
   cloud; chủ dự án duyệt đúng đơn đó trên máy: `b cau xem MA` (in lệnh + vân tay) rồi `b cau duyet MA VAN_TAY`;
 - danh sách nằm trong mã nên chặn **lỗi và lệnh bị tiêm vào phiên cloud**, không chặn kẻ đã đẩy được lên nhánh (họ
-  sửa được cả file này) → **để repo private + bật xác thực hai lớp cho tài khoản GitHub** (repo đang public);
+  sửa được cả file này) → repo giữ **public** theo ý chủ dự án, nên **bật xác thực hai lớp cho tài khoản GitHub** và không đưa
+  khoá/dữ liệu riêng vào repo (kể cả thư);
 - dừng khẩn: file `CAU_DUNG` ở gốc `lab` (tại máy, không cần mạng) hoặc `b cau dung` / `b cau tiep` (từ xa qua git);
 - mỗi kết quả mang **phiên bản mã** đã chạy (commit, `+sua` nếu cây dở) và bản sao các báo cáo mới ra.
 
@@ -193,7 +194,8 @@ Quy trình vào phiên (cloud): `b cau lay` → `b nc nhap` → `b nc`. Máy nh�
 ## 8. Việc kế tiếp (theo thứ tự)
 
 1. Máy nhà: mục 2 → 3 → 4, `b khoi-phuc`, `b cau cai`, thấy ping `DAT` (kênh thông).
-2. Chủ dự án: đổi repo sang **private**, bật 2FA; quyết định gộp nhánh vào `main` (PR).
+2. Chủ dự án: bật 2FA cho tài khoản GitHub (repo giữ **public** theo ý chủ dự án: không đưa khoá/dữ liệu riêng vào repo, kể cả thư);
+   quyết định gộp nhánh vào `main` (PR).
 3. Tìm bản sao `ds/` (mục 1); nếu không còn, ghi nhận mất và bỏ 2 chỗ phụ thuộc.
 4. Dựng lại kho giá (mục 5) theo giao thức mục 7 (7.3 đóng băng đoạn tự chạy lần đầu `nap`).
 5. Viết `b nc tien-len` (7.4), hộ chiếu dữ liệu (7.5), trần phép thử (7.6).
