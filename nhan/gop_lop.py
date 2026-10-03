@@ -182,24 +182,49 @@ def chon_chan(cac_ma: list[str], khung: str, tran: int = TOI_DA_CHAN) -> dict:
 
 
 def _mot_chan(ten_mau: str, ma: str, khung: str, tham_so: dict,
-              tren_holdout: bool = True) -> _Chan | None:
-    """Chay co che tren mot tai san, tra chuoi loi suat rong + mua-giu cua no."""
+              tren_holdout: bool = True,
+              ghi_ly_do: list | None = None) -> _Chan | None:
+    """Chay co che tren mot tai san, tra chuoi loi suat rong + mua-giu cua no.
+
+    ## VI SAO CO `ghi_ly_do` (them 20/09/2026)
+
+    Ham nay tra `None` o BON tinh huong khac han nhau, va `_ro` gop ca bon lai
+    thanh mot cau duy nhat *"chi dung duoc N chan"*:
+
+      * `nap` nem            -> **CHUA_DO_DUOC**: may khong co `data/<ma>`.
+      * holdout qua ngan     -> ket luan that ve tai san (khong du lich su).
+      * `MAU.sinh` nem       -> co che khong chay duoc tren tai san nay.
+      * `MP.chay` nem        -> **CHUA_DO_DUOC**: mo phong hong.
+
+    Hai trong bon la `CHUA_DO_DUOC`. Tren mot may thieu `data/`, ca ro roi vao
+    nhanh dau va bao cao in ra *"chi dung duoc 0 chan"* - doc y het "khong tai
+    san nao hop", tuc mot ket luan AM bia ra tu mot phep khong do duoc. Truyen
+    mot list vao `ghi_ly_do` de lay lai dung nguyen nhan tung chan.
+    """
+    def _bo(ly_do: str):
+        if ghi_ly_do is not None:
+            ghi_ly_do.append({"ma": ma, "ly_do": ly_do})
+        return None
     try:
         df = DL.nap(ma, khung)
         if DL.nguon_tai_san(ma) == "ngoai":
             df = DL.cat_theo_chat_luong(df, ma)[0]
-    except Exception:
-        return None
+    except Exception as e:
+        return _bo(f"CHUA_DO_DUOC: khong nap duoc ({type(e).__name__}: {e})")
     train, hold = DL.hai_nua(df, 0.6)
     phan = hold if tren_holdout else train
     if len(phan) < TOI_THIEU_BAR:
-        return None
+        return _bo(f"chi {len(phan)} bar < {TOI_THIEU_BAR} - khong du lich su")
+    try:
+        th = MAU.sinh(ten_mau, phan, tham_so)
+    except Exception as e:
+        return _bo(f"co che '{ten_mau}' khong chay duoc ({type(e).__name__})")
     try:
         cp = CP.tu_du_lieu(ma, phan)
-        kq = MP.chay(phan, MAU.sinh(ten_mau, phan, tham_so), cp, ma=ma, khung=khung)
+        kq = MP.chay(phan, th, cp, ma=ma, khung=khung)
         bh = MP.mua_giu(phan, cp, ma=ma, khung=khung)
-    except Exception:
-        return None
+    except Exception as e:
+        return _bo(f"CHUA_DO_DUOC: mo phong hong ({type(e).__name__}: {e})")
     return _Chan(ma, khung, np.asarray(kq.loi, float), np.asarray(bh.loi, float),
                  phan.index, int(kq.so_lenh or 0), cp.do_tin,
                  float(kq.phoi_nhiem or 0.0), np.asarray(kq.vi_the, float))
@@ -255,15 +280,25 @@ def gop_deu(bang: pd.DataFrame) -> np.ndarray:
 def _ro(ten_mau: str, cac_ma: list[str], khung: str, tham_so: dict,
         tren_holdout: bool = True) -> dict:
     """Dung mot ro: chay tung chan roi gop deu."""
-    chan = [c for c in (_mot_chan(ten_mau, m, khung, tham_so, tren_holdout)
+    bo = []
+    chan = [c for c in (_mot_chan(ten_mau, m, khung, tham_so, tren_holdout,
+                                  ghi_ly_do=bo)
                         for m in cac_ma[:TOI_DA_CHAN]) if c is not None]
+    # Chan roi vi KHONG DO DUOC khac han chan roi vi tai san khong hop. Dem
+    # rieng de nguoi doc khong nham mot ro thieu du lieu voi mot ro AM.
+    chua_do = [x for x in bo if x["ly_do"].startswith("CHUA_DO_DUOC")]
     if len(chan) < TOI_THIEU_CHAN:
         # Khoa loi KHONG duoc dat ten `loi`: trong module nay `loi` la CHUOI LOI
         # SUAT (mang numpy), va `if ro.get("loi")` tren mot mang nem ValueError.
         # Hai nghia cua tu "loi" da va nhau ngay lan chay dau tien.
         return {"khong_dung_duoc": f"chi dung duoc {len(chan)} chan, "
-                                   f"can >= {TOI_THIEU_CHAN}",
-                "so_chan": len(chan)}
+                                   f"can >= {TOI_THIEU_CHAN}"
+                                   + (f" ({len(chua_do)}/{len(bo)} chan roi vi "
+                                      f"CHUA_DO_DUOC, khong phai vi tai san)"
+                                      if chua_do else ""),
+                "so_chan": len(chan), "chan_bo": bo,
+                "chan_chua_do_duoc": len(chua_do),
+                "chua_do_duoc": bool(chua_do)}
     b_he = _gong(chan, "loi")
     b_bh = _gong(chan, "loi_bh")
 
@@ -281,7 +316,9 @@ def _ro(ten_mau: str, cac_ma: list[str], khung: str, tham_so: dict,
     if int(du.sum()) < TOI_THIEU_BAR:
         return {"khong_dung_duoc": f"chi {int(du.sum())} moc co >= "
                                    f"{TOI_THIEU_CHAN} chan cung luc",
-                "so_chan": len(chan)}
+                "so_chan": len(chan), "chan_bo": bo,
+                "chan_chua_do_duoc": len(chua_do),
+                "chua_do_duoc": bool(chua_do)}
     # KHONG duoc viet `b_he, b_bh = b_he[du], b_bh.reindex(b_he.index)`: ve
     # phai duoc tinh HET truoc khi gan, nen `b_he.index` o do van la index CU
     # (chua cat) va ro mua-giu giu nguyen 8.112 bar trong khi ro he con 3.634.
@@ -293,6 +330,8 @@ def _ro(ten_mau: str, cac_ma: list[str], khung: str, tham_so: dict,
     return {
         "so_chan": len(chan),
         "chan": [c.ma for c in chan],
+        "chan_bo": bo,
+        "chan_chua_do_duoc": len(chua_do),
         "index": b_he.index,
         "cua_so": f"{str(b_he.index[0])[:10]}..{str(b_he.index[-1])[:10]}",
         "chan_trung_binh_moi_moc": round(float(b_he.notna().sum(axis=1).mean()), 2),

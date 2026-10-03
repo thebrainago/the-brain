@@ -45,8 +45,9 @@ MAC_DINH = {
     # --- mo hinh ----------------------------------------------------------
     "cc_switch_provider": "aibox",
     "base_url": "https://api.ai-box.vn/v1",   # THANG, khong qua cau noi 8317
-    "model": "qwen3.7-flash",
-    "model_du_phong": "qwen3.6-flash",
+    "model": "ds/deepseek-flash",           # mac dinh: viec khoi luong lon (thu nha c91d 03/10/2026)
+    "model_du_phong": "qwen3.8-max-0902",   # viec can suy luan sau, hoac mac dinh LOI `leo_thang_sau_lan_sai` lan lien tiep
+    "leo_thang_sau_lan_sai": 2,
     "temperature": 0,
     "max_tokens": 4000,
     "timeout_giay": 180,

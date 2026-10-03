@@ -124,14 +124,28 @@ def _mot_muc(phan, cp, bh, p: float, ma: str, khung: str, hat: int = HAT,
     }
 
 
-def _nguong_fdr(family: str) -> float | None:
-    """Nguong LORD ke tiep cua mot ho - de doc kem MDE, khong tron vao no."""
+def _nguong_fdr(family: str) -> tuple[float | None, str | None]:
+    """Nguong LORD ke tiep cua mot ho - de doc kem MDE, khong tron vao no.
+
+    ## VI SAO TRA VE HAI GIA TRI (sua 20/09/2026)
+
+    Ban cu `except Exception: return None`. Nhin vao bao cao thi
+    `nguong_fdr_hien_tai = None` doc ra thanh "ho nay chua co rang buoc FDR
+    nao" - trong khi nguyen nhan THAT chi co mot: **khong doc duoc `nao.db`**.
+    `CONG.ho_fdr` chi ghep chuoi va `CONG.nguong_lord` la so hoc thuan, ca hai
+    khong the hong; chi `SO.mot` cham dia.
+
+    Tuc day dung hinh dang cua bay `CHUA_DO_DUOC` bi doc thanh `AM`: mot
+    phien chay tren may khong co so cai se in ra mot bao cao MDE trong y het
+    that, chi thieu dung cai rang buoc chat nhat. Nay tra kem LY DO, va
+    `duong_cong_luc` ghi no ra truong rieng.
+    """
     try:
         epoch = CONG.ho_fdr(family)
         n = SO.mot("SELECT COUNT(*) n FROM fdr WHERE ho=?", epoch)["n"]
-        return round(CONG.nguong_lord(int(n) + 1), 9)
-    except Exception:
-        return None
+        return round(CONG.nguong_lord(int(n) + 1), 9), None
+    except Exception as e:
+        return None, f"CHUA_DO_DUOC: khong doc duoc so cai FDR ({type(e).__name__}: {e})"
 
 
 def duong_cong_luc(ma: str = "EURCAD", khung: str = "H4",
@@ -166,6 +180,7 @@ def duong_cong_luc(ma: str = "EURCAD", khung: str = "H4",
             nguong = d
 
     bar_nam = CP.hinh_hoc(hold.index)[0] if hasattr(CP, "hinh_hoc") else None
+    _nf, _nf_ly_do = _nguong_fdr("do_luc")
     return {
         "tai_san": ma, "khung": khung, "so_bar": len(hold),
         "diem": diem,
@@ -189,7 +204,10 @@ def duong_cong_luc(ma: str = "EURCAD", khung: str = "H4",
         # Bao rieng: ngoai suc manh phep kiem, ung vien con phai vuot nguong FDR
         # hien tai cua ho no. Do la mot rang buoc KHAC, va no thay doi theo so
         # phep thu da tieu.
-        "nguong_fdr_hien_tai": _nguong_fdr("do_luc"),
+        "nguong_fdr_hien_tai": _nf,
+        # `None` o tren KHONG bao gio co nghia "ho nay khong bi FDR rang buoc".
+        # Truong nay noi ro do la CHUA_DO_DUOC hay khong.
+        "nguong_fdr_ly_do": _nf_ly_do,
     }
 
 

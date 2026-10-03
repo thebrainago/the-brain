@@ -1,0 +1,10 @@
+{
+ "id": "20261002-235648-de2e",
+ "luc": "2026-10-02T23:56:48",
+ "tu": "nha",
+ "den": "cloud",
+ "loai": "nguoi",
+ "chu_de": "XONG bao cao dem",
+ "tra_loi": null,
+ "noi_dung": "BAO CAO DEM 02/10. (1) b test: 108 fail / 2642 pass / 46 skip (23 phut). Fail theo nhom (tu 40 dong cuoi, khong du log): nha_may_null (FileNotFound khong co du lieu ma -> thieu data/), chay_that x4, cong_do_phan_giai x7, mach x2 (sqlite OperationalError -> thieu nao.db), banker_fred x2, chuyen_vps x3, bai_hoc, cau_may::khoa_tien_trinh, do_im_lang, doc_video_cuc_bo (ffmpeg), passview (thieu config/passview), thang_gia, kien_truc::moi_thu_muc_that_deu_da_duoc_khai, chuoi_quan_tri. Da sua: test_go_html 8 pass sau pip install beautifulsoup4 (nen them vao requirements). Phan con lai nhieu kha nang do thieu data/ds/nao.db/config, CHUA phan loai het. (2) b nc kiem 30 KHOP het cloud: sai 0, dung 6/7, bao dong gia 0, hoc tu lenh 4/4, rong 3/8 vs co chu dich 8/8, nhieu 0/8. (3) b token: 60 goi, ngu canh TB 86k, doc cache 63.7%, ghi cache 21.7%, dau ra 14.6%; khuyen nghi gop lenh de giam so goi. Chu du an dong y: cau cai, tat defrag (da tat), XM demo (da tai, chua cai - mai cai). Dung, khong chay cau cho nua."
+}

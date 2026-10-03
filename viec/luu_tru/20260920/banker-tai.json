@@ -1,0 +1,18 @@
+{
+  "ma": "banker-tai",
+  "muc_tieu": "Tai du lieu vi mo that (FRED/Yahoo/ECB/WorldBank) vao nao.db",
+  "lan": "MANG",
+  "uu_tien": 2,
+  "han_phut": 20.0,
+  "ra_luc": "2026-09-20T17:48:25",
+  "lenh": [
+    "{py}",
+    "-m",
+    "tru.banker",
+    "--ep"
+  ],
+  "ghi_chu": "Cloud bi chan: proxy tra 403 CONNECT cho fred.stlouisfed.org, alfred.stlouisfed.org, publicreporting.cftc.gov.",
+  "cong": {
+    "kieu": "chay_duoc"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "ma": "link-tham-do-con-mau",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "ma thoat 1",
+  "bang_chung": {
+    "ma_thoat": 1,
+    "giay": 25.1,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "link",
+      "tham-do",
+      "https://mql5.com/signals/2196457"
+    ],
+    "phien_ban_ma": "288080d+sua",
+    "dong_cuoi": [
+      "THAM DO LINK: 1 link",
+      "  -  1 x HET_TRANG: trang khong con (404/410)"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/link_tham_do_ket_qua.json": "{\n \"so_link\": 1,\n \"theo_ket_qua\": {\n  \"HET_TRANG\": 1\n },\n \"muc\": [\n  {\n   \"ma\": \"6d35ec79a8\",\n   \"nen_tang\": \"mql5\",\n   \"loai\": \"tin_hieu\",\n   \"cach\": \"http\",\n   \"ket_qua\": \"HET_TRANG\",\n   \"status\": 404,\n   \"ly_do\": \"\",\n   \"rieng\": false,\n   \"url\": \"https://mql5.com/signals/2196457\"\n  }\n ]\n}",
+      "reports/link_tham_do_ket_qua.md": "THAM DO LINK: 1 link\n  -  1 x HET_TRANG: trang khong con (404/410)\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-03T19:04:56"
+}

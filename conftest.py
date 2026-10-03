@@ -26,6 +26,19 @@ LAB = str(Path(__file__).resolve().parent)
 if LAB not in sys.path:
     sys.path.insert(0, LAB)
 
+@pytest.fixture(scope="session", autouse=True)
+def so_cai_tam(tmp_path_factory):
+    """`so_cai/` (so cai nghien cuu + moc doan dong bang) nam trong GIT: bo test KHONG duoc ghi vao ban that."""
+    import os
+    cu = os.environ.get("NC_SO_CAI")
+    os.environ["NC_SO_CAI"] = str(tmp_path_factory.mktemp("so_cai"))
+    yield
+    if cu is None:
+        os.environ.pop("NC_SO_CAI", None)
+    else:
+        os.environ["NC_SO_CAI"] = cu
+
+
 #: Bang ma mot bo test khong bao gio duoc lam phinh.
 BANG_CANH = ("ket_qua", "fdr", "gia_thuyet", "khang_dinh")
 

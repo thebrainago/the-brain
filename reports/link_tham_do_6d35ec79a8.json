@@ -1,0 +1,174 @@
+{
+ "url": "https://mql5.com/signals/2196457",
+ "kich_thuoc_html": 196214,
+ "so_the": 1115,
+ "tieu_de": "Copy trades of the X117 Taoist nature trading signal for MetaTrader 5 - 299 EUR ",
+ "meta": {
+  "description": "X117 Taoist nature Trading Signal for MetaTrader 5: social trading, mirror trading, copy trading and account monitoring",
+  "og:title": "Trading Signals for MetaTrader 5: X117 Taoist nature",
+  "og:type": "product"
+ },
+ "muc": [
+  {
+   "cap": "h1",
+   "chu": "X117 Taoist nature"
+  },
+  {
+   "cap": "h3",
+   "chu": "Distribution"
+  }
+ ],
+ "tab": [],
+ "bang": [
+  {
+   "so_hang": 3,
+   "tieu_de": [
+    "Symbol",
+    "",
+    "Deals",
+    "Sell",
+    "Buy"
+   ],
+   "mau": [
+    [
+     "GOLD#",
+     "1549",
+     "",
+     "",
+     ""
+    ],
+    [
+     "USDCHF#",
+     "2",
+     "",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "so_hang": 3,
+   "tieu_de": [
+    "Symbol",
+    "",
+    "Gross Profit, USD",
+    "Loss, USD",
+    "Profit, USD"
+   ],
+   "mau": [
+    [
+     "GOLD#",
+     "9.8K",
+     "",
+     "",
+     ""
+    ],
+    [
+     "USDCHF#",
+     "24",
+     "",
+     "",
+     ""
+    ]
+   ]
+  },
+  {
+   "so_hang": 3,
+   "tieu_de": [
+    "Symbol",
+    "",
+    "Gross Profit, pips",
+    "Loss, pips",
+    "Profit, pips"
+   ],
+   "mau": [
+    [
+     "GOLD#",
+     "410K",
+     "",
+     "",
+     ""
+    ],
+    [
+     "USDCHF#",
+     "134",
+     "",
+     "",
+     ""
+    ]
+   ]
+  }
+ ],
+ "form": [
+  {
+   "duong": "https://www.mql5.com/en/search",
+   "cach": "post",
+   "o": [
+    {
+     "ten": "headerSearchButton",
+     "loai": "button"
+    },
+    {
+     "ten": "keyword",
+     "loai": "text"
+    },
+    {
+     "ten": "headerSearchSubmit",
+     "loai": "submit"
+    },
+    {
+     "ten": "headerSearchClean",
+     "loai": "button"
+    }
+   ]
+  },
+  {
+   "duong": "/en/signals/mt5/page1",
+   "cach": "post",
+   "o": [
+    {
+     "ten": "substring_apply",
+     "loai": "hidden"
+    },
+    {
+     "ten": "substring_filter",
+     "loai": "hidden"
+    }
+   ]
+  }
+ ],
+ "script_nguon": [
+  "https://c.mql5.com/js/all.05860bf5dc889057f51e14f1b64b04e0.js",
+  "https://c.mql5.com/js/vendor.afe64ccd7642219b4875626f21c7482d.js",
+  "https://c.mql5.com/js/signals.d95c51137c652a78904684c4ead0a922.js",
+  "https://c.mql5.com/js/svg-chart.41b3b2994b96793970c7c0c78fee92d1.js"
+ ],
+ "json_nhung": [
+  {
+   "id": "",
+   "khoa": [
+    "<list 3>"
+   ],
+   "kich_thuoc": 3420
+  }
+ ],
+ "diem_cuoi": [
+  "https://search.mql5.com/api/query",
+  "/signals/charts/risks/json"
+ ],
+ "link_ra_theo_nen_tang": {
+  "khac": 34,
+  "mql5": 12,
+  "youtube": 4,
+  "telegram": 2,
+  "facebook": 1
+ },
+ "can_js": false,
+ "loi_doc": "",
+ "da_cat": false,
+ "kieu": "html",
+ "ma": "6d35ec79a8",
+ "nen_tang": "mql5",
+ "loai": "tin_hieu",
+ "cach": "http"
+}

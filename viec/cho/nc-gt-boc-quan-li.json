@@ -1,0 +1,20 @@
+{
+  "ma": "nc-gt-boc-quan-li",
+  "muc_tieu": "so tay: boc luat quan li lenh tu lich su lenh nguoi thang",
+  "lan": "NHE",
+  "uu_tien": 5,
+  "han_phut": 60.0,
+  "ra_luc": "2026-10-03T07:49:02",
+  "lenh": [
+    "{py}",
+    "b.py",
+    "nc",
+    "cc",
+    "ghi_gia_thuyet",
+    "{\"cau\": \"Bo luat QUAN LI LENH (buoc, he so lot, tran tang, tp, cat/giu, gio dung) cua cac he luoi/DCA song >=2 nam tren MQL5 (31 ung vien, 18 luoi/DCA) SUY RA DUOC tu lich su lenh (tab History) + gia that, va chay lai bang engine cua ta (nhan/luoi.py) o cung cap/khung cho lai sau phi + maxDD<80% cung bac voi duong von cong bo.\",\n \"vi_sao\": \"Day la cach ngan nhat tu 'dang ra tien' sang 'cua ta' (LUAT SO 0): khong doan luat, ma BOC no tu lenh that - tang cach nhau bao nhieu pip, lot nhan the nao, dong ca ro khi nao (mo_xe_lenh / boc_lich_su da co). Chu du an: nhieu bot danh kieu quan li lenh ma ta chua boc tach va khai thac. Cua nghen: bang lenh CHUA keo ve (mql5 chi ra duoc tu may nha) -> can may nha chay don lay lich su.\",\n \"ho\": \"quan_li_lenh\",\n \"pham_vi\": {\"nguon\": [\"mql5_signals_history\", \"myfxbook\", \"nhom_telegram_co_link\"], \"cong_cu\": [\"mo_xe_lenh\", \"thu_luoi\"], \"ung_vien_dau\": [\"X117 id 2196457 USDCHF\", \"Relax EA 884935\", \"Gold Reaper 2204998\"]},\n \"uu_tien\": 0.95}"
+  ],
+  "vi_sao": "so tay: boc luat quan li lenh tu lich su lenh nguoi thang",
+  "cong": {
+    "kieu": "chay_duoc"
+  }
+}

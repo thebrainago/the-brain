@@ -107,10 +107,27 @@ class Chuyen(unittest.TestCase):
         gt = dict(self.gt, template="khong_he_ton_tai")
         self.assertIsNone(NGS.chuyen(gt, "US500CASH", "H4"))
 
-    def test_tai_san_dich_khong_chay_duoc_thi_tra_None(self):
+    def test_tai_san_dich_khong_chay_duoc_thi_KHONG_DAT(self):
+        """Co che theo GIO tren D1 (khung khong co gio) -> khong duoc bao dat.
+
+        ## BAI NAY TUNG XANH VI LY DO SAI (sua 20/09/2026)
+
+        Ban cu viet `assertIsNone(...)`. Tren may CO du lieu no xanh dung y
+        dinh. Tren may KHONG co `data/` no cung xanh - nhung vi
+        `ty_le_kich_hoat` cua tai san GOC nem `FileNotFoundError` va ban cu
+        cua `chuyen` tra `None` cho ca hai nguyen nhan. Tuc bai kiem ve co che
+        theo gio thuc ra dang do... su vang mat cua thu muc `data/`.
+
+        Sau khi `chuyen` tach `CHUA_DO_DUOC` ra khoi `None`, bai nay phai noi
+        dung dieu no muon noi: **khong DAT**, va bo qua khi chua do duoc.
+        """
         gt = dict(self.gt, template="mua_qua_dem",
                   tham_so={"gio_vao": 20, "gio_ra": 14})
-        self.assertIsNone(NGS.chuyen(gt, "US500CASH", "D1"))
+        r = NGS.chuyen(gt, "US500CASH", "D1")
+        if isinstance(r, dict) and r.get("chua_do_duoc"):
+            self.skipTest("CHUA_DO_DUOC: %s" % r.get("ly_do"))
+        self.assertFalse(r and r.get("dat"),
+                         "co che theo GIO tren khung khong co gio ma bao dat")
 
     def test_tham_so_moi_van_chay_duoc_that_tren_tai_san_dich(self):
         """Chinh xong ma khong chay duoc thi la chinh hong."""

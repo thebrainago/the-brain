@@ -1,0 +1,54 @@
+{
+  "ma": "may-quet-dau",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 8.0,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "may",
+      "quet"
+    ],
+    "phien_ban_ma": "288080d+sua",
+    "dong_cuoi": [
+      "   \"C:\\\\Program Files\\\\XM Global MT5\"",
+      "  ],",
+      "  \"thu_muc_du_lieu\": [",
+      "   {",
+      "    \"id\": \"BB16F5\",",
+      "    \"may_chu_lich_su\": [",
+      "     \"signals\"",
+      "    ],",
+      "    \"gb_bases\": 0.05,",
+      "    \"gb_tester\": 0.0",
+      "   }",
+      "  ],",
+      "  \"dang_chay\": {",
+      "   \"terminal64\": 0,",
+      "   \"metatester64\": 0",
+      "  },",
+      "  \"agent_rss_gb_tb\": null",
+      " },",
+      " \"nhan_c\": {",
+      "  \"san_sang\": false,",
+      "  \"trinh_bien\": null,",
+      "  \"ly_do\": \"khong co trinh bien dich (cc/gcc/clang/zig/ziglang/cl) - chay Python\",",
+      "  \"che_do\": \"auto\"",
+      " }",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/may_nha_bao_cao.md": "BAO CAO MAY NHA  [XANH]  2026-10-03T19:07:14\nTOM LAI:\n  - Chua do toc do may nen chua co con so chinh thuc. UOC TAM (tu bang thong ly thuyet, CHUA do): tao toi da ~4 tai khoan MT5 demo. Chay `b may do --nhanh` luc may ranh (~1 phut; day du `b may do` ~5 phut) de co so that.\nCHU DU AN CAN LAM:\n  1. Them RAM CUNG LOAI voi thanh dang co (DDR4 32.0 GB, 2133 MT/s; ma hang M386A4G40DM0-CPB) vao khe KHAC KENH (xem so tay bo mach: khe vi tri 1 cua moi kenh). Them 1 thanh: 1 -> 2 kenh, bang thong ly thuyet gap 2.0 lan; them du 3 thanh: 4 kenh, gap 4.0 lan. Khong tron RDIMM voi LRDIMM; chua chac thi gui anh nhan thanh dang co de chon dung loai.\n  2. File trang (pagefile): dat 1 file CO DINH tren o HDD moi (goi y 62 GB, dau = toi da, khong de Windows tu co gian) lam LUOI AN TOAN chong loi het bo nho (da xay ra 13/09). Khong lam bo nho lam viec: HDD cham ~100 lan SSD, neu phai doc/ghi lien tuc thi may dung hinh. Giu file trang nho tren SSD. Xem tai_lieu/MAY_NHA_TOI_UU.md\n  3. Ke hoach dien dang la Balanced: doi sang High performance (powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c) de CPU khong ha xung / khong ngu nhan\nPHIEN NHA / MAY TU LAM:\n  - Dat tran CPU cua he = 78 (giua dai 75-80): `b tran-cpu 78` (mac dinh trong code la 85)\nSO LIEU:\n  - May: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz, 10 nhan / 20 luong, RAM 32.0 GB (1 thanh, khe trong 15, 1 kenh dang dung).\n",
+      "reports/may_nha_ket_luan.json": "{\n \"den\": \"XANH\",\n \"tom_lai\": [\n  \"Chua do toc do may nen chua co con so chinh thuc. UOC TAM (tu bang thong ly thuyet, CHUA do): tao toi da ~4 tai khoan MT5 demo. Chay `b may do --nhanh` luc may ranh (~1 phut; day du `b may do` ~5 phut) de co so that.\"\n ],\n \"tom_tat\": [\n  \"May: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz, 10 nhan / 20 luong, RAM 32.0 GB (1 thanh, khe trong 15, 1 kenh dang <user>).\"\n ],\n \"so\": {\n  \"mt5_uoc_tam\": {\n   \"tran\": {\n    \"cpu\": 16,\n    \"ram\": 9,\n    \"bang_thong\": 4,\n    \"dia\": 44\n   },\n   \"tran_nho_nhat_do\": \"bang_thong\",\n   \"agent_toi_da\": 4,\n   \"bang_thong_dung_gbs\": 8.55,\n   \"bang_thong_nguon\": \"uoc (50% ly thuyet)\",\n   \"bang_thong_moi_agent_gia_dinh_gbs\": 2.0,\n   \"ram_moi_agent_gb\": 2.5,\n   \"ram_moi_agent_do_that\": false,\n   \"gb_moi_terminal\": 8.0,\n   \"gb_moi_terminal_do_that\": false,\n   \"che_do_toi_uu_hoa\": {\n    \"terminal\": 1,\n    \"agent\": 4\n   },\n   \"che_do_chay_don\": {\n    \"terminal_toi_da\": 4\n   },\n   \"tai_khoan_demo_toi_da\": 4,\n   \"tai_khoan_demo_neu_xm_cho_dung_chung\": 1,\n   \"ly_do\": \"tran thap nhat la bang_thong (cpu=16, ram=9, bang_thong=4, dia=44); them terminal/tai khoan vuot 4 khong nhanh hon vi chi chia nhau cung mot may\"\n  },\n  \"kenh_ram\": {\n   \"dang_dung\": 1,\n   \"toi_da_goi_y\": 4,\n   \"toi_da_nen_tang\": 4\n  }\n },\n \"khuyen_nghi\": [\n  {\n   \"viec\": \"Them RAM CUNG LOAI voi thanh dang co (DDR4 32.0 GB, 2133 MT/s; ma hang M386A4G40DM0-CPB) vao khe KHAC KENH (xem so tay bo mach: khe vi tri 1 cua moi kenh). Them 1 thanh: 1 -> 2 kenh, bang thong ly thuyet gap 2.0 lan; them du 3 thanh: 4 kenh, gap 4.0 lan. Khong tron RDIMM voi LRDIMM; chua chac thi gui anh nhan thanh dang co de chon <user> loai.\",\n   \"ai_lam\": \"chu_du_an\",\n   \"can_phep\": true\n  },\n  {\n   \"viec\": \"File trang (pagefile): dat 1 file CO DINH tren o HDD moi (goi y 62 GB, dau = toi da, khong de Windows tu co gian) lam LUOI AN TOAN chong loi het bo nho (da xay ra 13/09). Khong lam bo nho lam viec: HDD cham ~100 lan SSD, neu phai doc/ghi lien tuc thi may <user> hinh. Giu file trang nho tren SSD. Xem tai_lieu/MAY_NHA_TOI_UU.md\",\n   \"ai_lam\": \"chu_du_an\",\n   \"can_phep\": true\n  },\n  {\n   \"viec\": \"Ke hoach dien dang la Balanced: doi sang High performance (powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c) de CPU khong ha xung / khong ngu nhan\",\n   \"ai_lam\": \"chu_du_an\",\n   \"can_phep\": true\n  },\n  {\n   \"viec\": \"Dat tran CPU cua he = 78 (giua dai 75-80): `b tran-cpu 78` (mac dinh trong code la 85)\",\n   \"ai_lam\": \"may\",\n   \"can_phep\": false\n  }\n ]\n}",
+      "reports/may_nha_quet.json": "{\n \"luc\": \"2026-10-03T19:07:13\",\n \"he_dieu_hanh\": \"Microsoft Windows 10 Pro 10.0.19045\",\n \"python\": \"3.12.10\",\n \"cpu\": {\n  \"ten\": \"Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz\",\n  \"so_o_cam\": 1,\n  \"nhan_vat_ly\": 10,\n  \"luong\": 20,\n  \"mhz_toi_da\": 2201,\n  \"mhz_hien_tai\": 2201,\n  \"l3_mb\": 25.0,\n  \"nguon\": \"wmi\"\n },\n \"ram\": {\n  \"tong_gb\": 32.0,\n  \"thanh\": [\n   {\n    \"khe\": \"DIMM_B1\",\n    \"kenh\": \"B\",\n    \"gb\": 32.0,\n    \"mt_s\": 2133,\n    \"mt_s_toi_da\": 2133,\n    \"loai\": \"DDR4\",\n    \"ecc\": false,\n    \"registered\": false,\n    \"unbuffered\": false,\n    \"lrdimm\": false,\n    \"hang\": \"Samsung\",\n    \"ma_hang\": \"M386A4G40DM0-CPB\"\n   }\n  ],\n  \"so_thanh\": 1,\n  \"khe_tong\": 16,\n  \"khe_trong\": 15,\n  \"toi_da_ho_tro_gb\": 264.0,\n  \"kenh_dang_dung\": 1,\n  \"kenh_suy_tu_ten_khe\": true,\n  \"mt_s\": 2133,\n  \"bang_thong_ly_thuyet_gbs\": 17.1,\n  \"ly_thuyet_neu_du_kenh_gbs\": null\n },\n \"dia\": {\n  \"vat_ly\": [\n   {\n    \"ten\": \"WDC WD2500AAKX-08ERMA0\",\n    \"loai\": \"HDD\",\n    \"bus\": \"SATA\",\n    \"gb\": 250.0,\n    \"suc_khoe\": \"Healthy\",\n    \"vong_phut\": null\n   },\n   {\n    \"ten\": \"WDC PC SN520 SDAPTUW-128G-1006\",\n    \"loai\": \"SSD\",\n    \"bus\": \"NVMe\",\n    \"gb\": 128.0,\n    \"suc_khoe\": \"Healthy\",\n    \"vong_phut\": 0\n   },\n   {\n    \"ten\": \"UMIS RPJTJ128MEE1MWX\",\n    \"loai\": \"SSD\",\n    \"bus\": \"NVMe\",\n    \"gb\": 128.0,\n    \"suc_khoe\": \"Healthy\",\n    \"vong_phut\": 0\n   }\n  ],\n  \"o\": [\n   {\n    \"o\": \"C:\",\n    \"tong_gb\": 111.18,\n    \"trong_gb\": 43.85,\n    \"fs\": \"NTFS\"\n   },\n   {\n    \"o\": \"D:\",\n    \"tong_gb\": 119.24,\n    \"trong_gb\": 118.89,\n    \"fs\": \"NTFS\"\n   },\n   {\n    \"o\": \"E:\",\n    \"tong_gb\": 232.88,\n    \"trong_gb\": 190.08,\n    \"fs\": \"NTFS\"\n   }\n  ]\n },\n \"pagefile\": {\n  \"dang_dung\": [\n   {\n    \"o\": \"C:\",\n    \"cap_phat_mb\": 5120,\n    \"dang_dung_mb\": 0,\n    \"dinh_mb\": 1\n   }\n  ],\n  \"cai_dat_tay\": [],\n  \"he_thong_tu_quan_ly\": true,\n  \"tong_cap_phat_gb\": 5.0\n },\n \"ke_hoach_dien\": {\n  \"guid\": \"381b4222-f694-41f0-9685-ff5bb260df2e\",\n  \"ten\": \"Balanced\",\n  \"can_chuyen_high_performance\": true\n },\n \"bo_mach\": {\n  \"Manufacturer\": \"HUANANZHI\",\n  \"Product\": \"X99-P4F\"\n },\n \"bios\": {\n  \"Manufacturer\": \"American Megatrends Inc.\",\n  \"SMBIOSBIOSVersion\": \"5.11\",\n  \"Ngay\": \"2023-10-31\"\n },\n \"nhiet_c\": null,\n \"do_duoc_bang_powershell\": true,\n \"loi_powershell\": null,\n \"mt5\": {\n  \"ban_cai\": [\n   \"C:\\\\Program Files\\\\XM Global MT5\"\n  ],\n  \"thu_muc_du_lieu\": [\n   {\n    \"id\": \"BB16F5\",\n    \"may_chu_lich_su\": [\n     \"signals\"\n    ],\n    \"gb_bases\": 0.05,\n    \"gb_tester\": 0.0\n   }\n  ],\n  \"dang_chay\": {\n   \"terminal64\": 0,\n   \"metatester64\": 0\n  },\n  \"agent_rss_gb_tb\": null\n },\n \"nhan_c\": {\n  \"san_sang\": false,\n  \"trinh_bien\": null,\n  \"ly_do\": \"khong co trinh bien dich (cc/gcc/clang/zig/ziglang/cl) - chay Python\",\n  \"che_do\": \"auto\"\n }\n}"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-03T19:07:14"
+}

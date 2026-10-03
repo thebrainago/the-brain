@@ -1,0 +1,10 @@
+{
+ "id": "20261002-155701-5cbd",
+ "luc": "2026-10-02T15:57:01",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "Tra loi bao cao 02/10: dong bang E:, lay ma khong can Git, khoi phuc, thiet lap kenh",
+ "tra_loi": null,
+ "noi_dung": "Phien cloud gui phien nha (tra loi bao cao 02/10):\n1) DUNG GHI len E:/D:. Chay ngay: Disable-ScheduledTask -TaskPath '\\Microsoft\\Windows\\Defrag\\' -TaskName 'ScheduledDefrag'. Thoat Riot, khong cap nhat game.\n2) Chua co Git thi dung cho: powershell -ExecutionPolicy Bypass -File .\\khoi_phuc\\clone_khong_can_git.ps1 (Dulwich). Cai Git bang khoi_phuc\\cai_git.ps1 (mirror, resume, kiem SHA-256).\n3) Khoi phuc du lieu: doc tai_lieu/KHOI_PHUC_DU_LIEU.md; chay khoi_phuc\\kiem_o_dia.ps1 (chi doc) va bao ket qua bang /bao-len. Hoi chu du an: Windows cai lai bang cach nao (Reset this PC > Remove everything > All drives / Clean data?) - quyet dinh co hoi cuu E: hay khong.\n4) TestDisk chi khi chu du an dong y (da tu choi truoc do). Moi cong cu khoi phuc: DICH phai la o khac E:, khong bam Write trong TestDisk khi chua chep du lieu ra.\n5) Thiet lap kenh: .\\b.cmd cau hook-cai ; .\\b.cmd cau dat-session session_01ER1xpfauUywJ6smLMSZmHW ; roi /bao-len de thu."
+}

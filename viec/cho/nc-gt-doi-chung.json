@@ -1,0 +1,20 @@
+{
+  "ma": "nc-gt-doi-chung",
+  "muc_tieu": "so tay: phep kiem chung entry + doi chung random walk",
+  "lan": "NHE",
+  "uu_tien": 5,
+  "han_phut": 60.0,
+  "ra_luc": "2026-10-03T07:49:00",
+  "lenh": [
+    "{py}",
+    "b.py",
+    "nc",
+    "cc",
+    "ghi_gia_thuyet",
+    "{\"cau\": \"KIEM CHUNG gia thuyet 'quan li lenh quyet dinh, entry khong': trong CUNG luat quan li luoi, doi entry 'vao ngay' bang (a) entry co tin hieu xu huong, (b) entry hoi quy, (c) entry ngau nhien cung tan suat -> lai sau phi khong khac nhau qua do lech giua cac o lan can tren tai san hoi quy; DONG THOI chuoi random walk (cung bien do, khong chi phi) cho ty le o co lai bang bao nhieu thi 'co lai trong mau' cua luoi KHONG duoc coi la bang chung.\",\n \"vi_sao\": \"Luoi/DCA co phan phoi loi nhuan lech am (thu nho deu, mat lon hiem): quet nhieu o tren chuoi that LUON tim duoc o co lai trong mau, ke ca khi chuoi khong co gi (ky vong duoi random walk = -chi phi, nhan/pmg). Can mot phep HIEU CHUAN HAI CHIEU: ty le o co lai tren random walk (null) va tren chuoi hoi quy co dap an (AR am). Khong phai cong chan - la nhan canh bao do tin; cong chan van la lai sau phi + maxDD<80% + dung cua so. Phep do dung quet_luoi voi truc che_do/cho_lui/tia_lenh va ma TONG HOP lam doi chung.\",\n \"ho\": \"quan_li_lenh\",\n \"pham_vi\": {\"doi_chung\": [\"random_walk\", \"xu_huong\", \"hoi_quy_AR_am\"], \"cong_cu\": [\"quet_luoi\", \"thu_luoi\", \"kiem\"], \"doan\": \"kham_pha\"},\n \"uu_tien\": 0.8}"
+  ],
+  "vi_sao": "so tay: phep kiem chung entry + doi chung random walk",
+  "cong": {
+    "kieu": "chay_duoc"
+  }
+}

@@ -1,5 +1,12 @@
 # HUONG DAN CHO CLAUDE CODE — lab/ (THE BRAIN)
 
+## MUC TIEU CUOI (chu du an 03/10/2026, nguyen van) - doc truoc ca LUAT SO 0
+
+*"Cuoi cung cua he thong la tim nhung thu dang ra tien va tiem nang roi bien thanh cua ta"*.
+Day chuyen MOT chieu: TIM (dang ra tien + tiem nang) -> LAY lich su lenh -> HIEU luat -> LAM LAI thanh EA cua ta -> THU tren gia that -> CHINH -> chay demo.
+Truoc moi viec tu hoi: viec nay dua mot thu DANG RA TIEN lai gan "cua ta" hon khong? Khong thi de sau (toc do, engine, tai lieu chi la phu tro).
+Chu du an KHONG doc duoc thuat ngu (nhan C, bit-y-het, quet luoi...): bao cao bang loi thuong, 3-8 dong, noi ro tung buoc "xong / chua / ket o dau / can chu du an lam gi".
+
 ## LUAT SO 0 — DOI CHIEU SO DO TRUOC MOI PHIEN (chot 12/09/2026)
 
 **Nguon duy nhat cua CAU TRUC he thong la `Desktop/hethong.txt`**, ban chep dong bo
@@ -25,8 +32,14 @@ Ba dieu trong so do ma de lam nguoc:
    nhung mo hinh kinh te hay quan tri quy de ma can de cao qua nhieu tieu chi hoc
    thuat hay cac chi tieu chat che. Muc dich cuoi cung la co tien chap nhan ca chi
    phi va rui ro cao"*.
-   MDE / FDR / placebo la **NHAN CANH BAO**, khong phai CONG CHAN. Chi chan khi
-   thua mua-giu o CUNG RUI RO - do moi la cau hoi tien.
+   MDE / FDR / placebo la **NHAN CANH BAO**, khong phai CONG CHAN.
+   **TIEU CHI DUYET (chu du an 25/09/2026, thay "chi chan khi thua mua-giu")**:
+   *"toi khong quan tam martingale hay dca hay la phuong phap gi. Toi trade don bay
+   toi chap nhan rui ro, chi can co lai va maxdd duoi 80% la ok"*. Cong CHAN chi con
+   **co lai sau phi + maxDD < 80%** (`cham_diem.TRAN_SUT_GIAM` - MOT nguon cho
+   `cong`, `cong_ra_tien`, `bang_he`, `nc_*`) + tinh dung cua so (phi do duoc, du
+   lenh, khong an khe dao ngay). Thua mua-giu o cung rui ro va "kieu martingale"
+   (tang 2 kinh te) xuong NHAN: van tinh, van hien, khong chan (THE_HE_CONG 6).
 2. **QUAN LI LENH quan trong hon ENTRY** - "module quan trong trong toan bo he thong".
 3. **"FX" = KIEU GIAO DICH LONG/SHORT**, khong phai chi cap tien. San fx co ca chi
    so, hang hoa, kim loai. Chon tai san theo viec no co ra tien khong, khong theo lop.
@@ -34,6 +47,96 @@ Ba dieu trong so do ma de lam nguoc:
 **Khong duoc dung lai o muc mo ta.** Chu du an: *"toi muon claude phai lam duoc he
 thong do va co the nang cap phat trien hon ca mo ta cua toi"*. So do la SAN, khong
 phai TRAN.
+
+## LUAT SO 1 — AI LA NHA NGHIEN CUU CHINH (chot 25/09/2026)
+
+Chu du an: *"The Brain la cong cu va cac phuong an cho cau. Phan thuc thi chinh va
+suy luan chinh phai do AI nam quyen"*. Thiet ke: `tai_lieu/NHA_NGHIEN_CUU.md`.
+
+Moi phien Claude Code:
+1. **Mo dau bang `b nc`** (phien cloud: `b cau lay` roi `b nc nhap` de co so tay cua may nha) - ho so nghien cuu (cau hoi mo, cua chu du an xep truoc;
+   gia thuyet dang song; thi nghiem tot nhat; hieu biet co bang chung; phep thu da tieu).
+2. **Tu chon viec co gia tri nhat va lam** - khong cho giao viec. Chu du an la nha
+   tai tro: dat muc tieu, gui y tuong qua `b nc hoi "..."`, doc so tay.
+3. **Moi phep do nghien cuu di qua `b nc cc <cong_cu> '<json>'`** (16 cong cu: ho so,
+   tim quy luat, thu co che, quet, mo xe lenh, thu luoi, xac nhan, niem phong...) de
+   no vao so tay `nc.db`. Khong viet them script `_*.py` roi cho mot thi nghiem moi -
+   ket qua ngoai so tay la ket qua khong ai tim lai duoc.
+4. **Ket phien**: ghi hieu biet (kem tn_id) + cau hoi moi + trang thai gia thuyet.
+
+Code do va cham, AI khong tu viet ket qua: 3 doan (niem phong mo MOT lan), van tay
+thi nghiem, phep thu dem theo dong gia thuyet, ba trang thai. DAT = co lai sau phi;
+`tien.cagr_duoi_tran_pct` = CAGR tot nhat voi maxDD < 80% (don bay <= 10, khong qua
+Kelly). Niem phong chot DON BAY tren kham pha + xac nhan roi moi mo: DAT = co lai VA
+maxDD < 80% o chinh don bay do. Martingale/DCA/luoi hop le. Hai con so ly do:
+(a) ket qua tot nhat cua lab (AUDCAD luoi co tia, holdout +13,26%/nam) den tu vong
+nghien cuu, khong den tu pheu; (b) tren chuoi co dap an, do tim rong ~3.000 dieu
+kien thay edge yeu **3/8**, mot gia thuyet co chu dich thay **8/8** (`b nc kiem 30`).
+Hoc tu lenh dung/sai = `mo_xe_lenh`. Het token: `b nc tu-lai MA KHUNG` (khong LLM).
+
+**LAN EA THO (03/10/2026, ra soat kien truc)**: EA cong khai (MQL5 Code Base / Market) chay THANG tren MT5 tester truoc, khong qua
+DSL (so do dong 38/55/60): `b nc cc ea_tho_kham|quet|chay|tinh`. Doan dong bang, niem phong 1 lan, DAT = lai sau phi + maxDD < 80%.
+**CHUA hieu chuan voi may that (4 diem)** - doc `tai_lieu/LAN_EA_THO.md` TRUOC khi tin DAT nao; vi sao + doi chieu so do:
+`tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`.
+
+**NGUON NGUOI THANG (03/10/2026, chu du an: 'khai thac he co lai san truoc, dung di duong vong')**: `tai_lieu/NGUON_NGUOI_THANG.md` - ban do nguon, so do that (31/400 ho so MQL5 song >=2 nam, 18 la luoi/DCA tren AUDCAD & anh em), thu tu A chay nguyen file -> B lich su winners -> luoi/DCA -> C cap (EA, tin hieu) -> D chup tuan. TradingView = nguon ma; cTrader = chua. Chua co `DAT` o xac_nhan thi KHONG mo them nguon/engine moi.
+
+**LINK CUA CHU DU AN (03/10/2026)**: `b link` (`tai_lieu/LINK_NGUON.md`) - link / tin nhan nhom -> phan loai -> tham do -> lich su lenh. Link rieng KHONG vao git (`link_rieng.txt`, `du_lieu_cao/`); **CHUA chay tren trang that**. Ba bot cu mat file (BigMouse, DCA Am Duong, BlackDragon): chu du an can LOGIC - `tai_lieu/BOT_CU_LOGIC.md`.
+
+## LAM LAI TU DAU (chu du an chot 02/10/2026)
+
+May nha cai lai Windows, mat `nao.db`, `data/`, `ds/`... Chu du an: *"coi nhu du an duoc lam lai tu dau bai ban
+va khoa hoc hon"* - V6, Ultima AUDCAD, SP500 da test **khong phai bang chung** (chi la boi canh / nguon sinh gia
+thuyet). Dung `tai_lieu/KHOI_PHUC_MAY_NHA.md`: **may moi / sau khi cai lai -> doc no TRUOC, chay `b khoi-phuc`.**
+Giao thuc khoa hoc moi (muc 7 cua tai lieu do): **so cai nghien cuu nam trong git** (`so_cai/nc/`, `b nc xuat|nhap`),
+**doan du lieu DONG BANG theo NGAY** (`so_cai/doan.json`: du lieu moi them khong keo doan niem phong nhay),
+ket qua cu khong phai bang chung. May nha la noi DUY NHAT ghi so cai (`b cau cai ... --ghi-so-cai`).
+
+## KENH CLOUD <-> MAY NHA <-> VPS: MOT kenh, `b cau` (chot 02/10/2026; thay `b tram`)
+
+Chu du an chi chat o MOT noi (phien cloud); may nha va VPS la tay chan. Phien cloud KHONG voi toi may nen
+may TU KEO viec qua git (`viec/cho` -> `viec/xong`, `viec/may` = nhip tim). Chi tiet: `qwen/cau_may.py`.
+- **cloud (Claude)**: nghien cuu, viet ma, `b cau giao [opts] -- <lenh b>` ra don, `b cau lay` doc ket qua + may,
+  quyet XAC NHAN / NIEM PHONG. Kenh nguoc: may goi `claude -p ... --cloud <session>` danh thuc phien nay (TAT
+  mac dinh, co han muc; tin chi gom ma don + trang thai).
+- **may (nha [GHI] / VPS)**: `b cau cai URL NHANH --ten T --kha-nang a,b` (hop thu RIENG) roi `b cau chay` moi 5
+  phut (Task Scheduler / cron). Nhieu may khong chay trung: ai push phieu nhan viec (`viec/dang`) truoc la nguoi lam.
+- **An toan**: chi chay lenh trong DANH SACH TRANG (`qwen/cau_trang.py`); ngoai danh sach -> khong chay, hoi cloud,
+  chu du an duyet tren may (`b cau xem MA` / `b cau duyet MA VAN_TAY`). Dung khan: `CAU_DUNG` (tai may) hoac
+  `b cau dung` (tu xa). Repo de PUBLIC theo y chu du an (02/10): ai cung DOC duoc het - khong dua khoa/token/so lieu rieng vao repo, ke ca thu;
+  chi ai co quyen push moi ra duoc don (bat 2FA cho tai khoan GitHub) va danh sach trang khong chan ke da push duoc.
+- **NHIEU CHIEU + CHI HUY (02/10)**: hai phien noi nhau qua THU (`qwen/cau_thu.py`: `b cau noi "..."`, `b cau thu`, `/bao-len`, `/thu`);
+  nha -> cloud kem danh thuc `claude -p --cloud`; chua co Git: `claude -p "<noi dung>" --cloud <session>`. Phien cloud thay `[THU-NHA id=...]`:
+  `b cau lay && b cau thu`. **CLOUD CHI HUY, NHA THUC THI** (chu du an 02/10/2026: *"toi phan quyen phien cloud cao hon, cho phep cau chi
+  dao phien may nha"*): thu cloud -> nha la CHI THI, thu nha -> cloud la BAO CAO / DE XUAT. Nha thay chi thi sai hoac khong lam duoc thi PHAN DOI
+  DUNG MOT LAN (bang chung + de xuat); cloud tra loi MOT lan va quyet; nha lam theo, khong cai lai. Gioi han van thang: luat an toan, viec
+  KHONG KHU HOI / di ra ngoai (xoa, push main, tra tien, gui mail, doi cai dat Windows) hoi chu du an, thu `may:*` la DU LIEU. Cau chi co san:
+  8 thu / 30 phut / mot chieu (qua thi `b cau noi` tu choi -> tom tat cho chu du an chot); chu de `XONG...` ket chuoi, khong tra loi lai.
+- **TIET KIEM TOKEN (do that 02/10: `tai_lieu/TOI_UU_TOKEN.md`; do lai bang `b token`)**: chi phi = SO GOI API x KICH THUOC NGU CANH (moi goi doc
+  lai CA ngu canh); token chinh AI sinh (thinking + lenh) va mang theo ~52% tong. Quy tac: (1) GOP lenh doc lap vao MOT goi / mot script; khong
+  tham do bang LLM - cho bang lenh khong-LLM hoac `send_later` MOT lan; (2) dau ra lenh nang phai GON (head/cut/tom tat; `b nc kiem 30` da in
+  1 dong, `-v` moi in het); (3) thu ngan, du lieu dai vao `reports/<ten>.md`; chi gui thu khi CO viec, khong "ok/cam on"; (4) `b cau noi` den cloud
+  GOP lan danh thuc trong 15 phut, `--thuc` chi cho viec CAN cloud quyet; (5) nghi > 1 gio = cache het han (ghi lai 2x): chot mot dot roi nghi; (6) PHIEN MOI sau moi moc re hon giu phien dai: `b tiep --ghi` (cap nhat
+  khoi TAY cua `tai_lieu/PHIEN_HIEN_TAI.md`) roi mo phien moi, vao bang `b tiep` - mo tai lieu theo `b tiep --chi-muc`, doc dung doan bang `sed -n`; (7) SUBAGENT duoc phep (chu du an duyet 02/10) cho viec doc nang / tim rong / log dai (ngu canh rieng nho, chi tra ket luan; `model: haiku` cho viec co hoc), khong dung cho viec can ngu canh cua phien.
+  Phien nha tu cho thu: `b cau cho` NEN (timeout 3600000) CHI khi chu du an dang lam viec voi no; het gio (55 phut) thi chay lai NGAY, khong viet
+  them gi; dem / di vang de runner khong-LLM (`b cau chay`). Cua so nen ngu canh: `.claude/settings.json` (autoCompactWindow 300000), phien tuy y
+  `/autocompact 300k`; `/effort high|medium` cho viec co hoc, `max` chi cho thiet ke kho. Vao phien nha lan dau: `tai_lieu/BAT_DAU_O_NHA.md`.
+  Thu nam trong repo PUBLIC: khong dan khoa/token.
+- **tho (model re qua AI Box - chot 03/10/2026, thu nha c91d)**: `b nc tho [--sau]` KHAM PHA tren doan kham_pha, ghi so tay nguon 'tho'.
+  KHONG xac_nhan / niem_phong / xuat_mq5. Model MAC DINH `ds/deepseek-flash`, DU PHONG `qwen3.8-max-0902` (`config/qwen.json`): sai 2 lan LIEN TIEP
+  -> doi sang du phong DUNG MOT LAN, van hong -> dong vong LOI (khong im lang); `--sau` = bat dau bang du phong (viec can suy luan sau). Khoa: bien
+  `AIBOX_API_KEY` hoac cc-switch `aibox` (khong bao gio vao repo). Khong cai Qwen Code / DeepSeek Harness. `q` (qwen) la bo chay TU DONG DAI NGAY
+  tren may nha, dung chung cau hinh model + hop thu nay. So sanh + ly do: `tai_lieu/SO_SANH_LLM.md`. (`nhan/tri_tue.py` / `config/tri_tue.json` =
+  boc ma SEEKER giu qwen3.7-flash: do rieng 05/09 tren viec boc ma.)
+
+## TRINH DUYET AI + NGUON DIEN DAN DA NGON NGU (chu du an 03/10/2026 toi)
+
+Chu du an: may nha chi de dau tu, KHONG co du lieu ca nhan -> cho AI luu / dung moi tai khoan, mat khau, API, quyen admin. **Bi mat nam o `E:\api.txt`** (chu du an them vao do; Claude doc va ghi them o do). Repo la PUBLIC: **KHONG bao gio chep mat khau / khoa vao file nay, vao repo, thu, bao cao, log.** Tk micro XM la tk THAT -> khong dung; chi dung DEMO (`XMGlobal-MT5 10`).
+- **Trinh duyet cua AI ("browser the brain")**: chay `mo_trinh_duyet_ai.cmd` -> Chrome CDP **9224**, ho so `.browser_thebrain` (gitignore). Dieu khien bang Playwright `connect_over_cdp("http://127.0.0.1:9224")`, `contexts[0]`. Da dang nhap (chu du an dang nhap 1 lan): Gmail **thebrainago@gmail.com**, MQL5, Myfxbook. **DUNG dong cua so; KHONG mo ho so Chrome goc (Profile 3) bang ban sao / junction** - Chrome 154 gan phien Google voi thu muc goc nen mat dang nhap (da thu 03/10). Cac tk mang xa hoi / dien dan khac da tao o ho so goc khong mang sang duoc: dang nhap lai bang **"Sign in with Google" (thebrainago)** neu trang co nut do (Myfxbook, nhieu dien dan), khong thi `tu_dang_ky.py` tao moi bang danh tinh mac dinh (id / mat khau mac dinh nam o `E:\api.txt`), doc ma xac minh trong Gmail thebrainago NGAY TRONG trinh duyet nay (connector Gmail cua Claude la anhanh1799, KHONG phai thebrainago).
+- **Mang**: Myfxbook (va co the vai trang khac) bi nha mang chan DNS -> `warp-cli connect` (WARP da cai + dang ky), xong `warp-cli disconnect`; mql5.com vao duoc khong can WARP, WARP doi IP co the huy phien MQL5.
+- **MQL5**: tab Trading history can dang nhap. Lich su lenh = export chinh thuc `https://www.mql5.com/en/signals/<id>/export/positions` (CSV `;`, lay bang `ctx.request.get` trong phien da dang nhap, Referer = trang tin hieu; ngay moi nhat bi an). Mau da co: `reports/fixture/mql5_2023752_positions.csv`. Nhieu trang (danh sach tin hieu, ket qua tim kiem, dien dan): **doc so trang (phan trang) roi qua LAN LUOT tung trang**, nhip 3-5 giay / trang (mql5 cam IP sau ~50-150 request), gap 403 / Cloudflare thi DUNG, ghi ma loi; luu moc "da toi trang N" de lan sau lam tiep.
+- **Nguon dien dan da ngon ngu**: chu du an yeu cau search da ngon ngu, tin MOI QUOC GIA co it nhat 1 dien dan trader (nho > 40 nguon da tung xay). Ngan hang tu khoa da ngon ngu: `keywords_nguon.py`; dien dan: `nguon_dien_dan.py` (hien chi 6: futures.io, traderslaboratory, forexfactory, quant.stackexchange, smart-lab(ru), traderviet(vi)); theo doi ca nhan / nhom: `seeker_theo_doi.py` (`--quet` quet lai); follow / join co kiem soat spam: `tu_follow_join.py`; tao tk tu dong + doc ma xac minh: `tu_dang_ky.py` + `doc_email.py` + `dang_nhap.py`; `web_registry.json`, `config/nguon_ung_vien.json`, `config/nguon_tu_tim.json`, `config/tan_so_quet.json`. **Cac cong cu cu ghi cung duong dan may cu (`C:\Users\SV STORE\...`), CDP 9222 va IMAP (`config/email_cong_tac.json`, khong co o may nay) -> phai port sang CDP 9224 + `.browser_thebrain` + doc thu qua Gmail trong trinh duyet.** **Kiem ke 03/10: `tai_lieu/KIEM_KE_NGUON.md` - con NGUYEN trong code, 71 nguon dang ky (tru/seeker.NGUON 14 + NGUON_TRINH_DUYET 23, nhan/nguon_bai_viet FEEDS 27 + TRANG 7) + 19 ung vien dien dan quoc gia (`_do_dien_dan_quoc_gia.py`, do 15/09: vao duoc 7)**; chi bang `nguon` trong nao.db la mat. Nuoc thieu: dung `keywords_nguon.py` tim 1-3 dien dan moi nuoc (EN, ES, PT, RU, ZH, JA, KO, VI, TH, ID, AR, TR, DE, FR, IT, PL, HI...).
+- **Tan so**: quet lai nguon da theo doi **1 tuan / lan** (chu du an chot 03/10; `config/tan_so_quet.json`, `seeker_theo_doi.py --quet`), co "follow" de thay noi dung moi / cap nhat. Chi nhan nguon moi vao day chuyen khi da co DAT o xac_nhan (luat cu), khong tu them khi chua co.
 
 ## VAN HANH (chot 12/09/2026)
 - Duyet san moi de xuat, **lam lien tuc khong cho duyet**.
@@ -66,10 +169,13 @@ Sau khi co slot tester (goi G2-A) thi noi ra: moi phien giu **mot slot rieng**.
 
 ## Vao phien / ket phien
 ```
+b tiep             BAN GIAO PHIEN (~1,5k token): trang thai + quyet dinh + viec ke tiep - DOC DAU TIEN, KHONG doc lai lich su chat / tai lieu dai
+b nc               HO SO NGHIEN CUU - doc dau tien (LUAT SO 1)
 b vao              trang thai song + ban giao hom qua  (~2 giay)
 b ban-do           SINH ban do tu ma nguon - DOC TRUOC KHI XAY GI MOI
 b kien-truc        SO DO KIEN TRUC: 129 module nhan theo LOP + VAI TRO + no kien truc
 b ho-so            HO SO HE THONG: mot file TU DU dua cho AI khong co dia (Claude chat)
+b may              QUET + DO MAY NHA (den XANH/VANG/DO, % dinh o 75-80% CPU, so tai khoan MT5 toi da): `tai_lieu/MAY_NHA_TOI_UU.md` - phien nha chay `b may` TRUOC khi bao cao suc khoe may
 b ket "tom tat"    chot ngay: git commit + sinh TIEP_TUC_MAI.md moi
 b                  menu day du
 ```

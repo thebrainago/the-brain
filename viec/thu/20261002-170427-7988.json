@@ -1,0 +1,10 @@
+{
+ "id": "20261002-170427-7988",
+ "luc": "2026-10-02T17:04:27",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "chi thi sang mai: pull, b tiep, test fail list, MT5",
+ "tra_loi": null,
+ "noi_dung": "CHI THI cho SANG MAI (khong can lam gi toi nay): 1) mo may, pull: git fetch origin claude/autonomous-trading-system-rzzt7h && git merge --ff-only FETCH_HEAD; pip install -r requirements.txt (them beautifulsoup4). 2) Doc `.\\b.cmd tiep` (ban giao ~1,8k token: trang thai + viec ke tiep) - KHONG doc lai tai lieu dai. 3) Chay lai b test luu danh sach fail: pytest -q -n 8 --dist loadfile -rfE --tb=no, loc dong FAILED/ERROR (<=160 ky tu moi dong) vao reports/test_fail_nha.txt, push: cloud diff voi Linux de tim loi CHI-CO-TREN-WINDOWS (da biet 1: khoa_tien_trinh, da sua). 4) Chu du an cai MT5 XM demo -> bo xuat M1 (BAT_DAU_O_NHA.md buoc 4-5). 5) Co the chu du an chay `.\\b.cmd so-sanh --khai` de so sanh DeepSeek/Qwen (tai_lieu/SO_SANH_LLM.md). Nho: gop lenh, dau ra gon."
+}

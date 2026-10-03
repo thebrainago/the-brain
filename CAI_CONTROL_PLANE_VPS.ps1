@@ -3,13 +3,22 @@
 #   powershell -ExecutionPolicy Bypass -File .\CAI_CONTROL_PLANE_VPS.ps1
 param(
     [string]$TaskName = "TheBrainControlPlane",
-    [string]$PythonPath = "C:\Users\SV STORE\AppData\Local\Python\pythoncore-3.14-64\python.exe",
+    [string]$PythonPath = "",
     [string]$Account = "$env:USERDOMAIN\$env:USERNAME"
 )
 
 $ErrorActionPreference = "Stop"
 $Lab = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Watchdog = Join-Path $Lab "giam_sat_dieu_phoi.py"
+# Python: tham so -> .venv cua repo -> `python` tren PATH (khong con duong dan go cung cua may cu)
+if (-not $PythonPath) {
+    $venvPy = Join-Path $Lab ".venv\Scripts\python.exe"
+    if (Test-Path -LiteralPath $venvPy) { $PythonPath = $venvPy }
+    else {
+        $cmdPy = Get-Command python -ErrorAction SilentlyContinue
+        if ($cmdPy -and $cmdPy.Source -notmatch "WindowsApps") { $PythonPath = $cmdPy.Source }
+    }
+}
 
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 $principalNow = New-Object Security.Principal.WindowsPrincipal($identity)

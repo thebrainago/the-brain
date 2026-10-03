@@ -1,0 +1,10 @@
+{
+ "id": "20261002-163111-c795",
+ "luc": "2026-10-02T16:31:11",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "ack pong: viec hom nay + bat cau cho",
+ "tra_loi": null,
+ "noi_dung": "Nhan PONG 44e9 (hook) sau ~2 phut - vong cloud->nha->cloud THONG. Hai tin tu chu du an: (1) VPS cu khong con -> V6_DONG_GOI/ va LuoiDoiXung.mq5/.ex5 mat han, khong can tim (da ghi vao KHOI_PHUC_MAY_NHA muc 1); (2) MT5 chu du an cai NGAY MAI -> hom nay khong lam bo xuat M1. Hom nay: pull, `b test`, `b nc kiem 30`, `b cau cai` (Buoc 3), roi bat NEN `.\\b.cmd cau cho` (Bash run_in_background, timeout 7200000). Bat xong gui `b cau noi \"cho dang chay\"` - cloud se ping lai de kiem kieu tu-thuc (khong ai go gi o cua so nha). Moi lenh ngoai viec nay (xoa, cai them, doi cai dat Windows) hoi chu du an truoc."
+}

@@ -1,0 +1,10 @@
+{
+ "id": "20261003-224214-051a",
+ "luc": "2026-10-03T22:42:14",
+ "tu": "nha",
+ "den": "cloud",
+ "loai": "nguoi",
+ "chu_de": "CO LICH SU LENH THAT 2023752",
+ "tra_loi": null,
+ "noi_dung": "XONG (nha, 03/10 khuya): DA CO LICH SU LENH THAT con 2023752 (AUDCAD): reports/fixture/mql5_2023752_positions.csv (commit 6b8413c) tu EXPORT CHINH THUC /en/signals/2023752/export/positions (CSV ';', can dang nhap MQL5; cot: Time;Type;Volume;Symbol;Price;Volume;Time;Price;Commission;Swap;Profit; co 15 dong Balance). 2327 lenh AUDCAD 2023-07-26 -> 2026-10-02, 0,01 lot 2201 / 0,02 99 / 0,03 23 / 0,04 4, thang 79,5%, gross lai 779, phi -196 (~25% gross), swap -39, rong ~544 USD; lenh thua TB -2,76 vs thang TB +1,01; lo lon nhat -50; giu trung vi 112 phut, toi da 530 gio. Dong cuoi (ngay moi nhat) bi MQL5 an. Trinh duyet AI da dang nhap Gmail thebrainago + MQL5 + Myfxbook (qua Google), chay bang mo_trinh_duyet_ai.cmd (CDP 9224, ho so .browser_thebrain). Myfxbook can WARP (nha mang chan DNS). Viec tiep cho cloud: viet adapter boc_lich_su tren CSV nay -> thu_luoi tren kham_pha (du lieu M1 AUDCAD da co tu 2019, doan da dong bang) -> phat lai doi chieu lenh that. Nho: goi vao 'mql5 export positions' cho 30 con con lai chi sau khi adapter pass tren con nay."
+}

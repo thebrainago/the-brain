@@ -3,9 +3,18 @@
 
 ## Khoa nam o dau, va vi sao khong chep sang day
 
-`~/.cc-switch/cc-switch.db`, bang `providers`, khop ten bang CHUOI CON. Mot khoa
-API chi nen ton tai o MOT noi - chep di la tao them mot cho de ro ri va mot ban
-co the lech khi chu du an doi khoa.
+(1) bien moi truong `AIBOX_API_KEY` (may nha: bien User; phien cloud / may khong co
+cc-switch: cai dat moi truong), roi (2) `~/.cc-switch/cc-switch.db`, bang
+`providers`, khop ten bang CHUOI CON. Khoa KHONG bao gio nam trong repo / thu / log:
+chep di la tao them mot cho de ro ri va mot ban co the lech khi chu du an doi khoa.
+
+## Model mac dinh + du phong (thu nha c91d, 03/10/2026)
+
+`config/qwen.json`: `model` = `ds/deepseek-flash` (viec khoi luong lon: nhanh, it token),
+`model_du_phong` = `qwen3.8-max-0902` (suy luan sau: cham, nhieu token hon).
+`ke_hoach_thu()`: model dau thu `leo_thang_sau_lan_sai` (2) lan, KHONG duoc thi moi toi
+model du phong - mot loi le te khong dang tra gia model dat hon. `sau=True` = viec can
+suy luan sau, di thang model du phong.
 
 ## Vi sao goi THANG api.ai-box.vn chu khong qua cau noi 8317
 
@@ -26,6 +35,7 @@ cham tran. Luon kiem `completion_tokens` co sat tran khong.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sqlite3
 from pathlib import Path
@@ -67,22 +77,54 @@ def tu_cc_switch(ten: str = "aibox") -> dict:
 
 
 def duong(c: dict | None = None) -> dict:
-    """Tra {khoa, base_url, model} da giai quyet xong moi uu tien."""
+    """Tra {khoa, base_url, model, provider, nguon} da giai quyet xong moi uu tien (env truoc, cc-switch sau)."""
     c = c or CH.nap()
-    cc = tu_cc_switch(c["cc_switch_provider"])
+    khoa_env = (os.environ.get("AIBOX_API_KEY") or "").strip()
+    if khoa_env:
+        cc = {"khoa": khoa_env, "ten": "env:AIBOX_API_KEY", "base_url": "", "model": ""}
+        nguon = "env:AIBOX_API_KEY"
+    else:
+        cc = tu_cc_switch(c["cc_switch_provider"])
+        nguon = "cc-switch:%s" % cc.get("ten", "")
     if not cc.get("khoa"):
         raise SystemExit(
-            "!! khong tim thay provider chua '%s' trong %s.\n"
+            "!! khong co khoa AI Box: bien moi truong AIBOX_API_KEY trong, va khong tim thay\n"
+            "   provider chua '%s' trong %s.\n"
             "   Da tung mat ca duong LLM vi lech TEN provider (06/09): moi loi goi\n"
             "   tra 'thieu OPENAI_API_KEY' va khong ai bao. Mo cc-switch xem ten that,\n"
-            "   roi sua `cc_switch_provider` trong config/qwen.json."
+            "   roi sua `cc_switch_provider` trong config/qwen.json (hoac dat AIBOX_API_KEY)."
             % (c["cc_switch_provider"], CC_SWITCH_DB))
     base = cc["base_url"]
     if not c.get("qua_cau_noi") and ("127.0.0.1" in base or "localhost" in base):
         base = c["base_url"]        # thang, khong qua cau noi Codex
     return {"khoa": cc["khoa"], "base_url": base or c["base_url"],
-            "model": c["model"] or cc.get("model") or "qwen3.7-flash",
-            "provider": cc["ten"]}
+            "model": c["model"] or cc.get("model") or CH.MAC_DINH["model"],
+            "provider": cc["ten"], "nguon": nguon}
+
+
+def thu_tu_model(c: dict | None = None, sau: bool = False) -> list[str]:
+    """[mac dinh, du phong], bo ten rong va ten trung; `sau=True` dao thu tu (viec can suy luan sau)."""
+    c = c or CH.nap()
+    ds = []
+    for m in (c.get("model"), c.get("model_du_phong")):
+        m = str(m or "").strip()
+        if m and m not in ds:
+            ds.append(m)
+    return ds[::-1] if sau else ds
+
+
+def ke_hoach_thu(c: dict | None = None, sau: bool = False) -> list[str]:
+    """Cac model THU LAN LUOT cho MOT viec: model dau `leo_thang_sau_lan_sai` lan, moi model sau 1 lan.
+
+    Vi sao hai lan roi moi doi (thu nha c91d): mot loi le te (mang chap chon, mot lan tra rong)
+    khong dang tra gia model manh - cham hon ~5 lan va ra nhieu token hon (do 03/10: 15,9 s
+    vs 3,1 s); hai lan lien tiep la model nay khong lam duoc viec nay.
+    """
+    c = c or CH.nap()
+    ds = thu_tu_model(c, sau)
+    if not ds:
+        return []
+    return [ds[0]] * max(1, int(c.get("leo_thang_sau_lan_sai") or 2)) + ds[1:]
 
 
 def chat(c: dict | None = None, model: str | None = None, cong_cu=None):
@@ -108,7 +150,7 @@ def kiem() -> dict:
     c = CH.nap()
     d = duong(c)
     ra = {"provider": d["provider"], "base_url": d["base_url"], "model": d["model"]}
-    for m in (d["model"], c["model_du_phong"]):
+    for m in thu_tu_model(c):
         t = time.time()
         try:
             r = chat(c, model=m).invoke("Tra loi dung mot tu: OK")

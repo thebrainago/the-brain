@@ -1,0 +1,22 @@
+{
+  "ma": "test-that",
+  "muc_tieu": "Chay ca bo test tren may CO data/ + nao.db. Cloud do 85 bai vi thieu dau vao; can biet bai nao do THAT.",
+  "lan": "CPU",
+  "uu_tien": 1,
+  "han_phut": 45.0,
+  "ra_luc": "2026-09-20T17:48:25",
+  "lenh": [
+    "{py}",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=no",
+    "-rf",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "ghi_chu": "So danh sach ten voi reports/do_nhanh.txt (85 bai do tren cloud). Bai do o CA HAI noi moi la bai do that. Ma thoat 1 = co bai do (AM); >=2 = loi thu gom (CHUA_DO_DUOC).",
+  "cong": {
+    "kieu": "pytest"
+  }
+}

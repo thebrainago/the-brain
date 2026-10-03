@@ -71,18 +71,43 @@ def he_da_pass(trang_thai=TRANG_THAI_KE_THUA) -> list[dict]:
     return ra
 
 
+#: Ly do cuoi cung khien `ty_le_kich_hoat` tra `None`. Doc ngay sau loi goi.
+#: Khong phai trang thai toan cuc "dung": chi de `chuyen`/`ung_vien` phan biet
+#: duoc HAI nguyen nhan rat khac nhau ma khong doi chu ky ham cong khai.
+_LY_DO_CUOI: str | None = None
+
+
 def ty_le_kich_hoat(ma: str, khung: str, template: str, tham_so: dict,
                     chi_train: bool = True) -> float | None:
-    """Ty le bar co phoi nhiem khac 0. None = khong chay duoc tren tai san nay."""
+    """Ty le bar co phoi nhiem khac 0. None = khong chay duoc tren tai san nay.
+
+    ## HAI NGUYEN NHAN KHAC HAN NHAU (tach 20/09/2026)
+
+    Ban cu co hai `except Exception: return None` gop lai lam mot dau ra:
+
+      * **THIEU DU LIEU** (`DU.nap` nem) - may nay khong co `data/<ma>`. Day la
+        `CHUA_DO_DUOC`: khong noi duoc gi ve co che ca.
+      * **CO CHE KHONG CHAY DUOC** (`MAU.sinh` nem) - vd co che theo GIO tren
+        khung khong co gio. Day la ket luan THAT ve cap (co che, tai san).
+
+    Vi sao phai tach: `ung_vien()` bo im lang moi ung vien tra `None`. Tren
+    mot may thieu `data/`, MOI he da PASS deu roi vao nhanh thu nhat va bao
+    cao in ra `tu_he_da_pass: 0` - doc y het "khong he nao ke thua duoc",
+    dung hinh dang bay `CHUA_DO_DUOC` bi doc thanh `AM` cua LUAT SO 0.
+    """
+    global _LY_DO_CUOI
+    _LY_DO_CUOI = None
     try:
         df = DU.nap(ma, khung)
-    except Exception:
+    except Exception as e:
+        _LY_DO_CUOI = f"CHUA_DO_DUOC: khong nap duoc {ma} {khung} ({type(e).__name__}: {e})"
         return None
     if chi_train:
         df = DU.hai_nua(df, 0.6)[0]
     try:
         th = MAU.sinh(template, df, tham_so)
-    except Exception:
+    except Exception as e:
+        _LY_DO_CUOI = f"co che '{template}' khong chay duoc tren {ma} {khung} ({type(e).__name__})"
         return None
     return float(np.mean(np.abs(np.nan_to_num(np.asarray(th, float))) > 0))
 
@@ -126,7 +151,15 @@ def chuyen(gt: dict, ma_dich: str, khung_dich: str,
     if not tpl or tpl not in MAU.MAU:
         return None
     goc = ty_le_kich_hoat(gt["tai_san"], gt["khung"], tpl, ts)
-    if goc is None or goc <= 0:
+    if goc is None:
+        # Ghi ly do vao chinh ket qua thay vi tra `None` tron: goi y thu hai
+        # cua LUAT SO 0 la khong bao gio de mot phep KHONG DO DUOC im lang.
+        return {"tu": gt.get("ma"), "template": tpl, "ho": gt.get("ho"),
+                "tai_san_goc": gt.get("tai_san"), "khung_goc": gt.get("khung"),
+                "tai_san_dich": ma_dich, "khung_dich": khung_dich,
+                "dat": False, "chua_do_duoc": True,
+                "ly_do": _LY_DO_CUOI or "khong do duoc ty le kich hoat goc"}
+    if goc <= 0:
         return None
 
     thang = ty_le_kich_hoat(ma_dich, khung_dich, tpl, ts)
@@ -161,15 +194,19 @@ def ung_vien(ma_dich: str, khung_dich: str, gom_kho: bool = True) -> dict:
     co do tin cay rat khac nhau va khong duoc tron lam mot.
     """
     NP.nap_vao_mau()
-    ke_thua = []
+    ke_thua, chua_do = [], []
     for gt in he_da_pass():
         r = chuyen(gt, ma_dich, khung_dich)
-        if r:
-            ke_thua.append(r)
+        if not r:
+            continue
+        (chua_do if r.get("chua_do_duoc") else ke_thua).append(r)
     kho = []
     if gom_kho:
         kho = [{"ten": c.get("ten"), "ho": c.get("ho"), "nguon": c.get("nguon")}
                for c in NP.doc_kho()]
     return {"tai_san": ma_dich, "khung": khung_dich,
             "tu_kho_seeker": len(kho), "tu_he_da_pass": len(ke_thua),
+            # `tu_he_da_pass: 0` chi doc duoc la "khong he nao ke thua duoc"
+            # KHI `chua_do_duoc: 0`. Thieu `data/` thi moi he roi vao day.
+            "chua_do_duoc": len(chua_do), "khong_do_duoc": chua_do,
             "kho": kho, "ke_thua": ke_thua}

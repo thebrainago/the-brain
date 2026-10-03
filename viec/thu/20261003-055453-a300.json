@@ -1,0 +1,10 @@
+{
+ "id": "20261003-055453-a300",
+ "luc": "2026-10-03T05:54:53",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI THI #3: do toc do nhan C + quet_luoi + giay MT5",
+ "tra_loi": null,
+ "noi_dung": "CHI THI #3 (cloud->nha) 03/10 khuya, BO SUNG #1 + #2 (viec cu van hieu luc, khong lap lai). Da day ed3d3fe. Doc NGAN: tai_lieu/TOC_DO_TEST.md muc 4.\nMoi: engine luoi co nhan C (khop tung bit Python, do tren Linux: 1 o x86, quet 54 o x50) + cong cu nc quet_luoi + boc_lich_su. CHUA chay tren Windows / Python 3.14 / du lieu that.\nLAM theo thu tu (hong o buoc nao thi DUNG o do, bao cloud kem 15 dong cuoi cua dau ra):\n1. git pull. CHI neu buoc 2 bao khong co trinh bien dich: pip install ziglang (mot lan, ~80 MB).\n2. python -m nhan.luoi_nhan trang-thai -> nhan C dung duoc khong, tu kiem khop khong, ban Python.\n3. python -m nhan.luoi_nhan do 190000 -> so ms Python vs C (khong tin so Linux: do lai tai may nha).\n4. python -m pytest -q test_luoi_nhan.py test_quet_luoi.py test_luoi_quy_cach.py -> pass/fail (fail thi ghi node id).\n5. Khi co bar that (sau b khoi-phuc + XM demo): b nc cc quet_luoi (vi du o TOC_DO_TEST muc 4) tren AUDCAD M15 -> ghi giay + hinh_dang. KHONG niem phong gi, KHONG xac nhan o day.\n6. Lan ea_tho_quet / ea_tho_chay dau tien: chep cot `giay` (giay / lan MT5, Model=0 va 4) vao reports/toc_do_mt5.md va day len.\n7. Khi co bang lenh that cua 31 ID (thu #2): b nc cc boc_lich_su tren tung bang; ket qua tu vao so tay.\nTra loi MOT thu: b cau noi \"...\" --chu-de \"XONG toc do\" kem so o buoc 2-4 va 6. Khong gui thu 'ok'."
+}

@@ -24,6 +24,15 @@ DAT = {"ten": "x", "ho": "xu_huong", "chieu": 1, "giu": 5,
                 "phai": {"chi_bao": "sma", "n": 20}}]}
 
 
+def _thay_tri_tue(monkeypatch, gia):
+    """Thay `nhan.tri_tue` bang ban gia. Phai thay CA HAI cho: `sys.modules` VA thuoc tinh `tri_tue` cua goi `nhan` -
+    `from nhan import tri_tue` doc thuoc tinh cua goi truoc, nen neu bai nao chay TRUOC da import that thi thuoc tinh
+    do thang `sys.modules` (bai nay pass khi chay mot minh, do khi chay sau mot so file khac)."""
+    import nhan
+    monkeypatch.setitem(sys.modules, "nhan.tri_tue", gia)
+    monkeypatch.setattr(nhan, "tri_tue", gia, raising=False)
+
+
 def test_khong_bat_sua_thi_khong_goi_mang(monkeypatch):
     goi = {"n": 0}
 
@@ -99,7 +108,7 @@ def test_doc_duoc_ca_ban_sua_lan_co_che(monkeypatch):
     for khoa in ("ban_sua", "co_che"):
         gia = types.SimpleNamespace(
             hoi_json=lambda *a, **k: {"json": {khoa: [dict(DAT)]}})
-        monkeypatch.setitem(sys.modules, "nhan.tri_tue", gia)
+        _thay_tri_tue(monkeypatch, gia)
         c, ly = B.sua_bang_llm("EA", dict(HONG), ["loi"])
         assert c is not None and c["ho"] == "xu_huong", (khoa, ly)
 
@@ -107,7 +116,7 @@ def test_doc_duoc_ca_ban_sua_lan_co_che(monkeypatch):
 def test_mot_dict_don_cung_doc_duoc(monkeypatch):
     import types
     gia = types.SimpleNamespace(hoi_json=lambda *a, **k: {"json": {"ban_sua": dict(DAT)}})
-    monkeypatch.setitem(sys.modules, "nhan.tri_tue", gia)
+    _thay_tri_tue(monkeypatch, gia)
     c, _ = B.sua_bang_llm("EA", dict(HONG), ["loi"])
     assert c is not None and c["ho"] == "xu_huong"
 

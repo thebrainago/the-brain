@@ -403,11 +403,19 @@ def bien_dich(tai_lieu, luc: str | None = None) -> list:
 
 # ----------------------------------------------------------------- MOT LUOT
 
-def _doc_con_tro() -> int:
+def _doc_con_tro() -> int | None:
+    """Con tro da luu. `None` = KHONG DOC DUOC, khac han con tro bang 0.
+
+    Ban cu tra 0 khi loi, va 0 doc y het "bat dau tu dau". He quet lai tu
+    artifact dau tien: ton cong, va moi ung vien cu duoc xep lai vao hang doi
+    mot lan nua - so ung vien phinh len ma khong ai biet vi sao.
+    """
     try:
         return int(json.loads(CON_TRO.read_text(encoding="utf-8"))["artifact_id"])
+    except FileNotFoundError:
+        return 0                     # chua chay lan nao - 0 la DUNG
     except Exception:
-        return 0
+        return None                  # co file nhung hong - KHONG phai 0
 
 
 def _luu_con_tro(artifact_id: int) -> None:
@@ -417,7 +425,13 @@ def _luu_con_tro(artifact_id: int) -> None:
 
 def mot_luot(gioi_han: int = TRAN_MOI_LUOT, tiep_tuc: bool = True) -> dict:
     """Quet cac DocumentArtifact chua bien dich, xep ung vien vao hang doi."""
-    tu = _doc_con_tro() if tiep_tuc else 0
+    tu = (_doc_con_tro() if tiep_tuc else 0)
+    if tu is None:
+        # Con tro hong: van chay tu 0 (khong co lua chon nao khac) nhung PHAI
+        # noi ra, khong thi mot luot quet lai toan bo trong y het mot luot
+        # binh thuong.
+        print("CANH BAO: con tro hong, quet lai tu dau - so ung vien se phinh")
+        tu = 0
     rows = SO.nhieu(
         "SELECT id, payload FROM artifact "
         "WHERE artifact_type IN ('document','code') AND id>? "

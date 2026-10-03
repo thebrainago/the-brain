@@ -101,8 +101,9 @@ def ten_sach(s: str) -> str:
     return re.sub(r"[^A-Za-z0-9]+", "_", s)[:40].strip("_") or "ea"
 
 
-def tai_lo(so_bai: int = 24, muc: str = "mt5/experts") -> list[dict]:
-    """Tai `so_bai` EA that tu MQL5 Code Base. Chi file .mq5 don, khong .zip."""
+def tai_lo(so_bai: int = 24, muc: str = "mt5/experts", nghi: float = 3.0) -> list[dict]:
+    """Tai `so_bai` EA that tu MQL5 Code Base. Chi lay van ban .mq5 CHINH tren trang (khong .zip): EA nhieu file mat
+    .mqh -> `nhan/ea_tho` loai THIEU_TEP. `nghi` = giay giua hai bai: mql5.com cam IP sau ~50-150 request, cham khong mat gi."""
     from tru import seeker as S
     S._ghi_con_tro("mql5_code", {"trang": {muc: 1}, "danh_muc_ke": 0})
     ds = [d for d in S.n_mql5_code([]) if muc.split("/")[-1] in d["tieu_de"]]
@@ -114,14 +115,14 @@ def tai_lo(so_bai: int = 24, muc: str = "mt5/experts") -> list[dict]:
             r = None
         if r and r.get("noi_dung"):
             ra.append({"url": d["url"], "ten": d["tieu_de"], "ma": r["noi_dung"]})
-        time.sleep(0.4)
+        time.sleep(nghi)
     KHO_EA.mkdir(parents=True, exist_ok=True)
     (KHO_EA / "kho.json").write_text(
         json.dumps(ra, ensure_ascii=False), encoding="utf-8")
     return ra
 
 
-def bien_dich(ds: list[dict], ten_terminal: str = "exness") -> list[dict]:
+def bien_dich(ds: list[dict], ten_terminal: str = "exness", cho_giay: float = 12.0) -> list[dict]:
     """Ghi .mq5 vao MQL5/Experts/_tu_dong roi bien dich tung file.
 
     Duong dan phai TUONG DOI tinh tu `MQL5` - duong tuyet doi cho rc=0 va khong
@@ -138,7 +139,7 @@ def bien_dich(ds: list[dict], ten_terminal: str = "exness") -> list[dict]:
         f.write_text(x["ma"], encoding="utf-8")
         rel = "Experts" + chr(92) + "_tu_dong" + chr(92) + f.name
         p = subprocess.Popen([str(me), f"/compile:{rel}", "/log"], cwd=str(mql5))
-        for _ in range(48):
+        for _ in range(max(1, int(cho_giay / 0.25))):
             if f.with_suffix(".ex5").exists():
                 break
             time.sleep(0.25)
@@ -326,6 +327,7 @@ def chay_mot(viec: dict) -> dict:
     tap_set = viet_set(nhan, viec.get("input") or {}, ten_t)
     ini = viet_ini(nhan, viec["ea"], tap_set, viec["symbol"], viec["khung"],
                    viec["tu"], viec["den"], model=viec.get("model", 4),
+                   von=viec.get("von", 10000), don_bay=viec.get("don_bay", 100),
                    ten_terminal=ten_t)
     dong_terminal(ten_t)
     t0 = time.time()
@@ -373,11 +375,12 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tai", type=int, default=0, help="tai va bien dich N EA")
     ap.add_argument("--muc", default="mt5/experts")
+    ap.add_argument("--nghi", type=float, default=3.0, help="giay nghi giua hai bai tai (mql5.com cam IP neu don dap)")
     ap.add_argument("--terminal", default="exness")
     a = ap.parse_args()
 
     if a.tai:
-        ds = tai_lo(a.tai, a.muc)
+        ds = tai_lo(a.tai, a.muc, a.nghi)
         print(f"tai duoc {len(ds)} file .mq5")
         kq = bien_dich(ds, a.terminal)
         ok = sum(1 for x in kq if x["bien_dich"])

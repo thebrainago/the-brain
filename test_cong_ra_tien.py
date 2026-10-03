@@ -90,8 +90,11 @@ class NguongLaThamSo(unittest.TestCase):
     than ham, vi ban ghi ket qua phai kem theo nguong da dung."""
 
     def test_nguong_mac_dinh_hop_ly(self):
-        self.assertGreater(CRT.MUC_CAGR, 0.0)
+        # 25/09 chu du an: "chi can co lai va maxdd duoi 80%" -> nguong duyet lai = 0
+        # (dieu kien 1_lai la CAGR > 0 nghiem ngat), tran DD doc tu cham_diem.
+        self.assertGreaterEqual(CRT.MUC_CAGR, 0.0)
         self.assertGreater(CRT.TRAN_DD, CRT.MUC_CAGR)
+        self.assertLess(CRT.TRAN_DD, 1.0, "tran 100% = khong co tran")
         self.assertGreaterEqual(CRT.MIN_LENH, 1)
         self.assertGreater(CRT.MIN_NAM, 0.0)
 
