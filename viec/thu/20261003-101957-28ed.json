@@ -1,0 +1,10 @@
+{
+ "id": "20261003-101957-28ed",
+ "luc": "2026-10-03T10:19:57",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI THI #5: b link (tiep nhan link nhom) + bot cu mat file",
+ "tra_loi": null,
+ "noi_dung": "CHI THI #5 (cloud->nha) 03/10 chieu. BO SUNG cho #4, KHONG doi thu tu: con mau 2196457 van la uu tien 1. Da day 37a1c0b (doc dau CLAUDE.md).\nMoi: lenh b link = tiep nhan LINK chu du an (cac nhom co nhieu bot co lai) + tham do trang + nap bao cao lenh chu du an luu tay. CHUA chay tren trang that. Doc NGAN: tai_lieu/LINK_NGUON.md.\nChu du an noi may nha mat sach du lieu, ba bot cu (BigMouse, DCA Am Duong, BlackDragon) mat file; can LOGIC chu khong can file: tai_lieu/BOT_CU_LOGIC.md.\nLAM (hong buoc nao thi DUNG o do, bao cloud kem 15 dong cuoi cua dau ra):\n1. git pull. Don link-tham-do-con-mau (lan MANG) da xep hang: thu trang cong khai cua con mau 2196457, ket qua ve qua b cau lay (OK / bi chan / robots). Neu mql5.com khong vao duoc (DNS): bat WARP (b mang) roi chay lai: python b.py link tham-do https://mql5.com/signals/2196457\n2. Khi chu du an dua link: python b.py link them \"<link hoac tin nhan>\" (vao link_rieng.txt, khong len git) -> python b.py link (ke hoach) -> python b.py link chay --toi-da 12. Tep chu du an luu tay (bao cao lich su .htm/.csv, result.json cua Telegram, zip): tha vao du_lieu_cao/tha_vao/ -> python b.py link thu-muc\n3. Trang can dang nhap: chu du an dang nhap Chrome (CDP 9224) mot lan -> python b.py link chay --cdp (chi chu du an chay tay; cloud khong ra don --cdp).\n4. Bot cu: HOI chu du an so tai khoan + may chu cua ba bot (KHONG dan mat khau vao thu). Neu con C:\\Windows.old hoac o khac thi chi LIET KE file .set/.ex4/.mq4/.htm theo ten bot, KHONG chay file la, KHONG chay Don dia. Lich su lenh cua tai khoan do (neu con) di theo b link tai-khoan-xem hoac bao cao HTML -> boc_lich_su.\nKHONG lam: dan khoa / mat khau / link nhom kin vao thu hay repo; chay .ex4/.ex5 la; them nguon moi khi chua co DAT o xac_nhan."
+}
