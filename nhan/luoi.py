@@ -159,6 +159,9 @@ class KetQuaLuoi:
     bar_chay: int | None = None
     so_nam: float = 0.0
     duong_equity: np.ndarray | None = field(default=None, repr=False)
+    #: DataFrame lenh mo phong (chi co khi `chay(..., ghi_lenh=True)`): mo, dong, chieu, lot, gia_mo, gia_dong, tang, ro,
+    #: ly_do. Lenh chua dong den het du lieu co `dong` = NaT. Cung luoc do voi lich su lenh that (`nhan/boc_lich_su`).
+    lenh: object | None = field(default=None, repr=False)
 
 
 #: Truong cua `ThamSo` da khai bao nhung engine KHONG doc. Dat != 0 cho ket qua y het 0 (khong loi, khong canh bao)
@@ -334,8 +337,13 @@ def khoa_quy_cach(qc: QuyCach) -> str:
     return hashlib.sha1(json.dumps(d, sort_keys=True).encode("utf-8")).hexdigest()[:12]
 
 
-def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | None = None):
+def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | None = None,
+            ghi: list | None = None):
     """Mo phong MOT ro. Tra (lai_cong_don_theo_bar, lo_treo_theo_bar, thong ke).
+
+    `ghi` (list) bat che do GHI LENH: moi lenh mo/dong duoc them vao list nhu mot tuple
+    `("mo", bar, gia, lot, id, tang, ro)` / `("dong", bar, gia, id, ly_do)` (ly_do `tp` hoac `tia`).
+    Chi them dong ghi, KHONG doi so nao - `ghi=None` cho ket qua y het ban truoc khi co tham so nay.
 
     `lai_cong_don_theo_bar` la lai DA CHOT tich luy (rong phi) den tung bar.
     `lo_treo_theo_bar` la lo chua chot cua cac tang dang mo tai bar do.
@@ -370,6 +378,9 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
     # tang con lai bi DANH SO LAI va lot cua chung doi ngam. Loi do thoi ket
     # qua len vi no am tham bo di dung nhung tang lot to nhat.
     vao = [(cl[0], _lot(0))]
+    if ghi is not None:
+        vao_id, n_id, ro_hien = [0], 1, 0           # id lenh song SONG SONG voi `vao`; ro_hien = so ro dang chay
+        ghi.append(("mo", 0, float(cl[0]), float(_lot(0)), 0, 0, 0))
     cho = 0.0          # != 0: dang CHO gia lui toi muc nay moi mo L1
     lai = 0.0
     phi_sp = 0.0
@@ -388,6 +399,11 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
         if cho:
             if (lo[i] <= cho) if chieu > 0 else (hi[i] >= cho):
                 vao = [(cho, _lot(0))]
+                if ghi is not None:
+                    ro_hien += 1
+                    vao_id = [n_id]
+                    ghi.append(("mo", i, float(cho), float(_lot(0)), n_id, 0, ro_hien))
+                    n_id += 1
                 so_lenh += 1
                 phi_sp += spread_gia[i] * _lot(0) * hop
                 cho = 0.0
@@ -401,6 +417,10 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
             while (lo[i] <= moc if chieu > 0 else hi[i] >= moc):
                 phi_sp += spread_gia[i] * _lot(so_tang) * hop
                 vao.append((moc, _lot(so_tang)))
+                if ghi is not None:
+                    vao_id.append(n_id)
+                    ghi.append(("mo", i, float(moc), float(_lot(so_tang)), n_id, so_tang, ro_hien))
+                    n_id += 1
                 so_tang += 1
                 so_lenh += 1
                 if len(vao) >= ts.tran_tang:
@@ -439,11 +459,20 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
                 phi_sp += spread_gia[i] * (l_dau + l_cuoi) * hop
                 so_cap += 1
                 da += 1
+                if ghi is not None:
+                    ghi.append(("dong", i, float(tot), vao_id[0], "tia"))
+                    ghi.append(("dong", i, float(tot), vao_id[-1], "tia"))
+                    vao_id = vao_id[1:-1]
                 vao = vao[1:-1]
             if not vao:
                 # tia het ca ro -> mo lai mot lenh moi, ladder ve 0
                 so_tang = 1
                 vao = [(cl[i], _lot(0))]
+                if ghi is not None:
+                    ro_hien += 1
+                    vao_id = [n_id]
+                    ghi.append(("mo", i, float(cl[i]), float(_lot(0)), n_id, 0, ro_hien))
+                    n_id += 1
                 so_lenh += 1
                 phi_sp += spread_gia[i] * _lot(0) * hop
             tong_lot = sum(l for _g, l in vao)
@@ -465,14 +494,24 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
         if cham:
             lai += loi_chot
             so_ro += 1
+            if ghi is not None:
+                for k_id in vao_id:
+                    ghi.append(("dong", i, float(mtp), k_id, "tp"))
             treo_arr[i] = 0.0
             so_tang = 1
             if ts.cho_lui > 0:
                 # khong mo lai ngay: dat moc cho gia lui `cho_lui` pip
                 cho = mtp - chieu * ts.cho_lui * pip
                 vao = []
+                if ghi is not None:
+                    vao_id = []
             else:
                 vao = [(mtp, _lot(0))]
+                if ghi is not None:
+                    ro_hien += 1
+                    vao_id = [n_id]
+                    ghi.append(("mo", i, float(mtp), float(_lot(0)), n_id, 0, ro_hien))
+                    n_id += 1
                 so_lenh += 1
                 phi_sp += spread_gia[i] * _lot(0) * hop
         lai_arr[i] = lai - phi_sp - phi_sw
@@ -484,8 +523,33 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
         "so_cap": so_cap, "con_mo": len(vao)}
 
 
-def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None) -> KetQuaLuoi:
-    """Mo phong day du tren mot khung du lieu. `von` bang dong BAO GIA. `qc` None = AUDCAD cu."""
+def _bang_lenh(nhat_ky: dict, idx, qc: QuyCach):
+    """Nhat ky `_mot_ro` (theo chieu) -> DataFrame lenh. `ro` la khoa DUY NHAT: chan 2*so_ro (+1 neu ban)."""
+    import pandas as pd
+    hang = []
+    for chieu, ev in nhat_ky.items():
+        mo = {}
+        for e in ev:
+            if e[0] == "mo":
+                _t, bar, gia, lot, ma_id, tang, ro = e
+                mo[ma_id] = dict(mo=idx[bar], dong=pd.NaT, chieu=chieu, lot=lot, gia_mo=gia, gia_dong=np.nan,
+                                 tang=tang, ro=2 * ro + (0 if chieu > 0 else 1), ly_do="")
+            else:
+                _t, bar, gia, ma_id, ly_do = e
+                mo[ma_id].update(dong=idx[bar], gia_dong=gia, ly_do=ly_do)
+        hang.extend(mo.values())
+    cot = ["mo", "dong", "chieu", "lot", "gia_mo", "gia_dong", "tang", "ro", "ly_do"]
+    if not hang:
+        return pd.DataFrame(columns=cot)
+    d = pd.DataFrame(hang, columns=cot).sort_values(["mo", "ro", "tang"], kind="stable").reset_index(drop=True)
+    d.attrs["pip"] = qc.pip
+    return d
+
+
+def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None, ghi_lenh: bool = False) -> KetQuaLuoi:
+    """Mo phong day du tren mot khung du lieu. `von` bang dong BAO GIA. `qc` None = AUDCAD cu.
+
+    `ghi_lenh=True`: them `KetQuaLuoi.lenh` (danh sach lenh mo phong). Khong doi bat ky con so nao khac."""
     chua = tham_so_chua_cai_dat(ts)
     if chua:
         raise ValueError("tham so %s da khai bao nhung luoi.py CHUA cai dat: dat != 0 se bi bo qua am tham" % chua)
@@ -504,9 +568,10 @@ def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None) -> KetQuaLuoi:
     dem[1:] = np.diff(idx.values).astype("timedelta64[s]").astype(float) / 86400.0
 
     chieus = {"mua": (1,), "ban": (-1,), "hai_chieu": (1, -1)}[ts.che_do]
-    lais, treos, tks = [], [], []
+    lais, treos, tks, nhat_ky = [], [], [], {}
     for c in chieus:
-        a, b, k = _mot_ro(hi, lo, cl, sp, dem, c, ts, qc)
+        ghi = nhat_ky.setdefault(c, []) if ghi_lenh else None
+        a, b, k = _mot_ro(hi, lo, cl, sp, dem, c, ts, qc, ghi)
         lais.append(a)
         treos.append(b)
         tks.append(k)
@@ -541,7 +606,8 @@ def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None) -> KetQuaLuoi:
         tang_max=max(k["tang_max"] for k in tks),
         lo_treo_dinh=float(np.max(treo)),
         chay=bar_chay is not None, bar_chay=bar_chay,
-        so_nam=so_nam, duong_equity=equity)
+        so_nam=so_nam, duong_equity=equity,
+        lenh=_bang_lenh(nhat_ky, idx, qc) if ghi_lenh else None)
 
 
 def chi_so(kq: KetQuaLuoi, von: float) -> dict:

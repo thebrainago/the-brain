@@ -499,3 +499,40 @@ def test_thu_luoi_tu_choi_dung_lo_tong_truoc_khi_nap_du_lieu(moi_truong, monkeyp
     monkeypatch.setattr(NDL, "nap", _khong_duoc_goi)
     r = TN.danh_gia_luoi("USDCHF", "M15", dict(TS, dung_lo_tong=500.0), "kham_pha", von=10000.0)
     assert r["trang_thai"] == "CHUA_DO_DUOC" and "CHUA cai dat" in r["ly_do"] and "dung_lo_tong" in r["ly_do"]
+
+
+# ------------------------------------------------------------------ 7. GHI LENH (danh sach lenh mo phong)
+@pytest.mark.parametrize("ten", sorted(CASES))
+def test_ghi_lenh_khong_doi_so_nao_va_khop_bo_dem(ten):
+    """`ghi_lenh=True` chi THEM nhat ky: moi con so van y het ban khong ghi, va nhat ky khop bo dem cua chinh engine
+    (so lenh, so ro chot TP, lai gop) - de `lenh` doi chieu duoc voi lich su that / tester ma khong lech ngam."""
+    ts, von, kw = CASES[ten]
+    df = _chuoi(**kw)
+    a = LU.chay(df, LU.ThamSo(**ts), von)
+    b = LU.chay(df, LU.ThamSo(**ts), von, ghi_lenh=True)
+    assert a.lenh is None and b.lenh is not None
+    assert _tom_tat(a, von) == _tom_tat(b, von) and np.array_equal(a.duong_equity, b.duong_equity)
+    ln = b.lenh
+    assert len(ln) == b.so_lenh, "so lenh nhat ky phai bang so_lenh cua engine"
+    dong = ln[ln["dong"].notna()]
+    assert (dong["gia_dong"].notna()).all() and (ln.loc[ln["dong"].isna(), "gia_dong"].isna()).all()
+    assert (dong["dong"] >= dong["mo"]).all(), "lenh khong duoc dong truoc khi mo"
+    # lai da chot (gop) = tong (gia_dong - gia_mo) x lot x hop: dung chinh tong `lai_gop` cua engine (khong co lenh dang mo)
+    hop = LU.QC_AUDCAD.hop_dong
+    lai = float((dong["chieu"] * (dong["gia_dong"] - dong["gia_mo"]) * dong["lot"]).sum() * hop)
+    assert abs(lai - b.lai_gop) <= 1e-6 * max(1.0, abs(b.lai_gop)), (lai, b.lai_gop)
+    # moi ro co dung MOT tang 0, cac tang lien tuc 0..k theo thu tu mo (tia lenh chi bo bot o giua nen khong bat buoc)
+    if not ts.get("tia_lenh"):
+        for _ro, g in ln.groupby("ro"):
+            assert sorted(g["tang"]) == list(range(len(g)))
+    for _ro, g in ln.groupby("ro"):
+        assert (g["tang"] == 0).sum() == 1 and g["chieu"].nunique() == 1
+
+
+def test_ghi_lenh_ban_chi_co_lenh_ban_va_chieu_ghi_dung():
+    df = _chuoi()
+    b = LU.chay(df, LU.ThamSo(buoc=15, tp=10, tran_tang=12, che_do="ban"), 10000.0, ghi_lenh=True)
+    assert set(b.lenh["chieu"]) == {-1}
+    assert (b.lenh["ro"] % 2 == 1).all(), "ro cua chieu ban danh so le"
+    h = LU.chay(df, LU.ThamSo(buoc=15, tp=10, tran_tang=12), 10000.0, ghi_lenh=True)
+    assert set(h.lenh["chieu"]) == {1, -1} and h.lenh.attrs["pip"] == LU.QC_AUDCAD.pip
