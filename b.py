@@ -69,6 +69,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b slot [kiem]     SLOT TESTER: may lan tester dung duoc, nang tran duoc chua
     b may [bao-cao|quet|mau|do|giam-sat]  MAY NHA: quet phan cung, DO toc do/gioi han, bao cao den XANH/VANG/DO
     b link [chay|tham-do|thu-muc|...]  LINK chu du an -> tham do trang, nap bao cao lenh, thu hoach lich su (link_rieng.txt)
+    b dien-dan [do|quet|bao-cao]  DIEN DAN nhieu nuoc: doc tung trang co moc, tim EA luoi/DCA/tin hieu (config/dien_dan.json)
     b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
     b phanh           han muc / kill-switch cua he chay that
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
@@ -715,6 +716,20 @@ def c_link(a):
     """
     from nhan import link_chay as LCH
     return LCH.main(list(a or []))
+
+
+def c_dien_dan(a):
+    """DOC DIEN DAN / DANH SACH NHIEU TRANG (nhan/doc_dien_dan.py, config/dien_dan.json): tim EA / luoi / DCA / tin hieu, khong dang nhap.
+
+        b dien-dan                       ke hoach (khong goi mang): moi dien dan doc toi dau, bao gio doc lai
+        b dien-dan do [--ma a,b]         tham do trang 1-2 cua dien dan (ke ca dien dan dang tat): co bai khong, co sang trang duoc khong
+        b dien-dan quet [--ma a,b] [--toi-da-trang N] [--ep]   doc tung trang co moc 'den trang N', 3-5 giay / trang, gap 403/429/captcha thi DUNG ten mien
+        b dien-dan bao-cao               in lai bao cao (khong mang)
+    Mac dinh moi dien dan doc lai 1 tuan / lan (`--ep` chi bo qua cho tuan, khong bo nhip / robots / nghi sau chan).
+    Dien dan can Chrome AI (cach_lay cdp) chi chay o may nha: `mo_trinh_duyet_ai.cmd` (cong 9224). Xem tai_lieu/DIEN_DAN_DOC.md.
+    """
+    from nhan import doc_dien_dan as DD
+    return DD.main(list(a or []))
 
 
 def c_github(a):
@@ -1444,6 +1459,7 @@ LENH = {
     "slot": c_slot,
     "may": c_may,
     "link": c_link,
+    "dien-dan": c_dien_dan,
     "ho-so": c_ho_so, "hs": c_ho_so,
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,

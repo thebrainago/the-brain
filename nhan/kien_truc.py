@@ -128,7 +128,7 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
          "tu_dang_nhap", "telegram", "theo_doi", "nguon_bai_viet",
          "nguon_tinix", "kham_pha_nguon", "vuon_nguon", "tu_khoa_da_ngon_ngu",
          "toan_van", "doc_song_song", "hang_doi", "san_cong_cu", "nen_tang",
-         "tien_ich_xet", "chi_tieu", "link_nguon", "link_chay"),
+         "tien_ich_xet", "chi_tieu", "link_nguon", "link_chay", "doc_dien_dan"),
     ),
     "BOC TACH — tai lieu thanh co che": (
         "Khau hep nhat cua he: van xuoi/ma nguon/anh/video -> khai bao kiem dinh duoc.",

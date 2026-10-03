@@ -83,6 +83,11 @@ def _url_cho_tham_do(s: str) -> bool:
     return len(s) <= 400 and s.isprintable() and LN.cho_tham_do(s)[0]
 
 
+def _ma_dien_dan(s: str) -> bool:
+    """Danh sach ma dien dan cach nhau dau phay (`config/dien_dan.json`): chu thuong / so / _, toi da 30 ma."""
+    return re.fullmatch(r"[a-z0-9_]{1,40}(,[a-z0-9_]{1,40}){0,29}", s) is not None
+
+
 class Hinh:
     """Mot hinh lenh: `pos` = [(ham_kiem, bat_buoc)...] theo thu tu; `co` = {"--co": ham_kiem | None (co khong gia tri)}."""
 
@@ -152,6 +157,12 @@ LENH_B: dict[tuple, Hinh] = {
     ("link", "bao-cao"): Hinh(),
     ("link", "chia-se"): Hinh([(_ma_hex10, True)], {"--url": _url_cho_tham_do}),
     ("link", "ho-so-symbol"): Hinh(co={"--song": _so(30, 100_000), "--toi-da": _so(1, 60)}),
+    # dien dan nhieu nuoc (03/10/2026): chi doc cong khai theo config/dien_dan.json, ton trong robots + nhip + nghi sau chan.
+    # Khong co co chon Chrome: dien dan nao can Chrome AI thi do CONFIG quyet (chi chay khi mo_trinh_duyet_ai.cmd dang bat cong 9224)
+    ("dien-dan", "ke-hoach"): Hinh(),
+    ("dien-dan", "bao-cao"): Hinh(),
+    ("dien-dan", "do"): Hinh(co={"--ma": _ma_dien_dan}),
+    ("dien-dan", "quet"): Hinh(co={"--ma": _ma_dien_dan, "--toi-da-trang": _so(1, 200), "--ep": None}),
 }
 #: `-m <module> ...`
 MODULE_M: dict[str, Hinh] = {

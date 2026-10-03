@@ -188,13 +188,22 @@ def tim_link(van_ban: str) -> list[str]:
     return ra
 
 
+#: Duoi HAI nhan pho bien (co.jp, com.tr...): `gogojungle.co.jp` phai la MOT ten mien rieng, khong gop chung moi trang `.co.jp`
+#: vao mot xo nhip / nghi / tran ngay (03/10/2026, khi them dien dan Nhat / Indonesia / Tho Nhi Ky).
+_DUOI_HAI_NHAN = frozenset(
+    "co.jp ne.jp or.jp co.id or.id com.tr co.uk org.uk com.au co.nz com.br co.kr com.vn co.th com.cn com.sg com.my co.in "
+    "com.mx com.ar co.za com.pl com.hk com.tw com.ua com.ph com.eg com.sa com.ru".split())
+
+
 def mien_goc(host: str) -> str:
-    """'www.mql5.com' -> 'mql5.com'. Khop hau to voi khoa NHIP_MIEN; khong co thi lay hai nhan cuoi."""
+    """'www.mql5.com' -> 'mql5.com'. Khop hau to voi khoa NHIP_MIEN; khong co thi lay hai nhan cuoi (ba nhan neu duoi la co.jp, com.tr...)."""
     h = (host or "").lower().strip(".")
     for k in NHIP_MIEN:
         if k != "*" and (h == k or h.endswith("." + k)):
             return k
     p = h.split(".")
+    if len(p) >= 3 and ".".join(p[-2:]) in _DUOI_HAI_NHAN:
+        return ".".join(p[-3:])
     return ".".join(p[-2:]) if len(p) >= 2 else h
 
 

@@ -75,15 +75,20 @@ def _sha(b: bytes) -> str:
     return hashlib.sha1(b).hexdigest()
 
 
+def _json_ghi(d) -> str:
+    """MOT cach ghi JSON cho moi bao cao. `_co` do dung cai nam tren dia: `indent=1` phinh them ~10-25% so voi dang gon."""
+    return json.dumps(d, ensure_ascii=False, indent=1)
+
+
 def _ghi_json_nguyen_tu(duong: Path, d) -> None:
     duong.parent.mkdir(parents=True, exist_ok=True)
     tam = duong.with_name(duong.name + ".tmp")
-    tam.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    tam.write_text(_json_ghi(d), encoding="utf-8")
     os.replace(tam, duong)
 
 
 def _co(x) -> int:
-    return len(json.dumps(x, ensure_ascii=False))
+    return len(_json_ghi(x))
 
 
 def _vua_gioi_han(d: dict, khoa_cat: tuple, toi_da: int = GIOI_HAN_BAO_CAO) -> dict:

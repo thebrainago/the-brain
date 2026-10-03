@@ -13,7 +13,9 @@ from __future__ import annotations
 
 import urllib.request
 
-CDP_MAC_DINH = (9222, 9224)   # 9224 = darwin (.browser_darwinex), 9222 = thebrain2
+#: 9224 = Chrome AI cua he (`mo_trinh_duyet_ai.cmd`, ho so `.browser_thebrain`) - chu du an chot 03/10/2026, nen UU TIEN;
+#: 9222 = trinh duyet cu (thebrain2, truoc khi may nha cai lai Windows) - chi la du phong.
+CDP_MAC_DINH = (9224, 9222)
 
 
 def cdp_dang_chay(ports=CDP_MAC_DINH):

@@ -722,6 +722,16 @@ def test_vua_gioi_han_cat_danh_sach_cho_vua_40k_va_van_la_json_hop_le():
     assert len(s) < 40_000 and ra["da_cat"] and isinstance(json.loads(s)["cau_truc"], (dict, str))
 
 
+def test_gioi_han_bao_cao_do_dung_nhu_tep_tren_dia_indent_khong_lam_vuot_40k(tmp_path):
+    # `_ghi_json_nguyen_tu` ghi indent=1 (phinh ~10-25% so voi dang gon): gioi han phai do DUNG dang se ghi
+    d = {"muc": [{"ma": "m%04d" % i, "n": i, "ly_do": "x" * 20, "ket": {"a": 1, "b": [1, 2, 3]}} for i in range(1500)], "luc": "t"}
+    assert len(json.dumps(d, ensure_ascii=False)) < len(json.dumps(d, ensure_ascii=False, indent=1))
+    ra = LC._vua_gioi_han(d, ("muc",))
+    f = tmp_path / "bc.json"
+    LC._ghi_json_nguyen_tu(f, ra)
+    assert f.stat().st_size < 40_000 and ra["da_cat"] and ra["muc"] and json.loads(f.read_text(encoding="utf-8"))["luc"] == "t"
+
+
 # ============================================================== 9. CLI + vien rang buoc
 def _cli(argv, capsys):
     rc = LC.main(argv)
