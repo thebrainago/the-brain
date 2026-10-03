@@ -62,3 +62,16 @@ da duyet, `thu-muc`, `bao-cao`, `chia-se`); `them`, `tai-khoan-xem`, `--cdp` chi
 1. Doc `reports/link_chay_ket_qua.md`: link nao OK / bi chan / can dang nhap -> cloud viet bo doc that cho trang co lenh (MQL5 signals tab History, Myfxbook, FX Blue).
 2. Chu du an cho biet cac nhom o dau (Telegram / Zalo / Facebook / Discord) -> chi viet them phan Telegram neu dung la Telegram.
 3. Lich su lenh vao `boc_lich_su` -> `thu_luoi` tren doan kham pha -> xac nhan MOT lan (khong them nguon neu chua co `DAT` o xac_nhan).
+
+## Cap nhat 03/10 toi (may nha chay that lan dau)
+- **Chay duoc**: may nha toi duoc mql5.com khong can WARP; trang tin hieu ~196 KB, co 3 bang tom tat (Distribution: symbol x lenh / USD / pip), end point
+  `/signals/charts/risks/json`. Tab LICH SU LENH **khong co trong HTML tinh** (JS nap sau).
+- **Dang dung de tai MQL5**: `https://www.mql5.com/en/signals/<id>` (`mql5.com/signals/N` -> 301 -> `www.mql5.com/signals/N` -> **404**; chi co `www` + `/en` moi 200).
+  `_url_de_tai` (may nha sua, `69b536a`) lo cho duong HTTP; cloud va them cho duong **Chrome (CDP)** va thu phan neo `#!tab=history`.
+  Bai hoc: bo doc web viet o cloud phai duoc may nha thu tren trang THAT truoc khi tin ket qua "bi chan / 404".
+- **Nhan symbol that**: `link_nguon.phan_bo_symbol(bang)` doc bang Distribution (nhan `GOLD#`, `XAUUSDm`, `.pro`... qua `chuan_symbol`); `tham-do` tra them
+  `symbol_chinh`. `b link ho-so-symbol [--song 730] [--toi-da 40]` kiem lai 31 ho so song lau -> `reports/nguoi_thang_symbol.json` (tom tat tung trang o
+  `du_lieu_cao/`, khong vao git). Ly do: nhan cu trong `reports/signal_ho_so.json` gan nham con 2196457 la USDCHF (that: vang 1549 lenh) - xem `NGUON_NGUOI_THANG.md`.
+- **Viec tiep (chua xong)**: bang LENH cua mot con (tab History): `python mo_chrome_cdp.py` roi `b link tham-do https://mql5.com/signals/2196457 --cdp` roi
+  `b link chia-se <ma>` -> cloud doc ten end point trong `xhr` / `tab_lich_su` de viet bo doc lich su.
+

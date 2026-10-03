@@ -195,6 +195,7 @@ def lay_cdp_that(url: str, truoc=None, port=None, cho_ms: int = 14000, mo_tab: b
     Mang cua Chrome la mang cua chu du an, nen van di qua `truoc` (nhip / tran ngay) giong HTTP."""
     from nhan import doc_trinh_duyet as DT
     kq = {"status": None, "html": "", "xhr": [], "tab_lich_su": [], "loi": ""}
+    url = _url_de_tai(url)                       # cung loi 404 gia nhu HTTP: `mql5.com/signals/N` (khong www, khong /en) -> 404 ca trong Chrome
     cong = port or DT.cdp_dang_chay()
     if not cong:
         kq["loi"] = "khong_mo_cdp"
@@ -247,6 +248,22 @@ def lay_cdp_that(url: str, truoc=None, port=None, cho_ms: int = 14000, mo_tab: b
                             break
                         except Exception:
                             continue
+                    if not kq["tab_lich_su"] and LN.mien_goc(urlsplit(url).hostname or "") == "mql5.com":
+                        try:                     # MQL5 doi tab bang phan neo `#!tab=...`, khong chac co chu "History" de bam: dat phan neo roi nap lai
+                            n1 = len(xhr)
+                            pg.evaluate("location.hash = '#!tab=history'")
+                            pg.wait_for_timeout(1500)
+                            if len(xhr) == n1:
+                                pg.reload(timeout=min(cho_ms + 3000, 40000), wait_until="domcontentloaded")
+                            try:
+                                pg.wait_for_load_state("networkidle", timeout=cho_ms)
+                            except Exception:
+                                pass
+                            pg.wait_for_timeout(1500)
+                            kq["tab_lich_su"].append({"html": (pg.content() or "")[:toi_da_html],
+                                                      "xhr": list(dict.fromkeys(xhr[n1:]))})
+                        except Exception:
+                            pass
             except Exception as e:
                 kq["loi"] = "%s: %s" % (type(e).__name__, str(e)[:100])
             finally:
@@ -300,6 +317,9 @@ def _tom_tat_noi_dung(text: str, url: str) -> dict:
             pass
     d = LN.tom_tat_cau_truc(t, url)
     d["kieu"] = "html"
+    ps = LN.phan_bo_symbol(d.get("bang"))
+    if ps:
+        d["phan_bo_symbol"] = ps
     return d
 
 
@@ -397,7 +417,8 @@ class Chay:
         duong = self._ghi_tom_tat(m, tom, dung_cdp)
         self.tt.ghi(khoa, host, "OK", status=status, kich_thuoc=len(text), so_bang=len(tom.get("bang", [])))
         return dict(r, ket_qua="OK", status=status, kieu=tom.get("kieu"), so_bang=len(tom.get("bang", [])), so_tab=len(tom.get("tab", [])),
-                    so_diem_cuoi=len(tom.get("diem_cuoi", [])) + len(tom.get("xhr", [])), can_js=bool(tom.get("can_js")), tom_tat=duong)
+                    so_diem_cuoi=len(tom.get("diem_cuoi", [])) + len(tom.get("xhr", [])), can_js=bool(tom.get("can_js")), tom_tat=duong,
+                    symbol_chinh=(tom.get("phan_bo_symbol") or {}).get("symbol_chinh"), phan_bo_symbol=tom.get("phan_bo_symbol"))
 
     def _ghi_tom_tat(self, m: dict, tom: dict, dung_cdp: bool) -> str:
         """Tom tat cong khai qua HTTP -> `reports/link_tham_do_<ma>.json` (ve cloud). Link rieng hoac Chrome (da dang nhap) -> chi o may nha."""
@@ -462,7 +483,7 @@ def bao_cao_chay(ket: list[dict]) -> dict:
     muc = []
     for r in ket:
         e = {k: r[k] for k in ("ma", "nen_tang", "loai", "cach", "ket_qua", "status", "kieu", "so_bang", "so_tab", "so_diem_cuoi",
-                               "can_js", "tom_tat", "ly_do") if k in r}
+                               "can_js", "tom_tat", "ly_do", "symbol_chinh") if k in r}
         if r.get("dich"):
             e["dich"] = {k: r["dich"][k] for k in ("ma", "nen_tang", "loai") if k in r["dich"]}
         e["rieng"] = bool(r.get("rieng"))
@@ -856,6 +877,43 @@ def thu_hoach_passview(toi_da: int = 3, doc=None, thu_muc_lenh=None, dong_ho=tim
             "lenh_tong": lenh_tong, "tk": ket}
 
 
+# ============================================================== 8. KIEM LAI NHAN SYMBOL CUA HO SO MQL5 SONG LAU
+def ho_so_symbol(ch: "Chay", ho_so=None, song_toi_thieu: int = 730, toi_da: int = 40) -> dict:
+    """Kiem lai NHAN symbol cua cac ho so MQL5 song lau (`reports/signal_ho_so.json`) bang bang Distribution THAT cua trang.
+
+    Nhan cu do `_quet_signal_mql5._RX_SYM` gan (dem chu hoa 6 ky tu trong CA trang) sai o con 2196457: vang 1549 lenh bi gan USDCHF
+    (2 lenh). Chi tham do cong khai (HTTP, co nhip + robots), moi trang MOT lan, dung khi ten mien chan / het luot. Tom tat tung trang
+    nam o `du_lieu_cao/` (khong vao git); ket qua gon -> `reports/nguoi_thang_symbol.json`."""
+    if ho_so is None:
+        ho_so = json.loads((LAB / "reports" / "signal_ho_so.json").read_text(encoding="utf-8"))
+    chon = sorted((h for h in ho_so if h.get("id") and (h.get("song_ngay") or 0) >= song_toi_thieu),
+                  key=lambda h: -(h.get("song_ngay") or 0))[:toi_da]
+    goc = ch.thu_muc_reports
+    ch.thu_muc_reports = THU_MUC_TOM_TAT / "ho_so_symbol"
+    muc, dung = [], ""
+    try:
+        for h in chon:
+            r = ch.tham_do(LN.phan_loai("https://www.mql5.com/en/signals/%d" % int(h["id"])))
+            ps = r.get("phan_bo_symbol") or {}
+            cu = list(h.get("symbol") or [])
+            muc.append({"id": int(h["id"]), "song_ngay": round(float(h.get("song_ngay") or 0)), "nhan_cu": cu, "ket_qua": r["ket_qua"],
+                        "symbol_chinh": ps.get("symbol_chinh"), "ty_le_lenh": ps.get("ty_le_lenh"), "day_du": ps.get("day_du"),
+                        "symbol": [{k: x[k] for k in ("tho", "chuan", "lenh") if k in x} for x in (ps.get("symbol") or [])[:6]],
+                        "nhan_cu_dung": (bool(cu) and ps.get("symbol_chinh") == cu[0]) if ps else None})
+            if r["ket_qua"] in ("CHAN_TAN_SUAT", "CHAN_CAM", "CHAN_ROBOTS", "CHO"):
+                dung = r["ket_qua"]
+                break
+    finally:
+        ch.thu_muc_reports = goc
+    dem: dict = {}
+    for x in muc:
+        if x["symbol_chinh"]:
+            dem[x["symbol_chinh"]] = dem.get(x["symbol_chinh"], 0) + 1
+    return {"da_thu": len(muc), "tong_song_lau": len(chon), "doc_duoc": sum(1 for x in muc if x["symbol_chinh"]),
+            "nhan_cu_sai": sum(1 for x in muc if x["nhan_cu_dung"] is False), "dung_vi": dung,
+            "dem_symbol_chinh": dict(sorted(dem.items(), key=lambda kv: -kv[1])), "muc": muc}
+
+
 # ============================================================== 7. CHIA SE TOM TAT (link cong khai da tham do bang Chrome)
 def chia_se(ma: str, thu_muc_tom_tat=None, thu_muc_reports=None, tt=None, duong_link=None) -> tuple[bool, str]:
     """Copy tom tat CUC BO cua mot link CONG KHAI (da tham do bang Chrome) sang `reports/link_tham_do_<ma>.json` de cloud doc.
@@ -924,6 +982,9 @@ def main(argv=None) -> int:
     p = sp.add_parser("tai-khoan-xem", help="thu hoach lich su bang tai khoan xem da luu (can MT5 o may nha)")
     p.add_argument("--toi-da", type=int, default=3)
     sp.add_parser("bao-cao", help="in lai bao cao lan gan nhat")
+    p = sp.add_parser("ho-so-symbol", help="kiem lai nhan symbol cua ho so MQL5 song lau bang bang Distribution that -> reports/nguoi_thang_symbol.json")
+    p.add_argument("--song", type=int, default=730)
+    p.add_argument("--toi-da", type=int, default=40)
     p = sp.add_parser("chia-se", help="gui tom tat cuc bo cua link CONG KHAI vao reports/")
     p.add_argument("ma")
     a = ap.parse_args(argv)
@@ -972,6 +1033,13 @@ def main(argv=None) -> int:
             if f.is_file():
                 print(f.read_text(encoding="utf-8").rstrip() + "\n")
         return 0
+    if a.lenh == "ho-so-symbol":
+        bc = ho_so_symbol(ch, song_toi_thieu=a.song, toi_da=a.toi_da)
+        _ghi_json_nguyen_tu(LAB / "reports" / "nguoi_thang_symbol.json", bc)
+        print("HO SO SYMBOL: da thu %d/%d, doc duoc %d, gan sai tu truoc %d%s; symbol chinh that: %s"
+              % (bc["da_thu"], bc["tong_song_lau"], bc["doc_duoc"], bc["nhan_cu_sai"], (" (dung vi %s)" % bc["dung_vi"]) if bc["dung_vi"] else "",
+                 ", ".join("%s %d" % kv for kv in bc["dem_symbol_chinh"].items()) or "chua co"))
+        return 0 if bc["doc_duoc"] else 1
     if a.lenh == "chia-se":
         ok, ly = chia_se(a.ma)
         print(("DA CHIA SE: " if ok else "KHONG CHIA SE: ") + ly)

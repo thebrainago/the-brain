@@ -757,6 +757,8 @@ class TestDanhSachTrangLink:
         ["{py}", "b.py", "link", "thu-muc", "--toi-thieu", "30"],
         ["{py}", "b.py", "link", "bao-cao"],
         ["{py}", "b.py", "link", "chia-se", "0123456789"],
+        ["{py}", "b.py", "link", "ho-so-symbol"],
+        ["{py}", "b.py", "link", "ho-so-symbol", "--song", "730", "--toi-da", "40"],
     ])
     def test_cho_qua(self, lenh):
         assert self.CT.kiem_lenh(lenh) is None, self.CT.kiem_lenh(lenh)
@@ -783,6 +785,126 @@ class TestDanhSachTrangLink:
         ["{py}", "b.py", "link", "chia-se", "xyz"],
         ["{py}", "b.py", "link", "chia-se", "0123456789", "extra"],
         ["{py}", "b.py", "link", "bao-cao", "--ghi"],
+        ["{py}", "b.py", "link", "ho-so-symbol", "--toi-da", "61"],
+        ["{py}", "b.py", "link", "ho-so-symbol", "--song", "5"],
+        ["{py}", "b.py", "link", "ho-so-symbol", "--song"],
+        ["{py}", "b.py", "link", "ho-so-symbol", "--cdp"],
+        ["{py}", "b.py", "link", "ho-so-symbol", "extra"],
     ])
     def test_tu_choi(self, lenh):
         assert self.CT.kiem_lenh(lenh) is not None
+
+
+# ============================================================== 8. NHAN SYMBOL THAT (bang Distribution) + CDP dung URL da sua
+def _trang_distribution(*hang):
+    """Trang tin hieu MQL5 gia, 3 bang Distribution (lenh / USD / pip). Moi hang = (ten san, lenh, usd, pip)."""
+    def bang(cot, i):
+        return ("<table><tr><th>Symbol</th><th></th><th>%s</th><th>Sell</th><th>Buy</th></tr>" % cot
+                + "".join("<tr><td>%s</td><td>%s</td><td></td><td></td><td></td></tr>" % (h[0], h[i]) for h in hang) + "</table>")
+    return ("<html><head><title>Copy trades of the X signal</title></head><body><h3>Distribution</h3>"
+            + bang("Deals", 1) + bang("Gross Profit, USD", 2) + bang("Gross Profit, pips", 3) + "</body></html>")
+
+
+def test_tham_do_mql5_ra_symbol_chinh_that_ke_ca_ten_san_la(tmp_path):
+    url = "https://www.mql5.com/en/signals/2196457"
+    web = Web({url: (200, _trang_distribution(("GOLD#", "1549", "9.8K", "410K"), ("USDCHF#", "2", "24", "134"), ("EURUSD#", "1", "5", "20")), "")})
+    ch, _ = _chay(tmp_path, web)
+    r = ch.tham_do(_m(url))
+    assert r["ket_qua"] == "OK" and r["symbol_chinh"] == "XAUUSD" and r["phan_bo_symbol"]["day_du"] is True
+    assert [x["chuan"] for x in r["phan_bo_symbol"]["symbol"]] == ["XAUUSD", "USDCHF", "EURUSD"]
+    tom = json.loads((tmp_path / "reports" / ("link_tham_do_%s.json" % r["ma"])).read_text(encoding="utf-8"))
+    assert tom["phan_bo_symbol"]["symbol_chinh"] == "XAUUSD"
+    assert LC.bao_cao_chay([r])["muc"][0]["symbol_chinh"] == "XAUUSD"
+
+
+def test_ho_so_symbol_sua_nhan_nham_va_chi_ghi_gon_vao_reports(tmp_path):
+    web = Web({"https://www.mql5.com/en/signals/111": (200, _trang_distribution(("GOLD#", "1549", "9.8K", "410K"), ("USDCHF#", "2", "24", "134")), ""),
+               "https://www.mql5.com/en/signals/222": (200, _trang_distribution(("AUDCAD", "500", "1K", "9K"), ("AUDNZD", "20", "10", "50")), "")})
+    ch, _ = _chay(tmp_path, web)
+    ho = [{"id": 111, "song_ngay": 900, "symbol": ["USDCHF"]},                     # nhan cu SAI (that: vang)
+          {"id": 222, "song_ngay": 800, "symbol": ["AUDCAD", "AUDNZD"]},            # nhan cu dung
+          {"id": 333, "song_ngay": 700, "symbol": ["EURUSD"]},                      # chua du 730 ngay: bo
+          {"id": 444, "song_ngay": 750, "symbol": []}]                             # trang khong tra duoc
+    bc = LC.ho_so_symbol(ch, ho_so=ho, song_toi_thieu=730, toi_da=40)
+    assert (bc["da_thu"], bc["tong_song_lau"], bc["doc_duoc"], bc["nhan_cu_sai"], bc["dung_vi"]) == (3, 3, 2, 1, "")
+    assert bc["dem_symbol_chinh"] == {"XAUUSD": 1, "AUDCAD": 1}
+    a, b, c = bc["muc"]
+    assert (a["id"], a["symbol_chinh"], a["nhan_cu_dung"]) == (111, "XAUUSD", False) and a["symbol"][1]["chuan"] == "USDCHF"
+    assert (b["id"], b["symbol_chinh"], b["nhan_cu_dung"]) == (222, "AUDCAD", True)
+    assert c["id"] == 444 and c["symbol_chinh"] is None and c["nhan_cu_dung"] is None
+    assert not list((tmp_path / "reports").glob("link_tham_do_*"))                  # tom tat tung trang KHONG vao reports/ (git)
+    assert len(list((tmp_path / "du_lieu_cao" / "tom_tat" / "ho_so_symbol").glob("link_tham_do_*.json"))) == 2
+    assert ch.thu_muc_reports == tmp_path / "reports"                               # da tra lai thu muc cu
+
+
+def test_ho_so_symbol_dung_ngay_khi_ten_mien_chan(tmp_path):
+    web = Web({"https://www.mql5.com/en/signals/111": (403, "<html>Attention Required! | Cloudflare</html>", "")})
+    ch, _ = _chay(tmp_path, web)
+    bc = LC.ho_so_symbol(ch, ho_so=[{"id": 111, "song_ngay": 900}, {"id": 222, "song_ngay": 800}, {"id": 333, "song_ngay": 760}])
+    assert bc["da_thu"] == 1 and bc["dung_vi"] in ("CHAN_CAM", "CHAN_TAN_SUAT") and bc["doc_duoc"] == 0     # khong dap tiep vao trang dang chan
+
+
+def test_cdp_mo_dung_url_da_sua_va_thu_phan_neo_lich_su_cua_mql5(monkeypatch):
+    import sys
+    import types
+    from nhan import doc_trinh_duyet as DT
+    ghi = []
+
+    class Loc:
+        def count(self):
+            return 0
+
+    class Trang:
+        def on(self, *_):
+            pass
+
+        def goto(self, url, **_):
+            ghi.append(("goto", url))
+            return types.SimpleNamespace(status=200)
+
+        def wait_for_load_state(self, *a, **k):
+            pass
+
+        def wait_for_timeout(self, *a):
+            pass
+
+        def content(self):
+            return "<html></html>"
+
+        def get_by_role(self, *a, **k):
+            return Loc()
+
+        def get_by_text(self, *a, **k):
+            return Loc()
+
+        def evaluate(self, js):
+            ghi.append(("evaluate", js))
+
+        def reload(self, **_):
+            ghi.append(("reload",))
+
+        def close(self):
+            pass
+
+    class Ctx:
+        def new_page(self):
+            return Trang()
+
+    class PW:
+        def __enter__(self):
+            return types.SimpleNamespace(chromium=types.SimpleNamespace(connect_over_cdp=lambda u: types.SimpleNamespace(contexts=[Ctx()])))
+
+        def __exit__(self, *a):
+            return False
+
+    gia = types.ModuleType("playwright.sync_api")
+    gia.sync_playwright = lambda: PW()
+    monkeypatch.setitem(sys.modules, "playwright", types.ModuleType("playwright"))
+    monkeypatch.setitem(sys.modules, "playwright.sync_api", gia)
+    monkeypatch.setattr(DT, "cdp_dang_chay", lambda: 9224)
+    monkeypatch.setattr(DT, "_don_tab", lambda ctx: None)
+    kq = LC.lay_cdp_that("https://mql5.com/signals/2196457", cho_ms=10)
+    assert kq["loi"] == "" and kq["status"] == 200
+    assert ghi[0] == ("goto", "https://www.mql5.com/en/signals/2196457")                 # khong con 404 gia trong Chrome
+    assert ("evaluate", "location.hash = '#!tab=history'") in ghi and ("reload",) in ghi        # khong co chu 'History' de bam -> thu phan neo
+    assert len(kq["tab_lich_su"]) == 1

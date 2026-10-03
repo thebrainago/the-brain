@@ -151,6 +151,7 @@ LENH_B: dict[tuple, Hinh] = {
     ("link", "thu-muc"): Hinh(co={"--toi-thieu": _so(1, 100_000)}),
     ("link", "bao-cao"): Hinh(),
     ("link", "chia-se"): Hinh([(_ma_hex10, True)]),
+    ("link", "ho-so-symbol"): Hinh(co={"--song": _so(30, 100_000), "--toi-da": _so(1, 60)}),
 }
 #: `-m <module> ...`
 MODULE_M: dict[str, Hinh] = {

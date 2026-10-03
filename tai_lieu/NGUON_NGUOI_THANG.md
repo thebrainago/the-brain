@@ -37,6 +37,16 @@ truoc 03/10 `luoi.py` GHIM phi qua dem + point cua AUDCAD nen khong chay duoc - 
 Han che trung thuc: ca 400 deu tang truong > 0 va khong ho so nao co DD cong bo >= 80% (danh sach da loc/xep san) -> hai dieu kien do khong phan biet duoc gi, chi TUOI SONG la thuoc loc that; va KHONG tinh duoc ti le co lai cua "mot signal bat ky";
 `dd_pct` la so trang cong bo (chua doi chieu cach tinh); ho giau quy tac nen day la nguon GIA THUYET, khong phai bang chung (LAM LAI TU DAU).
 
+**SUA 03/10 toi (may nha do that, thu d7bc): NHAN MA O BANG TREN CO THE SAI.** Nhan `symbol` cua 400 ho so do `_quet_signal_mql5._RX_SYM` gan =
+dem moi chu hoa 6 ky tu trong CA TRANG HTML, lay 3 ma nhieu nhat. Hai loi: (1) bo sot ten san khong theo mau 6 chu cai (`GOLD#`, `GOLD`,
+`XAUUSDm`...) nen vang mang hau to khong vao nhan; (2) ma hiem (vai lenh) van len nhan neu xuat hien nhieu lan trong trang. Do that: con
+2196457 "X117 Taoist nature" (nhan cu USDCHF) thuc ra giao dich **GOLD# 1549 lenh**, USDCHF# chi 2 lenh (bang Distribution cua trang). Vi vay:
+(a) hai dong "ma xuat hien trong top-3" va "rieng 18 luoi/DCA" o tren **CHUA TIN**; (b) nhan xet "gan het la luoi/DCA tren cap bien dong thap"
+co the do nhan - vang co the nhieu hon (vang khong phai cap bien dong thap); (c) viec 18/31 la luoi/DCA lay tu dac trung duong von / muc tai trong
+`luan_dau_chan` (khong tu nhan ma) nen it bi anh huong hon, nhung CHUA kiem lai. Cach sua: `nhan/link_nguon.phan_bo_symbol` + `chuan_symbol` doc
+bang Distribution THAT (nhan ra `GOLD#` = XAUUSD), `b link ho-so-symbol` ap len 31 trang song >= 2 nam -> `reports/nguoi_thang_symbol.json`
+(`nhan_cu_sai`, `dem_symbol_chinh`). **Chua co file do thi chua chon con mau dau tien theo ma.**
+
 ## 3. Ban do nguon - moi nguon cho GI
 
 | Nguon | Cho gi | Ma? | Lich su lenh? | Vao he o dau | Kho tu dong |

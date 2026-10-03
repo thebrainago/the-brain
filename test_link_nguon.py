@@ -520,3 +520,49 @@ class TestChoThamDo:
         ("https://mql5.com.evil.org/x", False)])                                  # ten mien gia mao
     def test_bang(self, url, ok):
         assert LN.cho_tham_do(url)[0] is ok, LN.cho_tham_do(url)
+
+
+# ============================================================== PHAN BO SYMBOL (bang Distribution cua trang tin hieu MQL5)
+_DIST = [{"so_hang": 3, "tieu_de": ["Symbol", "", "Deals", "Sell", "Buy"], "mau": [["GOLD#", "1549", "", "", ""], ["USDCHF#", "2", "", "", ""]]},
+         {"so_hang": 3, "tieu_de": ["Symbol", "", "Gross Profit, USD", "Loss, USD", "Profit, USD"],
+          "mau": [["GOLD#", "9.8K", "", "", ""], ["USDCHF#", "24", "", "", ""]]},
+         {"so_hang": 3, "tieu_de": ["Symbol", "", "Gross Profit, pips", "Loss, pips", "Profit, pips"],
+          "mau": [["GOLD#", "410K", "", "", ""], ["USDCHF#", "134", "", "", ""]]}]          # y het trang that cua 2196457 (do o may nha 03/10)
+
+
+class TestPhanBoSymbol:
+    @pytest.mark.parametrize("tho,chuan", [
+        ("GOLD#", "XAUUSD"), ("Gold", "XAUUSD"), ("GOLDm", "XAUUSD"), ("XAUUSDm", "XAUUSD"), ("XAUUSD.a", "XAUUSD"),
+        ("SILVER", "XAGUSD"), ("EURUSD.pro", "EURUSD"), ("EURUSD_i", "EURUSD"), ("EURUSDm", "EURUSD"), ("AUDCAD+", "AUDCAD"),
+        ("USDCHF#", "USDCHF"), ("US30m", "US30"), ("NAS100", "NAS100"), ("BTCUSD", "BTCUSD"), ("", "")])
+    def test_chuan_symbol(self, tho, chuan):
+        assert LN.chuan_symbol(tho) == chuan
+
+    @pytest.mark.parametrize("t,v", [("1549", 1549.0), ("9.8K", 9800.0), ("410K", 410000.0), ("1,549", 1549.0), ("-3.4K", -3400.0),
+                                     ("1.2M", 1.2e6), ("", None), ("abc", None), (None, None)])
+    def test_so_ngan(self, t, v):
+        assert LN._so_ngan(t) == v
+
+    def test_con_vang_2196457_la_vang_khong_phai_usdchf(self):
+        ps = LN.phan_bo_symbol(_DIST)
+        assert ps["symbol_chinh"] == "XAUUSD" and ps["ty_le_lenh"] == 0.999
+        assert ps["symbol"][0] == {"tho": "GOLD#", "chuan": "XAUUSD", "lenh": 1549, "usd": 9800.0, "pip": 410000.0}
+        assert ps["symbol"][1]["chuan"] == "USDCHF" and ps["symbol"][1]["lenh"] == 2
+        assert ps["day_du"] is False                                  # trang bao 3 hang, bang mau moi chi cho 2
+
+    def test_hai_ten_san_cua_cung_mot_cap_duoc_gop(self):
+        b = [{"so_hang": 3, "tieu_de": ["Symbol", "", "Deals"], "mau": [["EURUSD", "10", ""], ["EURUSDm", "15", ""], ["GBPUSD", "20", ""]]}]
+        ps = LN.phan_bo_symbol(b)
+        assert ps["symbol_chinh"] == "EURUSD" and ps["ty_le_lenh"] == round(25 / 45, 3) and ps["day_du"] is True
+
+    @pytest.mark.parametrize("bang", [None, [], [{"so_hang": 2, "tieu_de": ["Time", "Type"], "mau": [["a", "1"]]}],
+                                      [{"so_hang": 1, "tieu_de": ["Symbol", "", "Gross Profit, USD"], "mau": [["GOLD#", "9.8K"]]}],     # thieu bang so lenh
+                                      [{"so_hang": 1, "tieu_de": ["Symbol", "", "Deals"], "mau": [["GOLD#", "n/a"]]}]])
+    def test_khong_co_bang_symbol_thi_none(self, bang):
+        assert LN.phan_bo_symbol(bang) is None
+
+    def test_bang_symbol_lay_toi_10_hang_mau_bang_khac_chi_2(self):
+        def bang(cot0):
+            return "<table><tr><th>%s</th><th>n</th></tr>" % cot0 + "".join("<tr><td>S%d</td><td>%d</td></tr>" % (i, i) for i in range(1, 8)) + "</table>"
+        d = LN.tom_tat_cau_truc("<html><body>%s%s</body></html>" % (bang("Symbol"), bang("Month")))
+        assert len(d["bang"][0]["mau"]) == 7 and len(d["bang"][1]["mau"]) == 2 and d["bang"][0]["so_hang"] == 7

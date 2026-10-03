@@ -940,8 +940,8 @@ class _Tham(HTMLParser):
                     b["tieu_de"] = h["o"][:14]                    # hang tieu de khong tinh vao so hang du lieu
                 else:
                     b["so_hang"] += 1
-                    if len(b["mau"]) < 2:
-                        b["mau"].append(h["o"][:14])
+                    if len(b["mau"]) < (10 if str((b["tieu_de"] or [""])[0]).strip().lower() == "symbol" else 2):
+                        b["mau"].append(h["o"][:14])       # bang Symbol (Distribution cua MQL5): lay toi 10 hang de thay du phan bo
             self._hang = None
         elif tag == "table" and self._bang_dang:
             self._bang_dang.pop()
@@ -1004,6 +1004,79 @@ def tom_tat_cau_truc(html: str, url: str = "", toi_da: int = 40_000) -> dict:
             kq[khoa].pop()
             kq["da_cat"] = True
     return kq
+
+
+# ---------------------------------------------------------------- PHAN BO SYMBOL (bang Distribution cua trang tin hieu MQL5)
+_HAU_TO_SO = {"K": 1e3, "M": 1e6, "B": 1e9}
+
+
+def _so_ngan(s):
+    """'1549' -> 1549.0 · '9.8K' -> 9800.0 · '1,549' -> 1549.0 · rong / chu -> None (trang tieng Anh: dau cham la thap phan)."""
+    t = str(s or "").replace("\xa0", "").replace(" ", "").strip()
+    m = re.fullmatch(r"([+-]?\d[\d,]*(?:\.\d+)?)([KMB]?)", t, re.I)
+    if not m:
+        return None
+    try:
+        return float(m.group(1).replace(",", "")) * _HAU_TO_SO.get(m.group(2).upper(), 1.0)
+    except ValueError:
+        return None
+
+
+def chuan_symbol(tho) -> str:
+    """Ten symbol cua san -> ten chung: 'GOLD#' / 'XAUUSDm' -> XAUUSD · 'EURUSD.pro' / 'EURUSD_i' / 'EURUSDm' -> EURUSD · 'US30m' -> US30.
+
+    Cat hau to cua san (moi thu tu ky tu khong phai chu-so dau tien, va chu thuong theo sau phan chu hoa); GOLD* / SILVER* doi ra
+    XAUUSD / XAGUSD. KHONG doan ten la: khong nhan ra thi tra lai ten da cat hau to, chu hoa."""
+    s = re.split(r"[^A-Za-z0-9]", str(tho or "").strip(), maxsplit=1)[0]
+    m = re.fullmatch(r"([A-Z0-9]{3,})([a-z]{1,5})", s)
+    if m:
+        s = m.group(1)
+    u = s.upper()
+    if u.startswith(("GOLD", "XAUUSD")):
+        return "XAUUSD"
+    if u.startswith(("SILVER", "XAGUSD")):
+        return "XAGUSD"
+    return u
+
+
+def phan_bo_symbol(bang):
+    """Cac bang 'Distribution' cua trang tin hieu MQL5 (Symbol | so lenh ; Symbol | USD ; Symbol | pip) -> symbol chinh THAT, hoac None.
+
+    VI SAO: bo gan nhan cu (`_quet_signal_mql5._RX_SYM`) dem moi chu hoa 6 ky tu trong CA TRANG, nen bo sot `GOLD#` / `XAUUSDm` va gan
+    nham `USDCHF` (2 lenh) cho con vang 1549 lenh (2196457, may nha do 03/10). Cac gia tri So (lenh / USD / pip) lay o COT 2 cua moi hang
+    (cot tieu de bi de trong tren trang that); khong doan y nghia cot USD (lai rong hay gop) - chi ghi la `usd`."""
+    theo: dict = {}
+    for b in bang or []:
+        tieu = [str(c).strip() for c in (b.get("tieu_de") or [])]
+        if not tieu or tieu[0].lower() != "symbol":
+            continue
+        chu = " ".join(tieu).lower()
+        khoa = "lenh" if "deals" in chu else "pip" if "pips" in chu else "usd" if "usd" in chu else None
+        if khoa and khoa not in theo:
+            theo[khoa] = b
+    if "lenh" not in theo:
+        return None
+    hang = []
+    for r in theo["lenh"].get("mau") or []:
+        tho = str(r[0]).strip() if r else ""
+        so = _so_ngan(r[1]) if len(r) > 1 else None
+        if tho and so is not None:
+            hang.append({"tho": tho, "chuan": chuan_symbol(tho), "lenh": int(so)})
+    if not hang:
+        return None
+    for khoa in ("usd", "pip"):
+        if khoa in theo:
+            gt = {str(r[0]).strip(): _so_ngan(r[1]) for r in theo[khoa].get("mau") or [] if len(r) > 1}
+            for h in hang:
+                if gt.get(h["tho"]) is not None:
+                    h[khoa] = gt[h["tho"]]
+    gop: dict = {}
+    for h in hang:
+        gop[h["chuan"]] = gop.get(h["chuan"], 0) + h["lenh"]
+    tong = sum(gop.values())
+    chinh = max(gop, key=gop.get)
+    return {"symbol_chinh": chinh, "ty_le_lenh": round(gop[chinh] / tong, 3) if tong else None,
+            "day_du": len(hang) >= int(theo["lenh"].get("so_hang") or len(hang)), "symbol": hang}
 
 
 def cho_tham_do(url: str) -> tuple[bool, str]:
