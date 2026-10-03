@@ -1,0 +1,253 @@
+{
+ "luc": "2026-10-03 20:20:54",
+ "lan": 2,
+ "task": [
+  "json_ky_luat",
+  "spec_co_che",
+  "goi_cong_cu",
+  "trich_bang_bao_cao",
+  "tinh_cagr_maxdd",
+  "luat_chan",
+  "tom_tat_trung_thuc",
+  "tieng_viet_2_cau"
+ ],
+ "ncc": {
+  "deepseek": {
+   "mo_hinh": "ds/deepseek-flash",
+   "nguon": "env",
+   "task": {
+    "json_ky_luat": {
+     "diem": [
+      0.0,
+      0.0
+     ],
+     "tb": 0.0,
+     "ghi": [
+      "khong phai JSON object",
+      "khong phai JSON object"
+     ]
+    },
+    "spec_co_che": {
+     "diem": [
+      0.0,
+      0.0
+     ],
+     "tb": 0.0,
+     "ghi": [
+      "khong co danh sach khai bao",
+      "khong co danh sach khai bao"
+     ]
+    },
+    "goi_cong_cu": {
+     "diem": [
+      0.0,
+      0.0
+     ],
+     "tb": 0.0,
+     "ghi": [
+      "goi nham cong cu 'xem_so_tay'",
+      "goi nham cong cu 'xem_so_tay'"
+     ]
+    },
+    "trich_bang_bao_cao": {
+     "diem": [
+      0.0,
+      0.667
+     ],
+     "tb": 0.334,
+     "ghi": [
+      "cau hinh=False hold=False dd=False",
+      "cau hinh=True hold=True dd=False"
+     ]
+    },
+    "tinh_cagr_maxdd": {
+     "diem": [
+      0.0,
+      0.0
+     ],
+     "tb": 0.0,
+     "ghi": [
+      "khong phai JSON",
+      "khong phai JSON"
+     ]
+    },
+    "luat_chan": {
+     "diem": [
+      0.0,
+      0.0
+     ],
+     "tb": 0.0,
+     "ghi": [
+      "can danh sach 4 gia tri true/false",
+      "can danh sach 4 gia tri true/false"
+     ]
+    },
+    "tom_tat_trung_thuc": {
+     "diem": [
+      0.0,
+      0.0
+     ],
+     "tb": 0.0,
+     "ghi": [
+      "thieu ['108', '2642', 'khop', 'mai']; so bia -; 0 tu",
+      "thieu ['108', '2642', 'khop', 'mai']; so bia -; 0 tu"
+     ]
+    },
+    "tieng_viet_2_cau": {
+     "diem": [
+      0.25,
+      0.25
+     ],
+     "tb": 0.25,
+     "ghi": [
+      "2 cau=False khong markdown=True co 'cache'=False tieng Viet=False",
+      "2 cau=False khong markdown=True co 'cache'=False tieng Viet=False"
+     ]
+    }
+   },
+   "tok_vao": 3514,
+   "tok_ra": 6627,
+   "loi": 0,
+   "giay": [
+    2.71,
+    1.86,
+    9.95,
+    8.8,
+    1.15,
+    1.67,
+    1.43,
+    1.68,
+    2.24,
+    2.21,
+    1.99,
+    2.03,
+    2.06,
+    1.79,
+    1.78,
+    2.16
+   ],
+   "tb": 0.073,
+   "giay_trung_vi": 2.01,
+   "chi_phi_usd": null
+  },
+  "qwen": {
+   "mo_hinh": "qwen3.8-max-0902",
+   "nguon": "env",
+   "task": {
+    "json_ky_luat": {
+     "diem": [
+      1.0,
+      1.0
+     ],
+     "tb": 1.0,
+     "ghi": [
+      "json sach; ngay_con_lai=29; cuoi_tuan=False",
+      "json sach; ngay_con_lai=29; cuoi_tuan=False"
+     ]
+    },
+    "spec_co_che": {
+     "diem": [
+      1.0,
+      1.0
+     ],
+     "tb": 1.0,
+     "ghi": [
+      "5/5 hop le va khac nhau",
+      "5/5 hop le va khac nhau"
+     ]
+    },
+    "goi_cong_cu": {
+     "diem": [
+      1.0,
+      0.0
+     ],
+     "tb": 0.5,
+     "ghi": [
+      "args={\"ma\": \"AUDCAD\", \"khung\": \"H4\", \"so_null\": 200}",
+      "goi nham cong cu 'xem_so_tay'"
+     ]
+    },
+    "trich_bang_bao_cao": {
+     "diem": [
+      0.667,
+      1.0
+     ],
+     "tb": 0.834,
+     "ghi": [
+      "cau hinh=True hold=False dd=True",
+      "cau hinh=True hold=True dd=True"
+     ]
+    },
+    "tinh_cagr_maxdd": {
+     "diem": [
+      1.0,
+      1.0
+     ],
+     "tb": 1.0,
+     "ghi": [
+      "tong_loi=True maxdd=True cagr=True",
+      "tong_loi=True maxdd=True cagr=True"
+     ]
+    },
+    "luat_chan": {
+     "diem": [
+      1.0,
+      1.0
+     ],
+     "tb": 1.0,
+     "ghi": [
+      "dung 4/4 (tra [True, False, True, True], dap an [True, False, True, True])",
+      "dung 4/4 (tra [True, False, True, True], dap an [True, False, True, True])"
+     ]
+    },
+    "tom_tat_trung_thuc": {
+     "diem": [
+      1.0,
+      1.0
+     ],
+     "tb": 1.0,
+     "ghi": [
+      "thieu -; so bia -; 52 tu",
+      "thieu -; so bia -; 51 tu"
+     ]
+    },
+    "tieng_viet_2_cau": {
+     "diem": [
+      1.0,
+      1.0
+     ],
+     "tb": 1.0,
+     "ghi": [
+      "2 cau=True khong markdown=True co 'cache'=True tieng Viet=True",
+      "2 cau=True khong markdown=True co 'cache'=True tieng Viet=True"
+     ]
+    }
+   },
+   "tok_vao": 3992,
+   "tok_ra": 18703,
+   "loi": 0,
+   "giay": [
+    14.29,
+    13.71,
+    81.07,
+    75.25,
+    3.69,
+    4.97,
+    6.31,
+    6.86,
+    41.5,
+    27.25,
+    12.66,
+    10.86,
+    63.21,
+    41.9,
+    8.72,
+    7.1
+   ],
+   "tb": 0.917,
+   "giay_trung_vi": 13.19,
+   "chi_phi_usd": null
+  }
+ },
+ "ket_luan": "deepseek thang 0 / hoa 0 / thua 8 tren 8 task; diem TB deepseek 0.073 vs qwen 0.917. CHON qwen (chenh >= 0,1)."
+}

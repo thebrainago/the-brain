@@ -292,7 +292,10 @@ def tao_task(dai: bool = False) -> list[dict]:
 
 # ------------------------------------------------------------------ chay
 def goi_mot(ncc: dict, task: dict, post=None, timeout: int = 150) -> dict:
-    than = {"model": ncc["mo_hinh"], "max_tokens": task.get("max_tokens", 400), "temperature": 0.2,
+    # Mo hinh suy luan (deepseek flash, qwen max) tieu token suy luan TRONG max_tokens -> 200-300 la noi dung rong (do 03/10: deepseek 0,07
+    # diem vi finish=length). SO_SANH_NHAN_MAX_TOKENS nhan tran len de cham cong bang; tok_ra van tinh token that.
+    nhan = max(1, int(os.environ.get("SO_SANH_NHAN_MAX_TOKENS", "1") or 1))
+    than = {"model": ncc["mo_hinh"], "max_tokens": task.get("max_tokens", 400) * nhan, "temperature": 0.2,
             "messages": [{"role": "user", "content": task["nhac"]}]}
     if task.get("tools"):
         than["tools"] = task["tools"]
