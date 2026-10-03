@@ -167,6 +167,32 @@ def _yeu_cau_seeker(chu_de: str, tu_khoa: list, vi_sao: str = "", **_) -> dict:
     return {"da_xep": len(tu_khoa[:30]), "file": _tuong_doi(YEU_CAU_SEEKER)}
 
 
+def _ea_tho_kham(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    kw.pop("vong_id", None)
+    return EAT.kham(**kw)
+
+
+def _ea_tho_chay(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    return EAT.chay(**kw)
+
+
+def _ea_tho_quet(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    return EAT.quet(**kw)
+
+
+def _ea_tho_tinh(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    return EAT.tinh(**kw)
+
+
+_EA = {"type": "string", "description": (
+    "EA cong khai: duong toi file .mq5, hoac 'kho:<so thu tu>' / 'kho:<tu trong tieu de>' trong "
+    "reports/ea/kho.json (EA da tai tu MQL5 Code Base)")}
+
+
 CONG_CU: list[dict] = [
     _cc("xem_so_tay",
         "Doc HO SO NGHIEN CUU: cau hoi mo (nguoi dat xep truoc), gia thuyet dang song, thi "
@@ -305,6 +331,50 @@ CONG_CU: list[dict] = [
         "mot huong can y tuong ma du lieu chua goi y duoc - vd mot kieu quan tri lenh chua co.",
         {"chu_de": {"type": "string"}, "tu_khoa": {"type": "array", "items": {"type": "string"}},
          "vi_sao": {"type": "string"}}, ["chu_de", "tu_khoa"], _yeu_cau_seeker),
+    _cc("ea_tho_kham",
+        "Xem MOT EA cong khai (MQL5 Code Base / Market) TRUOC khi chay: co phai CHIEN LUOC khong hay chi la cong "
+        "cu (replay, dong lenh, giam sat, bang bam tay - khong tu vao lenh), tai san/khung nham toi KEM BANG CHUNG, "
+        "input so, luoi tham so nho quanh mac dinh cua tac gia, cua so ngay kham_pha/xac_nhan/niem_phong da dong "
+        "bang. Thuan, khong chay tester. Goi truoc ea_tho_chay: EA co phieu khong duoc dat len EURUSD.",
+        {"ea": _EA, "tieu_de": {"type": "string", "description": "tieu de/mo ta trang nguon neu .mq5 khong co"},
+         "mo_ta": {"type": "string"},
+         "co_san": {"type": "array", "items": {"type": "string"},
+                    "description": "ma co du lieu tren may (mac dinh: tu kho du lieu)"}},
+        ["ea"], _ea_tho_kham),
+    _cc("ea_tho_chay",
+        "Chay MOT EA cong khai THANG tren MT5 tester (tick that, Model=4) tren mot doan DA DONG BANG, cham bang "
+        "tieu chi chu du an: co lai sau phi VA maxDD < 80%, bat ke martingale/luoi/DCA. doan: kham_pha (tu do) | "
+        "xac_nhan (ham y nguyen, dem so lan nhin) | niem_phong (MOT lan cho mot bo ea+ma+khung+tham_so, can gt_id "
+        "va mot xac_nhan DAT dung bo tham so do, toi da 3 lan/dong gia thuyet). tham_so = input cua EA doi so voi "
+        "mac dinh cua tac gia. Chi chay duoc o may nha co MT5 - o cloud tra loi ro 'can may nha' (hay giao qua "
+        "b cau). Hong ha tang (khong doc duoc bao cao, tester chet) KHONG tinh phep thu, KHONG tieu lan mo. Ket "
+        "qua DAT la 'canh bac co ky vong duong do duoc', chua phai chan ly.",
+        {"ea": _EA, "ma": _MA, "khung": _KHUNG,
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan", "niem_phong"]},
+         "tham_so": {"type": "object", "description": "{ten_input: gia_tri_so}; bo trong = mac dinh cua tac gia"},
+         "gt_id": _GT},
+        ["ea", "ma", "khung"], _ea_tho_chay),
+    _cc("ea_tho_quet",
+        "Quet NHIEU EA cong khai tren doan kham_pha: phan loai het (bo cong cu, bo EA ma may khong co tai san), "
+        "roi chay chien luoc o ma/khung nham toi, moi cap mot gia thuyet moi (tu ghi so tay). Dung de duyet kho EA "
+        "da tai ('kho:*') - dung thay cho viet script lap. toi_da_lan gioi han so luot tester THAT (ket qua da co "
+        "tra tu so tay, khong tinh); phan con lai nam o 'con_lai': goi lai de di tiep. Bang gon.",
+        {"eas": {"type": "array", "items": {"type": "string"},
+                 "description": "['kho:*'] = ca kho; hoac danh sach duong .mq5 / 'kho:<so>'"},
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
+         "toi_da_lan": {"type": "integer", "description": "so luot tester that toi da (mac dinh 6)"},
+         "co_san": {"type": "array", "items": {"type": "string"}}},
+        ["eas"], _ea_tho_quet),
+    _cc("ea_tho_tinh",
+        "Tinh chinh MOT EA cong khai quanh MAC DINH cua tac gia: luoi nho (moi lan doi MOT input chu ky/buoc/nguong, "
+        "khong dong lot/magic/gio) tren kham_pha, chon bo DAT co CAGR cao nhat roi xac_nhan DUNG bo do mot lan. Moi "
+        "diem luoi la mot phep thu duoc dem theo dong gia thuyet. KHONG cham niem_phong - do la buoc rieng bang "
+        "ea_tho_chay. Goi sau khi ea_tho_quet cho thay EA do co lai o mac dinh hoac gan co lai.",
+        {"ea": _EA, "ma": _MA, "khung": _KHUNG, "gt_id": _GT,
+         "so_bien": {"type": "integer", "description": "so input toi da duoc doi (mac dinh 3)"},
+         "toi_da_lan": {"type": "integer", "description": "so diem luoi toi da, gom mac dinh (mac dinh 7)"},
+         "xac_nhan": {"type": "boolean", "description": "false = dung o bo tot nhat tren kham_pha"}},
+        ["ea", "ma", "khung"], _ea_tho_tinh),
 ]
 THEO_TEN = {c["ten"]: c for c in CONG_CU}
 #: Cong cu chi GHI so tay (khong do gi) - van duoc goi khi het ngan sach chu ky.

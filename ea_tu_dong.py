@@ -121,7 +121,7 @@ def tai_lo(so_bai: int = 24, muc: str = "mt5/experts") -> list[dict]:
     return ra
 
 
-def bien_dich(ds: list[dict], ten_terminal: str = "exness") -> list[dict]:
+def bien_dich(ds: list[dict], ten_terminal: str = "exness", cho_giay: float = 12.0) -> list[dict]:
     """Ghi .mq5 vao MQL5/Experts/_tu_dong roi bien dich tung file.
 
     Duong dan phai TUONG DOI tinh tu `MQL5` - duong tuyet doi cho rc=0 va khong
@@ -138,7 +138,7 @@ def bien_dich(ds: list[dict], ten_terminal: str = "exness") -> list[dict]:
         f.write_text(x["ma"], encoding="utf-8")
         rel = "Experts" + chr(92) + "_tu_dong" + chr(92) + f.name
         p = subprocess.Popen([str(me), f"/compile:{rel}", "/log"], cwd=str(mql5))
-        for _ in range(48):
+        for _ in range(max(1, int(cho_giay / 0.25))):
             if f.with_suffix(".ex5").exists():
                 break
             time.sleep(0.25)
@@ -326,6 +326,7 @@ def chay_mot(viec: dict) -> dict:
     tap_set = viet_set(nhan, viec.get("input") or {}, ten_t)
     ini = viet_ini(nhan, viec["ea"], tap_set, viec["symbol"], viec["khung"],
                    viec["tu"], viec["den"], model=viec.get("model", 4),
+                   von=viec.get("von", 10000), don_bay=viec.get("don_bay", 100),
                    ten_terminal=ten_t)
     dong_terminal(ten_t)
     t0 = time.time()
