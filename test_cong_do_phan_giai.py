@@ -16,6 +16,7 @@ duoi san do, va luat quyet dinh khong con dua p co san vao chuoi FDR.
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -24,6 +25,7 @@ if LAB not in sys.path:
     sys.path.insert(0, LAB)
 
 from nhan import cong as CONG
+from nhan import so as SO
 
 
 class SanPhanGiai(unittest.TestCase):
@@ -90,7 +92,22 @@ class CheDoNghienCuu(unittest.TestCase):
     dieu kien 5 lan 10 truot theo. Ba dieu kien truot deu tu MOT goc, va ket qua
     la 22 nam NIKKEI khong do duoc gi - ke ca voi tin hieu do chinh xac 85%
     (Sharpe 9,0).
+
+    `CONG.xet` ghi mot dong `fdr` cho moi lan goi (ho 'test_che_do'). Phai ghi vao so TAM: 03/10/2026
+    moi lan `pytest` day them 2-3 dong vao `nao.db` THAT (guard `canh_so_cai_that` bao ERROR o teardown
+    cua ca 4 luong xdist), va nguong LORD cua ho nay tut theo so dong nen bai kiem LUC "van ra PASS" se
+    tu hong dan theo so lan chay.
     """
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._db_cu = SO.DB
+        SO.DB = Path(self._tmp.name) / "nao_test.db"
+        SO.khoi_tao()
+
+    def tearDown(self):
+        SO.DB = self._db_cu
+        self._tmp.cleanup()
 
     def _chay(self, che_do, do_tin="KHAI"):
         from types import SimpleNamespace
