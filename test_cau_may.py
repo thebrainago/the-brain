@@ -16,6 +16,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from nhan import may_nha as MN
 from qwen import cau_git as CG, cau_may as CM, cau_trang as CT
 
 PING = ["{py}", "-c", "print('CAU NOI SONG')"]
@@ -53,6 +54,7 @@ def ha_tang(tmp_path, monkeypatch):
     monkeypatch.setattr(CG, "CAU_HINH", tmp_path / "config" / "cau.json")
     monkeypatch.setattr(CT, "DUYET", tmp_path / "config" / "cau_duyet.json")
     monkeypatch.setattr(CG, "NGU_GIAY", (0, 0, 0))
+    monkeypatch.setattr(MN, "NHAT_KY", tmp_path / "nhat_ky" / "may_nha_mau.jsonl")      # chay_mot_luot lay mau suc khoe: khong ghi vao repo that
     return SimpleNamespace(bare=bare, cloud=cloud, hop_a=hop_a, hop_b=hop_b, lab=lab, tmp=tmp_path)
 
 
@@ -87,6 +89,8 @@ class TestDanhSachTrang:
         ["{py}", "b.py", "nc", "tu-lai", "AUDCAD", "H4"],
         ["{py}", "b.py", "hepha", "qt", "200", "--ma", "AUDCAD", "--khung", "H4", "--ghep"],
         ["{py}", "b.py", "nc", "cc", "ho_so_tai_san", "{}"],
+        ["{py}", "b.py", "nc", "hoi", "Bo luat quan li lenh nao cho lai sau phi khi entry la vao ngay?"],
+        ["{py}", "b.py", "nc", "hoi", "Bo luat quan li lenh nao cho lai sau phi khi entry la vao ngay?", "0.95"],
         ["{py}", "b.py", "test"],
     ])
     def test_cho_qua_cac_hinh_hop_le(self, lenh):
@@ -104,6 +108,13 @@ class TestDanhSachTrang:
         ["{py}", "b.py", "nc", "tu-lai"],                                    # thieu doi so bat buoc
         ["{py}", "b.py", "nc", "cc", "khong_co_cong_cu", "{}"],              # cong cu la
         ["{py}", "b.py", "nc", "cc", "ho_so_tai_san", "[1]"],                # JSON khong phai object
+        ["{py}", "b.py", "nc", "hoi"],                                       # thieu cau hoi
+        ["{py}", "b.py", "nc", "hoi", "ngan"],                               # qua ngan (< 10 ky tu)
+        ["{py}", "b.py", "nc", "hoi", "x" * 801],                            # qua dai
+        ["{py}", "b.py", "nc", "hoi", "dong mot\ndong hai chen them lenh"],   # nhieu dong
+        ["{py}", "b.py", "nc", "hoi", "--out=/etc/x cau hoi hop le dai du"],  # co thay cho van ban
+        ["{py}", "b.py", "nc", "hoi", "cau hoi hop le va du dai", "2.5"],    # uu tien ngoai 0..1
+        ["{py}", "b.py", "nc", "hoi", "cau hoi hop le va du dai", "0.5", "them"],   # thua doi so
         ["{py}", "b.py", "hepha", "qt", "200", "--ma", "AUDCAD", "--ma", "EURUSD"],   # co lap
         ["{py}", "b.py", "hepha", "qt", "--out", "/etc/x"],                  # co la
         ["{py}", "-m", "pytest", "--rootdir=/etc"],                          # co pytest la

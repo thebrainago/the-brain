@@ -57,6 +57,18 @@ def _cong_cu(s: str) -> bool:
     return s in CC.THEO_TEN
 
 
+def _van_ban(lo: int, hi: int):
+    """Mot dong chu thuong (cau hoi / y tuong): in duoc, mot dong, do dai lo..hi. Khong phai co (`--...`)."""
+    return lambda s: lo <= len(s) <= hi and s.isprintable() and not s.startswith("-")
+
+
+def _thuc01(s: str) -> bool:
+    try:
+        return 0.0 <= float(s) <= 1.0
+    except ValueError:
+        return False
+
+
 def _khung(s: str) -> bool:
     return s in _KHUNG
 
@@ -103,6 +115,7 @@ LENH_B: dict[tuple, Hinh] = {
     ("nc", "tu-lai"): Hinh([(_MA.match, True), (_khung, False)], {"--khong-niem-phong": None}),
     ("nc", "tho"): Hinh(co={"--vong": _so(1, 200), "--cong-cu": _so(1, 200)}),
     ("nc", "cc"): Hinh([(_cong_cu, True), (_json_obj, False)]),
+    ("nc", "hoi"): Hinh([(_van_ban(10, 800), True), (_thuc01, False)]),     # cau hoi cua CHU DU AN vao so tay (nguon 'nguoi')
     ("hepha", "do"): Hinh(),
     ("hepha", "duc"): Hinh([(_so(1, 5000), False)]),
     ("hepha", "nap"): Hinh([(_so(1, 5000), False)], {"--that": None}),
@@ -113,6 +126,13 @@ LENH_B: dict[tuple, Hinh] = {
     ("ban-do",): Hinh(),
     ("kien-truc",): Hinh(),
     ("khoi-phuc",): Hinh(co={"--json": None}),
+    # nhan/may_nha.py: quet + do + ket luan may nha. CHI DOC, tru `do` (file tam xoa ngay). Khong co `ap-dung`:
+    # moi de xuat (pagefile, ke hoach dien) chi IN RA, chu du an tu lam.
+    ("may", "quet"): Hinh(),
+    ("may", "mau"): Hinh(co={"--nang": None}),
+    ("may", "bao-cao"): Hinh(),
+    ("may", "do"): Hinh(co={"--nhanh": None, "--ep": None, "--toi-da": _so(1, 64)}),
+    ("may", "giam-sat"): Hinh([(_so(1, 180), False), (_so(5, 300), False)]),
 }
 #: `-m <module> ...`
 MODULE_M: dict[str, Hinh] = {

@@ -88,6 +88,10 @@ NHIP_HOST = {
 #: RAM TRONG *va* so tien trinh python dang song.
 RAM_TOI_THIEU_GB = 3.0
 TRAN_TIEN_TRINH_PYTHON = 28
+#: CAM KET bo nho con lai toi thieu de nhan mot viec nang (GB; Windows: RAM + file trang con cap phat duoc). Chinh con so nay het la
+#: `ENOMEM` du RAM vat ly con trong (13/09: o C con 233 MB, file trang khong gian ra duoc). Bang nguong DO cua `nhan/may_nha.py`.
+#: Chi kiem tren Windows: Linux mac dinh cho cam ket qua muc (overcommit) nen `CommitLimit - Committed_AS` am van binh thuong.
+COMMIT_TOI_THIEU_GB = 3.0
 
 
 # ------------------------------------------------------------ DOI IP
@@ -243,13 +247,25 @@ class HetCho(RuntimeError):
 
 
 # ------------------------------------------------------------ DO MAY
+def _commit_con_lai() -> float | None:
+    """GB cam ket con lai (Windows: GlobalMemoryStatusEx qua `may_nha`). Ngoai Windows / khong doc duoc -> None (KHONG chan: None != 0)."""
+    if os.name != "nt":
+        return None
+    try:
+        from nhan import may_nha as MN
+        return MN._commit_windows().get("con_lai_gb")
+    except Exception:
+        return None
+
+
 def may() -> dict:
     import shutil
     try:
         import psutil
     except ImportError:
         return {"ram_trong_gb": 99.0, "cpu": 0.0, "python": 0,
-                "dia_gb": shutil.disk_usage(str(GOC)).free / 2**30}
+                "dia_gb": shutil.disk_usage(str(GOC)).free / 2**30,
+                "commit_con_lai_gb": _commit_con_lai()}
     m = psutil.virtual_memory()
     n = 0
     for p in psutil.process_iter(["name"]):
@@ -258,7 +274,8 @@ def may() -> dict:
     return {"ram_trong_gb": round(m.available / 2**30, 1),
             "cpu": psutil.cpu_percent(interval=0.2),
             "python": n,
-            "dia_gb": round(shutil.disk_usage(str(GOC)).free / 2**30, 1)}
+            "dia_gb": round(shutil.disk_usage(str(GOC)).free / 2**30, 1),
+            "commit_con_lai_gb": _commit_con_lai()}
 
 
 def don_mo_coi(qua_gio: float = 6.0, in_ra=print) -> int:
@@ -401,6 +418,12 @@ def xin(lop: str, viec: str = "", cho_giay: float = 0.0, ram_gb: float = 0.0):
     if ram_gb and m["ram_trong_gb"] < max(ram_gb, RAM_TOI_THIEU_GB):
         raise HetCho("RAM con %.1f GB, viec `%s` can %.1f GB"
                      % (m["ram_trong_gb"], viec, ram_gb))
+    cm = m.get("commit_con_lai_gb")
+    can_cm = max((ram_gb or 0.0) + 1.0, COMMIT_TOI_THIEU_GB)
+    if cm is not None and cm < can_cm:
+        raise HetCho("cam ket bo nho (RAM + file trang) con %.1f GB, viec `%s` can >= %.1f GB - may sap `ENOMEM` du RAM trong con "
+                     "%.1f GB; dat file trang co dinh lon hon (tai_lieu/MAY_NHA_TOI_UU.md muc 5)"
+                     % (cm, viec or lop, can_cm, m.get("ram_trong_gb", 0.0)))
     if m["python"] > TRAN_TIEN_TRINH_PYTHON:
         don_mo_coi(in_ra=lambda *a: None)
         if may()["python"] > TRAN_TIEN_TRINH_PYTHON:
@@ -443,8 +466,9 @@ def xin(lop: str, viec: str = "", cho_giay: float = 0.0, ram_gb: float = 0.0):
 def bang(in_ra=print) -> dict:
     m = may()
     in_ra("NGAN SACH TAI NGUYEN")
-    in_ra("  may   : %.1f GB RAM trong · CPU %.0f%% · %d python · %.1f GB dia"
-          % (m["ram_trong_gb"], m["cpu"], m["python"], m["dia_gb"]))
+    in_ra("  may   : %.1f GB RAM trong · CPU %.0f%% · %d python · %.1f GB dia%s"
+          % (m["ram_trong_gb"], m["cpu"], m["python"], m["dia_gb"],
+             (" · cam ket con %.1f GB" % m["commit_con_lai_gb"]) if m.get("commit_con_lai_gb") is not None else ""))
     dung = {}
     for lop, tran in SUC_CHUA.items():
         n = _dang_giu(lop)

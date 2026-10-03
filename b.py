@@ -67,6 +67,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b github          DAY lab/ len GitHub rieng (thebrainago/the-brain, rieng tu)
     b ho-so           HO SO HE THONG: mot file TU DU dua cho AI khong co dia
     b slot [kiem]     SLOT TESTER: may lan tester dung duoc, nang tran duoc chua
+    b may [bao-cao|quet|mau|do|giam-sat]  MAY NHA: quet phan cung, DO toc do/gioi han, bao cao den XANH/VANG/DO
     b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
     b phanh           han muc / kill-switch cua he chay that
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
@@ -680,6 +681,20 @@ def c_slot(a):
         return ST.kiem()
     ST.bang()
     return 0
+
+
+def c_may(a):
+    """MAY NHA: quet phan cung + do co gian + bao cao bang loi thuong (nhan/may_nha.py).
+
+        b may                   bao cao ngan: den XANH/VANG/DO + viec chu du an can lam (~5 giay)
+        b may quet              phan cung: CPU, thanh RAM (khe trong, kenh), o dia, pagefile, MT5
+        b may mau [--nang]      mot mau tai nguyen
+        b may do [--nhanh]      DO toc do 1..N tien trinh (~4 phut, ~1 phut voi --nhanh); may phai RANH
+        b may giam-sat [PHUT]   lay mau lien tuc, tom tat bao nhieu % thoi gian CPU nam trong dai 75-80
+    Chi DOC (tru `do` ghi file tam roi xoa). Khong doi cai dat Windows nao: de xuat chi duoc IN RA.
+    """
+    from nhan import may_nha as MN
+    return MN.main(list(a or []))
 
 
 def c_github(a):
@@ -1407,6 +1422,7 @@ LENH = {
     "tho": c_tho, "tho-code": c_tho,
     "github": c_github, "gh": c_github,
     "slot": c_slot,
+    "may": c_may,
     "ho-so": c_ho_so, "hs": c_ho_so,
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,

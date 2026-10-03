@@ -51,7 +51,7 @@ Niem phong MOT lan, luat cu (lai sau phi + maxDD < 80%, phi do duoc)
 | Rust / GPU | KHONG | C da dua 1 o ve ~12 ms; GPU chi co loi khi quet > 100.000 o, ma moi o la mot phep thu |
 | cTrader CLI (Docker, Linux, song song) | CHUA | MOI EA cong khai la MQL5 -> phai dich lai; chi lam MOT spike neu hang cho tester > ~6 gio/ngay (`NGUON_NGUOI_THANG.md` muc 6) |
 | TradingView / Pine | KHONG de test | khong co tester ban duoc; chi la nguon ma y tuong |
-| Toi uu may nha: loai tru Defender cho thu muc du lieu MT5 + repo, plan "High performance", du lieu MT5 + `data/` tren SSD, EA khong `Print` / khong visual | LAM, nhung de DO | thuong co loi, **chua do tren may nay**: so truoc / sau bang cot `giay` |
+| Toi uu may nha: loai tru Defender cho thu muc du lieu MT5 + repo, plan "High performance", du lieu MT5 + `data/` tren SSD, EA khong `Print` / khong visual | LAM, nhung de DO | thuong co loi, **chua do tren may nay**: so truoc / sau bang cot `giay`. Dung `b may` (quet + do + den xanh/vang/do + so tai khoan MT5 toi da): `tai_lieu/MAY_NHA_TOI_UU.md` |
 
 ## 4. Viec o may nha (theo thu tu; cai nao hong thi dung o do va bao cloud)
 

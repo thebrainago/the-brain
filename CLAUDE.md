@@ -160,6 +160,7 @@ b vao              trang thai song + ban giao hom qua  (~2 giay)
 b ban-do           SINH ban do tu ma nguon - DOC TRUOC KHI XAY GI MOI
 b kien-truc        SO DO KIEN TRUC: 129 module nhan theo LOP + VAI TRO + no kien truc
 b ho-so            HO SO HE THONG: mot file TU DU dua cho AI khong co dia (Claude chat)
+b may              QUET + DO MAY NHA (den XANH/VANG/DO, % dinh o 75-80% CPU, so tai khoan MT5 toi da): `tai_lieu/MAY_NHA_TOI_UU.md` - phien nha chay `b may` TRUOC khi bao cao suc khoe may
 b ket "tom tat"    chot ngay: git commit + sinh TIEP_TUC_MAI.md moi
 b                  menu day du
 ```

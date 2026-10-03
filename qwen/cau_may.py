@@ -60,7 +60,9 @@ _SESSION = CTH.SESSION
 _NHANH = re.compile(r"^[A-Za-z0-9._/-]{1,100}$")
 _URL = re.compile(r"^https://[A-Za-z0-9.-]+/[\w.-]+/[\w.-]+?(\.git)?$")
 TOI_DA_BAO_NGAY = 12
-LAN_GIAO = {"test": "CPU", "nc": "CPU", "hepha": "CPU"}
+LAN_GIAO = {"test": "CPU", "nc": "CPU", "hepha": "CPU", "may": "CPU"}
+#: `b may do` / `giam-sat` chiem CA may (do co gian) -> chung lan voi MT5 tester, khong chay song song voi viec nao khac
+LAN_GIAO_CHI_TIET = {("may", "do"): "TESTER", ("may", "giam-sat"): "TESTER"}
 
 
 def _ten(s: str) -> str:
@@ -124,16 +126,22 @@ def cai(url: str, nhanh: str, hop_thu: str | None = None, ten: str | None = None
 
 
 # ------------------------------------------------------------------ NHIP TIM
-def nhip_tim(hop: Path, c: dict, trang_thai: str, dang_chay: str | None = None, con_cho: int = 0) -> bool:
+def nhip_tim(hop: Path, c: dict, trang_thai: str, dang_chay: str | None = None, con_cho: int = 0,
+             den: str | None = None, ly_do_den: str = "") -> bool:
     """Ghi `viec/may/<ten>.json`. Chi ghi lai khi doi trang thai HOAC cu hon 60 phut - khong thi may ranh
-    day mot commit moi 5 phut (288 commit/ngay) lam lich su repo thanh rac."""
+    day mot commit moi 5 phut (288 commit/ngay) lam lich su repo thanh rac.
+
+    `den` = den suc khoe may (XANH/VANG/DO, tu `nhan/may_nha.ghi_mau_nhe`). Chi DOI MAU moi tinh la doi trang thai:
+    so do tung mau (CPU, RAM moi 5 phut) o lai may trong `nhat_ky/may_nha_mau.jsonl`, KHONG len git."""
     f = hop / "viec" / "may" / ("%s.json" % _ten(c["ten"]))
     moi = {"ten": c["ten"], "kha_nang": c["kha_nang"], "phien_ban_ma": CG.phien_ban_ma(GOC),
            "trang_thai": trang_thai, "dang_chay": dang_chay, "con_cho": int(con_cho),
-           "python": sys.version.split()[0], "he_dieu_hanh": platform.platform()[:60],
+           "den": den, "python": sys.version.split()[0], "he_dieu_hanh": platform.platform()[:60],
            "luc": time.strftime("%Y-%m-%dT%H:%M:%S")}
+    if den and den != "XANH" and ly_do_den:
+        moi["ly_do_den"] = str(ly_do_den)[:200]
     cu = _doc(f)
-    if cu and all(cu.get(k) == moi[k] for k in ("trang_thai", "dang_chay", "con_cho", "phien_ban_ma", "kha_nang")):
+    if cu and all(cu.get(k) == moi[k] for k in ("trang_thai", "dang_chay", "con_cho", "phien_ban_ma", "kha_nang", "den")):
         try:
             if time.time() - time.mktime(time.strptime(cu["luc"], "%Y-%m-%dT%H:%M:%S")) < 3600:
                 return False
@@ -169,6 +177,8 @@ def bang_may(goc: Path | None = None) -> str:
         d.append("  %-16s %-8s dang chay=%s con cho=%s ma=%s [%s]%s"
                  % (m.get("ten"), m.get("trang_thai"), m.get("dang_chay") or "-", m.get("con_cho"),
                     m.get("phien_ban_ma"), ",".join(m.get("kha_nang") or []), im))
+        if m.get("den") and m["den"] != "XANH":
+            d.append("      suc khoe may: %s - %s" % (m["den"], m.get("ly_do_den") or "?"))
     return "\n".join(d)
 
 
@@ -217,6 +227,16 @@ def bao_cloud(ket_qua: list[dict], hoi: list[str], c: dict, hop: Path, chay=None
 
 
 # ------------------------------------------------------------------ CHAY MOT LUOT
+def _mau_may() -> tuple[str | None, str]:
+    """(den, ly_do) cua mot mau tai nguyen nhe. KHONG BAO GIO nem: giam sat hong khong duoc lam hong bo chay viec."""
+    try:
+        from nhan import may_nha as MN
+        r = MN.ghi_mau_nhe()
+        return r.get("den"), "; ".join(r.get("ly_do") or [])[:200]
+    except Exception:                                       # noqa: BLE001
+        return None, ""
+
+
 def _con_song(pid) -> bool:
     try:
         import psutil
@@ -250,6 +270,7 @@ def chay_mot_luot(c: dict | None = None, toi_da: int = 50) -> dict:
     if not _lay_khoa(hop):
         return {"trang_thai": "DANG_BAN"}
     xong, hoi = [], []
+    den_may, ly_den = _mau_may()        # moi luot 5 phut: lay MOT mau nhe (khong LLM), ghi nhat ky cuc bo, tra den
     try:
         r = CG.dong_bo(c["nhanh"], ep=True, goc=hop, rieng=True)
         if r.get("trang_thai") != "DAT":
@@ -267,9 +288,10 @@ def chay_mot_luot(c: dict | None = None, toi_da: int = 50) -> dict:
             xong.append(kq)
             if kq.get("can_cloud"):
                 hoi.append(str(kq.get("ma")))
-            nhip_tim(hop, c, "DANG_CHAY", dang_chay=str(kq.get("ma")), con_cho=max(hang - 1, 0))
+            nhip_tim(hop, c, "DANG_CHAY", dang_chay=str(kq.get("ma")), con_cho=max(hang - 1, 0),
+                     den=den_may, ly_do_den=ly_den)
             CG.dong_bo(c["nhanh"], ep=True, goc=hop, rieng=True)   # day NGAY: cloud dang cho de ra don tiep
-        nhip_tim(hop, c, "RANH", con_cho=len(CG.don_dang_cho(hop, may=c["ten"])))
+        nhip_tim(hop, c, "RANH", con_cho=len(CG.don_dang_cho(hop, may=c["ten"])), den=den_may, ly_do_den=ly_den)
         CG.dong_bo(c["nhanh"], ep=True, goc=hop, rieng=True)
         return {"trang_thai": "XONG", "da_chay": [{"ma": k.get("ma"), "trang_thai": k.get("trang_thai")} for k in xong],
                 "bao_cloud": bao_cloud(xong, hoi, c, hop)}
@@ -292,7 +314,7 @@ def giao(b_lenh: list[str], ma: str | None = None, lan: str | None = None, han_p
         raise ValueError(loi)
     ma = ma or _ten("-".join(b_lenh[:2]) + "-" + time.strftime("%m%d-%H%M%S"))
     p = CG.ra_don(ma, vi_sao or " ".join(b_lenh)[:200], lenh=lenh,
-                  lan=lan or LAN_GIAO.get(b_lenh[0], "CPU"), han_phut=han_phut,
+                  lan=lan or LAN_GIAO_CHI_TIET.get(tuple(b_lenh[:2])) or LAN_GIAO.get(b_lenh[0], "CPU"), han_phut=han_phut,
                   cong="pytest" if b_lenh[0] == "test" else "chay_duoc",
                   them={"may": may, "can": can, "vi_sao": vi_sao}, goc=goc)
     r = {"ma": ma, "file": str(p)}
