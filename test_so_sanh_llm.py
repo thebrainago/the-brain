@@ -165,13 +165,13 @@ class TestNhaCungCap:
 class TestMainVaNeedle:
     def test_khai_va_main_thieu_cau_hinh_khong_in_khoa(self, monkeypatch):
         for k in list(__import__("os").environ):
-            if k.startswith("SO_SANH_") or k in ("DEEPSEEK_API_KEY", "DASHSCOPE_API_KEY"):
+            if k.startswith("SO_SANH_") or k in ("DEEPSEEK_API_KEY", "DASHSCOPE_API_KEY", "AIBOX_API_KEY"):
                 monkeypatch.delenv(k)
         monkeypatch.setattr(S, "_cc_switch", lambda ten: {})
         b = io.StringIO()
         with redirect_stdout(b):
             assert S.main(["--khai"]) == 0
-        assert b.getvalue().count("THIEU") == 2
+        assert b.getvalue().count("THIEU") == len(S.MAC_DINH) == 7, "moi ho so ten san phai hien trong --khai"
         b = io.StringIO()
         with redirect_stdout(b):
             assert S.main([]) == 2
@@ -182,3 +182,140 @@ class TestMainVaNeedle:
         t = ts[-1]
         assert t["ten"] == "needle_dai" and S.NEEDLE["ma"] in t["nhac"] and len(t["nhac"]) > 10_000
         assert S.cham_needle({"text": "Ma la %s" % S.NEEDLE["ma"]})[0] == 1.0 and S.cham_needle({"text": "khong biet"})[0] == 0.0
+
+
+# ------------------------------------------------------------------ ban giao LLM (thu nha c91d, 03/10/2026)
+def _khoa_that(*_a, **_k):
+    pytest.fail("co env thi khong duoc hoi cc-switch")
+
+
+class TestHoSoAiBox:
+    def test_nam_ho_so_ten_san_tro_dung_model_cua_thu_c91d(self):
+        env = {"AIBOX_API_KEY": "khoa-gia"}
+        mo_hinh = {"ds": "ds/deepseek-flash", "qwen38": "qwen3.8-max-0902", "qwen38f": "qwen3.8-flash", "kimi": "kimi-k3", "glm": "glm-5.3"}
+        for ten, m in mo_hinh.items():
+            d = S.nha_cung_cap(ten, env=env, cc=_khoa_that)
+            assert d["url"] == "https://api.ai-box.vn/v1/chat/completions" and d["mo_hinh"] == m and d["khoa"] == "khoa-gia" and d["nguon"] == "env"
+
+    def test_cc_switch_cho_khoa_nhung_khong_duoc_doi_model_va_khong_lay_cau_noi_codex(self):
+        cc = lambda ten: {"khoa": "kk", "base_url": "http://127.0.0.1:8317/v1", "model": "gpt-codex", "ten": "aibox"} if ten == "aibox" else {}
+        d = S.nha_cung_cap("qwen38", env={}, cc=cc)
+        assert d["khoa"] == "kk" and d["mo_hinh"] == "qwen3.8-max-0902", "model cua ho so THANG model cua cc-switch"
+        assert d["url"] == "https://api.ai-box.vn/v1/chat/completions", "cau noi 127.0.0.1 chi cho /v1/responses cua Codex"
+        assert d["nguon"] == "cc-switch:aibox"
+
+    def test_ho_so_cu_qwen_giu_nghia_cu_cc_switch_van_quyet_model(self):
+        cc = lambda ten: {"khoa": "k2", "base_url": "https://api.ai-box.vn/v1", "model": "qwen3.7-flash", "ten": "aibox"}
+        assert S.nha_cung_cap("qwen", env={}, cc=cc)["mo_hinh"] == "qwen3.7-flash"
+
+    def test_doi_id_chua_thu_bang_bien_moi_truong(self):
+        env = {"AIBOX_API_KEY": "k", "SO_SANH_KIMI_MO_HINH": "kimi-k3-0902", "SO_SANH_GLM_URL": "https://glm.example/v1"}
+        assert S.nha_cung_cap("kimi", env=env, cc=_khoa_that)["mo_hinh"] == "kimi-k3-0902"
+        assert S.nha_cung_cap("glm", env=env, cc=_khoa_that)["url"] == "https://glm.example/v1/chat/completions"
+
+    def test_thieu_khoa_ai_box_khong_lo_khoa_va_chi_cach_sua(self):
+        with pytest.raises(S.ThieuCauHinh) as e:
+            S.nha_cung_cap("ds", env={}, cc=lambda ten: {})
+        assert "ds: thieu khoa" in str(e.value) and "SO_SANH_DS_KHOA" in str(e.value)
+
+
+class TestChamGoiCongCuNoiLong:
+    @staticmethod
+    def _goi(*cau):
+        return {"tool_calls": [{"function": {"name": n, "arguments": a}} for n, a in cau]}
+
+    DUNG = '{"ma": "AUDCAD", "khung": "H4", "so_null": 200}'
+
+    def test_doc_so_tay_truoc_roi_tim_quy_luat_van_dung_diem_tuyet_doi(self):
+        d, g = S.cham_goi_cong_cu(self._goi(("xem_so_tay", "{}"), ("tim_quy_luat", self.DUNG)))
+        assert d == pytest.approx(1.0) and "them: xem_so_tay" in g, "Qwen3.8 hay doc so tay truoc - ban cu cham 0 vi chi xet loi goi dau"
+
+    def test_chi_doc_so_tay_ma_khong_tim_quy_luat_la_0(self):
+        assert S.cham_goi_cong_cu(self._goi(("xem_so_tay", "{}")))[0] == 0.0
+        assert S.cham_goi_cong_cu({"tool_calls": []})[0] == 0.0
+
+    def test_bia_ten_cong_cu_bi_tru_dung_0_2(self):
+        d, g = S.cham_goi_cong_cu(self._goi(("tim_quy_luat", self.DUNG), ("xoa_het", "{}")))
+        assert d == pytest.approx(0.8) and "xoa_het" in g
+
+    def test_sai_tham_so_tru_tung_phan_va_arguments_dang_dict_van_doc_duoc(self):
+        assert S.cham_goi_cong_cu(self._goi(("tim_quy_luat", '{"ma": "AUDCAD", "khung": "D1", "so_null": 100}')))[0] == pytest.approx(0.6)
+        goi = {"tool_calls": [{"function": {"name": "tim_quy_luat", "arguments": {"ma": "audcad", "khung": "h4", "so_null": 200}}}]}
+        assert S.cham_goi_cong_cu(goi)[0] == pytest.approx(1.0)
+
+    def test_arguments_hong_va_bia_ten_cong_don_nhung_khong_xuong_duoi_0(self):
+        assert S.cham_goi_cong_cu(self._goi(("tim_quy_luat", "{khong json")))[0] == pytest.approx(0.25)
+        assert S.cham_goi_cong_cu(self._goi(("tim_quy_luat", "[1, 2]")))[0] == pytest.approx(0.25)
+        assert S.cham_goi_cong_cu(self._goi(("tim_quy_luat", "{khong json"), ("bia", "{}")))[0] == pytest.approx(0.05)
+
+
+class TestKetLuanNhieuNhaCungCap:
+    @staticmethod
+    def _kq(**diem_chi_phi):
+        ncc = {n: {"tb": tb, "chi_phi_usd": cp, "tok_ra": 1000, "task": {}} for n, (tb, cp) in diem_chi_phi.items()}
+        return {"task": [], "ncc": ncc}
+
+    def test_dan_dau_hon_cai_ke_tiep_tu_0_1_thi_chon_diem_cao(self):
+        k = S.ket_luan(self._kq(ds=(0.95, None), qwen38=(0.7, None), kimi=(0.5, None)))
+        assert k.startswith("Xep hang (diem TB): ds 0.950 > qwen38 0.700 > kimi 0.500") and "CHON ds" in k
+
+    def test_chenh_duoi_0_1_khong_duoc_goi_la_thang_dung_voi_mau_nho(self):
+        k = S.ket_luan(self._kq(ds=(0.906, None), qwen38=(0.854, None), kimi=(0.5, None)))
+        assert k.startswith("Xep hang (diem TB): ds 0.906 > qwen38 0.854 > kimi 0.500")
+        assert "2 cai gan nhau" in k and "CHON" not in k, "0,906 vs 0,854 la nhieu cua mau 8 task x 2 lan"
+
+    def test_gan_nhau_co_gia_thi_chon_re_hon_khong_gia_thi_noi_that(self):
+        k = S.ket_luan(self._kq(ds=(0.90, 0.5), qwen38=(0.88, 2.0), kimi=(0.3, 0.1)))
+        assert "2 cai GAN NHAU" in k and "RE HON = ds (0.50000 USD)" in k, "kimi re nhat nhung diem thua xa -> khong duoc vao nhom gan nhau"
+        k = S.ket_luan(self._kq(ds=(0.90, None), qwen38=(0.88, 2.0), glm=(0.89, 1.0)))
+        assert "chua khai gia" in k and "ds 1000" in k
+
+    def test_bao_cao_ba_nha_cung_cap_du_cot_va_khong_lo_khoa(self):
+        kq = S.so_sanh([ncc("a"), ncc("b"), ncc("c")], S.tao_task()[:4], lan=1, post=post_tot)
+        b = S.bao_cao(kq)
+        assert "3 nha cung cap" in b and "a-m" in b and "c-m" in b and "KHOA_BI_MAT" not in b and "Xep hang" in kq["ket_luan"]
+
+
+class TestBiCatVaNhanTran:
+    @staticmethod
+    def _post_cat(ghi=None):
+        def post(d, than, timeout=0):
+            if ghi is not None:
+                ghi.append(than)
+            r = post_tot(d, than)
+            r["choices"][0]["finish_reason"] = "length"
+            return r
+        return post
+
+    def test_goi_mot_danh_dau_bi_cat_khi_finish_length(self):
+        t = S.tao_task()[0]
+        assert S.goi_mot(ncc("x"), t, post=self._post_cat())["bi_cat"] is True
+        assert S.goi_mot(ncc("x"), t, post=post_tot)["bi_cat"] is False
+
+    def test_so_sanh_dem_bi_cat_canh_bao_trong_ket_luan_va_bao_cao(self):
+        kq = S.so_sanh([ncc("cat"), ncc("lanh")], S.tao_task()[:2], lan=1,
+                       post=lambda d, t, to=0: (self._post_cat() if d["ten"] == "cat" else post_tot)(d, t))
+        assert kq["ncc"]["cat"]["bi_cat"] == 2 and kq["ncc"]["lanh"]["bi_cat"] == 0
+        assert "CANH BAO: cat bi cat 2 luot" in kq["ket_luan"] and "CHUA DO DUOC" in kq["ket_luan"]
+        assert "BI CAT" in kq["ncc"]["cat"]["task"]["json_ky_luat"]["ghi"][0]
+        assert "bi cat (length)" in S.bao_cao(kq)
+
+    def test_khong_bi_cat_thi_khong_canh_bao_va_khong_them_dong(self):
+        kq = S.so_sanh([ncc("a"), ncc("b")], S.tao_task()[:2], lan=1, post=post_tot)
+        assert "CANH BAO" not in kq["ket_luan"] and "bi cat (length)" not in S.bao_cao(kq)
+
+    def test_nhan_max_tokens_mac_dinh_12_bien_moi_truong_doi_duoc_va_rac_khong_lam_chet(self, monkeypatch):
+        t = dict(S.tao_task()[0], max_tokens=200)
+        ghi = []
+        monkeypatch.delenv("SO_SANH_NHAN_MAX_TOKENS", raising=False)
+        S.goi_mot(ncc("x"), t, post=self._post_cat(ghi))
+        assert ghi[-1]["max_tokens"] == 2400
+        for v, mong in (("3", 600), ("0", 200), ("-5", 200), ("abc", 2400), ("", 2400)):
+            monkeypatch.setenv("SO_SANH_NHAN_MAX_TOKENS", v)
+            S.goi_mot(ncc("x"), t, post=self._post_cat(ghi))
+            assert ghi[-1]["max_tokens"] == mong, v
+
+    def test_tham_so_them_cua_nha_cung_cap_de_len_than_yeu_cau(self):
+        ghi = []
+        S.goi_mot(ncc("x", them={"enable_thinking": False}), S.tao_task()[0], post=self._post_cat(ghi))
+        assert ghi[0]["enable_thinking"] is False and ghi[0]["model"] == "x-m"

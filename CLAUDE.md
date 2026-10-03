@@ -122,8 +122,12 @@ may TU KEO viec qua git (`viec/cho` -> `viec/xong`, `viec/may` = nhip tim). Chi 
   them gi; dem / di vang de runner khong-LLM (`b cau chay`). Cua so nen ngu canh: `.claude/settings.json` (autoCompactWindow 300000), phien tuy y
   `/autocompact 300k`; `/effort high|medium` cho viec co hoc, `max` chi cho thiet ke kho. Vao phien nha lan dau: `tai_lieu/BAT_DAU_O_NHA.md`.
   Thu nam trong repo PUBLIC: khong dan khoa/token.
-- **tho (model re - DeepSeek qua cc-switch)**: `b nc tho` KHAM PHA tren doan kham_pha, ghi so tay nguon 'tho'.
-  KHONG xac_nhan / niem_phong / xuat_mq5. `q` (qwen) la bo chay TU DONG DAI NGAY tren may nha va dung chung hop thu nay.
+- **tho (model re qua AI Box - chot 03/10/2026, thu nha c91d)**: `b nc tho [--sau]` KHAM PHA tren doan kham_pha, ghi so tay nguon 'tho'.
+  KHONG xac_nhan / niem_phong / xuat_mq5. Model MAC DINH `ds/deepseek-flash`, DU PHONG `qwen3.8-max-0902` (`config/qwen.json`): sai 2 lan LIEN TIEP
+  -> doi sang du phong DUNG MOT LAN, van hong -> dong vong LOI (khong im lang); `--sau` = bat dau bang du phong (viec can suy luan sau). Khoa: bien
+  `AIBOX_API_KEY` hoac cc-switch `aibox` (khong bao gio vao repo). Khong cai Qwen Code / DeepSeek Harness. `q` (qwen) la bo chay TU DONG DAI NGAY
+  tren may nha, dung chung cau hinh model + hop thu nay. So sanh + ly do: `tai_lieu/SO_SANH_LLM.md`. (`nhan/tri_tue.py` / `config/tri_tue.json` =
+  boc ma SEEKER giu qwen3.7-flash: do rieng 05/09 tren viec boc ma.)
 
 ## TRINH DUYET AI + NGUON DIEN DAN DA NGON NGU (chu du an 03/10/2026 toi)
 

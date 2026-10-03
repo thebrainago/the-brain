@@ -123,7 +123,7 @@ LENH_B: dict[tuple, Hinh] = {
     ("nc", "kiem"): Hinh([(_so(0, 100), False)]),
     ("nc", "bot"): Hinh([(_so(1, 10), False)]),
     ("nc", "tu-lai"): Hinh([(_MA.match, True), (_khung, False)], {"--khong-niem-phong": None}),
-    ("nc", "tho"): Hinh(co={"--vong": _so(1, 200), "--cong-cu": _so(1, 200)}),
+    ("nc", "tho"): Hinh(co={"--vong": _so(1, 200), "--cong-cu": _so(1, 200), "--sau": None}),
     ("nc", "cc"): Hinh([(_cong_cu, True), (_json_obj, False)]),
     ("nc", "hoi"): Hinh([(_van_ban(10, 800), True), (_thuc01, False)]),     # cau hoi cua CHU DU AN vao so tay (nguon 'nguoi')
     ("hepha", "do"): Hinh(),

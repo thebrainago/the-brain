@@ -14,13 +14,20 @@ Task (9, ~15k token / nha cung cap / lan; `--dai` them 1 task ngu canh dai ~12k 
 Cham THANG/HOA/THUA tung task, khong chi diem TB: mau nho thi chenh < 0,1 la nhieu. Ket luan: chenh diem >= 0,1 -> chon diem cao; con lai chon re hon.
 
 Khoa KHONG nam trong repo/chat. Moi nha cung cap `P` (deepseek, qwen, hoac ten bat ky) lay theo thu tu:
-  1. bien moi truong  SO_SANH_<P>_KHOA (hoac DEEPSEEK_API_KEY / DASHSCOPE_API_KEY) + SO_SANH_<P>_URL + SO_SANH_<P>_MO_HINH
+  1. bien moi truong  SO_SANH_<P>_KHOA (hoac DEEPSEEK_API_KEY / DASHSCOPE_API_KEY / AIBOX_API_KEY) + SO_SANH_<P>_URL + SO_SANH_<P>_MO_HINH
   2. cc-switch (may nha): provider co ten chua `deepseek` / `aibox` (hoac SO_SANH_<P>_CC)
 Tuy chon: SO_SANH_<P>_GIA_VAO / _GIA_RA (USD / 1 trieu token; khong khai thi chi phi ghi 'chua khai'), SO_SANH_<P>_THEM = JSON them vao than
 yeu cau (vd {"enable_thinking": false} cho Qwen3).
 
+Ho so co ten san tren AI Box (thu nha c91d 03/10/2026; chi can AIBOX_API_KEY hoac cc-switch `aibox`; model o day THANG model cua cc-switch):
+  ds = ds/deepseek-flash (MAC DINH cua he) · qwen38 = qwen3.8-max-0902 (DU PHONG) · qwen38f = qwen3.8-flash · kimi = kimi-k3 · glm = glm-5.3
+  (kimi / glm: ID theo thu c91d, CHUA thu - sai ID thi AI Box tra loi 4xx, dem vao `loi`; doi ID bang SO_SANH_KIMI_MO_HINH...).
+  `deepseek` / `qwen` giu nguyen nghia cu (cai gi cc-switch / bien SO_SANH_* tro toi).
+Mo hinh suy luan an token suy luan TRONG max_tokens: `SO_SANH_NHAN_MAX_TOKENS` (mac dinh 12) nhan tran cua moi task; luot nao van bi cat
+(finish=length) duoc DANH DAU `bi_cat` + canh bao trong ket luan: do la CHUA DO DUOC, khong phai diem kem.
+
     b so-sanh --khai                          in cach giai quyet tung nha cung cap (KHONG goi, KHONG in khoa)
-    b so-sanh [--nha-cung-cap deepseek,qwen] [--task a,b] [--lan 2] [--dai] [--json]
+    b so-sanh [--nha-cung-cap ds,qwen38] [--task a,b] [--lan 2] [--dai] [--json]
 """
 from __future__ import annotations
 
@@ -34,9 +41,15 @@ import time
 from pathlib import Path
 
 LAB = Path(__file__).resolve().parent.parent
+_AIBOX = {"url": "https://api.ai-box.vn/v1", "cc": "aibox", "khoa_env": ("AIBOX_API_KEY",), "co_dinh": True}
 MAC_DINH = {
     "deepseek": {"url": "https://api.deepseek.com", "cc": "deepseek", "khoa_env": ("DEEPSEEK_API_KEY",), "mo_hinh": "deepseek-chat"},
     "qwen": {"url": "", "cc": "aibox", "khoa_env": ("DASHSCOPE_API_KEY",), "mo_hinh": ""},
+    "ds": dict(_AIBOX, mo_hinh="ds/deepseek-flash"),
+    "qwen38": dict(_AIBOX, mo_hinh="qwen3.8-max-0902"),
+    "qwen38f": dict(_AIBOX, mo_hinh="qwen3.8-flash"),
+    "kimi": dict(_AIBOX, mo_hinh="kimi-k3"),                # ID theo thu c91d, CHUA thu
+    "glm": dict(_AIBOX, mo_hinh="glm-5.3"),                 # ID theo thu c91d, CHUA thu
 }
 LAN_MAC_DINH = 2
 
@@ -70,8 +83,12 @@ def nha_cung_cap(ten: str, env=None, cc=None) -> dict:
     if not khoa:
         d = (cc or _cc_switch)(env.get("SO_SANH_%s_CC" % P) or md.get("cc") or ten)
         if d.get("khoa"):
-            khoa, url, mo_hinh, nguon = d["khoa"], env.get("SO_SANH_%s_URL" % P) or d.get("base_url") or url, \
-                env.get("SO_SANH_%s_MO_HINH" % P) or d.get("model") or mo_hinh, "cc-switch:%s" % d.get("ten", "")
+            u_cc = d.get("base_url") or ""
+            if url and ("127.0.0.1" in u_cc or "localhost" in u_cc):
+                u_cc = ""                                   # co URL that san thi khong lay cau noi Codex (chi cho /v1/responses)
+            m_cc = "" if md.get("co_dinh") else (d.get("model") or "")      # ho so co ten: model cua ho so thang model cua cc-switch
+            khoa, url, mo_hinh, nguon = d["khoa"], env.get("SO_SANH_%s_URL" % P) or u_cc or url, \
+                env.get("SO_SANH_%s_MO_HINH" % P) or m_cc or mo_hinh, "cc-switch:%s" % d.get("ten", "")
     thieu = [n for n, v in (("khoa", khoa), ("url", url), ("mo_hinh", mo_hinh)) if not v]
     if thieu:
         raise ThieuCauHinh("%s: thieu %s - dat SO_SANH_%s_KHOA/_URL/_MO_HINH (hoac them provider vao cc-switch o may nha)" % (ten, ", ".join(thieu), P))
@@ -159,18 +176,26 @@ def cham_spec_co_che(tra: dict, k: int = 5) -> tuple:
 
 
 def cham_goi_cong_cu(tra: dict) -> tuple:
+    """Dap an dung: MOT loi goi `tim_quy_luat(ma=AUDCAD, khung=H4, so_null=200)`. Goi THEM cong cu doc-chi da cap (xem_so_tay) la hop ly - doc
+    so tay truoc khi tim (Qwen3.8 hay lam vay; ban cham cu chi xet loi goi DAU nen cho 0 diem, thu c91d 03/10). Tru 0,2 neu goi cong cu
+    KHONG co trong danh sach cap (bia ten)."""
     tc = tra.get("tool_calls") or []
     if not tc:
         return 0.0, "khong goi cong cu (tra loi bang chu)"
-    f = (tc[0].get("function") or {})
+    ten = [str((c.get("function") or {}).get("name") or "") for c in tc]
+    phat = 0.2 if any(n not in {t["function"]["name"] for t in TOOLS} for n in ten) else 0.0
+    i = next((k for k, n in enumerate(ten) if n == "tim_quy_luat"), None)
+    if i is None:
+        return 0.0, "khong goi tim_quy_luat (goi: %s)" % ", ".join(ten)[:80]
+    a = (tc[i].get("function") or {}).get("arguments")
     try:
-        a = json.loads(f.get("arguments") or "{}")
+        a = json.loads(a or "{}") if isinstance(a, str) or a is None else a
     except ValueError:
-        return 0.25 if f.get("name") == "tim_quy_luat" else 0.0, "arguments khong phai JSON"
-    if f.get("name") != "tim_quy_luat":
-        return 0.0, "goi nham cong cu %r" % f.get("name")
+        return max(0.0, 0.25 - phat), "arguments khong phai JSON"
+    if not isinstance(a, dict):
+        return max(0.0, 0.25 - phat), "arguments khong phai JSON object"
     d = 0.4 + 0.2 * (str(a.get("ma", "")).upper() == "AUDCAD") + 0.2 * (str(a.get("khung", "")).upper() == "H4") + 0.2 * _co_so(a.get("so_null"), 200, 0)
-    return d, "args=%s" % json.dumps(a, ensure_ascii=False)[:80]
+    return max(0.0, d - phat), "args=%s%s" % (json.dumps(a, ensure_ascii=False)[:80], "; them: " + ", ".join(n for n in ten if n != "tim_quy_luat") if len(ten) > 1 else "")
 
 
 def cham_trich_bang(tra: dict) -> tuple:
@@ -291,10 +316,18 @@ def tao_task(dai: bool = False) -> list[dict]:
 
 
 # ------------------------------------------------------------------ chay
+def _nhan_max_tokens() -> int:
+    """Bien `SO_SANH_NHAN_MAX_TOKENS` (mac dinh 12); gia tri rac / <= 0 khong duoc lam chet ca lan so sanh."""
+    try:
+        return max(1, int(os.environ.get("SO_SANH_NHAN_MAX_TOKENS") or 12))
+    except ValueError:
+        return 12
+
+
 def goi_mot(ncc: dict, task: dict, post=None, timeout: int = 150) -> dict:
     # Mo hinh suy luan (deepseek flash, qwen max) tieu token suy luan TRONG max_tokens -> 200-300 la noi dung rong (do 03/10: deepseek 0,07
     # diem vi finish=length). SO_SANH_NHAN_MAX_TOKENS nhan tran len de cham cong bang; tok_ra van tinh token that.
-    nhan = max(1, int(os.environ.get("SO_SANH_NHAN_MAX_TOKENS", "1") or 1))
+    nhan = _nhan_max_tokens()
     than = {"model": ncc["mo_hinh"], "max_tokens": task.get("max_tokens", 400) * nhan, "temperature": 0.2,
             "messages": [{"role": "user", "content": task["nhac"]}]}
     if task.get("tools"):
@@ -305,16 +338,18 @@ def goi_mot(ncc: dict, task: dict, post=None, timeout: int = 150) -> dict:
         r = (post or _post_that)(ncc, than, timeout)
     except Exception as e:                                  # noqa: BLE001
         return {"loi": "%s: %s" % (type(e).__name__, str(e)[:160]), "giay": round(time.time() - t0, 2), "tok_vao": 0, "tok_ra": 0}
-    m = ((r.get("choices") or [{}])[0].get("message") or {})
+    ch = (r.get("choices") or [{}])[0]
+    m = (ch.get("message") or {})
     u = r.get("usage") or {}
     return {"text": (m.get("content") or ""), "tool_calls": m.get("tool_calls") or [], "giay": round(time.time() - t0, 2),
-            "tok_vao": int(u.get("prompt_tokens") or 0), "tok_ra": int(u.get("completion_tokens") or 0)}
+            "tok_vao": int(u.get("prompt_tokens") or 0), "tok_ra": int(u.get("completion_tokens") or 0),
+            "bi_cat": ch.get("finish_reason") == "length"}
 
 
 def so_sanh(ds_ncc: list[dict], ds_task: list[dict], lan: int = LAN_MAC_DINH, post=None) -> dict:
     kq: dict = {"luc": time.strftime("%Y-%m-%d %H:%M:%S"), "lan": lan, "task": [t["ten"] for t in ds_task], "ncc": {}}
     for ncc in ds_ncc:
-        ra = {"mo_hinh": ncc["mo_hinh"], "nguon": ncc["nguon"], "task": {}, "tok_vao": 0, "tok_ra": 0, "loi": 0, "giay": []}
+        ra = {"mo_hinh": ncc["mo_hinh"], "nguon": ncc["nguon"], "task": {}, "tok_vao": 0, "tok_ra": 0, "loi": 0, "bi_cat": 0, "giay": []}
         for t in ds_task:
             diem, ghi = [], []
             for _ in range(lan):
@@ -328,6 +363,9 @@ def so_sanh(ds_ncc: list[dict], ds_task: list[dict], lan: int = LAN_MAC_DINH, po
                     ghi.append("LOI " + tra["loi"])
                     continue
                 d, g = t["cham"](tra)
+                if tra.get("bi_cat"):
+                    ra["bi_cat"] += 1
+                    g += " [BI CAT: het max_tokens]"
                 diem.append(round(d, 3))
                 ghi.append(g)
             ra["task"][t["ten"]] = {"diem": diem, "tb": round(sum(diem) / len(diem), 3), "ghi": ghi}
@@ -340,10 +378,38 @@ def so_sanh(ds_ncc: list[dict], ds_task: list[dict], lan: int = LAN_MAC_DINH, po
     return kq
 
 
+def _canh_bao_cat(kq: dict) -> str:
+    cat = [(n, r.get("bi_cat", 0)) for n, r in kq["ncc"].items() if r.get("bi_cat")]
+    if not cat:
+        return ""
+    return (" CANH BAO: " + ", ".join("%s bi cat %d luot" % x for x in cat)
+            + " do het max_tokens -> diem cua cac luot do CHUA DO DUOC (tang SO_SANH_NHAN_MAX_TOKENS roi chay lai), khong phai kem.")
+
+
+def _ket_luan_nhieu(kq: dict) -> str:
+    xep = sorted(kq["ncc"].items(), key=lambda kv: -kv[1]["tb"])
+    dong = " > ".join("%s %.3f" % (n, r["tb"]) for n, r in xep)
+    (a, ra), gan = xep[0], [(n, r) for n, r in xep if xep[0][1]["tb"] - r["tb"] < 0.1]
+    if len(gan) == 1:
+        return "Xep hang (diem TB): %s. CHON %s (hon cai ke tiep >= 0,1)." % (dong, a)
+    cp = [(n, r.get("chi_phi_usd")) for n, r in gan]
+    if all(c is not None for _, c in cp):
+        n, c = min(cp, key=lambda x: x[1])
+        return "Xep hang (diem TB): %s. %d cai GAN NHAU (chenh < 0,1, mau nho): chon RE HON = %s (%.5f USD)." % (dong, len(gan), n, c)
+    return "Xep hang (diem TB): %s. %d cai gan nhau (chenh < 0,1); chua khai gia (SO_SANH_<P>_GIA_VAO/_GIA_RA) nen chua chon theo chi phi (token ra: %s)." % (
+        dong, len(gan), ", ".join("%s %d" % (n, r["tok_ra"]) for n, r in gan))
+
+
 def ket_luan(kq: dict) -> str:
+    return _ket_luan_hai(kq) + _canh_bao_cat(kq)
+
+
+def _ket_luan_hai(kq: dict) -> str:
     t = list(kq["ncc"].items())
     if len(t) < 2:
         return "Chi co 1 nha cung cap: khong co gi de so sanh."
+    if len(t) > 2:
+        return _ket_luan_nhieu(kq)
     (a, ra), (b, rb) = t[0], t[1]
     thang = sum(1 for k in kq["task"] if ra["task"][k]["tb"] > rb["task"][k]["tb"] + 0.05)
     thua = sum(1 for k in kq["task"] if rb["task"][k]["tb"] > ra["task"][k]["tb"] + 0.05)
@@ -369,13 +435,15 @@ def bao_cao(kq: dict) -> str:
     dong.append("%-22s" % "giay trung vi/goi" + "".join("%12.1f" % kq["ncc"][n]["giay_trung_vi"] for n in ten))
     dong.append("%-22s" % "chi phi USD" + "".join("%12s" % ("chua khai" if kq["ncc"][n]["chi_phi_usd"] is None else "%.4f" % kq["ncc"][n]["chi_phi_usd"]) for n in ten))
     dong.append("%-22s" % "loi goi" + "".join("%12d" % kq["ncc"][n]["loi"] for n in ten))
+    if any(kq["ncc"][n].get("bi_cat") for n in ten):
+        dong.append("%-22s" % "bi cat (length)" + "".join("%12d" % kq["ncc"][n].get("bi_cat", 0) for n in ten))
     dong.append("mo hinh: " + " · ".join("%s=%s (%s)" % (n, kq["ncc"][n]["mo_hinh"], kq["ncc"][n]["nguon"]) for n in ten))
     dong.append("KET LUAN: " + kq["ket_luan"])
     return "\n".join(dong)
 
 
 def _khai() -> int:
-    for ten in ("deepseek", "qwen"):
+    for ten in MAC_DINH:
         try:
             d = nha_cung_cap(ten)
             print("%-9s OK  mo_hinh=%s nguon=%s url=%s gia=%s/%s" % (ten, d["mo_hinh"], d["nguon"], d["url"], d["gia_vao"], d["gia_ra"]))
@@ -398,7 +466,7 @@ def main(argv: list[str]) -> int:
 
     def co(ten, mac_dinh=None):
         return argv[argv.index(ten) + 1] if ten in argv and argv.index(ten) + 1 < len(argv) else mac_dinh
-    ten = [x for x in (co("--nha-cung-cap", "deepseek,qwen") or "").split(",") if x]
+    ten = [x for x in (co("--nha-cung-cap", "ds,qwen38") or "").split(",") if x]
     try:
         ds_ncc = [nha_cung_cap(x) for x in ten]
     except ThieuCauHinh as e:

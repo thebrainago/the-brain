@@ -18,10 +18,10 @@ theo huong khac thi tac tu van phai giu dung luat cua no.
 """
 from __future__ import annotations
 
+import sys
 import time
 
 from . import cau_hinh as CH
-from . import cong_cu as CC
 from . import mo_hinh as MH
 
 HE_THONG = """Ban la qwen, dang chay tiep du an nghien cuu dinh luong "The Brain"
@@ -66,23 +66,46 @@ CACH VIET: tieng Viet, ngan, di thang van de. Moi bang so phai co SO LENH.
 Khong viet dai dong. Khong khen. Neu khong chac thi noi la khong chac."""
 
 
-def _tac_tu(cong_cu=None):
+def _tac_tu(cong_cu=None, model=None):
     from langchain.agents import create_agent
+    from . import cong_cu as CC          # nap muon: import module nay khong doi langchain (test `hoi` o cloud)
     c = CH.nap()
-    return create_agent(model=MH.chat(c), tools=cong_cu or CC.BO_CONG_CU,
+    return create_agent(model=MH.chat(c, model=model), tools=cong_cu or CC.BO_CONG_CU,
                         system_prompt=HE_THONG)
 
 
-def hoi(nhac: str, so_vong: int = 12) -> str:
-    """Chay tac tu mot luot. Tra ve van ban cuoi cung."""
-    try:
-        g = _tac_tu()
-        r = g.invoke({"messages": [{"role": "user", "content": nhac}]},
-                     {"recursion_limit": so_vong * 2})
-        tin = r["messages"][-1]
-        return (getattr(tin, "content", "") or "").strip()
-    except Exception as e:
-        return "!! tac tu loi: %s: %s" % (type(e).__name__, str(e)[:300])
+def _van_ban(noi_dung) -> str:
+    """`content` co the la chuoi hoac danh sach khoi {type:'text', text:...} (tuy mo hinh)."""
+    if isinstance(noi_dung, list):
+        noi_dung = "".join(k.get("text", "") if isinstance(k, dict) else str(k) for k in noi_dung)
+    return (noi_dung or "").strip()
+
+
+def hoi(nhac: str, so_vong: int = 12, sau: bool = False) -> str:
+    """Chay tac tu mot luot. Tra ve van ban cuoi cung.
+
+    Model: `config/qwen.json` -> `model` (ds/deepseek-flash); sai `leo_thang_sau_lan_sai` (2) lan
+    lien tiep (loi goi, het vong, tra rong) thi doi sang `model_du_phong` (qwen3.8 max).
+    `sau=True` = viec can suy luan sau: di thang model du phong (manh hon, cham hon, dat hon).
+    Moi lan DOI model in mot dong ra stderr de nguoi doc log thay tien dang di len.
+    """
+    loi = []
+    ke_hoach = MH.ke_hoach_thu(CH.nap(), sau)
+    for i, m in enumerate(ke_hoach):
+        if i and m != ke_hoach[i - 1]:
+            print("[tac tu] %s sai %d lan lien tiep -> doi sang %s"
+                  % (ke_hoach[i - 1], i, m), file=sys.stderr, flush=True)
+        try:
+            g = _tac_tu(model=m)
+            r = g.invoke({"messages": [{"role": "user", "content": nhac}]},
+                         {"recursion_limit": so_vong * 2})
+            tl = _van_ban(getattr(r["messages"][-1], "content", ""))
+            if tl:
+                return tl
+            loi.append("%s: tra rong" % m)
+        except Exception as e:
+            loi.append("%s: %s: %s" % (m, type(e).__name__, str(e)[:200]))
+    return "!! tac tu loi: " + " | ".join(loi or ["khong co model nao trong config/qwen.json"])[:600]
 
 
 # ------------------------------------------------------------------ ba luc
@@ -134,6 +157,7 @@ def kiem() -> str:
 if __name__ == "__main__":
     import sys
     from . import bang_viec as BV
+    from . import cong_cu as CC
     from . import so_tay as ST
     CC.NGU_CANH["so_tay"] = ST.SoTay()
     CC.NGU_CANH["bang"] = BV.BangViec()

@@ -1,7 +1,8 @@
-# SO SÁNH MODEL RẺ: DeepSeek vs Qwen (chuẩn bị 02/10/2026, chạy 03/10)
+# SO SÁNH MODEL RẺ: DeepSeek vs Qwen (chuẩn bị 02/10/2026, chạy thật 03/10, **chốt 03/10 đêm**)
 
-> Chủ dự án: *"mai tôi sẽ gọi lại API cho cậu so sánh giữa DeepSeek và Qwen"*. Công cụ đã viết và test bằng nhà cung cấp giả
-> (`test_so_sanh_llm.py`, 17 test); **chưa chạy với API thật**. Mã: `nhan/so_sanh_llm.py`, lệnh `b so-sanh`.
+> Chủ dự án: *"mai tôi sẽ gọi lại API cho cậu so sánh giữa DeepSeek và Qwen"*. Công cụ chấm bằng mã, test bằng nhà cung cấp giả
+> (`test_so_sanh_llm.py`, 36 test). Máy nhà đã chạy thật một lần tối 03/10 (mục "03/10 toi" cuối file) và **quyết định đã nối vào hệ
+> thống** ở mục "03/10 đêm - QUYẾT ĐỊNH ĐÃ NỐI". Mã: `nhan/so_sanh_llm.py`, lệnh `b so-sanh`.
 
 ## Việc của chủ dự án (3 bước, ~5 phút)
 
@@ -53,3 +54,32 @@ Chủ dự án có một nguồn API LLM giá rẻ (tài liệu `https://home.ai
 - API: `https://api.ai-box.vn/v1/chat/completions`. `ds/deepseek-flash` chay; `deepseek-v4.1-flash` tra 503 luc do. Khoa nam o `E:\api.txt` (khong vao repo).
 - Lan 1 (tran token cu 200-300): deepseek 0,07 vs qwen 0,92 - SAI LECH DO BO CHAM: mo hinh suy luan tieu token suy luan trong `max_tokens` nen noi dung rong (finish=length). Da them `SO_SANH_NHAN_MAX_TOKENS` (nhan tran).
 - Lan 2 (nhan x12): deepseek 0,906 vs qwen 0,854 (deepseek thang 2 / hoa 5 / thua 1). Token ra 14,6k vs 20,4k; do tre trung vi 3,1 s vs 15,9 s. Deepseek yeu o goi_cong_cu (0,5), qwen o goi_cong_cu (0,0) - ca hai can xem lai task nay truoc khi tin. CHUA co gia -> chua chon theo chi phi. Ket luan so bo: DeepSeek flash re hon va nhanh hon 5x, diem ngang; chua du de loai Qwen.
+
+## 03/10 đêm - QUYẾT ĐỊNH ĐÃ NỐI VÀO HỆ THỐNG (thư nhà c91d → cloud làm)
+
+**Chốt:** model mặc định `ds/deepseek-flash`, dự phòng `qwen3.8-max-0902`, cả hai qua AI Box (`https://api.ai-box.vn/v1`, kiểu OpenAI).
+Sai **2 lần liên tiếp** (lỗi gọi, trả rỗng, hoặc mọi công cụ trong một lượt bị từ chối) → đổi sang dự phòng **đúng một lần**; hỏng tiếp thì
+đóng vòng với trạng thái `LOI` và ném lỗi (không im lặng). Việc cần suy luận sâu: `--sau` (bắt đầu bằng model dự phòng).
+
+- **Vì sao (đo ở nhà 03/10, 8 task × 2 lượt):** điểm 0,906 vs 0,854 (chênh < 0,1 là nhiễu của mẫu nhỏ, nên điểm KHÔNG dùng để loại model nào);
+  độ trễ trung vị 3,1 s vs 15,9 s (DeepSeek flash nhanh ~5 lần); token ra 14,6k vs 20,4k. Chưa có giá → chưa chọn theo chi phí.
+- **Không cài Qwen Code / DeepSeek Harness:** hệ đã gọi API kiểu OpenAI trực tiếp, chỉ đổi `base_url` + `model`; thêm agent terminal là thêm một lớp mà
+  cổng chấm bằng mã (`qwen/cong.py`) vẫn phải đứng sau. Chưa có lý do đo được để thêm.
+- **Nối ở đâu:** `config/qwen.json` (`model`, `model_du_phong`, `leo_thang_sau_lan_sai`) · `qwen/mo_hinh.py` (`duong`: khoá từ biến `AIBOX_API_KEY` trước, rồi
+  cc-switch `aibox`; cc-switch chỉ cho KHOÁ, model và URL lấy ở config; `thu_tu_model`, `ke_hoach_thu`) · `qwen/tac_tu.py` (`hoi`, `sau=`) ·
+  `nhan/nc_tho.py` (`b nc tho [--sau]`, `goi_re` cho phần tóm tắt của `qwen/cau_git.py`) · danh sách trắng `qwen/cau_trang.py` (`--sau`).
+  Test: `test_ban_giao_llm.py`, `test_nc_tho.py` (21), `test_so_sanh_llm.py` (36). Đổi model chính tạm thời: `THO_MO_HINH`.
+- **Khoá:** chỉ ở MỘT nơi (`E:\api.txt` → biến môi trường User `AIBOX_API_KEY`, hoặc cc-switch). Không vào repo / thư / log; cloud không có khoá nên
+  **chưa gọi thử thật từ cloud** — mọi đường trên được test bằng nhà cung cấp giả.
+- **Đường KHÔNG đổi:** `nhan/tri_tue.py` + `config/tri_tue.json` (bóc mã / SEEKER: `qwen3.7-flash` tầng 1, `qwen3.6-flash` tầng 2). Đo riêng 05/09 trên
+  đúng việc bóc mã; muốn đổi thì đo lại bằng việc đó, không suy từ bảng này.
+- **Bộ chấm đã sửa (thư c91d):** `goi_cong_cu` nới — gọi thêm công cụ đọc-chỉ đã cấp (`xem_so_tay`) rồi mới `tim_quy_luat` vẫn đủ điểm, chỉ trừ 0,2 khi bịa tên
+  công cụ (bản cũ chỉ xét lời gọi ĐẦU nên Qwen, hay đọc sổ tay trước, bị 0,0 oan); trần token nhân 12 mặc định (`SO_SANH_NHAN_MAX_TOKENS`, giá trị rác → 12);
+  lượt bị cắt (`finish=length`) được đánh dấu `bi_cat` và kết luận ghi "CHƯA ĐO ĐƯỢC" thay vì coi là điểm kém; từ 3 nhà cung cấp trở lên có bảng xếp hạng.
+- **Hồ sơ có tên sẵn trên AI Box:** `ds`, `qwen38`, `qwen38f`, `kimi`, `glm` (`b so-sanh --khai` liệt kê). `kimi-k3` và `glm-5.3` lấy theo thư c91d,
+  **ID chưa thử**: sai ID thì AI Box trả 4xx, tính vào cột lỗi; đổi bằng `SO_SANH_KIMI_MO_HINH` / `SO_SANH_GLM_MO_HINH`.
+
+**Còn lại (không làm đêm ở nhà vì điện):** (1) chạy lại bảng với bộ chấm mới, NGẮN, khi chủ dự án bật máy:
+`b so-sanh --nha-cung-cap ds,qwen38,kimi,glm --lan 2` (~4 × 16 lời gọi), xong thì tắt máy; (2) chủ dự án điền giá vào/ra
+(`SO_SANH_<P>_GIA_VAO` / `_GIA_RA`, `THO_GIA_VAO` / `THO_GIA_RA` và bản `_DU_PHONG`) — mình không đoán giá; (3) nếu `kimi` / `glm` chạy được và hơn hẳn thì
+đổi `model_du_phong` trong `config/qwen.json` — một dòng, không sửa mã.

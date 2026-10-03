@@ -173,8 +173,14 @@ máy 20 luồng — hai trụ không tranh CPU của nhau.
 
 ## Đường LLM
 
-Khoá đọc **tại chỗ** từ `~/.cc-switch/cc-switch.db` (bảng `providers`, khớp tên
-bằng chuỗi con). Không chép sang dự án: một khoá API chỉ nên tồn tại ở một nơi.
+Khoá: biến môi trường `AIBOX_API_KEY` trước, rồi đọc **tại chỗ** từ `~/.cc-switch/cc-switch.db`
+(bảng `providers`, khớp tên bằng chuỗi con). Không chép sang dự án: một khoá API chỉ nên tồn tại ở một nơi.
+cc-switch chỉ cho KHOÁ — model và URL lấy ở `config/qwen.json`.
+
+**Model (chốt 03/10/2026, thư nhà c91d):** mặc định `ds/deepseek-flash` (nhanh, ít token), dự phòng `qwen3.8-max-0902`
+(suy luận sâu, chậm ~5 lần) — `config/qwen.json` → `model`, `model_du_phong`. Sai `leo_thang_sau_lan_sai` (2) lần LIÊN TIẾP
+(lỗi gọi, trả rỗng) thì đổi sang dự phòng đúng một lần (`mo_hinh.ke_hoach_thu`, `tac_tu.hoi`); `hoi(..., sau=True)` bắt đầu
+bằng dự phòng. Hỏng cả hai thì `hoi` trả chuỗi `!! tac tu loi: ...` ghi rõ từng model. Bảng đo + lý do: `tai_lieu/SO_SANH_LLM.md`.
 
 Gọi **thẳng** `https://api.ai-box.vn/v1`, không qua cầu nối `127.0.0.1:8317` —
 cầu nối đó dựng cho Codex CLI (Codex đòi `/v1/responses` mà AI Box không có).
