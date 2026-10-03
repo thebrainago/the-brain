@@ -3,19 +3,19 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-03 06:05 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 59f9bee · 1 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-03 10:17 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 49ce359 · 7 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
-  · 40dd6d0 CLAUDE.md: MUC TIEU CUOI cua chu du an (tim thu dang ra tien -> bien thanh cua ta)
-  · ed3d3fe TOC_DO_TEST: do duoc / chua do / bang quyet dinh toc do test + ban giao phien
-  · 92a8cd3 quet_luoi: quet tham so luoi trong MOT goi (chuan_bi/chay_mang tach tu chay, bit-y
-  · 503acd4 luoi: bar 0 chi tru spread lenh dau (khong phai tong ca chuoi) + phien ban engine 
-  · 764dde6 test_ea_tho: thu tu bo cong cu chi kiem tien to, khong kiem duoi danh sach
+  · 49ce359 link_chay: tham do trang, nap tha_vao, thu hoach tai khoan xem + 52 test
+  · 1ad1a44 boc_lich_su: bao cao HTML MT5 nhieu bang - chon Positions, khong chon Deals/Orders
+  · 5b79100 link_nguon: nhan link rieng + phan loai + ke hoach cao + nhip lich su; passview: d
+  · b3a4663 cloud: don may-do-nhanh-dau
+  · 3850254 cloud: don may-quet-dau
 - Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 12, nha->cloud 4
   · moi nhat cloud->nha (gio may gui 2026-10-03T06:02:53): CHI THI #4 UU TIEN: MOT con mau di het day chuyen
 - May:
   · nha RANH ma=9429269+sua nhip 2026-10-02T23:30:26 (gio may)
-- Don: cho 1 · dang 1 · xong 1 (DAT 1)
+- Don: cho 7 · dang 1 · xong 1 (DAT 1)
 - Du lieu: kho gia /home/user/the-brain/data: 0 file .parquet · so_cai/doan.json CHUA CO (tao o lan nap() dau, PHAI commit+push ngay) · so_cai/nc 0 file 0 KB
 - Cau hinh: config/cau.json khong co (phien cloud)
 <!-- AUTO:HET -->

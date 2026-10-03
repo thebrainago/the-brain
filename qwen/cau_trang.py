@@ -73,6 +73,16 @@ def _khung(s: str) -> bool:
     return s in _KHUNG
 
 
+def _ma_hex10(s: str) -> bool:
+    return re.fullmatch(r"[0-9a-f]{10}", s) is not None
+
+
+def _url_cho_tham_do(s: str) -> bool:
+    """Link CONG KHAI duoc tham do qua don: https + ten mien da duyet, khong rieng (`link_nguon.cho_tham_do`)."""
+    from nhan import link_nguon as LN
+    return len(s) <= 400 and s.isprintable() and LN.cho_tham_do(s)[0]
+
+
 class Hinh:
     """Mot hinh lenh: `pos` = [(ham_kiem, bat_buoc)...] theo thu tu; `co` = {"--co": ham_kiem | None (co khong gia tri)}."""
 
@@ -133,6 +143,14 @@ LENH_B: dict[tuple, Hinh] = {
     ("may", "bao-cao"): Hinh(),
     ("may", "do"): Hinh(co={"--nhanh": None, "--ep": None, "--toi-da": _so(1, 64)}),
     ("may", "giam-sat"): Hinh([(_so(1, 180), False), (_so(5, 300), False)]),
+    # link chu du an (03/10/2026): chi cac lenh KHONG dung khoa / dang nhap cua chu du an. Khong co `them` / `nap-van-ban`
+    # (ghi vao link_rieng.txt rieng), `tai-khoan-xem` (mat khau investor), `--cdp` (Chrome da dang nhap), `telegram-*` (phien Telegram)
+    ("link", "ke-hoach"): Hinh(),
+    ("link", "chay"): Hinh(co={"--toi-da": _so(1, 40), "--theo-nen": _so(1, 10), "--lai": None}),
+    ("link", "tham-do"): Hinh([(_url_cho_tham_do, True)]),
+    ("link", "thu-muc"): Hinh(co={"--toi-thieu": _so(1, 100_000)}),
+    ("link", "bao-cao"): Hinh(),
+    ("link", "chia-se"): Hinh([(_ma_hex10, True)]),
 }
 #: `-m <module> ...`
 MODULE_M: dict[str, Hinh] = {

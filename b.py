@@ -68,6 +68,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
     b ho-so           HO SO HE THONG: mot file TU DU dua cho AI khong co dia
     b slot [kiem]     SLOT TESTER: may lan tester dung duoc, nang tran duoc chua
     b may [bao-cao|quet|mau|do|giam-sat]  MAY NHA: quet phan cung, DO toc do/gioi han, bao cao den XANH/VANG/DO
+    b link [chay|tham-do|thu-muc|...]  LINK chu du an -> tham do trang, nap bao cao lenh, thu hoach lich su (link_rieng.txt)
     b quantlab        QUY TRINH CHUAN 4 buoc: boc -> loc -> ho so -> ghep
     b phanh           han muc / kill-switch cua he chay that
     b quan-tri        75 khai bao quan tri -> MQL5 -> chen vao EA ngoai
@@ -695,6 +696,24 @@ def c_may(a):
     """
     from nhan import may_nha as MN
     return MN.main(list(a or []))
+
+
+def c_link(a):
+    """LINK CUA CHU DU AN -> tham do / nap tep / lich su lenh (nhan/link_nguon.py + nhan/link_chay.py).
+
+        b link                          ke hoach (khong goi mang): bao nhieu link, nen tang nao, lay bang cach nao
+        b link them <link/tin nhan>     them vao link_rieng.txt (khong len git) + tai khoan xem
+        b link nap-van-ban [tep|-]      nap ca doan tin nhan (tim link + tai khoan xem trong do)
+        b link chay [--toi-da N] [--theo-nen N] [--lai] [--cdp]   tham do MAU, ton trong robots + tan suat
+        b link tham-do URL [--cdp]      tham do MOT link
+        b link thu-muc [--toi-thieu N]  nap du_lieu_cao/tha_vao/ (bao cao HTML/CSV, Telegram result.json, zip)
+        b link tai-khoan-xem [--toi-da N]  thu hoach lich su bang tai khoan xem da luu (can MT5 o may nha)
+        b link bao-cao                  in lai bao cao
+        b link chia-se MA               gui tom tat cuc bo cua link CONG KHAI vao reports/
+    Dau ra chi gom so dem / ma bam, khong in link rieng. CHUA chay tren trang that: xem tai_lieu/LINK_NGUON.md.
+    """
+    from nhan import link_chay as LCH
+    return LCH.main(list(a or []))
 
 
 def c_github(a):
@@ -1423,6 +1442,7 @@ LENH = {
     "github": c_github, "gh": c_github,
     "slot": c_slot,
     "may": c_may,
+    "link": c_link,
     "ho-so": c_ho_so, "hs": c_ho_so,
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,

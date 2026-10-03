@@ -81,6 +81,8 @@ DSL (so do dong 38/55/60): `b nc cc ea_tho_kham|quet|chay|tinh`. Doan dong bang,
 
 **NGUON NGUOI THANG (03/10/2026, chu du an: 'khai thac he co lai san truoc, dung di duong vong')**: `tai_lieu/NGUON_NGUOI_THANG.md` - ban do nguon, so do that (31/400 ho so MQL5 song >=2 nam, 18 la luoi/DCA tren AUDCAD & anh em), thu tu A chay nguyen file -> B lich su winners -> luoi/DCA -> C cap (EA, tin hieu) -> D chup tuan. TradingView = nguon ma; cTrader = chua. Chua co `DAT` o xac_nhan thi KHONG mo them nguon/engine moi.
 
+**LINK CUA CHU DU AN (03/10/2026)**: `b link` (`tai_lieu/LINK_NGUON.md`) - link / tin nhan nhom -> phan loai -> tham do -> lich su lenh. Link rieng KHONG vao git (`link_rieng.txt`, `du_lieu_cao/`); **CHUA chay tren trang that**. Ba bot cu mat file (BigMouse, DCA Am Duong, BlackDragon): chu du an can LOGIC - `tai_lieu/BOT_CU_LOGIC.md`.
+
 ## LAM LAI TU DAU (chu du an chot 02/10/2026)
 
 May nha cai lai Windows, mat `nao.db`, `data/`, `ds/`... Chu du an: *"coi nhu du an duoc lam lai tu dau bai ban

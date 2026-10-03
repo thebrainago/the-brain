@@ -727,3 +727,54 @@ def test_ma_nguon_chi_chua_ascii_va_khong_in_url_rieng_ra_man_hinh():
     for dong in nguon.splitlines():
         if "print(" in dong and "in_ra" not in dong:
             assert 'url"' not in dong and "nhan" not in dong.replace("nhan import", "")
+
+
+# =============================================================== NOI VAO HE THONG: b link + DANH SACH TRANG
+def test_c_link_nam_trong_bang_LENH_va_goi_duoc_CLI(tmp_path, capsys):
+    import b as B
+    assert B.LENH["link"] is B.c_link
+    assert B.c_link(["bao-cao"]) == 0                                 # khong goi mang, khong can may that
+
+
+class TestDanhSachTrangLink:
+    from qwen import cau_trang as CT                                    # noqa: E402  (chi dung trong lop nay)
+
+    @pytest.mark.parametrize("lenh", [
+        ["{py}", "b.py", "link", "ke-hoach"],
+        ["{py}", "b.py", "link", "chay"],
+        ["{py}", "b.py", "link", "chay", "--toi-da", "12", "--theo-nen", "2", "--lai"],
+        ["{py}", "b.py", "link", "tham-do", "https://mql5.com/signals/2331122"],
+        ["{py}", "b.py", "link", "tham-do", "https://www.myfxbook.com/members/abc/def/123456"],
+        ["{py}", "b.py", "link", "thu-muc"],
+        ["{py}", "b.py", "link", "thu-muc", "--toi-thieu", "30"],
+        ["{py}", "b.py", "link", "bao-cao"],
+        ["{py}", "b.py", "link", "chia-se", "0123456789"],
+    ])
+    def test_cho_qua(self, lenh):
+        assert self.CT.kiem_lenh(lenh) is None, self.CT.kiem_lenh(lenh)
+
+    @pytest.mark.parametrize("lenh", [
+        ["{py}", "b.py", "link"],                                           # phai goi ro lenh con
+        ["{py}", "b.py", "link", "them", "https://mql5.com/signals/1"],     # ghi vao link_rieng.txt: chi chu du an
+        ["{py}", "b.py", "link", "nap-van-ban", "-"],
+        ["{py}", "b.py", "link", "tai-khoan-xem"],                          # dung mat khau investor da luu
+        ["{py}", "b.py", "link", "telegram-quet"],                          # dung phien Telegram cua chu du an
+        ["{py}", "b.py", "link", "chay", "--cdp"],                          # Chrome da dang nhap
+        ["{py}", "b.py", "link", "tham-do", "https://mql5.com/signals/1", "--cdp"],
+        ["{py}", "b.py", "link", "chay", "--toi-da", "41"],
+        ["{py}", "b.py", "link", "chay", "--toi-da", "0"],
+        ["{py}", "b.py", "link", "chay", "--toi-da"],
+        ["{py}", "b.py", "link", "chay", "--toi-da", "5; rm -rf /"],
+        ["{py}", "b.py", "link", "chay", "--lai", "--lai"],
+        ["{py}", "b.py", "link", "tham-do"],                                # thieu URL
+        ["{py}", "b.py", "link", "tham-do", "http://mql5.com/signals/1"],   # khong https
+        ["{py}", "b.py", "link", "tham-do", "https://evil.example/x"],      # ten mien chua duyet
+        ["{py}", "b.py", "link", "tham-do", "https://127.0.0.1/x"],
+        ["{py}", "b.py", "link", "tham-do", "https://facebook.com/groups/abc"],
+        ["{py}", "b.py", "link", "tham-do", "https://mql5.com/signals/1?token=abc"],
+        ["{py}", "b.py", "link", "chia-se", "xyz"],
+        ["{py}", "b.py", "link", "chia-se", "0123456789", "extra"],
+        ["{py}", "b.py", "link", "bao-cao", "--ghi"],
+    ])
+    def test_tu_choi(self, lenh):
+        assert self.CT.kiem_lenh(lenh) is not None
