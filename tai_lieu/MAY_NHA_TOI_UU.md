@@ -175,3 +175,15 @@ Cai nghen thuc su: ...
 MT5: UOC N = ... | Buoc 1 T1 = ... giay | Buoc 2 T2 = ... | TOI DA that = ...
 Dia: o ..: ghi ... MB/s, ... IOPS (kieu ...)
 ```
+
+## 10. CO CAN THUE VPS KHONG (03/10/2026, tra loi chu du an - chua do, chua thue)
+
+**Ket luan: CHUA thue ngay.** Thue khi da co it nhat MOT EA qua cong that (`DAT` o xac_nhan) de chay demo / forward 24/7. Luc do VPS la de GIU EA SONG, khong phai de test nhanh hon.
+
+- **VPS KHONG giup:** (a) quet / backtest nhanh hon - vCPU thue yeu, it nhan, it RAM hon may nha 10 nhan/20 luong; viec dang lam hon la them thanh RAM thu hai CUNG LOAI de chay 2 kenh (muc 5).
+  (b) cao web - IP datacenter hay bi MQL5 / Myfxbook chan hon IP nha; viec cao giu o may nha (`b link`, `LINK_NGUON.md`).
+- **VPS CO giup:** (1) demo / forward-test chay lien tuc khi may nha tat, mat dien, cai lai Windows; (2) mot ban SAO LUU NGOAI MAY (bai hoc 02/10: cai lai Windows mat het `nao.db`, `data/`, file bot);
+  (3) la "may thu hai" cho `b cau chay` (kenh cau da ho tro: `b cau cai URL NHANH --ten T --kha-nang ...`) - nhung van chi MOT may la [GHI] (tester, `nao.db`).
+- **Sao luu ngay bay gio KHONG ton tien:** o HDD 230 GB la o VAT LY RIENG nen song sot khi cai lai Windows tren o C - dua `data/`, `nao.db`, `du_lieu_cao/`, `config/passview.json`, file `.set/.ex5/.mq5` da co vao do (dinh ky), va 1 ban nua ra ngoai may (o USB / kho luu tru rieng tu). KHONG dua vao git (repo PUBLIC).
+- **Khi den luc thue:** can Windows VPS (MT5 chay tren Windows), khoang 2-4 vCPU / 4-8 GB RAM, gia xap xi 10-30 USD/thang (CON SO XAP XI, kiem lai luc thue); VPS cua chinh MetaQuotes (khoang 15 USD/thang, kiem lai) chi chay EA, khong chay duoc he thong Python cua ta.
+  Dieu kien: chu du an dong y chi phi · tai khoan MT5 DEMO rieng cho VPS · khong dua khoa / mat khau vao repo · ket qua demo van chi tinh la GIA THUYET cho den khi co `DAT`.
