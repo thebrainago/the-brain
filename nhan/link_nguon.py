@@ -502,6 +502,7 @@ _UU_TIEN = {
     ("telegram", "kenh_cong_khai"): 20, ("telegram", "moi_vao_nhom"): 20, ("telegram", "tin_nhan_rieng"): 20,
     ("telegram", "tin_nhan_cong_khai"): 21, ("github", "kho_ma"): 22, ("mql5", "ma_nguon"): 23,
     ("mql5", "san_pham_market"): 24, ("ctrader", "thuat_toan"): 25, ("tradingview", "pine_script"): 26,
+    ("rut_gon", "chuyen_huong"): 5,           # 1 yeu cau chuyen huong re nhat, va cho biet dich den that (co the la tai khoan cong khai)
 }
 _THU_TU_CACH = {"http": 0, "giai_ma": 0, "cdp": 1, "telethon": 2, "thu_cong": 3, "khong_ho_tro": 4}
 _TEN_NEN = {"mql5": "MQL5", "myfxbook": "Myfxbook", "fxblue": "FX Blue", "darwinex": "Darwinex", "tradingview": "TradingView",
