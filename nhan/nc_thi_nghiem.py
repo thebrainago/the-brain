@@ -1181,22 +1181,47 @@ def boc_lich_su(ma: str, khung: str = "M15", tep: str | None = None, lenh: list 
     return ra
 
 
+def _cap_sut_giam_ung_vien(e: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Ranh gioi Pareto cua cac cap (dinh `a`, day-sau-no `b`) cua duong von `e`: tap NHO NHAT chua cap cho sut giam
+    cuc dai voi moi von + k*(e - von), k > 0. O(n): day sau = min luy ke tu duoi len; day thay doi it lan
+    (vai tram) nen gom khoi theo day roi lay dinh cao nhat moi khoi."""
+    m = np.minimum.accumulate(e[::-1])[::-1]                  # m[i] = min(e[i:]) - khong giam theo i
+    dau = np.concatenate(([0], np.flatnonzero(m[1:] != m[:-1]) + 1))   # dau moi khoi cung day
+    a = np.maximum.reduceat(e, dau)                          # dinh cao nhat cua khoi
+    b = m[dau]
+    # khoi sau co day CAO hon (khong tot hon) -> chi giu neu dinh cua no cao hon moi dinh truoc do
+    truoc = np.concatenate(([-np.inf], np.maximum.accumulate(a)[:-1]))
+    giu = a > truoc
+    return a[giu], b[giu]
+
+
 def _he_so_lot_tai_tran(equity: np.ndarray, von: float, dd_tran: float = DD_TRAN,
                         k_toi_da: float = 1000.0) -> float | None:
     """He so lot k de maxDD cua duong von + k*(equity - von) cham (duoi) tran. None = khong tinh duoc.
 
     DD tang theo k (moi cap dinh/day: k*d/(von + k*P) tang theo k), nen chia doi dung.
+
+    TOC DO (03/10/2026): ban cu tinh lai sut giam tren CA duong von (190.000 bar) 80 lan chia doi - 139 ms, chiem 88%
+    thoi gian mot lan `danh_gia_luoi` sau khi nhan C lam `luoi.chay` nhanh x89. Nhung sut giam cuc dai chi phu thuoc
+    mot so it CAP (dinh, day sau no), va tap cap ung vien KHONG doi theo k: voi moi diem i, day tot nhat la min cua
+    duong von tu i tro di (`m`). Cap (a = e_i, b = m_i) bi loai neu co cap khac a' >= a va b' <= b (dinh cao hon, day
+    thap hon -> `1 - v_b/v_a` khong nho hon voi MOI k > 0, ke ca sau lam tron vi phep +, *, / lam tron deu don dieu).
+    Giu lai ranh gioi Pareto (vai tram cap thay vi 190.000 diem), tinh dd(k) tren do - CUNG cong thuc tung cap nen
+    ket qua giong ban cu den tung bit (test_he_so_lot_tran.py so voi ban cu tren duong von ngau nhien).
     """
     e = np.asarray(equity, float)
     if len(e) < 2 or not np.all(np.isfinite(e)) or von <= 0:
         return None
     muc = float(dd_tran) - 1e-3
+    e_min = float(e.min())
+    a_f, b_f = _cap_sut_giam_ung_vien(e)
 
     def dd(k: float) -> float:
-        v = von + k * (e - von)
-        if np.any(v <= 0):
-            return 1.0
-        return VL._sut_giam(v)
+        if von + k * (e_min - von) <= 0:       # = np.any(v <= 0) vi phep tinh don dieu theo e; chi de ro nghia 'chet' (cong thuc
+            return 1.0                          # duoi cung ra >= 1 o day nen phan loai khong doi neu bo)
+        va = von + k * (a_f - von)
+        vb = von + k * (b_f - von)
+        return float(np.max(1.0 - vb / np.maximum(va, 1e-12)))
 
     if dd(k_toi_da) < muc:
         return k_toi_da
