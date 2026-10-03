@@ -406,6 +406,24 @@ CONG_CU: list[dict] = [
         lambda ma, khung="M15", tep=None, lenh=None, doan="kham_pha", pip=None, lech_gio=None, so_null=200,
         phat=True, hop_dong=None, gt_id=None, vong_id=None, **_:
         TN.boc_lich_su(ma, khung, tep, lenh, doan, pip, lech_gio, int(so_null), bool(phat), hop_dong, gt_id, vong_id)),
+    _cc("quet_luoi",
+        "QUET THAM SO he LUOI (nhan/luoi.py) trong MOT lan goi, tren doan KHAM PHA - thay cho hang tram lan goi thu_luoi (moi lan goi = "
+        "mot vong LLM = token). `luoi` = {tham_so: [gia tri,...]} (toi da 6 truc, 40 gia tri/truc, tich Descartes; qua toi_da_o thi lay mau "
+        "theo hat), `co_dinh` = tham so khong doi (cung ten voi thu_luoi: buoc, tp, tran_tang, che_do, lot, kieu_lot, he_so_lot, tia_lenh, "
+        "bien_cap, cap_moi_bar, cho_lui, chot_tien, he_so_buoc, buoc_tran). Moi o chay CHINH engine cua thu_luoi (co test doi chieu so) va "
+        "tinh lai o he so lot cham tran maxDD 80%. Ra: HINH DANG (CAO_NGUYEN / CAI_GAI / HON_HOP / KHONG_CO_LAI), ty le o co lai, hang xom "
+        "cua o tot nhat, bang_top, `tham_so_day_du` cua o tot nhat. O tot nhat la cuc dai cua N o nen la LUA CHON chua phai phep do: di tiep "
+        "bang thu_luoi tren xac_nhan. Moi o la mot phep thu (so_phep_thu = so o da chay). Khong co tham so doan: chi kham_pha. Ma/chi phi/"
+        "quy cach nhu thu_luoi. Nhan C (`python -m nhan.luoi_nhan trang-thai`) lam moi o nhanh ~100 lan; khong co thi moi o ~1 s / 190.000 bar.",
+        {"ma": _MA, "khung": _KHUNG,
+         "luoi": {"type": "object", "description": "{tham_so: [gia tri,...]}, vd {\"buoc\": [10,15,20], \"tp\": [8,12]}"},
+         "co_dinh": {"type": "object", "description": "tham so ThamSo khong doi trong luot quet"},
+         "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
+         "toi_da_o": {"type": "integer", "description": "tran so o (mac dinh 300, toi da 1000); vuot thi lay mau theo hat"},
+         "hat": {"type": "integer", "description": "hat lay mau khi tich Descartes vuot toi_da_o (mac dinh 0)"},
+         "gt_id": _GT}, ["ma", "khung", "luoi"],
+        lambda ma, khung, luoi=None, co_dinh=None, von=10000.0, toi_da_o=300, hat=0, gt_id=None, vong_id=None, **_:
+        TN.quet_luoi(ma, khung, co_dinh, luoi, float(von), gt_id, vong_id, int(toi_da_o), int(hat))),
 ]
 THEO_TEN = {c["ten"]: c for c in CONG_CU}
 #: Cong cu chi GHI so tay (khong do gi) - van duoc goi khi het ngan sach chu ky.

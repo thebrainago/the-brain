@@ -538,7 +538,8 @@ def test_cong_cu_boc_lich_su_co_trong_bo_va_schema_hop_le():
     t = CC.THEO_TEN["boc_lich_su"]
     assert len(t["mo_ta"]) > 40 and t["schema"]["required"] == ["ma"]
     assert {"ma", "khung", "tep", "lenh", "doan", "lech_gio", "so_null", "phat", "gt_id"} <= set(t["schema"]["properties"])
-    assert [c["ten"] for c in CC.CONG_CU][-1] == "boc_lich_su"       # them o CUOI: giu thu tu schema (cache prompt)
+    ten = [c["ten"] for c in CC.CONG_CU]
+    assert ten.count("boc_lich_su") == 1 and ten.index("boc_lich_su") > ten.index("ea_tho_tinh")   # them SAU: giu thu tu schema (cache prompt)
     assert "niem_phong" in t["mo_ta"] and "GIA THUYET" in t["mo_ta"]
 
 

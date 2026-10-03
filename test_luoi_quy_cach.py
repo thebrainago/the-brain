@@ -480,7 +480,7 @@ def test_moi_truong_thamso_hoac_duoc_doc_hoac_bi_tu_choi():
     va nguoc lai: da cai dat roi thi phai go khoi danh sach (khong de chan nham)."""
     import dataclasses
     import inspect
-    nguon = inspect.getsource(LU._mot_ro) + inspect.getsource(LU.chay)
+    nguon = inspect.getsource(LU._mot_ro) + inspect.getsource(LU.chay) + inspect.getsource(LU.chay_mang)
     for f in dataclasses.fields(LU.ThamSo):
         doc = ("ts." + f.name) in nguon
         assert doc != (f.name in LU.CHUA_CAI_DAT), (

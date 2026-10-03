@@ -571,13 +571,22 @@ def _bang_lenh(nhat_ky: dict, idx, qc: QuyCach):
     return d
 
 
-def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None, ghi_lenh: bool = False) -> KetQuaLuoi:
-    """Mo phong day du tren mot khung du lieu. `von` bang dong BAO GIA. `qc` None = AUDCAD cu.
+@dataclass(frozen=True)
+class DuLieuChay:
+    """Mang numpy cua MOT chuoi + MOT quy cach, dung chung cho nhieu lan `chay_mang` (quet tham so). Chi doc: `chay_mang` va
+    nhan C khong ghi len no, nen nhieu luong dung chung duoc."""
+    hi: np.ndarray
+    lo: np.ndarray
+    cl: np.ndarray
+    sp: np.ndarray                  # spread theo GIA (cot POINT x point; bar bang 0 thay bang trung vi)
+    dem: np.ndarray                 # so dem qua dem giua hai bar lien tiep (ngay)
+    idx: object                     # chi so thoi gian cua khung (pandas DatetimeIndex)
+    qc: QuyCach
 
-    `ghi_lenh=True`: them `KetQuaLuoi.lenh` (danh sach lenh mo phong). Khong doi bat ky con so nao khac."""
-    chua = tham_so_chua_cai_dat(ts)
-    if chua:
-        raise ValueError("tham so %s da khai bao nhung luoi.py CHUA cai dat: dat != 0 se bi bo qua am tham" % chua)
+
+def chuan_bi(df, qc: QuyCach | None = None) -> DuLieuChay:
+    """Doi khung du lieu thanh mang numpy mot lan (spread, qua dem). `chay` = `chuan_bi` + `chay_mang`: cung mot duong tinh,
+    nen quet N cau hinh chi tra chi phi nay mot lan thay vi N lan (~9 ms / 190.000 bar moi lan)."""
     qc = qc or QC_AUDCAD
     hi = df["high"].to_numpy(float)
     lo = df["low"].to_numpy(float)
@@ -591,6 +600,25 @@ def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None, ghi_lenh: bool =
     idx = df.index
     dem = np.zeros(len(df))
     dem[1:] = np.diff(idx.values).astype("timedelta64[s]").astype(float) / 86400.0
+    return DuLieuChay(hi, lo, cl, sp, dem, idx, qc)
+
+
+def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None, ghi_lenh: bool = False) -> KetQuaLuoi:
+    """Mo phong day du tren mot khung du lieu. `von` bang dong BAO GIA. `qc` None = AUDCAD cu.
+
+    `ghi_lenh=True`: them `KetQuaLuoi.lenh` (danh sach lenh mo phong). Khong doi bat ky con so nao khac."""
+    chua = tham_so_chua_cai_dat(ts)
+    if chua:
+        raise ValueError("tham so %s da khai bao nhung luoi.py CHUA cai dat: dat != 0 se bi bo qua am tham" % chua)
+    return chay_mang(chuan_bi(df, qc), ts, von, ghi_lenh)
+
+
+def chay_mang(dl: DuLieuChay, ts: ThamSo, von: float, ghi_lenh: bool = False) -> KetQuaLuoi:
+    """Phan con lai cua `chay` tren mang da chuan bi - tung bit nhu `chay(df, ts, von, qc)`."""
+    chua = tham_so_chua_cai_dat(ts)
+    if chua:
+        raise ValueError("tham so %s da khai bao nhung luoi.py CHUA cai dat: dat != 0 se bi bo qua am tham" % chua)
+    qc, hi, lo, cl, sp, dem, idx = dl.qc, dl.hi, dl.lo, dl.cl, dl.sp, dl.dem, dl.idx
 
     chieus = {"mua": (1,), "ban": (-1,), "hai_chieu": (1, -1)}[ts.che_do]
     lais, treos, tks, nhat_ky = [], [], [], {}
