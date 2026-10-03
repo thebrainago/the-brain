@@ -368,7 +368,8 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
         return ts.lot
 
     def _buoc(k: int) -> float:
-        """Khoang cach tu tang k den tang k+1 (pip), co gian dan va tran."""
+        """Khoang cach tu tang k den tang k+1 (pip, k tinh tu 0), co gian dan va tran. Goi voi `so_tang - 1`:
+        khoang cach DAU TIEN = `buoc` (truoc 03/10/2026 goi nham `so_tang` -> khoang dau = buoc * he_so_buoc)."""
         if ts.he_so_buoc == 1.0:
             return ts.buoc
         return min(ts.buoc * (ts.he_so_buoc ** k), ts.buoc_tran)
@@ -413,7 +414,7 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
                 continue
         # ---- 1. BAT LOI TRUOC: them tang ----
         if len(vao) < ts.tran_tang:
-            moc = vao[-1][0] - chieu * _buoc(so_tang) * pip
+            moc = vao[-1][0] - chieu * _buoc(so_tang - 1) * pip
             while (lo[i] <= moc if chieu > 0 else hi[i] >= moc):
                 phi_sp += spread_gia[i] * _lot(so_tang) * hop
                 vao.append((moc, _lot(so_tang)))
@@ -425,7 +426,7 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
                 so_lenh += 1
                 if len(vao) >= ts.tran_tang:
                     break
-                moc = moc - chieu * _buoc(so_tang) * pip
+                moc = moc - chieu * _buoc(so_tang - 1) * pip
         if not vao:
             lai_arr[i] = lai - phi_sp - phi_sw
             treo_arr[i] = 0.0

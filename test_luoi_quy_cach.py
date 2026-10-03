@@ -71,6 +71,8 @@ def _tom_tat(kq, von: float) -> dict:
 
 
 #: SINH TU BAN CU cua luoi.py (truoc khi them QuyCach) bang `_sinh_golden()`. KHONG sua tay.
+#: NGOAI LE 03/10/2026: 'gian_dan' sinh lai sau khi sua loi lech mot nac cua `_buoc` (khoang dau tien = buoc, khong phai
+#: buoc * he_so_buoc) - xem test_khoang_cach_gian_dan_tinh_bang_tay. Cac ca khac KHONG doi mot bit.
 GOLDEN = {'chay_giua_chung': {'bar_chay': 695,
                      'chay': True,
                      'eq_cuoi': 0.0,
@@ -118,19 +120,19 @@ GOLDEN = {'chay_giua_chung': {'bar_chay': 695,
                    'tang_max': 7},
  'gian_dan': {'bar_chay': None,
               'chay': False,
-              'eq_cuoi': 10303.016259445942,
-              'eq_min': 9993.305568153,
-              'eq_tong': 60834532.62753357,
-              'lai_gop': 444.0,
-              'lai_rong': 314.8509330395919,
-              'lo_treo_dinh': 44.371564037803296,
-              'loi_suat_nam_pct': 18.548274724630794,
-              'maxdd_pct': -0.2504697745782991,
-              'phi_spread': 110.77000000000004,
-              'phi_swap': 18.37906696040806,
-              'so_lenh': 449,
-              'so_ro': 189,
-              'tang_max': 6},
+              'eq_cuoi': 10358.468377509236,
+              'eq_min': 9992.20544526764,
+              'eq_tong': 61009900.04212849,
+              'lai_gop': 529.0,
+              'lai_rong': 372.42593056717124,
+              'lo_treo_dinh': 50.123213388548194,
+              'loi_suat_nam_pct': 21.940092119299884,
+              'maxdd_pct': -0.2703620682947383,
+              'phi_spread': 134.77000000000004,
+              'phi_swap': 21.804069432828754,
+              'so_lenh': 534,
+              'so_ro': 202,
+              'tang_max': 7},
  'mac_dinh': {'bar_chay': None,
               'chay': False,
               'eq_cuoi': 10387.431515779064,
@@ -536,3 +538,26 @@ def test_ghi_lenh_ban_chi_co_lenh_ban_va_chieu_ghi_dung():
     assert (b.lenh["ro"] % 2 == 1).all(), "ro cua chieu ban danh so le"
     h = LU.chay(df, LU.ThamSo(buoc=15, tp=10, tran_tang=12), 10000.0, ghi_lenh=True)
     assert set(h.lenh["chieu"]) == {1, -1} and h.lenh.attrs["pip"] == LU.QC_AUDCAD.pip
+
+
+# ------------------------------------------------------------------ 8. KHOANG CACH GIAN DAN (tinh bang tay)
+@pytest.mark.parametrize("che_do,chieu", [("mua", 1), ("ban", -1)])
+def test_khoang_cach_gian_dan_tinh_bang_tay(che_do, chieu):
+    """Khoang dau tien = `buoc`, tiep theo nhan he_so_buoc, chan `buoc_tran`: buoc 10, he 2, tran 30 -> 10, 20, 30, 30 pip.
+    (Truoc 03/10/2026 engine goi `_buoc(so_tang)` thay vi `_buoc(so_tang - 1)`: khoang dau = buoc * he_so_buoc, lech moi ro
+    gian dan mot nac so voi tai lieu va `mo_phong_v2.py`.) Duong gia dung cho gia di mot mach qua tat ca cac moc."""
+    pip = LU.QC_AUDCAD.pip
+    n = 4
+    idx = pd.date_range("2024-01-01", periods=n, freq="15min")
+    g0 = 1.0000
+    xa = g0 - chieu * 200 * pip                       # lui sau 200 pip nguoc chieu lenh: cham het cac tang
+    hi = [g0, g0, g0, g0] if chieu > 0 else [g0, xa, xa, xa]
+    lo = [g0, xa, xa, xa] if chieu > 0 else [g0, g0, g0, g0]
+    close = [g0, xa, xa, xa]
+    df = pd.DataFrame({"open": [g0, g0, xa, xa], "high": hi, "low": lo, "close": close, "spread": 0.0}, index=idx)
+    kq = LU.chay(df, LU.ThamSo(che_do=che_do, buoc=10, he_so_buoc=2.0, buoc_tran=30.0, tp=500, tran_tang=5, lot=0.01),
+                 1e9, ghi_lenh=True)
+    gia = kq.lenh.sort_values("tang")["gia_mo"].to_numpy()
+    khoang = [round(chieu * (a - b) / pip, 6) for a, b in zip(gia[:-1], gia[1:])]
+    assert len(gia) == 5 and gia[0] == g0
+    assert khoang == [10.0, 20.0, 30.0, 30.0], khoang
