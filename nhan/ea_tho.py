@@ -80,6 +80,7 @@ MAC_DINH = {
     "da_hieu_chuan_lenh_mo": False,
     "nhan_them": {},                      # nhan bao cao ban ngu chua co mau: {"so_lenh": "..."}
     "tu_nap": True,                       # chua co doan dong bang thi nap du lieu de dong bang
+    "tep_san": [],                        # tep ma EA can ma may nay DA CO trong terminal: ["MultiPivots.mqh", "ZigZagPro"]
 }
 
 #: Ham de thay khi test / o may khong co MT5: f(lenh, ea, cfg) -> {xong, bao_cao, log, giay, loi}
@@ -158,17 +159,64 @@ def phan_tich_vao_lenh(code: str) -> dict:
             "co_vao_ngoai_ham": bool(_VAO.search(code)) and not co_vao}
 
 
+_GIU_CHUOI = re.compile(r'("(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\')|//[^\n]*|/\*.*?\*/', re.S)
+
+#: Thu vien chuan cua MT5 (MQL5\Include): thu muc con + tep le. `#include <...>` ngoai tap nay la cua tac gia EA.
+_INC_CHUAN_THU_MUC = frozenset("trade arrays indicators math strings files charts canvas controls expert generic "
+                               "chartobjects tools graphics lang opencl winapi".split())
+_INC_CHUAN_TEP = frozenset("object.mqh stdliberr.mqh virtualkeys.mqh movingaverages.mqh stdlib.mqh stderror.mqh".split())
+
+
+def _bo_chu_thich(ma_nguon: str) -> str:
+    """Bo chu thich, GIU chuoi (can duong dan include): `// #include <x>` va khoi /* ... */ khong tinh."""
+    return _GIU_CHUOI.sub(lambda m: m.group(1) or " ", ma_nguon or "")
+
+
+def _include_la(ma_nguon: str) -> list[str]:
+    ra = []
+    for p in re.findall(r"^[ \t]*#include[ \t]+<([^>\n]+)>", _bo_chu_thich(ma_nguon), re.M):
+        d = p.replace("\\", "/").strip()
+        chuan = d.lower().split("/", 1)[0] in _INC_CHUAN_THU_MUC if "/" in d else d.lower() in _INC_CHUAN_TEP
+        if not chuan and d not in ra:
+            ra.append(d)
+    return ra
+
+
 def can_tep(ma_nguon: str, code: str) -> dict:
-    """Tep/dich vu ngoai ma EA can: thieu thi bien dich hong hoac tester khong vao lenh."""
+    """Tep/dich vu ngoai ma EA can: thieu thi bien dich hong hoac tester khong vao lenh.
+    `include_cuc_bo` = #include "x" (canh file EA); `include_la` = #include <x> KHONG thuoc thu vien chuan MT5
+    (do 22 EA that: 9/16 chien luoc thieu .mqh cua tac gia kieu nay - truoc day lot tien kiem, chi hong luc bien dich)."""
+    ma = _bo_chu_thich(ma_nguon)
     return {
-        "include_cuc_bo": re.findall(r'^[ \t]*#include[ \t]+"([^"]+)"', ma_nguon, re.M),
-        "icustom": sorted(set(re.findall(r'\biCustom\s*\([^;"]*"([^"]+)"', ma_nguon))),
-        "tester_indicator": re.findall(r'#property[ \t]+tester_indicator[ \t]+"([^"]+)"', ma_nguon),
-        "resource": re.findall(r'^[ \t]*#resource[ \t]+"([^"]+)"', ma_nguon, re.M),
-        "dll": re.findall(r'^[ \t]*#import[ \t]+"([^"]+\.dll)"', ma_nguon, re.M | re.I),
+        "include_cuc_bo": re.findall(r'^[ \t]*#include[ \t]+"([^"]+)"', ma, re.M),
+        "include_la": _include_la(ma_nguon),
+        "icustom": sorted(set(re.findall(r'\biCustom\s*\([^;"]*"([^"]+)"', ma))),
+        "tester_indicator": re.findall(r'#property[ \t]+tester_indicator[ \t]+"([^"]+)"', ma),
+        "resource": re.findall(r'^[ \t]*#resource[ \t]+"([^"]+)"', ma, re.M),
+        "dll": re.findall(r'^[ \t]*#import[ \t]+"([^"]+\.dll)"', ma, re.M | re.I),
         "web_hoac_socket": bool(re.search(r"\b(WebRequest|SocketCreate|SocketConnect)\s*\(", code)),
         "onnx": bool(re.search(r"\bOnnx\w*\s*\(", code)),
     }
+
+
+def _ten_tep(x: str) -> str:
+    return re.sub(r"\.(mqh|ex5|mq5|dll|bmp|wav|png|onnx|ico|ttf)$", "",
+                  str(x).replace("\\", "/").strip().lower().rsplit("/", 1)[-1])
+
+
+def tep_thieu(tep: dict, san: list[str] | None = None) -> list[str]:
+    """Phu thuoc MA EA CAN ma may nay KHONG co: ["include_la:MultiPivots.mqh", ...]. Rong = khong thay thieu gi.
+    `san` = ten tep da cai san trong terminal (config `tep_san`, so khop theo ten khong duoi). Chi bao mau
+    `Examples\\...` di kem MT5 coi nhu co san."""
+    co = {_ten_tep(x) for x in (san or [])}
+    ra = []
+    for k in ("include_cuc_bo", "include_la", "icustom", "tester_indicator", "resource", "dll"):
+        for x in tep.get(k, ()):
+            if k in ("icustom", "tester_indicator") and str(x).replace("\\", "/").lower().startswith("examples/"):
+                continue
+            if _ten_tep(x) not in co:
+                ra.append("%s:%s" % (k, x))
+    return ra
 
 
 _HO_TU_KHOA = {
@@ -210,7 +258,11 @@ def input_so(ma_nguon: str) -> list[dict]:
     return ra
 
 
-def phan_loai(ma_nguon: str, tieu_de: str = "", mo_ta: str = "") -> dict:
+LOI_KHAC_PHUC_TEP = ("tai GOI DAY DU cua tac gia (kem .mqh / chi bao), dat vao thu muc MQL5 cua terminal, "
+                     "roi them ten tep vao config/ea_tho.json -> tep_san")
+
+
+def phan_loai(ma_nguon: str, tieu_de: str = "", mo_ta: str = "", tep_san: list[str] | None = None) -> dict:
     """EA co phai CHIEN LUOC (tu vao lenh) khong. Do 12 EA that: 5 la cong cu, khong co lenh vao tu dong."""
     code = sach(ma_nguon)
     v = phan_tich_vao_lenh(code)
@@ -231,10 +283,11 @@ def phan_loai(ma_nguon: str, tieu_de: str = "", mo_ta: str = "") -> dict:
     tep = can_tep(ma_nguon, code)
     if tep["web_hoac_socket"]:
         ly_do.append("co WebRequest/Socket: tester chan - EA co the khong vao lenh trong tester")
-    for k in ("include_cuc_bo", "icustom", "tester_indicator", "resource", "dll"):
+    for k in ("include_cuc_bo", "include_la", "icustom", "tester_indicator", "resource", "dll"):
         if tep[k]:
             ly_do.append("can %s: %s" % (k, ", ".join(tep[k][:4])))
-    ra = {"loai": loai, "ly_do": ly_do, "vao": v, "can_tep": tep, "ho": ho_goi_y(code),
+    ra = {"loai": loai, "ly_do": ly_do, "vao": v, "can_tep": tep, "thieu_tep": tep_thieu(tep, tep_san),
+          "ho": ho_goi_y(code),
           "input_so": input_so(ma_nguon), "dai_ky_tu": len(ma_nguon or "")}
     ra["khung_goi_y"] = khung_goi_y(ma_nguon, tieu_de, mo_ta)
     return ra
@@ -490,15 +543,18 @@ def kham(ea: str, tieu_de: str = "", mo_ta: str = "", co_san: list[str] | None =
     co_san = co_san if co_san is not None else ma_co_san()
     d = doc_ea(ea)
     td = tieu_de or d["tieu_de"]
-    pl = phan_loai(d["ma"], td, mo_ta)
+    cfg = cau_hinh()
+    pl = phan_loai(d["ma"], td, mo_ta, cfg["tep_san"])
     ra = {"ea": d["ten"], "sha": d["sha"], "tieu_de": d["tieu_de"], "url": d["url"], "phan_loai": pl}
     if pl["loai"] != "CHIEN_LUOC":
         ra["ket_luan"] = "KHONG chay tester: %s" % pl["loai"]
         return ra
+    if pl["thieu_tep"]:
+        ra["ket_luan"] = ("CHIEN_LUOC nhung THIEU TEP, tester khong bien dich duoc: %s - %s"
+                          % (", ".join(pl["thieu_tep"][:4]), LOI_KHAC_PHUC_TEP))
     mk = chon_ma_khung(pl, d["ma"], td, mo_ta, co_san)
     ra["ma_khung"] = mk
     ra["de_xuat_tham_so"] = de_xuat_tham_so(pl["input_so"])
-    cfg = cau_hinh()
     ra["cua_so"] = {"%s|%s" % (u["ma"], u["khung"]): {dn: ke_hoach(u["ma"], u["khung"], dn, cfg)
                                                       for dn in NDL.DOAN} for u in mk["ung_vien"][:1]}
     return ra
@@ -678,6 +734,10 @@ def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = No
             kq["tu_so_tay"] = "thi nghiem %s da chay y het - tra ket qua cu, KHONG tinh them phep thu" % cu["id"]
             kq["tn_id"] = cu["id"]
             return kq
+    thieu = tep_thieu(can_tep(ea["ma"], sach(ea["ma"])), cfg["tep_san"])
+    if thieu:
+        return {"trang_thai": "CHUA_DO_DUOC", "ha_tang": True, "thieu_tep": thieu,
+                "ly_do": "EA can tep may nay khong co: %s - %s" % (", ".join(thieu[:4]), LOI_KHAC_PHUC_TEP)}
     return {"trang_thai": "SAN_SANG", "lenh": lenh}
 
 
@@ -817,6 +877,7 @@ def quet(eas: list[str] | str, doan: str = "kham_pha", toi_da_lan: int = 6, co_s
     Buoc 2: chay chien luoc o ma/khung nham toi (toi da 2 ung vien moi EA) cho den het `toi_da_lan` lan chay THAT
     (ket qua da co trong so tay tra ve tu so tay, khong tinh). Phan con lai nam o `con_lai`: goi lai la di tiep."""
     co_san = co_san if co_san is not None else ma_co_san()
+    tep_san = cau_hinh()["tep_san"]
     if isinstance(eas, str):
         eas = [eas]
     ds = []
@@ -833,9 +894,13 @@ def quet(eas: list[str] | str, doan: str = "kham_pha", toi_da_lan: int = 6, co_s
         except (KeyError, OSError, ValueError) as x:
             bo_qua.append({"ea": e, "loai": "KHONG_DOC_DUOC", "ly_do": "doc EA loi: %s" % x})
             continue
-        pl = phan_loai(d["ma"], d["tieu_de"])
+        pl = phan_loai(d["ma"], d["tieu_de"], tep_san=tep_san)
         if pl["loai"] != "CHIEN_LUOC":
             bo_qua.append({"ea": d["ten"], "loai": pl["loai"], "ly_do": pl["ly_do"][0]})
+            continue
+        if pl["thieu_tep"]:                         # khong tao gia thuyet / khong ton luot tester cho EA khong bien dich duoc
+            bo_qua.append({"ea": d["ten"], "loai": "THIEU_TEP", "tep": pl["thieu_tep"],
+                           "ly_do": "can %s - %s" % (", ".join(pl["thieu_tep"][:4]), LOI_KHAC_PHUC_TEP)})
             continue
         mk = chon_ma_khung(pl, d["ma"], d["tieu_de"], "", co_san, toi_da=2)
         for ma in mk["thieu_du_lieu"]:

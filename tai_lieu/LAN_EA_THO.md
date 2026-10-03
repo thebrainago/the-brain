@@ -19,7 +19,9 @@ trong `CC.THEO_TEN`, khong can sua whitelist). `ea` = duong dan .mq5 hoac `kho:<
 ## Cau hinh `config/ea_tho.json` (tuy chon; khoa la cac khoa cua `ea_tho.MAC_DINH`)
 `model` (4) · `von` (10000) · `don_bay` (100) · `han_giay` (1800) · `chat_luong_toi_thieu_pct` (90) ·
 `tick_tu` ("YYYY-MM-DD" ngay som nhat co tick that) · `hau_to_symbol` · `ban_do_symbol` ({"XM_US500CASH":"US500Cash"}) ·
-`da_hieu_chuan_lenh_mo` · `nhan_them` ({"so_lenh":"<nhan bao cao tieng Viet>"}) · `tu_nap`.
+`da_hieu_chuan_lenh_mo` · `nhan_them` ({"so_lenh":"<nhan bao cao tieng Viet>"}) · `tu_nap` · `tep_san` (["MultiPivots.mqh", "ZigZagPro"]: tep/chi bao EA can ma terminal nay DA CO; khop theo ten khong duoi).
+
+**`THIEU_TEP`**: EA can `.mqh` / chi bao / dll ma may chua co (vd `#include <MultiPivots.mqh>`) bi loai truoc khi chay, khong ton luot tester, khong tao gia thuyet. Tai GOI DAY DU cua tac gia, dat vao thu muc `MQL5` cua terminal, them ten vao `tep_san`, goi lai. Do 22 EA that: 9/16 chien luoc vap rao nay - day la rao lon nhat cua duong chay thang.
 
 ## Ky luat (cung bo luat cua `nc_thi_nghiem`)
 - Doan du lieu lay tu `so_cai/doan.json` (DONG BANG theo ngay) + 1 ngay cach ly. kham_pha va xac_nhan: cung van tay tra lai tu so tay.
@@ -39,6 +41,8 @@ trong `CC.THEO_TEN`, khong can sua whitelist). `ea` = duong dan .mq5 hoac `kho:<
 4. **`_chay_that`** (slot -> bien dich -> tester -> log agent) chua chay lan nao. Chay 1 EA dem duoc, doc truong `log` neu hong.
 
 ## Gioi han (noi that)
+`ea_tu_dong.tai_lo` chi lay van ban `.mq5` CHINH tren trang CodeBase (khong .zip, nghi 3 giay/bai): EA nhieu file mat `.mqh` -> `THIEU_TEP`. Tai goi day du can mot trang CodeBase that cua EA nhieu file lam fixture (cloud khong ra duoc mql5.com) - viec cua may nha, xem thu chi thi 03/10.
+
 Lan nay KHONG boc logic; no do EA nguyen ban. Y nghia: EA nao ra DAT tren xac_nhan la **manh moi co bang chung** cho nhanh
 boc tach (doc ma EA do de ra gia thuyet co che) va cho HEPHAESTUS (luoi tham so). EA tien ich (5/12 mau da do) bi bo, khong tinh.
 Nhanh nhat tim EA tot: EA ban cong khai co ho so tin hieu con song (MQL5 Signals) - tin hieu AUDCAD luoi/DCA chinh la loai nay.

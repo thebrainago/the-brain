@@ -335,7 +335,8 @@ CONG_CU: list[dict] = [
         "Xem MOT EA cong khai (MQL5 Code Base / Market) TRUOC khi chay: co phai CHIEN LUOC khong hay chi la cong "
         "cu (replay, dong lenh, giam sat, bang bam tay - khong tu vao lenh), tai san/khung nham toi KEM BANG CHUNG, "
         "input so, luoi tham so nho quanh mac dinh cua tac gia, cua so ngay kham_pha/xac_nhan/niem_phong da dong "
-        "bang. Thuan, khong chay tester. Goi truoc ea_tho_chay: EA co phieu khong duoc dat len EURUSD.",
+        "bang, va tep ngoai EA can ma may chua co (thieu_tep: .mqh cua tac gia trong dau <>, chi bao iCustom...). "
+        "Thuan, khong chay tester. Goi truoc ea_tho_chay: EA co phieu khong duoc dat len EURUSD.",
         {"ea": _EA, "tieu_de": {"type": "string", "description": "tieu de/mo ta trang nguon neu .mq5 khong co"},
          "mo_ta": {"type": "string"},
          "co_san": {"type": "array", "items": {"type": "string"},
@@ -355,7 +356,8 @@ CONG_CU: list[dict] = [
          "gt_id": _GT},
         ["ea", "ma", "khung"], _ea_tho_chay),
     _cc("ea_tho_quet",
-        "Quet NHIEU EA cong khai tren doan kham_pha: phan loai het (bo cong cu, bo EA ma may khong co tai san), "
+        "Quet NHIEU EA cong khai tren doan kham_pha: phan loai het (bo cong cu, bo EA ma may khong co tai san, bo EA "
+        "THIEU_TEP can .mqh/chi bao ma may chua cai), "
         "roi chay chien luoc o ma/khung nham toi, moi cap mot gia thuyet moi (tu ghi so tay). Dung de duyet kho EA "
         "da tai ('kho:*') - dung thay cho viet script lap. toi_da_lan gioi han so luot tester THAT (ket qua da co "
         "tra tu so tay, khong tinh); phan con lai nam o 'con_lai': goi lai de di tiep. Bang gon.",

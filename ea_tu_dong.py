@@ -101,8 +101,9 @@ def ten_sach(s: str) -> str:
     return re.sub(r"[^A-Za-z0-9]+", "_", s)[:40].strip("_") or "ea"
 
 
-def tai_lo(so_bai: int = 24, muc: str = "mt5/experts") -> list[dict]:
-    """Tai `so_bai` EA that tu MQL5 Code Base. Chi file .mq5 don, khong .zip."""
+def tai_lo(so_bai: int = 24, muc: str = "mt5/experts", nghi: float = 3.0) -> list[dict]:
+    """Tai `so_bai` EA that tu MQL5 Code Base. Chi lay van ban .mq5 CHINH tren trang (khong .zip): EA nhieu file mat
+    .mqh -> `nhan/ea_tho` loai THIEU_TEP. `nghi` = giay giua hai bai: mql5.com cam IP sau ~50-150 request, cham khong mat gi."""
     from tru import seeker as S
     S._ghi_con_tro("mql5_code", {"trang": {muc: 1}, "danh_muc_ke": 0})
     ds = [d for d in S.n_mql5_code([]) if muc.split("/")[-1] in d["tieu_de"]]
@@ -114,7 +115,7 @@ def tai_lo(so_bai: int = 24, muc: str = "mt5/experts") -> list[dict]:
             r = None
         if r and r.get("noi_dung"):
             ra.append({"url": d["url"], "ten": d["tieu_de"], "ma": r["noi_dung"]})
-        time.sleep(0.4)
+        time.sleep(nghi)
     KHO_EA.mkdir(parents=True, exist_ok=True)
     (KHO_EA / "kho.json").write_text(
         json.dumps(ra, ensure_ascii=False), encoding="utf-8")
@@ -374,11 +375,12 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tai", type=int, default=0, help="tai va bien dich N EA")
     ap.add_argument("--muc", default="mt5/experts")
+    ap.add_argument("--nghi", type=float, default=3.0, help="giay nghi giua hai bai tai (mql5.com cam IP neu don dap)")
     ap.add_argument("--terminal", default="exness")
     a = ap.parse_args()
 
     if a.tai:
-        ds = tai_lo(a.tai, a.muc)
+        ds = tai_lo(a.tai, a.muc, a.nghi)
         print(f"tai duoc {len(ds)} file .mq5")
         kq = bien_dich(ds, a.terminal)
         ok = sum(1 for x in kq if x["bien_dich"])

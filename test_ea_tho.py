@@ -140,6 +140,29 @@ def test_can_tep_va_canh_bao_phu_thuoc():
     assert any("WebRequest" in x for x in pl["ly_do"]) and any("include_cuc_bo" in x for x in pl["ly_do"])
 
 
+def test_include_la_phan_biet_thu_vien_chuan_va_tep_cua_tac_gia():
+    """Do 22 EA that: moi `#include <MultiPivots.mqh>` / `<HybridMicrostructure\\...>` deu la tep CUA TAC GIA nhung nam trong
+    dau <>; tien kiem cu chi bat dau kep nen chung chi hong luc bien dich (9/16 chien luoc)."""
+    ma = ('#include <Trade\\Trade.mqh>\n#include <Trade/SymbolInfo.mqh>\n#include <Arrays\\ArrayObj.mqh>\n'
+          '#include <Object.mqh>\n#include <MultiPivots.mqh>\n#include <HybridMicrostructure\\Core.mqh>\n'
+          '#include <MultiPivots.mqh>\n// #include <ChuThich.mqh>\n/* cu:\n#include <KhoiChuThich.mqh>\n*/\n'
+          'void OnTick(){ trade.Buy(0.1); }')
+    t = E.phan_loai(ma)["can_tep"]
+    assert t["include_la"] == ["MultiPivots.mqh", "HybridMicrostructure/Core.mqh"], "chuan, chu thich, trung: khong tinh"
+    assert t["include_cuc_bo"] == []
+
+
+def test_tep_thieu_khop_theo_ten_khong_duoi_va_chi_bao_examples_co_san():
+    ma = ('#include <MultiPivots.mqh>\n#include "Cuc.mqh"\n'
+          'void OnTick(){ iCustom(_Symbol,0,"Examples\\\\ZigZag",12); iCustom(_Symbol,0,"MyInd",1); '
+          '// iCustom(_Symbol,0,"DaBo",1)\n trade.Buy(1); }')
+    tep = E.can_tep(ma, E.sach(ma))
+    assert E.tep_thieu(tep) == ["include_cuc_bo:Cuc.mqh", "include_la:MultiPivots.mqh", "icustom:MyInd"]
+    assert E.tep_thieu(tep, ["multipivots", "Cuc.mqh", "MyInd.ex5"]) == []
+    assert E.phan_loai(ma)["thieu_tep"] == E.tep_thieu(tep)
+    assert E.phan_loai(ma, tep_san=["MultiPivots", "Cuc", "MyInd"])["thieu_tep"] == []
+
+
 def test_ho_goi_y_can_it_nhat_hai_tu_khoa():
     code = "input double LotMultiplier = 2; input int GridStep = 100; void OnTick() { /*recovery*/ trade.Buy(1); }"
     # 'recovery' nam trong chu thich: chi tinh tu khoa trong ten dinh danh THAT
@@ -578,6 +601,26 @@ def test_quet_bo_tien_ich_dat_ma_theo_bang_chung_va_het_ngan_sach(tmp_path, monk
     lan = t.lan
     r3 = E.quet("kho:*", toi_da_lan=30, co_san=["EURUSD", "XAUUSD"])
     assert t.lan == lan and r3["so_lan_chay"] == 0 and all(b["tu_so_tay"] for b in r3["bang"])
+
+
+def test_ea_thieu_tep_bi_loai_truoc_khi_tao_gia_thuyet_hay_ton_luot_tester(ea_cl, tmp_path, monkeypatch):
+    thieu = tmp_path / "ThieuTep.mq5"
+    thieu.write_text("#include <MultiPivots.mqh>\n" + CHIEN_LUOC, encoding="utf-8")
+    t = dat_tester(monkeypatch, tmp_path)
+    r = E.chay(str(thieu), "EURUSD", "H1")
+    assert r["trang_thai"] == "CHUA_DO_DUOC" and r["ha_tang"] and r["thieu_tep"] == ["include_la:MultiPivots.mqh"]
+    assert "tep_san" in r["ly_do"] and t.lan == 0 and dem("thi_nghiem") == 0, "thieu tep: khong tester, khong ghi so"
+    k = E.kham(str(thieu), "EURUSD H1 trend", co_san=["EURUSD"])
+    assert "THIEU TEP" in k["ket_luan"] and k["ma_khung"]["ung_vien"], "kham van cho thay ma/khung nham toi (de biet tai goi nao)"
+    q = E.quet([str(thieu), ea_cl], co_san=["EURUSD"], toi_da_lan=5)
+    assert [b["loai"] for b in q["bo_qua"] if b["ea"].startswith("ThieuTep")] == ["THIEU_TEP"]
+    assert q["so_lan_chay"] == len(q["bang"]) == t.lan >= 1
+    assert all(not l["ea_ten"].startswith("ThieuTep") for l in t.lenh)
+    assert dem("gia_thuyet", "nguon='ea_tho'") == len(q["bang"]), "khong tao gia thuyet cho EA khong chay duoc"
+    # khai bao tep da cai san -> qua tien kiem va duoc chay
+    (tmp_path / "ea_tho.json").write_text(json.dumps({"tu_nap": False, "tep_san": ["MultiPivots.mqh"]}), encoding="utf-8")
+    r2 = E.chay(str(thieu), "EURUSD", "H1")
+    assert r2["trang_thai"] == "DAT" and t.lan >= 2 and r2["tn_id"]
 
 
 # ============================================================ BO CONG CU (nc_cong_cu)

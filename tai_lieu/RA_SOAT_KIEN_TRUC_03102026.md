@@ -60,7 +60,7 @@ Cloud **khong the** backtest bat ky thu gi that: khong co gia, khong co MT5.
 - Moi thu tren la **vao qua cong boc bang regex/DSL**: 22 EA that -> 7 co che. Trong 12 EA `kho.json`, 5 la cong cu (khong co vao-lenh
   tu dong) - loai dung, khong phai that bai cua bo boc. Con lai: breakout khoang gia / ORB (8 EA), luoi hoi phuc (Sniper Gold Hybrid),
   Renko, ONNX (HybridMicrostructure). Mo rong regex khong dua ti le len nhieu: cai thieu la **trang thai** (khoang gia dau phien, co theo
-  ngay, dem vi the, lenh cho, last-fill), khong thieu bieu thuc.
+  ngay, dem vi the, lenh cho, last-fill), khong thieu bieu thuc. **(Qua gon - xem muc 8: co ba nut chan, khong phai mot.)**
 - So pheu (12.078 / 285 / 18 / 4.125) la so **truoc 02/10**, lay tu `HO_SO_HE_THONG` va nhat ky; `nao.db` da mat khi cai lai may nha,
   kho se dung lai tu dau - dung so nay lam moc xu huong, khong phai trang thai song.
 - Hieu: **chay thang EA** (manh C) bo qua hoan toan cai pheu nay cho moi EA co `OnTick`. Boc logic van can, nhung nen la buoc SAU khi mot
@@ -94,7 +94,7 @@ that** (da biet 1, da sua: `khoa_tien_trinh` pid 1). Ba ca da xac nhan co san tr
 **May nha (khi bat, ~5 gio nua):**
 1. Khoi phuc theo `KHOI_PHUC_MAY_NHA.md` (data, `b khoi-phuc`, dong bang `so_cai/doan.json` + COMMIT/PUSH ngay).
 2. **Hieu chuan EA tho** (4 diem, `LAN_EA_THO.md`) - cho EA mua-giu mau 60 ngay; luu 1 bao cao that vao `test_bao_cao_mt5.py`.
-3. `ea_tho_quet` tren `reports/ea/kho.json` (12 EA, ~7 chien luoc): cho ra **DAT/AM that dau tien** cua manh C. Dem rate-limited.
+3. `ea_tho_quet` tren `reports/ea/kho.json` (12 EA: 5 cong cu, 1 thieu tep `THIEU_TEP`, 1 co phieu AAPL bo vi may khong co ma, **con 5 chien luoc chay duoc**): cho ra **DAT/AM that dau tien** cua manh C. Dem rate-limited.
 4. Lay **it** fixture voi toc do thap (tranh cam IP): mot trang lich su signal MQL5, mot trang he thong cong khai Myfxbook, mot trang
    Market cua EA AUDCAD DCA con song. Cloud viet bo doc offline tu fixture; khong cao hang loat truoc khi co parser.
 5. Lich 5 phut (`b cau chay`), `b test` -> diff voi nen Linux, bo xuat M1 cua XM demo.
@@ -112,3 +112,38 @@ that** (da biet 1, da sua: `khoa_tien_trinh` pid 1). Ba ca da xac nhan co san tr
 
 **Khong lam:** cao them tai lieu hoc thuat de tim co che · mo rong regex boc khi chua co trang thai · tin DAT nao cua EA tho truoc
 hieu chuan · cham niem phong nhieu lan de "vot" ket qua (cap 3/dong gia thuyet).
+
+
+## 8. Bo sung (03/10 dem): phan loai tay 22 EA - sua mot nhan dinh o muc 4
+
+Mot subagent doc het 22 file (12 tac gia doc lap trong `kho.json` + 10 file `mau_thu/` cua **mot** tac gia) tren dau vao MAC DINH; moi
+nhan do duoc ban ma doi chieu (bang 22 dong nam trong phien, khong dua vao repo). Tu do ra:
+
+| 22 EA (16 chien luoc / 5 tien ich / 1 mau rong) | chien luoc |
+|---|---|
+| Diem vao dien duoc bang DSL hien co: DAY DU / MOT PHAN / KHONG | 6 / 6 / 4 - **ca 6 "day du" phai ghep TAY**, bo boc khong tu ghep |
+| Quan li lenh khop 20 nut `quan_tri.NUT_CHAY_DUOC` + `quan_tri_dsl`: DAY DU / MOT PHAN / KHONG | 10 / 5 / 0 (1 chua ro) |
+| **Chay thang tren tester nguyen ban**: duoc / rui ro / khong | **5 / 2 / 9** |
+
+1. **Chay thang (manh C) khong phu thuoc bo boc, chi vap MOT rao: thieu tep.** 9/16 chien luoc can `.mqh` cua tac gia trong dau `<>`
+   (`MultiPivots.mqh` o 8 file - chi khai bao o 3, dung that o 5; 3 tep `HybridMicrostructure\*.mqh`). Day la **lo hong cua chinh
+   `ea_tho.can_tep`** (chi bat `#include "x"` dau kep): da sua - `include_la` (ngoai thu vien chuan MT5, bo qua chu thich), `tep_thieu`,
+   config `tep_san`; `quet` loai `THIEU_TEP` **truoc** khi tao gia thuyet hay ton luot tester; chay don le tra `CHUA_DO_DUOC` `ha_tang`.
+   Do tren du lieu that: `kho.json` 1/7 chien luoc thieu tep, `mau_thu/` 8/9. Bo loc **bao thu** (khong phan biet "chi khai bao" voi
+   "dung that" vi khong co noi dung .mqh). **Bai hoc cho khau tai ve: lay CA GOI cua tac gia (kem .mqh / chi bao), khong chi .mq5.**
+2. **Nut chan cua manh B khong phai mot.** 16 chien luoc xep theo nut chinh: (iii) trang thai/quan li ma DSL vao-lenh dong-bar khong giu
+   duoc: **7** · (ii) thieu toan hang (Renko, Lyapunov, tick-VWAP, chi so suc manh tien, bo nho swing): **6** · (i) chinh bo boc: **5**
+   (cung mot tac gia, ho Breakout: DSL dien duoc roi nhung bo boc ra 0 co che). 7/6/5 la **da so mong, khong phai ap dao**, va mau lech
+   (9/16 cung tac gia) nen khong dung de dinh luong ty le.
+3. **DSL khong phai khong co trang thai.** Co `vung` (vung song theo su kien, ORB nam trong muc dich cua no), `trang_thai_lat`,
+   `dem_lien_tiep`, `moc_ky` (ngay/tuan/thang), `tre`; `vao_lenh` co lenh cho OCO/limit/stop (offset theo ATR). **Thieu that**: dong ho
+   phut (`gio` chi den gio), `moc_ky` theo gio, toan hang spread / so vi the mo / gia lenh vua khop / da khung / Renko / bo nho swing / tick;
+   moi spec **mot chieu** nen khong noi duoc "ca ngay toi da mot lenh cho ca mua va ban". `quan_tri` co **20** nut chay duoc (muc 3 ghi 18).
+4. **Ba cau truc dung nhat** (xep theo so file duoc go; de lam SAU, khong luc nay): (a) thoat theo muc - `dung_lo(muc)` = SL tai toan hang
+   muc (bien doi dien cua khoang gia +/- dem) va `trailing_cao_nhat/thap_nhat(n)` -> 09, 11, Breakout1, CS1; (b) `so_lenh_trong_ngay(tran)`
+   dung chung hai chieu -> 11, Breakout1, Breakout4; (c) `renko(kich_thuoc)` -> 01, 02 (ngang hang: lenh cho tai muc cau truc -> Pivots1).
+   `session_range` KHONG thieu nghiem ngat: 6 EA da dien duoc bang `gio` + `tre(gio,k)` + `cao_nhat/thap_nhat(N)` + `vung` (cong thuc tay: ORB,
+   thien lech giua khoang, pivot gio).
+5. **Quyet dinh:** chua mo rong DSL. Khong kiem duoc tren gia that o cloud; moi cau truc chi go 2-4/16 file, trong khi duong chay thang da
+   phu 5-7/16 va len 9+ khi co goi day du. Giu `ea_tho` lam duong chinh; mo rong DSL chi khi `ea_tho_quet` o may nha cho thay EA DAT thuoc
+   nhom chan (iii) va boc logic cua chung dang gia tien.
