@@ -31,6 +31,12 @@
 - 02/10 Chu du an se cap API DeepSeek + Qwen ngay 03/10 de so sanh model re (`b so-sanh`) -> chon cho `b nc tho` / `q`.
 - Phong cach chu du an: ngan gon, ghet phuc tap va ghet token vo ich, chi muon MOT kenh; "khong duoc dung lai o muc mo ta".
 
+## Dang o dau (03/10 khuya, cloud, may nha van tat) - HEAD 92a8cd3
+- ENGINE LUOI (nghen so 1 cua nguon nguoi thang) da lam sach + tang toc, deu CO TEST: chan `dung_lo_tong` (khai bao ma engine khong doc) · bang lenh `ghi_lenh=True` cung schema lich su that · sua lech mot nac `he_so_buoc` · sua bar 0 (`lai_arr[0]` chi tru spread lenh dau; `luoi.PHIEN_BAN_ENGINE=3` vao van tay `thu_luoi` / `quet_luoi`) · nhan C `nhan/luoi_nhan.c` (x134, khop tung bit Python 3.11-3.13, ASan sach, 100% dong C, khong dich duoc -> tu dung Python, so y het) · `_he_so_lot_tai_tran` nhanh x60 (ranh gioi Pareto, ra y het ban cu) · cong cu nc `quet_luoi` (ca luoi tham so trong MOT goi, chi kham_pha, moi o la 1 phep thu, <= 1.000 o/goi, het gio = CHUA_DO_DUOC). Do: 54 o x 190.000 bar 31,2 s -> 0,62 s. Bang quyet dinh + lenh o nha: `tai_lieu/TOC_DO_TEST.md`.
+- BOC TU LICH SU LENH: `nhan/boc_lich_su.py` + cong cu nc `boc_lich_su` (buoc, he so lot, TP, gio lech, dieu kien vao suy nguoc; AI doi chieu voi bar that bang tool co san). 36 test tren du lieu cai san dap an; **CHUA chay tren lich su that** (chua co bang lenh nao ve repo) -> chua co con so lai nao tu nhanh nay.
+- Bo test day du: 80 fail la NEN Linux (`reports/test_fail_linux.txt`), 0 fail moi (3112 pass). Dot bien da diet cac test yeu cua nhan C va `quet_luoi`.
+- Quirk biet, KHONG sua: `cho == 0.0` la dau hieu "khong cho" trong `luoi._mot_ro` (muc cho dung 0,0 bi coi la khong cho; gia that khong bao gio = 0; ban C y het). Chua co EA / lich su that nao chay tren tester -> VAN CHUA co con so lai nao cua duong khai thac nay.
+
 ## Dang o dau (03/10 dem, cloud, may nha tat)
 - RA SOAT KIEN TRUC (chu du an hoi sao nhanh 'EA cong khai mql5/myfxbook -> boc logic -> backtest -> tinh chinh' khong ra gi): `tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`. Ket luan: ba manh khong noi nhau; duong nc di nguoc so do dong 55/60; pheu boc 2,4%: BA nut chan (bo boc / toan hang DSL / trang thai-quan li, muc 8 cua tai lieu); Myfxbook khong co adapter.
 - DA XAY (commit f58e662): LAN EA THO `nhan/ea_tho.py` + `nhan/bao_cao_mt5.py` + 4 cong cu `b nc cc ea_tho_*` (huong dan + 4 diem hieu chuan: `tai_lieu/LAN_EA_THO.md`). CHI test voi may tester gia (46 test); `_chay_that` chua tung chay. Nen test Linux: `reports/test_fail_linux.txt` (2684 pass / 117 fail).
@@ -52,6 +58,7 @@
 5. Cloud viet tiep (chua lam, DA DUYET, lam o phien MOI cho re ~5x moi luot): `b nc tien-len` (giai doan tien len, 7.4), ho chieu du lieu (7.5), tran phep thu (7.6) - tai_lieu/KHOI_PHUC_MAY_NHA.md muc 7.
 7. NGUON NGUOI THANG (nha, sau buoc 2; thu `viec/thu/20261003-025321-fa98.json` co 31 ID + thu tu): lay bang lenh 31 ID signal toc do 3-5 giay/trang; do chi phi that USDCHF/AUDCHF/AUDNZD/USDCAD/EURUSD/GBPAUD/USDJPY; ghi quy cach that XAUUSD/USDJPY vao `config/luoi_quy_cach.json`; bien dich `ea_LuoiThamChieu.mq5` (cloud DA viet 03/10, chua bien dich lan nao) va hieu chuan `luoi.py` vs tester tren AUDCAD roi USDCHF (lenh mau dau file EA; ket qua vao muc 9 NGUON_NGUOI_THANG.md; lech > 10% thi chua tin ma ngoai AUDCAD); chup lai 94 ho so moi tuan x 8 tuan (ben vung bang xep hang).
 6. DA DUYET: nha bat lich 5 phut (schtasks) khi may len; subagent cho viec doc nang; mo phien cloud MOI (phien cu ~450k ngu canh): phien moi vao bang `b tiep` roi gui nha thu `b cau dat-session <session_id moi>` (id: `get_session`).
+8. Nha, TOC DO (sau buoc 1; lenh o `TOC_DO_TEST.md` muc 4): `pip install ziglang` neu khong co trinh bien dich C -> `python -m nhan.luoi_nhan trang-thai` roi `do 190000` (Windows / Python 3.14) -> gui cloud so ms; doc cot `giay` cua lan `ea_tho_quet` dau (giay/lan MT5 that); khi co bang lenh that: `b nc cc boc_lich_su`; khi co bar that: thu `b nc cc quet_luoi`.
 
 ## Dung lam lai (da thu / da quyet)
 - Khong tim V6_DONG_GOI / EA tren VPS (het). Khong khoi phuc o E: (chua co dau vet bang file cu, can Admin) - ha uu tien, chi lam neu chu du an muon.
