@@ -468,3 +468,34 @@ def test_thu_luoi_von_quy_doi_cho_ma_co_ghi_de(moi_truong, khong_ghi_de):
     r = TN.danh_gia_luoi("USDJPY", "M15", TS, "kham_pha", von=10000.0)
     assert r["trang_thai"] in ("DAT", "AM"), r.get("ly_do")
     assert r["quy_cach"]["von_quy_doi"] == 150.0 and r["quy_cach"]["pip"] == 0.01 and r["von"] == 10000.0
+
+
+# ------------------------------------------------------------------ 6. THAM SO KHAI BAO MA ENGINE KHONG DOC
+def test_moi_truong_thamso_hoac_duoc_doc_hoac_bi_tu_choi():
+    """Mot truong `ThamSo` ma engine khong doc se cho ket qua y het 0 ma khong loi nao (`dung_lo_tong` da nhu vay
+    tu truoc 03/10). Truong nao khong xuat hien nhu `ts.<ten>` trong `_mot_ro`/`chay` phai nam trong CHUA_CAI_DAT -
+    va nguoc lai: da cai dat roi thi phai go khoi danh sach (khong de chan nham)."""
+    import dataclasses
+    import inspect
+    nguon = inspect.getsource(LU._mot_ro) + inspect.getsource(LU.chay)
+    for f in dataclasses.fields(LU.ThamSo):
+        doc = ("ts." + f.name) in nguon
+        assert doc != (f.name in LU.CHUA_CAI_DAT), (
+            "%s: engine %s nhung CHUA_CAI_DAT %s" % (f.name, "doc" if doc else "KHONG doc",
+                                                      "co ten" if f.name in LU.CHUA_CAI_DAT else "khong co ten"))
+
+
+def test_chay_tu_choi_tham_so_chua_cai_dat():
+    with pytest.raises(ValueError, match="CHUA cai dat"):
+        LU.chay(_chuoi(500), LU.ThamSo(buoc=15, tp=10, dung_lo_tong=500.0), 10000.0)
+    LU.chay(_chuoi(500), LU.ThamSo(buoc=15, tp=10, dung_lo_tong=0.0), 10000.0)        # 0 = tat: van chay
+    assert LU.tham_so_chua_cai_dat({"dung_lo_tong": 3, "buoc": 5}) == ["dung_lo_tong"]
+    assert LU.tham_so_chua_cai_dat(LU.ThamSo()) == []
+
+
+def test_thu_luoi_tu_choi_dung_lo_tong_truoc_khi_nap_du_lieu(moi_truong, monkeypatch):
+    def _khong_duoc_goi(*a, **k):
+        raise AssertionError("tham so bi chan phai tu choi TRUOC khi nap du lieu")
+    monkeypatch.setattr(NDL, "nap", _khong_duoc_goi)
+    r = TN.danh_gia_luoi("USDCHF", "M15", dict(TS, dung_lo_tong=500.0), "kham_pha", von=10000.0)
+    assert r["trang_thai"] == "CHUA_DO_DUOC" and "CHUA cai dat" in r["ly_do"] and "dung_lo_tong" in r["ly_do"]

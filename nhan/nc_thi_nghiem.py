@@ -975,6 +975,11 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
     if la:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "tham so luoi khong biet %s (co: %s)"
                 % (la, ", ".join(sorted(hop)))}
+    chua = LU.tham_so_chua_cai_dat(ts)
+    if chua:
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "tham so %s CHUA cai dat trong luoi.py (khai bao nhung engine khong doc: dat != 0 se cho ket qua "
+                         "y het 0, khong co cat lo nao). Bo no, hoac nho nha may cai dat truoc roi moi thu" % chua}
     if ts.get("kieu_lot", "phang") != "phang":
         ts_canh = ["kieu_lot != phang: lam tron lot nho lam lai lo lech khoi tuyen tinh - he so "
                    "lot o tran chi la xap xi"]

@@ -134,6 +134,9 @@ class ThamSo:
     #: DUNG LO TOAN CUC (`DungLo_0v01`): dong SACH ca hai ro khi lo noi cong lai
     #: vuot nguong. Day la thu bien "khong cat lo" thanh "cat lo co tran" - va
     #: no la co che doi han hinh dang duoi rui ro.
+    #: !! CHUA CAI DAT (03/10/2026 ra soat): `_mot_ro` chay hai ro ROI NHAU nen khong thay lo noi cong
+    #: hai chieu; truong nay khai bao tu truoc nhung khong duoc doc o dau ca. `chay` TU CHOI gia tri != 0
+    #: (xem `CHUA_CAI_DAT`) de khong ai tuong luoi da co cat lo trong khi ket qua y het 0.
     dung_lo_tong: float = 0.0
     #: BUOC GIAN DAN (`HeSoBuoc`/`BuocTranPip`): khoang cach tang thu k =
     #: buoc * he_so_buoc^(k-1), chan tren `buoc_tran`. >1 = gian dan (song lau
@@ -156,6 +159,17 @@ class KetQuaLuoi:
     bar_chay: int | None = None
     so_nam: float = 0.0
     duong_equity: np.ndarray | None = field(default=None, repr=False)
+
+
+#: Truong cua `ThamSo` da khai bao nhung engine KHONG doc. Dat != 0 cho ket qua y het 0 (khong loi, khong canh bao)
+#: - dung kieu loi "bo phan co ton tai nhung khong nam tren duong chay". Them ten vao day khi khai bao truoc cai dat.
+CHUA_CAI_DAT = ("dung_lo_tong",)
+
+
+def tham_so_chua_cai_dat(ts) -> list[str]:
+    """Ten cac truong `ts` (ThamSo hoac dict) dang dat != 0 ma engine chua cai dat."""
+    lay = ts.get if isinstance(ts, dict) else (lambda k, d=0: getattr(ts, k, d))
+    return [k for k in CHUA_CAI_DAT if lay(k, 0)]
 
 
 # ------------------------------------------------------------------ QUY CACH THEO MA
@@ -472,6 +486,9 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
 
 def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None) -> KetQuaLuoi:
     """Mo phong day du tren mot khung du lieu. `von` bang dong BAO GIA. `qc` None = AUDCAD cu."""
+    chua = tham_so_chua_cai_dat(ts)
+    if chua:
+        raise ValueError("tham so %s da khai bao nhung luoi.py CHUA cai dat: dat != 0 se bi bo qua am tham" % chua)
     qc = qc or QC_AUDCAD
     hi = df["high"].to_numpy(float)
     lo = df["low"].to_numpy(float)
