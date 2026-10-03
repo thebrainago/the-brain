@@ -627,9 +627,13 @@ def test_ea_thieu_tep_bi_loai_truoc_khi_tao_gia_thuyet_hay_ton_luot_tester(ea_cl
 def test_bon_cong_cu_ea_tho_dang_ky_cuoi_danh_sach_va_goi_duoc(ea_cl, tmp_path, monkeypatch):
     from nhan import nc_cong_cu as CC
     ten = [c["ten"] for c in CC.CONG_CU]
-    assert ten[-4:] == ["ea_tho_kham", "ea_tho_chay", "ea_tho_quet", "ea_tho_tinh"], "them o CUOI: giu cache prompt"
+    # NOI TIEP sau cong cu cu cuoi cung (`yeu_cau_seeker`), khong chen vao giua: cong cu sau nay (vd boc_lich_su) lai noi tiep
+    # sau bon cai nay - day truoc do khong doi thi cache prompt con. (Truoc 03/10 viet `ten[-4:]` nen moi cong cu them sau la vo.)
+    i = ten.index("ea_tho_kham")
+    assert ten[i - 1] == "yeu_cau_seeker" and ten[i:i + 4] == ["ea_tho_kham", "ea_tho_chay", "ea_tho_quet", "ea_tho_tinh"], \
+        "them o CUOI: giu cache prompt"
     api = {t["name"]: t for t in CC.schema_api()}
-    for n in ten[-4:]:
+    for n in ten[i:i + 4]:
         assert len(api[n]["description"]) > 200 and api[n]["input_schema"]["required"]
     r = CC.goi("ea_tho_kham", {"ea": ea_cl, "tieu_de": "XAUUSD trend M30", "co_san": ["XAUUSDM"]})
     assert r["phan_loai"]["loai"] == "CHIEN_LUOC" and r["ma_khung"]["ung_vien"][0]["ma"] == "XAUUSDM"
