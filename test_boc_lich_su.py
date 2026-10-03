@@ -624,3 +624,41 @@ def test_boc_lich_su_ma_khong_co_du_lieu_van_mo_ta_duoc(tmp_path, monkeypatch):
     assert r["trang_thai"] == "DAT" and r["bar"] is None
     assert any("khong nap duoc bar" in x for x in r["ghi_chu"])
     assert r["tham_so"]["buoc"] == pytest.approx(60.0, rel=0.05)
+
+
+# ============================================================== 7. BAO CAO HTML MT5 NHIEU BANG (Positions + Orders + Deals)
+def _bang_html(hang):
+    return "<table>" + "".join("<tr>" + "".join("<td>%s</td>" % c for c in r) + "</tr>" for r in hang) + "</table>"
+
+
+def _bao_cao_mt5(chi_deal: bool = False) -> str:
+    pos = [["Time", "Position", "Symbol", "Type", "Volume", "Price", "S / L", "T / P", "Time", "Price", "Commission", "Swap", "Profit"],
+           ["2024.01.02 10:00:00", "1001", "AUDCAD", "buy", "0.10", "0.88000", "", "0.88100", "2024.01.02 11:00:00", "0.88100", "-0.7",
+            "0", "7.30"],
+           ["2024.01.02 10:30:00", "1002", "AUDCAD", "sell", "0.10", "0.88200", "", "", "2024.01.02 12:00:00", "0.88100", "-0.7", "0",
+            "7.30"]]
+    deals = [["Time", "Deal", "Symbol", "Type", "Direction", "Volume", "Price", "Order", "Commission", "Fee", "Swap", "Profit", "Balance"]]
+    t = 5000
+    for q in pos[1:]:
+        deals.append([q[0], str(t), q[2], q[3], "in", q[4], q[5], str(t), q[10], "0", "0", "0", "10000"])
+        deals.append([q[8], str(t + 1), q[2], "sell" if q[3] == "buy" else "buy", "out", q[4], q[9], str(t + 1), "0", "0", q[11], q[12],
+                      "10007"])
+        t += 2
+    orders = [["Open Time", "Order", "Symbol", "Type", "Volume", "Price", "S / L", "T / P", "Time", "State", "Comment"]]
+    for q in pos[1:]:
+        orders.append([q[0], "9001", q[2], q[3], q[4], q[5], "", "", q[0], "filled", ""])
+        orders.append([q[8], "9002", q[2], "sell" if q[3] == "buy" else "buy", q[4], q[9], "", "", q[8], "filled", ""])
+    corpus = _bang_html(deals) if chi_deal else _bang_html(pos) + _bang_html(orders) + _bang_html(deals)
+    return "<html><body>" + corpus + "</body></html>"
+
+
+def test_bao_cao_mt5_nhieu_bang_chon_Positions_khong_chon_Deals():
+    """Truoc khi sua: Deals (4 hang) nhieu hon Positions (2 hang) nen bi chon, moi deal thanh mot lenh ma chi co gio/gia mo."""
+    d = BL.chuan_hoa(BL.doc_bang_html(_bao_cao_mt5()))
+    assert len(d) == 2 and d["dong"].notna().all() and d["gia_dong"].notna().all()
+    assert list(d["chieu"]) == [1, -1] and list(d["gia_mo"]) == [0.88, 0.882] and list(d["gia_dong"]) == [0.881, 0.881]
+
+
+def test_bao_cao_chi_co_bang_deal_bi_tu_choi_chu_khong_doc_sai_im_lang():
+    with pytest.raises(ValueError, match="DEAL"):
+        BL.doc_bang_html(_bao_cao_mt5(chi_deal=True))

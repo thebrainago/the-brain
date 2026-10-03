@@ -244,23 +244,37 @@ def _doc_chuoi(duong: Path) -> str:
 
 
 def doc_bang_html(text: str) -> pd.DataFrame:
-    """Bang lenh trong trang HTML luu tu web / bao cao tester: chon bang CO NHIEU hang nhat co du cot lenh."""
+    """Bang lenh trong trang HTML luu tu web / bao cao tester: chon bang LENH DA DONG (co ca gio dong + gia dong) nhieu hang nhat.
+
+    Bao cao MT5 co NHIEU bang cung cot Time / Type / Volume / Price: Positions (moi LENH mot dong: gio + gia mo VA dong),
+    Orders (lenh dat, co cot State), Deals (moi DEAL mot dong, cot Direction in/out - nhieu hang gap doi). Chon theo so hang se chon
+    NHAM Deals va doc moi deal thanh mot lenh. Nen: bang co `dong` + `gia_dong` thang; bang Deals / Orders KHONG bao gio duoc dung
+    thay cho Positions (khong ghep duoc vao/ra khi nhieu lenh cung mo - phai xuat muc Positions)."""
     p = _BangHTML()
     p.feed(text)
-    tot = None
+    tot, la_deal = None, False
     for b in p.bang:
         if len(b) < 3:
             continue
         # dong tieu de = hang dau co chu "time"/"volume"/"symbol"
         for k, h in enumerate(b[:6]):
+            goc = [_khong_dau(c) for c in h]
             ten = set(_ten_cot(h))
             if {"mo", "chieu", "lot"} <= ten:
+                da_dong = {"dong", "gia_dong"} <= ten
+                if not da_dong and ("direction" in goc or "state" in goc):
+                    la_deal = True                       # bang Deals / Orders cua MT5: khong dung lam bang lenh
+                    break
                 rong = max(len(h), 1)
                 rows = [r[:rong] + [""] * (rong - len(r)) for r in b[k + 1:] if len(r) >= max(4, rong - 2)]
-                if rows and (tot is None or len(rows) > len(tot[1])):
-                    tot = (h, rows)
+                diem = (1 if da_dong else 0, len(rows))
+                if rows and (tot is None or diem > tot[2]):
+                    tot = (h, rows, diem)
                 break
     if tot is None:
+        if la_deal:
+            raise ValueError("HTML chi co bang DEAL / ORDERS (moi deal mot dong), khong co bang lenh da dong. Xuat muc POSITIONS cua "
+                             "bao cao MT5 (hoac bao cao MT4: Closed Transactions) roi dua lai.")
         raise ValueError("khong thay bang lenh trong HTML (can dong tieu de co Time / Type / Volume / Price). "
                          "Dua file mau cho phien cloud de viet bo doc dung dinh dang that.")
     return pd.DataFrame(tot[1], columns=tot[0])
