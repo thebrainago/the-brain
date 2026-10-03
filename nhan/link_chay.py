@@ -39,7 +39,7 @@ import time
 import zipfile
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 LAB = Path(__file__).resolve().parent.parent
 if __package__ in (None, ""):
@@ -148,6 +148,16 @@ def _giai_ma_text(body: bytes, dau: dict) -> str:
     return body.decode("utf-8", errors="replace")
 
 
+def _url_de_tai(url: str) -> str:
+    """URL chuan hoa (bo www + bo /en) chi de SO SANH. MQL5 that: `mql5.com/signals/N` -> 301 -> `www.mql5.com/signals/N` -> 404;
+    chi `www.mql5.com/en/signals/N` moi ra 200 (do o may nha 03/10)."""
+    p = urlsplit(url)
+    if LN.mien_goc(p.hostname or "") != "mql5.com":
+        return url
+    path = p.path if re.match(r"^/[a-z]{2}(?=/|$)", p.path) else "/en" + p.path
+    return urlunsplit((p.scheme, "www.mql5.com", path, p.query, ""))
+
+
 def lay_http(url: str, ua: str = UA, timeout: float = 20.0, toi_da_byte: int = TOI_DA_BYTE, mot_buoc=None,
              toi_da_chuyen: int = 3, truoc=None):
     """GET don gian -> (status | None, text, loi).
@@ -158,7 +168,7 @@ def lay_http(url: str, ua: str = UA, timeout: float = 20.0, toi_da_byte: int = T
     * `mot_buoc(url, ua, timeout, toi_da_byte)` tiem duoc de test; mac dinh la `requests.get` that."""
     buoc = mot_buoc or _mot_buoc_that
     goc = LN.mien_goc(urlsplit(url).hostname or "")
-    u = url
+    u = _url_de_tai(url)
     for _ in range(toi_da_chuyen + 1):
         if truoc:
             truoc(u)

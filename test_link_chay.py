@@ -126,7 +126,15 @@ def test_lay_http_theo_chuyen_huong_cung_ten_mien_va_goi_truoc_moi_buoc():
     truoc = []
     st, text, loi = LC.lay_http("https://mql5.com/signals/1", mot_buoc=f, truoc=truoc.append)
     assert (st, text, loi) == (200, "caf\xe9", "")
-    assert goi == ["https://mql5.com/signals/1", "https://www.mql5.com/en/signals/1", "https://www.mql5.com/ru/signals/1"] == truoc
+    assert goi == ["https://www.mql5.com/en/signals/1", "https://www.mql5.com/en/signals/1", "https://www.mql5.com/ru/signals/1"] == truoc
+
+
+def test_url_de_tai_mql5_them_www_va_locale_con_ten_mien_khac_giu_nguyen():
+    # 03/10 may nha: mql5.com/signals/N -> 301 -> www.mql5.com/signals/N -> 404; chi www.mql5.com/en/signals/N ra 200
+    assert LC._url_de_tai("https://mql5.com/signals/2196457") == "https://www.mql5.com/en/signals/2196457"
+    assert LC._url_de_tai("https://mql5.com/signals/2196457?source=Site") == "https://www.mql5.com/en/signals/2196457?source=Site"
+    assert LC._url_de_tai("https://www.mql5.com/vi/signals/1") == "https://www.mql5.com/vi/signals/1"
+    assert LC._url_de_tai("https://www.myfxbook.com/members/a/b/1") == "https://www.myfxbook.com/members/a/b/1"
 
 
 def test_lay_http_chuyen_huong_ra_ngoai_dung_lai_khong_goi_dich():
