@@ -946,9 +946,13 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
     DD -3,5%) den tu engine nay. Cong cu nay cho nha nghien cuu di tiep mach do trong
     so tay, voi ky luat doan nhu moi he khac.
 
-    GIOI HAN THAT, khong giau: `luoi._mot_ro` GHIM phi qua dem AUDCAD (mua -0,263%/nam,
-    ban +3,853%/nam) va coi point = 1e-5. Ma khac -> CHUA_DO_DUOC cho toi khi luoi.py
-    nhan mo hinh chi phi. Chuoi TONG_HOP chi de kiem duong ong.
+    QUY CACH THEO MA (03/10/2026): `luoi.py` khong con ghim AUDCAD. AUDCAD / TONG_HOP giu hang so cu (ket qua y het
+    tung bit). Cap FX chuan (USDCHF, AUDCHF, EURUSD...) lay phi qua dem + spread tu MO HINH CHI PHI do duoc cua chinh doan
+    do va mang `chi_phi_do_tin` (KHAI -> nhan canh bao; cong niem phong van ha KHAI xuong CHUA_DO_DUOC). Cap JPY / vang chi
+    chay khi `config/luoi_quy_cach.json` da ghi quy cach do tu symbol_info; chi so / crypto / exotic / micro ->
+    CHUA_DO_DUOC kem ly do. Chuoi TONG_HOP chi de kiem duong ong.
+    GIOI HAN THAT: luoi.py CHUA doi chieu voi MT5 tester o ma nao (LuoiDoiXung.mq5 da mat) - doc nhu XEP HANG va hinh
+    dang, chua phai loi that; ma moi mang canh bao nay trong `canh_bao`.
 
     Tieu chi chu du an 25/09 ("chi can co lai va maxdd duoi 80%", martingale/DCA/luoi deu
     duoc): DAT = co lai sau phi va khong chay tai khoan o lot dang thu. Lai lo cua luoi
@@ -956,15 +960,15 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
     von + k*(equity - von) - he so lot cham tran 80% tim CHINH XAC bang chia doi tren duong
     equity (co lo treo), khong nhan tuyen tinh DD. Tra kem `lo_treo_o_tran_pct_von`.
     """
-    from dataclasses import fields as _fields
+    from dataclasses import asdict as _asdict, fields as _fields
     from nhan import luoi as LU
     if doan not in NDL.DOAN_MO:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "doan chi duoc la kham_pha/xac_nhan"}
     ma, khung = str(ma).upper(), str(khung).upper()
-    if not (NDL.la_tong_hop(ma) or "AUDCAD" in ma):
-        return {"trang_thai": "CHUA_DO_DUOC",
-                "ly_do": "luoi.py dang GHIM phi qua dem + point cua AUDCAD; %s can mo hinh chi phi "
-                         "rieng truoc (viec 8.2 trong tai_lieu/NHA_NGHIEN_CUU.md)" % ma}
+    chuan = LU.lop_quy_cach(ma) in ("audcad", "tong_hop")         # hang so cu cua luoi.py, ket qua y het
+    qc, ly_qc = LU.quy_cach_cho(ma, None, None)                   # kiem TEN/ghi de truoc khi nap du lieu
+    if qc is None:
+        return {"trang_thai": "CHUA_DO_DUOC", "ly_do": ly_qc}
     ts = dict(tham_so or {})
     hop = {f.name for f in _fields(LU.ThamSo)}
     la = [k for k in ts if k not in hop]
@@ -976,21 +980,33 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
                    "lot o tran chi la xap xi"]
     else:
         ts_canh = []
-    vt = ST.van_tay("luoi", ma, khung, doan, ts, von)
-    cu = ST.da_thu(vt)
-    if cu and cu.get("ket_qua"):
-        return dict(cu["ket_qua"], tu_so_tay="luoi %s da chay y het" % cu["id"])
+    if chuan:
+        vt = ST.van_tay("luoi", ma, khung, doan, ts, von)
+        cu = ST.da_thu(vt)
+        if cu and cu.get("ket_qua"):
+            return dict(cu["ket_qua"], tu_so_tay="luoi %s da chay y het" % cu["id"])
     t0 = time.time()
     try:
         pre, a = NDL.cat_doan(NDL.nap(ma, khung), doan)
         seg = pre.iloc[a:]
-        kq = LU.chay(seg, LU.ThamSo(**ts), float(von))
-        cs = LU.chi_so(kq, float(von))
-        moc = _moc(ma, khung, doan, seg, NDL.chi_phi(ma, pre))
+        cp = NDL.chi_phi(ma, pre)
+        if not chuan:
+            # quy cach phu thuoc mo hinh chi phi -> van tay phai gom no, neu khong phi doi van lay ket qua cu
+            qc, ly_qc = LU.quy_cach_cho(ma, float(np.nanmedian(seg["close"].to_numpy(float))), cp)
+            if qc is None:
+                return {"trang_thai": "CHUA_DO_DUOC", "ly_do": ly_qc}
+            vt = ST.van_tay("luoi", ma, khung, doan, ts, von, LU.khoa_quy_cach(qc))
+            cu = ST.da_thu(vt)
+            if cu and cu.get("ket_qua"):
+                return dict(cu["ket_qua"], tu_so_tay="luoi %s da chay y het" % cu["id"])
+        von_q = float(von) * qc.von_quy_doi                       # von bang dong BAO GIA (xem QuyCach.von_quy_doi)
+        kq = LU.chay(seg, LU.ThamSo(**ts), von_q, qc)
+        cs = LU.chi_so(kq, von_q)
+        moc = _moc(ma, khung, doan, seg, cp)
     except Exception as e:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "%s: %s" % (type(e).__name__, str(e)[:200])}
     dd = abs(float(cs["maxdd_pct"]))
-    k_tran = None if kq.chay else _he_so_lot_tai_tran(np.asarray(kq.duong_equity, float), float(von))
+    k_tran = None if kq.chay else _he_so_lot_tai_tran(np.asarray(kq.duong_equity, float), von_q)
     ln = float(cs["loi_suat_nam_pct"])
     tien = {"co_lai": bool(ln > 0 and not kq.chay), "loi_suat_nam_pct": round(ln, 2),
             "maxdd_pct": round(-dd, 2),
@@ -1010,6 +1026,9 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
     if tien["co_lai"] and tien["hon_moc_pct"] is not None and tien["hon_moc_pct"] <= 0:
         nhan.append("KHONG hon moc (%s%%/nam o cung tran DD) - beta, chua phai he"
                     % tien["moc_duoi_tran_pct"])
+    if qc.do_tin == "KHAI" and not chuan:
+        nhan.append("chi phi KHAI BAO (phi qua dem/spread chua do tren san): lai cua luoi nhay voi phi giu - ung vien, "
+                    "chua du de niem phong (cong ha xuong CHUA_DO_DUOC)")
     if kq.chay:
         tt, ly = "AM", ("CHAY TAI KHOAN o bar %s voi von %.0f o lot dang thu - giam lot/tang von "
                         "roi thu lai (lai lo tuyen tinh theo lot)" % (kq.bar_chay, von))
@@ -1023,11 +1042,16 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
         tt, ly = "AM", "khong co lai sau phi: %.2f%%/nam, maxDD %.1f%%" % (ln, dd)
     ra = {"trang_thai": tt, "ly_do": ly, "ma": ma, "khung": khung, "doan": doan, "tham_so": ts,
           "von": von, "tien": tien, "lenh": lenh,
+          "quy_cach": _asdict(qc), "chi_phi_do_tin": qc.do_tin,
           "chi_so_luoi": {k: (round(v, 3) if isinstance(v, float) else v) for k, v in cs.items()},
           "nhan_canh_bao": nhan,
           "canh_bao": ts_canh + (["chuoi TONG_HOP: phi qua dem AUDCAD ap len chuoi gia - chi kiem "
-                                  "duong ong"] if NDL.la_tong_hop(ma) else [])}
-    ra["tn_id"] = ST.ghi_thi_nghiem("luoi", {"tham_so": ts, "von": von}, ra, tt, vt, ma, khung, doan,
+                                  "duong ong"] if NDL.la_tong_hop(ma) else [])
+          + ([] if chuan else ["quy cach %s (%s): luoi.py CHUA doi chieu voi MT5 tester o ma nao - doc nhu XEP HANG "
+                               "va hinh dang, chua phai loi that; chay tester cung bo tham so truoc khi tin"
+                               % (qc.ma, qc.nguon)])}
+    spec = {"tham_so": ts, "von": von} if chuan else {"tham_so": ts, "von": von, "quy_cach": LU.khoa_quy_cach(qc)}
+    ra["tn_id"] = ST.ghi_thi_nghiem("luoi", spec, ra, tt, vt, ma, khung, doan,
                                     gt_id=gt_id, so_phep_thu=1 if doan == "kham_pha" else 0,
                                     giay=time.time() - t0, vong_id=vong_id,
                                     tom_tat="luoi %s: %s" % (json.dumps(ts, sort_keys=True)[:120], ly))

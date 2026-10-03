@@ -263,8 +263,13 @@ CONG_CU: list[dict] = [
         "cho_lui, kieu_lot (phang|cong|nhan), he_so_lot, tia_lenh, bien_cap, cap_moi_bar, "
         "chot_tien, dung_lo_tong, he_so_buoc, buoc_tran. Martingale/DCA hop le (chu du an). "
         "DAT = co lai sau phi, khong chay tai khoan o lot dang thu. Tra he so lot cham tran "
-        "maxDD 80% (tinh CHINH XAC tren duong equity) va LO TREO o lot do. Chi AUDCAD (phi qua "
-        "dem dang ghim) + TONG_HOP. Dung khung M15/M5: luoi song bang duong di trong bar.",
+        "maxDD 80% (tinh CHINH XAC tren duong equity) va LO TREO o lot do. Ma: AUDCAD y het "
+        "hang so cu; cap FX chuan (USDCHF, AUDCHF, EURUSD...) lay phi tu mo hinh chi phi cua "
+        "doan (ra kem quy_cach + chi_phi_do_tin; KHAI chi la nhan); JPY/vang chi khi "
+        "config/luoi_quy_cach.json co quy cach do that; chi so/crypto/exotic bi tu choi. Ma "
+        "ngoai AUDCAD CHUA doi chieu voi MT5 tester: doc nhu xep hang. chot_tien la TIEN "
+        "(bao gia / 0,01 lot), khong phai pip. Dung khung M15/M5: luoi song bang duong di "
+        "trong bar.",
         {"ma": _MA, "khung": _KHUNG, "tham_so": {"type": "object"},
          "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
          "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},

@@ -12,7 +12,7 @@ Dung huong, va so do cua chinh anh da ghi san (dong 35-41, 55-60). Thu tu khai t
 
 1. **Chay NGUYEN file cong khai tren MT5** (lan EA tho, da xay `nhan/ea_tho.py`). Khong boc logic. Cho den khi quet >= 30 EA that.
 2. **Keo LICH SU cua nguoi thang ve, AI suy nguoc** - dung cho he CHI co ho so khong co ma. Da co **31 ung vien** (muc 2). Cua
-   nghen that: engine luoi `nhan/luoi.py` chi chay AUDCAD -> **mo cho cac ma anh em truoc** (muc 4B).
+   nghen la engine luoi `nhan/luoi.py` (truoc chi chay AUDCAD): **DA MO 03/10** cho cap FX chuan; JPY / vang cho quy cach do that (muc 4B).
 3. **Cap (EA, tin hieu song)**: trang Market cua EA thuong ghi link tin hieu song cua chinh tac gia -> chay ban demo trong tester
    cung khoang thoi gian -> so duong von tester vs song = **thuoc do mo phong cua chinh ta**.
 4. **TradingView = nguon MA, khong phai tester** (muc 5). **cTrader = chua** - do 1 lan khi tester that su nghen (muc 6).
@@ -32,8 +32,8 @@ Tieu chi cua chu du an: co lai + maxDD < 80%, them tuoi song de loai may rui.
 
 Doc: (a) "nhieu he co lai san" **dung** nhung nguoi thang song >= 2 nam chi ~8% danh sach da la top theo tang truong; (b) ho **gan het
 la luoi/DCA tren cap da bien dong thap** (AUDCAD va hang xom cua no) - chinh la loai ket qua tot nhat cua lab (AUDCAD, `thu_luoi`) nen
-AUDCAD khong phai ngau nhien; (c) hang xom USDCHF / AUDCHF / AUDNZD / USDCAD / EURUSD **cung quy cach** (pip 1e-4, hop dong 100.000)
-nhung `luoi.py` GHIM phi qua dem + point cua AUDCAD nen khong chay duoc.
+AUDCAD khong phai ngau nhien; (c) hang xom USDCHF / AUDCHF / AUDNZD / USDCAD / EURUSD **cung quy cach** (pip 1e-4, hop dong 100.000);
+truoc 03/10 `luoi.py` GHIM phi qua dem + point cua AUDCAD nen khong chay duoc - nay chay (muc 4B).
 Han che trung thuc: ca 400 deu tang truong > 0 va khong ho so nao co DD cong bo >= 80% (danh sach da loc/xep san) -> hai dieu kien do khong phan biet duoc gi, chi TUOI SONG la thuoc loc that; va KHONG tinh duoc ti le co lai cua "mot signal bat ky";
 `dd_pct` la so trang cong bo (chua doi chieu cach tinh); ho giau quy tac nen day la nguon GIA THUYET, khong phai bang chung (LAM LAI TU DAU).
 
@@ -68,8 +68,13 @@ vi them nhanh chua kiem chi lam tang be mat chua do.
 2. Boc: tu chuoi lenh suy **buoc, he so lot, TP ro, che do** (day la tham so `ThamSo` cua `luoi.py`); vao-lenh lan dau dung `tim_quy_luat` / `mo_xe_lenh`
    voi nhan "co vao lenh" thay "thang/thua". Chi lam khi co MOT bang lenh that - khong thiet ke cho du lieu tuong tuong.
 3. Thu: `thu_luoi` tren `kham_pha`, `xac_nhan` (qua `b nc cc`, vao so tay).
-- **Cua nghen = engine** (viec 3 muc 8.2 `NHA_NGHIEN_CUU.md`): `luoi.py` nhan MO HINH CHI PHI theo ma. Thu tu: hang xom cung quy cach truoc
-  (USDCHF, AUDCHF, AUDNZD, USDCAD, EURUSD, GBPAUD, EURGBP), roi XAUUSD / cap JPY (quy cach khac: pip, hop dong, point - can doi chieu `symbol_info` that).
+- **Cua nghen = engine - DA MO 03/10** (`nhan/luoi.py`: `QuyCach`, `quy_cach_cho`). AUDCAD / TONG_HOP giu NGUYEN tung con so (test hoi quy, so vang
+  tao tu ma cu). Cap FX chuan (pip 1e-4, hop dong 100.000: USDCHF, AUDCHF, AUDNZD, USDCAD, EURUSD, GBPAUD, EURGBP...) lay phi qua dem + spread tu
+  mo hinh chi phi cua CHINH doan do; `do_tin = KHAI` chi la nhan (cong niem phong van ha KHAI xuong CHUA_DO_DUOC). JPY / vang chi chay khi may nha
+  ghi quy cach do tu `symbol_info` vao `config/luoi_quy_cach.json` (khoa theo ma; chi pip / hop_dong / point / spread_du_phong / von_quy_doi /
+  da_doi_chieu / nguon - phi KHONG ghi de duoc). Chi so / crypto / exotic / micro: tu choi kem ly do. Moi ma moi mang canh bao "luoi.py CHUA doi
+  chieu voi MT5 tester": doc nhu XEP HANG va hinh dang, chua phai loi that. `chot_tien` la TIEN (don vi tien bao gia tren 0,01 lot), khong phai pip:
+  cap JPY gan x100 so voi cap FX chuan.
 - **Ro ri phai chan**: lich su cua trader nam gan het trong doan xac_nhan / niem_phong. Gia thuyet tu do chi la GIA THUYET; thu tren kham_pha
   (ngoai thoi gian cua ho) va tien cu; khong dung chinh bar cua ho de "xac nhan".
 
@@ -117,10 +122,14 @@ lenh `backtest` va `optimize`, du lieu tick tu server / M1 tu server / **M1 tu f
 
 | Ai | Viec | Xong khi |
 |---|---|---|
-| cloud (lam ngay) | `luoi.py` nhan mo hinh chi phi theo ma (hang xom cung quy cach truoc); AUDCAD **giu nguyen tung con so** | test hoi quy AUDCAD y het + test hop dong cho ma moi; `thu_luoi` het chan ma |
+| cloud - XONG 03/10 | `luoi.py` nhan quy cach theo ma; AUDCAD **giu nguyen tung con so** | `test_luoi_quy_cach.py` (51 test: hoi quy AUDCAD tung bit, bat bien theo ti le gia / pip / point / lot / von, ca tinh tay, `thu_luoi` qua so tay); kiem dot bien: hang so AUDCAD con sot -> test bat |
+| cloud (lam sau, commit rieng) | sua loi CU `luoi._mot_ro`: sau vong lap `lai_arr[0] = -phi_sp` lay TONG spread ca chuoi (dong ~462) -> `equity[0] = von - tong spread` -> von nho bi chay tai khoan gia o bar 0, DD som bi thoi phong nhe. Chua sua de AUDCAD con khop tung bit | doi thanh `-(spread_gia[0]*lot*hop)`, sinh lai golden, ghi so truoc/sau |
 | nha | lay bang lenh cua 31 ID (tab History: ghi URL AJAX + luu 1 trang fixture), 1 trang / 3-5 giay | file fixture trong repo, cloud viet adapter |
-| nha (sau khi co XM demo + `b khoi-phuc`) | do chi phi that USDCHF / AUDCHF / AUDNZD / USDCAD / EURUSD / XAUUSD / USDJPY (spread, swap mua/ban, hop dong, point) | `do_tin = SAN` cho cac ma do; `thu_luoi` chay duoc |
-| cloud roi nha | hieu chuan `luoi.py` vs tester MT5: `LuoiDoiXung.mq5` da MAT (VPS het 02/10, khong co trong git) -> cloud viet EA tham chieu toi thieu mot file, nha bien dich + chay tren 1 ma moi | chenh lech lai/DD duoc ghi |
+| nha (sau khi co XM demo + `b khoi-phuc`) | do chi phi that USDCHF / AUDCHF / AUDNZD / USDCAD / EURUSD / XAUUSD / USDJPY (spread, swap mua/ban, hop dong, digits, point) | `do_tin = SAN` cho cac ma do; XAUUSD / USDJPY: ghi `config/luoi_quy_cach.json` (da_doi_chieu: true) -> `thu_luoi` chay duoc |
+| cloud - XONG 03/10 | `LuoiDoiXung.mq5` da MAT (VPS het 02/10, khong co trong git) -> viet lai EA tham chieu toi thieu `ea_LuoiThamChieu.mq5` (goc repo; lam DUNG nhung gi `luoi._mot_ro` mo phong, khong them gi). CHUA bien dich bang MetaEditor (cloud khong co), chi qua g++/clang++ voi stub; `ea_tho.phan_loai` ra CHIEN_LUOC, khong THIEU_TEP, doc dung 8 input (kieu int/double); luoi tham so de xuat chi dung `InpStepPips` / `InpTpPips` | do cheo LOGIC EA (port Python tung tick) voi `luoi.chay` (theo bar) tren cung duong gia tick gia lap, 8 seed, spread khop: lai EA/luoi = 0,96-0,99 (SE ~0,015), so lenh va so ro cung 0,96-0,99; phi spread moi lenh khop (seed 1: 272 lenh x 0,15 tien/lenh = 40,8 cua EA; luoi 267 lenh = 40,05). **Day KHONG phai hieu chuan voi MT5**: chi chung minh quy uoc TP/spread/dem tang cua EA va cua luoi khop nhau tren duong gia gia lap |
+| nha | hieu chuan `luoi.py` vs tester MT5 (diem cuoi cua dong tren): bien dich `ea_LuoiThamChieu.mq5` bang MetaEditor F7 (loi cu phap thi sua ngay va commit), chay `b nc cc ea_tho_chay` va `b nc cc thu_luoi` cung ma / cung doan (lenh mau nam trong dau file EA) tren AUDCAD roi USDCHF | chenh lech lai %/nam, maxDD, so lenh, so ro ghi vao dong nay; neu lech > 10% thi sua `luoi.py` truoc khi tin bat ky ma ngoai AUDCAD |
+
+> Luu y khi doi chieu `thu_luoi` voi du lieu KHONG co cot spread (spread = 0): `luoi` roi ve `QuyCach.spread_du_phong` (2 pip) nen se tru nhieu hon EA zero-spread, lai EA trong nhu cao hon 1,07-1,34 lan. Day la hang so du phong, khong phai sai lech mo hinh bar (tat du phong thi chenh chi con vai phan tram: 8 seed ra 0,99). Doi chieu that phai dung bar co spread that.
 | nha | cap C: 1 EA Market co ban free + tin hieu song; chay tester cung khoang | so tai hien duoc ghi vao `LAN_EA_THO.md` |
 | nha | ban D: chup lai 94 ho so moi tuan | bang ben vung sau 4 / 8 tuan |
 

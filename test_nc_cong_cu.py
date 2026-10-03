@@ -95,8 +95,9 @@ def test_yeu_cau_seeker_xep_hang_doi():
 
 
 def test_thu_luoi_chi_ma_co_chi_phi_dung_va_ghi_so():
-    r = CC.goi("thu_luoi", {"ma": "EURUSD", "khung": "M15", "tham_so": {"buoc": 30}})
-    assert r["trang_thai"] == "CHUA_DO_DUOC" and "AUDCAD" in r["ly_do"]
+    # 03/10/2026: luoi.py da co quy cach theo ma; ma chua ho tro (chi so/crypto/exotic) van bi tu choi kem ly do
+    r = CC.goi("thu_luoi", {"ma": "US500CASH", "khung": "M15", "tham_so": {"buoc": 30}})
+    assert r["trang_thai"] == "CHUA_DO_DUOC" and "chua ho tro" in r["ly_do"]
     r = CC.goi("thu_luoi", {"ma": "TONG_HOP_NHIEU_1", "khung": "H1", "tham_so": {"khong_co": 1}})
     assert r["trang_thai"] == "CHUA_DO_DUOC" and "khong biet" in r["ly_do"]
     ts = {"buoc": 40, "tp": 30, "tran_tang": 8, "che_do": "hai_chieu", "tia_lenh": True}
