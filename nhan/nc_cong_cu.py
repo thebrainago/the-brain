@@ -383,6 +383,29 @@ CONG_CU: list[dict] = [
          "toi_da_lan": {"type": "integer", "description": "so diem luoi toi da, gom mac dinh (mac dinh 7)"},
          "xac_nhan": {"type": "boolean", "description": "false = dung o bo tot nhat tren kham_pha"}},
         ["ea", "ma", "khung"], _ea_tho_tinh),
+    _cc("boc_lich_su",
+        "BOC LOGIC tu LICH SU LENH cua nguoi thang (MQL5 Signals / Myfxbook / bao cao tester) - MO TA, khong do loi nhuan. "
+        "Dau vao: `tep` (CSV/JSON/HTML luu tu trang, duong dan trong thu muc du an) hoac `lenh` (list dict: mo, dong, chieu, lot, "
+        "gia_mo, gia_dong). Ra: he luoi/DCA hay don lenh; tham_so cua luoi.ThamSo (buoc, he_so_buoc, lot, kieu_lot, tp hoac "
+        "chot_tien, cho_lui, tia_lenh, bien_cap, che_do, tran_tang = can duoi) kem do tin; hanh vi engine CHUA mo phong "
+        "(ngoai_engine); gio lech may chu uoc bang chinh gia; dieu kien vao (dac trung nc_dac_trung, dich vong null da sua "
+        "theo so dac trung) va phat lai qua luoi.chay so voi lich su that. Bar CHI tu doan kham_pha/xac_nhan cua (ma, khung); "
+        "lich su roi vao niem_phong thi chi mo ta. Nguoi thang la mau chon theo ket qua: tham_so/luat boc duoc la GIA THUYET - "
+        "dua sang thu_luoi / thu_co_che tren doan NGOAI cua so song cua ho. trang_thai DAT o day = da mo ta duoc, khong phai co lai.",
+        {"ma": _MA, "khung": _KHUNG,
+         "tep": {"type": "string", "description": "duong dan tep lich su (.csv/.json/.html) trong thu muc du an"},
+         "lenh": {"type": "array", "items": {"type": "object"},
+                  "description": "hoac list lenh {mo, dong, chieu, lot, gia_mo, gia_dong[, ma]} (toi da 50000)"},
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
+         "pip": {"type": "number", "description": "kich thuoc 1 pip (mac dinh theo quy cach cua ma, hoac doan theo ten)"},
+         "lech_gio": {"type": "number", "description": "gio CONG THEM vao gio lich su de ra gio bar (mac dinh: uoc bang gia)"},
+         "so_null": {"type": "integer", "description": "so lan dich vong null khi tim dieu kien vao (mac dinh 200)"},
+         "phat": {"type": "boolean", "description": "co phat lai tham so qua luoi.chay khong (mac dinh true)"},
+         "hop_dong": {"type": "number", "description": "co hop dong (mac dinh theo quy cach, FX 100000)"},
+         "gt_id": _GT}, ["ma"],
+        lambda ma, khung="M15", tep=None, lenh=None, doan="kham_pha", pip=None, lech_gio=None, so_null=200,
+        phat=True, hop_dong=None, gt_id=None, vong_id=None, **_:
+        TN.boc_lich_su(ma, khung, tep, lenh, doan, pip, lech_gio, int(so_null), bool(phat), hop_dong, gt_id, vong_id)),
 ]
 THEO_TEN = {c["ten"]: c for c in CONG_CU}
 #: Cong cu chi GHI so tay (khong do gi) - van duoc goi khi het ngan sach chu ky.

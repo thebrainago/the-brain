@@ -318,19 +318,21 @@ def tom_tat(so_dong: int = 12) -> dict:
     # Thi nghiem tot nhat theo TIEN duoi tran DD chu du an (tren kham_pha / xac_nhan)
     tot = []
     for r in nhieu("SELECT id, gt_id, loai, ma, khung, doan, tom_tat, ket_qua FROM thi_nghiem "
-                   "WHERE loai IN ('thu_co_che','xac_nhan') AND trang_thai='DAT' "
+                   "WHERE loai IN ('thu_co_che','xac_nhan','luoi') AND trang_thai='DAT' "
                    "ORDER BY id DESC LIMIT 400"):
         try:
             kq = json.loads(r["ket_qua"] or "{}")
         except Exception:
             kq = {}
         tn_ = kq.get("tien") or {}
-        cg = tn_.get("cagr_duoi_tran_pct")
+        # he luoi (loai='luoi') ghi cung khai niem duoi ten khac: loi suat o he so lot cham tran maxDD 80%
+        cg = tn_.get("cagr_duoi_tran_pct", tn_.get("loi_suat_o_tran_pct"))
         if cg is None:
             continue
         tot.append({"tn": r["id"], "gt": r["gt_id"], "loai": r["loai"], "ma": r["ma"],
                     "khung": r["khung"], "doan": r["doan"], "cagr_duoi_tran_pct": cg,
-                    "don_bay": tn_.get("don_bay"), "dd_pct": tn_.get("dd_pct"),
+                    "don_bay": tn_.get("don_bay", tn_.get("he_so_lot_tai_tran")),
+                    "dd_pct": tn_.get("dd_pct", tn_.get("maxdd_pct")),
                     "hon_moc_pct": tn_.get("hon_moc_pct"),
                     "so_lenh": (kq.get("lenh") or {}).get("so_lenh"),
                     "tom_tat": r["tom_tat"]})
@@ -338,7 +340,8 @@ def tom_tat(so_dong: int = 12) -> dict:
     gan = nhieu("SELECT id, loai, ma, khung, doan, trang_thai, tom_tat FROM thi_nghiem "
                 "ORDER BY id DESC LIMIT ?", so_dong)
     theo_ma = nhieu("SELECT ma, khung, COUNT(*) so_tn, COALESCE(SUM(so_phep_thu),0) phep_thu, "
-                    "SUM(trang_thai='DAT') dat FROM thi_nghiem WHERE doan='kham_pha' AND ma!='' "
+                    "SUM(trang_thai='DAT' AND loai NOT IN ('ho_so','boc_lich_su')) dat "
+                    "FROM thi_nghiem WHERE doan='kham_pha' AND ma!='' "
                     "GROUP BY ma, khung ORDER BY phep_thu DESC LIMIT 20")
     np_ = nhieu("SELECT id, luc, gt_id, ma, khung, trang_thai FROM niem_phong ORDER BY id DESC LIMIT ?",
                 so_dong)
