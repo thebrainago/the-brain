@@ -67,6 +67,11 @@ nghien cuu, khong den tu pheu; (b) tren chuoi co dap an, do tim rong ~3.000 dieu
 kien thay edge yeu **3/8**, mot gia thuyet co chu dich thay **8/8** (`b nc kiem 30`).
 Hoc tu lenh dung/sai = `mo_xe_lenh`. Het token: `b nc tu-lai MA KHUNG` (khong LLM).
 
+**LAN EA THO (03/10/2026, ra soat kien truc)**: EA cong khai (MQL5 Code Base / Market) chay THANG tren MT5 tester truoc, khong qua
+DSL (so do dong 38/55/60): `b nc cc ea_tho_kham|quet|chay|tinh`. Doan dong bang, niem phong 1 lan, DAT = lai sau phi + maxDD < 80%.
+**CHUA hieu chuan voi may that (4 diem)** - doc `tai_lieu/LAN_EA_THO.md` TRUOC khi tin DAT nao; vi sao + doi chieu so do:
+`tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`.
+
 ## LAM LAI TU DAU (chu du an chot 02/10/2026)
 
 May nha cai lai Windows, mat `nao.db`, `data/`, `ds/`... Chu du an: *"coi nhu du an duoc lam lai tu dau bai ban

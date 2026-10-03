@@ -31,6 +31,10 @@
 - 02/10 Chu du an se cap API DeepSeek + Qwen ngay 03/10 de so sanh model re (`b so-sanh`) -> chon cho `b nc tho` / `q`.
 - Phong cach chu du an: ngan gon, ghet phuc tap va ghet token vo ich, chi muon MOT kenh; "khong duoc dung lai o muc mo ta".
 
+## Dang o dau (03/10 dem, cloud, may nha tat)
+- RA SOAT KIEN TRUC (chu du an hoi sao nhanh 'EA cong khai mql5/myfxbook -> boc logic -> backtest -> tinh chinh' khong ra gi): `tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`. Ket luan: ba manh khong noi nhau; duong nc di nguoc so do dong 55/60; pheu boc 2,4% vi EA that giu TRANG THAI ma DSL khong co; Myfxbook khong co adapter.
+- DA XAY (commit f58e662): LAN EA THO `nhan/ea_tho.py` + `nhan/bao_cao_mt5.py` + 4 cong cu `b nc cc ea_tho_*` (huong dan + 4 diem hieu chuan: `tai_lieu/LAN_EA_THO.md`). CHI test voi may tester gia (46 test); `_chay_that` chua tung chay. Nen test Linux: `reports/test_fail_linux.txt` (2684 pass / 117 fail).
+
 ## Dang o dau (02/10 toi)
 - Kenh cloud<->nha THONG hai chieu (ping->pong ~2 phut; nha chay `cho`, runner 1 lan DAT, hop thu rieng `C:\Research SP500\cau_hop_thu`). Nha da: pull, venv, hook, tat defrag, tai MT5 XM (chua cai).
 - Nha bao cao dem 02/10 (xong, da dung, chu du an hen gio tat may; KHONG chay `cho` qua dem): `b test` 108 fail / 2642 pass / 46 skip (23 phut); `b nc kiem 30` KHOP cloud tung con so (xac dinh xuyen nen tang); `b token` nha: 60 goi, ngu canh TB 86k (cloud 443k -> ~5x re moi goi). Cloud da sua test `khoa_tien_trinh` (pid 1 khong co tren Windows) + them beautifulsoup4 vao requirements.
@@ -40,9 +44,10 @@
 ## Viec ke tiep (thu tu)
 1. Nha: `git pull`, `pip install -r requirements.txt`, chay lai `b test` luu danh sach fail (node id + loai loi, <= 110 dong, `pytest -q -n 8 --dist loadfile -rfE --tb=no`) vao `reports/test_fail_nha.txt`, push -> cloud diff voi baseline Linux de tim loi CHI-CO-TREN-WINDOWS (da biet 1, da sua). Thieu data/ds/nao.db/config/ffmpeg la moi truong, khong phai loi.
 2. 03/10 chu du an cai MT5 XM demo -> nha viet bo xuat M1 (`copy_rates_range`; doc `_tai_chi_so_xm.py` truoc: moc RAT xa, thu lai 4 lan, dem bar moi nam, D1 spread=0) cho AUDCAD, EURCAD, NZDCAD, EURGBP, XAUUSD, US500Cash -> ho chieu du lieu (`reports/ho_chieu_du_lieu.json`) + do chi phi that -> lan `nap()` dau dong bang doan: COMMIT+PUSH `so_cai/doan.json` NGAY -> `b nc kiem 30` + `b test` xanh tren may moi -> roi moi tin phat hien nao.
-3. 03/10 `b so-sanh` DeepSeek vs Qwen (tai_lieu/SO_SANH_LLM.md); khoa qua cc-switch (may nha) hoac bien moi truong; KHONG dan khoa vao chat.
-4. Cloud viet tiep (chua lam, DA DUYET, lam o phien MOI cho re ~5x moi luot): `b nc tien-len` (giai doan tien len, 7.4), ho chieu du lieu (7.5), tran phep thu (7.6) - tai_lieu/KHOI_PHUC_MAY_NHA.md muc 7.
-5. DA DUYET: nha bat lich 5 phut (schtasks) khi may len; subagent cho viec doc nang; mo phien cloud MOI (phien cu ~450k ngu canh): phien moi vao bang `b tiep` roi gui nha thu `b cau dat-session <session_id moi>` (id: `get_session`).
+3. **Hieu chuan LAN EA THO** (SAU buoc 2: can gia + `so_cai/doan.json`) (`tai_lieu/LAN_EA_THO.md`: lenh mo cuoi cua so, nhan bao cao tieng Viet - luu 1 bao cao THAT vao `test_bao_cao_mt5.py`, do sau tick XM, `_chay_that`), roi `b nc cc ea_tho_quet '{"eas":["kho:*"],"toi_da_lan":6}'` tren `reports/ea/kho.json` -> DAT/AM that dau tien cua duong EA tho. Lay IT fixture MQL5 signal / Myfxbook / Market voi toc do THAP (mql5.com cam IP sau ~50-150 request); cloud viet bo doc offline.
+4. 03/10 `b so-sanh` DeepSeek vs Qwen (tai_lieu/SO_SANH_LLM.md); khoa qua cc-switch (may nha) hoac bien moi truong; KHONG dan khoa vao chat.
+5. Cloud viet tiep (chua lam, DA DUYET, lam o phien MOI cho re ~5x moi luot): `b nc tien-len` (giai doan tien len, 7.4), ho chieu du lieu (7.5), tran phep thu (7.6) - tai_lieu/KHOI_PHUC_MAY_NHA.md muc 7.
+6. DA DUYET: nha bat lich 5 phut (schtasks) khi may len; subagent cho viec doc nang; mo phien cloud MOI (phien cu ~450k ngu canh): phien moi vao bang `b tiep` roi gui nha thu `b cau dat-session <session_id moi>` (id: `get_session`).
 
 ## Dung lam lai (da thu / da quyet)
 - Khong tim V6_DONG_GOI / EA tren VPS (het). Khong khoi phuc o E: (chua co dau vet bang file cu, can Admin) - ha uu tien, chi lam neu chu du an muon.

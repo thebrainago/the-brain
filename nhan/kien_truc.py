@@ -74,7 +74,7 @@ THU_MUC_GOC = {
 THU_MUC_LAB = {
     "bao_cao": "Bao cao phien The Brain (tu 15/08). Gom ve day 18/09.",
     "mau_thu": "Bo mau .mq5 THAT + `do_moc.py` — bai do chay duoc TREN CLOUD "
-               "(khong can nao.db/MT5). Moc 18/09: thay 22 diem vao lenh, ra 0 co che.",
+               "(khong can nao.db/MT5). Moc: thay 22 diem vao lenh; ra 0 co che (18/09), 2 (03/10).",
     "co_che_ds": "Co che do DeepSeek viet ra, cho kiem dinh.",
     "so_do": "So do he thong dang html/svg/png.",
     "tru": "**Bay tru** — Seeker/Quantlab/Evolution/Banker/Finder/Nghi. Tang tren.",
@@ -163,19 +163,19 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
         "Noi mot gia thuyet duoc phep doi doi. Hai cong: co that khong, va co ra tien khong.",
         ("mo_phong", "sang_loc", "cong", "cong_ra_tien", "cham_diem",
          "do_luong", "do_luc", "loc_co_che", "danh_muc", "nha_may_null",
-         "suy_giam"),
+         "suy_giam", "kiem_quy_uoc"),
     ),
     "MT5 / TESTER — do that": (
         "Quy tac cua chu du an: MT5 tester TRUOC, Python SAU.",
         ("dich_mq5", "dich_mq5_ghep", "dich_mq5_qtvt", "dich_mq5_quan_tri",
          "doc_lenh_tester", "khoa_tester", "dang_nhap_mt5", "passview",
-         "chay_that", "so_lenh", "san_sang_vps", "khoi_phuc", "tai_khoan_nen_tang"),
+         "chay_that", "so_lenh", "san_sang_vps", "khoi_phuc", "tai_khoan_nen_tang", "slot_tester"),
     ),
     "DIEU HANH & GIAM SAT": (
         "Giu he chay 24/7 va tu thay duoc minh dang hong cho nao.",
         ("do_token", "phien_hien_tai", "evo", "canary", "mach", "do_im_lang", "do_tai_nguyen", "don_mo_coi",
          "han_muc", "ngan_sach", "tran_cpu", "ban_do", "kien_truc", "tri_tue", "so_sanh_llm",
-         "muc_tieu", "vong_day_du", "day_chuyen", "day_chuyen_quantlab"),
+         "muc_tieu", "vong_day_du", "day_chuyen", "day_chuyen_quantlab", "ghi_an_toan", "ho_so_he"),
     ),
 }
 
