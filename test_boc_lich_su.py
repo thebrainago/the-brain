@@ -15,6 +15,7 @@ Bang chung chua co: bo doc HTML viet theo cau truc bang chung, chua thay mau tha
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -662,3 +663,214 @@ def test_bao_cao_mt5_nhieu_bang_chon_Positions_khong_chon_Deals():
 def test_bao_cao_chi_co_bang_deal_bi_tu_choi_chu_khong_doc_sai_im_lang():
     with pytest.raises(ValueError, match="DEAL"):
         BL.doc_bang_html(_bao_cao_mt5(chi_deal=True))
+
+
+# ============================================================== 8. LICH SU THAT (export MQL5 Signals, con 2023752)
+#: Tep that lay tu export chinh thuc cua MQL5 (can dang nhap): chi dung de doi chieu neu co mat trong thu muc; thieu thi bo qua
+TEP_THAT_2023752 = Path(__file__).parent / "reports" / "fixture" / "mql5_2023752_positions.csv"
+
+
+def _hai_cai_dat(tp_quy: dict, buoc_quy: dict, n_don: int = 30, n_hai: int = 12, nam: int = 2024) -> pd.DataFrame:
+    """Lich su 'tac gia doi cai dat': moi quy `n_don` ro 1 lenh (TP = tp_quy[q] pip) + `n_hai` ro NHIEU tang (xen ke 2 va 3 lenh,
+    buoc = buoc_quy[q] pip; xen ke de so tien chot khac nhau giua cac ro con TP tinh bang pip van hang so - nhu EA that).
+    Moi ro cach nhau ~1 ngay nen khong ro nao chong len ro khac cung chieu. Tien: loi = pip * 0,073 (0,01 lot AUDCAD), phi -0,08."""
+    rng = np.random.RandomState(5)
+    hang = []
+    for q, tp in tp_quy.items():
+        t = pd.Timestamp(year=nam, month=3 * (q - 1) + 1, day=2, hour=8)
+        for i in range(n_don + n_hai):
+            chieu = 1 if i % 2 == 0 else -1
+            p0 = 0.8900 + rng.uniform(0, 0.02)
+            if i < n_don:
+                c = p0 + chieu * (tp + rng.uniform(-0.15, 0.15)) * PIP
+                hang.append((t, t + pd.Timedelta(hours=2), chieu, p0, c, round(abs(c - p0) / PIP * 0.073, 2)))
+            else:
+                b = buoc_quy[q] + rng.uniform(-0.3, 0.3)
+                so_tang = 2 if (i - n_don) % 2 == 0 else 3
+                gia = [p0 - chieu * k * b * PIP for k in range(so_tang)]            # moi tang o SAU tang truoc theo huong bat loi
+                c = float(np.mean(gia)) + chieu * tp * PIP
+                for k, g in enumerate(gia):
+                    hang.append((t + pd.Timedelta(hours=1.5 * k), t + pd.Timedelta(hours=8), chieu, g, c,
+                                 round(abs(c - g) / PIP * 0.073, 2)))
+            t += pd.Timedelta(days=1, minutes=int(rng.randint(0, 600)))
+    d = pd.DataFrame(hang, columns=["mo", "dong", "chieu", "gia_mo", "gia_dong", "loi"])
+    d["lot"], d["hoa_hong"], d["swap"], d["ma"] = 0.01, -0.08, 0.0, "AUDCAD"
+    d["chieu"] = d["chieu"].map({1: "buy", -1: "sell"})
+    return d.sort_values("mo").reset_index(drop=True)
+
+
+def _xuat_mql5(d: pd.DataFrame, duong: Path, nap_rut=(("2023.12.25 00:00:00", 500.0), ("2024.03.15 09:00:00", -50.0))):
+    """Ghi bang lenh ra DUNG dinh dang export MQL5: BOM UTF-8, ';', tieu de TRUNG TEN (Time, Volume, Price hai lan), moi nhat o tren,
+    dong Balance (nap / rut) khong co lot / gia, so khong co ky hieu tien."""
+    dong = [(pd.Timestamp(r.dong), "%s;%s;%.2f;%s;%s;%.2f;%s;%s;%s;%s;%s" % (
+        pd.Timestamp(r.mo).strftime("%Y.%m.%d %H:%M:%S"), "Buy" if r.chieu == "buy" else "Sell", r.lot, r.ma, "%g" % r.gia_mo, r.lot,
+        pd.Timestamp(r.dong).strftime("%Y.%m.%d %H:%M:%S"), "%g" % r.gia_dong, "%g" % r.hoa_hong,
+        "" if not r.swap else "%g" % r.swap, "%g" % r.loi)) for r in d.itertuples()]
+    dong += [(pd.Timestamp(t.replace(".", "-")), "%s;Balance;;;;;;;;;%g" % (t, v)) for t, v in nap_rut]
+    dong.sort(key=lambda x: x[0], reverse=True)
+    duong.write_bytes(("\ufeffTime;Type;Volume;Symbol;Price;Volume;Time;Price;Commission;Swap;Profit\n"
+                       + "\n".join(x[1] for x in dong) + "\n").encode("utf-8"))
+
+
+def test_export_mql5_tieu_de_trung_ten_doc_du_gio_dong_gia_dong_phi_va_nap_rut(tmp_path):
+    """Pandas doi cot TRUNG TEN thanh `Time.1` / `Price.1`: ban cu lam mat gio dong + gia dong cua CA lich su (NaN) mot cach im lang."""
+    h = _hai_cai_dat({1: 4.0}, {1: 16.0}, n_don=5, n_hai=2)
+    _xuat_mql5(h, tmp_path / "ls.csv")
+    d = BL.chuan_hoa(tmp_path / "ls.csv", ma="AUDCAD")
+    assert len(d) == len(h) == 5 + 2 + 3
+    assert d["dong"].notna().all() and d["gia_dong"].notna().all() and (d["dong"] > d["mo"]).all()
+    assert d["hoa_hong"].tolist() == [-0.08] * len(h) and (d["swap"].fillna(0.0) == 0).all()
+    assert d["loi"].sum() == pytest.approx(h["loi"].sum(), abs=1e-6)
+    assert d.attrs["so_bo"] == 2                                          # 2 dong Balance: khong phai lenh
+    assert d.attrs["nap_rut"] == [["2023-12-25 00:00:00", 500.0], ["2024-03-15 09:00:00", -50.0]]
+
+
+def test_tien_that_khong_cong_dong_balance_vao_lai_va_uoc_so_du(tmp_path):
+    """Cot Profit cua export co ca dong Balance (nap +, rut -): cong thang vao la sai (con 2023752: 929 lai gop that, 779 neu lan)."""
+    h = _hai_cai_dat({1: 4.0}, {1: 16.0}, n_don=20, n_hai=4)          # 20 ro 1 lenh + 2 ro 2 lenh + 2 ro 3 lenh
+    _xuat_mql5(h, tmp_path / "ls.csv", nap_rut=(("2023.12.25 00:00:00", 500.0), ("2024.02.15 09:00:00", -50.0), ("2024.03.15 09:00:00", -30.0)))
+    d = BL.chuan_hoa(tmp_path / "ls.csv", ma="AUDCAD")
+    t = BL.tien_that(BL.phan_ro(d), d.attrs["nap_rut"])
+    loi_gop, hh = float(h["loi"].sum()), -0.08 * len(h)
+    assert t["so_lenh"] == len(h) and t["loi_gop"] == pytest.approx(loi_gop, abs=0.01)
+    assert t["hoa_hong"] == pytest.approx(hh, abs=0.01) and t["rong"] == pytest.approx(loi_gop + hh, abs=0.01)
+    assert t["phi_tren_loi_gop"] == pytest.approx(-hh / loi_gop, abs=0.001)
+    assert t["ro"]["so_ro"] == 24 and t["ro"]["so_ro_thua"] == 0           # khong ro nao thua trong du lieu dung san
+    assert len(h) == 20 + 2 * 2 + 2 * 3
+    sd = t["so_du"]
+    assert sd["von_dau"] == 500.0 and sd["nap"] == 500.0 and sd["rut"] == -80.0 and sd["so_dong_nap_rut"] == 3
+    assert sd["so_du_cuoi_uoc"] == pytest.approx(500 - 80 + loi_gop + hh, abs=0.01)
+    assert "DA DONG" in sd["luu_y"]
+    do_sau = {z["so_lenh_trong_ro"]: z for z in t["theo_do_sau"]}
+    assert (do_sau["1"]["so_ro"], do_sau["2"]["so_ro"], do_sau["3"]["so_ro"]) == (20, 2, 2)
+    assert sum(z["ty_le_lai"] for z in t["theo_do_sau"]) == pytest.approx(1.0, abs=0.01)
+    # lich su khong co cot loi -> khong bia tien
+    assert BL.tien_that(BL.phan_ro(d.drop(columns=["loi"]))) is None
+    # lich su bi cat (cua so) thi KHONG uoc so du: thieu dong nap dau / nhung lan rut sau
+    assert "so_du" not in BL.tien_that(BL.phan_ro(d), d.attrs["nap_rut"], toan_cua_so=False)
+    # dong dau tien khong phai nap tien -> khong uoc so du
+    assert "so_du" not in BL.tien_that(BL.phan_ro(d), [["2024-03-15 09:00:00", -50.0]])
+
+
+def test_doi_tham_so_phat_hien_tac_gia_doi_cai_dat_va_chi_ky_cuoi():
+    tp = {1: 4.0, 2: 4.0, 3: 7.5, 4: 7.5}
+    bc = {1: 16.0, 2: 16.0, 3: 21.0, 4: 21.0}
+    d = BL.phan_ro(BL.chuan_hoa(_hai_cai_dat(tp, bc), ma="AUDCAD"))
+    r = BL.doi_tham_so(d, PIP)
+    assert r["doi_cai_dat"] is True and [z["quy"] for z in r["theo_quy"]] == ["2024Q1", "2024Q2", "2024Q3", "2024Q4"]
+    ky = r["ky_cuoi"]
+    assert ky["tu"] == "2024-07-01" and ky["so_quy"] == 2                  # dung ranh gioi quy: khong keo quy cu (TP 4) vao
+    assert ky["tp_pip_p50"] == pytest.approx(7.5, abs=0.15) and ky["buoc12_pip_p50"] == pytest.approx(21.0, abs=0.4)
+    assert r["theo_quy"][0]["tp_pip_p50"] == pytest.approx(4.0, abs=0.15)
+    assert r["theo_quy"][0]["buoc12_pip_p50"] == pytest.approx(16.0, abs=0.4)
+    assert all(z["so_ro_1_lenh"] == 30 and z["so_ro_nhieu_tang"] == 12 for z in r["theo_quy"])
+    assert 'tu="2024-07-01"' in r["ghi_chu"]
+    # mot cai dat duy nhat -> khong bao doi, ky cuoi la ca bon quy
+    r1 = BL.doi_tham_so(BL.phan_ro(BL.chuan_hoa(_hai_cai_dat({q: 7.5 for q in (1, 2, 3, 4)}, {q: 21.0 for q in (1, 2, 3, 4)}), ma="AUDCAD")), PIP)
+    assert r1["doi_cai_dat"] is False and r1["ky_cuoi"]["tu"] == "2024-01-01" and r1["ky_cuoi"]["so_quy"] == 4 and "ghi_chu" not in r1
+    # it mau (< 2 quy du `toi_thieu` ro) -> khong co gi de so sanh: None, khong doan
+    nho = BL.phan_ro(BL.chuan_hoa(_hai_cai_dat({1: 4.0, 2: 7.5}, {1: 16.0, 2: 21.0}, n_don=10, n_hai=2), ma="AUDCAD"))
+    assert BL.doi_tham_so(nho, PIP) is None
+    # quy thieu mau o giua cat ky: Q1 va Q3 du mau, Q2 thieu -> ky cuoi chi gom Q3
+    ba = _hai_cai_dat({1: 7.5, 3: 7.5}, {1: 21.0, 3: 21.0})
+    r3 = BL.doi_tham_so(BL.phan_ro(BL.chuan_hoa(ba, ma="AUDCAD")), PIP)
+    assert r3["ky_cuoi"]["tu"] == "2024-07-01" and r3["ky_cuoi"]["so_quy"] == 1
+
+
+def test_boc_voi_doi_cai_dat_canh_bao_ngoai_engine_va_tu_loc_ro_bat_dau_trong_cua_so():
+    tp = {1: 4.0, 2: 4.0, 3: 7.5, 4: 7.5}
+    bc = {1: 16.0, 2: 16.0, 3: 21.0, 4: 21.0}
+    raw = _hai_cai_dat(tp, bc)
+    toan = BL.boc(raw, ma="AUDCAD", phat=False)
+    assert toan["trang_thai"] == "DAT" and toan["doi_tham_so"]["doi_cai_dat"] is True
+    assert any("DOI cai dat" in x and "2024-07-01" in x for x in toan["ngoai_engine"]), toan["ngoai_engine"]
+    assert "cua_so" not in toan and toan["tien_that"]["so_lenh"] == len(raw)
+    ky = BL.boc(raw, ma="AUDCAD", phat=False, tu="2024-07-01")
+    assert ky["cua_so"] == {"tu": "2024-07-01", "den": None}
+    assert ky["lich_su"]["so_ro"] == 84 and ky["lich_su"]["so_lenh"] == 2 * (30 + 6 * 2 + 6 * 3)
+    assert ky["lich_su"]["tu"] >= "2024-07-01" and ky["loai"] == "luoi_dca"
+    assert ky["tham_so"]["tp"] == pytest.approx(7.5, abs=0.2) and ky["tham_so"]["buoc"] == pytest.approx(21.0, abs=0.5)
+    assert not ky["doi_tham_so"]["doi_cai_dat"] and not any("DOI cai dat" in x for x in ky["ngoai_engine"])
+    assert "so_du" not in ky["tien_that"]                                # cat cua so thi khong uoc so du
+    dau = BL.boc(raw, ma="AUDCAD", phat=False, den="2024-06-30")
+    assert dau["lich_su"]["so_ro"] == 84 and dau["tham_so"]["tp"] == pytest.approx(4.0, abs=0.2)
+    with pytest.raises(ValueError):
+        BL.boc(raw, ma="AUDCAD", phat=False, tu="khong phai ngay")
+
+
+def test_loc_cua_so_khong_cat_doi_mot_ro():
+    """Ro bat dau 30/06 22:00 co tang 2 mo 01/07 02:00: `tu=01/07` loai CA ro (khong giu tang 2 nhu mot ro moi); `den=30/06` giu CA ro."""
+    t = pd.Timestamp("2024-06-30 22:00")
+    raw = pd.DataFrame([
+        dict(mo=t, dong=t + pd.Timedelta(hours=7), chieu="buy", lot=0.01, gia_mo=0.9000, gia_dong=0.9005, ma="AUDCAD"),
+        dict(mo=t + pd.Timedelta(hours=4), dong=t + pd.Timedelta(hours=7), chieu="buy", lot=0.01, gia_mo=0.8980, gia_dong=0.9005, ma="AUDCAD"),
+        dict(mo=pd.Timestamp("2024-07-02 10:00"), dong=pd.Timestamp("2024-07-02 11:00"), chieu="buy", lot=0.01, gia_mo=0.9000,
+             gia_dong=0.9004, ma="AUDCAD")])
+    d = BL.chuan_hoa(raw, ma="AUDCAD")
+    assert len(BL.loc_cua_so(d, tu="2024-07-01")) == 1
+    assert len(BL.loc_cua_so(d, den="2024-06-30")) == 2
+    assert len(BL.loc_cua_so(d, tu="2024-06-30", den="2024-07-02")) == 3
+    assert BL.loc_cua_so(d) is d
+    x = BL.loc_cua_so(d, tu="2024-07-01")
+    assert x.attrs["cua_so"] == {"tu": "2024-07-01", "den": None} and x.attrs["pip"] == d.attrs["pip"] and x.attrs["da_chuan_hoa"]
+    assert list(x.columns) == list(d.columns)                           # khong ro rỉ cot `ro` / `tang`
+    assert len(BL.loc_cua_so(d, tu="2030-01-01")) == 0
+
+
+def test_boc_lich_su_qua_cong_cu_tu_den_ghi_vao_spec_va_tep_export_mql5(tmp_path, monkeypatch):
+    tp = {1: 4.0, 2: 4.0, 3: 7.5, 4: 7.5}
+    bc = {1: 16.0, 2: 16.0, 3: 21.0, 4: 21.0}
+    _xuat_mql5(_hai_cai_dat(tp, bc), tmp_path / "ls_that.csv")
+    monkeypatch.setattr(NDL, "LAB", tmp_path)
+    toan = CC.goi("boc_lich_su", {"ma": "AUDCAD", "khung": "M15", "tep": "ls_that.csv", "so_null": 20})
+    assert "loi" not in toan and toan["trang_thai"] == "DAT" and toan["loai_ket_qua"] == "mo_ta"
+    assert toan["doi_tham_so"]["doi_cai_dat"] is True and toan["tien_that"]["so_du"]["von_dau"] == 500.0
+    assert toan["tien_that"]["so_lenh"] == 4 * (30 + 6 * 2 + 6 * 3)
+    ky = CC.goi("boc_lich_su", {"ma": "AUDCAD", "khung": "M15", "tep": "ls_that.csv", "so_null": 20,
+                                "tu": toan["doi_tham_so"]["ky_cuoi"]["tu"]})
+    assert ky["trang_thai"] == "DAT" and ky["cua_so"]["tu"] == "2024-07-01"
+    assert ky["tham_so"]["tp"] == pytest.approx(7.5, abs=0.2) and ky["tn_id"] != toan["tn_id"]
+    assert ky["lich_su"]["so_ro"] == 84 and not ky["doi_tham_so"]["doi_cai_dat"]
+    spec = json.loads(ST.mot("SELECT dau_vao FROM thi_nghiem WHERE id=?", ky["tn_id"])["dau_vao"])
+    assert spec["cua_so"] == {"tu": "2024-07-01", "den": None}
+    assert "cua_so" not in json.loads(ST.mot("SELECT dau_vao FROM thi_nghiem WHERE id=?", toan["tn_id"])["dau_vao"])
+    # cung cua so chay lai -> so tay tra lai; cua so khac -> phep do khac
+    r2 = CC.goi("boc_lich_su", {"ma": "AUDCAD", "khung": "M15", "tep": "ls_that.csv", "so_null": 20, "tu": "2024-07-01"})
+    assert "tu_so_tay" in r2
+    # ngay sai / cua so rong -> tu choi, KHONG ghi so tay
+    n0 = ST.mot("SELECT COUNT(*) n FROM thi_nghiem")["n"]
+    loi = TN.boc_lich_su("AUDCAD", "M15", tep="ls_that.csv", tu="khong phai ngay")
+    assert loi["trang_thai"] == "CHUA_DO_DUOC" and "ngay ISO" in loi["ly_do"]
+    rong = TN.boc_lich_su("AUDCAD", "M15", tep="ls_that.csv", tu="2031-01-01")
+    assert rong["trang_thai"] == "CHUA_DO_DUOC" and "da loc cua so" in rong["ly_do"]
+    assert ST.mot("SELECT COUNT(*) n FROM thi_nghiem")["n"] == n0
+
+
+@pytest.mark.skipif(not TEP_THAT_2023752.exists(), reason="khong co tep export that 2023752 trong reports/fixture")
+def test_lich_su_that_2023752_doc_dung_tien_va_thay_hai_lan_doi_cai_dat():
+    """Doi chieu CON SO: thu may nha tung bao 'gross 779, rong ~544' vi cong nham 15 dong Balance (nap +500, rut -650,02) vao Profit.
+    Dung: lai gop 928,93 - hoa hong 196,22 - swap 38,58 = +694,13 tren 2327 lenh; 544,11 la SO DU CUOI (500 - 650,02 + 694,13)."""
+    d = BL.chuan_hoa(TEP_THAT_2023752, ma="AUDCAD")
+    assert len(d) == 2327 and d.attrs["so_bo"] == 15
+    assert d["dong"].notna().all() and d["gia_dong"].notna().all()
+    assert len(d.attrs["nap_rut"]) == 15 and sum(v for _, v in d.attrs["nap_rut"]) == pytest.approx(-150.02, abs=1e-6)
+    r = BL.boc(d, phat=False)
+    t = r["tien_that"]
+    assert (t["loi_gop"], t["hoa_hong"], t["swap"], t["rong"]) == pytest.approx((928.93, -196.22, -38.58, 694.13), abs=0.01)
+    assert t["so_du"]["so_du_cuoi_uoc"] == pytest.approx(544.11, abs=0.01) and t["so_du"]["von_dau"] == 500.0
+    assert t["ty_le_lenh_thang"] == pytest.approx(0.80, abs=0.01) and t["lenh_thua_lon_nhat"] == pytest.approx(-16.91, abs=0.01)
+    assert t["ro"]["so_ro"] == 1701 and t["ro"]["so_ro_thua"] == 15
+    one = {z["so_lenh_trong_ro"]: z for z in t["theo_do_sau"]}["1"]
+    assert one["ty_le_lai"] == pytest.approx(0.61, abs=0.02)             # ~61% lai tu ro 1 lenh: khong can quan li lenh
+    assert r["loai"] == "luoi_dca" and r["lich_su"]["so_lenh"] == 2327 and r["lich_su"]["tu"].startswith("2023-08-02")
+    # tac gia doi cai dat TP 4,1 -> 6,2 -> 7,6 pip: suy tren toan cua so la TRUNG BINH cac che do
+    doi = r["doi_tham_so"]
+    assert doi["doi_cai_dat"] is True and r["tp"]["che_do_tp"] == "khong_ro"
+    q = {z["quy"]: z for z in doi["theo_quy"]}
+    assert q["2023Q4"]["tp_pip_p50"] == pytest.approx(4.1, abs=0.2) and q["2025Q1"]["tp_pip_p50"] == pytest.approx(6.2, abs=0.3)
+    assert q["2026Q1"]["tp_pip_p50"] == pytest.approx(7.65, abs=0.3)
+    assert doi["ky_cuoi"]["tu"] == "2025-07-01" and doi["ky_cuoi"]["tp_pip_p50"] == pytest.approx(7.6, abs=0.3)
+    assert doi["ky_cuoi"]["buoc12_pip_p50"] == pytest.approx(21.5, abs=2.0)
+    ky = BL.boc(d, phat=False, tu=doi["ky_cuoi"]["tu"])
+    assert ky["tp"]["che_do_tp"] == "pip" and ky["tham_so"]["tp"] == pytest.approx(7.6, abs=0.3)
+    assert ky["tham_so"]["lot"] == 0.01 and ky["tham_so"]["tia_lenh"] is True and not ky["doi_tham_so"]["doi_cai_dat"]

@@ -73,6 +73,8 @@ _BI_DANH = {
     "gia_mo": {"gia_mo", "open_price", "price_open", "openprice", "entry_price"},
     "gia_dong": {"gia_dong", "close_price", "price_close", "closeprice", "exit_price"},
     "loi": {"loi", "profit", "pnl", "p_l", "net_profit", "loi_nhuan"},
+    "hoa_hong": {"hoa_hong", "commission", "comm", "fee", "fees"},
+    "swap": {"swap", "phi_qua_dem", "rollover"},
     "sl": {"sl", "s_l", "stop_loss", "stoploss"},
     "tp": {"tp", "t_p", "take_profit", "takeprofit"},
     "ma": {"ma", "symbol", "instrument", "pair", "item"},
@@ -88,6 +90,9 @@ def _ten_cot(cot) -> list[str]:
             c = [x for x in c if not str(x).startswith("Unnamed")][-1:] or [""]
             c = c[0]
         n = _khong_dau(c)
+        m = re.fullmatch(r"(.+)_(\d+)", n)                 # pandas doi cot TRUNG TEN thanh `Time.1` / `Price.1` (export MQL5)
+        if m and m.group(1) in _HAI_LAN:
+            n = m.group(1)
         if n in _HAI_LAN:
             k = thu_tu.get(n, 0)
             thu_tu[n] = k + 1
@@ -176,10 +181,17 @@ def chuan_hoa(lenh, pip: float | None = None, ma: str | None = None) -> pd.DataF
         raise ValueError("lich su thieu cot %s (co: %s). Can: mo, dong, chieu (buy/sell), lot, gia_mo, gia_dong"
                          % (thieu, list(d.columns)))
     n0 = len(d)
+    # dong NAP / RUT tien (export MQL5: Type = Balance, khong co lot / gia): khong phai lenh, nhung can cho so du that
+    la_nap_rut = d["chieu"].astype(str).str.strip().str.lower().str.match(r"(?:balance|deposit|withdraw|credit|nap|rut)")
+    nap_rut = []
+    if la_nap_rut.any() and "loi" in d.columns:
+        for t, v in zip(_gio(d.loc[la_nap_rut, "mo"]), d.loc[la_nap_rut, "loi"].map(_so)):
+            if pd.notna(t) and pd.notna(v):
+                nap_rut.append([str(t)[:19], float(v)])
     d["mo"] = _gio(d["mo"])
     d["dong"] = _gio(d["dong"]) if "dong" in d.columns else pd.NaT
     d["chieu"] = _chieu(d["chieu"])
-    for c in ("lot", "gia_mo", "gia_dong", "loi", "sl", "tp"):
+    for c in ("lot", "gia_mo", "gia_dong", "loi", "hoa_hong", "swap", "sl", "tp"):
         d[c] = d[c].map(_so) if c in d.columns else np.nan
     if "ma" not in d.columns:
         d["ma"] = str(ma or "")
@@ -189,9 +201,10 @@ def chuan_hoa(lenh, pip: float | None = None, ma: str | None = None) -> pd.DataF
     d["chieu"] = d["chieu"].astype(int)
     # lenh co gio dong nhung thieu gia dong -> coi nhu chua dong (khong bia gia)
     d.loc[d["gia_dong"].isna() | ~(d["gia_dong"] > 0), "dong"] = pd.NaT
-    cot = ["mo", "dong", "chieu", "lot", "gia_mo", "gia_dong", "loi", "sl", "tp", "ma"]
+    cot = ["mo", "dong", "chieu", "lot", "gia_mo", "gia_dong", "loi", "hoa_hong", "swap", "sl", "tp", "ma"]
     d = d[cot].sort_values(["mo", "chieu"], kind="stable").reset_index(drop=True)
     d.attrs["so_bo"] = int(n0 - len(d))
+    d.attrs["nap_rut"] = sorted(nap_rut)
     d.attrs["pip"] = float(pip) if pip else doan_pip(d["ma"].mode().iat[0] if len(d) else ma,
                                                       float(d["gia_mo"].median()) if len(d) else None)
     d.attrs["da_chuan_hoa"] = True
@@ -656,6 +669,149 @@ def _tp_kieu_don(d: pd.DataFrame, pip: float) -> dict:
     return out
 
 
+def loc_cua_so(d: pd.DataFrame, tu=None, den=None) -> pd.DataFrame:
+    """Giu cac RO BAT DAU trong [tu, den] (ngay ISO, `den` gom ca ngay do) - khong cat doi mot ro giua chung. Giu `attrs`.
+    `nap_rut` chi con dong nap/rut trong cua so; `attrs["cua_so"]` = {tu, den} (de `tien_that` khong tinh so du cho lich su cat).
+    Dung de suy tham so RIENG tung ky khi tac gia doi cai dat EA giua chung (xem `doi_tham_so`)."""
+    if tu is None and den is None:
+        return d
+    att = dict(d.attrs)
+    t0 = None if tu is None else pd.Timestamp(tu)
+    t1 = None if den is None else pd.Timestamp(den) + pd.Timedelta(days=1)
+    g = phan_ro(d)
+    dau = g.groupby("ro")["mo"].transform("min")
+    m = pd.Series(True, index=g.index)
+    if t0 is not None:
+        m &= dau >= t0
+    if t1 is not None:
+        m &= dau < t1
+    ra = g.loc[m, list(d.columns)].reset_index(drop=True)
+    ra.attrs.update(att)
+    ra.attrs["cua_so"] = {"tu": None if t0 is None else str(t0)[:10], "den": None if den is None else str(pd.Timestamp(den))[:10]}
+    ra.attrs["nap_rut"] = [e for e in att.get("nap_rut", [])
+                           if (t0 is None or pd.Timestamp(e[0]) >= t0) and (t1 is None or pd.Timestamp(e[0]) < t1)]
+    return ra
+
+
+def tien_that(d: pd.DataFrame, nap_rut: list | None = None, toan_cua_so: bool = True) -> dict | None:
+    """TIEN THAT cua lich su (don vi tien tai khoan cua nguoi do, thuong USD), doc tu cot loi / hoa_hong / swap. None neu khong co cot loi.
+
+    * `rong` = loi + hoa_hong + swap CUA CAC LENH. KHONG gom dong nap / rut tien: cot Profit cua export MQL5 co ca dong Balance
+      (nap +, rut -), cong thang vao la sai (con 2023752: 929 lai gop that, 779 neu lan 15 dong Balance).
+    * `theo_do_sau`: lai rong chia theo SO LENH cua ro -> tra loi 'loi tu entry hay tu trung binh gia': ro 1 lenh khong can quan li lenh.
+    * `so_du`: chi khi lich su day du (khong loc cua so) va dong dau tien la NAP: so du cuoi uoc = nap + rut + rong.
+      Chi tinh lenh DA DONG, khong thay lo treo - sut giam THAT (equity) lon hon: lay tu trang signal (dd_pct)."""
+    if "loi" not in d.columns or not d["loi"].notna().any():
+        return None
+    x = d[d["loi"].notna()]
+    hh = x["hoa_hong"].fillna(0.0) if "hoa_hong" in x.columns else pd.Series(0.0, index=x.index)
+    sw = x["swap"].fillna(0.0) if "swap" in x.columns else pd.Series(0.0, index=x.index)
+    net = x["loi"] + hh + sw
+    gop = float(x["loi"].sum())
+    ra = {"so_lenh": int(len(x)), "loi_gop": round(gop, 2), "hoa_hong": round(float(hh.sum()), 2), "swap": round(float(sw.sum()), 2),
+          "rong": round(float(net.sum()), 2),
+          "phi_tren_loi_gop": round(float(-(hh.sum() + sw.sum()) / gop), 3) if gop > 0 else None,
+          "ty_le_lenh_thang": round(float((net > 0).mean()), 3),
+          "thang_tb": round(float(net[net > 0].mean()), 3) if (net > 0).any() else None,
+          "thua_tb": round(float(net[net <= 0].mean()), 3) if (net <= 0).any() else None,
+          "lenh_thua_lon_nhat": round(float(net.min()), 3)}
+    if "ro" in x.columns:
+        g = x.assign(_net=net).groupby("ro")
+        ro = g.agg(n=("_net", "size"), net=("_net", "sum"))
+        ra["ro"] = {"so_ro": int(len(ro)), "so_ro_thua": int((ro["net"] < 0).sum()),
+                    "lo_ro_tong": round(float(ro.loc[ro["net"] < 0, "net"].sum()), 2),
+                    "ro_thua_lon_nhat": round(float(ro["net"].min()), 3)}
+        nhom = pd.cut(ro["n"], [0, 1, 2, 3, 5, 10 ** 6], labels=["1", "2", "3", "4-5", "6+"])
+        tong = float(ro["net"].sum())
+        ra["theo_do_sau"] = [
+            {"so_lenh_trong_ro": str(k), "so_ro": int(len(v)), "lai_rong": round(float(v["net"].sum()), 2),
+             "ty_le_lai": round(float(v["net"].sum() / tong), 3) if tong > 0 else None, "so_ro_thua": int((v["net"] < 0).sum())}
+            for k, v in ro.groupby(nhom, observed=True)]
+    if toan_cua_so and nap_rut:
+        ev = sorted([[str(t), float(v)] for t, v in nap_rut])
+        if ev[0][1] > 0:
+            nap = sum(v for _, v in ev if v > 0)
+            rut = sum(v for _, v in ev if v < 0)
+            e = pd.concat([pd.Series(net.to_numpy(float), index=pd.to_datetime(x["dong"].fillna(x["mo"]).to_numpy())),
+                           pd.Series([v for _, v in ev], index=pd.to_datetime([t for t, _ in ev]))]).sort_index()
+            so_du = e.cumsum()
+            ra["so_du"] = {"von_dau": round(ev[0][1], 2), "so_dong_nap_rut": len(ev), "nap": round(nap, 2), "rut": round(rut, 2),
+                           "so_du_cuoi_uoc": round(nap + rut + float(net.sum()), 2),
+                           "so_du_thap_nhat_lenh_da_dong": round(float(so_du.min()), 2),
+                           "lai_rong_tren_von_dau": round(float(net.sum()) / ev[0][1], 3),
+                           "luu_y": "chi tinh lenh DA DONG: lo dang treo (equity) khong nam trong danh sach lenh; sut giam that lay "
+                                    "tu trang signal, khong tu day"}
+    return ra
+
+
+def _quy(serie: pd.Series) -> pd.Series:
+    return serie.dt.to_period("Q").astype(str)
+
+
+def doi_tham_so(d: pd.DataFrame, pip: float, toi_thieu: int = 20, dung_sai: float = 0.06) -> dict | None:
+    """Tac gia co DOI cai dat EA giua chung khong? TP (pip) cua ro 1 lenh va buoc tang 1 -> 2 theo QUY.
+
+    Tren con 2023752 (AUDCAD, 3 nam): TP 4,1 pip (2023-2024Q2) -> 6,2 (2024Q4-2025Q1) -> 7,6 (2025Q3 tro di), buoc tang 1->2
+    16 -> 22 pip - phan vi trong tung ky RAT HEP (7,5-7,9) nen la cai dat co dinh bi doi tay, khong phai noise. Suy tham so tren TOAN
+    cua so cho con so TRUNG BINH cua ba che do (TP 'khong ro', buoc CV 0,47) - khong cai dat nao ca. Dung `ky_cuoi.tu` lam tham so
+    `tu` cua `boc_lich_su` de suy rieng cai dat HIEN TAI.
+
+    `ky_cuoi` = cac quy lien tiep tinh tu quy cuoi (du `toi_thieu` ro 1 lenh) ma [p25, p75] cua TP nam trong +/- `dung_sai` quanh
+    trung vi quy cuoi. None neu < 2 quy du mau (khong co gi de so)."""
+    if not {"ro", "tang"} <= set(d.columns):
+        return None
+    n_ro = d.groupby("ro")["tang"].transform("size")
+    don = d[(n_ro == 1) & d["dong"].notna()]
+    if don.empty:
+        return None
+    tp = (don["chieu"] * (don["gia_dong"] - don["gia_mo"]) / pip).rename("tp")
+    tp_q = pd.DataFrame({"q": _quy(don["dong"]), "tp": tp.to_numpy(float)})
+    dd = d.sort_values(["ro", "mo", "tang"], kind="stable").copy()
+    dd["_k"] = dd.groupby("ro").cumcount()
+    a = dd[dd["_k"] == 0].set_index("ro")
+    b = dd[dd["_k"] == 1].set_index("ro")
+    j = a.join(b, lsuffix="_a", rsuffix="_b", how="inner")
+    st = pd.DataFrame({"q": _quy(j["mo_a"]) if len(j) else pd.Series(dtype=str),
+                       "buoc": (j["chieu_a"] * (j["gia_mo_a"] - j["gia_mo_b"]) / pip).to_numpy(float) if len(j) else []})
+    rows = []
+    for q in sorted(set(tp_q["q"]) | set(st["q"])):
+        t, s_ = tp_q.loc[tp_q["q"] == q, "tp"], st.loc[st["q"] == q, "buoc"]
+        rows.append({"quy": q, "so_ro_1_lenh": int(len(t)),
+                     "tp_pip_p25": round(float(t.quantile(.25)), 2) if len(t) else None,
+                     "tp_pip_p50": round(float(t.median()), 2) if len(t) else None,
+                     "tp_pip_p75": round(float(t.quantile(.75)), 2) if len(t) else None,
+                     "so_ro_nhieu_tang": int(len(s_)),
+                     "buoc12_pip_p50": round(float(s_.median()), 2) if len(s_) else None})
+    du = [r for r in rows if r["so_ro_1_lenh"] >= toi_thieu]
+    if len(du) < 2:
+        return None
+    cuoi = du[-1]
+    m = cuoi["tp_pip_p50"]
+    gom = [cuoi]
+    for r in reversed(du[:-1]):
+        if pd.Period(gom[0]["quy"]).ordinal - pd.Period(r["quy"]).ordinal != 1:      # thung quy thieu mau: dung
+            break
+        if r["tp_pip_p25"] >= m * (1 - dung_sai) and r["tp_pip_p75"] <= m * (1 + dung_sai):
+            gom.insert(0, r)
+        else:
+            break
+    tu = str(pd.Period(gom[0]["quy"]).start_time.date())
+    t_ky = tp[(don["dong"] >= pd.Timestamp(tu)).to_numpy()]
+    b_ky = st.loc[st["q"] >= gom[0]["quy"], "buoc"] if len(st) else pd.Series(dtype=float)
+    doi = abs(du[0]["tp_pip_p50"] / m - 1) > 0.15
+    ra = {"theo_quy": rows, "doi_cai_dat": bool(doi),
+          "ky_cuoi": {"tu": tu, "so_quy": len(gom), "so_ro_1_lenh": int(len(t_ky)),
+                      "tp_pip_p25": round(float(t_ky.quantile(.25)), 2), "tp_pip_p50": round(float(t_ky.median()), 2),
+                      "tp_pip_p75": round(float(t_ky.quantile(.75)), 2),
+                      "so_ro_nhieu_tang": int(len(b_ky)),
+                      "buoc12_pip_p50": round(float(b_ky.median()), 2) if len(b_ky) else None}}
+    if doi:
+        ra["ghi_chu"] = ("tac gia DOI cai dat giua chung: TP ro 1 lenh %.1f pip (%s) -> %.1f pip (%s); buoc 1->2 %s -> %s pip. "
+                         "Suy tham so tren TOAN cua so la trung binh cac che do: dung tu=\"%s\" de lay cai dat hien tai"
+                         % (du[0]["tp_pip_p50"], du[0]["quy"], m, cuoi["quy"], du[0]["buoc12_pip_p50"], cuoi["buoc12_pip_p50"], tu))
+    return ra
+
+
 def phan_tich_lenh(lenh: pd.DataFrame, hop_dong: float = HOP_DONG_MAC_DINH, spread_pip: float | None = None) -> dict:
     """Moi thu rut duoc tu CHINH danh sach lenh (khong can bar): ro, tham so luoi suy ra, do tin, mo ta he don lenh.
 
@@ -686,6 +842,8 @@ def phan_tich_lenh(lenh: pd.DataFrame, hop_dong: float = HOP_DONG_MAC_DINH, spre
     dong = ro[ro["da_dong"]]
     lo = dong[dong["tp_pip"] < 0]
     dong_le = dong[(~dong["dong_cung_luc"]) & (~tia["tia_lenh"])]
+    tien = tien_that(d, lenh.attrs.get("nap_rut"), toan_cua_so=not lenh.attrs.get("cua_so"))
+    doi = doi_tham_so(d, pip)
     ra = {"trang_thai": "DAT", "ma": ma_list, "pip": pip, "hop_dong": hop_dong, "spread_pip": spread_pip,
           "lich_su": {"so_lenh": int(len(d)), "so_ro": n_ro, "so_ro_nhieu_tang": int(len(nhieu)),
                       "tu": str(d["mo"].min())[:19], "den": str((d["dong"].max() if d["dong"].notna().any() else d["mo"].max()))[:19],
@@ -699,6 +857,12 @@ def phan_tich_lenh(lenh: pd.DataFrame, hop_dong: float = HOP_DONG_MAC_DINH, spre
           "ro_dong_le_ty_le": round(len(dong_le) / len(dong), 3) if len(dong) else None,
           "che_do": {"gia_tri": che_do, "ro_mua": mua, "ro_ban": ban},
           "lich": _lich(ro)}
+    if lenh.attrs.get("cua_so"):
+        ra["cua_so"] = lenh.attrs["cua_so"]
+    if tien:
+        ra["tien_that"] = tien
+    if doi:
+        ra["doi_tham_so"] = doi
     # luoi/DCA = nhieu ro co tang them va cac tang xep thanh THANG (moi tang o SAU tang truoc theo huong bat loi).
     # Lenh doc lap chong len nhau chi xep thang ngau nhien (~0,5^(so tang - 1)) nen nguong 0,75 + >= 20 ro tach duoc.
     ra["loai"] = ("luoi_dca" if (len(nhieu) >= 20 and (buoc.get("ty_le_ro_luoi_sach") or 0) >= 0.75)
@@ -746,6 +910,8 @@ def phan_tich_lenh(lenh: pd.DataFrame, hop_dong: float = HOP_DONG_MAC_DINH, spre
     if len(ma_list) > 1:
         ngoai.append("lich su co %d ma (%s): ro chi gom trong tung ma, nhung tham so suy ra la GOP - loc theo ma truoc"
                      % (len(ma_list), ", ".join(ma_list[:5])))
+    if doi and doi["doi_cai_dat"]:
+        ngoai.append(doi["ghi_chu"])
     if tp["che_do_tp"] == "pip" and spread_pip is None:
         ngoai.append("khong biet spread luc vao lenh: TP o tham_so la TP DO DUOC tren lich su (da tru spread neu gia lich su la ask/bid "
                      "that); truyen spread_pip (hoac dua bar co cot spread) de cong lai cho dung quy uoc engine")
@@ -1051,11 +1217,13 @@ def phat_lai(bar: pd.DataFrame, tham_so: dict, ro_that: pd.DataFrame, qc=None, h
 # ============================================================== NHAC TOAN BO
 def boc(lenh, bar: pd.DataFrame | None = None, pip: float | None = None, ma: str | None = None,
         hop_dong: float = HOP_DONG_MAC_DINH, lech_gio: float | None = None, dich: int = 1, so_null: int = 200,
-        qc=None, phat: bool = True, spread_pip: float | None = None) -> dict:
+        qc=None, phat: bool = True, spread_pip: float | None = None, tu=None, den=None) -> dict:
     """Ca duong ong: chuan hoa -> gom ro -> suy tham so -> (co bar) can gio, tim dieu kien vao, phat lai. Bo cac truong `_`.
-    `spread_pip` mac dinh = trung vi cot `spread` (POINT) cua bar doi pip (point = qc.point, khong co qc thi pip / 10)."""
+    `spread_pip` mac dinh = trung vi cot `spread` (POINT) cua bar doi pip (point = qc.point, khong co qc thi pip / 10).
+    `tu` / `den` (ngay ISO): chi xet cac ro bat dau trong khoang do - dung khi `doi_tham_so` bao tac gia doi cai dat giua chung."""
     # bang da chuan hoa (co the chi gom lenh MUA: cot chieu toan +1 mo ho voi enum MT5) thi khong chuan hoa lai
     d = lenh if (isinstance(lenh, pd.DataFrame) and lenh.attrs.get("da_chuan_hoa")) else chuan_hoa(lenh, pip=pip, ma=ma)
+    d = loc_cua_so(d, tu, den)
     if spread_pip is None and bar is not None and "spread" in bar.columns:
         point = qc.point if qc is not None else d.attrs["pip"] / 10.0
         sp = float(pd.to_numeric(bar["spread"], errors="coerce").median())

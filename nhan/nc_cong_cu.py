@@ -391,7 +391,10 @@ CONG_CU: list[dict] = [
         "(ngoai_engine); gio lech may chu uoc bang chinh gia; dieu kien vao (dac trung nc_dac_trung, dich vong null da sua "
         "theo so dac trung) va phat lai qua luoi.chay so voi lich su that. Bar CHI tu doan kham_pha/xac_nhan cua (ma, khung); "
         "lich su roi vao niem_phong thi chi mo ta. Nguoi thang la mau chon theo ket qua: tham_so/luat boc duoc la GIA THUYET - "
-        "dua sang thu_luoi / thu_co_che tren doan NGOAI cua so song cua ho. trang_thai DAT o day = da mo ta duoc, khong phai co lai.",
+        "dua sang thu_luoi / thu_co_che tren doan NGOAI cua so song cua ho. trang_thai DAT o day = da mo ta duoc, khong phai co lai. "
+        "Tep export MQL5 (cot Time;Type;Volume;Symbol;Price;Volume;Time;Price;Commission;Swap;Profit) doc duoc nguyen: ra them "
+        "`tien_that` (lai rong sau phi that, lai theo do sau ro, so du uoc tinh tu dong Balance) va `doi_tham_so` (TP / buoc doi theo quy "
+        "-> dung `tu` = ky_cuoi.tu de suy cai dat HIEN TAI).",
         {"ma": _MA, "khung": _KHUNG,
          "tep": {"type": "string", "description": "duong dan tep lich su (.csv/.json/.html) trong thu muc du an"},
          "lenh": {"type": "array", "items": {"type": "object"},
@@ -402,10 +405,13 @@ CONG_CU: list[dict] = [
          "so_null": {"type": "integer", "description": "so lan dich vong null khi tim dieu kien vao (mac dinh 200)"},
          "phat": {"type": "boolean", "description": "co phat lai tham so qua luoi.chay khong (mac dinh true)"},
          "hop_dong": {"type": "number", "description": "co hop dong (mac dinh theo quy cach, FX 100000)"},
+         "tu": {"type": "string", "description": "ngay ISO: chi xet ro BAT DAU tu ngay nay (dung khi doi_tham_so bao tac gia doi cai dat; "
+                                                 "lay doi_tham_so.ky_cuoi.tu)"},
+         "den": {"type": "string", "description": "ngay ISO: chi xet ro bat dau den het ngay nay"},
          "gt_id": _GT}, ["ma"],
         lambda ma, khung="M15", tep=None, lenh=None, doan="kham_pha", pip=None, lech_gio=None, so_null=200,
-        phat=True, hop_dong=None, gt_id=None, vong_id=None, **_:
-        TN.boc_lich_su(ma, khung, tep, lenh, doan, pip, lech_gio, int(so_null), bool(phat), hop_dong, gt_id, vong_id)),
+        phat=True, hop_dong=None, gt_id=None, vong_id=None, tu=None, den=None, **_:
+        TN.boc_lich_su(ma, khung, tep, lenh, doan, pip, lech_gio, int(so_null), bool(phat), hop_dong, gt_id, vong_id, tu, den)),
     _cc("quet_luoi",
         "QUET THAM SO he LUOI (nhan/luoi.py) trong MOT lan goi, tren doan KHAM PHA - thay cho hang tram lan goi thu_luoi (moi lan goi = "
         "mot vong LLM = token). `luoi` = {tham_so: [gia tri,...]} (toi da 6 truc, 40 gia tri/truc, tich Descartes; qua toi_da_o thi lay mau "

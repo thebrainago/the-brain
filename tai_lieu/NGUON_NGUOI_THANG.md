@@ -130,7 +130,7 @@ lenh `backtest` va `optimize`, du lieu tick tu server / M1 tu server / **M1 tu f
 |---|---|---|
 | cloud - XONG 03/10 | `luoi.py` nhan quy cach theo ma; AUDCAD **giu nguyen tung con so** | `test_luoi_quy_cach.py` (51 test: hoi quy AUDCAD tung bit, bat bien theo ti le gia / pip / point / lot / von, ca tinh tay, `thu_luoi` qua so tay); kiem dot bien: hang so AUDCAD con sot -> test bat |
 | cloud - XONG 03/10 | sua loi CU `luoi._mot_ro` (+ nhan C): `lai_arr[0]` nay = `-(spread lenh dau)`, truoc la `-TONG spread ca chuoi` -> `equity[0] = von - tong spread`. **`lai_rong` khong doi, golden 7/7 khong doi mot bit**; doi o hai cho: (1) von sat muc stop-out bi bao chay o bar 0 du chua lo gi; (2) he so lot o tran DD (`_he_so_lot_tai_tran`) bi chan nhan tao o k = von / tong spread (do tren chuoi tong hop: 71,5 / 19,3 / 8,4 / 249,8, nay 1000 / 492 / 931 / 1000 = do SUT GIAM quyet dinh) -> cau hinh giao dich nhieu truoc day bi phat theo so lenh khi xep theo `loi_suat_o_tran_pct`. Chua co dong so tay nao bi anh huong (sau khi lam lai tu dau khong con dong `luoi` nao). Van tay `thu_luoi` nay gom `luoi.PHIEN_BAN_ENGINE` (=3) de lan doi engine sau khong tai dung ket qua cu | `test_luoi_quy_cach.py` muc 9 (4 ca, FAIL tren ban cu), `test_he_so_lot_tran.py` (3 ca, FAIL tren ban cu), 2 ban dot bien nhan C `bar0_*` |
-| cloud - XONG 03/10 | **boc tham so + dieu kien vao tu LICH SU LENH**: `nhan/boc_lich_su.py`, cong cu nc `boc_lich_su` (buoc, he so lot, TP, gio lech, dieu kien vao suy nguoc tu bang lenh; AI co the doi chieu voi bar that qua cac tool co san) | 36 test tren du lieu cai san dap an. **Chua chay tren lich su that** (chua co bang lenh nao ve repo) -> chua co con so lai nao tu nhanh nay |
+| cloud - XONG 03/10 | **boc tham so + dieu kien vao tu LICH SU LENH**: `nhan/boc_lich_su.py`, cong cu nc `boc_lich_su` (buoc, he so lot, TP, gio lech, dieu kien vao suy nguoc tu bang lenh; AI co the doi chieu voi bar that qua cac tool co san) | 45 test: 38 tren du lieu cai san dap an + 7 tren dinh dang export MQL5 that. Chay tren lich su THAT dau tien 03/10 khuya (con 2023752, muc 11); chua co phep do lai tren du lieu cua ta |
 | cloud - XONG 03/10 | **nhan C cho engine luoi** (`nhan/luoi_nhan.c` + `.py`, ctypes, du phong Python): x134 tren engine, khop tung bit voi Python (3.11/3.12/3.13), ASan sach; sau khi go diem nghen thu hai (`_he_so_lot_tai_tran` ranh gioi Pareto, ban cu 80 lan chia doi) mot lan danh gia luoi tren 190.000 bar: **1547 ms -> 18 ms (x86)** | `test_luoi_nhan.py` (116 test), `test_he_so_lot_tran.py` (62 test); chi tiet + lenh o `TOC_DO_TEST.md` |
 | cloud - XONG 03/10 | **quet tham so luoi trong MOT goi**: cong cu nc `quet_luoi` (`nc_thi_nghiem.quet_luoi`; `luoi.chuan_bi` + `luoi.chay_mang` tach tu `luoi.chay`, bit-y-het): ca luoi (tich Descartes, <= 6 truc, <= 40 gia tri / truc, <= 1.000 o / goi, vuot thi lay mau theo `hat`) chay da luong tren **kham_pha**; moi o la MOT phep thu; doc hinh dang CAO_NGUYEN / CAI_GAI / HON_HOP / KHONG_CO_LAI la NHAN; o tot nhat chi la LUA CHON -> tiep bang `thu_luoi` tren xac_nhan. Do: 54 o x 190.000 bar (du lieu tong hop) 31,2 s Python -> 0,62 s C (11,6 ms / o) | `test_quet_luoi.py` (61 test, dot bien diet 3/4 mutant song duoc, con 1 mutant tuong duong); o tot nhat khop `thu_luoi` mot o tung con so. **Chua chay tren bar that** |
 | nha | lay bang lenh cua 31 ID (tab History: ghi URL AJAX + luu 1 trang fixture), 1 trang / 3-5 giay | file fixture trong repo, cloud viet adapter |
@@ -152,3 +152,29 @@ lenh `backtest` va `optimize`, du lieu tick tu server / M1 tu server / **M1 tu f
 - TradingView xuat du lieu chien luoc: https://www.tradingview.com/support/solutions/43000613680/ · khong co API chinh thuc: https://blog.traderspost.io/article/tradingview-api
 - Pine cuc bo: https://pynescript.readthedocs.io/ · https://gittrend.io/repo/PyneSys/pynecore
 - Collective2 (track go-forward): https://www.wealth-lab.com/a/BuildNotesB40C2
+
+## 11. Lich su lenh THAT dau tien: con 2023752 (AUDCAD, 03/10 khuya)
+
+Nguon: export chinh thuc MQL5 `/en/signals/2023752/export/positions` (nha lay bang trinh duyet AI da dang nhap). `boc_lich_su` nay doc dung tep that
+(truoc do tieu de TRUNG TEN Time/Price/Volume lam mat gio dong + gia dong cua CA lich su mot cach im lang; them cot Commission/Swap; dong Balance = nap/rut).
+Ket qua: 2327 lenh dong (0,01 lot 2201 / 0,02 99 / 0,03 23 / 0,04 4), 1701 ro, 2023-08-02 -> 2026-10-02, hai chieu, 15 dong Balance.
+
+| Dieu do duoc | So |
+|---|---|
+| Lai gop - hoa hong - swap = **lai rong** | 928,93 - 196,22 - 38,58 = **+694,13 USD** (phi an 25% lai gop; hoa hong 0,08 / lenh 0,01 lot) |
+| Nap / rut | +500 dau, 13 lan rut 50, 1 dong -0,02 -> -650,02 tong; **so du cuoi uoc 544,11** (= 500 - 650,02 + 694,13) |
+| Ro thua | 15 / 1701 ro (tong -21,29); lenh thua lon nhat -16,91; 80% lenh thang |
+| Lai theo do sau ro | ro 1 lenh = 61% lai (1340 ro, 1 ro thua); ro 4+ lenh: 60 ro, 14 thua - cho thua nam o do sau |
+| MQL5 cong bo (khong doc duoc tu danh sach lenh dong) | maxDD 41,57% (equity, gom lo treo) - duoi tran 80% cua chu du an |
+
+**Sua mot con so sai trong thu nha 051a**: "gross 779 / rong ~544 / lo lon nhat -50" cong nham 15 dong Balance vao cot Profit. 544 la SO DU CUOI, -50 la mot lan RUT TIEN.
+
+**Tac gia DOI cai dat giua chung** (`doi_tham_so`, theo quy): TP cua ro 1 lenh **4,1 pip** (2023Q3-2024Q2) -> **6,2** (2024Q4-2025Q1) -> **7,6** (tu 2025Q3, bien p25-p75 chi 7,5-7,9);
+buoc tang 1 -> 2: 16 -> 21-22 pip. Suy tham so tren TOAN lich su cho con so TRUNG BINH cua ba che do (TP "khong ro", buoc CV 0,47) = khong cai dat nao ca: dung `tu`.
+Cai dat HIEN TAI (tu 2025-07-01, `boc_lich_su ... "tu":"2025-07-01"`): hai chieu, lot 0,01 co dinh (tang 3: 0,02), TP 7,6 pip (do tin vua), buoc ~21 pip (he so ~1,2, CV 0,64 - buoc co ve dong),
+tia lenh (cat cap) bien ~5 pip, tran tang quan sat 5 (toan lich su 9). Vao lenh: nen M5 moi, dom 15-18h gio may chu - **la gia thuyet, chua do** (can bar trong cua so cua con = xac_nhan / niem_phong, KHONG dung de tim luat).
+
+**Cach thu dung ky luat** (nguoi thang chon theo KET QUA -> chi tham so la gia thuyet): (1) `quet_luoi` M15 **kham_pha 2018-01-02 -> 2023-07-02** = hoan toan TRUOC khi con bat dau (2023-07-26) = bang chung DOC LAP
+ve viec cai dat co ban chat hay chi gap may; quanh buoc 14-26, TP 6-14 (phi XM > phi cua con nen TP quet rong hon), chon theo HINH DANG cao nguyen; (2) MOT o tren `xac_nhan` (khoang con dang song: khong doc lap, chi
+chung minh LAM LAI duoc); (3) niem phong MOT lan neu o do DAT = co lai sau phi + maxDD < 80% o dung don bay do. **Khong dung `xac_nhan` / niem phong de hieu chuan.**
+Chi phi can `do_tin` khac KHAI. Thu #8 (`viec/thu/`) co lenh cu the.

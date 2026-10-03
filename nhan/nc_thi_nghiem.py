@@ -1307,7 +1307,7 @@ _TEP_LICH_SU_TOI_DA = 50_000
 def boc_lich_su(ma: str, khung: str = "M15", tep: str | None = None, lenh: list | None = None,
                 doan: str = "kham_pha", pip: float | None = None, lech_gio: float | None = None,
                 so_null: int = 200, phat: bool = True, hop_dong: float | None = None,
-                gt_id: int | None = None, vong_id: int | None = None) -> dict:
+                gt_id: int | None = None, vong_id: int | None = None, tu: str | None = None, den: str | None = None) -> dict:
     """Boc logic tu LICH SU LENH cua nguoi thang (so do dong 41) - MO TA, khong phai phep do loi nhuan.
 
     Dau vao: `tep` (CSV / JSON / HTML luu tu trang Signals MQL5, Myfxbook, bao cao tester; duong dan TRONG thu muc du an)
@@ -1319,7 +1319,11 @@ def boc_lich_su(ma: str, khung: str = "M15", tep: str | None = None, lenh: list 
     (ma, khung) - phan lich su roi vao doan niem phong khong duoc dung de can gio / tim dieu kien / phat lai. Nguoi thang la mau
     CHON THEO KET QUA nen luat boc duoc chi la GIA THUYET: dua sang `thu_luoi` / `thu_co_che` tren doan NGOAI cua so song cua ho.
     `trang_thai` = DAT nghia la DA MO TA DUOC (khong phai co lai sau phi): xem `loai_ket_qua = mo_ta`. Chi phep thu thuc su
-    (tim dieu kien vao tren bar) moi tinh `so_phep_thu` = 1."""
+    (tim dieu kien vao tren bar) moi tinh `so_phep_thu` = 1.
+
+    `tu` / `den` (ngay ISO): chi xet cac ro BAT DAU trong khoang do. Dung khi ket qua bao `doi_tham_so.doi_cai_dat` (tac gia doi cai
+    dat EA giua chung - con 2023752: TP 4,1 -> 6,2 -> 7,6 pip): suy tham so tren TOAN lich su cho con so trung binh cua nhieu che do;
+    lay `doi_tham_so.ky_cuoi.tu` lam `tu` de suy cai dat HIEN TAI."""
     import hashlib
     import re
     from nhan import boc_lich_su as BL
@@ -1360,12 +1364,20 @@ def boc_lich_su(ma: str, khung: str = "M15", tep: str | None = None, lenh: list 
         att = dict(d.attrs)
         d = khop.reset_index(drop=True)
         d.attrs.update(att)
+    if tu is not None or den is not None:
+        try:
+            d = BL.loc_cua_so(d, tu, den)
+        except (ValueError, TypeError) as e:
+            return tu_choi("`tu` / `den` phai la ngay ISO (vd 2025-07-01): %s" % str(e)[:120])
     if len(d) < 2:
-        return tu_choi("lich su chi co %d lenh hop le (bo %d dong)" % (len(d), d.attrs.get("so_bo", 0)))
+        return tu_choi("lich su chi co %d lenh hop le (bo %d dong%s)"
+                       % (len(d), d.attrs.get("so_bo", 0), "; da loc cua so %s" % d.attrs["cua_so"] if d.attrs.get("cua_so") else ""))
     cot = ["mo", "dong", "chieu", "lot", "gia_mo", "gia_dong"]
     sha = hashlib.sha1(d[cot].to_csv(index=False).encode("utf-8")).hexdigest()[:16]
     spec = {"lenh_sha": sha, "so_lenh": int(len(d)), "pip": pip, "lech_gio": lech_gio, "so_null": int(so_null),
             "phat": bool(phat), "hop_dong": hop_dong, "ban": BL.PHIEN_BAN}
+    if d.attrs.get("cua_so"):
+        spec["cua_so"] = d.attrs["cua_so"]
     vt = ST.van_tay("boc_lich_su", ma, khung, doan, spec)
     cu = ST.da_thu(vt)
     if cu and cu.get("ket_qua"):
