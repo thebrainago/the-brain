@@ -369,6 +369,25 @@ def test_ca_bien_cham_dung_moc_khop_tung_bit(nhan, ca, chieu):
     assert np.array_equal(a[0], b[0]) and np.array_equal(a[1], b[1]) and a[3] == b[3]
 
 
+def test_bar_0_la_spread_lenh_dau_o_ca_python_va_nhan_c(nhan):
+    """`lai_arr[0]` = -(spread[0] * ts.lot * hop): chi phi DA TRA luc bar 0 (sua 03/10/2026). Truoc do ca hai ban gan
+    `-tong spread ca chuoi` -> diem dau gia, xem test_luoi_quy_cach muc 9. Tung bit, hai chieu, ca cap JPY."""
+    so_ca = so_nhieu_lenh = 0
+    for jpy in (False, True):
+        for seed in (1, 2, 3):
+            for hi, lo, cl, sp, dem, ts, qc in _so_ngau_nhien(seed, 6, jpy):
+                for chieu in (1, -1):
+                    mong = -(sp[0] * ts.lot * qc.hop_dong)
+                    a, b = _py(hi, lo, cl, sp, dem, chieu, ts, qc), _c(hi, lo, cl, sp, dem, chieu, ts, qc)
+                    assert a[0][0] == mong and b[0][0] == mong, (a[0][0], b[0][0], mong)
+                    assert a[1][0] == 0.0 and b[1][0] == 0.0
+                    so_ca += 1
+                    if a[2]["so_lenh"] > 1:
+                        so_nhieu_lenh += 1
+                        assert a[0][0] > -a[2]["phi_spread"]                 # khong con la tong ca chuoi
+    assert so_ca >= 30 and so_nhieu_lenh >= so_ca // 2, (so_ca, so_nhieu_lenh)
+
+
 def test_ham_c_tu_choi_dau_vao_ngoai_mien(nhan):
     """n = 0 hoac chieu = 0: wrapper khong bao gio gui, nhung ham C van phai tu choi (ma loi) chu khong doc bo nho bay."""
     p = LN._dong_goi(LU.ThamSo(), LU.QC_AUDCAD, 1)
@@ -659,7 +678,8 @@ _DOT_BIEN = {
     "he_so_buoc_lech_tang": ("double b0 = buoc_k(buoc, he_buoc, buoc_tran, so_tang - 1);",
                              "double b0 = buoc_k(buoc, he_buoc, buoc_tran, so_tang);", False),
     "qua_dem_365": ("/ 365.0 * cl[i];", "/ 360.0 * cl[i];", False),
-    "bar0_sua_loi": ("lai_arr[0] = -phi_sp;", "lai_arr[0] = -(spread[0] * lot * hop);", False),
+    "bar0_loi_cu": ("lai_arr[0] = -phi_sp_bar0; ", "lai_arr[0] = -phi_sp;       ", False),
+    "bar0_quen_spread_lenh_dau": ("const double phi_sp_bar0 = phi_sp;", "const double phi_sp_bar0 = 0.0;   ", False),
     "kahan_vuot_bien": ("for (int64_t k = 1; k < n; k++) {", "for (int64_t k = 1; k <= n; k++) {", True),
     "kahan_bo_bu": ("if (c != 0.0 && isfinite(c)) f += c;", "if (c != 0.0 && isfinite(c)) f += 0.0;", True),
 }

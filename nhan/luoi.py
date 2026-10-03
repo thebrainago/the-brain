@@ -331,6 +331,12 @@ def quy_cach_cho(ma: str, gia_dien_hinh: float | None = None, cp=None) -> tuple[
                    nguon="%s; %s" % (nguon, nguon_phi)), ""
 
 
+#: Tang MOI KHI engine doi SO LIEU ra (khong tinh khi chi doi cach tinh, vd nhan C): di vao van tay cua `thu_luoi` de so tay
+#: khong tai dung ket qua cua ban engine cu. 1 = ban dau · 2 = sua lech mot nac khoang cach gian dan (1ba9023) ·
+#: 3 = bar 0 chi tru spread lenh dau (03/10/2026).
+PHIEN_BAN_ENGINE = 3
+
+
 def khoa_quy_cach(qc: QuyCach) -> str:
     """Dau van tay cac so lam doi ket qua - dua vao van tay thi nghiem de KHONG lay lai ket qua cu khi phi doi."""
     d = {k: getattr(qc, k) for k in ("pip", "hop_dong", "point", "phi_nam_mua", "phi_nam_ban", "spread_du_phong",
@@ -394,6 +400,7 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
     treo_arr = np.empty(n)
     # phi mo lenh dau
     phi_sp += spread_gia[0] * ts.lot * hop
+    phi_sp_bar0 = phi_sp        # chi phi DA PHAT SINH luc bar 0 (khong phai tong spread ca chuoi - xem cuoi ham)
     so_lenh += 1
     tong_lot = ts.lot
     for i in range(1, n):
@@ -517,7 +524,11 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
                 so_lenh += 1
                 phi_sp += spread_gia[i] * _lot(0) * hop
         lai_arr[i] = lai - phi_sp - phi_sw
-    lai_arr[0] = -phi_sp
+    # Bar 0 = lai chot 0 tru chi phi da tra DEN bar 0 (spread lenh dau), cung quy uoc `lai_arr[i]` o tren. Truoc 03/10/2026 day
+    # la `-phi_sp` SAU vong lap = TONG spread ca chuoi: equity[0] = von - tong spread, mot diem dau gia o rat thap. No khong
+    # doi lai rong, nhung khi nhan he so lot k (`nc_thi_nghiem._he_so_lot_tai_tran`) diem do bien thanh "tai khoan chet o
+    # k = von / tong spread" -> chan k nhan tao, phat cac cau hinh giao dich nhieu khi xep theo loi_suat_o_tran_pct.
+    lai_arr[0] = -phi_sp_bar0
     treo_arr[0] = 0.0
     return lai_arr, treo_arr, {
         "lai_gop": lai, "phi_spread": phi_sp, "phi_swap": phi_sw,

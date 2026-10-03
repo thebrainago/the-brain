@@ -8,6 +8,7 @@ HET khong - nen ban cu duoc chep NGUYEN VAN xuong duoi lam tham phan, so bang `=
 import numpy as np
 import pytest
 
+from nhan import luoi as LU
 from nhan import nc_thi_nghiem as TN
 from nhan import vao_lenh as VL
 
@@ -181,3 +182,34 @@ def test_ranh_gioi_loai_khoi_hoa_dinh_nhung_day_cao_hon():
     # va ca co hai khoi KHONG thua nhau: day cao hon nhung dinh cao hon han
     a2, b2 = TN._cap_sut_giam_ung_vien(np.array([10.0, 5.0, 20.0, 6.0, 8.0]))
     assert a2.tolist() == [10.0, 20.0] and b2.tolist() == [5.0, 6.0]
+
+
+# ---------------------------------------------------------------- HE QUA CUA LOI BAR 0 CUA LUOI (sua 03/10/2026)
+def _chuoi_hoi_quy(n=6000, seed=7, gia0=0.95):
+    import pandas as pd
+    rng = np.random.RandomState(seed)
+    x = np.empty(n)
+    x[0] = gia0
+    for i in range(1, n):
+        x[i] = x[i - 1] + 0.02 * (gia0 - x[i - 1]) + rng.normal(0, 4e-4)
+    o = np.r_[x[0], x[:-1]]
+    hi = np.maximum(o, x) + np.abs(rng.normal(0, 2e-4, n))
+    lo = np.minimum(o, x) - np.abs(rng.normal(0, 2e-4, n))
+    sp = np.where(rng.rand(n) < 0.02, 0, rng.randint(12, 40, n)).astype(float)
+    idx = pd.date_range("2024-01-01", periods=n, freq="15min")
+    return pd.DataFrame({"open": o, "high": hi, "low": lo, "close": x, "spread": sp}, index=idx)
+
+
+@pytest.mark.parametrize("kw", [dict(buoc=15, tp=10, tran_tang=12), dict(buoc=8, tp=5, tran_tang=12),
+                                dict(buoc=10, tp=6, tran_tang=10, che_do="hai_chieu")])
+def test_he_so_lot_khong_bi_chan_boi_tong_spread_cua_chuoi(kw):
+    """Ban cu cua `luoi.chay` gan equity[0] = von - TONG spread -> tai khoan 'chet' o bar 0 khi k = von / tong spread, nen k bang
+    DUNG von / phi_spread o moi cau hinh (do 03/10/2026: 71,51 / 19,33 / 8,41) va cau hinh GIAO DICH NHIEU bi phat theo so lenh
+    chu khong theo rui ro. Sau khi sua, k do SUT GIAM (hoac tran k_toi_da) quyet dinh."""
+    von = 10000.0
+    kq = LU.chay(_chuoi_hoi_quy(), LU.ThamSo(**kw), von, LU.QC_AUDCAD)
+    e = np.asarray(kq.duong_equity, float)
+    assert int(np.argmin(e)) != 0, "diem thap nhat khong duoc la bar 0"
+    k = TN._he_so_lot_tai_tran(e, von)
+    assert k is not None and k > 3 * von / kq.phi_spread, (k, von / kq.phi_spread)
+    assert _che_do_cua_k(e, von, k) in ("tran_dd", "tran_k")      # khong phai 'chet' (tai khoan chet o day bar dau)

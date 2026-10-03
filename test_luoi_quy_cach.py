@@ -58,8 +58,9 @@ CASES = {
 
 
 def _tom_tat(kq, von: float) -> dict:
-    """Tom tat so lieu cua mot lan chay. `eq_*` bo bar 0: ban cu gan equity[0] = von - TONG spread ca chuoi (loi da
-    biet, ghi o `tai_lieu/NGUON_NGUOI_THANG.md` muc 9) - de sua sau khong lam hong golden o cho khong lien quan."""
+    """Tom tat so lieu cua mot lan chay. `eq_*` bo bar 0 vi GOLDEN sinh tu ban cu, khi equity[0] = von - TONG spread ca chuoi
+    (loi da sua 03/10/2026: nay equity[0] = von - spread lenh dau). Bar 0 co test rieng o muc 9 - giu nguyen cach tom tat nay de
+    golden khong phai sinh lai (khong con so nao khac trong golden doi)."""
     cs = LU.chi_so(kq, von)
     e = np.asarray(kq.duong_equity, float)[1:]
     return {"lai_rong": float(kq.lai_rong), "lai_gop": float(kq.lai_gop), "phi_spread": float(kq.phi_spread),
@@ -561,3 +562,55 @@ def test_khoang_cach_gian_dan_tinh_bang_tay(che_do, chieu):
     khoang = [round(chieu * (a - b) / pip, 6) for a, b in zip(gia[:-1], gia[1:])]
     assert len(gia) == 5 and gia[0] == g0
     assert khoang == [10.0, 20.0, 30.0, 30.0], khoang
+
+
+# ------------------------------------------------------------------ 9. BAR 0 = CHI spread lenh dau (sua 03/10/2026)
+def _sp_gia(df, qc):
+    """Spread theo GIA tung bar, tinh y het `chay` (cot POINT x point; bar bang 0 thay bang trung vi)."""
+    sp = df["spread"].to_numpy(float) * qc.point
+    return np.where(sp > 0, sp, np.nanmedian(sp[sp > 0]))
+
+
+@pytest.mark.parametrize("che_do,so_chieu", [("mua", 1), ("ban", 1), ("hai_chieu", 2)])
+def test_bar_dau_chi_tinh_spread_lenh_dau_khong_phai_tong_ca_chuoi(che_do, so_chieu):
+    """equity[0] = von - spread cua LENH DAU. Ban cu gan `von - TONG spread ca chuoi`: mot diem dau gia o rat thap. No khong
+    doi lai rong, nhung lam sai moi phep do tren duong von dung diem dau (he so lot o tran DD chang han)."""
+    qc = LU.QC_AUDCAD
+    df = _chuoi()
+    ts = LU.ThamSo(che_do=che_do, buoc=15, tp=10, tran_tang=12)
+    von = 10000.0
+    kq = LU.chay(df, ts, von, qc)
+    sp0 = _sp_gia(df, qc)[0] * ts.lot * qc.hop_dong
+    assert kq.so_lenh > 50 and kq.phi_spread > 20 * so_chieu * sp0       # nhieu lenh: tong >> lenh dau (neu khong, test vo nghia)
+    assert kq.duong_equity[0] == pytest.approx(von - so_chieu * sp0, abs=1e-9, rel=0)
+    assert kq.duong_equity[0] > von - kq.phi_spread + 10 * sp0             # khong con la `von - tong spread`
+
+
+def test_khong_bao_chay_tai_khoan_gia_o_bar_0():
+    """Von nam giua `muc stop-out + spread lenh dau` va `muc stop-out + tong spread`: ban cu bao `chay o bar 0` du lenh dau
+    moi mat dung mot spread. Day la dau hieu NGOAI cua loi bar 0 (khong chi la mot con so dep/xau di)."""
+    qc = LU.QC_AUDCAD
+    df = _chuoi()
+    ts = LU.ThamSo(che_do="mua", buoc=15, tp=10, tran_tang=12)
+    kq0 = LU.chay(df, ts, 1e7, qc)                                           # von khong lo: lay tang_max + tong spread
+    lot_tong = ts.lot * kq0.tang_max                                         # kieu_lot mac dinh = hang
+    nguong = ts.muc_stopout * lot_tong * qc.hop_dong * float(df["close"].mean()) / ts.don_bay
+    sp0 = _sp_gia(df, qc)[0] * ts.lot * qc.hop_dong
+    assert kq0.phi_spread > 20 * sp0
+    von = nguong + 0.5 * (sp0 + kq0.phi_spread)
+    assert von - kq0.phi_spread < nguong < von - sp0                         # dung khoang can kiem
+    kq = LU.chay(df, ts, von, qc)
+    assert kq.bar_chay != 0, "stop-out o bar 0 (equity[0] bi tru tong spread ca chuoi)"
+    assert kq.duong_equity[0] == pytest.approx(von - sp0, abs=1e-9, rel=0)
+
+
+@pytest.mark.parametrize("ma", ["AUDCAD", "USDCHF"])
+def test_doi_phien_ban_engine_thi_so_tay_khong_tai_dung_ket_qua_cu(moi_truong, monkeypatch, ma):
+    """Engine doi so lieu (nhu sua bar 0) ma van tay khong doi thi sau nay `thu_luoi` tra lai con so cua ban engine CU nhu thuc
+    do. Ca hai nhanh van tay (chuan: AUDCAD; ma khac: co khoa quy cach) deu phai gom phien ban engine."""
+    r0 = TN.danh_gia_luoi(ma, "M15", TS, "kham_pha", von=10000.0)
+    assert "tu_so_tay" in TN.danh_gia_luoi(ma, "M15", TS, "kham_pha", von=10000.0)      # cung phien ban: dung lai
+    monkeypatch.setattr(LU, "PHIEN_BAN_ENGINE", LU.PHIEN_BAN_ENGINE + 1)
+    r1 = TN.danh_gia_luoi(ma, "M15", TS, "kham_pha", von=10000.0)
+    assert "tu_so_tay" not in r1, "van tay khong gom phien ban engine"
+    assert r1["tien"] == r0["tien"]                                                       # engine that khong doi gi o day

@@ -3,8 +3,8 @@
  * Vi sao co file nay: `_mot_ro` la vong lap Python ~3-8 us/bar. Quet 1.000 to hop tham so tren 190.000 bar M15 ton ~20 phut
  * tren mot nhan. Ban C chay cung phep tinh nay nhanh hon hai bac do lon va (qua ctypes) NHA GIL, nen quet duoc da luong that.
  *
- * LUAT SAT: day la ban DICH NGUYEN VAN cua `_mot_ro` Python - cung thu tu phep tinh, cung thu tu cong don, cung moc
- * `lai_arr[0] = -phi_sp` (loi bar 0 da biet, sua o MOT cho khac). Ban Python van la CHUAN: `nhan/luoi_nhan.py` tu kiem nhan nay
+ * LUAT SAT: day la ban DICH NGUYEN VAN cua `_mot_ro` Python - cung thu tu phep tinh, cung thu tu cong don, cung gia tri
+ * bar 0 (`lai_arr[0]` = tru spread lenh dau). Ban Python van la CHUAN: `nhan/luoi_nhan.py` tu kiem nhan nay
  * voi ban Python truoc khi cho dung, va `test_luoi_nhan.py` doi chieu tren hang tram kich ban ngau nhien. Muon doi hanh vi:
  * sua ban Python TRUOC, roi dich lai day. Bien dich KHONG duoc dung -ffast-math / -ffp-contract=fast (FMA doi lam tron).
  *
@@ -188,6 +188,7 @@ LUOI_API int32_t luoi_mot_ro(const double *hi, const double *lo, const double *c
     int64_t so_tang = 1, tang_max = 1;
     double tong_lot;
     phi_sp += spread[0] * lot * hop;   /* NB: `ts.lot`, khong phai lot cua tang 0 - y het Python */
+    const double phi_sp_bar0 = phi_sp; /* chi phi DA PHAT SINH luc bar 0 (khong phai tong ca chuoi) */
     so_lenh += 1;
     tong_lot = lot;
 
@@ -316,7 +317,7 @@ LUOI_API int32_t luoi_mot_ro(const double *hi, const double *lo, const double *c
         }
         lai_arr[i] = lai - phi_sp - phi_sw;
     }
-    lai_arr[0] = -phi_sp;             /* GIU y het ban Python (loi bar 0 da biet) */
+    lai_arr[0] = -phi_sp_bar0;        /* y het Python: lai chot 0 tru spread lenh dau (sua 03/10/2026, truoc la tong ca chuoi) */
     treo_arr[0] = 0.0;
     stats[S_LAI_GOP] = lai;
     stats[S_PHI_SPREAD] = phi_sp;

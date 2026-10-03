@@ -986,7 +986,7 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
     else:
         ts_canh = []
     if chuan:
-        vt = ST.van_tay("luoi", ma, khung, doan, ts, von)
+        vt = ST.van_tay("luoi", ma, khung, doan, ts, von, LU.PHIEN_BAN_ENGINE)
         cu = ST.da_thu(vt)
         if cu and cu.get("ket_qua"):
             return dict(cu["ket_qua"], tu_so_tay="luoi %s da chay y het" % cu["id"])
@@ -1000,7 +1000,7 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
             qc, ly_qc = LU.quy_cach_cho(ma, float(np.nanmedian(seg["close"].to_numpy(float))), cp)
             if qc is None:
                 return {"trang_thai": "CHUA_DO_DUOC", "ly_do": ly_qc}
-            vt = ST.van_tay("luoi", ma, khung, doan, ts, von, LU.khoa_quy_cach(qc))
+            vt = ST.van_tay("luoi", ma, khung, doan, ts, von, LU.khoa_quy_cach(qc), LU.PHIEN_BAN_ENGINE)
             cu = ST.da_thu(vt)
             if cu and cu.get("ket_qua"):
                 return dict(cu["ket_qua"], tu_so_tay="luoi %s da chay y het" % cu["id"])
