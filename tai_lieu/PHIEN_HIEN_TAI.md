@@ -3,16 +3,16 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-03 06:02 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 9642d6f · 2 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-03 06:05 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 59f9bee · 1 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
+  · 40dd6d0 CLAUDE.md: MUC TIEU CUOI cua chu du an (tim thu dang ra tien -> bien thanh cua ta)
   · ed3d3fe TOC_DO_TEST: do duoc / chua do / bang quyet dinh toc do test + ban giao phien
   · 92a8cd3 quet_luoi: quet tham so luoi trong MOT goi (chuan_bi/chay_mang tach tu chay, bit-y
   · 503acd4 luoi: bar 0 chi tru spread lenh dau (khong phai tong ca chuoi) + phien ban engine 
   · 764dde6 test_ea_tho: thu tu bo cong cu chi kiem tien to, khong kiem duoi danh sach
-  · f5ec1d5 nc_thi_nghiem: he so lot o tran DD nhanh x60 (ranh gioi Pareto), ra y het ban cu
-- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 11, nha->cloud 4
-  · moi nhat cloud->nha (gio may gui 2026-10-03T05:54:53): CHI THI #3: do toc do nhan C + quet_luoi + giay MT5
+- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 12, nha->cloud 4
+  · moi nhat cloud->nha (gio may gui 2026-10-03T06:02:53): CHI THI #4 UU TIEN: MOT con mau di het day chuyen
 - May:
   · nha RANH ma=9429269+sua nhip 2026-10-02T23:30:26 (gio may)
 - Don: cho 1 · dang 1 · xong 1 (DAT 1)
@@ -34,6 +34,7 @@
 
 ## Dang o dau (03/10 khuya, cloud, may nha van tat) - HEAD 92a8cd3
 - NUT KET SO 1 cua muc tieu cuoi: cloud KHONG lay duoc lich su lenh / trang signal. `www.mql5.com` bi CHINH SACH MANG cua moi truong chan (proxy `connect_rejected` + WebFetch `EGRESS_BLOCKED`, do 03/10), khong phai tuong lua cua trang. Chu du an mo duoc: menu moi truong o thanh tieu de phien -> Edit -> Network access -> Custom -> them `www.mql5.com`, `www.myfxbook.com` (giu danh sach goi mac dinh). CHUA biet mql5 co cho IP cloud vao khong (thu 1 lan la biet). Chua mo -> may nha lay (thu #2 / #3).
+- THU #4 DA GUI NHA (`viec/thu/20261003-060253-6943.json`, commit 59f9bee, chu de "CHI THI #4 UU TIEN"): DOI THU TU #1-#3, khong them viec -> MOT con mau di het day chuyen: signal 2196457 (X117, USDCHF, luoi/DCA, 2,6 nam, +889%, DD 16,8%; du phong 884935 Relax EA). Buoc: gia M1 USDCHF >= 3 nam -> tab History 2196457 thanh fixture (cloud viet adapter sau khi thay mau) -> `boc_lich_su` + `thu_luoi` kham_pha -> `phat_lai` doi chieu lenh that -> bao cao 5 dong loi thuong (khop den dau, lai/nam sau phi, maxDD). Thu #3 (toc do) chi sau buoc 3. Chua co hoi am. Chu du an da duoc bao cao bang loi thuong + xin MOT viec: mo mang `www.mql5.com` / `www.myfxbook.com` cho moi truong cloud.
 - ENGINE LUOI (nghen so 1 cua nguon nguoi thang) da lam sach + tang toc, deu CO TEST: chan `dung_lo_tong` (khai bao ma engine khong doc) · bang lenh `ghi_lenh=True` cung schema lich su that · sua lech mot nac `he_so_buoc` · sua bar 0 (`lai_arr[0]` chi tru spread lenh dau; `luoi.PHIEN_BAN_ENGINE=3` vao van tay `thu_luoi` / `quet_luoi`) · nhan C `nhan/luoi_nhan.c` (x134, khop tung bit Python 3.11-3.13, ASan sach, 100% dong C, khong dich duoc -> tu dung Python, so y het) · `_he_so_lot_tai_tran` nhanh x60 (ranh gioi Pareto, ra y het ban cu) · cong cu nc `quet_luoi` (ca luoi tham so trong MOT goi, chi kham_pha, moi o la 1 phep thu, <= 1.000 o/goi, het gio = CHUA_DO_DUOC). Do: 54 o x 190.000 bar 31,2 s -> 0,62 s. Bang quyet dinh + lenh o nha: `tai_lieu/TOC_DO_TEST.md`.
 - BOC TU LICH SU LENH: `nhan/boc_lich_su.py` + cong cu nc `boc_lich_su` (buoc, he so lot, TP, gio lech, dieu kien vao suy nguoc; AI doi chieu voi bar that bang tool co san). 36 test tren du lieu cai san dap an; **CHUA chay tren lich su that** (chua co bang lenh nao ve repo) -> chua co con so lai nao tu nhanh nay.
 - Bo test day du: 80 fail la NEN Linux (`reports/test_fail_linux.txt`), 0 fail moi (3112 pass). Dot bien da diet cac test yeu cua nhan C va `quet_luoi`.
