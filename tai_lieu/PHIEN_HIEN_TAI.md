@@ -3,19 +3,19 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-03 10:17 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 49ce359 · 7 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-03 10:35 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 79c850b · 4 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
+  · 79c850b tai lieu may nha: muc 10 - co can thue VPS khong, sao luu sang HDD (tra loi chu du
+  · 434cced cloud: don link-tham-do-con-mau
+  · 37a1c0b b link: noi tiep nhan link chu du an vao he thong + danh sach trang + tai lieu + l
   · 49ce359 link_chay: tham do trang, nap tha_vao, thu hoach tai khoan xem + 52 test
   · 1ad1a44 boc_lich_su: bao cao HTML MT5 nhieu bang - chon Positions, khong chon Deals/Orders
-  · 5b79100 link_nguon: nhan link rieng + phan loai + ke hoach cao + nhip lich su; passview: d
-  · b3a4663 cloud: don may-do-nhanh-dau
-  · 3850254 cloud: don may-quet-dau
-- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 12, nha->cloud 4
-  · moi nhat cloud->nha (gio may gui 2026-10-03T06:02:53): CHI THI #4 UU TIEN: MOT con mau di het day chuyen
+- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 13, nha->cloud 4
+  · moi nhat cloud->nha (gio may gui 2026-10-03T10:19:57): CHI THI #5: b link (tiep nhan link nhom) + bot cu mat file
 - May:
   · nha RANH ma=9429269+sua nhip 2026-10-02T23:30:26 (gio may)
-- Don: cho 7 · dang 1 · xong 1 (DAT 1)
+- Don: cho 8 · dang 1 · xong 1 (DAT 1)
 - Du lieu: kho gia /home/user/the-brain/data: 0 file .parquet · so_cai/doan.json CHUA CO (tao o lan nap() dau, PHAI commit+push ngay) · so_cai/nc 0 file 0 KB
 - Cau hinh: config/cau.json khong co (phien cloud)
 <!-- AUTO:HET -->
@@ -31,6 +31,19 @@
 - 02/10 Chu du an se cap API DeepSeek + Qwen ngay 03/10 de so sanh model re (`b so-sanh`) -> chon cho `b nc tho` / `q`.
 - 03/10 MUC TIEU CUOI: "tim nhung thu dang ra tien va tiem nang roi bien thanh cua ta" (dau CLAUDE.md). Chu du an noi thang "toi cha hieu cau noi va dang lam gi" sau mot bao cao toan thuat ngu -> bao cao bang LOI THUONG, tung buoc xong / chua / ket.
 - Phong cach chu du an: ngan gon, ghet phuc tap va ghet token vo ich, chi muon MOT kenh; "khong duoc dung lai o muc mo ta".
+- 03/10 chieu (nguyen van, cloud): "toi van mang quan diem xu li lenh tot thi khong can quan tam entry, co nhieu bot danh kieu do ma ta cung chua boc tach va khai thac duoc"; "ta phai chap nhan la cac he thong song duoc da phan la he dca, viec ta can lam la tim entry toi uu nhat / bo quy tac quan li va xu li lenh thoi" -> 3 gia thuyet `viec/cho/nc-gt-*.json` + cau hoi `nc-hoi-quan-li-lenh.json` (CHUA chay, cho may nha).
+- 03/10 chieu: may nha 10 nhan / 20 luong, RAM 32 GB MOT thanh (1 kenh) nen "khong dung het toc luc", moi mua HDD 230 GB "de giai quyet phan nao van de tran bo nho"; van cho chay 75-80% CPU; hoi TOI DA tao bao nhieu tk MT5 demo (-> `b may`, `tai_lieu/MAY_NHA_TOI_UU.md`; so tam 4, CHUA do).
+- 03/10 chieu: ba bot cu (BigMouse, DCA Am Duong, BlackDragon) mat het file va **CHUA TUNG CHAY** ("bot cu khong con gi dau, toi cung chua chay bao gio"; truoc do: "con logic thi may ra tim duoc thoi, cai toi can la logic") -> KHONG co lich su lenh nao de lay; chi con logic trong repo (`tai_lieu/BOT_CU_LOGIC.md`). Dung hoi so tai khoan / mat khau investor, dung quet o dia cho 3 bot nay.
+- 03/10 chieu: "rat nhieu group co rat nhieu bot lai ma ta chua cao duoc du toi co link dan" -> `b link` (`tai_lieu/LINK_NGUON.md`). CHUA biet cac nhom nam o Telegram / Zalo / Facebook / Discord (cau hoi mo cho chu du an; #30 Telegram nhom kin CHUA viet).
+- 03/10 chieu: cau hoi chon Qwen Code + Qwen 3.8 hay DeepSeek Harness + DeepSeek V4 (nguon API re `home.ai-box.vn/docs`): chu du an RUT khoi cloud, "thoi khong can toi se dung cau hoi nay tren may nha" -> phien NHA tra loi; du lieu cloud da tra: `tai_lieu/SO_SANH_LLM.md` muc "03/10 chieu".
+- 03/10 chieu: "de danh token di, toi lam tren may nha" -> cloud DUNG, lam tiep o may nha toi nay (muc "TOI 03/10 O NHA" o Viec ke tiep).
+
+## Dang o dau (03/10 chieu, cloud DUNG de danh token; may nha mo toi nay) - HEAD: `git log -1`
+- XONG + DA PUSH: (a) `b may` quet / do / giam sat may nha + uoc luong so tk MT5 (`tai_lieu/MAY_NHA_TOI_UU.md`; muc 10 = co can thue VPS khong: CHUA, sao luu sang HDD truoc) - chay thu o Linux + gia lap PowerShell, CHUA tren Windows that · (b) `b link`: link / tin nhan nhom -> phan loai -> tham do -> lich su lenh (`tai_lieu/LINK_NGUON.md`, `nhan/link_nguon.py` + `link_chay.py`, 83 test; danh sach trang cho cloud giao: ke-hoach|chay|tham-do|thu-muc|bao-cao|chia-se, con them|nap-van-ban|tai-khoan-xem|--cdp chi chu du an chay tay) · (c) logic bot cu con trong repo (`tai_lieu/BOT_CU_LOGIC.md`) · (d) quan li lenh / DCA = 3 gia thuyet + 1 cau hoi xep hang (`viec/cho/nc-*.json`).
+- CHUA CHAY o may that: moi duong mang cua `b link` (cloud khong toi mql5 / myfxbook / Telegram) va phan Windows cua `b may`. Bo doc rieng tung trang (MQL5 History tab / Myfxbook / FX Blue / Darwinex) viet SAU khi `b link chay` o nha tra cau truc trang that.
+- CHUA LAM (#30): `nhan/telegram_nhom.py` (nhom Telegram kin: chi nhom chu du an chon, chi doc, khong tu vao nhom, bao cao chi dem + ma bam, tep vao `du_lieu_cao/tha_vao/`) - CHO chu du an noi cac nhom nam o dau.
+- Don cho nha (8): `may-quet-dau`, `may-do-nhanh-dau`, `link-tham-do-con-mau` (lan MANG), `cau-kiem`, `nc-hoi-quan-li-lenh`, `nc-gt-quan-li-lenh`, `nc-gt-boc-quan-li`, `nc-gt-doi-chung`. Thu: #5 `20261003-101957-28ed` (b link) va #6 (sua #5: bot cu khong con gi).
+- Test bo lien quan lan nay: 496 pass / 2 fail = 2 loi nen Linux da biet (`test_kien_truc::BangVaiTro::test_moi_thu_muc_that_deu_da_duoc_khai`, `test_passview::test_gitignore_co_passview`; xem `reports/test_fail_linux.txt`).
 
 ## Dang o dau (03/10 khuya, cloud, may nha van tat) - HEAD 92a8cd3
 - NUT KET SO 1 cua muc tieu cuoi: cloud KHONG lay duoc lich su lenh / trang signal. `www.mql5.com` bi CHINH SACH MANG cua moi truong chan (proxy `connect_rejected` + WebFetch `EGRESS_BLOCKED`, do 03/10), khong phai tuong lua cua trang. Chu du an mo duoc: menu moi truong o thanh tieu de phien -> Edit -> Network access -> Custom -> them `www.mql5.com`, `www.myfxbook.com` (giu danh sach goi mac dinh). CHUA biet mql5 co cho IP cloud vao khong (thu 1 lan la biet). Chua mo -> may nha lay (thu #2 / #3).
@@ -54,6 +67,7 @@
 - `b so-sanh` (nhan/so_sanh_llm.py, 8 task cham bang ma, tai_lieu/SO_SANH_LLM.md) da viet + 17 test bang nha cung cap gia, CHUA chay that (can API; chay o NHA, `b so-sanh --khai` truoc).
 
 ## Viec ke tiep (thu tu)
+0. TOI 03/10 O NHA ("de danh token di, toi lam tren may nha" -> uu tien lenh KHONG-LLM, bao cao 3-8 dong loi thuong): (a) `git pull` -> `b tiep` -> `b cau lay && b cau thu` (thu #1-#6; #6 sua #5) -> `b cau chay` lam cac don `viec/cho`. (b) `b may`, roi `b may do --nhanh` khi may RANH: tra loi chu du an "toi da tao bao nhieu tk MT5 / tran 75-80% CPU / RAM 1 thanh cham the nao" bang SO DO THAT (dien muc 9 `MAY_NHA_TOI_UU.md`). (c) mql5 / myfxbook khong vao duoc -> `b mang` (WARP); roi don `link-tham-do-con-mau` -> doc `reports/link_chay_ket_qua.md`; loi nao cua phan Windows -> `reports/` + thu ve cloud, khong sua mo (`MAY_NHA_TOI_UU.md` muc 7). (d) chu du an: `b link them "<link / tin nhan>"` (link rieng chi nam o nha), noi cac nhom nam o dau, tha bao cao lich su (neu co) vao `du_lieu_cao/tha_vao/` roi `b link thu-muc`. (e) cau hoi LLM cua chu du an: doc `home.ai-box.vn/docs` (nha ra duoc mang), `b so-sanh --khai`, chi `b so-sanh` that khi chu du an dong y chi phi. KHONG hoi chu du an ve bot cu: khong con gi, chua tung chay.
 1. Nha: `git pull`, `pip install -r requirements.txt`, chay lai `b test` luu danh sach fail (node id + loai loi, <= 110 dong, `pytest -q -n 8 --dist loadfile -rfE --tb=no`) vao `reports/test_fail_nha.txt`, push -> cloud diff voi baseline Linux de tim loi CHI-CO-TREN-WINDOWS (da biet 1, da sua). Thieu data/ds/nao.db/config/ffmpeg la moi truong, khong phai loi.
 2. 03/10 chu du an cai MT5 XM demo -> nha viet bo xuat M1 (`copy_rates_range`; doc `_tai_chi_so_xm.py` truoc: moc RAT xa, thu lai 4 lan, dem bar moi nam, D1 spread=0) cho AUDCAD, EURCAD, NZDCAD, EURGBP, XAUUSD, US500Cash -> ho chieu du lieu (`reports/ho_chieu_du_lieu.json`) + do chi phi that -> lan `nap()` dau dong bang doan: COMMIT+PUSH `so_cai/doan.json` NGAY -> `b nc kiem 30` + `b test` xanh tren may moi -> roi moi tin phat hien nao.
 3. **Hieu chuan LAN EA THO** (SAU buoc 2: can gia + `so_cai/doan.json`) (`tai_lieu/LAN_EA_THO.md`: lenh mo cuoi cua so, nhan bao cao tieng Viet - luu 1 bao cao THAT vao `test_bao_cao_mt5.py`, do sau tick XM, `_chay_that`), roi `b nc cc ea_tho_quet '{"eas":["kho:*"],"toi_da_lan":6}'` tren `reports/ea/kho.json` -> DAT/AM that dau tien cua duong EA tho. Lay IT fixture MQL5 signal / Myfxbook / Market voi toc do THAP (mql5.com cam IP sau ~50-150 request); cloud viet bo doc offline.

@@ -4,6 +4,8 @@ Bạn là phiên Claude Code **tương tác** trên máy nhà của chủ dự �
 **cloud** (`session_01ER1xpfauUywJ6smLMSZmHW`) đã viết toàn bộ mã. Hai bên nói chuyện qua repo public này (thư mục `viec/thu`).
 Không có gì phức tạp hơn thế. File này nằm trên git nên cloud sửa được — lần sau chỉ cần tải lại.
 
+> **Cập nhật 03/10 chiều:** sau file này đọc `b tiep` (khối TAY có mục "TỐI 03/10 Ở NHÀ" + quyết định mới) và `b cau thu` (thư #1–#6; #6 sửa #5). Cloud đã viết thêm, **chưa chạy trên Windows thật**: `b may` (quét + đo máy, số tài khoản MT5 — `tai_lieu/MAY_NHA_TOI_UU.md`), `b link` (nhận link / tin nhắn nhóm → lịch sử lệnh — `tai_lieu/LINK_NGUON.md`), logic ba bot cũ còn trong repo (`tai_lieu/BOT_CU_LOGIC.md`). Chủ dự án nói bot cũ không còn gì và chưa từng chạy → đừng hỏi số tài khoản / mật khẩu investor.
+
 ## Luật (đọc trước, thắng mọi thứ bên dưới)
 
 1. Chỉ ghi trong thư mục lab (`C:\Research SP500\lab`). **Không ghi gì lên ổ E:** (có thể còn dữ liệu cũ), không cài TestDisk,
