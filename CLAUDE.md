@@ -1,5 +1,12 @@
 # HUONG DAN CHO CLAUDE CODE — lab/ (THE BRAIN)
 
+## MUC TIEU CUOI (chu du an 03/10/2026, nguyen van) - doc truoc ca LUAT SO 0
+
+*"Cuoi cung cua he thong la tim nhung thu dang ra tien va tiem nang roi bien thanh cua ta"*.
+Day chuyen MOT chieu: TIM (dang ra tien + tiem nang) -> LAY lich su lenh -> HIEU luat -> LAM LAI thanh EA cua ta -> THU tren gia that -> CHINH -> chay demo.
+Truoc moi viec tu hoi: viec nay dua mot thu DANG RA TIEN lai gan "cua ta" hon khong? Khong thi de sau (toc do, engine, tai lieu chi la phu tro).
+Chu du an KHONG doc duoc thuat ngu (nhan C, bit-y-het, quet luoi...): bao cao bang loi thuong, 3-8 dong, noi ro tung buoc "xong / chua / ket o dau / can chu du an lam gi".
+
 ## LUAT SO 0 — DOI CHIEU SO DO TRUOC MOI PHIEN (chot 12/09/2026)
 
 **Nguon duy nhat cua CAU TRUC he thong la `Desktop/hethong.txt`**, ban chep dong bo

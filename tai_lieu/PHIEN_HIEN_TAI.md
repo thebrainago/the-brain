@@ -3,16 +3,16 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-02 17:16 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 2f310bd · 3 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-03 06:02 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 9642d6f · 2 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
-  · 2f310bd cau_thu: phien cloud REBASE khi nha day chen truoc (gui + doc thu), cay nha van ch
-  · 777534a BAN GIAO PHIEN (b tiep) + so sanh model re (b so-sanh) + sua test Windows: phien m
-  · ba78852 TOI UU TOKEN theo so do that + CLOUD CHI HUY: b token, cua so nen 300k, gop danh t
-  · a17589a KHOI_PHUC_MAY_NHA: VPS het (V6_DONG_GOI + EA LuoiDoiXung khong con ban nao), MT5 c
-  · e100fc6 BAT_DAU_O_NHA: truong hop da co lab, hop thu rieng (b cau cai), dang nhap GitHub m
-- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 7, nha->cloud 4
-  · moi nhat nha->cloud (gio may gui 2026-10-02T23:56:48): XONG bao cao dem
+  · ed3d3fe TOC_DO_TEST: do duoc / chua do / bang quyet dinh toc do test + ban giao phien
+  · 92a8cd3 quet_luoi: quet tham so luoi trong MOT goi (chuan_bi/chay_mang tach tu chay, bit-y
+  · 503acd4 luoi: bar 0 chi tru spread lenh dau (khong phai tong ca chuoi) + phien ban engine 
+  · 764dde6 test_ea_tho: thu tu bo cong cu chi kiem tien to, khong kiem duoi danh sach
+  · f5ec1d5 nc_thi_nghiem: he so lot o tran DD nhanh x60 (ranh gioi Pareto), ra y het ban cu
+- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 11, nha->cloud 4
+  · moi nhat cloud->nha (gio may gui 2026-10-03T05:54:53): CHI THI #3: do toc do nhan C + quet_luoi + giay MT5
 - May:
   · nha RANH ma=9429269+sua nhip 2026-10-02T23:30:26 (gio may)
 - Don: cho 1 · dang 1 · xong 1 (DAT 1)
@@ -29,9 +29,11 @@
 - 02/10 VPS cu da het -> V6_DONG_GOI/, LuoiDoiXung.mq5/.ex5, .set MAT HAN (chi con dac ta + ket qua). Chi dung MT5 DEMO.
 - 02/10 DA DONG Y: `b cau cai`, tat defrag, XM demo (chu du an tu cai MT5 ngay 03/10). KHUYA 02/10 chu du an DUYET HET de xuat: lich schtasks 5 phut (runner khong-LLM, nha bat khi may len), subagent cho viec doc nang (model `haiku` cho viec co hoc), phien cloud MOI sau moc; duyet san moi de xuat tiep (CLAUDE.md VAN HANH).
 - 02/10 Chu du an se cap API DeepSeek + Qwen ngay 03/10 de so sanh model re (`b so-sanh`) -> chon cho `b nc tho` / `q`.
+- 03/10 MUC TIEU CUOI: "tim nhung thu dang ra tien va tiem nang roi bien thanh cua ta" (dau CLAUDE.md). Chu du an noi thang "toi cha hieu cau noi va dang lam gi" sau mot bao cao toan thuat ngu -> bao cao bang LOI THUONG, tung buoc xong / chua / ket.
 - Phong cach chu du an: ngan gon, ghet phuc tap va ghet token vo ich, chi muon MOT kenh; "khong duoc dung lai o muc mo ta".
 
 ## Dang o dau (03/10 khuya, cloud, may nha van tat) - HEAD 92a8cd3
+- NUT KET SO 1 cua muc tieu cuoi: cloud KHONG lay duoc lich su lenh / trang signal. `www.mql5.com` bi CHINH SACH MANG cua moi truong chan (proxy `connect_rejected` + WebFetch `EGRESS_BLOCKED`, do 03/10), khong phai tuong lua cua trang. Chu du an mo duoc: menu moi truong o thanh tieu de phien -> Edit -> Network access -> Custom -> them `www.mql5.com`, `www.myfxbook.com` (giu danh sach goi mac dinh). CHUA biet mql5 co cho IP cloud vao khong (thu 1 lan la biet). Chua mo -> may nha lay (thu #2 / #3).
 - ENGINE LUOI (nghen so 1 cua nguon nguoi thang) da lam sach + tang toc, deu CO TEST: chan `dung_lo_tong` (khai bao ma engine khong doc) · bang lenh `ghi_lenh=True` cung schema lich su that · sua lech mot nac `he_so_buoc` · sua bar 0 (`lai_arr[0]` chi tru spread lenh dau; `luoi.PHIEN_BAN_ENGINE=3` vao van tay `thu_luoi` / `quet_luoi`) · nhan C `nhan/luoi_nhan.c` (x134, khop tung bit Python 3.11-3.13, ASan sach, 100% dong C, khong dich duoc -> tu dung Python, so y het) · `_he_so_lot_tai_tran` nhanh x60 (ranh gioi Pareto, ra y het ban cu) · cong cu nc `quet_luoi` (ca luoi tham so trong MOT goi, chi kham_pha, moi o la 1 phep thu, <= 1.000 o/goi, het gio = CHUA_DO_DUOC). Do: 54 o x 190.000 bar 31,2 s -> 0,62 s. Bang quyet dinh + lenh o nha: `tai_lieu/TOC_DO_TEST.md`.
 - BOC TU LICH SU LENH: `nhan/boc_lich_su.py` + cong cu nc `boc_lich_su` (buoc, he so lot, TP, gio lech, dieu kien vao suy nguoc; AI doi chieu voi bar that bang tool co san). 36 test tren du lieu cai san dap an; **CHUA chay tren lich su that** (chua co bang lenh nao ve repo) -> chua co con so lai nao tu nhanh nay.
 - Bo test day du: 80 fail la NEN Linux (`reports/test_fail_linux.txt`), 0 fail moi (3112 pass). Dot bien da diet cac test yeu cua nhan C va `quet_luoi`.
