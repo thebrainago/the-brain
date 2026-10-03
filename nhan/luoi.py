@@ -73,6 +73,7 @@ from pathlib import Path
 import numpy as np
 
 from nhan import chi_phi as CP
+from nhan import luoi_nhan as LN
 
 LAB = Path(__file__).resolve().parent.parent
 #: Hinh hoc hop dong DO TAY cho ma ngoai lop FX chuan (cap JPY, vang...). Chi pip / hop_dong / point / ...; PHI khong o day.
@@ -524,6 +525,18 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
         "so_cap": so_cap, "con_mo": len(vao)}
 
 
+def _mot_ro_nhanh(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | None = None,
+                  ghi: list | None = None):
+    """`_mot_ro` qua NHAN C (`nhan/luoi_nhan.py`, nhanh hon ~130 lan, nha GIL) khi dung duoc; khong thi chinh `_mot_ro`.
+
+    Ket qua KHONG doi so nao: nhan C duoc tu kiem voi `_mot_ro` truoc khi dung va khop tung bit tren 3.11/3.12/3.13
+    (`test_luoi_nhan.py`). `LUOI_NHAN=py` ep chay Python. `_mot_ro` van la ban CHUAN - muon doi hanh vi thi sua no truoc."""
+    r = LN.mot_ro(hi, lo, cl, spread_gia, dem, chieu, ts, qc, ghi)
+    if r is not None:
+        return r
+    return _mot_ro(hi, lo, cl, spread_gia, dem, chieu, ts, qc, ghi)
+
+
 def _bang_lenh(nhat_ky: dict, idx, qc: QuyCach):
     """Nhat ky `_mot_ro` (theo chieu) -> DataFrame lenh. `ro` la khoa DUY NHAT: chan 2*so_ro (+1 neu ban)."""
     import pandas as pd
@@ -572,7 +585,7 @@ def chay(df, ts: ThamSo, von: float, qc: QuyCach | None = None, ghi_lenh: bool =
     lais, treos, tks, nhat_ky = [], [], [], {}
     for c in chieus:
         ghi = nhat_ky.setdefault(c, []) if ghi_lenh else None
-        a, b, k = _mot_ro(hi, lo, cl, sp, dem, c, ts, qc, ghi)
+        a, b, k = _mot_ro_nhanh(hi, lo, cl, sp, dem, c, ts, qc, ghi)
         lais.append(a)
         treos.append(b)
         tks.append(k)

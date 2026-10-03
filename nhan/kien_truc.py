@@ -157,7 +157,7 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
         "Ho co che THU HAI. 262 co che dau la tin hieu VAO; day la nua con lai.",
         ("pmg", "pmg_engine", "pmg_g0", "pmg_quet", "quan_tri_dsl",
          "quan_tri_nhieu", "chuoi_quan_tri", "dap_quan_tri", "de_quan_tri",
-         "quan_tri_than", "luoi", "vao_lenh", "bien_don_bay"),
+         "quan_tri_than", "luoi", "luoi_nhan", "vao_lenh", "bien_don_bay"),
     ),
     "KIEM DINH & CONG": (
         "Noi mot gia thuyet duoc phep doi doi. Hai cong: co that khong, va co ra tien khong.",
