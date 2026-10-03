@@ -690,6 +690,31 @@ def test_chia_se_chi_cho_link_cong_khai_da_co_tom_tat_cuc_bo(tmp_path):
     assert LC.chia_se("../../etc/pw", **kw)[0] is False
 
 
+def test_chia_se_link_cong_khai_tham_do_thang_bang_chrome_can_url_khop_ma(tmp_path):
+    """Trang MQL5 cong khai tham do bang Chrome KHONG nam trong link_rieng.txt: truoc 03/10 `chia-se` tu choi (bug nho may nha bao).
+    Nay cho qua khi co `url` KHOP ma va khong rieng; thieu url / url khac ma / link rieng van bi chan."""
+    u = "https://www.mql5.com/en/signals/2331122"
+    (tmp_path / "link_rieng.txt").write_text("", encoding="utf-8")
+    ch, _ = _chay(tmp_path, Web({u: (200, TRANG_TIN_HIEU, "")}), lay_cdp=_cdp_gia())
+    m = _m(u)
+    assert ch.tham_do(m, cdp=True)["tom_tat"] == "local"             # qua Chrome -> chi o may nha
+    kw = dict(thu_muc_tom_tat=tmp_path / "du_lieu_cao" / "tom_tat", thu_muc_reports=tmp_path / "reports", tt=ch.tt,
+              duong_link=tmp_path / "link_rieng.txt")
+    dich = tmp_path / "reports" / ("link_tham_do_%s.json" % m["ma"])
+    ok0, ly0 = LC.chia_se(m["ma"], **kw)
+    assert not ok0 and "--url" in ly0 and not dich.exists()          # khong url: van chan nhu truoc (ma bam khong suy nguoc duoc URL)
+    ok1, ly1 = LC.chia_se(m["ma"], url="https://www.mql5.com/en/signals/9999999", **kw)
+    assert not ok1 and "khong khop" in ly1 and not dich.exists()
+    ok2, ly2 = LC.chia_se(m["ma"], url=u, **kw)
+    assert ok2 and dich.is_file()
+    assert "SECRETVALUE" not in dich.read_text(encoding="utf-8")      # gia tri o nhap/token van khong ra khoi may
+    rieng = "https://www.mql5.com/en/signals/9?token=SECRET99"
+    mr = _m(rieng)
+    ch.tham_do(mr, cdp=True)
+    ok3, _ = LC.chia_se(mr["ma"], url=rieng, **kw)
+    assert not ok3 and not (tmp_path / "reports" / ("link_tham_do_%s.json" % mr["ma"])).exists()
+
+
 def test_vua_gioi_han_cat_danh_sach_cho_vua_40k_va_van_la_json_hop_le():
     d = {"xhr": ["https://x.example/api/%d?a=&b=" % i + "z" * 100 for i in range(2000)], "bang": [{"a": 1}] * 5, "cau_truc": {"k": "v" * 60000}}
     ra = LC._vua_gioi_han(d, ("xhr", "bang"))
@@ -757,6 +782,7 @@ class TestDanhSachTrangLink:
         ["{py}", "b.py", "link", "thu-muc", "--toi-thieu", "30"],
         ["{py}", "b.py", "link", "bao-cao"],
         ["{py}", "b.py", "link", "chia-se", "0123456789"],
+        ["{py}", "b.py", "link", "chia-se", "0123456789", "--url", "https://www.mql5.com/en/signals/2023752"],
         ["{py}", "b.py", "link", "ho-so-symbol"],
         ["{py}", "b.py", "link", "ho-so-symbol", "--song", "730", "--toi-da", "40"],
     ])
@@ -784,6 +810,9 @@ class TestDanhSachTrangLink:
         ["{py}", "b.py", "link", "tham-do", "https://mql5.com/signals/1?token=abc"],
         ["{py}", "b.py", "link", "chia-se", "xyz"],
         ["{py}", "b.py", "link", "chia-se", "0123456789", "extra"],
+        ["{py}", "b.py", "link", "chia-se", "0123456789", "--url", "http://www.mql5.com/en/signals/1"],   # khong https
+        ["{py}", "b.py", "link", "chia-se", "0123456789", "--url", "https://mql5.com/signals/1?token=abc"],
+        ["{py}", "b.py", "link", "chia-se", "0123456789", "--url"],
         ["{py}", "b.py", "link", "bao-cao", "--ghi"],
         ["{py}", "b.py", "link", "ho-so-symbol", "--toi-da", "61"],
         ["{py}", "b.py", "link", "ho-so-symbol", "--song", "5"],

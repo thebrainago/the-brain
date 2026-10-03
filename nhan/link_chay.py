@@ -915,9 +915,12 @@ def ho_so_symbol(ch: "Chay", ho_so=None, song_toi_thieu: int = 730, toi_da: int 
 
 
 # ============================================================== 7. CHIA SE TOM TAT (link cong khai da tham do bang Chrome)
-def chia_se(ma: str, thu_muc_tom_tat=None, thu_muc_reports=None, tt=None, duong_link=None) -> tuple[bool, str]:
+def chia_se(ma: str, thu_muc_tom_tat=None, thu_muc_reports=None, tt=None, duong_link=None, url=None) -> tuple[bool, str]:
     """Copy tom tat CUC BO cua mot link CONG KHAI (da tham do bang Chrome) sang `reports/link_tham_do_<ma>.json` de cloud doc.
-    Tu choi link rieng. Chay lai bo loc: khong URL day du, khong gia tri o nhap (da co o `tom_tat_cau_truc`)."""
+    Tu choi link rieng. Chay lai bo loc: khong URL day du, khong gia tri o nhap (da co o `tom_tat_cau_truc`).
+
+    Link khong nam trong `link_rieng.txt` (vd trang MQL5 cong khai tham do thang bang Chrome): phai truyen `url` - ma phai
+    BANG ma cua url do va `phan_loai` khong coi la rieng; khong co url thi van tu choi nhu truoc (ma bam khong suy nguoc duoc URL)."""
     if not re.fullmatch(r"[0-9a-f]{10}", str(ma)):
         return False, "ma phai la 10 ky tu hex (xem `b link ke-hoach`)"
     nguon = (Path(thu_muc_tom_tat) if thu_muc_tom_tat else THU_MUC_TOM_TAT) / ("%s.json" % ma)
@@ -932,8 +935,15 @@ def chia_se(ma: str, thu_muc_tom_tat=None, thu_muc_reports=None, tt=None, duong_
             if v.get("dich_url") and LN.phan_loai(v["dich_url"])["ma"] == ma:
                 lien_quan = LN.phan_loai(v["dich_url"])
                 break
+    if lien_quan is None and url:                                   # link cong khai tham do thang, khong qua link_rieng.txt
+        cong = LN.phan_loai(url)
+        if cong["ma"] != ma:
+            return False, "url khong khop ma %s: khong chia se" % ma
+        if not LN.cho_tham_do(url)[0]:
+            return False, "url khong thuoc ten mien cong khai da duyet: khong chia se"
+        lien_quan = cong
     if lien_quan is None:
-        return False, "ma nay khong nam trong link_rieng.txt: khong chia se"
+        return False, "ma nay khong nam trong link_rieng.txt va khong co --url cong khai: khong chia se"
     if lien_quan["rieng"]:
         return False, "link RIENG TU: khong bao gio gui di"
     d = json.loads(nguon.read_text(encoding="utf-8"))
@@ -987,6 +997,7 @@ def main(argv=None) -> int:
     p.add_argument("--toi-da", type=int, default=40)
     p = sp.add_parser("chia-se", help="gui tom tat cuc bo cua link CONG KHAI vao reports/")
     p.add_argument("ma")
+    p.add_argument("--url", default=None, help="link cong khai (neu khong nam trong link_rieng.txt): phai khop ma")
     a = ap.parse_args(argv)
     ch = Chay(in_ra=print)
     if a.lenh in (None, "ke-hoach"):
@@ -1041,7 +1052,7 @@ def main(argv=None) -> int:
                  ", ".join("%s %d" % kv for kv in bc["dem_symbol_chinh"].items()) or "chua co"))
         return 0 if bc["doc_duoc"] else 1
     if a.lenh == "chia-se":
-        ok, ly = chia_se(a.ma)
+        ok, ly = chia_se(a.ma, url=a.url)
         print(("DA CHIA SE: " if ok else "KHONG CHIA SE: ") + ly)
         return 0 if ok else 1
     ap.print_help()

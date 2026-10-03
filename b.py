@@ -710,7 +710,7 @@ def c_link(a):
         b link tai-khoan-xem [--toi-da N]  thu hoach lich su bang tai khoan xem da luu (can MT5 o may nha)
         b link bao-cao                  in lai bao cao
         b link ho-so-symbol [--song N] [--toi-da N]   kiem lai nhan symbol cua ho so MQL5 song lau (bang Distribution that)
-        b link chia-se MA               gui tom tat cuc bo cua link CONG KHAI vao reports/
+        b link chia-se MA [--url URL]   gui tom tat cuc bo cua link CONG KHAI vao reports/ (--url neu link khong nam trong link_rieng.txt)
     Dau ra chi gom so dem / ma bam, khong in link rieng. CHUA chay tren trang that: xem tai_lieu/LINK_NGUON.md.
     """
     from nhan import link_chay as LCH

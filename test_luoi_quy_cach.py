@@ -614,3 +614,22 @@ def test_doi_phien_ban_engine_thi_so_tay_khong_tai_dung_ket_qua_cu(moi_truong, m
     r1 = TN.danh_gia_luoi(ma, "M15", TS, "kham_pha", von=10000.0)
     assert "tu_so_tay" not in r1, "van tay khong gom phien ban engine"
     assert r1["tien"] == r0["tien"]                                                       # engine that khong doi gi o day
+
+
+# ------------------------------------------------------------------ FILE QUY CACH THAT (config/luoi_quy_cach.json)
+def test_file_quy_cach_that_hop_le_va_khop_bang_xuat_xm():
+    """File that nam trong git (khong dung `khong_ghi_de`): moi muc phai qua duoc `quy_cach_cho`, pip = 10 point, va
+    pip/hop_dong/point khop `symbol_info` XM demo ma may nha xuat (`reports/xuat_m1_xm.json`). Go nham mot so 0 o day se
+    am tham doi luoi vang thanh luoi sai kich co - khong loi, khong canh bao."""
+    from pathlib import Path
+    bang, loi = LU._doc_ghi_de()
+    assert loi == "" and set(bang) == {"XAUUSD", "USDJPY"}
+    xuat = json.loads((Path(LU.LAB) / "reports" / "xuat_m1_xm.json").read_text(encoding="utf-8"))["ma"]
+    for ma, gd in bang.items():
+        qc, ly = LU.quy_cach_cho(ma, 4000.0 if ma == "XAUUSD" else 150.0, _cp(pm=0.05, pb=-0.02, sp=1e-4))
+        assert qc is not None, ly
+        x = xuat[ma]
+        assert qc.point == pytest.approx(x["point"]) and qc.hop_dong == pytest.approx(x["hop_dong"])
+        assert qc.pip == pytest.approx(10 * x["point"]), "pip phai la 10 point (quy uoc FX 5 chu so)"
+        assert gd["da_doi_chieu"] is True and "xuat_m1_xm" in gd["nguon"]
+    assert LU.quy_cach_cho("AUDCAD", 0.9, None)[0] == LU.QC_AUDCAD            # file khong dong toi hang so cu

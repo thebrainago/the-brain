@@ -27,25 +27,19 @@ Tieu chi cua chu du an: co lai + maxDD < 80%, them tuoi song de loai may rui.
 | song >= 1 nam, tang truong > 0, DD cong bo < 80% | **94** |
 | song >= 2 nam, tang truong > 0, DD cong bo < 80% | **31** (7,8%) |
 | trong 31 do: luoi/DCA · khong ro · gong lo · xu huong · scalp | **18** · 11 · 1 · 1 · 0 |
-| ma xuat hien trong top-3 ma cua 31 ho so | AUDCAD 15 · XAUUSD 9 · USDCHF 7 · AUDCHF 5 · USDJPY 4 · EURUSD 4 · AUDNZD 3 |
-| rieng 18 luoi/DCA | AUDCAD 12 · USDCHF 5 · AUDCHF 4 · XAUUSD 3 · USDCAD 2 · EURUSD 2 |
+| ~~ma top-3 theo nhan cu~~ (SAI: 19/31 nhan sai, xem muc ngay duoi) | khong dung nua |
+| MA THAT (bang Distribution cua trang): ma chinh theo so lenh | XAUUSD 8 · EURUSD 5 · USDJPY 3 · BTCUSD 3 · AUDCAD 3 · GBPUSD 2 · 7 ma moi ma 1 |
+| ma chiem >= 10% so lenh cua ho so | XAUUSD 12 · AUDCAD 8 · EURUSD 7 · USDJPY 7 · AUDNZD 5 · NZDCAD 4 · USDCHF 1 · AUDCHF 0 |
+| ho so NHIEU MA (ma chinh < 60% lenh) / THUAN MOT MA (>= 95%) | 20 / 10 |
+| ho so co >= 2 trong 3 ma AUDCAD-NZDCAD-AUDNZD (moi ma >= 10%) | 5: 1059619, 1975768, 2184802, 1627034, 2220467 |
 
-Doc: (a) "nhieu he co lai san" **dung** nhung nguoi thang song >= 2 nam chi ~8% danh sach da la top theo tang truong; (b) ho **gan het
-la luoi/DCA tren cap da bien dong thap** (AUDCAD va hang xom cua no) - chinh la loai ket qua tot nhat cua lab (AUDCAD, `thu_luoi`) nen
-AUDCAD khong phai ngau nhien; (c) hang xom USDCHF / AUDCHF / AUDNZD / USDCAD / EURUSD **cung quy cach** (pip 1e-4, hop dong 100.000);
-truoc 03/10 `luoi.py` GHIM phi qua dem + point cua AUDCAD nen khong chay duoc - nay chay (muc 4B).
+Doc (DA SUA theo ma that, 03/10 toi): (a) "nhieu he co lai san" **dung** nhung nguoi thang song >= 2 nam chi ~8% danh sach da la top theo tang truong; (b) **VANG la ma so 1** (12/31 ho so co >= 10% lenh), roi tam giac **AUDCAD-NZDCAD-AUDNZD** (5/31) va nhom USD lon (EURUSD / USDJPY / GBPUSD, thuong nam trong danh muc nhieu ma). Cau "gan het la luoi/DCA tren cap bien dong thap" KHONG co bang chung: chi 1/31 la AUDCAD thuan (2023752) va AUDCHF khong co mat (0/31; con so 5 truoc do la loi nhan); (c) **2/3 ho so la DANH MUC NHIEU MA** nhung engine luoi chay MOT ma moi lan (`ghep_danh_muc` chi ghep he DSL, khong ghep luoi) - muon dung lai kieu danh muc thi can ham ghep luoi nhieu ma (CHUA lam; chi lam khi mot chan luoi don le da co DAT, dung luat "chua co DAT thi khong mo engine moi"); (d) quy cach: cap FX chuan (pip 1e-4, hop dong 100.000) chay tu 03/10 (muc 4B); vang + USDJPY da co quy cach do that (`config/luoi_quy_cach.json`, 03/10 toi, khop `symbol_info` XM demo).
 Han che trung thuc: ca 400 deu tang truong > 0 va khong ho so nao co DD cong bo >= 80% (danh sach da loc/xep san) -> hai dieu kien do khong phan biet duoc gi, chi TUOI SONG la thuoc loc that; va KHONG tinh duoc ti le co lai cua "mot signal bat ky";
 `dd_pct` la so trang cong bo (chua doi chieu cach tinh); ho giau quy tac nen day la nguon GIA THUYET, khong phai bang chung (LAM LAI TU DAU).
 
-**SUA 03/10 toi (may nha do that, thu d7bc): NHAN MA O BANG TREN CO THE SAI.** Nhan `symbol` cua 400 ho so do `_quet_signal_mql5._RX_SYM` gan =
-dem moi chu hoa 6 ky tu trong CA TRANG HTML, lay 3 ma nhieu nhat. Hai loi: (1) bo sot ten san khong theo mau 6 chu cai (`GOLD#`, `GOLD`,
-`XAUUSDm`...) nen vang mang hau to khong vao nhan; (2) ma hiem (vai lenh) van len nhan neu xuat hien nhieu lan trong trang. Do that: con
-2196457 "X117 Taoist nature" (nhan cu USDCHF) thuc ra giao dich **GOLD# 1549 lenh**, USDCHF# chi 2 lenh (bang Distribution cua trang). Vi vay:
-(a) hai dong "ma xuat hien trong top-3" va "rieng 18 luoi/DCA" o tren **CHUA TIN**; (b) nhan xet "gan het la luoi/DCA tren cap bien dong thap"
-co the do nhan - vang co the nhieu hon (vang khong phai cap bien dong thap); (c) viec 18/31 la luoi/DCA lay tu dac trung duong von / muc tai trong
-`luan_dau_chan` (khong tu nhan ma) nen it bi anh huong hon, nhung CHUA kiem lai. Cach sua: `nhan/link_nguon.phan_bo_symbol` + `chuan_symbol` doc
-bang Distribution THAT (nhan ra `GOLD#` = XAUUSD), `b link ho-so-symbol` ap len 31 trang song >= 2 nam -> `reports/nguoi_thang_symbol.json`
-(`nhan_cu_sai`, `dem_symbol_chinh`). **Chua co file do thi chua chon con mau dau tien theo ma.**
+**KET QUA THAT 03/10 toi (may nha chay `b link ho-so-symbol`, thu aac2): 31/31 ho so doc duoc, nhan cu SAI o 19/31.** Nguyen nhan: `_quet_signal_mql5._RX_SYM` dem moi chu hoa 6 ky tu trong CA TRANG HTML, lay 3 ma nhieu nhat - bo sot ten san khong theo mau 6 chu cai (`GOLD#`, `XAUUSDm`...) va de ma hiem (vai lenh) len nhan. Vi du con 2196457 (nhan cu USDCHF) thuc ra la **vang 1549 lenh**, USDCHF 2 lenh. Cach sua: `nhan/link_nguon.phan_bo_symbol` + `chuan_symbol` doc bang Distribution THAT. Ket qua day du (ma chinh + 6 ma dau moi ho so) nam trong `viec/xong/link-ho-so-symbol.json` -> `bang_chung.tep_moi` (runner mang theo noi dung bao cao TRONG file ket qua, khong tao `reports/nguoi_thang_symbol.json` o cloud - khong phai mat file). Dac diem thang: 10 ho so thuan mot ma (>= 95% lenh), 20 ho so nhieu ma; so lenh/ngay (tong cac ma liet ke / ngay song): thap nhat 0,18 · trung vi 1,4 · cao nhat 7,3 - khong ai la scalp tan suat cao, nhieu ho so ~1 lenh/ngay. `day_du = false` o ca 31: bang Distribution chi liet ke ma dau, ty le lenh la tren cac dong hien ra.
+
+**Con mau 2023752 (AUDCAD 100%, 2337 lenh / 1137 ngay, cong bo 2023 +27,59% · 2024 +47,16%):** tab *Trading history* cua MQL5 chi hien "To see trades in realtime, please log in or register" -> **lich su lenh tung lenh CAN DANG NHAP MQL5** (khong co trong HTML, khong co XHR khi chua dang nhap; Chrome 154 ma hoa cookie gan voi ung dung nen khong chep duoc phien dang nhap cua chu du an). Co dang nhap thi moi bam `b link tham-do ... --cdp`. Khong dang nhap thi chi con so tong hop cong khai - dung de HIEU CHUAN luoi tren M1 that (so lenh/ngay, tang truong nam), khong phai de chep lenh.
 
 ## 3. Ban do nguon - moi nguon cho GI
 
