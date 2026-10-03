@@ -32,8 +32,9 @@
 - Phong cach chu du an: ngan gon, ghet phuc tap va ghet token vo ich, chi muon MOT kenh; "khong duoc dung lai o muc mo ta".
 
 ## Dang o dau (03/10 dem, cloud, may nha tat)
-- RA SOAT KIEN TRUC (chu du an hoi sao nhanh 'EA cong khai mql5/myfxbook -> boc logic -> backtest -> tinh chinh' khong ra gi): `tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`. Ket luan: ba manh khong noi nhau; duong nc di nguoc so do dong 55/60; pheu boc 2,4% vi EA that giu TRANG THAI ma DSL khong co; Myfxbook khong co adapter.
+- RA SOAT KIEN TRUC (chu du an hoi sao nhanh 'EA cong khai mql5/myfxbook -> boc logic -> backtest -> tinh chinh' khong ra gi): `tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`. Ket luan: ba manh khong noi nhau; duong nc di nguoc so do dong 55/60; pheu boc 2,4%: BA nut chan (bo boc / toan hang DSL / trang thai-quan li, muc 8 cua tai lieu); Myfxbook khong co adapter.
 - DA XAY (commit f58e662): LAN EA THO `nhan/ea_tho.py` + `nhan/bao_cao_mt5.py` + 4 cong cu `b nc cc ea_tho_*` (huong dan + 4 diem hieu chuan: `tai_lieu/LAN_EA_THO.md`). CHI test voi may tester gia (46 test); `_chay_that` chua tung chay. Nen test Linux: `reports/test_fail_linux.txt` (2684 pass / 117 fail).
+- Subagent doc 22 EA that (muc 8): chay thang tren tester duoc 5-7/16 chien luoc; rao lon nhat la THIEU TEP (`.mqh` cua tac gia) - da sua `can_tep` + `tep_san` + `quet` loai `THIEU_TEP` (65e8edc); `ea_tu_dong.tai_lo` chi lay `.mq5` don, nghi 3 giay/bai. DSL CHUA mo rong (khong kiem duoc o cloud; 3 cau truc dang lam sau: thoat theo muc, tran lenh/ngay, Renko). Thu chi thi gui nha: `viec/thu/20261003-013933-47c5.json` (fixture MQL5/Myfxbook toc do thap + hieu chuan EA tho + bat schtask).
 
 ## Dang o dau (02/10 toi)
 - Kenh cloud<->nha THONG hai chieu (ping->pong ~2 phut; nha chay `cho`, runner 1 lan DAT, hop thu rieng `C:\Research SP500\cau_hop_thu`). Nha da: pull, venv, hook, tat defrag, tai MT5 XM (chua cai).
