@@ -850,13 +850,27 @@ def de_xuat_ap_cheo(host: tuple | list | None = None, top: int = 15) -> list[dic
 #: 'xLot'; (2) luat cu the (All Sniper, Sniper, Opp, ChangeTP, News, ATR) dung truoc luat chung (TP, Multiplier). Test
 #: `test_loai_ten_that_ccbsn` / `test_loai_ten_bay_va_duong_bien` giu ca hai.
 _REGLA_THAM_SO: list[tuple[str, tuple]] = [
+    # --- khong thuoc khoi nao (de TRONG, khong doan bua): co hien thi, muc tieu ngay, lam lai chu ky, xo so, can bang lot
+    (r"(?i)show|daily|reset|lotter", ()),
+    (r"(?-i:BLL)|(?i:balance.?lot)", ()),
     (r"(?i)all.?sniper|sniper.?all", ("all_sniper",)),
     (r"(?i)sniper|trim", ("tia_n_lenh_khi_chuoi_dai",)),
-    (r"(?i)opp(?![a-z])|opposite|hedg", ("lenh_doi_ung_sau_n_lenh",)),         # 'PerLoss2Hedging' la nguong hedge, khong phai doi TP
-    (r"(?i)change.?tp|per.?loss", ("doi_tp_khi_lo",)),
+    (r"(?i)opp(?![a-z])|opposite|hedg|(?-i:HZ)", ("lenh_doi_ung_sau_n_lenh",)),         # 'PerLoss2Hedging' la nguong hedge, khong phai doi TP
+    (r"(?i)change.?tp|tp.?dca.?change|per.?loss", ("doi_tp_khi_lo",)),
     (r"(?i)news", ("loc_tin_tuc",)),
     (r"(?-i:ATR|ADX|Atr|Adx|(?<![A-Za-z])atr|(?<![A-Za-z])adx)", ("loc_adx_atr",)),
-    (r"(?i)new.?multi|orders?2new", ("lot_nhan_theo_bac",)),
+    # chi bao vao: DUNG TRUOC luat dist / multiplier / period (InpPeriodsIndiST khong phai buoc luoi; InpUTBOT_Multiplier khong phai lot)
+    (r"(?i)indi|ut.?bot|super.?trend|arrow|buffer|macd|stoch|momen|ichi|(?-i:CCI|BB)", ("vao_chi_bao_ngoai",)),
+    (r"(?i)new.?multi|change.?multi|orders?2new", ("lot_nhan_theo_bac",)),
+    # tien (USD): MoneySL / MoneyTP dung truoc luat TP / step ('MoneyTPAllDCASignalStep' khong phai buoc luoi)
+    (r"(?i)money.?sl|sl.?money", ("cat_lo_theo_tien",)),
+    (r"(?i)money.?tp|tp.?money", ("tp_chuoi_tien",)),
+    # keo SL / trailing dung truoc luat step ('InpTrailingStep' khong phai buoc luoi)
+    (r"(?i)break.?even|be.?(start|step|profit)", ("keo_sl_hoa_von_khi_co_lai",)),
+    (r"(?i)trail", ("trailing_stop_chuoi",)),
+    # tre ngay moi = bo loc gio; cac tre khac (sau dong, giua hai lenh) khong co khoi rieng; dung truoc luat 'tp$' ('DelayAfterSLTP')
+    (r"(?i)new.?day|day.?(open|start)|delay.?day", ("loc_gio_giao_dich",)),
+    (r"(?i)delay|cool.?down", ()),
     (r"(?i)dist(ance)?.?multi|step.?(multi|factor)|dist.?factor|grid.?multi", ("luoi_buoc_gian_dan",)),
     (r"(?i)dist(ance)?[1-9]$|step[1-9]$|level[1-9]$", ("luoi_buoc_theo_bac",)),
     (r"(?i)dist(ance)?0?$|step$|grid.?step|grid.?size", ("luoi_gian_cach_deu",)),
@@ -869,16 +883,16 @@ _REGLA_THAM_SO: list[tuple[str, tuple]] = [
     (r"(?i)tp.?dca|tp.?basket|tp.?all|basket.?tp|total.?tp|tp.?chuoi", ("tp_chuoi_tu_gia_tb",)),
     (r"(?i)(take.?profit|tp)$", ("tp_tung_lenh",)),
     (r"(?i)(stop.?loss|sl)$", ("sl_cung",)),
-    (r"(?i)break.?even|be.?(start|step|profit)", ("keo_sl_hoa_von_khi_co_lai",)),
-    (r"(?i)trail", ("trailing_stop_chuoi",)),
     (r"(?i)hour|session|time.?(start|end|trade|filter|from|to)|start.?time|end.?time|use.?time|trad(e|ing).?time", ("loc_gio_giao_dich",)),
     (r"(?i)calendar|holiday|monday|friday|weekday|day.?filter", ("loc_ngay_thu_lich",)),
-    (r"(?i)rsi", ("vao_rsi_qua_ban",)),
-    (r"(?-i:(?<![A-Za-z])E?MA(?![a-z]))", ("vao_theo_ma",)),
+    # 'rsi' phai VIET HOA ('InpBarSignal' chua 'rSi'), hoac chu thuong dung dau tu
+    (r"(?-i:RSI|Rsi|(?<![A-Za-z])rsi)", ("vao_rsi_qua_ban",)),
+    # EMA / MA: moc dau tu viet hoa, KHONG phai 'MAGIC'; 'UseEMAFilter' co chu thuong ngay truoc EMA nen chi chan chu HOA lien
+    # truoc (ngoai le 'TFEMA' = khung cua EMA)
+    (r"(?-i:(?:(?<![A-Z])|(?<=TF))E?MA(?![a-z])(?!GIC))", ("vao_theo_ma",)),
     (r"(?i)type.?buy.?sell|buy.?sell.?(mode|type)|only.?(buy|sell)|trade.?(mode|direction)", ("hai_chieu_doc_lap", "mot_chieu")),
     (r"(?i)auto.?lot|lot.?auto|risk.?percent|percent.?risk", ("lot_tu_dong_theo_von",)),
-    (r"(?i)new.?day|delay.?day", ("loc_ngay_thu_lich",)),
-    (r"(?i)indi.?mode|signal", ("vao_chi_bao_ngoai",)),
+    (r"(?i)signal", ("vao_chi_bao_ngoai",)),
 ]
 
 

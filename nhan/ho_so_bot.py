@@ -894,7 +894,9 @@ def _do_vao_lai(c: Ctx) -> dict:
     ngay = float((gap_s <= ngan).mean())
     p80 = _q(gap_s, 80)
     so_lieu = {"so_lan_vao_lai": n, "ty_vao_trong_gioi_han": _f(ngay, 3), "gioi_han_s": ngan, "gap_s_trung_vi": _f(np.median(gap_s), 1),
-               "gap_s_p80": _f(p80, 1), "gap_pip_trung_vi": _f(np.median(gap_pip), 2), "gap_pip_rcv": _f(_rcv(gap_pip), 3)}
+               "gap_s_p80": _f(p80, 1), "gap_pip_trung_vi": _f(np.median(gap_pip), 2), "gap_pip_rcv": _f(_rcv(gap_pip), 3),
+               # khoang nho nhat dong chuoi cu -> mo chuoi moi cung chieu: thu bang chung cho tham so 'tre sau khi dong' (MinuteDelayAfterClose)
+               "gap_s_min": _f(float(gap_s.min()), 1), "gap_s_p05": _f(_q(gap_s, 5), 1), "n_gap_duoi_60s": int((gap_s < 60.0).sum())}
     dt = _do_tin(n, 60, 25)
     # (1) khoang lui CO DINH duong: moi lan cho gia lui dung X pip roi moi vao
     ok = gap_pip[gap_s > _cua_so(c)]
@@ -1015,6 +1017,7 @@ def _do_buoc(c: Ctx) -> dict:
         ts = {"buoc_pip": _tham_so(_f(v, 2), "pip", "luoi_gian_cach_deu",
                                    "phan vi 10%% cua buoc nghich (uoc luong gia tri cai; trung vi %.1f gom phan vuot nguong do tick thua)"
                                    % dn[0]["gia_tri"])}
+        so_lieu["doan_buoc"] = [{"tu": int(dn[0]["tu"]), "den": int(dn[0]["den"]), "pip": _f(v, 2)}]
         return _kq(CO, dt, ly + (tot if k_sau < 12 else ""), so_lieu, ts,
                    khoi={"luoi_gian_cach_deu": (CO, dt, ly), "luoi_buoc_gian_dan": (KHONG, dt, ly), "luoi_buoc_theo_bac": (KHONG, dt, ly)}, bang=tb)
     if gdan is not None:
@@ -1039,6 +1042,8 @@ def _do_buoc(c: Ctx) -> dict:
             ts["moc_doi_buoc_%d" % (i - 1)] = _tham_so(d["tu"] - 1, "lenh", "luoi_buoc_theo_bac",
                                                        "lenh thu %d la lenh dau cua bac buoc moi (lech 1 la cach dem)" % d["tu"])
     ly = "buoc doi %d lan theo bac: %s pip (dung sai %.0f%%)" % (nd - 1, "; ".join(mo_ta), 100 * tol)
+    so_lieu["doan_buoc"] = [{"tu": int(d["tu"]), "den": int(d["den"]), "pip": ts["buoc_bac_%d" % i]["gia_tri"]}
+                            for i, d in enumerate(dn, 1)]
     nho = min(d["so_bac"] for d in dn) < 2
     dt2 = _ha(dt) if nho else dt
     return _kq(CO, dt2, ly, so_lieu, ts, khoi={"luoi_buoc_theo_bac": (CO, dt2, ly), "luoi_gian_cach_deu": (KHONG, dt2, ly),
@@ -1894,8 +1899,11 @@ def _do_thoat_tung_phan(c: Ctx) -> dict:
     nhieu = ro[ro["so_lenh"] >= 2]
     sau = ro[ro["so_lenh"] >= 10]
     nhieu_dot = ro[ro["so_dot"] > 1]
+    # do sau KIEM DUOC = so lenh lon nhat ma it nhat 8 chuoi da dong dat toi: tia bat dau o lenh sau hon muc nay chua tung duoc kich hoat
+    sl = ro["so_lenh"].to_numpy(int)
+    sau_kiem = next((k for k in range(int(sl.max()) if len(sl) else 1, 1, -1) if int((sl >= k).sum()) >= 8), 1)
     so_lieu = {"n_chuoi_nhieu_lenh": int(len(nhieu)), "n_chuoi_ge10": int(len(sau)), "n_chuoi_nhieu_dot_dong": int(len(nhieu_dot)),
-               "ty_cung_luc_nhieu_lenh": A["ty_cung_luc_nhieu_lenh"]}
+               "ty_cung_luc_nhieu_lenh": A["ty_cung_luc_nhieu_lenh"], "do_sau_kiem_duoc_tia": int(sau_kiem)}
     khoi: dict = {}
     if len(nhieu_dot) >= 5:
         ty = float(len(nhieu_dot) / max(len(nhieu), 1))
@@ -1907,10 +1915,14 @@ def _do_thoat_tung_phan(c: Ctx) -> dict:
         return _khong_do_duoc("thoat_tung_phan", "chi %d chuoi nhieu lenh (< 20)" % len(nhieu), so_lieu)
     dt = _do_tin(len(nhieu), 100, 40)
     khoi["tia_cap_sau_dau"] = (KHONG, dt, "%d chuoi nhieu lenh deu dong MOT dot (ca chuoi cung luc): khong co tia cap" % len(nhieu))
-    if len(sau) >= 10:
-        khoi["tia_n_lenh_khi_chuoi_dai"] = (KHONG, _do_tin(len(sau), 30, 12), "%d chuoi >= 10 lenh deu dong mot dot: khong co tia khi chuoi dai" % len(sau))
+    if len(sau) >= 10 and sau_kiem >= 8:
+        dt_sau = _do_tin(len(sau), 30, 12)
+        if sau_kiem < 20:
+            dt_sau = _ha(dt_sau)       # chua tung thay chuoi >= 20 lenh (it nhat 8 chuoi): tia bat dau o lenh 20 van co the ton tai
+        khoi["tia_n_lenh_khi_chuoi_dai"] = (KHONG, dt_sau, "%d chuoi >= 10 lenh deu dong mot dot: khong co tia khi chuoi dai (kiem duoc toi do sau %d lenh; "
+                                            "tia bat dau o lenh sau hon chua kiem)" % (len(sau), sau_kiem))
     else:
-        khoi["tia_n_lenh_khi_chuoi_dai"] = (KHONG_DO_DUOC, "thap", "chi %d chuoi >= 10 lenh (< 10): bot co the co tia kich hoat tu lenh thu N (vd 15-20) chua toi do sau do" % len(sau))
+        khoi["tia_n_lenh_khi_chuoi_dai"] = (KHONG_DO_DUOC, "thap", "chi %d chuoi >= 10 lenh va do sau kiem duoc %d lenh: bot co the co tia kich hoat tu lenh thu N (vd 15-20) chua toi do sau do" % (len(sau), sau_kiem))
     kq, dt = _top(khoi)
     return _kq(kq, dt, "; ".join("%s: %s" % (m, v[0]) for m, v in khoi.items()), so_lieu, khoi=khoi)
 
@@ -2068,6 +2080,18 @@ def _do_gio_ngay(c: Ctx) -> dict:
     thu_cam = [d for d in live if wd[d] <= 0.05 * tw]
     so_lieu["chuoi_theo_thu"] = [int(x) for x in wd]
     so_lieu["thu_co_lenh"] = live
+    # tre dau ngay (tham so kieu 'MinuteDelayNewDay'): phut tu HOAT DONG DAU TIEN cua ngay may chu (mo hoac dong bat ky lenh nao) den
+    # moi chuoi bat dau. Neu bot cho X phut moi duoc vao thi KHONG chuoi nao bat dau som hon X phut ke tu hoat dong dau ngay.
+    ngay_hd = pd.concat([o["mo"], dg]).sort_values()
+    dau_ngay = ngay_hd.groupby(ngay_hd.dt.normalize()).min()
+    t_chuoi = o["mo"][dau]
+    phut_dn = (t_chuoi - t_chuoi.dt.normalize().map(dau_ngay)).dt.total_seconds().to_numpy(float) / 60.0
+    phut_dn = phut_dn[np.isfinite(phut_dn)]
+    if len(phut_dn):
+        so_lieu["tre_dau_ngay_phut_min"] = _f(float(phut_dn.min()), 1)
+        so_lieu["tre_dau_ngay_phut_p05"] = _f(_q(phut_dn, 5), 1)
+        so_lieu["n_ngay_co_lenh"] = int(len(dau_ngay))
+        so_lieu["ty_chuoi_30_phut_dau_ngay"] = _f(float((phut_dn < 30.0).mean()), 3)
     # tre dau ngay: ty le chuoi trong 2 gio dau sau vung nghi san so voi muc trung binh
     if nghi:
         h0 = max(_vung_lien_tuc(nghi), key=lambda x: x[1])
