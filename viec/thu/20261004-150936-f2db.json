@@ -1,0 +1,10 @@
+{
+ "id": "20261004-150936-f2db",
+ "luc": "2026-10-04T15:09:36",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "THU TU TESTER + VIEC KHONG TESTER",
+ "tra_loi": null,
+ "noi_dung": "[CHI THI cloud -> nha] Thu tu tester + viec khong tester. Luat moi: may bat thi luon co viec, lam lien tuc, tuan tu.\n\n0. `git pull` (156580a). Chua chay thi bat: `b cau chay --lien-tuc --nghi 20` (nhip tim nha.json dang RANH tu 22:15 03/10).\n1. Thu #11 van hieu luc: KHONG niem phong, KHONG tai tick moi. Chi lam cac viec o duoi.\n2. Doc `tai_lieu/VIEC_NEN_MAY_NHA.md` muc \"THU TU TESTER\" roi lam theo thu tu:\n   T1 CLMCA o MODEL 0 (chi D_V1 va L07S): `ea_tho_chay` kham_pha, model 0, BO tick_tu, cung gt_id, bo_set nguyen van. Con DAT o Model 0 -> `xac_nhan` DUNG MOT LAN. Khong DAT -> `ghi_hieu_biet` \"Model 1 lac quan: so M1 -> so M0\".\n   T2 N3 bac thang 8 bac (5 bo tham so a-e, de trong file do). Chay HET 8 bac, moi bac MOT lenh `nc cc hieu_chuan_luoi`. Luu dau ra DAY DU ra tep UTF-8 `reports/hieu_chuan_tay_<bo>_<den>.json` roi `git add` (bo chay don chi mang ve 25 dong cuoi). Bac het han_giay -> gap doi han_giay, KHONG doi tham so.\n   T3 phan con lai cua N1: Model 1 chi de LOAI, bot nao duong thi chay lai Model 0.\n3. Luc tester ban, lam NGAY (khong tester): (a) xuat deal lan tn5 da chay -> `reports/fixture/tester_tn5_deals.csv.gz` + `_orders_mau.csv` + `_tham_so.txt` (de cloud so voi engine tung lenh); (b) `ea_gia_lap.do_lech_bar` tren bar M15 that cua AUDCAD kham_pha voi tham so tn5, 3 thu tu duong di -> `reports/do_lech_bar_tn5.md`; (c) N5 chi phi that, `reports/kho_bot.md` (khong nhi phan).\n4. Bao cao: sau moi bac 5 dong vao `reports/nen_may_nha.md`; xong het -> MOT thu `XONG ...` <= 12 dong (kem: bac nao KHOP/LECH, lai/nam tester vs engine, DD, so lenh, ky_lech_dau_tien, ket qua T1).\nGhi chu: nua tester cua hieu_chuan_luoi duoc nho theo (tham so + cua so + model + von) nen chay lai khong ton tester. Cloud dang lam cho cong cu tu ghi bao cao day du ra tep (cho test); xong se bao, den luc do dung tep tay nhu tren."
+}
