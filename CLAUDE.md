@@ -83,7 +83,9 @@ Test `test_niem_phong_luoi.py` (44 ca, 18 loi co y phai bi bat).
 
 **LAN EA THO (03/10/2026, ra soat kien truc)**: EA cong khai (MQL5 Code Base / Market) chay THANG tren MT5 tester truoc, khong qua
 DSL (so do dong 38/55/60): `b nc cc ea_tho_kham|quet|chay|tinh`. Doan dong bang, niem phong 1 lan, DAT = lai sau phi + maxDD < 80%.
-**CHUA hieu chuan voi may that (4 diem)** - doc `tai_lieu/LAN_EA_THO.md` TRUOC khi tin DAT nao; vi sao + doi chieu so do:
+`tham_so` sai ten / khong phai so bi TU CHOI (MT5 bo qua im lang); `bo_set` = chay NGUYEN VAN file `.set` cua tac gia (CLMCA co 5 `.set`);
+`ea` = `.mq5` | `.ex5` (HOP DEN, chi nhan `bo_set` / mac dinh, terminal phai TAT "Allow DLL imports", bot cua nguoi khac KHONG BAO GIO vao git).
+**CHUA hieu chuan voi may that (5 diem)** - doc `tai_lieu/LAN_EA_THO.md` TRUOC khi tin DAT nao; vi sao + doi chieu so do:
 `tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`.
 
 **NGUON NGUOI THANG (03/10/2026, chu du an: 'khai thac he co lai san truoc, dung di duong vong')**: `tai_lieu/NGUON_NGUOI_THANG.md` - ban do nguon, so do that (31/400 ho so MQL5 song >=2 nam, 18 la luoi/DCA tren AUDCAD & anh em), thu tu A chay nguyen file -> B lich su winners -> luoi/DCA -> C cap (EA, tin hieu) -> D chup tuan. TradingView = nguon ma; cTrader = chua. Chua co `DAT` o xac_nhan thi KHONG mo them nguon/engine moi.

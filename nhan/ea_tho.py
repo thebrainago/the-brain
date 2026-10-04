@@ -23,6 +23,10 @@ Module nay ra QUYET DINH bang code thuan (khong cham MT5 nen test duoc tren Linu
   * `ke_hoach`     cua so ngay cua kham_pha / xac_nhan / niem_phong tu `so_cai/doan.json` + 1 ngay cach ly
   * `lap_lenh` / `nhan_ket_qua`   lenh tester + cong: CO LAI sau phi VA maxDD < 80% (`cham_diem.TRAN_SUT_GIAM`)
   * `chay` `quet` `tinh`   bo ba cong cu (`nc_cong_cu`): chay mot, quet kho, tinh chinh quanh mac dinh
+  * `kiem_tham_so`  `tham_so` sai ten / khong phai so bi TU CHOI (MT5 bo qua im lang khoa .set khong ton tai)
+  * `doc_set`      `bo_set` = file .set CUA TAC GIA chay NGUYEN VAN (bool / chuoi / enum), van tay gom sha cua .set
+  * `doc_nhi_phan` EA `.ex5` KHONG co ma nguon chay duoc (voi `bo_set`) nhung la HOP DEN: khong doc luat, khong
+                   kiem nhin truoc / khoa ban quyen; khong de xuat luoi tham so; `.ex4` (MT4) khong chay duoc tren MT5
 
 Chay tester that CHI o may nha (`_chay_that`, qua `slot_tester` + `ea_tu_dong`); o day no la mot ham thay duoc
 (`CHAY_TESTER`) de test bang bao cao tong hop.
@@ -42,11 +46,15 @@ Chay tester that CHI o may nha (`_chay_that`, qua `slot_tester` + `ea_tu_dong`);
   2. nhan bao cao tieng Viet ngoai 8 nhan da biet (xem `bao_cao_mt5`), nhan `Period` / `History Quality`;
   3. do sau tick that cua XM demo (`tick_tu`) - cua so nao duoc chay Model=4;
   4. `_chay_that` (slot + bien dich + log agent) chua chay lan nao.
+  5. nhanh nhi phan (.ex5): MT5 co nap dung `.ex5` copy vao `Experts\\_tu_dong` va doc `.set` ten kem khong; bot co khoa
+     ban quyen (WebRequest, tai khoan, ngay het han) co vao lenh trong tester khong - khong thi it lenh -> CHUA_DO_DUOC.
 """
 from __future__ import annotations
 
+import difflib
 import hashlib
 import json
+import math
 import os
 import re
 import time
@@ -258,6 +266,109 @@ def input_so(ma_nguon: str) -> list[dict]:
     return ra
 
 
+_INPUT_KHAI = re.compile(r"\b(?:extern|input|sinput)\s+([A-Za-z_]\w*)\s+([A-Za-z_]\w*)\s*(?:=|;|\[)")
+_KIEU_NGUYEN = frozenset("int uint long ulong short ushort char uchar".split())
+
+
+def input_khai_bao(ma_nguon: str) -> dict:
+    """{ten: kieu} cho MOI input ma EA khai bao, ke ca bool / string / enum / color / datetime (`input_so` chi giu
+    input SO co mac dinh). Dung de bat tham so sai ten: MT5 bo qua im lang khoa .set khong ton tai."""
+    return {ten: kieu for kieu, ten in _INPUT_KHAI.findall(sach(ma_nguon)) if kieu != "group"}
+
+
+def co_input_ngoai(ma_nguon: str) -> bool:
+    """EA co .mqh cua tac gia (`#include "x"`, hoac `<x>` ngoai thu vien chuan MT5): input co the duoc khai o do, nen
+    ten input khong doi chieu duoc voi file .mq5 chinh - khong duoc coi khoa la la SAI."""
+    tep = can_tep(ma_nguon, sach(ma_nguon))
+    return bool(tep["include_cuc_bo"] or tep["include_la"])
+
+
+def kiem_tham_so(ts: dict, ma_nguon: str) -> str | None:
+    """None neu `tham_so` ap dung DUNG nhu da khai, nguoc lai MOT cau ly do.
+
+    Hai cho thua tham_so khai ma khong duoc ap dung: (1) khoa khong phai input cua EA - MT5 bo qua, chay mac dinh
+    nhung van tay lai khac; (2) gia tri khong phai so - `lap_lenh` chi dua input SO xuong tester, chuoi bi bo.
+    EA co .mqh cua tac gia (`co_input_ngoai`): khong biet het ten input nen bo buoc (1), con kiem kieu tren khoa biet."""
+    ts = _chuan_ts(ts)                       # tu dung vung: so nguyen khong lo (10**400) -> inf, bool -> 0/1
+    khai = input_khai_bao(ma_nguon)
+    la = sorted(k for k in ts if k not in khai)
+    if la and not co_input_ngoai(ma_nguon):
+        gan = ["%s -> %s" % (k, g[0]) for k in la[:6] for g in [difflib.get_close_matches(k, sorted(khai), 1, 0.7)] if g]
+        return ("tham_so co khoa KHONG phai input cua EA (MT5 bo qua im lang, chay mac dinh): %s%s (EA co: %s)"
+                % (", ".join(la[:6]), " [gan giong: %s]" % "; ".join(gan) if gan else "",
+                   ", ".join(sorted(khai)[:12]) or "khong input nao"))
+    kieu = {k: khai.get(k, "") for k in ts}
+    xau = sorted(k for k, v in ts.items() if not isinstance(v, (int, float)) or not math.isfinite(v))
+    xau += sorted(k for k in ts if kieu[k] == "string" and k not in xau)
+    if xau:
+        return ("tham_so phai la SO huu han cho input so (bool = 0/1): %s. Input chuoi / ten enum / ngay khong qua duoc "
+                "o day - dung bo_set de chay NGUYEN VAN file .set cua tac gia" % ", ".join(xau[:6]))
+    le = sorted(k for k, v in ts.items()
+                if (kieu[k] in _KIEU_NGUYEN or kieu[k].upper().startswith("ENUM_") or kieu[k] == "bool")
+                and v != int(v))
+    if le:
+        return "input kieu nguyen / enum / bool nhan so nguyen, khong nhan so le: %s" % ", ".join(le[:6])
+    sai_bool = sorted(k for k, v in ts.items() if kieu[k] == "bool" and v not in (0, 1))
+    if sai_bool:
+        return "input bool chi nhan 0 / 1: %s" % ", ".join(sai_bool[:6])
+    return None
+
+
+# ---- .set cua tac gia: chay NGUYEN VAN, khong phien dich tung input (bool / chuoi / enum di nguyen)
+_KHOA_SET = re.compile(r"^[A-Za-z_]\w{0,63}$")
+SET_TOI_DA_BYTE = 200_000
+SET_TOI_DA_KHOA = 500
+#: van ban .set vao so tay roi ra git CONG KHAI: .set cua nguoi la co the chua token / mat khau / ma ban quyen.
+#: Bo loc NHE (ten khoa nhay cam co gia tri khong phai so ngan, hoac gia tri mang dang khoa that) - khong thay mat nguoi doc.
+_KHOA_NHAY_CAM = re.compile(r"(?i)token|passw|secret|licen[sc]|api_?key|webhook|credential|investor")
+_DANG_BI_MAT = re.compile(r"\b\d{6,12}:[A-Za-z0-9_-]{30,}|\bsk-[A-Za-z0-9]{20,}|\bgh[pousr]_[A-Za-z0-9]{30,}|"
+                          r"\bxox[abprs]-[A-Za-z0-9-]{10,}|\bAKIA[0-9A-Z]{16}\b|\bAIza[0-9A-Za-z_-]{30,}")
+_GIA_TRI_SO_NGAN = re.compile(r"(?i)[-+]?\d{1,6}(?:\.\d+)?|true|false")
+
+
+def doc_set(duong) -> dict:
+    """File .set cua tac gia -> {ten, van_ban, khoa, n, sha}. NEM ValueError / OSError neu khong dung dinh dang.
+
+    `van_ban` = moi dong `Khoa=GiaTri`, da bo dong trong / `;` comment / hau to toi uu `||...` (chay MOT lan, khong
+    toi uu) - chinh van ban nay duoc ghi vao Profiles/Tester va dua vao van tay. Chi nhan duoi `.set`: lenh nhap tu
+    ben ngoai khong duoc doc tep tuy y (vd tep bi mat) roi de lo ten khoa vao so tay. Loi KHONG in noi dung dong sai."""
+    p = Path(str(duong))
+    if p.suffix.lower() != ".set":
+        raise ValueError("bo_set phai la file .set (nhan '%s')" % p.name[:40])
+    if p.stat().st_size > SET_TOI_DA_BYTE:
+        raise ValueError(".set lon bat thuong (> %d byte)" % SET_TOI_DA_BYTE)
+    khoa: dict = {}
+    nhay_cam: list[str] = []
+    for i, dong in enumerate(BC.doc_van_ban(p).replace("\x00", "").splitlines(), 1):
+        dong = dong.strip().lstrip("\ufeff")
+        if not dong or dong.startswith(";"):
+            continue
+        k, dau, v = dong.partition("=")
+        k, v = k.strip(), v.split("||", 1)[0].strip()
+        if not dau or not _KHOA_SET.match(k):
+            raise ValueError("dong %d khong phai Khoa=GiaTri hop le" % i)
+        if k in khoa:
+            raise ValueError("khoa '%s' lap o dong %d" % (k, i))
+        if len(v) > 200 or any(ord(c) < 32 for c in v):
+            raise ValueError("gia tri cua '%s' qua dai hoac co ky tu dieu khien" % k)
+        if _DANG_BI_MAT.search(v) or (v and _KHOA_NHAY_CAM.search(k) and not _GIA_TRI_SO_NGAN.fullmatch(v)):
+            nhay_cam.append(k)
+        khoa[k] = v
+    if nhay_cam:
+        raise ValueError("khoa nhay cam co gia tri (token / mat khau / ma ban quyen): %s - van ban .set vao so tay "
+                         "CONG KHAI nen khong dua len. Xoa gia tri (hoac dong) do trong .set - la bo KHAC, mot phep "
+                         "thu khac - roi chay lai" % ", ".join(nhay_cam[:6]))
+    if not khoa:
+        raise ValueError(".set khong co khoa nao")
+    if len(khoa) > SET_TOI_DA_KHOA:
+        raise ValueError(".set co qua nhieu khoa (> %d)" % SET_TOI_DA_KHOA)
+    van_ban = "".join("%s=%s\n" % (k, khoa[k]) for k in sorted(khoa))      # thu tu khoa khong co nghia voi MT5
+    return {"ten": p.stem[:40], "van_ban": van_ban, "khoa": khoa, "n": len(khoa),
+            "sha": hashlib.sha1(van_ban.encode("utf-8")).hexdigest()[:16]}
+
+
+LY_DO_NHI_PHAN = ("khong co ma nguon (.ex5): khong phan loai duoc, khong doc duoc input / luat, khong kiem duoc "
+                  "nhin truoc, khoa ban quyen hay ngay het han - chi do duoc KET QUA tren tester")
 LOI_KHAC_PHUC_TEP = ("tai GOI DAY DU cua tac gia (kem .mqh / chi bao), dat vao thu muc MQL5 cua terminal, "
                      "roi them ten tep vao config/ea_tho.json -> tep_san")
 
@@ -442,7 +553,14 @@ def de_xuat_tham_so(inputs: list[dict], so_bien: int = 3, he_so=(0.7, 1.4), toi_
 
 
 def _so_chuan(v):
-    return round(float(v), 10) if isinstance(v, (int, float)) and not isinstance(v, bool) else v
+    """Chuan hoa de van tay khong phan biet 8 / 8.0 / True / 1 (cung mot gia tri tren tester: ghi `:g` xuong .set).
+    So nguyen khong lo (10**400) khong doi ra float duoc -> inf, de `kiem_tham_so` tu choi thay vi vo cong cu."""
+    if isinstance(v, (int, float)):
+        try:
+            return round(float(v), 10)
+        except OverflowError:
+            return math.inf
+    return v
 
 
 def _chuan_ts(ts: dict | None) -> dict:
@@ -511,8 +629,40 @@ def sha_ma(ma: str) -> str:
     return hashlib.sha1((ma or "").replace("\r\n", "\n").encode("utf-8")).hexdigest()[:16]
 
 
+#: EA nhi phan: duoc COPY vao terminal de tester chay, KHONG bao gio thuc thi o day. Chi bam sha + kiem dang.
+EX5_TOI_DA_BYTE = 30_000_000
+EX5_TOI_THIEU_BYTE = 512
+_DUOI_KHONG_CHAY = {
+    ".ex4": "la EA cua MT4 - MT5 tester khong chay duoc (can ban .ex5 hoac .mq5)",
+    ".mq4": "la ma nguon MQL4 (MT4) - khong bien dich duoc tren MT5 (can .mq5 hoac .ex5)",
+    ".set": "la file tham so - dung bo_set; `ea` la file EA (.mq5 / .ex5)",
+}
+_DUOI_THUC_THI = frozenset(".exe .msi .dll .bat .cmd .ps1 .vbs .scr .jar .zip .rar .7z .iso .lnk".split())
+
+
+def doc_nhi_phan(p: Path) -> dict:
+    """File .ex5 -> {sha, dung_luong}. NEM ValueError / OSError neu khong giong chuong trinh MT5.
+
+    Bat loi tai hong hay gap: Drive / Telegram luu TRANG BAO LOI hoac HTML duoi ten file .ex5 (qua han muc, can xac
+    nhan quet virus) - ma that khong bao gio la van ban thuan, va dau .ex5 co NUL (chuoi UTF-16, bang so)."""
+    n = p.stat().st_size
+    if n > EX5_TOI_DA_BYTE:
+        raise ValueError(".ex5 lon bat thuong (%.0f MB > %.0f MB)" % (n / 1e6, EX5_TOI_DA_BYTE / 1e6))
+    if n < EX5_TOI_THIEU_BYTE:
+        raise ValueError(".ex5 qua nho (%d byte): tai hong hoac file rong" % n)
+    tho = p.read_bytes()
+    dau = tho[:512]
+    in_duoc = sum(1 for b in dau if 32 <= b < 127 or b in (9, 10, 13))
+    html = dau.lstrip(b"\xef\xbb\xbf \t\r\n").lower().startswith((b"<!doctype", b"<html", b"<?xml", b"<head", b"<body"))
+    if html or (in_duoc >= 0.98 * len(dau) and b"\x00" not in dau):
+        raise ValueError("file .ex5 nay thuc ra la van ban / trang web (tai hong, vd trang bao loi cua Drive): "
+                         "khong phai chuong trinh MT5")
+    return {"sha": hashlib.sha1(tho).hexdigest()[:16], "dung_luong": n}
+
+
 def doc_ea(ea: str) -> dict:
-    """`ea`: duong .mq5 | 'kho:<so thu tu>' | 'kho:<tu trong tieu de>' (reports/ea/kho.json)."""
+    """`ea`: duong .mq5 | duong .ex5 (NHI PHAN, khong ma nguon) | 'kho:<so thu tu>' | 'kho:<tu trong tieu de>'
+    (reports/ea/kho.json). EA nhi phan tra `nhi_phan=True`, `ma=""`, `sha` = sha cua BYTE file, `duong` = noi o may nay."""
     ea = str(ea).strip()
     if ea.lower().startswith("kho:"):
         ds = json.loads(KHO_JSON.read_text(encoding="utf-8-sig"))
@@ -532,6 +682,17 @@ def doc_ea(ea: str) -> dict:
         p = Path(ea)
         if not p.exists():
             raise KeyError("khong thay file EA: %s" % ea)
+        duoi = p.suffix.lower()
+        if duoi in _DUOI_KHONG_CHAY:
+            raise ValueError("%s %s" % (p.name[:60], _DUOI_KHONG_CHAY[duoi]))
+        if duoi in _DUOI_THUC_THI:
+            raise ValueError("%s la tep nen / chuong trinh / bo cai dat: he thong KHONG chay hay giai nen no, chi nhan "
+                             ".mq5 hoac .ex5" % p.name[:60])
+        if duoi == ".ex5":
+            nb = doc_nhi_phan(p)
+            ten = ten_sach(p.stem)[:30].strip("_") + "_" + nb["sha"][:6]
+            return {"ten": ten, "tieu_de": p.stem, "ma": "", "url": "", "sha": nb["sha"], "nhi_phan": True,
+                    "duong": str(p), "dung_luong": nb["dung_luong"]}
         ma, tieu_de, url = BC.doc_van_ban(p), p.stem, ""
     sha = sha_ma(ma)
     ten = ten_sach(tieu_de.split("]")[-1])[:30].strip("_") + "_" + sha[:6]
@@ -540,8 +701,15 @@ def doc_ea(ea: str) -> dict:
 
 def kham(ea: str, tieu_de: str = "", mo_ta: str = "", co_san: list[str] | None = None) -> dict:
     """Phan loai + ma/khung de thu + luoi tham so de xuat + cua so tung doan (neu da dong bang)."""
-    co_san = co_san if co_san is not None else ma_co_san()
     d = doc_ea(ea)
+    if d.get("nhi_phan"):
+        return {"ea": d["ten"], "sha": d["sha"], "tieu_de": d["tieu_de"], "url": "", "nhi_phan": True,
+                "dung_luong": d["dung_luong"],
+                "phan_loai": {"loai": "NHI_PHAN", "ly_do": [LY_DO_NHI_PHAN], "thieu_tep": [], "input_so": [], "ho": {}},
+                "ket_luan": ("EA NHI PHAN: chay duoc bang ea_tho_chay (ma + khung + bo_set = .set cua tac gia); "
+                             "khong tu chon ma/khung, khong de xuat luoi tham so. Chi nhan lenh tren tester / DEMO, "
+                             "terminal phai TAT 'Allow DLL imports'")}
+    co_san = co_san if co_san is not None else ma_co_san()
     td = tieu_de or d["tieu_de"]
     cfg = cau_hinh()
     pl = phan_loai(d["ma"], td, mo_ta, cfg["tep_san"])
@@ -658,6 +826,17 @@ def nhan_canh_bao(so: dict, bc: dict, cfg: dict, lenh: dict) -> list[str]:
         ra.append("CHUA hieu chuan: lenh con MO luc het cua so co duoc tinh/dong khong (lai dong vs equity)")
     if bc.get("lenh_mo_cuoi"):
         ra.append("co lenh mo cuoi ky")
+    bs = lenh.get("bo_set") or {}
+    if bs.get("khoa_la"):
+        ra.append(".set co khoa KHONG thay trong ma EA (%s): %s" % (
+            "EA co .mqh cua tac gia nen co the khai o file khac" if bs.get("doi_chieu") == "mot_phan"
+            else "MT5 bo qua khoa khong phai input; .set co the cua ban EA khac", ", ".join(bs["khoa_la"][:6])))
+    if lenh.get("khoa_chua_kiem"):
+        ra.append("tham_so co khoa khong thay trong ma EA nhung EA co .mqh cua tac gia nen KHONG kiem duoc ten: %s - "
+                  "khoa sai ten bi MT5 bo qua im lang" % ", ".join(lenh["khoa_chua_kiem"][:6]))
+    if lenh.get("nhi_phan"):
+        ra.append("EA NHI PHAN (hop den): khong doc duoc luat / input, khong kiem duoc nhin truoc, khoa ban quyen hay ngay "
+                  "het han; ten khoa trong .set khong doi chieu duoc. Ket qua chi noi bo nay kiem duoc tren tester")
     return ra
 
 
@@ -695,9 +874,11 @@ def _chan_niem_phong(lenh: dict, cfg: dict) -> str | None:
 
 
 def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = None,
-             gt_id: int | None = None, cfg: dict | None = None) -> dict:
+             gt_id: int | None = None, cfg: dict | None = None, bo_set: str | None = None) -> dict:
     """Lenh chay tester cho mot doan, hoac ly do KHONG chay. Tra `trang_thai='SAN_SANG'` + `lenh`.
 
+    `tham_so` = input SO doi so voi mac dinh cua tac gia (khoa phai la input cua EA). `bo_set` = file .set cua tac gia,
+    chay NGUYEN VAN (loai tru voi `tham_so`); van tay gom sha cua van ban .set da lam sach.
     kham_pha / xac_nhan: da co ket qua cung van tay -> tra lai tu so tay (khong chay, khong dem them)."""
     cfg = cfg or cau_hinh()
     ma, khung, doan = str(ma).upper(), str(khung).upper(), str(doan)
@@ -705,10 +886,29 @@ def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = No
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "khung '%s' khong hop le (co %s)" % (khung, KHUNG_HOP_LE)}
     if doan not in NDL.DOAN:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "doan phai la %s" % (tuple(NDL.DOAN),)}
+    ts, bs, nhi_phan = _chuan_ts(tham_so), None, bool(ea.get("nhi_phan"))
+    if bo_set:
+        if ts:
+            return {"trang_thai": "CHUA_DO_DUOC",
+                    "ly_do": "bo_set va tham_so loai tru nhau: .set cua tac gia chay nguyen van; muon doi input thi "
+                             "sua .set - do la mot bo KHAC, mot phep thu khac"}
+        try:
+            bs = doc_set(bo_set)
+        except (OSError, ValueError) as e:
+            return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "khong doc duoc .set: %s" % str(e)[:160]}
+        ts = {"@bo_set": bs["sha"]}
+    elif nhi_phan:
+        if ts:
+            return {"trang_thai": "CHUA_DO_DUOC",
+                    "ly_do": "EA nhi phan (khong ma nguon): khong doi chieu duoc ten input nen tham_so bi tu choi (MT5 "
+                             "bo qua im lang khoa sai ten). Dung bo_set = file .set CUA TAC GIA, hoac de mac dinh"}
+    else:
+        ly = kiem_tham_so(ts, ea["ma"])
+        if ly:
+            return {"trang_thai": "CHUA_DO_DUOC", "ly_do": ly}
     kh = ke_hoach(ma, khung, doan, cfg)
     if "tu" not in kh:
         return kh
-    ts = _chuan_ts(tham_so)
     vt = van_tay_chay(ea["sha"], ma, khung, ts, doan, kh, cfg["model"], cfg["von"])
     lenh = {"van_tay": vt, "doan": doan, "ma": ma, "khung": khung, "gt_id": gt_id, "ea_ten": ea["ten"],
             "ea_sha": ea["sha"], "tham_so": ts, "cua_so": kh, "model": int(cfg["model"]),
@@ -718,6 +918,23 @@ def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = No
                      "den": kh["den"], "model": int(cfg["model"]), "von": int(cfg["von"]),
                      "don_bay": int(cfg["don_bay"]), "han_giay": int(cfg["han_giay"]),
                      "input": {k: {"gia_tri": v} for k, v in ts.items() if isinstance(v, (int, float))}}}
+    if nhi_phan:
+        lenh["nhi_phan"] = {"sha": ea["sha"], "dung_luong": ea.get("dung_luong")}
+    if bs:
+        if nhi_phan:
+            khoa_la, doi_chieu = [], "khong"              # khong co ma nguon de doi chieu
+        else:
+            khai = input_khai_bao(ea["ma"])
+            khoa_la = sorted(k for k in bs["khoa"] if k not in khai)[:10]
+            doi_chieu = "mot_phan" if co_input_ngoai(ea["ma"]) else "du"
+        lenh["bo_set"] = {"ten": bs["ten"], "sha": bs["sha"], "so_khoa": bs["n"], "van_ban": bs["van_ban"],
+                          "khoa_la": khoa_la, "doi_chieu": doi_chieu}
+        lenh["viec"]["tep_set_tho"] = bs["van_ban"]
+    elif ts and co_input_ngoai(ea["ma"]):
+        khai = input_khai_bao(ea["ma"])
+        chua = sorted(k for k in ts if k not in khai)[:10]
+        if chua:
+            lenh["khoa_chua_kiem"] = chua
     if doan == "niem_phong":
         cu = ST.mot("SELECT * FROM niem_phong WHERE van_tay=?", vt)
         if cu:
@@ -734,7 +951,7 @@ def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = No
             kq["tu_so_tay"] = "thi nghiem %s da chay y het - tra ket qua cu, KHONG tinh them phep thu" % cu["id"]
             kq["tn_id"] = cu["id"]
             return kq
-    thieu = tep_thieu(can_tep(ea["ma"], sach(ea["ma"])), cfg["tep_san"])
+    thieu = [] if nhi_phan else tep_thieu(can_tep(ea["ma"], sach(ea["ma"])), cfg["tep_san"])
     if thieu:
         return {"trang_thai": "CHUA_DO_DUOC", "ha_tang": True, "thieu_tep": thieu,
                 "ly_do": "EA can tep may nay khong co: %s - %s" % (", ".join(thieu[:4]), LOI_KHAC_PHUC_TEP)}
@@ -786,12 +1003,20 @@ def nhan_ket_qua(lenh: dict, bao_cao, log: str = "", vong_id: int | None = None,
           "nhan": nhan}
     dau_vao = {"ea_sha": lenh["ea_sha"], "ea": lenh["ea_ten"], "tham_so": lenh["tham_so"],
                "cua_so": lenh["cua_so"], "model": lenh["model"], "von": lenh["von"]}
+    if lenh.get("bo_set"):
+        dau_vao["bo_set"] = lenh["bo_set"]          # kem van ban .set: o D:\ / du_lieu_cao co the mat, so tay thi khong
+        ra["bo_set"] = {k: v for k, v in lenh["bo_set"].items() if k != "van_ban"}
+    if lenh.get("nhi_phan"):
+        dau_vao["nhi_phan"] = ra["nhi_phan"] = lenh["nhi_phan"]
     tom_tat = "%s %s/%s %s: %s%%/nam DD%s%% · %s lenh -> %s" % (
         lenh["ea_ten"], ma, khung, doan, so.get("cagr_pct"), so.get("dd_pct"), so.get("so_lenh"), tt)
     if doan == "niem_phong":
         ra["goi_ten_dung"] = ("DAT o day = CO LAI VA maxDD < %.0f%% tren MT5 tester, doan chua tung dung toi, "
                               "cung bo tham so da qua xac_nhan - canh bac co ky vong duong do duoc, chua phai "
                               "chan ly. Buoc tiep: demo." % DD_TRAN)
+        if lenh.get("nhi_phan"):
+            ra["goi_ten_dung"] += (" EA nhi phan = hop den: chua hieu luat nen chua phai 'cua ta' - muon thanh EA cua "
+                                   "ta phai boc luat tu lich su lenh tester roi viet lai.")
         with ST.ket_noi() as cn:
             cn.execute("INSERT INTO niem_phong(luc,van_tay,gt_id,ma,khung,spec,ket_qua,trang_thai) "
                        "VALUES(?,?,?,?,?,?,?,?)",
@@ -816,14 +1041,43 @@ def _chay_that(lenh: dict, ea: dict, cfg: dict) -> dict:
         return {"xong": False, "loi": "chay tester can may nha (Windows + MT5), may nay la %s" % os.name}
     import ea_tu_dong as EA
     from nhan import slot_tester as SL
+    return _chay_voi_slot(lenh, ea, cfg, EA, SL)
+
+
+def _chay_voi_slot(lenh: dict, ea: dict, cfg: dict, EA, SL) -> dict:
+    """Phan `_chay_that` sau cong kiem he dieu hanh; `EA` / `SL` truyen vao de test bang module gia tren Linux.
+
+    EA nhi phan (.ex5): KHONG bien dich - copy byte vao terminal (da kiem sha luc copy), chi chay khi terminal TAT
+    'Allow DLL imports' (khong tat / khong doc duoc = tu choi: .ex5 la ma may co the goi ham he thong), xoa ban copy sau."""
     with SL.cap("ea_tho:" + lenh["van_tay"]) as slot:
         khoa = "slot:" + slot.ten
         EA.TERMINAL[khoa] = (slot.du_lieu, slot.exe.parent, "")
-        ds = EA.bien_dich([{"url": ea.get("url", ""), "ten": ea["ten"], "ma": ea["ma"]}], khoa, cho_giay=90.0)
-        if not ds or not ds[0]["bien_dich"]:
-            return {"xong": False, "loi": "bien dich hong: %s" % (ds[0]["loi"] if ds else "khong co ket qua")}
-        viec = dict(lenh["viec"], terminal=khoa, ea=ds[0]["ten_file"])
-        kq = EA.chay_mot(viec)
+        tep_ex5 = None
+        if ea.get("nhi_phan"):
+            dll = EA.cho_phep_dll(khoa)
+            if dll is not False:
+                return {"xong": False, "loi": (
+                    "terminal %s 'Allow DLL imports' (config/common.ini [Experts] AllowDllImport): EA nhi phan khong "
+                    "ma nguon co the goi ham he thong - TAT no (Tools > Options > Expert Advisors) roi chay lai"
+                    % ("DANG BAT" if dll else "khong doc duoc"))}
+            try:
+                ten_file, tep_ex5 = EA.chep_nhi_phan(ea["duong"], ea["ten"], khoa, ea["sha"])
+            except (OSError, ValueError) as e:
+                return {"xong": False, "loi": "khong dua duoc .ex5 vao terminal: %s" % str(e)[:160]}
+        else:
+            ds = EA.bien_dich([{"url": ea.get("url", ""), "ten": ea["ten"], "ma": ea["ma"]}], khoa, cho_giay=90.0)
+            if not ds or not ds[0]["bien_dich"]:
+                return {"xong": False, "loi": "bien dich hong: %s" % (ds[0]["loi"] if ds else "khong co ket qua")}
+            ten_file = ds[0]["ten_file"]
+        viec = dict(lenh["viec"], terminal=khoa, ea=ten_file)
+        try:
+            kq = EA.chay_mot(viec)
+        finally:
+            if tep_ex5 is not None:
+                try:
+                    tep_ex5.unlink()
+                except OSError:
+                    pass                    # terminal con giu file: de lai, vo hai (khong ai nap no ngoai tester)
         log = ""
         try:
             goc = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Tester"
@@ -838,11 +1092,11 @@ def _chay_that(lenh: dict, ea: dict, cfg: dict) -> dict:
 
 
 def chay(ea: str, ma: str, khung: str, doan: str = "kham_pha", tham_so: dict | None = None,
-         gt_id: int | None = None, vong_id: int | None = None) -> dict:
+         gt_id: int | None = None, vong_id: int | None = None, bo_set: str | None = None) -> dict:
     """MOT lan chay: lap lenh -> tester -> cong -> so tay."""
     d = doc_ea(ea)
     cfg = cau_hinh()
-    lo = lap_lenh(d, ma, khung, doan, tham_so, gt_id, cfg)
+    lo = lap_lenh(d, ma, khung, doan, tham_so, gt_id, cfg, bo_set)
     if lo.get("trang_thai") != "SAN_SANG":
         return lo
     t0 = time.time()
@@ -894,6 +1148,11 @@ def quet(eas: list[str] | str, doan: str = "kham_pha", toi_da_lan: int = 6, co_s
         except (KeyError, OSError, ValueError) as x:
             bo_qua.append({"ea": e, "loai": "KHONG_DOC_DUOC", "ly_do": "doc EA loi: %s" % x})
             continue
+        if d.get("nhi_phan"):
+            bo_qua.append({"ea": d["ten"], "loai": "NHI_PHAN",
+                           "ly_do": "quet tu dong can ma nguon de chon ma/khung - chay tung cai bang ea_tho_chay voi "
+                                    "ma, khung, bo_set cu the"})
+            continue
         pl = phan_loai(d["ma"], d["tieu_de"], tep_san=tep_san)
         if pl["loai"] != "CHIEN_LUOC":
             bo_qua.append({"ea": d["ten"], "loai": pl["loai"], "ly_do": pl["ly_do"][0]})
@@ -932,6 +1191,10 @@ def tinh(ea: str, ma: str, khung: str, gt_id: int | None = None, so_bien: int = 
 
     Moi diem la mot phep thu duoc dem theo dong gia thuyet. KHONG bao gio cham niem_phong: do la buoc rieng."""
     d = doc_ea(ea)
+    if d.get("nhi_phan"):
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "EA nhi phan: khong co ma nguon nen khong de xuat luoi tham so - chay tung .set cua tac gia "
+                         "bang ea_tho_chay(bo_set=...) duoi CUNG mot gt_id"}
     pl = phan_loai(d["ma"], d["tieu_de"])
     if pl["loai"] != "CHIEN_LUOC":
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "EA khong phai chien luoc (%s)" % pl["loai"]}

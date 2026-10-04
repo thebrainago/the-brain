@@ -86,3 +86,13 @@ nhat_ky/may_nha_mau.jsonl*
 link_rieng.txt
 config/link_rieng.txt
 du_lieu_cao/
+# BOT / CHUONG TRINH CUA NGUOI KHAC: repo la PUBLIC. EA nhi phan (.ex5 / .ex4), dll, bo cai dat, tep nen tai tu
+# MQL5 / Telegram / Drive chi o MAY NHA (du_lieu_cao/), KHONG BAO GIO len git: ban quyen cua nguoi ban + tai ve cong khai
+# la phat tan. Nhanh nhi phan cua ea_tho chi COPY tam vao terminal de tester chay roi xoa (nhan/ea_tho._chay_voi_slot).
+*.ex5
+*.ex4
+*.dll
+*.exe
+*.msi
+*.rar
+*.7z

@@ -190,7 +190,8 @@ def _ea_tho_tinh(**kw) -> dict:
 
 _EA = {"type": "string", "description": (
     "EA cong khai: duong toi file .mq5, hoac 'kho:<so thu tu>' / 'kho:<tu trong tieu de>' trong "
-    "reports/ea/kho.json (EA da tai tu MQL5 Code Base)")}
+    "reports/ea/kho.json (EA da tai tu MQL5 Code Base), hoac duong toi file .ex5 (EA NHI PHAN khong ma nguon: chay "
+    "duoc voi ma + khung + bo_set, la hop den; .ex4 cua MT4 khong chay duoc tren MT5)")}
 
 
 CONG_CU: list[dict] = [
@@ -370,12 +371,20 @@ CONG_CU: list[dict] = [
         "tieu chi chu du an: co lai sau phi VA maxDD < 80%, bat ke martingale/luoi/DCA. doan: kham_pha (tu do) | "
         "xac_nhan (ham y nguyen, dem so lan nhin) | niem_phong (MOT lan cho mot bo ea+ma+khung+tham_so, can gt_id "
         "va mot xac_nhan DAT dung bo tham so do, toi da 3 lan/dong gia thuyet). tham_so = input cua EA doi so voi "
-        "mac dinh cua tac gia. Chi chay duoc o may nha co MT5 - o cloud tra loi ro 'can may nha' (hay giao qua "
-        "b cau). Hong ha tang (khong doc duoc bao cao, tester chet) KHONG tinh phep thu, KHONG tieu lan mo. Ket "
+        "mac dinh cua tac gia; sai ten input / gia tri khong phai so bi TU CHOI (MT5 bo qua im lang). bo_set = file "
+        ".set CUA TAC GIA chay nguyen van (bool / chuoi / enum), loai tru voi tham_so; moi .set la mot bo = mot phep "
+        "thu - chay nhieu .set duoi CUNG gt_id de so phep thu duoc dem dung. EA .ex5 (khong ma nguon) chi nhan bo_set "
+        "hoac mac dinh, can terminal TAT 'Allow DLL imports'. Chi chay duoc o may nha co MT5 - o cloud tra loi ro "
+        "'can may nha' (hay giao qua b cau). Hong ha tang (khong doc duoc bao cao, tester chet) KHONG tinh phep thu, KHONG tieu lan mo. Ket "
         "qua DAT la 'canh bac co ky vong duong do duoc', chua phai chan ly.",
         {"ea": _EA, "ma": _MA, "khung": _KHUNG,
          "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan", "niem_phong"]},
-         "tham_so": {"type": "object", "description": "{ten_input: gia_tri_so}; bo trong = mac dinh cua tac gia"},
+         "tham_so": {"type": "object", "description": (
+             "{ten_input: gia_tri_so}; bo trong = mac dinh cua tac gia. Khoa PHAI la input cua EA, gia tri PHAI la "
+             "so (bool = 0/1): sai ten / chuoi bi tu choi (MT5 se bo qua im lang)")},
+         "bo_set": {"type": "string", "description": (
+             "duong toi file .set cua tac gia: chay NGUYEN VAN (ke ca bool / chuoi / enum), van tay gom sha cua .set, "
+             "moi .set = mot bo = mot phep thu. Loai tru voi tham_so")},
          "gt_id": _GT},
         ["ea", "ma", "khung"], _ea_tho_chay),
     _cc("ea_tho_quet",

@@ -175,6 +175,64 @@ def viet_set(ten: str, khai: dict, ten_terminal: str = "exness") -> str:
     return f.name
 
 
+def viet_set_tho(ten: str, van_ban: str, ten_terminal: str = "exness") -> str:
+    """Ghi NGUYEN VAN file .set cua tac gia (van ban da lam sach boi `ea_tho.doc_set`: moi dong Khoa=GiaTri).
+
+    Khong phien dich tung input nhu `viet_set`: bool / chuoi / ten enum di nguyen, nen EA nhieu chien luoc chon bang
+    input (CLMCA co 5 .set) chay dung bo cua tac gia thay vi mac dinh trong ma."""
+    mql5, _, _ = _duong(ten_terminal)
+    thu = mql5 / "Profiles" / "Tester"
+    thu.mkdir(parents=True, exist_ok=True)
+    f = thu / f"{ten}.set"
+    f.write_text(van_ban.rstrip("\n") + "\n", encoding="utf-16")
+    return f.name
+
+
+def cho_phep_dll(ten_terminal: str) -> bool | None:
+    """Terminal nay co cho EA goi DLL khong? Doc `config/common.ini` muc `[Experts]` khoa `AllowDllImport`.
+
+    True = BAT (gia tri khac 0) | False = tat, hoac khong co khoa / khong co tep (mac dinh cua MT5 la tat) |
+    None = tep co nhung khong doc duoc. Noi goi EA NHI PHAN (khong ma nguon) phai tu choi khi khac False."""
+    from nhan import bao_cao_mt5 as BC
+    dat, _cai, _sym = TERMINAL[ten_terminal]
+    p = dat / "config" / "common.ini"
+    if not p.exists():
+        return False
+    try:
+        van = BC.doc_van_ban(p)                        # MT5 ghi UTF-16 LE co BOM
+    except OSError:
+        return None
+    muc, bat = "", False
+    for dong in van.splitlines():
+        d = dong.strip().lstrip("\ufeff")
+        if d.startswith("[") and d.endswith("]"):
+            muc = d[1:-1].strip().lower()
+        elif muc == "experts":
+            k, dau, v = d.partition("=")
+            if dau and k.strip().lower() == "allowdllimport" and v.strip() not in ("", "0"):
+                bat = True
+    return bat
+
+
+def chep_nhi_phan(nguon: str, ten: str, ten_terminal: str, sha_mong_doi: str) -> tuple[str, Path]:
+    """Copy `.ex5` (EA nhi phan, khong ma nguon) vao MQL5/Experts/_tu_dong de tester chay theo ten.
+
+    Kiem sha mot lan nua LUC COPY: file co the bi doi giua luc doc (van tay) va luc chay. Khong chay file, khong sua
+    byte nao. Tra (ten_file khong duoi cho `.ini`, duong .ex5 vua ghi de noi goi xoa sau khi chay)."""
+    import hashlib
+    tho = Path(nguon).read_bytes()
+    sha = hashlib.sha1(tho).hexdigest()[:16]
+    if sha != sha_mong_doi:
+        raise ValueError("file .ex5 da DOI giua luc doc va luc chay (sha %s khac %s)" % (sha, sha_mong_doi))
+    mql5, _, _ = _duong(ten_terminal)
+    thu = mql5 / "Experts" / "_tu_dong"
+    thu.mkdir(parents=True, exist_ok=True)
+    ten_file = ten_sach(ten)
+    dich = thu / (ten_file + ".ex5")
+    dich.write_bytes(tho)
+    return ten_file, dich
+
+
 def viet_ini(ten: str, ea: str, tap_set: str, symbol: str, khung: str,
              tu: str, den: str, model: int = 4, von: int = 10000,
              don_bay: int = 100, ten_terminal: str = "exness") -> Path:
@@ -324,7 +382,10 @@ def chay_mot(viec: dict) -> dict:
             return {**viec, "bao_cao": "", "xong": False, "giay": 0.0,
                     "bo_qua": f"dia con {dia_trong_gb():.1f} GB < {DIA_TOI_THIEU_GB} "
                               f"(da don {thu_hoi} MB tick nhung van khong du)"}
-    tap_set = viet_set(nhan, viec.get("input") or {}, ten_t)
+    if viec.get("tep_set_tho"):
+        tap_set = viet_set_tho(nhan, viec["tep_set_tho"], ten_t)
+    else:
+        tap_set = viet_set(nhan, viec.get("input") or {}, ten_t)
     ini = viet_ini(nhan, viec["ea"], tap_set, viec["symbol"], viec["khung"],
                    viec["tu"], viec["den"], model=viec.get("model", 4),
                    von=viec.get("von", 10000), don_bay=viec.get("don_bay", 100),
