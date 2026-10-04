@@ -188,6 +188,11 @@ def _ea_tho_tinh(**kw) -> dict:
     return EAT.tinh(**kw)
 
 
+def _hieu_chuan_luoi(vong_id=None, **kw) -> dict:
+    from nhan import hieu_chuan_luoi as HCL
+    return HCL.hieu_chuan(vong_id=vong_id, **kw)
+
+
 _EA = {"type": "string", "description": (
     "EA cong khai: duong toi file .mq5, hoac 'kho:<so thu tu>' / 'kho:<tu trong tieu de>' trong "
     "reports/ea/kho.json (EA da tai tu MQL5 Code Base), hoac duong toi file .ex5 (EA NHI PHAN khong ma nguon: chay "
@@ -456,6 +461,31 @@ CONG_CU: list[dict] = [
          "gt_id": _GT}, ["ma", "khung", "luoi"],
         lambda ma, khung, luoi=None, co_dinh=None, von=10000.0, toi_da_o=300, hat=0, gt_id=None, vong_id=None, **_:
         TN.quet_luoi(ma, khung, co_dinh, luoi, float(von), gt_id, vong_id, int(toi_da_o), int(hat))),
+    _cc("hieu_chuan_luoi",
+        "HIEU CHUAN engine luoi (nhan/luoi.py) <-> MT5 tester that: chay CUNG ThamSo qua ea_LuoiDayDu.mq5 tren tester (can may co MT5) va "
+        "qua engine, tren MOT cua so ngay <= doan kham_pha (>= 14 ngay), roi so lai %/nam, maxDD, so lenh, BUY/SELL, lenh giu lau nhat, do "
+        "sau luoi theo thoi gian, swap, bang theo thang/quy. KHOP -> DAT, LECH -> AM (kem ly do + canh bao chan doan: ro ket, lech ty le "
+        "SELL, tick sinh tu M1, he so quy doi tien bao gia / tien tai khoan uoc tu deal tester...); ha tang hong (log 'cannot generate "
+        "history data', cua so bao cao lech, thieu bang Deals, qua it lenh) -> CHUA_DO_DUOC, khong ghi gi. Day KHONG phai phep thu y "
+        "tuong: dong so tay loai hieu_chuan_luoi / hieu_chuan_tester, doan 'hieu_chuan', so_phep_thu 0 - khong an FDR, khong dem la phep "
+        "thu, khong vao danh sach thi nghiem tot nhat. Nua tester duoc nho theo (tham_so + cua so + model + von + EA) nen doi version "
+        "engine / ban do sai so khong phai chay lai tester. `chi_engine` = chi in so engine (khong goi tester, khong ghi). "
+        "model mac dinh 0 (tick sinh tu M1; 1 noi doi khi TP < 2x bien do M1; 4 can tick that). Dung de biet engine lech tester "
+        "bao nhieu TRUOC khi tin bat ky so luoi nao (task #48).",
+        {"ma": _MA, "khung": _KHUNG,
+         "tu": {"type": "string", "description": "ngay bat dau cua so (YYYY-MM-DD hoac YYYY.MM.DD), phai nam trong doan kham_pha dong bang"},
+         "den": {"type": "string", "description": "ngay ket thuc cua so (bao gom), >= tu + 13 ngay, trong doan kham_pha"},
+         "tham_so": {"type": "object", "description": "luoi.ThamSo (buoc, tp, tran_tang, che_do, lot, kieu_lot, he_so_lot, he_so_buoc, tia_lenh, "
+                                                      "bien_cap, cap_moi_bar, cho_lui, chot_tien, don_bay, buoc_tran, muc_stopout)"},
+         "model": {"type": "integer", "description": "mo hinh tick cua tester: 0 (mac dinh) | 1 | 4"},
+         "von": {"type": "number", "description": "von bang tien tai khoan (so nguyen, mac dinh 10000)"},
+         "ea": {"type": "string", "description": "mac dinh ea_LuoiDayDu.mq5 (chay duoc moi EA co cung bo input)"},
+         "chi_engine": {"type": "boolean", "description": "true = chi chay engine, in so (khong tester, khong ghi so tay)"},
+         "von_quy_doi": {"type": "number", "description": "don vi bao gia / 1 don vi tai khoan (AUDCAD tren tk USD ~ 1,31..1,33); "
+                                                          "bo trong = uoc tu deal tester (can >= 20 lenh), khong uoc duoc thi dung quy cach"},
+         "han_giay": {"type": "integer", "description": "han chay tester, giay (>= 60, mac dinh theo config/ea_tho.json)"},
+         "lam_lai_tester": {"type": "boolean", "description": "true = bo qua nua tester da nho, chay tester lai"}},
+        ["ma", "khung", "tu", "den"], _hieu_chuan_luoi),
 ]
 THEO_TEN = {c["ten"]: c for c in CONG_CU}
 #: Cong cu chi GHI so tay (khong do gi) - van duoc goi khi het ngan sach chu ky.

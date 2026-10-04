@@ -28,10 +28,15 @@ Xuat bao cao tester `.htm` -> `reports/fixture/tester_<ten>_deals.csv.gz` (+ `_o
 (`ghi_hieu_biet`, nhan 'ho so co che'). Doc ket qua tung khoi (co / khong / khong ro / khong do duoc) va ghi **cho nao ho so SAI** so voi
 `.set` cua tac gia (bang chung dung nhat de sua bo do).
 
-**N3. Hieu chuan engine <-> tester (no cua moi so lieu luoi).** Bang bien the tren AUDCAD M15, CUNG `ThamSo`: (a) luoi phang,
-(b) + he so buoc, (c) + lot cong, (d) + tia lenh. Moi dong: lai %/nam, maxDD, so lenh, BUY/SELL, lenh giu lau nhat; hai cot
-(`thu_luoi` engine | `ea_tho_chay` + `ea_LuoiDayDu.mq5` tester). Dong dau tien lech > 10% tuong doi = dong "lech" -> bao cloud sua
-engine (`luoi.py`, task #48). Them `do_lech_bar` (`nhan/ea_gia_lap.py`, khong tester) de tach "bar lac quan" khoi "san that".
+**N3. Hieu chuan engine <-> tester (no cua moi so lieu luoi).** Cong cu MOT LENH: `b nc cc hieu_chuan_luoi '{"ma":"AUDCAD","khung":"M15",
+"tu":"2022-01-03","den":"2022-06-30","tham_so":{...},"model":0,"von":10000}'` - chay `ea_LuoiDayDu.mq5` tren tester + engine CUNG ThamSo tren
+CUNG cua so (>= 14 ngay, nam trong doan kham_pha; cua so 90-180 ngay de tester xong < 30 phut) roi tra KHOP / LECH + canh bao chan doan
+(ro ket, ty le SELL, do sau theo thoi gian, he so quy doi tien bao gia, swap...). Khong an phep thu (doan 'hieu_chuan', so_phep_thu 0).
+Bien the (mot dong moi lat, cung cua so, chay theo thu tu): (a) luoi phang `{"buoc":60,"tp":40,"tran_tang":10,"lot":0.01}`, (b) + `"he_so_buoc":1.2`,
+(c) + `"kieu_lot":"cong","he_so_lot":0.25,"lot":0.04`, (d) + `"tia_lenh":true,"bien_cap":5` (= tn5: buoc 21 tp 9 tran 9), (e) `"chot_tien":3`.
+Dong dau tien KHONG KHOP = noi engine lech: ghi 3-5 dong vao `reports/nen_may_nha.md` (cac canh bao + `ky_lech_dau_tien`) va BAO CLOUD
+(sua `luoi.py` + nhan C, task #48). Them `do_lech_bar` (`nhan/ea_gia_lap.py`, khong tester) de tach "bar lac quan" khoi "san that".
+`"lam_lai_tester":true` chi de ep chay lai nua tester da nho (vd sau khi nap them du lieu M1); ha tang chet (CHUA_DO_DUOC) tu chay lai o lan goi sau.
 
 **N4. Chuyen bot sang tai san / khung khac (khi cong cu `chuyen_bot` co).** Bot tot nhat (hien chi con CCBSN v2.6 + "Can Cu Bo 10K 2.7"
 va vai `.set` CLMCA): lay ke hoach do thong minh (`b nc cc chuyen_bot`), chay Model 1 tren cap / khung moi theo thu tu cloud xep

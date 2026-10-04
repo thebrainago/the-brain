@@ -43,6 +43,8 @@ Chay tester that CHI o may nha (`_chay_that`, qua `slot_tester` + `ea_tu_dong`);
 ## CHUA kiem voi may that (phai hieu chuan o nha truoc khi tin DAT)
 
   1. tester co tinh/dong lenh con MO luc het cua so khong (lai dong vs equity) - `da_hieu_chuan_lenh_mo`;
+     (fixture that 04/10: CO - tester dong lenh con mo luc het bang deal comment 'end of test'; engine luoi.py tinh
+     lai co ca lo/lai treo cuoi cua so, xem `hieu_chuan_luoi`)
   2. nhan bao cao tieng Viet ngoai 8 nhan da biet (xem `bao_cao_mt5`), nhan `Period` / `History Quality`;
   3. do sau tick that cua XM demo (`tick_tu`) - cua so nao duoc chay Model=4;
   4. `_chay_that` (slot + bien dich + log agent) chua chay lan nao.
@@ -874,18 +876,27 @@ def _chan_niem_phong(lenh: dict, cfg: dict) -> str | None:
 
 
 def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = None,
-             gt_id: int | None = None, cfg: dict | None = None, bo_set: str | None = None) -> dict:
+             gt_id: int | None = None, cfg: dict | None = None, bo_set: str | None = None,
+             cua_so_tay: dict | None = None) -> dict:
     """Lenh chay tester cho mot doan, hoac ly do KHONG chay. Tra `trang_thai='SAN_SANG'` + `lenh`.
 
     `tham_so` = input SO doi so voi mac dinh cua tac gia (khoa phai la input cua EA). `bo_set` = file .set cua tac gia,
     chay NGUYEN VAN (loai tru voi `tham_so`); van tay gom sha cua van ban .set da lam sach.
-    kham_pha / xac_nhan: da co ket qua cung van tay -> tra lai tu so tay (khong chay, khong dem them)."""
+    kham_pha / xac_nhan: da co ket qua cung van tay -> tra lai tu so tay (khong chay, khong dem them).
+
+    `cua_so_tay` = cua so TAY {tu, den, ngay} (dinh dang MT5 YYYY.MM.DD) thay cho `ke_hoach` - CHI cho `hieu_chuan_luoi`
+    (nhan/hieu_chuan_luoi.py) va CHI doan kham_pha: nguoi goi PHAI da chung minh cua so nam trong doan dong bang.
+    Cua so tay khong dung bo nho van tay cua phep thu thuong (nguoi goi tu luu cache) va `nhan_ket_qua` tu choi lenh
+    do (khong khop `ke_hoach`), nen khong the bi ghi nham thanh ket qua cua mot gia thuyet."""
     cfg = cfg or cau_hinh()
     ma, khung, doan = str(ma).upper(), str(khung).upper(), str(doan)
     if khung not in KHUNG_HOP_LE:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "khung '%s' khong hop le (co %s)" % (khung, KHUNG_HOP_LE)}
     if doan not in NDL.DOAN:
         return {"trang_thai": "CHUA_DO_DUOC", "ly_do": "doan phai la %s" % (tuple(NDL.DOAN),)}
+    if cua_so_tay is not None and doan != "kham_pha":
+        return {"trang_thai": "CHUA_DO_DUOC",
+                "ly_do": "cua so tay chi cho doan kham_pha (xac_nhan / niem_phong dung cua so dong bang cua ke_hoach)"}
     ts, bs, nhi_phan = _chuan_ts(tham_so), None, bool(ea.get("nhi_phan"))
     if bo_set:
         if ts:
@@ -906,7 +917,7 @@ def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = No
         ly = kiem_tham_so(ts, ea["ma"])
         if ly:
             return {"trang_thai": "CHUA_DO_DUOC", "ly_do": ly}
-    kh = ke_hoach(ma, khung, doan, cfg)
+    kh = ke_hoach(ma, khung, doan, cfg) if cua_so_tay is None else dict(cua_so_tay)
     if "tu" not in kh:
         return kh
     vt = van_tay_chay(ea["sha"], ma, khung, ts, doan, kh, cfg["model"], cfg["von"])
@@ -945,7 +956,7 @@ def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = No
         if ly:
             return {"trang_thai": "CHUA_DO_DUOC", "ly_do": ly}
     else:
-        cu = ST.da_thu(vt)
+        cu = None if cua_so_tay is not None else ST.da_thu(vt)
         if cu and cu.get("ket_qua"):
             kq = dict(cu["ket_qua"])
             kq["tu_so_tay"] = "thi nghiem %s da chay y het - tra ket qua cu, KHONG tinh them phep thu" % cu["id"]
