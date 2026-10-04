@@ -77,6 +77,34 @@ hay ngay het han - chi do duoc KET QUA tren tester. DAT cua no **chua phai "cua 
 5. **Khong bao gio vao git** (repo PUBLIC; ban quyen cua nguoi ban): `.gitignore` chan `*.ex5 *.ex4 *.dll *.exe *.msi *.rar *.7z` (+ zip, + `du_lieu_cao/`). Tep goc chi o may nha.
    So tay chi giu sha + dung luong + van ban `.set`. Ket qua niem phong ghi ro "hop den".
 
+## EA LUOI DAY DU `ea_LuoiDayDu.mq5` (04/10/2026) - EA cua ta, chay duoc khai bao tn5
+`ea_LuoiThamChieu.mq5` chi lam luoi toi thieu. Khai bao tot nhat cua du an (tn5: AUDCAD M15, buoc 21 x1,2, TP 9, tran 9, lot CONG 0,25, TIA LENH bien 5)
+can them lot cong, buoc gian dan, tia lenh, cho lui, chot theo tien: file nay co DU moi truong cua `luoi.ThamSo` (bang ten `nhan/ea_gia_lap.BANG_TEN`;
+test `test_bang_ten_phu_het_truong_thamso` do khi ai them truong vao `ThamSo` ma EA chua co input). Bo tham so cu cua `ea_LuoiThamChieu` chay y nguyen.
+
+**Cach chay (may nha, SAU hieu chuan diem 4 / B1)**: `b nc cc ea_tho_chay '{"ea":"ea_LuoiDayDu.mq5","ma":"AUDCAD","khung":"M15","doan":"kham_pha","gt_id":N,
+"tham_so":{...}}'` voi `tham_so = ea_gia_lap.tham_so_ea_tu_luoi(ThamSo(...))` (vi du tn5: InpLot 0,04 InpStepPips 21 InpStepMult 1,2 InpTpPips 9 InpMaxLevels 9 InpMode 2
+InpLotKind 2 InpLotMult 0,25 InpSpark 1 InpSparkPips 5). **Chon InpLot sao cho lot x he la boi cua buoc lot** (0,04 voi cong 0,25): EA lam tron lot theo buoc lot
+cua san, engine thi khong; neu khong, khong con khop tung lenh. Doi chieu: cung `ma`/`khung`/`doan` chay `thu_luoi` voi `ThamSo` tuong ung.
+
+**Da kiem (cloud, khong can MT5)**: `nhan/ea_gia_lap.py` + `ea_gia_lap.cpp` bien dich CHINH van ban `.mq5` (bo `#property`, `#include` thay bang stub MQL5, `input` thanh
+const) bang g++/clang++ va chay tren duong TICK voi san gia lap (hedging; `netting=True` de kiem EA tu choi). `test_ea_luoi_day_du.py` (47 test, ~25 giay):
+bang ten, cu phap nghiem (-Wall, loi tro dung dong .mq5), 10 kich ban TAY (so tien tinh bang tay truoc, khong chep dau ra san gia), 12 cau hinh x 8 duong gia
+doi chieu TUNG LENH voi `luoi.chay` (moi tick la mot bar, khong phi qua dem), 8 DOT BIEN (sua co chu dich ma EA -> bo so sanh phai bao lech), do khoang cach bar<->tick.
+Bo do rong 04/10: 12 cau hinh x 80 duong gia, khop DUNG chieu / lot / gia mo / tick mo+dong (tru 1 tick o `chot_tien_tia*` va `buoc_co`, do muc luoi le).
+
+**Quan he lai (do duoc, khong phai uoc luong)**: `lai_ea = so du - von - spread cua lenh con mo`. `lai_engine + phi_tia_kep - lai_ea = lech_explicada` voi `phi_tia_kep` =
+spread engine tru THEM khi dong cap tia, `lech_explicada` = chenh gia tung lenh (engine mo / dong o muc luoi chinh xac, EA o tick dau vuot muc). Phan con lai `lech_con_lai`
+<= 3e-12 o moi cau hinh / duong gia (spread khong doi). Spread doi giua cac tick = ngoai pham vi do nay (tester that moi cho thay).
+
+**Khac biet con lai voi engine - KHONG phai loi EA (task #48, chua sua, doi so lieu that)**: (a) engine dong cap TIA va chot_tien o gia TOT NHAT cua bar (cao nhat voi lenh mua), EA
+tick dong o gia vua cham nguong; (b) engine tru spread HAI lan o lenh tia (luc mo va luc dong), EA mot lan. Tren nen M15 gia lap co bien do that (6 duong x 1500 bar) engine cao hon EA
+**~15%** o cau hinh co tia / chot_tien (tn5 +14,7% .. +16,4%; chot_tien_tia +7,9% .. +17,8%), luoi thuan (khong tia) lech +-5%. `test_engine_lac_quan_voi_tia_lenh_khi_chay_tren_bar_ohlc`
+ghim so do. **Khi doc ket qua tester: tester la so THAT, `thu_luoi` tn5 la can tren** (ham y: cac con so +13,26%/nam AUDCAD tu `luoi.py` co the lac quan ~15% o phan tia).
+
+**CHUA kiem**: MetaEditor (cu phap rieng cua MQL5 - san gia la C++ nen mot so chuoi chuyen kieu / cu phap C++ chap nhan ma MQL5 co the khong), tester that (tick that, spread doi, swap qua dem, phi,
+khoi dong lai giua chung), va 5 diem hieu chuan ben duoi. May nha bien dich F7: loi cu phap thi sua ngay va commit, khong can xin phep.
+
 ## HIEU CHUAN truoc khi tin bat ky DAT nao (5 diem CHUA kiem voi may that)
 1. **Lenh con MO luc het cua so**: chay EA mau mua-giu (mua tick dau, khong SL/TP) mot cua so ~60 ngay, so lai bao cao voi
    (dong - mo) x lot x co hop dong. Bao cao co tinh lo lai troi khong? Dung roi dat `da_hieu_chuan_lenh_mo: true`
@@ -84,7 +112,7 @@ hay ngay het han - chi do duoc KET QUA tren tester. DAT cua no **chua phai "cua 
 2. **Nhan bao cao tieng Viet**: luu 1 bao cao that vao `test_bao_cao_mt5.py` (mau that dau tien). `doc_duoc=False` thi xem `thieu`,
    them nhan vao `nhan_them`. Bay da biet: "Loi nhuan rong" = Gross Profit; lai that = "Tong loi nhuan rong".
 3. **Do sau tick that cua XM demo**: ghi `tick_tu`. Cua so nam ngoai tick that -> `ha_tang`, khong ra so.
-4. **`_chay_that`** (slot -> bien dich -> tester -> log agent) chua chay lan nao. Chay 1 EA dem duoc, doc truong `log` neu hong.
+4. **`_chay_that`** (slot -> bien dich -> tester -> log agent) chua chay lan nao. Chay 1 EA dem duoc, doc truong `log` neu hong. Sau do chay `ea_LuoiDayDu.mq5` (tn5, lot 0,04) cung cua so voi `thu_luoi`: chenh lai la so THAT cua khoang cach engine<->tester (task #48).
 5. **Nhanh nhi phan + `bo_set`** chua chay voi MT5 that (logic kiem bang test gia tren Linux). Can xem: (a) MT5 co nap dung `.ex5` copy vao
    `MQL5\Experts\_tu_dong` va `.set` ten kem khong (`.ini` dung `Expert=_tu_dong\<ten>` + `ExpertParameters=<nhan>.set`); (b) bot kiem tra ban quyen
    qua WebRequest (tester chan) co the KHONG vao lenh -> it lenh -> `CHUA_DO_DUOC`, khong phai AM; (c) lenh dau tien nen la `ea_LuoiThamChieu`
