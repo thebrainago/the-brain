@@ -176,7 +176,7 @@ phải thắng lối cũ ở đấu trường này trước.
 3. **Giả thuyết** (`ghi_gia_thuyet`) + vì sao có người trả tiền cho phơi nhiễm đó.
 4. **Thí nghiệm**: `ho_so_tai_san` → `tim_quy_luat` hoặc `thu_co_che` → `mo_xe_lenh` → biến thể
    (bộ lọc / quản trị) → `quet_tham_so` (hình dạng) → `xac_nhan` → `niem_phong` → `xuat_mq5`.
-   Họ quản trị không cần tín hiệu vào (lưới, tỉa lệnh, nâng lot): `thu_luoi`.
+   Họ quản trị không cần tín hiệu vào (lưới, tỉa lệnh, nâng lot): `thu_luoi` → `niem_phong_luoi`.
 5. **Ghi**: hiểu biết kèm id thí nghiệm, câu hỏi mới, trạng thái giả thuyết.
 6. **Tóm tắt** 5–10 dòng → bảng `vong` + `reports/nc_vong/vong_NNNNN.md`.
 
@@ -202,6 +202,15 @@ phải thắng lối cũ ở đấu trường này trước.
   "có lãi ở một mức đòn bẩy nào đó" ⇔ Σx > 0, và mức tốt nhất là min(Kelly, đòn bẩy chạm DD 80%,
   10). Không bao giờ báo CAGR ở đòn bẩy quá Kelly. Lưới: hệ số lot chạm trần tính CHÍNH XÁC trên
   đường equity (lãi lỗ tuyến tính theo lot).
+- **Niêm phong lưới** (`niem_phong_luoi`, 04/10/2026): lưới không có đòn bẩy L tự do như DSL — cái phải
+  chốt TRƯỚC là **cỡ lot**. Lot chốt bằng CHÍNH engine `luoi.py` trên đoạn mở (khám phá + xác nhận): lot
+  lớn nhất mà vẫn không stop-out, maxDD < 80%, đòn bẩy đỉnh ≤ 10, còn lãi. Chỉ sau đó mới chạm đoạn niêm
+  phong, một lần. Chạy tài khoản (stop-out) = `AM` và các số sau đó (lãi/năm, phí/lãi, lệnh/năm) không in,
+  vì engine gom lệnh cả chuỗi chứ không dừng tại điểm cháy. Tiền điều kiện không nói gì về lợi nhuận niêm
+  phong (chi phí KHAI, đoạn mở < 50 bar, không chốt nổi lot) → `CHUA_DO_DUOC`, không tiêu lượt mở. Nhãn,
+  không chặn: phí ăn bao nhiêu % lãi gộp, chi phí chỉ ở mức SÀN, đã qua xác nhận chưa, `ghi_chu` của người
+  gọi (đoạn chồng lên đời sống con tín hiệu gốc → chỉ là LÀM LẠI, không độc lập). Engine CHƯA đối chiếu
+  MT5 tester nên ĐẠT ở đây là "kỳ vọng dương trên mô phỏng", chưa phải bằng chứng ra tiền.
 - **Chuỗi tổng hợp** không bao giờ xuất MQL5; chỉ khai báo ĐẠT niêm phong trên mã thật mới xuất.
 
 ---
@@ -347,7 +356,7 @@ từng request và cộng vào bảng `vong`; hết ngân sách ngày thì chu k
 |---|---|---|
 | 1 | Trên máy chủ dự án: `b nc kiem` rồi `b nc tu-lai AUDCAD H4`, `EURGBP H4`, `XAUUSDM H4` | sổ tay có hồ sơ + quy luật + kết luận ba mã, dùng dữ liệu và chi phí THẬT |
 | 2 | `b nc claude --vong 3` với câu hỏi ưu tiên của chủ dự án (tỉa lệnh AUDCAD) | ba chu kỳ có hiểu biết kèm bằng chứng; so với tự lái trên cùng mã |
-| 3 | `thu_luoi` (bọc `nhan/luoi.py`) **đã có cho AUDCAD**. Còn: `luoi.py` nhận mô hình chi phí (đang ghim phí qua đêm AUDCAD) để mở cho mọi mã | AI tự tái lập +13,26%/năm AUDCAD trong sổ tay rồi thử bản tỉa tinh vi hơn; `thu_luoi` chạy được trên EURGBP |
+| 3 | `thu_luoi` (bọc `nhan/luoi.py`) **đã có**; mô hình chi phí theo mã đã mở cho FX khác (AUDCAD y hệt cũ; mã khác có `do_tin` ĐO/SÀN/KHAI; JPY/vàng qua `config/luoi_quy_cach.json`); niêm phong lưới `niem_phong_luoi` đã có (04/10). Còn: đối chiếu `luoi.py` với MT5 tester (EA tham chiếu `ea_LuoiThamChieu.mq5`) | AI tự tái lập +13,26%/năm AUDCAD trong sổ tay rồi thử bản tỉa tinh vi hơn; `thu_luoi` chạy được trên EURGBP |
 | 4 | Gắn nhà nghiên cứu vào `dieu_phoi.py` như trụ `NHA_NGHIEN_CUU` (lane external), thay trụ NGHI | chạy 24/7 không người, nhịp tim trong `nao.db` |
 | 5 | Nối `reports/nc_yeu_cau_seeker.jsonl` vào `vuon_nguon` | một yêu cầu của AI dẫn tới tài liệu mới |
 | 6 | `xuat_mq5` dịch cả luật quản trị (`dich_mq5_qtvt`) | EA từ nhà nghiên cứu chạy tester Model=4 |

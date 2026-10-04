@@ -58,8 +58,8 @@ Moi phien Claude Code:
    gia thuyet dang song; thi nghiem tot nhat; hieu biet co bang chung; phep thu da tieu).
 2. **Tu chon viec co gia tri nhat va lam** - khong cho giao viec. Chu du an la nha
    tai tro: dat muc tieu, gui y tuong qua `b nc hoi "..."`, doc so tay.
-3. **Moi phep do nghien cuu di qua `b nc cc <cong_cu> '<json>'`** (16 cong cu: ho so,
-   tim quy luat, thu co che, quet, mo xe lenh, thu luoi, xac nhan, niem phong...) de
+3. **Moi phep do nghien cuu di qua `b nc cc <cong_cu> '<json>'`** (23 cong cu: ho so,
+   tim quy luat, thu co che, quet, mo xe lenh, thu luoi, xac nhan, niem phong, niem phong luoi...) de
    no vao so tay `nc.db`. Khong viet them script `_*.py` roi cho mot thi nghiem moi -
    ket qua ngoai so tay la ket qua khong ai tim lai duoc.
 4. **Ket phien**: ghi hieu biet (kem tn_id) + cau hoi moi + trang thai gia thuyet.
@@ -73,6 +73,13 @@ maxDD < 80% o chinh don bay do. Martingale/DCA/luoi hop le. Hai con so ly do:
 nghien cuu, khong den tu pheu; (b) tren chuoi co dap an, do tim rong ~3.000 dieu
 kien thay edge yeu **3/8**, mot gia thuyet co chu dich thay **8/8** (`b nc kiem 30`).
 Hoc tu lenh dung/sai = `mo_xe_lenh`. Het token: `b nc tu-lai MA KHUNG` (khong LLM).
+
+**NIEM PHONG LUOI (04/10/2026)**: `b nc cc niem_phong_luoi '{"ma","khung","tham_so"(khong lot),"gt_id","von"}'` - duong niem phong cho he
+`luoi.py` (truoc do chi he DSL moi niem phong duoc). Lot chot bang CHINH engine tren du lieu MO (kham_pha + xac_nhan): lot lon nhat con khong
+stop-out, maxDD < 80%, don bay dinh <= 10, con lai; roi MOI cham doan niem_phong, MOT lan. DAT = co lai (ke ca lo treo cuoi doan) + maxDD < 80%
++ >= 20 lenh + chi phi do duoc; chay tai khoan = AM (cac con so sau stop-out khong in). **DAT o day = LAM LAI + ky vong duong tren MO PHONG**
+(engine CHUA doi chieu MT5 tester; phi chi o muc SAN), khong phai phat hien doc lap khi doan chong len doi song con tin hieu goc (dung `ghi_chu`).
+Test `test_niem_phong_luoi.py` (44 ca, 18 loi co y phai bi bat).
 
 **LAN EA THO (03/10/2026, ra soat kien truc)**: EA cong khai (MQL5 Code Base / Market) chay THANG tren MT5 tester truoc, khong qua
 DSL (so do dong 38/55/60): `b nc cc ea_tho_kham|quet|chay|tinh`. Doan dong bang, niem phong 1 lan, DAT = lai sau phi + maxDD < 80%.

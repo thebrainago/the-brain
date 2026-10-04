@@ -160,6 +160,9 @@ class KetQuaLuoi:
     bar_chay: int | None = None
     so_nam: float = 0.0
     duong_equity: np.ndarray | None = field(default=None, repr=False)
+    #: Margin TINH (cung con so voi kiem stop-out, xap xi UOC CAO: tang_max x notional / don_bay) o lot cua chinh lan chay.
+    #: notional = margin * ThamSo.don_bay. `niem_phong_luoi` dung no de chan don bay dinh khi chot lot.
+    margin: float = 0.0
     #: DataFrame lenh mo phong (chi co khi `chay(..., ghi_lenh=True)`): mo, dong, chieu, lot, gia_mo, gia_dong, tang, ro,
     #: ly_do. Lenh chua dong den het du lieu co `dong` = NaT. Cung luoc do voi lich su lenh that (`nhan/boc_lich_su`).
     lenh: object | None = field(default=None, repr=False)
@@ -659,7 +662,7 @@ def chay_mang(dl: DuLieuChay, ts: ThamSo, von: float, ghi_lenh: bool = False) ->
         tang_max=max(k["tang_max"] for k in tks),
         lo_treo_dinh=float(np.max(treo)),
         chay=bar_chay is not None, bar_chay=bar_chay,
-        so_nam=so_nam, duong_equity=equity,
+        so_nam=so_nam, duong_equity=equity, margin=float(margin),
         lenh=_bang_lenh(nhat_ky, idx, qc) if ghi_lenh else None)
 
 

@@ -295,6 +295,23 @@ CONG_CU: list[dict] = [
         ["ma", "khung", "spec", "gt_id"],
         lambda ma, khung, spec, gt_id, quan_tri=None, vong_id=None, **_:
         TN.niem_phong(ma, khung, spec, quan_tri, gt_id, vong_id)),
+    _cc("niem_phong_luoi",
+        "PHEP THU CUOI cho he LUOI (nhan/luoi.py: luoi / DCA / martingale deu hop le): mo doan NIEM PHONG (20% cuoi) cho MOT "
+        "khai bao da dong bang = tham_so luoi + von (KHONG gom lot). Moi khai bao chi mo mot lan; moi dong gia thuyet toi da "
+        "3 lan. Truoc khi cham doan niem phong, CODE chot LOT tu du lieu da mo (kham_pha + xac_nhan): lot lon nhat ma "
+        "engine cho co lai, khong stop-out, maxDD < 80%, don bay dinh <= 10; khong chot duoc (lai am / hong o lot nho nhat / "
+        "chi phi KHAI / tham so sai) thi tra CHUA_DO_DUOC va niem phong CHUA bi dung toi. Roi chay MOT lan o lot do tren doan "
+        "niem phong. DAT = co lai sau phi (ke ca lo treo cuoi doan) VA khong stop-out VA maxDD < 80% o lot cam ket, >= 20 "
+        "lenh, chi phi khong KHAI. Nhan: phi an bao nhieu lai, hon moc, chi phi chi o muc SAN, da qua xac_nhan chua. "
+        "ghi_chu = dieu nguoi goi can nguoi doc biet (vd doan niem phong chong len doi song cua con tin hieu goc nen chi la "
+        "LAM LAI, khong doc lap) - duoc ghi vao ket qua. GIOI HAN: luoi.py chua doi chieu voi MT5 tester o ma nao; DAT = "
+        "canh bac ky vong duong do TREN MO PHONG. Chi goi khi he da qua xac_nhan va ban san sang chap nhan ket qua.",
+        {"ma": _MA, "khung": _KHUNG, "tham_so": {"type": "object"},
+         "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
+         "gt_id": _GT, "ghi_chu": {"type": "string"}},
+        ["ma", "khung", "tham_so", "gt_id"],
+        lambda ma, khung, tham_so, gt_id, von=10000.0, ghi_chu="", vong_id=None, **_:
+        TN.niem_phong_luoi(ma, khung, tham_so, float(von), gt_id, vong_id, ghi_chu)),
     _cc("ghep_danh_muc",
         "Ghep 2-8 he (co the khac ma/khung) cung rui ro, do tuong quan ngay va TIEN cua ca ro "
         "(CAGR tot nhat voi maxDD < 80%). Goi khi da co vai chan song rieng le - chan am nhung "

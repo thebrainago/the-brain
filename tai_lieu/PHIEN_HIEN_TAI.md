@@ -3,20 +3,20 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-03 10:35 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 79c850b · 4 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-04 02:17 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 3e3a9df · 8 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
-  · 79c850b tai lieu may nha: muc 10 - co can thue VPS khong, sao luu sang HDD (tra loi chu du
-  · 434cced cloud: don link-tham-do-con-mau
-  · 37a1c0b b link: noi tiep nhan link chu du an vao he thong + danh sach trang + tai lieu + l
-  · 49ce359 link_chay: tham do trang, nap tha_vao, thu hoach tai khoan xem + 52 test
-  · 1ad1a44 boc_lich_su: bao cao HTML MT5 nhieu bang - chon Positions, khong chon Deals/Orders
-- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 13, nha->cloud 4
-  · moi nhat cloud->nha (gio may gui 2026-10-03T10:19:57): CHI THI #5: b link (tiep nhan link nhom) + bot cu mat file
+  · 137ddb6 lay export MQL5 bang thao tac man hinh tren Chrome that + bang winners luoi 10 con
+  · b451503 BLOCKED: mat dang nhap MQL5/Google o trinh duyet AI; them lay_export_mql5.py
+  · 73ae639 nc: luoi AUDCAD theo con 2023752 - cao nguyen 70/70 o co lai, xac_nhan DAT (chi th
+  · 7847938 ban giao: ghi ket qua kiem thu toan bo sau b dien-dan (79 fail deu nam trong basel
+  · e0168b1 b dien-dan: doc dien dan nhieu trang (23 dien dan / 14 nuoc), chi DOC, da thu voi 
+- Thu: phien nay la `cloud`, chua doc 2 · 24h qua: cloud->nha 7, nha->cloud 10
+  · moi nhat nha->cloud (gio may gui 2026-10-04T08:52:49): XONG #8 muc 2: 10 lich su that, 3 luoi ro
 - May:
-  · nha RANH ma=9429269+sua nhip 2026-10-02T23:30:26 (gio may)
-- Don: cho 8 · dang 1 · xong 1 (DAT 1)
-- Du lieu: kho gia /home/user/the-brain/data: 0 file .parquet · so_cai/doan.json CHUA CO (tao o lan nap() dau, PHAI commit+push ngay) · so_cai/nc 0 file 0 KB
+  · nha RANH ma=de5446d+sua nhip 2026-10-03T22:15:43 (gio may)
+- Don: cho 9 · dang 9 · xong 9 (CHUA_DO_DUOC 1 · DAT 8)
+- Du lieu: kho gia /home/user/the-brain/data: 0 file .parquet · so_cai/doan.json CO · so_cai/nc 3 file 29 KB
 - Cau hinh: config/cau.json khong co (phien cloud)
 <!-- AUTO:HET -->
 
@@ -39,6 +39,12 @@
 - 03/10 chieu: "de danh token di, toi lam tren may nha" -> cloud DUNG, lam tiep o may nha toi nay (muc "TOI 03/10 O NHA" o Viec ke tiep).
 - 03/10 toi: LLM CHOT (thu nha c91d): mac dinh `ds/deepseek-flash`, du phong `qwen3.8-max-0902` sau 2 lan sai lien tiep, `--sau` cho viec can suy luan sau; KHONG cai Qwen Code / DeepSeek Harness. May nha TON DIEN (y chu du an): KHONG chay qua dem, chi chay NGAN khi bat may roi tat (`tai_lieu/SO_SANH_LLM.md` muc "QUYET DINH").
 - 03/10 khuya: chu du an CHOT DEEPSEEK lan nua ("toi se cung cap chi phi LLM toi da; quan trong la khai thac hieu qua, ke ca thay cau lam viec nang trong sandbox"; "may nha da chot deepseek thi dung deepseek"). Khong can nhac lai. Viec co hoc / nang (boc, dem, quet rong, gia thuyet nhap) giao cho DeepSeek (`b nc tho`, `q`); cloud giu suy luan + quyet. **Sandbox cloud CHUA goi duoc**: host `api.ai-box.vn` bi chinh sach mang chan (CONNECT 403, do 03/10) va khong co bien `AIBOX_API_KEY` -> chu du an tu lam qua menu moi truong (Edit): them host vao Network access (Custom) + dat `AIBOX_API_KEY` o muc bien / API credentials (phien MOI moi thay). KHONG dan khoa vao chat / repo.
+
+## Dang o dau (04/10 sang, cloud: #42 NIEM PHONG LUOI xong + test; nha da tra #8)
+- NHA DA TRA #8 (thu e656 + bb28; so tay push 73ae639): luoi AUDCAD theo con 2023752 - `quet_luoi` 70 o tren kham_pha 2018-01-02..2023-07-02 = CAO_NGUYEN 70/70 o co lai (tn3); `thu_luoi` tam vung (buoc 21, TP 9, tran 9, lot cong 0,25, he so buoc 1,2, tia lenh bien 5): kham_pha tn4 +8,45%/nam maxDD -19,25%; xac_nhan tn5 DAT +5,56%/nam maxDD -3,98% (lot 0,01, von 10.000). **Chi la LAM LAI, khong doc lap**: xac_nhan chong len doi song con (tu 2023-07-26); phi an 51-63% lai gop (con that ~25-30%); chi phi con SAN (chua phai phi XM that); 1.200-1.340 lenh/nam vs ~800 that; engine CHUA doi chieu tester. Lay duoc 10 lich su that (thao tac man hinh tren Chrome that Profile 3, `lay_export_man_hinh.py`): chi 3/10 ra cau truc luoi (AUDCAD 1975768 + 2184802 gan nhau, KHAC 2023752; NZDCAD 1059619); 7 con (GBPAUD, USDJPY, 2 EURUSD, 3 vang) khong suy ra luoi, vang phi/lai gop ~0; chua co cum chat. Con 20 con, lay theo lo <= 10.
+- XONG + test: `nhan/nc_thi_nghiem.niem_phong_luoi` + cong cu `b nc cc niem_phong_luoi` (CC.THEO_TEN = 23 cong cu), `test_niem_phong_luoi.py` 44 ca (18 loi co y phai bi bat - da kiem bang dot bien tay). Lot chot bang CHINH engine tren kham_pha + xac_nhan (lot lon nhat con: khong stop-out, maxDD < 80%, don bay dinh <= 10, con lai) roi MOI cham niem_phong, MOT lan (toi da 3 / dong gia thuyet); DAT = co lai (ke lo treo cuoi doan) + maxDD < 80% + >= 20 lenh + chi phi do duoc. Stop-out = AM va cac con so sau do KHONG in (engine gom lenh ca chuoi, chi vo hieu duong equity). Tien dieu kien (chi phi KHAI, doan mo < 50 bar, khong chot noi lot) = CHUA_DO_DUOC, khong tieu luot. `luoi.KetQuaLuoi.margin` them (khong doi so nao). Ca bo (cloud, `-n 4 --dist loadfile`): 3849 pass / 79 fail / 50 skip, ca 79 deu trong baseline, 0 ca moi.
+- **CHUA NIEM PHONG AI, co chu y (cloud giu)**: mot khai bao chi mo MOT lan va van tay KHONG gom chi phi -> niem phong luc chi phi con o muc SAN roi moi do duoc phi XM that thi khong chay lai duoc voi cung khai bao. Chi niem phong sau khi (a) hieu chuan `luoi.py` vs MT5 tester xong (thu #2 muc 4 con mo), (b) AUDCAD thoat chi phi SAN (do XM that + cho phep engine dung). Khai bao tn5 (khong lot): `{"bien_cap":5,"buoc":21,"che_do":"hai_chieu","he_so_buoc":1.2,"he_so_lot":0.25,"kieu_lot":"cong","tia_lenh":true,"tp":9,"tran_tang":9}`, von 10000, ma AUDCAD, khung M15, gt_id 4. Nho `ghi_chu`: doan niem phong chong len doi song con 2023752 -> DAT chi la LAM LAI.
+- KE TIEP (cloud): EA luoi DAY DU (hien `ea_LuoiThamChieu.mq5` thieu cong lot, he so buoc, tia lenh, cho lui, chot tien - khong chay duoc khai bao tn5) de tester doi chieu va chay demo; nha: hieu chuan + do chi phi XM that AUDCAD / NZDCAD (thu #9).
 
 ## Dang o dau (03/10 khuya 4, cloud: #41 DOC DIEN DAN xong, chua chay that; chot DeepSeek)
 - XONG + test: `b dien-dan [ke-hoach|do|quet|bao-cao]` (`nhan/doc_dien_dan.py`, `config/dien_dan.json`: 23 dien dan / 14 nuoc, 5 bat, 18 tat cho do that; `tai_lieu/DIEN_DAN_DOC.md`). Doc danh sach nhieu trang co moc `den_trang`, Referer = trang truoc, nhip theo ten mien (chung trang thai voi `b link`, khong chay cung luc), 403 / 429 / captcha thi DUNG, 168 gio / lan, ba cach lay `http | cdp | cdp_render` chon truoc trong config va KHONG doi khi bi chan. Bao cao ve cloud khong co URL / tieu de bai (ung vien nam o `du_lieu_cao/dien_dan/<ma>.jsonl`, gitignore). Cloud ra don `ke-hoach | bao-cao | do | quet`.
