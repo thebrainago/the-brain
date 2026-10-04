@@ -1,0 +1,216 @@
+; === Cài đặt chung ===
+InpCombine=false
+InpMagicID=9196
+InpLots=0.01
+InpTP=10.0
+InpSL=0.0
+InpTypeBuySell=0
+InpShowTP=false
+InpDelayAfterSLTP=0
+; === Giới hạn ===
+InpMaxBuyOrders=100
+InpMaxSellOrders=100
+InpMaxSpread=6.0
+InpMaxLots=2.3
+InpMaxLots2NewCycle=false
+InpDelayOrder=2
+; === Xổ số ===
+InpUseLottery=false
+InpMultiplierLottery=2.0
+InpMinuteDelayAfterClose=60
+InpMoneySL2Reset=0.0
+; === DCA ===
+InpUseDCA=true
+InpUseFilterDCA=false
+InpOrders2EnableFilterDCA=25
+InpDCAMODE=1
+InpCoeffMode=0
+InpMultiplier=1.0
+InpUseChangeMultiplier=true
+InpOrders2NewMultiplier=10
+InpNewMultiplier=1.2
+InpOrders2NewMultiplier2=20
+InpNewMultiplier2=1.1
+InpOrders2NewMultiplier3=30
+InpNewMultiplier3=1.05
+InpOrders2NewMultiplier4=40
+InpNewMultiplier4=1.06
+InpOrders2NewMultiplier5=50
+InpNewMultiplier5=1.03
+InpPlus=0.01
+InpDistanceMulti=1.2
+InpDistance0=10.0
+InpSingleTP=0.0
+InpTPDCA=20.0
+InpOrders2Distance1=5
+InpDistance1=15.0
+InpOrders2Distance2=10
+InpDistance2=15.0
+InpOrders2Distance3=15
+InpDistance3=15.0
+InpOrders2Distance4=20
+InpDistance4=15.0
+; === Điều chỉnh TP chuỗi khi âm ===
+InpUseChangeTPDCA=false
+InpPerLoss2ChangeTP=-20.0
+InpMoneyLoss2ChangeTP=-12000.0
+InpTPDCAChange=10.0
+; === Mở lệnh ngược chiều ===
+InpUseOpenOpp=false
+InpOrders2OpenOpp=12
+InpPerLotsOpp=15.0
+InpLotsOpp=0.01
+; === Tỉa lệnh cùng chuỗi ===
+InpUseSniper=true
+InpSniperAll=false
+InpOrders2StartSniper=20
+InpOrders2StartSniper2=15
+InpFirstOrdersSniper=2
+InpLastOrdersSniper=0
+InpPercentSniper=10.0
+InpMoneySniperFull=10.0
+InpTPSniper=5.0
+InpMuliSniper=1.15
+InpUseSniperPartial=false
+InpPerLoss2SniperPartial=-30.0
+InpOrders2StartSniperPartial=20
+InpPerLotsSniperPartial=30.0
+InpPerSniperPartial=20.0
+InpMoneySniperPartial=10.0
+InpLastOrdersSniperPartial=3
+; === Tỉa lệnh khác chuỗi ===
+InpUseAllSniper=false
+InpUseMagicFilter=false
+InpAllOrders2ActiveAllSniper=25
+InpFirstOrders2AllSniper=1
+InpLastOrders2AllSniper=5
+InpMoneyProfitAllSniper=10.0
+InpUseAllProfitToday2AllSniper=false
+InpUsePartialSniper=false
+InpMinLotsSniper=0.1
+InpMinPerLotsSniper=35.0
+; === Cân Lots ===
+InpUseBalanceLot=false
+InpAddBLLMode=1
+InpDiffLots2EnableBLL=6.0
+InpDiffLots2DisableBLL=2.0
+InpAddLotsBLL=0.1
+InpDelayTimeBLL=120
+; === Hedging Zone ===
+InpUseHedgingZone=false
+InpOrders2HedgingZone=20
+InpHedgingZoneMultiplier=2.0
+InpZoneHedgingPips=35.0
+InpMoneyTPALLHedgingZone=1000.0
+InpPipsTPAllHedgingZone=50.0
+InpOrders2EnableMoneyTPAllHZ=26
+InpNewMoneyTPAllHZ=100.0
+InpMaxLotsHedgingZone=20.0
+; === Hedging ===
+InpUseHedging=true
+InpOrders2Hedging=15
+InpPerLoss2Hedging=-25.0
+InpUseLotsDCA2Hedging=true
+InpPerLotsHedging=20.0
+InpTPHedging=0.0
+InpTPAllWhenHedging=150.0
+InpStopSniperWhenHedging=true
+; === Reset lots (thủ công) ===
+InpResetLots=0.1
+InpMultiplierReset=1.2
+InpTPReset=5.0
+; === Cài đặt đóng lệnh ===
+MoneyTPAllAcc=0.0
+MoneySLAllAcc=0.0
+MoneyTPAll=0.0
+MoneySLAll=0.0
+MoneyTPBuy=0.0
+MoneySLBuy=0.0
+MoneyTPSell=0.0
+MoneySLSell=0.0
+MoneyTPAllDCASignalStep=0.0
+; === Mục tiêu lợi nhuận ngày ===
+InpDailyMoneyTPTarget=0.0
+InpDailyMoneySLTarget=0.0
+InpDailyPerTPTarget=0.0
+InpDailyPerSLTarget=0.0
+InpMinuteDelayNewDay=120
+; === Trailing ===
+InpUseTrailing=true
+InpTrailingStart=15.0
+InpTrailingStep=5.0
+InpInitialSLTrailing=2.0
+InpShowLineStartTrailing=false
+; === Giới hạn thời gian theo giờ PC/Laptop ===
+InpUseTradingTime=false
+InpUseTime1=true
+InpStartTime1=08:30
+InpEndTime1=12:30
+InpUseTime2=true
+InpStartTime2=14:30
+InpEndTime2=18:30
+InpUseTime3=true
+InpStartTime3=20:30
+InpEndTime3=23:30
+InpUseTime4=true
+InpStartTime4=02:30
+InpEndTime4=05:30
+InpDCAOutTime=true
+; === Điều kiện mở lệnh ===
+InpIndiMode=7
+InpTFSignal=2
+InpUseEMAFilter=true
+InpTFEMAFilter=10
+InpEMA1=34
+InpEMA2=89
+InpMaxDistacneEMA=500.0
+InpUseMACDFilter=false
+InpTFMACDFilter=0
+InpFastEMAMACD=30
+InpSlowEMAMACD=50
+InpSMAMACD=5
+InpAppliedPriceMACD=6
+; === Indi CCI ===
+InpCCIPeriod=14
+InpCCIPrice=1
+InpOverBoughtCCI=100.0
+InpOverSoldCCI=-100.0
+; === Indi Stoch ===
+InpStochKPeriod=5
+InpStochDPeriod=3
+InpStochSlowing=3
+InpStochMAMethod=0
+InpStochPrice=0
+InpOverBoughtStoch=80.0
+InpOverSoldStoch=20.0
+; === Indi Momentum ===
+InpMomentumPeriod=14
+InpMomentumPrice=1
+InpOverBoughtMomen=100.45
+InpOverSoldMomen=99.45
+; === Supertrend Indicator ===
+InpPeriodsIndiST=21
+InpMultiplierIndiST=3.0
+; === UTBOT Indicator ===
+InpUTBOT_Nbr_Periods=10
+InpUTBOT_Multiplier=1.0
+InpUTBOT_ShowArrows=true
+InpUTBOT_ArrowDist=20
+; === Indicator ngoài ===
+InpNameIndiOutside=Nhập tên indi
+InpBuyBuffer=0
+InpSellBuffer=1
+InpBarSignal=1
+; === RSI Indicator ===
+InpRSIPeriod=14
+InpRSIApplyPrice=1
+InpRSIOverBought=75.0
+InpRSIOverSold=25.0
+; === Ichimoku Indicator ===
+InpIchiTenkan=9
+InpIchiKijun=26
+InpIchiSenkou=52
+; === BB Indicator ===
+InpBBPeriod=20
+InpBBDeviations=2.0
+InpBBPrice=1
