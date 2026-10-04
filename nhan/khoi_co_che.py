@@ -852,7 +852,7 @@ def de_xuat_ap_cheo(host: tuple | list | None = None, top: int = 15) -> list[dic
 _REGLA_THAM_SO: list[tuple[str, tuple]] = [
     (r"(?i)all.?sniper|sniper.?all", ("all_sniper",)),
     (r"(?i)sniper|trim", ("tia_n_lenh_khi_chuoi_dai",)),
-    (r"(?i)opp(?![a-z])|opposite", ("lenh_doi_ung_sau_n_lenh",)),
+    (r"(?i)opp(?![a-z])|opposite|hedg", ("lenh_doi_ung_sau_n_lenh",)),         # 'PerLoss2Hedging' la nguong hedge, khong phai doi TP
     (r"(?i)change.?tp|per.?loss", ("doi_tp_khi_lo",)),
     (r"(?i)news", ("loc_tin_tuc",)),
     (r"(?-i:ATR|ADX|Atr|Adx|(?<![A-Za-z])atr|(?<![A-Za-z])adx)", ("loc_adx_atr",)),
@@ -871,12 +871,14 @@ _REGLA_THAM_SO: list[tuple[str, tuple]] = [
     (r"(?i)(stop.?loss|sl)$", ("sl_cung",)),
     (r"(?i)break.?even|be.?(start|step|profit)", ("keo_sl_hoa_von_khi_co_lai",)),
     (r"(?i)trail", ("trailing_stop_chuoi",)),
-    (r"(?i)hour|session|time.?(start|end|trade|filter|from|to)|start.?time|end.?time|use.?time", ("loc_gio_giao_dich",)),
+    (r"(?i)hour|session|time.?(start|end|trade|filter|from|to)|start.?time|end.?time|use.?time|trad(e|ing).?time", ("loc_gio_giao_dich",)),
     (r"(?i)calendar|holiday|monday|friday|weekday|day.?filter", ("loc_ngay_thu_lich",)),
     (r"(?i)rsi", ("vao_rsi_qua_ban",)),
     (r"(?-i:(?<![A-Za-z])E?MA(?![a-z]))", ("vao_theo_ma",)),
     (r"(?i)type.?buy.?sell|buy.?sell.?(mode|type)|only.?(buy|sell)|trade.?(mode|direction)", ("hai_chieu_doc_lap", "mot_chieu")),
     (r"(?i)auto.?lot|lot.?auto|risk.?percent|percent.?risk", ("lot_tu_dong_theo_von",)),
+    (r"(?i)new.?day|delay.?day", ("loc_ngay_thu_lich",)),
+    (r"(?i)indi.?mode|signal", ("vao_chi_bao_ngoai",)),
 ]
 
 
