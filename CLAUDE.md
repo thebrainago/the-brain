@@ -103,6 +103,27 @@ Giao thuc khoa hoc moi (muc 7 cua tai lieu do): **so cai nghien cuu nam trong gi
 **doan du lieu DONG BANG theo NGAY** (`so_cai/doan.json`: du lieu moi them khong keo doan niem phong nhay),
 ket qua cu khong phai bang chung. May nha la noi DUY NHAT ghi so cai (`b cau cai ... --ghi-so-cai`).
 
+## MAY NHA CHAY LIEN TUC, TUAN TU, KHONG NGOI CHO (chu du an 04/10/2026) - THAY luat "tat may / viec ngan / cho thu"
+
+Chu du an: *"May nha can chay toi uu va khong nen de trong viec, no cu hay ngoi cho vo nghia, neu muon tiet kiem dien can luon chay
+khong de trong chu khong phai ngoi cho. Thay hien phap cho no lam viec lien tuc va tuan tu nhe"*.
+**HUY** luat cu (may nha khong chay qua dem / chi viec ngan / bao chu du an tat may / `b cau cho` ngoi doi thu). Luat moi, ap dung cho
+CA phien nha (co LLM) LAN bo chay khong-LLM (`b cau chay`):
+1. **May dang bat = luon co viec.** Cam: `b cau cho`, `sleep` dai, "cho cloud tra loi" ma khong lam gi. Cloud chua tra loi thi lam tiep
+   viec dang do / viec nen (muc 3); thu cloud den thi xu ly xong quay lai ngay.
+2. **TUAN TU: mot viec mot luc, theo thu tu danh so.** TESTER chi co MOT (rang buoc vat ly): viec tester xep hang noi duoi nhau, khong bao
+   gio hai viec tester cung luc. Luc tester ban, phien nha lam viec KHONG dung tester (doc deals, ho so bot, viet code / test / tai lieu,
+   bao cao) - khong ngoi canh tester.
+3. **Thu tu uu tien**: (a) don cloud giao o `viec/cho` (danh so `--id 01-...`, `02-...`: `don_dang_cho` xep theo `uu_tien` roi theo ten) ->
+   (b) viec dang do dang -> (c) **VIEC NEN thuong truc** `tai_lieu/VIEC_NEN_MAY_NHA.md` (N1...N6): tu lam, lan luot, KHONG cho giao (LUAT SO 1 muc 2).
+4. **Cloud giu hang doi SAU**: moi lan giao >= 20 don danh so (hoac >= 6 gio viec); `b cau lay` thay con < 2 gio viec thi giao them
+   TRUOC khi het. Don gui sau KHONG chen len truoc don dang xep tru khi cloud ra thu `chi thi`.
+5. **Dien**: bat / tat may la quyen chu du an. Khi hang doi con viec, KHONG khuyen tat may, KHONG hoi "co can tat khong". Chu du an muon
+   tiet kiem dien thi tu tat; may DANG BAT thi chay het cong suat huu ich, khong ngoi doi.
+6. **Phien nha**: `b cau chay --lien-tuc --nghi 20` o nen (khong LLM, dong co thuong truc keo don + chay) con phien LLM tu chon viec co gia tri
+   nhat. Xong MOT moc: ghi `reports/nen_may_nha.md` (3-8 dong: xong / chua / ket o dau / can gi), gui thu NGAN neu cloud can biet (khong
+   gui "ok / cam on"), roi lam tiep NGAY. Het token LLM thi bo chay khong-LLM van keo don danh so dang xep.
+
 ## KENH CLOUD <-> MAY NHA <-> VPS: MOT kenh, `b cau` (chot 02/10/2026; thay `b tram`)
 
 Chu du an chi chat o MOT noi (phien cloud); may nha va VPS la tay chan. Phien cloud KHONG voi toi may nen
@@ -129,8 +150,7 @@ may TU KEO viec qua git (`viec/cho` -> `viec/xong`, `viec/may` = nhip tim). Chi 
   1 dong, `-v` moi in het); (3) thu ngan, du lieu dai vao `reports/<ten>.md`; chi gui thu khi CO viec, khong "ok/cam on"; (4) `b cau noi` den cloud
   GOP lan danh thuc trong 15 phut, `--thuc` chi cho viec CAN cloud quyet; (5) nghi > 1 gio = cache het han (ghi lai 2x): chot mot dot roi nghi; (6) PHIEN MOI sau moi moc re hon giu phien dai: `b tiep --ghi` (cap nhat
   khoi TAY cua `tai_lieu/PHIEN_HIEN_TAI.md`) roi mo phien moi, vao bang `b tiep` - mo tai lieu theo `b tiep --chi-muc`, doc dung doan bang `sed -n`; (7) SUBAGENT duoc phep (chu du an duyet 02/10) cho viec doc nang / tim rong / log dai (ngu canh rieng nho, chi tra ket luan; `model: haiku` cho viec co hoc), khong dung cho viec can ngu canh cua phien.
-  Phien nha tu cho thu: `b cau cho` NEN (timeout 3600000) CHI khi chu du an dang lam viec voi no; het gio (55 phut) thi chay lai NGAY, khong viet
-  them gi; dem / di vang de runner khong-LLM (`b cau chay`). Cua so nen ngu canh: `.claude/settings.json` (autoCompactWindow 300000), phien tuy y
+  Phien nha KHONG cho thu (`b cau cho` bi HUY 04/10/2026 - xem muc "MAY NHA CHAY LIEN TUC"): lam viec nen, thu den thi xu ly. Cua so nen ngu canh: `.claude/settings.json` (autoCompactWindow 300000), phien tuy y
   `/autocompact 300k`; `/effort high|medium` cho viec co hoc, `max` chi cho thiet ke kho. Vao phien nha lan dau: `tai_lieu/BAT_DAU_O_NHA.md`.
   Thu nam trong repo PUBLIC: khong dan khoa/token.
 - **tho (model re qua AI Box - chot 03/10/2026, thu nha c91d)**: `b nc tho [--sau]` KHAM PHA tren doan kham_pha, ghi so tay nguon 'tho'.

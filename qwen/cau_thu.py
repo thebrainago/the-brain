@@ -17,9 +17,8 @@ Nay co mot lop THU tren cung hop thu git (`viec/thu/<id>.json`):
     cloud -> nha   `b cau noi --den nha "..."`   ghi thu + day; phien nha thay no o CAU KE TIEP chu du an go
                    (hook `UserPromptSubmit` / `SessionStart` cua Claude Code: `b cau thu --hook`)
 
-    nha CHO cloud  `b cau cho`   CHAN toi khi co thu moi roi thoat. Chay NEN trong Claude Code o nha (Bash
-                   run_in_background): luc cho khong ton token, co thu thi lenh thoat va Claude Code TU thuc day doc thu -
-                   chu du an khong phai go them mot cau nao (hook chi chay khi chu du an go).
+    nha CHO cloud  `b cau cho`   (DA HUY lam cach van hanh 04/10/2026: may nha KHONG ngoi cho - xem CLAUDE.md muc
+                   "MAY NHA CHAY LIEN TUC"; lenh con de chay tay) CHAN toi khi co thu moi roi thoat.
 
 Truoc khi co Git tren may nha: phien nha bao len duoc bang dung mot lenh, khong can repo:
     claude -p "<noi dung>" --cloud session_XXXX
@@ -331,7 +330,8 @@ def _ghi_thuc(ben: str, goc: Path | None, ds: list[float]) -> None:
 
 def cho(ben: str | None = None, toi_da_giay: float = TOI_DA_CHO_GIAY, nhip: float = NHIP_CHO_GIAY,
         goc: Path | None = None, ngu=time.sleep, dong_ho=time.time, ra=print) -> int:
-    """`b cau cho`: CHAN toi khi co thu moi gui den `ben`, in thu roi thoat 0.
+    """`b cau cho` (KHONG con la cach van hanh tu 04/10/2026 - may nha chay lien tuc, khong ngoi cho; xem CLAUDE.md):
+    CHAN toi khi co thu moi gui den `ben`, in thu roi thoat 0.
 
     Chay NEN trong Claude Code (Bash run_in_background): luc cho khong ton token; co thu thi lenh thoat va Claude Code TU
     thuc day doc thu. Het gio ma khong co thu: in mot dong, thoat 0 (chay lai neu van muon cho).
@@ -358,9 +358,10 @@ def cho(ben: str | None = None, toi_da_giay: float = TOI_DA_CHO_GIAY, nhip: floa
             _ghi_thuc(ben, goc, gan + [bay_gio])
             con = len(moi) - len(hien_ra)
             ra("=== %d THU MOI cho %s ===\n%s\n=== het thu%s ===\n"
-               "Tra loi bang `b cau noi \"...\"`. Xong viec thi chay LAI `b cau cho` (nen) de tiep tuc cho."
+               "Tra loi bang `b cau noi \"...\"` (chi khi can), roi LAM TIEP viec dang do / viec nen "
+               "(`tai_lieu/VIEC_NEN_MAY_NHA.md`) - khong ngoi cho thu."
                % (len(hien_ra), ben, "\n\n".join(hien_ra),
-                  (" - con %d thu chua hien, chay lai `b cau cho`" % con) if con else ""))
+                  (" - con %d thu chua hien: `b cau thu` doc tiep" % con) if con else ""))
             return 0
         if moi:
             giu = len(moi)
@@ -371,7 +372,7 @@ def cho(ben: str | None = None, toi_da_giay: float = TOI_DA_CHO_GIAY, nhip: floa
         ra("DANG GIU %d thu cho %s vi da thuc %d lan trong 1 gio (han muc chong thu qua lai vo han). "
            "Doc tay bang `b cau thu`." % (giu, ben, TOI_DA_THUC_GIO))
     else:
-        ra("HET GIO sau %d giay: khong co thu moi cho %s%s. Chay lai `b cau cho` NGAY (khong viet them gi): moi lan thuc la mot luot token."
+        ra("HET GIO sau %d giay: khong co thu moi cho %s%s. Luat 04/10/2026: may nha khong ngoi cho thu - lam viec nen (`tai_lieu/VIEC_NEN_MAY_NHA.md`)."
            % (int(toi_da_giay), ben, (" (loi keo git: %s - kiem tra mang/dang nhap)" % loi_lay) if loi_lay else ""))
     return 0
 

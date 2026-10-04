@@ -3,7 +3,7 @@
 > Người đọc: chủ dự án, và phiên Claude Code sẽ chạy trên máy nhà (phiên **[GHI]**).
 > Viết bởi phiên cloud sau khi máy nhà cài lại Windows. Cập nhật mục 8 mỗi khi xong một việc.
 > **Muốn chạy nhanh:** chủ dự án chỉ cần dán một lời nhắc ngắn cho Claude Code ở nhà, nó tự làm theo
-> `tai_lieu/BAT_DAU_O_NHA.md` (lấy mã → môi trường → nối cloud → `b cau cho`). File này là bản đầy đủ để tra cứu.
+> `tai_lieu/BAT_DAU_O_NHA.md` (lấy mã → môi trường → nối cloud → chạy liên tục `b cau chay --lien-tuc`). File này là bản đầy đủ để tra cứu.
 
 ## 0. Đọc 1 phút
 

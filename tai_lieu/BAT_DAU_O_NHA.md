@@ -70,16 +70,24 @@ Vướng gói nào thì cài nhóm tối thiểu: `numpy pandas scipy requests p
   `git push` lần đầu: Git Credential Manager mở trình duyệt, **chủ dự án đăng nhập GitHub một lần**.
 - Chưa có Git vẫn báo lên được, không cần repo: `claude -p "<nội dung>" --cloud session_01ER1xpfauUywJ6smLMSZmHW`.
 
-## Bước 4 — Chờ thư của cloud (chạy NỀN, lúc chờ không tốn token)
+## Bước 4 — Chạy liên tục, tuần tự, KHÔNG ngồi chờ (chủ dự án 04/10/2026; thay luật "chờ thư" cũ)
 
-Chỉ khi chủ dự án đang làm việc với bạn (ban đêm / đi vắng để runner `b cau chay` lo). Chạy bằng công cụ Bash/PowerShell của Claude Code với `run_in_background = true` và `timeout = 3600000`:
+Chủ dự án: *"Máy nhà cần chạy tối ưu và không nên để trống việc, nó cứ hay ngồi chờ vô nghĩa… cần luôn chạy không để trống chứ không phải ngồi chờ. Thay hiến pháp cho nó làm việc liên tục và tuần tự."*
+**Hủy** `b cau cho` (ngồi đợi thư) và mọi kiểu "hết đơn thì nghỉ / báo chủ dự án tắt máy". Luật đầy đủ: `CLAUDE.md` mục "MÁY NHÀ CHẠY LIÊN TỤC".
 
-```powershell
-.\b.cmd cau cho
-```
-Có thư thì lệnh **thoát và in thư** → bạn được đánh thức. Làm theo thư (trong luật 1–4), trả lời bằng
-`.\b.cmd cau noi "kết quả / câu hỏi ngắn"`, rồi chạy **lại** `b cau cho`. Hết giờ (55 phút) không có thư thì chạy lại **ngay, không viết gì thêm** (mỗi lần thức dậy là một lượt đọc cả ngữ cảnh; còn trong hạn cache 1 giờ thì rẻ gấp ~10).
-Đóng phiên thì tiến trình chờ mất theo; thư vẫn nằm trên git và hiện ở `SessionStart` của phiên sau.
+1. **Động cơ thường trực (không LLM, không tốn token)**: một cửa sổ PowerShell riêng (hoặc Task Scheduler "At log on"):
+   ```powershell
+   .\b.cmd cau chay --lien-tuc --nghi 20
+   ```
+   Nó kéo đơn của cloud và chạy lần lượt theo số thứ tự (`01-…` trước `02-…`), tester xếp hàng nối đuôi nhau. Lịch 5 phút/lần của Bước 3 vẫn giữ làm lưới an toàn (một bộ chạy mỗi máy — bản đến sau tự thoát `DANG_BAN`).
+2. **Phiên LLM (bạn)** không bao giờ ngồi chờ thư. Mỗi vòng: (a) `.\b.cmd cau lay` rồi `.\b.cmd cau thu` — có thư thì làm theo (trong luật 1–4);
+   (b) lấy việc theo thứ tự: đơn cloud (đánh số) → việc đang dở → **việc nền** `tai_lieu/VIEC_NEN_MAY_NHA.md` (N1…N6, tự làm, không chờ giao);
+   (c) xong MỘT mốc: ghi 3–8 dòng vào `reports/nen_may_nha.md` (xong / chưa / kẹt ở đâu / cần gì), gửi `b cau noi` ngắn **chỉ khi cloud cần biết hoặc bạn bị chặn**, rồi làm tiếp NGAY.
+3. **Tester chỉ có một**: việc tester nối đuôi, không bao giờ hai việc cùng lúc. Lúc tester bận, bạn làm việc KHÔNG dùng tester (đọc deals, hồ sơ bot, viết test / tài liệu, đối chiếu số) — không ngồi cạnh tester.
+4. **Điện**: bật / tắt máy là quyền chủ dự án. Máy đang bật thì chạy việc hữu ích liên tục; **đừng** khuyên tắt máy hay hỏi "có cần tắt không" khi hàng đợi còn việc.
+5. Cloud giữ hàng đợi sâu (≥ 20 đơn / ≥ 6 giờ việc mỗi lần giao). Thấy `b cau lay` báo còn < 2 giờ việc mà chưa có đơn mới → gửi cloud MỘT thư ngắn (`--chu-de "can them viec"`), rồi chuyển sang việc nền, **không chờ trả lời**.
+
+Đóng phiên thì động cơ thường trực (cửa sổ riêng / Task Scheduler) vẫn chạy; thư vẫn nằm trên git và hiện ở `SessionStart` của phiên sau.
 
 ## Cách nói chuyện (để hai Claude không nói nhảm với nhau)
 
@@ -87,7 +95,7 @@ Có thư thì lệnh **thoát và in thư** → bạn được đánh thức. L�
 - Chỉ gửi thư khi **có việc**: kết quả, câu hỏi, bị chặn. Không gửi "ok / cảm ơn". Đánh thức cloud tốn một lượt đọc cả ngữ cảnh của nó: `b cau noi` tự **gộp** trong 15 phút; chỉ dùng `--thuc` khi cloud CẦN quyết hoặc bạn bị chặn.
 - Kết một chuỗi việc bằng thư có chủ đề `XONG`; bên nhận thư `XONG` không trả lời thêm.
 - Thư dài → ghi vào `reports/<tên>.md`, thư chỉ chứa đường dẫn + 3 dòng tóm tắt.
-- Hạn mức có sẵn: 8 thư / 30 phút / một chiều (quá thì `b cau noi` từ chối: tóm tắt 3 dòng cho chủ dự án) và tối đa 20 lần thức dậy / giờ (`b cau cho` giữ thư lại, `b cau thu` đọc tay được).
+- Hạn mức có sẵn: 8 thư / 30 phút / một chiều (quá thì `b cau noi` từ chối: tóm tắt 3 dòng cho chủ dự án) và tối đa 20 lần thức dậy / giờ (thư bị giữ lại thì `b cau thu` đọc tay được).
 - Giữ ngữ cảnh nhỏ: lệnh nặng chỉ lấy bản tóm tắt (`b nc kiem 30` đã in 1 dòng; `b test`: chỉ báo số pass/fail + tên test fail). Sau mỗi mốc xong, chủ dự án có thể `/clear` — mọi thứ cần nhớ nằm trong thư / `reports/`.
 
 ## Việc tiếp theo, theo thứ tự (cloud chốt 02/10)

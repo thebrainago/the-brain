@@ -42,7 +42,7 @@
 | `b token`: đo lại bất cứ lúc nào, ở cả hai máy, kèm khuyến nghị theo ngưỡng | Để tối ưu theo số, không theo cảm giác; phiên nhà tự chạy và báo bản tóm tắt ~25 dòng |
 | `b nc kiem 30` mặc định in **1 dòng ~700 ký tự** (trước: ~25.000; `-v` để in hết) | Mỗi ký tự in ra vào ngữ cảnh và bị đọc lại ở mọi gọi sau |
 | `b cau noi` đến cloud **gộp** lần đánh thức trong 15 phút (`--thuc` để ép, chỉ cho việc CẦN cloud quyết) | Mỗi lần đánh thức = một lượt đọc cả ngữ cảnh cloud (lạnh nếu nghỉ > 1 giờ) |
-| `b cau cho` chu kỳ **55 phút** (trước 7.000 giây) và "hết giờ thì chạy lại, không viết gì" | Hết giờ vẫn trong hạn cache: đọc 0,1× thay vì ghi lại 2× (ấm rẻ hơn lạnh ~4–9 lần) |
+| `b cau cho` chu kỳ **55 phút** (trước 7.000 giây) và "hết giờ thì chạy lại, không viết gì" — **HỦY 04/10/2026**: máy nhà chạy liên tục, không ngồi chờ (CLAUDE.md) | Hết giờ vẫn trong hạn cache: đọc 0,1× thay vì ghi lại 2× (ấm rẻ hơn lạnh ~4–9 lần) |
 | Cầu chì thư: 8 thư / 30 phút / một chiều, quá thì `b cau noi` từ chối | Hai Claude cãi nhau vô hạn là cách đốt token nhanh nhất; chặn bằng mã, không bằng lời dặn |
 | Nhãn thư theo vai: cloud → nhà = CHỈ THỊ; nhà → cloud = BÁO CÁO / ĐỀ XUẤT | Chủ dự án đã phân quyền cloud chỉ huy (02/10); bất đồng thì cloud quyết, không ai phải đoán |
 

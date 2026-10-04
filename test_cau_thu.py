@@ -407,12 +407,13 @@ class TestCho:
 
     def test_co_san_thu_thi_in_ngay_danh_dau_da_doc_va_khong_ngu(self, hai_dau):
         h = hai_dau
-        CTH.gui("cloud", "nha", "Da them b cau cho.", chu_de="cap nhat", goc=h.cloud, nhanh="main", rieng=True)
+        CTH.gui("cloud", "nha", "Da them lenh moi.", chu_de="cap nhat", goc=h.cloud, nhanh="main", rieng=True)
         dh, ra = _DongHo(), []
         assert self._cho(h, dh, ra) == 0
         assert dh.dem == 0, "co thu san thi khong duoc ngu"
-        assert len(ra) == 1 and "1 THU MOI cho nha" in ra[0] and "Da them b cau cho." in ra[0]
-        assert "THU TU cloud" in ra[0] and "b cau cho" in ra[0]            # nhac chay LAI de tiep tuc cho
+        assert len(ra) == 1 and "1 THU MOI cho nha" in ra[0] and "Da them lenh moi." in ra[0]
+        assert "THU TU cloud" in ra[0] and "viec nen" in ra[0]             # luat 04/10: lam tiep viec nen
+        assert "b cau cho" not in ra[0], "khong con nhac ngoi cho"
         assert CTH.doc_moi("nha", h.nha) == [], "da in roi thi khong hien lai"
 
     def test_thu_den_giua_luc_cho_thi_thuc_day_khong_cho_het_gio(self, hai_dau):

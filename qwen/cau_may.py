@@ -34,7 +34,7 @@ NHIEU CHIEU - noi tu BAT KY phien nao (xem `cau_thu.py`):
     b cau noi "..." [--den cloud|nha] [--chu-de X] [--tra-loi ID] [--thuc]   gui THU (nha -> cloud: kem danh thuc, GOP neu vua thuc <15 phut;
                                                                  --thuc = ep, chi cho viec CAN cloud quyet / bi chan)
     b cau thu [--hook] [--tat-ca] [--ben nha|cloud]                  doc thu moi (--hook: cho Claude Code o nha)
-    b cau cho [--toi-da GIAY] [--ben nha|cloud]                      CHO thu moi (chay NEN; co thu thi thoat de Claude Code tu thuc)
+    b cau cho [--toi-da GIAY] [--ben nha|cloud]                      CHO thu moi (DA HUY lam cach van hanh 04/10/2026: may nha khong ngoi cho)
     b cau hook-cai | dat-session session_XXXX                        (may nha) gan hook + khai bao phien cloud
 """
 from __future__ import annotations
