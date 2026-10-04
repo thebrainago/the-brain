@@ -36,3 +36,13 @@ Ca hai van phai giu: duyet tung nhom, khong tu join hang loat, khong dang tin, b
 
 ## G. Ket qua 4 link dau (04/10, xem `reports/telegram_khao_sat_20261004.md`)
 Vao + theo doi duoc 3/4; link rieng `t.me/c/...` can link moi. Tep da tai: CLMCA.zip (MIT, co ma nguon + 5 .set, XAUUSD M15, SL cung, khong martingale/grid) - ung vien dau tien cho LAN EA THO; Scalp_m5_break_fix.ex5 (bien dich).
+
+## H. Dang link Google Drive thu muc (chu du an gui 04/10/2026; da chay that)
+Thu muc Drive cong khai chua bot + "cach dung". Khong can dang nhap, khong can man hinh:
+1. Liet ke khong tai: `gdown.download_folder(id=ID, skip_download=True, quiet=True)` -> danh sach (id, duong dan). (Connector Drive cua Claude khong liet ke duoc thu muc chia se: dung gdown.) In ra bang Python voi `PYTHONIOENCODING=utf-8` (ten tieng Viet).
+2. Phan loai theo thu muc cap 1: indicator hang loat (bo qua tru khi chu du an bao), bot (tai), file cai dat `.exe` (bo qua), bang tinh (.xlsx: doc bang openpyxl), tai lieu (.docx Google Docs goc: xuat `https://docs.google.com/document/d/<id>/export?format=txt|html`, lay link that tu html).
+3. Tai tung tep bang `gdown.download(id=..., output=...)` vao `du_lieu_cao/<ten>/` (gitignore), ten file giu nguyen duong dan con.
+4. "Cach dung" thuong la LINK VIDEO YouTube trong tai lieu: `yt-dlp --skip-download --write-auto-subs --sub-langs vi,en --sub-format vtt` lay phu de tu dong (khong can xem video / khong can Whisper); doi `.vtt` -> `.txt` (bo thoi gian, bo dong lap); giao SUBAGENT doc nhieu tep va viet tom tat (tep tom tat vao `reports/`).
+5. File `.set` cua MT5 la UTF-16: giai ma `utf-16`, gom `ten=gia tri||...`; so sanh giua cac bo de thay tham so nao doi (xem `reports/drive_trade_an_lac_khao_sat.md`).
+6. Tep bien dich (.ex4/.ex5) khong co ma nguon: logic = video + .set; chay thang tren tester demo (LAN EA THO), tat DLL.
+7. Chu du an cho phep tai bot ke ca ban crack (bot ho gop tien mua / da bi crack ban ra thi truong) - tep chi o may nha, khong vao git, khong chia se lai.
