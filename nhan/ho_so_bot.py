@@ -2099,18 +2099,21 @@ def _do_gio_ngay(c: Ctx) -> dict:
     thu_cam = [d for d in live if wd[d] <= 0.05 * tw]
     so_lieu["chuoi_theo_thu"] = [int(x) for x in wd]
     so_lieu["thu_co_lenh"] = live
-    # tre dau ngay (tham so kieu 'MinuteDelayNewDay'): phut tu HOAT DONG DAU TIEN cua ngay may chu (mo hoac dong bat ky lenh nao) den
-    # moi chuoi bat dau. Neu bot cho X phut moi duoc vao thi KHONG chuoi nao bat dau som hon X phut ke tu hoat dong dau ngay.
-    ngay_hd = pd.concat([o["mo"], dg]).sort_values()
-    dau_ngay = ngay_hd.groupby(ngay_hd.dt.normalize()).min()
+    # tre dau ngay (tham so kieu 'MinuteDelayNewDay'): do theo GIO DONG HO may chu, KHONG theo 'hoat dong dau tien cua ngay' (neu chinh chuoi la
+    # hoat dong dau tien thi tre = 0 mot cach tam thuong, du bot co cho - sai lam cua ban dau, sua 04/10). `chuoi_theo_30_phut` = so chuoi bat dau
+    # theo tung o 30 phut cua ngay may chu (48 o); `tre_sau_mo_cua_phut_*` = phut tu luc san mo lai sau doan nghi dai nhat den moi chuoi bat dau.
+    # Bot cho X phut thi KHONG chuoi nao bat dau truoc X phut ke tu 00:00 (cach doc yeu nhat): `ho_so_set` dung o nay de bac bo / xac nhan tre.
     t_chuoi = o["mo"][dau]
-    phut_dn = (t_chuoi - t_chuoi.dt.normalize().map(dau_ngay)).dt.total_seconds().to_numpy(float) / 60.0
-    phut_dn = phut_dn[np.isfinite(phut_dn)]
-    if len(phut_dn):
-        so_lieu["tre_dau_ngay_phut_min"] = _f(float(phut_dn.min()), 1)
-        so_lieu["tre_dau_ngay_phut_p05"] = _f(_q(phut_dn, 5), 1)
-        so_lieu["n_ngay_co_lenh"] = int(len(dau_ngay))
-        so_lieu["ty_chuoi_30_phut_dau_ngay"] = _f(float((phut_dn < 30.0).mean()), 3)
+    phut_ngay = (t_chuoi.dt.hour * 60 + t_chuoi.dt.minute).to_numpy(float)
+    so_lieu["chuoi_theo_30_phut"] = [int(x) for x in np.bincount((phut_ngay // 30).astype(int), minlength=48)[:48]]
+    if nghi:
+        h_nghi = max(_vung_lien_tuc(nghi), key=lambda x: x[1])
+        gio_mo = (h_nghi[0] + h_nghi[1]) % 24
+        sau_mo = (phut_ngay - 60.0 * gio_mo) % 1440.0
+        so_lieu["gio_mo_cua_lai"] = int(gio_mo)
+        so_lieu["tre_sau_mo_cua_phut_min"] = _f(float(sau_mo.min()), 1)
+        so_lieu["tre_sau_mo_cua_phut_p05"] = _f(_q(sau_mo, 5), 1)
+        so_lieu["ty_chuoi_2_gio_dau_sau_mo_cua"] = _f(float((sau_mo < 120.0).mean()), 3)
     # tre dau ngay: ty le chuoi trong 2 gio dau sau vung nghi san so voi muc trung binh
     if nghi:
         h0 = max(_vung_lien_tuc(nghi), key=lambda x: x[1])
