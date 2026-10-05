@@ -1,0 +1,44 @@
+{
+ "id": "test_kiem_the_nhap",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "test_ban_nhap_hop_le_mot_o HONG: AssertionError: "
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: .write_text (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "test_ban_nhap_hop_le_khong_co_loi HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_ma_khong_co_trong_kho HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_doi_khoa_khac_ngoai_tham_so HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_so_o_rong HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_so_o_qua_8 HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_ten_o_khong_hop_le HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_lop_khong_hop_le HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_thieu_don_vi_voi_lop_do_dai HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_thieu_mien_voi_lop_do_dai HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_cong_tac_khong_can_don_vi_va_mien HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_he_so_khong_can_don_vi_nhung_can_mien HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'",
+    "test_main_tra_ve_0_khi_thu_muc_rong HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/tam_giac_vuong.json'"
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "test_ban_nhap_hop_le_mot_o HONG: AssertionError: "
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 89.58
+}

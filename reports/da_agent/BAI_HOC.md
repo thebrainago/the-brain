@@ -11,3 +11,7 @@
 - the_phuong_phap 12, thu_chuyen 25, do_thong_minh 16, nc_phuong_phap 16 test: Claude doc, chay lai, nhan vao repo (`test_*_llm.py`). Chi phi ~597 d.
 - Hong: kiem_the_nhap (NameError KCN sau 3 vong), dich_tham_so (loi mang tren tep 44 KB) - de lan sau, chia nho tep.
 - Ket luan: giao viec CO MAY CHAM CHAY THAT (test chay duoc) cho ket qua dang tin; kiem toan bang doc thi nhieu rac.
+
+## Lan 3 (05/10): chia nho tep + doc ten that: dich_tham_so 13 test, nc_ho_so 17 test DAT (60 d)
+- Cat tep 14-20 KB + vai nhanh + cau "moi ten dung trong test phai co that" -> 1 vong la dat. Tep 44 KB truoc do hong vi 502.
+- kiem_the_nhap van hong: module doc thu muc that (`kho_phuong_phap/`), test sinh ra doan ten the khong co. Can test dung thu muc tam; de lan sau (lam tay).
