@@ -33,7 +33,7 @@ def goi(ten_model: str, he: str, nguoi: str, max_tokens: int = 1500, so_chi: Pat
             "max_tokens": max_tokens, "temperature": temperature, **them}
     t0 = time.time()
     last = None
-    for lan in range(3):                       # loi mang / 5xx: thu lai toi da 3 lan, khong im lang
+    for lan in range(5):                       # loi mang / 5xx (ke ca 521 tam thoi cua Cloudflare): thu lai toi da 5 lan, lui dan, khong im lang
         try:
             r = requests.post(URL, json=body, timeout=180, headers=_dau())
             if r.status_code >= 500:
@@ -42,9 +42,9 @@ def goi(ten_model: str, he: str, nguoi: str, max_tokens: int = 1500, so_chi: Pat
             break
         except Exception as e:                  # noqa: BLE001
             last = e
-            time.sleep(2 * (lan + 1))
+            time.sleep(min(60, 4 * 2 ** lan))
     else:
-        raise RuntimeError("goi %s hong 3 lan: %s" % (model, last))
+        raise RuntimeError("goi %s hong 5 lan: %s" % (model, last))
     j = r.json()
     u = j.get("usage", {})
     vao, ra = u.get("prompt_tokens", 0), u.get("completion_tokens", 0)

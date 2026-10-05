@@ -1,0 +1,41 @@
+{
+ "id": "test_pmg",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "bai test KHONG duoc dung: open( (khong ghi tep / mang)"
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "test_kiem_g1_loai_mode_ngoai_mien HONG: KeyError: 'dat'",
+    "test_kiem_g1_loai_so_ngoai_mien HONG: KeyError: 'dat'",
+    "test_kiem_g1_loai_khi_khong_co_basket_stop_that HONG: KeyError: 'dat'",
+    "test_kiem_g1_avg_plus_chi_can_tp_dist_lon_hon_chi_phi HONG: KeyError: 'dat'"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "test_d_be_geometric_tien_ve_h_khi_n_lon HONG: AssertionError: ",
+    "test_kiem_g1_tra_dict_co_khoa_dat HONG: AssertionError: ",
+    "test_kiem_g1_loai_mode_ngoai_mien HONG: KeyError: 'dat'",
+    "test_kiem_g1_loai_so_ngoai_mien HONG: KeyError: 'dat'",
+    "test_kiem_g1_loai_khi_khong_co_basket_stop_that HONG: KeyError: 'dat'",
+    "test_kiem_g1_avg_plus_chi_can_tp_dist_lon_hon_chi_phi HONG: KeyError: 'dat'"
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "bai test KHONG duoc dung: open( (khong ghi tep / mang)"
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 97.58
+}

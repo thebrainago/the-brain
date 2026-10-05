@@ -19,3 +19,7 @@
 ## Lan 4 (05/10): 9 module, 4 DAT (53 test), 5 HONG; AI Box 521 tam thoi ~14:15-14:40 UTC
 - DAT: nc_bot_hoc 12, pmg_g0 14, quan_tri_nhieu 12, hang_doi 15 (Claude chay lai, khong ghi tep ngoai). HONG: khoi_phuc, doc_chi_bao, bang_he (3 vong), pmg_quet, pmg (0 vong, gap 521 giua chung) -> thu lai.
 - Loi 521 (Cloudflare, origin refused) la tam thoi; phien chi huy khac vao duoc cung luc. Executor nen thu lai viec 0 vong khi gap 5xx.
+
+## Lan 5 (05/10): thu lai 5 module hong voi tep 12 KB: chi khoi_phuc DAT (17 test). 4 con lai van hong
+- Loi la LLM doan sai: tham so kwargs khong co that (pmg_quet), khang dinh sai (doc_chi_bao, bang_he), dung open( (pmg). Khong lo ra loi that cua module.
+- Ket luan: voi module co nhieu phu thuoc chi tiet, model re khong tu suy ra duoc hanh vi - Claude viet tay hoac chia theo ham. Executor: thu lai 5 lan lui dan khi 5xx (da sua llm.py).
