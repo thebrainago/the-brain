@@ -3,7 +3,60 @@
  "loai": "TANG",
  "ten": "Gong lenh dang lai de can lenh am",
  "mo_ta": "Khong chot lenh dang lai: giu no de bu cho cac lenh am (BNK), den khi chot ca chuoi; SemiHFT giu Buy khi Sell ket.",
- "tham_so": [],
+ "tham_so": [
+  {
+   "ten": "tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buoc",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    300,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tran_tang",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    50,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    10.0,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
  "can": [],
  "xung_dot": [],
  "tuong_tac_biet": [],
@@ -29,5 +82,11 @@
  ],
  "ap_cheo": "Giam DD hien thi, khong giam rui ro that neu khong co luat dong; do bang 'lenh nao bi giu bao lau'.",
  "rui_ro": "Lenh duong bi giu roi dao chieu: mat het lai da co.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

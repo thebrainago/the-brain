@@ -3,7 +3,34 @@
  "loai": "THOAT",
  "ten": "TP treo len (TP dich dan)",
  "mo_ta": "Khi them lenh, TP cua chuoi duoc dich theo (BlackDragon 'TP trailing treo len').",
- "tham_so": [],
+ "tham_so": [
+  {
+   "ten": "tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "bien_cap",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    5,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
  "can": [],
  "xung_dot": [],
  "tuong_tac_biet": [],
@@ -29,5 +56,11 @@
  ],
  "ap_cheo": "Thuc chat giong tp_chuoi_tu_gia_tb khi TP tinh tu gia tb: co the da nam trong khoi nen.",
  "rui_ro": "Kho tach khoi tp_chuoi_tu_gia_tb neu khong co bang lenh sua.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

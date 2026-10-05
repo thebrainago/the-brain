@@ -5,20 +5,30 @@
  "mo_ta": "Sau khi chuoi co N lenh (1-55), neu tong lai >= X USD (1-10) thi dong TAT CA: luat thoat an toan cho chuoi dai (CCBSN).",
  "tham_so": [
   {
-   "ten": "All Sniper: so lenh",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "so_lenh_toi_thieu",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    55,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "All Sniper: USD",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "muc_lai_tien",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    1,
+    10,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +56,11 @@
  ],
  "ap_cheo": "Mot chot_tien bac thang theo do sau chuoi: thu bang quet_luoi.",
  "rui_ro": "Chot non voi tien nho: mat truong lai khi chuoi dai hoi manh.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

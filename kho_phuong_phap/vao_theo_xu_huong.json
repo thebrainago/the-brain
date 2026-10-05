@@ -5,20 +5,43 @@
  "mo_ta": "Vao cung chieu voi xu huong (khung H1 tro len), nhoi them khi xu huong tiep tuc; tac gia canh bao sideway la ke thu.",
  "tham_so": [
   {
-   "ten": "khung",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "nguong_adx",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    20,
+    50,
+    5
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "luat xu huong (khong noi)",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "buoc_nhoi",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    100,
+    10
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lan_nhoi",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +69,11 @@
  ],
  "ap_cheo": "Khoi doi nghich voi luoi: 'luoi khi sideway, theo trend khi co trend' can bo loc che do (loc_adx_atr / loc_sideway_nen).",
  "rui_ro": "Sideway: bi cuon lenh lien tiep.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

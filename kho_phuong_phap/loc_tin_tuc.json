@@ -5,12 +5,30 @@
  "mo_ta": "Tat khi co tin manh (BlackDragon co nhung chua cau hinh; CCBSN v3.0.6 theo thong bao).",
  "tham_so": [
   {
-   "ten": "news filter",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "nguong_do_manh_tin",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    50,
+    100,
+    10
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "khoang_gio_truoc_sau",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    5,
+    60,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -38,5 +56,11 @@
  ],
  "ap_cheo": "Can lich tin that (nguon ngoai): chua co trong kho.",
  "rui_ro": "Phu thuoc nguon lich.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

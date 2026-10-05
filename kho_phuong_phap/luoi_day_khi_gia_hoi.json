@@ -5,20 +5,30 @@
  "mo_ta": "Khi gia di nguoc roi hoi lai, bot van them lenh (luoi day them) va keo TP ve gan: ket thuc chuoi som hon (KawKaw).",
  "tham_so": [
   {
-   "ten": "buoc them khi hoi",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "buoc_them_lenh",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    10
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "khoang TP keo lai",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "tp_keo_lai",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    5,
+    100,
+    5
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +56,11 @@
  ],
  "ap_cheo": "Giam thoi gian chuoi nhung tang lot trung binh; thu tren chuoi sau.",
  "rui_ro": "Them lenh o gia hoi ma gia quay dau = lot nang them o gia xau.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

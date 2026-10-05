@@ -5,20 +5,26 @@
  "mo_ta": "Lay gia mo cua ngay lam moc; Sell khi gia len qua tam X, Buy khi gia xuong duoi tam X (danh nguoc xu huong); triet ly 'choi SAU bao': doi gia lech 30-40 gia roi moi tha.",
  "tham_so": [
   {
-   "ten": "khoang lech vao (3-30 gia)",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "khoang_lech_vao",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    100,
+    5
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "buy_on / sell_on",
-   "lop": "CHUA_PHAN_LOP",
+   "ten": "che_do_huong_lenh",
+   "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +52,11 @@
  ],
  "ap_cheo": "Khoang cach toi gia mo cua ngay la mot dac trung moi cho tim_quy_luat; thu lam dieu kien vao cua he luoi.",
  "rui_ro": "Ngay co 'bao' (vang di 40-60 gia trong 5-10 phut khong hoi): chuoi ket.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

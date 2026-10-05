@@ -5,44 +5,65 @@
  "mo_ta": "Khi chuoi co >= N lenh, chot rieng M lenh (nang am hoac thap nhat) den khi lai sau tia >= X USD, phan con lai van chay (CCBSN Sniper, NuTi 'tia lenh' N=10 M=2 2,5 USD, SemiHFT Buy chot lenh thap nhat truoc).",
  "tham_so": [
   {
-   "ten": "InpUseSniper",
+   "ten": "inp_use_sniper",
    "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "InpTPSniper",
+   "ten": "inp_tp_sniper",
    "lop": "KC_TP",
    "don_vi": "pip",
-   "mien": null,
+   "mien": [
+    10,
+    100,
+    5
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "InpMoneySniperFull",
+   "ten": "inp_money_sniper_full",
    "lop": "TIEN",
    "don_vi": "tien",
-   "mien": null,
+   "mien": [
+    1.0,
+    50.0,
+    1.0
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "InpFirstOrdersSniper",
+   "ten": "inp_first_orders_sniper",
    "lop": "SO_DEM",
    "don_vi": "lenh",
-   "mien": null,
+   "mien": [
+    1,
+    10,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "InpLastOrdersSniper",
+   "ten": "inp_last_orders_sniper",
    "lop": "SO_DEM",
    "don_vi": "lenh",
-   "mien": null,
+   "mien": [
+    1,
+    10,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -74,5 +95,11 @@
  ],
  "ap_cheo": "Khoi nen thu SOM: CCBSN song sot dung no; mo rong tia_cap thanh tia M lenh khi chuoi >= N.",
  "rui_ro": "Tia lenh tot, giu lenh xau: gia trung binh tien ve phia xau.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

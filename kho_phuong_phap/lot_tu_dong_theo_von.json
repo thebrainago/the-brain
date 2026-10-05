@@ -5,12 +5,30 @@
  "mo_ta": "Lot lenh dau = so du / n (vd 0,01 cho moi 1000 von).",
  "tham_so": [
   {
-   "ten": "auto lot",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "so_du_moi_lot",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    500,
+    10000,
+    500
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lot_toi_thieu",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.1,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -38,5 +56,11 @@
  ],
  "ap_cheo": "Ket hop voi tran_lot_tong thanh 'lai kep co kiem soat'.",
  "rui_ro": "Lai kep cung la thua kep sau chuoi xau.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

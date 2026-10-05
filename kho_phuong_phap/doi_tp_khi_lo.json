@@ -5,20 +5,26 @@
  "mo_ta": "Khi lo cua chuoi vuot X% (CCBSN -5 .. -20%), bot ha muc TP xuong (chap nhan chot it hon de thoat som).",
  "tham_so": [
   {
-   "ten": "InpUseChangeTPDCA",
+   "ten": "inp_use_change_tp_dca",
    "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "InpPerLoss2ChangeTP",
-   "lop": "TIEN",
-   "don_vi": "pct",
-   "mien": null,
+   "ten": "inp_per_loss_2_change_tp",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    5,
+    20,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +52,11 @@
  ],
  "ap_cheo": "Ke thua cho_lui va tia_cap: kieu 'thoat som khi sau'; thu bang quet_luoi.",
  "rui_ro": "Chot it o dung luc co the hoi manh.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

@@ -5,12 +5,52 @@
  "mo_ta": "Chuoi Buy va chuoi Sell cung song, moi chuoi co luoi va TP rieng; lenh Sell khong cat lo lenh Buy.",
  "tham_so": [
   {
-   "ten": "kieu: hai chieu",
-   "lop": "CHUA_PHAN_LOP",
+   "ten": "che_do",
+   "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buoc",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    500,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    1.0,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -40,5 +80,11 @@
  ],
  "ap_cheo": "Phan lon bot luoi chay hai chieu; so voi mot_chieu tren cung ma.",
  "rui_ro": "Trend manh: chuoi nguoc trend am sau, chuoi thuan trend chot lai nho, am rong tang theo thoi gian.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

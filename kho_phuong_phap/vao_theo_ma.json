@@ -6,19 +6,25 @@
  "tham_so": [
   {
    "ten": "chu_ky_ma",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    5,
+    200,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
    "ten": "khung",
-   "lop": "CHUA_PHAN_LOP",
+   "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +52,11 @@
  ],
  "ap_cheo": "Dac trung (gia - MA) / ATR co the dung lam bo loc chieu cho che do mot_chieu.",
  "rui_ro": "MA tre: vao muon khi thi truong dao chieu nhanh.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

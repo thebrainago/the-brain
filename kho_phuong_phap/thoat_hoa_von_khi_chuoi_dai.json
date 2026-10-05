@@ -5,20 +5,26 @@
  "mo_ta": "Khi chuoi co N lenh (Bigmouse: 3), bo TP duong va chi dat SL o hoa von: chuoi thoat o 0 thay vi cho lai.",
  "tham_so": [
   {
-   "ten": "so lenh kich hoat",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "so_lenh_kich_hoat",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    2,
+    10,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "kich hoat hoa von",
-   "lop": "CHUA_PHAN_LOP",
+   "ten": "kich_hoat_hoa_von",
+   "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +52,11 @@
  ],
  "ap_cheo": "Luat 'cat DD': thu bien N nho / lon tren luoi - doi lai het lai cua chuoi dai.",
  "rui_ro": "Cat het co hoi cua chinh chuoi nguy hiem nhat.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

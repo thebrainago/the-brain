@@ -5,20 +5,30 @@
  "mo_ta": "Sau moi lenh cat lo, lenh ke tiep nhan doi lot (0,01 -> 0,02 -> 0,04 -> ... 0,32 / 0,64); thang thi ve lot dau (NewYear, SignalX).",
  "tham_so": [
   {
-   "ten": "he so lot nhan 2",
-   "lop": "CHUA_PHAN_LOP",
+   "ten": "he_so_lot",
+   "lop": "HE_SO",
    "don_vi": "",
-   "mien": null,
+   "mien": [
+    1.5,
+    3.0,
+    0.5
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "lot toi da",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.1,
+    0.01
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +56,11 @@
  ],
  "ap_cheo": "Chu du an chap nhan martingale (tieu chi: co lai sau phi + maxDD < 80%); thu tren he co tin hieu ro.",
  "rui_ro": "Chuoi thua 7 lenh = lot x64: chay tai khoan; win rate thap la tu sat.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

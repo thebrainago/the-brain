@@ -5,20 +5,30 @@
  "mo_ta": "Bao = di 40-60 gia trong 5-10 phut khong hoi (NuTi): chi tha bot SAU bao (gia da di 30-40 gia).",
  "tham_so": [
   {
-   "ten": "ngay thau",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "nguong_bien_dong",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "pip",
+   "mien": [
+    30,
+    60,
+    5
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "khoang lech",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "thoi_gian_nen",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    5,
+    10,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +56,11 @@
  ],
  "ap_cheo": "Dac trung bien dong ngan (range 5-10 phut / ATR) lam bo loc vao / them lenh; xem DD co giam khong.",
  "rui_ro": "Dinh nghia 'bao' theo cam tinh.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

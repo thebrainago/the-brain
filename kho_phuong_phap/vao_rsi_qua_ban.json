@@ -5,28 +5,39 @@
  "mo_ta": "Mua khi RSI chu ky ngan (vd 4) tren khung nho (M5) xuong duoi nguong (vd 15); moi lan co tin hieu la them mot lenh.",
  "tham_so": [
   {
-   "ten": "rsi_chu_ky",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "rsi_period",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    2,
+    20,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "khung",
-   "lop": "CHUA_PHAN_LOP",
+   "ten": "timeframe",
+   "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "nguong_vao",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "rsi_threshold",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    5,
+    30,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -54,5 +65,11 @@
  ],
  "ap_cheo": "Thu lam cua vao cho he luoi cua ta: thay 'vao ngay' bang 'vao khi RSI(4) < 15' tren AUDCAD M15 va so voi vao ngay.",
  "rui_ro": "Chi mua + nhoi: xu huong giam dai = ket ca chuoi, khong co SL (theo video).",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

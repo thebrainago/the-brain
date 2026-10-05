@@ -5,20 +5,26 @@
  "mo_ta": "Mo lenh dau ngay khi bat bot hoac ngay sau khi chuoi truoc dong (Buy, Sell hoac ca hai); khong dung chi bao.",
  "tham_so": [
   {
-   "ten": "chieu: mua | ban | hai chieu",
-   "lop": "CHUA_PHAN_LOP",
+   "ten": "chieu_vao",
+   "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "tre sau khi chuoi truoc dong",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "tre_mo_lenh",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    0,
+    60,
+    5
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -48,5 +54,11 @@
  ],
  "ap_cheo": "Khoi nen: moi he luoi cua ta dung no. Thay no bang diem vao co dieu kien (RSI, tam gia ngay...) de xem loc diem vao co them ky vong khong.",
  "rui_ro": "Vao ngay luc thi truong dang chay manh mot chieu = chuoi sau ngay tu dau.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

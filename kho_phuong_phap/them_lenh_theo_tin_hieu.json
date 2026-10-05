@@ -5,20 +5,30 @@
  "mo_ta": "Khong co khoang cach co dinh: moi tin hieu vao (vd RSI < 15 tren M5) them mot lenh cung chieu, ke ca dang am (GoldHunter: hang tram lenh).",
  "tham_so": [
   {
-   "ten": "tin hieu",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "nguong_chi_bao",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    0,
+    100,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "tran lenh (khong noi)",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "so_lan_toi_da",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    100,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -46,5 +56,11 @@
  ],
  "ap_cheo": "Neu tin hieu tot hon luoi co dinh thi lenh them nen nam o 'day nhip' chu khong o moi buoc; so tung thang.",
  "rui_ro": "Tin hieu bam day nhieu lan: don lot o gia xau.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

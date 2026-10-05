@@ -5,28 +5,39 @@
  "mo_ta": "Bot doc buffer cua mot chi bao (so buffer cho Buy, so buffer cho Sell) hoac nguoi nhin chi bao roi vao tay (SSL ba khung cua HandDCA).",
  "tham_so": [
   {
-   "ten": "ten chi bao",
-   "lop": "CHUA_PHAN_LOP",
+   "ten": "ten_chi_bao",
+   "lop": "CONG_TAC",
    "don_vi": "",
    "mien": null,
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "buffer buy",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "buffer_buy",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "gia_tri",
+   "mien": [
+    0,
+    100,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   },
   {
-   "ten": "buffer sell",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "buffer_sell",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "gia_tri",
+   "mien": [
+    0,
+    100,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -54,5 +65,11 @@
  ],
  "ap_cheo": "Ma 'SSL ba khung dong cung mau' co the viet thanh dac trung de thu bang tim_quy_luat.",
  "rui_ro": "Chi bao ve lai (repaint): vao theo nen chua dong la sai (loi nguoi trinh bay).",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }

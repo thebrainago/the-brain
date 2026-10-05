@@ -5,12 +5,30 @@
  "mo_ta": "Mot nen chi duoc them toi da mot lenh (tranh don lenh khi gia chay nhanh trong mot nen); NuTi DCA theo nen.",
  "tham_so": [
   {
-   "ten": "khung nen",
-   "lop": "CHUA_PHAN_LOP",
-   "don_vi": "",
-   "mien": null,
+   "ten": "cap_moi_bar",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    5,
+    1
+   ],
    "ten_trong_set": null,
-   "ten_trong_engine": null
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buoc",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    20,
+    300,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
   }
  ],
  "can": [],
@@ -38,5 +56,11 @@
  ],
  "ap_cheo": "De do: them tham so 'moi bar toi da 1 lenh'; xem co cat duoc DD luc tin manh khong.",
  "rui_ro": "Them cham luc gia da di xa: gia trung binh kem hon.",
- "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
 }
