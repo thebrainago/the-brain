@@ -679,17 +679,19 @@ def dich_luoi(ts, src: ThiTruong, dst: ThiTruong, cach: CachDich | None = None, 
 
 
 def cac_cach_dich(ts, src: ThiTruong, dst: ThiTruong, gio_giu_phut: float | None = None, tang_tham_chieu: int | None = None,
-                  q_do_sau: float = 0.9) -> list:
+                  q_do_sau: float = 0.9, lot: str = "I4") -> list:
     """Danh sach <= 9 cach dich CO SO (thiet ke muc 8.2): buoc {I1, pha tron 0,5} x tam {I6, giu} x thoi gian {dong ho, so nen};
-    them 'I2 thuan' khi ti le chi phi / bien do doi tu 2 lan. Cac cach cho ra CUNG tham so duoc gop (`cung_ket_qua`)."""
+    them 'I2 thuan' khi ti le chi phi / bien do doi tu 2 lan. Cac cach cho ra CUNG tham so duoc gop (`cung_ket_qua`).
+    `lot`: cach chia lot cua MOI cach ('I4' giu ngan sach rui ro | 'giu' giu lot); chon 'giu' khi lot se do cong chot sau (bo thu chuyen S1 /
+    quy trinh tim: lot nho nhat 0,01 khong chia duoc nua thi 'I4' tra KHONG_AP_DUOC)."""
     cac = []
     for w in (0.0, 0.5):
         for tam in ("I6", "giu"):
             for tg in ("dong_ho", "so_nen"):
-                cac.append(CachDich(w_buoc=w, tam=tam, thoi_gian=tg, q_do_sau=q_do_sau))
+                cac.append(CachDich(w_buoc=w, tam=tam, thoi_gian=tg, q_do_sau=q_do_sau, lot=lot))
     if _hop_le(src.A) and _hop_le(src.C) and _hop_le(dst.A) and _hop_le(dst.C):
         if abs(math.log((dst.C / dst.A) / (src.C / src.A))) >= math.log(NGUONG_CHI_PHI_AP_DAO):
-            cac.append(CachDich(w_buoc=1.0, tam="I6", thoi_gian="dong_ho", q_do_sau=q_do_sau))
+            cac.append(CachDich(w_buoc=1.0, tam="I6", thoi_gian="dong_ho", q_do_sau=q_do_sau, lot=lot))
     ra, thay = [], {}
     for c in cac:
         k = dich_luoi(ts, src, dst, c, gio_giu_phut, tang_tham_chieu)

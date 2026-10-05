@@ -3,19 +3,19 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-05 00:48 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 67c43df · 7 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-05 05:50 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 39bc787 · 8 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
-  · 67c43df ho_so_bot: sua phep do TRE DAU NGAY - do theo gio dong ho may chu, khong theo "hoa
-  · 9383143 ho_so_bot WP5c: bo dieu phoi ho_so() - mot loi goi ra HO SO co che cua bot tu lenh
-  · af35e7d ho_so_bot WP5a/WP5b: sua bang phan loai ten .set + them so do kiem duoc tre / bac 
-  · 54497fc ho_so_bot: do co che THOAT / HEDGE / GIO / NHIP THEM LENH tren lenh THAT + sua ban
-  · 2a412dc Thiet ke CHUYEN BOT SANG TAI SAN / KHUNG KHAC (tra loi thong diep B cua chu du an)
-- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 4, nha->cloud 10
+  · 39bc787 S1: gop ket qua giai doan 1 + kiem doc lap cho thu_chuyen va do_thong_minh
+  · 5d23736 S1: the gioi tong hop (thu_chuyen) + do thong minh (do_thong_minh); nguong dong ba
+  · 2c7b846 cloud: hang doi hieu chuan engine-tester 01-10 (N3, tester tuan tu)
+  · 34201d5 hieu_chuan: ket qua day du ra tep reports/hieu_chuan/*.json de bo chay don mang ve
+  · 9ff3069 chuyen: S0 dich tham so luoi / .set sang thi truong khac (nhan/dich_tham_so.py)
+- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 2, nha->cloud 10
   · moi nhat nha->cloud (gio may gui 2026-10-04T17:10:01): XONG #9/#10 (nha; so chi tiet reports/ea_tho_20261
 - May:
   · nha RANH ma=de5446d+sua nhip 2026-10-03T22:15:43 (gio may)
-- Don: cho 9 · dang 9 · xong 9 (CHUA_DO_DUOC 1 · DAT 8)
+- Don: cho 20 · dang 9 · xong 9 (CHUA_DO_DUOC 1 · DAT 8)
 - Du lieu: kho gia /home/user/the-brain/data: 0 file .parquet · so_cai/doan.json CO · so_cai/nc 3 file 29 KB
 - Cau hinh: config/cau.json khong co (phien cloud)
 <!-- AUTO:HET -->
@@ -39,6 +39,16 @@
 - 03/10 chieu: "de danh token di, toi lam tren may nha" -> cloud DUNG, lam tiep o may nha toi nay (muc "TOI 03/10 O NHA" o Viec ke tiep).
 - 03/10 toi: LLM CHOT (thu nha c91d): mac dinh `ds/deepseek-flash`, du phong `qwen3.8-max-0902` sau 2 lan sai lien tiep, `--sau` cho viec can suy luan sau; KHONG cai Qwen Code / DeepSeek Harness. May nha TON DIEN (y chu du an): KHONG chay qua dem, chi chay NGAN khi bat may roi tat (`tai_lieu/SO_SANH_LLM.md` muc "QUYET DINH").
 - 03/10 khuya: chu du an CHOT DEEPSEEK lan nua ("toi se cung cap chi phi LLM toi da; quan trong la khai thac hieu qua, ke ca thay cau lam viec nang trong sandbox"; "may nha da chot deepseek thi dung deepseek"). Khong can nhac lai. Viec co hoc / nang (boc, dem, quet rong, gia thuyet nhap) giao cho DeepSeek (`b nc tho`, `q`); cloud giu suy luan + quyet. **Sandbox cloud CHUA goi duoc**: host `api.ai-box.vn` bi chinh sach mang chan (CONNECT 403, do 03/10) va khong co bien `AIBOX_API_KEY` -> chu du an tu lam qua menu moi truong (Edit): them host vao Network access (Custom) + dat `AIBOX_API_KEY` o muc bien / API credentials (phien MOI moi thay). KHONG dan khoa vao chat / repo.
+
+## Dang o dau (05/10 sang, cloud: S1 CHOT DONG BANG - giai doan 1 XONG, giai doan 2 san sang, CHUA CHAY; may nha tat qua dem)
+- Chu du an 05/10: may nha TAT qua dem (nghi), "lam not viec cua cau, cai gi cho may nha thi de lai"; phien cloud nay da dai (nhieu lan nen ngu canh) nen chu du an xin LENH DAN cho phien MOI. Hang doi `viec/cho` van nguyen (`00-ho-so-bot-ccbsn` + 10 don bac thang hieu chuan, ~11 gio tester) cho may nha bat lai (`b cau chay --lien-tuc --nghi 20`). Thu #11 / #12 nha CHUA tra.
+- XONG + day (5d23736, 39bc787): the gioi tong hop L0-L5 + dap an + 49 bien the dich + `do_thong_minh` (tim kiem thong minh tren luoi cuc bo) + quy tac chon mac dinh DONG BANG truoc khi chay. GIAI DOAN 1 chay xong: `reports/thu_chuyen/p1/` (28 JSON) + `p1_tong_hop.json`; quy tac da dong bang chon `A_chart|w=1|tam=I6|san=0` (hoi tiec trung vi 0,047). Y nghia (CHI co che tren the gioi NHAN TAO nang chi phi hon that, KHONG phai bang chung loi nhuan): doi khoang cach theo ti le pha tron (bien do nen / chi phi); KHONG dat san cung 3x chi phi (tot hon: 0,08 vs 0,19); khi hai the gioi giong nhau thi KHONG doi gi (= B0, hoi tiec 0); doi thoi gian giu lenh can TIM KIEM chu khong dich thang.
+- XONG: `dich_tham_so.cac_cach_dich(..., lot="I4"|"giu")` (mac dinh khong doi; giai doan 2 goi `lot="giu"` vi lot cua the gioi nhan tao do cong chot sau). Loi da bat truoc khi chay: voi `lot="I4"` bo sinh tra 0 ung vien trong the gioi nhan tao (lot toi thieu 0,01 khong chia duoc) nen SMART am tham quay ve B0; da sua + ung vien khoi dau nay la T0 + cach dich co so. Kiem `tai_lieu/ban_va_chua_test/kiem_dich_tham_so.txt` (37 phep + 15 dot bien).
+- XONG: `nhan/thu_chuyen_tim.py` = GIAI DOAN 2 (9 quy trinh tim x top-k 1/4/12 + 3 moc B0/T0/B1; the gioi NHIEU N0 / N0_re khong co dap an de do ty le "DAT gia"; cac cap so sanh dong bang `CAP_SO_SANH`; tong hop bootstrap cap doi theo tang + Clopper-Pearson + theo loai). Kiem `tai_lieu/ban_va_chua_test/kiem_giai_doan_2.txt` = 134 phep kiem + 57 dot bien co y (chay: `cp tai_lieu/ban_va_chua_test/kiem_giai_doan_2.txt /tmp/kiem_giai_doan_2.py && python3 /tmp/kiem_giai_doan_2.py` tu goc repo; `KIEM_CHI=thuc` chi chay cac dot bien cua duong ong that). KHONG pytest (CHOT AN TOAN con hieu luc).
+- GIAI DOAN 2 DA DONG BANG, **CHUA CHAY**: ke hoach `reports/thu_chuyen/p2_ke_hoach.json` (plan_hash `cf3680039615c56f`; nguong doc ket qua nam trong `cau_hinh` cua tep do) da commit TRUOC khi chay. KHONG sua `nhan/thu_chuyen_tim.py`, `dich_tham_so.py`, `thu_chuyen.py`, `do_thong_minh.py` truoc khi chay (doi = ke hoach KHAC, phai ghi hash moi). Chay (phien cloud, ~3 gio, ba viec NOI TIEP, moi viec `run_in_background` + `timeout: 7200000`, KHONG poll, doi thong bao xong):
+  `mkdir -p /tmp/p2s && git archive HEAD | tar -x -C /tmp/p2s && cd /tmp/p2s`
+  A1: `python3 -m nhan.thu_chuyen_tim p2 --p1 reports/thu_chuyen/p1 --ra /tmp/p2r --kich-ban K2,K05,C2,S05 --bien-the "A_chart|w=1|tam=I6|san=0"`; A2: cung lenh voi `--kich-ban H4,TF5,TF1,Z0`; B: `--kich-ban N0,N0_re` (24 hat moi the gioi). Cung `--ra` thi bo qua tep da co (chay lai duoc). Xong: `python3 -m nhan.thu_chuyen_tim tong-hop --ra /tmp/p2r --ghi reports/thu_chuyen/p2_tong_hop.json`, chep `p2_*.json` vao `reports/thu_chuyen/p2/`, viet `reports/thu_chuyen_s1.md` (3-8 dong loi thuong o dau, ket luan THEO NGUONG DA DONG BANG, noi ro day la co che chu khong phai loi nhuan, ghi ca ket qua xau), commit, fetch, day.
+- Sau giai doan 2 (theo thu tu gia tri cho chu du an): (1) `nhan/the_phuong_phap.py` + `kho_phuong_phap/*.json` (the phuong phap: khoi co che + tham so co kieu + luat doi ti le + bang chung; hat giong = `ho_so_set` `cong_thuc` va `khoi_co_che`; so do 7 trong `CHUYEN_BOT_SANG_TAI_SAN_KHAC.md`) + cong cu nc `chuyen_bot` / `ke_hoach_do` / `luu_the` / `thu_chuyen`; (2) don cho may nha: bac thang hieu chuan, CLMCA Model 0, CAT KHOI bang `.set` tren CanCuBo (can duong `.ex5` o `reports/kho_bot.md` tu nha), `quet_o` / `do_thi_truong` CPU; (3) quyet S0 doi hay giu (w=1, san cung -> canh bao) sau ket qua giai doan 2 (doi = phien ban moi, bao ca hai).
 
 ## Dang o dau (05/10, cloud: HO SO BOT + DOI CHIEU .set + cong cu nc `ho_so_bot` + DICH THAM SO (S0) XONG; pytest van bi chan)
 - XONG + day (54497fc, af35e7d, 9383143, 67c43df + commit ke tiep): `nhan/ho_so_bot.py` (~2700 dong) = HO SO CO CHE tu LENH THAT cua tester. `HB.ho_so(lenh | deals | Ctx, ma=...)` mot loi goi tra dict JSON thuan: 52 khoi co che (moi khoi: nhom, ket luan co / khong / khong_ro / khong_do_duoc, do tin, ly do), `tham_so` da do (gia tri + don vi + khoi), `van_tay`, `tong_ket`, `canh_bao`. Khoi lich su lenh khong cho do thi NOI THANG, khong bao gio ghi "tac gia khong dung" chi vi khong do duoc.

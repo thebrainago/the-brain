@@ -1,0 +1,152 @@
+{
+ "plan_hash": "cf3680039615c56f",
+ "cau_hinh": {
+  "phien_ban_gd2": 1,
+  "nguong": {
+   "phien_ban": 1,
+   "thong_minh_so_voi_ngau_nhien": 0.8,
+   "thang_khi": "can tren khoang tin cay 95 % (bootstrap 2000 lan, phan tang theo kich ban x phong cach) cua hieu cap doi (SMART_k - RANDT_k) < 0",
+   "dat_gia_sau_xac_nhan": 0.05,
+   "dat_gia_truoc_xac_nhan": 0.25,
+   "so_hat": 12,
+   "so_hat_nhieu": 24,
+   "so_nam_quan_sat": 2.0,
+   "top_k": [
+    1,
+    4,
+    12
+   ],
+   "ngan_sach_ngang": "RAND, RANDT (va RAND_S, RANDT_S) do DUNG so o ma SMART (SMART_S) da do; FULL do het luoi cua dap an",
+   "gop": "moi kich ban co dap an tru Z0, ca hai phong cach; Z0 tinh rieng (kiem 'tim co lam hong so dung khong'); N0* tinh rieng (khong co dap an)"
+  },
+  "bien_the_mac_dinh": "A_chart|w=1|tam=I6|san=0",
+  "quy_trinh": [
+   "SMART",
+   "SMARTRAW",
+   "SMART_S",
+   "FULL_RAW",
+   "FULL_PLAT",
+   "RAND",
+   "RANDT",
+   "RAND_S",
+   "RANDT_S"
+  ],
+  "chuan": [
+   "B0",
+   "T0",
+   "B1"
+  ],
+  "top_k": [
+   1,
+   4,
+   12
+  ],
+  "cap_so_sanh": [
+   [
+    "SMART",
+    [
+     "RANDT",
+     "RAND",
+     "FULL_PLAT",
+     "FULL_RAW",
+     "SMARTRAW",
+     "T0",
+     "B1",
+     "B0"
+    ],
+    "day_du"
+   ],
+   [
+    "SMART_S",
+    [
+     "RANDT_S",
+     "RAND_S",
+     "T0"
+    ],
+    "nho"
+   ]
+  ],
+  "ung_vien_tim": "T0 (neu ap duoc) + DT.cac_cach_dich(lot=giu), moi ung vien qua DM.ap_san(san_pip)",
+  "kich_ban_nhieu": [
+   {
+    "ten": "N0",
+    "loai": "L5",
+    "nguon": {
+     "sigma_pip": 30.0,
+     "nua_doi_phut": 240.0,
+     "troi_nam": 15.0,
+     "chi_phi_pip": 10.0,
+     "hoi_quy": true
+    },
+    "dich": {
+     "sigma_pip": 30.0,
+     "nua_doi_phut": 240.0,
+     "troi_nam": 15.0,
+     "chi_phi_pip": 10.0,
+     "hoi_quy": false
+    },
+    "khung_nguon": 1,
+    "khung_dich": 1,
+    "k": null,
+    "mo_ta": "random walk, khong hoi quy, chi phi nhu goc (khong co co hoi that)"
+   },
+   {
+    "ten": "N0_re",
+    "loai": "L5",
+    "nguon": {
+     "sigma_pip": 30.0,
+     "nua_doi_phut": 240.0,
+     "troi_nam": 15.0,
+     "chi_phi_pip": 10.0,
+     "hoi_quy": true
+    },
+    "dich": {
+     "sigma_pip": 30.0,
+     "nua_doi_phut": 240.0,
+     "troi_nam": 15.0,
+     "chi_phi_pip": 3.0,
+     "hoi_quy": false
+    },
+    "khung_nguon": 1,
+    "khung_dich": 1,
+    "k": null,
+    "mo_ta": "random walk, chi phi 3 pip (re hon 3 lan): nhieu co hoi 'dat gia' hon"
+   }
+  ],
+  "he_so_buoc": [
+   0.5,
+   0.7,
+   1.0,
+   1.4,
+   2.0
+  ],
+  "he_so_tp": [
+   0.6,
+   1.0,
+   1.6
+  ],
+  "he_so_tam": [
+   0.5,
+   1.0,
+   2.0
+  ],
+  "so_tot": 3,
+  "so_vong": 2,
+  "ke_hoach_do_thong_minh": "b7ae8c00918fa5b3",
+  "van_tay_gd1": "30faa89a302cd6e8"
+ },
+ "bien_the_mac_dinh": "A_chart|w=1|tam=I6|san=0",
+ "nguon_bien_the_mac_dinh": "reports/thu_chuyen/p1_tong_hop.json (quy tac dong bang cua giai doan 1, plan_hash 30faa89a302cd6e8)",
+ "ngay_dong_bang": "2026-10-05, TRUOC khi chay giai doan 2 (chua co tep p2_*.json nao ngoai mot lan chay thu 1 hat de do thoi gian)",
+ "chia_lan_chay": {
+  "A1": "kich ban K2,K05,C2,S05 x phang,geo x 12 hat (khoang 1 gio)",
+  "A2": "kich ban H4,TF5,TF1,Z0 x phang,geo x 12 hat (khoang 1 gio)",
+  "B": "the gioi nhieu N0,N0_re x phang,geo x 24 hat (khoang 0,7 gio)"
+ },
+ "thay_doi_truoc_khi_dong_bang": [
+  "bo sinh ung vien cua S0 them tham so lot (mac dinh I4 giu nguyen); giai doan 2 goi voi lot=giu vi lot cua the gioi nhan tao do cong chot sau (lan chay thu dau cho 0 ung vien vi I4 can lot < 0,01)",
+  "ung vien khoi dau cua SMART / RANDT = T0 + cac cach dich co so",
+  "them cac cap so sanh SMART vs T0 / B1 / B0 va SMART_S vs T0 (CAP_SO_SANH), ghi vao van tay"
+ ],
+ "luu_y": "nguong la NHAN canh bao, khong phai cong chan; the gioi nhan tao nang chi phi hon thuc te; ket qua noi ve CO CHE tim, khong noi ve loi nhuan that"
+}

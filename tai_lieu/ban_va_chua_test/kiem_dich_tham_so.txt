@@ -299,6 +299,9 @@ def checks(D, nhanh=False):
     audx = D.ThiTruong(ma="AUDCAD", khung_phut=15, A=6e-4, C=2.5e-4 * 6, pip=1e-4, pv=73000.0, von=10000.0, do_tin_chi_phi="DO", tien_te="tai_khoan", point=1e-5)
     cac2 = D.cac_cach_dich(tsc, gold, audx, None, 12)
     ck("them_I2_khi_chi_phi_lech", sum(1 + len(k.cung_ket_qua) for k in cac2) == 9 and any(k.cach.w_buoc == 1.0 for k in cac2), [k.cach.ten() for k in cac2])
+    cac3 = D.cac_cach_dich(tsc, gold, audx, None, 12, lot="giu")
+    ck("cac_cach_dich_lot_tham_so", len(cac3) >= 1 and all(k.cach.lot == "giu" for k in cac3) and all(k.cach.lot == "I4" for k in cac2)
+       and any(k.cach.w_buoc == 1.0 for k in cac3), ([k.cach.lot for k in cac3], [k.cach.lot for k in cac2]))
 
     # 16. I6: gio dong ho vs so nen (M15 -> H1 CUNG duong gia)
     if not nhanh:
@@ -376,6 +379,8 @@ def main():
         "lot_nhan_sai_mu": [("return he_so_lot ** k\n", "return he_so_lot ** (k + 1)\n")],
         "I6_dao_ti_le": [("k_tam = e_d / e_s", "k_tam = e_s / e_d")],
         "gop_trung_hong": [("thay[khoa].cung_ket_qua.append(c.ten())", "pass")],
+        "lot_khong_chuyen_vao_cach": [("cac.append(CachDich(w_buoc=w, tam=tam, thoi_gian=tg, q_do_sau=q_do_sau, lot=lot))", "cac.append(CachDich(w_buoc=w, tam=tam, thoi_gian=tg, q_do_sau=q_do_sau))")],
+        "lot_khong_chuyen_vao_I2": [('cac.append(CachDich(w_buoc=1.0, tam="I6", thoi_gian="dong_ho", q_do_sau=q_do_sau, lot=lot))', 'cac.append(CachDich(w_buoc=1.0, tam="I6", thoi_gian="dong_ho", q_do_sau=q_do_sau))')],
         "tien_theo_loi_nham": [('theo_tp = any(t in n for t in ("tp", "profit", "target", "sniper"))', 'theo_tp = not any(t in n for t in ("tp", "profit", "target", "sniper"))')],
         "bo_lot_toi_thieu": [("if lot_tho < dst.lot_toi_thieu - 1e-12:", "if False:")],
         "thieu_mot_lop": [('    "dung_lo_tong": TIEN,         # engine CHUA cai dat (`luoi.CHUA_CAI_DAT`)\n', "")],
