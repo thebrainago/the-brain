@@ -3,14 +3,14 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-05 10:13 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 9990dca · 35 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-05 10:30 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 871f8d7 · 17 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
+  · 871f8d7 Phuong an bo tri LLM theo 4 muc ngan sach + nhan/giao_llm.py (goi AI Box tu phien 
+  · bee5cf1 Nhan 35 the phuong phap do DeepSeek dien (may cham DAT 35/35, da doc mau 3 the); t
   · 9990dca Dien kieu + mien cho 35 the phuong phap (ban nhap tho, qwen3.8-flash) + bao cao
   · d1335a4 so ban giao: giai doan 2 xong, the phuong phap, deepseek goi duoc
   · a03ff5e S1 giai doan 2: ket qua + bao cao (SMART khong thang RANDT; T0 co ban tot ngang nh
-  · 4c5cb83 tai lieu: bang gia AI Box (chu du an cung cap)
-  · 632cabe tai lieu: quy tac giao viec cho DeepSeek (hang rao, may cham, 2 vong sua)
 - Thu: phien nay la `cloud`, chua doc 20 · 24h qua: cloud->nha 2, nha->cloud 4
   · moi nhat cloud->nha (gio may gui 2026-10-05T08:04:15): Phien cloud MOI id=session_01XDvcQqRLu2itnyVWxmPCW
 - May:

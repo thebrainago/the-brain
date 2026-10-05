@@ -23,7 +23,7 @@ Claude (phien nay) giu: quyet dinh, doc mau 3 ket qua, xac nhan / niem phong. LL
 | 400k | 50% = ~28.500 | 20% = ~3.000 | 15% = ~1.170 | 15% = ~620 (v4-pro) | khuyen nghi: can bang |
 | 500k | 40% = ~28.500 | 20% = ~3.800 | 15% = ~1.470 | 25% = ~770 v4-pro + ~570 max | them du phong leo thang |
 Quy tac chung: tien to lenh giong het (trung cache) · tat suy luan cho T1/T2 (bat la ton tien + rong noi dung) · `max_tokens` vua du ·
-tran chi / ngay = ngan sach / 30 (so `reports/deepseek/so_chi.jsonl`) · vuot tran thi dung va bao.
+KHONG dat tran ngay / thang (chu du an tra truoc, 05/10: co bao nhieu dung bay nhieu); van ghi so chi `reports/deepseek/so_chi.jsonl` de biet con bao nhieu.
 Khuyen nghi: **muc 300k** la du cho giai doan nay (viec that: ~100 d / 35 the; ca thang mau o muc 300k khong den het). Bat dau 300k, tang khi so chi that cho thay thieu.
 
 ## Cach dieu khien (khong tach phien)

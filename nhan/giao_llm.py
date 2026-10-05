@@ -28,9 +28,9 @@ def da_chi_hom_nay() -> float:
     return sum(j.get("dong", 0) for j in map(json.loads, SO_CHI.read_text("utf-8").splitlines()) if j.get("ngay") == ngay)
 
 
-def goi(tang: str, prompt: str, max_tokens: int = 1500, viec: str = "", tran_ngay: float = 10000.0, he: str = "") -> dict:
+def goi(tang: str, prompt: str, max_tokens: int = 1500, viec: str = "", tran_ngay: float | None = None, he: str = "") -> dict:
     """Tra {'noi_dung','dong','vao','ra'}; vuot tran ngay -> nem RuntimeError (khong im lang)."""
-    if da_chi_hom_nay() >= tran_ngay:
+    if tran_ngay is not None and da_chi_hom_nay() >= tran_ngay:
         raise RuntimeError("vuot tran chi ngay %.0f d" % tran_ngay)
     model, gv, gr, gc, them = TANG[tang]
     msgs = ([{"role": "system", "content": he}] if he else []) + [{"role": "user", "content": prompt}]
