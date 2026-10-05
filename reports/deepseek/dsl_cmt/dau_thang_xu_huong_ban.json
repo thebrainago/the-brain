@@ -1,0 +1,30 @@
+{
+ "ten": "dau_thang_xu_huong_ban",
+ "ho": "xu_huong",
+ "chieu": -1,
+ "giu": 5,
+ "co_che": "Dong tien dau thang theo xu huong: khi gia nam tren EMA 50 va ngay dau thang (<=3), cac don vi mua lon thuong bat dau chu ky tai co cau hoac mo vi the moi, tao ra luc day gia lien tuc trong phien dau thang.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_thang"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 3
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "ema",
+    "n": 50
+   }
+  }
+ ],
+ "ra": []
+}

@@ -1,0 +1,39 @@
+{
+ "ten": "bien_dong_thap_pha_vo_ban",
+ "ho": "pha_vo",
+ "chieu": -1,
+ "giu": 2,
+ "co_che": "Khi biến động giá (ATR) rơi xuống mức cực thấp trong lịch sử gần đây, thị trường đang ở trạng thái nén chặt và thiếu thanh khoản. Việc giá đóng cửa vượt qua đỉnh cao nhất của 10 nến trước đó ngay tại vùng nén này là tín hiệu phá vỡ giả mạo hoặc bắt đầu một đợt tăng giá mạnh do lực mua bất ngờ xuất hiện khi người bán đã kiệt sức.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "phan_vi",
+    "cua": {
+     "chi_bao": "atr",
+     "n": 14
+    },
+    "n": 100
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 0.2
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "thap_nhat_cua_cac",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "n": 10
+   }
+  }
+ ],
+ "ra": []
+}

@@ -19,3 +19,11 @@ Chua dua vao: chu ky / mua vu (da co `ho 1` LICH), tuong quan lien thi truong (i
 
 ## Viec LLM lam (job 3, 05/10): soan khai bao DSL theo y tuong CMT
 `reports/deepseek/chay_dsl_cmt.py`: 10 y tuong x 2 chieu, T1, 1 vong sua; 17/20 qua `kiem_khai_bao` (48 d). **Claude doc mau: cac ban BAN (-1) bi dao sai nghia** (vi du mua nhip lui: EMA nhanh > cham + RSI<40 dung cho MUA; ban sao chep lai y nguyen dieu kien) -> xep vao `ban_chua_duyet/`, khong dung. Ban MUA la **ban nhap de may nha thu tren kham_pha**, chua vao `config/co_che_dsl.json`.
+
+## Dot 2 (05/10): may lat MUA -> BAN, khong de LLM lat
+`nhan/guong_dsl.py` (test `test_guong_dsl.py`, 6 ca): lat phep so sanh, doi hang cua chi bao co khoang (RSI 30 -> 70, IBS 0,2 -> 0,8, zscore -2 -> +2),
+doi kenh cao <-> thap (Donchian: ca cot high <-> low), GIU NGUYEN dieu kien khong co huong (ADX, ATR, lich). Gap kenh khong ro tren / duoi (Keltner,
+Bollinger, Ichimoku) hoac chi bao chua biet lat -> tra None, khong doan. Model re chi soan ban MUA (dot 2: 11/12 qua cu phap, ~30 d); ban BAN do may lat:
+**19 ban MUA + 13 ban BAN** trong `reports/deepseek/dsl_cmt/` (6 ban MUA khong lat duoc, cho Claude / may nha lam tay). **10 / 23 cum la cum CHUA CO trong kho** (vi du
+PHA_VO + SUC_MANH_XU_HUONG, DAO_DONG + SUC_MANH_XU_HUONG) - day moi la gia tri that cua dot nay: lap vao cho trong cua kho, khong them ban sao.
+Cac ban nay van la BAN NHAP: chua vao `config/co_che_dsl.json` (chi phien GHI / may nha duoc sua `config/*`), chua chay tren gia.

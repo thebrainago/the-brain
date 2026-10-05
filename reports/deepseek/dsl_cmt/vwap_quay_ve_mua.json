@@ -1,0 +1,56 @@
+{
+ "ten": "vwap_quay_ve_mua",
+ "ho": "quay_ve_trung_binh",
+ "chieu": 1,
+ "giu": 5,
+ "co_che": "Khi giá nằm sâu dưới VWAP với biến động thấp (ADX < 25) và độ lệch chuẩn lớn (zscore < -2 hoặc khoảng cách > 2 ATR), thị trường đang ở trạng thái quá bán tạm thời trong xu hướng đi ngang. Nhà đầu tư kỳ vọng lực mua sẽ xuất hiện để đẩy giá hồi quy về mức trung bình giao dịch (VWAP) do các lệnh chờ mua được kích hoạt.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "vwap"
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "do_lech",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "atr",
+    "n": 14
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 25
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">=",
+   "phai": {
+    "chi_bao": "vwap"
+   }
+  }
+ ]
+}

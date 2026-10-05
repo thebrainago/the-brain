@@ -1,0 +1,51 @@
+{
+ "ten": "bollinger_ep_bop_xu_huong_mua",
+ "ho": "quay_ve_trung_binh",
+ "chieu": 1,
+ "giu": 2,
+ "co_che": "Khi gia tiep can day duoi Bollinger trong khi EMA 100 dang doc len, cho thay luc ban bi qua tai trong mot xu huong tang gia chu dao. Day la co hoi mua o vung gia tri thap nhat cua bien dong ngan han de loi nhuan tu su hoi quy ve trung binh va tiep dien da nang.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "phan_vi",
+    "cua": {
+     "chi_bao": "bollinger",
+     "n": 20
+    }
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 0.05
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "cot": "close",
+    "n": 100
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "ema",
+    "cot": "close",
+    "n": 100,
+    "tre": 1
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "phan_vi",
+    "cua": {
+     "chi_bao": "bollinger",
+     "n": 20
+    }
+   },
+   "phep": ">=",
+   "phai": {
+    "hang": 0.5
+   }
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "ten": "cci_qua_ban_roi_len_mua",
+ "ho": "quay_ve_trung_binh",
+ "chieu": 1,
+ "giu": 2,
+ "co_che": "Khi CCI vượt lên trên -100 trong bối cảnh ADX > 20, thị trường xác nhận xu hướng tăng đang mạnh mẽ và lực cầu đã quay trở lại sau giai đoạn quá bán, tạo điều kiện an toàn để mua vào theo đà.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "cci",
+    "n": 20
+   },
+   "phep": ">",
+   "phai": {
+    "hang": -100
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 20
+   }
+  }
+ ]
+}

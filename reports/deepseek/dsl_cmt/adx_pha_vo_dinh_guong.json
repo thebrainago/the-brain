@@ -1,0 +1,35 @@
+{
+ "ten": "adx_pha_vo_dinh_guong",
+ "co_che": "Xu huong manh duoc xac nhan bang ADX cao ket hop voi viec gia pha vo dinh moi, cho thay luc mua dang thang va co kha nang tiep tuc tang.",
+ "ho": "pha_vo",
+ "chieu": -1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "thap_nhat_cua_cac",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "n": 55
+   }
+  }
+ ],
+ "ra": []
+}

@@ -1,0 +1,31 @@
+{
+ "ten": "supertrend_dao_chieu_mua",
+ "ho": "xu_huong",
+ "chieu": 1,
+ "giu": 5,
+ "co_che": "Khi gia dong cua cat len tren duong Supertrend, day la tin hieu manh ve su chuyen doi xu huong tu giam sang tang, cho phep mua vao khi luc mua bat dau chiem uu the.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "supertrend"
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "supertrend"
+   }
+  }
+ ]
+}
