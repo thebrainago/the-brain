@@ -73,4 +73,32 @@ CLAUDE.md ≈ 7,4k token (~1,7% chi phí đọc mỗi gọi ở ngữ cảnh hi�
 
 - Mức tiết kiệm sau thay đổi: chạy `b token` ở phiên mới sau vài ngày, so với bảng mục 1. (Ước tính −33% từ cửa sổ nén là **mô hình**, không phải số đo; phần hạ effort chỉ là giả định.)
 - Phiên nhà chưa có số đo: `b token` ở nhà rồi báo bản tóm tắt.
-- Subagent: tài liệu chính thức khuyên dùng cho việc đọc nặng (ngữ cảnh riêng nhỏ, chỉ trả kết luận) và với ngữ cảnh 440k thì rẻ hơn rõ rệt; nhưng quy tắc phiên hiện tại không cho tự sinh subagent — cần chủ dự án đồng ý.
+- Subagent: tài liệu chính thức khuyên dùng cho việc đọc nặng (ngữ cảnh riêng nhỏ, chỉ trả kết luận) và với ngữ cảnh 440k thì rẻ hơn rõ rệt; nhưng quy tắc phiên hiện tại không cho tự sinh subagent — cần chủ dự án đồng ý. **Cập nhật 05/10:** chủ dự án đã duyệt từ 02/10 (CLAUDE.md) cho việc đọc nặng / tìm rộng / log dài; phần phân công đầy đủ ở mục 8.
+
+## 8. Giao việc cho LLM rẻ hay tự làm (chủ dự án hỏi 05/10/2026)
+
+> Câu hỏi: việc nào giao LLM để nhanh và đỡ token; so "mình làm từ đầu" với "LLM làm, mình chấm rồi bắt nó sửa hoặc mình tự sửa" xem cách nào rẻ và hiệu quả hơn.
+> Đây là **suy luận từ mô hình chi phí ở mục 2 + số đo trong `SO_SANH_LLM.md`**, chưa phải số đo trên chính các việc này; phép thử đo nằm ở 8.4.
+
+**8.1 Nguyên tắc.** Chỉ giao khi có **máy chấm tự động** (mã, test, phép phá mã), khối lượng lớn hơn nhiều so với tờ giao việc, và việc không cần ngữ cảnh của phiên.
+Chấm bằng mã: không chấm bằng mắt mình (đọc tốn ngữ cảnh và bị mang theo ở mọi gọi sau) và không để LLM tự chấm. Bằng chứng trong repo (`CLAUDE.md`): một lần LLM điền `co_che` cho 48 khai báo, bộ thẩm định bác 41.
+Sửa tối đa **2 vòng** rồi trả về mình (cùng kiểu với `config/qwen.json`: sai 2 lần liên tiếp thì đổi model dự phòng đúng một lần, hỏng tiếp thì đóng vòng `LOI`); vòng sửa vô hạn là cách đốt token nhanh nhất (mục 3, cầu chì thư).
+
+**8.2 Ba cách làm, tính theo mô hình mục 2** (R = số gọi còn lại trong cửa sổ; chữ mình viết ra ≈ 7 + 0,1R mỗi token, chữ mình đọc thêm ≈ 2 + 0,1R):
+
+| Cách | Mình phải trả | Đáng khi |
+|---|---|---|
+| A. Mình viết từ đầu | toàn bộ chữ viết ra + thinking | việc nhỏ, việc khó, thiết kế, việc cần ngữ cảnh phiên |
+| B. LLM rẻ nháp, máy chấm, LLM tự sửa (tối đa 2 vòng), mình đọc 1 dòng kết quả | tờ giao việc (vài trăm token) + 1 dòng kết quả; chữ của LLM rẻ không vào ngữ cảnh của mình | việc khối lượng lớn, lặp lại, có máy chấm |
+| C. LLM rẻ nháp, mình đọc kỹ rồi sửa tay | tờ giao + đọc cả bản nháp + sửa tay | chỉ khi bản nháp gần đúng; lệch hướng thì trả hai lần (đọc rồi viết lại) |
+
+Kết luận: **B cho việc lớn có máy chấm, A cho việc nhỏ / khó / thiết kế, C hiếm khi đáng.** Đọc rẻ hơn viết (khoảng một nửa theo mô hình), nên C thắng A khi bản nháp gần đúng; tỉ lệ "gần đúng" với mã tinh vi của repo này **chưa ai đo** — đó là lý do có 8.4.
+
+**8.3 Phân công.**
+- **Giao** (có máy chấm): (1) điền thẻ phương pháp hàng loạt từ hồ sơ bot / `.set` / mã MQL5 — máy kiểm đúng khuôn, tham số có thật trong `.set`, khớp hành vi lệnh thật (`ho_so_bot`, `ho_so_set`); nhãn nguồn `tho`, không bao giờ xác nhận / niêm phong; (2) khám phá rộng trên đoạn khám phá (`b nc tho`); (3) viết test / tài liệu theo mẫu khi bộ chấm (test chạy + phép phá mã) do mình đặt trước; (4) đọc log dài, tìm rộng trong kho = subagent `haiku` (chủ dự án duyệt 02/10), chỉ trả kết luận.
+- **Giữ ở Claude:** thiết kế; kế hoạch đóng băng và ngưỡng; bộ phép phá mã (phần khó nhất của máy chấm, không giao được); đọc kết quả và quyết định xác nhận / niêm phong; báo cáo cho chủ dự án; việc nhỏ (tờ giao việc đắt hơn việc).
+- **Đã nằm trong mã, không tốn LLM:** chạy giai đoạn 2 (~3 giờ), hiệu chuẩn tester, `b nc tu-lai`.
+
+**8.4 Phép thử đo (CHƯA chạy; làm sau giai đoạn 2).** 3 loại việc × 2 cách (A mình / B LLM rẻ + máy chấm): (1) 6 thẻ phương pháp từ hồ sơ bot đã có (cần `nhan/the_phuong_phap.py` có trước); (2) test cho một module nhỏ chưa có test; (3) tóm tắt một log dài. Đo: token và số gọi của mình (`b token`), điểm máy chấm, số vòng sửa, lỗi lọt qua phép phá mã. Ngưỡng chốt TRƯỚC khi chạy (đề xuất, đổi được trước lần chạy đầu): nhận B cho một loại việc khi điểm máy chấm không thấp hơn A **và** token của mình giảm ≥ 30%.
+
+**8.5 Còn thiếu.** (a) Sandbox cloud chưa gọi được DeepSeek: host `api.ai-box.vn` bị chặn, chưa có `AIBOX_API_KEY`. Chủ dự án thêm host ở Network access → Custom và khóa vào biến môi trường (không dán vào chat), chỉ phiên MỚI thấy. Trước đó chỉ giao được subagent; máy nhà bật thì `b nc tho` / `q` chạy ngay. (b) Chưa có giá AI Box nên chưa tính được số tiền tiết kiệm, chỉ so tương đối. (c) `SO_SANH_LLM.md` đo 8 việc nhỏ (điểm 0,906 vs 0,854, chênh < 0,1 là nhiễu; độ trễ trung vị 3,1 s vs 15,9 s), **chưa đo** lập trình / nghiên cứu dài: không suy ra model rẻ làm được việc khó.
