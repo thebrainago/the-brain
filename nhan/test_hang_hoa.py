@@ -33,3 +33,17 @@ def test_tai_loi_ro_va_luu():
     try: H.tai("vang", get=lambda u: "<html>blocked</html>" + " " * 60, thu_muc=d)
     except RuntimeError: pass
     else: assert False
+
+def test_tai_yahoo_ngay_va_khu_trung():
+    import json, tempfile
+    from pathlib import Path
+    ts = [1700000000 + 86400 * k for k in range(10)] + [1700000000 + 86400 * 9]      # ngay cuoi lap
+    q = {k: [1.0 + i for i in range(11)] for k in ("open", "high", "low", "close", "volume")}
+    q["close"][3] = None                                                              # bar thieu gia dong cua bi bo
+    j = json.dumps({"chart": {"result": [{"timestamp": ts, "indicators": {"quote": [q]}}]}})
+    d = Path(tempfile.mkdtemp()); H.tai_yahoo("vang", thu_muc=d, get=lambda u: j if "period1=0" in u else "sai")
+    r = H.doc("vang", d)
+    assert len(r) == 9 and r.index.is_monotonic_increasing
+    try: H.tai_yahoo("vang", thu_muc=d, get=lambda u: "khong phai json")
+    except RuntimeError as e: assert "yahoo" in str(e).lower()
+    else: assert False

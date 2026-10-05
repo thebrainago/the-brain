@@ -54,6 +54,43 @@ def tai(ten: str, nguon: str = "stooq", ma: str | None = None, thu_muc: Path = T
     return f
 
 
+YAHOO = "https://query1.finance.yahoo.com/v8/finance/chart/%s?period1=0&period2=%d&interval=1d"
+YAHOO_MA = {"dau_wti": "CL=F", "khi_tu_nhien": "NG=F", "vang": "GC=F", "bac": "SI=F", "dong": "HG=F", "ngo": "ZC=F", "lua_mi": "ZW=F",
+            "dau_tuong": "ZS=F", "ca_phe": "KC=F", "duong": "SB=F", "bong": "CT=F", "dau_nhien_lieu": "HO=F", "dau_brent": "BZ=F"}
+
+
+def tai_yahoo(ten: str, thu_muc: Path = THU_MUC, get=None, ma: str | None = None) -> Path:
+    """Gia NGAY day du (period1=0: `range=max` bi Yahoo gop thanh THANG - bay da gap 05/10) tu Yahoo chart API. Can User-Agent. Loi / 429 -> RuntimeError."""
+    import json
+    import time
+    if get is None:
+        import requests
+
+        def get(u):
+            for lan in range(4):
+                r = requests.get(u, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+                if r.status_code == 429:
+                    time.sleep(5 * (lan + 1)); continue
+                r.raise_for_status()
+                return r.text
+            raise RuntimeError("Yahoo 429 lien tuc")
+    ma = ma or YAHOO_MA[ten]
+    url = YAHOO % (ma, int(time.time()))
+    try:
+        j = json.loads(get(url))["chart"]["result"][0]
+    except Exception as e:                      # noqa: BLE001
+        raise RuntimeError("khong tai duoc %s tu query1.finance.yahoo.com: %s" % (ten, e)) from e
+    q = j["indicators"]["quote"][0]
+    df = pd.DataFrame({k: q[k] for k in ("open", "high", "low", "close", "volume")},
+                      index=pd.to_datetime(j["timestamp"], unit="s").normalize())
+    df.index.name = "date"
+    df = df[~df.index.duplicated(keep="last")].dropna(subset=["close"]).sort_index()
+    thu_muc.mkdir(parents=True, exist_ok=True)
+    f = thu_muc / ("%s.csv.gz" % ten)
+    df.to_csv(f, compression="gzip", float_format="%.6g")
+    return f
+
+
 def doc(ten: str, thu_muc: Path = THU_MUC) -> pd.DataFrame:
     return pd.read_csv(Path(thu_muc) / ("%s.csv.gz" % ten), index_col="date", parse_dates=True)
 
