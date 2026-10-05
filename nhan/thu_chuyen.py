@@ -530,6 +530,134 @@ def ghi_json(duong_dan: str, obj) -> None:
     os.replace(tam, duong_dan)
 
 
+def _trung_vi(xs):
+    xs = [x for x in xs if x is not None and math.isfinite(x)]
+    return float(np.median(xs)) if xs else None
+
+
+def doc_giai_doan_1(thu_muc: str) -> list:
+    """Doc cac tep `p1_*.json` trong `thu_muc` (sap theo ten)."""
+    ra = []
+    for ten in sorted(os.listdir(thu_muc)):
+        if ten.startswith("p1_") and ten.endswith(".json"):
+            with open(os.path.join(thu_muc, ten), encoding="utf-8") as f:
+                ra.append(json.load(f))
+    return ra
+
+
+#: ten cac bien the dung lam moc: B0 chep nguyen; B1 = chi theo ti le bien do cua khung bot (I1 thuan, khong san, giu so tang);
+#: S0 = mac dinh cua dich_tham_so (A_chart, buoc theo bien do, tam I6, san 3 C; tp w=0,5 khong co trong luoi nen lay gan nhat w=0)
+TEN_B0 = "B0_chep"
+TEN_B1 = ten_bien_the("A_chart", 0.0, "giu", 0.0)
+TEN_S0 = ten_bien_the("A_chart", 0.0, "I6", DT.SAN_CHI_PHI)
+THU_TU_DON_GIAN = {"A_chart": 0, "A_ref": 1, "R_H": 2, "sigma": 3}
+
+
+def tong_hop_giai_doan_1(ket_qua: list, bo_qua_kich_ban=("Z0",), ty_le_do_duoc_toi_thieu: float = 0.8, hoa: float = 0.02) -> dict:
+    """Gop ket qua giai doan 1 (list dict cua `giai_doan_1`): hoi tiec trung vi cua tung bien the tren cac cap (kich ban x phong cach),
+    anh huong bien cua tung yeu to, chon quy tac mac dinh theo NGUONG['chon_quy_tac_mac_dinh'] va kiem bang bo-mot-kich-ban-ra.
+    Hoi tiec cua mot cap = trung vi tren cac cap duong quan sat; cap KHONG DO DUOC (buoc hay tp duoi nguong phan giai cua the gioi dich o
+    PHAN LON lan quan sat) khong co hoi tiec nhung duoc dem; bien the chi duoc xet lam mac dinh khi do duoc >= `ty_le_do_duoc_toi_thieu`
+    so cap."""
+    cap = {}                                   # (kich_ban, kieu) -> {ten bien the -> {hoi_tiec, do_duoc, buoc, tp, tang}}
+    thong_tin = {}
+    for r in ket_qua:
+        k = (r["kich_ban"], r["kieu"])
+        thong_tin[k] = {"loai": r["loai"], "dap_an_nguon": r["dap_an_nguon"], "dap_an_dich": r["dap_an_dich"], "k_ky_vong": r["k_ky_vong"]}
+        theo_ten: dict = {}
+        for h in r["hang"]:
+            theo_ten.setdefault(h["ten"], []).append(h)
+        d = {}
+        for ten, hs in theo_ten.items():
+            ap = [h for h in hs if h["ap_duoc"]]
+            do_duoc = [h for h in ap if not h["duoi_phan_giai"]]
+            n = len(hs)
+            d[ten] = {"hoi_tiec": _trung_vi([h["hoi_tiec"] for h in do_duoc]) if len(do_duoc) * 2 > n else None,
+                      "hoi_tiec_tho": _trung_vi([h["hoi_tiec"] for h in ap]),
+                      "ty_le_duoi_phan_giai": (len(ap) - len(do_duoc)) / n if n else None, "ap_duoc": len(ap) / n if n else 0.0,
+                      "buoc": _trung_vi([h["buoc"] for h in ap]), "tp": _trung_vi([h["tp"] for h in ap]), "tang": _trung_vi([h["tang"] for h in ap]),
+                      "quy_mo": hs[0]["quy_mo"], "w": hs[0]["w"], "tam": hs[0]["tam"], "san": hs[0]["san"]}
+        cap[k] = d
+    xet = [k for k in cap if k[0] not in bo_qua_kich_ban]
+    ten_bt = sorted({t for d in cap.values() for t in d})
+    bang = []
+    for t in ten_bt:
+        hts = [cap[k][t]["hoi_tiec"] for k in xet if t in cap[k]]
+        do = [x for x in hts if x is not None]
+        ref = next((cap[k][t] for k in xet if t in cap[k]), None) or next((cap[k][t] for k in cap if t in cap[k]), {})
+        bang.append({"ten": t, "quy_mo": ref.get("quy_mo"), "w": ref.get("w"), "tam": ref.get("tam"), "san": ref.get("san"),
+                     "hoi_tiec_trung_vi": _trung_vi(do), "hoi_tiec_trung_binh": float(np.mean(do)) if do else None,
+                     "hoi_tiec_tho_trung_vi": _trung_vi([cap[k][t]["hoi_tiec_tho"] for k in xet if t in cap[k]]),
+                     "hoi_tiec_xau_nhat": max(do) if do else None, "so_cap_do_duoc": len(do), "so_cap": len(hts),
+                     "du_dieu_kien": bool(hts) and len(do) / len(hts) >= ty_le_do_duoc_toi_thieu})
+    # anh huong bien cua tung yeu to: trung vi (tren cac bien the con lai va cac cap) cua hoi tiec
+    bien = {}
+    for yt in ("quy_mo", "w", "tam", "san"):
+        muc = sorted({str(b[yt]) for b in bang if b[yt] is not None})
+        out = {}
+        for m in muc:
+            xs = []
+            for k in xet:
+                for t, v in cap[k].items():
+                    if v[yt] is not None and str(v[yt]) == m:
+                        xs.append(v["hoi_tiec"])
+            out[m] = {"hoi_tiec_trung_vi": _trung_vi(xs), "so_do_duoc": len([x for x in xs if x is not None]), "so_o": len(xs)}
+        bien[yt] = out
+
+    def chon(cac_cap):
+        """Bien the dat tieu chi mac dinh tren tap `cac_cap`."""
+        ung = []
+        for t in ten_bt:
+            if t == TEN_B0:
+                continue
+            hts = [cap[k][t]["hoi_tiec"] for k in cac_cap if t in cap[k]]
+            do = [x for x in hts if x is not None]
+            if not hts or len(do) / len(hts) < ty_le_do_duoc_toi_thieu:
+                continue
+            ref = next(cap[k][t] for k in cac_cap if t in cap[k])
+            ung.append((float(np.median(do)), t, ref))
+        if not ung:
+            return None
+        tot = min(u[0] for u in ung)
+        gan = [u for u in ung if u[0] <= tot + hoa]
+        gan.sort(key=lambda u: (THU_TU_DON_GIAN.get(u[2]["quy_mo"], 9), u[2]["w"], 0 if u[2]["tam"] == "giu" else 1, u[2]["san"]))
+        return gan[0][1], gan[0][0]
+
+    mac_dinh = chon(xet)
+    loso = []
+    for kb in sorted({k[0] for k in xet}):
+        con_lai = [k for k in xet if k[0] != kb]
+        c = chon(con_lai)
+        giu = [k for k in xet if k[0] == kb]
+        if c is None:
+            loso.append({"kich_ban": kb, "chon": None})
+            continue
+        ten = c[0]
+        loso.append({"kich_ban": kb, "chon": ten, "hoi_tiec_khi_giu_lai": _trung_vi([cap[k][ten]["hoi_tiec"] for k in giu if ten in cap[k]]),
+                     "B0": _trung_vi([cap[k][TEN_B0]["hoi_tiec"] for k in giu if TEN_B0 in cap[k]]),
+                     "B1": _trung_vi([cap[k][TEN_B1]["hoi_tiec"] for k in giu if TEN_B1 in cap[k]]),
+                     "S0": _trung_vi([cap[k][TEN_S0]["hoi_tiec"] for k in giu if TEN_S0 in cap[k]])})
+    tung_cap = []
+    for k in sorted(cap):
+        d = cap[k]
+        do = {t: v["hoi_tiec"] for t, v in d.items() if v["hoi_tiec"] is not None}
+        tot = min(do, key=do.get) if do else None
+        tung_cap.append({"kich_ban": k[0], "kieu": k[1], **thong_tin[k],
+                         "B0": d.get(TEN_B0, {}).get("hoi_tiec"), "B1": d.get(TEN_B1, {}).get("hoi_tiec"), "S0": d.get(TEN_S0, {}).get("hoi_tiec"),
+                         "mac_dinh": d.get(mac_dinh[0], {}).get("hoi_tiec") if mac_dinh else None,
+                         "B0_tho": d.get(TEN_B0, {}).get("hoi_tiec_tho"), "B1_tho": d.get(TEN_B1, {}).get("hoi_tiec_tho"),
+                         "S0_tho": d.get(TEN_S0, {}).get("hoi_tiec_tho"),
+                         "mac_dinh_tho": d.get(mac_dinh[0], {}).get("hoi_tiec_tho") if mac_dinh else None,
+                         "tot_nhat": tot, "hoi_tiec_tot_nhat": do.get(tot) if tot else None})
+    theo_loai = {}
+    for loai in sorted({t["loai"] for t in tung_cap if t["kich_ban"] not in bo_qua_kich_ban}):
+        hs = [t for t in tung_cap if t["loai"] == loai and t["kich_ban"] not in bo_qua_kich_ban]
+        theo_loai[loai] = {c: _trung_vi([t[c] for t in hs]) for c in ("B0", "B1", "S0", "mac_dinh", "B0_tho", "B1_tho", "S0_tho", "mac_dinh_tho")}
+        theo_loai[loai]["so_cap"] = len(hs)
+    return {"mac_dinh": {"ten": mac_dinh[0], "hoi_tiec_trung_vi": mac_dinh[1]} if mac_dinh else None, "loso": loso, "bien_the": bang,
+            "anh_huong_bien": bien, "theo_loai": theo_loai, "tung_cap": tung_cap}
+
+
 def chay_giai_doan_1(thu_muc: str, ten_kich_ban=None, ten_kieu=("phang", "geo"), so_duong: int = SO_DUONG_DAP_AN, so_nam: float = SO_NAM_DUONG,
                      so_obs: int = 3, luong: int | None = None, log=print) -> None:
     """Chay giai doan 1, ghi tung (kich ban, phong cach) ra `thu_muc/p1_<kich ban>_<kieu>.json` va dap an ra `thu_muc/dapan_*.json`.
