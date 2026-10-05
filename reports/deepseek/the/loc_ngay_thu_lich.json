@@ -1,0 +1,62 @@
+{
+ "ma": "loc_ngay_thu_lich",
+ "loai": "LOC",
+ "ten": "Loc ngay / thu / lich",
+ "mo_ta": "Tranh sang thu Hai, toi thu Sau, dau - cuoi thang, cuoi quy, nua cuoi thang 12, ngay le My (loi khuyen tac gia NuTi); CCBSN co lich.",
+ "tham_so": [
+  {
+   "ten": "bat_loc_lich",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "ngay_tranh",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    0,
+    365,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khoang lang (nhieu ngay khong co lenh vao) lap lai theo lich."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong loc ngay.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_ngay_thu_lich"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Gia thuyet kiem duoc bang so lieu dai: cac ngay 'tranh' co that su lam luoi lo? (xem LOI_KHUYEN_VAN_HANH).",
+ "rui_ro": "Mau nho theo ngay: de cai gai.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
+}

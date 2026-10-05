@@ -1,0 +1,79 @@
+{
+ "ma": "keo_sl_hoa_von_khi_co_lai",
+ "loai": "BAO_VE",
+ "ten": "Keo SL ve hoa von khi da co lai",
+ "mo_ta": "Khi chuoi co >= N lenh va tong lai > X (USD / gia), keo SL ve hoa von cong them delta (HandATMX 3 lenh / 5 USD / 1 gia; NewYear 2.1 lot 0,08 va lai 2 gia; SemiHFT, Bigmouse 2 gia).",
+ "tham_so": [
+  {
+   "ten": "so_lenh_toi_thieu",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    2,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "nguong_lai",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    1,
+    100,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "delta",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    0.1,
+    10,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chuoi dong boi [sl] voi tien thu duong NHO (xap xi delta) thay vi TP; xuat hien sau chuoi dai."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co SL.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "keo_sl_hoa_von_khi_co_lai"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi lap lai o 5 bot: xay mot lan, thu cho moi he luoi.",
+ "rui_ro": "Quet sat ngay sau khi dat, mat lai tiem nang (tac gia noi).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
+}

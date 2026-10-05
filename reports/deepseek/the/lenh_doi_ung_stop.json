@@ -1,0 +1,66 @@
+{
+ "ma": "lenh_doi_ung_stop",
+ "loai": "TANG",
+ "ten": "Lenh stop doi ung (hedging bang lenh cho)",
+ "mo_ta": "Sau lenh dau, dat lenh STOP nguoc chieu cach gia mot khoang (350-360 point); khi stop khop thi dat tiep stop nguoc lai: tao thang bac hedging (Bigmouse).",
+ "tham_so": [
+  {
+   "ten": "khoang_cach_buy_sell",
+   "lop": "KC_BUOC",
+   "don_vi": "point",
+   "mien": [
+    100,
+    1000,
+    50
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "he_so_lot_tong",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.0,
+    2.0,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lenh mo bang BUY STOP / SELL STOP (cot Type trong bang Orders); chieu luan phien; khoang cach gia hang so."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chi mo lenh thi truong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "lenh_doi_ung_stop"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Chi dang thu neu do that cho thay lai; ghep voi lot_tong_gap_doi moi co nghia.",
+ "rui_ro": "36 lenh la 'tai khoan khong con' (loi tac gia trong video).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
+}

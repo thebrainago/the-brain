@@ -1,0 +1,66 @@
+{
+ "ma": "thoat_rsi_va_tb_duong",
+ "loai": "THOAT",
+ "ten": "Thoat khi trung binh duong va RSI vuot nguong",
+ "mo_ta": "Dong ca chuoi khi gia trung binh cua chuoi dang lai va RSI(4) M5 > 50 (GoldHunter), khong dat TP pip / USD.",
+ "tham_so": [
+  {
+   "ten": "nguong_rsi",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    40,
+    60,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "ky_thuat_rsi",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    2,
+    14,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Tien thu khi dong khong co cum co dinh; lenh dong luc gia da qua gia trung binh."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co chi bao.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "thoat_rsi_va_tb_duong"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Thay TP co dinh bang 'thoat khi hoi nhe + RSI het qua ban': thu tren luoi AUDCAD, do chuoi ngan lai bao nhieu.",
+ "rui_ro": "Chi bao ve lai tre: thoat muon, nha lai.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
+}
