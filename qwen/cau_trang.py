@@ -131,6 +131,7 @@ LENH_B: dict[tuple, Hinh] = {
     ("nc", "tho"): Hinh(co={"--vong": _so(1, 200), "--cong-cu": _so(1, 200), "--sau": None}),
     ("nc", "cc"): Hinh([(_cong_cu, True), (_json_obj, False)]),
     ("nc", "hoi"): Hinh([(_van_ban(10, 800), True), (_thuc01, False)]),     # cau hoi cua CHU DU AN vao so tay (nguon 'nguoi')
+    ("xuat-gia",): Hinh([(_van_ban(3, 120), True), (_khung, False)], {"--tu": _so(1990, 2030)}),   # chu du an duyet 05/10: gia vai cap -> du_lieu_gia/ + sao luu ngoai git
     ("hepha", "do"): Hinh(),
     ("hepha", "duc"): Hinh([(_so(1, 5000), False)]),
     ("hepha", "nap"): Hinh([(_so(1, 5000), False)], {"--that": None}),

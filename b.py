@@ -685,6 +685,12 @@ def c_slot(a):
     return 0
 
 
+def c_xuat_gia(a):
+    """b xuat-gia MA1,MA2 [KHUNG] [--thu-muc DIR] [--tu NAM]: xuat gia vai cap ra csv.gz (nhan/xuat_gia.py), co SAO LUU ngoai git."""
+    from nhan import xuat_gia
+    xuat_gia.main_cli(list(a))
+
+
 def c_may(a):
     """MAY NHA: quet phan cung + do co gian + bao cao bang loi thuong (nhan/may_nha.py).
 
@@ -1458,6 +1464,7 @@ LENH = {
     "github": c_github, "gh": c_github,
     "slot": c_slot,
     "may": c_may,
+    "xuat-gia": c_xuat_gia,
     "link": c_link,
     "dien-dan": c_dien_dan,
     "ho-so": c_ho_so, "hs": c_ho_so,
