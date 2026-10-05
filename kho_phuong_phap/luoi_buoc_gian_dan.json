@@ -1,0 +1,73 @@
+{
+ "ma": "luoi_buoc_gian_dan",
+ "loai": "TANG",
+ "ten": "Buoc gian dan theo he so",
+ "mo_ta": "Buoc thu k = buoc * he_so^(k-1) co tran; he_so > 1 = song lau hon khi xu huong, < 1 = day dan.",
+ "tham_so": [
+  {
+   "ten": "buoc",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    50,
+    400,
+    25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "he_so_buoc",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.0,
+    2.0,
+    0.25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "tran_tang",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    4,
+    20,
+    2
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khoang cach lien tiep tang theo ti le co dinh (1,05-1,2) cho den khi chay vao tran."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "he_so_buoc",
+   "buoc_tran"
+  ],
+  "ghi_chu": "luoi.ThamSo.he_so_buoc, buoc_tran.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "luoi_buoc_gian_dan"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Black Dragon (x1,2) va CCBSN (InpDistanceMulti) deu dung: thu cung gia tri tren AUDCAD.",
+ "rui_ro": "Gian qua nhanh: luoi that thua nhieu khi gia hoi khong du xa de chot.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

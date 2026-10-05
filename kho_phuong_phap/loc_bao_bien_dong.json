@@ -1,0 +1,50 @@
+{
+ "ma": "loc_bao_bien_dong",
+ "loai": "LOC",
+ "ten": "Loc bao bien dong",
+ "mo_ta": "Bao = di 40-60 gia trong 5-10 phut khong hoi (NuTi): chi tha bot SAU bao (gia da di 30-40 gia).",
+ "tham_so": [
+  {
+   "ten": "ngay thau",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "khoang lech",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chi thay duoc khi co bar gia M1-M5."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_bao_bien_dong"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Dac trung bien dong ngan (range 5-10 phut / ATR) lam bo loc vao / them lenh; xem DD co giam khong.",
+ "rui_ro": "Dinh nghia 'bao' theo cam tinh.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

@@ -1,0 +1,49 @@
+{
+ "ma": "lot_phang",
+ "loai": "LOT",
+ "ten": "Lot phang",
+ "mo_ta": "Moi lenh trong chuoi cung lot.",
+ "tham_so": [
+  {
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.5,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lot lenh k = lot lenh 1 voi moi k."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "kieu_lot",
+   "lot"
+  ],
+  "ghi_chu": "luoi.ThamSo.kieu_lot = phang.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "lot_phang"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi an toan nhat; moc so sanh cho moi khoi lot khac.",
+ "rui_ro": "Phang khong cuu duoc chuoi dai (nhung DD tang cham).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

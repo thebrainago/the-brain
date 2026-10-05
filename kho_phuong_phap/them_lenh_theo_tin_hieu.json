@@ -1,0 +1,50 @@
+{
+ "ma": "them_lenh_theo_tin_hieu",
+ "loai": "TANG",
+ "ten": "Moi lan co tin hieu la them mot lenh",
+ "mo_ta": "Khong co khoang cach co dinh: moi tin hieu vao (vd RSI < 15 tren M5) them mot lenh cung chieu, ke ca dang am (GoldHunter: hang tram lenh).",
+ "tham_so": [
+  {
+   "ten": "tin hieu",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "tran lenh (khong noi)",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khoang cach gia giua lenh them khong deu, co the dao chieu (them o gia tot hon hoac xau hon)."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py them theo buoc gia, khong theo tin hieu.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "them_lenh_theo_tin_hieu"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Neu tin hieu tot hon luoi co dinh thi lenh them nen nam o 'day nhip' chu khong o moi buoc; so tung thang.",
+ "rui_ro": "Tin hieu bam day nhieu lan: don lot o gia xau.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

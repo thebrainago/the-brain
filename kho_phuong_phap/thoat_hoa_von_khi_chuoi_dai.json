@@ -1,0 +1,50 @@
+{
+ "ma": "thoat_hoa_von_khi_chuoi_dai",
+ "loai": "BAO_VE",
+ "ten": "Chap nhan hoa von khi chuoi dai",
+ "mo_ta": "Khi chuoi co N lenh (Bigmouse: 3), bo TP duong va chi dat SL o hoa von: chuoi thoat o 0 thay vi cho lai.",
+ "tham_so": [
+  {
+   "ten": "so lenh kich hoat",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "kich hoat hoa von",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chuoi dai dong boi [sl] voi tien thu ~ 0 (am nho = phi), khong phai TP duong."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chi thoat o TP duong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "thoat_hoa_von_khi_chuoi_dai"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Luat 'cat DD': thu bien N nho / lon tren luoi - doi lai het lai cua chuoi dai.",
+ "rui_ro": "Cat het co hoi cua chinh chuoi nguy hiem nhat.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

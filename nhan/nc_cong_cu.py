@@ -519,6 +519,22 @@ CONG_CU: list[dict] = [
          "ghi_bao_cao": {"type": "boolean", "description": "true (mac dinh) = ghi reports/ho_so/<ten>.md (+ _set.md, so_sanh_*.md)"}},
         ["lenh"], _ho_so_bot),
 ]
+
+
+def _phuong_phap(ten):
+    def f(vong_id=None, **kw):
+        from nhan import nc_phuong_phap as NPP
+        return {c[0]: c for c in NPP.CONG_CU}[ten][4](vong_id=vong_id, **kw)
+    return f
+
+
+def _them_phuong_phap():
+    from nhan import nc_phuong_phap as NPP
+    for ten, mo_ta, tt, bb, _ham in NPP.CONG_CU:
+        CONG_CU.append(_cc(ten, mo_ta, tt, bb, _phuong_phap(ten)))
+
+
+_them_phuong_phap()
 THEO_TEN = {c["ten"]: c for c in CONG_CU}
 #: Cong cu chi GHI so tay (khong do gi) - van duoc goi khi het ngan sach chu ky.
 CONG_CU_GHI = ("ghi_gia_thuyet", "ghi_hieu_biet", "ghi_cau_hoi", "xem_so_tay")

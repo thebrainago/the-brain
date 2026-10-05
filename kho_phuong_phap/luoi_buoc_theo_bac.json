@@ -1,0 +1,70 @@
+{
+ "ma": "luoi_buoc_theo_bac",
+ "loai": "TANG",
+ "ten": "Buoc theo bac (doi buoc o moc so lenh)",
+ "mo_ta": "Buoc doi theo so lenh: bac 1 cho lenh 2-9, bac 2 tu lenh 10, bac 3 ... (CCBSN Distance1-4, NuTi 'quang').",
+ "tham_so": [
+  {
+   "ten": "buoc_bac1",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    50,
+    400,
+    25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "buoc_bac_sau",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    50,
+    800,
+    50
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "so_lenh_moi_bac",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    6,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khoang cach gia giua cac lenh doi gia tri o nhung chi so lenh co dinh (vd lenh 10, 20, 30)."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chi co mot buoc + he so; chua co bang buoc theo tang.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "luoi_buoc_theo_bac"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi DE THU DAU: CCBSN la bot song sot duy nhat va dung 4 nac buoc; them vao luoi.py (+C +EA) la viec ro rang.",
+ "rui_ro": "Nhieu tham so = de khop nhieu: phai quet cao nguyen, khong cai gai.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

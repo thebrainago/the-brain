@@ -1,0 +1,42 @@
+{
+ "ma": "vao_tay_roi_dca",
+ "loai": "VAO",
+ "ten": "Nguoi vao lenh dau, bot lo phan sau",
+ "mo_ta": "Lenh dau do nguoi dat (hoac che do manual / magic 0); bot chi lo them lenh, TP, trailing.",
+ "tham_so": [
+  {
+   "ten": "magic 0 = tay",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khong quan sat duoc tu lich su lenh: lenh dau khong theo quy luat nao; chi thay phan bot lam (luoi, TP)."
+ ],
+ "engine": {
+  "trang_thai": "ngoai",
+  "co": [],
+  "ghi_chu": "Can mot nguoi hoac mot luat vao; thay bang khoi VAO co dieu kien de mo phong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_tay_roi_dca"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Thay 'nguoi' bang mot luat vao do duoc (vd 3 khung SSL cua HandDCA, hoac luat tim bang tim_quy_luat) roi thu phan quan ly cua bot nay.",
+ "rui_ro": "Bot khong co phan vao: ket qua phu thuoc hoan toan nguoi dung, khong the tu chay.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

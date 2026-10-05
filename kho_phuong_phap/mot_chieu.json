@@ -1,0 +1,44 @@
+{
+ "ma": "mot_chieu",
+ "loai": "TANG",
+ "ten": "Chi mot chieu (chi Buy hoac chi Sell)",
+ "mo_ta": "Chi danh mot chieu (thuong chi Buy vang theo y 'vang dai han tang'); xu ly xong chuoi roi moi sang chuoi khac.",
+ "tham_so": [
+  {
+   "ten": "chieu: mua | ban",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Tu 95% lenh tro len cung mot chieu."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "che_do"
+  ],
+  "ghi_chu": "luoi.ThamSo.che_do = mua | ban.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "mot_chieu"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Chi nen thu tren tai san co xu huong dai han ro (vang, chi so); don bay thap hon vi khong co chuoi doi khang.",
+ "rui_ro": "Xu huong nguoc dai = ket ca chuoi (khong co ve phia doi dien).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

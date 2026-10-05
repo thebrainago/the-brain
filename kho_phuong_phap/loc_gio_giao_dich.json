@@ -1,0 +1,58 @@
+{
+ "ma": "loc_gio_giao_dich",
+ "loai": "LOC",
+ "ten": "Loc gio giao dich",
+ "mo_ta": "Chi cho mo lenh trong cac khung gio (BlackDragon, Bigmouse 'gio mo cua', NewYear 2.1 time trade 1-3, SemiHFT theo ngay, CCBSN lich ngay / gio).",
+ "tham_so": [
+  {
+   "ten": "gio bat dau",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "gio ket thuc",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "time trade 1-3 (NewYear 2.1)",
+   "lop": "CHUA_PHAN_LOP",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Phan bo gio vao lenh dau khong deu: co gio khong bao gio co lenh."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong loc gio.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_gio_giao_dich"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Thu loai gio xau (qua dem / tin) cho luoi: dac trung gio da co trong DSL, do bang quet_luoi sau khi them.",
+ "rui_ro": "Quet gio la cach de cai gai: can kiem tren doan xac nhan.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

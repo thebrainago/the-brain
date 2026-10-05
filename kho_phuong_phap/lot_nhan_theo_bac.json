@@ -1,0 +1,70 @@
+{
+ "ma": "lot_nhan_theo_bac",
+ "loai": "LOT",
+ "ten": "He so lot doi theo bac",
+ "mo_ta": "He so nhan lot thay doi o cac moc so lenh (CCBSN: lenh 10/20/30/40/50 -> he so moi 1,2/1,1/1,05/1,06/1,03; NuTi quang 2 lot lon tu lenh 10).",
+ "tham_so": [
+  {
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.5,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "he_so_lot",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.1,
+    2.0,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "bac_bat_dau_nhan",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    8,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Ti le lot lien tiep r_k = lot_k / lot_(k-1) doi gia tri o chi so lenh co dinh."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chi co mot he so; chua co bang moc -> he so.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "lot_nhan_theo_bac"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi song sot: them vao luoi.py (kieu_lot = bac, bang moc -> he so) roi quet.",
+ "rui_ro": "Lot cuoi chuoi lon: DD phinh o day.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

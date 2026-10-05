@@ -1,0 +1,60 @@
+{
+ "ma": "luoi_gian_cach_deu",
+ "loai": "TANG",
+ "ten": "Luoi gian cach deu",
+ "mo_ta": "Moi lenh them cach lenh truoc dung mot buoc co dinh (pip hoac gia).",
+ "tham_so": [
+  {
+   "ten": "buoc",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    50,
+    400,
+    25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "tran_tang",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    4,
+    20,
+    2
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khoang cach gia giua cac lenh lien tiep gan nhu hang so (CV nho)."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "buoc"
+  ],
+  "ghi_chu": "luoi.ThamSo.buoc.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "luoi_gian_cach_deu"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi nen; so sanh voi buoc gian dan va buoc theo bac tren cung ma.",
+ "rui_ro": "Buoc nho + lot tang = lenh day, am sau rat nhanh.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}
