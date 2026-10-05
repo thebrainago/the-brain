@@ -3,14 +3,14 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-05 10:35 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 44669db · sach · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-05 11:20 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 78eca3d · 3 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
+  · 78eca3d cloud: hang doi 12 don quet luoi CPU (20-31) cho may nha
   · 44669db cloud: don 31-quet-luoi-EURNZD-M15
   · 0890749 cloud: don 30-quet-luoi-GBPAUD-M15
   · 7a1de69 cloud: don 29-quet-luoi-EURAUD-M15
   · e970a7d cloud: don 28-quet-luoi-USDCAD-M15
-  · f873de6 cloud: don 27-quet-luoi-NZDUSD-M15
 - Thu: phien nay la `cloud`, chua doc 20 · 24h qua: cloud->nha 2, nha->cloud 4
   · moi nhat cloud->nha (gio may gui 2026-10-05T08:04:15): Phien cloud MOI id=session_01XDvcQqRLu2itnyVWxmPCW
 - May:

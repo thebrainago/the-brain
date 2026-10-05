@@ -1,0 +1,9 @@
+Dưới đây là mô tả hai bot bằng lời thường, dựa đúng trên hồ sơ bạn đưa.
+
+**Bot CanCuBo**
+
+Khi vào lệnh, bot chỉ đánh một chiều (mua), giá đi ngược thì thêm lệnh theo lưới cách nhau gần như đều khoảng 100,7 pip, mỗi nến 15 phút chỉ thêm tối đa một lệnh, và khối lượng lệnh sau nhân dần theo hệ số 1,05. Khi lỗ, bot cứ giữ và nhồi thêm theo lưới đó, chưa thấy dấu hiệu cắt lỗ từng lệnh. Khi thoát, mỗi lệnh có chốt lời riêng cách giá vào đúng 100 pip, còn cả chuỗi thì được bảo vệ bằng dừng lỗ kéo theo, khoảng cách thoát không bao giờ dưới 15 pip và nằm trên các mốc cách nhau 2 pip. Điểm chắc là: chỉ một chiều, bước lưới đều, hệ số nhân lot, TP từng lệnh và trailing stop cả chuỗi — đều hiện rõ trong lệnh thật. Điểm còn mù là: điều kiện vào lệnh đầu, cách chọn điểm vào, và việc có kéo dừng lỗ về hòa vốn hay không — hồ sơ chưa đủ để kết luận.
+
+**Bot VamGe**
+
+Khi vào lệnh, bot đánh cả hai chiều nhưng gần như không bao giờ mở cùng lúc, và giá đi ngược thì thêm lệnh theo lưới có bước đổi theo bậc: bậc 2–4 khoảng 10,3 pip, từ bậc 5 trở đi khoảng 15,4 pip. Khi lỗ, bot nhồi thêm lệnh, hệ số nhân lot cũng đổi theo bậc (bậc 2–10 nhân 1, bậc 11–20 nhân 1,2, bậc 21–25 nhân 1,1), và khi chuỗi ngược chiều đã đủ dài (khoảng 16 lệnh trở lên) thì mở một lệnh đối ứng có gắn nhãn riêng, lot bằng lot lệnh chủ mới nhất. Khi thoát, bot chốt cả chuỗi dựa trên giá trung bình, với khoảng cách tối thiểu tùy độ dài chuỗi (chuỗi 1 lệnh khoảng 10,1 pip; chuỗi 2–4 lệnh khoảng 20 pip; chuỗi 5–9 lệnh khoảng 20,1 pip). Điểm chắc là: bước lưới đổi theo bậc, chỉ thêm lệnh khi mở nến mới, lệnh đối ứng sau N lệnh, hệ số lot theo bậc, và TP cả chuỗi tính từ giá trung bình. Điểm còn mù là: điều kiện vào lệnh đầu, việc hai chiều có chạy độc lập thật không, có kéo dừng lỗ về hòa vốn hay trailing stop cả chuỗi hay không, và có nhận hòa vốn khi chuỗi dài hay không — hồ sơ chưa đủ để kết luận.
