@@ -29,3 +29,10 @@ Khuyen nghi: **muc 300k** la du cho giai doan nay (viec that: ~100 d / 35 the; c
 ## Cach dieu khien (khong tach phien)
 `python3 -m nhan.giao_llm` (hoac import `goi(tang, prompt)`): goi thang AI Box tu phien nay (khoa do proxy gan, khong in khoa),
 ghi so chi, chay may cham, tra ket qua. Claude goi - cham - doc mau - nhan; khong can phien phu.
+
+## CAP NHAT 05/10 (so sanh 6 model tren cung 35 the, phien DeepSeek do, `reports/deepseek/so_sanh/_SO_SANH.md`)
+Dat may cham / tien 35 the: qwen3.8-flash 35/35 · 73 d · 9,8s | ds/deepseek-flash 34/35 · 264 d · 3,1s (nhanh nhat) | qwen3.8-max 33/35 · 851 d |
+ds/deepseek-v4-pro 30/35 · 1.079 d (THAP hon flash) | kimi-k2.7-code 13/35 (22 loi 502, khong tat duoc suy luan) | glm-5.3 0/35 (bat buoc suy luan).
+=> **Sua bang chung (thay cho bang tren):** T1 qwen3.8-flash lam hang loat; T2 ds/deepseek-flash la vong sua cuoi + viec can nhanh;
+**khong leo len v4-pro / max cho viec dien mau** (dat 4-12 lan, khong tot hon); T3 kimi, glm: KHONG dung goi hang loat qua AI Box.
+Viec that su kho van do Claude lam. Loi hay gap cua model manh: thieu don_vi o NGUONG_CHI_BAO (them 1 dong vao prompt). 1 lan chay / 35 mau: chenh 1-2 the chua co nghia.
