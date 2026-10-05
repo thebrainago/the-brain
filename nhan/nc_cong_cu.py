@@ -245,6 +245,16 @@ CONG_CU: list[dict] = [
         ["ma", "khung", "spec"],
         lambda ma, khung, spec, quan_tri=None, gt_id=None, vong_id=None, **_:
         TN.danh_gia(ma, khung, spec, quan_tri, "kham_pha", gt_id, vong_id)),
+    _cc("thu_lo_co_che",
+        "Chay NHIEU he DSL (moi tep .json trong reports/deepseek/<thu_muc>/) tren CUNG MOT ma+khung, "
+        "doan KHAM PHA, trong MOT lan goi: du lieu nap mot lan, ghi so tay tung he nhu thu_co_che. "
+        "Dung thay cho hang tram don le (toi uu may nha). Tra ve bang gon: ten, trang_thai, so lenh, "
+        "ky vong bps, CAGR duoi tran. `tu`/`den` cat lat theo ten tep (thu tu chu cai). `loc` = chuoi con trong ten tep.",
+        {"ma": _MA, "khung": _KHUNG, "thu_muc": {"type": "string", "description": "dsl_cmt | dsl_hh"},
+         "loc": {"type": "string"}, "ten": {"type": "array", "items": {"type": "string"}, "description": "ten tep (khong .json) cu the"}, "tu": {"type": "integer"}, "den": {"type": "integer"},
+         "gt_id": _GT}, ["ma", "khung", "thu_muc"],
+        lambda ma, khung, thu_muc, loc="", ten=None, tu=0, den=10_000, gt_id=None, vong_id=None, **_:
+        _thu_lo(ma, khung, thu_muc, loc, int(tu), int(den), gt_id, vong_id, ten)),
     _cc("quet_tham_so",
         "Quet luoi tham so cua mot he tren kham pha va doc HINH DANG: CAO_NGUYEN (nhieu o lan "
         "can cung CO LAI - dang tin) hay CAI_GAI (mot o dep le loi - cuc dai ngau nhien). `luoi` = "
@@ -592,6 +602,30 @@ def goi(ten: str, dau_vao: dict | None = None, vong_id: int | None = None) -> di
     if isinstance(kq, dict):
         kq.setdefault("_giay", round(time.time() - t0, 2))
     return kq
+
+
+def _thu_lo(ma, khung, thu_muc, loc, tu, den, gt_id, vong_id, ten=None) -> dict:
+    if thu_muc not in ("dsl_cmt", "dsl_hh"):
+        raise ValueError("thu_muc chi duoc dsl_cmt | dsl_hh")
+    d = Path(__file__).resolve().parent.parent / "reports" / "deepseek" / thu_muc
+    tep = [f for f in sorted(d.glob("*.json")) if f.name != "meta.json" and loc in f.name and (not ten or f.stem in ten)][tu:den]
+    bang = []
+    for f in tep:
+        try:
+            spec = json.loads(f.read_text(encoding="utf-8"))
+            spec.setdefault("ra", [])
+            kq = TN.danh_gia(ma, khung, spec, None, "kham_pha", gt_id, vong_id)
+        except Exception as e:  # mot he hong khong duoc giet ca lo
+            kq = {"trang_thai": "CHUA_DO_DUOC", "ly_do": "%s: %s" % (type(e).__name__, str(e)[:120])}
+        bang.append({"he": f.stem, "trang_thai": kq.get("trang_thai"),
+                     "so_lenh": (kq.get("lenh") or {}).get("so_lenh"),
+                     "ky_vong_bps": (kq.get("lenh") or {}).get("ky_vong_bps"),
+                     "cagr_duoi_tran_pct": (kq.get("tien") or {}).get("cagr_duoi_tran_pct"),
+                     "ly_do": (kq.get("ly_do") or "")[:100] if kq.get("trang_thai") != "DAT" else ""})
+    dem = {}
+    for b in bang:
+        dem[b["trang_thai"]] = dem.get(b["trang_thai"], 0) + 1
+    return {"trang_thai": "XONG", "ma": ma, "khung": khung, "so_he": len(bang), "dem": dem, "bang": bang}
 
 
 def main(argv: list[str]) -> int:
