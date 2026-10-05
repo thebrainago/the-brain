@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-c3_suc_ma_dao_do_tay2_mua",
+ "muc_tieu": "thu ban nhap CMT tay 'c3_suc_ma_dao_do_tay2_mua' tren AUDCAD M15 (kham_pha)",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T15:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"c3_suc_ma_dao_do_tay2_mua\",\"ho\":\"quay_ve_trung_binh\",\"co_che\":\"CMT tay: ADX<20 (khong xu huong) + RSI(14)<30: dao dong dung o thi truong di ngang\",\"chieu\":1,\"giu\":5,\"vao\":[{\"trai\":{\"chi_bao\":\"adx\",\"n\":14},\"phep\":\"<\",\"phai\":{\"hang\":20}},{\"trai\":{\"chi_bao\":\"rsi\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":14},\"phep\":\"<\",\"phai\":{\"hang\":30}}]}}"
+ ],
+ "vi_sao": "lap cho trong CMT: SUC_MANH + DAO_DONG viet tay",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}
