@@ -79,3 +79,47 @@ def cham(nd: str, ch: dict, bc: dict):
         mod, ham = k.split(":", 1)
         return getattr(importlib.import_module(mod), ham)(nd, ch, bc)
     return None, ["kieu cham khong biet: %s" % k]
+
+
+_CAM = ("open(", ".write_text", ".write_bytes", "os.remove", "shutil", "subprocess", "os.system", "requests", "urllib", "unlink", "rmtree", "TP.ghi", "the_phuong_phap.ghi", "ghi(", "mkdir")
+
+
+def cham_test_chay(nd, ch, bc):
+    """Bai test do LLM viet: phai dich duoc, cam ghi tep / mang, >= it_nhat ham test_*, va CHAY HET DAT tren ma hien tai (chay tung ham, cach ly, cwd tam)."""
+    import json as _j
+    import os
+    import subprocess
+    import sys
+    import tempfile
+    code, loi = cham_py(nd, ch, bc)
+    if loi:
+        return None, loi
+    cam = [c for c in _CAM if c in code]
+    if cam:
+        return None, ["bai test KHONG duoc dung: %s (khong ghi tep / mang)" % ", ".join(cam)]
+    goc = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    chay = ("import json,sys,traceback\n_g={}\nexec(compile(open(sys.argv[1]).read(),'t','exec'),_g)\nr={}\n"
+            "for k,v in list(_g.items()):\n    if k.startswith('test_') and callable(v):\n        try:\n            v(); r[k]='OK'\n"
+            "        except BaseException as e:\n            r[k]='%s: %s'%(type(e).__name__,str(e)[:200])\nprint('@@'+json.dumps(r))\n")
+    with tempfile.TemporaryDirectory() as td:
+        tep = os.path.join(td, "t.py")
+        open(tep, "w", encoding="utf-8").write(code)
+        open(os.path.join(td, "run.py"), "w").write(chay)
+        try:
+            p = subprocess.run([sys.executable, os.path.join(td, "run.py"), tep], cwd=td, capture_output=True, text=True, timeout=ch.get("giay", 90),
+                               env={**os.environ, "PYTHONPATH": goc})
+        except subprocess.TimeoutExpired:
+            return None, ["bai test chay qua %d giay" % ch.get("giay", 90)]
+    m = [l for l in p.stdout.splitlines() if l.startswith("@@")]
+    if not m:
+        return None, ["khong chay duoc: " + (p.stderr.strip().splitlines() or ["?"])[-1][:300]]
+    kq = _j.loads(m[-1][2:])
+    hong = {k: v for k, v in kq.items() if v != "OK"}
+    ra = []
+    if len(kq) < ch.get("it_nhat", 5):
+        ra.append("chi co %d ham test_* (can >= %d)" % (len(kq), ch.get("it_nhat", 5)))
+    ra += ["%s HONG: %s" % (k, v) for k, v in hong.items()]
+    return {"code": code, "ket_qua": kq}, ra
+
+
+BO_CHAM["test_chay"] = cham_test_chay

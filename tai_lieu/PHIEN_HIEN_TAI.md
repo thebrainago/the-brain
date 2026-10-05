@@ -3,14 +3,14 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-05 12:44 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ b47b2f1 · 2 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-05 12:51 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 2fddc43 · 9 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
+  · 2fddc43 da_agent: he da tac tu (Claude nao + LLM re tay chan): chay DAG, may cham, sua <=2
   · b47b2f1 CMT dot 2: guong_dsl (may lat MUA->BAN, 6 test) + 12 y tuong moi do model re soan;
   · 1f5644b CMT: cmt_prior (ho chi bao, loc cum, canh bao, uu tien theo che do) + cong cu cmt_
   · 82acd90 Ho so co che CanCuBo + VamGe tu lenh that (chay duoc o cloud) + tom tat loi thuong
   · 78eca3d cloud: hang doi 12 don quet luoi CPU (20-31) cho may nha
-  · 44669db cloud: don 31-quet-luoi-EURNZD-M15
 - Thu: phien nay la `cloud`, chua doc 20 · 24h qua: cloud->nha 2, nha->cloud 3
   · moi nhat cloud->nha (gio may gui 2026-10-05T08:04:15): Phien cloud MOI id=session_01XDvcQqRLu2itnyVWxmPCW
 - May:

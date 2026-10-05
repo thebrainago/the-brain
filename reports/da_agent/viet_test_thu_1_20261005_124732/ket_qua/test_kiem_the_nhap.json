@@ -1,0 +1,33 @@
+{
+ "id": "test_kiem_the_nhap",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "test_cham_cong_tac_khong_can_don_vi_va_mien HONG: NameError: name 'KCN' is not defined"
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "test_so_o_qua_8 HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: .write_text (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "test_cham_cong_tac_khong_can_don_vi_va_mien HONG: NameError: name 'KCN' is not defined"
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 159.6
+}
