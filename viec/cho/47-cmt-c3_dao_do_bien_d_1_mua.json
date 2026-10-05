@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-c3_dao_do_bien_d_1_mua",
+ "muc_tieu": "thu ban nhap CMT 'c3_dao_do_bien_d_1_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"c3_dao_do_bien_d_1_mua\",\"ho\":\"quay_ve_trung_binh\",\"co_che\":\"Gia bi day xuong duoi dai Bollinger duoi trong khi RSI roi vao vung qua ban, nghia la nguoi ban dang hoang loan ban thao va ap luc ban da can kiet; khi bien do con duoi dai nay, xac suat gia bat lai ve trung binh dai giua la lon nen mua vao de an nhip hoi.\",\"chieu\":1,\"giu\":3,\"vao\":[{\"trai\":{\"chi_bao\":\"rsi\",\"n\":14},\"phep\":\"<\",\"phai\":{\"hang\":30}},{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\"<\",\"phai\":{\"chi_bao\":\"bollinger\",\"n\":20,\"do_lech\":2,\"cot\":\"lower\"}}],\"ra\":[{\"trai\":{\"chi_bao\":\"rsi\",\"n\":14},\"phep\":\">\",\"phai\":{\"hang\":60}}]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

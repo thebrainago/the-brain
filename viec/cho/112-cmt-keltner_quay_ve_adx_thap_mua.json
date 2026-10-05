@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-keltner_quay_ve_adx_thap_mua",
+ "muc_tieu": "thu ban nhap CMT 'keltner_quay_ve_adx_thap_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"keltner_quay_ve_adx_thap_mua\",\"ho\":\"quay_ve_trung_binh\",\"chieu\":1,\"giu\":5,\"co_che\":\"Khi ADX < 20 cho thấy thị trường không có xu hướng rõ ràng (sideways), giá thường dao động quanh đường trung bình. Việc giá đóng cửa dưới dải Keltner dưới trong bối cảnh này báo hiệu sự quá bán tạm thời và khả năng cao giá sẽ hồi quy về trung bình (mean reversion) do thiếu lực đẩy của trend.\",\"vao\":[{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\"<\",\"phai\":{\"chi_bao\":\"keltner\",\"n\":20}},{\"trai\":{\"chi_bao\":\"adx\",\"n\":14},\"phep\":\"<\",\"phai\":{\"hang\":20}}],\"ra\":[{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\">\",\"phai\":{\"chi_bao\":\"ema\",\"n\":20}}]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

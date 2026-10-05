@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-c3_lich_nen_3_mua",
+ "muc_tieu": "thu ban nhap CMT 'c3_lich_nen_3_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"c3_lich_nen_3_mua\",\"ho\":\"lich\",\"chieu\":1,\"giu\":3,\"vao\":[{\"trai\":{\"chi_bao\":\"ngay_trong_tuan\"},\"phep\":\"<=\",\"phai\":{\"hang\":2}},{\"trai\":{\"chi_bao\":\"mau_nen\"},\"phep\":\">\",\"phai\":{\"hang\":0}}],\"co_che\":\"CMT LICH + NEN (nhap, may dien)\"}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

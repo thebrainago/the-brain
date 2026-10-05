@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-sto_cheo_trong_xu_huong_mua",
+ "muc_tieu": "thu ban nhap CMT 'sto_cheo_trong_xu_huong_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"sto_cheo_trong_xu_huong_mua\",\"ho\":\"xu_huong\",\"chieu\":1,\"giu\":5,\"co_che\":\"Stochastic oversold bounce confirms short-term momentum reversal while long-term trend filter ensures alignment with institutional buying pressure.\",\"vao\":[{\"trai\":{\"chi_bao\":\"stochastic\",\"cot\":\"k\"},\"phep\":\"cheo_len\",\"phai\":{\"hang\":20}},{\"trai\":{\"chi_bao\":\"sma\",\"n\":50},\"phep\":\">\",\"phai\":{\"chi_bao\":\"sma\",\"n\":200}}]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-c3_bien_d_pha_vo_1_mua",
+ "muc_tieu": "thu ban nhap CMT 'c3_bien_d_pha_vo_1_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"c3_bien_d_pha_vo_1_mua\",\"ho\":\"pha_vo\",\"chieu\":1,\"giu\":5,\"vao\":[{\"trai\":{\"chi_bao\":\"bollinger\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":20,\"k\":2,\"cot\":\"duoi\"},\"phep\":\"<=\",\"phai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"}},{\"trai\":{\"chi_bao\":\"donchian\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"high\"},\"n\":20,\"cot\":\"tren\"},\"phep\":\">\",\"phai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"}}],\"co_che\":\"CMT BIEN_DONG + PHA_VO (nhap, may dien)\"}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

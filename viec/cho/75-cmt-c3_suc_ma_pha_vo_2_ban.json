@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-c3_suc_ma_pha_vo_2_ban",
+ "muc_tieu": "thu ban nhap CMT 'c3_suc_ma_pha_vo_2_ban' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"c3_suc_ma_pha_vo_2_ban\",\"ho\":\"pha_vo\",\"co_che\":\"Khi xu huong da duoc xac nhan boi suc manh (ADX cao) va gia dong cua pha vo duong bien tren cua kenh Donchian, dong tien lon thuong tiep tuc day gia di tiep do cac lenh mua duoc kich hoat theo breakout va nha dau tu ky thuat mua duoi theo, nen nguoi tra tien cho phoi nhiem nay la nhung nguoi mua muon bat kip song xu huong moi.\",\"chieu\":-1,\"giu\":5,\"vao\":[{\"trai\":{\"chi_bao\":\"adx\",\"n\":14},\"phep\":\">\",\"phai\":{\"hang\":25}},{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\"<\",\"phai\":{\"chi_bao\":\"donchian\",\"n\":20,\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"high\"}}}],\"ra\":[{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\">\",\"phai\":{\"chi_bao\":\"donchian\",\"n\":10,\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"low\"}}}]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-bien_dong_thap_pha_vo_mua",
+ "muc_tieu": "thu ban nhap CMT 'bien_dong_thap_pha_vo_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"bien_dong_thap_pha_vo_mua\",\"ho\":\"pha_vo\",\"chieu\":1,\"giu\":2,\"co_che\":\"Khi biến động giá (ATR) rơi xuống mức cực thấp trong lịch sử gần đây, thị trường đang ở trạng thái nén chặt và thiếu thanh khoản. Việc giá đóng cửa vượt qua đỉnh cao nhất của 10 nến trước đó ngay tại vùng nén này là tín hiệu phá vỡ giả mạo hoặc bắt đầu một đợt tăng giá mạnh do lực mua bất ngờ xuất hiện khi người bán đã kiệt sức.\",\"vao\":[{\"trai\":{\"chi_bao\":\"phan_vi\",\"cua\":{\"chi_bao\":\"atr\",\"n\":14},\"n\":100},\"phep\":\"<\",\"phai\":{\"hang\":0.2}},{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\">\",\"phai\":{\"chi_bao\":\"cao_nhat_cua_cac\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"high\"},\"n\":10}}],\"ra\":[]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

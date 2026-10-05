@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-c3_xu_huo_suc_ma_1_ban",
+ "muc_tieu": "thu ban nhap CMT 'c3_xu_huo_suc_ma_1_ban' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"c3_xu_huo_suc_ma_1_ban\",\"ho\":\"xu_huong\",\"chieu\":-1,\"giu\":8,\"co_che\":\"Gia nam tren duong xu huong dai han cho thay dong tien lon dang do vao va duy tri xu huong tang, dong thoi chi bao suc manh xu huong xac nhan luc keo hien tai du manh de tiep dien, nen nguoi giao dich tra tien de vao lenh mua som truoc khi xu huong mo rong.\",\"vao\":[{\"trai\":{\"chi_bao\":\"ema\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":50},\"phep\":\"<\",\"phai\":{\"chi_bao\":\"ema\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":200}},{\"trai\":{\"chi_bao\":\"adx\",\"n\":14},\"phep\":\">\",\"phai\":{\"hang\":25}}],\"ra\":[]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

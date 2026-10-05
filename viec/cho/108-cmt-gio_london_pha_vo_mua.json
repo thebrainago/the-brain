@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-gio_london_pha_vo_mua",
+ "muc_tieu": "thu ban nhap CMT 'gio_london_pha_vo_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"gio_london_pha_vo_mua\",\"ho\":\"pha_vo\",\"co_che\":\"Dong tien lon tu phien London bat dau chay vao khi gia vuot qua dinh 12 bar truoc do trong khung gio buoi sang, tao ra luc mua manh va xu huong tang gia ro ret.\",\"chieu\":1,\"giu\":5,\"vao\":[{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\">=\",\"phai\":{\"hang\":7}},{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\"<=\",\"phai\":{\"hang\":10}},{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\">\",\"phai\":{\"chi_bao\":\"cao_nhat_cua_cac\",\"n\":12}}]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

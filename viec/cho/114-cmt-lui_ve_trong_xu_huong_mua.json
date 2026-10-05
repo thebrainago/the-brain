@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-lui_ve_trong_xu_huong_mua",
+ "muc_tieu": "thu ban nhap CMT 'lui_ve_trong_xu_huong_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"lui_ve_trong_xu_huong_ema_rsi\",\"ho\":\"xu_huong\",\"chieu\":1,\"giu\":5,\"co_che\":\"Khi gia nam tren EMA dai han cho thay xu huong tang truong manh, viec RSI roi duoi 40 tao ra mot nhieu mua qua ban tam thoi trong khi cac nha dau tu co chuc nang van giu vi the, do do ho san sang tra tien de mua lai hang hoa o gia tot hon so voi gia tri thuc te cua dong tien dang chay vao thi truong.\",\"vao\":[{\"trai\":{\"chi_bao\":\"ema\",\"n\":9},\"phep\":\">\",\"phai\":{\"chi_bao\":\"ema\",\"n\":21}},{\"trai\":{\"chi_bao\":\"rsi\",\"n\":14},\"phep\":\"<\",\"phai\":{\"hang\":40}}],\"ra\":[]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

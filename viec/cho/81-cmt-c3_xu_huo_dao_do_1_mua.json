@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-c3_xu_huo_dao_do_1_mua",
+ "muc_tieu": "thu ban nhap CMT 'c3_xu_huo_dao_do_1_mua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"ten\":\"c3_xu_huo_dao_do_1_mua\",\"ho\":\"xu_huong\",\"co_che\":\"Khi xu huong tang da duoc xac nhan boi gia nam tren duong trung binh dai han, nhung dong luong ngan han bi nen lai tam thoi lam RSI ve vung qua ban, do la luc dong tien lon dang tich luy va se day gia tiep di theo xu huong, nen nguoi mua som huong loi khi gia quay lai dung xu huong chinh.\",\"chieu\":1,\"giu\":5,\"vao\":[{\"trai\":{\"chi_bao\":\"ema\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":50},\"phep\":\">\",\"phai\":{\"chi_bao\":\"sma\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":200}},{\"trai\":{\"chi_bao\":\"rsi\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":14},\"phep\":\"<\",\"phai\":{\"hang\":40}}],\"ra\":[{\"trai\":{\"chi_bao\":\"rsi\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":14},\"phep\":\">\",\"phai\":{\"hang\":70}}]}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}
