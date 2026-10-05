@@ -57,8 +57,9 @@ Khi co them `.set` cua cung bot (CLMCA co 5): dua tat ca vao MOT lan chay (`them
 engine CUNG ThamSo tren CUNG cua so (>= 14 ngay, trong doan kham_pha) roi tra KHOP / LECH + canh bao chan doan (ro ket, ty le SELL, do sau theo thoi gian, he so quy doi
 tien bao gia, swap...); khong an phep thu (doan 'hieu_chuan', so_phep_thu 0); nua tester duoc nho theo (tham so + cua so + model + von) nen doi engine khong phai chay lai tester:
 `python b.py nc cc hieu_chuan_luoi '{"ma":"AUDCAD","khung":"M15","tu":"2018-01-03","den":"<den>","tham_so":<TS>,"model":0,"von":10000,"han_giay":<giay>}'`
-Dau ra dai ~200 dong: **ghi ra tep UTF-8 `reports/hieu_chuan_tay_<bo>_<den>.json` (bash: `> tep`; PowerShell: `| Out-File -Encoding utf8 tep`) va `git add` tep do** - bo chay don
-khong-LLM chi mang ve 25 dong cuoi; cloud doc tep qua `git pull`.
+Dau ra dai ~200 dong NHUNG KHONG can lam gi them (05/10): cong cu TU GHI ket qua day du ra `reports/hieu_chuan/<ma>_<khung>_<tu>_<den>_<van tay>_e<phien ban engine>.json`
+(<= 38.000 ky tu, tra duong dan o khoa `bao_cao`); bo chay don khong-LLM mang tep do ve cung don (`viec/xong/<id>.json`, tep moi trong `reports/`), cloud doc qua `git pull`.
+Chay tay trong phien nha: van co the `> tep` nhu cu, nhung tep do khong con la duong duy nhat.
 Bo tham so (cloud da kiem tren `luoi.ThamSo` + `tham_so_ea_tu_luoi`, deu hop le):
   a `{"buoc":60,"tp":40,"tran_tang":10,"lot":0.01}` luoi phang | b = a + `"he_so_buoc":1.2` | c = b + `"kieu_lot":"cong","he_so_lot":0.25,"lot":0.04`
   d `{"buoc":21,"tp":9,"tran_tang":9,"kieu_lot":"cong","he_so_lot":0.25,"lot":0.04,"he_so_buoc":1.2,"tia_lenh":true,"bien_cap":5}` (= tn5) | e = d + `"chot_tien":3`

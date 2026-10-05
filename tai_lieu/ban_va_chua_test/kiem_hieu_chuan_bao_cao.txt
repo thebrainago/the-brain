@@ -1,0 +1,260 @@
+# -*- coding: utf-8 -*-
+"""Kiem tra doc lap cho ban va `nhan/hieu_chuan_luoi.py`: ket qua DAY DU ra tep `reports/hieu_chuan/<khoa>.json` - script assert thuong,
+KHONG phai pytest, luu dang van ban (.txt) de pytest khong thu.
+
+Cach chay (tu THU MUC GOC repo):  cp tai_lieu/ban_va_chua_test/kiem_hieu_chuan_bao_cao.txt /tmp/kiem_hieu_chuan_bao_cao.py && python3 /tmp/kiem_hieu_chuan_bao_cao.py
+Dung lai HA TANG gia cua `test_hieu_chuan_luoi.py` (class `MayGia` = tester gia ghi bao cao MT5 day du, bar tong hop `DF`) bang cach NHAP
+module do - KHONG goi ham `test_*` nao. 25 phep kiem (tep ton tai / JSON doc duoc / <= 38.000 ky tu / khong chua khoa `bao_cao` / ten tep
+theo ma-khung-cua so-van tay tester-phien ban engine / lan hai dung cache va cung duong dan / chi_engine co `tham_so` + `engine` / cat
+`theo_ky` xen ke / qua dai thi tra None / thu muc khong ghi duoc thi khong nem loi va ket qua van day du / ten tep an toan / duong
+dan tuong doi / bo chay don `qwen.cau_git.tep_moi` mang ve nguyen tep) + 10 phep thu DOT BIEN (sua co y mot dong trong ban sao cua module,
+moi dot bien PHAI lam it nhat mot phep kiem hong). Ma thoat 0 = tat ca dat va moi dot bien bi bat.
+Khi che do quyen cho chay pytest: chuyen thanh cac test muc E cua `test_hieu_chuan_luoi.py` va xoa ban .txt nay.
+"""
+import dataclasses
+import json
+import os
+import shutil
+import sys
+import tempfile
+import time
+import types
+from pathlib import Path
+
+REPO = os.environ.get("REPO", os.getcwd())
+os.chdir(REPO)
+sys.path.insert(0, REPO)
+
+import test_hieu_chuan_luoi as T            # noqa: E402  (chi lay MayGia, DF, TS_DICT...)
+
+HC, E, ST, NDL, LU = T.HC, T.E, T.ST, T.NDL, T.LU
+SRC = os.path.join(REPO, "nhan", "hieu_chuan_luoi.py")
+TMP = Path(tempfile.mkdtemp(prefix="val_bc_"))
+
+
+def dat_moi_truong(sub):
+    tmp = TMP / sub
+    tmp.mkdir(parents=True, exist_ok=True)
+    ST.DB = tmp / "nc.db"
+    dd = {"t_dau": str(T.DF.index[0]), "t_xac_nhan": str(T.DF.index[int(0.6 * T.N)]), "t_niem_phong": str(T.DF.index[int(0.8 * T.N)]),
+          "t_cuoi": str(T.DF.index[-1]), "n0": T.N, "van_tay": "x", "luc": "2026-10-04 00:00:00"}
+    so_cai = tmp / "so_cai"
+    so_cai.mkdir(exist_ok=True)
+    (so_cai / "doan.json").write_text(json.dumps({"AUDCAD|M15": dd, "US500|M15": dd}), encoding="utf-8")
+    os.environ["NC_SO_CAI"] = str(so_cai)
+    cfg = tmp / "ea_tho.json"
+    cfg.write_text(json.dumps({"tu_nap": False}), encoding="utf-8")
+    os.environ["EA_THO_CFG"] = str(cfg)
+    df = T.DF.copy()
+    df.attrs["doan_dong_bang"] = dict(dd)
+    NDL.nap = lambda ma, khung="H4": df
+    return tmp
+
+
+def chay(Hm, **kw):
+    a = dict(ma="AUDCAD", khung="M15", tu=T.CUA_SO[0], den=T.CUA_SO[1], tham_so=dict(T.TS_DICT), model=0, von=10000)
+    a.update(kw)
+    return Hm.hieu_chuan(**a)
+
+
+def tep_doc(p):
+    return json.loads(Path(p).read_text(encoding="utf-8"))
+
+
+def load_variant(name, repl):
+    s = open(SRC, encoding="utf-8").read()
+    for a, b in repl:
+        assert s.count(a) >= 1, "mau khong co trong ma: %r" % a
+        s = s.replace(a, b)
+    mod = types.ModuleType("nhan." + name)
+    mod.__file__ = SRC
+    mod.__package__ = "nhan"
+    exec(compile(s, SRC, "exec"), mod.__dict__)
+    return mod
+
+
+def chay_kiem(Hm, ten):
+    """Tra ve (so_dat, danh sach hong). Moi phep kiem bat ngoai le thanh hong, khong dung giua chung."""
+    hong, dat = [], 0
+    tmp = dat_moi_truong("run_" + ten)
+    Hm.THU_MUC = tmp / "hc"
+    m = T.MayGia(tmp)
+    E.CHAY_TESTER = m
+
+    def kt(ten_kiem, f):
+        nonlocal dat
+        try:
+            ok = f()
+        except Exception as ex:           # noqa: BLE001
+            ok = False
+            ten_kiem += " <ngoai le %s: %s>" % (type(ex).__name__, str(ex)[:80])
+        if ok:
+            dat += 1
+        else:
+            hong.append(ten_kiem)
+
+    # -------- 1) chay day du (KHOP) -> bao_cao + noi dung
+    r = chay(Hm)
+    kt("01 chay day du ra KHOP/DAT", lambda: r.get("trang_thai") == "DAT" and r.get("ket_luan") == "KHOP")
+    bc = r.get("bao_cao")
+    kt("02 co khoa bao_cao", lambda: isinstance(bc, str) and bc.endswith(".json"))
+    nd = tep_doc(bc) if isinstance(bc, str) and os.path.exists(bc) else None
+    kt("03 tep ton tai va doc duoc JSON", lambda: isinstance(nd, dict))
+    kt("04 tep <= 38000 ky tu", lambda: os.path.getsize(bc) <= 38_000 * 4 and len(Path(bc).read_text(encoding="utf-8")) <= 38_000)
+    kt("05 tep khong chua khoa bao_cao", lambda: "bao_cao" not in nd)
+    kt("06 tep co du khoa chan doan", lambda: all(k in nd for k in ("trang_thai", "ket_luan", "tham_so", "theo_ky", "ky_lech_dau_tien", "nhan", "engine", "tester", "so_khoa", "tn_id")))
+    kt("07 tep khop dau ra (tham_so, so_khoa, tn_id)", lambda: nd["tham_so"] == r["tham_so"] and nd["so_khoa"] == r["so_khoa"] and nd["tn_id"] == r["tn_id"])
+    kt("08 ten tep co ma khung cua so van tay phien ban engine",
+       lambda: Path(bc).name.startswith("AUDCAD_M15_2024-01-01_2024-02-06_") and Path(bc).name.endswith("_e%s.json" % LU.PHIEN_BAN_ENGINE))
+
+    # -------- 2) lan hai cung dau vao (cache tester + cung so) -> van co bao_cao, cung duong dan, noi dung giong
+    n_lenh_truoc = m.lan
+    r2 = chay(Hm)
+    kt("09 lan hai dung cache tester (khong goi lai)", lambda: m.lan == n_lenh_truoc and r2.get("tu_so_tay"))
+    kt("10 lan hai co bao_cao cung duong dan", lambda: r2.get("bao_cao") == bc)
+    kt("11 lan hai noi dung tep giong lan mot (tru khong khoa)", lambda: tep_doc(bc).get("so_khoa") == r["so_khoa"] and tep_doc(bc).get("tn_id") == r["tn_id"])
+
+    # -------- 3) chi_engine chua co cache -> bao_cao, tham_so, engine
+    ts_khac = dict(T.TS_DICT, tp=7)
+    r3 = chay(Hm, tham_so=ts_khac, chi_engine=True)
+    kt("12 chi_engine CHUA_DO_DUOC va co bao_cao", lambda: r3.get("trang_thai") == "CHUA_DO_DUOC" and isinstance(r3.get("bao_cao"), str))
+    nd3 = tep_doc(r3["bao_cao"]) if isinstance(r3.get("bao_cao"), str) and os.path.exists(r3["bao_cao"]) else {}
+    kt("13 tep chi_engine co tham_so + engine + cua_so", lambda: nd3.get("tham_so", {}).get("tp") == 7 and "engine" in nd3 and "cua_so" in nd3)
+    kt("14 tep chi_engine khong chua bao_cao", lambda: "bao_cao" not in nd3)
+    kt("15 chi_engine khong goi tester va khong ghi so tay them", lambda: m.lan == n_lenh_truoc)
+
+    # -------- 4) tham so khac -> ten tep khac (khoa gom van tay tester)
+    r4 = chay(Hm, tham_so=ts_khac)
+    kt("16 tham so khac ra tep khac ten", lambda: isinstance(r4.get("bao_cao"), str) and r4["bao_cao"] != bc)
+    kt("17 tham so khac (tester chay tp=6) la LECH/AM va van co bao_cao", lambda: r4.get("trang_thai") == "AM" and r4.get("ket_luan") == "LECH")
+
+    # -------- 5) _luu_bao_cao truc tiep: cat theo_ky, qua dai -> None, loi ghi -> None, ten tep an toan, bo khoa bao_cao
+    def thu_theo_ky():
+        ra = {"trang_thai": "DAT", "theo_ky": [{"ky": "k%04d" % i, "x": "y" * 40} for i in range(2000)], "nhan": ["a"], "bao_cao": "khong_duoc_ghi"}
+        p = Hm._luu_bao_cao(ra, "thu_theo_ky")
+        if not p:
+            return False
+        s = Path(p).read_text(encoding="utf-8")
+        d = json.loads(s)
+        goc = ra["theo_ky"]
+        k = d["theo_ky"]
+        n = len(k)
+        buoc = len(goc) // n if n else 0
+        khop = n >= 4 and len(s) <= 38_000 and "bao_cao" not in d and d.get("ghi_chu_theo_ky")
+        # giu hinh dang: cac ky con lai la cac ky goc cach deu theo luy thua cua 2 tu dau
+        luy = any(k == goc[::2 ** j] for j in range(1, 12))
+        return bool(khop) and luy and ra["theo_ky"] is goc and len(goc) == 2000
+    kt("18 theo_ky qua dai: cat xen ke con hinh dang, khong sua dau vao", thu_theo_ky)
+
+    def thu_qua_dai():
+        ra = {"trang_thai": "DAT", "nhan": ["z" * 100] * 600, "theo_ky": [1, 2, 3]}
+        return Hm._luu_bao_cao(ra, "thu_qua_dai") is None
+    kt("19 qua dai khong cat duoc -> None (khong ghi, khong loi)", thu_qua_dai)
+
+    def thu_khong_ghi():
+        chan = tmp / "chan"
+        chan.write_text("x", encoding="utf-8")
+        cu = Hm.THU_MUC
+        Hm.THU_MUC = chan / "sub"
+        try:
+            ra = {"trang_thai": "DAT"}
+            return Hm._luu_bao_cao(ra, "khong_ghi") is None
+        finally:
+            Hm.THU_MUC = cu
+    kt("20 thu muc khong ghi duoc -> None, khong nem loi", thu_khong_ghi)
+
+    def thu_hieu_chuan_khi_khong_ghi_duoc():
+        chan = tmp / "chan2"
+        chan.write_text("x", encoding="utf-8")
+        cu = Hm.THU_MUC
+        Hm.THU_MUC = chan / "sub"
+        try:
+            rr = chay(Hm, tham_so=dict(T.TS_DICT, tp=8), chi_engine=True)
+            return rr.get("trang_thai") == "CHUA_DO_DUOC" and "bao_cao" not in rr and "engine" in rr
+        finally:
+            Hm.THU_MUC = cu
+    kt("21 hieu_chuan van tra ket qua day du khi khong ghi duoc tep", thu_hieu_chuan_khi_khong_ghi_duoc)
+
+    def thu_ten_an_toan():
+        p = Hm._luu_bao_cao({"trang_thai": "DAT"}, "../../etc/ban/../x y?z.json")
+        if not p:
+            return False
+        pp = Path(p).resolve()
+        thu = Path(Hm.THU_MUC).resolve()
+        return thu in pp.parents and ".." not in Path(p).name and " " not in Path(p).name
+    kt("22 ten tep an toan (khong vuot thu muc, khong ky tu la)", thu_ten_an_toan)
+
+    def thu_khoa_dai():
+        p = Hm._luu_bao_cao({"trang_thai": "DAT"}, "a" * 500)
+        return bool(p) and len(Path(p).name) <= 125 + 5
+    kt("23 khoa qua dai bi cat <= 120 ky tu", thu_khoa_dai)
+
+    def thu_duong_dan_tuong_doi():
+        cu = Hm.THU_MUC
+        Hm.THU_MUC = E.LAB / "reports" / "hieu_chuan_valtmp"
+        try:
+            p = Hm._luu_bao_cao({"trang_thai": "DAT"}, "tuong_doi")
+            return p == "reports/hieu_chuan_valtmp/tuong_doi.json"
+        finally:
+            Hm.THU_MUC = cu
+            shutil.rmtree(E.LAB / "reports" / "hieu_chuan_valtmp", ignore_errors=True)
+    kt("24 duong dan tuong doi so voi lab, dau /", thu_duong_dan_tuong_doi)
+
+    # -------- 6) bo chay don mang ve tep (qwen.cau_git.tep_moi)
+    def thu_runner():
+        from qwen import cau_git as CG
+        lab = TMP / ("lab_" + ten)
+        (lab / "reports" / "hieu_chuan").mkdir(parents=True, exist_ok=True)
+        cu = Hm.THU_MUC
+        Hm.THU_MUC = lab / "reports" / "hieu_chuan"
+        try:
+            t0 = time.time()
+            ra = {"trang_thai": "DAT", "theo_ky": [{"ky": i, "x": "y" * 30} for i in range(3000)], "nhan": ["n"]}
+            p = Hm._luu_bao_cao(ra, "runner")
+            mang = CG.tep_moi(t0, lab)
+            khoa = [k for k in mang if k.endswith("runner.json")]
+            return bool(p) and len(khoa) == 1 and len(mang[khoa[0]]) < CG.TEP_TOI_DA and json.loads(mang[khoa[0]])["trang_thai"] == "DAT"
+        finally:
+            Hm.THU_MUC = cu
+    kt("25 bo chay don mang ve nguyen tep (<= 40000, JSON con doc duoc)", thu_runner)
+    return dat, hong
+
+
+def main():
+    ok_that = True
+    dat, hong = chay_kiem(HC, "that")
+    print("=> %d dat, %d hong %s" % (dat, len(hong), hong))
+    ok_that = not hong
+    dot_bien = {
+        "luu_ca_khoa_bao_cao": [('thu = {k: v for k, v in ra.items() if k != "bao_cao"}', "thu = dict(ra)")],
+        "tran_gap_10": [("TEP_TOI_DA = 38_000 ", "TEP_TOI_DA = 380_000 ")],
+        "ten_khong_loc": [('re.sub(r"[^0-9A-Za-z_-]", "-", khoa)[:120]', "khoa[:120]")],
+        "cat_nua_dau": [("ky = ky[::2] ", "ky = ky[:len(ky) // 2 + 1] ")],
+        "bo_luu_chi_engine": [("        bc0 = _luu_bao_cao(r0, _khoa_bao_cao(ma, khung, cs, vt_t))\n        if bc0:\n            r0[\"bao_cao\"] = bc0\n", "")],
+        "khoa_thieu_van_tay": [('return "%s_%s_%s_%s_%s_e%s" % (ma, khung, cs["tu"], cs["den"], vt_t[:8], LU.PHIEN_BAN_ENGINE)', 'return "%s_%s_%s_%s_e%s" % (ma, khung, cs["tu"], cs["den"], LU.PHIEN_BAN_ENGINE)')],
+        "nuot_loi_it": [("    except (OSError, TypeError, ValueError):\n        return None\n\n\ndef _khoa_bao_cao", "    except ZeroDivisionError:\n        return None\n\n\ndef _khoa_bao_cao")],
+        "bo_luu_cache": [("        bc1 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t))\n        if bc1:\n            ra[\"bao_cao\"] = bc1\n        return ra\n", "        return ra\n")],
+        "qua_dai_van_ghi": [("        if len(s) > TEP_TOI_DA:\n            return None\n        THU_MUC.mkdir", "        THU_MUC.mkdir")],
+        "duong_dan_tuyet_doi": [("            return p.relative_to(E.LAB).as_posix()", "            return str(p)")],
+    }
+    bai = 0
+    for ten, rp in dot_bien.items():
+        try:
+            Hm = load_variant("hc_dotbien_" + ten, rp)
+        except AssertionError as ex:
+            print("DOT BIEN %-24s KHONG AP DUOC (%s)" % (ten, ex))
+            bai += 1
+            continue
+        try:
+            _, h = chay_kiem(Hm, ten)
+        except Exception as ex:         # noqa: BLE001
+            h = ["<ngoai le %s>" % type(ex).__name__]
+        print("DOT BIEN %-24s %s %s" % (ten, "BI BAT" if h else "LOT LUOI", [x[:26] for x in h[:4]]))
+        bai += 0 if h else 1
+    print("dot bien lot luoi:", bai)
+    shutil.rmtree(TMP, ignore_errors=True)
+    sys.exit(0 if (ok_that and not bai) else 1)
+
+
+if __name__ == "__main__":
+    main()

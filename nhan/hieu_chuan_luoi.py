@@ -28,11 +28,18 @@ Loi ha tang (tester khong ra bao cao, log hong, cua so bao cao lech, du lieu lab
 
 Dung (nc): b nc cc hieu_chuan_luoi '{"ma":"AUDCAD","khung":"M15","tu":"2018-01-02","den":"2019-12-31","tham_so":{...}}'
 `chi_engine=true`: khong goi tester; co nua tester trong cache thi van so (sau khi sua engine), khong co thi chi in so engine.
+
+KET QUA DAY DU RA TEP: bo chay don o may nha (`qwen/cau_git.chay_don`) chi mang ve 25 dong cuoi cua dau ra + cac bao cao nho (md / json,
+<= 40.000 ky tu) moi ra trong `reports/`; mot ket qua hieu chuan dai ~200 dong nen cloud chi doc duoc phan duoi. Moi lan chay vi vay ghi
+`reports/hieu_chuan/<ma>_<khung>_<tu>_<den>_<van tay tester>_e<phien ban engine>.json` (day du, <= 38.000 ky tu) va tra duong dan o khoa
+`bao_cao` (cuoi dau ra) - day la duong DUY NHAT dua ket qua dai toi cloud qua `b cau`.
 """
 from __future__ import annotations
 
 import dataclasses
+import json
 import math
+import re
 import time
 from datetime import date, datetime
 
@@ -54,6 +61,7 @@ DOAN = "hieu_chuan"                    # doan rieng: dem_phep_thu / phep_thu_the
 PHIEN_BAN = "1"                        # doi khi doi CACH DOC tester / cach tinh nua tester -> mat cache nua tester (co y)
 EA_MAC_DINH = E.LAB / "ea_LuoiDayDu.mq5"
 THU_MUC = E.LAB / "reports" / "hieu_chuan"
+TEP_TOI_DA = 38_000                    # bo chay don chi mang ve tep .md/.json <= 40.000 ky tu (qwen/cau_git.TEP_TOI_DA)
 MODEL_MAC_DINH = 0                     # Model 0 = moi tick sinh tu M1; Model 1 noi doi khi TP < 2 lan bien do M1 (CLAUDE.md)
 NGAY_TOI_THIEU = 14
 LENH_TOI_THIEU = 5
@@ -350,6 +358,37 @@ def _luu_bang_lenh(b: pd.DataFrame, khoa: str) -> str | None:
         return None
 
 
+def _luu_bao_cao(ra: dict, khoa: str) -> str | None:
+    """Ket qua DAY DU ra `reports/hieu_chuan/<khoa>.json` (<= `TEP_TOI_DA` ky tu; qua dai thi thu gon `theo_ky`). Tra duong dan tuong doi
+    so voi lab, hoac None khi khong ghi duoc (loi ghi -> khong sao: so tay + dau ra van du)."""
+    try:
+        thu = {k: v for k, v in ra.items() if k != "bao_cao"}
+        s = json.dumps(thu, ensure_ascii=False, indent=1, default=str)
+        if len(s) > TEP_TOI_DA:
+            s = json.dumps(thu, ensure_ascii=False, separators=(",", ":"), default=str)
+        ky = thu.get("theo_ky")
+        while len(s) > TEP_TOI_DA and isinstance(ky, list) and len(ky) > 4:
+            ky = ky[::2]                                      # bo bot ky xen ke: giu hinh dang, bo bot do dai
+            thu["theo_ky"] = ky
+            thu["ghi_chu_theo_ky"] = "da bo bot ky (xen ke) vi tep qua dai; so day du o dong so tay"
+            s = json.dumps(thu, ensure_ascii=False, separators=(",", ":"), default=str)
+        if len(s) > TEP_TOI_DA:
+            return None
+        THU_MUC.mkdir(parents=True, exist_ok=True)
+        p = THU_MUC / ("%s.json" % re.sub(r"[^0-9A-Za-z_-]", "-", khoa)[:120])
+        p.write_text(s, encoding="utf-8")
+        try:
+            return p.relative_to(E.LAB).as_posix()
+        except ValueError:
+            return str(p)
+    except (OSError, TypeError, ValueError):
+        return None
+
+
+def _khoa_bao_cao(ma: str, khung: str, cs: dict, vt_t: str) -> str:
+    return "%s_%s_%s_%s_%s_e%s" % (ma, khung, cs["tu"], cs["den"], vt_t[:8], LU.PHIEN_BAN_ENGINE)
+
+
 def tester_trong_cache(vt_t: str) -> dict | None:
     """Dong so tay cua nua tester cung van tay (EA, cua so, tham so, model, von, don bay) -> {'id','tester'} | None."""
     cu = ST.da_thu(vt_t)
@@ -571,10 +610,15 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
     if "loi" in e0:
         return {"trang_thai": "CHUA_DO_DUOC", "ha_tang": True, "ly_do": "engine khong chay duoc: %s" % e0["loi"]}
     if chi_engine and cache is None:
-        return {"trang_thai": "CHUA_DO_DUOC", "ma": ma, "khung": khung, "cua_so": cs, "engine": _gon_engine(e0),
-                "ly_do": "chua co nua tester trong so tay cho dung cua so + tham so + model + von nay: chi in so engine "
-                         "(khong ghi so tay). Chay lai khong co chi_engine de goi tester (hoac cho don tester xong)",
-                "nhan": ["he so quy doi dung: %.4f (%s)" % (f0, "do nguoi goi dat" if von_quy_doi else "mac dinh cua quy cach")]}
+        r0 = {"trang_thai": "CHUA_DO_DUOC", "ma": ma, "khung": khung, "cua_so": cs, "tham_so": dataclasses.asdict(ts),
+              "engine": _gon_engine(e0),
+              "ly_do": "chua co nua tester trong so tay cho dung cua so + tham so + model + von nay: chi in so engine "
+                       "(khong ghi so tay). Chay lai khong co chi_engine de goi tester (hoac cho don tester xong)",
+              "nhan": ["he so quy doi dung: %.4f (%s)" % (f0, "do nguoi goi dat" if von_quy_doi else "mac dinh cua quy cach")]}
+        bc0 = _luu_bao_cao(r0, _khoa_bao_cao(ma, khung, cs, vt_t))
+        if bc0:
+            r0["bao_cao"] = bc0
+        return r0
     th = nua_tester(lo, d, cfg2, ts, von, vt_t, vong_id, lam_lai_tester, qc0.hop_dong)
     if th.get("trang_thai") != "DAT":
         return th
@@ -619,6 +663,9 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
     cu_so = ST.da_thu(vt_so)
     if cu_so and isinstance(cu_so.get("ket_qua"), dict) and cu_so["ket_qua"].get("so_khoa") == khoa_so:
         ra["tn_id"], ra["tu_so_tay"] = cu_so["id"], "da ghi dong so tay %s (cung so)" % cu_so["id"]
+        bc1 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t))
+        if bc1:
+            ra["bao_cao"] = bc1
         return ra
     dau_vao = {"ma": ma, "khung": khung, "cua_so": cs_so, "model": int(model), "von": von, "don_bay": int(ts.don_bay),
                "tham_so": dataclasses.asdict(ts), "ea_sha": lenh["ea_sha"], "he_so_quy_doi": round(f_dung, 4),
@@ -628,4 +675,7 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
         t["lai_nam_pct"], t["dd_pct_so_sanh"], t["thong_ke"]["so_lenh_mo"], so["ket_luan"])
     ra["tn_id"] = ST.ghi_thi_nghiem(LOAI_SO_SANH, dau_vao, ra, tt, vt_so, ma, khung, DOAN, gt_id=None, so_phep_thu=0,
                                     giay=time.time() - t_dau, vong_id=vong_id, tom_tat=tom)
+    bc2 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t))
+    if bc2:
+        ra["bao_cao"] = bc2
     return ra
