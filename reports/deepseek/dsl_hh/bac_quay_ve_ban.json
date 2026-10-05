@@ -1,0 +1,34 @@
+{
+ "ten": "bac_quay_ve_ban",
+ "ho": "quay_ve_trung_binh",
+ "chieu": -1,
+ "giu": 2,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "zscore",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 20
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 2
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 25
+   }
+  }
+ ],
+ "co_che": "zscore gia 20 < -2 VA ADX 14 < 25: bac quay ve trung binh khi khong xu huong",
+ "ra": []
+}

@@ -1,0 +1,37 @@
+{
+ "ten": "gio_chot_phien_my_mua",
+ "ho": "xu_huong",
+ "chieu": 1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "gio"
+   },
+   "phep": ">=",
+   "phai": {
+    "hang": 15
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gio"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 17
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 35
+   }
+  }
+ ],
+ "co_che": "gio tu 15 den 17 VA RSI 14 < 35: nhip rut cuoi phien My cua dau"
+}

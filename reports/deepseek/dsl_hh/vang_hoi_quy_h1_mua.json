@@ -1,0 +1,41 @@
+{
+ "ten": "vang_hoi_quy_h1_mua",
+ "ho": "quay_ve_trung_binh",
+ "chieu": 1,
+ "giu": 24,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "zscore",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 24
+   },
+   "phep": "<",
+   "phai": {
+    "hang": -2
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gio"
+   },
+   "phep": ">=",
+   "phai": {
+    "hang": 8
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gio"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 20
+   }
+  }
+ ],
+ "co_che": "zscore gia 24 < -2 VA gio tu 8 den 20: vang quay ve trong gio hoat dong"
+}

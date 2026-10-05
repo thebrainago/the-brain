@@ -1,0 +1,43 @@
+{
+ "ten": "vang_thang_1_ban",
+ "ho": "lich",
+ "chieu": -1,
+ "giu": 10,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_thang"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 10
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "thang"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 1
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "ema",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 50
+   }
+  }
+ ],
+ "co_che": "hieu ung dau nam: ngay_trong_thang <= 10 VA thang = 1 VA gia dong cua > EMA 50",
+ "ra": []
+}

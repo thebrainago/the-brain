@@ -11,3 +11,9 @@ Ly do: gia NGAY hang hoa la du lieu cong khai (Stooq / FRED), khong can MT5. Ma:
 4. Chuoi chien luoc co chu ky ro (khi tu nhien mua dong, nong san theo mua vu trong): ghi thanh khai bao DSL (`ngu_phap`, chi bao `thang`/`ngay_trong_thang` da co) roi `thu_co_che` tren doan kham_pha.
 5. Co DAT o ngay -> chuyen sang CFD tuong ung tren MT5 (XTIUSD, XNGUSD, XAUUSD...) bang viec cho may nha; phi san CFD do o may nha.
 Bay: Stooq la hop dong NOI (khoang cuon khong phai loi nhuan - chi dung loi suat log ngay); null hoan vi da gom cuc tri cua ~24 cua so; 12 hang hoa x nhieu phep = dem vao FDR cua so tay.
+
+## Dot nhap HANG HOA (05/10): 20 y tuong (Claude mo rong) -> 20 ban + 20 doi chung/lat -> job may nha
+`reports/deepseek/chay_dsl_hh.py` -> `reports/deepseek/dsl_hh/` (+ `meta.json` tai san/khung). Y tuong: khi tu nhien mua dong / ban xuan, dau mua lai xe + IBS + thu Tu ton kho EIA,
+vang / bac IBS + mua vu cuoi nam + dau nam, nen bien dong pha vo, nong san theo vu (ngo, lua mi, dau tuong), ca phe / duong xu huong, phien My / London (H1).
+**Loi tim thay khi Claude doc mau**: DSL danh so `ngay_trong_tuan` 0 = thu Hai -> thu Tu = 2 (prompt dau toi ghi 3, LLM theo; da sua); hai y tuong goc la BAN phai soan chieu -1 chu khong lat tu ban MUA.
+Cac job `viec/cho/2xx-hh-*` chay `thu_co_che` tren CFD XTIUSD / XBRUSD / XNGUSD / XAUUSD / XAGUSD ...; ma nao may nha khong co du lieu se tra CHUA_DO_DUOC (khong phai AM).
