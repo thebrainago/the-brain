@@ -1,0 +1,38 @@
+{
+ "id": "test_quan_tri_nhieu",
+ "ok": true,
+ "du_lieu": {
+  "code": "# -*- coding: utf-8 -*-\n\"\"\"Test cho nhan.quan_tri_nhieu.\"\"\"\nimport numpy as np\nimport pandas as pd\n\nfrom nhan.quan_tri_nhieu import (\n    HO, SL_CUNG, GIU_TOI_DA,\n    ViThe, LenhCho, TrangThai,\n    _atr, _gia_tb, lai_ro,\n    dap_nhieu, bo_luat,\n)\n\n\ndef _df(o, h, l, c):\n    idx = pd.date_range(\"2020-01-01\", periods=len(o), freq=\"h\")\n    return pd.DataFrame({\"open\": o, \"high\": h, \"low\": l, \"close\": c}, index=idx)\n\n\ndef _df_phang(n, gia=100.0):\n    o = np.full(n, gia)\n    return _df(o, o.copy(), o.copy(), o.copy())\n\n\ndef test_hang_so_ho_va_luoi():\n    assert HO == (\"hedge\", \"luoi_dca\", \"stop_2_dau\", \"tt_stop_doi\", \"thoi_gian\")\n    assert SL_CUNG == 3.0\n    assert GIU_TOI_DA == 120\n\n\ndef test_ho_khong_biet_thi_bao_loi():\n    df = _df_phang(50)\n    th = np.zeros(50)\n    try:\n        dap_nhieu(df, th, \"khong_co_ho_nay\")\n    except ValueError:\n        return\n    raise AssertionError(\"phai nem ValueError voi ho khong biet\")\n\n\ndef test_atr_tren_chuoi_phang_bang_khong():\n    n = 40\n    o = np.full(n, 100.0)\n    a = _atr(o, o.copy(), o.copy(), 14)\n    assert np.isnan(a[0])\n    assert np.isnan(a[13])\n    assert a[14] == 0.0\n    assert a[-1] == 0.0\n\n\ndef test_atr_qua_ngan_tra_toan_nan():\n    n = 10\n    o = np.full(n, 100.0)\n    a = _atr(o, o.copy(), o.copy(), 14)\n    assert a.shape == (n,)\n    assert np.all(np.isnan(a))\n\n\ndef test_gia_tb_rong_va_mot_chieu():\n    assert _gia_tb([]) == (0.0, 0.0, 0)\n    v = [ViThe(chieu=1, gia=100.0, lot=2.0, bar_vao=0),\n         ViThe(chieu=1, gia=110.0, lot=1.0, bar_vao=1)]\n    gtb, tong, chieu = _gia_tb(v)\n    assert abs(tong - 3.0) < 1e-12\n    assert chieu == 1\n    assert abs(gtb - (100.0 * 2.0 + 110.0 * 1.0) / 3.0) < 1e-9\n\n\ndef test_gia_tb_hai_chieu_chieu_bang_khong():\n    v = [ViThe(chieu=1, gia=100.0, lot=1.0, bar_vao=0),\n         ViThe(chieu=-1, gia=100.0, lot=1.0, bar_vao=0)]\n    gtb, tong, chieu = _gia_tb(v)\n    assert chieu == 0\n    assert abs(tong - 2.0) < 1e-12\n    assert abs(gtb - 100.0) < 1e-9\n\n\ndef test_lai_ro_dau_va_chieu():\n    assert lai_ro([], 100.0) == 0.0\n    v = [ViThe(chieu=1, gia=100.0, lot=2.0, bar_vao=0)]\n    assert abs(lai_ro(v, 105.0) - 10.0) < 1e-9\n    assert abs(lai_ro(v, 95.0) + 10.0) < 1e-9\n    v2 = [ViThe(chieu=-1, gia=100.0, lot=1.0, bar_vao=0)]\n    assert abs(lai_ro(v2, 90.0) - 10.0) < 1e-9\n\n\ndef test_duong_cong_do_dai_va_rong_khi_khong_tin_hieu():\n    n = 200\n    rng = np.random.default_rng(1)\n    gia = 100 * np.exp(np.cumsum(rng.normal(0, 0.001, n)))\n    df = _df(gia, gia * 1.001, gia * 0.999, np.r_[gia[1:], gia[-1]])\n    th = np.zeros(n)\n    r = dap_nhieu(df, th, \"luoi_dca\", {\"buoc_atr\": 1.0, \"tp_atr\": 1.0})\n    assert r[\"duong_cong\"].shape == (n,)\n    assert r[\"so_ro\"] == 0\n    assert r[\"so_lenh\"] == 0\n    assert r[\"lai_tong\"] == 0.0\n    assert r[\"ro_treo_cuoi_mau\"] is None\n    assert r[\"ly_do\"] == {}\n\n\ndef test_duong_cong_rong_khi_atr_nan():\n    # Chuoi ngan hon atr_n+2 -> vong nen khong chay, khong co ro nao.\n    n = 10\n    o = np.full(n, 100.0)\n    df = _df(o, o.copy(), o.copy(), o.copy())\n    th = np.ones(n)\n    r = dap_nhieu(df, th, \"luoi_dca\", {\"buoc_atr\": 1.0, \"tp_atr\": 1.0})\n    assert r[\"so_ro\"] == 0\n    assert r[\"lai_tong\"] == 0.0\n    assert np.all(r[\"duong_cong\"] == 0.0)\n\n\ndef test_luoi_dca_mo_ro_va_co_lenh():\n    n = 300\n    rng = np.random.default_rng(3)\n    gia = 100 * np.exp(np.cumsum(rng.normal(0, 0.002, n)))\n    df = _df(gia, gia * 1.002, gia * 0.998, np.r_[gia[1:], gia[-1]])\n    th = np.zeros(n)\n    th[::50] = 1.0\n    r = dap_nhieu(df, th, \"luoi_dca\", {\"buoc_atr\": 1.0, \"tp_atr\": 1.0})\n    assert r[\"so_ro\"] >= 1\n    assert r[\"so_lenh\"] >= 1\n    assert r[\"dinh_lot\"] > 0\n    assert r[\"ho\"] == \"luoi_dca\"\n    assert r[\"duong_cong\"].shape == (n,)\n\n\ndef test_bo_luat_co_du_nam_ho():\n    bl = bo_luat()\n    assert len(bl) > 0\n    cac_ho = {v[0] for v in bl.values()}\n    assert cac_ho == set(HO)\n    for ten, (ho, p) in bl.items():\n        assert ho in HO\n        assert isinstance(p, dict)\n\n\ndef test_ro_treo_cuoi_mau_khi_con_vi_the():\n    # Chuoi di ngang -> luoi_dca mo ro va khong dong het -> co ro treo.\n    n = 400\n    rng = np.random.default_rng(5)\n    gia = 100 * np.exp(np.cumsum(rng.normal(0, 0.0005, n)))\n    df = _df(gia, gia * 1.0005, gia * 0.9995, np.r_[gia[1:], gia[-1]])\n    th = np.zeros(n)\n    th[0] = 1.0\n    r = dap_nhieu(df, th, \"luoi_dca\", {\"buoc_atr\": 5.0, \"tp_atr\": 5.0})\n    if r[\"ro_treo_cuoi_mau\"] is not None:\n        rt = r[\"ro_treo_cuoi_mau\"]\n        assert rt[\"so_lenh\"] >= 1\n        assert rt[\"con_song\"] >= 1\n        assert \"lai_mtm\" in rt\n",
+  "ket_qua": {
+   "test_hang_so_ho_va_luoi": "OK",
+   "test_ho_khong_biet_thi_bao_loi": "OK",
+   "test_atr_tren_chuoi_phang_bang_khong": "OK",
+   "test_atr_qua_ngan_tra_toan_nan": "OK",
+   "test_gia_tb_rong_va_mot_chieu": "OK",
+   "test_gia_tb_hai_chieu_chieu_bang_khong": "OK",
+   "test_lai_ro_dau_va_chieu": "OK",
+   "test_duong_cong_do_dai_va_rong_khi_khong_tin_hieu": "OK",
+   "test_duong_cong_rong_khi_atr_nan": "OK",
+   "test_luoi_dca_mo_ro_va_co_lenh": "OK",
+   "test_bo_luat_co_du_nam_ho": "OK",
+   "test_ro_treo_cuoi_mau_khi_con_vi_the": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: ghi( (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 55.28
+}

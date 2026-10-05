@@ -1,0 +1,34 @@
+{
+ "id": "test_hang_doi",
+ "ok": true,
+ "du_lieu": {
+  "code": "# -*- coding: utf-8 -*-\n\"\"\"Test cho module hang_doi. Chay bang cach goi tung ham test_*().\"\"\"\nfrom __future__ import annotations\n\nimport json\nimport time\n\nfrom nhan import so as SO\nfrom nhan import hang_doi as HD\n\n\ndef _don_sach():\n    \"\"\"Xoa bang de moi test bat dau tu trang thai trong.\"\"\"\n    with SO.ket_noi() as cn:\n        cn.execute(\"DROP TABLE IF EXISTS viec_quantlab\")\n    HD._DA_TAO = False\n\n\ndef _viec(ts=\"A\", khung=\"1d\", template=\"t1\"):\n    return {\"tai_san\": ts, \"khung\": khung, \"template\": template,\n            \"tham_so\": {\"a\": 1}}\n\n\ndef test_van_tay_on_dinh_voi_thu_tu_khoa():\n    \"\"\"tham_so sap khoa -> cung van tay du thu tu dict khac nhau.\"\"\"\n    v1 = HD.van_tay(\"noi_sinh\", \"A\", \"1d\", \"t1\", {\"x\": 1, \"y\": 2})\n    v2 = HD.van_tay(\"noi_sinh\", \"A\", \"1d\", \"t1\", {\"y\": 2, \"x\": 1})\n    assert v1 == v2\n    assert isinstance(v1, str) and len(v1) == 64\n\n\ndef test_van_tay_khac_khi_doi_nguon():\n    v1 = HD.van_tay(\"noi_sinh\", \"A\", \"1d\", \"t1\", {})\n    v2 = HD.van_tay(\"ngoai_sinh\", \"A\", \"1d\", \"t1\", {})\n    assert v1 != v2\n\n\ndef test_nap_idempotent_khong_sinh_ban_trung():\n    _don_sach()\n    r1 = HD.nap([_viec(), _viec()], \"noi_sinh\")\n    assert r1[\"them\"] == 1\n    assert r1[\"da_co\"] == 1\n    r2 = HD.nap([_viec()], \"noi_sinh\")\n    assert r2[\"them\"] == 0\n    assert r2[\"da_co\"] == 1\n\n\ndef test_nap_danh_sach_rong():\n    _don_sach()\n    r = HD.nap([], \"noi_sinh\")\n    assert r[\"them\"] == 0\n    assert r[\"da_co\"] == 0\n\n\ndef test_uu_tien_mac_dinh_theo_nguon():\n    _don_sach()\n    r = HD.nap([_viec()], \"ngoai_sinh\")\n    assert r[\"uu_tien\"] == HD.UU_TIEN[\"ngoai_sinh\"]\n    r2 = HD.nap([_viec(ts=\"B\")], \"noi_sinh\")\n    assert r2[\"uu_tien\"] == HD.UU_TIEN[\"noi_sinh\"]\n\n\ndef test_uu_tien_ngoai_sinh_nho_hon_noi_sinh():\n    \"\"\"So nho = uu tien cao -> ngoai_sinh phai nho hon noi_sinh.\"\"\"\n    assert HD.UU_TIEN[\"ngoai_sinh\"] < HD.UU_TIEN[\"noi_sinh\"]\n\n\ndef test_nhan_viec_tra_ve_va_danh_dau_dang_lam():\n    _don_sach()\n    HD.nap([_viec()], \"noi_sinh\")\n    ra = HD.nhan_viec(\"w1\", so_luong=1)\n    assert len(ra) == 1\n    assert ra[0][\"trang_thai\"] == \"DANG_LAM\"\n    assert ra[0][\"worker\"] == \"w1\"\n    assert ra[0][\"so_lan_thu\"] == 1\n    assert ra[0][\"tham_so\"] == {\"a\": 1}\n\n\ndef test_nhan_viec_uu_tien_ngoai_sinh_truoc():\n    _don_sach()\n    HD.nap([_viec(ts=\"NOI\")], \"noi_sinh\")\n    HD.nap([_viec(ts=\"NGOAI\")], \"ngoai_sinh\")\n    ra = HD.nhan_viec(\"w1\", so_luong=1)\n    assert len(ra) == 1\n    assert ra[0][\"tai_san\"] == \"NGOAI\"\n\n\ndef test_nhan_viec_loc_theo_nguon():\n    _don_sach()\n    HD.nap([_viec(ts=\"NOI\")], \"noi_sinh\")\n    HD.nap([_viec(ts=\"NGOAI\")], \"ngoai_sinh\")\n    ra = HD.nhan_viec(\"w1\", so_luong=5, nguon=\"noi_sinh\")\n    assert len(ra) == 1\n    assert ra[0][\"nguon\"] == \"noi_sinh\"\n\n\ndef test_nhan_viec_khi_hang_rong():\n    _don_sach()\n    ra = HD.nhan_viec(\"w1\", so_luong=3)\n    assert ra == []\n\n\ndef test_xong_danh_dau_trang_thai():\n    _don_sach()\n    HD.nap([_viec()], \"noi_sinh\")\n    ra = HD.nhan_viec(\"w1\", so_luong=1)\n    vid = ra[0][\"id\"]\n    HD.xong(vid, {\"kq\": 42})\n    with SO.ket_noi() as cn:\n        r = cn.execute(\"SELECT trang_thai, ket_qua FROM viec_quantlab \"\n                       \"WHERE id=?\", (vid,)).fetchone()\n    assert r[\"trang_thai\"] == \"XONG\"\n    assert json.loads(r[\"ket_qua\"]) == {\"kq\": 42}\n\n\ndef test_that_bai_qua_so_lan_thi_thanh_HONG():\n    _don_sach()\n    HD.nap([_viec()], \"noi_sinh\")\n    # Thu TOI_DA_THU lan: moi lan nhan roi that bai\n    for _ in range(HD.TOI_DA_THU):\n        ra = HD.nhan_viec(\"w1\", so_luong=1)\n        assert len(ra) == 1\n        HD.that_bai(ra[0][\"id\"], \"loi thu\")\n    with SO.ket_noi() as cn:\n        r = cn.execute(\"SELECT trang_thai FROM viec_quantlab\").fetchone()\n    assert r[\"trang_thai\"] == \"HONG\"\n    # Sau khi HONG, khong con nhan duoc nua\n    assert HD.nhan_viec(\"w1\", so_luong=1) == []\n\n\ndef test_lease_qua_han_duoc_tra_ve_CHO():\n    _don_sach()\n    HD.nap([_viec()], \"noi_sinh\")\n    ra = HD.nhan_viec(\"w1\", so_luong=1, han_lease=-1.0)\n    assert len(ra) == 1\n    # het_han da qua -> lan nhan tiep theo phai tra ve CHO roi gianh lai\n    ra2 = HD.nhan_viec(\"w2\", so_luong=1)\n    assert len(ra2) == 1\n    assert ra2[0][\"worker\"] == \"w2\"\n\n\ndef test_trang_thai_dem_theo_nguon():\n    _don_sach()\n    HD.nap([_viec(ts=\"A\"), _viec(ts=\"B\")], \"noi_sinh\")\n    HD.nap([_viec(ts=\"C\")], \"ngoai_sinh\")\n    tt = HD.trang_thai()\n    assert tt[\"theo_nguon\"][\"noi_sinh\"][\"CHO\"] == 2\n    assert tt[\"theo_nguon\"][\"ngoai_sinh\"][\"CHO\"] == 1\n    assert tt[\"tong\"][\"CHO\"] == 3\n    assert tt[\"lease_qua_han\"] == 0\n\n\ndef test_don_lease_treo_tra_ve_so_viec():\n    _don_sach()\n    HD.nap([_viec()], \"noi_sinh\")\n    HD.nhan_viec(\"w1\", so_luong=1, han_lease=-1.0)\n    n = HD.don_lease_treo()\n    assert n == 1\n    # Sau khi don, viec da ve CHO\n    tt = HD.trang_thai()\n    assert tt[\"tong\"].get(\"CHO\", 0) == 1\n    assert tt[\"lease_qua_han\"] == 0\n",
+  "ket_qua": {
+   "test_van_tay_on_dinh_voi_thu_tu_khoa": "OK",
+   "test_van_tay_khac_khi_doi_nguon": "OK",
+   "test_nap_idempotent_khong_sinh_ban_trung": "OK",
+   "test_nap_danh_sach_rong": "OK",
+   "test_uu_tien_mac_dinh_theo_nguon": "OK",
+   "test_uu_tien_ngoai_sinh_nho_hon_noi_sinh": "OK",
+   "test_nhan_viec_tra_ve_va_danh_dau_dang_lam": "OK",
+   "test_nhan_viec_uu_tien_ngoai_sinh_truoc": "OK",
+   "test_nhan_viec_loc_theo_nguon": "OK",
+   "test_nhan_viec_khi_hang_rong": "OK",
+   "test_xong_danh_dau_trang_thai": "OK",
+   "test_that_bai_qua_so_lan_thi_thanh_HONG": "OK",
+   "test_lease_qua_han_duoc_tra_ve_CHO": "OK",
+   "test_trang_thai_dem_theo_nguon": "OK",
+   "test_don_lease_treo_tra_ve_so_viec": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 28.81
+}

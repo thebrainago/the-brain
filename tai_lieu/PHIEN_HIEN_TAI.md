@@ -3,14 +3,14 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-05 14:16 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ a16c92c · 4 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-05 14:39 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 7c58d02 · 6 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
+  · 7c58d02 test tay cho kiem_the_nhap; ke hoach test lan 3 (cho AI Box hoi phuc)
+  · c169614 nhanh hang hoa: hang_hoa.py (tai Stooq/FRED + mua vu, chu ky, IBS co null hai chie
   · a16c92c viec cho may nha: 87 phep thu ban nhap CMT tren AUDCAD M15 (qua danh sach trang)
   · 27f2d18 da_agent lan 3: +30 test (dich_tham_so, nc_ho_so)
   · acbf78f CMT dot 3: lap cho trong theo cap ho (36 mua + 18 ban nhap), may kiem trung thanh 
-  · 605ecbe xuat-gia (sao luu ngoai git), da_agent dong goi doc lap + skill, viec xuat gia cho
-  · 1f543cf da_agent: 69 test do LLM viet (Claude duyet), bai hoc lan 2
 - Thu: phien nay la `cloud`, chua doc 20 · 24h qua: cloud->nha 2, nha->cloud 3
   · moi nhat cloud->nha (gio may gui 2026-10-05T08:04:15): Phien cloud MOI id=session_01XDvcQqRLu2itnyVWxmPCW
 - May:

@@ -1,0 +1,31 @@
+{
+ "id": "test_nc_bot_hoc",
+ "ok": true,
+ "du_lieu": {
+  "code": "# -*- coding: utf-8 -*-\n\"\"\"Test cho nhan/nc_bot_hoc.py - chi kiem hanh vi co that, du lieu nho tu dung.\"\"\"\nfrom __future__ import annotations\n\nimport numpy as np\nimport pandas as pd\n\nfrom nhan import nc_bot_hoc as BH\n\n\ndef _df_gia(n: int = 60) -> pd.DataFrame:\n    \"\"\"DataFrame OHLC nho, gia di len de co ATR hop le.\"\"\"\n    idx = pd.date_range(\"2020-01-01\", periods=n, freq=\"4h\")\n    c = np.linspace(100.0, 100.0 + n, n)\n    return pd.DataFrame({\"open\": c, \"high\": c + 1.0, \"low\": c - 1.0, \"close\": c}, index=idx)\n\n\ndef test_mlp_f_tra_ve_dung_kich_thuoc():\n    net = BH.MLP(d=5, k=3, h=4, seed=0)\n    X = np.zeros((7, 5))\n    q, cache = net.f(X)\n    assert q.shape == (7, 3)\n    assert len(cache) == 5\n\n\ndef test_mlp_hoc_khong_lam_hong_trong_so():\n    net = BH.MLP(d=4, k=2, h=3, seed=1)\n    X = np.random.default_rng(0).normal(size=(16, 4))\n    a = np.array([0, 1] * 8)\n    r = np.zeros(16)\n    truoc = [w.copy() for w in net.p]\n    net.hoc(X, a, r)\n    assert net.t == 1\n    assert any(not np.allclose(w0, w1) for w0, w1 in zip(truoc, net.p))\n\n\ndef test_mlp_hoc_voi_mang_rong_khong_loi():\n    net = BH.MLP(d=3, k=2, h=2, seed=2)\n    net.hoc(np.zeros((0, 3)), np.zeros(0, int), np.zeros(0))\n    assert net.t == 1\n\n\ndef test_thuong_theo_bar_hinh_dang_va_gia_tri_hop_le():\n    df = _df_gia(60)\n    atr = np.full(len(df), 1.0)\n\n    class CP:\n        spread_mang = staticmethod(lambda idx: np.zeros(len(idx)))\n        truot_gia_frac = 0.0\n\n    R, A = BH.thuong_theo_bar(df, CP(), atr)\n    assert R.shape == (len(df), len(A))\n    assert len(A) == 2 * len(BH.H)\n    assert set(s for s, _ in A) == {1, -1}\n    # hang cuoi khong the tinh -> NaN\n    assert np.isnan(R[-1]).all()\n    # co it nhat mot o huu han\n    assert np.isfinite(R).any()\n\n\ndef test_thuong_theo_bar_atr_nan_thi_bo_qua():\n    df = _df_gia(60)\n    atr = np.full(len(df), np.nan)\n\n    class CP:\n        spread_mang = staticmethod(lambda idx: np.zeros(len(idx)))\n        truot_gia_frac = 0.0\n\n    R, _ = BH.thuong_theo_bar(df, CP(), atr)\n    assert np.isnan(R).all()\n\n\ndef test_di_bo_khong_chong_lenh_va_ton_trong_hold():\n    # q luon am -> khong vao lenh nao\n    R = np.zeros((10, 2))\n    A = [(1, 1), (-1, 1)]\n    ok = np.ones(10, bool)\n    ds = BH._di_bo(np.full((10, 2), -1.0), R, A, np.arange(10), ok)\n    assert ds == []\n\n\ndef test_di_bo_vao_lenh_khi_q_duong():\n    R = np.zeros((10, 2))\n    R[0, 0] = 5.0\n    A = [(1, 1), (-1, 1)]\n    ok = np.ones(10, bool)\n    q = np.full((10, 2), -1.0)\n    q[0, 0] = 1.0\n    ds = BH._di_bo(q, R, A, np.arange(10), ok)\n    assert len(ds) == 1\n    assert ds[0] == (5.0, 1)\n\n\ndef test_di_bo_bo_qua_vi_tri_khong_ok():\n    R = np.zeros((10, 2))\n    R[0, 0] = 5.0\n    A = [(1, 1), (-1, 1)]\n    ok = np.ones(10, bool)\n    ok[0] = False\n    q = np.full((10, 2), -1.0)\n    q[0, 0] = 1.0\n    ds = BH._di_bo(q, R, A, np.arange(10), ok)\n    assert ds == []\n\n\ndef test_chuan_bi_tra_ve_bon_phan_tu():\n    df, F, R, A = BH.chuan_bi(\"TONG_HOP_NHIEU_1\", \"H4\")\n    assert len(df) == len(F) == len(R)\n    assert F.shape[1] == 26 + 10\n    assert len(A) == 2 * len(BH.H)\n\n\ndef test_hoc_bien_the_b_khong_dung_cua_so_gia_tho():\n    r = BH.hoc(\"TONG_HOP_NHIEU_1\", \"B\", buoc=200, hat=1)\n    assert r[\"bien_the\"] == \"B\"\n    assert r[\"buoc\"] == 200\n    assert set(r.keys()) >= {\"ma\", \"bien_the\", \"buoc\", \"avg1000_hoc\",\n                             \"kham_pha\", \"xac_nhan\", \"niem_phong\", \"dat_giao_thuc\"}\n    for doan in (\"kham_pha\", \"xac_nhan\", \"niem_phong\"):\n        d = r[doan]\n        assert set(d.keys()) == {\"lenh\", \"tb_bps\", \"t\", \"ty_le_mua\", \"dat\"}\n        assert isinstance(d[\"dat\"], bool)\n\n\ndef test_hoc_dat_giao_thuc_la_va_cua_hai_doan():\n    r = BH.hoc(\"TONG_HOP_NHIEU_1\", \"A\", buoc=200, hat=1)\n    assert r[\"dat_giao_thuc\"] == bool(r[\"xac_nhan\"][\"dat\"] and r[\"niem_phong\"][\"dat\"])\n\n\ndef test_hoc_avg1000_hoc_rong_khi_buoc_nho():\n    r = BH.hoc(\"TONG_HOP_NHIEU_1\", \"A\", buoc=10, hat=1)\n    # buoc // 5 = 2 -> co it nhat mot moc log\n    assert isinstance(r[\"avg1000_hoc\"], list)\n    assert len(r[\"avg1000_hoc\"]) >= 1\n",
+  "ket_qua": {
+   "test_mlp_f_tra_ve_dung_kich_thuoc": "OK",
+   "test_mlp_hoc_khong_lam_hong_trong_so": "OK",
+   "test_mlp_hoc_voi_mang_rong_khong_loi": "OK",
+   "test_thuong_theo_bar_hinh_dang_va_gia_tri_hop_le": "OK",
+   "test_thuong_theo_bar_atr_nan_thi_bo_qua": "OK",
+   "test_di_bo_khong_chong_lenh_va_ton_trong_hold": "OK",
+   "test_di_bo_vao_lenh_khi_q_duong": "OK",
+   "test_di_bo_bo_qua_vi_tri_khong_ok": "OK",
+   "test_chuan_bi_tra_ve_bon_phan_tu": "OK",
+   "test_hoc_bien_the_b_khong_dung_cua_so_gia_tho": "OK",
+   "test_hoc_dat_giao_thuc_la_va_cua_hai_doan": "OK",
+   "test_hoc_avg1000_hoc_rong_khi_buoc_nho": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 32.44
+}

@@ -15,3 +15,7 @@
 ## Lan 3 (05/10): chia nho tep + doc ten that: dich_tham_so 13 test, nc_ho_so 17 test DAT (60 d)
 - Cat tep 14-20 KB + vai nhanh + cau "moi ten dung trong test phai co that" -> 1 vong la dat. Tep 44 KB truoc do hong vi 502.
 - kiem_the_nhap van hong: module doc thu muc that (`kho_phuong_phap/`), test sinh ra doan ten the khong co. Can test dung thu muc tam; de lan sau (lam tay).
+
+## Lan 4 (05/10): 9 module, 4 DAT (53 test), 5 HONG; AI Box 521 tam thoi ~14:15-14:40 UTC
+- DAT: nc_bot_hoc 12, pmg_g0 14, quan_tri_nhieu 12, hang_doi 15 (Claude chay lai, khong ghi tep ngoai). HONG: khoi_phuc, doc_chi_bao, bang_he (3 vong), pmg_quet, pmg (0 vong, gap 521 giua chung) -> thu lai.
+- Loi 521 (Cloudflare, origin refused) la tam thoi; phien chi huy khac vao duoc cung luc. Executor nen thu lai viec 0 vong khi gap 5xx.

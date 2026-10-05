@@ -1,0 +1,35 @@
+{
+ "id": "test_doc_chi_bao",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "loi cu phap python dong 100: unterminated string literal (detected at line 100)"
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "test_vung_tin_hieu_bat_buffer_trong_if HONG: AssertionError: phai khoanh duoc it nhat mot vung",
+    "test_vung_tin_hieu_bat_alert HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "test_vung_tin_hieu_bat_buffer_trong_if HONG: AssertionError: ",
+    "test_vung_tin_hieu_bat_alert HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "loi cu phap python dong 100: unterminated string literal (detected at line 100)"
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 177.86
+}
