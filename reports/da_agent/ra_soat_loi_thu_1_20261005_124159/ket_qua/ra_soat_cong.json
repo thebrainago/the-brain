@@ -1,0 +1,76 @@
+{
+ "id": "ra_soat_cong",
+ "ok": true,
+ "du_lieu": {
+  "phat_hien": [
+   {
+    "ham": "xet",
+    "muc_do": "CAO",
+    "van_de": "Loi logic trong dieu kien '13_edge_vuot_spread'. Khi `chi_phi_spread` la None (khong do duoc), bien `_phi_thieu` dat True va `_phi_sp` gan gia tri 0.0. Sau do, bieu thuc kiem tra `dk[\"13_edge_vuot_spread\"] = (_phi_sp <= 0) or (...)` se luon tra ve True vi `0.0 <= 0`. Dieu nay nghia la mot chien luoc co chi phi khong xac dinh duoc (im lang) se DUOC TINH LA DAT tieu chi edge vuot spread, trong khi docstring va ly le cua cong yeu cau phai co bang chung chi phi that. Cac phep kiem khac nhu `7_chi_phi_do_duoc` co the chan lai neu che do la 'giao_dich', nhung trong cac truong hop khac hoac khi tinh toan tong hop, gia tri True gia tao nay co the dan den ket luan sai ve hieu qua kinh te.",
+    "de_xuat": "Sua doi dieu kien cho `13_edge_vuot_spread`: Neu `_phi_thieu` la True (chi phi khong do duoc), thi `dk[\"13_edge_vuot_spread\"]` phai duoc dat la False (hoac None/NaN de xac dinh ro rang la khong do duoc), khong duoc mac dinh la True. Hoac them kiem tra: `if _phi_thieu: dk[\"13_edge_vuot_spread\"] = False` truoc khi tinh toan."
+   },
+   {
+    "ham": "lai_theo_lenh",
+    "muc_do": "TB",
+    "van_de": "Rui ro sai so lieu im lang khi gom loi nhuan theo lenh. Ham dung `vi_the` (position size) de phan biet cac lenh khac nhau. Tuy nhien, neu `vi_the` co gia tri 0 (khong co vi the) trong khi `loi` co gia tri khac 0 (do sai so dong bo du lieu hoac phi giao dich/co so lien quan), vong lap `for i in range(n)` se xu ly: `if v[i] != dang` -> `dang` thay doi, `tich` reset ve 0. Sau do `if v[i] != 0.0` la False nen `tich` khong cong them loi. Ket qua la loi nhuan bi mat hoac bi gop sai vao lenh truoc/sau do. Doan code `if dang not in (None, 0.0): ra.append(tich)` o cuoi cung co the ghi nhan mot tich sai neu `dang` cuoi cung la 0.0.",
+    "de_xuat": "Them kiem tra dau vao: Neu `v[i] == 0` ma `l[i] != 0`, day la bat thuong. Co the log canh bao hoac xu ly bang cach coi do la lenh rieng biet (neu co loi thi phai co vi the). Hoac dam bao rang `vi_the` va `loi` dong bo tuyet doi ve mat thoi gian co vi the."
+   },
+   {
+    "ham": "nguong_lord",
+    "muc_do": "THAP",
+    "van_de": "Tinh toan nguong LORD su dung ham gam(k) = 1/(k+1)^1.6 va tong chuan hoa sum(gam(k) for k in range(1, 5001)). Gia tri `j` (thu tu phep thu) co the vuot qua 5000 trong cac chuoi FDR dai. Neu `j > 5000`, `gam(j)` se rat nho nhung `chuan` van la tong hang ngan. Cong thuc LORD chuan thuong can cap nhat tong chuan hoa dong tai hoac dung gia tri tien giac chinh xac hon. Viec dung tong hang ngan co the dan den sai le nho trong nguong alpha khi j lon, anh huong den quyet dinh bac bo/khong bac bo.",
+    "de_xuat": "Kiem tra gioi han `j`. Neu `j` co the lon, dung gia tri tien giac cua Riemann zeta function hoac cap nhat `chuan` dong tai. Hoac dat gioi han mem cho `j` va bao cao canh bao neu vuot."
+   },
+   {
+    "ham": "bootstrap_dung",
+    "muc_do": "THAP",
+    "van_de": "Ham sinh bootstrap khoi dung `rng.geometric(p)`. Trong NumPy, `geometric` tra ve gia tri >= 1. Bien `dai` co the lon hon `n - i`. Lenh `min(rng.geometric(p), n - i)` xu ly viec cat ngan, nhung neu `n-i` la 0 (cuoi mang), `dai` se la 0? Khong, `min(..., 0)` se tra ve 0. Sau do `vt = (bd + np.arange(0)) % n` -> rong. `ra[i:i+0]` khong gan gi. Vong lap `while i < n` se tang `i` len `i+0` -> vo han lap (infinite loop) neu `i` khong tang. Wait, `i += dai`. Neu `dai` = 0, `i` khong doi -> Infinite Loop.",
+    "de_xuat": "Dam bao `dai` toi thieu la 1. Sua thanh `dai = max(1, min(rng.geometric(p), n - i))`. Hoac kiem tra `if i >= n: break`."
+   }
+  ]
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "re",
+   "loi": []
+  }
+ ],
+ "phan_bien": {
+  "nhan_xet": [
+   {
+    "muc": "1 (xet / 13_edge_vuot_spread)",
+    "phan_dinh": "dung",
+    "ly_do": "Doc code: khi _phi_thieu=True thi _phi_sp=0.0, va dk['13_edge_vuot_spread'] = (_phi_sp <= 0) or (...) -> 0.0<=0 la True, nen dieu kien DAT du khong do duoc chi phi. Comment trong code cung thua nhan '13 la NHAN ... chi mat cai nhan nay, KHONG chan verdict', nhung van la gia tri True gia tao. Phat hien dung ve mat logic; muc do CAO co the hoi qua vi 13 nam trong NHAN_MEM (khong chan verdict), nhung van la loi that."
+   },
+   {
+    "muc": "2 (lai_theo_lenh)",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Mo ta ve v[i]==0 kem l[i]!=0 la co that trong code (tich khong cong loi khi v=0). Nhung tac gia khong chi ro truong hop nao trong he sinh ra vi_the=0 ma loi!=0; neu loi da duoc tinh la v*r-phi thi khi v=0 thi loi=0 theo cau truc, nen tinh huong nay kho xay ra. Muc do TB co the hoi cao; day la rui ro gia dinh chu khong phai loi chac chan."
+   },
+   {
+    "muc": "3 (nguong_lord)",
+    "phan_dinh": "nghi_sai",
+    "ly_do": "Code dung chuan = sum(gam(k) for k in range(1,5001)) lam hang so chuan hoa, khong phu thuoc j. Khi j>5000 thi gam(j) van tinh duoc va chuan khong doi, chi la sai so cat chuoi o k=5000 (vo cung nho, ~1e-9). Khong phai 'sai le lon' nhu tac gia noi. Muc do THAP la hop ly nhung ly do khong chinh xac."
+   },
+   {
+    "muc": "4 (bootstrap_dung)",
+    "phan_dinh": "nghi_sai",
+    "ly_do": "Code co 'dai = min(rng.geometric(p), n - i)' va vong lap while i<n. Khi i<n thi n-i>=1, nen dai>=1 (vi geometric>=1). Truong hop n-i=0 chi xay ra khi i>=n, luc do vong lap da ket thuc. Khong co infinite loop. Tac gia tu dat cau hoi roi tu tra loi sai. Phat hien nay SAI."
+   },
+   {
+    "muc": "thieu: kiem_ks / placebo",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Tac gia khong de cap: trong placebo, khi ks rong (khong do duoc lan nao) thi bs_hop_le=False va ps bi cat bo phan bootstrap, nhung 'bootstrap_hop_le' tra None (vi 'if ks else None'), trong khi 'null_hop_le' luon True. Dieu nay co the lam ben goi hieu nham la bootstrap hop le. Day la rui ro that nhung khong nam trong danh sach tac gia."
+   },
+   {
+    "muc": "thieu: he_so_khop_rui_ro",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Tac gia khong kiem: khi k_khop tinh duoc, lai_khop duoc tinh lai tu chuoi loi voi don bay k, nhung dk['2_sharpe_hon_mua_giu'] va dk['3_calmar_hon_mua_giu'] van dung he.get('sharpe')/he.get('calmar') CHUA nhan k. Do la bat doi xung: cong 1 da khop rui ro nhung cong 2/3 thi khong. Day la mau thuan tiem an voi docstring 'cung mot muc rui ro thi ben nao lai hon'."
+   }
+  ],
+  "tong": "Hai phat hien dau co co so (dac biet 13_edge_vuot_spread la loi that), hai phat hien sau (nguong_lord, bootstrap_dung) la suy dien sai ve code, va tac gia bo sot bat doi xung giua cong 1 (da khop rui ro) voi cong 2/3 (khong khop) trong xet()."
+ },
+ "dong": 20.61
+}

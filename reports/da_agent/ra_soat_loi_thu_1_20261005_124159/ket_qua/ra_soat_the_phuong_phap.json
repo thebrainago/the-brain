@@ -1,0 +1,46 @@
+{
+ "id": "ra_soat_the_phuong_phap",
+ "ok": true,
+ "du_lieu": {
+  "phat_hien": [
+   {
+    "ham": "kiem_the",
+    "muc_do": "CAO",
+    "van_de": "Loi logic khi kiem tra `tham_so`: vong lap `for i, o in enumerate(the[\"tham_so\"])` gia dinh `the[\"tham_so\"]` la danh sach. Neu `the[\"tham_so\"]` khong phai list (vi du: dict, None, hoac chuoi), lenh `enumerate` se gay ra `TypeError` lam crash chuong trinh thay vi tra ve danh sach loi. Docstring yeu cau ham tra ve 'Danh sach loi', nhung implementation khong bao dam dieu nay cho dau vao hong.",
+    "de_xuat": "Them kiem tra `if not isinstance(the.get(\"tham_so\"), list): loi.append(\"tham_so phai la danh sach\"); return loi` truoc vong lap."
+   },
+   {
+    "ham": "thay_so",
+    "muc_do": "TB",
+    "van_de": "Sai so lieu im lang trong tinh toan khoang cach dich: `d_dich = abs(float(v)) * src.pip`. Bien `v` lay tu `gia_tri` cua nguoi dung. Neu `v` la chuoi khong phai so (vi du \"abc\") hoac None, `float(v)` se gay `ValueError`/`TypeError` ma khong co try-except bao quanh, dẫn đến crash module thay vì báo lỗi dữ liệu không hợp lệ. Ngoài ra, việc dùng `src.pip` trực tiếp có thể sai nếu tham số `v` đã được quy đổi sang đơn vị khác trước đó (logic phụ thuộc vào giả định ngầm về đầu vào).",
+    "de_xuat": "Bọc vòng lặp xử lý từng tham số bằng try-except để bắt lỗi chuyển đổi kiểu dữ liệu và thêm vào `khong_ap_duoc` hoặc `canh_bao` thay vì crash."
+   },
+   {
+    "ham": "he_so_tu_thi_truong",
+    "muc_do": "TB",
+    "van_de": "Rủi ro chia cho 0 tiềm ẩn: `tien_tp=k * dst.pv / src.pv`. Nếu `src.pv` (point value của thị trường nguồn) bằng 0 (do cấu hình sai hoặc thiếu dữ liệu), phép chia sẽ gây `ZeroDivisionError`. Tương tự với `phi=dst.C / src.C` nếu `src.C` bằng 0.",
+    "de_xuat": "Kiểm tra `if src.pv == 0 or src.C == 0:` và trả về hệ số mặc định hoặc raise ValueError rõ ràng trước khi thực hiện phép chia."
+   },
+   {
+    "ham": "kiem_the",
+    "muc_do": "THAP",
+    "van_de": "Thiếu kiểm tra kiểu dữ liệu cho `engine`: `e = the[\"engine\"]`. Nếu `the[\"engine\"]` là None hoặc không phải dict, dòng `e.get(\"trang_thai\")` sẽ gây `AttributeError`. Mặc dù `_KHOA` đảm bảo key tồn tại, nhưng không đảm bảo giá trị là dict.",
+    "de_xuat": "Thêm kiểm tra `if not isinstance(e, dict): loi.append(\"engine phai la dict\")` trước khi truy cập `.get()`."
+   }
+  ]
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "re",
+   "loi": []
+  }
+ ],
+ "phan_bien": {
+  "loi": [
+   "JSON hong: Extra data: line 1 column 2234 (char 2233)"
+  ]
+ },
+ "dong": 14.76
+}

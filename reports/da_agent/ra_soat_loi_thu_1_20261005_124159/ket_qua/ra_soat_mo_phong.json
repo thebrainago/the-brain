@@ -1,0 +1,76 @@
+{
+ "id": "ra_soat_mo_phong",
+ "ok": true,
+ "du_lieu": {
+  "phat_hien": [
+   {
+    "ham": "chay",
+    "muc_do": "CAO",
+    "van_de": "Sai logic trong chế độ 'so_hoc' khi phát hiện cháy tài khoản. Dòng `song[bar_chay:] = 1.0` sau đó `von_mang[bar_chay:] = 0.0` làm mất hoàn toàn lợi nhuận/lỗ của các bar trước đó nếu `nguong_chay > 0`. Nếu vốn giảm xuống dưới ngưỡng (ví dụ 20%) nhưng chưa về 0, hệ thống coi như đã cháy và đặt von=0, xóa sạch lịch sử tích lũy từ đầu đến thời điểm đó thay vì chỉ dừng lại hoặc tính lãi trên phần vốn còn lại.",
+    "de_xuat": "Cần xem xét lại định nghĩa 'cháy'. Nếu `nguong_chay` là mức cắt lỗ cứng, việc đặt `von_mang[bar_chay:] = 0.0` là đúng cho mô phỏng đóng lệnh ngay lập tức. Tuy nhiên, dòng `song[bar_chay:] = 1.0` là thừa và gây nhầm lẫn vì `von_mang` đã bị ghi đè bằng 0.0. Quan trọng hơn: `loi = np.log(song)` sẽ trả về `log(1.0)=0` cho các bar sau khi cháy, nhưng `von_mang` lại là 0.0. Điều này tạo ra sự mâu thuẫn giữa chuỗi `loi` (cho thấy không lỗ thêm) và `von` (cho thấy mất trắng). Nên đồng bộ hóa: nếu cháy, `loi` các bar sau phải phản ánh việc mất vốn hoặc giữ nguyên trạng thái cuối cùng."
+   },
+   {
+    "ham": "chay_tpsl",
+    "muc_do": "CAO",
+    "van_de": "Lỗi logic nghiêm trọng trong tính toán phí qua đêm (`phi_gi`). Hàm gọi `cp.phi_giu_mang(idx, v, None)` với tham số `lai_suat_nam=None`. Trong module `chi_phi`, nếu hàm này yêu cầu lãi suất để tính phí swap/qua đêm, việc truyền `None` có thể dẫn đến lỗi runtime hoặc mặc định phí bằng 0 (im lặng), khiến kết quả backtest TP/SL sai lệch lớn so với thực tế CFD/FX (nơi phí qua đêm rất quan trọng). Docstring chính file cũng nhấn mạnh 'phi qua dem BAT DOI XUNG', nhưng code lại bỏ qua nó ở đây.",
+    "de_xuat": "Thay đổi chữ ký hàm `chay_tpsl` để nhận tham số `lai_suat_nam` và truyền vào `cp.phi_giu_mang`. Hoặc nếu cố ý bỏ qua phí qua đêm cho chiến lược ngắn hạn, cần ghi rõ trong docstring và đảm bảo `MoHinhChiPhi` xử lý `None` an toàn (không crash, không tự động gán 0 nếu dữ liệu có)."
+   },
+   {
+    "ham": "chay",
+    "muc_do": "TB",
+    "van_de": "Rủi ro chia cho 0 hoặc log âm trong chế độ 'so_hoc'. Dòng `loi_tho = np.log1p(np.maximum(loi_tho_sh, -1.0 + 1e-12))`. Mặc dù đã dùng `maximum` để tránh log(<=0), nhưng nếu `loi_tho_sh` nhỏ hơn `-1.0 + 1e-12` (tức lỗ > 100% vốn trong một bar do đòn bẩy cao), giá trị bị kẹp lại. Tuy nhiên, biến `song` được tính là `1.0 + loi_tho_sh - phi_tong`. Nếu `song <= nguong_chay` (thường là 0), ta xử lý cháy. Nhưng nếu `nguong_chay` được set dương (vd 0.2), và `song` rơi vào khoảng `(0, 0.2]`, thì `loi = np.log(song)` vẫn hợp lệ. Vấn đề nằm ở chỗ: `loi_tho` (gross return) được tính độc lập từ `loi_tho_sh` mà không trừ phí, trong khi `loi` (net) trừ phí. Sự không nhất quán này có thể gây khó khăn khi phân tích alpha vs beta nếu người dùng tin rằng `loi_tho` là gross P&L thuần túy.",
+    "de_xuat": "Kiểm tra kỹ logic tách biệt giữa Gross Return (`loi_tho`) và Net Return (`loi`). Đảm bảo `loi_tho` không bao giờ chứa thông tin về phí nếu tên biến gợi ý 'thuận' (gross). Hiện tại `loi_tho` trong mode 'so_hoc' là `np.log1p(...)` của phần vốn sinh lời từ thị trường, chưa trừ phí. Điều này đúng về mặt toán học nhưng cần docstring rõ ràng hơn để tránh hiểu lầm khi so sánh với mode 'log'."
+   },
+   {
+    "ham": "dem_lenh",
+    "muc_do": "THAP",
+    "van_de": "Logic đếm lệnh có thể bỏ sót trường hợp chuyển từ dương sang 0 rồi sang âm trong cùng một bước cập nhật nếu `v` không liên tục. Tuy nhiên, với `v` là mảng rời rạc theo bar, logic `sign(v) != sign(truoc)` và `abs(v)>1e-12` là khá chuẩn. Rủi ro nhỏ: nếu `v[i]` rất nhỏ (dưới 1e-12) nhưng khác 0, nó bị coi là flat (0), có thể làm sai lệch số lượng lệnh thực tế nếu template xuất ra tín hiệu nhiễu cực nhỏ.",
+    "de_xuat": "Xem xét tăng độ nhạy `1e-12` lên `1e-8` hoặc `1e-6` tùy thuộc vào đơn vị tiền tệ để tránh đếm sai các lệnh giao dịch quá nhỏ không đáng kể, hoặc chấp nhận rằng đây là hành vi mong muốn (lọc nhiễu)."
+   },
+   {
+    "ham": "chay",
+    "muc_do": "TB",
+    "van_de": "Biên giới `don_bay`: Code kiểm tra `if not np.isfinite(don_bay) or don_bay <= 0`. Tuy nhiên, `don_bay` được nhân vào `th` sau khi clip [-1, 1]. Nếu `don_bay` rất lớn (vd 100x), `v` có thể vượt xa khả năng chịu đựng của mô hình chi phí spread/trượt giá tuyến tính. Module `chi_phi` có thể không được thiết kế cho đòn bẩy cực cao, dẫn đến phí spread/trượt giá trở nên vô lý (vd: phí trượt giá tính trên khối lượng tuyệt đối có thể vượt quá vốn gốc nếu không cẩn thận trong cách tính `phi_truot_gia_frac`).",
+    "de_xuat": "Thêm cảnh báo hoặc kiểm tra trần hợp lý cho `don_bay` dựa trên loại tài sản, hoặc đảm bảo `MoHinhChiPhi` tính phí trượt giá/spread dựa trên % vốn hoặc % giá trị danh mục chứ không phải giá trị tuyệt đối thô nếu không có cơ chế bảo vệ."
+   }
+  ]
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "re",
+   "loi": []
+  }
+ ],
+ "phan_bien": {
+  "nhan_xet": [
+   {
+    "muc": "1",
+    "phan_dinh": "nghi_sai",
+    "ly_do": "Tac gia noi dong `song[bar_chay:] = 1.0` lam 'mat hoan toan loi nhuan/lo cua cac bar truoc do' va 'xoa sach lich su tich luy'. Doc code: `von_mang = np.cumprod(song)` duoc tinh TRUOC khi gan `von_mang[bar_chay:] = 0.0`, nen von cac bar truoc bar_chay van dung. Viec dat song=1.0 chi de tranh log(0) o cac bar sau, khong xoa lich su. Phan 'mau thuan giua loi va von' cung khong dung: sau bar_chay, von_mang=0 nen `von` property tra ve 0, con `loi`=0 chi la quy uoc 'khong con gi de lai/lo' - da ghi ro trong comment. Khong phai loi that."
+   },
+   {
+    "muc": "2",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Tac gia khang dinh `cp.phi_giu_mang(idx, v, None)` se gay loi hoac mac dinh phi=0. Nhung tep `chi_phi.py` KHONG duoc cung cap trong tai lieu, nen khong the xac minh hanh vi khi lai_suat_nam=None. Day la suy doan, khong phai phat hien dua tren bang chung. Co the la rui ro that (neu chi_phi yeu cau lai suat), nhung khong duoc kiem chung."
+   },
+   {
+    "muc": "3",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Nhan xet ve 'khong nhat quan giua loi_tho va loi' khong chi ra loi cu the. Trong che do so_hoc, `loi_tho = log1p(max(loi_tho_sh, -1+1e-12))` la gross (chua tru phi), `loi = log(song)` la net (da tru phi). Day la thiet ke co chu y, khong phai bug. Tac gia tu thua 'dung ve mat toan hoc' roi van liet ke - khong phai phat hien that."
+   },
+   {
+    "muc": "4",
+    "phan_dinh": "dung",
+    "ly_do": "Nhan xet ve nguong 1e-12 trong `dem_lenh` la hop ly nhung muc do THAP dung. Tuy nhien tac gia noi 'co the bo sot truong hop duong->0->am trong cung buoc' la khong dung vi v la mang roi rac theo bar, khong co 'cung buoc'. Phan con lai (nhieu cuc nho) la rui ro nho that."
+   },
+   {
+    "muc": "5",
+    "phan_dinh": "nghi_sai",
+    "ly_do": "Tac gia noi 'phi truot gia tinh tren khoi luong tuyet doi co the vuot qua von goc'. Doc code: `phi_tr = doi * cp.truot_gia_frac` va `phi_sp = doi * sp`, trong do `doi = |diff(v)|` la phoi nhiem (da clip [-1,1] roi nhan don_bay). Phi la ti le cua VON (vi `loi = v*r - phi_tong`), khong phai gia tri tuyet doi tho. Khong co co che nao de phi truot gia vuot von goc ngoai tru don_bay cuc lon - va do la hanh vi duoc thiet ke co chu y (don_bay la tham so nguoi goi khai ro). Khong phai bug."
+   }
+  ]
+ },
+ "dong": 19.17
+}
