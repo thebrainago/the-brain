@@ -98,7 +98,7 @@ Mot `ho_so_bot` (JSON) gom: danh sach khoi phat hien (co the nhieu, moi khoi co 
 
 | Lop | Vi du | Don vi chuan | Dich mac dinh |
 |---|---|---|---|
-| KC_BUOC | `buoc`, `buoc_tran` | A (bien do mot nen) | I1 / I2 pha tron (so w) |
+| KC_BUOC | `buoc`, `buoc_tran`, `cho_lui` (la khoang cach pip, khong phai thoi gian) | A (bien do mot nen) | I1 / I2 pha tron (so w) |
 | KC_TP | `tp`, tp sau N lenh | A va C | I2 nghieng, san >= 3 C |
 | KC_SL | cat lo, hoa von, trailing | A | I1 |
 | TAM | tran_tang x buoc (co he so buoc) | E(H,q) do sau thi truong | I6 (giu bien do an toan) |
@@ -106,9 +106,12 @@ Mot `ho_so_bot` (JSON) gom: danh sach khoi phat hien (co the nhieu, moi khoi co 
 | HE_SO | `he_so_lot`, `he_so_buoc` | khong thu nguyen | giu nguyen |
 | LOT | `lot`, lot cong | % von mat khi luoi di den do sau E(H,q) | I4 (ngan sach rui ro) |
 | TIEN | `chot_tien`, "All Sniper X USD", nguong hoa von | % von | theo (lot x khoang cach x gia tri diem) |
-| THOI_GIAN | cho lui, gio phien, so nen cua chi bao | gio dong ho hoac so nen | I5 (hai ung vien) |
+| THOI_GIAN | gio phien, so nen cua chi bao, tre tinh bang phut | gio dong ho hoac so nen | I5 (hai ung vien) |
 | NGUONG_CHI_BAO | RSI < 30, ADX > 25 | phan vi (ti le kich hoat) | `ngoai_sinh.chuyen` (giu ti le kich hoat) |
+| PHI | tran spread cho phep vao lenh (`InpMaxSpread`) | C (chi phi mot vong) | I2 (nhan ti le chi phi, doi sang point cua ma dich) |
 | CONG_TAC | `che_do`, `kieu_lot`, `tia_lenh`, `muc_stopout`, `don_bay` (thuoc tai khoan) | - | giu nguyen |
+
+Co **12 lop** (them PHI so voi ban thiet ke dau: tran spread khong thuoc loai khoang cach nao khac). Khoa `.set` khong phan loai duoc bang ten / gia tri duoc de o `CHUA_PHAN_LOP` (khong tu doan: vi du `InpPlus` - cong lot hay cong buoc? - o ca hai bo CCBSN).
 
 **Luat mot-lop:** MOI truong cua `luoi.ThamSo` va moi o tham so cua mot the phai co mot lop; test se dung neu them truong moi ma khong phan lop (chong "quen" am tham). Truong `ThamSo` da khai bao nhung engine khong doc (`luoi.CHUA_CAI_DAT`) khong duoc dua vao truc quet - quy tac nay `quet_luoi` da co.
 
@@ -244,7 +247,7 @@ Engine duoc tin **theo lop o** chi khi `hieu_chuan_luoi` cho KHOP o lop do. Luoi
 Moi lan chuyen xong ghi mot hang `chuyen_hang` (nc.db, xuat `so_cai/nc/chuyen_hang.jsonl`): bot (the), nguon, dich, khung, cach dich da dung (bat bien + w cho tung lop), `s_I1`, `s_I2`, `s_I3`, `s_chon`, khoang cach van tay, ket qua engine, ket qua tester, tuong quan hang, nhan (DAT / AM / CHUA_DO_DUOC kem ly do), vector khoang cach g. **Chi hang kham_pha duoc dua vao bo hoc.**
 
 ### 10.2 Cai gi duoc hoc
-1. **Bang "lop tham so x khoang cach -> cach dich tot"** (nho: ~11 lop x vai dac trung g): hoi quy ben (Theil-Sen / Huber) co co ve (ridge) ve phia mac dinh (b=1, c=0 tuc la I1 thuan) - voi it mau, **co ve ve cai prior tot hon la thoi phong**.
+1. **Bang "lop tham so x khoang cach -> cach dich tot"** (nho: ~12 lop x vai dac trung g): hoi quy ben (Theil-Sen / Huber) co co ve (ridge) ve phia mac dinh (b=1, c=0 tuc la I1 thuan) - voi it mau, **co ve ve cai prior tot hon la thoi phong**.
 2. **Luat ve nhan `s_I3`**: `log s_I3 ~ a + b log(A_dich/A_nguon) + c log(C_dich/C_nguon) + d * (khoang cach hoi quy) + ...`
 3. **Gia tri bien cua khoi** (muc 12.1): khoi nao dang tien trong bot nao.
 
@@ -313,12 +316,20 @@ Ghep the nay vao the kia qua `can` / `xung_dot`; chi thu to hop do `de_xuat_ap_c
 
 | Buoc | Lam gi | Xong khi | Ai chay | Phu thuoc |
 |---|---|---|---|---|
-| **S0** | `nhan/dich_tham_so.py` (dai so don vi, 11 lop, bat bien I1-I6, chan, E(H,q)); luat mot-lop; `quet_o` | test don vi: dong nhat, quy luat ti le, chan; moi truong ThamSo co lop | cloud (co test) | can duoc chay test |
+| **S0** | `nhan/dich_tham_so.py` (dai so don vi, 12 lop, bat bien I1-I6, chan, E(H,q)); luat mot-lop; `quet_o` | test don vi: dong nhat, quy luat ti le, chan; moi truong ThamSo co lop | cloud (co test) | can duoc chay test |
+|  | **TRANG THAI 05/10/2026:** phan DICH xong (`dich_tham_so.py`, 840 dong), kiem bang script tam 36 phep + 13 phep thu dot bien (xem muc 13.1); **chua** co `test_dich_tham_so.py` chay bang pytest (che do quyen), **chua** co `quet_o` | | | |
 | **S1** | the gioi L0-L3 + bo kiem chung + doi chung B0-B2 + dong bang nguong; chay chi engine | L0 bang nhau; L1 tim lai k; bang so sanh thong minh vs B0-B2 | cloud | S0 |
 | **S2** | **he don gian that, NHIEU lan:** luoi tron (B1) tren AUDCAD -> NZDCAD, USDCHF, AUDNZD, EURGBP... o M15 va H1; engine rut gon + tester top-4; ghi hang | >= 30 hang; tuong quan hang engine - tester; thong minh vs I1 thuan tren DU LIEU THAT | cloud + may nha (tester) | S1; bac thang hieu chuan #56 |
 | **S3** | `ho_so_bot` xong; van tay that cua CCBSN / CLMCA; nhan `s_I3` vang -> FX; **cat khoi bang .set** (12.1); bang hoc v0 | van tay co that; gia tri bien cua cac khoi cua CCBSN; bang v0 voi ghi so hang | cloud + may nha | #50, #52 |
 | **S4** | cai khoi vao engine theo thu tu uu tien (12.2) + do A/B + bac hieu chuan cho moi khoi | moi khoi: khop tester o lop do hoac ghi ro lech | cloud + may nha | #48 |
 | **S5** | to hop + tai lieu cong khai + chi bao qua HEPHAESTUS; bao cao "hoc duoc gi" theo lop tham so | bang hoc khoi dau co khoang tin cay; bao cao 3-8 dong cho chu du an | cloud + may nha | S3, S4 |
+
+### 13.1 S0 da kiem nhu the nao (05/10/2026, khong dung pytest)
+
+Mot script tam (`tai_lieu/ban_va_chua_test/kiem_dich_tham_so.txt`, chay: `python3 kiem_dich_tham_so.py` tu thu muc goc sau khi doi duoi) cho:
+- 36 phep kiem, deu dat. Co 4 phep neo vao ENGINE THAT chu khong chi vao cong thuc cua chinh module: (a) lo treo dinh cua `luoi.chay_mang` tai tang n khop `hinh_rui_ro` voi 5 kieu luoi (lot phang / nhan / cong, buoc co gian, tran buoc) x mua / ban x n = 3, 7, 12; (b) vang -> AUDCAD: sau khi dich theo I4, lo treo dinh tinh theo % von cua engine hai ben bang nhau trong 2% (con "giu lot" thi lech > 50%); (c) E(H,q) khop vong lap ngay tho; (d) I6: cung mot duong gia, M15 -> H1, giu gio dong ho ra he so tam ~1 con giu so nen ra ~2 (dung luat can bac hai).
+- 13 phep thu dot bien (sua co y mot dong trong ban sao cua module) - ca 13 deu bi bat: bo san 3C, doi dau I4, dao mu pha tron, ha nguong phan giai, lech cua so E, sai mu buoc / lot, dao ti le I6, hong gop trung, nham huong TIEN, bo lot toi thieu, thieu mot lop, dich so nen mac dinh. (Ban dau 1/13 lot luoi: nguong phan giai - da them diem kiem nam giua hai phia 2,0.)
+- Han che da biet: engine tren bar chi tin cay khi moi khoang cach >= 2 lan bien do nen; duoi nguong `engine_do_duoc = False` (chi tester do duoc). `dung_lo_tong` dat != 0 cung gan co do vi `luoi.py` chua cai dat. Gia tri diem `pv` va von phai cung dong tien; voi tep `.set` dung dong tien tai khoan.
 
 **Duong gang:** hieu chuan engine (#56) nam tren duong gang cua S2 - chua biet engine dang tin duoc o dau thi sang loc bang engine la mu. Vi vay thu tu tester cua may nha da xep ngay sau CLMCA (xem `VIEC_NEN_MAY_NHA.md`).
 
@@ -333,12 +344,12 @@ Ghep the nay vao the kia qua `can` / `xung_dot`; chi thu to hop do `de_xuat_ap_c
 - **Tick that chi tu ~2024-01 (FX) / ~2025-09 (vang)**; bot nhay vi cau truc (tia, hoa von) chi kiem tra duoc bang Model 4 tren doan gan day.
 - **The gioi nhan tao chi thu duoc cai ta nghi ra.** Qua L0-L7 la dieu kien can, khong phai du.
 
-## 15. MODULE VA CONG CU DU KIEN (chua co ma)
+## 15. MODULE VA CONG CU DU KIEN (`dich_tham_so.py` da co ma 05/10; con lai chua)
 
 | Tep | Vai tro |
 |---|---|
 | `nhan/the_phuong_phap.py` | dang the, doc / ghi kho, gieo tu `khoi_co_che`, bang chung tom tat sinh tu nc.db |
-| `nhan/dich_tham_so.py` | lop tham so, dai so don vi, bat bien I1-I6, chan, E(H,q), dich + bao cao "vi sao" |
+| `nhan/dich_tham_so.py` | **DA CO** - lop tham so, dai so don vi, bat bien I1-I6, chan, E(H,q), dich + bao cao "vi sao" |
 | `nhan/do_thong_minh.py` | xay luoi rut gon, thu hep dan, chon top-k khac nhau, ke hoach tester (khong tu chay tester), dem phep thu + `plan_hash` |
 | `nhan/thu_chuyen.py` | the gioi L0-L7, doi chung B0-B2, chi so M1-M5, kiem hash nguong |
 | `nhan/nc_thi_nghiem.quet_o` | ham anh em cua `quet_luoi` nhan DANH SACH O cu the (truc ghep); `quet_luoi` goi lai no - **hoi quy giu nguyen** |

@@ -116,7 +116,7 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
         ("nc_tac_tu", "nc_cong_cu", "nc_so_tay", "nc_thi_nghiem", "nc_mo_xe",
          "nc_dac_trung", "nc_du_lieu", "nc_tu_lai", "nc_bot_hoc", "nc_tho", "nc_so_cai",
          "ea_tho", "ea_gia_lap", "bao_cao_mt5", "lenh_tester", "khoi_co_che", "hieu_chuan_luoi",
-         "ho_so_bot", "ho_so_set", "nc_ho_so"),
+         "ho_so_bot", "ho_so_set", "nc_ho_so", "dich_tham_so"),
     ),
     "SO & HOP DONG": (
         "Nguon su that chung. Moi tru doc va ghi qua day, khong tu giu so rieng.",
