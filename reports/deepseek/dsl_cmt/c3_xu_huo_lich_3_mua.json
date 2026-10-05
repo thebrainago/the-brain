@@ -1,0 +1,37 @@
+{
+ "ten": "c3_xu_huo_lich_3_mua",
+ "ho": "xu_huong",
+ "co_che": "Giao dich mua khi xu huong tang da duoc xac nhan boi gia nam tren duong trung binh dai han, dong thoi thoi diem mua roi vao cua so lich co dac diem mua tot (dau thang), vi nguoi mua tra tien cho phoi nhiem nay dua tren ky vong xu huong tiep dien va hieu ung mua som trong thang.",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 34
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "sma",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 89
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_thang"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 5
+   }
+  }
+ ]
+}

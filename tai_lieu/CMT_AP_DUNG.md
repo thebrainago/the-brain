@@ -27,3 +27,9 @@ Bollinger, Ichimoku) hoac chi bao chua biet lat -> tra None, khong doan. Model r
 **19 ban MUA + 13 ban BAN** trong `reports/deepseek/dsl_cmt/` (6 ban MUA khong lat duoc, cho Claude / may nha lam tay). **10 / 23 cum la cum CHUA CO trong kho** (vi du
 PHA_VO + SUC_MANH_XU_HUONG, DAO_DONG + SUC_MANH_XU_HUONG) - day moi la gia tri that cua dot nay: lap vao cho trong cua kho, khong them ban sao.
 Cac ban nay van la BAN NHAP: chua vao `config/co_che_dsl.json` (chi phien GHI / may nha duoc sua `config/*`), chua chay tren gia.
+
+## Dot 3 (05/10): lap cho trong THEO HE (`reports/deepseek/chay_dsl_cmt3.py`)
+Liet ke moi cap HO CMT chua co ban nhap, ds-flash soan 3 bien the ban MUA / cap, **may** dien `ho` (DSL) va `co_che`, may kiem cu phap + kiem DUNG hai ho
+(lan dau 6/61 ban trung thanh: model re hay them dieu kien ho thu ba; dua kiem tra vao vong sua). Ban BAN do `guong_dsl` lat. Ket qua: **36 ban MUA + 18 BAN moi**
+(tong cum thu hieu dung 38), 2-3 cap con hong (SUC_MANH_XU_HUONG + DAO_DONG: ADX long san ATR / EMA nen bi dem la ho khac - viec tay).
+Van la BAN NHAP, chua chay tren gia: viec may nha = nap vao kho va thu tren kham_pha (khi co gia).

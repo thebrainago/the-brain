@@ -1,0 +1,50 @@
+{
+ "ten": "c3_dao_do_lich_2_ban",
+ "ho": "lich",
+ "chieu": -1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "stochastic",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 14,
+    "m": 3
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 80
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_tuan"
+   },
+   "phep": ">=",
+   "phai": {
+    "hang": 2
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "stochastic",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 14,
+    "m": 3
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 20
+   }
+  }
+ ],
+ "co_che": "CMT DAO_DONG + LICH (nhap, may dien)"
+}

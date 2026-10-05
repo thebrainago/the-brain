@@ -1,0 +1,39 @@
+{
+ "ten": "c3_xu_huo_nen_3_mua",
+ "ho": "xu_huong",
+ "chieu": 1,
+ "giu": 6,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "supertrend",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 14,
+    "he_so": 2.5
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "mau_nen",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 3
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 0
+   }
+  }
+ ],
+ "co_che": "CMT XU_HUONG + NEN (nhap, may dien)"
+}

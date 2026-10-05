@@ -1,0 +1,29 @@
+{
+ "ten": "c3_dao_do_lich_1_ban",
+ "ho": "lich",
+ "chieu": -1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 65
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_tuan"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 3
+   }
+  }
+ ],
+ "co_che": "CMT DAO_DONG + LICH (nhap, may dien)",
+ "ra": []
+}
