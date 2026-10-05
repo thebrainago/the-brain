@@ -1,0 +1,48 @@
+{
+ "ten": "hoi_quy_khi_adx_thap_",
+ "co_che": "Khi ADX duoi 20 thi thi truong khong co xu huong ro ret, gia thuong dao dong quanh trung binh. Zscore am sau cho thay gia dang bi bao qua muc so voi dinh ky, tao ra ap luc hoi quy ve gia tri trung binh (mean reversion) khi khong co luc mua ban manh de keo gia di tiep.",
+ "ho": "quay_ve_trung_binh",
+ "chieu": -1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx"
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 20
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "zscore",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 20
+   },
+   "phep": "<",
+   "phai": {
+    "hang": -2
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "zscore",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 20
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 0
+   }
+  }
+ ]
+}

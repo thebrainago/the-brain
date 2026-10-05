@@ -1,0 +1,41 @@
+{
+ "ten": "gian_bien_dong_atr_tang",
+ "ho": "bien_dong",
+ "chieu": -1,
+ "giu": 5,
+ "co_che": "Khi ATR(14) vượt lên trên trung bình của ATR(50), thị trường chuyển từ trạng thái nén sang giãn nở biến động. Trong bối cảnh giá đang giảm (chieu=-1), sự gia tăng đột ngột của biến động thường báo hiệu áp lực bán tháo mạnh mẽ hoặc một cú sốc tin tức tiêu cực, khiến các lệnh mua bắt đáy trở nên rủi ro cao do xu hướng giảm có thể tiếp diễn với biên độ rộng hơn.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "atr",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "sma",
+    "cua": {
+     "chi_bao": "atr",
+     "n": 50
+    },
+    "n": 50
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "atr",
+    "n": 14
+   },
+   "phep": "<=",
+   "phai": {
+    "chi_bao": "sma",
+    "cua": {
+     "chi_bao": "atr",
+     "n": 50
+    },
+    "n": 50
+   }
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "ten": "may_ichimoku_sto_cat_len",
+ "ho": "xu_huong",
+ "co_che": "Ket hop loc xu huong lon (gia nam tren may Ichimoku) voi tin hieu kich hoat ngan han (Stochastic cat len tu vung qua ban), tao ra cac phoi nhiem mua khi dong tien dang manh va co dau hieu quay dau tang cuong.",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "ichimoku",
+    "thanh_phan": "span_a"
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "ichimoku",
+    "thanh_phan": "span_b"
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "stochastic",
+    "thanh_phan": "k"
+   },
+   "phep": "cheo_len",
+   "phai": {
+    "chi_bao": "stochastic",
+    "thanh_phan": "d"
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "stochastic",
+    "thanh_phan": "k"
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 20
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "ichimoku",
+    "thanh_phan": "span_a"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   }
+  }
+ ]
+}

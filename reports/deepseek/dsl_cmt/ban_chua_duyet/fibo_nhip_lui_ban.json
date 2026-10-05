@@ -1,0 +1,57 @@
+{
+ "ten": "fibo_nhip_lui_05_618_len",
+ "ho": "quay_ve_trung_binh",
+ "chieu": -1,
+ "giu": 3,
+ "co_che": "Trong xu huong tang gia, khi gia hoi quy ve vung Fibonacci retracement 0.5-0.618 cua con song gan nhat va duoc ho tro boi EMA 50 dang doc len, cac nha dau tu co khuynh huong mua them (buy the dip) do tin rang day la muc gia hop ly de tiep tuc da nang, tao ra luc mua manh va day gia quay lai.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<=",
+   "phai": {
+    "chi_bao": "fibonacci",
+    "n": 20,
+    "muc": 0.618
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">=",
+   "phai": {
+    "chi_bao": "fibonacci",
+    "n": 20,
+    "muc": 0.5
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "n": 50
+   },
+   "phep": "cheo_len",
+   "phai": {
+    "hang": 0
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "fibonacci",
+    "n": 20,
+    "muc": 0.786
+   }
+  }
+ ]
+}

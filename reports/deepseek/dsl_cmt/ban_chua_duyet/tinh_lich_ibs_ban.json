@@ -1,0 +1,28 @@
+{
+ "ten": "tinh_lich_ibs_giam",
+ "ho": "lich",
+ "chieu": -1,
+ "giu": 5,
+ "co_che": "Thong ke lich su cho thay IBS thap (dong cua gan day nen) ket hop voi ngay trong tuan cu the tao ra ap luc ban tu dong tu cac quy dinh thanh khoan va tam ly chung, giup gia co xu huong tiep tuc giam ngan han.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_tuan"
+   },
+   "phep": "==",
+   "phai": {
+    "hang": 2
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ibs"
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 0.2
+   }
+  }
+ ],
+ "ra": []
+}

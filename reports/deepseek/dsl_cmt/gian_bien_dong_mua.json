@@ -1,0 +1,32 @@
+{
+ "ten": "gian_bien_dong_atr_breakout",
+ "ho": "bien_dong",
+ "co_che": "Khi biến động ngắn hạn (ATR 14) vượt lên trên mức trung bình dài hạn (ATR 50), thị trường thoát khỏi trạng thái nén giá, báo hiệu sự gia tăng đột ngột của dòng tiền và khả năng hình thành xu hướng mạnh.",
+ "chieu": 1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "atr",
+    "n": 14
+   },
+   "phep": "cheo_len",
+   "phai": {
+    "chi_bao": "atr",
+    "n": 50
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "atr",
+    "n": 50
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   }
+  }
+ ],
+ "ra": []
+}

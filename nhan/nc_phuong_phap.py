@@ -91,6 +91,20 @@ def _thu_chuyen(**kw):
 _NGUON = {"type": "object", "description": "thi truong {ma, khung_phut, A, C, pip, pv, von} (A, C don vi gia)"}
 _MA = {"type": "string", "description": "ma the trong kho_phuong_phap/"}
 _GT = {"type": "object", "description": "{ten_o: gia tri o thi truong nguon}"}
+
+def _cmt_loc(khai_bao=None, tinh_cach=None, kho=False, **_):
+    from nhan import cmt_prior as C
+    if kho:
+        import json
+        from nhan import ngu_phap as N
+        khai_bao = json.load(open(N.KHO_CO_CHE, encoding="utf-8"))
+    if not isinstance(khai_bao, list) or not khai_bao:
+        raise ValueError("can `khai_bao` (danh sach khai bao DSL) hoac kho=true")
+    r = C.loc(khai_bao, tinh_cach)
+    r["cum"] = r["cum"][:40]
+    r["canh_bao"] = {"so_spec_co_canh_bao": len(r["canh_bao"])}
+    return r
+
 CONG_CU = [
     ("luu_the", "Luu (kiem + ghi) mot THE PHUONG PHAP vao kho_phuong_phap/. Khong an phep thu.",
      {"the": {"type": "object", "description": "the theo dang muc 7.2 CHUYEN_BOT_SANG_TAI_SAN_KHAC.md"},
@@ -106,4 +120,6 @@ CONG_CU = [
     ("thu_chuyen", "Ke hoach thu chuyen mot the sang cac thi truong dich (CHUA_CHAY; ket luan can tester + cham_diem).",
      {"the_ma": _MA, "gia_tri": _GT, "nguon": _NGUON, "dich_ds": {"type": "array", "items": {"type": "object"}}, "w": {"type": "number"}},
      ["the_ma", "gia_tri", "nguon", "dich_ds"], _bao(_thu_chuyen)),
+    ("cmt_loc", "Gom khai bao DSL cung HO chi bao (kieu CMT) thanh cum: so phep thu HIEU DUNG + dai dien + thu tu theo che do (tinh_cach hoi_quy|quan_tinh). NHAN + THU TU, khong chan, khong chay engine.",
+     {"khai_bao": {"type": "array", "items": {"type": "object"}}, "tinh_cach": {"type": "string"}, "kho": {"type": "boolean", "description": "true = dung config/co_che_dsl.json"}}, [], _bao(_cmt_loc)),
 ]
