@@ -193,6 +193,11 @@ def _hieu_chuan_luoi(vong_id=None, **kw) -> dict:
     return HCL.hieu_chuan(vong_id=vong_id, **kw)
 
 
+def _ho_so_bot(vong_id=None, **kw) -> dict:
+    from nhan import nc_ho_so as NHS
+    return NHS.chay(vong_id=vong_id, **kw)
+
+
 _EA = {"type": "string", "description": (
     "EA cong khai: duong toi file .mq5, hoac 'kho:<so thu tu>' / 'kho:<tu trong tieu de>' trong "
     "reports/ea/kho.json (EA da tai tu MQL5 Code Base), hoac duong toi file .ex5 (EA NHI PHAN khong ma nguon: chay "
@@ -486,6 +491,33 @@ CONG_CU: list[dict] = [
          "han_giay": {"type": "integer", "description": "han chay tester, giay (>= 60, mac dinh theo config/ea_tho.json)"},
          "lam_lai_tester": {"type": "boolean", "description": "true = bo qua nua tester da nho, chay tester lai"}},
         ["ma", "khung", "tu", "den"], _hieu_chuan_luoi),
+    _cc("ho_so_bot",
+        "HO SO CO CHE cua mot con bot DA CO tu LENH THAT cua no (bao cao tester .htm / .csv / .csv.gz da nam trong thu muc du an) + (tuy chon) "
+        "DOI CHIEU bo .set cua tac gia: moi tham so .set nhan DUNG MOT ket qua - KHOP / MAU_THUAN (tac gia noi X, lenh that cho thay Y, kem do "
+        "tin) / TAT / BI_CHE / CHUA_GAP (lich su chua toi dieu kien) / KHONG_DO_DUOC / KHONG_RO / ... - va liet ke NUT AN (co che co trong lenh "
+        "that ma khong tham so nao dieu khien). Ra `cong_thuc` = co che do duoc kem so (buoc theo bac, he so lot theo bac, TP ca chuoi, hedge "
+        "sau N lenh, tre, ...): nguyen lieu de luu thanh phuong phap va thay so cho tai san / khung khac (tai_lieu/CHUYEN_BOT_SANG_TAI_SAN_KHAC.md). "
+        "`them` = cac cap {lenh, bo_set, ten, ma} nua: nhieu bo .set cua cung mot bot (hoac cung ho EA) thi doi chieu khai bao voi hanh vi GIUA cac "
+        "bo - tham so nao that su dieu khien, khoi nao co o bot nay khong o bot kia. CHI MO TA bot da co, khong noi bot co lai hay khong va "
+        "khong tieu phep thu (doan 'ho_so', so_phep_thu 0; cung van tay thi dung dong so tay cu). Duong dan phai nam trong thu muc du an; bo "
+        ".set phai la bo da chay ra dung tep lenh do. Lich su tester co luoi thoi gian 10-20 giay: moi so do o muc giay (tre, nhip) chi la do "
+        "bo mo phong. CHUA_DO_DUOC (co phep do loi / cap hong) khong bao gio la ket qua AM. Ghi bao cao ASCII vao reports/ho_so/ (tat bang "
+        "ghi_bao_cao=false).",
+        {"lenh": {"type": "string", "description": "duong dan tep lenh (trong thu muc du an): bao cao tester .htm / .csv / .csv.gz (bang Deals), "
+                                                   "hoac export lich su MQL5"},
+         "bo_set": {"type": "string", "description": "duong dan bo .set cua tac gia (tuy chon): doi chieu tung tham so voi lenh that"},
+         "ten": {"type": "string", "description": "ten ngan cua bot / lan chay (mac dinh theo ten tep); dung lam ten tep bao cao"},
+         "ma": {"type": "string", "description": "ma giao dich, vd GOLD.i# (bo trong = suy tu tep lenh)"},
+         "pip": {"type": "number", "description": "gia tri 1 pip (bo trong = suy tu ma; vang 0,1)"},
+         "hop_dong": {"type": "number", "description": "kich thuoc hop dong / 1 lot (bo trong = suy tu ma; vang 100)"},
+         "von_dau": {"type": "number", "description": "von ban dau cua lich su (bo trong = suy tu tep)"},
+         "khung_phut": {"type": "number", "description": "khung bieu do cua EA, phut (bo trong = do tu nhip vao lenh)"},
+         "he_so_don_vi": {"type": "number", "description": "ep he so quy doi 1 don vi khoang cach trong .set = bao nhieu pip (bo trong = tu uoc, "
+                                                           "kiem bang nhieu cap so; chi dat khi biet chac phien ban EA)"},
+         "them": {"type": "array", "items": {"type": "object"},
+                  "description": "cac cap {lenh, bo_set, ten, ma, he_so_don_vi} nua (toi da 5) de so sanh cac bo .set voi nhau"},
+         "ghi_bao_cao": {"type": "boolean", "description": "true (mac dinh) = ghi reports/ho_so/<ten>.md (+ _set.md, so_sanh_*.md)"}},
+        ["lenh"], _ho_so_bot),
 ]
 THEO_TEN = {c["ten"]: c for c in CONG_CU}
 #: Cong cu chi GHI so tay (khong do gi) - van duoc goi khi het ngan sach chu ky.

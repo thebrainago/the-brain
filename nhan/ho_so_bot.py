@@ -140,6 +140,24 @@ def _do_tin(n: int, tot: int = 30, vua: int = 12) -> str:
     return "cao" if n >= tot else "vua" if n >= vua else "thap"
 
 
+def _so_tron_nhat(lo: float, hi: float, toi_da_le: int = 3) -> float:
+    """So 'tron' nhat nam trong khoang [lo, hi]: it chu so le nhat, hoa thi gan tam nhat.
+
+    Khoang he so tu lot da lam tron chi cho biet cac gia tri TUONG THICH, khong phai gia tri do duoc. Trung diem
+    se doc sai: VAMGE o bac 2-10 cho khoang 0.926..1.046 (chua 1.0 = lot phang), trung diem 0.986 nghe nhu
+    'giam dan' - sai. Dung lam tham so de thay so vao thi phai la so don gian nhat con tuong thich."""
+    if hi < lo:
+        lo, hi = hi, lo
+    tam = (lo + hi) / 2.0
+    for le in range(0, toi_da_le + 1):
+        b = 10.0 ** -le
+        k0, k1 = math.ceil(lo / b - 1e-9), math.floor(hi / b + 1e-9)
+        if k0 <= k1:
+            k = min(range(k0, k1 + 1), key=lambda i: abs(i * b - tam)) if k1 - k0 < 2000 else round(tam / b)
+            return round(k * b, le)
+    return round(tam, toi_da_le)
+
+
 def _ha(do_tin: str, bac: int = 1) -> str:
     i = DO_TIN.index(do_tin)
     return DO_TIN[min(len(DO_TIN) - 1, i + bac)]
@@ -1367,8 +1385,8 @@ def _do_lot_theo_bac(c: Ctx, buoc_lot: float | None = None) -> dict:
         if nhan_1 is not None:
             ly += "; he so nhan %.2f..%.2f cung khop o do sau da thay: khong phan biet cong / nhan" % (nhan_1["a"], nhan_1["b"])
             return ket_qua("lot_cong", "thap", ly, {"cong_lot": _tham_so(_f(mod, 4), "lot", "lot_cong", "lot lenh sau - lot lenh truoc"),
-                                                    "he_so_lot": _tham_so(_f((nhan_1["a"] + nhan_1["b"]) / 2, 3), "he_so", "lot_nhan",
-                                                                          "khoang %.3f..%.3f" % (nhan_1["a"], nhan_1["b"]))},
+                                                    "he_so_lot": _tham_so(_f(_so_tron_nhat(nhan_1["a"], nhan_1["b"]), 3), "he_so", "lot_nhan",
+                                                                          "khoang tuong thich %.3f..%.3f (chon so tron nhat)" % (nhan_1["a"], nhan_1["b"]))},
                            ghi_ro=("lot_nhan",))
         return ket_qua("lot_cong", dt_base, ly, {"cong_lot": _tham_so(_f(mod, 4), "lot", "lot_cong", "lot lenh sau - lot lenh truoc")})
     if nhan_1 is not None and nhan_1["a"] > 1.0 + 1e-6:
@@ -1377,15 +1395,18 @@ def _do_lot_theo_bac(c: Ctx, buoc_lot: float | None = None) -> dict:
         ly = "%s: he so %.2f..%.2f" % (nhan_1["ghi"], a, b)
         if nhan_1["kieu"] == "chuoi" and tich is not None and tich["cov"] >= 0.95:
             ly += "; kieu lam tron mot lan tu lot dau cung khop (%.2f..%.2f)" % (tich["a"], tich["b"])
-        return ket_qua("lot_nhan", dt, ly, {"he_so_lot": _tham_so(_f((a + b) / 2, 3), "he_so", "lot_nhan", "khoang %.3f..%.3f (%s)" % (a, b, nhan_1["kieu"]))})
+        return ket_qua("lot_nhan", dt, ly, {"he_so_lot": _tham_so(_f(_so_tron_nhat(a, b), 3), "he_so", "lot_nhan",
+                                                           "khoang tuong thich %.3f..%.3f (%s; chon so tron nhat)" % (a, b, nhan_1["kieu"]))})
     if nhieu_doan:
         u = nhieu_doan[0]
         dn = u["dn"]
         ts, mo_ta = {}, []
         for i, x in enumerate(dn, 1):
-            mo_ta.append("bac %d-%d: x%.2f..%.2f" % (x["tu"], x["den"], x["lo"], x["hi"]))
-            ts["he_so_bac_%d" % i] = _tham_so(_f((x["lo"] + x["hi"]) / 2, 3), "he_so", "lot_nhan_theo_bac",
-                                              "bac %d..%d, khoang %.3f..%.3f" % (x["tu"], x["den"], x["lo"], x["hi"]))
+            mo_ta.append("bac %d-%d: x%s (khoang tuong thich %.2f..%.2f)"
+                         % (x["tu"], x["den"], ("%.3f" % _so_tron_nhat(x["lo"], x["hi"])).rstrip("0").rstrip("."), x["lo"], x["hi"]))
+            ts["he_so_bac_%d" % i] = _tham_so(_f(_so_tron_nhat(x["lo"], x["hi"]), 3), "he_so", "lot_nhan_theo_bac",
+                                              "bac %d..%d, khoang tuong thich %.3f..%.3f (chon so tron nhat)"
+                                              % (x["tu"], x["den"], x["lo"], x["hi"]))
             if i >= 2:
                 ts["moc_doi_he_so_%d" % (i - 1)] = _tham_so(x["tu"] - 1, "lenh", "lot_nhan_theo_bac",
                                                             "lenh thu %d la lenh dau cua bac he so moi (lech 1 la cach dem)" % x["tu"])

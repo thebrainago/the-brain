@@ -3,15 +3,15 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-04 15:11 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ ffdc352 · 2 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-05 00:48 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ 67c43df · 7 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
-  · 156580a VIEC_NEN_MAY_NHA: thu tu tester do cloud xep + bac thang hieu chuan 8 bac
-  · 246240b ho_so_bot (DANG DO): bo do khoi co che tu deal tester - chua dang ky, chua co cong
-  · e0b1eaf hieu_chuan_luoi: engine luoi <-> MT5 tester, cung cua so + cung tham so, KHONG an 
-  · f75adb3 hien phap may nha: chay lien tuc, tuan tu, khong ngoi cho (chu du an 04/10) + hang
-  · 4f5c5ad fixture tester CCBSN: deals goc (3 lan chay Model 1), orders/html mau, .set UTF-8 
-- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 5, nha->cloud 16
+  · 67c43df ho_so_bot: sua phep do TRE DAU NGAY - do theo gio dong ho may chu, khong theo "hoa
+  · 9383143 ho_so_bot WP5c: bo dieu phoi ho_so() - mot loi goi ra HO SO co che cua bot tu lenh
+  · af35e7d ho_so_bot WP5a/WP5b: sua bang phan loai ten .set + them so do kiem duoc tre / bac 
+  · 54497fc ho_so_bot: do co che THOAT / HEDGE / GIO / NHIP THEM LENH tren lenh THAT + sua ban
+  · 2a412dc Thiet ke CHUYEN BOT SANG TAI SAN / KHUNG KHAC (tra loi thong diep B cua chu du an)
+- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 4, nha->cloud 10
   · moi nhat nha->cloud (gio may gui 2026-10-04T17:10:01): XONG #9/#10 (nha; so chi tiet reports/ea_tho_20261
 - May:
   · nha RANH ma=de5446d+sua nhip 2026-10-03T22:15:43 (gio may)
@@ -39,6 +39,16 @@
 - 03/10 chieu: "de danh token di, toi lam tren may nha" -> cloud DUNG, lam tiep o may nha toi nay (muc "TOI 03/10 O NHA" o Viec ke tiep).
 - 03/10 toi: LLM CHOT (thu nha c91d): mac dinh `ds/deepseek-flash`, du phong `qwen3.8-max-0902` sau 2 lan sai lien tiep, `--sau` cho viec can suy luan sau; KHONG cai Qwen Code / DeepSeek Harness. May nha TON DIEN (y chu du an): KHONG chay qua dem, chi chay NGAN khi bat may roi tat (`tai_lieu/SO_SANH_LLM.md` muc "QUYET DINH").
 - 03/10 khuya: chu du an CHOT DEEPSEEK lan nua ("toi se cung cap chi phi LLM toi da; quan trong la khai thac hieu qua, ke ca thay cau lam viec nang trong sandbox"; "may nha da chot deepseek thi dung deepseek"). Khong can nhac lai. Viec co hoc / nang (boc, dem, quet rong, gia thuyet nhap) giao cho DeepSeek (`b nc tho`, `q`); cloud giu suy luan + quyet. **Sandbox cloud CHUA goi duoc**: host `api.ai-box.vn` bi chinh sach mang chan (CONNECT 403, do 03/10) va khong co bien `AIBOX_API_KEY` -> chu du an tu lam qua menu moi truong (Edit): them host vao Network access (Custom) + dat `AIBOX_API_KEY` o muc bien / API credentials (phien MOI moi thay). KHONG dan khoa vao chat / repo.
+
+## Dang o dau (05/10, cloud: HO SO BOT + DOI CHIEU .set + cong cu nc `ho_so_bot` XONG; pytest van bi chan)
+- XONG + day (54497fc, af35e7d, 9383143, 67c43df + commit ke tiep): `nhan/ho_so_bot.py` (~2700 dong) = HO SO CO CHE tu LENH THAT cua tester. `HB.ho_so(lenh | deals | Ctx, ma=...)` mot loi goi tra dict JSON thuan: 52 khoi co che (moi khoi: nhom, ket luan co / khong / khong_ro / khong_do_duoc, do tin, ly do), `tham_so` da do (gia tri + don vi + khoi), `van_tay`, `tong_ket`, `canh_bao`. Khoi lich su lenh khong cho do thi NOI THANG, khong bao gio ghi "tac gia khong dung" chi vi khong do duoc.
+- XONG (moi): `nhan/ho_so_set.py` = doi chieu TUNG tham so `.set` (190 / 172 khoa) voi ho so do. Moi khoa DUNG MOT trong 10 ket qua (KHOP, MAU_THUAN, TAT, BI_CHE, CHUA_GAP, KHONG_DO_DUOC, KHONG_RO, CHUA_DOI_CHIEU, KHONG_PHAN_LOAI, KHONG_LIEN_QUAN). Con `nut_an` (co che co trong lenh ma khong tham so nao dieu khien), `cong_thuc` (HAT GIONG cua "the phuong phap", #55), `so_sanh_bo_set` (nhieu `.set` = thi nghiem tu nhien: chi doi khai bao keo theo doi hanh vi moi la bang chung). CLI `python3 -m nhan.ho_so_set <deals> <bo.set> --ma 'GOLD.i#' [--json --md --gon]`.
+- XONG (moi): cong cu `b nc cc ho_so_bot` (`nhan/nc_ho_so.py`, CC.THEO_TEN = 25): tep phai nam trong thu muc du an, loi tung cap duoc bat rieng, ghi MOT dong so tay doan 'ho_so' so_phep_thu 0 (khong an phep thu; DAT khi khong co loi, CHUA_DO_DUOC khi hong - khong bao gio AM), cung van tay thi dung lai dong cu, bao cao ASCII <= 38000 ky tu o `reports/ho_so/` (bo chay don mang ve cho cloud), `tom_tat` o cuoi. Da chay het duong tren 3 tep that voi so tay tam (NC_DB tam): 1 cap 15 s, trung van tay dung lai dong, 2 cap co so sanh; duong ngoai thu muc / thieu tep / khoa la / he_so_don_vi am deu bi tu choi; tep hong ra CHUA_DO_DUOC.
+- SUA (moi): `he_so_*` cua khoi lot nay la SO TRON NHAT trong khoang tuong thich, khong con la trung diem (VAMGE bac 2-10 tung ra 0,986 trong khi dung la 1,0 = lot phang; CanCuBo 1,051 / 1,049 thanh 1,05 = dung khai bao). Hat giong `cong_thuc` nay sach. Doi chieu `.set` khong doi hang nao.
+- BANG CHUNG: `reports/ho_so_bot_that_20261004.md` (VAMGE v3.05 + CanCuBo v2.6, GOLD.i#): lot khop 3114/3114, 1467/1467, 1962/1962; buoc 10,3 -> 15,4 pip (VAMGE) vs 100,6 pip co dinh (CanCuBo, 4 tang buoc nhung 4 moc deu 1 -> chi tang cuoi chay); thoat: VAMGE chot ca chuoi 10 / 20 pip, CanCuBo khoa loi truot cua chuoi 15 pip nhich 2 pip (0/955 chuoi lo); hedge VAMGE mo khi chuoi >= 16 lenh, lot sao chep lenh them moi nhat; 6 cho "tac gia noi mot dang, lenh that cho thay dang khac" (`MinuteDelayAfterClose` / `MinuteDelayNewDay` o ca hai bot, `InpPlus`, `InpDistanceMulti` o VAMGE) - KHONG chon ben nao; 2 co che AN (toi da MOT lenh them moi nen 15 phut; chi MUA); 5 lan sua sai cua chinh minh (don vi pip = 0,1 USD; "p90 = MoneyTPAllAcc" la trung hop; luoi giay tester; trung diem he so; cach do tre dau ngay).
+- **CHOT AN TOAN con hieu luc**: KHONG chay pytest / test (lop an toan tach rieng chan mot lan 04/10; chua duoc chu du an doi che do). Moi kiem chung tren la script tam NGOAI repo tren 3 tep that + truong hop bien. CHUA viet / chay: `test_ho_so_bot.py` (moi co khung mo phong, 0 test), `test_ho_so_set.py`, `test_nc_ho_so.py`. Khi duoc chay test: viet ba tep (dap an cai san bang `Cfg`, doi chung am, mau hong, ASCII, `HB.kiem_dang_ky() == []`, mot dong so tay moi cap, ba loai trong `so_sanh_bo_set`), roi `test_kien_truc`, `test_khoi_co_che`, tep cham `nc_cong_cu`.
+- Thu nha: #11 (`20261004-080455-716b`) va #12 (`20261004-150936-f2db`) da gui, nha CHUA tra (hai thu XONG #9 / #10 da duoc tiep nhan). Khi thay `[THU-NHA id=...]`: `b cau lay && b cau thu`. Runner nha phai bat: `b cau chay --lien-tuc --nghi 20`.
+- Viec ke tiep: (1) don cho nha chay `b nc cc ho_so_bot` tren 2 cap that de ghi VAO SO TAY THAT (nha la noi duy nhat ghi so cai), roi doc cheo 5 `.set` CLMCA; (2) #55 S0 `nhan/dich_tham_so.py` + `quet_o` (can test); (3) #56 ap ban va + test muc E + hang doi `b cau giao` danh so (can test); (4) #53 nhan ban CCBSN (cho chu du an quyet nguon tick); (5) #48 sua engine luoi (cho so that tu bac thang hieu chuan cua nha).
 
 ## Dang o dau (04/10 toi, cloud: HIEU CHUAN luoi day xong; ho so bot DANG DO; thu #11 + #12 gui nha; test bi chot an toan; thiet ke CHUYEN BOT xong)
 - XONG + day (e0b1eaf): `nhan/hieu_chuan_luoi.py` + cong cu `b nc cc hieu_chuan_luoi` (CC.THEO_TEN = 24) + `test_hieu_chuan_luoi.py` 117 ca. MOT lenh = nua tester (duoc nho theo tham so + cua so + model + von) + nua engine + dong so sanh: KHOP -> DAT, LECH -> AM, ha tang chet -> CHUA_DO_DUOC; doan 'hieu_chuan', so_phep_thu 0 (khong an phep thu). Dung sai |engine - tester| <= max(tuong doi * |tester|, tuyet doi): lai 0,10 / 1,0; DD 0,25 / 2,0; lenh 0,15 / 3,0. DINH CHINH: thong diep commit e0b1eaf ghi "17 loi deu bi bat"; dung la 16 loi co y, 14 bi bat truc tiep, 2 bi che boi mot cai ghi de thua (chi lo khi bo ca hai) - khong sua lich su, ghi o day.

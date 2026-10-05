@@ -58,9 +58,11 @@ Moi phien Claude Code:
    gia thuyet dang song; thi nghiem tot nhat; hieu biet co bang chung; phep thu da tieu).
 2. **Tu chon viec co gia tri nhat va lam** - khong cho giao viec. Chu du an la nha
    tai tro: dat muc tieu, gui y tuong qua `b nc hoi "..."`, doc so tay.
-3. **Moi phep do nghien cuu di qua `b nc cc <cong_cu> '<json>'`** (24 cong cu: ho so,
+3. **Moi phep do nghien cuu di qua `b nc cc <cong_cu> '<json>'`** (25 cong cu: ho so,
    tim quy luat, thu co che, quet, mo xe lenh, thu luoi, xac nhan, niem phong, niem phong luoi,
-   hieu chuan luoi = engine <-> MT5 tester, KHONG an phep thu: `nhan/hieu_chuan_luoi.py`...) de
+   hieu chuan luoi = engine <-> MT5 tester, KHONG an phep thu: `nhan/hieu_chuan_luoi.py`;
+   `ho_so_bot` = ho so co che tung bot tu LENH THAT + doi chieu tung tham so `.set`, KHONG an phep thu:
+   `nhan/ho_so_bot.py`, `nhan/ho_so_set.py`, `nhan/nc_ho_so.py`...) de
    no vao so tay `nc.db`. Khong viet them script `_*.py` roi cho mot thi nghiem moi -
    ket qua ngoai so tay la ket qua khong ai tim lai duoc.
 4. **Ket phien**: ghi hieu biet (kem tn_id) + cau hoi moi + trang thai gia thuyet.

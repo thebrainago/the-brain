@@ -44,10 +44,14 @@ Thu #11 van hieu luc: KHONG niem phong, KHONG tai tick moi (Dukascopy...).
 Xuat bao cao tester `.htm` -> `reports/fixture/tester_<ten>_deals.csv.gz` (+ `_orders_mau.csv`, `.set.txt` neu khong co dong khoa).
 `.set` nao DAT o Model 0 (lai sau phi + maxDD < 80%) -> `xac_nhan` DUNG MOT LAN. Khong niem phong.
 
-**N2. Ho so co che tung bot (khong tester).** Voi moi bot co deals trong `reports/fixture/`: chay ho so co che
-(`b nc cc ho_so_bot`, khi cong cu do co - xem `nhan/ho_so_bot.py`) -> ghi `reports/ho_so_bot_<ngay>.md` + so tay
-(`ghi_hieu_biet`, nhan 'ho so co che'). Doc ket qua tung khoi (co / khong / khong ro / khong do duoc) va ghi **cho nao ho so SAI** so voi
-`.set` cua tac gia (bang chung dung nhat de sua bo do).
+**N2. Ho so co che tung bot (khong tester).** CONG CU DA CO (05/10): `b nc cc ho_so_bot`. Voi moi bot co deals trong `reports/fixture/`:
+`python b.py nc cc ho_so_bot '{"lenh":"reports/fixture/<deals>.csv.gz","bo_set":"reports/fixture/<bo>.set.txt","ma":"GOLD.i#","ten":"<ten>","them":[{"lenh":"...","bo_set":"...","ten":"..."}]}'`
+(`them` = cac cap {lenh, bo_set, ten} nua cua CUNG bot de so sanh cac `.set` voi nhau; chi tep trong thu muc du an). Cong cu ghi MOT dong so tay
+(doan 'ho_so', khong an phep thu, cung van tay thi dung dong cu) + bao cao ASCII `reports/ho_so/*.md` (bo chay don mang ve cho cloud).
+Moi khoa `.set` ra DUNG MOT ket qua; hai loai dang gia nhat cho ban: **MAU_THUAN** (tac gia khai mot dang, lenh that cho thay dang khac -
+KHONG chon ben nao, ghi nguyen van) va **nut an** (co che co trong lenh ma khong tham so nao dieu khien). Doc xong ghi `ghi_hieu_biet`
+(nhan 'ho so co che') **cho nao ho so SAI** so voi `.set` cua tac gia (bang chung dung nhat de sua bo do). Bang chung mau: `reports/ho_so_bot_that_20261004.md`.
+Khi co them `.set` cua cung bot (CLMCA co 5): dua tat ca vao MOT lan chay (`them`) de `so_sanh_bo_set` thanh thi nghiem tu nhien.
 
 **N3. Hieu chuan engine <-> tester (no cua moi so lieu luoi) - BAC THANG (cloud xep lai 04/10 toi).** Cong cu MOT LENH: chay CHINH `ea_LuoiDayDu.mq5` tren tester +
 engine CUNG ThamSo tren CUNG cua so (>= 14 ngay, trong doan kham_pha) roi tra KHOP / LECH + canh bao chan doan (ro ket, ty le SELL, do sau theo thoi gian, he so quy doi
