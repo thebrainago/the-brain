@@ -1,0 +1,82 @@
+{
+ "ma": "loc_tin_tuc",
+ "loai": "LOC",
+ "ten": "Loc tin tuc",
+ "mo_ta": "Tat khi co tin manh (BlackDragon co nhung chua cau hinh; CCBSN v3.0.6 theo thong bao).",
+ "tham_so": [
+  {
+   "ten": "bat_loc_tin",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "phut_truoc_tin",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    15,
+    120,
+    15
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "phut_sau_tin",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    15,
+    120,
+    15
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "muc_tin_toi_thieu",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "muc",
+   "mien": [
+    1,
+    3,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khong thay duoc tu deal; gian tiep: lenh vao thua quanh gio tin."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co lich tin.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_tin_tuc"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Can lich tin that (nguon ngoai): chua co trong kho.",
+ "rui_ro": "Phu thuoc nguon lich.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

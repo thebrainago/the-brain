@@ -1,0 +1,69 @@
+{
+ "ma": "tp_treo_len",
+ "loai": "THOAT",
+ "ten": "TP treo len (TP dich dan)",
+ "mo_ta": "Khi them lenh, TP cua chuoi duoc dich theo (BlackDragon 'TP trailing treo len').",
+ "tham_so": [
+  {
+   "ten": "tp_treo_len_bat",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "khoang_dich_tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    5,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lenh_dich_tp",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Cot T/P cua cac lenh trong chuoi doi gia tri moi khi them lenh (can bang Orders co lenh sua)."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py dat TP tu gia trung binh moi lan.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tp_treo_len"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Thuc chat giong tp_chuoi_tu_gia_tb khi TP tinh tu gia tb: co the da nam trong khoi nen.",
+ "rui_ro": "Kho tach khoi tp_chuoi_tu_gia_tb neu khong co bang lenh sua.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

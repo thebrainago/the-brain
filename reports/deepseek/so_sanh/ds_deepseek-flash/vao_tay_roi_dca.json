@@ -1,0 +1,134 @@
+{
+ "ma": "vao_tay_roi_dca",
+ "loai": "VAO",
+ "ten": "Nguoi vao lenh dau, bot lo phan sau",
+ "mo_ta": "Lenh dau do nguoi dat (hoac che do manual / magic 0); bot chi lo them lenh, TP, trailing.",
+ "tham_so": [
+  {
+   "ten": "magic_0_tay",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buoc",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    50,
+    400,
+    25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "he_so_buoc",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.0,
+    2.0,
+    0.25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tran_tang",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    4,
+    20,
+    2
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.5,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "he_so_lot",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.1,
+    2.0,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "cho_lui",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    0,
+    100,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khong quan sat duoc tu lich su lenh: lenh dau khong theo quy luat nao; chi thay phan bot lam (luoi, TP)."
+ ],
+ "engine": {
+  "trang_thai": "ngoai",
+  "co": [],
+  "ghi_chu": "Can mot nguoi hoac mot luat vao; thay bang khoi VAO co dieu kien de mo phong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_tay_roi_dca"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Thay 'nguoi' bang mot luat vao do duoc (vd 3 khung SSL cua HandDCA, hoac luat tim bang tim_quy_luat) roi thu phan quan ly cua bot nay.",
+ "rui_ro": "Bot khong co phan vao: ket qua phu thuoc hoan toan nguoi dung, khong the tu chay.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

@@ -1,0 +1,73 @@
+{
+ "ma": "vao_rsi_qua_ban",
+ "loai": "VAO",
+ "ten": "Vao khi RSI ngan han qua ban",
+ "mo_ta": "Mua khi RSI chu ky ngan (vd 4) tren khung nho (M5) xuong duoi nguong (vd 15); moi lan co tin hieu la them mot lenh.",
+ "tham_so": [
+  {
+   "ten": "rsi_chu_ky",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    2,
+    14,
+    1
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "khung_thoi_gian",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    1,
+    60,
+    1
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "nguong_rsi_vao",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    5,
+    35,
+    5
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lenh mo o bar ngay sau khi RSI cat nguong; nhieu lenh cung chieu mo lien tiep khi RSI van thap; khoang cach gia giua cac lenh khong deu."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co tin hieu vao; DSL ngu_phap co rsi nhung chi cho lenh don, khong cho chuoi nhoi.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_rsi_qua_ban"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Thu lam cua vao cho he luoi cua ta: thay 'vao ngay' bang 'vao khi RSI(4) < 15' tren AUDCAD M15 va so voi vao ngay.",
+ "rui_ro": "Chi mua + nhoi: xu huong giam dai = ket ca chuoi, khong co SL (theo video).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

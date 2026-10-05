@@ -1,0 +1,78 @@
+{
+ "ma": "loc_sideway_nen",
+ "loai": "LOC",
+ "ten": "Loc sideway bang nen",
+ "mo_ta": "Nhan ra sideway khi 3-4 nen khong thoat duoc vung cua nhau thi tat bot (NewYear, van hanh tay).",
+ "tham_so": [
+  {
+   "ten": "so_nen_xet",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    2,
+    8,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "ti_le_chong_lap",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    0.5,
+    1.0,
+    0.05
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tinh_rau_nen",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "hanh_dong_khi_sideway",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chi thay duoc khi co bar gia."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_sideway_nen"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Dung cho he theo xu huong (sideway la ke thu); voi luoi thi nguoc lai.",
+ "rui_ro": "Do bang mat: kho viet thanh luat.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

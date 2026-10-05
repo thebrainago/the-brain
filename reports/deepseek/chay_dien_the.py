@@ -62,7 +62,7 @@ Tra dung mot JSON. Bat dau bang { va ket thuc bang }.
 def goi(model: str, noi_dung: str, max_tokens: int) -> dict:
     t = time.time()
     # TAT che do suy luan: bat len thi token nghi an het max_tokens (ds -> noi dung rong) hoac qwen bi 502 sau ~30s (do 05/10).
-    tat = {"thinking": {"type": "disabled"}} if model.startswith("ds/") else {"enable_thinking": False}
+    tat = {"enable_thinking": False} if model.startswith("qwen") else {"thinking": {"type": "disabled"}}
     r = requests.post(URL, json={"model": model, "messages": [{"role": "user", "content": noi_dung}], "max_tokens": max_tokens,
                                  "temperature": 0.1, **tat}, timeout=180)
     if r.status_code != 200:

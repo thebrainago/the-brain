@@ -1,0 +1,69 @@
+{
+ "ma": "loc_dca_tu_lenh_n",
+ "loai": "LOC",
+ "ten": "Loc DCA tu lenh thu N",
+ "mo_ta": "Tu lenh thu N tro di (1-25) moi them lenh neu bo loc (khong ro bo loc nao) cho phep (CCBSN InpUseFilterDCA).",
+ "tham_so": [
+  {
+   "ten": "inp_use_filter_dca",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "n_bat_dau_loc",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    25,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "nguong_loc",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "",
+   "mien": [
+    1,
+    100,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Sau lenh N, nhip them lenh kem deu hoac dai hon cac lenh dau."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_dca_tu_lenh_n"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Chua biet bo loc la gi: dau van tay tren lich su lenh se goi y.",
+ "rui_ro": "Chua ro.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

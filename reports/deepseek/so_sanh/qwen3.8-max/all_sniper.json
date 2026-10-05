@@ -1,0 +1,60 @@
+{
+ "ma": "all_sniper",
+ "loai": "THOAT",
+ "ten": "All Sniper: dong tat ca khi lai X USD sau N lenh",
+ "mo_ta": "Sau khi chuoi co N lenh (1-55), neu tong lai >= X USD (1-10) thi dong TAT CA: luat thoat an toan cho chuoi dai (CCBSN).",
+ "tham_so": [
+  {
+   "ten": "so_lenh_kich_hoat",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    55,
+    1
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "chot_tien",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chuoi dai (>= N lenh) dong cung luc voi tong tien nho co dinh (1-10 USD)."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chot_tien khong doi theo so lenh.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "all_sniper"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Mot chot_tien bac thang theo do sau chuoi: thu bang quet_luoi.",
+ "rui_ro": "Chot non voi tien nho: mat truong lai khi chuoi dai hoi manh.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

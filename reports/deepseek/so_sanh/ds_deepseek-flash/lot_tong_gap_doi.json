@@ -1,0 +1,73 @@
+{
+ "ma": "lot_tong_gap_doi",
+ "loai": "LOT",
+ "ten": "Tong lot mot chieu gap doi chieu kia",
+ "mo_ta": "Tong lot chieu dang thua luon x2 tong lot chieu doi dien trong 4 lenh dau, tu lenh 5 con x1,6 (Bigmouse).",
+ "tham_so": [
+  {
+   "ten": "he_so_4_dau",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.5,
+    3.0,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "he_so_tu_lenh_5",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.0,
+    2.5,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lenh_ap_dung_he_so_dau",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Tai moi thoi diem tong lot Buy / tong lot Sell xap xi 2,0 roi 1,6."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co hai chieu noi voi nhau.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "lot_tong_gap_doi"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Chi co nghia khi di cung lenh_doi_ung_stop.",
+ "rui_ro": "Tong lot tang rat nhanh (max lot 15 theo tac gia).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

@@ -1,0 +1,138 @@
+{
+ "ma": "vao_theo_xu_huong",
+ "loai": "VAO",
+ "ten": "Danh theo xu huong (trend-following)",
+ "mo_ta": "Vao cung chieu voi xu huong (khung H1 tro len), nhoi them khi xu huong tiep tuc; tac gia canh bao sideway la ke thu.",
+ "tham_so": [
+  {
+   "ten": "khung_thoi_gian",
+   "lop": "THOI_GIAN",
+   "don_vi": "nen",
+   "mien": [
+    60,
+    1440,
+    60
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "chu_ky_ma",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    20,
+    200,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "nguong_adx",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "",
+   "mien": [
+    15,
+    40,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buoc_nhoi",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    20,
+    300,
+    20
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "sl",
+   "lop": "KC_SL",
+   "don_vi": "pip",
+   "mien": [
+    20,
+    300,
+    20
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.5,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tran_tang",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Cac lenh cung chieu mo khi gia di CUNG chieu loi (Buy: lenh sau mo o gia cao hon), nguoc voi luoi gian cach."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chi co luoi nguoc xu huong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_theo_xu_huong"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi doi nghich voi luoi: 'luoi khi sideway, theo trend khi co trend' can bo loc che do (loc_adx_atr / loc_sideway_nen).",
+ "rui_ro": "Sideway: bi cuon lenh lien tiep.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

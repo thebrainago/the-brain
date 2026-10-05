@@ -1,0 +1,99 @@
+{
+ "ma": "tia_n_lenh_khi_chuoi_dai",
+ "loai": "THOAT",
+ "ten": "Tia N lenh khi chuoi dai",
+ "mo_ta": "Khi chuoi co >= N lenh, chot rieng M lenh (nang am hoac thap nhat) den khi lai sau tia >= X USD, phan con lai van chay (CCBSN Sniper, NuTi 'tia lenh' N=10 M=2 2,5 USD, SemiHFT Buy chot lenh thap nhat truoc).",
+ "tham_so": [
+  {
+   "ten": "tia_lenh",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tp_sniper",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    5,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lai_sniper",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    0.5,
+    20,
+    0.5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lenh_dau_sniper",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lenh_cuoi_sniper",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Co dot dong CHI MOT PHAN chuoi (so lenh dong cung luc < so lenh dang mo), lap lai nhieu lan trong cung chuoi."
+ ],
+ "engine": {
+  "trang_thai": "mot_phan",
+  "co": [
+   "tia_lenh",
+   "bien_cap",
+   "cap_moi_bar"
+  ],
+  "ghi_chu": "tia_cap_sau_dau ghep 1 cap dau-cuoi; chua co tia M lenh theo N.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tia_n_lenh_khi_chuoi_dai"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi nen thu SOM: CCBSN song sot dung no; mo rong tia_cap thanh tia M lenh khi chuoi >= N.",
+ "rui_ro": "Tia lenh tot, giu lenh xau: gia trung binh tien ve phia xau.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

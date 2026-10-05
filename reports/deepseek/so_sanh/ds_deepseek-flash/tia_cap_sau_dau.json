@@ -1,0 +1,73 @@
+{
+ "ma": "tia_cap_sau_dau",
+ "loai": "THOAT",
+ "ten": "Tia cap: ghep lenh sau nhat voi lenh dau (khoi CUA TA)",
+ "mo_ta": "Ghep lenh sau nhat voi lenh dau tien, dong ca cap khi tong lai cua cap >= bien_cap pip (cat ngan thang bac ma khong cho ca chuoi ve).",
+ "tham_so": [
+  {
+   "ten": "bien_cap",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    5,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "cap_moi_bar",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    1,
+    20,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tia_lenh",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Hai lenh (dau va cuoi) dong cung luc truoc phan con lai cua chuoi."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "tia_lenh",
+   "bien_cap",
+   "cap_moi_bar"
+  ],
+  "ghi_chu": "luoi.ThamSo.tia_lenh, bien_cap, cap_moi_bar (tu LuoiDoiXung.mq5).",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tia_cap_sau_dau"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi cua ta; so voi tia_n_lenh_khi_chuoi_dai cua CCBSN / NuTi.",
+ "rui_ro": "Engine lac quan ~15% o tia lenh (viec #48): so tren tester that.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

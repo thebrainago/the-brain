@@ -1,0 +1,78 @@
+{
+ "ma": "vao_chi_bao_ngoai",
+ "loai": "VAO",
+ "ten": "Doc tin hieu tu chi bao ben ngoai",
+ "mo_ta": "Bot doc buffer cua mot chi bao (so buffer cho Buy, so buffer cho Sell) hoac nguoi nhin chi bao roi vao tay (SSL ba khung cua HandDCA).",
+ "tham_so": [
+  {
+   "ten": "buffer_buy",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buffer_sell",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "nguong_kich_hoat",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "point",
+   "mien": [
+    0,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_nen_xac_nhan",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    1,
+    5,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khong thay chi bao tu lich su lenh; chi thay lenh vao thua thot khong theo nhip luoi."
+ ],
+ "engine": {
+  "trang_thai": "ngoai",
+  "co": [],
+  "ghi_chu": "Chi bao cu the khong co san.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_chi_bao_ngoai"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Ma 'SSL ba khung dong cung mau' co the viet thanh dac trung de thu bang tim_quy_luat.",
+ "rui_ro": "Chi bao ve lai (repaint): vao theo nen chua dong la sai (loi nguoi trinh bay).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}
