@@ -3,16 +3,16 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-05 05:50 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ 39bc787 · 8 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-05 09:58 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ a03ff5e · 1 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +1/-0
 - Commit gan day:
-  · 39bc787 S1: gop ket qua giai doan 1 + kiem doc lap cho thu_chuyen va do_thong_minh
-  · 5d23736 S1: the gioi tong hop (thu_chuyen) + do thong minh (do_thong_minh); nguong dong ba
-  · 2c7b846 cloud: hang doi hieu chuan engine-tester 01-10 (N3, tester tuan tu)
-  · 34201d5 hieu_chuan: ket qua day du ra tep reports/hieu_chuan/*.json de bo chay don mang ve
-  · 9ff3069 chuyen: S0 dich tham so luoi / .set sang thi truong khac (nhan/dich_tham_so.py)
-- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 2, nha->cloud 10
-  · moi nhat nha->cloud (gio may gui 2026-10-04T17:10:01): XONG #9/#10 (nha; so chi tiet reports/ea_tho_20261
+  · a03ff5e S1 giai doan 2: ket qua + bao cao (SMART khong thang RANDT; T0 co ban tot ngang nh
+  · 4c5cb83 tai lieu: bang gia AI Box (chu du an cung cap)
+  · 632cabe tai lieu: quy tac giao viec cho DeepSeek (hang rao, may cham, 2 vong sua)
+  · 3a67976 the phuong phap: kho 52 the (hat giong tu khoi_co_che, 17 the co o co kieu) + 5 co
+  · 09e6003 docs: phan cong LLM re / Claude (TOI_UU_TOKEN muc 8) + ghi vao so ban giao
+- Thu: phien nay la `cloud`, chua doc 20 · 24h qua: cloud->nha 2, nha->cloud 4
+  · moi nhat cloud->nha (gio may gui 2026-10-05T08:04:15): Phien cloud MOI id=session_01XDvcQqRLu2itnyVWxmPCW
 - May:
   · nha RANH ma=de5446d+sua nhip 2026-10-03T22:15:43 (gio may)
 - Don: cho 20 · dang 9 · xong 9 (CHUA_DO_DUOC 1 · DAT 8)
@@ -39,6 +39,11 @@
 - 03/10 chieu: "de danh token di, toi lam tren may nha" -> cloud DUNG, lam tiep o may nha toi nay (muc "TOI 03/10 O NHA" o Viec ke tiep).
 - 03/10 toi: LLM CHOT (thu nha c91d): mac dinh `ds/deepseek-flash`, du phong `qwen3.8-max-0902` sau 2 lan sai lien tiep, `--sau` cho viec can suy luan sau; KHONG cai Qwen Code / DeepSeek Harness. May nha TON DIEN (y chu du an): KHONG chay qua dem, chi chay NGAN khi bat may roi tat (`tai_lieu/SO_SANH_LLM.md` muc "QUYET DINH").
 - 03/10 khuya: chu du an CHOT DEEPSEEK lan nua ("toi se cung cap chi phi LLM toi da; quan trong la khai thac hieu qua, ke ca thay cau lam viec nang trong sandbox"; "may nha da chot deepseek thi dung deepseek"). Khong can nhac lai. Viec co hoc / nang (boc, dem, quet rong, gia thuyet nhap) giao cho DeepSeek (`b nc tho`, `q`); cloud giu suy luan + quyet. **Sandbox cloud CHUA goi duoc**: host `api.ai-box.vn` bi chinh sach mang chan (CONNECT 403, do 03/10) va khong co bien `AIBOX_API_KEY` -> chu du an tu lam qua menu moi truong (Edit): them host vao Network access (Custom) + dat `AIBOX_API_KEY` o muc bien / API credentials (phien MOI moi thay). KHONG dan khoa vao chat / repo.
+
+## Dang o dau (05/10 trua, cloud: S1 GIAI DOAN 2 XONG + THE PHUONG PHAP + DEEPSEEK GOI DUOC)
+- XONG: giai doan 2 chay het (plan_hash cf3680039615c56f): SMART KHONG thang RANDT (xau hon, +0,049 [0,028; 0,071] top 1); T0 (cach chuyen co ban) tot ngang nhat; SMART lam hong dap an o the gioi Z0. Bao cao `reports/thu_chuyen_s1.md`, so lieu `reports/thu_chuyen/p2*`. Quyet S0 doi hay giu: cho chu du an (khuyen: giu T0 w=1 tam I6, khong dau tu them tim kiem thong minh).
+- XONG: `nhan/the_phuong_phap.py` + `kho_phuong_phap/` (52 the; 17 co o gõ tay `O_CHUAN`, 35 con lai chua gõ) + 5 cong cu nc (`nhan/nc_phuong_phap.py`: luu_the, chuyen_bot, ke_hoach_do, quet_o, thu_chuyen = chi dich + ke hoach, KHONG chay engine) + may cham `nhan/kiem_the_nhap.py`.
+- DEEPSEEK GOI DUOC tu sandbox (chu du an them host + API credentials Bearer; bien `AIBOX_API_KEY` van TRONG, khoa duoc proxy gan san - goi thang /v1/chat/completions khong kem Authorization). Quy tac: `tai_lieu/GIAO_VIEC_DEEPSEEK.md`; gia: `tai_lieu/BANG_GIA_AIBOX.md`. Phien chi doc `session_01EN9W8V5boTRmZihiWqioJd` dang lam viec 1 (dien 35 the, ra `reports/deepseek/the/`); doc `_BAO_CAO.md` + chay `python3 -m nhan.kiem_the_nhap` roi tu doc mau 3 the truoc khi chuyen vao kho. Chua do phep thu 8.4.
 
 ## Dang o dau (05/10 sang, cloud: S1 CHOT DONG BANG - giai doan 1 XONG, giai doan 2 san sang, CHUA CHAY; may nha tat qua dem)
 - Chu du an 05/10: may nha TAT qua dem (nghi), "lam not viec cua cau, cai gi cho may nha thi de lai"; phien cloud nay da dai (nhieu lan nen ngu canh) nen chu du an xin LENH DAN cho phien MOI. Hang doi `viec/cho` van nguyen (`00-ho-so-bot-ccbsn` + 10 don bac thang hieu chuan, ~11 gio tester) cho may nha bat lai (`b cau chay --lien-tuc --nghi 20`). Thu #11 / #12 nha CHUA tra.
