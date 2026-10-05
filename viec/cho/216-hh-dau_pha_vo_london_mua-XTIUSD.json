@@ -1,0 +1,20 @@
+{
+ "ma": "hh-dau_pha_vo_london_mua-XTIUSD",
+ "muc_tieu": "thu ban nhap HANG HOA 'dau_pha_vo_london_mua' tren XTIUSD H1 (kham_pha)",
+ "lan": "CPU",
+ "uu_tien": 12,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T16:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"XTIUSD\",\"khung\":\"H1\",\"spec\":{\"ten\":\"dau_pha_vo_london_mua\",\"ho\":\"pha_vo\",\"chieu\":1,\"giu\":12,\"vao\":[{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\">=\",\"phai\":{\"hang\":7}},{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\"<=\",\"phai\":{\"hang\":9}},{\"trai\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"phep\":\">\",\"phai\":{\"chi_bao\":\"cao_nhat\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"high\"},\"n\":12}}],\"co_che\":\"gio tu 7 den 9 VA gia dong cua > cao nhat 12 bar truoc: pha vo mo phien London\"}}"
+ ],
+ "vi_sao": "nhanh hang hoa (chu du an 05/10): mua vu / IBS / lich du lieu; ma khong co du lieu -> CHUA_DO_DUOC",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

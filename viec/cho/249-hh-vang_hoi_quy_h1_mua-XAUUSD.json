@@ -1,0 +1,20 @@
+{
+ "ma": "hh-vang_hoi_quy_h1_mua-XAUUSD",
+ "muc_tieu": "thu ban nhap HANG HOA 'vang_hoi_quy_h1_mua' tren XAUUSD H1 (kham_pha)",
+ "lan": "CPU",
+ "uu_tien": 12,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T16:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"XAUUSD\",\"khung\":\"H1\",\"spec\":{\"ten\":\"vang_hoi_quy_h1_mua\",\"ho\":\"quay_ve_trung_binh\",\"chieu\":1,\"giu\":24,\"vao\":[{\"trai\":{\"chi_bao\":\"zscore\",\"cua\":{\"chi_bao\":\"gia\",\"cot\":\"close\"},\"n\":24},\"phep\":\"<\",\"phai\":{\"hang\":-2}},{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\">=\",\"phai\":{\"hang\":8}},{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\"<=\",\"phai\":{\"hang\":20}}],\"co_che\":\"zscore gia 24 < -2 VA gio tu 8 den 20: vang quay ve trong gio hoat dong\"}}"
+ ],
+ "vi_sao": "nhanh hang hoa (chu du an 05/10): mua vu / IBS / lich du lieu; ma khong co du lieu -> CHUA_DO_DUOC",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

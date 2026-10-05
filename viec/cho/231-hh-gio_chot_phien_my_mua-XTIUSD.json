@@ -1,0 +1,20 @@
+{
+ "ma": "hh-gio_chot_phien_my_mua-XTIUSD",
+ "muc_tieu": "thu ban nhap HANG HOA 'gio_chot_phien_my_mua' tren XTIUSD H1 (kham_pha)",
+ "lan": "CPU",
+ "uu_tien": 12,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T16:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"XTIUSD\",\"khung\":\"H1\",\"spec\":{\"ten\":\"gio_chot_phien_my_mua\",\"ho\":\"xu_huong\",\"chieu\":1,\"giu\":3,\"vao\":[{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\">=\",\"phai\":{\"hang\":15}},{\"trai\":{\"chi_bao\":\"gio\"},\"phep\":\"<=\",\"phai\":{\"hang\":17}},{\"trai\":{\"chi_bao\":\"rsi\",\"n\":14},\"phep\":\"<\",\"phai\":{\"hang\":35}}],\"co_che\":\"gio tu 15 den 17 VA RSI 14 < 35: nhip rut cuoi phien My cua dau\"}}"
+ ],
+ "vi_sao": "nhanh hang hoa (chu du an 05/10): mua vu / IBS / lich du lieu; ma khong co du lieu -> CHUA_DO_DUOC",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}
