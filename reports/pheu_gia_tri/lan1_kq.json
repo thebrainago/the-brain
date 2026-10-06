@@ -1,0 +1,119 @@
+{
+ "eod_reversal": {
+  "tai_lieu_id": "eod_reversal",
+  "nguon": "deep_market_insight/baltussen_da_soebhag",
+  "the": {
+   "co_che": "Phe ban khong co phieu phai mua lai (cover) truoc khi dong cua de tranh rui ro gap-up qua dem, tao luc cau bat buoc cuoi phien day gia len; market maker gamma hedging va ETF rebalancing cung tao dong luong mua/ban co the doan duoc o 30 phut cuoi",
+   "lop_tai_san": "co_phieu",
+   "khung": "phut",
+   "loai_co_che": "cau_truc_thi_truong",
+   "loi_nhuan_cong_bo": {
+    "pct_nam": 17.3,
+    "sau_phi": false,
+    "ngoai_mau": null
+   },
+   "du_lieu_can": [
+    "gia_phut"
+   ],
+   "dau_hieu_do": [
+    "khong_phi",
+    "trong_mau"
+   ],
+   "suy_ra": [
+    {
+     "lop_tai_san": "chi_so",
+     "khung": "phut",
+     "chieu": 1,
+     "vi_sao_tra_tien": "ETF rebalancing va market maker gamma hedging tai cac muc strike lon van dien ra o 30 phut cuoi phien chi so, tao dong luong mua/ban co the doan duoc ma khong bi triet tieu boi arbitrage vi ap luc thoi gian",
+     "cach_bac_bo": "Neu backtest M5 tren US500/US100 CFD cho thay loi nhuan sau spread < 0 hoac t-stat < 1.5 trong holdout 2 nam, co che nay khong ton tai o chi so",
+     "bien_the_id": "eod_reversal#0"
+    },
+    {
+     "lop_tai_san": "fx",
+     "khung": "phut",
+     "chieu": 0,
+     "vi_sao_tra_tien": "FX giao dich 24/5 khong co su kien dong cua hang ngay, khong co short-covering bat buoc hay ETF rebalance nen khong co ly do de hoi quy cuoi phien xay ra",
+     "cach_bac_bo": "Neu test M15 tren AUDCAD/EURGBP vao gio 16:00-17:00 NY cho thay mean-reversion co y nghia thong ke, thi co che khac dang hoat dong chu khong phai EOD reversal",
+     "bien_the_id": "eod_reversal#1"
+    },
+    {
+     "lop_tai_san": "hang_hoa",
+     "khung": "phut",
+     "chieu": 1,
+     "vi_sao_tra_tien": "Cac san hang hoa co phien giao dich xac dinh (vd COMEX gold close) yeu cau trader ngay phai dong trang thai de tranh margin qua dem va rui ro gap, tao ap luc cover tuong tu co phieu",
+     "cach_bac_bo": "Neu backtest M5 tren vang/dau quanh gio dong cua san cho thay spread an het loi nhuan hoac khong co su hoi quy ro ret sau khi tru phi, y tuong sai",
+     "bien_the_id": "eod_reversal#2"
+    }
+   ]
+  },
+  "loi": [],
+  "so_vong": 1,
+  "diem": {
+   "diem": 13.6,
+   "tin_cay": 0.16,
+   "kha_thi": 1.0,
+   "moi": 1.0,
+   "ben_vung": 0.85
+  }
+ },
+ "dca_vang": {
+  "tai_lieu_id": "dca_vang",
+  "nguon": "tiktok/zilloo_quyen",
+  "the": {
+   "co_che": "DCA duong (pyramiding) tren xu huong M5 XAUUSD: nguoi giao dich ngan han bi cat lo hoac chot loi som tao luc day gia, bot them lenh cung chieu de tan dung dong luong; tien tra boi cac ben phai mua lai ban lai khi xu huong keo dai, DCA am bi gioi han -20%/-30% tai khoan de tranh chay tai khoan",
+   "lop_tai_san": "kim_loai",
+   "khung": "phut",
+   "loai_co_che": "quan_li_lenh",
+   "loi_nhuan_cong_bo": {
+    "pct_nam": null,
+    "sau_phi": null,
+    "ngoai_mau": null
+   },
+   "du_lieu_can": [
+    "gia_phut"
+   ],
+   "dau_hieu_do": [
+    "khong_phi",
+    "trong_mau",
+    "mau_ngan",
+    "quang_cao_khoa_hoc",
+    "song_sot"
+   ],
+   "suy_ra": [
+    {
+     "lop_tai_san": "kim_loai",
+     "khung": "phut",
+     "chieu": 0,
+     "vi_sao_tra_tien": "Vang M5 co bien do lon hon spread, neu xac dinh dung xu huong thi DCA duong tich luy loi nhuan theo cap so nhan nhanh hon phi giao dich tang tuyen tinh",
+     "cach_bac_bo": "Backtest M5 XAUUSD 1 nam voi quy tac DCA duong/chan am -20%, neu loi nhuan rong sau tru spread+commission < 0 hoac maxDD > 80% thi co che sai",
+     "bien_the_id": "dca_vang#0"
+    },
+    {
+     "lop_tai_san": "fx",
+     "khung": "phut",
+     "chieu": 0,
+     "vi_sao_tra_tien": "Cap cheo FX hoi quy manh o moi thang do theo lab G0, DCA am se bi nghich dao xu huong va cham stop -30% thuong xuyen hon vang, nhung DCA duong van co the bat duoc doan xu huong ngan",
+     "cach_bac_bo": "Chay DCA hai chieu tren AUDCAD M5 6 thang, neu ty le cham chan -20% vuot 40% tong lenh hoac DD > 80% thi khong ap dung duoc",
+     "bien_the_id": "dca_vang#1"
+    },
+    {
+     "lop_tai_san": "chi_so",
+     "khung": "gio",
+     "chieu": 0,
+     "vi_sao_tra_tien": "Chi so gan nhu khong hoi quy theo lab, DCA am mot chieu tren chi so se gay chay tai khoan vi xu huong don huong dai, chi phu hop neu dung DCA duong bat breakout khung H1",
+     "cach_bac_bo": "Test DCA buy-only tren US500 H1 qua giai doan giam 2022, neu tai khoan mat > 80% thi co che nay vo dung cho chi so",
+     "bien_the_id": "dca_vang#2"
+    }
+   ]
+  },
+  "loi": [],
+  "so_vong": 1,
+  "diem": {
+   "diem": 3.5,
+   "tin_cay": 0.05,
+   "kha_thi": 1.0,
+   "moi": 1.0,
+   "ben_vung": 0.7
+  }
+ }
+}
