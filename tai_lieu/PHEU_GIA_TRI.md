@@ -21,3 +21,7 @@ Cac manh da co khong thay: `vuon_nguon` (do suat nguon), `seeker` (hut), `boc_ll
 3. **Thu hoach ket qua**: cong cu `nc cc` ghi vao so tay `nc.db` o may nha; can doc lai theo `gt_id` -> `ghi_ket_qua` (chua noi, can xem schema so tay).
 4. **Dung `xep_nguon` chia ngan sach** trong `vuon_nguon` (hien chia theo ung vien): giu san tham do de nguon khong bi giet oan.
 5. Nguon dang anh / video (TikTok, FB): nguoi gui anh -> chu chep vao `chan_doan` (da lam tay hom nay); tu dong can OCR / video-to-text (moc rieng).
+
+## Ranh gioi (chu du an 06/10/2026)
+- **Ly thuyet / tin hieu -> chien luoc** (bai bao, `suy_ra` dang tin hieu) = viec cua **HEPHAESTUS** (de co che, rai luoi tham so, ghep nut), lam DAI HAN; `pheu_gia_tri` chi giao `suy_ra` cho Hephaestus, khong tu bien ra DSL.
+- **UU TIEN HIEN TAI**: nguon da co EA / tin hieu **dang ra tien** (MQL5, Myfxbook): chay nguyen file EA, keo lich su nguoi thang ve boc luat -> `NGUON_NGUOI_THANG.md`. Cloud khong toi duoc mql5 / myfxbook (do 06/10: HTTP 000), nen hai buoc nay chay o MAY NHA (phien LLM co Chrome da dang nhap): thu tu viec o `reports/uu_tien_ho_so_mql5.md`.
