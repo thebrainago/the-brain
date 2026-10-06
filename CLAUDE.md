@@ -121,7 +121,7 @@ CA phien nha (co LLM) LAN bo chay khong-LLM (`b cau chay`):
    (b) viec dang do dang -> (c) **VIEC NEN thuong truc** `tai_lieu/VIEC_NEN_MAY_NHA.md` (N1...N6): tu lam, lan luot, KHONG cho giao (LUAT SO 1 muc 2).
 4. **Cloud giu hang doi SAU**: moi lan giao >= 20 don danh so (hoac >= 6 gio viec); `b cau lay` thay con < 2 gio viec thi giao them
    TRUOC khi het. Don gui sau KHONG chen len truoc don dang xep tru khi cloud ra thu `chi thi`.
-5. **Dien**: bat / tat may la quyen chu du an. Khi hang doi con viec, KHONG khuyen tat may, KHONG hoi "co can tat khong". Chu du an muon
+5. **Dien (chot 06/10: may nha bat ~6-12 gio/ngay, khong 24/7; khong lo tien dien - cu lam het cong suat khi dang bat; hang doi giu >= 12 gio viec)**: bat / tat may la quyen chu du an. Khi hang doi con viec, KHONG khuyen tat may, KHONG hoi "co can tat khong". Chu du an muon
    tiet kiem dien thi tu tat; may DANG BAT thi chay het cong suat huu ich, khong ngoi doi.
 6. **Phien nha**: `b cau chay --lien-tuc --nghi 20` o nen (khong LLM, dong co thuong truc keo don + chay) con phien LLM tu chon viec co gia tri
    nhat. Xong MOT moc: ghi `reports/nen_may_nha.md` (3-8 dong: xong / chua / ket o dau / can gi), gui thu NGAN neu cloud can biet (khong

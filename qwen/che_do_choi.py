@@ -22,6 +22,8 @@ from pathlib import Path
 
 LAB = Path(__file__).resolve().parent.parent
 CAU_HINH = LAB / "config" / "che_do_choi.json"
+#: chu du an bao truoc: co tep nay = dang choi (CHOI_BAT.cmd tao, CHOI_TAT.cmd xoa), khong can doi may do ra game
+CO_TAY = LAB / "config" / "dang_choi.flag"
 
 GAME_MAC_DINH = ["League of Legends.exe", "LeagueClient.exe", "LeagueClientUx.exe"]
 TRAN_CPU_CHOI = 25          # % so nhan duoc dung khi dang choi
@@ -57,6 +59,8 @@ def dang_choi(ten_dang_chay: list[str] | None = None, c: dict | None = None) -> 
     for g in c["game"]:
         if g.lower() in co:
             return g
+    if CO_TAY.exists():
+        return "(chu du an bao)"
     return None
 
 

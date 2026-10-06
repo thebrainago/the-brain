@@ -56,3 +56,11 @@ if __name__ == "__main__":
     for k, f in list(globals().items()):
         if k.startswith("test_"):
             f(); print("ok", k)
+
+
+def test_co_tay_bao_truoc(tmp_path, monkeypatch):
+    f = tmp_path / "dang_choi.flag"
+    monkeypatch.setattr(CM, "CO_TAY", f)
+    assert CM.dang_choi([]) is None
+    f.write_text("1")
+    assert CM.dang_choi([]) == "(chu du an bao)"
