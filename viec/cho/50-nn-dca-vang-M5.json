@@ -1,0 +1,20 @@
+{
+ "ma": "nn-dca-vang-XAUUSDM-M5",
+ "muc_tieu": "NGUON NGOAI 06/10 (bot DCA mot chieu vang M5 cua chu du an): quet luoi mot chieu mua + ban tren XAUUSDM M5",
+ "lan": "CPU",
+ "uu_tien": 3,
+ "han_phut": 90.0,
+ "ra_luc": "2026-10-05T10:34:59",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "quet_luoi",
+  "{\"ma\": \"XAUUSDM\", \"khung\": \"M5\", \"luoi\": {\"che_do\": [\"mua\", \"ban\"], \"buoc\": [30, 60, 100, 150], \"tp\": [30, 60, 100], \"kieu_lot\": [\"phang\", \"cong\"]}, \"co_dinh\": {\"tran_tang\": 20, \"he_so_lot\": 0.5}, \"toi_da_o\": 100, \"von\": 10000}"
+ ],
+ "vi_sao": "chu du an gui bot DCA 1 chieu XAUUSD M5 (tp ky vong +30% tai khoan, cat -20%/-30%): thu dung kieu do tren engine luoi, mua va ban rieng",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}
