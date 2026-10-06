@@ -1,0 +1,32 @@
+{
+  "ma": "121-luoi-vang-M5-tp20",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 1.7,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "thu_luoi",
+      "{\"ma\": \"XAUUSDM\", \"khung\": \"M5\", \"tham_so\": {\"buoc\": 21.8, \"he_so_buoc\": 0.958, \"tp\": 20, \"tran_tang\": 9, \"lot\": 0.01, \"kieu_lot\": \"phang\", \"che_do\": \"mua\"}, \"doan\": \"kham_pha\"}"
+    ],
+    "phien_ban_ma": "6966719+sua",
+    "dong_cuoi": [
+      "{",
+      " \"trang_thai\": \"CHUA_DO_DUOC\",",
+      " \"ly_do\": \"FileNotFoundError: khong co du lieu cho XAUUSDM. Co: AUDCAD, AUDCHF, AUDNZD, EURCAD, EURGBP, EURUSD, GBPAUD, NZDCAD, SP500_CO_TUC_DO, US500CASH, USDCAD, USDCHF, USDJPY, XAUUSD\",",
+      " \"_giay\": 0.06",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-06T23:34:23"
+}
