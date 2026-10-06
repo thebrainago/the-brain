@@ -51,7 +51,7 @@ from pathlib import Path
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from qwen import cau_git as CG, cau_thu as CTH, cau_trang as CT
+from qwen import cau_git as CG, cau_thu as CTH, cau_trang as CT, che_do_choi as CM
 
 GOC = CG.GOC
 _TEN = re.compile(r"[^A-Za-z0-9_.-]")
@@ -286,6 +286,8 @@ def chay_mot_luot(c: dict | None = None, toi_da: int = 50) -> dict:
             if not kq or kq.get("hoan"):
                 break
             xong.append(kq)
+            if CM.dang_choi():          # chu du an dang choi game: lam cham lai, nghi giua hai don
+                time.sleep(float(CM.cau_hinh()["nghi_giay"]))
             if kq.get("can_cloud"):
                 hoi.append(str(kq.get("ma")))
             nhip_tim(hop, c, "DANG_CHAY", dang_chay=str(kq.get("ma")), con_cho=max(hang - 1, 0),
@@ -391,7 +393,7 @@ def main(argv: list[str]) -> int:
                     print(json.dumps(r, ensure_ascii=False), flush=True)
                     if r["trang_thai"] in ("DUNG", "CHUA_CAI"):
                         return 0 if r["trang_thai"] == "DUNG" else 1
-                    time.sleep(max(nghi, 10))
+                    time.sleep(max(nghi * (3 if CM.dang_choi() else 1), 10))
             r = chay_mot_luot()
             print(json.dumps(r, ensure_ascii=False))
             return 0 if r["trang_thai"] in ("XONG", "DANG_BAN", "DUNG") else 1

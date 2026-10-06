@@ -86,3 +86,7 @@ Khong mo nguon moi (luat: chua co DAT o xac_nhan).
 ## Nhat ky tien do (do nha ghi)
 
 `reports/nen_may_nha.md`, moi lat mot khoi 3-8 dong, moi nhat tren cung. Cloud doc bang `git pull` roi mo file nay - khong can thu.
+
+## TU NHAN DON + NHUONG MAY KHI CHOI GAME (06/10/2026)
+* May nha khoi dong lai / mat tien trinh: chay `CAI_TU_CHAY.cmd` MOT LAN (tac vu Windows: moi 5 phut + luc dang nhap, `b cau chay`; khoa trong code chong chay trung).
+* Dang choi LoL (`League of Legends.exe`, `LeagueClient.exe`, `LeagueClientUx.exe`): `qwen/che_do_choi.py` -> khong nhan don TESTER / don tuong tac man hinh, don con lai chay o uu tien thap nhat + 25% so nhan, nghi 30 giay giua hai don; game bat dau giua luc don dang chay thi ha ngay (kiem moi 5 giay). Het game: tu tro lai binh thuong. Them game: `config/che_do_choi.json` {"game": [...], "tran_cpu_choi": 25, "nghi_giay": 30}.

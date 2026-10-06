@@ -64,6 +64,7 @@ import time
 from pathlib import Path
 
 from . import cau_trang as CT
+from . import che_do_choi as CM
 
 GOC = Path(__file__).resolve().parent.parent
 CAU_HINH = GOC / "config" / "cau.json"
@@ -873,10 +874,9 @@ def chay_don(don: dict, goc: Path | None = None, chay_that: bool = True,
         t0 = time.time()
         qua_gio = False
         try:
-            r = subprocess.run([str(x) for x in lenh], cwd=str(g),
-                               capture_output=True, text=True, encoding="utf-8", errors="replace",
-                               timeout=han, env={**os.environ, "PYTHONIOENCODING": "utf-8"})
-            ma_thoat, ra, loi = r.returncode, r.stdout, r.stderr
+            # giam sat game (che_do_choi): dang choi LoL thi ha uu tien + gioi han nhan, giua chung cung bat duoc
+            ma_thoat, ra, loi, _da_ha = CM.chay_co_giam_sat(lenh, str(g), han,
+                                                            {**os.environ, "PYTHONIOENCODING": "utf-8"})
         except subprocess.TimeoutExpired:
             ma_thoat, ra, loi, qua_gio = -9, "", "qua han %.0f phut" % (han / 60), True
         except OSError as e:
@@ -927,11 +927,14 @@ def chay_mot_don_dang_cho(goc: Path | None = None, kiem_trang: bool = True,
         may, kha_nang = c["ten"], c["kha_nang"]
     lab_that = lab or (GOC if goc is None else goc)
     nh_nhan = nhanh_nhan or (nhanh_hien_tai(hop) if rieng else None)
+    choi = CM.dang_choi()      # chu du an dang choi game -> chi don nhe, uu tien thap (qwen/che_do_choi.py)
     for d in don_dang_cho(hop, may=may):
         if not _hop_may(d, may, kha_nang):
             continue
         if str(d.get("lan") or "NHE").upper() == "TESTER" \
                 and (hop / "viec" / ".khoa_tester").exists():
+            continue
+        if choi and not CM.duoc_chay_khi_choi(d)[0]:
             continue
         if nh_nhan and may and not nhan_viec(d, may, nh_nhan, goc=hop):
             continue
