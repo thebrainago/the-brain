@@ -1,0 +1,55 @@
+{
+  "ma": "lo-dsl_cmt-AUDCAD-24",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 1.6,
+    "lenh": [
+      "C:\\Users\\DUNG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "thu_lo_co_che",
+      "{\"ma\": \"AUDCAD\", \"khung\": \"M15\", \"thu_muc\": \"dsl_cmt\", \"ten\": [\"keltner_quay_ve_adx_thap_mua\", \"lui_ve_trong_xu_huong_ema_rsi_guong\", \"lui_ve_trong_xu_huong_mua\", \"may_ichimoku_sto_mua\", \"nen_bop_roi_bat_donchian_guong\", \"nen_bop_roi_bat_mua\", \"rsi_vung_bull_mua\", \"rsi_vung_bull_tiep_tuc_guong\", \"sto_cheo_trong_xu_huong_ban\", \"sto_cheo_trong_xu_huong_mua\", \"supertrend_dao_chieu_ban\", \"supertrend_dao_chieu_mua\", \"tinh_lich_ibs_mua\", \"tinh_lich_ibs_va_dong_cua_guong\", \"vwap_quay_ve_mua\"]}"
+    ],
+    "phien_ban_ma": "9658734+sua",
+    "dong_cuoi": [
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\\nA \"",
+      "  },",
+      "  {",
+      "   \"he\": \"tinh_lich_ibs_va_dong_cua_guong\",",
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\\nA \"",
+      "  },",
+      "  {",
+      "   \"he\": \"vwap_quay_ve_mua\",",
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\\nA \"",
+      "  }",
+      " ],",
+      " \"_giay\": 0.31",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/link_tham_do_ket_qua.json": "{\n \"so_link\": 1,\n \"theo_ket_qua\": {\n  \"LOI_MANG\": 1\n },\n \"muc\": [\n  {\n   \"ma\": \"6104394a5b\",\n   \"nen_tang\": \"dien_dan\",\n   \"loai\": \"dien_dan\",\n   \"cach\": \"cdp\",\n   \"ket_qua\": \"LOI_MANG\",\n   \"ly_do\": \"khong doc duoc robots.txt (ConnectionError: HTTPSConnectionPool(host='www.reddit.com', port=443): Max retries exceeded with url: /robots.txt (Ca): khong cao luot nay\",\n   \"rieng\": false,\n   \"url\": \"https://reddit.com/r/algotrading\"\n  }\n ]\n}",
+      "reports/link_tham_do_ket_qua.md": "THAM DO LINK: 1 link\n  -  1 x LOI_MANG: loi mang / khong doc duoc robots.txt\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-06T20:02:55"
+}
