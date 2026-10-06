@@ -163,6 +163,9 @@ may TU KEO viec qua git (`viec/cho` -> `viec/xong`, `viec/may` = nhip tim). Chi 
   tren may nha, dung chung cau hinh model + hop thu nay. So sanh + ly do: `tai_lieu/SO_SANH_LLM.md`. (`nhan/tri_tue.py` / `config/tri_tue.json` =
   boc ma SEEKER giu qwen3.7-flash: do rieng 05/09 tren viec boc ma.)
 
+## QUYEN CAI DAT (chu du an 07/10/2026)
+Chu du an: *"cho cai moi thu can thiet len may toi, cau la quyen admin"*. Cai goi Python tren may nha qua `b cai-goi <ten>` (danh sach `GOI_DUOC_CAI` trong `qwen/cau_trang.py`; them goi = sua danh sach, khong cai ten la). Khong cai phan mem ngoai Python / khong doi cai dat Windows khi chua hoi.
+
 ## TRINH DUYET AI + NGUON DIEN DAN DA NGON NGU (chu du an 03/10/2026 toi)
 
 Chu du an: may nha chi de dau tu, KHONG co du lieu ca nhan -> cho AI luu / dung moi tai khoan, mat khau, API, quyen admin. **Bi mat nam o `E:\api.txt`** (chu du an them vao do; Claude doc va ghi them o do). Repo la PUBLIC: **KHONG bao gio chep mat khau / khoa vao file nay, vao repo, thu, bao cao, log.** Tk micro XM la tk THAT -> khong dung; chi dung DEMO (`XMGlobal-MT5 10`).

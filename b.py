@@ -738,6 +738,20 @@ def c_dien_dan(a):
     return DD.main(list(a or []))
 
 
+def c_cai_goi(a):
+    """CAI GOI Python len may nay: b cai-goi <ten> (chi ten trong qwen.cau_trang.GOI_DUOC_CAI). Sau khi cai ziglang tu kiem loi C."""
+    import subprocess as _sp, sys as _sys
+    from qwen.cau_trang import GOI_DUOC_CAI
+    ten = (a or [""])[0]
+    if ten not in GOI_DUOC_CAI:
+        print("goi khong nam trong danh sach cho phep:", ten)
+        return 1
+    r = _sp.run([_sys.executable, "-m", "pip", "install", "--upgrade", ten])
+    if r.returncode == 0 and ten == "ziglang":
+        r = _sp.run([_sys.executable, "-m", "nhan.luoi_nhan"], cwd=str(LAB))
+    return r.returncode
+
+
 def c_github(a):
     """DAY lab/ len GitHub rieng (thebrainago/the-brain, repo RIENG TU).
 
@@ -1467,6 +1481,7 @@ LENH = {
     "xuat-gia": c_xuat_gia,
     "link": c_link,
     "dien-dan": c_dien_dan,
+    "cai-goi": c_cai_goi,
     "ho-so": c_ho_so, "hs": c_ho_so,
     "quantlab": c_quantlab, "ql": c_quantlab,
     "phanh": c_phanh, "phanh-mo": c_phanh_mo,

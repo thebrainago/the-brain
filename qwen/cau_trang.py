@@ -88,6 +88,15 @@ def _ma_dien_dan(s: str) -> bool:
     return re.fullmatch(r"[a-z0-9_]{1,40}(,[a-z0-9_]{1,40}){0,29}", s) is not None
 
 
+#: goi duoc cai tu xa tren may nha (chu du an 07/10/2026: "cho cai moi thu can thiet len may toi, cau la quyen admin"). Chi ten TRONG danh sach nay, tu PyPI.
+GOI_DUOC_CAI = {"ziglang", "psutil", "pytest", "numpy", "pandas", "pyarrow", "playwright", "pyautogui", "pyperclip", "requests",
+                "MetaTrader5", "brotli", "beautifulsoup4", "lxml", "numba", "scipy", "matplotlib", "openpyxl"}
+
+
+def _goi_cai(s: str) -> bool:
+    return s in GOI_DUOC_CAI
+
+
 class Hinh:
     """Mot hinh lenh: `pos` = [(ham_kiem, bat_buoc)...] theo thu tu; `co` = {"--co": ham_kiem | None (co khong gia tri)}."""
 
@@ -124,6 +133,7 @@ class Hinh:
 
 #: `b.py <lenh>` - khoa la bo ten lenh (dai nhat khop truoc)
 LENH_B: dict[tuple, Hinh] = {
+    ("cai-goi",): Hinh([(_goi_cai, True)]),
     ("nc", "so-tay"): Hinh(),
     ("nc", "kiem"): Hinh([(_so(0, 100), False)]),
     ("nc", "bot"): Hinh([(_so(1, 10), False)]),
