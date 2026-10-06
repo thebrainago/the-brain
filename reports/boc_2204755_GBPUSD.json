@@ -1,0 +1,296 @@
+{
+ "trang_thai": "DAT",
+ "ma": "GBPUSD",
+ "pip": 0.0001,
+ "hop_dong": 100000.0,
+ "spread_pip": null,
+ "lich_su": {
+  "so_lenh": 766,
+  "so_ro": 341,
+  "so_ro_nhieu_tang": 201,
+  "tu": "2024-02-26 22:11:00",
+  "den": "2024-09-19 16:20:34",
+  "so_lenh_dang_mo": 0,
+  "so_dong_bo": 25
+ },
+ "buoc": {
+  "ty_le_ro_luoi_sach": 0.498,
+  "so_ro_nhieu_tang": 201,
+  "buoc": 2.7,
+  "buoc_cv": 0.897,
+  "he_so_buoc": 1.0,
+  "buoc_tran": null,
+  "buoc_theo_tang": {
+   "1": 2.7,
+   "2": 2.15,
+   "3": 1.1,
+   "4": 2.7
+  },
+  "do_tin": "thap"
+ },
+ "lot": {
+  "kieu_lot": "phang",
+  "he_so_lot": 1.0,
+  "lot": 0.01,
+  "sai_so_lot": 0.0,
+  "lot_theo_tang": {
+   "1": 0.01,
+   "2": 0.01,
+   "3": 0.01,
+   "4": 0.01,
+   "5": 0.01,
+   "6": 0.01,
+   "7": 0.01
+  },
+  "do_tin": "cao"
+ },
+ "tp": {
+  "che_do_tp": "khong_ro",
+  "tp": null,
+  "chot_tien": null,
+  "so_ro_do_tp": 232,
+  "cv_tp_pip": 0.526,
+  "cv_chot_tien": 0.526,
+  "tp_pip_phan_vi": {
+   "10": 3.32,
+   "50": 6.6,
+   "90": 9.2
+  },
+  "chot_tien_phan_vi": {
+   "10": 0.332,
+   "50": 0.66,
+   "90": 0.92
+  },
+  "do_tin": "thap"
+ },
+ "cho_lui": {
+  "so_cap_ro": 339,
+  "vao_lai_ngay_ty_le": 0.009,
+  "cho_lui": null,
+  "gap_giay_trung_vi": 43985.0,
+  "lui_pip_phan_vi": {
+   "p25": -21.7,
+   "p50": 1.2,
+   "p75": 14.35
+  },
+  "do_tin": "khong_ro"
+ },
+ "tia": {
+  "so_ro_xet": 127,
+  "ty_le_cap": 0.0,
+  "tia_lenh": false,
+  "bien_cap": null,
+  "do_tin": "cao"
+ },
+ "tran_tang": {
+  "toi_da_thay": 7,
+  "so_ro_cham": 2,
+  "do_tin": "cao"
+ },
+ "ro_lo": {
+  "ty_le": 0.3167,
+  "so": 108,
+  "tp_pip_tb": -16.24
+ },
+ "ro_dong_le_ty_le": 0.581,
+ "che_do": {
+  "gia_tri": "hai_chieu",
+  "ro_mua": 169,
+  "ro_ban": 172
+ },
+ "lich": {
+  "gio_bat_dau": {
+   "dem": {
+    "0": 3,
+    "1": 8,
+    "2": 10,
+    "3": 13,
+    "4": 8,
+    "5": 17,
+    "6": 4,
+    "7": 6,
+    "8": 11,
+    "9": 18,
+    "10": 6,
+    "11": 8,
+    "12": 3,
+    "13": 8,
+    "14": 10,
+    "15": 17,
+    "16": 5,
+    "17": 8,
+    "18": 8,
+    "19": 7,
+    "20": 8,
+    "21": 17,
+    "22": 104,
+    "23": 34
+   },
+   "p_deu": 0.0,
+   "gio_khong_vao": [],
+   "gio_dong_nhat": [
+    22,
+    23,
+    9
+   ]
+  },
+  "thu_bat_dau": {
+   "dem": {
+    "0": 67,
+    "1": 61,
+    "2": 72,
+    "3": 68,
+    "4": 73,
+    "5": 0,
+    "6": 0
+   }
+  },
+  "vao_dau_nen_ty_le": {
+   "5": 0.023,
+   "15": 0.0,
+   "60": 0.0
+  },
+  "vao_dau_nen": null
+ },
+ "tien_that": {
+  "so_lenh": 766,
+  "loi_gop": -34.0,
+  "hoa_hong": -62.52,
+  "swap": -11.4,
+  "rong": -107.92,
+  "phi_tren_loi_gop": null,
+  "ty_le_lenh_thang": 0.688,
+  "thang_tb": 0.595,
+  "thua_tb": -1.763,
+  "lenh_thua_lon_nhat": -4.67,
+  "ro": {
+   "so_ro": 341,
+   "so_ro_thua": 91,
+   "lo_ro_tong": -392.43,
+   "ro_thua_lon_nhat": -15.9
+  },
+  "theo_do_sau": [
+   {
+    "so_lenh_trong_ro": "1",
+    "so_ro": 140,
+    "lai_rong": 11.71,
+    "ty_le_lai": null,
+    "so_ro_thua": 28
+   },
+   {
+    "so_lenh_trong_ro": "2",
+    "so_ro": 73,
+    "lai_rong": 32.03,
+    "ty_le_lai": null,
+    "so_ro_thua": 13
+   },
+   {
+    "so_lenh_trong_ro": "3",
+    "so_ro": 75,
+    "lai_rong": -65.58,
+    "ty_le_lai": null,
+    "so_ro_thua": 27
+   },
+   {
+    "so_lenh_trong_ro": "4-5",
+    "so_ro": 40,
+    "lai_rong": -49.63,
+    "ty_le_lai": null,
+    "so_ro_thua": 16
+   },
+   {
+    "so_lenh_trong_ro": "6+",
+    "so_ro": 13,
+    "lai_rong": -36.45,
+    "ty_le_lai": null,
+    "so_ro_thua": 7
+   }
+  ],
+  "so_du": {
+   "von_dau": 1000.0,
+   "so_dong_nap_rut": 25,
+   "nap": 2720.0,
+   "rut": -3503.33,
+   "so_du_cuoi_uoc": -891.25,
+   "so_du_thap_nhat_lenh_da_dong": -891.25,
+   "lai_rong_tren_von_dau": -0.108,
+   "luu_y": "chi tinh lenh DA DONG: lo dang treo (equity) khong nam trong danh sach lenh; sut giam that lay tu trang signal, khong tu day"
+  }
+ },
+ "doi_tham_so": {
+  "theo_quy": [
+   {
+    "quy": "2024Q1",
+    "so_ro_1_lenh": 14,
+    "tp_pip_p25": -0.77,
+    "tp_pip_p50": 6.15,
+    "tp_pip_p75": 7.07,
+    "so_ro_nhieu_tang": 29,
+    "buoc12_pip_p50": 1.1
+   },
+   {
+    "quy": "2024Q2",
+    "so_ro_1_lenh": 62,
+    "tp_pip_p25": 4.43,
+    "tp_pip_p50": 6.25,
+    "tp_pip_p75": 7.0,
+    "so_ro_nhieu_tang": 87,
+    "buoc12_pip_p50": 1.9
+   },
+   {
+    "quy": "2024Q3",
+    "so_ro_1_lenh": 64,
+    "tp_pip_p25": 5.73,
+    "tp_pip_p50": 6.5,
+    "tp_pip_p75": 7.23,
+    "so_ro_nhieu_tang": 85,
+    "buoc12_pip_p50": 2.2
+   }
+  ],
+  "doi_cai_dat": false,
+  "ky_cuoi": {
+   "tu": "2024-07-01",
+   "so_quy": 1,
+   "so_ro_1_lenh": 64,
+   "tp_pip_p25": 5.73,
+   "tp_pip_p50": 6.5,
+   "tp_pip_p75": 7.23,
+   "so_ro_nhieu_tang": 85,
+   "buoc12_pip_p50": 2.2
+  }
+ },
+ "loai": "khong_ro_ho_co_che",
+ "don_lenh": {
+  "so_lenh_da_dong": 766,
+  "giu_phut_phan_vi": {
+   "10": 32.0,
+   "50": 221.6,
+   "90": 939.7
+  },
+  "ty_le_thang": 0.708,
+  "pip_thang_tb": 6.69,
+  "pip_thua_tb": -17.66
+ },
+ "tham_so": {},
+ "ngoai_engine": [
+  "co ro dong LO (31.7% so ro): engine luoi.py chua mo phong cat lo ro (dung_lo_tong chua cai dat) - phat lai se THIEU phan thua do",
+  "58% ro dong LE TE (khong cung luc, khong phai cap tia lenh): trailing / cat tung lenh?",
+  "buoc giua cac tang bien thien manh (CV 0.90): co ve buoc DONG theo ATR/bien dong, engine chi co buoc co dinh + gian dan",
+  "khoang cach giua cac ro khong phai gia lui co dinh: cho theo gio / chi bao - xem dieu_kien_vao"
+ ],
+ "canh_bao": [
+  "NGUOI THANG la mau chon theo ket qua: luat boc duoc chi la GIA THUYET. Thu tren du lieu NGOAI cua so song cua ho (truoc ngay ho bat dau) roi moi tien toi xac nhan; cua so cua ho khong duoc la bang chung."
+ ],
+ "buoc_ke_tiep": [
+  "co bar cua ma nay (b nc cc boc_lich_su kem ma + khung) de can gio, tim dieu kien vao va phat lai"
+ ],
+ "khung": "M15",
+ "doan": "kham_pha",
+ "loai_ket_qua": "mo_ta",
+ "ghi_chu": [
+  "khong nap duoc bar GBPUSD M15 (FileNotFoundError: khong co du lieu cho GBPUSD. Co: AUDCAD, AUDCHF, AUDNZD, EURCAD, EURGBP, EURUSD, GBPAUD, NZDCAD, SP500_CO_TUC_DO, US500CASH, USDCAD, USDCHF, USDJPY, XAUUSD): chi MO TA lich su, khong can gio / dieu kien vao / phat lai"
+ ],
+ "bar": null,
+ "tn_id": 22,
+ "_giay": 2.13
+}
