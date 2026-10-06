@@ -1,0 +1,55 @@
+{
+  "ma": "lo-dsl_hh-XAGUSD-25",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 1.6,
+    "lenh": [
+      "C:\\Users\\DUNG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "thu_lo_co_che",
+      "{\"ma\": \"XAGUSD\", \"khung\": \"D1\", \"thu_muc\": \"dsl_hh\", \"ten\": [\"bac_quay_ve_ban\", \"bac_quay_ve_mua\", \"vang_ibs_ban\", \"vang_ibs_mua\", \"vang_mua_vu_cuoi_nam_ban\", \"vang_mua_vu_cuoi_nam_mua\", \"vang_pha_vo_nen_ban\", \"vang_pha_vo_nen_mua\"]}"
+    ],
+    "phien_ban_ma": "9658734+sua",
+    "dong_cuoi": [
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: FileNotFoundError: khong co du lieu cho XAGUSD. Co: AUDCAD, AUDCHF, AUDNZD, EURCAD, EU\"",
+      "  },",
+      "  {",
+      "   \"he\": \"vang_pha_vo_nen_ban\",",
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: FileNotFoundError: khong co du lieu cho XAGUSD. Co: AUDCAD, AUDCHF, AUDNZD, EURCAD, EU\"",
+      "  },",
+      "  {",
+      "   \"he\": \"vang_pha_vo_nen_mua\",",
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: FileNotFoundError: khong co du lieu cho XAGUSD. Co: AUDCAD, AUDCHF, AUDNZD, EURCAD, EU\"",
+      "  }",
+      " ],",
+      " \"_giay\": 0.17",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/link_tham_do_ket_qua.json": "{\n \"so_link\": 1,\n \"theo_ket_qua\": {\n  \"CHO\": 1\n },\n \"muc\": [\n  {\n   \"ma\": \"6104394a5b\",\n   \"nen_tang\": \"dien_dan\",\n   \"loai\": \"dien_dan\",\n   \"cach\": \"cdp\",\n   \"ket_qua\": \"CHO\",\n   \"ly_do\": \"link cho thu lai den 2026-10-06 20:07 (LOI_MANG)\",\n   \"rieng\": false,\n   \"url\": \"https://reddit.com/r/algotrading\"\n  }\n ]\n}",
+      "reports/link_tham_do_ket_qua.md": "THAM DO LINK: 1 link\n  -  1 x CHO: chua toi luot (dang nghi / het tran luot)\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-06T20:04:24"
+}
