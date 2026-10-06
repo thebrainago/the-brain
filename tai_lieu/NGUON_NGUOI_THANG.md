@@ -178,3 +178,8 @@ tia lenh (cat cap) bien ~5 pip, tran tang quan sat 5 (toan lich su 9). Vao lenh:
 ve viec cai dat co ban chat hay chi gap may; quanh buoc 14-26, TP 6-14 (phi XM > phi cua con nen TP quet rong hon), chon theo HINH DANG cao nguyen; (2) MOT o tren `xac_nhan` (khoang con dang song: khong doc lap, chi
 chung minh LAM LAI duoc); (3) NIEM PHONG: `niem_phong` nhan khai bao DSL vao/ra; he LUOI co duong rieng **`niem_phong_luoi`** (04/10/2026: lot chot bang chinh engine tren kham_pha + xac_nhan, mo MOT lan, DAT = co lai sau phi + maxDD < 80% + >= 20 lenh; `b nc cc niem_phong_luoi`). Nho: ca xac_nhan lan niem_phong cua con 2023752 deu chong len doi song that cua no (tu 2023-07-26) nen DAT chi la LAM LAI, truyen `ghi_chu` noi ro. **Khong dung `xac_nhan` / niem phong de hieu chuan.**
 Chi phi can `do_tin` khac KHAI. Thu #8 (`viec/thu/`) co lenh cu the.
+
+## BO SUNG 06/10/2026 - CHO EA / CHIEN LUOC NGOAI MQL5+MYFXBOOK
+May doc: `config/nguon_cho_ea.json` (26 nguon, co `mo`: tu_dong / may_nha / tay, `gia_tri`, `uu_tien`). Chua cho nao chay tren trang that (cloud khong ra duoc); lan dau: `b link tham-do` o may nha (6 don `link-tham-do-cho-*`).
+Thu tu dao: (1) FX Blue + Darwinex + Myfxbook autotrade + MT4 signals (lich su lenh / track record that) · (2) GitHub MQL5 + MQL5 CodeBase (ma EA mo -> `ea_tho_quet`) · (3) TradingView Pine, SignalStart, Telegram EA · (4) ForexFactory trade explorer / thread he thong · (5) Collective2, ZuluTrade, cTrader · sau cung: Reddit, QuantPedia (gia thuyet cho HEPHAESTUS), cho EA tra phi (CHI lay ten he thong, so tu khai khong tin).
+Quy tac: lich su lenh THAT > track record kiem toan > ma nguon mo > mo ta chu. Tin hieu luoi/DCA song >= 2 nam tren cap tuong quan (AUDCAD & anh em) di truoc.
