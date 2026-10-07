@@ -133,6 +133,7 @@ class Hinh:
 
 #: `b.py <lenh>` - khoa la bo ten lenh (dai nhat khop truoc)
 LENH_B: dict[tuple, Hinh] = {
+    ("tran-cpu",): Hinh([(_so(50, 95), False)]),      # chu du an 07/10: dung CPU toi 90%
     ("cai-goi",): Hinh([(_goi_cai, True)]),
     ("nc", "so-tay"): Hinh(),
     ("nc", "kiem"): Hinh([(_so(0, 100), False)]),
