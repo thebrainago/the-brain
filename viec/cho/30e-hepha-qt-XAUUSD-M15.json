@@ -1,0 +1,23 @@
+{
+ "ma": "30e-hepha-qt-XAUUSD-M15",
+ "muc_tieu": "test nhanh 1000 bien the tren vang M15",
+ "lan": "CPU",
+ "uu_tien": 5,
+ "han_phut": 120,
+ "ra_luc": "2026-10-07T12:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "hepha",
+  "qt",
+  "1000",
+  "--ma",
+  "XAUUSD",
+  "--khung",
+  "M15"
+ ],
+ "vi_sao": "mo rong dau vao (chu du an 07/10: tang so luong va chat luong dau vao)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}
