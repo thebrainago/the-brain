@@ -705,6 +705,12 @@ def c_may(a):
     return MN.main(list(a or []))
 
 
+def c_thu_cach_quet(a):
+    """SO SANH cac cach quet luoi tren don da quet (nhan/thu_cach_quet.py): b thu-cach-quet [SO_DON]. Khong ghi so tay."""
+    from nhan import thu_cach_quet as TCQ
+    return TCQ.main(list(a or []))
+
+
 def c_link(a):
     """LINK CUA CHU DU AN -> tham do / nap tep / lich su lenh (nhan/link_nguon.py + nhan/link_chay.py).
 
@@ -1478,6 +1484,7 @@ LENH = {
     "github": c_github, "gh": c_github,
     "slot": c_slot,
     "may": c_may,
+    "thu-cach-quet": c_thu_cach_quet,
     "xuat-gia": c_xuat_gia,
     "link": c_link,
     "dien-dan": c_dien_dan,

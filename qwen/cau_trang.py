@@ -155,6 +155,7 @@ LENH_B: dict[tuple, Hinh] = {
     ("khoi-phuc",): Hinh(co={"--json": None}),
     # nhan/may_nha.py: quet + do + ket luan may nha. CHI DOC, tru `do` (file tam xoa ngay). Khong co `ap-dung`:
     # moi de xuat (pagefile, ke hoach dien) chi IN RA, chu du an tu lam.
+    ("thu-cach-quet",): Hinh([(_so(1, 12), False)]),
     ("may", "quet"): Hinh(),
     ("may", "mau"): Hinh(co={"--nang": None}),
     ("may", "bao-cao"): Hinh(),
