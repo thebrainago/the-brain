@@ -1,0 +1,54 @@
+{
+  "ma": "15A-toi-uu-vang-M15",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 315.9,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"XAUUSD\", \"khung\": \"M15\", \"luoi\": {\"buoc\": [15, 18, 21.8, 25, 30], \"he_so_buoc\": [0.9, 0.958, 1.0], \"tp\": [8, 10, 15], \"tran_tang\": [7, 9, 12]}, \"co_dinh\": {\"che_do\": \"mua\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 120}"
+    ],
+    "phien_ban_ma": "3b9680e+sua",
+    "dong_cuoi": [
+      "   \"chay\": false,",
+      "   \"so_lenh\": 14761,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 12.45,",
+      "   \"maxdd_pct\": -47.64,",
+      "   \"he_so_lot_tai_tran\": 1.84,",
+      "   \"loi_suat_o_tran_pct\": 22.9,",
+      "   \"hon_moc_pct\": 22.9",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"mua\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"phang\",",
+      "  \"buoc\": 30,",
+      "  \"he_so_buoc\": 0.9,",
+      "  \"tp\": 8,",
+      "  \"tran_tang\": 12",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 109/120 o co lai, tot nhat +121.9%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 120 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 148,",
+      " \"_giay\": 314.38",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/tong_ket_06102026.md": "# Tong ket 06/10/2026 - cai moi, cai cai thien, cai con ket\n\n## Moi (hom nay)\n- Danh sach 26 cho/nguon EA + tin hieu ngoai MQL5/Myfxbook (`config/nguon_cho_ea.json`: FXBlue, Darwinex, TradingView, GitHub, cTrader, Collective2, ZuluTrade, eToro...) + thu tu dao trong `tai_lieu/NGUON_NGUOI_THANG.md`.\n- May nha TU NHAN VIEC sau khi khoi dong lai (`CAI_TU_CHAY.cmd`: chay moi 5 phut + khi dang nhap Windows).\n- CHE DO CHOI GAME (`qwen/che_do_choi.py`): thay LoL -> bo don TESTER + don dung man hinh, don khac chay o muc thap nhat, 25% nhan, nghi 30 giay giua don; game bat giua luc dang chay thi ha ngay. Moi: bao truoc bang `CHOI_BAT.cmd` / `CHOI_TAT.cmd`.\n- Hang doi: 20 don + sua don vang (v2), co don do hieu nang, so engine-tester (tim tham so nao gay lech), quet kho EA, ho so tai san.\n\n## Cai thien\n- Phat hien: trang thai \"DAT\" cua don chi nghia \"ma thoat 0\" - co don loi that (sai ten ma) van hien DAT. Se doc `dong_cuoi` khi duyet ket qua.\n- May nha bat 6-12 gio/ngay, hang doi giu >= 12 gio viec (da ghi vao CLAUDE.md).\n\n## Con ket\n- Tu dang ky tai khoan cho nguon: bi chan quyen, cho anh quyet (xin quyen / chi chay tay o nha / bo).\n- FXBlue, Darwinex, ForexFactory, Reddit bi chan DNS - can WARP.\n- Lech engine luoi so voi tester (tn5: tester -3,24%/nam, engine +33,8%) - cac don bisect cho tester.\n- 4 ho so MQL5 \"khong ro\" (cat lo ca ro) - engine chua mo phong.\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T07:11:52"
+}
