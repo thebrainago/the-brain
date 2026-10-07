@@ -1,0 +1,52 @@
+{
+  "ma": "17H02-toi-uu-NZDCAD-H1",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 3.1,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"NZDCAD\", \"khung\": \"H1\", \"luoi\": {\"buoc\": [10, 15, 20, 30], \"tp\": [8, 12, 20], \"tran_tang\": [7, 9]}, \"co_dinh\": {\"che_do\": \"mua\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 120}"
+    ],
+    "phien_ban_ma": "94ce312+sua",
+    "dong_cuoi": [
+      " \"luong\": 6,",
+      " \"nhan_c\": true,",
+      " \"giay\": 1.49,",
+      " \"giay_moi_o\": 0.0621,",
+      " \"quy_cach\": {",
+      "  \"ma\": \"NZDCAD\",",
+      "  \"do_tin\": \"SAN\"",
+      " },",
+      " \"chi_phi_do_tin\": \"SAN\",",
+      " \"moc_duoi_tran_pct\": 0.0,",
+      " \"canh_bao\": [",
+      "  \"quy cach NZDCAD (lop FX chuan 5 chu so (pip 1e-4, hop dong 100.000, point 1e-5); phi + spread tu mo hinh chi phi (do_tin=SAN)): luoi.py CHUA doi chieu voi MT5 tester o ma nao - doc nhu XEP HANG va hinh dang, chua phai loi that\"",
+      " ],",
+      " \"hinh_dang\": \"KHONG_CO_LAI\",",
+      " \"ty_le_o_co_lai\": 0.0,",
+      " \"o_tot_nhat\": null,",
+      " \"hang_xom\": null,",
+      " \"loi_suat_o_tran_trung_vi_pct\": -2.29,",
+      " \"bang_top\": [],",
+      " \"trang_thai\": \"AM\",",
+      " \"ly_do\": \"KHONG_CO_LAI: 0/24 o co lai\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 24 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 164,",
+      " \"_giay\": 1.5",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T07:55:27"
+}
