@@ -3,6 +3,11 @@ va LUAT LOC de xuat. Chi dem don co so that (don hong / TesterDangBan bi bo, kho
 Chay: python3 -m nhan.doi_chieu_mo_phong [--giao-lai]"""
 import glob, json, re, sys, statistics as S
 
+#: LUAT LOC CHOT 07/10/2026 (n=52 mau that engine <-> MT5): chi CAT khi engine <= nguong nay (%/nam).
+#: Do duoc: cung dau 41/52; engine <= -10 co 10 mau, MT5 deu am (0 cat nham); engine <= -5: 12 mau, 1 cat nham;
+#: engine <= 0: 22 mau, 6 cat nham (KHONG dung). Engine duong khong chung minh gi: 5/52 MT5 am; engine lac quan ~1,8 lan.
+NGUONG_CAT = -10.0
+
 _RE = re.compile(r'"so_khoa":\s*\[\s*([-\d.]+),\s*([-\d.]+),\s*([-\d.]+),\s*([-\d.]+)')
 
 
