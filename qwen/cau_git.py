@@ -65,6 +65,7 @@ from pathlib import Path
 
 from . import cau_trang as CT
 from . import che_do_choi as CM
+from . import dieu_toc as DT
 
 GOC = Path(__file__).resolve().parent.parent
 CAU_HINH = GOC / "config" / "cau.json"
@@ -946,6 +947,8 @@ def chay_mot_don_dang_cho(goc: Path | None = None, kiem_trang: bool = True,
             continue
         if choi and not CM.duoc_chay_khi_choi(d)[0]:
             continue
+        if goc is None and kiem_trang and not DT.duoc_vao(str(d.get("lan") or "NHE"))[0]:
+            return None     # may dang day (CPU / RAM / vua co bo khac khoi dong): nghi roi hoi lai, KHONG bo don
         if nh_nhan and may and not nhan_viec(d, may, nh_nhan, goc=hop):
             continue
         return chay_don(d, goc=hop, kiem_trang=kiem_trang, lab=lab_that)
