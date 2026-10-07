@@ -598,6 +598,8 @@ def _hop_may(don: dict, may: str | None, kha_nang: list[str] | None) -> bool:
     if ten and may is not None and may not in ([ten] if isinstance(ten, str) else list(ten)):
         return False
     can = don.get("can")
+    if not can and str(don.get("lan") or "").upper() == "TESTER":
+        can = ["mt5"]       # don TESTER can may co MT5 du khong khai (thu nha 07/10: bo CPU thuan nhan nham)
     if can and kha_nang is not None:
         return set(can if isinstance(can, list) else [can]) <= set(kha_nang)
     return True
@@ -692,6 +694,14 @@ KHOA_TESTER = VIEC / ".khoa_tester"
 #: chung, Ctrl-C). Khong co cai nay thi mot lan tat may lam ket lan TESTER
 #: vinh vien, va bang viec van trong nhu binh thuong.
 KHOA_CU_GIAY = 6 * 3600.0
+
+
+def _khoa_con_song(k: Path) -> bool:
+    """Khoa ton tai VA chua cu (< KHOA_CU_GIAY). Khoa cu (tien trinh chet) khong chan hang doi: don TESTER ke tiep se `_lay_khoa` thu hoi."""
+    try:
+        return k.exists() and (time.time() - k.stat().st_mtime) < KHOA_CU_GIAY
+    except OSError:
+        return k.exists()
 
 
 def _lay_khoa(thu: Path) -> bool:
@@ -932,7 +942,7 @@ def chay_mot_don_dang_cho(goc: Path | None = None, kiem_trang: bool = True,
         if not _hop_may(d, may, kha_nang):
             continue
         if str(d.get("lan") or "NHE").upper() == "TESTER" \
-                and (hop / "viec" / ".khoa_tester").exists():
+                and _khoa_con_song(hop / "viec" / ".khoa_tester"):
             continue
         if choi and not CM.duoc_chay_khi_choi(d)[0]:
             continue
