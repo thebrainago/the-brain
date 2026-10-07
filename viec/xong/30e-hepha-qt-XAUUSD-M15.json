@@ -1,0 +1,46 @@
+{
+  "ma": "30e-hepha-qt-XAUUSD-M15",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 15.8,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "hepha",
+      "qt",
+      "1000",
+      "--ma",
+      "XAUUSD",
+      "--khung",
+      "M15"
+    ],
+    "phien_ban_ma": "0d20898+sua",
+    "dong_cuoi": [
+      "  luoi_tran                          12",
+      "  luoi_chot_lui                      12",
+      "  luoi_cat_hoa                       12",
+      "  luoi_hedge                         12",
+      "  luoi_tia                           8",
+      "  luoi_trailing                      8",
+      "  luoi_bat_doi_xung                  8",
+      "  luoi_chan_von                      6",
+      "  luoi_thoat_gio                     6",
+      "",
+      "de ra: 84 cau hinh quan tri",
+      "",
+      "TY LE LOT TREN NHIEU: 0%  <- doc con so nay TRUOC bang duoi",
+      "cau hinh                           vuot    lai/nam      muc",
+      "",
+      "plan_hash: ae7659075db7883a61a5d09297793b2d  (FDR tinh 84 suat)"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T11:36:33"
+}
