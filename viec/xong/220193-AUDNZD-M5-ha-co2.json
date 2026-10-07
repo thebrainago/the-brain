@@ -1,0 +1,54 @@
+{
+  "ma": "220193-AUDNZD-M5-ha-co2",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 301.8,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"AUDNZD\", \"khung\": \"M5\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"cong\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 2}"
+    ],
+    "phien_ban_ma": "a08b2d4+sua",
+    "dong_cuoi": [
+      "   \"so_lenh\": 591,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 3.99,",
+      "   \"maxdd_pct\": -6.58,",
+      "   \"he_so_lot_tai_tran\": 78.62,",
+      "   \"loi_suat_o_tran_pct\": 313.95,",
+      "   \"hon_moc_pct\": 313.13",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"hai_chieu\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"cong\",",
+      "  \"buoc\": 24,",
+      "  \"tp\": 20,",
+      "  \"tran_tang\": 12,",
+      "  \"cho_lui\": 6,",
+      "  \"he_so_lot\": 0.3",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 2505/3000 o co lai, tot nhat +395.8%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 3000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 701,",
+      " \"_giay\": 296.3",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00015.md": "# THO vong 15 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n30 lan goi cong cu · 863158 token vao · 35416 token ra · 0.0000 USD\n\n**TONG KET VONG (tho kham pha) — 9 phep thu (tn680-688), tat ca XAUUSD H1 + mot nhanh D1.**\n\n1. **Phat hien MOI, manh nhat: gt42.** `tim_quy_luat` XAUUSD H1 (tn678, p_null 0,005) noi len luat \"fade cuc doan khi supertrend da quay xuong\" (don20>=0,608 & st_chieu<1 -> BAN giu 10). Chay that (tn680): **743 lenh 19,48 bps t5,25, 199,02%@x7,43 DD79,9, sharpe 2,05, lai_rong/phi 5,44, beta -0,01**. Day la chan BAN **NHIEU LENH NHAT** cua du an (cac chan cu 225-446 lenh), tra loi truc tiep cau hoi #15.\n\n2. **CAO_NGUYEN that** (tn682): quet 20 o don20 x giu = 20/20 co lai, trung vi 199%/nam; o tot 321,68%@x9,47 (704 lenh, sharpe 2,24); bien the giu5/thr0,55 = 316%@x9,4 voi **956 lenh, 8/9 nam**. MUA doi xung yeu hon (tn683: 118%@x8,2, 5/9 nam) -> BAN la chan chinh.\n\n3. **Gan DOC LAP voi cac chan MUA**: corr voi gt34-MUA chi -0,035 (tn685) -> ghep 3 chan vang H1 = **260,58%@x10** (hon chan tot nhat 228,67%). Loc kl_pv<0,42 nang standalone len 270%@x10 DD63,6 (tn687) nhung lam danh muc tut con 248,45% (tn688) vi it lenh.\n\n4. **VANG-CHI** (tn684): EURUSD cung luat AM -4,29 bps, 3/17 nam -> khop hb14/hb20, khong suy rong.\n\n5. **Da bac bo**: gt41 (khung D1) — XAUUSD D1 mua dip AM, US500CASH D1 mua dip yeu/beta (tn663-665). gt40 BAN doi xung (438 lenh 13,4 bps, yeu hon MUA 24,4). Cac kenh vang deu H1-chi (H4 AM: gt40-H4 1,2 bps, gt34-H4 -18 bps).\n\n**Giao cho Claude**: gt42 TRIEN_VONG + cau hoi #17 (uu tien 0,9) — chi 1 phep xac nhan OOS 2021+ la bai: (a) con song 2019/2020 (-5,7/-6,2) khong; (b) phi x2-3 (69% bar spread=0); (c) MT5 tester; (d) kiem loc kl_pv la that hay hau kiem. Neu song -> chan BAN dau tien + nhieu lenh nhat cua du an, ghep gt34-MUA nang danh muc len 260%@x10.\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T13:01:54"
+}
