@@ -1,0 +1,20 @@
+{
+ "ma": "2128-toi-uu-NZDCAD-M15-ha",
+ "muc_tieu": "quet luoi hai_chieu rong NZDCAD M15",
+ "lan": "CPU",
+ "uu_tien": 7,
+ "han_phut": 180,
+ "ra_luc": "2026-10-07T12:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "quet_luoi",
+  "{\"ma\": \"NZDCAD\", \"khung\": \"M15\", \"luoi\": {\"buoc\": [8, 12, 16, 24, 32, 48], \"tp\": [6, 10, 16, 24], \"tran_tang\": [6, 8, 10]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 150}"
+ ],
+ "vi_sao": "don CPU nang lap hang doi (may dung 90% CPU khi tester chi 1 slot)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}
