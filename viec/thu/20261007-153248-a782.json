@@ -1,0 +1,10 @@
+{
+ "id": "20261007-153248-a782",
+ "luc": "2026-10-07T15:32:48",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "LENH-BAT-MAY-07102026",
+ "tra_loi": null,
+ "noi_dung": "CHU DU AN VUA BAT MAY, CHI THI THEO THU TU (lam xong moc nao bao 1 dong vao reports/nen_may_nha.md): 1) Doc lai thu CHI-THI-DIA-RAM-DEFENDER (da duyet: Defender loai tru, dia RAM <=12GB ban sao data nong + cache MT5, giu khi choi LoL). 2) Kiem tra sau nang Windows: git da moi nhat chua (ban sao thu muc du an), data/ du chua, nao.db/so_cai; thieu thi b khoi-phuc. 3) Doc ten card do hoa, ghi vao reports/cau_hinh_may.md; thu 1 o luoi tren GPU chi neu co OpenCL/CUDA san, khong cai them, khong thi bo qua. 4) Tat man hinh khi chay (powercfg), khong tat may. 5) TESTER dang cho 22 don 23xx + hieu chuan: dam bao nha va m1-m3 chi nhan TESTER, p12 chet thi bat lai. 6) Do tai day (CPU/RAM/dia) o 12 roi 16 roi 18 luong CPU, moi muc 10 phut, ghi reports/dung_tai_day.md. 7) Cat som: o mo phong lo >=70% von thi dung, nhung GHI so o bi cat. 2 don AUDCAD-r21/r27-h1 loi vi cua so 2018-01-01 nam ngoai doan kham_pha (bat dau 2018-01-02): sua cua so roi giao lai. KHONG xoa/tra tien/doi cai dat Windows ngoai muc 1-4."
+}
