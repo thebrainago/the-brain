@@ -1,0 +1,54 @@
+{
+  "ma": "220298-EURCAD-M5-mu-nh3",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 675.3,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"EURCAD\", \"khung\": \"M5\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"mua\", \"lot\": 0.01, \"kieu_lot\": \"nhan\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 3}"
+    ],
+    "phien_ban_ma": "11101d2c+sua",
+    "dong_cuoi": [
+      "   \"so_lenh\": 7379,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 6.64,",
+      "   \"maxdd_pct\": -46.07,",
+      "   \"he_so_lot_tai_tran\": 2.725,",
+      "   \"loi_suat_o_tran_pct\": 18.09,",
+      "   \"hon_moc_pct\": 18.09",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"mua\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"nhan\",",
+      "  \"buoc\": 10,",
+      "  \"tp\": 6,",
+      "  \"tran_tang\": 6,",
+      "  \"cho_lui\": 0,",
+      "  \"he_so_lot\": 1.2",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 2430/3000 o co lai, tot nhat +35.0%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 3000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 879,",
+      " \"_giay\": 645.92",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00023.md": "# THO vong 23 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n19 lan goi cong cu · 468597 token vao · 39173 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 12 phép thử mới (tn862-873), 1 gt mới (gt56), 3 hiểu biết (hb57-59), 1 câu hỏi (#27).**\n\n**Đã thử & số:**\n- **Ghép danh mục gold H1 (tn862):** 3 họ độc lập (momentum-mua 652%@x10, momentum-bán 394%, fade-mua 217%) gộp lại chỉ **419%@x10 — AM**, kém chan tốt nhất một mình (652%). Corr mua-fade 0,438 (cao hơn sổ tay 0,30). → Đóng hướng \"đa dạng hóa 3 họ gold H1\".\n- **Lọc thêm vào gt55:** don20 (CAO_NGUYEN nhưng 569% < 679%, bps↑ lệnh↓ = dead weight, xác nhận hb55); gio==0 (777% nhưng 6/9 năm, không cao nguyên = bẫy lịch); atr_pv không ràng buộc (bar-lon vốn = biến động cao); z200 siết càng giảm (583→333%). → **Chan momentum đã bão hoà trên khám phá.**\n- **Câu hỏi #1 (tn870-873):** entry tầm thường + trailing = edge MỎNG/nhiễu (0,67-2,10 bps, t<1,2). Bỏ bar-lon chỉ còn 7-9 bps/6-7 năm so với 35 bps/9 năm của bản bar-lon. + Phát hiện **phí qua đêm bất đối xứng lớn** (MUA trả ~2,2 bps/đêm, BÁN nhận ~0,5 bps/đêm).\n\n**Giả thuyết giao Claude:** (1) **gt56** — \"short book\" gold H1 (các chan BÁN độc lập ghép lại) vượt MUA đơn lẻ nhờ carry thuận (ch27, ghep 1 lần để quyết). (2) Nhấn: **entry (bar-lon) quyết định, không phải quản trị** — bằng chứng chống luận điểm #1 của chủ dự án.\n\n**Vì sao:** vòng này chủ yếu ĐÓNG cửa (portfolio, lọc, quản trị-thay-entry, thời gian) — đúng như kỳ vọng ~70% đào sâu. Điều đọng lại: gt55-mua vẫn là chan mạnh nhất & bão hoà → ưu tiên chuyển sang XAC NHAN 2021+ / MT5 (việc nhà nghiên cứu chính, câu #25), và phía BÁN có lợi thế cấu trúc đáng thử.\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T14:00:11"
+}
