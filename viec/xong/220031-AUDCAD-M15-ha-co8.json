@@ -1,0 +1,54 @@
+{
+  "ma": "220031-AUDCAD-M15-ha-co8",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 7.4,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"AUDCAD\", \"khung\": \"M15\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"cong\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 8}"
+    ],
+    "phien_ban_ma": "0d20898+sua",
+    "dong_cuoi": [
+      "   \"so_lenh\": 3335,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 5.27,",
+      "   \"maxdd_pct\": -19.07,",
+      "   \"he_so_lot_tai_tran\": 1000.0,",
+      "   \"loi_suat_o_tran_pct\": 5271.18,",
+      "   \"hon_moc_pct\": 5271.18",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"hai_chieu\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"cong\",",
+      "  \"buoc\": 16,",
+      "  \"tp\": 45,",
+      "  \"tran_tang\": 15,",
+      "  \"cho_lui\": 10,",
+      "  \"he_so_lot\": 0.8",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 943/1000 o co lai, tot nhat +11448.7%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 1000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 355,",
+      " \"_giay\": 5.95",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00004.md": "# THO vong 4 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n19 lan goi cong cu · 266732 token vao · 22375 token ra · 0.0000 USD\n\nTONG KET CHU KY (tho kham pha) — 13 phep thu moi (tn336-353), 1 hb (11), 1 cau hoi (#6).\n\n**Da thu gi** (XAUUSD, kham_pha): (1) `mo_xe_lenh` vang H1 fade ban — tach ngu canh lenh thang/thua; (2) do ben khung: H4 giu6, H4 giu2(=8h), M30+adx, D1 — deu AM/yeu; (3) loc CHE DO tu mo_xe (rong20>=0,011 VA adx14>=24,29) roi `thu_co_che` (ban/mua) + `quet_tham_so` 100 o; (4) `ghep_danh_muc` 2 chieu; (5) kiem tra cheo tai san voi regime CHUAN HOA (phan_vi rong20>=0,7) tren EURUSD/EURGBP/US500CASH H1.\n\n**Ket qua chinh**: loc che do nang vang H1 ban tu 8,2 bps t2,26 → **17,3 bps t5,14, lai_rong/phi 4,87 (>3)**, quet_tham_so **100/100 o CO LAI (CAO_NGUYEN)**; mua loc 15,0 bps t4,19; 2 chieu corr **-0,21**, danh muc **+186%/nam @x8,4**. Nhung: **GOLD-ONLY** (regime chuan hoa tren EURUSD/EURGBP/US500CASH deu AM, ~0,5x phi) va **H1-ONLY** (H4 giu2=8h +1,9 bps t0,27; M30/M15/D1 am).\n\n**Giao cho Claude**: gt25 → giao cau hoi #6: xac_nhan 2021+ (lai chi song 2013-2018 → regime da het, BAC_BO), MT5 tester, va xu li 69% bar spread=0 (phi nhan 2-3x). Vi sao: day la lead SONG duy nhat cua lane tin hieu (cac ban TONG_HOP bac bo hb7, luoi la artifact hb6/hb8), lai_rong/phi 4-5 + CAO_NGUYEN la manh nhat tu truoc toi nay — nhung pham vi hep va nghi decay, nen quyet dinh that/gia nam o xac_nhan.\n\n**Da bac bo (ghi de khong thu lai)**: gold H1 fade khong tai dien o H4/M30/M15/D1 (tn339/345/347); khong phai luat chung cho FX/chi so (tn351/352/353).\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T11:54:54"
+}
