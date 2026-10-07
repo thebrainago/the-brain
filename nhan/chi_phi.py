@@ -727,7 +727,7 @@ def _doc_luu() -> dict:
 
 TERMINAL = {
     "MetaQuotes": r"C:\Program Files\MetaTrader 5\terminal64.exe",
-    "XM":         r"C:\Program Files\XM MT5\terminal64.exe",
+    "XM":         r"C:\Program Files\XM Global MT5\terminal64.exe",
     "Exness":     r"C:\Program Files\MetaTrader 5 EXNESS\terminal64.exe",
     "Ultima":     r"C:\Program Files\Ultima Markets MT5 Terminal\terminal64.exe",
     "FXCE":       r"C:\Program Files\FXCE MT5 Terminal\terminal64.exe",
