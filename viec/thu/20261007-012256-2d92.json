@@ -1,0 +1,10 @@
+{
+ "id": "20261007-012256-2d92",
+ "luc": "2026-10-07T01:22:56",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI THI 07/10: dieu toc + bo nho + o dia (chu du an toan quyen)",
+ "tra_loi": null,
+ "noi_dung": "Keo ma moi: co qwen/dieu_toc.py (cua chung: moi 20s chi 1 bo khoi dong, cho khi CPU>90 / RAM trong<4GB / cam ket<8GB; env THEBRAIN_DIEU_TOC_DIR de cac clone chung 1 thu muc - mac dinh %PUBLIC%). LAM NGAY: (1) pagefile CO DINH 48GB tren D: (HDD, luoi an toan; C chi con 24GB, giu file nho tren C), powercfg High performance; (2) DO RAM THAT luc dang chay 9 bo: python/terminal64/metatester64 RSS tung loai + so ban du lieu nap trung -> gui bang so cho cloud (vi sao no RAM: nghi moi tien trinh tu nap parquet rieng); (3) don dep C: chuyen thu muc LANH (backups/, reports cu, du_lieu_cao, log, tester cache cu) sang D:/E: - GIU du lieu NONG (data/ parquet dang quet, tester dang chay) tren C vi SSD; roi bao dung luong trong; (4) don 00y dat tran CPU 90. Moi phan lam xong ghi vao reports/nen_may_nha.md."
+}
