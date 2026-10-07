@@ -1,0 +1,42 @@
+{
+ "ten": "dong_chu_ky_cong_nghiep_mua",
+ "ho": "xu_huong",
+ "chieu": 1,
+ "giu": 10,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 50
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "ema",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 200
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 14
+   },
+   "phep": "cheo_len",
+   "phai": {
+    "hang": 50
+   }
+  }
+ ],
+ "co_che": "EMA 50 > EMA 200 VA RSI 14 cat len tren 50: dong theo chu ky cong nghiep khi xu huong len"
+}

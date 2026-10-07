@@ -1,0 +1,20 @@
+{
+ "ma": "17H02-toi-uu-NZDCAD-H1",
+ "muc_tieu": "thu co che luoi DCA mua (bot 2231030) tren NZDCAD H1",
+ "lan": "CPU",
+ "uu_tien": 6,
+ "han_phut": 120,
+ "ra_luc": "2026-10-07T08:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "quet_luoi",
+  "{\"ma\": \"NZDCAD\", \"khung\": \"H1\", \"luoi\": {\"buoc\": [10, 15, 20, 30], \"tp\": [8, 12, 20], \"tran_tang\": [7, 9]}, \"co_dinh\": {\"che_do\": \"mua\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 120}"
+ ],
+ "vi_sao": "mo rong toi uu sang H1/M30 (loi C nhanh sau khi cai ziglang)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

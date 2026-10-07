@@ -1,0 +1,200 @@
+; saved on 2026.02.01 18:48:45
+; this file contains input parameters for testing/optimizing Can Cu Bu Sieng Nang v2.7.2 expert advisor
+; to use it in the strategy tester, click Load in the context menu of the Inputs tab
+;
+; === Cài đặt chung ===
+InpCombine=false||false||0||true||N
+InpMagicID=712||9196||1||91960||N
+InpLots=0.01||0.01||0.001000||0.100000||N
+InpTP=100.0||10.0||1.000000||100.000000||N
+InpSL=0.0||0.0||0.000000||0.000000||N
+InpTypeBuySell=0||0||0||3||N
+InpShowTP=true||false||0||true||N
+InpDelayAfterSLTP=0||0||1||10||N
+; === Giới hạn ===
+InpMaxBuyOrders=100||100||1||1000||N
+InpMaxSellOrders=100||100||1||1000||N
+InpMaxSpread=300.0||3.0||0.300000||30.000000||N
+InpMaxLots=2.3||2.3||0.230000||23.000000||N
+InpMaxLots2NewCycle=true||false||0||true||N
+InpDelayOrder=2||2||1||20||N
+; === Xổ số ===
+InpUseLottery=false||false||0||true||N
+InpMultiplierLottery=2.0||2.0||0.200000||20.000000||N
+InpMinuteDelayAfterClose=60||60||1||600||N
+InpMoneySL2Reset=0.0||0.0||0.000000||0.000000||N
+; === DCA ===
+InpUseDCA=true||false||0||true||N
+InpUseFilterDCA=true||false||0||true||N
+InpOrders2EnableFilterDCA=25||25||1||250||N
+InpDCAMODE=1||0||0||2||N
+InpCoeffMode=0||0||0||1||N
+InpMultiplier=1.05||1.3||0.130000||13.000000||N
+InpUseChangeMultiplier=false||false||0||true||N
+InpOrders2NewMultiplier=10||10||1||100||N
+InpNewMultiplier=1.0||1.2||0.120000||12.000000||N
+InpOrders2NewMultiplier2=20||20||1||200||N
+InpNewMultiplier2=1.0||1.1||0.110000||11.000000||N
+InpOrders2NewMultiplier3=30||30||1||300||N
+InpNewMultiplier3=1.0||1.05||0.105000||10.500000||N
+InpOrders2NewMultiplier4=40||40||1||400||N
+InpNewMultiplier4=1.0||1.06||0.106000||10.600000||N
+InpOrders2NewMultiplier5=50||50||1||500||N
+InpNewMultiplier5=1.0||1.03||0.103000||10.300000||N
+InpPlus=0.0||0.01||0.001000||0.100000||N
+InpDistanceMulti=1.0||1.2||0.120000||12.000000||N
+InpDistance0=10.0||10.0||1.000000||100.000000||N
+InpSingleTP=0.0||0.0||0.000000||0.000000||N
+InpTPDCA=200.0||20.0||2.000000||200.000000||N
+InpOrders2Distance1=1||5||1||50||N
+InpDistance1=60.0||15.0||1.500000||150.000000||N
+InpOrders2Distance2=1||10||1||100||N
+InpDistance2=70.0||15.0||1.500000||150.000000||N
+InpOrders2Distance3=1||15||1||150||N
+InpDistance3=80.0||15.0||1.500000||150.000000||N
+InpOrders2Distance4=1||20||1||200||N
+InpDistance4=100.0||15.0||1.500000||150.000000||N
+; === Điều chỉnh TP chuỗi khi âm ===
+InpUseChangeTPDCA=false||false||0||true||N
+InpPerLoss2ChangeTP=-20.0||-20.0||-2.000000||-200.000000||N
+InpMoneyLoss2ChangeTP=-12000.0||-12000.0||-1200.000000||-120000.000000||N
+InpTPDCAChange=10.0||10.0||1.000000||100.000000||N
+; === Mở lệnh ngược chiều ===
+InpUseOpenOpp=false||false||0||true||N
+InpOrders2OpenOpp=12||12||1||120||N
+InpPerLotsOpp=15.0||15.0||1.500000||150.000000||N
+InpLotsOpp=0.01||0.01||0.001000||0.100000||N
+; === Tỉa lệnh cùng chuỗi ===
+InpUseSniper=false||false||0||true||N
+InpOrders2StartSniper=5||20||1||200||N
+InpOrders2StartSniper2=7||15||1||150||N
+InpFirstOrdersSniper=1||2||1||20||N
+InpLastOrdersSniper=0||0||1||10||N
+InpPercentSniper=5.0||10.0||1.000000||100.000000||N
+InpMoneySniperFull=5.0||10.0||1.000000||100.000000||N
+InpTPSniper=5.0||5.0||0.500000||50.000000||N
+InpMuliSniper=1.0||1.15||0.115000||11.500000||N
+InpUseSniperPartial=false||false||0||true||N
+InpPerLoss2SniperPartial=-30.0||-30.0||-3.000000||-300.000000||N
+InpOrders2StartSniperPartial=20||20||1||200||N
+InpPerLotsSniperPartial=30.0||30.0||3.000000||300.000000||N
+InpPerSniperPartial=20.0||20.0||2.000000||200.000000||N
+InpMoneySniperPartial=10.0||10.0||1.000000||100.000000||N
+InpLastOrdersSniperPartial=3||3||1||30||N
+; === Tỉa lệnh khác chuỗi ===
+InpUseAllSniper=false||false||0||true||N
+InpUseMagicFilter=true||false||0||true||N
+InpAllOrders2ActiveAllSniper=55||25||1||250||N
+InpFirstOrders2AllSniper=1||1||1||10||N
+InpLastOrders2AllSniper=10||5||1||50||N
+InpMoneyProfitAllSniper=10.0||10.0||1.000000||100.000000||N
+InpUseAllProfitToday2AllSniper=false||false||0||true||N
+; === Hedging Zone ===
+InpUseHedgingZone=false||false||0||true||N
+InpOrders2HedgingZone=20||20||1||200||N
+InpHedgingZoneMultiplier=2.0||2.0||0.200000||20.000000||N
+InpZoneHedgingPips=35.0||35.0||3.500000||350.000000||N
+InpMoneyTPALLHedgingZone=1000.0||1000.0||100.000000||10000.000000||N
+InpPipsTPAllHedgingZone=50.0||50.0||5.000000||500.000000||N
+InpMaxLotsHedgingZone=20.0||20.0||2.000000||200.000000||N
+; === Hedging ===
+InpUseHedging=false||false||0||true||N
+InpOrders2Hedging=15||15||1||150||N
+InpPerLoss2Hedging=-25.0||-25.0||-2.500000||-250.000000||N
+InpUseLotsDCA2Hedging=true||false||0||true||N
+InpPerLotsHedging=20.0||20.0||2.000000||200.000000||N
+InpTPHedging=0.0||0.0||0.000000||0.000000||N
+InpTPAllWhenHedging=150.0||150.0||15.000000||1500.000000||N
+InpStopSniperWhenHedging=true||false||0||true||N
+; === Reset lots (thủ công) ===
+InpResetLots=0.01||0.1||0.010000||1.000000||N
+InpMultiplierReset=1.0||1.2||0.120000||12.000000||N
+InpTPReset=5.0||5.0||0.500000||50.000000||N
+; === Cài đặt đóng lệnh ===
+MoneyTPAllAcc=10.0||0.0||0.000000||0.000000||N
+MoneySLAllAcc=0.0||0.0||0.000000||0.000000||N
+MoneyTPAll=0.0||0.0||0.000000||0.000000||N
+MoneySLAll=0.0||0.0||0.000000||0.000000||N
+MoneyTPBuy=0.0||0.0||0.000000||0.000000||N
+MoneySLBuy=0.0||0.0||0.000000||0.000000||N
+MoneyTPSell=0.0||0.0||0.000000||0.000000||N
+MoneySLSell=0.0||0.0||0.000000||0.000000||N
+MoneyTPAllDCASignalStep=0.0||0.0||0.000000||0.000000||N
+; === Mục tiêu lợi nhuận ngày ===
+InpDailyMoneyTPTarget=0.0||0.0||0.000000||0.000000||N
+InpDailyMoneySLTarget=0.0||0.0||0.000000||0.000000||N
+InpMinuteDelayNewDay=120||120||1||1200||N
+; === Trailing ===
+InpUseTrailing=true||false||0||true||N
+InpTrailingStart=30.0||15.0||1.500000||150.000000||N
+InpTrailingStep=2.0||5.0||0.500000||50.000000||N
+InpInitialSLTrailing=15.0||2.0||0.200000||20.000000||N
+InpShowLineStartTrailing=true||false||0||true||N
+; === Giới hạn thời gian theo giờ PC/Laptop ===
+InpUseTradingTime=false||false||0||true||N
+InpUseTime1=true||false||0||true||N
+InpStartTime1=05:30
+InpEndTime1=13:00
+InpUseTime2=true||false||0||true||N
+InpStartTime2=14:00
+InpEndTime2=16:00
+InpUseTime3=true||false||0||true||N
+InpStartTime3=21:00
+InpEndTime3=23:00
+InpUseTime4=true||false||0||true||N
+InpStartTime4=01:00
+InpEndTime4=03:30
+InpDCAOutTime=true||false||0||true||N
+; === Điều kiện mở lệnh ===
+InpIndiMode=8||0||0||9||N
+InpTFSignal=1||0||0||49153||N
+InpUseEMAFilter=false||false||0||true||N
+InpTFEMAFilter=0||0||0||49153||N
+InpEMA1=34||34||1||340||N
+InpEMA2=89||89||1||890||N
+InpUseMACDFilter=false||false||0||true||N
+InpTFMACDFilter=0||0||0||49153||N
+InpFastEMAMACD=30||30||1||300||N
+InpSlowEMAMACD=50||50||1||500||N
+InpSMAMACD=5||5||1||50||N
+InpAppliedPriceMACD=6||1||0||7||N
+; === Indi CCI ===
+InpCCIPeriod=14||14||1||140||N
+InpCCIPrice=1||1||0||7||N
+InpOverBoughtCCI=100.0||100.0||10.000000||1000.000000||N
+InpOverSoldCCI=-100.0||-100.0||-10.000000||-1000.000000||N
+; === Indi Stoch ===
+InpStochKPeriod=7||5||1||50||N
+InpStochDPeriod=1||3||1||30||N
+InpStochSlowing=2||3||1||30||N
+InpStochMAMethod=0||0||0||3||N
+InpStochPrice=0||0||0||1||N
+InpOverBoughtStoch=100.0||80.0||8.000000||800.000000||N
+InpOverSoldStoch=12.0||20.0||2.000000||200.000000||N
+; === Indi Momentum ===
+InpMomentumPeriod=14||14||1||140||N
+InpMomentumPrice=1||1||0||7||N
+InpOverBoughtMomen=100.45||100.45||10.045000||1004.500000||N
+InpOverSoldMomen=99.45||99.45||9.945000||994.500000||N
+; === Supertrend Indicator ===
+InpPeriodsIndiST=21||21||1||210||N
+InpMultiplierIndiST=3.0||3.0||0.300000||30.000000||N
+; === UTBOT Indicator ===
+InpUTBOT_Nbr_Periods=10||10||1||100||N
+InpUTBOT_Multiplier=1.0||1.0||0.100000||10.000000||N
+InpUTBOT_ShowArrows=true||false||0||true||N
+InpUTBOT_ArrowDist=20||20||1||200||N
+; === Indicator ngoài ===
+InpNameIndiOutside=Nhập tên indi
+InpBuyBuffer=0||0||1||10||N
+InpSellBuffer=1||1||1||10||N
+InpBarSignal=1||1||1||10||N
+; === RSI Indicator ===
+InpRSIPeriod=14||14||1||140||N
+InpRSIApplyPrice=1||1||0||7||N
+InpRSIOverBought=75.0||75.0||7.500000||750.000000||N
+InpRSIOverSold=25.0||25.0||2.500000||250.000000||N
+; === Ichimoku Indicator ===
+InpIchiTenkan=9||9||1||90||N
+InpIchiKijun=26||26||1||260||N
+InpIchiSenkou=52||52||1||520||N

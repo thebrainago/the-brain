@@ -1,0 +1,82 @@
+{
+ "ma": "lot_tu_dong_theo_von",
+ "loai": "LOT",
+ "ten": "Lot tu dong theo von",
+ "mo_ta": "Lot lenh dau = so du / n (vd 0,01 cho moi 1000 von).",
+ "tham_so": [
+  {
+   "ten": "von_moi_lot",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    100,
+    10000,
+    100
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lot_toi_thieu",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.5,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lot_toi_da",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.1,
+    5.0,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "lam_tron_lot",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lot dau cua chuoi tang dan theo so du tai luc vao."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.ThamSo.lot la hang so; lot chot ngoai engine (niem_phong_luoi).",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "lot_tu_dong_theo_von"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Ket hop voi tran_lot_tong thanh 'lai kep co kiem soat'.",
+ "rui_ro": "Lai kep cung la thua kep sau chuoi xau.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

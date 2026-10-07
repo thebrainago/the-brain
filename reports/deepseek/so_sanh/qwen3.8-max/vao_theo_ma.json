@@ -1,0 +1,56 @@
+{
+ "ma": "vao_theo_ma",
+ "loai": "VAO",
+ "ten": "Vao theo duong trung binh (MA / EMA)",
+ "mo_ta": "Chon huong vao lenh theo vi tri gia so voi MA (vd EMA 46) hoac che do 'theo entry' / 'theo MA'.",
+ "tham_so": [
+  {
+   "ten": "chu_ky_ma",
+   "lop": "SO_DEM",
+   "don_vi": "nen",
+   "mien": [
+    10,
+    200,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "khung",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chieu lenh dau khop dau cua (gia - MA) tai bar vao."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co tin hieu vao.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_theo_ma"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Dac trung (gia - MA) / ATR co the dung lam bo loc chieu cho che do mot_chieu.",
+ "rui_ro": "MA tre: vao muon khi thi truong dao chieu nhanh.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

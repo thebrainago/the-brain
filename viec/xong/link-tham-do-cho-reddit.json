@@ -1,0 +1,41 @@
+{
+  "ma": "link-tham-do-cho-reddit",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "ma thoat 1",
+  "bang_chung": {
+    "ma_thoat": 1,
+    "giay": 0.3,
+    "lenh": [
+      "C:\\Users\\DUNG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "b.py",
+      "link",
+      "tham-do",
+      "https://www.reddit.com/r/algotrading/"
+    ],
+    "phien_ban_ma": "c08415e+sua",
+    "dong_cuoi": [],
+    "loi_cuoi": [
+      "  File \"C:\\Research SP500\\lab\\nhan\\link_nguon.py\", line 700, in cho_phep",
+      "    _, rp, loi = self._nap(url)",
+      "                 ^^^^^^^^^^^^^^",
+      "  File \"C:\\Research SP500\\lab\\nhan\\link_nguon.py\", line 687, in _nap",
+      "    status, text, loi = self._lay(goc + \"/robots.txt\")",
+      "                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"C:\\Research SP500\\lab\\nhan\\link_chay.py\", line 361, in _lay_robots",
+      "    return self._lay(url, truoc=self._truoc)",
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"C:\\Research SP500\\lab\\nhan\\link_chay.py\", line 180, in lay_http",
+      "    status, dau, body, loi = buoc(u, ua, timeout, toi_da_byte)",
+      "                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"C:\\Research SP500\\lab\\nhan\\link_chay.py\", line 125, in _mot_buoc_that",
+      "    import requests",
+      "ModuleNotFoundError: No module named 'requests'"
+    ],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-06T19:50:45"
+}

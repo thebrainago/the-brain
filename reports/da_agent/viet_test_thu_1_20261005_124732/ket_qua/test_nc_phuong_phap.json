@@ -1,0 +1,61 @@
+{
+ "id": "test_nc_phuong_phap",
+ "ok": true,
+ "du_lieu": {
+  "code": "from nhan import nc_phuong_phap as NCP\n\n\ndef _tt(ma=\"X\", kp=60, a=1.0, c=1.0, pip=0.0001, pv=10.0, von=1000.0):\n    return {\"ma\": ma, \"khung_phut\": kp, \"A\": a, \"C\": c, \"pip\": pip, \"pv\": pv, \"von\": von}\n\n\ndef test_thi_truong_hop_le():\n    d = _tt()\n    tt = NCP._thi_truong(d, \"test\")\n    assert tt.ma == \"X\"\n    assert tt.khung_phut == 60.0\n    assert tt.A == 1.0\n    assert tt.do_tin_chi_phi == \"KHAI\"\n    assert tt.lot_toi_thieu == 0.01\n    assert tt.lot_buoc == 0.01\n\n\ndef test_thi_truong_khong_phai_dict():\n    r = None\n    try:\n        NCP._thi_truong(\"chuoi\", \"nguon\")\n    except ValueError as e:\n        r = str(e)\n    assert r is not None\n    assert \"phai la dict\" in r\n\n\ndef test_thi_truong_thieu_khoa():\n    d = {\"ma\": \"X\"}\n    r = None\n    try:\n        NCP._thi_truong(d, \"dich\")\n    except ValueError as e:\n        r = str(e)\n    assert r is not None\n    assert \"thieu\" in r\n    assert \"khung_phut\" in r\n\n\ndef test_bao_bat_value_error():\n    @NCP._bao\n    def ham_loi(**kw):\n        raise ValueError(\"loi roi\")\n\n    kq = ham_loi(vong_id=1)\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert kq[\"loi\"] == \"loi roi\"\n\n\ndef test_bao_bat_file_not_found():\n    @NCP._bao\n    def ham_fnf(**kw):\n        raise FileNotFoundError(\"khong thay\")\n\n    kq = ham_fnf()\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"khong thay\" in kq[\"loi\"]\n\n\ndef test_bao_khong_loi_tra_ket_qua():\n    @NCP._bao\n    def ham_ok(**kw):\n        return {\"ok\": True}\n\n    kq = ham_ok(vong_id=99)\n    assert kq == {\"ok\": True}\n\n\ndef test_luu_the_hong_tra_chua_do_duoc():\n    the_hong = {\"ma\": \"x\"}\n    kq = NCP._bao(NCP._luu_the)(the=the_hong)\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"the hong\" in kq[\"loi\"]\n    assert \"thieu khoa\" in kq[\"loi\"]\n\n\ndef test_luu_the_none_tra_loi():\n    kq = NCP._bao(NCP._luu_the)(the=None)\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"loi\" in kq\n\n\ndef test_chuyen_bot_the_khong_ton_tai():\n    kq = NCP._bao(NCP._chuyen_bot)(\n        the_ma=\"khong_ton_tai_xyz\", gia_tri={}, nguon=_tt(), dich=_tt(\"Y\")\n    )\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"No such file\" in kq[\"loi\"] or \"khong_ton_tai_xyz\" in kq[\"loi\"]\n\n\ndef test_ke_hoach_do_dich_ds_rong():\n    kq = NCP._bao(NCP._ke_hoach_do)(\n        the_ma=\"khong_ton_tai_xyz\", gia_tri={}, nguon=_tt(), dich_ds=[]\n    )\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"loi\" in kq\n\n\ndef test_ke_hoach_do_dich_ds_khong_phai_list():\n    kq = NCP._bao(NCP._ke_hoach_do)(\n        the_ma=\"khong_ton_tai_xyz\", gia_tri={}, nguon=_tt(), dich_ds=\"chuoi\"\n    )\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"loi\" in kq\n\n\ndef test_quet_o_the_khong_ton_tai():\n    kq = NCP._bao(NCP._quet_o)(the_ma=\"khong_ton_tai_xyz\", o=\"buoc\")\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"No such file\" in kq[\"loi\"] or \"khong_ton_tai_xyz\" in kq[\"loi\"]\n\n\ndef test_cmt_loc_thieu_khai_bao():\n    kq = NCP._bao(NCP._cmt_loc)(khai_bao=None, kho=False)\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"can `khai_bao`\" in kq[\"loi\"]\n\n\ndef test_cmt_loc_khai_bao_rong():\n    kq = NCP._bao(NCP._cmt_loc)(khai_bao=[], kho=False)\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"can `khai_bao`\" in kq[\"loi\"]\n\n\ndef test_cmt_loc_khai_bao_khong_phai_list():\n    kq = NCP._bao(NCP._cmt_loc)(khai_bao=\"chuoi\", kho=False)\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n    assert \"can `khai_bao`\" in kq[\"loi\"]\n\n\ndef test_cong_cu_co_du_6_muc():\n    assert len(NCP.CONG_CU) == 6\n    ten = [c[0] for c in NCP.CONG_CU]\n    assert \"luu_the\" in ten\n    assert \"chuyen_bot\" in ten\n    assert \"ke_hoach_do\" in ten\n    assert \"quet_o\" in ten\n    assert \"thu_chuyen\" in ten\n    assert \"cmt_loc\" in ten\n",
+  "ket_qua": {
+   "test_thi_truong_hop_le": "OK",
+   "test_thi_truong_khong_phai_dict": "OK",
+   "test_thi_truong_thieu_khoa": "OK",
+   "test_bao_bat_value_error": "OK",
+   "test_bao_bat_file_not_found": "OK",
+   "test_bao_khong_loi_tra_ket_qua": "OK",
+   "test_luu_the_hong_tra_chua_do_duoc": "OK",
+   "test_luu_the_none_tra_loi": "OK",
+   "test_chuyen_bot_the_khong_ton_tai": "OK",
+   "test_ke_hoach_do_dich_ds_rong": "OK",
+   "test_ke_hoach_do_dich_ds_khong_phai_list": "OK",
+   "test_quet_o_the_khong_ton_tai": "OK",
+   "test_cmt_loc_thieu_khai_bao": "OK",
+   "test_cmt_loc_khai_bao_rong": "OK",
+   "test_cmt_loc_khai_bao_khong_phai_list": "OK",
+   "test_cong_cu_co_du_6_muc": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "test_luu_the_hong HONG: ValueError: the hong: thieu khoa 'loai'; thieu khoa 'ten'; thieu khoa 'mo_ta'; thieu khoa 'tham_so'; thieu khoa 'can'",
+    "test_chuyen_bot_o_la HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/khong_ton_tai_xyz.json'",
+    "test_ke_hoach_do_dich_rong HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/khong_ton_tai_xyz.json'",
+    "test_quet_o_khong_co HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/khong_ton_tai_xyz.json'",
+    "test_cmt_loc_thieu_khai_bao HONG: ValueError: can `khai_bao` (danh sach khai bao DSL) hoac kho=true",
+    "test_cmt_loc_khai_bao_rong HONG: ValueError: can `khai_bao` (danh sach khai bao DSL) hoac kho=true"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "test_luu_the_hong_tra_chua_do_duoc HONG: ValueError: the hong: thieu khoa 'loai'; thieu khoa 'ten'; thieu khoa 'mo_ta'; thieu khoa 'tham_so'; thieu khoa 'can'",
+    "test_chuyen_bot_the_khong_ton_tai HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/khong_ton_tai_xyz.json'",
+    "test_ke_hoach_do_dich_ds_rong HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/khong_ton_tai_xyz.json'",
+    "test_ke_hoach_do_dich_ds_khong_phai_list HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/khong_ton_tai_xyz.json'",
+    "test_quet_o_the_khong_ton_tai HONG: FileNotFoundError: [Errno 2] No such file or directory: '/home/user/the-brain/kho_phuong_phap/khong_ton_tai_xyz.json'",
+    "test_cmt_loc_thieu_khai_bao HONG: ValueError: can `khai_bao` (danh sach khai bao DSL) hoac kho=true",
+    "test_cmt_loc_khai_bao_rong HONG: ValueError: can `khai_bao` (danh sach khai bao DSL) hoac kho=true",
+    "test_cong_cu_dang_ky HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 176.43
+}

@@ -1,0 +1,82 @@
+{
+ "ma": "loc_bao_bien_dong",
+ "loai": "LOC",
+ "ten": "Loc bao bien dong",
+ "mo_ta": "Bao = di 40-60 gia trong 5-10 phut khong hoi (NuTi): chi tha bot SAU bao (gia da di 30-40 gia).",
+ "tham_so": [
+  {
+   "ten": "bien_do_bao",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "gia",
+   "mien": [
+    20,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "thoi_gian_bao",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    3,
+    15,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "bien_do_pha_vo",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "gia",
+   "mien": [
+    20,
+    60,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "bat_loc_bao",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chi thay duoc khi co bar gia M1-M5."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_bao_bien_dong"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Dac trung bien dong ngan (range 5-10 phut / ATR) lam bo loc vao / them lenh; xem DD co giam khong.",
+ "rui_ro": "Dinh nghia 'bao' theo cam tinh.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

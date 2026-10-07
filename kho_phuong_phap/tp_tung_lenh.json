@@ -1,0 +1,49 @@
+{
+ "ma": "tp_tung_lenh",
+ "loai": "THOAT",
+ "ten": "TP rieng tung lenh",
+ "mo_ta": "Moi lenh co TP rieng (CCBSN InpTP, NuTi quang 1 TP don 2 gia, SignalX TP 2 gia); lenh dong rieng khi gia cham.",
+ "tham_so": [
+  {
+   "ten": "tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    20,
+    300,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Cot T/P trong bang Orders khac 0; lenh dong boi [tp] tai dung gia TP; khong dong cung luc ca chuoi."
+ ],
+ "engine": {
+  "trang_thai": "mot_phan",
+  "co": [
+   "tia_lenh",
+   "bien_cap"
+  ],
+  "ghi_chu": "luoi.py chot ca chuoi; chi co tia_cap (dau + cuoi) gan giong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tp_tung_lenh"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "TP tung lenh + khong SL = luoi 'ban dai' kieu NuTi quang 1; thu voi 60-100 lenh.",
+ "rui_ro": "Lenh sau cung ket lai het: khong co co che gom.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

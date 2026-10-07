@@ -1,0 +1,32 @@
+{
+ "ten": "c3_suc_ma_nen_3_mua",
+ "ho": "xu_huong",
+ "chieu": 1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "mau_nen",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 0
+   }
+  }
+ ],
+ "co_che": "CMT SUC_MANH_XU_HUONG + NEN (nhap, may dien)"
+}

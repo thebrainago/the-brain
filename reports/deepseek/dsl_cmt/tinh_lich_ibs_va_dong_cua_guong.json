@@ -1,0 +1,28 @@
+{
+ "ten": "tinh_lich_ibs_va_dong_cua_guong",
+ "ho": "lich",
+ "co_che": "Nha dau tu co xu huong mua vao khi gia tri IBS thap (gia gan dinh thang) ket hop voi yeu to lich ngay Thu 2, do lo so ve hieu ung 'Turnaround Tuesday' va tam ly gom hang sau phien giao dich dau tuan bi dong cua.",
+ "chieu": -1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_tuan"
+   },
+   "phep": "==",
+   "phai": {
+    "hang": 2
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ibs"
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 0.8
+   }
+  }
+ ],
+ "ra": []
+}

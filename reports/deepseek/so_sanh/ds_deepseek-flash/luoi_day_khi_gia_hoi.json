@@ -1,0 +1,60 @@
+{
+ "ma": "luoi_day_khi_gia_hoi",
+ "loai": "TANG",
+ "ten": "Gia hoi thi nhoi them lenh, keo TP lai gan",
+ "mo_ta": "Khi gia di nguoc roi hoi lai, bot van them lenh (luoi day them) va keo TP ve gan: ket thuc chuoi som hon (KawKaw).",
+ "tham_so": [
+  {
+   "ten": "buoc_them_khi_hoi",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "khoang_tp_keo_lai",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    5,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Co lenh them mo o gia TOT hon lenh them truoc (gia da hoi); TP chuoi gan gia trung binh."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chi them lenh khi gia di nguoc them.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "luoi_day_khi_gia_hoi"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Giam thoi gian chuoi nhung tang lot trung binh; thu tren chuoi sau.",
+ "rui_ro": "Them lenh o gia hoi ma gia quay dau = lot nang them o gia xau.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

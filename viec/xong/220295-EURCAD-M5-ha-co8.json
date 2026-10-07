@@ -1,0 +1,55 @@
+{
+  "ma": "220295-EURCAD-M5-ha-co8",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 976.1,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"EURCAD\", \"khung\": \"M5\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"cong\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 8}"
+    ],
+    "phien_ban_ma": "11101d2c+sua",
+    "dong_cuoi": [
+      "   \"loi_suat_o_tran_pct\": 159.71,",
+      "   \"hon_moc_pct\": 159.71",
+      "  },",
+      "  {",
+      "   \"tham_so\": {",
+      "    \"buoc\": 8,",
+      "    \"tp\": 6,",
+      "    \"tran_tang\": 7,",
+      "    \"cho_lui\": 3,",
+      "    \"he_so_lot\": 0.8",
+      "   },",
+      "   \"chay\": false,",
+      "   \"so_lenh\": 4244,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 2.6,",
+      "   \"maxdd_pct\": -37.92,",
+      "   \"he_so_lot_tai_tran\": 2.13,",
+      "   \"loi_suat_o_tran_pct\": 5.54,",
+      "   \"hon_moc_pct\": 5.54",
+      "  }",
+      " ],",
+      " \"ly_do\": \"HET GIO: chi chay 2243/3000 o trong 900 s - phan da chay khong phai mau ngau nhien cua luoi nen khong doc hinh dang; giam so o (toi_da_o / bot truc / bot gia tri) roi quet lai\",",
+      " \"tn_id\": 866,",
+      " \"_giay\": 901.3",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00021.md": "# THO vong 21 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n21 lan goi cong cu · 988438 token vao · 49415 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 6 phép thử mới (tn835/839/840/841/842/843) + 2 khai báo lỗi sửa được (tn832/833), 1 cached (tn611).**\n\n**Đã thử & số:**\n- **gt53 — N Donchian lớn (100/150/250):** bps 57,87 → 61,15 → 56,42, count 306→204→139 → CAGR 616→304→141%@x10. CAO_NGUYEN nhưng là **bão hoà, không nâng cấp**. **BAC_BO**.\n- **gt54 — thêm supertrend vào họ ĐỘNG LƯỢNG:** 43,76→43,33 bps (305→292 lệnh) → **trung tính/âm**, không phải đòn bẩy.\n- **Họ ĐỘNG LƯỢNG + bar lớn + trail (giữ 30)** = 294 lệnh, **52,93 bps, t7,66, 8/9 năm, 449%@x10 DD43,9%** (tn840) — **kênh ĐỘC LẬP MỚI**, nhưng không vượt gt44 và ghep không hơn (hb51). Giữ lâu hơn (60-200) **làm GIẢM** (tn841).\n- **Mấu chốt cơ chế (tn842/843):** trail **chỉ** hiệu quả KÈM lọc bar lớn — breakout+trail KHÔNG bar lớn chỉ 28,1 bps (DD79,9%@x10); cả hai lọc (KL và biên độ) đều cần; bỏ lọc nào cũng tụt về 42-47 bps.\n\n**Giả thuyết giao cho Claude:** gt53→BAC_BO; gt54→DANG_THU (phần \"supertrend\" bác bỏ, phần \"bar lớn+trail\" cho kênh mới). Câu hỏi mới #23 (gt37 flow-gio0: mạnh hơn gt44 nhưng t17-20 + gio==0 → nghi leak, cần kiểm) và #24 (chuyển trọng tâm sang XÁC NHẬN).\n\n**Vì sao:** trần khảm phá vàng H1 đã chạm ở **gt44 (616%@x10)**; dưới trần đòn bẩy x10 chỉ còn cách tăng bps×count mà cả hai họ trend đều bão hoà ~44-58 bps. Bước tiếp có giá trị nhất không phải thêm biến thể, mà là (a) kiểm gt37 — lead mạnh nhất còn khả nghi trong bảng TN tốt nhất, (b) xác nhận OOS + MT5 cho gt34/40/42/39/44.\n",
+      "reports/nc_tho/vong_00022.md": "# THO vong 22 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n23 lan goi cong cu · 699106 token vao · 41061 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 13 phép thử mới (tn844-855), 1 giả thuyết mới gt55 lên TRIEN_VONG, 2 hiểu biết (hb55/56), 2 câu hỏi (#25/#26).**\n\n**Đã thử & số:**\n- **Union \"bar lớn theo xu hướng\" MUA (gt55)** = MUA khi kl_pv≥0,9 & bd_pv≥0,95 & st_chieu=+1 & close>open, giu 20, trail 3/0,5: **537 lệnh, 34,82 bps, t9,33, DƯƠNG 9/9 năm, 679,74%@x10 DD41,1%** (tn844); trail 3/0,3 → **777,87%@x10, sharpe 3,57, 9/9 năm** (tn853). **VƯỢT gt44-mua (306 lệnh, 616%@x10).** CAO_NGUYEN 36/36 (ngưỡng×giu) và 12/12 (trail), tỉ lệ ô có lãi 1,0.\n- **Cơ chế 4-PHẦN, phần nào cũng gánh:** bỏ close>open → 19,87 bps (tn847); bỏ kl_pv → 26,56 bps (tn850); ST 7/2 → 700%@x10 nhưng 2021 âm (tn851); **mua bar lớn GIẢM trong uptrend → ÂM -13,84 bps** (tn854) ⇒ hướng nến là bắt buộc. Ride-trend (thoát khi ST lật) tệ: 252%@x10 (tn849).\n- **BAN đối xứng yếu:** 383%@x10, DD70%, 8/9 (tn845).\n\n**Giả thuyết giao cho Claude:** **gt55 (TRIEN_VONG)** — \"union bar-lớn + supertrend, bỏ Donchian\" là **chân TỐT NHẤT dự án trên khám phá** (778%@x10, DD 41%, 9/9 năm, CAO_NGUYEN). Câu hỏi #25 (ưu tiên 0,92): chạy **XÁC NHẬN 2021+ + phí x2-3 + MT5** trên tn844/tn853, so trực tiếp gt44-mua. #26: BAN có nâng được không + ghép MUA+BAN có phá hb51 không.\n\n**Phát hiện cấu trúc (hb55/56):** điều kiện **Donchian breakout của gt40/43/44 là DEAD WEIGHT** — bỏ nó vẫn hơn (537 vs 306 lệnh, 680 vs 616%@x10); phơi nhiễm nằm ở **bar lớn + xu hướng**, không ở vị trí kênh. Và tiền bị chặn bởi **TRẦN ĐÒN BẢY x10** (DD mới 41%), không bởi rủi ro.\n\n**Vì sao đáng theo:** đây là lần đầu một biến thể **vượt gt44** về TIEN@x10 lại vẫn **9/9 năm** và **CAO_NGUYEN** cả 3 chiều tham số; nếu sống OOS thì đây là chân chính thay gt44. Việc tiếp theo đáng giá nhất: Claude chạy xác nhận + MT5 cho gt55.\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T13:50:49"
+}

@@ -1,0 +1,84 @@
+{
+ "id": "ra_soat_luoi",
+ "ok": true,
+ "du_lieu": {
+  "phat_hien": [
+   {
+    "ham": "_mot_ro",
+    "muc_do": "CAO",
+    "van_de": "Sai logic trong `chot_tien`: Nguong chot (`nguong`) duoc tinh bang `ts.chot_tien * (ts.lot / 0.01)`, nhung bien `lai_noi` duoc tinh tren tong lot hien tai cua ro (co the khac `ts.lot` neu dung kieu_lot 'cong'/'nhan' hoac sau khi tia lenh). Khi `kieu_lot != 'phang'`, nguong tien bi sai lech theo ty le lot, dan den chot qua som/quam so voi thiet ke.",
+    "de_xuat": "Tinh `nguong` dua tren tong lot hien tai: `nguong = ts.chot_tien * (tong_lot / 0.01)` thay vi dung `ts.lot` co dinh."
+   },
+   {
+    "ham": "_mot_ro",
+    "muc_do": "TB",
+    "van_de": "Xung dot gia dinh trong `tia_lenh`: Khi `vao` rong sau vong lap `while` (do `cap_moi_bar` chan), code mo lai L1 tai `cl[i]`. Tuy nhien, `so_tang` duoc dat ve 1 va `vao` chi co 1 phan tu. Neu bar tiep theo gia di nguoc ngay, `buoc` dau tien se duoc ap dung tu `moc` moi nay. Logic nay hop ly nhung khong ghi chu rang viec reset `so_tang` lam mat lich su khoang cach gian dan (`he_so_buoc`) da tich luy truoc do, co the gay ra them tang qua nhanh so voi y nghia 'gian dan'.",
+    "de_xuat": "Them comment lam ro rang `he_so_buoc` bi reset khi `tia_lenh` xay ra, hoac luu `vi_tri_trong_ladder` cu de tiep tuc gian dan neu muon."
+   },
+   {
+    "ham": "quy_cach_cho",
+    "muc_do": "TB",
+    "van_de": "Xu ly `spread_du_phong` khi `cp` cung cap `sp_cp > 0`: Code dung `sp = sp_tay if sp_tay else (sp_cp if sp_cp > 0 else 2.0 * base[\"pip\"])`. Neu `cp` co `spread_frac_chung` rat nho (vd 0.00001) va `gia_dien_hinh` lon, `sp_cp` co the < `2.0 * pip` cua lop FX chuan (0.0002). Khi do `sp` se la `sp_cp` (rat nho) thay vi gia tri mac dinh an toan hon, co the lead đến uoc luong phi spread qua thap.",
+    "de_xuat": "Su dung `max(sp_cp, 2.0 * base['pip'])` khi lay tu `cp` de dam bao khong duoi nguong toi thieu ly thuyet cua lop symbol."
+   },
+   {
+    "ham": "chay_mang",
+    "muc_do": "THAP",
+    "van_de": "Uoc luong `margin` dung `np.mean(cl)` (gia trung binh ca chuoi). Trong truong hop xu huong manh (vd AUDCAD giam 50%), `mean(cl)` se cao hon nhieu so voi gia luc chay tai khoan (stop-out). Dieu nay dan den `margin` bi uoc CAO qua muc, khiem `equity <= stopout * margin` kho xay ra hon thuc te (false negative cho risk of ruin).",
+    "de_xuat": "Can ghi ro day la uoc luong CONSERVATIVE (an toan hon thuc te) hoac dung gia cuoi cung/mean cua 1 nam gan nhat thay vi mean toan bo chuoi."
+   },
+   {
+    "ham": "_mot_ro",
+    "muc_do": "THAP",
+    "van_de": "Bien `phi_sp_bar0` duoc gan `phi_sp` sau khi tru spread bar 0. Sau vong lap, `lai_arr[0] = -phi_sp_bar0`. Tuy nhien, `phi_sp` ben trong vong lap duoc cong don lien tuc. Neu `ghi_lenh=True`, cac thao tac `ghi.append` khong anh huong den `phi_sp`, nhung thu tu tinh toan `phi_sp` o bar 0 va cac bar sau phai dong nhat voi docstring 'Chi phi... tru moi lan mo'. Logic hien tai dung, nhung de sai sot neu ai sua vong lap ma quen cap nhat `phi_sp_bar0` khi co them lenh o bar 0 (hiện tại chỉ có 1 lenh).",
+    "de_xuat": "Them assert `len(vao)==1` o bar 0 de dam bao khong co them tang o bar dau anh huong den `phi_sp_bar0`."
+   }
+  ]
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "re",
+   "loi": [
+    "JSON hong: Expecting ',' delimiter: line 30 column 97 (char 3697)"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "re",
+   "loi": []
+  }
+ ],
+ "phan_bien": {
+  "nhan_xet": [
+   {
+    "muc": "1",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Phat hien chi ra `nguong = ts.chot_tien * (ts.lot/0.01)` trong khi `lai_noi` tinh tren `tong_lot` hien tai. Docstring cua `chot_tien` noi ro 'DON VI: TIEN bao gia tren 0,01 lot (nguong that = chot_tien * lot/0,01)' - tuc la nguong CO Y tinh theo lot GOC, khong phai tong lot. Vay 'sai logic' la phan dinh SAI (day la thiet ke, khong phai loi). Tuy nhien co mot diem that: khi `kieu_lot != 'phang'`, nguong khong scale theo lot thuc te nen y nghia 'chot theo tien' bi lech - nhung do la he qua cua thiet ke da khai bao, khong phai bug im lang. Muc do nen ha xuong TB va doi cach dien dat."
+   },
+   {
+    "muc": "2",
+    "phan_dinh": "nghi_sai",
+    "ly_do": "Phat hien thua nhan 'Logic nay hop ly' roi van de xuat them comment. Day la gop y van phong, khong phai loi logic/sai so lieu. `so_tang` reset ve 1 sau khi tia het ro la dung vi ladder da ve 0 - khong co 'mat lich su gian dan' vi khong con tang nao de gian. Khong phai phat hien."
+   },
+   {
+    "muc": "3",
+    "phan_dinh": "dung",
+    "ly_do": "Trong `quy_cach_cho`, dong `sp = sp_tay if sp_tay else (sp_cp if sp_cp > 0 else 2.0*base['pip'])` thuc su co the cho `sp` nho hon nguong toi thieu ly thuyet cua lop (2 pip) khi `cp.spread_frac_chung * gia_dien_hinh` rat nho. Day la rui ro im lang: phi spread bi uoc thap, ket qua loi suat bi thoi phong. De xuat `max(sp_cp, 2.0*base['pip'])` la hop ly."
+   },
+   {
+    "muc": "4",
+    "phan_dinh": "dung",
+    "ly_do": "`margin` trong `chay_mang` dung `np.mean(cl)` tren toan chuoi. Trong xu huong manh, gia luc stop-out khac xa mean, nen margin uoc sai. Chieu sai: neu gia giam manh (AUDCAD), mean > gia cuoi -> margin uoc CAO -> kho trigger stop-out hon -> false negative cho risk of ruin. Day la rui ro that, muc do THAP la phu hop (chi la uoc luong, khong phai con so chinh)."
+   },
+   {
+    "muc": "5",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Phat hien thua nhan 'Logic hien tai dung' roi de xuat them assert. Khong phai loi. Hon nua, o bar 0 chi co 1 lenh duoc mo (khong co vong lap them tang truoc bar 0), nen `phi_sp_bar0` luon dung. De xuat assert la phong ngua tuong lai, khong phai phat hien loi hien tai."
+   }
+  ],
+  "tong": "Chi 2/5 phat hien la loi that (spread_du_phong co the duoi nguong toi thieu, margin uoc bang mean toan chuoi); 3 muc con lai la gop y van phong hoac phan dinh sai vi docstring da khai bao ro thiet ke."
+ },
+ "dong": 22.06
+}

@@ -1,0 +1,50 @@
+{
+ "id": "test_the_phuong_phap",
+ "ok": true,
+ "du_lieu": {
+  "code": "import inspect\nfrom nhan import the_phuong_phap as T\nfrom nhan import dich_tham_so as DTS\n\n\ndef _the_hop_le():\n    return {\n        \"ma\": \"abc\",\n        \"loai\": \"VAO\",\n        \"ten\": \"Test\",\n        \"mo_ta\": \"Mo ta test\",\n        \"tham_so\": [{\"ten\": \"buoc\", \"lop\": DTS.KC_BUOC, \"don_vi\": \"pip\", \"mien\": [50, 400, 25], \"ten_trong_set\": None, \"ten_trong_engine\": None}],\n        \"can\": [],\n        \"xung_dot\": [],\n        \"tuong_tac_biet\": [],\n        \"vet\": [\"v1\"],\n        \"engine\": {\"trang_thai\": \"chua_ro\"},\n        \"nguon\": [],\n        \"dieu_kien_dung\": []\n    }\n\n\ndef test_kiem_the_hop_le_tra_rong():\n    the = _the_hop_le()\n    assert T.kiem_the(the) == []\n\n\ndef test_kiem_the_khong_phai_dict():\n    loi = T.kiem_the(\"chuoi\")\n    assert \"the phai la dict\" in loi\n\n\ndef test_kiem_the_thieu_khoa():\n    the = _the_hop_le()\n    del the[\"ma\"]\n    loi = T.kiem_the(the)\n    assert any(\"thieu khoa 'ma'\" in x for x in loi)\n\n\ndef test_kiem_the_ma_khong_hop_le():\n    the = _the_hop_le()\n    the[\"ma\"] = \"AB\"\n    loi = T.kiem_the(the)\n    assert any(\"khong hop le\" in x for x in loi)\n\n    the[\"ma\"] = \"1abc\"\n    loi = T.kiem_the(the)\n    assert any(\"khong hop le\" in x for x in loi)\n\n    the[\"ma\"] = \"a\" * 65\n    loi = T.kiem_the(the)\n    assert any(\"khong hop le\" in x for x in loi)\n\n\ndef test_kiem_the_loai_sai():\n    the = _the_hop_le()\n    the[\"loai\"] = \"SAI_LOAI\"\n    loi = T.kiem_the(the)\n    assert any(\"loai\" in x and \"khong thuoc\" in x for x in loi)\n\n\ndef test_kiem_the_ten_mo_ta_rong():\n    the = _the_hop_le()\n    the[\"ten\"] = \"   \"\n    loi = T.kiem_the(the)\n    assert any(\"ten / mo_ta rong\" in x for x in loi)\n\n    the[\"ten\"] = \"Ok\"\n    the[\"mo_ta\"] = \"\"\n    loi = T.kiem_the(the)\n    assert any(\"ten / mo_ta rong\" in x for x in loi)\n\n\ndef test_kiem_the_tham_so_trung_ten():\n    the = _the_hop_le()\n    o = {\"ten\": \"buoc\", \"lop\": DTS.KC_BUOC, \"don_vi\": \"pip\", \"mien\": None, \"ten_trong_set\": None, \"ten_trong_engine\": None}\n    the[\"tham_so\"] = [o, dict(o)]\n    loi = T.kiem_the(the)\n    assert any(\"trung ten\" in x for x in loi)\n\n\ndef test_kiem_the_mien_sai_dinh_dang():\n    the = _the_hop_le()\n    the[\"tham_so\"][0][\"mien\"] = [10, 5, 1]\n    loi = T.kiem_the(the)\n    assert any(\"mien phai la\" in x for x in loi)\n\n    the[\"tham_so\"][0][\"mien\"] = [1, 10, 0]\n    loi = T.kiem_the(the)\n    assert any(\"mien phai la\" in x for x in loi)\n\n    the[\"tham_so\"][0][\"mien\"] = [1, 10]\n    loi = T.kiem_the(the)\n    assert any(\"mien phai la\" in x for x in loi)\n\n\ndef test_kiem_the_engine_trang_thai_sai():\n    the = _the_hop_le()\n    the[\"engine\"] = {\"trang_thai\": \"sai\"}\n    loi = T.kiem_the(the)\n    assert any(\"engine.trang_thai\" in x for x in loi)\n\n\ndef test_kiem_the_danh_sach_khong_phai_list():\n    the = _the_hop_le()\n    the[\"can\"] = \"khong_phai_list\"\n    loi = T.kiem_the(the)\n    assert any(\"'can' phai la danh sach\" in x for x in loi)\n\n\ndef test_o_tu_ten_tra_dung_cau_truc():\n    o = T._o_tu_ten(\"buoc\")\n    assert o[\"ten\"] == \"buoc\"\n    assert \"lop\" in o\n    assert \"don_vi\" in o\n    assert o[\"mien\"] is None\n    assert o[\"ten_trong_set\"] is None\n    assert o[\"ten_trong_engine\"] is None\n\n\ndef test_thay_so_o_la_raise_value_error():\n    sig = inspect.signature(DTS.ThiTruong.__init__)\n    params = list(sig.parameters.keys())\n    if \"von\" not in params:\n        return\n    args = {}\n    for p in params:\n        if p == \"self\":\n            continue\n        ann = sig.parameters[p].annotation\n        if ann is str or ann == \"str\":\n            args[p] = \"x\"\n        else:\n            args[p] = 1.0\n    src = DTS.ThiTruong(**args)\n    dst = DTS.ThiTruong(**args)\n    the = _the_hop_le()\n    try:\n        T.thay_so(the, {\"o_la\": 10}, src, dst)\n        assert False, \"phai raise ValueError\"\n    except ValueError as e:\n        assert \"o khong co trong the\" in str(e)\n",
+  "ket_qua": {
+   "test_kiem_the_hop_le_tra_rong": "OK",
+   "test_kiem_the_khong_phai_dict": "OK",
+   "test_kiem_the_thieu_khoa": "OK",
+   "test_kiem_the_ma_khong_hop_le": "OK",
+   "test_kiem_the_loai_sai": "OK",
+   "test_kiem_the_ten_mo_ta_rong": "OK",
+   "test_kiem_the_tham_so_trung_ten": "OK",
+   "test_kiem_the_mien_sai_dinh_dang": "OK",
+   "test_kiem_the_engine_trang_thai_sai": "OK",
+   "test_kiem_the_danh_sach_khong_phai_list": "OK",
+   "test_o_tu_ten_tra_dung_cau_truc": "OK",
+   "test_thay_so_o_la_raise_value_error": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: ghi( (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "test_he_so_tu_thi_truong_lot_giu_nguyen HONG: TypeError: ThiTruong.__init__() missing 1 required positional argument: 'von'",
+    "test_he_so_tu_thi_truong_pip_ty_le_nghich HONG: TypeError: ThiTruong.__init__() missing 1 required positional argument: 'von'",
+    "test_thay_so_o_khong_co_trong_the_raise HONG: TypeError: ThiTruong.__init__() missing 1 required positional argument: 'von'",
+    "test_thay_so_lot_giu_nguyen_co_canh_bao HONG: TypeError: ThiTruong.__init__() missing 1 required positional argument: 'von'",
+    "test_thay_so_khoang_cach_qua_nho_khong_ap_duoc HONG: TypeError: ThiTruong.__init__() missing 1 required positional argument: 'von'",
+    "test_thay_so_tra_du_bon_khoa HONG: TypeError: ThiTruong.__init__() missing 1 required positional argument: 'von'"
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 157.48
+}

@@ -1,0 +1,58 @@
+{
+ "ma": "vao_ngay_lap_tuc",
+ "loai": "VAO",
+ "ten": "Vao ngay, khong cho tin hieu",
+ "mo_ta": "Mo lenh dau ngay khi bat bot hoac ngay sau khi chuoi truoc dong (Buy, Sell hoac ca hai); khong dung chi bao.",
+ "tham_so": [
+  {
+   "ten": "chieu",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tre_sau_dong",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    0,
+    60,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chuoi moi bat dau cung phut / cung bar voi luc chuoi cu dong; gio vao khong theo mot chi bao nao."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "cho_lui"
+  ],
+  "ghi_chu": "luoi.chay mo tang 1 o dau bar khi khong co ro dang song (cho_lui = 0).",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_ngay_lap_tuc"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi nen: moi he luoi cua ta dung no. Thay no bang diem vao co dieu kien (RSI, tam giac ngay...) de xem loc diem vao co them ky vong khong.",
+ "rui_ro": "Vao ngay luc thi truong dang chay manh mot chieu = chuoi sau ngay tu dau.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

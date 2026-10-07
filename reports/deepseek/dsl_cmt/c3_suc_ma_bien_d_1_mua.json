@@ -1,0 +1,36 @@
+{
+ "ten": "c3_suc_ma_bien_d_1_mua",
+ "ho": "bien_dong",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "bollinger",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 20,
+    "k": 2,
+    "cot": "duoi"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   }
+  }
+ ],
+ "co_che": "CMT SUC_MANH_XU_HUONG + BIEN_DONG (nhap, may dien)"
+}

@@ -1,0 +1,25 @@
+# BAI HOC TU CAC LAN CHAY DA TAC TU
+
+## 05/10 - ra soat loi 7 module loi (qwen3.8-flash, ~105 d, 5/7 dat may cham, 2 viec dich_tham_so + chi_phi bi cong 502 vi tep 44-46 KB)
+- May cham "tro ham co that" bat duoc bia ten ham NHUNG khong bat duoc bia LY LUAN. Claude doc code that kiem 3 phat hien muc CAO:
+  `cham_diem.tu_ket_qua_luoi` (nan lot cong sut giam) - SAI, code da bat `dd is None` va tra CHUA_DO_DUOC; `cong.xet` dieu kien 13 voi spread thieu - SAI, da co `_phi_thieu` + nhan;
+  `mo_phong.chay_tpsl` truyen `lai_suat_nam=None` - SAI, tham so tuy chon. **0/3 CAO la loi that.** `luoi._mot_ro chot_tien` (nguong theo ts.lot) - chua kiem (co the that khi kieu_lot khac phang).
+- Phan bien cheo (ds-flash) khong cuu duoc: gan "dung" cho phat hien sai (cham_diem nan). Model re doc module dong comment "vi sao" khong hieu bang tac gia.
+- Ket luan: dung LLM re RA SOAT LOI tren module da duoc chu thich ky la RA ON. Viec hop hon voi may cham MANH: viet TEST chay duoc (may chay test: dat/hong la su that), tom tat, doi chieu tai lieu <-> code. Rut kinh nghiem -> chuyen sang do do.
+
+## Lan 2 (05/10): viet test bang ds-flash - 4/6 DAT, 69 test chay qua
+- the_phuong_phap 12, thu_chuyen 25, do_thong_minh 16, nc_phuong_phap 16 test: Claude doc, chay lai, nhan vao repo (`test_*_llm.py`). Chi phi ~597 d.
+- Hong: kiem_the_nhap (NameError KCN sau 3 vong), dich_tham_so (loi mang tren tep 44 KB) - de lan sau, chia nho tep.
+- Ket luan: giao viec CO MAY CHAM CHAY THAT (test chay duoc) cho ket qua dang tin; kiem toan bang doc thi nhieu rac.
+
+## Lan 3 (05/10): chia nho tep + doc ten that: dich_tham_so 13 test, nc_ho_so 17 test DAT (60 d)
+- Cat tep 14-20 KB + vai nhanh + cau "moi ten dung trong test phai co that" -> 1 vong la dat. Tep 44 KB truoc do hong vi 502.
+- kiem_the_nhap van hong: module doc thu muc that (`kho_phuong_phap/`), test sinh ra doan ten the khong co. Can test dung thu muc tam; de lan sau (lam tay).
+
+## Lan 4 (05/10): 9 module, 4 DAT (53 test), 5 HONG; AI Box 521 tam thoi ~14:15-14:40 UTC
+- DAT: nc_bot_hoc 12, pmg_g0 14, quan_tri_nhieu 12, hang_doi 15 (Claude chay lai, khong ghi tep ngoai). HONG: khoi_phuc, doc_chi_bao, bang_he (3 vong), pmg_quet, pmg (0 vong, gap 521 giua chung) -> thu lai.
+- Loi 521 (Cloudflare, origin refused) la tam thoi; phien chi huy khac vao duoc cung luc. Executor nen thu lai viec 0 vong khi gap 5xx.
+
+## Lan 5 (05/10): thu lai 5 module hong voi tep 12 KB: chi khoi_phuc DAT (17 test). 4 con lai van hong
+- Loi la LLM doan sai: tham so kwargs khong co that (pmg_quet), khang dinh sai (doc_chi_bao, bang_he), dung open( (pmg). Khong lo ra loi that cua module.
+- Ket luan: voi module co nhieu phu thuoc chi tiet, model re khong tu suy ra duoc hanh vi - Claude viet tay hoac chia theo ham. Executor: thu lai 5 lan lui dan khi 5xx (da sua llm.py).

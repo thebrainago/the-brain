@@ -1,0 +1,28 @@
+{
+ "ten": "tuan_cuoi_thang_ban",
+ "ho": "lich",
+ "chieu": -1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_thang"
+   },
+   "phep": ">=",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ibs"
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 0.7
+   }
+  }
+ ],
+ "co_che": "ngay_trong_thang >= 25 VA IBS < 0,3: dong tien can doi danh muc cuoi thang",
+ "ra": []
+}

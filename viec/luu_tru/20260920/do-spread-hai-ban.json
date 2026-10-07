@@ -1,0 +1,17 @@
+{
+  "ma": "do-spread-hai-ban",
+  "muc_tieu": "Do xem mo_phong_v2 co tru spread GAP DOI so voi nhan/mo_phong.py khong",
+  "lan": "NHE",
+  "uu_tien": 2,
+  "han_phut": 10.0,
+  "ra_luc": "2026-09-20T19:27:40",
+  "lenh": [
+    "{py}",
+    "do_spread_hai_ban.py",
+    "EURCAD"
+  ],
+  "ghi_chu": "spread_mang() cua v1 ghi ro la \"Spread MOT CHIEU\" (nua spread) -> 2 luot x nua = 1 spread/vong, DUNG. v2 doc m[\"spread\"]/10 tu bar M1 MT5, ma truong do la spread DAY DU tinh bang point. Neu ty le ~2 thi cong 13_edge_vuot_spread dang dung nguong GAP DOI va co the loai nham he ra tien. Ma thoat: 0=DAT (cung thang do), 1=AM (lech), 2=CHUA_DO_DUOC.",
+  "cong": {
+    "kieu": "ba_muc"
+  }
+}

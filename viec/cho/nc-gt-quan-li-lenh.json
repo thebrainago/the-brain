@@ -1,0 +1,20 @@
+{
+  "ma": "nc-gt-quan-li-lenh",
+  "muc_tieu": "so tay: gia thuyet quan li lenh quyet dinh, entry khong (chu du an 03/10)",
+  "lan": "NHE",
+  "uu_tien": 5,
+  "han_phut": 60.0,
+  "ra_luc": "2026-10-03T07:48:58",
+  "lenh": [
+    "{py}",
+    "b.py",
+    "nc",
+    "cc",
+    "ghi_gia_thuyet",
+    "{\"cau\": \"Tren tai san HOI QUY (cap cheo FX, vang) mot bo quy tac QUAN LI LENH (luoi/DCA: buoc, tp, tran_tang, kieu lot, cho_lui) co lai sau phi + maxDD<80% o dung don bay ngay ca khi entry chi la 'vao ngay lap tuc' khong tin hieu; them entry co tin hieu khong tang lai on dinh. Tren tai san XU HUONG (chi so, US100) cung bo quy tac do KHONG co lai.\",\n \"vi_sao\": \"Nguoi tra tien: thi truong tra phi cho ben cung cap thanh khoan ngan han (ban bao hiem duoi: thu deu khi gia hoi quy, chiu cu sut lon khi xu huong) - tien den tu bat doi xung cua luat quan li lenh tren tai san hoi quy, khong tu du doan huong. Bang chung gian tiep (nguon gia thuyet, CHUA phai bang chung): G0 14/09 cap cheo FX + vang hoi quy o moi thang do (AUDCAD/EURGBP 8/8, XAUUSDM 7/8), chi so 0-1/8 (US100 0/8); 18/31 nguoi thang MQL5 song >=2 nam la luoi/DCA tren AUDCAD va anh em (tai_lieu/NGUON_NGUOI_THANG.md). Neu dung thi QUYET DINH ENTRY THAT = chon TAI SAN + KHUNG; luat quan li quyet dinh lai va maxDD. Chu du an 03/10: 'xu li lenh tot thi khong can quan tam entry'.\",\n \"ho\": \"quan_li_lenh\",\n \"pham_vi\": {\"che_do\": [\"mua\", \"ban\", \"hai_chieu\"], \"tai_san\": [\"AUDCAD\", \"EURGBP\", \"XAUUSDM\", \"AUDCHF\", \"USDCAD\", \"USDCHF\", \"US100\", \"US500\"], \"khung\": [\"M5\", \"M15\"], \"doan\": \"kham_pha\"},\n \"uu_tien\": 0.9}"
+  ],
+  "vi_sao": "so tay: gia thuyet quan li lenh quyet dinh, entry khong (chu du an 03/10)",
+  "cong": {
+    "kieu": "chay_duoc"
+  }
+}

@@ -1,0 +1,48 @@
+{
+ "ma": "vao_lai_sau_cho_lui",
+ "loai": "VAO",
+ "ten": "Cho gia lui roi moi vao lai (khoi CUA TA)",
+ "mo_ta": "Sau khi mot ro chot TP khong mo lai ngay ma cho gia lui them N pip nguoc chieu roi moi vao.",
+ "tham_so": [
+  {
+   "ten": "cho_lui",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    0,
+    120,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khoang cach thoi gian va gia giua chuoi vua dong va chuoi moi lon hon 0 va gan co dinh."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "cho_lui"
+  ],
+  "ghi_chu": "luoi.ThamSo.cho_lui.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_lai_sau_cho_lui"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Da do tren EURCAD (+7,9% -> +12,1%/nam, tester that). Thu tren moi ma khi ghep voi khoi cua bot khac.",
+ "rui_ro": "Bo lo nhip hoi nhanh sau chot neu cho_lui qua lon.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

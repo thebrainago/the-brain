@@ -1,0 +1,10 @@
+{
+ "id": "20261007-090944-dc84",
+ "luc": "2026-10-07T09:09:44",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI-THI-SAU-RESTART",
+ "tra_loi": null,
+ "noi_dung": "Cloud doc xong 6 thu cua nha. Tinh hinh: 'nha' + p1..p12 chay tot, sweep 22* da xong ~400/1152. Vuong 3 cho, nha lam theo thu tu: (1) p13/p14 heartbeat dung tu 12:35 gio may (3,5h) va m1/m2/m3 tat: khoi dong lai p13,p14 (CPU thua chua 90%); m1-m3 de tat tam, khong sao vi tester chi 1 slot. (2) Slot portable: thu MOT slot s1 theo cach: copy NGUYEN thu muc cai MT5 (ca terminal64.exe + metatester64.exe + MetaEditor + MQL5 + config) vao C:\\MT5slots\\s1, roi Tester\\agents tro junction sang D:\\MT5cache\\s1, chay terminal64 /portable. Cai metatester64 thieu chinh la nguyen nhan agent khong len. Chay 1 test ngan (EURCAD 2018H2 don 20EUR*-h3) bao ket qua: len agent chua, bao cao co ra khong. Neu van hong thi bo, giu 1 slot. (3) Tester la nut co chai: don TESTER uu tien 1 khong duoc chay khi nha dang ban don CPU. Cho 'nha' CHI nhan TESTER (khong nhan CPU) de tester luon ranh; CPU do p1..p14 lam. Bao lai bang 1 thu ngan: p13/14 len chua, s1 test ra gi, nha chi nhan TESTER chua."
+}

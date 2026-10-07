@@ -1,0 +1,40 @@
+{
+  "ma": "xuat-gia-4-cap-M15",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "ma thoat 1",
+  "bang_chung": {
+    "ma_thoat": 1,
+    "giay": 0.2,
+    "lenh": [
+      "C:\\Users\\DUNG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "b.py",
+      "xuat-gia",
+      "AUDCAD,NZDCAD,AUDNZD,EURGBP",
+      "M15",
+      "--tu",
+      "2018"
+    ],
+    "phien_ban_ma": "c08415e+sua",
+    "dong_cuoi": [],
+    "loi_cuoi": [
+      "Traceback (most recent call last):",
+      "  File \"C:\\Research SP500\\lab\\b.py\", line 1518, in <module>",
+      "    raise SystemExit(main(sys.argv[1:]))",
+      "                     ^^^^^^^^^^^^^^^^^^",
+      "  File \"C:\\Research SP500\\lab\\b.py\", line 1513, in main",
+      "    return LENH[ten](con) or 0",
+      "           ^^^^^^^^^^^^^^",
+      "  File \"C:\\Research SP500\\lab\\b.py\", line 690, in c_xuat_gia",
+      "    from nhan import xuat_gia",
+      "  File \"C:\\Research SP500\\lab\\nhan\\xuat_gia.py\", line 20, in <module>",
+      "    import pandas as pd",
+      "ModuleNotFoundError: No module named 'pandas'"
+    ],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-06T19:51:05"
+}

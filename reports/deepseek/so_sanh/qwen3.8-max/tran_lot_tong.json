@@ -1,0 +1,60 @@
+{
+ "ma": "tran_lot_tong",
+ "loai": "LOT",
+ "ten": "Tran lot",
+ "mo_ta": "Gioi han tong lot hoac lot lon nhat cua chuoi (Bigmouse 15, NuTi MT5 3, CCBSN InpMaxLots 0,02-2,3).",
+ "tham_so": [
+  {
+   "ten": "inp_max_lots",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    5.0,
+    0.01
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "max_lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    5.0,
+    0.01
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lot lon nhat cua cac chuoi dung o mot gia tri (cao nguyen) du chuoi sau."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co tran lot.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tran_lot_tong"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Tran lot la cach chan chay tai khoan: thu tran thap + tran so lenh.",
+ "rui_ro": "Cham tran ma gia van di nguoc: ket o lot lon.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

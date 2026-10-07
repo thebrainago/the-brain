@@ -1,0 +1,452 @@
+# -*- coding: utf-8 -*-
+"""Kiem tra doc lap cho nhan/thu_chuyen.py (the gioi nhan tao + cham diem + gop ket qua giai doan 1) - script assert thuong,
+KHONG phai pytest, luu dang van ban (.txt) de pytest khong thu.
+
+Cach chay (tu THU MUC GOC repo):  cp tai_lieu/ban_va_chua_test/kiem_thu_chuyen.txt /tmp/kiem_thu_chuyen.py && python3 /tmp/kiem_thu_chuyen.py
+Dau ra: bang PASS/FAIL + cac phep thu DOT BIEN (sua co y mot dong trong ban sao cua module; moi dot bien PHAI lam it nhat mot phep kiem
+hong). Ma thoat 0 = tat ca dat va moi dot bien bi bat.
+Khong chay engine luoi that: `luoi.chay_mang` / `luoi.chi_so` duoc thay tam bang ham gia khi can (va tra lai ngay sau do).
+Khi che do quyen cho chay pytest: chuyen thanh `test_thu_chuyen.py` va xoa ban .txt nay."""
+import dataclasses
+import json
+import math
+import os
+import shutil
+import sys
+import tempfile
+import types
+
+import numpy as np
+import pandas as pd
+
+REPO = os.environ.get("REPO", os.getcwd())
+sys.path.insert(0, REPO)
+from nhan import luoi as LU            # noqa: E402
+from nhan import nc_thi_nghiem as NT   # noqa: E402
+
+SRC_PATH = os.path.join(REPO, "nhan", "thu_chuyen.py")
+PLAN_HASH_GHIM = "30faa89a302cd6e8"
+
+
+def load_variant(name, repl=()):
+    s = open(SRC_PATH, encoding="utf-8").read()
+    for a, b in repl:
+        assert a in s, "mau khong co trong ma: %r" % a
+        s = s.replace(a, b)
+    mod = types.ModuleType(name)
+    mod.__file__ = SRC_PATH
+    sys.modules[name] = mod
+    exec(compile(s, name, "exec"), mod.__dict__)
+    return mod
+
+
+class Gia:
+    """Thay tam mot thuoc tinh cua module, tra lai khi thoat."""
+    def __init__(self, obj, **kw):
+        self.obj, self.kw, self.cu = obj, kw, {}
+
+    def __enter__(self):
+        for k, v in self.kw.items():
+            self.cu[k] = getattr(self.obj, k)
+            setattr(self.obj, k, v)
+        return self
+
+    def __exit__(self, *a):
+        for k, v in self.cu.items():
+            setattr(self.obj, k, v)
+
+
+# ----------------------------------------------------------------------------------------------- du lieu gia cho gop ket qua
+def hang_gia(ten, qm, w, tam, san, hoi, flagged):
+    out = []
+    for o in range(3):
+        r = hoi[o] if isinstance(hoi, (list, tuple)) else hoi
+        out.append({"obs": o, "ten": ten, "quy_mo": qm, "w": w, "tam": tam, "san": san, "ly_do": [], "ap_duoc": True, "buoc": 20.0, "tp": 20.0,
+                    "tang": 10, "diem_b": 100.0 * (1.0 - r), "hoi_tiec": r, "duoi_phan_giai": bool(flagged)})
+    return out
+
+
+def ket_qua_gia(M):
+    """6 cap do duoc (K2, C2, H4 x phang, geo) + 2 cap Z0. Moi bien the: (quy_mo, w, tam, san, [hoi tiec 6 cap], [co duoi phan giai 6 cap])."""
+    T = M.ten_bien_the
+    pairs = [("K2", "L1", "phang"), ("K2", "L1", "geo"), ("C2", "L2", "phang"), ("C2", "L2", "geo"), ("H4", "L4", "phang"), ("H4", "L4", "geo")]
+    F, N = True, False
+    bt = {
+        "B0_chep": (None, None, None, None, [0.80, 0.82, 0.30, 0.31, 0.20, 0.22], [F, F, N, N, N, N]),
+        T("A_chart", 0.0, "giu", 0.0): ("A_chart", 0.0, "giu", 0.0, [0.35, 0.33, 0.12, 0.13, 0.15, 0.16], [N] * 6),
+        T("A_chart", 0.0, "I6", 3.0): ("A_chart", 0.0, "I6", 3.0, [0.30, 0.28, 0.12, 0.11, 0.14, 0.15], [N] * 6),
+        T("A_ref", 0.0, "giu", 0.0): ("A_ref", 0.0, "giu", 0.0, [0.10] * 6, [N] * 6),
+        T("R_H", 0.5, "I6", 0.0): ("R_H", 0.5, "I6", 0.0, [0.095] * 6, [N] * 6),
+        T("sigma", 1.0, "I6", 3.0): ("sigma", 1.0, "I6", 3.0, [0.05, 0.05, 0.05, 0.05, 0.05, 0.05], [N, N, N, N, F, F]),
+        T("A_chart", 1.0, "giu", 0.0): ("A_chart", 1.0, "giu", 0.0, [0.14, 0.14, 0.14, 0.14, 0.0, 0.0], [N] * 6),
+    }
+    z0 = {"B0_chep": [0.0, 0.0], T("A_ref", 0.0, "giu", 0.0): [0.9, 0.9], T("R_H", 0.5, "I6", 0.0): [0.9, 0.9],
+          T("sigma", 1.0, "I6", 3.0): [0.0, 0.0], T("A_chart", 0.0, "giu", 0.0): [0.0, 0.0], T("A_chart", 0.0, "I6", 3.0): [0.0, 0.0],
+          T("A_chart", 1.0, "giu", 0.0): [0.0, 0.0]}
+    res = []
+    for ip, (kb, loai, kieu) in enumerate(pairs):
+        hang = []
+        for ten, (qm, w, tam, san, hoi, fl) in bt.items():
+            hang += hang_gia(ten, qm, w, tam, san, hoi[ip], fl[ip])
+        res.append({"kich_ban": kb, "loai": loai, "kieu": kieu, "k_ky_vong": None, "khung_nguon": 1, "khung_dich": 1, "nguon": {}, "dich": {},
+                    "dap_an_nguon": {"buoc": 10.0, "tp": 10.0, "tang": 10}, "dap_an_dich": {"buoc": 20.0, "tp": 20.0, "tang": 10}, "ho_so_nguon": [],
+                    "hang": hang})
+    for iz, kieu in enumerate(("phang", "geo")):
+        hang = []
+        for ten, (qm, w, tam, san, hoi, fl) in bt.items():
+            hang += hang_gia(ten, qm, w, tam, san, z0[ten][iz], False)
+        res.append({"kich_ban": "Z0", "loai": "L0", "kieu": kieu, "k_ky_vong": None, "khung_nguon": 1, "khung_dich": 1, "nguon": {}, "dich": {},
+                    "dap_an_nguon": {"buoc": 10.0, "tp": 10.0, "tang": 10}, "dap_an_dich": {"buoc": 10.0, "tp": 10.0, "tang": 10}, "ho_so_nguon": [],
+                    "hang": hang})
+    return res
+
+
+def lenh_gia(so_chuoi_dong=29, them_chuoi_mo=True, tang_lon=3):
+    """Bang lenh gia: chuoi i giu (i+1)*10 phut; (so_chuoi_dong - tang_lon) chuoi co tang toi da 1 (-> 2 tang), `tang_lon` chuoi co tang toi da 7 (-> 8);
+    chuoi mo (neu co) chi co lenh tang 0 va khong dong."""
+    hang = []
+    t0 = pd.Timestamp("2020-01-06 00:00")
+    for i in range(so_chuoi_dong):
+        mo = t0 + pd.Timedelta(days=i)
+        dong = mo + pd.Timedelta(minutes=(i + 1) * 10)
+        tmax = 7 if i >= so_chuoi_dong - tang_lon else 1
+        hang.append({"ro": i, "tang": 0, "mo": mo, "dong": dong})
+        hang.append({"ro": i, "tang": tmax, "mo": mo + pd.Timedelta(minutes=1), "dong": dong})
+    if them_chuoi_mo:
+        mo = t0 + pd.Timedelta(days=500)
+        hang.append({"ro": 9999, "tang": 0, "mo": mo, "dong": pd.NaT})
+    return pd.DataFrame(hang)
+
+
+def checks(M, kq=None):
+    """Tra ve list (ten, dat?, ghi chu); `kq` (neu co) duoc ghi dan de ngoai le giua chung khong lam mat ket qua truoc."""
+    kq = [] if kq is None else kq
+
+    def ck(ten, dat, ghi=""):
+        kq.append((ten, bool(dat), ghi))
+
+    PIP = M.PIP
+    # ---------------- hat on dinh
+    tg = M.TheGioi()
+    h1 = M.hat_on_dinh(tg, "A", 0)
+    ck("hat: tat dinh va trong [0, 2^31)", h1 == M.hat_on_dinh(tg, "A", 0) and 0 <= h1 < 2 ** 31)
+    ck("hat: doi thu tu / vai tro / the gioi thi doi hat",
+       len({h1, M.hat_on_dinh(tg, "A", 1), M.hat_on_dinh(tg, "B", 0), M.hat_on_dinh(tg.doi(sigma_pip=31.0), "A", 0)}) == 4)
+    ck("TheGioi.doi: ban sao, khong sua ban goc", tg.doi(chi_phi_pip=3.0).chi_phi_pip == 3.0 and tg.chi_phi_pip == 10.0)
+
+    # ---------------- sinh duong
+    n_nam = 0.2
+    d1 = M.sinh_duong(tg, n_nam, 12345)
+    n_ngay = int(round(n_nam * M.NGAY_NAM))
+    ck("duong: so nen = ngay x 1440", len(d1) == n_ngay * 1440, str(len(d1)))
+    ck("duong: chi ngay lam viec, bat dau 2000-01-03 00:00", d1.index[0] == pd.Timestamp("2000-01-03 00:00") and int(d1.index.dayofweek.max()) <= 4)
+    ck("duong: moi ngay du 1440 phut lien tiep", int(d1.groupby(d1.index.normalize()).size().min()) == 1440 and int(d1.groupby(d1.index.normalize()).size().max()) == 1440)
+    ck("duong: high >= max(open, close), low <= min(open, close)", bool((d1["high"] >= np.maximum(d1["open"], d1["close"]) - 1e-15).all()
+                                                                      and (d1["low"] <= np.minimum(d1["open"], d1["close"]) + 1e-15).all()))
+    ck("duong: open nen sau = close nen truoc", bool(np.allclose(d1["open"].to_numpy()[1:], d1["close"].to_numpy()[:-1], rtol=0, atol=1e-15)))
+    ck("duong: spread = chi_phi_pip x pip / point (10 pip = 100 point)", bool((d1["spread"] == tg.chi_phi_pip * (PIP / M.QUY_CACH.point)).all()), str(d1["spread"].iloc[0]))
+    d1b = M.sinh_duong(tg, n_nam, 12345)
+    d2 = M.sinh_duong(tg, n_nam, 12346)
+    ck("duong: tat dinh theo hat; khac hat thi khac duong", d1.equals(d1b) and not d1.equals(d2))
+    # tuyen tinh theo bien do: cung hat, sigma x2 va chi phi x2 -> (gia - 1) x2, spread x2
+    dk = M.sinh_duong(tg.doi(sigma_pip=60.0, chi_phi_pip=20.0), n_nam, 12345)
+    ck("duong: cung hat, sigma x2 -> (gia - 1) x2 CHINH XAC (cac ban L1 do cung mot duong)",
+       all(np.allclose(dk[c].to_numpy() - 1.0, 2.0 * (d1[c].to_numpy() - 1.0), rtol=1e-9, atol=1e-12) for c in ("open", "high", "low", "close")))
+    ck("duong: chi phi x2 -> spread x2", bool((dk["spread"] == 2.0 * d1["spread"]).all()))
+    # thong ke: OU thuan (troi 0): do lech chuan = sigma, tu tuong quan tai nua doi = 0,5
+    nam = 1.0
+    ou = M.sinh_duong(tg.doi(troi_nam=0.0), nam, 777)
+    x = ou["close"].to_numpy() - 1.0
+    ck("OU: do lech chuan ~ sigma (10 %)", abs(x.std() / (tg.sigma_pip * PIP) - 1.0) < 0.10, "%.3f" % (x.std() / (tg.sigma_pip * PIP)))
+    lag = int(tg.nua_doi_phut)
+    ac = float(np.corrcoef(x[:-lag], x[lag:])[0, 1])
+    ck("OU: tu tuong quan tai lag nua doi ~ 0,5 (+-0,12)", abs(ac - 0.5) < 0.12, "%.3f" % ac)
+    # random walk khop bien do ngan han nhung KHONG hoi quy
+    ou_c = M.sinh_duong(tg, nam, 888)
+    rw = M.sinh_duong(tg.doi(hoi_quy=False), nam, 888)
+    di_ou = np.diff(ou_c["close"].to_numpy())
+    di_rw = np.diff(rw["close"].to_numpy())
+    ck("random walk: do lech chuan buoc 1 phut khop OU (5 %)", abs(di_rw.std() / di_ou.std() - 1.0) < 0.05, "%.3f" % (di_rw.std() / di_ou.std()))
+    L = 1440
+    v_ou = float(np.var(ou_c["close"].to_numpy()[L:] - ou_c["close"].to_numpy()[:-L]))
+    v_rw = float(np.var(rw["close"].to_numpy()[L:] - rw["close"].to_numpy()[:-L]))
+    ck("random walk: bien thien 1 ngay lon gap > 2,3 lan OU (khong hoi quy)", v_rw / v_ou > 2.3, "%.2f" % (v_rw / v_ou))
+
+    # ---------------- gop khung / bien do
+    f = pd.DataFrame({"open": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0], "high": [1.5, 2.5, 5.0, 4.5, 5.5, 6.5, 7.5], "low": [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5],
+                      "close": [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0], "spread": [10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0]},
+                     index=pd.date_range("2020-01-06", periods=7, freq="1min"))
+    ck("gop_khung: k=1 tra nguyen", M.gop_khung(f, 1) is f)
+    g3 = M.gop_khung(f, 3)
+    ck("gop_khung: k=3 dung open dau / high max / low min / close cuoi / spread dau, cat phan thua",
+       len(g3) == 2 and list(g3["open"]) == [1.0, 4.0] and list(g3["high"]) == [5.0, 6.5] and list(g3["low"]) == [0.5, 3.5]
+       and list(g3["close"]) == [4.0, 7.0] and list(g3["spread"]) == [10.0, 13.0] and list(g3.index) == [f.index[0], f.index[3]])
+    r = pd.DataFrame({"high": [1.0 + PIP * i for i in range(40)], "low": [1.0 + PIP * i for i in range(40)]}, index=pd.date_range("2020-01-06", periods=40, freq="1min"))
+    ck("bien_do_nen_pip: trung vi (high - low)/pip", abs(M.bien_do_nen_pip(pd.DataFrame({"high": [1.0005, 1.0007, 1.0010], "low": [1.0, 1.0, 1.0]})) - 7.0) < 1e-6)
+    ck("bien_do_ngang_pip: doc doi 1 pip/phut, cua so 5 phut -> 4 pip", abs(M.bien_do_ngang_pip(r, 5, 1) - 4.0) < 1e-6)
+
+    # ---------------- cham diem (engine gia)
+    ts = LU.ThamSo()
+    from types import SimpleNamespace as NS
+
+    def chay_ket_qua(chay=False, equity=None, margin=500.0, lai=8.0):
+        eq = np.array([10000.0, 10000.0 + 1.0, 10000.0 + 800.0] if equity is None else equity, float)
+        return NS(chay=chay, duong_equity=eq, margin=margin), {"loi_suat_nam_pct": lai}
+
+    def diem_voi(**kw):
+        kqm, cs = chay_ket_qua(**kw)
+        with Gia(LU, chay_mang=lambda dl, t, v, ghi_lenh=False: kqm, chi_so=lambda k, v: cs):
+            return M.diem_o(None, ts, 10000.0, 10.0)
+    ck("diem_o: chay tai khoan -> -100", diem_voi(chay=True) == -100.0)
+    ck("diem_o: lo -> giu nguyen lai suat am", diem_voi(lai=-5.0) == -5.0)
+    ck("diem_o: lai bang 0 -> 0", diem_voi(lai=0.0) == 0.0)
+    # kd rat lon (equity tang don dieu), margin 500 -> notional 50.000 -> kl = 10 x 10.000 / 50.000 = 2 -> 8 x 2
+    ck("diem_o: lai x min(he so lot cham DD, tran don bay) -> chon tran don bay", abs(diem_voi(lai=8.0, margin=500.0) - 16.0) < 1e-9, str(diem_voi(lai=8.0, margin=500.0)))
+    eq_dd = [10000.0, 5000.0, 10800.0]
+    kd = NT._he_so_lot_tai_tran(np.asarray(eq_dd, float), 10000.0)
+    ck("diem_o: (kiem tra gia dinh) he so cham DD 80 % ~ 1,6 va nho hon tran don bay 10", 1.4 < kd < 1.7, "%.3f" % kd)
+    ck("diem_o: chon he so cham DD khi nho hon tran don bay", abs(diem_voi(lai=8.0, margin=100.0, equity=eq_dd) - 8.0 * kd) < 1e-9)
+    ck("diem_o: margin 0 -> khong co tran don bay, chi con he so cham DD", abs(diem_voi(lai=8.0, margin=0.0, equity=eq_dd) - 8.0 * kd) < 1e-9)
+    ck("diem_o: duong equity co NaN (khong tinh duoc he so) -> -100", diem_voi(lai=8.0, equity=[10000.0, float("nan"), 10500.0]) == -100.0)
+
+    # ---------------- ma tran diem
+    def diem_gia(dl, t):
+        if t.buoc == 13.0:
+            raise RuntimeError("loi engine gia")
+        return t.buoc + 100.0 * dl
+    with Gia(M, diem_o=diem_gia):
+        mm = M.diem_tren_cac_duong([0, 1, 2], [LU.ThamSo(buoc=10.0), LU.ThamSo(buoc=13.0), LU.ThamSo(buoc=20.0)], luong=2)
+    ck("diem_tren_cac_duong: hinh [tham so, duong], dung thu tu", mm.shape == (3, 3) and mm[0].tolist() == [10.0, 110.0, 210.0] and mm[2].tolist() == [20.0, 120.0, 220.0])
+    ck("diem_tren_cac_duong: loi engine -> -100 chi o dong do", mm[1].tolist() == [-100.0, -100.0, -100.0])
+    with Gia(M, diem_o=lambda dl, t: float(dl)):
+        tb = M.diem_tb([1, 2, 6], [ts])
+    ck("diem_tb: trung binh tren cac duong", abs(float(tb[0]) - 3.0) < 1e-12)
+
+    # ---------------- hoi tiec
+    ck("hoi_tiec: (100, 70) -> 0,3", abs(M.hoi_tuong_doi(100.0, 70.0) - 0.3) < 1e-12)
+    ck("hoi_tiec: tot hon dap an thi am (cham tren tap B)", abs(M.hoi_tuong_doi(100.0, 130.0) + 0.3) < 1e-12)
+    ck("hoi_tiec: lo -> tren 1", abs(M.hoi_tuong_doi(100.0, -20.0) - 1.2) < 1e-12)
+    ck("hoi_tiec: dap an <= 0 hoac diem khong huu han -> None",
+       M.hoi_tuong_doi(0.0, 5.0) is None and M.hoi_tuong_doi(-5.0, 5.0) is None and M.hoi_tuong_doi(100.0, float("nan")) is None
+       and M.hoi_tuong_doi(100.0, float("inf")) is None)
+
+    # ---------------- khong gian o + phong cach
+    cac, chi = M.luoi_o_dap_an(M.KIEU["phang"], 0.0)
+    ck("luoi_o_dap_an: san 0 -> du 24 x 5 x 4 o", len(cac) == len(M.BUOC) * len(M.TY_LE_TP) * len(M.TANG) == 480 and len(chi) == 480)
+    c10, i10 = M.luoi_o_dap_an(M.KIEU["geo"], 10.0)
+    ck("luoi_o_dap_an: san 10 -> moi buoc va tp >= 10 va it o hon", 0 < len(c10) < 480 and all(c.buoc >= 10.0 and c.tp >= 10.0 for c in c10))
+    ck("luoi_o_dap_an: chi so (ib, ir, it) khop gia tri", all(abs(c.buoc - M.BUOC[ib]) < 1e-9 and abs(c.tp - round(M.BUOC[ib] * M.TY_LE_TP[ir], 1)) < 1e-9
+                                                            and c.tran_tang == M.TANG[it] for c, (ib, ir, it) in zip(c10, i10)))
+    t_geo = M.KIEU["geo"].tham_so(10.0, 12.0, 8)
+    ck("Kieu.tham_so: giu phong cach (geo = nhan lot 1,1, buoc x1,15)", t_geo.kieu_lot == "nhan" and t_geo.he_so_lot == 1.1 and t_geo.he_so_buoc == 1.15
+       and t_geo.buoc == 10.0 and t_geo.tp == 12.0 and t_geo.tran_tang == 8)
+    t_ph = M.KIEU["phang"].tham_so(10.0, 12.0, 8)
+    ck("Kieu.tham_so: phang = lot phang, buoc khong doi", t_ph.kieu_lot == "phang" and t_ph.he_so_lot == 1.0 and t_ph.he_so_buoc == 1.0)
+
+    # ---------------- ho so chuoi (engine gia)
+    def ho_so_voi(lenh, chay=False):
+        with Gia(LU, chay_mang=lambda dl, t, v, ghi_lenh=False: NS(lenh=lenh, chay=chay)):
+            return M.ho_so_chuoi(None, ts)
+    hs = ho_so_voi(lenh_gia())
+    ck("ho_so_chuoi: dem chuoi, chuoi mo khong tinh vao chuoi dong", hs["so_chuoi"] == 30 and hs["so_chuoi_dong"] == 29, str(hs))
+    ck("ho_so_chuoi: p90 thoi gian giu chuoi da dong = 262 phut (29 chuoi 10..290, noi suy tuyen tinh)", abs(hs["gio_giu_phut"] - 262.0) < 1e-6, str(hs["gio_giu_phut"]))
+    ck("ho_so_chuoi: p90 so tang (tang toi da + 1; noi suy 2,6 -> lam tron len 3)", hs["tang_p90"] == 3, str(hs["tang_p90"]))
+    hs2 = ho_so_voi(lenh_gia(so_chuoi_dong=19, them_chuoi_mo=False, tang_lon=0))
+    ck("ho_so_chuoi: duoi 20 chuoi dong thi KHONG ket luan thoi gian giu", hs2["gio_giu_phut"] is None and hs2["so_chuoi_dong"] == 19 and hs2["tang_p90"] == 2)
+    hs3 = ho_so_voi(pd.DataFrame(columns=["ro", "tang", "mo", "dong"]), chay=True)
+    ck("ho_so_chuoi: khong co lenh -> 0 chuoi, khong ket luan, giu co chay", hs3 == {"so_chuoi": 0, "gio_giu_phut": None, "tang_p90": None, "chay": True})
+
+    # ---------------- thi truong do duoc
+    tgs = tg
+    m1 = M.sinh_duong(tgs, 0.4, 4242)
+    try:
+        M.thi_truong_do_duoc(m1, 15, "linh_tinh")
+        ck("thi_truong_do_duoc: kieu quy mo la bi tu choi", False)
+    except ValueError:
+        ck("thi_truong_do_duoc: kieu quy mo la bi tu choi", True)
+    tt15 = M.thi_truong_do_duoc(m1, 15, "A_chart")
+    a15 = M.bien_do_nen_pip(M.gop_khung(m1, 15)) * PIP
+    ck("thi_truong_do_duoc: A_chart = trung vi bien do nen CUA KHUNG bot", abs(tt15.A - a15) < 1e-12 and tt15.khung_phut == 15.0, "%.6f vs %.6f" % (tt15.A, a15))
+    ck("thi_truong_do_duoc: A_chart doi theo khung (M5 nho hon M15)", M.thi_truong_do_duoc(m1, 5, "A_chart").A < tt15.A)
+    refs = [M.thi_truong_do_duoc(m1, k, "A_ref").A for k in (1, 5, 15)]
+    ck("thi_truong_do_duoc: A_ref KHONG doi theo khung bot, bang bien do nen M15", max(refs) - min(refs) < 1e-15 and abs(refs[0] - a15) < 1e-12, str(refs))
+    try:
+        M.thi_truong_do_duoc(m1, 15, "R_H")
+        ck("thi_truong_do_duoc: R_H thieu gio_giu_phut bi tu choi", False)
+    except ValueError:
+        ck("thi_truong_do_duoc: R_H thieu gio_giu_phut bi tu choi", True)
+    rh = M.thi_truong_do_duoc(m1, 15, "R_H", None, 600.0)
+    ck("thi_truong_do_duoc: R_H = bien do ngang trong cua so gio giu", abs(rh.A - M.bien_do_ngang_pip(m1, 600.0, 1.0) * PIP) < 1e-12)
+    try:
+        M.thi_truong_do_duoc(m1, 15, "sigma")
+        ck("thi_truong_do_duoc: sigma thieu the gioi bi tu choi", False)
+    except ValueError:
+        ck("thi_truong_do_duoc: sigma thieu the gioi bi tu choi", True)
+    sg = M.thi_truong_do_duoc(m1, 15, "sigma", tgs)
+    ck("thi_truong_do_duoc: sigma = sigma that cua the gioi", abs(sg.A - tgs.sigma_pip * PIP) < 1e-15)
+    ck("thi_truong_do_duoc: chi doi A, chi phi C va khung giu nguyen giua cac kieu quy mo", tt15.C == sg.C == rh.C and tt15.khung_phut == sg.khung_phut)
+
+    # ---------------- chan duoi chi phi tam
+    cu = M.DT.SAN_CHI_PHI
+    with M.san_chi_phi_tam(0.0):
+        trong = M.DT.SAN_CHI_PHI
+    ck("san_chi_phi_tam: doi trong khoi va tra lai khi thoat", trong == 0.0 and M.DT.SAN_CHI_PHI == cu)
+    try:
+        with M.san_chi_phi_tam(1.5):
+            raise RuntimeError("x")
+    except RuntimeError:
+        pass
+    ck("san_chi_phi_tam: tra lai ca khi co ngoai le", M.DT.SAN_CHI_PHI == cu)
+
+    # ---------------- bo kich ban
+    ten = [k.ten for k in M.BO_KICH_BAN]
+    ck("kich ban: ten khong trung, du Z0 K2 K05 C2 S05 H4 TF5 TF1", len(set(ten)) == len(ten) == 8 and set(ten) == {"Z0", "K2", "K05", "C2", "S05", "H4", "TF5", "TF1"})
+    z0 = M.kich_ban("Z0")
+    ck("kich ban: Z0 la L0, cung the gioi o hai ben", z0.loai == "L0" and z0.nguon == z0.dich)
+    k2 = M.kich_ban("K2")
+    ck("kich ban: K2 = sigma x2 va chi phi x2 (k = 2), cac thu khac giu", k2.k == 2.0 and k2.dich.sigma_pip == 2 * k2.nguon.sigma_pip
+       and k2.dich.chi_phi_pip == 2 * k2.nguon.chi_phi_pip and k2.dich.nua_doi_phut == k2.nguon.nua_doi_phut and k2.dich.troi_nam == k2.nguon.troi_nam)
+    c2 = M.kich_ban("C2")
+    ck("kich ban: C2 chi doi chi phi x2", c2.dich == c2.nguon.doi(chi_phi_pip=2 * c2.nguon.chi_phi_pip))
+    h4 = M.kich_ban("H4")
+    ck("kich ban: H4 chi doi nua doi x4", h4.dich == h4.nguon.doi(nua_doi_phut=4 * h4.nguon.nua_doi_phut))
+    ck("kich ban: TF5 / TF1 cung the gioi, doi khung bot", M.kich_ban("TF5").nguon == M.kich_ban("TF5").dich and (M.kich_ban("TF5").khung_nguon, M.kich_ban("TF5").khung_dich) == (15, 5)
+       and (M.kich_ban("TF1").khung_nguon, M.kich_ban("TF1").khung_dich) == (15, 1))
+    try:
+        M.kich_ban("khong co")
+        ck("kich ban: ten la -> KeyError", False)
+    except KeyError:
+        ck("kich ban: ten la -> KeyError", True)
+
+    # ---------------- ke hoach dong bang
+    kh = M.ke_hoach_s1()
+    ck("ke_hoach_s1: tat dinh", kh["plan_hash"] == M.ke_hoach_s1()["plan_hash"] and len(kh["plan_hash"]) == 16)
+    ck("ke_hoach_s1: ghim dau van tay (doi nguong / kich ban / luoi sau khi chay = phien ban moi, phai co y)", kh["plan_hash"] == PLAN_HASH_GHIM, kh["plan_hash"])
+    with Gia(M, NGUONG=dict(M.NGUONG, so_obs=4)):
+        ck("ke_hoach_s1: doi nguong thi doi dau van tay", M.ke_hoach_s1()["plan_hash"] != kh["plan_hash"])
+    names = {M.ten_bien_the(q, w, t, s) for q in M.KIEU_QUY_MO for w in M.W_THU for t in M.TAM_THU for s in M.SAN_THU}
+    ck("ten_bien_the: 48 ten khac nhau, co B1 va S0", len(names) == 4 * 3 * 2 * 2 and M.TEN_B1 in names and M.TEN_S0 in names)
+    ck("ten_bien_the: dinh dang", M.ten_bien_the("A_ref", 0.5, "I6", 3.0) == "A_ref|w=0.5|tam=I6|san=3" and M.TEN_B1 == "A_chart|w=0|tam=giu|san=0")
+
+    # ---------------- doc ket qua giai doan 1
+    tmp = tempfile.mkdtemp(prefix="kiem_tc_")
+    try:
+        for ten_f, nd in (("p1_B_phang.json", {"x": 2}), ("p1_A_phang.json", {"x": 1}), ("dapan_goc_phang.json", {"x": 3}), ("ghi_chu.txt", None)):
+            with open(os.path.join(tmp, ten_f), "w", encoding="utf-8") as fh:
+                fh.write(json.dumps(nd) if nd is not None else "bo qua")
+        ck("doc_giai_doan_1: chi doc p1_*.json, sap theo ten", [d["x"] for d in M.doc_giai_doan_1(tmp)] == [1, 2])
+    finally:
+        shutil.rmtree(tmp, True)
+
+    # ---------------- gop ket qua (du lieu gia, dap an biet truoc)
+    res = ket_qua_gia(M)
+    T = M.ten_bien_the
+    AR = T("A_ref", 0.0, "giu", 0.0)
+    RH = T("R_H", 0.5, "I6", 0.0)
+    SG = T("sigma", 1.0, "I6", 3.0)
+    OUT = T("A_chart", 1.0, "giu", 0.0)
+    tg_ = M.tong_hop_giai_doan_1(res)
+    ck("gop: mac dinh = A_ref (trung vi 0,10; hoa 0,02 voi R_H 0,095 -> lay don gian hon)", tg_["mac_dinh"] is not None and tg_["mac_dinh"]["ten"] == AR
+       and abs(tg_["mac_dinh"]["hoi_tiec_trung_vi"] - 0.10) < 1e-9, str(tg_["mac_dinh"]))
+    bang = {b["ten"]: b for b in tg_["bien_the"]}
+    ck("gop: Z0 KHONG tinh (moi bien the chi 6 cap, khong co 8)", all(b["so_cap"] == 6 for b in bang.values()), str({k: v["so_cap"] for k, v in bang.items()}))
+    ck("gop: sigma khong du dieu kien (do duoc 4/6 < 0,8), A_ref du", bang[SG]["du_dieu_kien"] is False and bang[AR]["du_dieu_kien"] is True and bang[SG]["so_cap_do_duoc"] == 4)
+    ck("gop: trung vi cua bien the OUT = 0,14 (khong phai trung binh 0,093)", abs(bang[OUT]["hoi_tiec_trung_vi"] - 0.14) < 1e-9 and abs(bang[OUT]["hoi_tiec_trung_binh"] - 0.0933333) < 1e-5)
+    ck("gop: B0 duoi phan giai o K2 -> khong tinh o K2 (4/6 do duoc) nhung hoi tiec tho giu nguyen", bang["B0_chep"]["so_cap_do_duoc"] == 4
+       and abs(bang["B0_chep"]["hoi_tiec_tho_trung_vi"] - 0.305) < 1e-9, str(bang["B0_chep"]["hoi_tiec_tho_trung_vi"]))
+    ls = {x["kich_ban"]: x for x in tg_["loso"]}
+    ck("bo-mot-ra: bo K2 -> chon OUT (trung vi 0,07 tren C2 + H4); regret giu lai = trung vi OUT tren K2 = 0,14",
+       ls["K2"]["chon"] == OUT and abs(ls["K2"]["hoi_tiec_khi_giu_lai"] - 0.14) < 1e-9, str(ls["K2"]))
+    ck("bo-mot-ra: bo H4 -> sigma du dieu kien (4/4) va thang; o H4 no duoi phan giai -> hoi tiec giu lai = None",
+       ls["H4"]["chon"] == SG and ls["H4"]["hoi_tiec_khi_giu_lai"] is None, str(ls["H4"]))
+    ck("bo-mot-ra: bo C2 -> chon OUT", ls["C2"]["chon"] == OUT and abs(ls["C2"]["hoi_tiec_khi_giu_lai"] - 0.14) < 1e-9)
+    ck("bo-mot-ra: moi dong co B0 B1 S0 cua kich ban bi giu lai", abs(ls["C2"]["B1"] - 0.125) < 1e-9 and abs(ls["C2"]["S0"] - 0.115) < 1e-9 and abs(ls["C2"]["B0"] - 0.305) < 1e-9, str(ls["C2"]))
+    ck("gop: tung_cap du 8 dong (ke ca Z0)", len(tg_["tung_cap"]) == 8)
+    k2p = next(t for t in tg_["tung_cap"] if t["kich_ban"] == "K2" and t["kieu"] == "phang")
+    ck("gop: dong cap K2/phang: B0 None (duoi phan giai) nhung B0_tho 0,80; mac dinh 0,10", k2p["B0"] is None and abs(k2p["B0_tho"] - 0.80) < 1e-9 and abs(k2p["mac_dinh"] - 0.10) < 1e-9)
+    ck("gop: tot_nhat cua cap K2/phang = sigma 0,05", k2p["tot_nhat"] == SG and abs(k2p["hoi_tiec_tot_nhat"] - 0.05) < 1e-9)
+    ck("gop: theo loai chi co L1 L2 L4 (khong co L0)", set(tg_["theo_loai"]) == {"L1", "L2", "L4"} and tg_["theo_loai"]["L1"]["so_cap"] == 2)
+    ck("gop: theo loai L1: B0 None, B0_tho = 0,81, mac dinh 0,10", tg_["theo_loai"]["L1"]["B0"] is None and abs(tg_["theo_loai"]["L1"]["B0_tho"] - 0.81) < 1e-9
+       and abs(tg_["theo_loai"]["L1"]["mac_dinh"] - 0.10) < 1e-9)
+    ab = tg_["anh_huong_bien"]
+    ck("gop: anh huong bien co du bon yeu to va cac muc", set(ab) == {"quy_mo", "w", "tam", "san"} and set(ab["quy_mo"]) == {"A_chart", "A_ref", "R_H", "sigma"}
+       and set(ab["tam"]) == {"I6", "giu"} and set(ab["san"]) == {"0.0", "3.0"})
+    ck("gop: anh huong bien cua sigma: 4 o do duoc / 6", ab["quy_mo"]["sigma"]["so_do_duoc"] == 4 and ab["quy_mo"]["sigma"]["so_o"] == 6)
+    tg2 = M.tong_hop_giai_doan_1(res, bo_qua_kich_ban=())
+    ck("gop: bo_qua_kich_ban=() thi Z0 duoc tinh (8 cap)", all(b["so_cap"] == 8 for b in tg2["bien_the"]) and "L0" in tg2["theo_loai"])
+    # mot bien the khong do duoc o PHAN LON cap thi khong bao gio duoc chon, du hoi tiec nho
+    ck("gop: ten_bt gom ca B0 nhung B0 khong bao gio la mac dinh", tg_["mac_dinh"]["ten"] != "B0_chep")
+    # bang diem rong
+    ck("gop: khong co ket qua thi mac_dinh None", M.tong_hop_giai_doan_1([r for r in res if r["kich_ban"] == "Z0"])["mac_dinh"] is None)
+    return kq
+
+
+def mutants():
+    return [
+        # the gioi
+        ("spread khong nhan (PIP / point)", [("sp = np.full(n, tg.chi_phi_pip * (PIP / QUY_CACH.point))", "sp = np.full(n, tg.chi_phi_pip)")]),
+        ("high khong cao hon open / close", [("hi = mid + 0.5 * np.sqrt(d * d - 2 * v * np.log(u1))", "hi = mid")]),
+        ("OU khong chuan hoa phuong sai (bo sqrt(1 - phi^2))", [("ou = lfilter([1.0], [1.0, -phi], z * sigma * math.sqrt(1 - phi * phi))", "ou = lfilter([1.0], [1.0, -phi], z * sigma)")]),
+        ("nua doi sai (log 3)", [("phi = math.exp(-math.log(2.0) / tg.nua_doi_phut * buoc_phut)", "phi = math.exp(-math.log(3.0) / tg.nua_doi_phut * buoc_phut)")]),
+        ("random walk khong khop bien do ngan han", [("ou = np.cumsum(z * sigma * math.sqrt(2.0 * (1.0 - phi)))", "ou = np.cumsum(z * sigma * 0.01)")]),
+        ("hat bo qua thu tu duong", [('return zlib.crc32(("%r|%s|%d" % (tg, vai_tro, int(i))).encode("ascii")) & 0x7FFFFFFF', 'return zlib.crc32(("%r|%s|%d" % (tg, vai_tro, 0)).encode("ascii")) & 0x7FFFFFFF')]),
+        ("gop khung lay low = max", [('"low": g("low").min(1)', '"low": g("low").max(1)')]),
+        ("gop khung lay high = min", [('"high": g("high").max(1)', '"high": g("high").min(1)')]),
+        ("bien do ngang dung cua so sai (w + 1)", [("w = max(1, int(round(gio_phut / khung_phut)))", "w = max(1, int(round(gio_phut / khung_phut))) + 1")]),
+        # cham diem
+        ("diem_o lay MAX(kd, kl)", [("return ln * min(kd, kl)", "return ln * max(kd, kl)")]),
+        ("diem_o bo tran don bay", [("return ln * min(kd, kl)", "return ln * kd")]),
+        ("diem_o chay tai khoan khong con la -100", [("    if kq.chay:\n        return -100.0\n    cs = LU.chi_so(kq, von)", "    cs = LU.chi_so(kq, von)")]),
+        ("loi engine thanh diem 0", [("        except Exception:\n            return -100.0\n    with ThreadPoolExecutor", "        except Exception:\n            return 0.0\n    with ThreadPoolExecutor")]),
+        ("hoi tiec dao dau", [("return (diem_dap_an - diem) / diem_dap_an", "return (diem - diem_dap_an) / diem_dap_an")]),
+        ("hoi tiec chap nhan dap an <= 0", [("if not (diem_dap_an > 0) or not math.isfinite(diem):", "if not math.isfinite(diem):")]),
+        ("ho so chuoi lay p50 thay vi p90", [("float(np.quantile(giu, 0.9)) if len(giu) >= 20 else None", "float(np.quantile(giu, 0.5)) if len(giu) >= 20 else None")]),
+        ("ho so chuoi bo nguong 20 chuoi", [("if len(giu) >= 20 else None", "if len(giu) >= 1 else None")]),
+        ("ho so chuoi tinh ca chuoi mo", [("ok = dong.notna()", "ok = dong.notna() | True")]),
+        ("A_ref dung khung cua bot", [("a = bien_do_nen_pip(gop_khung(df_m1, KHUNG_THAM_CHIEU_PHUT)) * PIP", "a = bien_do_nen_pip(gop_khung(df_m1, khung_phut)) * PIP")]),
+        ("sigma khong nhan pip", [("a = tg.sigma_pip * PIP", "a = tg.sigma_pip")]),
+        ("san chi phi khong tra lai", [("    finally:\n        DT.SAN_CHI_PHI = cu", "    finally:\n        pass")]),
+        # kich ban + ke hoach
+        ("K2 doi sigma 60 -> 50", [('GOC.doi(sigma_pip=60.0, chi_phi_pip=20.0)', 'GOC.doi(sigma_pip=50.0, chi_phi_pip=20.0)')]),
+        ("W_THU doi", [("W_THU = (0.0, 0.5, 1.0)", "W_THU = (0.0, 0.25, 1.0)")]),
+        # gop ket qua
+        ("gop chon hoi tiec CAO nhat", [("tot = min(u[0] for u in ung)", "tot = max(u[0] for u in ung)")]),
+        ("gop hoa theo thu tu ngau nguoc", [("gan.sort(key=lambda u: (THU_TU_DON_GIAN.get(u[2][\"quy_mo\"], 9),", "gan.sort(key=lambda u: (-THU_TU_DON_GIAN.get(u[2][\"quy_mo\"], 9),")]),
+        ("gop khong cho hoa (<= tot)", [("gan = [u for u in ung if u[0] <= tot + hoa]", "gan = [u for u in ung if u[0] <= tot]")]),
+        ("gop tinh ca Z0", [("xet = [k for k in cap if k[0] not in bo_qua_kich_ban]", "xet = list(cap)")]),
+        ("gop bo-mot-ra khong bo kich ban", [("con_lai = [k for k in xet if k[0] != kb]", "con_lai = list(xet)")]),
+        ("gop bo qua rang buoc do duoc 80 %", [("if not hts or len(do) / len(hts) < ty_le_do_duoc_toi_thieu:", "if not hts:")]),
+        ("gop dung trung binh thay vi trung vi", [("ung.append((float(np.median(do)), t, ref))", "ung.append((float(np.mean(do)), t, ref))")]),
+        ("gop coi duoi phan giai la do duoc", [("do_duoc = [h for h in ap if not h[\"duoi_phan_giai\"]]", "do_duoc = list(ap)")]),
+        ("gop cho phep chon B0", [("            if t == TEN_B0:\n                continue\n            hts =", "            hts =")]),
+    ]
+
+
+def main():
+    import importlib
+    M = importlib.import_module("nhan.thu_chuyen")
+    res = checks(M)
+    n_sai = 0
+    for ten, dat, ghi in res:
+        print("%s  %s%s" % ("PASS" if dat else "FAIL", ten, ("   [" + ghi + "]") if ghi and not dat else ""))
+        n_sai += (not dat)
+    print("--- ban goc: %d phep kiem, %d hong" % (len(res), n_sai))
+    ok = n_sai == 0
+    song = 0
+    for i, (ten, repl) in enumerate(mutants()):
+        r = []
+        try:
+            V = load_variant("tc_mut_%d" % i, repl)
+            checks(V, r)
+            hong = [t for t, d, _ in r if not d]
+        except Exception as e:                     # noqa: BLE001 - dot bien lam sap giua chung cung tinh la bi bat
+            hong = [t for t, d, _ in r if not d] + ["(ngoai le) %s: %s" % (type(e).__name__, str(e)[:60])]
+        bat = bool(hong)
+        song += (not bat)
+        print("%s  dot bien: %s%s" % ("BAT " if bat else "SONG", ten, ("   <- " + hong[0]) if bat else ""))
+    print("--- %d dot bien, %d song sot" % (len(mutants()), song))
+    return 0 if ok and song == 0 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

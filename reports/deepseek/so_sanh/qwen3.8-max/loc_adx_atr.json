@@ -1,0 +1,60 @@
+{
+ "ma": "loc_adx_atr",
+ "loai": "LOC",
+ "ten": "Loc ADX / ATR (do manh xu huong, do bien dong)",
+ "mo_ta": "Dung ADX hoac ATR de khong vao / khong them lenh khi xu huong qua manh hoac bien dong qua lon (CCBSN v3.0.6 theo thong bao).",
+ "tham_so": [
+  {
+   "ten": "adx",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "he_so",
+   "mien": [
+    15,
+    60,
+    5
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "atr",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "point",
+   "mien": [
+    100,
+    2000,
+    100
+   ],
+   "nhan": "tho",
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Chi thay duoc khi co bar gia: lenh vao thua thot khi ADX cao."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co bo loc.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_adx_atr"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Bo loc che do chinh cho luoi: ADX cao = khong luoi. Thu bang quet_luoi neu kho dac trung co adx.",
+ "rui_ro": "Loc qua chat bo lo moi luoi sau nhip manh (chinh la luc lai lon).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

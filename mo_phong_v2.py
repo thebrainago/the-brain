@@ -38,6 +38,10 @@ KHO = Path(__file__).parent / "data"
 PV = 0.0714
 PIP = 0.0001
 LOT = 0.01
+#: Lot TOI THIEU san nhan. `PositionClosePartial` voi khoi luong nho hon muc
+#: nay **that bai IM LANG** tren MT5 - bay da ghi trong `dich_mq5_quan_tri.py`.
+#: Mo phong cho tia duoi muc do se ra mot bang so dep hon that.
+LOT_MIN = 0.01
 SWAP_NGAY = 0.0474
 
 
@@ -77,6 +81,8 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
              entry_nguoc=False,
              thoat_sau_bar=0, vol_min=None, vol_max=None, vol_ngan=20, vol_dai=200,
              trailing_tu=None, trailing_buoc=10.0, breakeven_tu=None,
+             chot_lui_tu=None, chot_lui_ty=0.9, tia_tu=None, tia_ty=0.5,
+             cat_hoa_gia="dong",
              tra_duong_von=False):
     """cho_lui/cho_toi_da : thay vi vao L1 tai gia thi truong, dat lenh CHO cach
                             gia hien tai `cho_lui` pip ve phia co loi, cho toi da
@@ -89,6 +95,78 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
     (>= kia_ket_tu lenh) thi ro ben nay chot SOM o tp_nhanh pip thay vi cho tp,
     de lay tien ve nuoi ben dang ket. Khong bat chuoc nguyen: EA goc dong han ben
     thang roi nhoi lot x2 vao ben thua; o day chi ha muc chot."""
+    """chot_lui_tu/chot_lui_ty: NHA LAI mot phan DINH LAI cua ca ro. Vu trang
+    khi lai noi cham `chot_lui_tu` (tien), dong sach khi lai tut xuong duoi
+    `dinh_lai * chot_lui_ty`. Boc tu EA that bang `nhan/quan_tri_than.py`:
+
+        if(peakwin>=45 && profits<(peakwin*0.9))   CloseAll();
+
+    KHAC `trailing_tu` da co, va khac o dung cho quan trong: `trailing` do bang
+    PIP tu dinh GIA, cai nay do bang TY LE cua dinh LAI. Mot ro 8 tang co lot
+    gap 8 lan ro 1 tang nen cung mot so pip la mot so TIEN khac han - trailing
+    10 pip that chat voi ro nho va long leo voi ro lon, dung nguoc cai ta muon.
+    Nha lai 10% dinh lai thi tu co gian theo ro.
+
+    Dinh lai DAT LAI VE 0 khi ro dang lo, dung nhu ban goc (`if(profits<=0)
+    peakwin=0`): no vu trang lai moi lan ro hoi ve duoi von.
+
+    tia_tu/tia_ty: dong `tia_ty` phan cua ro khi lai cham `tia_tu` (tien), giu
+    phan con lai chay tiep. KHAC `cat_hoa` da co: `cat_hoa` GHEP hai lenh (moi
+    nhat voi cu nhat) roi dong CA CAP; `tia` cat mot ty le cua CA ro. Chi tia
+    MOT LAN moi ro, va khong tia khi phan cat nho hon `LOT_MIN`.
+
+    TIA VA CAT_HOA TRANH VIEC CUA NHAU - do 19/09/2026, phai biet truoc khi doc
+    bang so. Voi `cat_hoa_tu=2` (MAC DINH, tuc cat hoa dang BAT), `tia` kich
+    hoat **0 lan** tren 60.000 bar: cat hoa dong cac cap ngay khi tong lai cua
+    cap vuot `bien_cap`, nen lai ca ro khong bao gio kip cham `tia_tu`. Tat cat
+    hoa di thi cung cau hinh do tia 9-22 lan/nam.
+
+    Nen mot bang so co `tia_nam = 0` KHONG co nghia "tia vo dung" - phan lon la
+    no chua bao gio duoc chay. Quet hai nut nay phai quet CUNG `cat_hoa_tu`,
+    khong thi ta dang so mot co che voi mot co che khac doi ten."""
+    """cat_hoa_gia: gia dung de dong mot CAP khi cat hoa.
+
+    "dong" (MAC DINH)  gia DONG CUA cua bar. Gia dinh than trong: tai gia dong
+                       cua thi chac chan giao dich duoc o muc do.
+    "tot_nhat"         dinh/day cua bar - HANH VI CU, giu lai de doi chieu.
+
+    ## VI SAO DOI MAC DINH (do 19/09/2026)
+
+    Cung MOT duong gia (chuoi `close` y het nhau), chi khac o cho nen co bien
+    do hay khong, voi `buoc=30 tp=60 cat_hoa_tu=2 thoat_sau_bar=48`:
+
+        nen CO bien do (hi > lo)         lai **+234**/nam,  **0/12** lan am
+        nen KHONG bien do (hi = lo = c)  lai **-208**/nam, **12/12** lan am
+
+    Dap an dung tren random walk co chi phi la AM. Toan bo phan "lai" den tu
+    bien do trong nen: trong CUNG mot bar, bo mo phong nap them tang khi
+    `lo[i] <= moc` (day bar) roi `cat_hoa` dong cap o `hi[i]` (dinh bar) - mua
+    o day ban o dinh trong mot nen. Bar khong noi thu tu cham nen khong co gi
+    bao dam duong di cho phep ca hai.
+
+    KHAC VOI TP, va day la cho de lan: TP dung dinh bar thi DUNG - TP la lenh
+    CHO dat san o mot muc biet truoc, bar cham muc do nghia la lenh khop that.
+    Muc ghep cua `cat_hoa` thi DOI theo ro (phu thuoc gia trung binh va so tang
+    hien tai), nen lay dinh bar la gia dinh bat duoc dung tick cao nhat.
+
+    ## HE QUA PHAI NOI RO
+
+    `cat_hoa_tu=2` la MAC DINH, nen MOI ket qua `mo_phong_v2` chay truoc
+    19/09/2026 deu chua phan nay - va do dung la ho co che chu du an quan tam
+    nhat. Chay lai voi `cat_hoa_gia="tot_nhat"` de do be cua chenh lech tren
+    du lieu that truoc khi bo bat ky ket luan cu nao."""
+    if cat_hoa_gia not in ("dong", "tot_nhat"):
+        raise ValueError("cat_hoa_gia phai la 'dong' hoac 'tot_nhat', nhan "
+                         "duoc %r" % (cat_hoa_gia,))
+    if tia_tu is not None and not (0.0 < tia_ty < 1.0):
+        raise ValueError(
+            "tia_ty phai trong khoang (0, 1) - tia 100%% la DONG ca ro, phai "
+            "goi dung ten no (nhan duoc %r)" % (tia_ty,))
+    if chot_lui_tu is not None and not (0.0 < chot_lui_ty < 1.0):
+        raise ValueError(
+            "chot_lui_ty phai trong khoang (0, 1) - giu 100%% dinh lai thi "
+            "khong bao gio chot (nhan duoc %r)" % (chot_lui_ty,))
+
     hi, lo, c, sp, thu = d["hi"], d["lo"], d["c"], d["sp"], d["thu"]
     PV = d.get("pv", 0.0714)
     n = d["n"]
@@ -110,6 +188,13 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
     mo_luc = {1: 0, -1: 0}
     #: gia TOT NHAT ro da cham ke tu khi mo - de dat moc trailing.
     dinh_ro = {1: None, -1: None}
+    #: DINH LAI cua ro (tien), va ro nay da tia chua. Hai thu nay song theo RO
+    #: nen chung duoc dat lai o cho MO ro - mot cho duy nhat. Dat lai o cac cho
+    #: DONG ro thi phai sua nam cho va quen mot cho la ro sau thua ke dinh cua
+    #: ro truoc, roi chot ngay o bar dau tien.
+    dinh_lai = {1: 0.0, -1: 0.0}
+    da_tia = {1: False, -1: False}
+    so_chot_lui = so_tia = 0
     so_thoat_gio = so_trailing = so_hoa_von = 0
     cho_dat = {1: None, -1: None}
     mo_lai_tu = {1: 0, -1: 0}
@@ -184,6 +269,8 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
                 cuoi[ch] = p0
                 mo_luc[ch] = i
                 dinh_ro[ch] = p0
+                dinh_lai[ch] = 0.0
+                da_tia[ch] = False
                 continue
             # --- nap them tang ---
             kc = min(buoc * he_so_buoc ** (len(g) - 1), buoc_tran)
@@ -227,7 +314,12 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
             lo_tong += min(lo_ro, 0.0)
             # --- CAT HOA: chi bat khi ro du lon (Bigmouse: Solenh_KichhoatCatHoa) ---
             if len(g) >= max(2, cat_hoa_tu):
-                tot = hi[i] if ch > 0 else lo[i]
+                # GIA DONG, khong phai dinh bar - xem `cat_hoa_gia`. Ban cu lay
+                # `hi[i]`, va trong CUNG mot bar bo mo phong vua nap them tang o
+                # DAY bar (`lo[i] <= moc`) vua dong cap o DINH bar: mua o day,
+                # ban o dinh, cung mot nen.
+                tot = (c[i] if cat_hoa_gia == "dong"
+                       else (hi[i] if ch > 0 else lo[i]))
                 da = 0
                 while len(g) >= 2 and da < cap_moi_nen:
                     a = ch * (tot - g[-1]) / PIP * (l[-1] / LOT)
@@ -290,6 +382,61 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
                 tot_bar = hi[i] if ch > 0 else lo[i]
                 dinh_ro[ch] = (max(dinh_ro[ch], tot_bar) if ch > 0
                                else min(dinh_ro[ch], tot_bar))
+            # --- TIA: dong MOT PHAN ro khi lai cham nguong, giu phan con lai ---
+            if tia_tu is not None and not da_tia[ch]:
+                tot_bar = hi[i] if ch > 0 else lo[i]
+                lai_tot = ch * (tot_bar - tb) / PIP * (tlot[ch] / LOT) * PV
+                lot_tia = tlot[ch] * tia_ty
+                # LOT_MIN: duoi muc nay `PositionClosePartial` that bai IM LANG
+                # tren MT5, nen mot mo phong cho tia se dep hon thuc te.
+                if lai_tot >= tia_tu and lot_tia >= LOT_MIN:
+                    # Chot dung TAI muc nguong, khong tai dinh cua bar: gia di
+                    # qua nguong o dau trong bar thi ta khong biet, nen lay muc
+                    # thap nhat co the - gia dinh THAN TRONG, cung ho voi luat
+                    # "bat loi truoc" cua `nhan/luoi.py`.
+                    gia_tia = tb + ch * tia_tu * PIP * LOT / (tlot[ch] * PV)
+                    lai += ch * (gia_tia - tb) / PIP * (lot_tia / LOT) * PV
+                    lai -= (sp[i] + truot) * PV * (lot_tia / LOT)
+                    ty_con = 1.0 - tia_ty
+                    for _k in range(len(l)):
+                        l[_k] *= ty_con
+                    # `tb` KHONG doi: tlot va tgl cung co lai mot ty le.
+                    tlot[ch] *= ty_con
+                    tgl[ch] *= ty_con
+                    da_tia[ch] = True
+                    so_tia += 1
+            # --- CHOT LUI: nha lai mot phan DINH LAI cua ca ro ---
+            if chot_lui_tu is not None:
+                # Kiem bang dinh tinh DEN BAR TRUOC. Cap nhat dinh bang bar nay
+                # roi kiem trong cung bar la NHIN TRUOC - dung loi da lam AUDCAD
+                # ra 6.557%/nam voi von 41 USD (do 05/09).
+                if dinh_lai[ch] >= chot_lui_tu:
+                    muc = dinh_lai[ch] * chot_lui_ty
+                    moc_dong = tb + ch * muc * PIP * LOT / (tlot[ch] * PV)
+                    xau_bar = lo[i] if ch > 0 else hi[i]
+                    if (xau_bar <= moc_dong) if ch > 0 else (xau_bar >= moc_dong):
+                        lai += ch * (moc_dong - tb) / PIP * (tlot[ch] / LOT) * PV
+                        lai -= (sp[i] + truot) * PV * (tlot[ch] / LOT)
+                        if khoa[ch] is not None:
+                            lk, gk = khoa[ch]
+                            lai += -ch * (c[i] - gk) / PIP * (lk / LOT) * PV
+                            khoa[ch] = None
+                        g.clear()
+                        l.clear()
+                        tlot[ch] = tgl[ch] = 0.0
+                        dinh_ro[ch] = None
+                        dem_ro += 1
+                        so_chot_lui += 1
+                        mo_lai_tu[ch] = i + nghi_sau_chot
+                        continue
+                # Ro van mo -> gio moi cap nhat dinh, de bar SAU dung no lam moc.
+                tot_bar = hi[i] if ch > 0 else lo[i]
+                lai_tot = ch * (tot_bar - tb) / PIP * (tlot[ch] / LOT) * PV
+                # DAT LAI khi ro dang lo, dung nhu ban goc `if(profits<=0)
+                # peakwin=0` - no vu trang lai moi lan ro hoi ve duoi von.
+                lai_dong = ch * (c[i] - tb) / PIP * (tlot[ch] / LOT) * PV
+                dinh_lai[ch] = 0.0 if lai_dong <= 0.0 else max(dinh_lai[ch],
+                                                               lai_tot)
             # --- THOAT THEO THOI GIAN: dong ro sau X bar BAT KE lai lo ---
             if thoat_sau_bar and (i - mo_luc[ch]) >= thoat_sau_bar:
                 lai += ch * (c[i] - tb) / PIP * (tlot[ch] / LOT) * PV
@@ -354,6 +501,8 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
         "ro_nam": dem_ro / so_nam, "cap_nam": so_cap / so_nam,
         "thoat_gio_nam": so_thoat_gio / so_nam,
         "trailing_nam": so_trailing / so_nam,
+        "chot_lui_nam": so_chot_lui / so_nam,
+        "tia_nam": so_tia / so_nam,
         "hoa_von_nam": so_hoa_von / so_nam,
         "cat_nam": so_cat / so_nam, "tang_max": tang_max, "lot_max": lot_max,
         "khoa_nam": so_khoa / so_nam,

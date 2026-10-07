@@ -1,0 +1,37 @@
+{
+ "ten": "c3_xu_huo_lich_1_mua",
+ "ho": "xu_huong",
+ "co_che": "Giao dich mua khi xu huong tang da duoc xac nhan boi dong luong gia va thoi diem mua roi vao cua so lich co dong tien theo mua theo chu ky, vi nguoi mua tra tien de nam bat dong tiep dien cua xu huong sau khi thoi diem lich tao ra nhip dieu chinh tam thoi.",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 21
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "ema",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 55
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_tuan"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 2
+   }
+  }
+ ]
+}

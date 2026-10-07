@@ -1,0 +1,28 @@
+{
+ "ten": "c3_suc_ma_lich_1_mua",
+ "ho": "lich",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_tuan"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 3
+   }
+  }
+ ],
+ "co_che": "CMT SUC_MANH_XU_HUONG + LICH (nhap, may dien)"
+}

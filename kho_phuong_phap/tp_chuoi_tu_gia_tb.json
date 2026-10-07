@@ -1,0 +1,48 @@
+{
+ "ma": "tp_chuoi_tu_gia_tb",
+ "loai": "THOAT",
+ "ten": "TP ca chuoi tu gia trung binh",
+ "mo_ta": "Dong ca chuoi khi gia cach gia trung binh X pip (CCBSN InpTPDCA; NuTi quang 2 'hoa von + 0,5 gia'; HandATMX 1 gia).",
+ "tham_so": [
+  {
+   "ten": "tp_tu_gia_tb",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Gia dong cach gia trung binh cua chuoi mot khoang hang so (pip); cac lenh cua chuoi dong CUNG LUC."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "tp"
+  ],
+  "ghi_chu": "luoi.ThamSo.tp.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tp_chuoi_tu_gia_tb"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi nen cua luoi; thay bang chot theo tien / theo RSI de so.",
+ "rui_ro": "TP nho: chot thieu khi xu huong that.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

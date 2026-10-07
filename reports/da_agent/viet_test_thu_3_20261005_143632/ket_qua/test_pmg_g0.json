@@ -1,0 +1,47 @@
+{
+ "id": "test_pmg_g0",
+ "ok": true,
+ "du_lieu": {
+  "code": "import numpy as np\nfrom nhan.pmg_g0 import (\n    _er, _er_cac_cua_so, _cua_so_cho_h, _null_dao_dau, _null_block, _null_gbm,\n    do_mot_o, fdr_bh, BAC_MOI_CUA_SO\n)\n\n\ndef test_er_trend_thuan():\n    gia = np.array([1.0, 2.0, 3.0, 4.0, 5.0])\n    assert abs(_er(gia) - 1.0) < 1e-9\n\n\ndef test_er_zigzag_bang_0():\n    gia = np.array([1.0, 2.0, 1.0, 2.0, 1.0])\n    assert _er(gia) == 0.0\n\n\ndef test_er_phang_tra_nan():\n    gia = np.array([5.0, 5.0, 5.0, 5.0])\n    assert np.isnan(_er(gia))\n\n\ndef test_er_mot_bar_tra_nan():\n    gia = np.array([3.0])\n    assert np.isnan(_er(gia))\n\n\ndef test_er_cac_cua_so_do_dai_hop_le():\n    gia = np.arange(20, dtype=float)\n    L = 4\n    ket_qua = _er_cac_cua_so(gia, L)\n    assert len(ket_qua) == 5\n    for v in ket_qua:\n        assert abs(v - 1.0) < 1e-9\n\n\ndef test_er_cac_cua_so_it_qua_tra_rong():\n    gia = np.arange(10, dtype=float)\n    ket_qua = _er_cac_cua_so(gia, 4)\n    assert len(ket_qua) == 0\n\n\ndef test_cua_so_cho_h_buoc_lon():\n    gia = np.cumsum(np.ones(200))\n    buoc = 10.0\n    L = _cua_so_cho_h(gia, buoc)\n    mong_doi = max(4, int(round(BAC_MOI_CUA_SO * buoc / 1.0)))\n    assert L == mong_doi\n\n\ndef test_cua_so_cho_h_phang_tra_0():\n    gia = np.ones(100)\n    assert _cua_so_cho_h(gia, 1.0) == 0\n\n\ndef test_null_dao_dau_giu_tri_tuyet_doi():\n    r = np.array([0.1, -0.2, 0.3, -0.4, 0.5])\n    mau = _null_dao_dau(r, 50, hat=1)\n    assert mau.shape == (50, 5)\n    for i in range(50):\n        assert np.allclose(np.abs(mau[i]), np.abs(r))\n\n\ndef test_null_block_dung_kich_thuoc():\n    r = np.random.default_rng(0).normal(0, 1, 100)\n    mau = _null_block(r, 10, hat=1, khoi=20)\n    assert mau.shape == (10, 100)\n\n\ndef test_null_gbm_dung_kich_thuoc():\n    r = np.random.default_rng(0).normal(0, 1, 100)\n    mau = _null_gbm(r, 10, hat=1)\n    assert mau.shape == (10, 100)\n\n\ndef test_fdr_bh_p_nho_va_lon():\n    cac_p = [0.001, 0.5, 0.01, 0.9]\n    dat = fdr_bh(cac_p, muc=0.10)\n    assert isinstance(dat, list)\n    assert len(dat) == 4\n    assert dat[0] is True\n    assert dat[2] is True\n    assert dat[1] is False\n    assert dat[3] is False\n\n\ndef test_fdr_bh_rong():\n    assert fdr_bh([], muc=0.10) == []\n\n\ndef test_do_mot_o_du_lieu_ngan():\n    gia = np.ones(10)\n    kq = do_mot_o(gia, h_atr=1.0, atr_tv=0.01, so_null=5)\n    assert kq[\"trang_thai\"] == \"CHUA_DO_DUOC\"\n",
+  "ket_qua": {
+   "test_er_trend_thuan": "OK",
+   "test_er_zigzag_bang_0": "OK",
+   "test_er_phang_tra_nan": "OK",
+   "test_er_mot_bar_tra_nan": "OK",
+   "test_er_cac_cua_so_do_dai_hop_le": "OK",
+   "test_er_cac_cua_so_it_qua_tra_rong": "OK",
+   "test_cua_so_cho_h_buoc_lon": "OK",
+   "test_cua_so_cho_h_phang_tra_0": "OK",
+   "test_null_dao_dau_giu_tri_tuyet_doi": "OK",
+   "test_null_block_dung_kich_thuoc": "OK",
+   "test_null_gbm_dung_kich_thuoc": "OK",
+   "test_fdr_bh_p_nho_va_lon": "OK",
+   "test_fdr_bh_rong": "OK",
+   "test_do_mot_o_du_lieu_ngan": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "test_cua_so_cho_h_ti_le_nghich_voi_buoc HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "test_er_di_ngang_bang_0 HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 149.73
+}

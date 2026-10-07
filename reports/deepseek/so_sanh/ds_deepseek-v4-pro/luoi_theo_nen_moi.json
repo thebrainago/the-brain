@@ -1,0 +1,99 @@
+{
+ "ma": "luoi_theo_nen_moi",
+ "loai": "TANG",
+ "ten": "Chi them lenh khi mo nen moi",
+ "mo_ta": "Mot nen chi duoc them toi da mot lenh (tranh don lenh khi gia chay nhanh trong mot nen); NuTi DCA theo nen.",
+ "tham_so": [
+  {
+   "ten": "khung_nen",
+   "lop": "THOI_GIAN",
+   "don_vi": "phut",
+   "mien": [
+    1,
+    240,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lenh_toi_da_moi_nen",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    5,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buoc",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    50,
+    400,
+    25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "he_so_lot",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    1.0,
+    2.0,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "tp",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    100,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Thoi gian mo cac lenh them trung dau nen; khong co hai lenh them cung mot bar."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "Engine them lenh theo gia trong bar; chua co rang 'toi da 1 lenh / bar'.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "luoi_theo_nen_moi"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "De do: them tham so 'moi bar toi da 1 lenh'; xem co cat duoc DD luc tin manh khong.",
+ "rui_ro": "Them cham luc gia da di xa: gia trung binh kem hon.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

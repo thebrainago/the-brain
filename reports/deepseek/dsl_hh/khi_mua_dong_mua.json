@@ -1,0 +1,42 @@
+{
+ "ten": "khi_mua_dong_mua",
+ "ho": "lich",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "thang"
+   },
+   "phep": ">=",
+   "phai": {
+    "hang": 8
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "thang"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 10
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "sma",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 50
+   }
+  }
+ ],
+ "co_che": "mua truoc mua dong: thang tu 8 den 10 VA gia dong cua > SMA 50 (nhu cau suoi am + xu huong)"
+}

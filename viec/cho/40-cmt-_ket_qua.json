@@ -1,0 +1,20 @@
+{
+ "ma": "cmt-_ket_qua",
+ "muc_tieu": "thu ban nhap CMT '_ket_qua' tren AUDCAD M15 (kham_pha) - vao so tay nc.db",
+ "lan": "CPU",
+ "uu_tien": 10,
+ "han_phut": 15.0,
+ "ra_luc": "2026-10-05T14:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "thu_co_che",
+  "{\"ma\":\"AUDCAD\",\"khung\":\"M15\",\"spec\":{\"dat\":17,\"hong\":[[\"nen_heiken_chuoi\",1,[\"vao[0].trai: 'dem_lien_tiep' can dieu kien 'khi' co trai/phai\"]],[\"nen_heiken_chuoi\",-1,[\"vao[0].trai: 'dem_lien_tiep' can dieu kien 'khi' co trai/phai\"]],[\"fibo_nhip_lui\",1,[\"vao[2]: hai ve GIONG HET nhau - dieu kien khong mang thong tin\"]]],\"so_cum\":13,\"canh_bao\":{\"14\":[\"xac_nhan_khong_doc_lap: moi dieu kien vao cung ho BIEN_DONG - CMT: chong cung ho khong xac nhan them\"]}}}"
+ ],
+ "vi_sao": "lap cho trong CMT (dot 2-3); can gia (xem job 00-xuat-gia)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

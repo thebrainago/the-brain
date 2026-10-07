@@ -1,0 +1,46 @@
+{
+ "ma": "sl_cung",
+ "loai": "BAO_VE",
+ "ten": "SL co dinh tung lenh",
+ "mo_ta": "Moi lenh co cat lo co dinh (NewYear 2.1 SL ~7 gia, SignalX, Bigmouse SL theo RR 1,3).",
+ "tham_so": [
+  {
+   "ten": "sl",
+   "lop": "KC_SL",
+   "don_vi": "pip",
+   "mien": [
+    100,
+    2000,
+    100
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Cot S/L khac 0; nhieu lenh dong boi [sl] o khoang cach co dinh."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co SL tung lenh.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "sl_cung"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Cong cu cho he lenh don (martingale); khong hop voi luoi khong SL.",
+ "rui_ro": "Cat lo lien tiep: lot nhan len roi cham SL.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

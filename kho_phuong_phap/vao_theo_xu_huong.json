@@ -1,0 +1,79 @@
+{
+ "ma": "vao_theo_xu_huong",
+ "loai": "VAO",
+ "ten": "Danh theo xu huong (trend-following)",
+ "mo_ta": "Vao cung chieu voi xu huong (khung H1 tro len), nhoi them khi xu huong tiep tuc; tac gia canh bao sideway la ke thu.",
+ "tham_so": [
+  {
+   "ten": "nguong_adx",
+   "lop": "NGUONG_CHI_BAO",
+   "don_vi": "%",
+   "mien": [
+    20,
+    50,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "buoc_nhoi",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    100,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": "buoc",
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lan_nhoi",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    10,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": "tran_tang",
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Cac lenh cung chieu mo khi gia di CUNG chieu loi (Buy: lenh sau mo o gia cao hon), nguoc voi luoi gian cach."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chi co luoi nguoc xu huong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_theo_xu_huong"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi doi nghich voi luoi: 'luoi khi sideway, theo trend khi co trend' can bo loc che do (loc_adx_atr / loc_sideway_nen).",
+ "rui_ro": "Sideway: bi cuon lenh lien tiep.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
+}

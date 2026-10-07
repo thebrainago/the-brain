@@ -1,0 +1,42 @@
+{
+ "ten": "c3_bien_d_pha_vo_1_mua",
+ "ho": "pha_vo",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "bollinger",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 20,
+    "k": 2,
+    "cot": "duoi"
+   },
+   "phep": "<=",
+   "phai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "donchian",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "high"
+    },
+    "n": 20,
+    "cot": "tren"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   }
+  }
+ ],
+ "co_che": "CMT BIEN_DONG + PHA_VO (nhap, may dien)"
+}

@@ -1,0 +1,41 @@
+{
+ "ten": "rsi_vung_bull_nhip_nghi",
+ "ho": "xu_huong",
+ "chieu": -1,
+ "giu": 5,
+ "co_che": "Khi RSI quay ve vung 40-80 trong khi EMA 200 dang doc len, day la tin hieu cho rang xu huong tang van con manh nhung thi truong dang nghi ngai de tich luy luc mua; viec ban ra (chieu -1) giup bao toan loi nhuan hoac tranh ru ro khi dong tien co the tam thoi chuyen sang phia ban.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 40
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "n": 200
+   },
+   "phep": "cheo_len",
+   "phai": {
+    "hang": 0
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 70
+   }
+  }
+ ]
+}

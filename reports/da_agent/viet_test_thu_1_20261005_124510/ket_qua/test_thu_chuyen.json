@@ -1,0 +1,30 @@
+{
+ "id": "test_thu_chuyen",
+ "ok": true,
+ "du_lieu": {
+  "code": "# -*- coding: utf-8 -*-\n\"\"\"Test cho module thu_chuyen.py (The Brain).\"\"\"\n\nimport math\nimport numpy as np\nimport pandas as pd\nfrom dataclasses import replace\n\nfrom nhan import thu_chuyen as TC\nfrom nhan import luoi as LU\n\n\ndef test_hat_on_dinh():\n    \"\"\"hat_on_dinh tra ve int duong va on dinh voi cung dau vao.\"\"\"\n    tg = TC.TheGioi()\n    h1 = TC.hat_on_dinh(tg, \"A\", 0)\n    h2 = TC.hat_on_dinh(tg, \"A\", 0)\n    h3 = TC.hat_on_dinh(tg, \"B\", 0)\n    \n    assert isinstance(h1, int)\n    assert h1 >= 0\n    assert h1 == h2, \"Hat khong on dinh\"\n    assert h1 != h3, \"Hat khong phan biet theo vai tro\"\n    \n    # Bien gioi: so lon\n    h_large = TC.hat_on_dinh(tg, \"A\", 10**9)\n    assert isinstance(h_large, int) and h_large >= 0\n\n\ndef test_sinh_duong_co_ban():\n    \"\"\"sinh_duong tao ra DataFrame hop le voi cac cot can thiet.\"\"\"\n    tg = TC.TheGioi(sigma_pip=10.0, nua_doi_phut=60.0, troi_nam=5.0, chi_phi_pip=2.0)\n    df = TC.sinh_duong(tg, so_nam=0.1, hat=12345, buoc_phut=1)\n    \n    assert isinstance(df, pd.DataFrame)\n    for col in [\"open\", \"high\", \"low\", \"close\", \"spread\"]:\n        assert col in df.columns\n    \n    # Kiem tra tinh hop ly cua OHLC\n    assert (df[\"high\"] >= df[\"low\"]).all()\n    assert (df[\"high\"] >= df[\"open\"]).all() or (df[\"high\"] >= df[\"close\"]).all()\n    assert (df[\"low\"] <= df[\"open\"]).all() or (df[\"low\"] <= df[\"close\"]).all()\n    \n    # Kiem tra spread co dinh\n    expected_spread = tg.chi_phi_pip * (TC.PIP / TC.QUY_CACH.point)\n    assert np.allclose(df[\"spread\"], expected_spread)\n\n\ndef test_gop_khung():\n    \"\"\"gop_khung gop dung cach khi k > 1 va tra nguyen khi k = 1.\"\"\"\n    df = TC.sinh_duong(TC.TheGioi(), so_nam=0.05, hat=1, buoc_phut=1)\n    \n    # k=1: tra nguyen\n    df_1 = TC.gop_khung(df, 1)\n    assert len(df_1) == len(df)\n    assert df_1.equals(df)\n    \n    # k=2: gop doi\n    df_2 = TC.gop_khung(df, 2)\n    assert len(df_2) == len(df) // 2\n    \n    # Kiem gia tri open/close/high/low cua nen gop dau tien\n    o1 = df.iloc[0][\"open\"]\n    c1 = df.iloc[1][\"close\"]\n    h_max = max(df.iloc[0][\"high\"], df.iloc[1][\"high\"])\n    l_min = min(df.iloc[0][\"low\"], df.iloc[1][\"low\"])\n    \n    assert df_2.iloc[0][\"open\"] == o1\n    assert df_2.iloc[0][\"close\"] == c1\n    assert df_2.iloc[0][\"high\"] == h_max\n    assert df_2.iloc[0][\"low\"] == l_min\n\n\ndef test_bien_do_nen_pip():\n    \"\"\"bien_do_nen_pip tra ve median bien do (pip) > 0.\"\"\"\n    df = TC.sinh_duong(TC.TheGioi(sigma_pip=30.0), so_nam=0.1, hat=100)\n    bd = TC.bien_do_nen_pip(df)\n    \n    assert isinstance(bd, float)\n    assert bd > 0\n    # Kiem tra thu cong\n    manual_bd = float(np.median((df[\"high\"] - df[\"low\"]).to_numpy())) / TC.PIP\n    assert math.isclose(bd, manual_bd, rel_tol=1e-9)\n\n\ndef test_diem_o_tai_khoan_chay():\n    \"\"\"diem_o tra ve -100 neu tai khoan chay (margin call).\"\"\"\n    # Tao mot the gioi co bien do rat lon va lot rat lon de dam bao chay\n    tg = TC.TheGioi(sigma_pip=1000.0, chi_phi_pip=100.0)\n    df = TC.sinh_duong(tg, so_nam=0.1, hat=1)\n    dl = LU.chuan_bi(df, TC.QUY_CACH)\n    \n    # Tham so vo ly: buoc nho, tp nho, tang nhieu -> de chay\n    ts = TC.KIEU[\"phang\"].tham_so(buoc=1.0, tp=1.0, tang=100, lot=10.0)\n    \n    diem = TC.diem_o(dl, ts)\n    assert diem == -100.0, f\"Ky vong -100 khi chay, nhan {diem}\"\n\n\ndef test_hoi_tuong_doi():\n    \"\"\"hoi_tuong_doi tinh dung cong thuc va xu ly dap an <= 0.\"\"\"\n    # Dap an > 0\n    da = 10.0\n    d = 8.0\n    ht = TC.hoi_tuong_doi(da, d)\n    assert math.isclose(ht, (10.0 - 8.0) / 10.0, rel_tol=1e-9)\n    \n    # Dap an <= 0 -> None\n    assert TC.hoi_tuong_doi(0.0, 5.0) is None\n    assert TC.hoi_tuong_doi(-5.0, 5.0) is None\n    \n    # Diem NaN -> None\n    assert TC.hoi_tuong_doi(10.0, float(\"nan\")) is None\n\n\ndef test_luong_mac_dinh():\n    \"\"\"luong_mac_dinh tra ve int >= 1.\"\"\"\n    n = TC.luong_mac_dinh()\n    assert isinstance(n, int)\n    assert n >= 1\n\n\ndef test_kich_ban_tim():\n    \"\"\"kich_ban tim dung ten va loi neu sai.\"\"\"\n    kb = TC.kich_ban(\"Z0\")\n    assert kb.ten == \"Z0\"\n    assert kb.loai == \"L0\"\n    \n    try:\n        TC.kich_ban(\"KHONG_CO\")\n        assert False, \"Phai loi KeyError\"\n    except KeyError:\n        pass\n\n\ndef test_thi_truong_do_duoc_sigma():\n    \"\"\"thi_truong_do_duoc voi kieu_quy_mo='sigma' dung A = sigma_pip * PIP.\"\"\"\n    tg = TC.TheGioi(sigma_pip=50.0)\n    df_m1 = TC.sinh_duong(tg, so_nam=0.05, hat=1)\n    \n    tt = TC.thi_truong_do_duoc(df_m1, khung_phut=1, kieu_quy_mo=\"sigma\", tg=tg)\n    \n    expected_A = tg.sigma_pip * TC.PIP\n    assert math.isclose(tt.A, expected_A, rel_tol=1e-9)\n\n\ndef test_san_chi_phi_tam():\n    \"\"\"san_chi_phi_tam doi tam thoi va khoi phuc DT.SAN_CHI_PHI.\"\"\"\n    from nhan import dich_tham_so as DT\n    gia_tri_cu = DT.SAN_CHI_PHI\n    \n    with TC.san_chi_phi_tam(5.0):\n        assert DT.SAN_CHI_PHI == 5.0\n    \n    assert DT.SAN_CHI_PHI == gia_tri_cu, \"Khong khoi phuc gia tri cu\"\n\n\ndef test_ke_hoach_s1_hash():\n    \"\"\"ke_hoach_s1 tra ve dict co plan_hash la chuoi hex 16 ky tu.\"\"\"\n    kh = TC.ke_hoach_s1()\n    assert \"plan_hash\" in kh\n    assert \"cau_hinh\" in kh\n    \n    h = kh[\"plan_hash\"]\n    assert isinstance(h, str)\n    assert len(h) == 16\n    assert all(c in \"0123456789abcdef\" for c in h)\n",
+  "ket_qua": {
+   "test_hat_on_dinh": "OK",
+   "test_sinh_duong_co_ban": "OK",
+   "test_gop_khung": "OK",
+   "test_bien_do_nen_pip": "OK",
+   "test_diem_o_tai_khoan_chay": "OK",
+   "test_hoi_tuong_doi": "OK",
+   "test_luong_mac_dinh": "OK",
+   "test_kich_ban_tim": "OK",
+   "test_thi_truong_do_duoc_sigma": "OK",
+   "test_san_chi_phi_tam": "OK",
+   "test_ke_hoach_s1_hash": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "re",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 6.03
+}

@@ -1,0 +1,37 @@
+{
+ "id": "test_bang_he",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "test_xep_theo_tien_none_va_am HONG: AssertionError: ",
+  "test_cong_tien_dat HONG: AssertionError: ",
+  "test_cong_tien_truot_nhieu_ly_do HONG: AssertionError: "
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: .write_text (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: .write_text, unlink (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "test_xep_theo_tien_none_va_am HONG: AssertionError: ",
+    "test_cong_tien_dat HONG: AssertionError: ",
+    "test_cong_tien_truot_nhieu_ly_do HONG: AssertionError: "
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 124.04
+}

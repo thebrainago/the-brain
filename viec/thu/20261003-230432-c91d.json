@@ -1,0 +1,10 @@
+{
+ "id": "20261003-230432-c91d",
+ "luc": "2026-10-03T23:04:32",
+ "tu": "nha",
+ "den": "cloud",
+ "loai": "nguoi",
+ "chu_de": "BAN GIAO LLM: DeepSeek mac dinh, Qwen du phong",
+ "tra_loi": null,
+ "noi_dung": "BAN GIAO LLM cho cloud (chu du an 03/10: 'ban giao cho cloud, cam may vat li ton dien lam'). (1) SO LIEU that tren AI Box (api.ai-box.vn/v1, OpenAI-compatible, khoa trong E:\\api.txt + bien moi truong User AIBOX_API_KEY / SO_SANH_{QWEN,DEEPSEEK}_*): ds/deepseek-flash 0,906 vs qwen3.8-max-0902 0,854 (8 task x 2 lan; reports/SO_SANH_LLM_20261003_2045.json; tai_lieu/SO_SANH_LLM.md). DeepSeek tre trung vi 3,1 s vs 15,9 s, token ra 14,6k vs 20,4k. Goi cong cu: thu truc tiep ca hai goi DUNG tim_quy_luat(AUDCAD,H4,200); diem thap o task goi_cong_cu la do bo cham khat khe (Qwen hay goi them xem_so_tay) -> cloud noi long cham. deepseek-v4.1-flash tra 503; kimi-k3 / glm-5.3 / qwen3.8-flash chua thu. Chua co gia -> chua so chi phi. Mo hinh suy luan an token suy luan trong max_tokens: dat tran lon (SO_SANH_NHAN_MAX_TOKENS=12 khi chay so-sanh). (2) PHUONG AN chu du an can: DeepSeek flash mac dinh cho viec khoi luong lon (b nc tho, q); Qwen3.8 max du phong khi viec can suy luan sau hoac DeepSeek sai 2 lan; KHONG cai Qwen Code / DeepSeek harness (da co goi OpenAI-compatible trong du an, chi tro base_url). (3) CLOUD LAM: cau hinh mac dinh + du phong trong code (config/qwen.json, nhan/so_sanh_llm, b nc tho / q), them kimi-k3 va glm-5.3 vao so-sanh neu muon, noi long cham goi_cong_cu. KHONG chay qua dem tren may nha: chu du an noi may vat li ton dien, chi bat khi can; viec dai dung cloud hoac cho chu du an bat may. Nha chi chay don ngan khi duoc goi."
+}

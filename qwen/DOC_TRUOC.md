@@ -41,6 +41,63 @@ Ranh giới này không phải vì sợ qwen phá. Nó đến từ một phép �
 dùng được cho một cổng. Nhưng nó dùng tốt cho khối lượng đọc — nên qwen gánh
 đọc/bóc/viết, còn cổng thì để code.
 
+## Giao việc VIẾT MÃ cho mô hình rẻ — `b tho`
+
+Bảng trên nói qwen **không** viết mã. Từ 19/09/2026 nó viết được, nhưng chỉ
+trong một khuôn rất chặt:
+
+```
+b tho don_hang.json          giao một đơn hàng cho mô hình rẻ
+b tho don_hang.json --thu    chạy khô: in lời nhắc sẽ gửi, không gọi LLM
+```
+
+Chia việc:
+
+| | ai làm |
+|---|---|
+| quyết định XÂY GÌ | người / mô hình mạnh |
+| viết **bài test** (= đặc tả) | người / mô hình mạnh |
+| gõ phần cài đặt cho đến khi test xanh | **mô hình rẻ** |
+| chấm đạt/không | `pytest`. Không ai tự phán. |
+
+Viết được bài test đúng là phần khó. Điền cho nó xanh là phần lặp lại — và đó
+là phần đáng trả tiền cho một mô hình rẻ.
+
+### Vì sao chia đúng chỗ đó
+
+Phiên 19/09 tìm ra ba lỗi thật trong bộ mô phỏng. Cả ba **không** tìm ra bằng
+cách gõ mã — chúng tìm ra bằng cách chạy thử rồi **nghi ngờ một kết quả đẹp**:
+
+- 51/84 cấu hình được chấm "CHẠY ĐƯỢC" trên random walk → `cat_hoa` đang gặt
+  biên độ trong nến;
+- 12.805%/năm với sụt giảm 4,67 → cổng phân giải bỏ sót các nút khoảng cách;
+- 50% lọt trên chuỗi đã phá edge → "chấm một đường không phân biệt được gì".
+
+Một mô hình rẻ viết mã sẽ sinh ra đúng những dòng mã đó, và sẽ báo cáo "51 cấu
+hình CHẠY ĐƯỢC" như một **thành công**. Nên ranh giới không phải "rẻ làm việc
+dễ, đắt làm việc khó" — nó là: ai viết **cổng**, và ai đi qua cổng.
+
+### Rào chắn quan trọng nhất: KHÔNG được sửa file test
+
+Kiểu hỏng kinh điển của mọi vòng lặp "sửa đến khi xanh": mô hình thấy sửa test
+dễ hơn sửa mã. Lúc đó bảng số vẫn xanh còn cái cổng thì biến mất.
+
+Không phải nỗi lo lý thuyết. Chính trong phiên 19/09, bài
+`test_ty_le_lot_tren_nhieu_phai_THAP` đỏ ở mức 50%, và cách dễ nhất là hạ
+ngưỡng. Nếu hạ thì phát hiện lớn nhất phiên đó đã không bao giờ tồn tại.
+
+Nên: để `file_test` vào `duoc_sua` là **lỗi đơn hàng** (ném `ValueError`), và
+mọi khối mã trỏ tới file ngoài danh sách bị bỏ qua **trước khi ghi**. Hết vòng
+mà chưa xanh thì mọi file được sửa trả về nguyên trạng.
+
+Đã kiểm trên repo thật: mô hình cố sửa bài test và `b.py` → không đổi một byte.
+
+### Đơn hàng gồm gì
+
+`don_hang_mau.json` ở gốc `lab/` là mẫu chạy được. Các trường:
+`ma` · `muc_tieu` · `file_test` (đặc tả) · `lenh_cham` · `duoc_sua` (danh sách
+trắng) · `so_vong_toi_da`.
+
 ## Ba trạng thái, không phải hai
 
 ```
@@ -116,8 +173,14 @@ máy 20 luồng — hai trụ không tranh CPU của nhau.
 
 ## Đường LLM
 
-Khoá đọc **tại chỗ** từ `~/.cc-switch/cc-switch.db` (bảng `providers`, khớp tên
-bằng chuỗi con). Không chép sang dự án: một khoá API chỉ nên tồn tại ở một nơi.
+Khoá: biến môi trường `AIBOX_API_KEY` trước, rồi đọc **tại chỗ** từ `~/.cc-switch/cc-switch.db`
+(bảng `providers`, khớp tên bằng chuỗi con). Không chép sang dự án: một khoá API chỉ nên tồn tại ở một nơi.
+cc-switch chỉ cho KHOÁ — model và URL lấy ở `config/qwen.json`.
+
+**Model (chốt 03/10/2026, thư nhà c91d):** mặc định `ds/deepseek-flash` (nhanh, ít token), dự phòng `qwen3.8-max-0902`
+(suy luận sâu, chậm ~5 lần) — `config/qwen.json` → `model`, `model_du_phong`. Sai `leo_thang_sau_lan_sai` (2) lần LIÊN TIẾP
+(lỗi gọi, trả rỗng) thì đổi sang dự phòng đúng một lần (`mo_hinh.ke_hoach_thu`, `tac_tu.hoi`); `hoi(..., sau=True)` bắt đầu
+bằng dự phòng. Hỏng cả hai thì `hoi` trả chuỗi `!! tac tu loi: ...` ghi rõ từng model. Bảng đo + lý do: `tai_lieu/SO_SANH_LLM.md`.
 
 Gọi **thẳng** `https://api.ai-box.vn/v1`, không qua cầu nối `127.0.0.1:8317` —
 cầu nối đó dựng cho Codex CLI (Codex đòi `/v1/responses` mà AI Box không có).

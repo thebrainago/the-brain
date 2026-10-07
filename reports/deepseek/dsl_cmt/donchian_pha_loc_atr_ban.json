@@ -1,0 +1,40 @@
+{
+ "ten": "donchian_pha_loc_atr_ban",
+ "ho": "pha_vo",
+ "co_che": "Gia pha vo dinh Donchian 20 bar cho thay luc mua thang, ket hop ATR lon hon trung binh chung to bien dong dang no ra giup xac nhan phe mua co suc manh va loai bo cac pha vo gia.",
+ "chieu": -1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "thap_nhat_cua_cac",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "low"
+    },
+    "n": 20
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "atr",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "tb",
+    "cua": {
+     "chi_bao": "atr",
+     "n": 14
+    },
+    "n": 50
+   }
+  }
+ ],
+ "ra": []
+}

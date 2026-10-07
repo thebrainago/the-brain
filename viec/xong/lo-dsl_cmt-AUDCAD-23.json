@@ -1,0 +1,56 @@
+{
+  "ma": "lo-dsl_cmt-AUDCAD-23",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 1.8,
+    "lenh": [
+      "C:\\Users\\DUNG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "thu_lo_co_che",
+      "{\"ma\": \"AUDCAD\", \"khung\": \"M15\", \"thu_muc\": \"dsl_cmt\", \"ten\": [\"c3_xu_huo_lich_1_mua\", \"c3_xu_huo_lich_3_ban\", \"c3_xu_huo_lich_3_mua\", \"c3_xu_huo_nen_1_mua\", \"c3_xu_huo_nen_2_mua\", \"c3_xu_huo_nen_3_mua\", \"c3_xu_huo_pha_vo_1_mua\", \"c3_xu_huo_pha_vo_2_mua\", \"c3_xu_huo_pha_vo_3_mua\", \"c3_xu_huo_suc_ma_1_ban\", \"c3_xu_huo_suc_ma_1_mua\", \"c3_xu_huo_suc_ma_3_ban\", \"c3_xu_huo_suc_ma_3_mua\", \"cci_qua_ban_roi_len_ban\", \"cci_qua_ban_roi_len_mua\", \"dau_thang_xu_huong_ban\", \"dau_thang_xu_huong_mua\", \"donchian_pha_loc_atr_ban\", \"donchian_pha_loc_atr_mua\", \"gian_bien_dong_mua\", \"gio_london_pha_vo_ban\", \"gio_london_pha_vo_mua\", \"hoi_quy_khi_adx_thap_mua\", \"hoi_quy_khi_adx_thap_zscore_am_guong\", \"ichimoku_tenkan_kijun_mua\"]}"
+    ],
+    "phien_ban_ma": "9658734+sua",
+    "dong_cuoi": [
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\\nA \"",
+      "  },",
+      "  {",
+      "   \"he\": \"hoi_quy_khi_adx_thap_zscore_am_guong\",",
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\\nA \"",
+      "  },",
+      "  {",
+      "   \"he\": \"ichimoku_tenkan_kijun_mua\",",
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": null,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": null,",
+      "   \"ly_do\": \"loi khi chay: ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\\nA \"",
+      "  }",
+      " ],",
+      " \"_giay\": 0.53",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/link_tham_do_b370b5eb75.json": "{\n \"url\": \"https://tradingview.com/scripts\",\n \"kich_thuoc_html\": 412622,\n \"so_the\": 2076,\n \"tieu_de\": \"Trading Strategies & Indicators Built by TradingView Community\",\n \"meta\": {\n  \"description\": \"Browse scripts to find the best strategies, indicators, or libraries built using Pine Script®. Over 100,000 publications to go beyond ordinary in market researc\",\n  \"robots\": \"index, follow\",\n  \"og:site_name\": \"TradingView\",\n  \"og:title\": \"Trading Strategies & Indicators Built by TradingView Community\",\n  \"og:type\": \"website\"\n },\n \"muc\": [\n  {\n   \"cap\": \"h1\",\n   \"chu\": \"Indicators and strategies\"\n  }\n ],\n \"tab\": [\n  {\n   \"chu\": \"Popular\",\n   \"den\": \"/scripts/\"\n  },\n  {\n   \"chu\": \"Marketplace\",\n   \"den\": \"/scripts/marketplace/\"\n  },\n  {\n   \"chu\": \"Editors' picks\",\n   \"den\": \"/scripts/editors-picks/\"\n  },\n  {\n   \"chu\": \"Popular\",\n   \"den\": \"/scripts/\"\n  },\n  {\n   \"chu\": \"Marketplace\",\n   \"den\": \"/scripts/marketplace/\"\n  },\n  {\n   \"chu\": \"Editors' picks\",\n   \"den\": \"/scripts/editors-picks/\"\n  }\n ],\n \"bang\": [],\n \"form\": [],\n \"script_nguon\": [\n  \"https://static.tradingview.com/static/bundles/en.44530.c3fa775a71a50f26d86a.js\",\n  \"https://static.tradingview.com/static/bundles/43047.42a88cdb02928d08e0e1.js\",\n  \"https://static.tradingview.com/static/bundles/8929.15f4375ba5e5ba7388f3.js\",\n  \"https://static.tradingview.com/static/bundles/promo_footer.574429f4c8aa970e066f.js\",\n  \"https://static.tradingview.com/static/bundles/runtime.4f5002b624f4a8412bb3.js\",\n  \"https://static.tradingview.com/static/bundles/en.4095.e604a3e834b9b8c56708.js\",\n  \"https://static.tradingview.com/static/bundles/14041.9a9e08dd2261a49814f5.js\",\n  \"https://static.tradingview.com/static/bundles/45885.f5357dbfbf6ad85daf52.js\",\n  \"https://static.tradingview.com/static/bundles/83215.87e<so_dai>.js\",\n  \"https://static.tradingview.com/static/bundles/25390.54701e2598a12af1628e.js\",\n  \"https://static.tradingview.com/static/bundles/42288.8f909e285acd0761a39d.js\",\n  \"https://static.tradingview.com/static/bundles/80987.<so_dai>ea380b5eb.js\",\n  \"https://static.tradingview.com/static/bundles/86343.d3d81de9070212e79c8a.js\",\n  \"https://static.tradingview.com/static/bundles/67543.06a21bab2f0da0d3fa71.js\",\n  \"https://static.tradingview.com/static/bundles/70252.bb6077bde5aa656f2dfe.js\",\n  \"https://static.tradingview.com/static/bundles/80150.5d525f559c78235239cd.js\",\n  \"https://static.tradingview.com/static/bundles/32493.a85e902ab5ea671ba172.js\",\n  \"https://static.tradingview.com/static/bundles/66164.4438ba891e77c3ac2060.js\",\n  \"https://static.tradingview.com/static/bundles/49465.1cf53895d<so_dai>ca.js\",\n  \"https://static.tradingview.com/static/bundles/16021.a616409e35f72d1e0698.js\",\n  \"https://static.tradingview.com/static/bundles/62912.4be58c6ae1032125bd74.js\",\n  \"https://static.tradingview.com/static/bundles/69741.06927eea75984e9e98a1.js\",\n  \"https://static.tradingview.com/static/bundles/35440.c927da500462e5d04208.js\",\n  \"https://static.tradingview.com/static/bundles/46410.29b2c31c9df2fdfaaef0.js\",\n  \"https://static.tradingview.com/static/bundles/68767.b0d21c964e65bc47cf40.js\"\n ],\n \"json_nhung\": [\n  {\n   \"id\": \"page-locale-links\",\n   \"khoa\": [\n    \"<list 20>\"\n   ],\n   \"kich_thuoc\": 2123\n  },\n  {\n   \"id\": \"\",\n   \"khoa\": [\n    \"@context\",\n    \"@type\",\n    \"itemListElement\"\n   ],\n   \"kich_thuoc\": 201\n  },\n  {\n   \"id\": \"\",\n   \"khoa\": [\n    \"mainMenuCategories\"\n   ],\n   \"kich_thuoc\": 46094\n  },\n  {\n   \"id\": \"\",\n   \"khoa\": [\n    \"vSubYt\"\n   ],\n   \"kich_thuoc\": 236\n  },\n  {\n   \"id\": \"\",\n   \"khoa\": [\n    \"B2cfZZ\"\n   ],\n   \"kich_thuoc\": 60090\n  },\n  {\n   \"id\": \"\",\n   \"khoa\": [\n    \"wbgp6M\"\n   ],\n   \"kich_thuoc\": 222\n  },\n  {\n   \"id\": \"\",\n   \"khoa\": [\n    \"cm360GlobalTagId\",\n    \"fbTagId\",\n    \"gaId\",\n    \"gaVars\",\n    \"gadwId\",\n    \"yaTagId\"\n   ],\n   \"kich_thuoc\": 190\n  },\n  {\n   \"id\": \"\",\n   \"khoa\": [\n    \"canSwitchTheme\",\n    \"days_to_deactivation\",\n    \"is_support_available\",\n    \"is_support_banned\",\n    \"tvPartnersHost\"\n   ],\n   \"kich_thuoc\": 194\n  }\n ],\n \"diem_cuoi\": [\n  \"GET\",\n  \"https://telemetry.tradingview.com/charts-ios-free\",\n  \"https://telemetry.tradingview.com/charts-ios-pro\",\n  \"https://telemetry.tradingview.com/charts-android-free\",\n  \"https://telemetry.tradingview.com/charts-android-pro\"\n ],\n \"link_ra_theo_nen_tang\": {\n  \"tradingview\": 100,\n  \"khac\": 7,\n  \"facebook\": 1,\n  \"youtube\": 1,\n  \"telegram\": 1,\n  \"dien_dan\": 1\n },\n \"can_js\": false,\n \"loi_doc\": \"\",\n \"da_cat\": false,\n \"kieu\": \"html\",\n \"ma\": \"b370b5eb75\",\n \"nen_tang\": \"tradingview\",\n \"loai\": \"danh_sach_pine\",\n \"cach\": \"http\"\n}",
+      "reports/link_tham_do_ket_qua.json": "{\n \"so_link\": 1,\n \"theo_ket_qua\": {\n  \"OK\": 1\n },\n \"muc\": [\n  {\n   \"ma\": \"b370b5eb75\",\n   \"nen_tang\": \"tradingview\",\n   \"loai\": \"danh_sach_pine\",\n   \"cach\": \"http\",\n   \"ket_qua\": \"OK\",\n   \"status\": 200,\n   \"kieu\": \"html\",\n   \"so_bang\": 0,\n   \"so_tab\": 6,\n   \"so_diem_cuoi\": 5,\n   \"can_js\": false,\n   \"tom_tat\": \"reports/link_tham_do_b370b5eb75.json\",\n   \"symbol_chinh\": null,\n   \"rieng\": false,\n   \"url\": \"https://tradingview.com/scripts\"\n  }\n ]\n}",
+      "reports/link_tham_do_ket_qua.md": "THAM DO LINK: 1 link\n  -  1 x OK: da lay duoc cau truc trang (tab, bang, diem cuoi) -> cloud doc de viet bo doc lich su dung dinh dang\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-06T20:02:42"
+}

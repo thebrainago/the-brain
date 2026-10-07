@@ -1,0 +1,32 @@
+{
+  "ma": "2151-toi-uu-US500CASH-M30-ba",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 1.4,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"US500CASH\", \"khung\": \"M30\", \"luoi\": {\"buoc\": [8, 12, 16, 24, 32, 48], \"tp\": [6, 10, 16, 24], \"tran_tang\": [6, 8, 10]}, \"co_dinh\": {\"che_do\": \"ban\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 150}"
+    ],
+    "phien_ban_ma": "0d20898+sua",
+    "dong_cuoi": [
+      "{",
+      " \"trang_thai\": \"CHUA_DO_DUOC\",",
+      " \"ly_do\": \"US500CASH: chua ho tro cho luoi (chi cap FX chuan 5 chu so; chi so/crypto/exotic/micro co hop dong va phi khac). Muon thu: ghi pip/hop_dong/point do tu symbol_info vao config/luoi_quy_cach.json\",",
+      " \"_giay\": 0.0",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T11:27:02"
+}

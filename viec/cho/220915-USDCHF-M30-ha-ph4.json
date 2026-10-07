@@ -1,0 +1,20 @@
+{
+ "ma": "220915-USDCHF-M30-ha-ph4",
+ "muc_tieu": "quet luoi rong 3000 o USDCHF M30 hai_chieu phang hat 4",
+ "lan": "CPU",
+ "uu_tien": 8,
+ "han_phut": 120,
+ "ra_luc": "2026-10-07T12:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "quet_luoi",
+  "{\"ma\": \"USDCHF\", \"khung\": \"M30\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 4}"
+ ],
+ "vi_sao": "lap day CPU (don cu chi 4s/don)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

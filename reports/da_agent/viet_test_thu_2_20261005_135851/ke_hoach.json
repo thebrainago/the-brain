@@ -1,0 +1,52 @@
+{
+ "ten": "viet_test_thu_2",
+ "muc_tieu": "Model re viet test cho 6 module chua co test; may CHAY test tren ma that: dat = test hop le, hong = test sai hoac ma co loi (Claude phan loai)",
+ "boi_canh": "Du an The Brain, Python 3.11, numpy/pandas co san.",
+ "tasks": [
+  {
+   "id": "test_dich_tham_so",
+   "vai": "nhanh",
+   "doc_tep": [
+    "nhan/dich_tham_so.py"
+   ],
+   "prompt": "Viet bai TEST cho module 'dich_tham_so' (xem tep). Quy tac:\n- Chi dung thu vien chuan + `from nhan import ...`. Moi test la ham `def test_...():` khong tham so, dung `assert`. KHONG ghi tep, KHONG goi mang, KHONG dung pytest/unittest.\n- Moi test kiem MOT hanh vi co that cua module bang du lieu NHO tu dung ngay trong test (khong doc tep ngoai). Co it nhat 3 ca bien (dau vao xau / rong / bien gioi).\n- Chi khang dinh nhung gi ban THAY trong ma (doc ky tham so va gia tri tra ve); khong doan hanh vi. Neu khong chac thi bo ca do.\n- 6 den 12 ham test. Tra DUNG mot khoi ```python ... ``` va khong gi them.\n- Moi ten (bien, ham, lop) dung trong test PHAI co that trong tep hoac duoc import ro rang; khong dung ten chua dinh nghia.",
+   "cham": {
+    "kieu": "test_chay",
+    "it_nhat": 5
+   },
+   "max_tokens": 3500,
+   "cat_tep": 14000,
+   "leo_thang": "manh"
+  },
+  {
+   "id": "test_kiem_the_nhap",
+   "vai": "nhanh",
+   "doc_tep": [
+    "nhan/kiem_the_nhap.py"
+   ],
+   "prompt": "Viet bai TEST cho module 'kiem_the_nhap' (xem tep). Quy tac:\n- Chi dung thu vien chuan + `from nhan import ...`. Moi test la ham `def test_...():` khong tham so, dung `assert`. KHONG ghi tep, KHONG goi mang, KHONG dung pytest/unittest.\n- Moi test kiem MOT hanh vi co that cua module bang du lieu NHO tu dung ngay trong test (khong doc tep ngoai). Co it nhat 3 ca bien (dau vao xau / rong / bien gioi).\n- Chi khang dinh nhung gi ban THAY trong ma (doc ky tham so va gia tri tra ve); khong doan hanh vi. Neu khong chac thi bo ca do.\n- 6 den 12 ham test. Tra DUNG mot khoi ```python ... ``` va khong gi them.\n- Moi ten (bien, ham, lop) dung trong test PHAI co that trong tep hoac duoc import ro rang; khong dung ten chua dinh nghia.",
+   "cham": {
+    "kieu": "test_chay",
+    "it_nhat": 5
+   },
+   "max_tokens": 3500,
+   "cat_tep": 20000,
+   "leo_thang": "manh"
+  },
+  {
+   "id": "test_nc_ho_so",
+   "vai": "nhanh",
+   "doc_tep": [
+    "nhan/nc_ho_so.py"
+   ],
+   "prompt": "Viet bai TEST cho module 'nc_ho_so' (xem tep). Quy tac:\n- Chi dung thu vien chuan + `from nhan import ...`. Moi test la ham `def test_...():` khong tham so, dung `assert`. KHONG ghi tep, KHONG goi mang, KHONG dung pytest/unittest.\n- Moi test kiem MOT hanh vi co that cua module bang du lieu NHO tu dung ngay trong test (khong doc tep ngoai). Co it nhat 3 ca bien (dau vao xau / rong / bien gioi).\n- Chi khang dinh nhung gi ban THAY trong ma (doc ky tham so va gia tri tra ve); khong doan hanh vi. Neu khong chac thi bo ca do.\n- 6 den 12 ham test. Tra DUNG mot khoi ```python ... ``` va khong gi them.\n- Moi ten (bien, ham, lop) dung trong test PHAI co that trong tep hoac duoc import ro rang; khong dung ten chua dinh nghia.",
+   "cham": {
+    "kieu": "test_chay",
+    "it_nhat": 5
+   },
+   "max_tokens": 3500,
+   "cat_tep": 20000,
+   "leo_thang": "manh"
+  }
+ ]
+}

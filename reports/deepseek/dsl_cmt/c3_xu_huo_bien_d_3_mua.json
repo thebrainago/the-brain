@@ -1,0 +1,47 @@
+{
+ "ten": "c3_xu_huo_bien_d_3_mua",
+ "ho": "xu_huong",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 21
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "sma",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 55
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "atr",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "atr",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 50
+   }
+  }
+ ],
+ "co_che": "CMT XU_HUONG + BIEN_DONG (nhap, may dien)"
+}

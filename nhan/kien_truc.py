@@ -74,7 +74,7 @@ THU_MUC_GOC = {
 THU_MUC_LAB = {
     "bao_cao": "Bao cao phien The Brain (tu 15/08). Gom ve day 18/09.",
     "mau_thu": "Bo mau .mq5 THAT + `do_moc.py` — bai do chay duoc TREN CLOUD "
-               "(khong can nao.db/MT5). Moc 18/09: thay 22 diem vao lenh, ra 0 co che.",
+               "(khong can nao.db/MT5). Moc: thay 22 diem vao lenh; ra 0 co che (18/09), 2 (03/10).",
     "co_che_ds": "Co che do DeepSeek viet ra, cho kiem dinh.",
     "so_do": "So do he thong dang html/svg/png.",
     "tru": "**Bay tru** — Seeker/Quantlab/Evolution/Banker/Finder/Nghi. Tang tren.",
@@ -110,6 +110,15 @@ TRU = ("seeker", "quantlab", "evolution", "banker", "finder", "nghi")
 #: Tang cua `nhan/`. Viet tay - xem docstring dau file ve vi sao.
 #: Module khong co trong bang nao se hien o muc CHUA XEP LOP.
 LOP: dict[str, tuple[str, tuple[str, ...]]] = {
+    "NHA NGHIEN CUU — AI nam quyen": (
+        "Tang tren cung tu 25/09/2026: AI (Claude) quyet dinh nghien cuu gi, cac lop duoi la "
+        "bo cong cu cua no. Code do va cham; AI dat gia thuyet, doc ket qua, hoc tu lenh.",
+        ("nc_tac_tu", "nc_cong_cu", "nc_so_tay", "nc_thi_nghiem", "nc_mo_xe",
+         "nc_dac_trung", "nc_du_lieu", "nc_tu_lai", "nc_bot_hoc", "nc_tho", "nc_so_cai",
+         "ea_tho", "ea_gia_lap", "bao_cao_mt5", "lenh_tester", "khoi_co_che", "hieu_chuan_luoi",
+         "ho_so_bot", "ho_so_set", "nc_ho_so", "dich_tham_so", "the_phuong_phap", "nc_phuong_phap", "cmt_prior", "hang_hoa", "xuat_gia", "kiem_the_nhap",
+         "do_thong_minh", "thu_chuyen", "thu_chuyen_tim"),
+    ),
     "SO & HOP DONG": (
         "Nguon su that chung. Moi tru doc va ghi qua day, khong tu giu so rieng.",
         ("so", "hop_dong", "quant_plan", "anh_chup", "bai_hoc",
@@ -121,7 +130,7 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
          "tu_dang_nhap", "telegram", "theo_doi", "nguon_bai_viet",
          "nguon_tinix", "kham_pha_nguon", "vuon_nguon", "tu_khoa_da_ngon_ngu",
          "toan_van", "doc_song_song", "hang_doi", "san_cong_cu", "nen_tang",
-         "tien_ich_xet", "chi_tieu"),
+         "tien_ich_xet", "chi_tieu", "link_nguon", "link_chay", "doc_dien_dan"),
     ),
     "BOC TACH — tai lieu thanh co che": (
         "Khau hep nhat cua he: van xuoi/ma nguon/anh/video -> khai bao kiem dinh duoc.",
@@ -139,34 +148,36 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
          "quy_doi_tham_so"),
     ),
     "SINH GIA THUYET": (
-        "Bon luong sinh: noi sinh, ngoai sinh, suy nguoc tu dau chan, to hop.",
-        ("noi_sinh", "ngoai_sinh", "suy_nguoc", "dau_chan", "luan_dau_chan",
-         "tin_hieu_mql5", "to_hop", "da_thoi_dai", "gop_lop", "chuyen_he",
-         "thu_hoi_thanh_phan"),
+        "Nam luong sinh. Bon luong dau bat nguon tu cai DA CO (lich su mot ma, "
+        "mot he da pass, dau chan nguoi khac, co che trong kho); `hephaestus` "
+        "la luong duy nhat sinh tu VON TU cua chinh ngu phap.",
+        ("hephaestus", "noi_sinh", "ngoai_sinh", "suy_nguoc", "dau_chan",
+         "luan_dau_chan", "tin_hieu_mql5", "to_hop", "da_thoi_dai", "gop_lop",
+         "chuyen_he", "thu_hoi_thanh_phan", "boc_lich_su"),
     ),
     "QUAN TRI VI THE": (
         "Ho co che THU HAI. 262 co che dau la tin hieu VAO; day la nua con lai.",
         ("pmg", "pmg_engine", "pmg_g0", "pmg_quet", "quan_tri_dsl",
          "quan_tri_nhieu", "chuoi_quan_tri", "dap_quan_tri", "de_quan_tri",
-         "luoi", "vao_lenh", "bien_don_bay"),
+         "quan_tri_than", "luoi", "luoi_nhan", "vao_lenh", "bien_don_bay"),
     ),
     "KIEM DINH & CONG": (
         "Noi mot gia thuyet duoc phep doi doi. Hai cong: co that khong, va co ra tien khong.",
         ("mo_phong", "sang_loc", "cong", "cong_ra_tien", "cham_diem",
          "do_luong", "do_luc", "loc_co_che", "danh_muc", "nha_may_null",
-         "suy_giam"),
+         "suy_giam", "kiem_quy_uoc"),
     ),
     "MT5 / TESTER — do that": (
         "Quy tac cua chu du an: MT5 tester TRUOC, Python SAU.",
         ("dich_mq5", "dich_mq5_ghep", "dich_mq5_qtvt", "dich_mq5_quan_tri",
          "doc_lenh_tester", "khoa_tester", "dang_nhap_mt5", "passview",
-         "chay_that", "so_lenh", "san_sang_vps", "tai_khoan_nen_tang"),
+         "chay_that", "so_lenh", "san_sang_vps", "khoi_phuc", "tai_khoan_nen_tang", "slot_tester"),
     ),
     "DIEU HANH & GIAM SAT": (
         "Giu he chay 24/7 va tu thay duoc minh dang hong cho nao.",
-        ("evo", "canary", "mach", "do_im_lang", "do_tai_nguyen", "don_mo_coi",
-         "han_muc", "ngan_sach", "tran_cpu", "ban_do", "kien_truc", "tri_tue",
-         "muc_tieu", "vong_day_du", "day_chuyen", "day_chuyen_quantlab"),
+        ("do_token", "phien_hien_tai", "evo", "canary", "mach", "do_im_lang", "do_tai_nguyen", "don_mo_coi",
+         "han_muc", "ngan_sach", "may_nha", "tran_cpu", "ban_do", "kien_truc", "tri_tue", "so_sanh_llm",
+         "muc_tieu", "vong_day_du", "day_chuyen", "day_chuyen_quantlab", "ghi_an_toan", "ho_so_he"),
     ),
 }
 

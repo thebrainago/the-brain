@@ -1,0 +1,82 @@
+{
+ "ma": "gong_duong_doi_ung",
+ "loai": "TANG",
+ "ten": "Gong lenh dang lai de can lenh am",
+ "mo_ta": "Khong chot lenh dang lai: giu no de bu cho cac lenh am (BNK), den khi chot ca chuoi; SemiHFT giu Buy khi Sell ket.",
+ "tham_so": [
+  {
+   "ten": "so_lenh_am_toi_da",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    20,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "nguong_lo_loi_dong_chuoi",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    5,
+    500,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "thoi_gian_giu_toi_da",
+   "lop": "THOI_GIAN",
+   "don_vi": "gio",
+   "mien": [
+    1,
+    168,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "bat_giu_lenh_duong",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Co lenh dang lai bi giu rat lau (lau hon trung vi nhieu lan), chi dong cung luc voi ca chuoi."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py chot theo ca chuoi, khong giu lenh duong rieng.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "gong_duong_doi_ung"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Giam DD hien thi, khong giam rui ro that neu khong co luat dong; do bang 'lenh nao bi giu bao lau'.",
+ "rui_ro": "Lenh duong bi giu roi dao chieu: mat het lai da co.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

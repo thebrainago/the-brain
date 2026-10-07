@@ -1,0 +1,105 @@
+{
+ "ten": "ra_soat_loi_thu_1",
+ "muc_tieu": "Model re ra soat 7 module loi cua The Brain tim loi im lang; Claude phan loai ket qua, chi sua cai that",
+ "boi_canh": "Du an The Brain: lab kiem thu chien luoc forex/CFD bang du lieu va tester. Sai so lieu im lang la loi nang nhat.",
+ "tasks": [
+  {
+   "id": "ra_soat_cham_diem",
+   "vai": "re",
+   "doc_tep": [
+    "nhan/cham_diem.py"
+   ],
+   "prompt": "Ra soat mot module Python cua he kiem thu chien luoc giao dich (The Brain). Muc tieu: tim LOI THAT hoac RUI RO SAI SO LIEU, khong phai gop y van phong.\nChi quan tam: (1) loi logic / sai dau / chia cho 0 / bien gioi / lam tron; (2) cho co the cho ra con so SAI ma khong bao loi (im lang); (3) logic bi lap hoac mau thuan voi docstring cua chinh no; (4) thieu kiem tra dau vao quan trong. KHONG de xuat viet lai ca module, khong gop y dat ten.\nBat buoc: moi phat hien phai tro DUNG ten ham / lop co that trong tep (hoac '(toan_tep)'), noi CU THE dong logic nao sai va sai ra sao, kem de xuat sua ngan.\nTra DUNG mot JSON {\"phat_hien\":[{\"ham\":\"...\",\"muc_do\":\"CAO|TB|THAP\",\"van_de\":\"...\",\"de_xuat\":\"...\"}]} voi 2 den 8 muc, xep CAO truoc. Neu thay it hon 2 van de that thi neu cac rui ro nho nhat. Khong bia.",
+   "cham": {
+    "kieu": "phat_hien_ma",
+    "tep": "nhan/cham_diem.py"
+   },
+   "phan_bien": "nhanh",
+   "max_tokens": 2500
+  },
+  {
+   "id": "ra_soat_luoi",
+   "vai": "re",
+   "doc_tep": [
+    "nhan/luoi.py"
+   ],
+   "prompt": "Ra soat mot module Python cua he kiem thu chien luoc giao dich (The Brain). Muc tieu: tim LOI THAT hoac RUI RO SAI SO LIEU, khong phai gop y van phong.\nChi quan tam: (1) loi logic / sai dau / chia cho 0 / bien gioi / lam tron; (2) cho co the cho ra con so SAI ma khong bao loi (im lang); (3) logic bi lap hoac mau thuan voi docstring cua chinh no; (4) thieu kiem tra dau vao quan trong. KHONG de xuat viet lai ca module, khong gop y dat ten.\nBat buoc: moi phat hien phai tro DUNG ten ham / lop co that trong tep (hoac '(toan_tep)'), noi CU THE dong logic nao sai va sai ra sao, kem de xuat sua ngan.\nTra DUNG mot JSON {\"phat_hien\":[{\"ham\":\"...\",\"muc_do\":\"CAO|TB|THAP\",\"van_de\":\"...\",\"de_xuat\":\"...\"}]} voi 2 den 8 muc, xep CAO truoc. Neu thay it hon 2 van de that thi neu cac rui ro nho nhat. Khong bia.",
+   "cham": {
+    "kieu": "phat_hien_ma",
+    "tep": "nhan/luoi.py"
+   },
+   "phan_bien": "nhanh",
+   "max_tokens": 2500
+  },
+  {
+   "id": "ra_soat_cong",
+   "vai": "re",
+   "doc_tep": [
+    "nhan/cong.py"
+   ],
+   "prompt": "Ra soat mot module Python cua he kiem thu chien luoc giao dich (The Brain). Muc tieu: tim LOI THAT hoac RUI RO SAI SO LIEU, khong phai gop y van phong.\nChi quan tam: (1) loi logic / sai dau / chia cho 0 / bien gioi / lam tron; (2) cho co the cho ra con so SAI ma khong bao loi (im lang); (3) logic bi lap hoac mau thuan voi docstring cua chinh no; (4) thieu kiem tra dau vao quan trong. KHONG de xuat viet lai ca module, khong gop y dat ten.\nBat buoc: moi phat hien phai tro DUNG ten ham / lop co that trong tep (hoac '(toan_tep)'), noi CU THE dong logic nao sai va sai ra sao, kem de xuat sua ngan.\nTra DUNG mot JSON {\"phat_hien\":[{\"ham\":\"...\",\"muc_do\":\"CAO|TB|THAP\",\"van_de\":\"...\",\"de_xuat\":\"...\"}]} voi 2 den 8 muc, xep CAO truoc. Neu thay it hon 2 van de that thi neu cac rui ro nho nhat. Khong bia.",
+   "cham": {
+    "kieu": "phat_hien_ma",
+    "tep": "nhan/cong.py"
+   },
+   "phan_bien": "nhanh",
+   "max_tokens": 2500
+  },
+  {
+   "id": "ra_soat_dich_tham_so",
+   "vai": "re",
+   "doc_tep": [
+    "nhan/dich_tham_so.py"
+   ],
+   "prompt": "Ra soat mot module Python cua he kiem thu chien luoc giao dich (The Brain). Muc tieu: tim LOI THAT hoac RUI RO SAI SO LIEU, khong phai gop y van phong.\nChi quan tam: (1) loi logic / sai dau / chia cho 0 / bien gioi / lam tron; (2) cho co the cho ra con so SAI ma khong bao loi (im lang); (3) logic bi lap hoac mau thuan voi docstring cua chinh no; (4) thieu kiem tra dau vao quan trong. KHONG de xuat viet lai ca module, khong gop y dat ten.\nBat buoc: moi phat hien phai tro DUNG ten ham / lop co that trong tep (hoac '(toan_tep)'), noi CU THE dong logic nao sai va sai ra sao, kem de xuat sua ngan.\nTra DUNG mot JSON {\"phat_hien\":[{\"ham\":\"...\",\"muc_do\":\"CAO|TB|THAP\",\"van_de\":\"...\",\"de_xuat\":\"...\"}]} voi 2 den 8 muc, xep CAO truoc. Neu thay it hon 2 van de that thi neu cac rui ro nho nhat. Khong bia.",
+   "cham": {
+    "kieu": "phat_hien_ma",
+    "tep": "nhan/dich_tham_so.py"
+   },
+   "phan_bien": "nhanh",
+   "max_tokens": 2500
+  },
+  {
+   "id": "ra_soat_mo_phong",
+   "vai": "re",
+   "doc_tep": [
+    "nhan/mo_phong.py"
+   ],
+   "prompt": "Ra soat mot module Python cua he kiem thu chien luoc giao dich (The Brain). Muc tieu: tim LOI THAT hoac RUI RO SAI SO LIEU, khong phai gop y van phong.\nChi quan tam: (1) loi logic / sai dau / chia cho 0 / bien gioi / lam tron; (2) cho co the cho ra con so SAI ma khong bao loi (im lang); (3) logic bi lap hoac mau thuan voi docstring cua chinh no; (4) thieu kiem tra dau vao quan trong. KHONG de xuat viet lai ca module, khong gop y dat ten.\nBat buoc: moi phat hien phai tro DUNG ten ham / lop co that trong tep (hoac '(toan_tep)'), noi CU THE dong logic nao sai va sai ra sao, kem de xuat sua ngan.\nTra DUNG mot JSON {\"phat_hien\":[{\"ham\":\"...\",\"muc_do\":\"CAO|TB|THAP\",\"van_de\":\"...\",\"de_xuat\":\"...\"}]} voi 2 den 8 muc, xep CAO truoc. Neu thay it hon 2 van de that thi neu cac rui ro nho nhat. Khong bia.",
+   "cham": {
+    "kieu": "phat_hien_ma",
+    "tep": "nhan/mo_phong.py"
+   },
+   "phan_bien": "nhanh",
+   "max_tokens": 2500
+  },
+  {
+   "id": "ra_soat_chi_phi",
+   "vai": "re",
+   "doc_tep": [
+    "nhan/chi_phi.py"
+   ],
+   "prompt": "Ra soat mot module Python cua he kiem thu chien luoc giao dich (The Brain). Muc tieu: tim LOI THAT hoac RUI RO SAI SO LIEU, khong phai gop y van phong.\nChi quan tam: (1) loi logic / sai dau / chia cho 0 / bien gioi / lam tron; (2) cho co the cho ra con so SAI ma khong bao loi (im lang); (3) logic bi lap hoac mau thuan voi docstring cua chinh no; (4) thieu kiem tra dau vao quan trong. KHONG de xuat viet lai ca module, khong gop y dat ten.\nBat buoc: moi phat hien phai tro DUNG ten ham / lop co that trong tep (hoac '(toan_tep)'), noi CU THE dong logic nao sai va sai ra sao, kem de xuat sua ngan.\nTra DUNG mot JSON {\"phat_hien\":[{\"ham\":\"...\",\"muc_do\":\"CAO|TB|THAP\",\"van_de\":\"...\",\"de_xuat\":\"...\"}]} voi 2 den 8 muc, xep CAO truoc. Neu thay it hon 2 van de that thi neu cac rui ro nho nhat. Khong bia.",
+   "cham": {
+    "kieu": "phat_hien_ma",
+    "tep": "nhan/chi_phi.py"
+   },
+   "phan_bien": "nhanh",
+   "max_tokens": 2500
+  },
+  {
+   "id": "ra_soat_the_phuong_phap",
+   "vai": "re",
+   "doc_tep": [
+    "nhan/the_phuong_phap.py"
+   ],
+   "prompt": "Ra soat mot module Python cua he kiem thu chien luoc giao dich (The Brain). Muc tieu: tim LOI THAT hoac RUI RO SAI SO LIEU, khong phai gop y van phong.\nChi quan tam: (1) loi logic / sai dau / chia cho 0 / bien gioi / lam tron; (2) cho co the cho ra con so SAI ma khong bao loi (im lang); (3) logic bi lap hoac mau thuan voi docstring cua chinh no; (4) thieu kiem tra dau vao quan trong. KHONG de xuat viet lai ca module, khong gop y dat ten.\nBat buoc: moi phat hien phai tro DUNG ten ham / lop co that trong tep (hoac '(toan_tep)'), noi CU THE dong logic nao sai va sai ra sao, kem de xuat sua ngan.\nTra DUNG mot JSON {\"phat_hien\":[{\"ham\":\"...\",\"muc_do\":\"CAO|TB|THAP\",\"van_de\":\"...\",\"de_xuat\":\"...\"}]} voi 2 den 8 muc, xep CAO truoc. Neu thay it hon 2 van de that thi neu cac rui ro nho nhat. Khong bia.",
+   "cham": {
+    "kieu": "phat_hien_ma",
+    "tep": "nhan/the_phuong_phap.py"
+   },
+   "phan_bien": "nhanh",
+   "max_tokens": 2500
+  }
+ ]
+}

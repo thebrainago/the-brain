@@ -7,7 +7,10 @@ Bonferroni khong bat duoc — tp=0,1xATR / sl=4,0xATR cho rr=0,025, winrate 100%
 tren 15-20 lenh. Breakeven winrate cua rr=0,025 la 97,6%, nen 100% vuot qua
 moi phep thu thong ke mot cach hop le. Dung toan hoc, vo gia tri kinh te.
 
-Test nay dung lai dung hinh dang do va bat cong phai tu choi no.
+Test nay dung lai dung hinh dang do va bat cong phai NHAN RA no. Tu 25/09/2026
+(the he cong 6) tang 2 la NHAN, khong chan - chu du an: *"toi khong quan tam
+martingale hay dca hay la phuong phap gi ... chi can co lai va maxdd duoi 80%"*.
+Phep do van phai dung, vi nhan sai thi chu du an doc sai.
 """
 import unittest
 

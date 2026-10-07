@@ -1,0 +1,37 @@
+{
+ "ten": "c3_dao_do_nen_2_mua",
+ "ho": "quay_ve_trung_binh",
+ "chieu": 1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "stochastic",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    },
+    "n": 14,
+    "m": 3
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 20
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "mau_nen",
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "close"
+    }
+   },
+   "phep": "cheo_len",
+   "phai": {
+    "hang": 0
+   }
+  }
+ ],
+ "co_che": "CMT DAO_DONG + NEN (nhap, may dien)"
+}

@@ -1,0 +1,35 @@
+{
+ "id": "test_bang_he",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "test_van_tay_day_du HONG: AssertionError: ",
+  "test_cong_tien_dat_va_khong_dat HONG: AssertionError: "
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "khong chay duoc: NameError: name '__file__' is not defined. Did you mean: '__name__'?"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: unlink (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "test_van_tay_day_du HONG: AssertionError: ",
+    "test_cong_tien_dat_va_khong_dat HONG: AssertionError: "
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 100.2
+}

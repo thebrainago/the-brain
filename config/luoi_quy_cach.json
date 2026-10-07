@@ -1,0 +1,17 @@
+{
+ "XAUUSD": {
+  "pip": 0.1,
+  "hop_dong": 100.0,
+  "point": 0.01,
+  "da_doi_chieu": true,
+  "nguon": "symbol_info XM demo GOLD.i# (reports/xuat_m1_xm.json 03/10/2026): digits 2, point 0,01, hop dong 100 oz/lot; pip = 10 point = 0,1 (quy uoc nhu cap FX 5 chu so)"
+ },
+ "USDJPY": {
+  "pip": 0.01,
+  "hop_dong": 100000.0,
+  "point": 0.001,
+  "von_quy_doi": 150.0,
+  "da_doi_chieu": true,
+  "nguon": "symbol_info XM demo USDJPY# (reports/xuat_m1_xm.json 03/10/2026): digits 3, point 0,001, hop dong 100.000; pip = 10 point = 0,01; von_quy_doi 150 ~ ty gia gan day (von tai khoan USD -> JPY), chi la xap xi"
+ }
+}

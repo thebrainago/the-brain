@@ -1,0 +1,48 @@
+{
+ "ma": "cat_lo_theo_tien",
+ "loai": "BAO_VE",
+ "ten": "Cat lo theo tien (chuoi / tai khoan)",
+ "mo_ta": "Dong het khi am X USD (Bigmouse 'cat am', NuTi 'shot tai khoan' -300 USD, de tat): bien 'khong cat lo' thanh 'cat lo co tran'.",
+ "tham_so": [
+  {
+   "ten": "tien_cat_lo",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    50,
+    2000,
+    50
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Cum chuoi dong boi [ea] / stopout voi lo gan co dinh -X; hoac tai khoan ve 0."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [
+   "dung_lo_tong"
+  ],
+  "ghi_chu": "ThamSo.dung_lo_tong da khai bao nhung KHONG cai dat (luoi.chay tu choi != 0).",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "cat_lo_theo_tien"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Dat tran DD tu truoc (vd 50%) la cach giu maxDD < 80% theo cong cua chu du an.",
+ "rui_ro": "Cat dung luc day: mat co hoi hoi phuc.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

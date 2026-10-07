@@ -1,0 +1,61 @@
+{
+ "ma": "lot_cong",
+ "loai": "LOT",
+ "ten": "Lot tang cong",
+ "mo_ta": "Lot lenh k = lot0 + (k-1) * buoc_lot (CCBSN InpPlus 0,01; KawKaw 'lot step add').",
+ "tham_so": [
+  {
+   "ten": "lot",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.5,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "cong_them",
+   "lop": "LOT",
+   "don_vi": "lot",
+   "mien": [
+    0.01,
+    0.2,
+    0.01
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lot tang deu cung mot luong moi lenh."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "kieu_lot",
+   "he_so_lot"
+  ],
+  "ghi_chu": "luoi.ThamSo.kieu_lot = cong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "lot_cong"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Hien hon nhan: so tren cung ma.",
+ "rui_ro": "Chuoi rat dai van phinh lot (tuyen tinh).",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

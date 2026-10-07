@@ -1,0 +1,29 @@
+{
+ "ten": "c3_suc_ma_dao_do_1_mua",
+ "ho": "quay_ve_trung_binh",
+ "chieu": 1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 40
+   }
+  }
+ ],
+ "co_che": "CMT SUC_MANH_XU_HUONG + DAO_DONG (nhap, may dien)"
+}

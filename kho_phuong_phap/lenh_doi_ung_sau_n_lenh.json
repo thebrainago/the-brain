@@ -1,0 +1,70 @@
+{
+ "ma": "lenh_doi_ung_sau_n_lenh",
+ "loai": "TANG",
+ "ten": "Mo lenh doi ung sau N lenh (hedge khi sau)",
+ "mo_ta": "Khi mot chuoi co N lenh (CCBSN: 5-12), mo them lenh NGUOC chieu voi lot nho co dinh (0,01-0,05) de giam toc do am.",
+ "tham_so": [
+  {
+   "ten": "n_kich_hoat",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    3,
+    12,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "ti_le_lot_doi",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    0.5,
+    2.0,
+    0.25
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "tp_doi",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    100,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Co lenh nguoc chieu xuat hien dung khi so lenh cua chuoi doi dien dat so co dinh; lot nho va khong tang."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py hai chuoi chay roi nhau, khong co lenh doi ung trong cung chuoi.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "lenh_doi_ung_sau_n_lenh"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi nen thu SOM vi CCBSN song sot dung no; do bang quet_luoi sau khi them.",
+ "rui_ro": "Hedge khong dong: neu khong co luat dong, hai chieu cung ket.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

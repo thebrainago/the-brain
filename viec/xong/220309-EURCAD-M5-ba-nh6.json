@@ -1,0 +1,55 @@
+{
+  "ma": "220309-EURCAD-M5-ba-nh6",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 876.5,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"EURCAD\", \"khung\": \"M5\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"ban\", \"lot\": 0.01, \"kieu_lot\": \"nhan\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 6}"
+    ],
+    "phien_ban_ma": "11101d2c+sua",
+    "dong_cuoi": [
+      "   \"so_lenh\": 1846,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 7.35,",
+      "   \"maxdd_pct\": -33.27,",
+      "   \"he_so_lot_tai_tran\": 130.176,",
+      "   \"loi_suat_o_tran_pct\": 956.97,",
+      "   \"hon_moc_pct\": 956.97",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"ban\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"nhan\",",
+      "  \"buoc\": 20,",
+      "  \"tp\": 34,",
+      "  \"tran_tang\": 12,",
+      "  \"cho_lui\": 10,",
+      "  \"he_so_lot\": 1.2",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 2457/3000 o co lai, tot nhat +2537.3%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 3000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 926,",
+      " \"_giay\": 821.28",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00025.md": "# THO vong 25 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n14 lan goi cong cu · 306958 token vao · 23019 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 6 phép thử mới (tn896-903), cập nhật gt34, 3 hiểu biết (hb64-66), 1 câu hỏi (#29).**\n\n**Đã thử & số:**\n- **Tái lập gt34-MUA** (tn569 khớp y nguyên): 225 lệnh, 46,86 bps, t7,52, 9/9 năm, 219%@x10.\n- **Quét giờ (tn896, 8 ô):** CAO_NGUYEN, **decay đơn điệu** (gio 0→13 ~40-47 bps, gio>=14 sụp về 7,75→-6,81 bps). Đây là gradient cả phiên, KHÔNG phải spike một bar → củng cố hb61 rằng chân fade độc lập với lỗ hổng bar gio-0 (khác hẳn họ momentum).\n- **Cửa sổ giờ [6,14) (tn899):** 169 lệnh 55,81 bps nhưng chỉ 187%@x10 < 219% base → **lọc giờ KHÔNG tăng tiền** (mất 11 lệnh gio 0-5 giá trị cao).\n- **Quét trailing (tn898, giu 16/24/40 × trail_buoc 0,3/0,5/1,0 = 9 ô):** CAO_NGUYEN 9/9, mọi ô >228%@x10.\n- **Ô tốt nhất (tn901):** giu 24 + trail 3/0,3 → **240 lệnh, 54,82 bps, t9,02, 9/9 năm, 332,58%@x10, DD 60,2%, beta 0,004, lãi_rong/phi 15,35**.\n- **BAN+trail (tn902):** 184%@x10 nhưng vẫn 6/9 năm → trailing KHÔNG cứu được decay của chiều BÁN.\n- **Ghép MUA+BAN (tn903):** tương quan -0,101 nhưng rổ 275%@x10 < MUA một mình → **không ghép**.\n\n**Giả thuyết giao lại Claude:** gt34 **TRIEN_VONG** với bản nâng cấp trailing (giu 24, trail 3/0,3) — 332,58%@x10, +52% tiền trên cùng trần x10, CAO_NGUYEN 9/9, chưa xác nhận/MT5. Câu hỏi #29: chạy XÁC NHẬN 2021+ + MT5 (phi x2-3) cho biến thể này và so trực tiếp với base không-trail.\n\n**Việc tiếp theo đáng giá nhất:** Claude chạy XAC NHAN/MT5 cho gt34-MUA+trail; nếu sống thì đây là chân chính thay gt34 gốc. Rủi ro cần nêu: DD@x10 tăng 43,8→60,2% và 100% còn trong khám phá.\n",
+      "reports/nc_tho/vong_00026.md": "# THO vong 26 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n20 lan goi cong cu · 467835 token vao · 28770 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 10 phép thử mới (tn906-916), 1 gt mới (gt58, con của gt34), 4 hiểu biết (hb67-70), 1 câu hỏi (#30).**\n\n**Đã thử & số:**\n- **gt34 bỏ ADX (tn906):** 262 lệnh, 40,44 bps, t6,96, **vẫn 9/9 năm**, 216,9%@x10 → ADX gần như dead weight. **Bỏ supertrend (tn531):** 12,85 bps, 6/9 năm → supertrend load-bearing.\n- **Vàng H1 có phải hồi quy rộng? (tn908):** mua dip thuần (stoch≤35, không lọc) = 684 lệnh **-7,05 bps, 3/9 năm** → KHÔNG; chính regime kênh rộng+ADX+xu hướng mới là gốc.\n- **Chuyển cơ chế sang tài sản khác:** US500 H1 (tn907) -9,61 bps; EURCAD H1 (tn911) +5,79 bps t1,55 (lai_rong/phi 2,61<3); AUDCAD H1 (tn912) -4,58 bps 0/6 → **không chuyển được**, vẫn vàng-only (nối dài hb45/hb52).\n- **Lọc chất lượng bar dip `than_pv>=0,3` (tn909/910/913/916):** nâng bps/lệnh 46,9→59-64 (giữ 16-20) và →68-72 khi thêm trailing(3/0,2-0,3); vẫn 9/9 năm; **CAO_NGUYEN 21/21 và 36/36**; đỉnh **348,67%@x10 (182 lệnh, 72,49 bps)** > tn901 (332,58%@x10 DD60,2) > base (219%@x10).\n\n**Giả thuyết giao cho Claude:** **gt58** — \"gt34-MUA + lọc than_pv≥0,3 + trailing(3/0,2) + giữ 30 = 348,67%@x10, 9/9 năm, DD thấp hơn\" (con của gt34). Lý do: chỉ mua dip khi bar dip đã đóng cửa cao hơn mở (người mua quay lại) + trailing ăn hết con trend.\n\n**Việc tiếp đáng giá nhất:** **câu hỏi #30 — XAC NHAN 2021+ và MT5 tester** cho biến thể nâng cấp này, so trực tiếp với tn901/base trên cùng đoạn; nếu sống + DD thấp thì thay gt34 gốc làm chân chính. (Lưu ý: mọi thứ ở đây 100% còn trong kham_pha, và than_pv là bộ lọc hậu kiểm từ mo_xe_lenh nên phải qua xác nhận.)\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T14:21:14"
+}

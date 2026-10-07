@@ -69,6 +69,66 @@ def test_thieu_RAM_thi_TU_CHOI(monkeypatch):
             pass
 
 
+def _may_gia(**kw):
+    d = {"ram_trong_gb": 99, "cpu": 10, "python": 3, "dia_gb": 99}
+    d.update(kw)
+    return lambda: d
+
+
+def test_het_CAM_KET_thi_TU_CHOI_du_RAM_vat_ly_con_nhieu(monkeypatch):
+    """13/09: `ENOMEM: uv_spawn` khi RAM vat ly con 17 GB - vi tran CAM KET (RAM + file trang) het, khong phai RAM trong."""
+    monkeypatch.setattr(NS, "may", _may_gia(ram_trong_gb=17.0, commit_con_lai_gb=1.2))
+    with pytest.raises(NS.HetCho) as e:
+        with NS.xin("CPU_NANG", "thu"):
+            pass
+    assert "cam ket" in str(e.value) and "17.0" in str(e.value)
+
+
+def test_CAM_KET_du_thi_cho_qua_va_viec_khai_bao_RAM_can_them_cho_cam_ket(monkeypatch, tmp_path):
+    monkeypatch.setattr(NS, "_KHOA", tmp_path / "khoa")
+    monkeypatch.setattr(NS, "may", _may_gia(commit_con_lai_gb=20.0))
+    with NS.xin("CPU_NANG", "thu", ram_gb=4.0):                       # can max(4 + 1, 3) = 5 GB, con 20 -> qua
+        pass
+    monkeypatch.setattr(NS, "may", _may_gia(commit_con_lai_gb=10.0))
+    with NS.xin("CPU_NANG", "thu", ram_gb=9.0):                       # can 10 GB, con dung 10 -> qua (khong < )
+        pass
+    with pytest.raises(NS.HetCho):                                     # can 10,5 GB, con 10 -> truot
+        with NS.xin("CPU_NANG", "thu", ram_gb=9.5):
+            pass
+
+
+def test_khong_biet_cam_ket_thi_KHONG_chan_vi_None_khong_phai_0(monkeypatch, tmp_path):
+    """Linux / khong doc duoc cam ket -> None. Chan nham o day = cong tu choi TAT CA cho may khong co thong tin."""
+    monkeypatch.setattr(NS, "_KHOA", tmp_path / "khoa")
+    monkeypatch.setattr(NS, "may", _may_gia(commit_con_lai_gb=None))
+    with NS.xin("CPU_NANG", "thu"):
+        pass
+    monkeypatch.setattr(NS, "may", _may_gia())                         # khong co ca khoa -> cac ban gia lap cu van chay
+    with NS.xin("CPU_NANG", "thu"):
+        pass
+
+
+def test_may_thuc_tra_khoa_cam_ket_va_ngoai_Windows_la_None():
+    import os
+    m = NS.may()
+    assert "commit_con_lai_gb" in m
+    if os.name != "nt":
+        assert m["commit_con_lai_gb"] is None and NS._commit_con_lai() is None
+    else:
+        assert m["commit_con_lai_gb"] is None or m["commit_con_lai_gb"] > 0
+
+
+def test_bang_in_dong_cam_ket_khi_biet(monkeypatch):
+    dong = []
+    monkeypatch.setattr(NS, "may", _may_gia(commit_con_lai_gb=12.5))
+    NS.bang(in_ra=dong.append)
+    assert any("cam ket con 12.5 GB" in d for d in dong)
+    dong.clear()
+    monkeypatch.setattr(NS, "may", _may_gia(commit_con_lai_gb=None))
+    NS.bang(in_ra=dong.append)
+    assert not any("cam ket" in d for d in dong)
+
+
 def test_qua_nhieu_tien_trinh_thi_TU_CHOI(monkeypatch):
     monkeypatch.setattr(NS, "may", lambda: {"ram_trong_gb": 99, "cpu": 10,
                                             "python": 999, "dia_gb": 99})

@@ -1,0 +1,41 @@
+{
+ "id": "test_doc_chi_bao",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "test_regex_buf_khop_dong_if_mot_dong HONG: AssertionError: ",
+  "test_vung_tin_hieu_bat_canh_bao HONG: AssertionError: ",
+  "test_vung_tin_hieu_ve_vat_the_phai_co_if HONG: AssertionError: "
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "test_vung_tin_hieu_bat_gain_buffer_trong_if HONG: AssertionError: ",
+    "test_vung_tin_hieu_bat_alert_buy HONG: AssertionError: ",
+    "test_vung_tin_hieu_ton_trong_so_vung HONG: AssertionError: ",
+    "test_regex_buf_khop_dong_if_mot_dong HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "test_vung_tin_hieu_bat_gain_buffer_trong_if HONG: AssertionError: phai khoanh duoc vung chua cho gan buffer",
+    "test_regex_buf_khop_dong_if_mot_dong HONG: AssertionError: "
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "test_regex_buf_khop_dong_if_mot_dong HONG: AssertionError: ",
+    "test_vung_tin_hieu_bat_canh_bao HONG: AssertionError: ",
+    "test_vung_tin_hieu_ve_vat_the_phai_co_if HONG: AssertionError: "
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 69.58
+}

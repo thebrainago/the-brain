@@ -20,7 +20,7 @@ tien lai bao nhieu, rui ro the nao, dung vong veo hoc thuat nua"*.
 
 ## BA MUC PHAN QUYET - dat theo NGUONG CHU DU AN, khong theo thong ke
 
-  `CHAY_DUOC`  lai >= 20%/nam · sut giam <= 60% · >= 20 lenh/nam · khong chay
+  `CHAY_DUOC`  lai >= 20%/nam · sut giam < 80% · >= 20 lenh/nam · khong chay
   `MONG`       co lai nhung khong dat mot trong cac nguong tren
   `BO`         lo, hoac chay tai khoan
 
@@ -36,8 +36,14 @@ from __future__ import annotations
 import numpy as np
 
 #: Nguong cua chu du an, dat 04-05/09. Doi o day, khong rai rac trong script.
-MUC_LAI = 20.0          # %/nam tren von phai bo ra
-TRAN_SUT_GIAM = 60.0    # %
+#:
+#: TIEU CHI DUYET 25/09/2026, nguyen van chu du an: *"toi khong quan tam martingale
+#: hay dca hay la phuong phap gi. Toi trade don bay toi chap nhan rui ro, chi can co
+#: lai va maxdd duoi 80% la ok"*. `TRAN_SUT_GIAM` la MOT NGUON cho moi cong doc tran
+#: sut giam: `cong.py` (dieu kien 15), `cong_ra_tien.TRAN_DD`, `bang_he`,
+#: `nc_thi_nghiem.DD_TRAN`. Doi o day thi ca bon doi theo.
+MUC_LAI = 20.0          # %/nam tren von phai bo ra - MUC TIEU 04/09, duoi = MONG (van co lai)
+TRAN_SUT_GIAM = 80.0    # % - maxDD phai DUOI muc nay (25/09; truoc do 60)
 MIN_LENH_NAM = 20.0
 CENT = 100.0            # 1 USD chuan = 100 USD cent
 
@@ -69,9 +75,9 @@ def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
         ly_do.append("khong co lai")
     if lai_pct < MUC_LAI:
         ly_do.append("lai %.1f%%/nam < muc %.0f%%" % (lai_pct, MUC_LAI))
-    if abs(sut_giam_pct) > TRAN_SUT_GIAM:
-        ly_do.append("sut giam %.0f%% > tran %.0f%%" % (abs(sut_giam_pct),
-                                                        TRAN_SUT_GIAM))
+    if abs(sut_giam_pct) >= TRAN_SUT_GIAM:       # "maxdd DUOI 80%" -> 80 la truot
+        ly_do.append("sut giam %.0f%% >= tran %.0f%%" % (abs(sut_giam_pct),
+                                                         TRAN_SUT_GIAM))
     if so_lenh_nam < MIN_LENH_NAM:
         ly_do.append("chi %.1f lenh/nam - khong phai he thong" % so_lenh_nam)
 
@@ -99,9 +105,40 @@ def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
 
 
 def tu_ket_qua_luoi(r: dict, von_can: float, so_nam: float, **kw) -> dict:
-    """Ban tien cho ket qua cua `mo_phong_v2.mo_phong`."""
+    """Ban tien cho ket qua cua `mo_phong_v2.mo_phong`.
+
+    ## LOI DA SUA 19/09/2026
+
+    Ban cu tinh `sut_giam_pct = 100 * von_can / max(von_can, 1e-9)`, tuc LUON
+    BANG 100 tren moi dau vao. Hau qua: moi cau hinh luoi deu dinh "sut giam
+    100% > tran 60%" roi bi ha mot bac, voi mot ly do BIA RA. Mot he lai
+    25%/nam tren von da tinh du dem cung bi cham la MONG.
+
+    Khong ai bat duoc vi `cham_diem` la module MO COI (xem `tu_to_hop`): cong
+    nay chua tung chay that lan nao. Mot cong khong ai di qua thi khong ai biet
+    no hong - va no van in ra mot bang diem trong nhu that.
+
+    Dung ra: sut giam do bang SO TIEN sut sau nhat (`r["von"]` cua `mo_phong`)
+    chia cho SO VON PHAI BO RA. Bo ra 2.000 de om mot cu sut 1.000 la sut 50%
+    von, khong phai 100%.
+    """
+    dd = r.get("von")
+    von = max(float(von_can), 1e-9)
+    if dd is None:
+        # Khong co sut giam trong ket qua thi KHONG suy ra duoc - va cai nguy
+        # hiem la no LOT cong trong im lang: `abs(nan) > 60` la False, nen cong
+        # sut giam khong noi gi va cau hinh di tiep nhu da qua. Phai noi thanh
+        # loi, dung luat `CHUA_DO_DUOC` khac `AM` cua du an.
+        d = cham(lai_nam=r.get("lai_nam", 0.0), von_can=von_can,
+                 sut_giam_pct=float("nan"),
+                 so_lenh_nam=r.get("ro_nam", 0.0), so_nam=so_nam, **kw)
+        d["ly_do"] = list(d["ly_do"]) + [
+            "CHUA_DO_DUOC: ket qua khong co truong 'von' nen khong do duoc "
+            "sut giam"]
+        d["muc"] = "BO" if d["muc"] == "BO" else "MONG"
+        return d
     return cham(lai_nam=r.get("lai_nam", 0.0), von_can=von_can,
-                sut_giam_pct=100.0 * von_can / max(von_can, 1e-9),
+                sut_giam_pct=100.0 * float(dd) / von,
                 so_lenh_nam=r.get("ro_nam", 0.0), so_nam=so_nam, **kw)
 
 

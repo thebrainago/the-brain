@@ -65,3 +65,37 @@ __pycache__/
 
 # mau_thu/ PHAI len repo: bo mau .mq5 cho phien cloud do duoc
 !mau_thu/
+
+# cau noi hai may: cau hinh + ban duyet + cong tac dung khan la cua TUNG MAY (qwen/cau_may.py)
+config/cau.json
+config/cau_duyet.json
+CAU_DUNG
+
+# Cau noi hai may: khoa lan TESTER la trang thai CUA MAY, khong phai cua repo.
+# Day no len se lam may kia tuong lan dang ban vinh vien.
+viec/.khoa_tester
+viec/**/*.tam
+.venv/
+
+# cai dat Claude Code RIENG cua may (hook thu: b cau hook-cai)
+.claude/settings.local.json
+
+# giam sat may nha (nhan/may_nha.py): MOI MAU 5 phut o lai may, chi mau tom tat / bao cao moi len git
+nhat_ky/may_nha_mau.jsonl*
+# link rieng cua chu du an (nhom ngoai, link moi): repo la PUBLIC nen KHONG dua len git (nhan/link_nguon.py)
+link_rieng.txt
+config/link_rieng.txt
+du_lieu_cao/
+# BOT / CHUONG TRINH CUA NGUOI KHAC: repo la PUBLIC. EA nhi phan (.ex5 / .ex4), dll, bo cai dat, tep nen tai tu
+# MQL5 / Telegram / Drive chi o MAY NHA (du_lieu_cao/), KHONG BAO GIO len git: ban quyen cua nguoi ban + tai ve cong khai
+# la phat tan. Nhanh nhi phan cua ea_tho chi COPY tam vao terminal de tester chay roi xoa (nhan/ea_tho._chay_voi_slot).
+*.ex5
+*.ex4
+*.dll
+*.exe
+*.msi
+*.rar
+*.7z
+du_lieu_hh/
+
+config/dang_choi.flag

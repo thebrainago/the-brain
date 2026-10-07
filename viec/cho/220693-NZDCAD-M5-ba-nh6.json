@@ -1,0 +1,20 @@
+{
+ "ma": "220693-NZDCAD-M5-ba-nh6",
+ "muc_tieu": "quet luoi rong 3000 o NZDCAD M5 ban nhan hat 6",
+ "lan": "CPU",
+ "uu_tien": 8,
+ "han_phut": 120,
+ "ra_luc": "2026-10-07T12:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "quet_luoi",
+  "{\"ma\": \"NZDCAD\", \"khung\": \"M5\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"ban\", \"lot\": 0.01, \"kieu_lot\": \"nhan\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 6}"
+ ],
+ "vi_sao": "lap day CPU (don cu chi 4s/don)",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}

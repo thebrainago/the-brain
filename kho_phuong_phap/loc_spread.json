@@ -1,0 +1,46 @@
+{
+ "ma": "loc_spread",
+ "loai": "LOC",
+ "ten": "Loc spread",
+ "mo_ta": "Khong vao / khong them lenh khi spread vuot X point (CCBSN InpMaxSpread 3-500).",
+ "tham_so": [
+  {
+   "ten": "spread_toi_da",
+   "lop": "PHI",
+   "don_vi": "point",
+   "mien": [
+    10,
+    100,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Khong thay duoc tu deal (bao cao khong co spread); gian tiep: khong co lenh vao o gio spread rong (qua dem)."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py dung chi phi spread theo mo hinh, khong loc.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "loc_spread"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Chi phi that cua he luoi (spread rong luc roll-over) la bo loc nhay: thu cho luoi AUDCAD.",
+ "rui_ro": "Loc qua chat: bo qua nhip vao tot.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

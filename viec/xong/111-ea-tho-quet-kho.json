@@ -1,0 +1,37 @@
+{
+  "ma": "111-ea-tho-quet-kho",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "ma thoat 1",
+  "bang_chung": {
+    "ma_thoat": 1,
+    "giay": 2.6,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "ea_tho_quet",
+      "{\"eas\": [\"kho:*\"], \"doan\": \"kham_pha\", \"toi_da_lan\": 6}"
+    ],
+    "phien_ban_ma": "3b9680e+sua",
+    "dong_cuoi": [
+      "{",
+      " \"loi\": \"TesterDangBan: het slot ranh (4 slot deu dang chay). tester dang bi giu boi pid 6152 (ea_tho:752f03b0a7bedef8) tu 2026-10-07 07:34:08. Hai viec tester cung luc se ghi de ket qua cua nhau VA khong ai bao loi.\",",
+      " \"dau_vet\": [",
+      "  \"           ^^^^^^^^^^^^^^\",",
+      "  \"  File \\\"C:\\\\Research SP500\\\\lab\\\\nhan\\\\slot_tester.py\\\", line 207, in cap\",",
+      "  \"    raise KT.TesterDangBan(\",",
+      "  \"nhan.khoa_tester.TesterDangBan: het slot ranh (4 slot deu dang chay). tester dang bi giu boi pid 6152 (ea_tho:752f03b0a7bedef8) tu 2026-10-07 07:34:08. Hai viec tester cung luc se ghi de ket qua cua nhau VA khong ai bao loi.\"",
+      " ],",
+      " \"_giay\": 1.2",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T07:34:28"
+}

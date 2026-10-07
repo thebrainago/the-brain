@@ -1,0 +1,270 @@
+{
+ "trang_thai": "DAT",
+ "ma": "XAUUSD",
+ "pip": 0.1,
+ "hop_dong": 100000.0,
+ "spread_pip": null,
+ "lich_su": {
+  "so_lenh": 1549,
+  "so_ro": 306,
+  "so_ro_nhieu_tang": 256,
+  "tu": "2024-02-01 18:13:49",
+  "den": "2026-10-02 06:31:21",
+  "so_lenh_dang_mo": 0,
+  "so_dong_bo": 32
+ },
+ "buoc": {
+  "ty_le_ro_luoi_sach": 0.016,
+  "so_ro_nhieu_tang": 256,
+  "buoc": 2.05,
+  "buoc_cv": 0.875,
+  "he_so_buoc": 1.0,
+  "buoc_tran": null,
+  "buoc_theo_tang": {
+   "1": 2.05
+  },
+  "do_tin": "thap"
+ },
+ "lot": {
+  "kieu_lot": "phang",
+  "he_so_lot": 1.0,
+  "lot": 0.01,
+  "sai_so_lot": 0.068,
+  "lot_theo_tang": {
+   "1": 0.01,
+   "2": 0.01,
+   "3": 0.01,
+   "4": 0.02,
+   "5": 0.01,
+   "6": 0.01,
+   "7": 0.01,
+   "8": 0.01,
+   "9": 0.01,
+   "10": 0.01,
+   "11": 0.01,
+   "12": 0.01,
+   "13": 0.015,
+   "14": 0.01,
+   "15": 0.01,
+   "16": 0.01,
+   "17": 0.01,
+   "18": 0.015,
+   "19": 0.01,
+   "20": 0.01,
+   "21": 0.01,
+   "22": 0.02,
+   "23": 0.04
+  },
+  "do_tin": "vua"
+ },
+ "tp": {
+  "che_do_tp": "khong_ro",
+  "tp": null,
+  "chot_tien": null,
+  "so_ro_do_tp": 180,
+  "cv_tp_pip": 1.563,
+  "cv_chot_tien": 1.651,
+  "tp_pip_phan_vi": {
+   "10": 4.99,
+   "50": 83.45,
+   "90": 266.25
+  },
+  "chot_tien_phan_vi": {
+   "10": 775.5,
+   "50": 11840.0,
+   "90": 69126.0
+  },
+  "do_tin": "thap"
+ },
+ "cho_lui": {
+  "so_cap_ro": 304,
+  "vao_lai_ngay_ty_le": 0.01,
+  "cho_lui": null,
+  "gap_giay_trung_vi": 310138.5,
+  "lui_pip_phan_vi": {
+   "p25": -306.5,
+   "p50": -110.7,
+   "p75": 83.9
+  },
+  "do_tin": "khong_ro"
+ },
+ "tia": {
+  "so_ro_xet": 215,
+  "ty_le_cap": 0.014,
+  "tia_lenh": false,
+  "bien_cap": null,
+  "do_tin": "cao"
+ },
+ "tran_tang": {
+  "toi_da_thay": 20,
+  "so_ro_cham": 1,
+  "do_tin": "thap (chi la can duoi)"
+ },
+ "ro_lo": {
+  "ty_le": 0.3889,
+  "so": 119,
+  "tp_pip_tb": -138.74
+ },
+ "ro_dong_le_ty_le": 0.781,
+ "che_do": {
+  "gia_tri": "hai_chieu",
+  "ro_mua": 171,
+  "ro_ban": 135
+ },
+ "lich": {
+  "gio_bat_dau": {
+   "dem": {
+    "0": 3,
+    "1": 7,
+    "2": 11,
+    "3": 17,
+    "4": 15,
+    "5": 3,
+    "6": 1,
+    "7": 9,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "11": 7,
+    "12": 10,
+    "13": 10,
+    "14": 6,
+    "15": 42,
+    "16": 38,
+    "17": 33,
+    "18": 22,
+    "19": 7,
+    "20": 14,
+    "21": 13,
+    "22": 10,
+    "23": 1
+   },
+   "p_deu": 0.0,
+   "gio_khong_vao": [
+    6,
+    23
+   ],
+   "gio_dong_nhat": [
+    15,
+    16,
+    17
+   ]
+  },
+  "thu_bat_dau": {
+   "dem": {
+    "0": 60,
+    "1": 71,
+    "2": 65,
+    "3": 52,
+    "4": 58,
+    "5": 0,
+    "6": 0
+   }
+  },
+  "vao_dau_nen_ty_le": {
+   "5": 0.069,
+   "15": 0.033,
+   "60": 0.013
+  },
+  "vao_dau_nen": null
+ },
+ "tien_that": {
+  "so_lenh": 1549,
+  "loi_gop": 8587.74,
+  "hoa_hong": 0.0,
+  "swap": 0.0,
+  "rong": 8587.74,
+  "phi_tren_loi_gop": -0.0,
+  "ty_le_lenh_thang": 0.693,
+  "thang_tb": 16.038,
+  "thua_tb": -18.11,
+  "lenh_thua_lon_nhat": -162.31,
+  "ro": {
+   "so_ro": 306,
+   "so_ro_thua": 102,
+   "lo_ro_tong": -6827.08,
+   "ro_thua_lon_nhat": -324.74
+  },
+  "theo_do_sau": [
+   {
+    "so_lenh_trong_ro": "1",
+    "so_ro": 50,
+    "lai_rong": -65.9,
+    "ty_le_lai": -0.008,
+    "so_ro_thua": 26
+   },
+   {
+    "so_lenh_trong_ro": "2",
+    "so_ro": 32,
+    "lai_rong": -813.67,
+    "ty_le_lai": -0.095,
+    "so_ro_thua": 16
+   },
+   {
+    "so_lenh_trong_ro": "3",
+    "so_ro": 38,
+    "lai_rong": 325.15,
+    "ty_le_lai": 0.038,
+    "so_ro_thua": 10
+   },
+   {
+    "so_lenh_trong_ro": "4-5",
+    "so_ro": 97,
+    "lai_rong": 2844.6,
+    "ty_le_lai": 0.331,
+    "so_ro_thua": 26
+   },
+   {
+    "so_lenh_trong_ro": "6+",
+    "so_ro": 89,
+    "lai_rong": 6297.56,
+    "ty_le_lai": 0.733,
+    "so_ro_thua": 24
+   }
+  ],
+  "so_du": {
+   "von_dau": 630.34,
+   "so_dong_nap_rut": 32,
+   "nap": 4754.65,
+   "rut": -7554.56,
+   "so_du_cuoi_uoc": 5787.83,
+   "so_du_thap_nhat_lenh_da_dong": 590.07,
+   "lai_rong_tren_von_dau": 13.624,
+   "luu_y": "chi tinh lenh DA DONG: lo dang treo (equity) khong nam trong danh sach lenh; sut giam that lay tu trang signal, khong tu day"
+  }
+ },
+ "loai": "khong_ro_ho_co_che",
+ "don_lenh": {
+  "so_lenh_da_dong": 1549,
+  "giu_phut_phan_vi": {
+   "10": 2.5,
+   "50": 50.6,
+   "90": 738.1
+  },
+  "ty_le_thang": 0.693,
+  "pip_thang_tb": 83.78,
+  "pip_thua_tb": -102.63
+ },
+ "tham_so": {},
+ "ngoai_engine": [
+  "co ro dong LO (38.9% so ro): engine luoi.py chua mo phong cat lo ro (dung_lo_tong chua cai dat) - phat lai se THIEU phan thua do",
+  "78% ro dong LE TE (khong cung luc, khong phai cap tia lenh): trailing / cat tung lenh?",
+  "buoc giua cac tang bien thien manh (CV 0.88): co ve buoc DONG theo ATR/bien dong, engine chi co buoc co dinh + gian dan",
+  "khoang cach giua cac ro khong phai gia lui co dinh: cho theo gio / chi bao - xem dieu_kien_vao"
+ ],
+ "canh_bao": [
+  "NGUOI THANG la mau chon theo ket qua: luat boc duoc chi la GIA THUYET. Thu tren du lieu NGOAI cua so song cua ho (truoc ngay ho bat dau) roi moi tien toi xac nhan; cua so cua ho khong duoc la bang chung."
+ ],
+ "buoc_ke_tiep": [
+  "co bar cua ma nay (b nc cc boc_lich_su kem ma + khung) de can gio, tim dieu kien vao va phat lai"
+ ],
+ "khung": "M15",
+ "doan": "kham_pha",
+ "loai_ket_qua": "mo_ta",
+ "ghi_chu": [
+  "khong nap duoc bar XAUUSD M15 (ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\nA suitable version of pyarrow or fastparquet is required for parquet support.\nTrying to i): chi MO TA lich su, khong can gio / dieu kien vao / phat lai"
+ ],
+ "bar": null,
+ "tn_id": 27,
+ "_giay": 3.06
+}

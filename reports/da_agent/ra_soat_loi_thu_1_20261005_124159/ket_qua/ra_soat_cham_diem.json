@@ -1,0 +1,76 @@
+{
+ "id": "ra_soat_cham_diem",
+ "ok": true,
+ "du_lieu": {
+  "phat_hien": [
+   {
+    "ham": "tu_to_hop",
+    "muc_do": "CAO",
+    "van_de": "Sai logic quy doi don vi (Unit Mismatch) dẫn đến kết quả sai lệch nghiêm trọng. Docstring ghi rõ: `von_can = sut giam sau nhat (% cua 100 = so tien dem sut)` và `lai_nam = CAGR`. Tuy nhiên, trong code lại gán cứng `von = 20.0 * BO_DEM_SUT_GIAM` (tức 40.0) và truyền `sut_giam_pct=20.0` vào hàm `cham`. \n\nHàm `cham` tính `lai_pct = lai_nam / von * 100`. Nếu `lai_nam` là CAGR thực tế (ví dụ 5% trên vốn danh nghĩa 100), thì `von` phải tương ứng với rủi ro thực tế hoặc vốn bỏ ra để tính tỷ lệ lợi nhuận trên vốn bỏ ra. Việc cố định `von=40` bất chấp dữ liệu đầu vào `dong.get('cagr_dd20')` khiến chỉ số `lai_pct_nam` bị bóp méo hoàn toàn so với ý đồ 'ra tien bao nhieu'. Hơn nữa, nếu `BO_DEM_SUT_GIAM` thay đổi, `von_can` thay đổi nhưng `sut_giam_pct` vẫn giữ nguyên 20%, làm mất đi mối quan hệ nhân quả giữa rủi ro và vốn cần thiết.",
+    "de_xuat": "Tính toán `von_can` dựa trên dữ liệu thực tế từ `dong` (nếu có trường maxDD tuyệt đối) hoặc sửa lại công thức trong `cham` để phù hợp với giả định chuẩn hóa của `to_hop`. Hiện tại, logic này tạo ra con số ảo."
+   },
+   {
+    "ham": "tu_ket_qua_luoi",
+    "muc_do": "TB",
+    "van_de": "Rủi ro chia cho 0 hoặc lỗi logic khi xử lý dữ liệu thiếu. Khi `dd is None`, code gọi `cham(..., sut_giam_pct=float(\"nan\"))`. Trong hàm `cham`, dòng `if abs(sut_giam_pct) >= TRAN_SUT_GIAM:` sẽ trả về `False` vì `abs(nan) >= 80` là False. Do đó, điều kiện kiểm tra mức độ rủi ro bị bỏ qua một cách im lặng. Mặc dù sau đó code ép `d[\"muc\"] = \"MONG\"`, nhưng các trường khác như `hoi_von_thang` được tính bằng `von / lai_nam`. Nếu `lai_nam` cũng bằng 0 hoặc rất nhỏ do dữ liệu hỏng, `hoi_von_thang` có thể gây lỗi chia cho 0 hoặc trả về vô cùng mà không báo lỗi rõ ràng ở bước trước đó.",
+    "de_xuat": "Kiểm tra tường minh `np.isnan(sut_giam_pct)` hoặc `lai_nam <= 0` ngay trong `tu_ket_qua_luoi` trước khi gọi `cham`, hoặc đảm bảo `cham` xử lý an toàn giá trị NaN/Zero cho phép tính `hoi_von`."
+   },
+   {
+    "ham": "cham",
+    "muc_do": "TB",
+    "van_de": "Logic đánh giá 'CHAY_DUOC' chưa chặt chẽ với yêu cầu docstring. Docstring nêu tiêu chí: `>= 20 lenh/nam`. Code dùng `MIN_LENH_NAM = 20.0` và kiểm tra `if so_lenh_nam < MIN_LENH_NAM`. Điều này đúng. Tuy nhiên, biến `nguy_co_chay` được nhận vào nhưng KHÔNG được sử dụng trong logic phân loại `muc` (CHAY_DUOC/MONG/BO). Docstring nhấn mạnh `nguy_co_chay` là 'con so DUY NHAT co nghia' với lớp không cắt lỗ, nhưng nó chỉ được in ra chứ không ảnh hưởng đến quyết định 'có chạy được hay không'. Một chiến lược có xác suất cháy tài khoản 99% vẫn được gắn nhãn 'CHAY_DUOC' nếu thỏa mãn các điều kiện kia.",
+    "de_xuat": "Thêm điều kiện kiểm tra `nguy_co_chay` vào logic phân loại `muc`. Ví dụ: nếu `nguy_co_chay > ngưỡng_cho_phép` thì hạ xuống 'MONG' hoặc 'BO'."
+   },
+   {
+    "ham": "bang",
+    "muc_do": "THAP",
+    "van_de": "Lỗi hiển thị tiềm ẩn khi sắp xếp. Dòng `d.sort(key=lambda x: -(x[\"lai_pct_nam\"] if x[\"muc\"] != \"BO\" else -1e9))`. Nếu `lai_pct_nam` là `None` (do lỗi tính toán trước đó hoặc dữ liệu thiếu), việc lấy `-None` sẽ gây ra `TypeError`. Mặc dù hàm `cham` luôn trả về float cho `lai_pct_nam`, nhưng nếu có sự can thiệp bên ngoài hoặc lỗi logic trong `tu_to_hop` sinh ra `None`, vòng lặp sort sẽ crash.",
+    "de_xuat": "Đảm bảo `lai_pct_nam` luôn là số thực hợp lệ trước khi sort, hoặc dùng `or 0.0` trong lambda key."
+   }
+  ]
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "re",
+   "loi": []
+  }
+ ],
+ "phan_bien": {
+  "nhan_xet": [
+   {
+    "muc": "1 - tu_to_hop sai don vi",
+    "phan_dinh": "khong_ro",
+    "ly_do": "Phat hien chi ra dung rang von=20*BO_DEM_SUT_GIAM=40 va sut_giam_pct=20 la hang so, khong lay tu dong. Nhung docstring cua tu_to_hop noi ro day la quy uoc VON DANH NGHIA 100 va dung ban da quy ve DD 20% (cagr_dd20), nen von=40 va dd=20 la nhat quan co chu dinh, khong phai bia. Cau 'bop meo hoan toan' la phong dai; thuc te la quy uoc don vi. Tuy nhien y 'neu BO_DEM_SUT_GIAM doi thi von doi nhung sut_giam_pct giu 20%' la mot quan sat dung ve tinh khong nhat quan noi bo, dang ghi nhan la rui ro nho chu khong phai loi CAO."
+   },
+   {
+    "muc": "2 - tu_ket_qua_luoi NaN",
+    "phan_dinh": "dung",
+    "ly_do": "Dung: abs(nan)>=80 la False nen cong sut giam bi lot im lang; code co y thuc dieu nay (ghi trong docstring) va co ep muc xuong MONG, nhung van de hoi_von_thang = von/lai_nam*12 khi lai_nam>0 - neu lai_nam=0 thi tra None (an toan), khong chia cho 0. Phan 'co the chia cho 0' trong phat hien la khong chinh xac, nhung rui ro NaN lot cong la that."
+   },
+   {
+    "muc": "3 - cham khong dung nguy_co_chay",
+    "phan_dinh": "dung",
+    "ly_do": "Dung: tham so nguy_co_chay duoc nhan va chi dua vao output, khong tham gia vao logic phan loai muc. Docstring noi no la 'con so DUY NHAT co nghia' voi lop khong cat lo, nen mau thuan giua docstring va code la co that."
+   },
+   {
+    "muc": "4 - bang sort None",
+    "phan_dinh": "nghi_sai",
+    "ly_do": "Kho: cham luon tra ve round(lai_pct_nam,2) la float, khong bao gio None. Truong hop None chi xay ra neu co can thiep ben ngoai, khong phai loi that trong module. Muc do THAP la hop ly nhung van de la gia dinh, khong phai loi hien huu."
+   },
+   {
+    "muc": "(toan_tep) - thieu kiem tra dau vao",
+    "phan_dinh": "dung",
+    "ly_do": "Dung: cham khong kiem tra so_nam<=0, so_lenh_nam am, hay lai_nam/von_can la NaN. Vi du so_nam=0 trong tu_to_hop se cho so_lenh_nam=sl (khong chia), nhung neu so_nam am thi ket qua am. Khong co assert/raise nao. Day la thieu kiem tra dau vao that."
+   },
+   {
+    "muc": "(toan_tep) - lam tron von_can_cent",
+    "phan_dinh": "dung",
+    "ly_do": "Dung: von_can_cent = round(von/CENT,2) voi CENT=100.0. Voi von nho (vi du von=1e-9 khi von_can va ky_quy_dinh deu 0), von_can_cent=0.0 - con so vo nghia nhung khong bao loi. Ngoai ra von=max(...,1e-9) che di truong hop von_can=0 that su, co the lam lai_pct phong dai vo cuc ma khong canh bao."
+   }
+  ],
+  "tong": "Hai phat hien CAO/TB ve NaN lot cong va nguy_co_chay khong dung la dung; phat hien 'sai don vi' o tu_to_hop la phong dai vi docstring da quy uoc ro; phat hien sort None la gia dinh khong co that; con thieu kiem tra dau vao va lam tron von_can_cent la rui ro that chua duoc neu."
+ },
+ "dong": 28.29
+}

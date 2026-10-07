@@ -1,0 +1,65 @@
+{
+ "ma": "vao_tam_gia_ngay",
+ "loai": "VAO",
+ "ten": "Vao theo 'tam gia' = gia mo cua ngay",
+ "mo_ta": "Lay gia mo cua ngay lam moc; Sell khi gia len qua tam X, Buy khi gia xuong duoi tam X (danh nguoc xu huong); triet ly 'choi SAU bao': doi gia lech 30-40 gia roi moi tha.",
+ "tham_so": [
+  {
+   "ten": "khoang_lech_vao",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    3,
+    30,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "cho_phep_mua",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  },
+  {
+   "ten": "cho_phep_ban",
+   "lop": "CONG_TAC",
+   "don_vi": "",
+   "mien": null,
+   "ten_trong_set": null,
+   "ten_trong_engine": null,
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lenh dau cua ngay cach gia mo cua ngay mot khoang gan co dinh; Sell nam tren moc, Buy nam duoi moc."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "Can gia mo cua ngay: luoi.py chua co dac trung nay.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "vao_tam_gia_ngay"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoang cach toi gia mo cua ngay la mot dac trung moi cho tim_quy_luat; thu lam dieu kien vao cua he luoi.",
+ "rui_ro": "Ngay co 'bao' (vang di 40-60 gia trong 5-10 phut khong hoi): chuoi ket.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

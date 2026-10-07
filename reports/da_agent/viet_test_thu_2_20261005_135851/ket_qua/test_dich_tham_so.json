@@ -1,0 +1,32 @@
+{
+ "id": "test_dich_tham_so",
+ "ok": true,
+ "du_lieu": {
+  "code": "# -*- coding: utf-8 -*-\n\"\"\"Test cho nhan/dich_tham_so.py - chi doc nhung gi co that trong ma.\"\"\"\nimport math\n\nimport numpy as np\n\nfrom nhan import dich_tham_so as D\nfrom nhan import luoi as LU\n\n\ndef test_thieu_lop_rong_voi_ThamSo_hien_tai():\n    # Luat mot-lop: moi truong cua luoi.ThamSo phai co lop, va khong lop nao tro vao truong khong ton tai.\n    assert D.thieu_lop() == []\n\n\ndef test_LOP_THAM_SO_LUOI_tro_dung_lop_hop_le():\n    for truong, lop in D.LOP_THAM_SO_LUOI.items():\n        assert lop in D.LOP, (truong, lop)\n\n\ndef test_MO_TA_LOP_phu_het_LOP():\n    assert set(D.MO_TA_LOP) == set(D.LOP)\n\n\ndef test_hop_le_tra_False_voi_so_am_va_nan():\n    assert D._hop_le(1.0) is True\n    assert D._hop_le(0.0) is False\n    assert D._hop_le(-1.0) is False\n    assert D._hop_le(float(\"nan\")) is False\n    assert D._hop_le(float(\"inf\")) is False\n    assert D._hop_le(None) is False\n\n\ndef test_kiem_thi_truong_rong_khi_moi_truong_duong():\n    tt = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0)\n    assert D.kiem_thi_truong(tt) == []\n\n\ndef test_kiem_thi_truong_bao_khi_A_am_va_C_bang_khong():\n    tt = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=-1.0, C=0.0, pip=0.0001, pv=100000.0, von=1000.0)\n    loi = D.kiem_thi_truong(tt)\n    assert any(\"A\" in s for s in loi)\n    assert any(\"C\" in s for s in loi)\n\n\ndef test_ThiTruong_point_mac_dinh_bang_pip_chia_10():\n    tt = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0)\n    assert math.isclose(tt.point, 0.0001 / 10.0)\n\n\ndef test_do_sau_tra_None_khi_khong_co_gia():\n    tt = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0)\n    assert tt.do_sau(10, 0.9) is None\n\n\ndef test_do_sau_tra_None_khi_chuoi_qua_ngan():\n    n = 50\n    hi = np.linspace(1.0, 1.1, n)\n    lo = np.linspace(0.9, 1.0, n)\n    cl = np.linspace(0.95, 1.05, n)\n    tt = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0, gia=(hi, lo, cl))\n    # H + 200 > n nen khong tinh duoc\n    assert tt.do_sau(10, 0.9) is None\n\n\ndef test_do_sau_tra_so_duong_khi_du_du_lieu():\n    n = 400\n    rng = np.random.default_rng(0)\n    cl = 1.0 + np.cumsum(rng.normal(0.0, 0.001, n))\n    hi = cl + 0.001\n    lo = cl - 0.001\n    tt = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0, gia=(hi, lo, cl))\n    e = tt.do_sau(10, 0.9)\n    assert e is not None\n    assert e >= 0.0\n\n\ndef test_la_cung_thi_truong_khi_cung_hang_so_va_khong_co_gia():\n    a = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0)\n    b = D.ThiTruong(ma=\"Y\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0)\n    assert D._la_cung_thi_truong(a, b) is True\n\n\ndef test_la_cung_thi_truong_khac_khi_A_khac():\n    a = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=1.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0)\n    b = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=2.0, C=0.1, pip=0.0001, pv=100000.0, von=1000.0)\n    assert D._la_cung_thi_truong(a, b) is False\n\n\ndef test_tom_tat_tra_cac_khoa_co_ban():\n    tt = D.ThiTruong(ma=\"X\", khung_phut=60.0, A=0.001, C=0.0001, pip=0.0001, pv=100000.0, von=1000.0)\n    t = tt.tom_tat()\n    assert t[\"ma\"] == \"X\"\n    assert math.isclose(t[\"A_pip\"], 10.0)\n    assert math.isclose(t[\"C_pip\"], 1.0)\n    assert math.isclose(t[\"C_tren_A\"], 0.1)\n",
+  "ket_qua": {
+   "test_thieu_lop_rong_voi_ThamSo_hien_tai": "OK",
+   "test_LOP_THAM_SO_LUOI_tro_dung_lop_hop_le": "OK",
+   "test_MO_TA_LOP_phu_het_LOP": "OK",
+   "test_hop_le_tra_False_voi_so_am_va_nan": "OK",
+   "test_kiem_thi_truong_rong_khi_moi_truong_duong": "OK",
+   "test_kiem_thi_truong_bao_khi_A_am_va_C_bang_khong": "OK",
+   "test_ThiTruong_point_mac_dinh_bang_pip_chia_10": "OK",
+   "test_do_sau_tra_None_khi_khong_co_gia": "OK",
+   "test_do_sau_tra_None_khi_chuoi_qua_ngan": "OK",
+   "test_do_sau_tra_so_duong_khi_du_du_lieu": "OK",
+   "test_la_cung_thi_truong_khi_cung_hang_so_va_khong_co_gia": "OK",
+   "test_la_cung_thi_truong_khac_khi_A_khac": "OK",
+   "test_tom_tat_tra_cac_khoa_co_ban": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 31.22
+}

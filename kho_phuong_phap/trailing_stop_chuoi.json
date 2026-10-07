@@ -1,0 +1,58 @@
+{
+ "ma": "trailing_stop_chuoi",
+ "loai": "BAO_VE",
+ "ten": "Trailing stop ca chuoi",
+ "mo_ta": "Thoat bang trailing stop tu hoa von (SemiHFT: khong co TP chuoi; lai 2 gia tu hoa von thi dich trailing).",
+ "tham_so": [
+  {
+   "ten": "kich_hoat",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    100,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  },
+  {
+   "ten": "buoc_nhich",
+   "lop": "KC_TP",
+   "don_vi": "pip",
+   "mien": [
+    1,
+    20,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Tien thu khi dong bien thien rong (khong cum), dong boi [sl] o gia cao hon gia trung binh."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "trailing_stop_chuoi"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Thay TP co dinh bang trailing: thu tren nhung chuoi hoi manh.",
+ "rui_ro": "Cat qua som neu trailing sat.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

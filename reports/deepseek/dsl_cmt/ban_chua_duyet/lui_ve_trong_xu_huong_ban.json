@@ -1,0 +1,42 @@
+{
+ "ten": "lui_ve_trong_xu_huong_ema_rsi",
+ "ho": "xu_huong",
+ "chieu": -1,
+ "giu": 5,
+ "co_che": "Khi xu huong tang duoc xac nhan boi EMA nhanh nam tren EMA cham, viec gia giam ve vung RSI qua ban (RSI < 40) tao ra hieu ung 'gia re' tam thoi trong mot chu ky tang truong. Cac nha dau tu co chieu dai thuong chap nhan mua vao luc nay de bat loi nhap lai khi xu huong chinh tiep dien.",
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "ema",
+    "n": 9
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "ema",
+    "n": 21
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 40
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 60
+   }
+  }
+ ]
+}

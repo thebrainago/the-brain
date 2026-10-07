@@ -1,0 +1,48 @@
+{
+ "ma": "tp_chuoi_tien",
+ "loai": "THOAT",
+ "ten": "TP ca chuoi theo tien",
+ "mo_ta": "Dong ca chuoi khi tong lai (da tru phi) dat X USD, bat ke gia (Bigmouse 5 USD, HandATMX 10 USD, KawKaw, CCBSN).",
+ "tham_so": [
+  {
+   "ten": "tp_tien",
+   "lop": "TIEN",
+   "don_vi": "tien",
+   "mien": [
+    5,
+    200,
+    5
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Tien thu cua chuoi luc dong gan hang so trong khi khoang cach gia thay doi."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "chot_tien"
+  ],
+  "ghi_chu": "luoi.ThamSo.chot_tien (don vi: tien tren 0,01 lot).",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tp_chuoi_tien"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Chuoi dai thi X USD = it pip: thu theo tien vs theo pip.",
+ "rui_ro": "Chuoi dai chot som: bo phan lai lon cua xu huong.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

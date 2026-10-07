@@ -1,0 +1,289 @@
+# -*- coding: utf-8 -*-
+"""Kiem tra doc lap cho nhan/do_thong_minh.py - script assert thuong, KHONG phai pytest, luu dang van ban (.txt) de pytest khong thu.
+
+Cach chay (tu THU MUC GOC repo):  cp tai_lieu/ban_va_chua_test/kiem_do_thong_minh.txt /tmp/kiem_do_thong_minh.py && python3 /tmp/kiem_do_thong_minh.py
+Dau ra: bang PASS/FAIL cho cac phep kiem + cac phep thu DOT BIEN (sua co y mot dong trong ban sao cua module; moi dot bien PHAI lam it nhat
+mot phep kiem hong). Ma thoat 0 = tat ca dat va moi dot bien bi bat.
+Khi che do quyen cho chay pytest: chuyen thanh `test_do_thong_minh.py` va xoa ban .txt nay.
+Khong dung engine: ham do (`danh_gia`) la ham toan hoc gia co dinh cao nguyen / dinh nhon da biet."""
+import dataclasses
+import math
+import os
+import sys
+import types
+
+import numpy as np
+
+REPO = os.environ.get("REPO", os.getcwd())
+sys.path.insert(0, REPO)
+from nhan import luoi as LU            # noqa: E402
+
+SRC_PATH = os.path.join(REPO, "nhan", "do_thong_minh.py")
+
+
+def load_variant(name, repl=()):
+    s = open(SRC_PATH, encoding="utf-8").read()
+    for a, b in repl:
+        assert a in s, "mau khong co trong ma: %r" % a
+        s = s.replace(a, b)
+    mod = types.ModuleType(name)
+    mod.__file__ = SRC_PATH
+    sys.modules[name] = mod
+    exec(compile(s, name, "exec"), mod.__dict__)
+    return mod
+
+
+# ----------------------------------------------------------------------------------------------- ham do gia
+def goc(buoc=12.0, tp=18.0, tang=10, **kw):
+    return LU.ThamSo(buoc=buoc, tp=tp, tran_tang=tang, **kw)
+
+
+def mat_cong(ts, b0=14.0, r0=1.5, t0=14.0, cao=100.0):
+    """Mot nui tron: dinh o buoc b0, ti le tp/buoc r0, so tang t0 (do lech tinh theo ti le log)."""
+    z = (math.log(ts.buoc / b0) / 0.30) ** 2 + (math.log(ts.tp / ts.buoc / r0) / 0.40) ** 2 + (math.log(ts.tran_tang / t0) / 0.50) ** 2
+    return cao - z
+
+
+def dem(f):
+    """Boc ham do tung o thanh ham do danh sach, dem so lan goi va so o da duoc dua vao."""
+    st = {"goi": 0, "o": [], "lo": []}
+
+    def danh_gia(cac):
+        st["goi"] += 1
+        st["lo"].append(len(cac))
+        st["o"].extend(cac)
+        return [f(t) for t in cac]
+    return danh_gia, st
+
+
+def checks(M, kq=None):
+    """Tra ve list (ten, dat?, ghi chu); `kq` (neu co) duoc ghi dan de ngoai le giua chung khong lam mat cac ket qua truoc."""
+    kq = [] if kq is None else kq
+
+    def ck(ten, dat, ghi=""):
+        kq.append((ten, bool(dat), ghi))
+
+    # ---------------- cao_nguyen_mang
+    flat = np.full((5, 3, 3), 10.0)
+    sp = flat.copy()
+    sp[2, 1, 1] = 99.0
+    cn = M.cao_nguyen_mang(sp)
+    ck("cao nguyen: dinh nhon giua nen phang bi hat xuong", abs(cn[2, 1, 1] - 10.0) < 1e-9, "cn=%.2f" % cn[2, 1, 1])
+    hill = np.fromfunction(lambda i, j, k: 50.0 - 0.1 * ((i - 2) ** 2 + (j - 1) ** 2 + (k - 1) ** 2), (5, 3, 3))
+    ch = M.cao_nguyen_mang(hill)
+    ck("cao nguyen: doi rong giu gan nguyen dinh (median 7 gia tri = 49,9) va dinh khong doi cho",
+       abs(ch[2, 1, 1] - 49.9) < 1e-9 and int(np.argmax(ch)) == int(np.argmax(hill)),
+       "cn=%.2f" % ch[2, 1, 1])
+    nan = flat.copy()
+    nan[0, 0, 0] = np.nan
+    cn2 = M.cao_nguyen_mang(nan)
+    ck("cao nguyen: o NaN giu NaN, khong keo o khac", np.isnan(cn2[0, 0, 0]) and np.isfinite(cn2[0, 0, 1]) and abs(cn2[0, 0, 1] - 10.0) < 1e-9)
+    ck("cao nguyen: giu NaN o goc va dung median cua o + ke con lai", abs(cn2[1, 0, 0] - 10.0) < 1e-9)
+    try:
+        M.cao_nguyen_mang(np.zeros((3, 3)))
+        ck("cao nguyen: mang 2 truc bi tu choi", False)
+    except ValueError:
+        ck("cao nguyen: mang 2 truc bi tu choi", True)
+    # median: o ria chi co 4 lang gieng - tinh tay
+    d = np.zeros((3, 3, 3))
+    d[1, 1, 1] = 3.0
+    d[0, 1, 1] = 9.0
+    # o (1,1,1) co 6 lang gieng: 9,0,0,0,0,0 -> tap 7 gia tri {3,9,0,0,0,0,0} -> median 0
+    ck("cao nguyen: median 7 gia tri tinh dung", abs(M.cao_nguyen_mang(d)[1, 1, 1] - 0.0) < 1e-9)
+
+    # ---------------- ap_san / bien_the
+    g = goc()
+    ck("ap_san: khong doi gi khi san <= 0", M.ap_san(g, 0.0, 0.0) is g)
+    ck("ap_san: khong doi gi khi da tren san", M.ap_san(g, 5.0, 5.0) is g)
+    a = M.ap_san(g, 20.0, 30.0)
+    ck("ap_san: nang buoc va tp len san", a.buoc == 20.0 and a.tp == 30.0 and a.tran_tang == g.tran_tang and a.lot == g.lot)
+    b = M.bien_the(g, 2.0, 1.5, 2.0)
+    ck("bien_the: moi khoang cach x f_buoc", abs(b.buoc - 2 * g.buoc) < 1e-9 and abs(b.bien_cap - 2 * g.bien_cap) < 1e-9
+       and abs(b.cho_lui - 2 * g.cho_lui) < 1e-9 and abs(b.buoc_tran - 2 * g.buoc_tran) < 1e-9)
+    ck("bien_the: tp x f_buoc x f_tp", abs(b.tp - g.tp * 2.0 * 1.5) < 1e-9)
+    ck("bien_the: so tang x f_tam lam tron", b.tran_tang == 20)
+    ck("bien_the: khong dung vao co che (kieu lot, he so, che do, lot)",
+       (b.kieu_lot, b.he_so_lot, b.he_so_buoc, b.che_do, b.lot, b.tia_lenh) == (g.kieu_lot, g.he_so_lot, g.he_so_buoc, g.che_do, g.lot, g.tia_lenh))
+    ck("bien_the: tang toi thieu 2", M.bien_the(goc(tang=3), 1.0, 1.0, 0.1).tran_tang == 2)
+    ck("bien_the: tang toi da", M.bien_the(goc(tang=400), 1.0, 1.0, 10.0).tran_tang == M.DT.TOI_DA_TANG)
+    for xau in (0.0, -1.0, float("nan"), float("inf")):
+        try:
+            M.bien_the(g, xau, 1.0, 1.0)
+            ck("bien_the: he so %r bi tu choi" % xau, False)
+        except ValueError:
+            ck("bien_the: he so %r bi tu choi" % xau, True)
+    ck("bien_the: tp ap san tp", M.bien_the(g, 0.5, 0.6, 1.0, 0.0, 50.0).tp == 50.0)
+
+    # ---------------- dung_luoi
+    lc = M.dung_luoi(g)
+    ck("dung_luoi: kich thuoc 5x3x3", lc.kich_thuoc() == (5, 3, 3) and len(lc.cac_o()) == 45)
+    tam = lc.o[2][1][1]
+    ck("dung_luoi: o tam (1,1,1) bang chinh goc", dataclasses.astuple(tam) == dataclasses.astuple(g))
+    lc2 = M.dung_luoi(g, san_buoc=15.0, san_tp=22.0)
+    ck("dung_luoi: san ap cho MOI o", all(t.buoc >= 15.0 - 1e-9 and t.tp >= 22.0 - 1e-9 for t in lc2.cac_o()))
+    ck("dung_luoi: o bi ap san co the trung nhau",
+       len({dataclasses.astuple(t) for t in lc2.cac_o()}) < 45)
+
+    # ---------------- ke_hoach
+    k1 = M.ke_hoach(5)
+    k2 = M.ke_hoach(5)
+    ck("ke_hoach: tat dinh", k1 == k2 and len(k1["plan_hash"]) == 16)
+    ck("ke_hoach: so phep thu toi da = uv + tot x 45 + vong x 27", k1["so_phep_thu_toi_da"] == 5 + 3 * 45 + 2 * 27)
+    ck("ke_hoach: doi so ung vien / so tot / so vong thi doi dau van tay",
+       len({M.ke_hoach(5)["plan_hash"], M.ke_hoach(6)["plan_hash"], M.ke_hoach(5, so_tot=2)["plan_hash"],
+            M.ke_hoach(5, so_vong=1)["plan_hash"], M.ke_hoach(5, he_buoc=(0.5, 1.0, 2.0))["plan_hash"]}) == 5)
+    ck("ke_hoach: ghim dau van tay mac dinh (doi hang so -> phai co y)", M.ke_hoach(5)["plan_hash"] == "b7ae8c00918fa5b3", M.ke_hoach(5)["plan_hash"])
+
+    # ---------------- tim: tim dung nui tron, khong do trung, ton trong tran
+    ung = [goc(5.0, 7.5, 10), goc(12.0, 18.0, 10), goc(30.0, 45.0, 10)]
+    f, st = dem(mat_cong)
+    r = M.tim(ung, f)
+    ts = r.tot_nhat
+    ck("tim: tra ve o gan dinh nui (buoc)", abs(math.log(ts.buoc / 14.0)) < 0.25, "buoc=%.2f" % ts.buoc)
+    ck("tim: tra ve o gan dinh nui (ti le tp)", abs(math.log(ts.tp / ts.buoc / 1.5)) < 0.40, "tp/buoc=%.2f" % (ts.tp / ts.buoc))
+    ck("tim: tra ve o gan dinh nui (so tang)", abs(math.log(ts.tran_tang / 14.0)) < 0.40, "tang=%d" % ts.tran_tang)
+    ck("tim: khong do lai o da do", len({dataclasses.astuple(t) for t in st["o"]}) == len(st["o"]))
+    ck("tim: so phep thu khop so o da dua vao danh_gia", r.so_phep_thu == len(st["o"]))
+    ck("tim: khong qua so phep thu toi da cua ke hoach", r.so_phep_thu <= M.ke_hoach(3)["so_phep_thu_toi_da"])
+    ck("tim: plan_hash khop ke_hoach", r.plan_hash == M.ke_hoach(3)["plan_hash"])
+    ck("tim: top xep theo cao nguyen giam dan", all(r.top[i]["cao_nguyen"] >= r.top[i + 1]["cao_nguyen"] for i in range(len(r.top) - 1)))
+    ck("tim: top khong qua toi_da_top va khong trung", len(r.top) <= M.TOI_DA_LEN_TESTER
+       and len({dataclasses.astuple(t["tham_so"]) for t in r.top}) == len(r.top))
+    ck("tim: cac_o du mat (so phep thu) va moi o co nguon", len(r.cac_o) == r.so_phep_thu and all(c["nguon"] for c in r.cac_o))
+    ck("tim: ung vien vao truoc luoi, goi danh_gia theo lo (luoi 45 o, o tam trung ung vien -> 44 o moi)", st["lo"][0] == 3 and st["lo"][1] == 44 and st["lo"][2] == 44, str(st["lo"][:3]))
+    ck("tim: nui tron + o gan dinh hon moi ung vien", r.top[0]["diem"] > max(mat_cong(u) for u in ung))
+    ck("tim: lich su co ung_vien va luoi_thu_gon", [h["buoc"] for h in r.lich_su][:2] == ["ung_vien", "luoi_thu_gon"])
+    ck("tim: ly do dung ghi lai", bool(r.ly_do_dung))
+    # ung vien trung nhau chi do mot lan
+    f2, st2 = dem(mat_cong)
+    r2 = M.tim([goc(), goc(), goc(12.0, 18.0, 10)], f2, so_tot=1, so_vong=0)
+    ck("tim: ung vien trung chi do mot lan (1 ung vien + 44 o moi cua luoi)", r2.so_phep_thu == 45, str(r2.so_phep_thu))
+
+    # ---------------- tim: san ap cho moi o
+    f3, st3 = dem(mat_cong)
+    M.tim(ung, f3, san_buoc=20.0, san_tp=30.0, so_vong=1)
+    ck("tim: san ap cho moi o da do (ke ca ung vien)", all(t.buoc >= 20.0 - 1e-9 and t.tp >= 30.0 - 1e-9 for t in st3["o"]))
+
+    # ---------------- tim: ngan sach
+    f4, st4 = dem(mat_cong)
+    r4 = M.tim(ung, f4, ngan_sach=10)
+    ck("ngan sach: chi do ung vien, khong vuot", len(st4["o"]) == 3 and r4.so_phep_thu == 3 and "het ngan sach" in r4.ly_do_dung, r4.ly_do_dung)
+    ck("ngan sach: van tra top (tu ung vien)", len(r4.top) == 3)
+    f5, st5 = dem(mat_cong)
+    r5 = M.tim(ung, f5, ngan_sach=3)
+    ck("ngan sach bang so ung vien: do dung 3 o", len(st5["o"]) == 3)
+    f6, st6 = dem(mat_cong)
+    r6 = M.tim(ung, f6, ngan_sach=2)
+    ck("ngan sach < so ung vien: khong do gi, khong top, co ly do", len(st6["o"]) == 0 and r6.top == [] and r6.tot_nhat is None and "ngan sach" in r6.ly_do_dung)
+    f7, st7 = dem(mat_cong)
+    r7 = M.tim(ung, f7, ngan_sach=3 + 135 + 5)
+    ck("ngan sach cat o vong thu hep: khong do vuot, con ket qua", len(st7["o"]) <= 143 and len(r7.top) > 0, "%d %s" % (len(st7["o"]), r7.ly_do_dung))
+    # ----- dinh nhon vs doi rong: tim chon doi
+    hill_ctr = goc(12.0, 18.0, 10)
+    spike_ts = M.bien_the(hill_ctr, 1.4, 1.0, 1.0)         # mot o tren luoi cua ung vien giua
+
+    def nui_va_dinh(ts):
+        v = mat_cong(ts, b0=12.0, r0=1.5, t0=10.0, cao=60.0)
+        if abs(ts.buoc - spike_ts.buoc) < 1e-9 and abs(ts.tp - spike_ts.tp) < 1e-9 and ts.tran_tang == spike_ts.tran_tang:
+            return v + 90.0
+        return v
+    f8, st8 = dem(nui_va_dinh)
+    r8 = M.tim([hill_ctr], f8, so_tot=1, so_vong=0)
+    diem_tho_max = max(c["diem"] for c in r8.cac_o)
+    ck("dinh nhon: co mot o co diem tho cao hon nhieu", diem_tho_max > 100.0, "%.1f" % diem_tho_max)
+    ck("dinh nhon: tim KHONG chon dinh nhon ma chon doi rong", abs(r8.tot_nhat.buoc - spike_ts.buoc) > 1e-6, "buoc=%.2f" % r8.tot_nhat.buoc)
+    dn = next((t for t in r8.top if abs(t["tham_so"].buoc - spike_ts.buoc) < 1e-6 and t["tham_so"].tran_tang == spike_ts.tran_tang
+              and abs(t["tham_so"].tp - spike_ts.tp) < 1e-6), None)
+    ck("dinh nhon: cao nguyen cua dinh nhon duoi diem tho cua no (neu nam trong top)", dn is None or dn["cao_nguyen"] < 100.0)
+    sp_all = next((c for c in r8.cac_o if abs(c["tham_so"].buoc - spike_ts.buoc) < 1e-6 and c["tham_so"].tran_tang == spike_ts.tran_tang
+                   and abs(c["tham_so"].tp - spike_ts.tp) < 1e-6), None)
+    ck("dinh nhon: o nhon nam trong cac_o voi diem tho cao", sp_all is not None and sp_all["diem"] > 100.0)
+
+    f8b, st8b = dem(nui_va_dinh)
+    r8b = M.tim([hill_ctr], f8b, so_tot=1, so_vong=1)
+    thu1 = [c["tham_so"].buoc for c in r8b.cac_o if c["nguon"] == "thu_hep_1"]
+    ck("dinh nhon: vong thu hep tam tren doi rong (co o buoc = 12/1,25), khong tren dinh nhon", len(thu1) > 0 and any(abs(b - 12.0 / M.HE_SO_THU_HEP[0]) < 1e-9 for b in thu1)
+       and not any(abs(b - spike_ts.buoc / M.HE_SO_THU_HEP[0]) < 1e-9 for b in thu1), str(sorted(set(round(b, 2) for b in thu1))))
+    # ---------------- tim: lo (-100) khong lam sap
+    def co_chay(ts):
+        return -100.0 if ts.buoc < 10.0 else mat_cong(ts)
+    f9, st9 = dem(co_chay)
+    r9 = M.tim(ung, f9, so_vong=1)
+    ck("o chay tai khoan (-100) khong lam sap va khong duoc chon", r9.tot_nhat is not None and r9.tot_nhat.buoc >= 10.0 - 1e-9)
+    # ---------------- tim: danh_gia tra sai so luong
+    try:
+        M.tim(ung, lambda cac: [0.0] * (len(cac) + 1))
+        ck("danh_gia tra sai so luong bi tu choi", False)
+    except ValueError:
+        ck("danh_gia tra sai so luong bi tu choi", True)
+    try:
+        M.tim([], lambda cac: [0.0] * len(cac))
+        ck("khong co ung vien bi tu choi", False)
+    except ValueError:
+        ck("khong co ung vien bi tu choi", True)
+    # ---------------- tim: tat dinh
+    fa, sa = dem(mat_cong)
+    fb, sb = dem(mat_cong)
+    ra = M.tim(ung, fa)
+    rb = M.tim(ung, fb)
+    ck("tim: tat dinh (hai lan chay cho ket qua y het)", ra.so_phep_thu == rb.so_phep_thu and dataclasses.astuple(ra.tot_nhat) == dataclasses.astuple(rb.tot_nhat))
+    # ---------------- tim: dung khi cai thien duoi 3% (nui phang - luoi dau da tot)
+    def hang(ts):
+        return 50.0
+    fh, sh = dem(hang)
+    rh = M.tim(ung, fh)
+    ck("tim: cao nguyen phang -> dung som (cai thien duoi nguong)", "cai thien duoi" in rh.ly_do_dung, rh.ly_do_dung)
+    # ---------------- to_dict
+    d = ra.to_dict()
+    import json
+    ck("to_dict: tuan tu hoa JSON duoc", len(json.dumps(d)) > 100 and d["plan_hash"] == ra.plan_hash)
+    return kq
+
+
+def mutants():
+    """(ten, [(mau, thay)]) - moi dot bien phai lam it nhat mot phep kiem hong."""
+    return [
+        ("cao nguyen lay MAX thay vi median", [("ra[idx] = float(np.median(v))", "ra[idx] = float(np.max(v))")]),
+        ("cao nguyen bo qua lang gieng truc 3", [("for ax in range(3):", "for ax in range(2):")]),
+        ("cao nguyen cho NaN keo o lang gieng", [("if 0 <= j[ax] < d.shape[ax] and np.isfinite(d[tuple(j)]):", "if 0 <= j[ax] < d.shape[ax]:")]),
+        ("khong ap san", [("    nb = max(ts.buoc, san_buoc) if san_buoc > 0 else ts.buoc", "    nb = ts.buoc")]),
+        ("tp khong nhan f_buoc", [('kw["tp"] = goc.tp * f_buoc * f_tp', 'kw["tp"] = goc.tp * f_tp')]),
+        ("tran tang khong chan duoi 2", [("max(2, round(goc.tran_tang * f_tam))", "max(0, round(goc.tran_tang * f_tam))")]),
+        ("khong dedupe o da do", [("if k not in da_do and k not in thay:", "if True:")]),
+        ("ngan sach sai dau (cho vuot 1 o)", [("if tran is not None and len(da_do) + len(moi) > tran:", "if tran is not None and len(da_do) + len(moi) > tran + 1:")]),
+        ("khong thu hep (so vong luon 0)", [("for r in range(max(0, int(so_vong))):", "for r in range(0):")]),
+        ("chon o theo diem tho thay vi cao nguyen", [("kk = (v, diem_cua(ts))", "kk = (diem_cua(ts), v)")]),
+        ("ke_hoach khong dua so tot vao dau van tay", [('"so_tot": int(so_tot), ', "")]),
+        ("top khong sap theo cao nguyen", [("key=lambda t: (-t[\"cao_nguyen\"], -t[\"diem\"]))[:max(1, int(toi_da_top))]", "key=lambda t: (t[\"diem\"], t[\"cao_nguyen\"]))[:max(1, int(toi_da_top))]")]),
+        ("o tam luoi khong phai goc (he so buoc 1,0 -> 1,1)", [("HE_SO_BUOC = (0.5, 0.7, 1.0, 1.4, 2.0)", "HE_SO_BUOC = (0.5, 0.7, 1.1, 1.4, 2.0)")]),
+    ]
+
+
+def main():
+    import importlib
+    M = importlib.import_module("nhan.do_thong_minh")
+    res = checks(M)
+    n_sai = 0
+    for ten, dat, ghi in res:
+        print("%s  %s%s" % ("PASS" if dat else "FAIL", ten, ("   [" + ghi + "]") if ghi and not dat else ""))
+        n_sai += (not dat)
+    print("--- ban goc: %d phep kiem, %d hong" % (len(res), n_sai))
+    ok = n_sai == 0
+    song = 0
+    for i, (ten, repl) in enumerate(mutants()):
+        r = []
+        try:
+            V = load_variant("dtm_mut_%d" % i, repl)
+            checks(V, r)
+            hong = [t for t, d, _ in r if not d]
+        except Exception as e:                     # noqa: BLE001 - dot bien lam sap giua chung cung tinh la bi bat
+            hong = [t for t, d, _ in r if not d] + ["(ngoai le) %s" % type(e).__name__]
+        bat = bool(hong)
+        song += (not bat)
+        print("%s  dot bien: %s%s" % ("BAT " if bat else "SONG", ten, ("   <- " + hong[0]) if bat else ""))
+    print("--- %d dot bien, %d song sot" % (len(mutants()), song))
+    return 0 if ok and song == 0 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

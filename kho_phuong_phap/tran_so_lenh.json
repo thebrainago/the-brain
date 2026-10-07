@@ -1,0 +1,48 @@
+{
+ "ma": "tran_so_lenh",
+ "loai": "LOT",
+ "ten": "Tran so lenh cua chuoi",
+ "mo_ta": "Ngung them lenh khi chuoi dat N lenh (Bigmouse 36, BlackDragon 99, NuTi 9 / 60 / 100, CCBSN InpMax*Orders 5-1000).",
+ "tham_so": [
+  {
+   "ten": "tran_lenh",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    5,
+    40,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": null
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Do sau chuoi bi cat o mot gia tri co dinh (nhieu chuoi dung o N)."
+ ],
+ "engine": {
+  "trang_thai": "co",
+  "co": [
+   "tran_tang"
+  ],
+  "ghi_chu": "luoi.ThamSo.tran_tang.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "tran_so_lenh"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Khoi nen; quet tran_tang voi cac khoi lot.",
+ "rui_ro": "Cham tran ma gia van di nguoc: ket o lot lon.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)"
+}

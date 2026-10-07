@@ -1,0 +1,31 @@
+{
+ "ten": "rsi_vung_bull_tiep_tuc_guong",
+ "ho": "xu_huong",
+ "co_che": "RSI vượt 40 xác nhận động lượng mua quay lại trong khi giá nằm trên EMA200 đảm bảo xu hướng tăng dài hạn vẫn còn nguyên vẹn, tạo điều kiện cho việc mua thêm hoặc giữ vị thế.",
+ "chieu": -1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "rsi",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 60
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "ema",
+    "n": 200
+   }
+  }
+ ],
+ "ra": []
+}

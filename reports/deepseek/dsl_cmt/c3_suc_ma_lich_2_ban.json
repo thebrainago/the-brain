@@ -1,0 +1,40 @@
+{
+ "ten": "c3_suc_ma_lich_2_ban",
+ "ho": "lich",
+ "chieu": -1,
+ "giu": 3,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "ngay_trong_tuan"
+   },
+   "phep": "<=",
+   "phai": {
+    "hang": 3
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": "<",
+   "phai": {
+    "hang": 20
+   }
+  }
+ ],
+ "co_che": "CMT SUC_MANH_XU_HUONG + LICH (nhap, may dien)"
+}

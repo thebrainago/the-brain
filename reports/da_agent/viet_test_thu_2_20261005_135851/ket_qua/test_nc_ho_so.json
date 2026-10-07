@@ -1,0 +1,36 @@
+{
+ "id": "test_nc_ho_so",
+ "ok": true,
+ "du_lieu": {
+  "code": "# -*- coding: utf-8 -*-\n\"\"\"Test cho nhan/nc_ho_so.py - chi kiem hanh vi that thay trong ma.\"\"\"\nfrom __future__ import annotations\n\nimport tempfile\nfrom pathlib import Path\n\nfrom nhan import nc_ho_so as NC\n\n\n# --------------------------------------------------------------------------------------------------- _ascii / _o / _cat\ndef test_ascii_bo_dau_va_giu_chu():\n    assert NC._ascii(\"Ho so BOT\") == \"Ho so BOT\"\n    assert NC._ascii(\"dau\") == \"dau\"\n\n\ndef test_o_thay_pipe_va_gop_khoang_trang():\n    assert NC._o(\"a|b\") == \"a/b\"\n    assert NC._o(\"  a   b  \") == \"a b\"\n\n\ndef test_cat_ngan_khong_doi():\n    assert NC._cat(\"abc\", 10) == \"abc\"\n\n\ndef test_cat_dai_them_dau_biet():\n    s = NC._cat(\"x\" * 100, 10)\n    assert len(s) <= 10\n    assert s.endswith(\"...\")\n\n\n# --------------------------------------------------------------------------------------------------- _ten_tu_tep / _ten_sach\ndef test_ten_tu_tep_bo_duoi():\n    assert NC._ten_tu_tep(Path(\"tester_vamge10k_kp_deals.csv.gz\")) == \"tester_vamge10k_kp_deals\"\n\n\ndef test_ten_sach_thay_ky_tu_la():\n    assert NC._ten_sach(\"a b/c\") == \"a_b_c\"\n\n\ndef test_ten_sach_rong_tra_bot():\n    assert NC._ten_sach(\"\") == \"bot\"\n\n\n# --------------------------------------------------------------------------------------------------- _duong\ndef test_duong_tu_choi_chuoi_rong():\n    try:\n        NC._duong(\"\", \"lenh\")\n        assert False, \"phai loi\"\n    except ValueError:\n        pass\n\n\ndef test_duong_tu_choi_ngoai_thu_muc_du_an():\n    try:\n        NC._duong(\"/etc/hosts\", \"lenh\")\n        assert False, \"phai loi\"\n    except ValueError:\n        pass\n\n\ndef test_duong_tu_choi_khong_phai_chuoi():\n    try:\n        NC._duong(123, \"lenh\")\n        assert False, \"phai loi\"\n    except ValueError:\n        pass\n\n\n# --------------------------------------------------------------------------------------------------- _cat_tep\ndef test_cat_tep_ngan_giu_nguyen():\n    s = \"a\\nb\\n\"\n    assert NC._cat_tep(s) == s\n\n\ndef test_cat_tep_dai_bi_cat_va_co_ghi_chu():\n    s = (\"dong\\n\" * 20000)\n    ra = NC._cat_tep(s)\n    assert len(ra) <= NC.TEP_TOI_DA\n    assert \"cat bot\" in ra\n\n\n# --------------------------------------------------------------------------------------------------- _viet\ndef test_viet_tao_tep_trong_thu_muc_ho_so():\n    goc = NC.THU_MUC\n    with tempfile.TemporaryDirectory() as td:\n        NC.THU_MUC = Path(td)\n        try:\n            p = NC._viet(\"x.md\", \"noi dung\\n\")\n            assert Path(td, \"x.md\").is_file()\n            assert p == \"x.md\"\n        finally:\n            NC.THU_MUC = goc\n\n\n# --------------------------------------------------------------------------------------------------- chay: kiem tra tham so\ndef test_chay_them_co_khoa_la_thi_loi():\n    try:\n        NC.chay(\"reports/fixture/tester_vamge10k_kp_deals.csv.gz\", them=[{\"lenh\": \"x\", \"sai\": 1}])\n        assert False, \"phai loi\"\n    except ValueError:\n        pass\n\n\ndef test_chay_qua_nhieu_cap_thi_loi():\n    them = [{\"lenh\": \"reports/fixture/tester_vamge10k_kp_deals.csv.gz\"}] * NC.TOI_DA_CAP\n    try:\n        NC.chay(\"reports/fixture/tester_vamge10k_kp_deals.csv.gz\", them=them)\n        assert False, \"phai loi\"\n    except ValueError:\n        pass\n\n\ndef test_chay_he_so_don_vi_khong_hop_le_thi_loi():\n    try:\n        NC.chay(\"reports/fixture/tester_vamge10k_kp_deals.csv.gz\", he_so_don_vi=-1)\n        assert False, \"phai loi\"\n    except ValueError:\n        pass\n\n\ndef test_chay_them_khong_phai_dict_thi_loi():\n    try:\n        NC.chay(\"reports/fixture/tester_vamge10k_kp_deals.csv.gz\", them=[1, 2])\n        assert False, \"phai loi\"\n    except ValueError:\n        pass\n",
+  "ket_qua": {
+   "test_ascii_bo_dau_va_giu_chu": "OK",
+   "test_o_thay_pipe_va_gop_khoang_trang": "OK",
+   "test_cat_ngan_khong_doi": "OK",
+   "test_cat_dai_them_dau_biet": "OK",
+   "test_ten_tu_tep_bo_duoi": "OK",
+   "test_ten_sach_thay_ky_tu_la": "OK",
+   "test_ten_sach_rong_tra_bot": "OK",
+   "test_duong_tu_choi_chuoi_rong": "OK",
+   "test_duong_tu_choi_ngoai_thu_muc_du_an": "OK",
+   "test_duong_tu_choi_khong_phai_chuoi": "OK",
+   "test_cat_tep_ngan_giu_nguyen": "OK",
+   "test_cat_tep_dai_bi_cat_va_co_ghi_chu": "OK",
+   "test_viet_tao_tep_trong_thu_muc_ho_so": "OK",
+   "test_chay_them_co_khoa_la_thi_loi": "OK",
+   "test_chay_qua_nhieu_cap_thi_loi": "OK",
+   "test_chay_he_so_don_vi_khong_hop_le_thi_loi": "OK",
+   "test_chay_them_khong_phai_dict_thi_loi": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 29.05
+}

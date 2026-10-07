@@ -1,0 +1,659 @@
+# -*- coding: utf-8 -*-
+"""nc_cong_cu.py - BO CONG CU cua nha nghien cuu AI: MOT danh sach, ba cach goi (Claude API, Claude Code, nguoi).
+
+Chu du an 25/09/2026: *"The Brain la cong cu va cac phuong an cho cau. Phan
+thuc thi chinh va suy luan chinh phai do AI nam quyen."*
+
+File nay la cho cau noi do thanh MA. Moi cong cu la mot phep do cua lab (chay
+he, quet, mo xe lenh, tim quy luat, niem phong...) co ten, mo ta noi RO KHI NAO
+goi, va JSON schema. Cung mot danh sach phuc vu:
+
+    Claude API       `nc_tac_tu.chay_vong` gui `SCHEMA_API` lam `tools`
+    Claude Code      `python b.py nc cc <ten> '<json>'` (hoac `@file.json`)
+    nguoi / script   `goi(ten, dau_vao)`
+
+Nen AI nao ngoi ghe nha nghien cuu - mot vong API 24/7, mot phien Claude Code
+dang chat voi chu du an, hay may tu lai khi het token - deu dung DUNG bo do
+va DUNG so tay. Khong co duong tat nao ghi ket qua ma khong qua day.
+
+Cong cu KHONG quyet dinh nghien cuu gi. Cong cu do, cham DAT/AM/CHUA_DO_DUOC
+bang code, ghi so tay. AI quyet dinh.
+"""
+from __future__ import annotations
+
+import json
+import os
+import sys
+import time
+import traceback
+from pathlib import Path
+from typing import Any, Callable
+
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from nhan import (nc_dac_trung as DT, nc_du_lieu as NDL, nc_so_tay as ST,
+                  nc_thi_nghiem as TN)
+
+LAB = Path(__file__).resolve().parent.parent
+THU_MUC_EA = LAB / "reports" / "nc_ea"
+HANG_DOI_TESTER = LAB / "reports" / "nc_hang_doi_tester.jsonl"
+YEU_CAU_SEEKER = LAB / "reports" / "nc_yeu_cau_seeker.jsonl"
+GIOI_HAN_KY_TU = 9000
+
+_SPEC = {"type": "object", "description": (
+    "Khai bao DSL cua ngu phap co che: {ten, co_che (MOT CAU >= 25 ky tu: ai tra tien "
+    "va vi sao), ho, chieu (1 mua / -1 ban), giu (so bar), vao: [dieu kien VA], ra: "
+    "[dieu kien HOAC]}. Xem hien chuong muc NGU PHAP.")}
+_QT = {"type": "object", "description": (
+    "Luat quan tri vi the cho dap_quan_tri (tuy chon): sl_atr, tp_atr, hue_tu_atr, "
+    "trail_tu_atr, trail_buoc, thoat_bar, chot_phan. Vd {\"sl_atr\": 2, \"tp_atr\": 3}.")}
+_MA = {"type": "string", "description": "Ma tai san, vd AUDCAD, XM_US500CASH, TONG_HOP_LOC_1"}
+_KHUNG = {"type": "string", "description": "Khung: M15, M30, H1, H4, D1 ..."}
+_GT = {"type": "integer", "description": "id gia thuyet trong so tay (de dem phep thu theo dong)"}
+
+
+def _tuong_doi(p: Path) -> str:
+    """Duong dan tuong doi voi lab neu nam trong lab (bao cao doc duoc tren moi may)."""
+    try:
+        return str(Path(p).resolve().relative_to(LAB))
+    except ValueError:
+        return str(p)
+
+
+def _cc(ten: str, mo_ta: str, thuoc_tinh: dict, bat_buoc: list, ham: Callable) -> dict:
+    return {"ten": ten, "mo_ta": mo_ta,
+            "schema": {"type": "object", "properties": thuoc_tinh, "required": bat_buoc},
+            "ham": ham}
+
+
+# ------------------------------------------------------------- CAI DAT
+def _xem_so_tay(so_dong: int = 12, **_) -> dict:
+    return {"so_tay": ST.tom_tat_md(int(so_dong))}
+
+
+def _danh_sach(**_) -> dict:
+    return {"tai_san": NDL.danh_sach(), "dac_trung": DT.mo_ta(),
+            "doan": {k: "%d%%-%d%%" % (a * 100, b * 100) for k, (a, b) in NDL.DOAN.items()}}
+
+
+def _ghi_gia_thuyet(cau: str = "", vi_sao: str = "", ho: str = "", pham_vi=None,
+                    cha: int | None = None, uu_tien: float | None = None,
+                    gt_id: int | None = None, trang_thai: str | None = None,
+                    ket_luan: str | None = None, nguon: str = "ai", **_) -> dict:
+    if gt_id is not None:
+        return {"gia_thuyet": ST.cap_nhat_gia_thuyet(int(gt_id), trang_thai, ket_luan, uu_tien)}
+    if len(cau.strip()) < 15 or len(vi_sao.strip()) < 15:
+        raise ValueError("gia thuyet can `cau` (phat bieu kiem duoc) va `vi_sao` (ai tra "
+                         "tien / co che) - moi cai >= 15 ky tu")
+    i = ST.them_gia_thuyet(cau, vi_sao, ho, pham_vi, cha, nguon,
+                           0.5 if uu_tien is None else float(uu_tien))
+    return {"gt_id": i}
+
+
+def _ghi_hieu_biet(cau: str = "", do_tin: float = 0.5, bang_chung: list | None = None,
+                   pham_vi=None, bac: int | None = None, ly_do: str = "", **_) -> dict:
+    if bac is not None:
+        ST.bac_hieu_biet(int(bac), ly_do or "bi bac", bang_chung)
+        return {"da_bac": int(bac)}
+    if len(cau.strip()) < 15:
+        raise ValueError("hieu biet can mot cau >= 15 ky tu")
+    return {"hb_id": ST.them_hieu_biet(cau, do_tin, bang_chung, pham_vi)}
+
+
+def _ghi_cau_hoi(cau: str = "", vi_sao: str = "", uu_tien: float = 0.5,
+                 dong: int | None = None, tra_loi: str = "", trang_thai: str = "XONG",
+                 gt_id: int | None = None, nguon: str = "ai", **_) -> dict:
+    if dong is not None:
+        ST.dong_cau_hoi(int(dong), tra_loi or "-", trang_thai)
+        return {"da_dong": int(dong), "trang_thai": trang_thai}
+    if len(cau.strip()) < 10:
+        raise ValueError("cau hoi can >= 10 ky tu")
+    return {"ch_id": ST.them_cau_hoi(cau, vi_sao, uu_tien, nguon, gt_id)}
+
+
+def _xuat_mq5(ten: str, khung: str, cac: list, **_) -> dict:
+    """Chi xuat khai bao DA DAT niem phong, tren ma that. Ghi .mq5 + mot dong hang doi tester."""
+    from nhan import dich_mq5 as DM
+    specs, ma_list, loi, don_bay = [], set(), [], {}
+    for c in cac:
+        ma = str(c.get("ma", "")).upper()
+        if NDL.la_tong_hop(ma):
+            loi.append("%s la chuoi TONG HOP - chi de hieu chuan, khong bao gio ra tester" % ma)
+            continue
+        s = TN.chuan_hoa_spec(c["spec"])
+        vt = ST.van_tay("niem_phong", ma, str(khung).upper(),
+                        {k: s[k] for k in ("vao", "ra", "chieu", "giu")},
+                        TN.chuan_hoa_quan_tri(c.get("quan_tri")))
+        np_ = ST.mot("SELECT trang_thai, ket_qua FROM niem_phong WHERE van_tay=?", vt)
+        if np_.get("trang_thai") != "DAT":
+            loi.append("%s/%s: chua DAT niem phong (%s) - xuat truoc la de tester nhin doan "
+                       "niem phong" % (ma, s["ten"], np_.get("trang_thai") or "chua mo"))
+            continue
+        if c.get("quan_tri"):
+            loi.append("%s: luat quan tri chua co duong dich MQL5 trong ban nay (dich_mq5_qtvt "
+                       "can noi) - xuat phan VAO, ghi chu quan tri vao hang doi" % s["ten"])
+        specs.append(s)
+        ma_list.add(ma)
+        try:     # don bay niem phong da CHOT truoc khi mo - tester phai chay dung muc do
+            ck = (json.loads(np_.get("ket_qua") or "{}").get("tien") or {}).get("o_don_bay_cam_ket")
+        except Exception:
+            ck = None
+        don_bay["%s/%s" % (ma, s["ten"])] = ck
+    if not specs:
+        return {"trang_thai": "CHUA_DO_DUOC", "ly_do": loi or ["khong co khai bao nao"]}
+    nguon, dat = DM.sinh_ea(specs, ten=ten, khung=str(khung).upper())
+    THU_MUC_EA.mkdir(parents=True, exist_ok=True)
+    f = THU_MUC_EA / ("%s.mq5" % ten)
+    f.write_text(nguon, encoding="utf-8")
+    HANG_DOI_TESTER.parent.mkdir(parents=True, exist_ok=True)
+    with HANG_DOI_TESTER.open("a", encoding="utf-8") as g:
+        g.write(json.dumps({"luc": ST.bay_gio(), "ea": _tuong_doi(f), "khung": khung,
+                            "ma": sorted(ma_list), "co_che": [s["ten"] for s in dat],
+                            "quan_tri": [c.get("quan_tri") for c in cac],
+                            "don_bay_cam_ket": don_bay, "tran_dd_pct": TN.DD_TRAN * 100,
+                            "trang_thai": "CHO_TESTER"}, ensure_ascii=False) + "\n")
+    return {"trang_thai": "DAT", "ea": _tuong_doi(f), "so_co_che": len(dat),
+            "canh_bao": loi, "don_bay_cam_ket": don_bay,
+            "buoc_tiep": "may chu du an: chay tester (Model=4) cho hang doi "
+                         "reports/nc_hang_doi_tester.jsonl, lot theo don_bay_cam_ket; DAT that "
+                         "= co lai va maxDD < %.0f%% trong tester" % (TN.DD_TRAN * 100)}
+
+
+def _yeu_cau_seeker(chu_de: str, tu_khoa: list, vi_sao: str = "", **_) -> dict:
+    YEU_CAU_SEEKER.parent.mkdir(parents=True, exist_ok=True)
+    with YEU_CAU_SEEKER.open("a", encoding="utf-8") as g:
+        g.write(json.dumps({"luc": ST.bay_gio(), "chu_de": chu_de, "tu_khoa": tu_khoa[:30],
+                            "vi_sao": vi_sao, "trang_thai": "CHO"}, ensure_ascii=False) + "\n")
+    return {"da_xep": len(tu_khoa[:30]), "file": _tuong_doi(YEU_CAU_SEEKER)}
+
+
+def _ea_tho_kham(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    kw.pop("vong_id", None)
+    return EAT.kham(**kw)
+
+
+def _ea_tho_chay(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    return EAT.chay(**kw)
+
+
+def _ea_tho_quet(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    return EAT.quet(**kw)
+
+
+def _ea_tho_tinh(**kw) -> dict:
+    from nhan import ea_tho as EAT
+    return EAT.tinh(**kw)
+
+
+def _hieu_chuan_luoi(vong_id=None, **kw) -> dict:
+    from nhan import hieu_chuan_luoi as HCL
+    return HCL.hieu_chuan(vong_id=vong_id, **kw)
+
+
+def _ho_so_bot(vong_id=None, **kw) -> dict:
+    from nhan import nc_ho_so as NHS
+    return NHS.chay(vong_id=vong_id, **kw)
+
+
+_EA = {"type": "string", "description": (
+    "EA cong khai: duong toi file .mq5, hoac 'kho:<so thu tu>' / 'kho:<tu trong tieu de>' trong "
+    "reports/ea/kho.json (EA da tai tu MQL5 Code Base), hoac duong toi file .ex5 (EA NHI PHAN khong ma nguon: chay "
+    "duoc voi ma + khung + bo_set, la hop den; .ex4 cua MT4 khong chay duoc tren MT5)")}
+
+
+CONG_CU: list[dict] = [
+    _cc("xem_so_tay",
+        "Doc HO SO NGHIEN CUU: cau hoi mo (nguoi dat xep truoc), gia thuyet dang song, thi "
+        "nghiem tot nhat, hieu biet co bang chung, phep thu da tieu theo ma. Goi o DAU moi chu "
+        "ky neu ho so trong loi nhac da cu, va truoc khi mo mot huong moi de khong dao lai.",
+        {"so_dong": {"type": "integer", "description": "so dong moi muc (mac dinh 12)"}}, [],
+        _xem_so_tay),
+    _cc("danh_sach_du_lieu",
+        "Liet ke tai san co du lieu (so nam, co spread khong), bon chuoi TONG_HOP co dap an "
+        "(chi de hieu chuan), va danh sach DAC TRUNG dung trong dieu kien. Goi khi chua biet "
+        "ma nao dung duoc.", {}, [], _danh_sach),
+    _cc("ho_so_tai_san",
+        "Tinh cach cua (ma, khung) tren doan kham pha: tu tuong quan, ti so phuong sai (hoi quy "
+        "hay quan tinh), cum bien dong, mua vu theo thu/thang/gio (t-stat), chi phi so voi bien "
+        "do bar, moc mua-giu. Goi TRUOC khi dat gia thuyet tren mot ma moi.",
+        {"ma": _MA, "khung": _KHUNG}, ["ma", "khung"],
+        lambda ma, khung, vong_id=None, **_: TN.ho_so(ma, khung, vong_id=vong_id)),
+    _cc("tim_quy_luat",
+        "NOI SINH: tim dieu kien (1-2 dac trung) lam loi suat h bar toi lech khoi 0 SAU CHI "
+        "PHI, tren doan kham pha, co null xoay vong hieu chuan ca qua trinh do tim (p_null). "
+        "Tra ve luat kem `spec` DSL chay duoc ngay. Goi khi muon AI tu tim luat vao lenh tu du "
+        "lieu thay vi tu tai lieu. Luat p_null > 0,1 = nhieu cung de ra.",
+        {"ma": _MA, "khung": _KHUNG,
+         "chan_troi": {"type": "array", "items": {"type": "integer"},
+                       "description": "so bar giu (mac dinh [1,3,5,10])"},
+         "so_null": {"type": "integer", "description": "so lan null (mac dinh 200)"},
+         "dac_trung": {"type": "array", "items": {"type": "string"},
+                       "description": "chi dung cac dac trung nay (tuy chon)"},
+         "gt_id": _GT}, ["ma", "khung"],
+        lambda ma, khung, chan_troi=(1, 3, 5, 10), so_null=200, dac_trung=None, gt_id=None,
+        vong_id=None, **_: TN.tim_quy_luat(ma, khung, chan_troi, so_null, dac_trung, gt_id, vong_id)),
+    _cc("thu_co_che",
+        "Chay MOT he (khai bao DSL + luat quan tri tuy chon) tren doan KHAM PHA voi chi phi that. "
+        "DAT = CO LAI sau moi phi (tieu chi chu du an: co lai + maxDD < 80%, phuong phap nao "
+        "cung duoc). Tra ve lenh (so lenh, ti le thang, rr, ky vong bps, t), TIEN (CAGR tot nhat "
+        "voi maxDD < 80% va don bay do), nhan_canh_bao (hon moc, kieu martingale, duoi lo - "
+        "khong chan), theo nam. Chay y het lan nua thi tra ket qua cu.",
+        {"ma": _MA, "khung": _KHUNG, "spec": _SPEC, "quan_tri": _QT, "gt_id": _GT},
+        ["ma", "khung", "spec"],
+        lambda ma, khung, spec, quan_tri=None, gt_id=None, vong_id=None, **_:
+        TN.danh_gia(ma, khung, spec, quan_tri, "kham_pha", gt_id, vong_id)),
+    _cc("thu_lo_co_che",
+        "Chay NHIEU he DSL (moi tep .json trong reports/deepseek/<thu_muc>/) tren CUNG MOT ma+khung, "
+        "doan KHAM PHA, trong MOT lan goi: du lieu nap mot lan, ghi so tay tung he nhu thu_co_che. "
+        "Dung thay cho hang tram don le (toi uu may nha). Tra ve bang gon: ten, trang_thai, so lenh, "
+        "ky vong bps, CAGR duoi tran. `tu`/`den` cat lat theo ten tep (thu tu chu cai). `loc` = chuoi con trong ten tep.",
+        {"ma": _MA, "khung": _KHUNG, "thu_muc": {"type": "string", "description": "dsl_cmt | dsl_hh"},
+         "loc": {"type": "string"}, "ten": {"type": "array", "items": {"type": "string"}, "description": "ten tep (khong .json) cu the"}, "tu": {"type": "integer"}, "den": {"type": "integer"},
+         "gt_id": _GT}, ["ma", "khung", "thu_muc"],
+        lambda ma, khung, thu_muc, loc="", ten=None, tu=0, den=10_000, gt_id=None, vong_id=None, **_:
+        _thu_lo(ma, khung, thu_muc, loc, int(tu), int(den), gt_id, vong_id, ten)),
+    _cc("quet_tham_so",
+        "Quet luoi tham so cua mot he tren kham pha va doc HINH DANG: CAO_NGUYEN (nhieu o lan "
+        "can cung CO LAI - dang tin) hay CAI_GAI (mot o dep le loi - cuc dai ngau nhien). `luoi` = "
+        "{duong_dan_tham_so: [gia tri]} (duong dan nhu vao0_phai_hang, vao0_trai_n, giu; them "
+        "tien to qt. cho luat quan tri, vd qt.sl_atr). Bo trong -> luoi tu dong. Moi o la mot "
+        "phep thu - quet co chu dich, khong quet cho co.",
+        {"ma": _MA, "khung": _KHUNG, "spec": _SPEC, "quan_tri": _QT,
+         "luoi": {"type": "object", "description": "{tham_so: [gia tri,...]}"},
+         "toi_da_o": {"type": "integer", "description": "tran so o (mac dinh 150)"}, "gt_id": _GT},
+        ["ma", "khung", "spec"],
+        lambda ma, khung, spec, quan_tri=None, luoi=None, toi_da_o=150, gt_id=None,
+        vong_id=None, **_: TN.quet(ma, khung, spec, luoi, quan_tri, "kham_pha", gt_id, vong_id,
+                                   int(toi_da_o))),
+    _cc("mo_xe_lenh",
+        "HOC TU LENH DUNG/LENH SAI: chay he tren kham pha, tach tung lenh, so ngu canh tai bar "
+        "tin hieu cua lenh thang va lenh thua -> bo loc de xuat (kem spec_de_xuat da gan dieu "
+        "kien) voi p_null; va MFE/MAE -> goi y luat quan tri (SL/hue/trailing/thoat bar). Goi "
+        "khi mot he co y tuong dung nhung ky vong yeu/am, hoac truoc khi tinh chinh quan tri.",
+        {"ma": _MA, "khung": _KHUNG, "spec": _SPEC, "quan_tri": _QT,
+         "so_null": {"type": "integer", "description": "so lan null (mac dinh 200)"}, "gt_id": _GT},
+        ["ma", "khung", "spec"],
+        lambda ma, khung, spec, quan_tri=None, so_null=200, gt_id=None, vong_id=None, **_:
+        TN.mo_xe(ma, khung, spec, quan_tri, int(so_null), gt_id, vong_id)),
+    _cc("thu_luoi",
+        "He LUOI khong can tin hieu vao (nhan/luoi.py - engine cua ket qua AUDCAD +13,26%/nam "
+        "holdout voi TIA LENH). tham_so: buoc, tp, tran_tang, che_do (mua|ban|hai_chieu), lot, "
+        "cho_lui, kieu_lot (phang|cong|nhan), he_so_lot, tia_lenh, bien_cap, cap_moi_bar, "
+        "chot_tien, he_so_buoc, buoc_tran (dung_lo_tong CHUA cai dat: bi tu choi, khong bo qua am tham). "
+        "Martingale/DCA hop le (chu du an). "
+        "DAT = co lai sau phi, khong chay tai khoan o lot dang thu. Tra he so lot cham tran "
+        "maxDD 80% (tinh CHINH XAC tren duong equity) va LO TREO o lot do. Ma: AUDCAD y het "
+        "hang so cu; cap FX chuan (USDCHF, AUDCHF, EURUSD...) lay phi tu mo hinh chi phi cua "
+        "doan (ra kem quy_cach + chi_phi_do_tin; KHAI chi la nhan); JPY/vang chi khi "
+        "config/luoi_quy_cach.json co quy cach do that; chi so/crypto/exotic bi tu choi. Ma "
+        "ngoai AUDCAD CHUA doi chieu voi MT5 tester: doc nhu xep hang. chot_tien la TIEN "
+        "(bao gia / 0,01 lot), khong phai pip. Dung khung M15/M5: luoi song bang duong di "
+        "trong bar.",
+        {"ma": _MA, "khung": _KHUNG, "tham_so": {"type": "object"},
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
+         "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
+         "gt_id": _GT}, ["ma", "khung"],
+        lambda ma, khung, tham_so=None, doan="kham_pha", von=10000.0, gt_id=None, vong_id=None,
+        **_: TN.danh_gia_luoi(ma, khung, tham_so, doan, float(von), gt_id, vong_id)),
+    _cc("xac_nhan",
+        "Chay mot he DA CHON tren doan XAC NHAN (60%-80%, chua dung toi luc kham pha). So lan "
+        "nhin bi dem theo dong gia thuyet. Chi goi cho bien the ban da chot tren kham pha - "
+        "khong dung de do tim.",
+        {"ma": _MA, "khung": _KHUNG, "spec": _SPEC, "quan_tri": _QT, "gt_id": _GT},
+        ["ma", "khung", "spec", "gt_id"],
+        lambda ma, khung, spec, gt_id, quan_tri=None, vong_id=None, **_:
+        TN.danh_gia(ma, khung, spec, quan_tri, "xac_nhan", gt_id, vong_id)),
+    _cc("niem_phong",
+        "PHEP THU CUOI: mo doan NIEM PHONG (20% cuoi) cho MOT khai bao da dong bang. Moi khai "
+        "bao chi mo mot lan; moi dong gia thuyet toi da 3 lan. Chan: CO LAI sau phi, chi phi do "
+        "duoc, >= 20 lenh, va maxDD < 80% o DON BAY CAM KET (chot tren kham pha + xac nhan truoc "
+        "khi mo). Nhan: hon moc, tang 2, duoi lo, so phep thu, Sharpe giam phat, cong that. "
+        "Chi goi khi he da qua xac_nhan va ban san sang chap nhan ket qua.",
+        {"ma": _MA, "khung": _KHUNG, "spec": _SPEC, "quan_tri": _QT, "gt_id": _GT},
+        ["ma", "khung", "spec", "gt_id"],
+        lambda ma, khung, spec, gt_id, quan_tri=None, vong_id=None, **_:
+        TN.niem_phong(ma, khung, spec, quan_tri, gt_id, vong_id)),
+    _cc("niem_phong_luoi",
+        "PHEP THU CUOI cho he LUOI (nhan/luoi.py: luoi / DCA / martingale deu hop le): mo doan NIEM PHONG (20% cuoi) cho MOT "
+        "khai bao da dong bang = tham_so luoi + von (KHONG gom lot). Moi khai bao chi mo mot lan; moi dong gia thuyet toi da "
+        "3 lan. Truoc khi cham doan niem phong, CODE chot LOT tu du lieu da mo (kham_pha + xac_nhan): lot lon nhat ma "
+        "engine cho co lai, khong stop-out, maxDD < 80%, don bay dinh <= 10; khong chot duoc (lai am / hong o lot nho nhat / "
+        "chi phi KHAI / tham so sai) thi tra CHUA_DO_DUOC va niem phong CHUA bi dung toi. Roi chay MOT lan o lot do tren doan "
+        "niem phong. DAT = co lai sau phi (ke ca lo treo cuoi doan) VA khong stop-out VA maxDD < 80% o lot cam ket, >= 20 "
+        "lenh, chi phi khong KHAI. Nhan: phi an bao nhieu lai, hon moc, chi phi chi o muc SAN, da qua xac_nhan chua. "
+        "ghi_chu = dieu nguoi goi can nguoi doc biet (vd doan niem phong chong len doi song cua con tin hieu goc nen chi la "
+        "LAM LAI, khong doc lap) - duoc ghi vao ket qua. GIOI HAN: luoi.py chua doi chieu voi MT5 tester o ma nao; DAT = "
+        "canh bac ky vong duong do TREN MO PHONG. Chi goi khi he da qua xac_nhan va ban san sang chap nhan ket qua.",
+        {"ma": _MA, "khung": _KHUNG, "tham_so": {"type": "object"},
+         "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
+         "gt_id": _GT, "ghi_chu": {"type": "string"}},
+        ["ma", "khung", "tham_so", "gt_id"],
+        lambda ma, khung, tham_so, gt_id, von=10000.0, ghi_chu="", vong_id=None, **_:
+        TN.niem_phong_luoi(ma, khung, tham_so, float(von), gt_id, vong_id, ghi_chu)),
+    _cc("ghep_danh_muc",
+        "Ghep 2-8 he (co the khac ma/khung) cung rui ro, do tuong quan ngay va TIEN cua ca ro "
+        "(CAGR tot nhat voi maxDD < 80%). Goi khi da co vai chan song rieng le - chan am nhung "
+        "nguoc pha cung co the lam ro tot len.",
+        {"chan": {"type": "array", "items": {"type": "object"},
+                  "description": "[{ma, khung, spec, quan_tri?}]"},
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]}}, ["chan"],
+        lambda chan, doan="kham_pha", vong_id=None, **_: TN.ghep_danh_muc(chan, doan, vong_id)),
+    _cc("ghi_gia_thuyet",
+        "Ghi gia thuyet MOI (cau, vi_sao = ai tra tien, ho, pham_vi, cha) -> gt_id; HOAC cap nhat "
+        "mot gia thuyet (gt_id + trang_thai MO/DANG_THU/TRIEN_VONG/BAC_BO + ket_luan). Moi huong "
+        "nghien cuu phai co gia thuyet de phep thu duoc dem theo dong.",
+        {"cau": {"type": "string"}, "vi_sao": {"type": "string"}, "ho": {"type": "string"},
+         "pham_vi": {"type": "object"}, "cha": _GT, "uu_tien": {"type": "number"},
+         "gt_id": _GT, "trang_thai": {"type": "string"}, "ket_luan": {"type": "string"}}, [],
+        _ghi_gia_thuyet),
+    _cc("ghi_hieu_biet",
+        "Ghi mot dieu DA HOC DUOC (do_tin 0..1, bang_chung = danh sach tn_id). Khong co bang "
+        "chung thi do tin bi kep <= 0,3. Hoac bac mot hieu biet cu (bac = hb_id, ly_do). Goi "
+        "cuoi moi phat hien hoac moi lan mot ket qua lat nguoc dieu cu.",
+        {"cau": {"type": "string"}, "do_tin": {"type": "number"},
+         "bang_chung": {"type": "array", "items": {"type": "integer"}},
+         "pham_vi": {"type": "object"}, "bac": {"type": "integer"}, "ly_do": {"type": "string"}},
+        [], _ghi_hieu_biet),
+    _cc("ghi_cau_hoi",
+        "Them cau hoi vao CHUONG TRINH NGHIEN CUU (cau, vi_sao, uu_tien) - hoac dong cau hoi "
+        "(dong = ch_id, tra_loi, trang_thai XONG/BO). Cuoi moi chu ky: dong cau da tra loi, mo "
+        "cau moi dang gia nhat.",
+        {"cau": {"type": "string"}, "vi_sao": {"type": "string"}, "uu_tien": {"type": "number"},
+         "dong": {"type": "integer"}, "tra_loi": {"type": "string"},
+         "trang_thai": {"type": "string"}, "gt_id": _GT}, [], _ghi_cau_hoi),
+    _cc("xuat_mq5",
+        "Xuat cac khai bao DA DAT niem phong (ma that) thanh MOT EA .mq5 + xep hang doi MT5 "
+        "tester tren may chu du an. Buoc bat buoc truoc demo: MT5 tester moi la do that.",
+        {"ten": {"type": "string"}, "khung": _KHUNG,
+         "cac": {"type": "array", "items": {"type": "object"},
+                 "description": "[{ma, spec, quan_tri?}]"}}, ["ten", "khung", "cac"], _xuat_mq5),
+    _cc("yeu_cau_seeker",
+        "Nho SEEKER di tim tai lieu/ma nguon cho mot chu de cu the (tu khoa da ngon ngu). Goi khi "
+        "mot huong can y tuong ma du lieu chua goi y duoc - vd mot kieu quan tri lenh chua co.",
+        {"chu_de": {"type": "string"}, "tu_khoa": {"type": "array", "items": {"type": "string"}},
+         "vi_sao": {"type": "string"}}, ["chu_de", "tu_khoa"], _yeu_cau_seeker),
+    _cc("ea_tho_kham",
+        "Xem MOT EA cong khai (MQL5 Code Base / Market) TRUOC khi chay: co phai CHIEN LUOC khong hay chi la cong "
+        "cu (replay, dong lenh, giam sat, bang bam tay - khong tu vao lenh), tai san/khung nham toi KEM BANG CHUNG, "
+        "input so, luoi tham so nho quanh mac dinh cua tac gia, cua so ngay kham_pha/xac_nhan/niem_phong da dong "
+        "bang, va tep ngoai EA can ma may chua co (thieu_tep: .mqh cua tac gia trong dau <>, chi bao iCustom...). "
+        "Thuan, khong chay tester. Goi truoc ea_tho_chay: EA co phieu khong duoc dat len EURUSD.",
+        {"ea": _EA, "tieu_de": {"type": "string", "description": "tieu de/mo ta trang nguon neu .mq5 khong co"},
+         "mo_ta": {"type": "string"},
+         "co_san": {"type": "array", "items": {"type": "string"},
+                    "description": "ma co du lieu tren may (mac dinh: tu kho du lieu)"}},
+        ["ea"], _ea_tho_kham),
+    _cc("ea_tho_chay",
+        "Chay MOT EA cong khai THANG tren MT5 tester (tick that, Model=4) tren mot doan DA DONG BANG, cham bang "
+        "tieu chi chu du an: co lai sau phi VA maxDD < 80%, bat ke martingale/luoi/DCA. doan: kham_pha (tu do) | "
+        "xac_nhan (ham y nguyen, dem so lan nhin) | niem_phong (MOT lan cho mot bo ea+ma+khung+tham_so, can gt_id "
+        "va mot xac_nhan DAT dung bo tham so do, toi da 3 lan/dong gia thuyet). tham_so = input cua EA doi so voi "
+        "mac dinh cua tac gia; sai ten input / gia tri khong phai so bi TU CHOI (MT5 bo qua im lang). bo_set = file "
+        ".set CUA TAC GIA chay nguyen van (bool / chuoi / enum), loai tru voi tham_so; moi .set la mot bo = mot phep "
+        "thu - chay nhieu .set duoi CUNG gt_id de so phep thu duoc dem dung. EA .ex5 (khong ma nguon) chi nhan bo_set "
+        "hoac mac dinh, can terminal TAT 'Allow DLL imports'. Chi chay duoc o may nha co MT5 - o cloud tra loi ro "
+        "'can may nha' (hay giao qua b cau). Hong ha tang (khong doc duoc bao cao, tester chet) KHONG tinh phep thu, KHONG tieu lan mo. Ket "
+        "qua DAT la 'canh bac co ky vong duong do duoc', chua phai chan ly.",
+        {"ea": _EA, "ma": _MA, "khung": _KHUNG,
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan", "niem_phong"]},
+         "tham_so": {"type": "object", "description": (
+             "{ten_input: gia_tri_so}; bo trong = mac dinh cua tac gia. Khoa PHAI la input cua EA, gia tri PHAI la "
+             "so (bool = 0/1): sai ten / chuoi bi tu choi (MT5 se bo qua im lang)")},
+         "bo_set": {"type": "string", "description": (
+             "duong toi file .set cua tac gia: chay NGUYEN VAN (ke ca bool / chuoi / enum), van tay gom sha cua .set, "
+             "moi .set = mot bo = mot phep thu. Loai tru voi tham_so")},
+         "gt_id": _GT},
+        ["ea", "ma", "khung"], _ea_tho_chay),
+    _cc("ea_tho_quet",
+        "Quet NHIEU EA cong khai tren doan kham_pha: phan loai het (bo cong cu, bo EA ma may khong co tai san, bo EA "
+        "THIEU_TEP can .mqh/chi bao ma may chua cai), "
+        "roi chay chien luoc o ma/khung nham toi, moi cap mot gia thuyet moi (tu ghi so tay). Dung de duyet kho EA "
+        "da tai ('kho:*') - dung thay cho viet script lap. toi_da_lan gioi han so luot tester THAT (ket qua da co "
+        "tra tu so tay, khong tinh); phan con lai nam o 'con_lai': goi lai de di tiep. Bang gon.",
+        {"eas": {"type": "array", "items": {"type": "string"},
+                 "description": "['kho:*'] = ca kho; hoac danh sach duong .mq5 / 'kho:<so>'"},
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
+         "toi_da_lan": {"type": "integer", "description": "so luot tester that toi da (mac dinh 6)"},
+         "co_san": {"type": "array", "items": {"type": "string"}}},
+        ["eas"], _ea_tho_quet),
+    _cc("ea_tho_tinh",
+        "Tinh chinh MOT EA cong khai quanh MAC DINH cua tac gia: luoi nho (moi lan doi MOT input chu ky/buoc/nguong, "
+        "khong dong lot/magic/gio) tren kham_pha, chon bo DAT co CAGR cao nhat roi xac_nhan DUNG bo do mot lan. Moi "
+        "diem luoi la mot phep thu duoc dem theo dong gia thuyet. KHONG cham niem_phong - do la buoc rieng bang "
+        "ea_tho_chay. Goi sau khi ea_tho_quet cho thay EA do co lai o mac dinh hoac gan co lai.",
+        {"ea": _EA, "ma": _MA, "khung": _KHUNG, "gt_id": _GT,
+         "so_bien": {"type": "integer", "description": "so input toi da duoc doi (mac dinh 3)"},
+         "toi_da_lan": {"type": "integer", "description": "so diem luoi toi da, gom mac dinh (mac dinh 7)"},
+         "xac_nhan": {"type": "boolean", "description": "false = dung o bo tot nhat tren kham_pha"}},
+        ["ea", "ma", "khung"], _ea_tho_tinh),
+    _cc("boc_lich_su",
+        "BOC LOGIC tu LICH SU LENH cua nguoi thang (MQL5 Signals / Myfxbook / bao cao tester) - MO TA, khong do loi nhuan. "
+        "Dau vao: `tep` (CSV/JSON/HTML luu tu trang, duong dan trong thu muc du an) hoac `lenh` (list dict: mo, dong, chieu, lot, "
+        "gia_mo, gia_dong). Ra: he luoi/DCA hay don lenh; tham_so cua luoi.ThamSo (buoc, he_so_buoc, lot, kieu_lot, tp hoac "
+        "chot_tien, cho_lui, tia_lenh, bien_cap, che_do, tran_tang = can duoi) kem do tin; hanh vi engine CHUA mo phong "
+        "(ngoai_engine); gio lech may chu uoc bang chinh gia; dieu kien vao (dac trung nc_dac_trung, dich vong null da sua "
+        "theo so dac trung) va phat lai qua luoi.chay so voi lich su that. Bar CHI tu doan kham_pha/xac_nhan cua (ma, khung); "
+        "lich su roi vao niem_phong thi chi mo ta. Nguoi thang la mau chon theo ket qua: tham_so/luat boc duoc la GIA THUYET - "
+        "dua sang thu_luoi / thu_co_che tren doan NGOAI cua so song cua ho. trang_thai DAT o day = da mo ta duoc, khong phai co lai. "
+        "Tep export MQL5 (cot Time;Type;Volume;Symbol;Price;Volume;Time;Price;Commission;Swap;Profit) doc duoc nguyen: ra them "
+        "`tien_that` (lai rong sau phi that, lai theo do sau ro, so du uoc tinh tu dong Balance) va `doi_tham_so` (TP / buoc doi theo quy "
+        "-> dung `tu` = ky_cuoi.tu de suy cai dat HIEN TAI).",
+        {"ma": _MA, "khung": _KHUNG,
+         "tep": {"type": "string", "description": "duong dan tep lich su (.csv/.json/.html) trong thu muc du an"},
+         "lenh": {"type": "array", "items": {"type": "object"},
+                  "description": "hoac list lenh {mo, dong, chieu, lot, gia_mo, gia_dong[, ma]} (toi da 50000)"},
+         "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
+         "pip": {"type": "number", "description": "kich thuoc 1 pip (mac dinh theo quy cach cua ma, hoac doan theo ten)"},
+         "lech_gio": {"type": "number", "description": "gio CONG THEM vao gio lich su de ra gio bar (mac dinh: uoc bang gia)"},
+         "so_null": {"type": "integer", "description": "so lan dich vong null khi tim dieu kien vao (mac dinh 200)"},
+         "phat": {"type": "boolean", "description": "co phat lai tham so qua luoi.chay khong (mac dinh true)"},
+         "hop_dong": {"type": "number", "description": "co hop dong (mac dinh theo quy cach, FX 100000)"},
+         "tu": {"type": "string", "description": "ngay ISO: chi xet ro BAT DAU tu ngay nay (dung khi doi_tham_so bao tac gia doi cai dat; "
+                                                 "lay doi_tham_so.ky_cuoi.tu)"},
+         "den": {"type": "string", "description": "ngay ISO: chi xet ro bat dau den het ngay nay"},
+         "gt_id": _GT}, ["ma"],
+        lambda ma, khung="M15", tep=None, lenh=None, doan="kham_pha", pip=None, lech_gio=None, so_null=200,
+        phat=True, hop_dong=None, gt_id=None, vong_id=None, tu=None, den=None, **_:
+        TN.boc_lich_su(ma, khung, tep, lenh, doan, pip, lech_gio, int(so_null), bool(phat), hop_dong, gt_id, vong_id, tu, den)),
+    _cc("quet_luoi",
+        "QUET THAM SO he LUOI (nhan/luoi.py) trong MOT lan goi, tren doan KHAM PHA - thay cho hang tram lan goi thu_luoi (moi lan goi = "
+        "mot vong LLM = token). `luoi` = {tham_so: [gia tri,...]} (toi da 6 truc, 40 gia tri/truc, tich Descartes; qua toi_da_o thi lay mau "
+        "theo hat), `co_dinh` = tham so khong doi (cung ten voi thu_luoi: buoc, tp, tran_tang, che_do, lot, kieu_lot, he_so_lot, tia_lenh, "
+        "bien_cap, cap_moi_bar, cho_lui, chot_tien, he_so_buoc, buoc_tran). Moi o chay CHINH engine cua thu_luoi (co test doi chieu so) va "
+        "tinh lai o he so lot cham tran maxDD 80%. Ra: HINH DANG (CAO_NGUYEN / CAI_GAI / HON_HOP / KHONG_CO_LAI), ty le o co lai, hang xom "
+        "cua o tot nhat, bang_top, `tham_so_day_du` cua o tot nhat. O tot nhat la cuc dai cua N o nen la LUA CHON chua phai phep do: di tiep "
+        "bang thu_luoi tren xac_nhan. Moi o la mot phep thu (so_phep_thu = so o da chay). Khong co tham so doan: chi kham_pha. Ma/chi phi/"
+        "quy cach nhu thu_luoi. Nhan C (`python -m nhan.luoi_nhan trang-thai`) lam moi o nhanh ~100 lan; khong co thi moi o ~1 s / 190.000 bar.",
+        {"ma": _MA, "khung": _KHUNG,
+         "luoi": {"type": "object", "description": "{tham_so: [gia tri,...]}, vd {\"buoc\": [10,15,20], \"tp\": [8,12]}"},
+         "co_dinh": {"type": "object", "description": "tham so ThamSo khong doi trong luot quet"},
+         "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
+         "toi_da_o": {"type": "integer", "description": "tran so o (mac dinh 300, toi da 3000); vuot thi lay mau theo hat"},
+         "hat": {"type": "integer", "description": "hat lay mau khi tich Descartes vuot toi_da_o (mac dinh 0)"},
+         "gt_id": _GT}, ["ma", "khung", "luoi"],
+        lambda ma, khung, luoi=None, co_dinh=None, von=10000.0, toi_da_o=300, hat=0, gt_id=None, vong_id=None, **_:
+        TN.quet_luoi(ma, khung, co_dinh, luoi, float(von), gt_id, vong_id, int(toi_da_o), int(hat))),
+    _cc("hieu_chuan_luoi",
+        "HIEU CHUAN engine luoi (nhan/luoi.py) <-> MT5 tester that: chay CUNG ThamSo qua ea_LuoiDayDu.mq5 tren tester (can may co MT5) va "
+        "qua engine, tren MOT cua so ngay <= doan kham_pha (>= 14 ngay), roi so lai %/nam, maxDD, so lenh, BUY/SELL, lenh giu lau nhat, do "
+        "sau luoi theo thoi gian, swap, bang theo thang/quy. KHOP -> DAT, LECH -> AM (kem ly do + canh bao chan doan: ro ket, lech ty le "
+        "SELL, tick sinh tu M1, he so quy doi tien bao gia / tien tai khoan uoc tu deal tester...); ha tang hong (log 'cannot generate "
+        "history data', cua so bao cao lech, thieu bang Deals, qua it lenh) -> CHUA_DO_DUOC, khong ghi gi. Day KHONG phai phep thu y "
+        "tuong: dong so tay loai hieu_chuan_luoi / hieu_chuan_tester, doan 'hieu_chuan', so_phep_thu 0 - khong an FDR, khong dem la phep "
+        "thu, khong vao danh sach thi nghiem tot nhat. Nua tester duoc nho theo (tham_so + cua so + model + von + EA) nen doi version "
+        "engine / ban do sai so khong phai chay lai tester. `chi_engine` = chi in so engine (khong goi tester, khong ghi). "
+        "model mac dinh 0 (tick sinh tu M1; 1 noi doi khi TP < 2x bien do M1; 4 can tick that). Dung de biet engine lech tester "
+        "bao nhieu TRUOC khi tin bat ky so luoi nao (task #48).",
+        {"ma": _MA, "khung": _KHUNG,
+         "tu": {"type": "string", "description": "ngay bat dau cua so (YYYY-MM-DD hoac YYYY.MM.DD), phai nam trong doan kham_pha dong bang"},
+         "den": {"type": "string", "description": "ngay ket thuc cua so (bao gom), >= tu + 13 ngay, trong doan kham_pha"},
+         "tham_so": {"type": "object", "description": "luoi.ThamSo (buoc, tp, tran_tang, che_do, lot, kieu_lot, he_so_lot, he_so_buoc, tia_lenh, "
+                                                      "bien_cap, cap_moi_bar, cho_lui, chot_tien, don_bay, buoc_tran, muc_stopout)"},
+         "model": {"type": "integer", "description": "mo hinh tick cua tester: 0 (mac dinh) | 1 | 4"},
+         "von": {"type": "number", "description": "von bang tien tai khoan (so nguyen, mac dinh 10000)"},
+         "ea": {"type": "string", "description": "mac dinh ea_LuoiDayDu.mq5 (chay duoc moi EA co cung bo input)"},
+         "chi_engine": {"type": "boolean", "description": "true = chi chay engine, in so (khong tester, khong ghi so tay)"},
+         "von_quy_doi": {"type": "number", "description": "don vi bao gia / 1 don vi tai khoan (AUDCAD tren tk USD ~ 1,31..1,33); "
+                                                          "bo trong = uoc tu deal tester (can >= 20 lenh), khong uoc duoc thi dung quy cach"},
+         "han_giay": {"type": "integer", "description": "han chay tester, giay (>= 60, mac dinh theo config/ea_tho.json)"},
+         "lam_lai_tester": {"type": "boolean", "description": "true = bo qua nua tester da nho, chay tester lai"}},
+        ["ma", "khung", "tu", "den"], _hieu_chuan_luoi),
+    _cc("ho_so_bot",
+        "HO SO CO CHE cua mot con bot DA CO tu LENH THAT cua no (bao cao tester .htm / .csv / .csv.gz da nam trong thu muc du an) + (tuy chon) "
+        "DOI CHIEU bo .set cua tac gia: moi tham so .set nhan DUNG MOT ket qua - KHOP / MAU_THUAN (tac gia noi X, lenh that cho thay Y, kem do "
+        "tin) / TAT / BI_CHE / CHUA_GAP (lich su chua toi dieu kien) / KHONG_DO_DUOC / KHONG_RO / ... - va liet ke NUT AN (co che co trong lenh "
+        "that ma khong tham so nao dieu khien). Ra `cong_thuc` = co che do duoc kem so (buoc theo bac, he so lot theo bac, TP ca chuoi, hedge "
+        "sau N lenh, tre, ...): nguyen lieu de luu thanh phuong phap va thay so cho tai san / khung khac (tai_lieu/CHUYEN_BOT_SANG_TAI_SAN_KHAC.md). "
+        "`them` = cac cap {lenh, bo_set, ten, ma} nua: nhieu bo .set cua cung mot bot (hoac cung ho EA) thi doi chieu khai bao voi hanh vi GIUA cac "
+        "bo - tham so nao that su dieu khien, khoi nao co o bot nay khong o bot kia. CHI MO TA bot da co, khong noi bot co lai hay khong va "
+        "khong tieu phep thu (doan 'ho_so', so_phep_thu 0; cung van tay thi dung dong so tay cu). Duong dan phai nam trong thu muc du an; bo "
+        ".set phai la bo da chay ra dung tep lenh do. Lich su tester co luoi thoi gian 10-20 giay: moi so do o muc giay (tre, nhip) chi la do "
+        "bo mo phong. CHUA_DO_DUOC (co phep do loi / cap hong) khong bao gio la ket qua AM. Ghi bao cao ASCII vao reports/ho_so/ (tat bang "
+        "ghi_bao_cao=false).",
+        {"lenh": {"type": "string", "description": "duong dan tep lenh (trong thu muc du an): bao cao tester .htm / .csv / .csv.gz (bang Deals), "
+                                                   "hoac export lich su MQL5"},
+         "bo_set": {"type": "string", "description": "duong dan bo .set cua tac gia (tuy chon): doi chieu tung tham so voi lenh that"},
+         "ten": {"type": "string", "description": "ten ngan cua bot / lan chay (mac dinh theo ten tep); dung lam ten tep bao cao"},
+         "ma": {"type": "string", "description": "ma giao dich, vd GOLD.i# (bo trong = suy tu tep lenh)"},
+         "pip": {"type": "number", "description": "gia tri 1 pip (bo trong = suy tu ma; vang 0,1)"},
+         "hop_dong": {"type": "number", "description": "kich thuoc hop dong / 1 lot (bo trong = suy tu ma; vang 100)"},
+         "von_dau": {"type": "number", "description": "von ban dau cua lich su (bo trong = suy tu tep)"},
+         "khung_phut": {"type": "number", "description": "khung bieu do cua EA, phut (bo trong = do tu nhip vao lenh)"},
+         "he_so_don_vi": {"type": "number", "description": "ep he so quy doi 1 don vi khoang cach trong .set = bao nhieu pip (bo trong = tu uoc, "
+                                                           "kiem bang nhieu cap so; chi dat khi biet chac phien ban EA)"},
+         "them": {"type": "array", "items": {"type": "object"},
+                  "description": "cac cap {lenh, bo_set, ten, ma, he_so_don_vi} nua (toi da 5) de so sanh cac bo .set voi nhau"},
+         "ghi_bao_cao": {"type": "boolean", "description": "true (mac dinh) = ghi reports/ho_so/<ten>.md (+ _set.md, so_sanh_*.md)"}},
+        ["lenh"], _ho_so_bot),
+]
+
+
+def _phuong_phap(ten):
+    def f(vong_id=None, **kw):
+        from nhan import nc_phuong_phap as NPP
+        return {c[0]: c for c in NPP.CONG_CU}[ten][4](vong_id=vong_id, **kw)
+    return f
+
+
+def _them_phuong_phap():
+    from nhan import nc_phuong_phap as NPP
+    for ten, mo_ta, tt, bb, _ham in NPP.CONG_CU:
+        CONG_CU.append(_cc(ten, mo_ta, tt, bb, _phuong_phap(ten)))
+
+
+_them_phuong_phap()
+THEO_TEN = {c["ten"]: c for c in CONG_CU}
+#: Cong cu chi GHI so tay (khong do gi) - van duoc goi khi het ngan sach chu ky.
+CONG_CU_GHI = ("ghi_gia_thuyet", "ghi_hieu_biet", "ghi_cau_hoi", "xem_so_tay")
+
+
+def schema_api() -> list[dict]:
+    """Danh sach `tools` cho Claude Messages API (thu tu co dinh - giu cache prompt)."""
+    return [{"name": c["ten"], "description": c["mo_ta"], "input_schema": c["schema"]}
+            for c in CONG_CU]
+
+
+def _gon(x: Any, gioi_han: int = GIOI_HAN_KY_TU) -> str:
+    """JSON gon cho ngu canh LLM. Qua dai thi cat danh sach dai truoc, roi cat chuoi."""
+    s = json.dumps(x, ensure_ascii=False, default=str, separators=(",", ":"))
+    if len(s) <= gioi_han:
+        return s
+
+    def _cat(o, sau=0):
+        if isinstance(o, dict):
+            return {k: _cat(v, sau + 1) for k, v in o.items()}
+        if isinstance(o, list):
+            return [_cat(v, sau + 1) for v in o[:6]] + (["... %d muc nua" % (len(o) - 6)]
+                                                        if len(o) > 6 else [])
+        if isinstance(o, str) and len(o) > 600:
+            return o[:600] + "..."
+        return o
+    s = json.dumps(_cat(x), ensure_ascii=False, default=str, separators=(",", ":"))
+    return s if len(s) <= gioi_han else s[:gioi_han] + "...[cat]"
+
+
+def goi(ten: str, dau_vao: dict | None = None, vong_id: int | None = None) -> dict:
+    """Goi mot cong cu. Loi -> {'loi': ...} (tac tu doc duoc, khong vo vong lap)."""
+    c = THEO_TEN.get(ten)
+    if c is None:
+        return {"loi": "khong co cong cu '%s'. Co: %s" % (ten, ", ".join(THEO_TEN))}
+    dv = dict(dau_vao or {})
+    thieu = [k for k in c["schema"].get("required", []) if k not in dv]
+    if thieu:
+        return {"loi": "thieu tham so bat buoc %s cho '%s'" % (thieu, ten)}
+    la = [k for k in dv if k not in c["schema"]["properties"]]
+    if la:
+        return {"loi": "tham so khong co trong schema cua '%s': %s" % (ten, la)}
+    t0 = time.time()
+    try:
+        kq = c["ham"](vong_id=vong_id, **dv)
+    except TN.LoiKhaiBao as e:
+        kq = {"trang_thai": "CHUA_DO_DUOC", "ly_do": "khai bao sai: %s" % e}
+    except NDL.DoanNiemPhong as e:
+        kq = {"loi": str(e)}
+    except (ValueError, KeyError, TypeError) as e:
+        kq = {"loi": "%s: %s" % (type(e).__name__, str(e)[:400])}
+    except Exception as e:  # loi that cua engine: tra ve kem dau vet ngan
+        kq = {"loi": "%s: %s" % (type(e).__name__, str(e)[:300]),
+              "dau_vet": traceback.format_exc().splitlines()[-4:]}
+    if isinstance(kq, dict):
+        kq.setdefault("_giay", round(time.time() - t0, 2))
+    return kq
+
+
+def _thu_lo(ma, khung, thu_muc, loc, tu, den, gt_id, vong_id, ten=None) -> dict:
+    if thu_muc not in ("dsl_cmt", "dsl_hh"):
+        raise ValueError("thu_muc chi duoc dsl_cmt | dsl_hh")
+    d = Path(__file__).resolve().parent.parent / "reports" / "deepseek" / thu_muc
+    tep = [f for f in sorted(d.glob("*.json")) if f.name != "meta.json" and loc in f.name and (not ten or f.stem in ten)][tu:den]
+    bang = []
+    for f in tep:
+        try:
+            spec = json.loads(f.read_text(encoding="utf-8"))
+            spec.setdefault("ra", [])
+            kq = TN.danh_gia(ma, khung, spec, None, "kham_pha", gt_id, vong_id)
+        except Exception as e:  # mot he hong khong duoc giet ca lo
+            kq = {"trang_thai": "CHUA_DO_DUOC", "ly_do": "%s: %s" % (type(e).__name__, str(e)[:120])}
+        bang.append({"he": f.stem, "trang_thai": kq.get("trang_thai"),
+                     "so_lenh": (kq.get("lenh") or {}).get("so_lenh"),
+                     "ky_vong_bps": (kq.get("lenh") or {}).get("ky_vong_bps"),
+                     "cagr_duoi_tran_pct": (kq.get("tien") or {}).get("cagr_duoi_tran_pct"),
+                     "ly_do": (kq.get("ly_do") or "")[:100] if kq.get("trang_thai") != "DAT" else ""})
+    dem = {}
+    for b in bang:
+        dem[b["trang_thai"]] = dem.get(b["trang_thai"], 0) + 1
+    return {"trang_thai": "XONG", "ma": ma, "khung": khung, "so_he": len(bang), "dem": dem, "bang": bang}
+
+
+def main(argv: list[str]) -> int:
+    """`python -m nhan.nc_cong_cu` liet ke; `... <ten> '<json>'` hoac `... <ten> @file.json` goi."""
+    if not argv or argv[0] in ("-h", "--help", "ds"):
+        for c in CONG_CU:
+            print("%-18s %s" % (c["ten"], c["mo_ta"][:150]))
+        print("\nGoi: python b.py nc cc <ten> '<json>'   (hoac @file.json)")
+        return 0
+    ten = argv[0]
+    tho = " ".join(argv[1:]).strip() or "{}"
+    if tho.startswith("@"):
+        tho = Path(tho[1:]).read_text(encoding="utf-8-sig")
+    try:
+        dv = json.loads(tho)
+    except json.JSONDecodeError as e:
+        print(json.dumps({"loi": "JSON dau vao hong: %s" % e}, ensure_ascii=False))
+        return 2
+    # `nc_tac_tu.chay_claude_code` dat NC_VONG_ID cho tien trinh `claude -p`, nen moi
+    # thi nghiem Claude Code chay trong mot chu ky duoc gan dung chu ky do trong so tay.
+    vid = os.environ.get("NC_VONG_ID")
+    kq = goi(ten, dv, vong_id=int(vid) if vid and vid.isdigit() else None)
+    if ten == "xem_so_tay" and "so_tay" in kq:
+        print(kq["so_tay"])
+    else:
+        print(json.dumps(kq, ensure_ascii=False, indent=1, default=str))
+    return 0 if not (isinstance(kq, dict) and kq.get("loi")) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

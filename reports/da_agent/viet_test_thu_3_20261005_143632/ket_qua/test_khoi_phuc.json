@@ -1,0 +1,33 @@
+{
+ "id": "test_khoi_phuc",
+ "ok": false,
+ "du_lieu": null,
+ "loi_cuoi": [
+  "khong chay duoc: NameError: name '__file__' is not defined. Did you mean: '__name__'?"
+ ],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": [
+    "khong chay duoc: NameError: name '__file__' is not defined. Did you mean: '__name__'?"
+   ]
+  },
+  {
+   "lan": 1,
+   "model": "nhanh",
+   "loi": [
+    "bai test KHONG duoc dung: .write_bytes, mkdir (khong ghi tep / mang)"
+   ]
+  },
+  {
+   "lan": 2,
+   "model": "manh",
+   "loi": [
+    "khong chay duoc: NameError: name '__file__' is not defined. Did you mean: '__name__'?"
+   ]
+  }
+ ],
+ "phan_bien": null,
+ "dong": 114.86
+}

@@ -1,0 +1,36 @@
+{
+ "id": "test_khoi_phuc",
+ "ok": true,
+ "du_lieu": {
+  "code": "# -*- coding: utf-8 -*-\n\"\"\"Test cho nhan/khoi_phuc.py - chan doan may: con gi, thieu gi.\"\"\"\nfrom __future__ import annotations\n\nimport sys\nfrom pathlib import Path\n\nfrom nhan import khoi_phuc as KP\n\n\n# ---------- _dong ----------\n\ndef test_dong_tra_ve_dict_du_truong():\n    d = KP._dong(\"nhom\", \"ten\", True, \"chi tiet\", \"sua\", mat_that=True)\n    assert d == {\"nhom\": \"nhom\", \"ten\": \"ten\", \"ok\": True,\n                 \"chi_tiet\": \"chi tiet\", \"sua\": \"sua\", \"mat_that\": True}\n\n\ndef test_dong_mac_dinh_rong_va_khong_mat_that():\n    d = KP._dong(\"n\", \"t\", None)\n    assert d[\"chi_tiet\"] == \"\"\n    assert d[\"sua\"] == \"\"\n    assert d[\"mat_that\"] is False\n    assert d[\"ok\"] is None\n\n\ndef test_dong_ok_false_van_giu():\n    d = KP._dong(\"n\", \"t\", False)\n    assert d[\"ok\"] is False\n\n\n# ---------- _gb ----------\n\ndef test_gb_khong_va_bien():\n    assert KP._gb(0) == \"0.00 GB\"\n    assert KP._gb(1_000_000_000) == \"1.00 GB\"\n    assert KP._gb(1_500_000_000) == \"1.50 GB\"\n\n\n# ---------- _parquet ----------\n\ndef test_parquet_thu_muc_khong_ton_tai():\n    # Path khong ton tai -> glob tra rong, khong nem\n    n, b = KP._parquet(Path(\"__khong_ton_tai_xyz__\"))\n    assert n == 0\n    assert b == 0.0\n\n\ndef test_parquet_thu_muc_rong(tmp_path=None):\n    # dung thu muc tam cua he thong qua tempfile de khong ghi vao repo\n    import tempfile\n    with tempfile.TemporaryDirectory() as td:\n        n, b = KP._parquet(Path(td))\n        assert n == 0\n        assert b == 0.0\n\n\n# ---------- buoc_tiep ----------\n\ndef test_buoc_tiep_khi_khong_thieu_gi():\n    ds = [KP._dong(\"cong cu\", \"python\", True),\n          KP._dong(\"cong cu\", \"git\", True),\n          KP._dong(\"cong cu\", \"claude (Claude Code)\", True),\n          KP._dong(\"ma nguon\", \"nhanh + commit\", True),\n          KP._dong(\"du lieu\", \"kho gia data/\", True),\n          KP._dong(\"du lieu\", \"nao.db\", True),\n          KP._dong(\"ban sao con lai\", \"ds/ (git rieng, KHONG co tren GitHub)\", True),\n          KP._dong(\"mt5\", \"terminal64.exe\", True),\n          KP._dong(\"bi mat\", \"config/api_keys.json\", True)]\n    b = KP.buoc_tiep(ds)\n    assert b == [\"Khong thieu gi dang ke. Chay `b vao`, `b nc`, roi `b test`.\"]\n\n\ndef test_buoc_tiep_uu_tien_windows_old_len_dau():\n    ds = [KP._dong(\"ban sao con lai\", \"Windows.old\", True, \"CO\"),\n          KP._dong(\"cong cu\", \"python\", True),\n          KP._dong(\"cong cu\", \"git\", True),\n          KP._dong(\"cong cu\", \"claude (Claude Code)\", True),\n          KP._dong(\"ma nguon\", \"nhanh + commit\", True),\n          KP._dong(\"du lieu\", \"kho gia data/\", True),\n          KP._dong(\"du lieu\", \"nao.db\", True),\n          KP._dong(\"ban sao con lai\", \"ds/ (git rieng, KHONG co tren GitHub)\", True),\n          KP._dong(\"mt5\", \"terminal64.exe\", True),\n          KP._dong(\"bi mat\", \"config/api_keys.json\", True)]\n    b = KP.buoc_tiep(ds)\n    assert b[0].startswith(\"COPY Windows.old\")\n\n\ndef test_buoc_tiep_bao_kho_git_khong_phai_repo():\n    ds = [KP._dong(\"ma nguon\", \"kho git (thu muc nay)\", False, \"khong phai kho git\",\n                   \"git clone https://github.com/thebrainago/the-brain.git lab\")]\n    b = KP.buoc_tiep(ds)\n    assert any(\"git clone\" in s for s in b)\n\n\ndef test_buoc_tiep_bao_nao_db_mat():\n    ds = [KP._dong(\"du lieu\", \"nao.db\", False, \"thieu\", \"tao lai\")]\n    b = KP.buoc_tiep(ds)\n    assert any(\"nao.db mat\" in s for s in b)\n\n\ndef test_buoc_tiep_bao_ds_khong_con():\n    ds = [KP._dong(\"ban sao con lai\", \"ds/ (git rieng, KHONG co tren GitHub)\", False, \"thieu\")]\n    b = KP.buoc_tiep(ds)\n    assert any(\"ds/ khong con\" in s for s in b)\n\n\ndef test_buoc_tiep_bao_bi_mat_thieu():\n    ds = [KP._dong(\"bi mat\", \"config/api_keys.json\", False, \"khong\")]\n    b = KP.buoc_tiep(ds)\n    assert any(\"Tao lai file khoa\" in s for s in b)\n\n\n# ---------- bao_cao ----------\n\ndef test_bao_cao_in_theo_nhom_va_buoc_tiep():\n    ds = [KP._dong(\"cong cu\", \"python\", True, \"3.11\"),\n          KP._dong(\"du lieu\", \"nao.db\", False, \"thieu\")]\n    ra = KP.bao_cao(ds)\n    assert \"[cong cu]\" in ra\n    assert \"[du lieu]\" in ra\n    assert \"CO    python\" in ra\n    assert \"THIEU nao.db\" in ra\n    assert \"BUOC TIEP\" in ra\n\n\ndef test_bao_cao_ok_none_hien_dau_gach():\n    ds = [KP._dong(\"goi python\", \"MetaTrader5 (tuy chon)\", None, \"chi can cho nhanh MT5\")]\n    ra = KP.bao_cao(ds)\n    assert \"  -   MetaTrader5 (tuy chon)\" in ra\n\n\n# ---------- kiem_may_khac ----------\n\ndef test_kiem_may_khac_khong_co_gi():\n    import tempfile\n    with tempfile.TemporaryDirectory() as td:\n        ds = KP.kiem_may_khac(Path(td))\n    ten = [x[\"ten\"] for x in ds]\n    assert \"Windows.old\" in ten\n    assert KP.O_LUU + \" (o D..H)\" in ten\n    assert \"ds/ (git rieng, KHONG co tren GitHub)\" in ten\n    # khong co Windows.old trong thu muc tam\n    wo = next(x for x in ds if x[\"ten\"] == \"Windows.old\")\n    assert wo[\"ok\"] is None\n\n\n# ---------- kiem_ma ----------\n\ndef test_kiem_ma_tra_ve_it_nhat_mot_dong():\n    ds = KP.kiem_ma()\n    assert isinstance(ds, list)\n    assert len(ds) >= 1\n    assert ds[0][\"nhom\"] == \"ma nguon\"\n    assert ds[0][\"ten\"] == \"nhanh + commit\"\n\n\n# ---------- chan_doan ----------\n\ndef test_chan_doan_gop_cac_nhom():\n    ds = KP.chan_doan()\n    nhom = {x[\"nhom\"] for x in ds}\n    assert \"cong cu\" in nhom\n    assert \"goi python\" in nhom\n    assert \"ma nguon\" in nhom\n    assert \"du lieu\" in nhom\n    assert \"mt5\" in nhom\n    assert \"kenh cloud<->may\" in nhom\n    assert \"bi mat\" in nhom\n",
+  "ket_qua": {
+   "test_dong_tra_ve_dict_du_truong": "OK",
+   "test_dong_mac_dinh_rong_va_khong_mat_that": "OK",
+   "test_dong_ok_false_van_giu": "OK",
+   "test_gb_khong_va_bien": "OK",
+   "test_parquet_thu_muc_khong_ton_tai": "OK",
+   "test_parquet_thu_muc_rong": "OK",
+   "test_buoc_tiep_khi_khong_thieu_gi": "OK",
+   "test_buoc_tiep_uu_tien_windows_old_len_dau": "OK",
+   "test_buoc_tiep_bao_kho_git_khong_phai_repo": "OK",
+   "test_buoc_tiep_bao_nao_db_mat": "OK",
+   "test_buoc_tiep_bao_ds_khong_con": "OK",
+   "test_buoc_tiep_bao_bi_mat_thieu": "OK",
+   "test_bao_cao_in_theo_nhom_va_buoc_tiep": "OK",
+   "test_bao_cao_ok_none_hien_dau_gach": "OK",
+   "test_kiem_may_khac_khong_co_gi": "OK",
+   "test_kiem_ma_tra_ve_it_nhat_mot_dong": "OK",
+   "test_chan_doan_gop_cac_nhom": "OK"
+  }
+ },
+ "loi_cuoi": [],
+ "lich_su": [
+  {
+   "lan": 0,
+   "model": "nhanh",
+   "loi": []
+  }
+ ],
+ "phan_bien": null,
+ "dong": 20.21
+}

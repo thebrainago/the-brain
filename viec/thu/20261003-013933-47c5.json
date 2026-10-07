@@ -1,0 +1,10 @@
+{
+ "id": "20261003-013933-47c5",
+ "luc": "2026-10-03T01:39:33",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI THI: fixture mql5/myfxbook toc do thap + hieu chuan lan EA tho (RA_SOAT muc 7)",
+ "tra_loi": null,
+ "noi_dung": "CHI THI (cloud->nha) 03/10, da day ce9dd71. Doc NGAN: tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md muc 7 + tai_lieu/LAN_EA_THO.md. Y chu du an: lay EA/chien luoc CONG KHAI da co hieu qua -> backtest -> tinh chinh. Chan hien tai: nhanh boc-tach-bang-DSL ra it (7 co che/44 diem vao tren 22 EA), duong chay EA that tren tester (nhan/ea_tho.py) vua xay xong nhung CHUA chay lan nao. Cloud khong ra duoc mql5/myfxbook (proxy 403) nen can may nha.\nTHU TU:\n(1) git pull; bat schtask `b cau chay` 5 phut (chu du an da duyet).\n(2) Khong can MT5: lay FIXTURE toc do THAP (>= 5 giay/request, toi da ~5 trang, bat WARP/`b mang` neu loi; bi 403/Cloudflare thi DUNG, ghi ma loi, dung ne tranh/spam): (a) 1 trang LICH SU LENH cua mot tin hieu MQL5 con song, AUDCAD luoi/DCA neu co; (b) 1 trang he thong cong khai Myfxbook (lich su lenh); (c) trang MQL5 Market/CodeBase cua EA tuong ung. Luu reports/fixture/<ten>.html chi phan can (bang lich su lenh), KHONG khoa/token/cookie (repo PUBLIC), commit + push. Cloud se viet bo doc lich su lenh -> dieu kien vao tu cac file do va test bang du lieu that.\n(3) Sau khi chu du an cai XM demo + xuat M1 + dong bang doan (so_cai/doan.json, commit+push NGAY): hieu chuan lan EA tho o 4 diem (LAN_EA_THO.md), luu 1 bao cao MT5 that vao test_bao_cao_mt5.py, roi `b nc cc ea_tho_quet '{\"eas\":[\"kho:*\"],\"toi_da_lan\":6}'`. EA DAT tren xac_nhan = manh moi: doc ma de ra gia thuyet co che.\n(4) b test: doi chieu danh sach fail voi reports/test_fail_linux.txt, bao hang moi (dem 02/10: 108 fail Windows, Linux 117, nhieu do thieu data/nao.db).\nPhan doi: duoc, MOT lan, kem bang chung. Bao cao: `b cau noi --den cloud` mot thu ngan, du lieu dai vao reports/*.md."
+}

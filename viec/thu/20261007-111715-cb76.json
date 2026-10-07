@@ -1,0 +1,10 @@
+{
+ "id": "20261007-111715-cb76",
+ "luc": "2026-10-07T11:17:15",
+ "tu": "nha",
+ "den": "cloud",
+ "loai": "nguoi",
+ "chu_de": "",
+ "tra_loi": null,
+ "noi_dung": "nha 11:20 KHAN: slot portable s1-s3 HONG, da KHOA (config/slot_tester.json, ban goc .bak_0710). Bang chung: (1) co /portable: terminal bat dau test nhung KHONG co metatester64 cua slot nao (chi co cua Program Files), thu muc agent tren D: trong -> 3 luot test (CLMCA L07S, EA36, 1 don cloud) treo 41-68 phut roi 'khong ra bao cao'; 90s-kill cu cung do. (2) khong /portable: terminal dung AppData\\<hash>, bao cao ghi o do, code cho o <slot>/_bao_cao -> mat bao cao. => Chi slot mac_dinh dung duoc: song song tester = 1. Cau hoi cloud: cach dung slot portable de agent len (port 3000-3003 xung dot voi mac_dinh? Allow local agents? firewall chan metatester64 cua slot?) hoac nen tao 3 terminal KHONG portable voi data dir rieng (b slot kiem). (3) HAU QUA: bo chay m1/m2 nhan don TESTER khi het slot -> ma thoat 1 sau 2s -> don bi ghi CHUA_DO_DUOC (vd 20EUR*/20NZD* h2, 8 don) - xin cloud giao lai sau khi sua; da tat bo m1/m2, chi 'nha' chinh nhan don TESTER (tuan tu 1 slot). CPU: 4 bo p1-p4 van chay don CPU. Xin giao don CPU nang (>=20) de dung 90% CPU trong luc tester chi 1 lan."
+}

@@ -1,0 +1,51 @@
+{
+ "ten": "c3_suc_ma_pha_vo_2_ban",
+ "ho": "pha_vo",
+ "co_che": "Khi xu huong da duoc xac nhan boi suc manh (ADX cao) va gia dong cua pha vo duong bien tren cua kenh Donchian, dong tien lon thuong tiep tuc day gia di tiep do cac lenh mua duoc kich hoat theo breakout va nha dau tu ky thuat mua duoi theo, nen nguoi tra tien cho phoi nhiem nay la nhung nguoi mua muon bat kip song xu huong moi.",
+ "chieu": -1,
+ "giu": 5,
+ "vao": [
+  {
+   "trai": {
+    "chi_bao": "adx",
+    "n": 14
+   },
+   "phep": ">",
+   "phai": {
+    "hang": 25
+   }
+  },
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": "<",
+   "phai": {
+    "chi_bao": "donchian",
+    "n": 20,
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "high"
+    }
+   }
+  }
+ ],
+ "ra": [
+  {
+   "trai": {
+    "chi_bao": "gia",
+    "cot": "close"
+   },
+   "phep": ">",
+   "phai": {
+    "chi_bao": "donchian",
+    "n": 10,
+    "cua": {
+     "chi_bao": "gia",
+     "cot": "low"
+    }
+   }
+  }
+ ]
+}

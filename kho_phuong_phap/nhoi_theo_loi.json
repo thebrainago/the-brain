@@ -1,0 +1,79 @@
+{
+ "ma": "nhoi_theo_loi",
+ "loai": "TANG",
+ "ten": "Nhoi them khi dang lai (pyramiding)",
+ "mo_ta": "Them lenh khi vi the dang lai de an xu huong (NewYear: 'nhoi theo trend', phu de mo ho).",
+ "tham_so": [
+  {
+   "ten": "buoc_nhoi",
+   "lop": "KC_BUOC",
+   "don_vi": "pip",
+   "mien": [
+    10,
+    200,
+    10
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": "buoc",
+   "nhan": "tho"
+  },
+  {
+   "ten": "so_lan_nhoi",
+   "lop": "SO_DEM",
+   "don_vi": "lenh",
+   "mien": [
+    1,
+    5,
+    1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": "tran_tang",
+   "nhan": "tho"
+  },
+  {
+   "ten": "he_so_lot_nhoi",
+   "lop": "HE_SO",
+   "don_vi": "",
+   "mien": [
+    0.5,
+    2.0,
+    0.1
+   ],
+   "ten_trong_set": null,
+   "ten_trong_engine": "he_so_lot",
+   "nhan": "tho"
+  }
+ ],
+ "can": [],
+ "xung_dot": [],
+ "tuong_tac_biet": [],
+ "vet": [
+  "Lenh them mo o gia THEO huong loi (Buy: gia cao hon lenh truoc)."
+ ],
+ "engine": {
+  "trang_thai": "chua",
+  "co": [],
+  "ghi_chu": "luoi.py khong co nhoi thuan xu huong.",
+  "nhan_c": false,
+  "ea_mq5": false
+ },
+ "nguon": [
+  {
+   "loai": "khoi_co_che",
+   "ma": "nhoi_theo_loi"
+  }
+ ],
+ "dieu_kien_dung": [
+  "phan_giai",
+  "lot_toi_thieu"
+ ],
+ "ap_cheo": "Doi nghich cua luoi: chi hop khi xu huong chay xa.",
+ "rui_ro": "Dao chieu luc da nhoi nhieu: mat het lai cua chuoi.",
+ "bang_chung_ghi_chu": "chua co (the moi gieo, chua do)",
+ "ghi_chu_tho": {
+  "viec": "dien kieu + mien",
+  "so_lan_sua": 0,
+  "model": "qwen3.8-flash",
+  "nhan": "tho"
+ }
+}

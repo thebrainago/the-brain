@@ -1,0 +1,54 @@
+{
+  "ma": "220126-AUDCHF-M15-ha-ph7",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 76.9,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"AUDCHF\", \"khung\": \"M15\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 7}"
+    ],
+    "phien_ban_ma": "1030ad7+sua",
+    "dong_cuoi": [
+      "   \"chay\": false,",
+      "   \"so_lenh\": 467,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 0.28,",
+      "   \"maxdd_pct\": -0.59,",
+      "   \"he_so_lot_tai_tran\": 1000.0,",
+      "   \"loi_suat_o_tran_pct\": 278.17,",
+      "   \"hon_moc_pct\": 278.17",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"hai_chieu\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"phang\",",
+      "  \"buoc\": 8,",
+      "  \"tp\": 6,",
+      "  \"tran_tang\": 8,",
+      "  \"cho_lui\": 10",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 2940/2991 o co lai, tot nhat +345.8%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 3000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 549,",
+      " \"_giay\": 57.11",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00011.md": "# THO vong 11 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n19 lan goi cong cu · 430297 token vao · 36851 token ra · 0.0000 USD\n\nTỔNG KẾT CHU KỲ (thợ khám phá) — 10 thí nghiệm (tn529–545), tất cả XAUUSD.\n\n**Đã thử gì (kèm số, cùng đơn vị so với bản gốc gt34 = 225 lệnh, 46,9 bps, t7,52, 9/9 năm, 219%/năm@x10 DD44%):**\n1. Quản trị vị thế không nâng TIỀN: ride đến supertrend đảo (179 lệnh, 46,8 bps, t4,6, 8/9) → 137%@x10; trail+hue (251 lệnh, 32 bps, t7,4, 9/9) → 146%@x10.\n2. Bỏ HƯỚNG supertrend (chỉ stoch+chế độ) → 504 lệnh, 12,9 bps t2,7, 6/9 → 48%; mua PHÁ VỠ thay vì dip → 142 lệnh, 10,1 bps t1,35 (lai_rong/phi 2,87<3) → 11%.\n3. Bỏ LỌC CHẾ ĐỘ (chỉ stoch+st_chieu) → 717 lệnh, 10,9 bps t2,9, 5/9 → 44%; nồng chế độ (pv≥0,8+adx≥30) → 132 lệnh, 57,9 bps t6,7, 7/9 → 134%.\n4. Shethử độ sâu dip: IBS≤0,2 → 17,7 bps (351 lệnh); cú sốc 1 bar → 21,0 bps (315); double-extreme don20<0,344 → 99 lệnh, **85,6 bps t12,07, 89,9% thắng, Calmar 3,90** → 162%@x10 DD27% (chất lượng cao nhất dự án nhưng chỉ 11,9 lệnh/năm).\n5. Ghép H1+M30 (corr ngày 0,42) → rổ 109,9% < 200,7% của H1 một mình → **không giúp**.\n\n**Giả thuyết đang giao Claude:** (a) **gt34** — cơ chế **3-PHẦN (hướng + chế độ + dip), cả ba thiết yếu**, β≈0 (trả lời trực tiếp câu hỏi #12: MUA 9/9 năm dù vàng giảm vì là momentum có cổng, không phải beta); (b) **gt35** — double-extreme 85,6 bps t12,07 nhưng TIỀN < bản gốc; (c) **gt36 mới** — bps/lenh đơn điệu khi nồng bất kỳ phần nào (CAO NGUYÊN) ⇒ kỳ vọng biến thể nồng còn sống OOS.\n\n**Việc tiếp theo đáng giá nhất:** xác nhận 2021+ + phí x2-3 (69% bar spread=0) + MT5 trên bản gốc gt34, và giải **câu hỏi #14** (2019-2021 flat do chế độ mạnh khan hiếm hay edge đã chết — quyết định sống/chết cả lane tín hiệu). Hướng để xuất mới: bản gốc vẫn là điểm TIỀN tối ưu; đừng thu hẹp dip để tăng bps — sai hướng.\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T12:33:11"
+}

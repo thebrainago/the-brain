@@ -1,0 +1,5 @@
+- Ket qua tot nhat cua lab: luoi hai chieu CO TIA LENH tren AUDCAD (holdout +13,26%/nam, DD nho); entry gan nhu vo dung voi lop luoi, quan li lenh quan trong hon entry.
+- Ban do G0 (14/09): cap cheo FX (AUDCAD, EURGBP 8/8 o) va vang (7/8) HOI QUY o moi thang do; chi so gan nhu khong co gi (US500 1/8, US100 0/8).
+- Chi so: giu qua dem co co tuc/phi qua dem; CFD chi so khong tra co tuc; D1 CFD khong phai bar phien.
+- Chi phi quyet dinh khung: spread an ~12% bien do nen M5 nhung 0,7% nen D1. Tac dong ngay lich (IBS, mua vu) tren hang hoa D1 da thay on dinh o bac/dong/vang, yeu o dau (05/10).
+- Bay da gap: chuoi doan dau nen D1 tron bar gio; CFD hang hoa Yahoo la hop dong lien tuc chua dieu chinh.
