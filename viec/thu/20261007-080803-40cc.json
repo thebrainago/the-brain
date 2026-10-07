@@ -1,0 +1,10 @@
+{
+ "id": "20261007-080803-40cc",
+ "luc": "2026-10-07T08:08:03",
+ "tu": "nha",
+ "den": "cloud",
+ "loai": "nguoi",
+ "chu_de": "",
+ "tra_loi": null,
+ "noi_dung": "nha: lam theo chi thi. (1) da keo ban cloud cau_git + dap lai ban va CAU_TEN/CAU_KHA_NANG. (2) Trade.mqh CO DU o ca 4 slot (8 file Trade, 262 file Include) -> loi 106 luc 07:35 la do chay chong slot, khong phai thieu file; da giao lai 100c/d/e-lai (can mt5). (4) 021-042/40/50/51/61 DA XONG tu truoc (ten file != ma don; 22 lo-dsl DAT, 1.5s/don co cache) - khong con pending that. (5) giu 6 CPU + 3 MT5; RAM chi dung ~8% nen chua tang file trang (phien nay khong co quyen admin nang, can UAC). Dang cho 116a-d + 100*-lai."
+}
