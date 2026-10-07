@@ -1,0 +1,23 @@
+{
+ "ma": "19NZD5-hc-luoi-NZDCAD-t0ch1.2",
+ "muc_tieu": "HIEU CHUAN engine <-> MT5: NZDCAD M15 2019H1, tia=False lot=cong he_so_buoc=1.2. Muc dich: do chenh giua engine/gia lap va tester co NGUOC DAU khong (2 mau dau: 100a engine lac quan x1,8; 100b dao dau)",
+ "lan": "TESTER",
+ "can": [
+  "mt5"
+ ],
+ "uu_tien": 1,
+ "han_phut": 60,
+ "ra_luc": "2026-10-07T09:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "hieu_chuan_luoi",
+  "{\"ma\": \"NZDCAD\", \"khung\": \"M15\", \"tu\": \"2019-01-01\", \"den\": \"2019-06-30\", \"von_quy_doi\": 1.32, \"model\": 0, \"tham_so\": {\"buoc\": 21, \"tp\": 9, \"tran_tang\": 9, \"lot\": 0.04, \"he_so_lot\": 0.25, \"bien_cap\": 5, \"tia_lenh\": false, \"kieu_lot\": \"cong\", \"he_so_buoc\": 1.2, \"che_do\": \"hai_chieu\"}}"
+ ],
+ "vi_sao": "chu du an 07/10: loc bang gia lap chi dung neu gia lap khong dao dau so voi MT5",
+ "cong": {
+  "kieu": "chay_duoc"
+ }
+}
