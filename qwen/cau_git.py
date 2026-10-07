@@ -892,6 +892,9 @@ def chay_don(don: dict, goc: Path | None = None, chay_that: bool = True,
             ma_thoat, ra, loi, qua_gio = -9, "", "qua han %.0f phut" % (han / 60), True
         except OSError as e:
             ma_thoat, ra, loi = -1, "", "%s: %s" % (type(e).__name__, e)
+        if lan == "TESTER" and ("TesterDangBan" in (ra or "") or "TesterDangBan" in (loi or "")):
+            return {"ma": ma, "trang_thai": "CHUA_DO_DUOC", "hoan": True,
+                    "ly_do": "het slot tester (viec khac dang giu) - de don lai cho vong sau, KHONG ghi xong"}
         tt, ly_do = _cham(kieu, ma_thoat, qua_gio)
         dong_cuoi = (ra or "").splitlines()[-25:]
         bc = {"ma_thoat": ma_thoat, "giay": round(time.time() - t0, 1),
