@@ -1,0 +1,56 @@
+{
+  "ma": "220198-AUDNZD-M5-ha-ph7",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 460.9,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"AUDNZD\", \"khung\": \"M5\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"phang\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 7}"
+    ],
+    "phien_ban_ma": "a08b2d4+sua",
+    "dong_cuoi": [
+      "   \"chay\": false,",
+      "   \"so_lenh\": 370,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 0.62,",
+      "   \"maxdd_pct\": -1.26,",
+      "   \"he_so_lot_tai_tran\": 223.757,",
+      "   \"loi_suat_o_tran_pct\": 138.81,",
+      "   \"hon_moc_pct\": 137.99",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"hai_chieu\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"phang\",",
+      "  \"buoc\": 20,",
+      "  \"tp\": 20,",
+      "  \"tran_tang\": 15,",
+      "  \"cho_lui\": 10",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 2301/3000 o co lai, tot nhat +155.6%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 3000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 715,",
+      " \"_giay\": 407.16",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00015.md": "# THO vong 15 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n30 lan goi cong cu · 863158 token vao · 35416 token ra · 0.0000 USD\n\n**TONG KET VONG (tho kham pha) — 9 phep thu (tn680-688), tat ca XAUUSD H1 + mot nhanh D1.**\n\n1. **Phat hien MOI, manh nhat: gt42.** `tim_quy_luat` XAUUSD H1 (tn678, p_null 0,005) noi len luat \"fade cuc doan khi supertrend da quay xuong\" (don20>=0,608 & st_chieu<1 -> BAN giu 10). Chay that (tn680): **743 lenh 19,48 bps t5,25, 199,02%@x7,43 DD79,9, sharpe 2,05, lai_rong/phi 5,44, beta -0,01**. Day la chan BAN **NHIEU LENH NHAT** cua du an (cac chan cu 225-446 lenh), tra loi truc tiep cau hoi #15.\n\n2. **CAO_NGUYEN that** (tn682): quet 20 o don20 x giu = 20/20 co lai, trung vi 199%/nam; o tot 321,68%@x9,47 (704 lenh, sharpe 2,24); bien the giu5/thr0,55 = 316%@x9,4 voi **956 lenh, 8/9 nam**. MUA doi xung yeu hon (tn683: 118%@x8,2, 5/9 nam) -> BAN la chan chinh.\n\n3. **Gan DOC LAP voi cac chan MUA**: corr voi gt34-MUA chi -0,035 (tn685) -> ghep 3 chan vang H1 = **260,58%@x10** (hon chan tot nhat 228,67%). Loc kl_pv<0,42 nang standalone len 270%@x10 DD63,6 (tn687) nhung lam danh muc tut con 248,45% (tn688) vi it lenh.\n\n4. **VANG-CHI** (tn684): EURUSD cung luat AM -4,29 bps, 3/17 nam -> khop hb14/hb20, khong suy rong.\n\n5. **Da bac bo**: gt41 (khung D1) — XAUUSD D1 mua dip AM, US500CASH D1 mua dip yeu/beta (tn663-665). gt40 BAN doi xung (438 lenh 13,4 bps, yeu hon MUA 24,4). Cac kenh vang deu H1-chi (H4 AM: gt40-H4 1,2 bps, gt34-H4 -18 bps).\n\n**Giao cho Claude**: gt42 TRIEN_VONG + cau hoi #17 (uu tien 0,9) — chi 1 phep xac nhan OOS 2021+ la bai: (a) con song 2019/2020 (-5,7/-6,2) khong; (b) phi x2-3 (69% bar spread=0); (c) MT5 tester; (d) kiem loc kl_pv la that hay hau kiem. Neu song -> chan BAN dau tien + nhieu lenh nhat cua du an, ghep gt34-MUA nang danh muc len 260%@x10.\n",
+      "reports/nc_tho/vong_00016.md": "# THO vong 16 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n25 lan goi cong cu · 675207 token vao · 25681 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 14 phép thử mới (tn690-704), tất cả XAUUSD H1 + 3 nhánh kiểm.**\n\nĐã thử & số: mở rộng **gt40 họ PHA_VO** — nén-chặt-phá-lên (tn690 DAT 445 lệnh 21,8 bps), quét ngưỡng×giữ = CAO_NGUYEN 25/25 (tn691); bỏ supertrend vẫn dương (tn692 16,9 bps); **đổi sang breakout Donchian THUẦN** = mạnh hơn: n=30 MUA 504 lệnh 30,47 bps t6,78 sharpe 2,36 **9/9 năm 381,77%@x10** (tn697), BAN đối xứng 495 lệnh 27,03 bps 8/9 năm (tn698), quét n×giữ CAO_NGUYEN 12/12 (tn695). Kiểm artifact: cùng luật trên EURUSD H1 AM nặng (tn699, 1/17 năm), H4 AM (tn703), US500 AM beta 1,07 (tn704), M30 AM (tn696) => **VÀNG-H1-CHI, không phải lỗi engine**.\n\n**Giả thuyết giao cho Claude (q#18, ưu tiên 0,95):** gt40 breakout Donchian-30 + supertrend (2 chiều, giữ 20) là **chân MẠNH NHẤT dự án** trên khám phá, **DOC LAP họ fade** (corr gt34-mua 0,30 / gt42-bản -0,11), **KHÔNG decay 2019+** (khác họ fade đã decay), beta~0. Cần: xác nhận 2021+, phí x2-3, MT5. Nếu sống → họ PHA_VO làm chân chính, FADE làm chân phụ.\n\n**Lead phụ (q#19, 0,6):** lọc `giờ==0` cho t14,3 (166 lệnh 84,9 bps) — nhưng hb31 cảnh báo cấu trúc lịch vàng H1 là bẫy rollover, phải kiểm trước khi tin.\n\n**Bài học mới:** khi chân mạnh nhất đã chạm TRẦN ĐÒN BẨY x10, ghép thêm chân tương quan thấp KHÔNG tăng TIỀN (3 chân 260,8% vs chân tốt nhất 229,3% tn693; 4 chân 342% vs 371% tn700) — đa dạng hóa bị trần đòn bẩy triệt tiêu (hb37). Đã ghi: gt40 DANG_THU, hb35/36/37/38, câu hỏi #18/#19.\n",
+      "reports/nc_tho/vong_00017.md": "# THO vong 17 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n12 lan goi cong cu · 398191 token vao · 18778 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 6 phép thử mới (tn705-714), tất cả XAUUSD H1.**\n\n1. **Đã thử & số:** mo_xe_lenh gt40-MUA (tn705) → lộ lọc \"bar breakout LỚN\"; quet kl_pv×bd_pv 20 ô = CAO_NGUYEN 20/20 (tn708); thu_co_che MUA (tn710) và BAN (tn711); ghep 2 chiều (tn713); kiểm biên giới trên gt42-BAN fade (tn714).\n\n2. **Kết quả chính — gt40 được NÂNG CẤP (gt43):** lọc bar breakout lớn (phần vị khối lượng ≥0,9 VA phần vị biên độ ≥0,95) → **MUA 332 lệnh 46,70 bps sharpe 3,31, 460,98%/năm @x10 DD 49,4%, 8/9 năm** (base 30,47 bps, 381,77%/năm DD 75,6%); **BAN 335 lệnh 41,94 bps, 350,73%/năm @x10 DD 55,4%, 9/9 năm**. Điểm mạnh: DD giảm 75,6→49,4% (còn nhiều địa DD dưới trần x10), lại_ròng/phí 11,6-12,9, beta ~0, không cảnh báo.\n\n3. **Biên giới cơ chế (hb40):** lọc này NÂNG PHA_VO nhưng PHÁ FADE — gt42-BAN + lọc = −10,90 bps, 2/9 năm. Nghĩa: bar khối lượng+biên độ cực cao = động lượng THẬT → tiếp diễn, không đảo chiều. Lọc chỉ dùng cho họ PHA_VO.\n\n4. **Gộp 2 chiều gt43 = 442,87%** (không hơn chân tốt nhất 447,41%; tương quan −0,036) → đã chạm trần đòn bẩy x10, gộp không lợi.\n\n5. **Đã ghi:** gt43 (giả thuyết nâng cấp), hb39 (bằng chứng nâng cấp, 0,7), hb40 (biên giới cơ chế, 0,65), ch20 (câu hỏi xác nhận).\n\n6. **Giao cho Claude:** gt43 là chân mạnh nhất+dễ chịu phí nhất của dự án NHƯNG là lọc HẬU KIẾM tìm bởi mo_xe → bắt buộc (a) xác nhận 2021+, (b) phí x2-3, (c) MT5, và kiểm trùng lặp với gt39 (động lượng cú sốc). Nếu sống: thay base gt40 làm chân chính.\n\n7. **Việc tiếp theo:** chờ Claude xác nhận gt43; nếu qua → ghep gt43-MUA + gt42-BAN (fade) làm danh mục 2 họ (PHA_VO + FADE) để tăng công suất.\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T13:05:50"
+}
