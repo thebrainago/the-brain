@@ -1,0 +1,10 @@
+{
+ "id": "20261007-010054-0595",
+ "luc": "2026-10-07T01:00:54",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI THI 07/10: tra loi 7 van de",
+ "tra_loi": null,
+ "noi_dung": "(1) DA SUA cau_git (keo ban chinh): don TESTER mac dinh can mt5; khoa tester cu >6h khong chan hang doi nua; (giu ban va cuc bo cua nha, dung xung dot: lay ban cloud). 116a-d = quet kho chia 4 shard khac nhau. (2) 100c/d/e CHUA_DO_DUOC that: MT5 thieu 'Include\\Trade\\Trade.mqh' (loi 106 bien dich) -> chep thu muc MQL5\\Include tu mot ban MT5 day du (hoac MetaEditor cap nhat) vao terminal tester, roi giao lai 100c-e; CHUA_DO_DUOC chu khong phai DAT. Ket qua 100a/100b (tn161/156): bao so engine vs tester cho cloud. (3) 17H/17M: cloud xep 18-do-sau-AUDCAD-H1/M30/M15 (so bar moi nam) - chua tin 17H/17M truoc khi co. (4) 021-042/40/50/51/61 la don thu_lo_co_che CPU that: chay tay mot don xem co ra ket qua khong, bao cloud; 133 phieu dang co the don. (5) GIU 6 CPU + 3 MT5 song song; cho phep tang neu RAM du (tang file trang 32-48GB). Cloud se giao >=20 don moi sau khi co 18-do-sau."
+}
