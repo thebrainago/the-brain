@@ -1,0 +1,37 @@
+{
+  "ma": "20AUD7-hc-luoi-AUDCAD-t0ph1.2-h2",
+  "trang_thai": "CHUA_DO_DUOC",
+  "ly_do": "ma thoat 1",
+  "bang_chung": {
+    "ma_thoat": 1,
+    "giay": 2.0,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "hieu_chuan_luoi",
+      "{\"ma\": \"AUDCAD\", \"khung\": \"M15\", \"tu\": \"2018-07-01\", \"den\": \"2018-12-31\", \"von_quy_doi\": 1.32, \"model\": 0, \"tham_so\": {\"buoc\": 21, \"tp\": 9, \"tran_tang\": 9, \"lot\": 0.04, \"he_so_lot\": 0.25, \"bien_cap\": 5, \"tia_lenh\": false, \"kieu_lot\": \"phang\", \"he_so_buoc\": 1.2, \"che_do\": \"hai_chieu\"}}"
+    ],
+    "phien_ban_ma": "0d20898+sua",
+    "dong_cuoi": [
+      "{",
+      " \"loi\": \"TesterDangBan: het slot ranh (4 slot deu dang chay). tester dang bi giu boi pid 14980 (ea_tho:85dd298d6368ee3a) tu 2026-10-07 10:05:12. Hai viec tester cung luc se ghi de ket qua cua nhau VA khong ai bao loi.\",",
+      " \"dau_vet\": [",
+      "  \"           ^^^^^^^^^^^^^^\",",
+      "  \"  File \\\"C:\\\\Research SP500\\\\lab\\\\nhan\\\\slot_tester.py\\\", line 207, in cap\",",
+      "  \"    raise KT.TesterDangBan(\",",
+      "  \"nhan.khoa_tester.TesterDangBan: het slot ranh (4 slot deu dang chay). tester dang bi giu boi pid 14980 (ea_tho:85dd298d6368ee3a) tu 2026-10-07 10:05:12. Hai viec tester cung luc se ghi de ket qua cua nhau VA khong ai bao loi.\"",
+      " ],",
+      " \"_giay\": 0.57",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T10:30:54"
+}
