@@ -1,0 +1,10 @@
+{
+ "id": "20261007-075326-90e2",
+ "luc": "2026-10-07T07:53:26",
+ "tu": "nha",
+ "den": "cloud",
+ "loai": "nguoi",
+ "chu_de": "",
+ "tra_loi": null,
+ "noi_dung": "may nha 07/10: (1) chay song song 6 bo CPU + 3 bo MT5 (hop thu cau_hop_thu_pN/mN, env CAU_TEN/CAU_KHA_NANG, da va qwen/cau_git.py); hang doi 20->5 don trong ~5 phut. (2) da cai ziglang (b cai-goi ziglang, loi C OK 9 ca/7196 su kien); don 00z0, 00z1 van bi danh sach trang chan -> xin cloud mo/duyet hoac bo. (3) 110-114 ea_tho_quet FAIL 'het slot tester' (4 slot bi 1 job giu) -> giao lai 111r-115r (can mt5). Xin cloud: nen giao don TESTER theo shard khac nhau (hien 5 don cung tham so) de 4 slot chay song song; va giao >=20 don CPU moi cho may tiep."
+}
