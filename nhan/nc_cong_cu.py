@@ -471,7 +471,7 @@ CONG_CU: list[dict] = [
          "luoi": {"type": "object", "description": "{tham_so: [gia tri,...]}, vd {\"buoc\": [10,15,20], \"tp\": [8,12]}"},
          "co_dinh": {"type": "object", "description": "tham so ThamSo khong doi trong luot quet"},
          "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
-         "toi_da_o": {"type": "integer", "description": "tran so o (mac dinh 300, toi da 1000); vuot thi lay mau theo hat"},
+         "toi_da_o": {"type": "integer", "description": "tran so o (mac dinh 300, toi da 3000); vuot thi lay mau theo hat"},
          "hat": {"type": "integer", "description": "hat lay mau khi tich Descartes vuot toi_da_o (mac dinh 0)"},
          "gt_id": _GT}, ["ma", "khung", "luoi"],
         lambda ma, khung, luoi=None, co_dinh=None, von=10000.0, toi_da_o=300, hat=0, gt_id=None, vong_id=None, **_:

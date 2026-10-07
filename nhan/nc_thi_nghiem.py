@@ -1533,7 +1533,7 @@ def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | Non
     if chua:
         return tu_choi("tham so %s CHUA cai dat trong luoi.py (khai bao nhung engine khong doc: dat != 0 se cho ket qua y het 0). "
                        "Bo no khoi quet" % chua)
-    toi_da_o = max(1, min(int(toi_da_o), 1000))
+    toi_da_o = max(1, min(int(toi_da_o), 3000))
     khoa = list(luoi)
     dai = [len(luoi[k]) for k in khoa]
     tong = math.prod(dai)
