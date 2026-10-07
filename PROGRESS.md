@@ -60,3 +60,8 @@ ha + m1-m3 CHI nhan TESTER: env CAU_CHI_LAN=TESTER (va qwen/cau_git.py chay_mot_
 - Da do lai swap/phi 380 ma XM (thay ban MT5 17; 13 ma hop dong thang giu so cu) va spread bar H1 80 ma (EURCAD 1,74 bps; AUDCAD 3,28; NZDCAD 4,84; EURGBP 2,54; vang 0,71; US500 1,0). Backup: config/chi_phi_do.json.bak_xm10. Sua TERMINAL['XM'] -> "XM Global MT5". Terminal XM gio dang nhap san tk trang (demo cu 345930355 khong con mac dinh).
 - GPU may nha GT 730 2GB -> reports/gpu_may_nha.md (da bao cloud).
 - Viec tiep: chay lai CLMCA Model 0 + hieu chuan voi chi phi moi; p11/p12 treo.
+
+## 07/10/2026 23:35 - DIA RAM + DEFENDER + 18 BO
+- Defender loai tru xong; dia RAM R: 4GB (OSFMount) co data + cache MT5 s2,s3; script `ramdisk_khoi_dong.ps1` (tasks TheBrainRamdisk luc boot, TheBrainRamdiskDongBo 10 phut). lab\data = junction R:\data, goc lab\data_goc. s1 se doi sang R: lan khoi dong sau (dang chay tester).
+- 18 bo CPU (p15-p18 moi clone), TheBrainSongSong -N 18. CPU 100%, RAM trong >=15 GB. Chi tiet: reports/dung_tai_day.md.
+- Doc tuan tu khong nhanh hon (nut that la CPU). Chua lam: cat som mo phong khi lo>=70% von (muc 4 chi thi cloud 12:30).
