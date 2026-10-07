@@ -49,16 +49,42 @@ def xong_gia(d: dict) -> str | None:
     return m.group(0) if m else None
 
 
+def _nhom(d: dict) -> str:
+    """Nhom don de uoc thoi gian: sweep theo KHUNG+kieu (M5 nang gap ~40 lan H1), con lai theo lan."""
+    import re
+    m = re.match(r"22\d+-\w+-(M5|M15|M30|H1)-(ha|mu|ba)-", d.get("ma", ""))
+    if m:
+        return "sweep-%s-%s" % (m.group(1), m.group(2))
+    if "hc-luoi" in d.get("ma", ""):
+        return "hieu-chuan-MT5"
+    return str(d.get("lan") or "NHE").upper()
+
+
+def lich_su_giay() -> dict[str, float]:
+    """Thoi gian CHAY THAT trung binh (giay) theo nhom, tu viec/xong (bang_chung.giay). Thay cho han_phut*0.3 (sai ~100 lan)."""
+    tong: dict[str, list[float]] = {}
+    for f in (VIEC / "xong").glob("*.json"):
+        d = _doc(f)
+        g = (d.get("bang_chung") or {}).get("giay")
+        if g is not None:
+            tong.setdefault(_nhom(d), []).append(float(g))
+    return {k: sum(v) / len(v) for k, v in tong.items() if v}
+
+
 def tong_hop(ngung_phut: float = 30.0, bay_gio: float | None = None) -> dict:
     t = bay_gio or time.time()
     tim = nhip_tim(ngung_phut, t)
     cho = [f for f in (VIEC / "cho").glob("*.json") if not (VIEC / "xong" / f.name).exists()]
     gio_con = 0.0
+    ls = lich_su_giay()
+    giay_lan: dict[str, float] = {}
     theo_lan: dict[str, int] = {}
     for f in cho:
         d = _doc(f)
-        gio_con += float(d.get("han_phut") or 30) / 60.0 * 0.3         # han la tran, thuc te ~30% han
         lan = str(d.get("lan") or "NHE").upper()
+        g = ls.get(_nhom(d), ls.get(lan, 60.0))           # giay chay that theo lich su (khong dung han_phut)
+        giay_lan[lan] = giay_lan.get(lan, 0.0) + g
+        gio_con += g / 3600.0
         theo_lan[lan] = theo_lan.get(lan, 0) + 1
     xong = sorted((VIEC / "xong").glob("*.json"), key=lambda f: f.stat().st_mtime)
     gan = [f for f in xong if t - f.stat().st_mtime < 3600]
@@ -77,7 +103,7 @@ def tong_hop(ngung_phut: float = 30.0, bay_gio: float | None = None) -> dict:
             continue
         if t - f.stat().st_mtime > 3 * 3600:
             ket.append(f.stem)
-    return {"nhip_tim": tim, "con_cho": len(cho), "theo_lan": theo_lan, "gio_viec_con": round(gio_con, 1),
+    return {"nhip_tim": tim, "con_cho": len(cho), "theo_lan": theo_lan, "gio_viec_con": round(gio_con, 1), "gio_tuong_doi": {k: round(v / 3600, 1) for k, v in giay_lan.items()},
             "xong_1h": tt, "xong_gia_1h": gia, "dang_ket": ket[:10]}
 
 
