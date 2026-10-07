@@ -1,0 +1,54 @@
+{
+  "ma": "220316-EURCAD-M15-ha-co5",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 274.4,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"EURCAD\", \"khung\": \"M15\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"cong\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 5}"
+    ],
+    "phien_ban_ma": "11101d2c+sua",
+    "dong_cuoi": [
+      "   \"so_lenh\": 1244,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 0.58,",
+      "   \"maxdd_pct\": -0.17,",
+      "   \"he_so_lot_tai_tran\": 1000.0,",
+      "   \"loi_suat_o_tran_pct\": 583.41,",
+      "   \"hon_moc_pct\": 583.41",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"hai_chieu\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"cong\",",
+      "  \"buoc\": 8,",
+      "  \"tp\": 8,",
+      "  \"tran_tang\": 10,",
+      "  \"cho_lui\": 6,",
+      "  \"he_so_lot\": 1.2",
+      " },",
+      " \"trang_thai\": \"AM\",",
+      " \"ly_do\": \"HON_HOP: 2661/3000 o co lai, tot nhat +3408.1%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 3000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 940,",
+      " \"_giay\": 245.71",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/nc_tho/vong_00027.md": "# THO vong 27 (ds/deepseek-flash, env:AIBOX_API_KEY)\n\n21 lan goi cong cu · 439172 token vao · 33089 token ra · 0.0000 USD\n\n**TỔNG KẾT VÒNG (thợ khám phá) — 9 phép thử (tn920-928), gt59 mới (đã BAC_BO), 5 hiểu biết (hb71-75), 1 câu hỏi (#31), cập nhật gt34/gt35.**\n\n**Đã thử & số:**\n- **mo_xe_lenh trên gt34-MUA** (tn920-922): bộ lọc mạnh nhất là `don20 thấp` (94,1% thắng, 113 bps), `gio<14` (97,8 vs 3,6 bps), `kl_pv thấp`, `than_pv cao`. Nhưng tất cả đều là \"hiếm + phien A\".\n- **gt34+gio<14** (tn920): 187 lệnh, 60,4 bps, t10,0, **9/9 năm**, 256%@x10 DD40,6 — hơn base (219%) nhưng **không cộng dồn**: +than_pv+trail = 315,7%@x10 (8/9 năm) < **gt58 348,7%@x10 (9/9)** → phiên A chỉ là đòn bẩy phụ.\n- **Quét nguong dip don20** (tn925, CAO_NGUYEN 12/12): TIỀN tốt nhất ở ngưỡng **RỘNG** (don20<0,7: 207 lệnh 217%@x10 9/9 năm), siết về 0,344 chỉ còn 162%@x10 và **7/9 năm** → **\"double-extreme\" (#13b) KHÔNG phải nâng cấp**.\n- **gt59 — cơ chế sang FX** (tn927/928): EURGBP −2,02 bps t−0,83 AM; USDJPY +1,20 bps 0,45x phí → **cơ chế là ĐẶC THÙ VÀNG**, hướng \"chân thứ 2 từ FX\" đóng.\n- **Vàng M30** (tn513): 411 lệnh nhưng 9,94 bps, lãi ròng 2,74x phí, 5/8 năm → hạ khung thất bại vì phí/bar.\n\n**Phát hiện lớn nhất (rủi ro):** mọi biến thể fade đều có **cùng một hình dạng năm** — x1 ≈ +25..+50%/năm ở 2015-2017 và **gần phẳng 2019-2021 (+0,9..+2,8%/năm)**; biến thể cực đoan nhất còn **âm 2019/2020**. \"DƯƠNG 9/9 năm\" che giấu rằng ~90% CAGR đến từ đúng giai đoạn 2013-2018 mà bar bị nghi artifact. Đây là lý do tôi mở **#31 (u0,88): kiểm MT5 tách 2015-2017 vs 2019-2021 cho cả hồ fade** — nếu phần 2015-2017 sụp như bar giờ-0 thì gt34/gt58 cũng là artifact và đàn chỉ còn ~+1-3%/năm x1.\n\n**Việc tiếp theo đáng giá nhất:** #31 (MT5 tách giai đoạn cho hồ fade), song song #28 (bar giờ-0) và #30 (xác nhận gt58).\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-07T14:24:33"
+}
