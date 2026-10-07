@@ -156,6 +156,10 @@ $o.pagefile_dung=@(Get-CimInstance Win32_PageFileUsage | Select-Object Name,Allo
 $o.pagefile_cai=@(Get-CimInstance Win32_PageFileSetting | Select-Object Name,InitialSize,MaximumSize)
 $o.he_thong=@(Get-CimInstance Win32_ComputerSystem | Select-Object AutomaticManagedPagefile,TotalPhysicalMemory,NumberOfProcessors,NumberOfLogicalProcessors)
 $o.he_dieu_hanh=@(Get-CimInstance Win32_OperatingSystem | Select-Object Caption,Version,BuildNumber,OSArchitecture)
+$o.gpu=@(Get-CimInstance Win32_VideoController | Select-Object Name,AdapterRAM,DriverVersion,CurrentHorizontalResolution)
+$o.defender_loai_tru=@((Get-MpPreference).ExclusionPath).Count
+$o.opencl=[bool](Test-Path "$env:windir\System32\OpenCL.dll")
+$o.cuda=[bool](Test-Path "$env:windir\System32\nvcuda.dll")
 $o.nhiet=@(Get-CimInstance -Namespace root/wmi -ClassName MSAcpi_ThermalZoneTemperature | Select-Object CurrentTemperature)
 $o.dien=(powercfg /getactivescheme | Out-String)
 $o | ConvertTo-Json -Depth 4 -Compress
@@ -485,6 +489,11 @@ def quet(runner=None, voi_mt5: bool = True, voi_nhan_c: bool = True) -> dict:
         "ke_hoach_dien": _doc_dien(ps),
         "bo_mach": {k: " ".join(str(v or "").split())[:40] for k, v in (_ds((ps or {}).get("bo_mach")) or [{}])[0].items()},
         "bios": {k: " ".join(str(v or "").split())[:40] for k, v in (_ds((ps or {}).get("bios")) or [{}])[0].items()},
+        "gpu": [{"ten": " ".join(str(g.get("Name") or "").split())[:60], "vram_gb": round((_so(g.get("AdapterRAM")) or 0) / 2 ** 30, 1)}
+                for g in _ds((ps or {}).get("gpu"))],
+        "gpu_opencl": bool((ps or {}).get("opencl")),
+        "gpu_cuda": bool((ps or {}).get("cuda")),
+        "defender_so_thu_muc_loai_tru": (ps or {}).get("defender_loai_tru"),
         "nhiet_c": None,
         "do_duoc_bang_powershell": ps is not None,
         "loi_powershell": loi_ps,
