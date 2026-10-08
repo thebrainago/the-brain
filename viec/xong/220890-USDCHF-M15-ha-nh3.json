@@ -1,0 +1,54 @@
+{
+  "ma": "220890-USDCHF-M15-ha-nh3",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 360.6,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "quet_luoi",
+      "{\"ma\": \"USDCHF\", \"khung\": \"M15\", \"luoi\": {\"buoc\": [8, 10, 12, 16, 20, 24, 30, 36, 45, 60, 80, 100], \"tp\": [6, 8, 10, 13, 16, 20, 26, 34, 45, 60], \"tran_tang\": [4, 5, 6, 7, 8, 10, 12, 15], \"cho_lui\": [0, 3, 6, 10], \"he_so_lot\": [0.1, 0.2, 0.3, 0.5, 0.8, 1.2]}, \"co_dinh\": {\"che_do\": \"hai_chieu\", \"lot\": 0.01, \"kieu_lot\": \"nhan\"}, \"von\": 10000, \"toi_da_o\": 3000, \"hat\": 3}"
+    ],
+    "phien_ban_ma": "c6d08ce2+sua",
+    "dong_cuoi": [
+      "   \"cat_som\": false,",
+      "   \"co_lai\": true,",
+      "   \"loi_suat_nam_pct\": 0.35,",
+      "   \"maxdd_pct\": -2.68,",
+      "   \"he_so_lot_tai_tran\": 709.077,",
+      "   \"loi_suat_o_tran_pct\": 248.98,",
+      "   \"hon_moc_pct\": 248.98",
+      "  }",
+      " ],",
+      " \"tham_so_day_du\": {",
+      "  \"che_do\": \"hai_chieu\",",
+      "  \"lot\": 0.01,",
+      "  \"kieu_lot\": \"nhan\",",
+      "  \"buoc\": 8,",
+      "  \"tp\": 8,",
+      "  \"tran_tang\": 15,",
+      "  \"cho_lui\": 0,",
+      "  \"he_so_lot\": 1.2",
+      " },",
+      " \"trang_thai\": \"DAT\",",
+      " \"ly_do\": \"CAO_NGUYEN: 2718/3000 o co lai, tot nhat +86807.4%/nam o tran DD 80%\",",
+      " \"doc_dung\": \"Chon theo HINH DANG, khong theo o tot nhat: cuc dai cua 3000 o tren nhieu cung dep. Cao nguyen = nhieu o lan can cung CO LAI. Di tiep: `thu_luoi` voi `tham_so_day_du` tren xac_nhan (cung gia thuyet) - o tot nhat o day la LUA CHON, chua phai phep do.\",",
+      " \"tn_id\": 1621,",
+      " \"_giay\": 342.2",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/hieu_chuan/AUDCAD_M15_2018-01-03_2018-06-30_f26a9820_e3.json": "{\n \"trang_thai\": \"AM\",\n \"ket_luan\": \"LECH\",\n \"ly_do\": \"LECH o lai (engine -2.16%/nam, tester +0.62%/nam)\",\n \"ma\": \"AUDCAD\",\n \"khung\": \"M15\",\n \"cua_so\": {\n  \"tu\": \"2018.01.03\",\n  \"den\": \"2018.06.30\",\n  \"ngay\": 179,\n  \"khoa_doan\": \"AUDCAD|M15\"\n },\n \"model\": 0,\n \"von\": 10000.0,\n \"don_bay\": 100,\n \"tham_so\": {\n  \"buoc\": 35,\n  \"tp\": 6,\n  \"tran_tang\": 9,\n  \"che_do\": \"hai_chieu\",\n  \"lot\": 0.04,\n  \"muc_stopout\": 0.5,\n  \"don_bay\": 100.0,\n  \"cho_lui\": 0.0,\n  \"kieu_lot\": \"nhan\",\n  \"he_so_lot\": 0.4,\n  \"tia_lenh\": false,\n  \"bien_cap\": 5,\n  \"cap_moi_bar\": 999,\n  \"chot_tien\": 0.0,\n  \"dung_lo_tong\": 0.0,\n  \"he_so_buoc\": 1.5,\n  \"buoc_tran\": 400.0\n },\n \"he_so_quy_doi\": {\n  \"dung\": 1.32,\n  \"nguon\": \"do nguoi goi dat\",\n  \"uoc_tu_deal\": {\n   \"trung_vi\": 0.7253,\n   \"p25\": 1.2484,\n   \"p75\": 1.2863,\n   \"so_mau\": 196,\n   \"cach\": \"tong\"\n  }\n },\n \"tester\": {\n  \"lai_rong\": 30.32,\n  \"lai_nam_pct\": 0.6186804469273743,\n  \"dd\": {\n   \"von_tuong_doi_pct\": 1.26,\n   \"von_toi_da_pct\": 1.26,\n   \"so_du_pct\": 3.7,\n   \"dd_pct_cong\": 1.26,\n   \"so_sanh_pct\": 1.26\n  },\n  \"pf\": 1.06,\n  \"chat_luong_pct\": 1.0,\n  \"model\": 0,\n  \"giay\": 181.3,\n  \"thong_ke\": {\n   \"so_lenh_mo\": 196,\n   \"so_lenh_dong\": 196,\n   \"lenh_mo_cuoi\": 0,\n   \"buy\": 100,\n   \"sell\": 96,\n   \"giu_lau_nhat_gio\": 2591.97,\n   \"giu_lau_nhat_mo\": \"2018-03-14 00:00:01\",\n   \"tang_max\": 11,\n   \"do_sau_tb\": 8.106,\n   \"do_sau_p90\": 11,\n   \"lai_chua_swap\": 30.32000000000005,\n   \"swap\": 0.0,\n   \"theo_ky\": {\n    \"2018-01\": {\n     \"lai_pct\": 1.319,\n     \"so_dong\": 63,\n     \"tang_max\": 8\n    },\n    \"2018-02\": {\n     \"lai_pct\": 0.3821,\n     \"so_dong\": 24,\n     \"tang_max\": 9\n    },\n    \"2018-03\": {\n     \"lai_pct\": 0.9566,\n     \"so_dong\": 30,\n     \"tang_max\": 10\n    },\n    \"2018-04\": {\n     \"lai_pct\": 0.9848,\n     \"so_dong\": 46,\n     \"tang_max\": 9\n    },\n    \"2018-05\": {\n     \"lai_pct\": 0.4111,\n     \"so_dong\": 22,\n     \"tang_max\": 10\n    },\n    \"2018-06\": {\n     \"lai_pct\": -3.7504,\n     \"so_dong\": 11,\n     \"tang_max\": 11\n    }\n   }\n  },\n  \"bang_lenh\": \"reports/hieu_chuan/f26a982053e58369_lenh.csv.gz\",\n  \"ghep_fifo_pct\": 0.0\n },\n \"engine\": {\n  \"lai_tong\": -105.658,\n  \"lai_nam_pct\": -2.156,\n  \"dd_pct\": 1.7537,\n  \"lai_chot_nam_pct\": 1.7512,\n  \"chay\": false,\n  \"phi_spread\": 84.9047,\n  \"lai_treo\": -191.4809,\n  \"so_bar\": 1404,\n  \"tu_bar\": \"2018-01-03 00:00:00\",\n  \"den_bar\": \"2018-06-29 23:00:00\",\n  \"qc\": {\n   \"ma\": \"AUDCAD\",\n   \"pip\": 0.0001,\n   \"hop_dong\": 100000.0,\n   \"von_quy_doi\": 1.32,\n   \"khoa\": \"29f44ceb5857\"\n  },\n  \"thong_ke\": {\n   \"so_lenh_mo\": 171,\n   \"so_lenh_dong\": 161,\n   \"lenh_mo_cuoi\": 10,\n   \"buy\": 73,\n   \"sell\": 98,\n   \"giu_lau_nhat_gio\": 2399.0,\n   \"giu_lau_nhat_mo\": \"2018-03-22 00:00:00\",\n   \"tang_max\": 10,\n   \"do_sau_tb\": 6.277,\n   \"do_sau_p90\": 10,\n   \"lai_chua_swap\": -27.670018380103457,\n   \"swap\": -77.98800730848893,\n   \"theo_ky\": {\n    \"2018-01\": {\n     \"lai_pct\": 0.2972,\n     \"so_dong\": 28,\n     \"tang_max\": 5\n    },\n    \"2018-02\": {\n     \"lai_pct\": 0.3746,\n     \"so_dong\": 43,\n     \"tang_max\": 5\n    },\n    \"2018-03\": {\n     \"lai_pct\": 0.2279,\n     \"so_dong\": 20,\n     \"tang_max\": 8\n    },\n    \"2018-04\": {\n     \"lai_pct\": 0.5044,\n     \"so_dong\": 47,\n     \"tang_max\": 7\n    },\n    \"2018-05\": {\n     \"lai_pct\": 0.2541,\n     \"so_dong\": 23,\n     \"tang_max\": 9\n    },\n    \"2018-06\": {\n     \"lai_pct\": -1.9348,\n     \"so_dong\": 10,\n     \"tang_max\": 10\n    }\n   }\n  },\n  \"kiem_tung_lenh_khop\": true\n },\n \"phien_ban_engine\": 3,\n \"tn_tester_id\": 1616,\n \"tester_tu_cache\": false,\n \"khop\": {\n  \"lai\": false,\n  \"dd\": true,\n  \"lenh\": true\n },\n \"lech\": {\n  \"lai_nam_pp\": -2.775,\n  \"dd_pp\": 0.494,\n  \"lenh\": -25,\n  \"lenh_pct\": -12.76\n },\n \"dung_sai\": {\n  \"lai\": [\n   0.1,\n   1.0\n  ],\n  \"dd\": [\n   0.25,\n   2.0\n  ],\n  \"lenh\": [\n   0.15,\n   3.0\n  ]\n },\n \"theo_ky\": [\n  {\n   \"ky\": \"2018-01\",\n   \"tester_pct\": 1.319,\n   \"engine_pct\": 0.2972,\n   \"tester_dong\": 63,\n   \"engine_dong\": 28,\n   \"tester_tang\": 8,\n   \"engine_tang\": 5\n  },\n  {\n   \"ky\": \"2018-02\",\n   \"tester_pct\": 0.3821,\n   \"engine_pct\": 0.3746,\n   \"tester_dong\": 24,\n   \"engine_dong\": 43,\n   \"tester_tang\": 9,\n   \"engine_tang\": 5\n  },\n  {\n   \"ky\": \"2018-03\",\n   \"tester_pct\": 0.9566,\n   \"engine_pct\": 0.2279,\n   \"tester_dong\": 30,\n   \"engine_dong\": 20,\n   \"tester_tang\": 10,\n   \"engine_tang\": 8\n  },\n  {\n   \"ky\": \"2018-04\",\n   \"tester_pct\": 0.9848,\n   \"engine_pct\": 0.5044,\n   \"tester_dong\": 46,\n   \"engine_dong\": 47,\n   \"tester_tang\": 9,\n   \"engine_tang\": 7\n  },\n  {\n   \"ky\": \"2018-05\",\n   \"tester_pct\": 0.4111,\n   \"engine_pct\": 0.2541,\n   \"tester_dong\": 22,\n   \"engine_dong\": 23,\n   \"tester_tang\": 10,\n   \"engine_tang\": 9\n  },\n  {\n   \"ky\": \"2018-06\",\n   \"tester_pct\": -3.7504,\n   \"engine_pct\": -1.9348,\n   \"tester_dong\": 11,\n   \"engine_dong\": 10,\n   \"tester_tang\": 11,\n   \"engine_tang\": 10\n  }\n ],\n \"ky_lech_dau_tien\": {\n  \"ky\": \"2018-01\",\n  \"tester_pct\": 1.319,\n  \"engine_pct\": 0.2972,\n  \"tester_dong\": 63,\n  \"engine_dong\": 28,\n  \"tester_tang\": 8,\n  \"engine_tang\": 5\n },\n \"nhan\": [\n  \"chat luong lich su cua tester chi 1% (Model 0): tick sinh tu M1 / gia dinh - lech co the do mo phong tick, khong han la loi engine\",\n  \"tien bao gia khac tien tai khoan: he so quy doi 1.3200 (engine tinh bang tien bao gia, da chia he so nay)\",\n  \"he so quy doi troi trong cua so (p25 1.248 .. p75 1.286): ty gia doi nhieu, sai so tien <= ~5%\",\n  \"swap: tester +0.00%/nam engine -1.59%/nam (chenh dang ke: kiem swap_mode / swap 3 ngay cua ma)\",\n  \"von_quy_doi dat 1.3200 khac uoc luong tu deal tester 0.7253 (82.0%)\"\n ],\n \"so_khoa\": [\n  -2.16,\n  0.62,\n  1.75,\n  1.26,\n  171,\n  196\n ],\n \"tn_id\": 1617\n}"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-08T08:23:51"
+}
