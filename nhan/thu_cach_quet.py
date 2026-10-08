@@ -88,16 +88,17 @@ def so_sanh(diem: np.ndarray, co_lai: np.ndarray, chay: np.ndarray, dai: list[in
 
     # thua-roi-min: moi truc lay chi so chan (va chi so cuoi), tinh lan can +-1 cua top-M o thua
     chi_so = {t: i for i, t in enumerate(toa)}
-    thua = [i for i, t in enumerate(toa) if all(c % 2 == 0 or c == d - 1 for c, d in zip(t, dai))]
-    for m in (5, 10):
-        top_m = sorted(thua, key=lambda i: -diem[i])[:m]
-        tap = set(thua)
-        for i in top_m:
-            if diem[i] == -math.inf:
-                continue
-            lan = [range(max(0, c - 1), min(d, c + 2)) for c, d in zip(toa[i], dai)]
-            tap.update(chi_so[t] for t in itertools.product(*lan))
-        kq["thua_roi_min_top%d" % m] = do(tap, float(len(tap)))
+    for buoc in (2, 3):                              # buoc 2 = chi so chan (che do thua_roi_min); buoc 3 = thua hon nua
+        thua = [i for i, t in enumerate(toa) if all(c % buoc == 0 or c == d - 1 for c, d in zip(t, dai))]
+        for m in (5, 10, 20):
+            top_m = sorted(thua, key=lambda i: -diem[i])[:m]
+            tap = set(thua)
+            for i in top_m:
+                if diem[i] == -math.inf:
+                    continue
+                lan = [range(max(0, c - buoc + 1), min(d, c + buoc)) for c, d in zip(toa[i], dai)]
+                tap.update(chi_so[t] for t in itertools.product(*lan))
+            kq["thua_roi_min_top%d" % m if buoc == 2 else "thua3_roi_min_top%d" % m] = do(tap, float(len(tap)))
 
     if diem_1_3 is not None:
         for ten, giu in (("hai_tang_co_lai_1_3", co_lai_1_3.astype(bool)),
