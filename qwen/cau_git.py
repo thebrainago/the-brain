@@ -62,6 +62,7 @@ import re
 import socket
 import subprocess
 import time
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from . import cau_loi as CL
@@ -128,11 +129,14 @@ TRANG_THAI = ("DAT", "AM", "CHUA_DO_DUOC")
 
 #: DUY NHAT nhung duong nay duoc `git add`. Xem luat an toan 1.
 #:
+#: `du_lieu_gia` (08/10/2026): `b xuat-gia` (chu du an duyet 05/10: gia vai cap M15 tu 2018, da SAO LUU ngoai git) ghi o day; thieu dong
+#: nay thi file xuat xong nam lai o may nha va cloud khong bao gio thay - ke hoach 05/10 chua tung chay qua duoc vi the.
+#:
 #: `config/` KHONG co trong danh sach, co chu dich: `CLAUDE.md` quy tac phien
 #: cam phien [DOC] sua `config/*.json`, va may chay `q` dung la mot phien nhu
 #: vay doi voi ma nguon. `data/` va `nao.db` da bi gitignore san nhung van
 #: khong liet ke o day - hai lop chan tot hon mot.
-DUOC_DAY = ("viec/xong", "viec/hoi", "viec/dang", "viec/may", "so_cai", "reports")
+DUOC_DAY = ("viec/xong", "viec/hoi", "viec/dang", "viec/may", "so_cai", "reports", "du_lieu_gia")
 
 #: Vong `q` goi `dong_bo()` moi nhip. Keo/day that thi ton mang, nen chi lam
 #: khi da qua ngan nay giay ke tu lan truoc.
@@ -805,6 +809,59 @@ def _hop_may(don: dict, may: str | None, kha_nang: list[str] | None) -> bool:
     return True
 
 
+MUI_GIO_NHA_PHUT = 7 * 60       # may nha o Viet Nam (UTC+7); nhip tim cu khong ghi mui gio
+
+
+def mui_gio_phut_may() -> int:
+    """Chenh lech gio dia phuong cua MAY NAY so voi UTC (phut, dong = duong): ghi vao nhip tim de ben doc doi ve UTC."""
+    return int(-(time.altzone if time.localtime().tm_isdst > 0 else time.timezone) // 60)
+
+
+def tuoi_nhip_phut(d: dict, bay_gio: float | None = None) -> float | None:
+    """Tuoi (phut) cua mot nhip tim `viec/may/*.json`, None neu khong doc duoc `luc`.
+
+    `luc` la gio DIA PHUONG cua may ghi no, khong mui gio -> doi ve UTC bang `mui_gio_phut` trong nhip (nhip cu khong ghi: +7).
+    Truoc 08/10/2026 cloud (UTC) tru thang gio nha (UTC+7) nen moi nhip 'tre' 7 gio: bo chay chet that van hien 'song'
+    (monitor bao 19/22 song trong khi chi 1 bo chay con nhip tim trong 30 phut)."""
+    try:
+        luc = datetime.fromisoformat(str(d.get("luc")))
+    except (TypeError, ValueError):
+        return None
+    off = d.get("mui_gio_phut")
+    if not isinstance(off, (int, float)) or isinstance(off, bool):
+        off = MUI_GIO_NHA_PHUT
+    bay = datetime.fromtimestamp(bay_gio if bay_gio is not None else time.time(), timezone.utc).replace(tzinfo=None)
+    return (bay - (luc - timedelta(minutes=off))).total_seconds() / 60
+
+
+def tag_ma(lab: Path | None = None) -> list[str]:
+    """Nhan KHA NANG suy ra tu CHINH MA dang chay o `lab` (khong khai tay, khong noi doi duoc).
+
+    Don khai `can: ["engine4"]` chi duoc bo chay NAP MA CO tinh nang do nhan. Vi sao: ma cua cloud toi may cham (08/10/2026
+    lab nha tre ~270 commit) - mot don can ma moi ma bo chay cu nhan nham thi chay SAI hoac treo, roi ghi CHUA_DO_DUOC: mat
+    mot don va mot luot may. Co nhan thi don CHO bo chay moi (ma toi may roi no tu chay), khong bi dot.
+
+    - `ma-0810`   : bo chay co giet CA CAY tien trinh khi het han + khong doi mai ong dan (`che_do_choi`), tu keo ma lab.
+    - `engineN`  : `nhan/luoi.PHIEN_BAN_ENGINE` = N (khai ca engine1..N: don can >= bac nao cung khai `engine<bac>`).
+                   `engine4` = mo hinh bar `duong_di` (ban cu `cuc_tri` lac quan x2,2 trung vi so voi tester).
+    - `dien-dan-v2`: `nhan/doc_dien_dan` biet tim trang ke + that bai trung thuc.
+    """
+    lab = Path(lab) if lab else GOC
+    ra = ["ma-0810"]
+    try:
+        m = re.search(r"^PHIEN_BAN_ENGINE\s*=\s*(\d+)", (lab / "nhan" / "luoi.py").read_text(encoding="utf-8", errors="replace"), re.M)
+        if m:
+            ra += ["engine%d" % i for i in range(1, int(m.group(1)) + 1)]
+    except OSError:
+        pass
+    try:
+        if "def tim_trang_tiep(" in (lab / "nhan" / "doc_dien_dan.py").read_text(encoding="utf-8", errors="replace"):
+            ra.append("dien-dan-v2")
+    except OSError:
+        pass
+    return ra
+
+
 def nhan_viec(don: dict, may: str, nhanh: str, goc: Path | None = None) -> bool:
     """Dat PHIEU NHAN VIEC `viec/dang/<ma>.json` roi PUSH: ai push duoc truoc la nguoi lam don do.
 
@@ -1176,6 +1233,8 @@ def chay_mot_don_dang_cho(goc: Path | None = None, kiem_trang: bool = True,
     if chi_lan is None:
         chi_lan = cau_hinh().get("chi_lan") or []
     chi_lan = [str(x).upper() for x in chi_lan]
+    if kha_nang is not None:            # + nhan suy ra tu ma dang chay (xem `tag_ma`): don can `engine4` chi bo chay nap ma moi moi nhan
+        kha_nang = list(kha_nang) + [t for t in tag_ma(lab_that) if t not in kha_nang]
     for d in don_dang_cho(hop, may=may):
         if not _hop_may(d, may, kha_nang):
             continue

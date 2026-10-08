@@ -138,10 +138,11 @@ def nhip_tim(hop: Path, c: dict, trang_thai: str, dang_chay: str | None = None, 
     `lab_keo` = nhan NGAN on dinh cua lan keo MA NGUON lab gan nhat (`CG.tom_tat_keo_lab`): `kip` | `tre: <ly do>` |
     `bo_qua: <ly do>`. Cloud doc o day de biet ma cua minh da TOI may thuc thi chua, va neu chua thi vi sao."""
     f = hop / "viec" / "may" / ("%s.json" % _ten(c["ten"]))
-    moi = {"ten": c["ten"], "kha_nang": c["kha_nang"], "phien_ban_ma": CG.phien_ban_ma_nguon(GOC),
+    moi = {"ten": c["ten"], "kha_nang": list(c["kha_nang"]) + [t for t in CG.tag_ma(GOC) if t not in c["kha_nang"]],
+           "phien_ban_ma": CG.phien_ban_ma_nguon(GOC),
            "trang_thai": trang_thai, "dang_chay": dang_chay, "con_cho": int(con_cho),
            "den": den, "python": sys.version.split()[0], "he_dieu_hanh": platform.platform()[:60],
-           "luc": time.strftime("%Y-%m-%dT%H:%M:%S")}
+           "luc": time.strftime("%Y-%m-%dT%H:%M:%S"), "mui_gio_phut": CG.mui_gio_phut_may()}
     if lab_keo:
         moi["lab_keo"] = str(lab_keo)[:160]
     if den and den != "XANH" and ly_do_den:
@@ -165,10 +166,8 @@ def doc_may(goc: Path | None = None) -> list[dict]:
     for p in sorted(thu.glob("*.json")) if thu.exists() else []:
         d = _doc(p)
         if d:
-            try:
-                d["tuoi_phut"] = round((time.time() - time.mktime(time.strptime(d["luc"], "%Y-%m-%dT%H:%M:%S"))) / 60)
-            except (KeyError, ValueError):
-                d["tuoi_phut"] = None
+            tuoi = CG.tuoi_nhip_phut(d)           # `luc` la gio DIA PHUONG cua may ghi: doi ve UTC (cloud va nha khac mui gio)
+            d["tuoi_phut"] = None if tuoi is None else round(tuoi)
             ra.append(d)
     return ra
 

@@ -142,6 +142,16 @@ class DuaLai(unittest.TestCase):
              "loi_ha_tang": {"nhan": "thieu_thu_vien", "nhom": "sua_duoc", "bang_chung": "ImportError: pyarrow"}}}), encoding="utf-8")
         self.assertEqual(CL.dua_lai(self.goc)["dua_lai"], ["e"])
 
+    def test_don_ten_file_khac_ma_van_duoc_dua_lai(self):
+        """Ket qua nam o viec/xong/<ma>.json; don goc co the ten file khac ma (`021-lo-cmt-audcad-0.json` co ma `lo-dsl_cmt-AUDCAD-21`).
+        Truoc 08/10/2026 `dua_lai` tim `viec/cho/<ma>.json` nen xep nham don do vao `khong_chay_lai` va khong bao gio chay lai."""
+        (self.goc / "viec" / "cho" / "021-lo-cmt-audcad-0.json").write_text(json.dumps({"ma": "lo-dsl_cmt-AUDCAD-21"}), encoding="utf-8")
+        self._don("lo-dsl_cmt-AUDCAD-21", "ImportError: Unable to find a usable engine; tried using: 'pyarrow'", co_don=False)
+        r = CL.dua_lai(self.goc)
+        self.assertEqual((r["dua_lai"], r["khong_chay_lai"]), (["lo-dsl_cmt-AUDCAD-21"], []))
+        self.assertFalse((self.goc / "viec" / "xong" / "lo-dsl_cmt-AUDCAD-21.json").exists())
+        self.assertEqual(sorted(CL.don_theo_ma(self.goc)), ["lo-dsl_cmt-AUDCAD-21"])
+
     def test_thieu_du_lieu_khong_tu_dua_lai(self):
         self._don("b", "FileNotFoundError: khong co du lieu cho COFFEE")
         r = CL.dua_lai(self.goc)

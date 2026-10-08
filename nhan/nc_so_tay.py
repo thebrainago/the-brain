@@ -296,6 +296,15 @@ def usd_hom_nay() -> float:
 
 
 # --------------------------------------------------------------- TOM TAT
+def _engine_hien_hanh() -> int | None:
+    """`luoi.PHIEN_BAN_ENGINE` cua ma dang chay; None neu khong nap duoc engine (khong loc gi - khong doan)."""
+    try:
+        from nhan import luoi as LU
+        return int(LU.PHIEN_BAN_ENGINE)
+    except Exception:                                        # noqa: BLE001 - so tay doc duoc ca khi thieu numpy
+        return None
+
+
 def tom_tat(so_dong: int = 12) -> dict:
     """HO SO NGHIEN CUU cho dau moi chu ky: gon, du de khong lap lai viec cu."""
     dem = {b: int(mot("SELECT COUNT(*) n FROM %s" % b).get("n") or 0)
@@ -317,6 +326,8 @@ def tom_tat(so_dong: int = 12) -> dict:
                "ORDER BY (nguon='nguoi') DESC, uu_tien DESC, id ASC LIMIT ?", so_dong)
     # Thi nghiem tot nhat theo TIEN duoi tran DD chu du an (tren kham_pha / xac_nhan)
     tot = []
+    luoi_cu = 0                                               # ket qua luoi cua engine cu: dem, KHONG xep hang (xem `_engine_hien_hanh`)
+    pb_engine = _engine_hien_hanh()
     for r in nhieu("SELECT id, gt_id, loai, ma, khung, doan, tom_tat, ket_qua FROM thi_nghiem "
                    "WHERE loai IN ('thu_co_che','xac_nhan','luoi') AND trang_thai='DAT' "
                    "ORDER BY id DESC LIMIT 400"):
@@ -324,6 +335,9 @@ def tom_tat(so_dong: int = 12) -> dict:
             kq = json.loads(r["ket_qua"] or "{}")
         except Exception:
             kq = {}
+        if r["loai"] == "luoi" and pb_engine is not None and (kq.get("engine") or {}).get("phien_ban") != pb_engine:
+            luoi_cu += 1
+            continue
         tn_ = kq.get("tien") or {}
         # he luoi (loai='luoi') ghi cung khai niem duoi ten khac: loi suat o he so lot cham tran maxDD 80%
         cg = tn_.get("cagr_duoi_tran_pct", tn_.get("loi_suat_o_tran_pct"))
@@ -350,7 +364,7 @@ def tom_tat(so_dong: int = 12) -> dict:
     return {"dem": dem, "tong_phep_thu_kham_pha": tong_phep_thu,
             "gia_thuyet_theo_trang_thai": theo_tt,
             "gia_thuyet_dang_mo": gt_mo, "gia_thuyet_da_ket": gt_xong,
-            "hieu_biet": hb, "cau_hoi_mo": ch, "thi_nghiem_tot_nhat": tot[:so_dong],
+            "hieu_biet": hb, "cau_hoi_mo": ch, "thi_nghiem_tot_nhat": tot[:so_dong], "luoi_engine_cu": luoi_cu,
             "thi_nghiem_gan_day": gan, "phep_thu_theo_ma": theo_ma,
             "niem_phong": np_, "vong_gan_day": vg, "usd_hom_nay": round(usd_hom_nay(), 3)}
 
@@ -383,6 +397,9 @@ def tom_tat_md(so_dong: int = 12) -> str:
                  x["cagr_duoi_tran_pct"], x.get("don_bay"), x.get("dd_pct"), x.get("hon_moc_pct"),
                  x["so_lenh"], x["tom_tat"] or "") for x in t["thi_nghiem_tot_nhat"]]
         L.append("")
+    if t.get("luoi_engine_cu"):
+        L += ["## Luoi tinh bang ENGINE CU: %d ket qua khong xep hang (bar `cuc_tri` lac quan 15-55%% so voi EA; chay lai bang engine hien hanh)"
+              % t["luoi_engine_cu"], ""]
     if t["hieu_biet"]:
         L += ["## Hieu biet da co bang chung"]
         L += ["- [hb %d tin %.2f] %s (tn %s)" % (h["id"], h["do_tin"] or 0, h["cau"], h["bang_chung"])

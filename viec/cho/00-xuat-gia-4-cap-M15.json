@@ -1,11 +1,24 @@
 {
-  "ma": "xuat-gia-4-cap-M15",
-  "muc_tieu": "xuat gia 4 cap M15 (tu 2018) ra du_lieu_gia/ + sao luu ngoai git, de cloud chay quet_luoi (chu du an duyet 05/10)",
-  "lan": "NHE",
-  "uu_tien": 1,
-  "han_phut": 30.0,
-  "ra_luc": "2026-10-05T13:00:00",
-  "lenh": ["{py}", "b.py", "xuat-gia", "AUDCAD,NZDCAD,AUDNZD,EURGBP", "M15", "--tu", "2018"],
-  "vi_sao": "cloud khong co data/; sao luu ban goc ngoai git truoc khi day (rui ro ban quyen nha moi gioi)",
-  "cong": {"kieu": "chay_duoc"}
+ "ma": "xuat-gia-4-cap-M15",
+ "muc_tieu": "xuat gia 4 cap M15 (tu 2018) ra du_lieu_gia/ + sao luu ngoai git, de cloud chay quet_luoi (chu du an duyet 05/10)",
+ "lan": "NHE",
+ "uu_tien": 2,
+ "han_phut": 30.0,
+ "ra_luc": "2026-10-05T13:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "xuat-gia",
+  "AUDCAD,NZDCAD,AUDNZD,EURGBP",
+  "M15",
+  "--tu",
+  "2018"
+ ],
+ "vi_sao": "cloud khong co data/; sao luu ban goc ngoai git truoc khi day (rui ro ban quyen nha moi gioi). Lan 1 (06/10) chet vi thieu pandas -> cai 00y truoc. Chi may co ma moi (DUOC_DAY co du_lieu_gia) moi day duoc file gia ra git",
+ "cong": {
+  "kieu": "chay_duoc"
+ },
+ "can": [
+  "ma-0810"
+ ]
 }

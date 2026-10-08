@@ -90,6 +90,19 @@ def quet_ket_qua(thu_muc: Path) -> list[dict]:
     return ra
 
 
+def don_theo_ma(goc: Path) -> dict[str, Path]:
+    """{ma: file don} cua `viec/cho/*.json`. Ten file KHONG nhat thiet bang ma (`021-lo-cmt-audcad-0.json` co ma `lo-dsl_cmt-AUDCAD-21`,
+    `00-xuat-gia-4-cap-M15.json` co ma `xuat-gia-4-cap-M15`) - ket qua nam o `viec/xong/<ma>.json` nen phai tra theo ma."""
+    ra = {}
+    for p in sorted((Path(goc) / "viec" / "cho").glob("*.json")):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8-sig"))
+        except (OSError, ValueError):
+            continue
+        ra[str(d.get("ma") or p.stem) if isinstance(d, dict) else p.stem] = p
+    return ra
+
+
 def dua_lai(goc: Path, toi_da_lan: int = 2) -> dict:
     """Don DAT gia thuoc nhom `sua_duoc`: chuyen file ket qua sang `viec/luu_tru/loi_ha_tang/` de don (van o `viec/cho/`)
     thanh DANG CHO va chay lai. Moi don dua lai toi da `toi_da_lan` lan (so lan ghi o `_so_lan.json`).
@@ -103,6 +116,7 @@ def dua_lai(goc: Path, toi_da_lan: int = 2) -> dict:
     except (OSError, ValueError):
         dem = {}
     kq = {"dua_lai": [], "khong_chay_lai": [], "can_chan_doan": [], "het_lan": []}
+    don = don_theo_ma(goc)
     for r in quet_ket_qua(xong):
         if r["nhom"] in ("khong_chay_lai", "can_chan_doan"):
             kq[r["nhom"]].append(r["ma"])
@@ -110,7 +124,7 @@ def dua_lai(goc: Path, toi_da_lan: int = 2) -> dict:
         if dem.get(r["ma"], 0) >= toi_da_lan:
             kq["het_lan"].append(r["ma"])
             continue
-        if not (goc / "viec" / "cho" / ("%s.json" % r["ma"])).exists():
+        if r["ma"] not in don:
             kq["khong_chay_lai"].append(r["ma"])      # khong con don goc de chay lai
             continue
         dem[r["ma"]] = dem.get(r["ma"], 0) + 1

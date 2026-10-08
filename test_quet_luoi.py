@@ -255,6 +255,35 @@ def test_quet_khong_vao_bang_thi_nghiem_tot_nhat_cua_so_tay(moi_truong):
     assert [x["loai"] for x in tot] == ["luoi"] and tot[0]["cagr_duoi_tran_pct"] == r["o_tot_nhat"]["loi_suat_o_tran_pct"]
 
 
+def test_luoi_engine_cu_khong_xep_hang_chung_voi_engine_hien_hanh(moi_truong):
+    """08/10/2026: dong `luoi` mang DAU ENGINE; dong khong dau (hoac dau cu) khong vao `thi_nghiem_tot_nhat` - chi duoc DEM.
+    Ly do: bar `cuc_tri` cu lac quan 15-55% (x2,2 trung vi so voi tester) nen xep chung voi engine hien hanh la xep thuoc do hong."""
+    r = TN.quet_luoi("AUDCAD", "M15", CD, GRID)
+    d = TN.danh_gia_luoi("AUDCAD", "M15", r["tham_so_day_du"], "kham_pha", von=10000.0)
+    assert d["trang_thai"] == "DAT"
+    assert d["engine"]["phien_ban"] == LU.PHIEN_BAN_ENGINE and d["engine"]["khop_bar"] == "duong_di"
+    tt = ST.tom_tat()
+    assert [x["loai"] for x in tt["thi_nghiem_tot_nhat"]] == ["luoi"] and tt["luoi_engine_cu"] == 0
+    assert "ENGINE CU" not in ST.tom_tat_md()
+
+    def doi_dau(mut):
+        with ST.ket_noi() as cn:
+            for z in cn.execute("SELECT id, ket_qua FROM thi_nghiem WHERE loai='luoi'").fetchall():
+                kq = json.loads(z[1])
+                mut(kq)
+                cn.execute("UPDATE thi_nghiem SET ket_qua=? WHERE id=?", (json.dumps(kq), z[0]))
+
+    doi_dau(lambda kq: kq.pop("engine"))                                   # dong ghi truoc ngay co dau engine
+    tt = ST.tom_tat()
+    assert tt["thi_nghiem_tot_nhat"] == [] and tt["luoi_engine_cu"] == 1
+    assert "1 ket qua khong xep hang" in ST.tom_tat_md()
+    doi_dau(lambda kq: kq.update(engine={"phien_ban": LU.PHIEN_BAN_ENGINE - 1, "khop_bar": "cuc_tri"}))   # dau cua engine truoc
+    assert ST.tom_tat()["thi_nghiem_tot_nhat"] == [] and ST.tom_tat()["luoi_engine_cu"] == 1
+    doi_dau(lambda kq: kq.update(engine={"phien_ban": LU.PHIEN_BAN_ENGINE, "khop_bar": "duong_di"}))      # dung dau -> xep hang lai
+    tt = ST.tom_tat()
+    assert len(tt["thi_nghiem_tot_nhat"]) == 1 and tt["luoi_engine_cu"] == 0
+
+
 def test_khong_co_duong_nao_dua_quet_sang_xac_nhan_hay_niem_phong(moi_truong):
     assert "doan" not in inspect.signature(TN.quet_luoi).parameters
     with pytest.raises(TypeError):

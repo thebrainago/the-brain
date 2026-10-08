@@ -1095,6 +1095,10 @@ def danh_gia_luoi(ma: str, khung: str, tham_so: dict | None = None, doan: str = 
                                "va hinh dang, chua phai loi that; chay tester cung bo tham so truoc khi tin"
                                % (qc.ma, qc.nguon)])}
     spec = {"tham_so": ts, "von": von} if chuan else {"tham_so": ts, "von": von, "quy_cach": LU.khoa_quy_cach(qc)}
+    # DAU ENGINE (08/10/2026): ket qua luoi tinh bang engine cu (bar `cuc_tri`, lac quan 15-55% so voi EA) khong con duoc xep hang chung voi
+    # ket qua engine hien hanh - `nc_so_tay.tom_tat` loc theo dau nay. Van tay thi nghiem da gom `PHIEN_BAN_ENGINE` nen engine moi la phep thu moi.
+    ra["engine"] = {"phien_ban": LU.PHIEN_BAN_ENGINE,
+                    "khop_bar": (ts.get("khop_bar") if isinstance(ts, dict) else None) or LU.ThamSo.khop_bar}
     ra["tn_id"] = ST.ghi_thi_nghiem("luoi", spec, ra, tt, vt, ma, khung, doan,
                                     gt_id=gt_id, so_phep_thu=1 if (doan == "kham_pha" and not lam_lai_cu) else 0,
                                     giay=time.time() - t0, vong_id=vong_id,

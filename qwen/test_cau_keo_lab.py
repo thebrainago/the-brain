@@ -339,6 +339,44 @@ class TestChiLan:
         assert r and r["ma"] == "t-test"
 
 
+class TestTagMa:
+    """Nhan kha nang suy ra tu MA dang chay: don can ma moi khong bi bo chay cu nhan nham (08/10/2026, lab nha tre ~270 commit)."""
+
+    @staticmethod
+    def _lab(tmp_path, ten, engine=None, trang_ke=False):
+        lab = tmp_path / ten
+        if engine is not None:
+            ghi(lab, "nhan/luoi.py", "# luoi\nPHIEN_BAN_ENGINE = %d\n" % engine)
+        if trang_ke:
+            ghi(lab, "nhan/doc_dien_dan.py", "def tim_trang_tiep(fo, tach, url, n):\n    return {}\n")
+        lab.mkdir(parents=True, exist_ok=True)
+        return lab
+
+    def test_nhan_suy_ra_tu_ma(self, tmp_path):
+        lab = self._lab(tmp_path, "moi", engine=4, trang_ke=True)
+        assert CG.tag_ma(lab) == ["ma-0810", "engine1", "engine2", "engine3", "engine4", "dien-dan-v2"]
+
+    def test_ma_cu_khong_co_nhan_tinh_nang(self, tmp_path):
+        assert CG.tag_ma(self._lab(tmp_path, "cu")) == ["ma-0810"]
+        assert CG.tag_ma(self._lab(tmp_path, "cu3", engine=3)) == ["ma-0810", "engine1", "engine2", "engine3"]
+
+    def test_don_can_engine4_cho_bo_chay_ma_cu_va_chay_o_bo_chay_ma_moi(self, tmp_path):
+        hop = tmp_path / "hop"
+        CG.bao_dam_thu_muc(goc=hop)
+        _don(hop, "a-can-engine4", "CPU", 1)
+        d = json.loads((hop / "viec" / "cho" / "a-can-engine4.json").read_text(encoding="utf-8"))
+        d["can"] = ["engine4"]
+        (hop / "viec" / "cho" / "a-can-engine4.json").write_text(json.dumps(d), encoding="utf-8")
+        _don(hop, "z-thuong", "CPU", 9)
+        cu = self._lab(tmp_path, "cu", engine=3)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=cu, may="p1", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "z-thuong"            # ma cu: don can engine4 CHO, khong bi dot, don thuong van chay
+        assert not (hop / "viec" / "xong" / "a-can-engine4.json").exists()
+        moi = self._lab(tmp_path, "moi", engine=4)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=moi, may="p2", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "a-can-engine4"       # ma moi: don do chay
+
+
 class TestTienTrinhMoi:
     def _gia_lap(self, tmp_path, monkeypatch, ma_b):
         lab = tmp_path / "lab_gia"
@@ -458,3 +496,19 @@ class TestChayMotLuotMaLab:
         d = json.loads((hop / "viec" / "may" / "may-a.json").read_text("utf-8"))
         assert d["lab_keo"].startswith("tre: ") and "qwen/ma.py" in d["lab_keo"], d
         assert "ma lab: tre" in CM.bang_may(hop)
+
+
+class TestTuoiNhip:
+    def test_gio_dia_phuong_doi_ve_utc(self):
+        from datetime import datetime, timezone
+        bay = datetime(2026, 10, 8, 16, 47, tzinfo=timezone.utc).timestamp()
+        assert round(CG.tuoi_nhip_phut({"luc": "2026-10-08T23:26:06"}, bay)) == 21                  # nhip cu: mac dinh +7
+        assert round(CG.tuoi_nhip_phut({"luc": "2026-10-08T23:26:06", "mui_gio_phut": 420}, bay)) == 21
+        assert round(CG.tuoi_nhip_phut({"luc": "2026-10-08T16:30:00", "mui_gio_phut": 0}, bay)) == 17
+        assert CG.tuoi_nhip_phut({"luc": "khong phai gio"}, bay) is None
+        assert CG.tuoi_nhip_phut({}, bay) is None
+
+    def test_mui_gio_phut_may_la_so_nguyen_trong_khoang_hop_le(self):
+        m = CG.mui_gio_phut_may()
+        assert isinstance(m, int)
+        assert -12 * 60 <= m <= 14 * 60
