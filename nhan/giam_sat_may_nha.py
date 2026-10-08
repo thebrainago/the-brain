@@ -7,6 +7,7 @@ Dung: python -m nhan.giam_sat_may_nha [--phut-ngung 30]
 """
 from __future__ import annotations
 
+import collections
 import json
 import re
 import sys
@@ -103,8 +104,19 @@ def tong_hop(ngung_phut: float = 30.0, bay_gio: float | None = None) -> dict:
             continue
         if t - f.stat().st_mtime > 3 * 3600:
             ket.append(f.stem)
-    return {"nhip_tim": tim, "con_cho": len(cho), "theo_lan": theo_lan, "gio_viec_con": round(gio_con, 1), "gio_tuong_doi": {k: round(v / 3600, 1) for k, v in giay_lan.items()},
-            "xong_1h": tt, "xong_gia_1h": gia, "dang_ket": ket[:10]}
+    song = sum(1 for x in tim if x["song"])
+    # GIO DONG HO (08/10/2026): `gio_viec_con` o tren la gio-LOI cong don; may chay song song nen cho that = gio-loi / so cho chay.
+    # TESTER 4 slot, cac lan khac chia cho so bo chay song. Lan nao dai nhat quyet dinh.
+    suc = {"TESTER": 4.0}
+    gio_dong_ho = max([v / 3600.0 / suc.get(l, float(max(1, song))) for l, v in giay_lan.items()] or [0.0])
+    try:
+        from qwen import cau_loi as CL                       # xong-gia TOAN BO viec/xong (khong chi 1 gio): dem theo nhom
+        gia_nhom = dict(collections.Counter(x["nhom"] for x in CL.quet_ket_qua(VIEC / "xong")))
+    except Exception:
+        gia_nhom = {}
+    return {"nhip_tim": tim, "con_cho": len(cho), "theo_lan": theo_lan, "gio_viec_con": round(gio_con, 1), "gio_dong_ho": round(gio_dong_ho, 1),
+            "gio_tuong_doi": {k: round(v / 3600, 1) for k, v in giay_lan.items()},
+            "xong_1h": tt, "xong_gia_1h": gia, "xong_gia_nhom": gia_nhom, "dang_ket": ket[:10]}
 
 
 def hanh_dong(k: dict) -> list[str]:
@@ -114,8 +126,16 @@ def hanh_dong(k: dict) -> list[str]:
         ra.append("TAT CA bo chay mat nhip tim -> may nha tat / mat mang; bao chu du an NEU keo dai > 3h (bat may la quyen ho)")
     elif chet:
         ra.append("bo chay chet: %s -> nhac may nha khoi dong lai bo do" % ",".join(chet))
-    if k["gio_viec_con"] < 12:
-        ra.append("hang doi chi con ~%.0f gio viec -> giao them >= 20 don (uu tien don do duoc, khong cache)" % k["gio_viec_con"])
+    gio = k.get("gio_dong_ho", k["gio_viec_con"])           # gio DONG HO (khong phai gio-loi cong don)
+    if gio < 12:
+        ra.append("hang doi chi con ~%.0f gio dong ho -> giao them >= 20 don (uu tien don do duoc, khong cache)" % gio)
+    gn = k.get("xong_gia_nhom") or {}
+    if gn.get("sua_duoc"):
+        ra.append("%d don 'DAT' gia SUA DUOC (thieu thu vien / het dia / tester ban) -> chay `python -m qwen.cau_loi dua-lai` roi push" % gn["sua_duoc"])
+    if gn.get("can_chan_doan"):
+        ra.append("%d don tester chet / bien dich hong -> nho nha mo log tester (khong dua lai mu)" % gn["can_chan_doan"])
+    if gn.get("khong_chay_lai"):
+        ra.append("%d don thieu du lieu gia / ngoai doan -> sua DON (doi ma hoac xuat gia tu MT5), khong chay lai y het" % gn["khong_chay_lai"])
     if k["xong_gia_1h"]:
         ra.append("%d don 'DAT' that ra loi -> xem + sua + giao lai: %s" % (len(k["xong_gia_1h"]), ", ".join(m for m, _ in k["xong_gia_1h"][:5])))
     if k["dang_ket"]:
@@ -130,7 +150,8 @@ def main(argv: list[str]) -> int:
     ngung = float(argv[argv.index("--phut-ngung") + 1]) if "--phut-ngung" in argv else 30.0
     k = tong_hop(ngung)
     song = sum(1 for x in k["nhip_tim"] if x["song"])
-    print("bo chay song %d/%d | con cho %d don (~%s gio) %s | xong 1h %s" % (song, len(k["nhip_tim"]), k["con_cho"], k["gio_viec_con"], k["theo_lan"], k["xong_1h"]))
+    print("bo chay song %d/%d | con cho %d don (~%s gio dong ho, %s gio-loi) %s | xong 1h %s" % (
+        song, len(k["nhip_tim"]), k["con_cho"], k["gio_dong_ho"], k["gio_viec_con"], k["theo_lan"], k["xong_1h"]))
     for ten, ly in k["xong_gia_1h"][:8]:
         print("  XONG-GIA %-40s %s" % (ten, ly))
     for h in hanh_dong(k):

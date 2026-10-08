@@ -63,6 +63,7 @@ import subprocess
 import time
 from pathlib import Path
 
+from . import cau_loi as CL
 from . import cau_trang as CT
 from . import che_do_choi as CM
 from . import dieu_toc as DT
@@ -872,7 +873,8 @@ def chay_don(don: dict, goc: Path | None = None, chay_that: bool = True,
     ma = don.get("ma") or "khong-ten"
     lan = str(don.get("lan") or "NHE").upper()
     han = min(float(don.get("han_phut") or 60.0), HAN_TOI_DA_PHUT) * 60.0
-    kieu = str((don.get("cong") or {}).get("kieu") or "")
+    cong = don.get("cong")
+    kieu = str((cong if isinstance(cong, str) else (cong or {}).get("kieu")) or "")   # `cong` dang chuoi cung hop le (xem ra_don)
 
     if kiem_trang and don.get("lenh"):
         duoc, ly = CT.cho_phep(don.get("lenh"))
@@ -912,6 +914,13 @@ def chay_don(don: dict, goc: Path | None = None, chay_that: bool = True,
                     "ly_do": "het slot tester (viec khac dang giu) - de don lai cho vong sau, KHONG ghi xong"}
         tt, ly_do = _cham(kieu, ma_thoat, qua_gio)
         dong_cuoi = (ra or "").splitlines()[-25:]
+        loi_ha_tang = None
+        if tt == "DAT" and kieu == "chay_duoc":
+            # 08/10/2026: ma thoat 0 KHONG du de goi la DAT - cong cu `b nc cc` bat loi roi in {"loi":..} va van thoat 0
+            loi_ha_tang = CL.dau_vet(dong_cuoi, (loi or "").splitlines()[-15:])
+            if loi_ha_tang:
+                tt = "CHUA_DO_DUOC"
+                ly_do = "ma thoat 0 NHUNG dau ra bao loi (%s): %s" % (loi_ha_tang["nhan"], loi_ha_tang["bang_chung"][:120])
         bc = {"ma_thoat": ma_thoat, "giay": round(time.time() - t0, 1),
               "lenh": [str(x) for x in lenh],
               "phien_ban_ma": phien_ban_ma(g),
@@ -919,6 +928,8 @@ def chay_don(don: dict, goc: Path | None = None, chay_that: bool = True,
               # dau ra co the dai hang nghin dong.
               "dong_cuoi": dong_cuoi,
               "loi_cuoi": (loi or "").splitlines()[-15:]}
+        if loi_ha_tang:
+            bc["loi_ha_tang"] = loi_ha_tang
         if hop != g:                                    # hop thu rieng: mang bao cao theo
             bc["tep_moi"] = tep_moi(t0, g)
             if cau_hinh().get("tom_tat_re") and don.get("lenh", [""])[1:] != CT.PING:

@@ -13,3 +13,10 @@ def test_hanh_dong_bao_het_viec_va_bo_chet():
          "gio_viec_con": 3, "xong_gia_1h": [], "dang_ket": []}
     h = " ".join(G.hanh_dong(k))
     assert "a" in h and "giao them" in h
+
+
+def test_hanh_dong_bao_xong_gia_theo_nhom_va_dung_gio_dong_ho():
+    k = {"nhip_tim": [{"ten": "a", "song": True, "den": None}], "gio_viec_con": 90, "gio_dong_ho": 4, "xong_gia_1h": [], "dang_ket": [],
+         "xong_gia_nhom": {"sua_duoc": 25, "can_chan_doan": 24, "khong_chay_lai": 31}}
+    h = " ".join(G.hanh_dong(k))
+    assert "giao them" in h and "dua-lai" in h and "mo log tester" in h and "thieu du lieu gia" in h
