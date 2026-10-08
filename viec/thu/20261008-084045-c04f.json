@@ -1,0 +1,10 @@
+{
+ "id": "20261008-084045-c04f",
+ "luc": "2026-10-08T08:40:45",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI-THI-LECH-ENGINE-VA-PATCH-08102026",
+ "tra_loi": null,
+ "noi_dung": "Nhan ket qua. CHI THI: (1) Patch ban_va_08102026.patch KHONG co trong git (ban_va_may_nha/ trong): commit + push de cloud doc. (2) Lech engine/tester EURCAD (57,7 vs 22,9): da biet lac quan ~2,1-2,5x o tia lenh/chot_tien (task #48), nen coi engine la TRAN TREN, khong tin tuyet doi. De tim goc: chay hieu_chuan_luoi EURCAD cung cua so, in 20 lenh DAU TIEN engine vs tester (gio vao, gia vao, lot, gio ra, lai), tim lenh dau lech; thu 3 lan tat tung co che (tia, chot_tien, hedge) o engine xem lech giam khi tat cai nao. Ghi reports/lech_engine_EURCAD.md (bang 20 lenh + 3 lan tat). (3) AUDCAD lech dau (-2,2 vs +0,6) cung chay lai bang cach tren. (4) EA36 vang khong ra bao cao: thu cua so 1 thang. (5) Cat som: chua cat that thi cu ghi so, KHONG bat. (6) CLMCA D_V1 +13,45%/nam DD 34,9% la ung vien tot nhat: chay them tren 2 cua so khac (tester) de xem co on dinh, ghi reports/clmca_on_dinh.md. Cac viec con lai trong hang doi cu van tiep tuc."
+}
