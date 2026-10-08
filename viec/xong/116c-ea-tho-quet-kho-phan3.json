@@ -1,0 +1,52 @@
+{
+  "ma": "116c-ea-tho-quet-kho-phan3",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 3.6,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "ea_tho_quet",
+      "{\"eas\": [\"kho:6\", \"kho:7\", \"kho:8\"], \"doan\": \"kham_pha\", \"toi_da_lan\": 6}"
+    ],
+    "phien_ban_ma": "44b3b23d+sua",
+    "dong_cuoi": [
+      "   \"ea\": \"Basket_Protective_Close_764ef0\",",
+      "   \"loai\": \"TIEN_ICH\",",
+      "   \"ly_do\": \"khong co lenh vao (OrderSend / CTrade.Buy|Sell...) - dong lenh, bang dieu khien hoac do dac\"",
+      "  },",
+      "  {",
+      "   \"ea\": \"HybridMicrostructure_EA_cb0e14\",",
+      "   \"loai\": \"THIEU_TEP\",",
+      "   \"tep\": [",
+      "    \"include_la:HybridMicrostructure/ParamUX.mqh\",",
+      "    \"include_la:HybridMicrostructure/AIBridge.mqh\",",
+      "    \"include_la:HybridMicrostructure/AIBridgeUX.mqh\"",
+      "   ],",
+      "   \"ly_do\": \"can include_la:HybridMicrostructure/ParamUX.mqh, include_la:HybridMicrostructure/AIBridge.mqh, include_la:HybridMicrostructure/AIBridgeUX.mqh - tai GOI DAY DU cua tac gia (kem .mqh / chi bao), dat vao thu muc MQL5 cua terminal, roi them ten tep vao config/ea_tho.json -> tep_san\"",
+      "  },",
+      "  {",
+      "   \"ea\": \"AAPL_cfd_ORB_strategy_b7b40b\",",
+      "   \"loai\": \"THIEU_DU_LIEU\",",
+      "   \"ly_do\": \"EA nham toi AAPL nhung may nay khong co ma do - khong thay bang ma khac\"",
+      "  }",
+      " ],",
+      " \"con_lai\": [],",
+      " \"so_lan_chay\": 0,",
+      " \"het_ngan_sach\": false,",
+      " \"_giay\": 0.39",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-08T20:22:45"
+}
