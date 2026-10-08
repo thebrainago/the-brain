@@ -133,6 +133,20 @@ class LoiCau(RuntimeError):
 
 
 # ------------------------------------------------------------------ git tho
+GIT_KHOA_MO_COI_GIAY = 30 * 60
+
+
+def _go_khoa_cu(goc: Path) -> None:
+    """Go `.git/index.lock` cu > 30 phut (may nha 08/10: p12 ket rebase 18 gio vi khoa mo coi).
+    Mot lenh git binh thuong khong giu khoa qua vai phut (han 120s), nen khoa cu hon 30 phut la mo coi."""
+    try:
+        k = Path(goc) / ".git" / "index.lock"
+        if k.is_file() and time.time() - k.stat().st_mtime > GIT_KHOA_MO_COI_GIAY:
+            k.unlink()
+    except OSError:
+        pass
+
+
 def _git(*doi, goc: Path | None = None, han: float = 120.0,
          tho: bool = False) -> tuple[int, str, str]:
     """Chay mot lenh git. Tra (ma_thoat, stdout, stderr) - KHONG nem.
@@ -153,6 +167,7 @@ def _git(*doi, goc: Path | None = None, han: float = 120.0,
     mot duong dan LECH - va `dong_bo` se ket luan sai ve viec file nao dang do
     dang, tuc quyet dinh sai giua "keo duoc" va "khong duoc keo".
     """
+    _go_khoa_cu(goc or MAILBOX)
     r = subprocess.run(["git", *doi], cwd=str(goc or MAILBOX), capture_output=True,
                        text=True, timeout=han,
                        # Git co the treo cho nhap mat khau tren may khong ai
