@@ -341,10 +341,10 @@ def test_tran_so_o_bi_kep_va_gia_tri_trung_trong_truc_bi_go(moi_truong, monkeypa
 
     monkeypatch.setattr(TN, "_o_luoi", gia)
     monkeypatch.setenv("NC_QUET_LUONG", "3")
-    luoi = {"buoc": list(range(5, 45)), "tp": list(range(5, 45))}                      # 40 x 40 = 1.600 o
-    r = TN.quet_luoi("AUDCAD", "M15", CD, luoi, toi_da_o=5000)
-    assert len(dem) == 1000 and r["lay_mau"]["chon"] == 1000 and r["so_o_tong"] == 1600 and r["so_o"] == 1000
-    assert ST.nhieu("SELECT so_phep_thu n FROM thi_nghiem WHERE loai='quet_luoi'")[0]["n"] == 1000
+    luoi = {"buoc": list(range(5, 45)), "tp": list(range(5, 45)), "cho_lui": [0.0, 3.0, 6.0]}   # 40 x 40 x 3 = 4.800 o
+    r = TN.quet_luoi("AUDCAD", "M15", CD, luoi, toi_da_o=5000)                         # tran cung = 3.000 (nang tu 1.000 o commit 3eee6f3b)
+    assert len(dem) == 3000 and r["lay_mau"]["chon"] == 3000 and r["so_o_tong"] == 4800 and r["so_o"] == 3000
+    assert ST.nhieu("SELECT so_phep_thu n FROM thi_nghiem WHERE loai='quet_luoi'")[0]["n"] == 3000
     dem.clear()
     r = TN.quet_luoi("AUDCAD", "M15", CD, {"buoc": [10, 10, 15, 15, 20], "tp": [8, 12]}, toi_da_o=0)
     assert r["luoi"]["buoc"] == [10, 15, 20] and r["so_o_tong"] == 6, "gia tri trung phai bi go"
@@ -600,3 +600,57 @@ def test_che_do_thua_roi_min_tim_dinh_va_re_hon_quet_day(moi_truong, monkeypatch
     assert r["o_tot_nhat"]["tham_so"] == {"buoc": 7, "tp": 11}
     assert len({tuple(sorted(o.items())) for o in dem}) == len(dem), "khong o nao chay hai lan"
     assert TN.quet_luoi("AUDCAD", "M15", CD, luoi, che_do="la")["trang_thai"] == "CHUA_DO_DUOC"
+
+
+# ------------------------------------------------------------------ TRAN DON BAY CUA XEP HANG (08/10/2026)
+class _KQ:
+    def __init__(self, margin):
+        self.margin = margin
+
+
+def test_he_so_lot_hop_le_chan_boi_don_bay_khi_don_bay_chan_truoc():
+    """k cham tran maxDD = 400 nhung lot dang thu da la don bay 0,5 -> k toi da theo don bay = 10 / 0,5 = 20 < 400."""
+    k, gh, d1 = TN._he_so_lot_hop_le(_KQ(margin=50.0), don_bay_tk=100.0, von=10000.0, k_dd=400.0)    # 50 x 100 / 10000 = 0,5
+    assert gh == "TRAN_DON_BAY" and d1 == 0.5 and abs(k - 20.0) < 1e-9
+
+
+def test_he_so_lot_hop_le_giu_nguyen_khi_maxdd_chan_truoc():
+    k, gh, d1 = TN._he_so_lot_hop_le(_KQ(margin=50.0), 100.0, 10000.0, 12.0)       # 12 x 0,5 = don bay 6 <= 10: maxDD chan truoc
+    assert (k, gh, d1) == (12.0, "TRAN_DD", 0.5)
+
+
+def test_he_so_lot_hop_le_khong_tinh_duoc_thi_none():
+    assert TN._he_so_lot_hop_le(_KQ(10.0), 100.0, 10000.0, None) == (None, None, None)
+    assert TN._he_so_lot_hop_le(_KQ(10.0), 100.0, 10000.0, 0.0) == (None, None, None)
+
+
+def test_loi_suat_o_tran_khong_bao_gio_vuot_tran_don_bay(moi_truong):
+    """Tren cac o that cua `danh_gia_luoi`: loi suat o tran <= ban cu (chi tran maxDD), va neu tran don bay chan thi
+    don bay dinh sau khi nhan lot dung bang 10 (khong vuot)."""
+    for _dong, d in _mot_o_vs_danh_gia(moi_truong, "AUDCAD"):
+        t = d["tien"]
+        if t["he_so_lot_tai_tran"] is None:
+            continue
+        assert t["loi_suat_o_tran_pct"] <= t["loi_suat_chi_tran_dd_pct"] + 1e-6
+        assert t["don_bay_dinh_o_lot_thu"] * t["he_so_lot_tai_tran"] <= TN.L_TOI_DA + 0.05, t          # +0,05: sai so lam tron hai con so da in
+        if t["gioi_han_lot"] == "TRAN_DON_BAY":
+            assert abs(t["don_bay_dinh_o_lot_thu"] * t["he_so_lot_tai_tran"] - TN.L_TOI_DA) < 0.05, t
+
+
+def test_ket_qua_so_tay_cu_khuyet_tran_don_bay_duoc_tinh_lai_va_khong_dem_them_phep_thu(moi_truong):
+    ts = dict(CD, buoc=10, tp=8)
+    d1 = TN.danh_gia_luoi("AUDCAD", "M15", ts, "kham_pha", von=10000.0)
+    assert "tu_so_tay" not in d1 and d1["tien"]["gioi_han_lot"] in ("TRAN_DD", "TRAN_DON_BAY"), d1
+    d1b = TN.danh_gia_luoi("AUDCAD", "M15", ts, "kham_pha", von=10000.0)                    # y het -> lay lai tu so tay
+    assert d1b.get("tu_so_tay") and d1b["tien"] == d1["tien"]
+    so_truoc = ST.nhieu("SELECT COALESCE(SUM(so_phep_thu),0) n FROM thi_nghiem WHERE loai='luoi'")[0]["n"]
+    # gia lap ban ghi TRUOC 08/10/2026: tien khong co cac truong tran don bay
+    cu = dict(d1)
+    cu["tien"] = {k: v for k, v in d1["tien"].items() if k not in ("gioi_han_lot", "don_bay_dinh_o_lot_thu", "loi_suat_chi_tran_dd_pct")}
+    cu.pop("tn_id", None)
+    with ST.ket_noi() as cn:
+        cn.execute("UPDATE thi_nghiem SET ket_qua=? WHERE id=?", (json.dumps(cu), d1["tn_id"]))
+    d2 = TN.danh_gia_luoi("AUDCAD", "M15", ts, "kham_pha", von=10000.0)
+    assert "tu_so_tay" not in d2 and d2["tien"] == d1["tien"], "ban ghi cu khuyet truong -> phai tinh lai ra dung so moi"
+    so_sau = ST.nhieu("SELECT COALESCE(SUM(so_phep_thu),0) n FROM thi_nghiem WHERE loai='luoi'")[0]["n"]
+    assert so_sau == so_truoc, "tinh lai cung phep thu khong duoc dem them phep thu"
