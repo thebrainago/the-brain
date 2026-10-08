@@ -473,9 +473,12 @@ CONG_CU: list[dict] = [
          "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
          "toi_da_o": {"type": "integer", "description": "tran so o (mac dinh 300, toi da 3000); vuot thi lay mau theo hat"},
          "hat": {"type": "integer", "description": "hat lay mau khi tich Descartes vuot toi_da_o (mac dinh 0)"},
+         "che_do": {"type": "string", "enum": ["day", "thua_roi_min"],
+                    "description": "`thua_roi_min`: tang 1 quet THUA (truc lay chi so chan) roi tang 2 chi quet quanh top-10 (~1/5 chi phi, "
+                                   "tim lai ~92% top-10 - nhan/thu_cach_quet.py); mac dinh `day`"},
          "gt_id": _GT}, ["ma", "khung", "luoi"],
-        lambda ma, khung, luoi=None, co_dinh=None, von=10000.0, toi_da_o=300, hat=0, gt_id=None, vong_id=None, **_:
-        TN.quet_luoi(ma, khung, co_dinh, luoi, float(von), gt_id, vong_id, int(toi_da_o), int(hat))),
+        lambda ma, khung, luoi=None, co_dinh=None, von=10000.0, toi_da_o=300, hat=0, gt_id=None, vong_id=None, che_do="day", **_:
+        TN.quet_luoi(ma, khung, co_dinh, luoi, float(von), gt_id, vong_id, int(toi_da_o), int(hat), che_do=str(che_do))),
     _cc("hieu_chuan_luoi",
         "HIEU CHUAN engine luoi (nhan/luoi.py) <-> MT5 tester that: chay CUNG ThamSo qua ea_LuoiDayDu.mq5 tren tester (can may co MT5) va "
         "qua engine, tren MOT cua so ngay <= doan kham_pha (>= 14 ngay), roi so lai %/nam, maxDD, so lenh, BUY/SELL, lenh giu lau nhat, do "

@@ -577,3 +577,26 @@ def test_chuoi_tong_hop_chay_duoc_va_co_canh_bao_ong_dan():
     assert r["so_o"] == 6 and any("TONG_HOP" in c for c in r["canh_bao"])
     if r["trang_thai"] != "CHUA_DO_DUOC":                       # CHUA_DO_DUOC khong vao so tay nhu ket qua da thu
         assert "tu_so_tay" in CC.goi("quet_luoi", dv)
+
+
+def test_che_do_thua_roi_min_tim_dinh_va_re_hon_quet_day(moi_truong, monkeypatch):
+    """Tang 1 quet thua (chi so chan + cuoi), tang 2 don quanh top: dinh o chi so le van duoc tim, chi phi << quet day."""
+    dem = []
+    dinh = (7, 11)                                                  # le, le: KHONG nam o tang 1
+
+    def gia(dl, cd, o, von_q, moc):
+        dem.append(o)
+        x, y = o["buoc"], o["tp"]
+        diem = 100 - abs(x - dinh[0]) - abs(y - dinh[1])
+        return {"tham_so": o, "chay": False, "so_lenh": 50, "co_lai": diem > 0, "loi_suat_nam_pct": float(diem),
+                "maxdd_pct": -1.0, "he_so_lot_tai_tran": 1.0, "loi_suat_o_tran_pct": float(diem), "hon_moc_pct": 1.0}
+
+    monkeypatch.setattr(TN, "_o_luoi", gia)
+    monkeypatch.setenv("NC_QUET_LUONG", "1")
+    luoi = {"buoc": list(range(1, 21)), "tp": list(range(1, 21))}   # 400 o
+    r = TN.quet_luoi("AUDCAD", "M15", CD, luoi, toi_da_o=3000, che_do="thua_roi_min")
+    assert r["che_do"]["ten"] == "thua_roi_min" and r["che_do"]["so_o_day_du"] == 400
+    assert len(dem) == r["so_o"] < 400 // 2
+    assert r["o_tot_nhat"]["tham_so"] == {"buoc": 7, "tp": 11}
+    assert len({tuple(sorted(o.items())) for o in dem}) == len(dem), "khong o nao chay hai lan"
+    assert TN.quet_luoi("AUDCAD", "M15", CD, luoi, che_do="la")["trang_thai"] == "CHUA_DO_DUOC"

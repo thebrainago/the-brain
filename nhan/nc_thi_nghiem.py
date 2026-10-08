@@ -1424,7 +1424,7 @@ def niem_phong_luoi(ma: str, khung: str, tham_so: dict | None = None, von: float
 
 
 # ---------------------------------------------------------------- QUET LUOI
-def _doc_hinh_dang_luoi(do_duoc: list, luoi: dict) -> dict:
+def _doc_hinh_dang_luoi(do_duoc: list, luoi: dict, ty_lai_ref: float | None = None) -> dict:
     """Doc HINH DANG cua bang quet luoi (cao nguyen hay cai gai) - ham thuan tuy tren cac dong da do duoc.
 
     Dong: {tham_so, co_lai, loi_suat_o_tran_pct}. `co_lai` da gom ca chay tai khoan va lai tren duong von: o chay khong bao gio la
@@ -1433,6 +1433,8 @@ def _doc_hinh_dang_luoi(do_duoc: list, luoi: dict) -> dict:
     khoa = list(luoi)
     lai = np.array([bool(r["co_lai"]) for r in do_duoc], bool)
     ty_lai = float(np.mean(lai)) if len(lai) else 0.0
+    if ty_lai_ref is not None:          # che do thua_roi_min: ty le lai doc tren tang 1 (mau deu), tang 2 chi don quanh o tot -> lech len
+        ty_lai = float(ty_lai_ref)
     ung = [r for r in do_duoc if r["co_lai"] and r.get("loi_suat_o_tran_pct") is not None]
     if not ung:
         return {"hinh_dang": "KHONG_CO_LAI", "ty_le_o_co_lai": round(ty_lai, 3), "o_tot_nhat": None, "hang_xom": None}
@@ -1483,7 +1485,8 @@ def _luong_quet_luoi() -> int:
 
 def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | None = None,
               von: float = 10000.0, gt_id: int | None = None, vong_id: int | None = None,
-              toi_da_o: int = O_QUET_LUOI_TOI_DA, hat: int = 0, ngan_giay: float = 900.0) -> dict:
+              toi_da_o: int = O_QUET_LUOI_TOI_DA, hat: int = 0, ngan_giay: float = 900.0,
+              che_do: str = "day") -> dict:
     """Quet tham so cua he LUOI (`nhan/luoi.py`) tren doan KHAM PHA trong MOT goi, doc HINH DANG - khong phai o tot nhat.
 
     `co_dinh`: tham so ThamSo khong doi; `luoi`: {tham_so: [gia tri,...]} (tich Descartes; vuot `toi_da_o` thi lay mau ngau nhien
@@ -1537,7 +1540,23 @@ def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | Non
     khoa = list(luoi)
     dai = [len(luoi[k]) for k in khoa]
     tong = math.prod(dai)
-    if tong > toi_da_o:
+    if che_do not in ("day", "thua_roi_min"):
+        return tu_choi("che_do chi la `day` hoac `thua_roi_min`")
+    thua = che_do == "thua_roi_min"
+
+    def toa(i: int) -> tuple:                          # toa do (chi so tren tung truc), chu so cuoi doi nhanh nhat
+        c = []
+        for d in reversed(dai):
+            i, r = divmod(i, d)
+            c.append(r)
+        return tuple(reversed(c))
+
+    if thua:
+        # TANG 1: moi truc lay chi so chan va chi so cuoi (mau deu, ~tong/2^k o); TANG 2: hop +-1 quanh top-10 o tang 1
+        chon = [i for i in range(tong) if all(c % 2 == 0 or c == d - 1 for c, d in zip(toa(i), dai))]
+        if len(chon) > toi_da_o:
+            return tu_choi("tang 1 co %d o > toi_da_o %d: bot truc / gia tri" % (len(chon), toi_da_o))
+    elif tong > toi_da_o:
         chon = sorted(int(i) for i in np.random.default_rng(int(hat)).choice(tong, size=toi_da_o, replace=False))
     else:
         chon = list(range(tong))
@@ -1551,6 +1570,8 @@ def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | Non
 
     cac_o = [giai_ma(i) for i in chon]
     spec_vt = {"co_dinh": co_dinh, "luoi": luoi, "von": von, "toi_da_o": toi_da_o, "hat": int(hat)}
+    if thua:
+        spec_vt["che_do"] = che_do
     if chuan:
         vt = ST.van_tay("quet_luoi", ma, khung, doan, spec_vt, LU.PHIEN_BAN_ENGINE)
         cu = ST.da_thu(vt)
@@ -1583,11 +1604,32 @@ def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | Non
         return _o_luoi(dl, co_dinh, o, von_q, moc_pct)
 
     luong = min(_luong_quet_luoi(), len(cac_o))
-    if luong > 1:
-        with ThreadPoolExecutor(max_workers=luong) as ex:
-            bang = list(ex.map(mot_o, cac_o))                 # map giu thu tu o -> bang khong doi theo so luong
-    else:
-        bang = [mot_o(o) for o in cac_o]
+
+    def chay_ds(ds: list) -> list:
+        if luong > 1:
+            with ThreadPoolExecutor(max_workers=luong) as ex:
+                return list(ex.map(mot_o, ds))                # map giu thu tu o -> bang khong doi theo so luong
+        return [mot_o(o) for o in ds]
+
+    bang = chay_ds(cac_o)
+    ty_lai_t1 = None
+    so_o_t1 = len(bang)
+    if thua:
+        t1 = [r for r in bang if not r.get("het_gio") and "loi" not in r and r["so_lenh"] >= LENH_TOI_THIEU]
+        ty_lai_t1 = (sum(1 for r in t1 if r["co_lai"]) / len(t1)) if t1 else None
+        chi_so_o = {tuple(luoi[k].index(r["tham_so"][k]) for k in khoa): r for r in bang}
+        top = sorted([r for r in t1 if r["co_lai"] and r.get("loi_suat_o_tran_pct") is not None],
+                     key=lambda r: -r["loi_suat_o_tran_pct"])[:10]
+        them = set()
+        for r in top:
+            c0 = tuple(luoi[k].index(r["tham_so"][k]) for k in khoa)
+            for c in itertools.product(*[range(max(0, x - 1), min(d, x + 2)) for x, d in zip(c0, dai)]):
+                if c not in chi_so_o:
+                    them.add(c)
+        them = sorted(them)[:max(0, toi_da_o - len(bang))]
+        o_them = [{k: luoi[k][j] for k, j in zip(khoa, c)} for c in them]
+        bang = bang + chay_ds(o_them)
+        cac_o = cac_o + o_them
     da_chay = [r for r in bang if not r.get("het_gio")]
     do_duoc = [r for r in da_chay if "loi" not in r and r["so_lenh"] >= LENH_TOI_THIEU]
     nhan_c = LN.che_do() != "py" and LN.lay_nhan() is not None
@@ -1612,7 +1654,10 @@ def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | Non
                 "chi_phi_do_tin": qc.do_tin, "moc_duoi_tran_pct": moc_pct, "canh_bao": canh_bao}
     if len(da_chay) < len(bang):
         ra["het_gio"] = {"da_chay": len(da_chay), "bo_lai": len(bang) - len(da_chay), "ngan_giay": ngan_giay}
-    if tong > toi_da_o:
+    if thua:
+        ra["che_do"] = {"ten": "thua_roi_min", "so_o_tang1": so_o_t1, "so_o_tang2": len(bang) - so_o_t1, "so_o_day_du": tong,
+                        "ty_le_chi_phi": round(len(bang) / max(1, tong), 3)}
+    elif tong > toi_da_o:
         ra["lay_mau"] = {"hat": int(hat), "so_o_tong": tong, "chon": toi_da_o}
     loi_o = [r for r in da_chay if "loi" in r]
     if loi_o:
@@ -1631,7 +1676,7 @@ def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | Non
                   ly_do="chi %d/%d o do duoc (it lenh < %d, loi, hoac het gio); can >= 3 o do duoc va >= 1/3 so o da chay de doc hinh dang"
                   % (len(do_duoc), len(da_chay), LENH_TOI_THIEU))
     else:
-        ra.update(_doc_hinh_dang_luoi(do_duoc, luoi))
+        ra.update(_doc_hinh_dang_luoi(do_duoc, luoi, ty_lai_t1))
         tot = ra["o_tot_nhat"]
         lai_tran = [r["loi_suat_o_tran_pct"] for r in do_duoc if r.get("loi_suat_o_tran_pct") is not None]
         ra["loi_suat_o_tran_trung_vi_pct"] = round(float(np.median(lai_tran)), 2) if lai_tran else None
