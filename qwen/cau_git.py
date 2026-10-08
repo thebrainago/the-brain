@@ -58,6 +58,7 @@ from __future__ import annotations
 import json
 import os
 import platform
+import re
 import socket
 import subprocess
 import time
@@ -70,13 +71,14 @@ from . import dieu_toc as DT
 
 GOC = Path(__file__).resolve().parent.parent
 CAU_HINH = GOC / "config" / "cau.json"
+_TEN_KHONG_HOP_LE = re.compile(r"[^A-Za-z0-9_.-]")
 
 
 def cau_hinh() -> dict:
     """Cau hinh MAY-CUC-BO (`config/cau.json`, bi gitignore - cloud khong ghi duoc).
 
-    Moi truong ghi de duoc: `CAU_HOP_THU`, `CAU_NHANH`. Khong co file thi tra mac dinh: che do CU cua `q`
-    (`viec/` nam ngay trong lab, dong bo tren chinh cay lam viec).
+    Moi truong ghi de duoc: `CAU_HOP_THU`, `CAU_NHANH`, `CAU_TEN`, `CAU_KHA_NANG` (a,b,c), `CAU_CHI_LAN` (vd TESTER).
+    Khong co file thi tra mac dinh: che do CU cua `q` (`viec/` nam ngay trong lab, dong bo tren chinh cay lam viec).
     """
     c = {"ten": socket.gethostname(), "hop_thu": "", "nhanh": "",
          "kha_nang": [platform.system().lower()], "session_cloud": "", "bao_cloud": False,
@@ -89,6 +91,16 @@ def cau_hinh() -> dict:
         pass
     c["hop_thu"] = os.environ.get("CAU_HOP_THU", c["hop_thu"])
     c["nhanh"] = os.environ.get("CAU_NHANH", c["nhanh"])
+    # Nhieu bo chay tren MOT may (p1..p18, m1..m3 o may nha): moi bo khai TEN / KHA NANG / LAN rieng qua moi truong,
+    # khong phai sua `cau.json` dung chung. (Truoc 08/10 phan nay chi la BAN VA CUC BO o may nha, khong co tren git ->
+    # lab khong `git pull` duoc moi khi cloud sua file nay. Nay nam o ban chinh.)
+    ten = _TEN_KHONG_HOP_LE.sub("_", os.environ.get("CAU_TEN", "")).strip("_.-")[:40]
+    if ten:
+        c["ten"] = ten
+    kn = [x.strip() for x in os.environ.get("CAU_KHA_NANG", "").split(",") if x.strip()]
+    if kn:
+        c["kha_nang"] = [_TEN_KHONG_HOP_LE.sub("_", x)[:40] for x in kn]
+    c["chi_lan"] = [x.strip().upper() for x in os.environ.get("CAU_CHI_LAN", "").split(",") if x.strip()]
     return c
 
 
@@ -344,6 +356,177 @@ def dong_bo(nhanh: str | None = None, ep: bool = False,
     except (OSError, subprocess.SubprocessError) as e:
         return {"trang_thai": "CHUA_DO_DUOC",
                 "ly_do": "%s: %s" % (type(e).__name__, e)}
+
+
+# ------------------------------------------------------------------ MA NGUON CUA LAB
+#: Nhip keo ma nguon cua lab (giay). Nhieu bo chay (p1..p21) dung CHUNG mot lab nen nhip nay tinh theo TEP DAU o lab
+#: (`.git/cau_keo_lab.json`), khong theo tung tien trinh: ca bay bo chay cung chi `fetch` mot lan moi nhip.
+NHIP_KEO_LAB_GIAY = 300.0
+KHOA_KEO_LAB_CU_GIAY = 600.0
+#: Phan ma ma bo chay nap vao bo nho. Doi mot trong cac duong nay -> bo chay phai khoi dong lai de chay ma moi.
+DUONG_MA_BO_CHAY = ("qwen/", "nhan/", "b.py")
+
+
+def _thu_muc_git(lab: Path) -> Path | None:
+    ma, ra, _ = _git("rev-parse", "--git-dir", goc=lab)
+    if ma != 0 or not ra:
+        return None
+    p = Path(ra)
+    return p if p.is_absolute() else Path(lab) / p
+
+
+def _lay_khoa_tep(p: Path, cu_giay: float) -> bool:
+    """Khoa bang tep tao nguyen tu (O_EXCL). Khoa cu hon `cu_giay` la cua tien trinh da chet -> go roi lay lai."""
+    for _ in range(2):
+        try:
+            fd = os.open(str(p), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            try:
+                os.write(fd, str(os.getpid()).encode())
+            finally:
+                os.close(fd)
+            return True
+        except FileExistsError:
+            try:
+                if time.time() - p.stat().st_mtime <= cu_giay:
+                    return False
+                p.unlink()
+            except OSError:
+                return False
+        except OSError:
+            return False
+    return False
+
+
+def chu_ky_ma_bo_chay(lab: Path | None = None) -> str:
+    """Dau van cay git cua phan ma bo chay (`DUONG_MA_BO_CHAY`) tai HEAD cua lab. Doi so voi luc bo chay nap =
+    bo chay dang giu ma CU trong bo nho. Khong doc cay lam viec (file chu du an dang sua do khong tinh)."""
+    g = lab or GOC
+    ra = []
+    for d in DUONG_MA_BO_CHAY:
+        try:
+            ma, h, _ = _git("rev-parse", "HEAD:%s" % d.rstrip("/"), goc=g)
+        except (OSError, subprocess.SubprocessError):
+            ma, h = 1, ""
+        ra.append(h[:12] if ma == 0 and h else "-")
+    return "/".join(ra)
+
+
+def _keo_lab_that(nhanh: str, lab: Path) -> dict:
+    """`fetch` + `merge --ff-only` tren LAB. KHONG stash, KHONG reset, KHONG doi nhanh: khong keo duoc thi ghi ly do."""
+    nh = nhanh_hien_tai(lab)
+    if nh is None:
+        return {"trang_thai": "BO_QUA", "ly_do": "lab dang o HEAD roi (khong nam tren nhanh nao)"}
+    if nh != nhanh:
+        return {"trang_thai": "BO_QUA", "nhanh_lab": nh,
+                "ly_do": "lab dang o nhanh %s, khong phai %s (khong tu doi nhanh)" % (nh, nhanh)}
+    gd = _thu_muc_git(lab)
+    if gd is None:
+        return {"trang_thai": "BO_QUA", "ly_do": "khong tim thay thu muc .git cua lab"}
+    for dau in ("rebase-merge", "rebase-apply", "MERGE_HEAD", "CHERRY_PICK_HEAD", "REVERT_HEAD", "BISECT_LOG"):
+        if (gd / dau).exists():
+            return {"trang_thai": "BO_QUA", "nhanh_lab": nh,
+                    "ly_do": "lab dang do dang (%s) - nguoi/phien nha dang xu li" % dau}
+    ma, tu, _ = _git("rev-parse", "HEAD", goc=lab)
+    if ma != 0:
+        return {"trang_thai": "CHUA_DO_DUOC", "nhanh_lab": nh, "ly_do": "khong doc duoc HEAD cua lab"}
+    ma, _, loi = _git("fetch", "origin", nhanh, goc=lab, han=180.0)
+    if ma != 0:
+        return {"trang_thai": "CHUA_DO_DUOC", "nhanh_lab": nh, "tu": tu[:8],
+                "ly_do": "fetch hong: %s" % (loi or "khong ro")[:160]}
+    ma, den, _ = _git("rev-parse", "FETCH_HEAD", goc=lab)
+    if ma != 0 or not den:
+        return {"trang_thai": "CHUA_DO_DUOC", "nhanh_lab": nh, "ly_do": "khong doc duoc FETCH_HEAD"}
+    if den == tu or _git("merge-base", "--is-ancestor", den, tu, goc=lab)[0] == 0:
+        return {"trang_thai": "DAT", "nhanh_lab": nh, "da_keo": False, "tu": tu[:8], "den": tu[:8],
+                "ly_do": "lab da co ma moi nhat cua remote" if den == tu else "lab di truoc remote (khong co gi moi de keo)"}
+    ma, ra, loi = _git("merge", "--ff-only", "FETCH_HEAD", goc=lab, han=300.0)
+    if ma != 0:
+        _, ahead, _ = _git("rev-list", "--count", "FETCH_HEAD..HEAD", goc=lab)
+        _, behind, _ = _git("rev-list", "--count", "HEAD..FETCH_HEAD", goc=lab)
+        tho = (loi or ra or "khong ro")
+        # git liet ke file chan bang dong thut tab ("\tqwen/ma.py"); dong "error: Your local changes ..." dai ma khong
+        # noi gi them - dua TEN FILE len truoc, de nhip tim (cat ngan) con nguyen cai phien nha can biet.
+        file_chan = [x.strip() for x in tho.splitlines() if x[:1] in ("\t", " ") and x.strip()]
+        dong = [x.strip() for x in tho.splitlines() if x.strip()]
+        if file_chan:
+            chan = ", ".join(file_chan[:4]) + (" (+%d file)" % (len(file_chan) - 4) if len(file_chan) > 4 else "")
+        else:
+            chan = " | ".join(dong[:3])[:200]
+        nguyen_nhan = ("lab co %s commit chua day len va remote co %s commit moi (re nhanh)" % (ahead, behind)
+                       if ahead.isdigit() and int(ahead) > 0 else
+                       "file dang sua do dang chan: %s" % chan)
+        return {"trang_thai": "CHUA_DO_DUOC", "nhanh_lab": nh, "tu": tu[:8], "da_keo": False,
+                "lab_truoc": int(ahead) if ahead.isdigit() else None,
+                "lab_sau": int(behind) if behind.isdigit() else None,
+                "ly_do": "khong keo duoc ma: " + nguyen_nhan}
+    _, ds, _ = _git("diff", "--name-only", tu, den, goc=lab)
+    file_doi = [x for x in ds.splitlines() if x.strip()]
+    _, so, _ = _git("rev-list", "--count", "%s..%s" % (tu, den), goc=lab)
+    return {"trang_thai": "DAT", "nhanh_lab": nh, "da_keo": True, "tu": tu[:8], "den": den[:8],
+            "so_commit": int(so) if so.isdigit() else None, "so_file": len(file_doi),
+            "doi_ma": any(f.startswith(DUONG_MA_BO_CHAY) for f in file_doi),
+            "ly_do": "da keo %s commit (%d file)" % (so or "?", len(file_doi))}
+
+
+def keo_lab(nhanh: str, lab: Path | None = None, nghi_giay: float | None = None, ep: bool = False) -> dict:
+    """Keo MA NGUON cua LAB (khong chi hop thu) de bo chay dung ma moi nhat ma cloud vua day len.
+
+    ## Vi sao co ham nay (chu du an 08/10/2026, 'Cau phai xem van de dang thuc su o dau')
+    `dong_bo` chi keo HOP THU (`viec/`). Cac don chay bang MA O LAB (`lab=GOC`) - ma do chi doi khi phien nha
+    `git pull` bang tay. Do 08/10: lab o `44b3b23d`, cloud di truoc 150+ commit => moi ban sua cua cloud (bat don
+    'DAT' gia, xep hang co tran don bay, cau hinh dien dan) NAM TREN GIT nhung KHONG TOI DUOC may thuc thi.
+
+    ## An toan (cung luat voi `_keo`)
+    - Chi `fetch` + `merge --ff-only` tren dung nhanh cua hop thu. KHONG stash / reset / checkout / doi nhanh.
+    - File chu du an dang sua ma commit moi cung dong vao -> git tu choi, ghi ly do vao nhip tim; khong mat gi.
+    - Lab dang rebase / merge do dang, o nhanh khac, hay HEAD roi -> BO_QUA, khong dung vao.
+    - Nhip + khoa dung chung qua tep trong `.git` cua lab: 21 bo chay khong `fetch` 21 lan, khong giam chan nhau.
+
+    -> {"trang_thai": "DAT"|"CHUA_DO_DUOC"|"BO_QUA", "ly_do", "da_keo", "doi_ma", "tu", "den", "luc"}.
+    Hong KHONG BAO GIO nem ra ngoai (mot loi mang khong duoc giet bo chay).
+    """
+    lab = Path(lab or GOC)
+    nghi = NHIP_KEO_LAB_GIAY if nghi_giay is None else float(nghi_giay)
+    try:
+        gd = _thu_muc_git(lab) if (lab / ".git").exists() else None
+    except (OSError, subprocess.SubprocessError):
+        gd = None
+    if gd is None:
+        return {"trang_thai": "BO_QUA", "ly_do": "lab khong phai kho git"}
+    tem, khoa = gd / "cau_keo_lab.json", gd / "cau_keo_lab.khoa"
+    cu = _doc_json(tem) or {}
+    if not ep and cu and time.time() - float(cu.get("luc") or 0) < nghi:
+        return {**cu, "bo_qua_nhip": True}
+    if not _lay_khoa_tep(khoa, KHOA_KEO_LAB_CU_GIAY):
+        return {**cu, "bo_qua_nhip": True, "may_khac_dang_keo": True} if cu else \
+            {"trang_thai": "BO_QUA", "ly_do": "bo chay khac dang keo ma", "may_khac_dang_keo": True}
+    try:
+        try:
+            kq = _keo_lab_that(nhanh, lab)
+        except (OSError, subprocess.SubprocessError) as e:
+            kq = {"trang_thai": "CHUA_DO_DUOC", "ly_do": "%s: %s" % (type(e).__name__, str(e)[:160])}
+        kq["luc"] = time.time()
+        try:
+            tem.write_text(json.dumps(kq, ensure_ascii=False), encoding="utf-8")
+        except OSError:
+            pass
+        return kq
+    finally:
+        try:
+            khoa.unlink()
+        except OSError:
+            pass
+
+
+def tom_tat_keo_lab(kq: dict | None) -> str:
+    """Nhan NGAN, ON DINH (khong gio, khong ma commit) cho nhip tim: doi nhan moi tinh la doi trang thai nhip tim."""
+    if not kq:
+        return "chua_keo"
+    tt = kq.get("trang_thai")
+    if tt == "DAT":
+        return "kip"
+    ly = re.sub(r"\d+", "N", str(kq.get("ly_do") or "?"))      # so commit doi moi lan cloud day -> bo so, khong rac lich su git
+    return ("tre: " if tt == "CHUA_DO_DUOC" else "bo_qua: ") + ly[:140]
 
 
 # ------------------------------------------------------------------ don hang
@@ -818,6 +1001,24 @@ def phien_ban_ma(lab: Path | None = None) -> str:
         return "khong doc duoc"
 
 
+def phien_ban_ma_nguon(lab: Path | None = None) -> str:
+    """Nhan phien ban cho NHIP TIM: commit CUOI CUNG dong den thu gi NGOAI `viec/` (ma, cau hinh, tai lieu), them `+sua`.
+
+    Khac `phien_ban_ma` (HEAD): HEAD cua lab nhay theo MOI commit tren nhanh, ke ca commit nhip tim / ket qua cua
+    ~22 bo chay (cung nhanh, chi dong `viec/`). Tu khi lab tu keo ma (`keo_lab`), neu nhip tim ghi HEAD thi moi nhip
+    tim doi -> bo chay commit nhip tim -> HEAD lai nhay -> vong lap commit vo tan. Dung nhan nay thi nhip tim chi doi khi
+    MA thuc su doi. Ket qua tung don van ghi HEAD that (`phien_ban_ma`) de truy nguyen."""
+    g = lab or GOC
+    try:
+        ma, h, _ = _git("log", "-1", "--format=%h", "--", ".", ":(exclude)viec", goc=g)
+        if ma != 0 or not h:
+            return phien_ban_ma(g)
+        _, ban, _ = _git("status", "--porcelain", "--untracked-files=no", goc=g)
+        return h + ("+sua" if ban else "")
+    except Exception:                                   # noqa: BLE001
+        return "khong doc duoc"
+
+
 def tep_moi(tu_luc: float, lab: Path | None = None) -> dict:
     """Noi dung cac bao cao NHO (md/json/jsonl/txt/csv) vua ra trong `reports/` cua lab ke tu `tu_luc`.
 
@@ -948,8 +1149,12 @@ def ghi_va_doc(ma, trang_thai, ly_do="", bang_chung=None, goc=None, **them) -> d
 def chay_mot_don_dang_cho(goc: Path | None = None, kiem_trang: bool = True,
                           lab: Path | None = None, may: str | None = None,
                           kha_nang: list[str] | None = None,
-                          nhanh_nhan: str | None = None) -> dict | None:
+                          nhanh_nhan: str | None = None,
+                          chi_lan: list[str] | None = None) -> dict | None:
     """Lay don uu tien cao nhat CHAY DUOC roi chay. `None` = khong co gi (hay dang DUNG KHAN).
+
+    `chi_lan` (vd `["TESTER"]`; mac dinh doc moi truong `CAU_CHI_LAN`): bo chay CHUYEN MOT LAN chi nhan don thuoc lan do
+    (bo `m1..m3` o may nha chi lam don TESTER, moi bo mot slot MT5; bo CPU `p*` khong dung toi tester).
 
     Bo qua don TESTER khi lan dang ban thay vi dung ca hang doi - neu khong
     mot don tester dai se chan het cac don NHE phia sau.
@@ -968,8 +1173,13 @@ def chay_mot_don_dang_cho(goc: Path | None = None, kiem_trang: bool = True,
     lab_that = lab or (GOC if goc is None else goc)
     nh_nhan = nhanh_nhan or (nhanh_hien_tai(hop) if rieng else None)
     choi = CM.dang_choi()      # chu du an dang choi game -> chi don nhe, uu tien thap (qwen/che_do_choi.py)
+    if chi_lan is None:
+        chi_lan = cau_hinh().get("chi_lan") or []
+    chi_lan = [str(x).upper() for x in chi_lan]
     for d in don_dang_cho(hop, may=may):
         if not _hop_may(d, may, kha_nang):
+            continue
+        if chi_lan and str(d.get("lan") or "NHE").upper() not in chi_lan:
             continue
         if str(d.get("lan") or "NHE").upper() == "TESTER" \
                 and _khoa_con_song(hop / "viec" / ".khoa_tester"):

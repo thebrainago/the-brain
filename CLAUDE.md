@@ -136,6 +136,11 @@ may TU KEO viec qua git (`viec/cho` -> `viec/xong`, `viec/may` = nhip tim). Chi 
   mac dinh, co han muc; tin chi gom ma don + trang thai).
 - **may (nha [GHI] / VPS)**: `b cau cai URL NHANH --ten T --kha-nang a,b` (hop thu RIENG) roi `b cau chay` moi 5
   phut (Task Scheduler / cron). Nhieu may khong chay trung: ai push phieu nhan viec (`viec/dang`) truoc la nguoi lam.
+- **MA LAB CUNG PHAI TOI MAY (08/10/2026)**: don chay bang MA O LAB (`lab=GOC`), va truoc day chi HOP THU duoc tu keo -> ban sua cua cloud nam tren git
+  ma may khong thay (lab cu 150+ commit). Nay moi luot bo chay `cau_git.keo_lab` (fetch + `merge --ff-only`, KHONG stash / reset / doi nhanh), `--lien-tuc` la
+  GIAM SAT mong: moi luot sinh tien trinh con (nap ma moi nhat), ma doi giua luot thi chay tiep bang tien trinh moi. File dang sua do dang chan
+  `pull` thi hien o nhip tim `lab_keo: tre: <file>` (khong mat gi) - phien nha COMMIT ban va cua minh roi `git pull --ff-only` (dung `git checkout` file da co ban
+  chinh thuc), khong vut viec local. `CAU_TEN` / `CAU_KHA_NANG` / `CAU_CHI_LAN` (moi truong) khai ten / kha nang / chi lan tung bo chay.
 - **An toan**: chi chay lenh trong DANH SACH TRANG (`qwen/cau_trang.py`); ngoai danh sach -> khong chay, hoi cloud,
   chu du an duyet tren may (`b cau xem MA` / `b cau duyet MA VAN_TAY`). Dung khan: `CAU_DUNG` (tai may) hoac
   `b cau dung` (tu xa). Repo de PUBLIC theo y chu du an (02/10): ai cung DOC duoc het - khong dua khoa/token/so lieu rieng vao repo, ke ca thu;

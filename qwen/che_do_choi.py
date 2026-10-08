@@ -31,6 +31,10 @@ NGHI_GIAY = 30
 #: don tuong tac man hinh: khong chay khi dang choi
 TU_KHOA_TUONG_TAC = ("lay_export_man_hinh", "man_hinh", "pyautogui", "dang_nhap", "tu_dang_ky", "telegram")
 NHIP_GIAM_SAT = 5.0
+#: Sau khi het han + giet cay: doi ong dan stdout/stderr dong toi da bay nhieu giay roi BO. Mot tien trinh chau thua huong
+#: ong (vd terminal64.exe do don tester sinh ra, hay worker cua pool) song sot sau khi cay bi giet thi `communicate()` KHONG
+#: BAO GIO tra ve - bo chay treo hang gio tren don da qua han (08/10/2026: p9, p11 ~594 phut tren don han 120 phut).
+GIAY_CHO_ONG_SAU_KHI_GIET = 20.0
 
 IDLE = getattr(subprocess, "IDLE_PRIORITY_CLASS", 0x00000040)
 
@@ -110,7 +114,8 @@ def chay_co_giam_sat(lenh: list[str], cwd: str, han: float, env: dict, ten_dang_
     """Chay lenh, giam sat game moi `nhip` giay. Tra (ma_thoat, stdout, stderr, da_ha_tran). Het han -> TimeoutExpired."""
     flags = IDLE if (dang_choi(ten_dang_chay) and os.name == "nt") else 0
     p = subprocess.Popen([str(x) for x in lenh], cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
-                         encoding="utf-8", errors="replace", env=env, creationflags=flags)
+                         encoding="utf-8", errors="replace", env=env, creationflags=flags,
+                         **({} if os.name == "nt" else {"start_new_session": True}))   # POSIX: nhom rieng -> killpg giet ca cay
     da_ha = False
     t_het = time.time() + han
     if dang_choi(ten_dang_chay):
@@ -122,13 +127,26 @@ def chay_co_giam_sat(lenh: list[str], cwd: str, han: float, env: dict, ten_dang_
         except subprocess.TimeoutExpired:
             if time.time() >= t_het:
                 _giet_cay(p.pid)
-                p.communicate()
+                try:
+                    p.communicate(timeout=GIAY_CHO_ONG_SAU_KHI_GIET)
+                except subprocess.TimeoutExpired:
+                    p.poll()    # chau van giu ong dan: BO ong, bao het han NGAY (khong cho mai)
                 raise
             if not da_ha and dang_choi(ten_dang_chay):
                 da_ha = ha(p.pid)
 
 
 def _giet_cay(pid: int) -> None:
+    """Giet CA CAY tien trinh (khong bao gio nem). Ba lop, lop sau chay du lop truoc da thanh cong:
+    POSIX `killpg` (cay nam trong nhom rieng, xem `Popen`) -> `psutil` (con chau de quy) -> Windows `taskkill /F /T`.
+    Truoc 08/10/2026 chi co psutil va moi loi bi nuot: thieu psutil / khong tim ra con chau thi cay SONG SOT va
+    `communicate()` doi mai tren don da qua han."""
+    if os.name != "nt":
+        try:
+            import signal
+            os.killpg(os.getpgid(pid), signal.SIGKILL)
+        except Exception:
+            pass
     try:
         import psutil
         goc = psutil.Process(pid)
@@ -140,3 +158,8 @@ def _giet_cay(pid: int) -> None:
         goc.kill()
     except Exception:
         pass
+    if os.name == "nt":
+        try:
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(pid)], capture_output=True, timeout=30)
+        except Exception:
+            pass

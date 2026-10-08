@@ -46,6 +46,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -127,21 +128,27 @@ def cai(url: str, nhanh: str, hop_thu: str | None = None, ten: str | None = None
 
 # ------------------------------------------------------------------ NHIP TIM
 def nhip_tim(hop: Path, c: dict, trang_thai: str, dang_chay: str | None = None, con_cho: int = 0,
-             den: str | None = None, ly_do_den: str = "") -> bool:
+             den: str | None = None, ly_do_den: str = "", lab_keo: str | None = None) -> bool:
     """Ghi `viec/may/<ten>.json`. Chi ghi lai khi doi trang thai HOAC cu hon 60 phut - khong thi may ranh
     day mot commit moi 5 phut (288 commit/ngay) lam lich su repo thanh rac.
 
     `den` = den suc khoe may (XANH/VANG/DO, tu `nhan/may_nha.ghi_mau_nhe`). Chi DOI MAU moi tinh la doi trang thai:
-    so do tung mau (CPU, RAM moi 5 phut) o lai may trong `nhat_ky/may_nha_mau.jsonl`, KHONG len git."""
+    so do tung mau (CPU, RAM moi 5 phut) o lai may trong `nhat_ky/may_nha_mau.jsonl`, KHONG len git.
+
+    `lab_keo` = nhan NGAN on dinh cua lan keo MA NGUON lab gan nhat (`CG.tom_tat_keo_lab`): `kip` | `tre: <ly do>` |
+    `bo_qua: <ly do>`. Cloud doc o day de biet ma cua minh da TOI may thuc thi chua, va neu chua thi vi sao."""
     f = hop / "viec" / "may" / ("%s.json" % _ten(c["ten"]))
-    moi = {"ten": c["ten"], "kha_nang": c["kha_nang"], "phien_ban_ma": CG.phien_ban_ma(GOC),
+    moi = {"ten": c["ten"], "kha_nang": c["kha_nang"], "phien_ban_ma": CG.phien_ban_ma_nguon(GOC),
            "trang_thai": trang_thai, "dang_chay": dang_chay, "con_cho": int(con_cho),
            "den": den, "python": sys.version.split()[0], "he_dieu_hanh": platform.platform()[:60],
            "luc": time.strftime("%Y-%m-%dT%H:%M:%S")}
+    if lab_keo:
+        moi["lab_keo"] = str(lab_keo)[:160]
     if den and den != "XANH" and ly_do_den:
         moi["ly_do_den"] = str(ly_do_den)[:200]
     cu = _doc(f)
-    if cu and all(cu.get(k) == moi[k] for k in ("trang_thai", "dang_chay", "con_cho", "phien_ban_ma", "kha_nang", "den")):
+    if cu and all(cu.get(k) == moi.get(k) for k in ("trang_thai", "dang_chay", "con_cho", "phien_ban_ma", "kha_nang", "den",
+                                                   "lab_keo")):
         try:
             if time.time() - time.mktime(time.strptime(cu["luc"], "%Y-%m-%dT%H:%M:%S")) < 3600:
                 return False
@@ -179,6 +186,8 @@ def bang_may(goc: Path | None = None) -> str:
                     m.get("phien_ban_ma"), ",".join(m.get("kha_nang") or []), im))
         if m.get("den") and m["den"] != "XANH":
             d.append("      suc khoe may: %s - %s" % (m["den"], m.get("ly_do_den") or "?"))
+        if m.get("lab_keo") and m["lab_keo"] != "kip":
+            d.append("      ma lab: %s" % m["lab_keo"])
     return "\n".join(d)
 
 
@@ -257,10 +266,42 @@ def _lay_khoa(hop: Path) -> bool:
     return True
 
 
-def chay_mot_luot(c: dict | None = None, toi_da: int = 50) -> dict:
+#: Dau van phan ma bo chay (`CG.chu_ky_ma_bo_chay`) luc tien trinh NAY nap. Lab doi ma (do bo chay nay hoac bo khac keo,
+#: hoac phien nha `git pull`) ma tien trinh van giu ma cu trong bo nho -> khong nhan them don o ma cu, tra `nap_lai_ma`.
+_MA_NAP: str | None = None
+
+
+def _ma_da_doi() -> bool:
+    global _MA_NAP
+    try:
+        nay = CG.chu_ky_ma_bo_chay(GOC)
+    except Exception:                                       # noqa: BLE001 - giam sat hong khong duoc giet bo chay
+        return False
+    if _MA_NAP is None:
+        _MA_NAP = nay
+        return False
+    return nay != _MA_NAP
+
+
+def _keo_ma(c: dict) -> str:
+    """Keo ma nguon lab (nhip dung chung giua cac bo chay) -> nhan ngan cho nhip tim. KHONG BAO GIO nem."""
+    try:
+        return CG.tom_tat_keo_lab(CG.keo_lab(c["nhanh"], GOC))
+    except Exception as e:                                  # noqa: BLE001
+        return "tre: keo_lab nem %s" % type(e).__name__
+
+
+def chay_mot_luot(c: dict | None = None, toi_da: int = 50, dung_khi_doi_ma: bool = True) -> dict:
     """MOT luot: dung khan? -> khoa -> keo -> lap (nhan viec -> chay -> day) -> nhip tim -> bao cloud.
 
-    Task Scheduler / cron goi 5 phut/lan; luot truoc con chay thi luot sau thoat ngay (`DANG_BAN`)."""
+    Task Scheduler / cron goi 5 phut/lan; luot truoc con chay thi luot sau thoat ngay (`DANG_BAN`).
+
+    ## MA O LAB CUNG PHAI TOI (08/10/2026)
+    Don chay bang MA O LAB (`lab=GOC`), va `dong_bo` chi keo HOP THU. Truoc day ma lab chi doi khi co nguoi `git pull`
+    -> moi ban sua cua cloud (bat don 'DAT' gia, cau hinh dien dan, xep hang...) nam tren git ma may thuc thi khong
+    thay. Nay moi luot / giua cac don goi `CG.keo_lab` (fetch + ff-only, nhip 5 phut dung chung); neu phan ma bo chay
+    doi thi dung nhan don o ma cu va tra `nap_lai_ma` de bo giam sat (`luot_tien_trinh_moi`) chay luot sau o tien trinh MOI.
+    `dung_khi_doi_ma=False`: tien trinh khong the tu nap lai ma (che do `CAU_TRONG_TIEN_TRINH`) -> cu chay tiep."""
     c = c or CG.cau_hinh()
     hop = Path(c["hop_thu"]) if c.get("hop_thu") else None
     if not hop or not (hop / ".git").exists() or not c.get("nhanh"):
@@ -270,19 +311,25 @@ def chay_mot_luot(c: dict | None = None, toi_da: int = 50) -> dict:
     if not _lay_khoa(hop):
         return {"trang_thai": "DANG_BAN"}
     xong, hoi = [], []
+    nap_lai = False
     den_may, ly_den = _mau_may()        # moi luot 5 phut: lay MOT mau nhe (khong LLM), ghi nhat ky cuc bo, tra den
+    _ma_da_doi()                        # ghi lai ma tien trinh nay dang giu, TRUOC khi keo ma moi
     try:
         r = CG.dong_bo(c["nhanh"], ep=True, goc=hop, rieng=True)
         if r.get("trang_thai") != "DAT":
             return {"trang_thai": "CHUA_DO_DUOC", "ly_do": r.get("ly_do")}
+        nhan_lab = _keo_ma(c)
         if CG.dung_khan(hop):
-            if nhip_tim(hop, c, "DUNG"):
+            if nhip_tim(hop, c, "DUNG", lab_keo=nhan_lab):
                 CG.dong_bo(c["nhanh"], ep=True, goc=hop, rieng=True)
             return {"trang_thai": "DUNG", "ly_do": CG.dung_khan(hop)}
         for _ in range(toi_da):
+            if dung_khi_doi_ma and _ma_da_doi():
+                nap_lai = True
+                break
             hang = len(CG.don_dang_cho(hop, may=c["ten"]))
             kq = CG.chay_mot_don_dang_cho(goc=hop, lab=GOC, may=c["ten"], kha_nang=c["kha_nang"],
-                                          nhanh_nhan=c["nhanh"])
+                                          nhanh_nhan=c["nhanh"], chi_lan=c.get("chi_lan"))
             if not kq or kq.get("hoan"):
                 break
             xong.append(kq)
@@ -290,16 +337,52 @@ def chay_mot_luot(c: dict | None = None, toi_da: int = 50) -> dict:
                 time.sleep(float(CM.cau_hinh()["nghi_giay"]))
             if kq.get("can_cloud"):
                 hoi.append(str(kq.get("ma")))
+            nhan_lab = _keo_ma(c)       # giua hai don: ma moi cua cloud ve ngay, don ke tiep chay ma moi
             nhip_tim(hop, c, "DANG_CHAY", dang_chay=str(kq.get("ma")), con_cho=max(hang - 1, 0),
-                     den=den_may, ly_do_den=ly_den)
+                     den=den_may, ly_do_den=ly_den, lab_keo=nhan_lab)
             CG.dong_bo(c["nhanh"], ep=True, goc=hop, rieng=True)   # day NGAY: cloud dang cho de ra don tiep
-        nhip_tim(hop, c, "RANH", con_cho=len(CG.don_dang_cho(hop, may=c["ten"])), den=den_may, ly_do_den=ly_den)
+        nhip_tim(hop, c, "RANH", con_cho=len(CG.don_dang_cho(hop, may=c["ten"])), den=den_may, ly_do_den=ly_den,
+                 lab_keo=nhan_lab)
         CG.dong_bo(c["nhanh"], ep=True, goc=hop, rieng=True)
         return {"trang_thai": "XONG", "da_chay": [{"ma": k.get("ma"), "trang_thai": k.get("trang_thai")} for k in xong],
+                "nap_lai_ma": bool(dung_khi_doi_ma and (nap_lai or _ma_da_doi())),
                 "bao_cloud": bao_cloud(xong, hoi, c, hop)}
     finally:
         try:
             (hop / ".git" / "cau_khoa.json").unlink()
+        except OSError:
+            pass
+
+
+def luot_tien_trinh_moi(sau_loi: bool = False) -> dict:
+    """Chay MOT luot (`b cau chay`) trong tien trinh Python MOI -> luot nao cung nap ma MOI NHAT tu dia.
+
+    ## Vi sao (08/10/2026)
+    Bo chay `--lien-tuc` song nhieu ngay; Python nap module MOT lan, nen du lab da keo ma moi, tien trinh van chay
+    ma cu (do 08/10: p9 `c6d08ce2`, p11 `3d2f136d` cu hon lab ca chuc gio). Bo GIAM SAT nay chi con vong lap rat nho:
+    keo ma lab (neu duoc) -> sinh tien trinh con chay mot luot -> doc ket qua. Luot con chet vi ma moi hong (loi cu phap)
+    thi giam sat van song va KEO duoc ban sua o nhip ke tiep.
+
+    Ket qua luot con tra qua tep tam (`CAU_KET_QUA_LUOT`); khong ra ket qua = `LOI_CON` (khong bao gio la 'xong')."""
+    c = CG.cau_hinh()
+    if c.get("nhanh"):
+        try:
+            CG.keo_lab(c["nhanh"], GOC, nghi_giay=60.0 if sau_loi else None)
+        except Exception:                                   # noqa: BLE001
+            pass
+    fd, tam = tempfile.mkstemp(prefix="cau_luot_", suffix=".json")
+    os.close(fd)
+    try:
+        p = subprocess.run([sys.executable, str(GOC / "b.py"), "cau", "chay"], cwd=str(GOC),
+                           env={**os.environ, "CAU_KET_QUA_LUOT": tam, "CAU_LUOT_CON": "1"})
+        r = _doc(Path(tam))
+        return r or {"trang_thai": "LOI_CON", "ma_thoat": p.returncode,
+                     "ly_do": "luot con khong ghi ket qua (chet som? loi nap ma?)"}
+    except OSError as e:
+        return {"trang_thai": "LOI_CON", "ly_do": "%s: %s" % (type(e).__name__, str(e)[:160])}
+    finally:
+        try:
+            os.unlink(tam)
         except OSError:
             pass
 
@@ -388,14 +471,29 @@ def main(argv: list[str]) -> int:
         if lenh == "chay":
             if "--lien-tuc" in con:
                 nghi = int(_co(con, "--nghi", 60))
+                # Mac dinh moi luot chay o TIEN TRINH MOI (nap ma moi nhat). `CAU_TRONG_TIEN_TRINH=1` -> cach cu (test / debug).
+                trong = bool(os.environ.get("CAU_TRONG_TIEN_TRINH"))
+                hong = False
                 while True:
-                    r = chay_mot_luot()
-                    print(json.dumps(r, ensure_ascii=False), flush=True)
+                    r = chay_mot_luot(dung_khi_doi_ma=False) if trong else luot_tien_trinh_moi(sau_loi=hong)
+                    if trong or r.get("trang_thai") == "LOI_CON":       # luot con da tu in ket qua cua no
+                        print(json.dumps(r, ensure_ascii=False), flush=True)
                     if r["trang_thai"] in ("DUNG", "CHUA_CAI"):
                         return 0 if r["trang_thai"] == "DUNG" else 1
+                    hong = r["trang_thai"] == "LOI_CON"
+                    if r.get("nap_lai_ma"):             # ma moi ve giua luot: chay luot ke tiep NGAY (o tien trinh moi)
+                        time.sleep(2)
+                        continue
                     time.sleep(max(nghi * (3 if CM.dang_choi() else 1), 10))
             r = chay_mot_luot()
+            if r.get("nap_lai_ma") and not os.environ.get("CAU_LUOT_CON"):
+                r = luot_tien_trinh_moi()               # chay bang cron: ma vua doi -> chay tiep ngay bang ma moi
             print(json.dumps(r, ensure_ascii=False))
+            if os.environ.get("CAU_KET_QUA_LUOT"):
+                try:
+                    Path(os.environ["CAU_KET_QUA_LUOT"]).write_text(json.dumps(r, ensure_ascii=False), encoding="utf-8")
+                except OSError:
+                    pass
             return 0 if r["trang_thai"] in ("XONG", "DANG_BAN", "DUNG") else 1
         if lenh == "may":
             print(bang_may())

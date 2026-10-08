@@ -64,3 +64,96 @@ def test_co_tay_bao_truoc(tmp_path, monkeypatch):
     assert CM.dang_choi([]) is None
     f.write_text("1")
     assert CM.dang_choi([]) == "(chu du an bao)"
+
+
+# ---- het han phai giet CA CAY va KHONG BAO GIO treo vi ong dan (08/10/2026: p9, p11 ~594 phut tren don han 120 phut) ----
+def _giet_theo_dong_lenh(mau: str) -> int:
+    import psutil
+    n = 0
+    for p in psutil.process_iter(["cmdline"]):
+        try:
+            if mau in " ".join(p.info.get("cmdline") or []):
+                p.kill()
+                n += 1
+        except Exception:
+            pass
+    return n
+
+
+def _con_song(mau: str) -> bool:
+    import psutil
+    for p in psutil.process_iter(["cmdline"]):
+        try:
+            if mau in " ".join(p.info.get("cmdline") or []) and p.status() != psutil.STATUS_ZOMBIE:
+                return True
+        except Exception:
+            pass
+    return False
+
+
+CHAU = ("import subprocess, sys, time\n"
+        "subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(%d)'])\n"      # chau thua huong stdout / stderr
+        "time.sleep(60)\n")
+
+
+def test_het_han_giet_ca_cay_ke_ca_chau():
+    t = time.time()
+    try:
+        try:
+            CM.chay_co_giam_sat([PY, "-c", CHAU % 241], ".", 1.5, ENV, ten_dang_chay=[], nhip=0.5)
+        except subprocess.TimeoutExpired:
+            pass
+        else:
+            assert False, "phai het han"
+        assert time.time() - t < 20
+        for _ in range(50):
+            if not _con_song("sleep(241)"):
+                break
+            time.sleep(0.2)
+        assert not _con_song("sleep(241)"), "tien trinh chau song sot sau khi het han"
+    finally:
+        _giet_theo_dong_lenh("sleep(241)")
+
+
+def test_het_han_van_giet_duoc_khi_thieu_psutil(monkeypatch):
+    if os.name == "nt":
+        return                                          # tren Windows lop du phong la taskkill /T (khong test o cloud)
+    monkeypatch.setitem(sys.modules, "psutil", None)    # `import psutil` -> ImportError
+    t = time.time()
+    try:
+        try:
+            CM.chay_co_giam_sat([PY, "-c", CHAU % 242], ".", 1.5, ENV, ten_dang_chay=[], nhip=0.5)
+        except subprocess.TimeoutExpired:
+            pass
+        else:
+            assert False, "phai het han"
+        assert time.time() - t < 20
+    finally:
+        monkeypatch.undo()
+        for _ in range(50):
+            if not _con_song("sleep(242)"):
+                break
+            time.sleep(0.2)
+        song = _con_song("sleep(242)")
+        _giet_theo_dong_lenh("sleep(242)")
+        assert not song, "killpg phai giet ca nhom khi khong co psutil"
+
+
+def test_het_han_khong_treo_khi_chau_giu_ong_dan_ma_khong_giet_duoc(monkeypatch):
+    # _giet_cay chi giet duoc tien trinh con truc tiep -> chau van giu ong stdout. Truoc day `p.communicate()` doi mai.
+    def chi_giet_con(pid):
+        import psutil
+        psutil.Process(pid).kill()
+    monkeypatch.setattr(CM, "_giet_cay", chi_giet_con)
+    monkeypatch.setattr(CM, "GIAY_CHO_ONG_SAU_KHI_GIET", 2.0)
+    t = time.time()
+    try:
+        try:
+            CM.chay_co_giam_sat([PY, "-c", CHAU % 243], ".", 1.5, ENV, ten_dang_chay=[], nhip=0.5)
+        except subprocess.TimeoutExpired:
+            pass
+        else:
+            assert False, "phai het han"
+        assert time.time() - t < 20, "bo chay bi treo vi ong dan"
+    finally:
+        _giet_theo_dong_lenh("sleep(243)")
