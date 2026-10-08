@@ -65,28 +65,59 @@ hop dong va lot; cai that su co the sai la dinh nghia pip, doi spread -> gia (po
 
 ## HAI MO HINH BAR (08/10/2026) - vi sao co `khop_bar`
 
-Chu du an hoi tai sao 24 gio / hang nghin phep thu chi ra mot he lai 13%/nam DD > 30%. Mot nguyen nhan CO BANG CHUNG o day:
-125 o hieu chuan (EURCAD / AUDCAD / NZDCAD, `reports/hieu_chuan/`) cho engine LAC QUAN x2,5-x7 so voi MT5 tester, tap trung o
-cac o `tia_lenh=True` M15 - dung loai o ma quet tham so chon ra lam ung vien dau bang.
+Chu du an hoi tai sao 24 gio / hang nghin phep thu chi ra mot he lai 13%/nam DD > 30%. Mot nguyen nhan CO BANG CHUNG o day
+(so lieu day du, cach doc va gioi han: `reports/lech_engine_EURCAD.md`):
+
+  1. VOI MT5 TESTER (125 o hieu chuan EURCAD / AUDCAD / NZDCAD, engine ban 3 = `cuc_tri` vs tester model 0): o `tia_lenh=True` (68 o)
+     engine cao hon tester o 50/68 o; o co tester >= +1%/nam (32 o) ty le engine/tester TRUNG VI x2,2 (M15 x3,2; cao nhat x16); o khong
+     tia (57 o): bo phan swap engine thi ~ tester (chenh trung vi +0,0 diem/nam). 15 o xep dau theo engine DEU la o tia lenh: engine
+     +40..+154 %/nam, tester -33..+53 %/nam (cua so ~6 thang quy ra nam), engine cao hon tester o 15/15; thu hang hai ben van tuong
+     quan (Spearman 0,79) nhung top-15 chi trung 8/15. Quet tham so xep hang bang engine nay CHON DUNG loai o hong nhat.
+  2. VOI CHINH EA (`ea_LuoiDayDu.mq5` chay tren san gia C++, cung mot duong gia, chuoi tick min `paso` = 1e-6 gia; 12 cau hinh x 4 thu tu
+     cao/thap trong bar): `cuc_tri` lac quan +12..+55% o cau hinh chot theo tien / tia lenh (chot_tien +37, chot_tien_tia +31..+37,
+     chot_tien_tia_cho_lui +20..+55, chot_tien_cho_lui +12..+27, tn5 +14..+15); `duong_di` nam trong +-5% o thu tu THEO NEN (thu tu ma
+     mo hinh gia dinh) o ca 12 cau hinh.
+  3. TREN DU LIEU TONG HOP (random walk, khong chi phi, ky vong that = 0; `python -m nhan.kiem_do_phan_giai`, 16 hat x 2 ngay, don vi
+     bao gia, lech GHEP DOI so voi chay tung tick) sai lech cua mo hinh tang theo cap bar (k = 60 / 300 / 900 tick ~ M1 / M5 / M15):
+         cau hinh        cuc_tri                    duong_di (sai so chuan 1-3, nhan_lot 16-32)
+         tia             +11 / +58 / +184           +1 / +1 / -7
+         chot_tien       +14 / +47 / +111           -0,2 / -1 / -8
+         tia_cho_lui     +7 / +33 / +93             +1 / +2 / +1,5
+         cho_lui         +0,6 / +8,5 / +22          0 / -1 / -3
+         nhan_lot        +32 / +407 / +613          -10 / -14 / -54
+         khong_tia       0 / +3,5 / +18             0 / -0,4 / -2
+     Cau hinh khong tia lenh gan nhu khong lech o khung nho; tia lenh, chot theo tien va lot nhan (cung la loai ma xep hang chon dau
+     bang) lech nhieu nhat va lech THEO KHUNG, nen chay M15 de "nhanh" la dung cai khung mo hinh sai nhat.
 
   `cuc_tri` (ban cu, `_mot_ro`): moi bar xu ly theo thu tu CO DINH "them tang theo low -> tia cap o HIGH -> TP so voi high". Hai loi:
     (a) mot tia cap duoc chot o CUC TRI cua bar chu khong o gia nguong cua no (cap co lai >= bien_cap pip se bi ghi lai o muc
-        high - tang them hang chuc pip), va toi 999 cap/bar;
+        high - tang them hang chuc pip), va toi 999 cap/bar; spread cua tia bi tru hai lan;
     (b) thu tu trong bar luon la thuan loi: tang hap thu duoc mot cu nhun nguoc roi chot o dinh, bar nao cung vay.
     Hai thu cong lai tao ra loi nhuan tu khong khi do phan giai bar thap (bar M15 gom ~900 tick).
-  `duong_di` (MAC DINH): moi bar di tren duong O -> L -> H -> C neu nen xanh (C >= O), O -> H -> L -> C neu nen do - duong NGAN NHAT
-    qua ca hai cuc tri (chenh lech quang duong giua hai thu tu = 2(O-C)); thu tu khong biet mau nen LUON them cac cu nhun ngoai le
-    nen LAC QUAN chu khong "than trong". Tren moi doan don dieu: doan NGUOC chieu ro them tang (khop o moc, hoac o gia dau doan
-    neu nhay gia vuot moc); doan THUAN chieu chot tia / TP o GIA NGUONG, nhieu lan lien tiep trong cung doan (ro chot xong mo lai
-    ngay o gia chot). Chi phi spread tinh MOT lan luc mo lenh (khong tinh them o tia, giong EA va tester); lo treo = lo noi lon
-    nhat TREN CA DUONG chu khong chi o low.
-  Do tren random walk khong chi phi, khong drift (ky vong ket qua THAT = 0 voi bat ky luat nao): sai lech so voi chay theo tung tick
-  (cung duong, chenh lech ghep doi) cua `cuc_tri` la +112 / +233 / +504 o M1 / M5 / M15 (mot cau hinh tia lenh), tang theo khung;
-  cua `duong_di` la -16 / -14 / -27 (SE ~ 12-16) - gan 0 va KHONG phu thuoc khung. Cau hinh khong tia lenh gan nhu khong lech o
-  ca hai. Tai lap bang: `python -m nhan.kiem_do_phan_giai` (test: `test_luoi_duong_di.py`).
-  CON THIEU (khong duoc bao la da hieu chuan): `duong_di` chi chung minh het lech do PHAN GIAI BAR tren du lieu tong hop; so voi tester
-  tren du lieu that con swap (tester bao 0,00% o ca 125 o, engine tinh ~3-10%/nam), vi mo cau truc tick that, va open bar that
-  (engine suy open = close bar truoc kep vao [low, high]). Chay lai 125 o bang `chi_engine=true` de do phan con lai.
+  `duong_di` (MAC DINH): moi bar di tren duong O -> L -> H -> C neu nen xanh (C >= O, ke ca doji), O -> H -> L -> C neu nen do - duong NGAN
+    NHAT qua ca hai cuc tri (chenh lech quang duong giua hai thu tu = 2(O-C)). Tren moi doan don dieu: doan NGUOC chieu ro them tang
+    (khop o moc, hoac o gia dau doan neu nhay gia vuot moc); doan THUAN chieu chot tia / TP o GIA NGUONG, nhieu lan lien tiep trong cung
+    doan (ro chot xong mo lai ngay o gia chot, noi tiep tu gia khop). Spread tinh MOT lan luc mo lenh (khong tinh them o tia, giong EA
+    va tester); lo treo = lo noi lon nhat TREN CA DUONG chu khong chi o low. Cham dung moc (<= `EPS_CHAM_PIP` = 1e-6 pip) la khop,
+    nhu EA / tester: khong de nhieu double 1e-16 quyet dinh co khop hay khong.
+  Chi `hieu_chuan_luoi` duoc chon `cuc_tri` (de do lech); duong nghien cuu cua AI chi nhan `duong_di` (`MO_HINH_BAR_NGHIEN_CUU`).
+
+  CON THIEU (khong duoc bao la da hieu chuan):
+    (a) THU TU CAO/THAP TRONG BAR: bar OHLC khong cho biet low hay high den truoc; `duong_di` dung mau nen. Khi EA chay theo thu tu khac
+        (thap truoc / cao truoc / xen ke), cau hinh cho-gia-lui bi `duong_di` danh gia THAP hon EA 12-33% (cho_lui -33 / -29 / -32,
+        tia_cho_lui -23 / -32 / -19, chot_tien_tia_cho_lui -24 / -16 / -12, buoc_co -17 / -17 / -15, chot_tien_cho_lui -4 .. -15)
+        va cau hinh chi-ban (ban_cong) -14,7% o 2/4 thu tu; cac cau hinh con lai (mua_phang, hai_nhan_buoc, tn5, chot_tien,
+        chot_tien_tia, buoc_thu) lech <= 7%. Lech am = engine BI QUAN, tuc la an toan cho xep hang, nhung co the loai nham o thang.
+        Tren du lieu that M15 do bien do nen lon, nen xep hang xong van phai qua tester (hoac M1).
+    (b) SWAP: tester bao 0,00 o ca 125 o, engine tinh trung vi -4,4 %/nam (121/125 o am, thap nhat -32) - chua doi chieu duoc, chua
+        biet tester khong tinh hay cach doc bao cao bi sai.
+    (c) cau truc tick that, open bar that (engine suy open = close bar truoc kep vao [low, high]); gap thuan chieu vao bar do rong 0
+        hoan chot tia / TP sang bar sau.
+    (d) luoi thap phan: chuoi tick thua (`paso` = 1e-5 = 1 point) sinh nhieu luong tu hoa (cung mot cau hinh lech vai % tuy
+        hat) - dung 1e-6 (xem `test_ea_luoi_day_du.py`).
+  Chay lai 125 o hieu chuan bang `hieu_chuan_luoi` voi `chi_engine=true` de do phan con lai bang engine moi (khong can tester lai).
+  Test: `test_luoi_duong_di.py` (hinh hoc khop lenh, tu nhat tren doan tick, khong lech theo khung, MC), `test_luoi_nhan.py`,
+  `test_ea_luoi_day_du.py` (engine vs EA tren cung duong gia).
 """
 from __future__ import annotations
 
@@ -593,7 +624,7 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
 #: nhung moc = gia khop -/+ buoc * pip la phep double nen sai ~1e-16 se quyet dinh "cham hay khong" (vd 0,900445 - 0,0016 ra
 #: 0,8988449999999999 trong khi gia that 0,898845 nam tren luoi 1e-6): lenh khop lech mot tick o cac o cham dung moc - rat hay gap
 #: o du lieu mau 1 phut (bien do nen ~10 diem). 1e-6 pip la nho hon mot buoc gia that (1 diem = 0,1 pip) 1e5 lan nhung lon hon sai so
-#: double cua moi cap gia / pip thuc te (<= 1e-9 pip). GIU KHOP `EPS_CHAM_PIP` trong `luoi_nhan.c` (test_luoi_duong_di kiem bang nhau).
+#: double cua moi cap gia / pip thuc te (<= 1e-9 pip). GIU KHOP `EPS_CHAM_PIP` trong `luoi_nhan.c` (test_luoi_nhan::test_dung_sai_cham_moc_c_bang_python kiem bang nhau).
 EPS_CHAM_PIP = 1e-6
 
 #: Chan so vong chot / tia trong MOT doan don dieu. Voi tp > 0 va gia huu han so vong <= do dai doan / nguong chot, nen so nay chi

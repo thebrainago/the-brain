@@ -9,7 +9,9 @@ Sau lop kiem, tu re den dat. Khong lop nao thay duoc tester MT5 that (cu phap ri
   4. DOI CHIEU NGAU NHIEN voi `luoi.chay` tren CUNG duong gia tick: 12 cau hinh x nhieu duong gia, khop TUNG LENH (chieu, lot,
      gia mo, tick mo / dong) va LAI sau hai khoan da biet (`KetQuaDoiChieu`) - phan lech con lai phai bang 0.
   5. DOT BIEN: sua ma EA co chu dich -> bo so sanh PHAI bao lech (bo so sanh co rang, khong gat dau cho moi thu).
-  6. Do khoang cach mo hinh bar OHLC (engine) <-> tick (EA), `test_engine_lac_quan_...` - dau hieu cho task #48.
+  6. Do khoang cach mo hinh bar OHLC (engine) <-> tick (EA) - task #48: `cuc_tri` (cu) lac quan +15% .. +55% so voi EA chay tren tick cua CHINH cac bar do;
+     `duong_di` (mac dinh) khop < 6% theo nen va KHONG lac quan voi bat ky thu tu cao / thap nao (than trong toi -39% o cau hinh cho lui). Cham, `cham`;
+     bang day du: `python test_ea_luoi_day_du.py --bang --paso 1e-6` (`reports/lech_engine_EURCAD.md` muc 2).
 """
 from __future__ import annotations
 
@@ -561,35 +563,110 @@ def test_dot_bien_khong_doi_gi_van_khop(tmp_path, exe):
 
 # ============================================================ 6. khoang cach mo hinh BAR (engine) <-> TICK (EA): task #48
 #: Bar M15 gia lap co bien do that (~7 pip), 4 chuoi x 1500 bar. EA chay tren tick sinh tu CHINH cac bar do (`G.do_lech_bar`), engine chay tren bar.
+#: `PASO_DO` = 1e-6 (= 0,1 point): voi 1e-5 moi tick bi ep ve luoi point, them vai % nhieu luong tu o cau hinh tia / chot tien. Bang day du:
+#: `python test_ea_luoi_day_du.py --bang --paso 1e-6` (hoac `reports/lech_engine_EURCAD.md` muc 2). Moi ca chay ~1,7 giay -> danh dau `cham`.
+PASO_DO = 1e-6
 _BAR_THAT = [bars_that(seed=sd) for sd in range(1, 5)]
+#: Cau hinh cua test 'khop theo nen' (moi cau hinh 4 chuoi x 1 thu tu ~7 giay). Bo `ban_cong` / `hai_nhan_buoc` / `buoc_thu`: cuc_tri va duong_di cho
+#: CUNG so o do (bang trong bao cao) nen khong phan biet duoc hai mo hinh; van co mat o test 'moi thu tu duong gia' ben duoi.
+_CH_KHOP_THEO_NEN = ["tn5", "mua_phang", "chot_tien", "chot_tien_tia", "cho_lui", "tia_cho_lui", "chot_tien_cho_lui", "chot_tien_tia_cho_lui", "buoc_co"]
+_THU_TU_KHAC = tuple(t for t in THU_TU if t != "theo_nen")
 
 
-def _lai_engine_va_ea(exe, ten, thu_tu, mo_hinh):
+def lai_engine_va_ea(exe, ten, mo_hinh, thu_tu=("theo_nen",), hat=range(4), paso=PASO_DO):
+    """-> {thu_tu: (lai engine, lai EA)} cong qua cac chuoi bar `_BAR_THAT[i] for i in hat` (don vi bao gia, tru phi lenh con mo)."""
     ts = dataclasses.replace(CAU_HINH[ten], khop_bar=mo_hinh)
-    e = a = 0.0
-    for d in _BAR_THAT:
-        x = G.do_lech_bar(exe, ts, d, thu_tu=thu_tu, paso=1e-5)[0]
-        e += x["lai_engine"]
-        a += x["lai_ea"]
-    return e, a
+    tong = {tt: [0.0, 0.0] for tt in thu_tu}
+    for i in hat:
+        for x in G.do_lech_bar(exe, ts, _BAR_THAT[i], thu_tu=thu_tu, paso=paso):
+            tong[x["thu_tu"]][0] += x["lai_engine"]
+            tong[x["thu_tu"]][1] += x["lai_ea"]
+    return {tt: (v[0], v[1]) for tt, v in tong.items()}
 
 
 @can_cxx
+@pytest.mark.cham
 @pytest.mark.parametrize("ten,tran_lech", [("tn5", 1.08), ("chot_tien", 1.20), ("chot_tien_tia", 1.20), ("cho_lui", 1.20)])
 def test_cuc_tri_van_lac_quan_so_voi_ea_tick(exe, ten, tran_lech):
     """BANG CHUNG cua chan doan 08/10/2026 (khong phai loi EA): mo hinh bar CU `cuc_tri` dong cap tia / chot tien o gia TOT NHAT cua bar va
-    luon xu ly bat loi truoc, nen cao hon EA chay tren tick cua CHINH cac bar do: tn5 +14%, chot_tien +38%, chot_tien_tia +37%, cho_lui
-    +30% (do 08/10, thu tu duong gia 'theo_nen' = cung gia dinh mau nen voi `duong_di`). Giu lai de khong ai quen vi sao `duong_di` ra doi."""
-    e, a = _lai_engine_va_ea(exe, ten, "theo_nen", "cuc_tri")
+    luon xu ly bat loi truoc, nen cao hon EA chay tren tick cua CHINH cac bar do: tn5 +15%, chot_tien +37%, chot_tien_tia +37%, cho_lui
+    +26% (do 08/10, paso 1e-6, thu tu duong gia 'theo_nen' = cung gia dinh mau nen voi `duong_di`; chot_tien_tia_cho_lui toi +55%).
+    Giu lai de khong ai quen vi sao `duong_di` ra doi."""
+    e, a = lai_engine_va_ea(exe, ten, "cuc_tri")["theo_nen"]
     assert a > 0 and e > a * tran_lech, "%s: cuc_tri %.1f, EA %.1f - mo hinh cu KHONG con lac quan nhu da do" % (ten, e, a)
 
 
 @can_cxx
-@pytest.mark.parametrize("ten", ["tn5", "mua_phang", "chot_tien", "chot_tien_tia", "cho_lui", "tia_cho_lui", "chot_tien_cho_lui", "buoc_co"])
+@pytest.mark.cham
+@pytest.mark.parametrize("ten", _CH_KHOP_THEO_NEN)
 def test_duong_di_khop_ea_tick_cung_thu_tu_duong_gia(exe, ten):
     """`duong_di` (mac dinh) tren bar so voi EA chay tren tick sinh tu CHINH cac bar do theo CUNG thu tu duong gia (nen xanh: thap -> cao,
-    nen do: cao -> thap): lai lech < 4% o moi cau hinh (do 08/10/2026: -0,4% tn5, 0,0% mua_phang, +0,7% chot_tien, +1,8% chot_tien_tia,
-    0,0% cho_lui, +0,1% tia_cho_lui, -0,8% chot_tien_cho_lui, -0,9% buoc_co), trong khi `cuc_tri` lech +14% .. +38% (test tren).
-    Phan con lai la do KHONG BIET thu tu cao / thap that trong nen, khong phai sai so mo hinh - xem `reports/lech_engine_EURCAD.md`."""
-    e, a = _lai_engine_va_ea(exe, ten, "theo_nen", "duong_di")
-    assert a > 0 and abs(e - a) < 0.04 * a + 2.0, "%s: duong_di %.1f, EA %.1f (%+.1f%%)" % (ten, e, a, 100.0 * (e - a) / a)
+    nen do: cao -> thap): lai lech < 6% o moi cau hinh (do 08/10/2026, paso 1e-6, 4 chuoi: +3,1% mua_phang, +0,2% tn5, -0,1% chot_tien,
+    +2,1% chot_tien_tia, -3,0% cho_lui, -3,0% tia_cho_lui, -4,5% chot_tien_cho_lui, -2,3% chot_tien_tia_cho_lui, -3,9% buoc_co), trong khi
+    `cuc_tri` lech +15% .. +55% (test tren). Phan con lai la do KHONG BIET thu tu cao / thap that trong nen, khong phai sai so mo hinh - xem
+    `reports/lech_engine_EURCAD.md`. Cong 2,0 (don vi bao gia) cho cau hinh lai nho."""
+    e, a = lai_engine_va_ea(exe, ten, "duong_di")["theo_nen"]
+    assert a > 0 and abs(e - a) < 0.06 * a + 2.0, "%s: duong_di %.1f, EA %.1f (%+.1f%%)" % (ten, e, a, 100.0 * (e - a) / a)
+
+
+@can_cxx
+@pytest.mark.cham
+@pytest.mark.parametrize("ten", list(CAU_HINH))
+def test_duong_di_khong_lac_quan_voi_bat_ky_thu_tu_cao_thap_trong_nen(exe, ten):
+    """Tinh chat QUAN TRONG NHAT cua mo hinh cong bang: voi MOI thu tu duong gia (thap truoc / cao truoc / xen ke) engine khong duoc cao hon EA tick
+    qua 6% - cai da thoi phong ket qua luoi 15-55% truoc 08/10 la su LAC QUAN, con than trong thi chi mat co hoi. Do (08/10, paso 1e-6, chuoi 1): lech cao
+    nhat +3,3% (chot_tien_tia); cac cau hinh 'cho lui / buoc gian' than trong hon EA tren nhieu thu tu (cho_lui -39,5%, tia_cho_lui -26%, buoc_co
+    -14%, ban_cong -4%: lech THAT khi thu tu cao / thap la bat dinh - bang day du trong bao cao). Chan duoi -45% chi de bat loi engine bo lenh bua bai."""
+    r = lai_engine_va_ea(exe, ten, "duong_di", thu_tu=_THU_TU_KHAC, hat=[0])
+    for tt, (e, a) in r.items():
+        assert a > 0, "%s/%s: EA khong lai (%.1f) - chuoi thu khong con y nghia" % (ten, tt, a)
+        assert e - a < 0.06 * a + 2.0, "%s/%s: engine LAC QUAN %.1f so voi EA %.1f (%+.1f%%)" % (ten, tt, e, a, 100.0 * (e - a) / a)
+        assert e - a > -0.45 * a - 2.0, "%s/%s: engine qua than trong %.1f so voi EA %.1f (%+.1f%%)" % (ten, tt, e, a, 100.0 * (e - a) / a)
+
+
+# ============================================================ bang day du: python test_ea_luoi_day_du.py --bang --paso 1e-6
+def _o_bang(r: dict) -> str:
+    return " / ".join("%+.1f" % (100.0 * (r[tt][0] - r[tt][1]) / abs(r[tt][1]) if r[tt][1] else float("nan")) for tt in THU_TU)
+
+
+def in_bang(paso: float, hat: list[int], cau_hinh: list[str], mo_hinh: list[str]) -> list[str]:
+    """Bang markdown 'lai engine lech bao nhieu % so voi lai EA tick' (am = engine than trong hon EA), moi mo hinh bar mot cot, 4 thu tu duong gia
+    trong nen: theo nen / thap truoc / cao truoc / xen ke. Cot dau = lai cua EA (theo nen) cong qua cac chuoi, don vi bao gia."""
+    import tempfile
+    exe = G.bien_dich(EA_MQ5, thu_muc=Path(tempfile.mkdtemp(prefix="ea_gia_lap_exe_")))
+    dong = ["| cau hinh | EA lai (theo nen) | " + " | ".join("`%s`: theo nen / thap truoc / cao truoc / xen ke" % m for m in mo_hinh) + " |",
+            "|---|---:|" + "---|" * len(mo_hinh)]
+    print("\n".join(dong), flush=True)
+    for ten in cau_hinh:
+        kq = {m: lai_engine_va_ea(exe, ten, m, thu_tu=THU_TU, hat=hat, paso=paso) for m in mo_hinh}
+        a0 = kq[mo_hinh[0]]["theo_nen"][1]
+        dong.append("| %s | %+.0f | " % (ten, a0) + " | ".join(_o_bang(kq[m]) for m in mo_hinh) + " |")
+        print(dong[-1], flush=True)
+    return dong
+
+
+if __name__ == "__main__":
+    import argparse
+    import shutil
+    import sys
+    ap = argparse.ArgumentParser(description="In bang lech engine <-> EA tick (muc 6): lai engine so voi lai EA, 4 thu tu duong gia trong nen")
+    ap.add_argument("--bang", action="store_true", help="bat buoc: in bang (khong chay pytest)")
+    ap.add_argument("--paso", type=float, default=PASO_DO, help="buoc tick, don vi GIA (uoc nguyen cua point 1e-5; mac dinh %g)" % PASO_DO)
+    ap.add_argument("--hat", default="1,2,3,4", help="cac chuoi bar (seed) cua `bars_that`, cach nhau bang phay (mac dinh 1,2,3,4 = bang trong bao cao)")
+    ap.add_argument("--cau-hinh", default="", help="cac cau hinh cua CAU_HINH cach nhau bang phay (mac dinh: tat ca)")
+    ap.add_argument("--mo-hinh", default=",".join(L.MO_HINH_BAR), help="mo hinh bar (mac dinh %s)" % ",".join(L.MO_HINH_BAR))
+    a = ap.parse_args()
+    if not a.bang:
+        ap.error("chay pytest de chay test; them --bang de in bang")
+    if G.trinh_bien_dich() is None:
+        sys.exit("khong co g++ / clang++ (hoac EA_GIA_LAP_CXX)")
+    seeds = [int(x) for x in a.hat.split(",") if x.strip()]
+    if not seeds or any(not 1 <= x <= len(_BAR_THAT) for x in seeds):
+        sys.exit("--hat chi nhan 1..%d" % len(_BAR_THAT))
+    ten_ch = [x for x in a.cau_hinh.split(",") if x.strip()] or list(CAU_HINH)
+    sai = [x for x in ten_ch if x not in CAU_HINH]
+    mh = [x for x in a.mo_hinh.split(",") if x.strip()]
+    sai_mh = [x for x in mh if x not in L.MO_HINH_BAR]
+    if sai or sai_mh or not mh:
+        sys.exit("khong co cau hinh %s / mo hinh %s (cau hinh: %s; mo hinh: %s)" % (sai or "-", sai_mh or "-", ",".join(CAU_HINH), ",".join(L.MO_HINH_BAR)))
+    in_bang(a.paso, [x - 1 for x in seeds], ten_ch, mh)

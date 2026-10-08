@@ -329,8 +329,8 @@ _HUT = 2.0 ** -17
 
 # Ca BIEN cua mo hinh `duong_di` (cung quy uoc nhi phan nhu tren; KHONG bar nao co dong == mo-kep, tru bar phang, de duong gia cua chieu
 # ban dung la guong cua chieu mua: nen doji tinh la nen XANH cho ca hai chieu). Moi ca toi mot DAU BANG cua mot phep so sanh cua ham `lui` / `len_`:
-# neu mot ben doi `>` thanh `>=` (hay nguoc lai) thi bo ba (so_ro, so_lenh, so_cap) hoac duong lai doi. Bo ba "mong" duoc suy tay (xem
-# `test_luoi_duong_di.py`, nhom BienTay) va Python PHAI ra dung no - ca nao ngung cham dung moc thi tu kiem hong ngay.
+# neu mot ben doi `>` thanh `>=` (hay nguoc lai) thi bo ba (so_ro, so_lenh, so_cap) hoac duong lai doi. Bo ba "mong" duoc suy tay (cung
+# kieu voi cac ca tay cua `test_luoi_duong_di.py`) va Python PHAI ra dung no - ca nao ngung cham dung moc thi tu kiem hong ngay.
 _CA_BIEN_DUONG = (
     # high cua bar k cham DUNG TP +25 pip: chot, mo lai o gia TP -> 6 vong
     ("tp_bang", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0),

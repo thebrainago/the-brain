@@ -47,9 +47,9 @@ enum { S_LAI_GOP = 0, S_PHI_SPREAD, S_PHI_SWAP, S_SO_RO, S_SO_LENH, S_TANG_MAX, 
 #define LOI_DAU_VAO (-2)
 #define LOI_VONG (-3)                  /* `duong_di`: qua TOI_DA_VONG lan chot / them tang trong MOT doan don dieu (tham so suy bien) */
 
-/* GIU KHOP `luoi.TOI_DA_VONG_DOAN` (test_luoi_duong_di kiem hai so nay bang nhau) */
+/* GIU KHOP `luoi.TOI_DA_VONG_DOAN` (test_luoi_nhan::test_tran_so_vong_c_bang_python kiem hai so nay bang nhau) */
 #define TOI_DA_VONG 1000000
-/* Dung sai "gia cham moc" cua `duong_di`, tinh bang PIP. GIU KHOP `luoi.EPS_CHAM_PIP` (test_luoi_duong_di kiem hai so nay bang nhau). */
+/* Dung sai "gia cham moc" cua `duong_di`, tinh bang PIP. GIU KHOP `luoi.EPS_CHAM_PIP` (test_luoi_nhan::test_dung_sai_cham_moc_c_bang_python kiem hai so nay bang nhau). */
 #define EPS_CHAM_PIP 1e-6
 
 typedef struct { double g; double l; int64_t id; } Pos;

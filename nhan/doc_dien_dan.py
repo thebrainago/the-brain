@@ -19,6 +19,24 @@ nguon moi chi vao day chuyen khi da co DAT o xac_nhan (CLAUDE.md, NGUON_NGUOI_TH
     b dien-dan quet [--ma a,b] [--toi-da-trang N] [--ep]    doc tiep (mac dinh CHI dien dan `bat: true`); --ep = bo qua cho "1 tuan / lan"
     b dien-dan bao-cao                           khong mang: dung lai bao cao tu trang thai
 
+## Tim trang ke (08/10/2026) - vi sao quet sau 70 nguon chi doc duoc vai trang
+
+Loi cu: bo phan trang chi DEM so ghi tren link "1 2 3 .. 5842" ma khong di theo, va "khong thay link trang ke" bi coi la "het danh sach"
+(XONG_PASS, nghi 168 gio) du dien dan con 5842 trang -> don quet bao DAT sau khi doc 1 trang. Nay `tim_trang_tiep(fo, tach, url_hien, n_tiep)` thu lan luot
+(`phan_trang: auto`, mac dinh; `mau` = chi `mau_trang`; `khong` = chi doc trang 1) va tra {"url", "cach", "tong_uoc"}:
+  1. `rel_next` (`<link rel=next>` / `<a rel=next>`, cung ten mien, khac trang dang doc) ;  2. `mau_trang` khai trong config ;
+  3. `neo_so`: link CHINH XAC ghi so `n_tiep` ;  4. `mau_suy_ra`: khi thanh phan trang rut gon (`1 2 3 .. 5842`) khong hien so `n_tiep`, suy URL tu >= 2 link
+     so >= 2 cung danh sach, CHI khi cum so doi la ham tuyen tinh NGUYEN cua so tren link (`page-N`; phpBB `start=25*(N-1)`) va `n_tiep <= so lon nhat thanh phan ghi` ;
+  5. `chu_tiep`: nut "Next >" / "Trang sau" / chu tuong duong cac ngon ngu khac (xem `_TU_TIEP` va `_MUI_TEN_DON`; chi mui ten DON, cac dau ngoac kep kieu >> bi bo vi nhieu giao dien dung chung cho "TRANG CUOI").
+Link phai thuoc CHINH danh sach dang doc: cung ten mien va cung `_goc_danh_sach` (bo vi tri trang `?page=3` `&start=50` `/page-3` `/p3`, ma phien,
+tham so sap xep) HOAC cung duong dan voi `<link rel=canonical>` cung ten mien. Vi vay "2 3 .. 120" duoi tung chu de (`/threads/x.1/page-2`) khong bi nham
+voi phan trang cua danh sach. Gioi han da biet: thanh phan trang tro sang duong dan KHAC `url` trong config va canonical (dien dan chuyen huong) thi phai sua `url`
+hoac khai `mau_trang` - `b dien-dan do` goi y dung cau do (`co_neo_so_khac`).
+Khong tim duoc duong sang trang trong khi thanh phan trang bao con trang -> `KHONG_THAY_TRANG_TIEP` (loi CAU HINH, KHONG phai XONG): nghi 24 gio (`GIO_NGHI_LOI_CAU_HINH`),
+giu moc `den_trang`, khong tang `so_pass`; hien o bao cao. Ma thoat cua `b dien-dan quet`: 0 = co tien (hoac chi dang cho) ; 3 = ma khong co trong config ;
+**5 = khong dien dan nao tien duoc** (tat het / BO_QUA / KHONG_THAY_TRANG_TIEP / bi chan, in `!! DIEN_DAN_KHONG_TIEN: ...`; `qwen/cau_loi.py` nhan dau vet nay la
+`can_chan_doan`, nen don khong con ghi DAT gia). Mot phan dien dan hong, phan con lai tien: in `!! N dien dan khong tien duoc: ma(KET_QUA)` va van thoat 0.
+
 ## Luat cung (giong b link; repo PUBLIC)
 
 * Khong ne chan, khong gia nguoi. 429 / 403 / captcha / Cloudflare -> DUNG ten mien do (nghi 15 phut x 2^n ... 24 gio) va ghi ma loi; khong
@@ -43,6 +61,10 @@ moi. Hai thu do that lo ra va da sua:
   1. `ctx.request.get(max_redirects>0)` tu theo ca sang ten mien KHAC -> dat `max_redirects=0`, ta tu theo tung buoc (`cdp`).
   2. `page.route` cua Playwright KHONG duoc goi cho buoc chuyen huong, nen Chrome van cham ten mien khac -> `cdp_render` chan bang lop Fetch cua
      CDP o hai giai doan (Request + Response), chi tren KHUNG CHINH; may chu dich khong nhan gi. Anh / script / CDN / khung con tai nhu thuong.
+DA THU (08/10, cloud, `test_doc_dien_dan.py` muc 10): 6 kieu phan trang cua cac phan mem dien dan that (XenForo `/page-N`, vBulletin `&page=N`, phpBB
+`&start=25*(N-1)&sid=`, IPB `/page/N/`, mql5 `/pageN`, WordPress) khong co rel=next va khong khai `mau_trang`, moi chu de co them thanh phan trang nho `2 3 120`: doc het
+danh sach theo dung thu tu, moi trang MOT lan, khong doan trang vuot thanh phan trang; danh sach `1 2 3 .. 5842` doc 5 trang / luot roi noi tiep o trang 6 trong
+tien trinh moi; link chu de khong bi nham voi trang danh sach; `KHONG_THAY_TRANG_TIEP` + ma thoat 5. Cac test nay HONG 42 ca khi chay lai hanh vi cu (kiem dot bien).
 CHUA THU THAT: cac dien dan that (cloud khong toi duoc). `mau_bai` / `mau_trang` trong config lay tu lan do 15/09 hoac tri nho (muc `kiem_tra`):
 `b dien-dan do` o may nha la lan do that dau tien. Chrome cua chu du an co the khac ban (154): neu id khung doi cach danh so, su kien dau tien
 khong khop khung chinh -> DONG (loi `khung_chinh_khong_khop`) chu khong am tham tat bo loc.
@@ -58,7 +80,7 @@ import sys
 import time
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 LAB = Path(__file__).resolve().parent.parent
 if __package__ in (None, ""):
@@ -190,7 +212,7 @@ class _Neo(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.neo: list[tuple[str, str]] = []
-        self.rel_next, self.base, self.tieu_de = "", "", ""
+        self.rel_next, self.base, self.tieu_de, self.canonical = "", "", "", ""
         self._a: list | None = None                             # the <a> dang mo: [href, [manh chu]]
         self._tren_title = False
 
@@ -211,6 +233,8 @@ class _Neo(HTMLParser):
         elif tag == "link":
             if la_next and a.get("href") and not self.rel_next:
                 self.rel_next = a["href"]
+            if "canonical" in a.get("rel", "").lower().split() and a.get("href") and not self.canonical:
+                self.canonical = a["href"]
         elif tag == "base":
             if a.get("href") and not self.base:
                 self.base = a["href"]
@@ -239,7 +263,7 @@ _RX_NEO_TRANG = re.compile(r"page|[?&/]p[=/]|pg[=/]|[?&]start=|[?&]offset=", re.
 
 
 def tach_trang(html: str, url: str) -> dict:
-    """HTML -> {tieu_de, neo: [(url tuyet doi, chu)], rel_next, so_trang: [so ghi tren cac neo phan trang]}. Khong nem loi voi HTML hong."""
+    """HTML -> {tieu_de, neo: [(url tuyet doi, chu)], rel_next, so_trang: [so ghi tren cac neo phan trang], canonical}. Khong nem loi voi HTML hong."""
     p = _Neo()
     try:
         p.feed(html or "")
@@ -266,13 +290,18 @@ def tach_trang(html: str, url: str) -> dict:
         neo.append((tuyet_doi, chu))
         if re.fullmatch(r"\d{1,5}", chu) and _RX_NEO_TRANG.search(tuyet_doi):
             so_trang.add(int(chu))
-    rel_next = ""
+    rel_next, canonical = "", ""
     if p.rel_next:
         try:
             rel_next = urljoin(goc, p.rel_next).split("#", 1)[0]
         except ValueError:
             rel_next = ""
-    return {"tieu_de": re.sub(r"\s+", " ", p.tieu_de).strip()[:160], "neo": neo, "rel_next": rel_next, "so_trang": sorted(so_trang)}
+    if p.canonical:                                              # dia chi chinh thuc cua trang: dien dan chuyen huong `url` cau hinh sang duong dan khac van nhan ra
+        try:
+            canonical = urljoin(goc, p.canonical).split("#", 1)[0]
+        except ValueError:
+            canonical = ""
+    return {"tieu_de": re.sub(r"\s+", " ", p.tieu_de).strip()[:160], "neo": neo, "rel_next": rel_next, "so_trang": sorted(so_trang), "canonical": canonical}
 
 
 _RX_HAU_TO_BAI = re.compile(r"/(?:page[-_]?\d+|latest|unread|last)/?$", re.I)
@@ -306,19 +335,155 @@ def trich_bai(fo: dict, tach: dict, url_trang: str, do_dai_toi_thieu: int = 25, 
     return ra
 
 
-def url_trang_tiep(fo: dict, tach: dict, url_hien: str, n_tiep: int) -> str:
-    """URL trang `n_tiep` hoac '' (het / khong phan trang). `phan_trang`: auto = rel=next truoc, khong co thi `mau_trang`; mau = chi `mau_trang`;
-    khong = chi doc trang 1. rel=next tro sang ten mien khac hoac tro lai chinh no -> bo qua."""
-    kieu = fo.get("phan_trang", "auto")
-    if kieu == "khong":
+# ---- tim trang tiep KHI KHONG co rel=next va khong khai `mau_trang` (08/10/2026)
+# Do 08/10: 2 trong 8 don "quet sau" chi doc 1 trang roi bao XONG_PASS du MQL5 ghi 5842 trang - thanh phan trang chi duoc DEM (tong_trang),
+# khong bao gio duoc DUNG de di tiep, va "khong thay trang tiep" bi doc nham thanh "het danh sach". Nay: neo so -> mau suy ra -> chu "trang sau".
+#: tham so query chi VI TRI trang (gia tri la so): bo khi so sanh "cung mot danh sach"
+_THAM_SO_TRANG = frozenset(("page", "p", "pg", "paged", "pagenum", "pageno", "pagina", "seite", "strona", "sayfa", "halaman", "start", "offset",
+                            "skip", "pn"))
+_THAM_SO_PHIEN = frozenset(("sid", "s", "phpsessid", "sessionid", "session"))        # phpBB / vBulletin gan ma phien vao link phan trang
+#: tham so chi cach TRINH BAY danh sach (sap xep, so dong): vBulletin ghi `&order=desc&sort=lastpost&pp=25` vao link trang 2.. nhung khong vao `url` cau hinh
+_THAM_SO_TRINH_BAY = frozenset(("order", "sort", "orderby", "sortby", "sk", "sd", "st", "dir", "direction", "pp", "perpage", "per_page", "limit", "daysprune",
+                                "ref", "hilit"))
+_RX_HAU_TO_TRANG = re.compile(r"/(?:page|pagina|seite|strona|sayfa|halaman|pg|p)[-_/]?\d+/?$", re.I)
+#: chu tren neo phan trang: `3`, `Page 3`, `Trang 3` va dang CJK / Cyrillic tuong duong (khong nhan `03`: so dem muc luc, khong phai trang)
+_RX_CHU_SO_TRANG = re.compile(
+    r"(?:page|pagina|p[aá]gina|trang|seite|strona|sayfa|halaman|страница|стр\.?|ページ|第|หน้า)?\s*(\d{1,5})\s*(?:ページ|页|頁)?", re.I)
+_MUI_TEN = (
+    r"  »›>→▶⟩〉》")                                                       # ky tu mui ten / khoang trang bi cat khi so voi chu "trang sau"
+#: chu cua nut "trang sau" (da ngon ngu): duong CUOI CUNG, sau neo so va mau suy ra; "cuoi" / "last" / ">>" khong bao gio vao day.
+_TU_TIEP = frozenset((
+    r"next", r"next page", r"siguiente", r"pagina siguiente", r"página siguiente", r"weiter", r"nächste", r"naechste", r"nächste seite", r"suivant", r"suivante",
+    r"page suivante", r"avanti", r"successiva", r"prossima", r"próxima", r"proxima", r"seguinte", r"próxima página", r"volgende", r"nästa", r"następna", r"dalej",
+    r"далее", r"вперед", r"вперёд", r"следующая", r"следующая страница", r"次へ", r"次のページ", r"下一页", r"下一頁", r"下页", r"下一页 »", r"다음", r"다음 페이지",
+    r"selanjutnya", r"berikutnya", r"ถัดไป", r"sonraki", r"ileri", r"tiếp", r"tiếp theo", r"trang sau", r"trang tiếp", r"trang kế", r"अगला", r"التالي", r"التالية"))
+_MUI_TEN_DON = frozenset((
+    r"›", r">", r"→", r"▶", r"⟩", r"〉"))                                   # mui ten don; dau ngoac kep phai bi bo vi nhieu giao dien dung cho "TRANG CUOI"
+
+
+def _goc_danh_sach(url: str) -> str:
+    """URL -> khoa "cung mot danh sach": bo vi tri trang (`?page=3`, `&start=50`, duoi `/page-3`, `/page/3/`, `/p3`), ma phien va tham so trinh bay.
+    Neo "2" cua bai `/threads/x.1/page-2` co khoa KHAC neo "2" cua chinh danh sach `/forums/robot.44/page-2` -> khong bi nham."""
+    sp = urlsplit(url)
+    q = [(k, v) for k, v in parse_qsl(sp.query, keep_blank_values=True)
+         if k.lower() not in _THAM_SO_PHIEN and k.lower() not in _THAM_SO_TRINH_BAY and not (k.lower() in _THAM_SO_TRANG and v.isdigit())]
+    return LN.chuan_hoa_url(urlunsplit((sp.scheme, sp.netloc, _RX_HAU_TO_TRANG.sub("", sp.path), urlencode(q), "")))
+
+
+def _so_tren_neo(chu: str) -> int:
+    g = _RX_CHU_SO_TRANG.fullmatch((chu or "").strip())
+    return int(g.group(1)) if g and not g.group(1).startswith("0") else 0
+
+
+def _la_chu_tiep(chu: str) -> bool:
+    c = re.sub(r"\s+", " ", (chu or "").strip().casefold())
+    if not c or len(c) > 24:
+        return False
+    if c in _MUI_TEN_DON or c in _TU_TIEP:
+        return True
+    loi = c.strip(_MUI_TEN)
+    return bool(loi) and loi in _TU_TIEP
+
+
+def _goc_chap_nhan(fo: dict, tach: dict, url_hien: str) -> set[str]:
+    """Cac `_goc_danh_sach` duoc coi la "chinh danh sach nay": cua URL dang doc, va cua `<link rel=canonical>` neu cung ten mien."""
+    ra = {_goc_danh_sach(url_hien)}
+    c = tach.get("canonical") or ""
+    if c.startswith(("http://", "https://")) and _mien(c) == _mien(fo["url"]):
+        ra.add(_goc_danh_sach(c))
+    return ra
+
+
+def _neo_cung_danh_sach(fo: dict, tach: dict, url_hien: str) -> list[tuple[int, str]]:
+    """[(so ghi tren neo, URL https)] cac neo danh so TRANG cua CHINH danh sach dang doc: cung ten mien va `_goc_danh_sach` thuoc `_goc_chap_nhan`."""
+    goc, mien = _goc_chap_nhan(fo, tach, url_hien), _mien(fo["url"])
+    ra, thay = [], set()
+    for u, chu in tach["neo"]:
+        n = _so_tren_neo(chu)
+        if not n or _mien(u) != mien:
+            continue
+        u = re.sub(r"^http://", "https://", u)
+        if (n, u) not in thay and _goc_danh_sach(u) in goc:
+            thay.add((n, u))
+            ra.append((n, u))
+    return ra
+
+
+def _suy_mau(cac: list[tuple[int, str]], n: int) -> str:
+    """>= 2 neo (so, URL) cung danh sach -> URL trang `n` khi neo `n` khong hien (thanh phan trang rut gon `1 2 3 ... 5842`).
+    Tach URL thanh [chu, so, chu, so ...]: phan chu phai y het nhau, dung MOT cum so doi, va cum do la ham TUYEN TINH NGUYEN cua so tren neo:
+    `page-N` (a=1, b=0), phpBB `start=25*(N-1)` (a=25, b=-25). Moi neo phai nam tren duong thang do, neu khong -> '' (khong doan)."""
+    nhom: dict[tuple, list] = {}
+    for so, u in cac:
+        p = re.split(r"(\d+)", u)
+        nhom.setdefault(tuple(p[0::2]), []).append((so, p))
+    if not nhom:
         return ""
+    khung, mau = max(nhom.items(), key=lambda kv: len({so for so, _ in kv[1]}))
+    if len({so for so, _ in mau}) < 2:
+        return ""
+    cho_doi = [i for i in range(1, len(mau[0][1]), 2) if len({p[i] for _, p in mau}) > 1]
+    if len(cho_doi) != 1:
+        return ""
+    i = cho_doi[0]
+    if any(len(p[i]) > 1 and p[i].startswith("0") for _, p in mau):                      # 005, 010: do rong co dinh - khong suy
+        return ""
+    (s1, p1), (s2, p2) = min(mau, key=lambda x: x[0]), max(mau, key=lambda x: x[0])
+    d_so = s2 - s1
+    if d_so <= 0 or (int(p2[i]) - int(p1[i])) % d_so:
+        return ""
+    a = (int(p2[i]) - int(p1[i])) // d_so
+    b = int(p1[i]) - a * s1
+    if a <= 0 or any(int(p[i]) != a * s + b for s, p in mau):
+        return ""
+    v = a * n + b
+    if v < 0:
+        return ""
+    ra = list(mau[0][1])
+    ra[i] = str(v)
+    return "".join(ra)
+
+
+def tim_trang_tiep(fo: dict, tach: dict, url_hien: str, n_tiep: int) -> dict:
+    """-> {"url": URL trang `n_tiep` hoac '' , "cach": rel_next | mau_trang | neo_so | mau_suy_ra | chu_tiep | '', "tong_uoc": so trang LON NHAT ma
+    thanh phan trang cua CHINH danh sach nay ghi (0 = khong thay)}. `phan_trang`: auto = rel=next, roi `mau_trang`, roi (khong khai gi) tu tim tren trang
+    (neo so -> mau suy ra tu >= 2 neo -> nut "trang sau"); mau = chi `mau_trang`; khong = chi doc trang 1. Thanh phan trang phai thuoc CHINH danh sach nay
+    (cung duong dan sau khi bo vi tri trang / ma phien / tham so sap xep; hoac cung duong dan voi `<link rel=canonical>`): link "2 3 .. 120" duoi tung chu de bi bo.
+    rel=next tro sang ten mien khac hoac tro lai chinh no -> bo qua. Thanh phan trang CHI cho phep di toi trang <= so lon nhat no ghi (khong doan trang 4 khi
+    thanh phan trang dung o 3). `url == ''` ma `tong_uoc > n_tiep - 1` = dien dan CON trang nhung ta khong co duong sang: KHONG phai "het danh sach"."""
+    kieu = fo.get("phan_trang", "auto")
+    cac = _neo_cung_danh_sach(fo, tach, url_hien)
+    ra = {"url": "", "cach": "", "tong_uoc": max((n for n, _ in cac), default=0)}
+    if kieu == "khong":
+        return ra
     if kieu == "auto" and tach.get("rel_next"):
         nx = re.sub(r"^http://", "https://", tach["rel_next"])
         if _mien(nx) == _mien(fo["url"]) and LN.chuan_hoa_url(nx) != LN.chuan_hoa_url(url_hien):
-            return nx
+            return dict(ra, url=nx, cach="rel_next")
     if fo.get("mau_trang"):
-        return _thay_mau_trang(fo, n_tiep)
-    return ""
+        return dict(ra, url=_thay_mau_trang(fo, n_tiep), cach="mau_trang")
+    if kieu != "auto":
+        return ra
+    theo_so = {}
+    for n, u in cac:
+        theo_so.setdefault(n, u)
+    if n_tiep in theo_so:
+        return dict(ra, url=theo_so[n_tiep], cach="neo_so")
+    if cac and n_tiep <= ra["tong_uoc"]:
+        u = _suy_mau([(n, u) for n, u in cac if n >= 2], n_tiep)
+        if u and LN.chuan_hoa_url(u) != LN.chuan_hoa_url(url_hien):
+            return dict(ra, url=u, cach="mau_suy_ra")
+    goc, mien, hien = _goc_chap_nhan(fo, tach, url_hien), _mien(fo["url"]), LN.chuan_hoa_url(url_hien)
+    for u, chu in tach["neo"]:                                                           # cuoi cung: nut "trang sau" cua chinh danh sach nay
+        u = re.sub(r"^http://", "https://", u)
+        if _la_chu_tiep(chu) and _mien(u) == mien and LN.chuan_hoa_url(u) != hien and _goc_danh_sach(u) in goc:
+            return dict(ra, url=u, cach="chu_tiep")
+    return ra
+
+
+def url_trang_tiep(fo: dict, tach: dict, url_hien: str, n_tiep: int) -> str:
+    """URL trang `n_tiep` hoac '' (het / khong phan trang / khong tim duoc). Xem `tim_trang_tiep` (ke ca `cach` va tong so trang uoc)."""
+    return tim_trang_tiep(fo, tach, url_hien, n_tiep)["url"]
 
 
 def _van_tay(bai: list[dict], tach: dict) -> str:
@@ -771,6 +936,14 @@ class Quet:
         d.trang_cuoi = trang_cuoi
         self._dung(d, "XONG_PASS", ly)
 
+    def _khong_thay_tiep(self, d: _Dien, tong: int, status) -> None:
+        """Trang `d.n` doc xong (bai da ghi) nhung thanh phan trang ghi toi `tong` trang va ta khong tim duoc link trang ke. Day la LOI CAU HINH, khong phai
+        'XONG': nghi 24 gio (khong dap lai), khong xoa moc 'da toi trang N' (so lan XONG_PASS khong tang), noi ro de chu du an / phien cloud sua `mau_trang`."""
+        ly = "trang %d/%d nhung khong tim thay link trang %d (khai `mau_trang` cho dien dan nay, hoac `phan_trang: khong`)" % (d.n, tong, d.n + 1)
+        self._ghi(d, "KHONG_THAY_TRANG_TIEP", status=status, den_trang=0, url_tiep="", tong_trang=d.tong_trang, dau_van_tay=[], tien_do="KHONG_THAY_TRANG_TIEP",
+                  trang_cuoi=d.n, bai_tong=self._kho_cua(d.fo).tong(), ly_do=ly[:90], den_han=int(self.tt.dh() + GIO_NGHI_LOI_CAU_HINH * 3600))
+        self._dung(d, "KHONG_THAY_TRANG_TIEP", ly)
+
     def _mot_trang(self, d: _Dien) -> None:
         if d.da_lam >= d.toi_da_luot:
             self._dung(d, "DANG_DO", "het %d trang / luot: lan sau doc tiep tu trang %d" % (d.toi_da_luot, d.n))
@@ -802,11 +975,15 @@ class Quet:
         d.bai_moi += self._kho_cua(d.fo).them(bai, d.n, int(self.tt.dh()))
         d.da_lam += 1
         d.trang_cuoi = d.n
-        d.tong_trang = max([d.tong_trang, d.n] + list(t["so_trang"]))
         d.van_tay = (d.van_tay + [vt])[-3:]
-        tiep = url_trang_tiep(d.fo, t, d.url, d.n + 1)
+        tm = tim_trang_tiep(d.fo, t, d.url, d.n + 1)
+        tiep = tm["url"]
+        d.tong_trang = max(d.tong_trang, d.n, tm["tong_uoc"])     # KHONG dung `so_trang`: link "2 3 .. 120" duoi tung chu de khong phai thanh phan trang cua danh sach
         ket = ""
         if not tiep:
+            if tm["tong_uoc"] > d.n and d.fo.get("phan_trang", "auto") != "khong":   # thanh phan trang bao CON trang ma ta khong co duong sang: KHONG phai het
+                self._khong_thay_tiep(d, tm["tong_uoc"], status)
+                return
             ket = "het trang (khong thay trang tiep)"
         elif d.n >= d.toi_da_pass:
             ket = "cham tran %d trang / pass" % d.toi_da_pass
@@ -863,9 +1040,11 @@ class Quet:
             return r
         t = tach_trang(text, d.url)
         bai = trich_bai(fo, t, d.url, d.do_dai)
+        tm = tim_trang_tiep(fo, t, d.url, 2)
         r.update(kich_thuoc=len(text), so_link=len(t["neo"]), so_bai=len(bai), rel_next=bool(t["rel_next"]),
-                 tong_trang_uoc=max(t["so_trang"], default=0), mau_trang=bool(fo.get("mau_trang")))
-        url2 = url_trang_tiep(fo, t, d.url, 2)
+                 tong_trang_uoc=tm["tong_uoc"], co_neo_so_khac=bool(t["so_trang"]) and not tm["tong_uoc"], mau_trang=bool(fo.get("mau_trang")),
+                 cach_trang_tiep=tm["cach"])
+        url2 = tm["url"]
         if url2 and bai:
             d.referer = d.url
             kq2, _, text2, _ = self._lay_mot(d, url2, het_trang_ok=True)
@@ -891,7 +1070,9 @@ class Quet:
             if not fo.get("bat"):
                 r["buoc_tiep"] = "tat"
             elif int(m.get("den_han", 0)) > now:
-                r["buoc_tiep"] = "cho den %s (1 tuan / lan)" % LN._gio_text(m["den_han"])
+                loi = m.get("ket_qua") not in (None, "OK", "XONG")
+                r["buoc_tiep"] = ("cho den %s vi %s (sua config roi --ep)" % (LN._gio_text(m["den_han"]), m["ket_qua"])) if loi \
+                    else "cho den %s (1 tuan / lan)" % LN._gio_text(m["den_han"])
             elif not ok:
                 r["buoc_tiep"] = "cho: %s" % ly
             elif int(m.get("den_trang", 0)) > 0 and m.get("url_goc") == fo["url"] and m.get("url_tiep"):
@@ -973,10 +1154,16 @@ def _goi_y(r: dict) -> str:
         return "it bai (%d): sai mau_bai hoac trang can JS -> thu cach_lay=cdp_render; chua nen bat" % r.get("so_bai", 0)
     t2 = r.get("trang2")
     if not t2:
+        if r.get("tong_trang_uoc", 0) > 1:
+            return ("trang bao co %d trang nhung KHONG tim thay link trang 2 (se bao KHONG_THAY_TRANG_TIEP, khong phai het): "
+                    "them mau_trang, hoac dat phan_trang=khong" % r["tong_trang_uoc"])
+        if r.get("co_neo_so_khac"):
+            return ("doc duoc trang 1 (%d bai); co link danh so trang nhung khong cung duong dan voi `url` (dien dan chuyen huong? dat `url` la dia chi cuoi cung; "
+                    "link duoi tung chu de thi bo qua): them mau_trang hoac dat phan_trang=khong" % r["so_bai"])
         return "doc duoc trang 1 (%d bai) nhung chua thay cach sang trang: them mau_trang hoac dat phan_trang=khong" % r["so_bai"]
     if t2.get("ket_qua") == "OK":
         if t2.get("khac_trang_1"):
-            return "dung duoc: dat bat=true (%d bai o trang 1, co phan trang)" % r["so_bai"]
+            return "dung duoc: dat bat=true (%d bai o trang 1, co phan trang, cach sang trang: %s)" % (r["so_bai"], r.get("cach_trang_tiep") or "?")
         return "trang 2 giong trang 1 hoac khong co bai: mau_trang sai -> sua hoac dat phan_trang=khong (chi doc trang 1)"
     if t2.get("ket_qua") == "HET_TRANG":
         return "trang 2 khong ton tai (404): dien dan chi co 1 trang hoac mau_trang sai - xem lai truoc khi bat"
@@ -1017,6 +1204,30 @@ def _in_ke_hoach(kh: list[dict], in_ra=print) -> None:
         in_ra("  dang tat (%d): %s" % (len(tat), ", ".join(tat)))
 
 
+#: ket qua luot can NGUOI / cloud sua cau hinh: dien dan van khong doc sau duoc nen doc xong trang 1 cung KHONG tinh la tien
+_KQ_CAU_HINH = frozenset(("KHONG_THAY_TRANG_TIEP", "KHONG_CO_BAI", "CHUYEN_HUONG", "HET_TRANG", "BO_QUA", "KHONG_CO_CHROME"))
+#: ket qua luot do bi chan / loi mang (tam thoi): trang da doc truoc khi bi chan van tinh la tien
+_KQ_CHAN = frozenset(("CHAN_ROBOTS", "CHAN_TAN_SUAT", "CHAN_CAM", "LOI_MANG", "LOI_MAY_CHU"))
+_KQ_KHONG_TIEN = _KQ_CAU_HINH | _KQ_CHAN
+
+
+def _luot_khong_tien(bc: dict) -> str:
+    """'' neu luot quet co tien; nguoc lai MOT dong ly do. Co tien = it nhat mot dien dan xong mot pass, hoac doc >= 1 trang ma khong roi vao loi cau hinh;
+    hoac cac dien dan chi dang CHO (CHO_TUAN, CHO, DANG_DO 0 trang) - binh thuong, KHONG phai loi. Don quet ma thoat 0 trong khi moi dien dan deu
+    loi / bi tat / khong di tiep duoc la don 'DAT' gia (do 08/10/2026: 6/8 don quet-sau bao DAT du dien dan dang tat o may nha; 2/8 chi doc 1 trang roi 'XONG')."""
+    ban = [b for b in bc.get("dien_dan", []) if "ket_qua_luot" in b]
+    if not ban:
+        return "khong dien dan nao duoc chon (tat het? xem `b dien-dan ke-hoach`)"
+    if any(b["ket_qua_luot"] == "XONG_PASS" or (b.get("trang_luot", 0) > 0 and b["ket_qua_luot"] not in _KQ_CAU_HINH) for b in ban):
+        return ""
+    if not any(b["ket_qua_luot"] in _KQ_KHONG_TIEN for b in ban):
+        return ""
+    dem: dict[str, int] = {}
+    for b in ban:
+        dem[b["ket_qua_luot"]] = dem.get(b["ket_qua_luot"], 0) + 1
+    return "khong dien dan nao doc tiep duoc: " + ", ".join("%s %d" % kv for kv in sorted(dem.items()))
+
+
 def main(argv=None, tao_quet=None) -> int:
     ap = argparse.ArgumentParser(prog="b dien-dan", description="Doc dien dan / danh sach nhieu trang (chi doc; nho 'den trang N'; 1 tuan / lan)")
     ap.add_argument("lenh", choices=("ke-hoach", "do", "quet", "bao-cao"))
@@ -1050,10 +1261,18 @@ def main(argv=None, tao_quet=None) -> int:
                 print("  %-20s %-3s %-16s %d trang luot nay, den trang %d%s, +%d bai%s" % (
                     b["ma"], b["nuoc"], b["ket_qua_luot"], b["trang_luot"], b["den_trang"], tong, b["bai_moi"],
                     ("  (" + b["ly_do"] + ")") if b.get("ly_do") and b["ket_qua_luot"] not in ("DANG_DO", "XONG_PASS") else ""))
+        xau = ["%s(%s)" % (b["ma"], b["ket_qua_luot"]) for b in bc["dien_dan"] if b.get("ket_qua_luot") in _KQ_KHONG_TIEN]
+        if xau:
+            print("!! %d dien dan khong tien duoc: %s" % (len(xau), ", ".join(xau)))
         print("-> reports/%s (URL + tieu de bai nam o du_lieu_cao/dien_dan/, khong len git)" % BAO_CAO_MD.name)
     if bc.get("khong_thay_ma"):
         print("!! khong co ma dien dan: %s" % ", ".join(bc["khong_thay_ma"]))
         return 3
+    if a.lenh == "quet":
+        ly = _luot_khong_tien(bc)
+        if ly:
+            print("!! DIEN_DAN_KHONG_TIEN: %s" % ly)
+            return 5
     return 0
 
 

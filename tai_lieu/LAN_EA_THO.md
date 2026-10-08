@@ -97,10 +97,12 @@ Bo do rong 04/10: 12 cau hinh x 80 duong gia, khop DUNG chieu / lot / gia mo / t
 spread engine tru THEM khi dong cap tia, `lech_explicada` = chenh gia tung lenh (engine mo / dong o muc luoi chinh xac, EA o tick dau vuot muc). Phan con lai `lech_con_lai`
 <= 3e-12 o moi cau hinh / duong gia (spread khong doi). Spread doi giua cac tick = ngoai pham vi do nay (tester that moi cho thay).
 
-**Khac biet con lai voi engine - KHONG phai loi EA (task #48, chua sua, doi so lieu that)**: (a) engine dong cap TIA va chot_tien o gia TOT NHAT cua bar (cao nhat voi lenh mua), EA
-tick dong o gia vua cham nguong; (b) engine tru spread HAI lan o lenh tia (luc mo va luc dong), EA mot lan. Tren nen M15 gia lap co bien do that (6 duong x 1500 bar) engine cao hon EA
-**~15%** o cau hinh co tia / chot_tien (tn5 +14,7% .. +16,4%; chot_tien_tia +7,9% .. +17,8%), luoi thuan (khong tia) lech +-5%. `test_engine_lac_quan_voi_tia_lenh_khi_chay_tren_bar_ohlc`
-ghim so do. **Khi doc ket qua tester: tester la so THAT, `thu_luoi` tn5 la can tren** (ham y: cac con so +13,26%/nam AUDCAD tu `luoi.py` co the lac quan ~15% o phan tia).
+**Khac biet voi engine - KHONG phai loi EA (task #48; DA SUA 08/10/2026 bang mo hinh bar `duong_di`)**: mo hinh bar cu `cuc_tri` dong cap TIA va chot_tien o gia TOT NHAT cua bar
+va tru spread HAI lan o lenh tia (EA mot lan), nen cao hon EA chay tren tick cua CHINH cac bar do: tn5 +15%, chot_tien +37%, chot_tien_tia +37%, cho_lui +26%, chot_tien_tia_cho_lui +55%
+(do 08/10, paso 1e-6, 4 chuoi M15 gia lap). Tren 125 o hieu chuan THANG voi tester MT5 (model 0): o co tia engine cu cao hon tester o 50/68 o, trung vi gap 2,2 lan (M15 gap 3,2; EURCAD nang nhat).
+Nay engine mac dinh `duong_di` (mot duong gia cong bang: nen xanh O -> L -> H -> C, nen do O -> H -> L -> C; spread MOT lan / lenh): lech < 5% so voi EA tick cung thu tu va KHONG
+lac quan voi bat ky thu tu cao / thap nao. **Con thieu**: thu tu cao / thap THAT trong nen (cau hinh cho_lui / buoc gian than trong 12..33% o M15), swap (engine ~ -4,4%/nam, tester 0 o ca 125 o),
+tick that. **Khi doc ket qua tester: tester la so THAT.** Bang chung + cach tai lap: `reports/lech_engine_EURCAD.md`, `python test_ea_luoi_day_du.py --bang --paso 1e-6`, `test_luoi_duong_di.py`.
 
 **CHUA kiem**: MetaEditor (cu phap rieng cua MQL5 - san gia la C++ nen mot so chuoi chuyen kieu / cu phap C++ chap nhan ma MQL5 co the khong), tester that (tick that, spread doi, swap qua dem, phi,
 khoi dong lai giua chung), va 5 diem hieu chuan ben duoi. May nha bien dich F7: loi cu phap thi sua ngay va commit, khong can xin phep.

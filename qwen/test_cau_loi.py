@@ -19,9 +19,18 @@ class DauVet(unittest.TestCase):
               "tester khong ra ket qua: tester khong ra bao cao": "tester_khong_ra",
               "tester khong ra ket qua: bien dich hong: ea.mq5(113,10) : error 106: file 'Include\\Trade\\Trade.mqh' not found": "bien_dich_hong",
               "loi khi chay: FileNotFoundError: khong co du lieu cho XTIUSD": "thieu_du_lieu",
-              "ngoai doan kham_pha": "ngoai_doan"}
+              "ngoai doan kham_pha": "ngoai_doan",
+              "!! DIEN_DAN_KHONG_TIEN: khong dien dan nao doc tiep duoc: BO_QUA 8": "dien_dan_khong_tien"}
         for dong, nhan in ca.items():
             self.assertEqual(CL.dau_vet(["binh thuong", dong])["nhan"], nhan, dong)
+
+    def test_dien_dan_khong_tien_la_can_chan_doan_va_dong_canh_bao_mot_phan_thi_khong_bi_nghi(self):
+        """08/10/2026: 6/8 don quet sau bao DAT trong khi dien dan o may nha dang tat (BO_QUA). `b dien-dan quet` nay thoat 5 va in dong nay;
+        dong '!! 1 dien dan khong tien duoc' (co dien dan khac van doc duoc) KHONG phai dau vet loi cua ca don."""
+        r = CL.dau_vet(["a  BO_QUA  0 trang luot nay", "!! DIEN_DAN_KHONG_TIEN: khong dien dan nao doc tiep duoc: BO_QUA 8"])
+        self.assertEqual((r["nhan"], r["nhom"]), ("dien_dan_khong_tien", "can_chan_doan"))
+        self.assertIn("BO_QUA 8", r["bang_chung"])
+        self.assertIsNone(CL.dau_vet(["a  OK  3 trang luot nay", "!! 1 dien dan khong tien duoc: b(CHAN_CAM)"]))
 
     def test_nhan_log_tester_cu_the_thang_dong_chung_chung(self):
         """08/10/2026 (`nhan/chan_doan_tester.py`): ly do tester hong gio mang `[tester:<nhan>]` cung dong chung

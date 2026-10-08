@@ -42,6 +42,9 @@ DAU_VET = (
     ("tester_het_bo_nho", "can_chan_doan", r"\[tester:het_bo_nho\]"),
     ("tester_agent_chet", "can_chan_doan", r"\[tester:agent_chet\]"),
     ("tester_khong_ra", "can_chan_doan", r"tester khong ra (?:bao cao|ket qua)"),
+    # `b dien-dan quet` (nhan/doc_dien_dan.py, 08/10/2026): luot quet khong dien dan nao doc tiep duoc (tat / bi chan / khong thay trang ke / sai cau hinh).
+    # Ma thoat cua no da la 5; nhan nay phong khi mot lop boc nuot ma thoat. `can_chan_doan`: sua `config/dien_dan.json` roi moi dua lai.
+    ("dien_dan_khong_tien", "can_chan_doan", r"DIEN_DAN_KHONG_TIEN"),
     ("thieu_du_lieu", "khong_chay_lai", r"FileNotFoundError|khong co du lieu cho \w+"),
     ("ngoai_doan", "khong_chay_lai", r"ngoai doan kham_pha|ngoai doan xac_nhan"),
     ("loi_ben_trong", "sua_duoc", r"loi khi chay:|Traceback \(most recent call last\)"),

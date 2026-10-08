@@ -204,25 +204,29 @@ def chay(exe, tk: dict, von: float, tham_so: dict | None = None, netting: bool =
     """Chay EA tren chuoi tick. Tra {'ok', 'ma_thoat', 'kq' (dict so tu RES), 'lenh' (DataFrame), 'log' (list dong LOG), 'loi'}.
     `kq`: n_mo, n_dong, n_tp, n_ea, balance, equity, con_mo, lot_con_mo, spread_con_mo, max_open, max_lot_open, max_dd_pct..."""
     tm = Path(thu_muc) if thu_muc else Path(tempfile.mkdtemp(prefix="ea_gia_lap_run_"))
-    tm.mkdir(parents=True, exist_ok=True)
-    f_tick, f_csv = tm / "ticks.bin", tm / "lenh.csv"
-    ghi_tick(f_tick, tk)
-    lenh = [str(exe), str(f_tick), str(f_csv), repr(float(von))]
-    if netting:
-        lenh.append("--netting")
-    if digits is not None:
-        lenh.append("--digits=%d" % digits)
-    for k, v in (tham_so or {}).items():
-        lenh.append("%s=%r" % (k, float(v)))
-    p = subprocess.run(lenh, capture_output=True, text=True, timeout=han_giay)
-    kq, log = {}, []
-    for dong in p.stdout.splitlines():
-        if dong.startswith("RES "):
-            _r, k, v = dong.split(" ", 2)
-            kq[k] = float(v)
-        elif dong.startswith("LOG "):
-            log.append(dong[4:])
-    df = pd.read_csv(f_csv) if f_csv.exists() and f_csv.stat().st_size else pd.DataFrame()
+    try:
+        tm.mkdir(parents=True, exist_ok=True)
+        f_tick, f_csv = tm / "ticks.bin", tm / "lenh.csv"
+        ghi_tick(f_tick, tk)
+        lenh = [str(exe), str(f_tick), str(f_csv), repr(float(von))]
+        if netting:
+            lenh.append("--netting")
+        if digits is not None:
+            lenh.append("--digits=%d" % digits)
+        for k, v in (tham_so or {}).items():
+            lenh.append("%s=%r" % (k, float(v)))
+        p = subprocess.run(lenh, capture_output=True, text=True, timeout=han_giay)
+        kq, log = {}, []
+        for dong in p.stdout.splitlines():
+            if dong.startswith("RES "):
+                _r, k, v = dong.split(" ", 2)
+                kq[k] = float(v)
+            elif dong.startswith("LOG "):
+                log.append(dong[4:])
+        df = pd.read_csv(f_csv) if f_csv.exists() and f_csv.stat().st_size else pd.DataFrame()
+    finally:
+        if not thu_muc:          # thu muc tam do chinh ham nay tao: chuoi tick o paso 1e-6 nang ~12 MB / lan chay, de lai la day dia (08/10: 2482 thu muc = 29 GB)
+            shutil.rmtree(tm, ignore_errors=True)
     return dict(ok=p.returncode == 0 and kq.get("init_ok") == 1.0, ma_thoat=p.returncode, kq=kq, lenh=df, log=log,
                 loi=p.stderr[-2000:])
 

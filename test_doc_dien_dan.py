@@ -233,7 +233,7 @@ def test_tach_trang_rel_next_tren_the_a_va_html_hong_khong_nem_loi():
     assert t["rel_next"] == "https://forum.example.com/x/p/2" and ("https://forum.example.com/y", "y") in t["neo"]
     for rac in ("", None, "<<<>>><a href=", "<a href='\x00'>", "\ufffd" * 50, "<a " * 5000):
         t = DD.tach_trang(rac, "https://forum.example.com/")
-        assert set(t) == {"tieu_de", "neo", "rel_next", "so_trang"}
+        assert set(t) == {"tieu_de", "neo", "rel_next", "so_trang", "canonical"}
 
 
 def test_trich_bai_theo_mau_bai_bo_trung_trang_goc_va_neo_phan_trang():
@@ -281,8 +281,9 @@ def test_url_trang_tiep_ba_che_do():
     assert DD.url_trang_tiep(dict(f, phan_trang="mau"), dict(t, rel_next="https://forum.example.com/zzz"), u(1), 2) == u(2)
     assert DD.url_trang_tiep(dict(f, phan_trang="khong"), t, u(1), 2) == ""
     assert DD.url_trang_tiep(fo(mau_trang=None), t_cuoi, u(3), 4) == ""                         # khong rel=next, khong mau -> het
-    tro_lai = dict(t, rel_next=u(1))
-    assert DD.url_trang_tiep(fo(mau_trang=None), tro_lai, u(1), 2) == ""                        # rel=next tro lai chinh no -> bo
+    tro_lai = dict(t, rel_next=u(1), neo=[], so_trang=[])
+    assert DD.url_trang_tiep(fo(mau_trang=None), tro_lai, u(1), 2) == ""                        # rel=next tro lai chinh no, khong neo nao khac -> bo
+    assert DD.url_trang_tiep(fo(mau_trang=None), dict(t, rel_next=u(1)), u(1), 2) == u(2)       # ... nhung thanh phan trang co neo "2" thi di theo neo (08/10)
     nx = dict(t, rel_next="http://forum.example.com/robot/page-2")
     assert DD.url_trang_tiep(f, nx, u(1), 2) == "https://forum.example.com/robot/page-2"       # nang http -> https
 
@@ -1306,3 +1307,354 @@ def test_mien_goc_hau_to_hai_nhan_khong_gop_cac_trang_khac_nhau():
                        ("forum.example.com", "example.com"), ("localhost", "localhost"), ("", ""), ("co.jp", "co.jp")):
         assert LN.mien_goc(host) == mong, host
     assert LN.mien_goc("a.gogojungle.co.jp") != LN.mien_goc("b.kaskus.co.jp")
+
+
+# ============================================================== 10. TU TIM TRANG TIEP (08/10/2026): khong rel=next, khong mau_trang
+# Do 08/10: 2/8 don "quet sau" chi doc 1 trang roi bao XONG_PASS du MQL5 ghi 5842 trang. Thanh phan trang truoc day chi duoc DEM (tong_trang),
+# khong bao gio duoc DUNG de di tiep, va "khong thay link trang ke" bi doc nham thanh "het danh sach". Cac HTML o day mo phong 6 phan mem dien dan that.
+_SID = "9f3a1c77e0b24d5a"
+KIEU_DS = ("xenforo", "vbulletin", "phpbb", "ipb", "mql5", "wordpress")
+
+
+def url_ds(kieu, p, host=HOST):
+    """URL trang `p` cua mot danh sach dien dan gia, theo cach phan trang that cua tung phan mem (trang 1 = URL khai trong config)."""
+    g = "https://%s" % host
+    return {
+        "xenforo": g + "/forums/robot.44/" + ("" if p == 1 else "page-%d" % p),
+        "vbulletin": g + "/forumdisplay.php?f=44" + ("" if p == 1 else "&page=%d" % p),
+        "phpbb": g + "/viewforum.php?f=44" + ("" if p == 1 else "&start=%d&sid=%s" % (25 * (p - 1), _SID)),      # start = 25*(N-1), co ma phien
+        "ipb": g + "/forum/44-robot/" + ("" if p == 1 else "page/%d/" % p),
+        "mql5": g + "/en/forum/ea" + ("" if p == 1 else "/page%d" % p),
+        "wordpress": g + "/blog/" + ("" if p == 1 else "page/%d/" % p),
+    }[kieu]
+
+
+def trang_ds(kieu, n, tong, so_neo=None, cua_so=True, so_bai=4, nut_tiep=True, mini=True, host=HOST, them_head=""):
+    """Trang `n` / `tong` cua danh sach. KHONG rel=next. `so_neo` = cac so trang hien thanh LINK (trang hien tai la <span>): mac dinh `1 .. n-1 n n+1 .. tong`
+    (`cua_so`) hoac co dinh `1 2 3 .. tong`. Moi chu de co thanh phan trang nho `2 3 120` (XenForo / phpBB that co) - KHONG phai trang cua danh sach."""
+    hang = ""
+    for i in range(so_bai):
+        tid = n * 100 + i
+        nho = ('<span class="mini"><a href="https://%s/t/%d/page-2">2</a> <a href="https://%s/t/%d/page-3">3</a> '
+               '<a href="https://%s/t/%d/page-120">120</a></span>' % (host, tid, host, tid, host, tid)) if mini else ""
+        hang += '<div class="structItem"><a href="/t/%d/">Grid EA robot thread %d-%d</a>%s</div>' % (tid, n, i, nho)
+    if so_neo is None:
+        hien = {1, n - 1, n, n + 1, tong} if cua_so else {1, 2, 3, tong}
+        so_neo = sorted(p for p in hien if 1 <= p <= tong)
+    neo = "".join('<span class="cur">%d</span>' % p if p == n else '<a href="%s">%d</a>' % (url_ds(kieu, p, host), p) for p in so_neo)
+    nut = '<a class="next" href="%s">Next &rsaquo;</a><a class="last" href="%s">&raquo;</a>' % (url_ds(kieu, n + 1, host), url_ds(kieu, tong, host)) \
+        if nut_tiep and n < tong else ""
+    return ('<html><head><title>Robot EA - trang %d</title>%s</head><body>%s<div class="pageNav">%s%s</div></body></html>' % (n, them_head, hang, neo, nut))
+
+
+def web_ds(kieu, tong, toi_da=None, **kw):
+    return {url_ds(kieu, p): (200, trang_ds(kieu, p, tong, **kw), "") for p in range(1, (toi_da or tong) + 1)}
+
+
+def fo_ds(kieu, ma="a", host=HOST, **kw):
+    kw.setdefault("mau_trang", None)                                                                  # mac dinh KHONG khai mau_trang: bat buoc tu tim
+    return fo(ma, host, url_ds(kieu, 1, host)[len("https://" + host):], **kw)
+
+
+@pytest.mark.parametrize("kieu", KIEU_DS)
+def test_tim_trang_tiep_di_theo_neo_so_khi_thanh_phan_trang_co_trang_ke(kieu):
+    t = DD.tach_trang(trang_ds(kieu, 3, 9), url_ds(kieu, 3))
+    assert t["rel_next"] == "" and sorted(set(t["so_trang"])) == [2, 3, 4, 9, 120]               # khong rel=next; 120 la cua mini-pager chu de
+    tm = DD.tim_trang_tiep(fo_ds(kieu), t, url_ds(kieu, 3), 4)
+    assert tm == {"url": url_ds(kieu, 4), "cach": "neo_so", "tong_uoc": 9}, tm
+
+
+@pytest.mark.parametrize("kieu", KIEU_DS)
+def test_tim_trang_tiep_suy_ra_mau_khi_thanh_phan_trang_rut_gon_1_2_3_cuoi(kieu):
+    """Dien dan MQL5 ghi `1 2 3 ... 5842` o moi trang: trang 6 khong co neo, phai suy ra tu >= 2 neo (page-N, ?page=N, start=25*(N-1), ma phien...)."""
+    t = DD.tach_trang(trang_ds(kieu, 5, 9, cua_so=False, nut_tiep=False), url_ds(kieu, 5))
+    tm = DD.tim_trang_tiep(fo_ds(kieu), t, url_ds(kieu, 5), 6)
+    assert tm == {"url": url_ds(kieu, 6), "cach": "mau_suy_ra", "tong_uoc": 9}, tm
+    assert DD.tim_trang_tiep(fo_ds(kieu), t, url_ds(kieu, 5), 9)["url"] == url_ds(kieu, 9)       # neo cuoi co san -> dung neo
+    assert DD.tim_trang_tiep(fo_ds(kieu), t, url_ds(kieu, 5), 10)["url"] == ""                    # trang 10 > 9: thanh phan trang khong cho phep doan
+
+
+@pytest.mark.parametrize("cua_so", [True, False])
+@pytest.mark.parametrize("kieu", KIEU_DS)
+def test_quet_tu_di_het_danh_sach_khi_khong_co_rel_next_va_khong_khai_mau_trang(tmp_path, kieu, cua_so):
+    tong = 7
+    web = Web(web_ds(kieu, tong, cua_so=cua_so))
+    q, _ = tao(tmp_path, web, cfg(fo_ds(kieu), toi_da_trang_luot=50))
+    bc = q.chay()
+    assert web.trang_da_goi() == [url_ds(kieu, p) for p in range(1, tong + 1)]                    # dung thu tu, moi trang MOT lan, khong doan trang 8
+    assert kq_luot(bc) == "XONG_PASS"
+    m = muc(q)
+    assert (m["ket_qua"], m["trang_cuoi"], m["tong_trang"], m["so_pass"], m["so_loi"]) == ("XONG", tong, tong, 1, 0)
+    uv = ung_vien(tmp_path)
+    assert len(uv) == 4 * tong and {x["trang"] for x in uv} == set(range(1, tong + 1))             # 4 bai moi trang; link '2 3 120' cua chu de khong thanh bai
+
+
+@pytest.mark.parametrize("kieu", ["xenforo", "phpbb"])
+def test_quet_danh_sach_5842_trang_doc_tiep_tu_moc_qua_nhieu_luot(tmp_path, kieu):
+    """Truong hop MQL5 forum 08/10: `1 2 3 ... 5842`. Moi luot doc 5 trang, luot sau doc tiep tu trang 6 (tien trinh moi), tong trang hien dung."""
+    web = Web(web_ds(kieu, 5842, toi_da=12, cua_so=False))
+    q1, dh = tao(tmp_path, web, cfg(fo_ds(kieu), toi_da_trang_luot=5))
+    bc = q1.chay()
+    assert kq_luot(bc) == "DANG_DO" and web.trang_da_goi() == [url_ds(kieu, p) for p in range(1, 6)]
+    m = muc(q1)
+    assert (m["den_trang"], m["url_tiep"], m["tong_trang"], m["tien_do"]) == (5, url_ds(kieu, 6), 5842, "DANG_DO")
+    web2 = Web(web_ds(kieu, 5842, toi_da=12, cua_so=False))
+    q2, _ = tao(tmp_path, web2, cfg(fo_ds(kieu), toi_da_trang_luot=5), dh=dh)
+    q2.chay()
+    assert web2.trang_da_goi() == [url_ds(kieu, p) for p in range(6, 11)] and muc(q2)["den_trang"] == 10
+    assert len(ung_vien(tmp_path)) == 40 and muc(q2)["tong_trang"] == 5842
+
+
+def test_thanh_phan_trang_duoi_tung_chu_de_khong_bi_nham_voi_trang_cua_danh_sach(tmp_path):
+    """Danh sach 1 trang, KHONG co thanh phan trang nao, nhung moi chu de co `2 3 120`: khong duoc di vao /t/<id>/page-2 (quet het forum nhu nguoi doc)."""
+    h = trang_ds("xenforo", 1, 1, so_neo=[], nut_tiep=False)
+    t = DD.tach_trang(h, url_ds("xenforo", 1))
+    assert t["so_trang"] == [2, 3, 120]
+    assert DD.tim_trang_tiep(fo_ds("xenforo"), t, url_ds("xenforo", 1), 2) == {"url": "", "cach": "", "tong_uoc": 0}
+    web = Web({url_ds("xenforo", 1): (200, h, "")})
+    q, _ = tao(tmp_path, web, cfg(fo_ds("xenforo")))
+    assert kq_luot(q.chay()) == "XONG_PASS" and web.trang_da_goi() == [url_ds("xenforo", 1)]
+    assert muc(q)["tong_trang"] == 1                                                                # khong "1/120" nho link cua chu de
+    g = q.do()["dien_dan"][0]
+    assert g["tong_trang_uoc"] == 0 and g["co_neo_so_khac"] is True and "khong cung duong dan" in g["goi_y"]
+
+
+def test_khong_thay_trang_ke_la_loi_cau_hinh_khong_phai_het_danh_sach(tmp_path):
+    """Thanh phan trang chi hien `1 ... 40`: ta biet con 39 trang nhung khong co duong sang. TUNG bao XONG_PASS (sai); nay KHONG_THAY_TRANG_TIEP."""
+    h = trang_ds("xenforo", 1, 40, so_neo=[40], nut_tiep=False)
+    web = Web({url_ds("xenforo", 1): (200, h, "")})
+    q, dh = tao(tmp_path, web, cfg(fo_ds("xenforo")))
+    bc = q.chay()
+    assert kq_luot(bc) == "KHONG_THAY_TRANG_TIEP" and bc["tom_tat_luot"] == {"KHONG_THAY_TRANG_TIEP": 1}
+    assert web.trang_da_goi() == [url_ds("xenforo", 1)]                                              # khong doan bua trang 2
+    m = muc(q)
+    assert (m["ket_qua"], m["tien_do"], m["trang_cuoi"], m["tong_trang"], m["den_trang"], m["url_tiep"]) == ("KHONG_THAY_TRANG_TIEP", "KHONG_THAY_TRANG_TIEP", 1, 40, 0, "")
+    assert m.get("so_pass", 0) == 0 and m["den_han"] == int(dh() + DD.GIO_NGHI_LOI_CAU_HINH * 3600)    # KHONG tinh la xong 1 pass; nghi 24 gio
+    assert "khong tim thay link trang 2" in m["ly_do"] and "mau_trang" in m["ly_do"] and "https://" not in m["ly_do"]
+    assert len(ung_vien(tmp_path)) == 4                                                              # bai cua trang 1 van duoc giu
+    b = next(x for x in bc["dien_dan"] if x["ma"] == "a")
+    assert b["tong_trang"] == 40 and b["trang_luot"] == 1 and "khong tim thay link trang 2" in b["ly_do"]
+    kh = q.ke_hoach()[0]
+    assert kh["buoc_tiep"].startswith("cho den ") and "KHONG_THAY_TRANG_TIEP" in kh["buoc_tiep"] and "--ep" in kh["buoc_tiep"]
+    n = len(web.goi)
+    assert kq_luot(q.chay()) == "CHO_TUAN" and len(web.goi) == n                                     # nghi 24 gio, khong dap lai
+    dh.t += 25 * 3600
+    assert kq_luot(q.chay()) == "KHONG_THAY_TRANG_TIEP" and web.trang_da_goi().count(url_ds("xenforo", 1)) == 2
+    assert len(ung_vien(tmp_path)) == 4                                                              # doc lai khong ghi trung
+
+
+def test_khong_thay_trang_ke_sua_bang_mau_trang_va_ep_thi_di_tiep_ngay(tmp_path):
+    h = trang_ds("xenforo", 1, 40, so_neo=[40], nut_tiep=False)
+    web = Web({url_ds("xenforo", 1): (200, h, ""), **{url_ds("xenforo", p): (200, trang_ds("xenforo", p, 40, so_neo=[40], nut_tiep=False), "") for p in (2, 3)}})
+    q, dh = tao(tmp_path, web, cfg(fo_ds("xenforo")))
+    assert kq_luot(q.chay()) == "KHONG_THAY_TRANG_TIEP"
+    q2, _ = tao(tmp_path, web, cfg(fo_ds("xenforo", mau_trang="{base}page-{n}"), toi_da_trang_luot=3), dh=dh)         # chu du an khai mau_trang
+    assert kq_luot(q2.chay()) == "CHO_TUAN"                                                           # sua config nhung chua --ep: van nghi het 24 gio
+    assert kq_luot(q2.chay(ep=True)) == "DANG_DO" and [x for x in web.trang_da_goi()][-3:] == [url_ds("xenforo", p) for p in (1, 2, 3)]
+    assert muc(q2)["den_trang"] == 3 and muc(q2)["url_tiep"] == url_ds("xenforo", 4)
+
+
+def test_phan_trang_khong_van_la_xong_pass_du_thanh_phan_trang_ghi_nhieu_trang(tmp_path):
+    h = trang_ds("xenforo", 1, 40)
+    q, _ = tao(tmp_path, Web({url_ds("xenforo", 1): (200, h, "")}), cfg(fo_ds("xenforo", phan_trang="khong")))
+    assert kq_luot(q.chay()) == "XONG_PASS"                                                           # chu du an chu dong chi doc trang 1 -> khong phai loi
+
+
+def test_neo_tro_lai_chinh_trang_dang_doc_khong_gay_vong_lap(tmp_path):
+    h = ('<html><body><a href="/t/1/">Grid EA robot thread 1</a><a href="%s">2</a><a href="%s">9</a></body></html>' % (url_ds("xenforo", 1), url_ds("xenforo", 9)))
+    web = Web({url_ds("xenforo", 1): (200, h, "")})
+    q, _ = tao(tmp_path, web, cfg(fo_ds("xenforo")))
+    assert kq_luot(q.chay()) == "XONG_PASS" and web.trang_da_goi() == [url_ds("xenforo", 1)] and "tro lai chinh no" in muc(q)["ly_do"]
+
+
+def test_neo_so_chi_nhan_cung_ten_mien_va_cung_danh_sach():
+    f = fo_ds("xenforo")
+    cua_minh, la = url_ds("xenforo", 2), "https://forum.example.com.evil.org/forums/robot.44/page-2"
+    khac_dm = "https://other.example.org/forums/robot.44/page-2"
+    anh_em = "https://cdn.example.com/forums/robot.44/page-2"                                          # cung ten mien goc nhung KHAC may chu -> khac danh sach
+    khac_ds = "https://forum.example.com/forums/other.55/page-2"
+    http = "http://forum.example.com/forums/robot.44/page-3"
+    h = "".join('<a href="%s">%s</a>' % (x, n) for x, n in ((la, 2), (khac_dm, 2), (anh_em, 2), (khac_ds, 2), (http, 3), (cua_minh, 2)))
+    t = DD.tach_trang(h, url_ds("xenforo", 1))
+    assert DD._neo_cung_danh_sach(f, t, url_ds("xenforo", 1)) == [(3, url_ds("xenforo", 3)), (2, cua_minh)]      # http nang https; con lai bi loai
+    assert DD.tim_trang_tiep(f, t, url_ds("xenforo", 1), 2)["url"] == cua_minh
+    h2 = "".join('<a href="%s">%s</a>' % (x, n) for x, n in ((la, 2), (khac_dm, 3), (anh_em, 4), (khac_ds, 5)))
+    assert DD.tim_trang_tiep(f, DD.tach_trang(h2, url_ds("xenforo", 1)), url_ds("xenforo", 1), 2) == {"url": "", "cach": "", "tong_uoc": 0}
+
+
+@pytest.mark.parametrize("chu,mong", [("3", 3), ("Page 3", 3), ("page3", 3), ("Trang 12", 12), ("Seite 4", 4), ("Strona 5", 5), ("Pagina 6", 6), ("Página 6", 6),
+                                      ("第5页", 5), ("5ページ", 5), ("страница 7", 7), ("стр. 8", 8), ("12345", 12345), ("  9  ", 9),
+                                      ("03", 0), ("0", 0), ("00", 0), ("", 0), (None, 0), ("1,000", 0), ("123456", 0), ("Page", 0), ("2 replies", 0), ("v2", 0), ("1.5", 0)])
+def test_so_tren_neo_nhan_chu_so_trang_nhieu_ngon_ngu_va_bo_so_dem_muc_luc(chu, mong):
+    assert DD._so_tren_neo(chu) == mong
+
+
+@pytest.mark.parametrize("chu,mong", [("Next", True), ("next ›", True), ("Next »", True), ("Next page", True), ("›", True), (">", True), ("→", True), ("▶", True),
+                                      ("Siguiente", True), ("Weiter »", True), ("Nächste", True), ("Suivant", True), ("Следующая", True), ("Далее", True),
+                                      ("下一页", True), ("次へ", True), ("다음", True), ("Trang sau", True), ("Tiếp", True), ("Berikutnya", True),
+                                      ("»", False), (">>", False), ("»»", False), ("Last", False), ("Cuối", False), ("Previous", False), ("‹ Prev", False),
+                                      ("Prev ›", False), ("Next unread post in the thread below", False), ("", False), (None, False), ("2", False)])
+def test_chu_trang_sau_nhieu_ngon_ngu_va_dau_mui_ten_cuoi_khong_phai_trang_sau(chu, mong):
+    assert DD._la_chu_tiep(chu) is mong
+
+
+def test_nut_trang_sau_la_duong_cuoi_khi_khong_co_thanh_phan_trang_danh_so(tmp_path):
+    def nut(n, tong):
+        nxt = '<a class="pageNavSimple-el--next" href="%s">Next &rsaquo;</a>' % url_ds("xenforo", n + 1) if n < tong else ""
+        prv = '<a href="%s">&lsaquo; Prev</a>' % url_ds("xenforo", n - 1) if n > 1 else ""
+        return trang_ds("xenforo", n, tong, so_neo=[], nut_tiep=False).replace("</body>", prv + nxt + "</body>")
+    t = DD.tach_trang(nut(1, 4), url_ds("xenforo", 1))
+    assert DD.tim_trang_tiep(fo_ds("xenforo"), t, url_ds("xenforo", 1), 2) == {"url": url_ds("xenforo", 2), "cach": "chu_tiep", "tong_uoc": 0}
+    web = Web({url_ds("xenforo", p): (200, nut(p, 4), "") for p in range(1, 5)})
+    q, _ = tao(tmp_path, web, cfg(fo_ds("xenforo")))
+    assert kq_luot(q.chay()) == "XONG_PASS" and web.trang_da_goi() == [url_ds("xenforo", p) for p in range(1, 5)]
+    # dau » don le (thuong la 'trang cuoi') khong phai trang sau; Next tro sang danh sach khac / ten mien khac cung khong
+    sai = ('<a href="%s">&raquo;</a><a href="https://other.example.org/x/page-2">Next</a><a href="https://forum.example.com/forums/other.55/page-2">Next</a>' %
+           url_ds("xenforo", 9))
+    assert DD.tim_trang_tiep(fo_ds("xenforo"), DD.tach_trang(sai, url_ds("xenforo", 1)), url_ds("xenforo", 1), 2)["url"] == ""
+
+
+def test_nut_trang_sau_dung_khi_thanh_phan_trang_con_trang_nhung_khong_suy_ra_duoc_mau():
+    """Chi hien `1 ... 40` va nut Next: khong du >= 2 neo de suy mau -> Next la duong cuoi. (Neu khong co ca Next thi la KHONG_THAY_TRANG_TIEP.)"""
+    t = DD.tach_trang(trang_ds("xenforo", 2, 40, so_neo=[1, 40]), url_ds("xenforo", 2))
+    assert DD.tim_trang_tiep(fo_ds("xenforo"), t, url_ds("xenforo", 2), 3) == {"url": url_ds("xenforo", 3), "cach": "chu_tiep", "tong_uoc": 40}
+    t2 = DD.tach_trang(trang_ds("xenforo", 2, 40, so_neo=[1, 40], nut_tiep=False), url_ds("xenforo", 2))
+    assert DD.tim_trang_tiep(fo_ds("xenforo"), t2, url_ds("xenforo", 2), 3) == {"url": "", "cach": "", "tong_uoc": 40}
+
+
+def test_mau_suy_ra_tu_choi_khi_khong_tuyen_tinh_hoac_do_rong_co_dinh_hoac_nhieu_cum_so_doi():
+    f = fo_ds("xenforo")
+    def thu(neo):
+        h = "".join('<a href="%s">%d</a>' % (x, n) for n, x in neo)
+        return DD.tim_trang_tiep(f, DD.tach_trang(h, url_ds("xenforo", 1)), url_ds("xenforo", 1), 4)
+    g = "https://forum.example.com/forums/robot.44/"
+    assert thu([(2, g + "page-2"), (3, g + "page-3"), (9, g + "page-9")])["cach"] == "mau_suy_ra"
+    assert thu([(2, g + "page-2"), (3, g + "page-3"), (9, g + "page-10")])["url"] == ""               # khong nam tren mot duong thang
+    assert thu([(2, g + "page-02"), (3, g + "page-03"), (9, g + "page-09")])["url"] == ""             # do rong co dinh: khong suy
+    assert thu([(2, g + "page-2"), (9, g + "page-9")])["cach"] == "mau_suy_ra"                        # 2 neo la du
+    assert thu([(9, g + "page-9")])["url"] == ""                                                       # 1 neo khong du
+    nhieu = [(2, g + "page-2?x=1"), (3, g + "page-3?x=2"), (9, g + "page-9?x=3")]
+    assert thu(nhieu)["url"] == ""                                                                      # hai cum so doi cung luc: khong doan
+    assert thu([(2, g + "page-2"), (3, g + "p3"), (9, g + "page-9")])["cach"] == "mau_suy_ra"          # neo la ('p3') khac khung bi bo, 2 neo con lai du
+
+
+def test_bo_so_dem_muc_luc_chu_so_co_so_0_khong_thanh_neo_trang():
+    h = "".join('<a href="%s">%s</a>' % (url_ds("xenforo", p), "%02d" % p) for p in (2, 3, 4))
+    t = DD.tach_trang(h, url_ds("xenforo", 1))
+    assert DD._neo_cung_danh_sach(fo_ds("xenforo"), t, url_ds("xenforo", 1)) == []
+
+
+def test_tham_so_sap_xep_va_so_dong_khong_lam_roi_danh_sach_vbulletin():
+    """vBulletin ghi `&order=desc&sort=lastpost&pp=25` vao link trang 2.. nhung `url` cau hinh khong co: van la CUNG danh sach. `tag=2` thi khong."""
+    base = "https://forum.example.com/forumdisplay.php?f=44"
+    f = fo("a", HOST, "/forumdisplay.php?f=44", mau_trang=None)
+    h = ('<a href="%s&order=desc&sort=lastpost&page=2&pp=25">2</a><a href="%s&order=desc&sort=lastpost&page=3&pp=25">3</a>'
+         '<a href="%s&tag=2">2</a><a href="https://forum.example.com/forumdisplay.php?f=45&page=2">2</a>' % (base, base, base))
+    t = DD.tach_trang(h, base)
+    cac = DD._neo_cung_danh_sach(f, t, base)
+    assert [n for n, _ in cac] == [2, 3] and all("tag=" not in x and "f=45" not in x for _, x in cac)
+    assert DD.tim_trang_tiep(f, t, base, 2)["url"] == "%s&order=desc&sort=lastpost&page=2&pp=25" % base
+
+
+def test_canonical_giup_nhan_ra_danh_sach_khi_url_cau_hinh_duoc_chuyen_huong_sang_duong_khac():
+    f = fo("a", HOST, "/old/robot", mau_trang=None)                                                    # config tro vao duong cu; dien dan 301 sang /forums/robot.44/
+    h = ('<link rel="canonical" href="https://forum.example.com/forums/robot.44/">' +
+         "".join('<a href="%s">%d</a>' % (url_ds("xenforo", p), p) for p in (2, 3, 9)))
+    t = DD.tach_trang(h, "https://forum.example.com/old/robot")
+    assert t["canonical"] == "https://forum.example.com/forums/robot.44/"
+    assert DD.tim_trang_tiep(f, t, "https://forum.example.com/old/robot", 2)["url"] == url_ds("xenforo", 2)
+    khong = DD.tach_trang(h.replace("canonical", "alternate"), "https://forum.example.com/old/robot")
+    assert khong["canonical"] == "" and DD.tim_trang_tiep(f, khong, "https://forum.example.com/old/robot", 2)["url"] == ""
+    ngoai = DD.tach_trang(h.replace("forum.example.com/forums/robot.44/\">", "evil.example.org/forums/robot.44/\">", 1), "https://forum.example.com/old/robot")
+    assert DD.tim_trang_tiep(f, ngoai, "https://forum.example.com/old/robot", 2)["url"] == ""            # canonical ra ten mien khac: bo
+
+
+def test_url_trang_tiep_la_vo_boc_mong_cua_tim_trang_tiep():
+    t = DD.tach_trang(trang_ds("ipb", 2, 9), url_ds("ipb", 2))
+    assert DD.url_trang_tiep(fo_ds("ipb"), t, url_ds("ipb", 2), 3) == DD.tim_trang_tiep(fo_ds("ipb"), t, url_ds("ipb", 2), 3)["url"] == url_ds("ipb", 3)
+
+
+def test_tham_do_cho_biet_cach_sang_trang_va_canh_bao_khi_co_trang_ma_khong_co_duong_sang(tmp_path):
+    web = Web({**web_ds("phpbb", 4, cua_so=False)})
+    q, _ = tao(tmp_path, web, cfg(fo_ds("phpbb", bat=False)))
+    r = q.do()["dien_dan"][0]
+    assert r["cach_trang_tiep"] == "neo_so" and r["tong_trang_uoc"] == 4 and r["trang2"]["khac_trang_1"] is True
+    assert "cach sang trang: neo_so" in r["goi_y"] and "bat=true" in r["goi_y"]
+    web2 = Web({url_ds("xenforo", 1): (200, trang_ds("xenforo", 1, 40, so_neo=[40], nut_tiep=False), "")})
+    q2, _ = tao(tmp_path / "x", web2, cfg(fo_ds("xenforo", bat=False)))
+    r2 = q2.do()["dien_dan"][0]
+    assert r2["tong_trang_uoc"] == 40 and "trang2" not in r2 and "KHONG tim thay link trang 2" in r2["goi_y"] and "KHONG_THAY_TRANG_TIEP" in r2["goi_y"]
+
+
+# ---- ma thoat cua `b dien-dan quet`: khong dien dan nao di tiep duoc thi KHONG phai "DAT"
+def test_cli_quet_khong_dien_dan_nao_duoc_chon_la_ma_5(tmp_path, capsys):
+    q, _ = tao(tmp_path, Web(), cfg(fo("a", bat=False)))
+    assert DD.main(["quet"], tao_quet=lambda: q) == 5
+    out = capsys.readouterr().out
+    assert "!! DIEN_DAN_KHONG_TIEN: khong dien dan nao duoc chon" in out
+
+
+def test_cli_quet_dien_dan_dang_tat_goi_ten_la_ma_5_khong_phai_dat_gia(tmp_path, capsys):
+    """6/8 don 'quet-sau' 08/10 bao DAT trong khi dien dan o may nha dang `bat: false` (BO_QUA)."""
+    web = Web(dien_dan_web())
+    q, _ = tao(tmp_path, web, cfg(fo("a", bat=False)))
+    assert DD.main(["quet", "--ma", "a"], tao_quet=lambda: q) == 5
+    out = capsys.readouterr().out
+    assert "DIEN_DAN_KHONG_TIEN" in out and "BO_QUA 1" in out and "a(BO_QUA)" in out and web.goi == []
+
+
+def test_cli_quet_bi_chan_het_la_ma_5_nhung_chan_giua_chung_sau_khi_doc_duoc_trang_thi_van_la_tien(tmp_path, capsys):
+    q, _ = tao(tmp_path, Web({u(1): (403, "", "")}), cfg(fo("a")))
+    assert DD.main(["quet"], tao_quet=lambda: q) == 5 and "CHAN_CAM 1" in capsys.readouterr().out
+    web = Web({**dien_dan_web(), u(3): (429, "", "")})
+    q2, _ = tao(tmp_path / "x", web, cfg(fo("a")))
+    assert DD.main(["quet"], tao_quet=lambda: q2) == 0                                                  # doc duoc trang 1-2 roi moi bi 429: co tien
+    out = capsys.readouterr().out
+    assert "DIEN_DAN_KHONG_TIEN" not in out and "a(CHAN_TAN_SUAT)" in out                                # nhung van in dong canh bao
+
+
+def test_cli_quet_mot_dien_dan_doc_duoc_mot_dien_dan_bi_chan_la_ma_0_kem_dong_canh_bao(tmp_path, capsys):
+    web = Web({**dien_dan_web(), "https://forum.blocked-one.org/robot/": (403, "", "")})
+    q, _ = tao(tmp_path, web, cfg(fo("a"), fo("b", "forum.blocked-one.org")))
+    assert DD.main(["quet"], tao_quet=lambda: q) == 0
+    out = capsys.readouterr().out
+    assert "!! 1 dien dan khong tien duoc: b(CHAN_CAM)" in out and "DIEN_DAN_KHONG_TIEN" not in out
+
+
+def test_cli_quet_chi_vi_dang_cho_hoac_het_nhip_la_ma_0(tmp_path, capsys):
+    web = Web(dien_dan_web())
+    q, _ = tao(tmp_path, web, cfg(fo("a")))
+    assert DD.main(["quet"], tao_quet=lambda: q) == 0                                                    # doc het mot pass
+    capsys.readouterr()
+    assert DD.main(["quet"], tao_quet=lambda: q) == 0                                                    # CHO_TUAN: chua den han, khong phai loi
+    out = capsys.readouterr().out
+    assert "CHO_TUAN" in out and "DIEN_DAN_KHONG_TIEN" not in out and "!!" not in out
+
+
+def test_cli_quet_dang_cho_nhung_co_dien_dan_khac_bi_chan_van_la_ma_5(tmp_path, capsys):
+    web = Web({**dien_dan_web(), "https://forum.blocked-one.org/robot/": (403, "", "")})
+    q0, dh = tao(tmp_path, web, cfg(fo("a")))
+    q0.chay()
+    q, _ = tao(tmp_path, web, cfg(fo("a"), fo("b", "forum.blocked-one.org")), dh=dh)
+    assert DD.main(["quet"], tao_quet=lambda: q) == 5                                                    # a: CHO_TUAN, b: CHAN_CAM -> khong co gi di tiep
+    assert "CHAN_CAM 1, CHO_TUAN 1" in capsys.readouterr().out
+
+
+def test_cli_quet_khong_thay_trang_ke_o_moi_dien_dan_la_ma_5_du_da_doc_trang_1(tmp_path, capsys):
+    web = Web({url_ds("xenforo", 1): (200, trang_ds("xenforo", 1, 40, so_neo=[40], nut_tiep=False), "")})
+    q, _ = tao(tmp_path, web, cfg(fo_ds("xenforo")))
+    assert DD.main(["quet"], tao_quet=lambda: q) == 5
+    out = capsys.readouterr().out
+    assert "KHONG_THAY_TRANG_TIEP 1" in out and "https://" not in out.replace("du_lieu_cao", "")
+    # ... nhung neu CO dien dan khac di duoc thi luot van co tien
+    web2 = Web({**web.trang, **dien_dan_web("khac.example.net")})
+    q2, _ = tao(tmp_path / "y", web2, cfg(fo_ds("xenforo"), fo("b", "khac.example.net")))
+    assert DD.main(["quet"], tao_quet=lambda: q2) == 0
+    assert "!! 1 dien dan khong tien duoc: a(KHONG_THAY_TRANG_TIEP)" in capsys.readouterr().out
+
+
+def test_dau_vet_cau_loi_nhan_ra_dong_dien_dan_khong_tien():
+    from qwen import cau_loi as CL
+    r = CL.dau_vet(["  a  BO_QUA  0 trang luot nay", "!! DIEN_DAN_KHONG_TIEN: khong dien dan nao doc tiep duoc: BO_QUA 8", "-> reports/x.md"])
+    assert (r["nhan"], r["nhom"]) == ("dien_dan_khong_tien", "can_chan_doan") and "BO_QUA 8" in r["bang_chung"]
+    assert CL.dau_vet(["a  OK  3 trang luot nay", "!! 1 dien dan khong tien duoc: b(CHAN_CAM)"]) is None      # co tien: khong phai DAT gia
