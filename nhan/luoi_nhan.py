@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
-"""luoi_nhan.py - NHAN C cho engine luoi (`luoi._mot_ro`): tu dich, nap bang ctypes, tu kiem, DU PHONG Python.
+"""luoi_nhan.py - NHAN C cho engine luoi (`luoi._mot_ro` va `luoi._mot_ro_duong`, chon theo `ThamSo.khop_bar`): tu dich, nap
+bang ctypes, tu kiem, DU PHONG Python.
 
 Vi sao: chu du an hoi cach tang toc do test (03/10/2026). `_mot_ro` do duoc 2,8-7,9 us/bar: mot lan chay 190.000 bar M15 ~ 0,5-1,3
 giay, quet 1.000 to hop ~ 20 phut tren mot nhan. Ban C cung phep tinh nhanh hon ~2 bac do lon, va ctypes NHA GIL nen quet duoc
 da luong (ThreadPoolExecutor) ma khong can tien trinh phu.
 
 Nguyen tac (giu lai, dung bo):
-  1. `luoi._mot_ro` (Python) la CHUAN va van la duong du phong. Nhan C chi duoc dung khi (a) dich duoc, (b) TU KIEM khop ban Python tren
-     cac kich ban co dinh cua chinh Python dang chay, (c) tham so nam trong mien da kiem. Khong dat mot trong ba -> Python, im lang
-     ve ket qua (KHONG doi so), chi ghi ly do vao `trang_thai()`.
+  1. Ban Python (`luoi.mot_ro_chuan`: `_mot_ro` cho `cuc_tri`, `_mot_ro_duong` cho `duong_di`) la CHUAN va van la duong du phong. Nhan C
+     chi duoc dung khi (a) dich duoc, (b) TU KIEM khop ban Python tren cac kich ban co dinh cua chinh Python dang chay, CA HAI
+     mo hinh bar, (c) tham so nam trong mien da kiem. Khong dat mot trong ba -> Python, im lang ve ket qua (KHONG doi so), chi ghi
+     ly do vao `trang_thai()`.
   2. Khop TUNG BIT khi co the (cung thu tu phep tinh, cung kieu cong cua `sum()` theo phien ban Python: >= 3.12 cong bu Neumaier
-     tren float thuan). Khac biet con lai chi co the den tu libm khac nhau cua `pow` (Windows/zig) - tu kiem cho phep sai so 1e-9
-     NHUNG buoc chuoi lenh (so ro, so lenh, bar, id, tang) phai TRUNG KHIT.
-  3. Khong sua hanh vi cua engine o day. Muon doi hanh vi: sua `luoi._mot_ro` truoc, dich lai `luoi_nhan.c` sau, chay test_luoi_nhan.
+     tren float thuan - chi `cuc_tri`; `duong_di` cong tuan tu moi noi). Khac biet con lai chi co the den tu libm khac nhau cua
+     `pow` (Windows/zig) - tu kiem cho phep sai so 1e-9 NHUNG buoc chuoi lenh (so ro, so lenh, bar, id, tang) phai TRUNG KHIT.
+  3. Khong sua hanh vi cua engine o day. Muon doi hanh vi: sua ban Python truoc, dich lai `luoi_nhan.c` sau, chay test_luoi_nhan +
+     test_luoi_duong_di.
 
 Bien moi truong:
   LUOI_NHAN=py|c|auto   py = khong bao gio dung C; c = bat buoc C (loi neu khong co); auto (mac dinh) = C neu dung duoc
@@ -27,6 +30,7 @@ from __future__ import annotations
 import ctypes
 import hashlib
 import importlib.util
+import inspect
 import json
 import math
 import os
@@ -42,17 +46,19 @@ from pathlib import Path
 
 import numpy as np
 
-PHIEN_BAN = 2                      # = LUOI_NHAN_PHIEN_BAN trong luoi_nhan.c
+PHIEN_BAN = 4                      # = LUOI_NHAN_PHIEN_BAN trong luoi_nhan.c (3: them mo hinh `duong_di`, tham so P_MO_HINH; 4: dung sai cham moc)
 NGUON_C = Path(__file__).with_name("luoi_nhan.c")
 
 #: Thu tu KHOP enum P_* trong luoi_nhan.c
 _TEN_P = ("lot", "hop", "pip", "buoc", "tp", "tran", "kieu", "he_lot", "he_buoc", "buoc_tran", "cho_lui", "tia",
-          "bien_cap", "cap_moi_bar", "chot_tien", "ty_le", "kahan")
+          "bien_cap", "cap_moi_bar", "chot_tien", "ty_le", "kahan", "mo_hinh")
 _KIEU = {"nhan": 1.0, "cong": 2.0}  # con lai (phang / la) = 0.0, y het `_lot` Python
-#: Truong `ThamSo` / `QuyCach` ma nhan C DOC = nhung truong `luoi._mot_ro` doc. `test_luoi_nhan` quet nguon `_mot_ro`: them truong
-#: moi vao engine ma quen nhan C thi test do (neu khong, C tinh THIEU im lang - dung loai bo phan "ton tai nhung khong chay").
+#: Truong `ThamSo` / `QuyCach` ma nhan C DOC = nhung truong `luoi._mot_ro` / `luoi._mot_ro_duong` / `luoi.chay_mang` doc. `test_luoi_nhan`
+#: quet nguon cac ham do: them truong moi vao engine ma quen nhan C thi test do (neu khong, C tinh THIEU im lang - dung loai bo
+#: phan "ton tai nhung khong chay"). `khop_bar` di vao C qua `P_MO_HINH`.
 TRUONG_TS = ("lot", "buoc", "tp", "tran_tang", "kieu_lot", "he_so_lot", "he_so_buoc", "buoc_tran", "cho_lui", "tia_lenh",
-             "bien_cap", "cap_moi_bar", "chot_tien")
+             "bien_cap", "cap_moi_bar", "chot_tien", "khop_bar")
+MO_HINH_C = {"cuc_tri": 0.0, "duong_di": 1.0}                 # = gia tri p[P_MO_HINH] trong luoi_nhan.c
 TRUONG_QC = ("hop_dong", "pip", "phi_nam_mua", "phi_nam_ban")
 _GHI_COT = 8
 _SO_STATS = 8
@@ -190,7 +196,8 @@ def _dong_goi(ts, qc, chieu: int) -> np.ndarray:
     v = {"lot": ts.lot, "hop": qc.hop_dong, "pip": qc.pip, "buoc": ts.buoc, "tp": ts.tp, "tran": ts.tran_tang,
          "kieu": _KIEU.get(ts.kieu_lot, 0.0), "he_lot": ts.he_so_lot, "he_buoc": ts.he_so_buoc, "buoc_tran": ts.buoc_tran,
          "cho_lui": ts.cho_lui, "tia": 1.0 if ts.tia_lenh else 0.0, "bien_cap": ts.bien_cap, "cap_moi_bar": ts.cap_moi_bar,
-         "chot_tien": ts.chot_tien, "ty_le": ty_le, "kahan": 1.0 if _kahan(ts) else 0.0}
+         "chot_tien": ts.chot_tien, "ty_le": ty_le, "kahan": 1.0 if _kahan(ts) else 0.0,
+         "mo_hinh": MO_HINH_C[ts.khop_bar]}
     return np.array([float(v[k]) for k in _TEN_P], dtype=np.float64)
 
 
@@ -315,6 +322,96 @@ _CA_BIEN = (
 )
 
 
+#: Khoang HUT (pip) cua cac ca `*_hut_eps`: 2^-17 = 7,6e-6 pip = 7,6 lan `luoi.EPS_CHAM_PIP`. Phai LON hon dung sai (test_luoi_nhan kiem), va la luy thua cua 2
+#: de gia nhi phan van chinh xac.
+_HUT = 2.0 ** -17
+
+
+# Ca BIEN cua mo hinh `duong_di` (cung quy uoc nhi phan nhu tren; KHONG bar nao co dong == mo-kep, tru bar phang, de duong gia cua chieu
+# ban dung la guong cua chieu mua: nen doji tinh la nen XANH cho ca hai chieu). Moi ca toi mot DAU BANG cua mot phep so sanh cua ham `lui` / `len_`:
+# neu mot ben doi `>` thanh `>=` (hay nguoc lai) thi bo ba (so_ro, so_lenh, so_cap) hoac duong lai doi. Bo ba "mong" duoc suy tay (xem
+# `test_luoi_duong_di.py`, nhom BienTay) va Python PHAI ra dung no - ca nao ngung cham dung moc thi tu kiem hong ngay.
+_CA_BIEN_DUONG = (
+    # high cua bar k cham DUNG TP +25 pip: chot, mo lai o gia TP -> 6 vong
+    ("tp_bang", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0),
+     [(0, 0, 0)] + [(25 * k, 25 * (k - 1), 25 * k) for k in range(1, 7)], (6, 7, 0)),
+    # low cua nen do cham DUNG tung moc luoi (-40 pip): mo du 4 lenh, KHONG co lenh thu 5 (tran tang)
+    ("khop_bang", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0),
+     [(0, 0, 0), (0, -40, -40), (-40, -80, -80), (-80, -120, -120), (-120, -120, -120)], (0, 4, 0)),
+    # chot o +25 roi cho lui 10 pip; bar 4 cham DUNG moc cho (30) -> mo lai
+    ("cho_lui_bang", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0, cho_lui=10.0),
+     [(0, 0, 0), (25, 0, 5), (25, 15, 20), (40, 15, 40), (40, 30, 30)], (2, 3, 0)),
+    # lai noi dung 25 = chot_tien (0,25 * lot/0,01): chot ca ro o gia cham dung
+    ("chot_tien_bang", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, chot_tien=0.25),
+     [(0, 0, 0), (25, 0, 5), (25, 0, 25), (50, 25, 50)], (2, 3, 0)),
+    # gia tia cap (+2 pip) dung bang high cua bar: PHAI tia
+    ("tia_bang", dict(buoc=4.0, tp=1000.0, tran_tang=6, lot=1.0, tia_lenh=True, bien_cap=4.0, cap_moi_bar=1),
+     [(0, 0, 0), (2, -4, 1), (2, -4, 0)], (0, 4, 1)),
+    # gia tia == gia TP cung luc: TIA di truoc TP
+    ("tia_hoa_tp", dict(buoc=4.0, tp=4.0, tran_tang=6, lot=1.0, tia_lenh=True, bien_cap=4.0, cap_moi_bar=999),
+     [(0, 0, 0), (2, -4, 1)], (0, 3, 1)),
+    # cap_moi_bar = 1: bar 2 co hai cap cung gia tia -> chi cap dau duoc tia (cap thu hai de bar sau)
+    ("cap_moi_bar_bang", dict(buoc=4.0, tp=1000.0, tran_tang=6, lot=1.0, tia_lenh=True, bien_cap=4.0, cap_moi_bar=1),
+     [(0, 0, 0), (0, -12, -12), (-2, -12, -2)], (0, 4, 1)),
+    # nhay gia luc mo nen vuot HAI moc (-40, -80): chi MOT lenh o gia mo (kep -85), moc ke tiep tinh tu gia khop that (-125)
+    ("nhay_gia", dict(buoc=40.0, tp=1000.0, tran_tang=6, lot=1.0),
+     [(0, 0, 0), (-85, -90, -90)], (0, 2, 0)),
+    # bar PHANG nhay gia vuot moc (-40): khong doan nao co do dai, chi cu "nhay gia luc mo nen" khop duoc lenh, o gia -85 (khong phai -40)
+    ("phang_nhay_gia", dict(buoc=40.0, tp=1000.0, tran_tang=6, lot=1.0),
+     [(0, 0, 0), (-85, -85, -85)], (0, 2, 0)),
+    # chot o +25 roi cho lui 10 pip (moc cho = 15); bar 2 phang o 5 nhay gia VUOT moc cho: mo lai L1 o GIA NHAY (5), khong o moc cho (15)
+    ("cho_lui_nhay_gia", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0, cho_lui=10.0),
+     [(0, 0, 0), (25, 0, 25), (5, 5, 5)], (1, 2, 0)),
+    # --- HUT MOT CHUT (08/10/2026): gia dung cach moc `_HUT` pip (= 7,6 lan dung sai `EPS_CHAM_PIP`) thi KHONG duoc tinh la cham. Hai nua cua
+    # dung sai: cac ca tren (cham DUNG) bat ban bo dung sai / sai dau; cac ca nay bat ban dung sai QUA LON (nuot ca khoang hut that).
+    ("khop_hut_eps", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0),
+     [(0, 0, 0), (0, -40 + _HUT, -40 + _HUT)], (0, 1, 0)),
+    ("tp_hut_eps", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0),
+     [(0, 0, 0), (25 - _HUT, 0, 25 - _HUT)], (0, 1, 0)),
+    ("cho_lui_hut_eps", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0, cho_lui=10.0),
+     [(0, 0, 0), (25, 0, 5), (25, 15, 20), (40, 15, 40), (40, 30 + _HUT, 30 + _HUT)], (2, 2, 0)),
+)
+
+
+# Ca BIEN THAP PHAN cua `duong_di` (08/10/2026): gia 5 chu so THAT (pip = 1e-4) va moc cham DUNG tren luoi 1e-5, nhung moc tinh bang double
+# (`gia - buoc * pip`, `trung binh + tp * pip`, `gia chot - cho_lui * pip`) lech ~1 ulp ve phia KHONG cham (vd 0,85 - 16 * 0,0001 ra
+# 0,8483999999999999 < 0,8484 = low cua bar). Gia nhi phan o tren khong bao gio co nhieu nay nen KHONG bat duoc dung sai `EPS_CHAM_PIP`: bo no
+# di thi EA / tester van khop lenh o cac o nay con engine bo lo (dung cai da gay lech mot tick o du lieu M1). Tim bang quet toan khoang gia
+# 0,85..0,95; `test_luoi_nhan.py` kiem moi ca la CO nhieu that (tat dung sai di thi ra ket qua khac).
+# (ten, chieu, tham so, cac bar (hi, lo, cl) tinh bang TICK 1e-5 tuyet doi, (so_ro, so_lenh, so_cap) ma Python PHAI ra)
+_CA_BIEN_THAP_PHAN = (
+    # mua: low cua bar 1 = 0,84840 = L1 (0,85000) - 16 pip: PHAI khop tang 2
+    ("khop_mua", +1, dict(buoc=16.0, tp=1000.0, tran_tang=4, lot=0.01),
+     [(85000, 85000, 85000), (85000, 84840, 84840)], (0, 2, 0)),
+    # ban: high cua bar 1 = 0,85200 = L1 (0,85040) + 16 pip
+    ("khop_ban", -1, dict(buoc=16.0, tp=1000.0, tran_tang=4, lot=0.01),
+     [(85040, 85040, 85040), (85200, 85040, 85200)], (0, 2, 0)),
+    # mua: high cua bar 1 = L1 (0,86240) + 10 pip; lot 0,07 lam gia trung binh (0,07 * g) / 0,07 lech 1 ulp: PHAI chot ro roi mo lai
+    ("tp_mua", +1, dict(buoc=1000.0, tp=10.0, tran_tang=4, lot=0.07),
+     [(86240, 86240, 86240), (86340, 86240, 86340)], (1, 2, 0)),
+    ("tp_ban", -1, dict(buoc=1000.0, tp=10.0, tran_tang=4, lot=0.07),
+     [(85030, 85030, 85030), (85030, 84930, 84930)], (1, 2, 0)),
+    # mua: chot o 0,85160 (= 0,85010 + 15 pip), cho lui 8 pip -> moc cho 0,85080; low cua bar 2 cham DUNG moc do: PHAI mo lai L1
+    ("cho_lui_mua", +1, dict(buoc=1000.0, tp=15.0, tran_tang=4, lot=0.01, cho_lui=8.0),
+     [(85010, 85010, 85010), (85160, 85010, 85160), (85120, 85080, 85080)], (1, 2, 0)),
+    ("cho_lui_ban", -1, dict(buoc=1000.0, tp=15.0, tran_tang=4, lot=0.01, cho_lui=8.0),
+     [(85000, 85000, 85000), (85000, 84850, 84850), (84930, 84880, 84930)], (1, 2, 0)),
+)
+
+
+def _qc_thap_phan():
+    """Quy cach cua `_CA_BIEN_THAP_PHAN`: pip 1e-4, 1 lot = 100000 don vi, khong phi nam."""
+    from nhan import luoi as LU
+    return LU.QuyCach(ma="NP10", pip=1e-4, hop_dong=100_000.0, point=1e-5, phi_nam_mua=0.0, phi_nam_ban=0.0)
+
+
+def _chuoi_thap_phan(bars):
+    """(hi, lo, cl, spread, dem) tu cac bar tinh bang tick 1e-5 (so nguyen / 1e5 = so double GAN NHAT voi so thap phan, y het du lieu 5 chu so doc tu file)."""
+    a = np.array(bars, dtype=float) / 1e5
+    n = len(a)
+    return (np.ascontiguousarray(a[:, 0]), np.ascontiguousarray(a[:, 1]), np.ascontiguousarray(a[:, 2]),   # cot cua mang 2 chieu la LAT; `_goi` can lien tuc
+            np.zeros(n), np.zeros(n))
+
 def _qc_bien():
     """Quy cach nhi phan cho ca bien: pip = 2^-10, 1 lot = 1024 don vi, khong phi nam."""
     from nhan import luoi as LU
@@ -377,42 +474,77 @@ def so_sanh_ket_qua(a, b, rtol: float = 1e-9, atol: float = 1e-9):
 
 
 def _tu_kiem(lib):
-    """Chay nhan C va `luoi._mot_ro` tren cung kich ban co dinh, ca hai chieu, co ghi lenh. Tra (ok, mo ta)."""
+    """Chay nhan C va ban Python chuan (`luoi.mot_ro_chuan`) tren cung kich ban co dinh, CA HAI mo hinh bar, ca hai chieu, co ghi lenh.
+    Tra (ok, mo ta)."""
     from nhan import luoi as LU
     hi, lo, cl, sp, dem = _kich_ban_tu_kiem()
     qc = LU.QC_AUDCAD
-    tong_ev = 0
-    for k, kw in enumerate(_CA_TU_KIEM):
-        ts = LU.ThamSo(**kw)
-        for chieu in (1, -1):
-            ev: list = []
-            lai, treo, tk = LU._mot_ro(hi, lo, cl, sp, dem, chieu, ts, qc, ev)
-            r = _goi(lib, hi, lo, cl, sp, dem, chieu, _dong_goi(ts, qc, chieu), True)
-            if r is None:
-                return False, "nhan C bao loi o ca %d chieu %+d" % (k, chieu)
-            ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]))
-            if not ok:
-                return False, "ca %d chieu %+d: %s" % (k, chieu, mo_ta)
-            tong_ev += len(ev)
-    if tong_ev < 200:
-        return False, "kich ban tu kiem qua thua (%d su kien) - khong du tin cay" % tong_ev
+    tong_ev = {}
+    for mh in LU.MO_HINH_BAR:
+        tong_ev[mh] = 0
+        for k, kw in enumerate(_CA_TU_KIEM):
+            ts = LU.ThamSo(**kw, khop_bar=mh)
+            for chieu in (1, -1):
+                ev: list = []
+                lai, treo, tk = LU.mot_ro_chuan(hi, lo, cl, sp, dem, chieu, ts, qc, ev)
+                r = _goi(lib, hi, lo, cl, sp, dem, chieu, _dong_goi(ts, qc, chieu), True)
+                if r is None:
+                    return False, "nhan C bao loi o %s ca %d chieu %+d" % (mh, k, chieu)
+                ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]))
+                if not ok:
+                    return False, "%s ca %d chieu %+d: %s" % (mh, k, chieu, mo_ta)
+                tong_ev[mh] += len(ev)
+        if tong_ev[mh] < 200:
+            return False, "kich ban tu kiem qua thua o %s (%d su kien) - khong du tin cay" % (mh, tong_ev[mh])
     qc_bien = _qc_bien()
-    for ten, kw, bars, mong in _CA_BIEN:
-        ts = LU.ThamSo(**kw)
-        for chieu in (1, -1):
-            hi, lo, cl, sp, dem = _chuoi_bien(bars, chieu)
-            ev = []
-            lai, treo, tk = LU._mot_ro(hi, lo, cl, sp, dem, chieu, ts, qc_bien, ev)
-            thuc = (int(tk["so_ro"]), int(tk["so_lenh"]), int(tk["so_cap"]))
-            if thuc != mong:                    # Python doi nghia: ca nay khong con cham dung moc -> khong con gia tri kiem
-                return False, "ca bien %s chieu %+d: Python ra %s, ky vong %s" % (ten, chieu, thuc, mong)
-            r = _goi(lib, hi, lo, cl, sp, dem, chieu, _dong_goi(ts, qc_bien, chieu), True)
-            if r is None:
-                return False, "nhan C bao loi o ca bien %s chieu %+d" % (ten, chieu)
-            ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]), 0.0, 0.0)   # chinh xac: khong dung sai
-            if not ok:
-                return False, "ca bien %s chieu %+d: %s" % (ten, chieu, mo_ta)
-    return True, "khop %d ca x 2 chieu (%d su kien) + %d ca bien" % (len(_CA_TU_KIEM), tong_ev, len(_CA_BIEN))
+    for mh, bang in (("cuc_tri", _CA_BIEN), ("duong_di", _CA_BIEN_DUONG)):
+        for ten, kw, bars, mong in bang:
+            ts = LU.ThamSo(**kw, khop_bar=mh)
+            for chieu in (1, -1):
+                hi, lo, cl, sp, dem = _chuoi_bien(bars, chieu)
+                ev = []
+                lai, treo, tk = LU.mot_ro_chuan(hi, lo, cl, sp, dem, chieu, ts, qc_bien, ev)
+                thuc = (int(tk["so_ro"]), int(tk["so_lenh"]), int(tk["so_cap"]))
+                if thuc != mong:                # Python doi nghia: ca nay khong con cham dung moc -> khong con gia tri kiem
+                    return False, "ca bien %s/%s chieu %+d: Python ra %s, ky vong %s" % (mh, ten, chieu, thuc, mong)
+                r = _goi(lib, hi, lo, cl, sp, dem, chieu, _dong_goi(ts, qc_bien, chieu), True)
+                if r is None:
+                    return False, "nhan C bao loi o ca bien %s/%s chieu %+d" % (mh, ten, chieu)
+                ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]), 0.0, 0.0)   # chinh xac: khong dung sai
+                if not ok:
+                    return False, "ca bien %s/%s chieu %+d: %s" % (mh, ten, chieu, mo_ta)
+    qc_tp = _qc_thap_phan()
+    for ten, chieu, kw, bars, mong in _CA_BIEN_THAP_PHAN:                # gia thap phan: dung sai cham moc (chi `duong_di` co)
+        ts = LU.ThamSo(**kw, khop_bar="duong_di")
+        hi, lo, cl, sp, dem = _chuoi_thap_phan(bars)
+        ev = []
+        lai, treo, tk = LU.mot_ro_chuan(hi, lo, cl, sp, dem, chieu, ts, qc_tp, ev)
+        thuc = (int(tk["so_ro"]), int(tk["so_lenh"]), int(tk["so_cap"]))
+        if thuc != mong:
+            return False, "ca thap phan %s: Python ra %s, ky vong %s" % (ten, thuc, mong)
+        r = _goi(lib, hi, lo, cl, sp, dem, chieu, _dong_goi(ts, qc_tp, chieu), True)
+        if r is None:
+            return False, "nhan C bao loi o ca thap phan %s" % ten
+        ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]), 0.0, 0.0)
+        if not ok:
+            return False, "ca thap phan %s: %s" % (ten, mo_ta)
+    return True, "khop %d ca x 2 mo hinh x 2 chieu (%s su kien) + %d ca bien + %d ca thap phan" % (
+        len(_CA_TU_KIEM), "/".join(str(tong_ev[m]) for m in LU.MO_HINH_BAR), len(_CA_BIEN) + len(_CA_BIEN_DUONG), len(_CA_BIEN_THAP_PHAN))
+
+
+def _dau_ban_kiem() -> str:
+    """Van tay cua CHINH BO TU KIEM (bang ca + ma cac ham kiem), nam trong ten marker 'da kiem': them / sua mot ca bien thi marker cu het gia tri.
+    Thieu cai nay thi nhan da dich + da kiem bang bo cu se BO QUA ca moi - bo kiem moi khong bao gio chay tren may da co cache (08/10/2026:
+    phat hien khi them ca thap phan cua `EPS_CHAM_PIP` ma khong doi nguon .c)."""
+    h = hashlib.sha256()
+    for ten in ("_CA_TU_KIEM", "_CA_BIEN", "_CA_BIEN_DUONG", "_CA_BIEN_THAP_PHAN", "_HUT"):
+        h.update(repr(globals()[ten]).encode())
+    for f in (_tu_kiem, _kich_ban_tu_kiem, _chuoi_bien, _chuoi_thap_phan, _qc_bien, _qc_thap_phan, so_sanh_ket_qua, _su_kien_khop):
+        try:
+            h.update(inspect.getsource(f).encode())
+        except (OSError, TypeError):                              # khong doc duoc ma nguon (chi co .pyc): van tay chi con bang ca
+            h.update(b"?")
+    return h.hexdigest()[:8]
 
 
 # ------------------------------------------------------------------ NAP (mot lan moi tien trinh)
@@ -465,7 +597,7 @@ def _thu_nap():
             except OSError:
                 pass
             continue
-        if _kiem_va_nhan(lib, cache / ("luoi_nhan_%s.ok_%s" % (khoa, _dau_py())), "cache", thu_vien, loi):
+        if _kiem_va_nhan(lib, cache / ("luoi_nhan_%s.ok_%s_%s" % (khoa, _dau_py(), _dau_ban_kiem())), "cache", thu_vien, loi):
             return
     # 2. dich moi bang tung trinh bien dich co san
     ung_vien = _ung_vien_trinh_bien()
@@ -486,7 +618,7 @@ def _thu_nap():
         except Exception as e:
             loi.append("%s: nap that bai (%s)" % (ten, e))
             continue
-        if _kiem_va_nhan(lib, cache / ("luoi_nhan_%s.ok_%s" % (khoa, _dau_py())), ten, thu_vien, loi):
+        if _kiem_va_nhan(lib, cache / ("luoi_nhan_%s.ok_%s_%s" % (khoa, _dau_py(), _dau_ban_kiem())), ten, thu_vien, loi):
             return
     _tt["ly_do"] = "; ".join(loi) if loi else "khong dung duoc nhan C - chay Python"
 
@@ -535,9 +667,10 @@ def trang_thai() -> dict:
 
 # ------------------------------------------------------------------ GIAO DIEN CHO luoi.chay
 def mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts, qc=None, ghi=None):
-    """Thay the `luoi._mot_ro` (cung chu ky, cung gia tri tra ve) hoac tra None neu khong dung nhan C duoc.
+    """Thay the `luoi.mot_ro_chuan` (cung chu ky, cung gia tri tra ve, mo hinh theo `ts.khop_bar`) hoac tra None neu khong dung nhan C duoc.
 
     None nghia la "hay chay Python": che do py, khong co nhan, tham so ngoai mien da kiem, mang dau vao khong phai ndarray float64.
+    Du lieu co NaN / inf: nhan C tu choi (bao loi) -> cung ve None -> ban Python chuan nem ValueError (`duong_di`).
     """
     lib = lay_nhan()
     if lib is None:
@@ -551,8 +684,14 @@ def mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts, qc=None, ghi=None):
             return None
     if not (len(hi) == len(lo) == len(cl) == len(spread_gia) == len(dem)) or len(cl) < 1 or chieu not in (1, -1):
         return None
+    if getattr(ts, "khop_bar", None) not in MO_HINH_C:           # ten la -> de Python (mot_ro_chuan) bao ValueError ro rang
+        return None
     if not kha_dung(ts, qc):
         return None
+    if ts.khop_bar == "duong_di":
+        from nhan.luoi import mien_duong_di
+        if mien_duong_di(ts, qc):                                 # ngoai mien `duong_di` (tp <= 0, ...): Python nem ValueError
+            return None
     hi, lo, cl, spread_gia, dem = (np.ascontiguousarray(a) for a in (hi, lo, cl, spread_gia, dem))
     r = _goi(lib, hi, lo, cl, spread_gia, dem, int(chieu), _dong_goi(ts, qc, chieu), ghi is not None)
     if r is None:
@@ -565,7 +704,8 @@ def mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts, qc=None, ghi=None):
 
 # ------------------------------------------------------------------ DO TOC DO
 def do_toc_do(so_bar: int = 60_000, lap: int = 3) -> dict:
-    """Do us/bar cua Python va C tren chuoi gia lap (CHUA phai toc do tren du lieu that; de so sanh tuong doi)."""
+    """Do us/bar cua Python va C tren chuoi gia lap, cho TUNG mo hinh bar (CHUA phai toc do tren du lieu that; de so sanh tuong doi).
+    Khoa chinh `python_us_bar` / `c_us_bar` = mo hinh MAC DINH (`duong_di`); `cuc_tri` nam o khoa cung ten."""
     from nhan import luoi as LU
     rng = np.random.default_rng(7)
     n = int(so_bar)
@@ -576,27 +716,32 @@ def do_toc_do(so_bar: int = 60_000, lap: int = 3) -> dict:
     sp = np.full(n, 0.0001)
     dem = np.zeros(n)
     dem[96::96] = 1.0
-    ts = LU.ThamSo(buoc=30.0, tp=25.0, tran_tang=12)
     qc = LU.QC_AUDCAD
-    out = {"so_bar": n}
-    t = []
-    for _ in range(max(1, lap)):
-        t0 = time.perf_counter()
-        LU._mot_ro(hi, lo, cl, sp, dem, 1, ts, qc)
-        t.append(time.perf_counter() - t0)
-    out["python_us_bar"] = round(min(t) / n * 1e6, 3)
     lib = lay_nhan() if che_do() != "py" else None
-    if lib is None:
-        out["c_us_bar"] = None
-        out["ly_do"] = _tt["ly_do"]
-        return out
-    t = []
-    for _ in range(max(1, lap) + 2):
-        t0 = time.perf_counter()
-        mot_ro(hi, lo, cl, sp, dem, 1, ts, qc)
-        t.append(time.perf_counter() - t0)
-    out["c_us_bar"] = round(min(t) / n * 1e6, 4)
-    out["nhanh_hon_lan"] = round(out["python_us_bar"] / out["c_us_bar"], 1)
+    out = {"so_bar": n}
+    for mh in ("duong_di", "cuc_tri"):
+        ts = LU.ThamSo(buoc=30.0, tp=25.0, tran_tang=12, khop_bar=mh)
+        t = []
+        for _ in range(max(1, lap)):
+            t0 = time.perf_counter()
+            LU.mot_ro_chuan(hi, lo, cl, sp, dem, 1, ts, qc)
+            t.append(time.perf_counter() - t0)
+        d = {"python_us_bar": round(min(t) / n * 1e6, 3)}
+        if lib is None:
+            d["c_us_bar"] = None
+            d["ly_do"] = _tt["ly_do"]
+        else:
+            t = []
+            for _ in range(max(1, lap) + 2):
+                t0 = time.perf_counter()
+                mot_ro(hi, lo, cl, sp, dem, 1, ts, qc)
+                t.append(time.perf_counter() - t0)
+            d["c_us_bar"] = round(min(t) / n * 1e6, 4)
+            d["nhanh_hon_lan"] = round(d["python_us_bar"] / d["c_us_bar"], 1)
+        if mh == "duong_di":
+            out.update(d)
+        else:
+            out["cuc_tri"] = d
     return out
 
 

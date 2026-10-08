@@ -510,6 +510,10 @@ def test_quet_tren_chuoi_hoi_quy_ra_cao_nguyen_va_tren_chuoi_troi_xuong_khong(mo
     (dict(luoi={"buoc": [10, 15]}, co_dinh={"buoc": 10}), "ca `co_dinh` lan `luoi`"),
     (dict(luoi={"dung_lo_tong": [0.0, 200.0]}), "CHUA cai dat"),
     (dict(luoi={"buoc": [10, 15]}, co_dinh={"dung_lo_tong": 500.0}), "CHUA cai dat"),
+    (dict(luoi={"buoc": [10, 15]}, co_dinh={"khop_bar": "cuc_tri"}), "khop_bar"),     # mo hinh bar KHONG phai truc tham so
+    (dict(luoi={"khop_bar": ["duong_di", "cuc_tri"]}), "khop_bar"),
+    (dict(luoi={"khop_bar": "cuc_tri"}), "khop_bar"),
+    (dict(luoi={"khop_bar": []}), "khop_bar"),
     (dict(luoi={"buoc": []}), "khong rong"),
     (dict(luoi={"buoc": 10}), "danh sach gia tri don"),
     (dict(luoi={"buoc": [[1, 2], [3]]}), "danh sach gia tri don"),

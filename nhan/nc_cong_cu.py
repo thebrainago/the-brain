@@ -291,7 +291,11 @@ CONG_CU: list[dict] = [
         "config/luoi_quy_cach.json co quy cach do that; chi so/crypto/exotic bi tu choi. Ma "
         "ngoai AUDCAD CHUA doi chieu voi MT5 tester: doc nhu xep hang. chot_tien la TIEN "
         "(bao gia / 0,01 lot), khong phai pip. Dung khung M15/M5: luoi song bang duong di "
-        "trong bar.",
+        "trong bar. Engine khop lenh theo DUONG DI trong bar (O->L->H->C nen xanh, O->H->L->C nen do; "
+        "so voi EA chay cung duong gia lech ~2%); `khop_bar` khac `duong_di` bi tu choi o day (mo hinh "
+        "cuc_tri cu lac quan 15-40%, chi con de do lech qua hieu_chuan_luoi). Cau hinh cho-gia-lui "
+        "(cho_lui, tia_lenh + cho_lui) con lech toi ~30% tuy thu tu cao/thap trong bar M15 chua biet: "
+        "xep hang xong phai qua tester.",
         {"ma": _MA, "khung": _KHUNG, "tham_so": {"type": "object"},
          "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan"]},
          "von": {"type": "number", "description": "von bang dong bao gia (mac dinh 10000)"},
@@ -494,7 +498,9 @@ CONG_CU: list[dict] = [
          "tu": {"type": "string", "description": "ngay bat dau cua so (YYYY-MM-DD hoac YYYY.MM.DD), phai nam trong doan kham_pha dong bang"},
          "den": {"type": "string", "description": "ngay ket thuc cua so (bao gom), >= tu + 13 ngay, trong doan kham_pha"},
          "tham_so": {"type": "object", "description": "luoi.ThamSo (buoc, tp, tran_tang, che_do, lot, kieu_lot, he_so_lot, he_so_buoc, tia_lenh, "
-                                                      "bien_cap, cap_moi_bar, cho_lui, chot_tien, don_bay, buoc_tran, muc_stopout)"},
+                                                      "bien_cap, cap_moi_bar, cho_lui, chot_tien, don_bay, buoc_tran, muc_stopout; "
+                                                      "khop_bar = duong_di (mac dinh) | cuc_tri (ban cu lac quan, CHI de do lech - "
+                                                      "day la noi duy nhat duoc chon no)"},
          "model": {"type": "integer", "description": "mo hinh tick cua tester: 0 (mac dinh) | 1 | 4"},
          "von": {"type": "number", "description": "von bang tien tai khoan (so nguyen, mac dinh 10000)"},
          "ea": {"type": "string", "description": "mac dinh ea_LuoiDayDu.mq5 (chay duoc moi EA co cung bo input)"},

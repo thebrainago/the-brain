@@ -347,6 +347,8 @@ def test_du_lieu_mo_qua_ngan_khong_tieu_luot(mt):
 @pytest.mark.parametrize("ts,von,ky_tu", [
     ({"khong_co_tham_so": 1}, VON, "khong biet"),
     ({"dung_lo_tong": 5.0}, VON, "CHUA cai dat"),
+    (dict(TS, khop_bar="cuc_tri"), VON, "khop_bar"),         # mo hinh bar lac quan: khong niem phong bang no
+    (dict(TS, khop_bar=None), VON, "khop_bar"),
     (dict(TS, buoc=0), VON, "buoc phai > 0"),
     (dict(TS, tp=-1.0), VON, "tp phai > 0"),
     (dict(TS, don_bay=0), VON, "don_bay phai > 0"),

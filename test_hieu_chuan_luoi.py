@@ -10,6 +10,7 @@ MT5 THAT khong la viec cua may nha (`b nc cc hieu_chuan_luoi`): bao cao that dau
 """
 from __future__ import annotations
 
+import dataclasses
 import json
 import re
 from pathlib import Path
@@ -692,10 +693,14 @@ def test_dd_tester_uu_tien_von_tuong_doi_roi_von_toi_da_roi_cong():
 
 
 # ---- engine: cong tung lenh phai khop tong, cho ca bon kieu luoi (bao ve khi luoi.py doi cach tinh phi)
+@pytest.mark.parametrize("mo_hinh", LU.MO_HINH_BAR)
 @pytest.mark.parametrize("ten", sorted(CAU_HINH))
-def test_engine_tach_theo_lenh_khop_tong_cho_moi_kieu_luoi(ten):
+def test_engine_tach_theo_lenh_khop_tong_cho_moi_kieu_luoi(ten, mo_hinh):
+    """Hai mo hinh bar co CACH TINH SPREAD KHAC NHAU o lenh tia (`cuc_tri` tru hai lan, `duong_di` mot lan): tach theo lenh phai khop
+    tong CA HAI - truoc 08/10/2026 chi co mot, nen doi mo hinh mac dinh la tn5 (co tia) mat khop."""
     cs = {"tu": "2024.01.01", "den": "2024.02.06", "ngay": 37}
-    e = HC.nua_engine("AUDCAD", "M15", cs, CAU_HINH[ten], VON, F_THAT)
+    ts = dataclasses.replace(CAU_HINH[ten], khop_bar=mo_hinh)
+    e = HC.nua_engine("AUDCAD", "M15", cs, ts, VON, F_THAT)
     assert "loi" not in e, e
     assert e["kiem"]["khop"] and e["kiem"]["lai_tong_khop"], (ten, e["kiem"])
     k = e["thong_ke"]
@@ -705,6 +710,23 @@ def test_engine_tach_theo_lenh_khop_tong_cho_moi_kieu_luoi(ten):
     assert e["lai_tong"] == pytest.approx(k["lai_chua_swap"] + k["swap"])           # lai gom ca lai/lo treo cuoi cua so
     assert e["lai_tong"] - e["lai_chot_nam_pct"] / 100.0 * VON * so_nam == pytest.approx(e["lai_treo"], abs=1e-6)
     assert e["qc"]["von_quy_doi"] == F_THAT and e["so_bar"] > 3000
+
+
+@pytest.mark.parametrize("mo_hinh", LU.MO_HINH_BAR)
+def test_tach_spread_tia_phai_dung_mo_hinh_va_bi_bat_khi_sai(mo_hinh):
+    """Cach tach spread o lenh tia theo mo hinh: dung mo hinh -> khop; DOI mo hinh (cuc_tri <-> duong_di) tren cung mot lan chay co tia
+    -> `kiem['khop']` phai False. Neu khong, phep so cong tung lenh vo nghia voi lenh tia (khong bat duoc tach sai)."""
+    ts = dataclasses.replace(CAU_HINH["tn5"], khop_bar=mo_hinh)
+    dl = LU.chuan_bi(bars_that(), LU.QC_AUDCAD)
+    kq = LU.chay_mang(dl, ts, 10000.0, ghi_lenh=True)
+    assert int((kq.lenh["ly_do"] == "tia").sum()) >= 10, "can nhieu lenh tia de phep thu co nghia"
+    _b, dung = HC.bang_lenh_engine(kq, dl, 1.0, mo_hinh)
+    assert dung["khop"], dung
+    khac = [m for m in LU.MO_HINH_BAR if m != mo_hinh][0]
+    _b, sai = HC.bang_lenh_engine(kq, dl, 1.0, khac)
+    assert not sai["khop"], sai
+    with pytest.raises(ValueError, match="mo_hinh"):
+        HC.bang_lenh_engine(kq, dl, 1.0, "tick")
 
 
 def test_engine_cua_so_ngoai_du_lieu_la_loi_ha_tang_khong_phai_lai_bang_0():

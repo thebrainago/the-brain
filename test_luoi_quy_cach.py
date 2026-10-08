@@ -182,18 +182,21 @@ GOLDEN = {'chay_giua_chung': {'bar_chay': 695,
 
 
 def _sinh_golden() -> dict:  # pragma: no cover - chi dung mot lan, voi ban luoi.py cu
-    return {ten: _tom_tat(LU.chay(_chuoi(**ck), LU.ThamSo(**kw), von), von)
+    return {ten: _tom_tat(LU.chay(_chuoi(**ck), LU.ThamSo(**kw, khop_bar="cuc_tri"), von), von)
             for ten, (kw, von, ck) in CASES.items()}
 
 
 # ------------------------------------------------------------------ 1. HOI QUY AUDCAD
 @pytest.mark.parametrize("ten", sorted(CASES))
 def test_audcad_mac_dinh_giong_het_ban_cu(ten):
+    """GOLDEN sinh tu ban TRUOC khi co QuyCach - luc do chi co mo hinh bar `cuc_tri`. Tu 08/10/2026 mac dinh la `duong_di`, nen ban cu
+    phai duoc goi RO BANG TEN (`khop_bar="cuc_tri"`): ket qua cu van tai lap duoc tung bit, khong bi mo hinh moi ghi de."""
     kw, von, ck = CASES[ten]
     df = _chuoi(**ck)
     cu = GOLDEN[ten]
+    ts = LU.ThamSo(**kw, khop_bar="cuc_tri")
     for qc in (None, LU.QC_AUDCAD):
-        kq = LU.chay(df, LU.ThamSo(**kw), von) if qc is None else LU.chay(df, LU.ThamSo(**kw), von, qc)
+        kq = LU.chay(df, ts, von) if qc is None else LU.chay(df, ts, von, qc)
         moi = _tom_tat(kq, von)
         for k, v in cu.items():
             if isinstance(v, float):
@@ -216,10 +219,13 @@ def _rut(kq, von):
     return {k: t[k] for k in ("loi_suat_nam_pct", "maxdd_pct", "so_ro", "so_lenh", "tang_max", "chay", "bar_chay")}
 
 
+@pytest.mark.parametrize("mo_hinh", LU.MO_HINH_BAR)
 @pytest.mark.parametrize("ten", ["mac_dinh", "tia_lenh", "gian_dan", "chot_tien_ban", "chay_giua_chung"])
-def test_bat_bien_theo_quy_mo_gia_va_pip(ten):
-    """Gia x k, pip x k, point x k, von x k -> ty le lai / DD y het. Con 1e-4 / 1e-5 / 2e-4 nao sot trong engine se lam hong."""
+def test_bat_bien_theo_quy_mo_gia_va_pip(ten, mo_hinh):
+    """Gia x k, pip x k, point x k, von x k -> ty le lai / DD y het. Con 1e-4 / 1e-5 / 2e-4 nao sot trong engine se lam hong
+    (ca hai mo hinh bar)."""
     kw, von, ck = CASES[ten]
+    kw = dict(kw, khop_bar=mo_hinh)
     k = 100.0
     a = _rut(LU.chay(_chuoi(**ck), LU.ThamSo(**kw), von), von)
     qc = LU.QuyCach(ma="JPY_GIA", pip=LU.QC_AUDCAD.pip * k, point=LU.QC_AUDCAD.point * k,
@@ -236,10 +242,12 @@ def test_bat_bien_theo_quy_mo_gia_va_pip(ten):
             assert b[key] == a[key], key
 
 
+@pytest.mark.parametrize("mo_hinh", LU.MO_HINH_BAR)
 @pytest.mark.parametrize("ten", ["mac_dinh", "chay_giua_chung"])
-def test_bat_bien_theo_lot_va_hop_dong(ten):
+def test_bat_bien_theo_lot_va_hop_dong(ten, mo_hinh):
     """Hop dong / m, lot x m -> cung vi the that: ket qua y het - ke ca BAR stop-out (margin = lot x hop dong x gia)."""
     kw, von, ck = CASES[ten]
+    kw = dict(kw, khop_bar=mo_hinh)
     m = 100.0
     a = LU.chay(_chuoi(**ck), LU.ThamSo(**kw), von)
     qc = LU.QuyCach(ma="X", hop_dong=LU.QC_AUDCAD.hop_dong / m)
@@ -250,9 +258,11 @@ def test_bat_bien_theo_lot_va_hop_dong(ten):
     assert (b.so_lenh, b.so_ro, b.tang_max, b.chay, b.bar_chay) == (a.so_lenh, a.so_ro, a.tang_max, a.chay, a.bar_chay)
 
 
-def test_von_tuyen_tinh_voi_lot_khi_khong_chay():
+@pytest.mark.parametrize("mo_hinh", LU.MO_HINH_BAR)
+def test_von_tuyen_tinh_voi_lot_khi_khong_chay(mo_hinh):
     """Lot x2 va von x2 -> ty le lai / DD y het (luat 'lai lo luoi tuyen tinh theo lot' ma danh_gia_luoi dua vao)."""
     kw, von, _ = CASES["mac_dinh"]
+    kw = dict(kw, khop_bar=mo_hinh)
     a = _rut(LU.chay(_chuoi(), LU.ThamSo(**kw), von), von)
     b = _rut(LU.chay(_chuoi(), LU.ThamSo(**dict(kw, lot=0.02)), 2 * von), 2 * von)
     for key in a:
@@ -450,6 +460,33 @@ def test_thu_luoi_ma_chua_ho_tro_hoac_chua_doi_chieu_van_tu_choi(moi_truong):
     assert r["trang_thai"] == "CHUA_DO_DUOC" and "khong biet" in r["ly_do"]
 
 
+@pytest.mark.parametrize("kb", ["cuc_tri", "Duong_di", "", None, 1, ["duong_di"], {"duong_di": 1}])
+def test_thu_luoi_tu_choi_khop_bar_ngoai_duong_di_truoc_khi_nap_du_lieu(moi_truong, monkeypatch, kb):
+    """08/10/2026: `cuc_tri` lac quan +15..+40% so voi EA (x2,5-x7 so voi tester o cac o tia lenh M15) - AI KHONG duoc xep hang bang no.
+    Chan o cua TRUOC (truoc khi nap du lieu, khong ghi so tay); gia tri rac (sai kieu / sai chu hoa) cung bi chan, khong doan y."""
+    monkeypatch.setattr(NDL, "nap", lambda *a, **k: (_ for _ in ()).throw(AssertionError("phai chan truoc khi nap du lieu")))
+    r = TN.danh_gia_luoi("USDCHF", "M15", dict(TS, khop_bar=kb), "kham_pha", von=10000.0)
+    assert r["trang_thai"] == "CHUA_DO_DUOC" and "khop_bar" in r["ly_do"] and "duong_di" in r["ly_do"], r
+    assert ST.nhieu("SELECT id FROM thi_nghiem") == [], "bi tu choi khong duoc ghi so tay (khong phai phep thu)"
+
+
+def test_thu_luoi_khop_bar_duong_di_ghi_ro_ra_y_het_khong_ghi(moi_truong):
+    """`khop_bar="duong_di"` viet ro = mac dinh: cung so, cung khai bao (khong sinh them mot khai bao 'moi')."""
+    a = TN.danh_gia_luoi("USDCHF", "M15", TS, "kham_pha", von=10000.0)
+    b = TN.danh_gia_luoi("USDCHF", "M15", dict(TS, khop_bar="duong_di"), "kham_pha", von=10000.0)
+    assert a["trang_thai"] in ("DAT", "AM") and b["trang_thai"] == a["trang_thai"]
+    assert a["tien"] == b["tien"] and a["lenh"] == b["lenh"]
+    assert TN._khai_bao_luoi(TS) == TN._khai_bao_luoi(dict(TS, khop_bar="duong_di"))
+    assert TN._khai_bao_luoi(TS)["khop_bar"] == "duong_di"
+
+
+def test_mo_hinh_bar_nghien_cuu_la_tap_con_cua_mo_hinh_bar_va_chua_duong_di():
+    """Moi mo hinh duoc phep o duong nghien cuu phai la mo hinh engine chay duoc, va mac dinh cua ThamSo phai nam trong do."""
+    assert set(LU.MO_HINH_BAR_NGHIEN_CUU) <= set(LU.MO_HINH_BAR)
+    assert LU.ThamSo.khop_bar in LU.MO_HINH_BAR_NGHIEN_CUU
+    assert "cuc_tri" not in LU.MO_HINH_BAR_NGHIEN_CUU and "cuc_tri" in LU.MO_HINH_BAR
+
+
 def test_thu_luoi_audcad_khong_doi_theo_mo_hinh_chi_phi(moi_truong):
     moi_truong["cp"] = _cp(pm=5.0, pb=5.0, do_tin="KHAI")           # neu AUDCAD lay phi tu day thi lo sap san
     r = TN.danh_gia_luoi("AUDCAD", "M15", TS, "kham_pha", von=10000.0)
@@ -480,11 +517,18 @@ def test_moi_truong_thamso_hoac_duoc_doc_hoac_bi_tu_choi():
     va nguoc lai: da cai dat roi thi phai go khoi danh sach (khong de chan nham)."""
     import dataclasses
     import inspect
-    nguon = inspect.getsource(LU._mot_ro) + inspect.getsource(LU.chay) + inspect.getsource(LU.chay_mang)
+    chung = inspect.getsource(LU.chay) + inspect.getsource(LU.chay_mang)
+    nguon = {"cuc_tri": inspect.getsource(LU._mot_ro) + chung,
+             "duong_di": inspect.getsource(LU._mot_ro_duong) + inspect.getsource(LU.mien_duong_di) + chung}
+    chon = inspect.getsource(LU.kiem_khop_bar)               # cho chon mo hinh: doc `ts.khop_bar`, hai mo hinh khong can doc
     for f in dataclasses.fields(LU.ThamSo):
-        doc = ("ts." + f.name) in nguon
-        assert doc != (f.name in LU.CHUA_CAI_DAT), (
-            "%s: engine %s nhung CHUA_CAI_DAT %s" % (f.name, "doc" if doc else "KHONG doc",
+        if ("ts." + f.name) in chon:
+            assert f.name == "khop_bar" and f.name not in LU.CHUA_CAI_DAT, f.name
+            continue
+        doc = {m: ("ts." + f.name) in s for m, s in nguon.items()}
+        assert doc["cuc_tri"] == doc["duong_di"], "%s: chi MOT mo hinh bar doc %s - mo hinh kia bo qua im lang" % (f.name, doc)
+        assert doc["cuc_tri"] != (f.name in LU.CHUA_CAI_DAT), (
+            "%s: engine %s nhung CHUA_CAI_DAT %s" % (f.name, "doc" if doc["cuc_tri"] else "KHONG doc",
                                                       "co ten" if f.name in LU.CHUA_CAI_DAT else "khong co ten"))
 
 

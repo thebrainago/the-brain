@@ -110,6 +110,7 @@ LOP_THAM_SO_LUOI = {
     "dung_lo_tong": TIEN,         # engine CHUA cai dat (`luoi.CHUA_CAI_DAT`)
     "he_so_buoc": HE_SO,
     "buoc_tran": KC_BUOC,
+    "khop_bar": CONG_TAC,         # cach engine mo phong bar (luoi.MO_HINH_BAR), khong phai tham so giao dich: dich khung giu nguyen
 }
 
 #: Mo ta mot dong cho moi lop (don vi chuan + cach dich mac dinh): nguon cho bang trong tai lieu va bao cao.

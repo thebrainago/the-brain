@@ -54,6 +54,7 @@ KHONG_CO_TRONG_EA = {
     "muc_stopout": "stop-out la cua nha mo gioi (engine mo phong chet tai khoan)",
     "don_bay": "don bay la cua tai khoan; EA khong dat",
     "dung_lo_tong": "engine CHUA cai dat (luoi.CHUA_CAI_DAT) nen EA cung khong",
+    "khop_bar": "chi la CACH MO PHONG bar cua engine (luoi.MO_HINH_BAR); EA chay theo tick that nen khong co input",
 }
 _CHE_DO = {"mua": 0, "ban": 1, "hai_chieu": 2}
 _KIEU_LOT = {"phang": 0, "nhan": 1, "cong": 2}
@@ -235,7 +236,8 @@ class KetQuaDoiChieu:
     ea: pd.DataFrame
     lai_engine: float          # luoi.chay(...).lai_rong
     lai_ea: float              # so du - von - spread cua lenh dang mo (so du chua ghi spread cua lenh chua dong)
-    phi_tia_kep: float         # spread engine tru THEM khi dong cap tia - EA khong co; lai_engine + phi_tia_kep ~ lai_ea
+    phi_tia_kep: float         # spread engine tru THEM khi dong cap tia - EA khong co; lai_engine + phi_tia_kep ~ lai_ea.
+    #                            Chi co o `khop_bar="cuc_tri"` (ban cu tru spread HAI lan); `duong_di` tinh MOT lan nhu EA -> 0
     lech_explicada: float      # phan `lech_lai` GIAI THICH duoc bang chenh GIA tung lenh (engine dong / mo o muc luoi le giua hai tick)
     so_khop: int
     trang_thai: str
@@ -304,7 +306,8 @@ def doi_chieu(exe, ts, df: pd.DataFrame, paso: float = 1e-6, thu_tu: str = "theo
     eng = eng.sort_values(["i_mo", "chieu", "tang"], kind="stable").reset_index(drop=True)
     sp = bt["spread"].to_numpy(float) * qc.point
     tia = eng[eng.ly_do == "tia"]
-    phi_tia_kep = float((tia.lot.to_numpy() * qc.hop_dong * sp[tia.i_dong.to_numpy()]).sum()) if len(tia) else 0.0
+    phi_tia_kep = (float((tia.lot.to_numpy() * qc.hop_dong * sp[tia.i_dong.to_numpy()]).sum())
+                   if len(tia) and ts.khop_bar == "cuc_tri" else 0.0)
     k = r["kq"]
     so_khop, trang_thai, chi_tiet = so_lenh(eng, ea, paso, tol_tick, tol_gia)
     return KetQuaDoiChieu(eng=eng, ea=ea, lai_engine=float(kq.lai_rong), lai_ea=k["balance"] - von - k["spread_con_mo"],
@@ -345,6 +348,11 @@ def do_lech_bar(exe, ts, df: pd.DataFrame, thu_tu=("theo_nen", "thap_truoc", "ca
     out = []
     for tt in ([thu_tu] if isinstance(thu_tu, str) else thu_tu):
         tk = tick_tu_bar(df, tt, point=qc.point, paso=paso)
+        # Engine vao lenh dau o CLOSE cua bar 0 (`vao = [(cl[0], ...)]`), EA vao o tick dau tien. Neu EA chay tu open bar 0 thi hai ben bat dau
+        # o hai gia khac nhau: voi cau hinh it lenh / phu thuoc duong (cho_lui) hai ro lech pha mai mai - do 08/10/2026: lech -13% .. -37% chi
+        # vi lech pha, bien mat khi cat bar 0 (lech < 1%). Cat tick bar 0 -> EA bat dau o open bar 1 = close bar 0 = diem vao dau cua engine.
+        giu = np.asarray(tk["bar_idx"]) >= 1
+        tk = {k: np.asarray(v)[giu] for k, v in tk.items()}
         r = chay(exe, tk, von, ps, digits=digits, han_giay=han_giay)
         if not r["ok"]:
             raise RuntimeError("EA khong chay duoc: %s %s" % (r["loi"], r["log"][-3:]))

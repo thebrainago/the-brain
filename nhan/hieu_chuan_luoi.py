@@ -234,12 +234,16 @@ def bang_lenh_tester(g: pd.DataFrame) -> pd.DataFrame:
         "ly": np.where(het_gio, "het_gio", g["ly_do_ra"].astype(str))})
 
 
-def bang_lenh_engine(kq, dl, f: float) -> tuple[pd.DataFrame, dict]:
+def bang_lenh_engine(kq, dl, f: float, mo_hinh: str) -> tuple[pd.DataFrame, dict]:
     """`KetQuaLuoi.lenh` (ghi_lenh=True) -> (bang lenh chung theo TIEN TAI KHOAN, kiem).
 
     lai_q = gia - spread: gia = chieu*(gia_ra - gia_mo)*lot*hop (lenh con mo: gia_ra = dong bar cuoi); spread = spread_gia[bar mo]*lot*hop
-    + spread_gia[bar dong]*lot*hop cho lenh `tia` (dung hai dong `phi_sp +=` cua `_mot_ro`). `kiem` so cong tung lenh voi tong cua
-    engine; khong khop -> `kiem['khop']=False` (engine doi ma ma cach tach nay chua doi theo)."""
+    (+ spread_gia[bar dong]*lot*hop cho lenh `tia` CHI o mo hinh `cuc_tri`: ban cu tru spread HAI lan o cap tia - hai dong `phi_sp +=`
+    cua `_mot_ro` - con EA va tester chi tra MOT lan luc mo; `duong_di` tinh MOT lan nhu EA nen khong co khoan thu hai).
+    `mo_hinh` = `ThamSo.khop_bar` cua lan chay (BAT BUOC, khong doan: tach sai mo hinh thi `kiem['khop']` sai o moi cau hinh co tia).
+    `kiem` so cong tung lenh voi tong cua engine; khong khop -> `kiem['khop']=False` (engine doi ma ma cach tach nay chua doi theo)."""
+    if mo_hinh not in LU.MO_HINH_BAR:
+        raise ValueError("bang_lenh_engine: mo_hinh phai la mot trong %s, nhan %r" % (LU.MO_HINH_BAR, mo_hinh))
     cot = ["mo", "dong", "chieu", "lot", "gia_mo", "gia_dong", "lai", "swap", "ly"]
     L = kq.lenh
     if L is None or len(L) == 0:
@@ -256,7 +260,7 @@ def bang_lenh_engine(kq, dl, f: float) -> tuple[pd.DataFrame, dict]:
     gm, gd = L["gia_mo"].to_numpy(float), L["gia_dong"].to_numpy(float)
     gia_ra = np.where(co, gd, float(dl.cl[-1]))
     gross = chieu * (gia_ra - gm) * lot * hop
-    tia = (L["ly_do"].to_numpy() == "tia") & co
+    tia = (L["ly_do"].to_numpy() == "tia") & co & (mo_hinh == "cuc_tri")
     sp_mo = dl.sp[p_mo] * lot * hop
     sp_dong = np.where(tia, dl.sp[p_dong] * lot * hop, 0.0)
     lai_q = gross - sp_mo - sp_dong
@@ -299,7 +303,7 @@ def nua_engine(ma: str, khung: str, cs: dict, ts: LU.ThamSo, von: float, f: floa
         von_q = float(von) * float(f)
         kq = LU.chay_mang(dl, ts, von_q, ghi_lenh=True)
         chi = LU.chi_so(kq, von_q)
-        b, kiem = bang_lenh_engine(kq, dl, f)
+        b, kiem = bang_lenh_engine(kq, dl, f, ts.khop_bar)
     except Exception as e:                                   # noqa: BLE001 - mot chuoi ma hong khong duoc lam sap ca hang doi
         return {"loi": "%s: %s" % (type(e).__name__, str(e)[:200])}
     so_nam = cs["ngay"] / 365.25
@@ -385,8 +389,11 @@ def _luu_bao_cao(ra: dict, khoa: str) -> str | None:
         return None
 
 
-def _khoa_bao_cao(ma: str, khung: str, cs: dict, vt_t: str) -> str:
-    return "%s_%s_%s_%s_%s_e%s" % (ma, khung, cs["tu"], cs["den"], vt_t[:8], LU.PHIEN_BAN_ENGINE)
+def _khoa_bao_cao(ma: str, khung: str, cs: dict, vt_t: str, khop_bar: str = LU.ThamSo.khop_bar) -> str:
+    """Ten bao cao. Mo hinh bar KHAC mac dinh (`cuc_tri`, chi de do lai do lech cu) co duoi rieng: hai mo hinh chay cung o + cung
+    nua tester khong duoc de len bao cao cua nhau."""
+    khoa = "%s_%s_%s_%s_%s_e%s" % (ma, khung, cs["tu"], cs["den"], vt_t[:8], LU.PHIEN_BAN_ENGINE)
+    return khoa if khop_bar == LU.ThamSo.khop_bar else "%s_%s" % (khoa, khop_bar)
 
 
 def tester_trong_cache(vt_t: str) -> dict | None:
@@ -615,7 +622,7 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
               "ly_do": "chua co nua tester trong so tay cho dung cua so + tham so + model + von nay: chi in so engine "
                        "(khong ghi so tay). Chay lai khong co chi_engine de goi tester (hoac cho don tester xong)",
               "nhan": ["he so quy doi dung: %.4f (%s)" % (f0, "do nguoi goi dat" if von_quy_doi else "mac dinh cua quy cach")]}
-        bc0 = _luu_bao_cao(r0, _khoa_bao_cao(ma, khung, cs, vt_t))
+        bc0 = _luu_bao_cao(r0, _khoa_bao_cao(ma, khung, cs, vt_t, ts.khop_bar))
         if bc0:
             r0["bao_cao"] = bc0
         return r0
@@ -655,7 +662,7 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
           "tester_tu_cache": bool(th["tu_cache"])}
     ra.update({k: so[k] for k in ("khop", "lech", "dung_sai", "theo_ky", "ky_lech_dau_tien", "nhan")})
     ra["nhan"] = list(t.get("canh_bao", [])) + ra["nhan"]
-    vt_so = ST.van_tay("hieu_chuan_luoi", vt_t, LU.PHIEN_BAN_ENGINE, round(f_dung, 4), e["qc"]["khoa"], DUNG_SAI, KY_LECH,
+    vt_so = ST.van_tay("hieu_chuan_luoi", vt_t, LU.PHIEN_BAN_ENGINE, ts.khop_bar, round(f_dung, 4), e["qc"]["khoa"], DUNG_SAI, KY_LECH,
                        PHIEN_BAN)
     khoa_so = [round(e["lai_nam_pct"], 2), round(t["lai_nam_pct"], 2), round(e["dd_pct"], 2), round(t["dd_pct_so_sanh"], 2),
                int(e["thong_ke"]["so_lenh_mo"]), int(t["thong_ke"]["so_lenh_mo"])]
@@ -663,7 +670,7 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
     cu_so = ST.da_thu(vt_so)
     if cu_so and isinstance(cu_so.get("ket_qua"), dict) and cu_so["ket_qua"].get("so_khoa") == khoa_so:
         ra["tn_id"], ra["tu_so_tay"] = cu_so["id"], "da ghi dong so tay %s (cung so)" % cu_so["id"]
-        bc1 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t))
+        bc1 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t, ts.khop_bar))
         if bc1:
             ra["bao_cao"] = bc1
         return ra
@@ -675,7 +682,7 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
         t["lai_nam_pct"], t["dd_pct_so_sanh"], t["thong_ke"]["so_lenh_mo"], so["ket_luan"])
     ra["tn_id"] = ST.ghi_thi_nghiem(LOAI_SO_SANH, dau_vao, ra, tt, vt_so, ma, khung, DOAN, gt_id=None, so_phep_thu=0,
                                     giay=time.time() - t_dau, vong_id=vong_id, tom_tat=tom)
-    bc2 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t))
+    bc2 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t, ts.khop_bar))
     if bc2:
         ra["bao_cao"] = bc2
     return ra

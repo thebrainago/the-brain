@@ -19,9 +19,10 @@ Ban do co luat DAY DU va dung, nhung hai cho khong dung duoc:
 
 ## LUAT MO PHONG - khai bao TRUOC khi chay, khong doi giua chung
 
-  1. Khung M15/M5/M1, gia OHLC. Trong MOT bar xu ly **BAT LOI TRUOC**: them
-     tang truoc, xet TP sau. Neu mot bar cham ca hai thi coi nhu bi them tang
-     truoc roi moi chot - gia dinh THAN TRONG.
+  1. Khung M15/M5/M1, gia OHLC. **Hai mo hinh khop lenh trong mot bar** (`ThamSo.khop_bar`, xem muc "HAI MO HINH BAR" cuoi
+     docstring): `duong_di` (MAC DINH tu 08/10/2026) di tung nen theo duong O->L->H->C (nen xanh) / O->H->L->C (nen do) va khop MOI
+     lenh o GIA NGUONG cua no; `cuc_tri` (ban cu) xu ly BAT LOI TRUOC roi chot o CUC TRI cua nen - gia dinh "than trong" nhung sai
+     huong voi tia lenh (xem muc do lech).
   2. `che_do`: `mua` (chi ro mua), `ban`, hoac `hai_chieu` (hai ro doc lap).
   3. **Lot PHANG** moi tang. KHONG nhan lot. Martingale da bi kho du an bac bo:
      Lottery Mode x1,3 bien +54.354 thanh -1.550 voi DD 94,4%.
@@ -61,6 +62,31 @@ va dung o USDCHF / AUDCHF / USDCAD / EURUSD... (`tai_lieu/NGUON_NGUOI_THANG.md`)
 CHUA hieu chuan voi MT5 tester o bat ky ma nao (`LuoiDoiXung.mq5` da mat cung VPS 02/10): xep hang va hinh dang dung duoc,
 con lai tuyet doi phai chay tester cung bo tham so truoc khi tin. O muc "lot cham tran DD 80%" ket qua bat bien theo co
 hop dong va lot; cai that su co the sai la dinh nghia pip, doi spread -> gia (point), va swap - ca ba nam o day.
+
+## HAI MO HINH BAR (08/10/2026) - vi sao co `khop_bar`
+
+Chu du an hoi tai sao 24 gio / hang nghin phep thu chi ra mot he lai 13%/nam DD > 30%. Mot nguyen nhan CO BANG CHUNG o day:
+125 o hieu chuan (EURCAD / AUDCAD / NZDCAD, `reports/hieu_chuan/`) cho engine LAC QUAN x2,5-x7 so voi MT5 tester, tap trung o
+cac o `tia_lenh=True` M15 - dung loai o ma quet tham so chon ra lam ung vien dau bang.
+
+  `cuc_tri` (ban cu, `_mot_ro`): moi bar xu ly theo thu tu CO DINH "them tang theo low -> tia cap o HIGH -> TP so voi high". Hai loi:
+    (a) mot tia cap duoc chot o CUC TRI cua bar chu khong o gia nguong cua no (cap co lai >= bien_cap pip se bi ghi lai o muc
+        high - tang them hang chuc pip), va toi 999 cap/bar;
+    (b) thu tu trong bar luon la thuan loi: tang hap thu duoc mot cu nhun nguoc roi chot o dinh, bar nao cung vay.
+    Hai thu cong lai tao ra loi nhuan tu khong khi do phan giai bar thap (bar M15 gom ~900 tick).
+  `duong_di` (MAC DINH): moi bar di tren duong O -> L -> H -> C neu nen xanh (C >= O), O -> H -> L -> C neu nen do - duong NGAN NHAT
+    qua ca hai cuc tri (chenh lech quang duong giua hai thu tu = 2(O-C)); thu tu khong biet mau nen LUON them cac cu nhun ngoai le
+    nen LAC QUAN chu khong "than trong". Tren moi doan don dieu: doan NGUOC chieu ro them tang (khop o moc, hoac o gia dau doan
+    neu nhay gia vuot moc); doan THUAN chieu chot tia / TP o GIA NGUONG, nhieu lan lien tiep trong cung doan (ro chot xong mo lai
+    ngay o gia chot). Chi phi spread tinh MOT lan luc mo lenh (khong tinh them o tia, giong EA va tester); lo treo = lo noi lon
+    nhat TREN CA DUONG chu khong chi o low.
+  Do tren random walk khong chi phi, khong drift (ky vong ket qua THAT = 0 voi bat ky luat nao): sai lech so voi chay theo tung tick
+  (cung duong, chenh lech ghep doi) cua `cuc_tri` la +112 / +233 / +504 o M1 / M5 / M15 (mot cau hinh tia lenh), tang theo khung;
+  cua `duong_di` la -16 / -14 / -27 (SE ~ 12-16) - gan 0 va KHONG phu thuoc khung. Cau hinh khong tia lenh gan nhu khong lech o
+  ca hai. Tai lap bang: `python -m nhan.kiem_do_phan_giai` (test: `test_luoi_duong_di.py`).
+  CON THIEU (khong duoc bao la da hieu chuan): `duong_di` chi chung minh het lech do PHAN GIAI BAR tren du lieu tong hop; so voi tester
+  tren du lieu that con swap (tester bao 0,00% o ca 125 o, engine tinh ~3-10%/nam), vi mo cau truc tick that, va open bar that
+  (engine suy open = close bar truoc kep vao [low, high]). Chay lai 125 o bang `chi_engine=true` de do phan con lai.
 """
 from __future__ import annotations
 
@@ -144,6 +170,29 @@ class ThamSo:
     #: hon trong xu huong), <1 = day dan.
     he_so_buoc: float = 1.0
     buoc_tran: float = 400.0
+    #: MO HINH KHOP LENH TRONG MOT BAR (08/10/2026, xem "HAI MO HINH BAR" o dau file). Day KHONG phai tham so chien luoc ma la lua
+    #: chon cach mo phong; EA that chay theo tick nen khong co input tuong ung (`ea_gia_lap.KHONG_CO_TRONG_EA`).
+    #: `duong_di` = di duong O-L-H-C / O-H-L-C, khop o gia nguong (mac dinh)
+    #: `cuc_tri`  = ban cu: bat loi truoc, chot o cuc tri cua bar. LAC QUAN voi tia lenh (x2,5-x7 so voi tester); chi giu de
+    #:             tai lap so cu va lam moc so sanh.
+    khop_bar: str = "duong_di"
+
+
+#: Gia tri hop le cua `ThamSo.khop_bar`.
+MO_HINH_BAR = ("cuc_tri", "duong_di")
+#: Mo hinh bar DUOC PHEP o DUONG NGHIEN CUU cua AI (thu_luoi / quet_luoi / niem_phong_luoi / xac_nhan trong `nc_thi_nghiem`).
+#: `cuc_tri` chi con de DO LECH (`hieu_chuan_luoi`, test, doi chieu EA): no lac quan +15..+40% so voi EA tren cung duong gia va
+#: x2,5-x7 so voi tester o cac o tia lenh M15 - xep hang hay niem phong bang no la lap lai dung loi "hang nghin phep thu chon ra
+#: he ao" (muc HAI MO HINH BAR). Them mo hinh moi vao day SAU KHI no co bang chung nho EA / tester, khong truoc.
+MO_HINH_BAR_NGHIEN_CUU = ("duong_di",)
+
+
+def kiem_khop_bar(ts) -> str:
+    """Tra `ts.khop_bar` neu hop le, ValueError neu khong (khong doan: ten sai se am tham chay mo hinh sai)."""
+    kb = ts.khop_bar
+    if not isinstance(kb, str) or kb not in MO_HINH_BAR:
+        raise ValueError("ThamSo.khop_bar phai la mot trong %s, nhan %r" % (MO_HINH_BAR, kb))
+    return kb
 
 
 @dataclass
@@ -336,8 +385,9 @@ def quy_cach_cho(ma: str, gia_dien_hinh: float | None = None, cp=None) -> tuple[
 
 #: Tang MOI KHI engine doi SO LIEU ra (khong tinh khi chi doi cach tinh, vd nhan C): di vao van tay cua `thu_luoi` de so tay
 #: khong tai dung ket qua cua ban engine cu. 1 = ban dau · 2 = sua lech mot nac khoang cach gian dan (1ba9023) ·
-#: 3 = bar 0 chi tru spread lenh dau (03/10/2026).
-PHIEN_BAN_ENGINE = 3
+#: 3 = bar 0 chi tru spread lenh dau (03/10/2026) · 4 = mo hinh bar `duong_di` thanh MAC DINH (08/10/2026): tia lenh khop o gia
+#: nguong thay vi cuc tri nen ket qua cac cau hinh tia lenh thap hon nhieu; ket qua cu = `khop_bar="cuc_tri"` (van chay duoc).
+PHIEN_BAN_ENGINE = 4
 
 
 def khoa_quy_cach(qc: QuyCach) -> str:
@@ -539,16 +589,285 @@ def _mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | N
         "so_cap": so_cap, "con_mo": len(vao)}
 
 
+#: Dung sai so hoc cua phep "gia da CHAM moc" cua `duong_di`, tinh bang PIP. EA / tester khop lenh khi gia cham DUNG moc (`bid <= muc`),
+#: nhung moc = gia khop -/+ buoc * pip la phep double nen sai ~1e-16 se quyet dinh "cham hay khong" (vd 0,900445 - 0,0016 ra
+#: 0,8988449999999999 trong khi gia that 0,898845 nam tren luoi 1e-6): lenh khop lech mot tick o cac o cham dung moc - rat hay gap
+#: o du lieu mau 1 phut (bien do nen ~10 diem). 1e-6 pip la nho hon mot buoc gia that (1 diem = 0,1 pip) 1e5 lan nhung lon hon sai so
+#: double cua moi cap gia / pip thuc te (<= 1e-9 pip). GIU KHOP `EPS_CHAM_PIP` trong `luoi_nhan.c` (test_luoi_duong_di kiem bang nhau).
+EPS_CHAM_PIP = 1e-6
+
+#: Chan so vong chot / tia trong MOT doan don dieu. Voi tp > 0 va gia huu han so vong <= do dai doan / nguong chot, nen so nay chi
+#: chan truong hop suy bien (nguong chot nho hon buoc nhay cua double) de khong treo may. Qua ngan sach -> RuntimeError.
+TOI_DA_VONG_DOAN = 1_000_000
+
+
+def mien_duong_di(ts: ThamSo, qc: QuyCach) -> str:
+    """Ly do `duong_di` tu choi bo tham so / quy cach nay ("" = chap nhan). MOT nguon cho ban Python (nem ValueError) lan nhan C
+    (`luoi_nhan.kha_dung` -> de Python lo): hai ben phai tu choi y het nhau, khong ben nao tu doan.
+
+    `tp > 0` la dieu kien TIEN QUYET: ro chot xong mo lai ngay o gia chot, nen tp <= 0 se chot di chot lai mai tai cung mot gia
+    (ban `cuc_tri` moi bar chi chot toi da mot lan nen khong vuong loi nay)."""
+    try:
+        so = {"lot": ts.lot, "buoc": ts.buoc, "tp": ts.tp, "tran_tang": ts.tran_tang, "he_so_lot": ts.he_so_lot,
+              "he_so_buoc": ts.he_so_buoc, "buoc_tran": ts.buoc_tran, "cho_lui": ts.cho_lui, "bien_cap": ts.bien_cap,
+              "cap_moi_bar": ts.cap_moi_bar, "chot_tien": ts.chot_tien, "hop_dong": qc.hop_dong, "pip": qc.pip,
+              "phi_nam_mua": qc.phi_nam_mua, "phi_nam_ban": qc.phi_nam_ban}
+        for k, v in so.items():
+            if isinstance(v, bool) or not isinstance(v, (int, float, np.integer, np.floating)) or not math.isfinite(float(v)):
+                return "%s phai la so huu han, nhan %r" % (k, v)
+        if not (float(ts.lot) > 0 and float(ts.buoc) > 0 and float(ts.tp) > 0 and float(ts.tran_tang) >= 1
+                and float(qc.pip) > 0 and float(qc.hop_dong) > 0 and float(ts.he_so_buoc) > 0):
+            return "lot, buoc, tp, he_so_buoc, pip, hop_dong phai > 0 va tran_tang >= 1"
+        if not (float(ts.cho_lui) >= 0 and float(ts.buoc_tran) >= 0 and float(ts.he_so_lot) >= 0 and float(ts.chot_tien) >= 0):
+            return "cho_lui, buoc_tran, he_so_lot, chot_tien khong duoc am"
+    except Exception as e:                                       # noqa: BLE001 - thuoc tinh thieu / kieu la: de tu choi, khong nem loi la
+        return "bo tham so khong doc duoc: %r" % (e,)
+    return ""
+
+
+def _mot_ro_duong(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | None = None,
+                  ghi: list | None = None):
+    """Mo phong MOT ro theo mo hinh `duong_di` (`ThamSo.khop_bar == "duong_di"`). Cung chu ky va cung kieu tra ve voi `_mot_ro`:
+    (lai_cong_don_theo_bar, lo_treo_theo_bar, thong ke), `ghi` ghi lenh cung dang tuple.
+
+    Moi bar (i >= 1) di tren duong `o -> x -> y -> cl[i]` voi `o` = dong cua bar truoc kep vao [low, high] (du lieu chua co cot open):
+    nen xanh (cl >= o) `x,y = low,high`; nen do `x,y = high,low`. Moi doan la mot nhat cat thang, nen moi su kien co GIA NGUONG ro:
+      - doan NGUOC chieu ro (`lui`): ro CHO gia lui (`cho_lui`) mo L1 o muc cho; them tang o dung moc luoi. Nhay gia vuot moc ->
+        khop o gia dau doan (gia dau tien co the khop), khong o moc.
+      - doan THUAN chieu ro (`len_`): tia cap (tang dau + tang cuoi) chot khi gia TRUNG BINH CO TRONG SO cua cap dat `bien_cap` pip
+        lai, ca ro chot khi gia dat TP (trung binh + tp pip, hoac lai noi >= `chot_tien`). Su kien nao cham truoc theo chieu di
+        thi xu ly truoc (bang nhau: tia truoc TP). Ro chot xong mo lai L1 NGAY o gia chot (hoac cho lui) roi tiep tuc di cung
+        doan, nen mot nen chay manh chot duoc nhieu ro. Moi tia tinh vao `cap_moi_bar` cua BAR (khong phai cua doan).
+    Spread tru MOT lan khi mo moi lenh (khong tru them luc dong: giong EA va tester). Phi qua dem: tong lot con mo luc het bar.
+    `lo_treo_theo_bar[i]` = lo noi LON NHAT tren ca duong cua bar (truoc khi chot), khac `_mot_ro` chi do o low.
+
+    Du lieu / tham so ngoai mien (NaN, inf, tp <= 0, ...) -> ValueError (khong chay am tham). Moi phep cong la tuan tu tung phan tu
+    (khong `sum()`), de nhan C khop TUNG BIT tren moi phien ban Python."""
+    qc = qc or QC_AUDCAD
+    if chieu not in (1, -1):
+        raise ValueError("chieu phai la +1 hoac -1, nhan %r" % (chieu,))
+    ly_do = mien_duong_di(ts, qc)
+    if ly_do:
+        raise ValueError("khop_bar='duong_di': " + ly_do)
+    mang = [np.asarray(a, dtype=float) for a in (hi, lo, cl, spread_gia, dem)]
+    n = len(mang[2])
+    if n < 1 or any(a.ndim != 1 or len(a) != n for a in mang):
+        raise ValueError("hi, lo, cl, spread, dem phai cung do dai >= 1 (1 chieu)")
+    if not all(np.isfinite(a).all() for a in mang):
+        raise ValueError("khop_bar='duong_di': hi/lo/cl/spread/dem co NaN hoac inf")
+    hi, lo, cl, spread_gia, dem = (a.tolist() for a in mang)
+    pip, hop = float(qc.pip), float(qc.hop_dong)
+    lot_ts, buoc_ts, he_lot, he_buoc = float(ts.lot), float(ts.buoc), float(ts.he_so_lot), float(ts.he_so_buoc)
+    buoc_tran, cho_lui, bien_cap = float(ts.buoc_tran), float(ts.cho_lui), float(ts.bien_cap)
+    cap_moi_bar, chot_tien, tran = float(ts.cap_moi_bar), float(ts.chot_tien), float(ts.tran_tang)
+    kieu, tia = ts.kieu_lot, bool(ts.tia_lenh)
+    s = chieu
+    t = float(ts.tp) * pip
+    eps = EPS_CHAM_PIP * pip                                     # dung sai "cham moc" (xem EPS_CHAM_PIP)
+    ty_le = qc.phi_nam_mua if chieu > 0 else qc.phi_nam_ban
+    nguong_tien = chot_tien * (lot_ts / 0.01)                    # chot theo tien: quy ve 0,01 lot goc (y het `_mot_ro`)
+
+    def _lot(k: int) -> float:
+        if kieu == "nhan":
+            return lot_ts * (he_lot ** k)
+        if kieu == "cong":
+            return lot_ts * (1.0 + he_lot * k)
+        return lot_ts
+
+    def _buoc(k: int) -> float:
+        if he_buoc == 1.0:
+            return buoc_ts
+        v = buoc_ts * (he_buoc ** k)
+        return buoc_tran if buoc_tran < v else v                  # min(v, buoc_tran)
+
+    lai_arr = np.empty(n)
+    treo_arr = np.empty(n)
+    vao = [(cl[0], _lot(0))]                                      # (gia, lot) - lot GAN vao lenh luc mo
+    vid = [0]                                                     # id lenh, song song voi `vao`
+    n_id, ro_hien = 1, 0
+    if ghi is not None:
+        ghi.append(("mo", 0, float(cl[0]), float(_lot(0)), 0, 0, 0))
+    cho = 0.0                                                     # != 0: dang CHO gia lui toi muc nay moi mo L1
+    lai = phi_sp = phi_sw = 0.0
+    so_ro = so_cap = 0
+    so_lenh = 1
+    so_tang = 1                                                   # so tang DA MO cua ro hien tai (khong tut khi tia)
+    tang_max = 1
+    da_bar = 0                                                    # so tia da lam trong bar dang xu ly
+    phi_sp += spread_gia[0] * lot_ts * hop                        # NB: lot_ts (khong phai lot tang 0) - y het `_mot_ro`
+    phi_sp_bar0 = phi_sp
+
+    def mo_lenh(i: int, gia: float, k: int, moi_ro: bool) -> None:
+        nonlocal phi_sp, so_lenh, n_id, ro_hien, vao, vid
+        lk = _lot(k)
+        phi_sp += spread_gia[i] * lk * hop
+        so_lenh += 1
+        if moi_ro:
+            ro_hien += 1
+            vao = [(gia, lk)]
+            vid = [n_id]
+        else:
+            vao.append((gia, lk))
+            vid.append(n_id)
+        if ghi is not None:
+            ghi.append(("mo", i, float(gia), float(lk), n_id, k, ro_hien))
+        n_id += 1
+
+    def lui(i: int, a: float, b: float) -> None:
+        """Doan NGUOC chieu ro tu `a` den `b` (a == b: nhay gia luc mo nen)."""
+        nonlocal cho, so_tang, tang_max
+        if cho != 0.0:
+            if s * (cho - b) < -eps:
+                return                                            # chua lui toi muc cho
+            g = cho if s * (cho - a) <= 0 else a
+            mo_lenh(i, g, 0, True)
+            so_tang = 1
+            cho = 0.0
+            a = g
+        if len(vao) < tran:
+            moc = vao[-1][0] - s * _buoc(so_tang - 1) * pip
+            vong = 0
+            while s * (moc - b) >= -eps:
+                vong += 1
+                if vong > TOI_DA_VONG_DOAN:
+                    raise RuntimeError("khop_bar='duong_di': qua %d tang trong mot doan (buoc luoi suy bien)" % TOI_DA_VONG_DOAN)
+                g = moc if s * (moc - a) <= 0 else a
+                mo_lenh(i, g, so_tang, False)
+                so_tang += 1
+                if len(vao) >= tran:
+                    break
+                moc = g - s * _buoc(so_tang - 1) * pip              # moc ke tiep tinh tu GIA KHOP THAT (EA: tu BID mo cua tang sau cung)
+        if len(vao) > tang_max:
+            tang_max = len(vao)
+
+    def len_(i: int, a: float, b: float) -> None:
+        """Doan THUAN chieu ro tu `a` den `b`: tia cap + chot ro, moi cai o gia nguong cua no."""
+        nonlocal lai, phi_sp, so_ro, so_cap, so_tang, cho, vao, vid, da_bar
+        p = a
+        vong = 0
+        while vao:
+            vong += 1
+            if vong > TOI_DA_VONG_DOAN:
+                raise RuntimeError("khop_bar='duong_di': qua %d lan chot / tia trong mot doan (nguong chot suy bien)" % TOI_DA_VONG_DOAN)
+            tong = 0.0
+            sw = 0.0
+            for g, lt in vao:
+                tong += lt
+                sw += lt * g
+            tb = sw / tong
+            if chot_tien > 0:
+                mtp = tb + s * nguong_tien / (hop * tong)
+            else:
+                mtp = tb + s * t
+            la_tia = False
+            ps = 0.0
+            if tia and len(vao) >= 2 and da_bar < cap_moi_bar:
+                g_d, l_d = vao[0]
+                g_c, l_c = vao[-1]
+                ps = (g_c * l_c + g_d * l_d) / (l_c + l_d) + s * bien_cap * pip
+                la_tia = s * ps <= s * mtp                        # bang nhau: tia truoc TP
+            g_ev = ps if la_tia else mtp
+            if s * (g_ev - b) > eps:
+                break                                             # chua toi trong doan nay
+            e = g_ev if s * (g_ev - p) >= 0 else p                # nguong da bi vuot luc dau doan (gia da doi) -> khop o gia hien tai
+            p = e
+            if la_tia:
+                g_d, l_d = vao[0]
+                g_c, l_c = vao[-1]
+                lai += (s * (e - g_c) * l_c + s * (e - g_d) * l_d) * hop
+                so_cap += 1
+                da_bar += 1
+                if ghi is not None:
+                    ghi.append(("dong", i, float(e), vid[0], "tia"))
+                    ghi.append(("dong", i, float(e), vid[-1], "tia"))
+                vao = vao[1:-1]
+                vid = vid[1:-1]
+                if not vao:
+                    so_tang = 1                                   # tia het ca ro -> mo lai mot lenh moi, ladder ve 0
+                    mo_lenh(i, e, 0, True)
+            else:
+                acc = 0.0
+                for g, lt in vao:
+                    acc += s * (e - g) * lt
+                lai += acc * hop
+                so_ro += 1
+                if ghi is not None:
+                    for k_id in vid:
+                        ghi.append(("dong", i, float(e), k_id, "tp"))
+                so_tang = 1
+                if cho_lui > 0:
+                    cho = e - s * cho_lui * pip                   # khong mo lai ngay: cho gia lui
+                    vao = []
+                    vid = []
+                else:
+                    mo_lenh(i, e, 0, True)
+
+    def treo_tai(gia: float) -> float:
+        """Lo noi (duong) cua cac tang dang mo neu gia hien tai la `gia`."""
+        acc = 0.0
+        for g, lt in vao:
+            d = s * (g - gia)
+            if d > 0:
+                acc += d * lt
+        return acc * hop
+
+    for i in range(1, n):
+        hi_i, lo_i, cl_i = hi[i], lo[i], cl[i]
+        o = cl[i - 1]                                             # gia mo ~ dong bar truoc (chua co cot open), kep vao [low, high]
+        if o < lo_i:
+            o = lo_i
+        if o > hi_i:
+            o = hi_i
+        x, y = (lo_i, hi_i) if cl_i >= o else (hi_i, lo_i)       # nen xanh: xuong low truoc; nen do: len high truoc
+        da_bar = 0
+        lui(i, o, o)                                              # nhay gia luc mo nen: tang / cho lui da bi vuot ngay luc mo
+        treo_bar = treo_tai(o)
+        a = o
+        for b in (x, y, cl_i):
+            d = s * (b - a)
+            if d < 0:
+                lui(i, a, b)
+            elif d > 0:
+                len_(i, a, b)
+            f = treo_tai(b)
+            if f > treo_bar:
+                treo_bar = f
+            a = b
+        if vao and dem[i] != 0.0:
+            tl = 0.0
+            for _g, lt in vao:
+                tl += lt
+            phi_sw += tl * hop * ty_le * dem[i] / 365.0 * cl_i
+        lai_arr[i] = lai - phi_sp - phi_sw
+        treo_arr[i] = treo_bar
+    # Bar 0 = lai chot 0 tru spread lenh dau (cung quy uoc `_mot_ro`, sua 03/10/2026)
+    lai_arr[0] = -phi_sp_bar0
+    treo_arr[0] = 0.0
+    return lai_arr, treo_arr, {
+        "lai_gop": lai, "phi_spread": phi_sp, "phi_swap": phi_sw,
+        "so_ro": so_ro, "so_lenh": so_lenh, "tang_max": tang_max,
+        "so_cap": so_cap, "con_mo": len(vao)}
+
+
+def mot_ro_chuan(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | None = None,
+                 ghi: list | None = None):
+    """Ban Python CHUAN cua mo hinh `ts.khop_bar` (khong qua nhan C). Dung cho du phong, test va doi chieu."""
+    if kiem_khop_bar(ts) == "duong_di":
+        return _mot_ro_duong(hi, lo, cl, spread_gia, dem, chieu, ts, qc, ghi)
+    return _mot_ro(hi, lo, cl, spread_gia, dem, chieu, ts, qc, ghi)
+
+
 def _mot_ro_nhanh(hi, lo, cl, spread_gia, dem, chieu: int, ts: ThamSo, qc: QuyCach | None = None,
                   ghi: list | None = None):
-    """`_mot_ro` qua NHAN C (`nhan/luoi_nhan.py`, nhanh hon ~130 lan, nha GIL) khi dung duoc; khong thi chinh `_mot_ro`.
+    """Mo hinh `ts.khop_bar` qua NHAN C (`nhan/luoi_nhan.py`, nhanh hon ~130 lan, nha GIL) khi dung duoc; khong thi ban Python chuan
+    (`mot_ro_chuan`: `_mot_ro` hoac `_mot_ro_duong`).
 
-    Ket qua KHONG doi so nao: nhan C duoc tu kiem voi `_mot_ro` truoc khi dung va khop tung bit tren 3.11/3.12/3.13
-    (`test_luoi_nhan.py`). `LUOI_NHAN=py` ep chay Python. `_mot_ro` van la ban CHUAN - muon doi hanh vi thi sua no truoc."""
+    Ket qua KHONG doi so nao: nhan C duoc tu kiem voi ban Python truoc khi dung va khop tung bit tren 3.11/3.12/3.13
+    (`test_luoi_nhan.py`). `LUOI_NHAN=py` ep chay Python. Ban Python van la CHUAN - muon doi hanh vi thi sua no truoc."""
     r = LN.mot_ro(hi, lo, cl, spread_gia, dem, chieu, ts, qc, ghi)
     if r is not None:
         return r
-    return _mot_ro(hi, lo, cl, spread_gia, dem, chieu, ts, qc, ghi)
+    return mot_ro_chuan(hi, lo, cl, spread_gia, dem, chieu, ts, qc, ghi)
 
 
 def _bang_lenh(nhat_ky: dict, idx, qc: QuyCach):
@@ -622,6 +941,7 @@ def chay_mang(dl: DuLieuChay, ts: ThamSo, von: float, ghi_lenh: bool = False) ->
     if chua:
         raise ValueError("tham so %s da khai bao nhung luoi.py CHUA cai dat: dat != 0 se bi bo qua am tham" % chua)
     qc, hi, lo, cl, sp, dem, idx = dl.qc, dl.hi, dl.lo, dl.cl, dl.sp, dl.dem, dl.idx
+    kiem_khop_bar(ts)                                   # ten mo hinh bar sai -> ValueError ngay, khong am tham chay mo hinh khac
 
     chieus = {"mua": (1,), "ban": (-1,), "hai_chieu": (1, -1)}[ts.che_do]
     lais, treos, tks, nhat_ky = [], [], [], {}

@@ -943,8 +943,21 @@ def niem_phong(ma: str, khung: str, spec: dict, quan_tri: dict | None = None,
 
 
 # ---------------------------------------------------------------- LUOI
+def _loi_mo_hinh_bar(gia_tri) -> str | None:
+    """Ly do tu choi gia tri `khop_bar` o DUONG NGHIEN CUU, None = duoc phep (`luoi.MO_HINH_BAR_NGHIEN_CUU`).
+    `cuc_tri` (ban cu) lac quan +15..+40% so voi EA va x2,5-x7 so voi tester o cac o tia lenh M15: AI xep hang / niem phong bang
+    no la chon lai he ao (08/10/2026). Muon do lech giua hai mo hinh thi dung `hieu_chuan_luoi`, khong qua duong nay."""
+    from nhan import luoi as LU
+    if isinstance(gia_tri, str) and gia_tri in LU.MO_HINH_BAR_NGHIEN_CUU:
+        return None
+    return ("khop_bar=%r khong dung duoc o duong nghien cuu (chi: %s). Mo hinh `cuc_tri` lac quan 15-40%% so voi EA tren cung "
+            "duong gia (2,5-7 lan so voi tester o cac o tia lenh M15) nen xep hang / niem phong bang no la chon lai he ao. "
+            "Bo `khop_bar` (mac dinh `duong_di`); muon do lech giua hai mo hinh thi dung `hieu_chuan_luoi`"
+            % (gia_tri, ", ".join(LU.MO_HINH_BAR_NGHIEN_CUU)))
+
+
 def _loi_tham_so_luoi(ts: dict) -> str | None:
-    """Ly do tu choi bo tham so luoi (ten la / tham so khai bao nhung engine khong doc), None = hop le.
+    """Ly do tu choi bo tham so luoi (ten la / tham so khai bao nhung engine khong doc / mo hinh bar khong duoc phep), None = hop le.
     Dung chung `danh_gia_luoi` va `niem_phong_luoi` de hai duong khong lech nhau ve cai gi duoc phep."""
     from dataclasses import fields as _fields
     from nhan import luoi as LU
@@ -952,6 +965,10 @@ def _loi_tham_so_luoi(ts: dict) -> str | None:
     la = [k for k in ts if k not in hop]
     if la:
         return "tham so luoi khong biet %s (co: %s)" % (la, ", ".join(sorted(hop)))
+    if "khop_bar" in ts:
+        loi_kb = _loi_mo_hinh_bar(ts["khop_bar"])
+        if loi_kb:
+            return loi_kb
     chua = LU.tham_so_chua_cai_dat(ts)
     if chua:
         return ("tham so %s CHUA cai dat trong luoi.py (khai bao nhung engine khong doc: dat != 0 se cho ket qua "
@@ -1527,6 +1544,16 @@ def quet_luoi(ma: str, khung: str, co_dinh: dict | None = None, luoi: dict | Non
     la = sorted(k for k in list(co_dinh) + list(luoi) if k not in hop)
     if la:
         return tu_choi("tham so luoi khong biet %s (co: %s)" % (la, ", ".join(sorted(hop))))
+    if "khop_bar" in co_dinh:
+        loi_kb = _loi_mo_hinh_bar(co_dinh["khop_bar"])
+        if loi_kb:
+            return tu_choi(loi_kb)
+    if "khop_bar" in luoi:                                # mo hinh bar KHONG phai truc tham so: khong quet qua no
+        gt_kb = luoi["khop_bar"] if isinstance(luoi["khop_bar"], (list, tuple)) else [luoi["khop_bar"]]
+        for g in gt_kb or [None]:
+            loi_kb = _loi_mo_hinh_bar(g)
+            if loi_kb:
+                return tu_choi(loi_kb)
     trung = sorted(set(co_dinh) & set(luoi))
     if trung:
         return tu_choi("tham so %s nam o ca `co_dinh` lan `luoi`" % trung)

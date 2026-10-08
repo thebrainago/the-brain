@@ -463,11 +463,15 @@ SEED_DOI_CHIEU = range(200, 208)
 
 
 @can_cxx
+@pytest.mark.parametrize("mo_hinh", L.MO_HINH_BAR)
 @pytest.mark.parametrize("ten", list(CAU_HINH))
-def test_doi_chieu_voi_engine_tung_lenh_va_lai(exe, ten):
+def test_doi_chieu_voi_engine_tung_lenh_va_lai(exe, ten, mo_hinh):
     """Cung duong tick -> EA that va `luoi.chay` (moi tick la mot bar) phai mo / dong CUNG lenh o cung tick, cung lot, cung chieu,
-    gia mo trong 2 buoc; lai chenh nhau chi do chenh gia giua hai tick (`lech_con_lai` = 0, tuc khong co khoan chi phi bi tinh khac)."""
-    ts = CAU_HINH[ten]
+    gia mo trong 2 buoc; lai chenh nhau chi do chenh gia giua hai tick (`lech_con_lai` = 0, tuc khong co khoan chi phi bi tinh khac).
+
+    CA HAI mo hinh bar: tren bar suy bien (moi tick mot bar) `duong_di` phai tai lap EA tung lenh mot - day la phep kiem logic mo hinh moi
+    voi mot cai cai dat doc lap (ma MQL5). Spread o lenh tia: `cuc_tri` tru hai lan (`phi_tia_kep`), `duong_di` mot lan nhu EA."""
+    ts = dataclasses.replace(CAU_HINH[ten], khop_bar=mo_hinh)
     so_lenh = n_tia = n_ea = n_tp = 0
     for sd in SEED_DOI_CHIEU:
         r = G.doi_chieu(exe, ts, bars(150, sd), thu_tu=THU_TU[sd % 4], tol_tick=TOL_TICK.get(ten, 1))
@@ -489,18 +493,19 @@ def test_doi_chieu_voi_engine_tung_lenh_va_lai(exe, ten):
 
 
 @can_cxx
-def test_doi_chieu_hai_duong_gia_dac_biet(exe):
+@pytest.mark.parametrize("mo_hinh", L.MO_HINH_BAR)
+def test_doi_chieu_hai_duong_gia_dac_biet(exe, mo_hinh):
     """Hai duong gia cuc doan: (a) day xuong lien tuc (khong TP nao) -> tang day, dung o tran; (b) giang bien rat hep quanh mot muc
     -> chi mo, khong tang. Engine va EA van khop lenh va lai."""
     xuong = pd.DataFrame(dict(open=np.round(1.0 - 0.0003 * np.arange(60), 5), high=np.round(1.0001 - 0.0003 * np.arange(60), 5),
                               low=np.round(0.9996 - 0.0003 * np.arange(60), 5), close=np.round(0.9997 - 0.0003 * np.arange(60), 5),
                               spread=20), index=pd.date_range("2024-01-01", periods=60, freq="15min"))
-    r = G.doi_chieu(exe, CAU_HINH["mua_phang"], xuong)
+    r = G.doi_chieu(exe, dataclasses.replace(CAU_HINH["mua_phang"], khop_bar=mo_hinh), xuong)
     assert r.trang_thai == "khop" and abs(r.lech_con_lai) < 1e-6
     assert r.kq_ea["max_open"] == 5 and len(r.eng) == 5                                # tran_tang = 5, khong TP nao
     hep = pd.DataFrame(dict(open=0.9, high=0.90003, low=0.89997, close=0.9, spread=20),
                        index=pd.date_range("2024-01-01", periods=40, freq="15min"))
-    r = G.doi_chieu(exe, CAU_HINH["tn5"], hep)
+    r = G.doi_chieu(exe, dataclasses.replace(CAU_HINH["tn5"], khop_bar=mo_hinh), hep)
     assert r.trang_thai == "khop" and len(r.eng) == 2 and r.kq_ea["n_dong"] == 0       # hai ro (mua + ban), moi ro 1 lenh, khong tang 2
 
 
@@ -555,21 +560,36 @@ def test_dot_bien_khong_doi_gi_van_khop(tmp_path, exe):
 
 
 # ============================================================ 6. khoang cach mo hinh BAR (engine) <-> TICK (EA): task #48
+#: Bar M15 gia lap co bien do that (~7 pip), 4 chuoi x 1500 bar. EA chay tren tick sinh tu CHINH cac bar do (`G.do_lech_bar`), engine chay tren bar.
+_BAR_THAT = [bars_that(seed=sd) for sd in range(1, 5)]
+
+
+def _lai_engine_va_ea(exe, ten, thu_tu, mo_hinh):
+    ts = dataclasses.replace(CAU_HINH[ten], khop_bar=mo_hinh)
+    e = a = 0.0
+    for d in _BAR_THAT:
+        x = G.do_lech_bar(exe, ts, d, thu_tu=thu_tu, paso=1e-5)[0]
+        e += x["lai_engine"]
+        a += x["lai_ea"]
+    return e, a
+
+
 @can_cxx
-def test_engine_lac_quan_voi_tia_lenh_khi_chay_tren_bar_ohlc(exe):
-    """KHONG phai loi cua EA: engine chay tren bar OHLC dong cap tia / chot tien o gia TOT NHAT cua bar (cao nhat voi lenh mua) va tru
-    spread HAI lan cho lenh tia, EA tick dong o gia vua cham nguong. Tren nen M15 gia lap co bien do that (~7 pip), tn5 cua engine cao hon
-    EA ~15% (do 04/10/2026: +16,4% / +16,3% / +14,7% theo ba thu tu duong gia), con luoi thuan (mua_phang) chi lech +-5%.
-    Test nay GHIM so do: khi sua engine (task #48) no se doi mau - cap nhat khi do, khong xoa."""
-    df = [bars_that(seed=s) for s in range(1, 5)]
-    def gop(ten, thu):
-        e = a = 0.0
-        for d in df:
-            x = G.do_lech_bar(exe, CAU_HINH[ten], d, thu_tu=thu, paso=1e-5)[0]
-            e += x["lai_engine"]
-            a += x["lai_ea"]
-        return e, a
-    e, a = gop("tn5", "theo_nen")
-    assert e > a * 1.08 > 0, "tn5: engine %.1f EA %.1f - mo hinh bar KHONG con lac quan hon EA (da sua #48? cap nhat test + tai lieu)" % (e, a)
-    e, a = gop("mua_phang", "theo_nen")
-    assert a > 0 and abs(e - a) < 0.08 * abs(a) + 5.0, "luoi thuan: engine %.1f EA %.1f" % (e, a)
+@pytest.mark.parametrize("ten,tran_lech", [("tn5", 1.08), ("chot_tien", 1.20), ("chot_tien_tia", 1.20), ("cho_lui", 1.20)])
+def test_cuc_tri_van_lac_quan_so_voi_ea_tick(exe, ten, tran_lech):
+    """BANG CHUNG cua chan doan 08/10/2026 (khong phai loi EA): mo hinh bar CU `cuc_tri` dong cap tia / chot tien o gia TOT NHAT cua bar va
+    luon xu ly bat loi truoc, nen cao hon EA chay tren tick cua CHINH cac bar do: tn5 +14%, chot_tien +38%, chot_tien_tia +37%, cho_lui
+    +30% (do 08/10, thu tu duong gia 'theo_nen' = cung gia dinh mau nen voi `duong_di`). Giu lai de khong ai quen vi sao `duong_di` ra doi."""
+    e, a = _lai_engine_va_ea(exe, ten, "theo_nen", "cuc_tri")
+    assert a > 0 and e > a * tran_lech, "%s: cuc_tri %.1f, EA %.1f - mo hinh cu KHONG con lac quan nhu da do" % (ten, e, a)
+
+
+@can_cxx
+@pytest.mark.parametrize("ten", ["tn5", "mua_phang", "chot_tien", "chot_tien_tia", "cho_lui", "tia_cho_lui", "chot_tien_cho_lui", "buoc_co"])
+def test_duong_di_khop_ea_tick_cung_thu_tu_duong_gia(exe, ten):
+    """`duong_di` (mac dinh) tren bar so voi EA chay tren tick sinh tu CHINH cac bar do theo CUNG thu tu duong gia (nen xanh: thap -> cao,
+    nen do: cao -> thap): lai lech < 4% o moi cau hinh (do 08/10/2026: -0,4% tn5, 0,0% mua_phang, +0,7% chot_tien, +1,8% chot_tien_tia,
+    0,0% cho_lui, +0,1% tia_cho_lui, -0,8% chot_tien_cho_lui, -0,9% buoc_co), trong khi `cuc_tri` lech +14% .. +38% (test tren).
+    Phan con lai la do KHONG BIET thu tu cao / thap that trong nen, khong phai sai so mo hinh - xem `reports/lech_engine_EURCAD.md`."""
+    e, a = _lai_engine_va_ea(exe, ten, "theo_nen", "duong_di")
+    assert a > 0 and abs(e - a) < 0.04 * a + 2.0, "%s: duong_di %.1f, EA %.1f (%+.1f%%)" % (ten, e, a, 100.0 * (e - a) / a)
