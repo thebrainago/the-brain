@@ -1,0 +1,54 @@
+{
+  "ma": "00m1-may-quet-nhan-c",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 81.4,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "may",
+      "quet"
+    ],
+    "phien_ban_ma": "c6d08ce2+sua",
+    "dong_cuoi": [
+      "    \"gb_tester\": 0.55",
+      "   },",
+      "   {",
+      "    \"id\": \"D20944\",",
+      "    \"may_chu_lich_su\": [",
+      "     \"signals\",",
+      "     \"XMGlobal-MT5 10\"",
+      "    ],",
+      "    \"gb_bases\": 1.22,",
+      "    \"gb_tester\": 0.0",
+      "   }",
+      "  ],",
+      "  \"dang_chay\": {",
+      "   \"terminal64\": 3,",
+      "   \"metatester64\": 3",
+      "  },",
+      "  \"agent_rss_gb_tb\": 1.74",
+      " },",
+      " \"nhan_c\": {",
+      "  \"san_sang\": true,",
+      "  \"trinh_bien\": \"cache\",",
+      "  \"ly_do\": \"ok (da kiem truoc do)\",",
+      "  \"che_do\": \"auto\"",
+      " }",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/may_nha_bao_cao.md": "BAO CAO MAY NHA  [VANG]  2026-10-08T08:30:27\nTOM LAI:\n  - Chua do toc do may nen chua co con so chinh thuc. UOC TAM (tu bang thong ly thuyet, CHUA do): tao toi da ~4 tai khoan MT5 demo. Chay `b may do --nhanh` luc may ranh (~1 phut; day du `b may do` ~5 phut) de co so that.\nCHU DU AN CAN LAM:\n  1. Them RAM CUNG LOAI voi thanh dang co (DDR4 32.0 GB, 2133 MT/s; ma hang M386A4G40DM0-CPB) vao khe KHAC KENH (xem so tay bo mach: khe vi tri 1 cua moi kenh). Them 1 thanh: 1 -> 2 kenh, bang thong ly thuyet gap 2.0 lan; them du 3 thanh: 4 kenh, gap 4.0 lan. Khong tron RDIMM voi LRDIMM; chua chac thi gui anh nhan thanh dang co de chon dung loai.\n  2. O C: con 16.7 GB: don thu muc tam / backups / cache tester (xem muc mt5.gb_tester trong `b may quet`) hoac chuyen du lieu sang o khac\n  3. File trang (pagefile): dat 1 file CO DINH tren o HDD moi (goi y 62 GB, dau = toi da, khong de Windows tu co gian) lam LUOI AN TOAN chong loi het bo nho (da xay ra 13/09). Khong lam bo nho lam viec: HDD cham ~100 lan SSD, neu phai doc/ghi lien tuc thi may dung hinh. Giu file trang nho tren SSD. Xem tai_lieu/MAY_NHA_TOI_UU.md\nPHIEN NHA / MAY TU LAM:\n  - Dat tran CPU cua he = 78 (giua dai 75-80): `b tran-cpu 78` (mac dinh trong code la 85)\nSO LIEU:\n  - May: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz, 10 nhan / 20 luong, RAM 32.0 GB (1 thanh, khe trong 15, 1 kenh dang dung).\n",
+      "reports/may_nha_ket_luan.json": "{\n \"den\": \"VANG\",\n \"tom_lai\": [\n  \"Chua do toc do may nen chua co con so chinh thuc. UOC TAM (tu bang thong ly thuyet, CHUA do): tao toi da ~4 tai khoan MT5 demo. Chay `b may do --nhanh` luc may ranh (~1 phut; day du `b may do` ~5 phut) de co so that.\"\n ],\n \"tom_tat\": [\n  \"May: Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz, 10 nhan / 20 luong, RAM 32.0 GB (1 thanh, khe trong 15, 1 kenh dang <user>).\"\n ],\n \"so\": {\n  \"mt5_uoc_tam\": {\n   \"tran\": {\n    \"cpu\": 16,\n    \"ram\": 7,\n    \"bang_thong\": 4,\n    \"dia\": 22\n   },\n   \"tran_nho_nhat_do\": \"bang_thong\",\n   \"agent_toi_da\": 4,\n   \"bang_thong_dung_gbs\": 8.55,\n   \"bang_thong_nguon\": \"uoc (50% ly thuyet)\",\n   \"bang_thong_moi_agent_gia_dinh_gbs\": 2.0,\n   \"ram_moi_agent_gb\": 1.74,\n   \"ram_moi_agent_do_that\": true,\n   \"gb_moi_terminal\": 12.68,\n   \"gb_moi_terminal_do_that\": true,\n   \"che_do_toi_uu_hoa\": {\n    \"terminal\": 1,\n    \"agent\": 4\n   },\n   \"che_do_chay_don\": {\n    \"terminal_toi_da\": 4\n   },\n   \"tai_khoan_demo_toi_da\": 4,\n   \"tai_khoan_demo_neu_xm_cho_dung_chung\": 1,\n   \"ly_do\": \"tran thap nhat la bang_thong (cpu=16, ram=7, bang_thong=4, dia=22); them terminal/tai khoan vuot 4 khong nhanh hon vi chi chia nhau cung mot may\"\n  },\n  \"kenh_ram\": {\n   \"dang_dung\": 1,\n   \"toi_da_goi_y\": 4,\n   \"toi_da_nen_tang\": 4\n  }\n },\n \"khuyen_nghi\": [\n  {\n   \"viec\": \"Them RAM CUNG LOAI voi thanh dang co (DDR4 32.0 GB, 2133 MT/s; ma hang M386A4G40DM0-CPB) vao khe KHAC KENH (xem so tay bo mach: khe vi tri 1 cua moi kenh). Them 1 thanh: 1 -> 2 kenh, bang thong ly thuyet gap 2.0 lan; them du 3 thanh: 4 kenh, gap 4.0 lan. Khong tron RDIMM voi LRDIMM; chua chac thi gui anh nhan thanh dang co de chon <user> loai.\",\n   \"ai_lam\": \"chu_du_an\",\n   \"can_phep\": true\n  },\n  {\n   \"viec\": \"O C: con 16.7 GB: don thu muc tam / backups / cache tester (xem muc mt5.gb_tester trong `b may quet`) hoac chuyen du lieu sang o khac\",\n   \"ai_lam\": \"chu_du_an\",\n   \"can_phep\": true\n  },\n  {\n   \"viec\": \"File trang (pagefile): dat 1 file CO DINH tren o HDD moi (goi y 62 GB, dau = toi da, khong de Windows tu co gian) lam LUOI AN TOAN chong loi het bo nho (da xay ra 13/09). Khong lam bo nho lam viec: HDD cham ~100 lan SSD, neu phai doc/ghi lien tuc thi may <user> hinh. Giu file trang nho tren SSD. Xem tai_lieu/MAY_NHA_TOI_UU.md\",\n   \"ai_lam\": \"chu_du_an\",\n   \"can_phep\": true\n  },\n  {\n   \"viec\": \"Dat tran CPU cua he = 78 (giua dai 75-80): `b tran-cpu 78` (mac dinh trong code la 85)\",\n   \"ai_lam\": \"may\",\n   \"can_phep\": false\n  }\n ]\n}",
+      "reports/may_nha_quet.json": "{\n \"luc\": \"2026-10-08T08:29:37\",\n \"he_dieu_hanh\": \"Microsoft Windows 10 Pro 10.0.19045\",\n \"python\": \"3.12.10\",\n \"cpu\": {\n  \"ten\": \"Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz\",\n  \"so_o_cam\": 1,\n  \"nhan_vat_ly\": 10,\n  \"luong\": 20,\n  \"mhz_toi_da\": 2201,\n  \"mhz_hien_tai\": 2201,\n  \"l3_mb\": 25.0,\n  \"nguon\": \"wmi\"\n },\n \"ram\": {\n  \"tong_gb\": 32.0,\n  \"thanh\": [\n   {\n    \"khe\": \"DIMM_B1\",\n    \"kenh\": \"B\",\n    \"gb\": 32.0,\n    \"mt_s\": 2133,\n    \"mt_s_toi_da\": 2133,\n    \"loai\": \"DDR4\",\n    \"ecc\": false,\n    \"registered\": false,\n    \"unbuffered\": false,\n    \"lrdimm\": false,\n    \"hang\": \"Samsung\",\n    \"ma_hang\": \"M386A4G40DM0-CPB\"\n   }\n  ],\n  \"so_thanh\": 1,\n  \"khe_tong\": 16,\n  \"khe_trong\": 15,\n  \"toi_da_ho_tro_gb\": 264.0,\n  \"kenh_dang_dung\": 1,\n  \"kenh_suy_tu_ten_khe\": true,\n  \"mt_s\": 2133,\n  \"bang_thong_ly_thuyet_gbs\": 17.1,\n  \"ly_thuyet_neu_du_kenh_gbs\": null\n },\n \"dia\": {\n  \"vat_ly\": [\n   {\n    \"ten\": \"WDC WD2500AAKX-08ERMA0\",\n    \"loai\": \"HDD\",\n    \"bus\": \"SATA\",\n    \"gb\": 250.0,\n    \"suc_khoe\": \"Healthy\",\n    \"vong_phut\": null\n   },\n   {\n    \"ten\": \"WDC PC SN520 SDAPTUW-128G-1006\",\n    \"loai\": \"SSD\",\n    \"bus\": \"NVMe\",\n    \"gb\": 128.0,\n    \"suc_khoe\": \"Healthy\",\n    \"vong_phut\": 0\n   },\n   {\n    \"ten\": \"UMIS RPJTJ128MEE1MWX\",\n    \"loai\": \"SSD\",\n    \"bus\": \"NVMe\",\n    \"gb\": 128.0,\n    \"suc_khoe\": \"Healthy\",\n    \"vong_phut\": 0\n   }\n  ],\n  \"o\": [\n   {\n    \"o\": \"C:\",\n    \"tong_gb\": 111.18,\n    \"trong_gb\": 16.66,\n    \"fs\": \"NTFS\"\n   },\n   {\n    \"o\": \"D:\",\n    \"tong_gb\": 119.24,\n    \"trong_gb\": 27.14,\n    \"fs\": \"NTFS\"\n   },\n   {\n    \"o\": \"E:\",\n    \"tong_gb\": 232.88,\n    \"trong_gb\": 232.78,\n    \"fs\": \"NTFS\"\n   },\n   {\n    \"o\": \"R:\",\n    \"tong_gb\": 4.0,\n    \"trong_gb\": 2.39,\n    \"fs\": \"NTFS\"\n   }\n  ]\n },\n \"pagefile\": {\n  \"dang_dung\": [\n   {\n    \"o\": \"C:\",\n    \"cap_phat_mb\": 2048,\n    \"dang_dung_mb\": 193,\n    \"dinh_mb\": 242\n   },\n   {\n    \"o\": \"D:\",\n    \"cap_phat_mb\": 49152,\n    \"dang_dung_mb\": 196,\n    \"dinh_mb\": 260\n   }\n  ],\n  \"cai_dat_tay\": [\n   {\n    \"o\": \"C:\",\n    \"dau_mb\": 2048,\n    \"toi_da_mb\": 4096\n   },\n   {\n    \"o\": \"D:\",\n    \"dau_mb\": 49152,\n    \"toi_da_mb\": 49152\n   }\n  ],\n  \"he_thong_tu_quan_ly\": false,\n  \"tong_cap_phat_gb\": 50.0\n },\n \"ke_hoach_dien\": {\n  \"guid\": \"8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c\",\n  \"ten\": \"High performance\",\n  \"can_chuyen_high_performance\": false\n },\n \"bo_mach\": {\n  \"Manufacturer\": \"HUANANZHI\",\n  \"Product\": \"X99-P4F\"\n },\n \"bios\": {\n  \"Manufacturer\": \"American Megatrends Inc.\",\n  \"SMBIOSBIOSVersion\": \"5.11\",\n  \"Ngay\": \"2023-10-31\"\n },\n \"gpu\": [\n  {\n   \"ten\": \"NVIDIA GeForce GT 730\",\n   \"vram_gb\": 2.0\n  }\n ],\n \"gpu_opencl\": true,\n \"gpu_cuda\": true,\n \"defender_so_thu_muc_loai_tru\": 1,\n \"nhiet_c\": null,\n \"do_duoc_bang_powershell\": true,\n \"loi_powershell\": null,\n \"mt5\": {\n  \"ban_cai\": [\n   \"C:\\\\MT5slots\\\\s1\",\n   \"C:\\\\MT5slots\\\\s2\",\n   \"C:\\\\MT5slots\\\\s3\",\n   \"C:\\\\Program Files\\\\XM Global MT5\"\n  ],\n  \"thu_muc_du_lieu\": [\n   {\n    \"id\": \"53785E\",\n    \"may_chu_lich_su\": [],\n    \"gb_bases\": null,\n    \"gb_tester\": null\n   },\n   {\n    \"id\": \"67752D\",\n    \"may_chu_lich_su\": [],\n    \"gb_bases\": null,\n    \"gb_tester\": null\n   },\n   {\n    \"id\": \"7BD9DD\",\n    \"may_chu_lich_su\": [\n     \"signals\",\n     \"XMGlobal-MT5 10\"\n    ],\n    \"gb_bases\": 1.23,\n    \"gb_tester\": 0.0\n   },\n   {\n    \"id\": \"BB16F5\",\n    \"may_chu_lich_su\": [\n     \"signals\",\n     \"XMGlobal-MT5 10\"\n    ],\n    \"gb_bases\": 12.68,\n    \"gb_tester\": 0.55\n   },\n   {\n    \"id\": \"D20944\",\n    \"may_chu_lich_su\": [\n     \"signals\",\n     \"XMGlobal-MT5 10\"\n    ],\n    \"gb_bases\": 1.22,\n    \"gb_tester\": 0.0\n   }\n  ],\n  \"dang_chay\": {\n   \"terminal64\": 3,\n   \"metatester64\": 3\n  },\n  \"agent_rss_gb_tb\": 1.74\n },\n \"nhan_c\": {\n  \"san_sang\": true,\n  \"trinh_bien\": \"cache\",\n  \"ly_do\": \"ok (da kiem truoc do)\",\n  \"che_do\": \"auto\"\n }\n}"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-08T08:30:31"
+}
