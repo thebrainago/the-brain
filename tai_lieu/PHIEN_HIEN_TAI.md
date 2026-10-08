@@ -22,6 +22,7 @@
 
 <!-- TAY:BAT_DAU -->
 ## Quyet dinh cua chu du an con hieu luc (ngay = ngay chot)
+- **08/10 ĐIỀU HÀNH (chủ dự án)**: (1) **SỬA LỖI TRƯỚC**: bộ chạy chết, đơn treo, ổ đầy, tester không ra báo cáo, nguồn LỖI/CHUYỂN HƯỚNG -> giao sửa ngay, không chỉ ghi báo cáo; (2) **LUÂN PHIÊN** giữa các module (QUANTLAB quét/xác nhận · HEPHAESTUS bóc tách · SEEKER đào nguồn/diễn đàn/link · sổ tay nc) để máy luôn có việc, tester xếp hàng một, CPU/mạng chạy song song; (3) **máy nhà làm hết chức năng dự án, không để phí**: Chrome AI 9224, diễn đàn quét SÂU (không chỉ trang 1), bóc tách bot. Tự nạp theo dung lượng ổ + RAM/CPU + giờ thực đơn tồn + việc còn cần làm (thư CHI-THI-TU-NAP-THEO-NANG-LUC-08102026), KHÔNG theo luật cố định 12 giờ.
 - 25/09 TIEU CHI DUYET: co lai sau phi + maxDD < 80%; martingale/DCA/luoi hop le; don bay chap nhan (CLAUDE.md LUAT SO 0).
 - 25/09 AI la nha nghien cuu chinh, chu du an la nha tai tro (LUAT SO 1; `b nc` o dau phien).
 - 02/10 LAM LAI TU DAU: V6, Ultima AUDCAD, SP500 chi la boi canh, khong phai bang chung. GitHub de PUBLIC (khong dua khoa/token/du lieu rieng vao repo, ke ca thu).
