@@ -32,6 +32,15 @@ DAU_VET = (
     ("tester_ban", "sua_duoc", r"TesterDangBan|het slot ranh"),
     ("het_dia", "sua_duoc", r"dia con [\d.,]+ ?GB ?<"),
     ("bien_dich_hong", "can_chan_doan", r"bien dich hong|error \d+: file '.*' not found"),
+    # Nhan do LOG tester dat (`nhan/chan_doan_tester.py`, 08/10/2026): `... tester khong ra bao cao sau 94s [tester:mat_ket_noi] <dong log goc> ...`.
+    # DUNG TRUOC dong chung `tester_khong_ra`. Tat ca `can_chan_doan`: dua lai chi dot them gio tester khi nguyen nhan chua duoc go.
+    ("tester_chua_dang_nhap", "can_chan_doan", r"\[tester:chua_dang_nhap\]"),
+    ("tester_mat_ket_noi", "can_chan_doan", r"\[tester:mat_ket_noi\]"),
+    ("tester_thieu_lich_su", "can_chan_doan", r"\[tester:thieu_lich_su\]"),
+    ("tester_khong_nap_ea", "can_chan_doan", r"\[tester:khong_nap_ea\]"),
+    ("tester_ea_tu_choi", "can_chan_doan", r"\[tester:ea_tu_choi\]"),
+    ("tester_het_bo_nho", "can_chan_doan", r"\[tester:het_bo_nho\]"),
+    ("tester_agent_chet", "can_chan_doan", r"\[tester:agent_chet\]"),
     ("tester_khong_ra", "can_chan_doan", r"tester khong ra (?:bao cao|ket qua)"),
     ("thieu_du_lieu", "khong_chay_lai", r"FileNotFoundError|khong co du lieu cho \w+"),
     ("ngoai_doan", "khong_chay_lai", r"ngoai doan kham_pha|ngoai doan xac_nhan"),

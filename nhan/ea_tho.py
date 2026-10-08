@@ -65,12 +65,14 @@ from pathlib import Path
 
 from nhan import bao_cao_mt5 as BC
 from nhan import cham_diem as CD
+from nhan import chan_doan_tester as CDT
 from nhan import nc_du_lieu as NDL
 from nhan import nc_so_tay as ST
 from nhan import nc_thi_nghiem as TN
 
 LAB = Path(__file__).resolve().parent.parent
 KHO_JSON = LAB / "reports" / "ea" / "kho.json"
+THU_MUC_CHAN_DOAN = LAB / "reports" / "chan_doan_tester"      # bang chung day du khi tester khong ra bao cao (gitignore)
 NGAY_TOI_THIEU = 30                       # cua so ngan hon: it lenh, noi suy vo nghia
 DD_TRAN = float(CD.TRAN_SUT_GIAM)         # % - MOT nguon cho moi cong
 PF_NGHI_NHIN_TRUOC = 4.0
@@ -1055,11 +1057,42 @@ def _chay_that(lenh: dict, ea: dict, cfg: dict) -> dict:
     return _chay_voi_slot(lenh, ea, cfg, EA, SL)
 
 
+def _loi_bien_dich(ds: list, slot) -> str:
+    """Ly do bien dich hong: dong loi cua MetaEditor + `Include\\Trade\\Trade.mqh` co trong thu muc du lieu cua slot khong
+    (24 don chet o giay 92-95 vi thieu no - do ra ngay thay vi doan). Khong nem."""
+    loi = (ds[0].get("loi") or "") if ds else ""
+    ra = "bien dich hong: %s" % (loi if ds else "khong co ket qua")
+    try:
+        sl = CDT.kiem_slot(slot.du_lieu)
+        ra += " | slot %s Trade.mqh=%s" % (slot.ten, "co" if sl["include_trade"] else "THIEU")
+        if ds and not loi:
+            ra += " | khong co dong loi trong log bien dich (MetaEditor het 90 giay / khong ghi log)"
+    except Exception:                                   # noqa: BLE001
+        pass
+    return ra
+
+
+def _loi_khong_bao_cao(slot, viec: dict, kq: dict, t_bat: float) -> str:
+    """Ly do tester khong ra bao cao, KEM bang chung cua DUNG slot nay (log moi, lich su M1, dang nhap, tien do mo phong).
+    Bang chung day du ghi `reports/chan_doan_tester/` (co the chua so tai khoan demo -> khong len git). Khong nem."""
+    try:
+        cd = CDT.thu_thap(slot.du_lieu, t_bat, ma=viec.get("symbol"), tu=viec.get("tu"), den=viec.get("den"),
+                          khung=viec.get("khung"), giay=kq.get("giay"))
+        ra = CDT.tom_tat(cd, ten_slot=slot.ten)
+        ten = CDT.ghi_chi_tiet(cd, THU_MUC_CHAN_DOAN, slot.ten)
+        return ra + ((" | chi tiet: reports/chan_doan_tester/" + ten) if ten else "")
+    except Exception as e:                              # noqa: BLE001
+        return "tester khong ra bao cao (chan doan loi: %s: %s)" % (type(e).__name__, str(e)[:100])
+
+
 def _chay_voi_slot(lenh: dict, ea: dict, cfg: dict, EA, SL) -> dict:
     """Phan `_chay_that` sau cong kiem he dieu hanh; `EA` / `SL` truyen vao de test bang module gia tren Linux.
 
     EA nhi phan (.ex5): KHONG bien dich - copy byte vao terminal (da kiem sha luc copy), chi chay khi terminal TAT
-    'Allow DLL imports' (khong tat / khong doc duoc = tu choi: .ex5 la ma may co the goi ham he thong), xoa ban copy sau."""
+    'Allow DLL imports' (khong tat / khong doc duoc = tu choi: .ex5 la ma may co the goi ham he thong), xoa ban copy sau.
+
+    Tester hong -> `loi` mang BANG CHUNG (08/10/2026, `nhan/chan_doan_tester.py`): truoc day chi la 'tester khong ra bao cao'."""
+    t_bat = time.time()
     with SL.cap("ea_tho:" + lenh["van_tay"]) as slot:
         khoa = "slot:" + slot.ten
         EA.TERMINAL[khoa] = (slot.du_lieu, slot.exe.parent, "")
@@ -1078,7 +1111,7 @@ def _chay_voi_slot(lenh: dict, ea: dict, cfg: dict, EA, SL) -> dict:
         else:
             ds = EA.bien_dich([{"url": ea.get("url", ""), "ten": ea["ten"], "ma": ea["ma"]}], khoa, cho_giay=90.0)
             if not ds or not ds[0]["bien_dich"]:
-                return {"xong": False, "loi": "bien dich hong: %s" % (ds[0]["loi"] if ds else "khong co ket qua")}
+                return {"xong": False, "loi": _loi_bien_dich(ds, slot)}
             ten_file = ds[0]["ten_file"]
         viec = dict(lenh["viec"], terminal=khoa, ea=ten_file)
         try:
@@ -1089,17 +1122,19 @@ def _chay_voi_slot(lenh: dict, ea: dict, cfg: dict, EA, SL) -> dict:
                     tep_ex5.unlink()
                 except OSError:
                     pass                    # terminal con giu file: de lai, vo hai (khong ai nap no ngoai tester)
-        log = ""
-        try:
-            goc = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Tester"
-            fs = sorted(goc.glob("*/Agent-*/logs/*.log"), key=lambda p: p.stat().st_mtime)
-            if fs:
-                log = BC.doc_van_ban(fs[-1])
-        except OSError:
-            pass
-        return {"xong": bool(kq.get("xong")), "bao_cao": kq.get("bao_cao", ""), "log": log,
-                "giay": kq.get("giay", 0.0), "loi": kq.get("bo_qua") or ("" if kq.get("xong") else
-                                                                         "tester khong ra bao cao")}
+        # Log agent cua DUNG slot nay (moi hon luc bat dau); khong thay thi dung kieu cu: file moi nhat cua ca may.
+        log = CDT.log_agent_slot(slot.du_lieu, t_bat)
+        if not log:
+            try:
+                goc = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Tester"
+                fs = sorted(goc.glob("*/Agent-*/logs/*.log"), key=lambda p: p.stat().st_mtime)
+                if fs:
+                    log = BC.doc_van_ban(fs[-1])
+            except OSError:
+                pass
+        xong = bool(kq.get("xong"))
+        loi = kq.get("bo_qua") or ("" if xong else _loi_khong_bao_cao(slot, viec, kq, t_bat))
+        return {"xong": xong, "bao_cao": kq.get("bao_cao", ""), "log": log, "giay": kq.get("giay", 0.0), "loi": loi}
 
 
 def chay(ea: str, ma: str, khung: str, doan: str = "kham_pha", tham_so: dict | None = None,

@@ -596,7 +596,9 @@ def test_chay_voi_slot_bien_dich_hong_la_loi_ha_tang(tmp_path, may, monkeypatch,
     monkeypatch.setattr(EA, "bien_dich", lambda ds, t, cho_giay=12.0: [{"bien_dich": False, "ten_file": "", "loi": "x"}])
     lenh, d = _lenh_va_ea(tmp_path, ea_cl)
     r = E._chay_voi_slot(lenh, d, E.cau_hinh(), EA, may.slot)
-    assert r == {"xong": False, "loi": "bien dich hong: x"} and may.ghi == []
+    # 08/10/2026: ly do mang them bang chung cua slot (Trade.mqh co khong) - xem test_chan_doan_tester.py
+    assert r["xong"] is False and r["loi"].startswith("bien dich hong: x") and may.ghi == []
+    assert set(r) == {"xong", "loi"}
 
 
 def test_chay_that_khong_phai_windows_van_tu_choi_noi_ro(tmp_path, monkeypatch):

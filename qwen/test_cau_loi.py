@@ -23,6 +23,36 @@ class DauVet(unittest.TestCase):
         for dong, nhan in ca.items():
             self.assertEqual(CL.dau_vet(["binh thuong", dong])["nhan"], nhan, dong)
 
+    def test_nhan_log_tester_cu_the_thang_dong_chung_chung(self):
+        """08/10/2026 (`nhan/chan_doan_tester.py`): ly do tester hong gio mang `[tester:<nhan>]` cung dong chung
+        'tester khong ra bao cao' - nhan CU THE phai thang (neu khong thi 20 don van mang mot nhan 'tester_khong_ra' mu)."""
+        ca = {"chua_dang_nhap": "12:00:01 Network authorization on XMGlobal-MT5 10 failed",
+              "mat_ket_noi": "12:00:01 Network connection closed",
+              "thieu_lich_su": "12:00:01 Core 1 AUDCAD: no history data",
+              "khong_nap_ea": "12:00:01 Tester cannot load Experts\\_tu_dong\\x",
+              "ea_tu_choi": "12:00:01 Core 1 OnInit returned non-zero",
+              "het_bo_nho": "12:00:01 Core 1 not enough memory",
+              "agent_chet": "12:00:01 Tester agent 127.0.0.1:3000 stopped"}
+        for nhan, dong_log in ca.items():
+            ly_do = ("tester khong ra bao cao sau 94s [tester:%s] %s | slot s1 Trade.mqh=co, M1 AUDCAD: 2019=THIEU | "
+                     "log moi: terminal 6d, agent:a3000 6d") % (nhan, dong_log)
+            r = CL.dau_vet(['{"loi": "tester khong ra ket qua: %s"}' % ly_do])
+            self.assertEqual((r["nhan"], r["nhom"]), ("tester_" + nhan, "can_chan_doan"), nhan)
+            self.assertLessEqual(len(r["bang_chung"]), 240)
+        # nhan cu the nam trong 240 ky tu DAU cua bang chung (mot khi bi cat o do thi nguoi doc khong con thay)
+        dai = "tester khong ra bao cao sau 94s [tester:mat_ket_noi] " + "x" * 600
+        self.assertIn("[tester:mat_ket_noi]", CL.dau_vet([dai])["bang_chung"])
+
+    def test_tester_hong_khong_nhan_van_la_tester_khong_ra(self):
+        for dong in ("tester khong ra ket qua: tester khong ra bao cao sau 94s | slot s1 Trade.mqh=co",
+                     "tester khong ra bao cao (chan doan loi: RuntimeError: boom)"):
+            r = CL.dau_vet([dong])
+            self.assertEqual((r["nhan"], r["nhom"]), ("tester_khong_ra", "can_chan_doan"), dong)
+
+    def test_nhan_log_khong_bat_nham_chu_thuong(self):
+        for dong in ("co the tester:mat ket noi", "tester:thieu_lich_su", "[tester] ok", "[tester:khong_biet] x"):
+            self.assertIsNone(CL.dau_vet([dong]), dong)
+
     def test_ket_qua_binh_thuong_khong_bi_nghi(self):
         self.assertIsNone(CL.dau_vet(["xong 220000-AUDCAD-M5 co_lai_that 0.953", "TONG HOP", "co_lai 0.1"]))
         self.assertIsNone(CL.dau_vet([]))
