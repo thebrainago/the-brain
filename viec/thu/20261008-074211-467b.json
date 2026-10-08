@@ -1,0 +1,10 @@
+{
+ "id": "20261008-074211-467b",
+ "luc": "2026-10-08T07:42:11",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI-THI-TU-NAP-THEO-NANG-LUC-08102026",
+ "tra_loi": null,
+ "noi_dung": "THAY luat '<12 gio' trong thu 20-DON-MOI. Tu nap hang doi dua tren 4 thu, moi vong chay: (1) DUNG LUONG: o C:/R: con trong < 10GB -> KHONG nap, don bo cache/tmp truoc; (2) RAM+CPU: RAM trong < 4GB hoac CPU > 90% keo dai -> nap it/khong nap; (3) DON TON tinh bang GIO THUC (so don / so don xong moi gio do duoc), nap khi con < 3 gio thuc, nap vua du ~8 gio thuc; (4) VIEC CON CAN LAM: dem so (o CAO_NGUYEN chua thu_luoi, cap tai san x khung chua hepha, lich su lenh chua boc, link/dien dan chua doc). Dem = 0 thi KHONG nap don (bao cloud). Nap theo thu tu: xac nhan CAO_NGUYEN > hepha > seeker > quet thua. Khong nap quet day, khong M5. Ghi so dem + ly do nap/khong nap vao reports/tu_nap_log.md moi vong. Dong thoi: chay lai b nc cc ho_so_bot + b hepha tren cac bot da co lich su lenh va ghi reports/chat_luong_co_che.md: so co che that boc duoc, co che nao da kiem chung bang lenh khop, co che nao chi doan."
+}
