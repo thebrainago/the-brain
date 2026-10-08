@@ -1,0 +1,54 @@
+{
+  "ma": "5111-hepha-XAUUSD-H1",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 80.8,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "hepha",
+      "qt",
+      "3000",
+      "--ma",
+      "XAUUSD",
+      "--khung",
+      "H1",
+      "--ghep"
+    ],
+    "phien_ban_ma": "44b3b23d+sua",
+    "dong_cuoi": [
+      "GHEP: 1074 cau hinh (tu 84 cau hinh don), 6.2 nut trung binh",
+      "  ghep:luoi_chot_lui+luoi_cat_hoa    72",
+      "  ghep:luoi_chot_lui+luoi_hedge      72",
+      "  ghep:luoi_cat_hoa+luoi_hedge       72",
+      "  ghep:luoi_tia+luoi_chot_lui        48",
+      "  ghep:luoi_tia+luoi_hedge           48",
+      "  ghep:luoi_chot_lui+luoi_trailing   48",
+      "  ghep:luoi_chot_lui+luoi_bat_doi_xung 48",
+      "  ghep:luoi_cat_hoa+luoi_trailing    48",
+      "  ghep:luoi_cat_hoa+luoi_bat_doi_xung 48",
+      "  ghep:luoi_hedge+luoi_trailing      48",
+      "  ghep:luoi_hedge+luoi_bat_doi_xung  48",
+      "  ghep:luoi_chot_lui+luoi_chan_von   36",
+      "",
+      "de ra: 1074 cau hinh quan tri",
+      "",
+      "TY LE LOT TREN NHIEU: 0%  <- doc con so nay TRUOC bang duoi",
+      "cau hinh                           vuot    lai/nam      muc",
+      "",
+      "plan_hash: f5e6455e4cc7d20b569889cd9536b8f1  (FDR tinh 1074 suat)"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/link_nguon_ke_hoach.json": "{\n \"tong\": 0,\n \"rieng\": 0,\n \"theo_cach_lay\": {},\n \"theo_nen_tang\": {},\n \"theo_trang_thai\": {},\n \"bi_cat\": 0,\n \"muc\": []\n}",
+      "reports/link_nguon_ke_hoach.md": "CHUA CO LINK NAO.\n  Dan link (hoac dan nguyen tin nhan) vao tep `link_rieng.txt` o thu muc lab/ tren may nha, hoac chay: b link them \"<link>\"\n  Tep nay khong bao gio len GitHub.\n"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-08T14:41:45"
+}
