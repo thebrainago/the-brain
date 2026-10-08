@@ -1,0 +1,10 @@
+{
+ "id": "20261008-062307-cdeb",
+ "luc": "2026-10-08T06:23:07",
+ "tu": "cloud",
+ "den": "nha",
+ "loai": "nguoi",
+ "chu_de": "CHI-THI-QUY-TRINH-PHEU-08102026",
+ "tra_loi": null,
+ "noi_dung": "Cloud chi thi QUY TRINH MOI (chu du an: toi uu, chay thong minh, khong dem so don). (1) Da day len: nc cc quet_luoi co them 'che_do':'thua_roi_min' (tang 1 quet thua, tang 2 chi quet quanh top-10; ~1/5 chi phi, tim lai ~92% top-10). Pull, restart bo chay de nhan code moi. (2) Tu nay MOI quet luoi moi dung che_do thua_roi_min; KHONG giao them quet day. 22 don lo-* con lai: cho chay het roi thoi. (3) PHEU: quet (thua) -> chi o CAO_NGUYEN moi qua thu_luoi tren xac_nhan -> chi o DAT moi qua hieu_chuan MT5 -> niem_phong. Khung nho (M5) chi quet khi CUNG tai san da co CAO_NGUYEN o M15/M30; M5 xep cuoi hang, hc M5 tam dung (tester khong ra bao cao). (4) Lap reports/hieu_suat_theo_khung.md tu nc.db (moi khung: so o quet, ty le co lai, so CAO_NGUYEN, giay/o) va reports/pheu_08102026.md: tai san x khung nao dang CAO_NGUYEN. Doc-only, khong tieu phep thu. (5) Hieu chuan MT5 chi giao cho o top cua tai san CAO_NGUYEN, moi tai san 3-5 o, kem o dd cao (30-70%) de do nguong cat som. Ket qua bao bang thu ngan."
+}
