@@ -1,266 +1,277 @@
 {
- "phien_ban": 1,
- "ghi_chu": [
-  "Danh sach DIEN DAN / DANH SACH NHIEU TRANG cho `b dien-dan` (nhan/doc_dien_dan.py). Chi DOC trang cong khai. Doc tai_lieu/DIEN_DAN_DOC.md.",
-  "Chu du an 03/10/2026: moi nuoc it nhat mot dien dan trader; doc phan trang tung trang, nho moc 'den trang N', quet lai 1 tuan / lan.",
-  "`bat` mac dinh la false: chi bat dien dan DA DO duoc (b dien-dan do). Muc 'kiem_tra' ghi nguon su that: do 15/09 hay 'tu tri nho, CHUA kiem'.",
-  "cach_lay: http = GET thuong (UA that thu, khong gia nguoi) · cdp = Chrome AI cong 9224 (ho so .browser_thebrain) doc bang request co Referer · cdp_render = nhu cdp nhung mo tab de chay JS.",
-  "KHONG dua khoa / mat khau / link rieng vao file nay (repo PUBLIC). Khong tu dang ky tai khoan, khong tham gia nhom, khong theo doi: xem tai_lieu/DIEN_DAN_DOC.md muc 'Khong lam'."
- ],
- "chu_ky_gio": 168,
- "mac_dinh": {
-  "toi_da_trang_luot": 10,
-  "toi_da_trang_pass": 200,
-  "tran_ngay_mien": 120,
-  "tran_ngay_theo_mien": {"mql5.com": 60},
-  "do_dai_tieu_de": 25
- },
- "nuoc_chua_co_ung_vien": ["pt", "it", "ko", "ms", "tl", "bn"],
- "dien_dan": [
-  {
-   "ma": "mql5_forum_ru",
-   "ten": "Dien dan MQL5 (tieng Nga) - nha cua MetaQuotes",
-   "nuoc": "ru",
-   "url": "https://www.mql5.com/ru/forum",
-   "bat": true,
-   "cach_lay": "http",
-   "mau_bai": "mql5\\.com/(?:[a-z]{2}/)?forum/\\d+",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: VAO_DUOC 180201 ky tu, 106 link bai. Phan trang CHUA kiem: `b dien-dan do` se noi co thay rel=next / so trang khong. Neu 403/429 thi DUNG (mql5 cam IP sau ~50-150 yeu cau)."
+  "phien_ban": 1,
+  "ghi_chu": [
+    "Danh sach DIEN DAN / DANH SACH NHIEU TRANG cho `b dien-dan` (nhan/doc_dien_dan.py). Chi DOC trang cong khai. Doc tai_lieu/DIEN_DAN_DOC.md.",
+    "Chu du an 03/10/2026: moi nuoc it nhat mot dien dan trader; doc phan trang tung trang, nho moc 'den trang N', quet lai 1 tuan / lan.",
+    "`bat` mac dinh la false: chi bat dien dan DA DO duoc (b dien-dan do). Muc 'kiem_tra' ghi nguon su that: do 15/09 hay 'tu tri nho, CHUA kiem'.",
+    "cach_lay: http = GET thuong (UA that thu, khong gia nguoi) · cdp = Chrome AI cong 9224 (ho so .browser_thebrain) doc bang request co Referer · cdp_render = nhu cdp nhung mo tab de chay JS.",
+    "KHONG dua khoa / mat khau / link rieng vao file nay (repo PUBLIC). Khong tu dang ky tai khoan, khong tham gia nhom, khong theo doi: xem tai_lieu/DIEN_DAN_DOC.md muc 'Khong lam'."
+  ],
+  "chu_ky_gio": 168,
+  "mac_dinh": {
+    "toi_da_trang_luot": 10,
+    "toi_da_trang_pass": 200,
+    "tran_ngay_mien": 120,
+    "tran_ngay_theo_mien": {
+      "mql5.com": 60
+    },
+    "do_dai_tieu_de": 25
   },
-  {
-   "ma": "mql5_tin_hieu_mt5",
-   "ten": "Danh sach tin hieu MQL5 (MT5) - nguon 'nguoi thang'",
-   "nuoc": "en",
-   "url": "https://www.mql5.com/en/signals/mt5/list",
-   "bat": false,
-   "cach_lay": "http",
-   "mau_trang": "{base}/page{n}",
-   "mau_bai": "mql5\\.com/(?:[a-z]{2}/)?signals/\\d+",
-   "kieu": "danh_sach",
-   "kiem_tra": "chua do. Tat de khong mo them nguon khi chua co DAT o xac_nhan (CLAUDE.md, NGUON_NGUOI_THANG). Bat khi can them ung vien tin hieu."
-  },
-  {
-   "ma": "traderviet_ea",
-   "ten": "TraderViet - muc Robot / EA / Indicator (Viet Nam)",
-   "nuoc": "vi",
-   "url": "https://traderviet.com/forums/robot-ea-indicator.44/",
-   "bat": true,
-   "cach_lay": "http",
-   "mau_trang": "{base}page-{n}",
-   "mau_bai": "traderviet\\.com/t/[^\\s\"']+",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: VAO_DUOC 156154 ky tu, 89 link bai (bai la /t/<slug>, khong phai /threads/). Trang 2+ dung kieu XenForo /page-N: CHUA kiem."
-  },
-  {
-   "ma": "thaiforexschool",
-   "ten": "Thai Forex School (Thai Lan)",
-   "nuoc": "th",
-   "url": "https://www.thaiforexschool.com/",
-   "bat": true,
-   "cach_lay": "http",
-   "mau_trang": "{base}page/{n}/",
-   "kieu": "danh_sach",
-   "kiem_tra": "15/09: VAO_DUOC 96094 ky tu, 55 link. Bai nhan bang do dai tieu de (khong co mau_bai). /page/N/ la kieu WordPress, CHUA kiem."
-  },
-  {
-   "ma": "note_fx",
-   "ten": "note.com - the FX tu dong (Nhat Ban)",
-   "nuoc": "ja",
-   "url": "https://note.com/hashtag/FX%E8%87%AA%E5%8B%95%E5%A3%B2%E8%B2%B7",
-   "bat": true,
-   "cach_lay": "http",
-   "mau_bai": "note\\.com/[^/\\s\"']+/n/n[0-9a-f]+",
-   "kieu": "danh_sach",
-   "kiem_tra": "15/09: VAO_DUOC 1004203 ky tu, 50 link. Trang cuon vo han bang JS: chi doc trang 1 moi luot; muon nhieu hon thi thu cdp_render."
-  },
-  {
-   "ma": "fxon",
-   "ten": "FX-On (Nhat Ban)",
-   "nuoc": "ja",
-   "url": "https://fx-on.com/",
-   "bat": true,
-   "cach_lay": "http",
-   "mau_bai": "fx-on\\.com/(?:[a-z]{2}/)?(?:post|systemtrade|review)/[^\\s\"']*\\d+",
-   "kieu": "danh_sach",
-   "kiem_tra": "15/09: VAO_DUOC 246962 ky tu, 28 link. Trang chu khong phan trang (chi trang 1) cho toi khi biet muc co phan trang."
-  },
-  {
-   "ma": "smartlab_blog",
-   "ten": "Smart-Lab - blog giao dich (Nga)",
-   "nuoc": "ru",
-   "url": "https://smart-lab.ru/blogs/",
-   "bat": false,
-   "cach_lay": "http",
-   "mau_trang": "{base}page{n}/",
-   "mau_bai": "smart-lab\\.ru/(?:blog/\\d+\\.php|(?:blog|company)/[^/\\s\"']+/\\d+)",
-   "kieu": "danh_sach",
-   "kiem_tra": "15/09: VAO_DUOC nhung chi 1 link bai (mau_bai cu co the sai). Chay `b dien-dan do` roi bat neu so bai >= 3."
-  },
-  {
-   "ma": "indomt5",
-   "ten": "Kaskus - muc Forex (Indonesia)",
-   "nuoc": "id",
-   "url": "https://www.kaskus.co.id/forum/64/forex",
-   "bat": false,
-   "cach_lay": "cdp_render",
-   "mau_bai": "kaskus\\.co\\.id/thread/[0-9a-f]+",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: VAO_NHUNG_0_LINK (82641 ky tu, 0 bai: trang dung JS). Thu cdp_render khi Chrome AI cong 9224 dang mo."
-  },
-  {
-   "ma": "forexforum_tr",
-   "ten": "Forex Forum TR (Tho Nhi Ky)",
-   "nuoc": "tr",
-   "url": "https://www.forexforum.com.tr/",
-   "bat": false,
-   "cach_lay": "cdp",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224); neu van chan thi bo, khong ne."
-  },
-  {
-   "ma": "forex_nawigator",
-   "ten": "Forex Nawigator (Ba Lan)",
-   "nuoc": "pl",
-   "url": "https://www.forex-nawigator.biz/forum/",
-   "bat": false,
-   "cach_lay": "cdp",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224)."
-  },
-  {
-   "ma": "bankier_forum",
-   "ten": "Bankier.pl - dien dan chung khoan (Ba Lan)",
-   "nuoc": "pl",
-   "url": "https://www.bankier.pl/forum/",
-   "bat": false,
-   "cach_lay": "http",
-   "kieu": "dien_dan",
-   "kiem_tra": "chua kiem (ten tu tri nho). Dien dan chung khoan chung, it bot: uu tien thap, chi de du mat nuoc."
-  },
-  {
-   "ma": "wallstreet_online",
-   "ten": "Wallstreet-Online - thao luan (Duc)",
-   "nuoc": "de",
-   "url": "https://www.wallstreet-online.de/diskussion/",
-   "bat": false,
-   "cach_lay": "cdp",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224)."
-  },
-  {
-   "ma": "ariva_forum",
-   "ten": "Ariva - dien dan (Duc)",
-   "nuoc": "de",
-   "url": "https://www.ariva.de/forum/",
-   "bat": false,
-   "cach_lay": "http",
-   "kieu": "dien_dan",
-   "kiem_tra": "chua kiem (ten tu tri nho). Phong du phong cho nuoc Duc."
-  },
-  {
-   "ma": "arabictrader",
-   "ten": "Arabic Trader (A Rap)",
-   "nuoc": "ar",
-   "url": "https://www.arabictrader.com/",
-   "bat": false,
-   "cach_lay": "cdp",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224)."
-  },
-  {
-   "ma": "gogojungle",
-   "ten": "GogoJungle - cho he thong FX (Nhat Ban)",
-   "nuoc": "ja",
-   "url": "https://www.gogojungle.co.jp/systemtrade/fx",
-   "bat": false,
-   "cach_lay": "cdp",
-   "mau_bai": "gogojungle\\.co\\.jp/(?:systemtrade|fx)/[^\\s\"']*\\d+",
-   "kieu": "danh_sach",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC."
-  },
-  {
-   "ma": "mmgp",
-   "ten": "MMGP (Nga)",
-   "nuoc": "ru",
-   "url": "https://mmgp.com/forums/",
-   "bat": false,
-   "cach_lay": "cdp",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC."
-  },
-  {
-   "ma": "pantip_sinlapa",
-   "ten": "Pantip - the Forex (Thai Lan)",
-   "nuoc": "th",
-   "url": "https://pantip.com/tag/Forex",
-   "bat": false,
-   "cach_lay": "cdp_render",
-   "mau_bai": "pantip\\.com/topic/\\d+",
-   "kieu": "danh_sach",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC."
-  },
-  {
-   "ma": "fx168",
-   "ten": "FX168 (Trung Quoc)",
-   "nuoc": "zh",
-   "url": "https://www.fx168.com/",
-   "bat": false,
-   "cach_lay": "cdp",
-   "kieu": "danh_sach",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC."
-  },
-  {
-   "ma": "forexfactory",
-   "ten": "Forex Factory - dien dan",
-   "nuoc": "en",
-   "url": "https://www.forexfactory.com/forum",
-   "bat": false,
-   "cach_lay": "cdp",
-   "mau_bai": "forexfactory\\.com/thread/\\d+",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC (Cloudflare). Chan = DUNG, khong ne; chi thu bang Chrome AI mot lan."
-  },
-  {
-   "ma": "babypips_forum",
-   "ten": "BabyPips - dien dan",
-   "nuoc": "en",
-   "url": "https://forums.babypips.com/",
-   "bat": false,
-   "cach_lay": "cdp",
-   "mau_bai": "forums\\.babypips\\.com/t/[^\\s\"']+/\\d+",
-   "kieu": "dien_dan",
-   "kiem_tra": "15/09: KHONG_VAO_DUOC. Dien dan Discourse: sau khi vao duoc se co rel=next."
-  },
-  {
-   "ma": "rankia_foros",
-   "ten": "Rankia - foros (Tay Ban Nha)",
-   "nuoc": "es",
-   "url": "https://www.rankia.com/foros/",
-   "bat": false,
-   "cach_lay": "http",
-   "kieu": "dien_dan",
-   "kiem_tra": "chua kiem (ten tu tri nho). Dien dan dau tu chung, it bot: chi de du mat nuoc."
-  },
-  {
-   "ma": "boursorama_forum",
-   "ten": "Boursorama - forum (Phap)",
-   "nuoc": "fr",
-   "url": "https://www.boursorama.com/bourse/forum/",
-   "bat": false,
-   "cach_lay": "http",
-   "kieu": "dien_dan",
-   "kiem_tra": "chua kiem (ten tu tri nho). Dien dan chung khoan chung: chi de du mat nuoc."
-  },
-  {
-   "ma": "tradingqna",
-   "ten": "TradingQ&A - Zerodha (An Do)",
-   "nuoc": "in",
-   "url": "https://tradingqna.com/",
-   "bat": false,
-   "cach_lay": "http",
-   "kieu": "dien_dan",
-   "kiem_tra": "chua kiem (ten tu tri nho). Dien dan Discourse (co rel=next khi vao duoc); traderji da chet (trang mac dinh Apache)."
-  }
- ]
+  "nuoc_chua_co_ung_vien": [
+    "pt",
+    "it",
+    "ko",
+    "ms",
+    "tl",
+    "bn"
+  ],
+  "dien_dan": [
+    {
+      "ma": "mql5_forum_ru",
+      "ten": "Dien dan MQL5 (tieng Nga) - nha cua MetaQuotes",
+      "nuoc": "ru",
+      "url": "https://www.mql5.com/ru/forum",
+      "bat": true,
+      "cach_lay": "http",
+      "mau_bai": "mql5\\.com/(?:[a-z]{2}/)?forum/\\d+",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: VAO_DUOC 180201 ky tu, 106 link bai. Phan trang CHUA kiem: `b dien-dan do` se noi co thay rel=next / so trang khong. Neu 403/429 thi DUNG (mql5 cam IP sau ~50-150 yeu cau).",
+      "mau_trang": "{base}/page{n}",
+      "phan_trang": "auto"
+    },
+    {
+      "ma": "mql5_tin_hieu_mt5",
+      "ten": "Danh sach tin hieu MQL5 (MT5) - nguon 'nguoi thang'",
+      "nuoc": "en",
+      "url": "https://www.mql5.com/en/signals/mt5/list",
+      "bat": true,
+      "cach_lay": "http",
+      "mau_trang": "{base}/page{n}",
+      "mau_bai": "mql5\\.com/(?:[a-z]{2}/)?signals/\\d+",
+      "kieu": "danh_sach",
+      "kiem_tra": "08/10 do: dung duoc, co phan trang; chu du an yeu cau quet sau -> BAT"
+    },
+    {
+      "ma": "traderviet_ea",
+      "ten": "TraderViet - muc Robot / EA / Indicator (Viet Nam)",
+      "nuoc": "vi",
+      "url": "https://traderviet.com/forums/robot-ea-indicator.44/",
+      "bat": true,
+      "cach_lay": "http",
+      "mau_trang": "{base}page-{n}",
+      "mau_bai": "traderviet\\.com/t/[^\\s\"']+",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: VAO_DUOC 156154 ky tu, 89 link bai (bai la /t/<slug>, khong phai /threads/). Trang 2+ dung kieu XenForo /page-N: CHUA kiem."
+    },
+    {
+      "ma": "thaiforexschool",
+      "ten": "Thai Forex School (Thai Lan)",
+      "nuoc": "th",
+      "url": "https://www.thaiforexschool.com/",
+      "bat": true,
+      "cach_lay": "http",
+      "mau_trang": "{base}page/{n}/",
+      "kieu": "danh_sach",
+      "kiem_tra": "15/09: VAO_DUOC 96094 ky tu, 55 link. Bai nhan bang do dai tieu de (khong co mau_bai). /page/N/ la kieu WordPress, CHUA kiem."
+    },
+    {
+      "ma": "note_fx",
+      "ten": "note.com - the FX tu dong (Nhat Ban)",
+      "nuoc": "ja",
+      "url": "https://note.com/hashtag/FX%E8%87%AA%E5%8B%95%E5%A3%B2%E8%B2%B7",
+      "bat": true,
+      "cach_lay": "http",
+      "mau_bai": "note\\.com/[^/\\s\"']+/n/n[0-9a-f]+",
+      "kieu": "danh_sach",
+      "kiem_tra": "15/09: VAO_DUOC 1004203 ky tu, 50 link. Trang cuon vo han bang JS: chi doc trang 1 moi luot; muon nhieu hon thi thu cdp_render."
+    },
+    {
+      "ma": "fxon",
+      "ten": "FX-On (Nhat Ban)",
+      "nuoc": "ja",
+      "url": "https://fx-on.com/",
+      "bat": true,
+      "cach_lay": "http",
+      "mau_bai": "fx-on\\.com/(?:[a-z]{2}/)?(?:post|systemtrade|review)/[^\\s\"']*\\d+",
+      "kieu": "danh_sach",
+      "kiem_tra": "15/09: VAO_DUOC 246962 ky tu, 28 link. Trang chu khong phan trang (chi trang 1) cho toi khi biet muc co phan trang."
+    },
+    {
+      "ma": "smartlab_blog",
+      "ten": "Smart-Lab - blog giao dich (Nga)",
+      "nuoc": "ru",
+      "url": "https://smart-lab.ru/blogs/",
+      "bat": false,
+      "cach_lay": "http",
+      "mau_trang": "{base}page{n}/",
+      "mau_bai": "smart-lab\\.ru/(?:blog/\\d+\\.php|(?:blog|company)/[^/\\s\"']+/\\d+)",
+      "kieu": "danh_sach",
+      "kiem_tra": "15/09: VAO_DUOC nhung chi 1 link bai (mau_bai cu co the sai). Chay `b dien-dan do` roi bat neu so bai >= 3."
+    },
+    {
+      "ma": "indomt5",
+      "ten": "Kaskus - muc Forex (Indonesia)",
+      "nuoc": "id",
+      "url": "https://www.kaskus.co.id/forum/64/forex",
+      "bat": false,
+      "cach_lay": "cdp_render",
+      "mau_bai": "kaskus\\.co\\.id/thread/[0-9a-f]+",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: VAO_NHUNG_0_LINK (82641 ky tu, 0 bai: trang dung JS). Thu cdp_render khi Chrome AI cong 9224 dang mo."
+    },
+    {
+      "ma": "forexforum_tr",
+      "ten": "Forex Forum TR (Tho Nhi Ky)",
+      "nuoc": "tr",
+      "url": "https://www.forexforum.com.tr/",
+      "bat": false,
+      "cach_lay": "cdp",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224); neu van chan thi bo, khong ne."
+    },
+    {
+      "ma": "forex_nawigator",
+      "ten": "Forex Nawigator (Ba Lan)",
+      "nuoc": "pl",
+      "url": "https://www.forex-nawigator.biz/forum/",
+      "bat": false,
+      "cach_lay": "cdp",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224)."
+    },
+    {
+      "ma": "bankier_forum",
+      "ten": "Bankier.pl - dien dan chung khoan (Ba Lan)",
+      "nuoc": "pl",
+      "url": "https://www.bankier.pl/forum/",
+      "bat": false,
+      "cach_lay": "http",
+      "kieu": "dien_dan",
+      "kiem_tra": "chua kiem (ten tu tri nho). Dien dan chung khoan chung, it bot: uu tien thap, chi de du mat nuoc."
+    },
+    {
+      "ma": "wallstreet_online",
+      "ten": "Wallstreet-Online - thao luan (Duc)",
+      "nuoc": "de",
+      "url": "https://www.wallstreet-online.de/diskussion/",
+      "bat": false,
+      "cach_lay": "cdp",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224)."
+    },
+    {
+      "ma": "ariva_forum",
+      "ten": "Ariva - dien dan (Duc)",
+      "nuoc": "de",
+      "url": "https://www.ariva.de/forum/",
+      "bat": true,
+      "cach_lay": "http",
+      "kieu": "dien_dan",
+      "kiem_tra": "08/10 do: dung duoc, co phan trang; chu du an yeu cau quet sau -> BAT"
+    },
+    {
+      "ma": "arabictrader",
+      "ten": "Arabic Trader (A Rap)",
+      "nuoc": "ar",
+      "url": "https://www.arabictrader.com/",
+      "bat": false,
+      "cach_lay": "cdp",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC. Do lai bang Chrome AI (cong 9224)."
+    },
+    {
+      "ma": "gogojungle",
+      "ten": "GogoJungle - cho he thong FX (Nhat Ban)",
+      "nuoc": "ja",
+      "url": "https://www.gogojungle.co.jp/systemtrade/fx",
+      "bat": false,
+      "cach_lay": "cdp",
+      "mau_bai": "gogojungle\\.co\\.jp/(?:systemtrade|fx)/[^\\s\"']*\\d+",
+      "kieu": "danh_sach",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC."
+    },
+    {
+      "ma": "mmgp",
+      "ten": "MMGP (Nga)",
+      "nuoc": "ru",
+      "url": "https://mmgp.com/forums/",
+      "bat": false,
+      "cach_lay": "cdp",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC."
+    },
+    {
+      "ma": "pantip_sinlapa",
+      "ten": "Pantip - the Forex (Thai Lan)",
+      "nuoc": "th",
+      "url": "https://pantip.com/tag/Forex",
+      "bat": false,
+      "cach_lay": "cdp_render",
+      "mau_bai": "pantip\\.com/topic/\\d+",
+      "kieu": "danh_sach",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC."
+    },
+    {
+      "ma": "fx168",
+      "ten": "FX168 (Trung Quoc)",
+      "nuoc": "zh",
+      "url": "https://www.fx168.com/",
+      "bat": false,
+      "cach_lay": "cdp",
+      "kieu": "danh_sach",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC."
+    },
+    {
+      "ma": "forexfactory",
+      "ten": "Forex Factory - dien dan",
+      "nuoc": "en",
+      "url": "https://www.forexfactory.com/forum",
+      "bat": false,
+      "cach_lay": "cdp",
+      "mau_bai": "forexfactory\\.com/thread/\\d+",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC (Cloudflare). Chan = DUNG, khong ne; chi thu bang Chrome AI mot lan."
+    },
+    {
+      "ma": "babypips_forum",
+      "ten": "BabyPips - dien dan",
+      "nuoc": "en",
+      "url": "https://forums.babypips.com/",
+      "bat": false,
+      "cach_lay": "cdp",
+      "mau_bai": "forums\\.babypips\\.com/t/[^\\s\"']+/\\d+",
+      "kieu": "dien_dan",
+      "kiem_tra": "15/09: KHONG_VAO_DUOC. Dien dan Discourse: sau khi vao duoc se co rel=next."
+    },
+    {
+      "ma": "rankia_foros",
+      "ten": "Rankia - foros (Tay Ban Nha)",
+      "nuoc": "es",
+      "url": "https://www.rankia.com/foros/",
+      "bat": false,
+      "cach_lay": "http",
+      "kieu": "dien_dan",
+      "kiem_tra": "chua kiem (ten tu tri nho). Dien dan dau tu chung, it bot: chi de du mat nuoc."
+    },
+    {
+      "ma": "boursorama_forum",
+      "ten": "Boursorama - forum (Phap)",
+      "nuoc": "fr",
+      "url": "https://www.boursorama.com/bourse/forum/",
+      "bat": false,
+      "cach_lay": "http",
+      "kieu": "dien_dan",
+      "kiem_tra": "chua kiem (ten tu tri nho). Dien dan chung khoan chung: chi de du mat nuoc."
+    },
+    {
+      "ma": "tradingqna",
+      "ten": "TradingQ&A - Zerodha (An Do)",
+      "nuoc": "in",
+      "url": "https://tradingqna.com/",
+      "bat": true,
+      "cach_lay": "http",
+      "kieu": "dien_dan",
+      "kiem_tra": "08/10 do: dung duoc, co phan trang; chu du an yeu cau quet sau -> BAT"
+    }
+  ]
 }
