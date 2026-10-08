@@ -8,7 +8,7 @@
 //+------------------------------------------------------------------+
 #property copyright "The Brain"
 #property version   "1.00"
-#property description "Full grid EA: mirrors nhan/luoi.py (lot kinds, widening steps, pair-closing sparks, wait-pullback, money take-profit)."
+#property description "Full grid EA: mirrors nhan/luoi.py (lot kinds, widening steps, pair-closing sparks, wait-pullback, money take-profit, basket cut-loss, time exit, rest, entry-hour window)."
 
 // VI SAO CO FILE NAY
 //   `ea_LuoiThamChieu.mq5` chi lam duoc luoi TOI THIEU (lot phang / nhan, buoc co dinh, TP theo pip). Khai bao tot nhat cua
@@ -35,8 +35,17 @@
 //     so voi moc chot roi moi mo tang 1.
 //   - CHOT THEO TIEN (InpTakeMoney > 0): thay TP theo pip. Dong het ro khi lai noi (theo BID, DON VI TIEN BAO GIA, vi du CAD
 //     voi AUDCAD) >= InpTakeMoney * InpLot / 0,01 (dung sai nua point tren tong lot, nhu TP). Khi do KHONG dat TP may chu.
-//   - KHONG co cat lo, KHONG co dung-lo-tong (luoi.py cung chua cai dat `dung_lo_tong`). Tai khoan phai la HEDGING.
-//   - Khoi dong lai giua chung: k duoc suy lai bang so lenh dang mo (xap xi); moc cho lui mat.
+//   - CAT LO CA RO (InpCutPips / InpCutMoney > 0, them 08/10/2026 de TAI LAP nguoi thang da boc): dong het ro khi BID di NGUOC
+//     >= khoang cach cat so voi trung binh co trong so (tinh lai sau moi tang / tia). Khoang cach = muc GAN trung binh hon trong
+//     InpCutPips va InpCutMoney * (InpLot / 0,01) / (hop dong * tong lot). Cat xong: ro rong, KHONG cho lui, mo lai tang 1 NGAY
+//     (neu duoc phep: het nghi + trong cua so gio). Kiem cat TRUOC khi them tang (nhay gia vuot ca hai -> cat). (Cat kiem tren MOI tick;
+//     sau mot cap tia khong bao gio cat ngay - xem chung minh o docstring `luoi._mot_ro_duong`.)
+//   - THOAT THEO GIO (InpExitHours > 0): ro song >= so gio nay (tinh tu luc mo tang 1 cua ro, gio TICK) -> dong het o gia hien tai.
+//   - NGHI (InpRestHours > 0): sau CAT LO / THOAT GIO chua mo ro MOI cho den het so gio nay. Chot loi (TP, tia, chot tien) khong nghi.
+//   - LOC GIO VAO LENH (InpHourFrom != InpHourTo): chi MO RO MOI khi gio may chu (TimeCurrent) nam trong [tu, den); tu > den = qua
+//     nua dem. KHONG chan them tang cua ro dang mo, khong chan chot / cat. Gio quy ra GIAY NGUYEN (lam tron nua len) nhu luoi.py.
+//   - KHONG co dung-lo-tong (luoi.py cung chua cai dat `dung_lo_tong`). Tai khoan phai la HEDGING.
+//   - Khoi dong lai giua chung: k duoc suy lai bang so lenh dang mo (xap xi); moc cho lui mat; luc mo ro suy tu lenh mo som nhat.
 //
 // CACH DOI CHIEU (cung ma, cung cua so, cung von; ket qua vao so tay nc.db)
 //   MT5   : b nc cc ea_tho_chay '{"ea":"ea_LuoiDayDu.mq5","ma":"AUDCAD","khung":"M15","doan":"kham_pha","gt_id":N,
@@ -73,9 +82,23 @@ input int    InpSparkPerBar = 999;       // toi da so cap tia moi NEN cua khung 
 input double InpWaitBack    = 0.0;       // pip cho gia lui truoc khi mo lai tang 1; 0 = mo lai ngay (cho_lui)
 input double InpTakeMoney   = 0.0;       // chot ca ro theo tien bao gia tren 0,01 lot; 0 = chot theo pip (chot_tien)
 input double InpPipSize     = 0.0;       // kich thuoc 1 pip theo GIA; 0 = tu tinh (FX 3/5 chu so: 10 point)
+input double InpCutPips     = 0.0;       // cat lo ca ro khi BID di nguoc >= pip nay so voi trung binh co trong so; 0 = tat (cat_lo_pip)
+input double InpCutMoney    = 0.0;       // cat lo ca ro khi lo noi >= tien bao gia tren 0,01 lot; 0 = tat (cat_lo_tien)
+input double InpExitHours   = 0.0;       // dong ca ro khi song >= so gio nay (tu luc mo tang 1); 0 = tat (thoat_gio)
+input double InpRestHours   = 0.0;       // sau cat lo / thoat gio: nghi so gio nay roi moi mo ro MOI; 0 = vao lai ngay (nghi_gio)
+input double InpHourFrom    = 0.0;       // chi MO RO MOI trong [tu, den) gio may chu; tu > den = qua nua dem; tu == den = tat (gio_vao_tu)
+input double InpHourTo      = 0.0;       // (gio_vao_den)
 
 CTrade   g_trade;
 double   g_pip = 0.0;
+double   g_exit_s = 0.0;                 // InpExitHours / InpRestHours / InpHourFrom / InpHourTo quy ra GIAY NGUYEN (nhu luoi.cau_hinh_gio)
+double   g_rest_s = 0.0;
+double   g_from_s = 0.0;
+double   g_to_s = 0.0;
+datetime g_t_mo[2];                      // luc mo tang 1 cua ro hien tai (gio tick) - cho thoat theo gio
+datetime g_nghi_den[2];                  // != 0: chua mo ro MOI truoc moc nay (sau cat lo / thoat gio)
+int      g_so_cat = 0;                   // thong ke cho OnDeinit
+int      g_so_gio = 0;
 int      g_tang[2];                      // so tang DA MO cua ro hien tai (khong tut khi tia). [0] = mua, [1] = ban
 double   g_cho[2];                       // != 0: dang cho BID toi muc nay moi mo tang 1
 double   g_tp_bid[2];                    // moc chot theo BID cua ro (de tinh moc cho lui)
@@ -98,6 +121,7 @@ struct SRo
    double lot_cuoi;
    double bid_cuoi;
    double lai_noi;                       // lai noi theo BID, tien bao gia
+   datetime t_dau;                       // gio mo cua lenh mo SOM nhat (chi dung khi khoi dong lai giua chung)
   };
 
 //+------------------------------------------------------------------+
@@ -111,6 +135,20 @@ int OnInit()
       Print("LDD: tham so sai (InpMode 0..2, InpMaxLevels 1..60, InpLotKind 0..2, he so > 0, buoc > 0, lot > 0, TP > 0 hoac chot tien > 0)");
       return INIT_PARAMETERS_INCORRECT;
      }
+   if(InpCutPips < 0.0 || InpCutMoney < 0.0 || InpExitHours < 0.0 || InpRestHours < 0.0 || InpExitHours > 1.0e6 ||
+      InpRestHours > 1.0e6 || InpHourFrom < 0.0 || InpHourFrom > 24.0 || InpHourTo < 0.0 || InpHourTo > 24.0)
+     {
+      Print("LDD: tham so sai (cat lo, thoat gio, nghi >= 0 va <= 1.000.000 gio; gio vao lenh trong [0, 24])");
+      return INIT_PARAMETERS_INCORRECT;
+     }
+   g_exit_s = MathFloor(InpExitHours * 3600.0 + 0.5);                 // giay NGUYEN, lam tron nua len: y het luoi.cau_hinh_gio
+   g_rest_s = MathFloor(InpRestHours * 3600.0 + 0.5);
+   g_from_s = MathFloor(InpHourFrom * 3600.0 + 0.5);
+   g_to_s   = MathFloor(InpHourTo * 3600.0 + 0.5);
+   g_t_mo[0] = 0;
+   g_t_mo[1] = 0;
+   g_nghi_den[0] = 0;
+   g_nghi_den[1] = 0;
    if((ENUM_ACCOUNT_MARGIN_MODE)AccountInfoInteger(ACCOUNT_MARGIN_MODE) != ACCOUNT_MARGIN_MODE_RETAIL_HEDGING)
      {
       Print("LDD: can tai khoan HEDGING (tai khoan nay la netting/exchange: cac tang cung huong se bi gop mot vi the)");
@@ -132,7 +170,8 @@ int OnInit()
 
 void OnDeinit(const int reason)
   {
-   PrintFormat("LDD: ket thuc - so cap tia=%d, so tang dang mo nhieu nhat=%d", g_so_tia, g_tang_max);
+   PrintFormat("LDD: ket thuc - so cap tia=%d, so tang dang mo nhieu nhat=%d, so ro cat lo=%d, so ro thoat gio=%d",
+               g_so_tia, g_tang_max, g_so_cat, g_so_gio);
   }
 
 //+------------------------------------------------------------------+
@@ -215,6 +254,7 @@ void DocRo(const ENUM_POSITION_TYPE loai, SRo &r)
    r.lot_cuoi = 0.0;
    r.bid_cuoi = 0.0;
    r.lai_noi = 0.0;
+   r.t_dau = 0;
    const double bid    = SymbolInfoDouble(_Symbol, SYMBOL_BID);
    const double hd     = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_CONTRACT_SIZE);
    const double chieu  = (loai == POSITION_TYPE_BUY) ? 1.0 : -1.0;
@@ -234,6 +274,7 @@ void DocRo(const ENUM_POSITION_TYPE loai, SRo &r)
          r.tk_dau = tk;
          r.lot_dau = l;
          r.bid_dau = g;
+         r.t_dau = (datetime)PositionGetInteger(POSITION_TIME);
         }
       if(tk > r.tk_cuoi)
         {
@@ -299,9 +340,28 @@ void DongHet(const ENUM_POSITION_TYPE loai)
      }
   }
 
+// Duoc MO RO MOI luc nay khong: het thoi gian nghi VA gio may chu (tick) nam trong cua so vao lenh. Hai tinh nang tat -> luon duoc.
+// Giong `cho_phep_mo` cua luoi.py (gio tick thay cho gio mo bar).
+bool CoTheMoRo(const int i)
+  {
+   const datetime t = TimeCurrent();
+   if(g_nghi_den[i] != 0 && t < g_nghi_den[i])
+      return false;
+   if(g_from_s != g_to_s)
+     {
+      const double td  = (double)t;
+      const double sec = td - 86400.0 * MathFloor(td / 86400.0);                 // giay trong ngay [0, 86400)
+      if(g_from_s < g_to_s)
+         return (sec >= g_from_s && sec < g_to_s);
+      return (sec >= g_from_s || sec < g_to_s);                                  // cua so qua nua dem
+     }
+   return true;
+  }
+
 // mo tang 1 cua ro MOI. Ro vua dong boi TP may chu / chot tien -> cho lui (neu bat) roi mo; ro tia het (g_co da bo) -> mo ngay.
-// Goi o DAU tick (ro dong giua hai tick boi TP may chu) va NGAY SAU khi EA tu dong ro (tia het / chot tien) - engine mo lai
-// o chinh bar dong, nen EA khong cho tick sau.
+// Goi o DAU tick (ro dong giua hai tick boi TP may chu) va NGAY SAU khi EA tu dong ro (tia het / chot tien / cat lo / thoat gio) -
+// engine mo lai o chinh bar dong, nen EA khong cho tick sau. Ngoai cua so gio / dang nghi: giu nguyen (ro rong, muc cho lui con),
+// thu lai o tick sau.
 bool MoRoMoi(const ENUM_POSITION_TYPE loai)
   {
    const bool   mua   = (loai == POSITION_TYPE_BUY);
@@ -320,17 +380,71 @@ bool MoRoMoi(const ENUM_POSITION_TYPE loai)
       const bool toi = mua ? (bid <= g_cho[i] + 0.5 * _Point) : (bid >= g_cho[i] - 0.5 * _Point);
       if(!toi)
          return false;
+      if(!CoTheMoRo(i))                           // toi muc cho nhung dang nghi / ngoai cua so gio: giu muc cho, chua vao
+         return false;
       g_cho[i] = 0.0;
      }
+   else if(!CoTheMoRo(i))                         // ro rong khong cho lui: chi vao khi het nghi va trong cua so gio
+      return false;
    if(!MoTang(loai, 0))
       return false;
    g_tang[i] = 1;
    g_co[i] = true;
+   g_t_mo[i] = TimeCurrent();
    SRo r;
    DocRo(loai, r);
    DatTP(loai, r);
    if(r.n > g_tang_max)
       g_tang_max = r.n;
+   return true;
+  }
+
+// MOC BID ma ro `r` (khong rong) bi CAT LO: trung binh co trong so lui `khoang` ve phia nguoc chieu ro, `khoang` = muc GAN trung binh
+// hon trong (InpCutPips, InpCutMoney * (InpLot / 0,01) / (hop dong * tong lot)) - giong `moc_cat` cua luoi.py. Chi goi khi cat lo bat.
+double MocCat(const SRo &r, const double chieu)
+  {
+   const double tb = r.sum_lg / r.lot;
+   double kc = 1.0e300;
+   if(InpCutPips > 0.0)
+      kc = InpCutPips * g_pip;
+   if(InpCutMoney > 0.0)
+     {
+      const double hd = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_CONTRACT_SIZE);
+      const double k2 = InpCutMoney * (InpLot / 0.01) / (hd * r.lot);
+      if(k2 < kc)
+         kc = k2;
+     }
+   return tb - chieu * kc;
+  }
+
+// BID da cham / vuot moc cat lo cua ro chua (dung sai nua point, nhu cac cho khac)
+bool ChamCat(const SRo &r, const double bid, const double chieu)
+  {
+   if((InpCutPips <= 0.0 && InpCutMoney <= 0.0) || r.n == 0 || r.lot <= 0.0)
+      return false;
+   const double moc = MocCat(r, chieu);
+   return (chieu > 0.0) ? (bid <= moc + 0.5 * _Point) : (bid >= moc - 0.5 * _Point);
+  }
+
+// dong NGUYEN ro vi CAT LO (kieu 2) hoac THOAT GIO (kieu 3). Dong THAT het: ro rong, k ve 0, KHONG cho lui, bat dau nghi (neu bat);
+// that bai (con lenh) thi tra false, tick sau thu lai.
+bool DongRoVaNghi(const ENUM_POSITION_TYPE loai, const int kieu)
+  {
+   const int i = (loai == POSITION_TYPE_BUY) ? 0 : 1;
+   DongHet(loai);
+   SRo r;
+   DocRo(loai, r);
+   if(r.n > 0)
+      return false;
+   g_co[i] = false;
+   g_tang[i] = 0;
+   g_cho[i] = 0.0;
+   if(kieu == 2)
+      g_so_cat++;
+   else
+      g_so_gio++;
+   if(g_rest_s > 0.0)
+      g_nghi_den[i] = (datetime)((double)TimeCurrent() + g_rest_s);
    return true;
   }
 
@@ -357,6 +471,23 @@ void XuLy(const ENUM_POSITION_TYPE loai)
       g_co[i] = true;
       if(g_tang[i] < r.n)
          g_tang[i] = r.n;
+      g_t_mo[i] = r.t_dau;                        // luc mo ro: xap xi bang luc mo cua lenh mo som nhat con lai
+     }
+
+   // ---- 0a. THOAT THEO GIO: ro song >= InpExitHours -> dong het o gia hien tai, mo lai ro moi (neu duoc phep) ----
+   if(g_exit_s > 0.0 && (double)(TimeCurrent() - g_t_mo[i]) >= g_exit_s)
+     {
+      if(DongRoVaNghi(loai, 3))
+         MoRoMoi(loai);
+      return;
+     }
+
+   // ---- 0b. CAT LO CA RO: kiem TRUOC khi them tang (BID nhay vuot ca moc cat lan moc tang -> cat, khong them tang) ----
+   if(ChamCat(r, bid, chieu))
+     {
+      if(DongRoVaNghi(loai, 2))
+         MoRoMoi(loai);
+      return;
      }
 
    // ---- 1. BAT LOI TRUOC: them tang khi BID di nguoc >= buoc(k) tu BID MO CUA TANG SAU CUNG ----
@@ -404,6 +535,8 @@ void XuLy(const ENUM_POSITION_TYPE loai)
          DocRo(loai, r);
          if(!(ok1 && ok2))
             break;
+         if(ChamCat(r, bid, chieu))               // bo hai lenh dau / cuoi doi trung binh: ro con lai da vuot moc cat -> thoat vong tia
+            break;
         }
       if(da_tia)
         {
@@ -413,6 +546,12 @@ void XuLy(const ENUM_POSITION_TYPE loai)
             g_tang[i] = 0;
             g_cho[i] = 0.0;
             MoRoMoi(loai);
+            return;
+           }
+         if(ChamCat(r, bid, chieu))
+           {
+            if(DongRoVaNghi(loai, 2))
+               MoRoMoi(loai);
             return;
            }
          DatTP(loai, r);

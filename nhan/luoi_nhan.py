@@ -46,22 +46,26 @@ from pathlib import Path
 
 import numpy as np
 
-PHIEN_BAN = 4                      # = LUOI_NHAN_PHIEN_BAN trong luoi_nhan.c (3: them mo hinh `duong_di`, tham so P_MO_HINH; 4: dung sai cham moc)
+PHIEN_BAN = 5                      # = LUOI_NHAN_PHIEN_BAN trong luoi_nhan.c (3: them mo hinh `duong_di`, tham so P_MO_HINH; 4: dung sai cham moc;
+                                   #   5: co che thoat + loc gio: cat lo ca ro, thoat gio, nghi, cua so gio vao lenh; them con tro `tg`, 6 tham so, 2 thong ke)
 NGUON_C = Path(__file__).with_name("luoi_nhan.c")
 
 #: Thu tu KHOP enum P_* trong luoi_nhan.c
 _TEN_P = ("lot", "hop", "pip", "buoc", "tp", "tran", "kieu", "he_lot", "he_buoc", "buoc_tran", "cho_lui", "tia",
-          "bien_cap", "cap_moi_bar", "chot_tien", "ty_le", "kahan", "mo_hinh")
+          "bien_cap", "cap_moi_bar", "chot_tien", "ty_le", "kahan", "mo_hinh",
+          "cat_pip", "cat_tien", "thoat_gio", "nghi_gio", "gio_vao_tu", "gio_vao_den")
 _KIEU = {"nhan": 1.0, "cong": 2.0}  # con lai (phang / la) = 0.0, y het `_lot` Python
 #: Truong `ThamSo` / `QuyCach` ma nhan C DOC = nhung truong `luoi._mot_ro` / `luoi._mot_ro_duong` / `luoi.chay_mang` doc. `test_luoi_nhan`
 #: quet nguon cac ham do: them truong moi vao engine ma quen nhan C thi test do (neu khong, C tinh THIEU im lang - dung loai bo
 #: phan "ton tai nhung khong chay"). `khop_bar` di vao C qua `P_MO_HINH`.
 TRUONG_TS = ("lot", "buoc", "tp", "tran_tang", "kieu_lot", "he_so_lot", "he_so_buoc", "buoc_tran", "cho_lui", "tia_lenh",
-             "bien_cap", "cap_moi_bar", "chot_tien", "khop_bar")
+             "bien_cap", "cap_moi_bar", "chot_tien", "khop_bar",
+             "cat_lo_pip", "cat_lo_tien", "thoat_gio", "nghi_gio", "gio_vao_tu", "gio_vao_den")
 MO_HINH_C = {"cuc_tri": 0.0, "duong_di": 1.0}                 # = gia tri p[P_MO_HINH] trong luoi_nhan.c
 TRUONG_QC = ("hop_dong", "pip", "phi_nam_mua", "phi_nam_ban")
 _GHI_COT = 8
-_SO_STATS = 8
+_LY_DO_DONG = ("tp", "tia", "cat", "gio")       # = ma `ly_do` cua su kien dong trong luoi_nhan.c (0 tp, 1 tia, 2 cat lo, 3 thoat gio)
+_SO_STATS = 10                      # lai_gop, phi_spread, phi_swap, so_ro, so_lenh, tang_max, so_cap, con_mo, so_cat, so_gio
 _TRAN_TOI_DA = 1_000_000            # tran_tang lon hon: de Python lo (khong ai chay that o day)
 
 _khoa = threading.RLock()
@@ -176,8 +180,8 @@ def _nap_dll(duong_dan: Path):
                            % (lib.luoi_nhan_phien_ban(), lib.luoi_nhan_so_tham_so()))
     vp = ctypes.c_void_p
     lib.luoi_mot_ro.restype = ctypes.c_int32
-    lib.luoi_mot_ro.argtypes = [vp, vp, vp, vp, vp, ctypes.c_int64, ctypes.c_int32, vp, vp, vp, vp, ctypes.c_int32, vp,
-                                ctypes.c_int64, ctypes.POINTER(ctypes.c_int64)]
+    lib.luoi_mot_ro.argtypes = [vp, vp, vp, vp, vp, vp, ctypes.c_int64, ctypes.c_int32, vp, vp, vp, vp, ctypes.c_int32, vp,
+                                ctypes.c_int64, ctypes.POINTER(ctypes.c_int64)]       # hi lo cl spread dem tg n chieu p lai treo stats ghi_bat ghi cap n_ghi
     return lib
 
 
@@ -197,7 +201,9 @@ def _dong_goi(ts, qc, chieu: int) -> np.ndarray:
          "kieu": _KIEU.get(ts.kieu_lot, 0.0), "he_lot": ts.he_so_lot, "he_buoc": ts.he_so_buoc, "buoc_tran": ts.buoc_tran,
          "cho_lui": ts.cho_lui, "tia": 1.0 if ts.tia_lenh else 0.0, "bien_cap": ts.bien_cap, "cap_moi_bar": ts.cap_moi_bar,
          "chot_tien": ts.chot_tien, "ty_le": ty_le, "kahan": 1.0 if _kahan(ts) else 0.0,
-         "mo_hinh": MO_HINH_C[ts.khop_bar]}
+         "mo_hinh": MO_HINH_C[ts.khop_bar],
+         "cat_pip": ts.cat_lo_pip, "cat_tien": ts.cat_lo_tien, "thoat_gio": ts.thoat_gio, "nghi_gio": ts.nghi_gio,
+         "gio_vao_tu": ts.gio_vao_tu, "gio_vao_den": ts.gio_vao_den}
     return np.array([float(v[k]) for k in _TEN_P], dtype=np.float64)
 
 
@@ -225,8 +231,9 @@ def kha_dung(ts, qc) -> bool:
         return False
 
 
-def _goi(lib, hi, lo, cl, sp, dem, chieu: int, p: np.ndarray, ghi: bool):
-    """Goi nhan C mot lan. Tra (lai, treo, stats_array, events | None) hoac None neu nhan bao loi."""
+def _goi(lib, hi, lo, cl, sp, dem, chieu: int, p: np.ndarray, ghi: bool, tg=None):
+    """Goi nhan C mot lan. Tra (lai, treo, stats_array, events | None) hoac None neu nhan bao loi.
+    `tg` = ndarray float64 lien tuc (giay epoch gio mo tung bar) hoac None (con tro NULL: nhan C chi doc khi tinh nang gio bat)."""
     n = len(cl)
     lai = np.empty(n)
     treo = np.empty(n)
@@ -236,14 +243,15 @@ def _goi(lib, hi, lo, cl, sp, dem, chieu: int, p: np.ndarray, ghi: bool):
     def gi(a):
         return a.ctypes.data
 
+    ptr_tg = None if tg is None else gi(tg)
     if not ghi:
-        rc = lib.luoi_mot_ro(gi(hi), gi(lo), gi(cl), gi(sp), gi(dem), n, chieu, gi(p), gi(lai), gi(treo), gi(st), 0, None, 0,
+        rc = lib.luoi_mot_ro(gi(hi), gi(lo), gi(cl), gi(sp), gi(dem), ptr_tg, n, chieu, gi(p), gi(lai), gi(treo), gi(st), 0, None, 0,
                              ctypes.byref(so_ghi))
         return None if rc != 0 else (lai, treo, st, None)
     cap = 4096
     while True:
         buf = np.empty((cap, _GHI_COT))
-        rc = lib.luoi_mot_ro(gi(hi), gi(lo), gi(cl), gi(sp), gi(dem), n, chieu, gi(p), gi(lai), gi(treo), gi(st), 1, gi(buf),
+        rc = lib.luoi_mot_ro(gi(hi), gi(lo), gi(cl), gi(sp), gi(dem), ptr_tg, n, chieu, gi(p), gi(lai), gi(treo), gi(st), 1, gi(buf),
                              cap, ctypes.byref(so_ghi))
         if rc != 0:
             return None
@@ -255,13 +263,14 @@ def _goi(lib, hi, lo, cl, sp, dem, chieu: int, p: np.ndarray, ghi: bool):
         if r[0] == 0.0:
             ev.append(("mo", int(r[1]), r[2], r[3], int(r[4]), int(r[5]), int(r[6])))
         else:
-            ev.append(("dong", int(r[1]), r[2], int(r[4]), "tia" if r[7] else "tp"))
+            ev.append(("dong", int(r[1]), r[2], int(r[4]), _LY_DO_DONG[int(r[7])]))
     return lai, treo, st, ev
 
 
 def _thong_ke(st: np.ndarray) -> dict:
     return {"lai_gop": float(st[0]), "phi_spread": float(st[1]), "phi_swap": float(st[2]), "so_ro": int(st[3]),
-            "so_lenh": int(st[4]), "tang_max": int(st[5]), "so_cap": int(st[6]), "con_mo": int(st[7])}
+            "so_lenh": int(st[4]), "tang_max": int(st[5]), "so_cap": int(st[6]), "con_mo": int(st[7]),
+            "so_cat": int(st[8]), "so_gio": int(st[9])}
 
 
 # ------------------------------------------------------------------ TU KIEM
@@ -294,6 +303,31 @@ _CA_TU_KIEM = (
     dict(buoc=12.0, tp=15.0, tran_tang=14, he_so_buoc=1.2, buoc_tran=40.0),
     dict(buoc=14.0, tp=12.0, tran_tang=10, kieu_lot="nhan", he_so_lot=1.15, tia_lenh=True, bien_cap=2.5, cap_moi_bar=2,
          cho_lui=6.0, he_so_buoc=1.1, buoc_tran=60.0),
+)
+
+
+def _tg_tu_kiem(n: int) -> np.ndarray:
+    """Giay epoch gio mo bar cua chuoi `_kich_ban_tu_kiem` (khung M15, bat dau 22:13:20 de gio trong ngay khong tron gio)."""
+    return 1_700_000_000.0 + 900.0 * np.arange(n, dtype=np.float64)
+
+
+#: CHI `duong_di` (co che thoat + loc gio, ABI 5). Chay tren cung chuoi gia voi `_tg_tu_kiem`, ca hai chieu, co ghi lenh. `_tu_kiem` doi hoi
+#: tong so lan cat / thoat gio du lon de bo kiem khong "trong".
+_CA_TU_KIEM_THOAT = (
+    dict(buoc=20.0, tp=15.0, tran_tang=8, cat_lo_pip=45.0),
+    dict(buoc=20.0, tp=15.0, tran_tang=8, cat_lo_tien=2.0),
+    dict(buoc=25.0, tp=20.0, tran_tang=6, kieu_lot="nhan", he_so_lot=1.3, cat_lo_pip=60.0, cat_lo_tien=1.5),
+    dict(buoc=15.0, tp=10.0, tran_tang=9, tia_lenh=True, bien_cap=3.0, cap_moi_bar=1, cat_lo_pip=40.0),
+    dict(buoc=15.0, tp=30.0, tran_tang=12, tia_lenh=True, bien_cap=2.0, cap_moi_bar=999, kieu_lot="nhan", he_so_lot=1.4, cat_lo_tien=1.0),
+    dict(buoc=20.0, tp=15.0, tran_tang=8, cho_lui=10.0, cat_lo_pip=50.0),
+    dict(buoc=20.0, tp=15.0, tran_tang=8, chot_tien=2.0, cat_lo_pip=70.0, nghi_gio=1.0),
+    dict(buoc=20.0, tp=15.0, tran_tang=8, thoat_gio=5.0),
+    dict(buoc=20.0, tp=15.0, tran_tang=8, thoat_gio=2.0, nghi_gio=1.5, cat_lo_pip=60.0),
+    dict(buoc=20.0, tp=15.0, tran_tang=8, gio_vao_tu=1.0, gio_vao_den=7.0),
+    dict(buoc=20.0, tp=15.0, tran_tang=8, gio_vao_tu=22.0, gio_vao_den=5.5, cat_lo_pip=80.0),
+    dict(buoc=14.0, tp=12.0, tran_tang=10, kieu_lot="nhan", he_so_lot=1.15, tia_lenh=True, bien_cap=2.5, cap_moi_bar=2,
+         cho_lui=6.0, he_so_buoc=1.1, buoc_tran=60.0, cat_lo_pip=55.0, thoat_gio=8.0, nghi_gio=0.5, gio_vao_tu=20.0, gio_vao_den=11.0),
+    dict(buoc=18.0, tp=12.0, tran_tang=10, kieu_lot="cong", he_so_lot=0.5, cat_lo_tien=0.8, gio_vao_tu=3.3, gio_vao_den=17.1, nghi_gio=0.75),
 )
 
 
@@ -370,6 +404,71 @@ _CA_BIEN_DUONG = (
      [(0, 0, 0), (25 - _HUT, 0, 25 - _HUT)], (0, 1, 0)),
     ("cho_lui_hut_eps", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0, cho_lui=10.0),
      [(0, 0, 0), (25, 0, 5), (25, 15, 20), (40, 15, 40), (40, 30 + _HUT, 30 + _HUT)], (2, 2, 0)),
+)
+
+
+# Ca BIEN cua CO CHE THOAT + LOC GIO (08/10/2026; cung quy uoc nhi phan, pip = 2^-10, 1 lot = 1024 don vi; moi gia tri tren luoi 2^-10 nen moi
+# phep tinh chinh xac). Moi ca co them cot thoi gian `tg` (giay epoch gio mo bar) va bo ba mong doi thanh NAM so:
+# (so_ro, so_lenh, so_cap, so_cat, so_gio) - SUY TAY tu luat (docstring `luoi._mot_ro_duong`), khong chay engine roi chep lai. Moi ca toi mot DAU BANG:
+# doi `<` thanh `<=` (hay `>=` thanh `>`) o dung phep so sanh do thi bo nam so doi.
+_CA_BIEN_THOAT = (
+    # --- CAT LO ---
+    # L1 o 0, cat 60 pip, buoc 40. Nen do roi toi -80: them L2 o -40 (moc them -40 truoc moc cat -60), roi moc them tang ke tiep (-80) TRUNG moc cat
+    # (trung binh -20 - 60 = -80): bang nhau thi CAT truoc -> khong mo L3, dong 2 lenh lo 120 pip, mo lai L1 o -80 (3 lenh, 1 cat).
+    ("cat_hoa_them", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, cat_lo_pip=60.0),
+     [(0, 0, 0), (0, -80, -80)], [0.0, 900.0], (0, 3, 0, 1, 0)),
+    # y het nhung day chi toi -80 + 2^-17 pip (hut mot chut): chua cham moc cat -> khong cat (2 lenh)
+    ("cat_hut_eps", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, cat_lo_pip=60.0),
+     [(0, 0, 0), (0, -80 + _HUT, -80 + _HUT)], [0.0, 900.0], (0, 2, 0, 0, 0)),
+    # nen 2 mo cua o -90 (nhay gia vuot ca moc them -40 lan moc cat -60): cat TRUOC them tang (EA kiem cat truoc) o gia nhay -90, mo lai o -90
+    ("cat_nhay_gia", dict(buoc=40.0, tp=1000.0, tran_tang=6, lot=1.0, cat_lo_pip=60.0),
+     [(0, 0, 0), (0, -30, -30), (-90, -90, -90)], [0.0, 900.0, 1800.0], (0, 2, 0, 1, 0)),
+    # cat 10 pip < buoc 40: moc cat luon truoc moc them. Roi -80: cat o -10, -20, ..., -80 (8 lan), moi lan mo lai o gia cat -> 9 lenh
+    ("cat_day_chuyen", dict(buoc=40.0, tp=1000.0, tran_tang=6, lot=1.0, cat_lo_pip=10.0),
+     [(0, 0, 0), (0, -80, -80)], [0.0, 900.0], (0, 9, 0, 8, 0)),
+    # --- THOAT THEO GIO ---
+    # thoat 1 gio = 3600 s; bar 4 cach luc mo ro (bar 0) DUNG 3600 s -> thoat o gia mo bar 4, mo lai (2 lenh, 1 thoat)
+    ("thoat_bang", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, thoat_gio=1.0),
+     [(0, 0, 0)] * 5, [0.0, 900.0, 1800.0, 2700.0, 3600.0], (0, 2, 0, 0, 1)),
+    # ro CHOT TP o bar 2 va mo ro moi (luc mo = 1800 s): den bar 5 (4500 s) moi 2700 s < 3600 -> CHUA thoat. (Quen dat lai luc mo thi thoat o bar 4.)
+    ("thoat_ro_moi", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0, thoat_gio=1.0),
+     [(0, 0, 0), (0, 0, 0), (25, 0, 25), (25, 25, 25), (25, 25, 25), (25, 25, 25)], [0.0, 900.0, 1800.0, 2700.0, 3600.0, 4500.0],
+     (1, 2, 0, 0, 0)),
+    # --- NGHI sau cat lo ---
+    # bar 1 nhay xuong -100: cat o -100 (1800 s nghi -> khong mo lai truoc 900 + 1800 = 2700 s); bar 2 (1800 s) con nghi; bar 3 (2700 s) DUNG het nghi -> vao
+    ("nghi_bang", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, cat_lo_pip=60.0, nghi_gio=0.5),
+     [(0, 0, 0), (-100, -100, -100), (-100, -100, -100), (-100, -100, -100)], [0.0, 900.0, 1800.0, 2700.0], (0, 2, 0, 1, 0)),
+    # --- LOC GIO VAO LENH ---
+    # cua so [1h, 2h): bar 0..3 (0..2700 s) ngoai cua so -> khong co ro; bar 4 (3600 s = 1h DUNG) trong cua so -> vao o gia mo bar
+    ("gio_tu_bang", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, gio_vao_tu=1.0, gio_vao_den=2.0),
+     [(0, 0, 0)] * 5, [0.0, 900.0, 1800.0, 2700.0, 3600.0], (0, 1, 0, 0, 0)),
+    # cua so [0,5h; 1h): vao o bar 2 (1800 s), chot TP o bar 3 (2700 s, trong cua so: mo lai), chot TP o bar 4 (3600 s = 1h DUNG: het cua so) -> khong mo lai
+    ("gio_den_bang", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0, gio_vao_tu=0.5, gio_vao_den=1.0),
+     [(0, 0, 0), (0, 0, 0), (0, 0, 0), (25, 0, 25), (50, 25, 50)], [0.0, 900.0, 1800.0, 2700.0, 3600.0], (2, 2, 0, 0, 0)),
+    # cua so qua nua dem [22h, 4h): bar 0 luc 21:00 ngoai; bar 1 luc 22:00 DUNG -> vao
+    ("gio_dem_tu_bang", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, gio_vao_tu=22.0, gio_vao_den=4.0),
+     [(0, 0, 0)] * 2, [864000.0 + 75600.0, 864000.0 + 79200.0], (0, 1, 0, 0, 0)),
+    # cung cua so: bar 0 luc 02:00 trong -> vao; bar 1 luc 03:00 chot TP + mo lai; bar 2 luc 04:00 DUNG hoi het cua so: chot TP, khong mo lai
+    ("gio_dem_den_bang", dict(buoc=40.0, tp=25.0, tran_tang=4, lot=1.0, gio_vao_tu=22.0, gio_vao_den=4.0),
+     [(0, 0, 0), (25, 0, 25), (50, 25, 50)], [864000.0 + 7200.0, 864000.0 + 10800.0, 864000.0 + 14400.0], (2, 2, 0, 0, 0)),
+    # --- GIO THAP PHAN -> GIAY: 4,1 h = 14760 s nhung 4.1 * 3600 = 14759.999999999998 trong double (do 08/10/2026; 3,3 h thi PHEP NHAN RA DUNG 11880.0, khong
+    # kiem duoc gi): bo "+ 0,5" thi cat mat 1 giay. Khe giua cac bar chi 1 giay de DUNG MOT BAR nam o 14759 s / 14760 s: ban sai ra so lenh / so thoat
+    # khac. Moc ngay = 864000 s (10 ngay tron, 00:00).
+    # thoat 4,1 h: bar 1 cach luc mo ro 14759 s < 14760 -> CHUA thoat (ban cat-cut: 14759 >= 14759 thoat luon)
+    ("thoat_thap_phan_chua_du", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, thoat_gio=4.1),
+     [(0, 0, 0)] * 2, [0.0, 14759.0], (0, 1, 0, 0, 0)),
+    # ... dung 14760 s -> thoat o gia mo bar, mo lai
+    ("thoat_thap_phan_dung", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, thoat_gio=4.1),
+     [(0, 0, 0)] * 2, [0.0, 14760.0], (0, 2, 0, 0, 1)),
+    # nghi 4,1 h sau cat lo: bar 1 (900 s) cat o -20, nghi toi 900 + 14760 = 15660 s; bar 2 luc 15659 s con nghi -> KHONG vao lai (ban cat-cut: nghi toi 15659 -> vao)
+    ("nghi_thap_phan", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, cat_lo_pip=20.0, nghi_gio=4.1),
+     [(0, 0, 0), (0, -30, -30), (-30, -30, -30)], [0.0, 900.0, 15659.0], (0, 1, 0, 1, 0)),
+    # cua so [4,1 h; 17,1 h): hai bar luc 14758 s va 14759 s deu NGOAI cua so (14760 s moi vao) -> khong co ro (ban cat-cut: 14759 s da vao)
+    ("gio_tu_thap_phan", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, gio_vao_tu=4.1, gio_vao_den=17.1),
+     [(0, 0, 0)] * 2, [864000.0 + 14758.0, 864000.0 + 14759.0], (0, 0, 0, 0, 0)),
+    # cua so [0 h; 4,1 h): bar 0 luc 14759 s con TRONG cua so (het luc 14760 s) -> vao o bar 0 (ban cat-cut: 14759 s da het cua so -> khong vao)
+    ("gio_den_thap_phan", dict(buoc=40.0, tp=1000.0, tran_tang=4, lot=1.0, gio_vao_tu=0.0, gio_vao_den=4.1),
+     [(0, 0, 0)] * 2, [864000.0 + 14759.0, 864000.0 + 14760.0], (0, 1, 0, 0, 0)),
 )
 
 
@@ -455,9 +554,9 @@ def so_sanh_ket_qua(a, b, rtol: float = 1e-9, atol: float = 1e-9):
     (NaN o cung vi tri coi la bang)."""
     la, ta, sa, ga = a
     lb, tb, sb, gb = b
-    for ten in ("so_ro", "so_lenh", "tang_max", "so_cap", "con_mo"):
-        if int(sa[ten]) != int(sb[ten]):
-            return False, "%s: py=%s c=%s" % (ten, sa[ten], sb[ten])
+    for ten in ("so_ro", "so_lenh", "tang_max", "so_cap", "con_mo", "so_cat", "so_gio"):
+        if int(sa.get(ten, 0)) != int(sb.get(ten, 0)):
+            return False, "%s: py=%s c=%s" % (ten, sa.get(ten, 0), sb.get(ten, 0))
     if not (np.allclose(la, lb, rtol=rtol, atol=atol, equal_nan=True)
             and np.allclose(ta, tb, rtol=rtol, atol=atol, equal_nan=True)):
         return False, "duong lai/treo lech (max %.3g)" % max(_lech_max(la, lb), _lech_max(ta, tb))
@@ -496,7 +595,41 @@ def _tu_kiem(lib):
                 tong_ev[mh] += len(ev)
         if tong_ev[mh] < 200:
             return False, "kich ban tu kiem qua thua o %s (%d su kien) - khong du tin cay" % (mh, tong_ev[mh])
+    tg = _tg_tu_kiem(len(cl))
+    so_cat = so_gio = su_kien_thoat = 0
+    for k, kw in enumerate(_CA_TU_KIEM_THOAT):                            # co che thoat + loc gio: chi `duong_di`, tren cung chuoi gia + cot gio
+        ts = LU.ThamSo(**kw, khop_bar="duong_di")
+        for chieu in (1, -1):
+            ev = []
+            lai, treo, tk = LU.mot_ro_chuan(hi, lo, cl, sp, dem, chieu, ts, qc, ev, tg)
+            r = _goi(lib, hi, lo, cl, sp, dem, chieu, _dong_goi(ts, qc, chieu), True, tg)
+            if r is None:
+                return False, "nhan C bao loi o ca thoat %d chieu %+d" % (k, chieu)
+            ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]))
+            if not ok:
+                return False, "ca thoat %d chieu %+d: %s" % (k, chieu, mo_ta)
+            so_cat += int(tk["so_cat"])
+            so_gio += int(tk["so_gio"])
+            su_kien_thoat += len(ev)
+    if so_cat < 100 or so_gio < 20:                     # bo kiem khong cham toi cat lo / thoat gio thi khong chung minh gi
+        return False, "kich ban tu kiem co che thoat qua thua (%d cat, %d thoat gio) - khong du tin cay" % (so_cat, so_gio)
     qc_bien = _qc_bien()
+    for ten, kw, bars, tg_s, mong in _CA_BIEN_THOAT:
+        ts = LU.ThamSo(**kw, khop_bar="duong_di")
+        tg_a = np.asarray(tg_s, dtype=np.float64)
+        for chieu in (1, -1):
+            hi, lo, cl, sp, dem = _chuoi_bien(bars, chieu)
+            ev = []
+            lai, treo, tk = LU.mot_ro_chuan(hi, lo, cl, sp, dem, chieu, ts, qc_bien, ev, tg_a)
+            thuc = (int(tk["so_ro"]), int(tk["so_lenh"]), int(tk["so_cap"]), int(tk["so_cat"]), int(tk["so_gio"]))
+            if thuc != mong:                                                # Python doi nghia: ca nay khong con cham dung moc
+                return False, "ca bien thoat %s chieu %+d: Python ra %s, ky vong %s" % (ten, chieu, thuc, mong)
+            r = _goi(lib, hi, lo, cl, sp, dem, chieu, _dong_goi(ts, qc_bien, chieu), True, tg_a)
+            if r is None:
+                return False, "nhan C bao loi o ca bien thoat %s chieu %+d" % (ten, chieu)
+            ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]), 0.0, 0.0)
+            if not ok:
+                return False, "ca bien thoat %s chieu %+d: %s" % (ten, chieu, mo_ta)
     for mh, bang in (("cuc_tri", _CA_BIEN), ("duong_di", _CA_BIEN_DUONG)):
         for ten, kw, bars, mong in bang:
             ts = LU.ThamSo(**kw, khop_bar=mh)
@@ -528,8 +661,9 @@ def _tu_kiem(lib):
         ok, mo_ta = so_sanh_ket_qua((lai, treo, tk, ev), (r[0], r[1], _thong_ke(r[2]), r[3]), 0.0, 0.0)
         if not ok:
             return False, "ca thap phan %s: %s" % (ten, mo_ta)
-    return True, "khop %d ca x 2 mo hinh x 2 chieu (%s su kien) + %d ca bien + %d ca thap phan" % (
-        len(_CA_TU_KIEM), "/".join(str(tong_ev[m]) for m in LU.MO_HINH_BAR), len(_CA_BIEN) + len(_CA_BIEN_DUONG), len(_CA_BIEN_THAP_PHAN))
+    return True, "khop %d ca x 2 mo hinh x 2 chieu (%s su kien) + %d ca thoat (%d cat, %d thoat gio) + %d ca bien (+%d thoat) + %d ca thap phan" % (
+        len(_CA_TU_KIEM), "/".join(str(tong_ev[m]) for m in LU.MO_HINH_BAR), len(_CA_TU_KIEM_THOAT), so_cat, so_gio,
+        len(_CA_BIEN) + len(_CA_BIEN_DUONG), len(_CA_BIEN_THOAT), len(_CA_BIEN_THAP_PHAN))
 
 
 def _dau_ban_kiem() -> str:
@@ -537,9 +671,9 @@ def _dau_ban_kiem() -> str:
     Thieu cai nay thi nhan da dich + da kiem bang bo cu se BO QUA ca moi - bo kiem moi khong bao gio chay tren may da co cache (08/10/2026:
     phat hien khi them ca thap phan cua `EPS_CHAM_PIP` ma khong doi nguon .c)."""
     h = hashlib.sha256()
-    for ten in ("_CA_TU_KIEM", "_CA_BIEN", "_CA_BIEN_DUONG", "_CA_BIEN_THAP_PHAN", "_HUT"):
+    for ten in ("_CA_TU_KIEM", "_CA_TU_KIEM_THOAT", "_CA_BIEN", "_CA_BIEN_DUONG", "_CA_BIEN_THOAT", "_CA_BIEN_THAP_PHAN", "_HUT"):
         h.update(repr(globals()[ten]).encode())
-    for f in (_tu_kiem, _kich_ban_tu_kiem, _chuoi_bien, _chuoi_thap_phan, _qc_bien, _qc_thap_phan, so_sanh_ket_qua, _su_kien_khop):
+    for f in (_tu_kiem, _kich_ban_tu_kiem, _tg_tu_kiem, _chuoi_bien, _chuoi_thap_phan, _qc_bien, _qc_thap_phan, so_sanh_ket_qua, _su_kien_khop):
         try:
             h.update(inspect.getsource(f).encode())
         except (OSError, TypeError):                              # khong doc duoc ma nguon (chi co .pyc): van tay chi con bang ca
@@ -666,11 +800,14 @@ def trang_thai() -> dict:
 
 
 # ------------------------------------------------------------------ GIAO DIEN CHO luoi.chay
-def mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts, qc=None, ghi=None):
+def mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts, qc=None, ghi=None, tg=None):
     """Thay the `luoi.mot_ro_chuan` (cung chu ky, cung gia tri tra ve, mo hinh theo `ts.khop_bar`) hoac tra None neu khong dung nhan C duoc.
 
     None nghia la "hay chay Python": che do py, khong co nhan, tham so ngoai mien da kiem, mang dau vao khong phai ndarray float64.
     Du lieu co NaN / inf: nhan C tu choi (bao loi) -> cung ve None -> ban Python chuan nem ValueError (`duong_di`).
+    `tg` = giay epoch gio mo tung bar (ndarray float64, cung do dai chuoi gia): chi can khi `ts` dung thoat_gio / nghi_gio / gio_vao_*;
+    thieu hoac sai dang -> None (Python bao ValueError ro rang). Co che thoat + loc gio chi co o `duong_di`: `cuc_tri` + tinh nang bat -> None
+    (Python tu choi).
     """
     lib = lay_nhan()
     if lib is None:
@@ -688,12 +825,21 @@ def mot_ro(hi, lo, cl, spread_gia, dem, chieu: int, ts, qc=None, ghi=None):
         return None
     if not kha_dung(ts, qc):
         return None
+    from nhan import luoi as LU
+    tg_c = None
     if ts.khop_bar == "duong_di":
-        from nhan.luoi import mien_duong_di
-        if mien_duong_di(ts, qc):                                 # ngoai mien `duong_di` (tp <= 0, ...): Python nem ValueError
+        if LU.mien_duong_di(ts, qc):                              # ngoai mien `duong_di` (tp <= 0, ...): Python nem ValueError
             return None
+        if LU.can_cot_thoi_gian(ts):
+            if not isinstance(tg, np.ndarray) or tg.dtype != np.float64 or tg.ndim != 1 or len(tg) != len(cl):
+                return None                                       # thieu / sai dang cot thoi gian: Python bao ValueError
+            if not np.isfinite(tg).all():
+                return None
+            tg_c = np.ascontiguousarray(tg)
+    elif LU.tinh_nang_duong_di_dang_bat(ts):                      # `cuc_tri` khong cai dat co che thoat / loc gio: Python tu choi
+        return None
     hi, lo, cl, spread_gia, dem = (np.ascontiguousarray(a) for a in (hi, lo, cl, spread_gia, dem))
-    r = _goi(lib, hi, lo, cl, spread_gia, dem, int(chieu), _dong_goi(ts, qc, chieu), ghi is not None)
+    r = _goi(lib, hi, lo, cl, spread_gia, dem, int(chieu), _dong_goi(ts, qc, chieu), ghi is not None, tg_c)
     if r is None:
         return None
     lai, treo, st, ev = r

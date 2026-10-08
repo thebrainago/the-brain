@@ -121,15 +121,15 @@ def _kich_ban(rng, jpy: bool = False, mo_hinh: str = "duong_di"):
     return hi, lo, cl, sp, dem, ts, qc
 
 
-def _py(hi, lo, cl, sp, dem, chieu, ts, qc):
+def _py(hi, lo, cl, sp, dem, chieu, ts, qc, tg=None):
     ev: list = []
-    lai, treo, tk = LU.mot_ro_chuan(hi, lo, cl, sp, dem, chieu, ts, qc, ev)
+    lai, treo, tk = LU.mot_ro_chuan(hi, lo, cl, sp, dem, chieu, ts, qc, ev, tg)
     return lai, treo, tk, ev
 
 
-def _c(hi, lo, cl, sp, dem, chieu, ts, qc):
+def _c(hi, lo, cl, sp, dem, chieu, ts, qc, tg=None):
     ev: list = []
-    r = LN.mot_ro(hi, lo, cl, sp, dem, chieu, ts, qc, ev)
+    r = LN.mot_ro(hi, lo, cl, sp, dem, chieu, ts, qc, ev, tg)
     assert r is not None, "nhan C tra None cho %s" % (ts,)
     return r[0], r[1], r[2], ev
 
@@ -151,6 +151,49 @@ def _so_ngau_nhien(seed: int, so_ca: int = 8, jpy: bool = False, mo_hinh: str = 
     rng = np.random.default_rng(seed)
     for _ in range(so_ca):
         yield _kich_ban(rng, jpy, mo_hinh)
+
+
+#: Gio (so thap phan KHONG nhi phan) de bat loi lam tron gio -> giay. Luu y: 3.3 * 3600.0 la DUNG 11880.0 trong double nen 3,3 h khong kiem
+#: duoc "+0,5"; gia tri that su can no (tich ngay duoi so nguyen) la 4,1 h (14759.999999999998), 8,2, 8,7, 16,4... - xem `_CA_BIEN_THOAT`.
+_GIO_THOAT = (0.25, 0.5, 0.75, 1.0, 1.1, 1.5, 2.0, 2.3, 3.3, 4.0, 5.9, 8.0, 12.0)
+_GIO_NGHI = (0.25, 0.5, 0.75, 1.0, 1.1, 1.75, 3.3)
+_GIO_VAO_TU = (0.0, 1.1, 2.5, 3.3, 6.0, 8.0, 12.0, 17.25, 21.7, 22.0)
+_GIO_VAO_DEN = (0.0, 2.3, 4.5, 5.9, 8.0, 13.0, 18.0, 23.75, 24.0)
+
+
+def _kich_ban_thoat(rng, jpy: bool = False):
+    """`_kich_ban` (mo hinh duong_di) + co che CAT LO / THOAT GIO / NGHI / LOC GIO bat ngau nhien + cot thoi gian `tg` (luoi bar deu 1 / 5 / 15 /
+    60 phut, thinh thoang co khe cuoi tuan; moc bat dau NAM TREN luoi bar de ranh gioi gio trung dung mot bar). So ngau nhien cua phan moi
+    rut SAU toan bo `_kich_ban` -> gia + tham so cu y het `_kich_ban` cung hat giong. It nhat MOT tinh nang bat.
+    Tra (hi, lo, cl, sp, dem, ts, qc, tg)."""
+    hi, lo, cl, sp, dem, ts, qc = _kich_ban(rng, jpy, "duong_di")
+    n = len(cl)
+    kw: dict = {}
+    if rng.random() < 0.55:
+        kw["cat_lo_pip"] = float(rng.uniform(0.4, 6.0)) * ts.buoc
+    if rng.random() < 0.3:
+        kw["cat_lo_tien"] = float(rng.uniform(0.5, 25.0))
+    if rng.random() < 0.3:
+        kw["thoat_gio"] = float(rng.choice(_GIO_THOAT))
+    if rng.random() < 0.3:
+        kw["nghi_gio"] = float(rng.choice(_GIO_NGHI))
+    if rng.random() < 0.3:
+        tu, den = float(rng.choice(_GIO_VAO_TU)), float(rng.choice(_GIO_VAO_DEN))
+        if tu != den:
+            kw.update(gio_vao_tu=tu, gio_vao_den=den)
+    if not kw:
+        kw["cat_lo_pip"] = float(rng.uniform(0.4, 6.0)) * ts.buoc
+    giay = float(rng.choice([60.0, 300.0, 900.0, 3600.0]))
+    goc = giay * (int(1.7e9 // giay) + int(rng.integers(0, 3000)))
+    khe = np.where(rng.random(n) < 0.01, giay * rng.integers(5, 300, n), 0.0)
+    tg = goc + giay * np.arange(n, dtype=np.float64) + np.cumsum(khe)
+    return hi, lo, cl, sp, dem, dataclasses.replace(ts, **kw), qc, np.ascontiguousarray(tg)
+
+
+def _so_ngau_nhien_thoat(seed: int, so_ca: int = 8, jpy: bool = False):
+    rng = np.random.default_rng(seed)
+    for _ in range(so_ca):
+        yield _kich_ban_thoat(rng, jpy)
 
 
 def _df(n: int = 6000, seed: int = 7, gia0: float = 0.95) -> pd.DataFrame:
@@ -213,6 +256,29 @@ def test_khop_cap_jpy(nhan, seed, mo_hinh):
         for chieu in (1, -1):
             _khop(_py(hi, lo, cl, sp, dem, chieu, ts, qc), _c(hi, lo, cl, sp, dem, chieu, ts, qc),
                   "jpy %s seed=%d ca=%d chieu=%+d" % (mo_hinh, seed, k, chieu))
+
+
+@pytest.mark.parametrize("jpy,seeds", [(False, (31, 32, 33, 34, 35, 36, 37, 38)), (True, (41, 42, 43))])
+def test_khop_tren_kich_ban_ngau_nhien_co_che_thoat_va_loc_gio(nhan, jpy, seeds):
+    """CAT LO CA RO / THOAT GIO / NGHI / LOC GIO (ABI 5, 08/10/2026): kich ban ngau nhien co cot thoi gian (`_kich_ban_thoat`), nhan C khop
+    Python TUNG BIT (lai, treo, thong ke, chuoi lenh) o ca hai chieu. Dem tong de phep thu khong rong: neu cac tinh nang gan nhu khong kich hoat
+    thi 'khop' chi la khop tren duong cu. `test_luoi_thoat_gio.py` lo phan NGU NGHIA (dap an tinh bang tay + bat bien)."""
+    tong = dict(so_cat=0, so_gio=0, so_lenh=0)
+    co = dict(cat=0, thoat=0, nghi=0, loc=0)
+    for seed in seeds:
+        for k, (hi, lo, cl, sp, dem, ts, qc, tg) in enumerate(_so_ngau_nhien_thoat(seed, 8, jpy)):
+            co["cat"] += bool(ts.cat_lo_pip or ts.cat_lo_tien)
+            co["thoat"] += bool(ts.thoat_gio)
+            co["nghi"] += bool(ts.nghi_gio)
+            co["loc"] += ts.gio_vao_tu != ts.gio_vao_den
+            for chieu in (1, -1):
+                a = _py(hi, lo, cl, sp, dem, chieu, ts, qc, tg)
+                b = _c(hi, lo, cl, sp, dem, chieu, ts, qc, tg)
+                _khop(a, b, "thoat jpy=%s seed=%d ca=%d chieu=%+d %s" % (jpy, seed, k, chieu, ts))
+                for key in tong:
+                    tong[key] += a[2][key]
+    assert tong["so_lenh"] > 1000 and tong["so_cat"] > 300 and tong["so_gio"] > 50, ("kich ban qua thua - khong du tin cay", tong)
+    assert min(co.values()) >= 3, ("moi tinh nang can xuat hien o it nhat 3 ca", co)
 
 
 _CO_SO = dict(buoc=18.0, tp=12.0, tran_tang=9, tia_lenh=True, bien_cap=2.5, cap_moi_bar=2, cho_lui=5.0, he_so_buoc=1.1,
@@ -523,10 +589,13 @@ def test_luy_thua_buoc_tran_so_de_python_bao_loi(nhan, mo_hinh):
 
 
 @pytest.mark.parametrize("mo_hinh", MO_HINH)
-def test_moc_cho_lui_dung_bang_0_python_bao_loi_va_c_nhuong(nhan, mo_hinh):
-    """`cho == 0.0` vua la moc gia hop le vua la co 'khong cho' (ca Python `if cho:` lan C `cho != 0.0`): neu moc cho lui rot dung vao 0
-    thi ro rong va khong ai cho -> Python IndexError. C KHONG tu doan: tra loi -> Python nem dung loi do. (Gia that khong bao gio ~ 0;
-    day la loi ngu nghia co san cua engine, ghi nhan chu khong sua.)"""
+def test_moc_cho_lui_dung_bang_0(nhan, mo_hinh):
+    """`cho == 0.0` vua la moc gia hop le vua la co 'khong cho' (ca Python `if cho:` lan C `cho != 0.0`): moc cho lui rot dung vao 0.
+
+    `cuc_tri` (ban cu, khong sua): ro rong va khong ai cho -> Python IndexError. C KHONG tu doan: tra None -> Python nem dung loi do.
+    `duong_di` (viet lai 08/10/2026 cung dot cat lo / loc gio): dau MOI bar, ro rong va khong cho thi vao lai o GIA MO BAR (cung duong
+    di voi nghi / cua so gio dong), nen khong con phu thuoc co `cho`: Python va C CUNG chay xong va TRUNG KHIT tung bit, khong IndexError.
+    (Gia that khong bao gio ~ 0; truoc day day la lo ngu nghia, nay chi con ban cu giu no de doi chung.)"""
     p = 2.0 ** -10
     qc = LN._qc_bien()
     goc = 5 * p
@@ -535,11 +604,20 @@ def test_moc_cho_lui_dung_bang_0_python_bao_loi_va_c_nhuong(nhan, mo_hinh):
     lo[1] = goc
     sp, dem = np.zeros(3), np.zeros(3)
     ts = LU.ThamSo(buoc=40.0, tp=5.0, tran_tang=4, lot=1.0, cho_lui=10.0, khop_bar=mo_hinh)   # TP o 10 pip, cho lui 10 pip -> moc cho = 0,0 dung
-    assert LN.mot_ro(hi, lo, cl, sp, dem, 1, ts, qc, []) is None
-    with pytest.raises(IndexError):
-        LU.mot_ro_chuan(hi, lo, cl, sp, dem, 1, ts, qc)
-    with pytest.raises(IndexError):
-        LU._mot_ro_nhanh(hi, lo, cl, sp, dem, 1, ts, qc)
+    if mo_hinh == "cuc_tri":
+        assert LN.mot_ro(hi, lo, cl, sp, dem, 1, ts, qc, []) is None
+        with pytest.raises(IndexError):
+            LU.mot_ro_chuan(hi, lo, cl, sp, dem, 1, ts, qc)
+        with pytest.raises(IndexError):
+            LU._mot_ro_nhanh(hi, lo, cl, sp, dem, 1, ts, qc)
+        return
+    py, c = _py(hi, lo, cl, sp, dem, 1, ts, qc), _c(hi, lo, cl, sp, dem, 1, ts, qc)
+    _khop(py, c, "cho lui = 0,0 dung")
+    lai, _treo, tk, ev = py
+    assert tk["so_ro"] == 1 and tk["so_lenh"] == 2 and tk["con_mo"] == 1                     # bar 1 chot TP, bar 2 mo lai ro moi
+    assert [(e[0], e[1]) for e in ev] == [("mo", 0), ("dong", 1), ("mo", 2)]                  # mo bar0, chot TP bar1, vao lai dau bar2
+    assert ev[2][2] == cl[1]                                                                  # ... o GIA MO bar 2 (= dong bar 1), khong cho gi nua
+    assert lai[2] == lai[1] > 0                                                               # lai khong doi o bar 2: khong co phi, khong co lenh dong
 
 
 @pytest.mark.parametrize("mo_hinh", MO_HINH)
@@ -817,18 +895,16 @@ _DOT_BIEN = {
     # --- mo hinh `duong_di` (08/10/2026): moi dong la mot phep so sanh / cong thuc cua d_lui, d_len, d_treo_tai hoac vong nen
     'dd_lui_gap_khop_o_moc': ('double gg = (s * (moc - a) <= 0) ? moc : a;      /* nhay gia vuot moc: khop o gia dau doan */',
                              'double gg = moc;      /* nhay gia vuot moc: khop o gia dau doan */', False, "duong_di"),
-    'dd_lui_chuoi_tu_moc': ('moc = gg - s * b1 * D->pip;',
-                           'moc = moc - s * b1 * D->pip;', False, "duong_di"),
-    'dd_lui_cham_moc_bo_dung_sai': ('while (s * (moc - b) >= -D->eps) {',
-                                   'while (s * (moc - b) >= 0) {', False, "duong_di"),
-    'dd_lui_cham_moc_sai_dau_dung_sai': ('while (s * (moc - b) >= -D->eps) {',
-                                        'while (s * (moc - b) >= D->eps) {', False, "duong_di"),
-    'dd_lui_cham_moc_dung_sai_lon': ('while (s * (moc - b) >= -D->eps) {',
-                                    'while (s * (moc - b) >= -1000.0 * D->eps) {', False, "duong_di"),
-    'dd_lui_tran_truoc': ('if ((double)D->v.n < D->tran) {',
-                         'if ((double)D->v.n <= D->tran) {', False, "duong_di"),
-    'dd_lui_tran_sau': ('if ((double)D->v.n >= D->tran) break;',
-                       'if ((double)D->v.n > D->tran) break;', False, "duong_di"),
+    'dd_lui_chuoi_tu_lenh_dau': ('moc = D->v.a[D->v.head + D->v.n - 1].g - s * b0 * D->pip;',
+                                'moc = D->v.a[D->v.head].g - s * b0 * D->pip;', False, "duong_di"),
+    'dd_lui_cham_moc_bo_dung_sai': ('if (s * (moc - b) < -D->eps) break;              /* chua toi moc them tang */',
+                                   'if (s * (moc - b) < 0) break;              /* chua toi moc them tang */', False, "duong_di"),
+    'dd_lui_cham_moc_sai_dau_dung_sai': ('if (s * (moc - b) < -D->eps) break;              /* chua toi moc them tang */',
+                                        'if (s * (moc - b) < D->eps) break;              /* chua toi moc them tang */', False, "duong_di"),
+    'dd_lui_cham_moc_dung_sai_lon': ('if (s * (moc - b) < -D->eps) break;              /* chua toi moc them tang */',
+                                    'if (s * (moc - b) < -1000.0 * D->eps) break;              /* chua toi moc them tang */', False, "duong_di"),
+    'dd_lui_tran_truoc': ('const int co_them = (double)D->v.n < D->tran;',
+                         'const int co_them = (double)D->v.n <= D->tran;', False, "duong_di"),
     'dd_cho_cham_moc_bo_dung_sai': ('if (s * (D->cho - b) < -D->eps) return 0;',
                                    'if (s * (D->cho - b) < 0) return 0;', False, "duong_di"),
     'dd_cho_cham_moc_sai_dau_dung_sai': ('if (s * (D->cho - b) < -D->eps) return 0;',
@@ -867,8 +943,8 @@ _DOT_BIEN = {
                         'D->cho = e + s * D->cho_lui * D->pip;', False, "duong_di"),
     'dd_cho_lui_dieu_kien': ('if (D->cho_lui > 0) {',
                             'if (D->cho_lui >= 0) {', False, "duong_di"),
-    'dd_treo_max': ('if (f > treo_bar) treo_bar = f;',
-                   'if (f < treo_bar) treo_bar = f;', False, "duong_di"),
+    'dd_treo_max': ('if (f > D.treo_bar) D.treo_bar = f;',
+                   'if (f < D.treo_bar) D.treo_bar = f;', False, "duong_di"),
     'dd_treo_lai_tru_lo': ('if (d > 0) acc += d * va[k].l;',
                           'acc += d * va[k].l;', False, "duong_di"),
     'dd_swap_dieu_kien': ('if (D.v.n > 0 && dem[i] != 0.0) {',
@@ -889,22 +965,121 @@ _DOT_BIEN = {
                       'if (cl_i <= o) { pts[0] = lo_i; pts[1] = hi_i; }', False, "duong_di"),
     'dd_bo_nhay_gia_dau_nen': ('if ((rc = d_lui(&D, i, o, o)) != 0) goto xong;       /* nhay gia luc mo nen */',
                               'rc = 0;', False, "duong_di"),
-    'dd_treo_bo_gia_mo': ('double treo_bar = d_treo_tai(&D, o);',
-                         'double treo_bar = 0.0;', False, "duong_di"),
+    'dd_treo_bo_gia_mo': ('double f0 = d_treo_tai(&D, o);',
+                         'double f0 = 0.0;', False, "duong_di"),
     'dd_tia_chap_1_lenh': ('if (D->tia && D->v.n >= 2 &&',
                           'if (D->tia && D->v.n >= 1 &&', False, "duong_di"),
-    'dd_tang_max_bo': ('if (D->v.n > D->tang_max) D->tang_max = D->v.n;',
-                      ';', False, "duong_di"),
-    'dd_so_tang_khong_ve_1_khi_chot': ('for (int64_t k = 0; k < D->v.n; k++) ghi_dong(&D->g, i, e, va[k].id, 0);\n            D->so_tang = 1;',
-                                      'for (int64_t k = 0; k < D->v.n; k++) ghi_dong(&D->g, i, e, va[k].id, 0);', False, "duong_di"),
-    'dd_tia_het_ro_khong_mo_lai': ('            if (D->v.n == 0) {                               /* tia het ca ro -> mo lai mot lenh moi, ladder ve 0 */\n                D->so_tang = 1;\n                if ((rc = d_mo_lenh(D, i, e, 0, 1)) != 0) return rc;\n            }',
+    'dd_tang_max_bo': ('D->so_tang += 1;\n            if (D->v.n > D->tang_max) D->tang_max = D->v.n;',
+                      'D->so_tang += 1;\n            ;', False, "thoat"),
+    # (khong co ban 'so_tang khong ve 1 khi chot': nhanh TP dat so_tang = 1 la du thua - `d_thu_mo_lai` va nhanh `cho` cua `d_lui` deu tu dat 1
+    # truoc khi so_tang duoc doc, nen bo dong do khong doi mot con so nao: ban dot bien TUONG DUONG, khong phai lo hong cua bo kiem.)
+    'dd_tia_het_ro_khong_mo_lai': ('            if (D->v.n == 0) {                               /* tia het ca ro -> mo lai mot lenh moi, ladder ve 0 (neu duoc phep) */\n                if ((rc = d_thu_mo_lai(D, i, e)) != 0) return rc;\n            }',
                                   '            if (D->v.n == 0) {\n                D->so_tang = 1;\n            }', False, "duong_di"),
     'dd_tp_tien_chia_hop': ('mtp = tb + s * D->nguong_tien / (D->hop * tong);',
                            'mtp = tb + s * D->nguong_tien / tong;', False, "duong_di"),
-    'dd_tb_khong_trong_so': ('double tb = sw / tong;',
-                            'double tb = sw / (double)D->v.n;', False, "duong_di"),
+    'dd_tb_khong_trong_so': ('double tb = sw / tong;\n        double mtp;',
+                            'double tb = sw / (double)D->v.n;\n        double mtp;', False, "duong_di"),
     'dd_tia_trung_binh_sai': ('ps = (pc->g * pc->l + pd->g * pd->l) / (pc->l + pd->l) + s * D->bien_cap * D->pip;',
                              'ps = (pc->g + pd->g) / 2.0 + s * D->bien_cap * D->pip;', False, "duong_di"),
+    # --- CO CHE CAT LO / THOAT GIO / NGHI / LOC GIO (ABI 5, 08/10/2026): kich ban ngau nhien CO cot thoi gian (`_kich_ban_thoat`), nhan 'thoat'.
+    # Khong co ban cho `D->cho = 0.0` trong d_dong_het (ro dang mo thi cho luon = 0), `D->so_tang = 1` trong d_thu_mo_lai (moi duong goi
+    # deu da dat 1) va `tang_max < 1` (d_lui luon chay ngay sau): ca ba la dong du thua, bo di khong doi mot con so nao - ban TUONG DUONG.
+    # Them hai ban TUONG DUONG da CHUNG MINH (khong dua vao may thu): (a) san 0 cua `treo_bar` trong d_dong_het - moi lan cong d_lai < 0 thi
+    # F = max(NF, 0) (quy nap: max(max(NF,0)+d, 0) = max(NF+d, 0) vi d < 0), va ngay sau do `if (f > treo_bar) treo_bar = f` voi f >= 0 luon
+    # chay truoc khi `treo_arr[i]` duoc doc, nen so ra khong doi; (b) `e_cat = mcut` thay vi nhay gia: khi moc cat bi nhay qua (mcut ben
+    # kia a) thi s*mcut > s*a >= s*e_them nen cat_truoc van dung y het, con khi khong nhay thi hai gia tri la mot.
+    'th_nghi_bien_bang': ('if (t < D->nghi_den) return 0;',
+                         'if (t <= D->nghi_den) return 0;', False, "thoat"),
+    'th_cua_so_tu_mo_dau': ('return (D->gio_tu_s <= sec && sec < D->gio_den_s);',
+                           'return (D->gio_tu_s < sec && sec < D->gio_den_s);', False, "thoat"),
+    'th_cua_so_den_dong_cuoi': ('return (D->gio_tu_s <= sec && sec < D->gio_den_s);',
+                               'return (D->gio_tu_s <= sec && sec <= D->gio_den_s);', False, "thoat"),
+    'th_cua_so_qua_dem_tu': ('return (sec >= D->gio_tu_s || sec < D->gio_den_s);',
+                            'return (sec > D->gio_tu_s || sec < D->gio_den_s);', False, "thoat"),
+    'th_cua_so_qua_dem_den': ('return (sec >= D->gio_tu_s || sec < D->gio_den_s);',
+                             'return (sec >= D->gio_tu_s || sec <= D->gio_den_s);', False, "thoat"),
+    'th_cua_so_qua_dem_va': ('return (sec >= D->gio_tu_s || sec < D->gio_den_s);',
+                            'return (sec >= D->gio_tu_s && sec < D->gio_den_s);', False, "thoat"),
+    'th_cua_so_nhanh_nguoc': ('if (D->gio_tu_s < D->gio_den_s) return',
+                             'if (D->gio_tu_s > D->gio_den_s) return', False, "thoat"),
+    'th_loc_gio_chi_cua_so_thuong': ('D.loc_gio = (D.gio_tu_s != D.gio_den_s);',
+                                    'D.loc_gio = (D.gio_tu_s < D.gio_den_s);', False, "thoat"),
+    'th_loc_gio_tu_bang_den_la_bat': ('D.loc_gio = (D.gio_tu_s != D.gio_den_s);',
+                                     'D.loc_gio = (D.gio_tu_s <= D.gio_den_s);', False, "thoat"),
+    'th_dung_tg_bo_loc_gio': ('D.dung_tg = (D.thoat_s > 0.0 || D.nghi_s > 0.0 || D.loc_gio);',
+                             'D.dung_tg = (D.thoat_s > 0.0 || D.nghi_s > 0.0);', False, "thoat"),
+    'th_giay_thoat_cat_cut': ('D.thoat_s = floor(p[P_THOAT_GIO] * 3600.0 + 0.5);',
+                             'D.thoat_s = floor(p[P_THOAT_GIO] * 3600.0);', False, "thoat"),
+    'th_giay_nghi_cat_cut': ('D.nghi_s = floor(p[P_NGHI_GIO] * 3600.0 + 0.5);',
+                            'D.nghi_s = floor(p[P_NGHI_GIO] * 3600.0);', False, "thoat"),
+    'th_giay_tu_cat_cut': ('D.gio_tu_s = floor(p[P_GIO_VAO_TU] * 3600.0 + 0.5);',
+                          'D.gio_tu_s = floor(p[P_GIO_VAO_TU] * 3600.0);', False, "thoat"),
+    'th_giay_den_cat_cut': ('D.gio_den_s = floor(p[P_GIO_VAO_DEN] * 3600.0 + 0.5);',
+                           'D.gio_den_s = floor(p[P_GIO_VAO_DEN] * 3600.0);', False, "thoat"),
+    'th_dong_het_khong_huong': ('acc += D->s * (e - va[k].g) * va[k].l;',
+                               'acc += (e - va[k].g) * va[k].l;', False, "thoat"),
+    'th_dem_cat_gio_doi_cho': ('if (ma == 2) D->so_cat += 1; else D->so_gio += 1;',
+                              'if (ma == 2) D->so_gio += 1; else D->so_cat += 1;', False, "thoat"),
+    'th_nghi_tinh_tu_luc_mo': ('D->nghi_den = D->tg[i] + D->nghi_s;',
+                              'D->nghi_den = D->t_mo + D->nghi_s;', False, "thoat"),
+    'th_treo_goc_dau': ('D->treo_bar = D->treo_bar + d_lai;',
+                       'D->treo_bar = D->treo_bar - d_lai;', False, "thoat"),
+    'th_treo_goc_chi_khi_lai': ('if (d_lai < 0.0) {',
+                               'if (d_lai > 0.0) {', False, "thoat"),
+    'th_treo_goc_quen_phi_spread': ('double d_lai = (D->lai - D->phi_sp - D->phi_sw) - D->r_dau;',
+                                   'double d_lai = (D->lai - D->phi_sw) - D->r_dau;', False, "thoat"),
+    'th_moc_cat_khong_trong_so': ('sw += va[k].l * va[k].g; }\n    double tb = sw / tong;\n    double kc',
+                                 'sw += va[k].g; }\n    double tb = sw / tong;\n    double kc', False, "thoat"),
+    'th_moc_cat_chon_kc_lon': ('if (k2 < kc) kc = k2;',
+                              'if (k2 > kc) kc = k2;', False, "thoat"),
+    'th_moc_cat_tien_quen_hop': ('double k2 = D->nguong_cat / (D->hop * tong);',
+                                'double k2 = D->nguong_cat / tong;', False, "thoat"),
+    'th_moc_cat_huong': ('return tb - D->s * kc;',
+                        'return tb + D->s * kc;', False, "thoat"),
+    'th_moc_cat_pip_quen_nhan_pip': ('kc = D->cat_pip * D->pip;',
+                                    'kc = D->cat_pip;', False, "thoat"),
+    'th_cat_tien_quen_nhan_lot': ('D.nguong_cat = D.cat_tien * (D.lot / 0.01);',
+                                 'D.nguong_cat = D.cat_tien;', False, "thoat"),
+    'th_cat_bat_bo_tien': ('D.cat_bat = (D.cat_pip > 0.0 || D.cat_tien > 0.0);',
+                          'D.cat_bat = (D.cat_pip > 0.0);', False, "thoat"),
+    'th_lui_ro_day_khong_cat': ('if (!co_them && !D->cat_bat) break;',
+                               'if (!co_them) break;', False, "thoat"),
+    'th_lui_hoa_them_truoc_cat': ('cat_truoc = (s * e_cat >= s * e_them);',
+                                 'cat_truoc = (s * e_cat > s * e_them);', False, "thoat"),
+    'th_lui_ro_day_cat_sau_cung': ('cat_truoc = 1;',
+                                  'cat_truoc = 0;', False, "thoat"),
+    'th_lui_e_them_bo_nhay_gia': ('const double e_them = (s * (moc - a) <= 0) ? moc : a;',
+                                 'const double e_them = moc;', False, "thoat"),
+    'th_lui_cat_bo_dung_sai': ('if (s * (mcut - b) < -D->eps) break;             /* chua toi moc cat */',
+                              'if (s * (mcut - b) < 0) break;             /* chua toi moc cat */', False, "thoat"),
+    'th_lui_cat_sai_dau_dung_sai': ('if (s * (mcut - b) < -D->eps) break;             /* chua toi moc cat */',
+                                   'if (s * (mcut - b) < D->eps) break;             /* chua toi moc cat */', False, "thoat"),
+    'th_lui_cat_dung_sai_lon': ('if (s * (mcut - b) < -D->eps) break;             /* chua toi moc cat */',
+                               'if (s * (mcut - b) < -1000.0 * D->eps) break;             /* chua toi moc cat */', False, "thoat"),
+    'th_lui_cat_gia_khop_bo_nhay_gia': ('double e = (s * (mcut - a) <= 0) ? mcut : a;\n            d_dong_het(D, i, e, 2);',
+                                       'double e = mcut;\n            d_dong_het(D, i, e, 2);', False, "thoat"),
+    'th_lui_cat_khong_mo_lai': ('d_dong_het(D, i, e, 2);\n            if ((rc = d_thu_mo_lai(D, i, e)) != 0) return rc;',
+                               'd_dong_het(D, i, e, 2);', False, "thoat"),
+    'th_lui_cat_ma_ly_do': ('d_dong_het(D, i, e, 2);',
+                           'd_dong_het(D, i, e, 3);', False, "thoat"),
+    'th_thoat_bien_lon_hon': ('tg[i] - D.t_mo >= D.thoat_s)',
+                             'tg[i] - D.t_mo > D.thoat_s)', False, "thoat"),
+    'th_thoat_ro_rong': ('if (D.thoat_s > 0.0 && D.v.n > 0 && tg[i] - D.t_mo >= D.thoat_s)',
+                        'if (D.thoat_s > 0.0 && tg[i] - D.t_mo >= D.thoat_s)', False, "thoat"),
+    'th_thoat_gia_dong_bar': ('d_dong_het(&D, i, o, 3);',
+                             'd_dong_het(&D, i, cl_i, 3);', False, "thoat"),
+    'th_thoat_tinh_tu_bar_0': ('tg[i] - D.t_mo >= D.thoat_s)',
+                              'tg[i] - tg[0] >= D.thoat_s)', False, "thoat"),
+    'th_vao_lai_bo_cho': ('if (D.v.n == 0 && D.cho == 0.0) {',
+                         'if (D.v.n == 0) {', False, "thoat"),
+    'th_bar0_bo_loc_gio': ('if (d_cho_phep_mo(&D, 0)) {',
+                          'if (1) {', False, "thoat"),
+    'th_t_mo_bar0': ('if (D.dung_tg) D.t_mo = tg[0];',
+                    'if (D.dung_tg) D.t_mo = 0.0;', False, "thoat"),
+    'th_t_mo_ro_moi': ('if (D->dung_tg) D->t_mo = D->tg[i];',
+                      'if (D->dung_tg) D->t_mo = D->tg[0];', False, "thoat"),
+    'th_cho_lui_bo_loc_gio': ('if (!d_cho_phep_mo(D, i)) return 0;',
+                             ';', False, "thoat"),
 }
 
 
@@ -925,13 +1100,17 @@ def test_dot_bien_bi_tu_kiem_hoac_khop_chinh_xac_bat(nhan_sach, monkeypatch, tmp
         assert "TU KIEM KHONG KHOP" in LN.trang_thai()["ly_do"], LN.trang_thai()["ly_do"]
         return
     for seed in (1, 2, 3, 4):
-        for hi, lo, cl, sp, dem, ts, qc in _so_ngau_nhien(seed, 8, mo_hinh=mo_hinh):
+        if mo_hinh == "thoat":                               # co che CAT LO / THOAT GIO / NGHI / LOC GIO + cot thoi gian
+            kich_ban = _so_ngau_nhien_thoat(seed, 8)
+        else:
+            kich_ban = ((*k, None) for k in _so_ngau_nhien(seed, 8, mo_hinh=mo_hinh))
+        for hi, lo, cl, sp, dem, ts, qc, tg in kich_ban:
             for chieu in (1, -1):
-                r = LN.mot_ro(hi, lo, cl, sp, dem, chieu, ts, qc, [])
+                r = LN.mot_ro(hi, lo, cl, sp, dem, chieu, ts, qc, [], tg)
                 if r is None:
                     return
-                a = _py(hi, lo, cl, sp, dem, chieu, ts, qc)
-                if not LN.so_sanh_ket_qua(a, _c(hi, lo, cl, sp, dem, chieu, ts, qc), 0.0, 0.0)[0]:
+                a = _py(hi, lo, cl, sp, dem, chieu, ts, qc, tg)
+                if not LN.so_sanh_ket_qua(a, _c(hi, lo, cl, sp, dem, chieu, ts, qc, tg), 0.0, 0.0)[0]:
                     return                                   # so sanh chinh xac bat duoc
     pytest.fail("ban dot bien '%s' LOT qua ca tu kiem lan so sanh chinh xac" % ten)
 

@@ -122,10 +122,28 @@ def test_engine_co_phai_tro_toi_truong_that_va_da_cai_dat():
             assert set(k.truong_engine) <= set(L.CHUA_CAI_DAT), k.ma
 
 
-def test_cat_lo_theo_tien_khong_duoc_ghi_la_co_khi_engine_chua_cai_dat():
+def test_cat_lo_theo_tien_chi_ghi_mot_phan_vi_cat_theo_tai_khoan_chua_cai_dat():
+    # Engine cat CA CHUOI theo tien (cat_lo_tien, 08/10/2026) nhung cat theo TAI KHOAN (dung_lo_tong) van khong cai dat: khong duoc ghi "co".
     k = KC.khoi("cat_lo_theo_tien")
-    assert "dung_lo_tong" in L.CHUA_CAI_DAT
-    assert k.engine == "chua" and k.truong_engine == ("dung_lo_tong",)
+    assert "dung_lo_tong" in L.CHUA_CAI_DAT and "cat_lo_tien" not in L.CHUA_CAI_DAT
+    assert k.engine == "mot_phan" and k.truong_engine == ("cat_lo_tien",)
+    assert "dung_lo_tong" in k.engine_ghi_chu           # noi ro phan nao chua co
+
+
+def test_co_che_thoat_va_loc_gio_cua_engine_duoc_ghi_dung_trang_thai():
+    # Moi truong "tinh nang duong_di" cua engine phai thuoc DUNG MOT khoi (khong khoi nao quen, khong khoi nao ghi chung truong).
+    chu = {}
+    for k in KC.KHOI_DS:
+        for t in k.truong_engine:
+            if t in L.TINH_NANG_DUONG_DI:
+                chu.setdefault(t, []).append(k.ma)
+    assert chu == {"cat_lo_pip": ["cat_lo_chuoi_theo_pip"], "cat_lo_tien": ["cat_lo_theo_tien"], "thoat_gio": ["thoat_theo_thoi_gian"],
+                   "nghi_gio": ["nghi_sau_cat_lo"], "gio_vao_tu": ["loc_gio_giao_dich"], "gio_vao_den": ["loc_gio_giao_dich"]}, chu
+    assert {m: KC.khoi(m).engine for m in ("cat_lo_chuoi_theo_pip", "thoat_theo_thoi_gian", "nghi_sau_cat_lo")} == {
+        "cat_lo_chuoi_theo_pip": "co", "thoat_theo_thoi_gian": "co", "nghi_sau_cat_lo": "co"}
+    assert KC.khoi("loc_gio_giao_dich").engine == "mot_phan"       # chi MOT cua so, khong nhieu cua so / ngay trong tuan
+    for m in ("cat_lo_chuoi_theo_pip", "thoat_theo_thoi_gian", "nghi_sau_cat_lo"):
+        assert m in KC.BOT["luoi_cua_ta"].khoi                      # engine "co" => he cua ta co khoi do
 
 
 def test_kiem_bat_khoi_ghi_co_ma_truong_khong_ton_tai_hoac_chua_cai_dat(tam):

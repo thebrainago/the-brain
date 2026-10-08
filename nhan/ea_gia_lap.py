@@ -48,7 +48,12 @@ BANG_TEN = {
     "he_so_lot": "InpLotMult", "kieu_lot": "InpLotKind", "he_so_buoc": "InpStepMult", "buoc_tran": "InpStepCap",
     "tia_lenh": "InpSpark", "bien_cap": "InpSparkPips", "cap_moi_bar": "InpSparkPerBar", "cho_lui": "InpWaitBack",
     "chot_tien": "InpTakeMoney",
+    "cat_lo_pip": "InpCutPips", "cat_lo_tien": "InpCutMoney", "thoat_gio": "InpExitHours", "nghi_gio": "InpRestHours",
+    "gio_vao_tu": "InpHourFrom", "gio_vao_den": "InpHourTo",
 }
+#: Truong chi `khop_bar="duong_di"` co (luoi.TINH_NANG_DUONG_DI) va mac dinh 0 = TAT: khi bang 0 KHONG dua vao tham_so cua EA (EA mac dinh cung 0),
+#: nen bo tham so cu va so tay cu giu nguyen tung chu; bat (!= 0) thi dua vao nhu moi input khac.
+CHI_DUA_KHI_BAT = frozenset(("cat_lo_pip", "cat_lo_tien", "thoat_gio", "nghi_gio", "gio_vao_tu", "gio_vao_den"))
 #: Truong engine KHONG co input tuong ung, va ly do: la thu cua TAI KHOAN / san, hoac engine chua cai dat.
 KHONG_CO_TRONG_EA = {
     "muc_stopout": "stop-out la cua nha mo gioi (engine mo phong chet tai khoan)",
@@ -66,7 +71,8 @@ class LoiBienDich(RuntimeError):
 
 def tham_so_ea_tu_luoi(ts) -> dict:
     """`luoi.ThamSo` (hoac dict cung ten truong) -> tham_so cho `ea_LuoiDayDu.mq5`. Truong la -> ValueError, KHONG bo qua im lang;
-    `dung_lo_tong != 0` -> ValueError (engine cung tu choi)."""
+    `dung_lo_tong != 0` -> ValueError (engine cung tu choi). Sau truong `CHI_DUA_KHI_BAT` (cat lo / thoat gio / nghi / loc gio) = 0 thi
+    khong dua vao (EA mac dinh cung 0)."""
     d = dataclasses.asdict(ts) if dataclasses.is_dataclass(ts) else dict(ts)
     ra = {}
     for k, v in d.items():
@@ -76,6 +82,8 @@ def tham_so_ea_tu_luoi(ts) -> dict:
             continue
         if k not in BANG_TEN:
             raise ValueError("truong ThamSo '%s' chua co input trong EA (them vao BANG_TEN va EA truoc)" % k)
+        if k in CHI_DUA_KHI_BAT and not v:
+            continue
         if k == "che_do":
             v = _CHE_DO[v]
         elif k == "kieu_lot":
@@ -140,13 +148,17 @@ def bien_dich(duong_mq5, chi_cu_phap: bool = False, thu_muc=None) -> Path | None
 
 
 # ------------------------------------------------------------------ duong gia: bar OHLC -> tick
-def tick_tu_bar(df: pd.DataFrame, thu_tu="thap_truoc", point: float = POINT, giay_bar: float = 900.0, paso=None) -> dict:
+def tick_tu_bar(df: pd.DataFrame, thu_tu="thap_truoc", point: float = POINT, giay_bar: float = 900.0, paso=None,
+                giay_nguyen: bool = False) -> dict:
     """Moi bar (open, high, low, close, spread[point]) -> chuoi tick BUOC `paso` (mac dinh = `point`): open -> cuc tri thu nhat ->
     cuc tri thu hai -> close.
 
     `thu_tu`: 'thap_truoc' (thap roi cao - dung gia dinh BAT LOI TRUOC cua engine voi lenh MUA), 'cao_truoc' (voi lenh BAN),
     'xen_ke' (bar chan thap truoc, bar le cao truoc), 'theo_nen' (nen tang: thap truoc; nen giam: cao truoc).
     Gia bar PHAI nam tren luoi `point`; `paso` nho hon `point` (uoc so nguyen cua nhau) cho chuoi tick MIN hon luoi gia bar.
+    `giay_nguyen=True`: gio tick lam tron XUONG ve giay nguyen (nhieu tick cung giay). San gia cat gio ve giay nguyen (`datetime`) con engine doc
+    giay tu chi so thoi gian - gio chia deu `giay_bar / n` roi cat o hai ben co the lech 1 giay o ranh gioi; voi giay nguyen san tu truoc thi hai ben
+    nhin CUNG mot gio (can cho thoat_gio / nghi_gio / gio_vao_*). Mac dinh gio chia deu (khong doi so cu).
     Tra dict mang: bid, spread (GIA), time (giay), bar (giay bat dau nen), bar_idx."""
     o, h, l, c = (np.rint(df[k].to_numpy(float) / point).astype(np.int64) for k in ("open", "high", "low", "close"))
     paso = float(paso or point)
@@ -170,7 +182,8 @@ def tick_tu_bar(df: pd.DataFrame, thu_tu="thap_truoc", point: float = POINT, gia
         n = len(pts)
         bid.append(pts * paso)
         spr.append(np.full(n, sp[i]))
-        tm.append(t0[i] + np.arange(n) * (giay_bar / n))
+        tt = t0[i] + np.arange(n) * (giay_bar / n)
+        tm.append(np.floor(tt) if giay_nguyen else tt)
         bar.append(np.full(n, t0[i]))
         bidx.append(np.full(n, i, np.int64))
     return dict(bid=np.concatenate(bid), spread=np.concatenate(spr), time=np.concatenate(tm), bar=np.concatenate(bar),
@@ -185,7 +198,14 @@ def barra_tu_tick(tk: dict, point: float = POINT, nhieu: float = 1e-9) -> pd.Dat
     `nhieu`: MT5 va EA tinh cham DUNG muc (bid = TP, bid = moc tang) la TRUNG; engine so sanh so thuc nen nhieu dau phay dong
     (0,89879999 < 0,8988) co the bo sot. Nong cao / thap them `nhieu` (mac dinh 1e-9: nho hon moi buoc tick 1e-6 den 1e-3 lan) de hai ben cung quy tac."""
     b = np.asarray(tk["bid"], float)
-    idx = pd.to_datetime(np.rint(np.asarray(tk["time"], float) * 1e6).astype(np.int64), unit="us")
+    us = np.rint(np.asarray(tk["time"], float) * 1e6).astype(np.int64)
+    if len(us) > 1 and (us[1:] == us[:-1]).any():
+        # nhieu tick cung giay (tick_tu_bar(giay_nguyen=True)): them 1 micro-giay cho tick thu 2, 3... cua nhom de chi so DUY NHAT (giay van
+        # la giay: `luoi.thoi_gian_giay` cat xuong giay). Chuoi khong co tick trung gio thi khong doi gi.
+        dau = np.r_[True, us[1:] != us[:-1]]
+        goc = np.flatnonzero(dau)[np.cumsum(dau) - 1]
+        us = us + (np.arange(len(us)) - goc)
+    idx = pd.to_datetime(us, unit="us")
     return pd.DataFrame(dict(open=b, high=b + nhieu, low=b - nhieu, close=b, spread=np.asarray(tk["spread"], float) / point),
                         index=idx)
 
@@ -284,15 +304,18 @@ def so_lenh(eng: pd.DataFrame, ea: pd.DataFrame, paso: float, tol_tick: int = 1,
 
 
 def doi_chieu(exe, ts, df: pd.DataFrame, paso: float = 1e-6, thu_tu: str = "theo_nen", von: float = 10000.0,
-              digits: int = 8, qc=None, tol_tick: int = 1, tol_gia: float = 2.0, han_giay: int = 300) -> KetQuaDoiChieu:
+              digits: int = 8, qc=None, tol_tick: int = 1, tol_gia: float = 2.0, han_giay: int = 300,
+              giay_tick: bool = False) -> KetQuaDoiChieu:
     """Chay CUNG mot duong gia qua EA that (`exe`) va qua `luoi.chay` (tick-bar, khong phi qua dem) roi so tung lenh.
 
     `df`: bar OHLC (+ cot `spread` theo POINT) chi de SINH duong gia; `paso` < point (1e-6 voi gia 5 chu so) cho chuoi tick min
     hon luoi gia bar (it dong gia dung dung muc), `digits=8` de lam tron TP cua EA khong doi quyet dinh. `ts`: `luoi.ThamSo` voi LOT LA
-    BOI SO BUOC LOT (0,04 voi cong 0,25) - EA lam tron lot, engine thi khong."""
+    BOI SO BUOC LOT (0,04 voi cong 0,25) - EA lam tron lot, engine thi khong.
+    `giay_tick=True`: gio tick giay nguyen (`tick_tu_bar(giay_nguyen=True)`) - BAT BUOC khi `ts` dung thoat_gio / nghi_gio / gio_vao_* de EA va
+    engine thay cung gio tung tick (xem `tick_tu_bar`)."""
     from nhan import luoi as L
     qc = qc or L.QuyCach(phi_nam_mua=0.0, phi_nam_ban=0.0)
-    tk = tick_tu_bar(df, thu_tu, point=qc.point, paso=paso)
+    tk = tick_tu_bar(df, thu_tu, point=qc.point, paso=paso, giay_nguyen=giay_tick)
     bt = barra_tu_tick(tk, point=qc.point)
     kq = L.chay(bt, ts, von, qc=qc, ghi_lenh=True)
     ps = tham_so_ea_tu_luoi(ts)

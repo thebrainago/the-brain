@@ -9,7 +9,7 @@ Chu du an 04/10/2026: *"moi bot se co chien luoc va cach quan tri cung nhu tinh 
 
 Mot con bot = **to hop cac KHOI co che** (vao lenh, them lenh, lot, thoat, bao ve, bo loc). Khoi dung chung giua nhieu bot la khoi 'chuan'; khoi chi mot hai bot dung la **yeu to dac sac**. Muon ap dung cheo: lay khoi cua bot A, cai vao he luoi cua ta (hoac bot B), do lai bang `b nc cc ...`. Bot la HOP DEN (.ex4/.ex5, khong co ma nguon) nen khoi chi co hai nguon: (1) loi tac gia / bo `.set` = **kien thuc truoc so lieu** (tep nay), (2) lich su lenh cua tester = **bang chung** (`nhan/ho_so_bot.py`, doi chieu: xac nhan / bac bo / khoi moi).
 
-- 52 khoi, 17 bot (12 bot co mo ta khoi + he cua ta; 5 bot chua co nguon mo ta).
+- 55 khoi, 17 bot (12 bot co mo ta khoi + he cua ta; 5 bot chua co nguon mo ta).
 - Dong chay: tester -> `lenh_tester.vi_the_tu_tep` -> `ho_so_bot` -> doi chieu voi bang nay -> them khoi con thieu vao engine -> nhan ban bot -> so lenh voi hop den.
 - Muc bang chung: N = ma nguon cua ta (he luoi.py); K = ten/gia tri tham so trong bo .set cua tac gia; T = thong bao cua chu bot (nhom Telegram); V = loi tac gia / nguoi trinh bay trong video (phu de tu dong, co the nhan sai); G = ta suy ra, chua ai noi (can lich su lenh moi chot). (D = lich su lenh tester: `ho_so_bot` ghi, khong nam trong bang tinh.)
 - Trang thai engine: **co** = co (engine mo phong duoc, da co test); **mot_phan** = mot phan (gan dung, chua dung y het); **chua** = chua (can them vao luoi.py + nhan C + EA); **ngoai** = ngoai (can nguoi / chi bao ngoai - khong mo phong tu lich su).
@@ -119,7 +119,7 @@ Mot con bot = **to hop cac KHOI co che** (vao lenh, them lenh, lot, thoat, bao v
 - San: MT5; tep: ma nguon; nguon thong tin: ma nguon cua ta.
 - Ket qua tester that: AUDCAD luoi co tia, holdout +13,26%/nam (mo phong, engine co the lac quan ~15% o tia lenh)
 - Dac sac: Luoi hai chieu / mot chieu, buoc gian dan, lot phang / cong / nhan, tia cap dau-cuoi, chot theo tien, cho gia lui truoc khi vao lai.
-- Khoi: `vao_ngay_lap_tuc`[N]; `vao_lai_sau_cho_lui`[N]; `hai_chieu_doc_lap`[N]; `mot_chieu`[N]; `luoi_gian_cach_deu`[N]; `luoi_buoc_gian_dan`[N]; `lot_phang`[N]; `lot_cong`[N]; `lot_nhan`[N]; `tran_so_lenh`[N]; `tp_chuoi_tu_gia_tb`[N]; `tp_chuoi_tien`[N]; `tia_cap_sau_dau`[N]
+- Khoi: `vao_ngay_lap_tuc`[N]; `vao_lai_sau_cho_lui`[N]; `hai_chieu_doc_lap`[N]; `mot_chieu`[N]; `luoi_gian_cach_deu`[N]; `luoi_buoc_gian_dan`[N]; `lot_phang`[N]; `lot_cong`[N]; `lot_nhan`[N]; `tran_so_lenh`[N]; `tp_chuoi_tu_gia_tb`[N]; `tp_chuoi_tien`[N]; `tia_cap_sau_dau`[N]; `cat_lo_chuoi_theo_pip`[N]; `thoat_theo_thoi_gian`[N]; `nghi_sau_cat_lo`[N]
 
 ## 3. MA TRAN BOT x KHOI
 
@@ -183,6 +183,7 @@ Ky hieu: N = ma nguon cua ta (he luoi.py), K = ten/gia tri tham so trong bo .set
 | tia_cap_sau_dau | 0 | . | . | . | . | . | . | . | . | . | . | . | . | N |
 | tia_n_lenh_khi_chuoi_dai | 3 | K | . | . | . | . | . | . | . | . | V | V | . | . |
 | all_sniper | 1 | K | . | . | . | . | . | . | . | . | . | . | . | . |
+| thoat_theo_thoi_gian | 0 | . | . | . | . | . | . | . | . | . | . | . | . | N |
 
 **BAO VE / CAT LO / HOA VON**
 
@@ -190,6 +191,8 @@ Ky hieu: N = ma nguon cua ta (he luoi.py), K = ten/gia tri tham so trong bo .set
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | sl_cung | 3 | . | V | . | . | . | . | . | . | V | . | . | V | . |
 | cat_lo_theo_tien | 2 | . | V | . | . | . | . | . | . | . | V | . | . | . |
+| cat_lo_chuoi_theo_pip | 0 | . | . | . | . | . | . | . | . | . | . | . | . | N |
+| nghi_sau_cat_lo | 0 | . | . | . | . | . | . | . | . | . | . | . | . | N |
 | thoat_hoa_von_khi_chuoi_dai | 1 | . | V | . | . | . | . | . | . | . | . | . | . | . |
 | keo_sl_hoa_von_khi_co_lai | 3 | . | V | . | . | . | . | V | . | V | . | . | . | . |
 | trailing_stop_chuoi | 1 | . | . | . | . | . | . | . | . | . | . | V | . | . |
@@ -525,6 +528,14 @@ Ky hieu: N = ma nguon cua ta (he luoi.py), K = ten/gia tri tham so trong bo .set
 - Ap cheo: Mot chot_tien bac thang theo do sau chuoi: thu bang quet_luoi.
 - Rui ro: Chot non voi tien nho: mat truong lai khi chuoi dai hoi manh.
 
+**`thoat_theo_thoi_gian`** - Thoat theo thoi gian giu chuoi (khoi CUA TA) (engine: co; 0 bot ngoai dung)
+- Mo ta: Dong het chuoi khi no da song >= N gio ke tu luc mo lenh dau, du lai hay lo (time stop).
+- Tham so: thoat_gio
+- Dau van tay trong lich su lenh: Thoi gian giu chuoi dam o mot gia tri (dong dung N gio sau luc mo) thay vi rai theo luc gia ve. (khong do duoc tu lenh)
+- Engine: luoi.ThamSo.thoat_gio (08/10/2026, kieu duong_di): dong o GIA MO cua bar dau tien du N gio; nhan C; EA InpExitHours. [truong luoi.ThamSo: thoat_gio]
+- Ap cheo: Quet thoat_gio cung cat_lo_pip: chuoi chua hoi sau N gio co hay hoi nua khong (do duoi cua chuoi lo).
+- Rui ro: Dong luc dang lo: lo noi thanh lo that.
+
 ### BAO VE / CAT LO / HOA VON
 
 **`sl_cung`** - SL co dinh tung lenh (engine: chua; 3 bot ngoai dung: bigmouse, newyear, signalx)
@@ -535,13 +546,29 @@ Ky hieu: N = ma nguon cua ta (he luoi.py), K = ten/gia tri tham so trong bo .set
 - Ap cheo: Cong cu cho he lenh don (martingale); khong hop voi luoi khong SL.
 - Rui ro: Cat lo lien tiep: lot nhan len roi cham SL.
 
-**`cat_lo_theo_tien`** - Cat lo theo tien (chuoi / tai khoan) (engine: chua; 2 bot ngoai dung: bigmouse, nuti)
+**`cat_lo_theo_tien`** - Cat lo theo tien (chuoi / tai khoan) (engine: mot_phan; 2 bot ngoai dung: bigmouse, nuti)
 - Mo ta: Dong het khi am X USD (Bigmouse 'cat am', NuTi 'shot tai khoan' -300 USD, de tat): bien 'khong cat lo' thanh 'cat lo co tran'.
 - Tham so: cat am USD, shot tai khoan
 - Dau van tay trong lich su lenh: Cum chuoi dong boi [ea] / stopout voi lo gan co dinh -X; hoac tai khoan ve 0. (phep do `thoat`)
-- Engine: ThamSo.dung_lo_tong da khai bao nhung KHONG cai dat (luoi.chay tu choi != 0). [truong luoi.ThamSo: dung_lo_tong]
+- Engine: CAT CA CHUOI theo tien: luoi.ThamSo.cat_lo_tien (08/10/2026, kieu duong_di; nhan C; EA InpCutMoney). Cat theo TAI KHOAN (dung_lo_tong) van KHONG cai dat (luoi.chay tu choi != 0). [truong luoi.ThamSo: cat_lo_tien]
 - Ap cheo: Dat tran DD tu truoc (vd 50%) la cach giu maxDD < 80% theo cong cua chu du an.
 - Rui ro: Cat dung luc day: mat co hoi hoi phuc.
+
+**`cat_lo_chuoi_theo_pip`** - Cat lo ca chuoi theo khoang cach pip (khoi CUA TA) (engine: co; 0 bot ngoai dung)
+- Mo ta: Dong het chuoi khi gia di nguoc >= X pip so voi gia trung binh THEO LOT cua chuoi (tinh lai sau moi tang): cat lo co tran thay vi cho hoi.
+- Tham so: cat_lo_pip
+- Dau van tay trong lich su lenh: Chuoi lo dong o khoang cach gia gan hang so tu gia trung binh (khong phai o mot so tien co dinh); ban boc vang 08/10 cho thay 36-62% chuoi dong LO. (khong do duoc tu lenh)
+- Engine: luoi.ThamSo.cat_lo_pip (08/10/2026, kieu duong_di): khop o dung moc cat (gia nhay qua moc thi o gia nhay); nhan C; EA InpCutPips (khop tung tick voi engine, test_ea_luoi_day_du). [truong luoi.ThamSo: cat_lo_pip]
+- Ap cheo: Quet cat_lo_pip tren luoi AUDCAD / vang: tran lo co dinh doi lai ty le thang giam bao nhieu, so voi cat theo tien.
+- Rui ro: Cat dung day: chuoi hoi sau do khong con; gia nhay (gap) thi lo that lon hon moc.
+
+**`nghi_sau_cat_lo`** - Nghi sau khi cat lo / thoat gio (khoi CUA TA) (engine: co; 0 bot ngoai dung)
+- Mo ta: Sau khi cat lo hoac thoat theo gio, KHONG mo chuoi moi trong M gio (chot loi khong nghi): tranh vao lai ngay luc thi truong dang chay nguoc.
+- Tham so: nghi_gio
+- Dau van tay trong lich su lenh: Sau chuoi dong LO, khoang trong den chuoi ke tiep dai hon sau chuoi dong LAI. (khong do duoc tu lenh)
+- Engine: luoi.ThamSo.nghi_gio (08/10/2026, kieu duong_di); nhan C; EA InpRestHours. [truong luoi.ThamSo: nghi_gio]
+- Ap cheo: Chi co nghia khi da bat cat lo hoac thoat gio: thu nghi_gio = 0 / 1 / 4 / 12.
+- Rui ro: Nghi qua dai bo lo luc hoi.
 
 **`thoat_hoa_von_khi_chuoi_dai`** - Chap nhan hoa von khi chuoi dai (engine: chua; 1 bot ngoai dung: bigmouse)
 - Mo ta: Khi chuoi co N lenh (Bigmouse: 3), bo TP duong va chi dat SL o hoa von: chuoi thoat o 0 thay vi cho lai.
@@ -577,11 +604,11 @@ Ky hieu: N = ma nguon cua ta (he luoi.py), K = ten/gia tri tham so trong bo .set
 - Ap cheo: Chi phi that cua he luoi (spread rong luc roll-over) la bo loc nhay: thu cho luoi AUDCAD.
 - Rui ro: Loc qua chat: bo qua nhip vao tot.
 
-**`loc_gio_giao_dich`** - Loc gio giao dich (engine: chua; 5 bot ngoai dung: ccbsn, bigmouse, black_dragon, newyear, semi_hft)
+**`loc_gio_giao_dich`** - Loc gio giao dich (engine: mot_phan; 5 bot ngoai dung: ccbsn, bigmouse, black_dragon, newyear, semi_hft)
 - Mo ta: Chi cho mo lenh trong cac khung gio (BlackDragon, Bigmouse 'gio mo cua', NewYear 2.1 time trade 1-3, SemiHFT theo ngay, CCBSN lich ngay / gio).
 - Tham so: gio bat dau, gio ket thuc, time trade 1-3 (NewYear 2.1)
 - Dau van tay trong lich su lenh: Phan bo gio vao lenh dau khong deu: co gio khong bao gio co lenh. (phep do `gio_ngay`)
-- Engine: luoi.py khong loc gio.
+- Engine: luoi.ThamSo.gio_vao_tu / gio_vao_den (08/10/2026, kieu duong_di): MOT cua so gio (qua nua dem duoc) chi chan MO CHUOI MOI; chua co nhieu cua so (time trade 1-3), loc ngay trong tuan, hay chan them tang. [truong luoi.ThamSo: gio_vao_tu, gio_vao_den]
 - Ap cheo: Thu loai gio xau (qua dem / tin) cho luoi: dac trung gio da co trong DSL, do bang quet_luoi sau khi them.
 - Rui ro: Quet gio la cach de cai gai: can kiem tren doan xac nhan.
 
@@ -638,7 +665,7 @@ Khoi chua (hoac moi mot phan) co trong `luoi.py`. Thu tu = **o bot song sot truo
 
 | # | khoi | engine | so bot | bot song sot | thieu gi |
 |---|---|---|---|---|---|
-| 1 | loc_gio_giao_dich | chua | 5 | ccbsn | luoi.py khong loc gio. |
+| 1 | loc_gio_giao_dich | mot_phan | 5 | ccbsn | luoi.ThamSo.gio_vao_tu / gio_vao_den (08/10/2026, kieu duong_di): MOT cua so gio (qua nua dem duoc) chi chan MO CHUOI MOI; chua co nhieu cua so (time trade 1-3), loc ngay trong tuan, hay chan them tang. |
 | 2 | tp_tung_lenh | mot_phan | 4 | ccbsn | luoi.py chot ca chuoi; chi co tia_cap (dau + cuoi) gan giong. |
 | 3 | tia_n_lenh_khi_chuoi_dai | mot_phan | 3 | ccbsn | tia_cap_sau_dau ghep 1 cap dau-cuoi; chua co tia M lenh theo N. |
 | 4 | tran_lot_tong | chua | 3 | ccbsn | luoi.py khong co tran lot. |
@@ -654,7 +681,7 @@ Khoi chua (hoac moi mot phan) co trong `luoi.py`. Thu tu = **o bot song sot truo
 | 14 | loc_spread | chua | 1 | ccbsn | luoi.py dung chi phi spread theo mo hinh, khong loc. |
 | 15 | keo_sl_hoa_von_khi_co_lai | chua | 3 | - | luoi.py khong co SL. |
 | 16 | sl_cung | chua | 3 | - | luoi.py khong co SL tung lenh. |
-| 17 | cat_lo_theo_tien | chua | 2 | - | ThamSo.dung_lo_tong da khai bao nhung KHONG cai dat (luoi.chay tu choi != 0). |
+| 17 | cat_lo_theo_tien | mot_phan | 2 | - | CAT CA CHUOI theo tien: luoi.ThamSo.cat_lo_tien (08/10/2026, kieu duong_di; nhan C; EA InpCutMoney). Cat theo TAI KHOAN (dung_lo_tong) van KHONG cai dat (luoi.chay tu choi != 0). |
 | 18 | gong_duong_doi_ung | chua | 2 | - | luoi.py chot theo ca chuoi, khong giu lenh duong rieng. |
 | 19 | lot_nhan_sau_sl | chua | 2 | - | luoi.py la chuoi luoi, khong co lenh don nhan sau SL. |
 | 20 | vao_theo_ma | chua | 2 | - | luoi.py khong co tin hieu vao. |
@@ -682,7 +709,7 @@ Menu thi nghiem (khong phai ket luan): khoi nao nen ghep vao he luoi cua ta truo
 
 | # | khoi | kieu | so bot | engine | ly do |
 |---|---|---|---|---|---|
-| 1 | loc_gio_giao_dich | them | 5 | chua | 5 bot dung (ccbsn, bigmouse, black_dragon, newyear, semi_hft); co o bot SONG SOT (ccbsn); engine: chua |
+| 1 | loc_gio_giao_dich | them | 5 | mot_phan | 5 bot dung (ccbsn, bigmouse, black_dragon, newyear, semi_hft); co o bot SONG SOT (ccbsn); engine: mot phan |
 | 2 | tp_tung_lenh | thay tp_chuoi_tu_gia_tb/tp_chuoi_tien | 4 | mot_phan | 4 bot dung (ccbsn, newyear, nuti, signalx); co o bot SONG SOT (ccbsn); engine: mot phan |
 | 3 | tia_n_lenh_khi_chuoi_dai | them | 3 | mot_phan | 3 bot dung (ccbsn, nuti, semi_hft); co o bot SONG SOT (ccbsn); engine: mot phan |
 | 4 | tran_lot_tong | them | 3 | chua | 3 bot dung (ccbsn, bigmouse, nuti); co o bot SONG SOT (ccbsn); engine: chua |
@@ -698,7 +725,7 @@ Menu thi nghiem (khong phai ket luan): khoi nao nen ghep vao he luoi cua ta truo
 | 14 | loc_spread | them | 1 | chua | 1 bot dung (ccbsn); co o bot SONG SOT (ccbsn); engine: chua |
 | 15 | keo_sl_hoa_von_khi_co_lai | them | 3 | chua | 3 bot dung (bigmouse, hand_atmx, newyear); engine: chua |
 | 16 | sl_cung | them | 3 | chua | 3 bot dung (bigmouse, newyear, signalx); engine: chua |
-| 17 | cat_lo_theo_tien | them | 2 | chua | 2 bot dung (bigmouse, nuti); engine: chua |
+| 17 | cat_lo_theo_tien | them | 2 | mot_phan | 2 bot dung (bigmouse, nuti); engine: mot phan |
 | 18 | gong_duong_doi_ung | them | 2 | chua | 2 bot dung (bnk, semi_hft); engine: chua |
 | 19 | lot_nhan_sau_sl | thay lot_phang/lot_cong/lot_nhan | 2 | chua | 2 bot dung (newyear, signalx); engine: chua |
 | 20 | vao_theo_ma | thay vao_ngay_lap_tuc | 2 | chua | 2 bot dung (gold_hunter, kawkaw46); engine: chua |

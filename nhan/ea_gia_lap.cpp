@@ -48,6 +48,7 @@ struct Pos
    double vol, open, sl, tp, spread_mo;
    string comment;
    long long magic, tick_mo;
+   datetime time_mo;                            // gio tick luc mo (POSITION_TIME)
   };
 
 static string g_sym = "AUDCAD";
@@ -154,7 +155,7 @@ static inline long long PositionGetInteger(ENUM_POSITION_PROPERTY_INTEGER p)
    switch(p)
      {
       case POSITION_TICKET: return (long long)q.ticket;
-      case POSITION_TIME: return g_time;
+      case POSITION_TIME: return q.time_mo;
       case POSITION_TYPE: return q.type;
       case POSITION_MAGIC: return q.magic;
      }
@@ -230,6 +231,7 @@ class CTrade
       q.comment = comment.substr(0, 31);          // MT5 cat comment o 31 ky tu
       q.magic = (long long)m_magic;
       q.tick_mo = g_tick;
+      q.time_mo = g_time;
       g_pos.push_back(q);
       g_n_mo++;
       g_retcode = 10009;

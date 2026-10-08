@@ -111,6 +111,13 @@ LOP_THAM_SO_LUOI = {
     "he_so_buoc": HE_SO,
     "buoc_tran": KC_BUOC,
     "khop_bar": CONG_TAC,         # cach engine mo phong bar (luoi.MO_HINH_BAR), khong phai tham so giao dich: dich khung giu nguyen
+    # ---- co che thoat + loc gio (08/10/2026, `luoi.TINH_NANG_DUONG_DI`): mac dinh 0 = TAT, chi dich khi BAT (xem khoi "co che thoat" o dich_luoi)
+    "cat_lo_pip": KC_SL,          # cat CA RO khi gia nguoc n pip so voi gia trung binh theo lot: khoang cach cat lo, I1 nhu moi KC_SL
+    "cat_lo_tien": TIEN,          # cat CA RO khi lo noi m tien tren 0,01 lot (cung don vi voi chot_tien)
+    "thoat_gio": THOI_GIAN,       # dong ro sau h gio ke tu luc mo: khoang gio dong ho (I5)
+    "nghi_gio": THOI_GIAN,        # nghi h gio sau cat lo / thoat gio roi moi mo ro moi: khoang gio dong ho (I5)
+    "gio_vao_tu": CONG_TAC,       # cua so gio MO RO MOI: gio-trong-ngay cua may chu (0-24), khong phai khoang thoi gian: giu nguyen
+    "gio_vao_den": CONG_TAC,
 }
 
 #: Mo ta mot dong cho moi lop (don vi chuan + cach dich mac dinh): nguon cho bang trong tai lieu va bao cao.
@@ -658,16 +665,41 @@ def dich_luoi(ts, src: ThiTruong, dst: ThiTruong, cach: CachDich | None = None, 
         kq.engine_do_duoc = False
         kq.engine_ly_do.append("dung_lo_tong: luoi.py CHUA cai dat (luoi.CHUA_CAI_DAT)")
 
+    # ---- CO CHE THOAT (cat lo ca ro, thoat theo gio, nghi): mac dinh 0 = TAT thi khong dich gi. Khoang cach cat lo theo I1 thuan (nhu moi
+    # KC_SL: `hs.sl`), tien theo khoang cach do va gia tri diem (khong nhan lot: la tien tren 0,01 lot), gio dong ho giu / giu so nen (I5).
+    cat_pip_d, cat_tien_d, thoat_d, nghi_d = ts.cat_lo_pip, ts.cat_lo_tien, ts.thoat_gio, ts.nghi_gio
+    if ts.cat_lo_pip > 0:
+        cat_pip_d = _tron_pip(ts.cat_lo_pip * hs.sl * hs.pip)
+        ghi("cat_lo_pip", KC_SL, ts.cat_lo_pip, cat_pip_d, "I1", "cat lo ca ro %s pip -> %s pip (x%s): giu ti le voi bien do nen (I1)"
+            % (_sv(ts.cat_lo_pip), _sv(cat_pip_d), _sv(cat_pip_d * p_d / (ts.cat_lo_pip * p_s))), "pip", cat_pip_d * p_d / (ts.cat_lo_pip * p_s))
+    if ts.cat_lo_tien > 0:
+        k_ct = hs.sl * pv_ty
+        cat_tien_d = float("%.4g" % (ts.cat_lo_tien * k_ct))
+        ghi("cat_lo_tien", TIEN, ts.cat_lo_tien, cat_tien_d, "TIEN", "cat lo ca ro theo tien %s -> %s (tren 0,01 lot): nhan ti le khoang cach (x%s) "
+            "va gia tri diem (x%s)" % (_sv(ts.cat_lo_tien), _sv(cat_tien_d), _sv(hs.sl), _sv(pv_ty)), "tien/0,01 lot", k_ct)
+    k_gio = hs.phut_theo_nen if cach.thoi_gian == "so_nen" else 1.0
+    for ten_g, v_g in (("thoat_gio", ts.thoat_gio), ("nghi_gio", ts.nghi_gio)):
+        if v_g > 0:
+            moi_g = v_g if k_gio == 1.0 else float("%.4g" % (v_g * k_gio))
+            if ten_g == "thoat_gio":
+                thoat_d = moi_g
+            else:
+                nghi_d = moi_g
+            ghi(ten_g, THOI_GIAN, v_g, moi_g, "I5_" + cach.thoi_gian, "%s %s gio -> %s gio (%s)" % (
+                "thoat theo gio" if ten_g == "thoat_gio" else "nghi sau khi cat", _sv(v_g), _sv(moi_g),
+                "giu gio dong ho" if k_gio == 1.0 else "giu so nen: x%s" % _sv(k_gio)), "gio", k_gio, quan_trong=False)
+
     # ---- ap dung + giu nguyen cac truong con lai
     kq.tham_so = replace(ts, buoc=buoc_d, tp=tp_d, tran_tang=tran_d, lot=lot_d, cho_lui=cho_lui_d, bien_cap=bien_cap_d,
-                         chot_tien=chot_d, dung_lo_tong=dung_lo_d, buoc_tran=buoc_tran_d)
+                         chot_tien=chot_d, dung_lo_tong=dung_lo_d, buoc_tran=buoc_tran_d,
+                         cat_lo_pip=cat_pip_d, cat_lo_tien=cat_tien_d, thoat_gio=thoat_d, nghi_gio=nghi_d)
     giu = [t for t, l in LOP_THAM_SO_LUOI.items() if l in (HE_SO, CONG_TAC) or t == "cap_moi_bar"]
     ghi("giu_nguyen", "-", None, None, "giu", "giu nguyen: " + ", ".join(sorted(giu)), quan_trong=False)
 
     # ---- phan giai: MOI khoang cach phai >= 2 lan bien do nen (luat pmg_engine); duoi nguong: engine khong do noi
     ts_d = kq.tham_so
     kiem = [("buoc", ts_d.buoc, True), ("chot loi", ts_d.tp, ts_d.chot_tien <= 0), ("bien cap tia", ts_d.bien_cap, bool(ts_d.tia_lenh)),
-            ("cho lui", ts_d.cho_lui, True)]
+            ("cho lui", ts_d.cho_lui, True), ("cat lo ca ro", ts_d.cat_lo_pip, True)]
     for nhan, v, dung in kiem:
         if dung and v and v > 0:
             ty = v * p_d / dst.A

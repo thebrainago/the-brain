@@ -2376,7 +2376,8 @@ def _do_dieu_kien_vao(c: Ctx) -> dict:
 
 
 # ============================================================== 6. DIEU PHOI: ho_so()
-#: khoi ma lich su lenh KHONG BAO GIO cho do duoc (`Khoi.kiem is None`) - ly do bang loi thuong. Day la "khong the biet", khong phai "khong co".
+#: khoi chua co phep do (`Khoi.kiem is None`) - ly do bang loi thuong. Day la "chua biet", khong phai "khong co". Hai loai: khoi ma lich
+#: su lenh KHONG BAO GIO cho do duoc (ly do bat dau bang ten dac trung thieu) va khoi "CHUA VIET PHEP DO" (lich su du de do, phep do chua viet).
 KHOI_CHUA_DO = {
     "vao_tay_roi_dca": "lich su khong ghi ai dat lenh dau (nguoi hay bot); chi tach duoc khi hai nhom lenh co ma magic / ghi chu khac nhau",
     "vao_chi_bao_ngoai": "tin hieu cua chi bao ngoai can duong gia truoc luc vao; lich su lenh chi cho gio va chieu (dieu_kien_vao chi do duoc khung nen)",
@@ -2386,6 +2387,10 @@ KHOI_CHUA_DO = {
     "loc_adx_atr": "ADX / ATR can duong gia truoc luc vao; deal khong co",
     "loc_sideway_nen": "nhan ra sideway can duong gia nen truoc luc vao; deal khong co",
     "loc_bao_bien_dong": "bao bien dong can duong gia trong vai phut truoc luc vao; deal khong co",
+    "cat_lo_chuoi_theo_pip": "CHUA VIET PHEP DO: lich su lenh du de do (khoang cach pip tu gia trung binh luc chuoi dong LO, theo nhom lot), "
+                             "phep do 'thoat' hien chi tim dam muc lo bang TIEN",
+    "thoat_theo_thoi_gian": "CHUA VIET PHEP DO: lich su lenh du de do (thoi gian giu chuoi co dam o mot gia tri khong), chua viet",
+    "nghi_sau_cat_lo": "CHUA VIET PHEP DO: lich su lenh du de do (khoang trong den chuoi ke tiep sau chuoi LO so voi sau chuoi LAI), chua viet",
 }
 
 

@@ -1151,6 +1151,11 @@ def _khai_bao_luoi(ts: dict) -> dict:
     from nhan import luoi as LU
     d = asdict(LU.ThamSo(**ts))
     d.pop("lot")
+    # Co che thoat + loc gio (08/10/2026) mac dinh 0 = TAT: khong dua vao khai bao khi TAT, de van tay cua moi khai bao viet truoc ngay do
+    # KHONG DOI MOT BIT (doi van tay = mo lai doan niem phong dang dung). Khi BAT (!= 0) chung vao van tay nhu moi tham so khac.
+    for k in LU.TINH_NANG_DUONG_DI:
+        if not d.get(k):
+            d.pop(k, None)
     mac_dinh = {f.name: f.default for f in fields(LU.ThamSo)}
     for k, v in list(d.items()):
         m = mac_dinh[k]

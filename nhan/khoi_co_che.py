@@ -397,9 +397,35 @@ KHOI_DS: list[Khoi] = [
        "'cat lo co tran'.",
        ("cat am USD", "shot tai khoan"),
        "Cum chuoi dong boi [ea] / stopout voi lo gan co dinh -X; hoac tai khoan ve 0.",
-       "thoat", "chua", "ThamSo.dung_lo_tong da khai bao nhung KHONG cai dat (luoi.chay tu choi != 0).",
+       "thoat", "mot_phan", "CAT CA CHUOI theo tien: luoi.ThamSo.cat_lo_tien (08/10/2026, kieu duong_di; nhan C; EA InpCutMoney). Cat theo "
+       "TAI KHOAN (dung_lo_tong) van KHONG cai dat (luoi.chay tu choi != 0).",
        "Dat tran DD tu truoc (vd 50%) la cach giu maxDD < 80% theo cong cua chu du an.",
        "Cat dung luc day: mat co hoi hoi phuc."),
+    _k("cat_lo_chuoi_theo_pip", "BAO_VE", "Cat lo ca chuoi theo khoang cach pip (khoi CUA TA)",
+       "Dong het chuoi khi gia di nguoc >= X pip so voi gia trung binh THEO LOT cua chuoi (tinh lai sau moi tang): cat lo co tran "
+       "thay vi cho hoi.",
+       ("cat_lo_pip",),
+       "Chuoi lo dong o khoang cach gia gan hang so tu gia trung binh (khong phai o mot so tien co dinh); ban boc vang 08/10 cho "
+       "thay 36-62% chuoi dong LO.",
+       None, "co", "luoi.ThamSo.cat_lo_pip (08/10/2026, kieu duong_di): khop o dung moc cat (gia nhay qua moc thi o gia nhay); nhan C; "
+       "EA InpCutPips (khop tung tick voi engine, test_ea_luoi_day_du).",
+       "Quet cat_lo_pip tren luoi AUDCAD / vang: tran lo co dinh doi lai ty le thang giam bao nhieu, so voi cat theo tien.",
+       "Cat dung day: chuoi hoi sau do khong con; gia nhay (gap) thi lo that lon hon moc."),
+    _k("thoat_theo_thoi_gian", "THOAT", "Thoat theo thoi gian giu chuoi (khoi CUA TA)",
+       "Dong het chuoi khi no da song >= N gio ke tu luc mo lenh dau, du lai hay lo (time stop).",
+       ("thoat_gio",),
+       "Thoi gian giu chuoi dam o mot gia tri (dong dung N gio sau luc mo) thay vi rai theo luc gia ve.",
+       None, "co", "luoi.ThamSo.thoat_gio (08/10/2026, kieu duong_di): dong o GIA MO cua bar dau tien du N gio; nhan C; EA InpExitHours.",
+       "Quet thoat_gio cung cat_lo_pip: chuoi chua hoi sau N gio co hay hoi nua khong (do duoi cua chuoi lo).",
+       "Dong luc dang lo: lo noi thanh lo that."),
+    _k("nghi_sau_cat_lo", "BAO_VE", "Nghi sau khi cat lo / thoat gio (khoi CUA TA)",
+       "Sau khi cat lo hoac thoat theo gio, KHONG mo chuoi moi trong M gio (chot loi khong nghi): tranh vao lai ngay luc thi truong "
+       "dang chay nguoc.",
+       ("nghi_gio",),
+       "Sau chuoi dong LO, khoang trong den chuoi ke tiep dai hon sau chuoi dong LAI.",
+       None, "co", "luoi.ThamSo.nghi_gio (08/10/2026, kieu duong_di); nhan C; EA InpRestHours.",
+       "Chi co nghia khi da bat cat lo hoac thoat gio: thu nghi_gio = 0 / 1 / 4 / 12.",
+       "Nghi qua dai bo lo luc hoi."),
     _k("thoat_hoa_von_khi_chuoi_dai", "BAO_VE", "Chap nhan hoa von khi chuoi dai",
        "Khi chuoi co N lenh (Bigmouse: 3), bo TP duong va chi dat SL o hoa von: chuoi thoat o 0 thay vi cho lai.",
        ("so lenh kich hoat", "kich hoat hoa von"),
@@ -435,7 +461,8 @@ KHOI_DS: list[Khoi] = [
        "ngay, CCBSN lich ngay / gio).",
        ("gio bat dau", "gio ket thuc", "time trade 1-3 (NewYear 2.1)"),
        "Phan bo gio vao lenh dau khong deu: co gio khong bao gio co lenh.",
-       "gio_ngay", "chua", "luoi.py khong loc gio.",
+       "gio_ngay", "mot_phan", "luoi.ThamSo.gio_vao_tu / gio_vao_den (08/10/2026, kieu duong_di): MOT cua so gio (qua nua dem duoc) chi "
+       "chan MO CHUOI MOI; chua co nhieu cua so (time trade 1-3), loc ngay trong tuan, hay chan them tang.",
        "Thu loai gio xau (qua dem / tin) cho luoi: dac trung gio da co trong DSL, do bang quet_luoi sau khi them.",
        "Quet gio la cach de cai gai: can kiem tren doan xac nhan."),
     _k("loc_ngay_thu_lich", "LOC", "Loc ngay / thu / lich",
@@ -503,7 +530,11 @@ _TRUONG_ENGINE = {
     "tp_tung_lenh": ("tia_lenh", "bien_cap"),
     "tia_cap_sau_dau": ("tia_lenh", "bien_cap", "cap_moi_bar"),
     "tia_n_lenh_khi_chuoi_dai": ("tia_lenh", "bien_cap", "cap_moi_bar"),
-    "cat_lo_theo_tien": ("dung_lo_tong",),
+    "cat_lo_theo_tien": ("cat_lo_tien",),
+    "cat_lo_chuoi_theo_pip": ("cat_lo_pip",),
+    "thoat_theo_thoi_gian": ("thoat_gio",),
+    "nghi_sau_cat_lo": ("nghi_gio",),
+    "loc_gio_giao_dich": ("gio_vao_tu", "gio_vao_den"),
 }
 KHOI_DS = [dataclasses.replace(k, truong_engine=_TRUONG_ENGINE.get(k.ma, ())) for k in KHOI_DS]
 KHOI: dict[str, Khoi] = {k.ma: k for k in KHOI_DS}

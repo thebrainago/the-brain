@@ -521,15 +521,33 @@ def test_moi_truong_thamso_hoac_duoc_doc_hoac_bi_tu_choi():
     nguon = {"cuc_tri": inspect.getsource(LU._mot_ro) + chung,
              "duong_di": inspect.getsource(LU._mot_ro_duong) + inspect.getsource(LU.mien_duong_di) + chung}
     chon = inspect.getsource(LU.kiem_khop_bar)               # cho chon mo hinh: doc `ts.khop_bar`, hai mo hinh khong can doc
+    # Tinh nang CHI mo hinh `duong_di` cai dat (cat lo / thoat gio / nghi / loc gio, 08/10/2026): `cuc_tri` KHONG doc nhung phai TU CHOI (khong
+    # bo qua im lang) - `_mot_ro` goi `tinh_nang_duong_di_dang_bat`; hanh vi that duoc thu o test_cuc_tri_tu_choi_tinh_nang_duong_di.
+    assert "tinh_nang_duong_di_dang_bat(ts)" in inspect.getsource(LU._mot_ro)
     for f in dataclasses.fields(LU.ThamSo):
         if ("ts." + f.name) in chon:
             assert f.name == "khop_bar" and f.name not in LU.CHUA_CAI_DAT, f.name
             continue
         doc = {m: ("ts." + f.name) in s for m, s in nguon.items()}
+        if f.name in LU.TINH_NANG_DUONG_DI:
+            assert doc == {"cuc_tri": False, "duong_di": True} and f.name not in LU.CHUA_CAI_DAT, (f.name, doc)
+            continue
         assert doc["cuc_tri"] == doc["duong_di"], "%s: chi MOT mo hinh bar doc %s - mo hinh kia bo qua im lang" % (f.name, doc)
         assert doc["cuc_tri"] != (f.name in LU.CHUA_CAI_DAT), (
             "%s: engine %s nhung CHUA_CAI_DAT %s" % (f.name, "doc" if doc["cuc_tri"] else "KHONG doc",
                                                       "co ten" if f.name in LU.CHUA_CAI_DAT else "khong co ten"))
+
+
+@pytest.mark.parametrize("truong,gia_tri", [("cat_lo_pip", 20.0), ("cat_lo_tien", 5.0), ("thoat_gio", 2.0), ("nghi_gio", 1.0),
+                                            ("gio_vao_tu", 3.0), ("gio_vao_den", 9.0)])
+def test_cuc_tri_tu_choi_tinh_nang_duong_di(truong, gia_tri):
+    """Mo hinh `cuc_tri` (ban cu) KHONG cai dat cat lo / thoat gio / nghi / loc gio: bat bat ky cai nao phai LOI to, khong duoc chay ra mot
+    ket qua nhu the tinh nang co hieu luc (day la dung kieu loi cua `dung_lo_tong` truoc 03/10: khai bao ma khong ai doc)."""
+    for kb in ("cuc_tri",):
+        with pytest.raises(ValueError, match=truong):
+            LU.chay(_chuoi(500), LU.ThamSo(buoc=15, tp=10, khop_bar=kb, **{truong: gia_tri}), 10000.0)
+    # mac dinh (duong_di) thi chay duoc: cung tham so khong bi tu choi o mo hinh dung
+    LU.chay(_chuoi(500), LU.ThamSo(buoc=15, tp=10, **{truong: gia_tri}), 10000.0)
 
 
 def test_chay_tu_choi_tham_so_chua_cai_dat():

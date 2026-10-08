@@ -1,6 +1,7 @@
 /* luoi_nhan.c - NHAN C cho `nhan/luoi.py` (mo phong MOT ro luoi, MOT chieu). HAI mo hinh bar, chon bang `p[P_MO_HINH]`:
  *   0 = `cuc_tri`  : dich nguyen van `_mot_ro`      (mo hinh cu: khop o cuc tri cua nen; lac quan voi tia lenh - xem luoi.py)
- *   1 = `duong_di` : dich nguyen van `_mot_ro_duong` (mo hinh mac dinh tu 08/10/2026: nen di theo duong O->x->y->C)
+ *   1 = `duong_di` : dich nguyen van `_mot_ro_duong` (mo hinh mac dinh tu 08/10/2026: nen di theo duong O->x->y->C), KEM co che
+ *                     thoat + loc gio (cat lo ca ro, thoat theo gio, nghi, cua so gio vao lenh: ABI 5; mac dinh tat)
  *
  * Vi sao co file nay: `_mot_ro` la vong lap Python ~3-8 us/bar. Quet 1.000 to hop tham so tren 190.000 bar M15 ton ~20 phut
  * tren mot nhan. Ban C chay cung phep tinh nay nhanh hon hai bac do lon va (qua ctypes) NHA GIL, nen quet duoc da luong that.
@@ -28,19 +29,20 @@
 #define LUOI_API __attribute__((visibility("default")))
 #endif
 
-#define LUOI_NHAN_PHIEN_BAN 4
+#define LUOI_NHAN_PHIEN_BAN 5
 
 /* chi so trong mang tham so `p` - GIU KHOP voi `luoi_nhan.py::_TEN_P` */
 enum {
     P_LOT = 0, P_HOP, P_PIP, P_BUOC, P_TP, P_TRAN, P_KIEU, P_HE_LOT, P_HE_BUOC, P_BUOC_TRAN,
-    P_CHO_LUI, P_TIA, P_BIEN_CAP, P_CAP_MOI_BAR, P_CHOT_TIEN, P_TY_LE, P_KAHAN, P_MO_HINH, P_SO
+    P_CHO_LUI, P_TIA, P_BIEN_CAP, P_CAP_MOI_BAR, P_CHOT_TIEN, P_TY_LE, P_KAHAN, P_MO_HINH,
+    P_CAT_PIP, P_CAT_TIEN, P_THOAT_GIO, P_NGHI_GIO, P_GIO_VAO_TU, P_GIO_VAO_DEN, P_SO
 };
 
 /* chi so trong mang thong ke `stats` */
-enum { S_LAI_GOP = 0, S_PHI_SPREAD, S_PHI_SWAP, S_SO_RO, S_SO_LENH, S_TANG_MAX, S_SO_CAP, S_CON_MO, S_SO };
+enum { S_LAI_GOP = 0, S_PHI_SPREAD, S_PHI_SWAP, S_SO_RO, S_SO_LENH, S_TANG_MAX, S_SO_CAP, S_CON_MO, S_SO_CAT, S_SO_GIO, S_SO };
 
 /* mot dong su kien ghi lenh: 8 double. kind 0 = mo (bar, gia, lot, id, tang, ro); kind 1 = dong (bar, gia, id, ly_do:
- * 0 = tp, 1 = tia) */
+ * 0 = tp, 1 = tia, 2 = cat lo, 3 = thoat gio) */
 #define GHI_COT 8
 
 #define LOI_BO_NHO (-1)
@@ -174,6 +176,10 @@ static int32_t mot_ro_cuc_tri(const double *hi, const double *lo, const double *
                               int64_t *ghi_n) {
     *ghi_n = 0;
     if (n < 1 || chieu == 0) return LOI_DAU_VAO;
+    /* co che thoat + loc gio chi co o `duong_di`: `cuc_tri` KHONG cai dat nen tu choi (khong am tham bo qua) - y het `_mot_ro` Python */
+    if (p[P_CAT_PIP] != 0.0 || p[P_CAT_TIEN] != 0.0 || p[P_THOAT_GIO] != 0.0 || p[P_NGHI_GIO] != 0.0 || p[P_GIO_VAO_TU] != 0.0 ||
+        p[P_GIO_VAO_DEN] != 0.0)
+        return LOI_DAU_VAO;
     const double lot = p[P_LOT], hop = p[P_HOP], pip = p[P_PIP], buoc = p[P_BUOC], tran = p[P_TRAN];
     const int kieu = (int)p[P_KIEU];
     const double he_lot = p[P_HE_LOT], he_buoc = p[P_HE_BUOC], buoc_tran = p[P_BUOC_TRAN];
@@ -338,6 +344,8 @@ static int32_t mot_ro_cuc_tri(const double *hi, const double *lo, const double *
     stats[S_TANG_MAX] = (double)tang_max;
     stats[S_SO_CAP] = (double)so_cap;
     stats[S_CON_MO] = (double)v.n;
+    stats[S_SO_CAT] = 0.0;
+    stats[S_SO_GIO] = 0.0;
     *ghi_n = g.n;
 xong:
     free(v.a);
@@ -348,19 +356,45 @@ xong:
  * MO HINH `duong_di` - dich nguyen van `luoi._mot_ro_duong` (doc docstring cua ham do truoc khi sua day).
  * Moi bar (i >= 1) di tren duong o -> x -> y -> cl[i]; moi doan la mot nhat cat thang, moi su kien khop o GIA NGUONG cua no.
  * KHAC `cuc_tri`: MOI tong deu cong TUAN TU tung phan tu (khong Neumaier) nen khong co P_KAHAN; spread chi tru luc mo lenh.
+ * CO CHE THOAT + LOC GIO (ABI 5): cat lo ca ro (pip / tien), thoat theo gio, nghi, cua so gio vao lenh. MAC DINH TAT (p = 0): khi do
+ * duong chay y het ABI 4 tung bit. Cac so gio doi sang GIAY NGUYEN `floor(gio*3600 + 0.5)` (y het `luoi._giay`) va dung `tg[i]` = giay
+ * epoch cua gio mo bar i.
  * ==================================================================================================================== */
 typedef struct {
     Vao v;                                                   /* cac tang dang mo cua ro hien tai */
     Ghi g;
     const double *sp;                                        /* spread theo GIA, theo bar */
+    const double *tg;                                        /* giay epoch gio mo tung bar; NULL khi khong dung tinh nang gio */
     double lot, hop, pip, buoc, tran, he_lot, he_buoc, buoc_tran, cho_lui, bien_cap, cap_moi_bar, chot_tien, nguong_tien, t;
+    double cat_pip, cat_tien, nguong_cat;                    /* cat lo: pip / tien (nguong_cat = cat_tien * lot/0,01) */
+    double thoat_s, nghi_s, gio_tu_s, gio_den_s;             /* thoat gio / nghi / cua so gio vao lenh, GIAY NGUYEN */
+    int cat_bat, loc_gio, dung_tg;
     double eps;                                              /* dung sai "cham moc" = EPS_CHAM_PIP * pip */
     int kieu, tia;
     double s;                                                /* chieu: +1.0 / -1.0 (Python: s = int +-1; phep nhan voi +-1 chinh xac) */
     double cho;                                              /* != 0: dang CHO gia lui toi muc nay moi mo L1 */
+    double t_mo;                                             /* gio mo (bar) cua ro hien tai (chi dung khi dung_tg) */
+    double nghi_den;                                         /* khong mo ro MOI truoc moc gio nay (sau cat lo / thoat gio) */
+    double r_dau;                                            /* lai rong da chot luc DAU bar dang xu ly */
+    double treo_bar;                                         /* lo noi lon nhat da thay trong bar dang xu ly */
     double lai, phi_sp, phi_sw;
-    int64_t so_ro, so_lenh, so_cap, so_tang, tang_max, n_id, ro_hien, da_bar;
+    int64_t so_ro, so_lenh, so_cap, so_cat, so_gio, so_tang, tang_max, n_id, ro_hien, da_bar;
 } Duong;
+
+/* Duoc mo RO MOI o bar `i` khong: het thoi gian nghi VA gio mo bar nam trong cua so vao lenh. Tinh nang gio tat -> luon duoc.
+ * Y het `cho_phep_mo` Python (fmod, khong phai %: dung cho moi dau cua t). */
+static int d_cho_phep_mo(const Duong *D, int64_t i) {
+    if (!D->dung_tg) return 1;
+    const double t = D->tg[i];
+    if (t < D->nghi_den) return 0;
+    if (D->loc_gio) {
+        double sec = fmod(t, 86400.0);
+        if (sec < 0.0) sec += 86400.0;
+        if (D->gio_tu_s < D->gio_den_s) return (D->gio_tu_s <= sec && sec < D->gio_den_s);
+        return (sec >= D->gio_tu_s || sec < D->gio_den_s);   /* cua so qua nua dem */
+    }
+    return 1;
+}
 
 /* Mo MOT lenh tang k o gia `gia` (moi_ro: lenh dau cua ro moi). Y het `mo_lenh` Python. */
 static int d_mo_lenh(Duong *D, int64_t i, double gia, int64_t k, int moi_ro) {
@@ -371,6 +405,7 @@ static int d_mo_lenh(Duong *D, int64_t i, double gia, int64_t k, int moi_ro) {
     if (moi_ro) {
         D->ro_hien += 1;
         vao_dat_mot(&D->v, gia, lk, D->n_id);
+        if (D->dung_tg) D->t_mo = D->tg[i];
     } else {
         int rc = vao_them(&D->v, gia, lk, D->n_id);
         if (rc != 0) return rc;
@@ -380,33 +415,103 @@ static int d_mo_lenh(Duong *D, int64_t i, double gia, int64_t k, int moi_ro) {
     return 0;
 }
 
-/* Doan NGUOC chieu ro tu a den b (a == b: nhay gia luc mo nen). Y het `lui` Python. */
+/* Mo L1 cua ro MOI o gia `e` neu duoc phep (het nghi + gio mo bar `i` trong cua so); khong thi ro rong, cho bar ke tiep duoc phep.
+ * Y het `thu_mo_lai` Python. */
+static int d_thu_mo_lai(Duong *D, int64_t i, double e) {
+    D->so_tang = 1;
+    if (d_cho_phep_mo(D, i)) {
+        int rc = d_mo_lenh(D, i, e, 0, 1);
+        if (rc != 0) return rc;
+        if (D->tang_max < 1) D->tang_max = 1;
+    }
+    return 0;
+}
+
+/* Dong NGUYEN ro hien tai o gia `e` (ma 2 = CAT LO, ma 3 = THOAT GIO). Y het `dong_het` Python, ke ca viec DOI GOC `treo_bar`. */
+static void d_dong_het(Duong *D, int64_t i, double e, int ma) {
+    const Pos *va = D->v.a + D->v.head;
+    double acc = 0.0;
+    for (int64_t k = 0; k < D->v.n; k++) acc += D->s * (e - va[k].g) * va[k].l;
+    D->lai += acc * D->hop;
+    if (ma == 2) D->so_cat += 1; else D->so_gio += 1;
+    for (int64_t k = 0; k < D->v.n; k++) ghi_dong(&D->g, i, e, va[k].id, ma);
+    D->v.n = 0;
+    D->v.head = 0;
+    D->so_tang = 1;
+    D->cho = 0.0;                                            /* cat / thoat gio: khong cho lui */
+    if (D->nghi_s > 0.0) D->nghi_den = D->tg[i] + D->nghi_s;
+    double d_lai = (D->lai - D->phi_sp - D->phi_sw) - D->r_dau;
+    if (d_lai < 0.0) {
+        D->treo_bar = D->treo_bar + d_lai;
+        if (D->treo_bar < 0.0) D->treo_bar = 0.0;
+    }
+}
+
+/* Moc gia ma ro dang mo (khong rong) bi CAT LO. Y het `moc_cat` Python. */
+static double d_moc_cat(const Duong *D) {
+    const Pos *va = D->v.a + D->v.head;
+    double tong = 0.0, sw = 0.0;
+    for (int64_t k = 0; k < D->v.n; k++) { tong += va[k].l; sw += va[k].l * va[k].g; }
+    double tb = sw / tong;
+    double kc = INFINITY;
+    if (D->cat_pip > 0.0) kc = D->cat_pip * D->pip;
+    if (D->cat_tien > 0.0) {
+        double k2 = D->nguong_cat / (D->hop * tong);
+        if (k2 < kc) kc = k2;
+    }
+    return tb - D->s * kc;
+}
+
+/* Doan NGUOC chieu ro tu a den b (a == b: nhay gia luc mo nen). Y het `lui` Python: moi vong la tang ke tiep HOAC cat lo (neu bat),
+ * cai nao khop truoc theo chieu di; het su kien trong doan thi dung. */
 static int d_lui(Duong *D, int64_t i, double a, double b) {
     const double s = D->s;
     int rc;
     if (D->cho != 0.0) {
         if (s * (D->cho - b) < -D->eps) return 0;            /* chua lui toi muc cho */
+        if (!d_cho_phep_mo(D, i)) return 0;                  /* ngoai cua so gio / dang nghi: giu muc cho, chua vao */
         double gg = (s * (D->cho - a) <= 0) ? D->cho : a;
         if ((rc = d_mo_lenh(D, i, gg, 0, 1)) != 0) return rc;
         D->so_tang = 1;
         D->cho = 0.0;
         a = gg;
     }
-    if (D->v.n == 0) return LOI_DAU_VAO;                     /* Python se IndexError o vao[-1]: de Python bao */
-    if ((double)D->v.n < D->tran) {
-        double b0 = buoc_k(D->buoc, D->he_buoc, D->buoc_tran, D->so_tang - 1);
-        if (isnan(b0)) return LOI_DAU_VAO;
-        double moc = D->v.a[D->v.head + D->v.n - 1].g - s * b0 * D->pip;
-        int64_t vong = 0;
-        while (s * (moc - b) >= -D->eps) {
+    int64_t vong = 0;
+    while (D->v.n > 0) {
+        const int co_them = (double)D->v.n < D->tran;
+        if (!co_them && !D->cat_bat) break;
+        double moc = 0.0;
+        if (co_them) {
+            double b0 = buoc_k(D->buoc, D->he_buoc, D->buoc_tran, D->so_tang - 1);
+            if (isnan(b0)) return LOI_DAU_VAO;
+            moc = D->v.a[D->v.head + D->v.n - 1].g - s * b0 * D->pip;   /* moc ke tiep tinh tu GIA KHOP THAT (EA: tu BID mo cua tang sau cung) */
+        }
+        int cat_truoc = 0;
+        double mcut = 0.0;
+        if (D->cat_bat) {
+            mcut = d_moc_cat(D);
+            if (co_them) {
+                const double e_cat = (s * (mcut - a) <= 0) ? mcut : a;    /* gia khop that cua tung su kien (nhay gia -> gia hien tai) */
+                const double e_them = (s * (moc - a) <= 0) ? moc : a;
+                cat_truoc = (s * e_cat >= s * e_them);                     /* bang nhau: cat truoc */
+            } else {
+                cat_truoc = 1;
+            }
+        }
+        if (cat_truoc) {
+            if (s * (mcut - b) < -D->eps) break;             /* chua toi moc cat */
+            if (++vong > TOI_DA_VONG) return LOI_VONG;
+            double e = (s * (mcut - a) <= 0) ? mcut : a;
+            d_dong_het(D, i, e, 2);
+            if ((rc = d_thu_mo_lai(D, i, e)) != 0) return rc;
+            a = e;
+        } else {
+            if (s * (moc - b) < -D->eps) break;              /* chua toi moc them tang */
             if (++vong > TOI_DA_VONG) return LOI_VONG;
             double gg = (s * (moc - a) <= 0) ? moc : a;      /* nhay gia vuot moc: khop o gia dau doan */
             if ((rc = d_mo_lenh(D, i, gg, D->so_tang, 0)) != 0) return rc;
             D->so_tang += 1;
-            if ((double)D->v.n >= D->tran) break;
-            double b1 = buoc_k(D->buoc, D->he_buoc, D->buoc_tran, D->so_tang - 1);
-            if (isnan(b1)) return LOI_DAU_VAO;
-            moc = gg - s * b1 * D->pip;                      /* moc ke tiep tinh tu GIA KHOP THAT (EA: tu BID mo cua tang sau cung) */
+            if (D->v.n > D->tang_max) D->tang_max = D->v.n;
         }
     }
     if (D->v.n > D->tang_max) D->tang_max = D->v.n;
@@ -448,9 +553,8 @@ static int d_len(Duong *D, int64_t i, double a, double b) {
             ghi_dong(&D->g, i, e, pc->id, 1);
             D->v.head += 1;
             D->v.n -= 2;
-            if (D->v.n == 0) {                               /* tia het ca ro -> mo lai mot lenh moi, ladder ve 0 */
-                D->so_tang = 1;
-                if ((rc = d_mo_lenh(D, i, e, 0, 1)) != 0) return rc;
+            if (D->v.n == 0) {                               /* tia het ca ro -> mo lai mot lenh moi, ladder ve 0 (neu duoc phep) */
+                if ((rc = d_thu_mo_lai(D, i, e)) != 0) return rc;
             }
         } else {
             double acc = 0.0;
@@ -459,12 +563,12 @@ static int d_len(Duong *D, int64_t i, double a, double b) {
             D->so_ro += 1;
             for (int64_t k = 0; k < D->v.n; k++) ghi_dong(&D->g, i, e, va[k].id, 0);
             D->so_tang = 1;
+            D->v.n = 0;                                      /* ro da chot: phai rong TRUOC khi thu mo lai (cua so gio dong -> khong mo, ro van rong) */
+            D->v.head = 0;
             if (D->cho_lui > 0) {
                 D->cho = e - s * D->cho_lui * D->pip;        /* khong mo lai ngay: cho gia lui */
-                D->v.n = 0;
-                D->v.head = 0;
             } else {
-                if ((rc = d_mo_lenh(D, i, e, 0, 1)) != 0) return rc;
+                if ((rc = d_thu_mo_lai(D, i, e)) != 0) return rc;
             }
         }
     }
@@ -483,7 +587,7 @@ static double d_treo_tai(const Duong *D, double gia) {
 }
 
 static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl, const double *spread,
-                            const double *dem, int64_t n, int32_t chieu, const double *p, double *lai_arr,
+                            const double *dem, const double *tg, int64_t n, int32_t chieu, const double *p, double *lai_arr,
                             double *treo_arr, double *stats, int32_t ghi_bat, double *ghi_out, int64_t ghi_cap,
                             int64_t *ghi_n) {
     *ghi_n = 0;
@@ -495,6 +599,9 @@ static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl
         if (!isfinite(p[k])) return LOI_DAU_VAO;
     if (!(p[P_LOT] > 0 && p[P_BUOC] > 0 && p[P_TP] > 0 && p[P_TRAN] >= 1 && p[P_PIP] > 0 && p[P_HOP] > 0 && p[P_HE_BUOC] > 0 &&
           p[P_CHO_LUI] >= 0 && p[P_BUOC_TRAN] >= 0 && p[P_HE_LOT] >= 0 && p[P_CHOT_TIEN] >= 0))
+        return LOI_DAU_VAO;
+    if (!(p[P_CAT_PIP] >= 0 && p[P_CAT_TIEN] >= 0 && p[P_THOAT_GIO] >= 0 && p[P_NGHI_GIO] >= 0 && p[P_THOAT_GIO] <= 1e6 &&
+          p[P_NGHI_GIO] <= 1e6 && p[P_GIO_VAO_TU] >= 0 && p[P_GIO_VAO_TU] <= 24 && p[P_GIO_VAO_DEN] >= 0 && p[P_GIO_VAO_DEN] <= 24))
         return LOI_DAU_VAO;
 
     Duong D;
@@ -509,6 +616,22 @@ static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl
     D.t = p[P_TP] * D.pip;
     D.eps = EPS_CHAM_PIP * D.pip;                            /* dung sai "cham moc" (y het Python: EPS_CHAM_PIP * pip) */
     D.nguong_tien = D.chot_tien * (D.lot / 0.01);            /* chot theo tien: quy ve 0,01 lot goc (y het Python) */
+    D.cat_pip = p[P_CAT_PIP]; D.cat_tien = p[P_CAT_TIEN];
+    D.cat_bat = (D.cat_pip > 0.0 || D.cat_tien > 0.0);
+    D.nguong_cat = D.cat_tien * (D.lot / 0.01);              /* cat lo theo tien: cung don vi voi chot_tien */
+    D.thoat_s = floor(p[P_THOAT_GIO] * 3600.0 + 0.5);        /* gio -> giay NGUYEN (y het `luoi._giay`) */
+    D.nghi_s = floor(p[P_NGHI_GIO] * 3600.0 + 0.5);
+    D.gio_tu_s = floor(p[P_GIO_VAO_TU] * 3600.0 + 0.5);
+    D.gio_den_s = floor(p[P_GIO_VAO_DEN] * 3600.0 + 0.5);
+    D.loc_gio = (D.gio_tu_s != D.gio_den_s);
+    D.dung_tg = (D.thoat_s > 0.0 || D.nghi_s > 0.0 || D.loc_gio);
+    D.nghi_den = -INFINITY;
+    if (D.dung_tg) {                                         /* can cot thoi gian: huu han, du n phan tu */
+        if (!tg) return LOI_DAU_VAO;
+        for (int64_t i = 0; i < n; i++)
+            if (!isfinite(tg[i])) return LOI_DAU_VAO;
+        D.tg = tg;
+    }
     const double ty_le = p[P_TY_LE];
 
     if (vao_khoi_tao(&D.v, (int64_t)(D.tran < 1e6 ? D.tran + 4 : 64)) != 0) return LOI_BO_NHO;
@@ -517,11 +640,16 @@ static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl
 
     const double lot0 = lot_k(D.kieu, D.lot, D.he_lot, 0);
     if (isnan(lot0)) { rc = LOI_DAU_VAO; goto xong; }
-    D.n_id = 1; D.ro_hien = 0;
-    vao_dat_mot(&D.v, cl[0], lot0, 0);
-    ghi_mo(&D.g, 0, cl[0], lot0, 0, 0, 0);
-    D.so_lenh = 1; D.so_tang = 1; D.tang_max = 1;
-    D.phi_sp += spread[0] * D.lot * D.hop;                   /* NB: `ts.lot`, khong phai lot cua tang 0 - y het Python */
+    D.n_id = 0; D.ro_hien = -1;
+    D.so_tang = 1;
+    if (d_cho_phep_mo(&D, 0)) {                              /* bar 0 = lenh dau o gia dong (cua so gio dang dong: ro rong, cho bar sau) */
+        D.n_id = 1; D.ro_hien = 0;
+        vao_dat_mot(&D.v, cl[0], lot0, 0);
+        ghi_mo(&D.g, 0, cl[0], lot0, 0, 0, 0);
+        D.so_lenh = 1; D.tang_max = 1;
+        D.phi_sp += spread[0] * D.lot * D.hop;               /* NB: `ts.lot`, khong phai lot cua tang 0 - y het Python */
+        if (D.dung_tg) D.t_mo = tg[0];
+    }
     const double phi_sp_bar0 = D.phi_sp;
 
     for (int64_t i = 1; i < n; i++) {
@@ -534,8 +662,17 @@ static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl
         else           { pts[0] = hi_i; pts[1] = lo_i; }     /* nen do: len high truoc */
         pts[2] = cl_i;
         D.da_bar = 0;
+        D.r_dau = D.lai - D.phi_sp - D.phi_sw;
+        D.treo_bar = 0.0;
+        if (D.thoat_s > 0.0 && D.v.n > 0 && tg[i] - D.t_mo >= D.thoat_s) d_dong_het(&D, i, o, 3);   /* thoat theo gio: o GIA MO bar */
+        if (D.v.n == 0 && D.cho == 0.0) {                    /* ro rong (cua so gio / dang nghi o bar truoc): vao lan dau o gia mo bar */
+            if ((rc = d_thu_mo_lai(&D, i, o)) != 0) goto xong;
+        }
         if ((rc = d_lui(&D, i, o, o)) != 0) goto xong;       /* nhay gia luc mo nen */
-        double treo_bar = d_treo_tai(&D, o);
+        {
+            double f0 = d_treo_tai(&D, o);
+            if (f0 > D.treo_bar) D.treo_bar = f0;
+        }
         double a = o;
         for (int j = 0; j < 3; j++) {
             double b = pts[j];
@@ -543,7 +680,7 @@ static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl
             if (d < 0) { if ((rc = d_lui(&D, i, a, b)) != 0) goto xong; }
             else if (d > 0) { if ((rc = d_len(&D, i, a, b)) != 0) goto xong; }
             double f = d_treo_tai(&D, b);
-            if (f > treo_bar) treo_bar = f;
+            if (f > D.treo_bar) D.treo_bar = f;
             a = b;
         }
         if (D.v.n > 0 && dem[i] != 0.0) {
@@ -552,7 +689,7 @@ static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl
             D.phi_sw += tl * D.hop * ty_le * dem[i] / 365.0 * cl_i;
         }
         lai_arr[i] = D.lai - D.phi_sp - D.phi_sw;
-        treo_arr[i] = treo_bar;
+        treo_arr[i] = D.treo_bar;
     }
     lai_arr[0] = -phi_sp_bar0;
     treo_arr[0] = 0.0;
@@ -564,22 +701,25 @@ static int32_t mot_ro_duong(const double *hi, const double *lo, const double *cl
     stats[S_TANG_MAX] = (double)D.tang_max;
     stats[S_SO_CAP] = (double)D.so_cap;
     stats[S_CON_MO] = (double)D.v.n;
+    stats[S_SO_CAT] = (double)D.so_cat;
+    stats[S_SO_GIO] = (double)D.so_gio;
     *ghi_n = D.g.n;
 xong:
     free(D.v.a);
     return rc;
 }
 
-/* ---- Diem vao duy nhat cho ctypes: chon mo hinh theo p[P_MO_HINH] (0 = cuc_tri, 1 = duong_di; gia tri khac -> LOI_DAU_VAO) ---- */
+/* ---- Diem vao duy nhat cho ctypes: chon mo hinh theo p[P_MO_HINH] (0 = cuc_tri, 1 = duong_di; gia tri khac -> LOI_DAU_VAO).
+ * `tg` = giay epoch cua gio mo tung bar (n phan tu) hoac NULL; chi `duong_di` doc no, va chi khi thoat_gio / nghi_gio / gio_vao_* bat. ---- */
 LUOI_API int32_t luoi_mot_ro(const double *hi, const double *lo, const double *cl, const double *spread,
-                             const double *dem, int64_t n, int32_t chieu, const double *p, double *lai_arr,
+                             const double *dem, const double *tg, int64_t n, int32_t chieu, const double *p, double *lai_arr,
                              double *treo_arr, double *stats, int32_t ghi_bat, double *ghi_out, int64_t ghi_cap,
                              int64_t *ghi_n) {
     const double mh = p[P_MO_HINH];
     if (mh == 0.0)
         return mot_ro_cuc_tri(hi, lo, cl, spread, dem, n, chieu, p, lai_arr, treo_arr, stats, ghi_bat, ghi_out, ghi_cap, ghi_n);
     if (mh == 1.0)
-        return mot_ro_duong(hi, lo, cl, spread, dem, n, chieu, p, lai_arr, treo_arr, stats, ghi_bat, ghi_out, ghi_cap, ghi_n);
+        return mot_ro_duong(hi, lo, cl, spread, dem, tg, n, chieu, p, lai_arr, treo_arr, stats, ghi_bat, ghi_out, ghi_cap, ghi_n);
     *ghi_n = 0;
     return LOI_DAU_VAO;
 }
