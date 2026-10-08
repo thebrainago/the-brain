@@ -1,0 +1,54 @@
+{
+  "ma": "2435EUR-hc-EURCAD-M30-k3",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 170.7,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "hieu_chuan_luoi",
+      "{\"ma\": \"EURCAD\", \"khung\": \"M30\", \"tu\": \"2018-07-01\", \"den\": \"2018-12-31\", \"von_quy_doi\": 1.32, \"model\": 0, \"tham_so\": {\"buoc\": 30, \"tp\": 8, \"tran_tang\": 6, \"lot\": 0.5, \"he_so_lot\": 0.5, \"bien_cap\": 3, \"tia_lenh\": true, \"kieu_lot\": \"nhan\", \"he_so_buoc\": 1.0, \"che_do\": \"hai_chieu\"}}"
+    ],
+    "phien_ban_ma": "f4cec84d+sua",
+    "dong_cuoi": [
+      "  \"engine_pct\": 44.3175,",
+      "  \"tester_dong\": 119,",
+      "  \"engine_dong\": 202,",
+      "  \"tester_tang\": 12,",
+      "  \"engine_tang\": 11",
+      " },",
+      " \"nhan\": [",
+      "  \"chat luong lich su cua tester chi 51% (Model 0): tick sinh tu M1 / gia dinh - lech co the do mo phong tick, khong han la loi engine\",",
+      "  \"tien bao gia khac tien tai khoan: he so quy doi 1.3200 (engine tinh bang tien bao gia, da chia he so nay)\",",
+      "  \"he so quy doi troi trong cua so (p25 1.305 .. p75 1.347): ty gia doi nhieu, sai so tien <= ~7%\",",
+      "  \"swap: tester +0.00%/nam engine -32.20%/nam (chenh dang ke: kiem swap_mode / swap 3 ngay cua ma)\",",
+      "  \"von_quy_doi dat 1.3200 khac uoc luong tu deal tester 0.5745 (129.8%)\"",
+      " ],",
+      " \"so_khoa\": [",
+      "  14.44,",
+      "  7.91,",
+      "  25.38,",
+      "  9.73,",
+      "  400,",
+      "  296",
+      " ],",
+      " \"tn_id\": 2011,",
+      " \"bao_cao\": \"reports/hieu_chuan/EURCAD_M30_2018-07-01_2018-12-31_33076dc5_e3.json\",",
+      " \"_giay\": 169.41",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {
+      "reports/hieu_chuan/EURCAD_M30_2018-07-01_2018-12-31_33076dc5_e3.json": "{\n \"trang_thai\": \"AM\",\n \"ket_luan\": \"LECH\",\n \"ly_do\": \"LECH o lai (engine +14.44%/nam, tester +7.91%/nam); maxDD (engine 25.4%, tester 9.7%); so lenh (engine 400, tester 296)\",\n \"ma\": \"EURCAD\",\n \"khung\": \"M30\",\n \"cua_so\": {\n  \"tu\": \"2018.07.01\",\n  \"den\": \"2018.12.31\",\n  \"ngay\": 184,\n  \"khoa_doan\": \"EURCAD|M30\"\n },\n \"model\": 0,\n \"von\": 10000.0,\n \"don_bay\": 100,\n \"tham_so\": {\n  \"buoc\": 30,\n  \"tp\": 8,\n  \"tran_tang\": 6,\n  \"che_do\": \"hai_chieu\",\n  \"lot\": 0.5,\n  \"muc_stopout\": 0.5,\n  \"don_bay\": 100.0,\n  \"cho_lui\": 0.0,\n  \"kieu_lot\": \"nhan\",\n  \"he_so_lot\": 0.5,\n  \"tia_lenh\": true,\n  \"bien_cap\": 3,\n  \"cap_moi_bar\": 999,\n  \"chot_tien\": 0.0,\n  \"dung_lo_tong\": 0.0,\n  \"he_so_buoc\": 1.0,\n  \"buoc_tran\": 400.0\n },\n \"he_so_quy_doi\": {\n  \"dung\": 1.32,\n  \"nguon\": \"do nguoi goi dat\",\n  \"uoc_tu_deal\": {\n   \"trung_vi\": 0.5745,\n   \"p25\": 1.3047,\n   \"p75\": 1.3468,\n   \"so_mau\": 296,\n   \"cach\": \"tong\"\n  }\n },\n \"tester\": {\n  \"lai_rong\": 398.51,\n  \"lai_nam_pct\": 7.910640081521739,\n  \"dd\": {\n   \"von_tuong_doi_pct\": 9.73,\n   \"von_toi_da_pct\": 9.73,\n   \"so_du_pct\": 37.08,\n   \"dd_pct_cong\": 9.73,\n   \"so_sanh_pct\": 9.73\n  },\n  \"pf\": 1.05,\n  \"chat_luong_pct\": 51.0,\n  \"model\": 0,\n  \"giay\": 167.4,\n  \"thong_ke\": {\n   \"so_lenh_mo\": 296,\n   \"so_lenh_dong\": 296,\n   \"lenh_mo_cuoi\": 0,\n   \"buy\": 141,\n   \"sell\": 155,\n   \"giu_lau_nhat_gio\": 3674.4,\n   \"giu_lau_nhat_mo\": \"2018-07-20 09:00:08\",\n   \"tang_max\": 12,\n   \"do_sau_tb\": 10.796,\n   \"do_sau_p90\": 12,\n   \"lai_chua_swap\": 398.5099999999993,\n   \"swap\": 0.0,\n   \"theo_ky\": {\n    \"2018-07\": {\n     \"lai_pct\": 28.0223,\n     \"so_dong\": 119,\n     \"tang_max\": 12\n    },\n    \"2018-08\": {\n     \"lai_pct\": 20.9345,\n     \"so_dong\": 72,\n     \"tang_max\": 12\n    },\n    \"2018-10\": {\n     \"lai_pct\": 5.2545,\n     \"so_dong\": 26,\n     \"tang_max\": 12\n    },\n    \"2018-12\": {\n     \"lai_pct\": -50.2262,\n     \"so_dong\": 79,\n     \"tang_max\": 11\n    }\n   }\n  },\n  \"bang_lenh\": \"reports/hieu_chuan/33076dc56aee1db3_lenh.csv.gz\",\n  \"ghep_fifo_pct\": 0.0\n },\n \"engine\": {\n  \"lai_tong\": 727.4507,\n  \"lai_nam_pct\": 14.4403,\n  \"dd_pct\": 25.3789,\n  \"lai_chot_nam_pct\": 139.5351,\n  \"chay\": false,\n  \"phi_spread\": 2712.358,\n  \"lai_treo\": -6301.8348,\n  \"so_bar\": 4665,\n  \"tu_bar\": \"2018-07-02 00:00:00\",\n  \"den_bar\": \"2018-12-31 18:30:00\",\n  \"qc\": {\n   \"ma\": \"EURCAD\",\n   \"pip\": 0.0001,\n   \"hop_dong\": 100000.0,\n   \"von_quy_doi\": 1.32,\n   \"khoa\": \"fc5e04c58926\"\n  },\n  \"thong_ke\": {\n   \"so_lenh_mo\": 400,\n   \"so_lenh_dong\": 393,\n   \"lenh_mo_cuoi\": 7,\n   \"buy\": 191,\n   \"sell\": 209,\n   \"giu_lau_nhat_gio\": 3674.0,\n   \"giu_lau_nhat_mo\": \"2018-07-20 09:00:00\",\n   \"tang_max\": 12,\n   \"do_sau_tb\": 10.372,\n   \"do_sau_p90\": 12,\n   \"lai_chua_swap\": 2349.4120169147686,\n   \"swap\": -1621.961332486838,\n   \"theo_ky\": {\n    \"2018-07\": {\n     \"lai_pct\": 44.3175,\n     \"so_dong\": 202,\n     \"tang_max\": 11\n    },\n    \"2018-08\": {\n     \"lai_pct\": 19.4093,\n     \"so_dong\": 79,\n     \"tang_max\": 12\n    },\n    \"2018-10\": {\n     \"lai_pct\": 6.1786,\n     \"so_dong\": 27,\n     \"tang_max\": 12\n    },\n    \"2018-12\": {\n     \"lai_pct\": -46.4113,\n     \"so_dong\": 92,\n     \"tang_max\": 11\n    }\n   }\n  },\n  \"kiem_tung_lenh_khop\": true\n },\n \"phien_ban_engine\": 3,\n \"tn_tester_id\": 2010,\n \"tester_tu_cache\": false,\n \"khop\": {\n  \"lai\": false,\n  \"dd\": false,\n  \"lenh\": false\n },\n \"lech\": {\n  \"lai_nam_pp\": 6.53,\n  \"dd_pp\": 15.649,\n  \"lenh\": 104,\n  \"lenh_pct\": 35.14\n },\n \"dung_sai\": {\n  \"lai\": [\n   0.1,\n   1.0\n  ],\n  \"dd\": [\n   0.25,\n   2.0\n  ],\n  \"lenh\": [\n   0.15,\n   3.0\n  ]\n },\n \"theo_ky\": [\n  {\n   \"ky\": \"2018-07\",\n   \"tester_pct\": 28.0223,\n   \"engine_pct\": 44.3175,\n   \"tester_dong\": 119,\n   \"engine_dong\": 202,\n   \"tester_tang\": 12,\n   \"engine_tang\": 11\n  },\n  {\n   \"ky\": \"2018-08\",\n   \"tester_pct\": 20.9345,\n   \"engine_pct\": 19.4093,\n   \"tester_dong\": 72,\n   \"engine_dong\": 79,\n   \"tester_tang\": 12,\n   \"engine_tang\": 12\n  },\n  {\n   \"ky\": \"2018-10\",\n   \"tester_pct\": 5.2545,\n   \"engine_pct\": 6.1786,\n   \"tester_dong\": 26,\n   \"engine_dong\": 27,\n   \"tester_tang\": 12,\n   \"engine_tang\": 12\n  },\n  {\n   \"ky\": \"2018-12\",\n   \"tester_pct\": -50.2262,\n   \"engine_pct\": -46.4113,\n   \"tester_dong\": 79,\n   \"engine_dong\": 92,\n   \"tester_tang\": 11,\n   \"engine_tang\": 11\n  }\n ],\n \"ky_lech_dau_tien\": {\n  \"ky\": \"2018-07\",\n  \"tester_pct\": 28.0223,\n  \"engine_pct\": 44.3175,\n  \"tester_dong\": 119,\n  \"engine_dong\": 202,\n  \"tester_tang\": 12,\n  \"engine_tang\": 11\n },\n \"nhan\": [\n  \"chat luong lich su cua tester chi 51% (Model 0): tick sinh tu M1 / gia dinh - lech co the do mo phong tick, khong han la loi engine\",\n  \"tien bao gia khac tien tai khoan: he so quy doi 1.3200 (engine tinh bang tien bao gia, da chia he so nay)\",\n  \"he so quy doi troi trong cua so (p25 1.305 .. p75 1.347): ty gia doi nhieu, sai so tien <= ~7%\",\n  \"swap: tester +0.00%/nam engine -32.20%/nam (chenh dang ke: kiem swap_mode / swap 3 ngay cua ma)\",\n  \"von_quy_doi dat 1.3200 khac uoc luong tu deal tester 0.5745 (129.8%)\"\n ],\n \"so_khoa\": [\n  14.44,\n  7.91,\n  25.38,\n  9.73,\n  400,\n  296\n ],\n \"tn_id\": 2011\n}"
+    }
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-08T13:17:53"
+}
