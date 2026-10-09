@@ -93,6 +93,13 @@ bang ten, cu phap nghiem (-Wall, loi tro dung dong .mq5), 10 kich ban TAY (so ti
 doi chieu TUNG LENH voi `luoi.chay` (moi tick la mot bar, khong phi qua dem), 8 DOT BIEN (sua co chu dich ma EA -> bo so sanh phai bao lech), do khoang cach bar<->tick.
 Bo do rong 04/10: 12 cau hinh x 80 duong gia, khop DUNG chieu / lot / gia mo / tick mo+dong (tru 1 tick o `chot_tien_tia*` va `buoc_co`, do muc luoi le).
 
+**Them 08/10/2026 - CAT LO CA RO / THOAT THEO GIO / NGHI / LOC GIO VAO LENH (de tai lap nguoi thang da boc)**: EA co them 6 input (`InpCutPips`, `InpCutMoney`, `InpExitHours`,
+`InpRestHours`, `InpHourFrom`, `InpHourTo`, tat = 0; ten <-> truong `ThamSo` cat_lo_pip / cat_lo_tien / thoat_gio / nghi_gio / gio_vao_tu / gio_vao_den) va `ea_gia_lap.tham_so_ea_tu_luoi`
+dich san. Gio quy ra GIAY NGUYEN (lam tron nua len: 4,1 gio = 14760 giay, khong phai 14759), so voi gio TICK. Kiem them (cloud, khong can MT5): 14 kich ban tay (dung giay, hai dau
+nua khoang cua cua so gio, qua nua dem, gio le, cho lui sau cat / thoat gio, nghi sau thoat gio), 96 o doi chieu tung lenh voi engine (12 cau hinh x 8 bo tinh nang x 4 duong gia, tick
+giay nguyen; EA tu dem so ro cat / thoat gio = engine; 4 bat bien doc lap), 40 dot bien EA deu bi bat, mot test do hai cho kiem cat sau tia cap (ma phong ve) khong bao gio chay.
+**Khong tin de dai hon**: day van la mo phong - MetaEditor / tester that chua chay; engine bar van lac quan so voi tick (xem muc ben duoi).
+
 **Quan he lai (do duoc, khong phai uoc luong)**: `lai_ea = so du - von - spread cua lenh con mo`. `lai_engine + phi_tia_kep - lai_ea = lech_explicada` voi `phi_tia_kep` =
 spread engine tru THEM khi dong cap tia, `lech_explicada` = chenh gia tung lenh (engine mo / dong o muc luoi chinh xac, EA o tick dau vuot muc). Phan con lai `lech_con_lai`
 <= 3e-12 o moi cau hinh / duong gia (spread khong doi). Spread doi giua cac tick = ngoai pham vi do nay (tester that moi cho thay).

@@ -56,9 +56,14 @@
 //                        "he_so_buoc":1.2,"tia_lenh":true,"bien_cap":5}}'
 //   Bang dich ten: nhan/ea_gia_lap.py BANG_TEN (ThamSo -> input). Chenh lech hop ly vi bar OHLC != tick, spread that doi.
 //
-// DA KIEM / CHUA KIEM (04/10/2026; tai_lieu/LAN_EA_THO.md muc "EA luoi day du")
+// DA KIEM / CHUA KIEM (04/10/2026, bo sung 08/10/2026; tai_lieu/LAN_EA_THO.md muc "EA luoi day du")
 //   Da: tren duong tick gia lap, EA khop engine TUNG LENH (chieu, lot, gia mo, tick mo / dong) o 12 cau hinh x 80 duong gia; lai
 //   chenh nhau chi do (a) engine tru spread HAI lan o lenh tia, (b) engine mo / dong o muc luoi chinh xac con EA o tick dau vuot muc.
+//   Da (08/10/2026, test_ea_luoi_day_du.py muc 3b / 4b / 5b) cho CAT LO / THOAT GIO / NGHI / CUA SO GIO: (1) 96 o doi chieu (12 cau hinh x
+//   8 bo tinh nang x 4 duong gia, tick theo GIAY NGUYEN) khop engine tung lenh, EA tu dem so ro cat / thoat bang engine, 4 bat bien doc lap
+//   (ro song <= thoat gio, mo ro moi khong som hon nghi, vao lenh trong cua so, ...); (2) 14 kich ban tay tinh bang tay (dung giay, hai dau
+//   nua khoang, qua nua dem, gio le 4,1 lam tron nua len, cho lui sau cat, nghi sau thoat gio...); (3) 40 dot bien EA deu bi bat, hai cho
+//   `ChamCat` sau tia cap duoc do la ma phong ve khong bao gio chay (66 lan kiem, 0 lan cat). Kiem dau vao EA khop `luoi.mien_duong_di`.
 //   Chua: MetaEditor, tester that (tick that, spread doi, swap qua dem, phi), 5 diem hieu chuan. Chay tren bar OHLC thi engine lac
 //   quan hon tick EA ~15% voi cau hinh co TIA LENH / chot tien (engine dong cap tia o gia tot nhat cua bar): doc ket qua tester
 //   la so THAT, ket qua engine la can tren.

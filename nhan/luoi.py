@@ -1203,9 +1203,13 @@ def chay_mang(dl: DuLieuChay, ts: ThamSo, von: float, ghi_lenh: bool = False) ->
     if chua:
         raise ValueError("tham so %s da khai bao nhung luoi.py CHUA cai dat: dat != 0 se bi bo qua am tham" % chua)
     qc, hi, lo, cl, sp, dem, idx = dl.qc, dl.hi, dl.lo, dl.cl, dl.sp, dl.dem, dl.idx
-    kiem_khop_bar(ts)                                   # ten mo hinh bar sai -> ValueError ngay, khong am tham chay mo hinh khac
+    kb = kiem_khop_bar(ts)                              # ten mo hinh bar sai -> ValueError ngay, khong am tham chay mo hinh khac
     tg = getattr(dl, "tg", None)
-    if can_cot_thoi_gian(ts):
+    if kb == "duong_di":
+        ly_do = mien_duong_di(ts, qc)                   # NaN / inf / am / kieu la -> ValueError ro rang TRUOC khi doi gio ra giay (`_giay`)
+        if ly_do:
+            raise ValueError("khop_bar='duong_di': " + ly_do)
+    if kb == "duong_di" and can_cot_thoi_gian(ts):      # `cuc_tri` + tinh nang gio: `_mot_ro` tu choi ro rang, khong can cot thoi gian
         if tg is None:
             raise ValueError("thoat_gio / nghi_gio / gio_vao_* can cot thoi gian cua bar (DuLieuChay.tg) - dung `chuan_bi`")
         thoat_s, nghi_s, gio_tu_s, gio_den_s = cau_hinh_gio(ts)
