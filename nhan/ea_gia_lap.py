@@ -154,7 +154,8 @@ def tick_tu_bar(df: pd.DataFrame, thu_tu="thap_truoc", point: float = POINT, gia
     cuc tri thu hai -> close.
 
     `thu_tu`: 'thap_truoc' (thap roi cao - dung gia dinh BAT LOI TRUOC cua engine voi lenh MUA), 'cao_truoc' (voi lenh BAN),
-    'xen_ke' (bar chan thap truoc, bar le cao truoc), 'theo_nen' (nen tang: thap truoc; nen giam: cao truoc).
+    'xen_ke' (bar chan thap truoc, bar le cao truoc), 'theo_nen' (nen tang: thap truoc; nen giam: cao truoc), 'nguoc_nen' (NGUOC LAI
+    'theo_nen': nen tang: cao truoc; nen giam: thap truoc; nen phang = cao truoc).
     Gia bar PHAI nam tren luoi `point`; `paso` nho hon `point` (uoc so nguyen cua nhau) cho chuoi tick MIN hon luoi gia bar.
     `giay_nguyen=True`: gio tick lam tron XUONG ve giay nguyen (nhieu tick cung giay). San gia cat gio ve giay nguyen (`datetime`) con engine doc
     giay tu chi so thoi gian - gio chia deu `giay_bar / n` roi cat o hai ben co the lech 1 giay o ranh gioi; voi giay nguyen san tu truoc thi hai ben
@@ -174,7 +175,8 @@ def tick_tu_bar(df: pd.DataFrame, thu_tu="thap_truoc", point: float = POINT, gia
         return a + np.sign(n) * np.arange(1, abs(n) + 1) if n else np.empty(0, np.int64)
 
     for i in range(len(df)):
-        if thu_tu == "thap_truoc" or (thu_tu == "xen_ke" and i % 2 == 0) or (thu_tu == "theo_nen" and c[i] >= o[i]):
+        if thu_tu == "thap_truoc" or (thu_tu == "xen_ke" and i % 2 == 0) or (thu_tu == "theo_nen" and c[i] >= o[i]) \
+                or (thu_tu == "nguoc_nen" and c[i] < o[i]):
             p1, p2 = l[i] * k, h[i] * k
         else:
             p1, p2 = h[i] * k, l[i] * k
@@ -191,7 +193,7 @@ def tick_tu_bar(df: pd.DataFrame, thu_tu="thap_truoc", point: float = POINT, gia
 
 
 GIAY_OHLC4 = (0.0, 20.0, 40.0, 59.0)
-THU_TU_NEN = ("theo_nen", "thap_truoc", "cao_truoc", "xen_ke")
+THU_TU_NEN = ("theo_nen", "nguoc_nen", "thap_truoc", "cao_truoc", "xen_ke")
 
 
 def tick_ohlc4(df: pd.DataFrame, thu_tu="theo_nen", point: float = POINT, giay=GIAY_OHLC4) -> dict:
@@ -200,7 +202,8 @@ def tick_ohlc4(df: pd.DataFrame, thu_tu="theo_nen", point: float = POINT, giay=G
     chuoi roi vao giay 40 (86-88%) / 20 (9-11%) / 0 (1-2%) / 59 (1%), moi lenh DAU chuoi o giay 0, lenh DCA o giay 40 (88%) / 20 (12%); khoang cach
     DCA vuot muc 100 pip trung vi 104, p95 129. CHUA doi chieu voi nen M1 that (Linux khong co gia) - `giay` va `thu_tu` la tham so de bo thu xep hang.
 
-    `thu_tu` nhu `tick_tu_bar`: 'theo_nen' (nen tang: open, LOW, HIGH, close; nen giam: open, HIGH, LOW, close), 'thap_truoc', 'cao_truoc', 'xen_ke'.
+    `thu_tu` nhu `tick_tu_bar`: 'theo_nen' (nen tang: open, LOW, HIGH, close; nen giam: open, HIGH, LOW, close), 'nguoc_nen' (dao lai: nen tang:
+    open, HIGH, LOW, close; nen giam: open, LOW, HIGH, close - luat doi thu cua 'theo_nen' khi doi chieu voi tester that), 'thap_truoc', 'cao_truoc', 'xen_ke'.
     Tra dict mang cung dang `tick_tu_bar`: bid, spread (GIA), time (giay), bar (giay bat dau nen), bar_idx. 4 tick / nen ke ca nen phang (open = high =
     low = close): EA van thay tick dau nen o giay 0 (mo chuoi theo nen moi)."""
     if thu_tu not in THU_TU_NEN:
@@ -215,7 +218,8 @@ def tick_ohlc4(df: pd.DataFrame, thu_tu="theo_nen", point: float = POINT, giay=G
     if n and ((h < np.maximum(o, c)) | (l > np.minimum(o, c))).any():
         raise ValueError("nen M1 hong: high < max(open, close) hoac low > min(open, close) (nen dau tien: %d)"
                          % int(np.flatnonzero((h < np.maximum(o, c)) | (l > np.minimum(o, c)))[0]))
-    thap = c >= o if thu_tu == "theo_nen" else (np.arange(n) % 2 == 0) if thu_tu == "xen_ke" else np.full(n, thu_tu == "thap_truoc")
+    thap = (c >= o if thu_tu == "theo_nen" else c < o if thu_tu == "nguoc_nen" else
+            (np.arange(n) % 2 == 0) if thu_tu == "xen_ke" else np.full(n, thu_tu == "thap_truoc"))
     p1, p2 = np.where(thap, l, h), np.where(thap, h, l)
     bid = (np.stack([o, p1, p2, c], axis=1) * point).ravel()
     sp = df["spread"].to_numpy(float) * point if "spread" in df.columns else np.zeros(n)

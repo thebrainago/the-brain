@@ -260,6 +260,32 @@ def test_tick_ohlc4_thu_tu_theo_mau_nen():
     assert np.allclose(G.tick_ohlc4(df, "xen_ke", 0.01)["bid"][:8], [100.0, 99.9, 100.4, 100.3,  100.3, 100.6, 100.0, 100.1])
 
 
+def test_tick_ohlc4_nguoc_nen_dao_lai_dung_theo_nen():
+    # nguoc_nen = luat DOI THU cua theo_nen: nen tang: O, HIGH, LOW, C ; nen giam: O, LOW, HIGH, C ; nen phang (c == o) coi nhu nen GIAM cua theo_nen dao lai
+    df = nen_m1([(100.0, 100.4, 99.9, 100.3), (100.3, 100.6, 100.0, 100.1), (100.5, 100.5, 100.5, 100.5), (100.2, 100.5, 99.8, 100.2)])
+    nguoc = G.tick_ohlc4(df, "nguoc_nen", 0.01)["bid"]
+    assert np.allclose(nguoc, [100.0, 100.4, 99.9, 100.3,  100.3, 100.0, 100.6, 100.1,  100.5, 100.5, 100.5, 100.5,  100.2, 100.5, 99.8, 100.2])
+    theo = G.tick_ohlc4(df, "theo_nen", 0.01)["bid"]
+    for i in (0, 1, 3):                                                         # moi nen KHONG phang: hai cuc tri dao cho nhau, open / close giu nguyen
+        a_, b_ = theo[4 * i:4 * i + 4], nguoc[4 * i:4 * i + 4]
+        assert a_[0] == b_[0] and a_[3] == b_[3] and a_[1] == b_[2] and a_[2] == b_[1]
+    # nen doji (c == o) co bien do: theo_nen coi la nen tang (LOW truoc), nguoc_nen coi la nen giam (HIGH truoc) -> hai luat khac nhau o day
+    assert theo[12:16].tolist() == [100.2, 99.8, 100.5, 100.2] and nguoc[12:16].tolist() == [100.2, 100.5, 99.8, 100.2]
+
+
+def test_tick_tu_bar_nguoc_nen_cung_thu_tu_voi_tick_ohlc4_o_cuc_tri():
+    # tick_tu_bar (buoc tick day) va tick_ohlc4 (4 tick) phai CUNG thu tu cuc tri cho moi luat, ke ca luat moi
+    df = nen_m1([(100.0, 100.4, 99.9, 100.3), (100.3, 100.6, 100.0, 100.1), (100.2, 100.5, 99.8, 100.2)])
+    for tt in ("theo_nen", "nguoc_nen", "thap_truoc", "cao_truoc", "xen_ke"):
+        day = G.tick_tu_bar(df, tt, 0.01, giay_bar=60.0)
+        b4 = G.tick_ohlc4(df, tt, 0.01)
+        for i in range(len(df)):
+            d = day["bid"][day["bar_idx"] == i]
+            hi, lo = np.argmax(d), np.argmin(d)
+            c = b4["bid"][4 * i:4 * i + 4]
+            assert (lo < hi) == (c[1] < c[2]), (tt, i)                         # cuc tri nao den truoc la y het nhau
+
+
 def test_tick_ohlc4_tu_choi_dau_vao_vo_ly():
     df = nen_m1([(100.0, 100.4, 99.9, 100.3)])
     with pytest.raises(ValueError):
