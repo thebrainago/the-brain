@@ -67,7 +67,7 @@ def chuoi_tu_vi_the(v: pd.DataFrame) -> pd.DataFrame:
             het = None
         d = dong[i]
         if np.isnat(d):
-            het = np.datetime64("9999-01-01", "ns")
+            het = np.datetime64("2200-01-01", "ns")          # "mo mai": nam 9999 tran int64 ns (-> 1815) va tach chuoi con mo thanh nhieu manh
         elif het is None or d > het:
             het = d
     if cur:

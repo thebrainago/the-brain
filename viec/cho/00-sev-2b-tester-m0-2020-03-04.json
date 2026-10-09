@@ -1,0 +1,24 @@
+{
+ "ma": "00-sev-2b-tester-m0-2020-03-04",
+ "muc_tieu": "MT5 tester chay EA dung lai cua CanCuBo (vang) 2020-03-01..2020-04-30, Model 0 (moi tick sinh tu M1); cloud so tung chuoi voi bot goc va mo phong",
+ "lan": "TESTER",
+ "uu_tien": 0,
+ "han_phut": 90.0,
+ "ra_luc": "2026-10-09T00:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "nc",
+  "cc",
+  "so_ea_voi_tester",
+  "{\"che_do\":\"tester\",\"tu\":\"2020-03-01\",\"den\":\"2020-04-30\",\"model\":0,\"ratchet\":1}"
+ ],
+ "vi_sao": "mini-Brain CanCuBo (chu du an 09/10): so luat backtest cua MAY THU MT5 voi mo phong cua ta. Can MA MOI (tag so-ea-v1: nhan/so_ea_voi_tester.py) nen don nay CHO yen toi khi may nha nap ma moi (thu 20261008-165737-eea9 + 20261008-094857-6bd4); khong lam hong gi o ma cu. Doc: tai_lieu/MINI_BRAIN_CANCUBO.md. Cua so nam trong doan kham_pha da dong bang (2014..2021-10-11), khong cham xac_nhan. Cua so co ~185 chuoi that; Model 0 vs 1 tren CUNG cua so de thay may thu sinh tick nhu the nao. Mang ve reports/so_ea_voi_tester/*.json + du_lieu_gia/so_ea_voi_tester/*.csv.gz (nho).",
+ "cong": {
+  "kieu": "chay_duoc"
+ },
+ "can": [
+  "mt5",
+  "so-ea-v1"
+ ]
+}

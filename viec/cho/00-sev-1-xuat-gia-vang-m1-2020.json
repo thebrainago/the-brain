@@ -1,0 +1,29 @@
+{
+ "ma": "00-sev-1-xuat-gia-vang-m1-2020",
+ "muc_tieu": "xuat nen M1 vang (XAUUSD = GOLD.i#) ca nam 2020 (~4 MB) de cloud kiem LUAT TICK cua may thu MT5 tren 703 chuoi lenh that",
+ "lan": "NHE",
+ "uu_tien": 0,
+ "han_phut": 30.0,
+ "ra_luc": "2026-10-09T00:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "xuat-gia",
+  "XAUUSD",
+  "M1",
+  "--tu",
+  "2020-01-01",
+  "--den",
+  "2020-12-31"
+ ],
+ "vi_sao": "mini-Brain CanCuBo (chu du an 09/10): so luat backtest cua MAY THU MT5 voi mo phong cua ta. Can MA MOI (tag so-ea-v1: nhan/so_ea_voi_tester.py) nen don nay CHO yen toi khi may nha nap ma moi (thu 20261008-165737-eea9 + 20261008-094857-6bd4); khong lam hong gi o ma cu. Doc: tai_lieu/MINI_BRAIN_CANCUBO.md. Cua so nam trong doan kham_pha da dong bang (2014..2021-10-11), khong cham xac_nhan. Nam 2020 co 703 chuoi that cua bot (du de phan biet cac luat thu tu tick, can ~110) va gom ca hai lan doi gio mua he (08/03, 01/11) de kiem lech gio kho <-> tester. Chi gia vang XM demo, khong du lieu ca nhan.",
+ "cong": {
+  "kieu": "chay_duoc"
+ },
+ "can": [
+  "ma-0810",
+  "gia-v2",
+  "data",
+  "so-ea-v1"
+ ]
+}

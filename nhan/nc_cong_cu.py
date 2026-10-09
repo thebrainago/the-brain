@@ -198,6 +198,11 @@ def _ho_so_bot(vong_id=None, **kw) -> dict:
     return NHS.chay(vong_id=vong_id, **kw)
 
 
+def _so_ea_voi_tester(vong_id=None, **kw) -> dict:
+    from nhan import so_ea_voi_tester as SEV
+    return SEV.cong_cu(vong_id=vong_id, **kw)
+
+
 _EA = {"type": "string", "description": (
     "EA cong khai: duong toi file .mq5, hoac 'kho:<so thu tu>' / 'kho:<tu trong tieu de>' trong "
     "reports/ea/kho.json (EA da tai tu MQL5 Code Base), hoac duong toi file .ex5 (EA NHI PHAN khong ma nguon: chay "
@@ -539,6 +544,30 @@ CONG_CU: list[dict] = [
                   "description": "cac cap {lenh, bo_set, ten, ma, he_so_don_vi} nua (toi da 5) de so sanh cac bo .set voi nhau"},
          "ghi_bao_cao": {"type": "boolean", "description": "true (mac dinh) = ghi reports/ho_so/<ten>.md (+ _set.md, so_sanh_*.md)"}},
         ["lenh"], _ho_so_bot),
+    _cc("so_ea_voi_tester",
+        "QUY LUAT BACKTEST cua MAY THU MT5 (mini-Brain bot CanCuBo / vang): MT5 tester sinh tick tu nen M1 nhu the nao va EA dung lai "
+        "(ea_CanCuBoLai.mq5, dung tu LENH THAT cua bot goc, khop tuyet doi 2.246 chuoi) co ra DUNG chuoi cua bot goc tren tester khong. "
+        "che_do `tu_kiem` = thu CHINH dung cu tren gia tong hop co dap an (khong can du lieu ngoai; ra do phan giai: can bao nhieu chuoi de "
+        "phan biet cac luat). `luat` = voi nen M1 vang that (may nha xuat: `b xuat-gia XAUUSD M1 --tu .. --den ..`) kiem tung su kien deal goc "
+        "(lenh dau, DCA, TP, SL) co hop le voi tung luat thu tu tick (theo_nen, nguoc_nen, thap_truoc, cao_truoc, xen_ke) khong, xep hang + kiem "
+        "dau chinh xac, ket luan RO / CHUA_RO / KHONG_KHOP; tu do lech gio nen M1 <-> deal. `so` = them quet mo phong EA tren nen M1 (luat x SL "
+        "doi len | bam theo) va, neu co `tester`, so ba chieu bot goc <-> mo phong <-> tester. `tester` = CHI may nha co MT5: chay EA dung lai tren "
+        "may thu trong cua so ngay >= 14 ngay nam trong doan kham_pha da dong bang (khong cham xac_nhan / niem_phong), Model 0 hoac 1, so chuoi "
+        "tester voi chuoi bot goc (DAT = khop >= 99%, AM = do duoc nhung lech). Day la DO DAC, khong phai phep thu y tuong: dong so tay doan "
+        "'hieu_chuan', so_phep_thu 0, khong an FDR. Thieu nen M1 / tester hong -> CHUA_DO_DUOC (khong bao gio AM).",
+        {"che_do": {"type": "string", "enum": ["tu_kiem", "luat", "so", "tester"], "description": "mac dinh tu_kiem"},
+         "tu": {"type": "string", "description": "ngay bat dau (YYYY-MM-DD): cua so nen M1 (luat/so) hoac cua so tester (tester, trong doan kham_pha)"},
+         "den": {"type": "string", "description": "ngay ket thuc (bao gom); tester: >= tu + 13 ngay"},
+         "model": {"type": "integer", "description": "chi che do tester: 1 = OHLC 1 phut (mac dinh) | 0 = moi tick sinh tu M1 (4 = tick that chi co tu 2024-02, ngoai doan kham_pha)"},
+         "ratchet": {"type": "integer", "description": "chi tester: 1 = SL chi doi len (mac dinh) | 0 = SL bam theo gia"},
+         "ngay": {"type": "number", "description": "chi tu_kiem: so ngay gia tong hop (mac dinh 120; >= 100 de thay RO)"},
+         "seed": {"type": "integer", "description": "chi tu_kiem: hat ngau nhien cua gia tong hop (mac dinh 1)"},
+         "ma": {"type": "string", "description": "ma tai san trong kho gia (mac dinh XAUUSD)"},
+         "tester": {"type": "string", "description": "chi che do so: TEN tep bang chuoi tester (khong duong dan) trong du_lieu_gia/so_ea_voi_tester/, vd tester_m1_r1_20190301_20190331.csv.gz"},
+         "von": {"type": "integer", "description": "chi tester: von tai khoan tester (mac dinh 10000, >= 1000)"},
+         "han_giay": {"type": "integer", "description": "chi tester: han chay tester, giay (>= 60)"},
+         "quet": {"type": "boolean", "description": "ep bat / tat quet mo phong (mac dinh: tu_kiem va so = bat, luat = tat)"}},
+        [], _so_ea_voi_tester),
 ]
 
 

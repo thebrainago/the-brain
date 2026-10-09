@@ -96,6 +96,17 @@ def test_chuoi_lenh_con_mo_cuoi_cua_so_la_het_gio():
     assert pd.isna(ch["dong"].iloc[1]) and pd.isna(ch["gia_ra"].iloc[1])
 
 
+def test_chuoi_con_mo_nhieu_lenh_cuoi_cua_so_van_la_MOT_chuoi():
+    """Truoc 09/10/2026 moc 'mo mai' la nam 9999 -> tran int64 ns (thanh 1815) nen chuoi dang DCA chua dong bi cat thanh nhieu chuoi n=1."""
+    v = bang(vt("2020-01-01 10:00:00", "2020-01-01 11:00:00"),
+             vt("2020-01-01 12:00:00", None, gia_dong=np.nan, ly="open", loi=np.nan),
+             vt("2020-01-02 03:00:00", None, gia_mo=1990.0, gia_dong=np.nan, ly="open", loi=np.nan),
+             vt("2020-02-03 03:00:00", None, gia_mo=1980.0, gia_dong=np.nan, ly="open", loi=np.nan))
+    ch = C.chuoi_tu_vi_the(v)
+    assert list(ch["n"]) == [1, 3] and list(ch["ly_do"]) == ["sl", "het_gio"]
+    assert ch["gia_cac_lenh"].iloc[1] == [2000.0, 1990.0, 1980.0]
+
+
 def test_chuoi_bang_rong():
     ch = C.chuoi_tu_vi_the(pd.DataFrame())
     assert len(ch) == 0 and list(ch.columns) == C.COT_CHUOI

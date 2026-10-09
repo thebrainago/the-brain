@@ -850,6 +850,8 @@ def tag_ma(lab: Path | None = None) -> list[str]:
                      file gia khong bao gio len git (bo chay chi `git add` duong trong `DUOC_DAY` CUA HOP THU) - don `b xuat-gia` can nhan nay.
     - `lenh-v1`    : `nhan/xuat_lenh_tester` (`b xuat-lenh`: bang lenh tester `reports/hieu_chuan/*_lenh.csv.gz` -> `<hop thu>/du_lieu_gia/mau_tester`).
                      Don `b xuat-lenh` can nhan nay (ma cu khong co lenh do; khong co nhan thi don cho, khong chet).
+    - `so-ea-v1`   : `nhan/so_ea_voi_tester` (`nc cc so_ea_voi_tester`: so bot goc <-> EA dung lai <-> may thu MT5 de tim QUY LUAT BACKTEST,
+                     can `chay_tester`). Don Mini-Brain CanCuBo can nhan nay: ma cu khong co cong cu do nen don CHO thay vi chet.
     """
     lab = Path(lab) if lab else GOC
     ra = ["ma-0810"]
@@ -877,6 +879,11 @@ def tag_ma(lab: Path | None = None) -> list[str]:
     try:
         if "def kiem_bang(" in (lab / "nhan" / "xuat_lenh_tester.py").read_text(encoding="utf-8", errors="replace"):
             ra.append("lenh-v1")
+    except OSError:
+        pass
+    try:
+        if "def chay_tester(" in (lab / "nhan" / "so_ea_voi_tester.py").read_text(encoding="utf-8", errors="replace"):
+            ra.append("so-ea-v1")
     except OSError:
         pass
     return ra

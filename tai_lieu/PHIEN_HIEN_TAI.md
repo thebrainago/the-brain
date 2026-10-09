@@ -3,25 +3,47 @@
 > Khoi AUTO do may lam moi (`b tiep --ghi`); khoi TAY do phien chi huy viet, cap nhat sau moi moc. Tai lieu day du: `b tiep --chi-muc`.
 
 <!-- AUTO:BAT_DAU -->
-## Trang thai (may do luc 2026-10-05 16:05 UTC) - `b tiep --ghi` de lam moi
-- Nhanh claude/autonomous-trading-system-rzzt7h @ b9b8701 · 178 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
+## Trang thai (may do luc 2026-10-09 17:53 UTC) - `b tiep --ghi` de lam moi
+- Nhanh claude/autonomous-trading-system-rzzt7h @ c72bd33d · 15 file sua/chua theo doi · so voi origin/claude/autonomous-trading-system-rzzt7h: +0/-0
 - Commit gan day:
-  · b9b8701 hang hoa: bao cao dot 1, tai_yahoo, bo du lieu Yahoo khoi git
-  · 745b60a hang hoa: job may nha (thu_co_che tren CFD hang hoa)
-  · b0c8bf2 hang hoa: 20 y tuong -> 40 ban nhap + 70 job may nha (Claude QA: sua thu Tu=2, y t
-  · 2854452 CMT: 2 cap SUC_MANH+DAO_DONG viet tay (+ban) va 4 phep thu cho may nha
-  · 670c1b0 da_agent: thu lai 5xx lui dan; +17 test khoi_phuc; bai hoc lan 5
-- Thu: phien nay la `cloud`, chua doc 20 · 24h qua: cloud->nha 1, nha->cloud 2
-  · moi nhat cloud->nha (gio may gui 2026-10-05T08:04:15): Phien cloud MOI id=session_01XDvcQqRLu2itnyVWxmPCW
+  · beef835a ea_gia_lap: them luat tick nguoc_nen (doi thu cua theo_nen) de kiem luat may thu 
+  · 6b9d79f3 mini-Brain CanCuBo: EA dung lai tu lenh that + san gia kiem gia luoi
+  · ac4062b5 Merge branch 'claude/autonomous-trading-system-rzzt7h' of https://github.com/theb
+  · ed18d83a San gia EA: SL phia may chu, hop dong vang, gioi han lot, iTime that + duong gia 
+  · 46d26510 Merge branch 'claude/autonomous-trading-system-rzzt7h' of https://github.com/theb
+- Thu: phien nay la `cloud`, chua doc 0 · 24h qua: cloud->nha 1
+  · moi nhat cloud->nha (gio may gui 2026-10-09T17:51:30): MINI-BRAIN-CANCUBO-09102026
 - May:
-  · nha RANH ma=de5446d+sua nhip 2026-10-03T22:15:43 (gio may)
-- Don: cho 56 · dang 9 · xong 9 (CHUA_DO_DUOC 1 · DAT 8)
+  · nha-m1 RANH ma=44b3b23d+sua nhip 2026-10-09T23:14:47 (gio may)
+  · nha-m2 RANH ma=44b3b23d+sua nhip 2026-10-09T23:14:41 (gio may)
+  · nha-m3 RANH ma=44b3b23d+sua nhip 2026-10-09T23:12:27 (gio may)
+  · nha-p1 RANH ma=44b3b23d+sua nhip 2026-10-09T23:12:38 (gio may)
+  · nha-p10 RANH ma=44b3b23d+sua nhip 2026-10-09T23:12:45 (gio may)
+  · nha-p11 DANG_CHAY ma=3d2f136d+sua nhip 2026-10-07T23:14:53 (gio may)
+  · nha-p12 RANH ma=44b3b23d+sua nhip 2026-10-09T23:11:41 (gio may)
+  · nha-p13 RANH ma=44b3b23d+sua nhip 2026-10-09T23:11:15 (gio may)
+  · nha-p14 RANH ma=44b3b23d+sua nhip 2026-10-09T23:15:23 (gio may)
+  · nha-p15 RANH ma=44b3b23d+sua nhip 2026-10-09T23:12:10 (gio may)
+  · nha-p16 RANH ma=44b3b23d+sua nhip 2026-10-09T23:10:52 (gio may)
+  · nha-p17 RANH ma=44b3b23d+sua nhip 2026-10-09T23:11:43 (gio may)
+  · nha-p18 RANH ma=44b3b23d+sua nhip 2026-10-09T23:11:25 (gio may)
+  · nha-p2 RANH ma=44b3b23d+sua nhip 2026-10-09T23:11:10 (gio may)
+  · nha-p3 RANH ma=44b3b23d+sua nhip 2026-10-09T23:13:44 (gio may)
+  · nha-p4 RANH ma=44b3b23d+sua nhip 2026-10-09T23:13:49 (gio may)
+  · nha-p5 RANH ma=44b3b23d+sua nhip 2026-10-09T23:11:32 (gio may)
+  · nha-p6 RANH ma=44b3b23d+sua nhip 2026-10-09T23:15:36 (gio may)
+  · nha-p7 RANH ma=44b3b23d+sua nhip 2026-10-09T23:13:07 (gio may)
+  · nha-p8 RANH ma=44b3b23d+sua nhip 2026-10-09T23:13:46 (gio may)
+  · nha-p9 RANH ma=44b3b23d+sua nhip 2026-10-09T23:13:56 (gio may)
+  · nha RANH ma=44b3b23d+sua nhip 2026-10-09T23:11:06 (gio may)
+- Don: cho 1729 · dang 1598 · xong 1573 (CHUA_DO_DUOC 54 · DAT 1519)
 - Du lieu: kho gia /home/user/the-brain/data: 0 file .parquet · so_cai/doan.json CO · so_cai/nc 3 file 29 KB
 - Cau hinh: config/cau.json khong co (phien cloud)
 <!-- AUTO:HET -->
 
 <!-- TAY:BAT_DAU -->
 ## Quyet dinh cua chu du an con hieu luc (ngay = ngay chot)
+- **09/10 toi - HUONG MOI (chu du an, nguyen y)**: "Vay la den bay gio cong viec van dang la thu dung lai 1 con bot de co the chay gia lap? Tai sao ko chay che do OPTIMIZE tren mt5, co phai nhanh hon khong nhi? Ta chi gia lap khi nao KHONG co san file mql5 thoi; con neu co roi thi viec can la backtest dang optimize de tim ra input tot nhat + thu them cac co che quan li von hoac lenh ben ngoai vao ma. Xong viec thi noi ro cho toi cau dang lam gi va muon lam gi tiep." Roi: "Dung da, toi mo sang phien chat moi" -> phien cloud nay DUNG o day, phien moi tiep (doc `b tiep`). Hieu: (1) bot da co `.mq5`/`.ex5` + `.set` -> chay MT5 OPTIMIZE (nhieu bo tham so MOT lan, dung het luong), khong dung lai bang gia lap; (2) gia lap / dung lai chi khi KHONG co file; (3) them lop quan li von / quan li lenh ben ngoai len bot roi cung toi uu.
 - **08/10 ĐIỀU HÀNH (chủ dự án)**: (1) **SỬA LỖI TRƯỚC**: bộ chạy chết, đơn treo, ổ đầy, tester không ra báo cáo, nguồn LỖI/CHUYỂN HƯỚNG -> giao sửa ngay, không chỉ ghi báo cáo; (2) **LUÂN PHIÊN** giữa các module (QUANTLAB quét/xác nhận · HEPHAESTUS bóc tách · SEEKER đào nguồn/diễn đàn/link · sổ tay nc) để máy luôn có việc, tester xếp hàng một, CPU/mạng chạy song song; (3) **máy nhà làm hết chức năng dự án, không để phí**: Chrome AI 9224, diễn đàn quét SÂU (không chỉ trang 1), bóc tách bot. Tự nạp theo dung lượng ổ + RAM/CPU + giờ thực đơn tồn + việc còn cần làm (thư CHI-THI-TU-NAP-THEO-NANG-LUC-08102026), KHÔNG theo luật cố định 12 giờ.
 - 25/09 TIEU CHI DUYET: co lai sau phi + maxDD < 80%; martingale/DCA/luoi hop le; don bay chap nhan (CLAUDE.md LUAT SO 0).
 - 25/09 AI la nha nghien cuu chinh, chu du an la nha tai tro (LUAT SO 1; `b nc` o dau phien).
@@ -40,6 +62,16 @@
 - 03/10 chieu: "de danh token di, toi lam tren may nha" -> cloud DUNG, lam tiep o may nha toi nay (muc "TOI 03/10 O NHA" o Viec ke tiep).
 - 03/10 toi: LLM CHOT (thu nha c91d): mac dinh `ds/deepseek-flash`, du phong `qwen3.8-max-0902` sau 2 lan sai lien tiep, `--sau` cho viec can suy luan sau; KHONG cai Qwen Code / DeepSeek Harness. May nha TON DIEN (y chu du an): KHONG chay qua dem, chi chay NGAN khi bat may roi tat (`tai_lieu/SO_SANH_LLM.md` muc "QUYET DINH").
 - 03/10 khuya: chu du an CHOT DEEPSEEK lan nua ("toi se cung cap chi phi LLM toi da; quan trong la khai thac hieu qua, ke ca thay cau lam viec nang trong sandbox"; "may nha da chot deepseek thi dung deepseek"). Khong can nhac lai. Viec co hoc / nang (boc, dem, quet rong, gia thuyet nhap) giao cho DeepSeek (`b nc tho`, `q`); cloud giu suy luan + quyet. **Sandbox cloud CHUA goi duoc**: host `api.ai-box.vn` bi chinh sach mang chan (CONNECT 403, do 03/10) va khong co bien `AIBOX_API_KEY` -> chu du an tu lam qua menu moi truong (Edit): them host vao Network access (Custom) + dat `AIBOX_API_KEY` o muc bien / API credentials (phien MOI moi thay). KHONG dan khoa vao chat / repo.
+
+## Dang o dau (09/10 toi, cloud: MINI-BRAIN CANCUBO - LENH MOI cua chu du an, uu tien hon moi viec khac)
+- Chu du an 09/10 (nguyen y): doc lenh truoc, ngung viec khong lien quan; chay BAN THU NHO The Brain tren Linux (cao du lieu -> boc tach co che -> kiem nghiem -> tinh chinh), chi can chat luong; buoc nao can du lieu ngoai thi bao de may nha chay; mo xe 1-2 con bot, thu ki tren gia lap VA MT5 (may nha chay MT5 roi cat du lieu sang), so sanh de tim QUY LUAT BACKTEST. Tai lieu: `tai_lieu/MINI_BRAIN_CANCUBO.md` (day chuyen, co che, luat, don, lenh).
+- XONG + test: bot CanCuBo (CCBSN v2.6 + .set 2.7, vang) boc tach tu lenh that, **khop tuyet doi 2.246/2.246 chuoi** (`python3 -m nhan.ea_cancubo_lai kiem`); EA dung lai `ea_CanCuBoLai.mq5` tai tao 2.244/2.244 chuoi tren duong gia toi thieu (`vong-kin`); dung cu `nhan/so_ea_voi_tester.py` (luat tick 4 diem/phut, lech gio, quet luat x ratchet, so 3 chieu goc <-> mo phong <-> tester) tu kiem tren gia tong hop co dap an: chon DUNG luat 4/4; 126 bai + dot bien 65/68 bat (3 tuong duong); da tim va sua 1 LOI THAT (moc "mo mai" nam 9999 tran int64 ns tach chuoi dang mo) .
+- CHUA: so voi gia M1 that + MT5 tester - Linux khong co gia. Luat 4 tick moi *tuong thich* voi lenh that (SL giay :40/:20 theo chieu nen), CHUA kiem. Tin hieu vao (`InpIndiMode=8`) CHUA hieu; ratchet hay follow cua SL CHUA phan biet.
+- May nha phai: nap ma moi MOT lan (thu 20261008-165737-eea9 A-F + 20261008-094857-6bd4); thu moi `20261009-175130-b1d0` (MINI-BRAIN-CANCUBO). Sau do 5 don `viec/cho/00-sev-*` (the `so-ea-v1`, uu_tien 0) tu chay: xuat gia M1 vang 2020 (~4 MB) + 4 lan tester (2 cua so x Model 1/0, ratchet 1); chi doan kham_pha, khong niem phong / xac_nhan.
+- Viec ke tiep (cloud, khi du lieu ve): `git pull` roi `python3 -m nhan.so_ea_voi_tester luat|so --thu-muc du_lieu_gia ...` (lenh o muc 6 cua tai lieu); neu luat tick `RO` -> chinh `ea_gia_lap` cho khop; roi quet tin hieu vao (Ichimoku?) va 2 don `ratchet=0`.
+- **DOI HUONG 09/10 toi (xem quyet dinh dau danh sach)**: viec Mini-Brain o tren la DUONG 'KHONG CO FILE' (dung lai tu lenh that). Voi bot da co file thi di duong MT5 OPTIMIZE. HIEN TRANG MA (da kiem 09/10): (a) cac script goc cu (`chay_bench_quan_tri.py`, `_z5_don_bay.py`, `_quet_placebo_rong.py`, `_bo_ba.py`...) TUNG chay `Optimization=1` (quet day du, `||Y` trong `[TesterInputs]`) cho EA tu viet; `qwen/tac_tu.py` ghi 'Optimization=2 (di truyen) bo sot co che, luon dung =1'; (b) duong EA nguoi khac (`nhan/ea_tho.py`: `lap_lenh`/`chay`/`quet`/`tinh`) CHUA co Optimize: `tinh` chay tung bo MOT lan MT5 (toi da 7 bo, tester 1 cai) => cham, la lo hong that; (c) kho bot that: CCBSN = `.ex5` hop den + 10 `.set` (co khoang `||buoc||toi||Y/N`), CLMCA = `.mq5` + 5 `.set` (`KHO_CO_CHE_BOT.md`).
+- DE XUAT viec ke tiep (cho chu du an chot o phien moi, chua lam): **`ea_tho_toi_uu`** = cong cu nc moi cho may nha: dung `.ini` voi `Optimization=1` (neu luoi > ~50k bo thi `=2`), `[TesterInputs]` lay tu `.set` (chon vai tham so co nghia, dat `Y`), chi tren doan `kham_pha`, model 0 (khong Model 1 lac quan), doc XML ket qua (moi dong = mot bo tham so: loi, DD, so lenh), loc bang cong co lai sau phi + maxDD < 80% + >= 20 lenh, lay top-K, xac_nhan DUNG MOT LAN bo tot nhat tren `xac_nhan`; viet + test tren Linux (bo doc XML, bo sinh `.ini`) trong khi may nha chay thu 1 lan that. Roi **lop quan li von / lenh ben ngoai**: `.ex5` hop den KHONG them duoc vao (tester chi chay MOT EA) => lop ngoai chi gan duoc len EA co ma nguon (CLMCA `.mq5`, va `ea_CanCuBoLai.mq5` da dung lai - khop 2.244/2.244 chuoi, la cho gan lop ngoai cho CanCuBo); lop thu: dung lo theo equity, tran lo ngay, nhan lot theo von, loc phien, chot mot phan, hedge khi sau; tham so lop ngoai cung dua vao Optimize.
+- 5 don `00-sev-*` o tren van la 'kiem EA dung lai tren MT5 that' - van huu ich (khong gan lop ngoai len EA chua duoc doi chieu MT5) nhung KHONG con la uu tien so 1; chu du an muon thi ha uu_tien / xoa.
 
 ## Dang o dau (09/10, cloud: THUOC DO SWAP + CHAY THU TREN LINUX TRUOC KHI CHAY RONG)
 - Chu du an 09/10 (nguyen y): chay tren Linux nay truoc khi chay rong; lap di lap lai tren du lieu DA BIET de toi uu phuong phap + quy trinh, tu SEEKER, HEPHAESTUS den cac module khac; sau cung chay rong 34 luong o may nha; can du lieu MT5 thi giao may nha chay MAU roi day len de so sanh. -> bo do theo module o Linux (task #11), may nha chi nhan mau nho, chua chay rong.
