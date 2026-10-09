@@ -356,6 +356,14 @@ def test_them_bid_kieu_bid_giu_nguyen_va_tu_choi_dau_vao_sai():
         B.them_bid(b, "san", pd.date_range("2019-01-02", periods=3, freq="1min"), np.array([0.1, 0.2]))
 
 
+def test_them_bid_loai_gia_la_bi_tu_choi_ke_ca_khi_da_co_du_idx_va_spread():
+    # co du idx + sp_gia thi chi con kiem loai gia: 'ask' khong duoc lang le coi la 'san'
+    b = _bang(_lenh("2019-01-02 10:00:00", 1, 1.0)).assign(gia_mo=1.0, gia_dong=1.0, chieu=1)
+    idx = pd.date_range("2019-01-02 09:59", periods=3, freq="1min")
+    with pytest.raises(ValueError, match="dang_gia phai la"):
+        B.them_bid(b, "ask", idx, np.array([0.1, 0.1, 0.1]))
+
+
 def test_ghep_cung_chieu_gio_gia_va_dem_lenh_le():
     tester = _bang(_lenh("2019-01-02 10:00:00", 1, 1.0000), _lenh("2019-01-02 10:05:00", -1, 1.0020), _lenh("2019-01-02 10:10:00", 1, 0.9990))
     bien_the = _bang(_lenh("2019-01-02 10:00:20", 1, 1.00003), _lenh("2019-01-02 10:05:00", -1, 1.0020), _lenh("2019-01-02 10:10:00", 1, 0.9980))
@@ -420,6 +428,17 @@ def test_ghep_chi_so_hang_khong_phu_thuoc_thu_tu_dong_cua_bang():
     tester = _bang(_lenh("2019-01-02 12:00:00", 1, 1.2), _lenh("2019-01-02 10:00:00", 1, 1.0))
     bien_the = _bang(_lenh("2019-01-02 10:00:00", 1, 1.0), _lenh("2019-01-02 12:00:00", 1, 1.2))
     assert B.ghep_lenh(bien_the, tester, 60, 0.01)["cap"] == [(0, 1), (1, 0)]
+
+
+def test_ghep_cap_va_chi_a_xep_theo_chi_so_hang_ke_ca_khi_lan_mua_ban():
+    # ham duyet MUA truoc roi BAN; ket qua van phai xep theo chi so hang cua bang vao (khong theo thu tu duyet)
+    tester = _bang(_lenh("2019-01-02 10:05:00", 1, 1.0), _lenh("2019-01-02 10:00:00", -1, 1.0))
+    bien_the = _bang(_lenh("2019-01-02 10:00:00", -1, 1.0), _lenh("2019-01-02 10:05:00", 1, 1.0),
+                     _lenh("2019-01-02 11:00:00", -1, 1.0), _lenh("2019-01-02 11:05:00", 1, 1.0))
+    g = B.ghep_lenh(bien_the, tester, 60, 0.01)
+    assert g["cap"] == [(0, 1), (1, 0)]                                    # nguoc lai (1, 0), (0, 1) neu khong xep
+    assert g["chi_a"] == [2, 3]                                            # nguoc lai [3, 2] neu khong xep
+    assert g["chi_b"] == []
 
 
 # ============================================================================================================ 4. SO SANH
@@ -679,6 +698,23 @@ def test_chay_bar_khung_khac_cho_so_nen_khac(m1_3ngay):
     assert len(set(n.values())) == 3                                      # khung mo phong khac nhau -> tap lenh khac nhau
 
 
+def test_chay_bar_chuyen_dung_che_do_gop_spread_xuong_gop_khung(m1_3ngay, monkeypatch):
+    goi, that = [], B.gop_khung
+    monkeypatch.setattr(B, "gop_khung", lambda seg, khung, spread="dau": goi.append((khung, spread)) or that(seg, khung, spread))
+    B.chay_bar(_ca_tay(m1_3ngay), m1_3ngay, B.BienThe("t", "bar", "M15", "duong_di", spread_gop="max"))
+    assert goi == [("M15", "max")]
+
+
+def test_chay_bar_spread_gop_max_dat_hon_dau_khi_spread_nhap_nhang(m1_3ngay):
+    m1 = m1_3ngay.copy()
+    m1["spread"] = np.where(np.arange(len(m1)) % 2 == 0, 10, 40)           # nen dau cua cua so 15 phut luc 10, luc 40; max luon 40
+    ca = _ca_tay(m1)
+    dau = B.chay_bar(ca, m1, B.BienThe("t", "bar", "M15", spread_gop="dau"))
+    mx = B.chay_bar(ca, m1, B.BienThe("t", "bar", "M15", spread_gop="max"))
+    assert dau.loi is None and mx.loi is None and len(dau.bang) > 0 and len(mx.bang) > 0
+    assert dau.lai > mx.lai
+
+
 def test_chay_bien_the_loi_ha_tang_thanh_dong_loi_khong_nem_ra_ngoai(m1_3ngay):
     ca = _ca_tay(m1_3ngay, ts=dict(TS_VUA, ten_la=3))
     r = B.chay_bien_the(ca, m1_3ngay, B.BienThe("t", "bar", "M5"))
@@ -739,6 +775,25 @@ def test_chay_mot_ca_canh_bao_khi_bang_lenh_khong_phai_cua_bao_cao(m1_3ngay):
     ca = dataclasses.replace(_ca_tay(m1_3ngay), t_truoc=999.0, n_t=3)
     (r,) = B.chay_mot_ca(ca, [B.BienThe("a", "bar", "M5")], m1=m1_3ngay, bang_tester=_tester_tay())
     assert r["canh_bao"] and "tong lai" in r["canh_bao"][0]
+
+
+def test_chay_mot_ca_truyen_dung_von_ngay_cua_so_va_dung_sai_vao_so_sanh(m1_3ngay, monkeypatch):
+    bat, that = [], B.so_sanh_bang
+    monkeypatch.setattr(B, "so_sanh_bang", lambda a, b, **kw: bat.append(kw) or that(a, b, **kw))
+    ca = _ca_tay(m1_3ngay)
+    bt = B.BienThe("a", "bar", "M15", "cuc_tri")
+    B.chay_mot_ca(ca, [bt], m1=m1_3ngay, bang_tester=_tester_tay())
+    qc = B.quy_cach_ca(ca, float(np.nanmedian(B.cat_cua_so(m1_3ngay, ca)["close"].to_numpy(float))))
+    tg, tp = B.dung_sai_cua(ca, bt, qc.pip)
+    assert bat == [dict(tol_giay=tg, tol_gia=tp, pip=qc.pip, von=ca.von, ngay=ca.ngay, t0=ca.tu, t1=ca.den_het)]
+    assert tg == 1350.0                                                        # 1,5 nen M15, khong phai mac dinh 120 s
+
+
+def test_chay_mot_ca_ghi_giay_chay_lam_tron_hai_so(m1_3ngay, monkeypatch):
+    that = B.chay_bien_the
+    monkeypatch.setattr(B, "chay_bien_the", lambda ca, seg, bt, exe=None: dataclasses.replace(that(ca, seg, bt, exe), giay=1.2399))
+    (r,) = B.chay_mot_ca(_ca_tay(m1_3ngay), [B.BienThe("a", "bar", "M5")], m1=m1_3ngay, bang_tester=_tester_tay())
+    assert r["giay"] == 1.24
 
 
 def test_quet_hai_luong_cho_ket_qua_giong_mot_luong(tmp_path, m1_3ngay):
@@ -969,6 +1024,22 @@ def test_chay_ea_dung_cau_hinh_da_chot_tick_1_point_60_giay_5_chu_so(exe):
     kq = B.chay_ea(ca, m1, B.BienThe("e", "ea", "M1", thu_tu="thap_truoc"), exe)
     assert len(kq.bang) == len(tay) and kq.lai == pytest.approx(float(tay["lai"].sum()), abs=1e-9)
     assert kq.bang["gia_mo"].to_numpy() == pytest.approx(tay["gia_mo"].to_numpy())
+    # gio mo / dong den tung giay phu thuoc `giay_bar` (rai tick trong nen); sut giam % phu thuoc von * f dua cho EA
+    assert kq.bang["mo"].equals(tay["mo"]) and kq.bang["dong"].equals(tay["dong"])
+    assert kq.dd_pct > 0 and kq.dd_pct == pytest.approx(float(r["kq"]["max_dd_pct"]))
+
+
+@can_cxx
+def test_chay_ea_nhan_spread_dua_vao_gia_san_va_tru_dung_spread_da_nhan(exe):
+    m1 = B.m1_tong_hop(seed=2, ngay=1.0, spread_pts=20)
+    ca = dataclasses.replace(_ca_tay(m1, ts=B.CAU_HINH_NHAY, ngay=1), f=1.32)
+    kq = B.chay_ea(ca, m1, B.BienThe("e", "ea", "M1", thu_tu="thap_truoc", nhan_spread=2.0), exe)
+    mua, ban = kq.bang[kq.bang["chieu"] > 0], kq.bang[kq.bang["chieu"] < 0]
+    assert len(mua) > 5 and len(ban) > 5
+    assert (mua["gia_mo"] - mua["bid_mo"]).to_numpy() == pytest.approx(2 * 20 * 1e-5, abs=1e-9)       # MUA mo o ASK = BID + 2 x 20 point
+    assert (ban["gia_mo"] - ban["bid_mo"]).abs().max() == 0                                             # BAN mo o BID
+    dong_ban = ban[ban["dong"].notna()]
+    assert len(dong_ban) > 0 and (dong_ban["gia_dong"] - dong_ban["bid_dong"]).to_numpy() == pytest.approx(2 * 20 * 1e-5, abs=1e-9)
 
 
 @can_cxx
