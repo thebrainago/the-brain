@@ -258,6 +258,8 @@ def chay(exe, tk: dict, von: float, tham_so: dict | None = None, netting: bool =
          sl_thi_truong: bool = False) -> dict:
     """Chay EA tren chuoi tick. Tra {'ok', 'ma_thoat', 'kq' (dict so tu RES), 'lenh' (DataFrame), 'log' (list dong LOG), 'loi'}.
     `kq`: n_mo, n_dong, n_tp, n_ea, n_sl, balance, equity, con_mo, lot_con_mo, spread_con_mo, max_open, max_lot_open, max_dd_pct...
+    `kq['gia_lech']`: so lan EA dat SL/TP (PositionModify / Buy / Sell) ma gia KHONG nam tren luoi chu so (thieu NormalizeDouble) - san gia van
+    nhan, MT5 that co the tu choi 'Invalid stops' (10016): bat ky EA nao muon chay that phai de so nay = 0.
     `hop_dong`: kich thuoc hop dong (mac dinh san gia 100000 = FX; vang = 100). `lot`: (min, max, buoc) cua ma. `sl_thi_truong`: SL khop o
     GIA TICK (co truot gia) thay vi dung muc SL (mac dinh, nhu tester MT5 do duoc tren vang)."""
     tm = Path(thu_muc) if thu_muc else Path(tempfile.mkdtemp(prefix="ea_gia_lap_run_"))

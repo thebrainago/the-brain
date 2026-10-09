@@ -76,6 +76,7 @@ static double g_balance = 0.0, g_von = 0.0, g_peak = 0.0, g_maxdd = 0.0, g_min_e
 static long long g_n_mo = 0, g_n_dong = 0, g_n_tp = 0, g_n_ea = 0, g_n_sl = 0;
 static bool g_sl_thi_truong = false;           // SL khop o gia tick (true) hay dung muc SL (false, mac dinh)
 static int g_max_open = 0;
+static long long g_gia_lech = 0;                // so lan dat SL/TP KHONG nam tren luoi chu so (chua NormalizeDouble): MT5 that co the tra 'Invalid stops' (10016)
 static double g_max_lot_open = 0.0;
 static FILE *g_csv = nullptr;
 
@@ -95,7 +96,11 @@ static inline double NormalizeDouble(double v, int d)
    const double k = std::pow(10.0, d);
    return std::round(v * k) / k;
   }
+// gia khac 0 ma khong bang chinh NormalizeDouble cua no = chua chuan hoa (vd. 130022 * 0.01 = 1300.2200000000003)
+static inline bool gia_lech(double x) { return x != 0.0 && x != NormalizeDouble(x, g_digits); }
 static inline int StringLen(const string &s) { return (int)s.size(); }
+// ArraySize cho mang tinh (kich thuoc biet luc bien dich): du cho mang du lieu nhung vao EA (vd. ea_CanCuBoLai.mq5 :: G_VAO[]).
+template <class T, size_t N> static inline int ArraySize(const T (&)[N]) { return (int)N; }
 static inline string StringSubstr(const string &s, int pos, int len = -1)
   {
    if(pos < 0 || pos > (int)s.size())
@@ -241,7 +246,7 @@ class CTrade
   {
    ulong m_magic = 0;
 
-   bool mo(int type, double vol, const string &comment)
+   bool mo(int type, double vol, const string &comment, double sl = 0.0, double tp = 0.0)
      {
       const double so_buoc = vol / g_vstep;
       if(!(vol >= g_vmin - 1e-9 && vol <= g_vmax + 1e-9 && std::fabs(so_buoc - std::round(so_buoc)) < 1e-6))
@@ -255,8 +260,10 @@ class CTrade
       q.type = type;
       q.vol = vol;
       q.open = type == POSITION_TYPE_BUY ? g_ask : g_bid;
-      q.sl = 0.0;
-      q.tp = 0.0;
+      q.sl = sl;
+      q.tp = tp;
+      if(gia_lech(sl) || gia_lech(tp))
+         g_gia_lech++;
       q.spread_mo = g_ask - g_bid;
       q.comment = comment.substr(0, 31);          // MT5 cat comment o 31 ky tu
       q.magic = (long long)m_magic;
@@ -273,19 +280,21 @@ public:
    void SetExpertMagicNumber(ulong m) { m_magic = m; }
    void SetDeviationInPoints(ulong) {}
    bool SetTypeFillingBySymbol(const string &) { return true; }
-   bool Buy(double vol, const string &, double, double, double, const string &comment)
+   bool Buy(double vol, const string &, double, double sl, double tp, const string &comment)
      {
-      return mo(POSITION_TYPE_BUY, vol, comment);
+      return mo(POSITION_TYPE_BUY, vol, comment, sl, tp);
      }
-   bool Sell(double vol, const string &, double, double, double, const string &comment)
+   bool Sell(double vol, const string &, double, double sl, double tp, const string &comment)
      {
-      return mo(POSITION_TYPE_SELL, vol, comment);
+      return mo(POSITION_TYPE_SELL, vol, comment, sl, tp);
      }
    bool PositionModify(ulong ticket, double sl, double tp)
      {
       for(auto &q : g_pos)
          if(q.ticket == ticket)
            {
+            if(gia_lech(sl) || gia_lech(tp))
+               g_gia_lech++;
             q.sl = sl;
             q.tp = tp;
             g_retcode = 10009;
@@ -486,5 +495,6 @@ int main(int argc, char **argv)
                (int)g_pos.size(), lot_con_mo, sp_con_mo);
    std::printf("RES max_open %d\nRES max_lot_open %.4f\nRES max_dd_pct %.6f\nRES min_equity %.6f\n", g_max_open, g_max_lot_open,
                g_maxdd * 100.0, g_min_eq);
+   std::printf("RES gia_lech %lld\n", g_gia_lech);
    return 0;
   }
