@@ -84,6 +84,7 @@ KHUNG_GIAY = {"M1": 60.0, "M5": 300.0, "M15": 900.0, "M30": 1800.0, "H1": 3600.0
 _QUY_TAC = {"M1": "1min", "M5": "5min", "M15": "15min", "M30": "30min", "H1": "1h", "H4": "4h", "D1": "1D"}
 SPREAD_GOP = ("dau", "cuoi", "max", "tb")
 THU_TU_TICK = ("theo_nen", "thap_truoc", "cao_truoc", "xen_ke")
+DUONG_TICK = ("day", "ohlc4")        # day = buoc 1 point (tick_tu_bar) ; ohlc4 = 4 tick/nen o giay 0/20/40/59 (tick_ohlc4: mo hinh Model 1 cua tester MT5)
 
 #: Sai lech cho phep giua tong lai bang lenh tester va bao cao (tuong doi): vuot = bang lenh khong phai cua bao cao nay (hoac bi cat).
 DUNG_SAI_NHAT_QUAN = 0.005
@@ -439,7 +440,8 @@ def _lai_thang(a: pd.DataFrame, b: pd.DataFrame, von: float, het: pd.Timestamp |
 # ============================================================ 4. BIEN THE
 @dataclass(frozen=True)
 class BienThe:
-    """Mot cach mo phong. `kieu`: 'bar' (engine tren nen gop tu M1) | 'ea' (EA that tren tick sinh tu M1)."""
+    """Mot cach mo phong. `kieu`: 'bar' (engine tren nen gop tu M1) | 'ea' (EA that tren tick sinh tu M1). `duong` (chi 'ea'): 'day' = tick tung point
+    (`tick_tu_bar`), 'ohlc4' = 4 tick/nen o giay 0/20/40/59 (`tick_ohlc4` - mo hinh 'Model 1 - 1 minute OHLC' cua tester MT5)."""
     ten: str
     kieu: str = "bar"
     khung: str = "M1"
@@ -447,6 +449,7 @@ class BienThe:
     nhan_spread: float = 1.0
     spread_gop: str = "dau"
     thu_tu: str = "theo_nen"
+    duong: str = "day"
 
     def __post_init__(self):
         if not self.ten or not isinstance(self.ten, str):
@@ -465,6 +468,12 @@ class BienThe:
             raise ValueError("nhan_spread phai la so >= 0, nhan %r" % (self.nhan_spread,))
         if self.kieu == "ea" and self.khung != "M1":
             raise ValueError("bien the 'ea' sinh tick tu M1: khung phai la M1, nhan %s" % self.khung)
+        if self.duong not in DUONG_TICK:
+            raise ValueError("duong %r khong hop le (co %s)" % (self.duong, DUONG_TICK))
+        if self.kieu == "bar" and self.duong != "day":
+            raise ValueError("duong chi co nghia voi bien the 'ea' (bien the 'bar' khong sinh tick)")
+        if self.duong == "ohlc4" and self.thu_tu == "xen_ke":
+            raise ValueError("duong='ohlc4' khong co thu_tu 'xen_ke' (tester MT5 khong xen ke theo so thu tu nen)")
 
 
 def bien_the_mac_dinh() -> list[BienThe]:
@@ -477,6 +486,8 @@ def bien_the_mac_dinh() -> list[BienThe]:
     ds.append(BienThe("bar_m15_duong_di_spmax", "bar", "M15", "duong_di", spread_gop="max"))
     for tt in THU_TU_TICK:
         ds.append(BienThe("ea_m1_" + tt, "ea", "M1", thu_tu=tt))
+    for tt in ("theo_nen", "thap_truoc", "cao_truoc"):
+        ds.append(BienThe("ea_m1_ohlc4_" + tt, "ea", "M1", thu_tu=tt, duong="ohlc4"))
     return ds
 
 
@@ -552,14 +563,18 @@ def bang_tu_ea(lenh: pd.DataFrame, tk: dict, qc: LU.QuyCach, f: float) -> pd.Dat
 
 
 def chay_ea(ca: Ca, seg: pd.DataFrame, bt: BienThe, exe, han_giay: int = 1800) -> KetQuaBT:
-    """CHINH `ea_LuoiDayDu.mq5` tren san gia, tick sinh tu M1 theo `bt.thu_tu` (buoc 1 point, giay_bar = 60). `exe`: file da bien dich."""
+    """CHINH `ea_LuoiDayDu.mq5` tren san gia, tick sinh tu M1 theo `bt.thu_tu`: `bt.duong` = 'day' (buoc 1 point, giay_bar = 60) hoac 'ohlc4' (4 tick/nen,
+    giay 0/20/40/59). `exe`: file da bien dich."""
     t = time.time()
     qc = quy_cach_ca(ca, float(np.nanmedian(seg["close"].to_numpy(float))))
     ts = LU.ThamSo(**dict(ca.ts, khop_bar="duong_di"))          # chi de dich tham so luoi sang input EA
     ps = G.tham_so_ea_tu_luoi(ts)
     ps["InpPipSize"] = qc.pip
     gia = seg if bt.nhan_spread == 1.0 else seg.assign(spread=seg["spread"] * float(bt.nhan_spread))
-    tk = G.tick_tu_bar(gia, bt.thu_tu, point=qc.point, giay_bar=60.0, paso=qc.point)
+    if bt.duong == "ohlc4":
+        tk = G.tick_ohlc4(gia, bt.thu_tu, point=qc.point)
+    else:
+        tk = G.tick_tu_bar(gia, bt.thu_tu, point=qc.point, giay_bar=60.0, paso=qc.point)
     r = G.chay(exe, tk, ca.von * ca.f, ps, digits=int(round(-math.log10(qc.point))), han_giay=han_giay)
     if not r["ok"]:
         raise RuntimeError("EA tren san gia khong chay duoc: %s %s" % (str(r["loi"])[-300:], r["log"][-3:]))
@@ -706,13 +721,14 @@ def m1_tong_hop(seed: int = 1, ngay: float = 2.0, spread_pts: int = 20, gia0: fl
 
 
 def tao_ca_tong_hop(exe, seed: int = 1, ngay: float = 2.0, thu_tu_that: str = "cao_truoc", ts: dict | None = None, von: float = 10000.0,
-                    f: float = 1.0, spread_pts: int = 20) -> tuple[Ca, pd.DataFrame, pd.DataFrame]:
-    """(ca, m1, bang_tester): 'tester' tong hop = EA that (`exe`) chay tren tick sinh tu M1 theo `thu_tu_that` - dap an da biet de thu bo thu."""
+                    f: float = 1.0, spread_pts: int = 20, duong_that: str = "day") -> tuple[Ca, pd.DataFrame, pd.DataFrame]:
+    """(ca, m1, bang_tester): 'tester' tong hop = EA that (`exe`) chay tren tick sinh tu M1 theo `thu_tu_that` va `duong_that` ('day' | 'ohlc4') - dap an
+    da biet de thu bo thu."""
     ts = dict(CAU_HINH_NHAY if ts is None else ts)
     m1 = m1_tong_hop(seed, ngay, spread_pts)
-    ca0 = Ca(ten="tong_hop_s%d_%s" % (seed, thu_tu_that), ma="AUDCAD", khung="M15", tu=m1.index[0], den_het=m1.index[-1], ngay=max(1, int(round(ngay))),
+    ca0 = Ca(ten="tong_hop_s%d_%s%s" % (seed, thu_tu_that, "" if duong_that == "day" else "_" + duong_that), ma="AUDCAD", khung="M15", tu=m1.index[0], den_het=m1.index[-1], ngay=max(1, int(round(ngay))),
              von=von, f=f, ts=ts, khoa=None, q=100.0, qc={}, so_khoa=None)
-    kq = chay_ea(ca0, m1, BienThe("that", "ea", "M1", thu_tu=thu_tu_that), exe)
+    kq = chay_ea(ca0, m1, BienThe("that", "ea", "M1", thu_tu=thu_tu_that, duong=duong_that), exe)
     b = kq.bang.drop(columns=["bid_mo", "bid_dong"])
     b["mo"] = pd.to_datetime(b["mo"]).dt.floor("s")
     b["dong"] = pd.to_datetime(b["dong"]).dt.floor("s")
@@ -721,15 +737,16 @@ def tao_ca_tong_hop(exe, seed: int = 1, ngay: float = 2.0, thu_tu_that: str = "c
     return ca, m1, b
 
 
-def tu_kiem(exe=None, ra=print, thu_tu_that: str = "cao_truoc", seeds=(1, 2, 3), ngay: float = 2.0) -> list[dict]:
-    """Chay moi bien the tren du lieu tong hop co dap an (`thu_tu_that`); in bang xep hang va tra cac dong tong hop."""
+def tu_kiem(exe=None, ra=print, thu_tu_that: str = "cao_truoc", seeds=(1, 2, 3), ngay: float = 2.0, duong_that: str = "day") -> list[dict]:
+    """Chay moi bien the tren du lieu tong hop co dap an (`thu_tu_that`, `duong_that`); in bang xep hang va tra cac dong tong hop."""
     exe = exe or bien_dich_ea()
     rows = []
     for s in seeds:
-        ca, m1, b = tao_ca_tong_hop(exe, s, ngay, thu_tu_that)
+        ca, m1, b = tao_ca_tong_hop(exe, s, ngay, thu_tu_that, duong_that=duong_that)
         rows += chay_mot_ca(ca, bien_the_mac_dinh(), exe=exe, m1=m1, bang_tester=b)
     tong = tong_hop(rows)
-    ra("tu kiem: dap an = EA tren tick sinh tu M1 theo thu tu '%s' (%d hat x %.0f ngay, cau hinh nhay: %s)" % (thu_tu_that, len(seeds), ngay, CAU_HINH_NHAY))
+    ra("tu kiem: dap an = EA tren tick sinh tu M1 theo thu tu '%s', duong '%s' (%d hat x %.0f ngay, cau hinh nhay: %s)"
+       % (thu_tu_that, duong_that, len(seeds), ngay, CAU_HINH_NHAY))
     in_bang(tong, ra)
     return tong
 
@@ -761,6 +778,8 @@ def viet_bao_cao(rows: list[dict], tong: list[dict], duong: Path, bo_qua: dict |
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Bo thu mo phong: so cac phuong an mo phong voi bang lenh MT5 tester that.")
     ap.add_argument("--tu-kiem", action="store_true", help="kiem co dap an tren du lieu tong hop (khong can du lieu that)")
+    ap.add_argument("--thu-tu-that", default="cao_truoc", choices=THU_TU_TICK, help="--tu-kiem: thu tu tick cua 'tester' tong hop")
+    ap.add_argument("--duong-that", default="day", choices=DUONG_TICK, help="--tu-kiem: duong gia cua 'tester' tong hop (day | ohlc4)")
     ap.add_argument("--xong", default="viec/xong")
     ap.add_argument("--gia", default=None, help="thu muc du_lieu_gia (mac dinh: hop thu runner / du_lieu_gia)")
     ap.add_argument("--lenh", default=None, help="thu muc bang lenh tester (mac dinh: <gia>/mau_tester)")
@@ -772,7 +791,7 @@ def main(argv=None) -> int:
     ap.add_argument("--ghi", action="store_true", help="ghi reports/bo_thu_mo_phong.md")
     a = ap.parse_args(argv)
     if a.tu_kiem:
-        tu_kiem()
+        tu_kiem(thu_tu_that=a.thu_tu_that, duong_that=a.duong_that)
         return 0
     cac, bo = doc_cac_ca(a.xong, chi_sach=not a.ca_nhiem)
     if a.ma:

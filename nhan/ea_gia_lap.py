@@ -190,6 +190,40 @@ def tick_tu_bar(df: pd.DataFrame, thu_tu="thap_truoc", point: float = POINT, gia
                 bar_idx=np.concatenate(bidx))
 
 
+GIAY_OHLC4 = (0.0, 20.0, 40.0, 59.0)
+THU_TU_NEN = ("theo_nen", "thap_truoc", "cao_truoc", "xen_ke")
+
+
+def tick_ohlc4(df: pd.DataFrame, thu_tu="theo_nen", point: float = POINT, giay=GIAY_OHLC4) -> dict:
+    """Duong gia cua tester MT5 'Model 1 - 1 minute OHLC' tren nen M1: MOI nen = DUNG 4 tick (open, cuc tri 1, cuc tri 2, close) o giay 0 / 20 / 40 / 59
+    cua nen. Day la THU tinh tu deal that (CanCuBo tren vang, 09/10/2026, `reports/fixture/tester_cancubo_*_deals.csv.gz`): 954 + 1290 lan thoat
+    chuoi roi vao giay 40 (86-88%) / 20 (9-11%) / 0 (1-2%) / 59 (1%), moi lenh DAU chuoi o giay 0, lenh DCA o giay 40 (88%) / 20 (12%); khoang cach
+    DCA vuot muc 100 pip trung vi 104, p95 129. CHUA doi chieu voi nen M1 that (Linux khong co gia) - `giay` va `thu_tu` la tham so de bo thu xep hang.
+
+    `thu_tu` nhu `tick_tu_bar`: 'theo_nen' (nen tang: open, LOW, HIGH, close; nen giam: open, HIGH, LOW, close), 'thap_truoc', 'cao_truoc', 'xen_ke'.
+    Tra dict mang cung dang `tick_tu_bar`: bid, spread (GIA), time (giay), bar (giay bat dau nen), bar_idx. 4 tick / nen ke ca nen phang (open = high =
+    low = close): EA van thay tick dau nen o giay 0 (mo chuoi theo nen moi)."""
+    if thu_tu not in THU_TU_NEN:
+        raise ValueError("thu_tu phai la mot trong %s, nhan %r" % (THU_TU_NEN, thu_tu))
+    g = np.asarray(giay, float)
+    if g.shape != (4,) or not (np.diff(g) > 0).all() or g[0] < 0 or g[-1] >= 60:
+        raise ValueError("giay phai la 4 so tang dan trong [0, 60), nhan %r" % (giay,))
+    if not point > 0:
+        raise ValueError("point phai > 0, nhan %r" % (point,))
+    n = len(df)
+    o, h, l, c = (np.rint(df[k].to_numpy(float) / point).astype(np.int64) for k in ("open", "high", "low", "close"))
+    if n and ((h < np.maximum(o, c)) | (l > np.minimum(o, c))).any():
+        raise ValueError("nen M1 hong: high < max(open, close) hoac low > min(open, close) (nen dau tien: %d)"
+                         % int(np.flatnonzero((h < np.maximum(o, c)) | (l > np.minimum(o, c)))[0]))
+    thap = c >= o if thu_tu == "theo_nen" else (np.arange(n) % 2 == 0) if thu_tu == "xen_ke" else np.full(n, thu_tu == "thap_truoc")
+    p1, p2 = np.where(thap, l, h), np.where(thap, h, l)
+    bid = (np.stack([o, p1, p2, c], axis=1) * point).ravel()
+    sp = df["spread"].to_numpy(float) * point if "spread" in df.columns else np.zeros(n)
+    t0 = df.index.values.astype("datetime64[s]").astype(np.int64).astype(np.float64)
+    return dict(bid=bid, spread=np.repeat(sp, 4), time=(t0[:, None] + g[None, :]).ravel(), bar=np.repeat(t0, 4),
+                bar_idx=np.repeat(np.arange(n, dtype=np.int64), 4))
+
+
 def barra_tu_tick(tk: dict, point: float = POINT, nhieu: float = 1e-9) -> pd.DataFrame:
     """MOI TICK = MOT BAR (open = close = bid; high = bid + nhieu, low = bid - nhieu) de `luoi.chay` nhin DUNG duong gia ma EA thay:
     khong con khoang mu trong bar (thu tu cao / thap, mo lai o gia dong bar, TP tinh o cao nhat). Day la cach doi chieu logic
@@ -220,9 +254,12 @@ def ghi_tick(duong, tk: dict) -> None:
 
 # ------------------------------------------------------------------ chay
 def chay(exe, tk: dict, von: float, tham_so: dict | None = None, netting: bool = False, thu_muc=None,
-         han_giay: int = 300, digits: int | None = None) -> dict:
+         han_giay: int = 300, digits: int | None = None, hop_dong: float | None = None, lot: tuple | None = None,
+         sl_thi_truong: bool = False) -> dict:
     """Chay EA tren chuoi tick. Tra {'ok', 'ma_thoat', 'kq' (dict so tu RES), 'lenh' (DataFrame), 'log' (list dong LOG), 'loi'}.
-    `kq`: n_mo, n_dong, n_tp, n_ea, balance, equity, con_mo, lot_con_mo, spread_con_mo, max_open, max_lot_open, max_dd_pct..."""
+    `kq`: n_mo, n_dong, n_tp, n_ea, n_sl, balance, equity, con_mo, lot_con_mo, spread_con_mo, max_open, max_lot_open, max_dd_pct...
+    `hop_dong`: kich thuoc hop dong (mac dinh san gia 100000 = FX; vang = 100). `lot`: (min, max, buoc) cua ma. `sl_thi_truong`: SL khop o
+    GIA TICK (co truot gia) thay vi dung muc SL (mac dinh, nhu tester MT5 do duoc tren vang)."""
     tm = Path(thu_muc) if thu_muc else Path(tempfile.mkdtemp(prefix="ea_gia_lap_run_"))
     try:
         tm.mkdir(parents=True, exist_ok=True)
@@ -233,6 +270,12 @@ def chay(exe, tk: dict, von: float, tham_so: dict | None = None, netting: bool =
             lenh.append("--netting")
         if digits is not None:
             lenh.append("--digits=%d" % digits)
+        if hop_dong is not None:
+            lenh.append("--contract=%r" % float(hop_dong))
+        if lot is not None:
+            lenh += ["--vmin=%r" % float(lot[0]), "--vmax=%r" % float(lot[1]), "--vstep=%r" % float(lot[2])]
+        if sl_thi_truong:
+            lenh.append("--sl-thi-truong")
         for k, v in (tham_so or {}).items():
             lenh.append("%s=%r" % (k, float(v)))
         p = subprocess.run(lenh, capture_output=True, text=True, timeout=han_giay)

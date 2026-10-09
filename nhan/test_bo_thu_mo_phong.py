@@ -608,6 +608,9 @@ def test_bien_the_mac_dinh_ten_duy_nhat_va_du_hai_kieu():
     assert len(ten) == len(set(ten))
     assert {b.kieu for b in ds} == {"bar", "ea"}
     assert {b.thu_tu for b in ds if b.kieu == "ea"} == set(B.THU_TU_TICK)
+    assert {(b.thu_tu, b.duong) for b in ds if b.kieu == "ea"} == \
+           {(tt, "day") for tt in B.THU_TU_TICK} | {(tt, "ohlc4") for tt in ("theo_nen", "thap_truoc", "cao_truoc")}
+    assert all(b.duong == "day" for b in ds if b.kieu == "bar")
     assert {(b.khung, b.khop_bar) for b in ds if b.kieu == "bar" and b.nhan_spread == 1.0 and b.spread_gop == "dau"} == \
            {(k, m) for k in ("M1", "M5", "M15") for m in LU.MO_HINH_BAR}
     assert any(b.nhan_spread == 0.0 for b in ds) and any(b.nhan_spread == 2.0 for b in ds) and any(b.spread_gop == "max" for b in ds)
@@ -615,7 +618,8 @@ def test_bien_the_mac_dinh_ten_duy_nhat_va_du_hai_kieu():
 
 
 @pytest.mark.parametrize("kw", [dict(ten=""), dict(kieu="xyz"), dict(khung="M7"), dict(khop_bar="giua"), dict(spread_gop="la"), dict(thu_tu="ngau_nhien"),
-                                dict(nhan_spread=-1.0), dict(nhan_spread=float("nan")), dict(nhan_spread=float("inf")), dict(kieu="ea", khung="M5")])
+                                dict(nhan_spread=-1.0), dict(nhan_spread=float("nan")), dict(nhan_spread=float("inf")), dict(kieu="ea", khung="M5"),
+                                dict(kieu="ea", duong="la"), dict(kieu="bar", duong="ohlc4"), dict(kieu="ea", duong="ohlc4", thu_tu="xen_ke")])
 def test_bien_the_tu_choi_gia_tri_vo_ly(kw):
     with pytest.raises(ValueError):
         B.BienThe(**dict(dict(ten="x"), **kw))
@@ -986,6 +990,21 @@ def test_bo_thu_tim_ra_dung_thu_tu_tick_da_gieo(exe, that):
     dung = next(r for r in rows if r["bien_the"] == "ea_m1_" + that)
     assert dung["lech_dau"] is None and dung["khop_den"] == 1.0 and dung["khop_dong"] == 1.0 and dung["khac_lot"] == 0
     assert dung["phan_ra"] == {"cap": pytest.approx(0.0, abs=1e-6), "chi_bien_the": 0.0, "chi_tester": 0.0}
+
+
+@can_cxx
+@pytest.mark.parametrize("that", ["theo_nen", "cao_truoc"])
+def test_bo_thu_tim_ra_dung_duong_gia_4_tick_da_gieo(exe, that):
+    # dap an = EA chay tren duong gia 4 tick/nen (mo hinh Model 1 cua tester MT5): bien the 'ohlc4' cung thu tu phai khop 100%, cac bien the khac < 95%
+    ca, m1, b = B.tao_ca_tong_hop(exe, seed=2, ngay=1.0, thu_tu_that=that, duong_that="ohlc4")
+    assert len(b) > 50 and B.kiem_nhat_quan(ca, b) == []
+    rows = B.chay_mot_ca(ca, [v for v in B.bien_the_mac_dinh() if v.kieu == "ea"], exe=exe, m1=m1, bang_tester=b)
+    khop = {r["bien_the"]: r["ti_le_khop"] for r in rows}
+    ten = "ea_m1_ohlc4_" + that
+    assert khop[ten] == 1.0
+    assert all(v < 0.95 for k, v in khop.items() if k != ten), khop
+    t = B.tong_hop(rows)
+    assert t[0]["bien_the"] == ten and t[0]["sai_so_tb"] == pytest.approx(0.0, abs=1e-9)
 
 
 @can_cxx

@@ -2,12 +2,16 @@
 //
 // Bien dich CHINH ma nguon .mq5 (nhan/ea_gia_lap.py bo dong #property / #include, GIU nguyen so dong) cung mot lop gia lap
 // API MQL5 + mot SAN GIA (tai khoan HEDGING) chay theo tung tick:
-//   - moi tick: cap nhat BID / ASK -> kiem TP may chu (MUA dong khi Bid >= TP, BAN dong khi Ask <= TP, khop DUNG gia TP) -> OnTick()
+//   - moi tick: cap nhat BID / ASK -> kiem TP / SL may chu (MUA: TP khi Bid >= TP, SL khi Bid <= SL; BAN: TP khi Ask <= TP, SL khi
+//     Ask >= SL; khop DUNG muc TP / SL, hoac gia thi truong cua tick neu bat `--sl-thi-truong` cho SL) -> OnTick()
 //   - MUA khop o ASK, BAN khop o BID; khong truot gia, khong swap, khong margin / stop-out (EA khong dung cac thu do)
 // KHONG phai MT5: lenh `PositionGet*`, `CTrade`... chi mo phong hanh vi MT5 ma EA dung. No tra loi "logic EA co dung y khong"
 // (so lenh, gia mo, lot, tia, TP khop engine nhan/luoi.py), KHONG tra loi "MT5 that se cho gi" - viec do cua tester o may nha.
 //
-// Dung:  ea_gia_lap <ticks.bin> <lenh.csv> <von> [--netting] [Ten=gia_tri ...]
+// Dung:  ea_gia_lap <ticks.bin> <lenh.csv> <von> [--netting] [--contract=N] [--vmin=X] [--vmax=X] [--vstep=X] [--sl-thi-truong]
+//                   [Ten=gia_tri ...]
+//   --contract=N: kich thuoc hop dong (mac dinh 100000 = FX; vang XAUUSD = 100). --vmin / --vmax / --vstep: gioi han lot cua ma.
+//   --sl-thi-truong: SL khop o GIA TICK (truot gia neu tick nhay qua SL); mac dinh khop DUNG muc SL (tester MT5 do duoc cho vang: 09/10).
 //   ticks.bin = int64 n, roi 4 mang float64 do dai n: bid, spread (don vi GIA), thoi gian (giay), thoi gian bat dau nen.
 //   --digits=N: so chu so thap phan cua ma (mac dinh 5; point = 10^-N). Dung N lon (7-8) khi chuoi tick min hon point that,
 //   de lam tron TP cua EA khong lam lech quyet dinh so voi engine tinh bang so thuc.
@@ -37,7 +41,11 @@ enum ENUM_SYMBOL_INFO_INTEGER { SYMBOL_DIGITS };
 enum ENUM_ACCOUNT_INFO_INTEGER { ACCOUNT_MARGIN_MODE };
 enum ENUM_ACCOUNT_MARGIN_MODE { ACCOUNT_MARGIN_MODE_RETAIL_NETTING, ACCOUNT_MARGIN_MODE_EXCHANGE,
                                 ACCOUNT_MARGIN_MODE_RETAIL_HEDGING };
-enum ENUM_TIMEFRAMES { PERIOD_CURRENT = 0 };
+// Gia tri THAT cua MQL5 (M1 = 1 ... H1 = 16385 ... D1 = 16408). W1 / MN1 co tinh KHONG khai bao: EA dung chung -> loi bien dich, khong im lang sai.
+enum ENUM_TIMEFRAMES { PERIOD_CURRENT = 0, PERIOD_M1 = 1, PERIOD_M2 = 2, PERIOD_M3 = 3, PERIOD_M4 = 4, PERIOD_M5 = 5, PERIOD_M6 = 6,
+                       PERIOD_M10 = 10, PERIOD_M12 = 12, PERIOD_M15 = 15, PERIOD_M20 = 20, PERIOD_M30 = 30, PERIOD_H1 = 16385,
+                       PERIOD_H2 = 16386, PERIOD_H3 = 16387, PERIOD_H4 = 16388, PERIOD_H6 = 16390, PERIOD_H8 = 16392,
+                       PERIOD_H12 = 16396, PERIOD_D1 = 16408 };
 enum { INIT_SUCCEEDED = 0, INIT_FAILED = 1, INIT_PARAMETERS_INCORRECT = 2 };
 
 // ---------------------------------------------------------------- trang thai san gia
@@ -65,7 +73,8 @@ static std::vector<Pos> g_pos;
 static ulong g_next_ticket = 1;
 static int g_sel = -1;
 static double g_balance = 0.0, g_von = 0.0, g_peak = 0.0, g_maxdd = 0.0, g_min_eq = 1e300;
-static long long g_n_mo = 0, g_n_dong = 0, g_n_tp = 0, g_n_ea = 0;
+static long long g_n_mo = 0, g_n_dong = 0, g_n_tp = 0, g_n_ea = 0, g_n_sl = 0;
+static bool g_sl_thi_truong = false;           // SL khop o gia tick (true) hay dung muc SL (false, mac dinh)
 static int g_max_open = 0;
 static double g_max_lot_open = 0.0;
 static FILE *g_csv = nullptr;
@@ -113,7 +122,26 @@ template <class... A> static inline void PrintFormat(const char *f, A... a)
   }
 
 static inline datetime TimeCurrent() { return g_time; }
-static inline datetime iTime(const string &, ENUM_TIMEFRAMES, int) { return g_bar_time; }
+// iTime(.., PERIOD_CURRENT, 0) = nen cua khung bieu do (do chuoi tick quyet: `bar`). Khung ro (M1..D1) = gio tick cat xuong boi so cua khung
+// (gio may chu coi nhu epoch giay, D1 mo luc 00:00 may chu). shift != 0 KHONG ho tro -> dung chuong trinh (truoc 09/10 tra nen hien tai im lang).
+static inline long long giay_khung(ENUM_TIMEFRAMES tf)
+  {
+   if(tf < 16384)
+      return 60LL * (long long)tf;
+   return tf < 32768 ? 3600LL * (long long)(tf - 16384) : 86400LL;
+  }
+static inline datetime iTime(const string &, ENUM_TIMEFRAMES tf, int shift)
+  {
+   if(shift != 0)
+     {
+      std::printf("LOI iTime shift=%d: san gia chi ho tro shift 0\n", shift);
+      std::exit(3);
+     }
+   if(tf == PERIOD_CURRENT)
+      return g_bar_time;
+   const long long g = giay_khung(tf);
+   return (datetime)(((long long)g_time / g) * g);
+  }
 
 // ---------------------------------------------------------------- thong tin san / tai khoan
 static inline double SymbolInfoDouble(const string &, ENUM_SYMBOL_INFO_DOUBLE p)
@@ -189,18 +217,20 @@ static double lai_lenh(const Pos &q, double gia_dong)
    return (q.type == POSITION_TYPE_BUY ? gia_dong - q.open : q.open - gia_dong) * q.vol * g_contract;
   }
 
-static void dong_vi_the(int idx, double gia_dong, int ly_do)   // ly_do: 0 = TP may chu, 1 = EA
+static void dong_vi_the(int idx, double gia_dong, int ly_do)   // ly_do: 0 = TP may chu, 1 = EA, 2 = SL may chu
   {
    const Pos q = g_pos[idx];
    g_balance += lai_lenh(q, gia_dong);
    g_n_dong++;
    if(ly_do == 0)
       g_n_tp++;
+   else if(ly_do == 2)
+      g_n_sl++;
    else
       g_n_ea++;
    if(g_csv)
       std::fprintf(g_csv, "%llu,%d,%.4f,%.8f,%.8f,%lld,%lld,%s,%.8f,%s\n", q.ticket, q.type, q.vol, q.open, gia_dong,
-                   q.tick_mo, g_tick, ly_do == 0 ? "tp" : "ea", q.spread_mo, q.comment.c_str());
+                   q.tick_mo, g_tick, ly_do == 0 ? "tp" : ly_do == 2 ? "sl" : "ea", q.spread_mo, q.comment.c_str());
    g_pos.erase(g_pos.begin() + idx);
   }
 
@@ -327,16 +357,22 @@ static void theo_doi_von()
    g_max_lot_open = std::max(g_max_lot_open, lot);
   }
 
-static void tp_may_chu()
+static void sl_tp_may_chu()
   {
    for(int i = (int)g_pos.size() - 1; i >= 0; i--)
      {
       const Pos &q = g_pos[i];
-      if(q.tp <= 0.0)
-         continue;
-      const double eps = g_point * 1e-6;                   // nhieu dau phay dong khi gia = TP dung tung chu so
-      if(q.type == POSITION_TYPE_BUY ? g_bid + eps >= q.tp : g_ask <= q.tp + eps)
+      const double eps = g_point * 1e-6;                   // nhieu dau phay dong khi gia = TP / SL dung tung chu so
+      const bool mua = q.type == POSITION_TYPE_BUY;
+      // TP truoc, roi SL. Mot lenh khong the cham ca hai tren cung mot tick (TP va SL nam hai phia gia mo), tru khi EA dat sai phia
+      // (SL tren gia cho lenh MUA...) - khi do TP duoc uu tien nhu truoc day.
+      if(q.tp > 0.0 && (mua ? g_bid + eps >= q.tp : g_ask <= q.tp + eps))
+        {
          dong_vi_the(i, q.tp, 0);
+         continue;
+        }
+      if(q.sl > 0.0 && (mua ? g_bid <= q.sl + eps : g_ask >= q.sl - eps))
+         dong_vi_the(i, g_sl_thi_truong ? (mua ? g_bid : g_ask) : q.sl, 2);
      }
   }
 
@@ -360,6 +396,31 @@ int main(int argc, char **argv)
         {
          g_digits = std::atoi(argv[i] + 9);
          g_point = std::pow(10.0, -g_digits);
+         continue;
+        }
+      if(!std::strncmp(argv[i], "--contract=", 11))
+        {
+         g_contract = std::atof(argv[i] + 11);
+         continue;
+        }
+      if(!std::strncmp(argv[i], "--vmin=", 7))
+        {
+         g_vmin = std::atof(argv[i] + 7);
+         continue;
+        }
+      if(!std::strncmp(argv[i], "--vmax=", 7))
+        {
+         g_vmax = std::atof(argv[i] + 7);
+         continue;
+        }
+      if(!std::strncmp(argv[i], "--vstep=", 8))
+        {
+         g_vstep = std::atof(argv[i] + 8);
+         continue;
+        }
+      if(!std::strcmp(argv[i], "--sl-thi-truong"))
+        {
+         g_sl_thi_truong = true;
          continue;
         }
       const char *e = std::strchr(argv[i], '=');
@@ -400,7 +461,7 @@ int main(int argc, char **argv)
       g_ask = bid[i] + spr[i];
       g_time = (datetime)tm[i];
       g_bar_time = (datetime)bar[i];
-      tp_may_chu();
+      sl_tp_may_chu();
       OnTick();
       theo_doi_von();
      }
@@ -419,8 +480,8 @@ int main(int argc, char **argv)
    (void)chi_phi_con_mo;
    if(g_csv)
       std::fclose(g_csv);
-   std::printf("RES init_ok 1\nRES n_tick %lld\nRES n_mo %lld\nRES n_dong %lld\nRES n_tp %lld\nRES n_ea %lld\n", n, g_n_mo, g_n_dong,
-               g_n_tp, g_n_ea);
+   std::printf("RES init_ok 1\nRES n_tick %lld\nRES n_mo %lld\nRES n_dong %lld\nRES n_tp %lld\nRES n_ea %lld\nRES n_sl %lld\n", n,
+               g_n_mo, g_n_dong, g_n_tp, g_n_ea, g_n_sl);
    std::printf("RES balance %.6f\nRES equity %.6f\nRES con_mo %d\nRES lot_con_mo %.4f\nRES spread_con_mo %.6f\n", g_balance, eq,
                (int)g_pos.size(), lot_con_mo, sp_con_mo);
    std::printf("RES max_open %d\nRES max_lot_open %.4f\nRES max_dd_pct %.6f\nRES min_equity %.6f\n", g_max_open, g_max_lot_open,
