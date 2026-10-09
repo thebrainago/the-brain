@@ -400,7 +400,9 @@ CONG_CU: list[dict] = [
         "thu - chay nhieu .set duoi CUNG gt_id de so phep thu duoc dem dung. EA .ex5 (khong ma nguon) chi nhan bo_set "
         "hoac mac dinh, can terminal TAT 'Allow DLL imports'. Chi chay duoc o may nha co MT5 - o cloud tra loi ro "
         "'can may nha' (hay giao qua b cau). Hong ha tang (khong doc duoc bao cao, tester chet) KHONG tinh phep thu, KHONG tieu lan mo. Ket "
-        "qua DAT la 'canh bac co ky vong duong do duoc', chua phai chan ly.",
+        "qua DAT la 'canh bac co ky vong duong do duoc', chua phai chan ly. MT5 tester KHONG ghi swap (cot Swap luon 0): khi bao cao co bang "
+        "lenh, lai / CAGR trong ket qua la SAU swap uoc (chi_so.swap_tien, cagr_truoc_swap_pct = so tester goc); luoi / DCA giu lenh lau "
+        "bi nhieu nhat. Doan niem_phong ma KHONG uoc duoc swap (thieu ty le cua ma, K) = hong ha tang, khong tieu lan mo.",
         {"ea": _EA, "ma": _MA, "khung": _KHUNG,
          "doan": {"type": "string", "enum": ["kham_pha", "xac_nhan", "niem_phong"]},
          "tham_so": {"type": "object", "description": (

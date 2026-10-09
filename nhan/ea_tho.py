@@ -69,6 +69,7 @@ from nhan import chan_doan_tester as CDT
 from nhan import nc_du_lieu as NDL
 from nhan import nc_so_tay as ST
 from nhan import nc_thi_nghiem as TN
+from nhan import swap_uoc as SW
 
 LAB = Path(__file__).resolve().parent.parent
 KHO_JSON = LAB / "reports" / "ea" / "kho.json"
@@ -771,9 +772,16 @@ def kiem_cua_so(bc: dict, cs: dict) -> tuple[bool | None, int]:
     return (a <= tu <= den <= b and ngay >= 0.8 * cs["ngay"]), ngay
 
 
-def phan_quyet(bc: dict, doan: str, lenh: dict, cfg: dict, log_hong: str = "") -> tuple[str, str, dict]:
+def phan_quyet(bc: dict, doan: str, lenh: dict, cfg: dict, log_hong: str = "", swap: dict | None = None) -> tuple[str, str, dict]:
     """-> (trang_thai, ly_do, chi_so). `chi_so['ha_tang']=True`: hong ha tang, KHONG ghi so (khong tieu phep thu,
-    khong tieu mot lan mo niem phong, khong lo so vi ket qua tra ve khong kem so nao)."""
+    khong tieu mot lan mo niem phong, khong lo so vi ket qua tra ve khong kem so nao).
+
+    `swap` = ket luan `swap_uoc.uoc_tu_bao_cao` (None = khong co bang lenh de uoc: giu cach cu). MT5 tester KHONG ghi swap (cot Swap
+    luon 0 o moi bao cao do duoc 09/10/2026) nen `lai_rong` cua no la lai TRUOC swap, con tai khoan that tra / nhan swap moi dem - luoi / DCA
+    giu lenh lau nen bi nhieu nhat. `nguon == 'uoc'`: lai duoc CONG swap uoc (am = ton) truoc khi xet DAT; `cagr_pct` la so SAU swap
+    (`cagr_truoc_swap_pct` = so cu); 'do' (tester co ghi swap): lai_rong da gom, khong cong them. 'khong_uoc_duoc' khi DA doc duoc bang Deals
+    (thieu ty le swap cua ma / khong uoc duoc he so tien) -> o doan niem_phong KHONG cho DAT (hong ha tang, khong tieu lan mo niem phong).
+    maxDD KHONG sua (tester khong co duong von sau swap): chi canh bao can tren."""
     so: dict = {"ha_tang": False}
 
     def hong(ly: str):
@@ -797,22 +805,39 @@ def phan_quyet(bc: dict, doan: str, lenh: dict, cfg: dict, log_hong: str = "") -
     if doan == "niem_phong" and not do_tin:
         return hong("chi phi KHONG do duoc (%s): doan niem phong khong the DAT, nen khong tinh ket qua o day - "
                     "sua du lieu/nhan roi chay lai (chua tieu lan mo)" % ly_tin)
+    nguon_sw = (swap or {}).get("nguon")
+    if doan == "niem_phong" and nguon_sw == "khong_uoc_duoc" and swap.get("bang_doc_duoc"):
+        return hong("swap KHONG uoc duoc (%s): tester khong ghi swap, lai tester la TRUOC swap nen doan niem phong khong the DAT - "
+                    "bo sung ty le swap/nam cua ma (chi_phi_do) hoac bang lenh doc duoc roi chay lai (chua tieu lan mo)" % swap.get("ly"))
     von = float(bc.get("von") or lenh["von"])
     lai, dd, n = float(bc["lai_rong"]), float(bc["dd_pct"]), int(bc["so_lenh"])
-    cagr = ((1.0 + lai / von) ** (365.25 / ngay) - 1.0) * 100.0 if von > 0 and 1.0 + lai / von > 0 else -100.0
+    sw_tien = float(swap["swap"]) if nguon_sw == "uoc" and swap.get("swap") is not None else 0.0
+    lai_sau = lai + sw_tien                        # 'do': lai_rong da gom swap tester ghi; 'uoc': cong swap uoc; khong co: nhu cu
+
+    def _cagr(x: float) -> float:
+        return ((1.0 + x / von) ** (365.25 / ngay) - 1.0) * 100.0 if von > 0 and 1.0 + x / von > 0 else -100.0
+    cagr, cagr_truoc = _cagr(lai_sau), _cagr(lai)
     so.update(lai=round(lai, 2), von=von, cagr_pct=round(cagr, 2), dd_pct=round(dd, 2), so_lenh=n,
               pf=bc.get("pf"), ky_vong_lenh=bc.get("ky_vong"), chat_luong_pct=bc.get("chat_luong_pct"),
               do_tin_chi_phi="DO" if do_tin else "KHAI", ngay=int(ngay), cua_so_khop=cua_so_ok)
+    if swap is not None:
+        so.update(swap_nguon=nguon_sw, swap_tien=round(sw_tien, 2) if nguon_sw == "uoc" else None, lai_sau_swap=round(lai_sau, 2),
+                  cagr_truoc_swap_pct=round(cagr_truoc, 2), swap_ly=swap.get("ly"),
+                  swap_ty_le_nguon=(swap.get("ty_le") or {}).get("nguon"))
     toi_thieu = TN.LENH_TOI_THIEU_NIEM_PHONG if doan == "niem_phong" else TN.LENH_TOI_THIEU
     if n < toi_thieu:
         return "CHUA_DO_DUOC", "chi %d lenh < %d tren doan %s" % (n, toi_thieu, doan), so
-    if lai <= 0:
-        return "AM", "KHONG co lai sau phi: %+.2f tren von %.0f (%+.2f%%/nam), %d lenh" % (lai, von, cagr, n), so
+    if lai_sau <= 0:
+        if sw_tien and lai > 0:
+            return "AM", ("KHONG co lai sau phi VA swap: tester %+.2f (truoc swap, %+.2f%%/nam) + swap uoc %+.2f = %+.2f tren von %.0f "
+                          "(%+.2f%%/nam), %d lenh" % (lai, cagr_truoc, sw_tien, lai_sau, von, cagr, n)), so
+        return "AM", "KHONG co lai sau phi: %+.2f tren von %.0f (%+.2f%%/nam), %d lenh" % (lai_sau, von, cagr, n), so
     if dd >= DD_TRAN:
         return "AM", ("co lai (%+.2f%%/nam, %d lenh) NHUNG maxDD %.1f%% >= %.0f%% o bo tham so/lot nay"
                       % (cagr, n, dd, DD_TRAN)), so
-    return "DAT", "co lai sau phi: %+.2f%%/nam, maxDD %.1f%% < %.0f%%, %d lenh, %s" % (
-        cagr, dd, DD_TRAN, n, ly_tin), so
+    ghi_sw = " (truoc swap %+.2f%%/nam, swap uoc %+.2f)" % (cagr_truoc, sw_tien) if sw_tien else ""
+    return "DAT", "co lai sau phi%s: %+.2f%%/nam%s, maxDD %.1f%% < %.0f%%, %d lenh, %s" % (
+        " VA swap" if sw_tien else "", cagr, ghi_sw, dd, DD_TRAN, n, ly_tin), so
 
 
 def nhan_canh_bao(so: dict, bc: dict, cfg: dict, lenh: dict) -> list[str]:
@@ -826,6 +851,20 @@ def nhan_canh_bao(so: dict, bc: dict, cfg: dict, lenh: dict) -> list[str]:
         ra.append("maxDD %.0f%% gan tran %.0f%%" % (so["dd_pct"], DD_TRAN))
     if so.get("do_tin_chi_phi") == "KHAI":
         ra.append("chi phi KHAI: tester khong chay tick that / chat luong thap - khong the DAT o niem phong")
+    if so.get("swap_nguon") == "uoc":
+        ra.append("swap UOC %+.2f (tu bang lenh tester x ty le %s): MT5 tester khong ghi swap nen lai tester la TRUOC swap; lai / CAGR o day "
+                  "da la SAU swap (truoc swap %+.2f%%/nam). PF / ky vong / maxDD van la so tester goc" % (
+                      so["swap_tien"], so.get("swap_ty_le_nguon") or "?", so["cagr_truoc_swap_pct"]))
+        if so.get("von") and so.get("dd_pct") is not None and so["swap_tien"] < 0 \
+                and so["dd_pct"] < DD_TRAN <= so["dd_pct"] + 100.0 * abs(so["swap_tien"]) / so["von"]:
+            ra.append("maxDD %.0f%% + toan bo swap uoc %.0f%% von >= tran %.0f%%: swap tru dan theo thoi gian nen maxDD that co the vuot tran "
+                      "(tester khong ve duong von sau swap)" % (so["dd_pct"], 100.0 * abs(so["swap_tien"]) / so["von"], DD_TRAN))
+        if so["swap_tien"] > 0 and (so.get("lai") or 0.0) <= 0:
+            ra.append("tester LO %+.2f (truoc swap): chi DAT nho swap DUONG uoc (carry). Ty le swap la bang HIEN TAI cua san, khong phai ty le "
+                      "tung ngay trong cua so, nen carry cua nhieu nam truoc co the khac xa - do tren tai khoan that truoc khi tin" % so["lai"])
+    elif so.get("swap_nguon") == "khong_uoc_duoc":
+        ra.append("swap KHONG uoc duoc (%s): lai tester la TRUOC swap, con tai khoan that tra swap moi dem (luoi / DCA giu lenh lau thi lon): "
+                  "con so lai o day lac quan chua biet bao nhieu" % so.get("swap_ly"))
     if not cfg.get("da_hieu_chuan_lenh_mo"):
         ra.append("CHUA hieu chuan: lenh con MO luc het cua so co duoc tinh/dong khong (lai dong vs equity)")
     if bc.get("lenh_mo_cuoi"):
@@ -971,6 +1010,19 @@ def lap_lenh(ea: dict, ma: str, khung: str, doan: str, tham_so: dict | None = No
     return {"trang_thai": "SAN_SANG", "lenh": lenh}
 
 
+def _uoc_swap(bao_cao, ma: str, cs: dict) -> dict | None:
+    """Swap uoc cua bao cao tester (`swap_uoc.uoc_tu_bao_cao`), het cua so = ngay cuoi + 1. None = khong co tep bao cao (dict) -> cach cu.
+    Loi khong ngo trong bo uoc KHONG duoc lam sap phep thu: tra 'khong_uoc_duoc' (doan niem_phong se bi chan o `phan_quyet`)."""
+    if isinstance(bao_cao, dict):
+        return None
+    den = _ngay_bc(cs.get("den"))
+    try:
+        return SW.uoc_tu_bao_cao(bao_cao, ma, None if den is None else (den + timedelta(days=1)).isoformat())
+    except Exception as e:                                  # noqa: BLE001
+        return {"nguon": "khong_uoc_duoc", "swap": None, "bang_doc_duoc": True,
+                "ly": "loi khi uoc swap (%s: %s)" % (type(e).__name__, str(e)[:120])}
+
+
 def nhan_ket_qua(lenh: dict, bao_cao, log: str = "", vong_id: int | None = None, giay: float = 0.0) -> dict:
     """Bao cao tester + lenh -> ket luan DAT/AM/CHUA_DO_DUOC, ghi so tay (va bang niem_phong neu la seal)."""
     cfg = cau_hinh()
@@ -997,7 +1049,8 @@ def nhan_ket_qua(lenh: dict, bao_cao, log: str = "", vong_id: int | None = None,
             kq["tu_so_tay"] = "thi nghiem %s da ghi - khong tinh them phep thu" % cu["id"]
             return kq
     bc = bao_cao if isinstance(bao_cao, dict) else BC.doc_bao_cao(bao_cao, cfg.get("nhan_them"))
-    tt, ly, so = phan_quyet(bc, doan, lenh, cfg, BC.dau_hieu_hong(log) if log else "")
+    sw = _uoc_swap(bao_cao, ma, lenh["cua_so"])
+    tt, ly, so = phan_quyet(bc, doan, lenh, cfg, BC.dau_hieu_hong(log) if log else "", sw)
     if so.get("ha_tang"):
         return {"trang_thai": tt, "ly_do": ly, "ha_tang": True,
                 "ghi_chu": "hong ha tang: KHONG ghi so tay, khong tieu phep thu / mot lan mo niem phong"}
@@ -1014,6 +1067,9 @@ def nhan_ket_qua(lenh: dict, bao_cao, log: str = "", vong_id: int | None = None,
     ra = {"trang_thai": tt, "ly_do": ly, "ma": ma, "khung": khung, "doan": doan, "ea": lenh["ea_ten"],
           "ea_sha": lenh["ea_sha"], "tham_so": lenh["tham_so"], "cua_so": lenh["cua_so"], "chi_so": so,
           "nhan": nhan}
+    if sw is not None:
+        ra["swap"] = {k: v for k, v in sw.items() if k != "phoi_bay"} | (
+            {"phoi_bay": {k: (round(v, 6) if isinstance(v, float) else v) for k, v in sw["phoi_bay"].items()}} if sw.get("phoi_bay") else {})
     dau_vao = {"ea_sha": lenh["ea_sha"], "ea": lenh["ea_ten"], "tham_so": lenh["tham_so"],
                "cua_so": lenh["cua_so"], "model": lenh["model"], "von": lenh["von"]}
     if lenh.get("bo_set"):
@@ -1027,6 +1083,11 @@ def nhan_ket_qua(lenh: dict, bao_cao, log: str = "", vong_id: int | None = None,
         ra["goi_ten_dung"] = ("DAT o day = CO LAI VA maxDD < %.0f%% tren MT5 tester, doan chua tung dung toi, "
                               "cung bo tham so da qua xac_nhan - canh bac co ky vong duong do duoc, chua phai "
                               "chan ly. Buoc tiep: demo." % DD_TRAN)
+        if so.get("swap_nguon") == "uoc":
+            ra["goi_ten_dung"] += (" Lai da tru swap UOC %+.2f (tester khong ghi swap; ty le %s): do cham tai khoan that moi cho so chinh xac."
+                                   % (so["swap_tien"], so.get("swap_ty_le_nguon") or "?"))
+        elif so.get("swap_nguon") != "do":
+            ra["goi_ten_dung"] += " CHUA tinh swap (bao cao khong co bang lenh de uoc): lai co the cao hon tai khoan that."
         if lenh.get("nhi_phan"):
             ra["goi_ten_dung"] += (" EA nhi phan = hop den: chua hieu luat nen chua phai 'cua ta' - muon thanh EA cua "
                                    "ta phai boc luat tu lich su lenh tester roi viet lai.")

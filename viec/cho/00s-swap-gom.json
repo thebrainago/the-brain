@@ -1,0 +1,23 @@
+{
+  "ma": "00s-swap-gom",
+  "muc_tieu": "gom do tiep xuc swap (A_mua / A_ban) cua cac hang hieu chuan da luu o may nha de cloud tru phi qua dem, khong chay lai tester",
+  "lan": "NHE",
+  "uu_tien": 0,
+  "han_phut": 45,
+  "can": [
+    "swap-v1"
+  ],
+  "lenh": [
+    "{py}",
+    "-m",
+    "nhan.swap_uoc",
+    "--quet",
+    "reports/hieu_chuan",
+    "--ra",
+    "reports/hieu_chuan/swap_gom.json"
+  ],
+  "vi_sao": "MT5 tester khong ghi swap (cot Swap = 0 o 286/286 hang + 3 bao cao that) nen lai tester la TRUOC swap, luoi / DCA bi 4-5 %/nam. Bang lenh cua cac hang da luu nam o may nha (khong vao git); don nay chi DOC chung, tinh A_mua / A_ban (tien x nam) va tra ra <= 270.000 ky tu chia phan de cloud tinh lai theo ty le XM. Khong dung tester, khong ghi gi ngoai reports/hieu_chuan/swap_gom*.json. Xem tai_lieu/SWAP_THUOC_DO.md.",
+  "cong": {
+    "kieu": "chay_duoc"
+  }
+}

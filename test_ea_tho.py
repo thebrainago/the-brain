@@ -10,10 +10,12 @@ from __future__ import annotations
 import json
 from datetime import date
 
+import pandas as pd
 import pytest
 
 from nhan import ea_tho as E
 from nhan import nc_so_tay as ST
+from nhan import swap_uoc as SW
 from test_bao_cao_mt5 import EN, html_mau
 
 CHIEN_LUOC = """
@@ -662,3 +664,260 @@ def test_tho_khong_duoc_goi_cong_cu_ea_tho():
     """Mo hinh re (DeepSeek) chi kham pha - EA tho cham xac_nhan/niem_phong nen khong nam trong CONG_CU_THO."""
     from nhan import nc_tho
     assert not any(n.startswith("ea_tho") for n in nc_tho.CONG_CU_THO)
+
+
+# ============================================================ SWAP (09/10/2026): tester khong ghi swap -> lai tester la TRUOC swap
+def _swap(tien, nguon="uoc", doc_duoc=True, ly="tester khong ghi swap (cot Swap = 0): uoc tu bang lenh"):
+    """Ket luan `swap_uoc.uoc_tu_bao_cao` (dang rut gon) de thu `phan_quyet` khong can bang lenh."""
+    r = {"nguon": nguon, "swap": tien, "ly": ly, "bang_doc_duoc": doc_duoc}
+    if nguon == "uoc":
+        r["ty_le"] = {"mua": 0.02473, "ban": -0.00463, "nguon": "XM EURUSDMICRO", "tin_cay": "CAO"}
+    return r
+
+
+def test_swap_lat_lai_duong_cua_tester_thanh_AM_va_noi_ro_hai_so():
+    cfg = E.cau_hinh()
+    tt0, _, so0 = E.phan_quyet(_bc(), "kham_pha", _lenh(), cfg)                   # khong co bang lenh: cach cu
+    assert tt0 == "DAT" and "swap_nguon" not in so0
+    tt, ly, so = E.phan_quyet(_bc(), "kham_pha", _lenh(), cfg, swap=_swap(-1500.0))
+    assert tt == "AM" and "KHONG co lai sau phi VA swap" in ly and not so["ha_tang"], ly
+    assert so["lai"] == 1234.56 and so["swap_tien"] == -1500.0 and so["lai_sau_swap"] == -265.44
+    assert so["cagr_truoc_swap_pct"] > 0 > so["cagr_pct"], "cagr_pct = SAU swap; cagr_truoc_swap_pct = so tester goc"
+    assert so["swap_nguon"] == "uoc" and so["swap_ty_le_nguon"] == "XM EURUSDMICRO"
+
+
+def test_swap_nho_hon_lai_van_DAT_nhung_cagr_la_so_sau_swap():
+    cfg, bc = E.cau_hinh(), _bc(lai=5000.0, tho=9000.0, lo=-4000.0)
+    tt0, _, so0 = E.phan_quyet(bc, "kham_pha", _lenh(), cfg)
+    tt, ly, so = E.phan_quyet(bc, "kham_pha", _lenh(), cfg, swap=_swap(-1500.0))
+    assert tt0 == tt == "DAT" and "co lai sau phi VA swap" in ly and "truoc swap" in ly, ly
+    assert so["lai_sau_swap"] == 3500.0 and so["cagr_pct"] < so["cagr_truoc_swap_pct"]
+    assert so["cagr_truoc_swap_pct"] == so0["cagr_pct"], "so truoc swap phai chinh la so cu"
+    assert so["dd_pct"] == so0["dd_pct"] and so["so_lenh"] == so0["so_lenh"], "maxDD / so lenh khong bi sua"
+
+
+def test_swap_do_duoc_khong_cong_them_tranh_tinh_hai_lan():
+    cfg, bc = E.cau_hinh(), _bc()
+    tt0, ly0, so0 = E.phan_quyet(bc, "kham_pha", _lenh(), cfg)
+    sw = {"nguon": "do", "swap": -900.0, "bang_doc_duoc": True, "ly": "tester co ghi swap khac 0: dung so do"}
+    tt, ly, so = E.phan_quyet(bc, "kham_pha", _lenh(), cfg, swap=sw)
+    assert (tt, ly) == (tt0, ly0) and so["cagr_pct"] == so0["cagr_pct"] and so["lai_sau_swap"] == so0["lai"]
+    assert so["swap_nguon"] == "do" and so["swap_tien"] is None, "lai_rong cua tester da gom swap do"
+    assert not any("swap UOC" in x for x in E.nhan_canh_bao(so, {}, cfg, _lenh()))
+
+
+def test_swap_am_san_roi_thi_khong_doi_loi_cho_swap():
+    cfg = E.cau_hinh()
+    tt, ly, so = E.phan_quyet(_bc(lai=-300.0, tho=900.0, lo=-1200.0), "kham_pha", _lenh(), cfg, swap=_swap(-100.0))
+    assert tt == "AM" and ly.startswith("KHONG co lai sau phi:") and "VA swap" not in ly, "tester da lo san: swap khong phai ly do"
+    assert so["lai_sau_swap"] == -400.0
+
+
+def test_swap_dd_van_la_so_tester_va_van_chan_tu_80():
+    cfg = E.cau_hinh()
+    bc = _bc(dd="8 000.00 (80.00%)", lai=9000.0, tho=15000.0, lo=-6000.0)
+    tt, ly, _ = E.phan_quyet(bc, "kham_pha", _lenh(), cfg, swap=_swap(-100.0))
+    assert tt == "AM" and "maxDD" in ly and "KHONG co lai" not in ly
+
+
+def test_swap_khong_uoc_duoc_la_nhan_o_doan_mo_va_chan_o_niem_phong_chi_khi_da_doc_duoc_bang():
+    cfg, lenh = E.cau_hinh(), _lenh("niem_phong")
+    from nhan import bao_cao_mt5 as BC
+    sw = _swap(None, "khong_uoc_duoc", ly="khong co ty le swap/nam do duoc cho ma nay (khong doan)")
+    tt, _, so = E.phan_quyet(_bc(), "kham_pha", _lenh(), cfg, swap=sw)             # doan mo: van cham, them nhan
+    assert tt == "DAT" and so["swap_nguon"] == "khong_uoc_duoc" and so["swap_tien"] is None
+    assert any("swap KHONG uoc duoc" in x for x in E.nhan_canh_bao(so, {}, cfg, _lenh()))
+    ky = "H1 (%s - %s)" % (lenh["cua_so"]["tu"], lenh["cua_so"]["den"])
+    bc = BC.phan_tich(html_mau(EN, ky=ky, lenh=40))
+    tt, ly, so = E.phan_quyet(bc, "niem_phong", lenh, cfg, swap=sw)                # seal + bang Deals doc duoc ma khong uoc duoc
+    assert tt == "CHUA_DO_DUOC" and so["ha_tang"] and "swap KHONG uoc duoc" in ly and "chua tieu lan mo" in ly
+    assert "cagr_pct" not in so, "hong ha tang khong tra so"
+    tt, _, so = E.phan_quyet(bc, "niem_phong", lenh, cfg, swap=_swap(None, "khong_uoc_duoc", doc_duoc=False))
+    assert tt == "DAT" and not so["ha_tang"], "bao cao tong hop (khong co bang Deals): cach cu, khong chan"
+    assert E.phan_quyet(bc, "niem_phong", lenh, cfg, swap=_swap(-50.0))[0] == "DAT", "uoc duoc va nho: seal van DAT"
+
+
+def test_swap_duong_cong_vao_va_lai_chi_den_tu_carry_co_nhan_rieng():
+    cfg = E.cau_hinh()
+    tt, ly, so = E.phan_quyet(_bc(lai=-100.0, tho=900.0, lo=-1000.0), "kham_pha", _lenh(), cfg, swap=_swap(400.0))
+    assert tt == "DAT" and so["lai_sau_swap"] == 300.0 and so["swap_tien"] == 400.0 and "VA swap" in ly
+    nhan = E.nhan_canh_bao(so, {}, cfg, _lenh())
+    assert any("carry" in x and "tester LO" in x for x in nhan), nhan
+    tt, _, so = E.phan_quyet(_bc(), "kham_pha", _lenh(), cfg, swap=_swap(400.0))      # tester da co lai: carry khong phai ly do
+    assert tt == "DAT" and not any("carry" in x for x in E.nhan_canh_bao(so, {}, cfg, _lenh()))
+    assert not any("toan bo swap" in x for x in E.nhan_canh_bao({**so, "dd_pct": 79.0}, {}, cfg, _lenh())), \
+        "swap duong khong lam tang maxDD: khong canh bao can tran"
+
+
+def test_swap_nhan_canh_bao_uoc_gan_tran_maxdd_va_khong_uoc_duoc():
+    cfg = E.cau_hinh()
+    so = {"swap_nguon": "uoc", "swap_tien": -3000.0, "cagr_truoc_swap_pct": 5.0, "von": 10000.0, "dd_pct": 55.0,
+          "swap_ty_le_nguon": "XM EURUSDMICRO", "so_lenh": 60, "lai": 4000.0}
+    nhan = E.nhan_canh_bao(so, {}, cfg, _lenh())
+    assert any("swap UOC -3000.00" in x and "XM EURUSDMICRO" in x and "+5.00%/nam" in x for x in nhan), nhan
+    assert any("maxDD 55% + toan bo swap uoc 30% von >= tran 80%" in x for x in nhan), nhan
+    assert not any("toan bo swap" in x for x in E.nhan_canh_bao({**so, "dd_pct": 20.0}, {}, cfg, _lenh())), "20 + 30 < 80"
+    assert not any("toan bo swap" in x for x in E.nhan_canh_bao({**so, "dd_pct": 85.0}, {}, cfg, _lenh())), "da qua tran: phan_quyet da AM"
+    khong = {"swap_nguon": "khong_uoc_duoc", "swap_ly": "thieu ty le", "so_lenh": 60}
+    assert any("swap KHONG uoc duoc (thieu ty le)" in x for x in E.nhan_canh_bao(khong, {}, cfg, _lenh()))
+    assert not any("swap" in x for x in E.nhan_canh_bao({"so_lenh": 60}, {}, cfg, _lenh())), "khong co thong tin swap: im lang"
+
+
+# ---- chay that qua tester gia co BANG LENH (Orders + Deals): swap duoc uoc tu chinh bang do
+def _bang_lenh(cs, ma, n=30, lot=1.0, chieu=1, gia0=1.10, mo_cuoi=False):
+    """Orders + Deals HTML cua n vi the nam TRONG cua so: moi vi the mo thu Hai 10:00, dong thu Hai tuan sau (dung 7 nua dem tinh swap).
+    gia dong xen ke +-0,002 quanh gia0 de P&L doi duoc K (hop dong 100000 tren tai khoan USD). `mo_cuoi`: them mot vi the con MO."""
+    from test_lenh_tester import dung_giao_dich, html_bao_cao
+    t0 = pd.Timestamp(cs["tu"].replace(".", "-"))
+    t0 += pd.Timedelta(days=(7 - t0.weekday()) % 7 + 7)
+    tuan = max(2, (int(cs["ngay"]) // 7 - 3) // n)
+    vi_the = []
+    for i in range(n):
+        mo = t0 + pd.Timedelta(days=7 * tuan * i, hours=10)
+        gd = gia0 + (0.002 if i % 2 == 0 else -0.002)
+        vi_the.append(dict(ma=ma, chieu=chieu, lot=lot, gia_mo=gia0, mo=mo, dong=[(mo + pd.Timedelta(days=7), lot, gd, "")]))
+    if mo_cuoi:
+        den = pd.Timestamp(cs["den"].replace(".", "-"))
+        vi_the.append(dict(ma=ma, chieu=chieu, lot=lot, gia_mo=gia0, mo=den - pd.Timedelta(days=13) + pd.Timedelta(hours=10), dong=[]))
+    deals, orders = dung_giao_dich(vi_the, von=10000.0, hop_dong=100000.0, digits=5,
+                                   bd=(t0 - pd.Timedelta(days=1)).strftime("%Y.%m.%d 00:00:00"))
+    van = html_bao_cao(deals, orders, ten_ea="MyEA")
+    return van[van.index('<div align="center"><b>Orders</b>'):van.rindex("</div></body></html>")]
+
+
+class MayGiaCoLenh(MayGia):
+    """Nhu `MayGia` (bao cao tong hop theo cua so cua lenh) nhung bao cao co THEM bang Orders + Deals cua `so_vi_the` vi the mua EURUSD."""
+
+    def __init__(self, tmp_path, so_vi_the=30, lot=1.0, chieu=1, mo_cuoi=False, **kw):
+        super().__init__(tmp_path, **kw)
+        self.so_vi_the, self.lot, self.chieu, self.mo_cuoi = so_vi_the, lot, chieu, mo_cuoi
+
+    def __call__(self, lenh, ea, cfg):
+        self.sua = lambda van: van.replace(
+            "</body></html>", _bang_lenh(lenh["cua_so"], lenh["ma"], self.so_vi_the, self.lot, self.chieu, mo_cuoi=self.mo_cuoi) + "</body></html>")
+        return super().__call__(lenh, ea, cfg)
+
+
+def _mong_swap_mua(n, lot=1.0, gia=1.10, dem=7, ma="EURUSD"):
+    """Dap an doc lap: swap = -ty_le_mua x (n x lot x K x gia x dem / 365), K = 100000 (EURUSD tren tai khoan USD)."""
+    return -SW.ty_le_cho(ma)["mua"] * n * lot * 100000.0 * gia * dem / 365.0
+
+
+def _gt():
+    return ST.them_gia_thuyet("EA cong khai co lai sau phi tren EURUSD H1", "EA da ban cong khai", ho="ea_tho")
+
+
+def test_chay_uoc_swap_tu_bang_lenh_cua_tester_va_lat_ket_luan(ea_cl, tmp_path, monkeypatch):
+    gt = _gt()
+    t = MayGiaCoLenh(tmp_path)                                  # tester bao +1234,56 truoc swap (cung bao cao tong hop mac dinh)
+    monkeypatch.setattr(E, "CHAY_TESTER", t)
+    r = E.chay(ea_cl, "EURUSD", "H1", "kham_pha", {"InpFast": 8}, gt)
+    sw = r["swap"]
+    assert sw["nguon"] == "uoc" and sw["bang_doc_duoc"] is True and sw["phoi_bay"]["so_lenh"] == 30, sw
+    assert sw["swap"] == pytest.approx(_mong_swap_mua(30), rel=0.02), "30 vi the x 7 nua dem: phai khop dap an tinh tay"
+    assert r["chi_so"]["swap_tien"] == pytest.approx(sw["swap"], abs=0.01) and r["chi_so"]["lai"] == 1234.56
+    assert r["trang_thai"] == "AM" and "KHONG co lai sau phi VA swap" in r["ly_do"], r["ly_do"]
+    assert any("swap UOC" in x for x in r["nhan"]["canh_bao"])
+    luu = json.loads(ST.mot("SELECT ket_qua FROM thi_nghiem WHERE id=?", r["tn_id"])["ket_qua"])
+    assert luu["swap"]["nguon"] == "uoc" and luu["chi_so"]["lai_sau_swap"] == r["chi_so"]["lai_sau_swap"], "so tay giu swap uoc"
+    assert ST.dem_phep_thu(gt_id=gt) == 1
+
+
+def test_chay_lai_lon_hon_swap_van_DAT_va_ghi_ca_hai_so(ea_cl, tmp_path, monkeypatch):
+    t = MayGiaCoLenh(tmp_path, kq=lambda l: {"lai": 5000.0, "tho": 9000.0, "lo": -4000.0})
+    monkeypatch.setattr(E, "CHAY_TESTER", t)
+    r = E.chay(ea_cl, "EURUSD", "H1", "kham_pha", {"InpFast": 8}, _gt())
+    so = r["chi_so"]
+    assert r["trang_thai"] == "DAT" and "VA swap" in r["ly_do"] and so["cagr_pct"] < so["cagr_truoc_swap_pct"]
+    assert so["lai_sau_swap"] == pytest.approx(5000.0 + _mong_swap_mua(30), rel=0.01, abs=2.0)
+
+
+def test_chay_ban_nhan_swap_duong_khi_ban_euro_cao_hon(ea_cl, tmp_path, monkeypatch):
+    """Chieu ban EURUSD: ty le ban am (nhan swap) -> swap uoc DUONG, cong vao lai."""
+    t = MayGiaCoLenh(tmp_path, chieu=-1)
+    monkeypatch.setattr(E, "CHAY_TESTER", t)
+    r = E.chay(ea_cl, "EURUSD", "H1", "kham_pha", {"InpFast": 8}, _gt())
+    ty = SW.ty_le_cho("EURUSD")
+    assert r["swap"]["swap"] == pytest.approx(-ty["ban"] * 30 * 100000.0 * 1.10 * 7 / 365.0, rel=0.02) and r["swap"]["swap"] > 0
+    assert r["chi_so"]["lai_sau_swap"] > r["chi_so"]["lai"]
+
+
+def test_chay_bao_cao_tong_hop_khong_co_bang_lenh_giu_cach_cu_va_noi_ro(ea_cl, tmp_path, monkeypatch):
+    dat_tester(monkeypatch, tmp_path)                           # MayGia thuong: chi co phan tong hop
+    r = E.chay(ea_cl, "EURUSD", "H1", "kham_pha", {"InpFast": 8}, _gt())
+    assert r["trang_thai"] == "DAT" and r["swap"]["bang_doc_duoc"] is False and r["swap"]["swap"] is None
+    assert r["chi_so"]["lai_sau_swap"] == r["chi_so"]["lai"] and r["chi_so"]["swap_tien"] is None
+    assert r["chi_so"]["cagr_pct"] == r["chi_so"]["cagr_truoc_swap_pct"]
+
+
+def test_niem_phong_mo_voi_swap_uoc_ghi_vao_ba_noi_va_goi_ten_dung_nhac_swap(ea_cl, tmp_path, monkeypatch):
+    gt, ts = _gt(), {"InpFast": 8}
+    dat_tester(monkeypatch, tmp_path, kq=lambda l: {"lenh": 40})
+    _xac_nhan_dat(ea_cl, gt, ts)
+    monkeypatch.setattr(E, "CHAY_TESTER", MayGiaCoLenh(tmp_path, kq=lambda l: {"lenh": 40, "lai": 5000.0, "tho": 9000.0, "lo": -4000.0}))
+    r = E.chay(ea_cl, "EURUSD", "H1", "niem_phong", ts, gt)
+    assert r["trang_thai"] == "DAT" and r["swap"]["nguon"] == "uoc", r
+    assert "swap UOC" in r["goi_ten_dung"] and "chua phai chan ly" in r["goi_ten_dung"]
+    np_ = ST.mot("SELECT * FROM niem_phong")
+    assert json.loads(np_["ket_qua"])["swap"]["nguon"] == "uoc" and dem("niem_phong") == 1
+    r2 = E.chay(ea_cl, "EURUSD", "H1", "niem_phong", ts, gt)
+    assert "da_mo_truoc" in r2, "mo mot lan: chay lai khong uoc / khong cham lai"
+
+
+def test_niem_phong_am_vi_swap_van_la_mot_lan_mo_va_danh_dau_truot(ea_cl, tmp_path, monkeypatch):
+    gt, ts = _gt(), {"InpFast": 9}
+    dat_tester(monkeypatch, tmp_path, kq=lambda l: {"lenh": 40})
+    _xac_nhan_dat(ea_cl, gt, ts)
+    monkeypatch.setattr(E, "CHAY_TESTER", MayGiaCoLenh(tmp_path, kq=lambda l: {"lenh": 40}))        # tester +1234,56 < swap uoc (~-1560)
+    r = E.chay(ea_cl, "EURUSD", "H1", "niem_phong", ts, gt)
+    assert r["trang_thai"] == "AM" and "VA swap" in r["ly_do"] and dem("niem_phong") == 1
+    assert ST.mot("SELECT trang_thai FROM gia_thuyet WHERE id=?", gt)["trang_thai"] == "TRUOT_NIEM_PHONG"
+
+
+def test_niem_phong_khong_uoc_duoc_swap_la_hong_ha_tang_khong_tieu_luot_mo(ea_cl, tmp_path, monkeypatch):
+    gt, ts = _gt(), {"InpFast": 8}
+    dat_tester(monkeypatch, tmp_path, kq=lambda l: {"lenh": 40})
+    _xac_nhan_dat(ea_cl, gt, ts)
+    ko_du = MayGiaCoLenh(tmp_path, so_vi_the=10, kq=lambda l: {"lenh": 40, "lai": 5000.0})           # 10 lenh < 20: khong uoc duoc K
+    monkeypatch.setattr(E, "CHAY_TESTER", ko_du)
+    r = E.chay(ea_cl, "EURUSD", "H1", "niem_phong", ts, gt)
+    assert r["ha_tang"] and "swap KHONG uoc duoc" in r["ly_do"] and "chi_so" not in r and dem("niem_phong") == 0
+    assert ST.mot("SELECT trang_thai FROM gia_thuyet WHERE id=?", gt)["trang_thai"] != "TRUOT_NIEM_PHONG"
+    monkeypatch.setattr(E, "CHAY_TESTER", MayGiaCoLenh(tmp_path, kq=lambda l: {"lenh": 40, "lai": 5000.0, "tho": 9000.0, "lo": -4000.0}))
+    r = E.chay(ea_cl, "EURUSD", "H1", "niem_phong", ts, gt)
+    assert r["trang_thai"] == "DAT" and dem("niem_phong") == 1, "lan hong khong tinh la mot lan mo"
+
+
+def test_niem_phong_ma_khong_co_ty_le_swap_bi_chan_khi_da_doc_duoc_bang(ea_cl, tmp_path, monkeypatch):
+    gt, ts = _gt(), {"InpFast": 8}
+    dat_tester(monkeypatch, tmp_path, kq=lambda l: {"lenh": 40})
+    _xac_nhan_dat(ea_cl, gt, ts)
+    monkeypatch.setattr(SW, "ty_le_cho", lambda ma: None)                                             # san khong cho ty le cua ma nay
+    monkeypatch.setattr(E, "CHAY_TESTER", MayGiaCoLenh(tmp_path, kq=lambda l: {"lenh": 40, "lai": 5000.0}))
+    r = E.chay(ea_cl, "EURUSD", "H1", "niem_phong", ts, gt)
+    assert r["ha_tang"] and "ty le" in r["ly_do"] and dem("niem_phong") == 0, r
+    r = E.chay(ea_cl, "EURUSD", "H1", "xac_nhan", {"InpFast": 11}, gt)                                # doan mo: chi la nhan
+    assert r["trang_thai"] in ("DAT", "AM") and r["swap"]["nguon"] == "khong_uoc_duoc"
+    assert any("swap KHONG uoc duoc" in x for x in r["nhan"]["canh_bao"])
+
+
+def test_uoc_swap_lenh_con_mo_tinh_den_het_cua_so_va_dict_khong_co_gi_de_uoc(ea_cl, tmp_path, monkeypatch):
+    monkeypatch.setattr(E, "CHAY_TESTER", MayGiaCoLenh(tmp_path, mo_cuoi=True))
+    r = E.chay(ea_cl, "EURUSD", "H1", "xac_nhan", {"InpFast": 8}, _gt())     # xac_nhan: ngay cuoi cua so la ngay thuong (nua dem do co tinh)
+    cs = r["cua_so"]
+    assert pd.Timestamp(cs["den"].replace(".", "-")).weekday() < 5, cs
+    p = tmp_path / "bc1.htm"
+    sw_het = E._uoc_swap(str(p), "EURUSD", cs)
+    ngay_sau = (pd.Timestamp(cs["den"].replace(".", "-")) + pd.Timedelta(days=1)).strftime("%Y-%m-%d")
+    assert sw_het["swap"] == pytest.approx(SW.uoc_tu_bao_cao(p, "EURUSD", ngay_sau)["swap"]), "het cua so = ngay cuoi + 1"
+    assert sw_het["swap"] != pytest.approx(SW.uoc_tu_bao_cao(p, "EURUSD", None)["swap"]), \
+        "vi the mo cuoi ky phai bi tinh den het cua so (khong thi lai bi lac quan)"
+    assert E._uoc_swap({"lai_rong": 1.0}, "EURUSD", cs) is None
+
+
+def test_uoc_swap_loi_bat_ngo_khong_lam_sap_phep_thu_ma_tra_khong_uoc_duoc(tmp_path, monkeypatch):
+    def hong(*a, **k):
+        raise RuntimeError("hong bat ngo")
+    monkeypatch.setattr(SW, "uoc_tu_bao_cao", hong)
+    r = E._uoc_swap(str(tmp_path / "x.htm"), "EURUSD", {"den": "2017.12.31"})
+    assert r["nguon"] == "khong_uoc_duoc" and r["bang_doc_duoc"] is True and "RuntimeError" in r["ly"] and r["swap"] is None

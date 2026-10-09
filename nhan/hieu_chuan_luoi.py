@@ -42,6 +42,7 @@ import math
 import re
 import time
 from datetime import date, datetime
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -54,11 +55,13 @@ from nhan import luoi as LU
 from nhan import nc_du_lieu as NDL
 from nhan import nc_so_tay as ST
 from nhan import nc_thi_nghiem as TN
+from nhan import swap_uoc as SW
 
 LOAI_TESTER = "hieu_chuan_tester"
 LOAI_SO_SANH = "hieu_chuan_luoi"
 DOAN = "hieu_chuan"                    # doan rieng: dem_phep_thu / phep_thu_theo_ma / thi_nghiem_tot_nhat khong bao gio thay no
 PHIEN_BAN = "1"                        # doi khi doi CACH DOC tester / cach tinh nua tester -> mat cache nua tester (co y)
+PHIEN_SO = "2"                         # doi khi doi CACH SO hai nua (2 = 09/10/2026: tester CONG swap uoc) -> dong so tay so sanh moi; KHONG dong vao tester
 EA_MAC_DINH = E.LAB / "ea_LuoiDayDu.mq5"
 THU_MUC = E.LAB / "reports" / "hieu_chuan"
 TEP_TOI_DA = 38_000                    # bo chay don chi mang ve tep .md/.json <= 40.000 ky tu (qwen/cau_git.TEP_TOI_DA)
@@ -317,7 +320,8 @@ def nua_engine(ma: str, khung: str, cs: dict, ts: LU.ThamSo, von: float, f: floa
             "lai_chot_nam_pct": float(kq.lai_rong) / f / von / so_nam * 100.0,
             "chay": bool(kq.chay), "phi_spread": float(kq.phi_spread) / f, "lai_treo": kiem["lai_treo_q"] / f,
             "so_bar": int(len(seg)), "tu_bar": str(seg.index[0]), "den_bar": str(seg.index[-1]),
-            "qc": {"ma": qc.ma, "pip": qc.pip, "hop_dong": qc.hop_dong, "von_quy_doi": float(f), "khoa": LU.khoa_quy_cach(qc)},
+            "qc": {"ma": qc.ma, "pip": qc.pip, "hop_dong": qc.hop_dong, "von_quy_doi": float(f), "khoa": LU.khoa_quy_cach(qc),
+                   "phi_nam_mua": float(qc.phi_nam_mua), "phi_nam_ban": float(qc.phi_nam_ban)},
             "thong_ke": tk, "kiem": kiem}
 
 
@@ -459,12 +463,17 @@ def nua_tester(lo: dict, d: dict, cfg2: dict, ts: LU.ThamSo, von: float, vt_t: s
         canh_bao.append("%.0f%% lenh ghep vao/ra bang FIFO (khong khop phuong trinh loi - cap cheo tien thi hop dong hieu dung troi theo "
                         "ty gia): lenh giu lau nhat chi la xap xi; cac so TONG (lai, DD, so lenh, BUY/SELL, do sau theo thoi gian, "
                         "he so quy doi cach 'tong') khong bi anh huong" % (100.0 * fifo_pct))
+    phoi_k1 = None                                    # swap: tester khong ghi (Swap = 0), luu 'phoi bay' de uoc sau (xem `swap_tester`)
+    try:
+        phoi_k1 = SW.phoi_bay(b, 1.0, pd.Timestamp(cs_so["den"].replace(".", "-")) + pd.Timedelta(days=1), lenh["ma"])
+    except (ValueError, KeyError, TypeError) as e:        # noqa: BLE001 - phan phu: khong duoc lam hong phep hieu chuan
+        canh_bao.append("khong tinh duoc phoi bay swap tu bang lenh tester (%s: %s)" % (type(e).__name__, str(e)[:100]))
     t = {"lai_rong": lai, "von": von_bc, "lai_nam_pct": lai / von_bc / so_nam * 100.0,
          "dd": _dd_tester(bc), "pf": bc.get("pf"), "so_lenh_bao_cao": bc.get("so_lenh"),
          "chat_luong_pct": bc.get("chat_luong_pct"), "bars": bc.get("bars"), "ticks": bc.get("ticks"),
          "model": int(lenh["model"]), "tu": bc.get("tu"), "den": bc.get("den"), "cua_so_so_sanh": cs_so,
          "thong_ke": tk, "he_so_quy_doi": hs, "ghep_fifo_pct": round(100.0 * fifo_pct, 1),
-         "bang_lenh": _luu_bang_lenh(b, vt_t), "canh_bao": canh_bao,
+         "bang_lenh": _luu_bang_lenh(b, vt_t), "swap_phoi_k1": phoi_k1, "canh_bao": canh_bao,
          "giay": round(float(r.get("giay") or (time.time() - t0)), 1)}
     t["dd_pct_so_sanh"] = t["dd"]["so_sanh_pct"]
     if t["dd_pct_so_sanh"] is None:
@@ -483,6 +492,50 @@ def nua_tester(lo: dict, d: dict, cfg2: dict, ts: LU.ThamSo, von: float, vt_t: s
 
 
 # ============================================================ 6. SO
+def _phoi_tu_bang_luu(duong, ma: str, het) -> dict | None:
+    """Nua tester CU (dong so tay truoc 09/10/2026, chua luu phoi bay): doc lai bang lenh da luu neu con tren may nay -> phoi bay K = 1."""
+    if not duong:
+        return None
+    p = Path(str(duong))
+    p = p if p.is_absolute() else E.LAB / p
+    if not p.is_file():
+        return None
+    try:
+        b = pd.read_csv(p)
+        for c in ("mo", "dong"):
+            b[c] = pd.to_datetime(b[c])
+        return SW.phoi_bay(b, 1.0, het, ma)
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+
+
+def swap_tester(t: dict, e: dict, f_dung: float, ma: str) -> dict:
+    """Ket luan swap cua NUA TESTER, cung THUOC DO voi engine: phoi bay cua bang lenh tester x ty le swap/nam CHINH engine da dung.
+
+    Tester khong ghi swap (cot Swap = 0 o moi bao cao do duoc 09/10: 286 hang + 3 bao cao that) nen `lai_rong` cua no la lai TRUOC swap,
+    con engine da tru swap -> so thang hai so la so tao nhung khac biet ~ -4 diem %/nam. K (tien tai khoan / don vi gia / lot) = hop dong
+    cua engine / he so quy doi dung: engine va tester cung quy doi tien mot cach. Tra ket qua cua `swap_uoc.ap_ty_le`:
+    'do' (tester co ghi swap khac 0: lai tester da gom) | 'uoc' | 'khong_uoc_duoc' (kem ly)."""
+    qc = e["qc"]
+    phoi = t.get("swap_phoi_k1")
+    if phoi is None:
+        het = pd.Timestamp(str(t["cua_so_so_sanh"]["den"]).replace(".", "-")) + pd.Timedelta(days=1)
+        phoi = _phoi_tu_bang_luu(t.get("bang_lenh"), ma, het)
+    if phoi is not None:
+        phoi = SW.doi_k(phoi, float(qc["hop_dong"]) / float(f_dung))
+        phoi["k_cach"] = "hop_dong / he_so_quy_doi (cung thuoc do voi engine)"
+    ty = {"mua": float(qc["phi_nam_mua"]), "ban": float(qc["phi_nam_ban"]), "nguon": "ty le cua engine (%s)" % qc["ma"],
+          "tin_cay": "engine"}
+    return SW.ap_ty_le(phoi, ty, t["thong_ke"].get("swap"))
+
+
+def _swap_pct_nam(sw: dict | None, von: float, so_nam: float) -> float | None:
+    """Swap UOC cua tester, %/nam cua von; None khi khong co uoc (tester co ghi -> 'do': da nam trong lai_rong, khong cong them)."""
+    if not sw or sw.get("nguon") != "uoc" or sw.get("swap") is None or von <= 0:
+        return None
+    return 100.0 * float(sw["swap"]) / von / so_nam
+
+
 def _gan(e: float, t: float, rel: float, ab: float) -> bool:
     return abs(e - t) <= max(rel * abs(t), ab)
 
@@ -503,7 +556,7 @@ def _ky_lech_dau_tien(tk_t: dict, tk_e: dict) -> tuple[list, dict | None]:
     return bang, dau
 
 
-def _canh_bao_chan_doan(t: dict, e: dict, f_dung: float) -> list[str]:
+def _canh_bao_chan_doan(t: dict, e: dict, f_dung: float, sw: dict | None = None) -> list[str]:
     ra: list[str] = []
     tk, ek = t["thong_ke"], e["thong_ke"]
     if tk["giu_lau_nhat_gio"] >= 120 and tk["giu_lau_nhat_gio"] >= 3 * max(ek["giu_lau_nhat_gio"], 1.0):
@@ -537,39 +590,90 @@ def _canh_bao_chan_doan(t: dict, e: dict, f_dung: float) -> list[str]:
         ra.append("cong lai/phi tung lenh cua engine KHONG khop tong (gop %.4f vs %.4f, spread %.4f vs %.4f): engine da doi ma ma "
                   "cach tach theo lenh chua doi - bang theo ky co the sai" % (
                       e["kiem"]["gross_dong"], e["kiem"]["lai_gop_engine"], e["kiem"]["spread"], e["kiem"]["phi_spread_engine"]))
-    if tk["swap"] is not None and ek["swap"] is not None:
-        so_nam = max(float(t["cua_so_so_sanh"]["ngay"]), 1.0) / 365.25
-        sw_t, sw_e = 100.0 * tk["swap"] / t["von"] / so_nam, 100.0 * ek["swap"] / t["von"] / so_nam
+    uoc = sw is not None and sw.get("nguon") == "uoc"
+    khong = sw is not None and sw.get("nguon") == "khong_uoc_duoc"
+    do = not uoc and not khong and tk["swap"] is not None            # tester co ghi swap (hoac chua co `sw`): so swap hai ben cho nhau
+    if not (uoc or khong or do):
+        return ra
+    so_nam = max(float(t["cua_so_so_sanh"]["ngay"]), 1.0) / 365.25
+    sw_e = None if ek["swap"] is None else 100.0 * ek["swap"] / t["von"] / so_nam
+    if uoc:
+        sw_t = _swap_pct_nam(sw, t["von"], so_nam)
+        ra.append("tester KHONG ghi swap (cot Swap = 0): lai tester o day da CONG swap uoc %+.2f%%/nam tu bang lenh x ty le cua engine "
+                  "(tester goc %+.2f%%/nam = TRUOC swap)" % (sw_t, float(t["lai_nam_pct"])))
+        if sw_e is not None and not _gan(sw_e, sw_t, *DUNG_SAI["lai"]):
+            ra.append("swap: engine %+.2f%%/nam, uoc tu bang lenh tester %+.2f%%/nam (chenh dang ke: hai ben giu lenh qua dem khac nhau)"
+                      % (sw_e, sw_t))
+    elif khong:
+        ra.append("tester KHONG ghi swap va KHONG uoc duoc (%s): lai tester la TRUOC swap, engine da tru swap%s - so lai hai ben khong "
+                  "cung thuoc do" % (sw.get("ly", "?"), " (%+.2f%%/nam)" % sw_e if sw_e is not None else ""))
+    elif sw_e is not None:
+        sw_t = 100.0 * tk["swap"] / t["von"] / so_nam
         if not _gan(sw_e, sw_t, *DUNG_SAI["lai"]):
             ra.append("swap: tester %+.2f%%/nam engine %+.2f%%/nam (chenh dang ke: kiem swap_mode / swap 3 ngay cua ma)" % (sw_t, sw_e))
     return ra
 
 
-def doi_chieu(t: dict, e: dict, f_dung: float) -> dict:
-    """Hai nua -> ket luan KHOP / LECH + bang theo ky + canh bao chan doan. Thuan tuy (khong ghi gi)."""
+def doi_chieu(t: dict, e: dict, f_dung: float, sw: dict | None = None) -> dict:
+    """Hai nua -> ket luan KHOP / LECH + bang theo ky + canh bao chan doan. Thuan tuy (khong ghi gi).
+
+    `sw` = `swap_tester(...)`. Tester khong ghi swap (lai_rong la TRUOC swap) con engine da tru swap, nen khi `sw['nguon'] == 'uoc'` lai tester
+    duoc CONG swap uoc roi moi so voi engine (cung thuoc do 'lai sau swap'): `lech.lai_nam_pp` = engine - tester sau swap. Hai mon rieng:
+    `lai_truoc_swap_pp` = (engine bo swap) - tester goc = sai lech cua MO HINH BAR / TICK (khong lien quan swap); `swap_engine_pp` =
+    swap engine - swap uoc tu bang lenh tester = hai ben giu lenh qua dem khac nhau bao nhieu. Tong hai mon = `lai_nam_pp`.
+    Khong co uoc ('do': tester da ghi, hoac 'khong_uoc_duoc', hoac sw=None) -> so nhu cu: engine vs `lai_nam_pct` cua tester."""
     tl, el = float(t["lai_nam_pct"]), float(e["lai_nam_pct"])
     td, ed = float(t["dd_pct_so_sanh"]), float(e["dd_pct"])
     tn, en = int(t["thong_ke"]["so_lenh_mo"]), int(e["thong_ke"]["so_lenh_mo"])
-    khop = {"lai": _gan(el, tl, *DUNG_SAI["lai"]) and not (el * tl < 0 and max(abs(el), abs(tl)) > 0.5),
+    so_nam = sw_pct = None
+    if sw is not None:
+        so_nam = max(float(t["cua_so_so_sanh"]["ngay"]), 1.0) / 365.25
+        sw_pct = _swap_pct_nam(sw, float(t["von"]), so_nam)
+    tl_so = tl + (sw_pct or 0.0)                          # tester SAU swap (chi khi UOC); khong co uoc thi chinh so tester goc
+    khop = {"lai": _gan(el, tl_so, *DUNG_SAI["lai"]) and not (el * tl_so < 0 and max(abs(el), abs(tl_so)) > 0.5),
             "dd": _gan(ed, td, *DUNG_SAI["dd"]), "lenh": _gan(float(en), float(tn), *DUNG_SAI["lenh"])}
     if e["chay"] and td < 90.0:
         khop["dd"] = False
+    ten_t = "tester" if sw_pct is None else "tester sau swap uoc"
     lech = []
     if not khop["lai"]:
-        lech.append("lai (engine %+.2f%%/nam, tester %+.2f%%/nam)" % (el, tl))
+        lech.append("lai (engine %+.2f%%/nam, %s %+.2f%%/nam)" % (el, ten_t, tl_so))
     if not khop["dd"]:
         lech.append("maxDD (engine %.1f%%, tester %.1f%%)" % (ed, td))
     if not khop["lenh"]:
         lech.append("so lenh (engine %d, tester %d)" % (en, tn))
     ket = "KHOP" if not lech else "LECH"
     bang, dau = _ky_lech_dau_tien(t["thong_ke"], e["thong_ke"])
-    ly = ("KHOP: engine %+.2f%%/nam, tester %+.2f%%/nam; maxDD %.1f%% vs %.1f%%; %d vs %d lenh"
-          % (el, tl, ed, td, en, tn)) if ket == "KHOP" else ("LECH o " + "; ".join(lech))
-    return {"ket_luan": ket, "ly_do": ly, "khop": khop,
-            "lech": {"lai_nam_pp": round(el - tl, 3), "dd_pp": round(ed - td, 3), "lenh": en - tn,
-                     "lenh_pct": round(100.0 * (en - tn) / max(tn, 1), 2)},
-            "dung_sai": {k: list(v) for k, v in DUNG_SAI.items()}, "theo_ky": bang, "ky_lech_dau_tien": dau,
-            "nhan": _canh_bao_chan_doan(t, e, f_dung)}
+    ly = ("KHOP: engine %+.2f%%/nam, %s %+.2f%%/nam; maxDD %.1f%% vs %.1f%%; %d vs %d lenh"
+          % (el, ten_t, tl_so, ed, td, en, tn)) if ket == "KHOP" else ("LECH o " + "; ".join(lech))
+    lech_so = {"lai_nam_pp": round(el - tl_so, 3), "dd_pp": round(ed - td, 3), "lenh": en - tn,
+               "lenh_pct": round(100.0 * (en - tn) / max(tn, 1), 2)}
+    ra = {"ket_luan": ket, "ly_do": ly, "khop": khop, "lech": lech_so,
+          "dung_sai": {k: list(v) for k, v in DUNG_SAI.items()}, "theo_ky": bang, "ky_lech_dau_tien": dau,
+          "nhan": _canh_bao_chan_doan(t, e, f_dung, sw)}
+    if sw_pct is not None and e["thong_ke"].get("swap") is not None:
+        sw_e = 100.0 * float(e["thong_ke"]["swap"]) / float(t["von"]) / so_nam
+        lech_so.update(lai_truoc_swap_pp=round((el - sw_e) - tl, 3), swap_engine_pp=round(sw_e - sw_pct, 3))
+        ra["tester_sau_swap"] = {"lai_nam_pct": round(tl_so, 3), "swap_uoc_pct_nam": round(sw_pct, 3), "swap_engine_pct_nam": round(sw_e, 3),
+                                 "lai_nam_pct_truoc_swap": round(tl, 3)}
+    elif sw_pct is not None:
+        ra["tester_sau_swap"] = {"lai_nam_pct": round(tl_so, 3), "swap_uoc_pct_nam": round(sw_pct, 3), "lai_nam_pct_truoc_swap": round(tl, 3)}
+    return ra
+
+
+def _gon_swap(sw: dict, so: dict) -> dict:
+    """Ket luan swap dua len ket qua: nguon, tien, %/nam, ty le dung, phoi bay (A_mua / A_ban: nho, cloud doi ty le ma khong can bang lenh)."""
+    ra = {"nguon": sw["nguon"], "ly": sw.get("ly")}
+    if sw.get("swap") is not None:
+        ra["tien"] = round(float(sw["swap"]), 2)
+    if sw.get("ty_le"):
+        ra["ty_le"] = sw["ty_le"]
+    if sw.get("phoi_bay"):
+        ra["phoi_bay"] = {k: (round(v, 6) if isinstance(v, float) else v) for k, v in sw["phoi_bay"].items()}
+    sau = so.get("tester_sau_swap")
+    if sau:
+        ra["pct_nam"] = sau.get("swap_uoc_pct_nam")
+    return ra
 
 
 def _gon_engine(e: dict) -> dict:
@@ -645,7 +749,8 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
         if "loi" in e:
             return {"trang_thai": "CHUA_DO_DUOC", "ha_tang": True, "tn_tester_id": th["tn_id"],
                     "ly_do": "engine khong chay duoc: %s" % e["loi"]}
-    so = doi_chieu(t, e, f_dung)
+    sw = swap_tester(t, e, f_dung, ma)
+    so = doi_chieu(t, e, f_dung, sw)
     if hs and von_quy_doi and abs(float(von_quy_doi) / hs["trung_vi"] - 1.0) > 0.03:
         so["nhan"].append("von_quy_doi dat %.4f khac uoc luong tu deal tester %.4f (%.1f%%)" % (
             float(von_quy_doi), hs["trung_vi"], 100.0 * (float(von_quy_doi) / hs["trung_vi"] - 1.0)))
@@ -662,13 +767,17 @@ def hieu_chuan(ma: str, khung: str, tu, den, tham_so: dict | None = None, model:
           "tester_tu_cache": bool(th["tu_cache"])}
     ra.update({k: so[k] for k in ("khop", "lech", "dung_sai", "theo_ky", "ky_lech_dau_tien", "nhan")})
     ra["nhan"] = list(t.get("canh_bao", [])) + ra["nhan"]
+    ra["swap"] = _gon_swap(sw, so)
     vt_so = ST.van_tay("hieu_chuan_luoi", vt_t, LU.PHIEN_BAN_ENGINE, ts.khop_bar, round(f_dung, 4), e["qc"]["khoa"], DUNG_SAI, KY_LECH,
-                       PHIEN_BAN)
+                       PHIEN_BAN, PHIEN_SO)
     khoa_so = [round(e["lai_nam_pct"], 2), round(t["lai_nam_pct"], 2), round(e["dd_pct"], 2), round(t["dd_pct_so_sanh"], 2),
                int(e["thong_ke"]["so_lenh_mo"]), int(t["thong_ke"]["so_lenh_mo"])]
     ra["so_khoa"] = khoa_so
+    sau = so.get("tester_sau_swap") or {}
+    ra["so_khoa_swap"] = [sau.get("lai_nam_pct"), sau.get("swap_uoc_pct_nam"), sau.get("swap_engine_pct_nam")]       # None = khong uoc
     cu_so = ST.da_thu(vt_so)
-    if cu_so and isinstance(cu_so.get("ket_qua"), dict) and cu_so["ket_qua"].get("so_khoa") == khoa_so:
+    if cu_so and isinstance(cu_so.get("ket_qua"), dict) and cu_so["ket_qua"].get("so_khoa") == khoa_so \
+            and cu_so["ket_qua"].get("so_khoa_swap") == ra["so_khoa_swap"]:
         ra["tn_id"], ra["tu_so_tay"] = cu_so["id"], "da ghi dong so tay %s (cung so)" % cu_so["id"]
         bc1 = _luu_bao_cao(ra, _khoa_bao_cao(ma, khung, cs_so, vt_t, ts.khop_bar))
         if bc1:

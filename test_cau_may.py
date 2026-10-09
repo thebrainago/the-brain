@@ -92,6 +92,8 @@ class TestDanhSachTrang:
         ["{py}", "b.py", "nc", "hoi", "Bo luat quan li lenh nao cho lai sau phi khi entry la vao ngay?"],
         ["{py}", "b.py", "nc", "hoi", "Bo luat quan li lenh nao cho lai sau phi khi entry la vao ngay?", "0.95"],
         ["{py}", "b.py", "test"],
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ra", "reports/hieu_chuan/swap_gom.json"],
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan"],
     ])
     def test_cho_qua_cac_hinh_hop_le(self, lenh):
         assert CT.kiem_lenh(lenh) is None, CT.kiem_lenh(lenh)
@@ -121,6 +123,16 @@ class TestDanhSachTrang:
         ["{py}", "-m", "pytest", "-p", "evil_plugin"],                       # plugin la
         ["{py}", "-m", "pytest", "../../etc/passwd"],                        # duong dan ngoai
         ["{py}", "{goc}/x.py"],                                              # the {goc} khong duoc dung lam script
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "/etc"],                   # swap_uoc: chi doc reports/hieu_chuan
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan/../../x"],
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan/"],
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ra", "reports/hieu_chuan/khac.json"],   # chi swap_*.json
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ra", "/tmp/swap_x.json"],
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ra", "reports/hieu_chuan/swap_A.json"],
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ra", "reports/hieu_chuan/swap_../x.json"],
+        ["{py}", "-m", "nhan.swap_uoc", "bang.csv.gz", "--ma", "AUDCAD"],     # doc tep tuy y: khong cho
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "extra"],
+        ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ma", "AUDCAD"],
         [], "chuoi", None, ["{py}"],
     ])
     def test_tu_choi_cac_hinh_nguy_hiem_hay_sai(self, lenh):

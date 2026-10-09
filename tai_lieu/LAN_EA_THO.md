@@ -126,6 +126,10 @@ khoi dong lai giua chung), va 5 diem hieu chuan ben duoi. May nha bien dich F7: 
    `MQL5\Experts\_tu_dong` va `.set` ten kem khong (`.ini` dung `Expert=_tu_dong\<ten>` + `ExpertParameters=<nhan>.set`); (b) bot kiem tra ban quyen
    qua WebRequest (tester chan) co the KHONG vao lenh -> it lenh -> `CHUA_DO_DUOC`, khong phai AM; (c) lenh dau tien nen la `ea_LuoiThamChieu`
    (diem 4) truoc khi chay bot la. Hong thi doc truong `log`, sua ha tang, khong tieu niem phong.
+6. **SWAP (09/10/2026, DA xu ly bang UOC, khong phai bang do)**: MT5 tester khong ghi swap (cot Swap = 0 o 286/286 hang + 3 bao cao that), nen lai
+   tester la TRUOC swap (luoi / DCA bi ~4-5 %/nam). `ea_tho` nay uoc swap tu bang lenh tester x ty le/nam cua ma (`nhan/swap_uoc.py`) va chi xet
+   DAT tren lai SAU swap; thieu ty le / he so tien o doan niem_phong = hong ha tang (khong tieu lan mo). Ty le la bang HIEN TAI cua XM -
+   do mot lenh swap tren tai khoan demo that de doi chieu. Doc: `tai_lieu/SWAP_THUOC_DO.md`.
 
 ## Gioi han (noi that)
 `ea_tu_dong.tai_lo` chi lay van ban `.mq5` CHINH tren trang CodeBase (khong .zip, nghi 3 giay/bai): EA nhieu file mat `.mqh` -> `THIEU_TEP`. Tai goi day du can mot trang CodeBase that cua EA nhieu file lam fixture (cloud khong ra duoc mql5.com) - viec cua may nha, xem thu chi thi 03/10.

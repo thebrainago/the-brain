@@ -83,6 +83,16 @@ def _url_cho_tham_do(s: str) -> bool:
     return len(s) <= 400 and s.isprintable() and LN.cho_tham_do(s)[0]
 
 
+def _thu_muc_hieu_chuan(s: str) -> bool:
+    """Chi doc thu muc ket qua hieu chuan luoi (`nhan/swap_uoc.py --quet`): khong duong dan khac, khong `..`."""
+    return s == "reports/hieu_chuan"
+
+
+def _tep_swap_gom(s: str) -> bool:
+    """Tep ra cua `swap_uoc --quet`: chi `reports/hieu_chuan/swap_<ten>.json` (ten chu thuong / so / _), khong de len tep khac."""
+    return re.fullmatch(r"reports/hieu_chuan/swap_[a-z0-9_]{1,60}\.json", s) is not None
+
+
 def _ma_dien_dan(s: str) -> bool:
     """Danh sach ma dien dan cach nhau dau phay (`config/dien_dan.json`): chu thuong / so / _, toi da 30 ma."""
     return re.fullmatch(r"[a-z0-9_]{1,40}(,[a-z0-9_]{1,40}){0,29}", s) is not None
@@ -180,6 +190,9 @@ LENH_B: dict[tuple, Hinh] = {
 #: `-m <module> ...`
 MODULE_M: dict[str, Hinh] = {
     "tru.banker": Hinh(co={"--nhin-truoc": None, "--ep": None}),
+    # 09/10/2026: gom phoi bay (so dem x lot x K) cua moi hang hieu chuan da luu -> mot tep nho cho cloud. CHI DOC bang lenh, chi ghi
+    # `reports/hieu_chuan/swap_*.json`. Don can nhan `swap-v1` (ma cu khong co module nay).
+    "nhan.swap_uoc": Hinh(co={"--quet": _thu_muc_hieu_chuan, "--ra": _tep_swap_gom}),
 }
 #: `<script>.py ...` o goc lab
 SCRIPT: dict[str, Hinh] = {

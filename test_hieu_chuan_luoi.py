@@ -27,6 +27,7 @@ from nhan import luoi as LU
 from nhan import nc_cong_cu as CC
 from nhan import nc_du_lieu as NDL
 from nhan import nc_so_tay as ST
+from nhan import swap_uoc as SW
 from qwen import cau_trang as CT
 from test_bao_cao_mt5 import EN, html_mau
 from test_lenh_tester import CAU_HINH, HOP_FX, bars_that, dung_giao_dich, ghi_htm, html_bao_cao, vi_the_tu_engine
@@ -865,3 +866,235 @@ def test_tick_tu_cua_may_nha_khong_cat_cua_so_hieu_chuan(may, moi_truong, monkey
     m = may()
     r = chay()
     assert r["trang_thai"] == "DAT" and m.lenh[0]["viec"]["tu"] == "2024.01.01" and m.lenh[0]["viec"]["den"] == "2024.02.06"
+
+
+# ================================================================= D. SWAP: tester khong ghi swap -> CONG swap uoc truoc khi so voi engine
+QC_GIA = {"ma": "AUDCAD", "hop_dong": 100000.0, "phi_nam_mua": -0.00263, "phi_nam_ban": 0.03853}      # = luoi.QC_AUDCAD (XM)
+
+
+def _bang_swap(chieu: int = 1, lot: float = 1.0, gia: float = 0.9) -> pd.DataFrame:
+    """MOT lenh giu dung 4 tuan (thu Hai 10:00 -> thu Hai 10:00) = 28 dem, gia khong doi."""
+    return pd.DataFrame({"mo": [pd.Timestamp("2024-01-08 10:00")], "dong": [pd.Timestamp("2024-02-05 10:00")], "chieu": [chieu], "lot": [lot],
+                         "gia_mo": [gia], "gia_dong": [gia]})
+
+
+def _sw_uoc(pct_nam: float, t: dict | None = None) -> dict:
+    """Ket luan 'uoc' co swap = pct_nam %/nam cua von cua `t` (nguon cua tien: `_swap_pct_nam`)."""
+    t = t or _t()
+    return {"nguon": "uoc", "swap": pct_nam / 100.0 * t["von"] * (t["cua_so_so_sanh"]["ngay"] / 365.25), "ly": "uoc", "phoi_bay": None}
+
+
+def test_swap_tester_uoc_tu_phoi_bay_ty_le_cua_engine_va_k_bang_hop_dong_chia_he_so():
+    phoi = SW.phoi_bay(_bang_swap(chieu=-1), 1.0, ma="AUDCAD")
+    r = HC.swap_tester(_t(swap_phoi_k1=phoi), _e(qc=QC_GIA), 1.3, "AUDCAD")
+    k = 100000.0 / 1.3
+    a = 1.0 * k * 0.9 * 28 / 365.0
+    assert r["nguon"] == "uoc" and r["swap"] == pytest.approx(-0.03853 * a, rel=1e-9)             # SELL tra 3,853%/nam: ton tien
+    assert r["phoi_bay"]["k_tien"] == pytest.approx(k) and r["phoi_bay"]["A_ban"] == pytest.approx(a) and r["phoi_bay"]["A_mua"] == 0.0
+    assert (r["ty_le"]["mua"], r["ty_le"]["ban"]) == (-0.00263, 0.03853) and "AUDCAD" in r["ty_le"]["nguon"]
+    assert phoi["k_tien"] == 1.0, "phoi luu trong nua tester (K = 1) khong bi sua"
+    mua = HC.swap_tester(_t(swap_phoi_k1=SW.phoi_bay(_bang_swap(chieu=1), 1.0, ma="AUDCAD")), _e(qc=QC_GIA), 1.3, "AUDCAD")
+    assert mua["swap"] == pytest.approx(0.00263 * a, rel=1e-9) and mua["swap"] > 0               # BUY AUDCAD NHAN swap
+
+
+def test_swap_tester_he_so_quy_doi_doi_thi_swap_doi_ty_le_nghich():
+    phoi = SW.phoi_bay(_bang_swap(chieu=-1), 1.0, ma="AUDCAD")
+    a = HC.swap_tester(_t(swap_phoi_k1=phoi), _e(qc=QC_GIA), 1.3, "AUDCAD")["swap"]
+    b = HC.swap_tester(_t(swap_phoi_k1=phoi), _e(qc=QC_GIA), 1.0, "AUDCAD")["swap"]
+    assert b / a == pytest.approx(1.3, rel=1e-9), "tien tai khoan = tien bao gia / f"
+
+
+def test_swap_tester_tester_co_ghi_swap_thi_la_do_khong_cong_them():
+    phoi = SW.phoi_bay(_bang_swap(chieu=-1), 1.0, ma="AUDCAD")
+    r = HC.swap_tester(_t(swap_phoi_k1=phoi, thong_ke=_tk(swap=-12.3)), _e(qc=QC_GIA), 1.3, "AUDCAD")
+    assert r["nguon"] == "do" and r["swap"] == -12.3 and "phoi_bay" not in r
+
+
+def test_swap_tester_thieu_phoi_bay_va_bang_lenh_la_khong_uoc_duoc_khong_doan(tmp_path):
+    r = HC.swap_tester(_t(), _e(qc=QC_GIA), 1.3, "AUDCAD")
+    assert r["nguon"] == "khong_uoc_duoc" and r["swap"] is None and r["ly"]
+    r = HC.swap_tester(_t(bang_lenh=str(tmp_path / "khong_co.csv.gz")), _e(qc=QC_GIA), 1.3, "AUDCAD")
+    assert r["nguon"] == "khong_uoc_duoc"
+    rac = tmp_path / "rac.csv.gz"
+    rac.write_bytes(b"khong phai csv nen")
+    r = HC.swap_tester(_t(bang_lenh=str(rac)), _e(qc=QC_GIA), 1.3, "AUDCAD")
+    assert r["nguon"] == "khong_uoc_duoc", "bang lenh hong: khong nem ngoai le, khong doan"
+
+
+def test_swap_tester_nua_tester_cu_khong_luu_phoi_bay_thi_doc_lai_bang_lenh_da_luu(tmp_path):
+    duong = tmp_path / "x_lenh.csv.gz"
+    _bang_swap(chieu=-1).to_csv(duong, index=False, compression="gzip")
+    t = _t(bang_lenh=str(duong))
+    r = HC.swap_tester(t, _e(qc=QC_GIA), 1.3, "AUDCAD")
+    thang = HC.swap_tester(_t(swap_phoi_k1=SW.phoi_bay(_bang_swap(chieu=-1), 1.0, ma="AUDCAD")), _e(qc=QC_GIA), 1.3, "AUDCAD")
+    assert r["nguon"] == "uoc" and r["swap"] == pytest.approx(thang["swap"], rel=1e-12)
+
+
+def test_swap_pct_nam_chi_cho_uoc_va_tinh_theo_von_va_so_nam():
+    assert HC._swap_pct_nam({"nguon": "uoc", "swap": -100.0}, 10000.0, 0.5) == pytest.approx(-2.0)
+    assert HC._swap_pct_nam({"nguon": "do", "swap": -100.0}, 10000.0, 0.5) is None                 # da nam trong lai_rong
+    assert HC._swap_pct_nam({"nguon": "khong_uoc_duoc", "swap": None}, 10000.0, 0.5) is None
+    assert HC._swap_pct_nam({"nguon": "uoc", "swap": None}, 10000.0, 0.5) is None
+    assert HC._swap_pct_nam(None, 10000.0, 0.5) is None and HC._swap_pct_nam({"nguon": "uoc", "swap": -1.0}, 0.0, 0.5) is None
+
+
+def test_doi_chieu_cong_swap_uoc_vao_lai_tester_roi_moi_so_voi_engine():
+    t = _t(lai_nam_pct=10.0)                                   # tester TRUOC swap
+    e = _e(lai_nam_pct=6.0, thong_ke=_tk(swap=-400.0))         # engine SAU swap: -400 / 10000 / 1,002 nam = -3,99 %/nam
+    cu = HC.doi_chieu(t, e, 1.0)
+    assert cu["ket_luan"] == "LECH" and "tester sau swap" not in cu["ly_do"], "khong co uoc thi so thang 10 vs 6: lech"
+    r = HC.doi_chieu(t, e, 1.0, _sw_uoc(-4.0, t))
+    assert r["ket_luan"] == "KHOP" and r["khop"]["lai"]
+    assert "tester sau swap uoc +6.00%/nam" in r["ly_do"]
+    sau = r["tester_sau_swap"]
+    assert sau["lai_nam_pct"] == pytest.approx(6.0) and sau["swap_uoc_pct_nam"] == pytest.approx(-4.0) and sau["lai_nam_pct_truoc_swap"] == 10.0
+    assert sau["swap_engine_pct_nam"] == pytest.approx(-400.0 / 10000.0 / (366 / 365.25) * 100.0, abs=1e-3)
+    assert abs(r["lech"]["lai_nam_pp"]) < 0.02
+
+
+def test_doi_chieu_lech_lai_tach_hai_mon_mo_hinh_gia_va_swap_cong_lai_bang_tong():
+    t = _t(lai_nam_pct=10.0)
+    e = _e(lai_nam_pct=3.0, thong_ke=_tk(swap=-150.0))         # engine swap -1,50 %/nam
+    r = HC.doi_chieu(t, e, 1.0, _sw_uoc(-4.0, t))              # tester sau swap = 6,0
+    L = r["lech"]
+    assert L["lai_nam_pp"] == pytest.approx(3.0 - 6.0, abs=1e-3)
+    assert L["swap_engine_pp"] == pytest.approx(-1.4969 - (-4.0), abs=2e-3)                    # engine it swap hon uoc 2,5 diem
+    assert L["lai_truoc_swap_pp"] == pytest.approx((3.0 + 1.4969) - 10.0, abs=2e-3)            # mo hinh gia: engine truoc swap 4,5 vs tester 10
+    assert L["lai_nam_pp"] == pytest.approx(L["lai_truoc_swap_pp"] + L["swap_engine_pp"], abs=2e-3)
+    assert r["ket_luan"] == "LECH" and r["ly_do"].startswith("LECH o lai") and "tester sau swap uoc" in r["ly_do"]
+
+
+def test_doi_chieu_tester_co_ghi_swap_la_do_khong_dieu_chinh_gi():
+    t, e = _t(lai_nam_pct=10.0), _e(lai_nam_pct=6.0, thong_ke=_tk(swap=-400.0))
+    a = HC.doi_chieu(t, e, 1.0)
+    b = HC.doi_chieu(t, e, 1.0, {"nguon": "do", "swap": -400.0, "ly": "do"})
+    assert (a["ket_luan"], a["ly_do"], a["lech"], a["khop"]) == (b["ket_luan"], b["ly_do"], b["lech"], b["khop"]) and "tester_sau_swap" not in b
+
+
+def test_doi_chieu_khong_uoc_duoc_thi_khong_dieu_chinh_nhung_noi_ro_hai_so_khong_cung_thuoc_do():
+    t, e = _t(lai_nam_pct=10.0), _e(lai_nam_pct=6.0, thong_ke=_tk(swap=-400.0))
+    r = HC.doi_chieu(t, e, 1.0, {"nguon": "khong_uoc_duoc", "swap": None, "ly": "khong co ty le"})
+    assert r["ket_luan"] == "LECH" and "tester sau swap" not in r["ly_do"] and "tester_sau_swap" not in r
+    assert any("KHONG uoc duoc (khong co ty le)" in x and "TRUOC swap" in x for x in r["nhan"]), r["nhan"]
+
+
+def test_doi_chieu_swap_uoc_dao_dau_lai_tester_thi_van_ap_luat_sai_dau():
+    """Tester +0,8 truoc swap, swap uoc -1,6 -> -0,8 sau swap; engine +0,8: sai dau, ca hai > 0,5 -> LECH (khong cho 'gan' qua)."""
+    t = _t(lai_nam_pct=0.8)
+    r = HC.doi_chieu(t, _e(lai_nam_pct=0.8, thong_ke=_tk(swap=-160.0)), 1.0, _sw_uoc(-1.6, t))
+    assert r["khop"]["lai"] is False and r["ket_luan"] == "LECH"
+
+
+def test_canh_bao_swap_uoc_noi_ro_lai_tester_la_sau_swap_va_chi_bao_lech_khi_vuot_dung_sai():
+    t = _t(lai_nam_pct=10.0)
+    sw = _sw_uoc(-4.0, t)
+    gan = HC._canh_bao_chan_doan(t, _e(thong_ke=_tk(swap=-400.0)), 1.0, sw)
+    assert len(gan) == 1 and "tester KHONG ghi swap" in gan[0] and "-4.00%/nam" in gan[0] and "+10.00%/nam = TRUOC swap" in gan[0]
+    xa = HC._canh_bao_chan_doan(t, _e(thong_ke=_tk(swap=-50.0)), 1.0, sw)
+    assert len(xa) == 2 and "swap: engine -0.50%/nam" in xa[1] and "-4.00%/nam" in xa[1]
+    ko_sw_engine = HC._canh_bao_chan_doan(t, _e(thong_ke=_tk(swap=None)), 1.0, sw)
+    assert len(ko_sw_engine) == 1
+
+
+def test_canh_bao_swap_khong_uoc_duoc_va_do_va_khong_co_sw_giu_nguyen_cach_cu():
+    t = _t(thong_ke=_tk(swap=-200.0))
+    e = _e(thong_ke=_tk(swap=-50.0))
+    cu = HC._canh_bao_chan_doan(t, e, 1.0)
+    assert HC._canh_bao_chan_doan(t, e, 1.0, {"nguon": "do", "swap": -200.0}) == cu and any("swap: tester -" in x for x in cu)
+    kd = HC._canh_bao_chan_doan(_t(), e, 1.0, {"nguon": "khong_uoc_duoc", "swap": None, "ly": "thieu ty le"})
+    assert len(kd) == 1 and "KHONG uoc duoc (thieu ty le)" in kd[0]
+    assert HC._canh_bao_chan_doan(_t(), _e(), 1.0, {"nguon": "do", "swap": 0.0}) == [], "engine khong swap, tester khong ghi: khong co gi de noi"
+
+
+# ---- tron vong: bao cao khong ghi swap (nhu MT5 that) -> uoc -> KHOP voi engine
+def test_tester_khong_ghi_swap_nhu_MT5_that_thi_uoc_swap_va_van_KHOP_voi_engine(may):
+    m = may(swap=False)
+    r = chay()
+    assert r["trang_thai"] == "DAT" and r["ket_luan"] == "KHOP", r["ly_do"]
+    assert abs(r["tester"]["thong_ke"]["swap"] or 0.0) == 0.0, "bao cao gia ghi Swap = 0 nhu MT5 that"
+    sw = r["swap"]
+    assert sw["nguon"] == "uoc" and sw["tien"] < 0 and sw["pct_nam"] < 0 and "ty_le" in sw and sw["phoi_bay"]["A_mua"] > 0 < sw["phoi_bay"]["A_ban"]
+    sw_engine = r["engine"]["thong_ke"]["swap"]
+    assert sw_engine < 0 and abs(sw["tien"] - sw_engine) <= 0.05 * abs(sw_engine), "uoc tu bang lenh ~ swap cua chinh engine (cung ty le)"
+    assert abs(r["lech"]["lai_nam_pp"]) < 0.1 and abs(r["lech"]["lai_truoc_swap_pp"]) < 0.1 and abs(r["lech"]["swap_engine_pp"]) < 0.1
+    # so tester GOC (truoc swap) khac engine DUNG bang swap: chinh khoan nay truoc day bi dem nham thanh lech
+    khoang_cach = r["tester"]["lai_nam_pct"] - r["engine"]["lai_nam_pct"]
+    assert khoang_cach == pytest.approx(-sw["pct_nam"], abs=0.1) and abs(khoang_cach) > 0.3
+    # so khoa cu (6 so) giu nguyen dinh dang; so khoa swap = [tester sau swap, swap uoc, swap engine]
+    assert len(r["so_khoa"]) == 6 and r["so_khoa"][1] == pytest.approx(r["tester"]["lai_nam_pct"], abs=0.01)
+    lai_sau, sw_u, sw_e = r["so_khoa_swap"]
+    assert lai_sau == pytest.approx(r["tester"]["lai_nam_pct"] + sw_u, abs=0.01) and sw_u == pytest.approx(sw["pct_nam"], abs=1e-3) and sw_e < 0
+    assert any("tester KHONG ghi swap" in x for x in r["nhan"])
+
+
+def test_tester_co_ghi_swap_thi_la_do_va_khong_cong_them(may):
+    may(swap=True)
+    r = chay()
+    assert r["swap"]["nguon"] == "do" and "phoi_bay" not in r["swap"] and r["so_khoa_swap"] == [None, None, None]
+    assert "tester_sau_swap" not in r and "swap_engine_pp" not in r["lech"]
+    assert r["ket_luan"] == "KHOP" and not any("tester KHONG ghi swap" in x for x in r["nhan"])
+
+
+def test_lan_hai_khong_ghi_swap_dung_cache_va_giu_ket_luan_swap(may):
+    m = may(swap=False)
+    r1 = chay()
+    r2 = chay()
+    assert m.lan == 1 and r2["tester_tu_cache"] is True and "tu_so_tay" in r2 and r2["tn_id"] == r1["tn_id"]
+    assert r2["so_khoa_swap"] == r1["so_khoa_swap"] and r2["swap"]["nguon"] == "uoc" and r2["swap"]["tien"] == r1["swap"]["tien"]
+    assert len(dong_so_tay()) == 2
+
+
+def test_dong_so_tay_cu_chua_co_so_khoa_swap_thi_ghi_dong_so_sanh_moi(may):
+    """Dong so sanh duoc ghi TRUOC khi co khoan swap (khong co `so_khoa_swap`) khong duoc che dong moi: cach so da doi nghia."""
+    may(swap=False)
+    r1 = chay()
+    with ST.ket_noi() as cn:
+        cn.execute("UPDATE thi_nghiem SET van_tay='van_tay_cu_truoc_swap' WHERE id=?", (r1["tn_id"],))
+    r2 = chay()
+    assert r2["tn_id"] != r1["tn_id"] and "tu_so_tay" not in r2, "van tay so sanh moi (PHIEN_SO) khong trung dong cu"
+    assert [x["loai"] for x in dong_so_tay()] == [HC.LOAI_TESTER, HC.LOAI_SO_SANH, HC.LOAI_SO_SANH]
+
+
+def test_dong_so_sanh_cung_van_tay_nhung_khac_so_khoa_swap_thi_ghi_dong_moi(may):
+    """Cung dau vao nhung ty le / cach uoc swap doi (van tay khong doi): dong cu KHONG duoc tra lai nhu 'cung so'."""
+    may(swap=False)
+    r1 = chay()
+    dong = ST.mot("SELECT id, ket_qua FROM thi_nghiem WHERE id=?", r1["tn_id"])
+    kq = json.loads(dong["ket_qua"])
+    kq["so_khoa_swap"] = [9.9, 9.9, 9.9]
+    with ST.ket_noi() as cn:
+        cn.execute("UPDATE thi_nghiem SET ket_qua=? WHERE id=?", (json.dumps(kq), dong["id"]))
+    r2 = chay()
+    assert r2["tn_id"] != r1["tn_id"] and "tu_so_tay" not in r2 and r2["so_khoa_swap"] == r1["so_khoa_swap"]
+
+
+def test_nua_tester_trong_cache_cu_khong_co_phoi_bay_van_uoc_duoc_tu_bang_lenh_da_luu(may):
+    m = may(swap=False)
+    r1 = chay()
+    dong = ST.mot("SELECT id, ket_qua FROM thi_nghiem WHERE loai=?", HC.LOAI_TESTER)
+    kq = json.loads(dong["ket_qua"])
+    assert kq["tester"].pop("swap_phoi_k1")["so_lenh"] > 100                    # xoa phoi bay: gia lam dong tester cua ban truoc 09/10
+    with ST.ket_noi() as cn:
+        cn.execute("UPDATE thi_nghiem SET ket_qua=? WHERE id=?", (json.dumps(kq), dong["id"]))
+    with ST.ket_noi() as cn:
+        cn.execute("DELETE FROM thi_nghiem WHERE loai=?", (HC.LOAI_SO_SANH,))
+    r2 = chay()
+    assert m.lan == 1 and r2["tester_tu_cache"] is True
+    assert r2["swap"]["nguon"] == "uoc" and r2["swap"]["tien"] == pytest.approx(r1["swap"]["tien"], rel=1e-6)
+    assert r2["so_khoa_swap"] == r1["so_khoa_swap"]
+
+
+def test_bang_lenh_mat_va_khong_co_phoi_bay_thi_khong_uoc_duoc_va_noi_ro_trong_ket_qua(may):
+    may(swap=False)
+    r1 = chay()
+    dong = ST.mot("SELECT id, ket_qua FROM thi_nghiem WHERE loai=?", HC.LOAI_TESTER)
+    kq = json.loads(dong["ket_qua"])
+    kq["tester"].pop("swap_phoi_k1")
+    Path(kq["tester"]["bang_lenh"]).unlink()                                     # may khac / da don: khong con bang lenh
+    with ST.ket_noi() as cn:
+        cn.execute("UPDATE thi_nghiem SET ket_qua=? WHERE id=?", (json.dumps(kq), dong["id"]))
+        cn.execute("DELETE FROM thi_nghiem WHERE loai=?", (HC.LOAI_SO_SANH,))
+    r2 = chay()
+    assert r2["swap"]["nguon"] == "khong_uoc_duoc" and r2["so_khoa_swap"] == [None, None, None]
+    assert r2["ket_luan"] == "LECH" and r1["ket_luan"] == "KHOP", "khong co uoc: so thang tester TRUOC swap voi engine SAU swap"
+    assert any("KHONG uoc duoc" in x and "TRUOC swap" in x for x in r2["nhan"])

@@ -845,6 +845,7 @@ def tag_ma(lab: Path | None = None) -> list[str]:
     - `engineN`  : `nhan/luoi.PHIEN_BAN_ENGINE` = N (khai ca engine1..N: don can >= bac nao cung khai `engine<bac>`).
                    `engine4` = mo hinh bar `duong_di` (ban cu `cuc_tri` lac quan x2,2 trung vi so voi tester).
     - `dien-dan-v2`: `nhan/doc_dien_dan` biet tim trang ke + that bai trung thuc.
+    - `swap-v1`    : `nhan/swap_uoc` (uoc phi qua dem tu bang lenh tester; hieu_chuan / ea_tho CONG swap uoc). Don `-m nhan.swap_uoc ...` can nhan nay.
     """
     lab = Path(lab) if lab else GOC
     ra = ["ma-0810"]
@@ -857,6 +858,11 @@ def tag_ma(lab: Path | None = None) -> list[str]:
     try:
         if "def tim_trang_tiep(" in (lab / "nhan" / "doc_dien_dan.py").read_text(encoding="utf-8", errors="replace"):
             ra.append("dien-dan-v2")
+    except OSError:
+        pass
+    try:
+        if "def uoc_tu_bao_cao(" in (lab / "nhan" / "swap_uoc.py").read_text(encoding="utf-8", errors="replace"):
+            ra.append("swap-v1")
     except OSError:
         pass
     return ra
