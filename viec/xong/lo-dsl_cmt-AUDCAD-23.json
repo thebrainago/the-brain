@@ -1,0 +1,52 @@
+{
+  "ma": "lo-dsl_cmt-AUDCAD-23",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 6.9,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "thu_lo_co_che",
+      "{\"ma\": \"AUDCAD\", \"khung\": \"M15\", \"thu_muc\": \"dsl_cmt\", \"ten\": [\"c3_xu_huo_lich_1_mua\", \"c3_xu_huo_lich_3_ban\", \"c3_xu_huo_lich_3_mua\", \"c3_xu_huo_nen_1_mua\", \"c3_xu_huo_nen_2_mua\", \"c3_xu_huo_nen_3_mua\", \"c3_xu_huo_pha_vo_1_mua\", \"c3_xu_huo_pha_vo_2_mua\", \"c3_xu_huo_pha_vo_3_mua\", \"c3_xu_huo_suc_ma_1_ban\", \"c3_xu_huo_suc_ma_1_mua\", \"c3_xu_huo_suc_ma_3_ban\", \"c3_xu_huo_suc_ma_3_mua\", \"cci_qua_ban_roi_len_ban\", \"cci_qua_ban_roi_len_mua\", \"dau_thang_xu_huong_ban\", \"dau_thang_xu_huong_mua\", \"donchian_pha_loc_atr_ban\", \"donchian_pha_loc_atr_mua\", \"gian_bien_dong_mua\", \"gio_london_pha_vo_ban\", \"gio_london_pha_vo_mua\", \"hoi_quy_khi_adx_thap_mua\", \"hoi_quy_khi_adx_thap_zscore_am_guong\", \"ichimoku_tenkan_kijun_mua\"]}"
+    ],
+    "phien_ban_ma": "44b3b23d+sua",
+    "dong_cuoi": [
+      "   \"trang_thai\": \"AM\",",
+      "   \"so_lenh\": 1200,",
+      "   \"ky_vong_bps\": -1.04,",
+      "   \"cagr_duoi_tran_pct\": -2.31,",
+      "   \"ly_do\": \"khong co lai sau phi: ky vong -1.04 bps/lenh, -2.31%/nam o don bay x1.00\"",
+      "  },",
+      "  {",
+      "   \"he\": \"hoi_quy_khi_adx_thap_zscore_am_guong\",",
+      "   \"trang_thai\": \"AM\",",
+      "   \"so_lenh\": 1210,",
+      "   \"ky_vong_bps\": -2.57,",
+      "   \"cagr_duoi_tran_pct\": -5.49,",
+      "   \"ly_do\": \"khong co lai sau phi: ky vong -2.57 bps/lenh, -5.49%/nam o don bay x1.00\"",
+      "  },",
+      "  {",
+      "   \"he\": \"ichimoku_tenkan_kijun_mua\",",
+      "   \"trang_thai\": \"CHUA_DO_DUOC\",",
+      "   \"so_lenh\": 0,",
+      "   \"ky_vong_bps\": null,",
+      "   \"cagr_duoi_tran_pct\": 0.0,",
+      "   \"ly_do\": \"chi 0 lenh < 10\"",
+      "  }",
+      " ],",
+      " \"_giay\": 5.03",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-09T20:06:15"
+}
