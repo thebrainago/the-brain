@@ -1,0 +1,34 @@
+{
+  "ma": "00y-cai-pandas",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 4.5,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "cai-goi",
+      "pandas"
+    ],
+    "phien_ban_ma": "44b3b23d+sua",
+    "dong_cuoi": [
+      "Requirement already satisfied: pandas in c:\\research sp500\\lab\\.venv\\lib\\site-packages (3.0.6)",
+      "Requirement already satisfied: numpy>=1.26.0 in c:\\research sp500\\lab\\.venv\\lib\\site-packages (from pandas) (2.5.3)",
+      "Requirement already satisfied: python-dateutil>=2.8.2 in c:\\research sp500\\lab\\.venv\\lib\\site-packages (from pandas) (2.9.0.post0)",
+      "Requirement already satisfied: tzdata in c:\\research sp500\\lab\\.venv\\lib\\site-packages (from pandas) (2026.4)",
+      "Requirement already satisfied: six>=1.5 in c:\\research sp500\\lab\\.venv\\lib\\site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)"
+    ],
+    "loi_cuoi": [
+      "",
+      "[notice] A new release of pip is available: 25.0.1 -> 26.2.1",
+      "[notice] To update, run: C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe -m pip install --upgrade pip"
+    ],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-09T20:01:02"
+}
