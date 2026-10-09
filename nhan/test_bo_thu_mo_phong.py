@@ -108,6 +108,7 @@ def test_ca_thieu_truong_bat_buoc_thi_bao_ro_ten(truong):
 
 
 @pytest.mark.parametrize("sua", [lambda b: b["he_so_quy_doi"].update(dung=0.0), lambda b: b["he_so_quy_doi"].update(dung=float("nan")),
+                                 lambda b: b["he_so_quy_doi"].update(dung=float("inf")),
                                  lambda b: b["he_so_quy_doi"].update(dung=-1.0), lambda b: b.update(von=-5.0),
                                  lambda b: b.update(von=float("inf")), lambda b: b.update(von=0.0),
                                  lambda b: b["cua_so"].update(ngay=0, tu="2019.01.02", den="2019.01.01"),
@@ -384,6 +385,16 @@ def test_ghep_chon_lenh_gan_gia_nhat_roi_moi_den_gan_gio():
     tester2 = _bang(_lenh("2019-01-02 10:00:50", 1, 1.0), _lenh("2019-01-02 10:00:10", 1, 1.0))
     g2 = B.ghep_lenh(_bang(_lenh("2019-01-02 10:00:00", 1, 1.0)), tester2, 60, 0.001)
     assert g2["cap"] == [(0, 1)]
+    # gia uu tien hon gio: lenh dung gia nhung xa gio hon van duoc chon
+    tester3 = _bang(_lenh("2019-01-02 10:00:50", 1, 1.0000), _lenh("2019-01-02 10:00:10", 1, 1.0002))
+    assert B.ghep_lenh(_bang(_lenh("2019-01-02 10:00:00", 1, 1.0000)), tester3, 60, 0.001)["cap"] == [(0, 0)]
+
+
+def test_ghep_duyet_theo_gio_mo_lenh_som_hon_nhan_truoc_du_bang_vao_khong_xep_gio():
+    tester = _bang(_lenh("2019-01-02 10:00:00", 1, 1.0))
+    bien_the = _bang(_lenh("2019-01-02 10:00:30", 1, 1.0), _lenh("2019-01-02 10:00:05", 1, 1.0))      # hang 1 mo som hon
+    g = B.ghep_lenh(bien_the, tester, 60, 0.001)
+    assert g["cap"] == [(1, 0)] and g["chi_a"] == [0]
 
 
 def test_ghep_bien_dung_sai_tinh_ca_hai_dau():
@@ -482,6 +493,24 @@ def test_so_sanh_khop_dong_cung_gia_nhung_dong_tre_qua_dung_sai_thi_khong_khop()
     tester = _bang(_lenh("2019-01-02 10:00:00", 1, 1.0, "2019-01-02 10:10:00", 1.001))
     bien_the = _bang(_lenh("2019-01-02 10:00:00", 1, 1.0, "2019-01-02 10:25:00", 1.001))      # dong tre 15 phut > dung sai 5 phut
     assert _so(bien_the, tester)["khop_dong"] == 0.0
+
+
+def test_so_sanh_khop_dong_dung_bien_dung_sai_gio_va_gia():
+    # gia nhi phan chinh xac de `<=` khong bi sai so dau phay dong: dung sai gio 300 giay, gia 0,5
+    tester = _bang(_lenh("2019-01-02 10:00:00", 1, 2.0, "2019-01-02 10:10:00", 2.0))
+    dung = _bang(_lenh("2019-01-02 10:00:00", 1, 2.0, "2019-01-02 10:15:00", 2.5))                # dong tre dung 300 s, lech gia dung 0,5
+    qua_gio = _bang(_lenh("2019-01-02 10:00:00", 1, 2.0, "2019-01-02 10:15:01", 2.0))
+    qua_gia = _bang(_lenh("2019-01-02 10:00:00", 1, 2.0, "2019-01-02 10:10:00", 2.5000001))
+    kw = dict(tol_giay=300, tol_gia=0.5, pip=1.0)
+    assert _so(dung, tester, **kw)["khop_dong"] == 1.0
+    assert _so(qua_gio, tester, **kw)["khop_dong"] == 0.0
+    assert _so(qua_gia, tester, **kw)["khop_dong"] == 0.0
+
+
+def test_so_sanh_mot_ben_rong_van_tinh_lai_thang_ben_kia():
+    a = _bang(_lenh("2019-01-02 10:00:00", 1, 1.0, "2019-01-02 10:30:00", 1.0, lai=7.0))
+    for r in (_so(a, a.iloc[0:0], von=1000.0), _so(a.iloc[0:0], a, von=1000.0)):
+        assert r["lai_thang"]["n_thang"] == 1 and r["lai_thang"]["mae_pct_von"] == pytest.approx(0.7)         # |7 - 0| / 1000 * 100
 
 
 def test_so_sanh_khop_dong_chi_tinh_cap_co_gia_dong_ca_hai_ben():
@@ -677,12 +706,12 @@ def _tester_tay():
 
 def test_chay_mot_ca_doc_tu_dia_va_tra_mot_dong_moi_bien_the(tmp_path, m1_3ngay):
     gia, lenh = _ghi_dia(tmp_path, m1_3ngay, _tester_tay())
-    ca = dataclasses.replace(_ca_tay(m1_3ngay), khoa=KHOA)
+    ca = dataclasses.replace(_ca_tay(m1_3ngay), khoa=KHOA, so_khoa=(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
     cac = [B.BienThe("a", "bar", "M5"), B.BienThe("b", "bar", "M15", "cuc_tri")]
     rows = B.chay_mot_ca(ca, cac, gia, lenh)
     assert [r["bien_the"] for r in rows] == ["a", "b"] and not any(r.get("loi") for r in rows)
     r = rows[0]
-    assert r["n_b"] == 3 and r["n_tester"] == 3 and r["ma"] == "AUDCAD" and r["q"] == 100.0
+    assert r["n_b"] == 3 and r["n_tester"] == 3 and r["ma"] == "AUDCAD" and r["q"] == 100.0 and r["dd_tester"] == 4.0
     assert r["lai_nam_tester"] == pytest.approx(1.5 / 10000.0 / (3 / 365.25) * 100.0)
     assert {"ti_le_khop", "phan_ra", "lech_dau", "khop_den", "lai_thang", "dd_pct", "giay", "n_a"} <= set(r)
 
@@ -723,6 +752,15 @@ def test_quet_hai_luong_cho_ket_qua_giong_mot_luong(tmp_path, m1_3ngay):
         return [{k: v for k, v in r.items() if k != "giay"} for r in rows]
     assert len(r1) == 6 and bo_giay(r1) == bo_giay(r2)
     assert [r["ca"] for r in r2] == ["c0", "c0", "c1", "c1", "c2", "c2"]    # thu tu theo ca, khong theo luc xong
+
+
+@can_cxx
+def test_quet_tu_bien_dich_ea_khi_co_bien_the_ea_ma_khong_dua_exe(exe, tmp_path):
+    ca, m1, b = B.tao_ca_tong_hop(exe, seed=3, ngay=0.5, thu_tu_that="cao_truoc")
+    gia, lenh = _ghi_dia(tmp_path, m1, b)
+    ca = dataclasses.replace(ca, khoa=KHOA)
+    rows = B.quet([ca], [B.BienThe("ea_m1_cao_truoc", "ea", "M1", thu_tu="cao_truoc")], gia, lenh, exe=None)
+    assert len(rows) == 1 and not rows[0].get("loi") and rows[0]["ti_le_khop"] == 1.0
 
 
 # =========================================================================================================== 8. TONG HOP
@@ -799,6 +837,55 @@ def test_main_chay_tu_dia_va_ghi_bao_cao(tmp_path, monkeypatch, m1_3ngay, capsys
     assert (tmp_path / "reports" / "bo_thu_mo_phong.md").exists()
 
 
+def _moi_truong_main(tmp_path, m1, cac_bao_cao):
+    """cac_bao_cao: [(ten_don, duong_bao_cao, bao_cao)] -> (thu muc xong, thu muc gia, thu muc lenh); gia chi co AUDCAD, bang lenh chi co KHOA."""
+    xong = tmp_path / "xong"
+    xong.mkdir()
+    for ten, duong, bc in cac_bao_cao:
+        _don(xong, ten, bc, duong=duong)
+    gia, lenh = _ghi_dia(tmp_path, m1, _tester_tay())
+    return xong, gia, lenh
+
+
+def _bc_main(**kw):
+    """Bao cao hieu chuan cho cua so 02..04/01/2019 cua `m1_3ngay`, khop voi `_tester_tay()` (3 lenh, lai 1,5)."""
+    return _bc(**dict(dict(tu="2019.01.02", den="2019.01.04", ngay=3, ts=dict(TS_VUA), khoa=KHOA, lai_t=1.5, n_t=3), **kw))
+
+
+def test_main_loc_theo_ma_va_gioi_han_so_ca(tmp_path, monkeypatch, m1_3ngay, capsys):
+    xong, gia, lenh = _moi_truong_main(tmp_path, m1_3ngay, [("j1", "reports/hieu_chuan/A_e4.json", _bc_main()),
+                                                          ("j2", "reports/hieu_chuan/B_e4.json", _bc_main())])
+    base = ["--xong", str(xong), "--gia", str(gia), "--lenh", str(lenh), "--bien-the", "bar_m5_duong_di"]
+    assert B.main(base + ["--ma", "EURCAD"]) == 2
+    assert "ca san sang: 0 / 0" in capsys.readouterr().out
+    assert B.main(base + ["--ma", "audcad", "--toi-da", "1"]) == 0
+    assert "ca san sang: 1 / 2" in capsys.readouterr().out
+    assert B.main(base) == 0
+    assert "ca san sang: 2 / 2" in capsys.readouterr().out
+
+
+def test_main_chi_lay_o_sach_tru_khi_co_ca_nhiem(tmp_path, m1_3ngay, capsys):
+    xong, gia, lenh = _moi_truong_main(tmp_path, m1_3ngay, [("j1", "reports/hieu_chuan/A_e4.json", _bc_main(q=51.0))])
+    base = ["--xong", str(xong), "--gia", str(gia), "--lenh", str(lenh), "--bien-the", "bar_m5_duong_di"]
+    assert B.main(base) == 2
+    assert B.main(base + ["--ca-nhiem"]) == 0
+    assert "ca san sang: 1 / 1" in capsys.readouterr().out.split("ca san sang: 0 / 0")[-1]
+
+
+def test_main_noi_ro_vi_sao_bo_qua_ca_thieu_gia_hoac_thieu_bang_lenh(tmp_path, m1_3ngay, capsys):
+    xong, gia, lenh = _moi_truong_main(tmp_path, m1_3ngay, [
+        ("j1", "reports/hieu_chuan/A_e4.json", _bc_main()),
+        ("j2", "reports/hieu_chuan/B_e4.json", _bc_main(ma="NZDCAD")),                         # khong co file gia NZDCAD
+        ("j3", "reports/hieu_chuan/C_e4.json", _bc_main(khoa="fedcba9876543210")),             # khong co bang lenh cua khoa nay
+        ("j4", "reports/hieu_chuan/D_e4.json", _bc_main(tu="2019.01.02", den="2019.01.25", ngay=24)),         # gia chi den 04/01: thieu > 7 ngay o cuoi
+        ("j5", "reports/hieu_chuan/E_e4.json", _bc_main(tu="2018.01.01", den="2018.03.31", ngay=90))])        # khong co nen nao trong cua so
+    assert B.main(["--xong", str(xong), "--gia", str(gia), "--lenh", str(lenh), "--bien-the", "bar_m5_duong_di"]) == 0
+    ra = capsys.readouterr().out
+    assert "ca san sang: 1 / 5 (bo qua 4)" in ra
+    assert "B_e4.json: chua co gia M1 cua NZDCAD" in ra and "C_e4.json: chua co bang lenh tester fedcba9876543210" in ra
+    assert "D_e4.json: gia M1 chi phu" in ra and "khong phu cua so" in ra and "E_e4.json: gia M1 chi co 0 nen" in ra
+
+
 # ======================================================================================== 9. EA TREN TICK SINH TU M1 (co dap an)
 @pytest.fixture(scope="module")
 def exe(tmp_path_factory):
@@ -871,7 +958,7 @@ def test_chay_ea_khop_lai_tay_voi_tick_sinh_tu_m1(exe):
 def test_chay_ea_dung_cau_hinh_da_chot_tick_1_point_60_giay_5_chu_so(exe):
     """Tester tong hop cung do `chay_ea` sinh ra nen kiem co-dap-an khong bat duoc loi cau hinh chung: ghim cau hinh bang cach goi san gia truc tiep."""
     m1 = B.m1_tong_hop(seed=2, ngay=1.0)
-    ca = dataclasses.replace(_ca_tay(m1, ts=B.CAU_HINH_NHAY, ngay=1), f=1.0)
+    ca = dataclasses.replace(_ca_tay(m1, ts=B.CAU_HINH_NHAY, ngay=1), f=1.32)
     qc = B.quy_cach_ca(ca)
     ps = G.tham_so_ea_tu_luoi(LU.ThamSo(**dict(B.CAU_HINH_NHAY, khop_bar="duong_di")))
     ps["InpPipSize"] = qc.pip
