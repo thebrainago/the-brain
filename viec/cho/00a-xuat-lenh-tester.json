@@ -1,0 +1,21 @@
+{
+ "ma": "xuat-lenh-tester",
+ "muc_tieu": "dua BANG LENH cua tester (125 o hieu chuan) len git de cloud so TUNG LENH voi engine (chu du an duyet 09/10)",
+ "lan": "NHE",
+ "uu_tien": 1,
+ "han_phut": 20.0,
+ "ra_luc": "2026-10-09T12:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "xuat-lenh"
+ ],
+ "vi_sao": "cloud chi thay con so tong (lai / DD / so lenh) nen biet engine lech nhung khong biet lech o lenh nao. Bang lenh nho (~1-2 MB tong), chi la lenh cua EA luoi cua ta chay tren tester cua ta. Can ma moi (lenh-v1); khong dung tester, chay duoc song song voi tester dang ban.",
+ "cong": {
+  "kieu": "chay_duoc"
+ },
+ "can": [
+  "ma-0810",
+  "lenh-v1"
+ ]
+}

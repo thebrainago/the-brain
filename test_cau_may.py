@@ -80,6 +80,19 @@ class TestDanhSachTrang:
             if d.get("lenh"):
                 assert CT.kiem_lenh(d["lenh"]) is None, (f.name, CT.kiem_lenh(d["lenh"]))
 
+    def test_moi_don_xuat_gia_that_phai_doi_bo_chay_ghi_dung_hop_thu(self):
+        """Don `xuat-gia` ma bo chay ma cu nhan thi file gia ghi vao lab va KHONG BAO GIO len git - phai can `gia-v2`.
+        (Khong doi hang doi co san don: don chay xong roi roi khoi `viec/cho`; day la rao cho don xep SAU nay.)"""
+        don = [json.loads(f.read_text(encoding="utf-8")) for f in sorted((REPO / "viec" / "cho").glob("*.json"))]
+        for d in (x for x in don if "xuat-gia" in (x.get("lenh") or [])):
+            assert "gia-v2" in (d.get("can") or []), d.get("ma")
+
+    def test_moi_don_xuat_lenh_phai_doi_bo_chay_co_lenh_v1(self):
+        """`b xuat-lenh` chi co o ma moi; bo chay ma cu nhan don ma khong co lenh nay se bao loi 'khong biet lenh' roi mat luot may."""
+        don = [json.loads(f.read_text(encoding="utf-8")) for f in sorted((REPO / "viec" / "cho").glob("*.json"))]
+        for d in (x for x in don if "xuat-lenh" in (x.get("lenh") or [])):
+            assert "lenh-v1" in (d.get("can") or []), d.get("ma")
+
     @pytest.mark.parametrize("lenh", [
         ["{py}", "-c", "print('CAU NOI SONG')"],
         ["{py}", "-m", "pytest", "-q", "--tb=no", "-rf", "-p", "no:cacheprovider"],
@@ -94,6 +107,11 @@ class TestDanhSachTrang:
         ["{py}", "b.py", "test"],
         ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ra", "reports/hieu_chuan/swap_gom.json"],
         ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD,NZDCAD,AUDNZD,EURGBP", "M15", "--tu", "2018"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD,EURCAD,NZDCAD", "M1", "--tu", "2018-07-01", "--den", "2018-12-31"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--den", "2018-12-31"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD"],
+        ["{py}", "b.py", "xuat-lenh"],
     ])
     def test_cho_qua_cac_hinh_hop_le(self, lenh):
         assert CT.kiem_lenh(lenh) is None, CT.kiem_lenh(lenh)
@@ -133,6 +151,24 @@ class TestDanhSachTrang:
         ["{py}", "-m", "nhan.swap_uoc", "bang.csv.gz", "--ma", "AUDCAD"],     # doc tep tuy y: khong cho
         ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "extra"],
         ["{py}", "-m", "nhan.swap_uoc", "--quet", "reports/hieu_chuan", "--ma", "AUDCAD"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--thu-muc", "/etc"],                 # noi ghi do bo chay quyet, don khong dat
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--tu", "2018-7-1"],                  # ngay khong dung dinh dang
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--tu", "2018-02-30"],                # ngay khong co that
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--tu", "1985"],                      # nam ngoai 1990..2039
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--den", "2040"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--den", "2018-12-31T23:59"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--den", "../x"],
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "--tu", "2018", "--tu", "2019"],       # co lap
+        ["{py}", "b.py", "xuat-gia", "AUD CAD", "M1"],                                     # ma co dau cach
+        ["{py}", "b.py", "xuat-gia", "AUDCAD;rm", "M1"],
+        ["{py}", "b.py", "xuat-gia", "../../etc", "M1"],
+        ["{py}", "b.py", "xuat-gia", ",".join(["AUDCAD"] * 21), "M1"],                     # qua 20 ma
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M2"],                                      # khung la
+        ["{py}", "b.py", "xuat-gia", "AUDCAD", "M1", "them"],                              # thua doi so
+        ["{py}", "b.py", "xuat-gia"],                                                      # thieu danh sach ma
+        ["{py}", "b.py", "xuat-lenh", "--thu-muc", "/etc"],                                # noi ghi / noi doc do bo chay + lab quyet
+        ["{py}", "b.py", "xuat-lenh", "--nguon", "/"],
+        ["{py}", "b.py", "xuat-lenh", "reports/hieu_chuan"],                               # khong nhan doi so
         [], "chuoi", None, ["{py}"],
     ])
     def test_tu_choi_cac_hinh_nguy_hiem_hay_sai(self, lenh):

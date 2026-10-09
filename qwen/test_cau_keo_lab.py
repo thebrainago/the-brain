@@ -343,7 +343,7 @@ class TestTagMa:
     """Nhan kha nang suy ra tu MA dang chay: don can ma moi khong bi bo chay cu nhan nham (08/10/2026, lab nha tre ~270 commit)."""
 
     @staticmethod
-    def _lab(tmp_path, ten, engine=None, trang_ke=False, swap=None):
+    def _lab(tmp_path, ten, engine=None, trang_ke=False, swap=None, gia=None, lenh=None):
         lab = tmp_path / ten
         if engine is not None:
             ghi(lab, "nhan/luoi.py", "# luoi\nPHIEN_BAN_ENGINE = %d\n" % engine)
@@ -351,6 +351,10 @@ class TestTagMa:
             ghi(lab, "nhan/doc_dien_dan.py", "def tim_trang_tiep(fo, tach, url, n):\n    return {}\n")
         if swap is not None:                           # swap=True: bo uoc swap day du; chuoi: noi dung tuy y
             ghi(lab, "nhan/swap_uoc.py", "def uoc_tu_bao_cao(duong, ma, het=None, ty_le=None):\n    return None\n" if swap is True else swap)
+        if gia is not None:                            # gia=True: bo xuat gia ghi vao hop thu; chuoi: noi dung tuy y
+            ghi(lab, "nhan/xuat_gia.py", "def thu_muc_mac_dinh():\n    return None\n" if gia is True else gia)
+        if lenh is not None:                           # lenh=True: bo xuat bang lenh tester day du; chuoi: noi dung tuy y
+            ghi(lab, "nhan/xuat_lenh_tester.py", "def kiem_bang(van_ban):\n    return {}\n" if lenh is True else lenh)
         lab.mkdir(parents=True, exist_ok=True)
         return lab
 
@@ -369,6 +373,62 @@ class TestTagMa:
         # tep co ten dung nhung chua co ham chinh (ban nhap / ban cu): khong khai nhan
         assert "swap-v1" not in CG.tag_ma(self._lab(tmp_path, "nua", swap="def ty_le_cho(ma):\n    return None\n"))
         assert CG.tag_ma(self._lab(tmp_path, "tat_ca", engine=4, trang_ke=True, swap=True))[-2:] == ["dien-dan-v2", "swap-v1"]
+
+    def test_nhan_gia_v2_chi_khi_xuat_gia_biet_ghi_vao_hop_thu(self, tmp_path):
+        assert CG.tag_ma(self._lab(tmp_path, "co", engine=4, gia=True))[-1] == "gia-v2"
+        assert "gia-v2" not in CG.tag_ma(self._lab(tmp_path, "khong", engine=4))
+        # `xuat_gia.py` ban cu (ghi vao lab, file khong bao gio len git): khong khai nhan
+        assert "gia-v2" not in CG.tag_ma(self._lab(tmp_path, "cu", gia="def ghi(df, ma, khung):\n    return {}\n"))
+        assert CG.tag_ma(self._lab(tmp_path, "tat_ca", engine=4, trang_ke=True, swap=True, gia=True))[-3:] == \
+            ["dien-dan-v2", "swap-v1", "gia-v2"]
+
+    def test_ma_that_cua_repo_khai_gia_v2(self):
+        assert "gia-v2" in CG.tag_ma(CG.GOC)
+
+    def test_nhan_lenh_v1_chi_khi_ma_co_bo_xuat_bang_lenh_tester(self, tmp_path):
+        assert CG.tag_ma(self._lab(tmp_path, "co", engine=4, lenh=True))[-1] == "lenh-v1"
+        assert "lenh-v1" not in CG.tag_ma(self._lab(tmp_path, "khong", engine=4, gia=True))
+        # tep co ten dung nhung chua co ham kiem bang (ban nhap): khong khai nhan
+        assert "lenh-v1" not in CG.tag_ma(self._lab(tmp_path, "nhap", lenh="def chay():\n    return {}\n"))
+        assert CG.tag_ma(self._lab(tmp_path, "tat_ca", engine=4, trang_ke=True, swap=True, gia=True, lenh=True))[-4:] == \
+            ["dien-dan-v2", "swap-v1", "gia-v2", "lenh-v1"]
+
+    def test_ma_that_cua_repo_khai_lenh_v1(self):
+        assert "lenh-v1" in CG.tag_ma(CG.GOC)
+
+    def test_don_lenh_v1_cho_bo_chay_ma_cu_va_chay_o_bo_chay_ma_moi(self, tmp_path):
+        hop = tmp_path / "hop"
+        CG.bao_dam_thu_muc(goc=hop)
+        _don(hop, "a-xuat-lenh", "NHE", 1)
+        f = hop / "viec" / "cho" / "a-xuat-lenh.json"
+        d = json.loads(f.read_text(encoding="utf-8"))
+        d["can"] = ["lenh-v1"]
+        f.write_text(json.dumps(d), encoding="utf-8")
+        _don(hop, "z-thuong", "NHE", 9)
+        cu = self._lab(tmp_path, "cu", engine=4, swap=True, gia=True)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=cu, may="p1", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "z-thuong"             # ma chua co xuat_lenh_tester: don CHO, khong chay ra 'khong biet lenh'
+        assert not (hop / "viec" / "xong" / "a-xuat-lenh.json").exists()
+        moi = self._lab(tmp_path, "moi", engine=4, swap=True, gia=True, lenh=True)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=moi, may="p2", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "a-xuat-lenh"
+
+    def test_don_gia_v2_cho_bo_chay_ma_cu_va_chay_o_bo_chay_ma_moi(self, tmp_path):
+        hop = tmp_path / "hop"
+        CG.bao_dam_thu_muc(goc=hop)
+        _don(hop, "a-xuat-gia", "NHE", 1)
+        f = hop / "viec" / "cho" / "a-xuat-gia.json"
+        d = json.loads(f.read_text(encoding="utf-8"))
+        d["can"] = ["gia-v2"]
+        f.write_text(json.dumps(d), encoding="utf-8")
+        _don(hop, "z-thuong", "NHE", 9)
+        cu = self._lab(tmp_path, "cu", engine=4, swap=True)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=cu, may="p1", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "z-thuong"             # ma chua ghi vao hop thu: don xuat gia CHO, khong chay roi mat file
+        assert not (hop / "viec" / "xong" / "a-xuat-gia.json").exists()
+        moi = self._lab(tmp_path, "moi", engine=4, swap=True, gia=True)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=moi, may="p2", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "a-xuat-gia"
 
     def test_don_swap_v1_cho_bo_chay_ma_cu_va_chay_o_bo_chay_ma_moi(self, tmp_path):
         hop = tmp_path / "hop"

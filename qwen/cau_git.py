@@ -846,6 +846,10 @@ def tag_ma(lab: Path | None = None) -> list[str]:
                    `engine4` = mo hinh bar `duong_di` (ban cu `cuc_tri` lac quan x2,2 trung vi so voi tester).
     - `dien-dan-v2`: `nhan/doc_dien_dan` biet tim trang ke + that bai trung thuc.
     - `swap-v1`    : `nhan/swap_uoc` (uoc phi qua dem tu bang lenh tester; hieu_chuan / ea_tho CONG swap uoc). Don `-m nhan.swap_uoc ...` can nhan nay.
+    - `gia-v2`     : `nhan/xuat_gia` ghi vao HOP THU cua bo chay (co `thu_muc_mac_dinh`) + cua so ngay `--tu/--den`. Ban cu ghi vao lab nen
+                     file gia khong bao gio len git (bo chay chi `git add` duong trong `DUOC_DAY` CUA HOP THU) - don `b xuat-gia` can nhan nay.
+    - `lenh-v1`    : `nhan/xuat_lenh_tester` (`b xuat-lenh`: bang lenh tester `reports/hieu_chuan/*_lenh.csv.gz` -> `<hop thu>/du_lieu_gia/mau_tester`).
+                     Don `b xuat-lenh` can nhan nay (ma cu khong co lenh do; khong co nhan thi don cho, khong chet).
     """
     lab = Path(lab) if lab else GOC
     ra = ["ma-0810"]
@@ -863,6 +867,16 @@ def tag_ma(lab: Path | None = None) -> list[str]:
     try:
         if "def uoc_tu_bao_cao(" in (lab / "nhan" / "swap_uoc.py").read_text(encoding="utf-8", errors="replace"):
             ra.append("swap-v1")
+    except OSError:
+        pass
+    try:
+        if "def thu_muc_mac_dinh(" in (lab / "nhan" / "xuat_gia.py").read_text(encoding="utf-8", errors="replace"):
+            ra.append("gia-v2")
+    except OSError:
+        pass
+    try:
+        if "def kiem_bang(" in (lab / "nhan" / "xuat_lenh_tester.py").read_text(encoding="utf-8", errors="replace"):
+            ra.append("lenh-v1")
     except OSError:
         pass
     return ra

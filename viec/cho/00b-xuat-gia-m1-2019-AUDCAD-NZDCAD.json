@@ -1,0 +1,28 @@
+{
+ "ma": "xuat-gia-m1-2019-AUDCAD-NZDCAD",
+ "muc_tieu": "xuat gia M1 that 2019-01..2019-08 cua AUDCAD, NZDCAD (cua so tester 100% chat luong) de cloud chay lai engine tren Linux (chu du an duyet 09/10)",
+ "lan": "NHE",
+ "uu_tien": 1,
+ "han_phut": 30.0,
+ "ra_luc": "2026-10-09T12:00:00",
+ "lenh": [
+  "{py}",
+  "b.py",
+  "xuat-gia",
+  "AUDCAD,NZDCAD",
+  "M1",
+  "--tu",
+  "2019-01-01",
+  "--den",
+  "2019-08-31"
+ ],
+ "vi_sao": "do 09/10: lich su tester chi day du (100%) tu 2019; cua so 2018 chi 1-51% nen so voi engine bi nhieu. M1 that cua hai cap nay bat dau ~10/2018 nen 2019 la khoang sach gan nhat. Khoang 5,5 MB nen vao git duoc (repo public: chi gia XM demo cua ta, khong du lieu ca nhan).",
+ "cong": {
+  "kieu": "chay_duoc"
+ },
+ "can": [
+  "ma-0810",
+  "gia-v2",
+  "data"
+ ]
+}

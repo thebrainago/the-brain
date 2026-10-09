@@ -75,6 +75,9 @@ CAU_DUNG
 # Day no len se lam may kia tuong lan dang ban vinh vien.
 viec/.khoa_tester
 viec/**/*.tam
+# xuat gia: tep tam dang ghi do (nhan/xuat_gia.py) khong duoc vao git
+du_lieu_gia/**/*.tam
+du_lieu_gia/*.tam
 .venv/
 
 # cai dat Claude Code RIENG cua may (hook thu: b cau hook-cai)

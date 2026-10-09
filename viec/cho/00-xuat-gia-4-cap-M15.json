@@ -14,11 +14,13 @@
   "--tu",
   "2018"
  ],
- "vi_sao": "cloud khong co data/; sao luu ban goc ngoai git truoc khi day (rui ro ban quyen nha moi gioi). Lan 1 (06/10) chet vi thieu pandas -> cai 00y truoc. Chi may co ma moi (DUOC_DAY co du_lieu_gia) moi day duoc file gia ra git",
+ "vi_sao": "cloud khong co data/; sao luu ban goc ngoai git truoc khi day (rui ro ban quyen nha moi gioi). Lan 1 (06/10) chet vi thieu pandas. 09/10: sua noi ghi - truoc day xuat vao lab/du_lieu_gia con bo chay chi git add du_lieu_gia CUA HOP THU nen file khong bao gio len; nay mac dinh ghi vao hop thu (can gia-v2). Chi may co ma moi moi nhan",
  "cong": {
   "kieu": "chay_duoc"
  },
  "can": [
-  "ma-0810"
+  "ma-0810",
+  "gia-v2",
+  "data"
  ]
 }

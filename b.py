@@ -686,9 +686,17 @@ def c_slot(a):
 
 
 def c_xuat_gia(a):
-    """b xuat-gia MA1,MA2 [KHUNG] [--thu-muc DIR] [--tu NAM]: xuat gia vai cap ra csv.gz (nhan/xuat_gia.py), co SAO LUU ngoai git."""
+    """b xuat-gia MA1,MA2 [KHUNG] [--thu-muc DIR] [--tu NAM|NGAY] [--den NAM|NGAY]: xuat gia vai cap ra csv.gz (nhan/xuat_gia.py), co SAO LUU ngoai git.
+    Mac dinh ghi vao du_lieu_gia/ cua HOP THU bo chay (de len duoc git); co tran dung luong moi tep / moi lenh (repo public)."""
     from nhan import xuat_gia
     xuat_gia.main_cli(list(a))
+
+
+def c_xuat_lenh(a):
+    """b xuat-lenh: dua BANG LENH CUA TESTER (reports/hieu_chuan/*_lenh.csv.gz, su that MT5) len <hop thu>/du_lieu_gia/mau_tester (nhan/xuat_lenh_tester.py).
+    Cloud dung de so TUNG LENH engine <-> MT5 tren Linux. Khong tham so; co tran dung luong (repo public)."""
+    from nhan import xuat_lenh_tester
+    xuat_lenh_tester.main_cli(list(a))
 
 
 def c_may(a):
@@ -1486,6 +1494,7 @@ LENH = {
     "may": c_may,
     "thu-cach-quet": c_thu_cach_quet,
     "xuat-gia": c_xuat_gia,
+    "xuat-lenh": c_xuat_lenh,
     "link": c_link,
     "dien-dan": c_dien_dan,
     "cai-goi": c_cai_goi,

@@ -24,6 +24,7 @@ toan; viec them lenh moi = sua MA o day (co review), khong phai sua mot file don
 """
 from __future__ import annotations
 
+import datetime
 import hashlib
 import json
 import re
@@ -93,6 +94,24 @@ def _tep_swap_gom(s: str) -> bool:
     return re.fullmatch(r"reports/hieu_chuan/swap_[a-z0-9_]{1,60}\.json", s) is not None
 
 
+def _nam_hoac_ngay(s: str) -> bool:
+    """`YYYY` hoac `YYYY-MM-DD` (ngay co that), nam 1990..2039 - cua so xuat gia (`nhan/xuat_gia.py`)."""
+    if re.fullmatch(r"(199\d|20[0-3]\d)(-\d{2}-\d{2})?", s) is None:
+        return False
+    if len(s) == 4:
+        return True
+    try:
+        datetime.date.fromisoformat(s)
+        return True
+    except ValueError:
+        return False
+
+
+def _ds_ma_gia(s: str) -> bool:
+    """Danh sach ma tai san cach nhau dau phay (xuat gia): chu / so / `_` / `.`, moi ma 2..24 ky tu, toi da 20 ma."""
+    return re.fullmatch(r"[A-Za-z0-9_.]{2,24}(,[A-Za-z0-9_.]{2,24}){0,19}", s) is not None
+
+
 def _ma_dien_dan(s: str) -> bool:
     """Danh sach ma dien dan cach nhau dau phay (`config/dien_dan.json`): chu thuong / so / _, toi da 30 ma."""
     return re.fullmatch(r"[a-z0-9_]{1,40}(,[a-z0-9_]{1,40}){0,29}", s) is not None
@@ -152,7 +171,12 @@ LENH_B: dict[tuple, Hinh] = {
     ("nc", "tho"): Hinh(co={"--vong": _so(1, 200), "--cong-cu": _so(1, 200), "--sau": None}),
     ("nc", "cc"): Hinh([(_cong_cu, True), (_json_obj, False)]),
     ("nc", "hoi"): Hinh([(_van_ban(10, 800), True), (_thuc01, False)]),     # cau hoi cua CHU DU AN vao so tay (nguon 'nguoi')
-    ("xuat-gia",): Hinh([(_van_ban(3, 120), True), (_khung, False)], {"--tu": _so(1990, 2030)}),   # chu du an duyet 05/10: gia vai cap -> du_lieu_gia/ + sao luu ngoai git
+    # chu du an duyet 05/10: gia vai cap -> du_lieu_gia/ + sao luu ngoai git. 09/10: cua so ngay (`--tu`, `--den`) de xin MAU nho
+    # (M1 nua nam / cap); khong cho `--thu-muc` (chi noi mac dinh = hop thu cua bo chay) va tran dung luong nam trong `xuat_gia.ghi`.
+    ("xuat-gia",): Hinh([(_ds_ma_gia, True), (_khung, False)], {"--tu": _nam_hoac_ngay, "--den": _nam_hoac_ngay}),
+    # 09/10: bang lenh CUA TESTER (su that MT5 cua EA luoi cua ta) -> <hop thu>/du_lieu_gia/mau_tester. Khong tham so, khong `--nguon` /
+    # `--thu-muc` (nguon luon la reports/hieu_chuan cua lab, dich luon la hop thu); tran dung luong nam trong `xuat_lenh_tester.chay`.
+    ("xuat-lenh",): Hinh(),
     ("hepha", "do"): Hinh(),
     ("hepha", "duc"): Hinh([(_so(1, 5000), False)]),
     ("hepha", "nap"): Hinh([(_so(1, 5000), False)], {"--that": None}),
