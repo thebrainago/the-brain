@@ -1,0 +1,139 @@
+{
+ "so_o": 125,
+ "so_ma": [
+  "AUDCAD",
+  "EURCAD",
+  "NZDCAD"
+ ],
+ "so_khung": [
+  "H1",
+  "M15",
+  "M30",
+  "M5"
+ ],
+ "cua_so_tu": "2018.01.03",
+ "cua_so_den": "2019.08.31",
+ "engine_hon_tester": "69/125",
+ "tia_lenh_so_o": 68,
+ "tia_lenh_engine_hon": "50/68",
+ "tia_lenh_ty_le_trung_vi_(tester>0)": 2.199,
+ "tia_lenh_ty_le_lon_nhat": 425.697,
+ "tia_lenh_n_ty_le": 38,
+ "tia_lenh_lech_lai_pp_trung_vi": 4.378,
+ "khong_tia_lenh_so_o": 57,
+ "khong_tia_lenh_engine_hon": "19/57",
+ "khong_tia_lenh_lech_lai_pp_trung_vi": -2.824,
+ "tester_swap_bang_0": "125/125",
+ "engine_swap_nam_pct_trung_vi": -4.366,
+ "top15_engine_lai_nam_pct": [
+  153.6,
+  134.9,
+  104.0,
+  96.8,
+  69.6,
+  65.8,
+  64.8,
+  57.7,
+  57.1,
+  55.8,
+  54.0,
+  49.9,
+  43.1,
+  40.9,
+  40.5
+ ],
+ "top15_engine_ma_tester_lai_nam_pct": [
+  20.9,
+  52.6,
+  29.3,
+  19.4,
+  14.5,
+  -0.4,
+  -33.0,
+  22.9,
+  19.2,
+  26.1,
+  36.6,
+  27.9,
+  23.4,
+  24.8,
+  12.5
+ ],
+ "top15_trung_voi_top15_tester": "8/15",
+ "spearman_engine_vs_tester_lai": 0.786,
+ "tester_lai_nam_duong": "61/125",
+ "tester_lai_nam_sau_swap_uoc_duong": "39/125",
+ "chat_luong_lich_su_pct_phan_bo": {
+  "100": 53,
+  "1": 1,
+  "51": 71
+ },
+ "ghi_chu": "Tinh lai tu hieu_chuan_125_o.csv bang xuat_du_lieu.py; engine = nhan/luoi.py v3 (cuc_tri), tester = MT5 Strategy Tester model 0.",
+ "tester_duong_nhung_<=0_sau_swap_engine_uoc": "22/61",
+ "tat_ca": {
+  "so_o": 125,
+  "engine_hon_tester": "69/125",
+  "tia_lenh": {
+   "so_o": 68,
+   "engine_hon": "50/68",
+   "ty_le_trung_vi_khi_tester>=1%": 2.199,
+   "n_1": 32,
+   "ty_le_lon_nhat_khi_tester>=1%": 16.078,
+   "ty_le_trung_vi_khi_tester>=5%": 1.806,
+   "n": 22,
+   "ty_le_lon_nhat_khi_tester>=5%": 7.335,
+   "lech_pp_trung_vi": 4.378,
+   "lech_pp_trung_vi_khong_tinh_swap": 8.691
+  },
+  "khong_tia_lenh": {
+   "so_o": 57,
+   "engine_hon": "19/57",
+   "lech_pp_trung_vi": -2.824,
+   "lech_pp_trung_vi_khong_tinh_swap": 0.034
+  }
+ },
+ "chi_lich_su_sach_100pct": {
+  "so_o": 53,
+  "engine_hon_tester": "33/53",
+  "tia_lenh": {
+   "so_o": 27,
+   "engine_hon": "20/27",
+   "ty_le_trung_vi_khi_tester>=1%": 0.906,
+   "n_1": 9,
+   "ty_le_lon_nhat_khi_tester>=1%": 4.344,
+   "ty_le_trung_vi_khi_tester>=5%": 1.191,
+   "n": 6,
+   "ty_le_lon_nhat_khi_tester>=5%": 2.137,
+   "lech_pp_trung_vi": 3.616,
+   "lech_pp_trung_vi_khong_tinh_swap": 7.351
+  },
+  "khong_tia_lenh": {
+   "so_o": 26,
+   "engine_hon": "13/26",
+   "lech_pp_trung_vi": -0.426,
+   "lech_pp_trung_vi_khong_tinh_swap": 1.877
+  }
+ },
+ "chi_lich_su_51pct": {
+  "so_o": 71,
+  "engine_hon_tester": "36/71",
+  "tia_lenh": {
+   "so_o": 41,
+   "engine_hon": "30/41",
+   "ty_le_trung_vi_khi_tester>=1%": 2.888,
+   "n_1": 23,
+   "ty_le_lon_nhat_khi_tester>=1%": 16.078,
+   "ty_le_trung_vi_khi_tester>=5%": 2.171,
+   "n": 16,
+   "ty_le_lon_nhat_khi_tester>=5%": 7.335,
+   "lech_pp_trung_vi": 5.577,
+   "lech_pp_trung_vi_khong_tinh_swap": 10.648
+  },
+  "khong_tia_lenh": {
+   "so_o": 30,
+   "engine_hon": "6/30",
+   "lech_pp_trung_vi": -5.13,
+   "lech_pp_trung_vi_khong_tinh_swap": -1.218
+  }
+ }
+}
