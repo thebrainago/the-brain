@@ -136,7 +136,20 @@ def tong_hop(ngung_phut: float = 30.0, bay_gio: float | None = None) -> dict:
             "xong_1h": tt, "xong_gia_1h": gia, "xong_gia_nhom": gia_nhom, "dang_ket": ket[:10]}
 
 
-def hanh_dong(k: dict) -> list[str]:
+def vong_lap_tom_tat() -> dict:
+    """Bang diem VONG LAP (nhan/vong_lap.py, 10/10/2026): hang doi chia THEO CHANG (tim-boc-kiem-giu-ap dung) thay vi chi dem gio. Giam sat
+    van chay neu vong_lap hong (tra {"loi": ...})."""
+    try:
+        from nhan import vong_lap as VL
+        bd = VL.bang_diem()
+        return {"khuyen_nghi": VL.khuyen_nghi(bd), "tom_tat": VL.tom_tat_cho_chu(bd), "cho_tong": bd["tong"]["cho_tong"],
+                "cho_chay_duoc": bd["tong"]["cho_chay_duoc"], "gio_cho_chay_duoc": bd["tong"]["gio_cho_chay_duoc"]}
+    except Exception as e:
+        return {"loi": "%s: %s" % (type(e).__name__, str(e)[:100])}
+
+
+def hanh_dong(k: dict, vong: dict | None = None) -> list[str]:
+    """`vong` = ket qua `vong_lap_tom_tat()`; None = khong xet chang (cac test cu / goi tu noi khac)."""
     ra = []
     chet = [x["ten"] for x in k["nhip_tim"] if not x["song"]]
     if chet and len(chet) == len(k["nhip_tim"]):
@@ -144,13 +157,22 @@ def hanh_dong(k: dict) -> list[str]:
     elif chet:
         ra.append("bo chay chet: %s -> nhac may nha khoi dong lai bo do" % ",".join(chet))
     gio = k.get("gio_dong_ho", k["gio_viec_con"])           # gio DONG HO (khong phai gio-loi cong don)
+    # May nha TAT (khong bo chay nao song) thi `bi_chan_ma_cu` = 0 du moi don deu cho ma moi: lay so that tu bang diem chang (kha_nang cua MOI nhip tung co)
+    bi_chan = k.get("bi_chan_ma_cu") or ((vong["cho_tong"] - vong["cho_chay_duoc"]) if vong and not vong.get("loi") else 0)
+    if vong and not vong.get("loi") and vong["cho_tong"] and not vong["cho_chay_duoc"]:
+        gio = 0.0
     if gio < 12:
-        ra.append("hang doi chi con ~%.0f gio dong ho -> giao them >= 20 don (uu tien don do duoc, khong cache)%s" % (
-            gio, "; CHI don KHONG khai `can` ma moi (bo chay song chua nap ma moi)" if k.get("bi_chan_ma_cu") else ""))
+        ra.append("hang doi chay duoc chi con ~%.0f gio dong ho -> giao them >= 20 don, CHIA THEO CHANG (xem VONG LAP duoi day; khong them quet_luoi trong mau)%s" % (
+            gio, "; CHI don KHONG khai `can` ma moi (may nha chua nap ma moi)" if bi_chan else ""))
     if k.get("bi_chan_ma_cu"):
         ra.append("%d don (~%.0f gio-loi) CHO MA MOI (khai `can` engine*/ma-0810/dien-dan-v2) ma khong bo chay song nao co the do -> may nha dang chay MA CU; "
                   "KHONG giao them don loai nay; nhac chu du an chay thu LAB-TU-KEO-MA (phien Claude o nha: `b cau lay && b cau thu`)" % (
                       k["bi_chan_ma_cu"], k.get("gio_bi_chan", 0)))
+    if vong:
+        if vong.get("loi"):
+            ra.append("vong_lap loi (%s) -> sua nhan/vong_lap.py, giam sat van chay" % vong["loi"])
+        else:
+            ra.extend(vong["khuyen_nghi"])
     gn = k.get("xong_gia_nhom") or {}
     if gn.get("sua_duoc"):
         ra.append("%d don 'DAT' gia SUA DUOC (thieu thu vien / het dia / tester ban) -> chay `python -m qwen.cau_loi dua-lai` roi push" % gn["sua_duoc"])
@@ -176,8 +198,11 @@ def main(argv: list[str]) -> int:
         song, len(k["nhip_tim"]), k["con_cho"], k["gio_dong_ho"], k["gio_viec_con"], k["theo_lan"], k["xong_1h"]))
     for ten, ly in k["xong_gia_1h"][:8]:
         print("  XONG-GIA %-40s %s" % (ten, ly))
-    for h in hanh_dong(k):
+    vong = vong_lap_tom_tat()
+    for h in hanh_dong(k, vong):
         print("HANH_DONG:", h)
+    for t in (vong.get("tom_tat") or [])[:5]:                # 5 dong: tinh hinh VONG (chang nao dang doi, chang nao dang ket)
+        print("VONG:", t)
     return 0
 
 

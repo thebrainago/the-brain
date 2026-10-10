@@ -64,3 +64,23 @@ def test_don_cho_ma_moi_khong_tinh_vao_hang_doi_khi_bo_chay_song_chua_co_the(tmp
     _hb(tmp_path, "nha-m", "2026-10-08T23:40:00", ["windows", "engine4", "dien-dan-v2"])
     k = G.tong_hop(30.0, bay)
     assert (k["bi_chan_ma_cu"], k["theo_lan"]) == (0, {"CPU": 2, "MANG": 1})
+
+
+def test_hanh_dong_them_khuyen_nghi_theo_chang_va_bao_may_nha_tat_khong_co_viec():
+    """Bang diem chang (vong_lap) vao HANH_DONG: may nha TAT (khong nhip nao song) thi `bi_chan_ma_cu` = 0 du 0/N don chay duoc - khong duoc
+    tin la 'hang doi dai'."""
+    k = {"nhip_tim": [{"ten": "a", "song": False, "den": None}], "gio_viec_con": 300, "gio_dong_ho": 300, "bi_chan_ma_cu": 0,
+         "xong_gia_1h": [], "dang_ket": []}
+    vong = {"khuyen_nghi": ["VONG LAP: 698 vung lai chua kiem ngoai mau -> `python3 -m nhan.vong_lap --giao 240`"], "tom_tat": [],
+            "cho_tong": 170, "cho_chay_duoc": 0, "gio_cho_chay_duoc": 0.0}
+    h = " ".join(G.hanh_dong(k, vong))
+    assert "698 vung lai" in h and "giao them" in h and "KHONG khai `can`" in h
+    # so voi khong co vong: tin hang doi dai (cach tinh cu), khong co khuyen nghi chang
+    h0 = " ".join(G.hanh_dong(k))
+    assert "giao them" not in h0 and "vong_lap" not in h0
+    # co don chay duoc -> khong ep gio ve 0
+    vong2 = dict(vong, cho_chay_duoc=50)
+    assert "giao them" not in " ".join(G.hanh_dong(k, vong2))
+    # vong_lap hong: giam sat van tra loi, kem mot dong loi
+    h3 = " ".join(G.hanh_dong(k, {"loi": "KeyError: x"}))
+    assert "vong_lap loi" in h3

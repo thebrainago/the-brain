@@ -668,6 +668,42 @@ def _thu_lo(ma, khung, thu_muc, loc, tu, den, gt_id, vong_id, ten=None) -> dict:
     return {"trang_thai": "XONG", "ma": ma, "khung": khung, "so_he": len(bang), "dem": dem, "bang": bang}
 
 
+#: Cong cu in them MOT dong `TOM_TAT {...}` o CUOI dau ra. May nha chi giu 25 dong cuoi cua stdout (`bang_chung.dong_cuoi`), ma ket qua
+#: `quet_luoi` / `thu_luoi` dai ~60 dong: khoi `tham_so_day_du` / `chi_so_luoi` bi cat o ~11% don. Dong nay song sot qua lan cat, nen vong lap
+#: (`nhan/vong_lap.py`) doc duoc tham so + ket qua tu `viec/xong` ma khong phai chay lai. Chi them mot dong, khong doi gi o dau ra cu.
+_TT_KHOA = {"thu_luoi": ("trang_thai", "ly_do", "ma", "khung", "doan", "tn_id", "tham_so", "tien", "lenh", "chi_so_luoi", "engine"),
+            "quet_luoi": ("trang_thai", "ly_do", "ma", "khung", "doan", "tn_id", "tham_so_day_du")}
+_TT_CON = {"tien": ("co_lai", "loi_suat_nam_pct", "maxdd_pct", "he_so_lot_tai_tran", "loi_suat_o_tran_pct", "hon_moc_pct", "gioi_han_lot"),
+           "lenh": ("so_lenh", "lenh_moi_nam"),
+           "chi_so_luoi": ("calmar", "loi_suat_nam_pct", "maxdd_pct", "lenh_nam", "chay"),
+           "engine": ("phien_ban",)}
+
+
+def _sach_json(x):
+    """NaN / vo cuc -> None (json chuan khong co NaN); tuple -> list; khoa -> chuoi."""
+    if isinstance(x, float):
+        return x if x == x and x not in (float("inf"), float("-inf")) else None
+    if isinstance(x, dict):
+        return {str(k): _sach_json(v) for k, v in x.items()}
+    if isinstance(x, (list, tuple)):
+        return [_sach_json(v) for v in x]
+    return x
+
+
+def tom_tat_dong(kq, cong_cu: str) -> str | None:
+    """Dong `TOM_TAT {...}` (mot dong, JSON gon) cho `thu_luoi` / `quet_luoi`; None cho cong cu khac hoac ket qua khong co `trang_thai`."""
+    khoa = _TT_KHOA.get(cong_cu)
+    if not khoa or not isinstance(kq, dict) or "trang_thai" not in kq:
+        return None
+    tt = {k: kq[k] for k in khoa if k in kq}
+    for k, giu in _TT_CON.items():
+        if isinstance(tt.get(k), dict):
+            tt[k] = {a: v for a, v in tt[k].items() if a in giu}
+    if isinstance(tt.get("ly_do"), str):
+        tt["ly_do"] = tt["ly_do"][:200]
+    return "TOM_TAT " + json.dumps(_sach_json(tt), ensure_ascii=True, sort_keys=True, separators=(",", ":"), default=str)
+
+
 def main(argv: list[str]) -> int:
     """`python -m nhan.nc_cong_cu` liet ke; `... <ten> '<json>'` hoac `... <ten> @file.json` goi."""
     if not argv or argv[0] in ("-h", "--help", "ds"):
@@ -692,6 +728,9 @@ def main(argv: list[str]) -> int:
         print(kq["so_tay"])
     else:
         print(json.dumps(kq, ensure_ascii=False, indent=1, default=str))
+        dong = tom_tat_dong(kq, ten)
+        if dong:
+            print(dong)                                  # DONG CUOI CUNG cua stdout (xem `_TT_KHOA`)
     return 0 if not (isinstance(kq, dict) and kq.get("loi")) else 1
 
 

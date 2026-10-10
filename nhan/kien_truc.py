@@ -177,7 +177,7 @@ LOP: dict[str, tuple[str, tuple[str, ...]]] = {
         "Giu he chay 24/7 va tu thay duoc minh dang hong cho nao.",
         ("do_token", "phien_hien_tai", "evo", "canary", "mach", "do_im_lang", "do_tai_nguyen", "don_mo_coi",
          "han_muc", "ngan_sach", "may_nha", "tran_cpu", "ban_do", "kien_truc", "tri_tue", "so_sanh_llm",
-         "muc_tieu", "vong_day_du", "day_chuyen", "day_chuyen_quantlab", "ghi_an_toan", "ho_so_he"),
+         "muc_tieu", "vong_day_du", "vong_lap", "giam_sat_may_nha", "day_chuyen", "day_chuyen_quantlab", "ghi_an_toan", "ho_so_he"),
     ),
 }
 
