@@ -423,7 +423,7 @@ def _ban_nho():
     return hi, lo, cl, np.zeros(n), np.zeros(n)
 
 
-def _bao_loi_o_ca_hai(ts, tg, mau, hi_lo=None):
+def _kiem_bao_loi_o_ca_hai(ts, tg, mau, hi_lo=None):
     """Python NEM ValueError khop `mau`; nhan C tu choi (None) de Python lo; duong dispatcher (`_mot_ro_nhanh`) cung nem dung loi do."""
     hi, lo, cl, sp, dm = hi_lo or _ban_nho()
     with pytest.raises(ValueError, match=mau):
@@ -437,7 +437,7 @@ def _bao_loi_o_ca_hai(ts, tg, mau, hi_lo=None):
                                  dict(thoat_gio=1.0, nghi_gio=2.0, gio_vao_tu=22.0, gio_vao_den=4.0)])
 def test_e1_thieu_cot_thoi_gian_thi_bao_loi_khong_chay_am_tham(nhan, sua):
     """Tinh nang gio ma khong co `tg` -> ValueError ro rang o Python; nhan C tra None (khong tu doan, khong doc bo nho bay)."""
-    _bao_loi_o_ca_hai(ts_(**sua), None, "cot thoi gian")
+    _kiem_bao_loi_o_ca_hai(ts_(**sua), None, "cot thoi gian")
 
 
 @pytest.mark.parametrize("ten,tg", [
@@ -446,7 +446,7 @@ def test_e1_thieu_cot_thoi_gian_thi_bao_loi_khong_chay_am_tham(nhan, sua):
 ])
 def test_e2_cot_thoi_gian_sai_hinh_thi_bao_loi(nhan, ten, tg):
     """`tg` phai la mang 1 chieu, huu han, cung do dai voi chuoi gia."""
-    _bao_loi_o_ca_hai(ts_(thoat_gio=1.0), tg, "tg phai la mang 1 chieu")
+    _kiem_bao_loi_o_ca_hai(ts_(thoat_gio=1.0), tg, "tg phai la mang 1 chieu")
 
 
 _NGOAI_MIEN = [
@@ -600,7 +600,7 @@ def _tat_het(ts):
     return dataclasses.replace(ts, **_TAT_HET)
 
 
-def _y_het(a, b, ten):
+def _kiem_y_het(a, b, ten):
     """a, b = (lai, treo, tk, nhat ky) tu `_chay_mang`: BANG NHAU TUNG BIT (khong dung sai)."""
     assert np.array_equal(a[0], b[0]), (ten, "lai")
     assert np.array_equal(a[1], b[1]), (ten, "treo")
@@ -609,7 +609,7 @@ def _y_het(a, b, ten):
 
 
 def _gan_nhau(a, b, ten):
-    """Nhu `_y_het` nhung dung sai 1e-12 (phep guong / nhan doi lot: thu tu cong don co the khac o bit cuoi)."""
+    """Nhu `_kiem_y_het` nhung dung sai 1e-12 (phep guong / nhan doi lot: thu tu cong don co the khac o bit cuoi)."""
     assert np.asarray(a[0]) == pytest.approx(np.asarray(b[0]), rel=1e-12, abs=1e-9), (ten, "lai")
     assert np.asarray(a[1]) == pytest.approx(np.asarray(b[1]), rel=1e-12, abs=1e-9), (ten, "treo")
 
@@ -656,7 +656,7 @@ def test_b1_tinh_nang_khong_bao_gio_cham_toi_ra_y_het_khong_co_tinh_nang(may, te
             goc = _tat_het(ts)
             a = _chay_mang(may, hi, lo, cl, sp, dem, chieu, goc, qc, tg)
             b = _chay_mang(may, hi, lo, cl, sp, dem, chieu, dataclasses.replace(goc, **_VO_HIEU[ten]), qc, tg)
-            _y_het(a, b, (ten, chieu))
+            _kiem_y_het(a, b, (ten, chieu))
             assert b[2]["so_cat"] == 0 and b[2]["so_gio"] == 0
 
 
@@ -680,7 +680,7 @@ def test_b2_them_tinh_nang_vo_hieu_len_cau_hinh_dang_bat_van_y_het(may, seed):
             them.append(dict(nghi_gio=5.0))
         for kw in them:
             b = _chay_mang(may, hi, lo, cl, sp, dem, 1, dataclasses.replace(ts, **kw), qc, tg)
-            _y_het(a, b, (kw, ts))
+            _kiem_y_het(a, b, (kw, ts))
             dem_them += 1
     assert dem_them > 0
 
@@ -693,7 +693,7 @@ def test_b3_dich_ca_cot_thoi_gian_di_so_nguyen_ngay_khong_doi_gi(may, ngay, seed
     for hi, lo, cl, sp, dem, ts, qc, tg in _ca_co_su_kien(6000 + seed, 4):
         a = _chay_mang(may, hi, lo, cl, sp, dem, 1, ts, qc, tg)
         b = _chay_mang(may, hi, lo, cl, sp, dem, 1, ts, qc, np.ascontiguousarray(tg + 86400.0 * ngay))
-        _y_het(a, b, (ngay, ts))
+        _kiem_y_het(a, b, (ngay, ts))
 
 
 @pytest.mark.parametrize("seed", range(8))
@@ -787,7 +787,7 @@ def test_b7_nghi_vo_han_dong_bang_sau_lan_cat_hoac_thoat_gio_dau_tien(may, seed)
         ev_a = a[3]
         k0 = next((j for j, e in enumerate(ev_a) if e[0] == "dong" and e[4] in ("cat", "gio")), None)
         if k0 is None:
-            _y_het(a, b, ts)
+            _kiem_y_het(a, b, ts)
             continue
         thay += 1
         bar_c, ly = ev_a[k0][1], ev_a[k0][4]
@@ -1038,7 +1038,7 @@ class PhatLai:
                 self.tai("tk[%s] = %r, tinh lai tu nhat ky %r", ten, tk[ten], v)
 
 
-def _phat_lai(may, hi, lo, cl, sp, dem, chieu, ts, qc, tg, ten=""):
+def _kiem_phat_lai(may, hi, lo, cl, sp, dem, chieu, ts, qc, tg, ten=""):
     lai, treo, tk, ev = _chay_mang(may, hi, lo, cl, sp, dem, chieu, ts, qc, tg)
     pl = PhatLai(hi, lo, cl, sp, dem, chieu, ts, qc, tg, ten)
     pl.chay(ev, lai, treo, tk)
@@ -1051,7 +1051,7 @@ def test_r1_phat_lai_nhat_ky_khop_luat_tren_kich_ban_ngau_nhien(may, seed):
     tong = {"cat": 0, "gio": 0, "nhay": 0}
     for j, (hi, lo, cl, sp, dem, ts, qc, tg) in enumerate(_so_ngau_nhien_thoat(11000 + seed, 6)):
         for chieu in (1, -1):
-            pl, _ = _phat_lai(may, hi, lo, cl, sp, dem, chieu, ts, qc, tg, "seed %d ca %d chieu %d %s" % (seed, j, chieu, ts))
+            pl, _ = _kiem_phat_lai(may, hi, lo, cl, sp, dem, chieu, ts, qc, tg, "seed %d ca %d chieu %d %s" % (seed, j, chieu, ts))
             tong["cat"] += pl.so_cat
             tong["gio"] += pl.so_gio
             tong["nhay"] += pl.so_cat_pip_tien[1]
@@ -1065,7 +1065,7 @@ def test_r2_phat_lai_phu_het_bon_tinh_nang_khong_phai_phep_thu_rong(nhan):
     for seed in range(12):
         for hi, lo, cl, sp, dem, ts, qc, tg in _so_ngau_nhien_thoat(11000 + seed, 6):
             for chieu in (1, -1):
-                pl, (_l, _t, tk, ev) = _phat_lai("c", hi, lo, cl, sp, dem, chieu, ts, qc, tg)
+                pl, (_l, _t, tk, ev) = _kiem_phat_lai("c", hi, lo, cl, sp, dem, chieu, ts, qc, tg)
                 cat += pl.so_cat_pip_tien[0]
                 nhay += pl.so_cat_pip_tien[1]
                 gio += pl.so_gio
@@ -1084,7 +1084,7 @@ def test_r3_phat_lai_tren_nhieu_hat_giong_nhan_c(nhan):
     for seed in range(60):
         for j, (hi, lo, cl, sp, dem, ts, qc, tg) in enumerate(_so_ngau_nhien_thoat(12000 + seed, 8)):
             for chieu in (1, -1):
-                pl, _ = _phat_lai("c", hi, lo, cl, sp, dem, chieu, ts, qc, tg, "seed %d ca %d chieu %d %s" % (seed, j, chieu, ts))
+                pl, _ = _kiem_phat_lai("c", hi, lo, cl, sp, dem, chieu, ts, qc, tg, "seed %d ca %d chieu %d %s" % (seed, j, chieu, ts))
                 tong += pl.so_cat + pl.so_gio
     assert tong > 100
 
@@ -1112,7 +1112,7 @@ def test_r4_phat_lai_khi_gia_co_khe_nhay_giua_hai_bar(may, seed):
     for j, (hi, lo, cl, sp, dem, ts, qc, tg) in enumerate(_so_ngau_nhien_thoat(13000 + seed, 6)):
         hi, lo, cl = _con_khe_gia(hi, lo, cl, ts, qc, rng_k)
         for chieu in (1, -1):
-            _phat_lai(may, hi, lo, cl, sp, dem, chieu, ts, qc, tg, "khe seed %d ca %d chieu %d %s" % (seed, j, chieu, ts))
+            _kiem_phat_lai(may, hi, lo, cl, sp, dem, chieu, ts, qc, tg, "khe seed %d ca %d chieu %d %s" % (seed, j, chieu, ts))
 
 
 def test_r5_khe_gia_thuc_su_sinh_ra_cat_do_nhay_gia_va_thoat_gio_o_gia_mo_kep(nhan):
@@ -1124,7 +1124,7 @@ def test_r5_khe_gia_thuc_su_sinh_ra_cat_do_nhay_gia_va_thoat_gio_o_gia_mo_kep(nh
         for hi, lo, cl, sp, dem, ts, qc, tg in _so_ngau_nhien_thoat(13000 + seed, 6):
             hi, lo, cl = _con_khe_gia(hi, lo, cl, ts, qc, rng_k)
             for chieu in (1, -1):
-                pl, (_l, _t, _k, ev) = _phat_lai("c", hi, lo, cl, sp, dem, chieu, ts, qc, tg)
+                pl, (_l, _t, _k, ev) = _kiem_phat_lai("c", hi, lo, cl, sp, dem, chieu, ts, qc, tg)
                 nhay += pl.so_cat_pip_tien[1]
                 gio_kep += sum(1 for e in ev if e[0] == "dong" and e[4] == "gio" and e[2] != cl[e[1] - 1])
     assert nhay >= 200 and gio_kep >= 60, (nhay, gio_kep)                                 # do thuc: 710 / 217

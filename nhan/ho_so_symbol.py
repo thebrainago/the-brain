@@ -45,8 +45,8 @@ def _bien_do(df) -> dict:
     r = np.diff(np.log(c[ok]))
     bar_nam = 252.0
     try:
-        from nhan import du_lieu as DL
-        bar_nam = float(DL.bar_moi_nam(df.index))
+        from nhan import do_luong as DLG                       # `du_lieu` khong co bar_moi_nam: truoc 10/10 AttributeError bi nuot -> luon 252
+        bar_nam = float(DLG.bar_moi_nam(df.index))
     except Exception:
         pass
     tr = np.maximum(h - l, np.maximum(np.abs(h - np.roll(c, 1)),

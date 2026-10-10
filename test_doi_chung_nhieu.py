@@ -1045,6 +1045,6 @@ def test_main_tu_choi_ten_la_va_tong_ket_tu_tep(tmp_path, capsys):
 
 
 def test_module_chi_ascii():
-    for p in (LAB / "nhan" / "doi_chung_nhieu.py", LAB / "nhan" / "test_doi_chung_nhieu.py"):
+    for p in (LAB / "nhan" / "doi_chung_nhieu.py", LAB / "test_doi_chung_nhieu.py"):
         loi = [i + 1 for i, d in enumerate(p.read_text(encoding="utf-8").splitlines()) if not d.isascii()]
         assert not loi, "%s co ky tu ngoai ASCII o dong %s" % (p.name, loi[:5])

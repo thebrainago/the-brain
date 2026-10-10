@@ -101,11 +101,13 @@ def test_khong_biet_cam_ket_thi_KHONG_chan_vi_None_khong_phai_0(monkeypatch, tmp
     """Linux / khong doc duoc cam ket -> None. Chan nham o day = cong tu choi TAT CA cho may khong co thong tin."""
     monkeypatch.setattr(NS, "_KHOA", tmp_path / "khoa")
     monkeypatch.setattr(NS, "may", _may_gia(commit_con_lai_gb=None))
+    vao = []
     with NS.xin("CPU_NANG", "thu"):
-        pass
+        vao.append("khong_biet_cam_ket")
     monkeypatch.setattr(NS, "may", _may_gia())                         # khong co ca khoa -> cac ban gia lap cu van chay
     with NS.xin("CPU_NANG", "thu"):
-        pass
+        vao.append("khong_khoa")
+    assert vao == ["khong_biet_cam_ket", "khong_khoa"], "ca hai lan deu phai vao duoc (khong bi chan)"
 
 
 def test_may_thuc_tra_khoa_cam_ket_va_ngoai_Windows_la_None():

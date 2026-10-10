@@ -42,7 +42,7 @@ Dem giay thoat / DCA cua 2.246 chuoi that (Model 1 = "1 minute OHLC" cua MT5 tes
   Ket luan chi duoc `RO` khi luat tot nhat khop >= 99% su kien VA moi phep so voi 4 luat con lai co p <= 1e-6 (kiem dau nhi thuc, mot phia).
 
 ## 4. Bo dung cu va DO TIN CAY (khong co du lieu ngoai van kiem duoc)
-`nhan/so_ea_voi_tester.py` (~800 dong) + `nhan/test_so_ea_voi_tester.py` (126 bai, 33 giay). Cac ham: `kiem_luat_tick` (tung su kien hop le theo luat tick nao, 4 ket luan
+`nhan/so_ea_voi_tester.py` (~800 dong) + `test_so_ea_voi_tester.py` (126 bai, 33 giay). Cac ham: `kiem_luat_tick` (tung su kien hop le theo luat tick nao, 4 ket luan
 RO / CHUA_RO / KHONG_KHOP / CHUA_DO_DUOC), `do_lech_gio` (quet +-6 gio de bat lech gio / DST giua kho gia va tester), `quet_mo_phong` (luoi luat x ratchet),
 `so_ba_chieu` + `chan_doan` (lenh goc <-> mo phong <-> tester MT5: tach "dung lai sai" khoi "mo hinh backtest sai"), `chay_tester` (CHI may nha), `tu_kiem`.
 - **Tu kiem tren gia tong hop co dap an** (`python3 -m nhan.so_ea_voi_tester tu-kiem`; hoac `b nc cc so_ea_voi_tester '{"che_do":"tu_kiem","ngay":120,"seed":1}'`, ~19 giay):
@@ -104,7 +104,7 @@ Khi 1-3 co ket luan: so sanh EA dung lai tren san C++ (mo phong) voi tester MT5 
 python3 -m nhan.ea_cancubo_lai kiem            # co che do tren 2.246 chuoi that (kp + xn)
 python3 -m nhan.ea_cancubo_lai vong-kin        # EA dung lai chay tren duong gia toi thieu -> tai tao 2.244/2.244
 python3 -m nhan.so_ea_voi_tester tu-kiem       # dung cu tu kiem tren gia tong hop co dap an (19 giay)
-python3 -m pytest nhan/test_so_ea_voi_tester.py nhan/test_ea_cancubo_lai.py -q      # 126 + 71 bai
+python3 -m pytest test_so_ea_voi_tester.py test_ea_cancubo_lai.py -q      # 126 + 71 bai
 ```
 
 ## 10. DOI HUONG (chu du an 09/10 toi) - doc truoc khi chay tiep muc 5-6

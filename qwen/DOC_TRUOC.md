@@ -131,7 +131,7 @@ bài mảng lớn (nghẹt băng thông RAM — máy chạy single-channel, 9,4 
     1 luồng 8,9 GB/s · 20 luồng 9,4 GB/s → song song hoá KHÔNG ăn gì
 ```
 
-Nên số tiến trình đúng **không suy ra được từ số nhân**. `dieu_toc.py` đo CPU thật
+Nên số tiến trình đúng **không suy ra được từ số nhân**. `dieu_toc_lan.py` đo CPU thật
 mỗi 5 giây và cộng/trừ slot theo phép đo, giữ **tổng CPU của cả máy** quanh 85%.
 Mục tiêu là của cả máy, không của riêng hệ này — nên khi MT5 tester ăn 60% thì làn
 CPU tự co lại. Đó là hành vi đúng.
@@ -217,7 +217,7 @@ Kiểu cổng có sẵn: `chay_duoc` · `khong_rong` · `so_lenh_du` · `truong_
 | file | việc |
 |---|---|
 | `cau_hinh.py` | mọi hằng số, một chỗ |
-| `dieu_toc.py` | giữ CPU ~85%, cấp phát lõi cho các làn |
+| `dieu_toc_lan.py` | giữ CPU ~85%, cấp phát lõi cho các làn (bộ chạy `q`); `dieu_toc.py` = cổng khởi động chung cho nhiều bộ chạy `b cau` |
 | `bang_viec.py` | đọc `NHIEM_VU.json`, giải phụ thuộc, chọn việc |
 | `tien_trinh.py` | phóng tiến trình con (BELOW_NORMAL, có hạn giờ, giết được cả cây) |
 | `cong.py` | **chấm đạt/âm/chưa đo được — bằng code** |

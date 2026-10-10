@@ -48,7 +48,7 @@ from . import bang_viec as BV
 from . import cau_hinh as CH
 from . import cong as CONG
 from . import cong_cu as CC
-from . import dieu_toc as DT
+from . import dieu_toc_lan as DT
 from . import so_tay as ST
 from . import tien_trinh as TT
 

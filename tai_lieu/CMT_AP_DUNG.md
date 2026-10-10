@@ -1,7 +1,7 @@
 # CMT -> HE THONG (05/10/2026, chu du an: "cap nhat giao trinh cmt va ap dung vao he thong de loc bot thi nghiem thua va tang xac suat thang")
 
 Gia dinh: CMT = Chartered Market Technician (giao trinh phan tich ky thuat). Neu y chu du an khac thi bao de sua.
-Ma: `nhan/cmt_prior.py` (+ test `nhan/test_cmt_prior.py`), cong cu `b nc cc cmt_loc`. KHONG phai cong chan: chi NHAN + THU TU.
+Ma: `nhan/cmt_prior.py` (+ test `test_cmt_prior.py`), cong cu `b nc cc cmt_loc`. KHONG phai cong chan: chi NHAN + THU TU.
 
 ## Bon y trong giao trinh va cho he dung chung
 | Y CMT | Dung o dau | Tac dung |

@@ -34,11 +34,8 @@ def test_khu_tron():
 
 
 def test_thieu_ohlc():
-    try:
+    with pytest.raises(ValueError):
         X.ghi(pd.DataFrame({"x": [1]}, index=pd.date_range("2024", periods=1)), "A", "M15", Path(tempfile.mkdtemp()), Path(tempfile.mkdtemp()))
-    except ValueError:
-        return
-    assert False
 
 
 # ------------------------------------------------------------------ ngay + ten tep

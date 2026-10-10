@@ -40,7 +40,7 @@ def main():
     for x in (-10, -5, 0, 5, 10, 15, 20):
         g = [r for r in rows if r["e"] <= x]
         print("engine <= %4d: n=%-3d MT5>0 %-3d (cat nham neu MT5 >= 10: %d)" % (x, len(g), sum(r["m"] > 0 for r in g), sum(r["m"] >= 10 for r in g)))
-    print("--- dd (engine DD%% -> MT5 DD%%): dung de dat nguong cat som theo von")
+    print("--- dd (engine DD% -> MT5 DD%): dung de dat nguong cat som theo von")
     for x in (20, 30, 40, 50, 60, 70):
         g = [r for r in rows if r["de"] >= x]
         print("DD engine >= %d: n=%-3d MT5 DD trung vi %s, MT5 lai>0: %d" % (x, len(g), round(S.median(r["dm"] for r in g), 1) if g else None, sum(r["m"] > 0 for r in g)))

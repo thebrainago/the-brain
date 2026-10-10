@@ -134,7 +134,7 @@ def _c(hi, lo, cl, sp, dem, chieu, ts, qc, tg=None):
     return r[0], r[1], r[2], ev
 
 
-def _khop(a, b, ten: str = ""):
+def _kiem_khop(a, b, ten: str = ""):
     """a = Python (chuan), b = nhan C. Dung sai 1e-9 o moi nen tang; TUNG BIT tren Linux (cung libm, cung co bien dich)."""
     ok, mo_ta = LN.so_sanh_ket_qua(a, b)
     assert ok, "%s: %s" % (ten, mo_ta)
@@ -242,7 +242,7 @@ def test_khop_tren_kich_ban_ngau_nhien(nhan, seed, mo_hinh):
         for chieu in (1, -1):
             a = _py(hi, lo, cl, sp, dem, chieu, ts, qc)
             b = _c(hi, lo, cl, sp, dem, chieu, ts, qc)
-            _khop(a, b, "%s seed=%d ca=%d chieu=%+d %s" % (mo_hinh, seed, k, chieu, ts))
+            _kiem_khop(a, b, "%s seed=%d ca=%d chieu=%+d %s" % (mo_hinh, seed, k, chieu, ts))
             tong_lenh += a[2]["so_lenh"]
     assert tong_lenh > 300, "kich ban qua thua - khong du tin cay"
 
@@ -254,7 +254,7 @@ def test_khop_cap_jpy(nhan, seed, mo_hinh):
     for k, (hi, lo, cl, sp, dem, ts, qc) in enumerate(_so_ngau_nhien(seed, 6, jpy=True, mo_hinh=mo_hinh)):
         assert qc.pip == 1e-2
         for chieu in (1, -1):
-            _khop(_py(hi, lo, cl, sp, dem, chieu, ts, qc), _c(hi, lo, cl, sp, dem, chieu, ts, qc),
+            _kiem_khop(_py(hi, lo, cl, sp, dem, chieu, ts, qc), _c(hi, lo, cl, sp, dem, chieu, ts, qc),
                   "jpy %s seed=%d ca=%d chieu=%+d" % (mo_hinh, seed, k, chieu))
 
 
@@ -274,7 +274,7 @@ def test_khop_tren_kich_ban_ngau_nhien_co_che_thoat_va_loc_gio(nhan, jpy, seeds)
             for chieu in (1, -1):
                 a = _py(hi, lo, cl, sp, dem, chieu, ts, qc, tg)
                 b = _c(hi, lo, cl, sp, dem, chieu, ts, qc, tg)
-                _khop(a, b, "thoat jpy=%s seed=%d ca=%d chieu=%+d %s" % (jpy, seed, k, chieu, ts))
+                _kiem_khop(a, b, "thoat jpy=%s seed=%d ca=%d chieu=%+d %s" % (jpy, seed, k, chieu, ts))
                 for key in tong:
                     tong[key] += a[2][key]
     assert tong["so_lenh"] > 1000 and tong["so_cat"] > 300 and tong["so_gio"] > 50, ("kich ban qua thua - khong du tin cay", tong)
@@ -310,7 +310,7 @@ def test_khop_khi_tham_so_la_kieu_so_khac(nhan, sua, mo_hinh):
         if r is None:                      # tu choi cung la dap an dung (Python lo) - nhung phai LA chu y, khong phai loi
             assert not LN.kha_dung(ts, LU.QC_AUDCAD)
             continue
-        _khop(_py(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD), _c(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD),
+        _kiem_khop(_py(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD), _c(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD),
               "%s %s chieu=%+d" % (mo_hinh, sua, chieu))
 
 
@@ -323,7 +323,7 @@ def test_khop_chuoi_rat_ngan(nhan, n, mo_hinh):
     sp, dem = np.full(n, 1e-4), np.ones(n)
     ts = LU.ThamSo(buoc=5.0, tp=3.0, tran_tang=4, tia_lenh=True, bien_cap=0.5, khop_bar=mo_hinh)
     for chieu in (1, -1):
-        _khop(_py(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD), _c(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD),
+        _kiem_khop(_py(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD), _c(hi, lo, cl, sp, dem, chieu, ts, LU.QC_AUDCAD),
               "n=%d chieu=%+d" % (n, chieu))
 
 
@@ -333,7 +333,7 @@ def test_khop_chuoi_phang(nhan, mo_hinh):
     cl = np.full(n, 0.9)
     sp, dem = np.full(n, 1e-4), np.zeros(n)
     ts = LU.ThamSo(buoc=5.0, tp=3.0, tran_tang=4, khop_bar=mo_hinh)
-    _khop(_py(cl, cl, cl, sp, dem, 1, ts, LU.QC_AUDCAD), _c(cl, cl, cl, sp, dem, 1, ts, LU.QC_AUDCAD), "phang")
+    _kiem_khop(_py(cl, cl, cl, sp, dem, 1, ts, LU.QC_AUDCAD), _c(cl, cl, cl, sp, dem, 1, ts, LU.QC_AUDCAD), "phang")
 
 
 @pytest.mark.parametrize("mo_hinh", MO_HINH)
@@ -371,7 +371,7 @@ def test_khop_khi_du_lieu_co_nan_hoac_inf(nhan, hong, mo_hinh):
             with pytest.raises(ValueError, match="NaN hoac inf"):
                 LU._mot_ro_nhanh(*args)                       # C tu choi -> Python lo -> cung loi, khong ket qua im lang
             continue
-        _khop(_py(m["hi"], m["lo"], m["cl"], m["sp"], m["dem"], chieu, ts, LU.QC_AUDCAD),
+        _kiem_khop(_py(m["hi"], m["lo"], m["cl"], m["sp"], m["dem"], chieu, ts, LU.QC_AUDCAD),
               _c(m["hi"], m["lo"], m["cl"], m["sp"], m["dem"], chieu, ts, LU.QC_AUDCAD), "%s chieu=%+d" % (hong, chieu))
 
 
@@ -391,8 +391,8 @@ def test_khop_tren_lat_cat_khong_lien_tuc(nhan, mo_hinh):
     v = [gian(a) for a in (hi, lo, cl, sp, dem)]
     assert not v[0].flags["C_CONTIGUOUS"]
     for chieu in (1, -1):
-        _khop(_py(*v, chieu, ts, qc), _c(*v, chieu, ts, qc), "lat cat chieu=%+d" % chieu)
-        _khop(_py(hi, lo, cl, sp, dem, chieu, ts, qc), _c(*v, chieu, ts, qc), "lat cat == lien tuc chieu=%+d" % chieu)
+        _kiem_khop(_py(*v, chieu, ts, qc), _c(*v, chieu, ts, qc), "lat cat chieu=%+d" % chieu)
+        _kiem_khop(_py(hi, lo, cl, sp, dem, chieu, ts, qc), _c(*v, chieu, ts, qc), "lat cat == lien tuc chieu=%+d" % chieu)
 
 
 @pytest.mark.parametrize("mo_hinh", MO_HINH)
@@ -412,7 +412,7 @@ def test_bo_dem_su_kien_tran_va_chay_lai(nhan, mo_hinh):
     ts = LU.ThamSo(buoc=4.0, tp=3.0, tran_tang=6, khop_bar=mo_hinh)
     a = _py(hi, lo, cl, sp, dem, 1, ts, LU.QC_AUDCAD)
     assert len(a[3]) > 4096, "kich ban chua du lon de ep bo dem tran (%d su kien)" % len(a[3])
-    _khop(a, _c(hi, lo, cl, sp, dem, 1, ts, LU.QC_AUDCAD), "tran bo dem")
+    _kiem_khop(a, _c(hi, lo, cl, sp, dem, 1, ts, LU.QC_AUDCAD), "tran bo dem")
 
 
 @pytest.mark.parametrize("mo_hinh", MO_HINH)
@@ -440,7 +440,7 @@ def test_khop_khi_so_tang_vuot_bo_dem_ban_dau(nhan, tia, mo_hinh):
     assert a[2]["tang_max"] > 256, "kich ban khong du sau de ep bo dem gian (tang_max=%d)" % a[2]["tang_max"]
     if tia:
         assert a[2]["so_cap"] > 20, "kich ban khong du tia de ep don mang (so_cap=%d)" % a[2]["so_cap"]
-    _khop(a, _c(hi, lo, cl, sp, dem, 1, ts, LU.QC_AUDCAD), "bo dem gian %s tia=%s" % (mo_hinh, tia))
+    _kiem_khop(a, _c(hi, lo, cl, sp, dem, 1, ts, LU.QC_AUDCAD), "bo dem gian %s tia=%s" % (mo_hinh, tia))
 
 
 @pytest.mark.parametrize("chieu", [1, -1])
@@ -612,7 +612,7 @@ def test_moc_cho_lui_dung_bang_0(nhan, mo_hinh):
             LU._mot_ro_nhanh(hi, lo, cl, sp, dem, 1, ts, qc)
         return
     py, c = _py(hi, lo, cl, sp, dem, 1, ts, qc), _c(hi, lo, cl, sp, dem, 1, ts, qc)
-    _khop(py, c, "cho lui = 0,0 dung")
+    _kiem_khop(py, c, "cho lui = 0,0 dung")
     lai, _treo, tk, ev = py
     assert tk["so_ro"] == 1 and tk["so_lenh"] == 2 and tk["con_mo"] == 1                     # bar 1 chot TP, bar 2 mo lai ro moi
     assert [(e[0], e[1]) for e in ev] == [("mo", 0), ("dong", 1), ("mo", 2)]                  # mo bar0, chot TP bar1, vao lai dau bar2

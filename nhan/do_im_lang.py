@@ -156,7 +156,7 @@ def _vi_sao_cam(ma: str) -> dict:
         from nhan import doc_trinh_duyet as DTD
         song = False
         try:
-            song = bool(DTD.dang_chay())
+            song = bool(DTD.cdp_dang_chay())                  # truoc 10/10 la `dang_chay` (khong ton tai) -> AttributeError bi nuot -> luon 'CDP TAT'
         except Exception:
             song = False
         if not song:

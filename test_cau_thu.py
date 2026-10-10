@@ -319,20 +319,24 @@ class TestChiHuyVaTietKiem:
         h = hai_dau
         for i in range(CTH.TOI_DA_THU_NUA_GIO):
             CTH.gui("nha", "cloud", "thu %d" % i, goc=h.nha, day=False)
-        CTH.gui("cloud", "nha", "chieu nguoc khong tinh chung", goc=h.nha, day=False)           # dem theo CHIEU
-        CTH.gui("nha", "cloud", "ket chuoi", chu_de="XONG viec 4", goc=h.nha, day=False)       # thu ket chuoi luon di qua
-        CTH.gui("nha", "cloud", "chu du an cho phep", goc=h.nha, day=False, du_han_muc=True)
+        gui_di = [CTH.gui("cloud", "nha", "chieu nguoc khong tinh chung", goc=h.nha, day=False),           # dem theo CHIEU
+                  CTH.gui("nha", "cloud", "ket chuoi", chu_de="XONG viec 4", goc=h.nha, day=False),       # thu ket chuoi luon di qua
+                  CTH.gui("nha", "cloud", "chu du an cho phep", goc=h.nha, day=False, du_han_muc=True)]
+        co = {d["id"] for d in CTH.tat_ca(h.nha)}
+        assert all(r["id"] in co for r in gui_di), "ca ba thu phai duoc ghi, khong bi cau chi chan"
 
     def test_may_khong_bi_cau_chi(self, hai_dau):
         h = hai_dau
-        for i in range(CTH.TOI_DA_THU_NUA_GIO + 3):
-            CTH.gui("may:nha1", "cloud", "ket qua %d" % i, goc=h.nha, day=False)
+        ids = [CTH.gui("may:nha1", "cloud", "ket qua %d" % i, goc=h.nha, day=False)["id"] for i in range(CTH.TOI_DA_THU_NUA_GIO + 3)]
+        co = {d["id"] for d in CTH.tat_ca(h.nha)}
+        assert all(i in co for i in ids), "thu cua may khong tinh vao cau chi: tat ca phai duoc ghi"
 
     def test_thu_cu_hon_30_phut_khong_tinh(self, hai_dau):
         h = hai_dau
         for k in range(CTH.TOI_DA_THU_NUA_GIO):
             self._hen(h, 31 + k)
-        CTH.gui("nha", "cloud", "van gui duoc", goc=h.nha, day=False)
+        r = CTH.gui("nha", "cloud", "van gui duoc", goc=h.nha, day=False)
+        assert r["id"] in {d["id"] for d in CTH.tat_ca(h.nha)}, "thu cu hon cua so khong tinh -> van gui duoc"
 
     def test_noi_bao_qua_han_muc_va_khong_danh_thuc(self, hai_dau):
         h = hai_dau

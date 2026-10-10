@@ -430,7 +430,7 @@ def test_xac_nhan_am_thi_ket_qua_cuoi_la_AM_du_luoi_dep(ea_cl, tmp_path, monkeyp
 
 
 # ---------------------------------------------------------------- hong ha tang khong phai AM
-def _khong_ghi_gi(r, ly=None):
+def _kiem_khong_ghi_gi(r, ly=None):
     assert r["trang_thai"] == "CHUA_DO_DUOC", r
     if ly:
         assert ly in r["ly_do"], r["ly_do"]
@@ -440,39 +440,39 @@ def _khong_ghi_gi(r, ly=None):
 def test_tester_chet_khong_phai_AM_va_khong_ghi_so_tay(ea_cl, tmp_path, monkeypatch):
     dat_may(monkeypatch, tmp_path, xong=False)
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "tester chet")
+    _kiem_khong_ghi_gi(r, "tester chet")
     assert r["ha_tang"]
 
 
 def test_tester_bao_xong_nhung_khong_co_file_bang_pass_la_ha_tang(ea_cl, tmp_path, monkeypatch, thu_muc_chan_doan):
     dat_may(monkeypatch, tmp_path, ghi_bang=False)
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "khong doc duoc bang pass")
+    _kiem_khong_ghi_gi(r, "khong doc duoc bang pass")
     assert "bang goc giu o" not in r["ly_do"] and not list(thu_muc_chan_doan.glob("*")), "khong co gi de giu"
 
 
 def test_bang_rong_va_bang_thieu_cot_giu_ban_goc_de_doc_lai(ea_cl, tmp_path, monkeypatch, thu_muc_chan_doan):
     dat_may(monkeypatch, tmp_path, sua_bang=lambda h: [])
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "bang rong")
+    _kiem_khong_ghi_gi(r, "bang rong")
     assert "reports/chan_doan_tester/" in r["ly_do"] and list(thu_muc_chan_doan.glob("toi_uu_*.xml"))
     # cot input mang ten khac ten bien (vd nhan hien thi) -> noi ro cot nao thieu
     dat_may(monkeypatch, tmp_path, sua_bang=lambda h: [{("Fast period" if k == "InpFast" else k): v for k, v in x.items()} for x in h])
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "thieu cot InpFast")
+    _kiem_khong_ghi_gi(r, "thieu cot InpFast")
     assert "Fast period" in r["ly_do"], "liet ke cot CO de nguoi doc thay ten that"
 
 
 def test_chi_mot_pass_nghia_la_mt5_chay_mot_lan_khong_doc_khoang(ea_cl, tmp_path, monkeypatch):
     dat_may(monkeypatch, tmp_path, sua_bang=lambda h: h[:1])
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "1/25 pass")
+    _kiem_khong_ghi_gi(r, "1/25 pass")
     assert "MOT lan" in r["ly_do"]
 
 
 def test_doc_duoc_duoi_90_phan_tram_pass_la_hong_con_du_90_thi_chap_nhan(ea_cl, tmp_path, monkeypatch):
     dat_may(monkeypatch, tmp_path, pass_=cao_nguyen, sua_bang=lambda h: h[:22])               # 22/25 = 88%
-    _khong_ghi_gi(TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI), "22/25")
+    _kiem_khong_ghi_gi(TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI), "22/25")
     dat_may(monkeypatch, tmp_path, pass_=cao_nguyen, sua_bang=lambda h: h[:23])               # 23/25 = 92%
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI, xac_nhan=False)
     assert r["so_pass"] == 23 and r["trang_thai"] == "DANG_CHO_XAC_NHAN"
@@ -491,13 +491,13 @@ def test_o_so_hong_khong_bi_dem_la_pass_dat(ea_cl, tmp_path, monkeypatch):
 def test_tat_ca_pass_deu_khong_lenh_la_hong_moi_truong_khong_phai_chien_luoc_te(ea_cl, tmp_path, monkeypatch):
     dat_may(monkeypatch, tmp_path, pass_=lambda g: {"lai": 0.0, "dd": 0.0, "lenh": 0})
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "TAT CA 25 pass deu 0 lenh")
+    _kiem_khong_ghi_gi(r, "TAT CA 25 pass deu 0 lenh")
 
 
 def test_input_khong_tac_dong_len_ea_moi_pass_y_het_la_ha_tang(ea_cl, tmp_path, monkeypatch):
     dat_may(monkeypatch, tmp_path, pass_=lambda g: {"lai": 850.0, "dd": 12.0, "lenh": 77})
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "CUNG lai va so lenh")
+    _kiem_khong_ghi_gi(r, "CUNG lai va so lenh")
 
 
 def test_gt_id_khong_co_trong_so_tay_bi_chan_truoc_tester(ea_cl, tmp_path, monkeypatch):
@@ -511,7 +511,7 @@ def test_gt_id_khong_co_trong_so_tay_bi_chan_truoc_tester(ea_cl, tmp_path, monke
 def test_may_khong_co_mt5_la_ha_tang_chu_khong_phai_am(ea_cl):
     """Khong cai tester gia (E.CHAY_TESTER = None): tren Linux `_chay_that` tra loi ro rang, khong nem, khong ghi so tay."""
     r = TU.toi_uu(ea_cl, "EURUSD", "H1", LUOI)
-    _khong_ghi_gi(r, "tester khong ra bang pass")
+    _kiem_khong_ghi_gi(r, "tester khong ra bang pass")
     assert r["ha_tang"]
 
 

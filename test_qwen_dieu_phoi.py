@@ -188,7 +188,7 @@ def test_viec_con_DANG_CHAY_sau_khi_may_chet_thanh_GIAN_DOAN(tmp_path):
 
 # ------------------------------------------------------------------ dieu toc
 def test_dieu_toc_khong_cap_qua_muc_tieu():
-    from qwen import dieu_toc as DT
+    from qwen import dieu_toc_lan as DT
     dt = DT.DieuToc({**__import__("qwen.cau_hinh", fromlist=["x"]).nap(),
                      "muc_tieu_cpu": 85.0})
     time.sleep(0.2)
@@ -204,7 +204,7 @@ def test_KHONG_lan_nao_duoc_mien_ngan_sach():
     chu khong an CPU'. Do la GIA DINH CHUA DO: do that luc chu du an choi game,
     mot viec lan LLM an 7,7 loi. Che do nghi ha muc tieu ve 35% ma may van 97%.
     """
-    from qwen import dieu_toc as DT
+    from qwen import dieu_toc_lan as DT
     dt = DT.DieuToc()
     for i in range(20):
         dt.giu("gia_%d" % i, "CPU")
@@ -216,7 +216,7 @@ def test_KHONG_lan_nao_duoc_mien_ngan_sach():
 def test_dieu_toc_HOC_suat_that_va_lay_max_voi_bang_khai():
     """Bang khai la chan DUOI cho lan chua chay; phep do la su that cho lan da
     chay. Lay max hai cai - uoc thap thi may nghen va nguoi phai di giet tay."""
-    from qwen import dieu_toc as DT
+    from qwen import dieu_toc_lan as DT
     dt = DT.DieuToc({**__import__("qwen.cau_hinh", fromlist=["x"]).nap(),
                      "nang_lan": {"LLM": 1.2}})
     assert dt.nang("LLM") == 1.2

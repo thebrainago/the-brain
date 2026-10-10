@@ -5,6 +5,8 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
+import pytest
+
 from nhan import nc_ho_so as NC
 
 
@@ -44,27 +46,18 @@ def test_ten_sach_rong_tra_bot():
 
 # --------------------------------------------------------------------------------------------------- _duong
 def test_duong_tu_choi_chuoi_rong():
-    try:
+    with pytest.raises(ValueError):
         NC._duong("", "lenh")
-        assert False, "phai loi"
-    except ValueError:
-        pass
 
 
 def test_duong_tu_choi_ngoai_thu_muc_du_an():
-    try:
+    with pytest.raises(ValueError):
         NC._duong("/etc/hosts", "lenh")
-        assert False, "phai loi"
-    except ValueError:
-        pass
 
 
 def test_duong_tu_choi_khong_phai_chuoi():
-    try:
+    with pytest.raises(ValueError):
         NC._duong(123, "lenh")
-        assert False, "phai loi"
-    except ValueError:
-        pass
 
 
 # --------------------------------------------------------------------------------------------------- _cat_tep
@@ -95,33 +88,21 @@ def test_viet_tao_tep_trong_thu_muc_ho_so():
 
 # --------------------------------------------------------------------------------------------------- chay: kiem tra tham so
 def test_chay_them_co_khoa_la_thi_loi():
-    try:
+    with pytest.raises(ValueError):
         NC.chay("reports/fixture/tester_vamge10k_kp_deals.csv.gz", them=[{"lenh": "x", "sai": 1}])
-        assert False, "phai loi"
-    except ValueError:
-        pass
 
 
 def test_chay_qua_nhieu_cap_thi_loi():
     them = [{"lenh": "reports/fixture/tester_vamge10k_kp_deals.csv.gz"}] * NC.TOI_DA_CAP
-    try:
+    with pytest.raises(ValueError):
         NC.chay("reports/fixture/tester_vamge10k_kp_deals.csv.gz", them=them)
-        assert False, "phai loi"
-    except ValueError:
-        pass
 
 
 def test_chay_he_so_don_vi_khong_hop_le_thi_loi():
-    try:
+    with pytest.raises(ValueError):
         NC.chay("reports/fixture/tester_vamge10k_kp_deals.csv.gz", he_so_don_vi=-1)
-        assert False, "phai loi"
-    except ValueError:
-        pass
 
 
 def test_chay_them_khong_phai_dict_thi_loi():
-    try:
+    with pytest.raises(ValueError):
         NC.chay("reports/fixture/tester_vamge10k_kp_deals.csv.gz", them=[1, 2])
-        assert False, "phai loi"
-    except ValueError:
-        pass
