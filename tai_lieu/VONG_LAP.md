@@ -50,6 +50,24 @@ v3 (lac quan 15-55% so voi EA that). Dieu nay dung voi muc tieu cua chu du an: c
   khong phai cong chan. `so_voi_nen` = HON_NEN / NGANG_NEN / CHUA_BIET (so voi nhom doi chung). `san_sang_niem_phong` chi bat khi co ket qua
   tu engine >= 4 (engine v3 lac quan).
 
+### Cach doc ket qua: ke hoach DONG BANG truoc khi co ket qua nao (10/10/2026)
+
+Khi 1.022 don kiem ngoai mau tra ve, `nhan/vong_lap.so_sanh_nhom` tra loi HAI cau hoi (nguong la hang `SO_SANH_*`, khong doi sau khi nhin so):
+
+1. **Chon o TOT NHAT trong luoi co hon chon BUA mot o cung luoi khong?** (`cao_vs_ngau`, ghep cap, McNemar chinh xac mot phia.) Neu KHONG hon:
+   3.000 o quet khong them gi so voi thu vai o -> dem gio may sang chieu rong (them thi truong, co che), khong quet sau.
+2. **Luot quet duoc xep CAO NGUYEN co ben hon luot quet khac khong?** (`cao_vs_doi`, hai nhom doc lap, Fisher chinh xac mot phia, chi so sanh o tot nhat
+   cua moi ben.) Neu KHONG: cach xep cao nguyen khong du bao gi, dung dung no lam bo loc duy nhat.
+
+- Ket luan: **HON** = chenh >= 10 diem va p < 0,05 (mot phia); **KEM** = nguoc lai; **CHUA_DU** = it hon 20 cap / 20 phep moi ben; con lai **NGANG** va
+  luon di kem **MDE** (chenh nho nhat phep thu thay duoc voi luc 80%): "khong thay" co the chi la "khong du mau de thay" (CLAUDE.md: ket luan am tinh kem MDE).
+  Chenh be khong bao gio thanh HON du mau lon. Hai phep thu cung luc, khong hieu chinh: day la NHAN canh bao, khong phai cong chan.
+- **Cung mot thuoc do** (`kq_cung_thuoc_do`): moi o lay ket luan cua LAN KIEM DAU (engine thap nhat). Don kiem lai engine moi chi ra cho co che da GIU,
+  nen neu dung no de so sanh thi nhom cao bi do bang thuoc kho hon. Nhan GIU van dung ket qua tot nhat.
+- KHONG_DO_DUOC (don chet, thieu so lieu) bi bo khoi ca hai phep thu - khong bao gio tinh la RUOT. Ca ty le tuyet doi (khoang tin cay Wilson) lan ty le theo
+  DO MANH cua cao nguyen (ba nhom, khi >= 30 ket luan) nam trong `reports/VONG_LAP.md`.
+- Dong tom tat bang loi thuong nam trong `tom_tat_cho_chu` (nen ra ca trong dong `VONG:` cua `giam_sat_may_nha`); diem nghen tu dong doi huong gio may khi ket qua la NGANG/KEM.
+
 ## 4. Chang AP DUNG (nap nguoc vao vong sau)
 
 Co che duoc GIU -> `ke_hoach_ap_dung`: (a) quet chuyen sang thi truong chua quet / khung ke ben (chi vao o TRONG, co du lieu trong
@@ -72,7 +90,7 @@ Dieu phoi dinh ky `Giam sat may nha moi gio`: `python3 -m nhan.giam_sat_may_nha`
 
 ## 7. Viec ke tiep (dung thu tu)
 
-1. May nha chay het cac don `vl-xn-*` -> doc tong ket: ty le qua cua vung lai so voi nhom doi chung (pheu co hon boc tham khong?).
+1. May nha chay het cac don `vl-xn-*` -> doc tong ket: ty le qua cua vung lai so voi nhom doi chung (pheu co hon boc tham khong? muc 3, phan "Cach doc ket qua").
 2. Co che dau tien qua nhan GIU -> kiem do ben: thu cac o lan can cua nguoi qua (khong chi mot o), roi `vl-xn4-*` (engine v4).
 3. Co che GIU -> AP DUNG: HEPHAESTUS rai luoi tham so quanh co che, SEEKER di tim nguon cung loai (TIM co muc tieu).
 4. Khi du ket qua: chu du an/cloud quyet NIEM PHONG theo luat (mot lan, doan dong bang). Khong tu dong.

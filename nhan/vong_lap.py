@@ -590,6 +590,174 @@ def danh_sach_giu(ung_vien: list[dict], kq: dict[str, dict], co_che: dict) -> li
     return ra
 
 
+# ------------------------------------------------------------------------ SO SANH THONG KE: pheu co hon boc tham khong?
+
+#: Ke hoach doc ket qua, CO DINH TRUOC KHI CO KET QUA (10/10/2026): doi nguong sau khi nhin so la dang tim nguong cho vua so.
+SO_SANH_N_TOI_THIEU = 20        # so cap (hoac so phep moi ben) co ket luan toi thieu truoc khi dam noi "hon" / "ngang"
+SO_SANH_ALPHA = 0.05            # mot phia; hai phep thu cung luc, khong hieu chinh: day la NHAN canh bao, khong phai cong chan
+SO_SANH_CHENH_TOI_THIEU = 0.10  # chenh ty le qua toi thieu (10 diem) de goi HON / KEM - mau lon khong duoc bien chenh be thanh "hon"
+
+
+def _nhi_thuc_tu(k: int, n: int) -> float:
+    """P(X >= k), X ~ Nhi thuc(n, 1/2), chinh xac (so nguyen, khong tran so)."""
+    if k <= 0 or n <= 0:
+        return 1.0
+    if k > n:
+        return 0.0
+    return min(1.0, sum(math.comb(n, x) for x in range(k, n + 1)) / (1 << n))
+
+
+def mcnemar_mot_phia(b: int, c: int) -> tuple[float, float]:
+    """(p_hon, p_kem), chinh xac. b = so cap ma nhom thu QUA con doi chung RUOT; c = nguoc lai. Cap cung ket qua khong dong gop."""
+    n = b + c
+    return _nhi_thuc_tu(b, n), _nhi_thuc_tu(c, n)
+
+
+def fisher_mot_phia(a: int, b: int, c: int, d: int) -> tuple[float, float]:
+    """(p_hon, p_kem), chinh xac (sieu hinh hoc) cho bang [[a, b], [c, d]]: a/b = nhom thu QUA/RUOT, c/d = nhom doi chung QUA/RUOT."""
+    n1, k, tong = a + b, a + c, a + b + c + d
+    if n1 == 0 or tong - n1 == 0:
+        return 1.0, 1.0
+    lo, hi = max(0, n1 - (tong - k)), min(n1, k)
+    mau = math.comb(tong, n1)
+    p = {x: math.comb(k, x) * math.comb(tong - k, n1 - x) for x in range(lo, hi + 1)}
+    return (min(1.0, sum(v for x, v in p.items() if x >= a) / mau), min(1.0, sum(v for x, v in p.items() if x <= a) / mau))
+
+
+def khoang_wilson(k: int, n: int, z: float = 1.96) -> list[float] | None:
+    """Khoang tin cay 95% (Wilson) cho ty le k/n; None khi n = 0."""
+    if n <= 0:
+        return None
+    p, z2 = k / n, z * z
+    mau = 1.0 + z2 / n
+    tam = (p + z2 / (2.0 * n)) / mau
+    nua = z * math.sqrt(p * (1.0 - p) / n + z2 / (4.0 * n * n)) / mau
+    return [round(max(0.0, tam - nua), 4), round(min(1.0, tam + nua), 4)]
+
+
+def mde_hai_ty_le(n1: int, n2: int, p0: float) -> float | None:
+    """Chenh ty le nho nhat (0..1) ma phep so sanh MOT PHIA 5% thay duoc voi luc 80% (xap xi chuan, hai mau doc lap). CLAUDE.md: ket luan
+    'ngang / khong thay khac' PHAI di kem con so nay, neu khong 'khong thay' co the chi la 'khong du mau de thay'."""
+    if n1 <= 0 or n2 <= 0:
+        return None
+    p = min(0.95, max(0.05, p0))
+    return round((1.645 + 0.8416) * math.sqrt(p * (1.0 - p) * (1.0 / n1 + 1.0 / n2)), 3)
+
+
+def _ket_luan_so_sanh(n_du: int, chenh: float | None, p_hon: float, p_kem: float) -> str:
+    if chenh is None or n_du < SO_SANH_N_TOI_THIEU:
+        return "CHUA_DU"
+    if chenh >= SO_SANH_CHENH_TOI_THIEU and p_hon < SO_SANH_ALPHA:
+        return "HON"
+    if chenh <= -SO_SANH_CHENH_TOI_THIEU and p_kem < SO_SANH_ALPHA:
+        return "KEM"
+    return "NGANG"
+
+
+def kq_cung_thuoc_do(da: dict[str, list[dict]]) -> dict[str, dict]:
+    """Ket qua dung de SO SANH nhom - MOT thuoc do cho moi nhom. Don kiem lai bang engine moi (`vl-xn4-`) chi ra cho vai co che duoc GIU, nen
+    dung no de so sanh se don rieng nhom cao vao thuoc do kho hon cac nhom khac. Moi o lay ket luan cua LAN KIEM DAU (engine thap nhat co
+    ket luan QUA/RUOT; cung engine thi lan moi nhat). Nhan GIU / niem phong van dung ket qua tot nhat (`moi_nhat`), khong qua day."""
+    ra: dict[str, dict] = {}
+    for i, v in da.items():
+        kl = sorted((r for r in v if r.get("ket_luan") in ("QUA", "RUOT")), key=lambda r: str(r.get("luc") or ""), reverse=True)
+        if kl:
+            ra[i] = min(kl, key=lambda r: r.get("phien_ban_engine") or ENGINE_CU)
+    return ra
+
+
+def _nhom_tuyet_doi(ung_vien: list[dict], kq: dict[str, dict], g: str) -> dict:
+    qua = ruot = 0
+    for u in ung_vien:
+        if nhom_cua(u) != g:
+            continue
+        k = (kq.get(u["id"]) or {}).get("ket_luan")
+        qua += k == "QUA"
+        ruot += k == "RUOT"
+    n = qua + ruot
+    return {"n": n, "qua": qua, "ty_le": round(qua / n, 4) if n else None, "khoang_tin_cay": khoang_wilson(qua, n)}
+
+
+def theo_do_manh(ung_vien: list[dict], kq: dict[str, dict], so_nhom: int = 3, n_toi_thieu: int = 30) -> list[dict] | None:
+    """Ty le qua cua nhom cao theo DO MANH cua cao nguyen (ty le o co lai o kham_pha): cao nguyen manh hon co song sot nhieu hon khong?
+    None khi it hon `n_toi_thieu` ket luan (chia nhom se la nhieu)."""
+    xs = sorted([(u["ty_le"], (kq.get(u["id"]) or {}).get("ket_luan") == "QUA") for u in ung_vien
+                 if nhom_cua(u) == "cao" and (kq.get(u["id"]) or {}).get("ket_luan") in ("QUA", "RUOT")], key=lambda t: t[0])
+    if len(xs) < n_toi_thieu:
+        return None
+    ra = []
+    for j in range(so_nhom):
+        lat = xs[j * len(xs) // so_nhom:(j + 1) * len(xs) // so_nhom]
+        qua = sum(1 for _, q in lat if q)
+        ra.append({"ty_le_o_co_lai": [round(lat[0][0], 3), round(lat[-1][0], 3)], "n": len(lat), "qua": qua, "ty_le_qua": round(qua / len(lat), 4)})
+    return ra
+
+
+def so_sanh_nhom(ung_vien: list[dict], kq: dict[str, dict]) -> dict:
+    """Vung lai (cao) co hon doi chung khong? HAI cau hoi khac nhau, hai phep thu khac nhau; nguong CO DINH truoc khi co ket qua (hang SO_SANH_*).
+
+    1. cao vs NGAU (ghep cap cung luoi, McNemar chinh xac): chon o TOT NHAT trong luoi co hon chon BUA mot o cung luoi khong? Neu khong, quet
+       3.000 o khong them gi so voi thu vai o -> dem thoi gian may sang chieu rong (thi truong, co che), khong quet sau.
+    2. cao vs DOI (hai nhom doc lap, Fisher chinh xac): luot quet duoc xep CAO_NGUYEN co ben hon luot quet khac khi chi so sanh o tot nhat cua moi
+       ben (cung 'loi nguoi thang') khong? Neu khong, cach xep cao nguyen khong du bao gi.
+    Ca hai: HON = chenh >= 10 diem VA p < 0,05 (mot phia); KEM la nguoc lai; CHUA_DU khi < 20 cap / < 20 phep moi ben; con lai NGANG, kem MDE.
+    `kq` phai cung thuoc do cho moi nhom (xem `kq_cung_thuoc_do`). Ket luan duoc = QUA | RUOT; KHONG_DO_DUOC bi bo khoi ca hai phep thu."""
+    qr = ("QUA", "RUOT")
+    kl = lambda u: (kq.get(u["id"]) or {}).get("ket_luan")
+    theo_id = {u["id"]: u for u in ung_vien}
+    ca = {"cao_qua_ngau_ruot": 0, "cao_ruot_ngau_qua": 0, "ca_hai_qua": 0, "ca_hai_ruot": 0}
+    for u in ung_vien:
+        cha = theo_id.get(u.get("cha")) if u["lop"] == "NGAU_NHIEN" else None
+        if cha is None or cha["lop"] != "CAO_NGUYEN" or kl(cha) not in qr or kl(u) not in qr:
+            continue
+        a, g = kl(cha) == "QUA", kl(u) == "QUA"
+        ca["ca_hai_qua" if a and g else "cao_qua_ngau_ruot" if a else "cao_ruot_ngau_qua" if g else "ca_hai_ruot"] += 1
+    n_cap = sum(ca.values())
+    b, c = ca["cao_qua_ngau_ruot"], ca["cao_ruot_ngau_qua"]
+    t_cao = (b + ca["ca_hai_qua"]) / n_cap if n_cap else None
+    t_ngau = (c + ca["ca_hai_qua"]) / n_cap if n_cap else None
+    chenh = None if n_cap == 0 else round(t_cao - t_ngau, 4)
+    p_h, p_k = mcnemar_mot_phia(b, c)
+    cn = dict(ca, cap=n_cap, ty_le_cao=None if t_cao is None else round(t_cao, 4), ty_le_ngau=None if t_ngau is None else round(t_ngau, 4),
+              chenh=chenh, p_hon=round(p_h, 5), p_kem=round(p_k, 5), mde=mde_hai_ty_le(n_cap, n_cap, t_ngau if t_ngau is not None else 0.5),
+              ket_luan=_ket_luan_so_sanh(n_cap, chenh, p_h, p_k))
+    tc, td = _nhom_tuyet_doi(ung_vien, kq, "cao"), _nhom_tuyet_doi(ung_vien, kq, "doi")
+    ph, pk = fisher_mot_phia(tc["qua"], tc["n"] - tc["qua"], td["qua"], td["n"] - td["qua"]) if tc["n"] and td["n"] else (1.0, 1.0)
+    chenh_d = None if not (tc["n"] and td["n"]) else round(tc["ty_le"] - td["ty_le"], 4)
+    cd = {"n_cao": tc["n"], "n_doi": td["n"], "qua_cao": tc["qua"], "qua_doi": td["qua"], "ty_le_cao": tc["ty_le"], "ty_le_doi": td["ty_le"],
+          "chenh": chenh_d, "p_hon": round(ph, 5), "p_kem": round(pk, 5),
+          "mde": mde_hai_ty_le(tc["n"], td["n"], td["ty_le"] if td["ty_le"] is not None else 0.5),
+          "ket_luan": _ket_luan_so_sanh(min(tc["n"], td["n"]), chenh_d, ph, pk)}
+    return {"cao_vs_ngau": cn, "cao_vs_doi": cd,
+            "tuyet_doi": {"cao": tc, "doi": td, "ngau": _nhom_tuyet_doi(ung_vien, kq, "ngau")},
+            "theo_do_manh": theo_do_manh(ung_vien, kq),
+            "luat": {"n_toi_thieu": SO_SANH_N_TOI_THIEU, "alpha": SO_SANH_ALPHA, "chenh_toi_thieu": SO_SANH_CHENH_TOI_THIEU}}
+
+
+def _loi_so_sanh(ss: dict) -> str | None:
+    """Mot dong LOI THUONG (khong thuat ngu) cho chu du an: chon o tot nhat co hon chon bua? cach xep 'cao nguyen' co hon luoi khac? None khi
+    chua co phep thu nao."""
+    cn, cd = ss.get("cao_vs_ngau") or {}, ss.get("cao_vs_doi") or {}
+    if not cn.get("cap") and not (cd.get("n_cao") and cd.get("n_doi")):
+        return None
+    ra = []
+    if cn.get("cap"):
+        kl, a, g, n = cn["ket_luan"], _pc(cn["ty_le_cao"]), _pc(cn["ty_le_ngau"]), cn["cap"]
+        md = int(round(100 * (cn["mde"] or 0.0)))
+        ra.append({"CHUA_DU": "chon o tot nhat trong luoi so voi chon bua: chua du phep thu (%d cap, can >= %d)" % (n, SO_SANH_N_TOI_THIEU),
+                   "HON": "chon o tot nhat trong luoi HON chon bua mot o cung luoi (qua ngoai mau %s so voi %s, %d cap, p=%.3f)" % (a, g, n, cn["p_hon"]),
+                   "NGANG": "chon o tot nhat trong luoi CHUA THAY hon chon bua (%s so voi %s, %d cap; phep thu chi thay duoc chenh tu ~%d diem)" % (a, g, n, md),
+                   "KEM": "chon o tot nhat trong luoi KEM hon chon bua (%s so voi %s, %d cap, p=%.3f)" % (a, g, n, cn["p_kem"])}[kl])
+    if cd.get("n_cao") and cd.get("n_doi"):
+        kl, a, g = cd["ket_luan"], _pc(cd["ty_le_cao"]), _pc(cd["ty_le_doi"])
+        md = int(round(100 * (cd["mde"] or 0.0)))
+        ra.append({"CHUA_DU": "xep luoi 'cao nguyen' so voi luoi khac: chua du phep thu (%d vs %d, can >= %d moi ben)" % (cd["n_cao"], cd["n_doi"], SO_SANH_N_TOI_THIEU),
+                   "HON": "luoi xep 'cao nguyen' ben hon luoi khac (qua %s so voi %s, %d vs %d phep, p=%.3f)" % (a, g, cd["n_cao"], cd["n_doi"], cd["p_hon"]),
+                   "NGANG": "luoi xep 'cao nguyen' CHUA THAY ben hon luoi khac (%s so voi %s, %d vs %d phep; phep thu chi thay duoc chenh tu ~%d diem)" % (a, g, cd["n_cao"], cd["n_doi"], md),
+                   "KEM": "luoi xep 'cao nguyen' KEM ben hon luoi khac (%s so voi %s, %d vs %d phep, p=%.3f)" % (a, g, cd["n_cao"], cd["n_doi"], cd["p_kem"])}[kl])
+    return "So sanh voi doi chung: " + "; ".join(ra) + "."
+
+
 # -------------------------------------------------------------------------------------------- AP DUNG
 
 _KHUNG_THU_TU = ("M1", "M5", "M15", "M30", "H1", "H4", "D1")
@@ -858,6 +1026,7 @@ def bang_diem(goc: Path | None = None, xong: list[dict] | None = None, cho: list
                    "gio_cho_chay_duoc": round(gio_cho, 1), "thieu_ma": dict(chan_tag), "cho_kham_chay_duoc": kham_cho,
                    "kha_nang_biet": sorted(kn)},
           "chang": ch, "san_luong": san_luong, "ung_vien": ung_vien, "co_che": co_che, "giu": giu}
+    bd["so_sanh"] = so_sanh_nhom(uv_tat_ca, kq_cung_thuoc_do(da))          # TRUOC tim_diem_nghen: diem nghen doc ket qua so sanh
     bd["diem_nghen"] = tim_diem_nghen(bd)
     bd["khuyen_nghi"] = khuyen_nghi(bd)
     bd["_uv"], bd["_kq"], bd["_da"], bd["_dc"] = uv_tat_ca, kq, da, dc    # cho `chay` / ghi bao cao; bo di khi in JSON
@@ -893,12 +1062,18 @@ def tim_diem_nghen(bd: dict) -> list[str]:
     if sl["tim"]["nguon_chan"] or sl["tim"]["link_trong"]:
         ra.append("TIM: doc duoc %d dien dan (%d bai), %d nguon bi chan/tat/can Chrome, %d lan tham do link khong co link nao" % (
             sl["tim"]["nguon_ok"], sl["tim"]["bai_moi"], sl["tim"]["nguon_chan"], sl["tim"]["link_trong"]))
-    nhom = sl["nhom_xac_nhan"]
-    if nhom["cao"]["n"] >= 10 and (nhom["ngau"]["qua"] + nhom["ngau"]["ruot"]) >= DOI_CHUNG_TOI_THIEU:
-        a, b = ty_le_qua(nhom["cao"]), ty_le_qua(nhom["ngau"])
-        if a is not None and b is not None and a < b + 0.05:
-            ra.append("quet rong KHONG hon o ngau nhien: o tot nhat qua ngoai mau %s, o ngau nhien cung luot quet %s -> thoi gian nen dem vao "
-                      "chieu rong (them thi truong / co che), khong quet sau" % (_pc(a), _pc(b)))
+    ss = bd.get("so_sanh") or {}
+    cn, cd = ss.get("cao_vs_ngau") or {}, ss.get("cao_vs_doi") or {}
+    if cn.get("ket_luan") in ("NGANG", "KEM"):
+        ra.append("chon o tot nhat trong luoi %s chon bua mot o cung luoi: ngoai mau %s so voi %s (%d cap; phep thu chi thay duoc chenh tu ~%d diem) -> "
+                  "thoi gian nen dem vao chieu rong (them thi truong / co che), khong quet sau" % (
+                      "KHONG hon" if cn["ket_luan"] == "NGANG" else "KEM hon", _pc(cn["ty_le_cao"]), _pc(cn["ty_le_ngau"]), cn["cap"],
+                      int(round(100 * (cn["mde"] or 0.0)))))
+    if cd.get("ket_luan") in ("NGANG", "KEM"):
+        ra.append("xep luoi 'cao nguyen' %s luoi khac: ngoai mau %s so voi %s (%d vs %d phep; phep thu chi thay duoc chenh tu ~%d diem) -> "
+                  "phan loai cao nguyen chua du bao duoc gi, dung dung no lam bo loc duy nhat" % (
+                      "KHONG ben hon" if cd["ket_luan"] == "NGANG" else "KEM ben hon", _pc(cd["ty_le_cao"]), _pc(cd["ty_le_doi"]), cd["n_cao"],
+                      cd["n_doi"], int(round(100 * (cd["mde"] or 0.0)))))
     if not bd["giu"]:
         ra.append("GIU: 0 co che giu lai (can >= 3 thi truong qua xac_nhan, >= 50% ung vien) -> chua co gi de AP DUNG vao vong sau")
     return ra
@@ -952,6 +1127,9 @@ def tom_tat_cho_chu(bd: dict) -> list[str]:
             return "%s %s (%d phep)" % (ten, "chua du de noi" if tl is None else _pc(tl), nhom[g]["qua"] + nhom[g]["ruot"])
         d.append("Ket qua ngoai mau, ty le con lai (co lai): vung lai %s; %s; %s." % (
             _mot("cao", "vung lai"), _mot("doi", "o tot nhat cua luot quet thuong"), _mot("ngau", "o ngau nhien")))
+        sanh = _loi_so_sanh(bd.get("so_sanh") or {})
+        if sanh:
+            d.append(sanh)
     d.append("Co che giu lai de ap dung vong sau: %d. Don ap dung (chuyen thi truong / nho SEEKER / ghi so tay) da xong: %d." % (
         len(bd["giu"]), sum(sl["ap_dung_xong"].values())))
     if bd["diem_nghen"]:
@@ -966,6 +1144,42 @@ def _bang_md(hang: list[list], tieu_de: list[str]) -> list[str]:
     for h in hang:
         ra.append("| " + " | ".join(str(x).replace("|", "/") for x in h) + " |")
     return ra
+
+
+def _gt(x, kieu: str = "{:.3f}") -> str:
+    return "-" if x is None else kieu.format(x)
+
+
+def _doan_so_sanh(ss: dict) -> list[str]:
+    """Muc 'Phep so sanh voi doi chung' cua bao cao (ASCII): hai phep thu, ty le tuyet doi co khoang tin cay, theo do manh cua cao nguyen."""
+    if not ss:
+        return []
+    cn, cd, td, lu = ss["cao_vs_ngau"], ss["cao_vs_doi"], ss["tuyet_doi"], ss["luat"]
+    L = ["## Phep so sanh voi doi chung (ke hoach dong bang 10/10/2026 - nguong dat TRUOC khi co ket qua)", "",
+         "Hai cau hoi khac nhau. HON = chenh >= %d diem va p < %s (mot phia, chinh xac); KEM = nguoc lai; CHUA_DU = it hon %d cap / %d phep moi ben; con lai "
+         "NGANG (kem MDE: chenh nho nhat phep thu thay duoc voi luc 80%%). Ca hai dung ket luan cua lan kiem DAU (cung engine) cho moi o; khong hieu chinh "
+         "da phep thu vi day la NHAN canh bao, khong phai cong chan." % (int(100 * lu["chenh_toi_thieu"]), lu["alpha"], lu["n_toi_thieu"], lu["n_toi_thieu"]), ""]
+    L += _bang_md([["1. chon o TOT NHAT trong luoi co hon chon BUA mot o cung luoi? (ghep cap, McNemar)", cn["cap"], cn["ca_hai_qua"], cn["cao_qua_ngau_ruot"],
+                    cn["cao_ruot_ngau_qua"], cn["ca_hai_ruot"], _gt(cn["ty_le_cao"], "{:.1%}"), _gt(cn["ty_le_ngau"], "{:.1%}"), _gt(cn["chenh"], "{:+.3f}"),
+                    _gt(cn["p_hon"] if cn["cap"] else None), _gt(cn["mde"]), cn["ket_luan"]]],
+                  ["Phep thu", "So cap", "Ca hai qua", "Cao qua / ngau ruot", "Cao ruot / ngau qua", "Ca hai ruot", "Ty le cao", "Ty le ngau", "Chenh", "p (hon)",
+                   "MDE", "Ket luan"])
+    L += [""]
+    L += _bang_md([["2. luoi xep CAO NGUYEN co ben hon luoi khac? (hai nhom, Fisher)", cd["n_cao"], cd["qua_cao"], cd["n_doi"], cd["qua_doi"],
+                    _gt(cd["ty_le_cao"], "{:.1%}"), _gt(cd["ty_le_doi"], "{:.1%}"), _gt(cd["chenh"], "{:+.3f}"),
+                    _gt(cd["p_hon"] if cd["n_cao"] and cd["n_doi"] else None), _gt(cd["mde"]), cd["ket_luan"]]],
+                  ["Phep thu", "Cao: da kiem", "Cao: qua", "Doi: da kiem", "Doi: qua", "Ty le cao", "Ty le doi", "Chenh", "p (hon)", "MDE", "Ket luan"])
+    L += [""]
+    L += _bang_md([[ten, td[g]["n"], td[g]["qua"], _gt(td[g]["ty_le"], "{:.1%}"),
+                    "-" if not td[g]["khoang_tin_cay"] else "%.1f%% - %.1f%%" % (100 * td[g]["khoang_tin_cay"][0], 100 * td[g]["khoang_tin_cay"][1])]
+                   for g, ten in (("cao", "vung lai"), ("doi", "doi chung: o tot nhat luot quet khac"), ("ngau", "doi chung: o ngau nhien"))],
+                  ["Nhom (ty le tuyet doi)", "Da kiem", "QUA", "Ty le qua", "Khoang tin cay 95% (Wilson)"])
+    dm = ss.get("theo_do_manh")
+    if dm:
+        L += ["", "Ty le qua cua nhom cao theo DO MANH cua cao nguyen (ty le o co lai o kham_pha; manh hon co song sot nhieu hon khong?):", ""]
+        L += _bang_md([["%s - %s" % (_gt(x["ty_le_o_co_lai"][0], "{:.2f}"), _gt(x["ty_le_o_co_lai"][1], "{:.2f}")), x["n"], x["qua"], _gt(x["ty_le_qua"], "{:.1%}")]
+                       for x in dm], ["Ty le o co lai o kham_pha", "Da kiem", "QUA", "Ty le qua"])
+    return L
 
 
 def viet_bao_cao(bd: dict) -> str:
@@ -1007,8 +1221,9 @@ def viet_bao_cao(bd: dict) -> str:
                                   ("ngau", "doi chung: o ngau nhien cung luoi"))],
                   ["Nhom", "Da kiem", "QUA (co lai)", "RUOT", "Khong do duoc", "Ty le qua"])
     L += ["", "QUA = co lai tren doan xac_nhan (mo, khong tinh phep thu) bang ENGINE MO PHONG. Ben trong mau luon dep hon ngoai mau (chon o tot "
-          "nhat trong 3.000 o); so sanh voi nhom doi chung moi cho biet cao nguyen co hon ngau nhien hay khong.", "",
-          "## Co che (che_do | kieu_lot | cho_lui)", ""]
+          "nhat trong 3.000 o); so sanh voi nhom doi chung moi cho biet cao nguyen co hon ngau nhien hay khong.", ""]
+    L += _doan_so_sanh(bd.get("so_sanh") or {})
+    L += ["", "## Co che (che_do | kieu_lot | cho_lui)", ""]
     L += _bang_md([[m["co_che"], m["n"], m["qua"], m["ruot"], "-" if m["ty_le_qua"] is None else _pc(m["ty_le_qua"]),
                     "%d/%d" % (len(m["thi_truong_qua"]), m["so_thi_truong_kiem"]), m["nhan"], m["so_voi_nen"]] for m in bd["co_che"]["co_che"]],
                   ["Co che", "Da kiem", "QUA", "RUOT", "Ty le qua", "Thi truong qua/kiem", "Nhan", "So voi nen"]) if bd["co_che"]["co_che"] else ["(chua co ket qua ngoai mau)"]

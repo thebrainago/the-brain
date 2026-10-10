@@ -1,6 +1,6 @@
 # VONG LAP KHEP KIN - bang diem theo chang
 
-Sinh tu `viec/` (git) boi `python3 -m nhan.vong_lap`, 2026-10-10 01:45 UTC. Khong LLM, khong du lieu gia. Chu du an 10/10/2026: *muc tieu la VONG LAP tim -> boc -> kiem -> giu -> ap dung -> vong sau; cac module nho chi la phan cua vong*.
+Sinh tu `viec/` (git) boi `python3 -m nhan.vong_lap`, 2026-10-10 02:01 UTC. Khong LLM, khong du lieu gia. Chu du an 10/10/2026: *muc tieu la VONG LAP tim -> boc -> kiem -> giu -> ap dung -> vong sau; cac module nho chi la phan cua vong*.
 
 ## Tom tat (loi thuong)
 
@@ -54,6 +54,24 @@ DAT o cot nay chi nghia 'don chay xong, ma thoat 0' (xem `bang_chung.dong_cuoi` 
 
 QUA = co lai tren doan xac_nhan (mo, khong tinh phep thu) bang ENGINE MO PHONG. Ben trong mau luon dep hon ngoai mau (chon o tot nhat trong 3.000 o); so sanh voi nhom doi chung moi cho biet cao nguyen co hon ngau nhien hay khong.
 
+## Phep so sanh voi doi chung (ke hoach dong bang 10/10/2026 - nguong dat TRUOC khi co ket qua)
+
+Hai cau hoi khac nhau. HON = chenh >= 10 diem va p < 0.05 (mot phia, chinh xac); KEM = nguoc lai; CHUA_DU = it hon 20 cap / 20 phep moi ben; con lai NGANG (kem MDE: chenh nho nhat phep thu thay duoc voi luc 80%). Ca hai dung ket luan cua lan kiem DAU (cung engine) cho moi o; khong hieu chinh da phep thu vi day la NHAN canh bao, khong phai cong chan.
+
+| Phep thu | So cap | Ca hai qua | Cao qua / ngau ruot | Cao ruot / ngau qua | Ca hai ruot | Ty le cao | Ty le ngau | Chenh | p (hon) | MDE | Ket luan |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1. chon o TOT NHAT trong luoi co hon chon BUA mot o cung luoi? (ghep cap, McNemar) | 0 | 0 | 0 | 0 | 0 | - | - | - | - | - | CHUA_DU |
+
+| Phep thu | Cao: da kiem | Cao: qua | Doi: da kiem | Doi: qua | Ty le cao | Ty le doi | Chenh | p (hon) | MDE | Ket luan |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 2. luoi xep CAO NGUYEN co ben hon luoi khac? (hai nhom, Fisher) | 0 | 0 | 0 | 0 | - | - | - | - | - | CHUA_DU |
+
+| Nhom (ty le tuyet doi) | Da kiem | QUA | Ty le qua | Khoang tin cay 95% (Wilson) |
+|---|---|---|---|---|
+| vung lai | 0 | 0 | - | - |
+| doi chung: o tot nhat luot quet khac | 0 | 0 | - | - |
+| doi chung: o ngau nhien | 0 | 0 | - | - |
+
 ## Co che (che_do | kieu_lot | cho_lui)
 
 (chua co ket qua ngoai mau)
@@ -78,4 +96,4 @@ GIU = qua xac_nhan o >= 3 thi truong va >= 50% so ung vien co ket luan (NHAN, kh
 
 ## Don vua ra lan nay
 
-- kiem ngoai mau: 782; kiem lai engine moi: 0; ap dung: 0; loi: 0
+- kiem ngoai mau: 0; kiem lai engine moi: 0; ap dung: 0; loi: 0

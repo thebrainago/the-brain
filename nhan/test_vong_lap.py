@@ -350,6 +350,186 @@ def test_so_voi_nen_hon_hay_ngang():
     assert cm["nen_so_sanh"] == "ngau" and cm["co_che"][0]["so_voi_nen"] == "HON_NEN"
 
 
+# ----------------------------------------------------------------------- so sanh thong ke voi doi chung
+
+def test_mcnemar_va_fisher_chinh_xac():
+    p_h, p_k = V.mcnemar_mot_phia(10, 2)
+    assert p_h == pytest.approx(79 / 4096) and p_k == pytest.approx(4083 / 4096)        # P(Bin(12,1/2) >= 10) = (66+12+1)/4096
+    assert V.mcnemar_mot_phia(0, 0) == (1.0, 1.0)                                       # khong cap nao khac nhau -> khong bang chung nao
+    assert V.mcnemar_mot_phia(5, 0)[0] == pytest.approx(1 / 32)
+    ph, pk = V.fisher_mot_phia(8, 2, 3, 7)
+    assert ph == pytest.approx(6446 / 184756) and pk > 0.9
+    assert V.fisher_mot_phia(0, 0, 5, 5) == (1.0, 1.0) and V.fisher_mot_phia(5, 5, 0, 0) == (1.0, 1.0)     # nhom rong
+    sp = pytest.importorskip("scipy.stats")                                             # doi chieu voi thu vien chuan neu may co
+    assert ph == pytest.approx(sp.fisher_exact([[8, 2], [3, 7]], alternative="greater")[1])
+    assert p_h == pytest.approx(sp.binomtest(10, 12, 0.5, alternative="greater").pvalue)
+
+
+def test_wilson_va_mde():
+    assert V.khoang_wilson(0, 0) is None
+    lo, hi = V.khoang_wilson(0, 10)
+    assert lo == 0.0 and hi == pytest.approx(0.2775, abs=1e-3)                          # 0/10 van con khoang tin cay rong, khong phai 'chac chan 0%'
+    lo, hi = V.khoang_wilson(5, 10)
+    assert (lo, hi) == (pytest.approx(0.2366, abs=1e-3), pytest.approx(0.7634, abs=1e-3))
+    assert V.khoang_wilson(10, 10)[1] == 1.0
+    assert V.mde_hai_ty_le(0, 10, 0.5) is None and V.mde_hai_ty_le(10, 0, 0.5) is None
+    assert 0.17 < V.mde_hai_ty_le(100, 100, 0.5) < 0.18
+    assert V.mde_hai_ty_le(400, 400, 0.5) < V.mde_hai_ty_le(100, 100, 0.5) / 1.9        # gap 4 lan mau -> MDE giam ~mot nua
+    assert V.mde_hai_ty_le(50, 50, 0.0) == V.mde_hai_ty_le(50, 50, 0.05) > 0            # ty le 0% khong lam MDE = 0 (khong co 'chac chan')
+
+
+def test_ket_luan_so_sanh_nguong_co_dinh():
+    kl = V._ket_luan_so_sanh
+    assert kl(30, 0.20, 0.01, 0.99) == "HON" and kl(30, -0.20, 0.99, 0.01) == "KEM"
+    assert kl(30, 0.20, 0.20, 0.90) == "NGANG"                                          # chenh lon nhung p khong du -> chua noi 'hon'
+    assert kl(300, 0.04, 0.001, 0.90) == "NGANG"                                        # p rat nho nhung chenh be: mau lon khong bien 4 diem thanh 'hon'
+    assert kl(10, 0.50, 0.0001, 1.0) == "CHUA_DU" and kl(30, None, 1.0, 1.0) == "CHUA_DU"
+
+
+def _cap_gia(ket_cao, ket_ngau, ma="AUDCAD"):
+    """Mot cap cao/ngau cho moi phan tu cua hai danh sach ket luan (QUA | RUOT | KHONG_DO_DUOC)."""
+    ung_vien, kq = [], {}
+    for i, (a, g) in enumerate(zip(ket_cao, ket_ngau)):
+        cao = _ung_vien_gia(i, ma)
+        ngau = dict(_ung_vien_gia(500 + i, ma), lop="NGAU_NHIEN", cha=cao["id"])
+        ung_vien += [cao, ngau]
+        kq[cao["id"]], kq[ngau["id"]] = _kq_gia(a), _kq_gia(g)
+    return ung_vien, kq
+
+
+def test_so_sanh_cao_vs_ngau_hon_ngang_chua_du():
+    # 20 cap cao QUA / ngau RUOT + 10 cap ca hai QUA: chon o tot nhat ro rang hon chon bua
+    ung_vien, kq = _cap_gia(["QUA"] * 30, ["RUOT"] * 20 + ["QUA"] * 10)
+    cn = V.so_sanh_nhom(ung_vien, kq)["cao_vs_ngau"]
+    assert (cn["cap"], cn["cao_qua_ngau_ruot"], cn["cao_ruot_ngau_qua"], cn["ca_hai_qua"]) == (30, 20, 0, 10)
+    assert cn["ty_le_cao"] == 1.0 and cn["ty_le_ngau"] == pytest.approx(0.3333, abs=1e-3) and cn["chenh"] == pytest.approx(0.6667, abs=1e-3)
+    assert cn["p_hon"] < 0.001 and cn["ket_luan"] == "HON"
+    # cung ty le qua o hai nhom, lech nhau o vai cap: CHUA THAY khac, va PHAI kem MDE
+    ung_vien, kq = _cap_gia(["QUA"] * 16 + ["QUA", "QUA"] + ["RUOT"] * 2 + ["RUOT"] * 10, ["QUA"] * 16 + ["RUOT", "RUOT"] + ["QUA", "QUA"] + ["RUOT"] * 10)
+    cn = V.so_sanh_nhom(ung_vien, kq)["cao_vs_ngau"]
+    assert cn["cap"] == 30 and cn["chenh"] == 0.0 and cn["ket_luan"] == "NGANG" and cn["mde"] and cn["mde"] > 0.1
+    # nguoc lai: ngau tot hon cao ro rang -> KEM
+    ung_vien, kq = _cap_gia(["RUOT"] * 22 + ["QUA"] * 8, ["QUA"] * 22 + ["QUA"] * 8)
+    assert V.so_sanh_nhom(ung_vien, kq)["cao_vs_ngau"]["ket_luan"] == "KEM"
+    # it cap: dung noi gi, du chenh khung khiep
+    ung_vien, kq = _cap_gia(["QUA"] * 8, ["RUOT"] * 8)
+    cn = V.so_sanh_nhom(ung_vien, kq)["cao_vs_ngau"]
+    assert cn["chenh"] == 1.0 and cn["ket_luan"] == "CHUA_DU"
+    # khong co cap nao: khong bao loi, khong dam noi
+    cn = V.so_sanh_nhom([], {})["cao_vs_ngau"]
+    assert cn["cap"] == 0 and cn["ty_le_cao"] is None and cn["chenh"] is None and cn["ket_luan"] == "CHUA_DU"
+
+
+def test_so_sanh_bo_cap_khong_do_duoc_va_cap_mo_coi():
+    # 25 cap that: cao QUA / ngau RUOT. Them 10 cap ma mot ben KHONG_DO_DUOC (don chet), va mot o ngau co 'cha' khong ton tai.
+    ung_vien, kq = _cap_gia(["QUA"] * 25 + ["QUA"] * 5 + ["KHONG_DO_DUOC"] * 5, ["RUOT"] * 25 + ["KHONG_DO_DUOC"] * 5 + ["RUOT"] * 5)
+    mo_coi = dict(_ung_vien_gia(900, "AUDCAD"), lop="NGAU_NHIEN", cha="khong-co")
+    ung_vien.append(mo_coi)
+    kq[mo_coi["id"]] = _kq_gia("QUA")
+    cn = V.so_sanh_nhom(ung_vien, kq)["cao_vs_ngau"]
+    assert cn["cap"] == 25 and cn["ca_hai_qua"] == 0 and cn["cao_ruot_ngau_qua"] == 0            # khong do duoc KHONG bi dem la RUOT
+    # cha khong phai CAO_NGUYEN (o doi chung) thi khong ghep
+    doi = dict(_ung_vien_gia(1000, "AUDCAD"), lop="HON_HOP")
+    con = dict(_ung_vien_gia(1001, "AUDCAD"), lop="NGAU_NHIEN", cha=doi["id"])
+    assert V.so_sanh_nhom([doi, con], {doi["id"]: _kq_gia("QUA"), con["id"]: _kq_gia("QUA")})["cao_vs_ngau"]["cap"] == 0
+
+
+def test_so_sanh_cao_vs_doi_hai_nhom_doc_lap():
+    def nhom(lop, qua, tong, goc_id):
+        ung_vien, kq = [], {}
+        for i in range(tong):
+            u = _ung_vien_gia(goc_id + i, "AUDCAD", lop=lop)
+            ung_vien.append(u)
+            kq[u["id"]] = _kq_gia("QUA" if i < qua else "RUOT")
+        return ung_vien, kq
+    uc, kc = nhom("CAO_NGUYEN", 20, 25, 0)
+    ud, kd = nhom("HON_HOP", 10, 25, 100)
+    cd = V.so_sanh_nhom(uc + ud, {**kc, **kd})["cao_vs_doi"]
+    assert (cd["n_cao"], cd["qua_cao"], cd["n_doi"], cd["qua_doi"]) == (25, 20, 25, 10)
+    assert cd["chenh"] == pytest.approx(0.4) and cd["p_hon"] < 0.01 and cd["ket_luan"] == "HON"
+    uc, kc = nhom("CAO_NGUYEN", 12, 25, 0)
+    ud, kd = nhom("CAI_GAI", 12, 25, 100)
+    cd = V.so_sanh_nhom(uc + ud, {**kc, **kd})["cao_vs_doi"]
+    assert cd["chenh"] == 0.0 and cd["ket_luan"] == "NGANG" and cd["mde"] > 0.2          # 25 vs 25: chi thay duoc chenh >= ~28 diem -> noi ro
+    ud, kd = nhom("CAI_GAI", 2, 4, 100)                                                  # doi chung chi 4 phep -> chua du
+    assert V.so_sanh_nhom(uc + ud, {**kc, **kd})["cao_vs_doi"]["ket_luan"] == "CHUA_DU"
+
+
+def test_kq_cung_thuoc_do_lay_lan_kiem_dau_khong_phai_ban_engine_moi():
+    def r(kl, engine, luc):
+        return dict(_kq_gia(kl, engine=engine), luc=luc)
+    da = {"a": [r("QUA", 3, "t1"), r("RUOT", 4, "t2")],                  # kiem lai bang engine 4 RUOT: GIU thay RUOT nhung so sanh nhom van la QUA (thuoc do dau)
+          "b": [r("KHONG_DO_DUOC", 3, "t1"), r("QUA", 4, "t2")],         # don dau chet: dung ket luan duy nhat co
+          "c": [r("KHONG_DO_DUOC", 3, "t1")],                            # khong co ket luan nao -> khong vao so sanh
+          "d": [r("RUOT", 3, "t1"), r("QUA", 3, "t2")]}                  # cung engine: lan moi nhat
+    ra = V.kq_cung_thuoc_do(da)
+    assert (ra["a"]["ket_luan"], ra["a"]["phien_ban_engine"]) == ("QUA", 3)
+    assert (ra["b"]["ket_luan"], ra["b"]["phien_ban_engine"]) == ("QUA", 4) and "c" not in ra and ra["d"]["ket_luan"] == "QUA"
+    assert V.moi_nhat(da["a"])["ket_luan"] == "RUOT"                     # nhan GIU van dung ket qua tot nhat (engine moi)
+
+
+def test_theo_do_manh_chia_ba_nhom_va_im_khi_it_mau():
+    ung_vien, kq = [], {}
+    for i in range(45):
+        u = dict(_ung_vien_gia(i, "AUDCAD"), ty_le=i / 45.0)
+        ung_vien.append(u)
+        kq[u["id"]] = _kq_gia("QUA" if i >= 30 else "RUOT")             # chi nhom cao nguyen MANH nhat song sot
+    t = V.theo_do_manh(ung_vien, kq)
+    assert [x["n"] for x in t] == [15, 15, 15] and [x["qua"] for x in t] == [0, 0, 15]
+    assert t[0]["ty_le_o_co_lai"][1] < t[1]["ty_le_o_co_lai"][0] < t[2]["ty_le_o_co_lai"][0]
+    assert V.theo_do_manh(ung_vien[:20], kq) is None                     # < 30 ket luan: chia ba nhom chi la nhieu
+
+
+def _tra_het(goc, cao_qua=True, ngau_qua=False):
+    """Tra ket qua cho moi don vl-xn-: cao nguyen QUA/RUOT, o ngau nhien QUA/RUOT, doi chung (USDJPY) RUOT."""
+    for p in sorted((goc / "viec" / "cho").glob("vl-xn-*.json")):
+        d = json.loads(p.read_text(encoding="utf-8"))
+        arg = json.loads(d["lenh"][-1])
+        la_ngau = "NGAU NHIEN" in d["muc_tieu"]
+        qua = False if arg["ma"] == "USDJPY" else (ngau_qua if la_ngau else cao_qua)
+        _tra(goc, p.stem, loi_suat=7.0 if qua else -2.0, calmar=0.25 if qua else -0.05, engine=3, kieu="cu")
+
+
+def test_bang_diem_noi_so_sanh_vao_diem_nghen_tom_tat_va_bao_cao():
+    goc = _goc()
+    _nhip(goc)
+    thi_truong = ["AUDCAD", "AUDCHF", "EURCAD", "GBPAUD", "NZDCAD", "AUDNZD", "EURGBP", "EURCHF", "GBPCAD", "CADCHF", "NZDUSD", "USDCAD", "AUDUSD", "EURNZD",
+                  "GBPCHF", "GBPNZD", "NZDCHF", "CADJPY", "AUDJPY", "EURAUD", "GBPUSD", "EURUSD"]
+    _nhieu_ung_vien(goc, thi_truong=thi_truong, moi=6)
+    _doan(goc, [(m, "M15") for m in thi_truong + ["USDJPY"]])
+    V.chay(goc, giao=400, toi_da_engine4=0)
+    # (1) o cao nguyen QUA, o ngau nhien RUOT: chon o tot nhat HON chon bua
+    _tra_het(goc, cao_qua=True, ngau_qua=False)
+    bd = V.bang_diem(goc)
+    cn = bd["so_sanh"]["cao_vs_ngau"]
+    assert cn["cap"] >= 20 and cn["ket_luan"] == "HON" and cn["ty_le_cao"] == 1.0 and cn["ty_le_ngau"] == 0.0
+    assert bd["so_sanh"]["cao_vs_doi"]["ket_luan"] == "CHUA_DU"                       # chi 4 o doi chung
+    assert not any("KHONG hon" in s for s in bd["diem_nghen"])
+    tt = V.tom_tat_cho_chu(bd)
+    assert len(tt) <= 8 and any("HON chon bua" in s for s in tt) and all(s.isascii() for s in tt)
+    json.dumps({k: v for k, v in bd.items() if not k.startswith("_")}, ensure_ascii=True)       # so_sanh phai in duoc ra JSON
+    md = V.viet_bao_cao(bd)
+    md.encode("ascii")
+    assert "## Phep so sanh voi doi chung" in md and "McNemar" in md and "Fisher" in md and "Wilson" in md
+    # (2) o ngau nhien cung qua: HET dau hieu hon -> diem nghen noi thang, kem MDE, va dua thoi gian sang chieu rong
+    _tra_het(goc, cao_qua=True, ngau_qua=True)
+    bd = V.bang_diem(goc)
+    cn = bd["so_sanh"]["cao_vs_ngau"]
+    assert cn["ket_luan"] == "NGANG" and cn["mde"] > 0.0
+    dong = [s for s in bd["diem_nghen"] if "KHONG hon" in s]
+    assert len(dong) == 1 and "~" in dong[0] and "chieu rong" in dong[0]
+    assert any("CHUA THAY hon chon bua" in s for s in V.tom_tat_cho_chu(bd))
+
+
+def test_so_sanh_khong_co_ket_qua_van_ra_bang_diem_hop_le():
+    goc = _goc()
+    _quet_nhieu_thi_truong(goc)
+    bd = V.bang_diem(goc)
+    assert bd["so_sanh"]["cao_vs_ngau"]["ket_luan"] == "CHUA_DU" and bd["so_sanh"]["cao_vs_doi"]["ket_luan"] == "CHUA_DU"
+    assert bd["so_sanh"]["theo_do_manh"] is None and V._loi_so_sanh(bd["so_sanh"]) is None
+    V.viet_bao_cao(bd).encode("ascii")
+
+
 # ------------------------------------------------------------------------------------------- ap dung
 
 def test_ke_hoach_ap_dung_chi_vao_cho_trong_va_luoi_hep():
