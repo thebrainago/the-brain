@@ -1,6 +1,6 @@
 # GÓI BÀN GIAO the-brain → brain2
 
-> Xuất ngày **10/10/2026** từ kho `thebrainago/the-brain`, nhánh `claude/autonomous-trading-system-rzzt7h`, commit `8a1151c`.
+> Xuất ngày **10/10/2026** từ kho `thebrainago/the-brain`, nhánh `claude/autonomous-trading-system-rzzt7h`. Số liệu lấy từ trạng thái kho ở commit `8a1151c`; chính gói này nằm ở các commit ngay sau đó (nên tìm gói ở link ghim do chủ dự án đưa kèm, đừng tìm ở `8a1151c`).
 > **Một chiều**: the-brain → brain2. Phiên Claude đám mây của the-brain soạn theo yêu cầu của chủ dự án; phiên đó không có quyền ghi vào brain2 (chủ dự án đã từ chối việc xin quyền): brain2 tự đọc, tự chọn, tự làm.
 
 ---
