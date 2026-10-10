@@ -10,7 +10,8 @@ Cac test duoi day co CHU DICH bat nhung loi lam cho con so 'nhieu cho ra X% qua'
   - gop o thang vao mot ty le (cac mau cung chuoi tuong quan) thay vi gop theo chuoi;
   - khoang tin cay cua mot CHENH (co the am) bi cat o 0;
   - 'KHONG_DO_DUOC' bi dem thanh QUA / RUOT, engine 3 bi so voi engine 4;
-  - quy tac doc R1 lech nguong, hoac doc nham khoa giua nguoi san xuat (tong_ket) va nguoi tieu thu (so_voi_nhieu);
+  - quy tac doc R2 (don vi doc lap la THI TRUONG, khong phai o) lech nguong, doc nham khoa giua nguoi san xuat (tong_ket) va nguoi tieu thu
+    (so_voi_nhieu_cum / doc_that_voi_nhieu), tron engine 3 voi engine 4, hoac coi o khong do duoc la 0;
   - chay tiep (resume) lam lai chuoi da xong, hoac bo qua chuoi loi;
   - mau (che_do x kieu_lot, luoi) lech khoi cac luot quet THAT cua may nha (hieu chuan do tren mot thu khac san xuat).
 """
@@ -25,6 +26,7 @@ import pandas as pd
 import pytest
 
 from nhan import doi_chung_nhieu as D
+from nhan import cham_diem as CD
 from nhan import luoi as LU
 from nhan import nc_du_lieu as NDL
 from nhan import nc_so_tay as ST
@@ -533,7 +535,7 @@ def test_tong_ket_con_so_gop_tren_vi_du_tay():
     assert k["so_chuoi"] == 3 and k["engine"] == 4 and k["loai"] == "khong_co"
     assert g["qua_o_tot_nhat"]["tb"] == 0.5 and g["qua_o_tot_nhat"]["n_chuoi"] == 2                 # chuoi 3 toan KHONG_DO_DUOC: khong dong gop
     assert g["qua_cao_nguyen"]["tb"] == 0.5
-    assert g["qua_hon_moc_o_tot_nhat"]["tb"] == pytest.approx((1 / 3 + 0.0) / 2, abs=1e-4)          # QUA nhung hon_moc <= 0 / None khong tinh
+    assert g["qua_hon_moc_o_tot_nhat"]["tb"] == pytest.approx((0.5 + 0.0) / 2, abs=1e-4)          # hon_moc <= 0 la 0 ; hon_moc None = chua do duoc -> bo khoi mau so
     assert g["qua_o_ngau"]["tb"] == pytest.approx((2 / 3 + 0.0) / 2, abs=1e-4) and g["qua_o_ngau"]["n_chuoi"] == 2
     assert g["ty_le_cao_nguyen"]["tb"] == pytest.approx(2 / 3, abs=1e-4) and g["ty_le_cao_nguyen"]["n_chuoi"] == 3      # CHUA_DO_DUOC bi bo
     assert k["troi_oos_pct_tb"] == pytest.approx((5.0 - 3.0 + 0.0) / 3, abs=0.01)
@@ -589,62 +591,372 @@ def test_tom_tat_loi_thuong_la_ascii_va_chi_ve_nhieu_va_hoi_quy():
     assert all(s.isascii() for s in ts) and "50%" in ts[0]
 
 
-# ------------------------------------------------------------------------------------------ quy tac doc R1 (nguoi tieu thu)
+# ------------------------------------------------------------------------------------------ mot o -> mot con so (R2: nguoi san xuat)
 
-def _tham_chieu(qua_tren_40, engine=4, hon_moc_qua=None):
-    """40 chuoi NHIEU, moi chuoi mot mau 'mua_phang' CAO_NGUYEN, `qua_tren_40` chuoi QUA -> tham chieu that do `tong_ket` sinh."""
-    hm = qua_tren_40 if hon_moc_qua is None else hon_moc_qua
-    dong = [_dong({"mua_phang": _muc(tot="QUA" if i < qua_tren_40 else "RUOT", hon_moc=1.0 if i < hm else -1.0)},
-                  hat=i + 1, khop_bar="duong_di" if engine == 4 else "cuc_tri") for i in range(40)]
-    return D.tong_ket(dong)
+MAU3 = ("mua_phang", "mua_cong", "ban_phang")
 
 
-def test_r1_dung_khoa_cua_nguoi_san_xuat_gop_va_theo_mau():
-    tc = _tham_chieu(20)
-    for mau in (None, "mua_phang"):
-        r = D.so_voi_nhieu(45, 50, tc, 4, mau=mau)
-        assert r["ket_luan"] == "VUOT_NHIEU" and r["engine"] == 4 and r["nhieu"] == 0.5 and r["n_chuoi_nhieu"] == 40, mau
-        assert r["thuc"] == 0.9 and r["khoang_thuc"] == VL.khoang_wilson(45, 50) and r["khoang_nhieu"][0] < 0.5 < r["khoang_nhieu"][1]
-        assert D.so_voi_nhieu(25, 50, tc, 4, mau=mau)["ket_luan"] == "NGANG_NHIEU"
-        assert D.so_voi_nhieu(5, 50, tc, 4, mau=mau)["ket_luan"] == "DUOI_NHIEU"
-    assert D.so_voi_nhieu(45, 50, tc, 4, mau="ban_phang")["ket_luan"] == "CHUA_DU"                  # mau chua co trong tham chieu
+def _x(kl="QUA", ln=3.0, dd=-10.0, hon_moc=None, chay=False):
+    """Mot muc ket qua ngoai mau (`xn_*`) cua mot o."""
+    return {"kl": kl, "ln": ln, "dd": dd, "o_tran": 5.0, "hon_moc": hon_moc, "so_lenh": 40, "chay": chay}
 
 
-def test_r1_phai_tach_hai_dieu_kien_khoang_tin_cay_va_chenh_toi_thieu():
-    tc = _tham_chieu(20)
-    # 36/50 = 72%: chenh 22 diem >= 10 nhung can duoi Wilson (~0,58) con nam trong khoang cua nhieu (~0,34-0,66) -> KHONG duoc 'vuot'
-    r = D.so_voi_nhieu(36, 50, tc, 4)
-    assert r["ket_luan"] == "NGANG_NHIEU" and r["thuc"] - r["nhieu"] >= D.NHIEU_CHENH_TOI_THIEU and r["khoang_thuc"][0] < r["khoang_nhieu"][1]
-    # khoang tin cay roi nhau nhung chenh chi 8 diem (< 10): van NGANG
-    hep = {"kich_ban": {"NHIEU@e4": {"gop": {"qua_cao_nguyen": {"tb": 0.5, "ci95": [0.49, 0.51], "n_chuoi": 5000}}}}}
-    r = D.so_voi_nhieu(580, 1000, hep, 4)
-    assert r["khoang_thuc"][0] > 0.51 and r["ket_luan"] == "NGANG_NHIEU"
-    assert D.so_voi_nhieu(610, 1000, hep, 4)["ket_luan"] == "VUOT_NHIEU"                           # chenh 11 diem: qua ngay
-    assert D.so_voi_nhieu(390, 1000, hep, 4)["ket_luan"] == "DUOI_NHIEU"
+def _muc_cm(ln, dd=-10.0, **kw):
+    """`_muc` nhung loi suat / maxDD cua o tot nhat dat tay (de kiem thuoc do calmar)."""
+    m = _muc(**kw)
+    m["xn_tot"]["ln"], m["xn_tot"]["dd"] = ln, dd
+    return m
 
 
-def test_r1_chua_du_khi_it_ket_qua_that_khi_thieu_tham_chieu_hoac_sai_engine():
-    tc = _tham_chieu(20)
-    assert D.so_voi_nhieu(19, 19, tc, 4)["ket_luan"] == "CHUA_DU" and D.so_voi_nhieu(20, 20, tc, 4)["ket_luan"] != "CHUA_DU"
-    assert D.so_voi_nhieu(45, 50, None, 4)["ket_luan"] == "CHUA_DU"
-    assert D.so_voi_nhieu(45, 50, {}, 4)["ket_luan"] == "CHUA_DU"
-    r = D.so_voi_nhieu(45, 50, tc, 3)                                    # tham chieu chi co engine 4: KHONG so engine 3 voi engine 4
+def _dong_nhieu(n_qua, n=40, engine=4, mau_ten=MAU3, kb="NHIEU"):
+    """`n` chuoi, moi chuoi gom cac mau `mau_ten` deu CAO_NGUYEN: `n_qua` chuoi QUA het, con lai RUOT het -> nhieu theo chuoi = n_qua / n."""
+    kbar = "duong_di" if engine == 4 else "cuc_tri"
+    return [_dong({t: _muc(tot="QUA" if i < n_qua else "RUOT", hon_moc=1.0 if i < n_qua else -1.0) for t in mau_ten},
+                  kb=kb, hat=i + 1, khop_bar=kbar) for i in range(n)]
+
+
+def test_qua_o_ba_thuoc_do_nhi_phan_va_none_khi_khong_do_duoc():
+    assert D.qua_o(None) is None and D.qua_o({}) is None and D.qua_o(_x("KHONG_DO_DUOC")) is None
+    for td in D.THUOC_DO_NHI_PHAN:
+        assert D.qua_o(_x("RUOT", hon_moc=None, dd=None), td) == 0.0              # RUOT luon la 0, ke ca khi thieu hon_moc / maxDD
+    assert D.qua_o(_x("QUA")) == 1.0
+    assert [D.qua_o(_x("QUA", hon_moc=h), "qua_hon_moc") for h in (2.0, 0.0, -1.0, None)] == [1.0, 0.0, 0.0, None]   # nghiem ngat > 0 ; thieu so = None
+    assert CD.TRAN_SUT_GIAM == 80.0                                                 # tieu chi duyet cua chu du an: maxDD < 80% (doi tran thi hieu chuan lai)
+    assert [D.qua_o(_x("QUA", dd=d), "duyet") for d in (-79.9, -80.0, -95.0, None)] == [1.0, 0.0, 0.0, None]
+    with pytest.raises(ValueError):
+        D.qua_o(_x("QUA"), "calmar")                                                  # calmar khong phai thuoc do nhi phan
+    with pytest.raises(ValueError):
+        D.qua_o(_x("QUA"), "bua")
+
+
+def test_calmar_cua_cong_thuc_chay_tai_khoan_va_khong_co_drawdown():
+    assert D.calmar_cua(_x(ln=6.0, dd=-12.0)) == pytest.approx(0.5)
+    assert D.calmar_cua(_x("RUOT", ln=-5.0, dd=-10.0)) == pytest.approx(-0.5)
+    assert D.calmar_cua(_x("RUOT", ln=50.0, dd=-90.0, chay=True)) == D.CHAY == float("-inf")      # chay tai khoan: thap nhat du loi suat hien thi duong
+    assert D.calmar_cua(_x(ln=4.0, dd=0.0)) == D.CALMAR_TRAN                                         # khong co drawdown: co lai -> tran huu han
+    assert D.calmar_cua(_x(ln=0.0, dd=0.0)) == 0.0 and D.calmar_cua(_x("RUOT", ln=-2.0, dd=0.0)) == 0.0
+    assert D.calmar_cua(_x(ln=1e9, dd=-1e-6)) == D.CALMAR_TRAN and D.calmar_cua(_x("RUOT", ln=-1e9, dd=-1e-6)) == -D.CALMAR_TRAN
+    for x in (None, _x("KHONG_DO_DUOC"), _x(ln=None), _x(dd=None), _x(ln=float("nan")), _x(dd=float("inf"))):
+        assert D.calmar_cua(x) is None, x
+
+
+def test_ecdf_phan_vi_trung_diem_khi_bang_nhau_va_chay_tai_khoan_la_day():
+    assert D.tao_ecdf([]) is None and D.tao_ecdf([None, None]) is None
+    e = D.tao_ecdf([4.0, 1.0, 3.0, 2.0])
+    assert e == {"n": 4, "n_chay": 0, "gia_tri": [1.0, 2.0, 3.0, 4.0]}
+    assert D.phan_vi_trong(e, 2.5) == 0.5 and D.phan_vi_trong(e, 0.0) == 0.0 and D.phan_vi_trong(e, 99.0) == 1.0
+    assert D.phan_vi_trong(e, 2.0) == pytest.approx((1 + 0.5) / 4)                                    # bang nhau: trung diem, khong phai can duoi / can tren
+    assert D.phan_vi_trong(D.tao_ecdf([5.0] * 4), 5.0) == 0.5                                          # toan bo bang nhau: 0,5
+    c = D.tao_ecdf([D.CHAY, D.CHAY, 1.0, 2.0])
+    assert c["n"] == 4 and c["n_chay"] == 2 and c["gia_tri"] == [1.0, 2.0]
+    assert D.phan_vi_trong(c, D.CHAY) == 0.0 and D.phan_vi_trong(c, 0.5) == 0.5 and D.phan_vi_trong(c, 1.5) == 0.75       # o chay tai khoan nam DUOI moi so khac
+    assert D.phan_vi_trong(None, 1.0) is None and D.phan_vi_trong(e, None) is None
+    json.dumps(c)                                                                                       # -inf khong lot vao json: gia_tri khong chua o chay tai khoan
+
+
+def test_o_cua_nhom_cao_doi_ngau_theo_hinh_dang():
+    cao = _muc("CAO_NGUYEN", "QUA", ngau="RUOT")
+    assert D.o_cua_nhom(cao, "cao") is cao["xn_tot"] and D.o_cua_nhom(cao, "ngau") is cao["xn_ngau"] and D.o_cua_nhom(cao, "doi") is None
+    for h in ("CAI_GAI", "HON_HOP", "KHONG_CO_LAI"):
+        m = _muc(h, "RUOT", ngau="QUA")             # o ngau chi ghep cap voi luot quet CAO_NGUYEN: o ngau cua luot quet khac khong thuoc nhom nao
+        assert D.o_cua_nhom(m, "doi") is m["xn_tot"] and D.o_cua_nhom(m, "cao") is None and D.o_cua_nhom(m, "ngau") is None, h
+    assert all(D.o_cua_nhom(_muc("CHUA_DO_DUOC"), n) is None for n in D.NHOM)
+    assert D.o_cua_nhom(_muc("CAO_NGUYEN", None), "cao") is None                                          # luot quet khong co o tot nhat
+    with pytest.raises(ValueError):
+        D.o_cua_nhom(cao, "khac")
+
+
+def test_tb_o_can_it_nhat_3_o_do_duoc_va_khong_dem_thieu_so_la_0():
+    cac = [dict(_x("QUA", hon_moc=1.0), mau="a"), dict(_x("RUOT"), mau="b")]
+    assert D.tb_o(cac, "qua") == (None, 2)                                                               # 2 o: chua du 3
+    cac += [dict(_x("QUA", hon_moc=None), mau="c"), dict(_x("KHONG_DO_DUOC"), mau="d")]
+    tb, n = D.tb_o(cac, "qua")
+    assert n == 3 and tb == pytest.approx(2 / 3)                                                          # KHONG_DO_DUOC bi bo
+    assert D.tb_o(cac, "qua_hon_moc") == (None, 2)                                                       # o 'c' thieu hon_moc: bo khoi thuoc do nay, khong phai 0
+    assert D.tb_o(cac, "qua_hon_moc", toi_thieu=2) == (0.5, 2)
+    ecdf = {"a": D.tao_ecdf([0.0, 1.0, 2.0, 3.0]), "b": D.tao_ecdf([0.0, 1.0, 2.0, 3.0])}
+    cm = [dict(_x(ln=25.0, dd=-10.0), mau="a"), dict(_x(ln=5.0, dd=-10.0), mau="b"), dict(_x(ln=25.0, dd=-10.0), mau="a")]
+    tb, n = D.tb_o(cm, "calmar", ecdf)
+    assert n == 3 and tb == pytest.approx((0.75 + 0.25 + 0.75) / 3)
+    cm.append(dict(_x(ln=9.0, dd=-10.0), mau="khong_co_ecdf"))
+    assert D.tb_o(cm, "calmar", ecdf)[1] == 3                                                            # mau khong co phan phoi nhieu: bo, khong dem 0 / 0,5
+    assert D.tb_o(cm, "calmar", None) == (None, 0)
+
+
+def test_nhieu_theo_chuoi_mot_con_so_moi_chuoi_va_bo_chuoi_it_hon_3_o():
+    r1 = _dong({"mua_phang": _muc(), "mua_cong": _muc(), "ban_phang": _muc(tot="RUOT"), "ban_cong": _muc(hinh="CAI_GAI")}, hat=1)
+    r2 = _dong({"mua_phang": _muc(), "mua_cong": _muc(tot="RUOT")}, hat=2)                              # chi 2 o cao nguyen: khong du 3
+    r3 = _dong({"mua_phang": _muc(ngau="QUA"), "mua_cong": _muc(ngau="RUOT"), "ban_phang": _muc(ngau="QUA")}, hat=3)
+    mau = list(D.MAU_TEN)
+    assert D.nhieu_theo_chuoi([r1, r2, r3], mau, "cao", "qua") == pytest.approx([2 / 3, 1.0])
+    assert D.nhieu_theo_chuoi([r1, r2, r3], mau, "ngau", "qua") == pytest.approx([2 / 3])
+    assert D.nhieu_theo_chuoi([r1, r2, r3], mau, "doi", "qua") == []                                     # r1 chi co 1 o 'doi'
+    assert D.nhieu_theo_chuoi([r1, r2, r3], mau, "cao", "qua_hon_moc") == []                              # hon_moc thieu o moi o: khong chuoi nao du 3 o do duoc
+
+
+def test_tong_ket_nhieu_theo_nhom_thuoc_do_ecdf_theo_mau_chi_o_kich_ban_nhieu():
+    dong = _dong_nhieu(2, n=4) + [_dong({t: _muc_cm(30.0) for t in MAU3}, kb="DAO_DONG", hat=h) for h in (1, 2)]
+    tk = D.tong_ket(dong)
+    n4, d4 = tk["kich_ban"]["NHIEU@e4"], tk["kich_ban"]["DAO_DONG@e4"]
+    assert set(n4["nhieu"]) == set(D.NHOM) and all(set(v) == set(D.THUOC_DO) for v in n4["nhieu"].values())
+    assert n4["nhieu"]["cao"]["qua"]["xs"] == [1.0, 1.0, 0.0, 0.0] and n4["nhieu"]["cao"]["qua"]["tb"] == 0.5
+    assert n4["nhieu"]["doi"]["qua"]["n"] == 0 and n4["nhieu"]["ngau"]["qua"]["n"] == 0                  # khong co o thuoc nhom nay
+    assert n4["nhieu"]["cao"]["calmar"]["xs"] == [0.5] * 4                                               # nhieu xep hang voi chinh no: bang het -> trung diem
+    assert set(n4["ecdf"]["cao"]) == set(MAU3) and n4["ecdf"]["cao"]["mua_phang"]["n"] == 4
+    assert n4["theo_mau"]["cao"]["qua"]["mua_phang"] == {"tb": 0.5, "n": 4}
+    assert "ecdf" not in d4 and "theo_mau" not in d4
+    assert d4["nhieu"]["cao"]["calmar"]["xs"] == [1.0, 1.0]                                              # calmar 3,0 hon moi o nhieu (0,3)
+    json.dumps(tk)                                                                                        # ghi duoc ra tep (khong co -inf / nan)
+
+
+def test_tong_ket_calmar_so_voi_nhieu_cung_engine_khong_tron_engine():
+    e4 = _dong_nhieu(2, n=4, engine=4)                                                                    # nhieu engine 4: calmar 0,3
+    e3 = [_dong({t: _muc_cm(1000.0) for t in MAU3}, hat=h, khop_bar="cuc_tri") for h in range(1, 5)]      # nhieu engine 3 (lac quan): calmar 100
+    beta = [_dong({t: _muc_cm(30.0) for t in MAU3}, kb="BETA", hat=h) for h in (1, 2)]                    # engine 4, calmar 3,0
+    tk = D.tong_ket(e4 + e3 + beta)
+    assert tk["kich_ban"]["BETA@e4"]["nhieu"]["cao"]["calmar"]["xs"] == [1.0, 1.0]                        # vuot moi o nhieu engine 4 ; tron engine se ra 0,5
+    assert tk["kich_ban"]["NHIEU@e3"]["nhieu"]["cao"]["calmar"]["xs"] == [0.5] * 4
+
+
+def test_ung_vien_va_kq_id_lop_va_o_ngau_chi_cho_cao_nguyen():
+    r = _dong({}, kb="NHIEU", hat=7)
+    muc = [(r, "mua_phang", _muc("CAO_NGUYEN", "QUA", ngau="RUOT")),
+           (r, "ban_phang", _muc("CAI_GAI", "RUOT", ngau="QUA")),            # o ngau cua luot quet khac khong thanh ung vien (ghep cap chi cho cao nguyen)
+           (r, "mua_cong", _muc("CAO_NGUYEN", None)),                          # khong co o tot nhat: bo
+           (r, "ban_cong", _muc("CHUA_DO_DUOC"))]
+    uv, kq = D._ung_vien_va_kq(muc)
+    assert [u["id"] for u in uv] == ["NHIEU:7:mua_phang", "NHIEU:7:mua_phang:ngau", "NHIEU:7:ban_phang"]
+    assert [u["lop"] for u in uv] == ["CAO_NGUYEN", "NGAU_NHIEN", "CAI_GAI"] and uv[1]["cha"] == uv[0]["id"]
+    assert kq["NHIEU:7:mua_phang"]["ket_luan"] == "QUA" and kq["NHIEU:7:mua_phang:ngau"]["ket_luan"] == "RUOT"
+    assert kq["NHIEU:7:mua_phang"]["phien_ban_engine"] == 4 and {u["ma"] for u in uv} == {"TONG_HOP_NHIEU_7"}
+    uv3, kq3 = D._ung_vien_va_kq([(_dong({}, hat=2, khop_bar="cuc_tri"), "mua_phang", _muc())])
+    assert kq3[uv3[0]["id"]]["phien_ban_engine"] == 3
+
+
+# ------------------------------------------------------------------------------------------ quy tac doc R2 (nguoi tieu thu)
+
+def _gia_tri(m, v=0.9):
+    return {"M%d" % i: v for i in range(m)}
+
+
+def test_so_voi_nhieu_cum_chua_du_khi_it_thi_truong_hoac_it_chuoi_nhieu():
+    nhieu = [0.4, 0.6] * 20
+    r = D.so_voi_nhieu_cum(_gia_tri(7), nhieu)
+    assert r["ket_luan"] == "CHUA_DU" and r["n_cum"] == 7 and "7 thi truong" in r["ly_do"]
+    assert D.so_voi_nhieu_cum(_gia_tri(8), nhieu)["ket_luan"] != "CHUA_DU"                               # dung 8 thi truong: du
+    r = D.so_voi_nhieu_cum(_gia_tri(12), nhieu[:29])
+    assert r["ket_luan"] == "CHUA_DU" and r["n_chuoi_nhieu"] == 29 and "29 chuoi nhieu" in r["ly_do"]
+    assert D.so_voi_nhieu_cum(_gia_tri(12), nhieu[:30])["ket_luan"] != "CHUA_DU"                         # dung 30 chuoi nhieu: du
+    with pytest.raises(ValueError):
+        D.so_voi_nhieu_cum({}, nhieu, "khac")
+
+
+def test_so_voi_nhieu_cum_vuot_duoi_ngang_va_hai_dieu_kien_tach_nhau():
+    nhieu = [0.4, 0.6] * 20                                       # trung binh 0,5 ; sd ~0,10
+    r = D.so_voi_nhieu_cum(_gia_tri(10, 0.9), nhieu)
+    assert r["ket_luan"] == "VUOT_NHIEU" and (r["that"], r["nhieu"], r["chenh"]) == (0.9, 0.5, 0.4) and r["du_luc"] is True
+    assert r["p_vuot"] < 0.001 and r["khoang_nhieu"][0] < 0.5 < r["khoang_nhieu"][1]
+    r = D.so_voi_nhieu_cum(_gia_tri(10, 0.1), nhieu)
+    assert r["ket_luan"] == "DUOI_NHIEU" and r["p_duoi"] < 0.001
+    assert D.so_voi_nhieu_cum(_gia_tri(10, 0.5), nhieu)["ket_luan"] == "NGANG_NHIEU"
+    # p rat nho nhung chenh chi 5 diem (< 10 diem): van NGANG (hai dieu kien tach nhau)
+    r = D.so_voi_nhieu_cum(_gia_tri(30, 0.55), nhieu)
+    assert r["p_vuot"] < 0.05 and r["chenh"] == pytest.approx(0.05) and r["ket_luan"] == "NGANG_NHIEU"
+    r = D.so_voi_nhieu_cum(_gia_tri(30, 0.45), nhieu)                                                      # doi xung phia duoi: p nho, chenh 5 diem -> van NGANG
+    assert r["p_duoi"] < 0.05 and r["chenh"] == pytest.approx(-0.05) and r["ket_luan"] == "NGANG_NHIEU"
+    # chenh 11 diem nhung nhieu rat do (sd ~0,30) va chi 8 thi truong: p lon -> khong duoc 'vuot', va phai noi ro la KHONG DU LUC
+    r = D.so_voi_nhieu_cum(_gia_tri(8, 0.61), [0.2, 0.8] * 20)
+    assert r["chenh"] == pytest.approx(0.11) and r["p_vuot"] > 0.05 and r["ket_luan"] == "NGANG_NHIEU" and r["du_luc"] is False
+
+
+def test_so_voi_nhieu_cum_p_khong_bao_gio_bang_0_va_hoa_nhau_tinh_la_cuc_doan_nhu_nhau():
+    r = D.so_voi_nhieu_cum(_gia_tri(10, 0.9), [0.4, 0.6] * 20)                                            # khong rut nao dat 0,9: p la 1/(20000+1), khong phai 0
+    assert r["p_vuot"] == pytest.approx(1 / 20001, abs=1e-6) and r["p_vuot"] > 0
+    nhi_phan = [0.0, 1.0] * 20                                                                              # trung binh 8 thi truong = 1,0 co xac suat 1/256
+    r = D.so_voi_nhieu_cum(_gia_tri(8, 1.0), nhi_phan)
+    assert r["p_vuot"] == pytest.approx(1 / 256, abs=0.0015) and r["ket_luan"] == "VUOT_NHIEU"            # hoa (>=) tinh la cuc doan nhu nhau
+    r = D.so_voi_nhieu_cum(_gia_tri(8, 0.0), nhi_phan)
+    assert r["p_duoi"] == pytest.approx(1 / 256, abs=0.0015) and r["ket_luan"] == "DUOI_NHIEU"
+
+
+def test_so_voi_nhieu_cum_mde_la_cong_thuc_da_dong_bang_va_ket_qua_tat_dinh():
+    nhieu = [0.2, 0.8] * 20
+    r = D.so_voi_nhieu_cum(_gia_tri(10, 0.5), nhieu)
+    sd = float(np.std(nhieu, ddof=1))
+    assert r["sd_nhieu"] == pytest.approx(sd, abs=1e-4)
+    assert r["mde"] == pytest.approx((1.645 + 0.84) * sd / math.sqrt(10), abs=1e-4)                       # luc 80% mot phia 5%
+    assert r["du_luc"] is (r["mde"] <= D.NHIEU_CHENH_TOI_THIEU)
+    assert D.so_voi_nhieu_cum(_gia_tri(10, 0.5), nhieu) == r                                              # cung dau vao -> cung ket qua (hat co dinh)
+    tron = list(reversed(nhieu[:10])) + nhieu[10:]
+    assert D.so_voi_nhieu_cum(_gia_tri(10, 0.5), tron) == r                                              # khong phu thuoc thu tu chuoi nhieu trong tep
+
+
+def test_so_voi_nhieu_cum_bao_hoa_khi_nhieu_tu_90_phan_tram_chi_cho_thuoc_do_nhi_phan():
+    bao_hoa = [1.0] * 36 + [0.0] * 4                                                                      # trung binh dung 0,90
+    r = D.so_voi_nhieu_cum(_gia_tri(10, 1.0), bao_hoa)
+    assert r["ket_luan"] == "BAO_HOA" and r["nhieu"] == 0.9 and "hon mua-giu" in r["ly_do"]
+    assert D.so_voi_nhieu_cum(_gia_tri(10, 1.0), [1.0] * 35 + [0.0] * 5)["ket_luan"] != "BAO_HOA"          # 0,875: chua bao hoa
+    for td in D.THUOC_DO_NHI_PHAN:
+        assert D.so_voi_nhieu_cum(_gia_tri(10, 1.0), bao_hoa, td)["ket_luan"] == "BAO_HOA", td
+    assert D.so_voi_nhieu_cum(_gia_tri(10, 0.95), [0.95] * 40, "calmar")["ket_luan"] != "BAO_HOA"        # phan vi xep hang khong 'bao hoa' theo nghia nay
+
+
+def _tc_nhieu(n_qua, **kw):
+    return D.tong_ket(_dong_nhieu(n_qua, **kw))
+
+
+def _o_that(cum, mau, kl="QUA", ln=3.0, dd=-10.0, hon_moc=None, chay=False, nhom="cao", engine=4):
+    return {"cum": cum, "mau": mau, "kl": kl, "ln": ln, "dd": dd, "hon_moc": hon_moc, "chay": chay, "nhom": nhom, "engine": engine}
+
+
+def _that(so_cum, kl="QUA", mau_ten=MAU3, ten="M", **kw):
+    return [_o_that("%s%d" % (ten, i), t, kl=kl, **kw) for i in range(so_cum) for t in mau_ten]
+
+
+def test_doc_that_voi_nhieu_theo_thi_truong_dung_khoa_cua_nguoi_san_xuat():
+    tc = _tc_nhieu(20)                                           # nhieu: 20 chuoi QUA het + 20 chuoi RUOT het -> trung binh 0,5
+    r = D.doc_that_voi_nhieu(_that(10), tc, 4)
+    assert r["ket_luan"] == "VUOT_NHIEU" and (r["engine"], r["nhom"], r["thuoc_do"]) == (4, "cao", "qua")
+    assert (r["n_cum"], r["n_chuoi_nhieu"], r["so_o"], r["cum_bo"]) == (10, 40, 30, []) and (r["that"], r["nhieu"]) == (1.0, 0.5)
+    assert D.doc_that_voi_nhieu(_that(10, kl="RUOT"), tc, 4)["ket_luan"] == "DUOI_NHIEU"
+    assert D.doc_that_voi_nhieu(_that(10), tc, 4, thuoc_do="duyet")["ket_luan"] == "VUOT_NHIEU"            # maxDD -10% < 80%
+    assert D.doc_that_voi_nhieu(_that(10, dd=-90.0), tc, 4, thuoc_do="duyet")["that"] == 0.0               # maxDD 90% >= 80%: khong qua tieu chi duyet
+    r = D.doc_that_voi_nhieu(_that(7), tc, 4)
+    assert r["ket_luan"] == "CHUA_DU" and r["n_cum"] == 7
+    r = D.doc_that_voi_nhieu(_that(9) + [_o_that("HAI_O", "mua_phang"), _o_that("HAI_O", "mua_cong")], tc, 4)
+    assert r["n_cum"] == 9 and r["cum_bo"] == ["HAI_O"] and r["so_o"] == 29                              # thi truong chi co 2 o: bo, nhung phai noi ra
+    mix = _that(10) + _that(10, kl="RUOT", nhom="doi", ten="D")
+    assert D.doc_that_voi_nhieu(mix, tc, 4, "cao")["so_o"] == 30                                           # o 'doi' khong tinh vao 'cao'
+    r = D.doc_that_voi_nhieu(mix, tc, 4, "doi")
+    assert r["ket_luan"] == "CHUA_DU" and "nhom doi" in r["ly_do"]                                       # nhieu chi co o 'cao': khong co chuan cho 'doi'
+    assert D.doc_that_voi_nhieu(_that(10), None, 4)["ket_luan"] == "CHUA_DU" and D.doc_that_voi_nhieu(_that(10), {}, 4)["ket_luan"] == "CHUA_DU"
+
+
+def test_doc_that_voi_nhieu_ma_cu_thieu_hon_moc_khong_do_duoc_thay_vi_bang_0():
+    tc = _tc_nhieu(20)
+    r = D.doc_that_voi_nhieu(_that(10), tc, 4, "cao", "qua_hon_moc")                                      # ket qua that cua may nha cu khong in hon_moc_pct
+    assert r["ket_luan"] == "CHUA_DU" and r["n_cum"] == 0 and len(r["cum_bo"]) == 10
+    r = D.doc_that_voi_nhieu(_that(10, hon_moc=5.0), tc, 4, "cao", "qua_hon_moc")
+    assert r["ket_luan"] == "VUOT_NHIEU" and r["that"] == 1.0
+    r = D.doc_that_voi_nhieu(_that(10), tc, 4, "cao", "calmar")                                          # o that y het o nhieu (cung ln / maxDD): khong duoc ra 'vuot'
+    assert r["ket_luan"] == "NGANG_NHIEU" and r["that"] == 0.5
+
+
+def test_doc_that_voi_nhieu_khong_so_engine_3_voi_engine_4():
+    tc = D.tong_ket(_dong_nhieu(20, engine=4))                                                           # chi co nhieu engine 4
+    r = D.doc_that_voi_nhieu(_that(10, engine=3), tc, 3)
     assert r["ket_luan"] == "CHUA_DU" and "engine 3" in r["ly_do"]
-    tc3 = _tham_chieu(20, engine=3)
-    assert D.so_voi_nhieu(45, 50, tc3, 3)["ket_luan"] == "VUOT_NHIEU" and D.so_voi_nhieu(45, 50, tc3, 4)["ket_luan"] == "CHUA_DU"
-    mot = D.tong_ket([_dong({"mua_phang": _muc()}, hat=1)])                # 1 chuoi: chua co khoang tin cay
-    assert D.so_voi_nhieu(45, 50, mot, 4)["ket_luan"] == "CHUA_DU"
+    tc2 = D.tong_ket(_dong_nhieu(20, engine=4) + _dong_nhieu(30, engine=3))                              # engine 3: nhieu qua 75%
+    assert D.doc_that_voi_nhieu(_that(10, engine=3), tc2, 3)["nhieu"] == 0.75
+    assert D.doc_that_voi_nhieu(_that(10, engine=4), tc2, 4)["nhieu"] == 0.5
 
 
-def test_r1_bao_hoa_khi_nhieu_da_qua_gan_het_va_doi_sang_hon_moc():
-    tc = _tham_chieu(38, hon_moc_qua=10)                                  # nhieu qua 95%, nhung chi 25% qua VA hon mua-giu/ban-giu
-    r = D.so_voi_nhieu(48, 50, tc, 4)
-    assert r["ket_luan"] == "BAO_HOA" and r["nhieu"] == 0.95 and "hon" in r["ly_do"]
-    r2 = D.so_voi_nhieu(48, 50, tc, 4, hon_moc=True)
-    assert r2["ket_luan"] == "VUOT_NHIEU" and r2["tieu_chi"] == "qua_hon_moc" and r2["nhieu"] == 0.25
-    # dung 90% van la bao hoa (>=), 89% thi khong
-    assert D.so_voi_nhieu(30, 50, _tham_chieu(36), 4)["ket_luan"] == "BAO_HOA"
-    assert D.so_voi_nhieu(30, 50, _tham_chieu(35), 4)["ket_luan"] != "BAO_HOA"
+def test_doc_that_voi_nhieu_canh_bao_khi_co_cau_mau_that_lech_co_cau_mau_nhieu():
+    sau = ("mua_phang", "mua_cong", "mua_nhan", "ban_phang", "ban_cong", "ban_nhan")
+    tc = D.tong_ket([_dong({t: _muc(tot="QUA" if t.startswith("mua") else "RUOT") for t in sau}, hat=i + 1) for i in range(40)])
+    r = D.doc_that_voi_nhieu(_that(10, mau_ten=("mua_phang", "mua_cong", "mua_nhan")), tc, 4)             # nhieu: 'mua' luon QUA, 'ban' luon RUOT -> chung 0,5
+    assert r["ket_luan"] == "VUOT_NHIEU" and r["nhieu"] == 0.5 and r["nhieu_cung_co_cau_mau"] == 1.0 and "co cau mau" in r["canh_bao"]
+    r = D.doc_that_voi_nhieu(_that(10, mau_ten=sau), tc, 4)
+    assert r["nhieu_cung_co_cau_mau"] == 0.5 and "canh_bao" not in r
+    r = D.doc_that_voi_nhieu(_that(10, mau_ten=("mua_phang", "mua_cong", "mua_nhan")), tc, 4, thuoc_do="calmar")
+    assert "nhieu_cung_co_cau_mau" not in r                                                              # calmar da chuan hoa theo tung mau
+
+
+def test_doc_that_theo_engine_tach_engine_va_engine_khong_khai_la_engine_3():
+    tc = D.tong_ket(_dong_nhieu(20, engine=4) + _dong_nhieu(20, engine=3))
+    o4, o3 = _that(10, ten="A", engine=4), _that(10, ten="B", kl="RUOT", engine=3)
+    ra = D.doc_that_theo_engine(o4 + o3, tc, thuoc_dos=("qua",))
+    assert set(ra) == {3, 4} and ra[4]["qua"]["ket_luan"] == "VUOT_NHIEU" and ra[3]["qua"]["ket_luan"] == "DUOI_NHIEU"
+    assert ra[3]["qua"]["engine"] == 3 and ra[4]["qua"]["so_o"] == 30
+    khong_khai = [dict(o, engine=None) for o in _that(10, kl="RUOT")]
+    assert set(D.doc_that_theo_engine(khong_khai, tc, thuoc_dos=("qua",))) == {3}                         # ket qua cu khong ghi engine = engine 3
+    chi_e4 = D.tong_ket(_dong_nhieu(20, engine=4))
+    ra = D.doc_that_theo_engine(o4 + o3, chi_e4, thuoc_dos=("qua",))
+    assert ra[4]["qua"]["ket_luan"] == "VUOT_NHIEU" and ra[3]["qua"]["ket_luan"] == "CHUA_DU"
+    assert D.doc_that_theo_engine([], tc) == {} and set(D.doc_that_theo_engine(o4, tc)[4]) == set(D.THUOC_DO)
+
+
+def test_cac_o_that_anh_xa_ung_vien_va_ket_qua_cua_vong_lap():
+    uv = [{"id": "u1", "ma": "AUDCAD", "lop": "CAO_NGUYEN", "che_do": "mua", "kieu_lot": "cong"},
+          {"id": "u2", "ma": "EURUSD", "lop": "CAI_GAI", "che_do": "hai_chieu", "kieu_lot": "phang"},
+          {"id": "u3", "ma": "AUDCAD", "lop": "NGAU_NHIEN", "cha": "u1", "che_do": "mua", "kieu_lot": "cong"},
+          {"id": "u4", "ma": "GBPJPY", "lop": "CAO_NGUYEN", "tham_so": {"che_do": "ban", "kieu_lot": "nhan"}},
+          {"id": "u5", "ma": "XAUUSD", "lop": "CAO_NGUYEN", "che_do": "mua", "kieu_lot": "phang"}]             # u5 chua co ket qua
+    kq = {"u1": {"ket_luan": "QUA", "loi_suat_nam_pct": 12.0, "maxdd_pct": -30.0, "hon_moc_pct": 4.0, "phien_ban_engine": 4, "ly_do": None},
+          "u2": {"ket_luan": "RUOT", "loi_suat_nam_pct": -50.0, "maxdd_pct": -95.0, "hon_moc_pct": None, "ly_do": "CHAY TAI KHOAN o ngay 40"},
+          "u3": {"ket_luan": "RUOT", "loi_suat_nam_pct": -1.0, "maxdd_pct": -10.0, "ly_do": "chay tai khoan o lot thu 0.01"},
+          "u4": {"ket_luan": "QUA", "loi_suat_nam_pct": 3.0, "maxdd_pct": -20.0, "phien_ban_engine": 3, "ly_do": ""}}
+    o = {(x["cum"], x["nhom"]): x for x in D.cac_o_that(uv, kq)}
+    assert set(o) == {("AUDCAD", "cao"), ("EURUSD", "doi"), ("AUDCAD", "ngau"), ("GBPJPY", "cao")}
+    a = o[("AUDCAD", "cao")]
+    assert (a["mau"], a["kl"], a["ln"], a["dd"], a["hon_moc"], a["chay"], a["engine"]) == ("mua_cong", "QUA", 12.0, -30.0, 4.0, False, 4)
+    assert o[("EURUSD", "doi")]["chay"] is True and o[("EURUSD", "doi")]["mau"] == "hai_chieu_phang"
+    assert o[("EURUSD", "doi")]["engine"] == 3 and o[("AUDCAD", "ngau")]["engine"] == 3                       # ket qua cu khong khai engine = engine 3
+    assert o[("AUDCAD", "ngau")]["chay"] is True and o[("GBPJPY", "cao")]["mau"] == "ban_nhan" and o[("GBPJPY", "cao")]["chay"] is False
+    assert set(D.doc_that_theo_engine(list(o.values()), None)) == {3, 4}                                     # noi duoc vao quy tac doc (thieu tham chieu -> CHUA_DU)
+
+
+def test_chenh_voi_nhieu_do_nhay_dung_huong_va_none_khi_thieu():
+    dong = _dong_nhieu(3, n=6) + [_dong({t: _muc_cm(30.0) for t in MAU3}, kb="DAO_DONG", hat=h) for h in range(1, 7)]
+    tk = D.tong_ket(dong)
+    c = D.chenh_voi_nhieu(tk, "DAO_DONG@e4", "cao", "qua")
+    assert c["chenh"] == pytest.approx(0.5) and (c["n"], c["n_nhieu"]) == (6, 6)
+    assert c["z"] == pytest.approx(0.5 / math.sqrt(float(np.var([1, 1, 1, 0, 0, 0], ddof=1)) / 6), abs=0.01)       # Welch: ben DAO_DONG co sd 0
+    assert D.chenh_voi_nhieu(tk, "DAO_DONG@e4", "cao", "calmar")["chenh"] == pytest.approx(0.5)                  # calmar 3,0 hon moi o nhieu
+    assert D.chenh_voi_nhieu(tk, "KHONG_CO@e4") is None and D.chenh_voi_nhieu(tk, "DAO_DONG@e3") is None
+    assert D.chenh_voi_nhieu(tk, "DAO_DONG@e4", "doi", "qua") is None                                              # khong o nao thuoc nhom 'doi'
+    e3 = D.tong_ket(_dong_nhieu(4, n=6, engine=3) + _dong_nhieu(6, n=6, engine=4) + [_dong({t: _muc() for t in MAU3}, kb="BETA", hat=h, khop_bar="cuc_tri")
+                                                                                          for h in range(1, 7)])
+    assert D.chenh_voi_nhieu(e3, "BETA@e3", "cao", "qua")["chenh"] == pytest.approx(1 - 4 / 6, abs=1e-3)       # so voi NHIEU cung engine 3 (qua 4/6), khong phai engine 4
+    mot = D.tong_ket(_dong_nhieu(1, n=2) + [_dong({t: _muc() for t in MAU3}, kb="BETA", hat=1)])
+    assert D.chenh_voi_nhieu(mot, "BETA@e4", "cao", "qua") is None                                                 # 1 chuoi: chua co do lech
+
+
+def _dong_cap(n, ket_cuc, khop_bar="duong_di", mau_ten=D.MAU_TEN):
+    """`n` chuoi NHIEU; chuoi i co `ket_cuc(i)` = (ket luan o tot nhat, ket luan o ngau) CHO MOI MAU (cac o cua mot thi truong chung mot duong gia)."""
+    ra = []
+    for i in range(n):
+        tot, ngau = ket_cuc(i)
+        ra.append(_dong({t: _muc(tot=tot, ngau=ngau) for t in mau_ten}, hat=i + 1, khop_bar=khop_bar))
+    return ra
+
+
+def test_kich_thuoc_phep_thu_khong_chenh_thi_khong_bao_hon_kem_va_chenh_that_thi_bao():
+    r = D.kich_thuoc_phep_thu(_dong_cap(20, lambda i: ("QUA", "QUA")), so_don_vi=12, lan=40)
+    assert (r["engine"], r["so_don_vi"], r["lan"], r["n_chuoi_nhieu"]) == (4, 12, 40, 20)
+    cn = r["cao_vs_ngau"]
+    assert cn["dem"] == {"HON": 0, "KEM": 0, "NGANG": 40, "CHUA_DU": 0} and cn["so_cap_tb"] == 108.0 and cn["doc_theo_thuc_nghiem"] is False
+    assert r["cao_vs_doi"]["ty_le_chua_du"] == 1.0                                                        # khong co luot quet 'doi' nao
+    cn = D.kich_thuoc_phep_thu(_dong_cap(20, lambda i: ("QUA", "RUOT")), so_don_vi=12, lan=40)["cao_vs_ngau"]   # cao luon QUA, ngau luon RUOT: that su hon
+    assert cn["ty_le_hon"] == 1.0 and cn["chenh_p05"] == cn["chenh_p95"] == 1.0 and cn["doc_theo_thuc_nghiem"] is True
+
+
+def test_kich_thuoc_phep_thu_bat_duoc_pep_thu_phong_dai_khi_cac_o_chung_mot_thi_truong():
+    """Khong co loi the nao (moi thi truong lat dong xu: cao hon ngau hoac ngau hon cao, deu nhau) nhung cac o cua MOT thi truong cung ket qua:
+    McNemar coi 108 cap la doc lap nen ra 'HON' / 'KEM' vuot xa muc 5% moi phia (hieu luc that chi la 12 thi truong, khong phai 108 cap).
+    Phep do kich thuoc thuc nghiem phai thay dieu do. Hai nua can bang 30 / 30 de ket qua khong phu thuoc may rui cua mot lan tung xu."""
+    lat = [bool(x) for x in np.random.default_rng(3).permutation([True] * 30 + [False] * 30)]
+    r = D.kich_thuoc_phep_thu(_dong_cap(60, lambda i: ("QUA", "RUOT") if lat[i] else ("RUOT", "QUA")), so_don_vi=12, lan=300)
+    cn = r["cao_vs_ngau"]
+    assert cn["so_cap_tb"] == 108.0 and cn["ty_le_hon"] > 0.08 and cn["ty_le_kem"] > 0.08 and cn["doc_theo_thuc_nghiem"] is True
+    assert cn["ty_le_hon"] + cn["ty_le_kem"] > 0.2                       # danh nghia chi 10% hai phia ; thuc te ~1/3
+
+
+def test_kich_thuoc_phep_thu_moi_lan_rut_la_cac_thi_truong_khac_nhau():
+    """Dung 12 chuoi va xin 12 don vi: neu rut KHONG hoan lai thi lan nao cung la cung 12 chuoi -> mot ket qua duy nhat ; neu co hoan lai thi dao dong."""
+    r = D.kich_thuoc_phep_thu(_dong_cap(12, lambda i: ("QUA", "RUOT") if i < 6 else ("RUOT", "QUA")), so_don_vi=12, lan=60)
+    cn = r["cao_vs_ngau"]
+    assert cn["dem"]["NGANG"] == 60 and cn["chenh_p05"] == cn["chenh_p95"] == 0.0 and cn["so_cap_tb"] == 108.0
+
+
+def test_kich_thuoc_phep_thu_khong_du_chuoi_hoac_sai_engine_la_none_va_tat_dinh():
+    dong = _dong_cap(11, lambda i: ("QUA", "QUA")) + _dong_cap(30, lambda i: ("QUA", "QUA"), khop_bar="cuc_tri")
+    assert D.kich_thuoc_phep_thu(dong, so_don_vi=12, lan=5) is None                                        # engine 4 chi co 11 chuoi
+    assert D.kich_thuoc_phep_thu(dong, khop_bar="cuc_tri", so_don_vi=12, lan=5)["engine"] == 3
+    assert D.kich_thuoc_phep_thu(dong, so_don_vi=0, lan=5) is None and D.kich_thuoc_phep_thu([], so_don_vi=3, lan=5) is None
+    a = D.kich_thuoc_phep_thu(_dong_cap(14, lambda i: ("QUA", "RUOT" if i % 3 else "QUA")), so_don_vi=6, lan=30)
+    b = D.kich_thuoc_phep_thu(_dong_cap(14, lambda i: ("QUA", "RUOT" if i % 3 else "QUA")), so_don_vi=6, lan=30)
+    assert a == b and a["lan"] == 30
 
 
 # ------------------------------------------------------------------------------------------ doc / ghi tep, chay tiep, CLI
@@ -655,7 +967,7 @@ def test_doc_tham_chieu_thieu_hong_hay_dung(tmp_path):
     assert D.doc_tham_chieu(tmp_path / "hong.json") is None
     (tmp_path / "rong.json").write_text(json.dumps({"kich_ban": {}}), encoding="utf-8")
     assert D.doc_tham_chieu(tmp_path / "rong.json") is None
-    tk = _tham_chieu(20)
+    tk = D.tong_ket(_dong_nhieu(20))
     (tmp_path / "tot.json").write_text(json.dumps(tk), encoding="utf-8")
     assert D.doc_tham_chieu(tmp_path / "tot.json")["kich_ban"].keys() == tk["kich_ban"].keys()
 

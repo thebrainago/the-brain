@@ -38,6 +38,7 @@ Ke hoach DONG BANG truoc khi chay + cach doc: `tai_lieu/VONG_LAP.md` muc "Doi ch
 from __future__ import annotations
 
 import argparse
+import bisect
 import concurrent.futures as cf
 import json
 import math
@@ -67,9 +68,8 @@ ENGINE_CUA = {"duong_di": 4, "cuc_tri": 3}
 CHAN_VR = (12, 48, 144, 288)    # chan troi (bar) do variance ratio: loi the hoi quy cham chi hien o chan dai (VR48 cua nua doi 288 gan nhu = 1)
 TEP_TONG_KET = LAB / "reports" / "vong_lap" / "doi_chung_nhieu.json"
 
-#: Quy tac doc (DONG BANG trong tai_lieu/VONG_LAP.md truoc khi chay): xem `so_voi_nhieu`
-NHIEU_N_TOI_THIEU = 20          # ket qua that ket luan duoc toi thieu truoc khi dam noi 'vuot' / 'duoi' nhieu
-NHIEU_CHENH_TOI_THIEU = 0.10    # chenh ty le qua toi thieu so voi nhieu (cung y nghia voi vong_lap.SO_SANH_CHENH_TOI_THIEU)
+#: Quy tac doc (DONG BANG trong tai_lieu/VONG_LAP.md truoc khi chay): xem `so_voi_nhieu_cum` ; cac hang so con lai cua R2 o khoi "mot o -> mot con so"
+NHIEU_CHENH_TOI_THIEU = 0.10    # chenh toi thieu so voi nhieu (cung y nghia voi vong_lap.SO_SANH_CHENH_TOI_THIEU)
 NHIEU_BAO_HOA = 0.90            # nhieu cung dat >= 90% 'qua': tieu chi QUA khong con phan biet -> doi sang 'qua VA hon mua-giu / ban-giu'
 
 #: Kich ban -> mo ta. `NHIEU_THAP/CAO` = CUNG duong gia cua NHIEU, nhan do bien dong (ghep cap voi NHIEU).
@@ -394,6 +394,22 @@ def _chan_doan_gop(muc: list[dict]) -> dict | None:
             "qua_neu_khong_lai_trong_mau": _tb_ci(p_khong), "chenh_co_lai_tru_khong_lai": _tb_ci(chenh, (-1.0, 1.0))}
 
 
+def _ung_vien_va_kq(muc: list[tuple]) -> tuple[list[dict], dict]:
+    """`muc` = [(chuoi, ten_mau, muc_mau)] -> (ung_vien, kq) theo dang `vong_lap.so_sanh_nhom` nhan: o tot nhat cua moi luot quet la mot ung vien
+    (lop = hinh dang), o ngau nhien cua luot quet CAO_NGUYEN la ung vien NGAU_NHIEN ghep cap (cha = ung vien do)."""
+    uv, kq = [], {}
+    for r, mau, m in muc:
+        if "xn_tot" not in m:
+            continue
+        i = "%s:%d:%s" % (r["kb"], r["hat"], mau)
+        uv.append({"id": i, "lop": m["hinh"], "ty_le": m.get("ty_le_o_co_lai") or 0.0, "ma": r["ma"], "khung": KHUNG})
+        kq[i] = {"ket_luan": m["xn_tot"]["kl"], "phien_ban_engine": r.get("engine", 4), "luc": ""}
+        if "xn_ngau" in m and m["hinh"] == "CAO_NGUYEN":
+            uv.append({"id": i + ":ngau", "lop": "NGAU_NHIEN", "cha": i, "ty_le": 0.0, "ma": r["ma"], "khung": KHUNG})
+            kq[i + ":ngau"] = {"ket_luan": m["xn_ngau"]["kl"], "phien_ban_engine": r.get("engine", 4), "luc": ""}
+    return uv, kq
+
+
 def _tong_ket_mau(dong: list[dict], mau: str) -> dict:
     from nhan import vong_lap as VL
     muc = [(r, r["mau"][mau]) for r in dong if mau in r.get("mau", {})]
@@ -419,16 +435,7 @@ def _tong_ket_mau(dong: list[dict], mau: str) -> dict:
            and m["xn_tot"]["kl"] in ("QUA", "RUOT")]
     ra["o_tran_o_tot_nhat"] = {"n": len(cap), "trong_mau_phan_vi": phan_vi([a for a, _ in cap]), "ngoai_mau_phan_vi": phan_vi([b for _, b in cap])}
     # cung phep so sanh san xuat tren du lieu nhieu
-    uv, kq = [], {}
-    for r, m in muc:
-        if "xn_tot" not in m:
-            continue
-        i = "%s:%d:%s" % (r["kb"], r["hat"], mau)
-        uv.append({"id": i, "lop": m["hinh"], "ty_le": m.get("ty_le_o_co_lai") or 0.0, "ma": r["ma"], "khung": KHUNG})
-        kq[i] = {"ket_luan": m["xn_tot"]["kl"], "phien_ban_engine": r.get("engine", 4), "luc": ""}
-        if "xn_ngau" in m and m["hinh"] == "CAO_NGUYEN":
-            uv.append({"id": i + ":ngau", "lop": "NGAU_NHIEN", "cha": i, "ty_le": 0.0, "ma": r["ma"], "khung": KHUNG})
-            kq[i + ":ngau"] = {"ket_luan": m["xn_ngau"]["kl"], "phien_ban_engine": r.get("engine", 4), "luc": ""}
+    uv, kq = _ung_vien_va_kq([(r, mau, m) for r, m in muc])
     ss = VL.so_sanh_nhom(uv, kq) if uv else {}
     ra["so_sanh"] = {k: ss.get(k) for k in ("cao_vs_ngau", "cao_vs_doi")}
     ra["chan_doan"] = _chan_doan_gop([m for _, m in muc])
@@ -455,34 +462,214 @@ def _la_cao(m: dict):
 
 def _qua_cua(khoa: str, hon_moc: bool = False, chi_cao: bool = False):
     """QUA (hoac QUA VA hon mua-giu / ban-giu) cua o `khoa` trong mot muc mau: 1/0, None khi khong ket luan duoc. `chi_cao`: chi tinh
-    cac luot quet duoc xep CAO_NGUYEN (cung nhom voi 'cao' cua vong lap that)."""
+    cac luot quet duoc xep CAO_NGUYEN (cung nhom voi 'cao' cua vong lap that). Cung cong thuc voi `qua_o` (mot nguon cho ca hai phia)."""
     def lay(m):
         if chi_cao and m.get("hinh") != "CAO_NGUYEN":
             return None
-        x = m.get(khoa)
-        if not x or x.get("kl") not in ("QUA", "RUOT"):
-            return None
-        return 1.0 if (x["kl"] == "QUA" and (not hon_moc or (x.get("hon_moc") or 0) > 0)) else 0.0
+        return qua_o(m.get(khoa), "qua_hon_moc" if hon_moc else "qua")
     return lay
 
 
-def tong_ket(dong: list[dict]) -> dict:
-    """Tong hop cac ban ghi chuoi (moi dong = mot chuoi) thanh bang tham chieu theo kich ban x engine x mau."""
+# ----------------------------------------------------------------------------------------------- mot o -> mot con so trong [0, 1] (R2)
+
+#: nhom (cung nghia voi `vong_lap.nhom_cua`): cao = o tot nhat cua luot quet CAO_NGUYEN ; doi = o tot nhat cua luot quet KHAC ; ngau = o ngau nhien ghep cap
+NHOM = ("cao", "doi", "ngau")
+#: thuoc do: qua = QUA ngoai mau ; qua_hon_moc = QUA VA hon mua-giu/ban-giu ; duyet = QUA VA maxDD < tran cua chu du an ; calmar = phan vi calmar so voi nhieu
+THUOC_DO = ("qua", "qua_hon_moc", "duyet", "calmar")
+THUOC_DO_NHI_PHAN = ("qua", "qua_hon_moc", "duyet")
+CALMAR_TRAN = 1.0e6              # calmar cua o co lai ma khong co drawdown nao: tran huu han (de xep hang va ghi JSON)
+CHAY = float("-inf")             # calmar cua o chay tai khoan: thap nhat, phan vi 0
+
+#: R2 (DONG BANG trong tai_lieu/VONG_LAP.md muc 8.3, khong doi sau khi nhin so that)
+CUM_TOI_THIEU = 8                # so thi truong toi thieu truoc khi dam doc
+CUM_KL_TOI_THIEU = 3             # ket luan duoc toi thieu cua MOT thi truong (hoac MOT chuoi nhieu) de co con so cua no
+NHIEU_CHUOI_TOI_THIEU = 30       # chuoi nhieu toi thieu de lam phan phoi nhieu
+RUT_LAN = 20_000
+RUT_HAT = 20_261_010
+NHIEU_ALPHA = 0.05               # mot phia
+
+
+def o_cua_nhom(m: dict, nhom: str):
+    """Muc ket qua ngoai mau (`xn_*`) cua `nhom` trong MOT muc mau cua chuoi; None neu muc nay khong thuoc nhom / khong co o do."""
+    if nhom not in NHOM:
+        raise ValueError("nhom phai la mot trong %s" % (NHOM,))
+    hinh = m.get("hinh")
+    if nhom == "ngau":
+        return m.get("xn_ngau") if hinh == "CAO_NGUYEN" else None
+    x = m.get("xn_tot")
+    if not x or hinh == "CHUA_DO_DUOC":
+        return None
+    return x if (hinh == "CAO_NGUYEN") == (nhom == "cao") else None
+
+
+def qua_o(x: dict | None, thuoc_do: str = "qua"):
+    """1.0 / 0.0 / None cua MOT o cho thuoc do nhi phan. None = khong ket luan duoc (KHONG_DO_DUOC), hoac khong do duoc o thuoc do nay: o 'QUA'
+    ma thieu hon_moc / maxDD (ket qua cua ma cu khong in hon_moc_pct) thi khong the noi 'hon' hay 'khong hon' -> bo, KHONG dem la 0."""
+    if not x or x.get("kl") not in ("QUA", "RUOT"):
+        return None
+    if thuoc_do not in THUOC_DO_NHI_PHAN:
+        raise ValueError("thuoc do nhi phan phai la mot trong %s" % (THUOC_DO_NHI_PHAN,))
+    if x["kl"] == "RUOT":
+        return 0.0
+    if thuoc_do == "qua":
+        return 1.0
+    if thuoc_do == "qua_hon_moc":
+        h = x.get("hon_moc")
+        return None if h is None else (1.0 if h > 0 else 0.0)
+    dd = x.get("dd")                                                  # duyet: maxDD duoi tran cua chu du an (mot nguon: cham_diem.TRAN_SUT_GIAM)
+    if dd is None:
+        return None
+    from nhan import cham_diem as CD
+    return 1.0 if abs(float(dd)) < CD.TRAN_SUT_GIAM else 0.0
+
+
+def calmar_cua(x: dict | None):
+    """Calmar ngoai mau cua mot o = ln / |maxDD| (cung cong thuc `luoi.chi_so`). `CHAY` (-inf) khi chay tai khoan ; None khi khong ket luan
+    duoc hoac thieu so. Khong co drawdown nao: co lai -> CALMAR_TRAN, khong lai -> 0."""
+    if not x or x.get("kl") not in ("QUA", "RUOT"):
+        return None
+    if x.get("chay"):
+        return CHAY
+    ln, dd = x.get("ln"), x.get("dd")
+    if ln is None or dd is None:
+        return None
+    ln, dd = float(ln), abs(float(dd))
+    if not (math.isfinite(ln) and math.isfinite(dd)):
+        return None
+    if dd < 1e-9:
+        return CALMAR_TRAN if ln > 0 else 0.0
+    return max(-CALMAR_TRAN, min(CALMAR_TRAN, ln / dd))
+
+
+def tao_ecdf(calmars) -> dict | None:
+    """Phan phoi calmar cua mot (engine, nhom, mau) tren chuoi nhieu: {n, n_chay, gia_tri (sap tang, KHONG gom o chay tai khoan)}."""
+    xs = [c for c in calmars if c is not None]
+    if not xs:
+        return None
+    return {"n": len(xs), "n_chay": sum(1 for c in xs if c == CHAY), "gia_tri": sorted(round(c, 4) for c in xs if c != CHAY)}
+
+
+def phan_vi_trong(ecdf: dict | None, c) -> float | None:
+    """Phan vi (0..1) cua calmar `c` trong `ecdf`: phan vi TRUNG DIEM khi bang nhau ; chay tai khoan = 0 ; None khi thieu ecdf / calmar."""
+    if not ecdf or c is None or not ecdf.get("n"):
+        return None
+    if c == CHAY:
+        return 0.0
+    gt = ecdf["gia_tri"]
+    v = round(float(c), 4)
+    thap, cao = bisect.bisect_left(gt, v), bisect.bisect_right(gt, v)
+    return (ecdf["n_chay"] + thap + 0.5 * (cao - thap)) / ecdf["n"]
+
+
+def gia_tri_o(x: dict | None, thuoc_do: str, ecdf: dict | None = None):
+    """Con so trong [0, 1] cua MOT o theo `thuoc_do` ; 'calmar' can `ecdf` cua dung (engine, nhom, mau)."""
+    if thuoc_do == "calmar":
+        return phan_vi_trong(ecdf, calmar_cua(x))
+    return qua_o(x, thuoc_do)
+
+
+def tb_o(cac_o: list[dict], thuoc_do: str, ecdf_theo_mau: dict | None = None, toi_thieu: int = CUM_KL_TOI_THIEU):
+    """(trung binh, so o do duoc) cua `gia_tri_o` tren `cac_o` (moi o la dict xn_* kem khoa 'mau') ; trung binh = None khi < `toi_thieu` o do duoc."""
+    v = []
+    for o in cac_o:
+        g = gia_tri_o(o, thuoc_do, (ecdf_theo_mau or {}).get(o.get("mau")))
+        if g is not None:
+            v.append(g)
+    return (float(np.mean(v)) if len(v) >= toi_thieu else None), len(v)
+
+
+def _o_cua_chuoi(r: dict, nhom: str, mau_ten) -> list[dict]:
+    ra = []
+    for t in mau_ten:
+        m = (r.get("mau") or {}).get(t)
+        x = o_cua_nhom(m, nhom) if m else None
+        if x is not None:
+            ra.append(dict(x, mau=t))
+    return ra
+
+
+def ecdf_nhieu(rows: list[dict], mau_ten) -> dict:
+    """{nhom: {mau: ecdf}} tu cac chuoi cua MOT kich ban x engine."""
+    ra: dict = {}
+    for nhom in NHOM:
+        d = {}
+        for t in mau_ten:
+            e = tao_ecdf([calmar_cua(o_cua_nhom(r["mau"][t], nhom)) for r in rows if t in (r.get("mau") or {}) and o_cua_nhom(r["mau"][t], nhom)])
+            if e:
+                d[t] = e
+        ra[nhom] = d
+    return ra
+
+
+def nhieu_theo_chuoi(rows: list[dict], mau_ten, nhom: str, thuoc_do: str, ecdf_theo_mau: dict | None = None) -> list[float]:
+    """Mot con so MOI CHUOI (trung binh cac o cua nhom ma chuoi do ket luan duoc, can >= CUM_KL_TOI_THIEU o): la cac 'thi truong gia' cua R2."""
+    xs = []
+    for r in rows:
+        tb, _ = tb_o(_o_cua_chuoi(r, nhom, mau_ten), thuoc_do, ecdf_theo_mau)
+        if tb is not None:
+            xs.append(tb)
+    return xs
+
+
+def _tom_xs(xs: list[float]) -> dict:
+    return {"n": len(xs), "tb": round(float(np.mean(xs)), 4) if xs else None,
+            "sd": round(float(np.std(xs, ddof=1)), 4) if len(xs) > 1 else None, "xs": [round(float(x), 4) for x in xs]}
+
+
+def _nhieu_theo_mau(rows: list[dict], mau_ten) -> dict:
+    """Ty le nhi phan theo MAU (gop o cua moi chuoi): nhieu mong doi cua mot ket qua that CO CAU MAU nhu vay (chan doan lech co cau mau)."""
+    ra: dict = {}
+    for nhom in NHOM:
+        for td in THUOC_DO_NHI_PHAN:
+            d = {}
+            for t in mau_ten:
+                v = [qua_o(o_cua_nhom(r["mau"][t], nhom), td) for r in rows if t in (r.get("mau") or {}) and o_cua_nhom(r["mau"][t], nhom)]
+                v = [x for x in v if x is not None]
+                if v:
+                    d[t] = {"tb": round(float(np.mean(v)), 4), "n": len(v)}
+            ra.setdefault(nhom, {})[td] = d
+    return ra
+
+
+def _hop_chinh(dong: list[dict]):
+    """Cac chuoi hop le cua cau hinh DONG NHAT NHIEU NHAT (v, so_bar, toi_da_o) + cau hinh do. Chuoi loi / khong co mau bi bo."""
     hop = [r for r in dong if r.get("mau") and not r.get("loi")]
     cau_hinh: dict = {}
     for r in hop:
         k = (r.get("v"), r.get("so_bar"), r.get("toi_da_o"))
         cau_hinh[k] = cau_hinh.get(k, 0) + 1
     chinh = max(cau_hinh, key=cau_hinh.get) if cau_hinh else None
-    hop = [r for r in hop if (r.get("v"), r.get("so_bar"), r.get("toi_da_o")) == chinh]
+    return [r for r in hop if (r.get("v"), r.get("so_bar"), r.get("toi_da_o")) == chinh], chinh
+
+
+def _cac_chuoi(hop: list[dict], kb: str, kbar: str) -> list[dict]:
+    return [r for r in hop if r["kb"] == kb and r.get("khop_bar", "duong_di") == kbar]
+
+
+def _mau_co(rows: list[dict]) -> list[str]:
+    return [m for m in MAU if any(m in r["mau"] for r in rows)]
+
+
+def tong_ket(dong: list[dict]) -> dict:
+    """Tong hop cac ban ghi chuoi (moi dong = mot chuoi) thanh bang tham chieu theo kich ban x engine x mau."""
+    hop, chinh = _hop_chinh(dong)
+    # phan phoi calmar cua NHIEU theo engine: chuan phan vi cho MOI kich ban cung engine (kich ban co loi the thi calmar cao hon nhieu -> phan vi > 0,5)
+    ecdf_chuan: dict = {}
+    for kbar in KHOP_BAR:
+        rows = _cac_chuoi(hop, "NHIEU", kbar)
+        if rows:
+            ecdf_chuan[ENGINE_CUA[kbar]] = ecdf_nhieu(rows, _mau_co(rows))
     ra_kb: dict = {}
     for kb in KICH_BAN:
         for kbar in KHOP_BAR:
-            rows = [r for r in hop if r["kb"] == kb and r.get("khop_bar", "duong_di") == kbar]
+            rows = _cac_chuoi(hop, kb, kbar)
             if not rows:
                 continue
-            mau_ten = [m for m in MAU if any(m in r["mau"] for r in rows)]
+            mau_ten = _mau_co(rows)
+            ecdf = ecdf_chuan.get(ENGINE_CUA[kbar]) or {}
             ra_kb["%s@e%d" % (kb, ENGINE_CUA[kbar])] = {
+                "nhieu": {nhom: {td: _tom_xs(nhieu_theo_chuoi(rows, mau_ten, nhom, td, ecdf.get(nhom))) for td in THUOC_DO} for nhom in NHOM},
+                **({"ecdf": ecdf_chuan[ENGINE_CUA[kbar]], "theo_mau": _nhieu_theo_mau(rows, mau_ten)} if kb == "NHIEU" else {}),
                 "kich_ban": kb, "khop_bar": kbar, "engine": ENGINE_CUA[kbar], "loai": LOAI[kb], "mo_ta": KICH_BAN[kb], "so_chuoi": len(rows),
                 "troi_is_pct_tb": round(float(np.mean([r["troi_is_pct"] for r in rows])), 2),
                 "troi_oos_pct_tb": round(float(np.mean([r["troi_oos_pct"] for r in rows])), 2),
@@ -524,7 +711,7 @@ def tom_tat_loi_thuong(kb: dict) -> list[str]:
     return ra
 
 
-# ----------------------------------------------------------------------------------------------- doc ket qua that so voi nhieu (quy tac R1)
+# ----------------------------------------------------------------------------------------------- doc ket qua THAT so voi nhieu (quy tac R2)
 
 def doc_tham_chieu(duong: Path | str | None = None) -> dict | None:
     """Tong ket da luu (`--ra`.json), None neu chua chay / hong."""
@@ -535,56 +722,154 @@ def doc_tham_chieu(duong: Path | str | None = None) -> dict | None:
     return d if isinstance(d, dict) and d.get("kich_ban") else None
 
 
-def _nhieu_tham_chieu(tc: dict | None, engine: int, mau: str | None, hon_moc: bool):
-    """(ty_le, khoang_tin_cay, so_don_vi_doc_lap) cua nhom 'cao nguyen' tren chuoi NHIEU cung engine; None khi thieu."""
-    ks = ((tc or {}).get("kich_ban") or {}).get("NHIEU@e%d" % int(engine))
-    if not ks:
-        return None
-    if mau:
-        d = (ks.get("mau") or {}).get(mau, {}).get("cao")
-        if not d:
-            return None
-        ty, kt, n = (d["ty_le_hon_moc"], d["khoang_hon_moc"], d["n"]) if hon_moc else (d["ty_le"], d["khoang_tin_cay"], d["n"])
-    else:
-        d = ks["gop"].get("qua_hon_moc_cao_nguyen" if hon_moc else "qua_cao_nguyen")
-        if not d:
-            return None
-        ty, kt, n = d["tb"], d["ci95"], d["n_chuoi"]
-    if ty is None or not kt or n < 2:
-        return None
-    return float(ty), [float(kt[0]), float(kt[1])], int(n)
+def so_voi_nhieu_cum(gia_tri_cum: dict[str, float], xs_nhieu: list[float], thuoc_do: str = "qua") -> dict:
+    """QUY TAC R2 (dong bang truoc khi doc ket qua that nao: `tai_lieu/VONG_LAP.md` muc 8.3).
 
+    Don vi doc lap la THI TRUONG (khong phai o, khong phai luot quet): `gia_tri_cum` = {thi truong: con so trong [0, 1]}, `xs_nhieu` = con so cua
+    tung CHUOI NHIEU cung engine/nhom/thuoc do (la 'thi truong gia'). T = trung binh cac thi truong ; phan phoi nhieu cua T = trung binh cua M
+    con so rut co hoan lai tu `xs_nhieu` (M = so thi truong, RUT_LAN lan, hat co dinh).
 
-def so_voi_nhieu(qua: int, n: int, tham_chieu: dict | None, engine: int, mau: str | None = None, hon_moc: bool = False) -> dict:
-    """Ket qua THAT (`qua` trong `n` ket luan duoc, nhom 'cao nguyen', engine `engine`) so voi chuoi NHIEU cung engine. QUY TAC R1 (dong bang
-    truoc khi co ket qua that nao, `tai_lieu/VONG_LAP.md`):
-
-    * `CHUA_DU` neu n < 20, hoac chua co tham chieu NHIEU cung engine (khong so engine 3 voi engine 4).
-    * `BAO_HOA` neu nhieu cung dat >= 90% va dang so theo 'qua': tieu chi khong con phan biet -> goi lai voi `hon_moc=True`
-      (qua VA hon mua-giu/ban-giu).
-    * `VUOT_NHIEU` neu can duoi Wilson cua ket qua that > can tren khoang tin cay cua nhieu VA chenh >= 10 diem.
-    * `DUOI_NHIEU` neu can tren Wilson cua that < can duoi khoang tin cay cua nhieu VA chenh >= 10 diem (am hon ca nhieu: co loi the nguoc?).
-    * con lai `NGANG_NHIEU` (kem MDE ngu y: n that va so chuoi nhieu nam trong ra).
-
-    `mau` = None so voi con so GOP (trung binh theo chuoi, khoang tin cay theo so chuoi); `mau="mua_phang"`... so tung mau.
-    Day la NHAN canh bao cho nhan GIU, khong phai cong chan."""
-    ra = {"tieu_chi": "qua_hon_moc" if hon_moc else "qua", "engine": int(engine), "mau": mau, "n_thuc": int(n)}
-    nh = _nhieu_tham_chieu(tham_chieu, engine, mau, hon_moc)
-    if n < NHIEU_N_TOI_THIEU:
-        return dict(ra, ket_luan="CHUA_DU", ly_do="moi co %d ket qua that ket luan duoc (< %d)" % (n, NHIEU_N_TOI_THIEU))
-    if nh is None:
-        return dict(ra, ket_luan="CHUA_DU", ly_do="chua co doi chung nhieu cho engine %d%s" % (int(engine), " / mau %s" % mau if mau else ""))
-    ty_n, (lo_n, hi_n), so_chuoi = nh
-    thuc = qua / n
-    kt = _wilson(int(qua), int(n))
-    ra.update(thuc=round(thuc, 4), khoang_thuc=kt, nhieu=round(ty_n, 4), khoang_nhieu=[lo_n, hi_n], n_chuoi_nhieu=so_chuoi)
-    if not hon_moc and ty_n >= NHIEU_BAO_HOA:
-        return dict(ra, ket_luan="BAO_HOA", ly_do="nhieu da dat %s 'qua': doi sang tieu chi qua VA hon mua-giu/ban-giu" % _pc(ty_n))
-    if kt[0] > hi_n and thuc - ty_n >= NHIEU_CHENH_TOI_THIEU:
+    * `CHUA_DU` neu < 8 thi truong hoac < 30 chuoi nhieu.
+    * `BAO_HOA` neu thuoc do nhi phan va nhieu TRUNG BINH da >= 90%: khong con phan biet -> doc cot 'qua VA hon mua-giu' hoac 'calmar'.
+    * `VUOT_NHIEU` neu p mot phia <= 0,05 VA T hon trung binh nhieu >= 0,10 ; `DUOI_NHIEU` doi xung ; con lai `NGANG_NHIEU`.
+    Luon kem `mde` = (1,645 + 0,84) x sd(chuoi nhieu) / can(M): chenh nho nhat thay duoc voi luc 80% ; `du_luc` = mde <= 0,10 (neu khong,
+    'ngang' chi la 'khong du thi truong de thay'). NHAN canh bao cho nhan GIU, khong phai cong chan."""
+    if thuoc_do not in THUOC_DO:
+        raise ValueError("thuoc_do phai la mot trong %s" % (THUOC_DO,))
+    ra = {"thuoc_do": thuoc_do, "n_cum": len(gia_tri_cum), "n_chuoi_nhieu": len(xs_nhieu)}
+    if len(gia_tri_cum) < CUM_TOI_THIEU:
+        return dict(ra, ket_luan="CHUA_DU", ly_do="moi co %d thi truong du so lieu (< %d)" % (len(gia_tri_cum), CUM_TOI_THIEU))
+    if len(xs_nhieu) < NHIEU_CHUOI_TOI_THIEU:
+        return dict(ra, ket_luan="CHUA_DU", ly_do="moi co %d chuoi nhieu (< %d)" % (len(xs_nhieu), NHIEU_CHUOI_TOI_THIEU))
+    gt = np.asarray([float(v) for v in gia_tri_cum.values()], float)
+    xs = np.sort(np.asarray([float(v) for v in xs_nhieu], float))          # sap xep: ket qua chi phu thuoc TAP chuoi nhieu, khong phu thuoc thu tu ghi tep
+    m = len(gt)
+    that, nhieu, sd = float(gt.mean()), float(xs.mean()), float(xs.std(ddof=1))
+    rut = np.random.default_rng(RUT_HAT).choice(xs, size=(RUT_LAN, m), replace=True).mean(axis=1)
+    p_vuot = (1 + int(np.sum(rut >= that - 1e-12))) / (RUT_LAN + 1)
+    p_duoi = (1 + int(np.sum(rut <= that + 1e-12))) / (RUT_LAN + 1)
+    mde = (1.645 + 0.84) * sd / math.sqrt(m)
+    ra.update(that=round(that, 4), nhieu=round(nhieu, 4), chenh=round(that - nhieu, 4), sd_nhieu=round(sd, 4), mde=round(mde, 4),
+              du_luc=bool(mde <= NHIEU_CHENH_TOI_THIEU), p_vuot=round(p_vuot, 5), p_duoi=round(p_duoi, 5),
+              khoang_nhieu=[round(float(np.percentile(rut, 2.5)), 4), round(float(np.percentile(rut, 97.5)), 4)])
+    if thuoc_do in THUOC_DO_NHI_PHAN and nhieu >= NHIEU_BAO_HOA:
+        return dict(ra, ket_luan="BAO_HOA", ly_do="nhieu da dat %s o thuoc do nay: doc cot 'qua VA hon mua-giu/ban-giu' hoac 'calmar'" % _pc(nhieu))
+    if p_vuot <= NHIEU_ALPHA and that - nhieu >= NHIEU_CHENH_TOI_THIEU:
         return dict(ra, ket_luan="VUOT_NHIEU")
-    if kt[1] < lo_n and ty_n - thuc >= NHIEU_CHENH_TOI_THIEU:
+    if p_duoi <= NHIEU_ALPHA and nhieu - that >= NHIEU_CHENH_TOI_THIEU:
         return dict(ra, ket_luan="DUOI_NHIEU")
     return dict(ra, ket_luan="NGANG_NHIEU")
+
+
+def doc_that_voi_nhieu(cac_o: list[dict], tham_chieu: dict | None, engine: int, nhom: str = "cao", thuoc_do: str = "qua") -> dict:
+    """Doc cac o THAT (cua MOT engine) theo R2 so voi `NHIEU@e<engine>` trong `tham_chieu` (= `doc_tham_chieu()`). Moi o = {cum: thi truong,
+    mau: che_do_kieu_lot, kl, ln, dd, chay, hon_moc, nhom}. KHONG so engine 3 voi engine 4. Thi truong < 3 ket luan duoc bi bo (`cum_bo`)."""
+    ra0 = {"engine": int(engine), "nhom": nhom, "thuoc_do": thuoc_do}
+    ks = ((tham_chieu or {}).get("kich_ban") or {}).get("NHIEU@e%d" % int(engine))
+    tc = (((ks or {}).get("nhieu") or {}).get(nhom) or {}).get(thuoc_do)
+    if not tc or not tc.get("xs"):
+        return dict(ra0, n_cum=0, n_chuoi_nhieu=0, ket_luan="CHUA_DU", ly_do="chua co doi chung nhieu cho engine %d / nhom %s" % (int(engine), nhom))
+    ecdf = (ks.get("ecdf") or {}).get(nhom) or {}
+    theo_cum: dict = {}
+    for o in cac_o:
+        if o.get("nhom", nhom) == nhom:
+            theo_cum.setdefault(o["cum"], []).append(o)
+    gt: dict = {}
+    for c, lst in theo_cum.items():
+        tb, _ = tb_o(lst, thuoc_do, ecdf)
+        if tb is not None:
+            gt[c] = tb
+    ra = so_voi_nhieu_cum(gt, tc["xs"], thuoc_do)
+    ra.update(ra0, so_o=sum(len(v) for v in theo_cum.values()), cum_bo=sorted(c for c in theo_cum if c not in gt))
+    tm = (((ks.get("theo_mau") or {}).get(nhom) or {}).get(thuoc_do)) if thuoc_do in THUOC_DO_NHI_PHAN else None
+    if tm and gt and "nhieu" in ra:                  # co cau mau cua ket qua that lech co cau mau cua nhieu -> so sanh 'tao' tren thuoc do nhi phan
+        mix = []
+        for c in gt:
+            v = [tm[o["mau"]]["tb"] for o in theo_cum[c] if o.get("mau") in tm and gia_tri_o(o, thuoc_do) is not None]
+            if v:
+                mix.append(float(np.mean(v)))
+        if len(mix) == len(gt):
+            ra["nhieu_cung_co_cau_mau"] = round(float(np.mean(mix)), 4)
+            if abs(ra["nhieu_cung_co_cau_mau"] - ra["nhieu"]) >= 0.05:
+                ra["canh_bao"] = ("co cau mau cua ket qua that lech co cau mau cua nhieu: nhieu cung co cau mau la %s (khong phai %s) - doc them cot calmar"
+                                  % (_pc(ra["nhieu_cung_co_cau_mau"]), _pc(ra["nhieu"])))
+    return ra
+
+
+def doc_that_theo_engine(cac_o: list[dict], tham_chieu: dict | None, nhom: str = "cao", thuoc_dos=THUOC_DO) -> dict:
+    """{engine: {thuoc_do: ket qua R2}} - tach theo engine cua tung ket qua that (ma cu = 3 ; ma moi = 4)."""
+    ra: dict = {}
+    for e in sorted({int(o.get("engine") or 3) for o in cac_o}):
+        lst = [o for o in cac_o if int(o.get("engine") or 3) == e and o.get("nhom", nhom) == nhom]
+        if lst:
+            ra[e] = {td: doc_that_voi_nhieu(lst, tham_chieu, e, nhom, td) for td in thuoc_dos}
+    return ra
+
+
+def cac_o_that(ung_vien: list[dict], kq: dict[str, dict]) -> list[dict]:
+    """Ket qua THAT cua vong lap (`vong_lap.kq_cung_thuoc_do`: ung vien + ket qua) -> cac o cua R2. 'Chay tai khoan' lay tu ly do (ma cu ghi
+    'chay tai khoan o lot thu', ma moi ghi 'CHAY TAI KHOAN ...')."""
+    from nhan import vong_lap as VL
+    ra = []
+    for u in ung_vien:
+        r = kq.get(u["id"])
+        if not r:
+            continue
+        ts = u.get("tham_so") or {}
+        che_do, kieu = u.get("che_do") or ts.get("che_do"), u.get("kieu_lot") or ts.get("kieu_lot") or "phang"
+        ra.append({"cum": u["ma"], "mau": "%s_%s" % (che_do, kieu), "nhom": VL.nhom_cua(u), "kl": r.get("ket_luan"),
+                   "ln": r.get("loi_suat_nam_pct"), "dd": r.get("maxdd_pct"), "hon_moc": r.get("hon_moc_pct"),
+                   "chay": "chay tai khoan" in str(r.get("ly_do") or "").lower(), "engine": r.get("phien_ban_engine") or VL.ENGINE_CU})
+    return ra
+
+
+def chenh_voi_nhieu(tk: dict, khoa: str, nhom: str = "cao", thuoc_do: str = "qua") -> dict | None:
+    """DO NHAY cua phep do: kich ban `khoa` (vd 'DAO_DONG@e4') co thuoc do cao hon NHIEU cung engine bao nhieu? (chenh trung binh theo chuoi,
+    z kieu Welch). Neu chang KIEM nhay thi chenh > 0 va tang theo lieu loi the ; None khi thieu."""
+    ks = (tk.get("kich_ban") or {}).get(khoa)
+    ref = (tk.get("kich_ban") or {}).get("NHIEU@e%d" % int(ks["engine"])) if ks else None
+    if not ks or not ref:
+        return None
+    a, b = ks["nhieu"][nhom][thuoc_do], ref["nhieu"][nhom][thuoc_do]
+    if a["tb"] is None or b["tb"] is None or a["n"] < 2 or b["n"] < 2:
+        return None
+    se = math.sqrt(a["sd"] ** 2 / a["n"] + b["sd"] ** 2 / b["n"])
+    d = a["tb"] - b["tb"]
+    return {"chenh": round(d, 4), "z": round(d / se, 2) if se > 0 else None, "n": a["n"], "n_nhieu": b["n"]}
+
+
+def kich_thuoc_phep_thu(dong: list[dict], kb: str = "NHIEU", khop_bar: str = "duong_di", so_don_vi: int = 12, lan: int = 500) -> dict | None:
+    """KICH THUOC THAT cua `vong_lap.so_sanh_nhom` (McNemar ghep cap + Fisher): phep thu do coi moi o la doc lap nhung cac o cua mot thi truong
+    chung MOT duong gia. Lay ngau nhien `so_don_vi` chuoi NHIEU (= 'thi truong' that cua may nha), chay CHINH `so_sanh_nhom` tren moi o cua chung,
+    lap `lan` lan: tren du lieu khong co loi the, ty le ket luan 'HON' phai ~ <= 5%. Neu > 10% thi chi doc `so_sanh_nhom` theo nguong thuc nghiem
+    (`chenh_p95`). None khi it hon `so_don_vi` chuoi."""
+    from nhan import vong_lap as VL
+    hop, _ = _hop_chinh(dong)
+    rows = _cac_chuoi(hop, kb, khop_bar)
+    if len(rows) < so_don_vi or so_don_vi < 1 or lan < 1:
+        return None
+    rng = np.random.default_rng(RUT_HAT)
+    dem = {"cao_vs_ngau": {"HON": 0, "KEM": 0, "NGANG": 0, "CHUA_DU": 0}, "cao_vs_doi": {"HON": 0, "KEM": 0, "NGANG": 0, "CHUA_DU": 0}}
+    chenh: dict = {"cao_vs_ngau": [], "cao_vs_doi": []}
+    cap = {"cao_vs_ngau": [], "cao_vs_doi": []}
+    for _ in range(int(lan)):
+        chon = rng.choice(len(rows), size=int(so_don_vi), replace=False)
+        uv, kq = _ung_vien_va_kq([(rows[int(i)], t, m) for i in chon for t, m in rows[int(i)]["mau"].items()])
+        ss = VL.so_sanh_nhom(uv, kq)
+        for k in dem:
+            dem[k][ss[k]["ket_luan"]] += 1
+            if ss[k]["chenh"] is not None:
+                chenh[k].append(float(ss[k]["chenh"]))
+            cap[k].append(ss[k]["cap"] if k == "cao_vs_ngau" else min(ss[k]["n_cao"], ss[k]["n_doi"]))
+    ra = {"kich_ban": kb, "khop_bar": khop_bar, "engine": ENGINE_CUA[khop_bar], "so_don_vi": int(so_don_vi), "lan": int(lan), "n_chuoi_nhieu": len(rows)}
+    for k in dem:
+        ch = np.asarray(chenh[k], float)
+        ra[k] = {"dem": dem[k], "ty_le_hon": round(dem[k]["HON"] / lan, 4), "ty_le_kem": round(dem[k]["KEM"] / lan, 4),
+                 "ty_le_chua_du": round(dem[k]["CHUA_DU"] / lan, 4), "so_cap_tb": round(float(np.mean(cap[k])), 1),
+                 "chenh_p05": round(float(np.percentile(ch, 5)), 4) if len(ch) else None,
+                 "chenh_p95": round(float(np.percentile(ch, 95)), 4) if len(ch) else None,
+                 "doc_theo_thuc_nghiem": bool(dem[k]["HON"] / lan > 0.10 or dem[k]["KEM"] / lan > 0.10)}
+    return ra
 
 
 # ----------------------------------------------------------------------------------------------- doc / ghi tep

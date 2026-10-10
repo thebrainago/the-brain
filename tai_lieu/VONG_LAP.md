@@ -163,3 +163,16 @@ ti le o ngau nhien cung luoi 'qua'; cac ti le do **va hon mua-giu/ban-giu**; ti 
   => cung ket luan o be mat; khong du de bat chenh nho. De khong phai tin vao day: lo `NHIEU 3.000 o` (60 chuoi, engine 3) la tham chieu dung cau hinh may nha.
 - Da thay ngay tu 12 chuoi: tren chuoi **chi co nhieu**, mua_phang bi xep CAO_NGUYEN 12/12 va o tot nhat 'qua' ngoai mau 12/12 (nhung 'qua VA hon mua-giu' chi 6/12 ~ tung dong xu).
   Nghia la 'qua' gan nhu khong phan biet loi the voi nhieu o it nhat mau nay: ly do cua BAO_HOA o 8.3 va cua nhom doi chung o muc 3.
+
+### 8.6 Da lam duoc (10/10/2026, dong bang lai): cong cu doc + ket qua MOT PHAN
+- Cong cu: `nhan/doi_chung_nhieu.py` (69 test, `nhan/test_doi_chung_nhieu.py`; kiem bang ~45 loi co y, con 1 loi song sot: `calmar` cua nhom 'doi' xep theo nhom 'cao', thap uu tien).
+  Them so voi 8.3: thuoc do `duyet` (= qua VA |maxDD| < 80, dung tieu chi cua chu du an), canh bao khi mau cua 'nhieu' va mau cua ket qua that khac co cau (`nhieu_cung_co_cau_mau`),
+  doc ket qua that theo TUNG engine rieng (`doc_that_theo_engine`), do kich thuoc that cua `so_sanh_nhom` (`kich_thuoc_phep_thu`: rut chuoi khong hoan lai, chay phep that nhieu lan).
+- Do kich thuoc (test co dinh): khi cac o cua cung mot thi truong dung chung duong gia, McNemar/Fisher cua muc 3 bao 'HON' hoac 'KEM' khoang 1/3 so lan du khong co hieu ung (danh nghia <= 10%)
+  -> `doc_theo_thuc_nghiem = True`: chi doc `so_sanh_nhom` theo nguong thuc nghiem `chenh_p05/p95`, khong theo p ly thuyet. Chua chay do nay tren lo lon.
+- Lo hieu chuan lon bi he thong cat (qua gioi han thoi gian nen). CON LAI (khong chay lai tu dong): NHIEU engine 4 (100 chuoi) / NHIEU engine 3 (200 chuoi, dung cau hinh may nha) / NHIEU_THAP / NHIEU_CAO ·
+  BETA / XU_HUONG / ba lieu DAO_DONG (30 chuoi moi cai). Chua xong: giai doan 3.000 o. File tho `reports/vong_lap/doi_chung_nhieu.jsonl`, tom tat `.json`; tai tao: `python3 -m nhan.doi_chung_nhieu --tong-ket`.
+- Doc so (MO TA, khong phai ket luan): tren chuoi CHI co nhieu o tot nhat 'qua' 86% (engine 4) / 88% (engine 3), o ngau nhien 84% / 85% -> 'qua' khong phan biet o tot nhat voi o ngau nhien (bao hoa).
+  'qua VA hon mua-giu': o tot nhat 55-57%, o ngau nhien 52%. Khi them co hoi quy that (ba lieu DAO_DONG; VR(288) 0,96 / 0,86 / 0,54): 'qua VA hon mua-giu' o tot nhat 63% / 71% / 77%, o ngau nhien 63% / 61% / 72%.
+  => chi phan biet duoc tu lieu manh, va chenh 'o tot nhat - o ngau nhien' chi vai diem: xep hang trong mau gan nhu khong them thong tin so voi o ngau nhien tren chuoi tong hop nay. Day la lo tham chieu cho nhan GIU, khong phai cong chan.
+- Quyet dinh 10/10 sau lan chu du an nhac 'dung lam module nho': dong bang hang muc nay o day; KHONG noi sau vao `vong_lap` (task #27) va KHONG chay them lo hieu chuan lon truoc khi co ket qua chuoi that.
