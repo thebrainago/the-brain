@@ -265,6 +265,31 @@ def nap(ma: str, khung: str = "H4") -> pd.DataFrame:
     return df
 
 
+def dang_ky_tong_hop(ma: str, khung: str, df: pd.DataFrame) -> None:
+    """Dua MOT chuoi tong hop do nguoi goi tu sinh (vd `doi_chung_nhieu`: kich ban ngoai `KICH_BAN`, hoac dai hon 9000 bar) vao bo nho de
+    `nap` / `chi_phi` / moi cong cu `nc_thi_nghiem` doc no nhu mot ma. CHI nhan ten `TONG_HOP_*`: ma that khong bao gio di qua cua nay
+    (khong ai duoc nhet du lieu gia duoi ten mot symbol that). Khong ghi dia, khong dong vao so cai."""
+    ma, khung = str(ma).upper(), str(khung).upper()
+    if not la_tong_hop(ma):
+        raise ValueError("chi dang ky duoc ma %s*, nhan '%s'" % (TIEN_TO_TONG_HOP, ma))
+    cot = {"open", "high", "low", "close", "spread"}
+    thieu = sorted(cot - set(df.columns))
+    if thieu:
+        raise ValueError("chuoi tong hop thieu cot %s" % thieu)
+    if len(df) == 0 or not df.index.is_monotonic_increasing:
+        raise ValueError("chuoi tong hop phai khong rong va co chi so thoi gian tang dan")
+    _DEM[(ma, khung)] = df
+
+
+def quen_tong_hop(ma: str, khung: str | None = None) -> None:
+    """Bo chuoi tong hop da dang ky (va mo hinh chi phi suy ra tu no) khoi bo nho - quet nhieu chuoi khong lam day RAM."""
+    ma = str(ma).upper()
+    for k in [k for k in _DEM if k[0] == ma and (khung is None or k[1] == str(khung).upper())]:
+        _DEM.pop(k, None)
+    for k in [k for k in _DEM_CP if k[0] == ma]:
+        _DEM_CP.pop(k, None)
+
+
 def chi_phi(ma: str, df: pd.DataFrame) -> CP.MoHinhChiPhi:
     """Mo hinh chi phi cho `df` (tien to cua doan dang xet).
 

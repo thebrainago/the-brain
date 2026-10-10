@@ -90,7 +90,76 @@ Dieu phoi dinh ky `Giam sat may nha moi gio`: `python3 -m nhan.giam_sat_may_nha`
 
 ## 7. Viec ke tiep (dung thu tu)
 
-1. May nha chay het cac don `vl-xn-*` -> doc tong ket: ty le qua cua vung lai so voi nhom doi chung (pheu co hon boc tham khong? muc 3, phan "Cach doc ket qua").
+1. May nha chay het cac don `vl-xn-*` -> doc tong ket: ty le qua cua vung lai so voi nhom doi chung (pheu co hon boc tham khong? muc 3, phan "Cach doc ket qua")
+   VA so voi chuoi CHI CO NHIEU (muc 8: ty le qua 'tu nhien' cua chang KIEM la bao nhieu).
 2. Co che dau tien qua nhan GIU -> kiem do ben: thu cac o lan can cua nguoi qua (khong chi mot o), roi `vl-xn4-*` (engine v4).
 3. Co che GIU -> AP DUNG: HEPHAESTUS rai luoi tham so quanh co che, SEEKER di tim nguon cung loai (TIM co muc tieu).
 4. Khi du ket qua: chu du an/cloud quyet NIEM PHONG theo luat (mot lan, doan dong bang). Khong tu dong.
+
+## 8. Doi chung nhieu: do chinh chang KIEM tren chuoi CO DAP AN (ke hoach DONG BANG 10/10/2026)
+
+Chang KIEM an 50% gio may va chua tung duoc do. "Qua ngoai mau" cua 1.022 don sap ve co the cao du KHONG co loi the nao (lenh luoi / martingale:
+nhieu lai nho, hiem khi lo lon -> tren ~1,7 nam ngoai mau xac suat "co lai va khong chay tai khoan" tu nhien cao). Ty le qua cua may nha chi co nghia
+khi biet **chuoi chi co nhieu** cho ra bao nhieu. `python3 -m nhan.doi_chung_nhieu` (Linux, khong can du lieu ngoai) chay CHINH duong ong that:
+`quet_luoi` (9 mau che_do x kieu_lot; da doi chieu khop tung don trong 2.303 don quet 3.000 o cua may nha, 0 lech: test
+`test_mau_khop_tung_luot_quet_san_xuat_cua_may_nha`) -> o tot nhat -> `danh_gia_luoi` tren xac_nhan -> o ngau nhien cung luoi -> `so_sanh_nhom`; nhung tren chuoi
+TONG_HOP co DAP AN. Ket qua la NHAN canh bao, khong phai cong chan (CLAUDE.md: tieu chi duyet la co lai + maxDD < 80%).
+
+### 8.1 Thiet ke (dong bang truoc khi chay lo lon)
+- Chuoi: H1, 54.600 bar (kham_pha 60% / xac_nhan 20% / niem_phong 20%: doan niem_phong KHONG BAO GIO duoc cat o day), bien dong ~9%/nam (GARCH), spread ~15 diem,
+  hat 1..N (hat 9001+ chi de do trung thuc, khong vao ket qua). Mac dinh quet 1.000 o/mau; san xuat quet 3.000 o (xem 8.5).
+- Moi chuoi chay du 9 mau; MOI chuoi la mot don vi doc lap (9 mau chung mot duong gia nen duoc lay trung binh trong chuoi truoc khi gop).
+
+| kich ban | trong chuoi co gi | engine | so chuoi |
+|---|---|---|---|
+| NHIEU | khong co loi the nao: thuoc do chinh | 3 (`cuc_tri`: may nha dang chay) | 200 |
+| NHIEU | nhu tren | 4 (`duong_di`: ma moi) | 100 |
+| DAO_DONG_RAT_YEU / DAO_DONG_YEU / DAO_DONG | co thanh phan HOI QUY that, 3 lieu (nua doi 288/144/48 bar) | 4 | 100 moi |
+| NHIEU_THAP / NHIEU_CAO | nhu NHIEU, bien dong x0,65 / x1,35 | 4 | 100 moi |
+| BETA / XU_HUONG | troi duong / quan tinh (biet truoc) | 4 | 100 moi |
+| NHIEU (san xuat: 3.000 o) | thuoc do chinh, dung cau hinh may nha | 3 | 60 |
+
+- Ba muc DAO_DONG dung de biet phep do co **NHAY** khong (variance ratio o chan 12/48/144/288 bar, do 10/10: .999/.982/.961/.956 ; 1.002/.968/.924/.873 ;
+  .956/.822/.636/.533). Neu ty le 'qua' / 'hon mua-giu' khong tang theo lieu loi the thi chang KIEM mu: moi ket luan 'ngang nhieu' tu day vo nghia.
+- Khong so engine 3 voi engine 4 (`NHIEU@e3` chi so voi ket qua engine 3 cua may nha, `NHIEU@e4` voi `vl-xn4-*`).
+- Lenh (chay noi tiep, moi lenh co the ngat va chay tiep: `--ra` ghi tung chuoi mot dong; `--luong` = so nhan, de 4 tren Linux cloud, ~34 o may nha):
+```
+python3 -m nhan.doi_chung_nhieu --kich-ban NHIEU --khop-bar cuc_tri --so-chuoi 200
+python3 -m nhan.doi_chung_nhieu --kich-ban NHIEU --so-chuoi 100
+python3 -m nhan.doi_chung_nhieu --kich-ban DAO_DONG_YEU,DAO_DONG,DAO_DONG_RAT_YEU,XU_HUONG,BETA,NHIEU_THAP,NHIEU_CAO --so-chuoi 100
+python3 -m nhan.doi_chung_nhieu --kich-ban NHIEU --khop-bar cuc_tri --so-chuoi 60 --toi-da-o 3000 --ra reports/vong_lap/doi_chung_nhieu_3000
+```
+
+### 8.2 Do cai gi
+Theo (kich ban, engine, mau), gop THEO CHUOI: ti le luot quet xep CAO_NGUYEN; ti le o tot nhat 'qua' ngoai mau (rieng nhom cao nguyen = nhom vong lap that kiem);
+ti le o ngau nhien cung luoi 'qua'; cac ti le do **va hon mua-giu/ban-giu**; ti le **duyet theo tieu chi chu du an** (co lai + maxDD < 80%); calmar cua o tot nhat
+(thuoc do 'lien tuc' khong bi bao hoa) ; bang chan doan 3x4 tren 150 o ngau nhien/mau: P(qua ngoai mau | co lai trong mau) - P(qua | khong lai trong mau)
+(= 'co lai trong mau' du bao duoc gi khong; tren nhieu ky vong ~0, tren DAO_DONG ky vong > 0).
+
+### 8.3 Quy tac doc ket qua THAT so voi nhieu (R2) - dong bang truoc khi doc ket qua that nao
+- **Don vi doc lap la THI TRUONG**, khong phai o hay luot quet: 9 mau cua mot (thi truong, khung) chung MOT duong gia, cac khung cua mot thi truong chung cua so ngoai mau.
+  Moi thi truong cho MOT con so trong [0, 1]: (a) ty le qua tren >= 3 ket luan duoc cua no, hoac (b) trung binh PHAN VI calmar cua cac o tot nhat cua no so voi chuoi nhieu cung
+  engine va cung mau (phan vi trung diem khi bang nhau; chay tai khoan = 0; kham pha khong do duoc thi bo). Can >= 8 thi truong, neu khong `CHUA_DU`.
+- T = trung binh cac con so cua cac thi truong. Phan phoi nhieu cua T = trung binh cua M con so rut co hoan lai tu tap con so THEO CHUOI cua kich ban NHIEU cung engine
+  (M = so thi truong that; can >= 30 chuoi nhieu; 20.000 lan rut; hat co dinh).
+- Ket luan: `BAO_HOA` (nhieu trung binh >= 90% o thuoc do nhi phan 'qua': khong con phan biet, phai doc cot 'qua VA hon mua-giu' hoac thuoc do calmar); `VUOT_NHIEU`
+  (p mot phia <= 0,05 VA T hon trung binh nhieu >= 0,10); `DUOI_NHIEU` (doi xung); con lai `NGANG_NHIEU`, LUON kem MDE =
+  (1,645 + 0,84) x do lech chuan(chuoi nhieu) / can(M) (chenh nho nhat thay duoc voi luc 80%). Cac hang so (8 / 3 / 30 / 20.000 / 0,05 / 0,10 / 0,90) la hang so trong code, khong doi sau khi nhin so that.
+- Phep `so_sanh_nhom` da dong bang o muc 3 coi moi o la doc lap: truoc khi doc no tren ket qua that, **do kich thuoc that cua no** tren du lieu nhieu (12 'thi truong' = 12 chuoi
+  nhieu, lap nhieu lan): neu ty le 'HON' sai > 10% thi chi doc no theo nguong toi han 5% thuc nghiem.
+- Gioi han (nhin ro): chuoi gia la AUDCAD-like H1 ~9%/nam; may nha quet M5-H1 tren 12 thi truong that (duoi day, gom bien dong, phi khac). Ket qua cu cua may nha (ma cu) khong in `hon_moc_pct`
+  (chi calmar / maxDD / chay). => ket qua doc la NHAN canh bao. Nhieu lay tu chuoi that cua tung thi truong (dao dau / block-bootstrap) can du lieu o may nha: chua lam.
+
+### 8.4 Ket qua doi hanh dong the nao (dong bang truoc khi co ket qua)
+- BAO_HOA (nhieu cung 'qua' >= 90%): 'qua' khong phan biet; nhan GIU phai doc theo thuoc do khong bao hoa (hon mua-giu, calmar so voi phan vi nhieu); 1.022 ket qua cua may nha
+  chi cho biet ty le chay tai khoan, chua phai bang chung loi the. Chay them: NHIEU voi ngoai mau dai gap doi (109.200 bar, 50 chuoi) de xem cua so dai co phan biet duoc khong.
+- Ket qua that NGANG_NHIEU: khong them gio may vao quet sau hoac kiem lai cung luoi; chuyen sang chieu rong (thi truong moi, co che moi, nguon moi).
+- VUOT_NHIEU: co che giu lai nhu UNG VIEN; can bang chung doc lap (engine 4, tester, doan niem phong theo luat).
+- Ty le 'qua' / chenh 'co lai trong mau' khong tang theo lieu DAO_DONG: chang KIEM khong thay duoc loi the that; doi thiet ke kiem truoc khi tin bat ky 'ngang' nao.
+
+### 8.5 Do trung thuc cua '1.000 o thay cho 3.000 o' (10/10, 12 chuoi NHIEU, hat 9001-9012, engine 4)
+- mua_phang: CAO_NGUYEN 12/12 ca hai; o tot nhat 'qua' 12/12 (1.000 o) va 11/11 (3.000 o); o ngau nhien 12/12 ca hai.
+- ban_phang: hinh dang 4/5/1/2 (CAO/CAI/KHONG_CO_LAI/HON_HOP) voi 1.000 o, 5/5/1/1 voi 3.000 o; o tot nhat 'qua' 5/11 va 3/11; o ngau nhien 6/11 va 7/11.
+  => cung ket luan o be mat; khong du de bat chenh nho. De khong phai tin vao day: lo `NHIEU 3.000 o` (60 chuoi, engine 3) la tham chieu dung cau hinh may nha.
+- Da thay ngay tu 12 chuoi: tren chuoi **chi co nhieu**, mua_phang bi xep CAO_NGUYEN 12/12 va o tot nhat 'qua' ngoai mau 12/12 (nhung 'qua VA hon mua-giu' chi 6/12 ~ tung dong xu).
+  Nghia la 'qua' gan nhu khong phan biet loi the voi nhieu o it nhat mau nay: ly do cua BAO_HOA o 8.3 va cua nhom doi chung o muc 3.
