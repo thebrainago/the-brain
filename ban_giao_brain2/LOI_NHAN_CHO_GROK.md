@@ -20,7 +20,7 @@ LINK (kho công khai, đọc không cần đăng nhập)
 RÀNG BUỘC TÔI ĐÃ CHỐT
 1. Chạy trên MÁY HIỆN CÓ. Không nâng số lõi, không mua VPS, không thuê máy chủ, không đăng ký dịch vụ trả tiền. Nghĩ là cần mua gì thì phải có SỐ ĐO chứng minh nghẽn là do tính toán (không phải do quét sai chỗ), rồi HỎI tôi trước.
 2. Mục tiêu là TIỀN, không phải sự chặt chẽ học thuật. Trước mỗi việc tự hỏi: việc này có đưa một thứ ĐANG RA TIỀN lại gần "của ta" hơn không? Không thì để sau.
-3. Tiêu chí duyệt của tôi (25/09): có lãi sau phí và maxDD dưới 80 % (đòn bẩy ≤ 10); martingale / DCA / lưới đều hợp lệ. Cổng của brain2 (theo mã Claude đọc ở commit 129f6a6 ngày 10/10: t ≥ 2,0 / 1,5; ≥ 47 / ≥ 20 lệnh; placebo p ≤ 0,05; cháy ≤ 5 %/năm) đang chặt hơn thế. Hãy hỏi tôi MỘT câu ngắn: brain2 theo tiêu chí 25/09 hay giữ cổng hiện tại? Chưa có trả lời thì đừng nới cổng; chỉ được THÊM nhãn cảnh báo.
+3. Tiêu chí duyệt của tôi (25/09): có lãi sau phí và maxDD dưới 80 % (đòn bẩy ≤ 10); martingale / DCA / lưới đều hợp lệ. Cổng của brain2 (theo mã brain2 mà Claude bên the-brain đọc ở commit 129f6a6 ngày 10/10: t ≥ 2,0 / 1,5; ≥ 47 / ≥ 20 lệnh; placebo p ≤ 0,05; cháy ≤ 5 %/năm) đang chặt hơn thế. Hãy hỏi tôi MỘT câu ngắn: brain2 theo tiêu chí 25/09 hay giữ cổng hiện tại? Chưa có trả lời thì đừng nới cổng; chỉ được THÊM nhãn cảnh báo.
 4. Số phải ĐO ĐƯỢC. Chưa đo được thì ghi "CHƯA ĐO ĐƯỢC" (không ghi là âm). Kết quả mô phỏng ghi rõ "mô phỏng"; đừng nói "ra tiền" khi mới có mô phỏng.
 5. Không đưa khóa / token / mật khẩu / số tài khoản vào kho. Bot, file .set, lịch sử lệnh thô của người khác không bao giờ vào git.
 
@@ -45,7 +45,7 @@ Grok: đọc gói bàn giao từ the-brain trước khi làm gì cho brain2. B�
 Ràng buộc: chạy trên máy hiện có; KHÔNG nâng lõi, KHÔNG mua VPS / dịch vụ trả tiền (muốn mua gì phải có số đo và hỏi tôi trước).
 Mục tiêu là tiền thật. Duyệt = lãi sau phí và maxDD < 80 % (tiêu chí 25/09 của tôi); cổng hiện tại của brain2 chặt hơn → hỏi tôi MỘT câu trước khi đổi, đừng tự nới.
 Gợi ý việc đầu (ý kiến, không phải lệnh): P1 kiểm mô phỏng lưới bằng 15 ô sạch; P4 đối chứng nhiễu; P3 swap theo từng lệnh.
-Số "chưa đo được" thì nói "chưa đo được", mô phỏng thì ghi "mô phỏng". Báo cáo cho tôi lời thường 3–8 dòng, thẳng thắn "chưa" khi chưa xong. Số trong gói là của the-brain: kiểm lại trên dữ liệu brain2.
+Chưa đo được thì ghi "CHƯA ĐO ĐƯỢC" (đừng ghi là âm); mô phỏng thì ghi "mô phỏng". Báo cáo cho tôi lời thường 3–8 dòng, thẳng thắn "chưa" khi chưa xong. Số trong gói là của the-brain: kiểm lại trên dữ liệu brain2.
 ```
 
 ---

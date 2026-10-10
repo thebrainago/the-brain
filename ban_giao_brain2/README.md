@@ -28,7 +28,7 @@ Các đường dẫn dạng `nhan/…`, `tai_lieu/…`, `reports/…`, `config/�
 - Ví dụ: `nhan/luoi.py` → `https://raw.githubusercontent.com/thebrainago/the-brain/claude/autonomous-trading-system-rzzt7h/nhan/luoi.py`
 - Cả gói: `https://github.com/thebrainago/the-brain/tree/claude/autonomous-trading-system-rzzt7h/ban_giao_brain2`
 
-Link nhánh có thể chết nếu nhánh bị gộp / xóa → dùng link **ghim commit** do chủ dự án đưa kèm (không bao giờ đổi), hoặc tìm thư mục `ban_giao_brain2/` trên nhánh mặc định. Không mở được link nào → nói chủ dự án, sẽ có bản zip của đúng thư mục này.
+Link nhánh có thể chết nếu nhánh bị gộp / xóa → dùng link **ghim commit** do chủ dự án đưa kèm (không bao giờ đổi), hoặc (nếu nhánh đã được gộp) tìm thư mục `ban_giao_brain2/` trên nhánh mặc định `main`. Không mở được link nào → nói chủ dự án, sẽ có bản zip của đúng thư mục này.
 
 Tệp the-brain được trích nhiều nhất (đọc khi cần, không bắt buộc): `nhan/luoi.py` (engine lưới), `nhan/swap_uoc.py`, `nhan/hieu_chuan_luoi.py`, `nhan/doi_chung_nhieu.py` (đã đóng băng — đừng chép nguyên), `tai_lieu/VONG_LAP.md`, `tai_lieu/RA_SOAT_KIEN_TRUC_03102026.md`, `tai_lieu/NGUON_NGUOI_THANG.md`, `tai_lieu/TOI_UU_TOKEN.md`, `reports/chan_doan_hieu_suat_08102026.md`.
 
