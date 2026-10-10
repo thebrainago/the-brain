@@ -235,21 +235,34 @@ def chep_nhi_phan(nguon: str, ten: str, ten_terminal: str, sha_mong_doi: str) ->
 
 def viet_ini(ten: str, ea: str, tap_set: str, symbol: str, khung: str,
              tu: str, den: str, model: int = 4, von: int = 10000,
-             don_bay: int = 100, ten_terminal: str = "exness") -> Path:
+             don_bay: int = 100, ten_terminal: str = "exness",
+             toi_uu: int = 0, tieu_chi: int = 0, inputs_ini: str = "") -> Path:
     """`.ini` cho tester.
 
     `Report=` PHAI la duong TUONG DOI - duong tuyet doi bi lo di khong bao loi
     (bai hoc 27/07), va file ra nam trong thu muc DU LIEU cua terminal.
     `Model=4` la tick that: xem cai bay 1 o dau file.
+
+    `toi_uu=1` = MT5 Optimize QUET DAY DU (khong dung 2 = di truyen: bo sot ca mot co che khi luoi nho, xem
+    `chay_bench_quan_tri.viet_ini`): khoang `Khoa=v||tu||buoc||den||Y` nam trong .set (`ExpertParameters`) VA, neu co
+    `inputs_ini`, trong muc `[TesterInputs]` cua .ini (cach cac script cu da chay that tren MT5) - cung noi dung nen
+    khong the mau thuan. Ket qua la bang `<Report>.xml` (moi dong mot pass), khong phai `.htm`. Chay tren may LOCAL
+    (`UseRemote=0`, `UseCloud=0`): EA khong bao gio roi khoi may. Mac dinh `toi_uu=0` = chay don, van ban .ini y nhu cu.
     """
+    if int(toi_uu) not in (0, 1):
+        raise ValueError("toi_uu chi nhan 0 (chay don) hoac 1 (quet day du); 2 = di truyen bo sot to hop")
     mql5, _, _ = _duong(ten_terminal)
     ra = mql5.parent / "_bao_cao"
     ra.mkdir(parents=True, exist_ok=True)
+    noi_toi_uu = (f"Optimization={int(toi_uu)}\nOptimizationCriterion={int(tieu_chi)}\nUseLocal=1\nUseRemote=0\nUseCloud=0\n"
+                  if toi_uu else "Optimization=0\n")
     noi = (f"[Tester]\nExpert=_tu_dong{chr(92)}{ea}\nExpertParameters={tap_set}\n"
            f"Symbol={symbol}\nPeriod={khung}\nModel={model}\nExecutionMode=0\n"
-           f"Optimization=0\nFromDate={tu}\nToDate={den}\nForwardMode=0\n"
+           f"{noi_toi_uu}FromDate={tu}\nToDate={den}\nForwardMode=0\n"
            f"Deposit={von}\nCurrency=USD\nLeverage=1:{don_bay}\nProfitInPips=0\n"
            f"Report=_bao_cao{chr(92)}{ten}\nReplaceReport=1\nShutdownTerminal=1\n")
+    if toi_uu and inputs_ini:
+        noi += f"\n[TesterInputs]\n{inputs_ini.rstrip(chr(10))}\n"
     f = REPORTS / "tester_ini"
     f.mkdir(parents=True, exist_ok=True)
     p = f / f"{ten}.ini"
@@ -368,7 +381,8 @@ def chay_mot(viec: dict) -> dict:
     dat, _cai, _sym = TERMINAL[ten_t]
     _, _, term = _duong(ten_t)
     nhan = viec["nhan"]
-    bc = dat / "_bao_cao" / f"{nhan}.htm"
+    toi_uu = bool(viec.get("toi_uu"))
+    bc = dat / "_bao_cao" / f"{nhan}{'.xml' if toi_uu else '.htm'}"      # Optimize ghi bang pass .xml, chay don ghi .htm
     try:
         bc.unlink()
     except OSError:
@@ -389,7 +403,8 @@ def chay_mot(viec: dict) -> dict:
     ini = viet_ini(nhan, viec["ea"], tap_set, viec["symbol"], viec["khung"],
                    viec["tu"], viec["den"], model=viec.get("model", 4),
                    von=viec.get("von", 10000), don_bay=viec.get("don_bay", 100),
-                   ten_terminal=ten_t)
+                   ten_terminal=ten_t, toi_uu=int(toi_uu), tieu_chi=int(viec.get("tieu_chi", 0)),
+                   inputs_ini=viec.get("tep_set_tho", "") if toi_uu else "")
     dong_terminal(ten_t)
     t0 = time.time()
     subprocess.Popen([str(term), f"/config:{ini}"])
@@ -398,7 +413,7 @@ def chay_mot(viec: dict) -> dict:
     han = viec.get("han_giay", 900)
     while time.time() - t0 < han:
         if bc.exists() and bc.stat().st_size > 2000:
-            time.sleep(2)
+            time.sleep(8 if toi_uu else 2)          # bang pass ghi mot luc o cuoi: cho them cho chac file da ghi xong
             break
         if time.time() - t0 > 90 and not _pid_cua_ten(ten_t):
             break                       # terminal da thoat ma khong ra bao cao

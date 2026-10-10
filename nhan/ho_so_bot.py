@@ -431,18 +431,38 @@ _COT_QUET = ("n_mo", "host_k", "lot_cung", "host_lot", "host_tb", "host_lag", "p
              "lot_dau", "bac", "bac_tang")
 
 
+def _khong_doc_duoc(e_deal: Exception, e_lenh: Exception) -> str:
+    return ("tep khong phai bao cao / CSV deal tester (%s) va cung khong doc duoc nhu export lenh da dong cua MQL5 / MT4 (%s)"
+            % (str(e_deal)[:140], str(e_lenh)[:140]))
+
+
 def chuan_bi(v, ma: str | None = None, pip: float | None = None, hop_dong: float | None = None,
              von_dau: float | None = None, khung_phut: float | None = None) -> Ctx:
     """Bang vi the (`lenh_tester.ghep_vi_the` / `vi_the_tu_tep`) hoac bang lenh chuan (`boc_lich_su.chuan_hoa`) hoac duong dan
     tep bao cao -> Ctx. Chi mot MA moi lan (nhieu ma: chon ma nhieu lenh nhat va canh bao - buoc theo pip khac nhau giua cac ma)."""
     canh_bao: list[str] = []
+    e_deal = None
     if isinstance(v, (str, Path)):
-        v = LT.vi_the_tu_tep(v)
+        try:
+            v = LT.vi_the_tu_tep(v)
+        except ValueError as e:                         # khong phai deal tester -> thu doc nhu export LENH da dong (MQL5 positions / MT4 / HTML Positions)
+            e_deal = e
+            try:
+                v = BL.doc_tep(v)
+            except (ValueError, KeyError) as e_lenh:
+                raise ValueError(_khong_doc_duoc(e_deal, e_lenh)) from e_lenh
     attrs = dict(getattr(v, "attrs", None) or {})
     if "deal_vao" in v.columns:
         o = LT.gop_theo_lenh(v).copy()
     else:
-        o = BL.chuan_hoa(v).copy()
+        try:
+            o = BL.chuan_hoa(v).copy()
+        except (ValueError, KeyError) as e_lenh:
+            if e_deal is None:
+                raise
+            raise ValueError(_khong_doc_duoc(e_deal, e_lenh)) from e_lenh
+        if e_deal is not None and not o["dong"].notna().any():          # CSV deal cut cot khong duoc doc nham thanh danh sach lenh CHUA DONG
+            raise ValueError(_khong_doc_duoc(e_deal, ValueError("khong co lenh nao da dong (thieu gio dong / gia dong)")))
         attrs = {**attrs, **o.attrs}
         o["deal_vao"] = np.arange(1, len(o) + 1)
         o["lot_vao"] = o["lot"]

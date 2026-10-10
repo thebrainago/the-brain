@@ -188,6 +188,12 @@ def _ea_tho_tinh(**kw) -> dict:
     return EAT.tinh(**kw)
 
 
+def _ea_tho_toi_uu(vong_id=None, **kw) -> dict:
+    from nhan import ea_tho_toi_uu as ETU
+    kq = ETU.toi_uu(vong_id=vong_id, **kw)
+    return {k: v for k, v in kq.items() if k != "bang"}         # bang pass day du nam o so tay (tn_id), khong lap lai trong moi cau tra loi
+
+
 def _hieu_chuan_luoi(vong_id=None, **kw) -> dict:
     from nhan import hieu_chuan_luoi as HCL
     return HCL.hieu_chuan(vong_id=vong_id, **kw)
@@ -568,6 +574,27 @@ CONG_CU: list[dict] = [
          "han_giay": {"type": "integer", "description": "chi tester: han chay tester, giay (>= 60)"},
          "quet": {"type": "boolean", "description": "ep bat / tat quet mo phong (mac dinh: tu_kiem va so = bat, luat = tat)"}},
         [], _so_ea_voi_tester),
+    _cc("ea_tho_toi_uu",
+        "MT5 OPTIMIZE cho MOT EA co file (EA cong khai .mq5, hoac .ex5 + .set CUA TAC GIA): MOT lan boot tester chay ca luoi input thay vi "
+        "tung diem rieng (ea_tho_tinh), nhanh hon nhieu. luoi = {input: [tu, buoc, den]} (4..400 to hop, toi da 4 input, ten input PHAI la "
+        "input that cua EA). Chi quet tren doan kham_pha da dong bang; MOI to hop la MOT phep thu (so_phep_thu = so to hop, khong phai 1). "
+        "Chon diem ON DINH nhat (trung vi lai cua o do va cac o ke - khong phai dinh nhon), ghi dinh_tho de thay dinh cao hon diem chon bao "
+        "nhieu, roi xac_nhan DUNG diem do MOT lan qua ea_tho_chay (cong day du: phi do duoc, swap uoc, du lenh). KHONG BAO GIO niem_phong. "
+        "Lai tung pass la TRUOC swap (tester khong ghi swap), chi de xep hang + ve hinh dang (cao_nguyen | lo_cho | cai_gai); DAT chi tu buoc "
+        "xac_nhan. Hong ha tang (tester chet, bang rong / thieu cot input, chi 1 pass, tat ca 0 lenh, input khong tac dong) = CHUA_DO_DUOC, "
+        "khong ghi so tay, KHONG phai AM. Goi lai cung doi so: luoi lay tu so tay, chi lam tiep buoc xac_nhan. Chi chay duoc o may nha co MT5 "
+        "(o cloud tra 'can may nha': giao qua b cau). Bang pass day du nam trong so tay (tn_id), khong in lai o day.",
+        {"ea": _EA, "ma": _MA, "khung": _KHUNG,
+         "luoi": {"type": "object", "description": (
+             "{ten_input: [tu, buoc, den]}, vd {\"InpFast\": [8, 2, 16], \"InpSlow\": [20, 2, 28]} = 25 to hop. Moi input >= 2 gia tri, "
+             "<= 60 gia tri; `den` tren thuc te la gia tri cuoi that co (tu + k*buoc)")},
+         "tham_so": {"type": "object", "description": (
+             "{ten_input: gia_tri_so} gia tri NEN cua cac input KHAC khong nam trong luoi (EA co ma nguon). Loai tru voi bo_set")},
+         "bo_set": {"type": "string", "description": (
+             "duong toi file .set cua tac gia lam gia tri nen (bat buoc voi .ex5; chi cac khoa co trong .set moi doi duoc). Loai tru voi tham_so")},
+         "gt_id": _GT,
+         "xac_nhan": {"type": "boolean", "description": "false = dung o diem on dinh tren kham_pha (trang_thai DANG_CHO_XAC_NHAN); mac dinh true"}},
+        ["ea", "ma", "khung", "luoi"], _ea_tho_toi_uu),
 ]
 
 
@@ -672,7 +699,9 @@ def _thu_lo(ma, khung, thu_muc, loc, tu, den, gt_id, vong_id, ten=None) -> dict:
 #: `quet_luoi` / `thu_luoi` dai ~60 dong: khoi `tham_so_day_du` / `chi_so_luoi` bi cat o ~11% don. Dong nay song sot qua lan cat, nen vong lap
 #: (`nhan/vong_lap.py`) doc duoc tham so + ket qua tu `viec/xong` ma khong phai chay lai. Chi them mot dong, khong doi gi o dau ra cu.
 _TT_KHOA = {"thu_luoi": ("trang_thai", "ly_do", "ma", "khung", "doan", "tn_id", "tham_so", "tien", "lenh", "chi_so_luoi", "engine"),
-            "quet_luoi": ("trang_thai", "ly_do", "ma", "khung", "doan", "tn_id", "tham_so_day_du")}
+            "quet_luoi": ("trang_thai", "ly_do", "ma", "khung", "doan", "tn_id", "tham_so_day_du"),
+            "ea_tho_toi_uu": ("trang_thai", "ly_do", "ma", "khung", "doan", "ea", "tn_id", "gt_id", "so_to_hop", "so_pass", "tong_quan", "chon",
+                              "dinh_tho", "xac_nhan")}
 _TT_CON = {"tien": ("co_lai", "loi_suat_nam_pct", "maxdd_pct", "he_so_lot_tai_tran", "loi_suat_o_tran_pct", "hon_moc_pct", "gioi_han_lot"),
            "lenh": ("so_lenh", "lenh_moi_nam"),
            "chi_so_luoi": ("calmar", "loi_suat_nam_pct", "maxdd_pct", "lenh_nam", "chay"),

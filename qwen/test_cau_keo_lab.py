@@ -343,7 +343,7 @@ class TestTagMa:
     """Nhan kha nang suy ra tu MA dang chay: don can ma moi khong bi bo chay cu nhan nham (08/10/2026, lab nha tre ~270 commit)."""
 
     @staticmethod
-    def _lab(tmp_path, ten, engine=None, trang_ke=False, swap=None, gia=None, lenh=None, so_ea=None):
+    def _lab(tmp_path, ten, engine=None, trang_ke=False, swap=None, gia=None, lenh=None, so_ea=None, toi_uu=None, ho_so=None):
         lab = tmp_path / ten
         if engine is not None:
             ghi(lab, "nhan/luoi.py", "# luoi\nPHIEN_BAN_ENGINE = %d\n" % engine)
@@ -357,6 +357,15 @@ class TestTagMa:
             ghi(lab, "nhan/xuat_lenh_tester.py", "def kiem_bang(van_ban):\n    return {}\n" if lenh is True else lenh)
         if so_ea is not None:                          # so_ea=True: bo so bot goc <-> EA dung lai <-> tester day du; chuoi: noi dung tuy y
             ghi(lab, "nhan/so_ea_voi_tester.py", "def chay_tester(tu, den):\n    return {}\n" if so_ea is True else so_ea)
+        if toi_uu is not None:                         # toi_uu=True: du BA tep (module + dang ky cong cu + viet_ini Optimize); dict: ghi de tung tep
+            tep = {"nhan/ea_tho_toi_uu.py": "def toi_uu(ea, ma, khung, luoi):\n    return {}\n",
+                   "nhan/nc_cong_cu.py": '_cc("ea_tho_toi_uu", "mo ta", {}, [], None)\n',
+                   "ea_tu_dong.py": "def viet_ini(ten, ea, toi_uu=0, inputs_ini=''):\n    return ''\n"}
+            tep.update({} if toi_uu is True else toi_uu)
+            for ten_tep, nd in tep.items():
+                ghi(lab, ten_tep, nd)
+        if ho_so is not None:                          # ho_so=True: ho_so_bot doc thang export lenh MQL5; chuoi: noi dung tuy y
+            ghi(lab, "nhan/ho_so_bot.py", "def _khong_doc_duoc(e_deal, e_lenh):\n    return ''\n" if ho_so is True else ho_so)
         lab.mkdir(parents=True, exist_ok=True)
         return lab
 
@@ -425,6 +434,41 @@ class TestTagMa:
         moi = self._lab(tmp_path, "moi", engine=4, swap=True, gia=True, lenh=True, so_ea=True)
         r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=moi, may="p2", kha_nang=["windows"], chi_lan=[])
         assert r and r["ma"] == "a-so-luat"
+
+    def test_nhan_toi_uu_v1_chi_khi_ma_co_du_ba_phan(self, tmp_path):
+        assert CG.tag_ma(self._lab(tmp_path, "co", engine=4, so_ea=True, toi_uu=True))[-1] == "toi-uu-v1"
+        assert "toi-uu-v1" not in CG.tag_ma(self._lab(tmp_path, "khong", engine=4, so_ea=True))
+        # thieu MOT trong ba phan thi KHONG khai: module co nhung chua dang ky cong cu / ea_tu_dong con viet ini don
+        assert "toi-uu-v1" not in CG.tag_ma(self._lab(tmp_path, "chua_dk", toi_uu={"nhan/nc_cong_cu.py": '_cc("so_ea_voi_tester", "m", {}, [], None)\n'}))
+        assert "toi-uu-v1" not in CG.tag_ma(self._lab(tmp_path, "ini_cu", toi_uu={"ea_tu_dong.py": "def viet_ini(ten, ea):\n    return ''\n"}))
+        assert "toi-uu-v1" not in CG.tag_ma(self._lab(tmp_path, "nhap", toi_uu={"nhan/ea_tho_toi_uu.py": "def chuan_luoi(luoi):\n    return {}\n"}))
+
+    def test_ma_that_cua_repo_khai_toi_uu_v1_va_ho_so_v2(self):
+        ra = CG.tag_ma(CG.GOC)
+        assert "toi-uu-v1" in ra and "ho-so-v2" in ra
+
+    def test_nhan_ho_so_v2_chi_khi_ma_doc_duoc_export_lenh_mql5(self, tmp_path):
+        assert CG.tag_ma(self._lab(tmp_path, "co", engine=4, ho_so=True))[-1] == "ho-so-v2"
+        assert "ho-so-v2" not in CG.tag_ma(self._lab(tmp_path, "cu", engine=4, ho_so="def chuan_bi(v):\n    return v\n"))
+        assert "ho-so-v2" not in CG.tag_ma(self._lab(tmp_path, "khong", engine=4))
+        assert CG.tag_ma(self._lab(tmp_path, "ca_hai", engine=4, so_ea=True, toi_uu=True, ho_so=True))[-2:] == ["toi-uu-v1", "ho-so-v2"]
+
+    def test_don_toi_uu_v1_cho_bo_chay_ma_cu_va_chay_o_bo_chay_ma_moi(self, tmp_path):
+        hop = tmp_path / "hop"
+        CG.bao_dam_thu_muc(goc=hop)
+        _don(hop, "a-toi-uu", "NHE", 1)
+        f = hop / "viec" / "cho" / "a-toi-uu.json"
+        d = json.loads(f.read_text(encoding="utf-8"))
+        d["can"] = ["toi-uu-v1"]
+        f.write_text(json.dumps(d), encoding="utf-8")
+        _don(hop, "z-thuong", "NHE", 9)
+        cu = self._lab(tmp_path, "cu", engine=4, swap=True, gia=True, lenh=True, so_ea=True)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=cu, may="p1", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "z-thuong"             # ma chua co ea_tho_toi_uu: don CHO, khong chay ra 'khong co cong cu' / viet ini don
+        assert not (hop / "viec" / "xong" / "a-toi-uu.json").exists()
+        moi = self._lab(tmp_path, "moi", engine=4, swap=True, gia=True, lenh=True, so_ea=True, toi_uu=True)
+        r = CG.chay_mot_don_dang_cho(goc=hop, kiem_trang=False, lab=moi, may="p2", kha_nang=["windows"], chi_lan=[])
+        assert r and r["ma"] == "a-toi-uu"
 
     def test_don_lenh_v1_cho_bo_chay_ma_cu_va_chay_o_bo_chay_ma_moi(self, tmp_path):
         hop = tmp_path / "hop"

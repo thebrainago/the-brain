@@ -852,6 +852,11 @@ def tag_ma(lab: Path | None = None) -> list[str]:
                      Don `b xuat-lenh` can nhan nay (ma cu khong co lenh do; khong co nhan thi don cho, khong chet).
     - `so-ea-v1`   : `nhan/so_ea_voi_tester` (`nc cc so_ea_voi_tester`: so bot goc <-> EA dung lai <-> may thu MT5 de tim QUY LUAT BACKTEST,
                      can `chay_tester`). Don Mini-Brain CanCuBo can nhan nay: ma cu khong co cong cu do nen don CHO thay vi chet.
+    - `toi-uu-v1`  : `nc cc ea_tho_toi_uu` (MT5 OPTIMIZE cho EA co file: mot lan boot tester quet ca luoi input). Can DU BA: `nhan/ea_tho_toi_uu`
+                     + cong cu da dang ky o `nhan/nc_cong_cu` + `ea_tu_dong.viet_ini` biet viet `Optimization=1` / `[TesterInputs]` (ma cu viet
+                     ini don -> chay MOT diem roi doc nham bang pass). Don `ea_tho_toi_uu` can nhan nay; TESTER van phai co `can:["mt5"]`.
+    - `ho-so-v2`   : `nhan/ho_so_bot.chuan_bi` doc THANG export lenh MQL5 (positions `;`) khi duong dan khong phai deal tester. Ma cu: `ValueError
+                     CSV deal thieu cot`. Don `ho_so_bot` tren `du_lieu_cao/mql5/*.csv` can nhan nay.
     """
     lab = Path(lab) if lab else GOC
     ra = ["ma-0810"]
@@ -884,6 +889,19 @@ def tag_ma(lab: Path | None = None) -> list[str]:
     try:
         if "def chay_tester(" in (lab / "nhan" / "so_ea_voi_tester.py").read_text(encoding="utf-8", errors="replace"):
             ra.append("so-ea-v1")
+    except OSError:
+        pass
+    try:
+        mo_dun = (lab / "nhan" / "ea_tho_toi_uu.py").read_text(encoding="utf-8", errors="replace")
+        dang_ky = (lab / "nhan" / "nc_cong_cu.py").read_text(encoding="utf-8", errors="replace")
+        viet_ini = (lab / "ea_tu_dong.py").read_text(encoding="utf-8", errors="replace")
+        if "def toi_uu(" in mo_dun and '_cc("ea_tho_toi_uu"' in dang_ky and "inputs_ini" in viet_ini:
+            ra.append("toi-uu-v1")
+    except OSError:
+        pass
+    try:
+        if "def _khong_doc_duoc(" in (lab / "nhan" / "ho_so_bot.py").read_text(encoding="utf-8", errors="replace"):
+            ra.append("ho-so-v2")
     except OSError:
         pass
     return ra

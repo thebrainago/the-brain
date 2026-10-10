@@ -54,7 +54,7 @@ TT_GHI = "vl-gh-"        # ghi hieu biet vao so tay nghien cuu
 #: Cong cu `nc cc <ten>` -> chang. Cong cu la (khong co o day) rot vao HA_TANG de khong tinh nham vao vong.
 _TIM = {"yeu_cau_seeker"}
 _BOC = {"ho_so_tai_san", "ho_so_bot", "ho_so_set", "ho_so_symbol"}
-_KHAM = {"quet_luoi", "thu_lo_co_che", "thu_co_che", "ea_tho_quet", "ea_tho_kham", "thu_hinh_dang", "mo_xe_lenh", "tim_quy_luat"}
+_KHAM = {"quet_luoi", "thu_lo_co_che", "thu_co_che", "ea_tho_quet", "ea_tho_kham", "ea_tho_toi_uu", "thu_hinh_dang", "mo_xe_lenh", "tim_quy_luat"}
 _XAC = {"niem_phong_luoi", "xac_nhan", "niem_phong"}
 _GIU = {"ghi_gia_thuyet", "ghi_hieu_biet"}
 

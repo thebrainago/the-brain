@@ -160,20 +160,22 @@ class VietSetTho(_TerminalGia, unittest.TestCase):
         self.assertEqual(self.tep_set("nhan3").read_text(encoding="utf-16"), "C=3\n")
 
 
-class ChayMotDungBoSetCuaTacGia(_TerminalGia, unittest.TestCase):
-    """`chay_mot` khong co MT5: Popen gia ghi san bao cao. Chi kiem AI viet .set nao va `.ini` tro vao dau."""
+class _ChayMotGia(_TerminalGia):
+    """`chay_mot` khong co MT5: Popen gia ghi san bao cao dung LOAI file ma `.ini` xin (.xml khi Optimize, .htm khi chay don)."""
 
     def setUp(self):
         super().setUp()
         self.mo = []                                            # cac lan "mo terminal": [duong terminal, /config:...]
         self.gio = [1000.0]
+        self.dung_luong = {"htm": 3000, "xml": 3000}            # > 2000 byte: chay_mot coi la bao cao xong
 
         def popen(args):
             self.mo.append(list(args))
-            nhan = Path(args[1][len("/config:"):]).stem
-            bc = self.dat / "_bao_cao" / (nhan + ".htm")
+            ini = Path(args[1][len("/config:"):])
+            duoi = "xml" if "Optimization=1" in ini.read_text(encoding="utf-16") else "htm"
+            bc = self.dat / "_bao_cao" / (ini.stem + "." + duoi)
             bc.parent.mkdir(parents=True, exist_ok=True)
-            bc.write_bytes(b"x" * 3000)                         # > 2000 byte: chay_mot coi la bao cao xong
+            bc.write_bytes(b"x" * self.dung_luong[duoi])
             return object()
 
         def dong_ho():
@@ -195,6 +197,10 @@ class ChayMotDungBoSetCuaTacGia(_TerminalGia, unittest.TestCase):
 
     def ini(self, nhan="ea_tho_abc"):
         return (self.goc / "reports" / "tester_ini" / (nhan + ".ini")).read_text(encoding="utf-16")
+
+
+class ChayMotDungBoSetCuaTacGia(_ChayMotGia, unittest.TestCase):
+    """Chi kiem AI viet .set nao va `.ini` tro vao dau."""
 
     def test_co_tep_set_tho_thi_ghi_nguyen_van_va_bo_qua_input(self):
         r = EA.chay_mot(self.viec(tep_set_tho="InpBuoc=true\nInpGhiChu=Alpha beta\n", input={"InpFast": {"gia_tri": 99}}))
@@ -314,6 +320,106 @@ class ChepNhiPhan(_TerminalGia, unittest.TestCase):
         EA.chep_nhi_phan(str(self.nguon("a.ex5", a)), "BotX", "thu", self.sha(a))
         _, dich = EA.chep_nhi_phan(str(self.nguon("b.ex5", b)), "BotX", "thu", self.sha(b))
         self.assertEqual(dich.read_bytes(), b)
+
+
+class VietIniToiUu(_TerminalGia, unittest.TestCase):
+    """MT5 Optimize trong `.ini`: quet day du (=1), chay LOCAL, `[TesterInputs]` cung noi dung voi .set; chay don khong doi mot chu."""
+
+    RANG = "InpFast=12||8||2||16||Y\nInpSlow=26||20||2||28||Y\nInpLots=0.1||0.1||0||0||N\n"
+
+    def ini(self, **kw):
+        p = EA.viet_ini("t_opt", "abc", "abc.set", "EURUSD", "H1", "2018.01.01", "2020.12.31", ten_terminal="thu", **kw)
+        return p.read_text(encoding="utf-16")
+
+    def test_chay_don_la_mac_dinh_va_khong_co_gi_cua_optimize(self):
+        t = self.ini()
+        self.assertIn("\nOptimization=0\n", t)
+        for la in ("OptimizationCriterion", "UseLocal", "UseRemote", "UseCloud", "[TesterInputs]"):
+            self.assertNotIn(la, t)
+        self.assertEqual(t, self.ini(toi_uu=0, tieu_chi=0, inputs_ini=""))
+        self.assertEqual(t.splitlines()[:3], ["[Tester]", "Expert=_tu_dong\\abc", "ExpertParameters=abc.set"])
+
+    def test_inputs_ini_bi_bo_qua_khi_khong_phai_optimize(self):
+        """Mot lan chay don khong bao gio bien thanh luoi chi vi nguoi goi lo dua kem khoang."""
+        t = self.ini(inputs_ini=self.RANG)
+        self.assertNotIn("[TesterInputs]", t)
+        self.assertNotIn("||", t)
+
+    def test_optimize_day_du_chay_local_va_tester_inputs_cung_noi_dung_voi_set(self):
+        t = self.ini(toi_uu=1, tieu_chi=0, inputs_ini=self.RANG)
+        dong = t.splitlines()
+        self.assertIn("Optimization=1", dong)
+        self.assertNotIn("Optimization=0", dong)
+        for can in ("OptimizationCriterion=0", "UseLocal=1", "UseRemote=0", "UseCloud=0"):
+            self.assertIn(can, dong, "Optimize chay tren may nay: EA va tick khong duoc roi khoi may")
+        i = dong.index("[TesterInputs]")
+        self.assertLess(dong.index("[Tester]"), i)
+        self.assertEqual(dong[i + 1:], self.RANG.splitlines(), "[TesterInputs] chiem het phan con lai va khong co dong la")
+        self.assertIn("ShutdownTerminal=1", dong[:i])
+        report = [l for l in dong if l.startswith("Report=")][0]
+        self.assertFalse(Path(report.split("=", 1)[1]).is_absolute())
+
+    def test_khong_co_khoang_thi_khong_tao_muc_tester_inputs(self):
+        t = self.ini(toi_uu=1)
+        self.assertIn("Optimization=1", t)
+        self.assertNotIn("[TesterInputs]", t)
+
+    def test_tieu_chi_di_vao_ini(self):
+        self.assertIn("OptimizationCriterion=6", self.ini(toi_uu=1, tieu_chi=6, inputs_ini=self.RANG).splitlines())
+
+    def test_chi_nhan_0_hoac_1_di_truyen_bo_sot_to_hop(self):
+        for x in (2, -1, 3):
+            with self.assertRaises(ValueError):
+                self.ini(toi_uu=x, inputs_ini=self.RANG)
+        self.assertFalse((self.goc / "reports" / "tester_ini" / "t_opt.ini").exists(), "tu choi truoc khi ghi file")
+
+
+class ChayMotToiUu(_ChayMotGia, unittest.TestCase):
+    """`chay_mot` voi `toi_uu`: doi `<nhan>.xml` (bang pass), khong phai `.htm`."""
+
+    RANG = "InpFast=12||8||2||16||Y\nInpLots=0.1||0.1||0||0||N\n"
+
+    def test_optimize_doi_bang_xml_ghi_set_nguyen_van_va_tester_inputs(self):
+        r = EA.chay_mot(self.viec(toi_uu=1, tieu_chi=0, han_giay=3600, tep_set_tho=self.RANG, input={"InpFast": {"gia_tri": 99}}))
+        self.assertTrue(r["xong"])
+        self.assertTrue(r["bao_cao"].endswith("ea_tho_abc.xml"), r["bao_cao"])
+        self.assertEqual(self.tep_set("ea_tho_abc").read_text(encoding="utf-16"), self.RANG,
+                         "khoang ||tu||buoc||den||Y di vao .set NGUYEN VAN, bo qua input")
+        ini = self.ini()
+        self.assertIn("\nOptimization=1\n", ini)
+        self.assertTrue(ini.rstrip().endswith("[TesterInputs]\n" + self.RANG.rstrip()), ini)
+        self.assertEqual(len(self.mo), 1)
+
+    def test_chay_don_van_la_htm_va_optimization_0(self):
+        r = EA.chay_mot(self.viec(tep_set_tho="InpFast=8\n"))
+        self.assertTrue(r["xong"] and r["bao_cao"].endswith("ea_tho_abc.htm"), r)
+        ini = self.ini()
+        self.assertIn("\nOptimization=0\n", ini)
+        self.assertNotIn("[TesterInputs]", ini)
+
+    def test_bang_pass_nho_hon_2000_byte_chua_phai_xong(self):
+        self.dung_luong["xml"] = 1500
+        r = EA.chay_mot(self.viec(toi_uu=1, han_giay=5, tep_set_tho=self.RANG))
+        self.assertFalse(r["xong"])
+        self.assertEqual(r["bao_cao"], "")
+
+    def test_optimize_khong_nhan_nham_bao_cao_htm(self):
+        """Mot `.htm` cu cung ten khong duoc coi la bang pass cua lan Optimize nay."""
+        cu = self.dat / "_bao_cao" / "ea_tho_abc.htm"
+        cu.parent.mkdir(parents=True, exist_ok=True)
+        cu.write_bytes(b"x" * 5000)
+        self.dung_luong["xml"] = 100
+        r = EA.chay_mot(self.viec(toi_uu=1, han_giay=5, tep_set_tho=self.RANG))
+        self.assertFalse(r["xong"])
+
+    def test_bang_pass_cu_bi_xoa_truoc_khi_chay(self):
+        cu = self.dat / "_bao_cao" / "ea_tho_abc.xml"
+        cu.parent.mkdir(parents=True, exist_ok=True)
+        cu.write_bytes(b"CU" * 3000)
+        self.dung_luong["xml"] = 4000
+        r = EA.chay_mot(self.viec(toi_uu=1, han_giay=3600, tep_set_tho=self.RANG))
+        self.assertTrue(r["xong"])
+        self.assertEqual(Path(r["bao_cao"]).read_bytes(), b"x" * 4000, "bang cua lan truoc khong duoc lan vao lan nay")
 
 
 if __name__ == "__main__":
