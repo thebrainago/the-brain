@@ -97,6 +97,15 @@ EA luoi DAY DU `ea_LuoiDayDu.mq5` (04/10, moi truong `luoi.ThamSo`; `ea_tho_chay
 
 **LINK CUA CHU DU AN (03/10/2026)**: `b link` (`tai_lieu/LINK_NGUON.md`) - link / tin nhan nhom -> phan loai -> tham do -> lich su lenh. Link rieng KHONG vao git (`link_rieng.txt`, `du_lieu_cao/`); **CHUA chay tren trang that**. Ba bot cu mat file (BigMouse, DCA Am Duong, BlackDragon): chu du an can LOGIC - `tai_lieu/BOT_CU_LOGIC.md`.
 
+## LUAT SO 2 — VONG LAP KHEP, DO TUNG CHANG (chu du an 10/10/2026)
+
+Chu du an: *"muc tieu cua the brain la VONG LAP lien tuc tim nguon chien luoc / he thong chat luong => boc tach co che => kiem dinh => giu lai va chon loc
+co che hieu qua => ap dung va bo sung vao cac vong ve sau. Viec ta dang lam chi la nhung module nho."* Tung nhanh dep (gia lap, bo kiem luat, mot con bot) KHONG thay vong.
+Moi phien: `python3 b.py vong-lap --in` (bang diem 6 chang tu `viec/`: gio may moi chang, vung lai chua kiem ngoai mau, co che giu lai) TRUOC khi chon viec; chon viec
+dua chang dang DOI nhat (TIM / BOC / GIU / AP DUNG) len, khong them quet trong mau. Do 10/10: 84% gio may la quet trong mau, 0/698 vung lai tung kiem ngoai mau.
+`python3 b.py vong-lap --giao 240` ra don kiem ngoai mau (doan `xac_nhan` MO, khong bao gio `niem_phong`) kem nhom doi chung (`doi`, `ngau`); nhan GIU = qua o >= 3 thi truong,
+la NHAN khong phai cong chan. Thiet ke + gioi han: `tai_lieu/VONG_LAP.md`.
+
 ## LAM LAI TU DAU (chu du an chot 02/10/2026)
 
 May nha cai lai Windows, mat `nao.db`, `data/`, `ds/`... Chu du an: *"coi nhu du an duoc lam lai tu dau bai ban

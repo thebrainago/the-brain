@@ -64,6 +64,7 @@ Nho ten file la viec cua may, khong phai cua nguoi. Go `b` de xem menu.
                       `b qwen` = `q`. `b qwen trang-thai` xem bang. `b qwen kiem`.
     b ban-do          SINH ban do tu ma nguon + chi ra module MO COI
     b kien-truc       SINH so do KIEN TRUC: module + VAI TRO + LOP + no kien truc
+    b vong-lap [--in|--giao N]  VONG LAP KHEP tim-boc-kiem-giu-ap dung: bang diem tung chang + ra don kiem ngoai mau (tai_lieu/VONG_LAP.md)
     b github          DAY lab/ len GitHub rieng (thebrainago/the-brain, rieng tu)
     b ho-so           HO SO HE THONG: mot file TU DU dua cho AI khong co dia
     b slot [kiem]     SLOT TESTER: may lan tester dung duoc, nang tran duoc chua
@@ -1097,6 +1098,15 @@ def c_kien_truc(a):
     return 0
 
 
+def c_vong_lap(a):
+    """VONG LAP KHEP (10/10/2026): bang diem tim -> boc -> kiem -> giu -> ap dung, do tu `viec/` (git), khong LLM / khong du lieu gia.
+
+    `b vong-lap` ghi reports/VONG_LAP.md; `--in` chi xem; `--giao [N]` ra them don kiem ngoai mau / ap dung (KHONG push: nguoi goi commit).
+    Xem tai_lieu/VONG_LAP.md.
+    """
+    from nhan import vong_lap as VL
+    return VL.main(list(a or []))
+
 
 # ---- DAY CHUYEN 03/09/2026: san -> doc -> boc -----------------------------
 def _nhan(a, i, mac_dinh):
@@ -1486,6 +1496,7 @@ LENH = {
     "luu": c_luu, "lich": c_lich, "lui": c_lui,
     "ban-do": c_ban_do, "profile": c_profile,
     "kien-truc": c_kien_truc, "kt": c_kien_truc,
+    "vong-lap": c_vong_lap, "vl": c_vong_lap,
     "hepha": c_hepha, "hephaestus": c_hepha,
     "cau": c_cau, "cau-git": c_cau,
     "tho": c_tho, "tho-code": c_tho,
