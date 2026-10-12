@@ -1,0 +1,52 @@
+{
+  "ma": "vl-xn-0ca6a1d7d6",
+  "trang_thai": "DAT",
+  "ly_do": "chay xong, ma thoat 0",
+  "bang_chung": {
+    "ma_thoat": 0,
+    "giay": 2.6,
+    "lenh": [
+      "C:\\Research SP500\\lab\\.venv\\Scripts\\python.exe",
+      "b.py",
+      "nc",
+      "cc",
+      "thu_luoi",
+      "{\"doan\": \"xac_nhan\", \"khung\": \"M30\", \"ma\": \"USDCAD\", \"tham_so\": {\"buoc\": 8, \"che_do\": \"ban\", \"cho_lui\": 0, \"he_so_lot\": 1.2, \"kieu_lot\": \"cong\", \"lot\": 0.01, \"tp\": 6, \"tran_tang\": 12}, \"von\": 10000}"
+    ],
+    "phien_ban_ma": "44b3b23d+sua",
+    "dong_cuoi": [
+      "  \"da_doi_chieu\": true,",
+      "  \"nguon\": \"lop FX chuan 5 chu so (pip 1e-4, hop dong 100.000, point 1e-5); phi + spread tu mo hinh chi phi (do_tin=SAN)\"",
+      " },",
+      " \"chi_phi_do_tin\": \"SAN\",",
+      " \"chi_so_luoi\": {",
+      "  \"loi_suat_nam_pct\": 26.223,",
+      "  \"maxdd_pct\": -84.286,",
+      "  \"lo_treo_dinh_pct_von\": 196.734,",
+      "  \"ro_nam\": 2055.852,",
+      "  \"lenh_nam\": 4247.166,",
+      "  \"tang_max\": 12,",
+      "  \"chay\": false,",
+      "  \"phi_tren_lai_gop_pct\": 56.817,",
+      "  \"calmar\": 0.311",
+      " },",
+      " \"nhan_canh_bao\": [",
+      "  \"o lot dang thu maxDD 84.3% >= 80%: giam lot x0.85\"",
+      " ],",
+      " \"canh_bao\": [",
+      "  \"kieu_lot != phang: lam tron lot nho lam lai lo lech khoi tuyen tinh - he so lot o tran chi la xap xi\",",
+      "  \"quy cach USDCAD (lop FX chuan 5 chu so (pip 1e-4, hop dong 100.000, point 1e-5); phi + spread tu mo hinh chi phi (do_tin=SAN)): luoi.py CHUA doi chieu voi MT5 tester o ma nao - doc nhu XEP HANG va hinh dang, chua phai loi that; chay tester cung bo tham so truoc khi tin\"",
+      " ],",
+      " \"tn_id\": 2094,",
+      " \"_giay\": 1.28",
+      "}"
+    ],
+    "loi_cuoi": [],
+    "tep_moi": {}
+  },
+  "so_do": {},
+  "can_cloud": false,
+  "cau_hoi": null,
+  "may": "DESKTOP-05PNLGF/Windows",
+  "luc": "2026-10-12T18:41:37"
+}
