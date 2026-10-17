@@ -103,6 +103,15 @@ _DAU_TRANG_DUYET = {
 }
 
 
+def _dau_cho(url: str) -> dict:
+    """Header trinh duyet; them token GitHub (bien moi truong GITHUB_TOKEN, KHONG luu trong git) khi goi api.github.com.
+    Khong token: 60 luot/gio (search 10 luot/phut) - mot luot `san-kho` can ~150 luot."""
+    tk = os.environ.get("GITHUB_TOKEN")
+    if tk and "api.github.com" in url:
+        return {**_DAU_TRANG_DUYET, "Authorization": "Bearer " + tk}
+    return _DAU_TRANG_DUYET
+
+
 def _lay(url: str, timeout: int = 25) -> str | None:
     """Tra van ban khi 200, `None` khi khong. Ghi CHI TIET vao `LAN_LAY_CUOI`.
 
@@ -132,7 +141,7 @@ def _lay(url: str, timeout: int = 25) -> str | None:
     # lai. Nhung no phai la DUONG LUI, khong phai duong chinh.
     try:
         import requests
-        r = requests.get(url, timeout=timeout, headers=_DAU_TRANG_DUYET)
+        r = requests.get(url, timeout=timeout, headers=_dau_cho(url))
         LAN_LAY_CUOI.update({"url": url, "ma": r.status_code, "loi": None})
         if r.status_code == 200:
             return r.text
@@ -146,7 +155,7 @@ def _lay(url: str, timeout: int = 25) -> str | None:
         _DV.bat()
     try:
         import requests
-        r = requests.get(url, timeout=timeout, headers=_DAU_TRANG_DUYET)
+        r = requests.get(url, timeout=timeout, headers=_dau_cho(url))
         LAN_LAY_CUOI.update({"url": url, "ma": r.status_code, "loi": None})
         if r.status_code == 200:
             return r.text
@@ -2642,6 +2651,137 @@ def viet_bao_cao(den_han, tong_moi, tong, hang, ban_doc, backfill, con_doc) -> N
     (REPORTS / "SEEKER.md").write_text("\n".join(d), encoding="utf-8")
 
 
+# ------------------------------------------------------------------ SAN KHO (17/10/2026)
+# Chu du an: "toi can tim nhung KHO nhu EA31337 - lam sao de seeker tim duoc". `n_github` san theo TEN HE
+# ("Sonic R", "Turtle"...) va coi moi repo la MOT tai lieu; `bo_nao._cao_github` chi doc 6 file nho nhat ->
+# mot kho 111 chien luoc (EA31337, chien luoc nam trong submodule) chi cho vai file vo ngoai.
+# San kho hoi cau khac: repo nao GOM NHIEU co che? Tim theo CHU DE + tu khoa "bo suu tap", lan theo
+# danh sach awesome-* va theo cac repo khac cua chu kho, roi CHAM bang CAY FILE (dem file chien luoc,
+# file quan tri lenh, submodule) truoc khi doc.
+GH_CHU_DE_KHO = ["mql5", "mql4", "expert-advisor", "metatrader5", "metatrader4", "forex-trading", "trading-strategies",
+                 "trading-strategy", "algorithmic-trading", "trading-bot", "grid-trading", "dca", "martingale",
+                 "hedging", "freqtrade-strategies", "pinescript", "tradingview-strategies", "backtrader"]
+GH_TU_KHOA_KHO = ["multi strategy expert advisor", "trading strategies collection", "strategy library forex",
+                  "grid dca bot", "martingale recovery expert advisor", "hedge basket expert advisor"]
+GH_AWESOME = ["wilsonfreitas/awesome-quant", "wangzhe3224/awesome-systematic-trading", "thinkong/awesomefreqtrade"]
+#: Kho da biet (17/10/2026): EA31337 (da doc, reports/SEEKER_EA31337.md) + kho XU LI LENH tim qua web:
+#: passivbot (luoi DCA + "auto unstuck" = go lenh ket bang cat lo nho dan), hummingbot (DCA / grid executor),
+#: freqtrade-strategies + NostalgiaForInfinity (DCA bang position adjustment). Sai ten -> cham_kho tra CHUA_DO_DUOC.
+GH_KHO_HAT = ["EA31337/EA31337", "EA31337/EA31337-strategies", "EA31337/EA31337-strategies-meta", "enarjord/passivbot",
+              "hummingbot/hummingbot", "freqtrade/freqtrade-strategies", "iterativv/NostalgiaForInfinity"]
+_DUOI_CHIEN_LUOC = (".mq4", ".mq5", ".mqh", ".pine", ".py", ".cs", ".js", ".ts")
+_TU_QUAN_TRI = ("grid", "dca", "martingale", "hedge", "recovery", "basket", "trailing", "breakeven", "break_even",
+                "averag", "pyramid", "unstuck", "lock", "money_manag", "position_adjust")
+_TU_CHIEN_LUOC = ("strateg", "stg_", "expert", "/ea", "signal", "robot", "bot")
+
+
+def diem_kho(duong_dan: list[str], so_submodule: int = 0) -> dict:
+    """Cham mot repo co phai KHO co che khong, chi tu danh sach duong dan file (cay git) + so submodule."""
+    p = [x.lower() for x in duong_dan]
+    ma = [x for x in p if x.endswith(_DUOI_CHIEN_LUOC) and not any(t in x for t in ("test", "/docs/", "example_config"))]
+    cl = [x for x in ma if any(t in x for t in _TU_CHIEN_LUOC)]
+    qt = [x for x in ma if any(t in x.rsplit("/", 1)[-1] for t in _TU_QUAN_TRI)]
+    mql = sum(1 for x in ma if x.endswith((".mq4", ".mq5", ".mqh")))
+    diem = len(cl) + 3 * len(qt) + 2 * so_submodule + 0.5 * mql
+    return {"so_file_ma": len(ma), "so_file_chien_luoc": len(cl), "so_file_quan_tri": len(qt), "so_file_mql": mql,
+            "so_submodule": so_submodule, "diem": round(diem, 1),
+            "la_kho": bool(len(cl) >= 15 or so_submodule >= 10 or len(qt) >= 5),
+            "vi_du_quan_tri": sorted(qt)[:8]}
+
+
+def tach_link_github(md: str) -> list[str]:
+    """'owner/repo' tu moi link github.com trong van ban (danh sach awesome-*), bo trung, bo link trang con cua GitHub."""
+    bo = {"topics", "orgs", "sponsors", "features", "about", "marketplace", "settings", "login", "search"}
+    ra = []
+    for o, r in re.findall(r"github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)", md):
+        r = re.sub(r"\.git$", "", r).rstrip(".")
+        if o.lower() in bo or not r:
+            continue
+        k = "%s/%s" % (o, r)
+        if k not in ra:
+            ra.append(k)
+    return ra
+
+
+def tach_submodule(gitmodules: str) -> list[str]:
+    """'owner/repo' cua cac submodule tren GitHub (doc noi dung file .gitmodules)."""
+    return tach_link_github("\n".join(l for l in gitmodules.splitlines() if "url" in l))
+
+
+def n_github_kho(sao_toi_thieu: int = 20, nghi: float = 7.0) -> list[dict]:
+    """Ung vien kho: tim theo CHU DE (topic:) va tu khoa bo suu tap, xep theo sao. Search API ~10 luot/phut."""
+    ra, thay = [], set()
+    truy = ["topic:%s stars:>=%d" % (c, sao_toi_thieu) for c in GH_CHU_DE_KHO] + \
+           ["%s stars:>=%d" % (t, sao_toi_thieu) for t in GH_TU_KHOA_KHO]
+    for q in truy:
+        txt = _lay("https://api.github.com/search/repositories?q=" + q.replace(" ", "+") + "&sort=stars&order=desc&per_page=50")
+        time.sleep(nghi)
+        if not txt:
+            continue
+        try:
+            for it in json.loads(txt).get("items", []):
+                k = it.get("full_name")
+                if k and k not in thay:
+                    thay.add(k)
+                    ra.append({"repo": k, "sao": it.get("stargazers_count", 0), "cap_nhat": it.get("pushed_at"),
+                               "mo_ta": (it.get("description") or "")[:300], "chu_de": it.get("topics", []), "tu": q})
+        except Exception:
+            pass
+    return ra
+
+
+def cham_kho(repo: str) -> dict | None:
+    """Doc CAY FILE (khong doc noi dung) + .gitmodules cua mot repo -> diem_kho. None = khong lay duoc (CHUA_DO_DUOC)."""
+    tt = _lay("https://api.github.com/repos/" + repo)
+    if not tt:
+        return None
+    try:
+        nhanh = json.loads(tt).get("default_branch") or "main"
+        cay = json.loads(_lay("https://api.github.com/repos/%s/git/trees/%s?recursive=1" % (repo, nhanh)) or "{}")
+    except Exception:
+        return None
+    dd = [x["path"] for x in cay.get("tree", []) if x.get("type") == "blob"]
+    sm = sum(1 for x in cay.get("tree", []) if x.get("type") == "commit")
+    con = tach_submodule(_lay("https://raw.githubusercontent.com/%s/%s/.gitmodules" % (repo, nhanh)) or "") if sm else []
+    return {"repo": repo, "nhanh": nhanh, **diem_kho(dd, sm), "repo_con": con}
+
+
+def san_kho(toi_da_cham: int = 40, ra_file: str = "reports/SAN_KHO.json") -> list[dict]:
+    """Mot luot san kho: ung vien (chu de + tu khoa + awesome-*) -> cham cay file -> xep diem -> ghi file."""
+    uv = {x["repo"]: x for x in n_github_kho()}
+    for k in GH_KHO_HAT:
+        uv.setdefault(k, {"repo": k, "sao": 10 ** 6, "tu": "kho_da_biet"})     # cham truoc
+    for a in GH_AWESOME:
+        md = _lay("https://raw.githubusercontent.com/%s/HEAD/README.md" % a) or ""
+        for k in tach_link_github(md):
+            uv.setdefault(k, {"repo": k, "sao": None, "tu": "awesome:" + a})
+    ds = sorted(uv.values(), key=lambda x: -(x.get("sao") or 0))[:toi_da_cham]
+    kq, da = [], set()
+    hang = list(ds)
+    while hang and len(kq) < toi_da_cham + 30:      # +30: chua cho repo con (chien luoc hay nam trong submodule)
+        x = hang.pop(0)
+        if x["repo"] in da:
+            continue
+        da.add(x["repo"])
+        c = cham_kho(x["repo"])
+        time.sleep(1.5)
+        kq.append({**x, **(c or {"trang_thai": "CHUA_DO_DUOC"})})
+        for con in (c or {}).get("repo_con", [])[:80]:
+            if con not in da and (c.get("so_submodule", 0) <= 12 or "strateg" in con.lower()):
+                hang.insert(0, {"repo": con, "sao": None, "tu": "submodule:" + x["repo"]})
+    kq.sort(key=lambda z: -(z.get("diem") or -1))
+    Path(ra_file).parent.mkdir(parents=True, exist_ok=True)
+    Path(ra_file).write_text(json.dumps({"luc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                                         "kho": kq}, ensure_ascii=False, indent=1), encoding="utf-8")
+    return kq
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "san-kho":
+        for z in san_kho()[:30]:
+            print("%-45s sao=%-6s diem=%-6s chien_luoc=%-4s quan_tri=%-3s submodule=%-3s %s" % (
+                z["repo"], z.get("sao"), z.get("diem"), z.get("so_file_chien_luoc"), z.get("so_file_quan_tri"),
+                z.get("so_submodule"), "KHO" if z.get("la_kho") else ""))
+        raise SystemExit(0)
     SO.khoi_tao()
     print(json.dumps(mot_luot(), ensure_ascii=False, indent=1)[:5000])

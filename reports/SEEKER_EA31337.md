@@ -42,3 +42,29 @@
 1. Nhóm **ghép/chuyển chiến lược** và **task theo vốn** là thứ mới nhất. Chúng là "não điều phối" giữa các mảnh mình đã có (MRZ, RSI, IBS, song mốc…). Đây đúng là phần ghép hệ anh muốn.
 2. Nhóm **xử lí lệnh** chỉ thêm được 4 ý nhỏ (hedge cân lot, thang limit hai phía, kèm limit tốt giá, nhồi một lần). Phần DCA/gỡ/rổ vẫn phải gom từ nguồn khác: EA lưới và DCA trên MQL5, tài khoản tín hiệu DCA sống lâu.
 3. Bước tiếp theo khi anh muốn: chuyển các mục ở bảng 1 thành khai báo trong kho (`config/co_che_dsl.json` cho vào lệnh/lọc, `config/quan_tri_dsl.json` cho xử lí lệnh), giữ URL nguồn.
+
+## 4. Tìm thêm những KHO như thế này (Seeker "săn kho", thêm 17/10/2026)
+
+**Vì sao Seeker trước giờ không thấy EA31337:**
+- Nó tìm GitHub theo **tên hệ** ("Sonic R", "Turtle", "ICT"…) và coi mỗi repo là **một** tài liệu.
+- Khi đọc một repo (`bo_nao._cao_github`), nó chỉ lấy **6 file nhỏ nhất**. Với EA31337, 111 chiến lược nằm trong repo con, nên nó chỉ đọc được vỏ ngoài.
+
+**Nay có `python tru/seeker.py san-kho`:**
+1. **Ứng viên** lấy từ ba đường:
+   - tìm theo **chủ đề** GitHub: `mql5`, `expert-advisor`, `grid-trading`, `dca`, `martingale`, `hedging`, `trading-strategies`, `freqtrade-strategies`, `pinescript`…;
+   - tìm theo từ khoá kiểu "bộ sưu tập": "multi strategy expert advisor", "grid dca bot", "martingale recovery"…;
+   - mọi link trong các danh sách `awesome-*`, cộng các kho đã biết.
+2. **Chấm bằng cây file, chưa đọc nội dung:** đếm file chiến lược, file xử lí lệnh (tên có grid / dca / martingale / hedge / recovery / basket / trailing / unstuck…) và số repo con. Repo đạt ngưỡng là **KHO**.
+3. **Đi theo repo con:** chiến lược thường nằm trong submodule, như EA31337 → EA31337-strategies có 69 repo con.
+4. Ghi kết quả ra `reports/SAN_KHO.json`, xếp theo điểm. Kho nào đạt thì clone về đọc hết như đã làm với EA31337. Repo chỉ giữ tóm tắt và URL.
+
+Chạy ở máy nhà. Nên đặt `GITHUB_TOKEN` trong biến môi trường; không có token, GitHub chỉ cho 60 lượt/giờ, mà một lượt săn cần khoảng 150 lượt gọi.
+
+**Kho xử lí lệnh đã tìm thấy qua web, chưa đọc:**
+| Kho | Vì sao đáng đọc |
+|---|---|
+| [enarjord/passivbot](https://github.com/enarjord/passivbot) | Lưới DCA đệ quy hoặc tĩnh. **"Auto unstuck" = gỡ lệnh kẹt**: cắt lỗ nhỏ dần, ưu tiên vị thế gần giá vào nhất ([wiki](https://github.com/enarjord/passivbot/wiki/passivbot_modes)). Đúng phần anh làm tay. |
+| [hummingbot/hummingbot](https://github.com/hummingbot/hummingbot) | DCA Executor, Grid Executor, controller Grid Strike: lưới có TP/SL/thời gian từng tầng, đi theo xu hướng ([DCA](https://hummingbot.org/v2-strategies/executors/dcaexecutor), [grid](https://condor.hummingbot.org/executors/grid-executor.md)) |
+| [freqtrade/freqtrade-strategies](https://github.com/freqtrade/freqtrade-strategies) + danh sách awesomefreqtrade | Hàng trăm chiến lược (crypto) kèm backtest. NostalgiaForInfinity dùng DCA bằng "position adjustment" ([danh sách](https://awesome.ecosyste.ms/lists/thinkong%2Fawesomefreqtrade)) |
+| MQL5 Market: Grid Martingale Pro, ManHedger | **Thương mại, không có mã**. Chỉ đọc mô tả cơ chế (lưới hai chiều, chốt rổ, giảm đòn bẩy khi sụt) ([1](https://www.mql5.com/en/market/product/96629), [2](https://www.mql5.com/en/job/207558)) |
+
