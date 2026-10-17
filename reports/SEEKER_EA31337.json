@@ -1,0 +1,1940 @@
+{
+ "nguon": "https://github.com/EA31337/EA31337 (GPL-3.0, commit 9b9bd38 2024-09-20; strategies 3da76f4, strategies-meta 3ddd3ea, classes 35a2814)",
+ "doc_luc": "2026-10-17",
+ "ghi_chu": "Tom tat do Claude doc ma nguon (chi doc, khong chay). KHONG chua ma nguon cua EA31337.",
+ "meta": [
+  {
+   "name": "Bears_Bulls",
+   "kind": "entry-combination",
+   "what": "BUY signals come only from the 'bulls' strategy and SELL signals only from the 'bears' strategy (strategies keyed by order type). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_bulls_for_BUY": "STRAT_BULLS_POWER",
+    "strategy_bears_for_SELL": "STRAT_BEARS_POWER",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 30.0,
+     "order_close_profit_pips": 30.0,
+     "order_close_time": "-10 (bars)"
+    }
+   },
+   "techniques": [],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Bears_Bulls/Stg_Meta_Bears_Bulls.mqh"
+  },
+  {
+   "name": "Conditions",
+   "kind": "entry-combination",
+   "what": "Checks up to 3 framework trade conditions in order; for the first condition that is TRUE and whose strategy gives a signal, uses that strategy's signal (OR, first hit wins). If no condition is true, no signal. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "condition1": "TRADE_COND_IS_PEAK -> STRAT_AMA",
+    "condition2": "TRADE_COND_IS_PIVOT -> STRAT_AWESOME",
+    "condition3": "NONE -> STRAT_NONE",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "IS_PEAK / IS_PIVOT are defined in the EA31337 framework (not in this clone) - exact formula UNKNOWN here (framework recollection: price beyond previous bar high/low; price vs previous bar pivot (H+L+C)/3).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Conditions/Stg_Meta_Conditions.mqh"
+  },
+  {
+   "name": "Delegate",
+   "kind": "order-management",
+   "what": "Intended to take over orders from other EAs/strategies (magic 30000-40000) by condition (end of day / older than 1 day). In code: each minute it collects such orders, but the condition check is a no-op (compares open_time > open_time+86400, always false; modify call commented out). Trading signals and PriceStop come only from the 'delegate' strategy; the 'main' strategy is loaded but never used. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "magic_min": 30000,
+    "magic_max": 40000,
+    "strategy_main": "STRAT_AMA (unused)",
+    "condition": "ORDER_LIFETIME_GT_1D (no-op)",
+    "strategy_delegate": "STRAT_AMA",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Work in progress; not listed in strategies-meta/enum.h, includes.h or the EA enum, so it cannot be selected.",
+   "selectable_in_EA31337_enum": false,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Delegate/Stg_Meta_Delegate.mqh"
+  },
+  {
+   "name": "Discrepancy",
+   "kind": "entry-combination",
+   "what": "If the current (forming) D1 candle and W1 candle disagree in direction (one bull, one bear) it uses the discrepancy strategy, otherwise the main strategy. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_main": "STRAT_RSI",
+    "strategy_on_D1_W1_discrepancy": "STRAT_MA_BREAKOUT",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "MTF used as a regime switch (D1 vs W1 candle colour), not as a same-direction confirmation.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Discrepancy/Stg_Meta_Discrepancy.mqh"
+  },
+  {
+   "name": "Double",
+   "kind": "entry-combination",
+   "what": "Signal only when BOTH strategies signal the same direction (AND). Close when both give the opposite open signal.",
+   "params": {
+    "strategy1": "STRAT_OSCILLATOR",
+    "strategy2": "STRAT_OSCILLATOR_TREND",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 30.0,
+     "order_close_profit_pips": 30.0,
+     "order_close_time": "-10 (bars)"
+    }
+   },
+   "techniques": [],
+   "notes": "Quirk: level/method taken from strategy 1 are passed on to strategy 2 in the loop.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Double/Stg_Meta_Double.mqh"
+  },
+  {
+   "name": "Enhance",
+   "kind": "order-management",
+   "what": "After any order is opened, it remembers that bar; for the rest of the day, when the wrapped strategy has no signal, it signals one extra BUY if the current bar's HIGH is below the remembered bar's LOW (price gapped a full bar lower) or one extra SELL if the current LOW is above the remembered HIGH. Only one add, flag reset at new day or when the wrapped strategy signals. Close = wrapped strategy's own SignalClose.",
+   "params": {
+    "strategy": "STRAT_CHAIKIN",
+    "add_trigger": "current bar fully beyond the bar of the last order open",
+    "max_adds": "1 per opened order / per day",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 30.0,
+     "order_close_profit_pips": 30.0,
+     "order_close_time": "-10 (bars)"
+    }
+   },
+   "techniques": [
+    "DCA/averaging"
+   ],
+   "notes": "Direction-agnostic: after a BUY, a fall gives a BUY add (averaging down) but a rise gives a SELL (opposite trade). Lot is not changed (same lot).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Enhance/Stg_Meta_Enhance.mqh"
+  },
+  {
+   "name": "Equity",
+   "kind": "risk/account-control",
+   "what": "Chooses the strategy by floating equity vs balance (Math::ChangeInPct(balance, equity)): between -5% and +5% -> normal strategy; +5..+10% -> GT_5; -10..-5% -> LT_5; >= +10% -> GT_10; <= -10% -> LT_10. Defaults for >=10% and <=-10% are NONE, so it stops opening (and stops signal-closing) at +/-10% floating P/L. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "normal_-5_5": "STRAT_MA_BREAKOUT",
+    "gt_5": "STRAT_MA_TREND",
+    "lt_-5": "STRAT_MA_TREND",
+    "gt_10": "STRAT_NONE",
+    "lt_-10": "STRAT_NONE",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Does NOT close the basket at an equity target; it only switches/blocks new entries.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Equity/Stg_Meta_Equity.mqh"
+  },
+  {
+   "name": "Formation",
+   "kind": "order-management",
+   "what": "Every minute builds a ladder of pending LIMIT orders on both sides, independent of signals: for i=0..Size-1, offset y = d/2 + d/2*cos(i*pi/Size) with d = 10% of the 2-day D1 high-low range; BUY_LIMIT at ask - y and SELL_LIMIT at bid + y (Size=2 -> offsets d and d/2). Existing ladder orders are modified to the new prices each minute; the ladder dictionaries are cleared at each new day. Entry signals themselves are the wrapped strategy's. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy": "STRAT_STDDEV",
+    "formation_type": "COS (also SIN; COSH/SINH MQL5 only)",
+    "size_per_side": 2,
+    "diameter": "0.1 * (max(H D1[0],H D1[1]) - min(L D1[0],L D1[1]))",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "1440 (minutes)"
+    }
+   },
+   "techniques": [
+    "DCA/averaging"
+   ],
+   "notes": "Grid/ladder of limit orders both sides. Whether 'new Order(request)' actually sends the order is framework behaviour (UNKNOWN in clone); cleared ladders are not deleted, so orphan pending orders may accumulate. Lot from framework default request.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Formation/Stg_Meta_Formation.mqh"
+  },
+  {
+   "name": "Hedge",
+   "kind": "order-management",
+   "what": "Takes the wrapped strategy's signals but only lets a trade open if it does not increase the long/short imbalance: ratio = (buyLots - sellLots)/max(buyLots, sellLots) over this strategy's open orders (loaded by magic hourly); BUY allowed only if ratio <= 0, SELL only if ratio >= 0. So when net long it only accepts SELLs (opening a hedge while the buy stays open) and vice versa. Close = opposite open signal (with the same ratio check).",
+   "params": {
+    "strategy": "STRAT_MA_BREAKOUT",
+    "ratio_rule": "BUY if ratio<=0, SELL if ratio>=0",
+    "orders_reload": "hourly by magic = strategy id; cache cleared daily",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "hedge/lock"
+   ],
+   "notes": "Equal lots per entry (no lot sizing). Needs a hedging account. Method-based extra ratio thresholds are @todo (commented out).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Hedge/Stg_Meta_Hedge.mqh"
+  },
+  {
+   "name": "Interval",
+   "kind": "session/time",
+   "what": "Uses the 'interval' strategy only in a window around every N-minute boundary, otherwise the main strategy. Code condition: minute-in-block >= N-before AND <= N+after; with N=15, before=2 this is minutes :13-:14, :28-:29, :43-:44, :58-:59 (the 'after' part can never match because minute-in-block <= 14). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_main": "STRAT_RSI",
+    "strategy_interval": "STRAT_OSCILLATOR_TREND",
+    "minutes_each": 15,
+    "minutes_before": 2,
+    "minutes_after": "2 (ineffective)",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "1440 (minutes)"
+    }
+   },
+   "techniques": [
+    "session filter"
+   ],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Interval/Stg_Meta_Interval.mqh"
+  },
+  {
+   "name": "Limit",
+   "kind": "risk/account-control",
+   "what": "Passes the wrapped strategy's signals but blocks new opens once 30 orders were opened today (counter in OnOrderOpen, reset at new day).",
+   "params": {
+    "strategy": "STRAT_MA_BREAKOUT",
+    "max_trades_per_day": 30,
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Bug: SignalClose calls the wrapped SignalOpen for the SAME direction (not negated), i.e. a new BUY signal closes buys.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Limit/Stg_Meta_Limit.mqh"
+  },
+  {
+   "name": "MA_Conditions",
+   "kind": "entry-combination",
+   "what": "Computes a D1 moving average (default DEMA 25, ma_shift 6, typical price); if the condition is TRUE uses the 'true' strategy, else the 'false' one. Default condition IN_PRICE_RANGE = MA value lies between the current bar's low and high (price is touching the MA). IS_PEAK = MA at 4-bar extreme. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_false": "STRAT_RSI",
+    "strategy_true": "STRAT_CHAIKIN",
+    "condition": "IN_PRICE_RANGE",
+    "ma_type": "DEMA(25, shift 6, PRICE_TYPICAL)",
+    "ma_tf": "D1",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "Bug: IS_PEAK compares the MA value with the bar INDEX returned by GetIndiHighest/Lowest. Not selectable in the EA enum.",
+   "selectable_in_EA31337_enum": false,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_MA_Conditions/Stg_Meta_MA_Conditions.mqh"
+  },
+  {
+   "name": "MA_Cross",
+   "kind": "entry-combination",
+   "what": "Uses a D1 MA (default LWMA 26 on weighted price) and a copy shifted 10 bars; on the bar where MA crosses ABOVE its 10-bar-lagged copy (MA[0] > MA[10] and MA[1] < MA[11]) it uses the MA-cross strategy, otherwise the main strategy. Only the upward cross is detected. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_main": "STRAT_RSI",
+    "strategy_on_cross": "STRAT_MA_TREND",
+    "ma_type": "MA (LWMA 26, PRICE_WEIGHTED)",
+    "shift2": 10,
+    "ma_tf": "D1",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "The 10-bar shift is set both in the indicator params and in the index, so the effective lag may be 20 bars (UNKNOWN).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_MA_Cross/Stg_Meta_MA_Cross.mqh"
+  },
+  {
+   "name": "Margin",
+   "kind": "risk/account-control",
+   "what": "Chooses strategy by free margin as % of balance (100/balance*freeMargin): >=80% -> RSI, 50-80% -> MA_Trend, 20-50% -> AMA, <=20% -> NONE (no new trades). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "gt_80": "STRAT_RSI",
+    "50_80": "STRAT_MA_TREND",
+    "20_50": "STRAT_AMA",
+    "lt_20": "STRAT_NONE",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Margin/Stg_Meta_Margin.mqh"
+  },
+  {
+   "name": "Martingale",
+   "kind": "order-management",
+   "what": "Despite the name there is NO lot multiplication. When the wrapped strategy has no signal and this strategy has open orders, it signals an extra BUY if ask < (lowest open price of its orders - 20 pips) and an extra SELL if bid > (highest open price + 20 pips): a price grid that adds every 20 pips beyond the extreme entry. Because SignalClose(BUY)=SignalOpen(SELL), buys are also closed when price exceeds the highest entry by 20 pips (and sells closed when price is 20 pips below the lowest).",
+   "params": {
+    "strategy": "STRAT_RSI",
+    "grid_step_pips": "20 (= SignalOpenLevel; also passed to RSI as its level)",
+    "lot_multiplier": "none",
+    "max_levels": "none",
+    "orders_reload": "hourly by magic; cache cleared daily",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 20.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "DCA/averaging"
+   ],
+   "notes": "Min/max open price are tracked over ALL its orders (buys and sells mixed) and only from orders newly found in the hourly scan; with a single order the min stays unset (0) so the first BUY add cannot trigger (bug in if/else-if). No limit on number of adds.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Martingale/Stg_Meta_Martingale.mqh"
+  },
+  {
+   "name": "Mirror",
+   "kind": "entry-combination",
+   "what": "Copies the EA's other active strategies (by type, on this meta's timeframe; set by the EA in OnStrategyAdd) and signals if ANY of them signals (OR); closes if any of their SignalClose fires.",
+   "params": {
+    "strategies": "all EA strategies added before it",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 80.0,
+     "order_close_profit_pips": 80.0,
+     "order_close_time": "-30 (bars)"
+    }
+   },
+   "techniques": [],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Mirror/Stg_Meta_Mirror.mqh"
+  },
+  {
+   "name": "Multi",
+   "kind": "entry-combination",
+   "what": "Runs a bitmask of built-in strategies and signals if ANY signals (OR); close if any SignalClose fires.",
+   "params": {
+    "active_strategies_mask_bits": [
+     3,
+     4,
+     5,
+     6,
+     8,
+     11,
+     15,
+     20,
+     21,
+     22,
+     23,
+     24
+    ],
+    "intended": "ATR, Alligator, Awesome, Bands, Chaikin, Envelopes, Indicator, Pattern, Pinbar, Pivot, RSI, RVI",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 80.0,
+     "order_close_profit_pips": 80.0,
+     "order_close_time": "-30 (bars)"
+    }
+   },
+   "techniques": [],
+   "notes": "Bug: loop index (0..31) is compared with case labels (1<<n), so only indexes 1,2,4,8,16 can match; with the default mask only ASI and ATR are actually loaded.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Multi/Stg_Meta_Multi.mqh"
+  },
+  {
+   "name": "Multi_Currency",
+   "kind": "entry-combination",
+   "what": "Up to 4 strategies; when strategy k signals (computed on the chart's own data) it immediately sends a MARKET order on the k-th Market Watch symbol with lot = max(meta lot, symbol min lot), and also returns true (OR of all) for the current symbol. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_symbol1..4": "all STRAT_NONE (inactive by default)",
+    "lot": "max(LotSize, min volume)",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Side effects: orders are sent from inside SignalOpen and also from SignalClose. Bug: strategy 4 result is stored in _result3 so symbol 4 is never traded. Per-symbol data assignment is @fixme.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Multi_Currency/Stg_Meta_Multi_Currency.mqh"
+  },
+  {
+   "name": "News",
+   "kind": "entry-filter",
+   "what": "Loads an economic calendar (data/news2018-2024.csv: time, name, HIGH/MEDIUM/LOW/NONE, currency). Only at the exact minute of an event it switches strategy by impact (last event at that minute wins): HIGH -> DEMA, MEDIUM -> DeMarker, LOW/NONE -> NONE; at all other minutes the main strategy is used. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_main": "STRAT_OSCILLATOR_TREND",
+    "high": "STRAT_DEMA",
+    "medium": "STRAT_DEMARKER",
+    "low": "STRAT_NONE",
+    "none": "STRAT_NONE",
+    "data": "CSV 2018-2024, only embedded with __resource__ (else empty)",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 30.0,
+     "order_close_profit_pips": 30.0,
+     "order_close_time": "-10 (bars)"
+    }
+   },
+   "techniques": [
+    "news filter"
+   ],
+   "notes": "MQL5 only. No currency filter (events for any currency count). Quirk: when the chosen strategy is NONE, SignalOpen returns TRUE for both BUY and SELL (it does not block). It is a strategy switch at the event minute, not a 'no trading around news' window.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_News/Stg_Meta_News.mqh"
+  },
+  {
+   "name": "Odd_Period",
+   "kind": "session/time",
+   "what": "Alternates strategies by period parity: (server time / H1 seconds) % 2 == 0 -> even strategy, else odd strategy (i.e. even vs odd hours). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_even": "STRAT_RSI",
+    "strategy_odd": "STRAT_CCI",
+    "period_tf": "H1",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "1440 (minutes)"
+    }
+   },
+   "techniques": [
+    "session filter"
+   ],
+   "notes": "Not selectable in the EA enum.",
+   "selectable_in_EA31337_enum": false,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Odd_Period/Stg_Meta_Odd_Period.mqh"
+  },
+  {
+   "name": "Order_Limit",
+   "kind": "order-management",
+   "what": "When the wrapped strategy signals, it additionally places a pending BUY_LIMIT 50 points below ask (SELL_LIMIT 50 points above bid) and also returns true so the EA opens the normal market order.",
+   "params": {
+    "strategy": "STRAT_RSI",
+    "limit_offset": "50 points (5 pips on 5-digit)",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "1440 (minutes)"
+    }
+   },
+   "techniques": [
+    "DCA/averaging"
+   ],
+   "notes": "One-step scale-in at a better price. Side effect: SignalClose=SignalOpen(opposite) also places limit orders. Lot/expiry come from framework defaults (UNKNOWN).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Order_Limit/Stg_Meta_Order_Limit.mqh"
+  },
+  {
+   "name": "Oscillator_Conditions",
+   "kind": "entry-combination",
+   "what": "Uses a D1 oscillator (default ATR 13); if the condition is true uses the 'true' strategy, else the 'false' one. Only condition: IS_PEAK (oscillator at a 4-bar high or low). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "condition": "IS_PEAK",
+    "strategy_false": "STRAT_OSCILLATOR_RANGE",
+    "strategy_true": "STRAT_CCI",
+    "oscillator": "ATR(13)",
+    "tf": "D1",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "Bug: compares the oscillator value with the bar INDEX from GetIndiHighest/Lowest, so the condition is effectively arbitrary. Not selectable in the EA enum.",
+   "selectable_in_EA31337_enum": false,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Oscillator_Conditions/Stg_Meta_Oscillator_Conditions.mqh"
+  },
+  {
+   "name": "Oscillator_Filter",
+   "kind": "entry-filter",
+   "what": "Lets a BUY through only if the oscillator rose over the last bar (IsIncreasing(1)) and a SELL only if it fell, AND the wrapped strategy signals. Oscillator on the strategy's own timeframe (default ATR 13).",
+   "params": {
+    "strategy": "STRAT_AWESOME",
+    "oscillator": "ATR(13), same TF",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Bug: SignalClose looks up strategy key 2 which does not exist -> never closes by signal.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Oscillator_Filter/Stg_Meta_Oscillator_Filter.mqh"
+  },
+  {
+   "name": "Oscillator_Switch",
+   "kind": "entry-combination",
+   "what": "If the H8 oscillator (default ATR 13) fell over the last bar -> 'down' strategy (Bands); if it rose -> 'up' strategy (Awesome); if flat -> no signal. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "oscillator": "ATR(13)",
+    "tf": "H8",
+    "strategy_down": "STRAT_BANDS",
+    "strategy_up": "STRAT_AWESOME",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "In effect a volatility-expanding vs contracting switch with ATR.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Oscillator_Switch/Stg_Meta_Oscillator_Switch.mqh"
+  },
+  {
+   "name": "Pattern",
+   "kind": "entry-combination",
+   "what": "Looks at the last 2 closed candles of the strategy timeframe: if the 2-candle pattern matches -> 2-candle strategy; else if the 1-candle pattern matches -> 1-candle strategy; else main strategy. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_main": "STRAT_AWESOME",
+    "pattern_1candle": "BODY_GT_WICKS -> STRAT_INDICATOR",
+    "pattern_2candle": "WICKS_GT_WICKS -> STRAT_STOCHASTIC",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Pattern definitions are framework-side. A D1 pattern indicator is created but not used.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Pattern/Stg_Meta_Pattern.mqh"
+  },
+  {
+   "name": "Pivot",
+   "kind": "entry-combination",
+   "what": "Daily Camarilla pivots: typical price inside S1-R1 -> strategy 1; inside S2-R2 -> 2; inside S3-R3 -> 3; otherwise (S4-R4 and beyond) -> 4. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "pivot_type": "PP_CAMARILLA",
+    "tf": "D1",
+    "pivot_shift": 1,
+    "S1R1": "STRAT_MA_BREAKOUT",
+    "S2R2": "STRAT_CHAIKIN",
+    "S3R3": "STRAT_AWESOME",
+    "beyond": "STRAT_CHAIKIN",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Pivot/Stg_Meta_Pivot.mqh"
+  },
+  {
+   "name": "Price_Band",
+   "kind": "entry-combination",
+   "what": "Compares the current bar's OPEN price with D1 Bollinger Bands (24, 1.0 dev, open price): inside the band -> inner strategy, at/outside lower or upper band -> outer strategy. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "band": "Bollinger(24, 1.0, PRICE_OPEN) or Envelopes(20, 0.1%)",
+    "tf": "D1",
+    "inner": "STRAT_CCI",
+    "outer": "STRAT_MA_BREAKOUT",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "Not selectable in the EA enum.",
+   "selectable_in_EA31337_enum": false,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Price_Band/Stg_Meta_Price_Band.mqh"
+  },
+  {
+   "name": "Profit",
+   "kind": "risk/account-control",
+   "what": "Uses realised daily balance change since the start of the day: < +1% -> strategy A, >= +1% -> strategy B (weekly branch is dead code). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "daily_lt_1pct": "STRAT_RSI",
+    "daily_gte_1pct": "STRAT_AMA",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Balance only (closed trades), not equity. Daily base is set at the first new-day event.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Profit/Stg_Meta_Profit.mqh"
+  },
+  {
+   "name": "RSI",
+   "kind": "entry-combination",
+   "what": "D1 RSI(14, typical): <=20 or >=80 -> 'peak' strategy; 20-40 or 60-80 -> 'trend' strategy; 40-60 -> 'neutral' strategy (exactly 40/60 -> no signal). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "rsi": "RSI(14, PRICE_TYPICAL)",
+    "tf": "D1",
+    "neutral_40_60": "STRAT_CHAIKIN",
+    "peak": "STRAT_DPO",
+    "trend": "STRAT_AWESOME",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_RSI/Stg_Meta_RSI.mqh"
+  },
+  {
+   "name": "Resistance",
+   "kind": "order-management",
+   "what": "Wrapped signal plus two filters: position in the 2-day D1 range, r = 2*(open-low)/(high-low)-1 in [-1,1], and inventory ratio L = (buyLots-sellLots)/max. BUY only if L != 1, r < 0 (lower half) and r <= L; SELL only if L != -1, r > 0 (upper half) and r >= L. Buys low/sells high and limits adding to the side already held. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy": "STRAT_CHAIKIN",
+    "signal_open_method": "3 (bit0: r<0 / r>0; bit1: r vs L)",
+    "range": "max/min of D1[0], D1[1]",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 3,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "hedge/lock"
+   ],
+   "notes": "Allows opposite-side orders while holding (when fully long, a SELL is allowed only at the very top r>=1). The method value 3 is also passed to the wrapped strategy.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Resistance/Stg_Meta_Resistance.mqh"
+  },
+  {
+   "name": "Reversal",
+   "kind": "entry-filter",
+   "what": "Inverts the wrapped strategy: BUY when it gives a SELL open signal and vice versa; close BUY when the wrapped strategy would close a SELL.",
+   "params": {
+    "strategy": "STRAT_OSCILLATOR_CROSS",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 30.0,
+     "order_close_profit_pips": 30.0,
+     "order_close_time": "-10 (bars)"
+    }
+   },
+   "techniques": [
+    "signal reversal/inversion"
+   ],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Reversal/Stg_Meta_Reversal.mqh"
+  },
+  {
+   "name": "Risk",
+   "kind": "entry-combination",
+   "what": "Builds a risk score starting at 0.5: +/-0.1 for IsPeak, not-IsPivot, not-trend (D1 open vs previous D1 pivot / range), D1 volume rising; +0.1 each if bar close is beyond R1/S1, R2/S2, R3/S3, R4/S4. Score > 0.6 -> high-risk strategy, < 0.4 -> low-risk, else medium. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "signal_open_method": "255 (all 8 factors; also passed to wrapped strategy)",
+    "low": "STRAT_RSI",
+    "medium": "STRAT_CHAIKIN",
+    "high": "STRAT_RSI",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 255,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "IsPeak/IsPivot and CHART_COND_* are framework definitions (UNKNOWN exact formulas here).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Risk/Stg_Meta_Risk.mqh"
+  },
+  {
+   "name": "SAR",
+   "kind": "entry-combination",
+   "what": "D1 Parabolic SAR (step 0.011, max 0.1): if SAR flipped side 1 bar ago -> strategy 1, 2 bars ago -> strategy 2, 3 bars ago -> strategy 3; later than that -> no signal. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "sar": "SAR(0.011, 0.1)",
+    "tf": "D1",
+    "1st": "STRAT_RVI",
+    "2nd": "STRAT_ASI",
+    "3rd": "STRAT_MA_CROSS_SUP_RES",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "Label says '3rd+' but code only matches up to 3 bars after the flip.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_SAR/Stg_Meta_SAR.mqh"
+  },
+  {
+   "name": "Scalper",
+   "kind": "exit",
+   "what": "Pass-through wrapper whose value is its tight defaults: close at 10 pips profit or 20 pips loss, or after 10 bars, max spread 3 pips, open filter method 41. Close also on the wrapped strategy's opposite open signal.",
+   "params": {
+    "strategy": "STRAT_OSCILLATOR_TREND",
+    "take_profit_close_pips": 10,
+    "loss_close_pips": 20,
+    "close_after_bars": 10,
+    "max_spread_pips": 3.0,
+    "signal_open_filter_method": 41,
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 41,
+     "price_stop_method": 0,
+     "max_spread_pips": 3.0,
+     "order_close_loss_pips": 20.0,
+     "order_close_profit_pips": 10.0,
+     "order_close_time": "-10 (bars)"
+    }
+   },
+   "techniques": [
+    "spread filter"
+   ],
+   "notes": "Close loss/profit are framework order-close conditions in pips (EA-level inputs override them in 'advanced' mode).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Scalper/Stg_Meta_Scalper.mqh"
+  },
+  {
+   "name": "Signal_Filter",
+   "kind": "entry-filter",
+   "what": "Passes the wrapped strategy's signal only when the selected framework trade condition is FALSE (default: blocks when TRADE_COND_IS_PIVOT is true). SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy": "STRAT_RSI",
+    "condition": "TRADE_COND_IS_PIVOT (block when true)",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "Condition formula is framework-side (UNKNOWN here).",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Signal_Filter/Stg_Meta_Signal_Filter.mqh"
+  },
+  {
+   "name": "Signal_Switch",
+   "kind": "entry-combination",
+   "what": "If the 'check' strategy gives a signal in the same direction, the trade is taken from the 'switch' strategy's signal instead of the main one; otherwise the main strategy is used. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "strategy_main": "STRAT_RSI",
+    "strategy_check": "STRAT_CHAIKIN",
+    "strategy_switch": "STRAT_RVI",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Signal_Switch/Stg_Meta_Signal_Switch.mqh"
+  },
+  {
+   "name": "Spread",
+   "kind": "entry-filter",
+   "what": "Chooses strategy by current spread: <1 pip -> RSI, 1-2 -> Oscillator_Trend, 2-4 -> Oscillator_Cross_Shift, >=4 -> ASI. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "lt_1": "STRAT_RSI",
+    "1_2": "STRAT_OSCILLATOR_TREND",
+    "2_4": "STRAT_OSCILLATOR_CROSS_SHIFT",
+    "gte_4": "STRAT_ASI",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "spread filter"
+   ],
+   "notes": "With the default MaxSpread 4 pips the >=4 bucket is normally blocked anyway.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Spread/Stg_Meta_Spread.mqh"
+  },
+  {
+   "name": "Timezone",
+   "kind": "session/time",
+   "what": "For each forex session currently open (London, New York, Sydney, Tokyo per framework MarketTimeForex hours) asks that session's strategy; signal if any open session's strategy signals (OR). Outside all sessions -> no signal. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "london": "STRAT_OSCILLATOR_TREND",
+    "newyork": "STRAT_MA_BREAKOUT",
+    "sydney": "STRAT_OSCILLATOR_CROSS_SHIFT",
+    "tokyo": "STRAT_AD",
+    "session_hours": "framework-defined (UNKNOWN here)",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 30.0,
+     "order_close_profit_pips": 30.0,
+     "order_close_time": "-10 (bars)"
+    }
+   },
+   "techniques": [
+    "session filter"
+   ],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Timezone/Stg_Meta_Timezone.mqh"
+  },
+  {
+   "name": "Trend",
+   "kind": "entry-filter",
+   "what": "D1 RSI(16, weighted) trend filter: BUY only if RSI of current and previous D1 bar are both >= 50-level, SELL only if both <= 50+level (level 0 -> 50), AND wrapped strategy signals. Close BUY when both D1 RSI values <= 50+level, close SELL when both >= 50-level (wrapped strategy not used for exit).",
+   "params": {
+    "strategy": "STRAT_OSCILLATOR_RANGE",
+    "rsi": "RSI(16, PRICE_WEIGHTED)",
+    "tf": "D1",
+    "threshold": "50 +/- signal level (0)",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 0,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [
+    "multi-timeframe confirmation"
+   ],
+   "notes": "Exit is a pure higher-timeframe trend-flip exit.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Trend/Stg_Meta_Trend.mqh"
+  },
+  {
+   "name": "Trio",
+   "kind": "entry-combination",
+   "what": "Three separate roles: open signals from strategy 1, close signals from strategy 2 (if NONE, falls back to strategy 1's opposite open signal), SL/TP price stops from strategy 3.",
+   "params": {
+    "open": "STRAT_OSCILLATOR_RANGE",
+    "close": "STRAT_NONE (fallback to open strategy)",
+    "stops": "STRAT_MA_TREND",
+    "price_stop_method": 1,
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Trio/Stg_Meta_Trio.mqh"
+  },
+  {
+   "name": "Volatility",
+   "kind": "entry-combination",
+   "what": "RSI(8) calculated on tick-volume (Volumes indicator as data source) on the strategy TF: <=20 or >=80 -> very-strong strategy, 20-40/60-80 -> strong, 40-60 -> normal; RSI == 0 -> no signal. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "indicator": "RSI(8) of tick Volumes, same TF",
+    "normal": "STRAT_MA",
+    "strong": "STRAT_STOCHASTIC",
+    "very_strong": "STRAT_STDDEV",
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "2880 (minutes)"
+    }
+   },
+   "techniques": [],
+   "notes": "README text is copy-pasted from Meta RSI.",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Volatility/Stg_Meta_Volatility.mqh"
+  },
+  {
+   "name": "Weekday",
+   "kind": "session/time",
+   "what": "One strategy per weekday (server DayOfWeek): Mon Ichimoku, Tue Ichimoku, Wed Heiken Ashi, Thu Oscillator_Trend, Fri MACD; Saturday/Sunday no strategy -> no signal. SignalClose = selected strategy's SignalOpen for the opposite direction (close on opposite signal).",
+   "params": {
+    "mon": "STRAT_ICHIMOKU",
+    "tue": "STRAT_ICHIMOKU",
+    "wed": "STRAT_HEIKEN_ASHI",
+    "thu": "STRAT_OSCILLATOR_TREND",
+    "fri": "STRAT_MACD",
+    "order_close_time_min": 720,
+    "common_defaults": {
+     "lot_size": "0 (= EA auto lot)",
+     "signal_open_method": 0,
+     "signal_open_level": 0.0,
+     "signal_open_filter_method": 32,
+     "price_stop_method": 1,
+     "max_spread_pips": 4.0,
+     "order_close_loss_pips": 200.0,
+     "order_close_profit_pips": 200.0,
+     "order_close_time": "720 (minutes)"
+    }
+   },
+   "techniques": [
+    "session filter"
+   ],
+   "notes": "",
+   "selectable_in_EA31337_enum": true,
+   "file": "/home/user/ea31337/ea31337/src/strategies-meta/Meta_Weekday/Stg_Meta_Weekday.mqh"
+  }
+ ],
+ "chien_luoc": [
+  {
+   "name": "AC",
+   "indicators": "Bill Williams Accelerator/Decelerator (AC), built-in, no params",
+   "buy": "AC rising 6 bars in a row (SignalOpenMethod=6 is reused as the bar count) AND AC up >30% vs 6 bars ago AND AC(current bar) < 0 AND framework signal bits 2|4: divergence over last 4 bars (weighted price fell while AC rose); bit 4 'value>price' is never true for an oscillator",
+   "sell": "Mirror: AC falling 6 bars, down >30% over 6 bars, AC > 0, bearish divergence (price rose while AC fell)",
+   "style": "mean-reversion",
+   "stops": "PSM=60 (bits 4+8+16+32), PSL=2. Framework default: anchor = Low[12] (SL buy) / High[12] (TP buy), pushed out by (1+2)=3x its distance to current price; then min/max with bar-12 high/low and a synthetic classic pivot S1/R1; trail adds |pivot(bar0)-pivot(bar12)| + broker min stop distance",
+   "close_defaults": "OrderCloseLoss 80 pips, OrderCloseProfit 80 pips, OrderCloseTime -30 (= 30 bars of strategy TF). SignalClose = opposite entry rule with SignalCloseMethod 6 / level 30; SignalCloseFilter 32",
+   "special": "Divergence entry below/above zero. SignalOpenFilterTime 3 = trade only 07-23 GMT. MaxSpread 4 pips. Shift 0. All signal-bit filters are direction-agnostic in the framework",
+   "file": "src/strategies/AC/Stg_AC.mqh"
+  },
+  {
+   "name": "AD",
+   "indicators": "Accumulation/Distribution (A/D), built-in",
+   "buy": "A/D up >0.02% vs 3 bars ago AND method 2 = divergence over last 4 bars (weighted price fell while A/D rose). Open filter 36 = no better-priced same-direction order open + ask above previous bar pivot (H+L+C)/3",
+   "sell": "A/D down >0.02% vs 3 bars ago AND price rose while A/D fell; bid below previous bar pivot",
+   "style": "mean-reversion",
+   "stops": "PSM=3, PSL=2 framework default (oscillator): SL buy = Low[12] - 3x|Low[12]-price|; SL sell = High[12] + 3x|High[12]-price|; TP on the other side the same way; + min stop distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose = opposite entry with method 2, level 0.02",
+   "special": "Volume divergence confirmed by previous-bar pivot filter (SignalOpenFilterMethod 36). Tick-volume based",
+   "file": "src/strategies/AD/Stg_AD.mqh"
+  },
+  {
+   "name": "ADX",
+   "indicators": "ADX Wilder (ADXW mode; ADX mode selectable), period 16, PRICE_TYPICAL",
+   "buy": "+DI > -DI AND ADX main up >2% vs 3 bars ago (trend strengthening)",
+   "sell": "-DI > +DI AND ADX main DOWN >2% vs 3 bars ago (as coded; comment says ADX should grow - asymmetric, likely bug)",
+   "style": "trend",
+   "stops": "PSM=3, PSL=2 framework default: High[12]/Low[12] pushed 3x distance from price + min distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalCloseMethod 4 (ignored: signal bits are commented out), level 0",
+   "special": "SignalOpenMethod not used. Requires valid data at shift and shift+3",
+   "file": "src/strategies/ADX/Stg_ADX.mqh"
+  },
+  {
+   "name": "AMA",
+   "indicators": "Adaptive MA: period 20, fast EMA 4, slow EMA 30, AMA shift 4, typical price",
+   "buy": "Bar Low < AMA (price dips under it) AND AMA rising 2 bars AND AMA up >0.001% vs 2 bars ago",
+   "sell": "Bar High > AMA AND AMA falling 2 bars AND IsDecByPct(+0.001) (i.e. any fall)",
+   "style": "mean-reversion",
+   "stops": "PSM=29 (1+4+8+16), PSL=2: anchor = max/min of AMA over bars 12-15 pushed 3x its distance from price; then min/max with High[12]/Low[12] and synthetic pivot R1/S1; + min distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose = opposite entry, method 0, level 0.001; SignalCloseFilter 32",
+   "special": "Pullback-into-rising-adaptive-MA entry (trend pullback)",
+   "file": "src/strategies/AMA/Stg_AMA.mqh"
+  },
+  {
+   "name": "ASI",
+   "indicators": "Accumulation Swing Index, max price change 300 (framework OnCalculate)",
+   "buy": "ASI rising 2 bars AND ASI up >100% vs 3 bars ago",
+   "sell": "ASI falling 2 bars AND IsDecByPct(+100) (trivially true when falling) - asymmetric",
+   "style": "trend",
+   "stops": "PSM=0: no SL/TP from this strategy",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 100, SignalCloseFilter 32",
+   "special": "Momentum of swing index; percent-change on an index that crosses zero is unstable",
+   "file": "src/strategies/ASI/Stg_ASI.mqh"
+  },
+  {
+   "name": "ATR",
+   "indicators": "ATR(13)",
+   "buy": "ATR rising 2 bars AND up >10% vs 3 bars ago AND ATR had been falling just before (bar s+2 < s+3: V-turn in volatility) AND method 2 divergence: weighted price FELL over last 4 bars while ATR rose => buy after a volatile drop",
+   "sell": "ATR falling 2 bars, down >10% vs 3 bars ago, had been rising just before AND divergence: price ROSE over 4 bars while ATR fell => sell a quiet/contracting rally",
+   "style": "volatility",
+   "stops": "PSM=1, PSL=2 framework default: SL buy = Low[12] - 3x|Low[12]-price|, TP buy = High[12] + 3x|High[12]-price| (mirror for sells); + min distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose method 0 level 10; SignalCloseFilter 8 (gap open outside previous bar range)",
+   "special": "Direction comes only from the price/ATR divergence bit; effectively a volatility-regime mean-reversion rule",
+   "file": "src/strategies/ATR/Stg_ATR.mqh"
+  },
+  {
+   "name": "ATR_MA_Trend",
+   "indicators": "Custom ATR_MA_Trend: upper = LWMA(High,13)*(1+0%)+1.5*ATR(15); lower = LWMA(Low,13)*(1-0%)-1.5*ATR(15); trend +1 when Close > previous upper, -1 when Close < previous lower; band ratchets (SuperTrend-like). Buffers UP/DOWN lines, UP2/DOWN2 = first bar of a new trend",
+   "buy": "DOWN2 buffer > 0 at bar 0 = the bar the indicator FLIPS TO DOWNTREND (close broke below the lower ATR band) - the code buys the downside flip",
+   "sell": "UP2 buffer > 0 = bar the indicator flips to UPTREND (close above upper band) -> sell",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default (High[12]/Low[12] pushed 3x distance from price)",
+   "close_defaults": "OCL 0 and OCP 0 (disabled), OCT -30 bars",
+   "special": "Fades an ATR-channel flip as written; UNKNOWN whether intended (could be a buffer mix-up) - inverted it is a classic SuperTrend breakout follower. SignalOpenFilterTime 9 = 08-23 GMT; TickFilter 28. Indicator body read from EA31337-indicators-other master (pinned commit not verified)",
+   "file": "src/strategies/ATR_MA_Trend/Stg_ATR_MA_Trend.mqh (+ Indi_ATR_MA_Trend.mqh)"
+  },
+  {
+   "name": "Alligator",
+   "indicators": "Alligator, LWMA on typical price: Jaw 30 (shift 6), Teeth 6 (shift 4), Lips 4 (shift 2); strategy Shift 2 so it reads bar 2",
+   "buy": "At bar 2: Lips > Teeth + 4 pips AND Teeth > Jaw + 4 pips. Default method 22 = bits 2+4+16: all three lines rose on the previous bar, Lips(bar2) > Lips(bar4), and at bar 4 the lines were NOT yet in bullish order (fresh alignment). Other bits: 1 all lines rising now; 8 Lips-Teeth gap > Teeth-Jaw gap (fanning out)",
+   "sell": "Mirror: Lips < Teeth - 4 pips < Jaw - 4 pips, lines falling, fresh bearish alignment",
+   "style": "trend",
+   "stops": "PSM=20 (4+16), PSL=2.2: anchor = max/min of first Alligator line over bars 12-15 pushed 3.2x its distance from price; min/max with bar-12 weighted price and synthetic pivot R1/S1; + min distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose = opposite entry with method 3 (bits 1+2), level 1.0 pip",
+   "special": "Uses shift 2 (closed bars only); 'fresh fan-out' detection (bit 16) avoids late entries",
+   "file": "src/strategies/Alligator/Stg_Alligator.mqh"
+  },
+  {
+   "name": "Arrows",
+   "indicators": "Arrow-type indicator switch; only Fractals is active (ATR_MA_Slope option commented out). Fractals shift 2",
+   "buy": "Lower (down) fractal present (non-zero, not DBL_MAX) at bar shift+2 = confirmed swing low",
+   "sell": "Upper fractal present at bar 2 = confirmed swing high",
+   "style": "pattern",
+   "stops": "PSM=0: none",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalCloseFilter 32",
+   "special": "Disabled alternative ATR_MA_Slope = (LWMA7 - blended previous LWMA7) / (ATR50/10); long if > 1.0, short if < -1.0. SignalOpenMethod/Level unused",
+   "file": "src/strategies/Arrows/Stg_Arrows.mqh (+ Indi_ATR_MA_Slope.mqh)"
+  },
+  {
+   "name": "Awesome",
+   "indicators": "Awesome Oscillator (built-in SMA5-SMA34 of median)",
+   "buy": "AO < 0 AND rising 2 bars (AO0>AO1>AO2) AND AO change vs 3 bars ago > 0% AND method 2: divergence (weighted price fell over 4 bars while AO rose). Comments say 'saucer' but code is a below-zero hook + divergence",
+   "sell": "AO > 0, falling 2 bars, bearish divergence",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default (High[12]/Low[12] pushed 3x)",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose method 2 level 0; SignalCloseFilter 16 (price beyond previous bar extreme)",
+   "special": "Needs valid data at shift and shift+4",
+   "file": "src/strategies/Awesome/Stg_Awesome.mqh"
+  },
+  {
+   "name": "BWMFI",
+   "indicators": "Bill Williams Market Facilitation Index + colour (green = MFI up & volume up), read at bar 1",
+   "buy": "MFI rising at bar 1 AND bars 1 and 2 both green",
+   "sell": "MFI falling AND bars 1 and 2 green - contradictory (green requires MFI up), so sell effectively never fires (buy-only as coded)",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 1.0",
+   "special": "Tick-volume based; two consecutive green bars = volume-confirmed move",
+   "file": "src/strategies/BWMFI/Stg_BWMFI.mqh"
+  },
+  {
+   "name": "Bands",
+   "indicators": "Bollinger Bands(24, dev 1.0, PRICE_OPEN) default; alternative Envelopes(20, EMA, open, 0.1%)",
+   "buy": "Lowest Low of last 3 bars + 2 pips < highest lower band of last 3 bars (lower band pierced). Default method 115 = bits 1+2+16+32+64: basis band at its 4-bar high (midline rising), close of bar 1 OR 2 below lower band, upper band higher than 2 bars ago, lowest low < basis, Open < basis. Other bits: 4 lower band rising, 8 basis rising, 128 both closes above basis",
+   "sell": "Highest High of last 3 bars - 2 pips > lowest upper band of last 3; bits: basis at 4-bar low, BOTH closes of bars 1 and 2 above upper band (stricter than buy), upper band lower than 2 bars ago, highest high > basis, Open > basis",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default: anchor = max/min of basis band over bars 12-15 pushed 3x distance from price + min distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose = opposite entry with method 1 (basis slope), level 2",
+   "special": "Band-pierce entry filtered by midline slope = buy dips in an up-sloping band. Tight 1.0-sigma bands on OPEN price",
+   "file": "src/strategies/Bands/Stg_Bands.mqh"
+  },
+  {
+   "name": "BearsPower",
+   "indicators": "Bears Power(30, close) = Low - EMA(30)",
+   "buy": "BearsPower(current bar) > 0 (low above EMA30) AND rising 2 bars AND up >300% vs 3 bars ago",
+   "sell": "BearsPower < 0 AND falling 2 bars AND down >300% vs 3 bars ago",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2. Class has its own PriceStop (method 1: highest high / lowest low over PSL*period = 60 bars; method 2: the opposite extreme) but its signature lacks the base '_bars' arg, so the EA's base-class call likely runs the framework default instead - UNKNOWN which applies",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 900",
+   "special": "Strong-momentum filter (300% acceleration)",
+   "file": "src/strategies/BearsPower/Stg_BearsPower.mqh"
+  },
+  {
+   "name": "BullsPower",
+   "indicators": "Bulls Power(30, close) = High - EMA(30)",
+   "buy": "BullsPower(current bar) > 0 AND rising 2 bars AND up >300% vs 3 bars ago",
+   "sell": "BullsPower < 0 AND falling 2 bars AND down >300% vs 3 bars ago",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 900",
+   "special": "Same skeleton as BearsPower",
+   "file": "src/strategies/BullsPower/Stg_BullsPower.mqh"
+  },
+  {
+   "name": "CCI",
+   "indicators": "CCI(20, typical), strategy Shift 1",
+   "buy": "CCI(current bar) < -90 AND CCI rising 2 bars (bar1>bar2>bar3); method 10 = bits 2|8 (divergence OR last value rose) is always met when rising, so no extra filter for buys",
+   "sell": "CCI > +90 AND falling 2 bars AND (since 'rose' is false) divergence required: weighted price rose over 4 bars while CCI fell",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose method 10, level 90",
+   "special": "Asymmetric: sells need divergence, buys do not",
+   "file": "src/strategies/CCI/Stg_CCI.mqh"
+  },
+  {
+   "name": "Chaikin",
+   "indicators": "Chaikin Oscillator (fast 10, slow 30, SMMA, tick volume)",
+   "buy": "CHO < -(50^2) = -2500 AND rising 1 bar AND up >50% vs 3 bars ago",
+   "sell": "CHO > +2500 AND falling 1 bar AND IsDecByPct(+50) (any fall) - asymmetric",
+   "style": "mean-reversion",
+   "stops": "PSM=29, PSL=2: bar-12 high/low peak + synthetic pivot R1/S1, anchor pushed 3x distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 50; SignalCloseFilter 32",
+   "special": "Level is squared; absolute value depends on broker tick volume",
+   "file": "src/strategies/Chaikin/Stg_Chaikin.mqh"
+  },
+  {
+   "name": "DEMA",
+   "indicators": "DEMA(25, MA shift 6, typical)",
+   "buy": "DEMA rising 1 bar AND up >0.07% vs 3 bars ago",
+   "sell": "DEMA falling 1 bar AND down >0.07% vs 3 bars ago",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2 framework default: anchor = max/min DEMA over bars 12-15 pushed 3x distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 0.07",
+   "special": "Pure slope filter",
+   "file": "src/strategies/DEMA/Stg_DEMA.mqh"
+  },
+  {
+   "name": "DPO",
+   "indicators": "Detrended Price Oscillator(12, median), framework-calculated",
+   "buy": "DPO < 0.5 (absolute price units) AND rising 1 bar AND up >0.5% vs 2 bars ago",
+   "sell": "DPO > 0.5 AND falling 1 bar AND IsDecByPct(+0.5) (any fall)",
+   "style": "mean-reversion",
+   "stops": "PSM=0: none (PSL 1)",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 0.5; SignalCloseFilter 32",
+   "special": "README calls it a demonstration strategy. 0.5 is absolute: on FX (DPO << 0.5) buys always pass the level and sells almost never do",
+   "file": "src/strategies/DPO/Stg_DPO.mqh"
+  },
+  {
+   "name": "DeMarker",
+   "indicators": "DeMarker(23)",
+   "buy": "DeM < 0.30 (0.5 - 0.2) AND rising 2 bars (checked from bar 0)",
+   "sell": "DeM > 0.70 AND falling 2 bars",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 0.2",
+   "special": "Plain oversold/overbought hook",
+   "file": "src/strategies/DeMarker/Stg_DeMarker.mqh"
+  },
+  {
+   "name": "Demo",
+   "indicators": "Indi_Demo (synthetic 0.1 + 0.1*bar index; placeholder)",
+   "buy": "Indicator rising 1 bar AND up > level/10 % vs 2 bars ago (level 0)",
+   "sell": "Mirror",
+   "style": "other",
+   "stops": "PSM=0: none",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars",
+   "special": "Template only, no market meaning",
+   "file": "src/strategies/Demo/Stg_Demo.mqh"
+  },
+  {
+   "name": "ElliottWave",
+   "indicators": "Elliott Wave Oscillator = SMA(5, median) - SMA(45, median); buffer0 = positive part, buffer1 = negative part (custom indicator)",
+   "buy": "Negative EWO < -0.001 AND hooked up: bar0 > bar1 and bar1 < bar2 (local trough below zero) AND higher than 3 bars ago",
+   "sell": "Positive EWO > 0.001 AND falling at bar 0 AND negative buffer rose at bar 1, i.e. EWO was negative at bar 2 and crossed above zero at bar 1 -> sells the first down-tick right after a fresh up-cross (asymmetric, likely bug)",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 0.001; SignalCloseFilter 32",
+   "special": "0.001 is absolute (price-scale dependent). SignalOpenMethod unused",
+   "file": "src/strategies/ElliottWave/Stg_ElliottWave.mqh (+ Indi_ElliottWave.mqh)"
+  },
+  {
+   "name": "Envelopes",
+   "indicators": "Envelopes(20, EMA, PRICE_OPEN, deviation 0.1%)",
+   "buy": "Lowest Low of last 3 bars < highest lower envelope of last 3 bars (lower band pierced) AND lower envelope higher than 3 bars ago",
+   "sell": "Highest High of last 3 bars > lowest upper envelope of last 3 AND upper envelope lower than 3 bars ago",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default: anchor = max/min of first envelope buffer over bars 12-15 pushed 3x distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose overridden = opposite entry rule (shift dropped)",
+   "special": "Pullback to band in the direction of the band slope",
+   "file": "src/strategies/Envelopes/Stg_Envelopes.mqh"
+  },
+  {
+   "name": "Force",
+   "indicators": "Force Index(35, SMA, applied price enum 2 = OPEN in MQL5 / HIGH in MQL4); strategy Shift 1",
+   "buy": "FI(current bar) < 0 AND rising 2 bars from bar 1 AND higher than 2 bars ago AND method 2: divergence (weighted price fell over 4 bars while FI rose) = bullish divergence below zero",
+   "sell": "FI > 0, falling 2 bars, bearish divergence (price rose while FI fell)",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose method 2",
+   "special": "Applied-price constant is platform dependent",
+   "file": "src/strategies/Force/Stg_Force.mqh"
+  },
+  {
+   "name": "Fractals",
+   "indicators": "Bill Williams Fractals (shift 0)",
+   "buy": "Lower fractal value present at bar 0 AND open filter 43 = 1+2+8+32: no order already this bar, daily trend strength > 0.4 (today's D1 open minus yesterday's pivot, divided by yesterday's range), no opposite order open, no better-priced same order",
+   "sell": "Upper fractal present AND daily trend strength < -0.4 (+ same order filters)",
+   "style": "pattern",
+   "stops": "PSM=16 (pivot), PSL=2: SL buy = min(S1, Low[12] pushed 3x), TP buy = max(R1, High[12] pushed 3x); pivots from a synthetic bar (close0, high/low of bar0 and bar12, open of bar12); + min distance",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalCloseFilter 16 (price beyond previous bar extreme)",
+   "special": "Swing point + daily-pivot trend filter. A fractal is only confirmed 2 bars later, so how often bar 0 is non-zero is UNKNOWN. SignalOpenMethod/Level/CloseMethod are hard-coded 0 (not inputs)",
+   "file": "src/strategies/Fractals/Stg_Fractals.mqh"
+  },
+  {
+   "name": "Gator",
+   "indicators": "Gator oscillator: Jaw 30 (shift 2), Teeth 14 (shift 2), Lips 6 (shift 4), EMA, PRICE_OPEN",
+   "buy": "Upper histogram |Jaw-Teeth| rising 2 bars AND lower histogram -|Teeth-Lips| falling 2 bars = both bars growing ('eating' phase); bits 1/2 (off by default): lower histogram was rising at bars 3-5 / 5-7",
+   "sell": "Upper histogram falling 2 bars AND lower rising = both contracting ('sated' phase)",
+   "style": "volatility",
+   "stops": "PSM=1, PSL=2 framework default (High[12]/Low[12])",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalCloseFilter 32",
+   "special": "Direction-agnostic: buy = lines diverging, sell = lines converging, regardless of price direction",
+   "file": "src/strategies/Gator/Stg_Gator.mqh"
+  },
+  {
+   "name": "HeikenAshi",
+   "indicators": "Heiken Ashi candles (last 4 HA bars)",
+   "buy": "HA range as % of open > 0.001 (trivial) AND current HA candle bullish AND default method -9 = 4-candle pattern BULL_CONT 'UDDU': bar3 bullish with high above bars 2 and 1, bars 2 and 1 bearish (pullback), bar0 bullish with high above bar3 high and body > sum of bodies of bars 1-2. Method map: 0 = two bullish HA candles; >0 = 1-candle + 3-candle pattern bit (method-1); <0 = 1-candle + 4-candle pattern bit -(method+1)",
+   "sell": "Same pattern bit is applied to both sides, so default needs a bearish current HA candle AND BULL_CONT (bullish bar0) - contradictory, sell never fires with -9 (buy-only)",
+   "style": "pattern",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT 0 (no time exit); SignalClose = opposite entry with method 4 (3-candle pattern bit 3), level 0.001; SignalCloseFilter 16",
+   "special": "Candle-pattern library on HA bars (4-candle catalogue: continuation, reversal, inverted hammer, shooting star, range/body growth...)",
+   "file": "src/strategies/HeikenAshi/Stg_HeikenAshi.mqh"
+  },
+  {
+   "name": "Ichimoku",
+   "indicators": "Ichimoku(Tenkan 30, Kijun 10, Senkou B 30) - non-standard, Tenkan slower than Kijun; read at bar 1",
+   "buy": "Tenkan > Kijun at bar 1 AND Tenkan < Kijun at bar 3 (cross within 2 bars) AND Chikou < Tenkan AND Senkou A > Senkou B (bullish cloud) AND Tenkan up >0.001% vs 3 bars ago",
+   "sell": "Mirror: Tenkan crosses below Kijun, Chikou > Tenkan, Senkou A < Senkou B, Tenkan falling",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2 framework default: anchor = max/min Tenkan over bars 12-15 pushed 3x",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 0.001",
+   "special": "Signal bits (Tenkan vs Chikou) only when method != 0 (default 0)",
+   "file": "src/strategies/Ichimoku/Stg_Ichimoku.mqh"
+  },
+  {
+   "name": "Indicator",
+   "indicators": "Generic wrapper: any built-in or custom indicator (default Chaikin oscillator, mode 0)",
+   "buy": "Indicator value > 20 AND method 68 = bits 4|64: value above price (price-range indicators only) OR last change bigger than the previous changes (volatile)",
+   "sell": "Indicator value < 20 AND same bits",
+   "style": "other",
+   "stops": "PSM=0: none",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalCloseFilter 32",
+   "special": "Optional daily export of indicator data to CSV/SQLite/JSON (research hook). Index order [mode][shift] looks swapped (bug), harmless at defaults",
+   "file": "src/strategies/Indicator/Stg_Indicator.mqh"
+  },
+  {
+   "name": "MA",
+   "indicators": "MA type switch; default LWMA(26, weighted price); options AMA, DEMA, FrAMA, Ichimoku, Price Channel, SAR, TEMA, VIDYA",
+   "buy": "MA(bar0) >= Open(bar0) + 0.2 pips AND MA was below the Open on bar 1 or bar 2 (price just dropped through the MA) AND MA rising; method 1 = MA also rising on prior bar. Bits: 2 = rising 4 bars from bar 3; 4 = MA at 4-bar high",
+   "sell": "Mirror: Open just rose above a falling MA",
+   "style": "mean-reversion",
+   "stops": "PSM=1, PSL=2 framework default: anchor = max/min MA over bars 12-15 pushed 3x",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose method 1, level 0",
+   "special": "Buys a dip through a still-rising MA (counter-intuitive cross direction)",
+   "file": "src/strategies/MA/Stg_MA.mqh"
+  },
+  {
+   "name": "MACD",
+   "indicators": "MACD(6, 34, 10, PRICE_OPEN)",
+   "buy": "Signal line > MACD main (main still below signal) AND signal rising 2 bars AND MACD main up >2% vs 3 bars ago - anticipates a bullish cross",
+   "sell": "Signal < main AND signal falling 2 bars AND main down >2% vs 3 bars ago",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2 framework default (High[12]/Low[12])",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 2",
+   "special": "Pre-cross entry; percent change of a zero-crossing line is unstable",
+   "file": "src/strategies/MACD/Stg_MACD.mqh"
+  },
+  {
+   "name": "MA_Breakout",
+   "indicators": "MA type switch; default Ichimoku mode 0 = Tenkan-sen(30) (Kijun 10, Senkou B 30, shift 1); option LWMA(26, weighted) etc. + D1 bars",
+   "buy": "Volatility burst: (range bar0 + bar1) / (range today + yesterday on D1) * 100 / TF minutes > 1.0 AND the line lies inside High-Low of bar0 or bar1 AND bar0 or bar1 bullish. Bits: 1 line rising, 2 rising 4 bars, 4 line at 4-bar high",
+   "sell": "Same burst + straddle AND bar0 or bar1 bearish",
+   "style": "breakout",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; close level 1",
+   "special": "Multi-timeframe (D1 range normalisation). Threshold scales with TF: M1 needs 2-bar range > 1% of 2-day range, M15 > 15%, H1 > 60%",
+   "file": "src/strategies/MA_Breakout/Stg_MA_Breakout.mqh"
+  },
+  {
+   "name": "MA_Cross_Candle",
+   "indicators": "MA type switch; default Ichimoku Tenkan(30) (option SMA(26, close)); strategy Shift 1",
+   "buy": "Line(bar1) inside High-Low of bar 2 AND rising 2 bars AND |line - current Open| > 3 pips; default method 8 = line at 4-bar high. Bits: 1 line inside the (bearish) body of bar 2; 2 line above Close(bar1); 4 line above High(bar1)",
+   "sell": "Line inside bar-2 range, falling 2 bars, |line - Open| < 3 pips (asymmetric), line at 4-bar low",
+   "style": "trend",
+   "stops": "PSM=1, PSL=3 framework default (anchor pushed 4x distance)",
+   "close_defaults": "OCL 0 (off), OCP 20 pips, OCT -30 bars; SignalClose = opposite entry with method 1, level 0, at shift 0",
+   "special": "MA-through-candle cross; TickFilter 28",
+   "file": "src/strategies/MA_Cross_Candle/Stg_MA_Cross_Candle.mqh"
+  },
+  {
+   "name": "MA_Cross_Pivot",
+   "indicators": "MA type switch; default DEMA(25, MA shift 6, typical) vs yesterday's D1 pivot (H+L+C)/3",
+   "buy": "DEMA rising AND DEMA(bar0) > D1 pivot AND DEMA(bar1) < pivot (cross up); method 1 = DEMA(bar3) also below pivot; bit 2 = DEMA at 4-bar high",
+   "sell": "Mirror cross down through the daily pivot",
+   "style": "breakout",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose method 1",
+   "special": "Uses daily pivot (multi-timeframe)",
+   "file": "src/strategies/MA_Cross_Pivot/Stg_MA_Cross_Pivot.mqh"
+  },
+  {
+   "name": "MA_Cross_Shift",
+   "indicators": "MA type switch; default LWMA(26, weighted) vs the same LWMA shifted 10 bars",
+   "buy": "MA rising AND MA(bar0) > MA(bar10) AND MA(bar1) < MA(bar11) = 10-bar MA momentum turns positive. Bits: 1 MA below its value 3 bars ago, 2 shifted MA below its value 3 bars ago, 4 MA at 4-bar high, 8 shifted MA at 4-bar high",
+   "sell": "Mirror",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars",
+   "special": "Shifted copy has indicator shift 10 AND is read at index 10 - UNKNOWN whether the real lag is 10 or 20 bars",
+   "file": "src/strategies/MA_Cross_Shift/Stg_MA_Cross_Shift.mqh"
+  },
+  {
+   "name": "MA_Cross_Sup_Res",
+   "indicators": "MA type switch; default TEMA(10, weighted) vs yesterday's D1 floor pivots R1-R4 / S1-S4",
+   "buy": "TEMA rising AND TEMA crosses above any of R1..R4 by > 0.5 pips this bar (previous bar below it); method 1 = TEMA at 4-bar high",
+   "sell": "TEMA falling AND crosses below any of S1..S4 by > 0.5 pips; TEMA at 4-bar low",
+   "style": "breakout",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars; SignalClose method 1, level 0.5",
+   "special": "Support/resistance from daily pivots (calc mode selectable: floor, classic, Camarilla etc.)",
+   "file": "src/strategies/MA_Cross_Sup_Res/Stg_MA_Cross_Sup_Res.mqh"
+  },
+  {
+   "name": "MA_Cross_Timeframe",
+   "indicators": "MA type switch; default LWMA(26, weighted) on strategy TF vs the same LWMA on H6",
+   "buy": "TF-MA rising AND TF-MA crosses above H6-MA (above now, below on previous bar). Bits: 1/2 TF/H6 MA below its value 3 bars ago; 4/8 TF/H6 MA at 4-bar high",
+   "sell": "Mirror",
+   "style": "trend",
+   "stops": "PSM=1, PSL=2 framework default",
+   "close_defaults": "OCL 80 pips, OCP 80 pips, OCT -30 bars",
+   "special": "Multi-timeframe cross; bar indexes mix TF bars and H6 bars",
+   "file": "src/strategies/MA_Cross_Timeframe/Stg_MA_Cross_Timeframe.mqh"
+  },
+  {
+   "name": "MA_Trend",
+   "indicators": "MA type switch; default LWMA(22, typical) on strategy TF + same LWMA on D1",
+   "buy": "|D1 MA(bar0) - D1 MA(bar1)| > 7 pips (strong daily slope) AND TF MA rising AND D1 MA rising; default method 8 = TF MA at 4-bar high. Bits: 1/2 TF/D1 MA also rising on prior bar, 4 TF MA rising 4 bars from bar 3",
+   "sell": "Mirror (both falling, daily slope > 7 pips, TF MA at 4-bar low)",
+   "style": "trend",
+   "stops": "Own PriceStop (PSM 1, PSL 2): SL = D1 MA - 2 pips (same formula for buys and sells; for sells it only works when D1 MA is above price); TP = TF MA +/- |D1 MA - TF MA| in trade direction + 2 pips",
+   "close_defaults": "OCL 200 pips, OCP 200 pips, OCT 2880 minutes (2 days); SignalClose method 8, level 7",
+   "special": "Multi-timeframe alignment with daily-MA based stop and MA-gap based target",
+   "file": "src/strategies/MA_Trend/Stg_MA_Trend.mqh"
+  },
+  {
+   "name": "MFI",
+   "selectable_in_EA": true,
+   "indicators": "Money Flow Index(22, tick volume)",
+   "buy": "MFI crosses up through 30 (50-level, level=20): MFI[0] > 30 and MFI[2] < 30, and MFI rising 2 bars in a row. Method 0 adds nothing.",
+   "sell": "MFI crosses down through 70: MFI[0] < 70 and MFI[2] > 70, MFI falling 2 bars.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS (method 1, level 2).",
+   "close_defaults": "Close method 0, level 20 -> opposite cross (buy closed on cross down through 70); close filter 0 (always allowed); 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 20, open filter 32, time 3",
+   "special": "Comment notes breakout/divergence variants as @todo."
+  },
+  {
+   "name": "Momentum",
+   "selectable_in_EA": true,
+   "indicators": "Momentum(12, close)",
+   "buy": "Momentum rising 2 consecutive bars, net change over 2 bars > 0%, AND divergence bit (method 2): indicator direction over last 4 bars opposite to weighted-price direction.",
+   "sell": "Momentum falling 2 bars, change < 0%, AND divergence bit.",
+   "style": "other",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 2 (divergence), level 0 -> buy closed when the sell condition appears; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 2, level 0, filter 32, time 3",
+   "special": "Momentum turn confirmed only when it diverges from price -> effectively a divergence/reversal trade. Lite mode runs it on H3."
+  },
+  {
+   "name": "OBV",
+   "selectable_in_EA": true,
+   "indicators": "On Balance Volume (close), read at shift 1",
+   "buy": "OBV rising 2 bars (closed bars), change > 0%, AND OBV/price divergence bit (method 2).",
+   "sell": "OBV falling 2 bars, change < 0%, AND divergence.",
+   "style": "other",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 2, level 0; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 2, level 0, filter 32, time 3",
+   "special": "Volume-flow vs price divergence; uses tick volume in FX."
+  },
+  {
+   "name": "OsMA",
+   "selectable_in_EA": true,
+   "indicators": "OsMA / MACD histogram (14,30,12, open price)",
+   "buy": "Histogram 2 bars ago < 0, histogram rising 2 bars, change > 100% over 2 bars, AND divergence bit (method 2).",
+   "sell": "Histogram 2 bars ago > 0, falling 2 bars, change < 100% (almost always true), AND divergence bit.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 2, level 100; close filter 2 (close allowed only when NOT in trend per D1 trend-strength); 80/80 pips, 30 bars.",
+   "open_defaults": "method 2, level 100, filter 32, time 3",
+   "special": "Classic 'histogram turns up below zero' hook. Asymmetric thresholds (buy much stricter than sell)."
+  },
+  {
+   "name": "Oscillator",
+   "selectable_in_EA": true,
+   "indicators": "Selectable single oscillator (AC, AD, AO, ATR, Bears, Bulls, BWMFI, CCI, CHO, CHV, DeMarker, MFI, MOM, OBV, PVT, ROC, RSI, StdDev, Stoch, TRIX, UO, WAD, WPR, Volumes); default CCI(20, typical)",
+   "buy": "CCI rising vs previous bar and up >0% over 2 bars; method 6 adds: CCI was rising for 4 consecutive bars ending 3 bars ago (bars 7->3) AND current CCI is the highest of the last 4 bars. (bit1 alt: previous bar was falling = hook).",
+   "sell": "Mirror: falling, older 4-bar fall, current = 4-bar low.",
+   "style": "trend",
+   "stops": "PriceStopMethod 0 -> no strategy stop; EA risk cap acts as SL/TP.",
+   "close_defaults": "Close method 0 -> plain opposite tick (oscillator turns down with 2-bar change <0); close filter 32 (close only allowed if an order with better price exists - framework caveat); 80/80 pips, 30 bars.",
+   "open_defaults": "method 6, level 0, filter 32, time 3",
+   "special": "Generic template reused by Oscillator_Martingale and Oscillator_Overlay."
+  },
+  {
+   "name": "Oscillator_Cross",
+   "selectable_in_EA": true,
+   "indicators": "Two lines of one indicator; default ADXW(16) +DI (fast) vs -DI (slow). Options: ADX, ADXW, MACD(6,34,10 open; signal vs main), RVI(12; signal vs main).",
+   "buy": "+DI crosses above -DI on this bar (bar1 below, bar0 above), +DI rising, +DI up >10% vs previous bar; method 2: +DI also below -DI 3 bars ago and +DI at 4-bar high.",
+   "sell": "+DI crosses below -DI, +DI falling, change <10%; method bit2: +DI at 4-bar low (bit1 would require +DI above -DI 3 bars ago).",
+   "style": "trend",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0, level 10 -> opposite cross; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 2, level 10, filter 32, time 3",
+   "special": "Folder is nested (Oscillator_Cross/Oscillator_Cross/). Buy side applies the 3-bars-ago check whenever method != 0 (asymmetric coding)."
+  },
+  {
+   "name": "Oscillator_Cross_Shift",
+   "selectable_in_EA": true,
+   "indicators": "One oscillator vs the same oscillator lagged; default AD (Accumulation/Distribution) now vs AD 10 bars back (Shift2=10). Same 24 oscillator choices as Oscillator.",
+   "buy": "AD crosses above its 10-bar-lagged copy (AD[0] > lag[0], AD[1] < lag[1]), AD rising, AD up >5% vs previous bar; method 6: lagged series lower than 3 bars before AND AD at 4-bar high.",
+   "sell": "Mirror cross down, falling, change <5%, lagged series higher than 3 bars before, AD at 4-bar low.",
+   "style": "trend",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0, level 5 -> opposite cross; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 6, level 5, filter 32, time 3",
+   "special": "Lag may be applied twice (indicator shift param 10 AND read at index 10) -> effective lag 10 or 20 bars: UNKNOWN. Elite README uses it for 2-4 pip spreads."
+  },
+  {
+   "name": "Oscillator_Cross_Timeframe",
+   "selectable_in_EA": true,
+   "indicators": "Same oscillator on strategy TF vs on a higher TF; default TRIX(14, weighted) vs TRIX on H6.",
+   "buy": "TF TRIX crosses above H6 TRIX this bar, TF TRIX rising, up >5%; method 6: H6 TRIX lower than 3 bars ago AND TF TRIX at 4-bar high.",
+   "sell": "Mirror (cross below, falling, H6 TRIX higher than 3 bars ago, 4-bar low).",
+   "style": "trend",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0, level 5 -> opposite cross; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 6, level 5, filter 32, time 3",
+   "special": "Multi-timeframe cross; both series indexed with the same bar shift (H6 bar index = TF bar index), so it compares 'n-th bar back' on each TF."
+  },
+  {
+   "name": "Oscillator_Cross_Zero",
+   "selectable_in_EA": true,
+   "indicators": "Default RVI(12) signal line (option: MACD 6/34/10 signal line).",
+   "buy": "Signal line crosses zero upward (bar1 < 0, bar0 > 0), rising, change >0.1%.",
+   "sell": "Crosses zero downward, falling, change <0.1%.",
+   "style": "trend",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0, level 0.1 -> opposite zero cross; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0.1, filter 32, time 3",
+   "special": "Method bits (if set): line also on the other side 3 bars ago; 4-bar extreme."
+  },
+  {
+   "name": "Oscillator_Divergence",
+   "selectable_in_EA": true,
+   "indicators": "Selectable oscillator; default CCI(20).",
+   "buy": "Find bar with the lowest indicator value in last 4 bars. Buy if (indicator now higher but open price now lower than at that bar = regular bullish divergence) OR (indicator lower but open higher = hidden divergence); indicator up >0% over 2 bars; method 2: indicator fell on the previous bar (bar1 < bar2).",
+   "sell": "Same vs the bar with the highest indicator value; indicator down over 2 bars; method 2: indicator rose on previous bar.",
+   "style": "pattern",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0 -> opposite divergence; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 2, level 0, filter 32, time 3",
+   "special": "Very short 4-bar divergence window; mixes regular and hidden divergence in one rule."
+  },
+  {
+   "name": "Oscillator_Martingale",
+   "selectable_in_EA": true,
+   "indicators": "Selectable oscillator; default RSI.",
+   "buy": "Primary: same as Oscillator template with method 6 (RSI rising, older 4-bar rise, RSI at 4-bar high). Fallback (only when primary fails AND this strategy already has open orders): RSI rising AND ask < lowest open price of this strategy's open orders minus level pips (level 0).",
+   "sell": "Primary mirror. Fallback: RSI falling AND bid > highest open price of existing orders + level pips.",
+   "style": "other",
+   "stops": "BASE_PS (method 1, level 2).",
+   "close_defaults": "Close method 0 -> opposite primary signal; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 6, level 0, filter 32, time 3",
+   "special": "LOTS DO NOT SCALE: no multiplier anywhere; every add-on uses the same strategy lot (EA lot or auto-lot). The 'martingale' is a price-averaging grid: it adds another position in the same direction only at a worse price than all existing entries (below the lowest for buys, above the highest for sells), gated by a one-bar oscillator tick in that direction. Open-price min/max is rebuilt from orders with this magic every hour (cleared daily) and mixes buy and sell orders. Coding quirk: with only ONE open order the min price stays unset (0) so a buy add-on is impossible until a second order exists, while a sell add-on works from the first order. No cap on number of adds besides margin; martingale-ratio checks are commented out. Rider uses a separate Meta_Martingale on M30 (not analysed here)."
+  },
+  {
+   "name": "Oscillator_Multi",
+   "selectable_in_EA": true,
+   "indicators": "Average of all buffers of one multi-line indicator; default RVI(12) ((main+signal)/2). Options: ADX, ADXW, Gator, MACD, OsMA, RVI.",
+   "buy": "Average makes a V-turn: avg0 > avg1 and avg1 < avg2, change avg1->avg0 >10%; method 2: avg0 is 4-bar high.",
+   "sell": "Inverted V: avg0 < avg1, avg1 > avg2, change <10%; avg0 4-bar low.",
+   "style": "mean-reversion",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0, level 10 -> opposite turn; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 2, level 10, filter 32, time 3",
+   "special": "Turning-point detector on a blended line."
+  },
+  {
+   "name": "Oscillator_Overlay",
+   "selectable_in_EA": true,
+   "indicators": "Indicator-on-indicator: RSI(16) intended to be computed on Bulls Power(30) values (base=Bulls, overlayed=RSI).",
+   "buy": "Overlay rising, up >0% over 2 bars; method 4: current value is 4-bar high.",
+   "sell": "Overlay falling, down over 2 bars, value is 4-bar low.",
+   "style": "trend",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 4, level 0 -> buy closed when overlay falls to a 4-bar low; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 4, level 0, filter 32, time 3",
+   "special": "Whether a BUILTIN RSI really uses the Bulls Power data source in this framework version is UNKNOWN."
+  },
+  {
+   "name": "Oscillator_Range",
+   "selectable_in_EA": true,
+   "indicators": "Bounded oscillator with known range; default RSI(16) (range 0-100). Options: CCI (-100..100), WPR (-100..0).",
+   "buy": "RSI hooks up (rising now, falling on previous bar) while RSI < 25 (mid 50 minus 50% of half-range).",
+   "sell": "RSI hooks down while RSI > 75.",
+   "style": "mean-reversion",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 50 (bit 2 used), close level 0 -> buy closed when RSI > 50 hooks down to a 4-bar low; sell closed when RSI < 50 hooks up to 4-bar high; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 50 (=% of half-range), filter 32, time 3",
+   "special": "Clean overbought/oversold hook entry with exit at the midline."
+  },
+  {
+   "name": "Oscillator_Trend",
+   "selectable_in_EA": true,
+   "indicators": "Oscillator on strategy TF + same oscillator on D1 as trend filter; default Momentum(12).",
+   "buy": "Price range of bar 2 > 10 pips (level), Momentum rising on TF AND on D1; method 8: TF Momentum rising 4 bars in a row (bars 5->1).",
+   "sell": "Range filter, Momentum falling on TF and D1, 4-bar fall.",
+   "style": "trend",
+   "stops": "Own PriceStop: anchor = D1 bar[4] high/low (UNKNOWN whether D1 or strategy TF chart, code reads trend indicator's chart = D1). Buy SL = D1 Low[4] - 2 pips, buy TP = D1 High[4] + 2 pips; sell SL = D1 High[4] - 2 pips, sell TP = D1 Low[4] + 2 pips. Then risk cap, set once.",
+   "close_defaults": "Close method 8, level 10 -> buy closed on the full sell condition; filter 32; OrderCloseLoss 200 pips, OrderCloseProfit 200 pips, OrderCloseTime 2880 minutes (2 days).",
+   "open_defaults": "method 8, level 10 (pips), filter 32, time 3",
+   "special": "Only strategy in this set with a D1 trend filter and day-based time stop."
+  },
+  {
+   "name": "Pattern",
+   "selectable_in_EA": true,
+   "indicators": "Candlestick pattern bitmasks (1-5 candle) on closed bar 1.",
+   "buy": "Range-change filter: |range(bar2)/range(bar1) - 1| > 0.6. Method 24064 decodes to 5-candle bit 0 = 'difference of the last two bodies is at a peak'.",
+   "sell": "Same range filter; method 24064 /1000 = 24 -> 1-candle bit 24 = 'upper hammer' pattern on bar 1.",
+   "style": "pattern",
+   "stops": "PriceStopMethod 0 -> EA risk cap only.",
+   "close_defaults": "Close method 132012, level 0.7: buy closed when 5-candle 'middle close at peak' (bit 4) + range filter 0.7; sell closed when 5-candle 'latest low at peak' (bit 12); close filter 10 (allowed if not-in-trend OR today's open gapped outside previous bar range); 80/80 pips, OrderCloseTime -6 (6 bars).",
+   "open_defaults": "method 24064, level 0.6, filter 40, time 3",
+   "special": "Method encoding: buy = buffer min(4, m/32), bit m%32; sell = buffer min(4, (m/1000)/32), bit (m/1000)%32. Buffers: 0=1-candle,1=2-candle,2=3-candle,3=4-candle,4=5-candle. Defaults look optimizer-generated rather than designed."
+  },
+  {
+   "name": "Pinbar",
+   "selectable_in_EA": true,
+   "indicators": "Pattern (spinning top: body <30% of range, both wicks >20%), RSI(20), CCI(18, typical), ATR(14).",
+   "buy": "Bar 1 is a spinning top AND RSI < 20*1.6 = 32; method 2: CCI < 18*1.6 = 28.8. (bit1 alt: ATR rising/falling).",
+   "sell": "Spinning top AND RSI > 68; method 2: CCI > 28.8.",
+   "style": "pattern",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 2, level 2.4: buy closed on spinning top with RSI > 52 and CCI > 43.2; sell closed on spinning top with RSI < 48 and CCI < 43.2; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 2, level 1.6, filter 40, time 3",
+   "special": "Despite the name it uses a spinning-top (indecision) candle, not a long-wick pin bar; thresholds scale with indicator period x level."
+  },
+  {
+   "name": "Pivot",
+   "selectable_in_EA": true,
+   "indicators": "Pivot points (Camarilla) on the strategy TF, levels from bar 2.",
+   "buy": "Typical price of bar 1 sits in the lower half of S1-S2, S2-S3 or S3-S4 zone, AND S1 level lower than 4 bars ago.",
+   "sell": "Typical price in upper half of R1-R2, R2-R3 or R3-R4, AND R1 higher than 4 bars ago.",
+   "style": "mean-reversion",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0 -> opposite zone signal; close filter 3 (allowed if no order opened this bar OR not in trend); 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0, filter 40, time 3, strategy shift 1",
+   "special": "Fade into Camarilla support/resistance bands."
+  },
+  {
+   "name": "RSI",
+   "selectable_in_EA": true,
+   "indicators": "RSI(16, weighted price)",
+   "buy": "RSI < 26 (50-24), rising vs previous bar, up >2.4% over 2 bars.",
+   "sell": "RSI > 74, falling, change <2.4% over 2 bars.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0, level 24 -> buy closed when RSI > 74 and turning down; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 24, filter 32, time 3",
+   "special": "Meta_RSI (Lite H1/H6/H8) is a different meta strategy."
+  },
+  {
+   "name": "RVI",
+   "selectable_in_EA": true,
+   "indicators": "Relative Vigor Index(12), main + signal",
+   "buy": "Signal < main, both < 0.02, signal rising 2 bars, main up >0.2% over 2 bars.",
+   "sell": "Signal > main, both > 0.02, signal falling 2 bars, main change < -0.2%.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 32 (peak bit), level 0.02 -> buy closed on sell condition plus RVI at a 4-bar extreme; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0.02, filter 32, time 3",
+   "special": "Signal line rising below the main line near zero = early bullish turn."
+  },
+  {
+   "name": "Retracement",
+   "selectable_in_EA": true,
+   "indicators": "Previous D1 bar pivot levels (Classic, applied price High if D1 bar bullish / Low if bearish) + a 'retracement' line, default Ichimoku(30,10,30) buffer 0 (options AMA, DEMA, FrAMA, MA, Price Channel, SAR, TEMA, VIDYA).",
+   "buy": "Previous D1 bar bullish, Ichimoku line rising, and line within 4% of the D1 range from the nearest support S1..S4.",
+   "sell": "Previous D1 bar bearish, line falling, and line within 4% of D1 range from nearest SUPPORT (code uses support proximity for sells too - likely bug).",
+   "style": "trend",
+   "stops": "Own PriceStop: SL = first S level below the line minus 2% of D1 range; TP = first R level above the line minus 2% of D1 range. Not direction-aware, so it only produces valid levels for BUY orders; sells end up with the risk cap only.",
+   "close_defaults": "Close method 0, level 4 -> opposite signal; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 4, filter 32, time 3",
+   "special": "Buy-the-pullback-to-daily-support in a bullish day; method bit1 adds 'line at 4-bar extreme'."
+  },
+  {
+   "name": "SAR",
+   "selectable_in_EA": true,
+   "indicators": "Parabolic SAR(step 0.011, max 0.1)",
+   "buy": "SAR flip below price: SAR[2] > SAR[0], SAR rising vs previous bar, SAR down >0.11% over 2 bars.",
+   "sell": "SAR flip above price: SAR[2] < SAR[0], SAR falling, SAR up >0.11% over 2 bars.",
+   "style": "trend",
+   "stops": "BASE_PS (anchor = range of SAR values from 12 bars back).",
+   "close_defaults": "Close method 0, level 0.11 -> opposite flip; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0.11, filter 32, time 3",
+   "special": "Lite mode default on H12."
+  },
+  {
+   "name": "SAWA",
+   "selectable_in_EA": false,
+   "indicators": "Custom indicator 'SAWA' (CCI 14, RSI 14, MA 14, koef 8) - source not in repo (indicators submodule empty).",
+   "buy": "Buffer0 > buffer1 and buffer0 rising (buffer meaning UNKNOWN).",
+   "sell": "Buffer0 < buffer1 and buffer0 falling.",
+   "style": "trend",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0 -> opposite; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0, filter 32, time 3",
+   "special": "Commented out of ENUM_STRATEGY, so not selectable in the EA build."
+  },
+  {
+   "name": "SVE_Bollinger_Bands",
+   "selectable_in_EA": true,
+   "indicators": "Custom SVE Bollinger Bands (TEMA 8, SVE 18, dev 1.6/1.6, deviation period 63): main, upper, lower.",
+   "buy": "Main line below lower band, rising, up >1% vs previous bar.",
+   "sell": "Main above upper band, falling, change <1%.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0, level 1 -> opposite band signal; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 1, filter 32, time 3",
+   "special": "Custom indicator source not in repo; formula UNKNOWN beyond names."
+  },
+  {
+   "name": "StdDev",
+   "selectable_in_EA": true,
+   "indicators": "Standard deviation(24, LWMA, weighted price)",
+   "buy": "StdDev rising 2 bars, up >28% over 2 bars, AND (divergence OR last-value-increased bit; method 10).",
+   "sell": "StdDev falling 2 bars, down >28%, AND divergence (inc bit impossible when falling).",
+   "style": "volatility",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0, level 28 -> buy closed on volatility collapse signal; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 10, level 28, filter 32, time 3",
+   "special": "Direction comes from volatility expansion (long) vs contraction (short) - no price-direction logic; questionable as a standalone entry."
+  },
+  {
+   "name": "Stochastic",
+   "selectable_in_EA": true,
+   "indicators": "Stochastic(K 8, D 12, slowing 12, EMA, low/high)",
+   "buy": "Min value of last 4 bars < 26, signal < main, both lines rising, signal up >2.4% over 3 bars.",
+   "sell": "Max of last 4 > 74, signal > main, both falling, signal change <2.4% over 3 bars.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0, level 24 -> opposite signal; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 24, open filter 0 (none), time 3",
+   "special": "Rider mode default on H2."
+  },
+  {
+   "name": "SuperTrend",
+   "selectable_in_EA": false,
+   "indicators": "Custom SuperTrend (period 14, shift 20, filter on); source not in repo.",
+   "buy": "SuperTrend line rising vs previous bar and up >0% over 2 bars.",
+   "sell": "Line falling, down over 2 bars.",
+   "style": "trend",
+   "stops": "Method 0 -> EA risk cap only.",
+   "close_defaults": "Close method 0 -> opposite; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0, filter 32, time 3",
+   "special": "Commented out of ENUM_STRATEGY (MQL5) - not selectable."
+  },
+  {
+   "name": "TMAT_SVEBB",
+   "selectable_in_EA": true,
+   "indicators": "SVE Bollinger Bands (as above) + TMA True bands (half length 3, ATR 6 x1.5).",
+   "buy": "SVE main below lower band, rising, up >1%, AND lowest low of last 3 bars <= lowest TMA value of last 3 bars (price pierced TMA band).",
+   "sell": "SVE main above upper band, falling, AND highest high of last 3 bars >= highest TMA value.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0, level 1 -> opposite; filter 0; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 1, filter 32, time 3",
+   "special": "Double band-exhaustion confirmation; Rider mode default on H6. TMA modes compared via GetMin/GetMax across all buffers (exact band used UNKNOWN)."
+  },
+  {
+   "name": "TMA_CG",
+   "selectable_in_EA": false,
+   "indicators": "Custom 'TMA+CG mladen NRP' (half length 61, ATR 20, band dev 2.8) - repainting-style centred TMA bands with arrow buffers.",
+   "buy": "Up-arrow buffer non-zero on current bar.",
+   "sell": "Down-arrow buffer non-zero.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0 -> opposite arrow; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0, filter 32, time 3",
+   "special": "Commented out of ENUM_STRATEGY - not selectable. Centred TMA typically recalculates past values (backtest risk)."
+  },
+  {
+   "name": "TMA_True",
+   "selectable_in_EA": true,
+   "indicators": "Custom TMA True bands (half length 3, ATR(6) x1.5): main, upper, lower.",
+   "buy": "Low of bar 1 <= lower band, TMA main rising and up >0% over 3 bars.",
+   "sell": "High of bar 1 >= upper band, TMA main falling, change <0% over 3 bars.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS (anchor = TMA value range from 12 bars back).",
+   "close_defaults": "Close method 0 -> opposite band touch; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0, filter 32, time 3",
+   "special": "Band touch in the direction of the TMA slope (dip-buy in uptrend)."
+  },
+  {
+   "name": "WPR",
+   "selectable_in_EA": true,
+   "indicators": "Williams %R(18)",
+   "buy": "%R now > -90 but min of last 4 bars < -90 (just left oversold), rising, up >4% over 3 bars.",
+   "sell": "%R now < -10 but max of last 4 > -10 (just left overbought), falling.",
+   "style": "mean-reversion",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0, level 40 -> opposite exit-from-extreme; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 40, filter 32, time 3",
+   "special": "Levels are -50 +/- level, so level 40 -> -90/-10."
+  },
+  {
+   "name": "ZigZag",
+   "selectable_in_EA": true,
+   "indicators": "ZigZag(depth 2, deviation 1, backstep 1): high map / low map buffers",
+   "buy": "A ZigZag swing-high pivot exists on bars {0,1,2,4} and no swing-low there; current bar high > that pivot high + 0.1 pip (break of recent swing high).",
+   "sell": "Swing-low pivot present (no high), current low < pivot low - 0.1 pip.",
+   "style": "breakout",
+   "stops": "BASE_PS.",
+   "close_defaults": "Close method 0, level 0.1 -> opposite breakout; filter 32; 80/80 pips, 30 bars.",
+   "open_defaults": "method 0, level 0.1, filter 32, time 3",
+   "special": "Very small depth (2) = micro-swing breakout; ZigZag repaints on the live bar."
+  }
+ ],
+ "lop_dieu_khien": "# EA31337 v3.000 — account / trade control layer (plain-language notes)\n\nSources read: `src/include/{ea.h,inputs.h,includes.h}`, `common/{enum.h,define.h,tasks.h,code-conf.h,mode.h,strategies-manager*.h}`,\n`common/{lite,advanced,rider,elite}/{inputs.mqh,defines.h}`, `src/EA31337.mq5`. The `classes` submodule was empty, so the\nframework semantics (filters, tasks, stops, lot sizing) were read from EA31337-classes at the pinned commit 35a2814\n(fetched read-only to `scratchpad/dl_classes/classes`). Nothing was compiled or executed.\n\n## 1. Modes (compile-time switch in `common/mode.h`; Lite is the default)\n\nEach timeframe slot runs one strategy (or meta-strategy = a combinator). Magic number = 31337 + strategy_id x TF-count + TF index.\n\n| TF | Lite | Advanced | Rider |\n|---|---|---|---|\n| M1, M5 | none | none | none |\n| M15 | Meta Scalper | Meta Trend | Meta Trend |\n| M30 | Meta Trend | Meta Trend | Meta Martingale |\n| H1 | Meta RSI | Meta Pivot | Meta Weekday |\n| H2 | Meta Volatility | Meta Oscillator Filter | Stochastic |\n| H3 | Momentum | Meta Oscillator Switch | Meta Scalper |\n| H4 | Meta Conditions | Ichimoku | Meta Double |\n| H6 | Meta RSI | Meta Timezone | TMAT_SVEBB |\n| H8 | Meta RSI | Meta Oscillator Switch | Meta Timezone |\n| H12 | SAR | Meta Volatility | Gator |\n\n- **Lite**: only strategy slots + risk/lot/spread inputs. No EA-level signal filters, no tasks, no EA close limits: each strategy's own defaults apply (typically open filter 32, time filter 3, close at -80/+80 pips or 30 bars).\n- **Advanced**: adds EA-wide signal filters (open 72, close -62, time 3, tick 32), 5 tasks, and EA-wide order limits (close at -280 pips / +120 pips / after 80 bars) that override every strategy. Per-TF \"stop strategies\" (`EA_Stops_M1..H12`) exist in code but are not inputs and are all NONE, so each strategy uses its own stops.\n- **Rider** (implies Advanced): filters open 128 (no effect, bit 128 is not checked), close 112, time 3; strategy close limits are switched OFF (0/0/0) and **all** strategies get their SL/TP from `EA_Stops_Strat = Envelopes` on `EA_Stops_Tf = H8` (Envelopes MA20 dev 0.1%, base PriceStop method 1 level 2). Tasks differ (see 2).\n- **Elite**: one main strategy `Meta MA Cross` (README: main = RSI, on MA cross = MA Trend) on M15+M30+H1+H2+H3+H4+H6+H8 simultaneously; filters open -64, close 12, time 13; limits -300/+120 pips, 90 bars. Elite does NOT define `__advanced__`, so it has **no tasks**. README shows a \"recommended\" deep meta tree (Meta Equity -> Meta Interval / MA Cross Sup-Res / DEMA / Ichimoku / Pattern ...).\n\n`EA_Strategy_Filter` (2047 = all) is a bitmask to switch TF slots on/off (1=M1,2=M5,4=M15,...,1024=H12).\n\n## 2. Tasks system (\"if CONDITION then ACTION\", Advanced/Rider only)\n\nFive slots `EA_TaskN_If / EA_TaskN_Then`, enabled by `EA_Tasks_Filter` bitmask (31 = all). Evaluated on every new period (each minute) via the EA's Trade object for the chart symbol, i.e. over all EA orders on that symbol.\n\n**\"Equity X%\" means: floating P/L of the EA's open orders as % of account balance** (`(balance+floating)/balance - 1`), not account equity growth.\n\nConditions in the enum and whether `ea.h::GetTaskEntry` (the code actually used) wires them:\n\n| Condition | Meaning | Works? |\n|---|---|---|\n| NONE | — | slot inert |\n| EA_ON_NEW_DAY / EA_ON_NEW_MONTH | fires at each new day / month | yes |\n| EA_ON_NEW_WEEK | new week | NO (commented out, classes issue 628) |\n| ORDERS_IN_TREND / ORDERS_IN_TREND_NOT | open orders aligned / not with trend | NO |\n| ORDERS_PROFIT_DBL_LOSS | profit doubles loss | NO |\n| TRADE_EQUITY_GT_01/02/05/10PC | floating P/L >= +1/+2/+5/+10 % of balance | yes |\n| TRADE_EQUITY_LT_01/02/05/10PC | floating P/L <= -1/-2/-5/-10 % of balance | yes |\n| TRADE_EQUITY_GT_RMARGIN / LT_RMARGIN | vs risk margin % | NO |\n| TRADE_IS_PEAK / TRADE_IS_PIVOT | price at peak / beyond pivot | NO |\n\nUnwired conditions create a task whose condition is inactive, so it silently never fires (no error, because `TaskEntry::IsValid` tests the wrong flag bit). `common/tasks.h` (class `EATasks`) maps more of them but is never used.\n\nActions (all wired): CLOSE_MOST_LOSS (close the single order with the lowest P/L), CLOSE_MOST_PROFIT (single order with highest P/L), ORDERS_CLOSE_ALL, ORDERS_CLOSE_IN_PROFIT (all orders with profit > current spread in pips), ORDERS_CLOSE_IN_TREND / IN_TREND_NOT (close orders on the trend side / against it, trend from Trade::GetTrend), ORDERS_CLOSE_SIDE_IN_LOSS / SIDE_IN_PROFIT (sum P/L per side buy vs sell, close the losing / winning side). CLOSE_LEAST_LOSS / LEAST_PROFIT are commented out (todo).\n\nDefaults:\n- Advanced: T1 equity >= +5% -> close all; T2 equity > risk margin -> close most profitable (INERT); T3 equity <= -2% -> close most profitable order (odd but real).\n- Rider: T1 equity >= +5% -> close all; T2 equity <= -5% -> close the most-losing order; T4 equity > risk margin -> close most losing (INERT).\n\n## 3. Signal filters (bitmasks; bit n tested with `(m & 1<<n)`)\n\nSignals are evaluated only when the tick filter passes (32 = first tick of a new bar of the strategy TF).\n\n**Open filter** (`SignalOpenFilterMethod`) — all enabled checks must pass (AND):\n- 1 `!BarO`: no order of this direction already opened in the current bar.\n- 2 `Trend`: D1 trend strength agrees — `(today's D1 open - yesterday's pivot)/yesterday's range` > threshold for buys (< -threshold sells). Threshold is 0.4 in the framework default ctor but not set by the ctor these strategies use -> UNKNOWN.\n- 4 `PP`: price above yesterday's (previous bar's) pivot HLC/3 for buys, below for sells.\n- 8 `OppO`: no open order of the opposite type.\n- 16 `Peak`: price beyond previous bar's high (buy) / low (sell) — breakout-only entries.\n- 32 `BetterO`: no existing same-direction order with a better entry price.\n- 64 `InLoss`: positive mask -> block when account equity < 99% of balance; negative mask -> block when equity > 101%.\n- Caveat: `HasOrderBetter` / `HasOrderOppositeType` read an empty OrderData instead of the order, so 8 and 32 likely don't work as intended. Negative masks are two's-complement (e.g. -64 = bits 64+128...; -62 = bits 2 and 64).\n\n**Close filter** (`SignalCloseFilterMethod`) — gate that must be true before a strategy's close signal is acted on; ANY enabled item suffices (OR). 0 = always allow.\n- 1 no order opened this bar; 2 NOT in trend; 4 NOT beyond pivot; 8 `O>H`: current open gapped above previous high or below previous low; 16 at peak (breakout bar); 32 a better-priced order exists; 64 equity > 101% of balance (positive) / < 99% (negative).\n- Advanced -62 => close allowed when not-in-trend OR equity < 99%. Rider 112 => peak OR better order OR equity > 101%. Elite 12 => not beyond pivot OR gap open.\n\n**Session time filter** (`SignalOpenFilterTime`, GMT hours, union = earliest open .. latest close):\n1 Chicago 14-23, 2 Frankfurt 7-16, 4 Hong Kong 1-10, 8 London 8-17, 16 New York 13-22, 32 Sydney 22-7, 64 Tokyo 0-9, 128 Wellington 22-6.\nDefault 3 (Chicago+Frankfurt) = trade 07:00-23:59 GMT. Elite 13 (Chicago+HK+London) = 01:00-23:59. Because it takes min-open/max-close, mixing sessions that wrap midnight with day sessions gives odd windows. Close time filter exists but defaults to 0 (off).\n\n**Tick filter** (`TickFilterMethod`): 1 per minute, 2 bar high/low ticks, 4 minute peaks, 8 unique ticks, 16 mid-bar, 32 bar open (default), 64 each 1/10 of bar, 128 every 10 s. Negative = OR instead of AND.\n\n`EA_SignalOpenStrategyFilter` (each/first/hourly-confirmed) is marked @fixme and disabled.\n\n## 4. Risk and money\n\n- `EA_Risk_MarginMax = 3.4` (%): (a) caps every order's SL and TP to the price distance at which that order's lot would lose/gain 3.4% of balance; when a strategy has PriceStopMethod 0 this cap *is* the SL/TP. (b) Trade state \"margin max soft\" when floating P/L <= -3.4% — classified \"shouldn't trade\" but NOT enforced (only \"cannot trade\" states block entries).\n- `EA_LotSize = 0` -> auto lot, recalculated once per day: `lot = free margin / (margin required per lot x leverage x 10)` (method 0; risk margin % is NOT used in this formula), floored at broker min lot. E.g. $10k, EURUSD 1:100 -> ~0.01 lot. Until the first daily recalculation trades use the broker minimum lot. Any fixed `EA_LotSize > 0` overrides all strategies.\n- `EA_MaxSpread = 4` pips: stored on all strategies but no enforcement found in the pinned framework -> effectively UNKNOWN/not applied.\n- Strategy is suspended if the broker reports not enough money.\n\n## 5. Stops, trailing, break-even, order close rules\n\n- Orders are sent without SL/TP. On each order-update pass (once per strategy-TF bar; first pass about a minute after entry) the EA asks the \"stop strategy\" (the strategy itself, or Envelopes-H8 in Rider) for `PriceStop()`, clamps it with the risk cap, normalises it, and modifies the order if valid.\n- Base PriceStop (method bits: 1 indicator peak, 2 indicator value, 4 price, 8 price peak, 16 pivot R1/S1, 32 add pivot difference, 64 add bar range): with the common default method 1 / level 2 the stop = bar-12 high/low pushed out by 3x its distance to current close + broker min distance (see JSON `_common`).\n- Trailing: the code passes a \"locked\" flag when method > 0 meaning \"only move in the favourable direction\", but the check is written so it can never pass once a stop exists -> SL/TP are set once and never trailed. There is **no break-even logic** and no classic trailing-stop input in this layer.\n- Order close limits (per order conditions): close when profit in pips < -OrderCloseLoss or > +OrderCloseProfit, or when order age > OrderCloseTime (minutes if >0, strategy bars if <0). Lite: per-strategy (usually 80/80/-30); Advanced: 280/120/-80; Elite: 300/120/-90; Rider: disabled.\n- Signal close: a strategy's close signal (default = opposite entry signal with close method/level) passing the close filter closes all of that strategy's orders of that side.\n- Task-based closes (section 2) act across all EA orders on the symbol.\n"
+}
