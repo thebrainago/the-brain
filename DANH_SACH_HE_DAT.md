@@ -130,6 +130,8 @@ Anh nói đúng là mua S&P 500 thì lãi, nhưng đó là **quỹ hoặc cổ p
 
 ## 4. Làm gì tiếp (đơn giản)
 
+**0. (17/10 tối) XỬ LÍ LỆNH trên MT5.** EA `ea_demo/BRAIN_XuLiLenh.mq5` (DCA khi sai, nhồi thuận, trailing khi đúng, hedge khoá và gỡ). MT5 tự tính điểm, spread, swap và hoa hồng. Script chạy 27 kịch bản `mt5tools/chay_xu_li_lenh.py` và hàng chờ máy nhà #41–#43 nằm ở **repo brain2**, vì script dùng chung bộ chạy tester ở đó.
+
 1. **Máy nhà #37–#40**: đo phí trên Exness cent và XM micro, rồi chạy lại đúng 28 cấu hình này trên tài khoản của anh. Máy sẽ báo luôn đạt hay không theo 3 yếu tố.
 2. **Demo**: chạy 5 mảnh ở mục 1.1 bằng EA có sẵn, lot theo mức DD anh chọn, 4–8 tuần. Anh xử lí thêm bằng tay (DCA, gồng, hedge) trên chính các lệnh đó.
 3. Thêm mảnh từ mục 2.1–2.2 bằng EA MT5 (chạy tester trên tài khoản anh): MR_z5 US100/US500, song mốc GER40 H4, Donchian + trailing vàng H4, AUDCAD H4 RSI TP2. Thêm các chân US500 đánh ngược (mục 1.2), lưới bán cặp chéo, ONH/ONL.
