@@ -108,8 +108,11 @@ class CheDoNghienCuu(unittest.TestCase):
             "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 20.0},
         }
         pl = {"p_xau_nhat": 0.001, "null_hop_le": True, "bootstrap_hop_le": True}
+        # Cac bat bien nay la cua che do CU ("nhan"): KHAI khong bao gio PASS, nghien cuu tran CO_CO_CHE.
+        # Che do "loi_nhuan" (17/10/2026) co test rieng: test_cong_loi_nhuan.py.
         with mock.patch.object(CONG.DO, "so_sanh", return_value=so_sanh), \
                 mock.patch.object(CONG.DO, "hieu_qua_giai_doan", return_value=[]), \
+                mock.patch.object(CONG, "che_do_cong", return_value="nhan"), \
                 mock.patch.object(CONG, "placebo", return_value=pl):
             return CONG.xet(None, kq, SimpleNamespace(),
                             SimpleNamespace(do_tin=do_tin, canh_bao=None),

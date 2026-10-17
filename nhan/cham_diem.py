@@ -18,11 +18,16 @@ tien lai bao nhieu, rui ro the nao, dung vong veo hoc thuat nua"*.
   `nguy_co_chay`  Ty le duong chay bi stop-out. Voi lop khong cat lo day la
                   con so DUY NHAT co nghia.
 
-## BA MUC PHAN QUYET - dat theo NGUONG CHU DU AN, khong theo thong ke
+## PHAN QUYET = BA YEU TO COT LOI CUA CHU DU AN (17/10/2026)
 
-  `CHAY_DUOC`  lai >= 20%/nam · sut giam <= 60% · >= 20 lenh/nam · khong chay
-  `MONG`       co lai nhung khong dat mot trong cac nguong tren
+  *"chi can tim ra mot he co lai sau khi tru di phi va cac muc gian, sut giam khong qua 80% va loi
+  nhuan tren 10% mot nam"*. Lot co gian (anh tu di lot) nen hoi: o muc lot ma sut giam lich su bang
+  80% von, lai co >= 10%/nam khong (`lai_pct_nam_o_dd80`).
+
+  `CHAY_DUOC`  co lai sau phi, khong chay, va lai >= 10%/nam o muc sut giam 80%
+  `CHUA_DAT`   co lai nhung lai qua mong so voi sut giam (giu lam MANH GHEP)
   `BO`         lo, hoac chay tai khoan
+  So lenh/nam chi la NHAN.
 
 ## KHONG CO O DAY, VA CO Y
 
@@ -35,10 +40,10 @@ from __future__ import annotations
 
 import numpy as np
 
-#: Nguong cua chu du an, dat 04-05/09. Doi o day, khong rai rac trong script.
-MUC_LAI = 20.0          # %/nam tren von phai bo ra
-TRAN_SUT_GIAM = 60.0    # %
-MIN_LENH_NAM = 20.0
+#: Nguong cua chu du an, 17/10/2026 (truoc do 04-05/09: 20 %/nam, 60 %, 20 lenh/nam). Doi o day, khong rai rac trong script.
+MUC_LAI = 10.0          # %/nam
+TRAN_SUT_GIAM = 80.0    # % von
+MIN_LENH_NAM = 20.0     # chi la nhan
 CENT = 100.0            # 1 USD chuan = 100 USD cent
 
 #: Bo dem von = bao nhieu lan sut giam LICH SU.
@@ -52,7 +57,8 @@ BO_DEM_SUT_GIAM = 2.0
 def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
          so_lenh_nam: float, so_nam: float, chay: bool = False,
          nguy_co_chay: float | None = None, ky_quy_dinh: float = 0.0,
-         da_qua_cong_that: bool = False, ten: str = "") -> dict:
+         da_qua_cong_that: bool = False, ten: str = "",
+         sut_giam_tien: float | None = None) -> dict:
     """Mot cau hinh -> bang diem thuc te. Tat ca don vi tien la CUNG mot dong.
 
     `von_can` truyen vao thuong la sut giam sau nhat; ham tu nang len neu ky
@@ -60,6 +66,11 @@ def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
     """
     von = max(float(von_can), float(ky_quy_dinh), 1e-9)
     lai_pct = lai_nam / von * 100.0
+    # Muc lot chu du an chap nhan: sut giam lich su = TRAN_SUT_GIAM % von. `sut_giam_tien` mac dinh theo quy uoc
+    # `von_can = BO_DEM_SUT_GIAM x sut giam` cua `tu_to_hop`.
+    dd_tien = float(sut_giam_tien) if sut_giam_tien is not None else float(von_can) / BO_DEM_SUT_GIAM
+    von_dd80 = max(dd_tien / (TRAN_SUT_GIAM / 100.0), float(ky_quy_dinh), 1e-9)
+    lai_pct_dd80 = lai_nam / von_dd80 * 100.0
     hoi_von = (von / lai_nam * 12.0) if lai_nam > 0 else None
 
     ly_do = []
@@ -67,24 +78,22 @@ def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
         ly_do.append("CHAY TAI KHOAN")
     if lai_nam <= 0:
         ly_do.append("khong co lai")
-    if lai_pct < MUC_LAI:
-        ly_do.append("lai %.1f%%/nam < muc %.0f%%" % (lai_pct, MUC_LAI))
-    if abs(sut_giam_pct) > TRAN_SUT_GIAM:
-        ly_do.append("sut giam %.0f%% > tran %.0f%%" % (abs(sut_giam_pct),
-                                                        TRAN_SUT_GIAM))
+    if lai_nam > 0 and lai_pct_dd80 < MUC_LAI:
+        ly_do.append("lai %.1f%%/nam o muc sut giam %.0f%% < muc %.0f%%" % (lai_pct_dd80, TRAN_SUT_GIAM, MUC_LAI))
     if so_lenh_nam < MIN_LENH_NAM:
-        ly_do.append("chi %.1f lenh/nam - khong phai he thong" % so_lenh_nam)
+        ly_do.append("NHAN: %.1f lenh/nam - manh ghep" % so_lenh_nam)
 
     if chay or lai_nam <= 0:
         muc = "BO"
-    elif not ly_do:
+    elif lai_pct_dd80 >= MUC_LAI:
         muc = "CHAY_DUOC"
     else:
-        muc = "MONG"
+        muc = "CHUA_DAT"
 
     return {
         "ten": ten, "muc": muc, "ly_do": ly_do,
         "lai_pct_nam": round(lai_pct, 2),
+        "lai_pct_nam_o_dd80": round(lai_pct_dd80, 2),
         "lai_tien_nam": round(lai_nam, 1),
         "von_can": round(von, 1),
         "von_can_cent": round(von / CENT, 2),
@@ -100,7 +109,7 @@ def cham(lai_nam: float, von_can: float, sut_giam_pct: float,
 
 def tu_ket_qua_luoi(r: dict, von_can: float, so_nam: float, **kw) -> dict:
     """Ban tien cho ket qua cua `mo_phong_v2.mo_phong`."""
-    return cham(lai_nam=r.get("lai_nam", 0.0), von_can=von_can,
+    return cham(lai_nam=r.get("lai_nam", 0.0), von_can=von_can, sut_giam_tien=von_can,
                 sut_giam_pct=100.0 * von_can / max(von_can, 1e-9),
                 so_lenh_nam=r.get("ro_nam", 0.0), so_nam=so_nam, **kw)
 
@@ -156,8 +165,8 @@ def bang(cac_diem: list[dict], in_ra=print, tran: int = 25) -> None:
                  ("%.0f th" % x["hoi_von_thang"]) if x["hoi_von_thang"] else "-"))
     n = sum(1 for x in d if x["muc"] == "CHAY_DUOC")
     in_ra("")
-    in_ra("CHAY_DUOC: %d | MONG: %d | BO: %d"
-          % (n, sum(1 for x in d if x["muc"] == "MONG"),
+    in_ra("CHAY_DUOC: %d | CHUA_DAT (lai mong, manh ghep): %d | BO: %d"
+          % (n, sum(1 for x in d if x["muc"] == "CHUA_DAT"),
              sum(1 for x in d if x["muc"] == "BO")))
     chua = [x for x in d if x["muc"] == "CHAY_DUOC" and not x["da_qua_cong_that"]]
     if chua:

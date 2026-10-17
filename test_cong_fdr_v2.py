@@ -123,6 +123,7 @@ class TestFdrV2(unittest.TestCase):
         so_sanh = {
             "he": {
                 "tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
+                "cagr_pct": 10.0, "max_dd_pct": -5.0,
                 "phoi_nhiem": 0.5, "so_bar": 100,
             },
             "mua_giu_net": {
@@ -164,6 +165,7 @@ class TestFdrV2(unittest.TestCase):
             so_lenh=100, loi=np.zeros(100), index=idx, vi_the=np.ones(100))
         so_sanh = {
             "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
+                   "cagr_pct": 10.0, "max_dd_pct": -5.0,
                    "phoi_nhiem": 0.5, "so_bar": 100},
             "mua_giu_net": {"tong_lai_pct": 1.0, "sharpe": 0.1, "calmar": 0.1},
             "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 5.0},
@@ -192,6 +194,7 @@ class TestFdrV2(unittest.TestCase):
             so_lenh=100, loi=np.zeros(100), index=idx, vi_the=np.ones(100))
         so_sanh = {
             "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
+                   "cagr_pct": 10.0, "max_dd_pct": -5.0,
                    "phoi_nhiem": 0.5, "so_bar": 100},
             "mua_giu_net": {"tong_lai_pct": 1.0, "sharpe": 0.1, "calmar": 0.1},
             "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 5.0},

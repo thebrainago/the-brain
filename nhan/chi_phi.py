@@ -159,9 +159,43 @@ def _loai_tai_san(ma: str) -> str:
     return "fx"
 
 
+_POINT_XM: tuple | None = None     # (duong dan CAU_HINH, {ten: point}) - doi CAU_HINH (test) thi doc lai
+
+
+def _point_xm_da_do() -> dict:
+    """{TEN_XM: point} da DO tu symbol_info MT5 cua XM (`config/chi_phi_do.json`, cac muc san == 'XM')."""
+    global _POINT_XM
+    if _POINT_XM is None or _POINT_XM[0] != str(CAU_HINH):
+        ra: dict = {}
+        try:
+            goc = json.loads(CAU_HINH.read_text(encoding="utf-8-sig"))
+        except Exception:
+            goc = {}
+
+        def di(o):
+            if isinstance(o, dict):
+                for k, v in o.items():
+                    if isinstance(v, dict) and v.get("san") == "XM" and isinstance(v.get("point"), (int, float)) \
+                            and v["point"] > 0:
+                        ra.setdefault(str(k).upper(), float(v["point"]))
+                    else:
+                        di(v)
+        di(goc)
+        _POINT_XM = (str(CAU_HINH), ra)
+    return _POINT_XM[1]
+
+
 def point_cua(ma: str, gia_dien_hinh: float) -> float:
-    """Suy kich thuoc point. Uu tien bang do lon gia de khong phu thuoc ten."""
+    """Suy kich thuoc point. Ma `XM_*` lay point DA DO cua XM; con lai doan theo lop tai san + do lon gia.
+
+    17/10/2026: doan theo lop sai o 214/407 ma XM da do. Nang nhat: JP225/HK50/IT40/SPAIN35 point 1,0 bi doan 0,01
+    (spread tinh thap 100 lan -> lai GIA), USDCNH/HKD/ZAR thap 10 lan, USDTRY cao 1.000 lan.
+    """
     m = ma.upper()
+    if m.startswith("XM_"):
+        p = _point_xm_da_do().get(m[3:])
+        if p:
+            return p
     lt = _loai_tai_san(m)
     if lt == "chi_so_my":
         return 0.01

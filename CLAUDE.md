@@ -1,3 +1,5 @@
+> **⚠ 17/10/2026 — CHU DU AN: tieu chi DUY NHAT la ba yeu to cot loi: lai sau phi va cac muc gian · sut giam <= 80 % · lai >= 10 %/nam. p-value/Holm/FDR/placebo/MDE/mua-giu/"hai nua" chi la nhan, khong dung de loai he. Doc `BO_TIEU_CHI_MOI.md` va `DANH_SACH_HE_DAT.md` TRUOC. Cung thay doi nay da co o repo brain2 (cua Grok).**
+
 # HUONG DAN CHO CLAUDE CODE — lab/ (THE BRAIN)
 
 ## LUAT SO 0 — DOI CHIEU SO DO TRUOC MOI PHIEN (chot 12/09/2026)
@@ -103,6 +105,10 @@ Research SP500/          <- kho git chinh (mo 30/08)
 trong `ds/browser/*` va `lab/BROWSER_SCAN*.bat` da sua theo.
 
 ## Luat khong duoc pha (rut gon — ban day du: ../AGENTS.md muc 3)
+> **17/10/2026 (`BO_TIEU_CHI_MOI.md`): cong mac dinh la `che_do_cong = "loi_nhuan"` = BA YEU TO COT LOI cua chu du an:**
+> lai sau phi + gian (khong an khe dao ngay), sut giam <= 80 %, lai >= 10 %/nam - lot co gian nen hoi `cagr/|dd| >= 10/80`.
+> Phi khai bao / p-value / placebo / FDR / Holm / MDE / mua-giu / du lenh / rr / "hai nua" duoi day chi con la NHAN.
+> Danh sach he dat: `DANH_SACH_HE_DAT.md`. Phi phai la phi san cua chu du an (`mt5tools/do_phi_san.py` -> `reports/phi_san/`).
 - **Canary truoc, ket qua sau.** Canary hong -> dung tru, khong tinh p-value nao.
 - **Chi phi phai DO DUOC.** `cp.do_tin` la `KHAI` thi **khong bao gio PASS**.
 - **Pre-registration.** Phai co `plan_hash` truoc khi cham holdout. Doi ke hoach

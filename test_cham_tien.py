@@ -31,16 +31,29 @@ def test_he_tot_thi_chay_duoc():
     assert CD.tu_to_hop(_TOT)["muc"] == "CHAY_DUOC"
 
 
-def test_lai_thap_thi_mong():
+def test_lai_10_nam_o_sut_giam_80_thi_chay_duoc():
+    """17/10/2026 chu du an: lai >= 10%/nam, sut giam <= 80%. cagr_dd20 = 2,5 -> o DD 80% von: 2,5 / 25 = 10%/nam."""
+    x = CD.tu_to_hop(dict(_TOT, cagr_dd20=2.5))
+    assert x["muc"] == "CHAY_DUOC" and abs(x["lai_pct_nam_o_dd80"] - 10.0) < 1e-9
+
+
+def test_lai_qua_mong_thi_chua_dat_nhung_khong_bo():
+    """Hieu chuan hai chieu: lai 6%/nam o DD 80% -> CHUA_DAT (giu lam manh ghep), khong phai BO."""
     x = CD.tu_to_hop(dict(_TOT, cagr_dd20=1.5))
-    assert x["muc"] == "MONG"
-    assert any("muc 20%" in l for l in x["ly_do"])
+    assert x["muc"] == "CHUA_DAT"
+    assert any("muc 10%" in l for l in x["ly_do"])
 
 
-def test_it_lenh_thi_mong():
+def test_it_lenh_van_chay_duoc_kem_nhan():
+    """17/10/2026: he it lenh la MANH GHEP dung duoc; nguong 20 lenh/nam chi con la nhan."""
     x = CD.tu_to_hop(dict(_TOT, so_lenh=30))       # 3 lenh/nam
-    assert x["muc"] == "MONG"
+    assert x["muc"] == "CHAY_DUOC"
     assert any("lenh/nam" in l for l in x["ly_do"])
+
+
+def test_lo_thi_bo():
+    """Hieu chuan hai chieu: phai co ca truong hop TRUOT - lo thi BO."""
+    assert CD.tu_to_hop(dict(_TOT, cagr_dd20=-3.0))["muc"] == "BO"
 
 
 def test_chay_tai_khoan_thi_bo():
@@ -62,7 +75,7 @@ def test_so_lenh_nam_chia_dung_so_nam():
     assert abs(x["so_lenh_nam"] - 30.0) < 0.01
     y = CD.tu_to_hop(dict(_TOT, so_lenh=300, so_nam=30.0))
     assert abs(y["so_lenh_nam"] - 10.0) < 0.01
-    assert y["muc"] == "MONG"          # 10 lenh/nam < nguong 20
+    assert y["muc"] == "CHAY_DUOC"     # 10 lenh/nam < 20: chi con la nhan (17/10)
 
 
 def test_thieu_so_nam_thi_bo_qua_chu_khong_doan(tmp_path, monkeypatch):
