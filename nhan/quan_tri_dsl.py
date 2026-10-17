@@ -153,18 +153,9 @@ def kiem_khai_bao(spec: dict) -> list[str]:
     if not co:
         loi.append("khong co luat quan tri nao (dat_hue/trailing/nhoi/chot/"
                    "cat_hoa/hedge/chan/khi)")
-    # Nhoi ma khong co tran la cong thuc chay tai khoan - da do 07/09: he so lot
-    # 1,5 cho DD 99,98% ngay TRONG mau [[quan-tri-chi-dat-hue-song-sot]].
-    nh = spec.get("nhoi") or {}
-    if nh:
-        chan = spec.get("chan") or {}
-        if not chan.get("so_vi_the_toi_da") and not chan.get("lot_toi_da"):
-            loi.append("co 'nhoi' ma khong co tran 'chan.so_vi_the_toi_da' hay "
-                       "'chan.lot_toi_da' - do la cong thuc chay tai khoan")
-        hs = nh.get("lot_x")
-        if isinstance(hs, (int, float)) and hs > 1.0:
-            loi.append("'nhoi.lot_x' = %s > 1,0 la martingale tren LOT - da do "
-                       "DD 99,98%% ngay trong mau" % hs)
+    # 17/10/2026 (chu du an: gom co che ve de dung EA, DCA / go lenh la loi the): nhoi khong tran va
+    # martingale tren lot KHONG con chan o day - xem `canh_bao()` va `gan_tran_mac_dinh()`. Tung chan 40/75
+    # co che quan tri boc tu EA that (26 nhoi khong tran, 22 lot_x > 1).
     for k in ("dat_hue", "trailing", "cat_hoa", "hedge"):
         v = spec.get(k)
         if isinstance(v, dict):
@@ -173,6 +164,36 @@ def kiem_khai_bao(spec: dict) -> list[str]:
                     loi.append("%s.%s thieu don vi (%s)" % (k, f, "|".join(DON_VI)))
     loi += kiem_con_so(spec)
     return loi
+
+
+#: Tran so lenh gan cho co che NHOI khong khai tran (17/10/2026). Khong co tran thi EA sinh ra nhoi vo han
+#: trong tester - day la loi MA, khong phai lua chon rui ro.
+TRAN_NHOI_MAC_DINH = 10
+
+
+def canh_bao(spec: dict) -> list[str]:
+    """NHAN rui ro cho chu du an doc - KHONG chan. Rui ro that do bang sut giam tren MT5 (DD <= 80 %)."""
+    ra = []
+    nh = spec.get("nhoi") or {}
+    if nh:
+        chan = spec.get("chan") or {}
+        if not chan.get("so_vi_the_toi_da") and not chan.get("lot_toi_da"):
+            ra.append("nhoi khong khai tran - gan tran mac dinh %d lenh (gan_tran_mac_dinh)" % TRAN_NHOI_MAC_DINH)
+        hs = nh.get("lot_x")
+        if isinstance(hs, (int, float)) and hs > 1.0:
+            ra.append("martingale tren lot (lot_x = %s): sut giam lon, phai do DD tren MT5" % hs)
+    return ra
+
+
+def gan_tran_mac_dinh(spec: dict) -> dict:
+    """Ban sao co `chan.so_vi_the_toi_da` = TRAN_NHOI_MAC_DINH khi co nhoi ma khong khai tran."""
+    if not (spec.get("nhoi") or {}):
+        return spec
+    chan = dict(spec.get("chan") or {})
+    if chan.get("so_vi_the_toi_da") or chan.get("lot_toi_da"):
+        return spec
+    chan["so_vi_the_toi_da"] = TRAN_NHOI_MAC_DINH
+    return {**spec, "chan": chan}
 
 
 #: Khoang cach hop le, tinh bang PIP. Ngoai khoang nay thi gan nhu chac chan
@@ -332,8 +353,11 @@ def nap_tu_boc(in_ra=print) -> dict:
     them = trung = 0
     for s in tho:
         d = tu_boc(s)
+        nhan = canh_bao(d)
+        d = gan_tran_mac_dinh(d)
         loi = kiem_khai_bao(d)
         d["_bi_chan"] = loi or []
+        d["_canh_bao"] = nhan
         vt = van_tay(d)
         if vt in cu:
             trung += 1

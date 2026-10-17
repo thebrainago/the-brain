@@ -98,17 +98,20 @@ class CongQuanTriGIU_CAC_CHOT_AN_TOAN(unittest.TestCase):
         self.assertIn("thieu 'ten'",
                       QT.kiem_khai_bao({"dat_hue": {"kich_hoat": {"atr": 1.0}}}))
 
-    def test_NHOI_khong_co_tran_bi_tu_choi(self):
-        loi = QT.kiem_khai_bao({"ten": "nhoi_khong_tran",
-                                "nhoi": {"buoc": {"atr": 1.0}}})
-        self.assertTrue(any("chay tai khoan" in x for x in loi), loi)
+    def test_NHOI_khong_co_tran_duoc_gan_tran_chu_khong_bi_tu_choi(self):
+        """17/10/2026: DCA la loi the cua chu du an - khong chan; EA sinh ra van PHAI co tran (tranh nhoi vo han)."""
+        s = {"ten": "nhoi_khong_tran", "nhoi": {"buoc": {"atr": 1.0}}}
+        self.assertTrue(any("tran mac dinh" in x for x in QT.canh_bao(s)))
+        g = QT.gan_tran_mac_dinh(s)
+        self.assertEqual(g["chan"]["so_vi_the_toi_da"], QT.TRAN_NHOI_MAC_DINH)
+        self.assertEqual(QT.kiem_khai_bao(g), [])
+        self.assertNotIn("chan", s, "khong duoc sua spec goc")
 
-    def test_MARTINGALE_tren_lot_bi_tu_choi(self):
-        """lot_x > 1,0 - da do DD 99,98% ngay TRONG mau."""
-        loi = QT.kiem_khai_bao({
-            "ten": "martingale", "nhoi": {"buoc": {"atr": 1.0}, "lot_x": 1.5},
-            "chan": {"so_vi_the_toi_da": 5}})
-        self.assertTrue(any("martingale" in x for x in loi), loi)
+    def test_MARTINGALE_tren_lot_la_nhan_khong_chan(self):
+        """lot_x > 1,0 tung cho DD 99,98% trong mau - nay la NHAN, sut giam do tren MT5 quyet dinh."""
+        s = {"ten": "martingale", "nhoi": {"buoc": {"atr": 1.0}, "lot_x": 1.5}, "chan": {"so_vi_the_toi_da": 5}}
+        self.assertEqual(QT.kiem_khai_bao(s), [])
+        self.assertTrue(any("martingale" in x for x in QT.canh_bao(s)))
 
     def test_nhoi_co_tran_va_lot_x_KHONG_tang_thi_qua(self):
         self.assertEqual(QT.kiem_khai_bao({
