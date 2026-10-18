@@ -50,7 +50,7 @@ Rồi agent **đọc tay** các file EA và xử lí lệnh (như `reports/SEEKE
 **Luật giữ nguyên:**
 - Mã của người khác chỉ nằm ở `data/` (git bỏ qua). Repo chỉ giữ tóm tắt và URL.
 - Không chạy mã tải về khi chưa đọc.
-- Không vượt Cloudflare hay đăng nhập thay chủ dự án.
+- Trang sau Cloudflare hoặc cần đăng nhập: đọc bằng **Chrome thật của AI** (hồ sơ riêng `.browser_thebrain`). Mã Python đọc qua CDP 9224 (`nhan/doc_trinh_duyet.py`); agent đọc qua **Browser MCP** (`tai_lieu/BROWSER_MCP.md`, cài 18/10). Agent không gõ mật khẩu, không giải CAPTCHA, không tạo tài khoản thay chủ dự án; gặp màn xác minh thì dừng và báo.
 - Đặt `GITHUB_TOKEN` trong biến môi trường máy nhà nếu có; không lưu vào git.
 
 ## 5. Kho đã biết
