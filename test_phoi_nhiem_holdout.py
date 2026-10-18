@@ -89,6 +89,7 @@ def _canh_pass():
                             vi_the=np.ones(100))
     so_sanh = {
         "he": {"tong_lai_pct": 10.0, "sharpe": 1.0, "calmar": 1.0,
+               "cagr_pct": 10.0, "max_dd_pct": -5.0,
                "phoi_nhiem": 0.5, "so_bar": 100},
         "mua_giu_net": {"tong_lai_pct": 1.0, "sharpe": 0.1, "calmar": 0.1},
         "alpha_vs_mua_giu": {"t_alpha": 3.0, "alpha_nam_pct": 5.0},
@@ -99,6 +100,14 @@ def _canh_pass():
 
 
 class ChanPassOLanNhinLai(SoTam):
+    """Luat cua che do CU ("nhan"): nhin lai holdout thi ha PASS -> UNG_VIEN. Che do "loi_nhuan" (18/10/2026)
+    chi gan NHAN va de PASS di tiep sang MT5 - xem `test_loi_nhuan_nhin_lai_van_PASS_kem_nhan`."""
+
+    def setUp(self):
+        super().setUp()
+        self._ghim = mock.patch.object(CONG, "che_do_cong", return_value="nhan")
+        self._ghim.start()
+        self.addCleanup(self._ghim.stop)
 
     def _xet(self, gt_ma: str, plan: str, **kw):
         kq_he, kq_bh, cp, so_sanh, pl = _canh_pass()
@@ -134,8 +143,9 @@ class ChanPassOLanNhinLai(SoTam):
         SO.ghi_ket_qua(ma, {}, {}, "FAIL", 0.5, 0.0, 0.0)
         ra = self._xet(ma, "plan-3")
         self.assertNotEqual(ra["verdict"], "FAIL")
-        self.assertTrue(all(ra["dieu_kien"].values()),
-                        "khong dieu kien nao duoc gia vo la truot")
+        # 12/13 (rr, edge) la NHAN tu 17/10/2026 - so lieu gia (loi = 0) truot chung la that, khong phai gia vo
+        self.assertTrue(all(v for k, v in ra["dieu_kien"].items() if k not in CONG.NHAN_MEM),
+                        "khong dieu kien CHAN nao duoc gia vo la truot")
 
     def test_khai_du_lieu_moi_thi_mo_lai_duoc(self):
         """Holdout dai ra that la ly do chinh dang - nhung phai KHAI."""
@@ -160,6 +170,14 @@ class ChanPassOLanNhinLai(SoTam):
         self.assertEqual(ra["fdr"]["thu_tu_trong_ho"], 1, "ho moi thi j phai ve 1")
         self.assertEqual(ra["verdict"], "UNG_VIEN",
                          "ho moi khong lam holdout moi lai")
+
+    def test_loi_nhuan_nhin_lai_van_PASS_kem_nhan(self):
+        ma = "Z.D1.loi_nhuan_nhin_lai"
+        SO.ghi_ket_qua(ma, {}, {}, "FAIL", 0.5, 0.0, 0.0)
+        with mock.patch.object(CONG, "che_do_cong", return_value="loi_nhuan"):
+            ra = self._xet(ma, "plan-ln")
+        self.assertEqual(ra["verdict"], "PASS")
+        self.assertTrue(any("NHAN: da nhin holdout" in x for x in ra["ly_do"]))
 
     def test_do_dac_khong_bi_chan_nham(self):
         """Null factory / thu luc dung `gt_ma` sinh moi moi lan nen phoi nhiem

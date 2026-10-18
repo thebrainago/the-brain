@@ -276,7 +276,9 @@ def loc(specs: list[dict], in_ra=print) -> tuple[list[dict], dict]:
         if khoa in thay:
             bo["trung"] += 1
             continue
-        if not (set(nut) & NUT_QUAN_TRI):
+        # 18/10/2026: luoi / DCA / martingale / go lenh (chi co nut LUOI) cung la xu li lenh - truoc day bi loai het
+        # (6/18 spec trong reports/quan_tri_vi_the.json, ca 6 deu la EA luoi/martingale/recovery).
+        if not (set(nut) & (NUT_QUAN_TRI | NUT_LUOI)):
             bo["khong_ghep_duoc"] += 1
             continue
         thay[khoa] = s["ten"]

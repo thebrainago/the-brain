@@ -1008,11 +1008,7 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
             qua_het = qua_het_chan
         nhan = [NHAN_MEM[k] for k, v in dk.items() if k in NHAN_MEM and not v]
 
-    if qua_het and che_do == "nghien_cuu" and cd_cong == "loi_nhuan":
-        # 17/10/2026: o che do loi_nhuan chuoi nghien cuu (chi so tien mat / Yahoo) van la UNG VIEN; phi chi khai bao.
-        verdict = "UNG_VIEN"
-        ly_do.append("NHAN: chuoi nghien cuu (khong mua truc tiep) - chay lai tren CFD cua san chu du an")
-    elif qua_het and che_do == "nghien_cuu":
+    if qua_het and che_do == "nghien_cuu":
         # Tran cua che do nghien cuu. Khong bao gio PASS: chua ai chung minh
         # duoc rang thu nay giao dich duoc.
         verdict = "CO_CO_CHE"
@@ -1079,7 +1075,11 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         except Exception:
             lan_truoc = 0
         ra["lan_nhin_holdout_truoc_do"] = lan_truoc
-        if lan_truoc > n["lan_nhin_holdout_truoc_do_toi_da"] and ra["verdict"] == "PASS":
+        if lan_truoc > n["lan_nhin_holdout_truoc_do_toi_da"] and ra["verdict"] == "PASS" and cd_cong == "loi_nhuan":
+            # 18/10/2026: o che do loi_nhuan nhin lai holdout chi la NHAN - PASS van di tiep sang MT5 (`mt5_tick`),
+            # MT5 tester moi la trong tai. Ha xuong UNG_VIEN thi khong buoc nao phia sau nhan -> he dat bi ket.
+            ly_do.append("NHAN: da nhin holdout %d lan truoc - MT5 tester se phan xu" % lan_truoc)
+        elif lan_truoc > n["lan_nhin_holdout_truoc_do_toi_da"] and ra["verdict"] == "PASS":
             ra["verdict"] = "UNG_VIEN"
             ly_do.append(
                 f"gia thuyet nay da nhin holdout {lan_truoc} lan truoc lan nay. "
@@ -1093,8 +1093,12 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         ra["canh_bao_nang"] = (
             f"t_alpha = {t_al:+.2f} > 5. Tren tap sang nay, LECH MOT BAR tang t trung vi "
             "tu -0,74 len +10,05. Phai gia dinh CO NHIN TRUOC cho toi khi chung minh nguoc lai.")
-        if verdict in ("PASS", "UNG_VIEN"):
+        if verdict in ("PASS", "UNG_VIEN") and cd_cong != "loi_nhuan":
             ra["verdict"] = "NGHI_NHIN_TRUOC"
+        elif verdict in ("PASS", "UNG_VIEN"):
+            # 18/10/2026: duong von DCA / luoi muot de cho t_alpha > 5 ma khong nhin truoc. Chi la NHAN; MT5 tester
+            # (khong nhin truoc duoc) se lo ngay neu lai la gia.
+            ly_do.append("NHAN: t_alpha > 5 - nghi nhin truoc, MT5 tester se phan xu")
 
     if kq_fdr:
         ra["fdr"] = kq_fdr

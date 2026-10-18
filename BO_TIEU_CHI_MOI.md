@@ -78,7 +78,7 @@ Luật vòng lặp của Grok (`tai_lieu/VONG_LAP.md`, mục "Luật cứng") đ
 
 ## 5. Không đổi, kèm lí do (sửa một chỗ trong bản rà soát)
 
-- **`quan_tri.loc`**: bản rà soát `RA_SOAT_TOAN_BO.md` đề xuất đổi bộ lọc này. Đọc lại code thì thấy nó **chỉ phân loại họ 2 (quản trị vị thế)**: spec không có nút quản trị thuộc họ 1 (tín hiệu vào). Nó không loại hệ có lãi nào, nên **giữ nguyên**.
+- **`quan_tri.loc`** (sửa lại 18/10): kết luận ngày 17/10 "không loại hệ có lãi nào, giữ nguyên" là **SAI**. Bộ lọc đòi ít nhất một nút thuộc `NUT_QUAN_TRI` (SL/TP/trailing/hoà vốn…), nên spec chỉ có **lưới / DCA / martingale** (đúng phong cách giao dịch của chủ dự án) bị bỏ. Nay chấp nhận cả `NUT_LUOI` (`set(nut) & (NUT_QUAN_TRI | NUT_LUOI)`).
 - **`TRAN_SPREAD_BPS = 8`** (`ho_so_symbol`): giữ nguyên. Đây là câu hỏi tiền, vì cặp phí cao giết mọi lưới. Khi có `reports/phi_san/` thì đổi sang phí đo trên sàn anh.
 
 ## 6. Máy nhà cần chạy

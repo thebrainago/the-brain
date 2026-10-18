@@ -2685,12 +2685,14 @@ _DUOI_CHIEN_LUOC = (".mq4", ".mq5", ".mqh", ".pine", ".py", ".cs", ".js", ".ts")
 _TU_QUAN_TRI = ("grid", "dca", "martingale", "hedge", "recovery", "basket", "trailing", "breakeven", "break_even",
                 "averag", "pyramid", "unstuck", "lock", "money_manag", "position_adjust")
 _TU_CHIEN_LUOC = ("strateg", "stg_", "expert", "/ea", "signal", "robot", "bot")
+#: file test / tai lieu (KHONG bat "test" trong backtest/, StrategyTester...)
+_LA_TEP_THU = re.compile(r"((^|/)tests?(/|$)|(^|/)test_[^/]*$|_test\.[a-z0-9]+$|(^|/)docs?/|example_config)", re.I)
 
 
 def diem_kho(duong_dan: list[str], so_submodule: int = 0) -> dict:
     """Cham mot repo co phai KHO co che khong, chi tu danh sach duong dan file (cay git) + so submodule."""
     p = [x.lower() for x in duong_dan]
-    ma = [x for x in p if x.endswith(_DUOI_CHIEN_LUOC) and not any(t in x for t in ("test", "/docs/", "example_config"))]
+    ma = [x for x in p if x.endswith(_DUOI_CHIEN_LUOC) and not _LA_TEP_THU.search(x)]
     cl = [x for x in ma if any(t in x for t in _TU_CHIEN_LUOC)]
     qt = [x for x in ma if any(t in x.rsplit("/", 1)[-1] for t in _TU_QUAN_TRI)]
     mql = sum(1 for x in ma if x.endswith((".mq4", ".mq5", ".mqh")))

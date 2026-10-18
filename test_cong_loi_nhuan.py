@@ -70,9 +70,11 @@ class CongLoiNhuan(unittest.TestCase):
         self.assertEqual(ra["verdict"], "FAIL")
         self.assertFalse(ra["dieu_kien"]["14_lai_rong_duong"])
 
-    def test_chuoi_nghien_cuu_van_la_ung_vien(self):
+    def test_chuoi_nghien_cuu_dat_thi_CO_CO_CHE_de_bac_cau_sang_CFD(self):
+        # 18/10/2026: phai la CO_CO_CHE - quantlab chi chuyen CO_CO_CHE sang `bac_cau_san` (chay lai tren CFD cua san).
+        # Ban 17/10 tra UNG_VIEN -> khong buoc nao phia sau nhan -> he dat bi ket vinh vien.
         ra = self._xet(cagr=12.0, dd=50.0, che_do="nghien_cuu")
-        self.assertEqual(ra["verdict"], "UNG_VIEN")
+        self.assertEqual(ra["verdict"], "CO_CO_CHE")
 
     def test_an_khe_gia_dao_ngay_van_chan_phi_khai_bao_thi_khong(self):
         # do khe gia can du lieu that (DL.khe_gio_bat_thuong); o day kiem cach XEP LOAI

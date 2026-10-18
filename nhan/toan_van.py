@@ -49,9 +49,14 @@ NGAN_SACH_KY_TU = {"bai_bao": 60_000, "ma_nguon": 90_000, "dien_dan": 40_000,
 # setup.py, docs - ton ngan sach ma khong mang thong tin co che nao.
 UU_TIEN_MA = re.compile(
     r"(strateg|signal|indicator|alpha|factor|momentum|revers|breakout|pairs|"
-    r"arbitrag|backtest|algo|model|entry|exit|rule)", re.I)
-DUOI_MA = (".py", ".mq5", ".mq4", ".pine", ".ipynb", ".r", ".jl")
-BO_QUA_MA = re.compile(r"(test|__init__|setup|conftest|/docs?/|example.*plot|_plotting)", re.I)
+    r"arbitrag|backtest|algo|model|entry|exit|rule|"
+    # 18/10/2026: XU LI LENH - phan chu du an coi trong nhat, truoc khong co trong danh sach uu tien
+    r"grid|dca|martingale|hedg|recover|basket|trail|breakeven|manag|expert|_ea\b|robot|bot)", re.I)
+DUOI_MA = (".py", ".mq5", ".mq4", ".mqh", ".pine", ".cs", ".ipynb", ".r", ".jl")
+# 18/10/2026: "test" chi khi la THU MUC test/tests hoac file test_*.py / *_test.* - ban cu bat "test" O BAT KY DAU
+# nen bo ca backtest/, StrategyTester, latest... (do that).
+BO_QUA_MA = re.compile(r"((^|/)tests?(/|$)|(^|/)test_[^/]*$|_test\.[a-z0-9]+$|__init__|(^|/)setup\.py$|conftest|"
+                       r"(^|/)docs?/|example.*plot|_plotting)", re.I)
 
 
 def _lay(url: str, timeout: int = 30, nhi_phan: bool = False):
