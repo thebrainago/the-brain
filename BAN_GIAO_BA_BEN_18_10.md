@@ -27,6 +27,27 @@
 | **Claude** | Các lỗi CHỜ còn lại trong báo cáo rà soát, theo thứ tự: ATR nhìn trước (A8), `mo_phong_v2` gắn cứng EURCAD (A9), bảng symbol chung (A10, A11), `quan_tri.boc_kho` (C6), đọc GitHub bỏ chỉ báo (C7), mã hoá (C8), `ma_nguon` (C9), `noi_sinh` hai chiều (B9), `chon_ung_vien` (B8), khoá tester (D7) |
 | **Cần chủ dự án quyết** | (1) **Pháp lý:** mã EA của người khác đang trong git công khai (báo cáo rà soát mục E). (2) **Thiết kế khối "quản trị" trong DSL** để thông tin xử lí lệnh vào được kho cơ chế (C5). (3) **Mô phỏng theo kiểu của anh trong `to_hop`:** không SL, DCA, giữ lệnh (B7). Hai việc (2) và (3) nên bàn cả ba bên tối nay |
 
+## 3b. Grok đã làm tối 18/10: ống dẫn một lệnh (Claude đừng làm trùng)
+
+> **Ở the-brain:** chỉ đồng bộ phần không phụ thuộc engine: ngưỡng, D7, D8, `simulator_nguoi` vào nghi_huu, các module `nguong` / `gio_san` / `kho_co_che` / `cau_llm` / `nhap_tay`. Ống dẫn (`ong_dan.py`), `tai_khoan.chay_tk`, `sinh_viec` và `chay_lien_tuc` chỉ có ở **brain2**, vì the-brain chưa có `nhan/tai_khoan.py` và `mt5tools/sinh_viec.py`.
+
+- **Xong, đừng viết lại:**
+  - Ngưỡng một chỗ (`config/nguong.json` + `nhan/nguong.py`, 65/15 cho Python và 80/10 cuối).
+  - Engine cấp tài khoản chuẩn `nhan/tai_khoan.chay_tk`.
+  - `nhan/nguon_lenh.py`, kho cơ chế `nhan/kho_co_che.py`, cầu LLM `nhan/cau_llm.py`.
+  - Ống dẫn `python3 ong_dan.py chay` (`tai_lieu/ONG_DAN.md`); hàng chờ `reports/ong_dan/hang_cho_mt5.jsonl` đã nối vào `sinh_viec` / `chay_lien_tuc`.
+  - **D7** (khoá tester chỉ giết terminal tester theo PID) và **D8** (giờ server Exness, `nhan/gio_san.py`).
+  - `simulator_nguoi.py` đã vào `nghi_huu/` và bị cấm dùng.
+  - **Thư mục nhập tay** (`nhan/nhap_tay.py`, `E:\brain2_nhap` + `data/seeker_da_nguon/nhap_tay`) và `reports/URL_BI_CHAN_THEM.md` (`python tru/seeker.py url-bi-chan`). Không dùng Browser MCP hay cách nào để vượt chặn: chủ dự án tự mở và lưu file.
+- **Claude nên làm tiếp:**
+  - (1) `BRAIN_XuLiLenh` chế độ đọc CSV lệnh (bước 7a), để chạy tổ hợp và nguồn ngoài trong `reports/ong_dan/viec_mt5/*/CAN_EA_GHEP.md`.
+  - (2) EA tách lệnh vượt `SYMBOL_VOLUME_MAX` như Python.
+  - (3) Các lỗi CHỜ khác trong bảng trên. Bỏ D7 khỏi danh sách.
+- **Máy nhà:**
+  - Lưu file các trang bị chặn vào `E:\brain2_nhap\` rồi chạy `python3 ong_dan.py chay`.
+  - Đo phí bằng `do_phi_san.py` trên Exness cent và XM micro. Ống dẫn tự dùng phí đó.
+  - Chạy `chay_lien_tuc.py` với `BRAIN_SAN_TESTER=XM|Exness` trên tài khoản hedging.
+
 ## 4. Luật làm chung (giữ nguyên)
 
 - Không đưa khoá, token, mật khẩu vào git (chỉ dùng biến môi trường). Không khôi phục các file đăng nhập Chrome đã gỡ.

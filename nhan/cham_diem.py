@@ -41,8 +41,10 @@ from __future__ import annotations
 import numpy as np
 
 #: Nguong cua chu du an, 17/10/2026 (truoc do 04-05/09: 20 %/nam, 60 %, 20 lenh/nam). Doi o day, khong rai rac trong script.
-MUC_LAI = 10.0          # %/nam
-TRAN_SUT_GIAM = 80.0    # % von
+# 18/10/2026: doc tu MOT cho (config/nguong.json qua nhan/nguong.py, tang "cuoi" = 80/10). Khong viet cung o day nua.
+from nhan import nguong as _NG  # noqa: E402
+MUC_LAI = _NG.lai_toi_thieu("cuoi")          # %/nam
+TRAN_SUT_GIAM = _NG.sut_giam_toi_da("cuoi")  # % von
 MIN_LENH_NAM = 20.0     # chi la nhan
 CENT = 100.0            # 1 USD chuan = 100 USD cent
 

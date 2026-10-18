@@ -26,6 +26,9 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from nhan import gio_san as GS  # noqa: E402  (D8 18/10/2026: gio doi ngay theo SAN, Exness GMT+0)
+
 TIEN_TE = {"USD", "EUR", "GBP", "JPY", "CHF", "AUD", "NZD", "CAD", "SEK", "NOK", "DKK", "PLN", "HUF", "CZK", "TRY", "ZAR",
            "MXN", "SGD", "HKD", "CNH", "XAU", "XAG", "XPT", "XPD"}
 # ten goc -> cac ten san hay dung (da bo ky tu khong phai chu/so, viet hoa)
@@ -193,6 +196,13 @@ def main() -> None:
           "margin_call": ai.margin_so_call, "stop_out": ai.margin_so_so, "lenh_cho_toi_da": ai.limit_orders,
           "do_luc": datetime.now().isoformat(timespec="seconds"), "ghi_chu": "tien te USC = tai khoan CENT (1 USD = 100 USC)"}
     (ra / "tai_khoan.json").write_text(json.dumps(tk, ensure_ascii=False, indent=1), encoding="utf-8")
+    # 18/10/2026: `**/tai_khoan.json` bi .gitignore chan -> ghi them `san.json` (KHONG co login / mat khau) de box doc
+    # duoc don bay + stop-out that qua git (`nhan/tai_khoan.ho_so_tai_khoan` tu thay ho so TAM).
+    (ra / "san.json").write_text(json.dumps({k: tk[k] for k in ("server", "company", "tien_te", "don_bay", "trade_mode",
+                                                                 "margin_mode", "so_mode", "margin_call", "stop_out", "do_luc")}
+                                            | {"gio_doi_ngay": list(GS.gio_doi_ngay(ai.server)),
+                                               "cam_doi_ngay": list(GS.cam_doi_ngay(ai.server))},
+                                            ensure_ascii=False, indent=1), encoding="utf-8")
     print("TAI KHOAN", json.dumps(tk, ensure_ascii=False))
     chi = {x.strip().upper() for x in a.chi.split(",") if x.strip()}
     ma_san: dict[str, list[str]] = {}
@@ -239,7 +249,7 @@ def main() -> None:
                     gio_rows.append({"goc": g, "symbol": i.name, "gio_server": h, "n_tick": n, "p50_gia": p50, "p90_gia": p90, "p99_gia": p99})
                 q50, q90, q99 = (float(x) for x in np.quantile(sp, [.5, .9, .99]))
                 r.update(tick_n=int(len(sp)), tick_tu=_tg(tt[0]).strftime("%Y-%m-%d"),
-                         spread_p50_gia=q50, spread_p90_gia=q90, spread_p99_gia=q99, gian_doi_ngay_x=gian_doi_ngay(bang))
+                         spread_p50_gia=q50, spread_p90_gia=q90, spread_p99_gia=q99, gian_doi_ngay_x=gian_doi_ngay(bang, GS.gio_doi_ngay(ai.server)))
                 if gia and q50:
                     r["spread_p50_bps"] = round(q50 / gia * 1e4, 3)
                 r["spread_chiem_TP_pct"] = round(100 * q50 / a.tp_gia, 2)

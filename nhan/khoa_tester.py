@@ -55,7 +55,9 @@ def _tep(ten: str | None) -> Path:
 #: Khoa cu hon nguong nay ma chu giu khong con song -> thu hoi. Mot lan chay
 #: tester day du (8.241 phep thu) do duoc la 82 giay; mot lan chay nang nhat tu
 #: truoc den nay khoang 20 phut. 45 phut la bien an toan.
-HAN_GIAY = 45 * 60
+#: D7 (18/10/2026): 45 phut < tran 3.600 s cua `phong` -> khoa het han khi tester van chay, tien trinh khac chen vao.
+#: Nay = 2 gio (> moi tran dang dung: 3.600 s `phong`, 1.800 s `chay_lien_tuc`).
+HAN_GIAY = 2 * 3600
 
 
 class TesterDangBan(RuntimeError):
@@ -100,10 +102,19 @@ def thu_lay(viec: str, ten: str | None = None) -> dict:
             f"cua nhau VA khong ai bao loi.")}
     tep = _tep(ten)
     tep.parent.mkdir(exist_ok=True)
-    tep.write_text(json.dumps(
-        {"pid": os.getpid(), "viec": viec, "slot": ten, "luc": time.time(),
-         "luc_doc": time.strftime("%Y-%m-%d %H:%M:%S")},
-        ensure_ascii=False), encoding="utf-8")
+    noi_dung = json.dumps({"pid": os.getpid(), "viec": viec, "slot": ten, "luc": time.time(),
+                           "luc_doc": time.strftime("%Y-%m-%d %H:%M:%S")}, ensure_ascii=False)
+    if cu and int(cu.get("pid") or 0) == os.getpid():
+        tep.write_text(noi_dung, encoding="utf-8")          # chinh minh giu -> gia han
+        return {"duoc": True, "ly_do": "", "chu": None}
+    # D7 (18/10/2026): tao file NGUYEN TU (O_EXCL). Ban cu "doc roi ghi" -> hai tien trinh cung thay trong, cung ghi.
+    try:
+        fd = os.open(str(tep), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    except FileExistsError:
+        chu = dang_giu(ten)
+        return {"duoc": False, "chu": chu, "ly_do": "tester vua bi tien trinh khac lay (%s)" % (chu or {}).get("viec")}
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        f.write(noi_dung)
     return {"duoc": True, "ly_do": "", "chu": None}
 
 
@@ -169,7 +180,7 @@ def phong(exe, ini, tran: int = 3600, nhip: float = 6.0,
 
 
 def dong_terminal(viec: str = "") -> bool:
-    """`taskkill /F /IM terminal64.exe` NHUNG chi khi khong ai khac dang giu khoa.
+    """Dong cac terminal TESTER (theo PID, khong theo ten anh) NHUNG chi khi khong ai khac dang giu khoa.
 
     Do 12/09/2026: bon script (`mt5_worker.py`, `lab.py`, `mt5_chay_ichimoku.py`,
     `chay_tester_z5.py`) goi thang `taskkill /F /IM terminal64.exe` de don duong
@@ -197,9 +208,58 @@ def dong_terminal(viec: str = "") -> bool:
             f"KHONG giet terminal64: pid {cu.get('pid')} ({cu.get('viec')}) dang "
             f"chay tester tu {cu.get('luc_doc')}. Giet bay gio la pha ket qua cua "
             f"ho, va ho se khong bao loi. Viec dang cho: {viec or '?'}")
-    subprocess.run(["taskkill", "/F", "/IM", "terminal64.exe"], capture_output=True)
-    time.sleep(2)
-    return True
+    # D7 (18/10/2026): KHONG giet theo ten anh nua. Lenh cu giet MOI terminal64 tren may - ke ca terminal dang GIAO DICH
+    # tai khoan that cua chu du an. Nay chi giet tien trinh duoc nhan dien la TESTER (`la_terminal_tester`), theo PID.
+    da = 0
+    for p in _cac_terminal():
+        if la_terminal_tester(p.get("exe"), p.get("cmd")):
+            try:
+                import psutil
+                psutil.Process(p["pid"]).kill()
+                da += 1
+            except Exception:
+                pass
+    if da:
+        time.sleep(2)
+    return da > 0
+
+
+def _ds_bien(ten: str) -> list[str]:
+    return [x.strip().lower().replace("/", "\\") for x in os.environ.get(ten, "").split(";") if x.strip()]
+
+
+def la_terminal_tester(exe: str | None, cmd: str | None) -> bool:
+    """True CHI KHI terminal nay chac chan la terminal TESTER (duoc phep giet).
+
+    - Nam trong BRAIN_TERMINAL_GIAO_DICH (cac duong dan terminal giao dich, phan cach `;`) -> KHONG BAO GIO giet.
+    - Duoc phong voi `/config:` (moi script tester cua du an deu phong the; terminal giao dich mo tay thi khong) -> tester.
+    - Duong dan exe chua mot muc trong BRAIN_TERMINAL_TESTER hoac `mt5_tester` (slot portable) -> tester.
+    - Con lai (terminal mo tay, khong biet) -> KHONG giet.
+    """
+    e = (exe or "").lower().replace("/", "\\")
+    c = (cmd or "").lower()
+    if any(e.startswith(g) for g in _ds_bien("BRAIN_TERMINAL_GIAO_DICH")):
+        return False
+    if "/config:" in c:
+        return True
+    return any(t in e for t in (_ds_bien("BRAIN_TERMINAL_TESTER") or ["mt5_tester"]))
+
+
+def _cac_terminal() -> list[dict]:
+    """[{pid, exe, cmd}] cac terminal64.exe dang chay. Khong co psutil -> [] (khong giet gi - an toan hon giet nham)."""
+    try:
+        import psutil
+    except Exception:
+        return []
+    ra = []
+    for p in psutil.process_iter(["pid", "name", "exe", "cmdline"]):
+        try:
+            if (p.info.get("name") or "").lower() != "terminal64.exe":
+                continue
+            ra.append({"pid": p.info["pid"], "exe": p.info.get("exe") or "", "cmd": " ".join(p.info.get("cmdline") or [])})
+        except Exception:
+            continue
+    return ra
 
 
 if __name__ == "__main__":
