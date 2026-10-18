@@ -20,8 +20,10 @@ Doi linh vuc = doi bo nguon + bo tu khoa goc, khong phai viet lai tru.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
+from collections import Counter
 import time
 import uuid
 from datetime import datetime, timezone
@@ -48,9 +50,12 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 #:
 #: Muc mac dinh giu nguyen hanh vi cu (phanh chi phi + ton trong quota API).
 #: `muc_tieu.san*` noi tran cho RIENG luot chien dich cua no.
+#: 18/10/2026 chu du an: "dao o nhung noi khong co gia tri thi lam sao thu thap duoc thu co cong hieu" -> nguon
+#: HOC THUAT / thao luan ve 0 (bai bao khong chay duoc), nguon MA (EA, chi bao, chien luoc chay duoc) len 6.
+#: Truoc: arxiv 3, github 3, openalex 3, stackexchange 2, hackernews 2, crossref 2, semantic 2, mql5_code 3.
 SO_TU_KHOA_MOI_NGUON = {
-    "arxiv": 3, "github": 3, "openalex": 3, "stackexchange": 2,
-    "hackernews": 2, "crossref": 2, "semantic": 2, "mql5_code": 3,
+    "arxiv": 0, "github": 6, "openalex": 0, "stackexchange": 1,
+    "hackernews": 0, "crossref": 0, "semantic": 0, "mql5_code": 6,
 }
 
 
@@ -59,11 +64,18 @@ def _so_tu_khoa(nguon: str, mac_dinh: int = 3) -> int:
 
 
 TU_KHOA_GOC = [
-    "trading strategy backtest", "momentum factor", "mean reversion equity",
+    # --- 18/10/2026: TU KHOA VAN HANH DUOC len dau (nguon theo tu khoa lay N tu dau tien). Tim MA chay duoc:
+    # EA / chi bao / chien luoc / bot co ma nguon, va kho gom nhieu cai mot cho.
+    "expert advisor source code mq5", "mt4 expert advisor open source", "multi strategy expert advisor",
+    "grid ea source code", "dca bot open source", "basket close recovery ea", "hedging grid ea source",
+    "pine script strategy open source", "freqtrade strategy", "ctrader cbot source", "mql5 indicator source code",
+    "expert advisor mql5", "algorithmic trading python", "trading strategy backtest",
+    # --- hoc thuat: giu lam duoi, it gia tri thu thap (bai bao khong chay duoc)
+    "momentum factor", "mean reversion equity",
     "statistical arbitrage", "market microstructure", "volatility risk premium",
     "trend following managed futures", "pairs trading cointegration",
-    "intraday seasonality", "order flow imbalance", "expert advisor mql5",
-    "algorithmic trading python", "portfolio optimization robust",
+    "intraday seasonality", "order flow imbalance",
+    "portfolio optimization robust",
     "overfitting backtest deflated sharpe", "regime switching model",
     # --- them 13/09/2026: HO QUAN TRI VI THE (trailing/hedge/tia lenh/limit
     # stop...), theo yeu cau chu du an *"module quan li lenh ... co the dung
@@ -2776,12 +2788,136 @@ def san_kho(toi_da_cham: int = 40, ra_file: str = "reports/SAN_KHO.json") -> lis
     return kq
 
 
+# ------------------------------------------------------- KY HIEU VAN HANH + LAY KHO VE (18/10/2026)
+# Chu du an: "toi can nhung he thong giao dich, nhung kho EA va indicator, strategy ma VAN HANH DUOC. Phai xem
+# tu khoa, KY HIEU, doc CA FILE de tim nhung kho, nguon nhu tren. Lay cua ho ve, nghien cuu, bien tau va ket hop."
+# Doc CA noi dung file, nhan ra no la EA / chien luoc / chi bao chay duoc tren nen tang nao bang KY HIEU ma
+# (ham su kien, lenh dat lenh, ham chi bao...), va no co nhung ky thuat xu li lenh nao.
+_KY_HIEU_NEN_TANG = {
+    "MT4/MT5": {"duoi": (".mq4", ".mq5", ".mqh"),
+                "ea": [r"\bOnTick\s*\(", r"\bint\s+start\s*\(\s*\)", r"\bOrderSend\s*\(", r"\bCTrade\b",
+                       r"\btrade\.(Buy|Sell|PositionOpen)\s*\(", r"\bPositionOpen\s*\("],
+                "chi_bao": [r"#property\s+indicator_", r"\bSetIndexBuffer\s*\(", r"\bOnCalculate\s*\("],
+                # lop chien luoc nam trong khung EA (EA31337 Stg_*, MQL5 Wizard CExpertSignal): co luat vao, chua tu dat lenh
+                "chien_luoc": [r"\bSignalOpen\s*\(", r":\s*public\s+(Strategy|CExpertSignal|CExpertTrailing|CExpertMoney)\b",
+                               r"\b(LongCondition|ShortCondition|CheckOpenLong|CheckOpenShort)\s*\("]},
+    "TradingView": {"duoi": (".pine",),
+                    "ea": [r"\bstrategy\s*\(", r"strategy\.(entry|order|exit)\s*\("],
+                    "chi_bao": [r"\b(indicator|study)\s*\(", r"\bplot(shape)?\s*\("]},
+    "Python": {"duoi": (".py",),
+               "ea": [r"class\s+\w+\s*\(\s*IStrategy\s*\)", r"def\s+populate_(entry|buy)_trend", r"\bbt\.Strategy\b",
+                      r"def\s+should_long\s*\(", r"\b(ScriptStrategyBase|ControllerBase|DirectionalTradingControllerBase)\b",
+                      r"\bcreate_(market_)?order\s*\(", r"\b(buy|sell)_(limit|market)\s*\("],
+               "chi_bao": [r"\bdef\s+(rsi|ema|sma|atr|macd|bollinger|supertrend)\w*\s*\("]},
+    "cTrader": {"duoi": (".cs",),
+                "ea": [r":\s*Robot\b", r"\bExecuteMarketOrder\s*\(", r"\bPlaceLimitOrder\s*\("],
+                "chi_bao": [r":\s*Indicator\b"]},
+}
+_KY_HIEU_QUAN_TRI = {
+    "trailing": r"trail", "hoa_von": r"break.?even", "luoi": r"\bgrid", "dca": r"\bdca\b|averag(e|ing)[ _]?(down|in)\b|cost.?averag|position_adjust|adjust_trade_position|av(era)?g_?entry",
+    "martingale": r"martingale|lot.?multipl|lot_?mult|lot.?exponent", "hedge": r"\bhedg", "go_lenh": r"recover|unstuck",
+    "chot_ro": r"basket|close_?all|closeall|total.?profit", "dong_mot_phan": r"partial|scale.?out",
+    "sua_sl_tp": r"OrderModify|PositionModify|\.Modify\s*\(", "lenh_cho": r"Buy_?Limit|Sell_?Limit|Buy_?Stop|Sell_?Stop|_LIMIT\b|_STOP\b",
+    "loc_phien": r"session|london|new.?york|tokyo|asian", "loc_spread": r"spread", "loc_tin": r"\bnews\b|calendar",
+}
+
+
+def doc_van_ban_ma(du_lieu: bytes) -> str:
+    """Bytes file ma -> van ban. File MQL hay luu UTF-16 (co BOM) - doc sai thi moi ky hieu deu 'khong thay'."""
+    if du_lieu[:2] in (b"\xff\xfe", b"\xfe\xff"):
+        return du_lieu.decode("utf-16", errors="ignore")
+    if len(du_lieu) > 8 and du_lieu[1:8:2] == b"\x00\x00\x00\x00":
+        return du_lieu.decode("utf-16-le", errors="ignore")
+    return du_lieu.decode("utf-8", errors="ignore")
+
+
+def dau_hieu_van_hanh(van_ban: str, ten_file: str = "") -> dict:
+    """Doc CA van ban mot file -> nen tang, loai (ea / chi_bao / thu_vien / khac), ky thuat xu li lenh, co chay duoc khong."""
+    t = ten_file.lower()
+    nen = next((n for n, k in _KY_HIEU_NEN_TANG.items() if t.endswith(k["duoi"])), None)
+    if nen is None:                                   # file .txt chua Pine...
+        nen = "TradingView" if re.search(r"//@version=\d", van_ban) else None
+    loai = "khac"
+    if nen:
+        k = _KY_HIEU_NEN_TANG[nen]
+        if any(re.search(x, van_ban) for x in k["ea"]):
+            loai = "ea"
+        elif any(re.search(x, van_ban) for x in k.get("chien_luoc", [])):
+            loai = "chien_luoc"
+        elif any(re.search(x, van_ban) for x in k["chi_bao"]):
+            loai = "chi_bao"
+        elif van_ban.strip():
+            loai = "thu_vien"
+    qt = sorted(m for m, x in _KY_HIEU_QUAN_TRI.items() if re.search(x, van_ban, re.I)) if loai in ("ea", "chien_luoc", "thu_vien") else []
+    return {"nen_tang": nen, "loai": loai, "van_hanh": loai in ("ea", "chien_luoc", "chi_bao"), "quan_tri": qt,
+            "dong": van_ban.count("\n") + 1 if van_ban else 0}
+
+
+def tai_kho(repo: str, goc: str = "data/cau_kho") -> Path | None:
+    """Lay kho ve (git clone --depth 1, ca submodule). Ma cua nguoi khac chi nam o data/ (git bo qua), KHONG vao repo."""
+    import subprocess
+    dich = Path(goc) / repo.replace("/", "__")
+    if (dich / ".git").exists():
+        return dich
+    dich.parent.mkdir(parents=True, exist_ok=True)
+    env = {**os.environ, "GIT_LFS_SKIP_SMUDGE": "1"}
+    try:
+        subprocess.run(["git", "clone", "--depth", "1", "--recurse-submodules", "--shallow-submodules",
+                        "https://github.com/%s" % repo, str(dich)], timeout=1800, env=env, check=False,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        return None
+    return dich if (dich / ".git").exists() else None
+
+
+def kiem_ke_kho(thu_muc: str | Path, ten: str | None = None, ra_thu_muc: str = "reports") -> dict:
+    """Doc CA TUNG FILE ma trong mot kho da lay ve -> bang kiem ke (khong chep ma): file nao la EA / chi bao chay
+    duoc, nen tang nao, ky thuat xu li lenh nao. Ghi reports/KHO_<ten>.json."""
+    goc = Path(thu_muc)
+    duoi = tuple(d for k in _KY_HIEU_NEN_TANG.values() for d in k["duoi"]) + (".txt",)
+    tep = []
+    for f in sorted(goc.rglob("*")):
+        if not f.is_file() or ".git" in f.parts or not f.name.lower().endswith(duoi) or f.stat().st_size > 2_000_000:
+            continue
+        try:
+            d = dau_hieu_van_hanh(doc_van_ban_ma(f.read_bytes()), f.name)
+        except Exception:
+            continue
+        if d["nen_tang"] is None:
+            continue
+        tep.append({"tep": str(f.relative_to(goc)), **d})
+    tong = {"so_tep": len(tep), "ea": sum(t["loai"] == "ea" for t in tep), "chien_luoc": sum(t["loai"] == "chien_luoc" for t in tep),
+            "chi_bao": sum(t["loai"] == "chi_bao" for t in tep),
+            "thu_vien": sum(t["loai"] == "thu_vien" for t in tep),
+            "nen_tang": dict(sorted(Counter(t["nen_tang"] for t in tep).items())),
+            "ky_thuat_quan_tri": dict(Counter(q for t in tep for q in t["quan_tri"]).most_common())}
+    ten = ten or goc.name
+    kq = {"kho": ten, "luc": datetime.now(timezone.utc).isoformat(timespec="seconds"), "tong": tong, "tep": tep}
+    Path(ra_thu_muc).mkdir(parents=True, exist_ok=True)
+    (Path(ra_thu_muc) / ("KHO_%s.json" % re.sub(r"[^A-Za-z0-9_.-]", "_", ten))).write_text(
+        json.dumps(kq, ensure_ascii=False, indent=1), encoding="utf-8")
+    return kq
+
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "san-kho":
-        for z in san_kho()[:30]:
+    if len(sys.argv) > 2 and sys.argv[1] == "tai-kho":          # tai-kho owner/repo [owner/repo ...]
+        for r in sys.argv[2:]:
+            d = tai_kho(r)
+            print(r, "->", d, json.dumps(kiem_ke_kho(d, r)["tong"], ensure_ascii=False) if d else "KHONG LAY DUOC")
+        raise SystemExit(0)
+    if len(sys.argv) > 2 and sys.argv[1] == "kiem-ke":          # kiem-ke <thu muc kho da co> [ten]
+        print(json.dumps(kiem_ke_kho(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)["tong"], ensure_ascii=False, indent=1))
+        raise SystemExit(0)
+    if len(sys.argv) > 1 and sys.argv[1] == "san-kho":         # san-kho [--tai N]: N kho diem cao nhat -> lay ve + kiem ke
+        kq = san_kho()
+        for z in kq[:30]:
             print("%-45s sao=%-6s diem=%-6s chien_luoc=%-4s quan_tri=%-3s submodule=%-3s %s" % (
                 z["repo"], z.get("sao"), z.get("diem"), z.get("so_file_chien_luoc"), z.get("so_file_quan_tri"),
                 z.get("so_submodule"), "KHO" if z.get("la_kho") else ""))
+        n_tai = int(sys.argv[sys.argv.index("--tai") + 1]) if "--tai" in sys.argv else 0
+        for z in [z for z in kq if z.get("la_kho")][:n_tai]:
+            d = tai_kho(z["repo"])
+            print("TAI", z["repo"], "->", json.dumps(kiem_ke_kho(d, z["repo"])["tong"], ensure_ascii=False) if d else "KHONG LAY DUOC")
         raise SystemExit(0)
     SO.khoi_tao()
     print(json.dumps(mot_luot(), ensure_ascii=False, indent=1)[:5000])

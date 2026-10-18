@@ -1,0 +1,3198 @@
+{
+ "kho": "EA31337",
+ "luc": "2026-10-18T02:17:19+00:00",
+ "tong": {
+  "so_tep": 361,
+  "ea": 120,
+  "chien_luoc": 109,
+  "chi_bao": 1,
+  "thu_vien": 131,
+  "nen_tang": {
+   "MT4/MT5": 360,
+   "Python": 1
+  },
+  "ky_thuat_quan_tri": {
+   "loc_spread": 114,
+   "lenh_cho": 20,
+   "martingale": 7,
+   "hedge": 3,
+   "loc_tin": 3,
+   "chot_ro": 2,
+   "trailing": 1,
+   "dca": 1,
+   "sua_sl_tp": 1,
+   "loc_phien": 1
+  }
+ },
+ "tep": [
+  {
+   "tep": "src/EA31337.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 29
+  },
+  {
+   "tep": "src/EA31337.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 302
+  },
+  {
+   "tep": "src/include/common/advanced/inputs.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "chot_ro"
+   ],
+   "dong": 101
+  },
+  {
+   "tep": "src/include/common/elite/inputs.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 58
+  },
+  {
+   "tep": "src/include/common/lite/inputs.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 47
+  },
+  {
+   "tep": "src/include/common/rider/inputs.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "chot_ro",
+    "martingale"
+   ],
+   "dong": 85
+  },
+  {
+   "tep": "src/strategies/.github/Test.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 24
+  },
+  {
+   "tep": "src/strategies/.github/Test.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 42
+  },
+  {
+   "tep": "src/strategies/AC/Stg_AC.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 19
+  },
+  {
+   "tep": "src/strategies/AC/Stg_AC.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 89
+  },
+  {
+   "tep": "src/strategies/AC/Stg_AC.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 121
+  },
+  {
+   "tep": "src/strategies/AD/Stg_AD.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 19
+  },
+  {
+   "tep": "src/strategies/AD/Stg_AD.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 83
+  },
+  {
+   "tep": "src/strategies/AD/Stg_AD.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 112
+  },
+  {
+   "tep": "src/strategies/ADX/Stg_ADX.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 19
+  },
+  {
+   "tep": "src/strategies/ADX/Stg_ADX.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 91
+  },
+  {
+   "tep": "src/strategies/ADX/Stg_ADX.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 144
+  },
+  {
+   "tep": "src/strategies/AMA/Stg_AMA.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/AMA/Stg_AMA.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/AMA/Stg_AMA.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 123
+  },
+  {
+   "tep": "src/strategies/ASI/Stg_ASI.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/ASI/Stg_ASI.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/ASI/Stg_ASI.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 116
+  },
+  {
+   "tep": "src/strategies/ATR/Stg_ATR.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/ATR/Stg_ATR.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/ATR/Stg_ATR.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 120
+  },
+  {
+   "tep": "src/strategies/ATR_MA_Trend/Indi_ATR_MA_Trend.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 178
+  },
+  {
+   "tep": "src/strategies/ATR_MA_Trend/Stg_ATR_MA_Trend.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 19
+  },
+  {
+   "tep": "src/strategies/ATR_MA_Trend/Stg_ATR_MA_Trend.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies/ATR_MA_Trend/Stg_ATR_MA_Trend.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 129
+  },
+  {
+   "tep": "src/strategies/Alligator/Stg_Alligator.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Alligator/Stg_Alligator.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Alligator/Stg_Alligator.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 185
+  },
+  {
+   "tep": "src/strategies/Arrows/Indi_ATR_MA_Slope.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 124
+  },
+  {
+   "tep": "src/strategies/Arrows/Stg_Arrows.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 18
+  },
+  {
+   "tep": "src/strategies/Arrows/Stg_Arrows.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 89
+  },
+  {
+   "tep": "src/strategies/Arrows/Stg_Arrows.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 167
+  },
+  {
+   "tep": "src/strategies/Awesome/Stg_Awesome.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Awesome/Stg_Awesome.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Awesome/Stg_Awesome.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 116
+  },
+  {
+   "tep": "src/strategies/BWMFI/Stg_BWMFI.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/BWMFI/Stg_BWMFI.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/BWMFI/Stg_BWMFI.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 124
+  },
+  {
+   "tep": "src/strategies/Bands/Stg_Bands.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Bands/Stg_Bands.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 77
+  },
+  {
+   "tep": "src/strategies/Bands/Stg_Bands.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 223
+  },
+  {
+   "tep": "src/strategies/BearsPower/Stg_BearsPower.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/BearsPower/Stg_BearsPower.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/BearsPower/Stg_BearsPower.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread",
+    "trailing"
+   ],
+   "dong": 155
+  },
+  {
+   "tep": "src/strategies/BullsPower/Stg_BullsPower.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/BullsPower/Stg_BullsPower.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/BullsPower/Stg_BullsPower.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 139
+  },
+  {
+   "tep": "src/strategies/CCI/Stg_CCI.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/CCI/Stg_CCI.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/CCI/Stg_CCI.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 120
+  },
+  {
+   "tep": "src/strategies/Chaikin/Stg_Chaikin.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Chaikin/Stg_Chaikin.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 77
+  },
+  {
+   "tep": "src/strategies/Chaikin/Stg_Chaikin.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 124
+  },
+  {
+   "tep": "src/strategies/DEMA/Stg_DEMA.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 19
+  },
+  {
+   "tep": "src/strategies/DEMA/Stg_DEMA.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 89
+  },
+  {
+   "tep": "src/strategies/DEMA/Stg_DEMA.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 120
+  },
+  {
+   "tep": "src/strategies/DPO/Stg_DPO.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/DPO/Stg_DPO.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/DPO/Stg_DPO.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 104
+  },
+  {
+   "tep": "src/strategies/DeMarker/Stg_DeMarker.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/DeMarker/Stg_DeMarker.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/DeMarker/Stg_DeMarker.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 121
+  },
+  {
+   "tep": "src/strategies/Demo/Stg_Demo.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Demo/Stg_Demo.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/Demo/Stg_Demo.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 101
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indi_ElliottWave.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 122
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indicators/Elliott_Wave_HeartBeat.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indicators/Elliott_Wave_Oscillator-Arrows.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indicators/Elliott_Wave_Oscillator1-Trend.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 80
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indicators/Elliott_Wave_Oscillator1.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 46
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indicators/Elliott_Wave_Oscillator2.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 93
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indicators/Elliott_Wave_Oscillator2.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "chi_bao",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 43
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Indicators/Elliott_Wave_Oscillator3-Trend.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 145
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Stg_ElliottWave.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 25
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Stg_ElliottWave.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 91
+  },
+  {
+   "tep": "src/strategies/ElliottWave/Stg_ElliottWave.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 132
+  },
+  {
+   "tep": "src/strategies/Envelopes/Stg_Envelopes.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Envelopes/Stg_Envelopes.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Envelopes/Stg_Envelopes.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 139
+  },
+  {
+   "tep": "src/strategies/Force/Stg_Force.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Force/Stg_Force.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Force/Stg_Force.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 136
+  },
+  {
+   "tep": "src/strategies/Fractals/Stg_Fractals.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Fractals/Stg_Fractals.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Fractals/Stg_Fractals.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 117
+  },
+  {
+   "tep": "src/strategies/Gator/Stg_Gator.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Gator/Stg_Gator.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Gator/Stg_Gator.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 137
+  },
+  {
+   "tep": "src/strategies/HeikenAshi/Stg_HeikenAshi.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/HeikenAshi/Stg_HeikenAshi.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 78
+  },
+  {
+   "tep": "src/strategies/HeikenAshi/Stg_HeikenAshi.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 143
+  },
+  {
+   "tep": "src/strategies/Ichimoku/Stg_Ichimoku.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Ichimoku/Stg_Ichimoku.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Ichimoku/Stg_Ichimoku.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 157
+  },
+  {
+   "tep": "src/strategies/Indicator/Stg_Indicator.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Indicator/Stg_Indicator.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 81
+  },
+  {
+   "tep": "src/strategies/Indicator/Stg_Indicator.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "dca",
+    "loc_spread"
+   ],
+   "dong": 441
+  },
+  {
+   "tep": "src/strategies/MA/Stg_MA.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA/Stg_MA.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA/Stg_MA.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 265
+  },
+  {
+   "tep": "src/strategies/MACD/Stg_MACD.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MACD/Stg_MACD.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/MACD/Stg_MACD.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 119
+  },
+  {
+   "tep": "src/strategies/MA_Breakout/Stg_MA_Breakout.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA_Breakout/Stg_MA_Breakout.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA_Breakout/Stg_MA_Breakout.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 278
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Candle/Stg_MA_Cross_Candle.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Candle/Stg_MA_Cross_Candle.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Candle/Stg_MA_Cross_Candle.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 301
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Pivot/Stg_MA_Cross_Pivot.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Pivot/Stg_MA_Cross_Pivot.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Pivot/Stg_MA_Cross_Pivot.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 279
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Shift/Stg_MA_Cross_Shift.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Shift/Stg_MA_Cross_Shift.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Shift/Stg_MA_Cross_Shift.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 340
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Sup_Res/Stg_MA_Cross_Sup_Res.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Sup_Res/Stg_MA_Cross_Sup_Res.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Sup_Res/Stg_MA_Cross_Sup_Res.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 288
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Timeframe/Stg_MA_Cross_Timeframe.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Timeframe/Stg_MA_Cross_Timeframe.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA_Cross_Timeframe/Stg_MA_Cross_Timeframe.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 311
+  },
+  {
+   "tep": "src/strategies/MA_Trend/Stg_MA_Trend.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MA_Trend/Stg_MA_Trend.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/MA_Trend/Stg_MA_Trend.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 320
+  },
+  {
+   "tep": "src/strategies/MFI/Stg_MFI.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/MFI/Stg_MFI.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/MFI/Stg_MFI.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 120
+  },
+  {
+   "tep": "src/strategies/Momentum/Stg_Momentum.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Momentum/Stg_Momentum.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Momentum/Stg_Momentum.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 115
+  },
+  {
+   "tep": "src/strategies/OBV/Stg_OBV.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/OBV/Stg_OBV.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/OBV/Stg_OBV.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 112
+  },
+  {
+   "tep": "src/strategies/OsMA/Stg_OsMA.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/OsMA/Stg_OsMA.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/OsMA/Stg_OsMA.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 122
+  },
+  {
+   "tep": "src/strategies/Oscillator/Stg_Oscillator.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator/Stg_Oscillator.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 100
+  },
+  {
+   "tep": "src/strategies/Oscillator/Stg_Oscillator.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 577
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross/Oscillator_Cross/Stg_Oscillator_Cross.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross/Oscillator_Cross/Stg_Oscillator_Cross.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 80
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross/Oscillator_Cross/Stg_Oscillator_Cross.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 245
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Shift/Stg_Oscillator_Cross_Shift.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Shift/Stg_Oscillator_Cross_Shift.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 104
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Shift/Stg_Oscillator_Cross_Shift.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 854
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Timeframe/Stg_Oscillator_Cross_Timeframe.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Timeframe/Stg_Oscillator_Cross_Timeframe.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 104
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Timeframe/Stg_Oscillator_Cross_Timeframe.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 775
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Zero/Stg_Oscillator_Cross_Zero.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Zero/Stg_Oscillator_Cross_Zero.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 80
+  },
+  {
+   "tep": "src/strategies/Oscillator_Cross_Zero/Stg_Oscillator_Cross_Zero.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 195
+  },
+  {
+   "tep": "src/strategies/Oscillator_Divergence/Stg_Oscillator_Divergence.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Divergence/Stg_Oscillator_Divergence.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 100
+  },
+  {
+   "tep": "src/strategies/Oscillator_Divergence/Stg_Oscillator_Divergence.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 645
+  },
+  {
+   "tep": "src/strategies/Oscillator_Martingale/Stg_Oscillator_Martingale.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "martingale"
+   ],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Martingale/Stg_Oscillator_Martingale.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "martingale"
+   ],
+   "dong": 100
+  },
+  {
+   "tep": "src/strategies/Oscillator_Martingale/Stg_Oscillator_Martingale.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread",
+    "martingale"
+   ],
+   "dong": 689
+  },
+  {
+   "tep": "src/strategies/Oscillator_Multi/Stg_Oscillator_Multi.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Multi/Stg_Oscillator_Multi.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 82
+  },
+  {
+   "tep": "src/strategies/Oscillator_Multi/Stg_Oscillator_Multi.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 293
+  },
+  {
+   "tep": "src/strategies/Oscillator_Overlay/Stg_Oscillator_Overlay.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Overlay/Stg_Oscillator_Overlay.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 100
+  },
+  {
+   "tep": "src/strategies/Oscillator_Overlay/Stg_Oscillator_Overlay.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 605
+  },
+  {
+   "tep": "src/strategies/Oscillator_Range/Stg_Oscillator_Range.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Range/Stg_Oscillator_Range.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 100
+  },
+  {
+   "tep": "src/strategies/Oscillator_Range/Stg_Oscillator_Range.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 633
+  },
+  {
+   "tep": "src/strategies/Oscillator_Trend/Stg_Oscillator_Trend.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Oscillator_Trend/Stg_Oscillator_Trend.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 100
+  },
+  {
+   "tep": "src/strategies/Oscillator_Trend/Stg_Oscillator_Trend.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 678
+  },
+  {
+   "tep": "src/strategies/Pattern/Stg_Pattern.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Pattern/Stg_Pattern.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/Pattern/Stg_Pattern.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 121
+  },
+  {
+   "tep": "src/strategies/Pinbar/Stg_Pinbar.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Pinbar/Stg_Pinbar.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 78
+  },
+  {
+   "tep": "src/strategies/Pinbar/Stg_Pinbar.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 139
+  },
+  {
+   "tep": "src/strategies/Pivot/Stg_Pivot.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Pivot/Stg_Pivot.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/Pivot/Stg_Pivot.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 149
+  },
+  {
+   "tep": "src/strategies/RSI/.github/ReportParser.py",
+   "nen_tang": "Python",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 72
+  },
+  {
+   "tep": "src/strategies/RSI/Stg_RSI.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/RSI/Stg_RSI.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/RSI/Stg_RSI.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 116
+  },
+  {
+   "tep": "src/strategies/RVI/Stg_RVI.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/RVI/Stg_RVI.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 76
+  },
+  {
+   "tep": "src/strategies/RVI/Stg_RVI.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 120
+  },
+  {
+   "tep": "src/strategies/Retracement/Stg_Retracement.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Retracement/Stg_Retracement.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 84
+  },
+  {
+   "tep": "src/strategies/Retracement/Stg_Retracement.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 437
+  },
+  {
+   "tep": "src/strategies/SAR/Stg_SAR.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/SAR/Stg_SAR.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 82
+  },
+  {
+   "tep": "src/strategies/SAR/Stg_SAR.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 116
+  },
+  {
+   "tep": "src/strategies/SAWA/Indi_SAWA.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 102
+  },
+  {
+   "tep": "src/strategies/SAWA/Stg_SAWA.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 13
+  },
+  {
+   "tep": "src/strategies/SAWA/Stg_SAWA.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 89
+  },
+  {
+   "tep": "src/strategies/SAWA/Stg_SAWA.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 126
+  },
+  {
+   "tep": "src/strategies/SVE_Bollinger_Bands/Indi_SVE_Bollinger_Bands.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 126
+  },
+  {
+   "tep": "src/strategies/SVE_Bollinger_Bands/Stg_SVE_Bollinger_Bands.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 13
+  },
+  {
+   "tep": "src/strategies/SVE_Bollinger_Bands/Stg_SVE_Bollinger_Bands.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 87
+  },
+  {
+   "tep": "src/strategies/SVE_Bollinger_Bands/Stg_SVE_Bollinger_Bands.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 124
+  },
+  {
+   "tep": "src/strategies/StdDev/Stg_StdDev.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/StdDev/Stg_StdDev.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/StdDev/Stg_StdDev.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 120
+  },
+  {
+   "tep": "src/strategies/Stochastic/Stg_Stochastic.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/Stochastic/Stg_Stochastic.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/Stochastic/Stg_Stochastic.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 128
+  },
+  {
+   "tep": "src/strategies/SuperTrend/Indi_SuperTrend.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 101
+  },
+  {
+   "tep": "src/strategies/SuperTrend/Stg_SuperTrend.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 19
+  },
+  {
+   "tep": "src/strategies/SuperTrend/Stg_SuperTrend.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 86
+  },
+  {
+   "tep": "src/strategies/SuperTrend/Stg_SuperTrend.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 124
+  },
+  {
+   "tep": "src/strategies/TMAT_SVEBB/Indi_SVE_Bollinger_Bands.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 124
+  },
+  {
+   "tep": "src/strategies/TMAT_SVEBB/Indi_TMA_True.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 127
+  },
+  {
+   "tep": "src/strategies/TMAT_SVEBB/Stg_TMAT_SVEBB.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 16
+  },
+  {
+   "tep": "src/strategies/TMAT_SVEBB/Stg_TMAT_SVEBB.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies/TMAT_SVEBB/Stg_TMAT_SVEBB.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 175
+  },
+  {
+   "tep": "src/strategies/TMA_CG/Indi_TMA_CG.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 126
+  },
+  {
+   "tep": "src/strategies/TMA_CG/Stg_TMA_CG.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 16
+  },
+  {
+   "tep": "src/strategies/TMA_CG/Stg_TMA_CG.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 83
+  },
+  {
+   "tep": "src/strategies/TMA_CG/Stg_TMA_CG.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 141
+  },
+  {
+   "tep": "src/strategies/TMA_True/Indi_TMA_True.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 127
+  },
+  {
+   "tep": "src/strategies/TMA_True/Stg_TMA_True.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 13
+  },
+  {
+   "tep": "src/strategies/TMA_True/Stg_TMA_True.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 88
+  },
+  {
+   "tep": "src/strategies/TMA_True/Stg_TMA_True.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 124
+  },
+  {
+   "tep": "src/strategies/WPR/Stg_WPR.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/WPR/Stg_WPR.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/WPR/Stg_WPR.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 125
+  },
+  {
+   "tep": "src/strategies/ZigZag/Stg_ZigZag.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies/ZigZag/Stg_ZigZag.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 75
+  },
+  {
+   "tep": "src/strategies/ZigZag/Stg_ZigZag.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 121
+  },
+  {
+   "tep": "src/strategies-meta/.github/Test.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 24
+  },
+  {
+   "tep": "src/strategies-meta/.github/Test.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 44
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Bears_Bulls/Stg_Meta_Bears_Bulls.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Bears_Bulls/Stg_Meta_Bears_Bulls.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Bears_Bulls/Stg_Meta_Bears_Bulls.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 131
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Conditions/Stg_Meta_Conditions.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Conditions/Stg_Meta_Conditions.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Conditions/Stg_Meta_Conditions.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 180
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Delegate/Stg_Meta_Delegate.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Delegate/Stg_Meta_Delegate.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Delegate/Stg_Meta_Delegate.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread",
+    "sua_sl_tp"
+   ],
+   "dong": 232
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Discrepancy/Stg_Meta_Discrepancy.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Discrepancy/Stg_Meta_Discrepancy.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Discrepancy/Stg_Meta_Discrepancy.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 172
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Double/Stg_Meta_Double.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Double/Stg_Meta_Double.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Double/Stg_Meta_Double.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 134
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Enhance/Stg_Meta_Enhance.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Enhance/Stg_Meta_Enhance.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Enhance/Stg_Meta_Enhance.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 210
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Equity/Stg_Meta_Equity.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Equity/Stg_Meta_Equity.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Equity/Stg_Meta_Equity.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 196
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Formation/Stg_Meta_Formation.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Formation/Stg_Meta_Formation.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Formation/Stg_Meta_Formation.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 327
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Hedge/Stg_Meta_Hedge.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "hedge"
+   ],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Hedge/Stg_Meta_Hedge.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "hedge"
+   ],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Hedge/Stg_Meta_Hedge.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "hedge",
+    "loc_spread"
+   ],
+   "dong": 249
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Interval/Stg_Meta_Interval.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Interval/Stg_Meta_Interval.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 94
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Interval/Stg_Meta_Interval.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 169
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Limit/Stg_Meta_Limit.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "lenh_cho"
+   ],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Limit/Stg_Meta_Limit.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho"
+   ],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Limit/Stg_Meta_Limit.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 194
+  },
+  {
+   "tep": "src/strategies-meta/Meta_MA_Conditions/Stg_Meta_MA_Conditions.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_MA_Conditions/Stg_Meta_MA_Conditions.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_MA_Conditions/Stg_Meta_MA_Conditions.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 460
+  },
+  {
+   "tep": "src/strategies-meta/Meta_MA_Cross/Stg_Meta_MA_Cross.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_MA_Cross/Stg_Meta_MA_Cross.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_MA_Cross/Stg_Meta_MA_Cross.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 399
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Margin/Stg_Meta_Margin.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Margin/Stg_Meta_Margin.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Margin/Stg_Meta_Margin.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 152
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Martingale/Stg_Meta_Martingale.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "martingale"
+   ],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Martingale/Stg_Meta_Martingale.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "martingale"
+   ],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Martingale/Stg_Meta_Martingale.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread",
+    "martingale"
+   ],
+   "dong": 246
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Mirror/Stg_Meta_Mirror.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Mirror/Stg_Meta_Mirror.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 96
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Mirror/Stg_Meta_Mirror.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 144
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Multi/Stg_Meta_Multi.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Multi/Stg_Meta_Multi.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 96
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Multi/Stg_Meta_Multi.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 247
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Multi_Currency/Stg_Meta_Multi_Currency.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Multi_Currency/Stg_Meta_Multi_Currency.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Multi_Currency/Stg_Meta_Multi_Currency.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 279
+  },
+  {
+   "tep": "src/strategies-meta/Meta_News/Stg_Meta_News.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "loc_tin"
+   ],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_News/Stg_Meta_News.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_tin"
+   ],
+   "dong": 105
+  },
+  {
+   "tep": "src/strategies-meta/Meta_News/Stg_Meta_News.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread",
+    "loc_tin"
+   ],
+   "dong": 275
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Odd_Period/Stg_Meta_Odd_Period.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Odd_Period/Stg_Meta_Odd_Period.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 94
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Odd_Period/Stg_Meta_Odd_Period.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 165
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Order_Limit/Stg_Meta_Order_Limit.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "lenh_cho"
+   ],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Order_Limit/Stg_Meta_Order_Limit.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho"
+   ],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Order_Limit/Stg_Meta_Order_Limit.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 214
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Conditions/Stg_Meta_Oscillator_Conditions.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Conditions/Stg_Meta_Oscillator_Conditions.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Conditions/Stg_Meta_Oscillator_Conditions.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 629
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Filter/Stg_Meta_Oscillator_Filter.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Filter/Stg_Meta_Oscillator_Filter.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 93
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Filter/Stg_Meta_Oscillator_Filter.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 539
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Switch/Stg_Meta_Oscillator_Switch.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Switch/Stg_Meta_Oscillator_Switch.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Oscillator_Switch/Stg_Meta_Oscillator_Switch.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 570
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Pattern/Stg_Meta_Pattern.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Pattern/Stg_Meta_Pattern.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Pattern/Stg_Meta_Pattern.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 201
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Pivot/Stg_Meta_Pivot.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Pivot/Stg_Meta_Pivot.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Pivot/Stg_Meta_Pivot.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 219
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Price_Band/Stg_Meta_Price_Band.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Price_Band/Stg_Meta_Price_Band.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Price_Band/Stg_Meta_Price_Band.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 226
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Profit/Stg_Meta_Profit.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Profit/Stg_Meta_Profit.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 93
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Profit/Stg_Meta_Profit.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 195
+  },
+  {
+   "tep": "src/strategies-meta/Meta_RSI/Stg_Meta_RSI.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_RSI/Stg_Meta_RSI.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_RSI/Stg_Meta_RSI.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 156
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Resistance/Stg_Meta_Resistance.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Resistance/Stg_Meta_Resistance.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Resistance/Stg_Meta_Resistance.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 275
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Reversal/Stg_Meta_Reversal.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Reversal/Stg_Meta_Reversal.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Reversal/Stg_Meta_Reversal.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 135
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Risk/Stg_Meta_Risk.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Risk/Stg_Meta_Risk.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Risk/Stg_Meta_Risk.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 243
+  },
+  {
+   "tep": "src/strategies-meta/Meta_SAR/Stg_Meta_SAR.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_SAR/Stg_Meta_SAR.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_SAR/Stg_Meta_SAR.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "lenh_cho",
+    "loc_spread"
+   ],
+   "dong": 172
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Scalper/Stg_Meta_Scalper.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Scalper/Stg_Meta_Scalper.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Scalper/Stg_Meta_Scalper.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 134
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Signal_Filter/Stg_Meta_Signal_Filter.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Signal_Filter/Stg_Meta_Signal_Filter.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Signal_Filter/Stg_Meta_Signal_Filter.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 150
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Signal_Switch/Stg_Meta_Signal_Switch.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Signal_Switch/Stg_Meta_Signal_Switch.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Signal_Switch/Stg_Meta_Signal_Switch.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 188
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Spread/Stg_Meta_Spread.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Spread/Stg_Meta_Spread.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Spread/Stg_Meta_Spread.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 185
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Timezone/Stg_Meta_Timezone.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Timezone/Stg_Meta_Timezone.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 94
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Timezone/Stg_Meta_Timezone.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_phien",
+    "loc_spread"
+   ],
+   "dong": 156
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Trend/Stg_Meta_Trend.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Trend/Stg_Meta_Trend.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Trend/Stg_Meta_Trend.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 163
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Trio/Stg_Meta_Trio.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Trio/Stg_Meta_Trio.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Trio/Stg_Meta_Trio.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 162
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Volatility/Stg_Meta_Volatility.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Volatility/Stg_Meta_Volatility.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 92
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Volatility/Stg_Meta_Volatility.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 218
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Weekday/Stg_Meta_Weekday.mq4",
+   "nen_tang": "MT4/MT5",
+   "loai": "thu_vien",
+   "van_hanh": false,
+   "quan_tri": [],
+   "dong": 14
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Weekday/Stg_Meta_Weekday.mq5",
+   "nen_tang": "MT4/MT5",
+   "loai": "ea",
+   "van_hanh": true,
+   "quan_tri": [],
+   "dong": 94
+  },
+  {
+   "tep": "src/strategies-meta/Meta_Weekday/Stg_Meta_Weekday.mqh",
+   "nen_tang": "MT4/MT5",
+   "loai": "chien_luoc",
+   "van_hanh": true,
+   "quan_tri": [
+    "loc_spread"
+   ],
+   "dong": 158
+  }
+ ]
+}

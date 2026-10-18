@@ -39,3 +39,47 @@ def test_ea31337_that_duoc_nhan_la_kho():
     assert SK.diem_kho([], so_submodule=sm)["la_kho"] and sm >= 60
     meta = [str(p.relative_to(EA)) for p in (EA / "src" / "strategies-meta").rglob("*.mqh")]
     assert SK.diem_kho(meta)["la_kho"]
+
+
+def test_ky_hieu_ea_mql5_mql4_va_chi_bao():
+    ea5 = "#include <Trade/Trade.mqh>\nCTrade trade;\nvoid OnTick(){ if(x) trade.Buy(0.01); TrailingStop(); }"
+    d = SK.dau_hieu_van_hanh(ea5, "Grid_EA.mq5")
+    assert d["nen_tang"] == "MT4/MT5" and d["loai"] == "ea" and d["van_hanh"] and "trailing" in d["quan_tri"]
+    ea4 = "extern double LotExponent=1.5;\nint start(){ OrderSend(Symbol(),OP_BUY,Lots,Ask,3,0,0); return(0); }"
+    d4 = SK.dau_hieu_van_hanh(ea4, "pipsmaker.mq4")
+    assert d4["loai"] == "ea" and "martingale" in d4["quan_tri"]
+    ind = "#property indicator_chart_window\nint OnCalculate(const int rates_total){return rates_total;}"
+    assert SK.dau_hieu_van_hanh(ind, "TMA_bands.mq5")["loai"] == "chi_bao"
+
+
+def test_ky_hieu_pine_python_ctrader():
+    pine = "//@version=5\nstrategy('ORB', overlay=true)\nif cond\n    strategy.entry('L', strategy.long)"
+    assert SK.dau_hieu_van_hanh(pine, "orb.txt") == {**SK.dau_hieu_van_hanh(pine, "orb.txt"), "nen_tang": "TradingView", "loai": "ea"}
+    assert SK.dau_hieu_van_hanh("//@version=5\nindicator('x')\nplot(close)", "x.pine")["loai"] == "chi_bao"
+    ft = "class NFI(IStrategy):\n    position_adjustment_enable = True\n    def adjust_trade_position(self):\n        pass"
+    d = SK.dau_hieu_van_hanh(ft, "NostalgiaForInfinityX.py")
+    assert d["loai"] == "ea" and "dca" in d["quan_tri"]
+    cs = "public class GridBot : Robot { protected override void OnBar(){ ExecuteMarketOrder(TradeType.Buy, Symbol, 1000); } }"
+    assert SK.dau_hieu_van_hanh(cs, "GridBot.cs")["loai"] == "ea"
+    # bai van / file khong phai ma -> khong van hanh
+    assert not SK.dau_hieu_van_hanh("This strategy buys when RSI < 30.", "notes.md")["van_hanh"]
+
+
+def test_doc_ma_utf16_va_kiem_ke(tmp_path):
+    ma = "void OnTick(){ OrderSend(1); } // basket close all, hedge"
+    assert "OnTick" in SK.doc_van_ban_ma(b"\xff\xfe" + ma.encode("utf-16-le"))
+    (tmp_path / "a").mkdir()
+    (tmp_path / "a" / "Hedge_EA.mq5").write_bytes(b"\xff\xfe" + ma.encode("utf-16-le"))
+    (tmp_path / "a" / "ind.mq5").write_text("#property indicator_separate_window\nint OnCalculate(){return 0;}")
+    (tmp_path / "README.md").write_text("no code")
+    kq = SK.kiem_ke_kho(tmp_path, "thu", ra_thu_muc=str(tmp_path / "ra"))
+    assert kq["tong"]["ea"] == 1 and kq["tong"]["chi_bao"] == 1 and kq["tong"]["ky_thuat_quan_tri"]["hedge"] == 1
+    assert (tmp_path / "ra" / "KHO_thu.json").exists()
+
+
+@pytest.mark.skipif(not (EA / "src" / "strategies").exists(), reason="can ban clone EA31337")
+def test_kiem_ke_ea31337_that(tmp_path):
+    kq = SK.kiem_ke_kho(EA, "EA31337", ra_thu_muc=str(tmp_path))
+    assert kq["tong"]["chien_luoc"] >= 100                       # 69 chien luoc + 42 meta
+    hedge = [t["tep"] for t in kq["tep"] if "hedge" in t["quan_tri"]]
+    assert any("Meta_Hedge" in t for t in hedge)

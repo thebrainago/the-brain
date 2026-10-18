@@ -1,3 +1,5 @@
+> **18/10/2026 — SEEKER: chỉ đọc và tóm tắt KHO MÃ chạy được (EA / chỉ báo / chiến lược / bot xử lí lệnh), đọc CẢ file, giữ phần xử lí lệnh. Xem `tai_lieu/SEEKER_KHO_VAN_HANH.md`.**
+
 # qwen/ — hệ tự chạy của The Brain
 
 **Một lệnh là đủ.** Mở terminal, gõ:

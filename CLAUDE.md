@@ -1,5 +1,8 @@
 > **⚠ 17/10/2026 — CHU DU AN: tieu chi DUY NHAT la ba yeu to cot loi: lai sau phi va cac muc gian · sut giam <= 80 % · lai >= 10 %/nam. p-value/Holm/FDR/placebo/MDE/mua-giu/"hai nua" chi la nhan, khong dung de loai he. Doc `BO_TIEU_CHI_MOI.md` va `DANH_SACH_HE_DAT.md` TRUOC. Cung thay doi nay da co o repo brain2 (cua Grok).**
 
+> **⚠ 18/10/2026 — SEEKER: tim KHO EA / chi bao / chien luoc VAN HANH DUOC (ky hieu ma, doc CA file, lay ve
+> data/cau_kho, kiem ke, nghien cuu - bien tau - ket hop). Nguon hoc thuat ve cuoi. Doc `tai_lieu/SEEKER_KHO_VAN_HANH.md`.**
+
 # HUONG DAN CHO CLAUDE CODE — lab/ (THE BRAIN)
 
 ## LUAT SO 0 — DOI CHIEU SO DO TRUOC MOI PHIEN (chot 12/09/2026)
