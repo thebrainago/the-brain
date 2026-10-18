@@ -470,7 +470,7 @@ def _chay_trong_khoa(symbol: str, khung: str, so: int = 0, loc: str = "",
         return {"loi": "qua 3600s"}
     giay = round(time.time() - t0, 1)
 
-    hong = kiem_log_agent()
+    hong = kiem_log_agent(t0)
     if hong.startswith("TESTER KHONG CHAY DUOC"):
         return {"loi": hong, "giay": giay, "chua_do": True}
 

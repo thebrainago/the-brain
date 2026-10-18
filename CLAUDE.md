@@ -3,6 +3,8 @@
 > **⚠ 18/10/2026 — SEEKER: tim KHO EA / chi bao / chien luoc VAN HANH DUOC (ky hieu ma, doc CA file, lay ve
 > data/cau_kho, kiem ke, nghien cuu - bien tau - ket hop). Nguon hoc thuat ve cuoi. Doc `tai_lieu/SEEKER_KHO_VAN_HANH.md`.**
 
+> **⚠ 18/10/2026 — RA SOAT MODULE: mo phong tung lam dep so (tai khoan chay bao thang, lenh BAN lai ao ~phuong sai/bar, SL gap khop o SL, spread rollover = 0, phi qua dem tinh ca lenh trong ngay) va loc nham he co lai. Da sua; so Python truoc 18/10 co lenh ban / khop luc rollover la LECH. Doc `reports/RA_SOAT_MODULE_18_10.md` va `BAN_GIAO_BA_BEN_18_10.md`.**
+
 # HUONG DAN CHO CLAUDE CODE — lab/ (THE BRAIN)
 
 ## LUAT SO 0 — DOI CHIEU SO DO TRUOC MOI PHIEN (chot 12/09/2026)

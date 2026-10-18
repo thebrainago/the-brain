@@ -67,7 +67,7 @@ class PhepTiaPhaiDUNG(unittest.TestCase):
         NP.doc_kho = lambda: [
             {"ten": "qua_thua", "_ty_le_kich_hoat": 0.001},
             {"ten": "vua", "_ty_le_kich_hoat": 0.20},
-            {"ten": "qua_day", "_ty_le_kich_hoat": 0.95},
+            {"ten": "qua_day", "_ty_le_kich_hoat": 0.99},
             {"ten": "khong_do", "_ty_le_kich_hoat": None},
         ]
         try:
@@ -189,12 +189,13 @@ def test_van_giu_DU_co_che_khong_loai_them():
     assert len(TH.co_che_dung_duoc()) == len(du)
 
 
-def test_tran_kich_hoat_060_co_co_so():
-    """Tran tren KHONG duoc noi: nhom >=60% la nhom TE NHAT (356 mau, CAGR
-    tv -1,89%, ty le PASS 0%). Ghi chu goc cua no khong neu phep do nao, nen
-    phep do nam o day."""
+def test_tran_kich_hoat_khong_loai_ca_nhom_he_o_thi_truong_lau():
+    """18/10/2026 (chu du an: chi loai khi KHONG co lai): tran 0,60 tung dua tren phep do "nhom >= 60 % TE NHAT
+    (356 mau, CAGR trung vi -1,89 %, PASS 0 %)" - PASS do la cua cong CU (thang mua-giu...). Trung vi am khong
+    co nghia la khong co mau nao co lai; to_hop tu cham tung mau theo tien. Tran nay chi con chan mua-giu
+    doi ten (>= 98 % thoi gian co lenh). VUNG_SINH_LOI (thu tu duyet) giu nguyen."""
     from nhan import to_hop as TH
-    assert TH.KICH_HOAT[1] <= 0.60
+    assert 0.95 <= TH.KICH_HOAT[1] < 1.0
     assert TH.VUNG_SINH_LOI[1] <= TH.KICH_HOAT[1]
 
 

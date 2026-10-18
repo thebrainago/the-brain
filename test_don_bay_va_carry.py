@@ -40,7 +40,9 @@ class GopSoHoc(unittest.TestCase):
     def test_tu_dong_chon_so_hoc_khi_co_don_bay(self):
         df = _khung(np.random.default_rng(1).normal(0, 0.01, 500))
         v = np.ones(len(df))
-        self.assertEqual(MP.chay(df, v, _rong(), don_bay=1.0, da_dich=True).che_do_gop, "log")
+        # 18/10/2026: "tu_dong" LUON so hoc (log cho lenh ban lai ao ~ phuong sai moi bar); "log" chi khi goi ro
+        self.assertEqual(MP.chay(df, v, _rong(), don_bay=1.0, da_dich=True).che_do_gop, "so_hoc")
+        self.assertEqual(MP.chay(df, v, _rong(), don_bay=1.0, da_dich=True, gop="log").che_do_gop, "log")
         self.assertEqual(MP.chay(df, v, _rong(), don_bay=2.0, da_dich=True).che_do_gop, "so_hoc")
 
     def test_luc_can_bien_dong_khong_duoc_bien_mat(self):

@@ -40,6 +40,36 @@ LEGACY_HOLDOUT_STATUS = "exposed_legacy"
 # 0,00001 - khong the qua du no dung. Chon cai TOT NHAT roi dung lai thi ngan
 # sach thong ke dung vao cho dang dung.
 TOI_DA_DANG_KY_MOI_CAP = 3
+# 18/10/2026 che do cong "loi_nhuan": FDR tat, nen ly do "tiet kiem suat FDR" o tren khong con. Han muc nay chi
+# con la han CPU cho buoc xac nhan.
+TOI_DA_DANG_KY_MOI_CAP_LOI_NHUAN = 10
+# San so lenh o sang tho khi che do "loi_nhuan". KHONG phai nguong thong ke (du lenh chi la nhan o cong): duoi muc
+# nay sut giam do tren train gan nhu bang 0 nen ti so cagr/|sut giam| phong len va lap day hang dang ky bang may rui.
+SO_LENH_SANG_THO_LOI_NHUAN = 10
+
+
+def _loi_nhuan() -> bool:
+    return CONG.che_do_cong() == "loi_nhuan"
+
+
+def _qua_sang_tho(cs: dict, m_bh: dict, so_lenh: int) -> bool:
+    """Sang tho tren TRAN. Che do "loi_nhuan" (17/10/2026): chi BA yeu to cot loi (lai rong, lai/sut giam) -
+    truoc 18/10 o day van doi THANG MUA-GIU ca tong lai lan Sharpe, tuc cong da bo dieu kien nay ma sang tho
+    van loai he co lai truoc khi no toi duoc cong. Che do khac: giu nguyen ban cu."""
+    if _loi_nhuan():
+        return so_lenh >= SO_LENH_SANG_THO_LOI_NHUAN and (cs.get("tong_lai_pct") or 0) > 0 and CONG.dat_cot_loi(cs)
+    return (so_lenh >= CONG.nguong()["so_lenh_toi_thieu"]
+            and (cs.get("tong_lai_pct") or -1e9) > (m_bh.get("tong_lai_pct") or 0)
+            and (cs.get("sharpe") or -9) > (m_bh.get("sharpe") or 0))
+
+
+def _diem_xep(cs: dict) -> float:
+    """Thu tu chon ung vien: "loi_nhuan" xep theo cagr/|sut giam| (cot loi), con lai theo Sharpe (ban cu)."""
+    return CONG.ti_so_cot_loi(cs) if _loi_nhuan() else (cs.get("sharpe") or -9)
+
+
+def _toi_da_dang_ky() -> int:
+    return TOI_DA_DANG_KY_MOI_CAP_LOI_NHUAN if _loi_nhuan() else TOI_DA_DANG_KY_MOI_CAP
 REPORTS = Path(__file__).resolve().parent.parent / "reports"
 PLAN_DIR = REPORTS / "quant_plans"
 PHEU_CURSOR = REPORTS / "pheu_cursor.json"
@@ -249,7 +279,11 @@ def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0,
         m_luc = DLUC.mde_cua(ma, khung)
     except Exception:
         m_luc = {"mde": 0.0}
-    if m_luc.get("mde") is None:
+    nhan_luc = None
+    if m_luc.get("mde") is None and _loi_nhuan():
+        # 18/10/2026: "khong do duoc bang thong ke" khong phai "khong co lai" - chi dan nhan, van quet.
+        nhan_luc = "NHAN: khong muc chinh xac nao vuot duoc cong thong ke tren cap nay (MDE None)"
+    elif m_luc.get("mde") is None:
         SO.ghi_chi_so("kham_pha_bo_qua_vo_luc", 1.0,
                       {"tai_san": ma, "khung": khung, "so_bar": m_luc.get("so_bar")})
         return {"ma": ma, "khung": khung, "che_do": che_do, "mde": None,
@@ -273,17 +307,14 @@ def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0,
             da_quet += 1
         except Exception:
             continue
-        if kq.so_lenh < CONG.nguong()["so_lenh_toi_thieu"]:
-            continue
-        # sang tho: phai thang mua-giu CA loi suat LAN sharpe ngay o train
-        if (m.get("tong_lai_pct") or -1e9) > (m_bh.get("tong_lai_pct") or 0) and \
-           (m.get("sharpe") or -9) > (m_bh.get("sharpe") or 0):
+        # sang tho: che do "loi_nhuan" chi hoi cot loi; ban cu doi thang mua-giu CA loi suat LAN sharpe o train
+        if _qua_sang_tho(m, m_bh, kq.so_lenh):
             ung_vien.append({"mau": ten, "tham_so": ts, "chi_so": m,
                              "ho": MAU.MAU[ten]["ho"], "co_che": MAU.MAU[ten]["co_che"]})
 
     # CHON LOC TRUOC KHI DANG KY. Moi dang ky an mot suat ngan sach thong ke,
     # nen dang ky het = tu lam nghen chinh minh (xem TOI_DA_DANG_KY_MOI_CAP).
-    ung_vien.sort(key=lambda u: -(u["chi_so"].get("sharpe") or -9))
+    ung_vien.sort(key=lambda u: -_diem_xep(u["chi_so"]))
     tong_ung_vien = len(ung_vien)
 
     # CONG KHA THI (chot 22/08). Truoc khi tieu mot suat FDR, hoi: cap nay co
@@ -301,19 +332,22 @@ def kham_pha(ma: str, khung: str, gioi_han_to_hop: int = 0,
             kt_luc = DLUC.du_luc_de_kiem(u["chi_so"].get("sharpe"), ma, khung)
         except Exception as e:
             kt_luc = {"du_luc": True, "ly_do": f"khong do duoc MDE: {type(e).__name__}"}
-        if kt_luc.get("du_luc"):
-            du_luc.append(u)
-        else:
+        if not kt_luc.get("du_luc"):
             thieu_luc.append({"mau": u["mau"], **{k: kt_luc[k] for k in
                                                   ("mde", "sharpe", "ly_do")
                                                   if k in kt_luc}})
-    ung_vien = du_luc[:TOI_DA_DANG_KY_MOI_CAP]
+        # 18/10/2026: che do "loi_nhuan" - thieu luc thong ke chi la NHAN, he co lai van di tiep
+        if kt_luc.get("du_luc") or _loi_nhuan():
+            if not kt_luc.get("du_luc"):
+                u = dict(u, nhan=["NHAN: Sharpe kham pha duoi MDE cua cap"])
+            du_luc.append(u)
+    ung_vien = du_luc[:_toi_da_dang_ky()]
 
     ra = {"ma": ma, "khung": khung, "da_quet": da_quet,
           "ung_vien": tong_ung_vien, "da_chon": len(ung_vien),
           "che_do": che_do, "thieu_luc": len(thieu_luc),
           "chi_tiet_thieu_luc": thieu_luc[:5], "cua_so": _cua_so(df),
-          "so_bar": len(df), "mua_giu_train": m_bh,
+          "so_bar": len(df), "mua_giu_train": m_bh, **({"nhan_luc": nhan_luc} if nhan_luc else {}),
           "chi_phi_do_tin": cp.do_tin,
           "_ung_vien": ung_vien, "_thieu_luc": thieu_luc}
     if not dang_ky:
@@ -710,7 +744,10 @@ def kham_pha_theo_mau(ten_mau: str, nguon: str = "") -> dict:
     # phai co che - va moi gia thuyet dang ky tu no se an mot suat FDR that.
     # Chan o day re hon nhieu so voi chan o tang xac nhan.
     ra["pham_vi"] = _pham_vi_cua(ten_mau)
-    if ra["pham_vi"].get("ket_luan") in ("KHONG_PHAN_BIET", "KHONG_CO_CO_CHE"):
+    if ra["pham_vi"].get("ket_luan") in ("KHONG_PHAN_BIET", "KHONG_CO_CO_CHE") and _loi_nhuan():
+        # 18/10/2026: chay deu tren lop "nen hong" co the la xu huong chung cua ca lop - van la tien neu co lai.
+        ra["nhan"] = ["NHAN pham_vi: " + str(ra["pham_vi"].get("ly_do"))]
+    elif ra["pham_vi"].get("ket_luan") in ("KHONG_PHAN_BIET", "KHONG_CO_CO_CHE"):
         ra["bo_qua"] = ra["pham_vi"]["ly_do"]
         return ra
     ds = _tai_san_quet_mau()
@@ -743,10 +780,9 @@ def kham_pha_theo_mau(ten_mau: str, nguon: str = "") -> dict:
                         kq = MP.chay(train, th, cp, ma=ma, khung=khung)
                     except Exception:
                         continue
-                    if kq.so_lenh < CONG.nguong()["so_lenh_toi_thieu"]:
-                        continue
                     cs = DO.chi_so(kq.loi, kq.index, kq.vi_the)
-                    if (cs.get("sharpe") or -9) > (m_bh.get("sharpe") or 0) and                        (cs.get("tong_lai_pct") or -1e9) > (m_bh.get("tong_lai_pct") or 0) and                        (tot is None or (cs.get("sharpe") or -9) > (tot[2].get("sharpe") or -9)):
+                    if _qua_sang_tho(cs, m_bh, kq.so_lenh) and \
+                       (tot is None or _diem_xep(cs) > _diem_xep(tot[2])):
                         tot = (ts, kieu_nen, cs)
             if tot is None:
                 continue
@@ -766,7 +802,8 @@ def kham_pha_theo_mau(ten_mau: str, nguon: str = "") -> dict:
             if not kt_luc.get("du_luc"):
                 ra.setdefault("thieu_luc", []).append(
                     {"tai_san": ma, "khung": khung, "ly_do": kt_luc.get("ly_do")})
-                continue
+                if not _loi_nhuan():
+                    continue
             ma_gt = f"{ma}.{khung}.{ten_mau}." + ("_".join(f"{k}{v}" for k, v in ts.items())
                                                  or "mac_dinh")
             SO.dang_ky_gia_thuyet(

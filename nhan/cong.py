@@ -118,6 +118,24 @@ NHAN_LOI_NHUAN = {
 }
 
 
+def dat_cot_loi(cs: dict, n: dict = None) -> bool:
+    """BA yeu to cot loi (17/10/2026) tren mot bo chi so `DO.chi_so`: lai rong > 0 VA co mot muc lot cho
+    lai >= `lai_nam_toi_thieu_pct` voi sut giam <= `sut_giam_toi_da_pct` <=> cagr / |sut giam| >= 10 / 80.
+    Dung chung cho cong (dieu kien 15) va sang tho cua quantlab - mot cong thuc, khong hai."""
+    n = n or nguong()
+    muc, tran = float(n.get("lai_nam_toi_thieu_pct", 10.0)), float(n.get("sut_giam_toi_da_pct", 80.0))
+    cg, dd = (cs or {}).get("cagr_pct"), abs((cs or {}).get("max_dd_pct") or 0.0)
+    return bool(cg is not None and cg > 0 and (dd <= 1e-9 or cg / dd >= muc / tran))
+
+
+def ti_so_cot_loi(cs: dict) -> float:
+    """cagr / |sut giam| - thu tu xep hang theo cot loi (cao = it sut giam cho moi % lai). Khong do duoc -> -inf."""
+    cg, dd = (cs or {}).get("cagr_pct"), abs((cs or {}).get("max_dd_pct") or 0.0)
+    if cg is None:
+        return float("-inf")
+    return cg / dd if dd > 1e-9 else (1e9 if cg > 0 else cg)
+
+
 def che_do_cong() -> str:
     """'loi_nhuan' (17/10/2026) = chi chan phi do duoc + khong an khe gia + lai rong > 0; con lai la nhan.
     'nhan' (12/09) = cac tieu chi hoc thuat chi dan nhan, van chan so voi mua-giu / du lenh / rr / edge. 'chan' = ban cu.
@@ -766,7 +784,7 @@ def xet(df, kq_he, kq_bh, cp, gt_ma: str = "", ho: str = "chung",
         # CO mot muc lot nao dat ca hai khong <=> cagr / |sut giam| >= 10 / 80 (tuyen tinh theo lot).
         _muc, _tran = float(n.get("lai_nam_toi_thieu_pct", 10.0)), float(n.get("sut_giam_toi_da_pct", 80.0))
         _cg, _dd = he.get("cagr_pct"), abs(he.get("max_dd_pct") or 0.0)
-        dk["15_lai_10_sut_giam_80"] = bool(_cg is not None and _cg > 0 and (_dd <= 1e-9 or _cg / _dd >= _muc / _tran))
+        dk["15_lai_10_sut_giam_80"] = dat_cot_loi(he, n)
         if dk["15_lai_10_sut_giam_80"] and _dd > 1e-9:
             _k = _muc / _cg
             ly_do.append("lot x%.2f -> lai %.0f%%/nam, sut giam ~%.0f%% (lot x%.2f -> sut giam %.0f%%, lai ~%.0f%%/nam)"

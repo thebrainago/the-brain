@@ -225,7 +225,7 @@ def _trong_khoa(symbol, khung, vao_kieu, vao_n, nhanh, tu, den, lot=1.0) -> dict
         return {"trang_thai": "CHUA_DO_DUOC", "loi": "qua 5400s"}
     giay = round(time.time() - t0, 1)
 
-    hong = kiem_log_agent()
+    hong = kiem_log_agent(t0)
     if hong.startswith("TESTER KHONG CHAY DUOC"):
         return {"trang_thai": "CHUA_DO_DUOC", "loi": hong, "giay": giay}
 

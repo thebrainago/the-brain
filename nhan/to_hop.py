@@ -72,7 +72,10 @@ TY_LE_HAI_NUA = (0.33, 3.0)
 #: giu nguyen 800 thi chang holdout tu loai gan het roi bao "khong he nao song".
 BAR_NUA_TOI_THIEU = 300
 #: Ti le bar co tin hieu. Ngoai khoang nay thi khong phai "tin hieu".
-KICH_HOAT = (0.02, 0.60)
+#: 18/10/2026: tran 0,60 -> 0,98 (cung muc `loc_co_che.TY_LE_NHIEU`). Tran 0,60 loai sach he xu huong / dao
+#: chieu (o thi truong 60-98 % thoi gian) - cung loi da sua o bo sinh ngay 03/09 (CLAUDE.md "Tran phoi nhiem").
+#: Mua-giu doi ten thi cong "loi_nhuan" tu loai neu khong dat lai/sut giam.
+KICH_HOAT = (0.02, 0.98)
 #: Bao nhieu o song sot moi chang.
 GIU_CHANG1 = 200
 GIU_CHANG2 = 40

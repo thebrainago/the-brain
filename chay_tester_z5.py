@@ -180,7 +180,7 @@ def chay_mot(ten: str, model: int, tu: str, den: str, tran_giay: int = 900) -> d
         return {"ten": ten, "model": model, "loi": "qua %ds" % tran_giay}
     giay = round(time.time() - t0, 1)
 
-    hong = kiem_log_agent()
+    hong = kiem_log_agent(t0)
     f = next((x for x in (bao_cao, XM_DATA / f"{ten}.html") if x.exists()), None)
     if f is None:
         return {"ten": ten, "model": model, "giay": giay,
@@ -196,9 +196,11 @@ def chay_mot(ten: str, model: int, tu: str, den: str, tran_giay: int = 900) -> d
 
 
 #: Thu muc log cua AGENT - khac log cua Tester, va chi o day moi co ly do that.
-LOG_AGENT = (Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Tester"
-             / "656C351524AFFE300FAFE576FA4C7845"
-             / "Agent-127.0.0.1-3000" / "logs")
+#: 18/10/2026: tung GHIM CUNG thu muc 656C3515 (da xoa 13/09, nay la BB16F565) va chi agent 3000 -> log
+#: "cannot generate history data" khong bao gio duoc doc, bao cao 0 lenh lot qua nhu ket qua that.
+#: Nay theo thu muc du lieu DO DUOC (`XM_DATA`) va quet MOI agent.
+TESTER_GOC = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Tester" / XM_DATA.name
+LOG_AGENT = TESTER_GOC / "Agent-127.0.0.1-3000" / "logs"      # giu ten cu cho ma goi ngoai
 
 #: Dau hieu tester KHONG CHAY DUOC - phai phan biet voi "chay duoc, 0 lenh".
 #:
@@ -212,10 +214,13 @@ DAU_HIEU_HONG = ("cannot generate history data", "0 ticks, 0 bars generated",
                  "not enough memory", "no history data")
 
 
-def kiem_log_agent() -> str:
-    """Tra chuoi ly do neu tester KHONG CHAY DUOC; rong neu chay that."""
+def kiem_log_agent(t0: float | None = None) -> str:
+    """Tra chuoi ly do neu tester KHONG CHAY DUOC; rong neu chay that.
+
+    `t0` (giay epoch luc bat dau chay): chi doc log agent SUA SAU luc do - log cu cua luot khac khong tinh."""
     try:
-        fs = sorted(LOG_AGENT.glob("*.log"), key=lambda p: p.stat().st_mtime)
+        fs = sorted((f for f in TESTER_GOC.glob("Agent-*/logs/*.log")
+                     if t0 is None or f.stat().st_mtime >= t0 - 2.0), key=lambda p: p.stat().st_mtime)
         if not fs:
             return ""
         van = fs[-1].read_text(encoding="utf-16", errors="ignore")

@@ -187,7 +187,9 @@ def dap_cau_truc(df: pd.DataFrame, tin_hieu, cau_truc: str = "thi_truong",
             i += 1
             continue
         vao_i = i + 1
-        a = atr[vao_i]
+        # 18/10/2026: ATR BIET TAI CLOSE bar tin hieu (i). Ban cu dung atr[vao_i] - gom ca bien do cua chinh
+        # nen vao lenh (chua biet luc dat lenh o open): do 1,00 -> dung 1,643 cho SL/TP va muc lenh cho.
+        a = atr[i]
         if not np.isfinite(a) or a <= 0:
             i += 1
             continue

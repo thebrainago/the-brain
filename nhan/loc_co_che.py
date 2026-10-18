@@ -189,7 +189,10 @@ def _do_mot_ma(ten_mau_ds, df) -> dict:
         trong = (np.abs(s) > 0).astype(int)
         ra[ten] = {"vt": _van_tay_hanh_vi(a),
                    "ty_le": float(trong.mean()),
-                   "so_lenh": int(np.sum(np.abs(np.diff(trong)) > 0))}
+                   # 18/10/2026: ti le o CUNG MOT CHIEU - he luon co lenh nhung dao mua/ban khong phai mua-giu
+                   "mot_phia": float(max(np.mean(s > 0), np.mean(s < 0))),
+                   # so lan doi vi the tinh CA lat chieu (+1 -> -1), khong chi vao/ra trang thai rong
+                   "so_lenh": int(np.sum(np.diff(np.sign(s)) != 0))}
     return ra
 
 
@@ -273,7 +276,7 @@ def loc(cac_mau=None, khung: str = "D1", cac_ma=None, in_ra=print) -> dict:
         # Chi loai khi suy bien tren TAT CA tai san do duoc.
         if all(c["ty_le"] < TY_LE_IT for c in song):
             bo[ten] = "gan_khong_bao_gio_vao"
-        elif all(c["ty_le"] > TY_LE_NHIEU for c in song):
+        elif all(c.get("mot_phia", c["ty_le"]) > TY_LE_NHIEU for c in song):
             bo[ten] = "mua_giu_tra_hinh"
         elif all(c["so_lenh"] < LENH_IT for c in song):
             bo[ten] = "duoi_%d_lan_doi_vi_the" % LENH_IT

@@ -44,30 +44,40 @@ def _so_ngay(index) -> np.ndarray:
 
 
 # --------------------------------------------------------------- CAC CANARY
-def ca_luon_mua(df, cp, ma):
-    """Luon mua 100%. Ky vong tinh tay:
-        sum(r) - spread[0] - truot[0] - phi_mua * tong_ngay/365
-    Bat: sai sot ke toan chi phi, hoac ghep vi the voi loi suat sai cho."""
-    kq = MP.chay(df, np.ones(len(df)), cp, ma=ma, da_dich=True)
-    r = MP._loi_suat_tien(df)
-    sp = cp.spread_mang(df.index)
-    cho = (float(np.sum(r)) - float(sp[0]) - cp.truot_gia_frac
-           - cp.phi_nam_mua * float(np.sum(_so_ngay(df.index))) / 365.0)
+def _dem_tay(index, cp) -> np.ndarray:
+    """So ngay tinh phi giu cua interval open[i] -> open[i+1] (bar cuoi 0), THEO KIEU cua mo hinh phi.
+    "nua_dem" (mac dinh tu 18/10/2026, nhu MT5): dem nua dem gio may chu, x3 ngay ba. "lien_tuc": ngay lich."""
+    if getattr(cp, "kieu_qua_dem", "lien_tuc") == "nua_dem":
+        return CP.dem_qua_dem(index, 2 if CP._loai_tai_san(cp.ma) == "fx" else 4)
+    ngay = np.zeros(len(index))
+    ngay[:-1] = _so_ngay(index)[1:]
+    return ngay
+
+
+def _ca_luon(df, cp, ma, chieu: float):
+    """Luon mua (chieu +1) / luon ban (-1) 100 %. Ky vong tinh tay, SO HOC tung bar (18/10/2026):
+        sum log(1 + chieu*(P[i+1]/P[i] - 1) - phi_i),  phi_0 += spread[0]*he_so_phi_spread + truot,
+        phi_i += phi_nam_(mua|ban) * dem_i / 365.
+    Ban truoc 18/10 ky vong `-sum(log r)` cho luon ban - chinh la cong thuc cho lenh ban LAI AO ~ phuong sai
+    moi bar, nen canary dang GHIM loi thay vi bat loi."""
+    kq = MP.chay(df, chieu * np.ones(len(df)), cp, ma=ma, da_dich=True)
+    ra = np.expm1(MP._loi_suat_tien(df))
+    phi = (cp.phi_nam_mua if chieu > 0 else cp.phi_nam_ban) * _dem_tay(df.index, cp) / 365.0
+    phi[0] += float(cp.spread_mang(df.index)[0]) * getattr(cp, "he_so_phi_spread", lambda: 1.0)() + cp.truot_gia_frac
+    cho = float(np.sum(np.log(1.0 + chieu * ra - phi)))
     thuc = float(np.sum(kq.loi))
     return abs(thuc - cho) < 1e-9, f"thuc {thuc:+.9f} vs tay {cho:+.9f}"
+
+
+def ca_luon_mua(df, cp, ma):
+    """Luon mua 100% = cong thuc tay. Bat: sai ke toan chi phi, hoac ghep vi the voi loi suat sai cho."""
+    return _ca_luon(df, cp, ma, 1.0)
 
 
 def ca_luon_ban(df, cp, ma):
-    """Luon ban 100%. Ky vong tinh tay:
-        -sum(r) - spread[0] - truot[0] - phi_BAN * tong_ngay/365
-    Bat DUNG loi that #1: phi qua dem chi tinh cho chieu mua."""
-    kq = MP.chay(df, -np.ones(len(df)), cp, ma=ma, da_dich=True)
-    r = MP._loi_suat_tien(df)
-    sp = cp.spread_mang(df.index)
-    cho = (-float(np.sum(r)) - float(sp[0]) - cp.truot_gia_frac
-           - cp.phi_nam_ban * float(np.sum(_so_ngay(df.index))) / 365.0)
-    thuc = float(np.sum(kq.loi))
-    return abs(thuc - cho) < 1e-9, f"thuc {thuc:+.9f} vs tay {cho:+.9f}"
+    """Luon ban 100% = cong thuc tay, tra phi BAN. Bat DUNG loi that #1: phi qua dem chi tinh cho chieu mua;
+    va (18/10/2026) lenh ban duoc cong lai log."""
+    return _ca_luon(df, cp, ma, -1.0)
 
 
 def ca_dung_ngoai(df, cp, ma):

@@ -53,6 +53,12 @@ POINT_MAC_DINH = {"fx5": 1e-5, "fx3": 1e-3, "chi_so": 0.01, "vang": 0.01}
 # Gio (UTC theo bar MT5) bi loai khi do spread: quanh roll-over 23:00-01:00
 # spread gian ra hang chuc lan, khong dai dien cho gio giao dich.
 GIO_LOAI = {23, 0}
+# 18/10/2026: GIO_LOAI chi con loai khoi SPREAD CHUNG (trung vi gio giao dich). Ho so THEO GIO nay
+# do CA gio 23 va 0: truoc day hai gio nay khong co trong ho so nen `spread_mang` lap bang spread
+# chung -> moi lenh khop luc rollover (bar H1/H4 00:00) duoc spread thuong, re hon that 5-9 lan.
+# Bar NGAY (D1/W1): mo phong khop o open bar (00:00 = rollover) nhung EA that vao lenh luc
+# `InpGioVao` = 2 gio may chu (BRAIN_V24). Lay spread cua gio do; doi bang BRAIN_GIO_KHOP_NGAY.
+GIO_KHOP_NGAY = int(os.environ.get("BRAIN_GIO_KHOP_NGAY", "2"))
 
 # Muc phi giu quan sat duoc cua du an, dung lam moc doi chieu va lam du phong.
 # Nguon: CLAUDE.md muc 13 + memory ban-do-chi-phi-lien-san / xm-chi-phi-that-theo-lop.
@@ -228,7 +234,9 @@ class MoHinhChiPhi:
     def spread_mang(self, index: pd.DatetimeIndex) -> np.ndarray:
         """Spread MOT CHIEU theo tung bar (frac). Dung gio cua bar khi co."""
         if self.spread_frac_theo_gio:
-            gio = hinh_hoc(index)[1]
+            ngay, gio = hinh_hoc(index)
+            if len(index) > 2 and float(np.median(ngay[:-1])) >= 0.9:
+                gio = np.full(len(index), GIO_KHOP_NGAY)      # bar ngay: spread cua gio khop that
             mac = self.spread_frac_chung
             bang = np.full(24, mac, dtype=float)
             for g, v in self.spread_frac_theo_gio.items():
@@ -317,8 +325,9 @@ def do_spread(ma: str, df: pd.DataFrame) -> tuple[dict, float, list]:
         canh_bao.append("khong du bar trong gio giao dich - dung ca chuoi")
     chung = float(np.median(s[dung])) * pt / gia
     theo_gio: dict[int, float] = {}
+    ca_gio = tot & (dow < 5)                 # 18/10/2026: ho so gio GOM ca gio rollover (xem GIO_LOAI)
     for g in range(24):
-        m = dung & (gio == g)
+        m = ca_gio & (gio == g)
         if m.sum() >= 200:
             theo_gio[g] = float(np.median(s[m])) * pt / gia
     ty_le_0 = 1.0 - float(tot.mean())
@@ -409,8 +418,9 @@ def do_spread_tu_bar_mt5(ma: str, so_bar: int = 6000, khung_mt5=None) -> dict | 
         if dung.sum() < 300:
             continue
         theo_gio = {}
+        ca_gio = tot & (dow < 5)             # 18/10/2026: gom ca gio rollover (xem GIO_LOAI)
         for g in range(24):
-            m = dung & (gio == g)
+            m = ca_gio & (gio == g)
             if m.sum() >= 50:
                 theo_gio[int(g)] = float(np.median(s[m])) * pt / gia
         return {

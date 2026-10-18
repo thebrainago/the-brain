@@ -35,23 +35,74 @@ import numpy as np
 import pandas as pd
 
 KHO = Path(__file__).parent / "data"
+CHI_PHI_DO = Path(__file__).parent / "config" / "chi_phi_do.json"
+# Thong so EURCAD - chi con la MAC DINH cho `d` tu dung tay (test). `nap()` nay doc thong so DO DUOC cua tung ma
+# (18/10/2026): truoc day moi ma deu dung pip 0,0001, gia tri pip 0,0714 USD va swap 0,0474 USD/ngay cua EURCAD,
+# hai chieu cung dau -> cap JPY hay vang ra lai ao ~100 lan, AUDCHF/EURGBP thap 40-80 %.
 PV = 0.0714
 PIP = 0.0001
 LOT = 0.01
 SWAP_NGAY = 0.0474
+#: Tien yet gia cua CFD khong doc duoc tu ten (FX/kim loai doc tu 3 ki tu cuoi).
+TIEN_YET_CFD = {"JP225": "JPY", "GER40": "EUR", "DE40": "EUR", "GER30": "EUR", "EU50": "EUR", "FRA40": "EUR",
+                "SPAIN35": "EUR", "IT40": "EUR", "NETH25": "EUR", "UK100": "GBP", "HK50": "HKD", "AUS200": "AUD",
+                "CHI50": "USD", "US500": "USD", "US100": "USD", "US30": "USD", "US2000": "USD"}
+
+
+def _tien_yet(cap: str) -> str:
+    goc = cap.upper().replace("XM_", "").replace("#", "")
+    for k, v in TIEN_YET_CFD.items():
+        if goc.startswith(k):
+            return v
+    if len(goc) >= 6 and goc[:6].isalpha():
+        return goc[3:6]
+    raise ValueError("khong biet tien yet gia cua %s - them vao TIEN_YET_CFD hoac truyen pv=" % cap)
+
+
+def thong_so(cap: str, bang: dict | None = None) -> dict:
+    """Thong so 0,01 lot cua `cap` tu `config/chi_phi_do.json` (do tren san): pip (= 10 point, khop `sp/10`),
+    pv (USD moi pip), he so danh nghia (USD moi don vi gia), phi qua dem mua/ban (ti le/nam, duong = tra).
+    Quy doi tien yet gia -> USD bang gia luc do cua cap USDxxx / xxxUSD. Thieu thong so -> nem loi (khong doan)."""
+    import json
+    bang = bang if bang is not None else json.loads(CHI_PHI_DO.read_text(encoding="utf-8"))
+    goc = cap.upper().replace("XM_", "").replace("#", "")
+    t = bang.get(goc) or bang.get(cap)
+    if not isinstance(t, dict) or not t.get("point") or not t.get("contract_size"):
+        raise ValueError("chua do point/contract_size cho %s trong %s" % (cap, CHI_PHI_DO.name))
+    q = _tien_yet(cap)
+    if q == "USD":
+        doi = 1.0
+    elif isinstance(bang.get("USD" + q), dict) and bang["USD" + q].get("gia_luc_do"):
+        doi = 1.0 / float(bang["USD" + q]["gia_luc_do"])
+    elif isinstance(bang.get(q + "USD"), dict) and bang[q + "USD"].get("gia_luc_do"):
+        doi = float(bang[q + "USD"]["gia_luc_do"])
+    else:
+        raise ValueError("khong quy doi duoc %s -> USD cho %s" % (q, cap))
+    pip = 10.0 * float(t["point"])
+    nf = LOT * float(t["contract_size"]) * doi          # USD moi 1,0 don vi gia, 0,01 lot
+    return {"pip": pip, "pv": nf * pip, "danh_nghia": nf, "tien_yet": q, "doi_usd": doi,
+            "phi_mua": float(t.get("phi_nam_mua") or 0.0), "phi_ban": float(t.get("phi_nam_ban") or 0.0),
+            "nguon": t.get("nguon") or t.get("san")}
 
 
 def nap(cap="EURCAD", pv=None):
     m = pd.read_parquet(KHO / f"{cap}_M1_mq.parquet")
-    return {
+    d = {
         "hi": m["high"].to_numpy(), "lo": m["low"].to_numpy(),
         "c": m["close"].to_numpy(),
         "sp": (m["spread"].to_numpy() / 10.0).astype(np.float32),
         "thu": m["time"].dt.dayofweek.to_numpy().astype(np.int8),
         "nam": (m["time"].max() - m["time"].min()).days / 365.25,
-        "pv": PV if pv is None else pv, "cap": cap,
+        "cap": cap,
         "n": len(m),
     }
+    if pv is not None:
+        d["pv"] = pv                     # goi tay: giu hanh vi cu (pip/swap EURCAD)
+        return d
+    ts = thong_so(cap)
+    d.update(pv=ts["pv"], pip=ts["pip"], danh_nghia=ts["danh_nghia"], phi_mua=ts["phi_mua"],
+             phi_ban=ts["phi_ban"], thong_so=ts)
+    return d
 
 
 def _lot_tang(i, he_so_1, nhom_dau, he_so_2, lot_sau_l1=None):
@@ -91,8 +142,11 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
     thang roi nhoi lot x2 vao ben thua; o day chi ha muc chot."""
     hi, lo, c, sp, thu = d["hi"], d["lo"], d["c"], d["sp"], d["thu"]
     PV = d.get("pv", 0.0714)
+    PIP = d.get("pip", 0.0001)           # 18/10/2026: theo ma (xem `thong_so`), khong con ghim EURCAD
     n = d["n"]
     swap_phut = SWAP_NGAY / 1440.0
+    # phi qua dem THEO CHIEU va theo gia (USD / phut / 0,01 lot); khong co thong so -> hang so EURCAD cu
+    nf, pm_, pb_ = d.get("danh_nghia"), d.get("phi_mua"), d.get("phi_ban")
 
     gia = {1: [], -1: []}
     lot = {1: [], -1: []}
@@ -204,7 +258,8 @@ def mo_phong(d, buoc=20.0, tp=13.0, he_so_buoc=1.0, buoc_tran=400.0,
                 tang_max = len(g)
             if tlot[ch] > lot_max:
                 lot_max = tlot[ch]
-            lai -= (tlot[ch] / LOT) * swap_phut * (3.0 if thu[i] == 2 else 1.0)
+            sw = swap_phut if nf is None else (pm_ if ch > 0 else pb_) * c[i] * nf / 365.0 / 1440.0
+            lai -= (tlot[ch] / LOT) * sw * (3.0 if thu[i] == 2 else 1.0)
             tb = tgl[ch] / tlot[ch]
             xau = lo[i] if ch > 0 else hi[i]
             lo_ro = ch * (xau - tb) / PIP * (tlot[ch] / LOT) * PV

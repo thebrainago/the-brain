@@ -235,15 +235,18 @@ def v1_sang_re(nhan, ten_mau, tham_so, ma, khung, df):
         return LOAI, "tin_hieu_hong", {}
 
     kich_hoat = float(np.mean(np.abs(th) > 1e-12))
+    # 18/10/2026: "mua-giu tra hinh" = gan nhu luon O MOT CHIEU. Do bang |tin hieu| thi he LUON CO LENH nhung
+    # DAO mua/ban (giao cat MA, Donchian dao chieu...) cung bi loai nhu mua-giu.
+    mot_phia = float(max(np.mean(th > 1e-12), np.mean(th < -1e-12)))
     so_doi = int(np.count_nonzero(np.diff(np.sign(th)) != 0))
-    do = {"kich_hoat": round(kich_hoat, 4), "so_doi_vi_the": so_doi, "so_bar": n}
+    do = {"kich_hoat": round(kich_hoat, 4), "mot_phia": round(mot_phia, 4), "so_doi_vi_the": so_doi, "so_bar": n}
 
     if kich_hoat < v1["kich_hoat_min"]:
         _ghi_loai(nhan, "V1", "kich_hoat_qua_thap", kich_hoat, v1["kich_hoat_min"])
         return LOAI, "kich_hoat_qua_thap", do
-    if kich_hoat > v1["kich_hoat_max"]:
-        # Kich hoat gan 100% = mua-giu tra hinh, khong phai co che.
-        _ghi_loai(nhan, "V1", "mua_giu_tra_hinh", kich_hoat, v1["kich_hoat_max"])
+    if mot_phia > v1["kich_hoat_max"]:
+        # Gan 100% o CUNG MOT CHIEU = mua-giu (ban-giu) tra hinh, khong phai co che.
+        _ghi_loai(nhan, "V1", "mua_giu_tra_hinh", mot_phia, v1["kich_hoat_max"])
         return LOAI, "mua_giu_tra_hinh", do
     if so_doi < v1["so_lenh_min"]:
         _ghi_cho_them(nhan, "V1", "qua_it_lenh",
@@ -328,8 +331,9 @@ def v2_sang_kinh_te(nhan, ten_mau, tham_so, ma, khung, df, cp):
             _ghi_cho_them(nhan, "V2", "nhay_chi_phi_ma_chi_phi_chua_do",
                           "can do spread that truoc khi ket luan")
             return CHUA_DU_LUC, "nhay_chi_phi_ma_chi_phi_chua_do", do
-    except Exception:
-        pass
+    except Exception as e:
+        # 18/10/2026: khong nuot im - phep do hong thi phai thay duoc la CHUA DO, khong phai "khong nhay"
+        do["nhay_chi_phi_loi"] = f"{type(e).__name__}: {e}"
 
     return NHAN, "", do
 
@@ -340,22 +344,18 @@ def _bar_moi_nam(khung: str) -> float:
 
 
 def _nhan_doi_chi_phi(cp):
-    """Nhan doi moi thanh phan chi phi. Dung `bien_the()` co san cua
-    `MoHinhChiPhi` chu khong deepcopy - lop do da co duong nhan ban dung."""
-    doi = {}
-    for t in ("spread_frac_chung", "truot_gia_frac", "phi_nam_mua", "phi_nam_ban"):
-        try:
-            doi[t] = float(getattr(cp, t, 0.0)) * 2.0
-        except Exception:
-            pass
-    if getattr(cp, "spread_frac_theo_gio", None):
-        doi["spread_frac_theo_gio"] = {k: v * 2.0
-                                       for k, v in cp.spread_frac_theo_gio.items()}
-    try:
-        return cp.bien_the(**doi)
-    except Exception:
-        from nhan import chi_phi as CP
-        return CP.MoHinhChiPhi(ma=getattr(cp, "ma", ""), do_tin="KHAI", **doi)
+    """Nhan doi chi phi: spread x2 (ca ho so gio, nam, bar), truot gia x2, phi qua dem phai TRA x2 -
+    phi la khoan THU (am) thi bo khoan thu (ve 0), khong nhan doi tien nhan.
+
+    18/10/2026: ban cu truyen `spread_frac_chung=`, `truot_gia_frac=`, `phi_nam_mua=`... ma `bien_the`
+    chi hieu `spread` / `truot_gia` / `phi_mua` / `phi_ban` -> lang le bo qua, ban "x2" Y HET ban goc, nen
+    `nhay_chi_phi` khong bao gio bat duoc."""
+    def _x2(p):
+        p = float(p or 0.0)
+        return p + abs(p)
+    return cp.bien_the(spread=float(cp.spread_frac_chung) * 2.0,
+                       truot_gia=float(cp.truot_gia_frac) * 2.0,
+                       phi_mua=_x2(cp.phi_nam_mua), phi_ban=_x2(cp.phi_nam_ban))
 
 
 # ------------------------------------------------------------------ V3

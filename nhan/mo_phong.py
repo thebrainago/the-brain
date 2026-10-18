@@ -153,7 +153,11 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
     phi_gi = cp.phi_giu_mang(idx, v, lai_suat_nam)
 
     if gop == "tu_dong":
-        che_do = "so_hoc" if abs(float(don_bay) - 1.0) > 1e-12 else "log"
+        # 18/10/2026: LUON so hoc. Ban cu chon "log" khi don_bay = 1: loi = v * log(1+r) dung cho v = +1 nhung
+        # voi v = -1 la log(S0/S1) - mot "vi the ban" tra 1/x - 1 thay vi 1 - x, tang them ~ phuong sai moi bar
+        # (do: chuoi drift 0, vol 17,5 %, luon ban: log +3,41 %/nam, so hoc +0,18 %/nam). Mua 100 %: hai cach
+        # trung nhau tung bar. Muon ban cu: gop="log".
+        che_do = "so_hoc"
     elif gop in ("log", "so_hoc"):
         che_do = gop
     else:
@@ -187,7 +191,11 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
             chay_tk = True
             ngay_chay = idx[bar_chay]
             song = song.copy()
-            song[bar_chay:] = 1.0        # dong bang: khong con von de lai/lo
+            # 18/10/2026: bar chay GHI DU khoan lo (von ve ~0). Truoc day `song[bar_chay:] = 1` gom ca bar
+            # chay -> log(1) = 0, nen `DO.chi_so(kq.loi)` (cong.xet dung) bao tai khoan CHAY la +284 %,
+            # sut giam 0 %. Tu bar sau thi dong bang: khong con von de lai/lo.
+            song[bar_chay] = 1e-12
+            song[bar_chay + 1:] = 1.0
             canh.append(f"CHAY TAI KHOAN tai bar {bar_chay} ({ngay_chay}) "
                         f"voi don bay {don_bay:g}x")
         von_mang = np.cumprod(song)
@@ -208,6 +216,18 @@ def chay(df: pd.DataFrame, tin_hieu, cp: CP.MoHinhChiPhi,
         che_do_gop=che_do, don_bay=float(don_bay),
         chay_tai_khoan=chay_tk, bar_chay=bar_chay, ngay_chay=ngay_chay,
         von_mang=von_mang)
+
+
+def _gop_so_hoc(loi_sh: np.ndarray, phi: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """(loi log RONG, loi log THO) tu loi suat SO HOC tung bar va phi (ti le von) - 18/10/2026.
+
+    Cac engine theo lenh truoc day cong `chieu * log(P1/P0)`: dung cho lenh MUA, nhung lenh BAN thanh
+    log(P0/P1) = tra 1/x - 1 thay vi 1 - x, tuc duoc them ~ (P1/P0 - 1)^2 moi bar giu. Nay cong so hoc
+    `chieu * (P1/P0 - 1)` roi moi lay log; von <= 0 thi ghi ~ -100 % (khong de log(<=0) thanh NaN roi bi
+    `nan_to_num` xoa ve 0 nhu mot bar hoa)."""
+    sh = np.nan_to_num(np.asarray(loi_sh, float), nan=0.0, posinf=0.0, neginf=0.0)
+    return (np.log(np.maximum(1.0 + sh - phi, 1e-12)),
+            np.log(np.maximum(1.0 + sh, 1e-12)))
 
 
 def dem_lenh(v: np.ndarray) -> int:
@@ -284,7 +304,13 @@ def chay_tpsl(df: pd.DataFrame, tin_hieu_vao, tp_frac: float, sl_frac: float,
             cham_tp, cham_sl = lo[i] <= muc_tp, hi[i] >= muc_sl
 
         gia_ra = None
-        if cham_tp and cham_sl:
+        # 18/10/2026: OPEN da nhay QUA muc (gap) -> khop o OPEN, khong o muc. Ban cu tra dung gia SL du open
+        # da nam duoi SL (SL 98, open 90 -> ghi 98: tra lai phan lo cua gap). TP gap thi khop o open (tot hon).
+        if i > bar_vao and (o[i] <= muc_sl if dang > 0 else o[i] >= muc_sl):
+            gia_ra = o[i]
+        elif i > bar_vao and (o[i] >= muc_tp if dang > 0 else o[i] <= muc_tp):
+            gia_ra = o[i]
+        elif cham_tp and cham_sl:
             # cung bar: doan bang OPEN cua chinh bar do - gan TP hon thi TP truoc.
             # KHONG mac dinh SL (THIET_KE muc 13).
             gia_ra = muc_tp if abs(o[i] - muc_tp) <= abs(o[i] - muc_sl) else muc_sl
@@ -296,17 +322,16 @@ def chay_tpsl(df: pd.DataFrame, tin_hieu_vao, tp_frac: float, sl_frac: float,
             gia_ra = o[i + 1]      # het gio giu -> dong o OPEN bar ke tiep
 
         if gia_ra is not None:
-            loi_tho[i] = dang * np.log(gia_ra / o[i])
+            loi_tho[i] = dang * (gia_ra / o[i] - 1.0)          # SO HOC (xem `_gop_so_hoc`)
             kl[i] += 1.0
             dang, gia_vao, bar_vao = 0.0, 0.0, -1
         elif i + 1 < n:
-            loi_tho[i] = dang * np.log(o[i + 1] / o[i])
+            loi_tho[i] = dang * (o[i + 1] / o[i] - 1.0)
 
-    loi_tho = np.nan_to_num(loi_tho, nan=0.0, posinf=0.0, neginf=0.0)
     phi_sp = kl * cp.spread_mang(idx)
     phi_tr = kl * cp.truot_gia_frac
     phi_gi = cp.phi_giu_mang(idx, v, None)
-    loi = loi_tho - phi_sp - phi_tr - phi_gi
+    loi, loi_tho = _gop_so_hoc(loi_tho, phi_sp + phi_tr + phi_gi)
 
     return KetQua(
         ma=ma, khung=khung, index=idx, vi_the=v, loi=loi, loi_tho=loi_tho,
