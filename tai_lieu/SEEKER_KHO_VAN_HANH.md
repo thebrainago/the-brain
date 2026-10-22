@@ -59,6 +59,8 @@ Rồi agent **đọc tay** các file EA và xử lí lệnh (như `reports/SEEKE
 |---|---|
 | EA31337 (+ strategies, strategies-meta, classes) | **ĐÃ ĐỌC** 17/10 → `reports/SEEKER_EA31337.md`, `reports/KHO_EA31337.json` |
 | enarjord/passivbot | chưa đọc. Ưu tiên 1: lưới DCA + **gỡ lệnh kẹt (auto unstuck)** |
+| je-suis-tm/quant-trading (17 chiến lược Python) | chưa tải. Ưu tiên THẤP (22/10): README tự nói **giao dịch không phí** nên số lãi vô giá trị; gần như không có xử lí lệnh; phần lớn đã có trong kho. Chỉ lấy **Dual Thrust** và **Shooting Star** (kho chưa có), thêm London Breakout / Parabolic SAR |
+| shiyu-coder/Kronos (mô hình dự báo nến, 24,7M–102M tham số) | chưa thử. Xem `HANG_CHO_MAY_NHA.md` S18: thí nghiệm nhỏ, **chỉ tính trên dữ liệu SAU ngày dừng huấn luyện của mô hình** |
 | hummingbot/hummingbot | chưa đọc. DCA / grid executor, Grid Strike |
 | freqtrade/freqtrade-strategies, iterativv/NostalgiaForInfinity, danh sách awesomefreqtrade | chưa đọc. Hàng trăm chiến lược, DCA qua `adjust_trade_position` |
 | MQL5 Code Base (đang có `n_mql5_code`) | đang gom. Phải đọc **cả file**, giữ phần xử lí lệnh |
